@@ -6,11 +6,27 @@
 # autoconf function (which are GPL) into our LGPL acinclude.m4.in
 # written by Michael Matz <matz@kde.org>
 # adapted by Dirk Mueller <mueller@kde.org>
+#
+#   This file is free software; you can redistribute it and/or
+#   modify it under the terms of the GNU Library General Public
+#   License as published by the Free Software Foundation; either
+#   version 2 of the License, or (at your option) any later version.
+
+#   This library is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#   Library General Public License for more details.
+
+#   You should have received a copy of the GNU Library General Public License
+#   along with this library; see the file COPYING.LIB.  If not, write to
+#   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+#   Boston, MA 02111-1307, USA.
 
 # we have to change two places
 # 1. the splitting of the substitutions into chunks of 90 (or even 48 in
 #    later autoconf's
 # 2. the big main loop which patches all Makefile.in's
+
 use File::Basename;
 
 my $ac_aux_dir = dirname($0);
@@ -62,6 +78,11 @@ while (<>) {
 # 2. begins with: "for ac_file in.*CONFIG_FILES"  (the next 'for' after (1))
 #    end with: "rm -f conftest.s\*"
 # on autoconf 250, it ends with '# CONFIG_HEADER section'
+#
+# gg: if a post-processing commands section is found first, 
+#    stop there and insert a new loop to honour the case/esac.
+# (pattern: /^\s+#\sRun the commands associated with the file./)
+
 	if (/^\s*for\s+ac_file\s+in\s+.*CONFIG_FILES/ ) {
 	    $flag = 3;
 	} else {
@@ -78,9 +99,11 @@ while (<>) {
 	    if ($ac_version != 2141) {
 	        print STDERR "hmm, don't know autoconf version\n";
 	    }
-        } elsif (/^\#\s*CONFIG_HEADER section.*/) {
+        } elsif (/^\#\s*CONFIG_HEADER section.*|^\s+#\s(Run) the commands associated/) {
           $flag = 4;
+          $commands = defined $1;
           &insert_main_loop();
+          $commands && insert_command_loop();
           if($ac_version != 250) {
             print STDERR "hmm, something went wrong :-(\n";
           }
@@ -158,4 +181,10 @@ rm -f \$ac_cs_root.s*
 
 EOF
     return;
+}
+
+sub insert_command_loop {
+    print <<EOF;
+  for ac_file in .. \$CONFIG_FILES ; do
+EOF
 }

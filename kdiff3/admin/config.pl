@@ -12,10 +12,21 @@
 #
 # written by Michael Matz <matz@kde.org>
 # adapted by Dirk Mueller <mueller@kde.org>
-#
-# the first part was done by looking at the config.status files generated
-# by configure.
-# 
+
+#   This file is free software; you can redistribute it and/or
+#   modify it under the terms of the GNU Library General Public
+#   License as published by the Free Software Foundation; either
+#   version 2 of the License, or (at your option) any later version.
+
+#   This library is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#   Library General Public License for more details.
+
+#   You should have received a copy of the GNU Library General Public License
+#   along with this library; see the file COPYING.LIB.  If not, write to
+#   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+#   Boston, MA 02111-1307, USA.
 
 my $ac_subs=$ARGV[0];
 my $ac_sacfiles = $ARGV[1];
@@ -41,11 +52,11 @@ chomp @subs;
 if ($bad_perl) {
     print "Using perl older than version 5.005\n";
     foreach my $pat (@subs) {
-	if (  ($pat =~ /s%([^%]*)%([^%]*)%g/ )
-	   || ($pat =~ m%/([^/]*)/([^/]*)/g% )
-	   || ($pat =~ /s%([^%]*)%([^%]*)%;t/ )
-	   || ($pat =~ m%/([^/]*)/([^/]*)/;t% )
-           || ($pat =~ /s,([^,]*),(.*),;t/)
+	if (  ($pat =~ m/s%([^%]*)%([^%]*)%g/ )
+	   || ($pat =~ m/s%([^%]*)%([^%]*)%;t/ )
+           || ($pat =~ m/s,([^,]*),(.*),;t/)
+	   || ($pat =~ m%s/([^/]*)/([^/]*)/g% )
+	   || ($pat =~ m%s/([^/]*)/([^/]*)/;t% )
 	   ) {
             # form : s%bla%blubb%g
             # or     s%bla%blubb%;t t   (autoconf > 2.13 and < 2.52 ?)
@@ -168,14 +179,11 @@ foreach $ac_file (@ac_files) {
 }
 
 sub patch_file {
-    my ($outf, $infiles, $firstline) = @_;
+    my ($outf, $infiles, $identline) = @_;
     my $filedata;
     my @infiles=split(' ', $infiles);
     my $i=0;
 
-    if ($firstline) {
-	$filedata = $firstline;
-    }
     foreach my $name (@infiles) {
 	if (open(CF, "< $name")) {
 	    while (<CF>) {
@@ -185,6 +193,10 @@ sub patch_file {
 	} else {
 	    print STDERR "can't open $name: $!"."\n";
 	}
+    }
+    if ($identline) {
+	# Put the ident in the second line.  For shitty automake 1.6x.
+	$filedata =~ s%\n%\n$identline%;
     }
 
     $filedata =~ s%\@configure_input\@%$configure_input%g;
