@@ -17,6 +17,9 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.3  2003/10/15 19:54:41  joachim99
+ * Handling of pFirstNonWhiteChar corrected.
+ *
  * Revision 1.2  2003/10/14 20:49:56  joachim99
  * SourceData::preprocess(): Fix for several subsequent CR-characters.
  *
@@ -133,11 +136,12 @@ public:
       const LineData* pLd2 = ldr2.m_pLd;
       const char* p1 = pLd1->pFirstNonWhiteChar;
       const char* p2 = pLd2->pFirstNonWhiteChar;
-      int i1=pLd1->pFirstNonWhiteChar - pLd1->pLine;
-      int i2=pLd2->pFirstNonWhiteChar - pLd2->pLine;
 
       int size1=pLd1->size;
       int size2=pLd2->size;
+
+      int i1=min2(pLd1->pFirstNonWhiteChar - pLd1->pLine,size1);
+      int i2=min2(pLd2->pFirstNonWhiteChar - pLd2->pLine,size2);
       for(;;)
       {
          while( i1<size1 && isWhite( p1[i1] ) ) ++i1;
@@ -200,7 +204,7 @@ void SourceData::preprocess( bool bPreserveCR )
          {
             --lineLength;
          }
-         m_v[lineIdx].pFirstNonWhiteChar = m_v[lineIdx].pLine + whiteLength;
+         m_v[lineIdx].pFirstNonWhiteChar = m_v[lineIdx].pLine + min2(whiteLength,lineLength);
          m_v[lineIdx].size = lineLength;
          lineLength = 0;
          bNonWhiteFound = false;
