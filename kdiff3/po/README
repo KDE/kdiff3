@@ -13,6 +13,7 @@ da    Danish
 de    Deutsch
 en_GB British English
 et    Estonian
+fr    French
 it    Italian
 pt    Portuguese
 pt_BR Brazilian Portuguese
@@ -22,6 +23,7 @@ sv    Svenska
 These languages are partly done:
 es    Espaniol
 hu    Hungarian
+ru    Russian
 
 Thanks to all translators!
 
@@ -48,6 +50,12 @@ The translation-table is created in 3 steps:
 3. The last step is to create a fast lookup-table (*.gmo) from the po-file via 
    msgfmt, but this happens automatically during the build process.
    (If a new po-file was added: make -f Makefile.cvs; configure; make)
+
+Before starting to translate make sure nobody else is already doing it. It would 
+be a pity, if your precious time is wasted. Look at http://i18n.kde.org/, send a 
+message to the translation team coordinator for your language, and tell them that  
+you want to translate KDiff3. He'll inform you if you should proceed. Also read
+the other docs on that site.
 
 ============
    
