@@ -8,5 +8,7 @@ nmake clean
 nmake
 lupdate kdiff3.pro
 lrelease kdiff3.pro
+cl version.c -o version.exe
 version nsis > version.nsi
 makensis.exe  /DQTDIR=%QTDIR% /DWINDOWS_DIR=%WINDIR%  kdiff3
+pause

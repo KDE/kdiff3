@@ -50,7 +50,7 @@
   
   !define MUI_UNINSTALLER
   !define MUI_UNCONFIRMPAGE
-  !define MUI_HEADERBITMAP "kdiff3.bmp"
+;  !define MUI_HEADERBITMAP "kdiff3.bmp"
 ;--------------------------------
 ;Languages
 
@@ -113,31 +113,31 @@
 ;--------------------------------
 ;Data
   
-  LicenseData /LANG=${LANG_ENGLISH} "License.txt"
-  LicenseData /LANG=${LANG_FRENCH} "License.txt"
-  LicenseData /LANG=${LANG_GERMAN} "License.txt"
-  LicenseData /LANG=${LANG_SPANISH} "License.txt"
-  LicenseData /LANG=${LANG_SIMPCHINESE} "License.txt"
-  LicenseData /LANG=${LANG_TRADCHINESE} "License.txt"
-  LicenseData /LANG=${LANG_JAPANESE} "License.txt"
-  LicenseData /LANG=${LANG_KOREAN} "License.txt"
-  LicenseData /LANG=${LANG_ITALIAN} "License.txt"
-  LicenseData /LANG=${LANG_DUTCH} "License.txt"
-  LicenseData /LANG=${LANG_DANISH} "License.txt"
-  LicenseData /LANG=${LANG_GREEK} "License.txt"
-  LicenseData /LANG=${LANG_RUSSIAN} "License.txt"
-  LicenseData /LANG=${LANG_PORTUGUESEBR} "License.txt"
-  LicenseData /LANG=${LANG_POLISH} "License.txt"
-  LicenseData /LANG=${LANG_UKRAINIAN} "License.txt"
-  LicenseData /LANG=${LANG_CZECH} "License.txt"
-  LicenseData /LANG=${LANG_SLOVAK} "License.txt"
-  LicenseData /LANG=${LANG_CROATIAN} "License.txt"
-  LicenseData /LANG=${LANG_BULGARIAN} "License.txt"
-  LicenseData /LANG=${LANG_HUNGARIAN} "License.txt"
-  LicenseData /LANG=${LANG_THAI} "License.txt"
-  LicenseData /LANG=${LANG_ROMANIAN} "License.txt"
-  LicenseData /LANG=${LANG_MACEDONIAN} "License.txt"
-  LicenseData /LANG=${LANG_TURKISH} "License.txt"
+  LicenseData /LANG=${LANG_ENGLISH} "..\COPYING"
+  LicenseData /LANG=${LANG_FRENCH} "..\COPYING"
+  LicenseData /LANG=${LANG_GERMAN} "..\COPYING"
+  LicenseData /LANG=${LANG_SPANISH} "..\COPYING"
+  LicenseData /LANG=${LANG_SIMPCHINESE} "..\COPYING"
+  LicenseData /LANG=${LANG_TRADCHINESE} "..\COPYING"
+  LicenseData /LANG=${LANG_JAPANESE} "..\COPYING"
+  LicenseData /LANG=${LANG_KOREAN} "..\COPYING"
+  LicenseData /LANG=${LANG_ITALIAN} "..\COPYING"
+  LicenseData /LANG=${LANG_DUTCH} "..\COPYING"
+  LicenseData /LANG=${LANG_DANISH} "..\COPYING"
+  LicenseData /LANG=${LANG_GREEK} "..\COPYING"
+  LicenseData /LANG=${LANG_RUSSIAN} "..\COPYING"
+  LicenseData /LANG=${LANG_PORTUGUESEBR} "..\COPYING"
+  LicenseData /LANG=${LANG_POLISH} "..\COPYING"
+  LicenseData /LANG=${LANG_UKRAINIAN} "..\COPYING"
+  LicenseData /LANG=${LANG_CZECH} "..\COPYING"
+  LicenseData /LANG=${LANG_SLOVAK} "..\COPYING"
+  LicenseData /LANG=${LANG_CROATIAN} "..\COPYING"
+  LicenseData /LANG=${LANG_BULGARIAN} "..\COPYING"
+  LicenseData /LANG=${LANG_HUNGARIAN} "..\COPYING"
+  LicenseData /LANG=${LANG_THAI} "..\COPYING"
+  LicenseData /LANG=${LANG_ROMANIAN} "..\COPYING"
+  LicenseData /LANG=${LANG_MACEDONIAN} "..\COPYING"
+  LicenseData /LANG=${LANG_TURKISH} "..\COPYING"
 
 ;--------------------------------
 ;Reserve Files
@@ -157,15 +157,12 @@ SectionIn 2 RO
     WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\${MUI_PRODUCT}" "" "$INSTDIR"
     WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}" "DisplayName" "${MUI_PRODUCT} (remove only)"
     WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}" "UninstallString" '"$INSTDIR\uninst.exe"'
-    File "..\kdiff3.exe"
-    File "License.txt"
+    File "kdiff3.exe"
+    File "..\COPYING"
     File "${WINDOWS_DIR}\system32\msvcp70.dll"
     File "${WINDOWS_DIR}\system32\msvcr70.dll"
     File "${QTDIR}\lib\qt-mt*.dll"
-    File "..\html\*.*"
-    File "..\demo.oldb"
     File "..\trd_*.qm"
-    File "${MYSQL}\lib\opt\libmysql.dll"
 
     SetOutPath "$INSTDIR\sqldrivers"
     File "${QTDIR}\plugins\sqldrivers\*.dll"
