@@ -202,14 +202,14 @@ SubSection "Integration"
 Section "WinCVS"
   DetailPrint "Integration to WinCVS"
   MessageBox  MB_OK "Please close WinCVS"
-  WriteRegStr HKCU "Software\WinCvs\wincvs\CVS settings" "P_Extdiff" '"$INSTDIR\kdiff3.exe"'
+  WriteRegStr HKCU "Software\WinCvs\wincvs\CVS settings" "P_Extdiff" '$INSTDIR\kdiff3.exe'
   WriteRegBin HKCU "Software\WinCvs\wincvs\CVS settings" "P_DiffUseExtDiff" 01
 
 SectionEnd 
 Section "Explorer"
   DetailPrint "Integration to Explorer"
-  WriteRegStr HKCR "Directory\shell}\KDiff3" "" '&KDiff3'
-  WriteRegStr HKCR "Directory\shell\KDiff3\command" "" '"$INSTDIR\kdiff3.exe" "%1"'
+;  WriteRegStr HKCR "Directory\shell}\KDiff3" "" '&KDiff3'
+;  WriteRegStr HKCR "Directory\shell\KDiff3\command" "" '"$INSTDIR\kdiff3.exe" "%1"'
     CreateShortCut "$SMPROGRAMS\..\..\SendTo\KDiff3.lnk" '"$INSTDIR\kdiff3.exe"'
 SectionEnd 
 SubSectionEnd
@@ -267,8 +267,8 @@ Section "Uninstall"
   Delete "$QUICKLAUNCH\KDiff3.lnk"
     RMDir /r "$INSTDIR"
   DetailPrint "Integration to Explorer"
-  DeleteRegKey HKCR "Directory\shell\KDiff3\command"
-  DeleteRegKey HKCR "Directory\shell\KDiff3"
+;  DeleteRegKey HKCR "Directory\shell\KDiff3\command"
+;  DeleteRegKey HKCR "Directory\shell\KDiff3"
   Delete "$SMPROGRAMS\..\..\SendTo\KDiff3.lnk"
 
     !insertmacro MUI_UNFINISHHEADER
