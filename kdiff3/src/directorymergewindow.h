@@ -2,7 +2,7 @@
                           directorymergewindow.h
                              -------------------
     begin                : Sat Oct 19 2002
-    copyright            : (C) 2002 by Joachim Eibl
+    copyright            : (C) 2002-2004 by Joachim Eibl
     email                : joachim.eibl@gmx.de
  ***************************************************************************/
 

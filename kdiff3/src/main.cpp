@@ -2,7 +2,7 @@
                           main.cpp  -  Where everything starts.
                              -------------------
     begin                : Don Jul 11 12:31:29 CEST 2002
-    copyright            : (C) 2002 by Joachim Eibl
+    copyright            : (C) 2002-2004 by Joachim Eibl
     email                : joachim.eibl@gmx.de
  ***************************************************************************/
 
@@ -93,6 +93,7 @@ int main(int argc, char *argv[])
    {
       return ::_spawnvp(_P_WAIT , "cleardiffmrg_orig", argv );      
    }
+   
 #endif
    QApplication::setColorSpec( QApplication::ManyColor ); // Grab all 216 colors
 
@@ -106,12 +107,13 @@ int main(int argc, char *argv[])
    KApplication app;
 #ifdef KREPLACEMENTS_H
    QString translationDir = getTranslationDir();
+   QString locale = QTextCodec::locale();
    QTranslator kdiff3Translator( 0 );
-   kdiff3Translator.load( QString("kdiff3_")+QTextCodec::locale(), translationDir );
+   kdiff3Translator.load( QString("kdiff3_")+locale, translationDir );
    app.installTranslator( &kdiff3Translator );
    
    QTranslator qtTranslator( 0 );
-   qtTranslator.load( QString("qt_")+QTextCodec::locale(), translationDir );
+   qtTranslator.load( QString("qt_")+locale, translationDir );
    app.installTranslator( &qtTranslator );
 #endif
 

@@ -2,7 +2,7 @@
                           difftextwindow.cpp  -  description
                              -------------------
     begin                : Mon Apr 8 2002
-    copyright            : (C) 2002 by Joachim Eibl
+    copyright            : (C) 2002-2004 by Joachim Eibl
     email                : joachim.eibl@gmx.de
  ***************************************************************************/
 
@@ -59,7 +59,7 @@ DiffTextWindow::DiffTextWindow(
 
 void DiffTextWindow::init(
    const QString& filename,
-   LineData* pLineData,
+   const LineData* pLineData,
    int size,
    const Diff3LineVector* pDiff3LineVector,
    int winIdx,
@@ -862,7 +862,7 @@ QCString DiffTextWindow::getString( int line )
    if (lineIdx==-1) return QCString();
    else
    {
-      LineData* ld = &m_pLineData[lineIdx];
+      const LineData* ld = &m_pLineData[lineIdx];
       return QCString( ld->pLine, ld->size + 1 );
    }
    return QCString();
@@ -962,13 +962,15 @@ QString DiffTextWindow::getSelection()
             int spaces = 1;
             if ( pLine[i]=='\t' )
             {
-
                spaces = tabber( outPos, g_tabSize );
             }
 
             if( selection.within( line, outPos ) )
             {
-              selectionString += pLine[i];
+               char buf[2];
+               buf[0] = pLine[i];
+               buf[1] = '\0';
+               selectionString += decodeString( buf, m_pOptionDialog );
             }
 
             outPos += spaces;
@@ -982,8 +984,6 @@ QString DiffTextWindow::getSelection()
             selectionString += '\n';
          }
       }
-
-
 
       ++line;
    }
@@ -1040,4 +1040,18 @@ QString decodeString( const char*s , OptionDialog* pOptions )
    }
    else
       return QString(s);
+}
+
+QCString encodeString( const QString& s , OptionDialog* pOptions )
+{
+   if ( pOptions->m_bStringEncoding )
+   {
+      QTextCodec* c = QTextCodec::codecForLocale();
+      if (c!=0)
+         return c->fromUnicode( s );
+      else
+         return QCString( s.ascii() );
+   }
+   else
+      return QCString( s.ascii() );
 }

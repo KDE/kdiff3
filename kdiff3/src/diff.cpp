@@ -2,7 +2,7 @@
                           diff.cpp  -  description
                              -------------------
     begin                : Mon Mar 18 2002
-    copyright            : (C) 2002 by Joachim Eibl
+    copyright            : (C) 2002-2004 by Joachim Eibl
     email                : joachim.eibl@gmx.de
  ***************************************************************************/
 
@@ -20,6 +20,7 @@
 
 #include "diff.h"
 #include "fileaccess.h"
+#include "optiondialog.h"
 
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -32,7 +33,7 @@
 //using namespace std;
 
 
-int LineData::width()
+int LineData::width() const
 {
    int w=0;
    int j=0;
@@ -110,64 +111,424 @@ bool equal( const LineData& l1, const LineData& l2, bool bStrict )
 }
 
 
-// class needed during preprocess phase
-class LineDataRef
+
+
+static bool isLineOrBufEnd( const char* p, int i, int size )
 {
-   const LineData* m_pLd;
-public:
-   LineDataRef(const LineData* pLd){ m_pLd = pLd; }
+   return 
+      i>=size        // End of file
+      || p[i]=='\n'  // Normal end of line
 
-   bool operator<(const LineDataRef& ldr2) const
-   {
-      const LineData* pLd1 = m_pLd;
-      const LineData* pLd2 = ldr2.m_pLd;
-      const char* p1 = pLd1->pFirstNonWhiteChar;
-      const char* p2 = pLd2->pFirstNonWhiteChar;
+      // No support for Mac-end of line yet, because incompatible with GNU-diff-routines.      
+      // || ( p[i]=='\r' && (i>=size-1 || p[i+1]!='\n') 
+      //                 && (i==0        || p[i-1]!='\n') )  // Special case: '\r' without '\n'
+      ;
+}
 
-      int size1=pLd1->size;
-      int size2=pLd2->size;
 
-      int i1=min2(pLd1->pFirstNonWhiteChar - pLd1->pLine,size1);
-      int i2=min2(pLd2->pFirstNonWhiteChar - pLd2->pLine,size2);
-      for(;;)
-      {
-         while( i1<size1 && isWhite( p1[i1] ) ) ++i1;
-         while( i2<size2 && isWhite( p2[i2] ) ) ++i2;
-         if ( i1==size1 || i2==size2 )
-         {
-            if ( i1==size1 && i2==size2 ) return false;  // Equal
-            if ( i1==size1 ) return true;  // String 1 is shorter than string 2
-            if ( i2==size2 ) return false; // String 1 is longer than string 2
-         }
-         if ( p1[i1]==p2[i2] ) { ++i1; ++i2; continue; }
-         return  p1[i1]<p2[i2];
-      }
-   }
-};
+/* Features of class SourceData:
+- Read a file (from the given URL) or accept data via a string.
+- Allocate and free buffers as necessary.
+- Run a preprocessor, when specified.
+- Run the line-matching preprocessor, when specified.
+- Run other preprocessing steps: Uppercase, ignore comments, 
+                                 remove carriage return, ignore numbers.
+
+Order of operation:
+ 1. If data was given via a string then save it to a temp file. (see setData())
+ 2. If the specified file is nonlocal (URL) copy it to a temp file.
+ 3. If a preprocessor was specified, run the input file through it.
+ 4. Read the output of the preprocessor.
+ 5. If Uppercase was specified: Turn the read data to uppercase.
+ 6. Write the result to a temp file.
+ 7. If a line-matching preprocessor was specified, run the temp file through it.
+ 8. Read the output of the line-matching preprocessor.
+ 9. If ignore numbers was specified, strip the LMPP-output of all numbers.
+10. If ignore comments was specified, strip the LMPP-output of comments.
+
+Optimizations: Skip unneeded steps.
+*/
+
+SourceData::SourceData()
+{ 
+   m_pOptionDialog = 0;
+   reset();
+}
+
+SourceData::~SourceData()
+{
+   reset();
+}
 
 void SourceData::reset()
+{
+   m_normalData.reset();
+   m_lmppData.reset();
+   if ( !m_tempInputFileName.isEmpty() )
+   {
+      FileAccess::removeFile( m_tempInputFileName );
+      m_tempInputFileName = "";
+   }
+}
+
+void SourceData::setFilename( const QString& filename )
+{
+   if (filename.isEmpty())
+   {
+      reset();
+   }
+   else
+   {
+      FileAccess fa( filename );
+      setFileAccess( fa );
+   }
+}
+
+bool SourceData::isEmpty() 
+{ 
+   return getFilename().isEmpty(); 
+}
+
+bool SourceData::hasData() 
+{ 
+   return m_normalData.m_pBuf != 0;
+}
+
+void SourceData::setOptionDialog( OptionDialog* pOptionDialog )
+{
+   m_pOptionDialog = pOptionDialog;
+}
+
+QString SourceData::getFilename()
+{
+   return m_fileAccess.absFilePath();
+}
+
+QString SourceData::getAliasName()
+{
+   return m_aliasName.isEmpty() ? m_fileAccess.prettyAbsPath() : m_aliasName;
+}
+
+void SourceData::setAliasName( const QString& name )
+{
+   m_aliasName = name;
+}
+
+void SourceData::setFileAccess( const FileAccess& fileAccess )
+{
+   m_fileAccess = fileAccess;
+   m_aliasName = QString();
+   if ( !m_tempInputFileName.isEmpty() )
+   {
+      FileAccess::removeFile( m_tempInputFileName );
+      m_tempInputFileName = "";
+   }
+}
+
+void SourceData::setData( const QString& data )
+{
+   // Create a temp file for preprocessing:
+   if ( m_tempInputFileName.isEmpty() )
+   {
+      m_tempInputFileName = FileAccess::tempFileName();
+   }
+   
+   FileAccess f( m_tempInputFileName );
+   bool bSuccess = f.writeFile( encodeString(data, m_pOptionDialog), data.length() );
+   if ( !bSuccess )
+   {
+      KMessageBox::error( m_pOptionDialog, i18n("Writing clipboard data to temp file failed.") );
+      return;
+   }
+   
+   m_aliasName = i18n("From Clipboard");
+   m_fileAccess = FileAccess("");  // Effect: m_fileAccess.isValid() is false
+}
+
+const LineData* SourceData::getLineDataForDiff() const 
+{
+   return m_lmppData.m_pBuf==0 ? &m_normalData.m_v[0] : &m_lmppData.m_v[0];
+}
+
+const LineData* SourceData::getLineDataForDisplay() const
+{
+   return &m_normalData.m_v[0];
+}
+
+int  SourceData::getSizeLines() const
+{
+   return m_normalData.m_vSize;
+}
+
+int SourceData::getSizeBytes() const
+{
+   return m_normalData.m_size;
+}
+
+const char* SourceData::getBuf() const
+{
+   return m_normalData.m_pBuf;
+}
+
+bool SourceData::isText()
+{
+   return m_normalData.m_bIsText;
+}
+ 
+bool SourceData::isFromBuffer()
+{
+   return !m_fileAccess.isValid();
+}
+
+
+bool SourceData::isBinaryEqualWith( const SourceData& other ) const
+{
+   return getSizeBytes() == other.getSizeBytes() &&  memcmp( getBuf(), other.getBuf(), getSizeBytes() )==0;
+}
+
+void SourceData::FileData::reset()
 {
    delete (char*)m_pBuf;
    m_pBuf = 0;
    m_v.clear();
    m_size = 0;
    m_vSize = 0;
-   m_bIsText = false;
-   m_bPreserve = false;
-   m_fileAccess = FileAccess("");
+   m_bIsText = true;
 }
 
+bool SourceData::FileData::readFile( const QString& filename )
+{
+   reset();
+   if ( filename.isEmpty() )   { return true; }
+
+   FileAccess fa( filename );
+   m_size = fa.sizeForReading();
+   char* pBuf;
+   m_pBuf = pBuf = new char[m_size+100];  // Alloc 100 byte extra: Savety hack, not nice but does no harm.
+   bool bSuccess = fa.readFile( pBuf, m_size );
+   if ( !bSuccess )
+   {
+      delete pBuf;
+      m_pBuf = 0;
+      m_size = 0;
+   }
+   return bSuccess;
+}
+
+bool SourceData::saveNormalDataAs( const QString& fileName )
+{
+   return m_normalData.writeFile( fileName );
+}
+
+bool SourceData::FileData::writeFile( const QString& filename )
+{
+   if ( filename.isEmpty() )   { return true; }
+
+   FileAccess fa( filename );
+   bool bSuccess = fa.writeFile(m_pBuf, m_size);
+   return bSuccess;
+}
+
+void SourceData::FileData::copyBufFrom( const FileData& src )
+{
+   reset();
+   char* pBuf;   
+   m_size = src.m_size;
+   m_pBuf = pBuf = new char[m_size+100];
+   memcpy( pBuf, src.m_pBuf, m_size );
+}
+
+void SourceData::readAndPreprocess()
+{
+   QString fileNameIn1;
+   QString fileNameOut1;
+   QString fileNameIn2;
+   QString fileNameOut2;
+   
+   bool bTempFileFromClipboard = !m_fileAccess.isValid();
+      
+   // Detect the input for the preprocessing operations
+   if ( !bTempFileFromClipboard )
+   {
+      if ( m_fileAccess.isLocal() )
+      {
+         fileNameIn1 = m_fileAccess.absFilePath();
+      }
+      else    // File is not local: create a temporary local copy:
+      {
+         if ( m_tempInputFileName.isEmpty() )  { m_tempInputFileName = FileAccess::tempFileName(); }
+      
+         m_fileAccess.copyFile(m_tempInputFileName);
+         fileNameIn1 = m_tempInputFileName;
+      }
+   }
+   else // The input was set via setData(), probably from clipboard.
+   {
+      fileNameIn1 = m_tempInputFileName;
+   }
+      
+   m_normalData.reset();
+   m_lmppData.reset();
+   
+   FileAccess faIn(fileNameIn1);
+   int fileInSize = faIn.size();
+   
+   if ( fileInSize > 0 )
+   {  
+
+#ifdef _WIN32
+      QString catCmd = "type";
+      fileNameIn1.replace( '/', "\\" );
+#else
+      QString catCmd = "cat";
+#endif
+      
+      // Run the first preprocessor
+      if ( m_pOptionDialog->m_PreProcessorCmd.isEmpty() )
+      {
+         // No preprocessing: Read the file directly:
+         m_normalData.readFile( fileNameIn1 );
+      }
+      else
+      {
+         QString ppCmd = m_pOptionDialog->m_PreProcessorCmd;
+         fileNameOut1 = FileAccess::tempFileName();
+         QString cmd = catCmd + " \"" + fileNameIn1 + "\" | " + ppCmd  + " >\"" + fileNameOut1+"\"";
+         ::system( encodeString(cmd, m_pOptionDialog) );
+         bool bSuccess = m_normalData.readFile( fileNameOut1 );
+         if ( fileInSize >0 && ( !bSuccess || m_normalData.m_size==0 ) )
+         {
+            KMessageBox::error(m_pOptionDialog, 
+               i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
+                  "\n\nThe preprocessing command will be disabled now."
+               ).arg(cmd) );
+            m_pOptionDialog->m_PreProcessorCmd = "";
+            m_normalData.readFile( fileNameIn1 );
+         }
+      }
+
+      // Internal Preprocessing: Uppercase-conversion   
+      bool bInternalPreprocessing = false;
+      if ( m_pOptionDialog->m_bUpCase )
+      {
+         int i;
+         char* pBuf = const_cast<char*>(m_normalData.m_pBuf);
+         for(i=0; i<m_normalData.m_size; ++i)
+         {
+            pBuf[i] = toupper(pBuf[i]);
+         }
+         
+         bInternalPreprocessing = true;
+      }
+      
+      // LineMatching Preprocessor
+      if ( ! m_pOptionDialog->m_LineMatchingPreProcessorCmd.isEmpty() )
+      {
+         if ( bInternalPreprocessing )  
+         {
+            // write data to file after internal preprocessing before running the external LMPP-cmd.
+            if ( !fileNameOut1.isEmpty() )
+            {
+               FileAccess::removeFile( fileNameOut1 );
+               fileNameOut1="";
+            }
+            
+            fileNameIn2 = FileAccess::tempFileName();
+            bool bSuccess = m_normalData.writeFile( fileNameIn2 );
+            if ( !bSuccess )
+            {
+               KMessageBox::error(m_pOptionDialog, i18n("Error writing temporary file: %1").arg(fileNameIn2) );
+            }
+         }
+         else
+         {
+            fileNameIn2 = fileNameOut1.isEmpty() ? fileNameIn1 : fileNameOut1;
+         }
+      
+         QString ppCmd = m_pOptionDialog->m_LineMatchingPreProcessorCmd;
+         fileNameOut2 = FileAccess::tempFileName();
+         QString cmd = catCmd + " \"" + fileNameIn2 + "\" | " + ppCmd  + " >\"" + fileNameOut2 + "\"";
+         ::system( encodeString(cmd, m_pOptionDialog) );
+         bool bSuccess = m_lmppData.readFile( fileNameOut2 );
+         if ( FileAccess(fileNameIn2).size()>0 && ( !bSuccess || m_lmppData.m_size==0 ) )
+         {
+            KMessageBox::error(m_pOptionDialog, 
+               i18n("The line-matching-preprocessing possibly failed. Check this command:\n\n  %1"
+                    "\n\nThe line-matching-preprocessing command will be disabled now."
+                   ).arg(cmd) );
+            m_pOptionDialog->m_LineMatchingPreProcessorCmd = "";
+            m_lmppData.readFile( fileNameIn2 );
+         }
+         FileAccess::removeFile( fileNameOut2 );
+         
+         if ( bInternalPreprocessing && !fileNameIn2.isEmpty() )
+         {
+            FileAccess::removeFile( fileNameIn2 );
+            fileNameIn2="";
+         }
+      }
+      else if ( m_pOptionDialog->m_bIgnoreComments )
+      {
+         // We need a copy of the normal data.
+         m_lmppData.copyBufFrom( m_normalData );
+      }
+      else
+      {  // We don't need any lmpp data at all.
+         m_lmppData.reset();
+      }
+   }            
+   
+   m_normalData.preprocess( m_pOptionDialog->m_bPreserveCarriageReturn );
+   m_lmppData.preprocess( false );
+   
+   if ( m_lmppData.m_vSize < m_normalData.m_vSize )
+   {
+      // This probably is the fault of the LMPP-Command, but not worth reporting.
+      m_lmppData.m_v.resize( m_normalData.m_vSize );
+      for(int i=m_lmppData.m_vSize; i<m_normalData.m_vSize; ++i )
+      {  // Set all empty lines to point to the end of the buffer.
+         m_lmppData.m_v[i].pLine = m_lmppData.m_pBuf+m_lmppData.m_size;
+      }
+      
+      m_lmppData.m_vSize = m_normalData.m_vSize;
+   }
+   
+   // Ignore comments
+   if ( m_pOptionDialog->m_bIgnoreComments )
+   {
+      m_lmppData.removeComments();
+      int vSize = min2(m_normalData.m_vSize, m_lmppData.m_vSize);
+      for(int i=0; i<vSize; ++i )
+      {
+         m_normalData.m_v[i].bContainsPureComment = m_lmppData.m_v[i].bContainsPureComment;
+      }
+   }
+      
+   // Remove unneeded temporary files. (A temp file from clipboard must not be deleted.)
+   if ( !bTempFileFromClipboard && !m_tempInputFileName.isEmpty() )
+   {
+      FileAccess::removeFile( m_tempInputFileName );
+      m_tempInputFileName = "";
+   }
+   
+   if ( !fileNameOut1.isEmpty() )
+   {
+      FileAccess::removeFile( fileNameOut1 );
+      fileNameOut1="";
+   }
+}
+
+
 /** Prepare the linedata vector for every input line.*/
-void SourceData::preprocess( bool bPreserveCR )
+void SourceData::FileData::preprocess( bool bPreserveCR )
 {
    const char* p = m_pBuf;
    m_bIsText = true;
    int lines = 1;
-
    int i;
    for( i=0; i<m_size; ++i )
    {
-      if (p[i]=='\n')
+      if ( isLineOrBufEnd(p,i,m_size) )
       {
          ++lines;
       }
@@ -184,7 +545,7 @@ void SourceData::preprocess( bool bPreserveCR )
    int whiteLength = 0;
    for( i=0; i<=m_size; ++i )
    {
-      if ( i==m_size ||  p[i]=='\n' )        // The last line does not end with a linefeed.
+      if ( isLineOrBufEnd( p, i, m_size ) )
       {
          m_v[lineIdx].pLine = &p[ i-lineLength ];
          while ( !bPreserveCR  &&  lineLength>0  &&  m_v[lineIdx].pLine[lineLength-1]=='\r'  )
@@ -237,7 +598,7 @@ static void checkLineForComments(
       {
          bWhite = false;
          ++i;
-         for( ; i<size && p[i]!='\'' && p[i]!='\n'; ++i)
+         for( ; !isLineOrBufEnd(p,i,size) && p[i]!='\''; ++i)
             ;
          if (p[i]=='\'') ++i;
       }
@@ -247,7 +608,7 @@ static void checkLineForComments(
       {
          bWhite = false;
          ++i;
-         for( ; i<size && !(p[i]=='"' && p[i-1]!='\\') && p[i]!='\n'; ++i)
+         for( ; !isLineOrBufEnd(p,i,size) && !(p[i]=='"' && p[i-1]!='\\'); ++i)
             ;
          if (p[i]=='"') ++i;
       }
@@ -258,7 +619,7 @@ static void checkLineForComments(
          int commentStart = i;
          bCommentInLine = true;
          i+=2;
-         for( ; i<size && p[i]!='\n'; ++i)
+         for( ; !isLineOrBufEnd(p,i,size); ++i)
             ;
          if ( !bWhite )
          {
@@ -273,7 +634,7 @@ static void checkLineForComments(
          int commentStart = i;
          bCommentInLine = true;
          i+=2;
-         for( ; i<size && p[i]!='\n'; ++i)
+         for( ; !isLineOrBufEnd(p,i,size); ++i)
          {
             if ( i+1<size && p[i]=='*' && p[i+1]=='/')  // end of the comment
             {
@@ -293,7 +654,7 @@ static void checkLineForComments(
       }
 
 
-      if (p[i]=='\n' || i>=size )
+      if ( isLineOrBufEnd(p,i,size) )
       {
          return;
       }
@@ -307,7 +668,7 @@ static void checkLineForComments(
 // Modifies the input data, and replaces C/C++ comments with whitespace
 // when the line contains other data too. If the line contains only
 // a comment or white data, remember this in the flag bContainsPureComment.
-void SourceData::removeComments( LineData* pLD )
+void SourceData::FileData::removeComments()
 {
    int line=0;
    char* p = (char*)m_pBuf;
@@ -324,7 +685,7 @@ void SourceData::removeComments( LineData* pLD )
          int commentStart = i;
          bCommentInLine = true;
 
-         for( ; i<size && p[i]!='\n'; ++i)
+         for( ; !isLineOrBufEnd(p,i,size); ++i)
          {
             if ( i+1<size && p[i]=='*' && p[i+1]=='/')  // end of the comment
             {
@@ -346,8 +707,8 @@ void SourceData::removeComments( LineData* pLD )
       }
 
       // end of line
-      assert( i>=size || p[i]=='\n');
-      pLD[line].bContainsPureComment = bCommentInLine && bWhite;
+      assert( isLineOrBufEnd(p,i,size));
+      m_v[line].bContainsPureComment = bCommentInLine && bWhite;
 /*      std::cout << line << " : " <<
        ( bCommentInLine ?  "c" : " " ) <<
        ( bWhite ? "w " : "  ") <<
@@ -357,170 +718,7 @@ void SourceData::removeComments( LineData* pLD )
    }
 }
 
-// read and preprocess file for line matching input data
-void SourceData::readLMPPFile( SourceData* pOrigSource, const QString& ppCmd, bool bUpCase, bool bRemoveComments )
-{
-   if ( ( ppCmd.isEmpty() && !bRemoveComments ) || pOrigSource->m_bPreserve )
-   {
-      reset();
-   }
-   else
-   {
-      setFilename( pOrigSource->m_fileAccess.absFilePath() );
-      readPPFile( false, ppCmd, bUpCase );
-      if ( m_vSize < pOrigSource->m_vSize )
-      {
-         m_v.resize( pOrigSource->m_vSize );
-         m_vSize = pOrigSource->m_vSize;
-      }
-   }
-   if ( bRemoveComments && m_vSize==pOrigSource->m_vSize )
-      removeComments( &pOrigSource->m_v[0] );
-}
 
-
-void SourceData::readPPFile( bool bPreserveCR, const QString& ppCmd, bool bUpCase )
-{
-   if ( !m_bPreserve )
-   {
-      if ( ! ppCmd.isEmpty() && !m_fileName.isEmpty() && FileAccess::exists( m_fileName ) )
-      {
-         QString fileNameOut = FileAccess::tempFileName();
-#ifdef _WIN32
-         QString cmd = QString("type ") + m_fileName + " | " + ppCmd  + " >" + fileNameOut;
-#else
-         QString cmd = QString("cat ") + m_fileName + " | " + ppCmd  + " >" + fileNameOut;
-#endif
-         ::system( cmd.ascii() );
-         readFile( fileNameOut, true, bUpCase );
-         FileAccess::removeFile( fileNameOut );
-      }
-      else
-      {
-         readFile( m_fileAccess.absFilePath(), true, bUpCase );
-      }
-   }
-   preprocess( bPreserveCR );
-}
-
-void SourceData::readFile( const QString& filename, bool bFollowLinks, bool bUpCase )
-{
-   delete (char*)m_pBuf;
-   m_size = 0;
-   m_pBuf = 0;
-   char* pBuf = 0;
-   if ( filename.isEmpty() )   { return; }
-
-   if ( !bFollowLinks )
-   {
-      FileAccess fi( filename );
-      if ( fi.isSymLink() )
-      {
-         QString s = fi.readLink();
-         m_size = s.length();
-         m_pBuf = pBuf = new char[m_size+100];
-         memcpy( pBuf, s.ascii(), m_size );
-         return;
-      }
-   }
-
-
-   FileAccess fa( filename );
-   m_size = fa.sizeForReading();
-   m_pBuf = pBuf = new char[m_size+100];
-   bool bSuccess = fa.readFile( pBuf, m_size );
-   if ( !bSuccess )
-   {
-      delete pBuf;
-      m_pBuf = 0;
-      m_size = 0;
-      return;
-   }
-
-
-   if ( bUpCase )
-   {
-      int i;
-      for(i=0; i<m_size; ++i)
-      {
-         pBuf[i] = toupper(pBuf[i]);
-      }
-   }
-
-}
-
-void SourceData::setData( const QString& data, bool bUpCase )
-{
-   delete (char*)m_pBuf;
-   m_size = data.length();
-   m_pBuf = 0;
-
-   char* pBuf = 0;
-   m_pBuf = pBuf = new char[m_size+100];
-
-   memcpy( pBuf, data.ascii(), m_size );
-   if ( bUpCase )
-   {
-      int i;
-      for(i=0; i<m_size; ++i)
-      {
-         pBuf[i] = toupper(pBuf[i]);
-      }
-   }
-   m_bPreserve = true;
-   m_fileName="";
-   m_aliasName = i18n("From Clipboard");
-   m_fileAccess = FileAccess("");
-}
-
-void SourceData::setFilename( const QString& filename )
-{
-   FileAccess fa( filename );
-   setFileAccess( fa );
-}
-
-QString SourceData::getFilename()
-{
-   return m_fileName;
-}
-
-QString SourceData::getAliasName()
-{
-   return m_aliasName.isEmpty() ? m_fileAccess.prettyAbsPath() : m_aliasName;
-}
-
-void SourceData::setAliasName( const QString& name )
-{
-   m_aliasName = name;
-}
-
-void SourceData::setFileAccess( const FileAccess& fileAccess )
-{
-   m_fileAccess = fileAccess;
-   m_aliasName = QString();
-   m_bPreserve = false;
-   m_fileName = m_fileAccess.absFilePath();
-}
-
-void prepareOccurances( LineData* p, int size )
-{
-   // Special analysis: Find out how often this line occurs
-   // Only problem: A simple search will cost O(N^2).
-   // To avoid this we will use a map. Then the cost will only be
-   // O(N*log N). (A hash table would be even better.)
-
-   std::map<LineDataRef,int> occurancesMap;
-   int i;
-   for( i=0; i<size; ++i )
-   {
-      ++occurancesMap[ LineDataRef( &p[i] ) ];
-   }
-
-   for( i=0; i<size; ++i )
-   {
-      p[i].occurances = occurancesMap[ LineDataRef( &p[i] ) ];
-   }
-}
 
 // First step
 void calcDiff3LineListUsingAB(
@@ -580,13 +778,13 @@ void calcDiff3LineListUsingAB(
          ++lineB;
       }
 
-      d3ll.push_back( d3l );      
+      d3ll.push_back( d3l );
    }
 }
 
 
 // Second step
-void calcDiff3LineListUsingAC(       
+void calcDiff3LineListUsingAC(
    const DiffList* pDiffListAC,
    Diff3LineList& d3ll
    )
@@ -617,13 +815,13 @@ void calcDiff3LineListUsingAC(
       if( d.nofEquals>0 )
       {
          // Find the corresponding lineA
-         while( (*i3).lineA!=lineA ) 
+         while( (*i3).lineA!=lineA )
 
             ++i3;
          (*i3).lineC = lineC;
          (*i3).bAEqC = true;
          (*i3).bBEqC = (*i3).bAEqB;
-                  
+
          --d.nofEquals;
          ++lineA;
          ++lineC;
@@ -655,7 +853,7 @@ void calcDiff3LineListUsingAC(
 }
 
 // Third step
-void calcDiff3LineListUsingBC(       
+void calcDiff3LineListUsingBC(
    const DiffList* pDiffListBC,
    Diff3LineList& d3ll
    )
@@ -728,7 +926,7 @@ void calcDiff3LineListUsingBC(
                while( i3 != i3b && i3!=d3ll.end() )
 
                {
-                  if ( (*i3).lineB != -1 ) 
+                  if ( (*i3).lineB != -1 )
                      ++nofDisturbingLines;
                   ++i3;
                }
@@ -740,7 +938,7 @@ void calcDiff3LineListUsingBC(
 
                   while( i3 != i3b )
                   {
-                     if ( (*i3).lineB != -1 ) 
+                     if ( (*i3).lineB != -1 )
                      {
                         Diff3Line d3l;
                         d3l.lineB = (*i3).lineB;
@@ -778,7 +976,7 @@ void calcDiff3LineListUsingBC(
                int nofDisturbingLines = 0;
                while( i3 != i3c && i3!=d3ll.end() )
                {
-                  if ( (*i3).lineC != -1 ) 
+                  if ( (*i3).lineC != -1 )
                      ++nofDisturbingLines;
                   ++i3;
                }
@@ -789,7 +987,7 @@ void calcDiff3LineListUsingBC(
                   i3 = i3b;
                   while( i3 != i3c )
                   {
-                     if ( (*i3).lineC != -1 ) 
+                     if ( (*i3).lineC != -1 )
                      {
                         Diff3Line d3l;
                         d3l.lineC = (*i3).lineC;
@@ -816,7 +1014,7 @@ void calcDiff3LineListUsingBC(
                }
             }
          }
-                  
+
          --d.nofEquals;
          ++lineB;
          ++lineC;
@@ -861,8 +1059,8 @@ void calcDiff3LineListUsingBC(
    int li=0;
    for( ; it!=d3ll.end(); ++it, ++li )
    {
-      printf( "%4d %4d %4d %4d  A%c=B A%c=C B%c=C\n",  
-         li, (*it).lineA, (*it).lineB, (*it).lineC, 
+      printf( "%4d %4d %4d %4d  A%c=B A%c=C B%c=C\n",
+         li, (*it).lineA, (*it).lineB, (*it).lineC,
          (*it).bAEqB ? '=' : '!', (*it).bAEqC ? '=' : '!', (*it).bBEqC ? '=' : '!' );
    }
    printf("\n");*/
@@ -873,8 +1071,8 @@ using ::equal;
 #endif
 
 // Fourth step
-void calcDiff3LineListTrim(       
-   Diff3LineList& d3ll, LineData* pldA, LineData* pldB, LineData* pldC
+void calcDiff3LineListTrim(
+   Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC
    )
 {
    const Diff3Line d3l_empty;
@@ -974,7 +1172,7 @@ void calcDiff3LineListTrim(
          (*i).lineA = (*i3).lineA;
          (*i).lineB = (*i3).lineB;
          (*i).bAEqB = true;
-                  
+
          (*i3).lineA = -1;
          (*i3).lineB = -1;
          (*i3).bAEqB = false;
@@ -993,7 +1191,7 @@ void calcDiff3LineListTrim(
          (*i).lineA = (*i3).lineA;
          (*i).lineC = (*i3).lineC;
          (*i).bAEqC = true;
-                  
+
          (*i3).lineA = -1;
          (*i3).lineC = -1;
          (*i3).bAEqC = false;
@@ -1012,7 +1210,7 @@ void calcDiff3LineListTrim(
          (*i).lineB = (*i3).lineB;
          (*i).lineC = (*i3).lineC;
          (*i).bBEqC = true;
-                  
+
          (*i3).lineB = -1;
          (*i3).lineC = -1;
          (*i3).bBEqC = false;
@@ -1052,8 +1250,8 @@ void calcDiff3LineListTrim(
    int li=0;
    for( ; it!=d3ll.end(); ++it, ++li )
    {
-      printf( "%4d %4d %4d %4d  A%c=B A%c=C B%c=C\n",  
-         li, (*it).lineA, (*it).lineB, (*it).lineC, 
+      printf( "%4d %4d %4d %4d  A%c=B A%c=C B%c=C\n",
+         li, (*it).lineA, (*it).lineB, (*it).lineC,
          (*it).bAEqB ? '=' : '!', (*it).bAEqC ? '=' : '!', (*it).bBEqC ? '=' : '!' );
 
    }
@@ -1061,7 +1259,7 @@ void calcDiff3LineListTrim(
 }
 
 void calcWhiteDiff3Lines(
-   Diff3LineList& d3ll, LineData* pldA, LineData* pldB, LineData* pldC
+   Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC
    )
 {
    Diff3LineList::iterator i3 = d3ll.begin();
@@ -1294,8 +1492,8 @@ void calcDiff( const T* p1, int size1, const T* p2, int size2, DiffList& diffLis
 void fineDiff(
    Diff3LineList& diff3LineList,
    int selector,
-   LineData* v1,
-   LineData* v2,
+   const LineData* v1,
+   const LineData* v2,
    bool& bTextsTotalEqual
    )
 {
@@ -1325,9 +1523,21 @@ void fineDiff(
 
             // Optimize the diff list.
             DiffList::iterator dli;
+            bool bUsefulFineDiff = false;
             for( dli = pDiffList->begin(); dli!=pDiffList->end(); ++dli)
             {
-               if( dli->nofEquals < 4  &&  (dli->diff1>0 || dli->diff2>0)  )
+               if( dli->nofEquals >= 4 )
+               {
+                  bUsefulFineDiff = true;
+                  break;
+               }
+            }
+
+            for( dli = pDiffList->begin(); dli!=pDiffList->end(); ++dli)
+            {
+               if( dli->nofEquals < 4  &&  (dli->diff1>0 || dli->diff2>0) 
+                  && !( bUsefulFineDiff && dli==pDiffList->begin() )
+               )
                {
                   dli->diff1 += dli->nofEquals;
                   dli->diff2 += dli->nofEquals;
@@ -1365,7 +1575,7 @@ void calcDiff3LineVector( const Diff3LineList& d3ll, Diff3LineVector& d3lv )
    {
       d3lv[j] = &(*i);
    }
-   assert( j==(int)d3lv.size() );   
+   assert( j==(int)d3lv.size() );
 }
 
 

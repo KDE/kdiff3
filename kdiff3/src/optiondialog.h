@@ -35,6 +35,11 @@ class KConfig;
 class OptionItem;
 class KKeyDialog;
 
+enum eLineEndStyle
+{
+   eLineEndUnix=0,
+   eLineEndDos
+};
 
 class OptionDialog : public KDialogBase
 {
@@ -64,6 +69,7 @@ public:
     int  m_tabSize;
     bool m_bAutoCopySelection;
     bool m_bStringEncoding;
+    int  m_lineEndStyle;
 
     bool m_bPreserveCarriageReturn;
     bool m_bTryHard;
@@ -105,6 +111,9 @@ public:
     QString m_DmFileAntiPattern;
     QString m_DmDirAntiPattern;
 
+    QString m_language;
+    QString m_fileCodec;
+    
     void saveOptions(KConfig* config);
     void readOptions(KConfig* config);
 
@@ -133,8 +142,10 @@ private:
     void setupDiffPage();
     void setupDirectoryMergePage();
     void setupKeysPage();
+    void setupRegionalPage();
     void setupOtherOptions();
 };
+
 
 
 

@@ -1,3 +1,35 @@
+Version 0.9.83 - 2004/03/06
+===========================
+- Reading directorys fixed for Win95/98
+- Caseinsensitive filename matching for windows.
+- Autocopy to selection for systems that support this. (Patch by Stefan Partheymueller)
+- Drawing during recalc suppressed in merge result editor.
+- Cursor could go beyond last line in merge result editor. (Corrected NrOfLine-counting.)
+- Windows: Start with invalid cmd-line-options brings up a messagebox with the list of options.
+- Corrected encoding when copying to or pasting from clipboard.
+- Corrected char-by-char-diff at beginning of line. ("012345 12345 xyz" <-> "012345 xyz")
+- Warning when merging with preprocessor or upcase-conversion enabled.
+- Rewrite of preprocessing code should fix several problems. E.g.:
+  - Ignore C/C++-comments only worked with a preprocessor active.
+  - Preprocessor output now is input of line-matching preprocessor.
+  - Paste to diff-window, didn't work if LMPP or Ignore C/C++-Comments was set.
+
+Version 0.9.82 - 2004/02/02
+===========================
+- DirectoryMerge: Running merge op for last item in a folder, performed the
+  merge op for all following items in following folders. (Possible data loss!)
+- Fix: Preprocessors and "Ignore Comments" didn't work at the same time.
+- Fix: Preprocessors crashed with remote files.
+- Open-Dialog: When either input is changed, then reset the output to be empty.
+  (To avoid accidental overwrites.)
+- Icon for "Highlight white space differences."
+- Editor-Option: Line End Style for saving: Dos/Windows "\r\n" vs. Unix "\n"
+- Merge output editor: Corrected wrong encoding for output-filename and 
+  user-typed characters.
+- Speedup for reading directories under Windows.
+- Enhanced progress dialog responsiveness during local file copy.
+- Fix for non-KDE-version: No URL-encoding when dropping files in open dialog.
+
 Version 0.9.81 - 2004/01/08
 ===========================
 - Allow to compile with --enable-final
@@ -40,7 +72,7 @@ Other Improvements:
 - Default diff-view now again side by side instead of one above the other.
 
 
-Version 0.9.71 - 2003/10/14
+Version 0.9.71 - 2003/10/17
 ===========================
 - Windows-Installer by Sebastien Fricker.
 - Bugfixes for Windows. (Problems with setFont() in paintEvent().)

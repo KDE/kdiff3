@@ -1,8 +1,8 @@
 /***************************************************************************
                           directorymergewindow.cpp
-                             -------------------
+                             -----------------
     begin                : Sat Oct 19 2002
-    copyright            : (C) 2002 by Joachim Eibl
+    copyright            : (C) 2002-2004 by Joachim Eibl
     email                : joachim.eibl@gmx.de
  ***************************************************************************/
 
@@ -347,6 +347,15 @@ static void calcDirStatus( bool bThreeDirs, DirMergeItem* i, int& nofFiles,
       calcDirStatus( bThreeDirs, static_cast<DirMergeItem*>(p), nofFiles, nofDirs, nofEqualFiles, nofManualMerges );
 }
 
+static QString sortString(const QString& s)
+{
+#ifdef _WIN32
+   return s.upper();
+#else
+   return s;
+#endif
+}
+
 bool DirectoryMergeWindow::init
    (
    FileAccess& dirA,
@@ -439,7 +448,7 @@ bool DirectoryMergeWindow::init
 
       for (i=dirListA.begin(); i!=dirListA.end();++i )
       {
-         MergeFileInfos& mfi = m_fileMergeMap[i->filePath()];
+         MergeFileInfos& mfi = m_fileMergeMap[sortString(i->filePath())];
          //std::cout <<i->filePath()<<std::endl;
          mfi.m_bExistsInA = true;
          mfi.m_fileInfoA = *i;
@@ -461,7 +470,7 @@ bool DirectoryMergeWindow::init
 
       for (i=dirListB.begin(); i!=dirListB.end();++i )
       {
-         MergeFileInfos& mfi = m_fileMergeMap[i->filePath()];
+         MergeFileInfos& mfi = m_fileMergeMap[sortString(i->filePath())];
          mfi.m_bExistsInB = true;
          mfi.m_fileInfoB = *i;
       }
@@ -483,7 +492,7 @@ bool DirectoryMergeWindow::init
 
       for (i=dirListC.begin(); i!=dirListC.end();++i )
       {
-         MergeFileInfos& mfi = m_fileMergeMap[i->filePath()];
+         MergeFileInfos& mfi = m_fileMergeMap[sortString(i->filePath())];
          mfi.m_bExistsInC = true;
          mfi.m_fileInfoC = *i;
       }
@@ -949,13 +958,15 @@ void DirectoryMergeWindow::prepareListView()
    t.start();
    for( j=m_fileMergeMap.begin(); j!=m_fileMergeMap.end(); ++j )
    {
-      const QString& fileName = j->first;
       MergeFileInfos& mfi = j->second;
 
       mfi.m_subPath = mfi.m_fileInfoA.exists() ? mfi.m_fileInfoA.filePath() :
                       mfi.m_fileInfoB.exists() ? mfi.m_fileInfoB.filePath() :
                       mfi.m_fileInfoC.exists() ? mfi.m_fileInfoC.filePath() :
                       QString("");
+
+      // const QString& fileName = j->first;
+      const QString& fileName = mfi.m_subPath;
 
       g_pProgressDialog->setInformation(
          i18n("Processing ") + QString::number(currentIdx) +" / "+ QString::number(nrOfFiles)
@@ -994,7 +1005,7 @@ void DirectoryMergeWindow::prepareListView()
       }
       else
       {
-         MergeFileInfos& dirMfi = m_fileMergeMap[dirPart]; // parent
+         MergeFileInfos& dirMfi = m_fileMergeMap[sortString(dirPart)]; // parent
          assert(dirMfi.m_pDMI!=0);
          new DirMergeItem( dirMfi.m_pDMI, filePart, &mfi );
          mfi.m_pParent = &dirMfi;

@@ -2,7 +2,7 @@
                           diff.h  -  description
                              -------------------
     begin                : Mon Mar 18 2002
-    copyright            : (C) 2002 by Joachim Eibl
+    copyright            : (C) 2002-2004 by Joachim Eibl
     email                : joachim.eibl@gmx.de
  ***************************************************************************/
 
@@ -28,7 +28,7 @@
 #include "common.h"
 #include "fileaccess.h"
 
-
+class OptionDialog;
 
 // Each range with matching elements is followed by a range with differences on either side.
 // Then again range of matching elements should follow.
@@ -123,47 +123,74 @@ struct LineData
    int size;
 
    LineData(){ pLine=0; size=0; occurances=0; bContainsPureComment=false; }
-   int width();  // Calcs width considering tabs.
+   int width() const;  // Calcs width considering tabs.
    int occurances;
-   bool whiteLine(){ return pFirstNonWhiteChar-pLine == size; }
+   bool whiteLine() const { return pFirstNonWhiteChar-pLine == size; }
    bool bContainsPureComment;
 };
-
-void prepareOccurances( LineData* p, int size );
 
 
 class SourceData
 {
 public:
-   SourceData(){ m_pBuf=0;m_size=0;m_vSize=0;m_bIsText=false;m_bPreserve=false; }
-   const char* m_pBuf;
-   int m_size;
-   int m_vSize; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
-   std::vector<LineData> m_v;
-   bool m_bIsText;
-   bool m_bPreserve;
-   void reset();
-   void readPPFile( bool bPreserveCR, const QString& ppCmd, bool bUpCase );
-   void readLMPPFile( SourceData* pOrigSource, const QString& ppCmd, bool bUpCase, bool bRemoveComments );
-   void readFile(const QString& filename, bool bFollowLinks, bool bUpCase );
-   void preprocess(bool bPreserveCR );
-   void removeComments( LineData* pLD );
-   void setData( const QString& data, bool bUpCase );
+   SourceData();
+   ~SourceData();
+   
+   void setOptionDialog( OptionDialog* pOptionDialog );
+   
+   int getSizeLines() const;
+   int getSizeBytes() const;
+   const char* getBuf() const;
+   const LineData* getLineDataForDisplay() const;
+   const LineData* getLineDataForDiff() const;
+
    void setFilename(const QString& filename);
    void setFileAccess( const FileAccess& fa );
    FileAccess& getFileAccess();
    QString getFilename();
    void setAliasName(const QString& a);
    QString getAliasName();
-   bool isEmpty() { return getFilename().isEmpty(); }
-private:
-   QString m_fileName;
+   bool isEmpty();  // File was set
+   bool hasData();  // Data was readable
+   bool isText();   // is it pure text (vs. binary data)
+   bool isFromBuffer();  // was it set via setData() (vs. setFileAccess() or setFilename())
+   void setData( const QString& data );
+   
+   void readAndPreprocess();
+   bool saveNormalDataAs( const QString& fileName );
+   
+   bool isBinaryEqualWith( const SourceData& other ) const;
+   
+   void reset();
+
+private:   
    QString m_aliasName;
    FileAccess m_fileAccess;
+   OptionDialog* m_pOptionDialog;
+   QString m_tempInputFileName;
+
+   struct FileData
+   {   
+      FileData(){ m_pBuf=0; m_size=0; }
+      ~FileData(){ reset(); }
+      const char* m_pBuf;
+      int m_size;
+      int m_vSize; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
+      std::vector<LineData> m_v;
+      bool m_bIsText;
+      bool readFile( const QString& filename );
+      bool writeFile( const QString& filename );
+      void preprocess(bool bPreserveCR );
+      void reset();
+      void removeComments();
+      void copyBufFrom( const FileData& src );
+   };
+   FileData m_normalData;
+   FileData m_lmppData;   
 };
 
-void calcDiff3LineListTrim( Diff3LineList& d3ll, LineData* pldA, LineData* pldB, LineData* pldC );
-void calcWhiteDiff3Lines(   Diff3LineList& d3ll, LineData* pldA, LineData* pldB, LineData* pldC );
+void calcDiff3LineListTrim( Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC );
+void calcWhiteDiff3Lines(   Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC );
 
 void calcDiff3LineVector( const Diff3LineList& d3ll, Diff3LineVector& d3lv );
 
@@ -214,6 +241,7 @@ public:
 class OptionDialog;
 
 QString decodeString( const char*s , OptionDialog* );
+QCString encodeString( const QString& s , OptionDialog* );
 
 class DiffTextWindow : public QWidget
 {
@@ -226,7 +254,7 @@ public:
       );
    void init(
       const QString& fileName,
-      LineData* pLineData,
+      const LineData* pLineData,
       int size,
       const Diff3LineVector* pDiff3LineVector,
       int winIdx,
@@ -271,7 +299,7 @@ public slots:
 
 private:
    bool m_bPaintingAllowed;
-   LineData* m_pLineData;
+   const LineData* m_pLineData;
    int m_size;
    QString m_filename;
 
@@ -438,6 +466,7 @@ public slots:
    void slotAutoSolve();
    void slotUnsolve();
    void slotSetFastSelectorLine(int);
+   void setPaintingAllowed(bool);
 
 signals:
    void scroll( int deltaX, int deltaY );
@@ -462,6 +491,8 @@ private:
 
    const Diff3LineList* m_pDiff3LineList;
    const TotalDiffStatus* m_pTotalDiffStatus;
+
+   bool m_bPaintingAllowed;
 
 private:
    class MergeEditLine
@@ -496,19 +527,33 @@ private:
    private:
       typedef std::list<MergeEditLine> BASE;
       int m_size;
+      int* m_pTotalSize;
    public:
       typedef std::list<MergeEditLine>::iterator iterator;
       typedef std::list<MergeEditLine>::const_iterator const_iterator;
-      MergeEditLineList(){m_size=0;}
-      void clear()                             { m_size=0; BASE::clear();          }
-      void push_back( const MergeEditLine& m)  { ++m_size; BASE::push_back(m);     }
-      void push_front( const MergeEditLine& m) { ++m_size; BASE::push_front(m);    }
-      iterator erase( iterator i )             { --m_size; return BASE::erase(i);  }
-      iterator insert( iterator i, const MergeEditLine& m ) { ++m_size; return BASE::insert(i,m); }
+      MergeEditLineList(){m_size=0; m_pTotalSize=0; }
+      void clear()                             { ds(-m_size); BASE::clear();          }
+      void push_back( const MergeEditLine& m)  { ds(+1); BASE::push_back(m);     }
+      void push_front( const MergeEditLine& m) { ds(+1); BASE::push_front(m);    }
+      iterator erase( iterator i )             { ds(-1); return BASE::erase(i);  }
+      iterator insert( iterator i, const MergeEditLine& m ) { ds(+1); return BASE::insert(i,m); }
       int size(){ /*assert(int(BASE::size())==m_size);*/ return m_size;}
       iterator begin(){return BASE::begin();}
       iterator end(){return BASE::end();}
       bool empty() { return m_size==0; }
+      
+      void setTotalSizePtr(int* pTotalSize)
+      {
+         m_pTotalSize = pTotalSize;
+         *m_pTotalSize += m_size;
+      }
+      
+   private:
+      void ds(int deltaSize) 
+      { 
+         m_size+=deltaSize; 
+         if (m_pTotalSize!=0)  *m_pTotalSize+=deltaSize;
+      }
    };
 
    friend class MergeEditLine;
@@ -569,6 +614,7 @@ private:
    int m_firstColumn;
    int m_nofColumns;
    int m_nofLines;
+   int m_totalSize; //Same as m_nofLines, but calculated differently
    bool m_bMyUpdate;
    bool m_bInsertMode;
    QString m_fileName;
@@ -597,8 +643,8 @@ private slots:
 void fineDiff(
    Diff3LineList& diff3LineList,
    int selector,
-   LineData* v1,
-   LineData* v2,
+   const LineData* v1,
+   const LineData* v2,
    bool& bTextsTotalEqual
    );
 

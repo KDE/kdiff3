@@ -2,7 +2,7 @@
                           kdiff3.cpp  -  description
                              -------------------
     begin                : Don Jul 11 12:31:29 CEST 2002
-    copyright            : (C) 2002 by Joachim Eibl
+    copyright            : (C) 2002-2004 by Joachim Eibl
     email                : joachim.eibl@gmx.de
  ***************************************************************************/
 
@@ -108,6 +108,16 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    // Needed before any file operations via FileAccess happen.
    g_pProgressDialog = new ProgressDialog(this);
 
+   // All default values must be set before calling readOptions().
+   m_pOptionDialog = new OptionDialog( m_pKDiff3Shell!=0, this );
+   connect( m_pOptionDialog, SIGNAL(applyClicked()), this, SLOT(slotRefresh()) );
+   
+   m_pOptionDialog->readOptions( isPart() ? m_pKDiff3Part->instance()->config() : kapp->config() );
+
+   m_sd1.setOptionDialog(m_pOptionDialog);
+   m_sd2.setOptionDialog(m_pOptionDialog);
+   m_sd3.setOptionDialog(m_pOptionDialog);
+   
    // Option handling: Only when pParent==0 (no parent)
    KCmdLineArgs *args = isPart() ? 0 : KCmdLineArgs::parsedArgs();
 
@@ -165,12 +175,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    m_pFindDialog = new FindDialog( this );
    connect( m_pFindDialog, SIGNAL(findNext()), this, SLOT(slotEditFindNext()));
 
-   // All default values must be set before calling readOptions().
-   m_pOptionDialog = new OptionDialog( m_pKDiff3Shell!=0, this );
-   connect( m_pOptionDialog, SIGNAL(applyClicked()), this, SLOT(slotRefresh()) );
-
    readOptions( isPart() ? m_pKDiff3Part->instance()->config() : kapp->config() );
-
+   
    autoAdvance->setChecked( m_pOptionDialog->m_bAutoAdvance );
    showWhiteSpaceCharacters->setChecked( m_pOptionDialog->m_bShowWhiteSpaceCharacters );
    showWhiteSpace->setChecked( m_pOptionDialog->m_bShowWhiteSpace );
@@ -230,35 +236,31 @@ void KDiff3App::completeInit()
       init( m_bAuto );
       if ( m_bAuto )
       {
-         const char* pBuf = 0;
-         unsigned int size = 0;
+         SourceData* pSD=0;
          if ( m_sd3.isEmpty() )
          {
-            if ( m_totalDiffStatus.bBinaryAEqB ){ pBuf=m_sd1.m_pBuf; size=m_sd1.m_size; }
+            if ( m_totalDiffStatus.bBinaryAEqB ){ pSD = &m_sd1; }
          }
          else
          {
-            if      ( m_totalDiffStatus.bBinaryBEqC ){ pBuf=m_sd3.m_pBuf; size=m_sd3.m_size; }
-            else if ( m_totalDiffStatus.bBinaryAEqB ){ pBuf=m_sd3.m_pBuf; size=m_sd3.m_size; }
-            else if ( m_totalDiffStatus.bBinaryAEqC ){ pBuf=m_sd2.m_pBuf; size=m_sd2.m_size; }
+            if      ( m_totalDiffStatus.bBinaryBEqC ){ pSD = &m_sd3; } // B==C (assume A is old)
+            else if ( m_totalDiffStatus.bBinaryAEqB ){ pSD = &m_sd3; } // assuming C has changed
+            else if ( m_totalDiffStatus.bBinaryAEqC ){ pSD = &m_sd2; } // assuming B has changed
          }
 
-         if ( pBuf!=0 )
+         if ( pSD!=0 )
          {
             // Save this file directly, not via the merge result window.
             bool bSuccess = false;
-            if ( m_pOptionDialog->m_bDmCreateBakFiles && QDir().exists( m_outputFilename ) )
+            FileAccess fa( m_outputFilename );
+            if ( m_pOptionDialog->m_bDmCreateBakFiles && fa.exists() )
             {
                QString newName = m_outputFilename + ".orig";
-               if ( QDir().exists( newName ) ) QFile::remove(newName);
-               if ( !QDir().exists( newName ) ) QDir().rename( m_outputFilename, newName );
+               if ( FileAccess::exists( newName ) ) FileAccess::removeFile( newName );
+               if ( !FileAccess::exists( newName ) ) fa.rename( newName );
             }
-            QFile file( m_outputFilename );
-            if ( file.open( IO_WriteOnly ) )
-            {
-               bSuccess = (long)size == file.writeBlock ( pBuf, size );
-               file.close();
-            }
+            
+            bSuccess = pSD->saveNormalDataAs( m_outputFilename );
             if ( bSuccess ) ::exit(0);
             else KMessageBox::error( this, i18n("Saving failed.") );
          }
@@ -280,17 +282,17 @@ void KDiff3App::completeInit()
    if ( ! m_bDirCompare  &&  m_pKDiff3Shell!=0 )
    {
       bool bFileOpenError = false;
-      if ( ! m_sd1.isEmpty() && m_sd1.m_pBuf==0  ||
-         ! m_sd2.isEmpty() && m_sd2.m_pBuf==0  ||
-         ! m_sd3.isEmpty() && m_sd3.m_pBuf==0 )
+      if ( ! m_sd1.isEmpty() && !m_sd1.hasData()  ||
+           ! m_sd2.isEmpty() && !m_sd2.hasData()  ||
+           ! m_sd3.isEmpty() && !m_sd3.hasData() )
       {
          QString text( i18n("Opening of these files failed:") );
          text += "\n\n";
-         if ( ! m_sd1.isEmpty() && m_sd1.m_pBuf==0 )
+         if ( ! m_sd1.isEmpty() && !m_sd1.hasData() )
             text += " - " + m_sd1.getAliasName() + "\n";
-         if ( ! m_sd2.isEmpty() && m_sd2.m_pBuf==0 )
+         if ( ! m_sd2.isEmpty() && !m_sd2.hasData() )
             text += " - " + m_sd2.getAliasName() + "\n";
-         if ( ! m_sd3.isEmpty() && m_sd3.m_pBuf==0 )
+         if ( ! m_sd3.isEmpty() && !m_sd3.hasData() )
             text += " - " + m_sd3.getAliasName() + "\n";
 
          KMessageBox::sorry( this, text, i18n("File Open Error") );
@@ -353,6 +355,7 @@ void KDiff3App::initActions( KActionCollection* ac )
 #include "xpm/iconC.xpm"
 #include "xpm/autoadvance.xpm"
 #include "xpm/showwhitespace.xpm"
+#include "xpm/showwhitespacechars.xpm"
 #include "xpm/showlinenumbers.xpm"
 //#include "reload.xpm"
 
@@ -370,8 +373,8 @@ void KDiff3App::initActions( KActionCollection* ac )
    chooseC = new KToggleAction(i18n("Select Line(s) From C"), QIconSet(QPixmap(iconC)), CTRL+Key_3, this, SLOT(slotChooseC()), ac, "merge_choose_c");
    autoAdvance = new KToggleAction(i18n("Automatically Go to Next Unsolved Conflict After Source Selection"), QIconSet(QPixmap(autoadvance)), 0, this, SLOT(slotAutoAdvanceToggled()), ac, "merge_autoadvance");
 
-   showWhiteSpaceCharacters = new KToggleAction(i18n("Show Space && Tabulator Characters for Differences"), QIconSet(QPixmap(showwhitespace)), 0, this, SLOT(slotShowWhiteSpaceToggled()), ac, "merge_show_whitespace_characters");
-   showWhiteSpace = new KToggleAction(i18n("Show White Space"), 0, this, SLOT(slotShowWhiteSpaceToggled()), ac, "merge_show_whitespace");
+   showWhiteSpaceCharacters = new KToggleAction(i18n("Show Space && Tabulator Characters for Differences"), QIconSet(QPixmap(showwhitespacechars)), 0, this, SLOT(slotShowWhiteSpaceToggled()), ac, "merge_show_whitespace_characters");
+   showWhiteSpace = new KToggleAction(i18n("Show White Space"), QIconSet(QPixmap(showwhitespace)), 0, this, SLOT(slotShowWhiteSpaceToggled()), ac, "merge_show_whitespace");
 
    showLineNumbers = new KToggleAction(i18n("Show Line Numbers"), QIconSet(QPixmap(showlinenumbers)), 0, this, SLOT(slotShowLineNumbersToggled()), ac, "merge_showlinenumbers");
    chooseAEverywhere = new KAction(i18n("Choose A Everywhere"), CTRL+SHIFT+Key_1, this, SLOT(slotChooseAEverywhere()), ac, "merge_choose_a_everywhere");
@@ -467,7 +470,6 @@ void KDiff3App::readOptions( KConfig* config )
          m_pKDiff3Shell->move( pos );
       }
    }
-   m_pOptionDialog->readOptions( config );
 
    slotRefresh();
 }

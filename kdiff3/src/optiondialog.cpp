@@ -28,6 +28,7 @@
 #include <qvbox.h>
 #include <qvalidator.h>
 #include <qtooltip.h>
+#include <qtextcodec.h>
 
 #include <kapplication.h>
 #include <kcolorbtn.h>
@@ -37,6 +38,7 @@
 #include <kconfig.h>
 #include <kmessagebox.h>
 //#include <kkeydialog.h>
+#include <map>
 
 #include "optiondialog.h"
 #include "diff.h"
@@ -126,25 +128,42 @@ private:
    QColor m_defaultVal;
 };
 
-class OptionLineEdit : public QLineEdit, public OptionItem
+class OptionLineEdit : public QComboBox, public OptionItem
 {
 public:
    OptionLineEdit( const QString& defaultVal, const QString& saveName, QString* pVar,
                    QWidget* pParent, OptionDialog* pOD )
-   : QLineEdit( pParent ), OptionItem( pOD, saveName )
+   : QComboBox( pParent ), OptionItem( pOD, saveName )
    {
       m_pVar = pVar;
       m_defaultVal = defaultVal;
+      m_list.push_back(defaultVal);
+      setEditable(true);
    }
-   void setToDefault(){ setText( m_defaultVal );      }
-   void setToCurrent(){ setText( *m_pVar );           }
-   void apply()       { *m_pVar = text();                              }
-   void write(KConfig* config){ config->writeEntry(m_saveName, *m_pVar );   }
-   void read (KConfig* config){ *m_pVar = config->readEntry( m_saveName, *m_pVar ); }
+   void setToDefault(){ setCurrentText( m_defaultVal );      }
+   void setToCurrent(){ setCurrentText( *m_pVar );           }
+   void apply()       { *m_pVar = currentText(); insertText();            }
+   void write(KConfig* config){ config->writeEntry( m_saveName, m_list, '|' );      }
+   void read (KConfig* config){ 
+      m_list = config->readListEntry( m_saveName, '|' ); 
+      if ( !m_list.isEmpty() ) *m_pVar = m_list.front();
+      clear();
+      insertStringList(m_list);
+   }
 private:
+   void insertText()
+   {  // Check if the text exists. If yes remove it and
+      QString current = currentText();
+      m_list.remove( current );
+      m_list.push_front( current );
+      clear();
+      if ( m_list.count()>10 ) m_list.erase( m_list.at(10), m_list.end() );
+      insertStringList(m_list);
+   }
    OptionLineEdit( const OptionLineEdit& ); // private copy constructor without implementation
    QString* m_pVar;
    QString m_defaultVal;
+   QStringList m_list;
 };
 
 #if defined QT_NO_VALIDATOR
@@ -179,23 +198,69 @@ private:
 class OptionComboBox : public QComboBox, public OptionItem
 {
 public:
-   OptionComboBox( int defaultVal, const QString& saveName, int* pVar,
+   OptionComboBox( int defaultVal, const QString& saveName, int* pVarNum,
                    QWidget* pParent, OptionDialog* pOD )
    : QComboBox( pParent ), OptionItem( pOD, saveName )
    {
-      m_pVar = pVar;
+      m_pVarNum = pVarNum;
+      m_pVarStr = 0;
       m_defaultVal = defaultVal;
       setEditable(false);
    }
-   void setToDefault(){ setCurrentItem( m_defaultVal );  }
-   void setToCurrent(){ setCurrentItem( *m_pVar );  }
-   void apply()       { *m_pVar = currentItem();  }
-   void write(KConfig* config){ config->writeEntry(m_saveName, *m_pVar );   }
-   void read (KConfig* config){ *m_pVar = config->readNumEntry( m_saveName, *m_pVar ); }
+   OptionComboBox( int defaultVal, const QString& saveName, QString* pVarStr,
+                   QWidget* pParent, OptionDialog* pOD )
+   : QComboBox( pParent ), OptionItem( pOD, saveName )
+   {
+      m_pVarNum = 0;
+      m_pVarStr = pVarStr;
+      m_defaultVal = defaultVal;
+      setEditable(false);
+   }
+   void setToDefault()
+   { 
+      setCurrentItem( m_defaultVal ); 
+      if (m_pVarStr!=0){ *m_pVarStr=currentText(); } 
+   }
+   void setToCurrent()
+   { 
+      if (m_pVarNum!=0) setCurrentItem( *m_pVarNum );
+      else              setText( *m_pVarStr );
+   }
+   void apply()       
+   { 
+      if (m_pVarNum!=0){ *m_pVarNum = currentItem(); }
+      else             { *m_pVarStr = currentText(); }
+   }
+   void write(KConfig* config)
+   { 
+      if (m_pVarStr!=0) config->writeEntry(m_saveName, *m_pVarStr );
+      else              config->writeEntry(m_saveName, *m_pVarNum );   
+   }
+   void read (KConfig* config)
+   {
+      if (m_pVarStr!=0)  setText( config->readEntry( m_saveName, currentText() ) );
+      else               *m_pVarNum = config->readNumEntry( m_saveName, *m_pVarNum ); 
+   }
 private:
    OptionComboBox( const OptionIntEdit& ); // private copy constructor without implementation
-   int* m_pVar;
+   int* m_pVarNum;
+   QString* m_pVarStr;
    int m_defaultVal;
+   
+   void setText(const QString& s)
+   {
+      // Find the string in the combobox-list, don't change the value if nothing fits.
+      for( int i=0; i<count(); ++i )
+      {
+         if ( text(i)==s )
+         {
+            if (m_pVarNum!=0) *m_pVarNum = i;
+            if (m_pVarStr!=0) *m_pVarStr = s;
+            setCurrentItem(i);
+            return;
+         }
+      }
+   }
 };
 
 OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *name )
@@ -211,6 +276,9 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
   setupOtherOptions();
   if (bShowDirMergeSettings)
      setupDirectoryMergePage();
+     
+  // setupRegionalPage();
+
   //setupKeysPage();
 
   // Initialize all values in the dialog
@@ -372,7 +440,24 @@ void OptionDialog::setupEditPage( void )
       "Off: You must explicitely copy e.g. via Ctrl-C."
       ));
    ++line;
-
+   
+   label = new QLabel( i18n("Line End Style:"), page );
+   gbox->addWidget( label, line, 0 );
+   #ifdef _WIN32
+   int defaultLineEndStyle = eLineEndDos;
+   #else
+   int defaultLineEndStyle = eLineEndUnix;
+   #endif
+   OptionComboBox* pLineEndStyle = new OptionComboBox( defaultLineEndStyle, "LineEndStyle", &m_lineEndStyle, page, this );
+   gbox->addWidget( pLineEndStyle, line, 1 );
+   pLineEndStyle->insertItem( "Unix", eLineEndUnix );
+   pLineEndStyle->insertItem( "Dos/Windows", eLineEndDos );
+   QToolTip::add( label, i18n(
+      "Sets the line endings for when a edited file is saved.\n"
+      "DOS/Windows: CR+LF; Unix: LF; with CR=0D, LF=0A")
+      );
+   ++line;
+      
    OptionCheckBox* pStringEncoding = new OptionCheckBox( i18n("Use locale encoding"), true, "LocaleEncoding", &m_bStringEncoding, page, this );
    gbox->addMultiCellWidget( pStringEncoding, line, line, 0, 1 );
    QToolTip::add( pStringEncoding, i18n(
@@ -464,7 +549,7 @@ void OptionDialog::setupDiffPage( void )
    pWhiteSpace2FileMergeDefault->insertItem( i18n("Manual choice"), 0 );
    pWhiteSpace2FileMergeDefault->insertItem( "A", 1 );
    pWhiteSpace2FileMergeDefault->insertItem( "B", 2 );
-   QToolTip::add( pWhiteSpace2FileMergeDefault, i18n(
+   QToolTip::add( label, i18n(
       "Allow the merge algorithm to automatically select an input for "
       "white-space-only changes." )
       );
@@ -478,7 +563,7 @@ void OptionDialog::setupDiffPage( void )
    pWhiteSpace3FileMergeDefault->insertItem( "A", 1 );
    pWhiteSpace3FileMergeDefault->insertItem( "B", 2 );
    pWhiteSpace3FileMergeDefault->insertItem( "C", 3 );
-   QToolTip::add( pWhiteSpace3FileMergeDefault, i18n(
+   QToolTip::add( label, i18n(
       "Allow the merge algorithm to automatically select an input for "
       "white-space-only changes." )
       );
@@ -611,6 +696,63 @@ void OptionDialog::setupDirectoryMergePage( void )
 
    topLayout->addStretch(10);
 }
+
+static void insertCodecs(OptionComboBox* p)
+{
+   std::multimap<QString,QString> m;  // Using the multimap for case-insensitive sorting.
+   int i;
+   for(i=0;;++i)
+   {
+      QTextCodec* pCodec = QTextCodec::codecForIndex ( i );
+      if ( pCodec != 0 )  m.insert( std::make_pair( QString(pCodec->mimeName()).upper(), pCodec->mimeName()) );
+      else                break;
+   }
+   
+   p->insertItem( i18n("Auto"), 0 );
+   std::multimap<QString,QString>::iterator mi;
+   for(mi=m.begin(), i=0; mi!=m.end(); ++mi, ++i)
+      p->insertItem(mi->second, i+1);
+}
+
+void OptionDialog::setupRegionalPage( void )
+{
+   QFrame *page = addPage( i18n("Regional Settings"), i18n("Regional Settings"),
+                           BarIcon("locale"/*"charset"*/, KIcon::SizeMedium ) );
+   QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+
+   QGridLayout *gbox = new QGridLayout( 3, 2 );
+   topLayout->addLayout( gbox );
+   int line=0;
+
+   QLabel* label;
+#ifdef KREPLACEMENTS_H   
+   label = new QLabel( i18n("Language (restart required)"), page );
+   gbox->addWidget( label, line, 0 );
+   OptionComboBox* pLanguage = new OptionComboBox( 0, "Language", &m_language, page, this );
+   gbox->addWidget( pLanguage, line, 1 );
+   pLanguage->insertItem( i18n("Auto"), 0 );
+   // Read directory: Find all kdiff3_*.qm-files and insert the found files here selection
+   QToolTip::add( label, i18n(
+      "Choose the language of the GUI-strings or \"Auto\".\n" 
+      "For a change of language to take place, quit and restart KDiff3.") 
+      );
+   ++line;
+#endif
+
+   label = new QLabel( i18n("Codec for file contents"), page );
+   gbox->addWidget( label, line, 0 );
+   OptionComboBox* pFileCodec = new OptionComboBox( 0, "FileCodec", &m_fileCodec, page, this );
+   gbox->addWidget( pFileCodec, line, 1 );
+   insertCodecs( pFileCodec );
+   QToolTip::add( label, i18n(
+      "Choose the codec that should be used for your input files\n"
+      "or \"Auto\" if unsure." ) 
+      );
+   ++line;
+      
+   topLayout->addStretch(10);
+}
+
 
 void OptionDialog::setupKeysPage( void )
 {
@@ -751,6 +893,7 @@ void OptionDialog::slotHelp( void )
 {
    KDialogBase::slotHelp();
 }
+
 
 
 #include "optiondialog.moc"

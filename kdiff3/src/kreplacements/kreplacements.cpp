@@ -141,7 +141,7 @@ void KMessageBox::information(  QWidget* parent, const QString& text, const QStr
 int  KMessageBox::warningYesNo( QWidget* parent, const QString& text, const QString& caption,
    const QString& button1, const QString& button2 )
 {
-   return  0 == QMessageBox::warning( parent, caption, text, button1, button2 ) ? Yes : No;
+   return  0 == QMessageBox::warning( parent, caption, text, button1, button2, QString::null, 1, 1 ) ? Yes : No;
 }
 
 int KMessageBox::warningYesNoCancel( QWidget* parent, const QString& text, const QString& caption,
@@ -419,6 +419,65 @@ void KConfig::setGroup(const QString&)
 {
 }
 
+// safeStringJoin and safeStringSplit allow to convert a stringlist into a string and back
+// safely, even if the individual strings in the list contain the separator character.
+static QString safeStringJoin(const QStringList& sl, char sepChar=',', char metaChar='\\' )
+{
+   // Join the strings in the list, using the separator ','
+   // If a string contains the separator character, it will be replaced with "\,".
+   // Any occurances of "\" (one backslash) will be replaced with "\\" (2 backslashes)
+   
+   assert(sepChar!=metaChar);
+   
+   QString sep;
+   sep += sepChar;
+   QString meta;
+   meta += metaChar;   
+   
+   QString safeString;
+   
+   QStringList::const_iterator i;
+   for (i=sl.begin(); i!=sl.end(); ++i)
+   {
+      QString s = *i;
+      s.replace(meta, meta+meta);   //  "\" -> "\\"
+      s.replace(sep, meta+sep);     //  "," -> "\,"
+      if ( i==sl.begin() )
+         safeString = s;
+      else
+         safeString += sep + s;
+   }
+   return safeString;
+}
+
+// Split a string that was joined with safeStringJoin
+static QStringList safeStringSplit(const QString& s, char sepChar=',', char metaChar='\\' )
+{
+   assert(sepChar!=metaChar);
+   QStringList sl;
+   // Miniparser
+   int i=0;
+   int len=s.length();
+   QString b;
+   for(i=0;i<len;++i)
+   {
+      if      ( i+1<len && s[i]==metaChar && s[i+1]==metaChar ){ b+=metaChar; ++i; }
+      else if ( i+1<len && s[i]==metaChar && s[i+1]==sepChar ){ b+=sepChar; ++i; }
+      else if ( s[i]==sepChar )  // real separator
+      {
+         sl.push_back(b);
+         b="";
+      }
+      else { b+=s[i]; }     
+   }
+   if ( !b.isEmpty() )
+      sl.push_back(b);
+
+   return sl;
+}
+
+
+
 static QString numStr(int n)
 {
    QString s;
@@ -493,18 +552,7 @@ void KConfig::writeEntry(const QString& k, const QString& v )
 
 void KConfig::writeEntry(const QString& k, const QStringList& v, char separator )
 {
-   QString s;
-
-   QStringList::ConstIterator i = v.begin();
-   for( i=v.begin(); i!= v.end(); ++i )
-   {
-      s += *i;
-
-      if ( !(*i).isEmpty() )
-         s += separator;
-   }
-
-   m_map[k] = s;
+   m_map[k] = safeStringJoin(v, separator);
 }
 
 
@@ -600,24 +648,14 @@ QString KConfig::readEntry(const QString& k, const QString& sDefault )
    return sval;
 }
 
-QStringList KConfig::readListEntry(const QString& k, char /*separator*/ )
+QStringList KConfig::readListEntry(const QString& k, char separator )
 {
    QStringList strList;
 
    std::map<QString,QString>::iterator i = m_map.find( k );
    if ( i!=m_map.end() )
    {
-      QString s = i->second;
-      int idx=0;
-      for(;;)
-      {
-         QString sec = subSection( s, idx, '|' ); //s.section('|',idx,idx);
-         if ( sec.isEmpty() )
-            break;
-         else
-            strList.append(sec);
-         ++idx;
-      }
+      strList = safeStringSplit( i->second, separator );
    }
    return strList;
 }
@@ -1042,7 +1080,7 @@ int KCmdLineArgs::count()
 
 QString KCmdLineArgs::arg(int idx)
 {
-   return QString(s_vArg[idx]);
+   return QString::fromLocal8Bit( s_vArg[idx] );
 }
 
 void KCmdLineArgs::clear()
@@ -1155,21 +1193,27 @@ KApplication::KApplication()
          }
          if (j==nofOptions)
          {
-            using std::cerr;
-            using std::endl;
-            cerr << "Unknown option: " << s_argv[i] << endl<<endl;
+            QString s;
+            s = QString("Unknown option: ") +  s_argv[i] + "\n";
 
-            cerr << "Usage when starting via commandline: "                      << endl;
-            cerr << "- Comparing 2 files:     kdiff3 file1 file2  "              << endl;
-            cerr << "- Merging 2 files:       kdiff3 file1 file2 -o outputfile " << endl;
-            cerr << "- Comparing 3 files:     kdiff3 file1 file2 file3         " << endl;
-            cerr << "- Merging 3 files:       kdiff3 file1 file2 file3 -o outputfile " << endl;
-            cerr << "     Note that file1 will be treated as base of file2 and file3." << endl;
-            cerr << endl;
-            cerr << "If you start without arguments, then a dialog will appear"        << endl;
-            cerr << "where you can select your files via a filebrowser."               << endl;
-            cerr << endl;
-            cerr << "For more documentation, see the help-menu or the subdirectory doc. " << endl;
+            s += "KDiff3-Usage when starting via commandline: \n";
+            s += "- Comparing 2 files:\t\tkdiff3 file1 file2\n";
+            s += "- Merging 2 files:  \t\tkdiff3 file1 file2 -o outputfile\n";
+            s += "- Comparing 3 files:\t\tkdiff3 file1 file2 file3\n";
+            s += "- Merging 3 files:  \t\tkdiff3 file1 file2 file3 -o outputfile\n";
+            s += "     Note that file1 will be treated as base of file2 and file3.\n";
+            s += "\n";
+            s += "If you start without arguments, then a dialog will appear\n";
+            s += "where you can select your files via a filebrowser.\n";
+            s += "\n";
+            s += "For more documentation, see the help-menu or the subdirectory doc.\n";
+#ifdef _WIN32 
+            // A windows program has no console
+            KMessageBox::information(0, s,i18n("KDiff3-Usage"));
+#else
+            std::cerr << s.latin1() << std::endl;
+#endif
+            
             ::exit(-1);
          }
       }
@@ -1247,6 +1291,7 @@ QObject* KLibFactory::create(QObject* pParent, QString const& name, QString cons
    else
       return 0;
 }
+
 
 
 

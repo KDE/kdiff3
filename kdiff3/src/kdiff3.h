@@ -2,7 +2,7 @@
                           kdiff3.h  -  description
                              -------------------
     begin                : Don Jul 11 12:31:29 CEST 2002
-    copyright            : (C) 2002 by Joachim Eibl
+    copyright            : (C) 2002-2004 by Joachim Eibl
     email                : joachim.eibl@gmx.de
  ***************************************************************************/
 
@@ -220,10 +220,6 @@ class KDiff3App : public QSplitter
     SourceData m_sd2;
     SourceData m_sd3;
 
-    SourceData m_sdlm1;  // SourceData for Line Matching only.
-    SourceData m_sdlm2;
-    SourceData m_sdlm3;
-
    QString m_outputFilename;
    bool m_bDefaultFilename;
 
@@ -250,7 +246,7 @@ class KDiff3App : public QSplitter
 
    bool improveFilenames();
 
-   bool runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffList& diffList );
+   bool runDiff( const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList );
    bool canContinue();
 
    void choose(int choice);
@@ -340,9 +336,11 @@ public:
 
    QCheckBox* m_pMerge;
    virtual void accept();
+   virtual bool eventFilter(QObject* o, QEvent* e);
 private:
    OptionDialog* m_pOptions;
    void selectURL( QComboBox* pLine, bool bDir, int i, bool bSave );
+   bool m_bInputFileNameChanged;
 private slots:
    void selectFileA();
    void selectFileB();
@@ -353,6 +351,7 @@ private slots:
    void selectOutputName();
    void selectOutputDir();
    void internalSlot(int);
+   void inputFilenameChanged();
 signals:
    void internalSignal(bool);
 };

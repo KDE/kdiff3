@@ -35,6 +35,7 @@
 #ifdef _WIN32
 #include <sys/utime.h>
 #include <io.h>
+#include <windows.h>
 #else
 #include <unistd.h>          // Needed for creating symbolic links via symlink().
 #include <utime.h>
@@ -204,9 +205,11 @@ void FileAccess::addPath( const QString& txt )
        S_IXOTH    00001     others have execute permission
 */
 
+#ifdef KREPLACEMENTS_H
+void FileAccess::setUdsEntry( const KIO::UDSEntry& ){}  // not needed if KDE is not available
+#else
 void FileAccess::setUdsEntry( const KIO::UDSEntry& e )
 {
-#ifndef KREPLACEMENTS_H
    KIO::UDSEntry::const_iterator ei;
    long acc = 0;
    long fileType = 0;
@@ -262,8 +265,8 @@ void FileAccess::setUdsEntry( const KIO::UDSEntry& e )
       m_name = m_path.mid( pos );
    }
    m_bHidden = m_name[0]=='.';
-#endif
 }
+#endif
 
 
 bool FileAccess::isValid() const       {   return m_bValidData;  }
@@ -342,7 +345,7 @@ bool FileAccess::readFile( void* pDestBuffer, unsigned long maxLength )
    return false;
 }
 
-bool FileAccess::writeFile( void* pSrcBuffer, unsigned long length )
+bool FileAccess::writeFile( const void* pSrcBuffer, unsigned long length )
 {
    if (m_bLocal)
    {
@@ -424,7 +427,7 @@ QString FileAccess::tempFileName()
          for(int i=0; ;++i)
          {
             // short filenames for WIN98 because for system() the command must not exceed 120 characters.
-            fileName = tmpDir + "/" + QString::number(i);
+            fileName = tmpDir + "\\" + QString::number(i);
             if ( ! FileAccess::exists(fileName) )
                break;
          }
@@ -624,7 +627,7 @@ void FileAccessJobHandler::slotGetData( KIO::Job* pJob, const QByteArray& newDat
    }
 }
 
-bool FileAccessJobHandler::put(void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume, int permissions )
+bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume, int permissions )
 {
    if ( maxLength>0 )
    {
@@ -1167,6 +1170,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
       m_bSuccess = QDir::setCurrent( m_pFileAccess->absFilePath() );
       if ( m_bSuccess )
       {
+#ifndef _WIN32
          m_bSuccess = true;
          QDir dir( "." );
 
@@ -1192,6 +1196,75 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
                pDirList->push_back( FileAccess( nicePath(*fi) ) );
             }
          }
+#else
+         QString pattern ="*.*";
+         WIN32_FIND_DATA findData;
+         WIN32_FIND_DATAA& findDataA=*(WIN32_FIND_DATAA*)&findData;  // Needed for Win95
+
+         HANDLE searchHandle = QT_WA_INLINE( 
+                 FindFirstFile( (TCHAR*)pattern.ucs2(), &findData ),
+                 FindFirstFileA( pattern.local8Bit(), &findDataA )
+              );
+
+         if ( searchHandle != INVALID_HANDLE_VALUE )
+         {
+            QString absPath = m_pFileAccess->absFilePath();
+            QString relPath = m_pFileAccess->filePath();
+            bool bFirst=true;
+            while( ! g_pProgressDialog->wasCancelled() )
+            {
+               if (!bFirst)
+               {
+                  if ( ! QT_WA_INLINE(
+                            FindNextFile(searchHandle,&findData),
+                            FindNextFileA(searchHandle,&findDataA)) )
+                     break;
+               }
+               bFirst = false;
+               FileAccess fa;
+               fa.m_size = findData.nFileSizeLow ;//+ findData.nFileSizeHigh;
+
+               FILETIME ft;
+               SYSTEMTIME t;
+               FileTimeToLocalFileTime( &findData.ftLastWriteTime, &ft ); FileTimeToSystemTime(&ft,&t);
+               fa.m_modificationTime = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
+               FileTimeToLocalFileTime( &findData.ftLastAccessTime, &ft ); FileTimeToSystemTime(&ft,&t);
+               fa.m_accessTime       = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
+               FileTimeToLocalFileTime( &findData.ftCreationTime, &ft ); FileTimeToSystemTime(&ft,&t);
+               fa.m_creationTime     = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
+
+               int  a = findData.dwFileAttributes;
+               fa.m_bWritable   = ( a & FILE_ATTRIBUTE_READONLY) == 0; 
+               fa.m_bDir        = ( a & FILE_ATTRIBUTE_DIRECTORY ) != 0;
+               fa.m_bFile       = !fa.m_bDir;
+               fa.m_bHidden     = ( a & FILE_ATTRIBUTE_HIDDEN) != 0;
+
+               fa.m_bExecutable = false; // Useless on windows
+               fa.m_bExists     = true;
+               fa.m_bReadable   = true;
+               fa.m_bLocal      = true;
+               fa.m_bValidData  = true;
+               fa.m_bSymLink    = false;
+               fa.m_fileType    = 0;
+
+               fa.m_name = QT_WA_INLINE( 
+                  QString::fromUcs2(findData.cFileName),
+                  QString::fromLocal8Bit(findDataA.cFileName) 
+                  );
+
+               fa.m_path = fa.m_name;
+               fa.m_absFilePath = absPath + "/" + fa.m_name;
+               fa.m_url.setPath( fa.m_absFilePath );
+               if ( fa.m_name!="." && fa.m_name!=".." )
+                  pDirList->push_back( fa );
+            }
+            FindClose( searchHandle );
+         }
+         else
+         {
+            return false;
+         }
+#endif
       }
    }
    else

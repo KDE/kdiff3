@@ -1,8 +1,8 @@
 /***************************************************************************
-                          kdiff.cpp  -  description
-                             -------------------
+                         pdiff.cpp  -  Implementation for class KDiff3App
+                         ---------------
     begin                : Mon Mär 18 20:04:50 CET 2002
-    copyright            : (C) 2002 by Joachim Eibl
+    copyright            : (C) 2002-2004 by Joachim Eibl
     email                : joachim.eibl@gmx.de
  ***************************************************************************/
 
@@ -99,7 +99,7 @@ QString createTempFile( const LineData* p, int size, bool bIgnoreWhiteSpace, boo
    return fileName;
 }
 
-bool KDiff3App::runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffList& diffList )
+bool KDiff3App::runDiff( const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList )
 {
    static GnuDiff gnuDiff;
    
@@ -164,8 +164,11 @@ bool KDiff3App::runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffL
    
       if (size1-currentLine1==size2-currentLine2 )
       {
-         Diff d( size1-currentLine1,0,0);
-         diffList.push_back(d);
+         if (size1-currentLine1>0)
+         {
+            Diff d( size1-currentLine1,0,0);
+            diffList.push_back(d);
+         }
       }
       else if ( !diffList.empty() )
       {  // Only necessary for a files that end with a newline
@@ -204,209 +207,6 @@ bool KDiff3App::runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffL
    g_pProgressDialog->setSubCurrent(1.0);
 
    return true;
-#if 0
-
-   if ( m_pOptionDialog->m_bUseExternalDiff )
-   {
-      bool bSuccess=false;
-
-      bool bIgnoreWhiteSpace = m_pOptionDialog->m_bIgnoreWhiteSpace;
-      bool bIgnoreNumbers = m_pOptionDialog->m_bIgnoreNumbers;
-
-      // Create two temp files (Remove all white spaces and carriage returns here)
-      // (Make sure that no existing files are overwritten.)
-      g_pProgressDialog->setSubCurrent(0);
-      QString fileName1 = createTempFile( p1, size1, bIgnoreWhiteSpace, bIgnoreNumbers );
-      g_pProgressDialog->setSubCurrent(0.25);
-      QString fileName2 = createTempFile( p2, size2, bIgnoreWhiteSpace, bIgnoreNumbers );
-      g_pProgressDialog->setSubCurrent(0.5);
-      QString fileNameOut = FileAccess::tempFileName();
-
-      if ( !fileName1.isEmpty() && !fileName2.isEmpty() )
-      {
-         QString cmd;
-#ifdef _WIN32
-         // Under Windows it's better to search for diff.exe
-         char buf[200];
-         int r= SearchPathA( 0, "diff.exe",  0, sizeof(buf), buf, 0 );
-
-         if (r!=0) { cmd = buf; }
-#else
-         // under Un*x I assume that a diff command is in the PATH
-         cmd = "diff";
-#endif
-         if ( !cmd.isEmpty() )
-         {
-            cmd += " -a ";     // -a = treat all files as text
-            if ( m_pOptionDialog->m_bTryHard )
-               cmd += "--minimal ";
-            //if ( m_pOptionDialog->m_bIgnoreWhiteSpace ) This I do myself, see below
-            //   cmd += "--ignore-all-space ";
-            cmd += fileName1+" "+fileName2+" >"+fileNameOut;
-            // Run diff
-            //int status1 = ::system( 0 ); // ==0 if shell not found
-            int status = ::system( cmd.ascii() );
-#ifdef WEXITSTATUS
-            status = WEXITSTATUS(status);
-#endif
-            //if (status<0)
-            //{
-            //   errorString = strerror( errno );
-            //}
-            bSuccess = status>=0 && status!=127;
-         }
-      }
-
-      g_pProgressDialog->setSubCurrent(0.75);
-
-      int currentLine1 = 0;
-      int currentLine2 = 0;
-      if ( bSuccess )
-      {
-         // Parse the output and create the difflist
-         QFile f( fileNameOut );
-         bSuccess = f.open(IO_ReadOnly);
-         if (bSuccess)
-         {
-            const QByteArray buf = f.readAll();
-            unsigned int bufSize=buf.size();
-            unsigned int pos=0;
-            for(pos=0;pos<bufSize;++pos)
-            {
-               unsigned int lineStart = pos;
-               // Find end of line
-               while( buf.at(pos)!='\n' && pos<bufSize )
-                  ++pos;
-
-               // parse it
-               char c = buf.at(lineStart);
-               if ( c == '>' || c == '-' || c=='<' )
-                  continue;  // Not interested in the data
-               else
-               {
-                  QCString line( &buf.at(lineStart), pos-lineStart+1 );
-                  int pa = line.find('a'); // add
-                  int pc = line.find('c'); // change
-                  int pd = line.find('d'); // delete
-                  int p = pa>0 ? pa : (pc > 0 ? pc : pd);
-                  if (p<0) break; // Unexpected error
-                  QCString left = line.left(p);
-                  QCString right = line.mid(p+1);
-                  int pcommaleft = left.find(',');
-                  int pcommaright = right.find(',');
-                  int l1top=-1, l1bottom=-1, l2top=-1, l2bottom=-1;
-                  if (pcommaleft>0)
-                  {
-                     l1top    = left.left(pcommaleft).toInt();
-                     l1bottom = left.mid(pcommaleft+1).toInt();
-                  }
-                  else
-                  {
-                     l1top    = left.toInt();
-                     l1bottom = l1top;
-                  }
-                  if (pcommaright>0)
-                  {
-                     l2top    = right.left(pcommaright).toInt();
-                     l2bottom = right.mid(pcommaright+1).toInt();
-                  }
-                  else
-                  {
-                     l2top    = right.toInt();
-                     l2bottom = l2top;
-                  }
-
-                  Diff d(0,0,0);
-
-                  if ( pa>0 )
-                  {
-                     d.nofEquals = l1top - currentLine1;
-                     d.diff1 = 0;
-                     d.diff2 = l2bottom - l2top + 1;
-                     assert( d.nofEquals == l2top - 1 - currentLine2 );
-                  }
-                  else if ( pd>0 )
-                  {
-                     d.nofEquals = l2top - currentLine2;
-                     d.diff1 = l1bottom - l1top + 1;
-                     d.diff2 = 0;
-                     assert( d.nofEquals == l1top - 1 - currentLine1 );
-                  }
-                  else if ( pc>0 )
-                  {
-                     d.nofEquals = l1top - 1 - currentLine1;
-                     d.diff1 = l1bottom - l1top + 1;
-                     d.diff2 = l2bottom - l2top + 1;
-                     assert( d.nofEquals == l2top - 1 - currentLine2 );
-                  }
-                  else
-                     assert(false);
-
-                  currentLine1 += d.nofEquals + d.diff1;
-                  currentLine2 += d.nofEquals + d.diff2;
-                  diffList.push_back(d);
-               }
-            }
-            if (size1-currentLine1==size2-currentLine2 )
-            {
-               Diff d( size1-currentLine1,0,0);
-               diffList.push_back(d);
-               currentLine1=size1;
-               currentLine2=size2;
-            }
-
-            if ( currentLine1 == size1 && currentLine2 == size2 )
-               bSuccess = true;
-         }
-         else
-         {
-            bSuccess = size1==size2;
-         }
-      }
-      if ( currentLine1==0 && currentLine2==0 )
-      {
-         Diff d( 0, size1, size2 );
-         diffList.push_back(d);
-      }
-
-      g_pProgressDialog->setSubCurrent(1.0);
-
-      if ( !bSuccess )
-      {
-         KMessageBox::sorry(this,
-            i18n("Running the external diff failed.\n"
-                 "Check if the diff works, if the program can write in the temp folder or if the disk is full.\n"
-                 "The external diff option will be disabled now and the internal diff will be used."),
-            i18n("Warning"));
-         m_pOptionDialog->m_bUseExternalDiff = false;
-      }
-
-      FileAccess::removeFile( fileName1 );
-      FileAccess::removeFile( fileName2 );
-      FileAccess::removeFile( fileNameOut );
-   }
-
-   if ( ! m_pOptionDialog->m_bUseExternalDiff )
-   {
-      g_pProgressDialog->setSubCurrent(0.0);
-      if ( size1>0 && p1!=0 && p1->occurances==0 )
-      {
-         prepareOccurances( p1, size1 );
-      }
-      g_pProgressDialog->setSubCurrent(0.25);
-
-      if ( size2>0 && p2!=0 && p2->occurances==0 )
-      {
-         prepareOccurances( p2, size2 );
-      }
-      g_pProgressDialog->setSubCurrent(0.5);
-
-      calcDiff( p1, size1, p2, size2, diffList, 2, m_pOptionDialog->m_maxSearchLength );
-
-      g_pProgressDialog->setSubCurrent(1.0);
-   }
-   return true;
-#endif
 }
 
 
@@ -418,18 +218,44 @@ void KDiff3App::init( bool bAuto )
    if ( bVisibleMergeResultWindow )
    {
       bPreserveCarriageReturn = false;
+      
+      QString msg;
+      
+      if ( !m_pOptionDialog->m_PreProcessorCmd.isEmpty() )
+      {
+         msg += "- " + i18n("PreprocessorCmd: ") + m_pOptionDialog->m_PreProcessorCmd + "\n";
+      }
+      if ( m_pOptionDialog->m_bUpCase )
+      {
+         msg += "- " + i18n("Convert to upper case\n");
+      }
+      if ( !msg.isEmpty() )
+      {
+         int result = KMessageBox::warningYesNo( this,
+                               i18n("The following option(s) you selected might change data:\n") + msg + 
+                               i18n("\nMost likely this is not wanted during a merge.\n"
+                                    "Do you want to disable these settings or continue with these settings active?"),
+                               i18n("Option unsafe for merging"), 
+                               i18n("Use these options during the merge"), i18n("Disable unsafe options")
+                               );
+                               
+         if (result == KMessageBox::No )
+         {
+            m_pOptionDialog->m_PreProcessorCmd = "";
+            m_pOptionDialog->m_bUpCase = false;
+         }
+      }
    }
 
    m_diff3LineList.clear();
 
-   bool bUseLineMatchingPP = !m_pOptionDialog->m_LineMatchingPreProcessorCmd.isEmpty() ||
-                             m_pOptionDialog->m_bIgnoreComments;
-   bool bUpCase = m_pOptionDialog->m_bUpCase;
-
+   // Because of the progressdialog paintevents can occur, but data is invalid,
+   // so painting must be suppressed.
    if (m_pDiffTextWindow1) m_pDiffTextWindow1->setPaintingAllowed( false );
    if (m_pDiffTextWindow2) m_pDiffTextWindow2->setPaintingAllowed( false );
    if (m_pDiffTextWindow3) m_pDiffTextWindow3->setPaintingAllowed( false );
    if (m_pOverview)        m_pOverview->setPaintingAllowed( false );
+   if (m_pMergeResultWindow) m_pMergeResultWindow->setPaintingAllowed( false );
 
 
    if( m_sd3.isEmpty() )
@@ -441,95 +267,74 @@ void KDiff3App::init( bool bAuto )
 
    // First get all input data.
    g_pProgressDialog->setInformation(i18n("Loading A"));
-   m_sd1.readPPFile( bPreserveCarriageReturn, m_pOptionDialog->m_PreProcessorCmd, bUpCase );
-   m_sdlm1.readLMPPFile( &m_sd1, m_pOptionDialog->m_LineMatchingPreProcessorCmd, bUpCase, m_pOptionDialog->m_bIgnoreComments );
+   m_sd1.readAndPreprocess();
    g_pProgressDialog->step();
 
    g_pProgressDialog->setInformation(i18n("Loading B"));
-   m_sd2.readPPFile( bPreserveCarriageReturn, m_pOptionDialog->m_PreProcessorCmd, bUpCase );
-   m_sdlm2.readLMPPFile( &m_sd2, m_pOptionDialog->m_LineMatchingPreProcessorCmd, bUpCase, m_pOptionDialog->m_bIgnoreComments );
+   m_sd2.readAndPreprocess();
    g_pProgressDialog->step();
 
-   m_sd3.m_bIsText = true;
    m_totalDiffStatus.reset();
    // Run the diff.
    if ( m_sd3.isEmpty() )
    {
-      m_totalDiffStatus.bBinaryAEqB = (m_sd1.m_size!=0 && m_sd1.m_size==m_sd2.m_size  &&  memcmp(m_sd1.m_pBuf,m_sd2.m_pBuf,m_sd1.m_size)==0);
+      m_totalDiffStatus.bBinaryAEqB = m_sd1.getSizeBytes()!=0 && m_sd1.isBinaryEqualWith( m_sd2 );
       g_pProgressDialog->setInformation(i18n("Diff: A <-> B"));
-      if ( !bUseLineMatchingPP )
-         runDiff( &m_sd1.m_v[0], m_sd1.m_vSize, &m_sd2.m_v[0], m_sd2.m_vSize, m_diffList12 );
-      else
-         runDiff( &m_sdlm1.m_v[0], m_sdlm1.m_vSize, &m_sdlm2.m_v[0], m_sdlm2.m_vSize, m_diffList12 );
+      
+      runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12 );
 
       g_pProgressDialog->step();
 
       g_pProgressDialog->setInformation(i18n("Linediff: A <-> B"));
       calcDiff3LineListUsingAB( &m_diffList12, m_diff3LineList );
-      fineDiff( m_diff3LineList, 1, &m_sd1.m_v[0], &m_sd2.m_v[0], m_totalDiffStatus.bTextAEqB );
-      if ( m_sd1.m_size==0 ) m_totalDiffStatus.bTextAEqB=false;
+      fineDiff( m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay(), m_totalDiffStatus.bTextAEqB );
+      if ( m_sd1.getSizeBytes()==0 ) m_totalDiffStatus.bTextAEqB=false;
 
       g_pProgressDialog->step();
    }
    else
    {
       g_pProgressDialog->setInformation(i18n("Loading C"));
-      m_sd3.readPPFile( bPreserveCarriageReturn, m_pOptionDialog->m_PreProcessorCmd, bUpCase );
-      m_sdlm3.readLMPPFile( &m_sd3, m_pOptionDialog->m_LineMatchingPreProcessorCmd, bUpCase, m_pOptionDialog->m_bIgnoreComments );
+      m_sd3.readAndPreprocess();
       g_pProgressDialog->step();
 
-      m_totalDiffStatus.bBinaryAEqB = (m_sd1.m_size!=0 && m_sd1.m_size==m_sd2.m_size  &&  memcmp(m_sd1.m_pBuf,m_sd2.m_pBuf,m_sd1.m_size)==0);
-      m_totalDiffStatus.bBinaryAEqC = (m_sd1.m_size!=0 && m_sd1.m_size==m_sd3.m_size  &&  memcmp(m_sd1.m_pBuf,m_sd3.m_pBuf,m_sd1.m_size)==0);
-      m_totalDiffStatus.bBinaryBEqC = (m_sd3.m_size!=0 && m_sd3.m_size==m_sd2.m_size  &&  memcmp(m_sd3.m_pBuf,m_sd2.m_pBuf,m_sd3.m_size)==0);
+      m_totalDiffStatus.bBinaryAEqB = m_sd1.getSizeBytes()!=0 && m_sd1.isBinaryEqualWith(m_sd2);
+      m_totalDiffStatus.bBinaryAEqC = m_sd1.getSizeBytes()!=0 && m_sd1.isBinaryEqualWith(m_sd3);
+      m_totalDiffStatus.bBinaryBEqC = m_sd3.getSizeBytes()!=0 && m_sd3.isBinaryEqualWith(m_sd2);
 
-      if ( !bUseLineMatchingPP )
-      {
-         g_pProgressDialog->setInformation(i18n("Diff: A <-> B"));
-         runDiff( &m_sd1.m_v[0], m_sd1.m_vSize, &m_sd2.m_v[0], m_sd2.m_vSize, m_diffList12 );
-         g_pProgressDialog->step();
-         g_pProgressDialog->setInformation(i18n("Diff: B <-> C"));
-         runDiff( &m_sd2.m_v[0], m_sd2.m_vSize, &m_sd3.m_v[0], m_sd3.m_vSize, m_diffList23 );
-         g_pProgressDialog->step();
-         g_pProgressDialog->setInformation(i18n("Diff: A <-> C"));
-         runDiff( &m_sd1.m_v[0], m_sd1.m_vSize, &m_sd3.m_v[0], m_sd3.m_vSize, m_diffList13 );
-         g_pProgressDialog->step();
-      }
-      else
-      {
-         g_pProgressDialog->setInformation(i18n("Diff: A <-> B"));
-         runDiff( &m_sdlm1.m_v[0], m_sd1.m_vSize, &m_sdlm2.m_v[0], m_sd2.m_vSize, m_diffList12 );
-         g_pProgressDialog->step();
-         g_pProgressDialog->setInformation(i18n("Diff: B <-> C"));
-         runDiff( &m_sdlm2.m_v[0], m_sd2.m_vSize, &m_sdlm3.m_v[0], m_sd3.m_vSize, m_diffList23 );
-         g_pProgressDialog->step();
-         g_pProgressDialog->setInformation(i18n("Diff: A <-> C"));
-         runDiff( &m_sdlm1.m_v[0], m_sd1.m_vSize, &m_sdlm3.m_v[0], m_sd3.m_vSize, m_diffList13 );
-         g_pProgressDialog->step();
-      }
+      g_pProgressDialog->setInformation(i18n("Diff: A <-> B"));
+      runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12 );
+      g_pProgressDialog->step();
+      g_pProgressDialog->setInformation(i18n("Diff: B <-> C"));
+      runDiff( m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23 );
+      g_pProgressDialog->step();
+      g_pProgressDialog->setInformation(i18n("Diff: A <-> C"));
+      runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13 );
+      g_pProgressDialog->step();
 
       calcDiff3LineListUsingAB( &m_diffList12, m_diff3LineList );
       calcDiff3LineListUsingAC( &m_diffList13, m_diff3LineList );
-      calcDiff3LineListTrim( m_diff3LineList, &m_sd1.m_v[0], &m_sd2.m_v[0], &m_sd3.m_v[0] );
+      calcDiff3LineListTrim( m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff() );
 
       calcDiff3LineListUsingBC( &m_diffList23, m_diff3LineList );
-      calcDiff3LineListTrim( m_diff3LineList, &m_sd1.m_v[0], &m_sd2.m_v[0], &m_sd3.m_v[0] );
-      debugLineCheck( m_diff3LineList, m_sd1.m_vSize, 1 );
-      debugLineCheck( m_diff3LineList, m_sd2.m_vSize, 2 );
-      debugLineCheck( m_diff3LineList, m_sd3.m_vSize, 3 );
+      calcDiff3LineListTrim( m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff() );
+      debugLineCheck( m_diff3LineList, m_sd1.getSizeLines(), 1 );
+      debugLineCheck( m_diff3LineList, m_sd2.getSizeLines(), 2 );
+      debugLineCheck( m_diff3LineList, m_sd3.getSizeLines(), 3 );
 
       g_pProgressDialog->setInformation(i18n("Linediff: A <-> B"));
-      fineDiff( m_diff3LineList, 1, &m_sd1.m_v[0], &m_sd2.m_v[0], m_totalDiffStatus.bTextAEqB );
+      fineDiff( m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay(), m_totalDiffStatus.bTextAEqB );
       g_pProgressDialog->step();
       g_pProgressDialog->setInformation(i18n("Linediff: B <-> C"));
-      fineDiff( m_diff3LineList, 2, &m_sd2.m_v[0], &m_sd3.m_v[0], m_totalDiffStatus.bTextBEqC );
+      fineDiff( m_diff3LineList, 2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay(), m_totalDiffStatus.bTextBEqC );
       g_pProgressDialog->step();
       g_pProgressDialog->setInformation(i18n("Linediff: A <-> C"));
-      fineDiff( m_diff3LineList, 3, &m_sd3.m_v[0], &m_sd1.m_v[0], m_totalDiffStatus.bTextAEqC );
+      fineDiff( m_diff3LineList, 3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay(), m_totalDiffStatus.bTextAEqC );
       g_pProgressDialog->step();
-      if ( m_sd1.m_size==0 ) { m_totalDiffStatus.bTextAEqB=false;  m_totalDiffStatus.bTextAEqC=false; }
-      if ( m_sd2.m_size==0 ) { m_totalDiffStatus.bTextAEqB=false;  m_totalDiffStatus.bTextBEqC=false; }
+      if ( m_sd1.getSizeBytes()==0 ) { m_totalDiffStatus.bTextAEqB=false;  m_totalDiffStatus.bTextAEqC=false; }
+      if ( m_sd2.getSizeBytes()==0 ) { m_totalDiffStatus.bTextAEqB=false;  m_totalDiffStatus.bTextBEqC=false; }
    }
-   calcWhiteDiff3Lines( m_diff3LineList, &m_sd1.m_v[0], &m_sd2.m_v[0], &m_sd3.m_v[0] );
+   calcWhiteDiff3Lines( m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff() );
    calcDiff3LineVector( m_diff3LineList, m_diff3LineVector );
 
    // Calc needed lines for display
@@ -542,11 +347,11 @@ void KDiff3App::init( bool bAuto )
    m_bTripleDiff = ! m_sd3.isEmpty();
 
    m_pDiffTextWindow1->init( m_sd1.getAliasName(),
-      &m_sd1.m_v[0], m_sd1.m_vSize, &m_diff3LineVector, 1, m_bTripleDiff );
+      m_sd1.getLineDataForDisplay(), m_sd1.getSizeLines(), &m_diff3LineVector, 1, m_bTripleDiff );
    m_pDiffTextWindow2->init( m_sd2.getAliasName(),
-      &m_sd2.m_v[0], m_sd2.m_vSize, &m_diff3LineVector, 2, m_bTripleDiff );
+      m_sd2.getLineDataForDisplay(), m_sd2.getSizeLines(), &m_diff3LineVector, 2, m_bTripleDiff );
    m_pDiffTextWindow3->init( m_sd3.getAliasName(),
-      &m_sd3.m_v[0], m_sd3.m_vSize, &m_diff3LineVector, 3, m_bTripleDiff );
+      m_sd3.getLineDataForDisplay(), m_sd3.getSizeLines(), &m_diff3LineVector, 3, m_bTripleDiff );
 
    if (m_bTripleDiff) m_pDiffTextWindow3->show();
    else               m_pDiffTextWindow3->hide();
@@ -554,9 +359,9 @@ void KDiff3App::init( bool bAuto )
    m_bOutputModified = bVisibleMergeResultWindow;
 
    m_pMergeResultWindow->init(
-      &m_sd1.m_v[0],
-      &m_sd2.m_v[0],
-      m_bTripleDiff ? &m_sd3.m_v[0] : 0,
+      m_sd1.getLineDataForDisplay(),
+      m_sd2.getLineDataForDisplay(),
+      m_bTripleDiff ? m_sd3.getLineDataForDisplay() : 0,
       &m_diff3LineList,
       &m_totalDiffStatus,
       m_outputFilename.isEmpty() ? QString("unnamed.txt") : m_outputFilename
@@ -571,6 +376,8 @@ void KDiff3App::init( bool bAuto )
    m_pDiffTextWindow2->setPaintingAllowed( true );
    m_pDiffTextWindow3->setPaintingAllowed( true );
    m_pOverview->setPaintingAllowed( true );
+   m_pMergeResultWindow->setPaintingAllowed( true );
+
 
    if ( !bVisibleMergeResultWindow )
       m_pMergeWindowFrame->hide();
@@ -604,7 +411,7 @@ void KDiff3App::init( bool bAuto )
          KMessageBox::information( this, totalInfo );
    }
 
-   if ( bVisibleMergeResultWindow && (!m_sd1.m_bIsText || !m_sd2.m_bIsText || !m_sd3.m_bIsText) )
+   if ( bVisibleMergeResultWindow && (!m_sd1.isText() || !m_sd2.isText() || !m_sd3.isText()) )
    {
       KMessageBox::information( this, i18n(
          "Some inputfiles don't seem to be pure textfiles.\n"
@@ -949,7 +756,8 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
 
        return true;                        // eat event
    }
-   else if (e->type() == QEvent::Wheel ) {  // wheel event
+   else if (e->type() == QEvent::Wheel )   // wheel event
+   {
        QWheelEvent *w = (QWheelEvent*)e;
        w->accept();
 
@@ -1001,10 +809,9 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
          if ( bDecodeSuccess && canContinue() )
          {
             raise();
-            bool bUpCase = m_pOptionDialog->m_bUpCase;
-            if      ( o == m_pDiffTextWindow1 ) m_sd1.setData(text, bUpCase);
-            else if ( o == m_pDiffTextWindow2 ) m_sd2.setData(text, bUpCase);
-            else if ( o == m_pDiffTextWindow3 ) m_sd3.setData(text, bUpCase);
+            if      ( o == m_pDiffTextWindow1 ) m_sd1.setData(text);
+            else if ( o == m_pDiffTextWindow2 ) m_sd2.setData(text);
+            else if ( o == m_pDiffTextWindow3 ) m_sd3.setData(text);
             init();
          }
       }
@@ -1037,6 +844,7 @@ OpenDialog::OpenDialog(
    connect( button, SIGNAL(clicked()), this, SLOT( selectFileA() ) );
    QPushButton * button2 = new QPushButton( i18n("Dir..."), this );
    connect( button2, SIGNAL(clicked()), this, SLOT( selectDirA() ) );
+   connect( m_lineA, SIGNAL(textChanged(const QString&)), this, SLOT(inputFilenameChanged() ) );
 
    h->addWidget( label,    0, 0 );
    h->addWidget( m_lineA,  0, 1 );
@@ -1052,6 +860,7 @@ OpenDialog::OpenDialog(
    connect( button, SIGNAL(clicked()), this, SLOT( selectFileB() ) );
    button2   = new QPushButton( i18n("Dir..."), this );
    connect( button2, SIGNAL(clicked()), this, SLOT( selectDirB() ) );
+   connect( m_lineB, SIGNAL(textChanged(const QString&)), this, SLOT(inputFilenameChanged() ) );
 
    h->addWidget( label,     1, 0 );
    h->addWidget( m_lineB,   1, 1 );
@@ -1067,6 +876,7 @@ OpenDialog::OpenDialog(
    connect( button, SIGNAL(clicked()), this, SLOT( selectFileC() ) );
    button2   = new QPushButton( i18n("Dir..."), this );
    connect( button2, SIGNAL(clicked()), this, SLOT( selectDirC() ) );
+   connect( m_lineC, SIGNAL(textChanged(const QString&)), this, SLOT(inputFilenameChanged() ) );
 
    h->addWidget( label,     2, 0 );
    h->addWidget( m_lineC,   2, 1 );
@@ -1122,7 +932,43 @@ OpenDialog::OpenDialog(
 
    QSize sh = sizeHint();
    setFixedHeight( sh.height() );
+   m_bInputFileNameChanged = false;
+
+#ifdef KREPLACEMENTS_H
+   m_lineA->lineEdit()->installEventFilter( this );
+   m_lineB->lineEdit()->installEventFilter( this );
+   m_lineC->lineEdit()->installEventFilter( this );
+   m_lineOut->lineEdit()->installEventFilter( this );
+#endif
 }
+
+// Eventfilter: Only needed under Windows.
+// Without this, files dropped in the line edit have URL-encoding.
+// This eventfilter decodes the filenames as needed by KDiff3.
+bool OpenDialog::eventFilter(QObject* o, QEvent* e)
+{
+   if (e->type()==QEvent::Drop)
+   {
+      QDropEvent* d = static_cast<QDropEvent*>(e);
+
+      if ( !QUriDrag::canDecode( d ) ) {
+         return false;
+      }
+
+      QStringList lst;
+      QUriDrag::decodeLocalFiles( d, lst );
+
+      if ( lst.count() > 0 )
+      {
+         static_cast<QLineEdit*>(o)->setText( lst[0] );
+         static_cast<QLineEdit*>(o)->setFocus();
+      }
+       
+      return true;
+   }
+   return false;
+}
+
 
 void OpenDialog::selectURL( QComboBox* pLine, bool bDir, int i, bool bSave )
 {
@@ -1152,6 +998,18 @@ void OpenDialog::selectOutputDir() {  selectURL( m_lineOut,  true,  4, true );  
 void OpenDialog::internalSlot(int i)
 {
    emit internalSignal(i!=0);
+}
+
+// Clear the output-filename when any input-filename changed, 
+// because users forgot to change the output and accidently overwrote it with
+// wrong data during a merge.
+void OpenDialog::inputFilenameChanged()
+{   
+   if(!m_bInputFileNameChanged)
+   {
+      m_bInputFileNameChanged=true;
+      m_lineOut->clearEdit();
+   }
 }
 
 void OpenDialog::accept()
@@ -1209,9 +1067,9 @@ void KDiff3App::slotFileOpen()
    for(;;)
    {
       OpenDialog d(this,
-         m_sd1.m_bPreserve ? QString("") : m_sd1.getAliasName(),
-         m_sd2.m_bPreserve ? QString("") : m_sd2.getAliasName(),
-         m_sd3.m_bPreserve ? QString("") : m_sd3.getAliasName(),
+         m_sd1.isFromBuffer() ? QString("") : m_sd1.getAliasName(),
+         m_sd2.isFromBuffer() ? QString("") : m_sd2.getAliasName(),
+         m_sd3.isFromBuffer() ? QString("") : m_sd3.getAliasName(),
          !m_outputFilename.isEmpty(),
          m_bDefaultFilename ? QString("") : m_outputFilename,
          SLOT(slotConfigure()), m_pOptionDialog );
@@ -1253,17 +1111,17 @@ void KDiff3App::slotFileOpen()
             m_pDirectoryMergeSplitter->hide();
             init();
 
-            if ( ! m_sd1.isEmpty() && m_sd1.m_pBuf==0  ||
-                 ! m_sd2.isEmpty() && m_sd2.m_pBuf==0  ||
-                 ! m_sd3.isEmpty() && m_sd3.m_pBuf==0 )
+            if ( ! m_sd1.isEmpty() && !m_sd1.hasData()  ||
+                 ! m_sd2.isEmpty() && !m_sd2.hasData()  ||
+                 ! m_sd3.isEmpty() && !m_sd3.hasData() )
             {
                QString text( i18n("Opening of these files failed:") );
                text += "\n\n";
-               if ( ! m_sd1.isEmpty() && m_sd1.m_pBuf==0 )
+               if ( ! m_sd1.isEmpty() && !m_sd1.hasData() )
                   text += " - " + m_sd1.getAliasName() + "\n";
-               if ( ! m_sd2.isEmpty() && m_sd2.m_pBuf==0 )
+               if ( ! m_sd2.isEmpty() && !m_sd2.hasData() )
                   text += " - " + m_sd2.getAliasName() + "\n";
-               if ( ! m_sd3.isEmpty() && m_sd3.m_pBuf==0 )
+               if ( ! m_sd3.isEmpty() && !m_sd3.hasData() )
                   text += " - " + m_sd3.getAliasName() + "\n";
 
                KMessageBox::sorry( this, text, i18n("File open error") );
@@ -1314,17 +1172,17 @@ void KDiff3App::slotFileOpen2(QString fn1, QString fn2, QString fn3, QString ofn
    {
       init();
 
-      if ( ! m_sd1.isEmpty() && m_sd1.m_pBuf==0  ||
-           ! m_sd2.isEmpty() && m_sd2.m_pBuf==0  ||
-           ! m_sd3.isEmpty() && m_sd3.m_pBuf==0 )
+      if ( ! m_sd1.isEmpty() && ! m_sd1.hasData()  ||
+           ! m_sd2.isEmpty() && ! m_sd2.hasData()  ||
+           ! m_sd3.isEmpty() && ! m_sd3.hasData() )
       {
          QString text( i18n("Opening of these files failed:") );
          text += "\n\n";
-         if ( ! m_sd1.isEmpty() && m_sd1.m_pBuf==0 )
+         if ( ! m_sd1.isEmpty() && !m_sd1.hasData() )
             text += " - " + m_sd1.getAliasName() + "\n";
-         if ( ! m_sd2.isEmpty() && m_sd2.m_pBuf==0 )
+         if ( ! m_sd2.isEmpty() && !m_sd2.hasData() )
             text += " - " + m_sd2.getAliasName() + "\n";
-         if ( ! m_sd3.isEmpty() && m_sd3.m_pBuf==0 )
+         if ( ! m_sd3.isEmpty() && !m_sd3.hasData() )
             text += " - " + m_sd3.getAliasName() + "\n";
 
          KMessageBox::sorry( this, text, i18n("File open error") );
@@ -1355,7 +1213,7 @@ void KDiff3App::slotEditCut()
 
    if ( !s.isNull() )
    {
-      QApplication::clipboard()->setText( s );
+      QApplication::clipboard()->setText( s, QClipboard::Clipboard );
    }
 
    slotStatusMsg(i18n("Ready."));
@@ -1371,7 +1229,7 @@ void KDiff3App::slotEditCopy()
    if ( s.isNull() && m_pMergeResultWindow!=0 ) s = m_pMergeResultWindow->getSelection();
    if ( !s.isNull() )
    {
-      QApplication::clipboard()->setText( s );
+      QApplication::clipboard()->setText( s, QClipboard::Clipboard );
    }
 
    slotStatusMsg(i18n("Ready."));
@@ -1387,20 +1245,19 @@ void KDiff3App::slotEditPaste()
    }
    else if ( canContinue() )
    {
-      bool bUpCase = m_pOptionDialog->m_bUpCase;
       if ( m_pDiffTextWindow1->hasFocus() )
       {
-         m_sd1.setData( QApplication::clipboard()->text(), bUpCase );
+         m_sd1.setData( QApplication::clipboard()->text() );
          init();
       }
       else if ( m_pDiffTextWindow2->hasFocus() )
       {
-         m_sd2.setData( QApplication::clipboard()->text(), bUpCase );
+         m_sd2.setData( QApplication::clipboard()->text() );
          init();
       }
       else if ( m_pDiffTextWindow3->hasFocus() )
       {
-         m_sd3.setData( QApplication::clipboard()->text(), bUpCase );
+         m_sd3.setData( QApplication::clipboard()->text() );
          init();
       }
    }
@@ -1584,6 +1441,23 @@ void KDiff3App::slotSelectionEnd()
    if ( m_pOptionDialog->m_bAutoCopySelection )
    {
       slotEditCopy();
+   }
+   else
+   {
+       QClipboard *clipBoard = QApplication::clipboard();
+
+       if (clipBoard->supportsSelection ())
+       {           
+           QString s;
+           if (               m_pDiffTextWindow1!=0 )   s = m_pDiffTextWindow1->getSelection();
+           if ( s.isNull() && m_pDiffTextWindow2!=0 )   s = m_pDiffTextWindow2->getSelection();
+           if ( s.isNull() && m_pDiffTextWindow3!=0 )   s = m_pDiffTextWindow3->getSelection();
+           if ( s.isNull() && m_pMergeResultWindow!=0 ) s = m_pMergeResultWindow->getSelection();
+           if ( !s.isNull() )
+           {
+               clipBoard->setText( s, QClipboard::Selection );
+           }
+       }
    }
 }
 
@@ -1922,15 +1796,15 @@ void KDiff3App::slotMergeCurrentFile()
       if ( !canContinue() ) return;
       if ( m_outputFilename.isEmpty() )
       {
-         if ( !m_sd3.isEmpty() && !m_sd3.m_bPreserve )
+         if ( !m_sd3.isEmpty() && !m_sd3.isFromBuffer() )
          {
             m_outputFilename =  m_sd3.getFilename();
          }
-         else if ( !m_sd2.isEmpty() && !m_sd2.m_bPreserve )
+         else if ( !m_sd2.isEmpty() && !m_sd2.isFromBuffer() )
          {
             m_outputFilename =  m_sd2.getFilename();
          }
-         else if ( !m_sd1.isEmpty() && !m_sd1.m_bPreserve )
+         else if ( !m_sd1.isEmpty() && !m_sd1.isFromBuffer() )
          {
             m_outputFilename =  m_sd1.getFilename();
          }
@@ -2016,7 +1890,7 @@ void KDiff3App::slotWinToggleSplitterOrientation()
 
 void KDiff3App::slotUpdateAvailabilities()
 {
-   bool bTextDataAvailable = (m_sd1.m_pBuf != 0 || m_sd2.m_pBuf != 0 || m_sd3.m_pBuf != 0 );
+   bool bTextDataAvailable = ( m_sd1.hasData() || m_sd2.hasData() || m_sd3.hasData() );
    if( dirShowBoth->isChecked() )
    {
       if ( m_bDirCompare )

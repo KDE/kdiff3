@@ -2,7 +2,7 @@
                           mergeresultwindow.cpp  -  description
                              -------------------
     begin                : Sun Apr 14 2002
-    copyright            : (C) 2002 by Joachim Eibl
+    copyright            : (C) 2002-2004 by Joachim Eibl
     email                : joachim.eibl@gmx.de
  ***************************************************************************/
 
@@ -27,6 +27,7 @@
 #include <optiondialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
+#include <iostream>
 
 int g_bAutoSolve = true;
 
@@ -45,6 +46,7 @@ MergeResultWindow::MergeResultWindow(
    m_firstColumn = 0;
    m_nofColumns = 0;
    m_nofLines = 0;
+   m_totalSize = 0;
    m_bMyUpdate = false;
    m_bInsertMode = true;
    m_scrollDeltaX = 0;
@@ -58,8 +60,9 @@ MergeResultWindow::MergeResultWindow(
 
    m_pDiff3LineList = 0;
    m_pTotalDiffStatus = 0;
-   
+
    m_pOptionDialog = pOptionDialog;
+   m_bPaintingAllowed = false;
 
    m_cursorXPos=0;
    m_cursorOldXPos=0;
@@ -255,6 +258,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
       }
 
       m_mergeLineList.clear();
+      m_totalSize = 0;
       int lineIdx = 0;
       Diff3LineList::const_iterator it;
       for( it=m_pDiff3LineList->begin(); it!=m_pDiff3LineList->end(); ++it, ++lineIdx )
@@ -302,6 +306,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
                   back->bConflict = false;
                }
             }
+            ml.mergeEditLineList.setTotalSizePtr(&m_totalSize);
             m_mergeLineList.push_back( ml );
          }
 
@@ -393,7 +398,6 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
                        melsrc==3 ? mel.id3l()->lineC : -1;
 
          if ( srcLine == -1 && oldSrcLine==-1 && oldSrc == melsrc )
-
             melIt = ml.mergeEditLineList.erase( melIt );
          else
             ++melIt;
@@ -434,7 +438,7 @@ int MergeResultWindow::getNofColumns()
 
 int MergeResultWindow::getNofLines()
 {
-   return m_nofLines;
+   return m_totalSize;
 }
 
 int MergeResultWindow::getNofVisibleColumns()
@@ -791,6 +795,12 @@ void MergeResultWindow::choose( int selector )
 
       ml.mergeEditLineList.push_back(mel);
    }
+   
+   if ( m_cursorYPos >= m_totalSize )
+   {
+      m_cursorYPos = m_totalSize-1;
+      m_cursorXPos = 0;
+   }
 
    update();
    emit updateAvailabilities();
@@ -1056,9 +1066,14 @@ void MergeResultWindow::writeLine(
    }
 }
 
+void MergeResultWindow::setPaintingAllowed(bool bPaintingAllowed)
+{
+   m_bPaintingAllowed = bPaintingAllowed;
+}
+
 void MergeResultWindow::paintEvent( QPaintEvent* e )
 {
-   if (m_pDiff3LineList==0) return;
+   if (m_pDiff3LineList==0 || !m_bPaintingAllowed) return;
 
    bool bOldSelectionContainsData = m_selection.bSelectionContainsData;
    const QFontMetrics& fm = fontMetrics();
@@ -1079,9 +1094,7 @@ void MergeResultWindow::paintEvent( QPaintEvent* e )
       //int visibleLines = height() / fontHeight;
 
       {  // Draw the topline
-         QString s;
-         s.sprintf(" Output : %s ", m_fileName.ascii() );
-         // s.sprintf(" Output : %s : Line %d",(const char*) m_fileName, m_firstLine+1 );
+         QString s = " " +i18n("Output") + " : " + m_fileName + " ";
          if (m_bModified)
             s += i18n("[Modified]");
 
@@ -1145,6 +1158,7 @@ void MergeResultWindow::paintEvent( QPaintEvent* e )
       if ( line != m_nofLines || nofColumns != m_nofColumns )
       {
          m_nofLines = line;
+         assert( m_nofLines == m_totalSize );
 
          m_nofColumns = nofColumns;
          emit resizeSignal();
@@ -1223,7 +1237,7 @@ void MergeResultWindow::convertToLinePos( int x, int y, int& line, int& pos )
 
    int yOffset = topLineYOffset - m_firstLine * fontHeight;
 
-   line = min2( ( y - yOffset ) / fontHeight, m_nofLines-1 );
+   line = min2( ( y - yOffset ) / fontHeight, m_totalSize-1 );
    pos  = ( x - xOffset ) / fontWidth;
 }
 
@@ -1438,7 +1452,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
          if( !melIt->isEditableText() )  break;
          if (x>=stringLength)
          {
-            if ( y<m_nofLines-1 )
+            if ( y<m_totalSize-1 )
             {
                setModified();
                QCString s1( ps, stringLength+1 );
@@ -1581,7 +1595,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
       case  Key_Right:
          if ( !bCtrl )
          {
-            ++x;  if(x>stringLength && y<m_nofLines-1){ ++y; x=0; }
+            ++x;  if(x>stringLength && y<m_totalSize-1){ ++y; x=0; }
          }
 
          else
@@ -1620,9 +1634,9 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
                   t.fill( ' ', spaces );
                }
                if ( m_bInsertMode )
-                  s.insert( x, t.ascii() );
+                  s.insert( x, encodeString(t, m_pOptionDialog) );
                else
-                  s.replace( x, t.length(), t.ascii() );
+                  s.replace( x, t.length(), encodeString(t, m_pOptionDialog) );
 
                melIt->setString( s );
                x += t.length();
@@ -1632,7 +1646,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
       }
    }
 
-   y = minMaxLimiter( y, 0, m_nofLines-1 );
+   y = minMaxLimiter( y, 0, m_totalSize-1 );
 
    calcIteratorFromLineNr( y, mlIt, melIt );
    ps = melIt->getString( this, stringLength );
@@ -1744,7 +1758,10 @@ QString MergeResultWindow::getSelection()
 
                   if( m_selection.within( line, outPos ) )
                   {
-                    selectionString += pLine[i];
+                     char buf[2];
+                     buf[0] = pLine[i];
+                     buf[1] = '\0';
+                     selectionString += decodeString( buf, m_pOptionDialog );
                   }
 
                   outPos += spaces;
@@ -1752,7 +1769,7 @@ QString MergeResultWindow::getSelection()
             }
             else if ( mel.isConflict() )
             {
-               selectionString += "<Merge Conflict>";
+               selectionString += i18n("<Merge Conflict>");
             }
             
             if( m_selection.within( line, outPos ) )
@@ -1866,9 +1883,9 @@ void MergeResultWindow::deleteSelection()
             {
                // Remove the line
                if ( mlIt->mergeEditLineList.size()>1 )
-               {   mlIt->mergeEditLineList.erase( melIt ); --m_nofLines; }
+                  mlIt->mergeEditLineList.erase( melIt );
                else
-               {   melIt->setRemoved();  }
+                  melIt->setRemoved();
             }
          }
 
@@ -1901,15 +1918,14 @@ void MergeResultWindow::pasteClipboard()
    const char* ps = melIt->getString( this, stringLength );
    int x = convertToPosInText( ps, stringLength, m_cursorXPos );
 
-   QString clipBoard = QApplication::clipboard()->text();
+   QCString clipBoard = encodeString( QApplication::clipboard()->text(), m_pOptionDialog );
 
    QCString currentLine = QCString( ps, x+1 );
    QCString endOfLine = QCString( ps+x, stringLength-x+1 );
    int i;
    for( i=0; i<(int)clipBoard.length(); ++i )
    {
-      QChar uc = clipBoard[i];
-      char c = uc;
+      char c = clipBoard[i];
       if ( c == '\r' ) continue;
       if ( c == '\n' )
       {
@@ -2015,11 +2031,10 @@ bool MergeResultWindow::saveDocument( const QString& fileName )
 
                if (line>0) // Prepend line feed, but not for first line
                {
-                  #ifdef _WIN32
-                  s.prepend("\r\n"); size+=2;
-                  #else
-                  s.prepend("\n");   size+=1;
-                  #endif
+                  if ( m_pOptionDialog->m_lineEndStyle == eLineEndDos )
+                  {   s.prepend("\r\n"); size+=2; }
+                  else
+                  {   s.prepend("\n");   size+=1; }
                }
 
                if (i==0) neededBufferSize += size;
@@ -2092,7 +2107,6 @@ void MergeResultWindow::setSelection( int firstLine, int startPos, int lastLine,
    m_selection.end( lastLine, convertToPosOnScreen( getString(lastLine), endPos ) );
    update();
 }
-
 
 Overview::Overview( QWidget* pParent, OptionDialog* pOptions )
 : QWidget( pParent, 0, WRepaintNoErase )
