@@ -1,0 +1,90 @@
+KDiff3-Readme
+=============
+
+Author: Joachim Eibl  (joachim.eibl@gmx.de)
+Copyright: (C) 2002 by Joachim Eibl
+KDiff3-Version: 0.81
+
+
+KDiff3 is a program that
+- compares two or three input files,
+- shows the differences line by line and character by character (!),
+- provides an automatic merge-facility and
+- an integrated editor for comfortable solving of merge-conflicts
+- and has an intuitive graphical user interface.
+
+
+Licence:
+    GNU GENERAL PUBLIC LICENSE, Version 2, June 1991
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+    For details see file "COPYING".
+
+
+Requirements & Installation:
+   Version 0.81 supports KDE2 and KDE3 but due to some problem with libkio and libkfile
+   it was necessary to provide different packages for each, but only the configure
+   script differs.
+
+   For KDE2 you need
+      - kdiff3-0.81_for_KDE2.tar.gz
+      - KDE2 and QT2-libraries.
+      - gcc, g++ with version >=2.95      
+      
+   For KDE3 you need
+      - kdiff3-0.81_for_KDE3.tar.gz
+      - KDE3 and QT3-libraries.
+      - gcc, g++ with version >=2.95
+
+Installation for KDE2:
+   - Make sure your shell-variable QTDIR is correct. (echo $QTDIR).
+     If it doesn't contain the correct path, type
+        export QTDIR=your_path_to_qt  (e.g. /usr/lib/qt2)
+   - Unpack the archive: tar xvfz kdiff3-0.81_for_KDE2.tar.gz
+   - cd into the directory kdiff3-0.81 and type
+   - ./configure --prefix=/opt/kde2
+   - make
+   - make install  (You must have root-rights for this step.)
+
+Installation for KDE3:
+   - Make sure your shell-variable QTDIR is correct. (echo $QTDIR).
+     If it doesn't contain the correct path, type
+        export QTDIR=your_path_to_qt  (e.g. /usr/lib/qt3)
+   - Unpack the archive: tar xvfz kdiff3-0.81_for_KDE3.tar.gz
+   - cd into the directory kdiff3-0.81 and type
+   - ./configure --prefix=/opt/kde3
+   - make
+   - make install  (You must have root-rights for this step.)
+
+   For details also see the generic instructions in file "INSTALL".
+   
+If some icons are not visible or don't seem right, probably the prefix
+was wrong. Check where you're KDE2/3 installation is located and
+use that directory with the prefix-option of configure.
+
+   
+Start from commandline:
+- Comparing 2 files:     kdiff3 file1 file2
+- Merging 2 files:       kdiff3 file1 file2 -o outputfile
+- Comparing 3 files:     kdiff3 file1 file2 file3
+- Merging 3 files:       kdiff3 file1 file2 file3 -o outputfile
+     Note that file1 will be treated as base of file2 and file3.
+
+If you start without arguments, then a dialog will appear where you can
+select your files via a filebrowser.
+
+For more documentation, see the help-menu or the subdirectory doc.
+
+Have fun!

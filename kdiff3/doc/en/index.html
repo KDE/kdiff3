@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+        
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        
+  <meta name="GENERATOR" content="Mozilla/4.78 [de] (X11; U; Linux 2.4.10-4GB i686) [Netscape]">
+</head>
+  <body background="background.png">
+    
+<h1> KDiff3 - Text Diff And Merge Tool</h1>
+  Author: <a href="mailto:joachim.eibl@gmx.de">Joachim Eibl</a>
+ <br>
+ Copyright 2002 <br>
+ Documentation for version 0.81.<br>
+<br>
+KDiff3 is a program that<br>
+<ul>
+  <li>compares two or three text input files,</li>
+  <li>shows the differences line by line and character by character (!),</li>
+  <li>provides an automatic merge-facility and</li>
+  <li>an editor for comfortable solving of merge-conflicts</li>
+  <li>and has an intuitive graphical user interface.</li>
+</ul>
+<p><a href="http://kdiff3.sourceforge.net">KDiff3 Home</a>
+  </p>
+ 
+<p><a href="#screenshots">Screenshots</a>
+  </p>
+ 
+<p><a href="#documentation">Documentation</a>
+  </p>
+ 
+<p><a href="#features">Features</a>
+  </p>
+ 
+<p><a href="#faq">Questions and Answers</a>
+  <br>
+ &nbsp; <br>
+ &nbsp; <br>
+ &nbsp; </p>
+ 
+<h2> <a name="screenshots"></a>
+ Screenshots</h2>
+  This screenshot shows the difference between two text files: <br>
+ <img src="screenshot_diff.png" height="269" width="578">
+   
+<p>This screenshot shows three input files being merged: <br>
+ <img src="screenshot_merge.png" height="306" width="577">
+  </p>
+ 
+<h2> <a name="features"></a>
+ Features</h2>
+    
+<h3> Line-By-Line And Char-By-Char Diff-Viewer</h3>
+  By using the possiblities of a graphical color display KDiff3 shows exactly
+ what the difference is: <br>
+ <img src="letter_by_letter.png" height="63" width="490">
+  <br>
+ &nbsp;  
+<h3> See White-Space Differences At One Glance</h3>
+  Spaces and tabs that differ appear visibly. When lines differ only in the
+ amount of white space this can be seen at one&nbsp; look in the summary
+column on the left side. <br>
+ <img src="white_space.png" height="60" width="480">
+  <br>
+ &nbsp;  
+<h3> Triple-Diff</h3>
+  Analyze three files and see where they differ. <br>
+ The left/middle/right windows are named A/B/C and have the blue/green/magenta
+ color respectively. <br>
+ If one file is the same and one file is different on a line then the color 
+shows which file is different. The red color means that both other files are
+different. <br>
+ <img src="triple_diff.png" height="50" width="512">
+  <br>
+ &nbsp;  
+<h3> Comfortable Merge Of Two Or Three Input Files</h3>
+  KDiff3 can be used to merge two or three input files and automatically
+merges as much as possible. The result is presented in an editable window
+where most conflicts can be solved with a single mouseclick: Select the buttons 
+A/B/C from the button-bar to select the source that should be used. You can 
+also select more than one source. Since this output window is an editor even 
+conflicts which need further corrections can be solved here without requiring 
+another tool. <br>
+ &nbsp;  
+<h3> And ...</h3>
+    
+<ul>
+  <li> Fast navigation via buttons.</li>
+   <li>A&nbsp;mouse-click into a summary column sync's all windows to show 
+the same position.</li>
+   <li> Select and copy from any window and paste into the merge result window.</li>
+   <li> Overview column that shows where the changes and conflicts are.</li>
+   <li> The colors are adjustable to your specific preferences.</li>
+   <li> Adjustable Tab size.&nbsp;</li>
+   <li>Option to insert spaces instead of tabs.</li>
+   <li> Open files comfortably via dialog or specify files on the command 
+line.</li>
+   <li> ...</li>
+   
+</ul>
+    
+<h3> Diff Algorithm</h3>
+  Some graphical diff-tools are just front-ends to the good old command-line
+ Diff. This is reuse at its best but also limits the possiblities of any
+front-end because a diff-analysis of each line is not provided by Diff.  
+<p>I invented my own diff-algorithm, with the advantage that I could also
+ reuse it for a line comparison. This algorithm was optimized for use with
+ C/C++-source files. I hope that the results are useful for you. <br>
+ &nbsp; </p>
+ 
+<h2> <a name="documentation"></a>
+ Documentation</h2>
+    
+<h3> Command-Line Options</h3>
+  - Comparing 2 files: <br>
+ <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ kdiff3 <i>file1 file2</i></tt>  
+<p>- Merging 2 files: <br>
+ <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ kdiff3 <i>file1 file2</i> -m</tt> <br>
+ <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ kdiff3 <i>file1 file2</i> -o <i>outputfile</i></tt> </p>
+ 
+<p>- Comparing 3 files: <br>
+ <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ kdiff3 <i>file1 file2 file3</i></tt> </p>
+ 
+<p>- Merging 3 files: <br>
+ <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ kdiff3 <i>file1 file2 file3</i> -m</tt> <br>
+ <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ kdiff3 <i>file1 file2 file3</i> -o <i>outputfile</i></tt><i> </i><br>
+ &nbsp;&nbsp;&nbsp;&nbsp; Note that file1 will be treated as base of file2 
+and file3. </p>
+ 
+<p>For more information use: <br>
+ <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ kdiff3 --help</tt> </p>
+ 
+<h3> Open-Dialog</h3>
+  Since many input files must be selectable, the program has a special open
+ dialog: <br>
+ <img src="open_dialog.png" height="189" width="448">
+  <br>
+ The open dialog allows to edit the filenames by hand, selecting a file via 
+the file-browser ("Select...") or allows to choose recent files from the drop-down
+lists. If you open the dialog again, then the current names still remain
+there. The third &nbsp;input file is not required. If the entry for "C" remains
+empty, then only a two file diff analysis will be done.  
+<p>If "Merge" is selected, then the "Output"-line becomes editable. But it 
+is not required to specify the output filename immediately. You can also postpone
+this until saving. </p>
+ 
+<p>The "Configure"-button opens the options-dialog, so that you can set the 
+options before running the analysis. <br>
+ &nbsp; </p>
+ 
+<h3> Interpreting The Information In The Input Windows</h3>
+ At the top of each text window is its "info line". The info lines of the 
+input windows contain a letter "A", "B" or "C", the filename and the line 
+number of the first visible line in the window. (Note that window "C" is optional.)
+Each info line appears in a different color. <br>
+ The three input windows are assigned the letters "A", "B" and "C". "A" has 
+color blue, "B" has green and "C" has magenta. (These are the defaults, but 
+can be changed in the Settings-Menu.) <br>
+ When a difference is detected then the color shows which input file differs. 
+When both other input files differ then the color used to express this is 
+red by default ("Conflict color" in the Settings).  
+<p>Left of each text is the "summary column". If differences occurred on
+a line then the summary column shows the respective color. For a white-space-only
+ difference the summary is chequered. For programming languages where white
+ space is not so important this is useful to see at one glance if anything
+ of importance was modified. (In C/C++ white space is only interesting within
+ strings, comments, for the preprocessor, and some only very esoteric situations.)
+ <br>
+ The vertical line separating the summary column and the text is interrupted
+ if the input file had no lines there. </p>
+ 
+<p>On the right side a "overview"-column is visible left of the vertical
+scrollbar. It shows the compressed summary column of input "A". All the differences 
+and conflicts are visible at one glance. When only two input windows are used,
+then all differences appear red here because every difference is also a conflict.
+A black rectangle frames the visible part of the inputs. For very long input
+files, when the number of input lines is bigger than the height of the overview
+column in pixels, then several input lines share one overview line. A conflict
+then has top priority over simple differences, which have priority over no
+change, so that no difference or conflict is lost here.  By clicking into
+this overview column the corresponding text will be shown.<br>
+ &nbsp; </p>
+ 
+<h3> Merging And The Merge Output Editor Window</h3>
+  This window also has an info line at the top showing "Output:", the filename
+ and "[Modified]" if you edited something. Usually it will contain some text 
+through the automatic merge facilities, but often it will also contain conflicts.
+ 
+<p>!!! Saving is disabled until all conflicts are resolved !!! </p>
+ 
+<p>With only two input files every difference is also a conflict that must
+ be solved manually. <br>
+ With three input files the first file is treated as base, while the second 
+and third input files contain modifications. When at any line only either 
+input B or input C have changed but not both then the changed source will 
+automatically be selected. Only when B and C have changed on the same lines, 
+then the tool detects a conflict that must be solved manually. </p>
+ 
+<p>The merge output editor window also has a summary column. It shows the
+ letter of the input from which a line was selected or nothing if all three
+ sources where equal on a line. For conflicts it shows a questionmark "?"
+and the line shows "&lt;Merge Conflict&gt;", all in red. Because solving
+conflicts  line by line would take very long, the lines are grouped into
+groups that  have the same difference and conflict characteristics. When
+clicking into  the summary column with the left mouse button in either window
+then the group belonging to that line will be selected in all windows and
+the beginning of that group will be shown. (This might involve an automatic
+position jump in the windows if the beginning of a group is not visible.)
+<br>
+ Note the input selector buttons containing the letters "A", "B" and "C"
+in the button bar below the menu bar. When clicking on either input selector 
+button, the lines from that input will be added at the end of the selected 
+group if that group didn't contain that source before. Otherwise the lines 
+from that input will be removed. </p>
+ 
+<p>Besides, you can directly edit any line. The summary column will show
+"m" for every line that was modified . </p>
+ 
+<p>Sometimes, when a line is removed either by automatic merge or be editing
+ and no other lines remain in that group, then the text &lt;No src line&gt;
+ will appear in that line. This is just a placeholder for the group for when 
+you might change your mind and select some source again. This text won't appear
+in the saved file or in any selections you want to copy and paste.  </p>
+ 
+<p>The text "&lt;Merge Conflict&gt;" will not appear either if you copy and
+ paste some text containing that line. Be careful to do so! </p>
+ 
+<h3> Navigation And Editing</h3>
+  Much navigation will be done with the scroll bars and the mouse but you
+can also navigate with the keys. If you click into either window then you
+can use the cursor buttons left, right, up, down, page up, page down, home,
+end, ctrl-home, ctrl-end as you would in other programs. The overview-column
+next to the &nbsp;vertical scroll bar of the input files can also be used
+for navigating by clicking into it.  
+<p>In the merge output editor you can also use the other keys for editing.
+ You can toggle between insert and overwrite mode with the insert key. (Default
+ is insert-mode.) </p>
+ 
+<p>A left-mouse-button-click into any summary column will synchronise all
+ windows to show the beginning of the same group of lines (as explained above, 
+see Merging). </p>
+ 
+<p>The button bar also contains six navigation buttons with which you can
+ jump to the first/last group of lines, to the next/previous difference group 
+or to the next/previous conflict. </p>
+ 
+<h3> Select, Copy And Paste</h3>
+  The input windows don't show a cursor, so selections must be made with
+the mouse by clicking with the left mouse button at the start, holding down
+the mousebutton and moving to the end, where you release the mouse button
+again. You can also select a word by double clicking it. In the merge output
+editor you can also select via the keyboard by holding the "shift"-button
+and navigation with the cursor keys.  
+<p>To copy to the clipboard you must press the "Copy"-button or Ctrl-C. But 
+there exists an option "Auto Copy Selection". If this is enabled, then whatever 
+you select is copied immediately and you don't need to explicitely copy. But
+pay attention when using this because the contents of the clipboard might 
+then be destroyed accidentally. </p>
+ 
+<p>"Cut" (Ctrl-X) copies to the clipboard and deletes the selected text and 
+"Paste" (Ctrl-V) inserts the text in the clipboard at the cursorposition
+or over the current selection. </p>
+ 
+<h3> Options</h3>
+  Options and the recent-file-list will be saved when you exit the program,
+ and reloaded when you start it.  
+<h4> Font</h4>
+  Select a fixed width font. (On some systems this dialog will also present
+ variable width fonts, but you should not use them.)  
+<h4> Colors</h4>
+  Foreground color: Usually black. <br>
+ Background color: Usually white. <br>
+ Diff Background color: Usually light gray. <br>
+ Color A: Usually dark blue. <br>
+ Color B: Usually dark green. <br>
+ Color C: Usually dark magenta. <br>
+ Conflict Color: Usually red.  
+<h4> Editor Settings</h4>
+  Tab inserts spaces: If this is disabled and you press the tabulator key,
+ a tab-character is inserted, otherwise the appropriate amount of characters
+ is inserted. <br>
+ Tab size: Can be adjusted for your specific needs. Default is 8. <br>
+ Auto indentation: When pressing Enter or Return the indentation of the previous 
+line is used for the new line. <br>
+ Auto copy selection: Every selection is immediately copied to the clipboard
+ when active and you needn't explicitely copy it.  
+<h4> Diff Settings</h4>
+  Ignore white space: Default is on. White space will be ignored in the first
+ part of the analysis in which the line matching is done. In the result the 
+white space differences will be shown nevertheless. <br>
+ Ignore trivial matches: Default is on. When trivial lines match after an 
+difference, this will be ignored and the search for a nontrivial matching 
+line continues. This improves the results for inputs with empty lines and 
+lines containing only a open or close-brace character, which is often the 
+case for C/C++-programs. <br>
+ &nbsp; <br>
+ &nbsp;  
+<h2> <a name="faq"></a>
+ Questions And Answers</h2>
+    
+<h4> Why is it called KDiff3?</h4>
+  Tools named KDiff and KDiff2 already exist. Also "KDiff3" should suggest
+ that it can merge like the "diff3"-tool in the Diff-Tool collection.  
+<h4> Why did I release it under GPL?</h4>
+  I'm using GPL programs for a very long time now and learned very much by
+ having a look at many of the sources. Hence this is my "Thank You" to all
+ programmers that also did so or will do the same.  
+<h4> Often lines that are similar but not identical appear next to each other
+ but sometimes not. Why?</h4>
+  Lines where only the amount of white space characters is different are
+treated as "equal" at first, while just one different non-white character
+causes the lines to be "different". If similar lines appear next to each
+other, this actually is coincidence but this fortunately is often the case.
+ 
+<h4> Sometimes lines that are identical don't appear next to each other. Why?</h4>
+  Lines that contain very few (less than three) non-white characters are
+not used for a match after a difference. Also solitary matching lines in
+the middle of differences are not used for matching if they are too far apart. 
+Most of the time this behaviour improves the quality of the diff-analysis.
+ But if users (that includes you!) tell me that they need a different behaviour,
+ then I'll make this an option in the next version.  
+<h4> Why won't the merge tool automatically merge if both changes are equal?</h4>
+  Previously I also thought this would be nice, but when I tried it, I saw
+ that this is dangerous. Sometimes by coincindence two changes are identical
+ in certain lines but not otherwise. When this is merged automatically then
+ these lines that are actually needed twice - once for each change - only
+appear once in the merge result. It can even happen that no other conflict
+appears in the vicinity and then the problem goes completely unnoticed.  
+<h4> Why must all conflicts be solved before the merge result can be saved?</h4>
+  For each equal or different section the editor in the merge result window
+ remembers where it begins or ends. This is needed so that conflicts can
+be solved manually by simply selecting the source button (A, B or C). This
+information is lost while saving as text and it is too much effort to create
+a special file format that supports saving and restoring all necessary information.
+ 
+<h4> Why does the editor in the merge result window not have an "undo"-function?</h4>
+  This was too much effort to do in the first version. And you can always
+restore a version from one source (A, B or C) by clicking the respective
+button. For big editing the use of another editor is recommended anyway.
+ 
+<h4> When I removed some text, then suddenly "&lt;No src line&gt;" appeared 
+and can't be deleted. What does that mean and how can one remove this?</h4>
+  For each equal or different section the editor in the merge result window
+ remembers where it begins or ends.&nbsp; "&lt;No src line&gt;" means that
+ there is nothing left in a section, not even a new line character. This
+can happen either while merging automatically or by editing. This is no problem, 
+since this hint won't appear in the saved file. If you want the orignal source 
+back just select the section (click on the left summary column) and then click
+the source button with the needed contents (A/B or C).  
+<h4> Why doesn't KDiff3 support syntax-highlighting?</h4>
+  KDiff3 already uses many colors for difference highlighting. More highlighting
+ would be confusing. Use another editor for this. <br>
+ 
+<h4>There is so much information here, but your question is still not answered?</h4>
+ Please send me your question. I appreciate every comment.<br>
+ &nbsp;  
+</body>
+</html>
