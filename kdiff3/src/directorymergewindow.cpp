@@ -17,9 +17,11 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.2  2003/10/11 12:41:57  joachim99
+ * Fix for gcc 2.95
+ *
  * Revision 1.1  2003/10/06 18:38:48  joachim99
  * KDiff3 version 0.9.70
- *                                                                   *
  ***************************************************************************/
 
 #include "directorymergewindow.h"
@@ -866,7 +868,8 @@ void DirectoryMergeWindow::prepareListView()
 
       mfi.m_subPath = mfi.m_fileInfoA.exists() ? mfi.m_fileInfoA.filePath() :
                       mfi.m_fileInfoB.exists() ? mfi.m_fileInfoB.filePath() :
-                      mfi.m_fileInfoC.exists() ? mfi.m_fileInfoC.filePath() : "";
+                      mfi.m_fileInfoC.exists() ? mfi.m_fileInfoC.filePath() :
+                      QString("");
 
       g_pProgressDialog->setInformation(
          "Processing " + QString::number(currentIdx) +" / "+ QString::number(nrOfFiles)
