@@ -101,6 +101,20 @@ static void showHelp()
    #endif
 }
 
+QString getTranslationDir()
+{
+   #ifdef _WIN32
+      char buf[200];
+      int r= SearchPathA( 0, ".",  0, sizeof(buf), buf, 0 );
+
+      QString exePath;
+      if (r!=0)  {  exePath = buf; }
+      else       {  exePath = "."; }
+      return exePath;
+   #else
+      return ".";
+   #endif
+}
 
 // static
 void KMessageBox::error( QWidget* parent, const QString& text, const QString& caption )
@@ -134,7 +148,7 @@ int KMessageBox::warningYesNoCancel( QWidget* parent, const QString& text, const
    const QString& button1, const QString& button2 )
 {
    int val = QMessageBox::warning( parent, caption, text,
-      button1, button2, "Cancel" );
+      button1, button2, i18n("Cancel") );
    if ( val==0 ) return Yes;
    if ( val==1 ) return No;
    else return Cancel;
@@ -278,23 +292,23 @@ KMainWindow::KMainWindow( QWidget* parent, const QString& name )
 : QMainWindow( parent, name ), m_actionCollection(this)
 {
    fileMenu = new QPopupMenu();
-   menuBar()->insertItem(tr("&File"), fileMenu);
+   menuBar()->insertItem(i18n("&File"), fileMenu);
    editMenu = new QPopupMenu();
-   menuBar()->insertItem(tr("&Edit"), editMenu);
+   menuBar()->insertItem(i18n("&Edit"), editMenu);
    directoryMenu = new QPopupMenu();
-   menuBar()->insertItem(tr("&Directory"), directoryMenu);
+   menuBar()->insertItem(i18n("&Directory"), directoryMenu);
    dirCurrentItemMenu = 0;
    dirCurrentSyncItemMenu = 0;
    movementMenu = new QPopupMenu();
-   menuBar()->insertItem(tr("&Movement"), movementMenu);
+   menuBar()->insertItem(i18n("&Movement"), movementMenu);
    mergeMenu = new QPopupMenu();
-   menuBar()->insertItem(tr("&Merge"), mergeMenu);
+   menuBar()->insertItem(i18n("&Merge"), mergeMenu);
    windowsMenu = new QPopupMenu();
-   menuBar()->insertItem(tr("&Windows"), windowsMenu);
+   menuBar()->insertItem(i18n("&Window"), windowsMenu);
    settingsMenu = new QPopupMenu();
-   menuBar()->insertItem(tr("&Settings"), settingsMenu);
+   menuBar()->insertItem(i18n("&Settings"), settingsMenu);
    helpMenu = new QPopupMenu();
-   menuBar()->insertItem(tr("&Help"), helpMenu);
+   menuBar()->insertItem(i18n("&Help"), helpMenu);
 
    m_pToolBar = new KToolBar(this);
       
@@ -632,27 +646,27 @@ KAction::KAction(const QString& text, const QIconSet& icon, int accel,
    {
       if( name[0]=='g')       addTo( p->movementMenu );
       else if( name.left(16)=="dir_current_sync")
-	  {
-          if ( p->dirCurrentItemMenu==0 )
-		  {
-			p->dirCurrentItemMenu = new QPopupMenu();
-            p->directoryMenu->insertItem(tr("Current &Item Merge Operation"), p->dirCurrentItemMenu);
+      {
+         if ( p->dirCurrentItemMenu==0 )
+         {
+            p->dirCurrentItemMenu = new QPopupMenu();
+            p->directoryMenu->insertItem(i18n("Current Item Merge Operation"), p->dirCurrentItemMenu);
             p->dirCurrentSyncItemMenu = new QPopupMenu();
-            p->directoryMenu->insertItem(tr("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
-		  }
-		  addTo( p->dirCurrentItemMenu );
-	  }
+            p->directoryMenu->insertItem(i18n("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
+         }
+         addTo( p->dirCurrentItemMenu );
+      }
       else if( name.left(11)=="dir_current")
-	  {
-          if ( p->dirCurrentItemMenu==0 )
-		  {
-			p->dirCurrentItemMenu = new QPopupMenu();
-            p->directoryMenu->insertItem(tr("Current &Item Merge Operation"), p->dirCurrentItemMenu);
+      {
+         if ( p->dirCurrentItemMenu==0 )
+         {
+            p->dirCurrentItemMenu = new QPopupMenu();
+            p->directoryMenu->insertItem(i18n("Current Item Merge Operation"), p->dirCurrentItemMenu);
             p->dirCurrentSyncItemMenu = new QPopupMenu();
-            p->directoryMenu->insertItem(tr("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
-		  }
-		  addTo( p->dirCurrentSyncItemMenu );
-	  }
+            p->directoryMenu->insertItem(i18n("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
+         }
+         addTo( p->dirCurrentSyncItemMenu );
+      }
       else if( name[0]=='d')  addTo( p->directoryMenu );
       else if( name[0]=='f')  addTo( p->fileMenu );
       else if( name[0]=='w')  addTo( p->windowsMenu );
@@ -680,27 +694,27 @@ KAction::KAction(const QString& text, int accel,
    {
       if( name[0]=='g') addTo( p->movementMenu );
       else if( name.left(16)=="dir_current_sync")
-	  {
-          if ( p->dirCurrentItemMenu==0 )
-		  {
-			p->dirCurrentItemMenu = new QPopupMenu();
-            p->directoryMenu->insertItem(tr("Current &Item Merge Operation"), p->dirCurrentItemMenu);
+      {
+         if ( p->dirCurrentItemMenu==0 )
+         {
+            p->dirCurrentItemMenu = new QPopupMenu();
+            p->directoryMenu->insertItem(i18n("Current Item Merge Operation"), p->dirCurrentItemMenu);
             p->dirCurrentSyncItemMenu = new QPopupMenu();
-            p->directoryMenu->insertItem(tr("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
-		  }
-		  addTo( p->dirCurrentItemMenu );
-	  }
+            p->directoryMenu->insertItem(i18n("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
+         }
+         addTo( p->dirCurrentItemMenu );
+      }
       else if( name.left(11)=="dir_current")
-	  {
-          if ( p->dirCurrentItemMenu==0 )
-		  {
-			p->dirCurrentItemMenu = new QPopupMenu();
-            p->directoryMenu->insertItem(tr("Current &Item Merge Operation"), p->dirCurrentItemMenu);
+      {
+         if ( p->dirCurrentItemMenu==0 )
+         {
+            p->dirCurrentItemMenu = new QPopupMenu();
+            p->directoryMenu->insertItem(i18n("Current Item Merge Operation"), p->dirCurrentItemMenu);
             p->dirCurrentSyncItemMenu = new QPopupMenu();
-            p->directoryMenu->insertItem(tr("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
-		  }
-		  addTo( p->dirCurrentSyncItemMenu );
-	  }
+            p->directoryMenu->insertItem(i18n("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
+         }
+         addTo( p->dirCurrentSyncItemMenu );
+      }
       else if( name[0]=='d')  addTo( p->directoryMenu );
       else if( name[0]=='f')  addTo( p->fileMenu );
       else if( name[0]=='w')  addTo( p->windowsMenu );
@@ -752,7 +766,7 @@ KAction* KStdAction::open( QWidget* parent, const char* slot, KActionCollection*
 {
    #include "../xpm/fileopen.xpm"
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( "Open", QIconSet(QPixmap(fileopen)), Qt::CTRL+Qt::Key_O, parent, slot, actionCollection, "open", false, false);
+   KAction* a = new KAction( i18n("Open"), QIconSet(QPixmap(fileopen)), Qt::CTRL+Qt::Key_O, parent, slot, actionCollection, "open", false, false);
    if(p){ a->addTo( p->fileMenu ); }
    return a;
 }
@@ -761,7 +775,7 @@ KAction* KStdAction::save( QWidget* parent, const char* slot, KActionCollection*
 {
    #include "../xpm/filesave.xpm"
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( "Save", QIconSet(QPixmap(filesave)), Qt::CTRL+Qt::Key_S, parent, slot, actionCollection, "save", false, false);
+   KAction* a = new KAction( i18n("Save"), QIconSet(QPixmap(filesave)), Qt::CTRL+Qt::Key_S, parent, slot, actionCollection, "save", false, false);
    if(p){ a->addTo( p->fileMenu ); }
    return a;
 }
@@ -769,7 +783,7 @@ KAction* KStdAction::save( QWidget* parent, const char* slot, KActionCollection*
 KAction* KStdAction::saveAs( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( "SaveAs", 0, parent, slot, actionCollection, "saveas", false, false);
+   KAction* a = new KAction( i18n("Save As..."), 0, parent, slot, actionCollection, "saveas", false, false);
    if(p) a->addTo( p->fileMenu );
    return a;
 }
@@ -777,7 +791,7 @@ KAction* KStdAction::saveAs( QWidget* parent, const char* slot, KActionCollectio
 KAction* KStdAction::quit( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( "Quit", Qt::CTRL+Qt::Key_Q, parent, slot, actionCollection, "quit", false, false);
+   KAction* a = new KAction( i18n("Quit"), Qt::CTRL+Qt::Key_Q, parent, slot, actionCollection, "quit", false, false);
    if(p) a->addTo( p->fileMenu );
    return a;
 }
@@ -785,7 +799,7 @@ KAction* KStdAction::quit( QWidget* parent, const char* slot, KActionCollection*
 KAction* KStdAction::cut( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( "Cut", Qt::CTRL+Qt::Key_X, parent, slot, actionCollection, "cut", false, false );
+   KAction* a = new KAction( i18n("Cut"), Qt::CTRL+Qt::Key_X, parent, slot, actionCollection, "cut", false, false );
    if(p) a->addTo( p->editMenu );
    return a;
 }
@@ -793,7 +807,7 @@ KAction* KStdAction::cut( QWidget* parent, const char* slot, KActionCollection* 
 KAction* KStdAction::copy( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( "Copy", Qt::CTRL+Qt::Key_C, parent, slot, actionCollection, "copy", false, false );
+   KAction* a = new KAction( i18n("Copy"), Qt::CTRL+Qt::Key_C, parent, slot, actionCollection, "copy", false, false );
    if(p) a->addTo( p->editMenu );
    return a;
 }
@@ -801,7 +815,7 @@ KAction* KStdAction::copy( QWidget* parent, const char* slot, KActionCollection*
 KAction* KStdAction::paste( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( "Paste", Qt::CTRL+Qt::Key_V, parent, slot, actionCollection, "paste", false, false );
+   KAction* a = new KAction( i18n("Paste"), Qt::CTRL+Qt::Key_V, parent, slot, actionCollection, "paste", false, false );
    if(p) a->addTo( p->editMenu );
    return a;
 }
@@ -809,7 +823,7 @@ KAction* KStdAction::paste( QWidget* parent, const char* slot, KActionCollection
 KToggleAction* KStdAction::showToolbar( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KToggleAction* a = new KToggleAction( "ShowToolBar", 0, parent, slot, actionCollection, "showtoolbar", false );
+   KToggleAction* a = new KToggleAction( i18n("Show Toolbar"), 0, parent, slot, actionCollection, "showtoolbar", false );
    if(p) a->addTo( p->settingsMenu );
    return a;
 }
@@ -817,7 +831,7 @@ KToggleAction* KStdAction::showToolbar( QWidget* parent, const char* slot, KActi
 KToggleAction* KStdAction::showStatusbar( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KToggleAction* a = new KToggleAction( "ShowStatusBar", 0, parent, slot, actionCollection, "showstatusbar", false );
+   KToggleAction* a = new KToggleAction( i18n("Show &Statusbar"), 0, parent, slot, actionCollection, "showstatusbar", false );
    if(p) a->addTo( p->settingsMenu );
    return a;
 }
@@ -825,7 +839,7 @@ KToggleAction* KStdAction::showStatusbar( QWidget* parent, const char* slot, KAc
 KAction* KStdAction::preferences( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( "Settings ...", 0, parent, slot, actionCollection, "settings", false, false );
+   KAction* a = new KAction( i18n("&Configure %1...").arg("KDiff3"), 0, parent, slot, actionCollection, "settings", false, false );
    if(p) a->addTo( p->settingsMenu );
    return a;
 }
@@ -837,7 +851,7 @@ KAction* KStdAction::keyBindings( QWidget*, const char*, KActionCollection*)
 KAction* KStdAction::about( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( "About", 0, parent, slot, actionCollection, "about", false, false );
+   KAction* a = new KAction( i18n("About"), 0, parent, slot, actionCollection, "about", false, false );
    if(p) a->addTo( p->helpMenu );
    return a;
 }
@@ -845,14 +859,14 @@ KAction* KStdAction::about( QWidget* parent, const char* slot, KActionCollection
 KAction* KStdAction::help( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( "Help", Qt::Key_F1, parent, slot, actionCollection, "help", false, false );
+   KAction* a = new KAction( i18n("Help"), Qt::Key_F1, parent, slot, actionCollection, "help", false, false );
    if(p) a->addTo( p->helpMenu );
    return a;
 }
 KAction* KStdAction::find( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( "Find", Qt::CTRL+Qt::Key_F, parent, slot, actionCollection, "find", false, false );
+   KAction* a = new KAction( i18n("Find"), Qt::CTRL+Qt::Key_F, parent, slot, actionCollection, "find", false, false );
    if(p) a->addTo( p->editMenu );
    return a;
 }
@@ -860,7 +874,7 @@ KAction* KStdAction::find( QWidget* parent, const char* slot, KActionCollection*
 KAction* KStdAction::findNext( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( "Find Next", Qt::Key_F3, parent, slot, actionCollection, "findNext", false, false );
+   KAction* a = new KAction( i18n("Find Next"), Qt::Key_F3, parent, slot, actionCollection, "findNext", false, false );
    if(p) a->addTo( p->editMenu );
    return a;
 }
@@ -873,7 +887,7 @@ KFontChooser::KFontChooser( QWidget* pParent, const QString& /*name*/, bool, con
 {
    m_pParent = pParent;
    QVBoxLayout* pLayout = new QVBoxLayout( this );
-   m_pSelectFont = new QPushButton("Select Font", this );
+   m_pSelectFont = new QPushButton(i18n("Select Font"), this );
    connect(m_pSelectFont, SIGNAL(clicked()), this, SLOT(slotSelectFont()));
    pLayout->addWidget(m_pSelectFont);
 

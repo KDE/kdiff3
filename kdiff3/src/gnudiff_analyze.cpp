@@ -1,11 +1,10 @@
 /* Analyze file differences for GNU DIFF.
 
    Modified for KDiff3 by Joachim Eibl 2003.
+   The original file was part of GNU DIFF.
 
    Copyright (C) 1988, 1989, 1992, 1993, 1994, 1995, 1998, 2001, 2002
    Free Software Foundation, Inc.
-
-   This file is part of GNU DIFF.
 
    GNU DIFF is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -40,7 +39,6 @@
 #include "gnudiff_diff.h"
 //#include <error.h>
 #include <stdlib.h>
-#include "gnudiff_xalloc.h"
 
 static lin *xvec, *yvec;	/* Vectors being compared. */
 static lin *fdiag;		/* Vector, indexed by diagonal, containing
@@ -55,7 +53,7 @@ static lin too_expensive;	/* Edit scripts longer than this are too
 				   expensive to compute.  */
 
 #define SNAKE_LIMIT 20	/* Snakes bigger than this are considered `big'.  */
-namespace GnuDiff {
+
 
 struct partition
 {
@@ -95,8 +93,8 @@ struct partition
    the worst this can do is cause suboptimal diff output.
    It cannot cause incorrect diff output.  */
 
-static lin
-diag (lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal,
+lin
+GnuDiff::diag (lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal,
       struct partition *part)
 {
   lin *const fd = fdiag;	/* Give the compiler a chance. */
@@ -334,8 +332,7 @@ diag (lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal,
    If FIND_MINIMAL, find a minimal difference no matter how
    expensive it is.  */
 
-static void
-compareseq (lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal)
+void GnuDiff::compareseq (lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal)
 {
   lin * const xv = xvec; /* Help the compiler.  */
   lin * const yv = yvec;
@@ -400,8 +397,7 @@ compareseq (lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal)
    When we discard a line, we also mark it as a deletion or insertion
    so that it will be printed in the output.  */
 
-static void
-discard_confusing_lines (struct file_data filevec[])
+void GnuDiff::discard_confusing_lines (struct file_data filevec[])
 {
   int f;
   lin i;
@@ -609,8 +605,7 @@ discard_confusing_lines (struct file_data filevec[])
    but usually it is cleaner to consider the following identical line
    to be the "change".  */
 
-static void
-shift_boundaries (struct file_data filevec[])
+void GnuDiff::shift_boundaries (struct file_data filevec[])
 {
   int f;
 
@@ -714,9 +709,7 @@ shift_boundaries (struct file_data filevec[])
    If DELETED is 0 then LINE0 is the number of the line before
    which the insertion was done; vice versa for INSERTED and LINE1.  */
 
-static struct change *
-add_change (lin line0, lin line1, lin deleted, lin inserted,
-	    struct change *old)
+GnuDiff::change* GnuDiff::add_change (lin line0, lin line1, lin deleted, lin inserted, struct change *old)
 {
   struct change *newChange = (change*) xmalloc (sizeof *newChange);
 
@@ -731,8 +724,7 @@ add_change (lin line0, lin line1, lin deleted, lin inserted,
 /* Scan the tables of which lines are inserted and deleted,
    producing an edit script in reverse order.  */
 
-static struct change *
-build_reverse_script (struct file_data const filevec[])
+GnuDiff::change* GnuDiff::build_reverse_script (struct file_data const filevec[])
 {
   struct change *script = 0;
   bool *changed0 = filevec[0].changed;
@@ -768,8 +760,7 @@ build_reverse_script (struct file_data const filevec[])
 /* Scan the tables of which lines are inserted and deleted,
    producing an edit script in forward order.  */
 
-static struct change *
-build_script (struct file_data const filevec[])
+GnuDiff::change* GnuDiff::build_script (struct file_data const filevec[])
 {
   struct change *script = 0;
   bool *changed0 = filevec[0].changed;
@@ -801,7 +792,7 @@ build_script (struct file_data const filevec[])
 
 
 /* Report the differences of two files.  */
-struct change* diff_2_files (struct comparison *cmp)
+GnuDiff::change* GnuDiff::diff_2_files (struct comparison *cmp)
 {
   lin diags;
   int f;
@@ -884,11 +875,6 @@ struct change* diff_2_files (struct comparison *cmp)
   return script;
 }
 
-inline bool isWhite( char c )
-{
-   return c==' ' || c=='\t' ||  c=='\r';
-}
-
 /* Compare two lines (typically one from each input file)
    according to the command line options.
    For efficiency, this is invoked only when the lines do not match exactly
@@ -896,7 +882,7 @@ inline bool isWhite( char c )
    Return nonzero if the lines differ.  */
 
 bool
-lines_differ (char const *s1, char const *s2)
+GnuDiff::lines_differ (char const *s1, char const *s2)
 {
   register unsigned char const *t1 = (unsigned char const *) s1;
   register unsigned char const *t2 = (unsigned char const *) s2;
@@ -1034,4 +1020,4 @@ lines_differ (char const *s1, char const *s2)
 
   return 1;
 }
-} // namespace GnuDiff
+

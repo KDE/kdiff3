@@ -30,6 +30,7 @@
 
 int g_bAutoSolve = true;
 
+#undef leftInfoWidth
 #define leftInfoWidth 3
 
 MergeResultWindow::MergeResultWindow(
@@ -500,6 +501,9 @@ void MergeResultWindow::go( e_Direction eDir, e_EndPoint eEndPoint )
    }
 
    setFastSelector( i );
+   
+   if ( isVisible() )
+      setFocus();
 }
 
 bool MergeResultWindow::isDeltaAboveCurrent()
@@ -1165,8 +1169,11 @@ void MergeResultWindow::paintEvent( QPaintEvent* e )
             if ( mel.isModified() || !mel.isEditableText() ) bModified = true;
          }
 
-         if ( ml.mergeDetails == eNoChange ) emit sourceMask( 0, bModified ? 1 : 0 );
-         else                                emit sourceMask( srcMask, enabledMask );
+         if (hasFocus())
+         {
+            if ( ml.mergeDetails == eNoChange ) emit sourceMask( 0, bModified ? 1 : 0 );
+            else                                emit sourceMask( srcMask, enabledMask );
+         }
       }
       p.end();
    }

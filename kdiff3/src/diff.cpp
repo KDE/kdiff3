@@ -1078,13 +1078,11 @@ void calcWhiteDiff3Lines(
 void debugLineCheck( Diff3LineList& d3ll, int size, int idx )
 {
    Diff3LineList::iterator it = d3ll.begin();
-
-   
    int i=0;
 
    for ( it = d3ll.begin(); it!= d3ll.end(); ++it )
    {
-      int l;
+      int l=0;
       if      (idx==1) l=(*it).lineA;
       else if (idx==2) l=(*it).lineB;
       else if (idx==3) l=(*it).lineC;

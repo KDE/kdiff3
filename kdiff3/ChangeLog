@@ -1,3 +1,15 @@
+Version 0.9.81 - 2004/01/08
+===========================
+- Allow to compile with --enable-final
+- Bugfix for 3 file-compare (and A or B don't exist, crashed)
+- Bugfix for crash when second directory is merged
+- Some keyboard-shortcuts for selection of merge-operation didn't work correctly.
+- Shortcuts Ctrl-1/2/3 are possible in textmergewindow and in dirmergewindow, 
+  depending on the focus.
+- First steps towards internationalisation
+- Manpage doc/en/kdiff3.1 by Eike Sauer (for Debian)
+- Directory rescan shortcut SHIFT-F5
+
 Version 0.9.80 - 2003/12/08
 ===========================
 New Text Diff/Merge Features:

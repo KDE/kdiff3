@@ -1,6 +1,7 @@
 /* xmalloc.c -- malloc with out of memory checking
 
    Modified for KDiff3 by Joachim Eibl 2003.
+   The original file was part of GNU DIFF.
 
    Copyright (C) 1990-1999, 2000, 2002 Free Software Foundation, Inc.
 
@@ -29,23 +30,17 @@
 #include <string.h>
 
 
-//#include "error.h"
-#include "gnudiff_xalloc.h"
-
 #ifndef EXIT_FAILURE
 # define EXIT_FAILURE 1
 #endif
 
-namespace GnuDiff
-{
-
+#include "gnudiff_diff.h"
 /* If non NULL, call this function when memory is exhausted. */
 //void (*xalloc_fail_func) PARAMS ((void)) = 0;
 void (*xalloc_fail_func)(void) = 0;
 
 
-void
-xalloc_die (void)
+void GnuDiff::xalloc_die (void)
 {
   if (xalloc_fail_func)
     (*xalloc_fail_func) ();
@@ -59,7 +54,7 @@ xalloc_die (void)
 /* Allocate N bytes of memory dynamically, with error checking.  */
 
 void *
-xmalloc (size_t n)
+GnuDiff::xmalloc (size_t n)
 {
   void *p;
 
@@ -73,7 +68,7 @@ xmalloc (size_t n)
    with error checking.  */
 
 void *
-xrealloc (void *p, size_t n)
+GnuDiff::xrealloc (void *p, size_t n)
 {
   p = realloc (p, n);
   if (p == 0)
@@ -84,7 +79,7 @@ xrealloc (void *p, size_t n)
 /* Allocate memory for N elements of S bytes, with error checking.  */
 
 void *
-xcalloc (size_t n, size_t s)
+GnuDiff::xcalloc (size_t n, size_t s)
 {
   void *p;
 
@@ -97,11 +92,9 @@ xcalloc (size_t n, size_t s)
 /* Yield a new block of SIZE bytes, initialized to zero.  */
 
 void *
-zalloc (size_t size)
+GnuDiff::zalloc (size_t size)
 {
   void *p = xmalloc (size);
   memset (p, 0, size);
   return p;
 }
-
-} // namespace GnuDiff

@@ -20,6 +20,7 @@
 #include <klocale.h>
 #include "kdiff3_shell.h"
 #include "version.h"
+#include <qtextcodec.h>
 
 
 static const char *description =
@@ -97,12 +98,22 @@ int main(int argc, char *argv[])
 
    KAboutData aboutData( "kdiff3", I18N_NOOP("KDiff3"),
       VERSION, description, KAboutData::License_GPL,
-      "(c) 2002-2003 Joachim Eibl", 0, "http://kdiff3.sourceforge.net/", "joachim.eibl@gmx.de");
+      "(c) 2002-2004 Joachim Eibl", 0, "http://kdiff3.sourceforge.net/", "joachim.eibl@gmx.de");
    aboutData.addAuthor("Joachim Eibl",0, "joachim.eibl@gmx.de");
    KCmdLineArgs::init( argc, argv, &aboutData );
    KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
 
-  KApplication app;
+   KApplication app;
+#ifdef KREPLACEMENTS_H
+   QString translationDir = getTranslationDir();
+   QTranslator kdiff3Translator( 0 );
+   kdiff3Translator.load( QString("kdiff3_")+QTextCodec::locale(), translationDir );
+   app.installTranslator( &kdiff3Translator );
+   
+   QTranslator qtTranslator( 0 );
+   qtTranslator.load( QString("qt_")+QTextCodec::locale(), translationDir );
+   app.installTranslator( &qtTranslator );
+#endif
 
   if (app.isRestored())
   {
@@ -115,3 +126,6 @@ int main(int argc, char *argv[])
 
   return app.exec();
 }
+
+// Suppress warning with --enable-final
+#undef VERSION

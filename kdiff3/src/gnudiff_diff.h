@@ -1,11 +1,10 @@
 /* Shared definitions for GNU DIFF
 
    Modified for KDiff3 by Joachim Eibl 2003.
+   The original file was part of GNU DIFF.
 
    Copyright (C) 1988, 1989, 1991, 1992, 1993, 1994, 1995, 1998, 2001,
    2002 Free Software Foundation, Inc.
-
-   This file is part of GNU DIFF.
 
    GNU DIFF is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -22,15 +21,18 @@
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
+#ifndef GNUDIFF_DIFF_H
+#define GNUDIFF_DIFF_H
+
 #include "gnudiff_system.h"
 
 #include <stdio.h>
 
 #define TAB_WIDTH 8
 
-namespace GnuDiff
+class GnuDiff
 {
-
+public:
 /* What kind of changes a hunk contains.  */
 enum changes
 {
@@ -48,12 +50,6 @@ enum changes
 };
 
 /* Variables for command line options */
-
-#ifndef GDIFF_MAIN
-# define XTERN extern
-#else
-# define XTERN
-#endif
 
 enum output_style
 {
@@ -89,24 +85,24 @@ enum output_style
    i.e. can handle a file that ends in a non-newline.  */
 #define ROBUST_OUTPUT_STYLE(S) ((S) != OUTPUT_ED && (S) != OUTPUT_FORWARD_ED)
 
-XTERN enum output_style output_style;
+enum output_style output_style;
 
 /* Nonzero if output cannot be generated for identical files.  */
-XTERN bool no_diff_means_no_output;
+bool no_diff_means_no_output;
 
 /* Number of lines of context to show in each set of diffs.
    This is zero when context is not to be shown.  */
-XTERN lin context;
+lin context;
 
 /* Consider all files as text files (-a).
    Don't interpret codes over 0177 as implying a "binary file".  */
-XTERN bool text;
+bool text;
 
 /* Number of lines to keep in identical prefix and suffix.  */
-XTERN lin horizon_lines;
+lin horizon_lines;
 
 /* The significance of white space during comparisons.  */
-XTERN enum
+enum
 {
   /* All white space is significant (the default).  */
   IGNORE_NO_WHITE_SPACE,
@@ -122,94 +118,94 @@ XTERN enum
 } ignore_white_space;
 
 /* Ignore changes that affect only blank lines (-B).  */
-XTERN bool ignore_blank_lines;
+bool ignore_blank_lines;
 
 /* Ignore changes that affect only numbers. (J. Eibl)  */
-XTERN bool bIgnoreNumbers;
-XTERN bool bIgnoreWhiteSpace;
+bool bIgnoreNumbers;
+bool bIgnoreWhiteSpace;
 
 /* Files can be compared byte-by-byte, as if they were binary.
    This depends on various options.  */
-XTERN bool files_can_be_treated_as_binary;
+bool files_can_be_treated_as_binary;
 
 /* Ignore differences in case of letters (-i).  */
-XTERN bool ignore_case;
+bool ignore_case;
 
 /* Ignore differences in case of letters in file names.  */
-XTERN bool ignore_file_name_case;
+bool ignore_file_name_case;
 
 /* File labels for `-c' output headers (--label).  */
-XTERN char *file_label[2];
+char *file_label[2];
 
 /* Regexp to identify function-header lines (-F).  */
-//XTERN struct re_pattern_buffer function_regexp;
+//struct re_pattern_buffer function_regexp;
 
 /* Ignore changes that affect only lines matching this regexp (-I).  */
-//XTERN struct re_pattern_buffer ignore_regexp;
+//struct re_pattern_buffer ignore_regexp;
 
 /* Say only whether files differ, not how (-q).  */
-XTERN bool brief;
+bool brief;
 
 /* Expand tabs in the output so the text lines up properly
    despite the characters added to the front of each line (-t).  */
-XTERN bool expand_tabs;
+bool expand_tabs;
 
 /* Use a tab in the output, rather than a space, before the text of an
    input line, so as to keep the proper alignment in the input line
    without changing the characters in it (-T).  */
-XTERN bool initial_tab;
+bool initial_tab;
 
 /* Remove trailing carriage returns from input.  */
-XTERN bool strip_trailing_cr;
+bool strip_trailing_cr;
 
 /* In directory comparison, specify file to start with (-S).
    This is used for resuming an aborted comparison.
    All file names less than this name are ignored.  */
-XTERN char const *starting_file;
+char const *starting_file;
 
 /* Pipe each file's output through pr (-l).  */
-XTERN bool paginate;
+bool paginate;
 
 /* Line group formats for unchanged, old, new, and changed groups.  */
-XTERN char const *group_format[CHANGED + 1];
+char const *group_format[CHANGED + 1];
 
 /* Line formats for unchanged, old, and new lines.  */
-XTERN char const *line_format[NEW + 1];
+char const *line_format[NEW + 1];
 
 /* If using OUTPUT_SDIFF print extra information to help the sdiff filter.  */
-XTERN bool sdiff_merge_assist;
+bool sdiff_merge_assist;
 
 /* Tell OUTPUT_SDIFF to show only the left version of common lines.  */
-XTERN bool left_column;
+bool left_column;
 
 /* Tell OUTPUT_SDIFF to not show common lines.  */
-XTERN bool suppress_common_lines;
+bool suppress_common_lines;
 
 /* The half line width and column 2 offset for OUTPUT_SDIFF.  */
-XTERN unsigned int sdiff_half_width;
-XTERN unsigned int sdiff_column2_offset;
+unsigned int sdiff_half_width;
+unsigned int sdiff_column2_offset;
 
 /* String containing all the command options diff received,
    with spaces between and at the beginning but none at the end.
    If there were no options given, this string is empty.  */
-XTERN char *switch_string;
+char *switch_string;
 
 /* Use heuristics for better speed with large files with a small
    density of changes.  */
-XTERN bool speed_large_files;
+bool speed_large_files;
 
 /* Patterns that match file names to be excluded.  */
-XTERN struct exclude *excluded;
+struct exclude *excluded;
 
 /* Don't discard lines.  This makes things slower (sometimes much
    slower) but will find a guaranteed minimal set of changes.  */
-XTERN bool minimal;
+bool minimal;
 
 /* Name of program the user invoked (for error messages).  */
-XTERN char *program_name;
+char *program_name;
 
 /* The strftime format to use for time strings.  */
-XTERN char const *time_format;
+char const *time_format;
 
 /* The result of comparison is an "edit script": a chain of `struct change'.
    Each `struct change' represents one place where some lines are deleted
@@ -317,11 +313,11 @@ struct comparison
 
 /* Describe the two files currently being compared.  */
 
-XTERN struct file_data files[2];
+struct file_data files[2];
 
 /* Stdio stream to output diffs to.  */
 
-XTERN FILE *outfile;
+FILE *outfile;
 
 /* Declare various functions.  */
 
@@ -356,8 +352,8 @@ void print_rcs_script (struct change *);
 void print_sdiff_script (struct change *);
 
 /* util.c */
-extern char const change_letter[4];
-extern char const pr_program[];
+//extern char const change_letter[4];
+//extern char const pr_program[];
 char *concat (char const *, char const *, char const *);
 char *dir_file_pathname (char const *, char const *);
 bool lines_differ (char const *, char const *);
@@ -383,5 +379,56 @@ void setup_output (char const *, char const *, bool);
 void translate_range (struct file_data const *, lin, lin, long *, long *);
 
 /* version.c */
-extern char const version_string[];
-} // namespace GnuDiff
+//extern char const version_string[];
+
+private:
+   // gnudiff_analyze.cpp
+   lin diag (lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal, struct partition *part);
+   void compareseq (lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal);
+   void discard_confusing_lines (struct file_data filevec[]);
+   void shift_boundaries (struct file_data filevec[]);
+   struct change * add_change (lin line0, lin line1, lin deleted, lin inserted, struct change *old);
+   struct change * build_reverse_script (struct file_data const filevec[]);
+   struct change* build_script (struct file_data const filevec[]);
+   
+   // gnudiff_io.cpp
+   void find_and_hash_each_line (struct file_data *current);
+   void prepare_text (struct file_data *current);
+   void find_identical_ends (struct file_data filevec[]);
+
+   // gnudiff_xmalloc.cpp
+   void *xmalloc (size_t n);
+   void *xcalloc (size_t n, size_t s);
+   void *xrealloc(void *p, size_t n);
+   char *xstrdup (const char *str);
+   void xalloc_die (void);
+   
+   inline bool isWhite( char c )
+   {
+      return c==' ' || c=='\t' ||  c=='\r';
+   }
+}; // class GnuDiff
+
+# define XMALLOC(Type, N_items) ((Type *) xmalloc (sizeof (Type) * (N_items)))
+# define XCALLOC(Type, N_items) ((Type *) xcalloc (sizeof (Type), (N_items)))
+# define XREALLOC(Ptr, Type, N_items) \
+  ((Type *) xrealloc ((void *) (Ptr), sizeof (Type) * (N_items)))
+
+/* Declare and alloc memory for VAR of type TYPE. */
+# define NEW(Type, Var)  Type *(Var) = XMALLOC (Type, 1)
+
+/* Free VAR only if non NULL. */
+# define XFREE(Var)	\
+   do {                 \
+      if (Var)          \
+        free (Var);     \
+   } while (0)
+
+/* Return a pointer to a malloc'ed copy of the array SRC of NUM elements. */
+# define CCLONE(Src, Num) \
+  (memcpy (xmalloc (sizeof (*Src) * (Num)), (Src), sizeof (*Src) * (Num)))
+
+/* Return a malloc'ed copy of SRC. */
+# define CLONE(Src) CCLONE (Src, 1)
+
+#endif

@@ -30,6 +30,7 @@
 #include <qdragobject.h>
 #include <klocale.h>
 
+#undef leftInfoWidth
 #define leftInfoWidth (4+m_lineNumberWidth)   // Nr of information columns on left side
 
 

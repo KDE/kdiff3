@@ -3,16 +3,19 @@ KDiff3-Readme
 
 Author: Joachim Eibl  (joachim.eibl@gmx.de)
 Copyright: (C) 2002-2003 by Joachim Eibl
-KDiff3-Version: 0.9.80
+KDiff3-Version: 0.9.81
 
 
 KDiff3 is a program that
-- compares two or three input files,
+- compares and merges two or three input files or directories,
 - shows the differences line by line and character by character (!),
 - provides an automatic merge-facility and
 - an integrated editor for comfortable solving of merge-conflicts
-- and has an intuitive graphical user interface,
-- and allows directory comparison and merge.
+- has support for KDE-KIO (ftp, sftp, http, fish, smb)
+- and has an intuitive graphical user interface.
+
+
+Do you want help translating? Read the README in the po-subdirectory!
 
 
 Licence:
@@ -42,19 +45,19 @@ Exception from the GPL:
 
 
 Requirements & Installation:
-   Version 0.9.80 provides special support for KDE3, but it can also be
+   Version 0.9.81 provides special support for KDE3, but it can also be
    built without KDE3 if the Qt-libraries are available.
    (I also tested the program under Windows.)
 
    You always need
-      - kdiff3-0.9.80.tar.gz
+      - kdiff3-0.9.81.tar.gz
 
    For building the KDE3-version
       - KDE>=3.1 and QT>=3.1-libraries.
       - gcc, g++ with version >=3.2
 
    For building the Qt-only-version
-      - QT-libraries (version 2.3.0 or >=3.1.0).
+      - QT-libraries (version >=3.1.0).
         (www.trolltech.com)
       - for Un*x:    gcc, g++ with version >=3.2
       - for Windows: VC6
@@ -64,7 +67,7 @@ Installation for KDE3:
    - Make sure your shell-variable QTDIR is correct. (echo $QTDIR).
      If it doesn't contain the correct path, type
         export QTDIR=your_path_to_qt  (e.g. /usr/lib/qt3)
-   - cd into the directory kdiff3-0.9.80 and type
+   - cd into the directory kdiff3-0.9.81 and type
    - ./configure --prefix=/opt/kde3           (your KDE3 directory here)
    - (make clean)                    (Required if you already compiled once.)
    - make                            (Run compilation)
@@ -87,13 +90,22 @@ Installation for KDE3:
             executable. To avoid confusion, better remove the local version then.
             (rm -R `find $KDEHOME -name "*kdiff3*" -not -name "kdiff3*rc"`)
 
+Upgrading KDiff3 for KDE:
+   If you already installed an older version or KDiff3 and you have the 
+   impression, that the new version doesn't work as described, you should try to 
+   remove all files belonging to KDiff3 before reinstalling. 
+   Try this search command to locate KDiff3-related files:
+      find $HOME/.kde /usr /opt -iname "*kdiff3*"
+   (Will take a few minutes.)
+   
+
 
 Installation for the Qt-only-platforms for Un*x:
    (for Qt >=3.1.0)
    - Make sure your shell-variable QTDIR is correct. (echo $QTDIR).
      If it doesn't contain the correct path, type
         export QTDIR=your_path_to_qt  (e.g. /usr/lib/qt)
-   - cd into the directory kdiff3-0.9.80/src and type
+   - cd into the directory kdiff3-0.9.81/src and type
    - make -f Makefile.qt
    - make -f Makefile.qt install     (You must have root-rights for this step.)
      (copies the files into /usr/local/bin and /usr/local/share/doc/kdiff3)
@@ -103,17 +115,7 @@ Installation for the Qt-only-platforms for Un*x:
 
 
 Build for Windows:
- (Qt 2.3-non commercial)
-   - Start some console.
-   - Make sure your shell-variable QTDIR is correct. (echo %QTDIR%).
-     If it doesn't contain the correct path, type
-        set QTDIR=your_path_to_qt  (e.g. c:\qt)
-   - Make sure your VC6 environment variables are set. Run VCVARS32.BAT.
-     (Typically located in "c:\programs\Microsoft Visual Studio\VC98\bin")
-   - cd into the directory kdiff3-0.9.80\src and type
-   - nmake /f Makefile.win_qt230
-   - For execution the Qt-DLL must be in the path or in the same directory.
- For newer versions of Qt, use qmake and kdiff3.pro to generate
+ Use qmake and kdiff3.pro to generate
  an appropriate Makefile.
      qmake kdiff3.pro -o Makefile
 
@@ -124,7 +126,7 @@ Build for Mac:
    - qmake kdiff3.pro -o Makefile
    - If you succeed, I'd like to know how so I can document it here.
 
-
+   
 Start from commandline:
 - Comparing 2 files:     kdiff3 file1 file2
 - Merging 2 files:       kdiff3 file1 file2 -o outputfile

@@ -273,6 +273,6 @@ extern "C"
     {
         return new KDiff3PartFactory;
     }
-};
+}
 
 #include "kdiff3_part.moc"

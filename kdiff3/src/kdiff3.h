@@ -253,6 +253,7 @@ class KDiff3App : public QSplitter
    bool runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffList& diffList );
    bool canContinue();
 
+   void choose(int choice);
 
    KActionCollection* actionCollection();
    KStatusBar*        statusBar();

@@ -844,10 +844,10 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
    std::vector<char> buffer(100000);
    Q_LONG bufSize = buffer.size();
    Q_LONG srcSize = srcFile.size();
-   while ( srcSize > 0 )
+   while ( srcSize > 0 && !g_pProgressDialog->wasCancelled() )
    {
       Q_LONG readSize = srcFile.readBlock( &buffer[0], min2( srcSize, bufSize ) );
-      if ( readSize==-1 )
+      if ( readSize==-1 || readSize==0 )
       {
          m_pFileAccess->m_statusText = i18n("Error during file copy operation: Reading failed. Filename: %1").arg(srcName);
          return false;
@@ -856,7 +856,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
       while ( readSize > 0 )
       {
          Q_LONG writeSize = destFile.writeBlock( &buffer[0], readSize );
-         if ( writeSize==-1 )
+         if ( writeSize==-1 || writeSize==0 )
          {
             m_pFileAccess->m_statusText = i18n("Error during file copy operation: Writing failed. Filename: %1").arg(destName);
             return false;
@@ -864,6 +864,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
          readSize -= writeSize;
       }
       destFile.flush();
+      g_pProgressDialog->setSubCurrent( (double)(srcFile.size()-srcSize)/srcFile.size(), false );
    }
    srcFile.close();
    destFile.close();

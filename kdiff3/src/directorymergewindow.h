@@ -140,9 +140,12 @@ public:
    int totalColumnWidth();
    bool isSyncMode() { return m_bSyncMode; }
    void initDirectoryMergeActions( QObject* pKDiff3App, KActionCollection* ac );
-   void updateAvailabilities( bool bDirCompare, bool bDiffWindowVisible );
+   void updateAvailabilities( bool bDirCompare, bool bDiffWindowVisible,
+      KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC );
 
    virtual void keyPressEvent( QKeyEvent* e );
+   virtual void focusInEvent( QFocusEvent* e );
+   virtual void focusOutEvent( QFocusEvent* e );
 
 public slots:
    void reload();
@@ -278,6 +281,7 @@ protected slots:
 
 class DirectoryMergeInfo : public QFrame
 {
+   Q_OBJECT
 public:
    DirectoryMergeInfo( QWidget* pParent );
    void setInfo(

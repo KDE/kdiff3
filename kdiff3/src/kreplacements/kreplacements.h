@@ -15,13 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * $Log$
- * Revision 1.2  2003/12/09 20:26:39  joachim99
- * 0.9.80
- *
- ***************************************************************************/
-
 #ifndef KREPLACEMENTS_H
 #define KREPLACEMENTS_H
 
@@ -40,6 +33,8 @@
 #include <qstringlist.h>
 
 #include <map>
+
+QString getTranslationDir();
 
 class KMainWindow;
 
@@ -232,6 +227,7 @@ public:
 
 class KAction : public QAction
 {
+   Q_OBJECT
 public:
    KAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bToggle=false, bool bMenu=true);
    KAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bToggle=false, bool bMenu=true);

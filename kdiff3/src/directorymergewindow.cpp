@@ -365,6 +365,7 @@ bool DirectoryMergeWindow::init
 
    clear();
 
+   m_mergeItemList.clear();
    m_currentItemForOperation = m_mergeItemList.end();
 
    m_dirA = dirA;
@@ -396,7 +397,7 @@ bool DirectoryMergeWindow::init
         (m_dirDest.prettyAbsPath() == m_dirA.prettyAbsPath()  ||  m_dirDest.prettyAbsPath()==m_dirB.prettyAbsPath() ) )
    {
       KMessageBox::error(this,
-         i18n( "The destination directory must not be the same as A or B when"
+         i18n( "The destination directory must not be the same as A or B when "
          "three directories are merged.\nCheck again before continuing."),
          i18n("Parameter Warning"));
       return false;
@@ -610,8 +611,8 @@ static void setMergeOperation( QListViewItem* pLVI, e_MergeOperation eMergeOp )
 
 // Merge current item (merge mode)
 void DirectoryMergeWindow::slotCurrentDoNothing() { setMergeOperation(currentItem(), eNoOperation ); }
-void DirectoryMergeWindow::slotCurrentChooseA()   { setMergeOperation(currentItem(), eCopyAToDest ); }
-void DirectoryMergeWindow::slotCurrentChooseB()   { setMergeOperation(currentItem(), eCopyBToDest ); }
+void DirectoryMergeWindow::slotCurrentChooseA()   { setMergeOperation(currentItem(), m_bSyncMode ? eCopyAToB : eCopyAToDest ); }
+void DirectoryMergeWindow::slotCurrentChooseB()   { setMergeOperation(currentItem(), m_bSyncMode ? eCopyBToA : eCopyBToDest ); }
 void DirectoryMergeWindow::slotCurrentChooseC()   { setMergeOperation(currentItem(), eCopyCToDest ); }
 void DirectoryMergeWindow::slotCurrentMerge()
 {
@@ -677,6 +678,14 @@ void DirectoryMergeWindow::keyPressEvent( QKeyEvent* e )
    QListView::keyPressEvent(e);
 }
 
+void DirectoryMergeWindow::focusInEvent(QFocusEvent*)
+{
+   updateAvailabilities();
+}
+void DirectoryMergeWindow::focusOutEvent(QFocusEvent*)
+{
+   updateAvailabilities();
+}
 
 void DirectoryMergeWindow::setAllMergeOperations( e_MergeOperation eDefaultOperation )
 {
@@ -1600,8 +1609,15 @@ void DirectoryMergeWindow::slotRunOperationForCurrentItem()
    if ( m_mergeItemList.empty() )
    {
       QListViewItem* pBegin = currentItem();
+      QListViewItem* pEnd = pBegin;
+      while ( pEnd!=0 && pEnd->nextSibling()==0 )
+      {
+         pEnd = pEnd->parent();
+      }
+      if ( pEnd!=0 ) 
+         pEnd=pEnd->nextSibling();
 
-      prepareMergeStart( pBegin, pBegin->nextSibling(), bVerbose );
+      prepareMergeStart( pBegin, pEnd, bVerbose );
       mergeContinue(true, bVerbose);
    }
    else
@@ -1671,7 +1687,7 @@ void DirectoryMergeWindow::mergeContinue(bool bStart, bool bVerbose)
    // Count the number of completed items (for the progress bar).
    for( MergeItemList::iterator i = m_mergeItemList.begin(); i!=m_mergeItemList.end(); ++i )
    {
-      DirMergeItem* pDMI = static_cast<DirMergeItem*>(*i);
+      DirMergeItem* pDMI = *i;
       ++nrOfItems;
       if ( pDMI->m_pMFI->m_bOperationComplete )
          ++nrOfCompletedItems;
@@ -2117,14 +2133,10 @@ bool DirectoryMergeWindow::makeDir( const QString& name, bool bQuiet )
 }
 
 
-
-
-
 DirectoryMergeInfo::DirectoryMergeInfo( QWidget* pParent )
 : QFrame(pParent)
 {
    QVBoxLayout *topLayout = new QVBoxLayout( this );
-
 
    QGridLayout *grid = new QGridLayout( topLayout );
    grid->setColStretch(1,10);
@@ -2261,7 +2273,7 @@ void DirectoryMergeWindow::initDirectoryMergeActions( QObject* pKDiff3App, KActi
    dirMergeCurrent = new KAction(i18n("Merge Current File"), QIconSet(QPixmap(startmerge)), 0, pKDiff3App, SLOT(slotMergeCurrentFile()), ac, "merge_current");
    dirFoldAll = new KAction(i18n("Fold All Subdirs"), 0, p, SLOT(slotFoldAllSubdirs()), ac, "dir_fold_all");
    dirUnfoldAll = new KAction(i18n("Unfold All Subdirs"), 0, p, SLOT(slotUnfoldAllSubdirs()), ac, "dir_unfold_all");
-   dirRescan = new KAction(i18n("Rescan"), 0, p, SLOT(reload()), ac, "dir_rescan");
+   dirRescan = new KAction(i18n("Rescan"), SHIFT+Key_F5, p, SLOT(reload()), ac, "dir_rescan");
    dirChooseAEverywhere = new KAction(i18n("Choose A for All Items"), 0, p, SLOT(slotChooseAEverywhere()), ac, "dir_choose_a_everywhere");
    dirChooseBEverywhere = new KAction(i18n("Choose B for All Items"), 0, p, SLOT(slotChooseBEverywhere()), ac, "dir_choose_b_everywhere");
    dirChooseCEverywhere = new KAction(i18n("Choose C for All Items"), 0, p, SLOT(slotChooseCEverywhere()), ac, "dir_choose_c_everywhere");
@@ -2287,7 +2299,8 @@ void DirectoryMergeWindow::initDirectoryMergeActions( QObject* pKDiff3App, KActi
 }
 
 
-void DirectoryMergeWindow::updateAvailabilities( bool bDirCompare, bool bDiffWindowVisible )
+void DirectoryMergeWindow::updateAvailabilities( bool bDirCompare, bool bDiffWindowVisible,
+   KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC )
 {
    dirStartOperation->setEnabled( bDirCompare );
    dirRunOperationForCurrentItem->setEnabled( bDirCompare );
@@ -2317,13 +2330,24 @@ void DirectoryMergeWindow::updateAvailabilities( bool bDirCompare, bool bDiffWin
    bool bMergeMode = bThreeDirs || !m_bSyncMode;
    bool bFTConflict = pMFI==0 ? false : conflictingFileTypes(*pMFI);
 
+   bool bDirWindowHasFocus = isVisible() && hasFocus();
+   
    dirCurrentDoNothing->setEnabled( bItemActive && bMergeMode );
    dirCurrentChooseA->setEnabled( bItemActive && bMergeMode && pMFI->m_bExistsInA );
    dirCurrentChooseB->setEnabled( bItemActive && bMergeMode && pMFI->m_bExistsInB );
    dirCurrentChooseC->setEnabled( bItemActive && bMergeMode && pMFI->m_bExistsInC );
    dirCurrentMerge->setEnabled( bItemActive && bMergeMode && !bFTConflict );
    dirCurrentDelete->setEnabled( bItemActive && bMergeMode );
-
+   if ( bDirWindowHasFocus )
+   {
+      chooseA->setEnabled( bItemActive && pMFI->m_bExistsInA );
+      chooseB->setEnabled( bItemActive && pMFI->m_bExistsInB );
+      chooseC->setEnabled( bItemActive && pMFI->m_bExistsInC );
+      chooseA->setChecked( false );
+      chooseB->setChecked( false );
+      chooseC->setChecked( false );
+   }
+   
    dirCurrentSyncDoNothing->setEnabled( bItemActive && !bMergeMode );
    dirCurrentSyncCopyAToB->setEnabled( bItemActive && !bMergeMode && pMFI->m_bExistsInA );
    dirCurrentSyncCopyBToA->setEnabled( bItemActive && !bMergeMode && pMFI->m_bExistsInB );

@@ -1,11 +1,10 @@
 /* File I/O for GNU DIFF.
 
    Modified for KDiff3 by Joachim Eibl 2003.
+   The original file was part of GNU DIFF.
 
    Copyright (C) 1988, 1989, 1992, 1993, 1994, 1995, 1998, 2001, 2002
    Free Software Foundation, Inc.
-
-   This file is part of GNU DIFF.
 
    GNU DIFF is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,10 +23,6 @@
 
 #include "gnudiff_diff.h"
 #include <stdlib.h>
-#include "gnudiff_xalloc.h"
-
-namespace GnuDiff
-{
 
 /* Rotate an unsigned value to the left.  */
 #define ROL(v, n) ((v) << (n) | (v) >> (sizeof (v) * CHAR_BIT - (n)))
@@ -81,8 +76,7 @@ static lin equivs_alloc;
 /* Split the file into lines, simultaneously computing the equivalence
    class for each line.  */
 
-static void
-find_and_hash_each_line (struct file_data *current)
+void GnuDiff::find_and_hash_each_line (struct file_data *current)
 {
   hash_value h;
   unsigned char const *p = (unsigned char const *) current->prefix_end;
@@ -379,8 +373,7 @@ find_and_hash_each_line (struct file_data *current)
    but remember that we had to add one.
    Strip trailing CRs, if that was requested.  */
 
-static void
-prepare_text (struct file_data *current)
+void GnuDiff::prepare_text (struct file_data *current)
 {
   size_t buffered = current->buffered;
   char *p = FILE_BUFFER (current);
@@ -430,8 +423,7 @@ guess_lines (lin n, size_t s, size_t t)
 /* Given a vector of two file_data objects, find the identical
    prefixes and suffixes of each object.  */
 
-static void
-find_identical_ends (struct file_data filevec[])
+void GnuDiff::find_identical_ends (struct file_data filevec[])
 {
   word *w0, *w1;
   char *p0, *p1, *buffer0, *buffer1;
@@ -657,7 +649,7 @@ verify (enough_prime_offsets,
    If PRETEND_BINARY is nonzero, pretend they are binary regardless.  */
 
 bool
-read_files (struct file_data filevec[], bool /*pretend_binary*/)
+GnuDiff::read_files (struct file_data filevec[], bool /*pretend_binary*/)
 {
   int i;
 
@@ -692,5 +684,3 @@ read_files (struct file_data filevec[], bool /*pretend_binary*/)
 
   return 0;
 }
-
-} // namespace GnuDiff

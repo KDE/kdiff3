@@ -101,6 +101,8 @@ QString createTempFile( const LineData* p, int size, bool bIgnoreWhiteSpace, boo
 
 bool KDiff3App::runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffList& diffList )
 {
+   static GnuDiff gnuDiff;
+   
    g_pProgressDialog->setSubCurrent(0);
 
    diffList.clear();
@@ -109,74 +111,78 @@ bool KDiff3App::runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffL
       Diff d( 0,0,0);
       if ( p1[0].pLine==0 && p2[0].pLine==0 && size1 == size2 )
          d.nofEquals = size1;
-      else if (p1[0].pLine!=0) d.diff1=size1;
-      else if (p2[0].pLine!=0) d.diff2=size2;
-
-      diffList.push_back(d);
-      return true;
-   }
-
-   GnuDiff::comparison comparisonInput;
-   memset( &comparisonInput, 0, sizeof(comparisonInput) );
-   comparisonInput.parent = 0;
-   comparisonInput.file[0].buffer = (word*)p1[0].pLine;//ptr to buffer
-   comparisonInput.file[0].buffered = p1[size1-1].pLine-p1[0].pLine+p1[size1-1].size; // size of buffer
-   comparisonInput.file[1].buffer = (word*)p2[0].pLine;//ptr to buffer
-   comparisonInput.file[1].buffered = p2[size2-1].pLine-p2[0].pLine+p2[size2-1].size; // size of buffer
-
-   GnuDiff::ignore_white_space = GnuDiff::IGNORE_ALL_SPACE;  // I think nobody needs anything else ...
-   GnuDiff::bIgnoreWhiteSpace = true;
-   GnuDiff::bIgnoreNumbers    = m_pOptionDialog->m_bIgnoreNumbers;
-   GnuDiff::minimal = m_pOptionDialog->m_bTryHard;
-   GnuDiff::ignore_case = false;  //  m_pOptionDialog->m_bUpCase is applied while reading.
-   GnuDiff::change* script = GnuDiff::diff_2_files( &comparisonInput );
-
-   int equalLinesAtStart =  comparisonInput.file[0].prefix_lines;
-   int currentLine1 = 0;
-   int currentLine2 = 0;
-   GnuDiff::change* p=0;
-   for (GnuDiff::change* e = script; e; e = p)
-   {
-      Diff d(0,0,0);
-      d.nofEquals = e->line0 - currentLine1;
-      assert( d.nofEquals == e->line1 - currentLine2 );
-      d.diff1 = e->deleted;
-      d.diff2 = e->inserted;
-      currentLine1 += d.nofEquals + d.diff1;
-      currentLine2 += d.nofEquals + d.diff2;
-      diffList.push_back(d);
-
-      p = e->link;
-      free (e);
-   }
-
-   if ( !diffList.empty() )
-   {
-      diffList.front().nofEquals += equalLinesAtStart;
-      currentLine1 += equalLinesAtStart;
-      currentLine2 += equalLinesAtStart;
-   }
-
-   if (size1-currentLine1==size2-currentLine2 )
-   {
-      Diff d( size1-currentLine1,0,0);
-      diffList.push_back(d);
-   }
-   else if ( !diffList.empty() )
-   {  // Only necessary for a files that end with a newline
-      int nofEquals = min2(size1-currentLine1,size2-currentLine2);
-      if ( nofEquals==0 )
+      else 
       {
-         diffList.back().diff1 += size1-currentLine1;
-         diffList.back().diff2 += size2-currentLine2;
+         d.diff1=size1;
+         d.diff2=size2;
       }
-      else
+
+      diffList.push_back(d);
+   }
+   else
+   {   
+      GnuDiff::comparison comparisonInput;
+      memset( &comparisonInput, 0, sizeof(comparisonInput) );
+      comparisonInput.parent = 0;
+      comparisonInput.file[0].buffer = (word*)p1[0].pLine;//ptr to buffer
+      comparisonInput.file[0].buffered = p1[size1-1].pLine-p1[0].pLine+p1[size1-1].size; // size of buffer
+      comparisonInput.file[1].buffer = (word*)p2[0].pLine;//ptr to buffer
+      comparisonInput.file[1].buffered = p2[size2-1].pLine-p2[0].pLine+p2[size2-1].size; // size of buffer
+   
+      gnuDiff.ignore_white_space = GnuDiff::IGNORE_ALL_SPACE;  // I think nobody needs anything else ...
+      gnuDiff.bIgnoreWhiteSpace = true;
+      gnuDiff.bIgnoreNumbers    = m_pOptionDialog->m_bIgnoreNumbers;
+      gnuDiff.minimal = m_pOptionDialog->m_bTryHard;
+      gnuDiff.ignore_case = false;  //  m_pOptionDialog->m_bUpCase is applied while reading.
+      GnuDiff::change* script = gnuDiff.diff_2_files( &comparisonInput );
+   
+      int equalLinesAtStart =  comparisonInput.file[0].prefix_lines;
+      int currentLine1 = 0;
+      int currentLine2 = 0;
+      GnuDiff::change* p=0;
+      for (GnuDiff::change* e = script; e; e = p)
       {
-         Diff d( nofEquals,size1-currentLine1-nofEquals,size2-currentLine2-nofEquals);
+         Diff d(0,0,0);
+         d.nofEquals = e->line0 - currentLine1;
+         assert( d.nofEquals == e->line1 - currentLine2 );
+         d.diff1 = e->deleted;
+         d.diff2 = e->inserted;
+         currentLine1 += d.nofEquals + d.diff1;
+         currentLine2 += d.nofEquals + d.diff2;
+         diffList.push_back(d);
+   
+         p = e->link;
+         free (e);
+      }
+   
+      if ( !diffList.empty() )
+      {
+         diffList.front().nofEquals += equalLinesAtStart;
+         currentLine1 += equalLinesAtStart;
+         currentLine2 += equalLinesAtStart;
+      }
+   
+      if (size1-currentLine1==size2-currentLine2 )
+      {
+         Diff d( size1-currentLine1,0,0);
          diffList.push_back(d);
       }
+      else if ( !diffList.empty() )
+      {  // Only necessary for a files that end with a newline
+         int nofEquals = min2(size1-currentLine1,size2-currentLine2);
+         if ( nofEquals==0 )
+         {
+            diffList.back().diff1 += size1-currentLine1;
+            diffList.back().diff2 += size2-currentLine2;
+         }
+         else
+         {
+            Diff d( nofEquals,size1-currentLine1-nofEquals,size2-currentLine2-nofEquals);
+            diffList.push_back(d);
+         }
+      }
    }
-
+   
 #ifndef NDEBUG
    // Verify difflist
    {
@@ -630,6 +636,15 @@ void KDiff3App::init( bool bAuto )
    }
 
    QTimer::singleShot( 10, this, SLOT(slotAfterFirstPaint()) );
+   
+   if ( bVisibleMergeResultWindow && m_pMergeResultWindow )
+   {
+      m_pMergeResultWindow->setFocus();
+   }
+   else if(m_pDiffTextWindow1)
+   {
+      m_pDiffTextWindow1->setFocus();
+   }
 }
 
 
@@ -1433,43 +1448,35 @@ void KDiff3App::slotGoNextDelta()
    if (m_pMergeResultWindow)  m_pMergeResultWindow->slotGoNextDelta();
 }
 
+void KDiff3App::choose( int choice )
+{
+   if (!m_bTimerBlock )
+   {
+      if ( m_pDirectoryMergeWindow && m_pDirectoryMergeWindow->hasFocus() )
+      {
+         if (choice==A) m_pDirectoryMergeWindow->slotCurrentChooseA();
+         if (choice==B) m_pDirectoryMergeWindow->slotCurrentChooseB();
+         if (choice==C) m_pDirectoryMergeWindow->slotCurrentChooseC();
+         
+         chooseA->setChecked(false);
+         chooseB->setChecked(false);
+         chooseC->setChecked(false);
+      }
+      else if ( m_pMergeResultWindow )
+      {
+         m_pMergeResultWindow->choose( choice );
+         if ( autoAdvance->isChecked() )
+         {
+            m_bTimerBlock = true;
+            QTimer::singleShot( m_pOptionDialog->m_autoAdvanceDelay, this, SLOT( slotGoNextUnsolvedConflict() ) );
+         }
+      }
+   }
+}
 
-void KDiff3App::slotChooseA()
-{
-   if (m_pMergeResultWindow && ! m_bTimerBlock )
-   {
-      m_pMergeResultWindow->choose(A);
-      if ( autoAdvance->isChecked() )
-      {
-         m_bTimerBlock = true;
-         QTimer::singleShot( m_pOptionDialog->m_autoAdvanceDelay, this, SLOT( slotGoNextUnsolvedConflict() ) );
-      }
-   }
-}
-void KDiff3App::slotChooseB()
-{
-   if ( m_pMergeResultWindow && ! m_bTimerBlock )
-   {
-      m_pMergeResultWindow->choose(B);
-      if ( autoAdvance->isChecked()  )
-      {
-         m_bTimerBlock = true;
-         QTimer::singleShot( m_pOptionDialog->m_autoAdvanceDelay, this, SLOT( slotGoNextUnsolvedConflict() ) );
-      }
-   }
-}
-void KDiff3App::slotChooseC()
-{
-   if ( m_pMergeResultWindow && ! m_bTimerBlock )
-   {
-      m_pMergeResultWindow->choose(C);
-      if ( autoAdvance->isChecked() )
-      {
-         m_bTimerBlock = true;
-         QTimer::singleShot( m_pOptionDialog->m_autoAdvanceDelay, this, SLOT( slotGoNextUnsolvedConflict() ) );
-      }
-   }
-}
+void KDiff3App::slotChooseA() { choose( A ); }
+void KDiff3App::slotChooseB() { choose( B ); }
+void KDiff3App::slotChooseC() { choose( C ); }
 
 // bConflictsOnly automatically choose for conflicts only (true) or for everywhere
 static void mergeChooseGlobal( KDiff3App* pThis, MergeResultWindow* pMRW, int selector, bool bConflictsOnly, bool bWhiteSpaceOnly )
@@ -2026,7 +2033,7 @@ void KDiff3App::slotUpdateAvailabilities()
    bool bDiffWindowVisible = m_pMainWidget != 0 && m_pMainWidget->isVisible();
    bool bMergeEditorVisible = m_pMergeWindowFrame !=0  &&  m_pMergeWindowFrame->isVisible();
 
-   m_pDirectoryMergeWindow->updateAvailabilities( m_bDirCompare, bDiffWindowVisible );
+   m_pDirectoryMergeWindow->updateAvailabilities( m_bDirCompare, bDiffWindowVisible, chooseA, chooseB, chooseC );
 
    dirShowBoth->setEnabled( m_bDirCompare );
    dirViewToggle->setEnabled(
@@ -2034,14 +2041,19 @@ void KDiff3App::slotUpdateAvailabilities()
       (!m_pDirectoryMergeSplitter->isVisible()  &&  m_pMainWidget!=0 && m_pMainWidget->isVisible() ||
         m_pDirectoryMergeSplitter->isVisible()  &&  m_pMainWidget!=0 && !m_pMainWidget->isVisible() && bTextDataAvailable )
       );
+      
+   bool bDirWindowHasFocus = m_pDirectoryMergeSplitter->isVisible() && m_pDirectoryMergeWindow->hasFocus();
 
    showWhiteSpaceCharacters->setEnabled( bDiffWindowVisible );
    autoAdvance->setEnabled( bMergeEditorVisible );
    autoSolve->setEnabled( bMergeEditorVisible  &&  m_bTripleDiff );
    unsolve->setEnabled( bMergeEditorVisible );
-   chooseA->setEnabled( bMergeEditorVisible );
-   chooseB->setEnabled( bMergeEditorVisible );
-   chooseC->setEnabled( bMergeEditorVisible  &&  m_bTripleDiff );
+   if ( !bDirWindowHasFocus )
+   {
+      chooseA->setEnabled( bMergeEditorVisible );
+      chooseB->setEnabled( bMergeEditorVisible );
+      chooseC->setEnabled( bMergeEditorVisible  &&  m_bTripleDiff );
+   }
    chooseAEverywhere->setEnabled( bMergeEditorVisible );
    chooseBEverywhere->setEnabled( bMergeEditorVisible );
    chooseCEverywhere->setEnabled( bMergeEditorVisible  &&  m_bTripleDiff );

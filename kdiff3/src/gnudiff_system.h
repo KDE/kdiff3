@@ -1,11 +1,10 @@
 /* System dependent declarations.
 
    Modified for KDiff3 by Joachim Eibl 2003.
+   The original file was part of GNU DIFF.
 
    Copyright (C) 1988, 1989, 1992, 1993, 1994, 1995, 1998, 2001, 2002
    Free Software Foundation, Inc.
-
-   This file is part of GNU DIFF.
 
    GNU DIFF is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -22,7 +21,12 @@
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
+#ifndef GNUDIFF_SYSTEM_H
+#define GNUDIFF_SYSTEM_H
+
 //#include <config.h>
+
+
 
 /* Don't bother to support K&R C compilers any more; it's not worth
    the trouble.  These macros prevent some library modules from being
@@ -131,3 +135,5 @@ typedef ptrdiff_t lin;
 verify (lin_is_signed, TYPE_SIGNED (lin));
 verify (lin_is_wide_enough, sizeof (ptrdiff_t) <= sizeof (lin));
 verify (lin_is_printable_as_long, sizeof (lin) <= sizeof (long));
+
+#endif
