@@ -15,16 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * $Log$
- * Revision 1.2  2003/10/14 20:51:45  joachim99
- * Bugfix for Syncmode.
- *
- * Revision 1.1  2003/10/06 18:38:48  joachim99
- * KDiff3 version 0.9.70
- *                                                                   *
- ***************************************************************************/
-
 #ifndef DIRECTORY_MERGE_WINDOW_H
 #define DIRECTORY_MERGE_WINDOW_H
 
@@ -44,6 +34,9 @@ class StatusInfo;
 class DirectoryMergeInfo;
 class OneDirectoryInfo;
 class QLabel;
+class KAction;
+class KToggleAction;
+class KActionCollection;
 
 enum e_MergeOperation
 {
@@ -146,12 +139,17 @@ public:
    bool isDirectoryMergeInProgress() { return m_bRealMergeStarted; }
    int totalColumnWidth();
    bool isSyncMode() { return m_bSyncMode; }
+   void initDirectoryMergeActions( QObject* pKDiff3App, KActionCollection* ac );
+   void updateAvailabilities( bool bDirCompare, bool bDiffWindowVisible );
+
+   virtual void keyPressEvent( QKeyEvent* e );
 
 public slots:
-   void mergeContinue();
    void reload();
    void mergeCurrentFile();
    void compareCurrentFile();
+   void slotRunOperationForAllItems();
+   void slotRunOperationForCurrentItem();
    void mergeResultSaved(const QString& fileName);
    void slotChooseAEverywhere();
    void slotChooseBEverywhere();
@@ -160,8 +158,25 @@ public slots:
    void slotNoOpEverywhere();
    void slotFoldAllSubdirs();
    void slotUnfoldAllSubdirs();
+   // Merge current item (merge mode)
+   void slotCurrentDoNothing();
+   void slotCurrentChooseA();
+   void slotCurrentChooseB();
+   void slotCurrentChooseC();
+   void slotCurrentMerge();
+   void slotCurrentDelete();
+   // Sync current item
+   void slotCurrentCopyAToB();
+   void slotCurrentCopyBToA();
+   void slotCurrentDeleteA();
+   void slotCurrentDeleteB();
+   void slotCurrentDeleteAAndB();
+   void slotCurrentMergeToA();
+   void slotCurrentMergeToB();
+   void slotCurrentMergeToAAndB();
 
 protected:
+   void mergeContinue( bool bStart, bool bVerbose );
    void resizeEvent(QResizeEvent* e);
    bool m_bAllowResizeEvents;
 
@@ -171,6 +186,8 @@ protected:
    friend class MergeFileInfos;
 
    bool canContinue();
+   void prepareMergeStart( QListViewItem* pBegin, QListViewItem* pEnd, bool bVerbose );
+   bool executeMergeOperation( MergeFileInfos& mfi, bool& bSingleFileMerge );
 
    void scanDirectory( const QString& dirName, t_DirectoryList& dirList );
    void scanLocalDirectory( const QString& dirName, t_DirectoryList& dirList );
@@ -206,17 +223,49 @@ protected:
    bool m_bFollowFileLinks;
    bool m_bSimulatedMergeStarted;
    bool m_bRealMergeStarted;
-   bool m_bSingleFileOperationStarted;
    bool m_bError;
    bool m_bSyncMode;
    bool m_bDirectoryMerge; // if true, then merge is the default operation, otherwise it's diff.
 
    OptionDialog* m_pOptions;
    KIconLoader* m_pIconLoader;
-   DirMergeItem* m_pCurrentItemForOperation;
    StatusMessageBox* m_pStatusMessageBox;
    DirectoryMergeInfo* m_pDirectoryMergeInfo;
    StatusInfo* m_pStatusInfo;
+
+   typedef std::list<DirMergeItem*> MergeItemList;
+   MergeItemList m_mergeItemList;
+   MergeItemList::iterator m_currentItemForOperation;
+
+   KAction* dirStartOperation;
+   KAction* dirRunOperationForCurrentItem;
+   KAction* dirCompareCurrent;
+   KAction* dirMergeCurrent;
+   KAction* dirRescan;
+   KAction* dirChooseAEverywhere;
+   KAction* dirChooseBEverywhere;
+   KAction* dirChooseCEverywhere;
+   KAction* dirAutoChoiceEverywhere;
+   KAction* dirDoNothingEverywhere;
+   KAction* dirFoldAll;
+   KAction* dirUnfoldAll;
+
+   KAction* dirCurrentDoNothing;
+   KAction* dirCurrentChooseA;
+   KAction* dirCurrentChooseB;
+   KAction* dirCurrentChooseC;
+   KAction* dirCurrentMerge;
+   KAction* dirCurrentDelete;
+
+   KAction* dirCurrentSyncDoNothing;
+   KAction* dirCurrentSyncCopyAToB;
+   KAction* dirCurrentSyncCopyBToA;
+   KAction* dirCurrentSyncDeleteA;
+   KAction* dirCurrentSyncDeleteB;
+   KAction* dirCurrentSyncDeleteAAndB;
+   KAction* dirCurrentSyncMergeToA;
+   KAction* dirCurrentSyncMergeToB;
+   KAction* dirCurrentSyncMergeToAAndB;
 signals:
    void startDiffMerge(QString fn1,QString fn2, QString fn3, QString ofn, QString,QString,QString);
    void checkIfCanContinue( bool* pbContinue );

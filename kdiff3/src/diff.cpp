@@ -15,19 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * $Log$
- * Revision 1.3  2003/10/15 19:54:41  joachim99
- * Handling of pFirstNonWhiteChar corrected.
- *
- * Revision 1.2  2003/10/14 20:49:56  joachim99
- * SourceData::preprocess(): Fix for several subsequent CR-characters.
- *
- * Revision 1.1  2003/10/06 18:38:48  joachim99
- * KDiff3 version 0.9.70
- *                                                                   *
- ***************************************************************************/
-
 #include <stdio.h>
 #include <iostream>
 
@@ -226,16 +213,160 @@ void SourceData::preprocess( bool bPreserveCR )
    m_vSize = lines;
 }
 
-// read and prepocess file for line matching input data
-void SourceData::readLMPPFile( SourceData* pOrigSource, const QString& ppCmd, bool bUpCase )
+
+// Must not be entered, when within a comment.
+// Returns either at a newline-character p[i]=='\n' or when i==size.
+// A line that contains only comments is still "white".
+// Comments in white lines must remain, while comments in
+// non-white lines are overwritten with spaces.
+static void checkLineForComments(
+   char* p,   // pointer to start of buffer
+   int& i,    // index of current position (in, out)
+   int size,  // size of buffer
+   bool& bWhite,          // false if this line contains nonwhite characters (in, out)
+   bool& bCommentInLine,  // true if any comment is within this line (in, out)
+   bool& bStartsOpenComment  // true if the line ends within an comment (out)
+   )
 {
-   if ( ppCmd.isEmpty() || pOrigSource->m_bPreserve )
+   bStartsOpenComment = false;
+   for(; i<size; ++i )
+   {
+      // A single apostroph ' has prio over a double apostroph " (e.g. '"')
+      // (if not in a string)
+      if ( p[i]=='\'' )
+      {
+         bWhite = false;
+         ++i;
+         for( ; i<size && p[i]!='\'' && p[i]!='\n'; ++i)
+            ;
+         if (p[i]=='\'') ++i;
+      }
+
+      // Strings have priority over comments: e.g. "/* Not a comment, but a string. */"
+      else if ( p[i]=='"' )
+      {
+         bWhite = false;
+         ++i;
+         for( ; i<size && !(p[i]=='"' && p[i-1]!='\\') && p[i]!='\n'; ++i)
+            ;
+         if (p[i]=='"') ++i;
+      }
+
+      // C++-comment
+      else if ( p[i]=='/' && i+1<size && p[i+1] =='/' )
+      {
+         int commentStart = i;
+         bCommentInLine = true;
+         i+=2;
+         for( ; i<size && p[i]!='\n'; ++i)
+            ;
+         if ( !bWhite )
+         {
+            memset( &p[commentStart], ' ', i-commentStart );
+         }
+         return;
+      }
+
+      // C-comment
+      else if ( p[i]=='/' && i+1<size && p[i+1] =='*' )
+      {
+         int commentStart = i;
+         bCommentInLine = true;
+         i+=2;
+         for( ; i<size && p[i]!='\n'; ++i)
+         {
+            if ( i+1<size && p[i]=='*' && p[i+1]=='/')  // end of the comment
+            {
+               i+=2;
+
+               // More comments in the line?
+               checkLineForComments( p, i, size, bWhite, bCommentInLine, bStartsOpenComment );
+               if ( !bWhite )
+               {
+                  memset( &p[commentStart], ' ', i-commentStart );
+               }
+               return;
+            }
+         }
+         bStartsOpenComment = true;
+         return;
+      }
+
+
+      if (p[i]=='\n' || i>=size )
+      {
+         return;
+      }
+      else if ( !isspace(p[i]) )
+      {
+         bWhite = false;
+      }
+   }
+}
+
+// Modifies the input data, and replaces C/C++ comments with whitespace
+// when the line contains other data too. If the line contains only
+// a comment or white data, remember this in the flag bContainsPureComment.
+void SourceData::removeComments( LineData* pLD )
+{
+   int line=0;
+   char* p = (char*)m_pBuf;
+   bool bWithinComment=false;
+   int size = m_size;
+   for(int i=0; i<size; ++i )
+   {
+//      std::cout << "2        " << std::string(&p[i], m_v[line].size) << std::endl;
+      bool bWhite = true;
+      bool bCommentInLine = false;
+
+      if ( bWithinComment )
+      {
+         int commentStart = i;
+         bCommentInLine = true;
+
+         for( ; i<size && p[i]!='\n'; ++i)
+         {
+            if ( i+1<size && p[i]=='*' && p[i+1]=='/')  // end of the comment
+            {
+               i+=2;
+
+               // More comments in the line?
+               checkLineForComments( p, i, size, bWhite, bCommentInLine, bWithinComment );
+               if ( !bWhite )
+               {
+                  memset( &p[commentStart], ' ', i-commentStart );
+               }
+               break;
+            }
+         }
+      }
+      else
+      {
+         checkLineForComments( p, i, size, bWhite, bCommentInLine, bWithinComment );
+      }
+
+      // end of line
+      assert( i>=size || p[i]=='\n');
+      pLD[line].bContainsPureComment = bCommentInLine && bWhite;
+/*      std::cout << line << " : " <<
+       ( bCommentInLine ?  "c" : " " ) <<
+       ( bWhite ? "w " : "  ") <<
+       std::string(pLD[line].pLine, pLD[line].size) << std::endl;*/
+
+      ++line;
+   }
+}
+
+// read and preprocess file for line matching input data
+void SourceData::readLMPPFile( SourceData* pOrigSource, const QString& ppCmd, bool bUpCase, bool bRemoveComments )
+{
+   if ( ( ppCmd.isEmpty() && !bRemoveComments ) || pOrigSource->m_bPreserve )
    {
       reset();
    }
    else
    {
-      m_fileName = pOrigSource->m_fileAccess.absFilePath();
+      setFilename( pOrigSource->m_fileAccess.absFilePath() );
       readPPFile( false, ppCmd, bUpCase );
       if ( m_vSize < pOrigSource->m_vSize )
       {
@@ -243,6 +374,8 @@ void SourceData::readLMPPFile( SourceData* pOrigSource, const QString& ppCmd, bo
          m_vSize = pOrigSource->m_vSize;
       }
    }
+   if ( bRemoveComments && m_vSize==pOrigSource->m_vSize )
+      removeComments( &pOrigSource->m_v[0] );
 }
 
 
@@ -304,37 +437,6 @@ void SourceData::readFile( const QString& filename, bool bFollowLinks, bool bUpC
       return;
    }
 
-   /*
-
-   FILE* f = fopen( filename, "rb" );
-   if ( f==0 )
-   {
-      std::cerr << "File open error for file: '"<< filename <<"': ";
-      perror("");
-      return;
-   }
-
-   fseek( f, 0, SEEK_END );
-
-   m_size =  ftell(f);
-
-   fseek( f, 0, SEEK_SET );
-
-   m_pBuf = pBuf = new char[m_size+100];
-   int bytesRead = fread( pBuf, 1, m_size, f );
-   if( bytesRead != m_size )
-   {
-      std::cerr << "File read error for file: '"<< filename <<"': ";
-
-      perror("");
-      fclose(f);
-      m_size = 0;
-      delete pBuf;
-      m_pBuf = 0;
-      return;
-   }
-   fclose( f );
-   */
 
    if ( bUpCase )
    {
@@ -958,7 +1060,7 @@ void calcDiff3LineListTrim(
 */
 }
 
-void calcWhiteDiff3Lines(       
+void calcWhiteDiff3Lines(
    Diff3LineList& d3ll, LineData* pldA, LineData* pldB, LineData* pldC
    )
 {
@@ -966,9 +1068,9 @@ void calcWhiteDiff3Lines(
 
    for( ; i3!=d3ll.end(); ++i3 )
    {
-      i3->bWhiteLineA = ( (*i3).lineA == -1  ||  pldA[(*i3).lineA].whiteLine() );
-      i3->bWhiteLineB = ( (*i3).lineB == -1  ||  pldB[(*i3).lineB].whiteLine() );
-      i3->bWhiteLineC = ( (*i3).lineC == -1  ||  pldC[(*i3).lineC].whiteLine() );
+      i3->bWhiteLineA = ( (*i3).lineA == -1  ||  pldA[(*i3).lineA].whiteLine() || pldA[(*i3).lineA].bContainsPureComment );
+      i3->bWhiteLineB = ( (*i3).lineB == -1  ||  pldB[(*i3).lineB].whiteLine() || pldB[(*i3).lineB].bContainsPureComment );
+      i3->bWhiteLineC = ( (*i3).lineC == -1  ||  pldC[(*i3).lineC].whiteLine() || pldC[(*i3).lineC].bContainsPureComment );
    }
 }
 
@@ -995,7 +1097,7 @@ void debugLineCheck( Diff3LineList& d3ll, int size, int idx )
             KMessageBox::error(0, i18n(
                "Data loss error:\n"
                "If it is reproducable please contact the author.\n"
-               ), "Severe internal Error" );
+               ), i18n("Severe Internal Error") );
             assert(false);
             std::cerr << "Severe Internal Error.\n";
             ::exit(-1);
@@ -1009,24 +1111,198 @@ void debugLineCheck( Diff3LineList& d3ll, int size, int idx )
       KMessageBox::error(0, i18n(
          "Data loss error:\n"
          "If it is reproducable please contact the author.\n"
-         ), "Severe internal Error" );
+         ), i18n("Severe Internal Error") );
       assert(false);
       std::cerr << "Severe Internal Error.\n";
       ::exit(-1);
    }
 }
 
+inline bool equal( char c1, char c2, bool /*bStrict*/ )
+{
+   // If bStrict then white space doesn't match
+
+   //if ( bStrict &&  ( c1==' ' || c1=='\t' ) )
+   //   return false;
+
+   return c1==c2;
+}
+
+
+// My own diff-invention:
+template <class T>
+void calcDiff( const T* p1, int size1, const T* p2, int size2, DiffList& diffList, int match, int maxSearchRange )
+{
+   diffList.clear();
+
+   const T* p1start = p1;
+   const T* p2start = p2;
+   const T* p1end=p1+size1;
+   const T* p2end=p2+size2;
+   for(;;)
+   {
+      int nofEquals = 0;
+      while( p1!=p1end &&  p2!=p2end && equal(*p1, *p2, false) )
+      {
+         ++p1;
+         ++p2;
+         ++nofEquals;
+      }
+
+      bool bBestValid=false;
+      int bestI1=0;
+      int bestI2=0;
+      int i1=0;
+      int i2=0;
+      for( i1=0; ; ++i1 )
+      {
+         if ( &p1[i1]==p1end || ( bBestValid && i1>= bestI1+bestI2))
+         {
+            break;
+         }
+         for(i2=0;i2<maxSearchRange;++i2)
+         {
+            if( &p2[i2]==p2end ||  ( bBestValid && i1+i2>=bestI1+bestI2) )
+            {
+               break;
+            }
+            else if(  equal( p2[i2], p1[i1], true ) &&
+                      ( match==1 ||  abs(i1-i2)<3  || ( &p2[i2+1]==p2end  &&  &p1[i1+1]==p1end ) ||
+                         ( &p2[i2+1]!=p2end  &&  &p1[i1+1]!=p1end  && equal( p2[i2+1], p1[i1+1], false ))
+                      )
+                   )
+            {
+               if ( i1+i2 < bestI1+bestI2 || bBestValid==false )
+               {
+                  bestI1 = i1;
+                  bestI2 = i2;
+                  bBestValid = true;
+                  break;
+               }
+            }
+         }
+      }
+
+      // The match was found using the strict search. Go back if there are non-strict
+      // matches.
+      while( bestI1>=1 && bestI2>=1 && equal( p1[bestI1-1], p2[bestI2-1], false ) )
+      {
+         --bestI1;
+         --bestI2;
+      }
+
+
+      bool bEndReached = false;
+      if (bBestValid)
+      {
+         // continue somehow
+         Diff d(nofEquals, bestI1, bestI2);
+         diffList.push_back( d );
+
+         p1 += bestI1;
+         p2 += bestI2;
+      }
+      else
+      {
+         // Nothing else to match.
+         Diff d(nofEquals, p1end-p1, p2end-p2);
+         diffList.push_back( d );
+
+         bEndReached = true; //break;
+      }
+
+      // Sometimes the algorithm that chooses the first match unfortunately chooses
+      // a match where later actually equal parts don't match anymore.
+      // A different match could be achieved, if we start at the end.
+      // Do it, if it would be a better match.
+      int nofUnmatched = 0;
+      const T* pu1 = p1-1;
+      const T* pu2 = p2-1;
+      while ( pu1>=p1start && pu2>=p2start && equal( *pu1, *pu2, false ) )
+      {
+         ++nofUnmatched;
+         --pu1;
+         --pu2;
+      }
+
+      Diff d = diffList.back();
+      if ( nofUnmatched > 0 )
+      {
+         // We want to go backwards the nofUnmatched elements and redo
+         // the matching
+         d = diffList.back();
+         Diff origBack = d;
+         diffList.pop_back();
+
+         while (  nofUnmatched > 0 )
+         {
+            if ( d.diff1 > 0  &&  d.diff2 > 0 )
+            {
+               --d.diff1;
+               --d.diff2;
+               --nofUnmatched;
+            }
+            else if ( d.nofEquals > 0 )
+            {
+               --d.nofEquals;
+               --nofUnmatched;
+            }
+
+            if ( d.nofEquals==0 && (d.diff1==0 || d.diff2==0) &&  nofUnmatched>0 )
+            {
+               if ( diffList.empty() )
+                  break;
+               d.nofEquals += diffList.back().nofEquals;
+               d.diff1 += diffList.back().diff1;
+               d.diff2 += diffList.back().diff2;
+               diffList.pop_back();
+               bEndReached = false;
+            }
+         }
+
+         if ( bEndReached )
+            diffList.push_back( origBack );
+         else
+         {
+
+            p1 = pu1 + 1 + nofUnmatched;
+            p2 = pu2 + 1 + nofUnmatched;
+            diffList.push_back( d );
+         }
+      }
+      if ( bEndReached )
+         break;
+   }
+
+#ifndef NDEBUG
+   // Verify difflist
+   {
+      int l1=0;
+      int l2=0;
+      DiffList::iterator i;
+      for( i = diffList.begin(); i!=diffList.end(); ++i )
+      {
+         l1+= i->nofEquals + i->diff1;
+         l2+= i->nofEquals + i->diff2;
+      }
+
+      //if( l1!=p1-p1start || l2!=p2-p2start )
+      if( l1!=size1 || l2!=size2 )
+         assert( false );
+   }
+#endif
+}
 
 void fineDiff(
    Diff3LineList& diff3LineList,
    int selector,
    LineData* v1,
    LineData* v2,
-   int maxSearchLength,
    bool& bTextsTotalEqual
    )
 {
    // Finetuning: Diff each line with deltas
+   int maxSearchLength=500;
    Diff3LineList::iterator i;
    int k1=0;
    int k2=0;
@@ -1064,6 +1340,14 @@ void fineDiff(
             if      (selector==1){ delete (*i).pFineAB; (*i).pFineAB = pDiffList; }
             else if (selector==2){ delete (*i).pFineBC; (*i).pFineBC = pDiffList; }
             else if (selector==3){ delete (*i).pFineCA; (*i).pFineCA = pDiffList; }
+            else assert(false);
+         }
+
+         if ( (v1[k1].bContainsPureComment || v1[k1].whiteLine()) && (v2[k2].bContainsPureComment || v2[k2].whiteLine()))
+         {
+            if      (selector==1){ i->bAEqB = true; }
+            else if (selector==2){ i->bBEqC = true; }
+            else if (selector==3){ i->bAEqC = true; }
             else assert(false);
          }
       }

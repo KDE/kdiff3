@@ -18,13 +18,6 @@
  *
  */
 
-/***************************************************************************
- * $Log$
- * Revision 1.1  2003/10/06 18:38:48  joachim99
- * KDiff3 version 0.9.70
- *                                                                   *
- ***************************************************************************/
-
 #ifndef OPTION_DIALOG_H
 #define OPTION_DIALOG_H
 
@@ -41,6 +34,7 @@ class KConfig;
 
 class OptionItem;
 class KKeyDialog;
+
 
 class OptionDialog : public KDialogBase
 {
@@ -69,19 +63,20 @@ public:
     bool m_bAutoIndentation;
     int  m_tabSize;
     bool m_bAutoCopySelection;
+    bool m_bStringEncoding;
 
-    bool m_bIgnoreTrivialMatches;
-    int  m_maxSearchLength;
     bool m_bPreserveCarriageReturn;
-    bool m_bUseExternalDiff;
     bool m_bTryHard;
+    bool m_bShowWhiteSpaceCharacters;
     bool m_bShowWhiteSpace;
     bool m_bShowLineNumbers;
     bool m_bHorizDiffWindowSplitting;
 
-    bool m_bIgnoreWhiteSpace;
+    int  m_whiteSpace2FileMergeDefault;
+    int  m_whiteSpace3FileMergeDefault;
     bool m_bUpCase;
     bool m_bIgnoreNumbers;
+    bool m_bIgnoreComments;
     QString m_PreProcessorCmd;
     QString m_LineMatchingPreProcessorCmd;
 
@@ -102,6 +97,7 @@ public:
     bool m_bDmFindHidden;
     bool m_bDmCreateBakFiles;
     bool m_bDmTrustDate;
+    bool m_bDmTrustSize;
     bool m_bDmCopyNewer;
     bool m_bDmShowOnlyDeltas;
     bool m_bDmUseCvsIgnore;
@@ -124,9 +120,9 @@ protected slots:
 
 private:
     void resetToDefaults();
-    
+
     std::list<OptionItem*> m_optionItemList;
-    
+
     // FontConfigDlg
     KFontChooser *m_fontChooser;
 
@@ -137,6 +133,7 @@ private:
     void setupDiffPage();
     void setupDirectoryMergePage();
     void setupKeysPage();
+    void setupOtherOptions();
 };
 
 

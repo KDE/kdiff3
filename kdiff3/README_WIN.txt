@@ -3,7 +3,7 @@ KDiff3-Readme for Windows
 
 Author: Joachim Eibl  (joachim.eibl@gmx.de)
 Copyright: (C) 2002-2003 by Joachim Eibl
-KDiff3-Version: 0.9.71
+KDiff3-Version: 0.9.80
 Homepage: http://kdiff3.sourceforge.net
 
 KDiff3 is a program that

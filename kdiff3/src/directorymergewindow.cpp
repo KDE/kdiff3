@@ -15,18 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * $Log$
- * Revision 1.3  2003/10/15 20:14:03  joachim99
- * Fix for MergeOperation DeleteAB.
- *
- * Revision 1.2  2003/10/11 12:41:57  joachim99
- * Fix for gcc 2.95
- *
- * Revision 1.1  2003/10/06 18:38:48  joachim99
- * KDiff3 version 0.9.70
- ***************************************************************************/
-
 #include "directorymergewindow.h"
 #include "optiondialog.h"
 #include <vector>
@@ -37,6 +25,7 @@
 #include <qpixmap.h>
 #include <qimage.h>
 #include <kpopupmenu.h>
+#include <kaction.h>
 #include <qregexp.h>
 #include <qmessagebox.h>
 #include <qlayout.h>
@@ -50,6 +39,7 @@
 #include <iostream>
 #include <assert.h>
 
+static bool conflictingFileTypes(MergeFileInfos& mfi);
 
 class StatusInfo : public QListView
 {
@@ -120,14 +110,14 @@ void DirectoryMergeWindow::fastFileComparison(
    {
       if ( fi1.isSymLink() != fi2.isSymLink() )
       {
-         status = "Mix of links and normal files.";
+         status = i18n("Mix of links and normal files.");
          return;
       }
       else if ( fi1.isSymLink() && fi2.isSymLink() )
       {
          bError = false;
          bEqual = fi1.readLink() == fi2.readLink();
-         status = "Link: ";
+         status = i18n("Link: ");
          return;
       }
    }
@@ -135,7 +125,12 @@ void DirectoryMergeWindow::fastFileComparison(
    if ( fi1.size()!=fi2.size() )
    {
       bEqual = false;
-      status = "Size. ";
+      status = i18n("Size. ");
+      return;
+   }
+   else if ( m_pOptions->m_bDmTrustSize )
+   {
+      bEqual = true;
       return;
    }
 
@@ -143,7 +138,7 @@ void DirectoryMergeWindow::fastFileComparison(
    {
       bEqual = ( fi1.lastModified() == fi2.lastModified()  &&  fi1.size()==fi2.size() );
       bError = false;
-      status = "Date&Size: ";
+      status = i18n("Date & Size: ");
       return;
    }
 
@@ -152,13 +147,13 @@ void DirectoryMergeWindow::fastFileComparison(
    TempRemover tr1( fileName1, fi1 );
    if ( !tr1.success() )
    {
-      status = "Creating temp copy of " + fileName1 + " failed.";
+      status = i18n("Creating temp copy of %1 failed.").arg(fileName1);
       return;
    }
    TempRemover tr2( fileName2, fi2 );
    if ( !tr2.success() )
    {
-      status = "Creating temp copy of " + fileName2 + " failed.";
+      status = i18n("Creating temp copy of %1 failed.").arg(fileName2);
       return;
    }
 
@@ -169,7 +164,7 @@ void DirectoryMergeWindow::fastFileComparison(
 
    if ( ! file1.open(IO_ReadOnly) )
    {
-      status = "Opening " + fileName1 + " failed.";
+      status = i18n("Opening %1 failed.").arg(fileName1);
       return;
    }
 
@@ -177,7 +172,7 @@ void DirectoryMergeWindow::fastFileComparison(
 
    if ( ! file2.open(IO_ReadOnly) )
    {
-      status = "Opening " + fileName2 + " failed.";
+      status = i18n("Opening %1 failed.").arg(fileName2);
       return;
    }
 
@@ -193,13 +188,13 @@ void DirectoryMergeWindow::fastFileComparison(
       int len = min2( size, (t_FileSize)buf1.size() );
       if( len != file1.readBlock( &buf1[0], len ) )
       {
-         status = "Error reading from " + fileName1;
+         status = i18n("Error reading from %1").arg(fileName1);
          return;
       }
 
       if( len != file2.readBlock( &buf2[0], len ) )
       {
-         status = "Error reading from " + fileName2;
+         status = i18n("Error reading from %1").arg(fileName2);
          return;
       }
 
@@ -240,18 +235,17 @@ DirectoryMergeWindow::DirectoryMergeWindow( QWidget* pParent, OptionDialog* pOpt
    m_bAllowResizeEvents = true;
    m_bSimulatedMergeStarted=false;
    m_bRealMergeStarted=false;
-   m_bSingleFileOperationStarted=false;
    m_bError = false;
    m_bSyncMode = false;
    m_pStatusInfo = new StatusInfo(0);
    m_pStatusInfo->hide();
    
-   addColumn("Name");
+   addColumn(i18n("Name"));
    addColumn("A");
    addColumn("B");
    addColumn("C");
-   addColumn("Operation");
-   addColumn("Status");
+   addColumn(i18n("Operation"));
+   addColumn(i18n("Status"));
 }
 
 DirectoryMergeWindow::~DirectoryMergeWindow()
@@ -275,7 +269,7 @@ void DirectoryMergeWindow::reload()
    {
       int result = KMessageBox::warningYesNo(this,
          i18n("You are currently doing a directory merge. Are you sure, you want to abort the merge and rescan the directory?"),
-         i18n("Warning"), i18n("Yes - Rescan"), i18n("No - Continue merging") );
+         i18n("Warning"), i18n("Rescan"), i18n("Continue Merging") );
       if ( result!=KMessageBox::Yes )
          return;
    }
@@ -371,7 +365,7 @@ bool DirectoryMergeWindow::init
 
    clear();
 
-   m_pCurrentItemForOperation = 0;
+   m_currentItemForOperation = m_mergeItemList.end();
 
    m_dirA = dirA;
    m_dirB = dirB;
@@ -386,15 +380,15 @@ bool DirectoryMergeWindow::init
        QString text( i18n("Opening of directories failed:") );
        text += "\n\n";
        if ( !dirA.isDir() )
-       {  text += "Dir A \"" + m_dirA.prettyAbsPath() + "\" does not exist or is not a directory.\n"; }
+       {  text += i18n("Dir A \"%1\" does not exist or is not a directory.\n").arg(m_dirA.prettyAbsPath()); }
 
        if ( !dirB.isDir() )
-       {  text += "Dir B \"" + m_dirB.prettyAbsPath() + "\" does not exist or is not a directory.\n"; }
+       {  text += i18n("Dir B \"%1\" does not exist or is not a directory.\n").arg(m_dirB.prettyAbsPath()); }
 
        if ( m_dirC.isValid() && !m_dirC.isDir() )
-       {  text += "Dir C \"" + m_dirC.prettyAbsPath() + "\" does not exist or is not a directory.\n"; }
+       {  text += i18n("Dir C \"%1\" does not exist or is not a directory.\n").arg(m_dirC.prettyAbsPath()); }
 
-       KMessageBox::sorry( this, text, i18n("Directory open error") );
+       KMessageBox::sorry( this, text, i18n("Directory Open Error") );
        return false;
    }
 
@@ -404,7 +398,7 @@ bool DirectoryMergeWindow::init
       KMessageBox::error(this,
          i18n( "The destination directory must not be the same as A or B when"
          "three directories are merged.\nCheck again before continuing."),
-         "KDiff3: Parameter warning");
+         i18n("Parameter Warning"));
       return false;
    }
 
@@ -431,7 +425,7 @@ bool DirectoryMergeWindow::init
    bool bListDirSuccessC = true;
    if ( m_dirA.isValid() )
    {
-      g_pProgressDialog->setInformation("Reading Directory A");
+      g_pProgressDialog->setInformation(i18n("Reading Directory A"));
       g_pProgressDialog->setSubRangeTransformation(currentScan/nofScans, (currentScan+1)/nofScans);
       ++currentScan;
 
@@ -453,7 +447,7 @@ bool DirectoryMergeWindow::init
 
    if ( m_dirB.isValid() )
    {
-      g_pProgressDialog->setInformation("Reading Directory B");
+      g_pProgressDialog->setInformation(i18n("Reading Directory B"));
       g_pProgressDialog->setSubRangeTransformation(currentScan/nofScans, (currentScan+1)/nofScans);
       ++currentScan;
 
@@ -475,7 +469,7 @@ bool DirectoryMergeWindow::init
    e_MergeOperation eDefaultMergeOp;
    if ( m_dirC.isValid() )
    {
-      g_pProgressDialog->setInformation("Reading Directory C");
+      g_pProgressDialog->setInformation(i18n("Reading Directory C"));
       g_pProgressDialog->setSubRangeTransformation(currentScan/nofScans, (currentScan+1)/nofScans);
       ++currentScan;
 
@@ -553,7 +547,7 @@ bool DirectoryMergeWindow::init
                         nofFiles, nofDirs, nofEqualFiles, nofManualMerges );
 
       QString s;
-      s = i18n("Directory Comparison Status:") + "\n\n" +
+      s = i18n("Directory Comparison Status") + "\n\n" +
           i18n("Number of subdirectories:") +" "+ QString::number(nofDirs)       + "\n"+
           i18n("Number of equal files:")     +" "+ QString::number(nofEqualFiles) + "\n"+
           i18n("Number of different files:") +" "+ QString::number(nofFiles-nofEqualFiles);
@@ -604,11 +598,91 @@ void DirectoryMergeWindow::slotUnfoldAllSubdirs()
       setListViewItemOpen( p, true );
 }
 
+static void setMergeOperation( QListViewItem* pLVI, e_MergeOperation eMergeOp )
+{
+   if ( pLVI==0 ) return;
+
+   DirMergeItem* pDMI = static_cast<DirMergeItem*>(pLVI);
+   MergeFileInfos& mfi = *pDMI->m_pMFI;
+
+   mfi.setMergeOperation(eMergeOp );
+}
+
+// Merge current item (merge mode)
+void DirectoryMergeWindow::slotCurrentDoNothing() { setMergeOperation(currentItem(), eNoOperation ); }
+void DirectoryMergeWindow::slotCurrentChooseA()   { setMergeOperation(currentItem(), eCopyAToDest ); }
+void DirectoryMergeWindow::slotCurrentChooseB()   { setMergeOperation(currentItem(), eCopyBToDest ); }
+void DirectoryMergeWindow::slotCurrentChooseC()   { setMergeOperation(currentItem(), eCopyCToDest ); }
+void DirectoryMergeWindow::slotCurrentMerge()
+{
+   bool bThreeDirs = m_dirC.isValid();
+   setMergeOperation(currentItem(), bThreeDirs ? eMergeABCToDest : eMergeABToDest );
+}
+void DirectoryMergeWindow::slotCurrentDelete()    { setMergeOperation(currentItem(), eDeleteFromDest ); }
+// Sync current item
+void DirectoryMergeWindow::slotCurrentCopyAToB()     { setMergeOperation(currentItem(), eCopyAToB ); }
+void DirectoryMergeWindow::slotCurrentCopyBToA()     { setMergeOperation(currentItem(), eCopyBToA ); }
+void DirectoryMergeWindow::slotCurrentDeleteA()      { setMergeOperation(currentItem(), eDeleteA );  }
+void DirectoryMergeWindow::slotCurrentDeleteB()      { setMergeOperation(currentItem(), eDeleteB );  }
+void DirectoryMergeWindow::slotCurrentDeleteAAndB()  { setMergeOperation(currentItem(), eDeleteAB ); }
+void DirectoryMergeWindow::slotCurrentMergeToA()     { setMergeOperation(currentItem(), eMergeToA ); }
+void DirectoryMergeWindow::slotCurrentMergeToB()     { setMergeOperation(currentItem(), eMergeToB ); }
+void DirectoryMergeWindow::slotCurrentMergeToAAndB() { setMergeOperation(currentItem(), eMergeToAB ); }
+
+
+void DirectoryMergeWindow::keyPressEvent( QKeyEvent* e )
+{
+   if ( (e->state() & Qt::ControlButton)!=0 )
+   {
+      bool bThreeDirs = m_dirC.isValid();
+
+      QListViewItem* lvi = currentItem();
+      DirMergeItem* pDMI = lvi==0 ? 0 : static_cast<DirMergeItem*>(lvi);
+      MergeFileInfos* pMFI = pDMI==0 ? 0 : pDMI->m_pMFI;
+
+      if ( pMFI==0 ) return;
+      bool bMergeMode = bThreeDirs || !m_bSyncMode;
+      bool bFTConflict = pMFI==0 ? false : conflictingFileTypes(*pMFI);
+
+      if ( bMergeMode )
+      {
+         switch(e->key())
+         {
+         case Key_1:      if(pMFI->m_bExistsInA){ slotCurrentChooseA(); }  return;
+         case Key_2:      if(pMFI->m_bExistsInB){ slotCurrentChooseB(); }  return;
+         case Key_3:      if(pMFI->m_bExistsInC){ slotCurrentChooseC(); }  return;
+         case Key_Space:  slotCurrentDoNothing();                          return;
+         case Key_4:      if ( !bFTConflict )   { slotCurrentMerge();   }  return;
+         case Key_Delete: slotCurrentDelete();                             return;
+         default: break;
+         }
+      }
+      else
+      {
+         switch(e->key())
+         {
+         case Key_1:      if(pMFI->m_bExistsInA){ slotCurrentCopyAToB(); }  return;
+         case Key_2:      if(pMFI->m_bExistsInB){ slotCurrentCopyBToA(); }  return;
+         case Key_Space:  slotCurrentDoNothing();                           return;
+         case Key_4:      if ( !bFTConflict ) { slotCurrentMergeToAAndB(); }  return;
+         case Key_Delete: if( pMFI->m_bExistsInA && pMFI->m_bExistsInB ) slotCurrentDeleteAAndB();
+                          else if( pMFI->m_bExistsInA ) slotCurrentDeleteA();
+                          else if( pMFI->m_bExistsInB ) slotCurrentDeleteB();
+                          return;
+         default: break;
+         }
+      }
+   }
+
+   QListView::keyPressEvent(e);
+}
+
+
 void DirectoryMergeWindow::setAllMergeOperations( e_MergeOperation eDefaultOperation )
 {
    if ( KMessageBox::Yes == KMessageBox::warningYesNo(this,
         i18n("This affects all merge operations."),
-        i18n("KDiff3: Changing all merge operations"),i18n("Continue"), i18n("Cancel") ) )
+        i18n("Changing All Merge Operations"),i18n("C&ontinue"), i18n("&Cancel") ) )
    {
       for( QListViewItem* p = firstChild(); p!=0; p = p->nextSibling() )
       {
@@ -875,7 +949,7 @@ void DirectoryMergeWindow::prepareListView()
                       QString("");
 
       g_pProgressDialog->setInformation(
-         "Processing " + QString::number(currentIdx) +" / "+ QString::number(nrOfFiles)
+         i18n("Processing ") + QString::number(currentIdx) +" / "+ QString::number(nrOfFiles)
          +"\n" + fileName, double(currentIdx) / nrOfFiles, false );
       if ( g_pProgressDialog->wasCancelled() ) break;
       ++currentIdx;
@@ -1004,10 +1078,10 @@ void DirectoryMergeWindow::calcSuggestedOperation( MergeFileInfos& mfi, e_MergeO
 
    if ( eDefaultMergeOp == eMergeABCToDest && !bCheckC ) { eDefaultMergeOp = eMergeABToDest; }
    if ( eDefaultMergeOp == eMergeToAB      &&  bCheckC ) { assert(false); }
-   
+
    if ( eDefaultMergeOp == eMergeToA || eDefaultMergeOp == eMergeToB ||
         eDefaultMergeOp == eMergeABCToDest || eDefaultMergeOp == eMergeABToDest || eDefaultMergeOp == eMergeToAB )
-   {   
+   {
       if ( !bCheckC )
       {
          if ( mfi.m_bEqualAB )
@@ -1174,53 +1248,45 @@ void DirectoryMergeWindow::onClick( QListViewItem* lvi, const QPoint& p, int c )
 
    bool bThreeDirs = m_dirC.isValid();
 
-   //bool bImmediate = (button==Qt::LeftButton);
-
    KPopupMenu m(this);
-   //if (bImmediate ) m.insertItem("Immediate Mode", eTitleId );
-   //else             m.insertItem("Postponed Mode", eTitleId );
-   //m.setItemEnabled ( eTitleId, false );
    if ( bThreeDirs )
    {
-      m.insertItem("Do nothing", eNoOperation );
+      dirCurrentDoNothing->plug(&m);
       int count=0;
-      if ( mfi.m_bExistsInA ) { m.insertItem("A", eCopyAToDest );  ++count;  }
-      if ( mfi.m_bExistsInB ) { m.insertItem("B", eCopyBToDest );  ++count;  }
-      if ( mfi.m_bExistsInC ) { m.insertItem("C", eCopyCToDest );  ++count;  }
-      if ( !conflictingFileTypes(mfi) && count>1 ) m.insertItem("Merge", eMergeABCToDest );
-      m.insertItem("Delete (if exists)", eDeleteFromDest );
+      if ( mfi.m_bExistsInA ) { dirCurrentChooseA->plug(&m); ++count;  }
+      if ( mfi.m_bExistsInB ) { dirCurrentChooseB->plug(&m); ++count;  }
+      if ( mfi.m_bExistsInC ) { dirCurrentChooseC->plug(&m); ++count;  }
+      if ( !conflictingFileTypes(mfi) && count>1 ) dirCurrentMerge->plug(&m);
+      dirCurrentDelete->plug(&m);
    }
    else if ( m_bSyncMode )
    {
-      m.insertItem("Do nothing", eNoOperation );
-      if ( mfi.m_bExistsInA ) m.insertItem("Copy A to B", eCopyAToB );
-      if ( mfi.m_bExistsInB ) m.insertItem("Copy B to A", eCopyBToA );
-      if ( mfi.m_bExistsInA ) m.insertItem("Delete A", eDeleteA );
-      if ( mfi.m_bExistsInB ) m.insertItem("Delete B", eDeleteB );
+      dirCurrentSyncDoNothing->plug(&m);
+      if ( mfi.m_bExistsInA ) dirCurrentSyncCopyAToB->plug(&m);
+      if ( mfi.m_bExistsInB ) dirCurrentSyncCopyBToA->plug(&m);
+      if ( mfi.m_bExistsInA ) dirCurrentSyncDeleteA->plug(&m);
+      if ( mfi.m_bExistsInB ) dirCurrentSyncDeleteB->plug(&m);
       if ( mfi.m_bExistsInA && mfi.m_bExistsInB )
       {
-         m.insertItem("Delete A and B", eDeleteAB );
+         dirCurrentSyncDeleteAAndB->plug(&m);
          if ( !conflictingFileTypes(mfi))
          {
-            m.insertItem("Merge to A",    eMergeToA );
-            m.insertItem("Merge to B",    eMergeToB );
-            m.insertItem("Merge to A and B",    eMergeToAB );
+            dirCurrentSyncMergeToA->plug(&m);
+            dirCurrentSyncMergeToB->plug(&m);
+            dirCurrentSyncMergeToAAndB->plug(&m);
          }
       }
    }
    else
    {
-      m.insertItem("Do nothing", eNoOperation );
-      if ( mfi.m_bExistsInA ) m.insertItem("A", eCopyAToDest );
-      if ( mfi.m_bExistsInB ) m.insertItem("B", eCopyBToDest );
-      if ( mfi.m_bExistsInA  &&  mfi.m_bExistsInB  && !conflictingFileTypes(mfi) )
-         m.insertItem("Merge", eMergeABToDest );
-      m.insertItem("Delete (if exists)", eDeleteFromDest );
+      dirCurrentDoNothing->plug(&m);
+      if ( mfi.m_bExistsInA ) { dirCurrentChooseA->plug(&m); }
+      if ( mfi.m_bExistsInB ) { dirCurrentChooseB->plug(&m); }
+      if ( !conflictingFileTypes(mfi) && mfi.m_bExistsInA  &&  mfi.m_bExistsInB ) dirCurrentMerge->plug(&m);
+      dirCurrentDelete->plug(&m);
    }
 
-   int result = m.exec( p );
-   if (result>=0 )
-      mfi.setMergeOperation( (e_MergeOperation)result );
+   m.exec( p );
 }
 
 // Since Qt 2.3.0 doesn't allow the specification of a compare operator, this trick emulates it.
@@ -1231,14 +1297,14 @@ void DirectoryMergeWindow::onClick( QListViewItem* lvi, const QPoint& p, int c )
 #endif
 
 DirMergeItem::DirMergeItem( QListView* pParent, const QString& fileName, MergeFileInfos* pMFI )
-: QListViewItem( pParent, DIRSORT( fileName ), "","","", "To do." )
+: QListViewItem( pParent, DIRSORT( fileName ), "","","", i18n("To do.") )
 {
    pMFI->m_pDMI = this;
    m_pMFI = pMFI;
 }
 
 DirMergeItem::DirMergeItem( DirMergeItem* pParent, const QString& fileName, MergeFileInfos* pMFI )
-: QListViewItem( pParent, DIRSORT( fileName ), "","","", "To do." )
+: QListViewItem( pParent, DIRSORT( fileName ), "","","", i18n("To do.") )
 {
    pMFI->m_pDMI = this;
    m_pMFI = pMFI;
@@ -1251,30 +1317,36 @@ DirMergeItem::~DirMergeItem()
 
 void MergeFileInfos::setMergeOperation( e_MergeOperation eMOp )
 {
+   if ( eMOp != m_eMergeOperation )
+   {
+      m_bOperationComplete = false;
+      m_pDMI->setText( s_OpStatusCol, "" );
+   }
+
    m_eMergeOperation = eMOp;
-   const char* s=0;
+   QString s;
    bool bDir = m_bDirA || m_bDirB || m_bDirC;
    if( m_pDMI!=0 )
    {
       switch( m_eMergeOperation )
       {
       case eNoOperation:      s=""; m_pDMI->setText(s_OpCol,""); break;
-      case eCopyAToB:         s="Copy A to B";     break;
-      case eCopyBToA:         s="Copy B to A";     break;
-      case eDeleteA:          s="Delete A";        break;
-      case eDeleteB:          s="Delete B";        break;
-      case eDeleteAB:         s="Delete A and B";  break;
-      case eMergeToA:         s="Merge to A";      break;
-      case eMergeToB:         s="Merge to B";      break;
-      case eMergeToAB:        s="Merge to A and B";  break;
+      case eCopyAToB:         s=i18n("Copy A to B");     break;
+      case eCopyBToA:         s=i18n("Copy B to A");     break;
+      case eDeleteA:          s=i18n("Delete A");        break;
+      case eDeleteB:          s=i18n("Delete B");        break;
+      case eDeleteAB:         s=i18n("Delete A & B");    break;
+      case eMergeToA:         s=i18n("Merge to A");      break;
+      case eMergeToB:         s=i18n("Merge to B");      break;
+      case eMergeToAB:        s=i18n("Merge to A & B");  break;
       case eCopyAToDest:      s="A";    break;
       case eCopyBToDest:      s="B";    break;
       case eCopyCToDest:      s="C";    break;
-      case eDeleteFromDest:   s="Delete (if exists)";  break;
-      case eMergeABCToDest:   s= bDir ? "Merge" : "Merge (manual)";  break;
-      case eMergeABToDest:    s= bDir ? "Merge" : "Merge (manual)";  break;
-      case eConflictingFileTypes: s="Error: Conflicting File Types"; break;
-      case eConflictingAges:  s="Error: Dates are equal but files are not."; break;
+      case eDeleteFromDest:   s=i18n("Delete (if exists)");  break;
+      case eMergeABCToDest:   s= bDir ? i18n("Merge") : i18n("Merge (manual)");    break;
+      case eMergeABToDest:    s= bDir ? i18n("Merge") : i18n("Merge (manual)");    break;
+      case eConflictingFileTypes: s=i18n("Error: Conflicting File Types");         break;
+      case eConflictingAges:  s=i18n("Error: Dates are equal but files are not."); break;
       default:                assert(false); break;
       }
       m_pDMI->setText(s_OpCol,s);
@@ -1298,7 +1370,7 @@ void DirectoryMergeWindow::compareCurrentFile()
 
    if ( m_bRealMergeStarted )
    {
-      KMessageBox::sorry(this,"This operation is currently not possible.","KDiff3");
+      KMessageBox::sorry(this,i18n("This operation is currently not possible."),i18n("Operation Not Possible"));
       return;
    }
 
@@ -1320,36 +1392,6 @@ void DirectoryMergeWindow::compareCurrentFile()
    emit updateAvailabilities();
 }
 
-void DirectoryMergeWindow::mergeCurrentFile()
-{
-   if (!canContinue()) return;
-
-   if ( m_bRealMergeStarted )
-   {
-      KMessageBox::sorry(this,"This operation is currently not possible because diff merge currently runs.","KDiff3");
-      return;
-   }
-
-   if ( isFileSelected() )
-   {
-      DirMergeItem* pDMI = static_cast<DirMergeItem*>( selectedItem() );
-      if ( pDMI != 0 )
-      {
-         MergeFileInfos& mfi = *pDMI->m_pMFI;
-         m_bSingleFileOperationStarted = true;
-         emit startDiffMerge(
-            mfi.m_bExistsInA ? mfi.m_fileInfoA.absFilePath() : QString(""),
-            mfi.m_bExistsInB ? mfi.m_fileInfoB.absFilePath() : QString(""),
-            mfi.m_bExistsInC ? mfi.m_fileInfoC.absFilePath() : QString(""),
-            fullNameDest(mfi),
-            "","",""
-            );
-         m_pCurrentItemForOperation = pDMI;
-         m_pCurrentItemForOperation->setText( s_OpStatusCol, "In progress ..." );
-      }
-   }
-   emit updateAvailabilities();
-}
 
 
 bool DirectoryMergeWindow::isFileSelected()
@@ -1365,33 +1407,41 @@ bool DirectoryMergeWindow::isFileSelected()
 
 void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
 {
-   m_bSingleFileOperationStarted = false;
-   if ( m_pCurrentItemForOperation!=0 && m_pCurrentItemForOperation->m_pMFI==0 )
+   DirMergeItem* pCurrentItemForOperation = (m_mergeItemList.empty() || m_currentItemForOperation==m_mergeItemList.end() )
+                                               ? 0
+                                               : *m_currentItemForOperation;
+
+   if ( pCurrentItemForOperation!=0 && pCurrentItemForOperation->m_pMFI==0 )
    {
-      KMessageBox::error( this, "This should never happen: \n\nmergeResultSaved: m_pMFI=0\n\nIf you know how to reproduce this, please contact the program author.","Program Error" );
+      KMessageBox::error( this, i18n("This should never happen: \n\nmergeResultSaved: m_pMFI=0\n\nIf you know how to reproduce this, please contact the program author."),i18n("Program Error") );
       return;
    }
-   if ( m_pCurrentItemForOperation!=0 && fileName == fullNameDest(*m_pCurrentItemForOperation->m_pMFI) )
+   if ( pCurrentItemForOperation!=0 && fileName == fullNameDest(*pCurrentItemForOperation->m_pMFI) )
    {
-      if ( m_pCurrentItemForOperation->m_pMFI->m_eMergeOperation==eMergeToAB )
+      if ( pCurrentItemForOperation->m_pMFI->m_eMergeOperation==eMergeToAB )
       {
-         MergeFileInfos& mfi = *m_pCurrentItemForOperation->m_pMFI;
+         MergeFileInfos& mfi = *pCurrentItemForOperation->m_pMFI;
          bool bSuccess = copyFLD( fullNameB(mfi), fullNameA(mfi) );
          if (!bSuccess)
          {
-            KMessageBox::error(this, i18n("An error occurred while copying.\n"), "KDiff3: Error" );
-            m_pStatusInfo->setCaption("KDiff3: Merge-Error");
+            KMessageBox::error(this, i18n("An error occurred while copying.\n"), i18n("Error") );
+            m_pStatusInfo->setCaption(i18n("Merge Error"));
             m_pStatusInfo->show();
             if ( m_pStatusInfo->firstChild()!=0 )
                m_pStatusInfo->ensureItemVisible( m_pStatusInfo->last() );
             m_bError = true;
-            m_pCurrentItemForOperation->setText( s_OpStatusCol, "Error." );
+            pCurrentItemForOperation->setText( s_OpStatusCol, i18n("Error.") );
             mfi.m_eMergeOperation = eCopyBToA;
             return;
          }
       }
-      m_pCurrentItemForOperation->setText( s_OpStatusCol, "Done." );
-      m_pCurrentItemForOperation->m_pMFI->m_bOperationComplete = true;
+      pCurrentItemForOperation->setText( s_OpStatusCol, i18n("Done.") );
+      pCurrentItemForOperation->m_pMFI->m_bOperationComplete = true;
+      if ( m_mergeItemList.size()==1 )
+      {
+         m_mergeItemList.clear();
+         m_bRealMergeStarted=false;
+      }
    }
 
    emit updateAvailabilities();
@@ -1403,76 +1453,246 @@ bool DirectoryMergeWindow::canContinue()
    checkIfCanContinue( &bCanContinue );
    if ( bCanContinue && !m_bError )
    {
-      if ( m_bRealMergeStarted && m_pCurrentItemForOperation!=0  && ! m_pCurrentItemForOperation->m_pMFI->m_bOperationComplete )
+      DirMergeItem* pCurrentItemForOperation =
+         (m_mergeItemList.empty() || m_currentItemForOperation==m_mergeItemList.end() ) ? 0 : *m_currentItemForOperation;
+
+      if ( pCurrentItemForOperation!=0  && ! pCurrentItemForOperation->m_pMFI->m_bOperationComplete )
       {
-         m_pCurrentItemForOperation->setText( s_OpStatusCol, "Not saved." );
-         m_pCurrentItemForOperation->m_pMFI->m_bOperationComplete = true;
+         pCurrentItemForOperation->setText( s_OpStatusCol, i18n("Not saved.") );
+         pCurrentItemForOperation->m_pMFI->m_bOperationComplete = true;
+         if ( m_mergeItemList.size()==1 )
+         {
+            m_mergeItemList.clear();
+            m_bRealMergeStarted=false;
+         }
       }
    }
    return bCanContinue;
 }
 
-void DirectoryMergeWindow::mergeContinue()
+bool DirectoryMergeWindow::executeMergeOperation( MergeFileInfos& mfi, bool& bSingleFileMerge )
 {
-   if ( ! canContinue() ) return;
-
-   m_bSingleFileOperationStarted = false;
-
-   int nrOfItems = 0;
-   int nrOfCompletedItems = 0;
-   int nrOfCompletedSimItems = 0;
-
-   if ( !m_bSimulatedMergeStarted && !m_bRealMergeStarted )
+   bool bCreateBackups = m_pOptions->m_bDmCreateBakFiles;
+   // First decide destname
+   QString destName;
+   switch( mfi.m_eMergeOperation )
    {
-      // First check if an invalid merge operations exist.
-      for( QListViewItem* p=firstChild(); p!=0; p = treeIterator( p ) )
-      {
-         DirMergeItem* pDMI = static_cast<DirMergeItem*>(p);
-         if (pDMI!=0 && pDMI->m_pMFI->m_eMergeOperation == eConflictingFileTypes )
-         {
-            ensureItemVisible( pDMI );
-            setSelected( pDMI, true );
-            KMessageBox::error(this, i18n("The highlighted item has a different type in the different directories. Select what to do."), "Error");
-            return;
-         }
-         if (pDMI!=0 && pDMI->m_pMFI->m_eMergeOperation == eConflictingAges )
-         {
-            ensureItemVisible( pDMI );
-            setSelected( pDMI, true );
-            KMessageBox::error(this, i18n("The modification dates of the file are equal but the files are not. Select what to do."), "Error");
-            return;
-         }
-         ++nrOfItems;
-         if ( pDMI->m_pMFI->m_bSimOpComplete )
-            ++nrOfCompletedSimItems;
-         if ( pDMI->m_pMFI->m_bOperationComplete )
-            ++nrOfCompletedItems;
-      }
+   case eNoOperation: break;
+   case eDeleteAB:    break;
+   case eMergeToAB:   // let the user save in B. In mergeResultSaved() the file will be copied to A.
+   case eMergeToB:
+   case eDeleteB:
+   case eCopyAToB:    destName = fullNameB(mfi); break;
+   case eMergeToA:
+   case eDeleteA:
+   case eCopyBToA:    destName = fullNameA(mfi); break;
+   case eMergeABToDest:
+   case eMergeABCToDest:
+   case eCopyAToDest:
+   case eCopyBToDest:
+   case eCopyCToDest:
+   case eDeleteFromDest: destName = fullNameDest(mfi); break;
+   default:
+      KMessageBox::error( this, i18n("Unknown merge operation. (This must never happen!)"), i18n("Error") );
+      assert(false);
+   }
 
+   bool bSuccess = false;
+   bSingleFileMerge = false;
+   switch( mfi.m_eMergeOperation )
+   {
+   case eNoOperation: bSuccess = true; break;
+   case eCopyAToDest:
+   case eCopyAToB:    bSuccess = copyFLD( fullNameA(mfi), destName ); break;
+   case eCopyBToDest:
+   case eCopyBToA:    bSuccess = copyFLD( fullNameB(mfi), destName ); break;
+   case eCopyCToDest: bSuccess = copyFLD( fullNameC(mfi), destName ); break;
+   case eDeleteFromDest:
+   case eDeleteA:
+   case eDeleteB:     bSuccess = deleteFLD( destName, bCreateBackups ); break;
+   case eDeleteAB:    bSuccess = deleteFLD( fullNameA(mfi), bCreateBackups ) &&
+                                 deleteFLD( fullNameB(mfi), bCreateBackups ); break;
+   case eMergeABToDest:
+   case eMergeToA:
+   case eMergeToAB:
+   case eMergeToB:      bSuccess = mergeFLD( fullNameA(mfi), fullNameB(mfi), "",
+                                             destName, bSingleFileMerge );
+                        break;
+   case eMergeABCToDest:bSuccess = mergeFLD(
+                                    mfi.m_bExistsInA ? fullNameA(mfi) : QString(""),
+                                    mfi.m_bExistsInB ? fullNameB(mfi) : QString(""),
+                                    mfi.m_bExistsInC ? fullNameC(mfi) : QString(""),
+                                    destName, bSingleFileMerge );
+                        break;
+   default:
+      KMessageBox::error( this, i18n("Unknown merge operation."), i18n("Error") );
+      assert(false);
+   }
+
+   return bSuccess;
+}
+
+
+// Check if the merge can start, and prepare the m_mergeItemList which then contains all
+// items that must be merged.
+void DirectoryMergeWindow::prepareMergeStart( QListViewItem* pBegin, QListViewItem* pEnd, bool bVerbose )
+{
+   if ( bVerbose )
+   {
       int status = KMessageBox::warningYesNoCancel(this,
          i18n("The merge is about to begin.\n\n"
          "Choose \"Do it\" if you have read the instructions and know what you are doing.\n"
          "Choosing \"Simulate it\" will tell you what would happen.\n\n"
          "Be aware that this program still has beta status "
          "and there is NO WARRANTY whatsoever! Make backups of your vital data!"),
-         i18n("KDiff3: Starting the Merge"), i18n("Do it"), i18n("Simulate it") );
-      if (status==KMessageBox::Yes) m_bRealMergeStarted = true;
+         i18n("Starting Merge"), i18n("Do It"), i18n("Simulate It") );
+      if (status==KMessageBox::Yes)      m_bRealMergeStarted = true;
       else if (status==KMessageBox::No ) m_bSimulatedMergeStarted = true;
       else return;
-
-      m_pStatusInfo->hide();
-      m_pStatusInfo->clear();
+   }
+   else
+   {
+      m_bRealMergeStarted = true;
    }
 
-   bool bContinueWithCurrentItem = false;
+   m_mergeItemList.clear();
+   if (pBegin == 0)
+      return;
+
+   for( QListViewItem* p = pBegin; p!= pEnd; p = treeIterator( p ) )
+   {
+      DirMergeItem* pDMI = static_cast<DirMergeItem*>(p);
+
+      if ( ! pDMI->m_pMFI->m_bOperationComplete )
+      {
+         m_mergeItemList.push_back(pDMI);
+
+         if (pDMI!=0 && pDMI->m_pMFI->m_eMergeOperation == eConflictingFileTypes )
+         {
+            ensureItemVisible( pDMI );
+            setSelected( pDMI, true );
+            KMessageBox::error(this, i18n("The highlighted item has a different type in the different directories. Select what to do."), i18n("Error"));
+            m_mergeItemList.clear();
+            m_bRealMergeStarted=false;
+            return;
+         }
+         if (pDMI!=0 && pDMI->m_pMFI->m_eMergeOperation == eConflictingAges )
+         {
+            ensureItemVisible( pDMI );
+            setSelected( pDMI, true );
+            KMessageBox::error(this, i18n("The modification dates of the file are equal but the files are not. Select what to do."), i18n("Error"));
+            m_mergeItemList.clear();
+            m_bRealMergeStarted=false;
+            return;
+         }
+      }
+   }
+
+   m_currentItemForOperation = m_mergeItemList.begin();
+   return;
+}
+
+void DirectoryMergeWindow::slotRunOperationForCurrentItem()
+{
+   if ( ! canContinue() ) return;
+
+   bool bVerbose = false;
+   if ( m_mergeItemList.empty() )
+   {
+      QListViewItem* pBegin = currentItem();
+
+      prepareMergeStart( pBegin, pBegin->nextSibling(), bVerbose );
+      mergeContinue(true, bVerbose);
+   }
+   else
+      mergeContinue(false, bVerbose);
+}
+
+void DirectoryMergeWindow::slotRunOperationForAllItems()
+{
+   if ( ! canContinue() ) return;
+
+   bool bVerbose = true;
+   if ( m_mergeItemList.empty() )
+   {
+      QListViewItem* pBegin = firstChild();
+
+      prepareMergeStart( pBegin, 0, bVerbose );
+      mergeContinue(true, bVerbose);
+   }
+   else
+      mergeContinue(false, bVerbose);
+}
+
+void DirectoryMergeWindow::mergeCurrentFile()
+{
+   if (!canContinue()) return;
+
+   if ( m_bRealMergeStarted )
+   {
+      KMessageBox::sorry(this,i18n("This operation is currently not possible because dir merge currently runs."),i18n("Operation Not Possible"));
+      return;
+   }
+
+   if ( isFileSelected() )
+   {
+      DirMergeItem* pDMI = static_cast<DirMergeItem*>( selectedItem() );
+      if ( pDMI != 0 )
+      {
+         MergeFileInfos& mfi = *pDMI->m_pMFI;
+         m_mergeItemList.clear();
+         m_mergeItemList.push_back( pDMI );
+         m_currentItemForOperation=m_mergeItemList.begin();
+         bool bDummy=false;
+         mergeFLD(
+            mfi.m_bExistsInA ? mfi.m_fileInfoA.absFilePath() : QString(""),
+            mfi.m_bExistsInB ? mfi.m_fileInfoB.absFilePath() : QString(""),
+            mfi.m_bExistsInC ? mfi.m_fileInfoC.absFilePath() : QString(""),
+            fullNameDest(mfi),
+            bDummy
+            );
+      }
+   }
+   emit updateAvailabilities();
+}
+
+
+// When bStart is true then m_currentItemForOperation must still be processed.
+// When bVerbose is true then a messagebox will tell when the merge is complete.
+void DirectoryMergeWindow::mergeContinue(bool bStart, bool bVerbose)
+{
+   if ( m_mergeItemList.empty() )
+      return;
+
+   int nrOfItems = 0;
+   int nrOfCompletedItems = 0;
+   int nrOfCompletedSimItems = 0;
+
+   // Count the number of completed items (for the progress bar).
+   for( MergeItemList::iterator i = m_mergeItemList.begin(); i!=m_mergeItemList.end(); ++i )
+   {
+      DirMergeItem* pDMI = static_cast<DirMergeItem*>(*i);
+      ++nrOfItems;
+      if ( pDMI->m_pMFI->m_bOperationComplete )
+         ++nrOfCompletedItems;
+      if ( pDMI->m_pMFI->m_bSimOpComplete )
+         ++nrOfCompletedSimItems;
+   }
+
+   m_pStatusInfo->hide();
+   m_pStatusInfo->clear();
+
+   DirMergeItem* pCurrentItemForOperation = m_currentItemForOperation==m_mergeItemList.end() ? 0 : *m_currentItemForOperation;
+
+   bool bContinueWithCurrentItem = bStart;  // true for first item, else false
    bool bSkipItem = false;
-   if ( m_bError && m_pCurrentItemForOperation!=0 )
+   if ( !bStart && m_bError && pCurrentItemForOperation!=0 )
    {
       int status = KMessageBox::warningYesNoCancel(this,
          i18n("There was an error in the last step.\n"
          "Do you want to continue with the item that caused the error or do you want to skip this item?"),
-         i18n("KDiff3: Continue merge after an error"), i18n("Continue with last item"), i18n("Skip item") );
-      if (status==KMessageBox::Yes) bContinueWithCurrentItem = true;
+         i18n("Continue merge after an error"), i18n("Continue With Last Item"), i18n("Skip Item") );
+      if      (status==KMessageBox::Yes) bContinueWithCurrentItem = true;
       else if (status==KMessageBox::No ) bSkipItem = true;
       else return;
       m_bError = false;
@@ -1485,89 +1705,87 @@ void DirectoryMergeWindow::mergeContinue()
    bool bSim = m_bSimulatedMergeStarted;
    while( bSuccess )
    {
-      if ( m_pCurrentItemForOperation!=0 && !bContinueWithCurrentItem )
+      if ( pCurrentItemForOperation==0 )
+      {
+         m_mergeItemList.clear();
+         m_bRealMergeStarted=false;
+         break;
+      }
+
+      if ( pCurrentItemForOperation!=0 && !bContinueWithCurrentItem )
       {
          if ( bSim )
          {
-            if( m_pCurrentItemForOperation->firstChild()==0 )
+            if( pCurrentItemForOperation->firstChild()==0 )
             {
-               m_pCurrentItemForOperation->m_pMFI->m_bSimOpComplete = true;
+               pCurrentItemForOperation->m_pMFI->m_bSimOpComplete = true;
             }
          }
          else
          {
-            if( m_pCurrentItemForOperation->firstChild()==0 )
+            if( pCurrentItemForOperation->firstChild()==0 )
             {
-               if( !m_pCurrentItemForOperation->m_pMFI->m_bOperationComplete )
+               if( !pCurrentItemForOperation->m_pMFI->m_bOperationComplete )
                {
-                  m_pCurrentItemForOperation->setText( s_OpStatusCol, bSkipItem ? "Skipped." : "Done." );
-                  m_pCurrentItemForOperation->m_pMFI->m_bOperationComplete = true;
+                  pCurrentItemForOperation->setText( s_OpStatusCol, bSkipItem ? i18n("Skipped.") : i18n("Done.") );
+                  pCurrentItemForOperation->m_pMFI->m_bOperationComplete = true;
                   bSkipItem = false;
                }
             }
             else
             {
-               m_pCurrentItemForOperation->setText( s_OpStatusCol, "In progress ..." );
+               pCurrentItemForOperation->setText( s_OpStatusCol, i18n("In progress...") );
             }
          }
       }
 
-      if ( m_pCurrentItemForOperation==0 )
+      if ( ! bContinueWithCurrentItem )
       {
-         m_pCurrentItemForOperation = static_cast<DirMergeItem*>( firstChild() );
-      }
-      else
-      {
-         if ( ! bContinueWithCurrentItem )
+         // Depth first
+         QListViewItem* pPrevItem = pCurrentItemForOperation;
+         ++m_currentItemForOperation;
+         pCurrentItemForOperation = m_currentItemForOperation==m_mergeItemList.end() ? 0 : *m_currentItemForOperation;
+         if ( (pCurrentItemForOperation==0 || pCurrentItemForOperation->parent()!=pPrevItem->parent()) && pPrevItem->parent()!=0 )
          {
-            // Depth first
-            QListViewItem* pNextItem = m_pCurrentItemForOperation->firstChild();
-            QListViewItem* pCurrentItem = m_pCurrentItemForOperation;
-            while( pCurrentItem!=0 && pNextItem==0 )
+            // Check if the parent may be set to "Done"
+            QListViewItem* pParent = pPrevItem->parent();
+            bool bDone = true;
+            while ( bDone && pParent!=0 )
             {
-               // Find an item on this level that hasn't been operated yet. (Always start at beginning.)
-               if ( pCurrentItem->parent()==0 )
-                  pNextItem = firstChild();
-               else
-                  pNextItem = pCurrentItem->parent()->firstChild();
-
-               while( pNextItem!=0 && ( static_cast<DirMergeItem*>(pNextItem)->m_pMFI->m_bOperationComplete ||
-                               ( bSim && static_cast<DirMergeItem*>(pNextItem)->m_pMFI->m_bSimOpComplete ) ) )
+               for( QListViewItem* p = pParent->firstChild(); p!=0; p=p->nextSibling() )
                {
-                  pNextItem = pNextItem->nextSibling();
-               }
-
-               if ( pNextItem == 0 )
-               {
-                  pCurrentItem = pCurrentItem->parent();
-                  if ( pCurrentItem!=0 )
+                  DirMergeItem* pDMI = static_cast<DirMergeItem*>(p);
+                  if ( !bSim && ! pDMI->m_pMFI->m_bOperationComplete   ||  bSim && pDMI->m_pMFI->m_bSimOpComplete )
                   {
-                     if (bSim)
-                        static_cast<DirMergeItem*>(pCurrentItem)->m_pMFI->m_bSimOpComplete = true;
-                     else
-                     {
-                        pCurrentItem->setText( s_OpStatusCol, "Done." );
-                        static_cast<DirMergeItem*>(pCurrentItem)->m_pMFI->m_bOperationComplete = true;
-                     }
+                     bDone=false;
+                     break;
                   }
                }
+               if ( bDone )
+               {
+                  if (bSim)
+                     static_cast<DirMergeItem*>(pParent)->m_pMFI->m_bSimOpComplete = bDone;
+                  else
+                  {
+                     pParent->setText( s_OpStatusCol, i18n("Done.") );
+                     static_cast<DirMergeItem*>(pParent)->m_pMFI->m_bOperationComplete = bDone;
+                  }
+               }
+               pParent = pParent->parent();
             }
-            m_pCurrentItemForOperation = static_cast<DirMergeItem*>(pNextItem);
          }
       }
 
-      if( m_pCurrentItemForOperation !=0 &&
-         (bSim ? m_pCurrentItemForOperation->m_pMFI->m_bSimOpComplete :
-                 m_pCurrentItemForOperation->m_pMFI->m_bOperationComplete ))
-         m_pCurrentItemForOperation = 0;
-
-      if ( m_pCurrentItemForOperation==0 )
+      if ( pCurrentItemForOperation == 0 ) // end?
       {
          if ( m_bRealMergeStarted )
          {
-            KMessageBox::information( this, "Merge operation complete.", "The merge is complete." );
+            if (bVerbose)
+            {
+               KMessageBox::information( this, i18n("Merge operation complete."), i18n("Merge Complete") );
+            }
             m_bRealMergeStarted = false;
-            m_pStatusInfo->setCaption("KDiff3: Merge complete.");
+            m_pStatusInfo->setCaption(i18n("Merge Complete"));
          }
          if ( m_bSimulatedMergeStarted )
          {
@@ -1576,104 +1794,61 @@ void DirectoryMergeWindow::mergeContinue()
             {
                static_cast<DirMergeItem*>(p)->m_pMFI->m_bSimOpComplete = false;
             }
-            m_pStatusInfo->setCaption("KDiff3: Simulated merge complete: Check if you agree with the proposed operations.");
+            m_pStatusInfo->setCaption(i18n("Simulated merge complete: Check if you agree with the proposed operations."));
             m_pStatusInfo->show();
          }
          g_pProgressDialog->hide();
+         m_mergeItemList.clear();
+         m_bRealMergeStarted=false;
          return;
       }
 
-      MergeFileInfos& mfi = *m_pCurrentItemForOperation->m_pMFI;
-      bool bCreateBackups = m_pOptions->m_bDmCreateBakFiles;
+      MergeFileInfos& mfi = *pCurrentItemForOperation->m_pMFI;
 
       g_pProgressDialog->setInformation( mfi.m_subPath,
          bSim ? double(nrOfCompletedSimItems)/nrOfItems : double(nrOfCompletedItems)/nrOfItems,
-         true
+         false // bRedrawUpdate
          );
       g_pProgressDialog->show();
 
-      // First decide destname
-      QString destName;
-      switch( mfi.m_eMergeOperation )
-      {
-      case eNoOperation: break;
-      case eDeleteAB:    break;
-      case eMergeToAB:   // let the user save in B. In mergeResultSaved() the file will be copied to A.
-      case eMergeToB:
-      case eDeleteB:
-      case eCopyAToB:    destName = fullNameB(mfi); break;
-      case eMergeToA:
-      case eDeleteA:
-      case eCopyBToA:    destName = fullNameA(mfi); break;
-      case eMergeABToDest:
-      case eMergeABCToDest:
-      case eCopyAToDest:
-      case eCopyBToDest:
-      case eCopyCToDest:
-      case eDeleteFromDest: destName = fullNameDest(mfi); break;
-      default:
-         KMessageBox::error( this, "Unknown merge operation.(This must never happen!)", "Error" );
-         assert(false);
-      }
+      bSuccess = executeMergeOperation( mfi, bSingleFileMerge );  // Here the real operation happens.
 
-      bSuccess = false;
-      bSingleFileMerge = false;
-      switch( mfi.m_eMergeOperation )
-      {
-      case eNoOperation: bSuccess = true; break;
-      case eCopyAToDest:
-      case eCopyAToB:    bSuccess = copyFLD( fullNameA(mfi), destName ); break;
-      case eCopyBToDest:
-      case eCopyBToA:    bSuccess = copyFLD( fullNameB(mfi), destName ); break;
-      case eCopyCToDest: bSuccess = copyFLD( fullNameC(mfi), destName ); break;
-      case eDeleteFromDest:
-      case eDeleteA:
-      case eDeleteB:     bSuccess = deleteFLD( destName, bCreateBackups ); break;
-      case eDeleteAB:    bSuccess = deleteFLD( fullNameA(mfi), bCreateBackups ) &&
-                                    deleteFLD( fullNameB(mfi), bCreateBackups ); break;
-      case eMergeABToDest:
-      case eMergeToA:
-      case eMergeToAB:
-      case eMergeToB:      bSuccess = mergeFLD( fullNameA(mfi), fullNameB(mfi), "",
-                                                destName, bSingleFileMerge );
-                           break;
-      case eMergeABCToDest:bSuccess = mergeFLD(
-                                         mfi.m_bExistsInA ? fullNameA(mfi) : QString(""),
-                                         mfi.m_bExistsInB ? fullNameB(mfi) : QString(""),
-                                         mfi.m_bExistsInC ? fullNameC(mfi) : QString(""),
-                                         destName, bSingleFileMerge );
-                           break;
-      default:
-         KMessageBox::error( this, "Unknown merge operation.", "Error" );
-         assert(false);
-      }
       if ( bSuccess )
       {
          if(bSim) ++nrOfCompletedSimItems;
          else     ++nrOfCompletedItems;
          bContinueWithCurrentItem = false;
       }
+
+      if( g_pProgressDialog->wasCancelled() )
+         break;
    }  // end while
 
    g_pProgressDialog->hide();
 
-   setCurrentItem( m_pCurrentItemForOperation );
-   ensureItemVisible( m_pCurrentItemForOperation );
+   setCurrentItem( pCurrentItemForOperation );
+   ensureItemVisible( pCurrentItemForOperation );
    if ( !bSuccess &&  !bSingleFileMerge )
    {
-      KMessageBox::error(this, i18n("An error occurred. Press OK to see detailed information.\n"), "KDiff3: Error" );
-      m_pStatusInfo->setCaption("KDiff3: Merge-Error");
+      KMessageBox::error(this, i18n("An error occurred. Press OK to see detailed information.\n"), i18n("Error") );
+      m_pStatusInfo->setCaption(i18n("Merge Error"));
       m_pStatusInfo->show();
       if ( m_pStatusInfo->firstChild()!=0 )
          m_pStatusInfo->ensureItemVisible( m_pStatusInfo->last() );
       m_bError = true;
-      m_pCurrentItemForOperation->setText( s_OpStatusCol, "Error." );
+      pCurrentItemForOperation->setText( s_OpStatusCol, i18n("Error.") );
    }
    else
    {
       m_bError = false;
    }
    emit updateAvailabilities();
+
+   if ( m_currentItemForOperation==m_mergeItemList.end() )
+   {
+      m_mergeItemList.clear();
+      m_bRealMergeStarted=false;
+   }
 }
 
 void DirectoryMergeWindow::allowResizeEvents(bool bAllowResizeEvents )
@@ -1698,16 +1873,16 @@ bool DirectoryMergeWindow::deleteFLD( const QString& name, bool bCreateBackup )
       bool bSuccess = renameFLD( name, name+".orig" );
       if (!bSuccess)
       {
-         m_pStatusInfo->addText( "Error: While deleting "+name+": Creating backup failed." );
+         m_pStatusInfo->addText( i18n("Error: While deleting %1: Creating backup failed.").arg(name) );
          return false;
       }
    }
    else
    {
       if ( fi.isDir() && !fi.isSymLink() )
-         m_pStatusInfo->addText("delete directory recursively( "+name+" )");
+         m_pStatusInfo->addText(i18n("delete directory recursively( %1 )").arg(name));
       else
-         m_pStatusInfo->addText("delete( "+name+" )");
+         m_pStatusInfo->addText(i18n("delete( %1 )").arg(name));
 
       if ( m_bSimulatedMergeStarted )
       {
@@ -1722,7 +1897,7 @@ bool DirectoryMergeWindow::deleteFLD( const QString& name, bool bCreateBackup )
          if ( !bSuccess )
          {
              // No Permission to read directory or other error.
-             m_pStatusInfo->addText( "Error: delete dir operation failed while trying to read the directory." );
+             m_pStatusInfo->addText( i18n("Error: delete dir operation failed while trying to read the directory.") );
              return false;
          }
 
@@ -1741,7 +1916,7 @@ bool DirectoryMergeWindow::deleteFLD( const QString& name, bool bCreateBackup )
             bSuccess = FileAccess::removeDir( name );
             if ( !bSuccess )
             {
-               m_pStatusInfo->addText( "Error: rmdir( "+name+" ) operation failed." );
+               m_pStatusInfo->addText( i18n("Error: rmdir( %1 ) operation failed.").arg(name));
                return false;
             }
          }
@@ -1751,7 +1926,7 @@ bool DirectoryMergeWindow::deleteFLD( const QString& name, bool bCreateBackup )
          bool bSuccess = FileAccess::removeFile( name );
          if ( !bSuccess )
          {
-            m_pStatusInfo->addText( "Error: delete operation failed." );
+            m_pStatusInfo->addText( i18n("Error: delete operation failed.") );
             return false;
          }
       }
@@ -1777,16 +1952,16 @@ bool DirectoryMergeWindow::mergeFLD( const QString& nameA,const QString& nameB,c
          return false;
    }
 
-   m_pStatusInfo->addText("manual merge( "+nameA+ ", "+nameB+","+nameC+" -> " + nameDest +" )" );
+   m_pStatusInfo->addText(i18n("manual merge( %1, %2, %3 -> %4)").arg(nameA).arg(nameB).arg(nameC).arg(nameDest));
    if ( m_bSimulatedMergeStarted )
    {
-      m_pStatusInfo->addText("     Note: After a manual merge the user should continue via F5." );
+      m_pStatusInfo->addText(i18n("     Note: After a manual merge the user should continue via F7.") );
       return true;
    }
 
    bSingleFileMerge = true;
-   m_pCurrentItemForOperation->setText( s_OpStatusCol, "In progress ..." );
-   ensureItemVisible( m_pCurrentItemForOperation );
+   (*m_currentItemForOperation)->setText( s_OpStatusCol, i18n("In progress...") );
+   ensureItemVisible( *m_currentItemForOperation );
 
    emit startDiffMerge( nameA, nameB, nameC, nameDest, "","","" );
 
@@ -1803,8 +1978,8 @@ bool DirectoryMergeWindow::copyFLD( const QString& srcName, const QString& destN
       bool bSuccess = deleteFLD( destName, m_pOptions->m_bDmCreateBakFiles );
       if ( !bSuccess )
       {
-         m_pStatusInfo->addText("Error: copy( "+srcName+ " -> " + destName +" ) failed."
-            "Deleting existing destination failed.");
+         m_pStatusInfo->addText(i18n("Error: copy( %1 -> %2 ) failed."
+            "Deleting existing destination failed.").arg(srcName).arg(destName));
          return false;
       }
    }
@@ -1813,7 +1988,7 @@ bool DirectoryMergeWindow::copyFLD( const QString& srcName, const QString& destN
 
    if ( fi.isSymLink() && (fi.isDir() && !m_bFollowDirLinks  ||  !fi.isDir() && !m_bFollowDirLinks) )
    {
-      m_pStatusInfo->addText("copyLink( "+srcName+ " -> " + destName +" )");
+      m_pStatusInfo->addText(i18n("copyLink( %1 -> %2 )").arg(srcName).arg(destName));
 #ifdef _WIN32
       // What are links?
 #else
@@ -1824,13 +1999,13 @@ bool DirectoryMergeWindow::copyFLD( const QString& srcName, const QString& destN
       FileAccess destFi(destName);
       if ( !destFi.isLocal() || !fi.isLocal() )
       {
-         m_pStatusInfo->addText("Error: copyLink failed: Remote links are not yet supported.");
+         m_pStatusInfo->addText(i18n("Error: copyLink failed: Remote links are not yet supported."));
          return false;
       }
       QString linkTarget = fi.readLink();
       bool bSuccess = FileAccess::symLink( linkTarget, destName );
       if (!bSuccess)
-         m_pStatusInfo->addText("Error: copyLink failed.");
+         m_pStatusInfo->addText(i18n("Error: copyLink failed."));
       return bSuccess;
 #endif
    }
@@ -1850,7 +2025,7 @@ bool DirectoryMergeWindow::copyFLD( const QString& srcName, const QString& destN
          return false;
    }
 
-   m_pStatusInfo->addText("copy( "+srcName+ " -> " + destName +" )");
+   m_pStatusInfo->addText(i18n("copy( %1 -> %2 )").arg(srcName).arg(destName));
 
    if ( m_bSimulatedMergeStarted )
    {
@@ -1876,13 +2051,13 @@ bool DirectoryMergeWindow::renameFLD( const QString& srcName, const QString& des
       bool bSuccess = deleteFLD( destName, false /*no backup*/ );
       if (!bSuccess)
       {
-         m_pStatusInfo->addText( "Error during rename( "+srcName+" -> " + destName + " ): "
-                             "Cannot delete existing destination." );
+         m_pStatusInfo->addText( i18n("Error during rename( %1 -> %2 ): "
+                             "Cannot delete existing destination." ).arg(srcName).arg(destName));
          return false;
       }
    }
 
-   m_pStatusInfo->addText("rename( "+srcName+ " -> " + destName +" )");
+   m_pStatusInfo->addText(i18n("rename( %1 -> %2 )").arg(srcName).arg(destName))	;
    if ( m_bSimulatedMergeStarted )
    {
       return true;
@@ -1891,7 +2066,7 @@ bool DirectoryMergeWindow::renameFLD( const QString& srcName, const QString& des
    bool bSuccess = FileAccess( srcName ).rename( destName );
    if (!bSuccess)
    {
-      m_pStatusInfo->addText( "Error: Rename failed." );
+      m_pStatusInfo->addText( i18n("Error: Rename failed.") );
       return false;
    }
 
@@ -1909,8 +2084,8 @@ bool DirectoryMergeWindow::makeDir( const QString& name, bool bQuiet )
       bool bSuccess = deleteFLD( name, true );
       if (!bSuccess)
       {
-         m_pStatusInfo->addText( "Error during makeDir of "+name+
-                             "Cannot delete existing file." );
+         m_pStatusInfo->addText( i18n("Error during makeDir of %1. "
+                             "Cannot delete existing file." ).arg(name));
          return false;
       }
    }
@@ -1925,7 +2100,7 @@ bool DirectoryMergeWindow::makeDir( const QString& name, bool bQuiet )
    }
 
    if ( ! bQuiet )
-      m_pStatusInfo->addText("makeDir( " + name + " )");
+      m_pStatusInfo->addText(i18n("makeDir( %1 )").arg(name));
 
    if ( m_bSimulatedMergeStarted )
    {
@@ -1935,7 +2110,7 @@ bool DirectoryMergeWindow::makeDir( const QString& name, bool bQuiet )
    bool bSuccess = FileAccess::makeDir( name );
    if ( bSuccess == false )
    {
-      m_pStatusInfo->addText( "Error while creating directory." );
+      m_pStatusInfo->addText( i18n("Error while creating directory.") );
       return false;
    }
    return true;
@@ -1962,16 +2137,16 @@ DirectoryMergeInfo::DirectoryMergeInfo( QWidget* pParent )
    m_pInfoB = new QLabel(this);        grid->addWidget( m_pInfoB,line,1 ); ++line;
    m_pC = new QLabel("C",this);        grid->addWidget( m_pC,line, 0 );
    m_pInfoC = new QLabel(this);        grid->addWidget( m_pInfoC,line,1 ); ++line;
-   m_pDest = new QLabel("Dest",this);  grid->addWidget( m_pDest,line, 0 );
+   m_pDest = new QLabel(i18n("Dest"),this);  grid->addWidget( m_pDest,line, 0 );
    m_pInfoDest = new QLabel(this);     grid->addWidget( m_pInfoDest,line,1 ); ++line;
 
    m_pInfoList = new QListView(this);  topLayout->addWidget( m_pInfoList );
-   m_pInfoList->addColumn("Dir");
-   m_pInfoList->addColumn("Type");
-   m_pInfoList->addColumn("Size");
-   m_pInfoList->addColumn("Attr");
-   m_pInfoList->addColumn("Last Modification");
-   m_pInfoList->addColumn("Link-Destination");
+   m_pInfoList->addColumn(i18n("Dir"));
+   m_pInfoList->addColumn(i18n("Type"));
+   m_pInfoList->addColumn(i18n("Size"));
+   m_pInfoList->addColumn(i18n("Attr"));
+   m_pInfoList->addColumn(i18n("Last Modification"));
+   m_pInfoList->addColumn(i18n("Link-Destination"));
    setMinimumSize( 100,100 );
 }
 
@@ -1995,7 +2170,7 @@ static void addListViewItem( QListView* pListView, const QString& dir,
          new QListViewItem(
             pListView,
             dir,
-            QString( fi.isDir() ? "Dir" : "File" ) + (fi.isSymLink() ? "-Link" : ""),
+            QString( fi.isDir() ? i18n("Dir") : i18n("File") ) + (fi.isSymLink() ? "-Link" : ""),
             QString::number(fi.size()),
             QString(fi.isReadable() ? "r" : " ") + (fi.isWritable()?"w" : " ")
 #ifdef _WIN32
@@ -2012,7 +2187,7 @@ static void addListViewItem( QListView* pListView, const QString& dir,
          new QListViewItem(
             pListView,
             dir,
-            "not available",
+            i18n("not available"),
             "",
             "",
             "",
@@ -2032,16 +2207,16 @@ void DirectoryMergeInfo::setInfo(
    bool bHideDest = false;
    if ( dirA.absFilePath()==dirDest.absFilePath() )
    {
-      m_pA->setText( "A (Dest): " );  bHideDest=true;
+      m_pA->setText( i18n("A (Dest): ") );  bHideDest=true;
    }
    else
-      m_pA->setText( !dirC.isValid() ? "A:    " : "A (Base): ");
+      m_pA->setText( !dirC.isValid() ? QString("A:    ") : i18n("A (Base): "));
 
    m_pInfoA->setText( dirA.prettyAbsPath() );
 
    if ( dirB.absFilePath()==dirDest.absFilePath() )
    {
-      m_pB->setText( "B (Dest): " );  bHideDest=true;
+      m_pB->setText( i18n("B (Dest): ") );  bHideDest=true;
    }
    else
       m_pB->setText( "B:    " );
@@ -2049,13 +2224,13 @@ void DirectoryMergeInfo::setInfo(
 
    if ( dirC.absFilePath()==dirDest.absFilePath() )
    {
-      m_pC->setText( "C (Dest): " );  bHideDest=true;
+      m_pC->setText( i18n("C (Dest): ") );  bHideDest=true;
    }
    else
       m_pC->setText( "C:    " );
    m_pInfoC->setText( dirC.prettyAbsPath() );
 
-   m_pDest->setText( "Dest: " ); m_pInfoDest->setText( dirDest.prettyAbsPath() );
+   m_pDest->setText( i18n("Dest: ") ); m_pInfoDest->setText( dirDest.prettyAbsPath() );
 
    if (!dirC.isValid())    { m_pC->hide(); m_pInfoC->hide();   }
    else                     { m_pC->show(); m_pInfoC->show();   }
@@ -2070,8 +2245,95 @@ void DirectoryMergeInfo::setInfo(
    if (!bHideDest)
    {
       FileAccess fiDest( dirDest.prettyAbsPath() + "/" + mfi.m_subPath, true );
-      addListViewItem( m_pInfoList, "Dest", dirDest.prettyAbsPath(), fiDest );
+      addListViewItem( m_pInfoList, i18n("Dest"), dirDest.prettyAbsPath(), fiDest );
    }
 }
+
+
+void DirectoryMergeWindow::initDirectoryMergeActions( QObject* pKDiff3App, KActionCollection* ac )
+{
+#include "xpm/startmerge.xpm"
+   DirectoryMergeWindow* p = this;
+
+   dirStartOperation = new KAction(i18n("Start/Continue Directory Merge"), Key_F7, p, SLOT(slotRunOperationForAllItems()), ac, "dir_start_operation");
+   dirRunOperationForCurrentItem = new KAction(i18n("Run Operation for Current Item"), Key_F6, p, SLOT(slotRunOperationForCurrentItem()), ac, "dir_run_operation_for_current_item");
+   dirCompareCurrent = new KAction(i18n("Compare Selected File"), 0, p, SLOT(compareCurrentFile()), ac, "dir_compare_current");
+   dirMergeCurrent = new KAction(i18n("Merge Current File"), QIconSet(QPixmap(startmerge)), 0, pKDiff3App, SLOT(slotMergeCurrentFile()), ac, "merge_current");
+   dirFoldAll = new KAction(i18n("Fold All Subdirs"), 0, p, SLOT(slotFoldAllSubdirs()), ac, "dir_fold_all");
+   dirUnfoldAll = new KAction(i18n("Unfold All Subdirs"), 0, p, SLOT(slotUnfoldAllSubdirs()), ac, "dir_unfold_all");
+   dirRescan = new KAction(i18n("Rescan"), 0, p, SLOT(reload()), ac, "dir_rescan");
+   dirChooseAEverywhere = new KAction(i18n("Choose A for All Items"), 0, p, SLOT(slotChooseAEverywhere()), ac, "dir_choose_a_everywhere");
+   dirChooseBEverywhere = new KAction(i18n("Choose B for All Items"), 0, p, SLOT(slotChooseBEverywhere()), ac, "dir_choose_b_everywhere");
+   dirChooseCEverywhere = new KAction(i18n("Choose C for All Items"), 0, p, SLOT(slotChooseCEverywhere()), ac, "dir_choose_c_everywhere");
+   dirAutoChoiceEverywhere = new KAction(i18n("Auto-Choose Operation for All Items"), 0, p, SLOT(slotAutoChooseEverywhere()), ac, "dir_autochoose_everywhere");
+   dirDoNothingEverywhere = new KAction(i18n("No Operation for All Items"), 0, p, SLOT(slotNoOpEverywhere()), ac, "dir_nothing_everywhere");
+
+   dirCurrentDoNothing = new KAction(i18n("Do Nothing"), 0, p, SLOT(slotCurrentDoNothing()), ac, "dir_current_do_nothing");
+   dirCurrentChooseA = new KAction(i18n("A"), 0, p, SLOT(slotCurrentChooseA()), ac, "dir_current_choose_a");
+   dirCurrentChooseB = new KAction(i18n("B"), 0, p, SLOT(slotCurrentChooseB()), ac, "dir_current_choose_b");
+   dirCurrentChooseC = new KAction(i18n("C"), 0, p, SLOT(slotCurrentChooseC()), ac, "dir_current_choose_c");
+   dirCurrentMerge   = new KAction(i18n("Merge"), 0, p, SLOT(slotCurrentMerge()), ac, "dir_current_merge");
+   dirCurrentDelete  = new KAction(i18n("Delete (If Exists)"), 0, p, SLOT(slotCurrentDelete()), ac, "dir_current_delete");
+
+   dirCurrentSyncDoNothing = new KAction(i18n("Do Nothing"), 0, p, SLOT(slotCurrentDoNothing()), ac, "dir_current_sync_do_nothing");
+   dirCurrentSyncCopyAToB = new KAction(i18n("Copy A to B"), 0, p, SLOT(slotCurrentCopyAToB()), ac, "dir_current_sync_copy_a_to_b" );
+   dirCurrentSyncCopyBToA = new KAction(i18n("Copy B to A"), 0, p, SLOT(slotCurrentCopyBToA()), ac, "dir_current_sync_copy_b_to_a" );
+   dirCurrentSyncDeleteA  = new KAction(i18n("Delete A"), 0, p, SLOT(slotCurrentDeleteA()), ac,"dir_current_sync_delete_a");
+   dirCurrentSyncDeleteB  = new KAction(i18n("Delete B"), 0, p, SLOT(slotCurrentDeleteB()), ac,"dir_current_sync_delete_b");
+   dirCurrentSyncDeleteAAndB  = new KAction(i18n("Delete A and B"), 0, p, SLOT(slotCurrentDeleteAAndB()), ac,"dir_current_sync_delete_a_and_b");
+   dirCurrentSyncMergeToA   = new KAction(i18n("Merge to A"), 0, p, SLOT(slotCurrentMergeToA()), ac,"dir_current_sync_merge_to_a");
+   dirCurrentSyncMergeToB   = new KAction(i18n("Merge to B"), 0, p, SLOT(slotCurrentMergeToB()), ac,"dir_current_sync_merge_to_b");
+   dirCurrentSyncMergeToAAndB   = new KAction(i18n("Merge to A and B"), 0, p, SLOT(slotCurrentMergeToAAndB()), ac,"dir_current_sync_merge_to_a_and_b");
+}
+
+
+void DirectoryMergeWindow::updateAvailabilities( bool bDirCompare, bool bDiffWindowVisible )
+{
+   dirStartOperation->setEnabled( bDirCompare );
+   dirRunOperationForCurrentItem->setEnabled( bDirCompare );
+   dirFoldAll->setEnabled( bDirCompare );
+   dirUnfoldAll->setEnabled( bDirCompare );
+
+   dirCompareCurrent->setEnabled( bDirCompare  &&  isVisible()  &&  isFileSelected() );
+
+   dirMergeCurrent->setEnabled( bDirCompare  &&  isVisible()  &&  isFileSelected()
+                                || bDiffWindowVisible );
+
+   dirRescan->setEnabled( bDirCompare );
+
+   dirAutoChoiceEverywhere->setEnabled( bDirCompare &&  isVisible() );
+   dirDoNothingEverywhere->setEnabled( bDirCompare &&  isVisible() );
+   dirChooseAEverywhere->setEnabled( bDirCompare &&  isVisible() );
+   dirChooseBEverywhere->setEnabled( bDirCompare &&  isVisible() );
+   dirChooseCEverywhere->setEnabled( bDirCompare &&  isVisible() );
+
+   bool bThreeDirs = m_dirC.isValid();
+
+   QListViewItem* lvi = currentItem();
+   DirMergeItem* pDMI = lvi==0 ? 0 : static_cast<DirMergeItem*>(lvi);
+   MergeFileInfos* pMFI = pDMI==0 ? 0 : pDMI->m_pMFI;
+
+   bool bItemActive = bDirCompare &&  isVisible() && pMFI!=0;//  &&  hasFocus();
+   bool bMergeMode = bThreeDirs || !m_bSyncMode;
+   bool bFTConflict = pMFI==0 ? false : conflictingFileTypes(*pMFI);
+
+   dirCurrentDoNothing->setEnabled( bItemActive && bMergeMode );
+   dirCurrentChooseA->setEnabled( bItemActive && bMergeMode && pMFI->m_bExistsInA );
+   dirCurrentChooseB->setEnabled( bItemActive && bMergeMode && pMFI->m_bExistsInB );
+   dirCurrentChooseC->setEnabled( bItemActive && bMergeMode && pMFI->m_bExistsInC );
+   dirCurrentMerge->setEnabled( bItemActive && bMergeMode && !bFTConflict );
+   dirCurrentDelete->setEnabled( bItemActive && bMergeMode );
+
+   dirCurrentSyncDoNothing->setEnabled( bItemActive && !bMergeMode );
+   dirCurrentSyncCopyAToB->setEnabled( bItemActive && !bMergeMode && pMFI->m_bExistsInA );
+   dirCurrentSyncCopyBToA->setEnabled( bItemActive && !bMergeMode && pMFI->m_bExistsInB );
+   dirCurrentSyncDeleteA->setEnabled( bItemActive && !bMergeMode && pMFI->m_bExistsInA );
+   dirCurrentSyncDeleteB->setEnabled( bItemActive && !bMergeMode && pMFI->m_bExistsInB );
+   dirCurrentSyncDeleteAAndB->setEnabled( bItemActive && !bMergeMode && pMFI->m_bExistsInB && pMFI->m_bExistsInB );
+   dirCurrentSyncMergeToA->setEnabled( bItemActive && !bMergeMode && !bFTConflict );
+   dirCurrentSyncMergeToB->setEnabled( bItemActive && !bMergeMode && !bFTConflict );
+   dirCurrentSyncMergeToAAndB->setEnabled( bItemActive && !bMergeMode && !bFTConflict );
+}
+
 
 #include "directorymergewindow.moc"

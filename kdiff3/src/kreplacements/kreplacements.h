@@ -17,8 +17,8 @@
 
 /***************************************************************************
  * $Log$
- * Revision 1.1  2003/10/06 18:48:54  joachim99
- * KDiff3 version 0.9.70
+ * Revision 1.2  2003/12/09 20:26:39  joachim99
+ * 0.9.80
  *
  ***************************************************************************/
 
@@ -178,6 +178,8 @@ public:
    QPopupMenu* fileMenu;
    QPopupMenu* editMenu;
    QPopupMenu* directoryMenu;
+   QPopupMenu* dirCurrentItemMenu;
+   QPopupMenu* dirCurrentSyncItemMenu;
    QPopupMenu* movementMenu;
    QPopupMenu* mergeMenu;
    QPopupMenu* windowsMenu;
@@ -231,8 +233,8 @@ public:
 class KAction : public QAction
 {
 public:
-   KAction(const QString& text, const QIconSet& icon, int accel, QWidget* parent, const char* slot, KActionCollection* actionCollection, const QString& name, bool bToggle=false, bool bMenu=true);
-   KAction(const QString& text, int accel, QWidget* parent, const char* slot, KActionCollection* actionCollection, const QString& name, bool bToggle=false, bool bMenu=true);
+   KAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bToggle=false, bool bMenu=true);
+   KAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bToggle=false, bool bMenu=true);
    void setStatusText(const QString&);
    void plug(QPopupMenu*);
 };
@@ -240,8 +242,8 @@ public:
 class KToggleAction : public KAction
 {
 public:
-   KToggleAction(const QString& text, const QIconSet& icon, int accel, QWidget* parent, const char* slot, KActionCollection* actionCollection, const QString& name, bool bMenu=true);
-   KToggleAction(const QString& text, int accel, QWidget* parent, const char* slot, KActionCollection* actionCollection, const QString& name, bool bMenu=true);
+   KToggleAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bMenu=true);
+   KToggleAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bMenu=true);
    KToggleAction(const QString& text, const QIconSet& icon, int accel, KActionCollection* actionCollection, const QString& name, bool bMenu=true);
    void setChecked(bool);
    bool isChecked();
@@ -332,6 +334,7 @@ public:
 
    int count();
    QString arg(int);
+   KURL url(int i){ return KURL(arg(i)); }
    void clear();
    QString getOption(const QString&);
    QCStringList getOptionList( const QString& );
@@ -391,6 +394,7 @@ namespace KIO
    class Job : public QObject
    {
    public:
+      void kill(bool){}
       bool error() {return false;}
       void showErrorDialog( QWidget* ) {}
    };

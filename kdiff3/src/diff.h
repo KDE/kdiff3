@@ -15,13 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * $Log$
- * Revision 1.1  2003/10/06 18:38:48  joachim99
- * KDiff3 version 0.9.70
- *                                                                   *
- ***************************************************************************/
-
 #ifndef DIFF_H
 #define DIFF_H
 
@@ -108,7 +101,7 @@ public:
    bool bTextAEqB;
 };
 
-void calcDiff3LineListUsingAB(       
+void calcDiff3LineListUsingAB(
    const DiffList* pDiffListAB,
    Diff3LineList& d3ll
    );
@@ -129,10 +122,11 @@ struct LineData
    const char* pFirstNonWhiteChar;
    int size;
 
-   LineData(){ pLine=0; size=0; occurances=0; }
+   LineData(){ pLine=0; size=0; occurances=0; bContainsPureComment=false; }
    int width();  // Calcs width considering tabs.
    int occurances;
    bool whiteLine(){ return pFirstNonWhiteChar-pLine == size; }
+   bool bContainsPureComment;
 };
 
 void prepareOccurances( LineData* p, int size );
@@ -150,9 +144,10 @@ public:
    bool m_bPreserve;
    void reset();
    void readPPFile( bool bPreserveCR, const QString& ppCmd, bool bUpCase );
-   void readLMPPFile( SourceData* pOrigSource, const QString& ppCmd, bool bUpCase );
+   void readLMPPFile( SourceData* pOrigSource, const QString& ppCmd, bool bUpCase, bool bRemoveComments );
    void readFile(const QString& filename, bool bFollowLinks, bool bUpCase );
    void preprocess(bool bPreserveCR );
+   void removeComments( LineData* pLD );
    void setData( const QString& data, bool bUpCase );
    void setFilename(const QString& filename);
    void setFileAccess( const FileAccess& fa );
@@ -217,6 +212,8 @@ public:
 };
 
 class OptionDialog;
+
+QString decodeString( const char*s , OptionDialog* );
 
 class DiffTextWindow : public QWidget
 {
@@ -337,6 +334,7 @@ public:
 
 public slots:
    void setFirstLine(int firstLine);
+   void slotRedraw();
 signals:
    void setLine(int);
 private:
@@ -376,6 +374,12 @@ enum e_MergeDetails
 
 void mergeOneLine( const Diff3Line& d, e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, int& src, bool bTwoInputs );
 
+enum e_MergeSrcSelector
+{
+   A=1,
+   B=2,
+   C=3
+};
 
 class MergeResultWindow : public QWidget
 {
@@ -398,6 +402,7 @@ public:
    bool saveDocument( const QString& fileName );
    int getNrOfUnsolvedConflicts();
    void choose(int selector);
+   void chooseGlobal(int selector, bool bConflictsOnly, bool bWhiteSpaceOnly );
 
    int getNofColumns();
    int getNofLines();
@@ -430,12 +435,6 @@ public slots:
    void slotGoNextUnsolvedConflict();
    void slotGoPrevConflict();
    void slotGoNextConflict();
-   void slotChooseA();
-   void slotChooseB();
-   void slotChooseC();
-   void slotChooseAEverywhere();
-   void slotChooseBEverywhere();
-   void slotChooseCEverywhere();
    void slotAutoSolve();
    void slotUnsolve();
    void slotSetFastSelectorLine(int);
@@ -452,7 +451,7 @@ signals:
    void showPopupMenu( const QPoint& point );
 
 private:
-   void merge(bool bAutoSolve, int defaultSelector);
+   void merge(bool bAutoSolve, int defaultSelector, bool bConflictsOnly=false, bool bWhiteSpaceOnly=false );
    QCString getString( int lineIdx );
 
    OptionDialog* m_pOptionDialog;
@@ -517,12 +516,16 @@ private:
    struct MergeLine
    {
       MergeLine()
-      { srcSelect=0; mergeDetails=eDefault; d3lLineIdx = -1; srcRangeLength=0; bConflict=false; bDelta=false;}
+      {
+         srcSelect=0; mergeDetails=eDefault; d3lLineIdx = -1; srcRangeLength=0;
+         bConflict=false; bDelta=false; bWhiteSpaceConflict=false;
+      }
       Diff3LineList::const_iterator id3l;
       e_MergeDetails mergeDetails;
       int d3lLineIdx;  // Needed to show the correct window pos.
       int srcRangeLength; // how many src-lines have this properties
       bool bConflict;
+      bool bWhiteSpaceConflict;
       bool bDelta;
       int srcSelect;
       MergeEditLineList mergeEditLineList;
@@ -596,189 +599,12 @@ void fineDiff(
    int selector,
    LineData* v1,
    LineData* v2,
-   int maxSearchLength,
    bool& bTextsTotalEqual
    );
 
 
 bool equal( const LineData& l1, const LineData& l2, bool bStrict );
 
-inline bool equal( char c1, char c2, bool /*bStrict*/ )
-{
-   // If bStrict then white space doesn't match
-
-   //if ( bStrict &&  ( c1==' ' || c1=='\t' ) )
-   //   return false;
-
-   return c1==c2;
-}
-
-
-// My own diff-invention:
-template <class T>
-void calcDiff( const T* p1, int size1, const T* p2, int size2, DiffList& diffList, int match, int maxSearchRange )
-{
-   diffList.clear();
-
-   const T* p1start = p1;
-   const T* p2start = p2;
-   const T* p1end=p1+size1;
-   const T* p2end=p2+size2;
-   for(;;)
-   {
-      int nofEquals = 0;
-      while( p1!=p1end &&  p2!=p2end && equal(*p1, *p2, false) )
-      {
-
-
-         ++p1;
-         ++p2;
-         ++nofEquals;
-      }
-
-      bool bBestValid=false;
-      int bestI1=0;
-      int bestI2=0;
-      int i1=0;
-      int i2=0;
-      for( i1=0; ; ++i1 )
-      {
-         if ( &p1[i1]==p1end || ( bBestValid && i1>= bestI1+bestI2))
-         {
-            break;
-         }
-         for(i2=0;i2<maxSearchRange;++i2)
-         {
-            if( &p2[i2]==p2end ||  ( bBestValid && i1+i2>=bestI1+bestI2) )
-            {
-               break;
-            }
-            else if(  equal( p2[i2], p1[i1], true ) &&
-                      ( match==1 ||  abs(i1-i2)<3  || ( &p2[i2+1]==p2end  &&  &p1[i1+1]==p1end ) ||
-                         ( &p2[i2+1]!=p2end  &&  &p1[i1+1]!=p1end  && equal( p2[i2+1], p1[i1+1], false ))
-                      )
-                   )
-            {
-               if ( i1+i2 < bestI1+bestI2 || bBestValid==false )
-               {
-                  bestI1 = i1;
-                  bestI2 = i2;
-                  bBestValid = true;
-                  break;
-               }
-            }
-         }
-      }
-
-      // The match was found using the strict search. Go back if there are non-strict
-      // matches.
-      while( bestI1>=1 && bestI2>=1 && equal( p1[bestI1-1], p2[bestI2-1], false ) )
-      {
-         --bestI1;
-         --bestI2;
-      }
-
-
-      bool bEndReached = false;
-      if (bBestValid)
-      {
-         // continue somehow
-         Diff d(nofEquals, bestI1, bestI2);
-         diffList.push_back( d );
-
-         p1 += bestI1;
-         p2 += bestI2;
-      }
-      else
-      {
-         // Nothing else to match.
-         Diff d(nofEquals, p1end-p1, p2end-p2);
-         diffList.push_back( d );
-
-         bEndReached = true; //break;
-      }
-
-      // Sometimes the algorithm that chooses the first match unfortunately chooses
-      // a match where later actually equal parts don't match anymore.
-      // A different match could be achieved, if we start at the end.
-      // Do it, if it would be a better match.
-      int nofUnmatched = 0;
-      const T* pu1 = p1-1;
-      const T* pu2 = p2-1;
-      while ( pu1>=p1start && pu2>=p2start && equal( *pu1, *pu2, false ) )
-      {
-         ++nofUnmatched;
-         --pu1;
-         --pu2;
-      }
-
-      Diff d = diffList.back();
-      if ( nofUnmatched > 0 )
-      {
-         // We want to go backwards the nofUnmatched elements and redo
-         // the matching
-         d = diffList.back();
-         Diff origBack = d;
-         diffList.pop_back();
-
-         while (  nofUnmatched > 0 )
-         {
-            if ( d.diff1 > 0  &&  d.diff2 > 0 )
-            {
-               --d.diff1;
-               --d.diff2;
-               --nofUnmatched;
-            }
-            else if ( d.nofEquals > 0 )
-            {
-               --d.nofEquals;
-               --nofUnmatched;
-            }
-
-            if ( d.nofEquals==0 && (d.diff1==0 || d.diff2==0) &&  nofUnmatched>0 )
-            {
-               if ( diffList.empty() )
-                  break;
-               d.nofEquals += diffList.back().nofEquals;
-               d.diff1 += diffList.back().diff1;
-               d.diff2 += diffList.back().diff2;
-               diffList.pop_back();
-               bEndReached = false;
-            }
-         }
-
-         if ( bEndReached )
-            diffList.push_back( origBack );
-         else
-         {
-
-            p1 = pu1 + 1 + nofUnmatched;
-            p2 = pu2 + 1 + nofUnmatched;
-            diffList.push_back( d );
-         }
-      }
-      if ( bEndReached )
-         break;
-   }
-
-#ifndef NDEBUG
-   // Verify difflist
-   {
-      int l1=0;
-      int l2=0;
-      DiffList::iterator i;
-      for( i = diffList.begin(); i!=diffList.end(); ++i )
-      {
-         l1+= i->nofEquals + i->diff1;
-         l2+= i->nofEquals + i->diff2;
-      }
-
-      //if( l1!=p1-p1start || l2!=p2-p2start )
-      if( l1!=size1 || l2!=size2 )
-         assert( false );
-   }
-#endif
-}
 
 
 

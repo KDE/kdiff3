@@ -15,15 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * $Log$
- * Revision 1.2  2003/10/11 12:47:09  joachim99
- * Avoid QWidget::setFont() in paintEvent()
- *
- * Revision 1.1  2003/10/06 18:38:48  joachim99
- * KDiff3 version 0.9.70
- ***************************************************************************/
-
 #include <iostream>
 #include "diff.h"
 #include "merger.h"
@@ -37,6 +28,7 @@
 #include <optiondialog.h>
 #include <math.h>
 #include <qdragobject.h>
+#include <klocale.h>
 
 #define leftInfoWidth (4+m_lineNumberWidth)   // Nr of information columns on left side
 
@@ -500,7 +492,7 @@ void DiffTextWindow::writeLine(
    }
 
    p.fillRect( leftInfoWidth*fontWidth, yOffset, width(), fontHeight, bgColor );
-   
+
    if (pld!=0)
    {
       // First calculate the "changed" information for each character.
@@ -548,11 +540,18 @@ void DiffTextWindow::writeLine(
             c = m_cDiffBoth;
          }
 
+         if ( c!=m_pOptionDialog->m_fgColor && whatChanged2==0 && !m_pOptionDialog->m_bShowWhiteSpace )
+         {
+            // The user doesn't want to see highlighted white space.
+            c = m_pOptionDialog->m_fgColor;
+         }
+
          QRect outRect( xOffset + fontWidth*outPos, yOffset, fontWidth*spaces, fontHeight );
          if ( m_invalidRect.intersects( outRect ) )
          {
             if( !selection.within( line, outPos ) )
             {
+
                if( c!=m_pOptionDialog->m_fgColor )
                {
                   QColor lightc = diffBgColor;
@@ -564,7 +563,7 @@ void DiffTextWindow::writeLine(
                p.setPen( c );
                if ( s[0]==' '  &&  c!=m_pOptionDialog->m_fgColor  &&  charChanged[i]!=0 )
                {
-                  if ( m_pOptionDialog->m_bShowWhiteSpace )
+                  if ( m_pOptionDialog->m_bShowWhiteSpaceCharacters && m_pOptionDialog->m_bShowWhiteSpace)
                   {
                      p.fillRect( xOffset + fontWidth*outPos, yOffset+fontAscent,
                                  fontWidth*spaces-1, fontDescent+1, c );
@@ -572,7 +571,7 @@ void DiffTextWindow::writeLine(
                }
                else
                {
-                  p.drawText( xOffset + fontWidth*outPos, yOffset + fontAscent, QString::fromUtf8(s) );
+                  p.drawText( xOffset + fontWidth*outPos, yOffset + fontAscent, decodeString(s,m_pOptionDialog) );
                }
                p.setFont(normalFont);
             }
@@ -583,7 +582,7 @@ void DiffTextWindow::writeLine(
                            fontWidth*(spaces), fontHeight, colorGroup().highlight() );
 
                p.setPen( colorGroup().highlightedText() );
-               p.drawText( xOffset + fontWidth*outPos, yOffset + fontAscent, QString::fromUtf8(s) );
+               p.drawText( xOffset + fontWidth*outPos, yOffset + fontAscent, decodeString(s,m_pOptionDialog) );
 
                selection.bSelectionContainsData = true;
             }
@@ -617,8 +616,11 @@ void DiffTextWindow::writeLine(
    }
    if ( c!=m_pOptionDialog->m_fgColor && whatChanged2==0 )//&& whatChanged==0 )
    {
-      p.setBrushOrigin(0,0);
-      p.fillRect( xLeft, yOffset, fontWidth*2-1, fontHeight, QBrush(c,Dense5Pattern) );
+      if ( m_pOptionDialog->m_bShowWhiteSpace )
+      {
+         p.setBrushOrigin(0,0);
+         p.fillRect( xLeft, yOffset, fontWidth*2-1, fontHeight, QBrush(c,Dense5Pattern) );
+      }
    }
    else
    {
@@ -782,11 +784,11 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
       const char* winId = (   m_winIdx==1 ? (m_bTriple?"A (Base)":"A") :
                             ( m_winIdx==2 ? "B" : "C" ) );
 
-      QString s;
+      QString s = QString(" ")+ winId + " : " + m_filename + " : ";
       if ( l!=-1 )
-         s.sprintf(" %s : %s : Topline %d", winId, m_filename.ascii(), l+1 );
+         s += i18n("Topline %1").arg( l+1 );
       else
-         s.sprintf(" %s : %s: End", winId, m_filename.ascii() );
+         s += i18n("End");
 
       if (hasFocus())
       {
@@ -1020,4 +1022,21 @@ void DiffTextWindow::setSelection( int firstLine, int startPos, int lastLine, in
    selection.start( firstLine, convertToPosOnScreen( getString(firstLine), startPos ) );
    selection.end( lastLine, convertToPosOnScreen( getString(lastLine), endPos ) );
    update();
+}
+
+
+#include <qtextcodec.h>
+
+QString decodeString( const char*s , OptionDialog* pOptions )
+{
+   if ( pOptions->m_bStringEncoding )
+   {
+      QTextCodec* c = QTextCodec::codecForLocale();
+      if (c!=0)
+         return c->toUnicode( s );
+      else
+         return QString(s);
+   }
+   else
+      return QString(s);
 }

@@ -187,18 +187,22 @@ public:
    void setSubRangeTransformation( double dMin, double dMax );
 
    void exitEventLoop();
-   void enterEventLoop();
+   void enterEventLoop( KIO::Job* pJob, const QString& jobInfo );
 
    void start();
 
    bool wasCancelled();
    void show();
    void hide();
+
+   virtual void timerEvent(QTimerEvent*);
 private:
    KProgress* m_pProgressBar;
    KProgress* m_pSubProgressBar;
    QLabel* m_pInformation;
    QLabel* m_pSubInformation;
+   QLabel* m_pSlowJobInfo;
+   QPushButton* m_pAbortButton;
    int m_maximum;
    double m_dCurrent;
    double m_dSubCurrent;
@@ -208,11 +212,13 @@ private:
    QTime m_t1;
    QTime m_t2;
    bool m_bWasCancelled;
-
+   KIO::Job* m_pJob;
+   QString m_currentJobInfo;  // Needed if the job doesn't stop after a reasonable time.
 protected:
    virtual void reject();
 private slots:
    void delayedHide();
+   void slotAbort();
 };
 
 extern ProgressDialog* g_pProgressDialog;

@@ -15,20 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * $Log$
- * Revision 1.3  2003/10/14 20:50:46  joachim99
- * Fix for a warning concerning VERSION
- *
- * Revision 1.2  2003/10/07 08:41:06  friseb123
- * Placing the version into a separate include: version.h
- * version.c extract the version number
- *
- * Revision 1.1  2003/10/06 18:38:48  joachim99
- * KDiff3 version 0.9.70
- *                                                                   *
- ***************************************************************************/
-
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <klocale.h>

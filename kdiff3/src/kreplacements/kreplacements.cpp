@@ -15,14 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * $Log$
- * Revision 1.2  2003/10/12 11:36:57  joachim99
- * Fix for finding documentation
- *
- * Revision 1.1  2003/10/06 18:48:54  joachim99
- * KDiff3 version 0.9.70
- ***************************************************************************/
 
 #include "kreplacements.h"
 
@@ -94,7 +86,7 @@ static void showHelp()
       else
       {
          QFileInfo prog( buf );
-         _spawnlp( _P_NOWAIT , prog.filePath(), prog.fileName(), (const char*)helpFile.absFilePath(), NULL );
+         _spawnlp( _P_NOWAIT , prog.filePath(), prog.fileName(), (const char*)("file:///"+helpFile.absFilePath()), NULL );
       }
 
    #else
@@ -291,6 +283,8 @@ KMainWindow::KMainWindow( QWidget* parent, const QString& name )
    menuBar()->insertItem(tr("&Edit"), editMenu);
    directoryMenu = new QPopupMenu();
    menuBar()->insertItem(tr("&Directory"), directoryMenu);
+   dirCurrentItemMenu = 0;
+   dirCurrentSyncItemMenu = 0;
    movementMenu = new QPopupMenu();
    menuBar()->insertItem(tr("&Movement"), movementMenu);
    mergeMenu = new QPopupMenu();
@@ -616,7 +610,7 @@ QStringList KConfig::readListEntry(const QString& k, char /*separator*/ )
 
 
 KAction::KAction(const QString& text, const QIconSet& icon, int accel,
- QWidget* receiver, const char* slot, KActionCollection* actionCollection,
+ QObject* receiver, const char* slot, KActionCollection* actionCollection,
  const QString& name, bool bToggle, bool bMenu
  )
 : QAction ( text, icon, text, accel, actionCollection->m_pMainWindow, name, bToggle )
@@ -637,6 +631,28 @@ KAction::KAction(const QString& text, const QIconSet& icon, int accel,
    if (bMenu)
    {
       if( name[0]=='g')       addTo( p->movementMenu );
+      else if( name.left(16)=="dir_current_sync")
+	  {
+          if ( p->dirCurrentItemMenu==0 )
+		  {
+			p->dirCurrentItemMenu = new QPopupMenu();
+            p->directoryMenu->insertItem(tr("Current &Item Merge Operation"), p->dirCurrentItemMenu);
+            p->dirCurrentSyncItemMenu = new QPopupMenu();
+            p->directoryMenu->insertItem(tr("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
+		  }
+		  addTo( p->dirCurrentItemMenu );
+	  }
+      else if( name.left(11)=="dir_current")
+	  {
+          if ( p->dirCurrentItemMenu==0 )
+		  {
+			p->dirCurrentItemMenu = new QPopupMenu();
+            p->directoryMenu->insertItem(tr("Current &Item Merge Operation"), p->dirCurrentItemMenu);
+            p->dirCurrentSyncItemMenu = new QPopupMenu();
+            p->directoryMenu->insertItem(tr("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
+		  }
+		  addTo( p->dirCurrentSyncItemMenu );
+	  }
       else if( name[0]=='d')  addTo( p->directoryMenu );
       else if( name[0]=='f')  addTo( p->fileMenu );
       else if( name[0]=='w')  addTo( p->windowsMenu );
@@ -645,7 +661,7 @@ KAction::KAction(const QString& text, const QIconSet& icon, int accel,
 }
 
 KAction::KAction(const QString& text, int accel,
- QWidget* receiver, const char* slot, KActionCollection* actionCollection,
+ QObject* receiver, const char* slot, KActionCollection* actionCollection,
  const QString& name, bool bToggle, bool bMenu
  )
 : QAction ( text, text, accel, actionCollection->m_pMainWindow, name, bToggle )
@@ -663,6 +679,28 @@ KAction::KAction(const QString& text, int accel,
    if (bMenu)
    {
       if( name[0]=='g') addTo( p->movementMenu );
+      else if( name.left(16)=="dir_current_sync")
+	  {
+          if ( p->dirCurrentItemMenu==0 )
+		  {
+			p->dirCurrentItemMenu = new QPopupMenu();
+            p->directoryMenu->insertItem(tr("Current &Item Merge Operation"), p->dirCurrentItemMenu);
+            p->dirCurrentSyncItemMenu = new QPopupMenu();
+            p->directoryMenu->insertItem(tr("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
+		  }
+		  addTo( p->dirCurrentItemMenu );
+	  }
+      else if( name.left(11)=="dir_current")
+	  {
+          if ( p->dirCurrentItemMenu==0 )
+		  {
+			p->dirCurrentItemMenu = new QPopupMenu();
+            p->directoryMenu->insertItem(tr("Current &Item Merge Operation"), p->dirCurrentItemMenu);
+            p->dirCurrentSyncItemMenu = new QPopupMenu();
+            p->directoryMenu->insertItem(tr("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
+		  }
+		  addTo( p->dirCurrentSyncItemMenu );
+	  }
       else if( name[0]=='d')  addTo( p->directoryMenu );
       else if( name[0]=='f')  addTo( p->fileMenu );
       else if( name[0]=='w')  addTo( p->windowsMenu );
@@ -680,13 +718,13 @@ void KAction::plug(QPopupMenu* menu)
 }
 
 
-KToggleAction::KToggleAction(const QString& text, const QIconSet& icon, int accel, QWidget* parent, const char* slot, KActionCollection* actionCollection, const QString& name, bool bMenu)
-: KAction( text, icon, accel, parent, slot, actionCollection, name, true, bMenu)
+KToggleAction::KToggleAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bMenu)
+: KAction( text, icon, accel, receiver, slot, actionCollection, name, true, bMenu)
 {
 }
 
-KToggleAction::KToggleAction(const QString& text, int accel, QWidget* parent, const char* slot, KActionCollection* actionCollection, const QString& name, bool bMenu)
-: KAction( text, accel, parent, slot, actionCollection, name, true, bMenu)
+KToggleAction::KToggleAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bMenu)
+: KAction( text, accel, receiver, slot, actionCollection, name, true, bMenu)
 {
 }
 
@@ -941,7 +979,7 @@ KAboutData::KAboutData( const QString& /*name*/, const QString& appName, const Q
    s_homepage = homepage;
 }
 
-KAboutData::KAboutData( const QString& /*name*/, const QString& appName, const QString& version )
+KAboutData::KAboutData( const QString& /*name*/, const QString& /*appName*/, const QString& /*version*/ )
 {
 }
 
@@ -969,7 +1007,7 @@ static std::vector<const char*> s_vArg;
 
 KCmdLineArgs* KCmdLineArgs::parsedArgs()  // static
 {
-   return &s_cmdLineArgs;   
+   return &s_cmdLineArgs;
 }
 
 void KCmdLineArgs::init( int argc, char**argv, KAboutData* )  // static

@@ -16,6 +16,7 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qapplication.h>
+#include <qpushbutton.h>
 #if QT_VERSION==230
 #else
 #include <qeventloop.h>
@@ -99,10 +100,19 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
    //       (This is a Win95-bug which has been corrected only in WinNT/2000/XP.)
    if ( !name.isEmpty() )
    {
-      if ( m_url.isLocalFile() || !m_url.isValid() ) // assuming that malformed means relative
+      // FileAccess tries to detect if the given name is an URL or a local file.
+      // This is a problem if the filename looks like an URL (i.e. contains a colon ':').
+      // e.g. "file:f.txt" is a valid filename.
+      // Most of the time it is sufficient to check if the file exists locally.
+      // 2 Problems remain:
+      //   1. When the local file exists and the remote location is wanted nevertheless. (unlikely)
+      //   2. When the local file doesn't exist and should be written to.
+
+      bool bExistsLocal = QDir().exists(name);
+      if ( m_url.isLocalFile() || !m_url.isValid() || bExistsLocal ) // assuming that invalid means relative
       {
          QString localName = name;
-         if ( m_url.isLocalFile() && name.left(5).lower()=="file:" )
+         if ( !bExistsLocal && m_url.isLocalFile() && name.left(5).lower()=="file:" )
          {
             localName = m_url.path(); // I want the path without preceding "file:"
          }
@@ -145,14 +155,25 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
          jh.stat(2/*all details*/, bWantToWrite); // returns bSuccess, ignored
 
          m_path = name;
+         m_bValidData = true; // After running stat() the variables are initialised
+                              // and valid even if the file doesn't exist and the stat
+                              // query failed.
       }
    }
 }
 
 void FileAccess::addPath( const QString& txt )
 {
-   m_url.addPath( txt );
-   setFile( m_url.url() );  // reinitialise
+   if ( m_url.isValid() )
+   {
+      m_url.addPath( txt );
+      setFile( m_url.url() );  // reinitialise
+   }
+   else
+   {
+      QString slash = (txt.isEmpty() || txt[0]=='/') ? "" : "/";
+      setFile( absFilePath() + slash + txt );
+   }
 }
 
 /*     Filetype:
@@ -540,7 +561,7 @@ bool FileAccessJobHandler::stat( int detail, bool bWantToWrite )
 
    connect( pStatJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotStatResult(KIO::Job*)));
 
-   g_pProgressDialog->enterEventLoop();
+   g_pProgressDialog->enterEventLoop( pStatJob, i18n("Getting file status: %1").arg(m_pFileAccess->prettyAbsPath()) );
 
    return m_bSuccess;
 }
@@ -582,7 +603,7 @@ bool FileAccessJobHandler::get(void* pDestBuffer, long maxLength )
       connect( pJob, SIGNAL(data(KIO::Job*,const QByteArray &)), this, SLOT(slotGetData(KIO::Job*, const QByteArray&)));
       connect( pJob, SIGNAL(percent(KIO::Job*,unsigned long)), this, SLOT(slotPercent(KIO::Job*, unsigned long)));
 
-      g_pProgressDialog->enterEventLoop();
+      g_pProgressDialog->enterEventLoop( pJob, i18n("Reading file: %1").arg(m_pFileAccess->prettyAbsPath()) );
       return m_bSuccess;
    }
    else
@@ -618,7 +639,7 @@ bool FileAccessJobHandler::put(void* pSrcBuffer, long maxLength, bool bOverwrite
       connect( pJob, SIGNAL(dataReq(KIO::Job*, QByteArray&)), this, SLOT(slotPutData(KIO::Job*, QByteArray&)));
       connect( pJob, SIGNAL(percent(KIO::Job*,unsigned long)), this, SLOT(slotPercent(KIO::Job*, unsigned long)));
 
-      g_pProgressDialog->enterEventLoop();
+      g_pProgressDialog->enterEventLoop( pJob, i18n("Writing file: %1").arg(m_pFileAccess->prettyAbsPath()) );
       return m_bSuccess;
    }
    else
@@ -681,7 +702,7 @@ bool FileAccessJobHandler::mkDir( const QString& dirName )
       KIO::SimpleJob* pJob = KIO::mkdir( dirURL );
       connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
 
-      g_pProgressDialog->enterEventLoop();
+      g_pProgressDialog->enterEventLoop( pJob, i18n("Making directory: %1").arg(dirName) );
       return m_bSuccess;
    }
 }
@@ -701,7 +722,7 @@ bool FileAccessJobHandler::rmDir( const QString& dirName )
       KIO::SimpleJob* pJob = KIO::rmdir( dirURL );
       connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
 
-      g_pProgressDialog->enterEventLoop();
+      g_pProgressDialog->enterEventLoop(pJob, i18n("Removing directory: %1").arg(dirName));
       return m_bSuccess;
    }
 }
@@ -716,7 +737,7 @@ bool FileAccessJobHandler::removeFile( const QString& fileName )
       KIO::SimpleJob* pJob = KIO::file_delete( fileName, false );
       connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
 
-      g_pProgressDialog->enterEventLoop();
+      g_pProgressDialog->enterEventLoop( pJob, i18n("Removing file: %1").arg(fileName) );
       return m_bSuccess;
    }
 }
@@ -731,7 +752,8 @@ bool FileAccessJobHandler::symLink( const QString& linkTarget, const QString& li
       KIO::CopyJob* pJob = KIO::link( linkTarget, linkLocation, false );
       connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
 
-      g_pProgressDialog->enterEventLoop();
+      g_pProgressDialog->enterEventLoop( pJob,
+         i18n("Creating symbolic link: %1 -> %2").arg(linkLocation).arg(linkTarget) );
       return m_bSuccess;
    }
 }
@@ -756,7 +778,8 @@ bool FileAccessJobHandler::rename( const QString& dest )
       connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
       connect( pJob, SIGNAL(percent(KIO::Job*,unsigned long)), this, SLOT(slotPercent(KIO::Job*, unsigned long)));
 
-      g_pProgressDialog->enterEventLoop();
+      g_pProgressDialog->enterEventLoop( pJob,
+         i18n("Renaming file: %1 -> %2").arg(m_pFileAccess->prettyAbsPath()).arg(dest) );
       return m_bSuccess;
    }
 }
@@ -790,7 +813,8 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
       KIO::FileCopyJob* pJob = KIO::file_copy ( m_pFileAccess->m_url, destUrl.url(), permissions, bOverwrite, bResume, bShowProgress );
       connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
       connect( pJob, SIGNAL(percent(KIO::Job*,unsigned long)), this, SLOT(slotPercent(KIO::Job*, unsigned long)));
-      g_pProgressDialog->enterEventLoop();
+      g_pProgressDialog->enterEventLoop( pJob,
+         i18n("Copying file: %1 -> %2").arg(m_pFileAccess->prettyAbsPath()).arg(dest) );
 
       return m_bSuccess;
       // Note that the KIO-slave preserves the original date, if this is supported.
@@ -804,13 +828,13 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
    bool bReadSuccess = srcFile.open( IO_ReadOnly );
    if ( bReadSuccess == false )
    {
-      m_pFileAccess->m_statusText = "Error during file copy operation: Opening file for reading failed. Filename: " + srcName;
+      m_pFileAccess->m_statusText = i18n("Error during file copy operation: Opening file for reading failed. Filename: %1").arg(srcName);
       return false;
    }
    bool bWriteSuccess = destFile.open( IO_WriteOnly );
    if ( bWriteSuccess == false )
    {
-      m_pFileAccess->m_statusText = "Error during file copy operation: Opening file for writing failed. Filename: " + destName;
+      m_pFileAccess->m_statusText = i18n("Error during file copy operation: Opening file for writing failed. Filename: %1").arg(destName);
       return false;
    }
 
@@ -825,7 +849,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
       Q_LONG readSize = srcFile.readBlock( &buffer[0], min2( srcSize, bufSize ) );
       if ( readSize==-1 )
       {
-         m_pFileAccess->m_statusText = "Error during file copy operation: Reading failed. Filename: "+srcName;
+         m_pFileAccess->m_statusText = i18n("Error during file copy operation: Reading failed. Filename: %1").arg(srcName);
          return false;
       }
       srcSize -= readSize;
@@ -834,7 +858,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
          Q_LONG writeSize = destFile.writeBlock( &buffer[0], readSize );
          if ( writeSize==-1 )
          {
-            m_pFileAccess->m_statusText = "Error during file copy operation: Writing failed. Filename: "+destName;
+            m_pFileAccess->m_statusText = i18n("Error during file copy operation: Writing failed. Filename: %1").arg(destName);
             return false;
          }
          readSize -= writeSize;
@@ -1190,7 +1214,8 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
          // This line makes the transfer via fish unreliable.:-(
          //connect( pListJob, SIGNAL(percent(KIO::Job*,unsigned long)), this, SLOT(slotPercent(KIO::Job*, unsigned long)));
 
-         g_pProgressDialog->enterEventLoop();
+         g_pProgressDialog->enterEventLoop( pListJob,
+            i18n("Listing directory: %1").arg(m_pFileAccess->prettyAbsPath()) );
       }
    }
 
@@ -1259,75 +1284,6 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
 }
 
 
-// Return value false means that the directory or some subdirectories
-// were not readable. Probably because of missing permissions.
-bool FileAccessJobHandler::scanLocalDirectory( const QString& dirName, t_DirectoryList* pDirList )
-{
-   bool bSuccess = true;
-   QDir dir( dirName );
-   g_pProgressDialog->setInformation( "Scanning directory: " + dirName, 0, false );
-
-   // First search subdirectorys
-   bool bHidden =  m_bFindHidden;
-   dir.setSorting( QDir::Name | QDir::DirsFirst );
-   dir.setFilter( QDir::Dirs | (bHidden ? QDir::Hidden : 0) );
-   dir.setMatchAllDirs( true );
-
-   const QFileInfoList *fiList = dir.entryInfoList();
-   if ( fiList == 0 )
-   {
-      // No Permission to read directory or other error.
-      return false;
-   }
-
-   QFileInfoListIterator it( *fiList );      // create list iterator
-
-   for ( ; it.current() != 0; ++it )       // for each file...
-   {
-      if ( g_pProgressDialog->wasCancelled() )
-         return true;
-
-      QFileInfo *fi = it.current();
-      if ( fi->isDir() )
-      {
-         if ( fi->fileName() == "." ||  fi->fileName()==".." ||
-            wildcardMultiMatch( m_dirAntiPattern, fi->fileName(), true/*case sensitive*/ ) )
-            continue;
-         else
-         {
-            if ( m_bRecursive )
-               if ( ! fi->isSymLink()  ||  m_bFollowDirLinks  )
-               {
-                  bool bLocalSuccess = scanLocalDirectory( fi->filePath(), pDirList );
-                  if ( ! bLocalSuccess )
-                     bSuccess = false;
-               }
-         }
-      }
-   }
-
-   dir.setFilter( QDir::Files | QDir::Dirs | (bHidden ? QDir::Hidden : 0) );
-   dir.setMatchAllDirs( true );
-   dir.setNameFilter( m_filePattern );
-
-   fiList = dir.entryInfoList();
-   it = *fiList;
-
-   QString sizeString;
-
-   for ( ; it.current() != 0; ++it )       // for each file...
-   {
-      QFileInfo* fi = it.current();
-
-      if ( fi->fileName() == "." ||  fi->fileName()==".."  ||
-           wildcardMultiMatch( fi->isDir() ? m_dirAntiPattern : m_fileAntiPattern, fi->fileName(), true/*case sensitive*/ ) )
-         continue;
-
-      pDirList->push_back( FileAccess( nicePath(*fi) ) );
-   }
-   return bSuccess;
-}
-
 void FileAccessJobHandler::slotListDirProcessNewEntries( KIO::Job *, const KIO::UDSEntryList& l )
 {
    KURL parentUrl( m_pFileAccess->m_absFilePath );
@@ -1377,6 +1333,14 @@ ProgressDialog::ProgressDialog( QWidget* pParent )
    m_pSubProgressBar = new KProgress(1000, this);
    layout->addWidget( m_pSubProgressBar );
 
+   QHBoxLayout* hlayout = new QHBoxLayout( layout );
+   m_pSlowJobInfo = new QLabel( " ", this);
+   hlayout->addWidget( m_pSlowJobInfo );
+
+   m_pAbortButton = new QPushButton( i18n("Cancel"), this);
+   hlayout->addWidget( m_pAbortButton );
+   connect( m_pAbortButton, SIGNAL(clicked()), this, SLOT(slotAbort()) );
+
    m_dCurrent = 0.0;
    m_dSubMax = 1.0;
    m_dSubMin = 0.0;
@@ -1385,6 +1349,7 @@ ProgressDialog::ProgressDialog( QWidget* pParent )
    m_t1.start();
    m_t2.start();
    m_bWasCancelled = false;
+   m_pJob = 0;
 }
 
 
@@ -1439,8 +1404,12 @@ void ProgressDialog::setSubCurrent( double dSubCurrent, bool bRedrawUpdate )
 void qt_enter_modal(QWidget*);
 void qt_leave_modal(QWidget*);
 
-void ProgressDialog::enterEventLoop()
+void ProgressDialog::enterEventLoop( KIO::Job* pJob, const QString& jobInfo )
 {
+   m_pJob = pJob;
+   m_currentJobInfo = jobInfo;
+   startTimer( 3000 ); /* 3 s delay */
+
    // instead of using exec() the eventloop is entered and exited often without hiding/showing the window.
 #if QT_VERSION==230
    //qApp->enter_loop();
@@ -1453,6 +1422,8 @@ void ProgressDialog::enterEventLoop()
 
 void ProgressDialog::exitEventLoop()
 {
+   killTimers();
+   m_pJob = 0;
 #if QT_VERSION==230
    //qApp->exit_loop();
 #else
@@ -1467,6 +1438,7 @@ void ProgressDialog::recalc( bool bUpdate )
       m_pProgressBar->setProgress( int( 1000.0 * m_dCurrent ) );
       m_pSubProgressBar->setProgress( int( 1000.0 * ( m_dSubCurrent * (m_dSubMax - m_dSubMin) + m_dSubMin ) ) );
       if ( !isVisible() ) show();
+      m_pSlowJobInfo->setText("");
       qApp->processEvents();
       m_t1.restart();
    }
@@ -1485,6 +1457,7 @@ void ProgressDialog::start()
 #include <qtimer.h>
 void ProgressDialog::show()
 {
+   killTimers();
    if ( !isVisible() )
    {
 #if QT_VERSION==230
@@ -1497,19 +1470,39 @@ void ProgressDialog::show()
 
 void ProgressDialog::hide()
 {
+   killTimers();
    // Calling QDialog::hide() directly doesn't always work. (?)
    QTimer::singleShot( 100, this, SLOT(delayedHide()) );
 }
 
 void ProgressDialog::delayedHide()
 {
+   if (m_pJob!=0)
+   {
+      m_pJob->kill(false);
+      m_pJob = 0;
+   }
    QDialog::hide();
+   m_pInformation->setText( "" );
+   m_dSubCurrent = 0;
+   m_dSubMin = 0;
+   m_dSubMax = 1;
+   m_dCurrent = 0;
+   m_pProgressBar->setProgress( 0 );
+   m_pSubProgressBar->setProgress( 0 );
+   m_pSubInformation->setText("");
+   m_pSlowJobInfo->setText("");
 }
 
 void ProgressDialog::reject()
 {
    m_bWasCancelled = true;
    QDialog::reject();
+}
+
+void ProgressDialog::slotAbort()
+{
+   reject();
 }
 
 bool ProgressDialog::wasCancelled()
@@ -1531,6 +1524,15 @@ void ProgressDialog::setSubRangeTransformation( double dMin, double dMax )
    m_dSubMin = dMin;
    m_dSubMax = dMax;
    m_dSubCurrent = 0;
+}
+
+void ProgressDialog::timerEvent(QTimerEvent*)
+{
+   if( !isVisible() )
+   {
+      show();
+   }
+   m_pSlowJobInfo->setText( m_currentJobInfo );
 }
 
 

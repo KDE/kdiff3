@@ -18,15 +18,6 @@
  *
  */
 
-/***************************************************************************
- * $Log$
- * Revision 1.2  2003/10/11 13:59:39  joachim99
- * Use Courier New as default font under WIN32
- *
- * Revision 1.1  2003/10/06 18:38:48  joachim99
- * KDiff3 version 0.9.70
- ***************************************************************************/
-
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qfont.h>
@@ -95,6 +86,26 @@ private:
    bool m_bDefaultVal;
 };
 
+class OptionToggleAction : public OptionItem
+{
+public:
+   OptionToggleAction( bool bDefaultVal, const QString& saveName, bool* pbVar, OptionDialog* pOD )
+   : OptionItem( pOD, saveName )
+   {
+      m_pbVar = pbVar;
+      *m_pbVar = bDefaultVal;
+   }
+   void setToDefault(){}
+   void setToCurrent(){}
+   void apply()       {}
+   void write(KConfig* config){ config->writeEntry(m_saveName, *m_pbVar );   }
+   void read (KConfig* config){ *m_pbVar = config->readBoolEntry( m_saveName, *m_pbVar ); }
+private:
+   OptionToggleAction( const OptionToggleAction& ); // private copy constructor without implementation
+   bool* m_pbVar;
+};
+
+
 class OptionColorButton : public KColorButton, public OptionItem
 {
 public:
@@ -148,7 +159,7 @@ public:
    {
       m_pVar = pVar;
       m_defaultVal = defaultVal;
-      QIntValidator* v = new QIntValidator(this);      
+      QIntValidator* v = new QIntValidator(this);
       v->setRange( rangeMin, rangeMax );
       setValidator( v );
    }
@@ -165,6 +176,27 @@ private:
    int m_defaultVal;
 };
 
+class OptionComboBox : public QComboBox, public OptionItem
+{
+public:
+   OptionComboBox( int defaultVal, const QString& saveName, int* pVar,
+                   QWidget* pParent, OptionDialog* pOD )
+   : QComboBox( pParent ), OptionItem( pOD, saveName )
+   {
+      m_pVar = pVar;
+      m_defaultVal = defaultVal;
+      setEditable(false);
+   }
+   void setToDefault(){ setCurrentItem( m_defaultVal );  }
+   void setToCurrent(){ setCurrentItem( *m_pVar );  }
+   void apply()       { *m_pVar = currentItem();  }
+   void write(KConfig* config){ config->writeEntry(m_saveName, *m_pVar );   }
+   void read (KConfig* config){ *m_pVar = config->readNumEntry( m_saveName, *m_pVar ); }
+private:
+   OptionComboBox( const OptionIntEdit& ); // private copy constructor without implementation
+   int* m_pVar;
+   int m_defaultVal;
+};
 
 OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *name )
   :KDialogBase( IconList, i18n("Configure"), Help|Default|Apply|Ok|Cancel,
@@ -176,6 +208,7 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
   setupColorPage();
   setupEditPage();
   setupDiffPage();
+  setupOtherOptions();
   if (bShowDirMergeSettings)
      setupDirectoryMergePage();
   //setupKeysPage();
@@ -189,14 +222,22 @@ OptionDialog::~OptionDialog( void )
 {
 }
 
+void OptionDialog::setupOtherOptions()
+{
+   new OptionToggleAction( false, "AutoAdvance", &m_bAutoAdvance, this );
+   new OptionToggleAction( true,  "ShowWhiteSpaceCharacters", &m_bShowWhiteSpaceCharacters, this );
+   new OptionToggleAction( true,  "ShowWhiteSpace", &m_bShowWhiteSpace, this );
+   new OptionToggleAction( false, "ShowLineNumbers", &m_bShowLineNumbers, this );
+   new OptionToggleAction( true,  "HorizDiffWindowSplitting", &m_bHorizDiffWindowSplitting, this );
+}
 
 void OptionDialog::setupFontPage( void )
 {
-   QFrame *page = addPage( i18n("Font"), i18n("Editor and diff output font" ),
+   QFrame *page = addPage( i18n("Font"), i18n("Editor & Diff Output Font" ),
                              BarIcon("fonts", KIcon::SizeMedium ) );
 
    QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
-   
+
    m_fontChooser = new KFontChooser( page,"font",true/*onlyFixed*/,QStringList(),false,6 );
    topLayout->addWidget( m_fontChooser );
 
@@ -204,7 +245,7 @@ void OptionDialog::setupFontPage( void )
    topLayout->addLayout( gbox );
    int line=0;
 
-   OptionCheckBox* pItalicDeltas = new OptionCheckBox( i18n("Italic Font For Deltas"), false, "ItalicForDeltas", &m_bItalicForDeltas, page, this );
+   OptionCheckBox* pItalicDeltas = new OptionCheckBox( i18n("Italic font for deltas"), false, "ItalicForDeltas", &m_bItalicForDeltas, page, this );
    gbox->addMultiCellWidget( pItalicDeltas, line, line, 0, 1 );
    QToolTip::add( pItalicDeltas, i18n(
       "Selects the italic version of the font for differences.\n"
@@ -215,7 +256,7 @@ void OptionDialog::setupFontPage( void )
 
 void OptionDialog::setupColorPage( void )
 {
-  QFrame *page = addPage( i18n("Color"), i18n("Colors in editor and diff output"),
+  QFrame *page = addPage( i18n("Color"), i18n("Colors in Editor & Diff Output"),
      BarIcon("colorize", KIcon::SizeMedium ) );
   QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
 
@@ -269,7 +310,7 @@ void OptionDialog::setupColorPage( void )
   ++line;
 
   OptionColorButton* pColorForConflict = new OptionColorButton( red, "ColorForConflict", &m_colorForConflict, page, this );
-  label = new QLabel( pColorForConflict, i18n("Conflict Color:"), page );
+  label = new QLabel( pColorForConflict, i18n("Conflict color:"), page );
   gbox->addWidget( label, line, 0 );
   gbox->addWidget( pColorForConflict, line, 1 );
   ++line;
@@ -294,7 +335,7 @@ void OptionDialog::setupColorPage( void )
 
 void OptionDialog::setupEditPage( void )
 {
-   QFrame *page = addPage( i18n("Editor Settings"), i18n("Editor behaviour"),
+   QFrame *page = addPage( i18n("Editor"), i18n("Editor Behaviour"),
                            BarIcon("edit", KIcon::SizeMedium ) );
    QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
 
@@ -317,18 +358,25 @@ void OptionDialog::setupEditPage( void )
    gbox->addWidget( pTabSize, line, 1 );
    ++line;
 
-   OptionCheckBox* pAutoIndentation = new OptionCheckBox( i18n("Auto Indentation"), true, "AutoIndentation", &m_bAutoIndentation, page, this  );
+   OptionCheckBox* pAutoIndentation = new OptionCheckBox( i18n("Auto indentation"), true, "AutoIndentation", &m_bAutoIndentation, page, this  );
    gbox->addMultiCellWidget( pAutoIndentation, line, line, 0, 1 );
    QToolTip::add( pAutoIndentation, i18n(
       "On: The indentation of the previous line is used for a new line.\n"
       ));
    ++line;
 
-   OptionCheckBox* pAutoCopySelection = new OptionCheckBox( i18n("Auto Copy Selection"), false, "AutoCopySelection", &m_bAutoCopySelection, page, this );
+   OptionCheckBox* pAutoCopySelection = new OptionCheckBox( i18n("Auto copy selection"), false, "AutoCopySelection", &m_bAutoCopySelection, page, this );
    gbox->addMultiCellWidget( pAutoCopySelection, line, line, 0, 1 );
    QToolTip::add( pAutoCopySelection, i18n(
       "On: Any selection is immediately written to the clipboard.\n"
       "Off: You must explicitely copy e.g. via Ctrl-C."
+      ));
+   ++line;
+
+   OptionCheckBox* pStringEncoding = new OptionCheckBox( i18n("Use locale encoding"), true, "LocaleEncoding", &m_bStringEncoding, page, this );
+   gbox->addMultiCellWidget( pStringEncoding, line, line, 0, 1 );
+   QToolTip::add( pStringEncoding, i18n(
+      "Change this if non-ascii-characters aren't displayed correctly."
       ));
    ++line;
 
@@ -338,7 +386,7 @@ void OptionDialog::setupEditPage( void )
 
 void OptionDialog::setupDiffPage( void )
 {
-   QFrame *page = addPage( i18n("Diff & Merge Settings"), i18n("Diff & Merge Settings"),
+   QFrame *page = addPage( i18n("Diff & Merge"), i18n("Diff & Merge Settings"),
                            BarIcon("misc", KIcon::SizeMedium ) );
    QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
 
@@ -346,94 +394,60 @@ void OptionDialog::setupDiffPage( void )
    topLayout->addLayout( gbox );
    int line=0;
 
-   OptionCheckBox* pIgnoreWhiteSpace = new OptionCheckBox( i18n("Ignore white space"), true, "IgnoreWhiteSpace", &m_bIgnoreWhiteSpace, page, this );
-   gbox->addMultiCellWidget( pIgnoreWhiteSpace, line, line, 0, 1 );
-   QToolTip::add( pIgnoreWhiteSpace, i18n(
-      "On: Text that differs only in white space will match and\n"
-      "be shown on the same line in the different output windows.\n"
-      "Off is useful when whitespace is very important.\n"
-      "On is good for C/C++ and similar languages." )
-      );
-   ++line;
+   QLabel* label=0;
 
-   OptionCheckBox* pPreserveCarriageReturn = new OptionCheckBox( i18n("Preserve Carriage Return"), false, "PreserveCarriageReturn", &m_bPreserveCarriageReturn, page, this );
+   OptionCheckBox* pPreserveCarriageReturn = new OptionCheckBox( i18n("Preserve carriage return"), false, "PreserveCarriageReturn", &m_bPreserveCarriageReturn, page, this );
    gbox->addMultiCellWidget( pPreserveCarriageReturn, line, line, 0, 1 );
-   QToolTip::add( pPreserveCarriageReturn,
+   QToolTip::add( pPreserveCarriageReturn, i18n(
       "Show carriage return characters '\\r' if they exist.\n"
-      "Helps to compare files that were modified under different operating systems."
+      "Helps to compare files that were modified under different operating systems.")
       );
    ++line;
 
-   OptionCheckBox* pIgnoreNumbers = new OptionCheckBox( i18n("Ignore Numbers"), false, "IgnoreNumbers", &m_bIgnoreNumbers, page, this );
+   OptionCheckBox* pIgnoreNumbers = new OptionCheckBox( i18n("Ignore numbers"), false, "IgnoreNumbers", &m_bIgnoreNumbers, page, this );
    gbox->addMultiCellWidget( pIgnoreNumbers, line, line, 0, 1 );
-   QToolTip::add( pIgnoreNumbers,
+   QToolTip::add( pIgnoreNumbers, i18n(
       "Ignore number characters during line matching phase. (Similar to Ignore white space.)\n"
-      "Might help to compare files with numeric data."
+      "Might help to compare files with numeric data.")
       );
    ++line;
 
-   OptionCheckBox* pUpCase = new OptionCheckBox( i18n("Convert to Upper Case"), false, "UpCase", &m_bUpCase, page, this );
+   OptionCheckBox* pIgnoreComments = new OptionCheckBox( i18n("Ignore C/C++ Comments"), false, "IgnoreComments", &m_bIgnoreComments, page, this );
+   gbox->addMultiCellWidget( pIgnoreComments, line, line, 0, 1 );
+   QToolTip::add( pIgnoreComments, i18n( "Treat C/C++ comments like white space.")
+      );
+   ++line;
+
+   OptionCheckBox* pUpCase = new OptionCheckBox( i18n("Convert to upper case"), false, "UpCase", &m_bUpCase, page, this );
    gbox->addMultiCellWidget( pUpCase, line, line, 0, 1 );
-   QToolTip::add( pUpCase,
-      "Turn all lower case characters to upper case on reading. (e.g.: 'a'->'A')"
+   QToolTip::add( pUpCase, i18n(
+      "Turn all lower case characters to upper case on reading. (e.g.: 'a'->'A')")
       );
    ++line;
 
-   QLabel* label = new QLabel( i18n("Preprocessor-Command"), page );
+   label = new QLabel( i18n("Preprocessor command:"), page );
    gbox->addWidget( label, line, 0 );
    OptionLineEdit* pLE = new OptionLineEdit( "", "PreProcessorCmd", &m_PreProcessorCmd, page, this );
    gbox->addWidget( pLE, line, 1 );
    QToolTip::add( label, i18n("User defined pre-processing. (See the docs for details.)") );
    ++line;
 
-   label = new QLabel( i18n("Line-Matching Preprocessor-Command"), page );
+   label = new QLabel( i18n("Line-matching preprocessor command:"), page );
    gbox->addWidget( label, line, 0 );
    pLE = new OptionLineEdit( "", "LineMatchingPreProcessorCmd", &m_LineMatchingPreProcessorCmd, page, this );
    gbox->addWidget( pLE, line, 1 );
    QToolTip::add( label, i18n("This pre-processor is only used during line matching.\n(See the docs for details.)") );
    ++line;
 
-   OptionCheckBox* pUseExternalDiff = new OptionCheckBox( i18n("Use external diff"), true, "UseExternalDiff", &m_bUseExternalDiff, page, this );
-   gbox->addMultiCellWidget( pUseExternalDiff, line, line, 0, 1 );
-   QToolTip::add( pUseExternalDiff,
-      "Since for complicated files the internal algorithm is not so good yet,\n"
-      "you probably want to use the normal diff tool as line matcher."
-      );
-   ++line;
-
-   OptionCheckBox* pTryHard = new OptionCheckBox( i18n("Try Hard (slow)"), true, "TryHard", &m_bTryHard, page, this );
+   OptionCheckBox* pTryHard = new OptionCheckBox( i18n("Try hard (slower)"), true, "TryHard", &m_bTryHard, page, this );
    gbox->addMultiCellWidget( pTryHard, line, line, 0, 1 );
-   QToolTip::add( pTryHard,
+   QToolTip::add( pTryHard, i18n(
       "Enables the --minimal option for the external diff.\n"
-      "The analysis of big files will be much slower."
+      "The analysis of big files will be much slower.")
       );
    ++line;
 
-   OptionCheckBox* pIgnoreTrivialMatches = new OptionCheckBox( i18n("Ignore trivial matches"), true, "IgnoreTrivialMatches", &m_bIgnoreTrivialMatches, page, this );
-   gbox->addMultiCellWidget( pIgnoreTrivialMatches, line, line, 0, 1 );
-   QToolTip::add( pIgnoreTrivialMatches, i18n(
-      "When a difference was found, the algorithm searches for matching lines\n"
-      "Short or trivial lines match even when the differences still continue.\n"
-      "Ignoring trivial lines avoids this. Good for C/C++ and similar languages." )
-      );
-   ++line;
-
-   label = new QLabel( i18n("Max search length"), page );
-   gbox->addWidget( label, line, 0 );
-   OptionIntEdit* pMaxSearchLength = new OptionIntEdit( 1000, "MaxSearchLength", &m_maxSearchLength, 100, 100000, page, this );
-   gbox->addWidget( pMaxSearchLength, line, 1 );
-   QToolTip::add( label, i18n(
-      "Diff might fail for too small values but might take too long for big values.\n" )
-      );
-   ++line;
-
-   connect( pUseExternalDiff, SIGNAL( toggled(bool)), pTryHard, SLOT(setEnabled(bool)));
-   connect( pUseExternalDiff, SIGNAL( toggled(bool)), pMaxSearchLength, SLOT(setDisabled(bool)));
-
-   connect( pUseExternalDiff, SIGNAL( toggled(bool)), label, SLOT(setDisabled(bool)));
-   connect( pUseExternalDiff, SIGNAL( toggled(bool)), pIgnoreTrivialMatches, SLOT(setDisabled(bool)));
-
-   label = new QLabel( i18n("Auto Advance Delay (ms)"), page );
+   label = new QLabel( i18n("Auto advance delay (ms):"), page );
    gbox->addWidget( label, line, 0 );
    OptionIntEdit* pAutoAdvanceDelay = new OptionIntEdit( 500, "AutoAdvanceDelay", &m_autoAdvanceDelay, 0, 2000, page, this );
    gbox->addWidget( pAutoAdvanceDelay, line, 1 );
@@ -443,12 +457,39 @@ void OptionDialog::setupDiffPage( void )
       );
    ++line;
 
+   label = new QLabel( i18n("White space 2-file merge default:"), page );
+   gbox->addWidget( label, line, 0 );
+   OptionComboBox* pWhiteSpace2FileMergeDefault = new OptionComboBox( 0, "WhiteSpace2FileMergeDefault", &m_whiteSpace2FileMergeDefault, page, this );
+   gbox->addWidget( pWhiteSpace2FileMergeDefault, line, 1 );
+   pWhiteSpace2FileMergeDefault->insertItem( i18n("Manual choice"), 0 );
+   pWhiteSpace2FileMergeDefault->insertItem( "A", 1 );
+   pWhiteSpace2FileMergeDefault->insertItem( "B", 2 );
+   QToolTip::add( pWhiteSpace2FileMergeDefault, i18n(
+      "Allow the merge algorithm to automatically select an input for "
+      "white-space-only changes." )
+      );
+   ++line;
+
+   label = new QLabel( i18n("White space 3-file merge default:"), page );
+   gbox->addWidget( label, line, 0 );
+   OptionComboBox* pWhiteSpace3FileMergeDefault = new OptionComboBox( 0, "WhiteSpace3FileMergeDefault", &m_whiteSpace3FileMergeDefault, page, this );
+   gbox->addWidget( pWhiteSpace3FileMergeDefault, line, 1 );
+   pWhiteSpace3FileMergeDefault->insertItem( i18n("Manual choice"), 0 );
+   pWhiteSpace3FileMergeDefault->insertItem( "A", 1 );
+   pWhiteSpace3FileMergeDefault->insertItem( "B", 2 );
+   pWhiteSpace3FileMergeDefault->insertItem( "C", 3 );
+   QToolTip::add( pWhiteSpace3FileMergeDefault, i18n(
+      "Allow the merge algorithm to automatically select an input for "
+      "white-space-only changes." )
+      );
+   ++line;
+
    topLayout->addStretch(10);
 }
 
 void OptionDialog::setupDirectoryMergePage( void )
 {
-   QFrame *page = addPage( i18n("Directory Merge Settings"), i18n("Directory Merge"),
+   QFrame *page = addPage( i18n("Directory Merge"), i18n("Directory Merge"),
                            BarIcon("folder", KIcon::SizeMedium ) );
    QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
 
@@ -456,11 +497,11 @@ void OptionDialog::setupDirectoryMergePage( void )
    topLayout->addLayout( gbox );
    int line=0;
 
-   OptionCheckBox* pRecursiveDirs = new OptionCheckBox( i18n("Recursive Directories"), true, "RecursiveDirs", &m_bDmRecursiveDirs, page, this );
+   OptionCheckBox* pRecursiveDirs = new OptionCheckBox( i18n("Recursive directories"), true, "RecursiveDirs", &m_bDmRecursiveDirs, page, this );
    gbox->addMultiCellWidget( pRecursiveDirs, line, line, 0, 1 );
    QToolTip::add( pRecursiveDirs, i18n("Whether to analyze subdirectories or not.") );
    ++line;
-   QLabel* label = new QLabel( i18n("File Pattern(s)"), page );
+   QLabel* label = new QLabel( i18n("File pattern(s):"), page );
    gbox->addWidget( label, line, 0 );
    OptionLineEdit* pFilePattern = new OptionLineEdit( "*", "FilePattern", &m_DmFilePattern, page, this );
    gbox->addWidget( pFilePattern, line, 1 );
@@ -471,7 +512,7 @@ void OptionDialog::setupDirectoryMergePage( void )
       ));
    ++line;
 
-   label = new QLabel( i18n("File-Anti-Pattern(s)"), page );
+   label = new QLabel( i18n("File-anti-pattern(s):"), page );
    gbox->addWidget( label, line, 0 );
    OptionLineEdit* pFileAntiPattern = new OptionLineEdit( "*.orig;*.o", "FileAntiPattern", &m_DmFileAntiPattern, page, this );
    gbox->addWidget( pFileAntiPattern, line, 1 );
@@ -482,7 +523,7 @@ void OptionDialog::setupDirectoryMergePage( void )
       ));
    ++line;
 
-   label = new QLabel( i18n("Dir-Anti-Pattern(s)"), page );
+   label = new QLabel( i18n("Dir-anti-pattern(s):"), page );
    gbox->addWidget( label, line, 0 );
    OptionLineEdit* pDirAntiPattern = new OptionLineEdit( "CVS;.deps", "DirAntiPattern", &m_DmDirAntiPattern, page, this );
    gbox->addWidget( pDirAntiPattern, line, 1 );
@@ -493,7 +534,7 @@ void OptionDialog::setupDirectoryMergePage( void )
       ));
    ++line;
 
-   OptionCheckBox* pUseCvsIgnore = new OptionCheckBox( i18n("Use CVS-Ignore"), false, "UseCvsIgnore", &m_bDmUseCvsIgnore, page, this );
+   OptionCheckBox* pUseCvsIgnore = new OptionCheckBox( i18n("Use .cvsignore"), false, "UseCvsIgnore", &m_bDmUseCvsIgnore, page, this );
    gbox->addMultiCellWidget( pUseCvsIgnore, line, line, 0, 1 );
    QToolTip::add( pUseCvsIgnore, i18n(
       "Extends the antipattern to anything that would be ignored by CVS.\n"
@@ -501,7 +542,7 @@ void OptionDialog::setupDirectoryMergePage( void )
       ));
    ++line;
 
-   OptionCheckBox* pFindHidden = new OptionCheckBox( i18n("Find Hidden Files and Directories"), true, "FindHidden", &m_bDmFindHidden, page, this );
+   OptionCheckBox* pFindHidden = new OptionCheckBox( i18n("Find hidden files and directories"), true, "FindHidden", &m_bDmFindHidden, page, this );
    gbox->addMultiCellWidget( pFindHidden, line, line, 0, 1 );
 #ifdef _WIN32
    QToolTip::add( pFindHidden, i18n("Finds files and directories with the hidden attribute.") );
@@ -510,7 +551,7 @@ void OptionDialog::setupDirectoryMergePage( void )
 #endif
    ++line;
 
-   OptionCheckBox* pFollowFileLinks = new OptionCheckBox( i18n("Follow File Links"), false, "FollowFileLinks", &m_bDmFollowFileLinks, page, this );
+   OptionCheckBox* pFollowFileLinks = new OptionCheckBox( i18n("Follow file links"), false, "FollowFileLinks", &m_bDmFollowFileLinks, page, this );
    gbox->addMultiCellWidget( pFollowFileLinks, line, line, 0, 1 );
    QToolTip::add( pFollowFileLinks, i18n(
       "On: Compare the file the link points to.\n"
@@ -518,7 +559,7 @@ void OptionDialog::setupDirectoryMergePage( void )
       ));
    ++line;
 
-   OptionCheckBox* pFollowDirLinks = new OptionCheckBox( i18n("Follow Directory Links"), false, "FollowDirLinks", &m_bDmFollowDirLinks, page, this );
+   OptionCheckBox* pFollowDirLinks = new OptionCheckBox( i18n("Follow directory links"), false, "FollowDirLinks", &m_bDmFollowDirLinks, page, this );
    gbox->addMultiCellWidget( pFollowDirLinks, line, line, 0, 1 );
    QToolTip::add( pFollowDirLinks,    i18n(
       "On: Compare the directory the link points to.\n"
@@ -532,14 +573,20 @@ void OptionDialog::setupDirectoryMergePage( void )
                  "Files and directories without change will not appear in the list."));
    ++line;
 
-   OptionCheckBox* pTrustDate = new OptionCheckBox( i18n("Trust the modification date. (Unsafe)."), false, "TrustDate", &m_bDmTrustDate, page, this );
+   OptionCheckBox* pTrustDate = new OptionCheckBox( i18n("Trust the modification date (unsafe)"), false, "TrustDate", &m_bDmTrustDate, page, this );
    gbox->addMultiCellWidget( pTrustDate, line, line, 0, 1 );
    QToolTip::add( pTrustDate, i18n("Assume that files are equal if the modification date and file length are equal.\n"
                                      "Useful for big directories or slow networks.") );
    ++line;
 
+   OptionCheckBox* pTrustSize = new OptionCheckBox( i18n("Trust the size (unsafe)"), false, "TrustSize", &m_bDmTrustSize, page, this );
+   gbox->addMultiCellWidget( pTrustSize, line, line, 0, 1 );
+   QToolTip::add( pTrustSize, i18n("Assume that files are equal if their file lengths are equal.\n"
+                                   "Useful for big directories or slow networks when the date is modified during download.") );
+   ++line;
+
    // Some two Dir-options: Affects only the default actions.
-   OptionCheckBox* pSyncMode = new OptionCheckBox( i18n("Synchronize Directories."), false,"SyncMode", &m_bDmSyncMode, page, this );
+   OptionCheckBox* pSyncMode = new OptionCheckBox( i18n("Synchronize directories"), false,"SyncMode", &m_bDmSyncMode, page, this );
    gbox->addMultiCellWidget( pSyncMode, line, line, 0, 1 );
    QToolTip::add( pSyncMode, i18n(
                   "Offers to store files in both directories so that\n"
@@ -547,14 +594,14 @@ void OptionDialog::setupDirectoryMergePage( void )
                   "Works only when comparing two directories without specifying a destination."  ) );
    ++line;
 
-   OptionCheckBox* pCopyNewer = new OptionCheckBox( i18n("Copy newer instead of merging. (Unsafe)."), false, "CopyNewer", &m_bDmCopyNewer, page, this );
+   OptionCheckBox* pCopyNewer = new OptionCheckBox( i18n("Copy newer instead of merging (unsafe)"), false, "CopyNewer", &m_bDmCopyNewer, page, this );
    gbox->addMultiCellWidget( pCopyNewer, line, line, 0, 1 );
    QToolTip::add( pCopyNewer, i18n(
                   "Don't look inside, just take the newer file.\n"
                   "(Use this only if you know what you are doing!)\n"
                   "Only effective when comparing two directories."  ) );
    ++line;
-                                               
+
    OptionCheckBox* pCreateBakFiles = new OptionCheckBox( i18n("Backup files (.orig)"), true, "CreateBakFiles", &m_bDmCreateBakFiles, page, this );
    gbox->addMultiCellWidget( pCreateBakFiles, line, line, 0, 1 );
    QToolTip::add( pCreateBakFiles, i18n(
@@ -590,8 +637,8 @@ void OptionDialog::slotOk( void )
          "Because this program doesn't handle variable width fonts\n"
          "correctly, you might experience problems while editing.\n\n"
          "Do you want to continue or do you want to select another font."),
-         i18n("Incompatible font."),
-         i18n("Continue at my own risk"), i18n("Select another font"));
+         i18n("Incompatible Font"),
+         i18n("Continue at Own Risk"), i18n("Select Another Font"));
       if (result==KMessageBox::No)
          return;
    }
@@ -637,11 +684,6 @@ void OptionDialog::resetToDefaults()
 #else
    m_fontChooser->setFont( QFont("Courier", 10 ), true /*only fixed*/ );
 #endif
-
-   m_bAutoAdvance = false;
-   m_bShowWhiteSpace = true;
-   m_bShowLineNumbers = false;
-   m_bHorizDiffWindowSplitting = true;
 }
 
 /** Initialise the widgets using the values in the public varibles. */
@@ -671,11 +713,6 @@ void OptionDialog::saveOptions( KConfig* config )
    // FontConfigDlg
    config->writeEntry("Font",  m_font );
 
-   config->writeEntry("AutoAdvance", m_bAutoAdvance );
-   config->writeEntry("ShowWhiteSpace", m_bShowWhiteSpace );
-   config->writeEntry("ShowLineNumbers", m_bShowLineNumbers );
-   config->writeEntry("HorizDiffWindowSplitting", m_bHorizDiffWindowSplitting );
-
    // Recent files (selectable in the OpenDialog)
    config->writeEntry( "RecentAFiles", m_recentAFiles, '|' );
    config->writeEntry( "RecentBFiles", m_recentBFiles, '|' );
@@ -700,13 +737,6 @@ void OptionDialog::readOptions( KConfig* config )
 
    // FontConfigDlg
    m_font = config->readFontEntry( "Font", &m_font);
-
-   // DiffConfigDlg
-
-   m_bAutoAdvance = config->readBoolEntry("AutoAdvance", m_bAutoAdvance );
-   m_bShowWhiteSpace = config->readBoolEntry("ShowWhiteSpace", m_bShowWhiteSpace );
-   m_bShowLineNumbers = config->readBoolEntry("ShowLineNumbers", m_bShowLineNumbers );
-   m_bHorizDiffWindowSplitting = config->readBoolEntry("HorizDiffWindowSplitting", m_bHorizDiffWindowSplitting);
 
    // Recent files (selectable in the OpenDialog)
    m_recentAFiles = config->readListEntry( "RecentAFiles", '|' );

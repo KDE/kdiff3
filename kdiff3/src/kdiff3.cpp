@@ -15,15 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * $Log$
- * Revision 1.2  2003/10/11 12:45:25  joachim99
- * Allow CTRL-Tab for Windows
- *
- * Revision 1.1  2003/10/06 18:38:48  joachim99
- * KDiff3 version 0.9.70
- ***************************************************************************/
-
 #include "diff.h"
 
 #include <iostream>
@@ -114,6 +105,9 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    m_bOutputModified = false;
    m_bTimerBlock = false;
 
+   // Needed before any file operations via FileAccess happen.
+   g_pProgressDialog = new ProgressDialog(this);
+
    // Option handling: Only when pParent==0 (no parent)
    KCmdLineArgs *args = isPart() ? 0 : KCmdLineArgs::parsedArgs();
 
@@ -147,14 +141,14 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
       m_sd1.setFilename( args->getOption("base") );
       if ( m_sd1.isEmpty() )
       {
-         if ( args->count() > 0 ) m_sd1.setFilename( args->arg(0) );
-         if ( args->count() > 1 ) m_sd2.setFilename( args->arg(1) );
-         if ( args->count() > 2 ) m_sd3.setFilename( args->arg(2) );
+         if ( args->count() > 0 ) m_sd1.setFilename( args->url(0).url() ); // args->arg(0)
+         if ( args->count() > 1 ) m_sd2.setFilename( args->url(1).url() );
+         if ( args->count() > 2 ) m_sd3.setFilename( args->url(2).url() );
       }
       else
       {
-         if ( args->count() > 0 ) m_sd2.setFilename( args->arg(0) );
-         if ( args->count() > 1 ) m_sd3.setFilename( args->arg(1) );
+         if ( args->count() > 0 ) m_sd2.setFilename( args->url(0).url() );
+         if ( args->count() > 1 ) m_sd3.setFilename( args->url(1).url() );
       }
 
       QCStringList aliasList = args->getOptionList("fname");
@@ -163,7 +157,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
       if ( ali != aliasList.end() ) { m_sd2.setAliasName(*ali); ++ali; }
       if ( ali != aliasList.end() ) { m_sd3.setAliasName(*ali); ++ali; }
    }
-   g_pProgressDialog = new ProgressDialog(this);
    ///////////////////////////////////////////////////////////////////
    // call inits to invoke all other construction parts
    initActions(actionCollection());
@@ -177,6 +170,12 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    connect( m_pOptionDialog, SIGNAL(applyClicked()), this, SLOT(slotRefresh()) );
 
    readOptions( isPart() ? m_pKDiff3Part->instance()->config() : kapp->config() );
+
+   autoAdvance->setChecked( m_pOptionDialog->m_bAutoAdvance );
+   showWhiteSpaceCharacters->setChecked( m_pOptionDialog->m_bShowWhiteSpaceCharacters );
+   showWhiteSpace->setChecked( m_pOptionDialog->m_bShowWhiteSpace );
+   showWhiteSpaceCharacters->setEnabled( m_pOptionDialog->m_bShowWhiteSpace );
+   showLineNumbers->setChecked( m_pOptionDialog->m_bShowLineNumbers );
 
    m_pMainSplitter = this; //new QSplitter(this);
    m_pMainSplitter->setOrientation( Vertical );
@@ -194,7 +193,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    connect( m_pDirectoryMergeWindow, SIGNAL(checkIfCanContinue(bool*)), this, SLOT(slotCheckIfCanContinue(bool*)));
    connect( m_pDirectoryMergeWindow, SIGNAL(updateAvailabilities()), this, SLOT(slotUpdateAvailabilities()));
 
-   initDirectoryMergeActions();
+   m_pDirectoryMergeWindow->initDirectoryMergeActions( this, actionCollection() );
 
    if ( args!=0 )  args->clear(); // Free up some memory.
 
@@ -294,7 +293,7 @@ void KDiff3App::completeInit()
          if ( ! m_sd3.isEmpty() && m_sd3.m_pBuf==0 )
             text += " - " + m_sd3.getAliasName() + "\n";
 
-         KMessageBox::sorry( this, text, i18n("File open error") );
+         KMessageBox::sorry( this, text, i18n("File Open Error") );
          bFileOpenError = true;
       }
 
@@ -313,7 +312,7 @@ void KDiff3App::initActions( KActionCollection* ac )
    if (ac==0)   KMessageBox::error(0, "actionCollection==0");
 
    fileOpen = KStdAction::open(this, SLOT(slotFileOpen()), ac);
-   fileOpen->setStatusText(i18n("Opens documents for comparison ..."));
+   fileOpen->setStatusText(i18n("Opens documents for comparison..."));
    fileSave = KStdAction::save(this, SLOT(slotFileSave()), ac);
    fileSave->setStatusText(i18n("Saves the merge result. All conflicts must be solved!"));
    fileSaveAs = KStdAction::saveAs(this, SLOT(slotFileSaveAs()), ac);
@@ -337,7 +336,7 @@ void KDiff3App::initActions( KActionCollection* ac )
    KStdAction::keyBindings(this, SLOT(slotConfigureKeys()), ac);
    KAction* pAction = KStdAction::preferences(this, SLOT(slotConfigure()), ac );
    if ( isPart() )
-      pAction->setText("Configure KDiff3 ...");
+      pAction->setText(i18n("Configure KDiff3..."));
 
 
 #include "xpm/downend.xpm"
@@ -360,24 +359,33 @@ void KDiff3App::initActions( KActionCollection* ac )
    goCurrent = new KAction(i18n("Go to Current Delta"), QIconSet(QPixmap(currentpos)), CTRL+Key_Space, this, SLOT(slotGoCurrent()), ac, "go_current");
    goTop = new KAction(i18n("Go to First Delta"), QIconSet(QPixmap(upend)), 0, this, SLOT(slotGoTop()), ac, "go_top");
    goBottom = new KAction(i18n("Go to Last Delta"), QIconSet(QPixmap(downend)), 0, this, SLOT(slotGoBottom()), ac, "go_bottom");
-   goPrevDelta = new KAction(i18n("Go to PrevDelta"), QIconSet(QPixmap(up1arrow)), CTRL+Key_Up, this, SLOT(slotGoPrevDelta()), ac, "go_prev_delta");
-   goNextDelta = new KAction(i18n("Go to NextDelta"), QIconSet(QPixmap(down1arrow)), CTRL+Key_Down, this, SLOT(slotGoNextDelta()), ac, "go_next_delta");
+   goPrevDelta = new KAction(i18n("Go to Previous Delta"), QIconSet(QPixmap(up1arrow)), CTRL+Key_Up, this, SLOT(slotGoPrevDelta()), ac, "go_prev_delta");
+   goNextDelta = new KAction(i18n("Go to Next Delta"), QIconSet(QPixmap(down1arrow)), CTRL+Key_Down, this, SLOT(slotGoNextDelta()), ac, "go_next_delta");
    goPrevConflict = new KAction(i18n("Go to Previous Conflict"), QIconSet(QPixmap(up2arrow)), CTRL+Key_PageUp, this, SLOT(slotGoPrevConflict()), ac, "go_prev_conflict");
    goNextConflict = new KAction(i18n("Go to Next Conflict"), QIconSet(QPixmap(down2arrow)), CTRL+Key_PageDown, this, SLOT(slotGoNextConflict()), ac, "go_next_conflict");
    goPrevUnsolvedConflict = new KAction(i18n("Go to Previous Unsolved Conflict"), QIconSet(QPixmap(prevunsolved)), 0, this, SLOT(slotGoPrevUnsolvedConflict()), ac, "go_prev_unsolved_conflict");
    goNextUnsolvedConflict = new KAction(i18n("Go to Next Unsolved Conflict"), QIconSet(QPixmap(nextunsolved)), 0, this, SLOT(slotGoNextUnsolvedConflict()), ac, "go_next_unsolved_conflict");
-   chooseA = new KToggleAction(i18n("Select line(s) from A"), QIconSet(QPixmap(iconA)), CTRL+Key_1, this, SLOT(slotChooseA()), ac, "merge_choose_a");
-   chooseB = new KToggleAction(i18n("Select line(s) from B"), QIconSet(QPixmap(iconB)), CTRL+Key_2, this, SLOT(slotChooseB()), ac, "merge_choose_b");
-   chooseC = new KToggleAction(i18n("Select line(s) from C"), QIconSet(QPixmap(iconC)), CTRL+Key_3, this, SLOT(slotChooseC()), ac, "merge_choose_c");
-   autoAdvance = new KToggleAction(i18n("Automatically go to next unsolved conflict after source selection"), QIconSet(QPixmap(autoadvance)), 0, this, SLOT(slotAutoAdvanceToggled()), ac, "merge_autoadvance");
-   showWhiteSpace = new KToggleAction(i18n("Show space and tabulator characters for differences"), QIconSet(QPixmap(showwhitespace)), 0, this, SLOT(slotShowWhiteSpaceToggled()), ac, "merge_showwhitespace");
-   showLineNumbers = new KToggleAction(i18n("Show line numbers"), QIconSet(QPixmap(showlinenumbers)), 0, this, SLOT(slotShowLineNumbersToggled()), ac, "merge_showlinenumbers");
+   chooseA = new KToggleAction(i18n("Select Line(s) From A"), QIconSet(QPixmap(iconA)), CTRL+Key_1, this, SLOT(slotChooseA()), ac, "merge_choose_a");
+   chooseB = new KToggleAction(i18n("Select Line(s) From B"), QIconSet(QPixmap(iconB)), CTRL+Key_2, this, SLOT(slotChooseB()), ac, "merge_choose_b");
+   chooseC = new KToggleAction(i18n("Select Line(s) From C"), QIconSet(QPixmap(iconC)), CTRL+Key_3, this, SLOT(slotChooseC()), ac, "merge_choose_c");
+   autoAdvance = new KToggleAction(i18n("Automatically Go to Next Unsolved Conflict After Source Selection"), QIconSet(QPixmap(autoadvance)), 0, this, SLOT(slotAutoAdvanceToggled()), ac, "merge_autoadvance");
+
+   showWhiteSpaceCharacters = new KToggleAction(i18n("Show Space && Tabulator Characters for Differences"), QIconSet(QPixmap(showwhitespace)), 0, this, SLOT(slotShowWhiteSpaceToggled()), ac, "merge_show_whitespace_characters");
+   showWhiteSpace = new KToggleAction(i18n("Show White Space"), 0, this, SLOT(slotShowWhiteSpaceToggled()), ac, "merge_show_whitespace");
+
+   showLineNumbers = new KToggleAction(i18n("Show Line Numbers"), QIconSet(QPixmap(showlinenumbers)), 0, this, SLOT(slotShowLineNumbersToggled()), ac, "merge_showlinenumbers");
    chooseAEverywhere = new KAction(i18n("Choose A Everywhere"), CTRL+SHIFT+Key_1, this, SLOT(slotChooseAEverywhere()), ac, "merge_choose_a_everywhere");
    chooseBEverywhere = new KAction(i18n("Choose B Everywhere"), CTRL+SHIFT+Key_2, this, SLOT(slotChooseBEverywhere()), ac, "merge_choose_b_everywhere");
    chooseCEverywhere = new KAction(i18n("Choose C Everywhere"), CTRL+SHIFT+Key_3, this, SLOT(slotChooseCEverywhere()), ac, "merge_choose_c_everywhere");
-   autoSolve = new KAction(i18n("Automatically solve simple conflicts"), 0, this, SLOT(slotAutoSolve()), ac, "merge_autosolve");
-   unsolve = new KAction(i18n("Set deltas to conflicts"), 0, this, SLOT(slotUnsolve()), actionCollection(), "merge_autounsolve");
-   fileReload  = new KAction(i18n("Reload"), /*QIconSet(QPixmap(reloadIcon)),*/ 0, this, SLOT(slotReload()), ac, "file_reload");
+   chooseAForUnsolvedConflicts = new KAction(i18n("Choose A For All Unsolved Conflicts"), 0, this, SLOT(slotChooseAForUnsolvedConflicts()), ac, "merge_choose_a_for_unsolved_conflicts");
+   chooseBForUnsolvedConflicts = new KAction(i18n("Choose B For All Unsolved Conflicts"), 0, this, SLOT(slotChooseBForUnsolvedConflicts()), ac, "merge_choose_b_for_unsolved_conflicts");
+   chooseCForUnsolvedConflicts = new KAction(i18n("Choose C For All Unsolved Conflicts"), 0, this, SLOT(slotChooseCForUnsolvedConflicts()), ac, "merge_choose_c_for_unsolved_conflicts");
+   chooseAForUnsolvedWhiteSpaceConflicts = new KAction(i18n("Choose A For All Unsolved Whitespace Conflicts"), 0, this, SLOT(slotChooseAForUnsolvedWhiteSpaceConflicts()), ac, "merge_choose_a_for_unsolved_whitespace_conflicts");
+   chooseBForUnsolvedWhiteSpaceConflicts = new KAction(i18n("Choose B For All Unsolved Whitespace Conflicts"), 0, this, SLOT(slotChooseBForUnsolvedWhiteSpaceConflicts()), ac, "merge_choose_b_for_unsolved_whitespace_conflicts");
+   chooseCForUnsolvedWhiteSpaceConflicts = new KAction(i18n("Choose C For All Unsolved Whitespace Conflicts"), 0, this, SLOT(slotChooseCForUnsolvedWhiteSpaceConflicts()), ac, "merge_choose_c_for_unsolved_whitespace_conflicts");
+   autoSolve = new KAction(i18n("Automatically Solve Simple Conflicts"), 0, this, SLOT(slotAutoSolve()), ac, "merge_autosolve");
+   unsolve = new KAction(i18n("Set Deltas to Conflicts"), 0, this, SLOT(slotUnsolve()), actionCollection(), "merge_autounsolve");
+   fileReload  = new KAction(i18n("Reload"), /*QIconSet(QPixmap(reloadIcon)),*/ Key_F5, this, SLOT(slotReload()), ac, "file_reload");
    showWindowA = new KToggleAction(i18n("Show Window A"), 0, this, SLOT(slotShowWindowAToggled()), ac, "win_show_a");
    showWindowB = new KToggleAction(i18n("Show Window B"), 0, this, SLOT(slotShowWindowBToggled()), ac, "win_show_b");
    showWindowC = new KToggleAction(i18n("Show Window C"), 0, this, SLOT(slotShowWindowCToggled()), ac, "win_show_c");
@@ -387,34 +395,17 @@ void KDiff3App::initActions( KActionCollection* ac )
 #endif
    winFocusPrev = new KAction(i18n("Focus Prev Window"), ALT+Key_Left, this, SLOT(slotWinFocusPrev()), ac, "win_focus_prev");
    winToggleSplitOrientation = new KAction(i18n("Toggle Split Orientation"), 0, this, SLOT(slotWinToggleSplitterOrientation()), ac, "win_toggle_split_orientation");
-}
 
-void KDiff3App::initDirectoryMergeActions()
-{
-#include "xpm/startmerge.xpm"
-   //dirOpen = new KAction(i18n("Open directories ..."), 0, this, SLOT(slotDirOpen()), actionCollection(), "dir_open");
-   dirStartOperation = new KAction(i18n("Start/Continue directory merge"), Key_F5, m_pDirectoryMergeWindow, SLOT(mergeContinue()), actionCollection(), "dir_start_operation");
-   dirCompareCurrent = new KAction(i18n("Compare selected file"), 0, m_pDirectoryMergeWindow, SLOT(compareCurrentFile()), actionCollection(), "dir_compare_current");
-   dirMergeCurrent = new KAction(i18n("Merge current file"), QIconSet(QPixmap(startmerge)), 0, this, SLOT(slotMergeCurrentFile()), actionCollection(), "merge_current");
-   dirShowBoth = new KToggleAction(i18n("Dir and Text Split Screen View"), 0, this, SLOT(slotDirShowBoth()), actionCollection(), "win_dir_show_both");
+   dirShowBoth = new KToggleAction(i18n("Dir && Text Split Screen View"), 0, this, SLOT(slotDirShowBoth()), ac, "win_dir_show_both");
    dirShowBoth->setChecked( true );
-   dirViewToggle = new KAction(i18n("Toggle between Dir and Text View"), 0, this, SLOT(slotDirViewToggle()), actionCollection(), "win_dir_view_toggle");
-   dirFoldAll = new KAction(i18n("Fold all subdirs"), 0, m_pDirectoryMergeWindow, SLOT(slotFoldAllSubdirs()), actionCollection(), "dir_fold_all");
-   dirUnfoldAll = new KAction(i18n("Unfold all subdirs"), 0, m_pDirectoryMergeWindow, SLOT(slotUnfoldAllSubdirs()), actionCollection(), "dir_unfold_all");
-   dirRescan = new KAction(i18n("Rescan"), 0, m_pDirectoryMergeWindow, SLOT(reload()), actionCollection(), "dir_rescan");
-   dirChooseAEverywhere = new KAction(i18n("Choose A for all items"), 0, m_pDirectoryMergeWindow, SLOT(slotChooseAEverywhere()), actionCollection(), "dir_choose_a_everywhere");
-   dirChooseBEverywhere = new KAction(i18n("Choose B for all items"), 0, m_pDirectoryMergeWindow, SLOT(slotChooseBEverywhere()), actionCollection(), "dir_choose_b_everywhere");
-   dirChooseCEverywhere = new KAction(i18n("Choose C for all items"), 0, m_pDirectoryMergeWindow, SLOT(slotChooseCEverywhere()), actionCollection(), "dir_choose_c_everywhere");
-   dirAutoChoiceEverywhere = new KAction(i18n("Auto-choose operation for all items"), 0, m_pDirectoryMergeWindow, SLOT(slotAutoChooseEverywhere()), actionCollection(), "dir_autochoose_everywhere");
-   dirDoNothingEverywhere = new KAction(i18n("No operation for all items"), 0, m_pDirectoryMergeWindow, SLOT(slotNoOpEverywhere()), actionCollection(), "dir_nothing_everywhere");
-   // choose A/B/C/Suggestion/NoOp everywhere
-
+   dirViewToggle = new KAction(i18n("Toggle Between Dir && Text View"), 0, this, SLOT(slotDirViewToggle()), actionCollection(), "win_dir_view_toggle");
 
    m_pMergeEditorPopupMenu = new QPopupMenu( this );
    chooseA->plug( m_pMergeEditorPopupMenu );
    chooseB->plug( m_pMergeEditorPopupMenu );
    chooseC->plug( m_pMergeEditorPopupMenu );
 }
+
 
 void KDiff3App::showPopupMenu( const QPoint& point )
 {
@@ -440,14 +431,6 @@ void KDiff3App::saveOptions( KConfig* config )
       config->writeEntry("Show Statusbar",viewStatusBar->isChecked());
       if(toolBar("mainToolBar")!=0)
          config->writeEntry("ToolBarPos", (int) toolBar("mainToolBar")->barPos());
-   }
-   m_pOptionDialog->m_bAutoAdvance = autoAdvance->isChecked();
-   m_pOptionDialog->m_bShowWhiteSpace = showWhiteSpace->isChecked();
-   m_pOptionDialog->m_bShowLineNumbers = showLineNumbers->isChecked();
-
-   if ( m_pDiffWindowSplitter!=0 )
-   {
-      m_pOptionDialog->m_bHorizDiffWindowSplitting = m_pDiffWindowSplitter->orientation()==Horizontal;
    }
 
    m_pOptionDialog->saveOptions( config );
@@ -498,7 +481,7 @@ bool KDiff3App::queryClose()
    {
       int result = KMessageBox::warningYesNoCancel(this,
          i18n("The merge result hasn't been saved."),
-         i18n("Warning"), i18n("Save and quit"), i18n("Quit without saving") );
+         i18n("Warning"), i18n("Save && Quit"), i18n("Quit Without Saving") );
       if ( result==KMessageBox::Cancel )
          return false;
       else if ( result==KMessageBox::Yes )
@@ -518,7 +501,7 @@ bool KDiff3App::queryClose()
    {
       int result = KMessageBox::warningYesNo(this,
          i18n("You are currently doing a directory merge. Are you sure, you want to abort?"),
-         i18n("Warning"), i18n("Yes - Quit"), i18n("No - Continue merging") );
+         i18n("Warning"), i18n("Quit"), i18n("Continue Merging") );
       if ( result!=KMessageBox::Yes )
          return false;
    }
@@ -558,7 +541,7 @@ void KDiff3App::slotFileSaveAs()
 {
   slotStatusMsg(i18n("Saving file with a new filename..."));
 
-  QString s = KFileDialog::getSaveURL( QDir::currentDirPath(), 0, this, i18n("Save as...") ).url();
+  QString s = KFileDialog::getSaveURL( QDir::currentDirPath(), 0, this, i18n("Save As...") ).url();
   if(!s.isEmpty())
   {
      m_outputFilename = s;
@@ -659,7 +642,7 @@ FindDialog::FindDialog(QWidget* pParent)
    layout->addMultiCellWidget( m_pSearchString, line,line,0,1 );
    ++line;
 
-   m_pCaseSensitive = new QCheckBox(i18n("Case Sensitive"),this);
+   m_pCaseSensitive = new QCheckBox(i18n("Case sensitive"),this);
    layout->addWidget( m_pCaseSensitive, line, 1 );
 
    m_pSearchInA = new QCheckBox(i18n("Search A"),this);
@@ -677,16 +660,16 @@ FindDialog::FindDialog(QWidget* pParent)
    m_pSearchInC->setChecked( true );
    ++line;
 
-   m_pSearchInOutput = new QCheckBox(i18n("Search Output"),this);
+   m_pSearchInOutput = new QCheckBox(i18n("Search output"),this);
    layout->addWidget( m_pSearchInOutput, line, 0 );
    m_pSearchInOutput->setChecked( true );
    ++line;
-   
-   QPushButton* pButton = new QPushButton( i18n("Search"), this );
+
+   QPushButton* pButton = new QPushButton( i18n("&Search"), this );
    layout->addWidget( pButton, line, 0 );
    connect( pButton, SIGNAL(clicked()), this, SLOT(accept()));
 
-   pButton = new QPushButton( i18n("Cancel"), this );
+   pButton = new QPushButton( i18n("&Cancel"), this );
    layout->addWidget( pButton, line, 1 );
    connect( pButton, SIGNAL(clicked()), this, SLOT(reject()));
 

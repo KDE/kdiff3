@@ -15,18 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * $Log$
- * Revision 1.3  2003/10/17 16:54:25  joachim99
- * Error-detection for diff-problems improved.
- *
- * Revision 1.2  2003/10/11 12:50:38  joachim99
- * KDiff3App::slotRefresh(): Call setFont() for subwindows
- *
- * Revision 1.1  2003/10/06 18:38:48  joachim99
- * KDiff3 version 0.9.70
- ***************************************************************************/
-
 #include "diff.h"
 #include "directorymergewindow.h"
 
@@ -66,6 +54,8 @@
 #else
 #include <unistd.h>
 #endif
+
+#include "gnudiff_diff.h"
 
 //using namespace std;
 
@@ -111,8 +101,104 @@ QString createTempFile( const LineData* p, int size, bool bIgnoreWhiteSpace, boo
 
 bool KDiff3App::runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffList& diffList )
 {
+   g_pProgressDialog->setSubCurrent(0);
+
    diffList.clear();
-   //QString errorString;
+   if ( p1[0].pLine==0 || p2[0].pLine==0 )
+   {
+      Diff d( 0,0,0);
+      if ( p1[0].pLine==0 && p2[0].pLine==0 && size1 == size2 )
+         d.nofEquals = size1;
+      else if (p1[0].pLine!=0) d.diff1=size1;
+      else if (p2[0].pLine!=0) d.diff2=size2;
+
+      diffList.push_back(d);
+      return true;
+   }
+
+   GnuDiff::comparison comparisonInput;
+   memset( &comparisonInput, 0, sizeof(comparisonInput) );
+   comparisonInput.parent = 0;
+   comparisonInput.file[0].buffer = (word*)p1[0].pLine;//ptr to buffer
+   comparisonInput.file[0].buffered = p1[size1-1].pLine-p1[0].pLine+p1[size1-1].size; // size of buffer
+   comparisonInput.file[1].buffer = (word*)p2[0].pLine;//ptr to buffer
+   comparisonInput.file[1].buffered = p2[size2-1].pLine-p2[0].pLine+p2[size2-1].size; // size of buffer
+
+   GnuDiff::ignore_white_space = GnuDiff::IGNORE_ALL_SPACE;  // I think nobody needs anything else ...
+   GnuDiff::bIgnoreWhiteSpace = true;
+   GnuDiff::bIgnoreNumbers    = m_pOptionDialog->m_bIgnoreNumbers;
+   GnuDiff::minimal = m_pOptionDialog->m_bTryHard;
+   GnuDiff::ignore_case = false;  //  m_pOptionDialog->m_bUpCase is applied while reading.
+   GnuDiff::change* script = GnuDiff::diff_2_files( &comparisonInput );
+
+   int equalLinesAtStart =  comparisonInput.file[0].prefix_lines;
+   int currentLine1 = 0;
+   int currentLine2 = 0;
+   GnuDiff::change* p=0;
+   for (GnuDiff::change* e = script; e; e = p)
+   {
+      Diff d(0,0,0);
+      d.nofEquals = e->line0 - currentLine1;
+      assert( d.nofEquals == e->line1 - currentLine2 );
+      d.diff1 = e->deleted;
+      d.diff2 = e->inserted;
+      currentLine1 += d.nofEquals + d.diff1;
+      currentLine2 += d.nofEquals + d.diff2;
+      diffList.push_back(d);
+
+      p = e->link;
+      free (e);
+   }
+
+   if ( !diffList.empty() )
+   {
+      diffList.front().nofEquals += equalLinesAtStart;
+      currentLine1 += equalLinesAtStart;
+      currentLine2 += equalLinesAtStart;
+   }
+
+   if (size1-currentLine1==size2-currentLine2 )
+   {
+      Diff d( size1-currentLine1,0,0);
+      diffList.push_back(d);
+   }
+   else if ( !diffList.empty() )
+   {  // Only necessary for a files that end with a newline
+      int nofEquals = min2(size1-currentLine1,size2-currentLine2);
+      if ( nofEquals==0 )
+      {
+         diffList.back().diff1 += size1-currentLine1;
+         diffList.back().diff2 += size2-currentLine2;
+      }
+      else
+      {
+         Diff d( nofEquals,size1-currentLine1-nofEquals,size2-currentLine2-nofEquals);
+         diffList.push_back(d);
+      }
+   }
+
+#ifndef NDEBUG
+   // Verify difflist
+   {
+      int l1=0;
+      int l2=0;
+      DiffList::iterator i;
+      for( i = diffList.begin(); i!=diffList.end(); ++i )
+      {
+         l1+= i->nofEquals + i->diff1;
+         l2+= i->nofEquals + i->diff2;
+      }
+
+      //if( l1!=p1-p1start || l2!=p2-p2start )
+      if( l1!=size1 || l2!=size2 )
+         assert( false );
+   }
+#endif
+
+   g_pProgressDialog->setSubCurrent(1.0);
+
+   return true;
+#if 0
 
    if ( m_pOptionDialog->m_bUseExternalDiff )
    {
@@ -285,10 +371,10 @@ bool KDiff3App::runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffL
             i18n("Running the external diff failed.\n"
                  "Check if the diff works, if the program can write in the temp folder or if the disk is full.\n"
                  "The external diff option will be disabled now and the internal diff will be used."),
-            i18n("KDiff3 Warning"));
+            i18n("Warning"));
          m_pOptionDialog->m_bUseExternalDiff = false;
       }
-      
+
       FileAccess::removeFile( fileName1 );
       FileAccess::removeFile( fileName2 );
       FileAccess::removeFile( fileNameOut );
@@ -314,6 +400,7 @@ bool KDiff3App::runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffL
       g_pProgressDialog->setSubCurrent(1.0);
    }
    return true;
+#endif
 }
 
 
@@ -327,12 +414,10 @@ void KDiff3App::init( bool bAuto )
       bPreserveCarriageReturn = false;
    }
 
-   g_bIgnoreWhiteSpace = m_pOptionDialog->m_bIgnoreWhiteSpace;
-   g_bIgnoreTrivialMatches = m_pOptionDialog->m_bIgnoreTrivialMatches;
-
    m_diff3LineList.clear();
 
-   bool bUseLineMatchingPP = !m_pOptionDialog->m_LineMatchingPreProcessorCmd.isEmpty();
+   bool bUseLineMatchingPP = !m_pOptionDialog->m_LineMatchingPreProcessorCmd.isEmpty() ||
+                             m_pOptionDialog->m_bIgnoreComments;
    bool bUpCase = m_pOptionDialog->m_bUpCase;
 
    if (m_pDiffTextWindow1) m_pDiffTextWindow1->setPaintingAllowed( false );
@@ -351,16 +436,15 @@ void KDiff3App::init( bool bAuto )
    // First get all input data.
    g_pProgressDialog->setInformation(i18n("Loading A"));
    m_sd1.readPPFile( bPreserveCarriageReturn, m_pOptionDialog->m_PreProcessorCmd, bUpCase );
-   m_sdlm1.readLMPPFile( &m_sd1, m_pOptionDialog->m_LineMatchingPreProcessorCmd, bUpCase );
+   m_sdlm1.readLMPPFile( &m_sd1, m_pOptionDialog->m_LineMatchingPreProcessorCmd, bUpCase, m_pOptionDialog->m_bIgnoreComments );
    g_pProgressDialog->step();
 
    g_pProgressDialog->setInformation(i18n("Loading B"));
    m_sd2.readPPFile( bPreserveCarriageReturn, m_pOptionDialog->m_PreProcessorCmd, bUpCase );
-   m_sdlm2.readLMPPFile( &m_sd2, m_pOptionDialog->m_LineMatchingPreProcessorCmd, bUpCase );
+   m_sdlm2.readLMPPFile( &m_sd2, m_pOptionDialog->m_LineMatchingPreProcessorCmd, bUpCase, m_pOptionDialog->m_bIgnoreComments );
    g_pProgressDialog->step();
 
    m_sd3.m_bIsText = true;
-   int maxSearchLength = m_pOptionDialog->m_maxSearchLength;
    m_totalDiffStatus.reset();
    // Run the diff.
    if ( m_sd3.isEmpty() )
@@ -376,7 +460,7 @@ void KDiff3App::init( bool bAuto )
 
       g_pProgressDialog->setInformation(i18n("Linediff: A <-> B"));
       calcDiff3LineListUsingAB( &m_diffList12, m_diff3LineList );
-      fineDiff( m_diff3LineList, 1, &m_sd1.m_v[0], &m_sd2.m_v[0], maxSearchLength, m_totalDiffStatus.bTextAEqB );
+      fineDiff( m_diff3LineList, 1, &m_sd1.m_v[0], &m_sd2.m_v[0], m_totalDiffStatus.bTextAEqB );
       if ( m_sd1.m_size==0 ) m_totalDiffStatus.bTextAEqB=false;
 
       g_pProgressDialog->step();
@@ -385,7 +469,7 @@ void KDiff3App::init( bool bAuto )
    {
       g_pProgressDialog->setInformation(i18n("Loading C"));
       m_sd3.readPPFile( bPreserveCarriageReturn, m_pOptionDialog->m_PreProcessorCmd, bUpCase );
-      m_sdlm3.readLMPPFile( &m_sd3, m_pOptionDialog->m_LineMatchingPreProcessorCmd, bUpCase );
+      m_sdlm3.readLMPPFile( &m_sd3, m_pOptionDialog->m_LineMatchingPreProcessorCmd, bUpCase, m_pOptionDialog->m_bIgnoreComments );
       g_pProgressDialog->step();
 
       m_totalDiffStatus.bBinaryAEqB = (m_sd1.m_size!=0 && m_sd1.m_size==m_sd2.m_size  &&  memcmp(m_sd1.m_pBuf,m_sd2.m_pBuf,m_sd1.m_size)==0);
@@ -428,13 +512,13 @@ void KDiff3App::init( bool bAuto )
       debugLineCheck( m_diff3LineList, m_sd3.m_vSize, 3 );
 
       g_pProgressDialog->setInformation(i18n("Linediff: A <-> B"));
-      fineDiff( m_diff3LineList, 1, &m_sd1.m_v[0], &m_sd2.m_v[0], maxSearchLength, m_totalDiffStatus.bTextAEqB );
+      fineDiff( m_diff3LineList, 1, &m_sd1.m_v[0], &m_sd2.m_v[0], m_totalDiffStatus.bTextAEqB );
       g_pProgressDialog->step();
       g_pProgressDialog->setInformation(i18n("Linediff: B <-> C"));
-      fineDiff( m_diff3LineList, 2, &m_sd2.m_v[0], &m_sd3.m_v[0], maxSearchLength, m_totalDiffStatus.bTextBEqC );
+      fineDiff( m_diff3LineList, 2, &m_sd2.m_v[0], &m_sd3.m_v[0], m_totalDiffStatus.bTextBEqC );
       g_pProgressDialog->step();
       g_pProgressDialog->setInformation(i18n("Linediff: A <-> C"));
-      fineDiff( m_diff3LineList, 3, &m_sd3.m_v[0], &m_sd1.m_v[0], maxSearchLength, m_totalDiffStatus.bTextAEqC );
+      fineDiff( m_diff3LineList, 3, &m_sd3.m_v[0], &m_sd1.m_v[0], m_totalDiffStatus.bTextAEqC );
       g_pProgressDialog->step();
       if ( m_sd1.m_size==0 ) { m_totalDiffStatus.bTextAEqB=false;  m_totalDiffStatus.bTextAEqC=false; }
       if ( m_sd2.m_size==0 ) { m_totalDiffStatus.bTextAEqB=false;  m_totalDiffStatus.bTextBEqC=false; }
@@ -522,7 +606,7 @@ void KDiff3App::init( bool bAuto )
          "Continue at your own risk.") );
 /*      QDialog d(this);
       QVBoxLayout* l = new QVBoxLayout(&d);
-      QVButtonGroup* bg = new QVButtonGroup(i18n("Some file(s) don't seem to be text files:"),&d);
+      QVButtonGroup* bg = new QVButtonGroup(i18n("Some File(s) Don't Seem to be Text Files"),&d);
       l->addWidget(bg);
       new QRadioButton("A: " + m_sd1.getAliasName(), bg);
       new QRadioButton("B: " + m_sd2.getAliasName(), bg);
@@ -532,7 +616,7 @@ void KDiff3App::init( bool bAuto )
       QPushButton* pSaveButton = new QPushButton( i18n("Save Selection"), &d );
       connect( pSaveButton, SIGNAL(clicked()), &d, SLOT(accept()));
       hbl->addWidget( pSaveButton );
-      QPushButton* pProceedButton = new QPushButton( i18n("Proceed with text-merge"), &d );
+      QPushButton* pProceedButton = new QPushButton( i18n("Proceed with Text-Merge"), &d );
       connect( pProceedButton, SIGNAL(clicked()), &d, SLOT(reject()));
       hbl->addWidget( pProceedButton );
 
@@ -928,15 +1012,15 @@ OpenDialog::OpenDialog(
    QGridLayout* h = new QGridLayout( v, 5, 4, 5 );
    h->setColStretch( 1, 10 );
 
-   QLabel* label  = new QLabel( "A (Base):", this );
+   QLabel* label  = new QLabel( i18n("A (Base):"), this );
 
    m_lineA = new QComboBox( true, this );
    m_lineA->insertStringList( m_pOptions->m_recentAFiles );
    m_lineA->setEditText( KURL(n1).prettyURL() );
    m_lineA->setMinimumSize( 200, m_lineA->size().height() );
-   QPushButton * button = new QPushButton( "File...", this );
+   QPushButton * button = new QPushButton( i18n("File..."), this );
    connect( button, SIGNAL(clicked()), this, SLOT( selectFileA() ) );
-   QPushButton * button2 = new QPushButton( "Dir...", this );
+   QPushButton * button2 = new QPushButton( i18n("Dir..."), this );
    connect( button2, SIGNAL(clicked()), this, SLOT( selectDirA() ) );
 
    h->addWidget( label,    0, 0 );
@@ -949,9 +1033,9 @@ OpenDialog::OpenDialog(
    m_lineB->insertStringList( m_pOptions->m_recentBFiles );
    m_lineB->setEditText( KURL(n2).prettyURL() );
    m_lineB->setMinimumSize( 200, m_lineB->size().height() );
-   button   = new QPushButton( "File...", this );
+   button   = new QPushButton( i18n("File..."), this );
    connect( button, SIGNAL(clicked()), this, SLOT( selectFileB() ) );
-   button2   = new QPushButton( "Dir...", this );
+   button2   = new QPushButton( i18n("Dir..."), this );
    connect( button2, SIGNAL(clicked()), this, SLOT( selectDirB() ) );
 
    h->addWidget( label,     1, 0 );
@@ -959,14 +1043,14 @@ OpenDialog::OpenDialog(
    h->addWidget( button,    1, 2 );
    h->addWidget( button2,   1, 3 );
 
-   label  = new QLabel( "C (Optional):", this );
+   label  = new QLabel( i18n("C (Optional):"), this );
    m_lineC= new QComboBox( true, this );
    m_lineC->insertStringList( m_pOptions->m_recentCFiles );
    m_lineC->setEditText( KURL(n3).prettyURL() );
    m_lineC->setMinimumSize( 200, m_lineC->size().height() );
-   button = new QPushButton( "File...", this );
+   button = new QPushButton( i18n("File..."), this );
    connect( button, SIGNAL(clicked()), this, SLOT( selectFileC() ) );
-   button2   = new QPushButton( "Dir...", this );
+   button2   = new QPushButton( i18n("Dir..."), this );
    connect( button2, SIGNAL(clicked()), this, SLOT( selectDirC() ) );
 
    h->addWidget( label,     2, 0 );
@@ -974,17 +1058,17 @@ OpenDialog::OpenDialog(
    h->addWidget( button,    2, 2 );
    h->addWidget( button2,   2, 3 );
 
-   m_pMerge = new QCheckBox( "Merge", this );
+   m_pMerge = new QCheckBox( i18n("Merge"), this );
    h->addWidget( m_pMerge, 3, 0 );
 
-   label  = new QLabel( "Output (Optional):", this );
+   label  = new QLabel( i18n("Output (optional):"), this );
    m_lineOut = new QComboBox( true, this );
    m_lineOut->insertStringList( m_pOptions->m_recentOutputFiles );
    m_lineOut->setEditText( KURL(outputName).prettyURL() );
    m_lineOut->setMinimumSize( 200, m_lineOut->size().height() );
-   button = new QPushButton( "File...", this );
+   button = new QPushButton( i18n("File..."), this );
    connect( button, SIGNAL(clicked()), this, SLOT( selectOutputName() ) );
-   button2   = new QPushButton( "Dir...", this );
+   button2   = new QPushButton( i18n("Dir..."), this );
    connect( button2, SIGNAL(clicked()), this, SLOT( selectOutputDir() ) );
    connect( m_pMerge, SIGNAL(stateChanged(int)), this, SLOT(internalSlot(int)) );
    connect( this, SIGNAL(internalSignal(bool)), m_lineOut, SLOT(setEnabled(bool)) );
@@ -1005,18 +1089,21 @@ OpenDialog::OpenDialog(
    h->addColSpacing( 1, 200 );
 
    QHBoxLayout* l = new QHBoxLayout( v, 5 );
-   button = new QPushButton( "Ok", this );
+
+   button = new QPushButton( i18n("Configure..."), this );
+   connect( button, SIGNAL(clicked()), pParent, slotConfigure );
+   l->addWidget( button, 1 );
+
+   l->addStretch(1);
+
+   button = new QPushButton( i18n("&OK"), this );
    button->setDefault( true );
    connect( button, SIGNAL(clicked()), this, SLOT( accept() ) );
-   l->addWidget( button );
+   l->addWidget( button, 1 );
 
-   button = new QPushButton( "Cancel", this );
+   button = new QPushButton( i18n("&Cancel"), this );
    connect( button, SIGNAL(clicked()), this, SLOT( reject() ) );
-   l->addWidget( button );
-
-   button = new QPushButton( "Configure...", this );
-   connect( button, SIGNAL(clicked()), pParent, slotConfigure );
-   l->addWidget( button );
+   l->addWidget( button,1 );
 
    QSize sh = sizeHint();
    setFixedHeight( sh.height() );
@@ -1096,7 +1183,7 @@ void KDiff3App::slotFileOpen()
    {
       int result = KMessageBox::warningYesNo(this,
          i18n("You are currently doing a directory merge. Are you sure, you want to abort?"),
-         i18n("Warning"), i18n("Yes - Abort"), i18n("No - Continue merging") );
+         i18n("Warning"), i18n("Abort"), i18n("Continue Merging") );
       if ( result!=KMessageBox::Yes )
          return;
    }
@@ -1345,14 +1432,16 @@ void KDiff3App::slotGoNextDelta()
 {
    if (m_pMergeResultWindow)  m_pMergeResultWindow->slotGoNextDelta();
 }
+
+
 void KDiff3App::slotChooseA()
 {
-   if (m_pMergeResultWindow && ! m_bTimerBlock )  
+   if (m_pMergeResultWindow && ! m_bTimerBlock )
    {
-      m_pMergeResultWindow->slotChooseA();
+      m_pMergeResultWindow->choose(A);
       if ( autoAdvance->isChecked() )
       {
-         m_bTimerBlock = true;                  
+         m_bTimerBlock = true;
          QTimer::singleShot( m_pOptionDialog->m_autoAdvanceDelay, this, SLOT( slotGoNextUnsolvedConflict() ) );
       }
    }
@@ -1361,7 +1450,7 @@ void KDiff3App::slotChooseB()
 {
    if ( m_pMergeResultWindow && ! m_bTimerBlock )
    {
-      m_pMergeResultWindow->slotChooseB();
+      m_pMergeResultWindow->choose(B);
       if ( autoAdvance->isChecked()  )
       {
          m_bTimerBlock = true;
@@ -1371,9 +1460,9 @@ void KDiff3App::slotChooseB()
 }
 void KDiff3App::slotChooseC()
 {
-   if ( m_pMergeResultWindow && ! m_bTimerBlock )  
+   if ( m_pMergeResultWindow && ! m_bTimerBlock )
    {
-      m_pMergeResultWindow->slotChooseC();
+      m_pMergeResultWindow->choose(C);
       if ( autoAdvance->isChecked() )
       {
          m_bTimerBlock = true;
@@ -1381,31 +1470,27 @@ void KDiff3App::slotChooseC()
       }
    }
 }
-void KDiff3App::slotChooseAEverywhere()
+
+// bConflictsOnly automatically choose for conflicts only (true) or for everywhere
+static void mergeChooseGlobal( KDiff3App* pThis, MergeResultWindow* pMRW, int selector, bool bConflictsOnly, bool bWhiteSpaceOnly )
 {
-   if (m_pMergeResultWindow )
+   if ( pMRW )
    {
-      slotGoTop();
-      m_pMergeResultWindow->slotChooseAEverywhere();
-   }
-}
-void KDiff3App::slotChooseBEverywhere()
-{
-   if (m_pMergeResultWindow )
-   {
-      slotGoTop();
-      m_pMergeResultWindow->slotChooseBEverywhere();
+      pThis->slotGoTop();
+      pMRW->chooseGlobal(selector, bConflictsOnly, bWhiteSpaceOnly );
    }
 }
 
-void KDiff3App::slotChooseCEverywhere()
-{
-   if (m_pMergeResultWindow )
-   {
-      slotGoTop();
-      m_pMergeResultWindow->slotChooseCEverywhere();
-   }
-}
+void KDiff3App::slotChooseAEverywhere() {  mergeChooseGlobal( this, m_pMergeResultWindow, A, false, false ); }
+void KDiff3App::slotChooseBEverywhere() {  mergeChooseGlobal( this, m_pMergeResultWindow, B, false, false ); }
+void KDiff3App::slotChooseCEverywhere() {  mergeChooseGlobal( this, m_pMergeResultWindow, C, false, false ); }
+void KDiff3App::slotChooseAForUnsolvedConflicts() {  mergeChooseGlobal( this, m_pMergeResultWindow, A, true, false ); }
+void KDiff3App::slotChooseBForUnsolvedConflicts() {  mergeChooseGlobal( this, m_pMergeResultWindow, B, true, false ); }
+void KDiff3App::slotChooseCForUnsolvedConflicts() {  mergeChooseGlobal( this, m_pMergeResultWindow, C, true, false ); }
+void KDiff3App::slotChooseAForUnsolvedWhiteSpaceConflicts() {  mergeChooseGlobal( this, m_pMergeResultWindow, A, true, true ); }
+void KDiff3App::slotChooseBForUnsolvedWhiteSpaceConflicts() {  mergeChooseGlobal( this, m_pMergeResultWindow, B, true, true ); }
+void KDiff3App::slotChooseCForUnsolvedWhiteSpaceConflicts() {  mergeChooseGlobal( this, m_pMergeResultWindow, C, true, true ); }
+
 
 void KDiff3App::slotAutoSolve()
 {
@@ -1445,31 +1530,26 @@ void KDiff3App::slotConfigureKeys()
 void KDiff3App::slotRefresh()
 {
    g_tabSize = m_pOptionDialog->m_tabSize;
-   if (m_pDiffTextWindow1!=0)   
-   { 
-      m_pDiffTextWindow1->setFont(m_pOptionDialog->m_font); 
-      m_pDiffTextWindow1->update(); 
+   if (m_pDiffTextWindow1!=0)
+   {
+      m_pDiffTextWindow1->setFont(m_pOptionDialog->m_font);
+      m_pDiffTextWindow1->update();
    }
    if (m_pDiffTextWindow2!=0)
-   { 
-      m_pDiffTextWindow2->setFont(m_pOptionDialog->m_font); 
-      m_pDiffTextWindow2->update(); 
+   {
+      m_pDiffTextWindow2->setFont(m_pOptionDialog->m_font);
+      m_pDiffTextWindow2->update();
    }
    if (m_pDiffTextWindow3!=0)
-   { 
-      m_pDiffTextWindow3->setFont(m_pOptionDialog->m_font); 
-      m_pDiffTextWindow3->update(); 
+   {
+      m_pDiffTextWindow3->setFont(m_pOptionDialog->m_font);
+      m_pDiffTextWindow3->update();
    }
    if (m_pMergeResultWindow!=0)
-   { 
-      m_pMergeResultWindow->setFont(m_pOptionDialog->m_font); 
-      m_pMergeResultWindow->update(); 
+   {
+      m_pMergeResultWindow->setFont(m_pOptionDialog->m_font);
+      m_pMergeResultWindow->update();
    }
-
-
-   autoAdvance->setChecked( m_pOptionDialog->m_bAutoAdvance );
-   showWhiteSpace->setChecked( m_pOptionDialog->m_bShowWhiteSpace );
-   showLineNumbers->setChecked( m_pOptionDialog->m_bShowLineNumbers );
 
    if ( m_pDiffWindowSplitter!=0 )
    {
@@ -1522,13 +1602,17 @@ void KDiff3App::slotAutoAdvanceToggled()
 
 void KDiff3App::slotShowWhiteSpaceToggled()
 {
+   m_pOptionDialog->m_bShowWhiteSpaceCharacters = showWhiteSpaceCharacters->isChecked();
    m_pOptionDialog->m_bShowWhiteSpace = showWhiteSpace->isChecked();
+   showWhiteSpaceCharacters->setEnabled( showWhiteSpace->isChecked() );
    if ( m_pDiffTextWindow1!=0 )
       m_pDiffTextWindow1->update();
    if ( m_pDiffTextWindow2!=0 )
       m_pDiffTextWindow2->update();
    if ( m_pDiffTextWindow3!=0 )
       m_pDiffTextWindow3->update();
+   if ( m_pOverview!=0 )
+      m_pOverview->slotRedraw();
 }
 
 void KDiff3App::slotShowLineNumbersToggled()
@@ -1609,7 +1693,7 @@ bool KDiff3App::canContinue()
    {
       int result = KMessageBox::warningYesNoCancel(this,
          i18n("The merge result hasn't been saved."),
-         i18n("Warning"), i18n("Save and continue"), i18n("Continue without saving") );
+         i18n("Warning"), i18n("Save && Continue"), i18n("Continue Without Saving") );
       if ( result==KMessageBox::Cancel )
          return false;
       else if ( result==KMessageBox::Yes )
@@ -1814,7 +1898,7 @@ void KDiff3App::slotEditFindNext()
       m_pFindDialog->currentPos = 0;
    }
 
-   KMessageBox::information(this,i18n("Search Complete."),i18n("KDiff3: Search Complete."));
+   KMessageBox::information(this,i18n("Search complete."),i18n("Search Complete"));
    m_pFindDialog->currentWindow = 1;
    m_pFindDialog->currentLine = 0;
    m_pFindDialog->currentPos = 0;
@@ -1918,6 +2002,8 @@ void KDiff3App::slotWinToggleSplitterOrientation()
       m_pDiffWindowSplitter->setOrientation(
          m_pDiffWindowSplitter->orientation()==Vertical ? Horizontal : Vertical
          );
+
+      m_pOptionDialog->m_bHorizDiffWindowSplitting = m_pDiffWindowSplitter->orientation()==Horizontal;
    }
 }
 
@@ -1940,32 +2026,16 @@ void KDiff3App::slotUpdateAvailabilities()
    bool bDiffWindowVisible = m_pMainWidget != 0 && m_pMainWidget->isVisible();
    bool bMergeEditorVisible = m_pMergeWindowFrame !=0  &&  m_pMergeWindowFrame->isVisible();
 
-   dirStartOperation->setEnabled( m_bDirCompare );
-   dirFoldAll->setEnabled( m_bDirCompare );
-   dirUnfoldAll->setEnabled( m_bDirCompare );
-
-   dirCompareCurrent->setEnabled( m_bDirCompare  &&  m_pDirectoryMergeWindow->isVisible()  &&  m_pDirectoryMergeWindow->isFileSelected() );
-
-   dirMergeCurrent->setEnabled( m_bDirCompare  &&  m_pDirectoryMergeWindow->isVisible()  &&  m_pDirectoryMergeWindow->isFileSelected()
-                                || bDiffWindowVisible );
+   m_pDirectoryMergeWindow->updateAvailabilities( m_bDirCompare, bDiffWindowVisible );
 
    dirShowBoth->setEnabled( m_bDirCompare );
-
-   dirRescan->setEnabled( m_bDirCompare );
-
    dirViewToggle->setEnabled(
       m_bDirCompare &&
       (!m_pDirectoryMergeSplitter->isVisible()  &&  m_pMainWidget!=0 && m_pMainWidget->isVisible() ||
         m_pDirectoryMergeSplitter->isVisible()  &&  m_pMainWidget!=0 && !m_pMainWidget->isVisible() && bTextDataAvailable )
       );
 
-   dirAutoChoiceEverywhere->setEnabled( m_bDirCompare &&  m_pDirectoryMergeWindow->isVisible() );
-   dirDoNothingEverywhere->setEnabled( m_bDirCompare &&  m_pDirectoryMergeWindow->isVisible() );
-   dirChooseAEverywhere->setEnabled( m_bDirCompare &&  m_pDirectoryMergeWindow->isVisible() );
-   dirChooseBEverywhere->setEnabled( m_bDirCompare &&  m_pDirectoryMergeWindow->isVisible() );
-   dirChooseCEverywhere->setEnabled( m_bDirCompare &&  m_pDirectoryMergeWindow->isVisible() );
-
-   showWhiteSpace->setEnabled( bDiffWindowVisible );
+   showWhiteSpaceCharacters->setEnabled( bDiffWindowVisible );
    autoAdvance->setEnabled( bMergeEditorVisible );
    autoSolve->setEnabled( bMergeEditorVisible  &&  m_bTripleDiff );
    unsolve->setEnabled( bMergeEditorVisible );
@@ -1975,6 +2045,12 @@ void KDiff3App::slotUpdateAvailabilities()
    chooseAEverywhere->setEnabled( bMergeEditorVisible );
    chooseBEverywhere->setEnabled( bMergeEditorVisible );
    chooseCEverywhere->setEnabled( bMergeEditorVisible  &&  m_bTripleDiff );
+   chooseAForUnsolvedConflicts->setEnabled( bMergeEditorVisible );
+   chooseBForUnsolvedConflicts->setEnabled( bMergeEditorVisible );
+   chooseCForUnsolvedConflicts->setEnabled( bMergeEditorVisible  &&  m_bTripleDiff );
+   chooseAForUnsolvedWhiteSpaceConflicts->setEnabled( bMergeEditorVisible );
+   chooseBForUnsolvedWhiteSpaceConflicts->setEnabled( bMergeEditorVisible );
+   chooseCForUnsolvedWhiteSpaceConflicts->setEnabled( bMergeEditorVisible  &&  m_bTripleDiff );
    showWindowA->setEnabled( bDiffWindowVisible && ( m_pDiffTextWindow2->isVisible() || m_pDiffTextWindow3->isVisible() ) );
    showWindowB->setEnabled( bDiffWindowVisible && ( m_pDiffTextWindow1->isVisible() || m_pDiffTextWindow3->isVisible() ));
    showWindowC->setEnabled( bDiffWindowVisible &&  m_bTripleDiff && ( m_pDiffTextWindow1->isVisible() || m_pDiffTextWindow2->isVisible() ) );

@@ -15,15 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * $Log$
- * Revision 1.2  2003/10/11 12:48:31  joachim99
- * Avoid QWidget::setFont() in paintEvent()
- *
- * Revision 1.1  2003/10/06 18:38:48  joachim99
- * KDiff3 version 0.9.70
- ***************************************************************************/
-
 #include "diff.h"
 #include <stdio.h>
 #include <qpainter.h>
@@ -118,7 +109,6 @@ void MergeResultWindow::init(
    update();
 }
 
-const int A=1, B=2, C=3;
 
 // Calculate the merge information for the given Diff3Line.
 // Results will be stored in mergeDetails, bConflict, bLineRemoved and src.
@@ -238,6 +228,8 @@ bool MergeResultWindow::sameKindCheck( const MergeLine& ml1, const MergeLine& ml
 {
    if ( ml1.bConflict && ml2.bConflict )
    {
+      // Both lines have conflicts: If one is only a white space conflict and
+      // the other one is a real conflict, then this line returns false.
       return ml1.id3l->bAEqC == ml2.id3l->bAEqC && ml1.id3l->bAEqB == ml2.id3l->bAEqB;
    }
    else
@@ -247,59 +239,85 @@ bool MergeResultWindow::sameKindCheck( const MergeLine& ml1, const MergeLine& ml
          );
 }
 
-void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector)
-{   
-   if(m_bModified)
+void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConflictsOnly, bool bWhiteSpaceOnly )
+{
+   if ( !bConflictsOnly )
    {
-      int result = KMessageBox::warningYesNo(this,
-         i18n("The output has been modified.\n"
-              "If you continue your changes will be lost."),
-         i18n("Warning"), i18n("Continue"), i18n("Cancel"));
-      if ( result==KMessageBox::No )
-         return;
-   }
-   
-   m_mergeLineList.clear();
-   int lineIdx = 0;
-   Diff3LineList::const_iterator it;
-   for( it=m_pDiff3LineList->begin(); it!=m_pDiff3LineList->end(); ++it, ++lineIdx )
-   {
-      const Diff3Line& d = *it;
-
-      MergeLine ml;
-      bool bLineRemoved;
-      mergeOneLine( d, ml.mergeDetails, ml.bConflict, bLineRemoved, ml.srcSelect, m_pldC==0 );
-      
-      ml.d3lLineIdx   = lineIdx;
-      ml.bDelta       = ml.srcSelect != A;
-      ml.id3l         = it;
-      ml.srcRangeLength = 1;
-
-      MergeLine* back = m_mergeLineList.empty() ? 0 : &m_mergeLineList.back();
-
-      bool bSame = back!=0 && sameKindCheck( ml, *back );
-      if( bSame )
+      if(m_bModified)
       {
-         ++back->srcRangeLength;
-      }
-      else
-      {
-         m_mergeLineList.push_back( ml );
+         int result = KMessageBox::warningYesNo(this,
+            i18n("The output has been modified.\n"
+               "If you continue your changes will be lost."),
+            i18n("Warning"), i18n("C&ontinue"), i18n("&Cancel"));
+         if ( result==KMessageBox::No )
+            return;
       }
 
-      if ( ! ml.bConflict )
+      m_mergeLineList.clear();
+      int lineIdx = 0;
+      Diff3LineList::const_iterator it;
+      for( it=m_pDiff3LineList->begin(); it!=m_pDiff3LineList->end(); ++it, ++lineIdx )
       {
-         MergeLine& tmpBack = m_mergeLineList.back();
-         MergeEditLine mel;
-         mel.setSource( ml.srcSelect, ml.id3l, bLineRemoved );
-         tmpBack.mergeEditLineList.push_back(mel);
-      }
-      else if ( back==0  || ! back->bConflict || !bSame )
-      {
-         MergeLine& tmpBack = m_mergeLineList.back();
-         MergeEditLine mel;
-         mel.setConflict();
-         tmpBack.mergeEditLineList.push_back(mel);
+         const Diff3Line& d = *it;
+
+         MergeLine ml;
+         bool bLineRemoved;
+         mergeOneLine( d, ml.mergeDetails, ml.bConflict, bLineRemoved, ml.srcSelect, m_pldC==0 );
+
+         // Automatic solving for only whitespace changes.
+         if ( ml.bConflict &&
+              ( m_pldC==0 && (d.bAEqB || d.bWhiteLineA && d.bWhiteLineB)  ||
+                m_pldC!=0 && (d.bAEqB && d.bAEqC || d.bWhiteLineA && d.bWhiteLineB && d.bWhiteLineC ) ) )
+         {
+            ml.bWhiteSpaceConflict = true;
+         }
+
+         ml.d3lLineIdx   = lineIdx;
+         ml.bDelta       = ml.srcSelect != A;
+         ml.id3l         = it;
+         ml.srcRangeLength = 1;
+
+         MergeLine* back = m_mergeLineList.empty() ? 0 : &m_mergeLineList.back();
+
+         bool bSame = back!=0 && sameKindCheck( ml, *back );
+         if( bSame )
+         {
+            ++back->srcRangeLength;
+            if ( back->bWhiteSpaceConflict && !ml.bWhiteSpaceConflict )
+               back->bWhiteSpaceConflict = false;
+         }
+         else
+         {
+            if (back!=0  &&  back->bWhiteSpaceConflict )
+            {
+               if ( m_pldC==0 && m_pOptionDialog->m_whiteSpace2FileMergeDefault != 0 )  // Only two inputs
+               {
+                  back->srcSelect = m_pOptionDialog->m_whiteSpace2FileMergeDefault;
+                  back->bConflict = false;
+               }
+               else if ( m_pldC!=0 && m_pOptionDialog->m_whiteSpace3FileMergeDefault != 0 )
+               {
+                  back->srcSelect = m_pOptionDialog->m_whiteSpace3FileMergeDefault;
+                  back->bConflict = false;
+               }
+            }
+            m_mergeLineList.push_back( ml );
+         }
+
+         if ( ! ml.bConflict )
+         {
+            MergeLine& tmpBack = m_mergeLineList.back();
+            MergeEditLine mel;
+            mel.setSource( ml.srcSelect, ml.id3l, bLineRemoved );
+            tmpBack.mergeEditLineList.push_back(mel);
+         }
+         else if ( back==0  || ! back->bConflict || !bSame )
+         {
+            MergeLine& tmpBack = m_mergeLineList.back();
+            MergeEditLine mel;
+            mel.setConflict();
+            tmpBack.mergeEditLineList.push_back(mel);
+         }
       }
    }
 
@@ -310,7 +328,8 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector)
       for( mlIt=m_mergeLineList.begin(); mlIt!=m_mergeLineList.end(); ++mlIt )
       {
          MergeLine& ml = *mlIt;
-         if ( ml.bDelta )
+         bool bConflict = ml.mergeEditLineList.empty() || ml.mergeEditLineList.begin()->isConflict();
+         if ( ml.bDelta && ( !bConflictsOnly || bConflict ) && (!bWhiteSpaceOnly || ml.bWhiteSpaceConflict ))
          {
             ml.mergeEditLineList.clear();
             if ( defaultSelector==-1 && ml.bDelta )
@@ -329,11 +348,11 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector)
                {
                   MergeEditLine mel;
                   mel.setSource( defaultSelector, d3llit, false );
-                  
+
                   int srcLine = defaultSelector==1 ? d3llit->lineA :
                                 defaultSelector==2 ? d3llit->lineB :
                                 defaultSelector==3 ? d3llit->lineC : -1;
-                                
+
                   if ( srcLine != -1 )
                   {
                      ml.mergeEditLineList.push_back(mel);
@@ -389,7 +408,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector)
    m_cursorYPos=0;
    m_firstLine = 0;
    m_firstColumn = 0;
-   
+
    m_bModified = false;
    updateAvailabilities();
    update();
@@ -440,12 +459,13 @@ void MergeResultWindow::go( e_Direction eDir, e_EndPoint eEndPoint )
 {
    assert( eDir==eUp || eDir==eDown );
    MergeLineList::iterator i = m_currentMergeLineIt;
+   bool bSkipWhiteConflicts = ! m_pOptionDialog->m_bShowWhiteSpace;
    if( eEndPoint==eEnd )
    {
       if (eDir==eUp) i = m_mergeLineList.begin();     // first mergeline
       else           i = --m_mergeLineList.end();     // last mergeline
 
-      while ( ! i->bDelta   &&   i!=m_mergeLineList.end() )
+      while ( i!=m_mergeLineList.end() && ! i->bDelta )
       {
          if ( eDir==eUp )  ++i;                       // search downwards
          else              --i;                       // search upwards
@@ -458,18 +478,18 @@ void MergeResultWindow::go( e_Direction eDir, e_EndPoint eEndPoint )
          if ( eDir==eUp )  --i;
          else              ++i;
       }
-      while ( i->bDelta == false  &&  i!=m_mergeLineList.end() );
+      while ( i!=m_mergeLineList.end() && ( i->bDelta == false || bSkipWhiteConflicts && i->bWhiteSpaceConflict ) );
    }
-   else if ( eEndPoint == eConflict  &&  i!=m_mergeLineList.end())
+   else if ( eEndPoint == eConflict  &&  i!=m_mergeLineList.end() )
    {
       do
       {
          if ( eDir==eUp )  --i;
          else              ++i;
       }
-      while ( i->bConflict == false  &&  i!=m_mergeLineList.end() );
+      while ( i!=m_mergeLineList.end() && (i->bConflict == false || bSkipWhiteConflicts && i->bWhiteSpaceConflict ) );
    }
-   else if ( eEndPoint == eUnsolvedConflict  &&  i!=m_mergeLineList.end())
+   else if ( i!=m_mergeLineList.end()  &&  eEndPoint == eUnsolvedConflict )
    {
       do
       {
@@ -484,22 +504,24 @@ void MergeResultWindow::go( e_Direction eDir, e_EndPoint eEndPoint )
 
 bool MergeResultWindow::isDeltaAboveCurrent()
 {
+   bool bSkipWhiteConflicts = ! m_pOptionDialog->m_bShowWhiteSpace;
    MergeLineList::iterator i = m_currentMergeLineIt;
    --i;
    for( ; i!=m_mergeLineList.end(); --i )
    {
-      if ( i->bDelta ) return true;
+      if ( i->bDelta && !( bSkipWhiteConflicts && i->bWhiteSpaceConflict ) ) return true;
    }
    return false;
 }
 
 bool MergeResultWindow::isDeltaBelowCurrent()
 {
+   bool bSkipWhiteConflicts = ! m_pOptionDialog->m_bShowWhiteSpace;
    MergeLineList::iterator i = m_currentMergeLineIt;
    ++i;
    for( ; i!=m_mergeLineList.end(); ++i )
    {
-      if ( i->bDelta ) return true;
+      if ( i->bDelta && !( bSkipWhiteConflicts && i->bWhiteSpaceConflict ) ) return true;
    }
    return false;
 }
@@ -770,40 +792,12 @@ void MergeResultWindow::choose( int selector )
    emit updateAvailabilities();
 }
 
-void MergeResultWindow::slotChooseA()
-{
-   choose( A );
-}
-
-void MergeResultWindow::slotChooseB()
-{
-   choose( B );
-}
-
-void MergeResultWindow::slotChooseC()
-{
-   choose( C );
-}
-void MergeResultWindow::slotChooseAEverywhere()
+// bConflictsOnly: automatically choose for conflicts only (true) or for everywhere (false)
+void MergeResultWindow::chooseGlobal(int selector, bool bConflictsOnly, bool bWhiteSpaceOnly )
 {
    resetSelection();
-   merge( false, A );
-   emit modified();
-   update();
-}
 
-void MergeResultWindow::slotChooseBEverywhere()
-{
-   resetSelection();
-   merge( false, B );
-   emit modified();
-   update();
-}
-
-void MergeResultWindow::slotChooseCEverywhere()
-{
-   resetSelection();
-   merge( false, C );
+   merge( false, selector, bConflictsOnly, bWhiteSpaceOnly );
    emit modified();
    update();
 }
@@ -980,7 +974,7 @@ void MergeResultWindow::writeLine(
          if ( lengthInLine < int(s.length()) )
          {                                // Draw a normal line first
             p.setPen( m_pOptionDialog->m_fgColor );
-            p.drawText( xOffset, yOffset+fontAscent,  QString::fromUtf8( s.mid(m_firstColumn) ) );
+            p.drawText( xOffset, yOffset+fontAscent,  decodeString( s.mid(m_firstColumn),m_pOptionDialog) );
          }
          int firstPosInLine2 = max2( firstPosInLine, m_firstColumn );
          int lengthInLine2 = max2(0,lastPosInLine - firstPosInLine2);
@@ -994,12 +988,12 @@ void MergeResultWindow::writeLine(
 
          p.setPen( colorGroup().highlightedText() );
          p.drawText( xOffset + fontWidth*(firstPosInLine2-m_firstColumn), yOffset+fontAscent,
-            QString::fromUtf8( s.mid(firstPosInLine2,lengthInLine2) ) );
+            decodeString( s.mid(firstPosInLine2,lengthInLine2), m_pOptionDialog ) );
       }
       else
       {
          p.setPen( m_pOptionDialog->m_fgColor );
-         p.drawText( xOffset, yOffset+fontAscent, QString::fromUtf8( s.mid(m_firstColumn) ) );
+         p.drawText( xOffset, yOffset+fontAscent, decodeString( s.mid(m_firstColumn), m_pOptionDialog ) );
       }
 
       p.setPen( m_pOptionDialog->m_fgColor );
@@ -1404,6 +1398,7 @@ void MergeResultWindow::wheelEvent( QWheelEvent* e )
     e->accept();
     scroll( 0, min2(d, getNofVisibleLines()) );
 }
+
 
 void MergeResultWindow::keyPressEvent( QKeyEvent* e )
 {
@@ -1961,7 +1956,7 @@ bool MergeResultWindow::saveDocument( const QString& fileName )
       KMessageBox::error( this,
          i18n("Not all conflicts are solved yet.\n"
               "File not saved.\n"),
-         i18n("There are conflicts left."));
+         i18n("Conflicts Left"));
       return false;
    }
 
@@ -1973,7 +1968,7 @@ bool MergeResultWindow::saveDocument( const QString& fileName )
       bool bSuccess = file.createBackup(".orig");
       if ( !bSuccess )
       {
-         KMessageBox::error( this, file.getStatusText() + i18n("\n\nFile not saved."), i18n("File save error.") );
+         KMessageBox::error( this, file.getStatusText() + i18n("\n\nFile not saved."), i18n("File Save Error") );
          return false;
       }
    }
@@ -2035,7 +2030,7 @@ bool MergeResultWindow::saveDocument( const QString& fileName )
    bool bSuccess = file.writeFile( dataArray.data(), neededBufferSize );
    if ( ! bSuccess )
    {
-      KMessageBox::error( this, i18n("Error while writing."), i18n("File save error.") );
+      KMessageBox::error( this, i18n("Error while writing."), i18n("File Save Error") );
       return false;
    }
    g_pProgressDialog->hide();
@@ -2105,6 +2100,12 @@ void Overview::init( Diff3LineList* pDiff3LineList, bool bTripleDiff )
 {
    m_pDiff3LineList = pDiff3LineList;
    m_bTripleDiff = bTripleDiff;
+   m_pixmap.resize( QSize(0,0) );   // make sure that a redraw happens
+   update();
+}
+
+void Overview::slotRedraw()
+{
    m_pixmap.resize( QSize(0,0) );   // make sure that a redraw happens
    update();
 }
@@ -2216,15 +2217,18 @@ void Overview::paintEvent( QPaintEvent* )
             }
          }
 
-         // Make sure that lines with conflict are not overwritten.
-         if (  c == m_pOptions->m_colorForConflict )
+         if (!bWhiteSpaceChange || m_pOptions->m_bShowWhiteSpace )
          {
-            p.fillRect(1, oldY, w, max2(1,y-oldY), bWhiteSpaceChange ? QBrush(c,Dense4Pattern) : c );
-            oldConflictY = oldY;
-         }
-         else if ( c!=m_pOptions->m_bgColor  &&  oldY>oldConflictY )
-         {
-            p.fillRect(1, oldY, w, max2(1,y-oldY), bWhiteSpaceChange ? QBrush(c,Dense4Pattern) : c );
+            // Make sure that lines with conflict are not overwritten.
+            if (  c == m_pOptions->m_colorForConflict )
+            {
+               p.fillRect(1, oldY, w, max2(1,y-oldY), bWhiteSpaceChange ? QBrush(c,Dense4Pattern) : c );
+               oldConflictY = oldY;
+            }
+            else if ( c!=m_pOptions->m_bgColor  &&  oldY>oldConflictY )
+            {
+               p.fillRect(1, oldY, w, max2(1,y-oldY), bWhiteSpaceChange ? QBrush(c,Dense4Pattern) : c );
+            }
          }
 
          oldY = y;

@@ -15,13 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-/***************************************************************************
- * $Log$
- * Revision 1.1  2003/10/06 18:38:48  joachim99
- * KDiff3 version 0.9.70
- *                                                                   *
- ***************************************************************************/
-
 #ifndef KDIFF3_H
 #define KDIFF3_H
 
@@ -158,20 +151,6 @@ class KDiff3App : public QSplitter
 // Special KDiff3 specific stuff starts here
     KAction *editFind;
     KAction *editFindNext;
-    KAction *dirOpen;
-    KAction *dirStartOperation;
-    KAction *dirCompareCurrent;
-    KAction *dirMergeCurrent;
-    KToggleAction *dirShowBoth;
-    KAction *dirViewToggle;
-    KAction *dirRescan;
-    KAction* dirChooseAEverywhere;
-    KAction* dirChooseBEverywhere;
-    KAction* dirChooseCEverywhere;
-    KAction* dirAutoChoiceEverywhere;
-    KAction* dirDoNothingEverywhere;
-    KAction* dirFoldAll;
-    KAction* dirUnfoldAll;
 
     KAction *goCurrent;
     KAction *goTop;
@@ -186,11 +165,18 @@ class KDiff3App : public QSplitter
     KToggleAction *chooseB;
     KToggleAction *chooseC;
     KToggleAction *autoAdvance;
+    KToggleAction *showWhiteSpaceCharacters;
     KToggleAction *showWhiteSpace;
     KToggleAction *showLineNumbers;
-    KAction *chooseAEverywhere;
-    KAction *chooseBEverywhere;
-    KAction *chooseCEverywhere;
+    KAction* chooseAEverywhere;
+    KAction* chooseBEverywhere;
+    KAction* chooseCEverywhere;
+    KAction* chooseAForUnsolvedConflicts;
+    KAction* chooseBForUnsolvedConflicts;
+    KAction* chooseCForUnsolvedConflicts;
+    KAction* chooseAForUnsolvedWhiteSpaceConflicts;
+    KAction* chooseBForUnsolvedWhiteSpaceConflicts;
+    KAction* chooseCForUnsolvedWhiteSpaceConflicts;
     KAction *autoSolve;
     KAction *unsolve;
     KToggleAction *showWindowA;
@@ -199,6 +185,8 @@ class KDiff3App : public QSplitter
     KAction *winFocusNext;
     KAction *winFocusPrev;
     KAction* winToggleSplitOrientation;
+    KToggleAction *dirShowBoth;
+    KAction *dirViewToggle;
 
     QPopupMenu* m_pMergeEditorPopupMenu;
 
@@ -225,7 +213,7 @@ class KDiff3App : public QSplitter
     Overview* m_pOverview;
 
     QWidget* m_pCornerWidget;
-    
+
     TotalDiffStatus m_totalDiffStatus;
 
     SourceData m_sd1;
@@ -273,7 +261,7 @@ class KDiff3App : public QSplitter
    KParts::MainWindow*       m_pKDiff3Shell;
    bool m_bAuto;
 
-private slots:
+public slots:
    void resizeDiffTextWindow(int newWidth, int newHeight);
    void resizeMergeResultWindow();
 
@@ -307,6 +295,12 @@ private slots:
    void slotChooseAEverywhere();
    void slotChooseBEverywhere();
    void slotChooseCEverywhere();
+   void slotChooseAForUnsolvedConflicts();
+   void slotChooseBForUnsolvedConflicts();
+   void slotChooseCForUnsolvedConflicts();
+   void slotChooseAForUnsolvedWhiteSpaceConflicts();
+   void slotChooseBForUnsolvedWhiteSpaceConflicts();
+   void slotChooseCForUnsolvedWhiteSpaceConflicts();
    void slotConfigure();
    void slotConfigureKeys();
    void slotRefresh();

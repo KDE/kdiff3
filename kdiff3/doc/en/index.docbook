@@ -45,8 +45,8 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2003-09-15</date>
-<releaseinfo>0.9.70</releaseinfo>
+<date>2003-12-07</date>
+<releaseinfo>0.9.80</releaseinfo>
 
 
 <abstract>
@@ -59,10 +59,10 @@ Do NOT change these in the translation. -->
 <listitem><para>provides an automatic merge-facility,</para></listitem>
 <listitem><para>has an editor for comfortable solving of merge-conflicts,</para></listitem>
 <listitem><para>provides networktransparency via KIO,</para></listitem>
-<listitem><para>and is very colorful (by default) :-)</para></listitem>
+<listitem><para>has options to highlight or hide changes in white-space or comments.</para></listitem>
 </itemizedlist>
 </para><para>
-   This document describes KDiff3-version 0.9.70.
+   This document describes KDiff3-version 0.9.80.
 </para>
 </abstract>
 
@@ -89,6 +89,8 @@ Please at least include KDE, the KDE package it is in, the name
 <keyword>kio</keyword>
 <keyword>networktransparent</keyword>
 <keyword>editor</keyword>
+<keyword>white space</keyword>
+<keyword>comments</keyword>
 </keywordset>
 
 </bookinfo>
@@ -217,6 +219,7 @@ This screenshot shows KDiff3 during a directory merge:
    <listitem><para> Show the line numbers for each line. </para></listitem>
    <listitem><para> Paste clipboard or drag text into a diff input window.</para></listitem>
    <listitem><para> Networktransparency via KIO.</para></listitem>
+   <listitem><para> Can be used as diff-viewer in KDevelop 3.</para></listitem>
    <listitem><para> ...</para></listitem>
 </itemizedlist>
 </sect2>
@@ -445,12 +448,20 @@ reduce typework by specifying the filename only for the first file. E.g.:
    copy and   paste some text containing such a line. But still be careful to
    do so.
 </para><para>
-   The "Merge" menu contains some actions that let you select "A", "B" or
-   "C" everywhere. When you select "Automatically solve simple conflicts" then
-   KDiff3 restarts the merge and solves as many conflicts as it can. "Set deltas
-   to conflicts" does the opposite: Even simple conflicts have to be solved
-   manually then. For all these actions the manual selections that happened
-   before are lost. (KDiff3 will tell you so, before proceeding.)
+   The normal merge will start by solving simple conflicts automatically.
+   But the "Merge"-menu provides some actions for other common needs.
+   If you have to select the same source for most conflicts, then you can
+   choose "A", "B" or "C" everywhere, or only for the remaining unsolved
+   conflicts, or for unsolved whitespace conflicts. If you want to decide every
+   single delta yourself, you can "Set deltas to conflicts". Or if you want to
+   return to the automatic choices of KDiff3 then select
+   "Automatically solve simple conflicts". KDiff3 then restarts the merge.
+   For actions that change your previous modifications KDiff3 will ask for your
+   confirmation before proceeding.
+</para><para>
+   Note: When choosing either source for unsolved whitespace conflicts and
+   the options "Ignore Numbers" or "Ignore C/C++ Comments" are used then changes in
+   numbers or comments will be treated like whitespace too.
 </para>
 </sect1>
 
@@ -592,6 +603,8 @@ reduce typework by specifying the filename only for the first file. E.g.:
       of the previous  line is used for the new line. </para></listitem></varlistentry>
    <varlistentry><term><emphasis>   Auto copy selection:</emphasis></term><listitem><para> Every selection is immediately copied
       to the clipboard   when active and you needn't explicitely copy it. </para></listitem></varlistentry>
+   <varlistentry><term><emphasis>   Use locale encoding:</emphasis></term><listitem><para> For displaying foreign characters.
+      Try changing this if some characters of your language aren't displayed correctly. </para></listitem></varlistentry>
 </variablelist>
 </sect2>
 
@@ -604,10 +617,6 @@ reduce typework by specifying the filename only for the first file. E.g.:
 </para>
 
 <variablelist>
-   <varlistentry><term><emphasis>Ignore white space:</emphasis></term><listitem><para> Default is on. White space will be
-      ignored  in the first  part of the analysis in which the line matching is
-      done. In  the result the  white space differences will be shown nevertheless.
-   </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Preserve Carriage Return:</emphasis></term><listitem><para> Some editors (on some systems) save
       carriage return '\r' and linefeed '\n'-characters at the end of line, while
       others will only save the linefeed '\n'. Usually KDiff3 ignores the carriage
@@ -619,6 +628,9 @@ reduce typework by specifying the filename only for the first file. E.g.:
       will be ignored  in the first  part of the analysis in which the line matching is
       done. In the result the differences will be shown nevertheless, but they are treated
       as white space.
+   </para></listitem></varlistentry>
+   <varlistentry><term><emphasis>Ignore C/C++ comments:</emphasis></term><listitem><para> Default is off.
+      Changes in comments will be treated like changes in white space.
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Convert to Upper Case:</emphasis></term><listitem><para>  Default is off. Converts the input to upper case
       while reading. Hence the comparison is not case sensitive. Take care during merging
@@ -639,27 +651,20 @@ reduce typework by specifying the filename only for the first file. E.g.:
       You can write your own preprocessor that fulfills your specific needs.
       Each input line must have a corresponding output line.
    </para></listitem></varlistentry>
-   <varlistentry><term><emphasis>Use external diff:</emphasis></term><listitem><para> If you have an external diff-tool (e.g. GNU-diff)
-      you can use it for the line matching phase. For some complicated files this
-      might be better than the internal algorithm of KDiff3.
-   </para></listitem></varlistentry>
-   <varlistentry><term><emphasis>Try Hard:</emphasis></term><listitem><para> Passes the "--minimal"-option to the external diff
-      tool, which then will try hard to find an even smaller delta. This will probably
+   <varlistentry><term><emphasis>Try Hard:</emphasis></term><listitem><para>
+      Try hard to find an even smaller delta. (Default is on.) This will probably
       be effective for complicated and big files. And slow for very big files.
-   </para></listitem></varlistentry>
-   <varlistentry><term><emphasis>Ignore trivial matches:</emphasis></term><listitem><para> Default is on. When trivial lines
-      match after an  difference, this will be ignored and the search for a nontrivial
-      matching  line continues. This improves the results for inputs with empty
-      lines and  lines containing only a open or close-brace character, which is
-      often the  case for C/C++-programs.
-   </para></listitem></varlistentry>
-   <varlistentry><term><emphasis>Max search length:</emphasis></term><listitem><para> Searching for a match is aborted after this
-      number of lines. The diff might fail for small values but take too long
-      for  big values. Default is 1000.
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Auto Advance Delay (ms):</emphasis></term><listitem><para> When in auto-advance-mode this setting specifies
       how long to show the result of the selection before jumping to the next unsolved
       conflict.
+   </para></listitem></varlistentry>
+   <varlistentry><term><emphasis>White space 2/3-file merge default:</emphasis></term><listitem><para>
+      Automatically solve all white-space conflict by choosing the specified file.
+      (Default is manual choice.) Useful if white-space really isn't important in many files.
+      If you need this only occasionally better use "Choose A/B/C For All Unsolved Whitespace Conflicts"
+      in the merge menu. Note that if you enable either "Ignore numbers" or "Ignore C/C++ comments"
+      then this auto-choice also applies for conflicts in numbers or comments.
    </para></listitem></varlistentry>
 </variablelist>
 
@@ -689,6 +694,10 @@ Yet there is one option here that is also relevant for saving single files:
      shown for the input files.</para></listitem></varlistentry>
   <varlistentry><term><emphasis>Show space and tabulator characters for differences:</emphasis></term><listitem><para> Sometimes
      the visible spaces and tabs are disturbing. You can turn this off.</para></listitem></varlistentry>
+  <varlistentry><term><emphasis>Show white space:</emphasis></term><listitem><para> Turn this off to suppress
+      any highlighting of white-space-only changes in the text or overview-columns.
+      (Note that this also applies to changes in numbers or comments if the options "Ignore numbers"
+      or "Ignore C/C++ comments" are active.)</para></listitem></varlistentry>
   <varlistentry><term><emphasis>Show Window A/B/C:</emphasis></term><listitem><para> Sometimes you want to use the space on
       the screen better for long lines. Hide the windows that are not important.
       (In the Windows-menu.)</para></listitem></varlistentry>
@@ -696,8 +705,9 @@ Yet there is one option here that is also relevant for saving single files:
       Switch between diff windows shown next to each other (A left of B left of C) or above
       each other (A above B above C). This should also help for long lines. (In the Windows-menu.)
       </para></listitem></varlistentry>
-  <varlistentry><term><emphasis>Start a merge quickly:</emphasis></term><listitem><para> Sometimes you are viewing the deltas
-      and decide to merge. <inlinemediaobject><imageobject><imagedata fileref="merge_current.png" format="PNG"/></imageobject></inlinemediaobject>
+  <varlistentry><term><emphasis>Start a merge quickly:</emphasis></term><listitem><para>
+      Sometimes you are viewing the deltas and decide to merge.
+      <inlinemediaobject><imageobject><imagedata fileref="merge_current.png" format="PNG"/></imageobject></inlinemediaobject>
       "Merge current file" in the Directory-menu also works if you only compare
       two files. A single click starts the merge and uses the filename of the last
       input-file as the default output filename. (When this is used to restart
@@ -750,7 +760,8 @@ So this is what this program can do for you: KDiff3 ...
                          take  place, without actually doing them,</para></listitem>
      <listitem><para>... lets you really do the merge, and lets you interact whenever
                          manual interaction is needed,</para></listitem>
-     <listitem><para>... lets you continue the merge after manual interaction with key F5,</para></listitem>
+     <listitem><para>... lets you run the selected operation for all items (key F7) or the selected item (key F6),</para></listitem>
+     <listitem><para>... lets you continue the merge after manual interaction with key F7,</para></listitem>
      <listitem><para>... optionally creates backups, with the ".orig" extension,</para></listitem>
      <listitem><para>...</para></listitem>
 </itemizedlist>
@@ -786,7 +797,7 @@ So this is what this program can do for you: KDiff3 ...
 
 <para>
    Note that only the comparison starts automatically, not the merge. For this you first must
-   select a menu entry or the key F5. (More details later.)
+   select a menu entry or the key F7. (More details later.)
 </para>
 </sect2>
 </sect1>
@@ -874,12 +885,14 @@ So this is what this program can do for you: KDiff3 ...
    After comparing the directories KDiff3 also evaluates a proposal for a
    merge  operation. This is shown in the "Operation" column. You can modify
    the operation  by clicking on the operation you want to change. A small menu
-   will popup and allows you to select an operation for that item. This operation
-   will be executed during the merge. It depends on the item and on the merge-mode
-   you are in, what operations are available. The merge-mode is one of
+   will popup and allows you to select an operation for that item. (You can also
+   select the most needed operations via keyboard.
+   Ctrl+1/2/3/4/Del will select A/B/C/Merge/Delete respectively if available.)
+   This operation will be executed during the merge. It depends on the item and
+   on the merge-mode you are in, what operations are available. The merge-mode is one of
 </para>
 <itemizedlist>
-     <listitem><para>Three directory-merge (A is treated as older base of both).</para></listitem>
+     <listitem><para>Three directory-merge ("A" is treated as older base of both).</para></listitem>
      <listitem><para>Two directory-merge.</para></listitem>
      <listitem><para>Two directory-sync-mode (activate via option "Synchronize Directories").</para></listitem>
 </itemizedlist>
@@ -954,6 +967,7 @@ So this is what this program can do for you: KDiff3 ...
 
 <sect1 id="dothemerge"><title>Doing A Merge</title>
 <para>
+   You can either merge the currently selected item (file or directory), or all items.
    When you have made all your operation choices (in all subdirectories too)
    then you can start the merge.
 </para><para>
@@ -975,19 +989,21 @@ So this is what this program can do for you: KDiff3 ...
                      in the tree, and hence also not in the destination.</para></listitem>
 </itemizedlist>
 <para>
-   (In the current version, you must do a rescan yourself, after changing
-   options affecting the directory scan.)
+   (In the current version, you must do a rescan via menu "Directory"->"Rescan"
+   yourself, after changing options affecting the directory scan.)
 </para><para>
    If you are satisfied so far, the rest is easy.
 </para><para>
-   In the "Directory"-menu select "Start/Continue directory merge" or press
-   F5 (which is the shortcut).
+   To merge all items: Select "Start/Continue directory merge" in the "Directory"-menu
+   or press F7 (which is the shortcut).
+   To merge only the current item: Select "Run Operation For Current Item"
+   or press F6.
 </para><para>
    If  due to conflicting filetypes still some items with invalid operations
    exist, then a messagebox will appear and these items will be pointed out,
    so you can select a valid operation for the item.
 </para><para>
-   Otherwise a dialog will appear giving you the options "Do it", "Simulate
+   If you merge all items a dialog will appear giving you the options "Do it", "Simulate
    it" and "Cancel".
 </para>
 <itemizedlist>
@@ -1001,18 +1017,24 @@ So this is what this program can do for you: KDiff3 ...
    (<link linkend="dirmergebigscreenshot">see the big screenshot</link>).
 </para><para>
    When you have finished with a file, again select "Start/Continue directory
-   merge" or the key F5. If you haven't saved yet, a dialog will ask you to
+   merge" or the key F7. If you haven't saved yet, a dialog will ask you to
    do so. Then KDiff3 will continue with the next item.
 </para><para>
    When KDiff3 encounters an error, it will tell you so and will show the
-   verbose-status-information.  At the bottom of this list, there will be some
-   error messages which should  help you to understand the cause of the problem.
-   When you continue merging (F5 key) KDiff3 will give you the choice to retry
-   or skip the item that caused  the problem. This means that before continuing
-   you can choose another operation  or solve the problem by other means.
+   verbose-status-information. At the bottom of this list, there will be some
+   error messages which should help you to understand the cause of the problem.
+   When you continue merging (F7 key) KDiff3 will give you the choice to retry
+   or skip the item that caused the problem. This means that before continuing
+   you can choose another operation or solve the problem by other means.
 </para><para>
    When the merge is complete, then KDiff3 will inform you via a message
    box.
+</para><para>
+   If some items were merged individually then KDiff3 remembers this (while this
+   merge-session goes on), and doesn't merge them again when later the merge for
+   all items is run. Even when the merge was skipped or nothing was saved these
+   items count as completed. Only when you change the merge operation the item
+   will be merged again.
 </para>
 </sect1>
 
@@ -1062,6 +1084,11 @@ So this is what this program can do for you: KDiff3 ...
          over a slow network, it might be faster to compare the modification dates
          and file length alone. But this speed improvement comes with the price of
          a little uncertainty. Use this option with care. Default is off.</para></listitem></varlistentry>
+   <varlistentry><term><emphasis>Trust the size:</emphasis></term><listitem><para>
+         Similar to trusting the modification date. No real comparison happens. Two
+         files are considered equal if their file-sizes are equal. This is useful
+         when the file-copy operation didn't preserve the modification date.
+         Use this option with care. Default is off.</para></listitem></varlistentry>
    <varlistentry><term><emphasis>Synchronize Directories:</emphasis></term><listitem><para> Activates "Sync-Mode" when two directories
          are compared and no explicit destination directory was specified. In this
          mode the proposed operations will be chosen so that both source directories
@@ -1152,7 +1179,8 @@ Other things that are possible, but probably less useful are:
 </para>
 <itemizedlist>
 <listitem><para>
-   A path can be relative and can contain "." or "..". This is not possible for URLs which are always absolute.
+   A path can be relative and can contain "." or "..". This is not possible for URLs
+   which are always absolute.
 </para></listitem><listitem><para>
    Special characters must be written with "escaping". ("#"->"%23", space->"%20", etc.)
    E.g. A file with the name "/#foo#" would have the URL "file:/%23foo%23".
@@ -1174,13 +1202,15 @@ Other things that are possible, but probably less useful are:
 <listitem><para>
    Sometimes there is no support for links.
 </para></listitem><listitem><para>
-   Or there is no way to distinguish if a link points to a file or a directory; always assuming a file. (ftp:, sftp:).
+   Or there is no way to distinguish if a link points to a file or a directory; always
+   assuming a file. (ftp:, sftp:).
 </para></listitem><listitem><para>
    Can't always determine the filesize.
 </para></listitem><listitem><para>
    Limited support for permissions.
 </para></listitem><listitem><para>
-   No possibility to modify permissions or modification time, so permissions or time of a copy will differ from the original.
+   No possibility to modify permissions or modification time, so permissions or time
+   of a copy will differ from the original. (See the option "Trust the size".)
    (Only possible for local files.)
 </para></listitem>
 </itemizedlist>

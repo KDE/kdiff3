@@ -1,3 +1,33 @@
+Version 0.9.80 - 2003/12/08
+===========================
+New Text Diff/Merge Features:
+- Now using GNU-diff algorithms internally. (Option "External Diff" removed.)
+- Option for treating C/C++ comments as whitespace during diff.
+- Bugfix for locale character encoding (+ new option "Use string encoding")
+- Option for suppressing highlighting in white-space changes.
+  (Also suppresses highlighting in comments and numbers when the
+  respective options are active.)
+- Merge-menu: Choose A/B/C for all unsolved conflicts.
+              Choose A/B/C for all unsolved whitespace conflicts.
+- Options to automatically choose a certain source for whitespace conflicts.
+- Shorcut F5 now used to reload the current file.
+
+New Directory-Comparison/Merge Features:
+- Option to trust filesize. (Some directory services don't copy the date/time correctly.)
+- Shortcut F7 now starts complete directory merge (previously F5).
+- Do the selected merge operation for the selected file/dir only
+  "Run Operation For Current Item" (F6).
+- Shortcuts for selecting the merge operation for the selected item.
+  Ctrl-1/2/3/4/Del select A/B/C/Merge/Delete respectively.
+
+Other Improvements:
+- Several i18n-corrections (by Stephan Binner)
+- Bugfix for option CVS-ignore: Didn't work correctly in subdirectories.
+- Bugfix for remote operations: Operation can now be aborted, when KIO-slaves doesn't respond.
+- Cancel-Button in progress bar.
+- Default diff-view now again side by side instead of one above the other.
+
+
 Version 0.9.71 - 2003/10/14
 ===========================
 - Windows-Installer by Sebastien Fricker.
