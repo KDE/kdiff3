@@ -185,14 +185,19 @@ SectionEnd
  
 Section "Documentation"
 
-
+    SetOutPath "$INSTDIR"
+    File /r tmp\kdiff3.sourceforge.net\doc
+    SetOutPath "$INSTDIR"
+    CreateShortCut "$SMPROGRAMS\${MUI_STARTMENUPAGE_VARIABLE}\Documentation.lnk" "$INSTDIR\doc\index.html"
+    
 SectionEnd
 
 SubSection "Integration"
 Section "WinCVS"
-
-  WriteRegStr HKEY_CURRENT_USER "Software\WinCvs\wincvs\CVS settings" "P_Extdiff" '"$INSTDIR\kdiff3.exe"'
-  WriteRegBin HKEY_CURRENT_USER "Software\WinCvs\wincvs\CVS settings" "P_DiffUseExtDiff" 01
+  DetailPrint "Integration to WinCVS"
+  MessageBox  MB_OK "Please close WinCVS"
+  WriteRegStr HKCU "Software\WinCvs\wincvs\CVS settings" "P_Extdiff" '"$INSTDIR\kdiff3.exe"'
+  WriteRegBin HKCU "Software\WinCvs\wincvs\CVS settings" "P_DiffUseExtDiff" 01
 
 SectionEnd 
 SubSectionEnd
