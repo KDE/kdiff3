@@ -442,9 +442,13 @@ bool FileAccess::removeDir( const QString& dirName )
 
 bool FileAccess::symLink( const QString& linkTarget, const QString& linkLocation )
 {
+#ifdef _WIN32
+  return false;
+#else
    return 0==::symlink( linkTarget.ascii(), linkLocation.ascii() );
    //FileAccessJobHandler fh(0);
    //return fh.symLink( linkTarget, linkLocation );
+#endif
 }
 
 bool FileAccess::exists( const QString& name )
