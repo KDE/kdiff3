@@ -1,0 +1,73 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="kdiff3_shell" version="0.9.70">
+<MenuBar>
+  <Menu name="file"><text>&amp;File</text>
+    <Action name="file_reload"/>
+  </Menu>
+  <Menu name="directory"><text>&amp;Directory</text>
+    <Action name="dir_start_operation"/>
+    <Action name="dir_compare_current"/>
+    <Action name="dir_rescan"/>
+    <Action name="dir_fold_all"/>
+    <Action name="dir_unfold_all"/>
+    <Action name="dir_choose_a_everywhere"/>
+    <Action name="dir_choose_b_everywhere"/>
+    <Action name="dir_choose_c_everywhere"/>
+    <Action name="dir_autochoose_everywhere"/>
+    <Action name="dir_nothing_everywhere"/>
+  </Menu>
+  <Menu name="movement"><text>&amp;Movement</text>
+    <Action name="go_current"/>
+    <Action name="go_top"/>
+    <Action name="go_bottom"/>
+    <Action name="go_prev_delta"/>
+    <Action name="go_next_delta"/>
+    <Action name="go_prev_conflict"/>
+    <Action name="go_next_conflict"/>
+    <Action name="go_prev_unsolved_conflict"/>
+    <Action name="go_next_unsolved_conflict"/>
+  </Menu>
+  <Menu name="merge"><text>&amp;Merge</text>
+    <Action name="merge_current"/>
+    <Action name="merge_choose_a"/>
+    <Action name="merge_choose_b"/>
+    <Action name="merge_choose_c"/>
+    <Action name="merge_autoadvance"/>
+    <Action name="merge_choose_a_everywhere"/>
+    <Action name="merge_choose_b_everywhere"/>
+    <Action name="merge_choose_c_everywhere"/>
+    <Action name="merge_autosolve"/>
+    <Action name="merge_autounsolve"/>
+    <Action name="merge_showwhitespace"/>
+    <Action name="merge_showlinenumbers"/>
+  </Menu>
+  <Menu name="window"><text>&amp;Window</text>
+    <Action name="win_focus_prev"/>
+    <Action name="win_focus_next"/>
+    <Action name="win_show_a"/>
+    <Action name="win_show_b"/>
+    <Action name="win_show_c"/>
+    <Action name="win_dir_show_both"/>
+    <Action name="win_dir_view_toggle"/>
+    <Action name="win_toggle_split_orientation"/>
+  </Menu>
+</MenuBar>
+<ToolBar name="mainToolBar"><text>Main Toolbar</text>
+  <Action name="merge_current"/>
+  <Action name="go_current"/>
+  <Action name="go_top"/>
+  <Action name="go_bottom"/>
+  <Action name="go_prev_delta"/>
+  <Action name="go_next_delta"/>
+  <Action name="go_prev_conflict"/>
+  <Action name="go_next_conflict"/>
+  <Action name="go_prev_unsolved_conflict"/>
+  <Action name="go_next_unsolved_conflict"/>
+  <Action name="merge_choose_a"/>
+  <Action name="merge_choose_b"/>
+  <Action name="merge_choose_c"/>
+  <Action name="merge_autoadvance"/>
+  <Action name="merge_showwhitespace"/>
+  <Action name="merge_showlinenumbers"/>
+</ToolBar>
+</kpartgui>
