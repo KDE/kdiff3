@@ -1,0 +1,121 @@
+README for KDiff3-Internationalisation (i18n)
+=============================================
+Author: Joachim Eibl 2004
+
+This text is for you, if you might want to help translating KDiff3 or just want 
+to learn how this i18n-thing works.
+
+Current completeness status KDiff3-0.9.81 (2004/01/06):
+Total number of message-strings: 376
+
+The translation for these languages is 100% complete:
+da    Danish
+de    Deutsch
+en_GB British English
+et    Estonian
+it    Italian
+pt    Portuguese
+pt_BR Brazilian Portuguese
+sr    Serbian
+sv    Svenska
+
+These languages are partly done:
+es    Espaniol
+hu    Hungarian
+
+Thanks to all translators!
+
+
+The program was written with English as main language. But to allow automatic
+translation of messages, every translatable text in the program was written as 
+i18n("translatable").
+
+i18n() is a translator-function. If a translation table exists, at runtime the 
+function looks for the given string in that table and returns the translation.
+
+The translation-table is created in 3 steps:
+1. First a template-translation table kdiff3.pot should be created: Usually via
+   xgettext --keyword=i18n --keyword=I18N_NOOP -C -o ../po/kdiff3.pot *.cpp *.h 
+   
+   It contains all translatable strings of the program, but no translations.
+   
+2. Translators create a translation for a specific language. Because we don't want 
+   to modify the template now, we'll create a copy for each language.
+   e.g.: cp kdiff3.pot de.po
+   Using KBabel we can comfortably edit the translated strings.
+   e.g.: kbabel de.po
+   
+3. The last step is to create a fast lookup-table (*.gmo) from the po-file via 
+   msgfmt, but this happens automatically during the build process.
+   (If a new po-file was added: make -f Makefile.cvs; configure; make)
+
+============
+   
+The following is for my own memory and for those who really want to learn dirty tricks and details:
+   
+The KDE-i18n team stores their results in CVS. But I would like to have an independent 
+copy of all translations in the po-directory of the source package. Actually it's just
+copying and renaming, but simplified with these commands:
+
+1. First checkout all available translations from the CVS-repository
+   cvs co kde-i18n/subdirs
+   for i in `cat kde-i18n/subdirs`; do  cvs co kde-i18n/$i/messages/kdeextragear-1/kdiff3.po; done
+   
+2. Copy and rename them as needed:
+   for i in `cat kde-i18n/subdirs`; do  cp kde-i18n/$i/messages/kdeextragear-1/kdiff3.po $i.po; done
+   rm -R kde-i18n
+
+   
+This was the explanation for translations within KDE. 
+But KDiff3 can also be compiled and run without KDE:
+
+Since Qt was used for KDiff3, the first part is quite the same: Only the fast lookup-table 
+(*.qm-files) must be created with $QTDIR/bin/msg2qm (instead of msgfmt). ($QTDIR/tools/msg2qm)
+
+Still one detail isn't right: Some strings are not translated, because under KDE their 
+translation is within KDE-libs or within Qt. But the translations are available:
+
+For Qt-strings in $QTDIR/translations (already as .qm-files)
+
+For KDE-libs in the CVS-repository, where we can reuse the previous trick to get 
+all kdelibs*.po-files:
+   for i in `cat kde-i18n/subdirs`; do cvs co kde-i18n/$i/messages/kdelibs/kdelibs.po; done
+   for i in `cat kde-i18n/subdirs`; do cp kde-i18n/$i/messages/kdelibs/kdelibs.po kdelibs_$i.po; done
+   
+Finally the program must only read the correct translation tables:
+
+   QTranslator kdiff3Translator( 0 );
+   kdiff3Translator.load( QString("kdiff3_")QTextCodec::locale(), translationDir );
+   app.installTranslator( &kdiff3Translator );
+   
+   QTranslator qtTranslator( 0 );
+   qtTranslator.load( QString("qt_")+QTextCodec::locale(), translationDir );
+   app.installTranslator( &qtTranslator );
+   
+   QTranslator kdelibsTranslator( 0 );
+   kdelibsTranslator.load( QString("kdelibs_")+QTextCodec::locale(), translationDir );
+   app.installTranslator( &kdelibsTranslator );
+
+This should do the job, if the translation-tables can be found. 
+The difficult part is: Where to search for the files, because this depends on 
+where the program was installed. (I didn't solve this puzzle yet.)
+
+Because it's too much effort to copy all kdelibs*.po-files along: Here is a little info
+about how to extract only the needed strings and to create the qm-files.
+
+1. Only src/kreplacements/kreplacements.cpp contains strings, that were not covered by 
+   the normal translations. Hence a special pot-file is needed.
+   xgettext --keyword=i18n --keyword=I18N_NOOP -C ../src/kreplacements/kreplacements.cpp -o kreplacements.pot
+   
+2. Take only needed strings and translations from kdelibs*.po:
+   msgmerge --no-fuzzy-matching kdelibs_de.po kreplacements.pot >kreplacements_de.po
+
+3. Concatenate the normal de.po and kreplacements_de.po:
+   msgcat --use-first de.po kreplacements_de.po >kdiff3_de.po
+
+4. Finally create the fast lookup table:
+   $QTDIR/bin/msg2qm kdiff3_de.po kdiff3_de.qm
+
+5. The intermediate files can then be deleted.
+
+The script createqm does steps 2-5 for languages where a kdiff3.po-translation exists.

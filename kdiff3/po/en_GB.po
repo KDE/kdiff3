@@ -1,0 +1,1838 @@
+# translation of kdiff3.po to British English
+# Copyright (C) 2003 Free Software Foundation, Inc.
+# Malcolm Hunter <malcolm.hunter@gmx.co.uk>, 2003.
+# Jonathan Riddell <kde-en-gb@jriddell.org>, 2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdiff3\n"
+"POT-Creation-Date: 2003-12-10 01:44+0100\n"
+"PO-Revision-Date: 2003-12-10 21:47+0000\n"
+"Last-Translator: Malcolm Hunter <malcolm.hunter@gmx.co.uk>\n"
+"Language-Team: British English <kde-en-gb@kde.me.uk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.1\n"
+
+#: _translatorinfo.cpp:1
+msgid ""
+"_: NAME OF TRANSLATORS\n"
+"Your names"
+msgstr "Jonathan Riddell"
+
+#: _translatorinfo.cpp:3
+msgid ""
+"_: EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr "kde-en-gb@jriddell.org"
+
+#: diff.cpp:472
+msgid "From Clipboard"
+msgstr "From Clipboard"
+
+#: diff.cpp:1098 diff.cpp:1112
+msgid ""
+"Data loss error:\n"
+"If it is reproducable please contact the author.\n"
+msgstr ""
+"Data loss error:\n"
+"If it is reproducable please contact the author.\n"
+
+#: diff.cpp:1100 diff.cpp:1114
+msgid "Severe Internal Error"
+msgstr "Severe Internal Error"
+
+#: difftextwindow.cpp:789
+#, c-format
+msgid "Topline %1"
+msgstr "Topline %1"
+
+#: difftextwindow.cpp:791
+msgid "End"
+msgstr "End"
+
+#: directorymergewindow.cpp:113
+msgid "Mix of links and normal files."
+msgstr "Mix of links and normal files."
+
+#: directorymergewindow.cpp:120
+msgid "Link: "
+msgstr "Link: "
+
+#: directorymergewindow.cpp:128
+msgid "Size. "
+msgstr "Size. "
+
+#: directorymergewindow.cpp:141
+msgid "Date & Size: "
+msgstr "Date & Size: "
+
+#: directorymergewindow.cpp:150 directorymergewindow.cpp:156
+msgid "Creating temp copy of %1 failed."
+msgstr "Creating temp copy of %1 failed."
+
+#: directorymergewindow.cpp:167 directorymergewindow.cpp:175
+msgid "Opening %1 failed."
+msgstr "Opening %1 failed."
+
+#: directorymergewindow.cpp:191 directorymergewindow.cpp:197
+#, c-format
+msgid "Error reading from %1"
+msgstr "Error reading from %1"
+
+#: directorymergewindow.cpp:243
+msgid "Name"
+msgstr "Name"
+
+#: directorymergewindow.cpp:247
+msgid "Operation"
+msgstr "Operation"
+
+#: directorymergewindow.cpp:248
+msgid "Status"
+msgstr "Status"
+
+#: directorymergewindow.cpp:271
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort "
+"the merge and rescan the directory?"
+msgstr ""
+"You are currently doing a directory merge. Are you sure, you want to abort "
+"the merge and rescan the directory?"
+
+#: directorymergewindow.cpp:272 directorymergewindow.cpp:2264
+msgid "Rescan"
+msgstr "Rescan"
+
+#: directorymergewindow.cpp:272 kdiff3.cpp:504 pdiff.cpp:1186
+msgid "Continue Merging"
+msgstr "Continue Merging"
+
+#: directorymergewindow.cpp:380
+msgid "Opening of directories failed:"
+msgstr "Opening of directories failed:"
+
+#: directorymergewindow.cpp:383
+msgid ""
+"Dir A \"%1\" does not exist or is not a directory.\n"
+msgstr ""
+"Dir A \"%1\" does not exist or is not a directory.\n"
+
+#: directorymergewindow.cpp:386
+msgid ""
+"Dir B \"%1\" does not exist or is not a directory.\n"
+msgstr ""
+"Dir B \"%1\" does not exist or is not a directory.\n"
+
+#: directorymergewindow.cpp:389
+msgid ""
+"Dir C \"%1\" does not exist or is not a directory.\n"
+msgstr ""
+"Dir C \"%1\" does not exist or is not a directory.\n"
+
+#: directorymergewindow.cpp:391
+msgid "Directory Open Error"
+msgstr "Directory Open Error"
+
+#: directorymergewindow.cpp:399
+msgid ""
+"The destination directory must not be the same as A or B when three "
+"directories are merged.\n"
+"Check again before continuing."
+msgstr ""
+"The destination directory must not be the same as A or B when three "
+"directories are merged.\n"
+"Check again before continuing."
+
+#: directorymergewindow.cpp:401
+msgid "Parameter Warning"
+msgstr "Parameter Warning"
+
+#: directorymergewindow.cpp:428
+msgid "Reading Directory A"
+msgstr "Reading Directory A"
+
+#: directorymergewindow.cpp:450
+msgid "Reading Directory B"
+msgstr "Reading Directory B"
+
+#: directorymergewindow.cpp:472
+msgid "Reading Directory C"
+msgstr "Reading Directory C"
+
+#: directorymergewindow.cpp:498
+msgid "Some subdirectories were not readable in"
+msgstr "Some subdirectories were not readable in"
+
+#: directorymergewindow.cpp:503
+msgid "Check the permissions of the subdirectories."
+msgstr "Check the permissions of the subdirectories."
+
+#: directorymergewindow.cpp:550
+msgid "Directory Comparison Status"
+msgstr "Directory Comparison Status"
+
+#: directorymergewindow.cpp:551
+msgid "Number of subdirectories:"
+msgstr "Number of subdirectories:"
+
+#: directorymergewindow.cpp:552
+msgid "Number of equal files:"
+msgstr "Number of equal files:"
+
+#: directorymergewindow.cpp:553
+msgid "Number of different files:"
+msgstr "Number of different files:"
+
+#: directorymergewindow.cpp:556
+msgid "Number of manual merges:"
+msgstr "Number of manual merges:"
+
+#: directorymergewindow.cpp:684
+msgid "This affects all merge operations."
+msgstr "This affects all merge operations."
+
+#: directorymergewindow.cpp:685
+msgid "Changing All Merge Operations"
+msgstr "Changing All Merge Operations"
+
+#: directorymergewindow.cpp:685 mergeresultwindow.cpp:251
+msgid "C&ontinue"
+msgstr "C&ontinue"
+
+#: directorymergewindow.cpp:952
+msgid "Processing "
+msgstr "Processing "
+
+#: directorymergewindow.cpp:1300 directorymergewindow.cpp:1307
+msgid "To do."
+msgstr "To do."
+
+#: directorymergewindow.cpp:1334 directorymergewindow.cpp:2279
+msgid "Copy A to B"
+msgstr "Copy A to B"
+
+#: directorymergewindow.cpp:1335 directorymergewindow.cpp:2280
+msgid "Copy B to A"
+msgstr "Copy B to A"
+
+#: directorymergewindow.cpp:1336 directorymergewindow.cpp:2281
+msgid "Delete A"
+msgstr "Delete A"
+
+#: directorymergewindow.cpp:1337 directorymergewindow.cpp:2282
+msgid "Delete B"
+msgstr "Delete B"
+
+#: directorymergewindow.cpp:1338
+msgid "Delete A & B"
+msgstr "Delete A & B"
+
+#: directorymergewindow.cpp:1339 directorymergewindow.cpp:2284
+msgid "Merge to A"
+msgstr "Merge to A"
+
+#: directorymergewindow.cpp:1340 directorymergewindow.cpp:2285
+msgid "Merge to B"
+msgstr "Merge to B"
+
+#: directorymergewindow.cpp:1341
+msgid "Merge to A & B"
+msgstr "Merge to A & B"
+
+#: directorymergewindow.cpp:1345
+msgid "Delete (if exists)"
+msgstr "Delete (if exists)"
+
+#: directorymergewindow.cpp:1346 directorymergewindow.cpp:1347
+#: directorymergewindow.cpp:2275 pdiff.cpp:1061
+msgid "Merge"
+msgstr "Merge"
+
+#: directorymergewindow.cpp:1346 directorymergewindow.cpp:1347
+msgid "Merge (manual)"
+msgstr "Merge (manual)"
+
+#: directorymergewindow.cpp:1348
+msgid "Error: Conflicting File Types"
+msgstr "Error: Conflicting File Types"
+
+#: directorymergewindow.cpp:1349
+msgid "Error: Dates are equal but files are not."
+msgstr "Error: Dates are equal but files are not."
+
+#: directorymergewindow.cpp:1373
+msgid "This operation is currently not possible."
+msgstr "This operation is currently not possible."
+
+#: directorymergewindow.cpp:1373 directorymergewindow.cpp:1633
+msgid "Operation Not Possible"
+msgstr "Operation Not Possible"
+
+#: directorymergewindow.cpp:1416
+msgid ""
+"This should never happen: \n"
+"\n"
+"mergeResultSaved: m_pMFI=0\n"
+"\n"
+"If you know how to reproduce this, please contact the program author."
+msgstr ""
+"This should never happen: \n"
+"\n"
+"mergeResultSaved: m_pMFI=0\n"
+"\n"
+"If you know how to reproduce this, please contact the program author."
+
+#: directorymergewindow.cpp:1416
+msgid "Program Error"
+msgstr "Program Error"
+
+#: directorymergewindow.cpp:1427
+msgid ""
+"An error occurred while copying.\n"
+msgstr ""
+"An error occurred while copying.\n"
+
+#: directorymergewindow.cpp:1428 directorymergewindow.cpp:1834
+msgid "Merge Error"
+msgstr "Merge Error"
+
+#: directorymergewindow.cpp:1433 directorymergewindow.cpp:1839
+msgid "Error."
+msgstr "Error."
+
+#: directorymergewindow.cpp:1438 directorymergewindow.cpp:1730
+#: directorymergewindow.cpp:1770
+msgid "Done."
+msgstr "Done."
+
+#: directorymergewindow.cpp:1461
+msgid "Not saved."
+msgstr "Not saved."
+
+#: directorymergewindow.cpp:1496
+msgid "Unknown merge operation. (This must never happen!)"
+msgstr "Unknown merge operation. (This must never happen!)"
+
+#: directorymergewindow.cpp:1528
+msgid "Unknown merge operation."
+msgstr "Unknown merge operation."
+
+#: directorymergewindow.cpp:1543
+msgid ""
+"The merge is about to begin.\n"
+"\n"
+"Choose \"Do it\" if you have read the instructions and know what you are "
+"doing.\n"
+"Choosing \"Simulate it\" will tell you what would happen.\n"
+"\n"
+"Be aware that this program still has beta status and there is NO WARRANTY "
+"whatsoever! Make backups of your vital data!"
+msgstr ""
+"The merge is about to begin.\n"
+"\n"
+"Choose \"Do it\" if you have read the instructions and know what you are "
+"doing.\n"
+"Choosing \"Simulate it\" will tell you what would happen.\n"
+"\n"
+"Be aware that this program still has beta status and there is NO WARRANTY "
+"whatsoever! Make backups of your vital data!"
+
+#: directorymergewindow.cpp:1548
+msgid "Starting Merge"
+msgstr "Starting Merge"
+
+#: directorymergewindow.cpp:1548
+msgid "Do It"
+msgstr "Do It"
+
+#: directorymergewindow.cpp:1548
+msgid "Simulate It"
+msgstr "Simulate It"
+
+#: directorymergewindow.cpp:1574
+msgid ""
+"The highlighted item has a different type in the different directories. "
+"Select what to do."
+msgstr ""
+"The highlighted item has a different type in the different directories. "
+"Select what to do."
+
+#: directorymergewindow.cpp:1583
+msgid ""
+"The modification dates of the file are equal but the files are not. Select "
+"what to do."
+msgstr ""
+"The modification dates of the file are equal but the files are not. Select "
+"what to do."
+
+#: directorymergewindow.cpp:1633
+msgid "This operation is currently not possible because dir merge currently runs."
+msgstr "This operation is currently not possible because dir merge currently runs."
+
+#: directorymergewindow.cpp:1692
+msgid ""
+"There was an error in the last step.\n"
+"Do you want to continue with the item that caused the error or do you want "
+"to skip this item?"
+msgstr ""
+"There was an error in the last step.\n"
+"Do you want to continue with the item that caused the error or do you want "
+"to skip this item?"
+
+#: directorymergewindow.cpp:1694
+msgid "Continue merge after an error"
+msgstr "Continue merge after an error"
+
+#: directorymergewindow.cpp:1694
+msgid "Continue With Last Item"
+msgstr "Continue With Last Item"
+
+#: directorymergewindow.cpp:1694
+msgid "Skip Item"
+msgstr "Skip Item"
+
+#: directorymergewindow.cpp:1730
+msgid "Skipped."
+msgstr "Skipped."
+
+#: directorymergewindow.cpp:1737 directorymergewindow.cpp:1963
+msgid "In progress..."
+msgstr "In progress..."
+
+#: directorymergewindow.cpp:1785
+msgid "Merge operation complete."
+msgstr "Merge operation complete."
+
+#: directorymergewindow.cpp:1785 directorymergewindow.cpp:1788
+msgid "Merge Complete"
+msgstr "Merge Complete"
+
+#: directorymergewindow.cpp:1797
+msgid "Simulated merge complete: Check if you agree with the proposed operations."
+msgstr "Simulated merge complete: Check if you agree with the proposed operations."
+
+#: directorymergewindow.cpp:1833
+msgid ""
+"An error occurred. Press OK to see detailed information.\n"
+msgstr ""
+"An error occurred. Press OK to see detailed information.\n"
+
+#: directorymergewindow.cpp:1876
+msgid "Error: While deleting %1: Creating backup failed."
+msgstr "Error: While deleting %1: Creating backup failed."
+
+#: directorymergewindow.cpp:1883
+msgid "delete directory recursively( %1 )"
+msgstr "delete directory recursively( %1 )"
+
+#: directorymergewindow.cpp:1885
+msgid "delete( %1 )"
+msgstr "delete( %1 )"
+
+#: directorymergewindow.cpp:1900
+msgid "Error: delete dir operation failed while trying to read the directory."
+msgstr "Error: delete dir operation failed while trying to read the directory."
+
+#: directorymergewindow.cpp:1919
+msgid "Error: rmdir( %1 ) operation failed."
+msgstr "Error: rmdir( %1 ) operation failed."
+
+#: directorymergewindow.cpp:1929
+msgid "Error: delete operation failed."
+msgstr "Error: delete operation failed."
+
+#: directorymergewindow.cpp:1955
+msgid "manual merge( %1, %2, %3 -> %4)"
+msgstr "manual merge( %1, %2, %3 -> %4)"
+
+#: directorymergewindow.cpp:1958
+msgid "     Note: After a manual merge the user should continue via F7."
+msgstr "     Note: After a manual merge the user should continue via F7."
+
+#: directorymergewindow.cpp:1981
+msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
+msgstr "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
+
+#: directorymergewindow.cpp:1991
+msgid "copyLink( %1 -> %2 )"
+msgstr "copyLink( %1 -> %2 )"
+
+#: directorymergewindow.cpp:2002
+msgid "Error: copyLink failed: Remote links are not yet supported."
+msgstr "Error: copyLink failed: Remote links are not yet supported."
+
+#: directorymergewindow.cpp:2008
+msgid "Error: copyLink failed."
+msgstr "Error: copyLink failed."
+
+#: directorymergewindow.cpp:2028
+msgid "copy( %1 -> %2 )"
+msgstr "copy( %1 -> %2 )"
+
+#: directorymergewindow.cpp:2054
+msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
+msgstr "Error during rename( %1 -> %2 ): Cannot delete existing destination."
+
+#: directorymergewindow.cpp:2060
+msgid "rename( %1 -> %2 )"
+msgstr "rename( %1 -> %2 )"
+
+#: directorymergewindow.cpp:2069
+msgid "Error: Rename failed."
+msgstr "Error: Rename failed."
+
+#: directorymergewindow.cpp:2087
+msgid "Error during makeDir of %1. Cannot delete existing file."
+msgstr "Error during makeDir of %1. Cannot delete existing file."
+
+#: directorymergewindow.cpp:2103
+msgid "makeDir( %1 )"
+msgstr "makeDir( %1 )"
+
+#: directorymergewindow.cpp:2113
+msgid "Error while creating directory."
+msgstr "Error while creating directory."
+
+#: directorymergewindow.cpp:2140 directorymergewindow.cpp:2248
+msgid "Dest"
+msgstr "Dest"
+
+#: directorymergewindow.cpp:2144 directorymergewindow.cpp:2173
+msgid "Dir"
+msgstr "Dir"
+
+#: directorymergewindow.cpp:2145
+msgid "Type"
+msgstr "Type"
+
+#: directorymergewindow.cpp:2146
+msgid "Size"
+msgstr "Size"
+
+#: directorymergewindow.cpp:2147
+msgid "Attr"
+msgstr "Attr"
+
+#: directorymergewindow.cpp:2148
+msgid "Last Modification"
+msgstr "Last Modification"
+
+#: directorymergewindow.cpp:2149
+msgid "Link-Destination"
+msgstr "Link-Destination"
+
+#: directorymergewindow.cpp:2190
+msgid "not available"
+msgstr "not available"
+
+#: directorymergewindow.cpp:2210
+msgid "A (Dest): "
+msgstr "A (Dest): "
+
+#: directorymergewindow.cpp:2213
+msgid "A (Base): "
+msgstr "A (Base): "
+
+#: directorymergewindow.cpp:2219
+msgid "B (Dest): "
+msgstr "B (Dest): "
+
+#: directorymergewindow.cpp:2227
+msgid "C (Dest): "
+msgstr "C (Dest): "
+
+#: directorymergewindow.cpp:2233
+msgid "Dest: "
+msgstr "Dest: "
+
+#: directorymergewindow.cpp:2258
+msgid "Start/Continue Directory Merge"
+msgstr "Start/Continue Directory Merge"
+
+#: directorymergewindow.cpp:2259
+msgid "Run Operation for Current Item"
+msgstr "Run Operation for Current Item"
+
+#: directorymergewindow.cpp:2260
+msgid "Compare Selected File"
+msgstr "Compare Selected File"
+
+#: directorymergewindow.cpp:2261
+msgid "Merge Current File"
+msgstr "Merge Current File"
+
+#: directorymergewindow.cpp:2262
+msgid "Fold All Subdirs"
+msgstr "Fold All Subdirs"
+
+#: directorymergewindow.cpp:2263
+msgid "Unfold All Subdirs"
+msgstr "Unfold All Subdirs"
+
+#: directorymergewindow.cpp:2265
+msgid "Choose A for All Items"
+msgstr "Choose A for All Items"
+
+#: directorymergewindow.cpp:2266
+msgid "Choose B for All Items"
+msgstr "Choose B for All Items"
+
+#: directorymergewindow.cpp:2267
+msgid "Choose C for All Items"
+msgstr "Choose C for All Items"
+
+#: directorymergewindow.cpp:2268
+msgid "Auto-Choose Operation for All Items"
+msgstr "Auto-Choose Operation for All Items"
+
+#: directorymergewindow.cpp:2269
+msgid "No Operation for All Items"
+msgstr "No Operation for All Items"
+
+#: directorymergewindow.cpp:2271 directorymergewindow.cpp:2278
+msgid "Do Nothing"
+msgstr "Do Nothing"
+
+#: directorymergewindow.cpp:2272
+msgid "A"
+msgstr "A"
+
+#: directorymergewindow.cpp:2273
+msgid "B"
+msgstr "B"
+
+#: directorymergewindow.cpp:2274
+msgid "C"
+msgstr "C"
+
+#: directorymergewindow.cpp:2276
+msgid "Delete (If Exists)"
+msgstr "Delete (If Exists)"
+
+#: directorymergewindow.cpp:2283
+msgid "Delete A and B"
+msgstr "Delete A and B"
+
+#: directorymergewindow.cpp:2286
+msgid "Merge to A and B"
+msgstr "Merge to A and B"
+
+#: fileaccess.cpp:535
+msgid ""
+"While trying to make a backup, deleting an older backup failed. \n"
+"Filename: "
+msgstr ""
+"While trying to make a backup, deleting an older backup failed. \n"
+"Filename: "
+
+#: fileaccess.cpp:542
+msgid ""
+"While trying to make a backup, renaming failed. \n"
+"Filenames: "
+msgstr ""
+"While trying to make a backup, renaming failed. \n"
+"Filenames: "
+
+#: fileaccess.cpp:564
+#, c-format
+msgid "Getting file status: %1"
+msgstr "Getting file status: %1"
+
+#: fileaccess.cpp:606
+#, c-format
+msgid "Reading file: %1"
+msgstr "Reading file: %1"
+
+#: fileaccess.cpp:642
+#, c-format
+msgid "Writing file: %1"
+msgstr "Writing file: %1"
+
+#: fileaccess.cpp:670
+msgid "Out of memory"
+msgstr "Out of memory"
+
+#: fileaccess.cpp:705
+#, c-format
+msgid "Making directory: %1"
+msgstr "Making directory: %1"
+
+#: fileaccess.cpp:725
+#, c-format
+msgid "Removing directory: %1"
+msgstr "Removing directory: %1"
+
+#: fileaccess.cpp:740
+#, c-format
+msgid "Removing file: %1"
+msgstr "Removing file: %1"
+
+#: fileaccess.cpp:756
+msgid "Creating symbolic link: %1 -> %2"
+msgstr "Creating symbolic link: %1 -> %2"
+
+#: fileaccess.cpp:782
+msgid "Renaming file: %1 -> %2"
+msgstr "Renaming file: %1 -> %2"
+
+#: fileaccess.cpp:817
+msgid "Copying file: %1 -> %2"
+msgstr "Copying file: %1 -> %2"
+
+#: fileaccess.cpp:831
+#, c-format
+msgid ""
+"Error during file copy operation: Opening file for reading failed. Filename: "
+"%1"
+msgstr ""
+"Error during file copy operation: Opening file for reading failed. Filename: "
+"%1"
+
+#: fileaccess.cpp:837
+#, c-format
+msgid ""
+"Error during file copy operation: Opening file for writing failed. Filename: "
+"%1"
+msgstr ""
+"Error during file copy operation: Opening file for writing failed. Filename: "
+"%1"
+
+#: fileaccess.cpp:852
+#, c-format
+msgid "Error during file copy operation: Reading failed. Filename: %1"
+msgstr "Error during file copy operation: Reading failed. Filename: %1"
+
+#: fileaccess.cpp:861
+#, c-format
+msgid "Error during file copy operation: Writing failed. Filename: %1"
+msgstr "Error during file copy operation: Writing failed. Filename: %1"
+
+#: fileaccess.cpp:1162
+msgid "Reading directory: "
+msgstr "Reading directory: "
+
+#: fileaccess.cpp:1218
+#, c-format
+msgid "Listing directory: %1"
+msgstr "Listing directory: %1"
+
+#: kdiff3.cpp:125
+msgid "Option --auto used, but no output file specified."
+msgstr "Option --auto used, but no output file specified."
+
+#: kdiff3.cpp:223
+msgid "Option --auto ignored for directory comparison."
+msgstr "Option --auto ignored for directory comparison."
+
+#: kdiff3.cpp:263
+msgid "Saving failed."
+msgstr "Saving failed."
+
+#: kdiff3.cpp:287 pdiff.cpp:1245 pdiff.cpp:1306
+msgid "Opening of these files failed:"
+msgstr "Opening of these files failed:"
+
+#: kdiff3.cpp:296
+msgid "File Open Error"
+msgstr "File Open Error"
+
+#: kdiff3.cpp:315
+msgid "Opens documents for comparison..."
+msgstr "Opens documents for comparison..."
+
+#: kdiff3.cpp:317
+msgid "Saves the merge result. All conflicts must be solved!"
+msgstr "Saves the merge result. All conflicts must be solved!"
+
+#: kdiff3.cpp:319
+msgid "Saves the current document as..."
+msgstr "Saves the current document as..."
+
+#: kdiff3.cpp:321
+msgid "Quits the application"
+msgstr "Quits the application"
+
+#: kdiff3.cpp:323
+msgid "Cuts the selected section and puts it to the clipboard"
+msgstr "Cuts the selected section and puts it to the clipboard"
+
+#: kdiff3.cpp:325
+msgid "Copies the selected section to the clipboard"
+msgstr "Copies the selected section to the clipboard"
+
+#: kdiff3.cpp:327
+msgid "Pastes the clipboard contents to actual position"
+msgstr "Pastes the clipboard contents to actual position"
+
+#: kdiff3.cpp:329
+msgid "Search for a string"
+msgstr "Search for a string"
+
+#: kdiff3.cpp:331
+msgid "Search again for the string"
+msgstr "Search again for the string"
+
+#: kdiff3.cpp:333
+msgid "Enables/disables the toolbar"
+msgstr "Enables/disables the toolbar"
+
+#: kdiff3.cpp:335
+msgid "Enables/disables the statusbar"
+msgstr "Enables/disables the statusbar"
+
+#: kdiff3.cpp:339
+msgid "Configure KDiff3..."
+msgstr "Configure KDiff3..."
+
+#: kdiff3.cpp:359
+msgid "Go to Current Delta"
+msgstr "Go to Current Delta"
+
+#: kdiff3.cpp:360
+msgid "Go to First Delta"
+msgstr "Go to First Delta"
+
+#: kdiff3.cpp:361
+msgid "Go to Last Delta"
+msgstr "Go to Last Delta"
+
+#: kdiff3.cpp:362
+msgid "Go to Previous Delta"
+msgstr "Go to Previous Delta"
+
+#: kdiff3.cpp:363
+msgid "Go to Next Delta"
+msgstr "Go to Next Delta"
+
+#: kdiff3.cpp:364
+msgid "Go to Previous Conflict"
+msgstr "Go to Previous Conflict"
+
+#: kdiff3.cpp:365
+msgid "Go to Next Conflict"
+msgstr "Go to Next Conflict"
+
+#: kdiff3.cpp:366
+msgid "Go to Previous Unsolved Conflict"
+msgstr "Go to Previous Unsolved Conflict"
+
+#: kdiff3.cpp:367
+msgid "Go to Next Unsolved Conflict"
+msgstr "Go to Next Unsolved Conflict"
+
+#: kdiff3.cpp:368
+msgid "Select Line(s) From A"
+msgstr "Select Line(s) From A"
+
+#: kdiff3.cpp:369
+msgid "Select Line(s) From B"
+msgstr "Select Line(s) From B"
+
+#: kdiff3.cpp:370
+msgid "Select Line(s) From C"
+msgstr "Select Line(s) From C"
+
+#: kdiff3.cpp:371
+msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
+msgstr "Automatically Go to Next Unsolved Conflict After Source Selection"
+
+#: kdiff3.cpp:373
+msgid "Show Space && Tabulator Characters for Differences"
+msgstr "Show Space && Tabulator Characters for Differences"
+
+#: kdiff3.cpp:374
+msgid "Show White Space"
+msgstr "Show White Space"
+
+#: kdiff3.cpp:376
+msgid "Show Line Numbers"
+msgstr "Show Line Numbers"
+
+#: kdiff3.cpp:377
+msgid "Choose A Everywhere"
+msgstr "Choose A Everywhere"
+
+#: kdiff3.cpp:378
+msgid "Choose B Everywhere"
+msgstr "Choose B Everywhere"
+
+#: kdiff3.cpp:379
+msgid "Choose C Everywhere"
+msgstr "Choose C Everywhere"
+
+#: kdiff3.cpp:380
+msgid "Choose A For All Unsolved Conflicts"
+msgstr "Choose A For All Unsolved Conflicts"
+
+#: kdiff3.cpp:381
+msgid "Choose B For All Unsolved Conflicts"
+msgstr "Choose B For All Unsolved Conflicts"
+
+#: kdiff3.cpp:382
+msgid "Choose C For All Unsolved Conflicts"
+msgstr "Choose C For All Unsolved Conflicts"
+
+#: kdiff3.cpp:383
+msgid "Choose A For All Unsolved Whitespace Conflicts"
+msgstr "Choose A For All Unsolved Whitespace Conflicts"
+
+#: kdiff3.cpp:384
+msgid "Choose B For All Unsolved Whitespace Conflicts"
+msgstr "Choose B For All Unsolved Whitespace Conflicts"
+
+#: kdiff3.cpp:385
+msgid "Choose C For All Unsolved Whitespace Conflicts"
+msgstr "Choose C For All Unsolved Whitespace Conflicts"
+
+#: kdiff3.cpp:386
+msgid "Automatically Solve Simple Conflicts"
+msgstr "Automatically Solve Simple Conflicts"
+
+#: kdiff3.cpp:387
+msgid "Set Deltas to Conflicts"
+msgstr "Set Deltas to Conflicts"
+
+#: kdiff3.cpp:389
+msgid "Show Window A"
+msgstr "Show Window A"
+
+#: kdiff3.cpp:390
+msgid "Show Window B"
+msgstr "Show Window B"
+
+#: kdiff3.cpp:391
+msgid "Show Window C"
+msgstr "Show Window C"
+
+#: kdiff3.cpp:392 kdiff3.cpp:394
+msgid "Focus Next Window"
+msgstr "Focus Next Window"
+
+#: kdiff3.cpp:396
+msgid "Focus Prev Window"
+msgstr "Focus Prev Window"
+
+#: kdiff3.cpp:397
+msgid "Toggle Split Orientation"
+msgstr "Toggle Split Orientation"
+
+#: kdiff3.cpp:399
+msgid "Dir && Text Split Screen View"
+msgstr "Dir && Text Split Screen View"
+
+#: kdiff3.cpp:401
+msgid "Toggle Between Dir && Text View"
+msgstr "Toggle Between Dir && Text View"
+
+#: kdiff3.cpp:420 kdiff3.cpp:536 kdiff3.cpp:560 kdiff3.cpp:593 kdiff3.cpp:613
+#: pdiff.cpp:1263 pdiff.cpp:1325 pdiff.cpp:1346 pdiff.cpp:1362 pdiff.cpp:1393
+msgid "Ready."
+msgstr "Ready."
+
+#: kdiff3.cpp:483 pdiff.cpp:1695
+msgid "The merge result hasn't been saved."
+msgstr "The merge result hasn't been saved."
+
+#: kdiff3.cpp:484
+msgid "Save && Quit"
+msgstr "Save && Quit"
+
+#: kdiff3.cpp:484
+msgid "Quit Without Saving"
+msgstr "Quit Without Saving"
+
+#: kdiff3.cpp:492 pdiff.cpp:1704
+msgid "Saving the merge result failed."
+msgstr "Saving the merge result failed."
+
+#: kdiff3.cpp:503 pdiff.cpp:1185
+msgid "You are currently doing a directory merge. Are you sure, you want to abort?"
+msgstr "You are currently doing a directory merge. Are you sure, you want to abort?"
+
+#: kdiff3.cpp:526
+msgid "Saving file..."
+msgstr "Saving file..."
+
+#: kdiff3.cpp:542
+msgid "Saving file with a new filename..."
+msgstr "Saving file with a new filename..."
+
+#: kdiff3.cpp:566
+msgid "Exiting..."
+msgstr "Exiting..."
+
+#: kdiff3.cpp:578
+msgid "Toggling toolbar..."
+msgstr "Toggling toolbar..."
+
+#: kdiff3.cpp:598
+msgid "Toggle the statusbar..."
+msgstr "Toggle the statusbar..."
+
+#: kdiff3.cpp:638
+msgid "Searchtext:"
+msgstr "Searchtext:"
+
+#: kdiff3.cpp:645
+msgid "Case sensitive"
+msgstr "Case sensitive"
+
+#: kdiff3.cpp:648
+msgid "Search A"
+msgstr "Search A"
+
+#: kdiff3.cpp:653
+msgid "Search B"
+msgstr "Search B"
+
+#: kdiff3.cpp:658
+msgid "Search C"
+msgstr "Search C"
+
+#: kdiff3.cpp:663
+msgid "Search output"
+msgstr "Search output"
+
+#: kdiff3.cpp:668
+msgid "&Search"
+msgstr "&Search"
+
+#: kdiff3_part.cpp:131 kdiff3_part.cpp:196
+msgid "Couldn't find files for comparison."
+msgstr "Couldn't find files for comparison."
+
+#: kdiff3_part.cpp:263
+msgid "KDiff3Part"
+msgstr "KDiff3Part"
+
+#: kdiff3_shell.cpp:63
+msgid ""
+"Could not find our part!\n"
+"This usually happens due to an installation problem. Please read the "
+"README-file in the source package for details."
+msgstr ""
+"Could not find our part!\n"
+"This usually happens due to an installation problem. Please read the "
+"README-file in the source package for details."
+
+#: main.cpp:26
+msgid "Text Diff and Merge Tool"
+msgstr "Text Diff and Merge Tool"
+
+#: main.cpp:31
+msgid "Merge the input."
+msgstr "Merge the input."
+
+#: main.cpp:33
+msgid "Explicit base file. For compatibility with certain tools."
+msgstr "Explicit base file. For compatibility with certain tools."
+
+#: main.cpp:35
+msgid "Output file. Implies -m. E.g.: -o newfile.txt"
+msgstr "Output file. Implies -m. E.g.: -o newfile.txt"
+
+#: main.cpp:36
+msgid "Output file, again. (For compatibility with certain tools.)"
+msgstr "Output file, again. (For compatibility with certain tools.)"
+
+#: main.cpp:37
+msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
+msgstr "No GUI if all conflicts are auto-solvable. (Needs -o file)"
+
+#: main.cpp:38
+msgid "Don't solve conflicts automatically. (For compatibility...)"
+msgstr "Don't solve conflicts automatically. (For compatibility...)"
+
+#: main.cpp:39
+msgid "Visible name replacement. Supply this once for every input."
+msgstr "Visible name replacement. Supply this once for every input."
+
+#: main.cpp:41
+msgid "For compatibility with certain tools."
+msgstr "For compatibility with certain tools."
+
+#: main.cpp:43
+msgid "file1 to open (base, if not specified via --base)"
+msgstr "file1 to open (base, if not specified via --base)"
+
+#: main.cpp:44
+msgid "file2 to open"
+msgstr "file2 to open"
+
+#: main.cpp:45
+msgid "file3 to open"
+msgstr "file3 to open"
+
+#: main.cpp:98 rc.cpp:3
+msgid "KDiff3"
+msgstr "KDiff3"
+
+#: mergeresultwindow.cpp:249
+msgid ""
+"The output has been modified.\n"
+"If you continue your changes will be lost."
+msgstr ""
+"The output has been modified.\n"
+"If you continue your changes will be lost."
+
+#: mergeresultwindow.cpp:667 pdiff.cpp:585
+msgid "All input files are binary equal."
+msgstr "All input files are binary equal."
+
+#: mergeresultwindow.cpp:669 pdiff.cpp:587
+msgid "All input files contain the same text."
+msgstr "All input files contain the same text."
+
+#: mergeresultwindow.cpp:671 pdiff.cpp:589
+msgid ""
+"Files A and B are binary equal.\n"
+msgstr ""
+"Files A and B are binary equal.\n"
+
+#: mergeresultwindow.cpp:672 pdiff.cpp:590
+msgid ""
+"Files A and B have equal text. \n"
+msgstr ""
+"Files A and B have equal text. \n"
+
+#: mergeresultwindow.cpp:673 pdiff.cpp:591
+msgid ""
+"Files A and C are binary equal.\n"
+msgstr ""
+"Files A and C are binary equal.\n"
+
+#: mergeresultwindow.cpp:674 pdiff.cpp:592
+msgid ""
+"Files A and C have equal text. \n"
+msgstr ""
+"Files A and C have equal text. \n"
+
+#: mergeresultwindow.cpp:675 pdiff.cpp:593
+msgid ""
+"Files B and C are binary equal.\n"
+msgstr ""
+"Files B and C are binary equal.\n"
+
+#: mergeresultwindow.cpp:676 pdiff.cpp:594
+msgid ""
+"Files B and C have equal text. \n"
+msgstr ""
+"Files B and C have equal text. \n"
+
+#: mergeresultwindow.cpp:679
+msgid "Total number of conflicts: "
+msgstr "Total number of conflicts: "
+
+#: mergeresultwindow.cpp:680
+msgid ""
+"\n"
+"Nr of automatically solved conflicts: "
+msgstr ""
+"\n"
+"Nr of automatically solved conflicts: "
+
+#: mergeresultwindow.cpp:681
+msgid ""
+"\n"
+"Nr of unsolved conflicts: "
+msgstr ""
+"\n"
+"Nr of unsolved conflicts: "
+
+#: mergeresultwindow.cpp:683
+msgid "Conflicts"
+msgstr "Conflicts"
+
+#: mergeresultwindow.cpp:1011
+msgid "<No src line>"
+msgstr "<No src line>"
+
+#: mergeresultwindow.cpp:1018
+msgid "<Merge Conflict>"
+msgstr "<Merge Conflict>"
+
+#: mergeresultwindow.cpp:1082
+msgid "[Modified]"
+msgstr "[Modified]"
+
+#: mergeresultwindow.cpp:1957
+msgid ""
+"Not all conflicts are solved yet.\n"
+"File not saved.\n"
+msgstr ""
+"Not all conflicts are solved yet.\n"
+"File not saved.\n"
+
+#: mergeresultwindow.cpp:1959
+msgid "Conflicts Left"
+msgstr "Conflicts Left"
+
+#: mergeresultwindow.cpp:1971
+msgid ""
+"\n"
+"\n"
+"File not saved."
+msgstr ""
+"\n"
+"\n"
+"File not saved."
+
+#: mergeresultwindow.cpp:1971 mergeresultwindow.cpp:2033
+msgid "File Save Error"
+msgstr "File Save Error"
+
+#: mergeresultwindow.cpp:1987
+msgid "Out of memory while preparing to save."
+msgstr "Out of memory while preparing to save."
+
+#: mergeresultwindow.cpp:2033
+msgid "Error while writing."
+msgstr "Error while writing."
+
+#: optiondialog.cpp:236
+msgid "Editor & Diff Output Font"
+msgstr "Editor & Diff Output Font"
+
+#: optiondialog.cpp:248
+msgid "Italic font for deltas"
+msgstr "Italic font for deltas"
+
+#: optiondialog.cpp:251
+msgid ""
+"Selects the italic version of the font for differences.\n"
+"If the font doesn't support italic characters, then this does nothing."
+msgstr ""
+"Selects the italic version of the font for differences.\n"
+"If the font doesn't support italic characters, then this does nothing."
+
+#: optiondialog.cpp:259
+msgid "Color"
+msgstr "Colour"
+
+#: optiondialog.cpp:259
+msgid "Colors in Editor & Diff Output"
+msgstr "Colours in Editor & Diff Output"
+
+#: optiondialog.cpp:273
+msgid "Foreground color:"
+msgstr "Foreground colour:"
+
+#: optiondialog.cpp:279
+msgid "Background color:"
+msgstr "Background colour:"
+
+#: optiondialog.cpp:286
+msgid "Diff background color:"
+msgstr "Diff background colour:"
+
+#: optiondialog.cpp:293
+msgid "Color A:"
+msgstr "Colour A:"
+
+#: optiondialog.cpp:300
+msgid "Color B:"
+msgstr "Colour B:"
+
+#: optiondialog.cpp:307
+msgid "Color C:"
+msgstr "Colour C:"
+
+#: optiondialog.cpp:313
+msgid "Conflict color:"
+msgstr "Conflict colour:"
+
+#: optiondialog.cpp:320
+msgid "Current range background color:"
+msgstr "Current range background colour:"
+
+#: optiondialog.cpp:327
+msgid "Current range diff background color:"
+msgstr "Current range diff background colour:"
+
+#: optiondialog.cpp:338
+msgid "Editor"
+msgstr "Editor"
+
+#: optiondialog.cpp:338
+msgid "Editor Behaviour"
+msgstr "Editor Behaviour"
+
+#: optiondialog.cpp:347
+msgid "Tab inserts spaces"
+msgstr "Tab inserts spaces"
+
+#: optiondialog.cpp:350
+msgid ""
+"On: Pressing tab generates the appropriate number of spaces.\n"
+"Off: A Tab-character will be inserted."
+msgstr ""
+"On: Pressing tab generates the appropriate number of spaces.\n"
+"Off: A Tab-character will be inserted."
+
+#: optiondialog.cpp:356
+msgid "Tab size:"
+msgstr "Tab size:"
+
+#: optiondialog.cpp:361
+msgid "Auto indentation"
+msgstr "Auto indentation"
+
+#: optiondialog.cpp:364
+msgid ""
+"On: The indentation of the previous line is used for a new line.\n"
+msgstr ""
+"On: The indentation of the previous line is used for a new line.\n"
+
+#: optiondialog.cpp:368
+msgid "Auto copy selection"
+msgstr "Auto copy selection"
+
+#: optiondialog.cpp:371
+msgid ""
+"On: Any selection is immediately written to the clipboard.\n"
+"Off: You must explicitely copy e.g. via Ctrl-C."
+msgstr ""
+"On: Any selection is immediately written to the clipboard.\n"
+"Off: You must explicitely copy e.g. via Ctrl-C."
+
+#: optiondialog.cpp:376
+msgid "Use locale encoding"
+msgstr "Use locale encoding"
+
+#: optiondialog.cpp:379
+msgid "Change this if non-ascii-characters aren't displayed correctly."
+msgstr "Change this if non-ascii-characters aren't displayed correctly."
+
+#: optiondialog.cpp:389
+msgid "Diff & Merge"
+msgstr "Diff & Merge"
+
+#: optiondialog.cpp:389
+msgid "Diff & Merge Settings"
+msgstr "Diff & Merge Settings"
+
+#: optiondialog.cpp:399
+msgid "Preserve carriage return"
+msgstr "Preserve carriage return"
+
+#: optiondialog.cpp:402
+msgid ""
+"Show carriage return characters '\\r' if they exist.\n"
+"Helps to compare files that were modified under different operating systems."
+msgstr ""
+"Show carriage return characters '\\r' if they exist.\n"
+"Helps to compare files that were modified under different operating systems."
+
+#: optiondialog.cpp:407
+msgid "Ignore numbers"
+msgstr "Ignore numbers"
+
+#: optiondialog.cpp:410
+msgid ""
+"Ignore number characters during line matching phase. (Similar to Ignore "
+"white space.)\n"
+"Might help to compare files with numeric data."
+msgstr ""
+"Ignore number characters during line matching phase. (Similar to Ignore "
+"white space.)\n"
+"Might help to compare files with numeric data."
+
+#: optiondialog.cpp:415
+msgid "Ignore C/C++ Comments"
+msgstr "Ignore C/C++ Comments"
+
+#: optiondialog.cpp:417
+msgid "Treat C/C++ comments like white space."
+msgstr "Treat C/C++ comments like white space."
+
+#: optiondialog.cpp:421
+msgid "Convert to upper case"
+msgstr "Convert to upper case"
+
+#: optiondialog.cpp:424
+msgid "Turn all lower case characters to upper case on reading. (e.g.: 'a'->'A')"
+msgstr "Turn all lower case characters to upper case on reading. (e.g.: 'a'->'A')"
+
+#: optiondialog.cpp:428
+msgid "Preprocessor command:"
+msgstr "Preprocessor command:"
+
+#: optiondialog.cpp:432
+msgid "User defined pre-processing. (See the docs for details.)"
+msgstr "User defined pre-processing. (See the docs for details.)"
+
+#: optiondialog.cpp:435
+msgid "Line-matching preprocessor command:"
+msgstr "Line-matching preprocessor command:"
+
+#: optiondialog.cpp:439
+msgid ""
+"This pre-processor is only used during line matching.\n"
+"(See the docs for details.)"
+msgstr ""
+"This pre-processor is only used during line matching.\n"
+"(See the docs for details.)"
+
+#: optiondialog.cpp:442
+msgid "Try hard (slower)"
+msgstr "Try hard (slower)"
+
+#: optiondialog.cpp:445
+msgid ""
+"Enables the --minimal option for the external diff.\n"
+"The analysis of big files will be much slower."
+msgstr ""
+"Enables the --minimal option for the external diff.\n"
+"The analysis of big files will be much slower."
+
+#: optiondialog.cpp:450
+msgid "Auto advance delay (ms):"
+msgstr "Auto advance delay (ms):"
+
+#: optiondialog.cpp:455
+msgid ""
+"When in Auto-Advance mode the result of the current selection is shown \n"
+"for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
+msgstr ""
+"When in Auto-Advance mode the result of the current selection is shown \n"
+"for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
+
+#: optiondialog.cpp:460
+msgid "White space 2-file merge default:"
+msgstr "White space 2-file merge default:"
+
+#: optiondialog.cpp:464 optiondialog.cpp:477
+msgid "Manual choice"
+msgstr "Manual choice"
+
+#: optiondialog.cpp:468 optiondialog.cpp:482
+msgid ""
+"Allow the merge algorithm to automatically select an input for "
+"white-space-only changes."
+msgstr ""
+"Allow the merge algorithm to automatically select an input for "
+"white-space-only changes."
+
+#: optiondialog.cpp:473
+msgid "White space 3-file merge default:"
+msgstr "White space 3-file merge default:"
+
+#: optiondialog.cpp:492
+msgid "Directory Merge"
+msgstr "Directory Merge"
+
+#: optiondialog.cpp:500
+msgid "Recursive directories"
+msgstr "Recursive directories"
+
+#: optiondialog.cpp:502
+msgid "Whether to analyze subdirectories or not."
+msgstr "Whether to analyse subdirectories or not."
+
+#: optiondialog.cpp:504
+msgid "File pattern(s):"
+msgstr "File pattern(s):"
+
+#: optiondialog.cpp:509
+msgid ""
+"Pattern(s) of files to be analyzed. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"Pattern(s) of files to be analysed. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+
+#: optiondialog.cpp:515
+msgid "File-anti-pattern(s):"
+msgstr "File-anti-pattern(s):"
+
+#: optiondialog.cpp:520
+msgid ""
+"Pattern(s) of files to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"Pattern(s) of files to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+
+#: optiondialog.cpp:526
+msgid "Dir-anti-pattern(s):"
+msgstr "Dir-anti-pattern(s):"
+
+#: optiondialog.cpp:531
+msgid ""
+"Pattern(s) of directories to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"Pattern(s) of directories to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+
+#: optiondialog.cpp:537
+msgid "Use .cvsignore"
+msgstr "Use .cvsignore"
+
+#: optiondialog.cpp:540
+msgid ""
+"Extends the antipattern to anything that would be ignored by CVS.\n"
+"Via local \".cvsignore\"-files this can be directory specific."
+msgstr ""
+"Extends the antipattern to anything that would be ignored by CVS.\n"
+"Via local \".cvsignore\"-files this can be directory specific."
+
+#: optiondialog.cpp:545
+msgid "Find hidden files and directories"
+msgstr "Find hidden files and directories"
+
+#: optiondialog.cpp:548
+msgid "Finds files and directories with the hidden attribute."
+msgstr "Finds files and directories with the hidden attribute."
+
+#: optiondialog.cpp:550
+msgid "Finds files and directories starting with '.'."
+msgstr "Finds files and directories starting with '.'."
+
+#: optiondialog.cpp:554
+msgid "Follow file links"
+msgstr "Follow file links"
+
+#: optiondialog.cpp:557
+msgid ""
+"On: Compare the file the link points to.\n"
+"Off: Compare the links."
+msgstr ""
+"On: Compare the file the link points to.\n"
+"Off: Compare the links."
+
+#: optiondialog.cpp:562
+msgid "Follow directory links"
+msgstr "Follow directory links"
+
+#: optiondialog.cpp:565
+msgid ""
+"On: Compare the directory the link points to.\n"
+"Off: Compare the links."
+msgstr ""
+"On: Compare the directory the link points to.\n"
+"Off: Compare the links."
+
+#: optiondialog.cpp:570
+msgid "List only deltas"
+msgstr "List only deltas"
+
+#: optiondialog.cpp:573
+msgid "Files and directories without change will not appear in the list."
+msgstr "Files and directories without change will not appear in the list."
+
+#: optiondialog.cpp:576
+msgid "Trust the modification date (unsafe)"
+msgstr "Trust the modification date (unsafe)"
+
+#: optiondialog.cpp:578
+msgid ""
+"Assume that files are equal if the modification date and file length are "
+"equal.\n"
+"Useful for big directories or slow networks."
+msgstr ""
+"Assume that files are equal if the modification date and file length are "
+"equal.\n"
+"Useful for big directories or slow networks."
+
+#: optiondialog.cpp:582
+msgid "Trust the size (unsafe)"
+msgstr "Trust the size (unsafe)"
+
+#: optiondialog.cpp:584
+msgid ""
+"Assume that files are equal if their file lengths are equal.\n"
+"Useful for big directories or slow networks when the date is modified during "
+"download."
+msgstr ""
+"Assume that files are equal if their file lengths are equal.\n"
+"Useful for big directories or slow networks when the date is modified during "
+"download."
+
+#: optiondialog.cpp:589
+msgid "Synchronize directories"
+msgstr "Synchronise directories"
+
+#: optiondialog.cpp:592
+msgid ""
+"Offers to store files in both directories so that\n"
+"both directories are the same afterwards.\n"
+"Works only when comparing two directories without specifying a destination."
+msgstr ""
+"Offers to store files in both directories so that\n"
+"both directories are the same afterwards.\n"
+"Works only when comparing two directories without specifying a destination."
+
+#: optiondialog.cpp:597
+msgid "Copy newer instead of merging (unsafe)"
+msgstr "Copy newer instead of merging (unsafe)"
+
+#: optiondialog.cpp:600
+msgid ""
+"Don't look inside, just take the newer file.\n"
+"(Use this only if you know what you are doing!)\n"
+"Only effective when comparing two directories."
+msgstr ""
+"Don't look inside, just take the newer file.\n"
+"(Use this only if you know what you are doing!)\n"
+"Only effective when comparing two directories."
+
+#: optiondialog.cpp:605
+msgid "Backup files (.orig)"
+msgstr "Backup files (.orig)"
+
+#: optiondialog.cpp:608
+msgid ""
+"When a file would be saved over an old file, then the old file\n"
+"will be renamed with a '.orig'-extension instead of being deleted."
+msgstr ""
+"When a file would be saved over an old file, then the old file\n"
+"will be renamed with a '.orig'-extension instead of being deleted."
+
+#: optiondialog.cpp:636
+msgid ""
+"You selected a variable width font.\n"
+"\n"
+"Because this program doesn't handle variable width fonts\n"
+"correctly, you might experience problems while editing.\n"
+"\n"
+"Do you want to continue or do you want to select another font."
+msgstr ""
+"You selected a variable width font.\n"
+"\n"
+"Because this program doesn't handle variable width fonts\n"
+"correctly, you might experience problems while editing.\n"
+"\n"
+"Do you want to continue or do you want to select another font."
+
+#: optiondialog.cpp:640
+msgid "Incompatible Font"
+msgstr "Incompatible Font"
+
+#: optiondialog.cpp:641
+msgid "Continue at Own Risk"
+msgstr "Continue at Own Risk"
+
+#: optiondialog.cpp:641
+msgid "Select Another Font"
+msgstr "Select Another Font"
+
+#: optiondialog.cpp:669
+msgid "This resets all options. Not only those of the current topic."
+msgstr "This resets all options. Not only those of the current topic."
+
+#: pdiff.cpp:371
+msgid ""
+"Running the external diff failed.\n"
+"Check if the diff works, if the program can write in the temp folder or if "
+"the disk is full.\n"
+"The external diff option will be disabled now and the internal diff will be "
+"used."
+msgstr ""
+"Running the external diff failed.\n"
+"Check if the diff works, if the program can write in the temp folder or if "
+"the disk is full.\n"
+"The external diff option will be disabled now and the internal diff will be "
+"used."
+
+#: pdiff.cpp:437
+msgid "Loading A"
+msgstr "Loading A"
+
+#: pdiff.cpp:442
+msgid "Loading B"
+msgstr "Loading B"
+
+#: pdiff.cpp:453 pdiff.cpp:481 pdiff.cpp:493
+msgid "Diff: A <-> B"
+msgstr "Diff: A <-> B"
+
+#: pdiff.cpp:461 pdiff.cpp:514
+msgid "Linediff: A <-> B"
+msgstr "Linediff: A <-> B"
+
+#: pdiff.cpp:470
+msgid "Loading C"
+msgstr "Loading C"
+
+#: pdiff.cpp:484 pdiff.cpp:496
+msgid "Diff: B <-> C"
+msgstr "Diff: B <-> C"
+
+#: pdiff.cpp:487 pdiff.cpp:499
+msgid "Diff: A <-> C"
+msgstr "Diff: A <-> C"
+
+#: pdiff.cpp:517
+msgid "Linediff: B <-> C"
+msgstr "Linediff: B <-> C"
+
+#: pdiff.cpp:520
+msgid "Linediff: A <-> C"
+msgstr "Linediff: A <-> C"
+
+#: pdiff.cpp:604
+msgid ""
+"Some inputfiles don't seem to be pure textfiles.\n"
+"Note that the KDiff3-merge was not meant for binary data.\n"
+"Continue at your own risk."
+msgstr ""
+"Some inputfiles don't seem to be pure textfiles.\n"
+"Note that the KDiff3-merge was not meant for binary data.\n"
+"Continue at your own risk."
+
+#: pdiff.cpp:1015
+msgid "A (Base):"
+msgstr "A (Base):"
+
+#: pdiff.cpp:1021 pdiff.cpp:1036 pdiff.cpp:1051 pdiff.cpp:1069
+msgid "File..."
+msgstr "File..."
+
+#: pdiff.cpp:1023 pdiff.cpp:1038 pdiff.cpp:1053 pdiff.cpp:1071
+msgid "Dir..."
+msgstr "Dir..."
+
+#: pdiff.cpp:1046
+msgid "C (Optional):"
+msgstr "C (Optional):"
+
+#: pdiff.cpp:1064
+msgid "Output (optional):"
+msgstr "Output (optional):"
+
+#: pdiff.cpp:1093
+msgid "Configure..."
+msgstr "Configure..."
+
+#: pdiff.cpp:1186
+msgid "Abort"
+msgstr "Abort"
+
+#: pdiff.cpp:1192 pdiff.cpp:1271
+msgid "Opening files..."
+msgstr "Opening files..."
+
+#: pdiff.cpp:1254 pdiff.cpp:1315
+msgid "File open error"
+msgstr "File open error"
+
+#: pdiff.cpp:1330
+msgid "Cutting selection..."
+msgstr "Cutting selection..."
+
+#: pdiff.cpp:1351
+msgid "Copying selection to clipboard..."
+msgstr "Copying selection to clipboard..."
+
+#: pdiff.cpp:1367
+msgid "Inserting clipboard contents..."
+msgstr "Inserting clipboard contents..."
+
+#: pdiff.cpp:1696
+msgid "Save && Continue"
+msgstr "Save && Continue"
+
+#: pdiff.cpp:1696
+msgid "Continue Without Saving"
+msgstr "Continue Without Saving"
+
+#: pdiff.cpp:1901
+msgid "Search complete."
+msgstr "Search complete."
+
+#: pdiff.cpp:1901
+msgid "Search Complete"
+msgstr "Search Complete"
+
+#: rc.cpp:1
+msgid "&KDiff3"
+msgstr "&KDiff3"
+
+#: rc.cpp:2
+msgid "Configure KDiff3"
+msgstr "Configure KDiff3"
+
+#: rc.cpp:5
+msgid "&Directory"
+msgstr "&Directory"
+
+#: rc.cpp:6
+msgid "Current Item Merge Operation"
+msgstr "Current Item Merge Operation"
+
+#: rc.cpp:7
+msgid "Current Item Sync Operation"
+msgstr "Current Item Sync Operation"
+
+#: rc.cpp:8
+msgid "&Movement"
+msgstr "&Movement"
+
+#: rc.cpp:9
+msgid "&Merge"
+msgstr "&Merge"
+
+#: rc.cpp:10
+msgid "&Window"
+msgstr "&Window"
+
+#~ msgid "Delete A && B"
+#~ msgstr "Delete A && B"
+
+#~ msgid "Merge to A && B"
+#~ msgstr "Merge to A && B"
+
+#~ msgid "In progress ..."
+#~ msgstr "In progress ..."
+
+#~ msgid ""
+#~ "On: Text that differs only in white space will match and\n"
+#~ "be shown on the same line in the different output windows.\n"
+#~ "Off is useful when whitespace is very important.\n"
+#~ "On is good for C/C++ and similar languages."
+#~ msgstr ""
+#~ "On: Text that differs only in white space will match and\n"
+#~ "be shown on the same line in the different output windows.\n"
+#~ "Off is useful when whitespace is very important.\n"
+#~ "On is good for C/C++ and similar languages."
+
+#~ msgid "Use external diff"
+#~ msgstr "Use external diff"
+
+#~ msgid ""
+#~ "Since for complicated files the internal algorithm is not so good yet,\n"
+#~ "you probably want to use the normal diff tool as line matcher."
+#~ msgstr ""
+#~ "Since for complicated files the internal algorithm is not so good yet,\n"
+#~ "you probably want to use the normal diff tool as line matcher."
+
+#~ msgid "Ignore trivial matches"
+#~ msgstr "Ignore trivial matches"
+
+#~ msgid ""
+#~ "When a difference was found, the algorithm searches for matching lines\n"
+#~ "Short or trivial lines match even when the differences still continue.\n"
+#~ "Ignoring trivial lines avoids this. Good for C/C++ and similar languages."
+#~ msgstr ""
+#~ "When a difference was found, the algorithm searches for matching lines\n"
+#~ "Short or trivial lines match even when the differences still continue.\n"
+#~ "Ignoring trivial lines avoids this. Good for C/C++ and similar languages."
+
+#~ msgid "Max search length:"
+#~ msgstr "Max search length:"
+
+#~ msgid ""
+#~ "Diff might fail for too small values but might take too long for big "
+#~ "values.\n"
+#~ msgstr ""
+#~ "Diff might fail for too small values but might take too long for big "
+#~ "values.\n"
