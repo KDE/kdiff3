@@ -17,9 +17,11 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.2  2003/10/11 12:48:31  joachim99
+ * Avoid QWidget::setFont() in paintEvent()
+ *
  * Revision 1.1  2003/10/06 18:38:48  joachim99
  * KDiff3 version 0.9.70
- *                                                                   *
  ***************************************************************************/
 
 #include "diff.h"
@@ -76,6 +78,7 @@ MergeResultWindow::MergeResultWindow(
    m_selection.reset();
 
    setMinimumSize( QSize(20,20) );
+   setFont( m_pOptionDialog->m_font );
 }
 
 void MergeResultWindow::init(
@@ -1060,10 +1063,6 @@ void MergeResultWindow::paintEvent( QPaintEvent* e )
    if (m_pDiff3LineList==0) return;
 
    bool bOldSelectionContainsData = m_selection.bSelectionContainsData;
-   if (font() != m_pOptionDialog->m_font )
-   {
-      setFont( m_pOptionDialog->m_font );
-   }
    const QFontMetrics& fm = fontMetrics();
    int fontHeight = fm.height();
    int fontWidth = fm.width("W");

@@ -17,9 +17,11 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.2  2003/10/11 12:47:09  joachim99
+ * Avoid QWidget::setFont() in paintEvent()
+ *
  * Revision 1.1  2003/10/06 18:38:48  joachim99
  * KDiff3 version 0.9.70
- *                                                                   *
  ***************************************************************************/
 
 #include <iostream>
@@ -38,7 +40,6 @@
 
 #define leftInfoWidth (4+m_lineNumberWidth)   // Nr of information columns on left side
 
-//using namespace std;
 
 DiffTextWindow::DiffTextWindow(
    QWidget* pParent,
@@ -58,6 +59,8 @@ DiffTextWindow::DiffTextWindow(
 
    m_pStatusBar = pStatusBar;
    m_bPaintingAllowed = true;
+
+   setFont(m_pOptionDialog->m_font);
 }
 
 
@@ -667,11 +670,6 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
       m_cDiff2 = m_pOptionDialog->m_colorB;
    }
    m_cDiffBoth = m_pOptionDialog->m_colorForConflict;  // Conflict color
-
-   if (font() != m_pOptionDialog->m_font )
-   {
-      setFont(m_pOptionDialog->m_font);
-   }
 
    bool bOldSelectionContainsData = selection.bSelectionContainsData;
    selection.bSelectionContainsData = false;
