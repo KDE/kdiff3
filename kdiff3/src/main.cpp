@@ -17,6 +17,9 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.3  2003/10/14 20:50:46  joachim99
+ * Fix for a warning concerning VERSION
+ *
  * Revision 1.2  2003/10/07 08:41:06  friseb123
  * Placing the version into a separate include: version.h
  * version.c extract the version number
@@ -29,8 +32,8 @@
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <klocale.h>
-#include "version.h"
 #include "kdiff3_shell.h"
+#include "version.h"
 
 
 static const char *description =
