@@ -189,6 +189,13 @@ SectionIn 2 RO
   
 SectionEnd
  
+Section "WinCVS Integration" SecStart 7
+
+  WriteRegStr HKEY_CURRENT_USER "Software\WinCvs\wincvs\CVS settings" "P_Extdiff" '"$INSTDIR\kdiff3.exe"'
+  WriteRegBin HKEY_CURRENT_USER "Software\WinCvs\wincvs\CVS settings" "P_DiffUseExtDiff" 01
+
+SectionEnd
+ 
 Section "Start of the application" SecStart 6
 
     Exec "$INSTDIR\kdiff3.exe"
