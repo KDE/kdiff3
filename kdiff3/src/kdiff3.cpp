@@ -17,9 +17,11 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.2  2003/10/11 12:45:25  joachim99
+ * Allow CTRL-Tab for Windows
+ *
  * Revision 1.1  2003/10/06 18:38:48  joachim99
  * KDiff3 version 0.9.70
- *                                                                   *
  ***************************************************************************/
 
 #include "diff.h"
@@ -380,6 +382,9 @@ void KDiff3App::initActions( KActionCollection* ac )
    showWindowB = new KToggleAction(i18n("Show Window B"), 0, this, SLOT(slotShowWindowBToggled()), ac, "win_show_b");
    showWindowC = new KToggleAction(i18n("Show Window C"), 0, this, SLOT(slotShowWindowCToggled()), ac, "win_show_c");
    winFocusNext = new KAction(i18n("Focus Next Window"), ALT+Key_Right, this, SLOT(slotWinFocusNext()), ac, "win_focus_next");
+#ifdef _WIN32
+   new KAction(i18n("Focus Next Window"), CTRL+Key_Tab, this, SLOT(slotWinFocusNext()), ac, "win_focus_next", false, false);
+#endif
    winFocusPrev = new KAction(i18n("Focus Prev Window"), ALT+Key_Left, this, SLOT(slotWinFocusPrev()), ac, "win_focus_prev");
    winToggleSplitOrientation = new KAction(i18n("Toggle Split Orientation"), 0, this, SLOT(slotWinToggleSplitterOrientation()), ac, "win_toggle_split_orientation");
 }
