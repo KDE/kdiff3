@@ -12,7 +12,7 @@ main(int argv,char** argc)
   }
   else if (strcmp(argc[1],"nsis")==0)
   {
-    printf("!define MUI_VERSION=\"%s\"\n",VERSION);
+    printf("!define MUI_VERSION \"%s\"\n",VERSION);
   }
   else if (strcmp(argc[1],"unix")==0)
   {

@@ -2,9 +2,9 @@
 ;MultiLanguage Example Script
 ;Written by Joost Verburg
 !define MUI_PRODUCT "KDiff3" ;Define your own software name here
-!ifndef MUI_VERSION
-;!define MUI_VERSION "" ;Define your own software version here
 !include "version.nsi"
+!ifndef MUI_VERSION
+!define MUI_VERSION "" ;Define your own software version here
 !endif
 !ifndef QTDIR
 !define QTDIR "f:\qt\3.1.2"
@@ -24,7 +24,7 @@
 
   ;General
   OutFile "KDiff3Setup_${MUI_VERSION}.exe"
-  setCompressor zlib
+  setCompressor bzip2
 
   
   
@@ -50,7 +50,7 @@
   
   !define MUI_UNINSTALLER
   !define MUI_UNCONFIRMPAGE
-;  !define MUI_HEADERBITMAP "kdiff3.bmp"
+  !define MUI_HEADERBITMAP "kdiff3.bmp"
 ;--------------------------------
 ;Languages
 
@@ -162,14 +162,8 @@ SectionIn 2 RO
     File "${WINDOWS_DIR}\system32\msvcp70.dll"
     File "${WINDOWS_DIR}\system32\msvcr70.dll"
     File "${QTDIR}\lib\qt-mt*.dll"
-    File "..\trd_*.qm"
+    ; File "*.qm"
 
-    SetOutPath "$INSTDIR\sqldrivers"
-    File "${QTDIR}\plugins\sqldrivers\*.dll"
-    SetOutPath "$INSTDIR\imageformats"
-    File "${QTDIR}\plugins\imageformats\*.dll"
-    SetOutPath "$INSTDIR\styles"
-    File "..\styles\*.dll"
   !insertmacro MUI_STARTMENU_WRITE_BEGIN
     
     ;Create shortcuts
@@ -189,18 +183,19 @@ SectionIn 2 RO
   
 SectionEnd
  
-Section "WinCVS Integration" SecStart 7
+Section "Documentation"
+
+
+SectionEnd
+
+SubSection "Integration"
+Section "WinCVS"
 
   WriteRegStr HKEY_CURRENT_USER "Software\WinCvs\wincvs\CVS settings" "P_Extdiff" '"$INSTDIR\kdiff3.exe"'
   WriteRegBin HKEY_CURRENT_USER "Software\WinCvs\wincvs\CVS settings" "P_DiffUseExtDiff" 01
 
-SectionEnd
- 
-Section "Start of the application" SecStart 6
-
-    Exec "$INSTDIR\kdiff3.exe"
-
-SectionEnd
+SectionEnd 
+SubSectionEnd
  
 ;Display the Finish header
 ;Insert this macro after the sections if you are not using a finish page
