@@ -56,7 +56,7 @@ public:
       if (firstChild()==0) return 0;
       else                 return m_pLast;
    }
-   
+
    void addText(const QString& s )
    {
       if (firstChild()==0) m_pLast = new QListViewItem( this, s );
@@ -177,7 +177,7 @@ void DirectoryMergeWindow::fastFileComparison(
       return;
    }
 
-   pp.setInformation( i18n("Comparing file ..."), 0, false );
+   pp.setInformation( i18n("Comparing file..."), 0, false );
 #if QT_VERSION==230
    typedef int t_FileSize;
 #else
@@ -248,7 +248,7 @@ DirectoryMergeWindow::DirectoryMergeWindow( QWidget* pParent, OptionDialog* pOpt
    m_pStatusInfo = new StatusInfo(0);
    m_pStatusInfo->hide();
    m_bScanning = false;
-   
+
    addColumn(i18n("Name"));
    addColumn("A");
    addColumn("B");
@@ -259,7 +259,7 @@ DirectoryMergeWindow::DirectoryMergeWindow( QWidget* pParent, OptionDialog* pOpt
    addColumn(i18n("Solved"));
    addColumn(i18n("Nonwhite"));
    addColumn(i18n("White"));
-   
+
    setColumnAlignment( s_UnsolvedCol, Qt::AlignRight );
    setColumnAlignment( s_SolvedCol,   Qt::AlignRight );
    setColumnAlignment( s_NonWhiteCol, Qt::AlignRight );
@@ -291,6 +291,7 @@ void DirectoryMergeWindow::reload()
       if ( result!=KMessageBox::Yes )
          return;
    }
+
    init( m_dirA, m_dirB, m_dirC, m_dirDest, m_bDirectoryMerge );
 }
 
@@ -385,14 +386,15 @@ bool DirectoryMergeWindow::init
 {
    if ( m_pOptions->m_bDmFullAnalysis )
    {
-      // A full analysis uses the same ressources that a normal text-diff/merge uses. 
+      // A full analysis uses the same ressources that a normal text-diff/merge uses.
       // So make sure that the user saves his data first.
       bool bCanContinue=false;
       checkIfCanContinue( &bCanContinue );
       if ( !bCanContinue )
          return false;
+      startDiffMerge("","","","","","","",0);  // hide main window
    }
-   
+
    show();
 
    ProgressProxy pp;
@@ -442,9 +444,9 @@ bool DirectoryMergeWindow::init
          i18n("Parameter Warning"));
       return false;
    }
-   
+
    m_bScanning = true;
-   statusBarMessage(i18n("Scanning directories ..."));
+   statusBarMessage(i18n("Scanning directories..."));
 
    m_bSyncMode = m_pOptions->m_bDmSyncMode && !m_dirC.isValid() && !m_dirDest.isValid();
 
@@ -472,7 +474,7 @@ bool DirectoryMergeWindow::init
       setColumnWidth( s_NonWhiteCol, 0 );
       setColumnWidth( s_UnsolvedCol, 0 );
       setColumnWidth( s_SolvedCol,   0 );
-   }   
+   }
    else if ( m_dirC.isValid() )
    {
       setColumnWidth(s_WhiteCol,    50 );
@@ -487,7 +489,7 @@ bool DirectoryMergeWindow::init
       setColumnWidth(s_UnsolvedCol, 50 );
       setColumnWidth(s_SolvedCol,    0 );
    }
-   
+
    bool bListDirSuccessA = true;
    bool bListDirSuccessB = true;
    bool bListDirSuccessC = true;
@@ -600,7 +602,7 @@ bool DirectoryMergeWindow::init
       sizes[1]=total - sizes[0];
       pSplitter->setSizes( sizes );
    }
-   
+
    m_bScanning = false;
    statusBarMessage(i18n("Ready."));
 
@@ -626,7 +628,7 @@ bool DirectoryMergeWindow::init
       KMessageBox::information( this, s );
       setSelected( firstChild(), true );
    }
-   
+
    return true;
 }
 
@@ -811,13 +813,23 @@ void DirectoryMergeWindow::compareFilesAndCalcAges( MergeFileInfos& mfi )
             "",
             "","","",&mfi.m_totalDiffStatus
             );
-         mfi.m_bEqualAB = mfi.m_totalDiffStatus.bBinaryAEqB;
-         mfi.m_bEqualBC = mfi.m_totalDiffStatus.bBinaryBEqC;
-         mfi.m_bEqualAC = mfi.m_totalDiffStatus.bBinaryAEqC;
+         int nofNonwhiteConflicts = mfi.m_totalDiffStatus.nofUnsolvedConflicts + 
+            mfi.m_totalDiffStatus.nofSolvedConflicts - mfi.m_totalDiffStatus.nofWhitespaceConflicts;
+
+         if (m_pOptions->m_bDmWhiteSpaceEqual && nofNonwhiteConflicts == 0)
+         {
+            mfi.m_bEqualAB =  mfi.m_bEqualBC =  mfi.m_bEqualAC = true;
+         }
+         else
+         {
+            mfi.m_bEqualAB = mfi.m_totalDiffStatus.bBinaryAEqB;
+            mfi.m_bEqualBC = mfi.m_totalDiffStatus.bBinaryBEqC;
+            mfi.m_bEqualAC = mfi.m_totalDiffStatus.bBinaryAEqC;
+         }
       }
    }
    else
-   {      
+   {
       bool bError;
       QString eqStatus;
       if( mfi.m_bExistsInA && mfi.m_bExistsInB )
@@ -1743,7 +1755,7 @@ void DirectoryMergeWindow::slotRunOperationForCurrentItem()
       {
          pEnd = pEnd->parent();
       }
-      if ( pEnd!=0 ) 
+      if ( pEnd!=0 )
          pEnd=pEnd->nextSibling();
 
       prepareMergeStart( pBegin, pEnd, bVerbose );
@@ -2201,7 +2213,7 @@ bool DirectoryMergeWindow::renameFLD( const QString& srcName, const QString& des
       }
    }
 
-   m_pStatusInfo->addText(i18n("rename( %1 -> %2 )").arg(srcName).arg(destName))	;
+   m_pStatusInfo->addText(i18n("rename( %1 -> %2 )").arg(srcName).arg(destName));
    if ( m_bSimulatedMergeStarted )
    {
       return true;
@@ -2288,7 +2300,7 @@ DirectoryMergeInfo::DirectoryMergeInfo( QWidget* pParent )
    m_pInfoList->addColumn(i18n("Last Modification"));
    m_pInfoList->addColumn(i18n("Link-Destination"));
    setMinimumSize( 100,100 );
-   
+
    m_pInfoList->installEventFilter(this);
 }
 
@@ -2422,17 +2434,17 @@ void DirectoryMergeWindow::initDirectoryMergeActions( QObject* pKDiff3App, KActi
    dirCurrentChooseB = new KAction(i18n("B"), 0, p, SLOT(slotCurrentChooseB()), ac, "dir_current_choose_b");
    dirCurrentChooseC = new KAction(i18n("C"), 0, p, SLOT(slotCurrentChooseC()), ac, "dir_current_choose_c");
    dirCurrentMerge   = new KAction(i18n("Merge"), 0, p, SLOT(slotCurrentMerge()), ac, "dir_current_merge");
-   dirCurrentDelete  = new KAction(i18n("Delete (If Exists)"), 0, p, SLOT(slotCurrentDelete()), ac, "dir_current_delete");
+   dirCurrentDelete  = new KAction(i18n("Delete (if exists)"), 0, p, SLOT(slotCurrentDelete()), ac, "dir_current_delete");
 
    dirCurrentSyncDoNothing = new KAction(i18n("Do Nothing"), 0, p, SLOT(slotCurrentDoNothing()), ac, "dir_current_sync_do_nothing");
    dirCurrentSyncCopyAToB = new KAction(i18n("Copy A to B"), 0, p, SLOT(slotCurrentCopyAToB()), ac, "dir_current_sync_copy_a_to_b" );
    dirCurrentSyncCopyBToA = new KAction(i18n("Copy B to A"), 0, p, SLOT(slotCurrentCopyBToA()), ac, "dir_current_sync_copy_b_to_a" );
    dirCurrentSyncDeleteA  = new KAction(i18n("Delete A"), 0, p, SLOT(slotCurrentDeleteA()), ac,"dir_current_sync_delete_a");
    dirCurrentSyncDeleteB  = new KAction(i18n("Delete B"), 0, p, SLOT(slotCurrentDeleteB()), ac,"dir_current_sync_delete_b");
-   dirCurrentSyncDeleteAAndB  = new KAction(i18n("Delete A and B"), 0, p, SLOT(slotCurrentDeleteAAndB()), ac,"dir_current_sync_delete_a_and_b");
+   dirCurrentSyncDeleteAAndB  = new KAction(i18n("Delete A && B"), 0, p, SLOT(slotCurrentDeleteAAndB()), ac,"dir_current_sync_delete_a_and_b");
    dirCurrentSyncMergeToA   = new KAction(i18n("Merge to A"), 0, p, SLOT(slotCurrentMergeToA()), ac,"dir_current_sync_merge_to_a");
    dirCurrentSyncMergeToB   = new KAction(i18n("Merge to B"), 0, p, SLOT(slotCurrentMergeToB()), ac,"dir_current_sync_merge_to_b");
-   dirCurrentSyncMergeToAAndB   = new KAction(i18n("Merge to A and B"), 0, p, SLOT(slotCurrentMergeToAAndB()), ac,"dir_current_sync_merge_to_a_and_b");
+   dirCurrentSyncMergeToAAndB   = new KAction(i18n("Merge to A && B"), 0, p, SLOT(slotCurrentMergeToAAndB()), ac,"dir_current_sync_merge_to_a_and_b");
 }
 
 
@@ -2468,7 +2480,7 @@ void DirectoryMergeWindow::updateAvailabilities( bool bDirCompare, bool bDiffWin
    bool bFTConflict = pMFI==0 ? false : conflictingFileTypes(*pMFI);
 
    bool bDirWindowHasFocus = isVisible() && hasFocus();
-   
+
    dirCurrentDoNothing->setEnabled( bItemActive && bMergeMode );
    dirCurrentChooseA->setEnabled( bItemActive && bMergeMode && pMFI->m_bExistsInA );
    dirCurrentChooseB->setEnabled( bItemActive && bMergeMode && pMFI->m_bExistsInB );
@@ -2484,7 +2496,7 @@ void DirectoryMergeWindow::updateAvailabilities( bool bDirCompare, bool bDiffWin
       chooseB->setChecked( false );
       chooseC->setChecked( false );
    }
-   
+
    dirCurrentSyncDoNothing->setEnabled( bItemActive && !bMergeMode );
    dirCurrentSyncCopyAToB->setEnabled( bItemActive && !bMergeMode && pMFI->m_bExistsInA );
    dirCurrentSyncCopyBToA->setEnabled( bItemActive && !bMergeMode && pMFI->m_bExistsInB );

@@ -1,1 +1,1 @@
-!define MUI_VERSION "0.9.86"
+!define MUI_VERSION "0.9.87"

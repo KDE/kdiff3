@@ -1,6 +1,6 @@
 /* File I/O for GNU DIFF.
 
-   Modified for KDiff3 by Joachim Eibl 2003.
+   Modified for KDiff3 by Joachim Eibl 2003, 2004, 2005.
    The original file was part of GNU DIFF.
 
    Copyright (C) 1988, 1989, 1992, 1993, 1994, 1995, 1998, 2001, 2002
@@ -42,7 +42,7 @@ struct equivclass
 {
   lin next;		/* Next item in this bucket.  */
   hash_value hash;	/* Hash of lines in this class.  */
-  char const *line;	/* A line that fits this class.  */
+  const QChar *line;	/* A line that fits this class.  */
   size_t length;	/* That line's length, not counting its newline.  */
 };
 
@@ -79,13 +79,13 @@ static lin equivs_alloc;
 void GnuDiff::find_and_hash_each_line (struct file_data *current)
 {
   hash_value h;
-  unsigned char const *p = (unsigned char const *) current->prefix_end;
-  unsigned char c;
+  const QChar *p = (const QChar *) current->prefix_end;
+  QChar c;
   lin i, *bucket;
   size_t length;
 
   /* Cache often-used quantities in local variables to help the compiler.  */
-  char const **linbuf = current->linbuf;
+  const QChar **linbuf = current->linbuf;
   lin alloc_lines = current->alloc_lines;
   lin line = 0;
   lin linbuf_base = current->linbuf_base;
@@ -93,16 +93,16 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
   struct equivclass *eqs = equivs;
   lin eqs_index = equivs_index;
   lin eqs_alloc = equivs_alloc;
-  char const *suffix_begin = current->suffix_begin;
-  char const *bufend = FILE_BUFFER (current) + current->buffered;
+  const QChar *suffix_begin = current->suffix_begin;
+  const QChar *bufend = FILE_BUFFER (current) + current->buffered;
   bool diff_length_compare_anyway =
     ignore_white_space != IGNORE_NO_WHITE_SPACE || bIgnoreNumbers;
   bool same_length_diff_contents_compare_anyway =
     diff_length_compare_anyway | ignore_case;
 
-  while ((char const *) p < suffix_begin)
+  while ((const QChar *) p < suffix_begin)
     {
-      char const *ip = (char const *) p;
+      const QChar *ip = (const QChar *) p;
 
       h = 0;
 
@@ -112,67 +112,13 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 	  {
 	  case IGNORE_ALL_SPACE:
 	    while ((c = *p++) != '\n')
-	      if (! (ISSPACE (c) || bIgnoreNumbers && (isdigit( c ) || c=='-' || c=='.' ) ))
-		h = HASH (h, TOLOWER (c));
-	    break;
-
-	  case IGNORE_SPACE_CHANGE:
-	    while ((c = *p++) != '\n')
-	      {
-		if (ISSPACE (c))
-		  {
-		    do
-		      if ((c = *p++) == '\n')
-			goto hashing_done;
-		    while (ISSPACE (c));
-
-		    h = HASH (h, ' ');
-		  }
-
-		/* C is now the first non-space.  */
-		h = HASH (h, TOLOWER (c));
-	      }
-	    break;
-
-	  case IGNORE_TAB_EXPANSION:
-	    {
-	      size_t column = 0;
-	      while ((c = *p++) != '\n')
-		{
-		  int repetitions = 1;
-
-		  switch (c)
-		    {
-		    case '\b':
-		      column -= 0 < column;
-		      break;
-
-		    case '\t':
-		      c = ' ';
-		      repetitions = TAB_WIDTH - column % TAB_WIDTH;
-		      column += repetitions;
-		      break;
-
-		    case '\r':
-		      column = 0;
-		      break;
-
-		    default:
-		      c = TOLOWER (c);
-		      column++;
-		      break;
-		    }
-
-		  do
-		    h = HASH (h, c);
-		  while (--repetitions != 0);
-		}
-	    }
+	      if (! (isWhite(c) || bIgnoreNumbers && (c.isDigit() || c=='-' || c=='.' ) ))
+                  h = HASH (h, c.lower().unicode());
 	    break;
 
 	  default:
 	    while ((c = *p++) != '\n')
-	      h = HASH (h, TOLOWER (c));
+               h = HASH (h, c.lower().unicode());
 	    break;
 	  }
       else
@@ -180,75 +126,20 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 	  {
 	  case IGNORE_ALL_SPACE:
 	    while ((c = *p++) != '\n')
-	      if (! (ISSPACE (c)|| bIgnoreNumbers && (isdigit( c ) || c=='-' || c=='.' ) ))
-		h = HASH (h, c);
-	    break;
-
-	  case IGNORE_SPACE_CHANGE:
-	    while ((c = *p++) != '\n')
-	      {
-		if (ISSPACE (c))
-		  {
-		    do
-		      if ((c = *p++) == '\n')
-			goto hashing_done;
-		    while (ISSPACE (c));
-
-		    h = HASH (h, ' ');
-		  }
-
-		/* C is now the first non-space.  */
-		h = HASH (h, c);
-	      }
-	    break;
-
-	  case IGNORE_TAB_EXPANSION:
-	    {
-	      size_t column = 0;
-	      while ((c = *p++) != '\n')
-		{
-		  int repetitions = 1;
-
-		  switch (c)
-		    {
-		    case '\b':
-		      column -= 0 < column;
-		      break;
-
-		    case '\t':
-		      c = ' ';
-		      repetitions = TAB_WIDTH - column % TAB_WIDTH;
-		      column += repetitions;
-		      break;
-
-		    case '\r':
-		      column = 0;
-		      break;
-
-		    default:
-		      column++;
-		      break;
-		    }
-
-		  do
-		    h = HASH (h, c);
-		  while (--repetitions != 0);
-		}
-	    }
+	      if (! (isWhite(c)|| bIgnoreNumbers && (c.isDigit() || c=='-' || c=='.' ) ))
+                  h = HASH (h, c.unicode());
 	    break;
 
 	  default:
 	    while ((c = *p++) != '\n')
-	      h = HASH (h, c);
+               h = HASH (h, c.unicode());
 	    break;
 	  }
 
-   hashing_done:;
-
       bucket = &buckets[h % nbuckets];
-      length = (char const *) p - ip - 1;
+      length = (const QChar *) p - ip - 1;
 
-      if ((char const *) p == bufend
+      if ((const QChar *) p >= bufend
 	  && current->missing_newline
 	  && ROBUST_OUTPUT_STYLE (output_style))
 	{
@@ -259,7 +150,7 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 
 	  /* Omit the inserted newline when computing linbuf later.  */
 	  p--;
-	  bufend = suffix_begin = (char const *) p;
+	  bufend = suffix_begin = (const QChar *) p;
 	}
 
       for (i = *bucket;  ;  i = eqs[i].next)
@@ -283,7 +174,7 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 	  }
 	else if (eqs[i].hash == h)
 	  {
-	    char const *eqline = eqs[i].line;
+	    const QChar *eqline = eqs[i].line;
 
 	    /* Reuse existing class if lines_differ reports the lines
                equal.  */
@@ -315,7 +206,7 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 	  alloc_lines = 2 * alloc_lines - linbuf_base;
 	  cureqs =(lin*) xrealloc (cureqs, alloc_lines * sizeof *cureqs);
 	  linbuf += linbuf_base;
-	  linbuf = (const char**) xrealloc (linbuf,
+	  linbuf = (const QChar**) xrealloc (linbuf,
 			     (alloc_lines - linbuf_base) * sizeof *linbuf);
 	  linbuf -= linbuf_base;
 	}
@@ -340,13 +231,13 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 	    xalloc_die ();
 	  alloc_lines = 2 * alloc_lines - linbuf_base;
 	  linbuf += linbuf_base;
-	  linbuf = (const char**)xrealloc (linbuf,
+	  linbuf = (const QChar**)xrealloc (linbuf,
 			     (alloc_lines - linbuf_base) * sizeof *linbuf);
 	  linbuf -= linbuf_base;
 	}
-      linbuf[line] = (char const *) p;
+      linbuf[line] = (const QChar *) p;
 
-      if ((char const *) p == bufend)
+      if ((const QChar *) p >= bufend)
 	break;
 
       if (context <= i && no_diff_means_no_output)
@@ -376,8 +267,7 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 void GnuDiff::prepare_text (struct file_data *current)
 {
   size_t buffered = current->buffered;
-  char *p = FILE_BUFFER (current);
-  char *dst;
+  QChar *p = FILE_BUFFER (current);
 
   if (buffered == 0 || p[buffered - 1] == '\n')
     current->missing_newline = 0;
@@ -393,18 +283,6 @@ void GnuDiff::prepare_text (struct file_data *current)
   /* Don't use uninitialized storage when planting or using sentinels.  */
   memset (p + buffered, 0, sizeof (word));
 
-  if (strip_trailing_cr && (dst = (char*)memchr (p, '\r', buffered)))
-    {
-      char const *src = dst;
-      char const *srclim = p + buffered;
-
-      do
-	dst += ! ((*dst = *src++) == '\r' && *src == '\n');
-      while (src < srclim);
-
-      buffered -= src - dst;
-    }
-
   current->buffered = buffered;
 }
 
@@ -417,7 +295,7 @@ guess_lines (lin n, size_t s, size_t t)
 {
   size_t guessed_bytes_per_line = n < 10 ? 32 : s / (n - 1);
   lin guessed_lines = MAX (1, t / guessed_bytes_per_line);
-  return MIN (guessed_lines, (lin)(PTRDIFF_MAX / (2 * sizeof (char *) + 1) - 5)) + 5;
+  return MIN (guessed_lines, (lin)(PTRDIFF_MAX / (2 * sizeof (QChar *) + 1) - 5)) + 5;
 }
 
 /* Given a vector of two file_data objects, find the identical
@@ -426,9 +304,9 @@ guess_lines (lin n, size_t s, size_t t)
 void GnuDiff::find_identical_ends (struct file_data filevec[])
 {
   word *w0, *w1;
-  char *p0, *p1, *buffer0, *buffer1;
-  char const *end0, *beg0;
-  char const **linbuf0, **linbuf1;
+  QChar *p0, *p1, *buffer0, *buffer1;
+  const QChar *end0, *beg0;
+  const QChar **linbuf0, **linbuf1;
   lin i, lines;
   size_t n0, n1;
   lin alloc_lines0, alloc_lines1;
@@ -442,8 +320,8 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
 
   w0 = filevec[0].buffer;
   w1 = filevec[1].buffer;
-  p0 = buffer0 = (char *) w0;
-  p1 = buffer1 = (char *) w1;
+  p0 = buffer0 = (QChar *) w0;
+  p1 = buffer1 = (QChar *) w1;
   n0 = filevec[0].buffered;
   n1 = filevec[1].buffered;
 
@@ -467,8 +345,8 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
 	w0++, w1++;
 
       /* Do the last few bytes of comparison a byte at a time.  */
-      p0 = (char *) w0;
-      p1 = (char *) w1;
+      p0 = (QChar *) w0;
+      p1 = (QChar *) w1;
       while (*p0 == *p1)
 	p0++, p1++;
 
@@ -567,7 +445,7 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
 
   prefix_mask = prefix_count - 1;
   lines = 0;
-  linbuf0 = (const char**) xmalloc (alloc_lines0 * sizeof *linbuf0);
+  linbuf0 = (const QChar**) xmalloc (alloc_lines0 * sizeof(*linbuf0));
   p0 = buffer0;
 
   /* If the prefix is needed, find the prefix lines.  */
@@ -584,7 +462,7 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
 	      if ((lin)(PTRDIFF_MAX / (2 * sizeof *linbuf0)) <= alloc_lines0)
 		xalloc_die ();
 	      alloc_lines0 *= 2;
-	      linbuf0 = (const char**) xrealloc (linbuf0, alloc_lines0 * sizeof *linbuf0);
+              linbuf0 = (const QChar**) xrealloc (linbuf0, alloc_lines0 * sizeof(*linbuf0));
 	    }
 	  linbuf0[l] = p0;
 	  while (*p0++ != '\n')
@@ -601,7 +479,7 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
   if (alloc_lines1 < buffered_prefix
       || (lin)(PTRDIFF_MAX / sizeof *linbuf1) <= alloc_lines1)
     xalloc_die ();
-  linbuf1 = (const char**)xmalloc (alloc_lines1 * sizeof *linbuf1);
+  linbuf1 = (const QChar**)xmalloc (alloc_lines1 * sizeof(*linbuf1));
 
   if (buffered_prefix != lines)
     {

@@ -2,8 +2,8 @@ KDiff3-Readme
 =============
 
 Author: Joachim Eibl  (joachim.eibl@gmx.de)
-Copyright: (C) 2002-2004 by Joachim Eibl
-KDiff3-Version: 0.9.86
+Copyright: (C) 2002-2005 by Joachim Eibl
+KDiff3-Version: 0.9.87
 
 
 KDiff3 is a program that
@@ -45,12 +45,12 @@ Exception from the GPL:
 
 
 Requirements & Installation:
-   Version 0.9.86 provides special support for KDE3, but it can also be
+   Version 0.9.87 provides special support for KDE3, but it can also be
    built without KDE3 if the Qt-libraries are available.
    (I also test and use the program under Windows.)
 
    You always need
-      - kdiff3-0.9.86.tar.gz
+      - kdiff3-0.9.87.tar.gz
 
    For building the KDE3-version
       - KDE>=3.1 and QT>=3.1-libraries. (QT>=3.2 is recommended)
@@ -67,7 +67,7 @@ Installation for KDE3:
    - Make sure your shell-variable QTDIR is correct. (echo $QTDIR).
      If it doesn't contain the correct path, type
         export QTDIR=your_path_to_qt  (e.g. /usr/lib/qt3)
-   - cd into the directory kdiff3-0.9.86 and type
+   - cd into the directory kdiff3-0.9.87 and type
    - ./configure --prefix=/opt/kde3           (your KDE3 directory here)
    - (make clean)                    (Required if you already compiled once.)
    - make                            (Run compilation)
@@ -108,7 +108,7 @@ Installation for the Qt-only-platforms for Un*x:
    - Make sure your shell-variable QTDIR is correct. (echo $QTDIR).
      If it doesn't contain the correct path, type
         export QTDIR=your_path_to_qt  (e.g. /usr/lib/qt)
-   - cd into the directory kdiff3-0.9.86/src and type
+   - cd into the directory kdiff3-0.9.87/src and type
    - make -f Makefile.qt
    - make -f Makefile.qt install     (You must have root-rights for this step.)
      (copies the files into /usr/local/bin and /usr/local/share/doc/kdiff3)

@@ -86,7 +86,7 @@ class KDialogBase : public QTabDialog
 {
    Q_OBJECT
 public:
-   KDialogBase( int, const QString& caption, int, int, QWidget* parent, const QString& name,
+   KDialogBase( int, const QString& caption, int, int, QWidget* parent, const char* name,
      bool /*modal*/, bool );
    ~KDialogBase();
 
@@ -187,7 +187,7 @@ public:
 
    KToolBar*  m_pToolBar;
 
-   KMainWindow( QWidget* parent, const QString& name );
+   KMainWindow( QWidget* parent, const char* name );
    KToolBar* toolBar(const QString& s = QString::null);
    KActionCollection* actionCollection();
    void createGUI();
@@ -233,8 +233,10 @@ class KAction : public QAction
 {
    Q_OBJECT
 public:
-   KAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bToggle=false, bool bMenu=true);
-   KAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bToggle=false, bool bMenu=true);
+   KAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bToggle=false, bool bMenu=true);
+   KAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bToggle=false, bool bMenu=true);
+   void init(QObject* receiver, const char* slot, KActionCollection* actionCollection, 
+        const char* name, bool bToggle, bool bMenu);
    void setStatusText(const QString&);
    void plug(QPopupMenu*);
 };
@@ -242,9 +244,9 @@ public:
 class KToggleAction : public KAction
 {
 public:
-   KToggleAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bMenu=true);
-   KToggleAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bMenu=true);
-   KToggleAction(const QString& text, const QIconSet& icon, int accel, KActionCollection* actionCollection, const QString& name, bool bMenu=true);
+   KToggleAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu=true);
+   KToggleAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu=true);
+   KToggleAction(const QString& text, const QIconSet& icon, int accel, KActionCollection* actionCollection, const char* name, bool bMenu=true);
    void setChecked(bool);
    bool isChecked();
 };
@@ -447,7 +449,7 @@ namespace KParts
    class MainWindow : public KMainWindow
    {
    public:
-      MainWindow( QWidget* parent, const QString& name ) : KMainWindow(parent,name) {}
+      MainWindow( QWidget* parent, const char* name ) : KMainWindow(parent,name) {}
       void setXMLFile(const QString&){}
       void setAutoSaveSettings(){}
       void saveMainWindowSettings(KConfig*){}

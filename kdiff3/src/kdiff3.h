@@ -27,6 +27,7 @@
 // include files for Qt
 #include <qdialog.h>
 #include <qsplitter.h>
+#include <qscrollbar.h>
 
 // include files for KDE
 #include <kapplication.h>
@@ -52,6 +53,39 @@ class KDiff3Part;
 class DirectoryMergeWindow;
 class DirectoryMergeInfo;
 
+
+class ReversibleScrollBar : public QScrollBar
+{
+   Q_OBJECT
+   bool* m_pbRightToLeftLanguage;
+   int m_realVal;
+public:
+   ReversibleScrollBar( Orientation o, QWidget* pParent, bool* pbRightToLeftLanguage )
+      : QScrollBar( o, pParent )
+   {
+      m_pbRightToLeftLanguage=pbRightToLeftLanguage;
+      m_realVal=0;
+      connect( this, SIGNAL(valueChanged(int)), this, SLOT(slotValueChanged(int)));
+   }
+   void setAgain(){ setValue(m_realVal); }
+public slots:
+   void slotValueChanged(int i)
+   {
+      m_realVal = i;
+      if(m_pbRightToLeftLanguage && *m_pbRightToLeftLanguage)
+         m_realVal = maxValue()-(i-minValue());
+      emit valueChanged2(m_realVal);
+   }
+   void setValue(int i)
+   {
+      if(m_pbRightToLeftLanguage && *m_pbRightToLeftLanguage)
+         QScrollBar::setValue( maxValue()-(i-minValue())  );
+      else
+         QScrollBar::setValue( i );
+   }
+signals:
+   void valueChanged2(int);
+};
 
 class KDiff3App : public QSplitter
 {
@@ -199,7 +233,7 @@ class KDiff3App : public QSplitter
     QSplitter*  m_pMainSplitter;
     QFrame*     m_pMainWidget;
     QFrame*     m_pMergeWindowFrame;
-    QScrollBar* m_pHScrollBar;
+    ReversibleScrollBar* m_pHScrollBar;
     QScrollBar* m_pDiffVScrollBar;
     QScrollBar* m_pMergeVScrollBar;
 

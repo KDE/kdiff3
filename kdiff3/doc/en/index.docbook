@@ -30,7 +30,7 @@ as Authors, publish date, the abstract, and Keywords -->
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 
 <copyright>
-<year>2002-2004</year>
+<year>2002-2005</year>
 <holder>Joachim Eibl</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
@@ -45,8 +45,8 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2004-05-29</date>
-<releaseinfo>0.9.84</releaseinfo>
+<date>2005-01-30</date>
+<releaseinfo>0.9.87</releaseinfo>
 
 
 <abstract>
@@ -59,10 +59,11 @@ Do NOT change these in the translation. -->
 <listitem><para>provides an automatic merge-facility,</para></listitem>
 <listitem><para>has an editor for comfortable solving of merge-conflicts,</para></listitem>
 <listitem><para>provides networktransparency via KIO,</para></listitem>
-<listitem><para>has options to highlight or hide changes in white-space or comments.</para></listitem>
+<listitem><para>has options to highlight or hide changes in white-space or comments,</para></listitem>
+<listitem><para>supports Unicode, UTF-8 and other file encodings.</para></listitem>
 </itemizedlist>
 </para><para>
-   This document describes KDiff3-version 0.9.84.
+   This document describes KDiff3-version 0.9.87.
 </para>
 </abstract>
 
@@ -221,6 +222,8 @@ This screenshot shows KDiff3 during a directory merge:
    <listitem><para>Networktransparency via KIO.</para></listitem>
    <listitem><para>Can be used as diff-viewer in KDevelop 3.</para></listitem>
    <listitem><para>Word-wrap for long lines.</para></listitem>
+   <listitem><para>Support for Unicode, UTF-8 and other codecs.</para></listitem>
+   <listitem><para>Support for right to left languages.</para></listitem>
    <listitem><para>...</para></listitem>
 </itemizedlist>
 </sect2>
@@ -691,6 +694,26 @@ Yet there is one option here that is also relevant for saving single files:
       be deleted without backup.
    </para></listitem></varlistentry>
 </variablelist>
+</sect2>
+
+<sect2><title>Regional and Language Options</title>
+  <variablelist>
+    <varlistentry><term><emphasis>Language:</emphasis></term><listitem><para>Adjust the language of the user interface. Changing this option doesn't affect the running program. You have to exit and restart KDiff3 so that the language is changed. (This option is not available in the KDE version of KDiff3 because the language is adjustable in the global KDE settings.) 
+	</para></listitem></varlistentry>
+    <varlistentry><term><emphasis>Use the same encoding for everything:</emphasis></term><listitem><para> The following encoding options can be adjusted separately for each item or if this option is true, all values will take the first value.
+	</para></listitem></varlistentry>
+    <varlistentry><term><emphasis>Local Encoding:</emphasis></term><listitem><para>Above the codec-selectors appears a note that tells you what the local encoding is. (This is not adjustable but for your information just in case you don't know your local encoding, but need to select it.)
+	</para></listitem></varlistentry>
+    <varlistentry><term><emphasis>File Encoding for A/B/C:</emphasis></term><listitem><para> Adjust the file encoding for input files. This has an effect on how the special characters are interpreted. Since you can adjust each codec separately you can even compare and merge files that were saved using different codecs.
+	</para></listitem></varlistentry>
+    <varlistentry><term><emphasis>File Encoding for Merge Output and Saving:</emphasis></term><listitem><para> When you have edited a file, then you can adjust which encoding will be used when saving to disk.
+	</para></listitem></varlistentry>
+    <varlistentry><term><emphasis>File Encoding for Preprocessor Files:</emphasis></term><listitem><para>When you define preprocessors then they might not be able to operate on your codec. (e.g.: Your files are 16-bit-unicode and your preprocessor can only take 8-bit-ascii.) With this option you can define the encoding of preprocessor output.
+	</para></listitem></varlistentry>
+    <varlistentry><term><emphasis>Right To Left Language:</emphasis></term><listitem><para>Some languages are written right to left. When this option is enabled, KDiff3 draws the text from right to left in the diff input windows and in the merge output window. Note that if you start KDiff3 with the command line option "--reverse" then all layouting will be done right to left too. (This is a feature provided by Qt.) This documentation was written assuming that "Right To Left Language" or reverse layout are disabled. So some references to "left" or "right" must be replaced by their respective counterpart if you use these options.
+	</para></listitem></varlistentry>
+
+  </variablelist>
 </sect2>
 
 <sect2><title>Miscellaneous</title>
@@ -1511,7 +1534,7 @@ Other things that are possible, but probably less useful are:
 </para></listitem><listitem><para>
    No possibility to modify permissions or modification time, so permissions or time
    of a copy will differ from the original. (See the option "Trust the size".)
-   (Modifying permissions or modification time is only possible for local files.)
+   (To modify permissions or modification time is only possible for local files.)
 </para></listitem>
 </itemizedlist>
 </sect2>
@@ -1642,14 +1665,14 @@ and menu. Merging or directory-comparison are not supported then.
 &kdiff3; - File and Directory Comparison and Merge Tool
 </para>
 <para>
-Program copyright 2002-2004 Joachim Eibl <email>joachim.eibl at gmx.de</email>
+Program copyright 2002-2005 Joachim Eibl <email>joachim.eibl at gmx.de</email>
 </para>
 <para>
 Several cool ideas and bugreports came from colleagues and many people out in the Wild Wild Web. Thank you!
 </para>
 
 <para>
-Documentation Copyright &copy; 2002-2004 Joachim Eibl <email>joachim.eibl at gmx.de</email>
+Documentation Copyright &copy; 2002-2005 Joachim Eibl <email>joachim.eibl at gmx.de</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->

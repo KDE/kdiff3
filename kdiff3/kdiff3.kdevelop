@@ -3,7 +3,7 @@
   <general>
     <author>Joachim Eibl</author>
     <email>joachim@gmx.de</email>
-    <version>0.9.85</version>
+    <version>0.9.87</version>
     <projectmanagement>KDevKDEAutoProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <keywords>
@@ -106,7 +106,7 @@
   <kdevdebugger>
     <general>
       <dbgshell>libtool</dbgshell>
-      <programargs/>
+      <programargs>/windows/C/qt/kdiff3-0.9.87/src/ /home/joachim/kdiff3-0.9.87/src</programargs>
       <gdbpath/>
       <configGdbScript/>
       <runShellScript/>
@@ -153,7 +153,10 @@
       <automaticHeaderCompletion>true</automaticHeaderCompletion>
       <headerCompletionDelay>250</headerCompletionDelay>
     </codecompletion>
-    <references/>
+    <references>
+      <pcs>KDElibs</pcs>
+      <pcs>Qt</pcs>
+    </references>
   </kdevcppsupport>
   <cppsupportpart>
     <filetemplates>

@@ -22,13 +22,15 @@
 #include <qpixmap.h>
 #include <qtimer.h>
 #include <qframe.h>
+#include <qtextstream.h>
+#include <qpainter.h>
 #include <list>
 #include <vector>
 #include <assert.h>
 #include "common.h"
 #include "fileaccess.h"
+#include "optiondialog.h"
 
-class OptionDialog;
 
 // Each range with matching elements is followed by a range with differences on either side.
 // Then again range of matching elements should follow.
@@ -136,15 +138,15 @@ void calcDiff3LineListUsingAC(
    Diff3LineList& d3ll
    );
 
-void calcDiff3LineListUsingBC(       
+void calcDiff3LineListUsingBC(
    const DiffList* pDiffListBC,
    Diff3LineList& d3ll
    );
 
 struct LineData
 {
-   const char* pLine;
-   const char* pFirstNonWhiteChar;
+   const QChar* pLine;
+   const QChar* pFirstNonWhiteChar;
    int size;
 
    LineData(){ pLine=0; size=0; occurances=0; bContainsPureComment=false; }
@@ -160,9 +162,9 @@ class SourceData
 public:
    SourceData();
    ~SourceData();
-   
+
    void setOptionDialog( OptionDialog* pOptionDialog );
-   
+
    int getSizeLines() const;
    int getSizeBytes() const;
    const char* getBuf() const;
@@ -181,38 +183,40 @@ public:
    bool isFromBuffer();  // was it set via setData() (vs. setFileAccess() or setFilename())
    void setData( const QString& data );
    bool isValid(); // Either no file is specified or reading was successful
-   
-   void readAndPreprocess();
+
+   void readAndPreprocess(QTextCodec* pEncoding);
    bool saveNormalDataAs( const QString& fileName );
-   
+
    bool isBinaryEqualWith( const SourceData& other ) const;
-   
+
    void reset();
 
-private:   
+private:
    QString m_aliasName;
    FileAccess m_fileAccess;
    OptionDialog* m_pOptionDialog;
    QString m_tempInputFileName;
 
    struct FileData
-   {   
+   {
       FileData(){ m_pBuf=0; m_size=0; }
       ~FileData(){ reset(); }
       const char* m_pBuf;
       int m_size;
       int m_vSize; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
+      QString m_unicodeBuf;
       std::vector<LineData> m_v;
       bool m_bIsText;
       bool readFile( const QString& filename );
       bool writeFile( const QString& filename );
-      void preprocess(bool bPreserveCR );
+      void preprocess(bool bPreserveCR, QTextCodec* pEncoding );
       void reset();
       void removeComments();
       void copyBufFrom( const FileData& src );
    };
    FileData m_normalData;
-   FileData m_lmppData;   
+   FileData m_lmppData;  
+   QTextCodec* m_pEncoding; 
 };
 
 void calcDiff3LineListTrim( Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC );
@@ -223,7 +227,6 @@ void calcDiff3LineVector( Diff3LineList& d3ll, Diff3LineVector& d3lv );
 void debugLineCheck( Diff3LineList& d3ll, int size, int idx );
 
 class QStatusBar;
-
 
 
 class Selection
@@ -266,8 +269,49 @@ public:
 
 class OptionDialog;
 
-QString decodeString( const char*s , OptionDialog* );
-QCString encodeString( const QString& s , OptionDialog* );
+QCString encodeString( const QString& s );
+
+
+// Helper class that swaps left and right for some commands.
+class MyPainter : public QPainter
+{
+   int m_factor;
+   int m_xOffset;
+   int m_fontWidth;
+public:
+   MyPainter(const QPaintDevice* pd, bool bRTL, int width, int fontWidth) 
+   : QPainter(pd) 
+   {
+      if (bRTL) 
+      {
+         m_fontWidth = fontWidth;
+         m_factor = -1;
+         m_xOffset = width-1;
+      }
+      else
+      {
+         m_fontWidth = 0;
+         m_factor = 1;
+         m_xOffset = 0;
+      }
+   }
+
+   void fillRect( int x, int y, int w, int h, const QBrush& b )
+   {
+      QPainter::fillRect( m_xOffset + m_factor*x, y, m_factor*w, h, b );
+   }
+
+   void drawText( int x, int y, const QString& s, bool bAdapt=false )
+   {
+      TextDirection td = (m_factor==1 || bAdapt == false) ? LTR : RTL;
+      QPainter::drawText( m_xOffset-m_fontWidth*s.length() + m_factor*x, y, s, -1, td );
+   }
+
+   void drawLine( int x1, int y1, int x2, int y2 )
+   {
+      QPainter::drawLine( m_xOffset + m_factor*x1, y1, m_xOffset + m_factor*x2, y2 );
+   }
+};
 
 class DiffTextWindow : public QWidget
 {
@@ -315,7 +359,7 @@ public:
 
    void convertSelectionToD3LCoords();
    
-   bool findString( const QCString& s, int& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive );
+   bool findString( const QString& s, int& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive );
    void setSelection( int firstLine, int startPos, int lastLine, int endPos, int& l, int& p );
 
    void setPaintingAllowed( bool bAllowPainting );
@@ -367,11 +411,11 @@ private:
       DiffList*& pFineDiff1, DiffList*& pFineDiff2,   // return values
       int& changed, int& changed2  );
 
-   QCString getString( int d3lIdx );
-   QCString getLineString( int line );
+   QString getString( int d3lIdx );
+   QString getLineString( int line );
 
    void writeLine(
-      QPainter& p, const LineData* pld,
+      MyPainter& p, const LineData* pld,
       const DiffList* pLineDiff1, const DiffList* pLineDiff2, int line,
       int whatChanged, int whatChanged2, int srcLineNr,
       int wrapLineOffset, int wrapLineLength, bool bWrapLine );
@@ -385,9 +429,9 @@ private:
    virtual void timerEvent(QTimerEvent*);
    bool m_bMyUpdate;
    void myUpdate(int afterMilliSecs );
-   
+
    void showStatusLine( int line );
-   
+
    QRect m_invalidRect;
 };
 
@@ -479,7 +523,7 @@ public:
       );
 
    bool saveDocument( const QString& fileName );
-   int getNrOfUnsolvedConflicts();
+   int getNrOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts=0);
    void choose(int selector);
    void chooseGlobal(int selector, bool bConflictsOnly, bool bWhiteSpaceOnly );
 
@@ -496,7 +540,7 @@ public:
    bool isConflictBelowCurrent();
    bool isUnsolvedConflictAboveCurrent();
    bool isUnsolvedConflictBelowCurrent();
-   bool findString( const QCString& s, int& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive );
+   bool findString( const QString& s, int& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive );
    void setSelection( int firstLine, int startPos, int lastLine, int endPos );
 public slots:
    void setFirstLine(int firstLine);
@@ -530,7 +574,7 @@ signals:
 
 private:
    void merge(bool bAutoSolve, int defaultSelector, bool bConflictsOnly=false, bool bWhiteSpaceOnly=false );
-   QCString getString( int lineIdx );
+   QString getString( int lineIdx );
 
    OptionDialog* m_pOptionDialog;
 
@@ -548,13 +592,13 @@ private:
    {
    public:
       MergeEditLine(){ m_src=0; m_bLineRemoved=false; }
-      void setConflict() { m_src=0; m_bLineRemoved=false; m_str=QCString(); }
+      void setConflict() { m_src=0; m_bLineRemoved=false; m_str=QString(); }
       bool isConflict()  { return  m_src==0 && !m_bLineRemoved && m_str.isNull(); }
-      void setRemoved(int src=0)  { m_src=src; m_bLineRemoved=true; m_str=QCString(); }
+      void setRemoved(int src=0)  { m_src=src; m_bLineRemoved=true; m_str=QString(); }
       bool isRemoved()   { return m_bLineRemoved; }
       bool isEditableText() { return !isConflict() && !isRemoved(); }
-      void setString( const QCString& s ){ m_str=s; m_bLineRemoved=false; m_src=0; }
-      const char* getString( const MergeResultWindow*, int& size );
+      void setString( const QString& s ){ m_str=s; m_bLineRemoved=false; m_src=0; }
+      QString getString( const MergeResultWindow* );
       bool isModified() { return ! m_str.isNull() ||  (m_bLineRemoved && m_src==0); }
 
       void setSource( int src, Diff3LineList::const_iterator i, bool bLineRemoved )
@@ -567,7 +611,7 @@ private:
    private:
       Diff3LineList::const_iterator m_id3l;
       int m_src;         // 1, 2 or 3 for A, B or C respectively, or 0 when line is from neither source.
-      QCString m_str;    // String when modified by user or null-string when orig data is used.
+      QString m_str;    // String when modified by user or null-string when orig data is used.
       bool m_bLineRemoved;
    };
 
@@ -590,16 +634,16 @@ private:
       iterator begin(){return BASE::begin();}
       iterator end(){return BASE::end();}
       bool empty() { return m_size==0; }
-      
+
       void setTotalSizePtr(int* pTotalSize)
       {
          m_pTotalSize = pTotalSize;
          *m_pTotalSize += m_size;
       }
-      
+
    private:
       void ds(int deltaSize) 
-      { 
+      {
          m_size+=deltaSize; 
          if (m_pTotalSize!=0)  *m_pTotalSize+=deltaSize;
       }
@@ -648,8 +692,8 @@ private:
    void myUpdate(int afterMilliSecs);
    virtual void timerEvent(QTimerEvent*);
    void writeLine(
-      QPainter& p, int line, const char* pStr, int size,
-      int srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved
+      MyPainter& p, int line, const QString& str,
+      int srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
       );
    void setFastSelector(MergeLineList::iterator i);
    void convertToLinePos( int x, int y, int& line, int& pos );
@@ -682,10 +726,10 @@ private:
    bool m_bCursorOn; // blinking on and off each second
    QTimer m_cursorTimer;
    QStatusBar* m_pStatusBar;
-   
+
    Selection m_selection;
 
-   bool deleteSelection2( const char*& ps, int& stringLength, int& x, int& y,
+   bool deleteSelection2( QString& str, int& x, int& y,
                     MergeLineList::iterator& mlIt, MergeEditLineList::iterator& melIt );
 public slots:
    void deleteSelection();
@@ -708,7 +752,7 @@ bool equal( const LineData& l1, const LineData& l2, bool bStrict );
 
 
 
-inline bool isWhite( char c )
+inline bool isWhite( QChar c )
 {
    return c==' ' || c=='\t' ||  c=='\r';
 }
@@ -732,8 +776,8 @@ extern bool g_bIgnoreTrivialMatches;
 extern int g_bAutoSolve;
 
 // Cursor conversions that consider g_tabSize.
-int convertToPosInText( const char* p, int size, int posOnScreen );
-int convertToPosOnScreen( const QString& p, int posInText );
-void calcTokenPos( const char* p, int size, int posOnScreen, int& pos1, int& pos2 );
+int convertToPosInText( const QString& s, int posOnScreen );
+int convertToPosOnScreen( const QString& s, int posInText );
+void calcTokenPos( const QString&, int posOnScreen, int& pos1, int& pos2 );
 #endif
 

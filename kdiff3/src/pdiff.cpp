@@ -64,46 +64,11 @@ bool g_bIgnoreWhiteSpace = true;
 bool g_bIgnoreTrivialMatches = true;
 
 
-QString createTempFile( const LineData* p, int size, bool bIgnoreWhiteSpace, bool bIgnoreNumbers )
-{
-   QString fileName = FileAccess::tempFileName();
-
-   QFile file( fileName );
-   bool bSuccess = file.open( IO_WriteOnly );
-   if ( !bSuccess ) return "";
-   for (int l=0; l<size; ++l)
-   {
-      // We don't want any white space in the diff output
-      QCString s( p[l].size+1 );
-      int is=0;
-      for(int j=0; j<p[l].size; ++j )
-      {
-         char c = p[l].pLine[j];
-         if ( !( bIgnoreWhiteSpace && isWhite( c )  ||
-                 bIgnoreNumbers    && (isdigit( c ) || c=='-' || c=='.' )
-               )
-            )
-         {
-            if ( c=='\0' )  // Replace zeros with something else.
-               s[is]=(char)0xFF;
-            else
-               s[is]=c;
-            ++is;
-         }
-      }
-      s[is]='\n';
-      ++is;
-      if( is != file.writeBlock( &s[0], is ) )
-         return "";
-   }
-   return fileName;
-}
-
 bool KDiff3App::runDiff( const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList )
 {
    ProgressProxy pp;
-   static GnuDiff gnuDiff;
-   
+   static GnuDiff gnuDiff;  // All values are initialized with zeros.
+
    pp.setCurrent(0);
 
    diffList.clear();
@@ -121,22 +86,22 @@ bool KDiff3App::runDiff( const LineData* p1, int size1, const LineData* p2, int 
       diffList.push_back(d);
    }
    else
-   {   
+   {
       GnuDiff::comparison comparisonInput;
       memset( &comparisonInput, 0, sizeof(comparisonInput) );
       comparisonInput.parent = 0;
       comparisonInput.file[0].buffer = (word*)p1[0].pLine;//ptr to buffer
-      comparisonInput.file[0].buffered = p1[size1-1].pLine-p1[0].pLine+p1[size1-1].size; // size of buffer
+      comparisonInput.file[0].buffered = (p1[size1-1].pLine-p1[0].pLine+p1[size1-1].size); // size of buffer
       comparisonInput.file[1].buffer = (word*)p2[0].pLine;//ptr to buffer
-      comparisonInput.file[1].buffered = p2[size2-1].pLine-p2[0].pLine+p2[size2-1].size; // size of buffer
-   
+      comparisonInput.file[1].buffered = (p2[size2-1].pLine-p2[0].pLine+p2[size2-1].size); // size of buffer
+
       gnuDiff.ignore_white_space = GnuDiff::IGNORE_ALL_SPACE;  // I think nobody needs anything else ...
       gnuDiff.bIgnoreWhiteSpace = true;
       gnuDiff.bIgnoreNumbers    = m_pOptionDialog->m_bIgnoreNumbers;
       gnuDiff.minimal = m_pOptionDialog->m_bTryHard;
       gnuDiff.ignore_case = false;
       GnuDiff::change* script = gnuDiff.diff_2_files( &comparisonInput );
-   
+
       int equalLinesAtStart =  comparisonInput.file[0].prefix_lines;
       int currentLine1 = 0;
       int currentLine2 = 0;
@@ -151,11 +116,11 @@ bool KDiff3App::runDiff( const LineData* p1, int size1, const LineData* p2, int 
          currentLine1 += d.nofEquals + d.diff1;
          currentLine2 += d.nofEquals + d.diff2;
          diffList.push_back(d);
-   
+
          p = e->link;
          free (e);
       }
-            
+
       if ( diffList.empty() )
       {
          Diff d(0,0,0);
@@ -174,7 +139,7 @@ bool KDiff3App::runDiff( const LineData* p1, int size1, const LineData* p2, int 
          else if ( !gnuDiff.files[0].missing_newline )
          {
             ++d.nofEquals;
-         }         
+         }
          diffList.push_back(d);
 */
       }
@@ -183,7 +148,7 @@ bool KDiff3App::runDiff( const LineData* p1, int size1, const LineData* p2, int 
          diffList.front().nofEquals += equalLinesAtStart;   
          currentLine1 += equalLinesAtStart;
          currentLine2 += equalLinesAtStart;
-         
+
          int nofEquals = min2(size1-currentLine1,size2-currentLine2);
          if ( nofEquals==0 )
          {
@@ -195,7 +160,7 @@ bool KDiff3App::runDiff( const LineData* p1, int size1, const LineData* p2, int 
             Diff d( nofEquals,size1-currentLine1-nofEquals,size2-currentLine2-nofEquals);
             diffList.push_back(d);
          }
-         
+
          /*
          if ( gnuDiff.files[0].missing_newline != gnuDiff.files[1].missing_newline )
          {
@@ -209,7 +174,7 @@ bool KDiff3App::runDiff( const LineData* p1, int size1, const LineData* p2, int 
          */
       }
    }
-   
+
 #ifndef NDEBUG
    // Verify difflist
    {
@@ -262,8 +227,8 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus )
                                i18n("The following option(s) you selected might change data:\n") + msg + 
                                i18n("\nMost likely this is not wanted during a merge.\n"
                                     "Do you want to disable these settings or continue with these settings active?"),
-                               i18n("Option unsafe for merging"), 
-                               i18n("Use these options during the merge"), i18n("Disable unsafe options")
+                               i18n("Option Unsafe for Merging"), 
+                               i18n("Use These Options During Merge"), i18n("Disable Unsafe Options")
                                );
                                
          if (result == KMessageBox::No )
@@ -291,11 +256,11 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus )
 
    // First get all input data.
    pp.setInformation(i18n("Loading A"));
-   m_sd1.readAndPreprocess();
+   m_sd1.readAndPreprocess(m_pOptionDialog->m_pEncodingA);
    pp.step();
 
    pp.setInformation(i18n("Loading B"));
-   m_sd2.readAndPreprocess();
+   m_sd2.readAndPreprocess(m_pOptionDialog->m_pEncodingB);
    pp.step();
 
    pTotalDiffStatus->reset();
@@ -319,7 +284,7 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus )
    else
    {
       pp.setInformation(i18n("Loading C"));
-      m_sd3.readAndPreprocess();
+      m_sd3.readAndPreprocess(m_pOptionDialog->m_pEncodingC);
       pp.step();
 
       pTotalDiffStatus->bBinaryAEqB = m_sd1.isBinaryEqualWith( m_sd2 );
@@ -462,12 +427,12 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus )
       // 2. If the files don't have the same name then show all names
       if ( caption.isEmpty() && (!f1.isEmpty() || !f2.isEmpty() || !f3.isEmpty()) )
       {
-         caption = ( f1.isEmpty()? "" : ".../"+f1 );
-         caption += QString(caption.isEmpty() || f2.isEmpty() ? "" : " <-> ") + ( f2.isEmpty()? "" : ".../"+f2 );
-         caption += QString(caption.isEmpty() || f3.isEmpty() ? "" : " <-> ") + ( f3.isEmpty()? "" : ".../"+f3 ) ;
+         caption = ( f1.isEmpty()? QString("") : QString(".../")+f1 );
+         caption += QString(caption.isEmpty() || f2.isEmpty() ? "" : " <-> ") + ( f2.isEmpty()? QString("") : QString(".../")+f2 );
+         caption += QString(caption.isEmpty() || f3.isEmpty() ? "" : " <-> ") + ( f3.isEmpty()? QString("") : QString(".../")+f3 ) ;
       }      
       
-      m_pKDiff3Shell->setCaption( caption.isEmpty() ? "KDiff3" : caption+" - KDiff3");
+      m_pKDiff3Shell->setCaption( caption.isEmpty() ? QString("KDiff3") : caption+QString(" - KDiff3"));
    }
    
    
@@ -678,7 +643,7 @@ void KDiff3App::initView()
    m_pMergeResultWindow->installEventFilter( this );       // for Cut/Copy/Paste-shortcuts
 
    QHBoxLayout* pHScrollBarLayout = new QHBoxLayout( pVLayout );
-   m_pHScrollBar = new QScrollBar( Horizontal, m_pMainWidget );
+   m_pHScrollBar = new ReversibleScrollBar( Horizontal, m_pMainWidget, &m_pOptionDialog->m_bRightToLeftLanguage );
    pHScrollBarLayout->addWidget( m_pHScrollBar );
    m_pCornerWidget = new QWidget( m_pMainWidget );
    pHScrollBarLayout->addWidget( m_pCornerWidget );
@@ -686,21 +651,21 @@ void KDiff3App::initView()
 
    connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pOverview, SLOT(setFirstLine(int)));
    connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow1, SLOT(setFirstLine(int)));
-   connect( m_pHScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow1, SLOT(setFirstColumn(int)));
+   connect( m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow1, SLOT(setFirstColumn(int)));
    connect( m_pDiffTextWindow1, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
    connect( m_pDiffTextWindow1, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
    connect( m_pDiffTextWindow1, SIGNAL(scroll(int,int)), this, SLOT(scrollDiffTextWindow(int,int)));
    m_pDiffTextWindow1->installEventFilter( this );
 
    connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow2, SLOT(setFirstLine(int)));
-   connect( m_pHScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow2, SLOT(setFirstColumn(int)));
+   connect( m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow2, SLOT(setFirstColumn(int)));
    connect( m_pDiffTextWindow2, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
    connect( m_pDiffTextWindow2, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
    connect( m_pDiffTextWindow2, SIGNAL(scroll(int,int)), this, SLOT(scrollDiffTextWindow(int,int)));
    m_pDiffTextWindow2->installEventFilter( this );
 
    connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow3, SLOT(setFirstLine(int)));
-   connect( m_pHScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow3, SLOT(setFirstColumn(int)));
+   connect( m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow3, SLOT(setFirstColumn(int)));
    connect( m_pDiffTextWindow3, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
    connect( m_pDiffTextWindow3, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
    connect( m_pDiffTextWindow3, SIGNAL(scroll(int,int)), this, SLOT(scrollDiffTextWindow(int,int)));
@@ -709,7 +674,7 @@ void KDiff3App::initView()
    MergeResultWindow* p = m_pMergeResultWindow;
    connect( m_pMergeVScrollBar, SIGNAL(valueChanged(int)), p, SLOT(setFirstLine(int)));
 
-   connect( m_pHScrollBar,      SIGNAL(valueChanged(int)), p, SLOT(setFirstColumn(int)));
+   connect( m_pHScrollBar,      SIGNAL(valueChanged2(int)), p, SLOT(setFirstColumn(int)));
    connect( p, SIGNAL(scroll(int,int)), this, SLOT(scrollMergeResultWindow(int,int)));
    connect( p, SIGNAL(sourceMask(int,int)), this, SLOT(sourceMask(int,int)));
    connect( p, SIGNAL( resizeSignal() ),this, SLOT(resizeMergeResultWindow()));
@@ -1241,6 +1206,12 @@ void KDiff3App::slotFileOpen2(QString fn1, QString fn2, QString fn3, QString ofn
 {
    if ( !canContinue() ) return;
 
+   if(fn1=="" && fn2=="" && fn3=="" && ofn=="" && m_pMainWidget!=0 )
+   {
+      m_pMainWidget->hide();
+      return;
+   }
+
    slotStatusMsg(i18n("Opening files..."));
 
    m_sd1.setFilename( fn1 );
@@ -1264,7 +1235,7 @@ void KDiff3App::slotFileOpen2(QString fn1, QString fn2, QString fn3, QString ofn
 
    bool bDirCompare = m_bDirCompare;
    improveFilenames();
-   
+
    if( m_bDirCompare )
    {
    }
@@ -1440,7 +1411,7 @@ void KDiff3App::slotChooseB() { choose( B ); }
 void KDiff3App::slotChooseC() { choose( C ); }
 
 // bConflictsOnly automatically choose for conflicts only (true) or for everywhere
-static void mergeChooseGlobal( KDiff3App* pThis, MergeResultWindow* pMRW, int selector, bool bConflictsOnly, bool bWhiteSpaceOnly )
+static void mergeChooseGlobal( MergeResultWindow* pMRW, int selector, bool bConflictsOnly, bool bWhiteSpaceOnly )
 {
    if ( pMRW )
    {
@@ -1448,15 +1419,15 @@ static void mergeChooseGlobal( KDiff3App* pThis, MergeResultWindow* pMRW, int se
    }
 }
 
-void KDiff3App::slotChooseAEverywhere() {  mergeChooseGlobal( this, m_pMergeResultWindow, A, false, false ); }
-void KDiff3App::slotChooseBEverywhere() {  mergeChooseGlobal( this, m_pMergeResultWindow, B, false, false ); }
-void KDiff3App::slotChooseCEverywhere() {  mergeChooseGlobal( this, m_pMergeResultWindow, C, false, false ); }
-void KDiff3App::slotChooseAForUnsolvedConflicts() {  mergeChooseGlobal( this, m_pMergeResultWindow, A, true, false ); }
-void KDiff3App::slotChooseBForUnsolvedConflicts() {  mergeChooseGlobal( this, m_pMergeResultWindow, B, true, false ); }
-void KDiff3App::slotChooseCForUnsolvedConflicts() {  mergeChooseGlobal( this, m_pMergeResultWindow, C, true, false ); }
-void KDiff3App::slotChooseAForUnsolvedWhiteSpaceConflicts() {  mergeChooseGlobal( this, m_pMergeResultWindow, A, true, true ); }
-void KDiff3App::slotChooseBForUnsolvedWhiteSpaceConflicts() {  mergeChooseGlobal( this, m_pMergeResultWindow, B, true, true ); }
-void KDiff3App::slotChooseCForUnsolvedWhiteSpaceConflicts() {  mergeChooseGlobal( this, m_pMergeResultWindow, C, true, true ); }
+void KDiff3App::slotChooseAEverywhere() {  mergeChooseGlobal( m_pMergeResultWindow, A, false, false ); }
+void KDiff3App::slotChooseBEverywhere() {  mergeChooseGlobal( m_pMergeResultWindow, B, false, false ); }
+void KDiff3App::slotChooseCEverywhere() {  mergeChooseGlobal( m_pMergeResultWindow, C, false, false ); }
+void KDiff3App::slotChooseAForUnsolvedConflicts() {  mergeChooseGlobal( m_pMergeResultWindow, A, true, false ); }
+void KDiff3App::slotChooseBForUnsolvedConflicts() {  mergeChooseGlobal( m_pMergeResultWindow, B, true, false ); }
+void KDiff3App::slotChooseCForUnsolvedConflicts() {  mergeChooseGlobal( m_pMergeResultWindow, C, true, false ); }
+void KDiff3App::slotChooseAForUnsolvedWhiteSpaceConflicts() {  mergeChooseGlobal( m_pMergeResultWindow, A, true, true ); }
+void KDiff3App::slotChooseBForUnsolvedWhiteSpaceConflicts() {  mergeChooseGlobal( m_pMergeResultWindow, B, true, true ); }
+void KDiff3App::slotChooseCForUnsolvedWhiteSpaceConflicts() {  mergeChooseGlobal( m_pMergeResultWindow, C, true, true ); }
 
 
 void KDiff3App::slotAutoSolve()
@@ -1515,7 +1486,10 @@ void KDiff3App::slotRefresh()
       m_pMergeResultWindow->setFont(m_pOptionDialog->m_font);
       m_pMergeResultWindow->update();
    }
-
+   if (m_pHScrollBar!=0)
+   {
+      m_pHScrollBar->setAgain();
+   }
    if ( m_pDiffWindowSplitter!=0 )
    {
        m_pDiffWindowSplitter->setOrientation( m_pOptionDialog->m_bHorizDiffWindowSplitting ? Horizontal : Vertical );
@@ -1904,7 +1878,7 @@ void KDiff3App::slotEditFind()
 
 void KDiff3App::slotEditFindNext()
 {
-   QCString s = m_pFindDialog->m_pSearchString->text().utf8();
+   QString s = m_pFindDialog->m_pSearchString->text();
    if ( s.isEmpty() )
    {
       slotEditFind();

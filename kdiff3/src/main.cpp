@@ -27,7 +27,7 @@
 #endif
 
 static const char *description =
-   I18N_NOOP("Text Diff and Merge Tool");
+   I18N_NOOP("Tool for Comparison and Merge of Files and Directories");
 
 static KCmdLineOptions options[] =
 {
@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
 
    KAboutData aboutData( "kdiff3", I18N_NOOP("KDiff3"),
       VERSION, description, KAboutData::License_GPL,
-      "(c) 2002-2004 Joachim Eibl", 0, "http://kdiff3.sourceforge.net/", "joachim.eibl@gmx.de");
+      "(c) 2002-2005 Joachim Eibl", 0, "http://kdiff3.sourceforge.net/", "joachim.eibl@gmx.de");
    aboutData.addAuthor("Joachim Eibl",0, "joachim.eibl@gmx.de");
    aboutData.addCredit("Eike Sauer", "Bugfixes, Debian package maintainer" );
    aboutData.addCredit("Sebastien Fricker", "Windows installer" );
@@ -116,6 +116,7 @@ int main(int argc, char *argv[])
    aboutData.addCredit("David Faure", "KIO-Help", "faure@kde.org" );
    aboutData.addCredit("Bernd Gehrmann", "Class CvsIgnoreList from Cervisia" );
    aboutData.addCredit("Andre Woebbeking", "Class StringMatcher" );
+   aboutData.addCredit("Michael Denio", "Directory Equality-Coloring patch");
    aboutData.addCredit("Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower", "GNU-Diffutils");
    aboutData.addCredit(I18N_NOOP("+ Many thanks to those who reported bugs and contributed ideas!"));
    

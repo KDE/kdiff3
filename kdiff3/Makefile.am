@@ -12,7 +12,7 @@ $(top_srcdir)/acinclude.m4: $(top_srcdir)/admin/acinclude.m4.in $(top_srcdir)/ad
 MAINTAINERCLEANFILES = subdirs configure.in acinclude.m4 configure.files 
 
 package-messages:
-	$(MAKE) -f admin/Makefile.common package-messages
+	cd $(top_srcdir) && $(MAKE) -f admin/Makefile.common package-messages
 	$(MAKE) -C po merge
 
 EXTRA_DIST = admin COPYING configure.in.in

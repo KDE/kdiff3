@@ -1,3 +1,12 @@
+Version 0.9.87 - 2005/30/01
+===========================
+- Unicode16 and UTF8 support (Internal data format is now QString (Unicode16). Conversion during save and load.)
+- Directory "Full Analysis": Equality-Coloring for files with only whitespace differences. (Michael Denio)
+- Support for right to left languages.
+- In MergeResultWindow show "<Merge Conflict (Whitespace only)>" for whitespace-only conflicts
+- Statusbar shows the number of remaining conflicts and whitespace conflicts.
+- Go Next/Prev Difference/Conflict now have improved tooltips informing about "Show White Space"-disabled-behaviour.
+
 Version 0.9.86 - 2004/06/14
 ===========================
 - Double click on any file in directory merge would close the directory merge window. (Regression in 0.9.85)

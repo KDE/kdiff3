@@ -1,6 +1,6 @@
 /* Shared definitions for GNU DIFF
 
-   Modified for KDiff3 by Joachim Eibl 2003.
+   Modified for KDiff3 by Joachim Eibl 2003, 2004, 2005.
    The original file was part of GNU DIFF.
 
    Copyright (C) 1988, 1989, 1991, 1992, 1993, 1994, 1995, 1998, 2001,
@@ -27,6 +27,7 @@
 #include "gnudiff_system.h"
 
 #include <stdio.h>
+#include <qstring.h>
 
 #define TAB_WIDTH 8
 
@@ -134,9 +135,6 @@ bool ignore_case;
 /* Ignore differences in case of letters in file names.  */
 bool ignore_file_name_case;
 
-/* File labels for `-c' output headers (--label).  */
-char *file_label[2];
-
 /* Regexp to identify function-header lines (-F).  */
 //struct re_pattern_buffer function_regexp;
 
@@ -155,22 +153,19 @@ bool expand_tabs;
    without changing the characters in it (-T).  */
 bool initial_tab;
 
-/* Remove trailing carriage returns from input.  */
-bool strip_trailing_cr;
-
 /* In directory comparison, specify file to start with (-S).
    This is used for resuming an aborted comparison.
    All file names less than this name are ignored.  */
-char const *starting_file;
+const QChar *starting_file;
 
 /* Pipe each file's output through pr (-l).  */
 bool paginate;
 
 /* Line group formats for unchanged, old, new, and changed groups.  */
-char const *group_format[CHANGED + 1];
+const QChar *group_format[CHANGED + 1];
 
 /* Line formats for unchanged, old, and new lines.  */
-char const *line_format[NEW + 1];
+const QChar *line_format[NEW + 1];
 
 /* If using OUTPUT_SDIFF print extra information to help the sdiff filter.  */
 bool sdiff_merge_assist;
@@ -185,11 +180,6 @@ bool suppress_common_lines;
 unsigned int sdiff_half_width;
 unsigned int sdiff_column2_offset;
 
-/* String containing all the command options diff received,
-   with spaces between and at the beginning but none at the end.
-   If there were no options given, this string is empty.  */
-char *switch_string;
-
 /* Use heuristics for better speed with large files with a small
    density of changes.  */
 bool speed_large_files;
@@ -201,11 +191,6 @@ struct exclude *excluded;
    slower) but will find a guaranteed minimal set of changes.  */
 bool minimal;
 
-/* Name of program the user invoked (for error messages).  */
-char *program_name;
-
-/* The strftime format to use for time strings.  */
-char const *time_format;
 
 /* The result of comparison is an "edit script": a chain of `struct change'.
    Each `struct change' represents one place where some lines are deleted
@@ -235,13 +220,13 @@ struct change
 struct file_data {
 #if 0
     int             desc;	/* File descriptor  */
-    char const      *name;	/* File name  */
+    const QChar      *name;	/* File name  */
     struct stat     stat;	/* File status */
 #endif
     /* Buffer in which text of file is read.  */
     word *buffer;
 
-    /* Allocated size of buffer, in bytes.  Always a multiple of
+    /* Allocated size of buffer, in QChars.  Always a multiple of
        sizeof *buffer.  */
     size_t bufsize;
 
@@ -249,7 +234,7 @@ struct file_data {
     size_t buffered;
 
     /* Array of pointers to lines in the file.  */
-    char const **linbuf;
+    const QChar **linbuf;
 
     /* linbuf_base <= buffered_lines <= valid_lines <= alloc_lines.
        linebuf[linbuf_base ... buffered_lines - 1] are possibly differing.
@@ -258,14 +243,14 @@ struct file_data {
     lin linbuf_base, buffered_lines, valid_lines, alloc_lines;
 
     /* Pointer to end of prefix of this file to ignore when hashing.  */
-    char const *prefix_end;
+    const QChar *prefix_end;
 
     /* Count of lines in the prefix.
        There are this many lines in the file before linbuf[0].  */
     lin prefix_lines;
 
     /* Pointer to start of suffix of this file to ignore when hashing.  */
-    char const *suffix_begin;
+    const QChar *suffix_begin;
 
     /* Vector, indexed by line number, containing an equivalence code for
        each line.  It is this vector that is actually compared with that
@@ -301,7 +286,7 @@ struct file_data {
 
 /* The file buffer, considered as an array of bytes rather than
    as an array of words.  */
-#define FILE_BUFFER(f) ((char *) (f)->buffer)
+#define FILE_BUFFER(f) ((QChar *) (f)->buffer)
 
 /* Data on two input files being compared.  */
 
@@ -329,7 +314,7 @@ void print_context_header (struct file_data[], bool);
 void print_context_script (struct change *, bool);
 
 /* dir.c */
-int diff_dirs (struct comparison const *, int (*) (struct comparison const *, char const *, char const *));
+int diff_dirs (struct comparison const *, int (*) (struct comparison const *, const QChar *, const QChar *));
 
 /* ed.c */
 void print_ed_script (struct change *);
@@ -352,11 +337,8 @@ void print_rcs_script (struct change *);
 void print_sdiff_script (struct change *);
 
 /* util.c */
-//extern char const change_letter[4];
-//extern char const pr_program[];
-char *concat (char const *, char const *, char const *);
-char *dir_file_pathname (char const *, char const *);
-bool lines_differ (char const *, char const *);
+QChar *concat (const QChar *, const QChar *, const QChar *);
+bool lines_differ (const QChar *, const QChar *);
 lin translate_line_number (struct file_data const *, lin);
 struct change *find_change (struct change *);
 struct change *find_reverse_change (struct change *);
@@ -364,22 +346,18 @@ void *zalloc (size_t);
 enum changes analyze_hunk (struct change *, lin *, lin *, lin *, lin *);
 void begin_output (void);
 void debug_script (struct change *);
-void fatal (char const *) __attribute__((noreturn));
+void fatal (const QChar *) __attribute__((noreturn));
 void finish_output (void);
-void message (char const *, char const *, char const *);
-void message5 (char const *, char const *, char const *, char const *, char const *);
-void output_1_line (char const *, char const *, char const *, char const *);
-void perror_with_name (char const *);
-void pfatal_with_name (char const *) __attribute__((noreturn));
-void print_1_line (char const *, char const * const *);
-void print_message_queue (void);
-void print_number_range (char, struct file_data *, lin, lin);
-void print_script (struct change *, struct change * (*) (struct change *), void (*) (struct change *));
-void setup_output (char const *, char const *, bool);
+void message (const QChar *, const QChar *, const QChar *);
+void message5 (const QChar *, const QChar *, const QChar *, const QChar *, const QChar *);
+void output_1_line (const QChar *, const QChar *, const QChar *, const QChar *);
+void perror_with_name (const QChar *);
+void pfatal_with_name (const QChar *) __attribute__((noreturn));
+void setup_output (const QChar *, const QChar *, bool);
 void translate_range (struct file_data const *, lin, lin, long *, long *);
 
 /* version.c */
-//extern char const version_string[];
+//extern const QChar version_string[];
 
 private:
    // gnudiff_analyze.cpp
@@ -401,7 +379,7 @@ private:
    void *xrealloc(void *p, size_t n);
    void xalloc_die (void);
    
-   inline bool isWhite( char c )
+   inline bool isWhite( QChar c )
    {
       return c==' ' || c=='\t' ||  c=='\r';
    }

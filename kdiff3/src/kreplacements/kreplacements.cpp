@@ -76,7 +76,7 @@ static void showHelp()
          return;
       }
 
-      HINSTANCE hi = FindExecutableA( helpFile.fileName(), helpFile.dirPath(true), buf );
+      HINSTANCE hi = FindExecutableA( helpFile.fileName().ascii(), helpFile.dirPath(true).ascii(), buf );
       if ( int(hi)<=32 )
       {
          static QTextBrowser* pBrowser = 0;
@@ -91,7 +91,7 @@ static void showHelp()
       else
       {
          QFileInfo prog( buf );
-         _spawnlp( _P_NOWAIT , prog.filePath(), prog.fileName(), (const char*)("file:///"+helpFile.absFilePath()), NULL );
+         _spawnlp( _P_NOWAIT , prog.filePath().ascii(), prog.fileName().ascii(), ("file:///"+helpFile.absFilePath()).ascii(), NULL );
       }
 
    #else
@@ -160,7 +160,7 @@ int KMessageBox::warningYesNoCancel( QWidget* parent, const QString& text, const
 }
 
 
-KDialogBase::KDialogBase( int, const QString& caption, int, int, QWidget* parent, const QString& name,
+KDialogBase::KDialogBase( int, const QString& caption, int, int, QWidget* parent, const char* name,
   bool /*modal*/, bool )
 : QTabDialog( parent, name, true /* modal */ )
 {
@@ -198,14 +198,14 @@ int KDialogBase::BarIcon(const QString& /*iconName*/, int )
 
 QVBox* KDialogBase::addVBoxPage( const QString& name, const QString& /*info*/, int )
 {
-   QVBox* p = new QVBox(this, name);
+   QVBox* p = new QVBox(this, name.ascii());
    addTab( p, name );
    return p;
 }
 
 QFrame* KDialogBase::addPage(  const QString& name, const QString& /*info*/, int )
 {
-   QFrame* p = new QFrame( this, name );
+   QFrame* p = new QFrame( this, name.ascii() );
    addTab( p, name );
    return p;
 }
@@ -253,10 +253,10 @@ void KDialogBase::slotHelp( )
 }
 
 KURL KFileDialog::getSaveURL( const QString &startDir,
-                           const QString &filter,
-                           QWidget *parent, const QString &caption)
+                              const QString &filter,
+                              QWidget *parent, const QString &caption)
 {
-   QString s = QFileDialog::getSaveFileName(startDir, filter, parent, caption);
+   QString s = QFileDialog::getSaveFileName(startDir, filter, parent, 0, caption);
    return KURL(s);
 }
 
@@ -265,7 +265,7 @@ KURL KFileDialog::getOpenURL( const QString &  startDir,
                            QWidget *  parent,
                            const QString &  caption )
 {
-   QString s = QFileDialog::getOpenFileName(startDir, filter, parent, caption);
+   QString s = QFileDialog::getOpenFileName(startDir, filter, parent, 0, caption);
    return KURL(s);
 }
 
@@ -273,7 +273,7 @@ KURL KFileDialog::getExistingURL( const QString &  startDir,
                                QWidget *  parent,
                                const QString &  caption)
 {
-   QString s = QFileDialog::getExistingDirectory(startDir, parent, caption);
+   QString s = QFileDialog::getExistingDirectory(startDir, parent, 0, caption);
    return KURL(s);
 }
 
@@ -302,7 +302,7 @@ KToolBar::KToolBar( QMainWindow* parent )
 }
 
 
-KMainWindow::KMainWindow( QWidget* parent, const QString& name )
+KMainWindow::KMainWindow( QWidget* parent, const char* name )
 : QMainWindow( parent, name ), m_actionCollection(this)
 {
    fileMenu = new QPopupMenu();
@@ -723,13 +723,10 @@ QStringList KConfig::readListEntry(const QString& k, char separator )
    return strList;
 }
 
-
-KAction::KAction(const QString& text, const QIconSet& icon, int accel,
- QObject* receiver, const char* slot, KActionCollection* actionCollection,
- const QString& name, bool bToggle, bool bMenu
- )
-: QAction ( text, icon, text, accel, actionCollection->m_pMainWindow, name, bToggle )
+void KAction::init(QObject* receiver, const char* slot, KActionCollection* actionCollection, 
+                   const char* name, bool bToggle, bool bMenu)
 {
+   QString n(name);
    KMainWindow* p = actionCollection->m_pMainWindow;
    if( slot!=0 )
    {
@@ -741,12 +738,10 @@ KAction::KAction(const QString& text, const QIconSet& icon, int accel,
       }
    }
 
-   if ( !icon.isNull() && p ) this->addTo( p->m_pToolBar );
-
    if (bMenu)
    {
-      if( name[0]=='g')       addTo( p->movementMenu );
-      else if( name.left(16)=="dir_current_sync")
+      if( n[0]=='g')       addTo( p->movementMenu );
+      else if( n.left(16)=="dir_current_sync")
       {
          if ( p->dirCurrentItemMenu==0 )
          {
@@ -757,7 +752,7 @@ KAction::KAction(const QString& text, const QIconSet& icon, int accel,
          }
          addTo( p->dirCurrentItemMenu );
       }
-      else if( name.left(11)=="dir_current")
+      else if( n.left(11)=="dir_current")
       {
          if ( p->dirCurrentItemMenu==0 )
          {
@@ -768,7 +763,7 @@ KAction::KAction(const QString& text, const QIconSet& icon, int accel,
          }
          addTo( p->dirCurrentSyncItemMenu );
       }
-      else if( name.left(4)=="diff")  addTo( p->diffMenu );
+      else if( n.left(4)=="diff")  addTo( p->diffMenu );
       else if( name[0]=='d')  addTo( p->directoryMenu );
       else if( name[0]=='f')  addTo( p->fileMenu );
       else if( name[0]=='w')  addTo( p->windowsMenu );
@@ -776,53 +771,26 @@ KAction::KAction(const QString& text, const QIconSet& icon, int accel,
    }
 }
 
+
+KAction::KAction(const QString& text, const QIconSet& icon, int accel,
+ QObject* receiver, const char* slot, KActionCollection* actionCollection,
+ const char* name, bool bToggle, bool bMenu
+ )
+: QAction ( text, icon, text, accel, actionCollection->m_pMainWindow, name, bToggle )
+{
+   KMainWindow* p = actionCollection->m_pMainWindow;
+   if ( !icon.isNull() && p ) this->addTo( p->m_pToolBar );
+
+   init(receiver,slot,actionCollection,name,bToggle,bMenu);
+}
+
 KAction::KAction(const QString& text, int accel,
  QObject* receiver, const char* slot, KActionCollection* actionCollection,
- const QString& name, bool bToggle, bool bMenu
+ const char* name, bool bToggle, bool bMenu
  )
 : QAction ( text, text, accel, actionCollection->m_pMainWindow, name, bToggle )
 {
-   KMainWindow* p = actionCollection->m_pMainWindow;
-   if( slot!=0 )
-   {
-      if (!bToggle)
-         connect(this, SIGNAL(activated()), receiver, slot);
-      else
-      {
-         connect(this, SIGNAL(toggled(bool)), receiver, slot);
-      }
-   }
-   if (bMenu)
-   {
-      if( name[0]=='g') addTo( p->movementMenu );
-      else if( name.left(16)=="dir_current_sync")
-      {
-         if ( p->dirCurrentItemMenu==0 )
-         {
-            p->dirCurrentItemMenu = new QPopupMenu();
-            p->directoryMenu->insertItem(i18n("Current Item Merge Operation"), p->dirCurrentItemMenu);
-            p->dirCurrentSyncItemMenu = new QPopupMenu();
-            p->directoryMenu->insertItem(i18n("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
-         }
-         addTo( p->dirCurrentItemMenu );
-      }
-      else if( name.left(11)=="dir_current")
-      {
-         if ( p->dirCurrentItemMenu==0 )
-         {
-            p->dirCurrentItemMenu = new QPopupMenu();
-            p->directoryMenu->insertItem(i18n("Current Item Merge Operation"), p->dirCurrentItemMenu);
-            p->dirCurrentSyncItemMenu = new QPopupMenu();
-            p->directoryMenu->insertItem(i18n("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
-         }
-         addTo( p->dirCurrentSyncItemMenu );
-      }
-      else if( name.left(4)=="diff")  addTo( p->diffMenu );
-      else if( name[0]=='d')  addTo( p->directoryMenu );
-      else if( name[0]=='f')  addTo( p->fileMenu );
-      else if( name[0]=='w')  addTo( p->windowsMenu );
-      else              addTo( p->mergeMenu );
-   }
+   init(receiver,slot,actionCollection,name,bToggle,bMenu);
 }
 
 void KAction::setStatusText(const QString&)
@@ -835,17 +803,17 @@ void KAction::plug(QPopupMenu* menu)
 }
 
 
-KToggleAction::KToggleAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bMenu)
+KToggleAction::KToggleAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu)
 : KAction( text, icon, accel, receiver, slot, actionCollection, name, true, bMenu)
 {
 }
 
-KToggleAction::KToggleAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const QString& name, bool bMenu)
+KToggleAction::KToggleAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu)
 : KAction( text, accel, receiver, slot, actionCollection, name, true, bMenu)
 {
 }
 
-KToggleAction::KToggleAction(const QString& text, const QIconSet& icon, int accel, KActionCollection* actionCollection, const QString& name, bool bMenu)
+KToggleAction::KToggleAction(const QString& text, const QIconSet& icon, int accel, KActionCollection* actionCollection, const char* name, bool bMenu)
 : KAction( text, icon, accel, 0, 0, actionCollection, name, true, bMenu)
 {
 }
@@ -1382,13 +1350,13 @@ KLibFactory* KLibLoader::factory(QString const&)
    return (KLibFactory*) init_libkdiff3part();
 }
 
-QObject* KLibFactory::create(QObject* pParent, QString const& name, QString const& classname )
+QObject* KLibFactory::create(QObject* pParent, const QString& name, const QString& classname )
 {
    KParts::Factory* f = dynamic_cast<KParts::Factory*>(this);
    if (f!=0)
-      return f->createPartObject( (QWidget*)pParent, name,
-                                            pParent, name,
-                                            classname,  QStringList() );
+      return f->createPartObject( (QWidget*)pParent, name.ascii(),
+                                            pParent, name.ascii(),
+                                            classname.ascii(),  QStringList() );
    else
       return 0;
 }

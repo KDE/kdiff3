@@ -26,6 +26,7 @@
 #include <klocale.h>
 #include <qfileinfo.h>
 #include <qdir.h>
+#include <qtextcodec.h>
 
 #include <map>
 #include <assert.h>
@@ -67,11 +68,11 @@ bool equal( const LineData& l1, const LineData& l2, bool bStrict )
       return false;
 
    // Ignore white space diff
-   const char* p1 = l1.pLine;
-   const char* p1End = p1 + l1.size;
+   const QChar* p1 = l1.pLine;
+   const QChar* p1End = p1 + l1.size;
 
-   const char* p2 = l2.pLine;
-   const char* p2End = p2 + l2.size;
+   const QChar* p2 = l2.pLine;
+   const QChar* p2End = p2 + l2.size;
 
    if ( g_bIgnoreWhiteSpace )
    {
@@ -111,9 +112,7 @@ bool equal( const LineData& l1, const LineData& l2, bool bStrict )
 }
 
 
-
-
-static bool isLineOrBufEnd( const char* p, int i, int size )
+static bool isLineOrBufEnd( const QChar* p, int i, int size )
 {
    return 
       i>=size        // End of file
@@ -131,7 +130,7 @@ static bool isLineOrBufEnd( const char* p, int i, int size )
 - Allocate and free buffers as necessary.
 - Run a preprocessor, when specified.
 - Run the line-matching preprocessor, when specified.
-- Run other preprocessing steps: Uppercase, ignore comments, 
+- Run other preprocessing steps: Uppercase, ignore comments,
                                  remove carriage return, ignore numbers.
 
 Order of operation:
@@ -150,7 +149,7 @@ Optimizations: Skip unneeded steps.
 */
 
 SourceData::SourceData()
-{ 
+{
    m_pOptionDialog = 0;
    reset();
 }
@@ -238,20 +237,20 @@ void SourceData::setData( const QString& data )
    {
       m_tempInputFileName = FileAccess::tempFileName();
    }
-   
+
    FileAccess f( m_tempInputFileName );
-   bool bSuccess = f.writeFile( encodeString(data, m_pOptionDialog), data.length() );
+   bool bSuccess = f.writeFile( QTextCodec::codecForName("UTF-8")->fromUnicode(data), data.length() );
    if ( !bSuccess )
    {
       KMessageBox::error( m_pOptionDialog, i18n("Writing clipboard data to temp file failed.") );
       return;
    }
-   
+
    m_aliasName = i18n("From Clipboard");
    m_fileAccess = FileAccess("");  // Effect: m_fileAccess.isValid() is false
 }
 
-const LineData* SourceData::getLineDataForDiff() const 
+const LineData* SourceData::getLineDataForDiff() const
 {
    return m_lmppData.m_pBuf==0 ? &m_normalData.m_v[0] : &m_lmppData.m_v[0];
 }
@@ -312,6 +311,8 @@ bool SourceData::FileData::readFile( const QString& filename )
    m_size = fa.sizeForReading();
    char* pBuf;
    m_pBuf = pBuf = new char[m_size+100];  // Alloc 100 byte extra: Savety hack, not nice but does no harm.
+                                // Some extra bytes at the end of the buffer are needed by
+                                // the diff algorithm. See also GnuDiff::diff_2_files().
    bool bSuccess = fa.readFile( pBuf, m_size );
    if ( !bSuccess )
    {
@@ -339,21 +340,46 @@ bool SourceData::FileData::writeFile( const QString& filename )
 void SourceData::FileData::copyBufFrom( const FileData& src )
 {
    reset();
-   char* pBuf;   
+   char* pBuf;
    m_size = src.m_size;
    m_pBuf = pBuf = new char[m_size+100];
    memcpy( pBuf, src.m_pBuf, m_size );
 }
 
-void SourceData::readAndPreprocess()
+// Convert the input file from input encoding to output encoding and write it to the output file.
+static bool convertFileEncoding( const QString& fileNameIn, QTextCodec* pCodecIn,
+                                 const QString& fileNameOut, QTextCodec* pCodecOut )
 {
+   QFile in( fileNameIn );
+   if ( ! in.open(IO_ReadOnly ) )
+      return false;
+   QTextStream inStream( &in );
+   inStream.setCodec( pCodecIn );
+
+   QFile out( fileNameOut );
+   if ( ! out.open( IO_WriteOnly ) )
+      return false;
+   QTextStream outStream( &out );
+   outStream.setCodec( pCodecOut );
+
+   QString data = inStream.read();
+   outStream << data;
+
+   return true;
+}
+
+void SourceData::readAndPreprocess(QTextCodec* pEncoding)
+{
+   m_pEncoding = pEncoding;
    QString fileNameIn1;
    QString fileNameOut1;
    QString fileNameIn2;
    QString fileNameOut2;
-   
+   QTextCodec* pEncoding1 = pEncoding;
+   QTextCodec* pEncoding2 = pEncoding;
+
    bool bTempFileFromClipboard = !m_fileAccess.isValid();
-      
+
    // Detect the input for the preprocessing operations
    if ( !bTempFileFromClipboard )
    {
@@ -364,7 +390,7 @@ void SourceData::readAndPreprocess()
       else    // File is not local: create a temporary local copy:
       {
          if ( m_tempInputFileName.isEmpty() )  { m_tempInputFileName = FileAccess::tempFileName(); }
-      
+
          m_fileAccess.copyFile(m_tempInputFileName);
          fileNameIn1 = m_tempInputFileName;
       }
@@ -372,16 +398,19 @@ void SourceData::readAndPreprocess()
    else // The input was set via setData(), probably from clipboard.
    {
       fileNameIn1 = m_tempInputFileName;
+      m_pEncoding = QTextCodec::codecForName("UTF-8");
+      pEncoding1 = m_pEncoding;
+      pEncoding2 = m_pEncoding;
    }
-      
+
    m_normalData.reset();
    m_lmppData.reset();
-   
+
    FileAccess faIn(fileNameIn1);
    int fileInSize = faIn.size();
-   
+
    if ( faIn.exists() ) // fileInSize > 0 )
-   {  
+   {
 
 #ifdef _WIN32
       QString catCmd = "type";
@@ -389,7 +418,7 @@ void SourceData::readAndPreprocess()
 #else
       QString catCmd = "cat";
 #endif
-      
+
       // Run the first preprocessor
       if ( m_pOptionDialog->m_PreProcessorCmd.isEmpty() )
       {
@@ -398,10 +427,20 @@ void SourceData::readAndPreprocess()
       }
       else
       {
+         QString fileNameInPP = fileNameIn1;
+
+         if ( pEncoding1 != m_pOptionDialog->m_pEncodingPP )
+         {
+            // Before running the preprocessor convert to the format that the preprocessor expects.
+            fileNameInPP = FileAccess::tempFileName();
+            pEncoding1 = m_pOptionDialog->m_pEncodingPP;
+            convertFileEncoding( fileNameIn1, pEncoding, fileNameInPP, pEncoding1 );
+         }
+
          QString ppCmd = m_pOptionDialog->m_PreProcessorCmd;
          fileNameOut1 = FileAccess::tempFileName();
-         QString cmd = catCmd + " \"" + fileNameIn1 + "\" | " + ppCmd  + " >\"" + fileNameOut1+"\"";
-         ::system( encodeString(cmd, m_pOptionDialog) );
+         QString cmd = catCmd + " \"" + fileNameInPP + "\" | " + ppCmd  + " >\"" + fileNameOut1+"\"";
+         ::system( encodeString(cmd) );
          bool bSuccess = m_normalData.readFile( fileNameOut1 );
          if ( fileInSize >0 && ( !bSuccess || m_normalData.m_size==0 ) )
          {
@@ -411,18 +450,32 @@ void SourceData::readAndPreprocess()
                ).arg(cmd) );
             m_pOptionDialog->m_PreProcessorCmd = "";
             m_normalData.readFile( fileNameIn1 );
+            pEncoding1 = m_pEncoding;
+         }
+         if (fileNameInPP != fileNameIn1)
+         {
+            FileAccess::removeFile( fileNameInPP );
          }
       }
-      
+
       // LineMatching Preprocessor
       if ( ! m_pOptionDialog->m_LineMatchingPreProcessorCmd.isEmpty() )
       {
          fileNameIn2 = fileNameOut1.isEmpty() ? fileNameIn1 : fileNameOut1;
-      
+         QString fileNameInPP = fileNameIn2;
+         pEncoding2 = pEncoding1;
+         if ( pEncoding2 != m_pOptionDialog->m_pEncodingPP )
+         {
+            // Before running the preprocessor convert to the format that the preprocesor expects.
+            fileNameInPP = FileAccess::tempFileName();
+            pEncoding2 = m_pOptionDialog->m_pEncodingPP;
+            convertFileEncoding( fileNameIn2, pEncoding1, fileNameInPP, pEncoding2 );
+         }
+
          QString ppCmd = m_pOptionDialog->m_LineMatchingPreProcessorCmd;
          fileNameOut2 = FileAccess::tempFileName();
-         QString cmd = catCmd + " \"" + fileNameIn2 + "\" | " + ppCmd  + " >\"" + fileNameOut2 + "\"";
-         ::system( encodeString(cmd, m_pOptionDialog) );
+         QString cmd = catCmd + " \"" + fileNameInPP + "\" | " + ppCmd  + " >\"" + fileNameOut2 + "\"";
+         ::system( encodeString(cmd) );
          bool bSuccess = m_lmppData.readFile( fileNameOut2 );
          if ( FileAccess(fileNameIn2).size()>0 && ( !bSuccess || m_lmppData.m_size==0 ) )
          {
@@ -434,6 +487,10 @@ void SourceData::readAndPreprocess()
             m_lmppData.readFile( fileNameIn2 );
          }
          FileAccess::removeFile( fileNameOut2 );
+         if (fileNameInPP != fileNameIn2)
+         {
+            FileAccess::removeFile( fileNameInPP );
+         }
       }
       else if ( m_pOptionDialog->m_bIgnoreComments || m_pOptionDialog->m_bIgnoreCase )
       {
@@ -444,20 +501,20 @@ void SourceData::readAndPreprocess()
       {  // We don't need any lmpp data at all.
          m_lmppData.reset();
       }
-   }            
-   
-   m_normalData.preprocess( m_pOptionDialog->m_bPreserveCarriageReturn );
-   m_lmppData.preprocess( false );
-   
+   }
+
+   m_normalData.preprocess( m_pOptionDialog->m_bPreserveCarriageReturn, pEncoding1 );
+   m_lmppData.preprocess( false, pEncoding2 );
+
    if ( m_lmppData.m_vSize < m_normalData.m_vSize )
    {
       // This probably is the fault of the LMPP-Command, but not worth reporting.
       m_lmppData.m_v.resize( m_normalData.m_vSize );
       for(int i=m_lmppData.m_vSize; i<m_normalData.m_vSize; ++i )
       {  // Set all empty lines to point to the end of the buffer.
-         m_lmppData.m_v[i].pLine = m_lmppData.m_pBuf+m_lmppData.m_size;
+         m_lmppData.m_v[i].pLine = m_lmppData.m_unicodeBuf.unicode()+m_lmppData.m_unicodeBuf.length();
       }
-      
+
       m_lmppData.m_vSize = m_normalData.m_vSize;
    }
 
@@ -465,13 +522,14 @@ void SourceData::readAndPreprocess()
    if ( m_pOptionDialog->m_bIgnoreCase )
    {
       int i;
-      char* pBuf = const_cast<char*>(m_lmppData.m_pBuf);
-      for(i=0; i<m_lmppData.m_size; ++i)
+      QChar* pBuf = const_cast<QChar*>(m_lmppData.m_unicodeBuf.unicode());
+      int ucSize = m_lmppData.m_unicodeBuf.length();
+      for(i=0; i<ucSize; ++i)
       {
-         pBuf[i] = toupper(pBuf[i]);
+         pBuf[i] = pBuf[i].upper();
       }
-   }   
-      
+   }
+
    // Ignore comments
    if ( m_pOptionDialog->m_bIgnoreComments )
    {
@@ -482,14 +540,14 @@ void SourceData::readAndPreprocess()
          m_normalData.m_v[i].bContainsPureComment = m_lmppData.m_v[i].bContainsPureComment;
       }
    }
-      
+
    // Remove unneeded temporary files. (A temp file from clipboard must not be deleted.)
    if ( !bTempFileFromClipboard && !m_tempInputFileName.isEmpty() )
    {
       FileAccess::removeFile( m_tempInputFileName );
       m_tempInputFileName = "";
    }
-   
+
    if ( !fileNameOut1.isEmpty() )
    {
       FileAccess::removeFile( fileNameOut1 );
@@ -499,15 +557,28 @@ void SourceData::readAndPreprocess()
 
 
 /** Prepare the linedata vector for every input line.*/
-void SourceData::FileData::preprocess( bool bPreserveCR )
+void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
 {
-   const char* p = m_pBuf;
+   //m_unicodeBuf = decodeString( m_pBuf, m_size, eEncoding );
+
+   QByteArray ba;
+   ba.setRawData( m_pBuf, m_size );
+   QTextStream ts( ba, IO_ReadOnly );
+   ts.setCodec( pEncoding);
+   m_unicodeBuf = ts.read();
+   ba.resetRawData( m_pBuf, m_size );
+
+   int ucSize = m_unicodeBuf.length();
+   m_unicodeBuf += "        ";  // Some extra bytes at the end of the buffer are needed by
+                                // the diff algorithm. See also GnuDiff::diff_2_files().
+   const QChar* p = m_unicodeBuf.unicode();
+
    m_bIsText = true;
    int lines = 1;
    int i;
-   for( i=0; i<m_size; ++i )
+   for( i=0; i<ucSize; ++i )
    {
-      if ( isLineOrBufEnd(p,i,m_size) )
+      if ( isLineOrBufEnd(p,i,ucSize) )
       {
          ++lines;
       }
@@ -522,9 +593,9 @@ void SourceData::FileData::preprocess( bool bPreserveCR )
    int lineLength=0;
    bool bNonWhiteFound = false;
    int whiteLength = 0;
-   for( i=0; i<=m_size; ++i )
+   for( i=0; i<=ucSize; ++i )
    {
-      if ( isLineOrBufEnd( p, i, m_size ) )
+      if ( isLineOrBufEnd( p, i, ucSize ) )
       {
          m_v[lineIdx].pLine = &p[ i-lineLength ];
          while ( !bPreserveCR  &&  lineLength>0  &&  m_v[lineIdx].pLine[lineLength-1]=='\r'  )
@@ -560,7 +631,7 @@ void SourceData::FileData::preprocess( bool bPreserveCR )
 // Comments in white lines must remain, while comments in
 // non-white lines are overwritten with spaces.
 static void checkLineForComments(
-   char* p,   // pointer to start of buffer
+   QChar* p,   // pointer to start of buffer
    int& i,    // index of current position (in, out)
    int size,  // size of buffer
    bool& bWhite,          // false if this line contains nonwhite characters (in, out)
@@ -650,9 +721,9 @@ static void checkLineForComments(
 void SourceData::FileData::removeComments()
 {
    int line=0;
-   char* p = (char*)m_pBuf;
+   QChar* p = const_cast<QChar*>(m_unicodeBuf.unicode());
    bool bWithinComment=false;
-   int size = m_size;
+   int size = m_unicodeBuf.length();
    for(int i=0; i<size; ++i )
    {
 //      std::cout << "2        " << std::string(&p[i], m_v[line].size) << std::endl;
@@ -1293,7 +1364,7 @@ void debugLineCheck( Diff3LineList& d3ll, int size, int idx )
    }
 }
 
-inline bool equal( char c1, char c2, bool /*bStrict*/ )
+inline bool equal( QChar c1, QChar c2, bool /*bStrict*/ )
 {
    // If bStrict then white space doesn't match
 
@@ -1494,11 +1565,10 @@ void fineDiff(
       if( k1==-1 && k2!=-1  ||  k1!=-1 && k2==-1 ) bTextsTotalEqual=false;
       if( k1!=-1 && k2!=-1 )
       {
-         if ( v1[k1].size != v2[k2].size || memcmp( v1[k1].pLine, v2[k2].pLine, v1[k1].size)!=0 )
+         if ( v1[k1].size != v2[k2].size || memcmp( v1[k1].pLine, v2[k2].pLine, v1[k1].size<<1)!=0 )
          {
             bTextsTotalEqual = false;
             DiffList* pDiffList = new DiffList;
-//            std::cout << std::string( v1[k1].pLine, v1[k1].size ) << "\n";
             calcDiff( v1[k1].pLine, v1[k1].size, v2[k2].pLine, v2[k2].size, *pDiffList, 2, maxSearchLength );
 
             // Optimize the diff list.

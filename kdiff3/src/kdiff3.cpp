@@ -104,6 +104,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    m_pMergeWindowFrame = 0;
    m_bOutputModified = false;
    m_bTimerBlock = false;
+   m_pHScrollBar = 0;
 
    // Needed before any file operations via FileAccess happen.
    g_pProgressDialog = new ProgressDialog(this);
@@ -111,13 +112,13 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    // All default values must be set before calling readOptions().
    m_pOptionDialog = new OptionDialog( m_pKDiff3Shell!=0, this );
    connect( m_pOptionDialog, SIGNAL(applyClicked()), this, SLOT(slotRefresh()) );
-   
+
    m_pOptionDialog->readOptions( isPart() ? m_pKDiff3Part->instance()->config() : kapp->config() );
 
    m_sd1.setOptionDialog(m_pOptionDialog);
    m_sd2.setOptionDialog(m_pOptionDialog);
    m_sd3.setOptionDialog(m_pOptionDialog);
-   
+
    // Option handling: Only when pParent==0 (no parent)
    KCmdLineArgs *args = isPart() ? 0 : KCmdLineArgs::parsedArgs();
 
@@ -161,18 +162,18 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
          if ( args->count() > 1 ) m_sd3.setFilename( args->url(1).url() );
       }
 
-      
+
       QCStringList aliasList = args->getOptionList("fname");
       QCStringList::Iterator ali = aliasList.begin();
-      
+
       QString an1 = args->getOption("L1");
       if ( !an1.isEmpty() )              { m_sd1.setAliasName(an1);         }
       else if ( ali != aliasList.end() ) { m_sd1.setAliasName(*ali); ++ali; }
-      
+
       QString an2 = args->getOption("L2");
       if ( !an2.isEmpty() )              { m_sd2.setAliasName(an2);         }
       else if ( ali != aliasList.end() ) { m_sd2.setAliasName(*ali); ++ali; }
-      
+
       QString an3 = args->getOption("L3");
       if ( !an3.isEmpty() )              { m_sd3.setAliasName(an3);         }
       else if ( ali != aliasList.end() ) { m_sd3.setAliasName(*ali); ++ali; }
@@ -186,7 +187,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    connect( m_pFindDialog, SIGNAL(findNext()), this, SLOT(slotEditFindNext()));
 
    readOptions( isPart() ? m_pKDiff3Part->instance()->config() : kapp->config() );
-   
+
    autoAdvance->setChecked( m_pOptionDialog->m_bAutoAdvance );
    showWhiteSpaceCharacters->setChecked( m_pOptionDialog->m_bShowWhiteSpaceCharacters );
    showWhiteSpace->setChecked( m_pOptionDialog->m_bShowWhiteSpace );
@@ -236,7 +237,7 @@ void KDiff3App::completeInit()
    }
 
    bool bSuccess = improveFilenames();
-   
+
    if ( m_bAuto && m_bDirCompare )
    {
       std::cerr << i18n("Option --auto ignored for directory comparison.").ascii()<<std::endl;
@@ -272,7 +273,7 @@ void KDiff3App::completeInit()
                if ( FileAccess::exists( newName ) ) FileAccess::removeFile( newName );
                if ( !FileAccess::exists( newName ) ) fa.rename( newName );
             }
-            
+
             bSuccess = pSD->saveNormalDataAs( m_outputFilename );
             if ( bSuccess ) ::exit(0);
             else KMessageBox::error( this, i18n("Saving failed.") );
@@ -379,12 +380,20 @@ void KDiff3App::initActions( KActionCollection* ac )
    goCurrent = new KAction(i18n("Go to Current Delta"), QIconSet(QPixmap(currentpos)), CTRL+Key_Space, this, SLOT(slotGoCurrent()), ac, "go_current");
    goTop = new KAction(i18n("Go to First Delta"), QIconSet(QPixmap(upend)), 0, this, SLOT(slotGoTop()), ac, "go_top");
    goBottom = new KAction(i18n("Go to Last Delta"), QIconSet(QPixmap(downend)), 0, this, SLOT(slotGoBottom()), ac, "go_bottom");
+   QString omitsWhitespace = ".\n" + i18n("(Skips white space differences when \"Show White Space\" is disabled.)");
+   QString includeWhitespace = ".\n" + i18n("(Doesn't skip white space differences even when \"Show White Space\" is disabled.)");
    goPrevDelta = new KAction(i18n("Go to Previous Delta"), QIconSet(QPixmap(up1arrow)), CTRL+Key_Up, this, SLOT(slotGoPrevDelta()), ac, "go_prev_delta");
+   goPrevDelta->setToolTip( goPrevDelta->text() + omitsWhitespace );
    goNextDelta = new KAction(i18n("Go to Next Delta"), QIconSet(QPixmap(down1arrow)), CTRL+Key_Down, this, SLOT(slotGoNextDelta()), ac, "go_next_delta");
+   goNextDelta->setToolTip( goNextDelta->text() + omitsWhitespace );
    goPrevConflict = new KAction(i18n("Go to Previous Conflict"), QIconSet(QPixmap(up2arrow)), CTRL+Key_PageUp, this, SLOT(slotGoPrevConflict()), ac, "go_prev_conflict");
+   goPrevConflict->setToolTip( goPrevConflict->text() + omitsWhitespace );
    goNextConflict = new KAction(i18n("Go to Next Conflict"), QIconSet(QPixmap(down2arrow)), CTRL+Key_PageDown, this, SLOT(slotGoNextConflict()), ac, "go_next_conflict");
+   goNextConflict->setToolTip( goNextConflict->text() + omitsWhitespace );
    goPrevUnsolvedConflict = new KAction(i18n("Go to Previous Unsolved Conflict"), QIconSet(QPixmap(prevunsolved)), 0, this, SLOT(slotGoPrevUnsolvedConflict()), ac, "go_prev_unsolved_conflict");
+   goPrevUnsolvedConflict->setToolTip( goPrevUnsolvedConflict->text() + includeWhitespace );
    goNextUnsolvedConflict = new KAction(i18n("Go to Next Unsolved Conflict"), QIconSet(QPixmap(nextunsolved)), 0, this, SLOT(slotGoNextUnsolvedConflict()), ac, "go_next_unsolved_conflict");
+   goNextUnsolvedConflict->setToolTip( goNextUnsolvedConflict->text() + includeWhitespace );
    chooseA = new KToggleAction(i18n("Select Line(s) From A"), QIconSet(QPixmap(iconA)), CTRL+Key_1, this, SLOT(slotChooseA()), ac, "merge_choose_a");
    chooseB = new KToggleAction(i18n("Select Line(s) From B"), QIconSet(QPixmap(iconB)), CTRL+Key_2, this, SLOT(slotChooseB()), ac, "merge_choose_b");
    chooseC = new KToggleAction(i18n("Select Line(s) From C"), QIconSet(QPixmap(iconC)), CTRL+Key_3, this, SLOT(slotChooseC()), ac, "merge_choose_c");
@@ -397,12 +406,12 @@ void KDiff3App::initActions( KActionCollection* ac )
    chooseAEverywhere = new KAction(i18n("Choose A Everywhere"), CTRL+SHIFT+Key_1, this, SLOT(slotChooseAEverywhere()), ac, "merge_choose_a_everywhere");
    chooseBEverywhere = new KAction(i18n("Choose B Everywhere"), CTRL+SHIFT+Key_2, this, SLOT(slotChooseBEverywhere()), ac, "merge_choose_b_everywhere");
    chooseCEverywhere = new KAction(i18n("Choose C Everywhere"), CTRL+SHIFT+Key_3, this, SLOT(slotChooseCEverywhere()), ac, "merge_choose_c_everywhere");
-   chooseAForUnsolvedConflicts = new KAction(i18n("Choose A For All Unsolved Conflicts"), 0, this, SLOT(slotChooseAForUnsolvedConflicts()), ac, "merge_choose_a_for_unsolved_conflicts");
-   chooseBForUnsolvedConflicts = new KAction(i18n("Choose B For All Unsolved Conflicts"), 0, this, SLOT(slotChooseBForUnsolvedConflicts()), ac, "merge_choose_b_for_unsolved_conflicts");
-   chooseCForUnsolvedConflicts = new KAction(i18n("Choose C For All Unsolved Conflicts"), 0, this, SLOT(slotChooseCForUnsolvedConflicts()), ac, "merge_choose_c_for_unsolved_conflicts");
-   chooseAForUnsolvedWhiteSpaceConflicts = new KAction(i18n("Choose A For All Unsolved Whitespace Conflicts"), 0, this, SLOT(slotChooseAForUnsolvedWhiteSpaceConflicts()), ac, "merge_choose_a_for_unsolved_whitespace_conflicts");
-   chooseBForUnsolvedWhiteSpaceConflicts = new KAction(i18n("Choose B For All Unsolved Whitespace Conflicts"), 0, this, SLOT(slotChooseBForUnsolvedWhiteSpaceConflicts()), ac, "merge_choose_b_for_unsolved_whitespace_conflicts");
-   chooseCForUnsolvedWhiteSpaceConflicts = new KAction(i18n("Choose C For All Unsolved Whitespace Conflicts"), 0, this, SLOT(slotChooseCForUnsolvedWhiteSpaceConflicts()), ac, "merge_choose_c_for_unsolved_whitespace_conflicts");
+   chooseAForUnsolvedConflicts = new KAction(i18n("Choose A for All Unsolved Conflicts"), 0, this, SLOT(slotChooseAForUnsolvedConflicts()), ac, "merge_choose_a_for_unsolved_conflicts");
+   chooseBForUnsolvedConflicts = new KAction(i18n("Choose B for All Unsolved Conflicts"), 0, this, SLOT(slotChooseBForUnsolvedConflicts()), ac, "merge_choose_b_for_unsolved_conflicts");
+   chooseCForUnsolvedConflicts = new KAction(i18n("Choose C for All Unsolved Conflicts"), 0, this, SLOT(slotChooseCForUnsolvedConflicts()), ac, "merge_choose_c_for_unsolved_conflicts");
+   chooseAForUnsolvedWhiteSpaceConflicts = new KAction(i18n("Choose A for All Unsolved Whitespace Conflicts"), 0, this, SLOT(slotChooseAForUnsolvedWhiteSpaceConflicts()), ac, "merge_choose_a_for_unsolved_whitespace_conflicts");
+   chooseBForUnsolvedWhiteSpaceConflicts = new KAction(i18n("Choose B for All Unsolved Whitespace Conflicts"), 0, this, SLOT(slotChooseBForUnsolvedWhiteSpaceConflicts()), ac, "merge_choose_b_for_unsolved_whitespace_conflicts");
+   chooseCForUnsolvedWhiteSpaceConflicts = new KAction(i18n("Choose C for All Unsolved Whitespace Conflicts"), 0, this, SLOT(slotChooseCForUnsolvedWhiteSpaceConflicts()), ac, "merge_choose_c_for_unsolved_whitespace_conflicts");
    autoSolve = new KAction(i18n("Automatically Solve Simple Conflicts"), 0, this, SLOT(slotAutoSolve()), ac, "merge_autosolve");
    unsolve = new KAction(i18n("Set Deltas to Conflicts"), 0, this, SLOT(slotUnsolve()), actionCollection(), "merge_autounsolve");
    fileReload  = new KAction(i18n("Reload"), /*QIconSet(QPixmap(reloadIcon)),*/ Key_F5, this, SLOT(slotReload()), ac, "file_reload");
@@ -410,13 +419,13 @@ void KDiff3App::initActions( KActionCollection* ac )
    showWindowB = new KToggleAction(i18n("Show Window B"), 0, this, SLOT(slotShowWindowBToggled()), ac, "win_show_b");
    showWindowC = new KToggleAction(i18n("Show Window C"), 0, this, SLOT(slotShowWindowCToggled()), ac, "win_show_c");
    winFocusNext = new KAction(i18n("Focus Next Window"), ALT+Key_Right, this, SLOT(slotWinFocusNext()), ac, "win_focus_next");
-   
+
    overviewModeNormal = new KToggleAction(i18n("Normal Overview"), 0, this, SLOT(slotOverviewNormal()), ac, "diff_overview_normal");
    overviewModeAB     = new KToggleAction(i18n("A vs. B Overview"), 0, this, SLOT(slotOverviewAB()), ac, "diff_overview_ab");
    overviewModeAC     = new KToggleAction(i18n("A vs. C Overview"), 0, this, SLOT(slotOverviewAC()), ac, "diff_overview_ac");
    overviewModeBC     = new KToggleAction(i18n("B vs. C Overview"), 0, this, SLOT(slotOverviewBC()), ac, "diff_overview_bc");
    wordWrap = new KToggleAction(i18n("Word Wrap Diff Windows"), 0, this, SLOT(slotWordWrapToggled()), ac, "diff_wordwrap");
-   
+
 #ifdef _WIN32
    new KAction(i18n("Focus Next Window"), CTRL+Key_Tab, this, SLOT(slotWinFocusNext()), ac, "win_focus_next", false, false);
 #endif
@@ -661,7 +670,7 @@ FindDialog::FindDialog(QWidget* pParent)
    layout->setSpacing(5);
 
    int line=0;
-   layout->addMultiCellWidget( new QLabel(i18n("Searchtext:"),this), line,line,0,1 );
+   layout->addMultiCellWidget( new QLabel(i18n("Search text:"),this), line,line,0,1 );
    ++line;
 
    m_pSearchString = new QLineEdit( this );

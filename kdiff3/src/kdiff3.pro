@@ -1,5 +1,7 @@
 TEMPLATE = app
+# When unresolved items remain during linking: Try adding "shared" in the CONFIG.
 CONFIG  += qt warn_on thread release
+
 HEADERS  = version.h diff.h kdiff3.h merger.h optiondialog.h kreplacements/kreplacements.h \
                   directorymergewindow.h fileaccess.h kdiff3_shell.h kdiff3_part.h
 SOURCES  = diff.cpp difftextwindow.cpp kdiff3.cpp main.cpp merger.cpp mergeresultwindow.cpp \
@@ -11,9 +13,9 @@ INCLUDEPATH += . ./kreplacements
 
 win32 {
    QMAKE_CXXFLAGS_DEBUG  -= -Zi
-   QMAKE_CXXFLAGS_DEBUG  += -GX -GR -Z7 /FR
+   QMAKE_CXXFLAGS_DEBUG  += -GX -GR -Z7 /FR -DQT_NO_ASCII_CAST
    QMAKE_LFLAGS_DEBUG  += /PDB:NONE
-   QMAKE_CXXFLAGS_RELEASE  += -GX -GR -DNDEBUG
+   QMAKE_CXXFLAGS_RELEASE  += -GX -GR -DNDEBUG -DQT_NO_ASCII_CAST
    RC_FILE = kdiff3.rc
 }
 unix {

@@ -83,9 +83,37 @@ void KDiff3Part::setModified(bool /*modified*/)
 */
 }
 
+static void getNameAndVersion( const QString& str, const QString& lineStart, QString& fileName, QString& version )
+{
+   if ( str.left( lineStart.length() )==lineStart && fileName.isEmpty() )
+   {
+      unsigned int pos = lineStart.length();
+      while ( pos<str.length() && (str[pos]==' ' || str[pos]=='\t') ) ++pos;
+      unsigned int pos2 = str.length()-1;
+      while ( pos2>pos )
+      { 
+         while (pos2>pos && str[pos2]!=' ' && str[pos2]!='\t') --pos2;
+         fileName = str.mid( pos, pos2-pos );
+         std::cerr << "KDiff3: " << fileName.latin1() << std::endl;
+         if ( FileAccess(fileName).exists() ) break;
+         --pos2;
+      }
+      
+      int vpos = str.findRev("\t", -1);
+      if ( vpos>0 && vpos>(int)pos2 )
+      {
+         version = str.mid( vpos+1 );
+         while( !version.right(1)[0].isLetterOrNumber() )
+            version.truncate( version.length()-1 );
+      }
+   }
+}
+
+
 bool KDiff3Part::openFile()
 {
    // m_file is always local so we can use QFile on it
+   std::cerr << "KDiff3: " << m_file.latin1() << std::endl;
    QFile file(m_file);
    if (file.open(IO_ReadOnly) == false)
       return false;
@@ -101,30 +129,8 @@ bool KDiff3Part::openFile()
    while (!stream.eof() && (fileName1.isEmpty() || fileName2.isEmpty()) )
    {
       str = stream.readLine() + "\n";
-      if ( str.left(4)=="--- " && fileName1.isEmpty() )
-      {
-         int pos = str.find("\t");
-         fileName1 = str.mid( 4, pos-4 );
-         int vpos = str.findRev("\t", -1);
-         if ( pos>0 && vpos>0 && vpos>pos )
-         {
-            version1 = str.mid( vpos+1 );
-            while( !version1.right(1)[0].isLetterOrNumber() )
-               version1.truncate( version1.length()-1 );
-         }
-      }
-      if ( str.left(4)=="+++ " && fileName2.isEmpty() )
-      {
-         int pos = str.find("\t");
-         fileName2 = str.mid( 4, pos-4 );
-         int vpos = str.findRev("\t", -1);
-         if ( pos>0 && vpos>0 && vpos>pos )
-         {
-            version2 = str.mid( vpos+1 );
-            while( !version2.right(1)[0].isLetterOrNumber() )
-               version2.truncate( version2.length()-1 );
-         }
-      }
+      getNameAndVersion( str, "---", fileName1, version1 );
+      getNameAndVersion( str, "+++", fileName2, version2 );
    }
 
    file.close();
@@ -148,40 +154,42 @@ bool KDiff3Part::openFile()
       // Normal patch
       // patch -f -u --ignore-whitespace -i [inputfile] -o [outfile] [patchfile]
       QString tempFileName = FileAccess::tempFileName();
-      QString cmd = "patch -f -u --ignore-whitespace -i " + m_file +
-                  " -o "+tempFileName + " " + fileName1;
+      QString cmd = "patch -f -u --ignore-whitespace -i \"" + m_file +
+                  "\" -o \""+tempFileName + "\" \"" + fileName1+ "\"";
 
       ::system( cmd.ascii() );
 
       m_widget->slotFileOpen2( fileName1, tempFileName, "", "",
                                "", version2.isEmpty() ? fileName2 : "REV:"+version2+":"+fileName2, "", 0 ); // alias names
-      FileAccess::removeFile( tempFileName );
+   std::cerr << "KDiff3: f1:" << fileName1.latin1() <<"<->"<<tempFileName.latin1()<< std::endl;
+//      FileAccess::removeFile( tempFileName );
    }
    else if ( version2.isEmpty() && f2.exists() )
    {
       // Reverse patch
       // patch -f -u -R --ignore-whitespace -i [inputfile] -o [outfile] [patchfile]
       QString tempFileName = FileAccess::tempFileName();
-      QString cmd = "patch -f -u -R --ignore-whitespace -i " + m_file +
-                  " -o "+tempFileName + " " + fileName2;
+      QString cmd = "patch -f -u -R --ignore-whitespace -i \"" + m_file +
+                  "\" -o \""+tempFileName + "\" \"" + fileName2+"\"";
 
       ::system( cmd.ascii() );
 
       m_widget->slotFileOpen2( tempFileName, fileName2, "", "",
                                version1.isEmpty() ? fileName1 : "REV:"+version1+":"+fileName1, "", "", 0 ); // alias name
-      FileAccess::removeFile( tempFileName );
+   std::cerr << "KDiff3: f2:" << fileName2.latin1() <<"<->"<<tempFileName.latin1()<< std::endl;
    }
    else if ( !version1.isEmpty() && !version2.isEmpty() )
    {
+   std::cerr << "KDiff3: f1/2:" << fileName1.latin1() <<"<->"<<fileName2.latin1()<< std::endl;
       // Assuming that files are on CVS: Try to get them
       // cvs update -p -r [REV] [FILE] > [OUTPUTFILE]
 
       QString tempFileName1 = FileAccess::tempFileName();
-      QString cmd1 = "cvs update -p -r " + version1 + " " + fileName1 + " >"+tempFileName1;
+      QString cmd1 = "cvs update -p -r " + version1 + " \"" + fileName1 + "\" >\""+tempFileName1+"\"";
       ::system( cmd1.ascii() );
 
       QString tempFileName2 = FileAccess::tempFileName();
-      QString cmd2 = "cvs update -p -r " + version2 + " " + fileName2 + " >"+tempFileName2;
+      QString cmd2 = "cvs update -p -r " + version2 + " \"" + fileName2 + "\" >\""+tempFileName2+"\"";
       ::system( cmd2.ascii() );
 
       m_widget->slotFileOpen2( tempFileName1, tempFileName2, "", "",
@@ -190,8 +198,9 @@ bool KDiff3Part::openFile()
          "", 0
       );
 
-      FileAccess::removeFile( tempFileName1 );
-      FileAccess::removeFile( tempFileName2 );
+   std::cerr << "KDiff3: f1/2:" << tempFileName1.latin1() <<"<->"<<tempFileName2.latin1()<< std::endl;
+//      FileAccess::removeFile( tempFileName1 );
+ //     FileAccess::removeFile( tempFileName2 );
       return true;
    }
    else

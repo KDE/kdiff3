@@ -792,6 +792,13 @@ GnuDiff::change* GnuDiff::build_script (struct file_data const filevec[])
 
 
 /* Report the differences of two files.  */
+// WARNING:
+//  This algorithm has one big problem: It must have a line end character
+//  at the end of the last line, even if there is none in the file.
+//  Because of this the algorithm first places a line end character there
+//  which means that the input data can't be const and some extra bytes of memory 
+//  must be allocated in advance for this purpose. This is very dangerous, because
+//  easy to forget.
 GnuDiff::change* GnuDiff::diff_2_files (struct comparison *cmp)
 {
   lin diags;
@@ -882,131 +889,33 @@ GnuDiff::change* GnuDiff::diff_2_files (struct comparison *cmp)
    Return nonzero if the lines differ.  */
 
 bool
-GnuDiff::lines_differ (char const *s1, char const *s2)
+GnuDiff::lines_differ (const QChar *s1, const QChar *s2)
 {
-  register unsigned char const *t1 = (unsigned char const *) s1;
-  register unsigned char const *t2 = (unsigned char const *) s2;
-  size_t column = 0;
+  const QChar *t1 = s1;
+  const QChar *t2 = s2;
 
   while (1)
     {
-      register unsigned char c1 = *t1++;
-      register unsigned char c2 = *t2++;
+      QChar c1 = *t1++;
+      QChar c2 = *t2++;
 
       /* Test for exact char equality first, since it's a common case.  */
       if (c1 != c2)
 	{
           while ( bIgnoreWhiteSpace && isWhite( c1 )  ||
-                  bIgnoreNumbers    && (isdigit( c1 ) || c1=='-' || c1=='.' ))
+                  bIgnoreNumbers    && (c1.isDigit() || c1=='-' || c1=='.' ))
              c1 = *t1++;
 
           while ( bIgnoreWhiteSpace && isWhite( c2 )  ||
-                  bIgnoreNumbers    && (isdigit( c2 ) || c2=='-' || c2=='.' ))
+                  bIgnoreNumbers    && (c2.isDigit() || c2=='-' || c2=='.' ))
              c2 = *t2++;
 
-#if 0
-	  switch (ignore_white_space)
-	    {
-	    case IGNORE_ALL_SPACE:
-	      /* For -w, just skip past any white space.  */
-	      while (ISSPACE (c1) && c1 != '\n') c1 = *t1++;
-	      while (ISSPACE (c2) && c2 != '\n') c2 = *t2++;
-	      break;
-
-	    case IGNORE_SPACE_CHANGE:
-	      /* For -b, advance past any sequence of white space in
-		 line 1 and consider it just one space, or nothing at
-		 all if it is at the end of the line.  */
-	      if (ISSPACE (c1))
-		{
-		  while (c1 != '\n')
-		    {
-		      c1 = *t1++;
-		      if (! ISSPACE (c1))
-			{
-			  --t1;
-			  c1 = ' ';
-			  break;
-			}
-		    }
-		}
-
-	      /* Likewise for line 2.  */
-	      if (ISSPACE (c2))
-		{
-		  while (c2 != '\n')
-		    {
-		      c2 = *t2++;
-		      if (! ISSPACE (c2))
-			{
-			  --t2;
-			  c2 = ' ';
-			  break;
-			}
-		    }
-		}
-
-	      if (c1 != c2)
-		{
-		  /* If we went too far when doing the simple test
-		     for equality, go back to the first non-white-space
-		     character in both sides and try again.  */
-		  if (c2 == ' ' && c1 != '\n'
-		      && (unsigned char const *) s1 + 1 < t1
-		      && ISSPACE (t1[-2]))
-		    {
-		      --t1;
-		      continue;
-		    }
-		  if (c1 == ' ' && c2 != '\n'
-		      && (unsigned char const *) s2 + 1 < t2
-		      && ISSPACE (t2[-2]))
-		    {
-		      --t2;
-		      continue;
-		    }
-		}
-
-	      break;
-
-	    case IGNORE_TAB_EXPANSION:
-	      if ((c1 == ' ' && c2 == '\t')
-		  || (c1 == '\t' && c2 == ' '))
-		{
-		  size_t column2 = column;
-		  for (;; c1 = *t1++)
-		    {
-		      if (c1 == ' ')
-			column++;
-		      else if (c1 == '\t')
-			column += TAB_WIDTH - column % TAB_WIDTH;
-		      else
-			break;
-		    }
-		  for (;; c2 = *t2++)
-		    {
-		      if (c2 == ' ')
-			column2++;
-		      else if (c2 == '\t')
-			column2 += TAB_WIDTH - column2 % TAB_WIDTH;
-		      else
-			break;
-		    }
-		  if (column != column2)
-		    return 1;
-		}
-	      break;
-
-	    case IGNORE_NO_WHITE_SPACE:
-	      break;
-	    }
-#endif
 	  /* Lowercase all letters if -i is specified.  */
 
 	  if (ignore_case)
 	    {
-	      c1 = TOLOWER (c1);
-	      c2 = TOLOWER (c2);
+	      c1 = c1.lower();
+              c2 = c2.lower();
 	    }
 
 	  if (c1 != c2)
@@ -1014,8 +923,6 @@ GnuDiff::lines_differ (char const *s1, char const *s2)
 	}
       if (c1 == '\n')
 	return 0;
-
-      column += c1 == '\t' ? TAB_WIDTH - column % TAB_WIDTH : 1;
     }
 
   return 1;

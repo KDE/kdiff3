@@ -740,7 +740,7 @@ bool FileAccessJobHandler::removeFile( const QString& fileName )
    else
    {
       m_bSuccess = false;
-      KIO::SimpleJob* pJob = KIO::file_delete( fileName, false );
+      KIO::SimpleJob* pJob = KIO::file_delete( KURL::fromPathOrURL(fileName), false );
       connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
 
       g_pProgressDialog->enterEventLoop( pJob, i18n("Removing file: %1").arg(fileName) );
@@ -755,7 +755,7 @@ bool FileAccessJobHandler::symLink( const QString& linkTarget, const QString& li
    else
    {
       m_bSuccess = false;
-      KIO::CopyJob* pJob = KIO::link( linkTarget, linkLocation, false );
+      KIO::CopyJob* pJob = KIO::link( KURL::fromPathOrURL(linkTarget), KURL::fromPathOrURL(linkLocation), false );
       connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
 
       g_pProgressDialog->enterEventLoop( pJob,
@@ -780,7 +780,7 @@ bool FileAccessJobHandler::rename( const QString& dest )
       bool bShowProgress = false;
       int permissions=-1;
       m_bSuccess = false;
-      KIO::FileCopyJob* pJob = KIO::file_move( m_pFileAccess->m_url, kurl.url(), permissions, bOverwrite, bResume, bShowProgress );
+      KIO::FileCopyJob* pJob = KIO::file_move( m_pFileAccess->m_url, kurl, permissions, bOverwrite, bResume, bShowProgress );
       connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
       connect( pJob, SIGNAL(percent(KIO::Job*,unsigned long)), this, SLOT(slotPercent(KIO::Job*, unsigned long)));
 
@@ -817,7 +817,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
       bool bShowProgress = false;
       int permissions = (m_pFileAccess->isExecutable()?0111:0)+(m_pFileAccess->isWritable()?0222:0)+(m_pFileAccess->isReadable()?0444:0);
       m_bSuccess = false;
-      KIO::FileCopyJob* pJob = KIO::file_copy ( m_pFileAccess->m_url, destUrl.url(), permissions, bOverwrite, bResume, bShowProgress );
+      KIO::FileCopyJob* pJob = KIO::file_copy ( m_pFileAccess->m_url, destUrl, permissions, bOverwrite, bResume, bShowProgress );
       connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
       connect( pJob, SIGNAL(percent(KIO::Job*,unsigned long)), this, SLOT(slotPercent(KIO::Job*, unsigned long)));
       g_pProgressDialog->enterEventLoop( pJob,
@@ -1207,7 +1207,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
          WIN32_FIND_DATA findData;
          WIN32_FIND_DATAA& findDataA=*(WIN32_FIND_DATAA*)&findData;  // Needed for Win95
 
-         HANDLE searchHandle = QT_WA_INLINE( 
+         HANDLE searchHandle = QT_WA_INLINE(
                  FindFirstFile( (TCHAR*)pattern.ucs2(), &findData ),
                  FindFirstFileA( pattern.local8Bit(), &findDataA )
               );
@@ -1240,7 +1240,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
                fa.m_creationTime     = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
 
                int  a = findData.dwFileAttributes;
-               fa.m_bWritable   = ( a & FILE_ATTRIBUTE_READONLY) == 0; 
+               fa.m_bWritable   = ( a & FILE_ATTRIBUTE_READONLY) == 0;
                fa.m_bDir        = ( a & FILE_ATTRIBUTE_DIRECTORY ) != 0;
                fa.m_bFile       = !fa.m_bDir;
                fa.m_bHidden     = ( a & FILE_ATTRIBUTE_HIDDEN) != 0;
@@ -1253,9 +1253,9 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
                fa.m_bSymLink    = false;
                fa.m_fileType    = 0;
 
-               fa.m_name = QT_WA_INLINE( 
+               fa.m_name = QT_WA_INLINE(
                   QString::fromUcs2(findData.cFileName),
-                  QString::fromLocal8Bit(findDataA.cFileName) 
+                  QString::fromLocal8Bit(findDataA.cFileName)
                   );
 
                fa.m_path = fa.m_name;
@@ -1424,7 +1424,7 @@ ProgressDialog::ProgressDialog( QWidget* pParent )
    m_pSlowJobInfo = new QLabel( " ", this);
    hlayout->addWidget( m_pSlowJobInfo );
 
-   m_pAbortButton = new QPushButton( i18n("Cancel"), this);
+   m_pAbortButton = new QPushButton( i18n("&Cancel"), this);
    hlayout->addWidget( m_pAbortButton );
    connect( m_pAbortButton, SIGNAL(clicked()), this, SLOT(slotAbort()) );
 
@@ -1457,18 +1457,18 @@ void ProgressDialog::push()
 void ProgressDialog::pop( bool bRedrawUpdate )
 {
    if ( !m_progressStack.empty() )
-   {   
+   {
       m_progressStack.pop_back();
       if ( m_progressStack.empty() )
          hide();
-      else      
+      else
          recalc(bRedrawUpdate);
    }
 }
 
 void ProgressDialog::setInformation(const QString& info, double dCurrent, bool bRedrawUpdate )
 {
-   if ( m_progressStack.empty() ) 
+   if ( m_progressStack.empty() )
       return;
    ProgressLevelData& pld = m_progressStack.back();
    pld.m_dCurrent = dCurrent;
@@ -1487,7 +1487,7 @@ void ProgressDialog::setInformation(const QString& info, double dCurrent, bool b
 
 void ProgressDialog::setInformation(const QString& info, bool bRedrawUpdate )
 {
-   if ( m_progressStack.empty() ) 
+   if ( m_progressStack.empty() )
       return;
    //ProgressLevelData& pld = m_progressStack.back();
    int level = m_progressStack.size();
@@ -1505,7 +1505,7 @@ void ProgressDialog::setInformation(const QString& info, bool bRedrawUpdate )
 
 void ProgressDialog::setMaxNofSteps( int maxNofSteps )
 {
-   if ( m_progressStack.empty() ) 
+   if ( m_progressStack.empty() )
       return;
    ProgressLevelData& pld = m_progressStack.back();
    pld.m_maxNofSteps = maxNofSteps;
@@ -1514,7 +1514,7 @@ void ProgressDialog::setMaxNofSteps( int maxNofSteps )
 
 void ProgressDialog::step( bool bRedrawUpdate )
 {
-   if ( m_progressStack.empty() ) 
+   if ( m_progressStack.empty() )
       return;
    ProgressLevelData& pld = m_progressStack.back();
    pld.m_dCurrent += 1.0/pld.m_maxNofSteps;
@@ -1523,7 +1523,7 @@ void ProgressDialog::step( bool bRedrawUpdate )
 
 void ProgressDialog::setCurrent( double dSubCurrent, bool bRedrawUpdate )
 {
-   if ( m_progressStack.empty() ) 
+   if ( m_progressStack.empty() )
       return;
    ProgressLevelData& pld = m_progressStack.back();
    pld.m_dCurrent = dSubCurrent;
@@ -1536,7 +1536,7 @@ void ProgressDialog::setCurrent( double dSubCurrent, bool bRedrawUpdate )
 // Requirement: 0 < dMin < dMax < 1
 void ProgressDialog::setRangeTransformation( double dMin, double dMax )
 {
-   if ( m_progressStack.empty() ) 
+   if ( m_progressStack.empty() )
       return;
    ProgressLevelData& pld = m_progressStack.back();
    pld.m_dRangeMin = dMin;
@@ -1546,7 +1546,7 @@ void ProgressDialog::setRangeTransformation( double dMin, double dMax )
 
 void ProgressDialog::setSubRangeTransformation( double dMin, double dMax )
 {
-   if ( m_progressStack.empty() ) 
+   if ( m_progressStack.empty() )
       return;
    ProgressLevelData& pld = m_progressStack.back();
    pld.m_dSubRangeMin = dMin;
@@ -1603,7 +1603,7 @@ void ProgressDialog::recalc( bool bUpdate )
          else
             m_pSubProgressBar->setProgress( int( 1000.0 * m_progressStack.front().m_dSubRangeMin ) );
       }
-         
+
       if ( !isVisible() ) show();
       m_pSlowJobInfo->setText("");
       qApp->processEvents();
@@ -1644,7 +1644,7 @@ void ProgressDialog::delayedHide()
    m_pInformation->setText( "" );
 
    m_progressStack.clear();
-   
+
    m_pProgressBar->setProgress( 0 );
    m_pSubProgressBar->setProgress( 0 );
    m_pSubInformation->setText("");

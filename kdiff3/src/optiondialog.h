@@ -33,9 +33,11 @@ class KConfig;
 #include <list>
 
 class OptionItem;
+class OptionCheckBox;
+class OptionEncodingComboBox;
 class KKeyDialog;
 
-enum eLineEndStyle
+enum e_LineEndStyle
 {
    eLineEndUnix=0,
    eLineEndDos
@@ -65,12 +67,17 @@ public:
     QColor m_currentRangeDiffBgColor;
 
     bool m_bWordWrap;
-    
+
     bool m_bReplaceTabs;
     bool m_bAutoIndentation;
     int  m_tabSize;
     bool m_bAutoCopySelection;
-    bool m_bStringEncoding;
+    bool m_bSameEncoding;
+    QTextCodec*  m_pEncodingA;
+    QTextCodec*  m_pEncodingB;
+    QTextCodec*  m_pEncodingC;
+    QTextCodec*  m_pEncodingOut;
+    QTextCodec*  m_pEncodingPP;
     int  m_lineEndStyle;
 
     bool m_bPreserveCarriageReturn;
@@ -111,11 +118,13 @@ public:
     bool m_bDmCopyNewer;
     bool m_bDmShowOnlyDeltas;
     bool m_bDmUseCvsIgnore;
+    bool m_bDmWhiteSpaceEqual;
     QString m_DmFilePattern;
     QString m_DmFileAntiPattern;
     QString m_DmDirAntiPattern;
 
     QString m_language;
+    bool m_bRightToLeftLanguage;
     //QString m_fileCodec;
     
     void saveOptions(KConfig* config);
@@ -130,7 +139,8 @@ protected slots:
     virtual void slotOk( void );
     virtual void slotApply( void );
     virtual void slotHelp( void );
-
+    
+    void slotEncodingChanged();
 private:
     void resetToDefaults();
 
@@ -138,6 +148,13 @@ private:
 
     // FontConfigDlg
     KFontChooser *m_fontChooser;
+    
+    OptionCheckBox* m_pSameEncoding;
+    OptionEncodingComboBox* m_pEncodingAComboBox;
+    OptionEncodingComboBox* m_pEncodingBComboBox;
+    OptionEncodingComboBox* m_pEncodingCComboBox;
+    OptionEncodingComboBox* m_pEncodingOutComboBox;
+    OptionEncodingComboBox* m_pEncodingPPComboBox;
 
 private:
     void setupFontPage();

@@ -223,7 +223,7 @@ SectionEnd
 SubSection "Integration"
 Section "WinCVS"
   DetailPrint "Integration to WinCVS"
-  MessageBox  MB_OK "Please close WinCVS"
+  MessageBox  MB_OK "If WinCVS is running, please close it before proceeding."
   WriteRegStr HKCU "Software\WinCvs\wincvs\CVS settings" "P_Extdiff" '$INSTDIR\kdiff3.exe'
   WriteRegBin HKCU "Software\WinCvs\wincvs\CVS settings" "P_DiffUseExtDiff" 01
 

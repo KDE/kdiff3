@@ -290,29 +290,117 @@ private:
    }
 };
 
+class OptionEncodingComboBox : public QComboBox, public OptionItem
+{
+   std::vector<QTextCodec*> m_codecVec;
+   QTextCodec** m_ppVarCodec;
+public:
+   OptionEncodingComboBox( const QString& saveName, QTextCodec** ppVarCodec,
+                   QWidget* pParent, OptionDialog* pOD )
+   : QComboBox( pParent ), OptionItem( pOD, saveName )
+   {
+      m_ppVarCodec = ppVarCodec;
+      insertCodec( i18n("Unicode, 8 bit"),  QTextCodec::codecForName("UTF-8") );
+      insertCodec( i18n("Unicode"), QTextCodec::codecForName("iso-10646-UCS-2") );
+      insertCodec( i18n("Latin1"), QTextCodec::codecForName("iso 8859-1") );
+
+      // First sort codec names:
+      std::map<QString, QTextCodec*> names;
+      int i;
+      for(i=0;;++i)
+      {
+         QTextCodec* c = QTextCodec::codecForIndex(i);
+         if ( c==0 ) break;
+         else  names[QString(c->name()).upper()]=c;
+      }
+
+      std::map<QString, QTextCodec*>::iterator it;
+      for(it=names.begin();it!=names.end();++it)
+      {
+         insertCodec( "", it->second );
+      }
+
+      QToolTip::add( this, i18n(
+         "Change this if non-ASCII characters are not displayed correctly."
+         ));
+   }
+   void insertCodec( const QString& visibleCodecName, QTextCodec* c )
+   {
+      if (c!=0)
+      {
+         for( unsigned int i=0; i<m_codecVec.size(); ++i )
+         {
+            if ( c==m_codecVec[i] )
+               return;  // don't insert any codec twice
+         }
+         insertItem( visibleCodecName.isEmpty() ? QString(c->name()) : visibleCodecName+" ("+c->name()+")", m_codecVec.size() );
+         m_codecVec.push_back( c );
+      }
+   }
+   void setToDefault()
+   { 
+      setCurrentItem( 0 ); 
+      if (m_ppVarCodec!=0){ *m_ppVarCodec=m_codecVec[0]; } 
+   }
+   void setToCurrent()
+   {
+      if (m_ppVarCodec!=0)
+      {
+         for(unsigned int i=0; i<m_codecVec.size(); ++i)
+         {
+            if ( *m_ppVarCodec==m_codecVec[i] )
+            {
+               setCurrentItem( i );
+               break;
+            }
+         }
+      }
+   }
+   void apply()
+   {
+      if (m_ppVarCodec!=0){ *m_ppVarCodec = m_codecVec[ currentItem() ]; }
+   }
+   void write(KConfig* config)
+   {
+      if (m_ppVarCodec!=0) config->writeEntry(m_saveName, (*m_ppVarCodec)->name() );
+   }
+   void read (KConfig* config)
+   {
+      QString codecName = config->readEntry( m_saveName, m_codecVec[ currentItem() ]->name() );
+      for(unsigned int i=0; i<m_codecVec.size(); ++i)
+      {
+         if ( codecName == m_codecVec[i]->name() )
+         {
+            setCurrentItem( i );
+            if (m_ppVarCodec!=0) *m_ppVarCodec = m_codecVec[i];
+            break;
+         }
+      }
+   }
+};
+
+
 OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *name )
   :KDialogBase( IconList, i18n("Configure"), Help|Default|Apply|Ok|Cancel,
                 Ok, parent, name, true /*modal*/, true )
 {
-  setHelp( "kdiff3/index.html", QString::null );
+   setHelp( "kdiff3/index.html", QString::null );
 
-  setupFontPage();
-  setupColorPage();
-  setupEditPage();
-  setupDiffPage();
-  setupOtherOptions();
-  if (bShowDirMergeSettings)
-     setupDirectoryMergePage();
-     
-#ifdef KREPLACEMENTS_H   
-  setupRegionalPage();
-#endif
+   setupFontPage();
+   setupColorPage();
+   setupEditPage();
+   setupDiffPage();
+   setupOtherOptions();
+   if (bShowDirMergeSettings)
+      setupDirectoryMergePage();
 
-  //setupKeysPage();
+   setupRegionalPage();
 
-  // Initialize all values in the dialog
-  resetToDefaults();
-  slotApply();
+   //setupKeysPage();
+
+   // Initialize all values in the dialog
+   resetToDefaults();
+   slotApply();
 }
 
 OptionDialog::~OptionDialog( void )
@@ -433,7 +521,7 @@ void OptionDialog::setupColorPage( void )
 
 void OptionDialog::setupEditPage( void )
 {
-   QFrame *page = addPage( i18n("Editor"), i18n("Editor Behaviour"),
+   QFrame *page = addPage( i18n("Editor"), i18n("Editor Behavior"),
                            BarIcon("edit", KIcon::SizeMedium ) );
    QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
 
@@ -471,7 +559,7 @@ void OptionDialog::setupEditPage( void )
       ));
    ++line;
    
-   label = new QLabel( i18n("Line End Style:"), page );
+   label = new QLabel( i18n("Line end style:"), page );
    gbox->addWidget( label, line, 0 );
    #ifdef _WIN32
    int defaultLineEndStyle = eLineEndDos;
@@ -483,18 +571,11 @@ void OptionDialog::setupEditPage( void )
    pLineEndStyle->insertItem( "Unix", eLineEndUnix );
    pLineEndStyle->insertItem( "Dos/Windows", eLineEndDos );
    QToolTip::add( label, i18n(
-      "Sets the line endings for when a edited file is saved.\n"
-      "DOS/Windows: CR+LF; Unix: LF; with CR=0D, LF=0A")
+      "Sets the line endings for when an edited file is saved.\n"
+      "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A")
       );
    ++line;
       
-   OptionCheckBox* pStringEncoding = new OptionCheckBox( i18n("Use locale encoding"), true, "LocaleEncoding", &m_bStringEncoding, page, this );
-   gbox->addMultiCellWidget( pStringEncoding, line, line, 0, 1 );
-   QToolTip::add( pStringEncoding, i18n(
-      "Change this if non-ASCII characters are not displayed correctly."
-      ));
-   ++line;
-
    topLayout->addStretch(10);
 }
 
@@ -527,7 +608,7 @@ void OptionDialog::setupDiffPage( void )
       );
    ++line;
 
-   OptionCheckBox* pIgnoreComments = new OptionCheckBox( i18n("Ignore C/C++ Comments"), false, "IgnoreComments", &m_bIgnoreComments, page, this );
+   OptionCheckBox* pIgnoreComments = new OptionCheckBox( i18n("Ignore C/C++ comments"), false, "IgnoreComments", &m_bIgnoreComments, page, this );
    gbox->addMultiCellWidget( pIgnoreComments, line, line, 0, 1 );
    QToolTip::add( pIgnoreComments, i18n( "Treat C/C++ comments like white space.")
       );
@@ -576,7 +657,7 @@ void OptionDialog::setupDiffPage( void )
    gbox->addWidget( label, line, 0 );
    OptionComboBox* pWhiteSpace2FileMergeDefault = new OptionComboBox( 0, "WhiteSpace2FileMergeDefault", &m_whiteSpace2FileMergeDefault, page, this );
    gbox->addWidget( pWhiteSpace2FileMergeDefault, line, 1 );
-   pWhiteSpace2FileMergeDefault->insertItem( i18n("Manual choice"), 0 );
+   pWhiteSpace2FileMergeDefault->insertItem( i18n("Manual Choice"), 0 );
    pWhiteSpace2FileMergeDefault->insertItem( "A", 1 );
    pWhiteSpace2FileMergeDefault->insertItem( "B", 2 );
    QToolTip::add( label, i18n(
@@ -589,7 +670,7 @@ void OptionDialog::setupDiffPage( void )
    gbox->addWidget( label, line, 0 );
    OptionComboBox* pWhiteSpace3FileMergeDefault = new OptionComboBox( 0, "WhiteSpace3FileMergeDefault", &m_whiteSpace3FileMergeDefault, page, this );
    gbox->addWidget( pWhiteSpace3FileMergeDefault, line, 1 );
-   pWhiteSpace3FileMergeDefault->insertItem( i18n("Manual choice"), 0 );
+   pWhiteSpace3FileMergeDefault->insertItem( i18n("Manual Choice"), 0 );
    pWhiteSpace3FileMergeDefault->insertItem( "A", 1 );
    pWhiteSpace3FileMergeDefault->insertItem( "B", 2 );
    pWhiteSpace3FileMergeDefault->insertItem( "C", 3 );
@@ -692,10 +773,10 @@ void OptionDialog::setupDirectoryMergePage( void )
    gbox->addMultiCellWidget( pBG, line, line, 0, 1 );
    ++line;
    
-   OptionRadioButton* pBinaryComparison = new OptionRadioButton( i18n("Binary Comparison"), true, "BinaryComparison", &m_bDmBinaryComparison, pBG, this );
+   OptionRadioButton* pBinaryComparison = new OptionRadioButton( i18n("Binary comparison"), true, "BinaryComparison", &m_bDmBinaryComparison, pBG, this );
    QToolTip::add( pBinaryComparison, i18n("Binary comparison of each file. (Default)") );
    
-   OptionRadioButton* pFullAnalysis = new OptionRadioButton( i18n("Full Analysis"), false, "FullAnalysis", &m_bDmFullAnalysis, pBG, this );
+   OptionRadioButton* pFullAnalysis = new OptionRadioButton( i18n("Full analysis"), false, "FullAnalysis", &m_bDmFullAnalysis, pBG, this );
    QToolTip::add( pFullAnalysis, i18n("Do a full analysis and show statistics information in extra columns.\n"
                                       "(Slower than a binary comparison, much slower for binary files.)") );
    
@@ -714,6 +795,16 @@ void OptionDialog::setupDirectoryMergePage( void )
                   "Offers to store files in both directories so that\n"
                   "both directories are the same afterwards.\n"
                   "Works only when comparing two directories without specifying a destination."  ) );
+   ++line;
+
+   // Allow white-space only differences to be considered equal
+   OptionCheckBox* pWhiteSpaceDiffsEqual = new OptionCheckBox( i18n("White space differences considered equal"), false,"WhiteSpaceEqual", &m_bDmWhiteSpaceEqual, page, this );
+   gbox->addMultiCellWidget( pWhiteSpaceDiffsEqual, line, line, 0, 1 );
+   QToolTip::add( pWhiteSpaceDiffsEqual, i18n(
+                  "If files differ only by white space consider them equal.\n"
+                  "This is only active when full analysis is chosen."  ) );
+   connect(pFullAnalysis, SIGNAL(toggled(bool)), pWhiteSpaceDiffsEqual, SLOT(setEnabled(bool)));
+   pWhiteSpaceDiffsEqual->setEnabled(false);
    ++line;
 
    OptionCheckBox* pCopyNewer = new OptionCheckBox( i18n("Copy newer instead of merging (unsafe)"), false, "CopyNewer", &m_bDmCopyNewer, page, this );
@@ -754,6 +845,16 @@ static void insertCodecs(OptionComboBox* p)
 
 void OptionDialog::setupRegionalPage( void )
 {
+   QFrame *page = addPage( i18n("Regional Settings"), i18n("Regional Settings"),
+                           BarIcon("locale"/*"charset"*/, KIcon::SizeMedium ) );
+   QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+
+   QGridLayout *gbox = new QGridLayout( 3, 2 );
+   topLayout->addLayout( gbox );
+   int line=0;
+
+   QLabel* label;
+
 #ifdef KREPLACEMENTS_H   
 
 static char* countryMap[]={
@@ -836,15 +937,6 @@ static char* countryMap[]={
 "zu Zulu"
 };
 
-   QFrame *page = addPage( i18n("Regional Settings"), i18n("Regional Settings"),
-                           BarIcon("locale"/*"charset"*/, KIcon::SizeMedium ) );
-   QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
-
-   QGridLayout *gbox = new QGridLayout( 3, 2 );
-   topLayout->addLayout( gbox );
-   int line=0;
-
-   QLabel* label;
    label = new QLabel( i18n("Language (restart required)"), page );
    gbox->addWidget( label, line, 0 );
    OptionComboBox* pLanguage = new OptionComboBox( 0, "Language", &m_language, page, this );
@@ -893,10 +985,81 @@ static char* countryMap[]={
       );
    ++line;
 */      
-   topLayout->addStretch(10);
 #endif
+
+   m_pSameEncoding = new OptionCheckBox( i18n("Use the same encoding for everything:"), true, "SameEncoding", &m_bSameEncoding, page, this );
+   gbox->addMultiCellWidget( m_pSameEncoding, line, line, 0, 1 );
+   QToolTip::add( m_pSameEncoding, i18n(
+                  "Enable this allows to change all encodings by changing the first only.\n"
+                  "Disable this if different individual settings are needed."
+                  ) );
+   ++line;
+
+   label = new QLabel( i18n("Note: Local Encoding is ") + QTextCodec::codecForLocale()->name(), page );
+   gbox->addWidget( label, line, 0 );
+   ++line;
+
+   label = new QLabel( i18n("File Encoding for A:"), page );
+   gbox->addWidget( label, line, 0 );
+   m_pEncodingAComboBox = new OptionEncodingComboBox( "EncodingForA", &m_pEncodingA, page, this );
+   gbox->addWidget( m_pEncodingAComboBox, line, 1 );
+   ++line;
+   label = new QLabel( i18n("File Encoding for B:"), page );
+   gbox->addWidget( label, line, 0 );
+   m_pEncodingBComboBox = new OptionEncodingComboBox( "EncodingForB", &m_pEncodingB, page, this );
+   gbox->addWidget( m_pEncodingBComboBox, line, 1 );
+   ++line;
+   label = new QLabel( i18n("File Encoding for C:"), page );
+   gbox->addWidget( label, line, 0 );
+   m_pEncodingCComboBox = new OptionEncodingComboBox( "EncodingForC", &m_pEncodingC, page, this );
+   gbox->addWidget( m_pEncodingCComboBox, line, 1 );
+   ++line;
+   label = new QLabel( i18n("File Encoding for Merge Output and Saving:"), page );
+   gbox->addWidget( label, line, 0 );
+   m_pEncodingOutComboBox = new OptionEncodingComboBox( "EncodingForOutput", &m_pEncodingOut, page, this );
+   gbox->addWidget( m_pEncodingOutComboBox, line, 1 );
+   ++line;
+   label = new QLabel( i18n("File Encoding for Preprocessor Files:"), page );
+   gbox->addWidget( label, line, 0 );
+   m_pEncodingPPComboBox = new OptionEncodingComboBox( "EncodingForPP", &m_pEncodingPP, page, this );
+   gbox->addWidget( m_pEncodingPPComboBox, line, 1 );   
+   ++line;
+
+   connect(m_pSameEncoding, SIGNAL(toggled(bool)), this, SLOT(slotEncodingChanged()));
+   connect(m_pEncodingAComboBox, SIGNAL(activated(int)), this, SLOT(slotEncodingChanged()));
+
+   OptionCheckBox* pRightToLeftLanguage = new OptionCheckBox( i18n("Right To Left Language"), false, "RightToLeftLanguage", &m_bRightToLeftLanguage, page, this );
+   gbox->addMultiCellWidget( pRightToLeftLanguage, line, line, 0, 1 );
+   QToolTip::add( pRightToLeftLanguage, i18n(
+                 "Some languages are read from right to left.\n"
+                 "This setting will change the viewer and editor accordingly."));
+   ++line;   
+
+
+   topLayout->addStretch(10);
 }
 
+void OptionDialog::slotEncodingChanged()
+{
+   if ( m_pSameEncoding->isChecked() )
+   {
+      m_pEncodingBComboBox->setEnabled( false );
+      m_pEncodingBComboBox->setCurrentItem( m_pEncodingAComboBox->currentItem() );
+      m_pEncodingCComboBox->setEnabled( false );
+      m_pEncodingCComboBox->setCurrentItem( m_pEncodingAComboBox->currentItem() );
+      m_pEncodingOutComboBox->setEnabled( false );
+      m_pEncodingOutComboBox->setCurrentItem( m_pEncodingAComboBox->currentItem() );
+      m_pEncodingPPComboBox->setEnabled( false );
+      m_pEncodingPPComboBox->setCurrentItem( m_pEncodingAComboBox->currentItem() );
+   }
+   else
+   {
+      m_pEncodingBComboBox->setEnabled( true );
+      m_pEncodingCComboBox->setEnabled( true );
+      m_pEncodingOutComboBox->setEnabled( true );
+      m_pEncodingPPComboBox->setEnabled( true );
+   }
+}
 
 void OptionDialog::setupKeysPage( void )
 {
@@ -972,6 +1135,7 @@ void OptionDialog::resetToDefaults()
 #else
    m_fontChooser->setFont( KGlobalSettings::fixedFont(), true /*only fixed*/ );
 #endif
+   slotEncodingChanged();
 }
 
 /** Initialise the widgets using the values in the public varibles. */
@@ -984,6 +1148,7 @@ void OptionDialog::setState()
    }
 
    m_fontChooser->setFont( m_font, true /*only fixed*/ );
+   slotEncodingChanged();
 }
 
 void OptionDialog::saveOptions( KConfig* config )
@@ -1039,7 +1204,5 @@ void OptionDialog::slotHelp( void )
 {
    KDialogBase::slotHelp();
 }
-
-
 
 #include "optiondialog.moc"
