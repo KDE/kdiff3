@@ -443,7 +443,7 @@ bool FileAccess::removeDir( const QString& dirName )
 bool FileAccess::symLink( const QString& linkTarget, const QString& linkLocation )
 {
 #ifdef _WIN32
-  return false;
+   return false;
 #else
    return 0==::symlink( linkTarget.ascii(), linkLocation.ascii() );
    //FileAccessJobHandler fh(0);
@@ -1485,11 +1485,14 @@ void ProgressDialog::start()
 #include <qtimer.h>
 void ProgressDialog::show()
 {
+   if ( !isVisible() )
+   {
 #if QT_VERSION==230
-   QWidget::show();
+      QWidget::show();
 #else
-   QDialog::show();
+      QDialog::show();
 #endif
+   }
 }
 
 void ProgressDialog::hide()
