@@ -14,6 +14,8 @@
 !endif
 !include "MUI.nsh"
 
+
+
 ;--------------------------------
 ;Configuration
     InstallDir "$PROGRAMFILES\KDiff3"
@@ -157,7 +159,9 @@ SectionIn 2 RO
     WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\${MUI_PRODUCT}" "" "$INSTDIR"
     WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}" "DisplayName" "${MUI_PRODUCT} (remove only)"
     WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}" "UninstallString" '"$INSTDIR\uninst.exe"'
+  DetailPrint "Writing files"
     File "kdiff3.exe"
+    File "..\binaries\windows\diff.exe"
     File "..\COPYING"
     File "${WINDOWS_DIR}\system32\msvcp70.dll"
     File "${WINDOWS_DIR}\system32\msvcr70.dll"
@@ -166,7 +170,7 @@ SectionIn 2 RO
 
   !insertmacro MUI_STARTMENU_WRITE_BEGIN
     
-    ;Create shortcuts
+    DetailPrint "Creating shortcuts"
     CreateDirectory "$SMPROGRAMS\${MUI_STARTMENUPAGE_VARIABLE}"
     CreateShortCut "$SMPROGRAMS\${MUI_STARTMENUPAGE_VARIABLE}\KDiff3.lnk" "$INSTDIR\kdiff3.exe"
     CreateShortCut "$SMPROGRAMS\${MUI_STARTMENUPAGE_VARIABLE}\Uninstal.lnk" "$INSTDIR\uninst.exe"
@@ -180,16 +184,18 @@ SectionIn 2 RO
     
   ;Store install folder
   WriteRegStr HKCU "Software\${MUI_PRODUCT}" "" $INSTDIR
-  
+    CreateShortCut "$QUICKLAUNCH\KDiff3.lnk" "$INSTDIR\kdiff3.exe"
+     
 SectionEnd
  
 Section "Documentation"
 
+    DetailPrint "Writing the documentation"
     SetOutPath "$INSTDIR"
     File /r tmp\kdiff3.sourceforge.net\doc
     SetOutPath "$INSTDIR"
     CreateShortCut "$SMPROGRAMS\${MUI_STARTMENUPAGE_VARIABLE}\Documentation.lnk" "$INSTDIR\doc\index.html"
-    
+    WriteRegStr HKCR "Application\kdiff3.exe\shell\open\command" "" '"$INSTDIR\kdiff3.exe" "%1"'    
 SectionEnd
 
 SubSection "Integration"
@@ -199,6 +205,12 @@ Section "WinCVS"
   WriteRegStr HKCU "Software\WinCvs\wincvs\CVS settings" "P_Extdiff" '"$INSTDIR\kdiff3.exe"'
   WriteRegBin HKCU "Software\WinCvs\wincvs\CVS settings" "P_DiffUseExtDiff" 01
 
+SectionEnd 
+Section "Explorer"
+  DetailPrint "Integration to Explorer"
+  WriteRegStr HKCR "Directory\shell}\KDiff3" "" '&KDiff3'
+  WriteRegStr HKCR "Directory\shell\KDiff3\command" "" '"$INSTDIR\kdiff3.exe" "%1"'
+    CreateShortCut "$SMPROGRAMS\..\..\SendTo\KDiff3.lnk" '"$INSTDIR\kdiff3.exe"'
 SectionEnd 
 SubSectionEnd
  
@@ -250,14 +262,16 @@ Section "Uninstall"
 
   RMDir "$INSTDIR"
   Delete "$INSTDIR\uninst.exe"
-DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}"
-DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Classes\oldb_auto_file\shell\open\command" 
-DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Classes\osio_auto_file\shell\open\command" 
-DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\FriSebSoftware\KDiff3" 
-DeleteRegKey HKEY_CLASSES_ROOT  ".oldb" 
-DeleteRegKey HKEY_CLASSES_ROOT  ".osio" 
-RMDir /r "$INSTDIR"
-!insertmacro MUI_UNFINISHHEADER
+    DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}"
+
+  Delete "$QUICKLAUNCH\KDiff3.lnk"
+    RMDir /r "$INSTDIR"
+  DetailPrint "Integration to Explorer"
+  DeleteRegKey HKCR "Directory\shell\KDiff3\command"
+  DeleteRegKey HKCR "Directory\shell\KDiff3"
+  Delete "$SMPROGRAMS\..\..\SendTo\KDiff3.lnk"
+
+    !insertmacro MUI_UNFINISHHEADER
 
 SectionEnd
 
