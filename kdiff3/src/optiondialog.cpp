@@ -20,9 +20,11 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.2  2003/10/11 13:59:39  joachim99
+ * Use Courier New as default font under WIN32
+ *
  * Revision 1.1  2003/10/06 18:38:48  joachim99
  * KDiff3 version 0.9.70
- *                                                                   *
  ***************************************************************************/
 
 #include <qcheckbox.h>
@@ -630,8 +632,12 @@ void OptionDialog::resetToDefaults()
       (*i)->setToDefault();
    }
 
+#ifdef _WIN32
+   m_fontChooser->setFont( QFont("Courier New", 10 ), true /*only fixed*/ );
+#else
    m_fontChooser->setFont( QFont("Courier", 10 ), true /*only fixed*/ );
-    
+#endif
+
    m_bAutoAdvance = false;
    m_bShowWhiteSpace = true;
    m_bShowLineNumbers = false;
