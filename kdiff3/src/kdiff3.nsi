@@ -25,7 +25,11 @@
 
 
   ;General
+!ifndef DEBUG
   OutFile "KDiff3Setup_${MUI_VERSION}.exe"
+!else
+  OutFile "KDiff3Setup_${MUI_VERSION}_debug.exe"
+!endif
   setCompressor bzip2
 
   
