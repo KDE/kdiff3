@@ -1,0 +1,49 @@
+README for the Documentation
+============================
+Author: Joachim Eibl, 2004-02-22
+
+The following text contains some info about how the docs are created.
+It helps me remember certain details. Most users probably aren't 
+interested in these things.
+
+Each directory contains the documentation for a different translation.
+The textual information is in the index.docbook of every subdirectory.
+
+I wrote the English version in en/index.docbook. The other translations
+were done by the KDE-Internationalization-Team. They are doing a great
+job!
+
+
+The command meinproc (which is part of KDE) can be used to convert this 
+file into HTML.
+
+meinproc index.docbook
+
+During normal installation on KDE a compressed file is generated.
+
+meinproc --check --cache index.cache.bz2 index.docbook
+
+
+As a service for non-KDE-users the en-directory also contains the 
+HTML-version of the English documentation.
+
+After running meinproc the HTML-files contain some references to files 
+in help:/common/ which contains stylesheets and KDE-graphics which make
+the result look much prettier. Because on non-KDE-systems this is not 
+available, I placed a copy of these files in doc/en/common. 
+To correct the references, I run the following command, which removes 
+the "help:/"-part of the references, and only the "common/"-part remains.
+
+for i in *.html; do sed -i "s/help:\///g" $i; done
+
+(sed-option "-i" means in-place, "s/orig/repl/" is the replacement-command,
+"g" replaces every occurance in the line, not only the first.)
+
+The screenshots were made with the English KDE-version and therefore are
+placed in the en-directory. But since for the other translations no new
+screenshots were made yet, they only contain links to the English 
+screenshots. These links are created en-bloc with this command. (But
+first you must cd into each subdirectory.)
+
+for i in `ls ../en | grep png`; do ln -s ../en/$i $i; done
+
