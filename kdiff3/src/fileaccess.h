@@ -174,40 +174,51 @@ public:
 
    void setInformation( const QString& info, bool bRedrawUpdate=true );
    void setInformation( const QString& info, double dCurrent, bool bRedrawUpdate=true );
-   void step( bool bRedrawUpdate=true);
-   void setMaximum( int maximum );
-
-   void setSubInformation(const QString& info, double dSubCurrent, bool bRedrawUpdate=true );
-   void setSubCurrent( double dSubCurrent, bool bRedrawUpdate=true );
+   void setCurrent( double dCurrent, bool bRedrawUpdate=true  );
+   void step( bool bRedrawUpdate=true );
+   void setMaxNofSteps( int dMaxNofSteps );
+   void push();
+   void pop(bool bRedrawUpdate=true);
 
    // The progressbar goes from 0 to 1 usually.
    // By supplying a subrange transformation the subCurrent-values
    // 0 to 1 will be transformed to dMin to dMax instead.
    // Requirement: 0 < dMin < dMax < 1
+   void setRangeTransformation( double dMin, double dMax );
    void setSubRangeTransformation( double dMin, double dMax );
 
    void exitEventLoop();
    void enterEventLoop( KIO::Job* pJob, const QString& jobInfo );
 
-   void start();
-
    bool wasCancelled();
    void show();
    void hide();
-
+   
    virtual void timerEvent(QTimerEvent*);
 private:
+
+   struct ProgressLevelData
+   {
+      ProgressLevelData()
+      {
+         m_dCurrent=0; m_maxNofSteps=1; m_dRangeMin=0; m_dRangeMax=1; 
+         m_dSubRangeMin = 0; m_dSubRangeMax = 1;
+      }
+      double m_dCurrent;
+      int    m_maxNofSteps;     // when step() is used.
+      double m_dRangeMax;
+      double m_dRangeMin;
+      double m_dSubRangeMax;
+      double m_dSubRangeMin;
+   };
+   std::list<ProgressLevelData> m_progressStack;
+
    KProgress* m_pProgressBar;
    KProgress* m_pSubProgressBar;
    QLabel* m_pInformation;
    QLabel* m_pSubInformation;
    QLabel* m_pSlowJobInfo;
    QPushButton* m_pAbortButton;
-   int m_maximum;
-   double m_dCurrent;
-   double m_dSubCurrent;
-   double m_dSubMin;
-   double m_dSubMax;
    void recalc(bool bRedrawUpdate);
    QTime m_t1;
    QTime m_t2;
@@ -219,6 +230,24 @@ protected:
 private slots:
    void delayedHide();
    void slotAbort();
+};
+
+// When using the ProgressProxy you need not take care of the push and pop, except when explicit.
+class ProgressProxy
+{
+public:
+   ProgressProxy();
+   ~ProgressProxy();
+   
+   void setInformation( const QString& info, bool bRedrawUpdate=true );
+   void setInformation( const QString& info, double dCurrent, bool bRedrawUpdate=true );
+   void setCurrent( double dCurrent, bool bRedrawUpdate=true  );
+   void step( bool bRedrawUpdate=true );
+   void setMaxNofSteps( int dMaxNofSteps );
+   bool wasCancelled();
+   void setRangeTransformation( double dMin, double dMax );
+   void setSubRangeTransformation( double dMin, double dMax );
+private:
 };
 
 extern ProgressDialog* g_pProgressDialog;

@@ -64,7 +64,7 @@ case $AUTOMAKE_STRING in
     echo "*** KDE requires automake 1.6.1 or newer"
     exit 1
     ;;
-  automake*1.6.* | automake*1.7* ) : ;;
+  automake*1.6.* | automake*1.7* | automake*1.8.* ) : ;;
   "" )
     echo "*** AUTOMAKE NOT FOUND!."
     echo "*** KDE requires automake 1.6.1 or newer"

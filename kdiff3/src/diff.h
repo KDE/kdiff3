@@ -62,11 +62,15 @@ struct Diff3Line
    bool bWhiteLineB;
    bool bWhiteLineC;
 
+   int linesNeededForDisplay; // Due to wordwrap
+   int sumLinesNeededForDisplay; // For fast conversion to m_diff3WrapLineVector
+   
    Diff3Line()
    {
       lineA=-1; lineB=-1; lineC=-1;
       bAEqC=false; bAEqB=false; bBEqC=false;
       pFineAB=0; pFineBC=0; pFineCA=0;
+      linesNeededForDisplay=1;
    }
 
    ~Diff3Line()
@@ -84,14 +88,31 @@ struct Diff3Line
    }
 };
 
+
 typedef std::list<Diff3Line> Diff3LineList;
-typedef std::vector<const Diff3Line*> Diff3LineVector;
+typedef std::vector<Diff3Line*> Diff3LineVector;
+
+class Diff3WrapLine
+{
+public:
+   Diff3Line* pD3L;
+   int diff3LineIndex;
+   int wrapLineOffset;
+   int wrapLineLength;   
+};
+
+typedef std::vector<Diff3WrapLine> Diff3WrapLineVector;
+
 
 class TotalDiffStatus
 {
 public:
+   TotalDiffStatus(){ reset(); }
    void reset() {bBinaryAEqC=false; bBinaryBEqC=false; bBinaryAEqB=false;
-                 bTextAEqC=false;   bTextBEqC=false;   bTextAEqB=false;}
+                 bTextAEqC=false;   bTextBEqC=false;   bTextAEqB=false;
+                 nofUnsolvedConflicts=0; nofSolvedConflicts=0;
+                 nofWhitespaceConflicts=0;                 
+                }
    bool bBinaryAEqC;
    bool bBinaryBEqC;
    bool bBinaryAEqB;
@@ -99,6 +120,10 @@ public:
    bool bTextAEqC;
    bool bTextBEqC;
    bool bTextAEqB;
+   
+   int nofUnsolvedConflicts;
+   int nofSolvedConflicts;
+   int nofWhitespaceConflicts;
 };
 
 void calcDiff3LineListUsingAB(
@@ -155,6 +180,7 @@ public:
    bool isText();   // is it pure text (vs. binary data)
    bool isFromBuffer();  // was it set via setData() (vs. setFileAccess() or setFilename())
    void setData( const QString& data );
+   bool isValid(); // Either no file is specified or reading was successful
    
    void readAndPreprocess();
    bool saveNormalDataAs( const QString& fileName );
@@ -192,7 +218,7 @@ private:
 void calcDiff3LineListTrim( Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC );
 void calcWhiteDiff3Lines(   Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC );
 
-void calcDiff3LineVector( const Diff3LineList& d3ll, Diff3LineVector& d3lv );
+void calcDiff3LineVector( Diff3LineList& d3ll, Diff3LineVector& d3lv );
 
 void debugLineCheck( Diff3LineList& d3ll, int size, int idx );
 
@@ -268,6 +294,7 @@ public:
 
    virtual void paintEvent( QPaintEvent*  );
    virtual void dragEnterEvent( QDragEnterEvent* e );
+   virtual void focusInEvent( QFocusEvent* e );
    //void setData( const char* pText);
 
    virtual void resizeEvent( QResizeEvent* );
@@ -279,17 +306,27 @@ public:
    int getNofLines();
    int getNofVisibleLines();
    int getNofVisibleColumns();
+   
+   int convertLineToDiff3LineIdx( int line );
+   int convertDiff3LineIdxToLine( int d3lIdx );
+   
+   void convertD3LCoordsToLineCoords( int d3LIdx, int d3LPos, int& line, int& pos );
+   void convertLineCoordsToD3LCoords( int line, int pos, int& d3LIdx, int& d3LPos );
 
+   void convertSelectionToD3LCoords();
+   
    bool findString( const QCString& s, int& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive );
-   void setSelection( int firstLine, int startPos, int lastLine, int endPos );
+   void setSelection( int firstLine, int startPos, int lastLine, int endPos, int& l, int& p );
 
    void setPaintingAllowed( bool bAllowPainting );
+   void recalcWordWrap( bool bWordWrap, int wrapLineVectorSize );
 signals:
    void resizeSignal( int nofVisibleColumns, int nofVisibleLines );
    void scroll( int deltaX, int deltaY );
    void newSelection();
    void selectionEnd();
    void setFastSelectorLine( int line );
+   void gotFocus();
 
 public slots:
    void setFirstLine( int line );
@@ -302,8 +339,10 @@ private:
    const LineData* m_pLineData;
    int m_size;
    QString m_filename;
+   bool m_bWordWrap;
 
    const Diff3LineVector* m_pDiff3LineVector;
+   Diff3WrapLineVector m_diff3WrapLineVector;
 
    OptionDialog* m_pOptionDialog;
    QColor m_cThis;
@@ -328,12 +367,14 @@ private:
       DiffList*& pFineDiff1, DiffList*& pFineDiff2,   // return values
       int& changed, int& changed2  );
 
-   QCString getString( int line );
+   QCString getString( int d3lIdx );
+   QCString getLineString( int line );
 
    void writeLine(
       QPainter& p, const LineData* pld,
       const DiffList* pLineDiff1, const DiffList* pLineDiff2, int line,
-      int whatChanged, int whatChanged2, int srcLineNr );
+      int whatChanged, int whatChanged2, int srcLineNr,
+      int wrapLineOffset, int wrapLineLength, bool bWrapLine );
 
    QStatusBar* m_pStatusBar;
 
@@ -344,7 +385,9 @@ private:
    virtual void timerEvent(QTimerEvent*);
    bool m_bMyUpdate;
    void myUpdate(int afterMilliSecs );
-
+   
+   void showStatusLine( int line );
+   
    QRect m_invalidRect;
 };
 
@@ -359,6 +402,10 @@ public:
    void init( Diff3LineList* pDiff3LineList, bool bTripleDiff );
    void setRange( int firstLine, int pageHeight );
    void setPaintingAllowed( bool bAllowPainting );
+   
+   enum e_OverviewMode { eOMNormal, eOMAvsB, eOMAvsC, eOMBvsC };
+   void setOverviewMode( e_OverviewMode eOverviewMode );
+   e_OverviewMode getOverviewMode();
 
 public slots:
    void setFirstLine(int firstLine);
@@ -373,10 +420,13 @@ private:
    int m_pageHeight;
    QPixmap m_pixmap;
    bool m_bPaintingAllowed;
+   e_OverviewMode m_eOverviewMode;
+   int m_nofLines;
 
    virtual void paintEvent( QPaintEvent* e );
    virtual void mousePressEvent( QMouseEvent* e );
    virtual void mouseMoveEvent( QMouseEvent* e );
+   void drawColumn( QPainter& p, e_OverviewMode eOverviewMode, int x, int w, int h, int nofLines );
 };
 
 
@@ -415,7 +465,8 @@ class MergeResultWindow : public QWidget
 public:
    MergeResultWindow(
       QWidget* pParent,
-      OptionDialog* pOptionDialog
+      OptionDialog* pOptionDialog,
+      QStatusBar* pStatusBar
       );
 
    void init(
@@ -423,7 +474,7 @@ public:
       const LineData* pLineDataB,
       const LineData* pLineDataC,
       const Diff3LineList* pDiff3LineList,
-      const TotalDiffStatus* pTotalDiffStatus,
+      TotalDiffStatus* pTotalDiffStatus,
       QString fileName
       );
 
@@ -436,9 +487,6 @@ public:
    int getNofLines();
    int getNofVisibleColumns();
    int getNofVisibleLines();
-   virtual void resizeEvent( QResizeEvent* e );
-   virtual void keyPressEvent( QKeyEvent* e );
-   virtual void wheelEvent( QWheelEvent* e );
    QString getSelection();
    void resetSelection();
    void showNrOfConflicts();
@@ -467,12 +515,13 @@ public slots:
    void slotUnsolve();
    void slotSetFastSelectorLine(int);
    void setPaintingAllowed(bool);
+   void updateSourceMask();
 
 signals:
    void scroll( int deltaX, int deltaY );
    void modified();
    void setFastSelectorRange( int line1, int nofLines );
-   void sourceMask( int srcMask, int enabledMask );
+   void sourceMask( int srcMask, int enabledMask );   
    void resizeSignal();
    void selectionEnd();
    void newSelection();
@@ -490,7 +539,7 @@ private:
    const LineData* m_pldC;
 
    const Diff3LineList* m_pDiff3LineList;
-   const TotalDiffStatus* m_pTotalDiffStatus;
+   TotalDiffStatus* m_pTotalDiffStatus;
 
    bool m_bPaintingAllowed;
 
@@ -608,6 +657,10 @@ private:
    virtual void mouseDoubleClickEvent ( QMouseEvent* e );
    virtual void mouseReleaseEvent ( QMouseEvent * );
    virtual void mouseMoveEvent ( QMouseEvent * );
+   virtual void resizeEvent( QResizeEvent* e );
+   virtual void keyPressEvent( QKeyEvent* e );
+   virtual void wheelEvent( QWheelEvent* e );
+   virtual void focusInEvent( QFocusEvent* e );
 
    QPixmap m_pixmap;
    int m_firstLine;
@@ -628,14 +681,15 @@ private:
    int m_cursorOldXPos;
    bool m_bCursorOn; // blinking on and off each second
    QTimer m_cursorTimer;
-
+   QStatusBar* m_pStatusBar;
+   
    Selection m_selection;
 
    bool deleteSelection2( const char*& ps, int& stringLength, int& x, int& y,
                     MergeLineList::iterator& mlIt, MergeEditLineList::iterator& melIt );
 public slots:
    void deleteSelection();
-   void pasteClipboard();
+   void pasteClipboard(bool bFromSelection);
 private slots:
    void slotCursorUpdate();
 };
@@ -679,7 +733,7 @@ extern int g_bAutoSolve;
 
 // Cursor conversions that consider g_tabSize.
 int convertToPosInText( const char* p, int size, int posOnScreen );
-int convertToPosOnScreen( const char* p, int posInText );
+int convertToPosOnScreen( const QString& p, int posInText );
 void calcTokenPos( const char* p, int size, int posOnScreen, int& pos1, int& pos2 );
 #endif
 

@@ -1,3 +1,60 @@
+Version 0.9.86 - 2004/06/14
+===========================
+- Double click on any file in directory merge would close the directory merge window. (Regression in 0.9.85)
+
+Version 0.9.85 - 2004/06/14
+===========================
+- When solving a conflict KDiff3 reports the number of remaining unsolved conflicts in the status bar.
+Bugfixes:
+- Fix for MergeResultWindow-contextmenu: All items were disabled always. (new in 0.9.84)
+- Fix for problem when opening files specified relative to current directory. (new in 0.9.84, qt-only-version)
+- Fix for compilation with older gcc (2.9x)
+- Several Word-wrap problems fixed: 
+     - Find string with word wrap active didn't work if found text was not in first wrap-line.
+     - overview-position was not updated when toggling word wrap
+     - horizontal scrollbar was not updated when toggling word wrap
+     - current selection was lost when toggling word wrap
+     - selecting a conflict in the diff-text-window didn't work right with word wrap.
+- Qt-only: Bold attribute for fonts was not persistent
+- Qt-only: Toolbar position was not persistent
+- Qt-only: Language-choice shows also the full language name.
+- Cursor and windows-boundary-lines were always black instead of having the foreground color
+- Starting KDiff3 with two not existing files showed a dialog saying that files are binary equal.
+- Errors while starting a directory comparison now also reopens the open-dialog.
+- Speedup during directory comparison by avoiding unnecessary redraws. (These always creep in again :-()
+- On KDE: When resetting to default options (or first start) now the default KDE-fixed font will be used.
+- Mergeresultwindow: Improved behaviour after automatic merge operation.
+
+Version 0.9.84 - 2004/05/29
+============================
+New Features:
+- Word Wrap for DiffTextWindow
+- Directory-Comparison: Option "Full Analysis" allows to show the number of solved vs. unsolved 
+  conflicts or deltas vs. whitespace-changes in the directory tree.
+- Diff-Menu for Diff-view specific entries
+- Docs now contain a new chapter for uses of preprocessor and line-matching-preprocessor. 
+- Added several credits which now are also visible in the Qt-only version.
+- The Qt-only version now also shows all command-line options. Under windows a dialog shows them.
+- Command line options -u and -L for Subversion-support.
+- Command line options --L1/2/3 for specifying alias names.
+- In the Qt-only-version the user-interface-language can be set via the regional-settings 
+  (only effective after a restart).
+- ProgressDialog redesign for recursive use.
+- Overview now allows to show the delta between two other files in triplediff-mode.
+- Option to ignore case which treats case-changes like white space (instead of conversion to upcase).
+Bugfixes:
+- Dir-Comp: When one file exists, but the other doesn't then instead the latest used other file was displayed.
+- Open dialog: When previously a file C was used, but should be empty now, it reappeared unbidden.
+- Several bugs for 64-bit systems fixed.
+- Fixed crash when one file ended with a newline and the other did not.
+- Windows: Case insensitive filename-pattern matching.
+- Corrected behaviour for files with size 0.
+- Fix for crash due to a race-condition (Patch by Eike Sauer)
+- Windows: Scrolling didn't work right when another window was in front.
+- Mergeresultwindow didn't show correct position when starting a second or later merge.
+- Fix for problem where sometimes the A/B/C-buttons were in wrong state.
+- Pasting from selection via the middle mousebutton.
+
 Version 0.9.83 - 2004/03/06
 ===========================
 - Reading directorys fixed for Win95/98

@@ -102,6 +102,7 @@ void DirectoryMergeWindow::fastFileComparison(
    FileAccess& fi1, FileAccess& fi2,
    bool& bEqual, bool& bError, QString& status )
 {
+   ProgressProxy pp;
    status = "";
    bEqual = false;
    bError = true;
@@ -176,16 +177,18 @@ void DirectoryMergeWindow::fastFileComparison(
       return;
    }
 
+   pp.setInformation( i18n("Comparing file ..."), 0, false );
 #if QT_VERSION==230
    typedef int t_FileSize;
 #else
    typedef QFile::Offset t_FileSize;
 #endif
-   t_FileSize size = file1.size();
+   t_FileSize fullSize = file1.size();
+   t_FileSize sizeLeft = fullSize;
 
-   while( size>0 )
+   while( sizeLeft>0 && ! pp.wasCancelled() )
    {
-      int len = min2( size, (t_FileSize)buf1.size() );
+      int len = min2( sizeLeft, (t_FileSize)buf1.size() );
       if( len != file1.readBlock( &buf1[0], len ) )
       {
          status = i18n("Error reading from %1").arg(fileName1);
@@ -203,7 +206,8 @@ void DirectoryMergeWindow::fastFileComparison(
          bError = false;
          return;
       }
-      size-=len;
+      sizeLeft-=len;
+      pp.setCurrent(double(fullSize-sizeLeft)/fullSize, false );
    }
 
    // If the program really arrives here, then the files are really equal.
@@ -221,6 +225,10 @@ static int s_BCol = 2;
 static int s_CCol = 3;
 static int s_OpCol = 4;
 static int s_OpStatusCol = 5;
+static int s_UnsolvedCol = 6;    // Nr of unsolved conflicts (for 3 input files)
+static int s_SolvedCol = 7;      // Nr of auto-solvable conflicts (for 3 input files)
+static int s_NonWhiteCol = 8;    // Nr of nonwhite deltas (for 2 input files)
+static int s_WhiteCol = 9;       // Nr of white deltas (for 2 input files)
 DirectoryMergeWindow::DirectoryMergeWindow( QWidget* pParent, OptionDialog* pOptions, KIconLoader* pIconLoader )
    : QListView( pParent )
 {
@@ -239,6 +247,7 @@ DirectoryMergeWindow::DirectoryMergeWindow( QWidget* pParent, OptionDialog* pOpt
    m_bSyncMode = false;
    m_pStatusInfo = new StatusInfo(0);
    m_pStatusInfo->hide();
+   m_bScanning = false;
    
    addColumn(i18n("Name"));
    addColumn("A");
@@ -246,6 +255,15 @@ DirectoryMergeWindow::DirectoryMergeWindow( QWidget* pParent, OptionDialog* pOpt
    addColumn("C");
    addColumn(i18n("Operation"));
    addColumn(i18n("Status"));
+   addColumn(i18n("Unsolved"));
+   addColumn(i18n("Solved"));
+   addColumn(i18n("Nonwhite"));
+   addColumn(i18n("White"));
+   
+   setColumnAlignment( s_UnsolvedCol, Qt::AlignRight );
+   setColumnAlignment( s_SolvedCol,   Qt::AlignRight );
+   setColumnAlignment( s_NonWhiteCol, Qt::AlignRight );
+   setColumnAlignment( s_WhiteCol,    Qt::AlignRight );
 }
 
 DirectoryMergeWindow::~DirectoryMergeWindow()
@@ -365,6 +383,19 @@ bool DirectoryMergeWindow::init
    bool bDirectoryMerge
    )
 {
+   if ( m_pOptions->m_bDmFullAnalysis )
+   {
+      // A full analysis uses the same ressources that a normal text-diff/merge uses. 
+      // So make sure that the user saves his data first.
+      bool bCanContinue=false;
+      checkIfCanContinue( &bCanContinue );
+      if ( !bCanContinue )
+         return false;
+   }
+   
+   show();
+
+   ProgressProxy pp;
    m_bFollowDirLinks = m_pOptions->m_bDmFollowDirLinks;
    m_bFollowFileLinks = m_pOptions->m_bDmFollowFileLinks;
    m_bSimulatedMergeStarted=false;
@@ -411,6 +442,9 @@ bool DirectoryMergeWindow::init
          i18n("Parameter Warning"));
       return false;
    }
+   
+   m_bScanning = true;
+   statusBarMessage(i18n("Scanning directories ..."));
 
    m_bSyncMode = m_pOptions->m_bDmSyncMode && !m_dirC.isValid() && !m_dirDest.isValid();
 
@@ -421,8 +455,6 @@ bool DirectoryMergeWindow::init
 
    QString origCurrentDirectory = QDir::currentDirPath();
 
-   g_pProgressDialog->start();
-
    m_fileMergeMap.clear();
    t_DirectoryList::iterator i;
 
@@ -430,13 +462,39 @@ bool DirectoryMergeWindow::init
    double nofScans = ( m_dirA.isValid() ? 1 : 0 )+( m_dirB.isValid() ? 1 : 0 )+( m_dirC.isValid() ? 1 : 0 );
    int currentScan = 0;
 
+   setColumnWidthMode(s_UnsolvedCol, QListView::Manual);
+   setColumnWidthMode(s_SolvedCol,   QListView::Manual);
+   setColumnWidthMode(s_WhiteCol,    QListView::Manual);
+   setColumnWidthMode(s_NonWhiteCol, QListView::Manual);
+   if ( !m_pOptions->m_bDmFullAnalysis )
+   {
+      setColumnWidth( s_WhiteCol,    0 );
+      setColumnWidth( s_NonWhiteCol, 0 );
+      setColumnWidth( s_UnsolvedCol, 0 );
+      setColumnWidth( s_SolvedCol,   0 );
+   }   
+   else if ( m_dirC.isValid() )
+   {
+      setColumnWidth(s_WhiteCol,    50 );
+      setColumnWidth(s_NonWhiteCol, 50 );
+      setColumnWidth(s_UnsolvedCol, 50 );
+      setColumnWidth(s_SolvedCol,   50 );
+   }
+   else
+   {
+      setColumnWidth(s_WhiteCol,    50 );
+      setColumnWidth(s_NonWhiteCol, 50 );
+      setColumnWidth(s_UnsolvedCol, 50 );
+      setColumnWidth(s_SolvedCol,    0 );
+   }
+   
    bool bListDirSuccessA = true;
    bool bListDirSuccessB = true;
    bool bListDirSuccessC = true;
    if ( m_dirA.isValid() )
    {
-      g_pProgressDialog->setInformation(i18n("Reading Directory A"));
-      g_pProgressDialog->setSubRangeTransformation(currentScan/nofScans, (currentScan+1)/nofScans);
+      pp.setInformation(i18n("Reading Directory A"));
+      pp.setSubRangeTransformation(currentScan/nofScans, (currentScan+1)/nofScans);
       ++currentScan;
 
       t_DirectoryList dirListA;
@@ -457,8 +515,8 @@ bool DirectoryMergeWindow::init
 
    if ( m_dirB.isValid() )
    {
-      g_pProgressDialog->setInformation(i18n("Reading Directory B"));
-      g_pProgressDialog->setSubRangeTransformation(currentScan/nofScans, (currentScan+1)/nofScans);
+      pp.setInformation(i18n("Reading Directory B"));
+      pp.setSubRangeTransformation(currentScan/nofScans, (currentScan+1)/nofScans);
       ++currentScan;
 
       t_DirectoryList dirListB;
@@ -479,8 +537,8 @@ bool DirectoryMergeWindow::init
    e_MergeOperation eDefaultMergeOp;
    if ( m_dirC.isValid() )
    {
-      g_pProgressDialog->setInformation(i18n("Reading Directory C"));
-      g_pProgressDialog->setSubRangeTransformation(currentScan/nofScans, (currentScan+1)/nofScans);
+      pp.setInformation(i18n("Reading Directory C"));
+      pp.setSubRangeTransformation(currentScan/nofScans, (currentScan+1)/nofScans);
       ++currentScan;
 
       t_DirectoryList dirListC;
@@ -516,8 +574,7 @@ bool DirectoryMergeWindow::init
 
    if ( bContinue )
    {
-      prepareListView();
-      g_pProgressDialog->hide();
+      prepareListView(pp);
 
       for( QListViewItem* p = firstChild();  p!=0; p = p->nextSibling() )
       {
@@ -527,7 +584,6 @@ bool DirectoryMergeWindow::init
    }
    else
    {
-      g_pProgressDialog->hide();
       setSelected( 0, true );
    }
 
@@ -544,6 +600,9 @@ bool DirectoryMergeWindow::init
       sizes[1]=total - sizes[0];
       pSplitter->setSizes( sizes );
    }
+   
+   m_bScanning = false;
+   statusBarMessage(i18n("Ready."));
 
    if ( bContinue )
    {
@@ -567,7 +626,7 @@ bool DirectoryMergeWindow::init
       KMessageBox::information( this, s );
       setSelected( firstChild(), true );
    }
-
+   
    return true;
 }
 
@@ -734,26 +793,52 @@ void DirectoryMergeWindow::compareFilesAndCalcAges( MergeFileInfos& mfi )
       dateMap[ mfi.m_fileInfoC.lastModified() ] = 2;
    }
 
-   bool bError;
-   QString eqStatus;
-   if( mfi.m_bExistsInA && mfi.m_bExistsInB )
+   if ( m_pOptions->m_bDmFullAnalysis )
    {
-      if( mfi.m_bDirA ) mfi.m_bEqualAB=true;
-      else fastFileComparison( mfi.m_fileInfoA, mfi.m_fileInfoB, mfi.m_bEqualAB, bError, eqStatus );
-   }
-   if( mfi.m_bExistsInA && mfi.m_bExistsInC )
-   {
-      if( mfi.m_bDirA ) mfi.m_bEqualAC=true;
-      else fastFileComparison( mfi.m_fileInfoA, mfi.m_fileInfoC, mfi.m_bEqualAC, bError, eqStatus );
-   }
-   if( mfi.m_bExistsInB && mfi.m_bExistsInC )
-   {
-      if (mfi.m_bEqualAB && mfi.m_bEqualAC)
-         mfi.m_bEqualBC = true;
+      if( mfi.m_bExistsInA && mfi.m_bDirA || mfi.m_bExistsInB && mfi.m_bDirB || mfi.m_bExistsInC && mfi.m_bDirC )
+      {
+         // If any input is a directory, don't start any comparison.
+         mfi.m_bEqualAB=mfi.m_bExistsInA && mfi.m_bExistsInB;
+         mfi.m_bEqualAC=mfi.m_bExistsInA && mfi.m_bExistsInC;
+         mfi.m_bEqualBC=mfi.m_bExistsInB && mfi.m_bExistsInC;
+      }
       else
       {
-         if( mfi.m_bDirB ) mfi.m_bEqualBC=true;
-         else fastFileComparison( mfi.m_fileInfoB, mfi.m_fileInfoC, mfi.m_bEqualBC, bError, eqStatus );
+         emit startDiffMerge(
+            mfi.m_bExistsInA ? mfi.m_fileInfoA.absFilePath() : QString(""),
+            mfi.m_bExistsInB ? mfi.m_fileInfoB.absFilePath() : QString(""),
+            mfi.m_bExistsInC ? mfi.m_fileInfoC.absFilePath() : QString(""),
+            "",
+            "","","",&mfi.m_totalDiffStatus
+            );
+         mfi.m_bEqualAB = mfi.m_totalDiffStatus.bBinaryAEqB;
+         mfi.m_bEqualBC = mfi.m_totalDiffStatus.bBinaryBEqC;
+         mfi.m_bEqualAC = mfi.m_totalDiffStatus.bBinaryAEqC;
+      }
+   }
+   else
+   {      
+      bool bError;
+      QString eqStatus;
+      if( mfi.m_bExistsInA && mfi.m_bExistsInB )
+      {
+         if( mfi.m_bDirA ) mfi.m_bEqualAB=true;
+         else fastFileComparison( mfi.m_fileInfoA, mfi.m_fileInfoB, mfi.m_bEqualAB, bError, eqStatus );
+      }
+      if( mfi.m_bExistsInA && mfi.m_bExistsInC )
+      {
+         if( mfi.m_bDirA ) mfi.m_bEqualAC=true;
+         else fastFileComparison( mfi.m_fileInfoA, mfi.m_fileInfoC, mfi.m_bEqualAC, bError, eqStatus );
+      }
+      if( mfi.m_bExistsInB && mfi.m_bExistsInC )
+      {
+         if (mfi.m_bEqualAB && mfi.m_bEqualAC)
+            mfi.m_bEqualBC = true;
+         else
+         {
+            if( mfi.m_bDirB ) mfi.m_bEqualBC=true;
+            else fastFileComparison( mfi.m_fileInfoB, mfi.m_fileInfoC, mfi.m_bEqualBC, bError, eqStatus );
+         }
       }
    }
 
@@ -928,7 +1013,7 @@ static QListViewItem* treeIterator( QListViewItem* p, bool bVisitChildren=true )
    return p;
 }
 
-void DirectoryMergeWindow::prepareListView()
+void DirectoryMergeWindow::prepareListView( ProgressProxy& pp )
 {
    static bool bFirstTime = true;
    if (bFirstTime)
@@ -968,10 +1053,10 @@ void DirectoryMergeWindow::prepareListView()
       // const QString& fileName = j->first;
       const QString& fileName = mfi.m_subPath;
 
-      g_pProgressDialog->setInformation(
+      pp.setInformation(
          i18n("Processing ") + QString::number(currentIdx) +" / "+ QString::number(nrOfFiles)
          +"\n" + fileName, double(currentIdx) / nrOfFiles, false );
-      if ( g_pProgressDialog->wasCancelled() ) break;
+      if ( pp.wasCancelled() ) break;
       ++currentIdx;
 
 
@@ -1317,18 +1402,51 @@ void DirectoryMergeWindow::onClick( QListViewItem* lvi, const QPoint& p, int c )
 #endif
 
 DirMergeItem::DirMergeItem( QListView* pParent, const QString& fileName, MergeFileInfos* pMFI )
-: QListViewItem( pParent, DIRSORT( fileName ), "","","", i18n("To do.") )
+: QListViewItem( pParent, DIRSORT( fileName ), "","","", i18n("To do."), "" )
 {
-   pMFI->m_pDMI = this;
-   m_pMFI = pMFI;
+   init(pMFI);
 }
 
 DirMergeItem::DirMergeItem( DirMergeItem* pParent, const QString& fileName, MergeFileInfos* pMFI )
-: QListViewItem( pParent, DIRSORT( fileName ), "","","", i18n("To do.") )
+: QListViewItem( pParent, DIRSORT( fileName ), "","","", i18n("To do."), "" )
+{
+   init(pMFI);
+}
+
+
+void DirMergeItem::init(MergeFileInfos* pMFI)
 {
    pMFI->m_pDMI = this;
    m_pMFI = pMFI;
+   TotalDiffStatus& tds = pMFI->m_totalDiffStatus;
+   if ( m_pMFI->m_bDirA || m_pMFI->m_bDirB || m_pMFI->m_bDirC )
+   {
+   }
+   else
+   {
+      setText( s_UnsolvedCol, QString::number( tds.nofUnsolvedConflicts ) );
+      setText( s_SolvedCol,   QString::number( tds.nofSolvedConflicts ) );
+      setText( s_NonWhiteCol, QString::number( tds.nofUnsolvedConflicts + tds.nofSolvedConflicts - tds.nofWhitespaceConflicts ) );
+      setText( s_WhiteCol,    QString::number( tds.nofWhitespaceConflicts ) );
+   }
 }
+
+int DirMergeItem::compare(QListViewItem *i, int col, bool ascending) const
+{
+   DirMergeItem* pDMI = static_cast<DirMergeItem*>(i);
+   bool bDir1 =  m_pMFI->m_bDirA || m_pMFI->m_bDirB || m_pMFI->m_bDirC;
+   bool bDir2 =  pDMI->m_pMFI->m_bDirA || pDMI->m_pMFI->m_bDirB || pDMI->m_pMFI->m_bDirC;
+   if ( m_pMFI==0 || pDMI->m_pMFI==0 || bDir1 == bDir2 )
+   {
+      if(col==s_UnsolvedCol || col==s_SolvedCol || col==s_NonWhiteCol || col==s_WhiteCol)
+         return key(col,ascending).toInt() > i->key(col,ascending).toInt() ? -1 : 1;
+      else
+         return QListViewItem::compare( i, col, ascending );
+   }
+   else
+      return bDir1 ? -1 : 1;
+}
+
 
 DirMergeItem::~DirMergeItem()
 {
@@ -1405,7 +1523,7 @@ void DirectoryMergeWindow::compareCurrentFile()
             mfi.m_bExistsInB ? mfi.m_fileInfoB.absFilePath() : QString(""),
             mfi.m_bExistsInC ? mfi.m_fileInfoC.absFilePath() : QString(""),
             "",
-            "","",""
+            "","","",0
             );
       }
    }
@@ -1657,7 +1775,7 @@ void DirectoryMergeWindow::mergeCurrentFile()
 
    if ( m_bRealMergeStarted )
    {
-      KMessageBox::sorry(this,i18n("This operation is currently not possible because dir merge currently runs."),i18n("Operation Not Possible"));
+      KMessageBox::sorry(this,i18n("This operation is currently not possible because directory merge is currently running."),i18n("Operation Not Possible"));
       return;
    }
 
@@ -1688,6 +1806,7 @@ void DirectoryMergeWindow::mergeCurrentFile()
 // When bVerbose is true then a messagebox will tell when the merge is complete.
 void DirectoryMergeWindow::mergeContinue(bool bStart, bool bVerbose)
 {
+   ProgressProxy pp;
    if ( m_mergeItemList.empty() )
       return;
 
@@ -1724,8 +1843,6 @@ void DirectoryMergeWindow::mergeContinue(bool bStart, bool bVerbose)
       else return;
       m_bError = false;
    }
-
-   g_pProgressDialog->start();
 
    bool bSuccess = true;
    bool bSingleFileMerge = false;
@@ -1824,7 +1941,7 @@ void DirectoryMergeWindow::mergeContinue(bool bStart, bool bVerbose)
             m_pStatusInfo->setCaption(i18n("Simulated merge complete: Check if you agree with the proposed operations."));
             m_pStatusInfo->show();
          }
-         g_pProgressDialog->hide();
+         //g_pProgressDialog->hide();
          m_mergeItemList.clear();
          m_bRealMergeStarted=false;
          return;
@@ -1832,11 +1949,11 @@ void DirectoryMergeWindow::mergeContinue(bool bStart, bool bVerbose)
 
       MergeFileInfos& mfi = *pCurrentItemForOperation->m_pMFI;
 
-      g_pProgressDialog->setInformation( mfi.m_subPath,
+      pp.setInformation( mfi.m_subPath,
          bSim ? double(nrOfCompletedSimItems)/nrOfItems : double(nrOfCompletedItems)/nrOfItems,
          false // bRedrawUpdate
          );
-      g_pProgressDialog->show();
+      //g_pProgressDialog->show();
 
       bSuccess = executeMergeOperation( mfi, bSingleFileMerge );  // Here the real operation happens.
 
@@ -1847,11 +1964,11 @@ void DirectoryMergeWindow::mergeContinue(bool bStart, bool bVerbose)
          bContinueWithCurrentItem = false;
       }
 
-      if( g_pProgressDialog->wasCancelled() )
+      if( pp.wasCancelled() )
          break;
    }  // end while
 
-   g_pProgressDialog->hide();
+   //g_pProgressDialog->hide();
 
    setCurrentItem( pCurrentItemForOperation );
    ensureItemVisible( pCurrentItemForOperation );
@@ -1982,7 +2099,7 @@ bool DirectoryMergeWindow::mergeFLD( const QString& nameA,const QString& nameB,c
    m_pStatusInfo->addText(i18n("manual merge( %1, %2, %3 -> %4)").arg(nameA).arg(nameB).arg(nameC).arg(nameDest));
    if ( m_bSimulatedMergeStarted )
    {
-      m_pStatusInfo->addText(i18n("     Note: After a manual merge the user should continue via F7.") );
+      m_pStatusInfo->addText(i18n("     Note: After a manual merge the user should continue by pressing F7.") );
       return true;
    }
 
@@ -1990,7 +2107,7 @@ bool DirectoryMergeWindow::mergeFLD( const QString& nameA,const QString& nameB,c
    (*m_currentItemForOperation)->setText( s_OpStatusCol, i18n("In progress...") );
    ensureItemVisible( *m_currentItemForOperation );
 
-   emit startDiffMerge( nameA, nameB, nameC, nameDest, "","","" );
+   emit startDiffMerge( nameA, nameB, nameC, nameDest, "","","",0 );
 
    return false;
 }
@@ -2171,6 +2288,15 @@ DirectoryMergeInfo::DirectoryMergeInfo( QWidget* pParent )
    m_pInfoList->addColumn(i18n("Last Modification"));
    m_pInfoList->addColumn(i18n("Link-Destination"));
    setMinimumSize( 100,100 );
+   
+   m_pInfoList->installEventFilter(this);
+}
+
+bool DirectoryMergeInfo::eventFilter(QObject*o, QEvent* e)
+{
+   if ( e->type()==QEvent::FocusIn && o==m_pInfoList )
+      emit gotFocus();
+   return false;
 }
 
 static void addListViewItem( QListView* pListView, const QString& dir,

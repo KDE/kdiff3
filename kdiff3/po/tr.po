@@ -1,38 +1,39 @@
-# translation of kdiff3.po to Svenska
+# translation of kdiff3.po to Türkçe
 # Copyright (C) 2003, 2004 Free Software Foundation, Inc.
-# Stefan Asserhäll <stefan.asserhall@comhem.se>, 2004.
+# Görkem Çetin <gorkem@kde.org>, 2003.
+# Engin ÇAĞATAY <engincagatay@yahoo.com>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "POT-Creation-Date: 2004-05-31 02:07+0200\n"
-"PO-Revision-Date: 2004-05-31 09:40+0200\n"
-"Last-Translator: Stefan Asserhäll <stefan.asserhall@comhem.se>\n"
-"Language-Team: Svenska <sv@li.org>\n"
+"PO-Revision-Date: 2004-04-08 09:49+0300\n"
+"Last-Translator: Engin ÇAĞATAY <engincagatay@yahoo.com>\n"
+"Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9\n"
+"X-Generator: KBabel 1.3\n"
 
 #: _translatorinfo.cpp:1
 msgid ""
 "_: NAME OF TRANSLATORS\n"
 "Your names"
-msgstr "Stefan Asserhäll"
+msgstr "Görkem ÇetinEngin ÇAĞATAY"
 
 #: _translatorinfo.cpp:3
 msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
-msgstr "stefan.asserhall@comhem.se"
+msgstr "gorkem@kde.org engincagatay@yahoo.com"
 
 #: diff.cpp:241
 msgid "Writing clipboard data to temp file failed."
-msgstr "Skrivning av klippbordsdata till tillfällig fil misslyckades."
+msgstr ""
 
 #: diff.cpp:245
 msgid "From Clipboard"
-msgstr "Från klippbord"
+msgstr "Panodan"
 
 #: diff.cpp:404
 msgid ""
@@ -42,11 +43,6 @@ msgid ""
 "\n"
 "The preprocessing command will be disabled now."
 msgstr ""
-"Preprocessing misslyckades möjligen. Kontrollera kommandot:\n"
-"\n"
-"  %1\n"
-"\n"
-"Preprocessingkommandot inaktiveras nu."
 
 #: diff.cpp:425
 msgid ""
@@ -56,136 +52,131 @@ msgid ""
 "\n"
 "The line-matching-preprocessing command will be disabled now."
 msgstr ""
-"Preprocessingen för radmatchning misslyckades möjligen. Kontrollera "
-"kommandot:\n"
-"\n"
-"  %1\n"
-"\n"
-"Preprocessingen för radmatchning inaktiveras nu."
 
 #: diff.cpp:1268 diff.cpp:1282
 msgid ""
 "Data loss error:\n"
 "If it is reproducable please contact the author.\n"
 msgstr ""
-"Dataförlustfel:\n"
-"Om det går att upprepa, kontakta upphovsmannen.\n"
+"Veri kaybı hatası:\n"
+"Bu durum tekrarlanabilir bir durumsa lütfen yazarla iletişim kurun.\n"
 
 #: diff.cpp:1270 diff.cpp:1284
 msgid "Severe Internal Error"
-msgstr "Allvarligt internt fel"
+msgstr "Ciddi Dahili Hata"
 
 #: difftextwindow.cpp:829
-#, c-format
+#, fuzzy, c-format
 msgid "Top line %1"
-msgstr "Övre rad %1"
+msgstr "Üst satır %1"
 
 #: difftextwindow.cpp:831
 msgid "End"
-msgstr "Slut"
+msgstr "Son"
 
 #: directorymergewindow.cpp:114
 msgid "Mix of links and normal files."
-msgstr "Blandning av länkar och normala filer."
+msgstr "Bağların ve normal dosyaların karışımı."
 
 #: directorymergewindow.cpp:121
 msgid "Link: "
-msgstr "Länk: "
+msgstr "Bağ: "
 
 #: directorymergewindow.cpp:129
 msgid "Size. "
-msgstr "Storlek: "
+msgstr "Boyut. "
 
 #: directorymergewindow.cpp:142
 msgid "Date & Size: "
-msgstr "Datum och storlek: "
+msgstr "Veri & Boyut: "
 
 #: directorymergewindow.cpp:151 directorymergewindow.cpp:157
 msgid "Creating temp copy of %1 failed."
-msgstr "Att skapa tillfällig kopia av %1 misslyckades."
+msgstr "%1 dosyasının geçici kopyasının oluşturulmasında hata oluştu."
 
 #: directorymergewindow.cpp:168 directorymergewindow.cpp:176
 msgid "Opening %1 failed."
-msgstr "Öppna %1 misslyckades."
+msgstr "%1 açılamadı."
 
 #: directorymergewindow.cpp:180
+#, fuzzy
 msgid "Comparing file ..."
-msgstr "Jämför fil..."
+msgstr "Dosya kaydediliyor..."
 
 #: directorymergewindow.cpp:194 directorymergewindow.cpp:200
 #, c-format
 msgid "Error reading from %1"
-msgstr "Fel vid läsning från %1"
+msgstr "%1 konumundan okunamıyor"
 
 #: directorymergewindow.cpp:252
 msgid "Name"
-msgstr "Namn"
+msgstr "İsim"
 
 #: directorymergewindow.cpp:256
 msgid "Operation"
-msgstr "Åtgärd"
+msgstr "İşlem"
 
 #: directorymergewindow.cpp:257
 msgid "Status"
-msgstr "Status"
+msgstr "Durum"
 
 #: directorymergewindow.cpp:258
 msgid "Unsolved"
-msgstr "Olöst"
+msgstr ""
 
 #: directorymergewindow.cpp:259
 msgid "Solved"
-msgstr "Löst"
+msgstr ""
 
 #: directorymergewindow.cpp:260
 msgid "Nonwhite"
-msgstr "Inte blank"
+msgstr ""
 
 #: directorymergewindow.cpp:261
 msgid "White"
-msgstr "Blank"
+msgstr ""
 
 #: directorymergewindow.cpp:289
 msgid ""
 "You are currently doing a directory merge. Are you sure, you want to abort "
 "the merge and rescan the directory?"
 msgstr ""
-"Du håller för närvarande på med att sammanfoga kataloger. Är du säker "
-"på att du vill avbryta den och avsöka katalogen igen?"
+"Şu anda bir dizin birleştirmesi yapıyorsunuz. Birleştirmeden çıkmak ve "
+"dizini yeniden taramak istediğinizden emin misiniz?"
 
 #: directorymergewindow.cpp:290 directorymergewindow.cpp:2404
 msgid "Rescan"
-msgstr "Avsök igen"
+msgstr "Yeniden Tara"
 
 #: directorymergewindow.cpp:290 kdiff3.cpp:525 pdiff.cpp:1151
 msgid "Continue Merging"
-msgstr "Fortsätt sammanfoga"
+msgstr "Birleştirmeye Devam Et"
 
 #: directorymergewindow.cpp:421
 msgid "Opening of directories failed:"
-msgstr "Öppna katalogerna misslyckades:"
+msgstr "Dizinler açılamadı:"
 
 #: directorymergewindow.cpp:424
 msgid ""
 "Dir A \"%1\" does not exist or is not a directory.\n"
 msgstr ""
-"Katalog A \"%1\" finns inte eller är inte en katalog.\n"
+"A Dizini \"%1\" mevcut değil ya da bu bir dizin değil.\n"
 
 #: directorymergewindow.cpp:427
 msgid ""
 "Dir B \"%1\" does not exist or is not a directory.\n"
 msgstr ""
-"Katalog B \"%1\" finns inte eller är inte en katalog.\n"
+"B Dizini \"%1\" mevcut değil ya da bu bir dizin değil.\n"
 
 #: directorymergewindow.cpp:430
 msgid ""
 "Dir C \"%1\" does not exist or is not a directory.\n"
 msgstr ""
-"Katalog C \"%1\" finns inte eller är inte en katalog.\n"
+"C Dizini \"%1\" mevcut değil ya da bu bir dizin değil.\n"
 
 #: directorymergewindow.cpp:432
 msgid "Directory Open Error"
-msgstr "Fel vid öppna katalog"
+msgstr "Dizin Açma Hatası"
 
 #: directorymergewindow.cpp:440
 msgid ""
@@ -193,144 +184,144 @@ msgid ""
 "directories are merged.\n"
 "Check again before continuing."
 msgstr ""
-"Målkatalogen får inte vara samma som A eller B när tre kataloger "
-"sammanfogas.\n"
-"Kontrollera igen innan du fortsätter."
+"3 dizin birleştirilirken hedef dizin A ya da B ile aynı olmamalıdır.\n"
+"Devam etmeden önce kontrol ediniz."
 
 #: directorymergewindow.cpp:442
 msgid "Parameter Warning"
-msgstr "Parametervarning"
+msgstr "Parametre Uyarısı"
 
 #: directorymergewindow.cpp:447
+#, fuzzy
 msgid "Scanning directories ..."
-msgstr "Söker i kataloger..."
+msgstr "Okuma dizini: "
 
 #: directorymergewindow.cpp:496
 msgid "Reading Directory A"
-msgstr "Läser katalog A"
+msgstr "A Dizini Okunuyor"
 
 #: directorymergewindow.cpp:518
 msgid "Reading Directory B"
-msgstr "Läser katalog B"
+msgstr "B Dizini Okunuyor"
 
 #: directorymergewindow.cpp:540
 msgid "Reading Directory C"
-msgstr "Läser katalog C"
+msgstr "C Dizini Okunuyor"
 
 #: directorymergewindow.cpp:566
 msgid "Some subdirectories were not readable in"
-msgstr "Vissa underkataloger kunde inte läsas i"
+msgstr "Bazı altdizinler okunabilir değildi"
 
 #: directorymergewindow.cpp:571
 msgid "Check the permissions of the subdirectories."
-msgstr "Kontrollera rättigheter för underkatalogerna."
+msgstr "Altdizinlerin izinlerini kontrol ediniz."
 
 #: directorymergewindow.cpp:605 kdiff3.cpp:442 kdiff3.cpp:557 kdiff3.cpp:581
 #: kdiff3.cpp:614 kdiff3.cpp:634 pdiff.cpp:1228 pdiff.cpp:1293 pdiff.cpp:1314
 #: pdiff.cpp:1330 pdiff.cpp:1360
 msgid "Ready."
-msgstr "Klar."
+msgstr "Hazır."
 
 #: directorymergewindow.cpp:619
 msgid "Directory Comparison Status"
-msgstr "Status för katalogjämförelse"
+msgstr "Dizin Karşılaştırması Durumu"
 
 #: directorymergewindow.cpp:620
 msgid "Number of subdirectories:"
-msgstr "Antal underkataloger:"
+msgstr "Altdizinlerin sayısı:"
 
 #: directorymergewindow.cpp:621
 msgid "Number of equal files:"
-msgstr "Antal likadana filer:"
+msgstr "Eşit dosyaların sayısı:"
 
 #: directorymergewindow.cpp:622
 msgid "Number of different files:"
-msgstr "Antal olika filer:"
+msgstr "Farklı dosyaların sayısı:"
 
 #: directorymergewindow.cpp:625
 msgid "Number of manual merges:"
-msgstr "Antal manuella sammanfogningar:"
+msgstr "El ile birleştirmelerin sayısı:"
 
 #: directorymergewindow.cpp:761
 msgid "This affects all merge operations."
-msgstr "Det här påverkar alla sammanfogningsåtgärder."
+msgstr "Bu, tüm birleştirme işlemlerini etkiler."
 
 #: directorymergewindow.cpp:762
 msgid "Changing All Merge Operations"
-msgstr "Ändra alla sammanfogningsåtgärder"
+msgstr "Tüm Birleştirme İşlemleri Değiştiriliyor"
 
 #: directorymergewindow.cpp:762 mergeresultwindow.cpp:256
 msgid "C&ontinue"
-msgstr "F&ortsätt"
+msgstr "D&evam Et"
 
 #: directorymergewindow.cpp:1057
 msgid "Processing "
-msgstr "Behandlar "
+msgstr ""
 
 #: directorymergewindow.cpp:1405 directorymergewindow.cpp:1411
 msgid "To do."
-msgstr "Att göra."
+msgstr "Yapılacak."
 
 #: directorymergewindow.cpp:1472 directorymergewindow.cpp:2419
 msgid "Copy A to B"
-msgstr "Kopiera A till B"
+msgstr "A'yı B'ye kopyala"
 
 #: directorymergewindow.cpp:1473 directorymergewindow.cpp:2420
 msgid "Copy B to A"
-msgstr "Kopiera B till A"
+msgstr "B'yi A'ya kopyala"
 
 #: directorymergewindow.cpp:1474 directorymergewindow.cpp:2421
 msgid "Delete A"
-msgstr "Ta bort A"
+msgstr "A'yı Sil"
 
 #: directorymergewindow.cpp:1475 directorymergewindow.cpp:2422
 msgid "Delete B"
-msgstr "Ta bort B"
+msgstr "B'yi Sil"
 
 #: directorymergewindow.cpp:1476
 msgid "Delete A & B"
-msgstr "Ta bort A och B"
+msgstr "A ve B'yi Sil"
 
 #: directorymergewindow.cpp:1477 directorymergewindow.cpp:2424
 msgid "Merge to A"
-msgstr "Sammanfoga till A"
+msgstr "A ile Birleştir"
 
 #: directorymergewindow.cpp:1478 directorymergewindow.cpp:2425
 msgid "Merge to B"
-msgstr "Sammanfoga till B"
+msgstr "B ile Birleştir"
 
 #: directorymergewindow.cpp:1479
 msgid "Merge to A & B"
-msgstr "Sammanfoga till A och B"
+msgstr "A ve B ile Birleştir"
 
 #: directorymergewindow.cpp:1483
 msgid "Delete (if exists)"
-msgstr "Ta bort (om den finns)"
+msgstr "(varsa) Sil"
 
 #: directorymergewindow.cpp:1484 directorymergewindow.cpp:1485
 #: directorymergewindow.cpp:2415 pdiff.cpp:978
 msgid "Merge"
-msgstr "Sammanfoga"
+msgstr "Birleştir"
 
 #: directorymergewindow.cpp:1484 directorymergewindow.cpp:1485
 msgid "Merge (manual)"
-msgstr "Sammanfoga (manuellt)"
+msgstr "Birleştir (el ile)"
 
 #: directorymergewindow.cpp:1486
 msgid "Error: Conflicting File Types"
-msgstr "Fel: Konflikt i filtyper"
+msgstr "Hata: Çakışan Dosya Türleri"
 
 #: directorymergewindow.cpp:1487
 msgid "Error: Dates are equal but files are not."
-msgstr "Fel: Datum är lika men filerna är det inte."
+msgstr "Hata: Tarihler aynı fakat dosyalar aynı değil."
 
 #: directorymergewindow.cpp:1511
 msgid "This operation is currently not possible."
-msgstr "Den här åtgärden är för närvarande inte möjlig att utföra."
+msgstr "Bu işlem şu anda yapılamıyor."
 
 #: directorymergewindow.cpp:1511 directorymergewindow.cpp:1778
 msgid "Operation Not Possible"
-msgstr "Åtgärd inte möjlig"
+msgstr "İşlem Yapılamıyor"
 
 #: directorymergewindow.cpp:1554
 msgid ""
@@ -340,46 +331,47 @@ msgid ""
 "\n"
 "If you know how to reproduce this, please contact the program author."
 msgstr ""
-"Det här ska aldrig inträffa:\n"
+"Bu, hiç oluşmamalı: \n"
 "\n"
 "mergeResultSaved: m_pMFI=0\n"
 "\n"
-"Om du vet hur du kan upprepa detta, kontakta programmets upphovsman."
+"Bu durumun nasıl tekrarlanacağını biliyorsanız, lütfen uygulamanın "
+"yazarıyla iletişime geçin."
 
 #: directorymergewindow.cpp:1554
 msgid "Program Error"
-msgstr "Programfel"
+msgstr "Uygulama Hatası"
 
 #: directorymergewindow.cpp:1565
 msgid ""
 "An error occurred while copying.\n"
 msgstr ""
-"Ett fel uppstod vid kopiering.\n"
+"Koplayanırken hata oluştu.\n"
 
 #: directorymergewindow.cpp:1566 directorymergewindow.cpp:1978
 msgid "Merge Error"
-msgstr "Sammanfogningsfel"
+msgstr "Birleştirme Hatası"
 
 #: directorymergewindow.cpp:1571 directorymergewindow.cpp:1983
 msgid "Error."
-msgstr "Fel."
+msgstr "Hata."
 
 #: directorymergewindow.cpp:1576 directorymergewindow.cpp:1874
 #: directorymergewindow.cpp:1914
 msgid "Done."
-msgstr "Klar."
+msgstr "Tamamlandı."
 
 #: directorymergewindow.cpp:1599
 msgid "Not saved."
-msgstr "Inte sparad."
+msgstr "Kaydedilmedi."
 
 #: directorymergewindow.cpp:1634
 msgid "Unknown merge operation. (This must never happen!)"
-msgstr "Okänd sammanfogningsåtgärd. (Det här får aldrig inträffa!)"
+msgstr "Bilinmeyen birleştirme işlemi. (Bu, hiçbir zaman oluşmamalı!)"
 
 #: directorymergewindow.cpp:1666
 msgid "Unknown merge operation."
-msgstr "Okänd sammanfogningsåtgärd."
+msgstr "Bilinmeyen birleştirme işlemi."
 
 #: directorymergewindow.cpp:1681
 msgid ""
@@ -392,50 +384,49 @@ msgid ""
 "Be aware that this program still has beta status and there is NO WARRANTY "
 "whatsoever! Make backups of your vital data!"
 msgstr ""
-"Sammanfogning ska nu börja.\n"
+"Birleştirme başlamak üzere.\n"
 "\n"
-"Välj \"Gör det\" om du har läst instruktionerna och vet vad du gör.\n"
-"Genom att välja \"Simulera det\" får du reda på vad som skulle hända.\n"
+"Açıklamaları okuduysanız ve ne yaptığınızı biliyorsanız \"Yap\"ı "
+"seçin.\n"
+"\"Dene\"yi seçmek size ne olabileceğini gösterir.\n"
 "\n"
-"Var medveten om att det här programmet fortfarande har beta-status, och det "
-"finns INGA GARANTIER överhuvudtaget! Gör säkerhetskopior av viktig "
-"information!"
+"Bu uygulama hala beta durumundadır ve ne olursa olsun hiçbir GARANTİSİ "
+"YOKTUR! Önemli verilerinizin yedeğini alın!!"
 
 #: directorymergewindow.cpp:1686
 msgid "Starting Merge"
-msgstr "Startar sammanfogning"
+msgstr "Birleştirme Başlıyor"
 
 #: directorymergewindow.cpp:1686
 msgid "Do It"
-msgstr "Gör det"
+msgstr "Yap"
 
 #: directorymergewindow.cpp:1686
 msgid "Simulate It"
-msgstr "Simulera det"
+msgstr "Dene"
 
 #: directorymergewindow.cpp:1712
 msgid ""
 "The highlighted item has a different type in the different directories. "
 "Select what to do."
 msgstr ""
-"Det markerade objektet har olika typ i de olika katalogerna. Välj vad du "
-"vill göra."
+"Renklendirilmiş nesne, değişik dizinlerde değişik dosya türüne sahip. "
+"Ne yapılacağını seçiniz."
 
 #: directorymergewindow.cpp:1721
 msgid ""
 "The modification dates of the file are equal but the files are not. Select "
 "what to do."
 msgstr ""
-"Ändringsdatum för filerna är samma, men filerna är det inte. Välj vad "
-"du vill göra."
+"Dosyaların değiştirilme tarihleri aynı fakat dosyalar aynı değil. Ne "
+"yapılacağını seçiniz."
 
 #: directorymergewindow.cpp:1778
+#, fuzzy
 msgid ""
 "This operation is currently not possible because directory merge is "
 "currently running."
-msgstr ""
-"Den här åtgärden är för närvarande inte möjlig eftersom "
-"katalogsammanfogning för närvarande kör."
+msgstr "Bu işlem şu anda yapılamıyor, çünkü birleştirme hala devam ediyor."
 
 #: directorymergewindow.cpp:1838
 msgid ""
@@ -443,231 +434,228 @@ msgid ""
 "Do you want to continue with the item that caused the error or do you want "
 "to skip this item?"
 msgstr ""
-"Ett fel uppstod under föregående steg.\n"
-"Vill du fortsätta med objektet som orsakade felet, eller vill du hoppa "
-"över objektet?"
+"Son adımda bir hata oluştu.\n"
+"Hata oluşturan nesne ile devam etmek mi yoksa bu nesneyi atlamak mı "
+"istiyorsunuz?"
 
 #: directorymergewindow.cpp:1840
 msgid "Continue merge after an error"
-msgstr "Fortsätt sammanfoga efter ett fel"
+msgstr "Bir hatadan sonra birleştirmeye devam et"
 
 #: directorymergewindow.cpp:1840
 msgid "Continue With Last Item"
-msgstr "Fortsätt med sista objekt"
+msgstr "Son Nesne ile Devam Et"
 
 #: directorymergewindow.cpp:1840
 msgid "Skip Item"
-msgstr "Hoppa över objekt"
+msgstr "Nesneyi Atla"
 
 #: directorymergewindow.cpp:1874
 msgid "Skipped."
-msgstr "Överhoppad."
+msgstr "Atlandı"
 
 #: directorymergewindow.cpp:1881 directorymergewindow.cpp:2107
 msgid "In progress..."
-msgstr "Pågår..."
+msgstr "uygulanıyor..."
 
 #: directorymergewindow.cpp:1929
 msgid "Merge operation complete."
-msgstr "Sammanfogningsåtgärd färdig."
+msgstr "Birleştirme işlemi tamamlandı."
 
 #: directorymergewindow.cpp:1929 directorymergewindow.cpp:1932
 msgid "Merge Complete"
-msgstr "Sammanfogning färdig"
+msgstr "Birleştirme Tamamlandı"
 
 #: directorymergewindow.cpp:1941
 msgid "Simulated merge complete: Check if you agree with the proposed operations."
 msgstr ""
-"Simulerad sammanfogning färdig. Kontrollera om du håller med om de "
-"föreslagna åtgärderna."
 
 #: directorymergewindow.cpp:1977
 msgid ""
 "An error occurred. Press OK to see detailed information.\n"
 msgstr ""
-"Ett fel uppstod. Tryck på Ok för att se detaljerad information.\n"
+"Bir hata oluştu. Detaylı bilgi görmek için TAMAM'a basınız.\n"
 
 #: directorymergewindow.cpp:2020
 msgid "Error: While deleting %1: Creating backup failed."
-msgstr "Fel: Vid borttagning av %1: Misslyckades skapa säkerhetskopia."
+msgstr "Hata: %1 silinirken oluştu: Yedek alınamadı."
 
 #: directorymergewindow.cpp:2027
 msgid "delete directory recursively( %1 )"
-msgstr "Ta bort katalog rekursivt (%1)"
+msgstr ""
 
 #: directorymergewindow.cpp:2029
 msgid "delete( %1 )"
-msgstr "Ta bort (%1)"
+msgstr "sil( %1 )"
 
 #: directorymergewindow.cpp:2044
 msgid "Error: delete dir operation failed while trying to read the directory."
-msgstr ""
-"Fel: Borttagningsåtgärd för katalog misslyckades när katalogen skulle "
-"läsas."
+msgstr "Hata: dizin okunmaya çalışırken dizini silme işlemi başarısız oldu."
 
 #: directorymergewindow.cpp:2063
 msgid "Error: rmdir( %1 ) operation failed."
-msgstr "Fel: Åtgärden rmdir (%1) misslyckades."
+msgstr "Hata: rmdir( %1 ) işlemi başarısız oldu."
 
 #: directorymergewindow.cpp:2073
 msgid "Error: delete operation failed."
-msgstr "Fel: Borttagningsåtgärden misslyckades."
+msgstr "Hata: silme işlemi başarısız oldu."
 
 #: directorymergewindow.cpp:2099
 msgid "manual merge( %1, %2, %3 -> %4)"
-msgstr "Manuell sammanfogning (%1, %2, %3 -> %4)"
+msgstr "el ile birleştir( %1, %2, %3 -> %4)"
 
 #: directorymergewindow.cpp:2102
+#, fuzzy
 msgid "     Note: After a manual merge the user should continue by pressing F7."
-msgstr ""
-"     Observera: Efter en manuell sammanfogning bör användaren fortsätta "
-"genom att trycka på F7."
+msgstr "     Not: El ile birleştirmeden sonra kullanıcı F7 ile devam etmelidir."
 
 #: directorymergewindow.cpp:2125
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
-"Fel: Kopiering (%1 -> %2) misslyckades. Borttagning av befintlig fil "
-"misslyckades."
+"Hata: kopyala( %1 -> %2) başarısız oldu. Mevcut hedefin silinmesi "
+"başarısız oldu."
 
 #: directorymergewindow.cpp:2135
 msgid "copyLink( %1 -> %2 )"
-msgstr "Kopiera länk (%1 -> %2)"
+msgstr ""
 
 #: directorymergewindow.cpp:2146
 msgid "Error: copyLink failed: Remote links are not yet supported."
-msgstr "Fel: Kopiera länk misslyckades: Fjärrlänkar stöds inte ännu."
+msgstr ""
 
 #: directorymergewindow.cpp:2152
 msgid "Error: copyLink failed."
-msgstr "Fel: Kopiera länk misslyckades."
+msgstr ""
 
 #: directorymergewindow.cpp:2172
 msgid "copy( %1 -> %2 )"
-msgstr "Kopiera (%1 -> %2)"
+msgstr "kopyala( %1 -> %2 )"
 
 #: directorymergewindow.cpp:2198
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
-msgstr "Fel vid namnbyte (%1 -> %2): Kan inte ta bort befintlig fil."
+msgstr ""
+"Yeniden isimlendirilirken ( %1 -> %2 ) hata oluştu: Mevcut hedef "
+"silinemiyor."
 
 #: directorymergewindow.cpp:2204
 msgid "rename( %1 -> %2 )"
-msgstr "Byt namn (%1 -> %2)"
+msgstr "yeniden isimlendir( %1 -> %2 )"
 
 #: directorymergewindow.cpp:2213
 msgid "Error: Rename failed."
-msgstr "Fel: Namnbyte misslyckades."
+msgstr "Hata: Yeniden isimlendirme başarısız oldu."
 
 #: directorymergewindow.cpp:2231
 msgid "Error during makeDir of %1. Cannot delete existing file."
-msgstr "Fel när katalogen %1 skulle skapas: Kan inte ta bort befintlig fil."
+msgstr ""
 
 #: directorymergewindow.cpp:2247
 msgid "makeDir( %1 )"
-msgstr "Skapa katalog (%1)"
+msgstr "dizin oluştur( %1 )"
 
 #: directorymergewindow.cpp:2257
 msgid "Error while creating directory."
-msgstr "Fel vid skapa katalog."
+msgstr "Dizin oluşturulması sırasında hata oluştu."
 
 #: directorymergewindow.cpp:2280 directorymergewindow.cpp:2388
 msgid "Dest"
-msgstr "Mål"
+msgstr "Hedef"
 
 #: directorymergewindow.cpp:2284 directorymergewindow.cpp:2313
 msgid "Dir"
-msgstr "Katalog"
+msgstr "Dizin"
 
 #: directorymergewindow.cpp:2285
 msgid "Type"
-msgstr "Typ"
+msgstr "Tür"
 
 #: directorymergewindow.cpp:2286
 msgid "Size"
-msgstr "Storlek"
+msgstr "Boyut"
 
 #: directorymergewindow.cpp:2287
 msgid "Attr"
-msgstr "Egenskap"
+msgstr "Özellikler"
 
 #: directorymergewindow.cpp:2288
 msgid "Last Modification"
-msgstr "Senast ändrad"
+msgstr "Son Değiştirme"
 
 #: directorymergewindow.cpp:2289
 msgid "Link-Destination"
-msgstr "Länkmål"
+msgstr "Bağ-Hedefi"
 
 #: directorymergewindow.cpp:2330
 msgid "not available"
-msgstr "Ej tillgänglig"
+msgstr "mümkün değil"
 
 #: directorymergewindow.cpp:2350
 msgid "A (Dest): "
-msgstr "A (mål): "
+msgstr "A (Hedef):"
 
 #: directorymergewindow.cpp:2353
 msgid "A (Base): "
-msgstr "A (bas): "
+msgstr ""
 
 #: directorymergewindow.cpp:2359
 msgid "B (Dest): "
-msgstr "B (mål): "
+msgstr "B (Hedef):"
 
 #: directorymergewindow.cpp:2367
 msgid "C (Dest): "
-msgstr "C (mål): "
+msgstr "C (Hedef):"
 
 #: directorymergewindow.cpp:2373
 msgid "Dest: "
-msgstr "Mål: "
+msgstr "Hedef: "
 
 #: directorymergewindow.cpp:2398
 msgid "Start/Continue Directory Merge"
-msgstr "Starta eller fortsätt katalogsammanfogning"
+msgstr ""
 
 #: directorymergewindow.cpp:2399
 msgid "Run Operation for Current Item"
-msgstr "Utför åtgärd för aktuellt objekt"
+msgstr "Mevcut Nesne için İşlem Başlat"
 
 #: directorymergewindow.cpp:2400
 msgid "Compare Selected File"
-msgstr "Jämför markerade filer"
+msgstr "Seçili Dosyayı Karşılaştır"
 
 #: directorymergewindow.cpp:2401
 msgid "Merge Current File"
-msgstr "Sammanfoga markerade filer"
+msgstr "Mevcut Dosyayı Birleştir"
 
 #: directorymergewindow.cpp:2402
 msgid "Fold All Subdirs"
-msgstr "Dra ihop alla underkataloger"
+msgstr ""
 
 #: directorymergewindow.cpp:2403
 msgid "Unfold All Subdirs"
-msgstr "Expandera alla underkataloger"
+msgstr ""
 
 #: directorymergewindow.cpp:2405
 msgid "Choose A for All Items"
-msgstr "Välj A för alla objekt"
+msgstr "Tüm Nesneler için A'yı Seç"
 
 #: directorymergewindow.cpp:2406
 msgid "Choose B for All Items"
-msgstr "Välj B för alla objekt"
+msgstr "Tüm Nesneler için B'yi Seç"
 
 #: directorymergewindow.cpp:2407
 msgid "Choose C for All Items"
-msgstr "Välj C för alla objekt"
+msgstr "Tüm Nesneler için C'yi Seç"
 
 #: directorymergewindow.cpp:2408
 msgid "Auto-Choose Operation for All Items"
-msgstr "Välj automatiskt åtgärd för alla objekt"
+msgstr "Tüm Nesneler için Atomatik-Seçim İşlemi"
 
 #: directorymergewindow.cpp:2409
 msgid "No Operation for All Items"
-msgstr "Ingen åtgärd för något objekt"
+msgstr ""
 
 #: directorymergewindow.cpp:2411 directorymergewindow.cpp:2418
 msgid "Do Nothing"
-msgstr "Gör ingenting"
+msgstr "Bir Şey Yapma"
 
 #: directorymergewindow.cpp:2412
 msgid "A"
@@ -683,78 +671,77 @@ msgstr "C"
 
 #: directorymergewindow.cpp:2416
 msgid "Delete (If Exists)"
-msgstr "Ta bort (om den finns)"
+msgstr "Sil (varsa)"
 
 #: directorymergewindow.cpp:2423
 msgid "Delete A and B"
-msgstr "Ta bort A och B"
+msgstr "A ve B'yi Sil"
 
 #: directorymergewindow.cpp:2426
 msgid "Merge to A and B"
-msgstr "Sammanfoga till A och B"
+msgstr "A ve B ile Birleştir"
 
 #: fileaccess.cpp:540
 msgid ""
 "While trying to make a backup, deleting an older backup failed. \n"
 "Filename: "
 msgstr ""
-"Vid försök att skapa en säkerhetskopia, misslyckades borttagning av "
-"äldre säkerhetskopia.\n"
-"Filnamn: "
+"Yedekleme yapılırken, eski bir yedeğin silinmesi başarısız oldu.\n"
+"Dosya adı: "
 
 #: fileaccess.cpp:547
 msgid ""
 "While trying to make a backup, renaming failed. \n"
 "Filenames: "
 msgstr ""
-"Vid försök att skapa en säkerhetskopia, misslyckades namnbyte.\n"
-"Filnamn: "
+"Yedekleme yapılırken, yeniden isimlendirme başarısız oldu.\n"
+"Dosya adları: "
 
 #: fileaccess.cpp:569
 #, c-format
 msgid "Getting file status: %1"
-msgstr "Hämtar filstatus: %1"
+msgstr "Dosya durumu okunuyor: %1"
 
 #: fileaccess.cpp:612
 #, c-format
 msgid "Reading file: %1"
-msgstr "Läser fil: %1"
+msgstr "Dosya okunuyor: %1"
 
 #: fileaccess.cpp:648
 #, c-format
 msgid "Writing file: %1"
-msgstr "Skriver fil: %1"
+msgstr "Dosya yazılıyor: %1"
 
 #: fileaccess.cpp:676
 msgid "Out of memory"
-msgstr "Slut på minne"
+msgstr "Hafıza dışı"
 
 #: fileaccess.cpp:711
 #, c-format
 msgid "Making directory: %1"
-msgstr "Skapar katalog: %1"
+msgstr "Dizin oluşturuluyor: %1"
 
 #: fileaccess.cpp:731
 #, c-format
 msgid "Removing directory: %1"
-msgstr "Tar bort katalog: %1"
+msgstr "Dizin siliniyor: %1"
 
 #: fileaccess.cpp:746
 #, c-format
 msgid "Removing file: %1"
-msgstr "Tar bort fil: %1"
+msgstr "Dosya siliniyor: %1"
 
 #: fileaccess.cpp:762
 msgid "Creating symbolic link: %1 -> %2"
-msgstr "Skapar symbolisk länk: %1 -> %2"
+msgstr "Sembolik bağ oluşturuluyor: %1 -> %2"
 
 #: fileaccess.cpp:788
 msgid "Renaming file: %1 -> %2"
-msgstr "Byter namn på fil: %1 -> %2"
+msgstr "Dosya yeniden isimlendiriliyor: %1 -> %2"
 
 #: fileaccess.cpp:824
 msgid "Copying file: %1 -> %2"
-msgstr "Kopierar fil: %1 -> %2"
+msgstr "Dosya kopyalanıyor: %1 -> %2"
 
 #: fileaccess.cpp:838
 #, c-format
@@ -762,8 +749,8 @@ msgid ""
 "Error during file copy operation: Opening file for reading failed. Filename: "
 "%1"
 msgstr ""
-"Fel under filkopieringsåtgärd: Öppna fil för läsning misslyckades. "
-"Filnamn: %1"
+"Dosya kopyalanırken hata oluştu: Dosya okunmak için açılamadı. Dosya "
+"adı: %1"
 
 #: fileaccess.cpp:844
 #, c-format
@@ -771,333 +758,335 @@ msgid ""
 "Error during file copy operation: Opening file for writing failed. Filename: "
 "%1"
 msgstr ""
-"Fel under filkopieringsåtgärd: Öppna fil för skrivning misslyckades. "
-"Filnamn: %1"
+"Dosya kopyalanırken hata oluştu: Dosya yazılmak için açılamadı. Dosya "
+"adı: %1"
 
 #: fileaccess.cpp:859
 #, c-format
 msgid "Error during file copy operation: Reading failed. Filename: %1"
-msgstr "Fel under filkopieringsåtgärd: Läsning misslyckades. Filnamn: %1"
+msgstr "Dosya kopyalanırken hata oluştu: Okunamadı. Dosya adı: %1"
 
 #: fileaccess.cpp:868
 #, c-format
 msgid "Error during file copy operation: Writing failed. Filename: %1"
-msgstr "Fel under filkopieringsåtgärd: Skrivning misslyckades. Filnamn: %1"
+msgstr "Dosya kopyalanırken hata oluştu: Yazılamadı. Dosya adı: %1"
 
 #: fileaccess.cpp:1171
 msgid "Reading directory: "
-msgstr "Läser katalog: "
+msgstr "Okuma dizini: "
 
 #: fileaccess.cpp:1297
 #, c-format
 msgid "Listing directory: %1"
-msgstr "Listar katalog: %1"
+msgstr "Listeleme dizini: %1"
 
 #: kdiff3.cpp:135
 msgid "Option --auto used, but no output file specified."
-msgstr "Väljaren --auto användes, men ingen utdatafil angavs."
+msgstr "--auto seçeneği kullanıldı, fakat çıktı dosyası belirtilmedi."
 
 #: kdiff3.cpp:241
 msgid "Option --auto ignored for directory comparison."
-msgstr "Väljaren --auto ignoreras för katalogjämförelse."
+msgstr ""
 
 #: kdiff3.cpp:277
 msgid "Saving failed."
-msgstr "Misslyckades spara."
+msgstr "Kaydetme başarısız oldu."
 
 #: kdiff3.cpp:301 pdiff.cpp:1210 pdiff.cpp:1274
 msgid "Opening of these files failed:"
-msgstr "Misslyckades öppna följande filer:"
+msgstr "Şu dosyaların açılması başarısız oldu:"
 
 #: kdiff3.cpp:310
 msgid "File Open Error"
-msgstr "Fel vid öppna fil"
+msgstr "Dosya Açma Hatası"
 
 #: kdiff3.cpp:329
 msgid "Opens documents for comparison..."
-msgstr "Öppnar dokument för jämförelse..."
+msgstr "Karşılaştırmak için belge açar..."
 
 #: kdiff3.cpp:331
 msgid "Saves the merge result. All conflicts must be solved!"
-msgstr "Sparar sammanfogningsresultat. Alla konflikter måste vara lösta."
+msgstr "Birleştirme sonuçlarını kaydeder. Tüm çakışmalar çözülmelidir!"
 
 #: kdiff3.cpp:333
 msgid "Saves the current document as..."
-msgstr "Sparar aktuellt dokument som..."
+msgstr "Mevcut belgeyi farklı kaydeder..."
 
 #: kdiff3.cpp:335
 msgid "Quits the application"
-msgstr "Avslutar programmet"
+msgstr "Uygulamadan çıkar"
 
 #: kdiff3.cpp:337
 msgid "Cuts the selected section and puts it to the clipboard"
-msgstr "Klipper ut markerad del och flyttar den till klippbordet"
+msgstr "Seçili bölümü keser ve panoya koyar"
 
 #: kdiff3.cpp:339
 msgid "Copies the selected section to the clipboard"
-msgstr "Kopierar markerad del till klippbordet"
+msgstr "Seçili bölümü panoya kopyalar"
 
 #: kdiff3.cpp:341
 msgid "Pastes the clipboard contents to actual position"
-msgstr "Klistrar in klippbordets innehåll på aktuell position"
+msgstr "Pano içeriklerini mevcut alana yapıştırır"
 
 #: kdiff3.cpp:343
 msgid "Search for a string"
-msgstr "Sök efter en sträng"
+msgstr "Bir satırı ara"
 
 #: kdiff3.cpp:345
 msgid "Search again for the string"
-msgstr "Sök efter strängen igen"
+msgstr "Satırı tekrar ara"
 
 #: kdiff3.cpp:347
 msgid "Enables/disables the toolbar"
-msgstr "Aktiverar/inaktiverar verktygsraden"
+msgstr "Araç çubuğunu açar/kapatır"
 
 #: kdiff3.cpp:349
 msgid "Enables/disables the statusbar"
-msgstr "Aktiverar/inaktiverar statusraden"
+msgstr "Durum çubuğunu açar/kapatır"
 
 #: kdiff3.cpp:353
 msgid "Configure KDiff3..."
-msgstr "Anpassa Kdiff3..."
+msgstr "KDiff3 Uygulamasını Yapılandır..."
 
 #: kdiff3.cpp:374
 msgid "Go to Current Delta"
-msgstr "Gå till aktuell skillnad"
+msgstr ""
 
 #: kdiff3.cpp:375
 msgid "Go to First Delta"
-msgstr "Gå till första skillnad"
+msgstr ""
 
 #: kdiff3.cpp:376
 msgid "Go to Last Delta"
-msgstr "Gå till sista skillnad"
+msgstr ""
 
 #: kdiff3.cpp:377
 msgid "Go to Previous Delta"
-msgstr "Gå till föregående skillnad"
+msgstr ""
 
 #: kdiff3.cpp:378
 msgid "Go to Next Delta"
-msgstr "Gå till nästa skillnad"
+msgstr ""
 
 #: kdiff3.cpp:379
 msgid "Go to Previous Conflict"
-msgstr "Gå till föregående konflikt"
+msgstr "Bir Önceki Çakışmaya Git"
 
 #: kdiff3.cpp:380
 msgid "Go to Next Conflict"
-msgstr "Gå till nästa konflikt"
+msgstr "Bir Sonraki Çakışmaya Git"
 
 #: kdiff3.cpp:381
 msgid "Go to Previous Unsolved Conflict"
-msgstr "Gå till föregående olösta konflikt"
+msgstr "Bir Önceki Çözülmeyen Çakışmaya Git"
 
 #: kdiff3.cpp:382
 msgid "Go to Next Unsolved Conflict"
-msgstr "Gå till nästa olösta konflikt"
+msgstr "Bir Sonraki Çözülmeyen Çakışmaya Git"
 
 #: kdiff3.cpp:383
 msgid "Select Line(s) From A"
-msgstr "Välj rad(er) från A"
+msgstr "A'dan Satır(lar) Seç"
 
 #: kdiff3.cpp:384
 msgid "Select Line(s) From B"
-msgstr "Välj rad(er) från B"
+msgstr "B'den Satır(lar) Seç"
 
 #: kdiff3.cpp:385
 msgid "Select Line(s) From C"
-msgstr "Välj rad(er) från C"
+msgstr "C'den Satır(lar) Seç"
 
 #: kdiff3.cpp:386
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
-msgstr "Gå automatiskt till nästa olösta konflikt efter val av källa"
+msgstr ""
+"Kaynak Seçiminden Sonra Otomatik Olarak Bir Sonraki Çözülmeyen "
+"Çakışmaya Git"
 
 #: kdiff3.cpp:388
 msgid "Show Space && Tabulator Characters for Differences"
-msgstr "Visa mellanslag och tabulatortecken i jämförelse"
+msgstr ""
 
 #: kdiff3.cpp:389
 msgid "Show White Space"
-msgstr "Visa blanktecken"
+msgstr "Boşluğu Göster"
 
 #: kdiff3.cpp:391
 msgid "Show Line Numbers"
-msgstr "Visa radnummer"
+msgstr "Satır Numaralarını Göster"
 
 #: kdiff3.cpp:392
 msgid "Choose A Everywhere"
-msgstr "Välj A överallt"
+msgstr "A'yı Heryerde Seç"
 
 #: kdiff3.cpp:393
 msgid "Choose B Everywhere"
-msgstr "Välj B överallt"
+msgstr "B'yi Heryerde Seç"
 
 #: kdiff3.cpp:394
 msgid "Choose C Everywhere"
-msgstr "Välj C överallt"
+msgstr "C'yi Heryerde Seç"
 
 #: kdiff3.cpp:395
 msgid "Choose A For All Unsolved Conflicts"
-msgstr "Välj A för alla olösta konflikter"
+msgstr "A'yı Tüm Çözülmemiş Çakışmalar için Seç"
 
 #: kdiff3.cpp:396
 msgid "Choose B For All Unsolved Conflicts"
-msgstr "Välj B för alla olösta konflikter"
+msgstr "B'yi Tüm Çözülmemiş Çakışmalar için Seç"
 
 #: kdiff3.cpp:397
 msgid "Choose C For All Unsolved Conflicts"
-msgstr "Välj C för alla olösta konflikter"
+msgstr "C'yi Tüm Çözülmemiş Çakışmalar için Seç"
 
 #: kdiff3.cpp:398
 msgid "Choose A For All Unsolved Whitespace Conflicts"
-msgstr "Välj A för olösta konflikter med blanktecken"
+msgstr ""
 
 #: kdiff3.cpp:399
 msgid "Choose B For All Unsolved Whitespace Conflicts"
-msgstr "Välj B för olösta konflikter med blanktecken"
+msgstr ""
 
 #: kdiff3.cpp:400
 msgid "Choose C For All Unsolved Whitespace Conflicts"
-msgstr "Välj C för olösta konflikter med blanktecken"
+msgstr ""
 
 #: kdiff3.cpp:401
 msgid "Automatically Solve Simple Conflicts"
-msgstr "Lös automatiskt enkla konflikter"
+msgstr "Basit Çakışmaları Otomatik Olarak Çöz"
 
 #: kdiff3.cpp:402
 msgid "Set Deltas to Conflicts"
-msgstr "Ändra skillnader till konflikter"
+msgstr ""
 
 #: kdiff3.cpp:404
 msgid "Show Window A"
-msgstr "Visa fönster A"
+msgstr "A Penceresini Göster"
 
 #: kdiff3.cpp:405
 msgid "Show Window B"
-msgstr "Visa fönster B"
+msgstr "B Penceresini Göster"
 
 #: kdiff3.cpp:406
 msgid "Show Window C"
-msgstr "Visa fönster C"
+msgstr "C Penceresini Göster"
 
 #: kdiff3.cpp:407 kdiff3.cpp:416
 msgid "Focus Next Window"
-msgstr "Fokus till nästa fönster"
+msgstr "Bir Sonraki Pencereye Odaklan"
 
 #: kdiff3.cpp:409
 msgid "Normal Overview"
-msgstr "Normal översikt"
+msgstr ""
 
 #: kdiff3.cpp:410
 msgid "A vs. B Overview"
-msgstr "A mot B-översikt"
+msgstr ""
 
 #: kdiff3.cpp:411
 msgid "A vs. C Overview"
-msgstr "A mot C-översikt"
+msgstr ""
 
 #: kdiff3.cpp:412
 msgid "B vs. C Overview"
-msgstr "B mot C-översikt"
+msgstr ""
 
 #: kdiff3.cpp:413
 msgid "Word Wrap Diff Windows"
-msgstr "Skillnadsfönster för radbrytning"
+msgstr ""
 
 #: kdiff3.cpp:418
 msgid "Focus Prev Window"
-msgstr "Fokus till föregående fönster"
+msgstr "Bir Önceki Pencereye Odaklan"
 
 #: kdiff3.cpp:419
 msgid "Toggle Split Orientation"
-msgstr "Byt delningsorientering"
+msgstr ""
 
 #: kdiff3.cpp:421
 msgid "Dir && Text Split Screen View"
-msgstr "Delad skärmvy för kataloger och text"
+msgstr ""
 
 #: kdiff3.cpp:423
 msgid "Toggle Between Dir && Text View"
-msgstr "Byt mellan katalog och textvy"
+msgstr ""
 
 #: kdiff3.cpp:504 pdiff.cpp:1754
 msgid "The merge result hasn't been saved."
-msgstr "Sammanfogningsresultatet har inte sparats."
+msgstr "Birleştirme sonucu kaydedilmedi."
 
 #: kdiff3.cpp:505
 msgid "Save && Quit"
-msgstr "Spara och avsluta"
+msgstr "Kaydet ve Çık"
 
 #: kdiff3.cpp:505
 msgid "Quit Without Saving"
-msgstr "Avsluta utan att spara"
+msgstr "Kaydetmeden Çık"
 
 #: kdiff3.cpp:513 pdiff.cpp:1763
 msgid "Saving the merge result failed."
-msgstr "Misslyckades spara sammanfogningsresultatet."
+msgstr "Birleştirme sonucunun kaydedilmesi başarısız oldu."
 
 #: kdiff3.cpp:524 pdiff.cpp:1150
 msgid "You are currently doing a directory merge. Are you sure, you want to abort?"
 msgstr ""
-"Du håller för närvarande på med en katalogsammanfogning. Är du säker "
-"på att du vill avbryta?"
+"Şu anda bir dizin birleştirmesi gerçekleştiriyorsunuz. Çıkmak "
+"istediğinizden emin misiniz?"
 
 #: kdiff3.cpp:547
 msgid "Saving file..."
-msgstr "Sparar fil..."
+msgstr "Dosya kaydediliyor..."
 
 #: kdiff3.cpp:563
 msgid "Saving file with a new filename..."
-msgstr "Sparar fil med ett nytt namn..."
+msgstr "Dosya yeni bir isimle kaydediliyor..."
 
 #: kdiff3.cpp:587
 msgid "Exiting..."
-msgstr "Avslutar..."
+msgstr "Çıkılıyor..."
 
 #: kdiff3.cpp:599
 msgid "Toggling toolbar..."
-msgstr "Växlar verktygsrad..."
+msgstr ""
 
 #: kdiff3.cpp:619
 msgid "Toggle the statusbar..."
-msgstr "Växla statusraden..."
+msgstr ""
 
 #: kdiff3.cpp:659
 msgid "Searchtext:"
-msgstr "Söktext:"
+msgstr "Metin Ara:"
 
 #: kdiff3.cpp:666
 msgid "Case sensitive"
-msgstr "Skiftlägeskänslig"
+msgstr ""
 
 #: kdiff3.cpp:669
 msgid "Search A"
-msgstr "Sök A"
+msgstr "A'yı Ara"
 
 #: kdiff3.cpp:674
 msgid "Search B"
-msgstr "Sök B"
+msgstr "B'yi Ara"
 
 #: kdiff3.cpp:679
 msgid "Search C"
-msgstr "Sök C"
+msgstr "C'yi Ara"
 
 #: kdiff3.cpp:684
 msgid "Search output"
-msgstr "Sökutmatning"
+msgstr "Çıktıyı Ara"
 
 #: kdiff3.cpp:689
 msgid "&Search"
-msgstr "&Sök"
+msgstr "&Ara"
 
 #: kdiff3_part.cpp:134 kdiff3_part.cpp:199
 msgid "Couldn't find files for comparison."
-msgstr "Kunde inte hitta filer för jämförelse."
+msgstr "Karşılaştırılacak dosya bulunamadı."
 
 #: kdiff3_part.cpp:266
 msgid "KDiff3Part"
-msgstr "Kdiff3-del"
+msgstr "KDiff3Part"
 
 #: kdiff3_shell.cpp:63
 msgid ""
@@ -1105,139 +1094,132 @@ msgid ""
 "This usually happens due to an installation problem. Please read the "
 "README-file in the source package for details."
 msgstr ""
-"Kunde inte hitta insticksprogram.\n"
-"Detta hänter oftast beroende på ett installationsproblem. Läs filen "
-"README i källkodspaketet för detaljinformation."
 
 #: main.cpp:30
 msgid "Text Diff and Merge Tool"
-msgstr "Verktyg för textjämförelse och sammanfogning"
+msgstr "Metin Karşılaştırma ve Birleştirme Aracı"
 
 #: main.cpp:35
 msgid "Merge the input."
-msgstr "Sammanfoga indata."
+msgstr "Girdiyi birleştir."
 
 #: main.cpp:37
 msgid "Explicit base file. For compatibility with certain tools."
-msgstr "Explicit basfil. För att fungera tillsammans med vissa verktyg."
+msgstr ""
 
 #: main.cpp:39
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
-msgstr "Utdatafil. Betyder underförstått -m. T.ex.: -o ny_fil.txt"
+msgstr ""
 
 #: main.cpp:40
 msgid "Output file, again. (For compatibility with certain tools.)"
-msgstr "Utdatafil, igen. (för att fungera med vissa verktyg.)"
+msgstr ""
 
 #: main.cpp:41
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
-"Inget grafiskt gränssnitt om alla konflikter kan lösas automatiskt "
-"(kräver -o fil)"
 
 #: main.cpp:42
 msgid "Don't solve conflicts automatically. (For compatibility...)"
-msgstr "Lös inte konflikter automatiskt. (För att fungera med andra verktyg...)"
+msgstr "Çakışmaları otomatik çözme. (Uyumluluk için...)"
 
 #: main.cpp:43
 msgid "Visible name replacement for input file 1 (base)."
-msgstr "Synlig ersättning av namn för indatafil 1 (bas)."
+msgstr ""
 
 #: main.cpp:44
 msgid "Visible name replacement for input file 2."
-msgstr "Synlig ersättning av namn för indatafil 2."
+msgstr ""
 
 #: main.cpp:45
 msgid "Visible name replacement for input file 3."
-msgstr "Synlig ersättning av namn för indatafil 3."
+msgstr ""
 
 #: main.cpp:47
 msgid "Alternative visible name replacement. Supply this once for every input."
-msgstr "Alternativ synlig ersättning av namn. Ange detta en gång för all indata."
+msgstr ""
 
 #: main.cpp:48
+#, fuzzy
 msgid "Has no effect. For compatibility with certain tools."
-msgstr "Har ingen effekt. För att fungera med vissa verktyg."
+msgstr "Bazı araçlarla uyumluluk için."
 
 #: main.cpp:50
 msgid "For compatibility with certain tools."
-msgstr "För att fungera med vissa verktyg."
+msgstr "Bazı araçlarla uyumluluk için."
 
 #: main.cpp:52
 msgid "file1 to open (base, if not specified via --base)"
-msgstr "Fil 1 att öppna (basfil, om den inte anges med --base)"
+msgstr ""
 
 #: main.cpp:53
 msgid "file2 to open"
-msgstr "Fil 2 att öppna"
+msgstr ""
 
 #: main.cpp:54
 msgid "file3 to open"
-msgstr "Fil 3 att öppna"
+msgstr ""
 
 #: main.cpp:108 rc.cpp:3
 msgid "KDiff3"
-msgstr "Kdiff3"
+msgstr "KDiff3"
 
 #: main.cpp:120
 msgid "+ Many thanks to those who reported bugs and contributed ideas!"
-msgstr "Samt stort tack till de som rapporterade fel och bidrog med idéer!"
+msgstr ""
 
 #: mergeresultwindow.cpp:254
 msgid ""
 "The output has been modified.\n"
 "If you continue your changes will be lost."
 msgstr ""
-"Utdata har ändrats.\n"
-"Om du fortsätter kommer dina ändringar att gå förlorade."
+"Çıktı üzerinde değişiklik yapıldı.\n"
+"Devam ederseniz değişiklikleri kaybedeceksiniz."
 
 #: mergeresultwindow.cpp:726 pdiff.cpp:483
 msgid "All input files are binary equal."
-msgstr "Alla indatafiler är binärt lika."
+msgstr ""
 
 #: mergeresultwindow.cpp:728 pdiff.cpp:485
 msgid "All input files contain the same text."
-msgstr "Alla indatafiler innehåller samma text."
+msgstr "Tüm girdi dosyaları aynı metni içeriyor."
 
 #: mergeresultwindow.cpp:730 pdiff.cpp:487
 msgid ""
 "Files A and B are binary equal.\n"
 msgstr ""
-"Filerna A och B är binärt lika.\n"
 
 #: mergeresultwindow.cpp:731 pdiff.cpp:488
 msgid ""
 "Files A and B have equal text. \n"
 msgstr ""
-"Filerna A och B innehåller samma text.\n"
+"A ve B dosyaları aynı metne sahip. \n"
 
 #: mergeresultwindow.cpp:732 pdiff.cpp:489
 msgid ""
 "Files A and C are binary equal.\n"
 msgstr ""
-"Filerna A och C är binärt lika.\n"
 
 #: mergeresultwindow.cpp:733 pdiff.cpp:490
 msgid ""
 "Files A and C have equal text. \n"
 msgstr ""
-"Filerna A och C innehåller samma text.\n"
+"A ve C dosyaları aynı metne sahip. \n"
 
 #: mergeresultwindow.cpp:734 pdiff.cpp:491
 msgid ""
 "Files B and C are binary equal.\n"
 msgstr ""
-"Filerna B och C är binärt lika.\n"
 
 #: mergeresultwindow.cpp:735 pdiff.cpp:492
 msgid ""
 "Files B and C have equal text. \n"
 msgstr ""
-"Filerna B och C innehåller samma text.\n"
+"B ve C dosyaları aynı metne sahip. \n"
 
 #: mergeresultwindow.cpp:738
 msgid "Total number of conflicts: "
-msgstr "Totalt antal konflikter: "
+msgstr "Toplam çakışma sayısı: "
 
 #: mergeresultwindow.cpp:739
 msgid ""
@@ -1245,7 +1227,7 @@ msgid ""
 "Nr of automatically solved conflicts: "
 msgstr ""
 "\n"
-"Antal automatiskt lösta konflikter: "
+"Otomatik çözülen çakışmaların sayısı: "
 
 #: mergeresultwindow.cpp:740
 msgid ""
@@ -1253,39 +1235,39 @@ msgid ""
 "Nr of unsolved conflicts: "
 msgstr ""
 "\n"
-"Antal olösta konflikter: "
+"Çözülmeyen çakışmaların sayısı: "
 
 #: mergeresultwindow.cpp:742
 msgid "Conflicts"
-msgstr "Konflikter"
+msgstr "Çakışmalar"
 
 #: mergeresultwindow.cpp:1081
 msgid "<No src line>"
-msgstr "<Ingen källrad>"
+msgstr "<Kaynak Satır Yok>"
 
 #: mergeresultwindow.cpp:1088 mergeresultwindow.cpp:1853
 msgid "<Merge Conflict>"
-msgstr "<Konflikter vid sammanfogning>"
+msgstr "<Birleştirme Çakışması>"
 
 #: mergeresultwindow.cpp:1155
 msgid "Output"
-msgstr "Utmatning"
+msgstr ""
 
 #: mergeresultwindow.cpp:1157
 msgid "[Modified]"
-msgstr "[Ändrad]"
+msgstr "[Değişiklik Yapıldı]"
 
 #: mergeresultwindow.cpp:2067
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved.\n"
 msgstr ""
-"Alla konflikter har inte lösts ännu.\n"
-"Filen sparas inte.\n"
+"Daha tüm çakışmalar çözülmedi.\n"
+"Dosya kaydedilmedi.\n"
 
 #: mergeresultwindow.cpp:2069
 msgid "Conflicts Left"
-msgstr "Konflikter kvar"
+msgstr "Çakışmalar Var"
 
 #: mergeresultwindow.cpp:2081
 msgid ""
@@ -1295,169 +1277,158 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Filen sparas inte."
+"Dosya kaydedilmedi."
 
 #: mergeresultwindow.cpp:2081 mergeresultwindow.cpp:2142
 msgid "File Save Error"
-msgstr "Fel vid spara fil"
+msgstr "Dosya Kaydetme Hatası"
 
 #: mergeresultwindow.cpp:2097
 msgid "Out of memory while preparing to save."
-msgstr "Slut på minne vid förberedelse för att spara."
+msgstr "Kaydedilmeye hazırlanırken hafıza aşımı."
 
 #: mergeresultwindow.cpp:2142
 msgid "Error while writing."
-msgstr "Fel vid skrivning."
+msgstr "Yazılırken hata oluştu."
 
 #: optiondialog.cpp:330
 msgid "Editor & Diff Output Font"
-msgstr "Teckensnitt för editor och jämförelser"
+msgstr "Düzenleyici ve Karşılaştırıcı Çıktısı Yazıtipi"
 
 #: optiondialog.cpp:342
 msgid "Italic font for deltas"
-msgstr "Kursiv stil för skillnader"
+msgstr ""
 
 #: optiondialog.cpp:345
 msgid ""
 "Selects the italic version of the font for differences.\n"
 "If the font doesn't support italic characters, then this does nothing."
 msgstr ""
-"Väljer den kursiva versionen av teckensnittet för skillnader.\n"
-"Om teckensnittet inte stöder kursiva tecken, gör detta ingenting."
 
 #: optiondialog.cpp:353
 msgid "Color"
-msgstr "Färg"
+msgstr "Renk"
 
 #: optiondialog.cpp:353
 msgid "Colors in Editor & Diff Output"
-msgstr "Färger för editor och jämförelser"
+msgstr "Düzenleyici ve Karşılaştırıcı Çıktısındaki Renkler"
 
 #: optiondialog.cpp:367
 msgid "Foreground color:"
-msgstr "Förgrundsfärg:"
+msgstr ""
 
 #: optiondialog.cpp:373
 msgid "Background color:"
-msgstr "Bakgrundsfärg:"
+msgstr "Arka alan rengi:"
 
 #: optiondialog.cpp:380
 msgid "Diff background color:"
-msgstr "Bakgrundsfärg för jämförelse:"
+msgstr "Karşılaştırıcı arka alanı rengi:"
 
 #: optiondialog.cpp:387
 msgid "Color A:"
-msgstr "Färg A:"
+msgstr "A'nın rengi:"
 
 #: optiondialog.cpp:394
 msgid "Color B:"
-msgstr "Färg B:"
+msgstr "B'nin rengi:"
 
 #: optiondialog.cpp:401
 msgid "Color C:"
-msgstr "Färg C:"
+msgstr "C'nin rengi:"
 
 #: optiondialog.cpp:407
 msgid "Conflict color:"
-msgstr "Konfliktfärg:"
+msgstr "Çakışma rengi:"
 
 #: optiondialog.cpp:414
 msgid "Current range background color:"
-msgstr "Bakgrundsfärg för aktuellt intervall:"
+msgstr ""
 
 #: optiondialog.cpp:421
 msgid "Current range diff background color:"
-msgstr "Bakgrundsfärg för aktuellt jämförelseintervall:"
+msgstr ""
 
 #: optiondialog.cpp:432
 msgid "Editor"
-msgstr "Editor"
+msgstr "Düzenleyici"
 
 #: optiondialog.cpp:432
 msgid "Editor Behaviour"
-msgstr "Editorbeteende"
+msgstr "Düzenleyici Davranışı"
 
 #: optiondialog.cpp:441
 msgid "Tab inserts spaces"
-msgstr "Tabulator infogar mellanslag"
+msgstr "Tab tuşu boşluk yerleştirir"
 
 #: optiondialog.cpp:444
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
 "Off: A Tab-character will be inserted."
 msgstr ""
-"På: Genom att trycka på tabulator, skapas lämpligt antal mellanslag.\n"
-"Av: Ett tabulatortecken infogas."
 
 #: optiondialog.cpp:450
 msgid "Tab size:"
-msgstr "Tabulatorbredd:"
+msgstr "Tab boyutu:"
 
 #: optiondialog.cpp:455
 msgid "Auto indentation"
-msgstr "Automatisk indentering"
+msgstr ""
 
 #: optiondialog.cpp:458
 msgid ""
 "On: The indentation of the previous line is used for a new line.\n"
 msgstr ""
-"På: Indentering av föregående rad används för en ny rad.\n"
 
 #: optiondialog.cpp:462
 msgid "Auto copy selection"
-msgstr "Kopiera automatiskt markering"
+msgstr ""
 
 #: optiondialog.cpp:465
 msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
 "Off: You must explicitely copy e.g. via Ctrl-C."
 msgstr ""
-"På: Alla markeringar skrivs omedelbart till klippbordet.\n"
-"Av: Du måste kopiera explicit, t.ex. via Ctrl-C."
 
 #: optiondialog.cpp:470
 msgid "Line End Style:"
-msgstr "Radslutstil:"
+msgstr ""
 
 #: optiondialog.cpp:482
 msgid ""
 "Sets the line endings for when a edited file is saved.\n"
 "DOS/Windows: CR+LF; Unix: LF; with CR=0D, LF=0A"
 msgstr ""
-"Anger radsluten när en redigerad fil sparas.\n"
-"DOS/WIndows: CR+LF, Unix: LF, med CR=0D och LF=0A"
 
 #: optiondialog.cpp:487
 msgid "Use locale encoding"
-msgstr "Använd lokal kodning"
+msgstr ""
 
 #: optiondialog.cpp:490
 msgid "Change this if non-ASCII characters are not displayed correctly."
-msgstr "Ändra det här om tecken som inte är ASCII inte visas riktigt."
+msgstr ""
 
 #: optiondialog.cpp:500
 msgid "Diff & Merge"
-msgstr "Jämför och sammanfoga"
+msgstr "Karşılaştırma ve Birleştirme"
 
 #: optiondialog.cpp:500
 msgid "Diff & Merge Settings"
-msgstr "Inställningar av jämför och sammanfoga"
+msgstr "Karşılaştırma ve Birleştirme Ayarları"
 
 #: optiondialog.cpp:510
 msgid "Preserve carriage return"
-msgstr "Behåll returtecken"
+msgstr ""
 
 #: optiondialog.cpp:513
 msgid ""
 "Show carriage return characters '\\r' if they exist.\n"
 "Helps to compare files that were modified under different operating systems."
 msgstr ""
-"Visa returtecken '\\r' om de finns.\n"
-"Hjälper till att jämföra filer som ändrats med olika operativsystem."
 
 #: optiondialog.cpp:518
 msgid "Ignore numbers"
-msgstr "Ignorera siffror"
+msgstr ""
 
 #: optiondialog.cpp:521
 msgid ""
@@ -1465,107 +1436,94 @@ msgid ""
 "white space.)\n"
 "Might help to compare files with numeric data."
 msgstr ""
-"Ignorera siffror när rader matchas. (Liknar ignorera blanktecken.)\n"
-"Kan hjälpa till att jämföra filer med numerisk data."
 
 #: optiondialog.cpp:526
 msgid "Ignore C/C++ Comments"
-msgstr "Ignorera C/C++ kommentarer"
+msgstr "C/C++ Yorumlarını Yoksay"
 
 #: optiondialog.cpp:528
 msgid "Treat C/C++ comments like white space."
-msgstr "Behandla C/C++ kommentarer som blanktecken."
+msgstr "C/C++ yorumlarına boşluk olarak davran."
 
 #: optiondialog.cpp:532
 msgid "Ignore case"
-msgstr "Ignorera skiftläge"
+msgstr ""
 
 #: optiondialog.cpp:535
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
-msgstr "Behandla skiftlägesskillnader som blankteckenskillnader. ('a' <=> 'A')"
+msgstr ""
 
 #: optiondialog.cpp:539
 msgid "Preprocessor command:"
-msgstr "Preprocessorkommando:"
+msgstr ""
 
 #: optiondialog.cpp:543
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr ""
-"Användardefinierad förbehandling (Se dokumentationen för "
-"detaljinformation.)"
 
 #: optiondialog.cpp:546
 msgid "Line-matching preprocessor command:"
-msgstr "Preprocessorkommando för radmatchning:"
+msgstr ""
 
 #: optiondialog.cpp:550
 msgid ""
 "This pre-processor is only used during line matching.\n"
 "(See the docs for details.)"
 msgstr ""
-"Den här preprocessorn används bara under radmatchning.\n"
-"(Se dokumentationen för detaljinformation.)"
 
 #: optiondialog.cpp:553
 msgid "Try hard (slower)"
-msgstr "Var noggrann (långsammare)"
+msgstr ""
 
 #: optiondialog.cpp:556
 msgid ""
 "Enables the --minimal option for the external diff.\n"
 "The analysis of big files will be much slower."
 msgstr ""
-"Aktiverar väljaren --minimal för det externa verktyget diff.\n"
-"Analys av stora filer blir mycket långsammare."
 
 #: optiondialog.cpp:561
 msgid "Auto advance delay (ms):"
-msgstr "Fördröjning vid automatisk fortsättning (ms):"
+msgstr ""
 
 #: optiondialog.cpp:566
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
 "for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
 msgstr ""
-"Vid läget automatisk fortsättning, visas resultatet av aktuell markering\n"
-"under den angivna tiden, innan det går vidare till nästa konflikt. "
-"Intervall: 0-2000 ms."
 
 #: optiondialog.cpp:571
 msgid "White space 2-file merge default:"
-msgstr "Standardvärde för sammanfogning av blanktecken med två filer:"
+msgstr ""
 
 #: optiondialog.cpp:575 optiondialog.cpp:588
 msgid "Manual choice"
-msgstr "Manuellt val"
+msgstr "El ile seçim"
 
 #: optiondialog.cpp:579 optiondialog.cpp:593
 msgid ""
 "Allow the merge algorithm to automatically select an input for "
 "white-space-only changes."
 msgstr ""
-"Tillåt att sammanfogningsalgoritmen automatiskt väljer indata för "
-"ändringar av bara blanktecken."
 
 #: optiondialog.cpp:584
 msgid "White space 3-file merge default:"
-msgstr "Standardvärde för sammanfogning av blanktecken med tre filer:"
+msgstr ""
 
 #: optiondialog.cpp:603
 msgid "Directory Merge"
-msgstr "Katalogsammanfogning"
+msgstr "Dizin Birleştirmesi"
 
 #: optiondialog.cpp:611
 msgid "Recursive directories"
-msgstr "Rekursiva kataloger"
+msgstr ""
 
 #: optiondialog.cpp:613
 msgid "Whether to analyze subdirectories or not."
-msgstr "Om underkataloger ska analyseras eller inte."
+msgstr "Altdizinlerin analiz edilip edilmeyeceği."
 
 #: optiondialog.cpp:615
 msgid "File pattern(s):"
-msgstr "Mönster för filer:"
+msgstr "Dosya Türleri:"
 
 #: optiondialog.cpp:620
 msgid ""
@@ -1573,13 +1531,10 @@ msgid ""
 "Wildcards: '*' and '?'\n"
 "Several Patterns can be specified by using the separator: ';'"
 msgstr ""
-"Mönster för filer som ska analyseras.\n"
-"Jokertecken: '*' och '?'\n"
-"Flera mönster kan anges genom att använda skiljetecknet ';'"
 
 #: optiondialog.cpp:626
 msgid "File-anti-pattern(s):"
-msgstr "Undantagsmönster för filer:"
+msgstr ""
 
 #: optiondialog.cpp:631
 msgid ""
@@ -1587,13 +1542,10 @@ msgid ""
 "Wildcards: '*' and '?'\n"
 "Several Patterns can be specified by using the separator: ';'"
 msgstr ""
-"Mönster för filer som ska undantas från analys.\n"
-"Jokertecken: '*' och '?'\n"
-"Flera mönster kan anges genom att använda skiljetecknet ';'"
 
 #: optiondialog.cpp:637
 msgid "Dir-anti-pattern(s):"
-msgstr "Undantagsmönster för kataloger:"
+msgstr ""
 
 #: optiondialog.cpp:642
 msgid ""
@@ -1601,94 +1553,87 @@ msgid ""
 "Wildcards: '*' and '?'\n"
 "Several Patterns can be specified by using the separator: ';'"
 msgstr ""
-"Mönster för kataloger som ska undantas från analys.\n"
-"Jokertecken: '*' och '?'\n"
-"Flera mönster kan anges genom att använda skiljetecknet ';'"
 
 #: optiondialog.cpp:648
 msgid "Use .cvsignore"
-msgstr "Använd .cvsignore"
+msgstr ".cvsignore kullan"
 
 #: optiondialog.cpp:651
 msgid ""
 "Extends the antipattern to anything that would be ignored by CVS.\n"
 "Via local \".cvsignore\"-files this can be directory specific."
 msgstr ""
-"Utökar undantagsmönster med allt som skulle ignoreras av CVS.\n"
-"Med lokala \".cvsignore\" filer, kan det här vara katalogspecifikt."
 
 #: optiondialog.cpp:656
 msgid "Find hidden files and directories"
-msgstr "Sök efter gömda filer och kataloger"
+msgstr "Gizli dosya ve dizinleri bul"
 
 #: optiondialog.cpp:659
 msgid "Finds files and directories with the hidden attribute."
-msgstr "Söker efter filer och kataloger med egenskapen gömd."
+msgstr "Gizli özelliğine sahip tüm dosya ve dizinleri bulur."
 
 #: optiondialog.cpp:661
 msgid "Finds files and directories starting with '.'."
-msgstr "Söker efter filer och kataloger som börjar med '.'."
+msgstr "'.' ile başlayan dosya ve dizinleri bulur."
 
 #: optiondialog.cpp:665
 msgid "Follow file links"
-msgstr "Följ fillänkar"
+msgstr "Dosya bağlarını takip et"
 
 #: optiondialog.cpp:668
 msgid ""
 "On: Compare the file the link points to.\n"
 "Off: Compare the links."
 msgstr ""
-"På: Jämför filen som länken pekar på.\n"
-"Av: Jämför länkarna."
+"Açık: Bağın işaret ettiği dosyayı karşılaştır.\n"
+"Kapalı: Bağları karşılaştır."
 
 #: optiondialog.cpp:673
 msgid "Follow directory links"
-msgstr "Följ kataloglänkar"
+msgstr "Dizin bağlarını takip et"
 
 #: optiondialog.cpp:676
 msgid ""
 "On: Compare the directory the link points to.\n"
 "Off: Compare the links."
 msgstr ""
-"På: Jämför katalogen som länken pekar på.\n"
-"Av: Jämför länkarna."
+"Açık: Bağın işaret ettiğin dizini karşılaştır.\n"
+"Kapalı: Bağları karşılaştır."
 
 #: optiondialog.cpp:681
 msgid "List only deltas"
-msgstr "Lista bara skillnader"
+msgstr ""
 
 #: optiondialog.cpp:684
 msgid "Files and directories without change will not appear in the list."
-msgstr "Filer och kataloger utan ändring visas inte i listan."
+msgstr ""
 
 #: optiondialog.cpp:687
 msgid "File Comparison Mode"
-msgstr "Filjämförelseläge"
+msgstr ""
 
 #: optiondialog.cpp:691
+#, fuzzy
 msgid "Binary Comparison"
-msgstr "Binär jämförelse"
+msgstr "Dizin Karşılaştırması Durumu"
 
 #: optiondialog.cpp:692
 msgid "Binary comparison of each file. (Default)"
-msgstr "Binär jämförelse av varje fil. (Standardvärde)"
+msgstr ""
 
 #: optiondialog.cpp:694
 msgid "Full Analysis"
-msgstr "Fullständig analys"
+msgstr ""
 
 #: optiondialog.cpp:695
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
 "(Slower than a binary comparison, much slower for binary files.)"
 msgstr ""
-"Gör en fullständig analys och visa statistisk information i extra "
-"kolumner.\n"
-"(Långsammare än binär jämförelse, mycket långsammare för binärfiler.)"
 
 #: optiondialog.cpp:698
 msgid "Trust the modification date (unsafe)"
-msgstr "Lita på ändringsdatum (inte säkert)"
+msgstr "Değiştirme tarihine güven (güvenilir değil)"
 
 #: optiondialog.cpp:699
 msgid ""
@@ -1696,12 +1641,13 @@ msgid ""
 "equal.\n"
 "Useful for big directories or slow networks."
 msgstr ""
-"Antar att filer är lika om ändringsdatum och fillängden är lika.\n"
-"Användbar för stora kataloger eller långsamma nätverk."
+"Değiştirilme tarihleri ve dosya uzunluklukları aynıysa dosyaların aynı "
+"olduğunu varsay.\n"
+"Büyük dizinler ve yavaş ağlar için kullanışlıdır."
 
 #: optiondialog.cpp:702
 msgid "Trust the size (unsafe)"
-msgstr "Lita på storleken (inte säkert)"
+msgstr "Boyuta güven (güvenilir değil)"
 
 #: optiondialog.cpp:703
 msgid ""
@@ -1709,13 +1655,13 @@ msgid ""
 "Useful for big directories or slow networks when the date is modified during "
 "download."
 msgstr ""
-"Antar att filer är lika om deras fillängder är lika.\n"
-"Användbar för stora kataloger eller långsamma nätverk när datum ändras "
-"under nerladdning."
+"Dosya uzunlukları eşitse dosyaların aynı olduğunu varsay.\n"
+"Tarih, indirme sırasında değiştirildiğinde büyük dizinler ve yavaş "
+"ağlar için kullanışlıdır."
 
 #: optiondialog.cpp:707
 msgid "Synchronize directories"
-msgstr "Synkronisera kataloger"
+msgstr ""
 
 #: optiondialog.cpp:710
 msgid ""
@@ -1723,13 +1669,10 @@ msgid ""
 "both directories are the same afterwards.\n"
 "Works only when comparing two directories without specifying a destination."
 msgstr ""
-"Erbjuder att lagra filer i båda katalogerna, så att båda\n"
-"blir likadana efteråt. Fungerar bara när två kataloger\n"
-"jämförs och ingen målkatalog anges."
 
 #: optiondialog.cpp:715
 msgid "Copy newer instead of merging (unsafe)"
-msgstr "Kopiera nyare istället för att sammanfoga (inte säkert)"
+msgstr "Birleştirmek yerine daha yeni olanı kopyala (güvenli değil)"
 
 #: optiondialog.cpp:718
 msgid ""
@@ -1737,43 +1680,39 @@ msgid ""
 "(Use this only if you know what you are doing!)\n"
 "Only effective when comparing two directories."
 msgstr ""
-"Titta inte i filen, utan använd bara den nyaste filen.\n"
-"(Använd bara det här om du vet vad du gör!)\n"
-"Har bara någon effekt när två kataloger jämförs."
+"İçeriğe bakma, sadece daha yeni olan dosyayı al.\n"
+"(Bu seçeneği sadece ne yaptığınızı biliyorsanız kullanın!)\n"
+"Sadece iki dizini karşılaştırırken etkilidir."
 
 #: optiondialog.cpp:723
 msgid "Backup files (.orig)"
-msgstr "Säkerhetskopior (.orig)"
+msgstr "Dosyaları yedekle (.orig)"
 
 #: optiondialog.cpp:726
 msgid ""
 "When a file would be saved over an old file, then the old file\n"
 "will be renamed with a '.orig'-extension instead of being deleted."
 msgstr ""
-"När en fil skulle sparas och en gammal fil redan finns, kommer den\n"
-"gamla filen att döpas om med filändelsen '.orig' istället för att tas "
-"bort."
+"Bir dosya eski bir dosyanın üzerine kaydedileceği zaman,\n"
+"eski dosya silinmek yerine '.orig' uzantısıyla kaydedilir."
 
 #: optiondialog.cpp:753
 msgid "Regional Settings"
-msgstr "Regionsinställningar"
+msgstr ""
 
 #: optiondialog.cpp:762
 msgid "Language (restart required)"
-msgstr "Språk (omstart krävs)"
+msgstr ""
 
 #: optiondialog.cpp:766
 msgid "Auto"
-msgstr "Automatisk"
+msgstr ""
 
 #: optiondialog.cpp:783
 msgid ""
 "Choose the language of the GUI-strings or \"Auto\".\n"
 "For a change of language to take place, quit and restart KDiff3."
 msgstr ""
-"Välj språk för strängarna i det grafiska gränssnittet eller "
-"\"Automatisk\".\n"
-"För att språkbytet ska ske, avsluta och starta om Kdiff3."
 
 #: optiondialog.cpp:825
 msgid ""
@@ -1784,38 +1723,31 @@ msgid ""
 "\n"
 "Do you want to continue or do you want to select another font."
 msgstr ""
-"Du valde ett teckensnitt med variabel bredd.\n"
-"\n"
-"Eftersom programmet inte hanterar teckensnitt med variabel bredd\n"
-"på ett riktigt sätt, kan du råka ut för problem vid redigering.\n"
-"\n"
-"Vill du fortsätta, eller vill du välja ett annat teckensnitt?"
 
 #: optiondialog.cpp:829
 msgid "Incompatible Font"
-msgstr "Olämpligt teckensnitt"
+msgstr "Uyumsuz Yazıtipi"
 
 #: optiondialog.cpp:830
 msgid "Continue at Own Risk"
-msgstr "Fortsätt på egen risk"
+msgstr "Riski Göze Alarak Devam Et"
 
 #: optiondialog.cpp:830
 msgid "Select Another Font"
-msgstr "Välj ett annat teckensnitt"
+msgstr "Başka Bir Yazıtipi Seç"
 
 #: optiondialog.cpp:858
 msgid "This resets all options. Not only those of the current topic."
-msgstr "Det här återställer alla alternativ, inte bara de i nuvarande ämne."
+msgstr "Bu, sadece bu bölümdekileri değil, tüm seçenekleri sıfırlar."
 
 #: pdiff.cpp:257
 msgid "PreprocessorCmd: "
-msgstr "Preprocessorkommando: "
+msgstr ""
 
 #: pdiff.cpp:262
 msgid ""
 "The following option(s) you selected might change data:\n"
 msgstr ""
-"Följande alternativ du valde kan ändra data:\n"
 
 #: pdiff.cpp:263
 msgid ""
@@ -1823,58 +1755,54 @@ msgid ""
 "Most likely this is not wanted during a merge.\n"
 "Do you want to disable these settings or continue with these settings active?"
 msgstr ""
-"\n"
-"Troligen är det inte önskvärt under en sammanfogning.\n"
-"Vill du inaktivera inställningarna eller fortsätta med inställningarna "
-"aktiva?"
 
 #: pdiff.cpp:265
 msgid "Option unsafe for merging"
-msgstr "Alternativ osäkert vid sammanfogning"
+msgstr ""
 
 #: pdiff.cpp:266
 msgid "Use these options during the merge"
-msgstr "Använd alternativen under sammanfogningen"
+msgstr ""
 
 #: pdiff.cpp:266
 msgid "Disable unsafe options"
-msgstr "Inaktivera osäkra alternativ"
+msgstr ""
 
 #: pdiff.cpp:293
 msgid "Loading A"
-msgstr "Laddar A"
+msgstr ""
 
 #: pdiff.cpp:297
 msgid "Loading B"
-msgstr "Laddar B"
+msgstr ""
 
 #: pdiff.cpp:306 pdiff.cpp:329
 msgid "Diff: A <-> B"
-msgstr "Jämförelse: A <-> B"
+msgstr ""
 
 #: pdiff.cpp:312 pdiff.cpp:349
 msgid "Linediff: A <-> B"
-msgstr "Radjämförelse: A <-> B"
+msgstr ""
 
 #: pdiff.cpp:321
 msgid "Loading C"
-msgstr "Laddar C"
+msgstr ""
 
 #: pdiff.cpp:332
 msgid "Diff: B <-> C"
-msgstr "Jämförelse: B <-> C"
+msgstr ""
 
 #: pdiff.cpp:335
 msgid "Diff: A <-> C"
-msgstr "Jämförelse: A <-> C"
+msgstr ""
 
 #: pdiff.cpp:352
 msgid "Linediff: B <-> C"
-msgstr "Radjämförelse: B <-> C"
+msgstr ""
 
 #: pdiff.cpp:355
 msgid "Linediff: A <-> C"
-msgstr "Radjämförelse: A <-> C"
+msgstr ""
 
 #: pdiff.cpp:502
 msgid ""
@@ -1882,106 +1810,120 @@ msgid ""
 "Note that the KDiff3-merge was not meant for binary data.\n"
 "Continue at your own risk."
 msgstr ""
-"Vissa indatafiler verkar inte vara rena textfiler.\n"
-"Observera att Kdiff3:s sammanfogning inte är avsedd för binärdata.\n"
-"Fortsätt på egen risk."
 
 #: pdiff.cpp:929
 msgid "A (Base):"
-msgstr "A (bas):"
+msgstr ""
 
 #: pdiff.cpp:935 pdiff.cpp:951 pdiff.cpp:967 pdiff.cpp:986
 msgid "File..."
-msgstr "Fil..."
+msgstr "Dosya..."
 
 #: pdiff.cpp:937 pdiff.cpp:953 pdiff.cpp:969 pdiff.cpp:988
 msgid "Dir..."
-msgstr "Katalog..."
+msgstr "Dizin..."
 
 #: pdiff.cpp:962
 msgid "C (Optional):"
-msgstr "C (valfri):"
+msgstr "C (İsteğe Bağlı):"
 
 #: pdiff.cpp:981
 msgid "Output (optional):"
-msgstr "Utmatning (valfri):"
+msgstr "Çıktı (İsteğe Bağlı):"
 
 #: pdiff.cpp:1010
 msgid "Configure..."
-msgstr "Anpassa..."
+msgstr "Yapılandır..."
 
 #: pdiff.cpp:1151
 msgid "Abort"
-msgstr "Avbryt"
+msgstr "Çık"
 
 #: pdiff.cpp:1157 pdiff.cpp:1236
 msgid "Opening files..."
-msgstr "Öppnar filer..."
+msgstr ""
 
 #: pdiff.cpp:1219 pdiff.cpp:1283
 msgid "File open error"
-msgstr "Fel när filen öppnades"
+msgstr "Dosya açma hatası"
 
 #: pdiff.cpp:1298
 msgid "Cutting selection..."
-msgstr "Klipper ut markering..."
+msgstr ""
 
 #: pdiff.cpp:1319
 msgid "Copying selection to clipboard..."
-msgstr "Kopierar markering till klippbord..."
+msgstr ""
 
 #: pdiff.cpp:1335
 msgid "Inserting clipboard contents..."
-msgstr "Infogar klippbordets innehåll..."
+msgstr ""
 
 #: pdiff.cpp:1755
 msgid "Save && Continue"
-msgstr "Spara och fortsätt"
+msgstr "Kaydet ve Devam Et"
 
 #: pdiff.cpp:1755
 msgid "Continue Without Saving"
-msgstr "Fortsätt utan att spara"
+msgstr "Kaydetmeden Devam Et"
 
 #: pdiff.cpp:1962
 msgid "Search complete."
-msgstr "Sökning färdig."
+msgstr "Arama tamamlandı."
 
 #: pdiff.cpp:1962
 msgid "Search Complete"
-msgstr "Sökning färdig"
+msgstr "Arama Tamamlandı"
 
 #: rc.cpp:1
 msgid "&KDiff3"
-msgstr "&Kdiff3"
+msgstr "&KDiff3"
 
 #: rc.cpp:2
 msgid "Configure KDiff3"
-msgstr "Anpassa Kdiff3"
+msgstr "KDiff3 Uygulamasını Yapılandır"
 
 #: rc.cpp:5
 msgid "&Directory"
-msgstr "&Katalog"
+msgstr "&Dizin"
 
 #: rc.cpp:6
 msgid "Current Item Merge Operation"
-msgstr "Sammanfogningsåtgärd för aktuellt objekt"
+msgstr ""
 
 #: rc.cpp:7
 msgid "Current Item Sync Operation"
-msgstr "Synkroniseringsåtgärd för aktuellt objekt"
+msgstr ""
 
 #: rc.cpp:8
 msgid "&Movement"
-msgstr "&Förflyttning"
+msgstr "&Hareket"
 
 #: rc.cpp:9
+#, fuzzy
 msgid "D&iffview"
-msgstr "&Jämförelsevy"
+msgstr "KDiff3"
 
 #: rc.cpp:10
 msgid "&Merge"
-msgstr "Sa&mmanfoga"
+msgstr "&Birleştir"
 
 #: rc.cpp:11
 msgid "&Window"
-msgstr "Fö&nster"
+msgstr "&Pencere"
+
+#, fuzzy
+#~ msgid "Error writing temporary file: %1"
+#~ msgstr "Dosya yazılıyor: %1"
+
+#~ msgid "Convert to upper case"
+#~ msgstr "Büyük harfe dönüştür"
+
+#~ msgid ""
+#~ "Turn all lower case characters to upper case on reading. (e.g.: 'a'->'A')"
+#~ msgstr ""
+#~ "Tüm küçük harfleri okuma sırasında büyük harfe dönüştür. (ör: 'a' -> 'A')"
+
+#, fuzzy
+#~ msgid "Convert to upper case\n"
+#~ msgstr "Büyük harfe dönüştür"

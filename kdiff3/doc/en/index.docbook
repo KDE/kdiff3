@@ -22,7 +22,7 @@ as Authors, publish date, the abstract, and Keywords -->
 <surname>Eibl</surname>
 <!--</personname>-->
 <affiliation><address>
-   <email>joachim.eibl@gmx.de</email>
+   <email>joachim.eibl at gmx.de</email>
 </address></affiliation>
 </author>
 </authorgroup>
@@ -30,7 +30,7 @@ as Authors, publish date, the abstract, and Keywords -->
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 
 <copyright>
-<year>2002-2003</year>
+<year>2002-2004</year>
 <holder>Joachim Eibl</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
@@ -45,8 +45,8 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2003-12-07</date>
-<releaseinfo>0.9.80</releaseinfo>
+<date>2004-05-29</date>
+<releaseinfo>0.9.84</releaseinfo>
 
 
 <abstract>
@@ -62,7 +62,7 @@ Do NOT change these in the translation. -->
 <listitem><para>has options to highlight or hide changes in white-space or comments.</para></listitem>
 </itemizedlist>
 </para><para>
-   This document describes KDiff3-version 0.9.80.
+   This document describes KDiff3-version 0.9.84.
 </para>
 </abstract>
 
@@ -205,22 +205,23 @@ This screenshot shows KDiff3 during a directory merge:
 </para>
 </sect2>
 
-<sect2><title> And ...</title>
+<sect2><title>And ...</title>
 <itemizedlist>
-   <listitem><para> Fast navigation via buttons.</para></listitem>
-   <listitem><para> A mouse-click into a summary column sync's all windows to show the same position.</para></listitem>
-   <listitem><para> Select and copy from any window and paste into the merge result window.</para></listitem>
-   <listitem><para> Overview column that shows where the changes and conflicts are.</para></listitem>
-   <listitem><para> The colors are adjustable to your specific preferences.</para></listitem>
-   <listitem><para> Adjustable Tab size.</para></listitem>
-   <listitem><para> Option to insert spaces instead of tabs.</para></listitem>
-   <listitem><para> Open files comfortably via dialog or specify files on the command line.</para></listitem>
-   <listitem><para> Search for strings in all text windows. Find (Ctrl-F) and Find Next (F3)</para></listitem>
-   <listitem><para> Show the line numbers for each line. </para></listitem>
-   <listitem><para> Paste clipboard or drag text into a diff input window.</para></listitem>
-   <listitem><para> Networktransparency via KIO.</para></listitem>
-   <listitem><para> Can be used as diff-viewer in KDevelop 3.</para></listitem>
-   <listitem><para> ...</para></listitem>
+   <listitem><para>Fast navigation via buttons.</para></listitem>
+   <listitem><para>A mouse-click into a summary column sync's all windows to show the same position.</para></listitem>
+   <listitem><para>Select and copy from any window and paste into the merge result window.</para></listitem>
+   <listitem><para>Overview column that shows where the changes and conflicts are.</para></listitem>
+   <listitem><para>The colors are adjustable to your specific preferences.</para></listitem>
+   <listitem><para>Adjustable Tab size.</para></listitem>
+   <listitem><para>Option to insert spaces instead of tabs.</para></listitem>
+   <listitem><para>Open files comfortably via dialog or specify files on the command line.</para></listitem>
+   <listitem><para>Search for strings in all text windows. Find (Ctrl-F) and Find Next (F3)</para></listitem>
+   <listitem><para>Show the line numbers for each line. </para></listitem>
+   <listitem><para>Paste clipboard or drag text into a diff input window.</para></listitem>
+   <listitem><para>Networktransparency via KIO.</para></listitem>
+   <listitem><para>Can be used as diff-viewer in KDevelop 3.</para></listitem>
+   <listitem><para>Word-wrap for long lines.</para></listitem>
+   <listitem><para>...</para></listitem>
 </itemizedlist>
 </sect2>
 </sect1>
@@ -285,6 +286,18 @@ reduce typework by specifying the filename only for the first file. E.g.:
 <sect2><title>For more information on command line options use: </title>
 <screen>
    <command>kdiff3</command> --help
+Options:
+  -m, --merge               Merge the input.
+  -b, --base file           Explicit base file. For compatibility with certain tools.
+  -o, --output file         Output file. Implies -m. E.g.: -o newfile.txt
+  --out file                Output file, again. (For compatibility with certain tools.)
+  --auto                    No GUI if all conflicts are auto-solvable. (Needs -o file)
+  --qall                    Don't solve conflicts automatically. (For compatibility...)
+  --L1 alias1               Visible name replacement for input file 1 (base).
+  --L2 alias2               Visible name replacement for input file 2.
+  --L3 alias3               Visible name replacement for input file 3.
+  -L, --fname alias         Alternative visible name replacement. Supply this once for every input.
+  -u                        Has no effect. For compatibility with certain tools.
 </screen>
 </sect2>
 
@@ -371,7 +384,8 @@ reduce typework by specifying the filename only for the first file. E.g.:
    strings, comments, for the preprocessor, and some only very esoteric situations.)
 </para><para>
    The vertical line separating the summary column and the text is interrupted
-   if the input file had no lines there.
+   if the input file had no lines there. When word-wrap is enabled then this vertical 
+   line appears dotted for wrapped lines.
 </para><para>
    On the right side a "overview"-column is visible left of the vertical scrollbar.
    It shows the compressed summary column of input "A". All the differences
@@ -603,6 +617,8 @@ reduce typework by specifying the filename only for the first file. E.g.:
       of the previous  line is used for the new line. </para></listitem></varlistentry>
    <varlistentry><term><emphasis>   Auto copy selection:</emphasis></term><listitem><para> Every selection is immediately copied
       to the clipboard   when active and you needn't explicitely copy it. </para></listitem></varlistentry>
+   <varlistentry><term><emphasis>   Line end style:</emphasis></term><listitem><para> When saving you can select what line 
+      end style you prefer. The default setting is the common choice for the used operating system. </para></listitem></varlistentry>
    <varlistentry><term><emphasis>   Use locale encoding:</emphasis></term><listitem><para> For displaying foreign characters.
       Try changing this if some characters of your language aren't displayed correctly. </para></listitem></varlistentry>
 </variablelist>
@@ -632,24 +648,14 @@ reduce typework by specifying the filename only for the first file. E.g.:
    <varlistentry><term><emphasis>Ignore C/C++ comments:</emphasis></term><listitem><para> Default is off.
       Changes in comments will be treated like changes in white space.
    </para></listitem></varlistentry>
-   <varlistentry><term><emphasis>Convert to Upper Case:</emphasis></term><listitem><para>  Default is off. Converts the input to upper case
-      while reading. Hence the comparison is not case sensitive. Take care during merging
-      because the case information will be lost in the merge-result too.
+   <varlistentry><term><emphasis>Ignore case:</emphasis></term><listitem><para>  Default is off. 
+      Case-differences of characters (like 'A' vs. 'a') will be treated like changes in white space.
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Preprocessor-Command:</emphasis></term><listitem><para>
-      When any file is read, it will be piped through this external command.
-      The output of this command will be visible instead of the original file.
-      You can write your own preprocessor that fulfills your specific needs.
-      Use this to cut away disturbing parts of the file, or to automatically
-      correct the indentation etc.
+   See <link linkend="preprocessors">next section</link>.
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Line-Matching Preprocessor-Command:</emphasis></term><listitem><para>
-      When any file is read, it will be piped through this external command. If
-      a preprocessor-command (see above) is also specified, then the output of the
-      preprocessor is the input of the line-matching preprocessor.
-      The output will only be used during the line matching phase of the analysis.
-      You can write your own preprocessor that fulfills your specific needs.
-      Each input line must have a corresponding output line.
+   See <link linkend="preprocessors">next section</link>.
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Try Hard:</emphasis></term><listitem><para>
       Try hard to find an even smaller delta. (Default is on.) This will probably
@@ -698,6 +704,16 @@ Yet there is one option here that is also relevant for saving single files:
       any highlighting of white-space-only changes in the text or overview-columns.
       (Note that this also applies to changes in numbers or comments if the options "Ignore numbers"
       or "Ignore C/C++ comments" are active.)</para></listitem></varlistentry>
+  <varlistentry><term><emphasis>Overview options:</emphasis></term><listitem><para>
+     These choices are only available when you compare three files. In normal mode all
+     differences are shown in one color-coded overview-column. But sometimes you are  
+     especially interested in the differences between only two of these three files.
+     Selecting "A vs. B", "A vs. C" or "B vs. C"-overview will show a second overview 
+     column with the required information next to the normal overview.
+  </para></listitem></varlistentry>
+  <varlistentry><term><emphasis>Word wrap diff windows:</emphasis></term><listitem><para>
+     Wrap lines when their length would exceed the width of a window.
+  </para></listitem></varlistentry>
   <varlistentry><term><emphasis>Show Window A/B/C:</emphasis></term><listitem><para> Sometimes you want to use the space on
       the screen better for long lines. Hide the windows that are not important.
       (In the Windows-menu.)</para></listitem></varlistentry>
@@ -719,6 +735,266 @@ Yet there is one option here that is also relevant for saving single files:
 <para>
    Currently only the KDE-version supports user-configurable keyboard-shortcuts.
    (Menu Settings->Configure Shortcuts...)
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="preprocessors"><title>Preprocessor Commands</title>
+<para>
+KDiff3 supports two preprocessor options.
+</para><para>
+<variablelist>
+   <varlistentry><term><emphasis>Preprocessor-Command:</emphasis></term><listitem><para>
+      When any file is read, it will be piped through this external command.
+      The output of this command will be visible instead of the original file.
+      You can write your own preprocessor that fulfills your specific needs.
+      Use this to cut away disturbing parts of the file, or to automatically
+      correct the indentation etc.
+   </para></listitem></varlistentry>
+   <varlistentry><term><emphasis>Line-Matching Preprocessor-Command:</emphasis></term><listitem><para>
+      When any file is read, it will be piped through this external command. If
+      a preprocessor-command (see above) is also specified, then the output of the
+      preprocessor is the input of the line-matching preprocessor.
+      The output will only be used during the line matching phase of the analysis.
+      You can write your own preprocessor that fulfills your specific needs.
+      Each input line must have a corresponding output line.
+   </para></listitem></varlistentry>
+</variablelist>
+</para>
+<para>
+The idea is to allow the user greater flexibility while configuring the diff-result.
+But this requires an external program, and many users don't want to write one themselves.
+The good news is that very often <command>sed</command> or <command>perl</command> 
+will do the job. 
+</para>
+<para>Example: Simple testcase: Consider file a.txt (6 lines):
+<screen>
+      aa
+      ba
+      ca
+      da
+      ea
+      fa
+</screen>
+And file b.txt (3 lines):
+<screen>
+      cg
+      dg
+      eg
+</screen>
+Without a preprocessor the following lines would be placed next to each other:
+<screen>
+      aa - cg
+      ba - dg
+      ca - eg
+      da
+      ea
+      fa
+</screen>
+This is probably not wanted since the first letter contains the actually interesting information.
+To help the matching algorithm to ignore the second letter we can use a line matching preprocessor 
+command, that replaces 'g' with 'a':
+<screen>
+   <command>sed</command> 's/g/a/'
+</screen>
+With this command the result of the comparison would be:
+<screen>
+      aa
+      ba
+      ca - cg
+      da - dg
+      ea - eg
+      fa
+</screen>
+Internally the matching algorithm sees the files after running the line matching preprocessor,
+but on the screen the file is unchanged. (The normal preprocessor would change the data also on 
+the screen.)
+</para>
+
+<sect2 id="sedbasics"><title><command>sed</command> Basics</title>
+<para>
+This section only introduces some very basic features of <command>sed</command>. For more
+information see <ulink url="info:/sed">info:/sed</ulink> or 
+<ulink url="http://www.gnu.org/software/sed/manual/html_mono/sed.html">
+http://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink>.
+A precompiled version for Windows can be found at <ulink url="http://unxutils.sourceforge.net">
+http://unxutils.sourceforge.net</ulink>.
+Note that the following examples assume that the <command>sed</command>-command is in some 
+directory in the PATH-environment variable. If this is not the case, you have to specify the full absolute
+path for the command. Also note that the following examples use the single quotation mark (') which won't work for Windows. 
+On Windows you should use the double quotation marks (") instead.
+</para>
+<para>
+In this context only the <command>sed</command>-substitute-command is used:
+<screen>
+   <command>sed</command> 's/<replaceable>REGEXP</replaceable>/<replaceable>REPLACEMENT</replaceable>/<replaceable>FLAGS</replaceable>'
+</screen>
+Before you use a new command within KDiff3, you should first test it in a console.
+Here the <command>echo</command>-command is useful. Example:
+<screen>
+   <command>echo</command> abrakadabra | <command>sed</command> 's/a/o/'
+   -> obrakadabra
+</screen>
+This example shows a very simple sed-command that replaces the first occurance 
+of "a" with "o". If you want to replace all occurances then you need the "g"-flag:
+<screen>
+   <command>echo</command> abrakadabra | <command>sed</command> 's/a/o/g'
+   -> obrokodobro
+</screen>
+The "|"-symbol is the pipe-command that transfers the output of the previous 
+command to the input of the following command. If you want to test with a longer file
+then you can use <command>cat</command> on Unix-like systems or <command>type</command> 
+on Windows-like systems. <command>sed</command> will do the substitution for each line.
+<screen>
+   <command>cat</command> <replaceable>filename</replaceable> | <command>sed</command> <replaceable>options</replaceable>
+</screen>
+</para>
+</sect2>
+<sect2 id="sedforkdiff3"><title>Examples For <command>sed</command>-Use In KDiff3</title>
+<sect3><title>Ignoring Other Types Of Comments</title>
+<para>
+Currently KDiff3 understands only C/C++ comments. Using the
+Line-Matching-Preprocessor-Command you can also ignore
+other types of comments, by converting them into C/C++-comments.
+
+Example: To ignore comments starting with "#", you would like to convert them
+to "//". Note that you also must enable the "Ignore C/C++-Comments" option to get 
+an effect. An appropriate Line-Matching-Preprocessor-Command would be:
+
+<screen>
+   <command>sed</command> 's/#/\/\//'
+</screen>
+Since for <command>sed</command> the "/"-character has a special meaning, it is necessary to place the 
+"\"-character before each "/" in the replacement-string. Sometimes the "\" is required
+to add or remove a special meaning of certain characters. The single quotation marks (') before 
+and after the substitution-command are important now, because otherwise the shell will
+try to interpret some special characters like '#', '$' or '\' before passing them to 
+<command>sed</command>. Note that on Windows you will need the double quotation marks (") here. Windows
+substitutes other characters like '%', so you might have to experiment a little bit.
+</para>
+</sect3>
+<sect3><title>Caseinsensitive Diff</title>
+<para>
+Use the following Line-Matching-Preprocessor-Command to convert all input to uppercase:
+<screen>
+   <command>sed</command> 's/\(.*\)/\U\1/'
+</screen>
+Here the ".*" is a regular expression that matches any string and in this context matches 
+all characters in the line. 
+The "\1" in the replacement string refers to the matched text within the first pair of "\(" and "\)".
+The "\U" converts the inserted text to uppercase.
+</para>
+</sect3>
+
+<sect3><title>Ignoring Version Control Keywords</title>
+<para>
+CVS and other version control systems use several keywords to insert automatically
+generated strings (<ulink url="info:/cvs/Keyword substitution">info:/cvs/Keyword substitution</ulink>).
+All of them follow the pattern "$KEYWORD generated text$". We now need a
+Line-Matching-Preprocessor-Command that removes only the generated text:
+<screen>
+   <command>sed</command> 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'
+</screen>
+The "\|" separates the possible keywords. You might want to modify this list 
+according to your needs.
+The "\" before the "$" is necessary because otherwise the "$" matches the end of the line.
+</para>
+<para>
+While experimenting with <command>sed</command> you might come to understand and even like
+these regular expressions. They are useful because there are many other programs that also 
+support similar things.
+</para>
+</sect3>
+
+<sect3><title>Ignoring Numbers</title>
+<para>
+Ignoring numbers actually is a built-in option. But as another example, this is how
+it would look as a Line-Matching-Preprocessor-command.
+<screen>
+   <command>sed</command> 's/[0123456789.-]//g'
+</screen>
+Any character within '[' and ']' is a match and will be replaced with nothing.
+</para>
+</sect3>
+
+<sect3><title>Ignoring Certain Columns</title>
+<para>
+Sometimes a text is very strictly formatted, and contains columns that you always want to ignore, while there are
+other columns you want to preserve for analysis. In the following example the first five columns (characters) are 
+ignored, the next ten columns are preserved, then again five columns are ignored and the rest of the line is preserved.
+<screen>
+   <command>sed</command> 's/.....\(..........\).....\(.*\)/\1\2/'
+</screen>
+Each dot '.' matches any single character. The "\1" and "\2" in the replacement string refer to the matched text within the first 
+and second pair of "\(" and "\)" denoting the text to be preserved.
+</para>
+</sect3>
+
+<sect3><title>Combining Several Substitutions</title>
+<para>
+Sometimes you want to apply several substitutions at once. You can then use the 
+semicolon ';' to separate these from each other. Example:
+<screen>
+   <command>echo</command> abrakadabra | <command>sed</command> 's/a/o/g;s/\(.*\)/\U\1/'
+   -> OBROKODOBRO
+</screen>
+</para>
+</sect3>
+
+<sect3><title>Using <command>perl</command> instead of <command>sed</command></title>
+<para>
+Instead of <command>sed</command> you might want to use something else like 
+<command>perl</command>.
+<screen>
+   <command>perl</command> -p -e 's/<replaceable>REGEXP</replaceable>/<replaceable>REPLACEMENT</replaceable>/<replaceable>FLAGS</replaceable>'
+</screen>
+But some details are different in <command>perl</command>. Note that where 
+<command>sed</command> needed "\(" and "\)" <command>perl</command>
+requires the simpler "(" and ")" without preceding '\'. Example:
+<screen>
+   <command>sed</command> 's/\(.*\)/\U\1/'
+   <command>perl</command> -p -e 's/(.*)/\U\1/'
+</screen>
+</para>
+</sect3>
+</sect2>
+
+<sect2><title>Order Of Preprocessor Execution</title>
+<para>
+The data is piped through all internal and external preprocessors in the 
+following order:
+</para>
+<itemizedlist>
+<listitem><para>Normal preprocessor,</para></listitem>
+<listitem><para>Line-Matching-Preprocessor,</para></listitem>
+<listitem><para>Ignore case (conversion to uppercase),</para></listitem>
+<listitem><para>Detection of C/C++ comments,</para></listitem>
+<listitem><para>Ignore numbers,</para></listitem>
+<listitem><para>Ignore white space</para></listitem>
+</itemizedlist>
+<para>
+The data after the normal preprocessor will be preserved for display and merging. The
+other operations only modify the data that the line-matching-diff-algorithm sees.
+</para><para>
+In the rare cases where you use a normal preprocessor note that 
+the line-matching-preprocessor sees the output of the normal preprocessor as input.
+</para>
+</sect2>
+
+<sect2><title>Warning</title>
+<para>
+The preprocessor-commands are often very useful, but as with any option that modifies
+your texts or hides away certain differences automatically, you might accidently overlook 
+certain differences and in the worst case destroy important data.
+</para><para>
+For this reason during a merge if a normal preprocessor-command is being used KDiff3 
+will tell you so and ask you if it should be disabled or not. 
+But it won't warn you if a Line-Matching-Preprocessor-command is active. The merge will not complete until
+all conflicts are solved. If you disabled "Show White Space" then the differences that
+were removed with the Line-Matching-Preprocessor-command will also be invisible. If the 
+Save-button remains disabled during a merge (because of remaining conflicts), make sure to enable 
+"Show White Space". If you don't wan't to merge these less important differences manually
+you can select "Choose [A|B|C] For All Unsolved Whitespace Conflicts" in the Merge-menu.
 </para>
 </sect2>
 </sect1>
@@ -962,6 +1238,15 @@ So this is what this program can do for you: KDiff3 ...
    agreeable.
 </para>
 </sect2>
+
+<sect2 id="statisticscolulmns"><title>Statistics Columns</title>
+<para>
+   When the file comparison mode "Full Analysis" is enabled in the options, then
+   KDiff3 will show extra columns containing the numbers of unsolved, solved, nonwhite and whitespace
+   conflicts. (The solved-column will only show when comparing or merging three directories.)
+</para>
+</sect2>
+
 </sect1>
 
 
@@ -1073,13 +1358,26 @@ So this is what this program can do for you: KDiff3 ...
          the program doesn't check if the link is "recursive". So for example a directory
          that contains a link to the directory would cause an infinite loop, and after
          some time when the stack overflows or all memory is used up, crash the program.)
-         Default is off.</para></listitem></varlistentry>
+         Default is off.</para></listitem></varlistentry>   
    <varlistentry><term><emphasis>List only deltas:</emphasis></term><listitem><para> Only items that are not equal in all input
          directories will be listed and only the changed files are visible. Hence
          files that are equal in all directories won't be copied during a merge and
          if the destination dir does not contain the files before the merge, you might
          miss some files later. (This option is likely to be changed in a later version.)
          Default is off.</para></listitem></varlistentry>
+
+   <varlistentry><term><emphasis>File Comparison Mode:</emphasis></term><listitem><para>
+<variablelist>            
+   <varlistentry><term><emphasis>Binary Comparison:</emphasis></term><listitem><para>
+         This is the default file comparison mode.
+         </para></listitem></varlistentry>         
+   <varlistentry><term><emphasis>Full Analysis:</emphasis></term><listitem><para>
+         Do a full analysis of each file and show the statistics information columns.
+         (Number of solved, unsolved, nonwhite and white conflicts.)
+         The full analysis is slower than a simple binary analysis, and much
+         slower when used on files that don't contain text. 
+         (Specify the appropriate file-antipatterns.)
+         </para></listitem></varlistentry>         
    <varlistentry><term><emphasis>Trust the modification date:</emphasis></term><listitem><para> If you compare big directories
          over a slow network, it might be faster to compare the modification dates
          and file length alone. But this speed improvement comes with the price of
@@ -1089,6 +1387,8 @@ So this is what this program can do for you: KDiff3 ...
          files are considered equal if their file-sizes are equal. This is useful
          when the file-copy operation didn't preserve the modification date.
          Use this option with care. Default is off.</para></listitem></varlistentry>
+</variablelist></para></listitem></varlistentry>
+         
    <varlistentry><term><emphasis>Synchronize Directories:</emphasis></term><listitem><para> Activates "Sync-Mode" when two directories
          are compared and no explicit destination directory was specified. In this
          mode the proposed operations will be chosen so that both source directories
@@ -1211,7 +1511,7 @@ Other things that are possible, but probably less useful are:
 </para></listitem><listitem><para>
    No possibility to modify permissions or modification time, so permissions or time
    of a copy will differ from the original. (See the option "Trust the size".)
-   (Only possible for local files.)
+   (Modifying permissions or modification time is only possible for local files.)
 </para></listitem>
 </itemizedlist>
 </sect2>
@@ -1342,14 +1642,14 @@ and menu. Merging or directory-comparison are not supported then.
 &kdiff3; - File and Directory Comparison and Merge Tool
 </para>
 <para>
-Program copyright 2002-2003 Joachim Eibl <email>joachim.eibl@gmx.de</email>
+Program copyright 2002-2004 Joachim Eibl <email>joachim.eibl at gmx.de</email>
 </para>
 <para>
 Several cool ideas and bugreports came from colleagues and many people out in the Wild Wild Web. Thank you!
 </para>
 
 <para>
-Documentation Copyright &copy; 2002-2003 Joachim Eibl <email>joachim.eibl@gmx.de</email>
+Documentation Copyright &copy; 2002-2004 Joachim Eibl <email>joachim.eibl at gmx.de</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
@@ -1380,9 +1680,7 @@ KDiff3 is also available for other platforms. See the homepage for details.
 <title>Requirements</title>
 
 <para>
-   In order to successfully use all features of &kdiff3;, you need &kde; >3.1. The
-   diff-tool from the <ulink url="http://www.gnu.org/software/diffutils/diffutils.html">GNU-diff-utils</ulink>
-   is recommended for best results.
+   In order to successfully use all features of &kdiff3;, you need &kde; >3.1.
 </para><para>
    For information about how to run KDiff3 on other platforms without KDE please see the
    <ulink url="http://kdiff3.sourceforge.net">homepage</ulink>.

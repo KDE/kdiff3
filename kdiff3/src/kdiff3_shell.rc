@@ -47,6 +47,16 @@
     <Action name="go_prev_unsolved_conflict"/>
     <Action name="go_next_unsolved_conflict"/>
   </Menu>
+  <Menu name="diff"><text>D&amp;iffview</text>
+    <Action name="diff_showlinenumbers"/>
+    <Action name="diff_show_whitespace_characters"/>
+    <Action name="diff_show_whitespace"/>
+    <Action name="diff_overview_normal"/>
+    <Action name="diff_overview_ab"/>
+    <Action name="diff_overview_ac"/>
+    <Action name="diff_overview_bc"/>
+    <Action name="diff_wordwrap"/>
+  </Menu>  
   <Menu name="merge"><text>&amp;Merge</text>
     <Action name="merge_current"/>
     <Action name="merge_choose_a"/>
@@ -64,9 +74,6 @@
     <Action name="merge_choose_c_for_unsolved_whitespace_conflicts"/>
     <Action name="merge_autosolve"/>
     <Action name="merge_autounsolve"/>
-    <Action name="merge_showlinenumbers"/>
-    <Action name="merge_show_whitespace_characters"/>
-    <Action name="merge_show_whitespace"/>
   </Menu>
   <Menu name="window"><text>&amp;Window</text>
     <Action name="win_focus_prev"/>
@@ -94,8 +101,8 @@
   <Action name="merge_choose_b"/>
   <Action name="merge_choose_c"/>
   <Action name="merge_autoadvance"/>
-  <Action name="merge_show_whitespace"/>
-  <Action name="merge_show_whitespace_characters"/>
-  <Action name="merge_showlinenumbers"/>
+  <Action name="diff_show_whitespace"/>
+  <Action name="diff_show_whitespace_characters"/>
+  <Action name="diff_showlinenumbers"/>
 </ToolBar>
 </kpartgui>

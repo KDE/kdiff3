@@ -162,6 +162,7 @@ SourceData::~SourceData()
 
 void SourceData::reset()
 {
+   m_fileAccess = FileAccess();
    m_normalData.reset();
    m_lmppData.reset();
    if ( !m_tempInputFileName.isEmpty() )
@@ -192,6 +193,11 @@ bool SourceData::isEmpty()
 bool SourceData::hasData() 
 { 
    return m_normalData.m_pBuf != 0;
+}
+
+bool SourceData::isValid()
+{
+   return isEmpty() || hasData();
 }
 
 void SourceData::setOptionDialog( OptionDialog* pOptionDialog )
@@ -283,7 +289,8 @@ bool SourceData::isFromBuffer()
 
 bool SourceData::isBinaryEqualWith( const SourceData& other ) const
 {
-   return getSizeBytes() == other.getSizeBytes() &&  memcmp( getBuf(), other.getBuf(), getSizeBytes() )==0;
+   return getSizeBytes() == other.getSizeBytes() && 
+          ( getSizeBytes()==0 || memcmp( getBuf(), other.getBuf(), getSizeBytes() )==0 );
 }
 
 void SourceData::FileData::reset()
@@ -373,7 +380,7 @@ void SourceData::readAndPreprocess()
    FileAccess faIn(fileNameIn1);
    int fileInSize = faIn.size();
    
-   if ( fileInSize > 0 )
+   if ( faIn.exists() ) // fileInSize > 0 )
    {  
 
 #ifdef _WIN32
@@ -406,44 +413,11 @@ void SourceData::readAndPreprocess()
             m_normalData.readFile( fileNameIn1 );
          }
       }
-
-      // Internal Preprocessing: Uppercase-conversion   
-      bool bInternalPreprocessing = false;
-      if ( m_pOptionDialog->m_bUpCase )
-      {
-         int i;
-         char* pBuf = const_cast<char*>(m_normalData.m_pBuf);
-         for(i=0; i<m_normalData.m_size; ++i)
-         {
-            pBuf[i] = toupper(pBuf[i]);
-         }
-         
-         bInternalPreprocessing = true;
-      }
       
       // LineMatching Preprocessor
       if ( ! m_pOptionDialog->m_LineMatchingPreProcessorCmd.isEmpty() )
       {
-         if ( bInternalPreprocessing )  
-         {
-            // write data to file after internal preprocessing before running the external LMPP-cmd.
-            if ( !fileNameOut1.isEmpty() )
-            {
-               FileAccess::removeFile( fileNameOut1 );
-               fileNameOut1="";
-            }
-            
-            fileNameIn2 = FileAccess::tempFileName();
-            bool bSuccess = m_normalData.writeFile( fileNameIn2 );
-            if ( !bSuccess )
-            {
-               KMessageBox::error(m_pOptionDialog, i18n("Error writing temporary file: %1").arg(fileNameIn2) );
-            }
-         }
-         else
-         {
-            fileNameIn2 = fileNameOut1.isEmpty() ? fileNameIn1 : fileNameOut1;
-         }
+         fileNameIn2 = fileNameOut1.isEmpty() ? fileNameIn1 : fileNameOut1;
       
          QString ppCmd = m_pOptionDialog->m_LineMatchingPreProcessorCmd;
          fileNameOut2 = FileAccess::tempFileName();
@@ -460,14 +434,8 @@ void SourceData::readAndPreprocess()
             m_lmppData.readFile( fileNameIn2 );
          }
          FileAccess::removeFile( fileNameOut2 );
-         
-         if ( bInternalPreprocessing && !fileNameIn2.isEmpty() )
-         {
-            FileAccess::removeFile( fileNameIn2 );
-            fileNameIn2="";
-         }
       }
-      else if ( m_pOptionDialog->m_bIgnoreComments )
+      else if ( m_pOptionDialog->m_bIgnoreComments || m_pOptionDialog->m_bIgnoreCase )
       {
          // We need a copy of the normal data.
          m_lmppData.copyBufFrom( m_normalData );
@@ -492,7 +460,18 @@ void SourceData::readAndPreprocess()
       
       m_lmppData.m_vSize = m_normalData.m_vSize;
    }
-   
+
+   // Internal Preprocessing: Uppercase-conversion   
+   if ( m_pOptionDialog->m_bIgnoreCase )
+   {
+      int i;
+      char* pBuf = const_cast<char*>(m_lmppData.m_pBuf);
+      for(i=0; i<m_lmppData.m_size; ++i)
+      {
+         pBuf[i] = toupper(pBuf[i]);
+      }
+   }   
+      
    // Ignore comments
    if ( m_pOptionDialog->m_bIgnoreComments )
    {
@@ -1498,6 +1477,7 @@ void fineDiff(
    )
 {
    // Finetuning: Diff each line with deltas
+   ProgressProxy pp;
    int maxSearchLength=500;
    Diff3LineList::iterator i;
    int k1=0;
@@ -1560,16 +1540,16 @@ void fineDiff(
          }
       }
       ++listIdx;
-      g_pProgressDialog->setSubCurrent(double(listIdx)/listSize);
+      pp.setCurrent(double(listIdx)/listSize);
    }
 }
 
 
 // Convert the list to a vector of pointers
-void calcDiff3LineVector( const Diff3LineList& d3ll, Diff3LineVector& d3lv )
+void calcDiff3LineVector( Diff3LineList& d3ll, Diff3LineVector& d3lv )
 {
    d3lv.resize( d3ll.size() );
-   Diff3LineList::const_iterator i;
+   Diff3LineList::iterator i;
    int j=0;
    for( i= d3ll.begin(); i!= d3ll.end(); ++i, ++j)
    {

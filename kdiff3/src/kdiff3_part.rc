@@ -6,8 +6,9 @@
     <Action name="go_bottom"/>
     <Action name="go_prev_delta"/>
     <Action name="go_next_delta"/>
-    <Action name="merge_showwhitespace"/>
-    <Action name="merge_showlinenumbers"/>
+    <Action name="diff_showwhitespace"/>
+    <Action name="diff_showlinenumbers"/>
+    <Action name="diff_wordwrap"/>
     <Action name="win_toggle_split_orientation"/>
     <Action name="options_configure"><text>Configure KDiff3</text></Action>
   </Menu>
@@ -17,7 +18,7 @@
   <Action name="go_bottom"/>
   <Action name="go_prev_delta"/>
   <Action name="go_next_delta"/>
-  <Action name="merge_showwhitespace"/>
-  <Action name="merge_showlinenumbers"/>
+  <Action name="diff_showwhitespace"/>
+  <Action name="diff_showlinenumbers"/>
 </ToolBar>
 </kpartgui>

@@ -25,6 +25,7 @@
 #include <qapplication.h>
 #include <qtooltip.h>
 #include <qfont.h>
+#include <qstringlist.h>
 #include <optiondialog.h>
 #include <math.h>
 #include <qdragobject.h>
@@ -52,6 +53,7 @@ DiffTextWindow::DiffTextWindow(
 
    m_pStatusBar = pStatusBar;
    m_bPaintingAllowed = true;
+   m_bWordWrap = false;
 
    setFont(m_pOptionDialog->m_font);
 }
@@ -70,6 +72,7 @@ void DiffTextWindow::init(
    m_pLineData = pLineData;
    m_size = size;
    m_pDiff3LineVector = pDiff3LineVector;
+   m_diff3WrapLineVector.clear();
    m_winIdx = winIdx;
 
    m_firstLine = 0;
@@ -110,30 +113,89 @@ void DiffTextWindow::dragEnterEvent( QDragEnterEvent* e )
 
 void DiffTextWindow::setFirstLine(int firstLine)
 {
-   m_firstLine = max2(0,firstLine);
-   myUpdate(0); // Immediately
+   int fontHeight = fontMetrics().height();
+   int topLineYOffset = fontHeight + 3;   
+   
+   int newFirstLine = max2(0,firstLine);
+
+   int deltaY = fontHeight * ( m_firstLine - newFirstLine );
+   
+   m_firstLine = newFirstLine;
+   
+   if ( m_scrollDeltaY > 0 )
+   {
+      update( 0, height()-fontHeight*3, width(), fontHeight*3 );
+   }
+   else if ( m_scrollDeltaY<0 )
+   {
+      update( 0, 0, width(), topLineYOffset+fontHeight*2 );
+   }
+   else
+   {
+      update( 0, 0, width(), topLineYOffset );
+   }
+   
+   QRect r( 0, topLineYOffset, width(), height()-topLineYOffset );   
+   QWidget::scroll( 0, deltaY, r );
 }
 
 void DiffTextWindow::setFirstColumn(int firstCol)
 {
-   m_firstColumn = max2(0,firstCol);
-   myUpdate(0); // Immediately
+   int fontHeight = fontMetrics().height();
+   int fontWidth = fontMetrics().width('W');
+   int topLineYOffset = fontHeight + 3;
+   int xOffset = leftInfoWidth * fontWidth;
+   
+   int newFirstColumn = max2(0,firstCol);
+
+   int deltaX = fontWidth * ( m_firstColumn - newFirstColumn );
+   
+   m_firstColumn = newFirstColumn;
+
+   QRect r( xOffset, topLineYOffset, width()-xOffset, height()-topLineYOffset );
+   
+   QWidget::scroll( deltaX, 0, r );
 }
 
 int DiffTextWindow::getNofColumns()
 {
-   int nofColumns = 0;
-   for( int i = 0; i< m_size; ++i )
+   if (m_bWordWrap)
    {
-      if ( m_pLineData[i].width() > nofColumns )
-         nofColumns = m_pLineData[i].width();
+      return getNofVisibleColumns();
    }
-   return nofColumns;
+   else
+   {
+      int nofColumns = 0;
+      for( int i = 0; i< m_size; ++i )
+      {
+         if ( m_pLineData[i].width() > nofColumns )
+            nofColumns = m_pLineData[i].width();
+      }
+      return nofColumns;
+   }
 }
 
 int DiffTextWindow::getNofLines()
 {
-   return m_pDiff3LineVector->size();
+   return m_bWordWrap ? m_diff3WrapLineVector.size() : 
+                        m_pDiff3LineVector->size();
+}
+
+
+int DiffTextWindow::convertLineToDiff3LineIdx( int line )
+{
+   if ( m_bWordWrap && m_diff3WrapLineVector.size()>0 )
+      return m_diff3WrapLineVector[ min2( line, (int)m_diff3WrapLineVector.size()-1 ) ].diff3LineIndex;
+   else
+      return line;
+}
+
+int DiffTextWindow::convertDiff3LineIdxToLine( int d3lIdx )
+{
+   if ( m_bWordWrap && m_pDiff3LineVector!=0 && m_pDiff3LineVector->size()>0 )
+      return (*m_pDiff3LineVector)[ min2( d3lIdx, (int)m_pDiff3LineVector->size()-1 ) ]->sumLinesNeededForDisplay;
+   else
+      return d3lIdx;
 }
 
 /** Returns a line number where the linerange [line, line+nofLines] can
@@ -156,13 +218,17 @@ int getBestFirstLine( int line, int nofLines, int firstLine, int visibleLines )
 
 
 void DiffTextWindow::setFastSelectorRange( int line1, int nofLines )
-{
+{   
    m_fastSelectorLine1 = line1;
    m_fastSelectorNofLines = nofLines;
-
    if ( isVisible() )
    {
-      int newFirstLine = getBestFirstLine( line1, nofLines, m_firstLine, getNofVisibleLines() );
+      int newFirstLine = getBestFirstLine( 
+         convertDiff3LineIdxToLine(m_fastSelectorLine1), 
+         convertDiff3LineIdxToLine(m_fastSelectorLine1+m_fastSelectorNofLines)-convertDiff3LineIdxToLine(m_fastSelectorLine1), 
+         m_firstLine, 
+         getNofVisibleLines() 
+         );
       if ( newFirstLine != m_firstLine )
       {
          scroll( 0, newFirstLine - m_firstLine );
@@ -173,26 +239,32 @@ void DiffTextWindow::setFastSelectorRange( int line1, int nofLines )
 }
 
 
-static void showStatusLine(int line, int winIdx, const QString& filename, const Diff3LineVector& d3lv, QStatusBar* sb)
+void DiffTextWindow::showStatusLine(int line )
 {
+   int d3lIdx = convertLineToDiff3LineIdx( line );
    int l=0;
-   const Diff3Line* pD3l = d3lv[line];
-   if(line >= 0 && line<(int)d3lv.size() && pD3l != 0 )
+   const Diff3Line* pD3l = (*m_pDiff3LineVector)[d3lIdx];
+   if(d3lIdx >= 0 && d3lIdx<(int)m_pDiff3LineVector->size() && pD3l != 0 )
    {
-      if      ( winIdx==1 ) l = pD3l->lineA;
-      else if ( winIdx==2 ) l = pD3l->lineB;
-      else if ( winIdx==3 ) l = pD3l->lineC;
+      if      ( m_winIdx==1 ) l = pD3l->lineA;
+      else if ( m_winIdx==2 ) l = pD3l->lineB;
+      else if ( m_winIdx==3 ) l = pD3l->lineC;
       else assert(false);
 
       QString s;
       if ( l!=-1 )
-         s.sprintf("File %s: Line %d", filename.ascii(), l+1 );
+         s.sprintf("File %s: Line %d", m_filename.ascii(), l+1 );
       else
-         s.sprintf("File %s: Line not available", filename.ascii() );
-      if (sb!=0) sb->message(s);
+         s.sprintf("File %s: Line not available", m_filename.ascii() );
+      if (m_pStatusBar!=0) m_pStatusBar->message(s);
    }
 }
 
+void DiffTextWindow::focusInEvent(QFocusEvent* e)
+{
+   emit gotFocus();
+   QWidget::focusInEvent(e);
+}
 
 void DiffTextWindow::mousePressEvent ( QMouseEvent* e )
 {
@@ -203,7 +275,7 @@ void DiffTextWindow::mousePressEvent ( QMouseEvent* e )
       convertToLinePos( e->x(), e->y(), line, pos );
       if ( pos < m_firstColumn )
       {
-         emit setFastSelectorLine( line );
+         emit setFastSelectorLine( convertLineToDiff3LineIdx(line) );
          selection.firstLine = -1;     // Disable current selection
       }
       else
@@ -212,7 +284,7 @@ void DiffTextWindow::mousePressEvent ( QMouseEvent* e )
          selection.start( line, pos );
          selection.end( line, pos );
 
-         showStatusLine( line, m_winIdx, m_filename, *m_pDiff3LineVector, m_pStatusBar );
+         showStatusLine( line );
       }
    }
 }
@@ -259,8 +331,17 @@ void DiffTextWindow::mouseDoubleClickEvent( QMouseEvent* e )
       convertToLinePos( e->x(), e->y(), line, pos );
 
       // Get the string data of the current line
-      QCString s = getString( line );
-
+      QCString s;
+      if ( m_bWordWrap )
+      {
+         const Diff3WrapLine& d = m_diff3WrapLineVector[line];
+         s = getString( d.diff3LineIndex ).mid( d.wrapLineOffset, d.wrapLineLength );
+      }
+      else
+      {
+         s = getString( line );
+      }
+      
       if ( ! s.isEmpty() )
       {
          int pos1, pos2;
@@ -271,7 +352,7 @@ void DiffTextWindow::mouseDoubleClickEvent( QMouseEvent* e )
          selection.end( line, convertToPosOnScreen( s, pos2 ) );
          update();
          // emit selectionEnd() happens in the mouseReleaseEvent.
-         showStatusLine( line, m_winIdx, m_filename, *m_pDiff3LineVector, m_pStatusBar );
+         showStatusLine( line );
       }
    }
 }
@@ -298,9 +379,8 @@ void DiffTextWindow::mouseMoveEvent ( QMouseEvent * e )
    if (selection.firstLine != -1 )
    {
       selection.end( line, pos );
-      myUpdate(0);
 
-      showStatusLine( line, m_winIdx, m_filename, *m_pDiff3LineVector, m_pStatusBar );
+      showStatusLine( line );
 
       // Scroll because mouse moved out of the window
       const QFontMetrics& fm = fontMetrics();
@@ -313,11 +393,18 @@ void DiffTextWindow::mouseMoveEvent ( QMouseEvent * e )
       if ( e->x() > width()     )       deltaX=+1;
       if ( e->y() < topLineYOffset )    deltaY=-1;
       if ( e->y() > height() )          deltaY=+1;
-      m_scrollDeltaX = deltaX;
-      m_scrollDeltaY = deltaY;
-      if ( deltaX != 0 || deltaY!= 0)
+      if ( deltaX != 0 && m_scrollDeltaX!=deltaX || deltaY!= 0 && m_scrollDeltaY!=deltaY )
       {
+         m_scrollDeltaX = deltaX;
+         m_scrollDeltaY = deltaY;
          emit scroll( deltaX, deltaY );
+         startTimer(50);
+      }
+      else
+      {
+         m_scrollDeltaX = deltaX;
+         m_scrollDeltaY = deltaY;
+         myUpdate(0);
       }
    }
 }
@@ -444,7 +531,10 @@ void DiffTextWindow::writeLine(
    int line,
    int whatChanged,
    int whatChanged2,
-   int srcLineNr
+   int srcLineNr,
+   int wrapLineOffset,
+   int wrapLineLength,
+   bool bWrapLine
    )
 {
    QFont normalFont = font();
@@ -464,8 +554,10 @@ void DiffTextWindow::writeLine(
    if ( ! m_invalidRect.intersects( lineRect ) )
       return;
 
-   int fastSelectorLine2 = m_fastSelectorLine1+m_fastSelectorNofLines - 1;
-   bool bFastSelectionRange = (line>=m_fastSelectorLine1 && line<= fastSelectorLine2 );
+   int fastSelectorLine1 = convertDiff3LineIdxToLine(m_fastSelectorLine1);
+   int fastSelectorLine2 = convertDiff3LineIdxToLine(m_fastSelectorLine1+m_fastSelectorNofLines)-1;
+      
+   bool bFastSelectionRange = (line>=fastSelectorLine1 && line<= fastSelectorLine2 );
    QColor bgColor = m_pOptionDialog->m_bgColor;
    QColor diffBgColor = m_pOptionDialog->m_diffBgColor;
 
@@ -516,7 +608,9 @@ void DiffTextWindow::writeLine(
       QCString s=" ";
       // Convert tabs
       int outPos = 0;
-      for( i=0; i<pld->size; ++i )
+      
+      int lineLength = m_bWordWrap ? wrapLineOffset+wrapLineLength : pld->size;
+      for( i=wrapLineOffset; i<lineLength; ++i )
       {
          int spaces = 1;
 
@@ -578,7 +672,6 @@ void DiffTextWindow::writeLine(
             }
             else
             {
-
                p.fillRect( xOffset + fontWidth*outPos, yOffset,
                            fontWidth*(spaces), fontHeight, colorGroup().highlight() );
 
@@ -606,14 +699,19 @@ void DiffTextWindow::writeLine(
    p.setPen( m_pOptionDialog->m_fgColor );
    if ( pld!=0 )
    {
-      if ( m_pOptionDialog->m_bShowLineNumbers )
+      if ( m_pOptionDialog->m_bShowLineNumbers && !bWrapLine )
       {
          QString num;
          num.sprintf( "%0*d", m_lineNumberWidth, srcLineNr);
          p.drawText( 0, yOffset + fontAscent, num );
          //p.drawLine( xLeft -1, yOffset, xLeft -1, yOffset+fontHeight-1 );
       }
-      p.drawLine( xOffset +1, yOffset, xOffset +1, yOffset+fontHeight-1 );
+      if ( !bWrapLine || wrapLineLength>0 )
+      {
+         p.setPen( QPen( m_pOptionDialog->m_fgColor, 0, bWrapLine ? DotLine : SolidLine) );
+         p.drawLine( xOffset +1, yOffset, xOffset +1, yOffset+fontHeight-1 );
+         p.setPen( QPen( m_pOptionDialog->m_fgColor, 0, SolidLine) );
+      }
    }
    if ( c!=m_pOptionDialog->m_fgColor && whatChanged2==0 )//&& whatChanged==0 )
    {
@@ -631,21 +729,14 @@ void DiffTextWindow::writeLine(
    if ( bFastSelectionRange )
    {
       p.fillRect( xOffset + fontWidth-1, yOffset, 3, fontHeight, m_pOptionDialog->m_fgColor );
-/*      p.drawLine( xOffset + fontWidth-1, yOffset, xOffset + fontWidth-1, yOffset+fontHeight-1 );
-      if ( line == m_fastSelectorLine1 )
-      {
-         p.drawLine( xOffset + fontWidth-1, yOffset, xOffset + fontWidth+2, yOffset );
-      }
-      if ( line == fastSelectorLine2 )
-      {
-         p.drawLine( xOffset + fontWidth-1, yOffset+fontHeight-1, xOffset + fontWidth+2, yOffset+fontHeight-1 );
-      }*/
    }
 }
 
 void DiffTextWindow::paintEvent( QPaintEvent* e )
 {
-   if ( m_pDiff3LineVector==0 || ! m_bPaintingAllowed ) return;
+   if ( m_pDiff3LineVector==0 || ! m_bPaintingAllowed ||
+        ( m_diff3WrapLineVector.empty() && m_bWordWrap ) ) 
+      return;
 
    m_lineNumberWidth =  m_pOptionDialog->m_bShowLineNumbers ? (int)log10((double)m_size)+1 : 0;
 
@@ -680,52 +771,8 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
    int fontHeight = fontMetrics().height();
    int fontAscent = fontMetrics().ascent();
 //   int fontDescent = fontMetrics().descent();
-   int fontWidth = fontMetrics().width('W');
 
    int topLineYOffset = fontHeight + 3;
-   int xOffset = leftInfoWidth * fontWidth;
-
-   int firstLineToDraw = 0;
-   int lastLineToDraw = (height() - topLineYOffset ) / fontHeight;
-   if ( abs(m_oldFirstLine - m_firstLine)>=lastLineToDraw )
-   {
-      m_oldFirstLine = -1;
-      m_invalidRect |= QRect( 0, topLineYOffset, width(), height() );
-   }
-
-   if ( m_oldFirstLine != -1 && m_oldFirstLine != m_firstLine )
-   {
-      int deltaY = fontHeight * ( m_oldFirstLine - m_firstLine );
-      if ( deltaY > 0 )
-      {  // Move down
-         bitBlt( this, 0, deltaY + topLineYOffset /*dy*/, this, 0, topLineYOffset /*sy*/, width(), height()- (deltaY + topLineYOffset), CopyROP, true);
-         lastLineToDraw = firstLineToDraw + ( m_oldFirstLine - m_firstLine);
-         m_invalidRect |= QRect( 0, topLineYOffset, width(), deltaY );
-      }
-      else
-      {  // Move up
-         bitBlt( this, 0, topLineYOffset /*dy*/, this, 0, -deltaY+topLineYOffset /*sy*/, width(), height()-(-deltaY+topLineYOffset), CopyROP, true);
-         firstLineToDraw = lastLineToDraw + ( m_oldFirstLine - m_firstLine);
-         m_invalidRect |= QRect( 0, height()+deltaY, width(), -deltaY );
-      }
-   }
-
-   if ( m_oldFirstColumn != -1  && m_oldFirstColumn != m_firstColumn )
-   {
-      int deltaX = fontWidth * ( m_oldFirstColumn - m_firstColumn );
-      if ( deltaX > 0 )
-      {  // Move right, scroll left
-         bitBlt( this, deltaX+xOffset, topLineYOffset, this, xOffset, topLineYOffset, width(), height(), CopyROP, true);
-         m_invalidRect |=
-            QRect( xOffset, topLineYOffset, deltaX, height() - topLineYOffset );
-      }
-      else
-      {  // Move left, scroll right
-         bitBlt( this, xOffset, topLineYOffset, this, xOffset-deltaX, topLineYOffset, width()-(xOffset-deltaX), height()-topLineYOffset, CopyROP, true);
-         m_invalidRect |=
-            QRect( width() + deltaX, topLineYOffset, -deltaX, height() - topLineYOffset );
-      }
-   }
 
    if ( selection.oldLastLine != -1 )
    {
@@ -741,9 +788,9 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
          firstLine = min2( selection.lastLine, selection.oldLastLine );
          lastLine = max2( selection.lastLine, selection.oldLastLine );
       }
-      int y1 = topLineYOffset + ( firstLine - m_firstLine  ) * fontHeight;
+      int y1 = topLineYOffset + ( firstLine - m_firstLine ) * fontHeight;
       int y2 = min2( height(),
-                     topLineYOffset + ( lastLine  - m_firstLine +1 ) * fontHeight );
+                     topLineYOffset + ( lastLine  - m_firstLine + 1 ) * fontHeight );
 
       if ( y1<height() && y2>topLineYOffset )
       {
@@ -762,9 +809,6 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
 
    p.fillRect( m_invalidRect, m_pOptionDialog->m_bgColor );
 
-   firstLineToDraw += m_firstLine;
-   lastLineToDraw += m_firstLine;
-
    p.setFont( font() );
 
    p.setPen( m_cThis );
@@ -772,7 +816,7 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
       || m_firstLine != m_oldFirstLine )
    {
       int l=-1;
-      for ( int i = m_firstLine; i<(int)m_pDiff3LineVector->size(); ++i )
+      for ( int i = convertLineToDiff3LineIdx(m_firstLine); i<(int)m_pDiff3LineVector->size(); ++i )
       {
          const Diff3Line* d3l = (*m_pDiff3LineVector)[i];
          if      ( m_winIdx==1 ) l=d3l->lineA;
@@ -787,7 +831,7 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
 
       QString s = QString(" ")+ winId + " : " + m_filename + " : ";
       if ( l!=-1 )
-         s += i18n("Topline %1").arg( l+1 );
+         s += i18n("Top line %1").arg( l+1 );
       else
          s += i18n("End");
 
@@ -806,11 +850,27 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
       }
    }
 
-   int lastVisibleLine = min2( m_firstLine + getNofVisibleLines()+2, (int)m_pDiff3LineVector->size() );
+   int lastVisibleLine = min2( m_firstLine + getNofVisibleLines()+2, 
+      (int)(m_bWordWrap ? m_diff3WrapLineVector.size() : m_pDiff3LineVector->size()) );
 
    for ( int line = m_firstLine; line<lastVisibleLine; ++line )
    {
-      const Diff3Line* d3l = (*m_pDiff3LineVector)[line];
+      int wrapLineOffset=0;
+      int wrapLineLength=0;
+      const Diff3Line* d3l =0;
+      bool bWrapLine = false;
+      if (m_bWordWrap)
+      {
+         Diff3WrapLine& d3wl = m_diff3WrapLineVector[line];
+         wrapLineOffset = d3wl.wrapLineOffset;
+         wrapLineLength = d3wl.wrapLineLength;
+         d3l = d3wl.pD3L;
+         bWrapLine = line > 0 && m_diff3WrapLineVector[line-1].pD3L == d3l;
+      }
+      else
+      {
+         d3l = (*m_pDiff3LineVector)[line];
+      }
       DiffList* pFineDiff1;
       DiffList* pFineDiff2;
       int changed=0;
@@ -827,7 +887,10 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
          line,                      // Line on the screen
          changed,
          changed2,
-         lineIdx+1
+         lineIdx+1,
+         wrapLineOffset,
+         wrapLineLength,
+         bWrapLine
          );
    }
    
@@ -849,9 +912,9 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
 
 }
 
-QCString DiffTextWindow::getString( int line )
+QCString DiffTextWindow::getString( int d3lIdx )
 {
-   const Diff3Line* d3l = (*m_pDiff3LineVector)[line];
+   const Diff3Line* d3l = (*m_pDiff3LineVector)[d3lIdx];
    DiffList* pFineDiff1;
    DiffList* pFineDiff2;
    int changed=0;
@@ -868,6 +931,18 @@ QCString DiffTextWindow::getString( int line )
    return QCString();
 }
 
+QCString DiffTextWindow::getLineString( int line )
+{
+   if ( m_bWordWrap )
+   {
+      int d3LIdx = convertLineToDiff3LineIdx(line);
+      return getString( d3LIdx ).mid( m_diff3WrapLineVector[line].wrapLineOffset, m_diff3WrapLineVector[line].wrapLineLength );
+   }
+   else
+   {
+      return getString( line );
+   }
+}
 
 void DiffTextWindow::getLineInfo(
    const Diff3Line& d,
@@ -942,9 +1017,10 @@ QString DiffTextWindow::getSelection()
    int lineIdx=0;
 
    int it;
-   for( it=0; it<(int)m_pDiff3LineVector->size(); ++it )
+   int vectorSize = m_bWordWrap ? m_diff3WrapLineVector.size() : m_pDiff3LineVector->size();
+   for( it=0; it<vectorSize; ++it )
    {
-      const Diff3Line* d = (*m_pDiff3LineVector)[it];
+      const Diff3Line* d = m_bWordWrap ? m_diff3WrapLineVector[it].pD3L : (*m_pDiff3LineVector)[it];
       if      ( m_winIdx == 1 ) {    lineIdx=d->lineA;     }
       else if ( m_winIdx == 2 ) {    lineIdx=d->lineB;     }
       else if ( m_winIdx == 3 ) {    lineIdx=d->lineC;     }
@@ -954,6 +1030,12 @@ QString DiffTextWindow::getSelection()
       {
          const char* pLine = m_pLineData[lineIdx].pLine;
          int size = m_pLineData[lineIdx].size;
+         
+         if ( m_bWordWrap )
+         {
+            pLine += m_diff3WrapLineVector[it].wrapLineOffset;
+            size = m_diff3WrapLineVector[it].wrapLineLength;
+         }
 
          // Consider tabs
          int outPos = 0;
@@ -976,7 +1058,11 @@ QString DiffTextWindow::getSelection()
             outPos += spaces;
          }
 
-         if( selection.within( line, outPos ) )
+         
+
+         if( selection.within( line, outPos ) &&
+            !( m_bWordWrap && it+1<vectorSize && d == m_diff3WrapLineVector[it+1].pD3L ) 
+           )
          {
             #ifdef _WIN32
             selectionString += '\r';
@@ -1017,13 +1103,248 @@ bool DiffTextWindow::findString( const QCString& s, int& d3vLine, int& posInLine
    return false;
 }
 
-void DiffTextWindow::setSelection( int firstLine, int startPos, int lastLine, int endPos )
+void DiffTextWindow::convertD3LCoordsToLineCoords( int d3LIdx, int d3LPos, int& line, int& pos )
+{
+   if( m_bWordWrap )
+   {
+      int wrapPos = d3LPos;
+      int wrapLine = convertDiff3LineIdxToLine(d3LIdx);
+      while ( wrapPos > m_diff3WrapLineVector[wrapLine].wrapLineLength )
+      {
+         wrapPos -= m_diff3WrapLineVector[wrapLine].wrapLineLength;
+         ++wrapLine;
+      }
+      pos = wrapPos;
+      line = wrapLine;
+   }
+   else
+   {
+      pos = d3LPos;
+      line = d3LIdx;
+   }
+}
+
+void DiffTextWindow::convertLineCoordsToD3LCoords( int line, int pos, int& d3LIdx, int& d3LPos )
+{
+   if( m_bWordWrap )
+   {
+      d3LPos = pos;
+      d3LIdx = convertLineToDiff3LineIdx( line );
+      int wrapLine = convertDiff3LineIdxToLine(d3LIdx); // First wrap line belonging to this d3LIdx
+      while ( wrapLine < line )
+      {
+         d3LPos += m_diff3WrapLineVector[wrapLine].wrapLineLength;
+         ++wrapLine;
+      }
+   }
+   else
+   {
+      d3LPos = pos;
+      d3LIdx = line;
+   }
+}
+
+
+void DiffTextWindow::setSelection( int firstLine, int startPos, int lastLine, int endPos, int& l, int& p )
 {
    selection.reset();
-   selection.start( firstLine, convertToPosOnScreen( getString(firstLine), startPos ) );
-   selection.end( lastLine, convertToPosOnScreen( getString(lastLine), endPos ) );
+   if ( m_bWordWrap && m_pDiff3LineVector!=0 )
+   {      
+      QString s1 = getString(firstLine);
+      int firstWrapLine = convertDiff3LineIdxToLine(firstLine);
+      int wrapStartPos = startPos;
+      while ( wrapStartPos > m_diff3WrapLineVector[firstWrapLine].wrapLineLength )
+      {
+         wrapStartPos -= m_diff3WrapLineVector[firstWrapLine].wrapLineLength;
+         s1 = s1.mid(m_diff3WrapLineVector[firstWrapLine].wrapLineLength);
+         ++firstWrapLine;
+      }
+
+      QString s2 = getString(lastLine);
+      int lastWrapLine = convertDiff3LineIdxToLine(lastLine);
+      int wrapEndPos = endPos;
+      while ( wrapEndPos > m_diff3WrapLineVector[lastWrapLine].wrapLineLength )
+      {
+         wrapEndPos -= m_diff3WrapLineVector[lastWrapLine].wrapLineLength;
+         s2 = s2.mid(m_diff3WrapLineVector[lastWrapLine].wrapLineLength);
+         ++lastWrapLine;
+      }
+
+      selection.start( firstWrapLine, convertToPosOnScreen( s1, wrapStartPos ) );
+      selection.end( lastWrapLine, convertToPosOnScreen( s2, wrapEndPos ) );
+      l=firstWrapLine;
+      p=wrapStartPos;
+   }
+   else
+   {
+      selection.start( firstLine, convertToPosOnScreen( getString(firstLine), startPos ) );
+      selection.end( lastLine, convertToPosOnScreen( getString(lastLine), endPos ) );
+      l=firstLine;
+      p=startPos;
+   }
    update();
 }
+
+
+// Returns the number of wrapped lines
+// if pWrappedLines != 0 then the stringlist will contain the wrapped lines.
+int wordWrap( const QString& origLine, int nofColumns, Diff3WrapLine* pDiff3WrapLine )
+{      
+   if (nofColumns<=0)
+      nofColumns = 1;
+      
+   int nofNeededLines = 0;
+   int length = origLine.length();
+   
+   if (length==0)
+   {
+      nofNeededLines = 1;
+      if( pDiff3WrapLine )
+      {
+         pDiff3WrapLine->wrapLineOffset=0;
+         pDiff3WrapLine->wrapLineLength=0;
+      }
+   }
+   else
+   {   
+      int pos = 0;
+      
+      while ( pos < length )
+      {
+         int wrapPos = pos + nofColumns;
+         
+         if ( length-pos <= nofColumns  )
+         {
+            wrapPos = length;
+         }
+         else
+         {      
+            int wsPos = max2( origLine.findRev( ' ', wrapPos ), origLine.findRev( '\t', wrapPos ) );
+            
+            if ( wsPos > pos )
+            {
+               // Wrap line at wsPos
+               wrapPos = wsPos;
+            }
+         }
+         
+         if ( pDiff3WrapLine )
+         {
+            pDiff3WrapLine->wrapLineOffset = pos;
+            pDiff3WrapLine->wrapLineLength = wrapPos-pos;
+            ++pDiff3WrapLine;
+         }
+         
+         pos = wrapPos;
+         
+         ++nofNeededLines;
+      }
+   }
+   return nofNeededLines;   
+}
+
+void DiffTextWindow::convertSelectionToD3LCoords()
+{
+   if ( m_pDiff3LineVector==0 || ! m_bPaintingAllowed || !isVisible() || selection.isEmpty() )
+   {
+      return;
+   }
+
+   // convert the selection to unwrapped coordinates: Later restore to new coords
+   int firstD3LIdx, firstD3LPos;
+   QCString s = getLineString( selection.beginLine() );
+   int firstPosInText = convertToPosInText( s, s.length(), selection.beginPos() );
+   convertLineCoordsToD3LCoords( selection.beginLine(), firstPosInText, firstD3LIdx, firstD3LPos );
+   
+   int lastD3LIdx, lastD3LPos;
+   s = getLineString( selection.endLine() );
+   int lastPosInText = convertToPosInText( s, s.length(), selection.endPos() );
+   convertLineCoordsToD3LCoords( selection.endLine(), lastPosInText, lastD3LIdx, lastD3LPos );
+   
+   //selection.reset();
+   selection.start( firstD3LIdx, firstD3LPos );
+   selection.end( lastD3LIdx, lastD3LPos );
+}
+
+void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize )
+{   
+   if ( m_pDiff3LineVector==0 || ! m_bPaintingAllowed || !isVisible() )
+   {
+      m_bWordWrap = bWordWrap;
+      if (!bWordWrap)  m_diff3WrapLineVector.resize( 0 );
+      return;
+   }
+   
+   m_bWordWrap = bWordWrap;
+   
+   if ( bWordWrap )
+   {                  
+      m_diff3WrapLineVector.resize( wrapLineVectorSize );      
+      
+      int nofVisibleColumns = getNofVisibleColumns();
+      int i;
+      int wrapLineIdx = 0;
+      int size = m_pDiff3LineVector->size();
+      for( i=0; i<size; ++i )
+      {
+         QString s = getString( i );
+         int linesNeeded = wordWrap( s, nofVisibleColumns, wrapLineVectorSize==0 ? 0 : &m_diff3WrapLineVector[wrapLineIdx] );
+         Diff3Line& d3l = *(*m_pDiff3LineVector)[i];
+         if ( d3l.linesNeededForDisplay<linesNeeded )
+         {
+            d3l.linesNeededForDisplay = linesNeeded;
+         }
+         
+         if ( wrapLineVectorSize>0 )
+         {
+            int j;
+            for( j=0; j<d3l.linesNeededForDisplay; ++j, ++wrapLineIdx )
+            {
+               Diff3WrapLine& d3wl = m_diff3WrapLineVector[wrapLineIdx];
+               d3wl.diff3LineIndex = i;
+               d3wl.pD3L = (*m_pDiff3LineVector)[i];
+               if ( j>=linesNeeded )
+               {
+                  d3wl.wrapLineOffset=0;
+                  d3wl.wrapLineLength=0;
+               }
+            }
+         }
+      }   
+   
+      if ( wrapLineVectorSize>0 )
+      {   
+         m_firstLine = min2( m_firstLine, wrapLineVectorSize-1 );
+         m_firstColumn = 0;      
+      }
+   }
+   else
+   {
+      m_diff3WrapLineVector.resize( 0 );
+   }
+   
+   if ( !selection.isEmpty() && ( !m_bWordWrap || wrapLineVectorSize>0 ) )
+   {  
+      // Assume unwrapped coordinates 
+      //( Why? ->Conversion to unwrapped coords happened a few lines above in this method. 
+      //  Also see KDiff3App::recalcWordWrap() on the role of wrapLineVectorSize)
+      
+      // Wrap them now.
+      
+      // convert the selection to unwrapped coordinates.      
+      int firstLine, firstPos;
+      convertD3LCoordsToLineCoords( selection.beginLine(), selection.beginPos(), firstLine, firstPos );
+      
+      int lastLine, lastPos;
+      convertD3LCoordsToLineCoords( selection.endLine(), selection.endPos(), lastLine, lastPos );
+               
+      //selection.reset();
+      selection.start( firstLine, convertToPosOnScreen( getLineString( firstLine ), firstPos ) );
+      selection.end( lastLine, convertToPosOnScreen( getLineString( lastLine ),lastPos ) );
+   }      
+}
+
+
 
 
 #include <qtextcodec.h>

@@ -68,7 +68,7 @@ sub diff_chunk($$)
         print "-----------------------------------------------\n";
         print @new;
         $haschanges = 1;
-        return;
+        return $haschanges;
     }
 
     print $old[0];
@@ -84,7 +84,6 @@ sub diff_chunk($$)
         next if ($o eq $n);
 
         if(defined($class) and $n =~ /^(\d+\s+)\w+(::\S+\s*.*)$/) {
-            print "comparing >$n< against >$1$class$2<\n";
             next if ($n eq "$1$class$2");
         }
 
@@ -118,6 +117,8 @@ while (<IN>) {
     chop;
 
     s/0x[0-9a-fA-F]+/0x......../g;
+    s/base size=/size=/g;
+    s/base align=/align=/g;
 
     $chunk .= $_ . "\n";
 

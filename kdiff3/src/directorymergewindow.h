@@ -26,6 +26,7 @@
 #include <map>
 #include "common.h"
 #include "fileaccess.h"
+#include "diff.h" //TotalDiffStatus
 
 class OptionDialog;
 class KIconLoader;
@@ -37,6 +38,7 @@ class QLabel;
 class KAction;
 class KToggleAction;
 class KActionCollection;
+class TotalDiffStatus;
 
 enum e_MergeOperation
 {
@@ -97,6 +99,8 @@ public:
    FileAccess m_fileInfoA;
    FileAccess m_fileInfoB;
    FileAccess m_fileInfoC;
+
+   TotalDiffStatus m_totalDiffStatus;   
 };
 
 class DirMergeItem : public QListViewItem
@@ -107,17 +111,9 @@ public:
    ~DirMergeItem();
    MergeFileInfos* m_pMFI;
 #if QT_VERSION!=230
-   virtual int compare(QListViewItem *i, int col, bool ascending) const
-   {
-      DirMergeItem* pDMI = static_cast<DirMergeItem*>(i);
-      bool bDir1 =  m_pMFI->m_bDirA || m_pMFI->m_bDirB || m_pMFI->m_bDirC;
-      bool bDir2 =  pDMI->m_pMFI->m_bDirA || pDMI->m_pMFI->m_bDirB || pDMI->m_pMFI->m_bDirC;
-      if ( m_pMFI==0 || pDMI->m_pMFI==0 || bDir1 == bDir2 )
-         return QListViewItem::compare( i, col, ascending );
-      else
-         return bDir1 ? -1 : 1;
-   }
+   virtual int compare(QListViewItem *i, int col, bool ascending) const;
 #endif
+   void init(MergeFileInfos* pMFI);
 };
 
 class DirectoryMergeWindow : public QListView
@@ -139,6 +135,7 @@ public:
    bool isDirectoryMergeInProgress() { return m_bRealMergeStarted; }
    int totalColumnWidth();
    bool isSyncMode() { return m_bSyncMode; }
+   bool isScanning() { return m_bScanning; }
    void initDirectoryMergeActions( QObject* pKDiff3App, KActionCollection* ac );
    void updateAvailabilities( bool bDirCompare, bool bDiffWindowVisible,
       KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC );
@@ -183,7 +180,7 @@ protected:
    void resizeEvent(QResizeEvent* e);
    bool m_bAllowResizeEvents;
 
-   void prepareListView();
+   void prepareListView(ProgressProxy& pp);
    void calcSuggestedOperation( MergeFileInfos& mfi, e_MergeOperation eDefaultOperation );
    void setAllMergeOperations( e_MergeOperation eDefaultOperation );
    friend class MergeFileInfos;
@@ -229,6 +226,8 @@ protected:
    bool m_bError;
    bool m_bSyncMode;
    bool m_bDirectoryMerge; // if true, then merge is the default operation, otherwise it's diff.
+   
+   bool m_bScanning; // true while in init()
 
    OptionDialog* m_pOptions;
    KIconLoader* m_pIconLoader;
@@ -270,9 +269,10 @@ protected:
    KAction* dirCurrentSyncMergeToB;
    KAction* dirCurrentSyncMergeToAAndB;
 signals:
-   void startDiffMerge(QString fn1,QString fn2, QString fn3, QString ofn, QString,QString,QString);
+   void startDiffMerge(QString fn1,QString fn2, QString fn3, QString ofn, QString,QString,QString,TotalDiffStatus*);
    void checkIfCanContinue( bool* pbContinue );
    void updateAvailabilities();
+   void statusBarMessage( const QString& msg );
 protected slots:
    void onDoubleClick( QListViewItem* lvi );
    void onClick( QListViewItem* lvi, const QPoint&, int c );
@@ -291,6 +291,9 @@ public:
       const FileAccess& DestPath,
       MergeFileInfos& mfi );
    QListView* getInfoList() {return m_pInfoList;}
+   virtual bool eventFilter( QObject* o, QEvent* e );
+signals:
+   void gotFocus();
 private:
    QLabel* m_pInfoA;
    QLabel* m_pInfoB;

@@ -304,6 +304,7 @@ QDateTime FileAccess::lastRead() const
 
 static bool interruptableReadFile( QFile& f, void* pDestBuffer, unsigned long maxLength )
 {
+   ProgressProxy pp;
    const unsigned long maxChunkSize = 100000;
    unsigned long i=0;
    while( i<maxLength )
@@ -316,8 +317,8 @@ static bool interruptableReadFile( QFile& f, void* pDestBuffer, unsigned long ma
       }
       i+=reallyRead;
 
-      g_pProgressDialog->setSubCurrent( double(i)/maxLength );
-      if ( g_pProgressDialog->wasCancelled() ) return false;
+      pp.setCurrent( double(i)/maxLength );
+      if ( pp.wasCancelled() ) return false;
    }
    return true;
 }
@@ -347,6 +348,7 @@ bool FileAccess::readFile( void* pDestBuffer, unsigned long maxLength )
 
 bool FileAccess::writeFile( const void* pSrcBuffer, unsigned long length )
 {
+   ProgressProxy pp;
    if (m_bLocal)
    {
       QFile f( filePath() );
@@ -364,8 +366,8 @@ bool FileAccess::writeFile( const void* pSrcBuffer, unsigned long length )
             }
             i+=reallyWritten;
 
-            g_pProgressDialog->setSubCurrent( double(i)/length );
-            if ( g_pProgressDialog->wasCancelled() ) return false;
+            pp.setCurrent( double(i)/length );
+            if ( pp.wasCancelled() ) return false;
          }
          return true;
       }
@@ -593,7 +595,8 @@ void FileAccessJobHandler::slotStatResult(KIO::Job* pJob)
 
 bool FileAccessJobHandler::get(void* pDestBuffer, long maxLength )
 {
-   if ( maxLength>0 )
+   ProgressProxy pp; // Implicitly used in slotPercent()
+   if ( maxLength>0 && !pp.wasCancelled() )
    {
       KIO::TransferJob* pJob = KIO::get( m_pFileAccess->m_url, false /*reload*/, false );
       m_transferredBytes = 0;
@@ -804,6 +807,7 @@ void FileAccessJobHandler::slotSimpleJobResult(KIO::Job* pJob)
 // Copy local or remote files.
 bool FileAccessJobHandler::copyFile( const QString& dest )
 {
+   ProgressProxy pp;
    KURL destUrl = KURL::fromPathOrURL( dest );
    m_pFileAccess->m_statusText = QString();
    if ( ! m_pFileAccess->isLocal() || ! destUrl.isLocalFile() ) // if either url is nonlocal
@@ -847,7 +851,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
    std::vector<char> buffer(100000);
    Q_LONG bufSize = buffer.size();
    Q_LONG srcSize = srcFile.size();
-   while ( srcSize > 0 && !g_pProgressDialog->wasCancelled() )
+   while ( srcSize > 0 && !pp.wasCancelled() )
    {
       Q_LONG readSize = srcFile.readBlock( &buffer[0], min2( srcSize, bufSize ) );
       if ( readSize==-1 || readSize==0 )
@@ -867,7 +871,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
          readSize -= writeSize;
       }
       destFile.flush();
-      g_pProgressDialog->setSubCurrent( (double)(srcFile.size()-srcSize)/srcFile.size(), false );
+      pp.setCurrent( (double)(srcFile.size()-srcSize)/srcFile.size(), false );
    }
    srcFile.close();
    destFile.close();
@@ -925,14 +929,14 @@ static bool wildcardMultiMatch( const QString& wildcard, const QString& testStri
 // class CvsIgnoreList from Cervisia cvsdir.cpp
 //    Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
 // with elements from class StringMatcher
-//    Copyright (c) 2003 André Wöbbeking <Woebbeking@web.de>
+//    Copyright (c) 2003 Andrï¿½Wï¿½beking <Woebbeking@web.de>
 // Modifications for KDiff3 by Joachim Eibl
 class CvsIgnoreList
 {
 public:
     CvsIgnoreList(){}
     void init(FileAccess& dir, bool bUseLocalCvsIgnore );
-    bool matches(const QString& fileName) const;
+    bool matches(const QString& fileName, bool bCaseSensitive ) const;
 
 private:
     void addEntriesFromString(const QString& str);
@@ -1073,7 +1077,7 @@ void CvsIgnoreList::addEntry(const QString& pattern)
    }
 }
 
-bool CvsIgnoreList::matches(const QString& text) const
+bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive ) const
 {
     if (m_exactPatterns.find(text) != m_exactPatterns.end())
     {
@@ -1113,7 +1117,7 @@ bool CvsIgnoreList::matches(const QString& text) const
 
    for ( it = m_generalPatterns.begin(); it != m_generalPatterns.end(); ++it )
    {
-      QRegExp pattern( *it, true /*CaseSensitive*/, true /*wildcard mode*/);
+      QRegExp pattern( *it, bCaseSensitive, true /*wildcard mode*/);
 #if QT_VERSION==230
       int len=0;
       if ( pattern.match( text, 0, &len )!=-1 && len==text.length())
@@ -1151,6 +1155,7 @@ static bool cvsIgnoreExists( t_DirectoryList* pDirList )
 bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden, const QString& filePattern,
    const QString& fileAntiPattern, const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore )
 {
+   ProgressProxy pp;
    m_pDirList = pDirList;
    m_pDirList->clear();
    m_bFindHidden = bFindHidden;
@@ -1160,13 +1165,14 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
    m_filePattern = filePattern;
    m_dirAntiPattern = dirAntiPattern;
 
-   if ( g_pProgressDialog->wasCancelled() )
+   if ( pp.wasCancelled() )
       return true; // Cancelled is not an error.
 
-   g_pProgressDialog->setSubInformation( i18n("Reading directory: ") + m_pFileAccess->absFilePath(), 0, false );
+   pp.setInformation( i18n("Reading directory: ") + m_pFileAccess->absFilePath(), 0, false );
 
    if( m_pFileAccess->isLocal() )
    {
+      QString currentPath = QDir::currentDirPath();
       m_bSuccess = QDir::setCurrent( m_pFileAccess->absFilePath() );
       if ( m_bSuccess )
       {
@@ -1211,7 +1217,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
             QString absPath = m_pFileAccess->absFilePath();
             QString relPath = m_pFileAccess->filePath();
             bool bFirst=true;
-            while( ! g_pProgressDialog->wasCancelled() )
+            while( ! pp.wasCancelled() )
             {
                if (!bFirst)
                {
@@ -1262,10 +1268,12 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
          }
          else
          {
+            QDir::setCurrent( currentPath ); // restore current path
             return false;
          }
 #endif
       }
+      QDir::setCurrent( currentPath ); // restore current path
    }
    else
    {
@@ -1298,6 +1306,11 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
    {
       cvsIgnoreList.init( *m_pFileAccess, cvsIgnoreExists(pDirList) );
    }
+#ifdef _WIN32
+   bool bCaseSensitive = false;
+#else
+   bool bCaseSensitive = true;
+#endif
 
    // Now remove all entries that don't match:
    t_DirectoryList::iterator i;
@@ -1309,12 +1322,12 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
       if (  (!bFindHidden && i->isHidden() )
             ||
             (i->isFile() &&
-               ( !wildcardMultiMatch( filePattern, i->fileName(), true ) ||
-                 wildcardMultiMatch( fileAntiPattern, i->fileName(), true ) ) )
+               ( !wildcardMultiMatch( filePattern, i->fileName(), bCaseSensitive ) ||
+                 wildcardMultiMatch( fileAntiPattern, i->fileName(), bCaseSensitive ) ) )
             ||
-            (i->isDir() && wildcardMultiMatch( dirAntiPattern, i->fileName(), true ) )
+            (i->isDir() && wildcardMultiMatch( dirAntiPattern, i->fileName(), bCaseSensitive ) )
             ||
-            cvsIgnoreList.matches(i->fileName())
+            cvsIgnoreList.matches( i->fileName(), bCaseSensitive )
          )
       {
          // Remove it
@@ -1381,12 +1394,12 @@ void FileAccessJobHandler::slotListDirProcessNewEntries( KIO::Job *, const KIO::
 
 void FileAccessJobHandler::slotListDirInfoMessage( KIO::Job*, const QString& msg )
 {
-   g_pProgressDialog->setSubInformation( msg, 0 );
+   g_pProgressDialog->setInformation( msg, 0.0 );
 }
 
 void FileAccessJobHandler::slotPercent( KIO::Job*, unsigned long percent )
 {
-   g_pProgressDialog->setSubCurrent( percent/100.0 );
+   g_pProgressDialog->setCurrent( percent/100.0 );
 }
 
 
@@ -1415,10 +1428,6 @@ ProgressDialog::ProgressDialog( QWidget* pParent )
    hlayout->addWidget( m_pAbortButton );
    connect( m_pAbortButton, SIGNAL(clicked()), this, SLOT(slotAbort()) );
 
-   m_dCurrent = 0.0;
-   m_dSubMax = 1.0;
-   m_dSubMin = 0.0;
-   m_dSubCurrent = 0.0;
    resize( 400, 100 );
    m_t1.start();
    m_t2.start();
@@ -1426,54 +1435,123 @@ ProgressDialog::ProgressDialog( QWidget* pParent )
    m_pJob = 0;
 }
 
+void ProgressDialog::push()
+{
+   ProgressLevelData pld;
+   if ( !m_progressStack.empty() )
+   {
+      pld.m_dRangeMax = m_progressStack.back().m_dSubRangeMax;
+      pld.m_dRangeMin = m_progressStack.back().m_dSubRangeMin;
+   }
+   else
+   {
+      m_bWasCancelled = false;
+      m_t1.restart();
+      m_t2.restart();
+      show();
+   }
+
+   m_progressStack.push_back( pld );
+}
+
+void ProgressDialog::pop( bool bRedrawUpdate )
+{
+   if ( !m_progressStack.empty() )
+   {   
+      m_progressStack.pop_back();
+      if ( m_progressStack.empty() )
+         hide();
+      else      
+         recalc(bRedrawUpdate);
+   }
+}
 
 void ProgressDialog::setInformation(const QString& info, double dCurrent, bool bRedrawUpdate )
 {
-   m_pInformation->setText( info );
-   m_dCurrent = dCurrent;
-   m_dSubCurrent=0;
-   m_dSubMin = 0;
-   m_dSubMax = 1;
-   m_pSubInformation->setText("");
+   if ( m_progressStack.empty() ) 
+      return;
+   ProgressLevelData& pld = m_progressStack.back();
+   pld.m_dCurrent = dCurrent;
+   int level = m_progressStack.size();
+   if ( level==1 )
+   {
+      m_pInformation->setText( info );
+      m_pSubInformation->setText("");
+   }
+   else if ( level==2 )
+   {
+      m_pSubInformation->setText( info );
+   }
    recalc(bRedrawUpdate);
 }
 
 void ProgressDialog::setInformation(const QString& info, bool bRedrawUpdate )
 {
-   m_pInformation->setText( info );
-   m_dSubCurrent = 0;
-   m_dSubMin = 0;
-   m_dSubMax = 1;
-   m_pSubInformation->setText("");
+   if ( m_progressStack.empty() ) 
+      return;
+   //ProgressLevelData& pld = m_progressStack.back();
+   int level = m_progressStack.size();
+   if ( level==1 )
+   {
+      m_pInformation->setText( info );
+      m_pSubInformation->setText( "" );
+   }
+   else if ( level==2 )
+   {
+      m_pSubInformation->setText( info );
+   }
    recalc(bRedrawUpdate);
 }
 
-void ProgressDialog::setMaximum( int maximum )
+void ProgressDialog::setMaxNofSteps( int maxNofSteps )
 {
-   m_maximum = maximum;
-   m_dCurrent = 0;
+   if ( m_progressStack.empty() ) 
+      return;
+   ProgressLevelData& pld = m_progressStack.back();
+   pld.m_maxNofSteps = maxNofSteps;
+   pld.m_dCurrent = 0;
 }
 
 void ProgressDialog::step( bool bRedrawUpdate )
 {
-   m_dCurrent += 1.0/m_maximum;
-   m_dSubCurrent=0;
+   if ( m_progressStack.empty() ) 
+      return;
+   ProgressLevelData& pld = m_progressStack.back();
+   pld.m_dCurrent += 1.0/pld.m_maxNofSteps;
    recalc(bRedrawUpdate);
 }
 
-void ProgressDialog::setSubInformation(const QString& info, double dSubCurrent, bool bRedrawUpdate )
+void ProgressDialog::setCurrent( double dSubCurrent, bool bRedrawUpdate )
 {
-   m_pSubInformation->setText(info);
-   m_dSubCurrent = dSubCurrent;
-   recalc(bRedrawUpdate);
-}
-
-void ProgressDialog::setSubCurrent( double dSubCurrent, bool bRedrawUpdate )
-{
-   m_dSubCurrent = dSubCurrent;
+   if ( m_progressStack.empty() ) 
+      return;
+   ProgressLevelData& pld = m_progressStack.back();
+   pld.m_dCurrent = dSubCurrent;
    recalc( bRedrawUpdate );
 }
 
+// The progressbar goes from 0 to 1 usually.
+// By supplying a subrange transformation the subCurrent-values
+// 0 to 1 will be transformed to dMin to dMax instead.
+// Requirement: 0 < dMin < dMax < 1
+void ProgressDialog::setRangeTransformation( double dMin, double dMax )
+{
+   if ( m_progressStack.empty() ) 
+      return;
+   ProgressLevelData& pld = m_progressStack.back();
+   pld.m_dRangeMin = dMin;
+   pld.m_dRangeMax = dMax;
+   pld.m_dCurrent = 0;
+}
+
+void ProgressDialog::setSubRangeTransformation( double dMin, double dMax )
+{
+   if ( m_progressStack.empty() ) 
+      return;
+   ProgressLevelData& pld = m_progressStack.back();
+   pld.m_dSubRangeMin = dMin;
+   pld.m_dSubRangeMax = dMax;
+}
 
 void qt_enter_modal(QWidget*);
 void qt_leave_modal(QWidget*);
@@ -1507,10 +1585,25 @@ void ProgressDialog::exitEventLoop()
 
 void ProgressDialog::recalc( bool bUpdate )
 {
-   if( (bUpdate && m_dSubCurrent == 0) || m_t1.elapsed()>200 )
+   int level = m_progressStack.size();
+   if( ( bUpdate && level==1) || m_t1.elapsed()>200 )
    {
-      m_pProgressBar->setProgress( int( 1000.0 * m_dCurrent ) );
-      m_pSubProgressBar->setProgress( int( 1000.0 * ( m_dSubCurrent * (m_dSubMax - m_dSubMin) + m_dSubMin ) ) );
+      if (m_progressStack.empty() )
+      {
+         m_pProgressBar->setProgress( 0 );
+         m_pSubProgressBar->setProgress( 0 );
+      }
+      else
+      {
+         std::list<ProgressLevelData>::iterator i = m_progressStack.begin();
+         m_pProgressBar->setProgress( int( 1000.0 * ( i->m_dCurrent * (i->m_dRangeMax - i->m_dRangeMin) + i->m_dRangeMin ) ) );
+         ++i;
+         if ( i!=m_progressStack.end() )
+            m_pSubProgressBar->setProgress( int( 1000.0 * ( i->m_dCurrent * (i->m_dRangeMax - i->m_dRangeMin) + i->m_dRangeMin ) ) );
+         else
+            m_pSubProgressBar->setProgress( int( 1000.0 * m_progressStack.front().m_dSubRangeMin ) );
+      }
+         
       if ( !isVisible() ) show();
       m_pSlowJobInfo->setText("");
       qApp->processEvents();
@@ -1518,15 +1611,6 @@ void ProgressDialog::recalc( bool bUpdate )
    }
 }
 
-void ProgressDialog::start()
-{
-   setInformation("",0, true);
-   setSubInformation("",0);
-   m_bWasCancelled = false;
-   m_t1.restart();
-   m_t2.restart();
-   show();
-}
 
 #include <qtimer.h>
 void ProgressDialog::show()
@@ -1558,10 +1642,9 @@ void ProgressDialog::delayedHide()
    }
    QDialog::hide();
    m_pInformation->setText( "" );
-   m_dSubCurrent = 0;
-   m_dSubMin = 0;
-   m_dSubMax = 1;
-   m_dCurrent = 0;
+
+   m_progressStack.clear();
+   
    m_pProgressBar->setProgress( 0 );
    m_pSubProgressBar->setProgress( 0 );
    m_pSubInformation->setText("");
@@ -1589,16 +1672,6 @@ bool ProgressDialog::wasCancelled()
    return m_bWasCancelled;
 }
 
-// The progressbar goes from 0 to 1 usually.
-// By supplying a subrange transformation the subCurrent-values
-// 0 to 1 will be transformed to dMin to dMax instead.
-// Requirement: 0 < dMin < dMax < 1
-void ProgressDialog::setSubRangeTransformation( double dMin, double dMax )
-{
-   m_dSubMin = dMin;
-   m_dSubMax = dMax;
-   m_dSubCurrent = 0;
-}
 
 void ProgressDialog::timerEvent(QTimerEvent*)
 {
@@ -1608,6 +1681,60 @@ void ProgressDialog::timerEvent(QTimerEvent*)
    }
    m_pSlowJobInfo->setText( m_currentJobInfo );
 }
+
+
+ProgressProxy::ProgressProxy()
+{
+   g_pProgressDialog->push();
+}
+
+ProgressProxy::~ProgressProxy()
+{
+   g_pProgressDialog->pop(false);
+}
+
+void ProgressProxy::setInformation( const QString& info, bool bRedrawUpdate )
+{
+   g_pProgressDialog->setInformation( info, bRedrawUpdate );
+}
+
+void ProgressProxy::setInformation( const QString& info, double dCurrent, bool bRedrawUpdate )
+{
+   g_pProgressDialog->setInformation( info, dCurrent, bRedrawUpdate );
+}
+
+void ProgressProxy::setCurrent( double dCurrent, bool bRedrawUpdate  )
+{
+   g_pProgressDialog->setCurrent( dCurrent, bRedrawUpdate );
+}
+
+void ProgressProxy::step( bool bRedrawUpdate )
+{
+   g_pProgressDialog->step( bRedrawUpdate );
+}
+
+void ProgressProxy::setMaxNofSteps( int maxNofSteps )
+{
+   g_pProgressDialog->setMaxNofSteps( maxNofSteps );
+}
+
+bool ProgressProxy::wasCancelled()
+{
+   return g_pProgressDialog->wasCancelled();
+}
+
+void ProgressProxy::setRangeTransformation( double dMin, double dMax )
+{
+   g_pProgressDialog->setRangeTransformation( dMin, dMax );
+}
+
+void ProgressProxy::setSubRangeTransformation( double dMin, double dMax )
+{
+   g_pProgressDialog->setSubRangeTransformation( dMin, dMax );
+}
+
+
+
 
 
 #include "fileaccess.moc"

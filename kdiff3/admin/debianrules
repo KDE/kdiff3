@@ -40,16 +40,16 @@ $ARTSCCONFIG		=	"$kde_bindir/artsc-config";
 
 if (defined $ENV{DEB_BUILD_OPTIONS} &&
     $ENV{DEB_BUILD_OPTIONS} =~ /\bdebug\b/) {
-  $enable_debug="--enable-debug";
+  $enable_debug="--enable-debug=full";
   $enable_final="";
 }
 else {
   $enable_debug="--disable-debug";
   if (defined $ENV{DEB_BUILD_OPTIONS} &&
-              $ENV{DEB_BUILD_OPTIONS} =~ /\bnofinal\b/) {
-	  $enable_final="";
-  } else {
+              $ENV{DEB_BUILD_OPTIONS} =~ /\bfinal\b/) {
 	  $enable_final="--enable-final";
+  } else {
+	  $enable_final="";
   }
 }
 

@@ -33,6 +33,7 @@
 #include <qstringlist.h>
 
 #include <map>
+#include <list>
 
 QString getTranslationDir();
 
@@ -133,9 +134,11 @@ class KToolBar : public QToolBar
 public:
    KToolBar(QMainWindow* parent);
 
-   enum BarPosition {Top};
+   enum BarPosition {Top, Bottom, Left, Right};
    BarPosition barPos();
    void setBarPos(BarPosition);
+private:
+   QMainWindow* m_pMainWindow;
 };
 
 class KActionCollection
@@ -177,6 +180,7 @@ public:
    QPopupMenu* dirCurrentSyncItemMenu;
    QPopupMenu* movementMenu;
    QPopupMenu* mergeMenu;
+   QPopupMenu* diffMenu;
    QPopupMenu* windowsMenu;
    QPopupMenu* settingsMenu;
    QPopupMenu* helpMenu;
@@ -315,8 +319,23 @@ public:
       const QString& description, int licence,
       const QString& copyright, int w, const QString& homepage, const QString& email);
    KAboutData( const QString& name, const QString& appName, const QString& version );
-   void addAuthor(const QString& name, int, const QString& email);
+   void addAuthor(const char* name=0, const char* task=0, const char* email=0, const char* weblink=0);
+   void addCredit(const char* name=0, const char* task=0, const char* email=0, const char* weblink=0);
    enum { License_GPL };
+   
+   struct AboutDataEntry
+   {
+      AboutDataEntry(const QString& name, const QString& task, const QString& email, const QString& weblink)
+      : m_name(name), m_task(task), m_email(email), m_weblink(weblink)  
+      {}
+      QString m_name;
+      QString m_task;
+      QString m_email;
+      QString m_weblink;
+   };
+   
+   std::list<AboutDataEntry> m_authorList;
+   std::list<AboutDataEntry> m_creditList;
 };
 
 typedef QValueList<QCString> QCStringList;

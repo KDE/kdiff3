@@ -12,8 +12,8 @@ CC       = gcc
 CXX      = g++
 LEX      = flex
 YACC     = yacc
-CFLAGS   = -pipe -O2 -march=i586 -mcpu=i686 -fmessage-length=0 -fPIC -Wall -W -O2 -march=i586 -mcpu=i686 -fmessage-length=0 -fPIC -D_REENTRANT  -DQT_NO_DEBUG -DQT_THREAD_SUPPORT -DQT_SHARED -DQT_TABLET_SUPPORT
-CXXFLAGS = -pipe -O2 -march=i586 -mcpu=i686 -fmessage-length=0 -fPIC -Wall -W -O2 -march=i586 -mcpu=i686 -fmessage-length=0 -fPIC -D_REENTRANT  -DQT_NO_DEBUG -DQT_THREAD_SUPPORT -DQT_SHARED -DQT_TABLET_SUPPORT
+CFLAGS   = -pipe -O2 -march=i586 -Wall -W -fmessage-length=0 -fPIC -D_REENTRANT  -DQT_NO_DEBUG -DQT_THREAD_SUPPORT -DQT_SHARED -DQT_TABLET_SUPPORT -D__USE_STD_IOSTREAM
+CXXFLAGS = -pipe -O2 -march=i586 -Wall -W -fmessage-length=0 -fPIC -D_REENTRANT  -DQT_NO_DEBUG -DQT_THREAD_SUPPORT -DQT_SHARED -DQT_TABLET_SUPPORT -D__USE_STD_IOSTREAM
 LEXFLAGS = 
 YACCFLAGS= -d
 INCPATH  = -I$(QTDIR)/mkspecs/default -I. -Ikreplacements -I/usr/include -I$(QTDIR)/include

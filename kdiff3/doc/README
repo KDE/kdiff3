@@ -47,3 +47,7 @@ first you must cd into each subdirectory.)
 
 for i in `ls ../en | grep png`; do ln -s ../en/$i $i; done
 
+Command to retrieve other translations from cvs:
+
+cvs co kde-i18n/subdirs
+for i in `cat kde-i18n/subdirs`; do  cvs co kde-i18n/$i/docs/kdeextragear-1/kdiff3/index.docbook; done

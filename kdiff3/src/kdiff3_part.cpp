@@ -17,6 +17,9 @@
 #include <kmessagebox.h>
 #include <klocale.h>
 #include <iostream>
+
+#include "version.h"
+
 KDiff3Part::KDiff3Part( QWidget *parentWidget, const char *widgetName,
                                   QObject *parent, const char *name )
     : KParts::ReadOnlyPart(parent, name)
@@ -137,7 +140,7 @@ bool KDiff3Part::openFile()
 
    if ( f1.exists() && f2.exists() && fileName1!=fileName2 )
    {
-      m_widget->slotFileOpen2( fileName1, fileName2, "", "", "", "", "" );
+      m_widget->slotFileOpen2( fileName1, fileName2, "", "", "", "", "", 0 );
       return true;
    }
    else if ( version1.isEmpty() && f1.exists() )
@@ -151,7 +154,7 @@ bool KDiff3Part::openFile()
       ::system( cmd.ascii() );
 
       m_widget->slotFileOpen2( fileName1, tempFileName, "", "",
-                               "", version2.isEmpty() ? fileName2 : "REV:"+version2+":"+fileName2, "" ); // alias names
+                               "", version2.isEmpty() ? fileName2 : "REV:"+version2+":"+fileName2, "", 0 ); // alias names
       FileAccess::removeFile( tempFileName );
    }
    else if ( version2.isEmpty() && f2.exists() )
@@ -165,7 +168,7 @@ bool KDiff3Part::openFile()
       ::system( cmd.ascii() );
 
       m_widget->slotFileOpen2( tempFileName, fileName2, "", "",
-                               version1.isEmpty() ? fileName1 : "REV:"+version1+":"+fileName1, "", "" ); // alias name
+                               version1.isEmpty() ? fileName1 : "REV:"+version1+":"+fileName1, "", "", 0 ); // alias name
       FileAccess::removeFile( tempFileName );
    }
    else if ( !version1.isEmpty() && !version2.isEmpty() )
@@ -184,7 +187,7 @@ bool KDiff3Part::openFile()
       m_widget->slotFileOpen2( tempFileName1, tempFileName2, "", "",
          "REV:"+version1+":"+fileName1,
          "REV:"+version2+":"+fileName2,
-         ""
+         "", 0
       );
 
       FileAccess::removeFile( tempFileName1 );
@@ -260,7 +263,7 @@ KInstance* KDiff3PartFactory::instance()
 {
     if( !s_instance )
     {
-        s_about = new KAboutData("kdiff3part", I18N_NOOP("KDiff3Part"), "0.9.70");
+        s_about = new KAboutData("kdiff3part", I18N_NOOP("KDiff3Part"), VERSION);
         s_about->addAuthor("Joachim Eibl", 0, "joachim.eibl@gmx.de");
         s_instance = new KInstance(s_about);
     }
@@ -274,5 +277,8 @@ extern "C"
         return new KDiff3PartFactory;
     }
 }
+
+// Suppress warning with --enable-final
+#undef VERSION
 
 #include "kdiff3_part.moc"

@@ -99,7 +99,7 @@ class KDiff3App : public QSplitter
     /** open a file and load it into the document*/
     void slotFileOpen();
     void slotFileOpen2( QString fn1, QString fn2, QString fn3, QString ofn,
-                        QString an1, QString an2, QString an3 );
+                        QString an1, QString an2, QString an3, TotalDiffStatus* pTotalDiffStatus );
 
     /** save a document */
     void slotFileSave();
@@ -165,6 +165,7 @@ class KDiff3App : public QSplitter
     KToggleAction *chooseB;
     KToggleAction *chooseC;
     KToggleAction *autoAdvance;
+    KToggleAction *wordWrap;
     KToggleAction *showWhiteSpaceCharacters;
     KToggleAction *showWhiteSpace;
     KToggleAction *showLineNumbers;
@@ -187,6 +188,11 @@ class KDiff3App : public QSplitter
     KAction* winToggleSplitOrientation;
     KToggleAction *dirShowBoth;
     KAction *dirViewToggle;
+    KToggleAction *overviewModeNormal;
+    KToggleAction *overviewModeAB;
+    KToggleAction *overviewModeAC;
+    KToggleAction *overviewModeBC;
+
 
     QPopupMenu* m_pMergeEditorPopupMenu;
 
@@ -239,7 +245,7 @@ class KDiff3App : public QSplitter
    OptionDialog* m_pOptionDialog;
    FindDialog*   m_pFindDialog;
 
-   void init( bool bAuto=false );
+   void init( bool bAuto=false, TotalDiffStatus* pTotalDiffStatus=0 );
 
    virtual bool eventFilter( QObject* o, QEvent* e );
    virtual void resizeEvent(QResizeEvent*);
@@ -261,6 +267,7 @@ class KDiff3App : public QSplitter
 public slots:
    void resizeDiffTextWindow(int newWidth, int newHeight);
    void resizeMergeResultWindow();
+   void recalcWordWrap();
 
    void showPopupMenu( const QPoint& point );
 
@@ -312,12 +319,17 @@ public slots:
    void slotShowWhiteSpaceToggled();
    void slotShowLineNumbersToggled();
    void slotAutoAdvanceToggled();
+   void slotWordWrapToggled();
    void slotShowWindowAToggled();
    void slotShowWindowBToggled();
    void slotShowWindowCToggled();
    void slotWinFocusNext();
    void slotWinFocusPrev();
    void slotWinToggleSplitterOrientation();
+   void slotOverviewNormal();
+   void slotOverviewAB();
+   void slotOverviewAC();
+   void slotOverviewBC();
 };
 
 

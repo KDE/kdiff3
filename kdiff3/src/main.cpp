@@ -22,6 +22,9 @@
 #include "version.h"
 #include <qtextcodec.h>
 
+#ifdef KREPLACEMENTS_H
+#include "optiondialog.h"
+#endif
 
 static const char *description =
    I18N_NOOP("Text Diff and Merge Tool");
@@ -37,7 +40,12 @@ static KCmdLineOptions options[] =
   { "out file",    I18N_NOOP("Output file, again. (For compatibility with certain tools.)"), 0 },
   { "auto",        I18N_NOOP("No GUI if all conflicts are auto-solvable. (Needs -o file)"), 0 },
   { "qall",        I18N_NOOP("Don't solve conflicts automatically. (For compatibility...)"), 0 },
-  { "fname alias",  I18N_NOOP("Visible name replacement. Supply this once for every input."), 0 },
+  { "L1 alias1",   I18N_NOOP("Visible name replacement for input file 1 (base)."), 0 },
+  { "L2 alias2",   I18N_NOOP("Visible name replacement for input file 2."), 0 },
+  { "L3 alias3",   I18N_NOOP("Visible name replacement for input file 3."), 0 },
+  { "L", 0, 0 },
+  { "fname alias", I18N_NOOP("Alternative visible name replacement. Supply this once for every input."), 0 },
+  { "u",  I18N_NOOP("Has no effect. For compatibility with certain tools."), 0 },
 #ifdef _WIN32
   { "query",       I18N_NOOP("For compatibility with certain tools."), 0 },
 #endif
@@ -101,20 +109,41 @@ int main(int argc, char *argv[])
       VERSION, description, KAboutData::License_GPL,
       "(c) 2002-2004 Joachim Eibl", 0, "http://kdiff3.sourceforge.net/", "joachim.eibl@gmx.de");
    aboutData.addAuthor("Joachim Eibl",0, "joachim.eibl@gmx.de");
+   aboutData.addCredit("Eike Sauer", "Bugfixes, Debian package maintainer" );
+   aboutData.addCredit("Sebastien Fricker", "Windows installer" );
+   aboutData.addCredit("Stephan Binner", "i18n-help", "binner@kde.org" );
+   aboutData.addCredit("Stefan Partheymueller", "Clipboard-patch" );
+   aboutData.addCredit("David Faure", "KIO-Help", "faure@kde.org" );
+   aboutData.addCredit("Bernd Gehrmann", "Class CvsIgnoreList from Cervisia" );
+   aboutData.addCredit("Andre Woebbeking", "Class StringMatcher" );
+   aboutData.addCredit("Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower", "GNU-Diffutils");
+   aboutData.addCredit(I18N_NOOP("+ Many thanks to those who reported bugs and contributed ideas!"));
+   
+   
    KCmdLineArgs::init( argc, argv, &aboutData );
    KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
 
    KApplication app;
 #ifdef KREPLACEMENTS_H
-   QString translationDir = getTranslationDir();
-   QString locale = QTextCodec::locale();
-   QTranslator kdiff3Translator( 0 );
-   kdiff3Translator.load( QString("kdiff3_")+locale, translationDir );
-   app.installTranslator( &kdiff3Translator );
+   QString locale;
    
+   locale = app.config()->readEntry("Language", "Auto");
+   int spacePos = locale.find(' ');
+   if (spacePos>0) locale = locale.left(spacePos);
+   QTranslator kdiff3Translator( 0 );
    QTranslator qtTranslator( 0 );
-   qtTranslator.load( QString("qt_")+locale, translationDir );
-   app.installTranslator( &qtTranslator );
+   if (locale != "en_orig")
+   {
+      if ( locale == "Auto" || locale.isEmpty() )
+         locale = QTextCodec::locale();
+         
+      QString translationDir = getTranslationDir();
+      kdiff3Translator.load( QString("kdiff3_")+locale, translationDir );
+      app.installTranslator( &kdiff3Translator );
+      
+      qtTranslator.load( QString("qt_")+locale, translationDir );
+      app.installTranslator( &qtTranslator );
+   }
 #endif
 
   if (app.isRestored())

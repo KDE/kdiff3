@@ -29,6 +29,8 @@
 #include <qvalidator.h>
 #include <qtooltip.h>
 #include <qtextcodec.h>
+#include <qradiobutton.h>
+#include <qvbuttongroup.h>
 
 #include <kapplication.h>
 #include <kcolorbtn.h>
@@ -42,6 +44,10 @@
 
 #include "optiondialog.h"
 #include "diff.h"
+
+#ifndef KREPLACEMENTS_H
+#include <kglobalsettings.h>
+#endif
 
 void OptionDialog::addOptionItem(OptionItem* p)
 {
@@ -84,6 +90,27 @@ public:
    void read (KConfig* config){ *m_pbVar = config->readBoolEntry( m_saveName, *m_pbVar ); }
 private:
    OptionCheckBox( const OptionCheckBox& ); // private copy constructor without implementation
+   bool* m_pbVar;
+   bool m_bDefaultVal;
+};
+
+class OptionRadioButton : public QRadioButton, public OptionItem
+{
+public:
+   OptionRadioButton( QString text, bool bDefaultVal, const QString& saveName, bool* pbVar,
+                   QWidget* pParent, OptionDialog* pOD )
+   : QRadioButton( text, pParent ), OptionItem( pOD, saveName )
+   {
+      m_pbVar = pbVar;
+      m_bDefaultVal = bDefaultVal;
+   }
+   void setToDefault(){ setChecked( m_bDefaultVal );      }
+   void setToCurrent(){ setChecked( *m_pbVar );           }
+   void apply()       { *m_pbVar = isChecked();                              }
+   void write(KConfig* config){ config->writeEntry(m_saveName, *m_pbVar );   }
+   void read (KConfig* config){ *m_pbVar = config->readBoolEntry( m_saveName, *m_pbVar ); }
+private:
+   OptionRadioButton( const OptionRadioButton& ); // private copy constructor without implementation
    bool* m_pbVar;
    bool m_bDefaultVal;
 };
@@ -277,7 +304,9 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
   if (bShowDirMergeSettings)
      setupDirectoryMergePage();
      
-  // setupRegionalPage();
+#ifdef KREPLACEMENTS_H   
+  setupRegionalPage();
+#endif
 
   //setupKeysPage();
 
@@ -297,6 +326,7 @@ void OptionDialog::setupOtherOptions()
    new OptionToggleAction( true,  "ShowWhiteSpace", &m_bShowWhiteSpace, this );
    new OptionToggleAction( false, "ShowLineNumbers", &m_bShowLineNumbers, this );
    new OptionToggleAction( true,  "HorizDiffWindowSplitting", &m_bHorizDiffWindowSplitting, this );
+   new OptionToggleAction( false, "WordWrap", &m_bWordWrap, this );
 }
 
 void OptionDialog::setupFontPage( void )
@@ -461,7 +491,7 @@ void OptionDialog::setupEditPage( void )
    OptionCheckBox* pStringEncoding = new OptionCheckBox( i18n("Use locale encoding"), true, "LocaleEncoding", &m_bStringEncoding, page, this );
    gbox->addMultiCellWidget( pStringEncoding, line, line, 0, 1 );
    QToolTip::add( pStringEncoding, i18n(
-      "Change this if non-ascii-characters aren't displayed correctly."
+      "Change this if non-ASCII characters are not displayed correctly."
       ));
    ++line;
 
@@ -503,10 +533,10 @@ void OptionDialog::setupDiffPage( void )
       );
    ++line;
 
-   OptionCheckBox* pUpCase = new OptionCheckBox( i18n("Convert to upper case"), false, "UpCase", &m_bUpCase, page, this );
-   gbox->addMultiCellWidget( pUpCase, line, line, 0, 1 );
-   QToolTip::add( pUpCase, i18n(
-      "Turn all lower case characters to upper case on reading. (e.g.: 'a'->'A')")
+   OptionCheckBox* pIgnoreCase = new OptionCheckBox( i18n("Ignore case"), false, "IgnoreCase", &m_bIgnoreCase, page, this );
+   gbox->addMultiCellWidget( pIgnoreCase, line, line, 0, 1 );
+   QToolTip::add( pIgnoreCase, i18n(
+      "Treat case differences like white space changes. ('a'<=>'A')")
       );
    ++line;
 
@@ -658,17 +688,24 @@ void OptionDialog::setupDirectoryMergePage( void )
                  "Files and directories without change will not appear in the list."));
    ++line;
 
-   OptionCheckBox* pTrustDate = new OptionCheckBox( i18n("Trust the modification date (unsafe)"), false, "TrustDate", &m_bDmTrustDate, page, this );
-   gbox->addMultiCellWidget( pTrustDate, line, line, 0, 1 );
+   QVButtonGroup* pBG = new QVButtonGroup(i18n("File Comparison Mode"),page);
+   gbox->addMultiCellWidget( pBG, line, line, 0, 1 );
+   ++line;
+   
+   OptionRadioButton* pBinaryComparison = new OptionRadioButton( i18n("Binary Comparison"), true, "BinaryComparison", &m_bDmBinaryComparison, pBG, this );
+   QToolTip::add( pBinaryComparison, i18n("Binary comparison of each file. (Default)") );
+   
+   OptionRadioButton* pFullAnalysis = new OptionRadioButton( i18n("Full Analysis"), false, "FullAnalysis", &m_bDmFullAnalysis, pBG, this );
+   QToolTip::add( pFullAnalysis, i18n("Do a full analysis and show statistics information in extra columns.\n"
+                                      "(Slower than a binary comparison, much slower for binary files.)") );
+   
+   OptionRadioButton* pTrustDate = new OptionRadioButton( i18n("Trust the modification date (unsafe)"), false, "TrustDate", &m_bDmTrustDate, pBG, this );
    QToolTip::add( pTrustDate, i18n("Assume that files are equal if the modification date and file length are equal.\n"
                                      "Useful for big directories or slow networks.") );
-   ++line;
 
-   OptionCheckBox* pTrustSize = new OptionCheckBox( i18n("Trust the size (unsafe)"), false, "TrustSize", &m_bDmTrustSize, page, this );
-   gbox->addMultiCellWidget( pTrustSize, line, line, 0, 1 );
+   OptionRadioButton* pTrustSize = new OptionRadioButton( i18n("Trust the size (unsafe)"), false, "TrustSize", &m_bDmTrustSize, pBG, this );
    QToolTip::add( pTrustSize, i18n("Assume that files are equal if their file lengths are equal.\n"
                                    "Useful for big directories or slow networks when the date is modified during download.") );
-   ++line;
 
    // Some two Dir-options: Affects only the default actions.
    OptionCheckBox* pSyncMode = new OptionCheckBox( i18n("Synchronize directories"), false,"SyncMode", &m_bDmSyncMode, page, this );
@@ -696,7 +733,7 @@ void OptionDialog::setupDirectoryMergePage( void )
 
    topLayout->addStretch(10);
 }
-
+/*
 static void insertCodecs(OptionComboBox* p)
 {
    std::multimap<QString,QString> m;  // Using the multimap for case-insensitive sorting.
@@ -713,9 +750,92 @@ static void insertCodecs(OptionComboBox* p)
    for(mi=m.begin(), i=0; mi!=m.end(); ++mi, ++i)
       p->insertItem(mi->second, i+1);
 }
+*/
 
 void OptionDialog::setupRegionalPage( void )
 {
+#ifdef KREPLACEMENTS_H   
+
+static char* countryMap[]={
+"af Afrikaans",
+"ar Arabic",
+"az Azerbaijani",
+"be Belarusian",
+"bg Bulgarian",
+"bn Bengali",
+"bo Tibetan",
+"br Breton",
+"bs Bosnian",
+"ca Catalan",
+"cs Czech",
+"cy Welsh",
+"da Danish",
+"de German",
+"el Greek",
+"en_GB British English",
+"eo Esperanto",
+"es Spanish",
+"et Estonian",
+"eu Basque",
+"fa Farsi (Persian)",
+"fi Finnish",
+"fo Faroese",
+"fr French",
+"ga Irish Gaelic",
+"gl Galician",
+"gu Gujarati",
+"he Hebrew",
+"hi Hindi",
+"hr Croatian",
+"hsb Upper Sorbian",
+"hu Hungarian",
+"id Indonesian",
+"is Icelandic",
+"it Italian",
+"ja Japanese",
+"ko Korean",
+"ku Kurdish",
+"lo Lao",
+"lt Lithuanian",
+"lv Latvian",
+"mi Maori",
+"mk Macedonian",
+"mn Mongolian",
+"ms Malay",
+"mt Maltese",
+"nb Norwegian Bookmal",
+"nds Low Saxon",
+"nl Dutch",
+"nn Norwegian Nynorsk",
+"nso Northern Sotho",
+"oc Occitan",
+"pl Polish",
+"pt Portuguese",
+"pt_BR Brazilian Portuguese",
+"ro Romanian",
+"ru Russian",
+"se Northern Sami",
+"sk Slovak",
+"sl Slovenian",
+"sq Albanian",
+"sr Serbian",
+"ss Swati",
+"sv Swedish",
+"ta Tamil",
+"tg Tajik",
+"th Thai",
+"tr Turkish",
+"uk Ukrainian",
+"uz Uzbek",
+"ven Venda",
+"vi Vietnamese",
+"wa Walloon",
+"xh Xhosa",
+"zh_CN Chinese Simplified",
+"zh_TW Chinese Traditional",
+"zu Zulu"
+};
+
    QFrame *page = addPage( i18n("Regional Settings"), i18n("Regional Settings"),
                            BarIcon("locale"/*"charset"*/, KIcon::SizeMedium ) );
    QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
@@ -725,20 +845,43 @@ void OptionDialog::setupRegionalPage( void )
    int line=0;
 
    QLabel* label;
-#ifdef KREPLACEMENTS_H   
    label = new QLabel( i18n("Language (restart required)"), page );
    gbox->addWidget( label, line, 0 );
    OptionComboBox* pLanguage = new OptionComboBox( 0, "Language", &m_language, page, this );
    gbox->addWidget( pLanguage, line, 1 );
-   pLanguage->insertItem( i18n("Auto"), 0 );
-   // Read directory: Find all kdiff3_*.qm-files and insert the found files here selection
+   pLanguage->insertItem( "Auto", 0 );  // Must not translate, won't work otherwise!
+   pLanguage->insertItem( "en_orig" );
+      
+   // Read directory: Find all kdiff3_*.qm-files and insert the found files here selection   
+   FileAccess fa( getTranslationDir() );
+   t_DirectoryList dirList;
+   fa.listDir( &dirList, false, false, "kdiff3_*.qm", "", "*", false, false );
+   t_DirectoryList::iterator i;
+   for( i=dirList.begin(); i!=dirList.end(); ++i)
+   {      
+      QString fileName = i->fileName();
+      // Skip the "kdiff3_" and omit the .qm
+      QString languageId = fileName.mid(7, fileName.length()-10 );
+      
+      unsigned int countryIdx=0;
+      for(countryIdx=0; countryIdx< sizeof(countryMap)/sizeof(countryMap[0]); ++countryIdx )
+      {
+         QString fullName = countryMap[countryIdx];
+         if ( languageId+" " == fullName.left(languageId.length()+1) )
+         {
+            languageId += " (" + fullName.mid(languageId.length()+1) + ")";
+         }
+      }
+      
+      pLanguage->insertItem( languageId );
+   }
+   
    QToolTip::add( label, i18n(
       "Choose the language of the GUI-strings or \"Auto\".\n" 
       "For a change of language to take place, quit and restart KDiff3.") 
       );
    ++line;
-#endif
-
+/*
    label = new QLabel( i18n("Codec for file contents"), page );
    gbox->addWidget( label, line, 0 );
    OptionComboBox* pFileCodec = new OptionComboBox( 0, "FileCodec", &m_fileCodec, page, this );
@@ -749,8 +892,9 @@ void OptionDialog::setupRegionalPage( void )
       "or \"Auto\" if unsure." ) 
       );
    ++line;
-      
+*/      
    topLayout->addStretch(10);
+#endif
 }
 
 
@@ -823,8 +967,10 @@ void OptionDialog::resetToDefaults()
 
 #ifdef _WIN32
    m_fontChooser->setFont( QFont("Courier New", 10 ), true /*only fixed*/ );
-#else
+#elif defined( KREPLACEMENTS_H )
    m_fontChooser->setFont( QFont("Courier", 10 ), true /*only fixed*/ );
+#else
+   m_fontChooser->setFont( KGlobalSettings::fixedFont(), true /*only fixed*/ );
 #endif
 }
 

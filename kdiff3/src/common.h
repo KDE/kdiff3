@@ -18,6 +18,8 @@
 #ifndef _COMMON_H
 #define _COMMON_H
 
+#include <assert.h>
+
 template< class T >
 T min2( T x, T y )
 {

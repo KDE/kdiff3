@@ -64,6 +64,8 @@ public:
     QColor m_currentRangeBgColor;
     QColor m_currentRangeDiffBgColor;
 
+    bool m_bWordWrap;
+    
     bool m_bReplaceTabs;
     bool m_bAutoIndentation;
     int  m_tabSize;
@@ -80,7 +82,7 @@ public:
 
     int  m_whiteSpace2FileMergeDefault;
     int  m_whiteSpace3FileMergeDefault;
-    bool m_bUpCase;
+    bool m_bIgnoreCase;
     bool m_bIgnoreNumbers;
     bool m_bIgnoreComments;
     QString m_PreProcessorCmd;
@@ -102,6 +104,8 @@ public:
     bool m_bDmFollowDirLinks;
     bool m_bDmFindHidden;
     bool m_bDmCreateBakFiles;
+    bool m_bDmBinaryComparison;
+    bool m_bDmFullAnalysis;
     bool m_bDmTrustDate;
     bool m_bDmTrustSize;
     bool m_bDmCopyNewer;
@@ -112,7 +116,7 @@ public:
     QString m_DmDirAntiPattern;
 
     QString m_language;
-    QString m_fileCodec;
+    //QString m_fileCodec;
     
     void saveOptions(KConfig* config);
     void readOptions(KConfig* config);

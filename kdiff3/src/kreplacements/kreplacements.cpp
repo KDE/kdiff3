@@ -17,6 +17,7 @@
 
 
 #include "kreplacements.h"
+#include "common.h"
 
 #include <assert.h>
 
@@ -31,10 +32,12 @@
 #include <qtextbrowser.h>
 #include <qtextstream.h>
 #include <qlayout.h>
+#include <qdockarea.h>
 
 #include <vector>
 #include <iostream>
 #include <algorithm>
+
 
 static QString s_copyright;
 static QString s_email;
@@ -42,6 +45,8 @@ static QString s_description;
 static QString s_appName;
 static QString s_version;
 static QString s_homepage;
+static KAboutData* s_pAboutData;
+
 
 #ifdef _WIN32
 #include <process.h>
@@ -275,16 +280,25 @@ KURL KFileDialog::getExistingURL( const QString &  startDir,
 
 KToolBar::BarPosition KToolBar::barPos()
 {
+   if ( m_pMainWindow->leftDock()->hasDockWindow(this) ) return Left;
+   if ( m_pMainWindow->rightDock()->hasDockWindow(this) ) return Right;
+   if ( m_pMainWindow->topDock()->hasDockWindow(this) ) return Top;
+   if ( m_pMainWindow->bottomDock()->hasDockWindow(this) ) return Bottom;
    return Top;
 }
 
-void KToolBar::setBarPos(BarPosition)
+void KToolBar::setBarPos(BarPosition bp)
 {
+   if ( bp == Left ) m_pMainWindow->moveDockWindow( this, DockLeft );
+   else if ( bp == Right ) m_pMainWindow->moveDockWindow( this, DockRight );
+   else if ( bp == Bottom ) m_pMainWindow->moveDockWindow( this, DockBottom );
+   else if ( bp == Top ) m_pMainWindow->moveDockWindow( this, DockTop );
 }
 
 KToolBar::KToolBar( QMainWindow* parent )
 : QToolBar( parent )
 {
+   m_pMainWindow = parent;
 }
 
 
@@ -301,6 +315,8 @@ KMainWindow::KMainWindow( QWidget* parent, const QString& name )
    dirCurrentSyncItemMenu = 0;
    movementMenu = new QPopupMenu();
    menuBar()->insertItem(i18n("&Movement"), movementMenu);
+   diffMenu = new QPopupMenu();
+   menuBar()->insertItem(i18n("D&iffview"), diffMenu);
    mergeMenu = new QPopupMenu();
    menuBar()->insertItem(i18n("&Merge"), mergeMenu);
    windowsMenu = new QPopupMenu();
@@ -358,6 +374,52 @@ void KMainWindow::quit()
 
 void KMainWindow::slotAbout()
 {
+   QTabDialog d;
+   d.setCaption("About " + s_appName);
+   QTextBrowser* tb1 = new QTextBrowser(&d);
+   tb1->setWordWrap( QTextEdit::NoWrap );
+   tb1->setText(
+      s_appName + " Version " + s_version +
+      "\n\n" + s_description + 
+      "\n\n" + s_copyright +
+      "\n\nHomepage: " + s_homepage +
+      "\n\nLicence: GNU GPL Version 2"
+      );
+   d.addTab(tb1,i18n("&About"));
+      
+   std::list<KAboutData::AboutDataEntry>::iterator i;
+   
+   QString s2;   
+   for( i=s_pAboutData->m_authorList.begin(); i!=s_pAboutData->m_authorList.end(); ++i )
+   {
+      if ( !i->m_name.isEmpty() )    s2 +=         i->m_name    + "\n";
+      if ( !i->m_task.isEmpty() )    s2 += "   " + i->m_task    + "\n";
+      if ( !i->m_email.isEmpty() )   s2 += "   " + i->m_email   + "\n";
+      if ( !i->m_weblink.isEmpty() ) s2 += "   " + i->m_weblink + "\n";
+      s2 += "\n";
+   }
+   QTextBrowser* tb2 = new QTextBrowser(&d);
+   tb2->setWordWrap( QTextEdit::NoWrap );
+   tb2->setText(s2);
+   d.addTab(tb2,i18n("A&uthor"));
+   
+   QString s3;
+   for( i=s_pAboutData->m_creditList.begin(); i!=s_pAboutData->m_creditList.end(); ++i )
+   {
+      if ( !i->m_name.isEmpty() )    s3 +=         i->m_name    + "\n";
+      if ( !i->m_task.isEmpty() )    s3 += "   " + i->m_task    + "\n";
+      if ( !i->m_email.isEmpty() )   s3 += "   " + i->m_email   + "\n";
+      if ( !i->m_weblink.isEmpty() ) s3 += "   " + i->m_weblink + "\n";
+      s3 += "\n";
+   }
+   QTextBrowser* tb3 = new QTextBrowser(&d);
+   tb3->setWordWrap( QTextEdit::NoWrap );
+   tb3->setText(s3);
+   d.addTab(tb3,i18n("&Thanks To"));
+   
+   d.resize(400,300);
+   d.exec();
+/*
    QMessageBox::information(
       this,
       "About " + s_appName,
@@ -367,6 +429,7 @@ void KMainWindow::slotAbout()
       "\n\nHomepage: " + s_homepage +
       "\n\nLicence: GNU GPL Version 2"
       );
+*/
 }
 
 void KMainWindow::slotHelp()
@@ -516,8 +579,7 @@ static int num( QString& s, int idx )
 
 void KConfig::writeEntry(const QString& k, const QFont& v )
 {
-   //m_map[k] = v.toString();
-   m_map[k] = v.family() + "," + QString::number(v.pointSize());
+   m_map[k] = v.family() + "," + QString::number(v.pointSize()) + "," + (v.bold() ? "bold" : "normal");
 }
 
 void KConfig::writeEntry(const QString& k, const QColor& v )
@@ -564,6 +626,7 @@ QFont KConfig::readFontEntry(const QString& k, QFont* defaultVal )
    {
       f.setFamily( subSection( i->second, 0, ',' ) );
       f.setPointSize( subSection( i->second, 1, ',' ).toInt() );
+      f.setBold( subSection( i->second, 2, ',' )=="bold" );
       //f.fromString(i->second);
    }
 
@@ -705,6 +768,7 @@ KAction::KAction(const QString& text, const QIconSet& icon, int accel,
          }
          addTo( p->dirCurrentSyncItemMenu );
       }
+      else if( name.left(4)=="diff")  addTo( p->diffMenu );
       else if( name[0]=='d')  addTo( p->directoryMenu );
       else if( name[0]=='f')  addTo( p->fileMenu );
       else if( name[0]=='w')  addTo( p->windowsMenu );
@@ -753,6 +817,7 @@ KAction::KAction(const QString& text, int accel,
          }
          addTo( p->dirCurrentSyncItemMenu );
       }
+      else if( name.left(4)=="diff")  addTo( p->diffMenu );
       else if( name[0]=='d')  addTo( p->directoryMenu );
       else if( name[0]=='f')  addTo( p->fileMenu );
       else if( name[0]=='w')  addTo( p->windowsMenu );
@@ -1035,8 +1100,14 @@ KAboutData::KAboutData( const QString& /*name*/, const QString& /*appName*/, con
 {
 }
 
-void KAboutData::addAuthor(const QString& /*name*/, int, const QString& /*email*/)
+void KAboutData::addAuthor(const char* name, const char* task, const char* email, const char* weblink)
 {
+   m_authorList.push_back( AboutDataEntry( name, task, email, weblink) );
+}
+
+void KAboutData::addCredit(const char* name, const char* task, const char* email, const char* weblink)
+{
+   m_creditList.push_back( AboutDataEntry( name, task, email, weblink) );
 }
 
 /*  Option structure: e.g.:
@@ -1062,10 +1133,11 @@ KCmdLineArgs* KCmdLineArgs::parsedArgs()  // static
    return &s_cmdLineArgs;
 }
 
-void KCmdLineArgs::init( int argc, char**argv, KAboutData* )  // static
+void KCmdLineArgs::init( int argc, char**argv, KAboutData* pAboutData )  // static
 {
    s_argc = argc;
    s_argv = argv;
+   s_pAboutData = pAboutData;
 }
 
 void KCmdLineArgs::addCmdLineOptions( KCmdLineOptions* options ) // static
@@ -1206,7 +1278,36 @@ KApplication::KApplication()
             s += "If you start without arguments, then a dialog will appear\n";
             s += "where you can select your files via a filebrowser.\n";
             s += "\n";
-            s += "For more documentation, see the help-menu or the subdirectory doc.\n";
+
+            s += "Options:\n";
+
+            j=0;
+            int pos=s.length();
+            for( j=0; j<nofOptions; ++j )
+            {
+               if ( s_pOptions[j].longName!=0 )
+               {
+                  if (s_pOptions[j].shortName[0]!='+')
+                  {
+                     s += "-";
+                     if ( strlen(s_pOptions[j].shortName)>1 ) s += "-";
+                  }
+                  s += s_pOptions[j].shortName;
+                  s += QString().fill(' ', minMaxLimiter( 20 - ((int)s.length()-pos), 3, 20 ) );
+                  s += s_pOptions[j].longName;
+                  s +="\n";
+                  pos=s.length();
+               }
+               else
+               {
+                  s += "-";
+                  if ( strlen(s_pOptions[j].shortName)>1 ) s += "-";
+                  s += s_pOptions[j].shortName;
+                  s += ", ";
+               }
+            }
+            
+            s += "\nFor more documentation, see the help-menu or the subdirectory doc.\n";
 #ifdef _WIN32 
             // A windows program has no console
             KMessageBox::information(0, s,i18n("KDiff3-Usage"));

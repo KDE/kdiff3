@@ -1,16 +1,28 @@
+
 This file contains some feature-wishes for future KDiff3-versions.
 
 TODO
 ====
+- Overview-option to show only remaining conflicts.
+- Colors for disabled and enabled arrow are very similar
+- ??? The gutters (kdiff3 have 2 "gutters") fonts and background-foreground colors sholud be configured other
+  than the "general" foreground-background colors. Otherwise they are confused with the main dialog.
 
-- Automatic line wrap for too long lines in the difference windows
+- Unicode and UTF8 support
+- Try to autodetect the line-end-style
+- Ignore cvs-keywords like $Revision$
+- Correct Christof crash with the Find-function.
+
+- Windows: Check if folders can match case-insensitive.
+- Close diff/merge window-menu-action.
+
 - Printing of the diff-windows (requires automatic line wrap)
 - Undo function in the merge-editor.
 - More viewing options for directory widget.
 
 - And one observation. When select Cyrillic charset - it looks like it was
   not saved. When open this dialog again - Latin charset is selected anyway.
-- Add options to specify a language and charset.
+- Add options to specify charset.
 - Ask before saving to a file that already exists (optionally).
 - Don't overwrite existing .orig-file, when saving the second time.
 
@@ -20,15 +32,12 @@ TODO
    - Optionally show size/date for A/B/C
    - Choose what to see (all or only different items)
    - If only different items are visible: copy the others nevertheless to destdir.
-   - Improve Ctrl-1/2/3 shortcuts in Dirview.
-   - Warnung wenn Datum in B oder C älter als A ist.
-   - Zielverzeichnis nachträglich änderbar
+   - Warnung wenn Datum in B oder C ï¿½ter als A ist.
+   - Zielverzeichnis nachtrï¿½lich ï¿½derbar
    - Bei Kopie von Remote nach lokal: Auf jeden Fall das modification Datum setzen.
    - Ctrl-Space doesn't work when a file comparison takes place.
    - Option to allow case-insensitive filename-matching.
 - Options to show/suppress annoying messages
-
-- Unicode-support
 
 - What's this-Help.
 - Tip of the day.
@@ -48,33 +57,4 @@ More Statistics before the merge begins:
 - Possibility to jump to next difference in the same line (for very long lines).
 
 - Allow analysis of unified directory-diff/patch-file.
-
-- Add example for line-matching preprocessor to the documentation.
-  Simple testcase: Consider file a.txt (6 lines):
-      aa
-      ba
-      ca
-      da
-      ea
-      fa
-  And file b.txt (3 lines):
-      cg
-      dg
-      eg
-  And the following line matching preprocessor command, that replaces 'g' with 'a':
-      /usr/bin/perl -p -e 's/g/a/;'
-  Without that command the following lines would be placed next to each other:
-      aa - cg
-      ba - dg
-      ca - eg
-      da
-      ea
-      fa
-  But with this command the result of the comparison would be:
-      aa
-      ba
-      ca - cg
-      da - dg
-      ea - eg
-      fa
 

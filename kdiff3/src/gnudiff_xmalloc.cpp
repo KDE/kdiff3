@@ -58,7 +58,7 @@ GnuDiff::xmalloc (size_t n)
 {
   void *p;
 
-  p = malloc (n);
+  p = malloc (n == 0 ? 1 : n); // There are systems where malloc returns 0 for n==0.
   if (p == 0)
     xalloc_die ();
   return p;
@@ -70,24 +70,12 @@ GnuDiff::xmalloc (size_t n)
 void *
 GnuDiff::xrealloc (void *p, size_t n)
 {
-  p = realloc (p, n);
+  p = realloc (p, n==0 ? 1 : n);
   if (p == 0)
     xalloc_die ();
   return p;
 }
 
-/* Allocate memory for N elements of S bytes, with error checking.  */
-
-void *
-GnuDiff::xcalloc (size_t n, size_t s)
-{
-  void *p;
-
-  p = calloc (n, s);
-  if (p == 0)
-    xalloc_die ();
-  return p;
-}
 
 /* Yield a new block of SIZE bytes, initialized to zero.  */
 

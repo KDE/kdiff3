@@ -5,25 +5,30 @@ Author: Joachim Eibl 2004
 This text is for you, if you might want to help translating KDiff3 or just want 
 to learn how this i18n-thing works.
 
-Current completeness status KDiff3-0.9.81 (2004/01/06):
-Total number of message-strings: 376
+grep "Language-Team" *.po
 
-The translation for these languages is 100% complete:
-da    Danish
-de    Deutsch
-en_GB British English
-et    Estonian
-fr    French
-it    Italian
-pt    Portuguese
-pt_BR Brazilian Portuguese
-sr    Serbian
-sv    Svenska
+az     Azerbaijani <translation-team-az@lists.sourceforge.net>     
+ca     LANGUAGE <LL@li.org>     
+da     Danish <dansk@klid.dk>     
+de     Deutsch <kde-i18n-de@kde.org>     
+en_GB  British English <kde-en-gb@kde.me.uk>     
+es     espaniol <kde-es@kybs.de>     
+et     Estonian <kde-et@linux.ee>     
+fr     French <kde-francophone@kde.org>     
+hu     Hungarian <kde-lista@sophia.jpte.hu>     
+it     Italian <kde-i18n-it@kde.org>     
+nl     Nederlands <kde-i18n-nl@kde.org>     
+pl     Polish     
+pt_BR  Brazilian Portuguese <kde-i18n-pt_BR@mail.kde.org>     
+pt     Portuguese <kde-i18n-pt@kde.org>     
+ro     Romanian <ro-kde@egroups.com>     
+ru     Russian <ru@li.org>     
+sr     Serbian
+sv     Svenska <sv@li.org>     
+ta      <tamilpc@ambalam.com>     
+tr     Türkçe <tr@li.org>     
+zh_CN  zh_CN <i18n-translation@lists.linux.net.cn>     
 
-These languages are partly done:
-es    Espaniol
-hu    Hungarian
-ru    Russian
 
 Thanks to all translators!
 
@@ -93,7 +98,7 @@ all kdelibs*.po-files:
 Finally the program must only read the correct translation tables:
 
    QTranslator kdiff3Translator( 0 );
-   kdiff3Translator.load( QString("kdiff3_")QTextCodec::locale(), translationDir );
+   kdiff3Translator.load( QString("kdiff3_")+QTextCodec::locale(), translationDir );
    app.installTranslator( &kdiff3Translator );
    
    QTranslator qtTranslator( 0 );

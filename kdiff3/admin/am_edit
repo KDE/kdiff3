@@ -51,6 +51,7 @@ sub findMocCandidates ();
 sub pruneMocCandidates ($);
 sub checkMocCandidates ();
 sub addMocRules ();
+sub findKcfgFile($);
 
 sub tag_AUTOMAKE ();
 sub tag_META_INCLUDES ();
@@ -60,6 +61,7 @@ sub tag_DOCFILES ();
 sub tag_LOCALINSTALL();
 sub tag_IDLFILES();
 sub tag_UIFILES();
+sub tag_KCFGFILES();
 sub tag_SUBDIRS();
 sub tag_ICON();
 sub tag_CLOSURE();
@@ -111,11 +113,12 @@ while (defined ($ARGV[0]))
     {
         $verbose = 1;       # Oh is there a problem...?
     }
-    elsif (/^-p(.+)$|^--path=(.+)$/)
+    elsif (/^(?:-p|--path=)(.+)$/)
     {
-        $thisProg = "$1/".basename($thisProg) if($1);
-        $thisProg = "$2/".basename($thisProg) if($2);
+        my $p = $1;
+        $thisProg = $p . "/". basename($thisProg);
         warn ("$thisProg doesn't exist\n")      if (!(-f $thisProg));
+        $thisProg .= " -p".$p;
         $pathoption=1;
     }
     elsif (/^--help$|^-h$/)
@@ -222,10 +225,12 @@ sub processMakefile ($)
     local %globalmocs = ();# list of all mocfiles (in %mocFiles format)
     local %important = (); # list of files to be generated asap
     local %uiFiles = ();
+    local %kcfgFiles = ();
 
     local $allidls = "";
     local $idl_output = "";# lists all idl generated files for cleantarget
     local $ui_output = "";# lists all uic generated files for cleantarget
+    local $kcfg_output = "";# lists all kcfg generated files for cleantarget
 
     local %dependmocs = ();
     
@@ -263,14 +268,15 @@ sub processMakefile ($)
 	tag_NO_UNDEFINED();
 	tag_CLOSURE();
 	tag_NMCHECK();
-	tag_UIFILES();             # Sorts out ui rules
+	tag_UIFILES();              # Sorts out ui rules
+	tag_KCFGFILES();            # Sorts out kcfg rules
         tag_METASOURCES ();         # Sorts out the moc rules
         if ($sources_changed{$program}) {
             my $lookup = $program . '_SOURCES\s*=[ \t]*(.*)';
 
             if($program =~ /libkdeinit_(.*)/) {
                 my $prog = $1;
-                substituteLine($prog . '_SOURCES\s*=[ \t]*.*', 
+                substituteLine($prog . '_SOURCES\s*=[ \t]*(.*)', 
                     "${prog}_SOURCES = ${prog}_dummy.$cxxsuffix\n" .
                     "libkdeinit_${prog}_SOURCES = " . $sources{$program});
                 $sources{$prog} = "${prog}_dummy.$cxxsuffix";
@@ -318,6 +324,11 @@ sub processMakefile ($)
     if ($ui_output) {
         appendLines ("$cleantarget-ui:\n\t-rm -f $ui_output\n");
         $target_adds{"$cleantarget-am"} .= "$cleantarget-ui ";
+    }
+
+    if ($kcfg_output) {
+        appendLines ("$cleantarget-kcfg:\n\t-rm -f $kcfg_output\n");
+        $target_adds{"$cleantarget-am"} .= "$cleantarget-kcfg ";
     }
 
     if ($closure_output) {
@@ -527,8 +538,10 @@ sub initialise ()
     }
 
     # Checking for files to process...
-    open (FILEIN, $makefile)
-      || die "Could not open $makefileDir/$makefile: $!\n";
+
+    open (FILEIN, $makefile) || die "Can't open $makefileDir/$makefile: $!\n";
+    # perl bug in 5.8.0: in utf8 mode it badly screws up
+    binmode(FILEIN, ":bytes") if ($] >= 5.008);
     # Read the file
     # stat(FILEIN)[7] might look more elegant, but is slower as it 
     # requires stat'ing the file
@@ -734,6 +747,7 @@ sub tag_FINAL()
         my %shash = ();
         @shash{@progsources} = 1;  # we are only interested in the existence
         my %sourcelist = ();
+        my %extradeps = ();
         
         foreach $source (@progsources) {
             my $suffix = $source;
@@ -751,8 +765,13 @@ sub tag_FINAL()
 		$moc_cpp_added = 1;
 	    }
         }
+
+        # scan for extra given dependencies and add them to our target
+        while ($MakefileData =~ /\n\s*(\S+)\.(?:lo|o)\s*:([^\n]*)/g) {
+            $extradeps{$1} = $2;
+        }
+
         foreach $suffix (keys %sourcelist) {
-            
             # See if this file contains c++ code. (i.e., just check the file's suffix against c++ extensions)
             my $suffix_is_cxx = 0;
             if($suffix =~ /($cppExt)$/) {
@@ -769,7 +788,8 @@ sub tag_FINAL()
                 # we support IDL on our own
                 if ($suffix eq "skel" || $suffix =~ /^stub/
 		    || $suffix =~ /^signals/ # obsolete, remove in KDE-4
-                    || $suffix eq "h" || $suffix eq "ui" ) {
+                    || $suffix eq "h" || $suffix eq "ui" 
+                    || $suffix eq "kcfgc" ) {
                     next;
                 }
                 
@@ -793,6 +813,9 @@ sub tag_FINAL()
                 } else {
                     $source_deps .= " $source";
                 }
+                my $plainsource = $source;
+                $plainsource =~ s/\.$cppExt$//;
+                $source_deps .= " " . $extradeps{$plainsource} if (exists($extradeps{$plainsource}));
             }
 
             $handling = "$program.all_$suffix.$suffix: \$(srcdir)/Makefile.in" . $source_deps . " " . join(' ', $mocs)  . "\n";
@@ -852,7 +875,8 @@ sub tag_KDEINIT()
                 $lines .= "\techo 'int main(int argc, char* argv[]) { return kdemain(argc,argv); }' >> ${kdeinit}.la.$cxxsuffix\n";
 
                 $lines .= "\n${kdeinit}_dummy.$cxxsuffix:\n";
-                $lines .= "\t echo > ${kdeinit}_dummy.$cxxsuffix\n";
+                $lines .= "\techo 'extern \"C\" int kdemain(int argc, char* argv[]);' > ${kdeinit}_dummy.$cxxsuffix; \\\n";
+                $lines .= "\techo 'extern \"C\" int kdeinitmain(int argc, char* argv[]) { return kdemain(argc,argv); }' >> ${kdeinit}_dummy.$cxxsuffix\n";
 
                 push(@cleanfiles, "${kdeinit}.la.$cxxsuffix");
                 push(@cleanfiles, "${kdeinit}_dummy.$cxxsuffix");
@@ -868,7 +892,7 @@ sub tag_KDEINIT()
                     substituteLine($lookup, "${kdeinit}_la_LIBADD = libkdeinit_${kdeinit}.la");
                     appendLines("libkdeinit_${kdeinit}_la_LIBADD = $libadd\n");
                 }
-                appendLines("libkdeinit_${kdeinit}_la_LDFLAGS = \$(all_libraries)\n");
+                appendLines("libkdeinit_${kdeinit}_la_LDFLAGS = -no-undefined -avoid-version \$(all_libraries)\n");
 
                 # add library dependencies
                 $lookup = $kdeinit . '_la_DEPENDENCIES\s*=[ \t]*(.*)';
@@ -944,7 +968,7 @@ sub tag_KDEINIT()
                 $realname{$kdeinit} = $kdeinit;
                 $sources{$kdeinit} = "${kdeinit}.la.$cxxsuffix";
 
-                $lines .= "${kdeinit}_LDFLAGS = \$(all_libraries)\n";
+                $lines .= "${kdeinit}_LDFLAGS = \$(KDE_RPATH) -no-undefined \$(all_libraries)\n";
                 $lines .= "${kdeinit}_LDADD = libkdeinit_${kdeinit}.la\n";
                 $lines .= "${kdeinit}_DEPENDENCIES = libkdeinit_${kdeinit}.la\n";
 
@@ -972,7 +996,7 @@ sub tag_KDEINIT()
 
     if($#progs >= 0) {
         if($MakefileData !~ m/\nbin_PROGRAMS\s*=/) {
-            print STDERR "Error: bin_PROGRAMS missing in $printname (required for bin_PROGRAMS).\n";
+            print STDERR "Error: bin_PROGRAMS missing in $printname (required for kdeinit_LTLIBRARIES).\n";
             $errorflag = 1;
         }
         else {
@@ -1026,7 +1050,7 @@ sub tag_COMPILE_FIRST()
           next if defined($donesources{$depend});
           push @deps, $depend;
         }
-        $target_adds{$sdeps} = join(' ', @deps) if (@deps);
+        $target_adds{$sdeps} .= join(' ', @deps) . ' ' if (@deps);
         $donesources{$source} = 1;
       }
     }
@@ -1128,7 +1152,8 @@ sub tag_AUTOMAKE ()
 
     $lookup = '.*cd \$\(srcdir\)\s+&&[\034\s]+\$\(AUTOCONF\)(.*)';
     if ($MakefileData =~ /\n($lookup)\n/) {
-      $newLine = "\tcd \$(srcdir) && rm -f configure && \$(MAKE) -f admin/Makefile.common configure";
+      $newLine  = "\tcd \$(srcdir) && rm -f configure\n";
+      $newLine .= "\tcd \$(top_srcdir) && \$(MAKE) -f admin/Makefile.common configure";
       substituteLine ($lookup, $newLine);
     }
 
@@ -1236,8 +1261,11 @@ sub tag_IDLFILES ()
             
             if ($allidls !~ /$source\_kidl/) {
                 
+                $use_ng = ($MakefileData =~ /\n$source\_DCOPIDLNG\s*=\s*(\S+)\n/);
+                $dcopidl =  $use_ng ? "\$(DCOPIDLNG)" : "\$(DCOPIDL)";
+
                 $dep_lines .= "$source.kidl: $sourcedir$source.h \$(DCOP_DEPENDENCIES)\n";
-                $dep_lines .= "\t\$(DCOPIDL) $sourcedir$source.h > $source.kidl || ( rm -f $source.kidl ; false )\n";
+                $dep_lines .= "\t$dcopidl $sourcedir$source.h > $source.kidl || ( rm -f $source.kidl ; false )\n";
                 
                 $allidls .= $source . "_kidl ";
             }
@@ -1332,11 +1360,12 @@ sub tag_UIFILES ()
                 my $dep_lines = "$source.$cxxsuffix: $sourcedir$source.ui $source.h $source.moc\n";
                 $dep_lines .= "\trm -f $source.$cxxsuffix\n";
                 if (!$kdeopts{"qtonly"}) {
-                    $dep_lines .= "\techo '#include <klocale.h>' > $source.$cxxsuffix\n";
+                    $dep_lines .= "\techo '#include <kdialog.h>' > $source.$cxxsuffix\n";
+                    $dep_lines .= "\techo '#include <klocale.h>' >> $source.$cxxsuffix\n";
                     my ($mangled_source) = $source;
                     $mangled_source =~ s/[^A-Za-z0-9]/_/g;  # get rid of garbage
                     $dep_lines .= "\t\$(UIC) -tr \${UIC_TR} -i $source.h $sourcedir$source.ui > $source.$cxxsuffix.temp ; ret=\$\$?; \\\n";
-                    $dep_lines .= "\tsed -e \"s,\${UIC_TR}( \\\"\\\" ),QString::null,g\" $source.$cxxsuffix.temp | sed -e \"s,\${UIC_TR}( \\\"\\\"\\, \\\"\\\" ),QString::null,g\" | sed -e \"s,image\\([0-9][0-9]*\\)_data,img\\1_" . $mangled_source . ",g\" >> $source.$cxxsuffix ;\\\n";
+                    $dep_lines .= "\t\$(PERL) -pe \"s,\${UIC_TR}( \\\"\\\" ),QString::null,g\" $source.$cxxsuffix.temp | \$(PERL) -pe \"s,\${UIC_TR}( \\\"\\\"\\, \\\"\\\" ),QString::null,g\" | \$(PERL) -pe \"s,image([0-9][0-9]*)_data,img\\\$\$1_" . $mangled_source . ",g\" >> $source.$cxxsuffix ;\\\n";
 		    $dep_lines .= "\trm -f $source.$cxxsuffix.temp ;\\\n";
                 } else {
                     $dep_lines .= "\t\$(UIC) -i $source.h $sourcedir$source.ui > $source.$cxxsuffix; ret=\$\$?; \\\n";
@@ -1364,8 +1393,64 @@ sub tag_UIFILES ()
             $important{$program} .= "$source.h ";
             $ui_output .= "\\\n\t$source.$cxxsuffix $source.h $source.moc ";
             push(@cleanfiles, "$source.$cxxsuffix");
-            push(@cleanfiles, "source.h");
+            push(@cleanfiles, "$source.h");
             push(@cleanfiles, "$source.moc");
+            $dep_files .= " \$(DEPDIR)/$source.P" if($dep_files !~/$source.P/ );
+        }
+    }
+}
+
+sub tag_KCFGFILES ()
+{
+    my @psources = split(/[\034\s]+/, $sources{$program});
+    my @depFiles = ();
+    
+    foreach $source (@psources) {
+
+        if ($source =~ m/\.kcfgc$/) {
+
+            print STDERR "adding KCFG file $source\n" if ($verbose);
+
+            my $qs = quotemeta($source);
+            $sources{$program} =~ s/$qs//;
+            $sources_changed{$program} = 1;
+      
+            $source =~ s/\.kcfgc$//;
+
+            my $sourcedir = '';
+            if (-f "$makefileDir/$source.kcfgc") {
+                $sourcedir = '$(srcdir)/';
+            }
+
+            if (!$kcfgFiles{$source}) {
+                $kcfg = "$program.kcfg";
+                findKcfgFile("$source.kcfgc");
+
+                my $fixsuffix = "";
+                $fixsuffix = "else mv $source.cpp $source.$cxxsuffix ; " 
+                    unless "cpp" eq $cxxsuffix;
+
+                my $dep_lines = "$source.$cxxsuffix: $source.h\n";
+                $dep_lines .= "$source.h: $sourcedir$kcfg $sourcedir$source.kcfgc \$(KCFG_DEPENDENCIES)\n";
+                $dep_lines .= "\t\$(KCONFIG_COMPILER) $sourcedir$kcfg $sourcedir$source.kcfgc; ret=\$\$?; \\\n";
+		$dep_lines .= "\tif test \"\$\$ret\" != 0; then rm -f $source.h ; exit \$\$ret ; $fixsuffix fi\n\n";
+
+                $rule_adds{"$source.$cxxsuffix"} = $dep_lines;
+
+		$kcfgFiles{$source} = 1;
+            }
+            
+            if ($program =~ /_la$/) {
+                $realObjs{$program} .= " $source.lo";
+            } else {
+                $realObjs{$program} .= " $source.\$(OBJEXT)";
+            }
+            $sources{$program} .= " $source.$cxxsuffix";
+            $sources_changed{$program} = 1;
+            $important{$program} .= "$source.h ";
+            $kcfg_output .= "\\\n\t$source.$cxxsuffix $source.h ";
+            push(@cleanfiles, "$source.$cxxsuffix");
+            push(@cleanfiles, "$source.h");
             $dep_files .= " \$(DEPDIR)/$source.P" if($dep_files !~/$source.P/ );
         }
     }
@@ -1644,7 +1729,7 @@ sub tag_POFILES ()
 	$pofiles =  join(" ", grep(/\.po$/, readdir(THISDIR)));
         closedir (THISDIR);
         print STDOUT "pofiles found = $pofiles\n"   if ($verbose);
-	if (-f "charset" && -f "kdelibs.po") {
+	if (-f "charset" && -f "kdelibs/kdelibs.po") {
 	    handle_TOPLEVEL();
 	}
     }
@@ -2188,7 +2273,7 @@ sub make_bcheck_target()
     $t .=  $cxxsuffix eq "KKK" ?
            "\$(CXX) \$(DEFS) -I. -I\$(srcdir) -I\$(top_builddir) \$(INCLUDES) \$(AM_CPPFLAGS) \$(CPPFLAGS) \$(KDE_CXXFLAGS) " :
            "\$(CXXCOMPILE) ";
-    $t .=  " --dump-class-hierarchy \$\$i.bchecktest.cc; then \\\n" .
+    $t .=  " --dump-class-hierarchy -c \$\$i.bchecktest.cc; then \\\n" .
            "\t            rm -f \$\$i.bchecktest.cc; exit 1; \\\n" .
            "\t        fi ; \\\n" .
            "\t        echo \"\" >> \$\$i.bchecktest.cc.class; \\\n" .
@@ -2337,3 +2422,18 @@ sub restoreMakefile ()
 }
 
 #-----------------------------------------------------------------------------
+
+# find the .kcfg file listed in the .kcfgc file
+sub findKcfgFile($)
+{
+  my ($kcfgf) = @_;
+  open (KCFGFIN, $kcfgf) || die "Could not open $kcfgf: $!\n";
+  seek(KCFGFIN, 0, 2);
+  my $kcfgfsize = tell(KCFGFIN);
+  seek(KCFGFIN, 0, 0);
+  read KCFGFIN, $kcfgfData, $kcfgfsize;
+  close KCFGFIN;
+  if(($kcfgfData =~ m/^File=(.*\.kcfg)/gm)) {
+    $kcfg = $1;
+  }
+}

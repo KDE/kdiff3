@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 
 # this script patches a config.status file, to use our own perl script
 # in the main loop
@@ -27,11 +27,12 @@
 #    later autoconf's
 # 2. the big main loop which patches all Makefile.in's
 
+use strict;
 use File::Basename;
 
 my $ac_aux_dir = dirname($0);
 my ($flag);
-local $ac_version = 0;
+my $ac_version = 0;
 my $vpath_seen = 0;
 $flag = 0;
 
@@ -99,9 +100,9 @@ while (<>) {
 	    if ($ac_version != 2141) {
 	        print STDERR "hmm, don't know autoconf version\n";
 	    }
-        } elsif (/^\#\s*CONFIG_HEADER section.*|^\s+#\s(Run) the commands associated/) {
+        } elsif (/^\#\s*CONFIG_(HEADER|COMMANDS) section.*|^\s+#\s(Run) the commands associated/) {
           $flag = 4;
-          $commands = defined $1;
+          my $commands = defined $2;
           &insert_main_loop();
           $commands && insert_command_loop();
           if($ac_version != 250) {

@@ -64,9 +64,13 @@ KDiff3Shell::KDiff3Shell()
            "This usually happens due to an installation problem. "
            "Please read the README-file in the source package for details.")
            );
-        kapp->quit();
+        //kapp->quit();
+        
+        ::exit(-1); //kapp->quit() doesn't work here yet.
+
         // we return here, cause kapp->quit() only means "exit the
         // next time we enter the event loop...
+        
         return;
     }
 

@@ -449,7 +449,7 @@ void GnuDiff::discard_confusing_lines (struct file_data filevec[])
       while ((tem = tem >> 2) > 0)
 	many *= 2;
 
-      for (i = 0; i < (int)end; i++)
+      for (i = 0; i < (lin)end; i++)
 	{
 	  lin nmatch;
 	  if (equivs[i] == 0)
@@ -457,7 +457,7 @@ void GnuDiff::discard_confusing_lines (struct file_data filevec[])
 	  nmatch = counts[equivs[i]];
 	  if (nmatch == 0)
 	    discards[i] = 1;
-	  else if (nmatch > (int)many)
+	  else if (nmatch > (lin)many)
 	    discards[i] = 2;
 	}
     }
