@@ -1,6 +1,6 @@
 rem set QTDIR=f:\qt\3.2.1\
 echo QTDIR=%QTDIR%
-del kdiff3setup.exe
+del kdiff3setup*.exe
 del kdiff3.exe
 qmake kdiff3.pro "CONFIG+=release" "DEFINES+=NO_DEBUG" 
 nmake distclean
