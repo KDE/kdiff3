@@ -7,7 +7,7 @@
 !define MUI_VERSION "" ;Define your own software version here
 !endif
 !ifndef QTDIR
-!define QTDIR "f:\qt\3.1.2"
+!define QTDIR "f:\qt\3.2.2"
 !endif
 !ifndef WINDOWS_DIR
 !define WINDOWS_DIR "c:\windows"
@@ -214,6 +214,20 @@ Section "Explorer"
 SectionEnd 
 SubSectionEnd
  
+Section "Source"
+
+    DetailPrint "Writing the Source Code"
+    SetOutPath "$INSTDIR\source\"
+    File /r tmp\source
+SectionEnd
+!ifdef DEBUG   
+Section "Debug Information"
+  DetailPrint "Writing debug information"
+  SetOutPath "$INSTDIR"
+  File /oname=kdiff3.pdb kdiff3.pdb
+SectionEnd 
+!endif
+
 ;Display the Finish header
 ;Insert this macro after the sections if you are not using a finish page
 !insertmacro MUI_SECTIONS_FINISHHEADER
