@@ -17,6 +17,9 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.2  2003/10/14 20:51:45  joachim99
+ * Bugfix for Syncmode.
+ *
  * Revision 1.1  2003/10/06 18:38:48  joachim99
  * KDiff3 version 0.9.70
  *                                                                   *
@@ -176,11 +179,11 @@ protected:
    void compareFilesAndCalcAges( MergeFileInfos& mfi );
 
    QString fullNameA( const MergeFileInfos& mfi )
-   { return mfi.m_fileInfoA.absFilePath(); }
+   { return m_dirA.absFilePath() + "/" + mfi.m_subPath; }
    QString fullNameB( const MergeFileInfos& mfi )
-   { return mfi.m_fileInfoB.absFilePath(); }
+   { return m_dirB.absFilePath() + "/" + mfi.m_subPath; }
    QString fullNameC( const MergeFileInfos& mfi )
-   { return mfi.m_fileInfoC.absFilePath(); }
+   { return m_dirC.absFilePath() + "/" + mfi.m_subPath; }
    QString fullNameDest( const MergeFileInfos& mfi )
    { return m_dirDestInternal.absFilePath() + "/" + mfi.m_subPath; }
 
