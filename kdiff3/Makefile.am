@@ -1,13 +1,4 @@
-####### kdevelop will overwrite this part!!! (begin)##########
-
-SUBDIRS = kdiff3 po doc 
-
-EXTRA_DIST = kdiff3.kdevprj admin AUTHORS COPYING ChangeLog INSTALL README kdiff3.lsm 
-
-####### kdevelop will overwrite this part!!! (end)############
-# not a GNU package. You can remove this line, if 
-# have all needed files, that a GNU package needs
-AUTOMAKE_OPTIONS = foreign 
+SUBDIRS = $(TOPSUBDIRS)
 
 $(top_srcdir)/configure.in: configure.in.in $(top_srcdir)/subdirs
 	cd $(top_srcdir) && $(MAKE) -f admin/Makefile.common configure.in ;
@@ -23,6 +14,8 @@ MAINTAINERCLEANFILES = subdirs configure.in acinclude.m4 configure.files
 package-messages:
 	$(MAKE) -f admin/Makefile.common package-messages
 	$(MAKE) -C po merge
+
+EXTRA_DIST = admin COPYING configure.in.in
 
 dist-hook:
 	cd $(top_distdir) && perl admin/am_edit -padmin

@@ -1,5 +1,202 @@
-Version 0.81 - 2002/08/18
+Version 0.9.70 - 2003/09/28
+===========================
+- Transparent access to URLs via KIO (KDE only):
+  Compare files and directories on ftp, fish, smb, tar etc. ressources.
+- Workaround for a Win32-bug (Crashed sometimes during selections)
+- When the merge flag is selected in the open dialog, the directory-tool
+  always starts a merge by default for each file. Without the flag only a
+  diff will be started by default.
+- Immediately showing progress bar in dir scan.
+- Showing progress bar for file comparison too.
+- Directory-menu: Fold/Unfold all subdirs
+- Bugfix for 3-way auto-merge: A line deleted from the base in B and C
+  resulted in a empty line instead of being completely removed.
+- Improved locale support
+- KDiff3 is now a KPart
+   - in KDevelop3 it can be used to compare the current text with the
+     last saved version, or the current version on disk with the last cvs version.
+   - in Konqueror it can be used to look at a unified *.patch-file if one complete
+     version is available too.
+- Documentation is now in docbook-format.
+- "Toggle Split Orientation" for Diff-Input windows. (Good for long lines.)
+- When "Dir and Text Split-Screen-View" is off: Now "Focus Next/Prev Window"
+  also toggles between dir and text-windows. Selecting a file via double click
+  switches to text-screen.
+- KDiff3 displays a warning when trying to read a dir without the permission.
+- Directory-Diff-Option "Use CVS-Ignore" to ignore files like CVS does.
+- Displaying a status message at the end of the directory-comparison.
+- Cursor in MergeResultWindow is automatically placed at current difference when a jump occurred.
+  (But not when something was selected.)
+- Fix for cursor blinking in the topline of the MergeResultWindow.
+
+
+Version 0.9.61 - 2003/06/07
+===========================
+- Compilation problem fixed.
+- Directory merge: Preserving file attributes and times during copy. (now also for Win32)
+- Crash fixed, when directory comparison from the command-line was started.
+
+
+Version 0.9.60 - 2003/06/01
+===========================
+New features:
+- New ways to select input for the diff window:
+  - Pasting clipboard text into a diff window.
+  - Drag and drop a file from a filemanager (e.g. konqueror) onto a diff window.
+  - Drag and drop text from an editor (e.g. kate) onto a diff window.
+  Reanalysis starts immediately if no merge is in progress.
+  (This should help you to compare similar parts in the same file.)
+- New/Deleted white lines are now also considered as white deltas.
+- Configurable keyboard shortcuts for most actions (KDE version only).
+- The overview now also distinguishes whitespace deltas.
+New preprocessor options:
+- You can now define your own external Preprocessor and LineMatchingPreprocessor:
+- "Convert to upper case",
+- "Ignore numbers"
+Fixed bugs:
+- Directory merge: Preserving file attributes and times during copy.
+  (not for Win32 yet)
+Source-tree-structure:
+- Switch to KDevelop3 (Gideon): Renamed subdir "kdiff3" to "src".
+- xpm-files in xpm-subdirectory.
+
+
+Version 0.9.51 - 2003/04/14
+===========================
+- Compilation fix for gcc 2.95.
+
+
+Version 0.9.50 - 2003/03/30
+===========================
+Fixed bugs:
+- Auto-Advance setting was lost when entering the settings-dialog.
+- Windows specific: Keys with AltGr-Combination didn't work.
+- Windows 95/98/ME: Fixed crash when KDiff3 is called used without parameters,
+  and corrected support for external diff.
+New Features:
+- Search-function: Search for a string in all open text windows.
+- Special background colors for current region.
+- Button to toggle showing of whitespace in differences.
+- Buttons to go to next/prev unsolved (!) conflict.
+- While auto-advance waits, no more choices are allowed.
+- New setting: Auto-advance-delay.
+  (Note that with delay 0 fast clicks might be detected as double clicks and the second
+  click does nothing. My advice: Prefer the keyboard-shortcuts Ctrl-1/2/3)
+- Functions to Show/Hide Diff Window A, B or C. The other windows then have more space.
+- Merge editor: The right mouse button selects the current region and lets you choose
+  A, B or C via a popup menu.
+- Commandline option --auto: No GUI if all conflicts are auto-solvable.
+- When equal files are compared, then a message box informs you.
+- Merge current file: When comparing two or three files, the merge can be started with a single click.
+- Option dialog: Warning for "Defaults" added, because it resets all options.
+- A warning is given, when the user tries to merge binary files. (i.e. files that contain '\0'-bytes)
+Changed behaviour:
+- 3 file automerge: When for a line B==C (and A!=B) then C will be selected.
+  (In older versions this was a conflict. I was convinced that this is no problem.)
+- Auto-Advance now jumps to next unsolved (!) conflict.
+- On 256-color-displays KDiff3 uses them. (Previously KDiff3 only used 16 colors.)
+- On 16-color-displays the Defaults-button in the options dialog selects special colors.
+
+
+Version 0.941 - 2003/02/09
+==========================
+Fixed bugs:
+- Qt-only-version: Compile problem corrected.
+- Documentation: Formatting for tables corrected.
+
+
+Version 0.94 - 2003/02/09
+=========================
+New features:
+- Option to use external GNU-diff for line matching.
+  (Sometimes GNU-diff is better, sometimes not: You may choose now.)
+- In diff-windows a tooltip shows the full path if you move the mouse on the filename.
+- Speedup of directory-merge operations without user interaction.
+  (Not every item in the tree is made visible anymore. This took too long.)
+- When opening a file for comparison or merge KDiff3 immediately shows the first difference.
+- "Go To Top/Bottom"-action have been changed to "Go To First/Last Delta".
+- Font-Option "Italic For Deltas" added.
+- Many icons and actions will only be enabled, when the operation is possible.
+- Icon for merge of current file in directory merge mode added.
+- New action "Go to Current Delta".
+- Conflicts where some lines contained only-white-space-changes are now separated from
+  other non-white-space-conflicts.
+- Experimental: Use as replacement for ClearCase-cleardiffmrg.exe (under Windows only).
+  See main.cpp for details.
+
+Fixed bugs:
+- If files were different, but had the same dates, the "not existant"-icon was
+  shown for one file. Now a error message will be shown if the option
+  "Copy newer instead of merging" is used.
+- Documentation: Section "The Operation Column" corrected.
+- Qt-only-version: Fontsize wasn't correctly restored.
+-                  Keyboard accelerators didn't work for ToggleActions.
+
+
+Version 0.931 - 2003/01/19
+==========================
+Fix for compilation problems with gcc version < 3.
+
+
+Version 0.93 - 2003/01/16
+=========================
+New features:
+- Directory comparison and merge. (More than 3000 new lines of code only here!!!)
+- Open-Dialog: Filename specification: If no previous filename is there then start
+  directory is taken from another file.
+- Message about number of found and automatically solved conflicts.
+- Support for wheelmouse based scrolling.
+- New option in Diff-tab: Preserve Carriage Return Characters
+
+Fixed bugs:
+- Save button disabled until all conflicts are solved.
+- Copy-operation conserves conflict messages "<Merge Conflict>".
+- Paste operation created pseudo conflicts when the clipboard contained empty lines.
+- W95/98/ME specific program crash removed.
+
+
+Version 0.92 - 2002/11/04
+=========================
+Severe bug corrected:
+- Merge menu: Choose A/B/C Everywhere sometimes lost data. (introduced in 0.9)
+
+
+Version 0.91 - 2002/11/03
+=========================
+Speed improvements for very big/complicated files:
+- Faster analysis because of limited search range (can be adjusted).
+- Faster scrolling and editor behaviour.
+
+Fixed bugs:
+- Compilation problem with gcc 3.2 fixed.
+- When comparing two lines, matching spaces often were undetected.
+- Merge editor appended extra empty line when saving.
+- Sometimes the next diff/conflict wasn't made visible.
+- The Auto-Advance setting is saved now.
+- When doing a merge the application now has modified-state,
+  even without further input. (The old method wasn't safe.)
+- File selection now always in directory of respective file.
+
+
+Version 0.9 - 2002/10/16
 ========================
+New features:
+- Qt-only support. Allows compilation under KDE2, Gnome, Mac, Windows, ...
+  Note that KDE3 still gets special treatment.
+- For Mergers: Auto-Advance after selection, Choose A/B/C everwhere, ...
+- Commandline: If files with same name in different directories
+  are compared, only the first parameter needs the filename.
+- Shift-Del, Ctrl-Ins, Shift-Ins supported for Cut/Copy/Paste
+
+Fixed bugs:
+- Make failed on some systems because of missing "minmax.h".
+- Files where opened for reading, but not closed afterwards.
+- Vertical scrollbar sometimes didn't work correctly.
+
+
+
+Version 0.81 - 2002/08/18
+=========================
 New features:
 - Now KDE3 is also supported. Previously only KDE2 was supported.
 - Navigation via click into the overview column now supported.
@@ -15,5 +212,3 @@ Fixed bugs:
 Version 0.8 - 2002/07/28
 ========================
 This is the first version to be released.
-It has all features intended for version 1.0 but so far has only been
-tested by the original author.

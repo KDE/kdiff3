@@ -2,8 +2,8 @@ KDiff3-Readme
 =============
 
 Author: Joachim Eibl  (joachim.eibl@gmx.de)
-Copyright: (C) 2002 by Joachim Eibl
-KDiff3-Version: 0.81
+Copyright: (C) 2002-2003 by Joachim Eibl
+KDiff3-Version: 0.9.70
 
 
 KDiff3 is a program that
@@ -11,7 +11,8 @@ KDiff3 is a program that
 - shows the differences line by line and character by character (!),
 - provides an automatic merge-facility and
 - an integrated editor for comfortable solving of merge-conflicts
-- and has an intuitive graphical user interface.
+- and has an intuitive graphical user interface,
+- and allows directory comparison and merge.
 
 
 Licence:
@@ -32,55 +33,109 @@ Licence:
 
     For details see file "COPYING".
 
+Exception from the GPL:
+    As a special exception, the copyright holder Joachim Eibl gives permission
+    to link this program with the Qt-library (commercial or non-commercial edition)
+    from Trolltech (www.trolltech.com), and he permits to distribute the resulting
+    executable, without including the source code for the Qt-library in the
+    source distribution.
+
 
 Requirements & Installation:
-   Version 0.81 supports KDE2 and KDE3 but due to some problem with libkio and libkfile
-   it was necessary to provide different packages for each, but only the configure
-   script differs.
+   Version 0.9.70 provides special support for KDE3, but it can also be
+   built without KDE3 if the Qt-libraries are available.
+   (I also tested the program under Windows.)
 
-   For KDE2 you need
-      - kdiff3-0.81_for_KDE2.tar.gz
-      - KDE2 and QT2-libraries.
-      - gcc, g++ with version >=2.95      
-      
-   For KDE3 you need
-      - kdiff3-0.81_for_KDE3.tar.gz
-      - KDE3 and QT3-libraries.
-      - gcc, g++ with version >=2.95
+   You always need
+      - kdiff3-0.9.70.tar.gz
 
-Installation for KDE2:
-   - Make sure your shell-variable QTDIR is correct. (echo $QTDIR).
-     If it doesn't contain the correct path, type
-        export QTDIR=your_path_to_qt  (e.g. /usr/lib/qt2)
-   - Unpack the archive: tar xvfz kdiff3-0.81_for_KDE2.tar.gz
-   - cd into the directory kdiff3-0.81 and type
-   - ./configure --prefix=/opt/kde2
-   - make
-   - make install  (You must have root-rights for this step.)
+   For building the KDE3-version
+      - KDE>=3.1 and QT>=3.1-libraries.
+      - gcc, g++ with version >=3.2
+
+   For building the Qt-only-version
+      - QT-libraries (version 2.3.0 or >=3.1.0).
+        (www.trolltech.com)
+      - for Un*x:    gcc, g++ with version >=3.2
+      - for Windows: VC6
+
 
 Installation for KDE3:
    - Make sure your shell-variable QTDIR is correct. (echo $QTDIR).
      If it doesn't contain the correct path, type
         export QTDIR=your_path_to_qt  (e.g. /usr/lib/qt3)
-   - Unpack the archive: tar xvfz kdiff3-0.81_for_KDE3.tar.gz
-   - cd into the directory kdiff3-0.81 and type
-   - ./configure --prefix=/opt/kde3
-   - make
-   - make install  (You must have root-rights for this step.)
+   - cd into the directory kdiff3-0.9.70 and type
+   - ./configure --prefix=/opt/kde3           (your KDE3 directory here)
+   - (make clean)                    (Required if you already compiled once.)
+   - make                            (Run compilation)
+   - make install                    (You must have root-rights for this step.)
 
    For details also see the generic instructions in file "INSTALL".
-   
-If some icons are not visible or don't seem right, probably the prefix
-was wrong. Check where you're KDE2/3 installation is located and
-use that directory with the prefix-option of configure.
 
-   
+   If some icons are not visible or don't seem right, probably the prefix
+   was wrong. Check where your KDE3 installation is located and
+   use that directory with the prefix-option of configure.
+   For SuSE and most distributions the prefix usually is /opt/kde3.
+   For Redhat and Mandrake the prefix usually is /usr.
+   For a local installation, that doesn't need root rights try
+   - ./configure --prefix=$KDEHOME  ($KDEHOME probably is the same as $HOME/.kde)
+   - make
+   - make install    (Installs everything in $KDEHOME. No root rights required.)
+   - Run $KDEHOME/bin/kdiff3. ($KDEHOME/bin is probably not in your path.)
+   Warning: If a local installation and a global installation exist, the local
+            menu, toolbar, help etc. will be used, even if you start the global
+            executable. To avoid confusion, better remove the local version then.
+            (rm -R `find $KDEHOME -name "*kdiff3*" -not -name "kdiff3*rc"`)
+
+
+Installation for the Qt-only-platforms for Un*x:
+   (for Qt >=3.1.0)
+   - Make sure your shell-variable QTDIR is correct. (echo $QTDIR).
+     If it doesn't contain the correct path, type
+        export QTDIR=your_path_to_qt  (e.g. /usr/lib/qt)
+   - cd into the directory kdiff3-0.9.70/src and type
+   - make -f Makefile.qt
+   - make -f Makefile.qt install     (You must have root-rights for this step.)
+     (copies the files into /usr/local/bin and /usr/local/share/doc/kdiff3)
+   - Note: The file kdiff3.pro was used to generate the Makefile.qt:
+           qmake kdiff3.pro -o Makefile.qt
+
+
+
+Build for Windows:
+ (Qt 2.3-non commercial)
+   - Start some console.
+   - Make sure your shell-variable QTDIR is correct. (echo %QTDIR%).
+     If it doesn't contain the correct path, type
+        set QTDIR=your_path_to_qt  (e.g. c:\qt)
+   - Make sure your VC6 environment variables are set. Run VCVARS32.BAT.
+     (Typically located in "c:\programs\Microsoft Visual Studio\VC98\bin")
+   - cd into the directory kdiff3-0.9.70\src and type
+   - nmake /f Makefile.win_qt230
+   - For execution the Qt-DLL must be in the path or in the same directory.
+ For newer versions of Qt, use qmake and kdiff3.pro to generate
+ an appropriate Makefile.
+     qmake kdiff3.pro -o Makefile
+
+
+Build for Mac:
+   - I couldn't test this, so you might have to experiment a bit.
+   - Start by generating a Makefile with
+   - qmake kdiff3.pro -o Makefile
+   - If you succeed, I'd like to know how so I can document it here.
+
+
 Start from commandline:
 - Comparing 2 files:     kdiff3 file1 file2
 - Merging 2 files:       kdiff3 file1 file2 -o outputfile
 - Comparing 3 files:     kdiff3 file1 file2 file3
 - Merging 3 files:       kdiff3 file1 file2 file3 -o outputfile
      Note that file1 will be treated as base of file2 and file3.
+
+If all files have the same name but are in different directories, you can
+reduce typework by specifying the filename only for the first file. E.g.:
+- Comparing 3 files:     kdiff3 dir1/filename dir2 dir3
+(This also works in the open-dialog.)
 
 If you start without arguments, then a dialog will appear where you can
 select your files via a filebrowser.
