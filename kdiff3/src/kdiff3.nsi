@@ -218,14 +218,11 @@ Section "Explorer"
 SectionEnd 
 SubSectionEnd
  
-Section "Source"
-
-    DetailPrint "Writing the Source Code"
-    SetOutPath "$INSTDIR\"
-    File /r tmp\source
-SectionEnd
 !ifdef DEBUG   
-Section "Debug Information"
+Section "Debug"
+  DetailPrint "Writing the Source Code"
+  SetOutPath "$INSTDIR\"
+  File /r tmp\source
   DetailPrint "Writing debug information"
   SetOutPath "$INSTDIR"
   File /oname=kdiff3.pdb kdiff3.pdb
