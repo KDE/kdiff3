@@ -17,9 +17,11 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.2  2003/10/11 12:50:38  joachim99
+ * KDiff3App::slotRefresh(): Call setFont() for subwindows
+ *
  * Revision 1.1  2003/10/06 18:38:48  joachim99
  * KDiff3 version 0.9.70
- *                                                                   *
  ***************************************************************************/
 
 #include "diff.h"
@@ -1435,10 +1437,27 @@ void KDiff3App::slotConfigureKeys()
 void KDiff3App::slotRefresh()
 {
    g_tabSize = m_pOptionDialog->m_tabSize;
-   if (m_pDiffTextWindow1!=0)   m_pDiffTextWindow1->update();
-   if (m_pDiffTextWindow2!=0)   m_pDiffTextWindow2->update();
-   if (m_pDiffTextWindow3!=0)   m_pDiffTextWindow3->update();
-   if (m_pMergeResultWindow!=0) m_pMergeResultWindow->update();
+   if (m_pDiffTextWindow1!=0)   
+   { 
+      m_pDiffTextWindow1->setFont(m_pOptionDialog->m_font); 
+      m_pDiffTextWindow1->update(); 
+   }
+   if (m_pDiffTextWindow2!=0)
+   { 
+      m_pDiffTextWindow2->setFont(m_pOptionDialog->m_font); 
+      m_pDiffTextWindow2->update(); 
+   }
+   if (m_pDiffTextWindow3!=0)
+   { 
+      m_pDiffTextWindow3->setFont(m_pOptionDialog->m_font); 
+      m_pDiffTextWindow3->update(); 
+   }
+   if (m_pMergeResultWindow!=0)
+   { 
+      m_pMergeResultWindow->setFont(m_pOptionDialog->m_font); 
+      m_pMergeResultWindow->update(); 
+   }
+
 
    autoAdvance->setChecked( m_pOptionDialog->m_bAutoAdvance );
    showWhiteSpace->setChecked( m_pOptionDialog->m_bShowWhiteSpace );
