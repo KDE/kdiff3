@@ -17,6 +17,9 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.3  2003/10/17 16:54:25  joachim99
+ * Error-detection for diff-problems improved.
+ *
  * Revision 1.2  2003/10/11 12:50:38  joachim99
  * KDiff3App::slotRefresh(): Call setFont() for subwindows
  *
@@ -263,6 +266,10 @@ bool KDiff3App::runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffL
             if ( currentLine1 == size1 && currentLine2 == size2 )
                bSuccess = true;
          }
+         else
+         {
+            bSuccess = size1==size2;
+         }
       }
       if ( currentLine1==0 && currentLine2==0 )
       {
@@ -270,9 +277,6 @@ bool KDiff3App::runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffL
          diffList.push_back(d);
       }
 
-      FileAccess::removeFile( fileName1 );
-      FileAccess::removeFile( fileName2 );
-      FileAccess::removeFile( fileNameOut );
       g_pProgressDialog->setSubCurrent(1.0);
 
       if ( !bSuccess )
@@ -284,6 +288,10 @@ bool KDiff3App::runDiff( LineData* p1, int size1, LineData* p2, int size2, DiffL
             i18n("KDiff3 Warning"));
          m_pOptionDialog->m_bUseExternalDiff = false;
       }
+      
+      FileAccess::removeFile( fileName1 );
+      FileAccess::removeFile( fileName2 );
+      FileAccess::removeFile( fileNameOut );
    }
 
    if ( ! m_pOptionDialog->m_bUseExternalDiff )
