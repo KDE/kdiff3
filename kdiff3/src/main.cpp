@@ -17,6 +17,10 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.2  2003/10/07 08:41:06  friseb123
+ * Placing the version into a separate include: version.h
+ * version.c extract the version number
+ *
  * Revision 1.1  2003/10/06 18:38:48  joachim99
  * KDiff3 version 0.9.70
  *                                                                   *
@@ -25,7 +29,7 @@
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <klocale.h>
-
+#include "version.h"
 #include "kdiff3_shell.h"
 
 
@@ -53,8 +57,6 @@ static KCmdLineOptions options[] =
   { 0, 0, 0 }
 };
 
-#undef VERSION
-#define VERSION "0.9.70"
 
 #ifdef _WIN32
 #include <process.h>

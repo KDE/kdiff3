@@ -1,6 +1,6 @@
 TEMPLATE = app
 CONFIG  += qt warn_on thread release
-HEADERS  = diff.h kdiff3.h merger.h optiondialog.h kreplacements/kreplacements.h \
+HEADERS  = version.h diff.h kdiff3.h merger.h optiondialog.h kreplacements/kreplacements.h \
                   directorymergewindow.h fileaccess.h kdiff3_shell.h kdiff3_part.h
 SOURCES  = diff.cpp difftextwindow.cpp kdiff3.cpp main.cpp merger.cpp mergeresultwindow.cpp \
                   optiondialog.cpp pdiff.cpp directorymergewindow.cpp fileaccess.cpp \
