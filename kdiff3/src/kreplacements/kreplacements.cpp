@@ -17,9 +17,11 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.2  2003/10/12 11:36:57  joachim99
+ * Fix for finding documentation
+ *
  * Revision 1.1  2003/10/06 18:48:54  joachim99
  * KDiff3 version 0.9.70
- *
  ***************************************************************************/
 
 #include "kreplacements.h"
@@ -64,23 +66,21 @@ static void showHelp()
       if (r!=0)  {  exePath = buf; }
       else       {  exePath = "."; }
 
-      QFileInfo helpFile( exePath + "\\doc\\en\\index.html" ); 
+      QFileInfo helpFile( exePath + "\\doc\\en\\index.html" );
+      if ( ! helpFile.exists() ) {  helpFile.setFile( exePath + "\\..\\doc\\en\\index.html" );     }
+      if ( ! helpFile.exists() ) {  helpFile.setFile( exePath + "\\doc\\index.html"         );     }
+      if ( ! helpFile.exists() ) {  helpFile.setFile( exePath + "\\..\\doc\\index.html"     );     }
       if ( ! helpFile.exists() )
       {
-         helpFile.setFile( exePath + "\\..\\doc\\en\\index.html" );
-         if ( ! helpFile.exists() )
-         {
-            QMessageBox::warning( 0, "KDiff3 Helpfile not found", 
-               "Couldn't find the helpfile at: \n\n    "
-               + helpFile.absFilePath() + "\n\n"
-               "The documentation can also be found at the homepage:\n\n " 
-               "    http://kdiff3.sourceforge.net/");   
-            return;
-         }
+         QMessageBox::warning( 0, "KDiff3 documentation not found",
+            "Couldn't find the documentation. \n\n"
+            "The documentation can also be found at the homepage:\n\n "
+            "    http://kdiff3.sourceforge.net/");
+         return;
       }
 
       HINSTANCE hi = FindExecutableA( helpFile.fileName(), helpFile.dirPath(true), buf );
-      if ( int(hi)<=32 ) 
+      if ( int(hi)<=32 )
       {
          static QTextBrowser* pBrowser = 0;
          if (pBrowser==0)
@@ -119,7 +119,7 @@ void KMessageBox::error( QWidget* parent, const QString& text, const QString& ca
 int KMessageBox::warningContinueCancel( QWidget* parent, const QString& text, const QString& caption,
    const QString& button1 )
 {
-   return  0 == QMessageBox::warning( parent, caption, text, button1, "Cancel" ) ? Continue : Cancel;   
+   return  0 == QMessageBox::warning( parent, caption, text, button1, "Cancel" ) ? Continue : Cancel;
 }
 
 void KMessageBox::sorry(  QWidget* parent, const QString& text, const QString& caption )
@@ -141,7 +141,7 @@ int  KMessageBox::warningYesNo( QWidget* parent, const QString& text, const QStr
 int KMessageBox::warningYesNoCancel( QWidget* parent, const QString& text, const QString& caption,
    const QString& button1, const QString& button2 )
 {
-   int val = QMessageBox::warning( parent, caption, text, 
+   int val = QMessageBox::warning( parent, caption, text,
       button1, button2, "Cancel" );
    if ( val==0 ) return Yes;
    if ( val==1 ) return No;
