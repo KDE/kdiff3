@@ -17,6 +17,9 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.2  2003/10/14 20:49:56  joachim99
+ * SourceData::preprocess(): Fix for several subsequent CR-characters.
+ *
  * Revision 1.1  2003/10/06 18:38:48  joachim99
  * KDiff3 version 0.9.70
  *                                                                   *
@@ -190,17 +193,19 @@ void SourceData::preprocess( bool bPreserveCR )
    int whiteLength = 0;
    for( i=0; i<=m_size; ++i )
    {
-      // For WIN32
-      if ( i==m_size || (!bPreserveCR  &&  p[i]=='\r' && p[i+1]=='\n' ) || p[i]=='\n' )        // The last line does not end with a linefeed.
+      if ( i==m_size ||  p[i]=='\n' )        // The last line does not end with a linefeed.
       {
          m_v[lineIdx].pLine = &p[ i-lineLength ];
+         while ( !bPreserveCR  &&  lineLength>0  &&  m_v[lineIdx].pLine[lineLength-1]=='\r'  )
+         {
+            --lineLength;
+         }
          m_v[lineIdx].pFirstNonWhiteChar = m_v[lineIdx].pLine + whiteLength;
          m_v[lineIdx].size = lineLength;
          lineLength = 0;
          bNonWhiteFound = false;
          whiteLength = 0;
          ++lineIdx;
-         if ( i<m_size && p[i]=='\r') ++i;
       }
       else
       {
@@ -580,7 +585,7 @@ void calcDiff3LineListUsingBC(
       if( d.nofEquals>0 )
       {
          // Find the corresponding lineB and lineC
-         while( i3b!=d3ll.end() && (*i3b).lineB!=lineB ) 
+         while( i3b!=d3ll.end() && (*i3b).lineB!=lineB )
             ++i3b;
 
          while( i3c!=d3ll.end() && (*i3c).lineC!=lineC )
@@ -715,7 +720,7 @@ void calcDiff3LineListUsingBC(
       else if ( d.diff1>0 )
       {
          Diff3LineList::iterator i3 = i3b;
-         while( (*i3).lineB!=lineB ) 
+         while( (*i3).lineB!=lineB )
             ++i3;
          if( i3 != i3b  &&  (*i3).bAEqB==false )
          {
