@@ -17,6 +17,9 @@
 
 /***************************************************************************
  * $Log$
+ * Revision 1.3  2003/10/15 20:14:03  joachim99
+ * Fix for MergeOperation DeleteAB.
+ *
  * Revision 1.2  2003/10/11 12:41:57  joachim99
  * Fix for gcc 2.95
  *
@@ -1594,6 +1597,7 @@ void DirectoryMergeWindow::mergeContinue()
       switch( mfi.m_eMergeOperation )
       {
       case eNoOperation: break;
+      case eDeleteAB:    break;
       case eMergeToAB:   // let the user save in B. In mergeResultSaved() the file will be copied to A.
       case eMergeToB:
       case eDeleteB:
