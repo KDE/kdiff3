@@ -217,7 +217,7 @@ SubSectionEnd
 Section "Source"
 
     DetailPrint "Writing the Source Code"
-    SetOutPath "$INSTDIR\source\"
+    SetOutPath "$INSTDIR\"
     File /r tmp\source
 SectionEnd
 !ifdef DEBUG   
