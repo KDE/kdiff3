@@ -1,9 +1,9 @@
 KDiff3-Readme
 =============
 
-Author: Joachim Eibl  (joachim.eibl@gmx.de)
-Copyright: (C) 2002-2005 by Joachim Eibl
-KDiff3-Version: 0.9.87
+Author: Joachim Eibl  (joachim.eibl at gmx.de)
+Copyright: (C) 2002-2006 by Joachim Eibl
+KDiff3-Version: 0.9.89
 
 
 KDiff3 is a program that
@@ -32,7 +32,7 @@ Licence:
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA  02111-1307  USA
 
     For details see file "COPYING".
 
@@ -45,12 +45,12 @@ Exception from the GPL:
 
 
 Requirements & Installation:
-   Version 0.9.87 provides special support for KDE3, but it can also be
+   Version 0.9.89 provides special support for KDE3, but it can also be
    built without KDE3 if the Qt-libraries are available.
    (I also test and use the program under Windows.)
 
    You always need
-      - kdiff3-0.9.87.tar.gz
+      - kdiff3-0.9.89.tar.gz
 
    For building the KDE3-version
       - KDE>=3.1 and QT>=3.1-libraries. (QT>=3.2 is recommended)
@@ -62,12 +62,17 @@ Requirements & Installation:
       - for Un*x:    gcc, g++ with version >=3.2
       - for Windows: VC6 / VC7.1
 
+   On some distributions it will be necessary to install developer
+   packages (RPMs) that contain include files for compilation:
+      - xorg-x11-devel (or x11-devel)
+      - qt-devel
+      - kdelibs-devel
 
 Installation for KDE3:
    - Make sure your shell-variable QTDIR is correct. (echo $QTDIR).
      If it doesn't contain the correct path, type
         export QTDIR=your_path_to_qt  (e.g. /usr/lib/qt3)
-   - cd into the directory kdiff3-0.9.87 and type
+   - cd into the directory kdiff3-0.9.89 and type
    - ./configure --prefix=/opt/kde3           (your KDE3 directory here)
    - (make clean)                    (Required if you already compiled once.)
    - make                            (Run compilation)
@@ -93,6 +98,25 @@ Installation for KDE3:
             executable. To avoid confusion, better remove the local version then.
             (rm -R `find $KDEHOME -name "*kdiff3*" -not -name "kdiff3*rc"`)
 
+   On Fedora-64-bit systems the following configure-line was reported to work:
+   ./configure --prefix=`kde-config --prefix` --enable-libsuffix=64 --with-qt-libraries=/usr/lib64/qt-3.3/lib/
+   Both --enable-libsuffix=64 and -with-qt-libraries=/usr/lib64/qt-3.3/lib/ are needed;
+   without the first one it fails to find the KDE libraries,
+   and without the second one it fails to find libqt-mt
+   (strangely enough: libqt-mt is in /usr/lib64/qt-3.3/lib, 
+   and "configure" tries /usr/lib64/qt-3.3/lib64)
+   If your qt-libraries are elsewhere please adapt the path accordingly.
+
+   Some secondary dependencies aren't correctly discovered by configure.
+   If e.g the a linker error appears telling you something like
+   "Can't find -lacl" this probably means that you have to install 
+   libacl-devel-*.rpm etc.
+
+   If you run an older version of KDE and the make-process fails in the
+   doc- or po-directory, cd to the src-directory and run "make" there. Also run 
+   "make install" there. This hopefully will create a working kdiff3-binary,
+   although without doc and language support.
+
 Upgrading KDiff3 for KDE:
    If you already installed an older version or KDiff3 and you have the 
    impression, that the new version doesn't work as described, you should try to 
@@ -108,7 +132,7 @@ Installation for the Qt-only-platforms for Un*x:
    - Make sure your shell-variable QTDIR is correct. (echo $QTDIR).
      If it doesn't contain the correct path, type
         export QTDIR=your_path_to_qt  (e.g. /usr/lib/qt)
-   - cd into the directory kdiff3-0.9.87/src and type
+   - cd into the directory kdiff3-0.9.89/src and type
    - make -f Makefile.qt
    - make -f Makefile.qt install     (You must have root-rights for this step.)
      (copies the files into /usr/local/bin and /usr/local/share/doc/kdiff3)
@@ -123,13 +147,38 @@ Build for Windows:
      qmake kdiff3.pro -o Makefile
 
 
-Build for Mac:
-   - I couldn't test this, so you might have to experiment a bit.
-   - Start by generating a Makefile with
-   - qmake kdiff3.pro -o Makefile
-   - If you succeed, I'd like to know how, so I can document it here.
+Building Kdiff3 for Mac OSX 10.3.8 (by Mark Teel)
+--------------------------------------------------------
+   1) Install Qt/Mac with thread support and static libraries.
+   2) cd .../kdiff3-0.9.89
+   3) Create a makefile for kdiff3 by executing:
+      qmake src/kdiff3.pro -o Makefile.qt
+   4) Edit Makefile.qt and add the definition "KDIFF3" to the following two lines:
+      CFLAGS   = -pipe -Wall -W -Os  -DKDIFF3 -DQT_NO_DEBUG ...
+      CXXFLAGS = -pipe -Wall -W -Os  -DKDIFF3 -DQT_NO_DEBUG ...
+   5) Edit Makefile.qt and change the include path like so:
+      (old) INCPATH  = -I/Library/qt3/mkspecs/default -Isrc ...
+      (new) INCPATH  = -I/Library/qt3/mkspecs/macx-g++ -Isrc ...
+   6) KDiff3-0.9.88-specific: Edit src/kdiff3.cpp line 290 like this:
+         statusBar()->setSizeGripEnabled(true);
+   7) KDiff3-0.9.88-specific: (not necessary for 0.9.89 or later)
+      Edit /usr/include/mach/ppc/processor_info.h and replace all instances of
+      "unsigned int word" found in the four register unions (on lines 44, 65, 
+      74, 82) as follows:
+      (old)
+         unsigned int word;
+      (new)
+      #if defined(KDIFF3)
+         unsigned word;
+      #else
+         unsigned int word;
+      #endif
+   8) Execute:
+      make -f Makefile.qt
+   9) After the build completes copy kdiff3 from the kdiff3-0.9.89 directory to
+      /Applications
 
-   
+
 Start from commandline:
 - Comparing 2 files:     kdiff3 file1 file2
 - Merging 2 files:       kdiff3 file1 file2 -o outputfile

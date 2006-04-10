@@ -27,7 +27,7 @@ as Authors, publish date, the abstract, and Keywords -->
 > <affiliation
 ><address
 > <email
->joachim.eibl@gmx.de</email>
+>joachim.eibl at gmx.de</email>
 </address
 ></affiliation>
 </author>
@@ -51,7 +51,7 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <copyright>
 <year
->2002-2003</year>
+>2002-2005</year>
 <holder
 >Joachim Eibl</holder>
 </copyright>
@@ -69,9 +69,9 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date
->2003-09-15</date>
+>2005-01-30</date>
 <releaseinfo
->0.9.70</releaseinfo>
+>0.9.87</releaseinfo>
 
 
 <abstract>
@@ -101,12 +101,16 @@ Do NOT change these in the translation. -->
 ></listitem>
 <listitem
 ><para
->ja on väga värviline (juba vaikimisi :-)</para
+>võimaldab esile tõsta või peita tühikute või kommentaaride erinevusi</para
+></listitem>
+<listitem
+><para
+>toetab Unicode'i, UTF-8 ja muid kodeeringuid.</para
 ></listitem>
 </itemizedlist>
 </para
 ><para
->Käesolev käsiraamat kirjeldab KDiff3 versiooni 0.9.70.. </para>
+>Käesolev käsiraamat kirjeldab KDiff3 versiooni 0.9.87. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -150,6 +154,10 @@ Please at least include KDE, the KDE package it is in, the name
 >võrguläbipaistvus</keyword>
 <keyword
 >redaktor</keyword>
+<keyword
+>tühimärgid</keyword>
+<keyword
+>kommentaarid</keyword>
 </keywordset>
 
 </bookinfo>
@@ -161,15 +169,15 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Veel üks võrdlemisrakendus?</title>
 <para
->Teatavasti on olemas üsna mitu graafilist võrdlusrakendust. Miks siis veel KDiff3? Siin ma sselgitan veidi selle loomise tagamaid. </para
+>Teatavasti on olemas üsna mitu graafilist võrdlusrakendust. Miks siis veel KDiff3? Siin ma selgitan veidi selle loomise tagamaid. </para
 ><para
 >KDiff3 nägi ilmavalgust sellepärast, et mul oli raskusi ühendamisega. Ühendamine on hädavajalik, kui mingi projekti failide kallal töötab korraga mitu inimest. Ühendamine peab olema mingil määral automatiseeritud, kui arvestada seda, et ühendamisvahend tegeleb nii uute, muudetud failidega (niinimetatud harudega) kui ka algse failiga (niinimetatud baas). Ühendamisvahend valib automaatselt muudatuse, mis mingis harus on tehtud. Kui mitu arendajat on muutnud üht ja sama rida, tuvastab ühendamisvahend konflikti, mis tuleb lahendada käsitsi. </para
 ><para
->Ühendamine on sellisel juhul keeruline, sest üks arendaja muutis hulk asju ja lisaks sellele parandas veel paljudes kohtades näiteks taanet. Samal ajal muutis teine arendaja samuti üsna palju samas failis ja nii tekibki korraga mitu ühendamiskonflikti. </para
+>Ühendamine oli sellisel juhul keeruline, sest üks arendaja muutis hulk asju ja lisaks sellele parandas veel paljudes kohtades näiteks taanet. Samal ajal muutis teine arendaja samuti üsna palju samas failis ja nii tekkiski korraga mitu ühendamiskonflikti. </para
 ><para
 >Vahendid, mida ma toona kasutasin, näitasid ainult muudetud ridu, aga mitte seda, mida neis ridades on muudetud. Ning miski ei viidanud ka sellele, et muudetud on ainult taanet. See muutis ühendamise väikest viisi luupainajaks. </para
 ><para
->Minu jaoks oli see alugspunkt. Esimene versioon oskas näidata erinevusi rea sees ning erinevusi tühimärkides. Hiljem lisandus veel hulk võimalusi, mis ainult suurendasid rakenduse kasulikkust. </para
+>Minu jaoks oli see alguspunkt. Esimene versioon oskas näidata erinevusi rea sees ning erinevusi tühimärkides. Hiljem lisandus veel hulk võimalusi, mis ainult suurendasid rakenduse kasulikkust. </para
 ><para
 >Nii on näiteks võimalik teksti kiireks võrdlemiseks kopeerida see lõikepuhvrisse ja asetada siis mis tahes võrdlusaknasse. </para
 ><para
@@ -237,7 +245,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Tühimärkide erinevuste näitamine</title>
 <para
->Tühikute ja tabeldusmärkide erinevusi näidatakse otseselt ära. Kui read erinevad ainult tühimärkide arvu poolest, võib seda üheainsa pilguga näha vasakul asuval kokkuvõttetulbal (mis tähendab, et ei pruugi enam pead murda, kui muudetud on kõigest taanet). </para>
+>Tühikute ja tabeldusmärkide erinevused näidatakse otseselt ära. Kui read erinevad ainult tühimärkide arvu poolest, võib seda üheainsa pilguga näha vasakul asuval kokkuvõttetulbal (mis tähendab, et ei pruugi enam pead murda, kui muudetud on kõigest taanet). </para>
 <screenshot
 ><mediaobject>
    <imageobject
@@ -321,6 +329,22 @@ Please at least include KDE, the KDE package it is in, the name
    <listitem
 ><para
 >Võrguläbipaistvus KIO moodulite vahendusel.</para
+></listitem>
+   <listitem
+><para
+>Võimalus kasutada KDevelop3 erinevuste näitajana.</para
+></listitem>
+   <listitem
+><para
+>Pikkade ridade murdmine.</para
+></listitem>
+   <listitem
+><para
+>Unicode'i, UTF-8 ja muude kodeeringute toetus.</para
+></listitem>
+   <listitem
+><para
+>Paremalt vasakule kirjutatavate keelte toetus.</para
 ></listitem>
    <listitem
 ><para
@@ -464,6 +488,18 @@ Please at least include KDE, the KDE package it is in, the name
 ><command
 >kdiff3</command
 > --help
+Võtmed:
+  -m, --merge               Sisendi liitmine.
+  -b, --base file           Baasfail. Ühilduvuseks teatud vahenditega.
+  -o, --output file         Väljundfail. Eelduseks -m. Nt.: -o newfile.txt
+  --out file                Taas väljundfail. (Ühilduvuseks teatud vahenditega.)
+  --auto                    GUI puudub, kui kõik konfliktid on automaatselt lahenevad. (Vajalik on -o file)
+  --qall                    Konflikte ei lahendata automaatselt. (Ühilduvuseks...)
+  --L1 alias1               Sisendfaili 1 (baas) näidatava nime asendus.
+  --L2 alias2               Sisendfaili 2 näidatava nime asendus.
+  --L3 alias3               Sisendfaili 3 näidatava nime asendus.
+  -L, --fname alias         Alternatiivne näidatava nime asendus. Tuleb anda kord iga sisendi kohta.
+  -u                        Toimeta. Ühilduvuseks teatud vahenditega.
 </screen>
 </sect2>
 
@@ -498,7 +534,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >Samuti võib kasutada lohistamist: lohista fail failihalduris või valitud tekst redaktorist ning kukuta see võrdlemise sisendaknasse. </para
 ><para
->Milleks see heea on? Mõnikord võib fail sisaldada kaht sarnast funktsiooni, kuid kontrollimine, kui sarnased nad ikkagi on, võib olla päris tülikas, kui sa pead näiteks kõigepealt looma kaks faili ja siis nad mõlemad avama. Nüüd aga on võimalik vajalikud osad lihtsalt kopeerida, asetada ja võrdlemine võibki alata. </para
+>Milleks see hea on? Mõnikord võib fail sisaldada kaht sarnast funktsiooni, kuid kontrollimine, kui sarnased nad ikkagi on, võib olla päris tülikas, kui sa pead näiteks kõigepealt looma kaks faili ja siis nad mõlemad avama. Nüüd aga on võimalik vajalikud osad lihtsalt kopeerida, asetada ja võrdlemine võibki alata. </para
 ><para
 >Märkus: praegu ei ole võimalik midagi KDiff3-st välja lohistada, toetatud on ainult lohistamine võrdlemise sisendaknasse. </para
 ><para
@@ -525,7 +561,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >Igast tekstist vasakul asub "kokkuvõttetulp". Kui real on erinevusi, näitab kokkuvõttetulp vastavat värvi. Ainult tühimärkide erinevuse korral on kokkuvõttetulbal näha ruuduline muster. See on abiks programmeerimiskeelte korral, kus tühimärkidel ei ole erilist tähendust, võimaldades ühe hetkega tuvastada, kas on ka mingeid olulisi muudatusi (näiteks C/C++ korral on tühimärkidel mingi roll ainult stringides, kommentaarides, preprotsessoris ja veel mõnel äärmiselt esoteerilisel juhtumil). </para
 ><para
->Kokkuvõttetulpa ja teksti lahutav püstjoon on katkestatud, kui sisendfailis pole selles kohas ühtki rida. </para
+>Kokkuvõttetulpa ja teksti lahutav püstjoon on katkestatud, kui sisendfailis pole selles kohas ühtki rida. Reamurdmise lubamisel on püstjoon murtud ridade juures punkteeritud. </para
 ><para
 >Paremal on otse kerimisriba kõrval näha "ülevaateriba". See näitab kokkusurutult sisendfaili "A" kokkuvõttetulpa. Nii on kõik erinevused ja konfliktid korraga näha. Kui kasutada ainult kaht sisendakent, on kõik erinevused punased, sest iga erinevus on sellisel juhul ju ka konflikt. Must ristkülik tähistab parajasti aknas näha olevat tekstiosa. Väga pikkade sisendfailide korral, kus sisendi ridade arv on suurem kui ülevaatetulba kõrgus pikslites, mahutatakse ühele ülevaatereale mitu sisendirida. Konflikti näitamist eelistatakse sellisel juhul tavalisele erinevusele ning viimast muutmata olekule, nii ei jää kindlasti nägemata ükski erinevus või konflikt. Ülevaateribale klõpsates näidatakse vastavat kohta tekstis. </para>
 </sect1>
@@ -557,18 +593,20 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >Lisaks saab vahetult redigeerida mis tahes rida. Kokkuvõttetulp näitab tähte "m" iga muudetud rea kohta. </para
 ><para
->Vahel võib juhtuda, et rida eemaldatakse automaatse liitmisega või redigeerides. Kui grupi ei ole jäänud enam ühtki rida, ilmub sellele reale tekst &lt;Lähterida puudub&gt;. See on kõigest grupi kohatäitja juhuks, kui muudad meelt ja valid taas mõne allika. Seda teksti ei ole näha ei salvestatud failis ega kopeeritavates/asetatavates valikutes. </para
+>Vahel võib juhtuda, et rida eemaldatakse automaatse liitmisega või redigeerides. Kui gruppi ei ole jäänud enam ühtki rida, ilmub sellele reale tekst &lt;Lähterida puudub&gt;. See on kõigest grupi kohatäitja juhuks, kui muudad meelt ja valid taas mõne allika. Seda teksti ei ole näha ei salvestatud failis ega kopeeritavates/asetatavates valikutes. </para
 ><para
->Tekst &lt;Ühendamise konflikt&gt; seevastu liigub küll lõikepuhvrisse, kui valida ja kopeerida/asetada sellist rida sisaldav tekst. Seepärast tasuks sellise võimalusega ettevaatlik olla. </para
+>Tekst "&lt;Ühendamise konflikt&gt;" seevastu liigub küll lõikepuhvrisse, kui valida ja kopeerida/asetada sellist rida sisaldav tekst. Seepärast tasuks sellise võimalusega ettevaatlik olla. </para
 ><para
->Menüü "Ühendamine" sisaldab teatud toiminguid, mis võimaldavad valida "A", "B" või "C" enam-vähem kõikjal. Kui valida "Lahenda automaatselt lihtsad konfliktid", taaskäivitab KDiff3 ühendamise ja lahendab nii palju konflikte, kui ta vähegi suudab ja oskab. "Määra erinevused konfliktideks" teeb aga täpselt vastupidist: isegi lihtsad konfliktid tuleb sellisel juhul käsitsi lahendada. Kõigi nende toimingute korral kaotatakse varasemad käsitsi tehtud valikud (KDiff3 hoiatab sellest muidugi ette ja küsib enne jätkamist sinu käest kinnitust). </para>
+>Tavaline ühendamine lahendab lihtsad konfliktid automaatselt. Menüü "Ühendamine" pakub lisaks mõningaid toiminguid muude levinumate vajaduste rahuldamiseks. Kui sul tuleb enamasti konfliktide puhul valida üks ja sama baas, võid valida kõikjal "A", "B" või "C" või ainult veel lahendamata konfliktidele või ainult lahendamata tühimärkide konfliktidele. Kui soovid lahendada iga erinevuse ise käsitsi, võid lülitada sisse võimaluse "Määra erinevused konfliktideks". Kui soovid aga taas panna KDiff3 automaatselt konflikte lahendama, vali "Lahenda automaatselt lihtsad konfliktid". Seejärel alustab KDiff3 uuesti ühendamist. Kui selle käigus muudetakse midagi, mida oled varem muutnud, küsib KDiff3 enne jätkamist, mida soovid teha. </para
+><para
+>Märkus: kui valid lahendamata tühimärkide konfliktide baasi ning võimalus "Numbreid ignoreeritakse" või "C/C++ kommentaare ignoreeritakse" on sisse lülitatud, koheldakse muutusi numbrites või kommentaarides samuti tühimärkidena. </para>
 </sect1>
 
 <sect1 id="navigation"
 ><title
 >Liikumine ja redigeerimine</title>
 <para
->Enamasti saab liikuda kerimisribade ja hiirega, kuid soovi korral on võimalik liikuda ka klahvidega. Kui klõpsata mis tahes aknasse, saab sarnaselt muude rakendustega kasutada noolenuppe, Page Up ja Page Down, Home, End, CTRL+Home, CTRL+End. Liikumiseks saab kasutada ka sisendafailide kerimisribast paremal pool asuvat ülevaateriba, mis võimaldab vajalikule kohale liikuda klõpsuga riba vajalikule kohale. </para
+>Enamasti saab liikuda kerimisribade ja hiirega, kuid soovi korral on võimalik liikuda ka klahvidega. Kui klõpsata mis tahes aknasse, saab sarnaselt muude rakendustega kasutada noolenuppe, Page Up ja Page Down, Home, End, Ctrl+Home, Ctrl+End. Liikumiseks saab kasutada ka sisendafailide kerimisribast paremal pool asuvat ülevaateriba, mis võimaldab vajalikule kohale liikuda klõpsuga riba vajalikule kohale. </para
 ><para
 >Üles-alla kerimiseks saab kasutada ka hiireratast. </para
 ><para
@@ -578,20 +616,20 @@ Please at least include KDE, the KDE package it is in, the name
 >Ühendamine</link
 >). </para
 ><para
->Nupureal on seitse liikumisnuppu, millega saab hüpata praegusele/esimesele/viimasele erinevusele, eelmisele/järgmisele erinevusele (CTRL+Nool üles/CTRL+Nool alla), eelmisele/järgmisele konfliktile (CTRL+Page Down/CTRL+Page Up) või eelmisele/järgmisele lahendamata konfliktile. Pane tähele, et KDiff3 jaoks jääb "konflikt", mida ei lahendata automaatselt ühendamise alguses, "konfliktiks" ka pärast selle käsitsi lahendamist. Seepärast on ka eristatud "lahendamata konfliktid". </para
+>Nupureal on seitse liikumisnuppu, millega saab hüpata praegusele/esimesele/viimasele erinevusele, eelmisele/järgmisele erinevusele (Ctrl+Nool üles/Ctrl+Nool alla), eelmisele/järgmisele konfliktile (Ctrl+Page Down/Ctrl+Page Up) või eelmisele/järgmisele lahendamata konfliktile. Pane tähele, et KDiff3 jaoks jääb "konflikt", mida ei lahendata automaatselt ühendamise alguses, "konfliktiks" ka pärast selle käsitsi lahendamist. Seepärast on ka eristatud "lahendamata konfliktid". </para
 ><para
->Lisaks neile on nupp "Pärast allikavalikut liigu automaatselt järgmisele lahendamata konfliktile". Seda sisse lülitades hüppab KDiff3 allika valimisel automaatsel selles leiduval lahendamata konfliktile. See on abiks, kui soovid tavaliselt valida ainult ühe allika. Kui sul läheb vaja mõlemat allikat või soovid pärast valimist tegelda redigeerimisega, on tõenäoliselt mõttekas see välja lülitada. Enne järgmisele lahendamata konfliktile liikumist näitab KDiff3 hetkeks langetatud valiku toimet. Kui kaua see näitamine kestab, saab määrata seadistustes: "automaatse edasiliikumise viivitus" on võimalik määrata millisekundites 0 ja 2000 vahel. Vihje: kas oled tüdinud kogu aeg klõpsimast? Kasuta siis pisikest automaatse edasiliikumise viivitust ning kiirklahve CTRL+1/2/3 A/B/C valimiseks. </para>
+>Lisaks neile on nupp "Pärast allikavalikut liigutakse automaatselt järgmisele lahendamata konfliktile". Seda sisse lülitades hüppab KDiff3 allika valimisel automaatsel selles leiduval lahendamata konfliktile. See on abiks, kui soovid tavaliselt valida ainult ühe allika. Kui sul läheb vaja mõlemat allikat või soovid pärast valimist tegelda redigeerimisega, on tõenäoliselt mõttekas see välja lülitada. Enne järgmisele lahendamata konfliktile liikumist näitab KDiff3 hetkeks langetatud valiku toimet. Kui kaua see näitamine kestab, saab määrata seadistustes: "automaatse edasiliikumise viivitus" on võimalik määrata millisekundites 0 ja 2000 vahel. Vihje: kas oled tüdinud kogu aeg klõpsimast? Kasuta siis pisikest automaatse edasiliikumise viivitust ning kiirklahve Ctrl+1/2/3 A/B/C valimiseks. </para>
 </sect1>
 
 <sect1 id="selections"
 ><title
 >Valimine, kopeerimine ja asetamine</title>
 <para
->Sisendaknas kursorit ei näidata, seepärast tuleb valimine teha hiirega, klõpsates vasaku nupuga valiku alguses, hoides nuppu all ja liikudes valiku lõppu, pärast mida võib nupu vabastada. Sõna saab valida ka sellel topeltklõpsu tehes. Ühendamisväljundi redigeerimisaknas saab valida ka klaviatuuri abil, hoides all klahvi SHIFT ja liikudes noolenuppudega. </para
+>Sisendaknas kursorit ei näidata, seepärast tuleb valimine teha hiirega, klõpsates vasaku nupuga valiku alguses, hoides nuppu all ja liikudes valiku lõppu, pärast mida võib nupu vabastada. Sõna saab valida ka sellel topeltklõpsu tehes. Ühendamisväljundi redigeerimisaknas saab valida ka klaviatuuri abil, hoides all klahvi Shift ja liikudes noolenuppudega. </para
 ><para
->Lõikepuhvrisse kopeerimiseks tuleb vajutada nuppu "Kopeeri" (CTRL+C või CTRL+Insert). Lisaks sellele on olemas ka võimalus "Valiku automaatne kopeerimine". Selle sisselülitamisel kopeeritakse kõik, mida oled valinud, automaatselt ning sul puudub vajadus anda mis tahes moel kopeerimiskäsku. Kuid ole selle võimalusega ettevaatlik, sest nii võib kogemata üle kirjutada vajaliku lõikepuhvri sisu. </para
+>Lõikepuhvrisse kopeerimiseks tuleb vajutada nuppu "Kopeeri" (Ctrl+C või Ctrl+Insert). Lisaks sellele on olemas ka võimalus "Valiku automaatne kopeerimine". Selle sisselülitamisel kopeeritakse kõik, mida oled valinud, automaatselt ning sul puudub vajadus anda mis tahes moel kopeerimiskäsku. Kuid ole selle võimalusega ettevaatlik, sest nii võib kogemata üle kirjutada vajaliku lõikepuhvri sisu. </para
 ><para
->Käsk "Lõika" (CTRL+X või SHIFT+Delete) kopeerib valitud teksti lõikepuhvisse ning kustutab selle, "Aseta" (CTRL+V või SHIFT+Insert) aga asetab lõikepuhvris oleva teksti kursori asukohta või aktiivse valiku asemele. </para>
+>Käsk "Lõika" (Ctrl+X või Shift+Delete) kopeerib valitud teksti lõikepuhvisse ning kustutab selle, "Aseta" (Ctrl+V või Shift+Insert) aga asetab lõikepuhvris oleva teksti kursori asukohta või aktiivse valiku asemele. </para>
 </sect1>
 
 <sect1 id="saving"
@@ -607,7 +645,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Stringide otsimine</title>
 <para
->Stringe saab otsida KDiff3 kõigis tekstiakendes. Redigeerimismenüü käsk "Otsi..." (CTRL+F) avab dialoogi, kus saab määrata, mida otsida. Samuti saab valida, millises aknas otsida. Otsimine algab alati teksti algusest. Käsk "Otsi järgmine" (F3) viib otsitava stringi järgmise esinemise juurde (kui seda muidugi on). Kui valid otsimise mitmes aknas, otsitakse esmalt ülalt alla läbi esimene aken, seejärel taas ülalt alla teine aken jne. </para>
+>Stringe saab otsida KDiff3 kõigis tekstiakendes. Redigeerimismenüü käsk "Otsi..." (Ctrl+F) avab dialoogi, kus saab määrata, mida otsida. Samuti saab valida, millises aknas otsida. Otsimine algab alati teksti algusest. Käsk "Otsi järgmine" (F3) viib otsitava stringi järgmise esinemise juurde (kui seda muidugi on). Kui valid otsimise mitmes aknas, otsitakse esmalt ülalt alla läbi esimene aken, seejärel taas ülalt alla teine aken jne. </para>
 </sect1>
 
 
@@ -778,6 +816,26 @@ Please at least include KDE, the KDE package it is in, the name
 >Iga tekstivalik kopeeritakse otsekohe lõikepuhvrisse, ilma et oleks vaja anda spetsiaalset kopeerimiskäsku. </para
 ></listitem
 ></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Realõpu stiil:</emphasis
+></term
+><listitem
+><para
+>Salvestamisel saab valida, millist realõpu stiili eelistada. Vaikimisi on see valitud operatsioonisüsteemi põhjal. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Kohaliku kodeeringu kasutamine:</emphasis
+></term
+><listitem
+><para
+>Mitte-ladina sümbolite näitamiseks. Tasub kasutada, kui mõningaid sinu keele sümboleid ei näidata korrektselt. </para
+></listitem
+></varlistentry>
 </variablelist>
 </sect2>
 
@@ -788,16 +846,6 @@ Please at least include KDE, the KDE package it is in, the name
 >Faile võrreldes püüab KDiff3 kõigepealt seada kokku read, mis on kõigis sisendfailides ühtmoodi. Ainult sel etapil võib ta eirata tühimärke. Teisel etapil võrreldakse iga rida ning nüüd võetakse arvesse ka tühimärgid. Tühimärke ei ignoreerita ka ühendamisel. </para>
 
 <variablelist>
-   <varlistentry
-><term
-><emphasis
->Tühimärke ignoreeritakse:</emphasis
-></term
-><listitem
-><para
->Vaikimisi sees. Sellisel juhul ignoreeritakse tühimärke analüüsi esimeses osas, kus võrreldakse ridu üldiselt. Analüüsi tulemuses näidatakse siiski ka tühimärgi erinevusi igal juhul. </para
-></listitem
-></varlistentry>
    <varlistentry
 ><term
 ><emphasis
@@ -821,11 +869,21 @@ Please at least include KDE, the KDE package it is in, the name
    <varlistentry
 ><term
 ><emphasis
->Teisendatakse suurtäheliseks:</emphasis
+>C/C++ kommentaare ignoreeritakse:</emphasis
 ></term
 ><listitem
 ><para
->Vaikimisi väljas. Sisendi lugemise ajal muudetakse see suurtäheliseks. Sellisel juhul ei ole võrdlus tõstutundlik. Ole sellega ühendamise ajal ettevaatlik, sest nii läheb tähesuurusega seotud info kaotsi ka ühendamise tulemuses. </para
+>Vaikimisi väljas. Muudatusi kommentaarides tõlgendatakse tühimärkide muudatustena. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Tõstu ignoreeritakse:</emphasis
+></term
+><listitem
+><para
+>Vaikimisi väljas. Tähtede tõstu erinevusi (näiteks 'A' vs. 'a') tõlgendatakse tühimärkide muudatustena. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -835,7 +893,9 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Mis tahes faili lugemisel filtreeritakse see läbi siin määratud käsu. Algse faili asemel näeb siis antud käsu väljundit. Sul on võimalik panna kirja oma eeltöötluse käsk, mis rahuldaks just sinu vajadused. Kasuta seda võimalust näiteks faili ülearuste osade kõrvaldamiseks või taande automaatseks korrigeerimiseks vms. </para
+>Vaata <link linkend="preprocessors"
+>järgmist osa</link
+>. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -845,17 +905,9 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Mis tahes faili lugemisel filtreeritakse see läbi siin määratud käsu. Kui määratud on ka eeltöötluse käsk (vaata eespool), on eeltöötluse käsu väljund ridade sobivuse eeltöötluse käsu sisendiks. Viimase väljundit kasutatakse ainult analüüsi esimeses, reasobivuse faasis. Sul on võimalik panna kirja oma eeltöötluse käsk, mis rahuldaks just sinu vajadused. Igal sisendi real peab olema talle vastav väljundi rida. </para
-></listitem
-></varlistentry>
-   <varlistentry
-><term
-><emphasis
->Välise rakenduse kasutamine:</emphasis
-></term
-><listitem
-><para
->Kui sul on mõni väline võrdlusrakendus (nt. GNU-diff), saad seda kasutada reasobivuse faasis. Mõningate keerulisemate failide puhul võib see olla isegi parem kui KDiff3 seesmine algoritm. </para
+>Vaata <link linkend="preprocessors"
+>järgmist osa</link
+>. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -865,27 +917,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Edastab välisele võrdlusrakendusele võtme "--minimal", mis püüab seejärel tuvastada ka kõige pisemad erinevused. Ilmselt on sellest rohkem kasu keerulisemate ja suurte failide korral. Aga mõistagi on see väga suurte failide puhul ka väga aeglane. </para
-></listitem
-></varlistentry>
-   <varlistentry
-><term
-><emphasis
->Labaseid sobivusi ignoreeritakse:</emphasis
-></term
-><listitem
-><para
->Vaikimisi sees. Kui tavalised reab sobivad pärast erinevust, seda ignoreeritakse ning jätkub mittelabase sobiva rea otsing. See parandab tulemusi, kui sisendis on tühje ridu ning ridu, milles on ainult alustav või lõpetav sulg, nagu neid esineb sageli C/C++ programmides. </para
-></listitem
-></varlistentry>
-   <varlistentry
-><term
-><emphasis
->Otsingu maks. pikkus:</emphasis
-></term
-><listitem
-><para
->Sobivuse otsimine katkestatakse siin määratud ridade järel. Võrdlus võib ebaõnnestuda väikese väärtuse korral, kuid kesta liigagi kaua liiga suure väärtuse puhul. Vaikimisi 1000. </para
+>Püüab tuvastada ka kõige pisemad erinevused. Vaikimisi sees. Ilmselt on sellest rohkem kasu keerulisemate ja suurte failide korral. Aga mõistagi on see väga suurte failide puhul ka väga aeglane. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -896,6 +928,16 @@ Please at least include KDE, the KDE package it is in, the name
 ><listitem
 ><para
 >Kui automaatne edasiliikumine on sisse lülitatud, määrab see võimalus, kui kaua näidatakse valiku tulemust, enne kui hüpatakse järgmisele lahendamata konfliktile. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Tühimärkide käsitlemine 2/3 faili ühendamisel:</emphasis
+></term
+><listitem
+><para
+>Lahendab automaatselt kõik tühimärkide konfliktid määratud faili valides (vaikimisi käsitsivalik). Kasulik, kui tühimärgid pole olulise tähtsusega. Kui seda läheb ainult mõnikord vaja, kasuta parem ühendamismenüü käske "Vali A/B/C kõigi lahendamata tühimärgikonfliktide korral". Pane tähele, et kui sees on "Numbreid ignoreeritakse" või "C/C++ kommentaare ignoreeritakse", rakendub see automaatne valik ka kõigile numbrite või kommentaaride konfliktidele. </para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -927,6 +969,84 @@ Please at least include KDE, the KDE package it is in, the name
 
 <sect2
 ><title
+>Riigi ja keele valikud</title>
+  <variablelist>
+    <varlistentry
+><term
+><emphasis
+>Keel:</emphasis
+></term
+><listitem
+><para
+>Kasutajaliidese keele määramine. Selle muutmine ei mõjuta töötavat rakendust. Keele muutmiseks tuleb KDiff3 sulgeda ja uuesti käivitada. (See valik ei ole kasutatav KDiff3 KDE versioonis, sest seal saab keele määrata KDE üldises seadistuses.) </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Kõikjal kasutatakse kodeeringut:</emphasis
+></term
+><listitem
+><para
+>Järgnevaid kodeeringuvalikuid saab määrata eraldi, välja arvatud juhul, kui äsjatoodud valik on sisse lülitatud, sest siis võtavad kõik valikud esimese valiku väärtuse. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Kohalik kodeering:</emphasis
+></term
+><listitem
+><para
+>Kodeeringu valimise väljade kohal seisab märge, mis annab teada kohaliku kodeeringu (see ei ole muudetav, vaid lihtsalt teadmiseks, kui sa ei peaks oma kodeeringut teadma). </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>A/B/C kodeering:</emphasis
+></term
+><listitem
+><para
+>Sisendfailide kodeeringu kohandamine. See mõjutab inglise tähestikku mittekuuluvate sümbolite esitamist. Kohandada saab iga kodeeringut eraldi, nii et sul on isegi võimalus võrrelda ja ühendada faile, mis on salvestatud erinevas kodeeringus. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Kodeering ühendamisväljundil ja salvestamisel:</emphasis
+></term
+><listitem
+><para
+>Kui muudad faili, saad siis määrata, millises kodeeringus salvestatakse see kettale. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Eelprotsessori failide kodeering:</emphasis
+></term
+><listitem
+><para
+>Kui oled määranud eelprotsessorid, võib juhtuda, et nad ei suuda sinu kodeeringut töödelda (kui näiteks sinu failid on 16-bitises Unicode''is, eelprotsessor suudab aga töödelda vaid 8-bitist ASCII-d). Siin saad määrata eelprotsessori väljundi kodeeringu. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Paremalt vasakule keeled:</emphasis
+></term
+><listitem
+><para
+>Mõningaid keeli kirjutatakse paremalt vasakule. Selle valiku sisselülitamisel näitab KDiff3 võrdluse sisendakendes ja ühendamise väljundaknas teksti paremalt vasakule. Pane tähele, et kui käivitad KDiff3 käsurealt võtmega "--reverse", kasutab kogu rakendus paremalt vasakule paigutust (seda võimaldab Qt). Käesolev käsiraamat on kirjutatud eeldusel, et "Paremalt vasakule keeled" ega võti "reverse" ei ole kasutusel. Sestap tuleb nende kasutamisel mõningaid "vasakul" või "paremal" antud kirjeldusi lugeda lihtsalt selle teadmise valguses vastupidi. </para
+></listitem
+></varlistentry>
+
+  </variablelist>
+</sect2>
+
+<sect2
+><title
 >Muud</title>
 <para
 >(neid valikuid ja toiminguid saab kasutada menüü või nupuriba vahendusel)</para>
@@ -949,6 +1069,36 @@ Please at least include KDE, the KDE package it is in, the name
 ><listitem
 ><para
 >Vahel võivad nähtavad tühikud ja tabeldusmärgid tõsiselt häirida, millisel juhul on võimalik nende näitamine välja lülitada.</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><emphasis
+>Näita tühimärke:</emphasis
+></term
+><listitem
+><para
+>Selle väljalülitamisel ei tõsteta esile tühimärkide erinevusi tekstis ega ülevaatetulbal. Pane tähele, et et kui sees on "Numbreid ignoreeritakse" või "C/C++ kommentaare ignoreeritakse", rakendub see ka kõigile numbrite või kommentaaride konfliktidele.</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><emphasis
+>Ülevaate valikud:</emphasis
+></term
+><listitem
+><para
+>Neid valikuid saab kasutada ainult kolme faili võrdlemisel. Tavarežiimis näidatakse erinevusi ühel värvilisel ülevaatetulbal. Kuid vahel võivad huvi pakkuda kolmest faili ainult kahe erinevused. Valides vastavalt ülevaate "A vs. B", "A vs. C" või "B vs. C", näidatakse tavalise ülevaatetulba kõrval teist vajaliku infoga. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><emphasis
+>Reamurdmine võrdlusakendes:</emphasis
+></term
+><listitem
+><para
+>Read murtakse, kui nende pikkus ületab akna laiust. </para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -995,6 +1145,323 @@ Please at least include KDE, the KDE package it is in, the name
 >Praegu toetab ainult KDE versioon kasutaja võimalust määrata kiirklahve (menüükäsk Seadistused -> Kiirklahvide seadistamine...) </para>
 </sect2>
 </sect1>
+
+<sect1 id="preprocessors"
+><title
+>Eeltöötluse käsud:</title>
+<para
+>KDiff3 toetab kaht eeltöötluse võimalust. </para
+><para>
+<variablelist>
+   <varlistentry
+><term
+><emphasis
+>Eeltöötluse käsk:</emphasis
+></term
+><listitem
+><para
+>Mis tahes faili lugemisel filtreeritakse see läbi siin määratud käsu. Algse faili asemel näeb siis antud käsu väljundit. Sul on võimalik panna kirja oma eeltöötluse käsk, mis rahuldaks just sinu vajadused. Kasuta seda võimalust näiteks faili ülearuste osade kõrvaldamiseks või taande automaatseks korrigeerimiseks vms. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Ridade sobivuse eeltöötluse käsk:</emphasis
+></term
+><listitem
+><para
+>Mis tahes faili lugemisel filtreeritakse see läbi siin määratud käsu. Kui määratud on ka eeltöötluse käsk (vaata eespool), on eeltöötluse käsu väljund ridade sobivuse eeltöötluse käsu sisendiks. Viimase väljundit kasutatakse ainult analüüsi esimeses, reasobivuse faasis. Sul on võimalik panna kirja oma eeltöötluse käsk, mis rahuldaks just sinu vajadused. Igal sisendi real peab olema talle vastav väljundi rida. </para
+></listitem
+></varlistentry>
+</variablelist>
+</para>
+<para
+>Selle mõte on pakkuda kasutajale suuremat paindlikkust võrdlemistulemuse seadistamisel. Kuid see nõuab välist programmi ja mõistagi ei taha enamik sellist ise kirjutama hakata. Õnneks suudab enamasti selliste asjadega toime tulla <command
+>sed</command
+> või <command
+>perl</command
+>. </para>
+<para
+>Näide: lihtne testnäide: Võtame faili a.txt (6 rida): <screen>
+      aa
+      ba
+      ca
+      da
+      ea
+      fa
+</screen
+> Ja faili b.txt (3 rida): <screen>
+      cg
+      dg
+      eg
+</screen
+> Ilma eeltöötluseta seatakse vastavusse järgmised read: <screen>
+      aa - cg
+      ba - dg
+      ca - eg
+      da
+      ea
+      fa
+</screen
+> Tõenäoliselt ei ole see sugugi see, mida sa soovisid, sest oluliseks infokandjaks on just esimesed tähed. Et sobivusalgoritn jätaks arvesse võtmata teise tähe, kasutame reasobivuse eeltöötluse käsku, mis asendab 'g' 'a'-ga: <screen>
+   <command
+>sed</command
+> 's/g/a/'
+</screen
+> Selle käsu korral on võrdlemise tulemus järgmine: <screen>
+      aa
+      ba
+      ca - cg
+      da - dg
+      ea - eg
+      fa
+</screen
+> Seesmisel näeb sobivusalgoritm faile juba pärast reasobivuse eeltöötluse rakendamist, kuid ekraanil jääb fail muutmata. (Tavaline eeltöötlus muudaks andmeid ka ekraanil.) </para>
+
+<sect2 id="sedbasics"
+><title
+><command
+>sed</command
+> põhitõed</title>
+<para
+>Selles osas tutvustame ainult programmi <command
+>sed</command
+> üksikuid põhimõttelisi omadusi. Rohkem infot leiab käsuga <ulink url="info:/sed"
+>info:/sed</ulink
+> või aadressilt <ulink url="http://www.gnu.org/software/sed/manual/html_mono/sed.html"
+> http://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink
+>. Windowsi eelkompileeritud versioon asub aadressil <ulink url="http://unxutils.sourceforge.net"
+> http://unxutils.sourceforge.net</ulink
+>. Pane tähele, et järgmistes näidetes eeldame, et käsk <command
+>sed</command
+> asub mõnes keskkonnamuutujaga PATH määratud kataloogis. Kui see nii ei ole, tuleb sul määrata käsu täielik asukoht. Pane tähele ka seda, et järgnevates näidetes on kasutatud ühekordset jutumärki ('), mis Windowsis ei toimi - seal tuleb kasutada topeltjutumärke ("). </para>
+<para
+>Antud kontekstis kasutatakse ainult <command
+>sed</command
+>-i asenduskäsku: <screen>
+   <command
+>sed</command
+> 's/<replaceable
+>REGULAARAVALDIS</replaceable
+>/<replaceable
+>ASENDUS</replaceable
+>/<replaceable
+>LIPUD</replaceable
+>'
+</screen
+> Enne uue käsu kasutamist KDiff3-ga võiks seda esmalt testida konsoolil. Siin tuleb kasuks käsk <command
+>echo</command
+>. Näide: <screen>
+   <command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/'
+   -> obrakadabra
+</screen
+> Toodud näites on tegemist äärmiselt lihtsa sed-käsuga, kus asendatakse esimene "a" "o"-ga. Kui soovid asendada kõik esinemiskorrad, tuleb kasutada lippu "g"-flag: <screen>
+   <command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g'
+   -> obrokodobro
+</screen
+> Sümbol "|" on torukäsk, mis edastab eelmise käsu väljundi järgmise käsu sisendile. Kui soovid testida pikema failiga, võid kasutada käsku <command
+>cat</command
+>, kui tegemist on UNIX-i süsteemiga, või <command
+>type</command
+>, kui tegu on Windowsiga. <command
+>sed</command
+> sooritab asenduse igal real. <screen
+><command
+>cat</command
+> <replaceable
+>failinimi</replaceable
+> | <command
+>sed</command
+> <replaceable
+>võtmed</replaceable
+>
+</screen>
+</para>
+</sect2>
+<sect2 id="sedforkdiff3"
+><title
+>Näited <command
+>sed</command
+>-i kasutamise kohta KDiff3-ga</title>
+<sect3
+><title
+>Muud tüüpi kommentaaride ignoreerimine</title>
+<para
+>Praegu mõistab KDiff3 ainult C/C++ kommentaare. Reasobivuse eeltöötluse käsuga saab aga ignoreerida ka muud tüüpi kommentaare, teisendades need C/C++ kommentaarideks. Näide: kui soovid ignoreerida kommentaare, mille alguses on "#", tuleks need teisendada nii, et alguses oleks "//". Pane tähele, et seejuureks peaks olema võimalus "C/C++ kommentaare ignoreeritakse" olema sisse lülitatud, muidu pole asjal mõtet. Vastav reasobivuse eeltöötluse käsk näeb välja selline: <screen>
+   <command
+>sed</command
+> 's/#/\/\//'
+</screen
+> Kuna <command
+>sed</command
+> omistab sümbolile "/" eritähenduse, on oluline asetada asendusstringis iga "/" ette sümbol "\". Mõnikord on "\" vajalik teatud ertähendusega sümbolite lisamiseks või eemaldamiseks. Nüüd on olulised üksikjutumärgid (') enne ja pärast asenduskäsku, sest vastasel juhul püüab shell mõningaid erisümboleid, näiteks '#', '$' või '\' tõlgendada juba enne nende edastamist käsule <command
+>sed</command
+>. Pane tähele, et Windowsis tuleb anda topeltjutumärgid ("). Windows asendab ka muid sümboleid, näiteks '%', nii et siin võib olla vajalik veidi eksperimenteerida. </para>
+</sect3>
+<sect3
+><title
+>Tõstutundetu võrdlus</title>
+<para
+>Järgmise reasobivuse eeltöötluse käsuga saab kogu sisendi muuta suurtäheliseks: <screen>
+   <command
+>sed</command
+> 's/\(.*\)/\U\1/'
+</screen
+> Siin on ".*" regulaaravaldis, mis sobib iga stringiga, antud kontekstis siis iga real asuva sümboliga. "\1" asendusstringis tähistab sobivat teksti esimeses "\(" and "\)" paaris. "\U" teisendab sisestatud teksti suurtäheliseks. </para>
+</sect3>
+
+<sect3
+><title
+>Versioonikontrolli võtmesõnade ignoreerimine</title>
+<para
+>CVS ja muud versioonikontrolli süsteemid kasutavad mitmeid võtmesõnu automaatselt genereeritavate stringide lisamiseks (<ulink url="info:/cvs/Keyword substitution"
+>info:/cvs/Keyword substitution</ulink
+>). Kõik need järgivad mustrit "$VÕTMESÕNA genereeritud tekst$". Nüüd läheb meil vaja reasobivuse eeltöötluse käsku, mis eemaldaks ainult genereeritud teksti: <screen>
+   <command
+>sed</command
+> 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'
+</screen
+> Võimalikke võtmesõnu eraldab "\|". Seda loendit võid mõistagi vastavalt oma vajadustele muuta. Enne "$" on kindlasti vajalik "\", sest muidu on "$" sobivuseks rea lõpp. </para>
+<para
+>Kui katsetad <command
+>sed</command
+>-iga, hakkad arvatavasti veidi aduma regulaaravaldiste mõtet ja võib-olla isegi neid armastama. Iseenesest on regulaaravaldised väga kasulikud, sest päris paljud programmid toetavad sarnast võimalust. </para>
+</sect3>
+
+<sect3
+><title
+>Numbrite ignoreerimine</title>
+<para
+>Numbrite ignoreerimine on tegelikult juba sisseehitatud võimalus. Kuid näitame siinkohal, kuidas see näeks välja reasobivuse eeltöötluse käsuna: <screen>
+   <command
+>sed</command
+> 's/[0123456789.-]//g'
+</screen
+> Sobivad kõik sümbolid '[' ja ']' vahel ning neid ei asendatagi, vaid lihtsalt kõrvaldatakse. </para>
+</sect3>
+
+<sect3
+><title
+>Teatud veergude ignoreerimine</title>
+<para
+>Tekst võib olla rangelt vormindatud ning sisaldada näiteks veergu, mida soovid alati ignoreerida, samas aga muid veerge analüüsiks kasutada. Järgnevas näites ignoreeritakse viit esimest veergu (sümbolit), järgmised kümme säilitatakse, siis ignoreeritakse taas viit veergu ning ülejäänud rida säilitatakse. <screen>
+   <command
+>sed</command
+> 's/.....\(..........\).....\(.*\)/\1\2/'
+</screen
+> Iga punkt '.' vastab ühele sümbolile. "\1" ja "\2" asendusstringis tähistavad sobivat teksti esimeses ja teises "\(" ja "\)" paaris, märkides säilitatavat teksti. </para>
+</sect3>
+
+<sect3
+><title
+>Mitme asenduse kombineerimine</title>
+<para
+>Vahel võib tekkida tahtmine teha mitu asendust korraga. Selleks tuleb nende eraldamiseks kasutada semikoolonit ';'. Näide: <screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g;s/\(.*\)/\U\1/'
+   -> OBROKODOBRO
+</screen>
+</para>
+</sect3>
+
+<sect3
+><title
+><command
+>perl</command
+>-i kasutamine <command
+>sed</command
+>-i asemel</title>
+<para
+><command
+>sed</command
+>-i asemel võib kasutada ka midagi muud, näiteks <command
+>perl</command
+>. <screen>
+   <command
+>perl</command
+> -p -e 's/<replaceable
+>REGULAARAVALDIS</replaceable
+>/<replaceable
+>ASENDUS</replaceable
+>/<replaceable
+>LIPUD</replaceable
+>'
+</screen
+> Kuid <command
+>perl</command
+> on mõnevõrra erinev. Pane tähele, et kui <command
+>sed</command
+>-ile oli vaja "\(" ja "\)", siis <command
+>perl</command
+>-ile on vaja lihtsalt "(" ja ")" ilma eelneva '\'. Näide: <screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+   <command
+>perl</command
+> -p -e 's/(.*)/\U\1/'
+</screen>
+</para>
+</sect3>
+</sect2>
+
+<sect2
+><title
+>Eeltöötluse sooritamise järjekord</title>
+<para
+>Andmed suunatakse läbi sisemiste ja väliste eeltöötluse käskude järgmises järjekorras </para>
+<itemizedlist>
+<listitem
+><para
+>Tavaline eeltöötlus,</para
+></listitem>
+<listitem
+><para
+>Reasobivuse eeltöötlus,</para
+></listitem>
+<listitem
+><para
+>Tõstu ignoreerimine (teisendamine suurtäheliseks),</para
+></listitem>
+<listitem
+><para
+>C/C++ kommentaaride tuvastamine,</para
+></listitem>
+<listitem
+><para
+>Numbrite ignoreerimine,</para
+></listitem>
+<listitem
+><para
+>Tühimärkide ignoreerimine</para
+></listitem>
+</itemizedlist>
+<para
+>Tavalise eeltöötluse tulemusandmed säilitatakse näitamiseks ja ühendamiseks. Muud operatsioonid muudavad ainult andmeid, mida näeb reasobivuse võrdlusalgoritm. </para
+><para
+>Neil harvadel juhtudel, kui kasutad tavalist eeltöötluse käsku, arvesta, et reasobivuse eeltöötluse käsk peab tavalise eeltöötluse käsu väljundit oma sisendiks. </para>
+</sect2>
+
+<sect2
+><title
+>Hoiatus</title>
+<para
+>Eeltöötluse käsud on sageli vägagi kasulikud, aga nagu ikka võimalustega, mis muudavad sinu teksti või peidavad automaatselt teatud erinevused, võib sel moel kogemata mõningad erinevused kahe silma vahele jätta või eriti halval juhul isegi olulised andmed hävitada. </para
+><para
+>Seetõttu teatab KDiff3 ühendamisel sellest, et kasutatakse tavalist eeltöötluse käsku, ning pärib, kas seda lubada vi mitte. Kuid sind ei hoiatata, kas reasobivuse eeltöötluse on aktiivne või mitte. Ühendamine on valmis alles siis, kui kõik konfliktid on lahendatud. Kui lülitad välja võimaluse "Tühimärkide näitamine", siis on nähtamatud ka erinevused, mis eemaldati reasobivuse eeltöötluse käsuga. Kui ühendamisel ei saa kasutada nuppu 'Salvesta' (sest failis on veel konflikte), lülita "tühimärkide näitamine" sisse. Kui sa ei soovi neid enamasti vähese tähtsusega erinevusi käsitsi ühendada, vali ühendamismenüüst käsk "Vali [A|B|C] kõigi lahendamata tühimärgikonfliktide korral". </para>
+</sect2>
+</sect1>
 </chapter>
 
 
@@ -1007,7 +1474,7 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >Programmeerijad peavad sageli oma eesmärgi saavutamiseks muutma kataloogis paljusid faile. Selle ülesande kergendamiseks võimaldab KDiff3 võrrelda ja ühendada ka terveid katalooge koos nende alamkataloogidega! </para
 ><para
->Kuigi kataloogide võrdlemine ja ühendamine tundub olevat üsna lihtne ja selge, tuleks siin siiski arvestada mitme asjaga. Kõige olulisem on kahtlemata see, et sellisel juhul puudutab iga operatsioon paljusid faile korraga. Kui sa ei ole esialgsetest andmetest varukoopiat teinud, võib algoleku taastamine olla väga raske või isegi võimatu. Seepärast kontrolli enne ühendamise alustamist alati, et andmed on turvaliselt varundatud ja et sul on alati võimalus tagasi minna. Kas kasutada arhiveerimist või mõnda versioonide kontrollimise süsteemi, on sinu enda otsustada, kuid pea silmas, ka ülikogenud programmeerijad vajavad aeg-ajalt vanu alliktekste. Ning ühtlasi arvesta sedagi, et kuigi mina (see tähendab, KDiff3 autor) olen püüdnud anda endast parima, ei saa ma täie kindlusega öelda, et rakendus on ideaalne ja täiesti veatu. Nagu ütleb GNU Üldine Avalik Litsents, ei ole sellel rakendusel MITTE MINGIT garantiid. Seepärast pea alati meeles, et </para>
+>Kuigi kataloogide võrdlemine ja ühendamine tundub olevat üsna lihtne ja selge, tuleks siin siiski arvestada mitme asjaga. Kõige olulisem on kahtlemata see, et sellisel juhul puudutab iga operatsioon paljusid faile korraga. Kui sa ei ole esialgsetest andmetest varukoopiat teinud, võib algoleku taastamine olla väga raske või isegi võimatu. Seepärast kontrolli enne ühendamise alustamist alati, et andmed on turvaliselt varundatud ja et sul on alati võimalus tagasi minna. Kas kasutada arhiveerimist või mõnda versioonide kontrollimise süsteemi, on sinu enda otsustada, kuid pea silmas, et ka ülikogenud programmeerijad vajavad aeg-ajalt vanu alliktekste. Ning ühtlasi arvesta sedagi, et kuigi mina (see tähendab, KDiff3 autor) olen püüdnud anda endast parima, ei saa ma täie kindlusega öelda, et rakendus on ideaalne ja täiesti veatu. Nagu ütleb GNU Üldine Avalik Litsents, ei ole sellel rakendusel MITTE MINGIT garantiid. Seepärast pea alati meeles, et </para>
 <blockquote
 ><para>
    <emphasis
@@ -1043,7 +1510,11 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
      <listitem
 ><para
->... lubab jätkata pärast sekkumist ühendamist klahvile F5 vajutades</para
+>... võimaldab käivitada valitud toimingu kõigil elementidel (klahv F7) või ainult valitud elemendil (klahv F6)</para
+></listitem>
+     <listitem
+><para
+>... lubab jätkata pärast sekkumist ühendamist klahvile F7 vajutades</para
 ></listitem>
      <listitem
 ><para
@@ -1107,7 +1578,7 @@ Please at least include KDE, the KDE package it is in, the name
 >. </para>
 
 <para
->Pane tähele, et automaatselt algab ainult võrdlemine, mitte aga ühendamine. Viimase jaoks tuleb kasutada vastavat menüükäsku või klahvi F5 (sellest räägime pikemalt veidi hiljem). </para>
+>Pane tähele, et automaatselt algab ainult võrdlemine, mitte aga ühendamine. Viimase jaoks tuleb kasutada vastavat menüükäsku või klahvi F7 (sellest räägime pikemalt veidi hiljem). </para>
 </sect2>
 </sect1>
 
@@ -1115,7 +1586,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Nähtav info</title>
 <para
->Kataloogide lugemise ilmub teatekast, mis näitab edenemise käiku. Kui katkestad kataloogi läbiuurimise, näidatakse ainult neid faile, mida selle hetkeni jõuti võrrelda. </para
+>Kataloogide lugemisel ilmub teatekast, mis näitab edenemise käiku. Kui katkestad kataloogi läbiuurimise, näidatakse ainult neid faile, mida selle hetkeni jõuti võrrelda. </para
 ><para
 >Kui kataloogide skaneerimine on lõpule jõudnud, näitab KDiff3 nimekirjakasti, kus vasakul on tulemused... </para>
 <screenshot
@@ -1205,11 +1676,11 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Operatsiooniveerg</title>
 <para
->Pärast kataloogide võrdlemist hindab KDiff3 ühendamise võimalusi. Seda näitab veerg "Operatsioon". Operatsiooni on võimalik muuta, kui klõpsata sellel operatsioonil, mida soovid muuta. Ilmub väike hüpikmenüü, mis lubab valida antud elemendile vajaliku operatsiooni. Valitud operatsioon tehakse teoks ühendamise käigus. Valikud sõltuvad elemendist ning ühendamisrežiimist. Viimaseks võib olla üks järgmistest: </para>
+>Pärast kataloogide võrdlemist hindab KDiff3 ühendamise võimalusi. Seda näitab veerg "Operatsioon". Operatsiooni on võimalik muuta, kui klõpsata sellel operatsioonil, mida soovid muuta. Ilmub väike hüpikmenüü, mis lubab valida antud elemendile vajaliku operatsiooni. (Kõige vajalikumad operatsioonid saab valida ka klaviatuurilt, näiteks Ctrl+1/2/3/4/Del valib vastavalt võimalusele A/B/C/Ühenda/Kustuta.) Valitud operatsioon tehakse teoks ühendamise käigus. Valikud sõltuvad elemendist ning ühendamisrežiimist. Viimaseks võib olla üks järgmistest: </para>
 <itemizedlist>
      <listitem
 ><para
->Kolme kataloogi ühendamine (A on sellisel juhul teistele baasiks).</para
+>Kolme kataloogi ühendamine ("A" on sellisel juhul teistele baasiks).</para
 ></listitem>
      <listitem
 ><para
@@ -1318,6 +1789,14 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >Ühendamisel võetakse ette üks fail teise järel. Staatuseveerg näitab kirjet "Tehtud" elementide puhul, mille ühendamist saatis edu, ning midagi muud, kui ühendamise käigus tuli ette midagi ootamatut. Kui ühendamine on lõpule jõudnud, võiksid üle kontrollida ka staatuseveeru, et näha, kas kõik seal ikka rahuldab sind. </para>
 </sect2>
+
+<sect2 id="statisticscolulmns"
+><title
+>Statistikaveerg</title>
+<para
+>Kui seadistustes on sisse lülitatud failide võrdlemise režiim "Täielik analüüs", näitab KDiff3 lisatuple, kus on kirjas lahendamata, lahendatud, tühimärkide ja mitte-tühimärkide konfliktide arv. (Lahendatud konflitkide arvuga tulpa näidatakse ainult kolme kataloogi võrdlemisel või ühendamisel.) </para>
+</sect2>
+
 </sect1>
 
 
@@ -1325,7 +1804,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Ühendamine</title>
 <para
->Kui oled langetanud kõik operatsioonivalikud (ka alamkataloogides), võid alustada tegelikku ühendamist. </para
+>Ühendada on võimalik parajasti valitud element (fail või kataloog) või kõik elemendid. Kui oled langetanud kõik operatsioonivalikud (ka alamkataloogides), võid alustada tegelikku ühendamist. </para
 ><para
 >Pane tähele, et kui sa ei määranud sihtkataloogi, peetakse kolme kataloogi ühendamisel selleks "C", kahe kataloogi ühendamisel "B" ning sünkroniseerimisel "A" ja/või "B". </para
 ><para
@@ -1349,15 +1828,15 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
 </itemizedlist>
 <para
->(Praeguses versioonis tuleb taasskaneerimine pärast kataloogide skaneerimist mõjutavate valikute muutmist uuesti ette võtta.) </para
+>(Praeguses versioonis tuleb taasskaneerimine pärast kataloogide skaneerimist mõjutavate valikute muutmist käsuga "Kataloog"->"Uuri uuesti läbi" uuesti ette võtta.) </para
 ><para
 >Kui kõik on korras, siis ülejäänud on juba lihtne. </para
 ><para
->Vali menüüst "Kataloog" käsk "Alusta/jätka kataloogi ühendamist" või vajuta klahvi F5. </para
+>Kõigi elementide ühendamine: vali menüüst "Kataloog" käsk "Alusta/jätka kataloogi ühendamist" või kasuta kiirklahvi F7. Ainult aktiivse elemendi ühendamine: vali "Käivita operatsioon käesoleva elemendiga" või vajuta F6. </para
 ><para
 >Kui failitüüpide konflikti tõttu esineb veel mõningaid sobimatute operatsioonidega elemente, ilmub teatekast, mis osutab sellistele elementidele, nii et sa saad valida neile vajalikud operatsioonid. </para
 ><para
->Vastasel juhul ilmub dialoog, kus valikuvõimalusteks on "Tee ära", "Simuleeri" ja "Loobu". </para>
+>Kui ühendad kõik elemendid, ilmub dialoog, kus valikuvõimalusteks on "Tee ära", "Simuleeri" ja "Loobu". </para>
 <itemizedlist>
      <listitem
 ><para
@@ -1373,18 +1852,20 @@ Please at least include KDE, the KDE package it is in, the name
 >vaata suurt pilti</link
 >). </para
 ><para
->Kui oled faili kallal kõik vajaliku ära teinud, vali uuesti menüükäsk "Alusta/jätka kataloogi ühendamist" või vajuta klahvi F5. Kui sa ei ole veel salvestanud, ilmub dialoog, mis teeb sulle vastava ettepaneku. Seejärel võtab KDiff3 ette järgmise elemendi. </para
+>Kui oled faili kallal kõik vajaliku ära teinud, vali uuesti menüükäsk "Alusta/jätka kataloogi ühendamist" või vajuta klahvi F7. Kui sa ei ole veel salvestanud, ilmub dialoog, mis teeb sulle vastava ettepaneku. Seejärel võtab KDiff3 ette järgmise elemendi. </para
 ><para
->Kui KDiff3 satub silmitsi veaga, annab ta sellest sulle teada ning näitab ka põhjalikku infot vea kohta, mis võib aidata kaasa arusaamisele, mis viga põhjustas. Kui valid ühendamise jätkamise (klahv F5), võimaldab KDiff3 sul antud elemendi ühendamist uuesti proovida või see vahele jätta. See tähendab, et sa saad enne jätkamist valida mõne muu operatsiooni või jätta hetkel asi nii, nagu on, et leida lahendus hiljem. </para
+>Kui KDiff3 satub silmitsi veaga, annab ta sellest sulle teada ning näitab ka põhjalikku infot vea kohta, mis võib aidata kaasa arusaamisele, mis viga põhjustas. Kui valid ühendamise jätkamise (klahv F7), võimaldab KDiff3 sul antud elemendi ühendamist uuesti proovida või see vahele jätta. See tähendab, et sa saad enne jätkamist valida mõne muu operatsiooni või jätta hetkel asi nii, nagu on, et leida lahendus hiljem. </para
 ><para
->Kui ühendamine on lõpule jõudnud, annab KDiff3 sellest teatekastiga sulle märku. </para>
+>Kui ühendamine on lõpule jõudnud, annab KDiff3 sellest teatekastiga sulle märku. </para
+><para
+>Kui mõned elemendi on ühendatud individuaalselt, jätab KDiff3 selle (antud ühendamisseansi ajal) meelde ega hakka neid enam ühendama, kui valid hiljem kõigi elementide ühendamise. Isegi juhul, kui ühendamine jäeti tegelikult vahele või midagi ei salvestatud, peetakse neid elemente ühendatuks, nii et nendega saab hakata uuesti tegelema alles siis, kui oled vahetanud ühendamisoperatsiooni. </para>
 </sect1>
 
 <sect1 id="dirmergeoptions"
 ><title
 >Kataloogide võrdlemise ja ühendamise valikud</title>
 <para
->KDiff3 seadistustes (menüükäsk "Seadistused"&gt;"KDiff3 seadistamine") on sektsioon "Kataloogide ühendamine" järgmiste valikutega: </para>
+>KDiff3 seadistustes (menüükäsk "Seadistused"-&gt;"KDiff3 seadistamine") on sektsioon "Kataloogide ühendamine" järgmiste valikutega: </para>
 
 <variablelist>
    <varlistentry
@@ -1436,7 +1917,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Mõnes failisüsteemis on failidel atribuut "peidetud", teistes süsteemides peidab failid nende nime eest seisev punkt ("."). See valik lubab sul määrata, kas sellised failid kaasatakse puusse või mitte. Vaikimisi sees.</para
+>Mõnes failisüsteemis on failidel atribuut "peidetud", teistes süsteemides peidab failid nende nime ees seisev punkt ("."). See valik lubab sul määrata, kas sellised failid kaasatakse puusse või mitte. Vaikimisi sees.</para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1456,9 +1937,10 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Kui on väljas, võrreldakse nimeviitu, kui sees, peetakse viitu kataloogideks ning neid skaneeritakse rekursiivselt. (Pane tähele, et programm ei kontrolli, kas viit on "rekursiivne", nii et viita kataloogile sisaldav kataloog tekitab lõputu silmuse, siis mõne aja pärast, kui pinu on ületäidetud või mälu otsa saab, elab programm üle krahhi.) Vaikimisi väljas.</para
+>Kui on väljas, võrreldakse nimeviitu, kui sees, peetakse viitu kataloogideks ning neid skaneeritakse rekursiivselt. (Pane tähele, et programm ei kontrolli, kas viit on "rekursiivne", nii et kui viita kataloogile sisaldav kataloog tekitab lõputu silmuse, siis mõne aja pärast, kui pinu on ületäidetud või mälu otsa saab, elab programm üle krahhi.) Vaikimisi väljas.</para
 ></listitem
-></varlistentry>
+></varlistentry
+>   
    <varlistentry
 ><term
 ><emphasis
@@ -1469,6 +1951,38 @@ Please at least include KDE, the KDE package it is in, the name
 >Näidatakse ainult elemente, mis ei ole sisendkataloogides võrdsed ning muudetud faile. Seepärast ei kopeerita ka kataloogides võrdseid faile ühendamisele ning kui sihtkataloog sellist faili eelnevalt ei sisaldanud, võibki see ilma selliste failideta jääda (võimalik, et tulevastes versioonides see valik muutub). Vaikimisi väljas.</para
 ></listitem
 ></varlistentry>
+
+   <varlistentry
+><term
+><emphasis
+>Failide võrdlemise režiim:</emphasis
+></term
+><listitem
+><para>
+<variablelist
+>            
+   <varlistentry
+><term
+><emphasis
+>Binaarne võrdlemine:</emphasis
+></term
+><listitem
+><para
+>See on vaikimisi failide võrdlemise režiim. </para
+></listitem
+></varlistentry
+>         
+   <varlistentry
+><term
+><emphasis
+>Täielik analüüs:</emphasis
+></term
+><listitem
+><para
+>Sooritab iga faili täieliku analüüsi ja näitab statistikatulpi (lahendatud, lahendamata, tühimärkide ja mitte-tühimärkide konfliktide arv). Täielik analüüs on aeglasem kui tavaline binaarne analüüs ning palju aeglasem, kui tegemist on failidega, mis ei sisalda teksti. (Määra sobivad anti-failimustrid.) </para
+></listitem
+></varlistentry
+>         
    <varlistentry
 ><term
 ><emphasis
@@ -1479,6 +1993,21 @@ Please at least include KDE, the KDE package it is in, the name
 >Suurte kataloogide võrdlemisel üle aeglase võrgu on usutavasti kiirem võimalus võrrelda ainult muutmiskuupäevi ja failide suurust. Kuid kui see ka suurendab kiirust, võib see ometi kaasa tuua eksimusi. Seepärast tasuks selle kasutamisse ettevaatlikult suhtuda. Vaikimisi väljas.</para
 ></listitem
 ></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Suuruse usaldamine:</emphasis
+></term
+><listitem
+><para
+>Sarnane muutmiskuupäeva usaldamisele. Tegelikku võrdlemist ei teostata. Kaht faili peetakse võrdseks, kui nende failisuurus on võrdne. See on abiks, kui failide kopeerimisel ei säilunud muutmise aeg. Kasuta seda siiski ettevaatlikult. Vaikimisi väljas.</para
+></listitem
+></varlistentry>
+</variablelist
+></para
+></listitem
+></varlistentry>
+         
    <varlistentry
 ><term
 ><emphasis
@@ -1611,7 +2140,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem
 ><listitem
 ><para
->Kui URL ei toimi oodatult, proovi seda avada Konqueroris. </para
+>Kui URL ei toimi oodatult, proovi see avada Konqueroris. </para
 ></listitem>
 </itemizedlist>
 
@@ -1643,7 +2172,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem
 ><listitem
 ><para
->Puudub võimalus muuta õigusi või muutmisaega, mistõttu koopia õigused või aeg erineb originaalist (see on võimalik ainult kohalike failidega). </para
+>Puudub võimalus muuta õigusi või muutmisaega, mistõttu koopia õigused või aeg erinevad originaalist - vaata ka võimalust "Suuruse usaldamine". (See on võimalik ainult kohalike failidega.) </para
 ></listitem>
 </itemizedlist>
 </sect2>
@@ -1653,7 +2182,7 @@ Please at least include KDE, the KDE package it is in, the name
 <title
 >&kdiff3; kui KPart</title>
 <para
->&kdiff3; on KPart. Hetkel on teostatud KParts::ReadOnlyPart-interface. </para
+>&kdiff3; on KPart. Hetkel on teostatud liides KParts::ReadOnlyPart. </para
 ><para
 >Selle peamine kasutusala on erinevuste vaatamine KDevelopis. KDevelop käivitab alati esmalt oma seesmise erinevuste näitaja. KDiff3 väljakutsumiseks klõpsa hiire parema nupuga erinevuste näitaja aknal ja vali kontekstimenüüst "Näita KDiff3-s". </para
 ><para
@@ -1712,7 +2241,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></question
 ><answer
 ><para
->Ridu, mis erinevad ainult tühimärkide arvu poolest, peetakse algul "võrdseks", samas muudab ka üksainus teistsugune tühimärk failid "erinevaks". Kui sarnased read satuvad teineteise kõrval, on see tegelikult kokkusattumus, aga õnneks esineb seda päris sageli. </para
+>Ridu, mis erinevad ainult tühimärkide arvu poolest, peetakse algul "võrdseks", samas muudab ka üksainus teistsugune tühimärk failid "erinevaks". Kui sarnased read satuvad teineteise kõrvale, on see tegelikult kokkusattumus, aga õnneks esineb seda päris sageli. </para
 ></answer
 ></qandaentry>
 
@@ -1741,11 +2270,11 @@ Please at least include KDE, the KDE package it is in, the name
 <qandaentry
 ><question
 ><para
->Eemaldasin veidi teksti ja järsku ilmus &lt;Lähterida puudub&gt;, mida ei saa kuidagi kõrvaldada. Mida see tähendab ja kuidas sellest lahti saada? </para
+>Eemaldasin veidi teksti ja järsku ilmus "&lt;Lähterida puudub&gt;", mida ei saa kuidagi kõrvaldada. Mida see tähendab ja kuidas sellest lahti saada? </para
 ></question
 ><answer
 ><para
->Iga võrdse või erineva sektsiooni korral jätab redaktor ühendamise tulemuse aknas meelde, kus see algab või lõpeb. &lt;Lähterida puudub&gt; tähendab, et sektsiooni ei ole enam midagi jäänud, isegi mitte reavahetusmärki. See võib juhtuda automaatsel ühendamisel või redigeerimise ajal. Tegelikult ei ole see üldse mingi probleem, sest salvestatud failis seda viidet enam ei ole. Kui soovid algvarianti tagasi, vali lihtsalt sektsioon (klõpsuga vasakul asuval kokkuvõttetulbal) ning seejärel klõpsa vajaliku sisuga allkfaili nuppu (A/B või C). </para
+>Iga võrdse või erineva sektsiooni korral jätab redaktor ühendamise tulemuse aknas meelde, kus see algab või lõpeb. "&lt;Lähterida puudub&gt;" tähendab, et sektsiooni ei ole enam midagi jäänud, isegi mitte reavahetusmärki. See võib juhtuda automaatsel ühendamisel või redigeerimise ajal. Tegelikult ei ole see üldse mingi probleem, sest salvestatud failis seda viidet enam ei ole. Kui soovid algvarianti tagasi, vali lihtsalt sektsioon (klõpsuga vasakul asuval kokkuvõttetulbal) ning seejärel klõpsa vajaliku sisuga allkfaili nuppu (A/B või C). </para
 ></answer
 ></qandaentry>
 
@@ -1782,15 +2311,15 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >&kdiff3; - failide ja kataloogide võrdlemise ja ühendamise vahend </para>
 <para
->Rakenduse autoriõigus 2002-2003: Joachim Eibl <email
->joachim.eibl@gmx.de</email
+>Rakenduse autoriõigus 2002-2005: Joachim Eibl <email
+>joachim.eibl AT gmx.de</email
 > </para>
 <para
 >Mitmed lahedad ideed ja vearaportid on pärit minu kolleegidelt ning paljudelt metsiku veebi asukatelt. Tänud teile kõigile! </para>
 
 <para
->Dokumentatsiooni autoriõigus &copy; 2002-2003: Joachim Eibl <email
->joachim.eibl@gmx.de</email
+>Dokumentatsiooni autoriõigus &copy; 2002-2005: Joachim Eibl <email
+>joachim.eibl AT gmx.de</email
 > </para>
 
 <para
@@ -1823,10 +2352,8 @@ Please at least include KDE, the KDE package it is in, the name
 >Nõuded</title>
 
 <para
->&kdiff3; kõigi võimaluste edukaks kasutamiseks on vajalik &kde; 
->3.1. Parimate tulemuste jaoks on soovitatav <ulink url="http://www.gnu.org/software/diffutils/diffutils.html"
->GNU-diff-utils</ulink
-> võrdlemisvahend. </para
+>&kdiff3; kõigi omaduste edukaks kasutamiseks on vajalik &kde; 
+>3.1. </para
 ><para
 >Infot selle kohta, kuidas panna KDiff3 tööle muudel platvormidel ilma KDE-ta, vaata palun <ulink url="http://kdiff3.sourceforge.net"
 >koduleheküljelt</ulink

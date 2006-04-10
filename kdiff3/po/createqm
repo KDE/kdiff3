@@ -1,8 +1,8 @@
-for i in `cat kde-i18n/subdirs` ; do
-   if [ -a kde-i18n/$i/messages/kdeextragear-1/kdiff3.po ]; then 
+for i in `cat subdirs` ; do
+   if [ -a $i.po ]; then 
       echo $i
-      msgmerge --no-fuzzy-matching kde-i18n/$i/messages/kdelibs/kdelibs.po kreplacements.pot >kreplacements_$i.po
-      msgcat --use-first kde-i18n/$i/messages/kdeextragear-1/kdiff3.po kreplacements_$i.po >kdiff3_$i.po
+      msgmerge --no-fuzzy-matching kdelibs_$i.po kreplacements.pot >kreplacements_$i.po
+      msgcat --use-first $i.po kreplacements_$i.po >kdiff3_$i.po
       /usr/lib/qt3/bin/msg2qm kdiff3_$i.po kdiff3_$i.qm
       rm kdiff3_$i.po kreplacements_$i.po
    fi

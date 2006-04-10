@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2003 by Joachim Eibl                                    *
- *   joachim.eibl@gmx.de                                                   *
+ *   Copyright (C) 2003-2006 by Joachim Eibl                               *
+ *   joachim.eibl at gmx.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,6 +20,8 @@
 #include <list>
 #include <qstring.h>
 #include <qdatetime.h>
+
+bool wildcardMultiMatch( const QString& wildcard, const QString& testString, bool bCaseSensitive );
 
 class t_DirectoryList;
 
@@ -212,6 +214,8 @@ private:
       double m_dSubRangeMin;
    };
    std::list<ProgressLevelData> m_progressStack;
+   
+   int m_progressDelayTimer;
 
    KProgress* m_pProgressBar;
    KProgress* m_pSubProgressBar;

@@ -2,8 +2,8 @@
                           kreplacements.cpp  -  description
                              -------------------
     begin                : Sat Aug 3 2002
-    copyright            : (C) 2002-2003 by Joachim Eibl
-    email                : joachim.eibl@gmx.de
+    copyright            : (C) 2002-2006 by Joachim Eibl
+    email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
 /***************************************************************************
@@ -277,6 +277,14 @@ KURL KFileDialog::getExistingURL( const QString &  startDir,
    return KURL(s);
 }
 
+QString KFileDialog::getSaveFileName (const QString &startDir, 
+                        const QString &filter, 
+                        QWidget *parent, 
+                        const QString &caption)
+{
+   return QFileDialog::getSaveFileName( startDir, filter, parent, 0, caption );
+}
+
 
 KToolBar::BarPosition KToolBar::barPos()
 {
@@ -330,22 +338,6 @@ KMainWindow::KMainWindow( QWidget* parent, const char* name )
       
    memberList = new QList<KMainWindow>;
    memberList->append(this);
-   connect( qApp, SIGNAL(lastWindowClosed()), this, SLOT(quit())); 
-}
-
-void KMainWindow::closeEvent(QCloseEvent*e)
-{
-   if ( queryClose() )
-   {
-      e->accept();
-   }
-   else
-      e->ignore();
-}
-
-bool KMainWindow::event( QEvent* e )
-{
-   return QMainWindow::event(e);
 }
 
 KToolBar* KMainWindow::toolBar(const QString&)
@@ -362,14 +354,7 @@ void KMainWindow::createGUI()
 {
    KStdAction::help(this, SLOT(slotHelp()), actionCollection());
    KStdAction::about(this, SLOT(slotAbout()), actionCollection());
-}
-
-void KMainWindow::quit()
-{
-   if ( queryExit() )
-   {
-      qApp->quit();
-   }
+   KStdAction::aboutQt(actionCollection());
 }
 
 void KMainWindow::slotAbout()
@@ -437,26 +422,37 @@ void KMainWindow::slotHelp()
    showHelp();
 }
 
+
+QString KStandardDirs::findResource(const QString& resource, const QString& /*appName*/)
+{
+   if (resource=="config")
+   {
+      QString home = QDir::homeDirPath();
+      return home + "/.kdiff3rc";
+   }
+   return QString();
+}
+
 KConfig::KConfig()
 {
-   QString home = QDir::homeDirPath();
-   m_fileName = home + "/.kdiff3rc";
+}
+
+void KConfig::readConfigFile( const QString& configFileName )
+{
+   if ( !configFileName.isEmpty() )
+   {
+      m_fileName = configFileName;
+   }
+   else
+   {
+      m_fileName = KStandardDirs().findResource("config","kdiff3rc");
+   }
 
    QFile f( m_fileName );
    if ( f.open(IO_ReadOnly) )
    {                               // file opened successfully
-      QTextStream t( &f );        // use a text stream
-      while ( !t.eof() )
-      {                                 // until end of file...	   
-         QString s = t.readLine();         // line of text excluding '\n'
-         int pos = s.find('=');
-         if( pos > 0 )                     // seems not to have a tag
-         {
-            QString key = s.left(pos);
-            QString val = s.mid(pos+1);
-            m_map[key] = val;
-         }	   
-      }
+      QTextStream t( &f );         // use a text stream
+      load(t);
       f.close();
    }
 }
@@ -467,260 +463,13 @@ KConfig::~KConfig()
    if ( f.open( IO_WriteOnly | IO_Translate ) )
    {                               // file opened successfully
        QTextStream t( &f );        // use a text stream
-       std::map<QString,QString>::iterator i;
-       for( i=m_map.begin(); i!=m_map.end(); ++i)
-       {
-          QString key = i->first;
-          QString val = i->second;
-          t << key << "=" << val << "\n";
-       }
+       save(t);
        f.close();
    }
 }
 
 void KConfig::setGroup(const QString&)
 {
-}
-
-// safeStringJoin and safeStringSplit allow to convert a stringlist into a string and back
-// safely, even if the individual strings in the list contain the separator character.
-static QString safeStringJoin(const QStringList& sl, char sepChar=',', char metaChar='\\' )
-{
-   // Join the strings in the list, using the separator ','
-   // If a string contains the separator character, it will be replaced with "\,".
-   // Any occurances of "\" (one backslash) will be replaced with "\\" (2 backslashes)
-   
-   assert(sepChar!=metaChar);
-   
-   QString sep;
-   sep += sepChar;
-   QString meta;
-   meta += metaChar;   
-   
-   QString safeString;
-   
-   QStringList::const_iterator i;
-   for (i=sl.begin(); i!=sl.end(); ++i)
-   {
-      QString s = *i;
-      s.replace(meta, meta+meta);   //  "\" -> "\\"
-      s.replace(sep, meta+sep);     //  "," -> "\,"
-      if ( i==sl.begin() )
-         safeString = s;
-      else
-         safeString += sep + s;
-   }
-   return safeString;
-}
-
-// Split a string that was joined with safeStringJoin
-static QStringList safeStringSplit(const QString& s, char sepChar=',', char metaChar='\\' )
-{
-   assert(sepChar!=metaChar);
-   QStringList sl;
-   // Miniparser
-   int i=0;
-   int len=s.length();
-   QString b;
-   for(i=0;i<len;++i)
-   {
-      if      ( i+1<len && s[i]==metaChar && s[i+1]==metaChar ){ b+=metaChar; ++i; }
-      else if ( i+1<len && s[i]==metaChar && s[i+1]==sepChar ){ b+=sepChar; ++i; }
-      else if ( s[i]==sepChar )  // real separator
-      {
-         sl.push_back(b);
-         b="";
-      }
-      else { b+=s[i]; }     
-   }
-   if ( !b.isEmpty() )
-      sl.push_back(b);
-
-   return sl;
-}
-
-
-
-static QString numStr(int n)
-{
-   QString s;
-   s.setNum( n );
-   return s;
-}
-
-static QString subSection( const QString& s, int idx, char sep )
-{
-   int pos=0;
-   while( idx>0 )
-   {
-      pos = s.find( sep, pos );
-      --idx;
-      if (pos<0) break;
-      ++pos;
-   }
-   if ( pos>=0 )
-   {
-      int pos2 = s.find( sep, pos );
-      if ( pos2>0 )
-         return s.mid(pos, pos2-pos);
-      else
-         return s.mid(pos);
-   }
-
-   return "";
-}
-
-static int num( QString& s, int idx )
-{
-   return subSection( s, idx, ',').toInt();
-
-   //return s.section(',', idx, idx).toInt();
-}
-
-void KConfig::writeEntry(const QString& k, const QFont& v )
-{
-   m_map[k] = v.family() + "," + QString::number(v.pointSize()) + "," + (v.bold() ? "bold" : "normal");
-}
-
-void KConfig::writeEntry(const QString& k, const QColor& v )
-{
-   m_map[k] = numStr(v.red()) + "," + numStr(v.green()) + "," + numStr(v.blue());
-}
-
-void KConfig::writeEntry(const QString& k, const QSize& v )
-{
-   m_map[k] = numStr(v.width()) + "," + numStr(v.height());
-}
-
-void KConfig::writeEntry(const QString& k, const QPoint& v )
-{
-   m_map[k] = numStr(v.x()) + "," + numStr(v.y());
-}
-
-void KConfig::writeEntry(const QString& k, int v )
-{
-   m_map[k] = numStr(v);
-}
-
-void KConfig::writeEntry(const QString& k, bool v )
-{
-   m_map[k] = numStr(v);
-}
-
-void KConfig::writeEntry(const QString& k, const QString& v )
-{
-   m_map[k] = v;
-}
-
-void KConfig::writeEntry(const QString& k, const QStringList& v, char separator )
-{
-   m_map[k] = safeStringJoin(v, separator);
-}
-
-
-QFont KConfig::readFontEntry(const QString& k, QFont* defaultVal )
-{
-   QFont f = *defaultVal;
-   std::map<QString,QString>::iterator i = m_map.find( k );
-   if ( i!=m_map.end() )
-   {
-      f.setFamily( subSection( i->second, 0, ',' ) );
-      f.setPointSize( subSection( i->second, 1, ',' ).toInt() );
-      f.setBold( subSection( i->second, 2, ',' )=="bold" );
-      //f.fromString(i->second);
-   }
-
-   return f;
-}
-
-QColor KConfig::readColorEntry(const QString& k, QColor* defaultVal )
-{
-   QColor c= *defaultVal;
-   std::map<QString,QString>::iterator i = m_map.find( k );
-   if ( i!=m_map.end() )
-   {
-      QString s = i->second;
-      c = QColor( num(s,0),num(s,1),num(s,2) );
-   }
-
-   return c;
-}
-
-QSize KConfig::readSizeEntry(const QString& k)
-{
-   QSize size(640,400);
-   std::map<QString,QString>::iterator i = m_map.find( k );
-   if ( i!=m_map.end() )
-   {
-
-      QString s = i->second;
-      size = QSize( num(s,0),num(s,1) );
-   }
-
-   return size;
-}
-
-QPoint KConfig::readPointEntry(const QString& k)
-{
-   QPoint point(0,0);
-   std::map<QString,QString>::iterator i = m_map.find( k );
-   if ( i!=m_map.end() )
-   {
-      QString s = i->second;
-      point = QPoint( num(s,0),num(s,1) );
-   }
-
-   return point;
-}
-
-bool KConfig::readBoolEntry(const QString& k, bool bDefault )
-{
-   bool b = bDefault;
-   std::map<QString,QString>::iterator i = m_map.find( k );
-   if ( i!=m_map.end() )
-   {
-      QString s = i->second;
-      b = (bool)num(s,0);
-   }
-
-   return b;
-}
-
-int KConfig::readNumEntry(const QString& k, int iDefault )
-{
-   int ival = iDefault;
-   std::map<QString,QString>::iterator i = m_map.find( k );
-   if ( i!=m_map.end() )
-   {
-      QString s = i->second;
-      ival = num(s,0);
-   }
-
-   return ival;
-}
-
-QString KConfig::readEntry(const QString& k, const QString& sDefault )
-{
-   QString sval = sDefault;
-   std::map<QString,QString>::iterator i = m_map.find( k );
-   if ( i!=m_map.end() )
-   {
-      sval = i->second;
-   }
-
-   return sval;
-}
-
-QStringList KConfig::readListEntry(const QString& k, char separator )
-{
-   QStringList strList;
-
-   std::map<QString,QString>::iterator i = m_map.find( k );
-   if ( i!=m_map.end() )
-   {
-      strList = safeStringSplit( i->second, separator );
-   }
-   return strList;
 }
 
 void KAction::init(QObject* receiver, const char* slot, KActionCollection* actionCollection, 
@@ -859,6 +608,15 @@ KAction* KStdAction::saveAs( QWidget* parent, const char* slot, KActionCollectio
    return a;
 }
 
+KAction* KStdAction::print( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+{
+   #include "../xpm/fileprint.xpm"
+   KMainWindow* p = actionCollection->m_pMainWindow;
+   KAction* a = new KAction( i18n("Print..."), QIconSet(QPixmap(fileprint)),Qt::CTRL+Qt::Key_P, parent, slot, actionCollection, "print", false, false);
+   if(p) a->addTo( p->fileMenu );
+   return a;
+}
+
 KAction* KStdAction::quit( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
@@ -887,6 +645,14 @@ KAction* KStdAction::paste( QWidget* parent, const char* slot, KActionCollection
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
    KAction* a = new KAction( i18n("Paste"), Qt::CTRL+Qt::Key_V, parent, slot, actionCollection, "paste", false, false );
+   if(p) a->addTo( p->editMenu );
+   return a;
+}
+
+KAction* KStdAction::selectAll( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+{
+   KMainWindow* p = actionCollection->m_pMainWindow;
+   KAction* a = new KAction( i18n("Select All"), Qt::CTRL+Qt::Key_A, parent, slot, actionCollection, "selectall", false, false );
    if(p) a->addTo( p->editMenu );
    return a;
 }
@@ -922,7 +688,15 @@ KAction* KStdAction::keyBindings( QWidget*, const char*, KActionCollection*)
 KAction* KStdAction::about( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("About"), 0, parent, slot, actionCollection, "about", false, false );
+   KAction* a = new KAction( i18n("About")+" KDiff3", 0, parent, slot, actionCollection, "about_kdiff3", false, false );
+   if(p) a->addTo( p->helpMenu );
+   return a;
+}
+
+KAction* KStdAction::aboutQt( KActionCollection* actionCollection )
+{
+   KMainWindow* p = actionCollection->m_pMainWindow;
+   KAction* a = new KAction( i18n("About")+" Qt", 0, qApp, SLOT(aboutQt()), actionCollection, "about_qt", false, false );
    if(p) a->addTo( p->helpMenu );
    return a;
 }
@@ -1047,6 +821,27 @@ void KColorButton::slotClicked()
    update();
 }
 
+KPrinter::KPrinter()
+{
+}
+QValueList<int> KPrinter::pageList()
+{
+   QValueList<int> vl;
+   int to = toPage();
+   for(int i=fromPage(); i<=to; ++i)
+   {
+      vl.push_back(i);
+   }
+   return vl;
+}
+void KPrinter::setCurrentPage(int)
+{
+}
+void KPrinter::setPageSelection(e_PageSelection)
+{
+}
+
+
 QPixmap KIconLoader::loadIcon( const QString&, int )
 {
    return QPixmap();
@@ -1133,7 +928,7 @@ QString KCmdLineArgs::getOption( const QString& s )
    int j=0;
    for( j=0; j<(int)s_vOption.size(); ++j )
    {
-      const char* optName = s_pOptions[j].shortName;
+      const char* optName = s_pOptions[j].name;
       const char* pos = strchr( optName,' ' );
       int len = pos==0 ? strlen( optName ) : pos - optName;
 
@@ -1152,7 +947,7 @@ QCStringList KCmdLineArgs::getOptionList( const QString& s )
    int j=0;
    for( j=0; j<(int)s_vOption.size(); ++j )
    {
-      const char* optName = s_pOptions[j].shortName;
+      const char* optName = s_pOptions[j].name;
       const char* pos = strchr( optName,' ' );
       int len = pos==0 ? strlen( optName ) : pos - optName;
 
@@ -1172,7 +967,7 @@ bool KCmdLineArgs::isSet(const QString& s)
    int j=0;
    for( j=0; j<(int)s_vOption.size(); ++j )
    {
-      const char* optName = s_pOptions[j].shortName;
+      const char* optName = s_pOptions[j].name;
       if( s == QString( optName ) )
       {
          return ! s_vOption[j].isEmpty();
@@ -1193,9 +988,9 @@ KApplication::KApplication()
    int nofOptions=0;
    int nofArgs=0;
    int i=0;
-   while( s_pOptions[i].shortName != 0 )
+   while( s_pOptions[i].name != 0 )
    {
-      if ( s_pOptions[i].shortName[0]=='[' )
+      if ( s_pOptions[i].name[0]=='[' )
          nofArgs++;
       else
          nofOptions++;
@@ -1203,27 +998,47 @@ KApplication::KApplication()
       ++i;
    }
 
+   // First find the option "-config" or "--config" to allow loading of options
+   QString configFileName;
+   for( i=1; i<s_argc-1; ++i )
+   {
+      QString arg = s_argv[i];
+      if ( arg == "-config" || arg == "--config" )
+      {
+         configFileName = s_argv[i+1];
+      }
+   }
+   m_config.readConfigFile(configFileName);
+
+   QStringList ignorableCmdLineOptionsList = m_config.readListEntry("IgnorableCmdLineOptions", QString("-u;-query;-html;-abort"), '|');
+   QString ignorableCmdLineOptions;
+   if ( !ignorableCmdLineOptionsList.isEmpty() ) 
+      ignorableCmdLineOptions = ignorableCmdLineOptionsList.front() + ";";
+
    s_vOption.resize(nofOptions);
 
    for( i=1; i<s_argc; ++i )
    {
       if ( s_argv[i][0]=='-' )  // An option
       {
+         if ( ignorableCmdLineOptions.contains(QString(s_argv[i])+";") )
+            continue;
          // Find the option
          int j=0;
          for( j=0; j<nofOptions; ++j )
          {
-            const char* optName = s_pOptions[j].shortName;
+            const char* optName = s_pOptions[j].name;
             const char* pos = strchr( optName,' ' );
             int len = pos==0 ? strlen( optName ) : pos - optName;
+            int len2 = strlen(s_argv[i]);
 
-            if( len>0 && ( s_argv[i][1]=='-' && memcmp( &s_argv[i][2], optName, len )==0  ||
-                                                memcmp( &s_argv[i][1], optName, len )==0  ))
+            if( len>0 && ( s_argv[i][1]=='-' && len2-2==len && memcmp( &s_argv[i][2], optName, len )==0  ||
+                                                len2-1==len && memcmp( &s_argv[i][1], optName, len )==0  ))
             {
-               if (s_pOptions[j].longName == 0)  // alias, because without description.
+               if (s_pOptions[j].description == 0)  // alias, because without description.
                {
                   ++j;
-                  optName = s_pOptions[j].shortName;
+                  optName = s_pOptions[j].name;
                   pos = strchr( optName,' ' );
                }
                if (pos!=0){ ++i; s_vOption[j].append(s_argv[i]); } //use param
@@ -1235,6 +1050,8 @@ KApplication::KApplication()
          {
             QString s;
             s = QString("Unknown option: ") +  s_argv[i] + "\n";
+            s += "If KDiff3 should ignore this option, run KDiff3 normally and edit\n"
+                 "the \"Command line options to ignore\" in the \"Integration Settings\".\n\n";
 
             s += "KDiff3-Usage when starting via commandline: \n";
             s += "- Comparing 2 files:\t\tkdiff3 file1 file2\n";
@@ -1253,36 +1070,37 @@ KApplication::KApplication()
             int pos=s.length();
             for( j=0; j<nofOptions; ++j )
             {
-               if ( s_pOptions[j].longName!=0 )
+               if ( s_pOptions[j].description!=0 )
                {
-                  if (s_pOptions[j].shortName[0]!='+')
+                  if (s_pOptions[j].name[0]!='+')
                   {
                      s += "-";
-                     if ( strlen(s_pOptions[j].shortName)>1 ) s += "-";
+                     if ( strlen(s_pOptions[j].name)>1 ) s += "-";
                   }
-                  s += s_pOptions[j].shortName;
+                  s += s_pOptions[j].name;
                   s += QString().fill(' ', minMaxLimiter( 20 - ((int)s.length()-pos), 3, 20 ) );
-                  s += s_pOptions[j].longName;
+                  s += s_pOptions[j].description;
                   s +="\n";
                   pos=s.length();
                }
                else
                {
                   s += "-";
-                  if ( strlen(s_pOptions[j].shortName)>1 ) s += "-";
-                  s += s_pOptions[j].shortName;
+                  if ( strlen(s_pOptions[j].name)>1 ) s += "-";
+                  s += s_pOptions[j].name;
                   s += ", ";
                }
             }
-            
-            s += "\nFor more documentation, see the help-menu or the subdirectory doc.\n";
-#ifdef _WIN32 
+
+            s += "\n"+i18n("For more documentation, see the help-menu or the subdirectory doc.")+"\n";
+#ifdef _WIN32
             // A windows program has no console
-            KMessageBox::information(0, s,i18n("KDiff3-Usage"));
+            if ( 0==QMessageBox::information(0, i18n("KDiff3-Usage"), s, i18n("Ignore"),i18n("Exit") ) )
+               continue;
 #else
             std::cerr << s.latin1() << std::endl;
 #endif
-            
+
             ::exit(-1);
          }
       }

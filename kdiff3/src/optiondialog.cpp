@@ -1,6 +1,6 @@
 /*
  *   kdiff3 - Text Diff And Merge Tool
- *   This file only: Copyright (C) 2002  Joachim Eibl, joachim.eibl@gmx.de
+ *   Copyright (C) 2002-2006  Joachim Eibl, joachim.eibl at gmx.de
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
- *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *   Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  */
 
@@ -39,15 +39,25 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kmessagebox.h>
+#include <kmainwindow.h> //For ktoolbar.h
+
 //#include <kkeydialog.h>
 #include <map>
 
 #include "optiondialog.h"
 #include "diff.h"
+#include "smalldialogs.h"
+
+#include <iostream>
 
 #ifndef KREPLACEMENTS_H
 #include <kglobalsettings.h>
 #endif
+
+static QString s_historyEntryStartRegExpToolTip;
+static QString s_historyEntryStartSortKeyOrderToolTip;
+static QString s_autoMergeRegExpToolTip;
+static QString s_historyStartRegExpToolTip;
 
 void OptionDialog::addOptionItem(OptionItem* p)
 {
@@ -57,7 +67,7 @@ void OptionDialog::addOptionItem(OptionItem* p)
 class OptionItem
 {
 public:
-   OptionItem( OptionDialog* pOptionDialog, QString saveName )
+   OptionItem( OptionDialog* pOptionDialog, const QString& saveName )
    {
       assert(pOptionDialog!=0);
       pOptionDialog->addOptionItem( this );
@@ -67,8 +77,9 @@ public:
    virtual void setToDefault()=0;
    virtual void setToCurrent()=0;
    virtual void apply()=0;
-   virtual void write(KConfig*)=0;
-   virtual void read(KConfig*)=0;
+   virtual void write(ValueMap*)=0;
+   virtual void read(ValueMap*)=0;
+   QString getSaveName(){return m_saveName;}
 protected:
    QString m_saveName;
 };
@@ -86,8 +97,8 @@ public:
    void setToDefault(){ setChecked( m_bDefaultVal );      }
    void setToCurrent(){ setChecked( *m_pbVar );           }
    void apply()       { *m_pbVar = isChecked();                              }
-   void write(KConfig* config){ config->writeEntry(m_saveName, *m_pbVar );   }
-   void read (KConfig* config){ *m_pbVar = config->readBoolEntry( m_saveName, *m_pbVar ); }
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pbVar );   }
+   void read (ValueMap* config){ *m_pbVar = config->readBoolEntry( m_saveName, *m_pbVar ); }
 private:
    OptionCheckBox( const OptionCheckBox& ); // private copy constructor without implementation
    bool* m_pbVar;
@@ -107,33 +118,76 @@ public:
    void setToDefault(){ setChecked( m_bDefaultVal );      }
    void setToCurrent(){ setChecked( *m_pbVar );           }
    void apply()       { *m_pbVar = isChecked();                              }
-   void write(KConfig* config){ config->writeEntry(m_saveName, *m_pbVar );   }
-   void read (KConfig* config){ *m_pbVar = config->readBoolEntry( m_saveName, *m_pbVar ); }
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pbVar );   }
+   void read (ValueMap* config){ *m_pbVar = config->readBoolEntry( m_saveName, *m_pbVar ); }
 private:
    OptionRadioButton( const OptionRadioButton& ); // private copy constructor without implementation
    bool* m_pbVar;
    bool m_bDefaultVal;
 };
 
-class OptionToggleAction : public OptionItem
+
+template<class T>
+class OptionT : public OptionItem
 {
 public:
-   OptionToggleAction( bool bDefaultVal, const QString& saveName, bool* pbVar, OptionDialog* pOD )
+   OptionT( const T& defaultVal, const QString& saveName, T* pVar, OptionDialog* pOD )
    : OptionItem( pOD, saveName )
    {
-      m_pbVar = pbVar;
-      *m_pbVar = bDefaultVal;
+      m_pVar = pVar;
+      *m_pVar = defaultVal;
+   }
+   OptionT( const QString& saveName, T* pVar, OptionDialog* pOD )
+   : OptionItem( pOD, saveName )
+   {
+      m_pVar = pVar;
    }
    void setToDefault(){}
    void setToCurrent(){}
    void apply()       {}
-   void write(KConfig* config){ config->writeEntry(m_saveName, *m_pbVar );   }
-   void read (KConfig* config){ *m_pbVar = config->readBoolEntry( m_saveName, *m_pbVar ); }
+   void write(ValueMap* vm){ writeEntry( vm, m_saveName, *m_pVar ); }
+   void read (ValueMap* vm){ readEntry ( vm, m_saveName, *m_pVar ); }
 private:
-   OptionToggleAction( const OptionToggleAction& ); // private copy constructor without implementation
-   bool* m_pbVar;
+   OptionT( const OptionT& ); // private copy constructor without implementation
+   T* m_pVar;
 };
 
+template <class T> void writeEntry(ValueMap* vm, const QString& saveName, const T& v ) {   vm->writeEntry( saveName, v ); }
+static void writeEntry(ValueMap* vm, const QString& saveName, const QStringList& v )   {   vm->writeEntry( saveName, v, '|' ); }
+
+static void readEntry(ValueMap* vm, const QString& saveName, bool& v )       {   v = vm->readBoolEntry( saveName, v ); }
+static void readEntry(ValueMap* vm, const QString& saveName, int&  v )       {   v = vm->readNumEntry( saveName, v ); }
+static void readEntry(ValueMap* vm, const QString& saveName, QSize& v )      {   v = vm->readSizeEntry( saveName, &v ); }
+static void readEntry(ValueMap* vm, const QString& saveName, QPoint& v )     {   v = vm->readPointEntry( saveName, &v ); }
+static void readEntry(ValueMap* vm, const QString& saveName, QStringList& v ){   v = vm->readListEntry( saveName, QStringList(), '|' ); }
+
+typedef OptionT<bool> OptionToggleAction;
+typedef OptionT<int>  OptionNum;
+typedef OptionT<QPoint> OptionPoint;
+typedef OptionT<QSize> OptionSize;
+typedef OptionT<QStringList> OptionStringList;
+
+class OptionFontChooser : public KFontChooser, public OptionItem
+{
+public:
+   OptionFontChooser( const QFont& defaultVal, const QString& saveName, QFont* pbVar, QWidget* pParent, OptionDialog* pOD )
+   :KFontChooser( pParent,"font",true/*onlyFixed*/,QStringList(),false,6 ),
+    OptionItem( pOD, saveName )
+   {
+      m_pbVar = pbVar;
+      *m_pbVar = defaultVal;
+      m_default = defaultVal;
+   }
+   void setToDefault(){ setFont( m_default, true /*only fixed*/ ); }
+   void setToCurrent(){ setFont( *m_pbVar, true /*only fixed*/ ); }
+   void apply()       { *m_pbVar = font();}
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pbVar );   }
+   void read (ValueMap* config){ *m_pbVar = config->readFontEntry( m_saveName, m_pbVar ); }
+private:
+   OptionFontChooser( const OptionToggleAction& ); // private copy constructor without implementation
+   QFont* m_pbVar;
+   QFont m_default;
+};
 
 class OptionColorButton : public KColorButton, public OptionItem
 {
@@ -147,8 +201,8 @@ public:
    void setToDefault(){ setColor( m_defaultVal );      }
    void setToCurrent(){ setColor( *m_pVar );           }
    void apply()       { *m_pVar = color();                              }
-   void write(KConfig* config){ config->writeEntry(m_saveName, *m_pVar );   }
-   void read (KConfig* config){ *m_pVar = config->readColorEntry( m_saveName, m_pVar ); }
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pVar );   }
+   void read (ValueMap* config){ *m_pVar = config->readColorEntry( m_saveName, m_pVar ); }
 private:
    OptionColorButton( const OptionColorButton& ); // private copy constructor without implementation
    QColor* m_pVar;
@@ -162,29 +216,32 @@ public:
                    QWidget* pParent, OptionDialog* pOD )
    : QComboBox( pParent ), OptionItem( pOD, saveName )
    {
+      setMinimumWidth(50);
+      setEditable(true);
       m_pVar = pVar;
       m_defaultVal = defaultVal;
       m_list.push_back(defaultVal);
-      setEditable(true);
+      insertText();
    }
-   void setToDefault(){ setCurrentText( m_defaultVal );      }
-   void setToCurrent(){ setCurrentText( *m_pVar );           }
+   void setToDefault(){ setCurrentText( m_defaultVal );   }
+   void setToCurrent(){ setCurrentText( *m_pVar );        }
    void apply()       { *m_pVar = currentText(); insertText();            }
-   void write(KConfig* config){ config->writeEntry( m_saveName, m_list, '|' );      }
-   void read (KConfig* config){ 
-      m_list = config->readListEntry( m_saveName, '|' ); 
-      if ( !m_list.isEmpty() ) *m_pVar = m_list.front();
+   void write(ValueMap* config){ config->writeEntry( m_saveName, m_list, '|' );      }
+   void read (ValueMap* config){ 
+      m_list = config->readListEntry( m_saveName, m_defaultVal, '|' ); 
+      if ( !m_list.empty() ) *m_pVar = m_list.front();
       clear();
       insertStringList(m_list);
    }
 private:
    void insertText()
-   {  // Check if the text exists. If yes remove it and
+   {  // Check if the text exists. If yes remove it and push it in as first element
       QString current = currentText();
       m_list.remove( current );
       m_list.push_front( current );
       clear();
-      if ( m_list.count()>10 ) m_list.erase( m_list.at(10), m_list.end() );
+      if ( m_list.size()>10 ) 
+         m_list.erase( m_list.at(10),m_list.end() );
       insertStringList(m_list);
    }
    OptionLineEdit( const OptionLineEdit& ); // private copy constructor without implementation
@@ -214,8 +271,8 @@ public:
    void apply()       { const QIntValidator* v=static_cast<const QIntValidator*>(validator());
                         *m_pVar = minMaxLimiter( text().toInt(), v->bottom(), v->top());
                         setText( QString::number(*m_pVar) );  }
-   void write(KConfig* config){ config->writeEntry(m_saveName, *m_pVar );   }
-   void read (KConfig* config){ *m_pVar = config->readNumEntry( m_saveName, *m_pVar ); }
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pVar );   }
+   void read (ValueMap* config){ *m_pVar = config->readNumEntry( m_saveName, *m_pVar ); }
 private:
    OptionIntEdit( const OptionIntEdit& ); // private copy constructor without implementation
    int* m_pVar;
@@ -229,6 +286,7 @@ public:
                    QWidget* pParent, OptionDialog* pOD )
    : QComboBox( pParent ), OptionItem( pOD, saveName )
    {
+      setMinimumWidth(50);
       m_pVarNum = pVarNum;
       m_pVarStr = 0;
       m_defaultVal = defaultVal;
@@ -253,17 +311,17 @@ public:
       if (m_pVarNum!=0) setCurrentItem( *m_pVarNum );
       else              setText( *m_pVarStr );
    }
-   void apply()       
+   void apply()
    { 
       if (m_pVarNum!=0){ *m_pVarNum = currentItem(); }
       else             { *m_pVarStr = currentText(); }
    }
-   void write(KConfig* config)
+   void write(ValueMap* config)
    { 
       if (m_pVarStr!=0) config->writeEntry(m_saveName, *m_pVarStr );
       else              config->writeEntry(m_saveName, *m_pVarNum );   
    }
-   void read (KConfig* config)
+   void read (ValueMap* config)
    {
       if (m_pVarStr!=0)  setText( config->readEntry( m_saveName, currentText() ) );
       else               *m_pVarNum = config->readNumEntry( m_saveName, *m_pVarNum ); 
@@ -338,9 +396,21 @@ public:
       }
    }
    void setToDefault()
-   { 
-      setCurrentItem( 0 ); 
-      if (m_ppVarCodec!=0){ *m_ppVarCodec=m_codecVec[0]; } 
+   {
+      QString defaultName = QTextCodec::codecForLocale()->name();
+      for(int i=0;i<count();++i)
+      {
+         if (defaultName==text(i) &&
+             m_codecVec[i]==QTextCodec::codecForLocale())
+         {
+            setCurrentItem(i);
+            if (m_ppVarCodec!=0){ *m_ppVarCodec=m_codecVec[i]; }
+            return;
+         }
+      }
+
+      setCurrentItem( 0 );
+      if (m_ppVarCodec!=0){ *m_ppVarCodec=m_codecVec[0]; }
    }
    void setToCurrent()
    {
@@ -360,11 +430,11 @@ public:
    {
       if (m_ppVarCodec!=0){ *m_ppVarCodec = m_codecVec[ currentItem() ]; }
    }
-   void write(KConfig* config)
+   void write(ValueMap* config)
    {
       if (m_ppVarCodec!=0) config->writeEntry(m_saveName, (*m_ppVarCodec)->name() );
    }
-   void read (KConfig* config)
+   void read (ValueMap* config)
    {
       QString codecName = config->readEntry( m_saveName, m_codecVec[ currentItem() ]->name() );
       for(unsigned int i=0; i<m_codecVec.size(); ++i)
@@ -395,6 +465,7 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
       setupDirectoryMergePage();
 
    setupRegionalPage();
+   setupIntegrationPage();
 
    //setupKeysPage();
 
@@ -415,6 +486,20 @@ void OptionDialog::setupOtherOptions()
    new OptionToggleAction( false, "ShowLineNumbers", &m_bShowLineNumbers, this );
    new OptionToggleAction( true,  "HorizDiffWindowSplitting", &m_bHorizDiffWindowSplitting, this );
    new OptionToggleAction( false, "WordWrap", &m_bWordWrap, this );
+
+   new OptionToggleAction( true,  "ShowIdenticalFiles", &m_bDmShowIdenticalFiles, this );
+
+   new OptionToggleAction( true,  "Show Toolbar", &m_bShowToolBar, this );
+   new OptionToggleAction( true,  "Show Statusbar", &m_bShowStatusBar, this );
+
+   new OptionNum( (int)KToolBar::Top, "ToolBarPos", &m_toolBarPos, this );
+   new OptionSize( QSize(600,400),"Geometry", &m_geometry, this );
+   new OptionPoint( QPoint(0,22), "Position", &m_position, this );
+
+   new OptionStringList( "RecentAFiles", &m_recentAFiles, this );
+   new OptionStringList( "RecentBFiles", &m_recentBFiles, this );
+   new OptionStringList( "RecentCFiles", &m_recentCFiles, this );
+   new OptionStringList( "RecentOutputFiles", &m_recentOutputFiles, this );
 }
 
 void OptionDialog::setupFontPage( void )
@@ -422,10 +507,19 @@ void OptionDialog::setupFontPage( void )
    QFrame *page = addPage( i18n("Font"), i18n("Editor & Diff Output Font" ),
                              BarIcon("fonts", KIcon::SizeMedium ) );
 
-   QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+   QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
 
-   m_fontChooser = new KFontChooser( page,"font",true/*onlyFixed*/,QStringList(),false,6 );
-   topLayout->addWidget( m_fontChooser );
+   QFont defaultFont =
+#ifdef _WIN32
+      QFont("Courier New", 10 );
+#elif defined( KREPLACEMENTS_H )
+      QFont("Courier", 10 );
+#else
+      KGlobalSettings::fixedFont();
+#endif
+
+   OptionFontChooser* pFontChooser = new OptionFontChooser( defaultFont, "Font", &m_font, page, this );
+   topLayout->addWidget( pFontChooser );
 
    QGridLayout *gbox = new QGridLayout( 1, 2 );
    topLayout->addLayout( gbox );
@@ -442,11 +536,12 @@ void OptionDialog::setupFontPage( void )
 
 void OptionDialog::setupColorPage( void )
 {
-  QFrame *page = addPage( i18n("Color"), i18n("Colors in Editor & Diff Output"),
+  QFrame *page = addPage( i18n("Color"), i18n("Colors Settings"),
      BarIcon("colorize", KIcon::SizeMedium ) );
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+  QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
 
   QGridLayout *gbox = new QGridLayout( 7, 2 );
+  gbox->setColStretch(1,5);
   topLayout->addLayout(gbox);
 
   QLabel* label;
@@ -455,20 +550,28 @@ void OptionDialog::setupColorPage( void )
   int depth = QColor::numBitPlanes();
   bool bLowColor = depth<=8;
 
-  OptionColorButton* pFgColor = new OptionColorButton( black,"FgColor", &m_fgColor, page, this );
+  label = new QLabel( i18n("Editor and Diff Views:"), page );
+  gbox->addWidget( label, line, 0 );
+  QFont f( label->font() );
+  f.setBold(true);
+  label->setFont(f);
+  ++line;
+
+  OptionColorButton* pFgColor = new OptionColorButton( Qt::black,"FgColor", &m_fgColor, page, this );
   label = new QLabel( pFgColor, i18n("Foreground color:"), page );
   gbox->addWidget( label, line, 0 );
   gbox->addWidget( pFgColor, line, 1 );
   ++line;
 
-  OptionColorButton* pBgColor = new OptionColorButton( white, "BgColor", &m_bgColor, page, this );
+  OptionColorButton* pBgColor = new OptionColorButton( Qt::white, "BgColor", &m_bgColor, page, this );
   label = new QLabel( pBgColor, i18n("Background color:"), page );
   gbox->addWidget( label, line, 0 );
   gbox->addWidget( pBgColor, line, 1 );
 
   ++line;
 
-  OptionColorButton* pDiffBgColor = new OptionColorButton( lightGray, "DiffBgColor", &m_diffBgColor, page, this );
+  OptionColorButton* pDiffBgColor = new OptionColorButton( 
+     bLowColor ? Qt::lightGray : qRgb(224,224,224), "DiffBgColor", &m_diffBgColor, page, this );
   label = new QLabel( pDiffBgColor, i18n("Diff background color:"), page );
   gbox->addWidget( label, line, 0 );
   gbox->addWidget( pDiffBgColor, line, 1 );
@@ -495,7 +598,7 @@ void OptionDialog::setupColorPage( void )
   gbox->addWidget( pColorC, line, 1 );
   ++line;
 
-  OptionColorButton* pColorForConflict = new OptionColorButton( red, "ColorForConflict", &m_colorForConflict, page, this );
+  OptionColorButton* pColorForConflict = new OptionColorButton( Qt::red, "ColorForConflict", &m_colorForConflict, page, this );
   label = new QLabel( pColorForConflict, i18n("Conflict color:"), page );
   gbox->addWidget( label, line, 0 );
   gbox->addWidget( pColorForConflict, line, 1 );
@@ -515,6 +618,46 @@ void OptionDialog::setupColorPage( void )
   gbox->addWidget( pColor, line, 1 );
   ++line;
 
+  pColor = new OptionColorButton( qRgb(0xff,0xd0,0x80), "ManualAlignmentRangeColor", &m_manualHelpRangeColor, page, this );
+  label = new QLabel( pColor, i18n("Color for manually aligned difference ranges:"), page );
+  gbox->addWidget( label, line, 0 );
+  gbox->addWidget( pColor, line, 1 );
+  ++line;
+
+  label = new QLabel( i18n("Directory Comparison View:"), page );
+  gbox->addWidget( label, line, 0 );
+  label->setFont(f);
+  ++line;
+
+  pColor = new OptionColorButton( qRgb(0,0xd0,0), "NewestFileColor", &m_newestFileColor, page, this );
+  label = new QLabel( pColor, i18n("Newest file color:"), page );
+  gbox->addWidget( label, line, 0 );
+  gbox->addWidget( pColor, line, 1 );
+  QString dirColorTip = i18n( "Changing this color will only be effective when starting the next directory comparison.");
+  QToolTip::add( label, dirColorTip );
+  ++line;
+
+  pColor = new OptionColorButton( qRgb(0xf0,0,0), "OldestFileColor", &m_oldestFileColor, page, this );
+  label = new QLabel( pColor, i18n("Oldest file color:"), page );
+  gbox->addWidget( label, line, 0 );
+  gbox->addWidget( pColor, line, 1 );
+  QToolTip::add( label, dirColorTip );
+  ++line;
+
+  pColor = new OptionColorButton( qRgb(0xc0,0xc0,0), "MidAgeFileColor", &m_midAgeFileColor, page, this );
+  label = new QLabel( pColor, i18n("Middle age file color:"), page );
+  gbox->addWidget( label, line, 0 );
+  gbox->addWidget( pColor, line, 1 );
+  QToolTip::add( label, dirColorTip );
+  ++line;
+
+  pColor = new OptionColorButton( qRgb(0,0,0), "MissingFileColor", &m_missingFileColor, page, this );
+  label = new QLabel( pColor, i18n("Color for missing files:"), page );
+  gbox->addWidget( label, line, 0 );
+  gbox->addWidget( pColor, line, 1 );
+  QToolTip::add( label, dirColorTip );
+  ++line;
+
   topLayout->addStretch(10);
 }
 
@@ -523,9 +666,10 @@ void OptionDialog::setupEditPage( void )
 {
    QFrame *page = addPage( i18n("Editor"), i18n("Editor Behavior"),
                            BarIcon("edit", KIcon::SizeMedium ) );
-   QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+   QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
 
    QGridLayout *gbox = new QGridLayout( 4, 2 );
+   gbox->setColStretch(1,5);
    topLayout->addLayout( gbox );
    QLabel* label;
    int line=0;
@@ -582,11 +726,12 @@ void OptionDialog::setupEditPage( void )
 
 void OptionDialog::setupDiffPage( void )
 {
-   QFrame *page = addPage( i18n("Diff & Merge"), i18n("Diff & Merge Settings"),
+   QFrame *page = addPage( i18n("Diff and Merge"), i18n("Diff and Merge Settings"),
                            BarIcon("misc", KIcon::SizeMedium ) );
-   QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+   QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
 
    QGridLayout *gbox = new QGridLayout( 3, 2 );
+   gbox->setColStretch(1,5);
    topLayout->addLayout( gbox );
    int line=0;
 
@@ -680,6 +825,121 @@ void OptionDialog::setupDiffPage( void )
       );
    ++line;
 
+   QGroupBox* pGroupBox = new QGroupBox( 2, Qt::Horizontal, i18n("Automatic Merge Regular Expression"), page);
+   gbox->addMultiCellWidget( pGroupBox, line,line,0,1);
+   ++line;
+   {
+      QWidget* page = new QWidget( pGroupBox );
+      QGridLayout* gbox = new QGridLayout( page, 2, 2, spacingHint() );
+      gbox->setColStretch(1,10);
+      int line = 0;
+
+      label = new QLabel( i18n("Auto merge regular expression:"), page );
+      gbox->addWidget( label, line, 0 );
+      m_pAutoMergeRegExpLineEdit = new OptionLineEdit( ".*\\$(Version|Header|Date|Author).*\\$.*", "AutoMergeRegExp", &m_autoMergeRegExp, page, this );
+      gbox->addWidget( m_pAutoMergeRegExpLineEdit, line, 1 );
+      s_autoMergeRegExpToolTip = i18n("Regular expression for lines where KDiff3 should automatically choose one source.\n"
+                                      "When a line with a conflict matches the regular expression then\n"
+                                      "- if available - C, otherwise B will be chosen.");
+      QToolTip::add( label, s_autoMergeRegExpToolTip );
+      ++line;
+
+      OptionCheckBox* pAutoMergeRegExp = new OptionCheckBox( i18n("Run regular expression auto merge on merge start"), false, "RunRegExpAutoMergeOnMergeStart", &m_bRunRegExpAutoMergeOnMergeStart, page, this );
+      gbox->addMultiCellWidget( pAutoMergeRegExp, line, line, 0, 1 );
+      QToolTip::add( pAutoMergeRegExp, i18n( "Run the merge for auto merge regular expressions\n"
+                                             "immediately when a merge starts.\n"));
+      ++line;
+   }
+
+   pGroupBox = new QGroupBox( 2, Qt::Horizontal, i18n("Version Control History Merging"), page);
+   gbox->addMultiCellWidget( pGroupBox, line,line,0,1);
+   ++line;
+   {
+      QWidget* page = new QWidget( pGroupBox );
+      QGridLayout* gbox = new QGridLayout( page, 2, 2, spacingHint() );
+      gbox->setColStretch(1,10);
+      int line = 0;
+
+      label = new QLabel( i18n("History start regular expression:"), page );
+      gbox->addWidget( label, line, 0 );
+      m_pHistoryStartRegExpLineEdit = new OptionLineEdit( ".*\\$Log.*\\$.*", "HistoryStartRegExp", &m_historyStartRegExp, page, this );
+      gbox->addWidget( m_pHistoryStartRegExpLineEdit, line, 1 );
+      s_historyStartRegExpToolTip = i18n("Regular expression for the start of the version control history entry.\n"
+                                 "Usually this line contains the \"$Log$
+                                 "Usually this line contains the \"Revision 1.7  2006/04/10 08:37:33  joachim99
+                                 "Usually this line contains the \"KDiff3 0.9.89
+                                 "Usually this line contains the \"\"-keyword.\n"
+                                 "Default value: \".*\\$Log.*\\$.*\"");
+      QToolTip::add( label, s_historyStartRegExpToolTip );
+      ++line;
+   
+      label = new QLabel( i18n("History entry start regular expression:"), page );
+      gbox->addWidget( label, line, 0 );
+      // Example line:  "** \main\rolle_fsp_dev_008\1   17 Aug 2001 10:45:44   rolle"
+      QString historyEntryStartDefault =
+         "\\s*\\\\main\\\\(\\S+)\\s+"  // Start with  "\main\"
+         "([0-9]+) "          // day
+         "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) " //month
+         "([0-9][0-9][0-9][0-9]) " // year
+         "([0-9][0-9]:[0-9][0-9]:[0-9][0-9])\\s+(.*)";  // time, name
+   
+      m_pHistoryEntryStartRegExpLineEdit = new OptionLineEdit( historyEntryStartDefault, "HistoryEntryStartRegExp", &m_historyEntryStartRegExp, page, this );
+      gbox->addWidget( m_pHistoryEntryStartRegExpLineEdit, line, 1 );
+      s_historyEntryStartRegExpToolTip = i18n("A version control history entry consists of several lines.\n"
+                                 "Specify the regular expression to detect the first line (without the leading comment).\n"
+                                 "Use parentheses to group the keys you want to use for sorting.\n"
+                                 "If left empty, then KDiff3 assumes that empty lines separate history entries.\n"
+                                 "See the documentation for details.");
+      QToolTip::add( label, s_historyEntryStartRegExpToolTip );
+      ++line;
+   
+      m_pHistoryMergeSorting = new OptionCheckBox( i18n("History merge sorting"), false, "HistoryMergeSorting", &m_bHistoryMergeSorting, page, this );
+      gbox->addMultiCellWidget( m_pHistoryMergeSorting, line, line, 0, 1 );
+      QToolTip::add( m_pHistoryMergeSorting, i18n("Sort version control history by a key.") );
+      ++line;
+            //QString branch = newHistoryEntry.cap(1);
+            //int day    = newHistoryEntry.cap(2).toInt();
+            //int month  = QString("Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec").find(newHistoryEntry.cap(3))/4 + 1;
+            //int year   = newHistoryEntry.cap(4).toInt();
+            //QString time = newHistoryEntry.cap(5);
+            //QString name = newHistoryEntry.cap(6);
+      QString defaultSortKeyOrder = "4,3,2,5,1,6"; //QDate(year,month,day).toString(Qt::ISODate) +" "+ time + " " + branch + " " + name;
+
+      label = new QLabel( i18n("History entry start sort key order:"), page );
+      gbox->addWidget( label, line, 0 );
+      m_pHistorySortKeyOrderLineEdit = new OptionLineEdit( defaultSortKeyOrder, "HistoryEntryStartSortKeyOrder", &m_historyEntryStartSortKeyOrder, page, this );
+      gbox->addWidget( m_pHistorySortKeyOrderLineEdit, line, 1 );
+      s_historyEntryStartSortKeyOrderToolTip = i18n("Each parentheses used in the regular expression for the history start entry\n"
+                                 "groups a key that can be used for sorting.\n"
+                                 "Specify the list of keys (that are numbered in order of occurrence\n"
+                                 "starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
+                                 "If left empty, then no sorting will be done.\n"
+                                 "See the documentation for details.");
+      QToolTip::add( label, s_historyEntryStartSortKeyOrderToolTip );
+      m_pHistorySortKeyOrderLineEdit->setEnabled(false);
+      connect( m_pHistoryMergeSorting, SIGNAL(toggled(bool)), m_pHistorySortKeyOrderLineEdit, SLOT(setEnabled(bool)));
+      ++line;
+
+      m_pHistoryAutoMerge = new OptionCheckBox( i18n("Merge version control history on merge start"), false, "RunHistoryAutoMergeOnMergeStart", &m_bRunHistoryAutoMergeOnMergeStart, page, this );
+      gbox->addMultiCellWidget( m_pHistoryAutoMerge, line, line, 0, 1 );
+      QToolTip::add( m_pHistoryAutoMerge, i18n("Run version control history automerge on merge start.") );
+      ++line;
+   }
+
+   QPushButton* pButton = new QPushButton( i18n("Test your regular expressions"), page );
+   gbox->addWidget( pButton, line, 0 );
+   connect( pButton, SIGNAL(clicked()), this, SLOT(slotHistoryMergeRegExpTester()));
+   ++line;
+
+   label = new QLabel( i18n("Irrelevant merge command:"), page );
+   gbox->addWidget( label, line, 0 );
+   pLE = new OptionLineEdit( "", "IrrelevantMergeCmd", &m_IrrelevantMergeCmd, page, this );
+   gbox->addWidget( pLE, line, 1 );
+   QToolTip::add( label, i18n("If specified this script is run after automerge\n"
+                              "when no other relevant changes were detected.\n"
+                              "Called with the parameters: filename1 filename2 filename3") );
+   ++line;
+
    topLayout->addStretch(10);
 }
 
@@ -687,9 +947,10 @@ void OptionDialog::setupDirectoryMergePage( void )
 {
    QFrame *page = addPage( i18n("Directory Merge"), i18n("Directory Merge"),
                            BarIcon("folder", KIcon::SizeMedium ) );
-   QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+   QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
 
    QGridLayout *gbox = new QGridLayout( 11, 2 );
+   gbox->setColStretch(1,5);
    topLayout->addLayout( gbox );
    int line=0;
 
@@ -710,7 +971,7 @@ void OptionDialog::setupDirectoryMergePage( void )
 
    label = new QLabel( i18n("File-anti-pattern(s):"), page );
    gbox->addWidget( label, line, 0 );
-   OptionLineEdit* pFileAntiPattern = new OptionLineEdit( "*.orig;*.o", "FileAntiPattern", &m_DmFileAntiPattern, page, this );
+   OptionLineEdit* pFileAntiPattern = new OptionLineEdit( "*.orig;*.o;*.obj", "FileAntiPattern", &m_DmFileAntiPattern, page, this );
    gbox->addWidget( pFileAntiPattern, line, 1 );
    QToolTip::add( label, i18n(
       "Pattern(s) of files to be excluded from analysis. \n"
@@ -721,7 +982,7 @@ void OptionDialog::setupDirectoryMergePage( void )
 
    label = new QLabel( i18n("Dir-anti-pattern(s):"), page );
    gbox->addWidget( label, line, 0 );
-   OptionLineEdit* pDirAntiPattern = new OptionLineEdit( "CVS;.deps", "DirAntiPattern", &m_DmDirAntiPattern, page, this );
+   OptionLineEdit* pDirAntiPattern = new OptionLineEdit( "CVS;.deps;.svn", "DirAntiPattern", &m_DmDirAntiPattern, page, this );
    gbox->addWidget( pDirAntiPattern, line, 1 );
    QToolTip::add( label, i18n(
       "Pattern(s) of directories to be excluded from analysis. \n"
@@ -763,10 +1024,22 @@ void OptionDialog::setupDirectoryMergePage( void )
       ));
    ++line;
 
-   OptionCheckBox* pShowOnlyDeltas = new OptionCheckBox( i18n("List only deltas"),false,"ListOnlyDeltas", &m_bDmShowOnlyDeltas, page, this );
-   gbox->addMultiCellWidget( pShowOnlyDeltas, line, line, 0, 1 );
-   QToolTip::add( pShowOnlyDeltas, i18n(
-                 "Files and directories without change will not appear in the list."));
+   //OptionCheckBox* pShowOnlyDeltas = new OptionCheckBox( i18n("List only deltas"),false,"ListOnlyDeltas", &m_bDmShowOnlyDeltas, page, this );
+   //gbox->addMultiCellWidget( pShowOnlyDeltas, line, line, 0, 1 );
+   //QToolTip::add( pShowOnlyDeltas, i18n(
+   //              "Files and directories without change will not appear in the list."));
+   //++line;
+
+#ifdef _WIN32
+   bool bCaseSensitiveFilenameComparison = false;
+#else
+   bool bCaseSensitiveFilenameComparison = true;
+#endif
+   OptionCheckBox* pCaseSensitiveFileNames = new OptionCheckBox( i18n("Case sensitive filename comparison"),bCaseSensitiveFilenameComparison,"CaseSensitiveFilenameComparison", &m_bDmCaseSensitiveFilenameComparison, page, this );
+   gbox->addMultiCellWidget( pCaseSensitiveFileNames, line, line, 0, 1 );
+   QToolTip::add( pCaseSensitiveFileNames, i18n(
+                 "The directory comparison will compare files or directories when their names match.\n"
+                 "Set this option if the case of the names must match. (Default for Windows is off, otherwise on.)"));
    ++line;
 
    QVButtonGroup* pBG = new QVButtonGroup(i18n("File Comparison Mode"),page);
@@ -847,15 +1120,16 @@ void OptionDialog::setupRegionalPage( void )
 {
    QFrame *page = addPage( i18n("Regional Settings"), i18n("Regional Settings"),
                            BarIcon("locale"/*"charset"*/, KIcon::SizeMedium ) );
-   QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+   QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
 
    QGridLayout *gbox = new QGridLayout( 3, 2 );
+   gbox->setColStretch(1,5);
    topLayout->addLayout( gbox );
    int line=0;
 
    QLabel* label;
 
-#ifdef KREPLACEMENTS_H   
+#ifdef KREPLACEMENTS_H
 
 static char* countryMap[]={
 "af Afrikaans",
@@ -894,6 +1168,7 @@ static char* countryMap[]={
 "is Icelandic",
 "it Italian",
 "ja Japanese",
+"ka Georgian",
 "ko Korean",
 "ku Kurdish",
 "lo Lao",
@@ -915,11 +1190,13 @@ static char* countryMap[]={
 "pt_BR Brazilian Portuguese",
 "ro Romanian",
 "ru Russian",
+"rw Kinyarwanda",
 "se Northern Sami",
 "sk Slovak",
 "sl Slovenian",
 "sq Albanian",
 "sr Serbian",
+"sr@Latn Serbian",
 "ss Swati",
 "sv Swedish",
 "ta Tamil",
@@ -995,7 +1272,7 @@ static char* countryMap[]={
                   ) );
    ++line;
 
-   label = new QLabel( i18n("Note: Local Encoding is ") + QTextCodec::codecForLocale()->name(), page );
+   label = new QLabel( i18n("Note: Local Encoding is ") + "\"" + QTextCodec::codecForLocale()->name() + "\"", page );
    gbox->addWidget( label, line, 0 );
    ++line;
 
@@ -1038,6 +1315,33 @@ static char* countryMap[]={
 
    topLayout->addStretch(10);
 }
+
+void OptionDialog::setupIntegrationPage( void )
+{
+   QFrame *page = addPage( i18n("Integration"), i18n("Integration Settings"),
+                           BarIcon("launch"/*"charset"*/, KIcon::SizeMedium ) );
+   QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
+
+   QGridLayout *gbox = new QGridLayout( 3, 2 );
+   gbox->setColStretch(1,5);
+   topLayout->addLayout( gbox );
+   int line=0;
+
+   QLabel* label;
+   label = new QLabel( i18n("Command line options to ignore:"), page );
+   gbox->addWidget( label, line, 0 );
+   OptionLineEdit* pIgnorableCmdLineOptions = new OptionLineEdit( "-u;-query;-html;-abort", "IgnorableCmdLineOptions", &m_ignorableCmdLineOptions, page, this );
+   gbox->addWidget( pIgnorableCmdLineOptions, line, 1 );
+   QToolTip::add( label, i18n(
+      "List of command line options that should be ignored when KDiff3 is used by other tools.\n"
+      "Several values can be specified if separated via ';'\n"
+      "This will suppress the \"Unknown option\"-error."
+      ));
+   ++line;
+
+   topLayout->addStretch(10);
+}
+
 
 void OptionDialog::slotEncodingChanged()
 {
@@ -1105,9 +1409,6 @@ void OptionDialog::slotApply( void )
       (*i)->apply();
    }
 
-   // FontConfigDlg
-   m_font = m_fontChooser->font();
-   
    emit applyClicked();   
 }
 
@@ -1121,20 +1422,13 @@ void OptionDialog::slotDefault()
 }
 
 void OptionDialog::resetToDefaults()
-{   
+{
    std::list<OptionItem*>::iterator i;
    for(i=m_optionItemList.begin(); i!=m_optionItemList.end(); ++i)
    {
       (*i)->setToDefault();
    }
 
-#ifdef _WIN32
-   m_fontChooser->setFont( QFont("Courier New", 10 ), true /*only fixed*/ );
-#elif defined( KREPLACEMENTS_H )
-   m_fontChooser->setFont( QFont("Courier", 10 ), true /*only fixed*/ );
-#else
-   m_fontChooser->setFont( KGlobalSettings::fixedFont(), true /*only fixed*/ );
-#endif
    slotEncodingChanged();
 }
 
@@ -1147,9 +1441,35 @@ void OptionDialog::setState()
       (*i)->setToCurrent();
    }
 
-   m_fontChooser->setFont( m_font, true /*only fixed*/ );
    slotEncodingChanged();
 }
+
+class ConfigValueMap : public ValueMap
+{
+private:
+   KConfig* m_pConfig;
+public:
+   ConfigValueMap( KConfig* pConfig ) { m_pConfig = pConfig; }
+
+   void writeEntry(const QString& s, const QFont&  v ){ m_pConfig->writeEntry(s,v); }
+   void writeEntry(const QString& s, const QColor& v ){ m_pConfig->writeEntry(s,v); }
+   void writeEntry(const QString& s, const QSize&  v ){ m_pConfig->writeEntry(s,v); }
+   void writeEntry(const QString& s, const QPoint& v ){ m_pConfig->writeEntry(s,v); }
+   void writeEntry(const QString& s, int v )          { m_pConfig->writeEntry(s,v); }
+   void writeEntry(const QString& s, bool v )         { m_pConfig->writeEntry(s,v); }
+   void writeEntry(const QString& s, const QStringList& v, char separator ){ m_pConfig->writeEntry(s,v,separator); }
+   void writeEntry(const QString& s, const QString& v ){ m_pConfig->writeEntry(s,v); }
+   void writeEntry(const QString& s, const char* v )   { m_pConfig->writeEntry(s,v); }
+
+   QFont       readFontEntry (const QString& s, QFont* defaultVal ) { return m_pConfig->readFontEntry(s,defaultVal); }
+   QColor      readColorEntry(const QString& s, QColor* defaultVal ){ return m_pConfig->readColorEntry(s,defaultVal); }
+   QSize       readSizeEntry (const QString& s, QSize* defaultVal ) { return m_pConfig->readSizeEntry(s,defaultVal); }
+   QPoint      readPointEntry(const QString& s, QPoint* defaultVal) { return m_pConfig->readPointEntry(s,defaultVal); }
+   bool        readBoolEntry (const QString& s, bool defaultVal )   { return m_pConfig->readBoolEntry(s,defaultVal); }
+   int         readNumEntry  (const QString& s, int defaultVal )    { return m_pConfig->readNumEntry(s,defaultVal); }
+   QStringList readListEntry (const QString& s, const QStringList& def, char separator )    { return m_pConfig->readListEntry(s.latin1(),def,separator); }
+   QString     readEntry     (const QString& s, const QString& defaultVal){ return m_pConfig->readEntry(s,defaultVal); }
+};
 
 void OptionDialog::saveOptions( KConfig* config )
 {
@@ -1157,20 +1477,12 @@ void OptionDialog::saveOptions( KConfig* config )
 
    config->setGroup("KDiff3 Options");
 
+   ConfigValueMap cvm(config);
    std::list<OptionItem*>::iterator i;
    for(i=m_optionItemList.begin(); i!=m_optionItemList.end(); ++i)
    {
-      (*i)->write(config);
+      (*i)->write(&cvm);
    }
-
-   // FontConfigDlg
-   config->writeEntry("Font",  m_font );
-
-   // Recent files (selectable in the OpenDialog)
-   config->writeEntry( "RecentAFiles", m_recentAFiles, '|' );
-   config->writeEntry( "RecentBFiles", m_recentBFiles, '|' );
-   config->writeEntry( "RecentCFiles", m_recentCFiles, '|' );
-   config->writeEntry( "RecentOutputFiles", m_recentOutputFiles, '|' );
 }
 
 void OptionDialog::readOptions( KConfig* config )
@@ -1179,23 +1491,12 @@ void OptionDialog::readOptions( KConfig* config )
 
    config->setGroup("KDiff3 Options");
 
+   ConfigValueMap cvm(config);
    std::list<OptionItem*>::iterator i;
-
    for(i=m_optionItemList.begin(); i!=m_optionItemList.end(); ++i)
    {
-      (*i)->read(config);
+      (*i)->read(&cvm);
    }
-
-   // Use the current values as default settings.
-
-   // FontConfigDlg
-   m_font = config->readFontEntry( "Font", &m_font);
-
-   // Recent files (selectable in the OpenDialog)
-   m_recentAFiles = config->readListEntry( "RecentAFiles", '|' );
-   m_recentBFiles = config->readListEntry( "RecentBFiles", '|' );
-   m_recentCFiles = config->readListEntry( "RecentCFiles", '|' );
-   m_recentOutputFiles = config->readListEntry( "RecentOutputFiles", '|' );
 
    setState();
 }
@@ -1204,5 +1505,71 @@ void OptionDialog::slotHelp( void )
 {
    KDialogBase::slotHelp();
 }
+
+QString OptionDialog::parseOptions( const QCStringList& optionList )
+{
+   QString result;
+   QCStringList::const_iterator i;
+   for ( i=optionList.begin(); i!=optionList.end(); ++i )
+   {
+      QString s = *i;
+
+      int pos = s.find('=');
+      if( pos > 0 )                     // seems not to have a tag
+      {
+         QString key = s.left(pos);
+         QString val = s.mid(pos+1);
+         std::list<OptionItem*>::iterator j;
+         bool bFound = false;
+         for(j=m_optionItemList.begin(); j!=m_optionItemList.end(); ++j)
+         {
+            if ( (*j)->getSaveName()==key )
+            {
+               ValueMap config;
+               config.writeEntry( key, val );  // Write the value as a string and
+               (*j)->read(&config);       // use the internal conversion from string to the needed value.
+               bFound = true;
+               break;
+            }
+         }
+         if ( ! bFound )
+         {
+            result += "No config item named \"" + key + "\"\n";
+         }
+      }
+      else
+      {
+         result += "No '=' found in \"" + s + "\"\n";
+      }
+   }
+   return result;
+}
+
+QString OptionDialog::calcOptionHelp()
+{
+   ValueMap config;
+   std::list<OptionItem*>::iterator j;
+   for(j=m_optionItemList.begin(); j!=m_optionItemList.end(); ++j)
+   {
+      (*j)->write( &config );
+   }
+   return config.getAsString();
+}
+
+void OptionDialog::slotHistoryMergeRegExpTester()
+{
+   RegExpTester dlg(this, s_autoMergeRegExpToolTip, s_historyStartRegExpToolTip, 
+                          s_historyEntryStartRegExpToolTip, s_historyEntryStartSortKeyOrderToolTip );
+   dlg.init(m_pAutoMergeRegExpLineEdit->currentText(), m_pHistoryStartRegExpLineEdit->currentText(), 
+            m_pHistoryEntryStartRegExpLineEdit->currentText(), m_pHistorySortKeyOrderLineEdit->currentText());
+   if ( dlg.exec() )
+   {
+      m_pAutoMergeRegExpLineEdit->setCurrentText( dlg.autoMergeRegExp() );
+      m_pHistoryStartRegExpLineEdit->setCurrentText( dlg.historyStartRegExp() );
+      m_pHistoryEntryStartRegExpLineEdit->setCurrentText( dlg.historyEntryStartRegExp() );
+      m_pHistorySortKeyOrderLineEdit->setCurrentText( dlg.historySortKeyOrder() );
+   }
+}
+
 
 #include "optiondialog.moc"

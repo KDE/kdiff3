@@ -19,7 +19,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; see the file COPYING.
    If not, write to the Free Software Foundation,
-   59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+   51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 #ifndef GNUDIFF_SYSTEM_H
 #define GNUDIFF_SYSTEM_H
@@ -119,13 +119,6 @@
 #define MIN(a, b) ((a) <= (b) ? (a) : (b))
 #define MAX(a, b) ((a) >= (b) ? (a) : (b))
 
-
-
-/* Type used for fast comparison of several bytes at a time.  */
-
-#ifndef word
-# define word unsigned int
-#endif
 
 /* The integer type of a line number.  Since files are read into main
    memory, ptrdiff_t should be wide enough.  */

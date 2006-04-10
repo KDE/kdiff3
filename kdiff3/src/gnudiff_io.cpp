@@ -19,7 +19,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; see the file COPYING.
    If not, write to the Free Software Foundation,
-   59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+   51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 #include "gnudiff_diff.h"
 #include <stdlib.h>
@@ -72,6 +72,61 @@ static lin equivs_alloc;
 
 #define binary_file_p(buf, size) (memchr (buf, 0, size) != 0)
 
+/* Compare two lines (typically one from each input file)
+   according to the command line options.
+   For efficiency, this is invoked only when the lines do not match exactly
+   but an option like -i might cause us to ignore the difference.
+   Return nonzero if the lines differ.  */
+
+bool GnuDiff::lines_differ (const QChar *s1, size_t len1, const QChar *s2, size_t len2 )
+{
+   const QChar *t1 = s1;
+   const QChar *t2 = s2;
+   const QChar *s1end = s1+len1;
+   const QChar *s2end = s2+len2;
+
+   for ( ; ; ++t1, ++t2 )
+   {
+      /* Test for exact char equality first, since it's a common case.  */
+      if ( t1!=s1end && t2!=s2end && *t1==*t2 )
+         continue;
+      else
+      {
+         while ( t1!=s1end &&
+                 ( bIgnoreWhiteSpace && isWhite( *t1 )  ||
+                   bIgnoreNumbers    && (t1->isDigit() || *t1=='-' || *t1=='.' )))
+         {
+            ++t1;
+         }
+
+         while ( t2 != s2end &&
+                 ( bIgnoreWhiteSpace && isWhite( *t2 )  ||
+                   bIgnoreNumbers    && (t2->isDigit() || *t2=='-' || *t2=='.' )))
+         {
+            ++t2;
+         }
+
+         if ( t1!=s1end && t2!=s2end )
+         {
+            if (ignore_case)
+            {  /* Lowercase comparison. */
+               if ( t1->lower() == t2->lower() )
+                  continue;
+            }
+            else if ( *t1 == *t2 )
+               continue;
+            else
+               return true;
+         }
+         else if ( t1==s1end && t2==s2end )
+            return false;
+         else
+            return true;
+      }
+   }
+   return false;
+}
+
 
 /* Split the file into lines, simultaneously computing the equivalence
    class for each line.  */
@@ -79,7 +134,7 @@ static lin equivs_alloc;
 void GnuDiff::find_and_hash_each_line (struct file_data *current)
 {
   hash_value h;
-  const QChar *p = (const QChar *) current->prefix_end;
+  const QChar *p = current->prefix_end;
   QChar c;
   lin i, *bucket;
   size_t length;
@@ -94,64 +149,63 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
   lin eqs_index = equivs_index;
   lin eqs_alloc = equivs_alloc;
   const QChar *suffix_begin = current->suffix_begin;
-  const QChar *bufend = FILE_BUFFER (current) + current->buffered;
+  const QChar *bufend = current->buffer + current->buffered;
   bool diff_length_compare_anyway =
     ignore_white_space != IGNORE_NO_WHITE_SPACE || bIgnoreNumbers;
   bool same_length_diff_contents_compare_anyway =
     diff_length_compare_anyway | ignore_case;
 
-  while ((const QChar *) p < suffix_begin)
+  while ( p < suffix_begin)
     {
-      const QChar *ip = (const QChar *) p;
+      const QChar *ip = p;
 
       h = 0;
 
-      /* Hash this line until we find a newline.  */
+      /* Hash this line until we find a newline or bufend is reached.  */
       if (ignore_case)
 	switch (ignore_white_space)
 	  {
 	  case IGNORE_ALL_SPACE:
-	    while ((c = *p++) != '\n')
+	    while ( p<bufend && (c = *p) != '\n' )
+            {
 	      if (! (isWhite(c) || bIgnoreNumbers && (c.isDigit() || c=='-' || c=='.' ) ))
                   h = HASH (h, c.lower().unicode());
+              ++p;
+            }            
 	    break;
 
 	  default:
-	    while ((c = *p++) != '\n')
+	    while ( p<bufend && (c = *p) != '\n' )
+            {
                h = HASH (h, c.lower().unicode());
+               ++p;
+            }
 	    break;
 	  }
       else
 	switch (ignore_white_space)
 	  {
 	  case IGNORE_ALL_SPACE:
-	    while ((c = *p++) != '\n')
+	    while ( p<bufend && (c = *p) != '\n')
+            {
 	      if (! (isWhite(c)|| bIgnoreNumbers && (c.isDigit() || c=='-' || c=='.' ) ))
-                  h = HASH (h, c.unicode());
+                 h = HASH (h, c.unicode());
+              ++p;
+            }
 	    break;
 
 	  default:
-	    while ((c = *p++) != '\n')
+	    while ( p<bufend && (c = *p) != '\n')
+            {
                h = HASH (h, c.unicode());
+               ++p;
+            }
 	    break;
 	  }
 
       bucket = &buckets[h % nbuckets];
-      length = (const QChar *) p - ip - 1;
-
-      if ((const QChar *) p >= bufend
-	  && current->missing_newline
-	  && ROBUST_OUTPUT_STYLE (output_style))
-	{
-	  /* This line is incomplete.  If this is significant,
-	     put the line into buckets[-1].  */
-	  if (ignore_white_space < IGNORE_SPACE_CHANGE)
-	    bucket = &buckets[-1];
-
-	  /* Omit the inserted newline when computing linbuf later.  */
-	  p--;
-	  bufend = suffix_begin = (const QChar *) p;
-	}
+      length = p - ip;
+      ++p;
 
       for (i = *bucket;  ;  i = eqs[i].next)
 	if (!i)
@@ -183,7 +237,7 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 		/* Reuse existing equivalence class if the lines are identical.
 		   This detects the common case of exact identity
 		   faster than lines_differ would.  */
-		if (memcmp (eqline, ip, length) == 0)
+		if (memcmp (eqline, ip, length*sizeof(QChar)) == 0)
 		  break;
 		if (!same_length_diff_contents_compare_anyway)
 		  continue;
@@ -191,7 +245,7 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 	    else if (!diff_length_compare_anyway)
 	      continue;
 
-	    if (! lines_differ (eqline, ip))
+	    if (! lines_differ (eqline, eqs[i].length, ip, length))
 	      break;
 	  }
 
@@ -235,9 +289,9 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 			     (alloc_lines - linbuf_base) * sizeof *linbuf);
 	  linbuf -= linbuf_base;
 	}
-      linbuf[line] = (const QChar *) p;
+      linbuf[line] = p;
 
-      if ((const QChar *) p >= bufend)
+      if ( p >= bufend)
 	break;
 
       if (context <= i && no_diff_means_no_output)
@@ -245,8 +299,8 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 
       line++;
 
-      while (*p++ != '\n')
-	continue;
+      while (p<bufend && *p++ != '\n')
+        continue;
     }
 
   /* Done with cache in local variables.  */
@@ -257,33 +311,6 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
   equivs = eqs;
   equivs_alloc = eqs_alloc;
   equivs_index = eqs_index;
-}
-
-/* Prepare the text.  Make sure the text end is initialized.
-   Make sure text ends in a newline,
-   but remember that we had to add one.
-   Strip trailing CRs, if that was requested.  */
-
-void GnuDiff::prepare_text (struct file_data *current)
-{
-  size_t buffered = current->buffered;
-  QChar *p = FILE_BUFFER (current);
-
-  if (buffered == 0 || p[buffered - 1] == '\n')
-    current->missing_newline = 0;
-  else
-    {
-      p[buffered++] = '\n';
-      current->missing_newline = 1;
-    }
-
-  if (!p)
-    return;
-
-  /* Don't use uninitialized storage when planting or using sentinels.  */
-  memset (p + buffered, 0, sizeof (word));
-
-  current->buffered = buffered;
 }
 
 /* We have found N lines in a buffer of size S; guess the
@@ -303,67 +330,33 @@ guess_lines (lin n, size_t s, size_t t)
 
 void GnuDiff::find_identical_ends (struct file_data filevec[])
 {
-  word *w0, *w1;
-  QChar *p0, *p1, *buffer0, *buffer1;
-  const QChar *end0, *beg0;
-  const QChar **linbuf0, **linbuf1;
-  lin i, lines;
-  size_t n0, n1;
-  lin alloc_lines0, alloc_lines1;
-  lin buffered_prefix, prefix_count, prefix_mask;
-  lin middle_guess, suffix_guess;
-
-  prepare_text (&filevec[0]);
-  prepare_text (&filevec[1]);
-
   /* Find identical prefix.  */
-
-  w0 = filevec[0].buffer;
-  w1 = filevec[1].buffer;
-  p0 = buffer0 = (QChar *) w0;
-  p1 = buffer1 = (QChar *) w1;
+  const QChar *p0, *p1, *buffer0, *buffer1;
+  p0 = buffer0 = filevec[0].buffer;
+  p1 = buffer1 = filevec[1].buffer;
+  size_t n0, n1;
   n0 = filevec[0].buffered;
   n1 = filevec[1].buffered;
+  const QChar* const pEnd0 = p0 + n0;
+  const QChar* const pEnd1 = p1 + n1;
 
   if (p0 == p1)
     /* The buffers are the same; sentinels won't work.  */
     p0 = p1 += n1;
   else
     {
-      /* Insert end sentinels, in this case characters that are guaranteed
-	 to make the equality test false, and thus terminate the loop.  */
-
-      if (n0 < n1)
-	p0[n0] = ~p1[n0];
-      else
-	p1[n1] = ~p0[n1];
-
-      /* Loop until first mismatch, or to the sentinel characters.  */
-
-      /* Compare a word at a time for speed.  */
-      while (*w0 == *w1)
-	w0++, w1++;
-
-      /* Do the last few bytes of comparison a byte at a time.  */
-      p0 = (QChar *) w0;
-      p1 = (QChar *) w1;
-      while (*p0 == *p1)
-	p0++, p1++;
-
-      /* Don't mistakenly count missing newline as part of prefix.  */
-      if (ROBUST_OUTPUT_STYLE (output_style)
-	  && ((buffer0 + n0 - filevec[0].missing_newline < p0)
-	      !=
-	      (buffer1 + n1 - filevec[1].missing_newline < p1)))
-	p0--, p1--;
+      /* Loop until first mismatch, or end. */
+      while ( p0!=pEnd0  &&  p1!=pEnd1  &&  *p0 == *p1 )
+      {
+         p0++;
+         p1++;
+      }
     }
 
   /* Now P0 and P1 point at the first nonmatching characters.  */
 
-  /* Skip back to last line-beginning in the prefix,
-     and then discard up to HORIZON_LINES lines from the prefix.  */
-  i = horizon_lines;
-  while (p0 != buffer0 && (p0[-1] != '\n' || i--))
+  /* Skip back to last line-beginning in the prefix. */
+  while (p0 != buffer0 && (p0[-1] != '\n' ))
     p0--, p1--;
 
   /* Record the prefix.  */
@@ -376,38 +369,35 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
   p0 = buffer0 + n0;
   p1 = buffer1 + n1;
 
-  if (! ROBUST_OUTPUT_STYLE (output_style)
-      || filevec[0].missing_newline == filevec[1].missing_newline)
-    {
-      end0 = p0;	/* Addr of last char in file 0.  */
+   const QChar *end0, *beg0;
+   end0 = p0; /* Addr of last char in file 0.  */
 
-      /* Get value of P0 at which we should stop scanning backward:
-	 this is when either P0 or P1 points just past the last char
-	 of the identical prefix.  */
-      beg0 = filevec[0].prefix_end + (n0 < n1 ? 0 : n0 - n1);
+   /* Get value of P0 at which we should stop scanning backward:
+      this is when either P0 or P1 points just past the last char
+      of the identical prefix.  */
+   beg0 = filevec[0].prefix_end + (n0 < n1 ? 0 : n0 - n1);
 
-      /* Scan back until chars don't match or we reach that point.  */
-      for (; p0 != beg0; p0--, p1--)
-	if (*p0 != *p1)
-	  {
-	    /* Point at the first char of the matching suffix.  */
-	    beg0 = p0;
-	    break;
-	  }
+   /* Scan back until chars don't match or we reach that point.  */
+   for (; p0 != beg0; p0--, p1--)
+   {
+      if (*p0 != *p1)
+      {
+         /* Point at the first char of the matching suffix.  */
+         beg0 = p0;
+         break;
+      }
+   }
 
-      /* Are we at a line-beginning in both files?  If not, add the rest of
-	 this line to the main body.  Discard up to HORIZON_LINES lines from
-	 the identical suffix.  Also, discard one extra line,
-	 because shift_boundaries may need it.  */
-      i = horizon_lines + !((buffer0 == p0 || p0[-1] == '\n')
-			    &&
-			    (buffer1 == p1 || p1[-1] == '\n'));
-      while (i-- && p0 != end0)
-	while (*p0++ != '\n')
-	  continue;
+   // Go to the next line (skip last line with a difference)
+   if ( p0 != end0 )
+   {
+      if (*p0 != *p1)
+         ++p0;
+      while ( p0<pEnd0 && *p0++ != '\n')
+         continue;
+   }
 
-      p1 += p0 - beg0;
-    }
+   p1 += p0 - beg0;
 
   /* Record the suffix.  */
   filevec[0].suffix_begin = p0;
@@ -427,6 +417,10 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
      Handle 1 more line than the context says (because we count 1 too many),
      rounded up to the next power of 2 to speed index computation.  */
 
+  const QChar **linbuf0, **linbuf1;
+  lin alloc_lines0, alloc_lines1;
+  lin buffered_prefix, prefix_count, prefix_mask;
+  lin middle_guess, suffix_guess;
   if (no_diff_means_no_output
       && context < (lin)(LIN_MAX / 4) && context < (lin)(n0))
     {
@@ -444,7 +438,7 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
     }
 
   prefix_mask = prefix_count - 1;
-  lines = 0;
+  lin lines = 0;
   linbuf0 = (const QChar**) xmalloc (alloc_lines0 * sizeof(*linbuf0));
   p0 = buffer0;
 
@@ -465,7 +459,7 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
               linbuf0 = (const QChar**) xrealloc (linbuf0, alloc_lines0 * sizeof(*linbuf0));
 	    }
 	  linbuf0[l] = p0;
-	  while (*p0++ != '\n')
+	  while ( p0<pEnd0 && *p0++ != '\n' )
 	    continue;
 	}
     }
@@ -481,14 +475,15 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
     xalloc_die ();
   linbuf1 = (const QChar**)xmalloc (alloc_lines1 * sizeof(*linbuf1));
 
+  lin i;
   if (buffered_prefix != lines)
-    {
+  {
       /* Rotate prefix lines to proper location.  */
       for (i = 0;  i < buffered_prefix;  i++)
 	linbuf1[i] = linbuf0[(lines - context + i) & prefix_mask];
       for (i = 0;  i < buffered_prefix;  i++)
 	linbuf0[i] = linbuf1[i];
-    }
+  }
 
   /* Initialize line buffer 1 from line buffer 0.  */
   for (i = 0; i < buffered_prefix; i++)

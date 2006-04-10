@@ -6,6 +6,10 @@ The following text contains some info about how the docs are created.
 It helps me remember certain details. Most users probably aren't 
 interested in these things.
 
+Docbook references:
+http://i18n.kde.org/doc/markup/index.html
+http://opensource.bureau-cornavin.com/crash-course/index.html
+
 Each directory contains the documentation for a different translation.
 The textual information is in the index.docbook of every subdirectory.
 
@@ -19,8 +23,18 @@ file into HTML.
 
 meinproc index.docbook
 
-During normal installation on KDE a compressed file is generated.
+If you prefer everything in one big HTML/Postscript/PDF-file:
+   LANG=de_DE meinproc --check index.docbook --stylesheet /opt/kde3/share/apps/ksgmltools2/customization/kde-nochunk.xsl
+   (The LANG=de_DE prevents that meinproc writes the file in UTF-8 encoding, which isn't understood by html2ps.)
+Create ps-file:
+   html2ps -D -u -n index.html >index.ps
+      (For the -D to work add the line "Ghostscript: 1;" in the "package"-section of file /usr/lib/html2ps/html2psrc.)
+Create pdf-file:
+   ps2pdf index.ps index.pdf
 
+The script createpdfdoc does these steps for all subdirectories.
+
+During normal installation on KDE a compressed file is generated:
 meinproc --check --cache index.cache.bz2 index.docbook
 
 
@@ -51,3 +65,15 @@ Command to retrieve other translations from cvs:
 
 cvs co kde-i18n/subdirs
 for i in `cat kde-i18n/subdirs`; do  cvs co kde-i18n/$i/docs/kdeextragear-1/kdiff3/index.docbook; done
+
+If a new translation is available, 
+- create a new directory, 
+- copy the index.docbook file there,
+- copy a Makefile.am there and correct it, 
+- edit the doc/Makefile.am to include the new subdir,
+- create the links for the graphics,
+- and don't forget to run make -f Makefile.cvs in the top directory.
+
+
+
+

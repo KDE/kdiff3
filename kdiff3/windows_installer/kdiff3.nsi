@@ -12,7 +12,7 @@
 !define MUI_VERSION "" ;Define your own software version here
 !endif
 !ifndef QTDIR
-!define QTDIR "f:\qt\3.1.2"
+!define QTDIR "f:\qt\3.3.5"
 !endif
 !ifndef WINDOWS_DIR
 !define WINDOWS_DIR "c:\windows"
@@ -170,21 +170,39 @@ SectionIn 2 RO
     File "kdiff3_es.qm"
     File "kdiff3_et.qm"
     File "kdiff3_fr.qm"
+    File "kdiff3_hi.qm"
     File "kdiff3_hu.qm"
     File "kdiff3_it.qm"
+    File "kdiff3_ja.qm"
+    File "kdiff3_lt.qm"
     File "kdiff3_nl.qm"
     File "kdiff3_pl.qm"
     File "kdiff3_pt.qm"
     File "kdiff3_pt_BR.qm"
     File "kdiff3_ru.qm"
     File "kdiff3_sr.qm"
+    File "kdiff3_sr@Latn.qm"
     File "kdiff3_sv.qm"
     File "kdiff3_ta.qm"
+    File "kdiff3_tg.qm"
     File "kdiff3_tr.qm"
     File "kdiff3_zh_CN.qm"
+    File "kdiff3_bg.qm"
+    File "kdiff3_br.qm"
+    File "kdiff3_cs.qm"
+    File "kdiff3_el.qm"
+    File "kdiff3_ga.qm"
+    File "kdiff3_ka.qm"
+    File "kdiff3_rw.qm"
+    File "qt_ar.qm"
+    File "qt_cs.qm"
     File "qt_de.qm"
     File "qt_fr.qm"
+    File "qt_iw.qm"
     File "qt_ru.qm"
+    File "qt_sk.qm"
+    File "qt_es.qm"
+    File "qt_he.qm"
     File "COPYING"
     File "Readme_Win.txt"
     File "ChangeLog.txt"
@@ -234,6 +252,11 @@ Section "Explorer"
 ;  WriteRegStr HKCR "Directory\shell\KDiff3\command" "" '"$INSTDIR\kdiff3.exe" "%1"'
     CreateShortCut "$SMPROGRAMS\..\..\SendTo\KDiff3.lnk" '"$INSTDIR\kdiff3.exe"'
 SectionEnd 
+Section "TortoiseSVN"
+  DetailPrint "Integration to TortoiseSVN"
+  WriteRegStr HKCU "Software\TortoiseSVN\" "Diff" '$INSTDIR\kdiff3.exe %base %mine  --L1 Base --L2 Mine'
+  WriteRegStr HKCU "Software\TortoiseSVN\" "Merge" '$INSTDIR\kdiff3.exe %base %mine %theirs -o %merged --L1 Base --L2 Mine --L3 Theirs'
+SectionEnd
 SubSectionEnd
  
 ;Display the Finish header

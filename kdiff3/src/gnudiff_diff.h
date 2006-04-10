@@ -19,7 +19,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; see the file COPYING.
    If not, write to the Free Software Foundation,
-   59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+   51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 #ifndef GNUDIFF_DIFF_H
 #define GNUDIFF_DIFF_H
@@ -52,42 +52,6 @@ enum changes
 
 /* Variables for command line options */
 
-enum output_style
-{
-  /* No output style specified.  */
-  OUTPUT_UNSPECIFIED,
-
-  /* Default output style.  */
-  OUTPUT_NORMAL,
-
-  /* Output the differences with lines of context before and after (-c).  */
-  OUTPUT_CONTEXT,
-
-  /* Output the differences in a unified context diff format (-u).  */
-  OUTPUT_UNIFIED,
-
-  /* Output the differences as commands suitable for `ed' (-e).  */
-  OUTPUT_ED,
-
-  /* Output the diff as a forward ed script (-f).  */
-  OUTPUT_FORWARD_ED,
-
-  /* Like -f, but output a count of changed lines in each "command" (-n).  */
-  OUTPUT_RCS,
-
-  /* Output merged #ifdef'd file (-D).  */
-  OUTPUT_IFDEF,
-
-  /* Output sdiff style (-y).  */
-  OUTPUT_SDIFF
-};
-
-/* True for output styles that are robust,
-   i.e. can handle a file that ends in a non-newline.  */
-#define ROBUST_OUTPUT_STYLE(S) ((S) != OUTPUT_ED && (S) != OUTPUT_FORWARD_ED)
-
-enum output_style output_style;
-
 /* Nonzero if output cannot be generated for identical files.  */
 bool no_diff_means_no_output;
 
@@ -98,9 +62,6 @@ lin context;
 /* Consider all files as text files (-a).
    Don't interpret codes over 0177 as implying a "binary file".  */
 bool text;
-
-/* Number of lines to keep in identical prefix and suffix.  */
-lin horizon_lines;
 
 /* The significance of white space during comparisons.  */
 enum
@@ -218,13 +179,8 @@ struct change
 /* Data on one input file being compared.  */
 
 struct file_data {
-#if 0
-    int             desc;	/* File descriptor  */
-    const QChar      *name;	/* File name  */
-    struct stat     stat;	/* File status */
-#endif
     /* Buffer in which text of file is read.  */
-    word *buffer;
+    const QChar* buffer;
 
     /* Allocated size of buffer, in QChars.  Always a multiple of
        sizeof *buffer.  */
@@ -273,9 +229,6 @@ struct file_data {
        The results of comparison are stored here.  */
     bool *changed;
 
-    /* 1 if file ends in a line with no final newline.  */
-    bool missing_newline;
-
     /* 1 if at end of file.  */
     bool eof;
 
@@ -283,10 +236,6 @@ struct file_data {
        sibling file.  */
     lin equiv_max;
 };
-
-/* The file buffer, considered as an array of bytes rather than
-   as an array of words.  */
-#define FILE_BUFFER(f) ((QChar *) (f)->buffer)
 
 /* Data on two input files being compared.  */
 
@@ -338,7 +287,7 @@ void print_sdiff_script (struct change *);
 
 /* util.c */
 QChar *concat (const QChar *, const QChar *, const QChar *);
-bool lines_differ (const QChar *, const QChar *);
+bool lines_differ ( const QChar *, size_t, const QChar *, size_t );
 lin translate_line_number (struct file_data const *, lin);
 struct change *find_change (struct change *);
 struct change *find_reverse_change (struct change *);
@@ -368,17 +317,16 @@ private:
    struct change * add_change (lin line0, lin line1, lin deleted, lin inserted, struct change *old);
    struct change * build_reverse_script (struct file_data const filevec[]);
    struct change* build_script (struct file_data const filevec[]);
-   
+
    // gnudiff_io.cpp
    void find_and_hash_each_line (struct file_data *current);
-   void prepare_text (struct file_data *current);
    void find_identical_ends (struct file_data filevec[]);
 
    // gnudiff_xmalloc.cpp
    void *xmalloc (size_t n);
    void *xrealloc(void *p, size_t n);
    void xalloc_die (void);
-   
+
    inline bool isWhite( QChar c )
    {
       return c==' ' || c=='\t' ||  c=='\r';

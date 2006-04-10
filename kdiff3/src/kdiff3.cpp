@@ -3,7 +3,7 @@
                              -------------------
     begin                : Don Jul 11 12:31:29 CEST 2002
     copyright            : (C) 2002-2004 by Joachim Eibl
-    email                : joachim.eibl@gmx.de
+    email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
 /***************************************************************************
@@ -15,7 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "diff.h"
+#include "difftextwindow.h"
+#include "mergeresultwindow.h"
 
 #include <iostream>
 
@@ -24,12 +25,14 @@
 #include <qprinter.h>
 #include <qpainter.h>
 #include <qsplitter.h>
-#include <qlayout.h>
 #include <qlineedit.h>
 #include <qcheckbox.h>
 #include <qpushbutton.h>
 #include <qpopupmenu.h>
 #include <qlabel.h>
+#include <qtextedit.h>
+#include <qlayout.h>
+#include <qpaintdevicemetrics.h>
 
 // include files for KDE
 #include <kiconloader.h>
@@ -41,6 +44,7 @@
 #include <kconfig.h>
 #include <kstdaction.h>
 #include <kcmdlineargs.h>
+#include <kprinter.h>
 //#include <kkeydialog.h>
 
 // application specific includes
@@ -49,6 +53,7 @@
 #include "fileaccess.h"
 #include "kdiff3_part.h"
 #include "directorymergewindow.h"
+#include "smalldialogs.h"
 
 #define ID_STATUS_MSG 1
 
@@ -81,6 +86,10 @@ bool KDiff3App::isPart()
    return m_pKDiff3Shell==0;
 }
 
+bool KDiff3App::isFileSaved()
+{
+   return m_bFileSaved;
+}
 
 KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part )
    :QSplitter(pParent, name)  //previously KMainWindow
@@ -97,17 +106,22 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    m_pDiffTextWindow1 = 0;
    m_pDiffTextWindow2 = 0;
    m_pDiffTextWindow3 = 0;
+   m_pDiffTextWindowFrame1 = 0;
+   m_pDiffTextWindowFrame2 = 0;
+   m_pDiffTextWindowFrame3 = 0;
    m_pDiffWindowSplitter = 0;
    m_pOverview        = 0;
    m_bTripleDiff = false;
    m_pMergeResultWindow = 0;
    m_pMergeWindowFrame = 0;
    m_bOutputModified = false;
+   m_bFileSaved = false;
    m_bTimerBlock = false;
    m_pHScrollBar = 0;
 
    // Needed before any file operations via FileAccess happen.
-   g_pProgressDialog = new ProgressDialog(this);
+   if (!g_pProgressDialog)
+      g_pProgressDialog = new ProgressDialog(0);
 
    // All default values must be set before calling readOptions().
    m_pOptionDialog = new OptionDialog( m_pKDiff3Shell!=0, this );
@@ -115,12 +129,49 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
 
    m_pOptionDialog->readOptions( isPart() ? m_pKDiff3Part->instance()->config() : kapp->config() );
 
+   // Option handling: Only when pParent==0 (no parent)
+   KCmdLineArgs *args = isPart() ? 0 : KCmdLineArgs::parsedArgs();
+
+   if (args)
+   {
+      QString s;
+      QString title;
+      if ( args->isSet("confighelp") )
+      {
+         s = m_pOptionDialog->calcOptionHelp();
+         title = i18n("Current Configuration:");
+      }
+      else
+      {
+         s = m_pOptionDialog->parseOptions( args->getOptionList("cs") );
+         title = i18n("Config Option Error:");
+      }
+      if (!s.isEmpty())
+      {
+#ifdef _WIN32 
+         // A windows program has no console
+         //KMessageBox::information(0, s,i18n("KDiff3-Usage"));
+         QDialog* pDialog = new QDialog(this,"",true,Qt::WDestructiveClose);
+         pDialog->setCaption(title);
+         QVBoxLayout* pVBoxLayout = new QVBoxLayout( pDialog );
+         QTextEdit* pTextEdit = new QTextEdit(pDialog);
+         pTextEdit->setText(s);
+         pTextEdit->setReadOnly(true);
+         pTextEdit->setWordWrap(QTextEdit::NoWrap);
+         pVBoxLayout->addWidget(pTextEdit);
+         pDialog->resize(600,400);
+         pDialog->exec();
+#else
+         std::cerr << title.latin1() << std::endl;
+         std::cerr << s.latin1() << std::endl;
+#endif
+         exit(1);
+      }
+   }
+
    m_sd1.setOptionDialog(m_pOptionDialog);
    m_sd2.setOptionDialog(m_pOptionDialog);
    m_sd3.setOptionDialog(m_pOptionDialog);
-
-   // Option handling: Only when pParent==0 (no parent)
-   KCmdLineArgs *args = isPart() ? 0 : KCmdLineArgs::parsedArgs();
 
    if (args!=0)
    {
@@ -186,14 +237,31 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    m_pFindDialog = new FindDialog( this );
    connect( m_pFindDialog, SIGNAL(findNext()), this, SLOT(slotEditFindNext()));
 
-   readOptions( isPart() ? m_pKDiff3Part->instance()->config() : kapp->config() );
-
    autoAdvance->setChecked( m_pOptionDialog->m_bAutoAdvance );
    showWhiteSpaceCharacters->setChecked( m_pOptionDialog->m_bShowWhiteSpaceCharacters );
    showWhiteSpace->setChecked( m_pOptionDialog->m_bShowWhiteSpace );
    showWhiteSpaceCharacters->setEnabled( m_pOptionDialog->m_bShowWhiteSpace );
    showLineNumbers->setChecked( m_pOptionDialog->m_bShowLineNumbers );
    wordWrap->setChecked( m_pOptionDialog->m_bWordWrap );
+   if ( ! isPart() )
+   {
+      viewToolBar->setChecked( m_pOptionDialog->m_bShowToolBar );
+      viewStatusBar->setChecked( m_pOptionDialog->m_bShowStatusBar );
+      slotViewToolBar();
+      slotViewStatusBar();
+      if( toolBar("mainToolBar")!=0 )
+         toolBar("mainToolBar")->setBarPos( (KToolBar::BarPosition) m_pOptionDialog->m_toolBarPos );
+/*      QSize size = m_pOptionDialog->m_geometry;
+      QPoint pos = m_pOptionDialog->m_position;
+      if(!size.isEmpty())
+      {
+         m_pKDiff3Shell->resize( size );
+         QRect visibleRect = QRect( pos, size ) & QApplication::desktop()->rect();
+         if ( visibleRect.width()>100 && visibleRect.height()>100 )
+            m_pKDiff3Shell->move( pos );
+      }*/
+   }
+   slotRefresh();
 
    m_pMainSplitter = this; //new QSplitter(this);
    m_pMainSplitter->setOrientation( Vertical );
@@ -223,20 +291,27 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
 }
 
 
-void KDiff3App::completeInit()
+void KDiff3App::completeInit( const QString& fn1, const QString& fn2, const QString& fn3 )
 {
    if (m_pKDiff3Shell!=0)
    {
-      QSize size=kapp->config()->readSizeEntry("Geometry");
-      QPoint pos=kapp->config()->readPointEntry("Position");
+      QSize size=m_pOptionDialog->m_geometry;
+      QPoint pos=m_pOptionDialog->m_position;
       if(!size.isEmpty())
       {
          m_pKDiff3Shell->resize( size );
-         m_pKDiff3Shell->move( pos );
+         QRect visibleRect = QRect( pos, size ) & QApplication::desktop()->rect();
+         if ( visibleRect.width()>100 && visibleRect.height()>100 )
+            m_pKDiff3Shell->move( pos );
+         if (!m_bAuto)
+            m_pKDiff3Shell->show();
       }
    }
+   if ( ! fn1.isEmpty() )  { m_sd1.setFilename(fn1); }
+   if ( ! fn2.isEmpty() )  { m_sd2.setFilename(fn2); }
+   if ( ! fn3.isEmpty() )  { m_sd3.setFilename(fn3); }
 
-   bool bSuccess = improveFilenames();
+   bool bSuccess = improveFilenames(false);
 
    if ( m_bAuto && m_bDirCompare )
    {
@@ -286,8 +361,11 @@ void KDiff3App::completeInit()
       }
    }
 
+   if (m_pKDiff3Shell)
+      m_pKDiff3Shell->show();
+
    if (statusBar() !=0 )
-      statusBar()->setSizeGripEnabled(false);
+      statusBar()->setSizeGripEnabled(true);
 
    slotClipboardChanged(); // For initialisation.
 
@@ -333,10 +411,15 @@ void KDiff3App::initActions( KActionCollection* ac )
 
    fileOpen = KStdAction::open(this, SLOT(slotFileOpen()), ac);
    fileOpen->setStatusText(i18n("Opens documents for comparison..."));
+
+   fileReload  = new KAction(i18n("Reload"), /*QIconSet(QPixmap(reloadIcon)),*/ Key_F5, this, SLOT(slotReload()), ac, "file_reload");
+   
    fileSave = KStdAction::save(this, SLOT(slotFileSave()), ac);
    fileSave->setStatusText(i18n("Saves the merge result. All conflicts must be solved!"));
    fileSaveAs = KStdAction::saveAs(this, SLOT(slotFileSaveAs()), ac);
    fileSaveAs->setStatusText(i18n("Saves the current document as..."));
+   filePrint = KStdAction::print(this, SLOT(slotFilePrint()), ac);
+   filePrint->setStatusText(i18n("Print the differences"));
    fileQuit = KStdAction::quit(this, SLOT(slotFileQuit()), ac);
    fileQuit->setStatusText(i18n("Quits the application"));
    editCut = KStdAction::cut(this, SLOT(slotEditCut()), ac);
@@ -345,6 +428,8 @@ void KDiff3App::initActions( KActionCollection* ac )
    editCopy->setStatusText(i18n("Copies the selected section to the clipboard"));
    editPaste = KStdAction::paste(this, SLOT(slotEditPaste()), ac);
    editPaste->setStatusText(i18n("Pastes the clipboard contents to actual position"));
+   editSelectAll = KStdAction::selectAll(this, SLOT(slotEditSelectAll()), ac);
+   editSelectAll->setStatusText(i18n("Select everything in current window"));
    editFind = KStdAction::find(this, SLOT(slotEditFind()), ac);
    editFind->setStatusText(i18n("Search for a string"));
    editFindNext = KStdAction::findNext(this, SLOT(slotEditFindNext()), ac);
@@ -381,7 +466,7 @@ void KDiff3App::initActions( KActionCollection* ac )
    goTop = new KAction(i18n("Go to First Delta"), QIconSet(QPixmap(upend)), 0, this, SLOT(slotGoTop()), ac, "go_top");
    goBottom = new KAction(i18n("Go to Last Delta"), QIconSet(QPixmap(downend)), 0, this, SLOT(slotGoBottom()), ac, "go_bottom");
    QString omitsWhitespace = ".\n" + i18n("(Skips white space differences when \"Show White Space\" is disabled.)");
-   QString includeWhitespace = ".\n" + i18n("(Doesn't skip white space differences even when \"Show White Space\" is disabled.)");
+   QString includeWhitespace = ".\n" + i18n("(Does not skip white space differences even when \"Show White Space\" is disabled.)");
    goPrevDelta = new KAction(i18n("Go to Previous Delta"), QIconSet(QPixmap(up1arrow)), CTRL+Key_Up, this, SLOT(slotGoPrevDelta()), ac, "go_prev_delta");
    goPrevDelta->setToolTip( goPrevDelta->text() + omitsWhitespace );
    goNextDelta = new KAction(i18n("Go to Next Delta"), QIconSet(QPixmap(down1arrow)), CTRL+Key_Down, this, SLOT(slotGoNextDelta()), ac, "go_next_delta");
@@ -412,9 +497,13 @@ void KDiff3App::initActions( KActionCollection* ac )
    chooseAForUnsolvedWhiteSpaceConflicts = new KAction(i18n("Choose A for All Unsolved Whitespace Conflicts"), 0, this, SLOT(slotChooseAForUnsolvedWhiteSpaceConflicts()), ac, "merge_choose_a_for_unsolved_whitespace_conflicts");
    chooseBForUnsolvedWhiteSpaceConflicts = new KAction(i18n("Choose B for All Unsolved Whitespace Conflicts"), 0, this, SLOT(slotChooseBForUnsolvedWhiteSpaceConflicts()), ac, "merge_choose_b_for_unsolved_whitespace_conflicts");
    chooseCForUnsolvedWhiteSpaceConflicts = new KAction(i18n("Choose C for All Unsolved Whitespace Conflicts"), 0, this, SLOT(slotChooseCForUnsolvedWhiteSpaceConflicts()), ac, "merge_choose_c_for_unsolved_whitespace_conflicts");
-   autoSolve = new KAction(i18n("Automatically Solve Simple Conflicts"), 0, this, SLOT(slotAutoSolve()), ac, "merge_autosolve");
-   unsolve = new KAction(i18n("Set Deltas to Conflicts"), 0, this, SLOT(slotUnsolve()), actionCollection(), "merge_autounsolve");
-   fileReload  = new KAction(i18n("Reload"), /*QIconSet(QPixmap(reloadIcon)),*/ Key_F5, this, SLOT(slotReload()), ac, "file_reload");
+   autoSolve    = new KAction(i18n("Automatically Solve Simple Conflicts"),  0, this, SLOT(slotAutoSolve()),    ac, "merge_autosolve");
+   unsolve      = new KAction(i18n("Set Deltas to Conflicts"),               0, this, SLOT(slotUnsolve()),      ac, "merge_autounsolve");
+   mergeRegExp  = new KAction(i18n("Run Regular Expression Auto Merge"),     0, this, SLOT(slotRegExpAutoMerge()),ac, "merge_regexp_automerge" );
+   mergeHistory = new KAction(i18n("Automatically Solve History Conflicts"), 0, this, SLOT(slotMergeHistory()), ac, "merge_versioncontrol_history" );
+   splitDiff    = new KAction(i18n("Split Diff At Selection"),               0, this, SLOT(slotSplitDiff()),    ac, "merge_splitdiff");
+   joinDiffs    = new KAction(i18n("Join Selected Diffs"),                   0, this, SLOT(slotJoinDiffs()),    ac, "merge_joindiffs");
+
    showWindowA = new KToggleAction(i18n("Show Window A"), 0, this, SLOT(slotShowWindowAToggled()), ac, "win_show_a");
    showWindowB = new KToggleAction(i18n("Show Window B"), 0, this, SLOT(slotShowWindowBToggled()), ac, "win_show_b");
    showWindowC = new KToggleAction(i18n("Show Window C"), 0, this, SLOT(slotShowWindowCToggled()), ac, "win_show_c");
@@ -424,12 +513,14 @@ void KDiff3App::initActions( KActionCollection* ac )
    overviewModeAB     = new KToggleAction(i18n("A vs. B Overview"), 0, this, SLOT(slotOverviewAB()), ac, "diff_overview_ab");
    overviewModeAC     = new KToggleAction(i18n("A vs. C Overview"), 0, this, SLOT(slotOverviewAC()), ac, "diff_overview_ac");
    overviewModeBC     = new KToggleAction(i18n("B vs. C Overview"), 0, this, SLOT(slotOverviewBC()), ac, "diff_overview_bc");
-   wordWrap = new KToggleAction(i18n("Word Wrap Diff Windows"), 0, this, SLOT(slotWordWrapToggled()), ac, "diff_wordwrap");
+   wordWrap     = new KToggleAction(i18n("Word Wrap Diff Windows"), 0, this, SLOT(slotWordWrapToggled()), ac, "diff_wordwrap");
+   addManualDiffHelp  = new KAction(i18n("Add Manual Diff Alignment"), Qt::CTRL+Qt::Key_Y, this, SLOT(slotAddManualDiffHelp()), ac, "diff_add_manual_diff_help");
+   clearManualDiffHelpList  = new KAction(i18n("Clear All Manual Diff Alignments"), Qt::CTRL+Qt::SHIFT+Qt::Key_Y, this, SLOT(slotClearManualDiffHelpList()), ac, "diff_clear_manual_diff_help_list");
 
 #ifdef _WIN32
-   new KAction(i18n("Focus Next Window"), CTRL+Key_Tab, this, SLOT(slotWinFocusNext()), ac, "win_focus_next", false, false);
+   new KAction(i18n("Focus Next Window"), Qt::CTRL+Qt::Key_Tab, this, SLOT(slotWinFocusNext()), ac, "win_focus_next", false, false);
 #endif
-   winFocusPrev = new KAction(i18n("Focus Prev Window"), ALT+Key_Left, this, SLOT(slotWinFocusPrev()), ac, "win_focus_prev");
+   winFocusPrev = new KAction(i18n("Focus Prev Window"), Qt::ALT+Qt::Key_Left, this, SLOT(slotWinFocusPrev()), ac, "win_focus_prev");
    winToggleSplitOrientation = new KAction(i18n("Toggle Split Orientation"), 0, this, SLOT(slotWinToggleSplitterOrientation()), ac, "win_toggle_split_orientation");
 
    dirShowBoth = new KToggleAction(i18n("Dir && Text Split Screen View"), 0, this, SLOT(slotDirShowBoth()), ac, "win_dir_show_both");
@@ -458,54 +549,18 @@ void KDiff3App::initStatusBar()
 
 void KDiff3App::saveOptions( KConfig* config )
 {
-   if ( !isPart() )
+   if (!isPart())
    {
-      config->setGroup("General Options");
-      config->writeEntry("Geometry", m_pKDiff3Shell->size());
-      config->writeEntry("Position", m_pKDiff3Shell->pos());
-      config->writeEntry("Show Toolbar", viewToolBar->isChecked());
-      config->writeEntry("Show Statusbar",viewStatusBar->isChecked());
-      if(toolBar("mainToolBar")!=0)
-         config->writeEntry("ToolBarPos", (int) toolBar("mainToolBar")->barPos());
+      m_pOptionDialog->m_geometry = m_pKDiff3Shell->size();
+      m_pOptionDialog->m_position = m_pKDiff3Shell->pos();
+      if ( toolBar("mainToolBar")!=0 )
+         m_pOptionDialog->m_toolBarPos = (int) toolBar("mainToolBar")->barPos();
    }
 
    m_pOptionDialog->saveOptions( config );
 }
 
 
-void KDiff3App::readOptions( KConfig* config )
-{
-   if( !isPart() )
-   {
-      config->setGroup("General Options");
-
-      // bar status settings
-      bool bViewToolbar = config->readBoolEntry("Show Toolbar", true);
-      viewToolBar->setChecked(bViewToolbar);
-      slotViewToolBar();
-
-      bool bViewStatusbar = config->readBoolEntry("Show Statusbar", true);
-      viewStatusBar->setChecked(bViewStatusbar);
-      slotViewStatusBar();
-
-
-      // bar position settings
-      KToolBar::BarPosition toolBarPos;
-      toolBarPos=(KToolBar::BarPosition) config->readNumEntry("ToolBarPos", KToolBar::Top);
-      if( toolBar("mainToolBar")!=0 )
-         toolBar("mainToolBar")->setBarPos(toolBarPos);
-
-      QSize size=config->readSizeEntry("Geometry");
-      QPoint pos=config->readPointEntry("Position");
-      if(!size.isEmpty())
-      {
-         m_pKDiff3Shell->resize( size );
-         m_pKDiff3Shell->move( pos );
-      }
-   }
-
-   slotRefresh();
-}
 
 
 bool KDiff3App::queryClose()
@@ -563,6 +618,7 @@ void KDiff3App::slotFileSave()
       bool bSuccess = m_pMergeResultWindow->saveDocument( m_outputFilename );
       if ( bSuccess )
       {
+         m_bFileSaved = true;
          m_bOutputModified = false;
          if ( m_bDirCompare )
             m_pDirectoryMergeWindow->mergeResultSaved(m_outputFilename);
@@ -596,6 +652,245 @@ void KDiff3App::slotFileSaveAs()
 }
 
 
+void printDiffTextWindow( MyPainter& painter, const QRect& view, const QString& headerText, DiffTextWindow* pDiffTextWindow, int line, int linesPerPage, QColor fgColor )
+{
+   QRect clipRect = view;
+   clipRect.setTop(0);
+   painter.setClipRect( clipRect );
+   painter.translate( view.left() , 0 );
+   QFontMetrics fm = painter.fontMetrics();
+   //if ( fm.width(headerText) > view.width() )
+   {
+      // A simple wrapline algorithm
+      int l=0;
+      for (unsigned int p=0; p<headerText.length(); )
+      {
+         QString s = headerText.mid(p);
+         unsigned int i;
+         for(i=2;i<s.length();++i) 
+            if (fm.width(s,i)>view.width())
+            {
+               --i;
+               break;
+            }
+         //QString s2 = s.left(i);
+         painter.drawText( 0, l*fm.height() + fm.ascent(), s.left(i) );
+         p+=i;
+         ++l;
+      }
+      painter.setPen( fgColor );
+      painter.drawLine( 0, view.top()-2, view.width(), view.top()-2 );
+   }
+
+   painter.translate( 0, view.top() );
+   pDiffTextWindow->print( painter, view, line, linesPerPage );
+   painter.resetXForm();
+}
+
+void KDiff3App::slotFilePrint()
+{
+   if ( !m_pDiffTextWindow1 )
+      return;
+
+   KPrinter printer;
+
+   int firstSelectionD3LIdx = -1;
+   int lastSelectionD3LIdx = -1;
+   if (                           m_pDiffTextWindow1 ) { m_pDiffTextWindow1->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords); }
+   if ( firstSelectionD3LIdx<0 && m_pDiffTextWindow2 ) { m_pDiffTextWindow2->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords); }
+   if ( firstSelectionD3LIdx<0 && m_pDiffTextWindow3 ) { m_pDiffTextWindow3->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords); }
+#ifdef KREPLACEMENTS_H  // Currently PrintSelection is not supported in KDEs print dialog.
+   if ( firstSelectionD3LIdx>=0 )
+   {
+      printer.setOptionEnabled(KPrinter::PrintSelection,true);
+   }
+#endif
+
+   printer.setPageSelection(KPrinter::ApplicationSide);
+   printer.setMinMax(1,10000);
+   printer.setCurrentPage(10000);
+
+   int currentFirstLine = m_pDiffTextWindow1->getFirstLine();
+   int currentFirstD3LIdx = m_pDiffTextWindow1->convertLineToDiff3LineIdx( currentFirstLine );
+
+   // do some printer initialization
+   printer.setFullPage( false );
+
+   // initialize the printer using the print dialog
+   if ( printer.setup( this ) )
+   {
+      slotStatusMsg( i18n( "Printing..." ) );
+      // create a painter to paint on the printer object
+      MyPainter painter( 0, m_pOptionDialog->m_bRightToLeftLanguage, width(), fontMetrics().width('W') );
+
+      // start painting
+      if( !painter.begin( &printer ) ) {               // paint on printer
+         slotStatusMsg( i18n( "Printing aborted." ) );
+         return;
+      }
+      QPaintDeviceMetrics metrics( painter.device() );
+      int dpiy = metrics.logicalDpiY();
+      int columnDistance = (int) ( (0.5/2.54)*dpiy ); // 0.5 cm between the columns
+
+      int columns = m_bTripleDiff ? 3 : 2;
+      int columnWidth = ( metrics.width()  - (columns-1)*columnDistance ) / columns;
+
+      QFont f = m_pOptionDialog->m_font;
+      f.setPointSizeFloat(f.pointSizeFloat()-1); // Print with slightly smaller font.
+      painter.setFont( f );
+      QFontMetrics fm = painter.fontMetrics();
+
+      QString topLineText = i18n("Top line"); 
+
+      //int headerWidth = fm.width( m_sd1.getAliasName() + ", "+topLineText+": 01234567" );
+      int headerLines = fm.width( m_sd1.getAliasName() + ", "+topLineText+": 01234567" )/columnWidth+1;
+
+      int headerMargin = headerLines * fm.height() + 3; // Text + one horizontal line
+      int footerMargin = fm.height() + 3;
+
+      QRect view ( 0, headerMargin, metrics.width(), metrics.height() - (headerMargin + footerMargin) );
+      QRect view1( 0*(columnWidth + columnDistance), view.top(), columnWidth,     view.height() );
+      QRect view2( 1*(columnWidth + columnDistance), view.top(), columnWidth,     view.height() );
+      QRect view3( 2*(columnWidth + columnDistance), view.top(), columnWidth,     view.height() );
+
+      int linesPerPage = view.height() / fm.height();
+      int charactersPerLine = columnWidth / fm.width("W");
+      if ( m_pOptionDialog->m_bWordWrap )
+      {
+         // For printing the lines are wrapped differently (this invalidates the first line)
+         recalcWordWrap( charactersPerLine );
+      }
+
+      int totalNofLines = max2(m_pDiffTextWindow1->getNofLines(), m_pDiffTextWindow2->getNofLines());
+      if ( m_bTripleDiff && m_pDiffTextWindow3)
+         totalNofLines = max2(totalNofLines, m_pDiffTextWindow3->getNofLines());
+
+      QValueList<int> pageList = printer.pageList();
+
+      bool bPrintCurrentPage=false;
+      bool bFirstPrintedPage = false;
+
+      bool bPrintSelection = false;
+      int totalNofPages = (totalNofLines+linesPerPage-1) / linesPerPage;
+      int line=-1;
+      int selectionEndLine = -1;
+
+#ifdef KREPLACEMENTS_H
+      if ( printer.printRange()==KPrinter::AllPages )
+      {
+         pageList.clear();
+         for(int i=0; i<totalNofPages; ++i)
+         {
+            pageList.push_back(i+1);
+         }
+      }
+
+      if ( printer.printRange()==KPrinter::Selection )
+#else
+      if ( !pageList.empty() && pageList.front()==9999 )
+#endif
+      {
+         bPrintSelection = true;
+         if ( firstSelectionD3LIdx >=0 )
+         {
+            line = m_pDiffTextWindow1->convertDiff3LineIdxToLine( firstSelectionD3LIdx );
+            selectionEndLine = m_pDiffTextWindow1->convertDiff3LineIdxToLine( lastSelectionD3LIdx+1 );
+            totalNofPages = (selectionEndLine-line+linesPerPage-1) / linesPerPage;
+         }
+      }
+
+      int page = 1;
+
+      QValueList<int>::iterator pageListIt = pageList.begin();
+      for(;;)
+      {
+         if (!bPrintSelection)
+         {
+            if (pageListIt==pageList.end())
+               break;
+            page = *pageListIt;
+            line = (page - 1) * linesPerPage;
+            if (page==10000)  // This means "Print the current page"
+            {
+               bPrintCurrentPage=true;
+               // Detect the first visible line in the window.
+               line = m_pDiffTextWindow1->convertDiff3LineIdxToLine( currentFirstD3LIdx );
+            }
+         }
+         else
+         {
+            if ( line>=selectionEndLine )
+            {
+               break;
+            }
+            else
+            {
+               if ( selectionEndLine-line < linesPerPage )
+                  linesPerPage=selectionEndLine-line;
+            }
+         }
+         if (line>=0 && line<totalNofLines )
+         {
+
+            if (bFirstPrintedPage)
+               printer.newPage();
+
+            painter.setClipping(true);
+
+            painter.setPen( m_pOptionDialog->m_colorA );
+            QString headerText1 = m_sd1.getAliasName() + ", "+topLineText+": " + QString::number(m_pDiffTextWindow1->calcTopLineInFile(line)+1);
+            printDiffTextWindow( painter, view1, headerText1, m_pDiffTextWindow1, line, linesPerPage, m_pOptionDialog->m_fgColor );
+
+            painter.setPen( m_pOptionDialog->m_colorB );
+            QString headerText2 = m_sd2.getAliasName() + ", "+topLineText+": " + QString::number(m_pDiffTextWindow2->calcTopLineInFile(line)+1);
+            printDiffTextWindow( painter, view2, headerText2, m_pDiffTextWindow2, line, linesPerPage, m_pOptionDialog->m_fgColor );
+
+            if ( m_bTripleDiff && m_pDiffTextWindow3 )
+            {
+               painter.setPen( m_pOptionDialog->m_colorC );
+               QString headerText3 = m_sd3.getAliasName() + ", "+topLineText+": " + QString::number(m_pDiffTextWindow3->calcTopLineInFile(line)+1);
+               printDiffTextWindow( painter, view3, headerText3, m_pDiffTextWindow3, line, linesPerPage, m_pOptionDialog->m_fgColor );
+            }
+            painter.setClipping(false);
+
+            painter.setPen( m_pOptionDialog->m_fgColor );
+            painter.drawLine( 0, view.bottom()+3, view.width(), view.bottom()+3 ); 
+            QString s = bPrintCurrentPage ? QString("") 
+                                          : QString::number( page ) + "/" + QString::number(totalNofPages);
+            if ( bPrintSelection ) s+=" (" + i18n("Selection") + ")";
+            painter.drawText( (view.right() - painter.fontMetrics().width( s ))/2,
+                        view.bottom() + painter.fontMetrics().ascent() + 5, s );
+
+            bFirstPrintedPage = true;
+         }
+
+         if ( bPrintSelection )
+         {
+            line+=linesPerPage;
+            ++page;
+         }
+         else
+         {
+            ++pageListIt;
+         }
+      }
+
+      painter.end();
+
+      if ( m_pOptionDialog->m_bWordWrap )
+      {
+         recalcWordWrap();
+         m_pDiffVScrollBar->setValue( m_pDiffTextWindow1->convertDiff3LineIdxToLine( currentFirstD3LIdx ) );
+      }
+
+      slotStatusMsg( i18n( "Printing completed." ) );
+   }
+   else
+   {
+      slotStatusMsg( i18n( "Printing aborted." ) );
+   }
+}
+
 void KDiff3App::slotFileQuit()
 {
    slotStatusMsg(i18n("Exiting..."));
@@ -603,7 +898,7 @@ void KDiff3App::slotFileQuit()
    if( !queryClose() )
        return;      // Don't quit
 
-   KApplication::exit(0);
+   KApplication::exit( isFileSaved() ? 0 : 1 );
 }
 
 
@@ -611,11 +906,12 @@ void KDiff3App::slotFileQuit()
 void KDiff3App::slotViewToolBar()
 {
    slotStatusMsg(i18n("Toggling toolbar..."));
+   m_pOptionDialog->m_bShowToolBar = viewToolBar->isChecked();
    ///////////////////////////////////////////////////////////////////
    // turn Toolbar on or off
    if ( toolBar("mainToolBar") !=0 )
    {
-      if(!viewToolBar->isChecked())
+      if(!m_pOptionDialog->m_bShowToolBar)
       {
          toolBar("mainToolBar")->hide();
       }
@@ -631,6 +927,7 @@ void KDiff3App::slotViewToolBar()
 void KDiff3App::slotViewStatusBar()
 {
    slotStatusMsg(i18n("Toggle the statusbar..."));
+   m_pOptionDialog->m_bShowStatusBar = viewStatusBar->isChecked();
    ///////////////////////////////////////////////////////////////////
    //turn Statusbar on or off
    if (statusBar() !=0 )
@@ -662,53 +959,5 @@ void KDiff3App::slotStatusMsg(const QString &text)
 
 
 
-FindDialog::FindDialog(QWidget* pParent)
-: QDialog( pParent )
-{
-   QGridLayout* layout = new QGridLayout( this );
-   layout->setMargin(5);
-   layout->setSpacing(5);
-
-   int line=0;
-   layout->addMultiCellWidget( new QLabel(i18n("Search text:"),this), line,line,0,1 );
-   ++line;
-
-   m_pSearchString = new QLineEdit( this );
-   layout->addMultiCellWidget( m_pSearchString, line,line,0,1 );
-   ++line;
-
-   m_pCaseSensitive = new QCheckBox(i18n("Case sensitive"),this);
-   layout->addWidget( m_pCaseSensitive, line, 1 );
-
-   m_pSearchInA = new QCheckBox(i18n("Search A"),this);
-   layout->addWidget( m_pSearchInA, line, 0 );
-   m_pSearchInA->setChecked( true );
-   ++line;
-
-   m_pSearchInB = new QCheckBox(i18n("Search B"),this);
-   layout->addWidget( m_pSearchInB, line, 0 );
-   m_pSearchInB->setChecked( true );
-   ++line;
-
-   m_pSearchInC = new QCheckBox(i18n("Search C"),this);
-   layout->addWidget( m_pSearchInC, line, 0 );
-   m_pSearchInC->setChecked( true );
-   ++line;
-
-   m_pSearchInOutput = new QCheckBox(i18n("Search output"),this);
-   layout->addWidget( m_pSearchInOutput, line, 0 );
-   m_pSearchInOutput->setChecked( true );
-   ++line;
-
-   QPushButton* pButton = new QPushButton( i18n("&Search"), this );
-   layout->addWidget( pButton, line, 0 );
-   connect( pButton, SIGNAL(clicked()), this, SLOT(accept()));
-
-   pButton = new QPushButton( i18n("&Cancel"), this );
-   layout->addWidget( pButton, line, 1 );
-   connect( pButton, SIGNAL(clicked()), this, SLOT(reject()));
-
-   hide();
-}
 
 #include "kdiff3.moc"

@@ -1,0 +1,96 @@
+#!/bin/bash
+
+# this is a script around make which basicly checks
+# if it's in srcdir or in builddir and changes to 
+# the right directory for calling /usr/bin/make
+# (C) Stephan Kulow
+
+# You may need to set OBJ_REPLACEMENT variable to get it to work.
+# In the variable use the sed syntax to switch directories, for example
+# export OBJ_REPLACEMENT="s:/home/zack/cvs/kde:/home/zack/build:"
+# will assure that the builds are performed under /home/zack/build
+# directory, when the cvs is held under /home/zack/cvs/kde.
+
+file=Makefile
+dir=.
+args=()
+jobs=
+
+while test $# -gt 0 ; do
+   case "${1}" in
+      -f)
+	shift
+	file="${1}" 
+	shift 
+	args=("${args[@]}" -f $file)
+	;;
+      -C)
+	shift
+	dir="${1}"
+	shift ;;
+      -j)
+	shift
+	jobs="${1}"
+	shift ;;
+      -j*)
+	jobs="${1/-j/}"
+	shift ;;
+      *)
+	args=("${args[@]}" "$1")
+	shift 
+	;;
+    esac
+done
+
+if test ! -f $dir/$file; then
+  if test -n "$OBJ_SUBDIR"; then
+    dir=$PWD
+    subdir=.
+    while test ! -f $dir/$OBJ_SUBDIR/$file; do
+       subdir=`basename $dir`"/$subdir"
+       dir=`dirname $dir`
+       if test "$dir" = "/"; then
+         # the case that someone puts the compile dir in /
+         # is very unlikely, so we better skip here ;)
+         echo "can't find $OBJ_SUBDIR above current dir"
+         exit 1
+       fi
+    done
+    cd $dir/$OBJ_SUBDIR/$subdir
+  else
+    if test -n "$OBJ_REPLACEMENT"; then
+      pwd=`echo $PWD | sed -e "$OBJ_REPLACEMENT"`
+      if test ! -f $pwd/$dir/$file; then
+  	 echo "no objdir found. Tried $pwd"
+	 exit 1
+      fi
+      cd $pwd/$dir
+    fi
+  fi
+else
+  cd $dir
+fi
+
+echo "makeobj[0]: Entering directory \`$PWD'"
+if test -z "$MAKE"; then
+    if head -n 1 $file | grep unsermake >/dev/null; then
+        MAKE=`type -p unsermake`
+	if test ! -x "$MAKE"; then
+		echo 'Makefile was created with unsermake, but there'
+		echo 'is no unsermake in $PATH'
+		exit 1
+	fi
+	MAKE="$MAKE --no-real-compare VERBOSE=1"
+	if test -n "$jobs"; then args=("${args[@]}" --compile-jobs=$jobs); fi
+    else
+        MAKE=/usr/bin/make
+	if test -n "$jobs"; then args=("${args[@]}" -j $jobs); fi
+    fi
+fi
+
+echo "Calling $MAKE ${args[@]}"
+LANGUAGE=C $MAKE "${args[@]}"
+retval=$?
+echo "makeobj[0]: Leaving directory \`$PWD'"
+exit $retval
+

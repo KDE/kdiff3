@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2003 by Joachim Eibl                                    *
- *   joachim.eibl@gmx.de                                                   *
+ *   joachim.eibl at gmx.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,10 +17,9 @@
 #include <qlabel.h>
 #include <qapplication.h>
 #include <qpushbutton.h>
-#if QT_VERSION==230
-#else
+
 #include <qeventloop.h>
-#endif
+
 #include "common.h"
 #include <ktempfile.h>
 #include <qdir.h>
@@ -42,7 +41,7 @@
 #endif
 
 
-ProgressDialog* g_pProgressDialog;
+ProgressDialog* g_pProgressDialog=0;
 
 
 FileAccess::FileAccess( const QString& name, bool bWantToWrite )
@@ -95,6 +94,7 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
    m_bSymLink = false;
    m_linkTarget = "";
    m_fileType = -1;
+   m_bLocal = true;
 
    // Note: Checking if the filename-string is empty is necessary for Win95/98/ME.
    //       The isFile() / isDir() queries would cause the program to crash.
@@ -121,13 +121,8 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
          m_bReadable    = fi.isReadable();
          m_bWritable    = fi.isWritable();
          m_bExecutable  = fi.isExecutable();
-#if QT_VERSION==230
-         m_creationTime = fi.lastModified();
-         m_bHidden    = false;
-#else
          m_creationTime = fi.created();
          m_bHidden    = fi.isHidden();
-#endif
          m_modificationTime = fi.lastModified();
          m_accessTime = fi.lastRead();
          m_size       = fi.size();
@@ -144,6 +139,32 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
          if ( ! m_url.isValid() )
          {
             m_url.setPath( m_absFilePath );
+         }
+
+         if ( !m_bExists  && m_absFilePath.contains("@@") )
+         {
+            // Try reading a clearcase file
+            m_localCopy = FileAccess::tempFileName();
+            QString ctName = m_localCopy + ".cleartool"; // Because cleartool can't overwrite existing file
+            QString cmd = "cleartool get -to \"" + ctName + "\"  \"" + m_absFilePath + "\"";
+            ::system( cmd.local8Bit() );
+            FileAccess ctFile(ctName);
+            ctFile.copyFile(m_localCopy);
+            ctFile.removeFile();
+
+            QFileInfo fi( m_localCopy );
+            m_bReadable    = fi.isReadable();
+            m_bWritable    = fi.isWritable();
+            m_bExecutable  = fi.isExecutable();
+            m_creationTime = fi.created();
+            m_bHidden    = fi.isHidden();
+            m_modificationTime = fi.lastModified();
+            m_accessTime = fi.lastRead();
+            m_size       = fi.size();
+            m_bSymLink   = fi.isSymLink();
+            m_bFile      = fi.isFile();
+            m_bDir       = fi.isDir();
+            m_bExists    = fi.exists();
          }
       }
       else
@@ -426,29 +447,31 @@ QString FileAccess::tempFileName()
       QString fileName;
       #ifdef _WIN32
          QString tmpDir = getenv("TEMP");
-         for(int i=0; ;++i)
-         {
-            // short filenames for WIN98 because for system() the command must not exceed 120 characters.
-            fileName = tmpDir + "\\" + QString::number(i);
-            if ( ! FileAccess::exists(fileName) )
-               break;
-         }
       #else
          QString tmpDir = "/tmp";
-         for(int i=0; ;++i)
-         {
-            fileName = tmpDir + "/kdiff3_" + QString::number(i) +".tmp";
-            if ( ! FileAccess::exists(fileName) )
-               break;
-         }
       #endif
-
+      for(int i=0; ;++i)
+      {
+         // short filenames for WIN98 because for system() the command must not exceed 120 characters.
+         #ifdef _WIN32
+         if ( QApplication::winVersion() & Qt::WV_DOS_based ) // Win95, 98, ME
+            fileName = tmpDir + "\\" + QString::number(i);
+         else
+         #endif
+            fileName = tmpDir + "/kdiff3_" + QString::number(i) +".tmp";
+         if ( ! FileAccess::exists(fileName) && 
+              QFile(fileName).open(IO_WriteOnly) ) // open, truncate and close the file, true if successful
+		{
+            break;
+		}
+      }
       return QDir::convertSeparators(fileName);
 
    #else  // using KDE
 
       KTempFile tmpFile;
-      tmpFile.setAutoDelete( true );  // We only want the name. Delete the precreated file immediately.
+      //tmpFile.setAutoDelete( true );  // We only want the name. Delete the precreated file immediately.
+      tmpFile.close();
       return tmpFile.name();
 
    #endif
@@ -905,21 +928,15 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
    return true;
 }
 
-static bool wildcardMultiMatch( const QString& wildcard, const QString& testString, bool bCaseSensitive )
+bool wildcardMultiMatch( const QString& wildcard, const QString& testString, bool bCaseSensitive )
 {
    QStringList sl = QStringList::split( ";", wildcard );
 
    for ( QStringList::Iterator it = sl.begin(); it != sl.end(); ++it )
    {
       QRegExp pattern( *it, bCaseSensitive, true /*wildcard mode*/);
-#if QT_VERSION==230
-      int len=0;
-      if ( pattern.match( testString, 0, &len )!=-1 && len==testString.length())
-         return true;
-#else
       if ( pattern.exactMatch( testString ) )
          return true;
-#endif
    }
 
    return false;
@@ -927,9 +944,9 @@ static bool wildcardMultiMatch( const QString& wildcard, const QString& testStri
 
 
 // class CvsIgnoreList from Cervisia cvsdir.cpp
-//    Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
+//    Copyright (C) 1999-2002 Bernd Gehrmann <bernd at mail.berlios.de>
 // with elements from class StringMatcher
-//    Copyright (c) 2003 Andr�W�beking <Woebbeking@web.de>
+//    Copyright (c) 2003 Andr�Woebeking <Woebbeking at web.de>
 // Modifications for KDiff3 by Joachim Eibl
 class CvsIgnoreList
 {
@@ -978,10 +995,9 @@ void CvsIgnoreList::init( FileAccess& dir, bool bUseLocalCvsIgnore )
                {
                   if (pos>pos1)
                   {
-                     QCString entry( &buf[pos1], pos-pos1+1 );
-                     addEntry( entry );
+                     addEntry( QString::fromLatin1( &buf[pos1], pos-pos1 ) );
                   }
-                  pos1=pos+1;
+                  ++pos1;
                }
             }
             delete buf;
@@ -1023,7 +1039,7 @@ void CvsIgnoreList::addEntriesFromFile(const QString &name)
 
 void CvsIgnoreList::addEntry(const QString& pattern)
 {
-   if (pattern != QChar('!'))
+   if (pattern != QString("!"))
    {
       if (pattern.isEmpty())    return;
 
@@ -1254,7 +1270,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
                fa.m_fileType    = 0;
 
                fa.m_name = QT_WA_INLINE(
-                  QString::fromUcs2(findData.cFileName),
+                  QString::fromUcs2((const ushort*)findData.cFileName),
                   QString::fromLocal8Bit(findDataA.cFileName)
                   );
 
@@ -1420,14 +1436,16 @@ ProgressDialog::ProgressDialog( QWidget* pParent )
    m_pSubProgressBar = new KProgress(1000, this);
    layout->addWidget( m_pSubProgressBar );
 
-   QHBoxLayout* hlayout = new QHBoxLayout( layout );
    m_pSlowJobInfo = new QLabel( " ", this);
-   hlayout->addWidget( m_pSlowJobInfo );
+   layout->addWidget( m_pSlowJobInfo );
 
+   QHBoxLayout* hlayout = new QHBoxLayout( layout );
+   hlayout->addStretch(1);
    m_pAbortButton = new QPushButton( i18n("&Cancel"), this);
    hlayout->addWidget( m_pAbortButton );
    connect( m_pAbortButton, SIGNAL(clicked()), this, SLOT(slotAbort()) );
 
+   m_progressDelayTimer = 0;
    resize( 400, 100 );
    m_t1.start();
    m_t2.start();
@@ -1559,8 +1577,10 @@ void qt_leave_modal(QWidget*);
 void ProgressDialog::enterEventLoop( KIO::Job* pJob, const QString& jobInfo )
 {
    m_pJob = pJob;
+   m_pSlowJobInfo->setText("");
    m_currentJobInfo = jobInfo;
-   startTimer( 3000 ); /* 3 s delay */
+   killTimer( m_progressDelayTimer );
+   m_progressDelayTimer = startTimer( 3000 ); /* 3 s delay */
 
    // instead of using exec() the eventloop is entered and exited often without hiding/showing the window.
 #if QT_VERSION==230
@@ -1574,17 +1594,17 @@ void ProgressDialog::enterEventLoop( KIO::Job* pJob, const QString& jobInfo )
 
 void ProgressDialog::exitEventLoop()
 {
-   killTimers();
+   killTimer( m_progressDelayTimer );
+   m_progressDelayTimer = 0;
    m_pJob = 0;
-#if QT_VERSION==230
-   //qApp->exit_loop();
-#else
    qApp->eventLoop()->exitLoop();
-#endif
 }
 
 void ProgressDialog::recalc( bool bUpdate )
 {
+   killTimer( m_progressDelayTimer );
+   m_progressDelayTimer = startTimer( 3000 ); /* 3 s delay */
+
    int level = m_progressStack.size();
    if( ( bUpdate && level==1) || m_t1.elapsed()>200 )
    {
@@ -1605,7 +1625,6 @@ void ProgressDialog::recalc( bool bUpdate )
       }
 
       if ( !isVisible() ) show();
-      m_pSlowJobInfo->setText("");
       qApp->processEvents();
       m_t1.restart();
    }
@@ -1615,8 +1634,9 @@ void ProgressDialog::recalc( bool bUpdate )
 #include <qtimer.h>
 void ProgressDialog::show()
 {
-   killTimers();
-   if ( !isVisible() )
+   killTimer( m_progressDelayTimer );
+   m_progressDelayTimer = 0;
+   if ( !isVisible() && (parentWidget()==0 || parentWidget()->isVisible()) )
    {
 #if QT_VERSION==230
       QWidget::show();
@@ -1628,7 +1648,8 @@ void ProgressDialog::show()
 
 void ProgressDialog::hide()
 {
-   killTimers();
+   killTimer( m_progressDelayTimer );
+   m_progressDelayTimer = 0;
    // Calling QDialog::hide() directly doesn't always work. (?)
    QTimer::singleShot( 100, this, SLOT(delayedHide()) );
 }
@@ -1643,7 +1664,7 @@ void ProgressDialog::delayedHide()
    QDialog::hide();
    m_pInformation->setText( "" );
 
-   m_progressStack.clear();
+   //m_progressStack.clear();
 
    m_pProgressBar->setProgress( 0 );
    m_pSubProgressBar->setProgress( 0 );

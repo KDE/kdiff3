@@ -1,3 +1,49 @@
+Version 0.9.89 - 2006/04/09
+===========================
+New features:
+- Version control history auto merge plus sorting
+- Auto merge regular expression
+- Splitting and joining differences for merging
+- Manual Diff Alignment tool
+- Printing of differences
+- Colorsettings for Dir-Colors
+- Dir-show identical/different/A-only/B-only/C-only files with immediate effect (instead of option "List only deltas")
+- Filename-edit above DiffInputWindows
+- Windows-Context Menu in A/B/C-columns for dir-comparison (Windows only)
+- Edit Menu: Select All (Ctrl-A)
+- New commandline options: 
+  --config filename: Select an individual config file. (Now also available for Windows and Qt-only version.)
+  --cs config: Change one specific setting via the command line. (For settings that were previously adjustable via GUI only.)
+  --confighelp: Show available config items and their current values.
+- Dircomp: "Compare/Merge explicitly selected files" (Select files/dirs by clicking icons in columns A/B/C)
+- User definable ignored command line options.
+- Ability to swap pathnames in open dialog
+- "Ignore"-button in error dialog when option not understood (Windows only)
+- Quadratical scroll speedup during selection when mouse moves out of the diff input window.
+Bugfixes, redesign:
+- Preparations for Qt4-Port + some redesign
+- GNU-Diff algorithm improved to be independent of line endings (needed for manual diff alignment)
+- Avoid restoring a window where it is almost invisible (if moved almost out of the screen area)
+- Go to next delta honors special "A vs. B", "A vs. C" or "B vs. C" overview when active. (Patch by Vladan Bato)
+- DirectoryMergeWindow: File/Antifile and DirPattern changes will update immediately without rescan.
+- Blue toolbar icons (for better visibility of disabled state)
+- Bugfix: Crash when merging and selecting "Choose A/B/C for all unsolved conflicts"
+  and one of the solved conflicts contained no lines in chosen input.
+- Fix: With --auto option, GUI stays invisible if not necessary
+- Fixed odd ProgressDialog-behaviour when continuing after an error or abort.
+- Directory merge: Fixed FollowFileLinks. (Didn't work when copying a file.)
+- Initial position now (x=0,y=22). This solves a problem on some Macs.
+- Better alignment of B and C in 3-file comparison
+- Correctly updating the selection when scrolling via keys and mouse is pressed
+- Horizontal scrolling in right-to-left language caused vertical lines - fixed.
+
+
+Version 0.9.88 - 2005/25/02
+===========================
+- Fixed crash that occurred in Directory Comparison mode "Full-Analysis".
+- Fix for Windows: Didn't save encoding correctly.
+- Many translations updated.
+
 Version 0.9.87 - 2005/30/01
 ===========================
 - Unicode16 and UTF8 support (Internal data format is now QString (Unicode16). Conversion during save and load.)

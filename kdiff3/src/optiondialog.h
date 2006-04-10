@@ -1,6 +1,6 @@
 /*
  *   kdiff3 - Text Diff And Merge Tool
- *   This file only: Copyright (C) 2002  Joachim Eibl, joachim.eibl@gmx.de
+ *   Copyright (C) 2002-2006  Joachim Eibl, joachim.eibl at gmx.de
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
- *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *   Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  */
 
@@ -31,10 +31,12 @@ class KConfig;
 #include <kdialogbase.h>
 #include <qstringlist.h>
 #include <list>
+#include <kcmdlineargs.h>
 
 class OptionItem;
 class OptionCheckBox;
 class OptionEncodingComboBox;
+class OptionLineEdit;
 class KKeyDialog;
 
 enum e_LineEndStyle
@@ -51,6 +53,15 @@ public:
 
     OptionDialog( bool bShowDirMergeSettings, QWidget *parent = 0, char *name = 0 );
     ~OptionDialog( void );
+    QString parseOptions( const QCStringList& optionList );
+    QString calcOptionHelp();
+
+    // Some settings are not available in the option dialog:
+    QSize  m_geometry;
+    QPoint m_position;
+    bool   m_bShowToolBar;
+    bool   m_bShowStatusBar;
+    int    m_toolBarPos;
 
     // These are the results of the option dialog.
     QFont m_font;
@@ -65,6 +76,11 @@ public:
     QColor m_colorForConflict;
     QColor m_currentRangeBgColor;
     QColor m_currentRangeDiffBgColor;
+    QColor m_oldestFileColor;
+    QColor m_midAgeFileColor;
+    QColor m_newestFileColor;
+    QColor m_missingFileColor;
+    QColor m_manualHelpRangeColor;
 
     bool m_bWordWrap;
 
@@ -94,6 +110,14 @@ public:
     bool m_bIgnoreComments;
     QString m_PreProcessorCmd;
     QString m_LineMatchingPreProcessorCmd;
+    bool m_bRunRegExpAutoMergeOnMergeStart;
+    QString m_autoMergeRegExp;
+    bool m_bRunHistoryAutoMergeOnMergeStart;
+    QString m_historyStartRegExp;
+    QString m_historyEntryStartRegExp;
+    bool m_bHistoryMergeSorting;
+    QString m_historyEntryStartSortKeyOrder;
+    QString m_IrrelevantMergeCmd;
 
     bool m_bAutoAdvance;
     int  m_autoAdvanceDelay;
@@ -116,17 +140,20 @@ public:
     bool m_bDmTrustDate;
     bool m_bDmTrustSize;
     bool m_bDmCopyNewer;
-    bool m_bDmShowOnlyDeltas;
+    //bool m_bDmShowOnlyDeltas;
+    bool m_bDmShowIdenticalFiles;
     bool m_bDmUseCvsIgnore;
     bool m_bDmWhiteSpaceEqual;
+    bool m_bDmCaseSensitiveFilenameComparison;
     QString m_DmFilePattern;
     QString m_DmFileAntiPattern;
     QString m_DmDirAntiPattern;
 
     QString m_language;
     bool m_bRightToLeftLanguage;
-    //QString m_fileCodec;
-    
+
+    QString m_ignorableCmdLineOptions;
+
     void saveOptions(KConfig* config);
     void readOptions(KConfig* config);
 
@@ -139,22 +166,26 @@ protected slots:
     virtual void slotOk( void );
     virtual void slotApply( void );
     virtual void slotHelp( void );
-    
+
     void slotEncodingChanged();
+    void slotHistoryMergeRegExpTester();
 private:
     void resetToDefaults();
 
     std::list<OptionItem*> m_optionItemList;
 
-    // FontConfigDlg
-    KFontChooser *m_fontChooser;
-    
     OptionCheckBox* m_pSameEncoding;
     OptionEncodingComboBox* m_pEncodingAComboBox;
     OptionEncodingComboBox* m_pEncodingBComboBox;
     OptionEncodingComboBox* m_pEncodingCComboBox;
     OptionEncodingComboBox* m_pEncodingOutComboBox;
     OptionEncodingComboBox* m_pEncodingPPComboBox;
+    OptionCheckBox* m_pHistoryAutoMerge;
+    OptionLineEdit* m_pAutoMergeRegExpLineEdit;
+    OptionLineEdit* m_pHistoryStartRegExpLineEdit;
+    OptionLineEdit* m_pHistoryEntryStartRegExpLineEdit;
+    OptionCheckBox* m_pHistoryMergeSorting;
+    OptionLineEdit* m_pHistorySortKeyOrderLineEdit;
 
 private:
     void setupFontPage();
@@ -164,6 +195,7 @@ private:
     void setupDirectoryMergePage();
     void setupKeysPage();
     void setupRegionalPage();
+    void setupIntegrationPage();
     void setupOtherOptions();
 };
 

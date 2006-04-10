@@ -1,0 +1,2430 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+  <!ENTITY kdiff3 "<application
+>KDiff3</application
+>">
+  <!ENTITY kappname "&kdiff3;">
+  <!ENTITY package "kdeextragear-1">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % German "INCLUDE">
+]>
+
+<book lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Das Handbuch zu &kdiff3;</title>
+
+<authorgroup>
+<author
+><firstname
+>Joachim</firstname
+> <surname
+>Eibl</surname
+> <affiliation
+><address
+> <email
+>joachim.eibl at gmx.de</email>
+</address
+></affiliation>
+</author>
+</authorgroup>
+
+<othercredit role="translator"
+><firstname
+>Thomas</firstname
+><surname
+>Reitelbach</surname
+><affiliation
+><address
+><email
+>tr@erdfunkstelle.de</email
+></address
+></affiliation
+><contrib
+>Deutsche Übersetzung</contrib
+></othercredit
+> 
+
+<copyright>
+<year
+>2002-2005</year>
+<holder
+>Joachim Eibl</holder>
+</copyright>
+<!-- Translators: put here the copyright notice of the translation -->
+<!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
+     and in the FDL itself on how to use it. -->
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<!-- Date and version information of the documentation
+Don't forget to include this last date and this last revision number, we
+need them for translation coordination !
+Please respect the format of the date (YYYY-MM-DD) and of the version
+(V.MM.LL), it could be used by automation scripts.
+Do NOT change these in the translation. -->
+
+<date
+>2005-01-30</date>
+<releaseinfo
+>0.9.87</releaseinfo>
+
+
+<abstract>
+<para
+></para>
+<para
+>&kdiff3; ist ein Programm zum Anzeigen von Unterschieden und zum Zusammenführen von Dateien und Ordnern. &kdiff3; <itemizedlist>
+<listitem
+><para
+>vergleicht zwei oder drei Textdateien bzw. Ordner und führt sie zusammen,</para
+></listitem>
+<listitem
+><para
+>kann Unterschiede zeilenweise und sogar Zeichen für Zeichen anzeigen,</para
+></listitem>
+<listitem
+><para
+>hat eine Funktion zum automatischen Zusammenführen,</para
+></listitem>
+<listitem
+><para
+>enthält einen speziellen komfortablen Editor zum Auflösen von Konflikten beim Zusammenführen,</para
+></listitem>
+<listitem
+><para
+>ist mit Hilfe von KIO Netzwerktransparent,</para
+></listitem>
+<listitem
+><para
+>kann Unterschiede in "weißen" Zeichen oder Kommentaren besonders hervorheben oder verstecken.</para
+></listitem>
+<listitem
+><para
+>unterstützt Unicode, UTF-8 und weitere Dateikodierungen.</para
+></listitem>
+</itemizedlist>
+</para
+><para
+>Dieses Dokument beschreibt &kdiff3; in der Version 0.9.87. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdeextragear</keyword>
+<keyword
+>kdiff3</keyword>
+<keyword
+>vergleichen</keyword>
+<keyword
+>zusammenführen</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>dreifach-vergleichen</keyword>
+<keyword
+>vergleichen</keyword>
+<keyword
+>Dateien</keyword>
+<keyword
+>Ordner</keyword>
+<keyword
+>Versionskontrolle</keyword>
+<keyword
+>Drei-Wege-Zusammenführen</keyword>
+<keyword
+>Unterschiede innerhalb einer Zeile</keyword>
+<keyword
+>synchronisieren</keyword>
+<keyword
+>kpart</keyword>
+<keyword
+>kio</keyword>
+<keyword
+>netzwerktransparent</keyword>
+<keyword
+>Editor</keyword>
+<keyword
+>"weißes" Zeichen</keyword>
+<keyword
+>Kommentare</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction"
+><title
+>Einführung</title>
+<sect1 id="why"
+><title
+>Noch eine Oberfläche zu Diff?</title>
+<para
+>Es gibt viele graphische Werkzeuge zum Vergleichen. Warum also &kdiff3;? Lassen Sie mich kurz erklären, warum ich &kdiff3; ins Leben gerufen habe. </para
+><para
+>&kdiff3; wurde programmiert, weil ich eine sehr komplizierte Zusammenführung durchzuführen hatte. Zusammenführen wird dann nötig, wenn mehrere Personen an der gleichen Datei in einem Projekt arbeiten. Wenn das verwendete Werkzeug zum Zusammenführen nicht nur die geänderten Dateien ("Branch" genannt), sondern auch die Originale ("Basis") zur Verfügung hat, kann das Zusammenführen gewissermaßen automatisiert werden. Das Programm wird dann automatisch die in der Branch gemachten Änderungen auswählen. Doch wenn mehrere Beitragende die gleichen Zeilen ändern, wird ein Konflikt erkannt. Solch ein Konflikt muss dann von Hand aufgelöst werden. </para
+><para
+>Die Zusammenführung war sehr kompliziert, weil einer der Beitragenden viele Änderungen vorgenommen und gleichzeitig an vielen Stellen die Einrückung korrigiert hatte. Ein weiterer Programmierer hatte in der gleichen Datei viel Text verändert. Das Ergebnis waren zahlreiche Konflikte beim Zusammenführen. </para
+><para
+>Das von mir benutzte Programm zeigte mir nur die geänderten Zeilen an, ich konnte aber nicht sehen, was genau sich innerhalb dieser Zeilen geändert hatte. Und es gab keinerlei Hinweise auf die Stellen, wo sich vielleicht nur die Einrückung geändert hatte. Das Zusammenführen dieser Änderungen war ein kleiner Albtraum. </para
+><para
+>Das war also der Beginn. Die erste Version von &kdiff3; konnte Unterschiede innerhalb einer Zeile und Änderungen an "weißen" Zeichen darstellen. Später wurden noch jede Menge weiterer nützlicher Funktionen hinzugefügt. </para
+><para
+>Wenn Sie zum Beispiel schnell Text vergleichen möchten, kopieren Sie ihn einfach in die Zwischenablage und fügen ihn in eines der Vergleichsfenster ein. </para
+><para
+>Eine Funktion die viel Arbeit machte, war das Vergleichen und Zusammenführen von Ordnern. Diese Funktion verwandelte &kdiff3; beinahe in einen vollwertigen Datei-Browser. </para
+><para
+>Ich hoffe, dass Sie viel Nutzen an &kdiff3; haben und wünsche Ihnen viel Freude! </para
+><para
+>Joachim Eibl (2003) </para>
+</sect1>
+
+<sect1 id="screenshots"
+><title
+>Bildschirmphotos und Funktionen</title>
+<para
+>Dieses Bildschirmphoto zeigt die Unterschiede zwischen zwei Textdateien</para>
+<para
+>(Unter Verwendung einer frühen Version von &kdiff3;):</para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+
+<para
+>Auch 3-Wege-Zusammenführen wird vollständig unterstützt. Dies ist nützlich, wenn zwei Personen unabhängig voneinander an einem Stück Kode arbeiten und Änderungen vornehmen. Die Originaldatei (die Basis) hilft &kdiff3; beim automatischen Auswählen der jeweils korrekten Änderungen. Der Zusammenführungs-Editor unter den Unterschiede-Fenstern ermöglicht das Auflösen von Konflikten und zeigt gleichzeitig das zu erwartende Ergebnis an. In diesem Editor können Sie das Ergebnis sogar direkt bearbeiten. Das Bildschirmphoto zeigt drei Quell-Dateien beim Zusammenführen: </para
+><para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</para>
+
+<para id="dirmergebigscreenshot"
+>&kdiff3; hilft Ihnen auch beim Vergleichen und Zusammenführen kompletter Ordner. Dieses Bildschirmphoto zeigt &kdiff3; beim Ordner-Zusammenführen: </para
+><para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="dirmergebig.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</para>
+</sect1>
+
+<sect1 id="features"
+><title
+>Weitere Funktionen</title>
+<sect2
+><title
+>Zeilen- und sogar Zeichenweises Darstellen von Unterschieden</title>
+<para
+>&kdiff3; zeigt die exakten Unterschiede an und bediehnt sich dazu der Möglichkeiten heutiger Farbmonitore. Wenn Sie häufig Kode überprüfen müssen, werden Sie diese Funktion mögen. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="letter_by_letter.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Erkennen von Unterschieden in "weißen" Zeichen auf einen Blick</title>
+<para
+>Unterschiede in "weißen" Zeichen und Tabulatoren werden sichtbar dargestellt. Wenn sich Zeilen nur in einer gewissen Anzahl an "weißen" Zeichen unterscheiden, kann man das auf einen Blick an der Zusammenfassung in der Spalte an der linken Seite sehen. (Kein Ärger mehr, wenn Jemand die Einrückung ändert.) </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="white_space.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>3-Wege-Vergleichen</title>
+<para
+>Man kann drei Dateien analysieren und sehen, an wo sie sich unterscheiden. </para
+><para
+>Das linke/mittlere/rechte Fenster hat den Namen A/B/C und ist entsprechend blau/grün/magenta eingefärbt. </para
+><para
+>Wenn eine Datei gleich ist, und die andere sich in einer Zeile unterscheidet, dann zeigt die Farbe an, welche Datei unterschiedlich ist. Rote Farbe bedeutet, dass beide sich Dateien unterscheiden. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="triple_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Komfortables zusammenführen von zwei oder drei Dateien</title>
+<para
+>Mit &kdiff3; kann man zwei oder drei Dateien zusammenführen. Dabei führt &kdiff3; so viel wie möglich automatisch zusammen. Das Ergebnis wird in einem editierbaren Fenster angezeigt; dort können die meisten Konflikte schon mit einem einfachen Mausklick gelöst werden: Wählen Sie zwischen den Knöpfen A/B/C um die zu benutzende Quelle auszuwählen. Sie können auch mehr als eine Quelle wählen. Weil das Fenster im Grunde ein Editor ist, können hier selbst Konflikte, die eine weitere Bearbeitung erfordern, einfach aufgelöst werden. Sie benötigen dazu keine weiteren Hilfsmittel. </para>
+</sect2>
+
+<sect2
+><title
+>Und ...</title>
+<itemizedlist>
+   <listitem
+><para
+>Schnelle Navigation über Knöpfe.</para
+></listitem>
+   <listitem
+><para
+>Ein Mausklick in die Zusammenfassungs-Spalte gleicht alle Fenster ab, so dass alle die gleiche Stelle anzeigen.</para
+></listitem>
+   <listitem
+><para
+>Kopieren Sie eine Auswahl aus irgendeinem Fenster einfach in das Ergebnisfenster.</para
+></listitem>
+   <listitem
+><para
+>Die Übersichtsspalte zeigt an, wo sich Änderungen und Konflikte befinden.</para
+></listitem>
+   <listitem
+><para
+>Die Farben sind an Ihre Bedürfnisse anpassbar.</para
+></listitem>
+   <listitem
+><para
+>Die Größe von Unterfenstern ist veränderbar.</para
+></listitem>
+   <listitem
+><para
+>Es gibt die Option, anstelle von Tabulatoren Leerzeichen einzufügen.</para
+></listitem>
+   <listitem
+><para
+>Bequemes Öffnen von Dateien über einen Dialog oder über die Kommandozeile.</para
+></listitem>
+   <listitem
+><para
+>Suchen (Strg-F) und Weitersuchen (F3) nach bestimmten Zeichenketten in allen Textfenstern.</para
+></listitem>
+   <listitem
+><para
+>Anzeigen der Zeilennummer zu jeder Zeile. </para
+></listitem>
+   <listitem
+><para
+>Einfügen aus der Zwischenablage oder das Ziehen von Text in ein Vergleichsfenster.</para
+></listitem>
+   <listitem
+><para
+>Netzwerktransparenz durch KIO.</para
+></listitem>
+   <listitem
+><para
+>&kdiff3; kann als Anzeigemodul in KDevelop 3 genutzt werden um Unterschiede anzuzeigen.</para
+></listitem>
+   <listitem
+><para
+>Zeilenumbruch für lange Zeilen</para
+></listitem>
+   <listitem
+><para
+>Unterstützung für Unicode, UTF-8 und weitere Kodierungen.</para
+></listitem>
+   <listitem
+><para
+>Unterstützung für Sprachen, die von rechts nach links geschrieben werden.</para
+></listitem>
+   <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="documentation"
+><title
+>Dokumentation zum Vergleichen und Zusammenführen von Dateien</title>
+
+<sect1 id="commandline"
+><title
+>Kommandozeilen-Optionen</title>
+
+<sect2
+><title
+>Vergleichen von zwei Dateien: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>datei1 datei2</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Zusammenführen von zwei Dateien: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>datei1 datei2</replaceable
+> -m
+   <command
+>kdiff3</command
+> <replaceable
+>datei1 datei2</replaceable
+> -o <replaceable
+>ausgabedatei</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Vergleichen von drei Dateien: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>datei1 datei2 datei3</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Zusammenführen von drei Dateien: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>datei1 datei2 datei3</replaceable
+> -m
+   <command
+>kdiff3</command
+> <replaceable
+>datei1 datei2 datei3</replaceable
+> -o <replaceable
+>ausgabedatei</replaceable
+>
+</screen>
+<para
+>Beachten Sie, dass <replaceable
+>datei1</replaceable
+> als Basis für <replaceable
+>datei2</replaceable
+> und <replaceable
+>datei3</replaceable
+> verwendet wird. </para>
+</sect2>
+
+<sect2
+><title
+>Spezialfall: Dateien mit gleichem Namen </title>
+<para
+>Wenn alle Dateien den gleichen Namen haben, aber in verschiedenen Ordnern liegen, dann können Sie sich die Tipparbeit erleichtern indem Sie nur den Dateinamen der ersten Datei vollständig ausschreiben. Beispiel: </para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>Ordner1/Dateiname Ordner2 Ordner3</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Kommandozeile zum Vergleichen bzw. Zusammenführen von Ordnern: </title>
+<para
+>Das Vorgehen ist hier sehr ähnlich, doch nun geht es um Ordner.</para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>Ordner1 Ordner2</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>Ordner1 Ordner2</replaceable
+> -o <replaceable
+>Zielordner</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>Ordner1 Ordner2 Ordner3</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>Ordner1 Ordner2 Ordner3</replaceable
+> -o <replaceable
+>Zielordner</replaceable
+>
+</screen>
+<para
+>Zum Vergleichen bzw. Zusammenführen von Ordnern lesen Sie bitte <link linkend="dirmerge"
+>hier</link
+> weiter.</para>
+</sect2>
+
+<sect2
+><title
+>Mehr Informationen zu den Kommandozeilen-Optionen erhalten Sie mit diesem Befehl: </title>
+<screen
+><command
+>kdiff3</command
+> --help
+Options:
+  -m, --merge               Quellen zusammenführen.
+  -b, --base file           Explizite Basisdatei. Für Kompatibilität mit anderen Programmen.
+  -o, --output datei        Ausgabe-Datei. Impliziert -m. Z. B.: -o neueDatei.txt
+  --out file                Ausgabe-Datei. (Für Kompatibilität mit anderen Programmen.)
+  --auto                    Keine graphische Oberfläche, wenn alle Konflikte automatisch aufgelöst werden können. (Benötigt -o datei)
+  --qall                    Konflikte nicht automatisch auflösen. (Aus Kompatibilitätsgründen.)
+  --L1 alias1               Sichtbarer Namensersatz für Quelldatei 1 (Basis).
+  --L2 alias2               Sichtbarer Namensersatz für Quelldatei 2.
+  --L3 alias3               Sichtbarer Namensersatz für Quelldatei 3.
+  -L, --fname alias         Alternativer sichtbarer Namensersatz. Für jede Quelldatei einmal angeben.
+  -u                        Hat keine Wirkung. Für Kompatibilität mit anderen Programmen.
+</screen>
+</sect2>
+
+</sect1>
+
+<sect1 id="opendialog"
+><title
+>Öffnen-Dialog</title>
+<para
+>Weil mehrere Dateien auszuwählen sind, hat &kdiff3; einen besonderen Dialog zum Öffnen von Dateien: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="open_dialog.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>Der Öffnen-Dialog ermöglicht das manuelle Eintippen von Dateinamen, die Auswahl über den Datei-Browser ("Datei...") oder das Auswählen einer zuletzt geöffneten Datei aus der Aufklappliste. Der Öffnen-Dialog merkt sich Ihre Auswahl und zeigt sie beim nächsten Mal wieder an. Sie müssen keine dritte Datei angeben; wenn Sie den Eintrag für "C" leer lassen, wird die Analyse der Unterschiede mit zwei Dateien durchgeführt. </para
+><para
+>Über den Knopf "Ordner..." können Sie auch einen Ordner auswählen. Wenn Sie einen Ordner wählen, wird das Vergleichen bzw. Zusammenführen von Ordnern eingeleitet. Wenn für "A" eine Datei ausgewählt wird, für "B" und "C" jedoch ein Ordner, dann benutzt &kdiff3; den Dateinamen aus "A" in den beiden anderen Ordnern. </para
+><para
+>Wenn "Zusammenführen" angekreuzt ist, wird das Eingabefeld für "Ziel" aktiv und lässt sich bearbeiten. Es ist allerdings nicht unbedingt erforderlich, sofort eine Ausgabedatei festzulegen. Sie können diesen Schritt auch später beim Speichern erledigen. </para
+><para
+>Der "Einrichten"-Knopf öffnet einen Dialog mit Einstellungen. Hier können Sie Optionen festlegen bevor Sie mit dem Vergleichen/Zusammenführen beginnen. </para>
+</sect1>
+
+<sect1 id="pasteinput"
+><title
+>Einfügen und Ablegen von Text</title>
+<para
+>Manchmal möchte man nicht eine ganze Datei, sondern nur Teile eines Textes vergleichen. &kdiff3; ermöglicht Ihnen, Textteile aus der Zwischenablage in das aktive Vergleichsfenster zu ziehen. Der Vergleich beginnt dann sofort. Im Öffnen-Dialog müssen Sie keine Dateien auswählen, Sie können den Dialog einfach mit dem "Abbrechen"-Knopf schließen. </para
+><para
+>Sie können auch "Ziehen und Ablegen" benutzen: Ziehen Sie einfach eine Datei aus einem Dateimanager oder ausgewählten Text aus einem Editor und lassen Sie ihn über einem Vergleichsfenster fallen. </para
+><para
+>Welcher Gedanke steckt dahinter? Manchmal enthält eine Datei z. B. mehrere ähnliche Funktionen. Wenn Sie herausfinden möchten, wie ähnlich sich diese Funktionen sind, wäre das ein relativ großer Aufwand. Sie müssten erst zwei entsprechende Dateien erstellen, sie in &kdiff3; laden und diese dann vergleichen. Jetzt können Sie die relevanten Abschnitte einfach kopieren, einfügen und dann vergleichen. </para
+><para
+>Anmerkung: Zur Zeit können Sie nichts aus &kdiff3; herausziehen. Nur das Fallenlassen von Text in ein Vergleichsfenster wird unterstützt. </para
+><para
+>Warnung: Einige Editoren interpretieren das Ziehen und Ablegen von Text in ein anderes Programm als Ausschneiden und Einfügen (anstelle von Kopieren und Einfügen). In einem solchen Fall könnten Ihre Originaldaten verloren gehen. </para>
+</sect1>
+
+<sect1 id="interpretinginformation"
+><title
+>Interpretieren der angezeigten Informationen in den Quellfenstern</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>Im oberen Teil jedes Textfensters befindet sich die Info-Zeile. Die Info-Zeile der Quellfenster enthält die Zeichen "A", "B" oder "C", den Dateinamen und die Zeilennummer der ersten sichtbaren Zeile im Fenster. (Beachten Sie, dass Fenster "C" optional ist.) Jede Info-Zeile hat eine unterschiedliche Farbe. (Wenn der Pfad zu einer Datei zu lang ist, lassen Sie die Maus eine Weile über der Zeile ruhen. Dann wird ein kleines Hilfsfenster den vollständigen Namen anzeigen.) </para
+><para
+>Den drei Quellfenstern sind die Buchstaben "A", "B" und "C" zugeordnet. "A" hat die Farbe Blau, "B" die Farbe Grün und "C" ist magenta. (Diese Voreinstellungen können über das Einstellungen-Menü geändert werden.) </para
+><para
+>Wenn ein Unterschied erkannt wird, sieht man an der Farbe, welche Datei sich unterscheidet. Wenn sich beide Dateien unterscheiden, ist die Voreingestellte Farbe dafür Rot. ("Farbe für Konflikte" in den Einstellungen). Das Farbschema ist besonders nützlich, wenn Sie drei Dateien vergleichen. Das ist im nächsten Abschnitt (<link linkend="merging"
+>Zusammenführen</link
+>) gut zu sehen. </para
+><para
+>Links neben dem Text befindet sich die Zusammenfassungs-Spalte. Wenn Unterschiede gefunden wurden, zeigt die Spalte die entsprechende Farbe an. Bei Unterschieden in "weißen" Zeichen wird die Farbe gerastert angezeigt. Bei einigen Programmiersprachen wo "weiße" Zeichen nicht so wichtig sind, ist es nützlich, nur die relevanten Änderungen zu sehen. (Bei C/C++ z. B. sind "weiße" Zeichen nur in Zeichenketten und Kommentaren, für den Preprozessor und in wenigen, seltenen Einzelfällen relevant.) </para
+><para
+>Die vertikale Linie, die die Zusammenfassungs-Spalte vom Text trennt, wird an den Stellen unterbrochen, wo die jeweilige Quelldatei keine Zeilen hat. Wenn der Zeilenumbruch aktiviert ist, wird die Linie an umgebrochenen Zeilen gepunktet dargestellt. </para
+><para
+>An der rechten Seite befindet sich eine Übersichts-Spalte, direkt links neben der vertikalen Bildlaufleiste. Sie zeigt eine komprimierte Zusammenfassung des gesamten Fenster "A". Alle Unterschiede und Konflikte sind hier auf einen Blick erkennbar. Wenn nur zwei Quellfenster genutzt werden, dann erscheinen alle Unterschiede rot, denn dann ist jeder Unterschied gleichzeitig auch ein Konflikt. Der aktuell sichtbare Bereich der Quelltexte wird durch ein schwarzes Rechteck umrandet. Bei sehr langen Quelldateien mit mehr Zeilen als die Übersichts-Spalte in Pixeln anzeigen kann, teilen sich mehrere Zeilen jeweils eine Zeile in der Übersichts-Spalte. Ein Konflikt hat gegenüber einfacher Unterschiede die höchste Priorität. Unterschiede wiederum haben eine höhere Priorität als "keine Änderungen". So gehen keine Konflikte oder Unterschiede verloren. Durch einen Klick in die Übersichts-Spalte wird der zugehörige Text angezeigt. </para>
+</sect1>
+
+
+<sect1 id="merging"
+><title
+>Zusammenführen und das editierbare Ergebnisfenster</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>Das Ergebnisfenster (unter den Vergleichsfenstern) hat auch eine Info-Zeile mit der Aufschrift "Ausgabe:", dem Dateinamen und "[Geändert]" wenn Sie das Ergebnis bearbeitet haben. Üblicherweise enthält es durch das automatische Zusammenführen bereits Text, aber oft enthält es auch Konflikte. </para
+><para
+>!!! Bis alle Konflikte aufgelöst sind, ist das Speichern deaktiviert !!! (Benutzen Sie die Knöpfe "Springe zu nächstem gelösten/ungelösten Konflikt" um die noch verbleibenden Konflikte zu finden.) </para
+><para
+>Wenn nur zwei Vergleichsfenstern benutzt werden, ist jeder Unterschied gleichzeitig auch ein Konflikt der manuell gelöst werden muss. </para
+><para
+>Bei drei Vergleichsfenstern wird die erste Datei als Basis verwendet, und die zweite und dritte Datei enthalten die Änderungen. Wenn eine Zeile nur in Datei B oder C geändert wurde, aber nicht in beiden, dann wird automatisch die richtige Änderung ausgewählt. Wenn B und C allerdings Änderungen in der gleichen Zeile enthalten, erkennt &kdiff3; einen manuell zu lösenden Konflikt. Wenn B und C identisch sind, sich aber von A unterscheiden, dann wird C als Quelle ausgewählt. </para
+><para
+>Das Ergebnisfenster hat auch eine Zusammenfassungs-Spalte an der linken Seite. Sie zeigt entweder den Buchstaben des Vergleichsfensters an von dem eine Zeile stammt, oder sie ist leer, wenn alle drei Quellen an der Stelle identisch sind. Konflikte werden mit einem roten Fragezeichen "?" und dem Text &lt;Zusammenführungskonflikt&gt; dargestellt. Weil das zeilenweise Auflösen von Konflikten sehr lange dauern würde, werden Zeilen mit gleichem Unterschied und Charakteristika gruppiert. Konflikte mit "weißen" Zeichen und Konflikte mit "nicht-weißen" Zeichen werden getrennt dargestellt, um das Zusammenführen von Dateien mit vielen Einrückungsänderungen zu vereinfachen. </para
+><para
+>Durch einen Klick mit der linken Maustaste in die Zusammenfassungs-Spalte in einem der Fenster wird die zu der Zeile gehörende Gruppe in allen Fenstern markiert und die erste Zeile der Gruppe wird angezeigt. (Dadurch wird auch ein Sprung der Position in den Fenstern verursacht, wo der Anfang der Gruppe sonst nicht sichtbar wäre.) Diese Gruppe wird dann die "aktuelle Gruppe". Sie wird mit der Farbe "Hintergrundfarbe für aktuellen Bereich" hervorgehoben und jeweils zur Linken erscheint ein schwarzer Balken. </para
+><para
+>Beachten Sie die Knöpfe zur Auswahl der Quelle mit der Beschriftung "A", "B" und "C" unterhalb der Menüleiste. Wenn Sie auf einen der Knöpfe klicken, werden die Zeilen aus dem entsprechenden Fenster an das Ende der ausgewählten Gruppe im Ergebnisfenster angehängt (wenn sie nicht bereits vorhanden sind). Falls die Zeilen bereits vorhanden sind, werden sie beim Klicken auf den Knopf entsprechend wieder entfernt. </para
+><para
+>Hinweis: Sie können auch jede Zeile manuell bearbeiten. Die Zusammenfassungs-Spalte zeigt dann ein "m" in jeder Zeile, die Sie von Hand bearbeitet haben. </para
+><para
+>Manchmal bleibt durch das automatische Zusammenführen oder durch manuelles Bearbeiten keine weitere Zeile mehr in der Gruppe übrig; dann wird in diesen Zeilen der Text &lt;Keine Zeile in der Quelle&gt; angezeigt. Das ist nur ein Platzhalter für den Fall, dass Sie Ihre Meinung ändern und vielleicht doch wieder eine andere Quelle wählen. Dieser Text erscheint weder in der endgültigen gespeicherten Datei, noch in einer Markierung die Sie vielleicht kopieren und woanders einfügen. </para
+><para
+>Der Text &lt;Zusammenführungskonflikt&gt; erscheint allerdings in der Zwischenablage, wenn Sie solchen Text aus dem Ergebnisfenster kopieren. Gehen Sie vorsichtig mit dieser Funktion um. </para
+><para
+>Das normale Zusammenführen startet mit dem automatischen Lösen einfacher Konflikte. Das "Zusammenführen"-Menü enthält einige häufig verwendete Funktionen. Wenn Sie bei den meisten Konflikten die gleiche Quelle auswählen müssen, können Sie z. B. überall "A", "B" oder "C" auswählen. Die gleiche Möglichkeit gibt es auch für die noch verbleibenden ungelösten Konflikte oder sogar für die noch verbleibenden ungelösten Konflikte in "weißen" Zeichen. Wenn Sie solche Entscheidungen nicht zusammengefasst für eine Gruppe, sondern sogar für jeden einzelnen Unterschied im Detail treffen möchten, dann wählen Sie "Alle Unterschiede zu Konflikten machen". Sie können wieder zur automatischen Auswahl von &kdiff3; zurück, indem Sie "Automatisch einfache Konflikte lösen" wählen. &kdiff3; startet das Zusammenführen dann erneut. &kdiff3; fragt nach, bevor Ihre eventuell gemachten Änderungen verloren gehen. </para
+><para
+>Hinweis: Wenn beim Auswählen der Quellen die Optionen "Zahlen ignorieren" oder "Ignoriere C/C++ Kommentare" aktiviert sind, werden Änderungen in Zahlen oder Kommentaren auch wie "weiße" Zeichen behandelt. </para>
+</sect1>
+
+<sect1 id="navigation"
+><title
+>Navigieren und Bearbeiten</title>
+<para
+>Navigiert wird hauptsächlich mit den Bildlaufleisten und der Maus, aber Sie können dazu auch die Tastatur benutzen. Wenn Sie in eines der Fenster klicken, können Sie die Pfeiltasten links, rechts, hoch, runter, Seite auf, Seite ab, Anfang, Ende, Strg-Anfang und Strg-Ende benutzen, siw wie Sie es auch von anderen Programmen gewohnt sind. Die Übersichts-Spalte neben der vertikalen Bildlaufleiste kann durch hineinklicken auch zum Navigieren benutzt werden. </para
+><para
+>Ausserdem können Sie das Rädchen Ihrer Maus zum hoch- und runterblättern benutzen. </para
+><para
+>Im Augabefenster können Sie auch die anderen Tasten zum Bearbeiten verwenden. Mit der "Einfügen"-Taste können Sie zwischen Einfüge- und Überschreibmodus wechseln. (Voreingestellt ist der Einfügemodus.) </para
+><para
+>Ein Klick mit der linken Maustaste in eine der Zusammenfassungs-Spalten synchronisiert die Ansicht aller Fenster auf den Anfang der jeweiligen Gruppe (wie bereits im Abschnitt <link linkend="merging"
+>"Zusammenführen und das editierbare Ausgabefenster"</link
+> erklärt wurde). </para
+><para
+>Die Werkzeugleiste enthält sieben Knöpfe zur Navigation mit denen Sie zum aktuellen/ersten/letzten Unterschied, zum nächsten/vorigen Unterschied (Strg-unten/Strg-oben), zum nächsten/vorigen Konflikt (Strg-Bild Aufwärts/Strg-Bild Abwärts) oder zum nächsten/vorigen ungelösten Konflikt springen können. Beachten Sie, dass &kdiff3; alle nicht automatisch gelösten Konflikte auch nach dem manuellen lösen weiterhin als Konflikt betrachtet. Daher muss zwischen gelösten und ungelösten Konflikten unterschieden werden. </para
+><para
+>Es gibt auch einen Knopf "Automatisch zum nächsten ungelösten Konflikt weiterspringen". Wenn Sie dies aktivieren, wird &kdiff3; nach der ersten Auswahl der Quelle automatisch zum nächsten ungelösten Konflikt weiterspringen und ihn lösen. Das ist hilfreich, wenn Sie immer nur eine Quelle wählen möchten. Wenn Sie beide Quellen brauchen, oder das Ergebnis nach der Auswahl noch bearbeiten möchten, dann sollten Sie diese Funktion ausschalten. Bevor &kdiff3; zum nächsten ungelösten Konflikt weiterspringt, wird das Ergebnis der Auswahl für eine Kurze Zeit angezeigt. Die Verzögerungszeit kann im Abschnitt "Vergleich und Zusammenführung" in den Einstellungen eingestellt werden: Geben Sie für "Automatisch-Weiterspringen-Verzögerung" einen Wert zwischen 0 und 2000 Millisekunden an. Tipp: Wenn Sie sich viele Mausklicks sparen möchten, dann benutzen Sie eine kurze Verzögerungszeit und die Tastenkürzel Strg-1/2/3 uum Auswählen der Quelle A/B/C. </para>
+</sect1>
+
+<sect1 id="selections"
+><title
+>Markieren, Kopieren und Einfügen</title>
+<para
+>In den Vergleichsfenstern wird kein Cursor angezeigt, daher müssen Markierungen mit der Maus gemacht werden. Drücken Sie am Beginn der Markierung die linke Maustaste und halten Sie sie gedrückt, ziehen Sie die Maus dann bis zum Ende der Markierung und lassen Sie hier die Maustaste wieder los. Ein einzelnes Wort kann auch einfach durch einen Doppelklick darauf markiert werden. Im Ergebnisfenster können Sie zum Markieren auch die Tastatur benutzen. Drücken Sie dazu die Umschalt-Taste und verändern Sie die Markierung mit den Pfeiltasten. </para
+><para
+>Um die Markierung in die Zwischenablage zu kopieren, müssen Sie den "Kopieren"-Knopf (Strg-C oder Strg-Einfügen) drücken. Es gibt auch die Option "Auswahl automatisch kopieren". Wenn diese aktiviert ist, wird, was immer Sie markieren, automatisch in die Zwischenablage kopiert und das manuelle Kopieren entfällt. Seien Sie mit dieser Option aber vorsichtig, denn Sie könnten so den Inhalt der Zwischenablage versehentlich überschreiben. </para
+><para
+>"Ausschneiden" (Strg-X oder Umschalt-Entfernen) kopiert in die Zwischenablage und löscht den markierten Text. "Einfügen" (Strg-V oder Umschalt-Einfügen) fügt den Text aus der Zwischenablage an der aktuellen Cursorposition ein bzw. ersetzt die aktuelle Markierung. </para>
+</sect1>
+
+<sect1 id="saving"
+><title
+>Speichern</title>
+<para
+>Speichern ist erst möglich, wenn alle Konflikte gelöst sind. Falls die Datei bereits existiert und die Option "Sicherungskopie erstellen" aktiviert ist, dann erhält die bestehende Datei die Endung ".orig". Wenn bereits eine ".orig"-Datei existiert, wird diese überschrieben. Wenn Sie einen weiteren Vergleich starten bzw. beenden und noch nicht gespeichert haben, dann fragt &kdiff3;, ob Sie Speichern, Abbrechen oder ohne zu speichern fortfahren möchten. (KDiff3 fängt allerdings keine System-Signale ab. Wenn Sie &kdiff3; also mit dem Signal "kill" beenden, gehen Ihre ungespeicherten Daten verloren.) </para
+><para
+>Zeilenenden werden entsprechend dem zugrundeliegenden Betriebssystem gespeichert. Unix-Varianten verwenden ein Zeilenvorschub-Zeichen "\n", und Win32-basierte Systeme benutzen Wagenrücklauf + Zeilenvorschub "\r\n". KDiff3 behält die Zeilenenden der Quelldateien nicht bei, darum sollten Sie &kdiff3; auch nicht mit Binärdateien verwenden. </para>
+</sect1>
+
+<sect1 id="find"
+><title
+>Suchen und Finden von Zeichenketten</title>
+<para
+>Sie können in jedem Textfenster von &kdiff3; nach einer Zeichenkette suchen. Die "Suchen..."-Funktion (Strg-F) im Bearbeiten-Menü öffnet einen Dialog, in dem Sie die zu suchende Zeichenkette eingeben können. Eine Suche beginnt immer am Anfang. Mit der Funktion "Weitersuchen" (F3) können Sie zum nächsten Vorkommen der gesuchten Zeichenkette springen. Wenn Sie eine Suche über mehrere Fenster aktiviert haben, wird erst das erste Fenster vom Beginn bis zum Ende durchsucht, danach das nächste Fenster, u. s. w. </para>
+</sect1>
+
+
+<sect1 id="options"
+><title
+>Optionen</title>
+<para
+>Die Optionen und die Liste der zuletzt verwendeten Dateien wird beim Beenden automatisch gespeichert und beim nächsten Start wiederhergestellt. (Menü Einstellungen->KDiff3 einrichten...) </para>
+<sect2
+><title
+>Schriftart</title>
+<para
+>Wählen Sie eine Schrift mit fester Breite. (Auf einigen Systemen stellt der Dialog auch Schriften mit variabler Breite zur Auswahl, Sie sollten diese aber nicht benutzen.) </para>
+<variablelist>
+   <varlistentry
+><term
+><emphasis
+>Kursivschrift bei Unterschieden:</emphasis
+></term
+><listitem
+><para
+>Wenn Sie diese Option aktivieren, werden Unterschiede in kursiver Schrift dargestellt. Wenn die gewählte Schrift diese Darstellung nicht unterstützt, passiert gar nichts.</para>
+   </listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>Farbe</title>
+<variablelist>
+   <varlistentry
+><term
+><emphasis
+>Vordergrundfarbe:</emphasis
+></term
+><listitem
+><para
+>Üblicherweise Schwarz. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Hintergrundfarbe:</emphasis
+></term
+><listitem
+><para
+>Üblicherweise Weiß. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Hintergrundfarbe bei Unterschieden:</emphasis
+></term
+><listitem
+><para
+>Üblicherweise helles Grau. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Farbe für A:</emphasis
+></term
+><listitem
+><para
+>Üblicherweise dunkles Blau. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Farbe für B:</emphasis
+></term
+><listitem
+><para
+>Üblicherweise dunkles Grün. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Farbe für C:</emphasis
+></term
+><listitem
+><para
+>Üblicherweise dunkles Magenta. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Farbe für Konflikte:</emphasis
+></term
+><listitem
+><para
+>Üblicherweise Rot.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Hintergrundfarbe für aktuellen Bereich:</emphasis
+></term
+><listitem
+><para
+>Üblicherweise helles Gelb.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Hintergrundfarbe für Unterschiede im aktuellen Bereich:</emphasis
+></term
+><listitem
+><para
+>Üblicherweise dunkles Gelb.</para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>An Systemen mit nur 16 oder 256 Farben könnten einige Farben nicht in ihrer reinen Form verfügbar sein sondern würden gerastert dargestellt werden. An diesen Systemen stellt der Knopf "Voreinstellungen" automatisch eine ungerasterte Farbe ein. </para>
+</sect2>
+
+<sect2
+><title
+>Editor</title>
+<variablelist>
+   <varlistentry
+><term
+><emphasis
+>Tabulator fügt Leerzeichen ein:</emphasis
+></term
+><listitem
+><para
+>Wenn diese Option aktiviert ist, wird beim Drücken der Tabulator-Taste die entsprechende Anzahl an Leerzeichen eingefügt. Ansonsten wird ein Tabulator-Zeichen eingefügt.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Tabulator Länge:</emphasis
+></term
+><listitem
+><para
+>Kann nach Ihren persönlichen Vorstellungen eingestellt werden. Voreingestellt ist 8. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Automatisch einrücken:</emphasis
+></term
+><listitem
+><para
+>Wenn Sie Eingabe oder Return drücken, wird die Einrückung der vorangehenden Zeile automatisch auch für die nächste Zeile verwendet. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Auswahl automatisch kopieren:</emphasis
+></term
+><listitem
+><para
+>Wenn diese Option aktiviert ist, wird jede Auswahl automatisch in die Zwischenablage kopiert. Das manuelle kopieren in die Zwischenablage entfällt dann. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Zeilenende-Typ:</emphasis
+></term
+><listitem
+><para
+>Sie können auswählen, welchen Zeilenende-Typ Sie zum Speichern bevorzugen. Der voreingestellte Wert ist die allgemein übliche Auswahl auf dem verwendeten Betriebssystem. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Verwendung der lokalen Codetabelle:</emphasis
+></term
+><listitem
+><para
+>Zum Anzeigen ausländischer Zeichen. Ändern Sie diese Option, wenn ausländische Zeichen nicht korrekt angezeigt werden. </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>Vergleich und Zusammenführung</title>
+<para
+>Beim Vergleichen von Dateien versucht &kdiff3; zuerst, alle vollständig identischen Zeilen in den Quelldateien zu finden. Nur während diesem ersten Schritt können "weiße" Zeichen ignoriert werden. Der zweite Schritt vergleicht jede Zeile. In diesem Schritt werden "weiße" Zeichen nicht ignoriert. Auch beim Zusammenführen werden "weiße" Zeichen nicht ignoriert. </para>
+
+<variablelist>
+   <varlistentry
+><term
+><emphasis
+>Wagenrücklaufzeichen anzeigen:</emphasis
+></term
+><listitem
+><para
+>Manche Editoren (auf manchen Systemen) speichern ein Wagenrücklaufzeichen '\r' und einen Zeilenvorschub '\n' am Ende einer Zeile, andere wiederum speichern nur einen Zeilenvorschub '\n'. Üblicherweise ignoriert &kdiff3; das Wagenrücklaufzeichen, aber dann könnten Dateien mit unterschiedlichen Größen im Seite-an-Seite-Vergleich identisch aussehen, obwohl sie unterschiedlich sind. Wenn diese Option aktiviert ist, werden Wagenrücklaufzeichen sichtbar gemacht, jedoch wie ein "weißes" Zeichen behandelt. Während dem Zusammenführen muss diese Option deaktiviert sein. In der Voreinstellung ist dies deaktiviert.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Zahlen ignorieren:</emphasis
+></term
+><listitem
+><para
+>In der Voreinstellung ist diese Option deaktiviert. Im ersten Teil der Analyse werden Zahlen und zugehörige Zeichen ('0'-'9', '.', '-') ignoriert. Im Ergebnis werden die Unterschiede dennoch angezeigt, aber sie werden wie "weiße" Zeichen behandelt. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Ignoriere C/C++ Kommentare:</emphasis
+></term
+><listitem
+><para
+>In der Voreinstellung ist diese Option deaktiviert. Änderungen in Kommentaren werden wie Änderungen in "weißen" Zeichen behandelt. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Groß-/Kleinschreibung ignorieren:</emphasis
+></term
+><listitem
+><para
+>In der Voreinstellung ist diese Option deaktiviert. Underschiede in einzelnen Zeichen (wie z. B. 'A' und 'a') werden wie Unterschiede in "weißen" Zeichen behandelt. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Vorverarbeitungsbefehl:</emphasis
+></term
+><listitem
+><para
+>Siehe <link linkend="preprocessors"
+>nächster Abschnitt</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Vorverarbeitungsbefehl nur für Zeilenabgleich:</emphasis
+></term
+><listitem
+><para
+>Siehe <link linkend="preprocessors"
+>nächster Abschnitt</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Aufwändig suchen (langsamer):</emphasis
+></term
+><listitem
+><para
+>Intensiv nach noch kleineren Unterschieden suchen. Die Option ist in der Voreinstellung aktiviert. Sie ist effektiv bei komplizierten und großen Dateien, aber langsam bei sehr großen Dateien. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Automatisch-Weiterspringen-Verzögerung (ms):</emphasis
+></term
+><listitem
+><para
+>Im Automatisch-Weiterspringen-Modus bestimmt diese Einstellung, wie lange das Ergebnis der Auswahl angezeigt wird, bevor zum nächsten ungelösten Konflikt weitergesprungen wird. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>"Weiße" Zeichen Autoauswahl bei 2/3 Dateien:</emphasis
+></term
+><listitem
+><para
+>Löst automatische alle Konflikte in "weißen" Zeichen indem die gewählte Datei als Quelle benutzt wird. (Voreingestellt ist manuelle Auswahl.) Das ist nützlich, wenn "weiße" Zeichen in vielen Dateien weniger wichtig sind. Wenn Sie dies nur von Zeit zu Zeit benötigen, dann nutzen Sie besser die Funktionen "Wähle A/B/C für alle ungelösten "weißen" Konflikte" aus dem Zusammenführen-Menü. Beachten Sie, dass die Automatische Auswahl auch Konflikte in Zahlen oder Kommentaren betrifft, wenn die Optionen "Zahlen ignorieren" oder "Ignoriere C/C++-Kommentare" aktiviert sind. </para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2
+><title
+>Verzeichnis-Zusammenführung</title>
+<para
+>Diese Optionen werden im Kapitel zum Scannen von Ordnern und Durchführen einer Zusammenführung behandelt. Schauen Sie für Details unter <link linkend="dirmergeoptions"
+>Dokumentation zum Verzeichnis-Vergleich und Zusammenführung</link
+> nach. </para
+><para
+>Es gibt hier dennoch eine Option die auch beim Speichern von einzelnen Dateien relevant ist: </para>
+<variablelist>
+   <varlistentry
+><term
+><emphasis
+>Sicherungskopie erstellen (.orig):</emphasis
+></term
+><listitem
+><para
+>Wenn eine Datei gespeichert wird und bereits eine ältere Version existiert, dann wird der Originalversion das Suffix ".orig" angehängt. Wenn bereits eine solche Backupdatei mit dem Suffix ".orig" existiert, wird diese ohne weitere Sicherung gelöscht. </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>Regional- und Spracheinstellungen</title>
+  <variablelist>
+    <varlistentry
+><term
+><emphasis
+>Sprache:</emphasis
+></term
+><listitem
+><para
+>Passt die Sprache der Benutzeroberfläche an. Das Ändern dieser Option betrifft nicht das aktuell laufende Programm. Sie müssen &kdiff3; beenden und neu starten, damit die Änderung aktiv wird. (Diese Option ist in der KDE-Version von &kdiff3; nicht verfügbar, weil die Sprache dort global über das Kontrollzentrum eingestellt wird.) </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Die gleiche Kodierung für alles verwenden:</emphasis
+></term
+><listitem
+><para
+>Die folgenden Kodierungseinstellungen können für jeden Eintrag separat eingestellt werden. Wenn man diese Option aktiviert, wird für alle Einträge die obere Einstellung verwendet. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Lokale kodierung:</emphasis
+></term
+><listitem
+><para
+>Über den Auswahlfeldern für die Kodierung erscheint ein kurzer Hinweis, was die lokale Kodierung ist. (Dies kann hier nicht geändert werden und hat für Sie rein informellen Charakter.) </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Datei-Kodierung für A/B/C:</emphasis
+></term
+><listitem
+><para
+>Passen Sie die Datei-Kodierung für Quelldateien an. Dies beeinflusst, wie Sonderzeichen behandelt und interpretiertwerden. Da die Kodierung für jede Datei einzeln einstellbar ist, können selbst Dateien mit unterschiedlicher Kodierung verglichen und zusammengeführt werden. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Datei-Kodierung für die Zusammenführen-Ausgaben und zum Speichern:</emphasis
+></term
+><listitem
+><para
+>Wenn Sie eine Datei bearbeitet haben, können Sie hier festlegen, welche Kodierung zum Speichern verwendet werden soll. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Datei-Kodierung für Preprozessor-Dateien:</emphasis
+></term
+><listitem
+><para
+>Wenn Sie Vorverarbeitungsbefehle definieren, könnten sie eventuell nicht mit Ihrem Codec funktionieren. (Z. B. könnten Ihre Dateien 16-Bit Unicode sein, aber der Vorverarbeitungsbefehl kann nur mit 8-Bit ASCII umgehen.) Mit dieser Option kann man die Kodierung der Ausgabe von Vorverarbeitungsbefehelen festlegen. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Rechts-nach-Links-Sprache:</emphasis
+></term
+><listitem
+><para
+>Einige Sprachen werden von Rechts nach Links geschrieben. Wenn diese Option aktiviert ist, zeigt &kdiff3; den Text in Vergleichs- und Zusammenführen-Fenstern von Rechts nach Links an. Wenn Sie &kdiff3; mit der Option "--reverse" starten, wird das gesamte Layout der Programmoberfläche von Rechts nach Links angezeigt. (Dies ist eine Funktion von Qt.) Diese Dokumentation wurde unter der Annahme geschrieben, dass "Rechts-nach-Links Sprache" und umgedrehtes Layout abgeschaltet sind. Wenn Sie diese Optionen verwenden, müssen Sie also Referenzen auf "Rechts" und "Links" entsprechend umkehren. </para
+></listitem
+></varlistentry>
+
+  </variablelist>
+</sect2>
+
+<sect2
+><title
+>Verschiedenes</title>
+<para
+>(Diese Optionen und Aktionen sind in den Menüs oder den Werkzeugleisten zu finden.)</para>
+<variablelist>
+  <varlistentry
+><term
+><emphasis
+>Zeige Zeilennummern:</emphasis
+></term
+><listitem
+><para
+>Sie können wählen, ob in den Quelldateien die Zeilennummern angezeigt werden sollen.</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><emphasis
+>Zeige Leerzeichen und Tabulator-Zeichen in Unterschieden:</emphasis
+></term
+><listitem
+><para
+>Manchmal sind sichtbare Leerzeichen und Tabulatoren störend. Sie können die Anzeige dieser Zeichen abschalten.</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><emphasis
+>Zeige "weiße" Zeichen:</emphasis
+></term
+><listitem
+><para
+>Schalten Sie dies ab, um Hervorhebungen von Änderungen in "weißen" Zeichen in den Text- oder Übersichtsspalten zu unterdrücken. (Hinweis: Dies gilt auch für Änderungen in Zahlen oder Kommentaren, wenn die Optionen "Zahlen ignorieren" oder "Ignoriere C/C++-Kommentare" aktiviert sind.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><emphasis
+>Übersichts-Optionen:</emphasis
+></term
+><listitem
+><para
+>Dieses Auswahl ist nur verfügbar, wenn Sie drei Dateien vergleichen. Im normalen Modus werden alle Unterschiede in einer farblich kodierten Übersichts-Spalte angezeigt. Aber manchmal möchten Sie vielleicht nur die Unterschiede zwischen zwei von drei Dateien sehen. Nach Auswahl von "A &lt;-&gt; B", "A &lt;-&gt; C" oder "B &lt;-&gt; C" wird neben der normalen noch eine zweite Übersichts-Spalte mit den benötigten Informationen angezeigt. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><emphasis
+>Zeilenumbruch in Diff-Fenstern:</emphasis
+></term
+><listitem
+><para
+>Aktiviert den Zeilenumbruch in Diff-Fenstern, wenn die Länge einer Zeile die Breite des Fensters überschreitet. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><emphasis
+>Zeige Fenster A/B/C:</emphasis
+></term
+><listitem
+><para
+>Manchmal möchte man den verfügbaren Platz auf dem Bildschirm lieber für lange Zeilen benutzen. Verstecken Sie einfach die weniger wichtigen Fenster. (Diese Option befindet sich im Fenster-Menü.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><emphasis
+>Ausrichtung der Fensterteilung wechseln:</emphasis
+></term
+><listitem
+><para
+>Ordnet die Vergleichfenster nebeneinander oder übereinander an. Dies kann auch zum Anzeigen von langen Zeilen nützlich sein. (Diese Option befindet sich im Fenster-Menü.) </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><emphasis
+>Aktuelle Datei zusammenführen:</emphasis
+></term
+><listitem
+><para
+>Manchmal betrachten Sie die Unterschiede und entscheiden sich dann unvermittelt, die Dateien zusammenzuführen. <inlinemediaobject
+><imageobject
+><imagedata fileref="merge_current.png" format="PNG"/></imageobject
+></inlinemediaobject
+>"Aktuelle Datei zusammenführen" im Zusammenführen-Menü funktioniert auch dann, wenn Sie nur zwei Dateien vergleichen. Ein einfacher Klick startet die Zusammenführung und benutzt den Dateinamen der letzten Quelldatei als voreingestellten Namen für die Ausgabedatei. (Wenn diese Funktion benutzt wird, um das Zusammenführen erneut zu starten, dann wird der Name der zuletzt benutzten Ausgabedatei beibehalten.)</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="shortcuts"
+><title
+>Kurzbefehle festlegen</title>
+<para
+>Zur Zeit unterstützt nur die KDE-Version benutzerdefinierbare Kurzbefehle (Menü Einstellungen->Kurzbefehle festlegen...) </para>
+</sect2>
+</sect1>
+
+<sect1 id="preprocessors"
+><title
+>Vorverarbeitungsbefehle:</title>
+<para
+>KDiff3 unterstützt zwei Vorverarbeitungsbefehle. </para
+><para>
+<variablelist>
+   <varlistentry
+><term
+><emphasis
+>Vorverarbeitungsbefehl:</emphasis
+></term
+><listitem
+><para
+>Beim Lesen einer Datei wird sie zuerst diesem externen Kommando übergeben. In &kdiff3; wird dann die Ausgabe des Kommandos sichtbar, und nicht die Datei selbst. Sie können Ihren eigenen Präprozessor schreiben, der genau Ihren Ansprüchen entspricht. Sie können diese Funktion z. B. zum herausschneiden störender Teile oder zum korrigieren der Einrückung verwenden. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Vorverarbeitungsbefehl nur für Zeilenabgleich:</emphasis
+></term
+><listitem
+><para
+>Beim Lesen einer Datei wird sie zuerst diesem externen Kommando übergeben. Wenn auch ein normaler Vorverarbeitungsbefehl angegeben wurde (siehe oben), dann ist die Ausgabe des Befehls die Eingabe dieses Vorverarbeitungsbefehls. Die Ausgabe des Kommandos wird nur beim Zeilenabgleich verwendet. Sie können Ihren eigenen Präprozessor schreiben, der genau Ihren Ansprüchen entspricht. Jede Eingabe-Zeile muss eine zugehörige Ausgabe-Zeile haben. </para
+></listitem
+></varlistentry>
+</variablelist>
+</para>
+<para
+>Der Gedanke dahinter ist, dem Anwender mehr Flexibilität beim Einrichten der Diff-Ergebnisse zu ermöglichen. Doch dafür wird ein externes Programm benötigt, und die meisten Anwender möchten das nicht selbst programmieren. Die Gute Nachricht ist allerdings, dass in dem meisten Fällen <command
+>sed</command
+> oder <command
+>perl</command
+> vollkommen ausreichen. </para>
+<para
+>Beispiel: Ein einfacher Testfall. Wie nehmen eine Datei a.txt (6 Zeilen):<screen>
+      aa
+      ba
+      ca
+      da
+      ea
+      fa
+</screen
+> Und eine Datei b.txt (3 Zeilen): <screen>
+      cg
+      dg
+      eg
+</screen
+>  Ohne Preprozessor würden die folgenden Zeilen nebeneinander stehen: <screen>
+      aa - cg
+      ba - dg
+      ca - eg
+      da
+      ea
+      fa
+</screen
+> Dies ist allerdings nicht das gewünschte Ergebnis, weil der erste Buchstabe die interessante Information darstellt. Um den Suchalgorythmus beim Abgleich zu unterstützen, ignorieren wir den zweiten Buchstaben. Dazu kann folgender Zeilen-Preprozessor verwendet werden, der "g" durch "a" ersetzt: <screen>
+   <command
+>sed</command
+> 's/g/a/'
+</screen
+> Mit diesem Kommando würde das Ergebnis so aussehen: <screen>
+      aa
+      ba
+      ca - cg
+      da - dg
+      ea - eg
+      fa
+</screen
+>  Programmintern "sieht" der Vergleichsalgorythmus die Dateien erst nach dem Durchlauf des Zeilen-Preprozessors, auf dem Bildschirm jedoch erscheinen die Dateien unverändert. (Der normale Preprozessor würde auch die Daten auf dem Bildschirm ändern.) </para>
+
+<sect2 id="sedbasics"
+><title
+><command
+>sed</command
+>-Grundlagen</title>
+<para
+>Dieser Abschnitt führt Sie nur in einige sehr grundlegende Funktionen von <command
+>sed</command
+> ein. Weiterführende Informationen finden Sie unter <ulink url="info:/sed"
+>info:/sed</ulink
+> oder <ulink url="http://www.gnu.org/software/sed/manual/html_mono/sed.html"
+>http://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink
+>. Eine vorkompilierte Version für Windows finden Sie unter <ulink url="http://unxutils.sourceforge.net"
+>http://unxutils.sourceforge.net</ulink
+>. Beachten Sie, dass die folgenden Beispiele voraussetzen, dass das Kommando <command
+>sed</command
+> sich in einem Ordner in der PATH-Variable befindet. Falls das nicht der Fall sein sollte, müssen Sie den vollständigen Pfad zu <command
+>sed</command
+> angeben. Außerdem nutzen die Beispiele einfache Hochkommas ('), die allerdings unter Windows nicht funktionieren. Unter Windows müssen Sie doppelte Hochkommas (") verwenden. </para>
+<para
+>In diesem Kontext wird nur das <command
+>sed</command
+>-Substitute-Kommando benutzt: <screen>
+   <command
+>sed</command
+> 's/<replaceable
+>REGEXP</replaceable
+>/<replaceable
+>ERSATZ</replaceable
+>/<replaceable
+>SCHALTER</replaceable
+>'
+</screen
+> Bevor Sie in KDiff3 ein neues Kommando benutzen, sollten Sie es zuerst in der Konsole testen. Hier kann der <command
+>echo</command
+>-Befehl sehr hilfreich sein. Beispiel: <screen>
+   <command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/'
+   -> obrakadabra
+</screen
+> Dieses Beispiel zeigt ein einfaches <command
+>sed</command
+>-Kommando, das das erste Vorkommen von "a" durch "o" ersetzt. Wenn Sie alle Vorkommen ersetzen möchten, müssen Sie den Schalter "g" benutzen: <screen>
+   <command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g'
+   -> obrokodobro
+</screen
+> Das "|"-Symbol ist das Pipe-Kommando, es übergibt die Ausgabe des ersten Kommandos an die Eingabe des folgenden Kommando. Wenn Sie Ihr <command
+>sed</command
+>-Kommando mit einer längeren Datei testen möchten, dann können Sie unter Unix <command
+>cat</command
+> und unter Window <command
+>type</command
+> dazu benutzen. <command
+>sed</command
+> wird die Ersetzung in jeder Zeile der Datei durchführen. <screen
+><command
+>cat</command
+> <replaceable
+>dateiname</replaceable
+> | <command
+>sed</command
+> <replaceable
+>optionen</replaceable
+>
+</screen>
+</para>
+</sect2>
+<sect2 id="sedforkdiff3"
+><title
+>Beispielanwendungen von <command
+>sed</command
+> in KDiff3</title>
+<sect3
+><title
+>Ignorieren weiterer Kommentartypen</title>
+<para
+>Zur Zeit unterstützt KDiff3 nur C/C++-Kommentare. Mit Hilfe des Vorverarbeitungsbefehl nur für Zeilenabgleich können Sie auf andere Kommentar-Arten unterstützen. Dafür wandeln Sie diese in C/C++-Kommentare um. Beispiel: Um Kommentare zu ignorieren, die mit "#" beginnen, würden Sie diese zu "//" umwandeln. Außerdem muss natürlich die Option "C/C++-Kommentare ignorieren" aktiviert sein damit dies etwas bewirkt. Ein passendes Kommando für den Vorverarbeitungsbefehl nur für Zeilenabgleich wäre zum Beispiel: <screen>
+   <command
+>sed</command
+> 's/#/\/\//'
+</screen
+> Weil das Zeichen "/" für <command
+>sed</command
+> ein Sonderzeichen ist, muss jedem "/" ein "\" vorangestellt werden. Manchmal wird dies benötigt, um einem Sonderzeichen die besondere Bedeutung zu "entziehen". Außerdem sind die einfachen Anführungszeichen (') vor und hinter dem Ersetzungskommando wichtig, weil die Shell sonst versucht, einige der Zeichen wie '#', '$' oder '\' zu ersetzen bevor sie an <command
+>sed</command
+> weitergereicht werden. Unter Windows müssen Sie doppelte Anführungszeichen verwenden ("). Windows ersetzt Zeichen wie '%' grundsätzlich, hier müssen Sie eventuell ein wenig experimentieren. </para>
+</sect3>
+<sect3
+><title
+>Diff ohne Beachtung der Groß-/ Kleinschreibung</title>
+<para
+>Verwenden Sie diesen Vorverarbeitungsbefehl für Zeilenabgleich um die Eingabe in Großbuchstaben umzuwandeln: <screen>
+   <command
+>sed</command
+> 's/\(.*\)/\U\1/'
+</screen
+> Das ".*" ist ein ergulärer Ausdruck der auf jede Zeichenkette passt und in diesem Zusammenhang daher alle Zeichen in einer Zeile erfasst. Die "\1" in der Ersetzungs-Zeichenkette bezieht sich auf den gefundenen Text im ersten Klammernpaar. Das "\U" wandelt den gefundenen Text in Großbuchstaben um. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorieren von Schlüsselwörtern aus Versionskontrolle-Systemen</title>
+<para
+>CVS und andere Versionskontrolle-Systeme verwenden einige Schlüsselwörter um automatisch erzeugte Zeichenketten einzufügen (<ulink url="info:/cvs/Keyword substitution"
+>info:/cvs/Keyword substitution</ulink
+>). Alle folgen dem selben Muster "$SCHLÜSSELWORT erzeugter Text$". Nun wird also ein Vorverarbeitungsbefehl für Zeilenabgleich benötigt, der den automatisch erzeugten Text entfernt: <screen>
+   <command
+>sed</command
+> 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'
+</screen
+> Das "\|" trennt die möglichen Schlüsselwörter. Sie können die Liste nach Bedarf ändern. Das "\" vor dem "$" ist nötig, weil "$" ein Sonderzeichen ist und "Ende der Zeile" bedeuten würde. </para>
+<para
+>Während Sie mit <command
+>sed</command
+> experimentieren, beginnen Sie vielleicht, es zu verstehen und vielleicht mögen Sie diese regulären Ausdrücke sogar. Sie sind sehr nützlich weil es viele Programme gibt, die sehr ähnliche Dinge unterstützen. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorieren von Zahlen</title>
+<para
+>Das Ignorieren von Zahlen ist eigentlich eine bereits eingebaute Funktion in KDiff3. Aber sie ist gut als Beispiel für einen weiteren Vorverarbeitungsbefehl für Zeilenabgleich geeignet. <screen>
+   <command
+>sed</command
+> 's/[0123456789.-]//g'
+</screen
+> Jedes Zeichen zwischen '[' und ']' ist ein Treffer, und jeder Treffer wird durch nichts ersetzt, also quasi gelöscht. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorieren von bestimmten Spalten</title>
+<para
+>Manchmal ist ein Text nach strengen Regeln formatiert und enthält Spalten, die Sie grundsätzlich ignorieren möchten, und andere Spalten, die Sie für die Analyse heranziehen möchten. Im folgenden Beispiel werden die ersten fünf Spalten (Zeichen) ignoriert, dann 10 Spalten beibehalten, dann wieder fünf Spalten ignoriert und der Rest der Zeile wird beibehalten. <screen>
+   <command
+>sed</command
+> 's/.....\(..........\).....\(.*\)/\1\2/'
+</screen
+> Jeder Punkt '.' passt auf genau ein Zeichen. Die "\1" und "\2" in der Ersetzungs-Zeichenkette beziehen sich auf den gefundenen Text im ersten und zweiten Klammernpaar und markieren so den beizubehaltenden Text. </para>
+</sect3>
+
+<sect3
+><title
+>Mehrere Ersetzungen kombinieren</title>
+<para
+>Manchmal möchten Sie vielleicht mehrere Ersetzungen auf einmal durchführen. Dann können Sie das Semikolon ';' benutzen, um die Ersetzungen voneinander zu trennen. Beispiel: <screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g;s/\(.*\)/\U\1/'
+   -> OBROKODOBRO
+</screen>
+</para>
+</sect3>
+
+<sect3
+><title
+><command
+>perl</command
+> statt <command
+>sed</command
+> benutzen</title>
+<para
+>Statt <command
+>sed</command
+> können Sie auch etwas anderes wie z. B. <command
+>perl</command
+> verwenden. <screen>
+   <command
+>perl</command
+> -p -e 's/<replaceable
+>REGEXP</replaceable
+>/<replaceable
+>ERSETZUNG</replaceable
+>/<replaceable
+>SCHALTER</replaceable
+>'
+</screen
+> Allerdings sind bei <command
+>perl</command
+> einige Details anders. Wo <command
+>sed</command
+> "\(" und "\)" benötigt, braucht <command
+>perl</command
+> nur noch "(" und ")" ohne das vorangestellte '\'. Beispiel: <screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+   <command
+>perl</command
+> -p -e 's/(.*)/\U\1/'
+</screen>
+</para>
+</sect3>
+</sect2>
+
+<sect2
+><title
+>Reihenfolge der Ausführung von Preprozessoren</title>
+<para
+>Die Daten werden durch interne und externe Preprozessoren in dieser Reihenfolge durchgeschleust: </para>
+<itemizedlist>
+<listitem
+><para
+>Normaler Preprozessor,</para
+></listitem>
+<listitem
+><para
+>Vorverarbeitungsbefehl für Zeilenabgleich,</para
+></listitem>
+<listitem
+><para
+>Groß-/Kleinschreibung ignorieren (Umwandlung in Großbuchstaben),</para
+></listitem>
+<listitem
+><para
+>Erkennung von C/C++ Kommentaren,</para
+></listitem>
+<listitem
+><para
+>Zahlen ignorieren,</para
+></listitem>
+<listitem
+><para
+>"weiße" Zeichen ignorieren</para
+></listitem>
+</itemizedlist>
+<para
+>Die Daten nach dem normalen Preprozessor werden für die Anzeige und zum Zusammenführen beibehalten. Die weiteren Operationen verändern nur die Daten, die der Zeilenabgleich-Algorythmus "sieht". </para
+><para
+>Beachten Sie: In seltenen Fällen wenn Sie einen normalen Preprozessor verwenden, sieht der Zeilenabgleich-Preprozessor die Ausgabe des normalen Preprozessors als Eingabe. </para>
+</sect2>
+
+<sect2
+><title
+>Warnung</title>
+<para
+>Die Preprozessor-Kommandos sind sehr nützlich, aber wie bei jeder Funktion, die Text verändert oder Unterschiede versteckt, können Sie versehentlich bestimmte Unterschiede nicht bemerken und im schlimmsten Fall wichtige Daten zerstören. </para
+><para
+>Beim Zusammenführen werden Sie daher von KDiff3 gewarnt, falls ein Preprozessor-Kommando benutzt wurd. Sie werden gefragt, ob dieser deaktiviert werden soll oder nicht. Sie werden allerdings nicht gewarnt, wenn ein Vorverarbeitungsbefehl für den Zeilenabgleich benutzt wird. Das Zusammenführen ist nicht abgeschlossen bevor nicht alle Konflikte aufgelöst wurden. Falls Sie "Weiße" Zeichen anzeigen deaktiviert haben, dann sind die vom Zeilenabgleich-Preprozessor entfernten Unterschiede ebenfalls unsichtbar. Wenn der Knopf "Speichern" während dem Zusammenführen deaktiviert bleibt (durch nicht aufgelöste Konflikte), dann aktivieren Sie "weiße" Zeichen anzeigen. Falls diese weniger wichtigen Unterschiede nicht zusammengeführt werden sollen, können Sie auch "Wähle [A|B|C] für alle ungelöste Konflikte" im Menü Zusammenführen-Menü auswählen. </para>
+</sect2>
+</sect1>
+</chapter>
+
+
+<chapter id="dirmerge"
+><title
+>Mit &kdiff3; Ordner Vergleichen und Zusammenführen</title>
+<sect1 id="dirmergeintro"
+><title
+>Einführung</title>
+<para
+>Oftmals müssen Programmierer in einem Ordner viele Dateien bearbeiten. Aus diesem Grund können Sie mit &kdiff3; komplette Ordner rekursiv vergleichen und zusammenführen. </para
+><para
+>Auch wenn das Vergleichen und Zusammenführen von ganzen Ordnern recht naheliegend und einleuchtend erscheint, gibt es einige Details, die Sie wissen sollten. Der wichtigste Punkt ist natürlich, dass sich jeder Durchlauf dieser Funktion gleich auf viele Dateien auswirkt. Wenn Sie keine Sicherungskopie der Originaldaten haben, könnte es schwer oder gar unmöglich werden, den Originalstand wiederherzustellen. Bevor Sie das Zusammenführen starten, sollten Sie also sicherstellen, dass Ihre Daten gesichert sind und das Sie alles rückgängig machen können. Ob Sie ein Archiv erstellen oder ein System zur Versionskontrolle benutzen, ist Ihre Entscheidung; selbst erfahrene Programmierer und Integratoren benötigen hin und wieder die alten Quelltexte. Bitte beachten Sie auch, dass selbst ich (der Autor von &kdiff3;) keine Garantie geben kann, dass das Programm fehlerlos ist. Entsprechend der GNU-GPL gibt es für dieses Programm KEINE GARANTIE. Also denken Sie daran: </para>
+<blockquote
+><para>
+   <emphasis
+>Irren ist menschlich, aber um etwas wirklich durcheinander zu bringen braucht man schon einen Computer ;-)</emphasis>
+</para
+></blockquote>
+<para
+>All diese Dinge kann &kdiff3; für Sie erledigen: &kdiff3;... </para>
+<itemizedlist>
+     <listitem
+><para
+>... liest und vergleicht rekursiv zwei oder drei Ordner,</para
+></listitem>
+     <listitem
+><para
+>... behandelt symbolische Links besonders vorsichtig,</para
+></listitem>
+     <listitem
+><para
+>... lässt Sie Ihre Dateien per Mausklick durchsuchen,</para
+></listitem>
+     <listitem
+><para
+>... macht für jedes Objekt einen Vorschlag zum Zusammenführen; Sie können den Vorschlag vor dem Start anpassen,</para
+></listitem>
+     <listitem
+><para
+>... kann das Zusammenführen simulieren und zeigt die simulierten Änderungen an, ohne sie wirklich durchzuführen,</para
+></listitem>
+     <listitem
+><para
+>... führt letztendlich die Zusammenführung durch und lässt Sie (wenn nötig) eingreifen,</para
+></listitem>
+     <listitem
+><para
+>... führt ausgewählte Aktionen entweder mit allen (F7-Taste), oder nur mit den ausgewählten Objekten (F6-Taste) aus,</para
+></listitem>
+     <listitem
+><para
+>... setzt das Zusammenführen nach einem manuellen Eingriff fort (F7-Taste),</para
+></listitem>
+     <listitem
+><para
+>... erzeugt optional Sicherungskopien mit der Erweiterung".orig",</para
+></listitem>
+     <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="startingdirmerge"
+><title
+>Ordnervergleich oder -zusammenführung starten</title>
+<para
+>Dies ist dem Vergleichen und Zusammenführen von einzelnen Dateien sehr ähnlich. Sie müssen nur Ordner auf der Kommandozeile oder im "Datei öffnen"-Dialog angeben. </para>
+<sect2
+><title
+>Vergleichen/Zusammenführen von zwei Ordnern: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>Ordner1 Ordner2</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>Ordner1 Ordner2</replaceable
+> -o <replaceable
+>Zielordner</replaceable
+>
+</screen>
+<para
+>Wenn kein Zielordner angegeben wurde, benutzt &kdiff3; <replaceable
+>Ordner2</replaceable
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Vergleichen/Zusammenführen von drei Ordnern: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>Ordner1 Ordner2 Ordner3</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>Ordner1 Ordner2 Ordner3</replaceable
+> -o <replaceable
+>Zielordner</replaceable
+>
+</screen>
+<para
+>Wenn drei Ordner zusammengeführt werden, dann wird <replaceable
+>Ordner1</replaceable
+> als Basis benutzt. Wenn kein Zielordner angegeben wurde, verwendet &kdiff3; <replaceable
+>Ordner3</replaceable
+> als Zielordner. </para>
+
+<para
+>Beachten Sie, dass nur der Vergleich von Ordnern automatisch startet, nicht das Zusammenführen. Um das Zusammenführen zu starten, müssen Sie den entsprechenden Menüeintrag auswählen oder die F7-Taste drücken. (Weitere Details folgen.) </para>
+</sect2>
+</sect1>
+
+<sect1 id="dirmergevisible"
+><title
+>Sichtbare Informationen</title>
+<para
+>Während dem Einlesen der Ordner informiert Sie ein kleines Nachrichtenfenster über den aktuellen Fortschritt. Wenn Sie das Scannen der Ordner abbrechen, werden nur die Dateien aufgelistet, die bis dahin verglichen wurden. </para
+><para
+>Wenn das Scannen der Ordner abgeschlossen ist, zeigt &kdiff3; ein Listenfenster mit den Ergebnissen auf der linken Seite, ... </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="dirbrowser.png" format="PNG"/></imageobject
+> <!--alt="Image of the directory browser."-->
+</mediaobject
+></screenshot>
+<para
+>... und den Details zu dem jeweils ausgewählten Objekt auf der rechten Seite: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="iteminfo.png" format="PNG"/></imageobject>
+   <!--alt="Image with information about the selected item."-->
+</mediaobject
+></screenshot>
+
+<sect2 id="name"
+><title
+>Die Spalte "Name"</title>
+<para
+>Jede Datei und jeder Ordner der während dem Scan gefunden wurde, wird hier in einem Baum dargestellt. Sie können ein Objekt mit einem einfachen Mausklick auswählen. </para
+><para
+>Die Ordnerstruktur wird normalerweise zusammengeklappt dargestellt. Sie können einen Ordner aufklappen, indem Sie auf das "+"/"-" klicken, oder auf das Objekt doppelklicken oder indem Sie die Pfeiltasten für links/rechts benutzen. Das "Verzeichnis"-Menü enthält zwei Funktionen "Alle Unterverzeichnisse einklappen" und "Alle Unterverzeichnisse aufklappen" mit denen Sie alle Ordner auf- bzw. zuklappen können. </para
+><para
+>Wenn Sie auf eine Datei doppelklicken, wird der Dateivergleich gestartet und es erscheint ein Vergleichsfenster. </para>
+<para
+>Das Symbol in der Spalte "Name" spiegelt den Dateityp im ersten Ordner ("A") wieder. Diese Typen sind möglich: </para>
+<itemizedlist>
+     <listitem
+><para
+>Normale Datei</para
+></listitem>
+     <listitem
+><para
+>Normaler Ordner (Ordner-Symbol)</para
+></listitem>
+     <listitem
+><para
+>Link auf eine Datei (Datei-Symbol mit einem Link-Pfeil)</para
+></listitem>
+     <listitem
+><para
+>Link auf einen Ordner (Ordner-Symbol mit einem Link-Pfeil)</para
+></listitem>
+</itemizedlist>
+<para
+>Wenn der Dateityp in den anderen Ordnern unterschiedlich ist, dann ist dies in den Spalten A/B/C und in dem Detailfenster zu dem ausgewählten Objekt sichtbar. In einem solchen Fall kann die Zusammenführ-Aktion nicht automatisch gewählt werden. Wenn das Zusammenführen gestartet wird, werden Sie über Probleme dieser Art nochmals informiert. </para>
+</sect2>
+
+<sect2 id="coloring"
+><title
+>Die Spalten A/B/C und das Farbschema</title>
+<para
+>Wie in dem obigen Bild zu sehen ist, werden in den Spalten A/B/C die Farben Rot, Grün, Gelb und Schwarz verwendet. </para>
+<itemizedlist>
+     <listitem
+><para
+>Schwarz: Dieser Eintrag existiert nicht in diesem Ordner.</para
+></listitem>
+     <listitem
+><para
+>Grün: Neuester Eintrag.</para
+></listitem>
+     <listitem
+><para
+>Gelb: Älter als grün, neuer als rot.</para
+></listitem>
+     <listitem
+><para
+>Rot: Ältester Eintrag.</para
+></listitem>
+</itemizedlist>
+<para
+>Bei identischen Einträgen ist die Farbe allerdings auch identisch, auch wenn das Alter der Einträge unterschiedlich ist. </para
+><para
+>Ordner werden als identisch betrachtet, wenn ihr gesamter Inhalt identisch ist. Dann haben auch Ordner die gleiche Farbe. Bei Ordnern ist das Alter unerheblich für seine Farbe. </para
+><para
+>Die Idee zu diesem Farbschema basiert auf <ulink url="http://samba.org/cgi-bin/cvsweb/dirdiff"
+>dirdiff</ulink
+>. Die Farben spiegeln die Farben eines Blattes wieder, welches erst grün ist, dann gelb wird und später, wenn es alt ist, rot wird. </para>
+
+</sect2
+><sect2 id="operation"
+><title
+>Die Aktions-Spalte</title>
+<para
+>Nach dem Vergleichen der Ordner schlägt &kdiff3; eine Zusammenführ-Aktion vor. Dieser Vorschlag wird in der Aktions-Spalte angezeigt. Sie können den Vorschlag ändern, indem Sie auf den entsprechenden Eintrag klicken. Daraufhin erscheint ein kleines Menü, in dem Sie eine Aktion auswählen können. (Die häufigsten Aktionen können Sie auch mit der Tastatur auswählen. Strg+1/2/3/4/Entf wählt entsprechend A/B/C/Zusammenführen/Löschen aus.) Die Aktion wird dann während dem Zusammenführen ausgeführt. Welche Aktionen möglich sind, hängt von dem Eintrag und dem aktuellen Zusammenführ-Modus ab. Mögliche Zusammenführ-Modi sind </para>
+<itemizedlist>
+     <listitem
+><para
+>Drei-Ordner-Zusammenführen ("A" wird als die ältere Basis für die beiden anderen herangezogen).</para
+></listitem>
+     <listitem
+><para
+>Zwei-Ordner-Zusammenführen.</para
+></listitem>
+     <listitem
+><para
+>Zwei-Ordner-Synchronisieren-Modus (aktivieren Sie diesen Modus mit der Option "Verzeichnisse Synchronisieren").</para
+></listitem>
+</itemizedlist>
+<para
+>Beim Zusammenführen von drei Ordnern sind diese Aktions-Vorschläge möglich: Wenn für ein Objekt... </para>
+<itemizedlist>
+     <listitem
+><para
+>... alle drei Ordner identisch sind: Kopieren von C</para
+></listitem>
+     <listitem
+><para
+>... A und C identisch sind, aber nicht B: Kopieren von B (oder falls B nicht existiert, löschen des Ziels, falls es existiert)</para
+></listitem>
+     <listitem
+><para
+>... A und B identisch sind, aber nicht C: Kopieren von C (oder falls C nicht existiert, löschen des Ziels, falls es existiert)</para
+></listitem>
+     <listitem
+><para
+>... B und C identisch sind, aber nicht A: Kopieren von A (oder falls A nicht existiert, löschen des Ziels, falls es existiert)</para
+></listitem>
+     <listitem
+><para
+>... nur A existiert: Löschen des Ziels (falls es existiert)</para
+></listitem>
+     <listitem
+><para
+>... nur B existiert: Kopieren von B</para
+></listitem>
+     <listitem
+><para
+>... nur C existiert: Kopieren von C</para
+></listitem>
+     <listitem
+><para
+>... A, B und C nicht identisch sind: Zusammenführen</para
+></listitem>
+     <listitem
+><para
+>... A, B und C nicht den gleichen Dateityp haben (z. B. wenn A ein Ordner und B eine Datei ist): "Fehler: Widersprüchliche Dateitypen". Solange solche fehlerhaften Objekte existieren, kann das Zusammenführen nicht gestartet werden.</para
+></listitem>
+</itemizedlist>
+<para
+>Beim Zusammenführen von zwei Ordnern sind diese Aktions-Vorschläge möglich: Wenn für ein Objekt... </para>
+<itemizedlist>
+     <listitem
+><para
+>... beide Ordner gleich sind: Kopieren von B</para
+></listitem>
+     <listitem
+><para
+>... A existiert, aber nicht B: Kopieren von A</para
+></listitem>
+     <listitem
+><para
+>... B existiert, aber nicht A: Kopieren von B</para
+></listitem>
+     <listitem
+><para
+>... A und B existieren aber nicht identisch sind: Zusammenführen</para
+></listitem>
+     <listitem
+><para
+>... A und B nicht den gleichen Dateityp haben (z. B. wenn A ein Ordner und B eine Datei ist): "Fehler: Widersprüchliche Dateitypen". Solange solche fehlerhaften Objekte existieren, kann das Zusammenführen nicht gestartet werden.</para
+></listitem>
+</itemizedlist>
+<para
+>Der Modus zum Synchronisieren ist aktiv, wenn nur zwei Ordner und kein expliziter Zielordner angegeben wurden und wenn die Option "Verzeichnisse synchronisieren" aktiv ist. Dann wählt &kdiff3; die nötige Aktion aus, damit nachher beide Ordner identisch sind. Wenn für einen Eintrag... </para>
+<itemizedlist>
+     <listitem
+><para
+>... beide Ordner identisch sind: Es wird nichts unternommen.</para
+></listitem>
+     <listitem
+><para
+>... A existiert, aber nicht B: Kopieren von A nach B</para
+></listitem>
+     <listitem
+><para
+>... B existiert, aber nicht A: Kopieren von B nach A</para
+></listitem>
+     <listitem
+><para
+>... A und B existieren, aber nicht identisch sind: Zusammenführen und das Ergebnis in beiden Ordnern speichern. (Der Anwender sieht als sichtbaren Dateinamen für die Ausgabedatei nur B; direkt nach dem Zusammenführen kopiert &kdiff3; B nach A.)</para
+></listitem>
+     <listitem
+><para
+>... A und B nicht den gleichen Dateityp haben (z. B. wenn A ein Ordner und B eine Datei ist): "Fehler: Widersprüchliche Dateitypen". Solange solche fehlerhaften Objekte existieren, kann das Zusammenführen nicht gestartet werden.</para
+></listitem>
+</itemizedlist>
+<para
+>Wenn zwei Ordner zusammengeführt werden und die Option "Neuere Datei statt Zusammenführung auswählen (unsicher)" aktiviert ist, dann untersucht &kdiff3; das Datum der Dateien und schlägt die neuere Datei zum Kopieren vor. Wenn die Dateien unterschiedlich sind, aber das gleiche Datum aufweisen, dann erscheint eine Fehlermeldung "Fehler: Dateien sind unterschiedlich, aber das Datum ist identisch.". Solange solche Fehler nicht beseitigt sind, kann das Zusammenführen der Ordner nicht gestartet werden. </para>
+</sect2>
+
+<sect2 id="status"
+><title
+>Die Status-Spalte</title>
+<para
+>Während dem Zusammenführen wird eine Datei nach der anderen abgearbeitet. Sie Status-Spalte zeigt "Fertig" an, wenn das Zusammenführen erfolgreich war, und entsprechend andere Meldungen, wenn etwas unerwartetes auftrat. Wenn das Zusammenführen abgeschlossen ist, sollten Sie eine letzte Überprüfung vornehmen und nachsehen, ob der Status überall in Ordnung ist. </para>
+</sect2>
+
+<sect2 id="statisticscolulmns"
+><title
+>Die Statistik-Spalte</title>
+<para
+>Wenn im Einrichtungsdialog die Dateivergleichsmethode "Vollständige Analyse" gewählt ist, wird KDiff3 weitere Spalten anzeigen. Diese enthalten die Anzahl ungelöster, gelöster, nicht "weißer" und "weißer" Konflikte. (Die Spalte für gelöste Konflikte wird nur angezeigt, wenn drei Ordner verglichen oder zusammengeführt werden.) </para>
+</sect2>
+
+</sect1>
+
+
+<sect1 id="dothemerge"
+><title
+>Eine Zusammenführung durchführen</title>
+<para
+>Sie können entweder den gerade ausgewählten Eintrag (Datei oder Odner) zusammenführen, oder alle Einträge auf einmal. Wenn Sie alle Zusammenführ-Aktionen ausgewählt haben (auch in allen Unterordnern), können Sie das Zusammenführen starten. </para
+><para
+>Beachten Sie bitte: Wenn Sie keinen Zielordner angegeben haben, dann wird im Drei-Ordner-Zusammenführen-Modus "C" als Ziel benutzt, beim Zwei-Ordner-Zusammenführen wird "B" als Ziel gewählt und beim Synchronisieren wird "A" und/oder "B" als Ziel verwendet. </para
+><para
+>Wenn Sie einen Zielordner ausgewählt haben, prüfen Sie bitte nachher, ob alle Einträge die im Zielordner sein sollten, auch in der Ordnerstruktur angezeigt werden. Es gibt einige Optionen durch die bestimmte Einträge übersprungen werden könnten. Überprüfen Sie diese Optionen um unliebsame Überraschungen zu vermeiden: </para>
+<itemizedlist>
+     <listitem
+><para
+>"Rekursive Verzeichnisse": Wenn diese Option deaktiviert ist, werden keine Dateien in Unterordnern bearbeitet.</para
+></listitem>
+     <listitem
+><para
+>"Datei Muster"/"Datei Anti-Muster": Ein-/ und Ausschließen auf das Muster passender Einträge</para
+></listitem>
+     <listitem
+><para
+>"Finde versteckte Dateien und Verzeichnisse"</para
+></listitem>
+     <listitem
+><para
+>"Nur Unterschiede anzeigen": Dateien die in allen Ordnern identisch sind erscheinen nicht in der Ordnerstruktur, und folglich auch nicht im Zielordner.</para
+></listitem>
+</itemizedlist>
+<para
+>(In der aktuellen Programmversion müssen Sie nach Änderungen an diesen Optionen den Ordner mit der Funktion "Aktualisieren" neu einlesen.) </para
+><para
+>Wenn Sie soweit zufrieden sind ist der Rest einfach. </para
+><para
+>Um alle Einträge zusammenzuführen: Wählen Sie "Verzeichniszusammenführung starten/fortsetzen" im "Verzeichnis"-Menü oder drücken Sie F7 (das Tastenkürzel). Um nur den aktuellen Eintrag zusammenzuführen: Wählen Sie "Aktion des aktuellen Elements ausführen" oder drücken Sie F6. </para
+><para
+>Wenn durch widersprüchliche Dateitypen immer noch ungültige Zusammenführen-Aktionen existieren, erscheint eine Meldung die auf die fehlerhaften Elemente hinweist. Sie können für sie dann eine gültige Aktion auswählen. </para
+><para
+>Wenn Sie alle Einträge zusammenführen, erscheint ein Dialogfenster mit den Optionen "Durchführen", "Simulieren" und "Abbrechen". </para>
+<itemizedlist>
+     <listitem
+><para
+>Wählen Sie "Simulieren" wenn Sie erst sehen möchten was passieren würde, ohne das wirklich Änderungen vorgenommen werden. Sie erhalten dann eine ausführliche Liste aller Aktionen.</para
+></listitem>
+     <listitem
+><para
+>Ansonsten klicken Sie auf "Durchführen" um das Zusammenführen wirklich zu starten.</para
+></listitem>
+</itemizedlist>
+<para
+>&kdiff3; führt dann bestimmte Aktionen mit allen Einträgen durch. Wenn ein manueller Eingriff nötig ist (zusammenführen einer einzelnen Datei), dann öffnet sich ein Zusammenführen-Fenster (<link linkend="dirmergebigscreenshot"
+>beachten Sie das Bildschirmphoto</link
+>). </para
+><para
+>Wenn Sie mit einer Datei fertig sind, wählen Sie erneut "Verzeichniszusammenführung starten/fortsetzen" oder drücken Sie F7. Wenn Sie noch nicht gespeichert haben, erscheint ein entsprechender Dialog. Dann führt &kdiff3; seine Arbeit mit dem nächsten Eintrag fort. </para
+><para
+>Wenn &kdiff3; auf einen Fehler stösst, erscheint eine Nachricht und ausführliche Status-Informationen. Am Schluss der Liste sehen Sie einige Fehlermeldungen, die Ihnen helfen sollen, die Ursache des Problems auszumachen. Wenn Sie das Zusammenführen fortfahren (F7-Taste), lässt &kdiff3; Ihnen die Wahl es erneut zu versuchen, oder den problematischen Eintrag zu überspringen. So haben Sie die Möglichkeit, eine andere Aktion für den Eintrag auszuwählen oder das Problem auf andere Weise zu lösen, bevor Sie mit dem Zusammenführen fortfahren. </para
+><para
+>&kdiff3; informiert Sie mit einem Info-Fenster wenn das Zusammenführen abgeschlossen ist. </para
+><para
+>Falls einige Einträge individuell zusammengeführt wurden, merkt sich &kdiff3; diese Einträge (in der aktuellen Sitzung) und führt sie beim späteren zusammenführen aller Einträge nicht nochmals zusammen. Selbst wenn hier das Zusammenführen übersprungen wurde oder nicht gespeichert wurde, werden diese Einträge als erledigt betrachtet. Nur wenn Sie die Zusammenführen-Aktion ändern, werden diese Einträge erneut zusammengeführt. </para>
+</sect1>
+
+<sect1 id="dirmergeoptions"
+><title
+>Optionen zum Vergleichen und Zusammenführen von Ordnern</title>
+<para
+>Das Einstellungen-Menü von &kdiff3; (Menü "Einstellungen"->"KDiff3 einrichten...") hat nun einen Abschnitt namens "Verzeichnis-Zusammenführung" mit diesen Optionen: </para>
+
+<variablelist>
+   <varlistentry
+><term
+><emphasis
+>Rekursive Verzeichnisse:</emphasis
+></term
+><listitem
+><para
+>Stellen Sie ein, ob Ordner rekursiv durchsucht werden sollen.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Datei Muster:</emphasis
+></term
+><listitem
+><para
+>Nur Dateien, die auf das angegebene Muster passen, werden im Elementbaum angezeigt. Es können mehrere Muster eingegeben werden. Trennen Sie die Muster mit einem Semikolon ";". Gültige Platzhalter: '*' und '?'. (z. B. "*.cpp;*.h"). Die Voreinstellung ist "*". Ordner müssen nicht diesem Muster entsprechen.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Datei Anti-Muster:</emphasis
+></term
+><listitem
+><para
+>Dateien und Ordner die diesem Muster entsprechen, werden nicht im Elementbaum angezeigt. Es kann mehr als ein Muster eingegeben werden, benutzen Sie das Semikolon ";" als Trennzeichen . Gültige Platzhalter: '*' und '?'. Voreinstellung ist "*.orig;*.o".</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>.cvsignore benutzen:</emphasis
+></term
+><listitem
+><para
+>Ignoriert Dateien, die auch von CVS ignoriert werden würden. Viele autmatisch erzeugte Dateien werden von CVS ignoriert. Der große Vorteil ist, dass dies Ordnerspezifisch mit einer ".cvsignore"-Datei eingestellt werden kann. (Schauen Sie unter <ulink url="info:/cvs/cvsignore"
+>info:/cvs/cvsignore</ulink
+>.)</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Finde versteckte Dateien und Verzeichnisse:</emphasis
+></term
+><listitem
+><para
+>In einigen Dateisystemen haben Dateien ein "Versteckt"-Attribut. In anderen Dateisystemen markiert ein vorangestellter Punkt "." eine Datei als versteckt. Diese Option lässt Sie entscheiden, ob diese Dateien im Elementbaum angezeigt werden sollen oder nicht. Diese Option ist in der Voreinstellung eingeschaltet.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Folge Datei-Verknüpfungen:</emphasis
+></term
+><listitem
+><para
+>Bei Links auf Dateien: Wenn die Option abgeschaltet ist, werden symbolische Verknüpfungen verglichen. Wenn die Option eingeschaltet ist, werden die Dateien verglichen, auf die die Links zeigen. Dies ist in der Voreinstellung deaktiviert.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Folge Verzeichnis-Verknüpfungen:</emphasis
+></term
+><listitem
+><para
+>Bei Links auf Ordner: Wenn die Option abgeschaltet ist, werden die symbolischen Links verglichen. Wenn die Option eingeschaltet ist, werden die Links wie normale Ordner behandelt und rekursiv durchsucht. (Beachten Sie, dass &kdiff3; nicht auf mögliche Rekursionen prüft. Ein Link auf einen Ordner der einen Link auf sich selbst enthält würde zu einer Endlosschleife führen und &kdiff3; stürzt ab.) Diese Option ist in der Voreinstellung abgeschaltet.</para
+></listitem
+></varlistentry
+>   
+   <varlistentry
+><term
+><emphasis
+>Nur Unterschiede anzeigen:</emphasis
+></term
+><listitem
+><para
+>Es werden nur Einträge angezeigt, die Unterschiede aufweisen. Das führt auch dazu, dass identische Dateien beim Zusammenführen nicht in den Zielordner kopiert werden. Falls der Zielordner diese Dateien nicht bereits enthält, fehlen sie nach dem Zusammenführen. (Das Verhalten wird in einer späteren Programmversion wahrscheinlich abgeändert.) Diese Option ist in der Voreinstellung abgeschaltet.</para
+></listitem
+></varlistentry>
+
+   <varlistentry
+><term
+><emphasis
+>Dateivergleichsmethode:</emphasis
+></term
+><listitem
+><para>
+<variablelist
+>            
+   <varlistentry
+><term
+><emphasis
+>Binärvergleich:</emphasis
+></term
+><listitem
+><para
+>Dies ist die voreingestellte Vergleichsmethode. </para
+></listitem
+></varlistentry
+>         
+   <varlistentry
+><term
+><emphasis
+>Vollständige Analyse:</emphasis
+></term
+><listitem
+><para
+>Führt eine vollständige Analyse jeder Datei durch und zeigt die Statistik-Spalten an. (Die Anzahl gelöster, ungelöster, nicht-"weißer" und "weißer" Konflikte.) Die vollständige Analyse ist langsamer als eine einfache binäre Analyse, und wesentlich langsamer, wenn sie auf Dateien angewendet wird, die keinen Text enthalten. (Geben Sie ein entsprechendes Anti-Muster ein.) </para
+></listitem
+></varlistentry
+>         
+   <varlistentry
+><term
+><emphasis
+>Vertraue dem Änderungsdatum (unsicher):</emphasis
+></term
+><listitem
+><para
+>Wenn Sie große Ordner über ein langsames Netzwerk vergleichen, geht es möglicherweise schneller, nur das Änderungsdatum und die Dateigröße zu vergleichen. Dieser Geschwindigkeitsvorteil kostet Sie allerdings ein gewisses Maß an Sicherheit. Bitte mit Vorsicht benutzen. Diese Option ist in der Voreinstellung abgschaltet.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Vertraue der Größe (unsicher):</emphasis
+></term
+><listitem
+><para
+>Ähnlich wie "Vertraue dem Änderungsdatum". Es findet kein echter Vergleich statt. Die Dateien werden als identisch betrachtet, wenn sie gleich groß sind. Das kann z. B. nützlich sein, wenn beim Kopieren das Änderungsdatum verlorengegangen ist. Bitte mit Vorsicht benutzen. Diese Option ist in der Voreinstellung abgschaltet.</para
+></listitem
+></varlistentry>
+</variablelist
+></para
+></listitem
+></varlistentry>
+         
+   <varlistentry
+><term
+><emphasis
+>Verzeichnisse synchronisieren:</emphasis
+></term
+><listitem
+><para
+>Aktiviert den "Synchronisieren"-Modus wenn zwei Ordner verglichen werden und kein Zielordner angegeben wurde. In diesem Modus werden die Vorschläge zum Zusammenführen so ausgewählt, dass nachher beide Ordner identisch sind. Auch die Ergebnisse vom Zusammenführen von Dateien werden in beiden Ordnern gespeichert. Diese Option ist in der Voreinstellung abgeschaltet.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Neuere Datei statt Zusammenführung auswählen (unsicher):</emphasis
+></term
+><listitem
+><para
+>Falls es Unterschiede gibt, wird statt dem Zusammenführen das Kopieren der neueren Datei als Aktion vorgeschlagen. (Dies wird als unsicher betrachtet, denn es wird das Wissen vorausgesetzt, dass die andere Datei nicht auch verändert wurde. Sie sollten dies in jedem Fall prüfen.) Diese Option ist in der Voreinstellung abgeschaltet.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Sicherungskopie erstellen (.orig):</emphasis
+></term
+><listitem
+><para
+>Wenn eine Datei oder ein Ordner durch eine andere ersetzt oder gelöscht wird, dann wird die Originalversion umbenannt und erhält die Erweiterung ".orig". Wenn eine alte Backup-Datei mit der ".orig"-Erweiterung bereits existiert, so wird diese ohne weiteres Backup gelöscht. Das betrifft auch das normale Zusammenführen einzelner Dateien, nicht nur das Zusammenführen ganzer Ordner. Diese Option ist in der Voreinstellung eingeschaltet.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="other"
+><title
+>Weitere Funktionen</title>
+<sect2
+><title
+>Verzeichnis &amp; Textfenster teilen sich Hauptfenster</title>
+<para
+>Normalerweise bleibt die Ordner-Zusammenführen-Ansicht währen dem Zusammenführen einzelner Dateien sichtbar; Sie können den Fensterteiler mit der Maus verschieben. Wenn Sie das nicht wollen, können Sie die Option "Verzeichnis &amp; Textfenster teilen sich Hauptfenster" im "Fenster"-Menü abschalten und mittels "Wechsel zwischen Verzeichnis &amp; Textfenster" zwischen den beiden Ansichten umschalten. </para>
+</sect2>
+<sect2
+><title
+>Vergleichen und Zusammenführen einer einzelnen Datei</title>
+<para
+>Wahrscheinlich bevorzugen Sie, eine Datei einfach mittels Doppelklick zu vergleichen. Dennoch gibt es im "Verzeichnis"-Menü auch einen entsprechenden Menüeintrag. Sie können eine einzelne Datei auch direkt zusammenführen, ohne erst das Ordnerzusammenführen starten zu müssen. Dazu benutzen Sie die Funktion "Aktuelle Datei Zusammenführen" aus dem "Zusammenführen"-Menü. Sobald Sie das Ergebnis speichern, wird der Status auf "Erledigt" gesetzt und die Datei wird nicht nochmals zusammengeführt wenn Sie das Ordnerzusammenführen starten. </para
+><para
+>Dieser Status geht allerdings verloren, wenn Sie das Verzeichnis erneut einlesen: "Verzeichnis"-Menü: "Neu einlesen" </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="misc">
+<title
+>Verschiedene Themen</title>
+<sect1 id="networktransparency">
+<title
+>Netzwerktransparenz via KIO</title>
+<sect2
+><title
+>KIO-Slaves</title>
+<para
+>KDE unterstützt Netzwerktransparenz mit Hilfe von KIO-Slaves. KDiff3 benutzt dies zum Einlesen von Dateien und Ordnern. Auf diese Weise können Sie Dateien und Ordner zum Öffnen angeben, die sich auf lokalen oder entfernten Rechnern befinden. </para
+><para
+>Beispiel: </para
+><para>
+<screen
+><command
+>kdiff3</command
+> test.cpp  ftp://ftp.weitweg.org/test.cpp
+   <command
+>kdiff3</command
+> tar:/home/hacker/archiv.tar.gz/ordner ./ordner
+</screen>
+</para>
+<para
+>Die erste Kommandozeile vergleicht eine lokale Datei mit einer auf einem FTP-Server. Die zweite Kommandozeile vergleicht einen Ordner innerhalb eines komprimierten Archivs mit einem lokalen Ordner. </para
+><para
+>Weitere interessante KIO-Slaves sind: </para>
+<itemizedlist>
+<listitem
+><para
+>Dateien aus dem WWW (http:),</para
+></listitem>
+<listitem
+><para
+>Dateien von FTP (ftp:),</para
+></listitem>
+<listitem
+><para
+>Verschlüsselte Dateiübertragung (fish:, sftp:),</para
+></listitem>
+<listitem
+><para
+>Windows-Ressourcen (smb:),</para
+></listitem>
+<listitem
+><para
+>Lokale Dateien (file:),</para
+></listitem>
+</itemizedlist>
+<para
+>Desweiteren wäre möglich (wenn auch weniger nützlich): </para>
+<itemizedlist>
+<listitem
+><para
+>Man-Pages (man:),</para
+></listitem>
+<listitem
+><para
+>Info-Seiten (info:),</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2
+><title
+>Wie man eine URL schreibt</title>
+<para
+>Eine URL hat eine andere Syntax als lokale Dateien und Ordner. Ein paar Dinge sollten Sie beachten: </para>
+<itemizedlist>
+<listitem
+><para
+>Ein Pfad kann relativ sein und "." oder ".." enthalten. Das ist mit URLs nicht möglich, diese sind immer absolut. </para
+></listitem
+><listitem
+><para
+>Sonderzeichen müssen maskiert werden. ("#"->"%23", Leerzeichen->"%20", u.s.w.). Zum Beispiel hat eine Datei mit dem Namen "/#foo#" die URL "file:/%23foo%23". </para
+></listitem
+><listitem
+><para
+>Wenn eine URL nicht wie erwartet funktioniert, versuchen Sie erstmal, diese im Konqueror zu öffnen. </para
+></listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2
+><title
+>Fähigkeiten von KIO-Slaves</title>
+<para
+>Netzwerktransparenz hat auch einen Nachteil: Nicht alle Ressourcen haben die gleichen Fähigkeiten. </para
+><para
+>Manchmal aufgrund des Dateisystems auf dem Server, manchmal durch das verwendete Protokoll. Es folgt eine kurze Liste der Einschränkungen: </para>
+<itemizedlist>
+<listitem
+><para
+>Teilweise werden keine Links unterstützt. </para
+></listitem
+><listitem
+><para
+>Oder es kann nicht unterschieden werden, ob ein Link auf eine Datei oder einen Ordner zeigt. Dann wird immer eine Datei als Link-Ziel angenommen. (ftp:, sftp:). </para
+></listitem
+><listitem
+><para
+>Die Dateigröße kann nicht immer ermittelt werden. </para
+></listitem
+><listitem
+><para
+>Eingeschränkte Unterstützung für Berechtigungen. </para
+></listitem
+><listitem
+><para
+>Es gibt keine Möglichkeit, Berechtigungen oder Veränderungsdatum zu bearbeiten. Daher weichen die Berechtigungen oder das Veränderungsdatum vom Original ab. (Beachten Sie hierzu die Option "Vertraue der Größe".) (Dies ist nur bei lokalen Dateien möglich.) </para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+<sect1 id="kpart">
+<title
+>&kdiff3; als KPart benutzen</title>
+<para
+>&kdiff3; ist ein KPart. Zur Zeit ist die KParts::ReadOnlyPart-Schnittstelle eingebaut. </para
+><para
+>Der hauptsächliche Verwendungszweck ist zur Zeit als Unterschiede-Betrachter in KDevelop. KDevelop startet zuerst immer den eingebauten Unterschiede-Betrachter. Um KDiff3 zu starten, drücken Sie die rechte Maustaste über dem Unterschiede-Betrachter und wählen dann "In KDiff3Part anzeigen" aus dem Kontextmenü. </para
+><para
+>Normalerweise benötigt &kdiff3; zwei vollständige Eingabedateien. Wenn es allerdings als KPart angewendet wird, nimmt &kdiff3; an, dass die Eingabedatei eine Patch-Datei im unified-Format ist. Dann entnimmt &kdiff3; die Namen der Originaldateien aus der Patch-Datei. Mindestens eine der beiden Dateien muss existieren. Dann startet &kdiff3; das Programm <command
+>patch</command
+> um die fehlende Datei wiederherzustellen. </para
+><para
+>Im Konqueror können Sie auf eine Patch-Datei klicken und aus dem Kontextmenü "Vorschau in"-"KDiff3Part" auswählen. Beachten Sie bitte, dass das nicht funktioniert wenn keine der Originaldateien existiert. Ausserdem ist dies unzuverlässig, wenn sich die Originaldateien seit Erzeugung der Patch-Datei verändert haben. </para
+><para
+>Wenn &kdiff3; als Part ausgeführt wird, unterstützt es nur das Vergleichen von zwei Dateien, eine sehr kleine Werkzeugleiste und Menü. Das Zusammenführen oder das Vergleichen von Ordnern wird im KPart-Modus nicht unterstützt. </para>
+</sect1>
+</chapter>
+
+<chapter id="faq">
+<title
+>Fragen und Antworten</title>
+&reporting.bugs; &updating.documentation; <qandaset id="faqlist">
+
+<qandaentry
+><question
+><para
+>Warum heisst das Programm "KDiff3"? </para
+></question
+><answer
+><para
+>Werkzeuge mit dem Namen "KDiff" und "KDiff2" (nun heist es "Kompare") gibt es bereits. Ausserdem weist der Name "KDiff3" bereits darauf hin, dass es Zusammenführen kann wie das Programm "diff3" aus der Diff-Tool-Sammlung. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Warum wurde KDiff3 unter der GPL lizenziert? </para
+></question
+><answer
+><para
+>Ich verwende GPL-Programme schon sehr lange und habe viel gelernt indem ich in die Quellen anderer Programme geschaut habe. Dies ist mein "Dankeschön" an alle Programmierer die diesen Weg gegangen sind oder ihn mal so gehen werden. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Einige Knöpfe und Funktionen fehlen. Was ist passiert? </para
+></question
+><answer
+><para
+>Sie haben das Programm aus den Quellen kompiliert und dem configure-Skript vermutlich nicht den richtigen Prefix zu KDE mitgeteilt. In der Voreinstellung installiert configure in /usr/local, aber dann kann KDE die Ressourcen für die Benutzerschnittstellen nicht finden (z. B. kdiff3ui.rc). In der README-Datei finden Sie nähere Informationen zu diesem Thema. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Häufig werden ähnliche, aber nicht identische Zeilen nebeneinander angezeigt, und manchmal nicht. Warum? </para
+></question
+><answer
+><para
+>Wenn nur die Anzahl an "weißen" Zeichen unterschiedlich ist, werden diese Zeilen erstmal als "identisch" behandelt; wenn jedoch auch nur ein "nicht-weißes" Zeichen unterschiedlich ist, wird die Zeile als "nicht identisch" behandelt. If similar lines appear next to each other, this actually is coincidence but this fortunately is often the case. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Warum müssen alle Konflikte gelöst sein, bevor das Ergebnis gespeichert werden kann? </para
+></question
+><answer
+><para
+>Der Editor merkt sich für jeden Unterschied in den Dateien wo er beginnt und wo er endet. Das ist nötig, um einen Konflikt einfach durch das Klicken in den Quelltext und Auswählen des Knopfes A/B/C lösen zu können. Diese wichtige Information geht allerdings verloren, wenn das Ergebnis einfach als Textdatei gespeichert wird und es ist zuviel Aufwand, extra ein eigenes Dateiformat zu entwerfen, das diese Informationen speichern könnte. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Warum hat der Editor im Ergebnisfenster einer Zusammenführung keine "Rückgängig"-Funktion? </para
+></question
+><answer
+><para
+>Der Aufwand dafür war bisher zu groß. Sie können eine bestimmte Version immer durch das Auswählen einer Quelle A/B/C wiederherstellen. Um grössere Mengen an Text zu bearbeiten sollte ein anderer Editor verwendet werden. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Nach dem entfernen von Text ist plötzlich "&lt;No src line&gt;" erschienen und der Text lässt sich nicht löschen. Was bedeutet das und wie kann das entfernt werden? </para
+></question
+><answer
+><para
+>Der Editor merkt sich für jede gleiche und unterschiedliche Sektion wo sie beginnt und wo sie aufhört. "&lt;No src line&gt;" bedeutet, dass in dieser Sektion nichts mehr existiert, nocht nicht mal mehr das Zeichen für den Zeilenvorschub. Soetwas kann beim automatischen Zusammenführen oder beim Editieren passieren und ist kein Problem, denn der Text erscheint nicht in der gespeicherten Datei. Wenn Sie den Originaltext wiederhaben möchten, klicken Sie in die Sektion und wählen die korrekte Quelle A/B/C aus. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Warum unterstützt KDiff3 keine Syntax-Hervorhebung? </para
+></question
+><answer
+><para
+>KDiff3 benutzt bereits viele Farben zum hervorheben von Unterschieden. Noch mehr Hervorhebung wäre verwirrend und verfehlt den Zweck. Benutzen Sie dafür bitte einen anderen Editor. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Wird Ihre Frage hier nicht beantwortet? </para
+></question
+><answer
+><para
+>Bitte senden Sie mir Ihre Frage zu. Ich bin dankbar für jeden Kommentar. </para
+></answer
+></qandaentry>
+
+</qandaset>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Dank und Lizenz</title>
+
+<para
+>&kdiff3; - Ein Programm zum vergleichen und zusammenführen von Dateien und Ordnern </para>
+<para
+>Programm-Copyright 2002-2005 Joachim Eibl <email
+>joachim.eibl at gmx.de</email
+> </para>
+<para
+>Viele gute Ideen und Fehlerberichte kamen von Kollegen und vielen Leuten aus dem "Wild Wild Web". Vielen Dank! </para>
+
+<para
+>Dokumentations-Copyright &copy; 2002-2005 Joachim Eibl <email
+>joachim.eibl at gmx.de</email
+> </para>
+
+<para
+>Deutsche Übersetzung: Thomas Reitelbach <email
+>tr@erdfunkstelle.de</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+<appendix id="installation">
+<title
+>Installation</title>
+
+<sect1 id="getting-kdiff3">
+<title
+>Wie Sie &kdiff3; bekommen können</title>
+
+<para
+>Sie können die neueste Version von KDiff3 von der Homepage <ulink url="http://kdiff3.sourceforge.net"
+>http://kdiff3.sourceforge.net</ulink
+> herunterladen. </para
+><para
+>Kdiff3 gibt es auch für andere Plattformen. Besuchen Sie für Details bitte die Homepage. </para>
+
+
+</sect1>
+
+<sect1 id="requirements">
+<title
+>Voraussetzungen</title>
+
+<para
+>Um alle Funktionen von &kdiff3; nutzen zu können, benötigen Sie &kde; 3.1 oder neuer. </para
+><para
+>Informationen, wie Sie KDiff3 auf anderen Plattformen ohne KDE benutzen können finden Sie auf der <ulink url="http://kdiff3.sourceforge.net"
+>Homepage</ulink
+>. </para
+><para
+>Eine Liste der letzten Änderungen finden Sie unter <ulink url="http://kdiff3.sourceforge.net/ChangeLog"
+>http://kdiff3.sourceforge.net/ChangeLog</ulink
+> oder in der Datei "ChangeLog" im Quell-Paket. </para>
+</sect1>
+
+<sect1 id="compilation">
+<title
+>Kompilieren und Installation</title>
+
+<para
+>Um &kdiff3; auf einem System mit &kde; zu kompilieren und installieren, benutzen Sie folgendes Kommando im Basisordner der &kdiff3;-Distribution:</para>
+
+<screen
+><prompt
+>%</prompt
+> <userinput
+><command
+>./configure --prefix=<replaceable
+>kde-dir</replaceable
+></command
+></userinput>
+<prompt
+>%</prompt
+> <userinput
+><command
+>make</command
+></userinput>
+<prompt
+>%</prompt
+> <userinput
+><command
+>make</command
+> install</userinput
+>
+</screen>
+<para
+><replaceable
+>kde-dir</replaceable
+> gibt den Ordner in Ihrem System an, in dem KDE installiert ist. Wenn Sie unsicher sind, finden Sie weitere Details in der README-Datei. </para>
+<para
+>Da &kdiff3; <command
+>autoconf</command
+> und <command
+>automake</command
+> verwendet, sollten Sie keine Probleme beim Kompilieren haben. Sollten dennoch Schwierigkeiten auftreten, berichten Sie bitte auf den &kde;-Mailinglisten davon.</para>
+
+</sect1>
+
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab
+-->

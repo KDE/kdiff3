@@ -3,9 +3,9 @@
 INCLUDES = $(all_includes)
 
 # these are the headers for your project
-noinst_HEADERS = kdiff3_part.h kdiff3_shell.h                       \
-                 kdiff3.h common.h  diff.h  directorymergewindow.h  \
-                 merger.h optiondialog.h fileaccess.h version.h
+noinst_HEADERS = kdiff3_part.h kdiff3_shell.h kdiff3.h common.h diff.h \
+	directorymergewindow.h merger.h optiondialog.h fileaccess.h version.h \
+	smalldialogs.h difftextwindow.h mergeresultwindow.h
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
@@ -43,11 +43,11 @@ kde_module_LTLIBRARIES = libkdiff3part.la
 
 # the Part's source, library search path, and link libraries
 libkdiff3part_la_SOURCES = kdiff3_part.cpp kdiff3.cpp directorymergewindow.cpp \
-                           merger.cpp pdiff.cpp difftextwindow.cpp diff.cpp \
-                           optiondialog.cpp mergeresultwindow.cpp fileaccess.cpp \
-                           gnudiff_analyze.cpp gnudiff_io.cpp gnudiff_xmalloc.cpp
+		merger.cpp pdiff.cpp difftextwindow.cpp diff.cpp optiondialog.cpp \
+		mergeresultwindow.cpp fileaccess.cpp gnudiff_analyze.cpp gnudiff_io.cpp gnudiff_xmalloc.cpp \
+		common.cpp smalldialogs.cpp
 libkdiff3part_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-libkdiff3part_la_LIBADD  = $(LIB_KPARTS) $(LIB_KFILE)
+libkdiff3part_la_LIBADD = $(LIB_KDEPRINT) $(LIB_KPARTS) $(LIB_KFILE)
 
 # this is where the desktop file will go
 partdesktopdir   = $(kde_servicesdir)

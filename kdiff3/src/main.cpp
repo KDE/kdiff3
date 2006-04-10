@@ -2,8 +2,8 @@
                           main.cpp  -  Where everything starts.
                              -------------------
     begin                : Don Jul 11 12:31:29 CEST 2002
-    copyright            : (C) 2002-2004 by Joachim Eibl
-    email                : joachim.eibl@gmx.de
+    copyright            : (C) 2002-2006 by Joachim Eibl
+    email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
 /***************************************************************************
@@ -19,12 +19,17 @@
 #include <kaboutdata.h>
 #include <klocale.h>
 #include "kdiff3_shell.h"
+#include <kstandarddirs.h>
 #include "version.h"
 #include <qtextcodec.h>
+#include <qfile.h>
+#include <qtextstream.h>
+#include <vector>
 
 #ifdef KREPLACEMENTS_H
 #include "optiondialog.h"
 #endif
+#include "common.h"
 
 static const char *description =
    I18N_NOOP("Tool for Comparison and Merge of Files and Directories");
@@ -45,15 +50,63 @@ static KCmdLineOptions options[] =
   { "L3 alias3",   I18N_NOOP("Visible name replacement for input file 3."), 0 },
   { "L", 0, 0 },
   { "fname alias", I18N_NOOP("Alternative visible name replacement. Supply this once for every input."), 0 },
-  { "u",  I18N_NOOP("Has no effect. For compatibility with certain tools."), 0 },
-#ifdef _WIN32
-  { "query",       I18N_NOOP("For compatibility with certain tools."), 0 },
-#endif
+  { "cs string",   I18N_NOOP("Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\""), 0 },
+  { "confighelp",  I18N_NOOP("Show list of config settings and current values."), 0 },
+  { "config file", I18N_NOOP("Use a different config file."), 0 }
+};
+static KCmdLineOptions options2[] =
+{
   { "+[File1]", I18N_NOOP("file1 to open (base, if not specified via --base)"), 0 },
   { "+[File2]", I18N_NOOP("file2 to open"), 0 },
-  { "+[File3]", I18N_NOOP("file3 to open"), 0 },
-  { 0, 0, 0 }
+  { "+[File3]", I18N_NOOP("file3 to open"), 0 }
 };
+
+
+void initialiseCmdLineArgs(std::vector<KCmdLineOptions>& vOptions, QStringList& ignorableOptions)
+{
+   vOptions.insert( vOptions.end(), options, (KCmdLineOptions*)((char*)options+sizeof(options)));
+   QString configFileName = KStandardDirs().findResource("config","kdiff3rc");
+   QFile configFile( configFileName );
+   if ( configFile.open( IO_ReadOnly ) )
+   {
+      QTextStream ts( &configFile );
+      while(!ts.atEnd())
+      {
+         QString line = ts.readLine();
+         if ( line.startsWith("IgnorableCmdLineOptions=") )
+         {
+            int pos = line.find('=');
+            if (pos>=0)
+            {
+               QString s = line.mid(pos+1);
+               QStringList sl = QStringList::split( '|', s );
+               if (!sl.isEmpty())
+               {
+                  ignorableOptions = QStringList::split( ';', sl.front() );
+                  for (QStringList::iterator i=ignorableOptions.begin(); i!=ignorableOptions.end(); ++i)
+                  {
+                     KCmdLineOptions ignoreOption;
+                     (*i).remove('-');
+                     if (!(*i).isEmpty())
+                     {
+                        ignoreOption.name = (*i).latin1();
+                        ignoreOption.description = I18N_NOOP("Ignored. (User defined.)");
+                        ignoreOption.def = 0;
+                        vOptions.push_back(ignoreOption);
+                     }
+                  }
+               }
+            }
+            break;
+         }
+      }
+   }
+   vOptions.insert(vOptions.end(),options2,(KCmdLineOptions*)((char*)options2+sizeof(options2)));
+
+   KCmdLineOptions last = KCmdLineLastOption;
+   vOptions.push_back(last);
+   KCmdLineArgs::addCmdLineOptions( &vOptions[0] ); // Add our own options.
+}
 
 
 #ifdef _WIN32
@@ -78,22 +131,32 @@ int main(int argc, char *argv[])
    /* KDiff3 can be used as replacement for the text-diff and merge tool provided by
       Clearcase. This is experimental and so far has only been tested under Windows.
 
-      The installation is very simple:
-      1. In the Clearcase "bin"-directory rename "cleardiffmrg.exe" to "cleardiffmrg_orig.exe".
-      2. Copy kdiff3.exe into that "bin"-directory and rename it to "cleardiffmrg.exe".
-         (Also copy the other files that are needed by KDiff3 there.)
-
-      Now when a file comparison or merge is done by Clearcase then of course KDiff3 will be
-      run instead.
-      If the commandline contains the option "-directory" then KDiff3 can't do it but will
-      run "cleardiffmrg_orig.exe" instead.
+      There are two ways to use KDiff3 with clearcase
+      -  The file lib/mgrs/map contains the list of compare/merge tasks on one side and 
+         the tool on the other. Originally this contains only clearcase tools, but you can
+         edit this file and put kdiff3 there instead. (Recommended method)
+      -  Exchange the original program with KDiff3: (Hackish, no fine control)
+         1. In the Clearcase "bin"-directory rename "cleardiffmrg.exe" to "cleardiffmrg_orig.exe".
+         2. Copy kdiff3.exe into that "bin"-directory and rename it to "cleardiffmrg.exe".
+            (Also copy the other files that are needed by KDiff3 there.)
+         Now when a file comparison or merge is done by Clearcase then of course KDiff3 will be
+         run instead.
+         If the commandline contains the option "-directory" then KDiff3 can't do it but will
+         run "cleardiffmrg_orig.exe" instead.
    */
 
-   /* // Write all args into a temporary file. Uncomment this for debugging purposes.
+   // Write all args into a temporary file. Uncomment this for debugging purposes.
+   /*
    FILE* f = fopen("c:\\t.txt","w");
    for(int i=0; i< argc; ++i)
       fprintf(f,"Arg %d: %s\n", i, argv[i]);
+
+   // Call orig cleardiffmrg.exe to see what result it returns.
+   int result=0;
+   result = ::_spawnvp(_P_WAIT , "C:\\Programme\\Rational\\ClearCase\\bin\\cleardiffmrg.exe", argv );
+   fprintf(f,"Result: %d\n", result );
    fclose(f);
+   return result;
    */
 
    // KDiff3 can replace cleardiffmrg from clearcase. But not all functions.
@@ -101,33 +164,35 @@ int main(int argc, char *argv[])
    {
       return ::_spawnvp(_P_WAIT , "cleardiffmrg_orig", argv );      
    }
-   
+
 #endif
-   QApplication::setColorSpec( QApplication::ManyColor ); // Grab all 216 colors
+   //QApplication::setColorSpec( QApplication::ManyColor ); // Grab all 216 colors
 
    KAboutData aboutData( "kdiff3", I18N_NOOP("KDiff3"),
       VERSION, description, KAboutData::License_GPL,
-      "(c) 2002-2005 Joachim Eibl", 0, "http://kdiff3.sourceforge.net/", "joachim.eibl@gmx.de");
-   aboutData.addAuthor("Joachim Eibl",0, "joachim.eibl@gmx.de");
+      "(c) 2002-2005 Joachim Eibl", 0, "http://kdiff3.sourceforge.net/", "joachim.eibl" "@" "gmx.de");
+   aboutData.addAuthor("Joachim Eibl",0, "joachim.eibl" "@" "gmx.de");
    aboutData.addCredit("Eike Sauer", "Bugfixes, Debian package maintainer" );
    aboutData.addCredit("Sebastien Fricker", "Windows installer" );
-   aboutData.addCredit("Stephan Binner", "i18n-help", "binner@kde.org" );
+   aboutData.addCredit("Stephan Binner", "i18n-help", "binner" "@" "kde.org" );
    aboutData.addCredit("Stefan Partheymueller", "Clipboard-patch" );
-   aboutData.addCredit("David Faure", "KIO-Help", "faure@kde.org" );
+   aboutData.addCredit("David Faure", "KIO-Help", "faure" "@" "kde.org" );
    aboutData.addCredit("Bernd Gehrmann", "Class CvsIgnoreList from Cervisia" );
    aboutData.addCredit("Andre Woebbeking", "Class StringMatcher" );
    aboutData.addCredit("Michael Denio", "Directory Equality-Coloring patch");
    aboutData.addCredit("Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower", "GNU-Diffutils");
    aboutData.addCredit(I18N_NOOP("+ Many thanks to those who reported bugs and contributed ideas!"));
-   
-   
+
    KCmdLineArgs::init( argc, argv, &aboutData );
-   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
+   std::vector<KCmdLineOptions> vOptions;
+   QStringList ignorableOptions;
+   initialiseCmdLineArgs(vOptions, ignorableOptions);
 
    KApplication app;
+
 #ifdef KREPLACEMENTS_H
    QString locale;
-   
+
    locale = app.config()->readEntry("Language", "Auto");
    int spacePos = locale.find(' ');
    if (spacePos>0) locale = locale.left(spacePos);
@@ -156,7 +221,8 @@ int main(int argc, char *argv[])
      new KDiff3Shell();
   }
 
-  return app.exec();
+  int retVal = app.exec();
+  return retVal;
 }
 
 // Suppress warning with --enable-final

@@ -3,7 +3,7 @@
                              -------------------
     begin                : Don Jul 11 12:31:29 CEST 2002
     copyright            : (C) 2002-2004 by Joachim Eibl
-    email                : joachim.eibl@gmx.de
+    email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
 /***************************************************************************
@@ -41,6 +41,11 @@
 // forward declaration of the KDiff3 classes
 class OptionDialog;
 class FindDialog;
+class ManualDiffHelpDialog;
+class DiffTextWindow;
+class DiffTextWindowFrame;
+class MergeResultWindow;
+class Overview;
 
 class QScrollBar;
 class QComboBox;
@@ -92,7 +97,7 @@ class KDiff3App : public QSplitter
   Q_OBJECT
 
   public:
-    /** construtor of KDiff3App, calls all init functions to create the application.
+    /** constructor of KDiff3App, calls all init functions to create the application.
      */
     KDiff3App( QWidget* parent, const char* name, KDiff3Part* pKDiff3Part );
     ~KDiff3App();
@@ -110,7 +115,7 @@ class KDiff3App : public QSplitter
     void readOptions( KConfig* );
 
     // Finish initialisation (virtual, so that it can be called from the shell too.)
-    virtual void completeInit();
+    virtual void completeInit(const QString& fn1="", const QString& fn2="", const QString& fn3="");
 
     /** queryClose is called by KMainWindow on each closeEvent of a window. Against the
      * default implementation (only returns true), this calles saveModified() on the document object to ask if the document shall
@@ -119,7 +124,10 @@ class KDiff3App : public QSplitter
      * @see KMainWindow#closeEvent
      */
     virtual bool queryClose();
+    virtual bool isFileSaved();
 
+  signals:
+     void createNewInstance( const QString& fn1, const QString& fn2, const QString& fn3 );
   protected:
     void initDirectoryMergeActions();
     /** sets up the statusbar for the main window by initialzing a statuslabel. */
@@ -135,10 +143,14 @@ class KDiff3App : public QSplitter
     void slotFileOpen2( QString fn1, QString fn2, QString fn3, QString ofn,
                         QString an1, QString an2, QString an3, TotalDiffStatus* pTotalDiffStatus );
 
+    void slotFileNameChanged(const QString& fileName, int winIdx);
+
     /** save a document */
     void slotFileSave();
     /** save a document by a new filename*/
     void slotFileSaveAs();
+
+    void slotFilePrint();
 
     /** closes all open windows by calling close() on each memberList item until the list is empty, then quits the application.
      * If queryClose() returns false because the user canceled the saveModified() dialog, the closing breaks.
@@ -173,11 +185,13 @@ class KDiff3App : public QSplitter
     KAction* fileOpen;
     KAction* fileSave;
     KAction* fileSaveAs;
+    KAction* filePrint;
     KAction* fileQuit;
     KAction* fileReload;
     KAction* editCut;
     KAction* editCopy;
     KAction* editPaste;
+    KAction* editSelectAll;
     KToggleAction* viewToolBar;
     KToggleAction* viewStatusBar;
 
@@ -200,6 +214,10 @@ class KDiff3App : public QSplitter
     KToggleAction *chooseC;
     KToggleAction *autoAdvance;
     KToggleAction *wordWrap;
+    KAction* splitDiff;
+    KAction* joinDiffs;
+    KAction* addManualDiffHelp;
+    KAction* clearManualDiffHelpList;
     KToggleAction *showWhiteSpaceCharacters;
     KToggleAction *showWhiteSpace;
     KToggleAction *showLineNumbers;
@@ -212,8 +230,10 @@ class KDiff3App : public QSplitter
     KAction* chooseAForUnsolvedWhiteSpaceConflicts;
     KAction* chooseBForUnsolvedWhiteSpaceConflicts;
     KAction* chooseCForUnsolvedWhiteSpaceConflicts;
-    KAction *autoSolve;
-    KAction *unsolve;
+    KAction* autoSolve;
+    KAction* unsolve;
+    KAction* mergeHistory;
+    KAction* mergeRegExp;
     KToggleAction *showWindowA;
     KToggleAction *showWindowB;
     KToggleAction *showWindowC;
@@ -231,8 +251,8 @@ class KDiff3App : public QSplitter
     QPopupMenu* m_pMergeEditorPopupMenu;
 
     QSplitter*  m_pMainSplitter;
-    QFrame*     m_pMainWidget;
-    QFrame*     m_pMergeWindowFrame;
+    QWidget*    m_pMainWidget;
+    QWidget*    m_pMergeWindowFrame;
     ReversibleScrollBar* m_pHScrollBar;
     QScrollBar* m_pDiffVScrollBar;
     QScrollBar* m_pMergeVScrollBar;
@@ -240,6 +260,9 @@ class KDiff3App : public QSplitter
     DiffTextWindow* m_pDiffTextWindow1;
     DiffTextWindow* m_pDiffTextWindow2;
     DiffTextWindow* m_pDiffTextWindow3;
+    DiffTextWindowFrame* m_pDiffTextWindowFrame1;
+    DiffTextWindowFrame* m_pDiffTextWindowFrame2;
+    DiffTextWindowFrame* m_pDiffTextWindowFrame3;
     QSplitter* m_pDiffWindowSplitter;
 
     MergeResultWindow* m_pMergeResultWindow;
@@ -267,25 +290,30 @@ class KDiff3App : public QSplitter
    DiffList m_diffList23;
    DiffList m_diffList13;
 
+   DiffBufferInfo m_diffBufferInfo;
    Diff3LineList m_diff3LineList;
    Diff3LineVector m_diff3LineVector;
+   //ManualDiffHelpDialog* m_pManualDiffHelpDialog;
+   ManualDiffHelpList m_manualDiffHelpList;
 
    int m_neededLines;
    int m_maxWidth;
    int m_DTWHeight;
    bool m_bOutputModified;
+   bool m_bFileSaved;
    bool m_bTimerBlock;      // Synchronisation
 
    OptionDialog* m_pOptionDialog;
    FindDialog*   m_pFindDialog;
 
-   void init( bool bAuto=false, TotalDiffStatus* pTotalDiffStatus=0 );
+   void init( bool bAuto=false, TotalDiffStatus* pTotalDiffStatus=0, bool bLoadFiles=true );
 
    virtual bool eventFilter( QObject* o, QEvent* e );
    virtual void resizeEvent(QResizeEvent*);
 
-   bool improveFilenames();
+   bool improveFilenames(bool bCreateNewInstance);
 
+   bool runDiff( const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList, int winIdx1, int winIdx2 );
    bool runDiff( const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList );
    bool canContinue();
 
@@ -297,11 +325,12 @@ class KDiff3App : public QSplitter
    KDiff3Part*        m_pKDiff3Part;
    KParts::MainWindow*       m_pKDiff3Shell;
    bool m_bAuto;
+   void recalcWordWrap(int nofVisibleColumns=-1);
 
 public slots:
    void resizeDiffTextWindow(int newWidth, int newHeight);
    void resizeMergeResultWindow();
-   void recalcWordWrap();
+   void slotRecalcWordWrap();
 
    void showPopupMenu( const QPoint& point );
 
@@ -314,6 +343,7 @@ public slots:
    void slotDirViewToggle();
 
    void slotUpdateAvailabilities();
+   void slotEditSelectAll();
    void slotEditFind();
    void slotEditFindNext();
    void slotGoCurrent();
@@ -330,6 +360,8 @@ public slots:
    void slotChooseC();
    void slotAutoSolve();
    void slotUnsolve();
+   void slotMergeHistory();
+   void slotRegExpAutoMerge();
    void slotChooseAEverywhere();
    void slotChooseBEverywhere();
    void slotChooseCEverywhere();
@@ -364,63 +396,12 @@ public slots:
    void slotOverviewAB();
    void slotOverviewAC();
    void slotOverviewBC();
+   void slotSplitDiff();
+   void slotJoinDiffs();
+   void slotAddManualDiffHelp();
+   void slotClearManualDiffHelpList();
+
+   void slotNoRelevantChangesDetected();
 };
 
-
-class OpenDialog : public QDialog
-{
-   Q_OBJECT
-public:
-   OpenDialog(
-      QWidget* pParent, const QString& n1, const QString& n2, const QString& n3,
-      bool bMerge, const QString& outputName, const char* slotConfigure, OptionDialog* pOptions  );
-
-   QComboBox* m_lineA;
-   QComboBox* m_lineB;
-   QComboBox* m_lineC;
-   QComboBox* m_lineOut;
-
-   QCheckBox* m_pMerge;
-   virtual void accept();
-   virtual bool eventFilter(QObject* o, QEvent* e);
-private:
-   OptionDialog* m_pOptions;
-   void selectURL( QComboBox* pLine, bool bDir, int i, bool bSave );
-   bool m_bInputFileNameChanged;
-private slots:
-   void selectFileA();
-   void selectFileB();
-   void selectFileC();
-   void selectDirA();
-   void selectDirB();
-   void selectDirC();
-   void selectOutputName();
-   void selectOutputDir();
-   void internalSlot(int);
-   void inputFilenameChanged();
-signals:
-   void internalSignal(bool);
-};
-
-class FindDialog : public QDialog
-{
-   Q_OBJECT
-public:
-   FindDialog(QWidget* pParent);
-   
-signals:
-   void findNext();
-
-public:
-   QLineEdit* m_pSearchString;
-   QCheckBox* m_pSearchInA;
-   QCheckBox* m_pSearchInB;
-   QCheckBox* m_pSearchInC;
-   QCheckBox* m_pSearchInOutput;
-   QCheckBox* m_pCaseSensitive;
-
-   int currentLine;
-   int currentPos;
-   int currentWindow;
-};
 #endif // KDIFF3_H

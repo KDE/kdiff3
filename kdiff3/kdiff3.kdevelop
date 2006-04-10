@@ -3,7 +3,7 @@
   <general>
     <author>Joachim Eibl</author>
     <email>joachim@gmx.de</email>
-    <version>0.9.87</version>
+    <version>0.9.88</version>
     <projectmanagement>KDevKDEAutoProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <keywords>
@@ -24,13 +24,15 @@
       <useconfiguration>debug</useconfiguration>
     </general>
     <run>
-      <mainprogram>src/kdiff3</mainprogram>
+      <mainprogram/>
       <directoryradio>executable</directoryradio>
       <customdirectory>/</customdirectory>
       <programargs/>
-      <terminal>false</terminal>
+      <terminal>true</terminal>
       <autocompile>true</autocompile>
-      <envvars/>
+      <envvars>
+        <envvar value="/home/joachim/kdiff3-0.9.89/debug/src/.libs/libkdiff3part.so" name="LD_PRELOAD" />
+      </envvars>
     </run>
     <configurations>
       <optimized>
@@ -41,7 +43,7 @@
         <cxxflags>-O2 -g0</cxxflags>
       </optimized>
       <debug>
-        <configargs>--enable-debug=full --prefix=/opt/kdecvs</configargs>
+        <configargs>--enable-debug=full --prefix=/opt/kde3</configargs>
         <builddir>debug</builddir>
         <ccompiler>kdevgccoptions</ccompiler>
         <cxxcompiler>kdevgppoptions</cxxcompiler>
@@ -106,7 +108,7 @@
   <kdevdebugger>
     <general>
       <dbgshell>libtool</dbgshell>
-      <programargs>/windows/C/qt/kdiff3-0.9.87/src/ /home/joachim/kdiff3-0.9.87/src</programargs>
+      <programargs/>
       <gdbpath/>
       <configGdbScript/>
       <runShellScript/>
@@ -153,10 +155,20 @@
       <automaticHeaderCompletion>true</automaticHeaderCompletion>
       <headerCompletionDelay>250</headerCompletionDelay>
     </codecompletion>
-    <references>
-      <pcs>KDElibs</pcs>
-      <pcs>Qt</pcs>
-    </references>
+    <references/>
+    <creategettersetter>
+      <prefixGet/>
+      <prefixSet>set</prefixSet>
+      <prefixVariable>m_,_</prefixVariable>
+      <parameterName>theValue</parameterName>
+      <inlineGet>true</inlineGet>
+      <inlineSet>true</inlineSet>
+    </creategettersetter>
+    <qt>
+      <used>false</used>
+      <version>3</version>
+      <root>/usr/lib/qt3</root>
+    </qt>
   </kdevcppsupport>
   <cppsupportpart>
     <filetemplates>
@@ -164,4 +176,11 @@
       <implementationsuffix>.cpp</implementationsuffix>
     </filetemplates>
   </cppsupportpart>
+  <kdevdocumentation>
+    <projectdoc>
+      <docsystem/>
+      <docurl/>
+      <usermanualurl/>
+    </projectdoc>
+  </kdevdocumentation>
 </kdevelop>

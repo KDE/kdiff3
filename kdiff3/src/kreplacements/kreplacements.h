@@ -2,8 +2,8 @@
                           kreplacements.h  -  description
                              -------------------
     begin                : Sat Aug 3 2002
-    copyright            : (C) 2002 by Joachim Eibl
-    email                : joachim.eibl@gmx.de
+    copyright            : (C) 2002-2006 by Joachim Eibl
+    email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
 /***************************************************************************
@@ -18,6 +18,8 @@
 #ifndef KREPLACEMENTS_H
 #define KREPLACEMENTS_H
 
+#include "common.h"
+
 #include <qobject.h>
 #include <qtabdialog.h>
 #include <qmainwindow.h>
@@ -31,6 +33,7 @@
 #include <qprogressbar.h>
 #include <qpopupmenu.h>
 #include <qstringlist.h>
+#include <qprinter.h>
 
 #include <map>
 #include <list>
@@ -125,6 +128,10 @@ public:
    static KURL getExistingURL( const QString &  startDir = QString::null,
                                QWidget *  parent = 0,
                                const QString &  caption = QString::null );
+   static QString getSaveFileName (const QString &startDir=QString::null, 
+                                   const QString &filter=QString::null, 
+                                   QWidget *parent=0, 
+                                   const QString &caption=QString::null);
 };
 
 typedef QStatusBar KStatusBar;
@@ -168,10 +175,8 @@ private:
    KStatusBar m_statusBar;
    KActionCollection m_actionCollection;
 protected:
-   void closeEvent(QCloseEvent* e);
    virtual bool queryClose() = 0;
    virtual bool queryExit() = 0;
-   bool event( QEvent* e );
 public:
    QPopupMenu* fileMenu;
    QPopupMenu* editMenu;
@@ -195,38 +200,19 @@ public:
 
    QList<KMainWindow>* memberList;
 public slots:
-   void quit();
    void slotHelp();
    void slotAbout();
 };
 
-class KConfig
+class KConfig : public ValueMap
 {
    QString m_fileName;
-   std::map<QString,QString> m_map;
 public:
    KConfig();
    ~KConfig();
+   void readConfigFile(const QString& configFileName);
 
    void setGroup(const QString&);
-
-   void writeEntry(const QString&, const QFont& );
-   void writeEntry(const QString&, const QColor& );
-   void writeEntry(const QString&, const QSize& );
-   void writeEntry(const QString&, const QPoint& );
-   void writeEntry(const QString&, int );
-   void writeEntry(const QString&, bool );
-   void writeEntry(const QString&, const QStringList&, char separator );
-   void writeEntry(const QString&, const QString& );
-
-   QFont readFontEntry(const QString&, QFont* defaultVal );
-   QColor readColorEntry(const QString&, QColor* defaultVal );
-   QSize readSizeEntry(const QString& );
-   QPoint readPointEntry(const QString& );
-   bool readBoolEntry(const QString&, bool bDefault );
-   int readNumEntry(const QString&, int iDefault );
-   QStringList readListEntry(const QString&, char separator );
-   QString readEntry(const QString&, const QString& );
 };
 
 class KAction : public QAction
@@ -258,14 +244,17 @@ public:
    static KAction* open( QWidget* parent, const char* slot, KActionCollection* );
    static KAction* save( QWidget* parent, const char* slot, KActionCollection* );
    static KAction* saveAs( QWidget* parent, const char* slot, KActionCollection* );
+   static KAction* print( QWidget* parent, const char* slot, KActionCollection* );
    static KAction* quit( QWidget* parent, const char* slot, KActionCollection* );
    static KAction* cut( QWidget* parent, const char* slot, KActionCollection* );
    static KAction* copy( QWidget* parent, const char* slot, KActionCollection* );
    static KAction* paste( QWidget* parent, const char* slot, KActionCollection* );
+   static KAction* selectAll( QWidget* parent, const char* slot, KActionCollection* );
    static KToggleAction* showToolbar( QWidget* parent, const char* slot, KActionCollection* );
    static KToggleAction* showStatusbar( QWidget* parent, const char* slot, KActionCollection* );
    static KAction* preferences( QWidget* parent, const char* slot, KActionCollection* );
    static KAction* about( QWidget* parent, const char* slot, KActionCollection* );
+   static KAction* aboutQt( KActionCollection* );
    static KAction* help( QWidget* parent, const char* slot, KActionCollection* );
    static KAction* find( QWidget* parent, const char* slot, KActionCollection* );
    static KAction* findNext( QWidget* parent, const char* slot, KActionCollection* );
@@ -306,13 +295,30 @@ public slots:
    void slotClicked();
 };
 
-struct KCmdLineOptions
+class KPrinter : public QPrinter
 {
-   const char* shortName;
-   const char* longName;
-   int whatever;
+public:
+   KPrinter();
+   enum e_PageSelection {ApplicationSide};
+   QValueList<int> pageList();
+   void setCurrentPage(int);
+   void setPageSelection(e_PageSelection);
 };
 
+class KStandardDirs
+{
+public:
+   QString findResource(const QString& resource, const QString& appName);
+};   
+
+struct KCmdLineOptions
+{
+   const char* name;
+   const char* description;
+   int def;
+};
+
+#define KCmdLineLastOption {0,0,0}
 
 class KAboutData
 {

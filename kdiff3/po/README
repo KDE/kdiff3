@@ -45,6 +45,7 @@ The translation-table is created in 3 steps:
    xgettext --keyword=i18n --keyword=I18N_NOOP -C -o ../po/kdiff3.pot *.cpp *.h 
    
    It contains all translatable strings of the program, but no translations.
+   (xgettext is usually part of package gettext-devel)
    
 2. Translators create a translation for a specific language. Because we don't want 
    to modify the template now, we'll create a copy for each language.
@@ -66,18 +67,15 @@ the other docs on that site.
    
 The following is for my own memory and for those who really want to learn dirty tricks and details:
    
-The KDE-i18n team stores their results in CVS. But I would like to have an independent 
+The KDE-i18n team stores their results in SVN. But I would like to have an independent 
 copy of all translations in the po-directory of the source package. Actually it's just
 copying and renaming, but simplified with these commands:
 
-1. First checkout all available translations from the CVS-repository
-   cvs co kde-i18n/subdirs
-   for i in `cat kde-i18n/subdirs`; do  cvs co kde-i18n/$i/messages/kdeextragear-1/kdiff3.po; done
-   
-2. Copy and rename them as needed:
-   for i in `cat kde-i18n/subdirs`; do  cp kde-i18n/$i/messages/kdeextragear-1/kdiff3.po $i.po; done
-   rm -R kde-i18n
 
+First fetch all available translations from the SVN-repository (access via websvn and wget)
+   wget http://websvn.kde.org/*checkout*/trunk/l10n/subdirs
+   for i in `cat subdirs`; do wget http://websvn.kde.org/*checkout*/trunk/l10n/$i/messages/extragear-utils/kdiff3.po -O $i.po; done
+   
    
 This was the explanation for translations within KDE. 
 But KDiff3 can also be compiled and run without KDE:
@@ -92,8 +90,8 @@ For Qt-strings in $QTDIR/translations (already as .qm-files)
 
 For KDE-libs in the CVS-repository, where we can reuse the previous trick to get 
 all kdelibs*.po-files:
-   for i in `cat kde-i18n/subdirs`; do cvs co kde-i18n/$i/messages/kdelibs/kdelibs.po; done
-   for i in `cat kde-i18n/subdirs`; do cp kde-i18n/$i/messages/kdelibs/kdelibs.po kdelibs_$i.po; done
+
+   for i in `cat subdirs`; do wget http://websvn.kde.org/*checkout*/trunk/l10n/$i/messages/kdelibs/kdelibs.po -O kdelibs_$i.po; done
    
 Finally the program must only read the correct translation tables:
 
@@ -119,6 +117,7 @@ about how to extract only the needed strings and to create the qm-files.
 1. Only src/kreplacements/kreplacements.cpp contains strings, that were not covered by 
    the normal translations. Hence a special pot-file is needed.
    xgettext --keyword=i18n --keyword=I18N_NOOP -C ../src/kreplacements/kreplacements.cpp -o kreplacements.pot
+   (xgettext is usually part of package gettext-devel)
    
 2. Take only needed strings and translations from kdelibs*.po:
    msgmerge --no-fuzzy-matching kdelibs_de.po kreplacements.pot >kreplacements_de.po

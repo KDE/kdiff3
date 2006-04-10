@@ -19,7 +19,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; see the file COPYING.
    If not, write to the Free Software Foundation,
-   59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+   51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 /* The basic algorithm is described in:
    "An O(ND) Difference Algorithm and its Variations", Eugene Myers,
@@ -792,13 +792,6 @@ GnuDiff::change* GnuDiff::build_script (struct file_data const filevec[])
 
 
 /* Report the differences of two files.  */
-// WARNING:
-//  This algorithm has one big problem: It must have a line end character
-//  at the end of the last line, even if there is none in the file.
-//  Because of this the algorithm first places a line end character there
-//  which means that the input data can't be const and some extra bytes of memory 
-//  must be allocated in advance for this purpose. This is very dangerous, because
-//  easy to forget.
 GnuDiff::change* GnuDiff::diff_2_files (struct comparison *cmp)
 {
   lin diags;
@@ -859,12 +852,9 @@ GnuDiff::change* GnuDiff::diff_2_files (struct comparison *cmp)
       shift_boundaries (cmp->file);
 
       /* Get the results of comparison in the form of a chain
-	 of `struct change's -- an edit script.  */
+         of `struct change's -- an edit script.  */
 
-      if (output_style == OUTPUT_ED)
-	script = build_reverse_script (cmp->file);
-      else
-	script = build_script (cmp->file);
+      script = build_script (cmp->file);
 
       changes = (script != 0);
 
@@ -881,50 +871,3 @@ GnuDiff::change* GnuDiff::diff_2_files (struct comparison *cmp)
 
   return script;
 }
-
-/* Compare two lines (typically one from each input file)
-   according to the command line options.
-   For efficiency, this is invoked only when the lines do not match exactly
-   but an option like -i might cause us to ignore the difference.
-   Return nonzero if the lines differ.  */
-
-bool
-GnuDiff::lines_differ (const QChar *s1, const QChar *s2)
-{
-  const QChar *t1 = s1;
-  const QChar *t2 = s2;
-
-  while (1)
-    {
-      QChar c1 = *t1++;
-      QChar c2 = *t2++;
-
-      /* Test for exact char equality first, since it's a common case.  */
-      if (c1 != c2)
-	{
-          while ( bIgnoreWhiteSpace && isWhite( c1 )  ||
-                  bIgnoreNumbers    && (c1.isDigit() || c1=='-' || c1=='.' ))
-             c1 = *t1++;
-
-          while ( bIgnoreWhiteSpace && isWhite( c2 )  ||
-                  bIgnoreNumbers    && (c2.isDigit() || c2=='-' || c2=='.' ))
-             c2 = *t2++;
-
-	  /* Lowercase all letters if -i is specified.  */
-
-	  if (ignore_case)
-	    {
-	      c1 = c1.lower();
-              c2 = c2.lower();
-	    }
-
-	  if (c1 != c2)
-	    break;
-	}
-      if (c1 == '\n')
-	return 0;
-    }
-
-  return 1;
-}
-

@@ -27,17 +27,17 @@ as Authors, publish date, the abstract, and Keywords -->
 > <affiliation
 ><address
 > <email
->joachim.eibl@gmx.de</email>
+>joachim.eibl snabela gmx.de</email>
 </address
 ></affiliation>
 </author>
 </authorgroup>
 
-<othercredit role="translator"><firstname>Erik Kjær</firstname><surname>Pedersen</surname><affiliation><address><email>erik@binghamton.edu</email></address></affiliation><contrib>Oversætter</contrib></othercredit>
+&erik.kjaer.pedersen.role; 
 
 <copyright>
 <year
->2002-2003</year>
+>2002-2006</year>
 <holder
 >Joachim Eibl</holder>
 </copyright>
@@ -55,16 +55,16 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date
->2003-12-07</date>
+>2006-03-12</date>
 <releaseinfo
->0.9.80</releaseinfo>
+>0.9.89</releaseinfo>
 
 
 <abstract>
 <para
 ></para>
 <para
->&kdiff3; er et værktøj til sammenligning og sammenfletning af filer og mapper, som: <itemizedlist>
+>&kdiff3; er et værktøj til sammenligning og sammenfletning af filer og mapper, som <itemizedlist>
 <listitem
 ><para
 >sammenligner og fletter to eller tre tekst-inddatafiler eller mapper sammen,</para
@@ -87,12 +87,24 @@ Do NOT change these in the translation. -->
 ></listitem>
 <listitem
 ><para
->har valgmuligheder til at fremhæve eller skjule ændringer i blanke tegn eller kommentarer.</para
+>har valgmuligheder til at fremhæve eller skjule ændringer i blanke tegn eller kommentarer,</para
+></listitem>
+<listitem
+><para
+>understøtter Unicode, UTF-8 og andre tegnsæt,</para
+></listitem>
+<listitem
+><para
+>udskriver forskelle,</para
+></listitem>
+<listitem
+><para
+>understøtter versionshåndteringsnøgleord og historiksammenfletning.</para
 ></listitem>
 </itemizedlist>
 </para
 ><para
->Dette dokument beskriver KDiff3 version 0.9.80. </para>
+>Dette dokument beskriver Kdiff3 version 0.9.98. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -151,9 +163,9 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Endnu en sammenligningsgrænseflade?</title>
 <para
->Der findes flere grafiske sammenligningsværktøjer. Hvorfor skal du vælge KDiff3? Lad mig fortælle dig hvorfor jeg skrev det. </para
+>Der eksisterer flere grafiske sammenligningsværktøjer. Hvorfor skal du vælge &kdiff3;? Lad mig fortælle dig hvorfor jeg skrev det. </para
 ><para
->KDiff3 blev påbegyndt fordi jeg var tvunget til at lave en svær sammenfletning. At sammensætte er nødvendigt når flere personer arbejder med samme fil i et projekt. En sammenfletning kan være delvis automatiseret, når sammenfletningsværktøjet ikke kun har adgang til de nye ændrede filer (som kaldes "grene"), men også originalfilen (som kaldes "basis"). Sammenfletningsværktøjet vælger automatisk en ændring som kun er udført i en gren. Når flere bidragydere ændrer samme linjer, detekterer sammenfletningsværktøjet en konflikt som skal løses manuelt. </para
+>&kdiff3; blev påbegyndt fordi jeg var tvunget til at lave en svær sammenfletning. At sammensætte er nødvendigt når flere personer arbejder med samme fil i et projekt. En sammenfletning kan være delvis automatiseret, når sammenfletningsværktøjet ikke kun har adgang til de nye ændrede filer (som kaldes "grene"), men også originalfilen (som kaldes "basis"). Sammenfletningsværktøjet vælger automatisk en ændring som kun er udført i en gren. Når flere bidragydere ændrer samme linjer, detekterer sammenfletningsværktøjet en konflikt som skal løses manuelt. </para
 ><para
 >Sammenfletningen var svær eftersom en bidragyder havde ændret meget og rettet indrykningen mange steder. Den anden bidragydere havde også ændret meget tekst i samme fil, hvilket forårsagede flere konflikter ved sammenfletningen. </para
 ><para
@@ -165,7 +177,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >En funktion som krævede en stor anstrengelse var funktionen for mappesammenligning og sammenfletning, som gjorde programmet til en næsten fuldstændig filsøger. </para
 ><para
->Jeg håber at KDiff3 også virker for dig. Hav det sjovt! </para
+>Jeg håber at &kdiff3; også virker for dig. Hav det sjovt! </para
 ><para
 >Joachim Eibl (2003) </para>
 </sect1>
@@ -176,7 +188,7 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >Dette skærmaftryk viser forskellen mellem to tekstfiler</para>
 <para
->(Med en tidlig version af KDiff3):</para>
+>(Med en tidlig version af &kdiff3;):</para>
 <screenshot
 ><mediaobject>
    <imageobject
@@ -185,7 +197,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></screenshot>
 
 <para
->Trevejssammenfletning understøttes fuldstændigt. Det er nyttigt hvis to personer ændrer kode uafhængig af hinanden. Originalfilen (basen) bruges til at hjælpe KDiff3 med automatisk at vælge de rigtige ændringer. Editoren for sammenfletning under sammenligningsvinduerne lader dig løse konflikter, mens den viser dig hvilken udskrift du får. Du kan til og med redigere udskriften. Dette skærmaftryk viser tre inddatafiler som sammensættes: </para
+>Trevejs sammenfletning understøttes fuldstændigt. Dette er nyttigt hvis to personer ændrer kode uafhængig af hinanden. Originalfilen (basen) bruges til  at hjælpe Kdiff3 med automatisk at vælge de rigtige ændringer. Sammenfletningseditoren under diff-vinduerne lader dig løse konflikter, mens uddata du vil få vises. Skærmbilledet viser tre inddatafiler som er ved at blive flettet sammen: </para
 ><para>
 <screenshot
 ><mediaobject>
@@ -196,7 +208,7 @@ Please at least include KDE, the KDE package it is in, the name
 </para>
 
 <para id="dirmergebigscreenshot"
->KDiff3 hjælper dig også med at sammenligne og sammenflette hele mapper. Dette skærmaftryk viser KDiff3 under en mappesammenfletning: </para
+>&kdiff3; hjælper dig også med at sammenligne og sammenflette hele mapper. Dette skærmaftryk viser &kdiff3; under en mappesammenfletning: </para
 ><para>
 <screenshot
 ><mediaobject>
@@ -214,7 +226,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Linje-for-linje og tegn-for-tegn sammenligningsvisning</title>
 <para
->Ved at bruge mulighederne en grafisk farveskærm har, viser KDiff3 nøjagtigt hvad forskellene er. Når du skal lave mange kodegennemgange, vil du kunne lide dette. </para>
+>Ved at bruge mulighederne en grafisk farveskærm har, viser &kdiff3; nøjagtigt hvad forskellene er. Når du skal lave mange kodegennemgange, vil du kunne lide dette. </para>
 <screenshot
 ><mediaobject>
    <imageobject
@@ -257,7 +269,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Bekvem sammenfletning af to eller tre inddatafiler</title>
 <para
->KDiff3 kan bruges til at sammenflette to eller tre inddatafiler og sammenfletter automatisk så meget som muligt. Resultatet vises i et redigerbart vindue hvor de fleste konflikter kan løses med et enkelt museklik. Vælg knapperne A/B/C i værktøjslinjen for at vælge kilden som skal bruges. Du kan også vælge mere end en kilde. Eftersom udskriftsvinduet er en editor, kan til og med konflikter som behøver yderligere korrigering løses her uden at kræve et andet værktøj. </para>
+>&kdiff3; kan bruges til at sammenflette to eller tre inddatafiler og sammenfletter automatisk så meget som muligt. Resultatet vises i et redigerbart vindue hvor de fleste konflikter kan løses med et enkelt museklik. Vælg knapperne A/B/C i værktøjslinjen for at vælge kilden som skal bruges. Du kan også vælge mere end en kilde. Eftersom udskriftsvinduet er en editor, kan til og med konflikter som behøver yderligere korrigering løses her uden at kræve et andet værktøj. </para>
 </sect2>
 
 <sect2
@@ -298,7 +310,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
    <listitem
 ><para
->Søg efter strenge i alle tekstvinduer. Søg (Ctrl+F) og Søg igen (F3).</para
+>Søg efter strenge i alle tekstvinduer. Find (Ctrl-F) og Find næste (F3).</para
 ></listitem>
    <listitem
 ><para
@@ -318,6 +330,18 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
    <listitem
 ><para
+>Tekstombrydning af lange linjer.</para
+></listitem>
+   <listitem
+><para
+>Støtte for Unicode, UTF-8 og andre kodninger.</para
+></listitem>
+   <listitem
+><para
+>Støtte for sprog som læses fra højre til venstre.</para
+></listitem>
+   <listitem
+><para
 >...</para
 ></listitem>
 </itemizedlist>
@@ -327,7 +351,7 @@ Please at least include KDE, the KDE package it is in, the name
 
 <chapter id="documentation"
 ><title
->Dokumentation af filsammenligning og fletning</title>
+>Filsammenligning og fletning</title>
 
 <sect1 id="commandline"
 ><title
@@ -354,7 +378,7 @@ Please at least include KDE, the KDE package it is in, the name
 > <replaceable
 >fil1 fil2</replaceable
 > -m
-   <command
+<command
 >kdiff3</command
 > <replaceable
 >fil1 fil2</replaceable
@@ -385,11 +409,11 @@ Please at least include KDE, the KDE package it is in, the name
 > <replaceable
 >fil1 fil2 fil3</replaceable
 > -m
-   <command
+<command
 >kdiff3</command
 > <replaceable
 >fil1 fil2 fil3</replaceable
-> -o <replaceable
+>-o <replaceable
 >uddatafil</replaceable
 >
 </screen>
@@ -407,7 +431,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Specialtilfælde: Filer med samme navn </title>
 <para
->Hvis alle filer har samme navn men er i forskellige mapper, kan du reducere hvor meget du skal skrive ved kun at angive filnavnet for den første fil. F.eks.: </para>
+>Hvis alle filer har samme navn men er i forskellige mapper, kan du reducere hvor meget du skal skrive ved kun at angive filnavnet for den første fil. &eg;: </para>
 <screen
 ><command
 >kdiff3</command
@@ -427,22 +451,22 @@ Please at least include KDE, the KDE package it is in, the name
 >kdiff3</command
 > <replaceable
 >kat1 kat2</replaceable>
-   <command
+<command
 >kdiff3</command
 > <replaceable
 >kat1 kat2</replaceable
 > -o <replaceable
 >målkat</replaceable>
-   <command
+<command
 >kdiff3</command
 > <replaceable
 >kat1 kat2 kat3</replaceable>
-   <command
+<command
 >kdiff3</command
 > <replaceable
 >kat1 kat2 kat3</replaceable
-> -o <replaceable
->målmappe</replaceable
+>-o <replaceable
+>målkat</replaceable
 >
 </screen>
 <para
@@ -453,12 +477,67 @@ Please at least include KDE, the KDE package it is in, the name
 
 <sect2
 ><title
->For mere information om kommandolinjeflag bruges: </title>
+>Andre kommandolinjeflag</title>
+<para
+>For at se alle tilgængelige kommandolinjeflag, skriv</para>
 <screen
 ><command
 >kdiff3</command
 > --help
 </screen>
+<para
+>Eksempeluddata:</para>
+<screen
+>Vælgare:
+  -m, --merge               Sammenflet inddata.
+  -b, --base file           Eksplicit basisfil. For at virke sammen med visse værktøjer.
+  -o, --output file         Uddatafil. Betyder underforstået -m. F.eks.: -o ny_fil.txt
+  --out file                Uddatafil, igen. (for at virke med visse værktøjer.)
+  --auto                    Ingen grafisk grænseflade hvis alle konflikter kan løses automatisk (kræver -o fil)
+  --qall                    Løs ikke konflikter automatisk. (For at virke med andre værktøjer...)
+  --L1 alias1               Synlig erstatning af navn for inddatafil 1 (basis).
+  --L2 alias2               Synlig erstatning af navn for inddatafil 2.
+  --L3 alias3               Synlig erstatning af navn for inddatafil 3.
+  -L, --fname alias         Alternativ synlig erstatning af navn. Angiv dette en gang for al inddata.
+  --cs string               Sæt en indstilling ud af kraft. Anvend en gang for hver indstilling, f.eks.  --cs "AutoAdvance=1"
+  --confighelp              Vis liste med indstillinger og nuværende værdier.
+  --config file             Anvend en anden indstillingsfil.
+</screen>
+<para
+>Flaget <option
+>-cs</option
+> lader dig justere et indstillingstilvalg som ellers kun kan justeres via indstillingsdialogerne. Men vær klar  over at når Kdiff3 afsluttes opbevares den ændrede værdi sammen med andre indstillinger. Med <option
+>--confighelp</option
+> kan du finde ud af  navnene på tilgængelige tilvalg og nuværende værdier.</para>
+<para
+>Via <option
+>--config</option
+> kan du angive en anden indstillingsfil. Hvis du ofte bruger Kdiff3 med helt forskellige indstillinger tillader dette dig nemt at skifte mellem dem.</para>
+</sect2>
+<sect2
+><title
+>Kommandolinjeflag som ignoreres</title>
+<para
+>Mange personer vil bruge Kdiff3 sammen med et versionshåndteringssystem, men når versionshåndteringssystemet kalder Kdiff3 med kommandolinjeflag som Kdiff3 ikke genkender, afsluttes Kdiff3 med en fejl. Integrationsindstillingerne gør det muligt at angive kommandolinjeflag som skal ignoreres af Kdiff3. De vises i brugshjælpen som i dette eksempel:</para>
+<screen
+>--<replaceable
+>foo</replaceable
+>                     Ignoreres. (brugerdefineret)
+</screen>
+<variablelist>
+  <varlistentry
+><term
+><emphasis
+>Kommandolinjeflag at ignorere:</emphasis
+></term
+><listitem
+><para
+>En liste med flag, adskilte med semikolon ';'. Når et af disse flag findes på kommandolinjen, ignorerer Kdiff3 det og kører uden at rapportere en fejl. (Standard er "u;query;html;abort").</para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Hvis dette ikke er nok, anbefales du at skrive et skalscript som udfører oversættelsen af flag.</para>
 </sect2>
 
 </sect1>
@@ -475,53 +554,79 @@ Please at least include KDE, the KDE package it is in, the name
 </mediaobject
 ></screenshot>
 <para
->Åbningsdialogen tillader at filnavnene redigeres i hånden, at en fil vælges via filsøgeren ("Fil...") eller at nyligst brugte filer vælges i dropned-boksen. Hvis du åbner dialogen igen, findes de nuværende navne stadigvæk der. Den tredje inddatafil kræves ikke. Hvis feltet for "C" forbliver tomt, udføres kun en tovejs sammenligninganalyse. </para
+>Åbningsdialogen tillader at filnavnene redigeres i hånden, at en fil vælges via filsøgeren ("Fil...") eller at nyligt brugte filer vælges i dropned-feltet. Hvis du åbner dialogen igen, eksisterer de nuværende navne stadigvæk der. Den tredje inddatafil kræves ikke. Hvis feltet for "C" forbliver tomt, udføres kun en tovejs sammenligninganalyse. </para
 ><para
->Du kan også vælge en mappe med "Mappe...". Hvis en mappe angives for A, starter en mappesammenligning og sammenfletning. Hvis A angiver en fil, men B, C eller udskriften angiver en mappe, bruger KDiff3 filnavnet fra A i de angivne mapper. </para
+>Du kan også vælge en mappe med "Mappe...". Hvis en mappe angives for A, starter en mappesammenligning og sammenfletning. Hvis A angiver en fil, men B, C eller udskriften angiver en mappe, bruger &kdiff3; filnavnet fra A i de angivne mapper. </para
 ><para
 >Hvis "Sammenflet" er valgt, bliver linjen "Udskrift" redigerbar. Det kræves dog ikke at uddatafilens navn angives med det samme. Du kan også vente med dette til du gemmer. </para
 ><para
->Knappen "Indstil" viser indstillingsdialogen, så du kan indstille tilvalgene inden analysen udføres. </para>
+>Knappen "Indstil.." viser indstillingsdialogen, så du kan indstille tilvalgene inden analysen udføres. </para>
 </sect1>
 
 <sect1 id="pasteinput"
 ><title
 >Indsæt eller slip inddata</title>
 <para
->Sommetider vil du sammenligne dele af en tekst som ikke er en egen fil. KDiff3 lader dig også indsætte tekst fra klippebordet i det inddatavindue for sammenligning som har fokus. Sammenligningsanalysen sker så med det samme. I åbningsdialogen behøver du så ikke at angive filer, men kun at lukke den via "Annullér". </para
+>Sommetider vil du sammenligne dele af en tekst som ikke er en egen fil. &kdiff3; lader dig også indsætte tekst fra klippebordet i det inddatavindue for sammenligning som har fokus. Sammenligningsanalysen sker så med det samme. I åbningsdialogen behøver du så ikke at angive filer, men kun at lukke den via "Annullér". </para
 ><para
 >Du kan også bruge træk og slip: Træk en fil fra en filhåndtering eller markeret tekst fra en editor og slip den på et inddatavindue til sammenligning. </para
 ><para
 >Hvad er idéen? Sommetider indeholder en fil to lignende funktioner, men at kontrollere hvor ens de virkelig er bliver en stor anstrengelse hvis du først skal oprette to filer og derefter indlæse dem. Nu kan du helt enkelt kopiere, indsætte og sammenligne de relevante afsnit. </para
 ><para
->Bemærk: For øjeblikket kan du ikke trække noget fra KDiff3. Det understøttes kun at slippe inddata i sammenligningvinduet. </para
+>Bemærk: For øjeblikket kan du ikke trække noget fra &kdiff3;. Det understøttes kun at slippe inddata i sammenligningvinduet. </para
 ><para
 >Advarsel: Visse editorer tolker stadigvæk træk og slip til et andet program som klip ud (i stedet for kopiér) og indsæt. De oprindelige data kan derfor gå tabt. </para>
 </sect1>
 
 <sect1 id="interpretinginformation"
 ><title
->Tolk informationen i inddatavinduet</title>
+>Sammenlign filer og tolke informationen i inddatavinduerne</title>
 <screenshot
 ><mediaobject>
 <imageobject
 ><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
 </mediaobject
 ></screenshot>
-<para
->Længst oppe i hvert tekstvindue findes dets "informationslinje". Informationslinjerne i inddatavinduet indeholder bogstaverne "A", "B" eller "C", filnavnet og linjenummeret for den første synlige linje i vinduet. (Bemærk at vinduet "C" er valgfrit.) Hver informationslinje vises i sin egen farve. (Hvis søgestierne er for lange til at få plads, kan du flytte musen til informationslinjen, så vil et værktøjsvink vise hele navnet.) </para
+<sect2
+><title
+>Informationslinje</title
 ><para
->De tre inddatavinduer tildeles bogstaverne "A", "B" og "C". "A" har blå farve, "B" har grøn farve og "C" magenta. (Det er standardfarverne, men de kan ændres via indstillingsmenuen.) </para
+>Længst oppe i hvert tekstvindue er dets "informationslinje". Informationslinjerne i inddatavinduet indeholder bogstaven "A", "B" eller "C", filnavnet og linjenummeret for den første synlige linje i vinduet. (Bemærk at vinduet "C" er valgfrit.) Hver informationslinje vises i en egen farve. </para
+><para
+>Når du vælger en anden fil ved at bladre eller afslutter at redigere filnavnet her ved at trykke på returtasten, indlæses den nye fil og sammenlignes med filen eller filerne som allerede er indlæste. </para
+></sect2
+><sect2
+><title
+>Farvelægning</title
+><para
+>De tre inddatavinduer tildeles bogstaverne "A", "B" og "C". "A" har blå farve, "B" har grøn farve og "C" har magenta. (Dette er standardfarver, men de kan ændres via menuen Opsætning.) </para
 ><para
 >Når en forskel opdages viser farven hvilken inddatafil som adskiller sig. Når begge de øvrige inddatafiler adskiller sig, er farven som bruges for at udtrykke dette normalt rød ("Konfliktfarve" i indstillingerne). Dette farvelægningsmønster er særlig nyttigt i tilfældet med tre inddatafiler, som ses i næste afsnit (<link linkend="merging"
 >Sammenfletning</link
 >). </para
+></sect2
+><sect2
+><title
+>Sammenfatningssøjle</title
 ><para
 >Til venstre for hver tekst er "sammendragssøjlen". Hvis forskelle opstod på en linje, viser sammendragssøjlen tilsvarende farve. For en forskel som kun består af blanke tegn er sammendraget afkrydset. For programmeringssprog, hvor blanke tegn ikke er så vigtige er det nyttigt at se med et blik om noget af vigtighed er ændret. (For C/C++ er blanke tegn kun interessante inde i strenge, i kommentarer, for præprocessoren og i nogle meget esoteriske situationer.) </para
 ><para
->Den lodrette linje som adskiller sammendragssøjlen og teksten er afbrudt hvis inddatafilen ikke har nogen linjer der. </para
+>Den lodrette linje som adskiller sammendragssøjlen og teksten er afbrudt hvis inddatafilen ikke har nogen linjer der. Når tekstombrydning er aktiveret så vil denne linje se prikket ud for ombrudte linjer. </para
+></sect2
+><sect2
+><title
+>Oversigtssøjle</title
 ><para
->På højre side er en "oversigtssøjle" synlig til venstre for den lodrette rullebjælke. Den viser et komprimeret sammendrag af inddata "A". Alle forskelle og konflikter er synlige med et blik. Når kun to inddatavinduer bruges, ses alle forskelle i rødt her, eftersom alle forskelle også er konflikter. Et sort rektangel indrammer den synlige del af inddata. For meget lange inddatafiler, hvor antallet af inddatalinjer er større end højden på oversigten i billedpunkter, deler flere inddatalinjer en oversigtslinje. En konflikt har prioritet over enkle forskelle, som har prioritet over ingen ændringer, så ingen forskelle eller konflikter går tabte her. Ved at klikke på oversigtssøjlen vises den tilsvarende tekst. </para>
+>På højre side er en "oversigtssøjle" synlig til venstre for den lodrette rullebjælke. Den viser et komprimeret sammendrag af inddata "A". Alle forskelle og konflikter er synlige med et blik. Når kun to inddatavinduer bruges, ses alle forskelle i rødt her, eftersom alle forskelle også er konflikter. Et sort rektangel indrammer den synlige del af inddata. For meget lange inddatafiler, hvor antallet af inddatalinjer er større end højden på oversigten i billedpunkter, deler flere inddatalinjer en oversigtslinje. En konflikt har prioritet over enkle forskelle, som har prioritet over ingen ændringer, så ingen forskelle eller konflikter går tabte her. Ved at klikke på oversigtssøjlen vises den tilsvarende tekst. </para
+></sect2
+><sect2 id="manualdiffhelp"
+><title
+>Justér linjer manuelt</title
+><para
+>Sommetider placerer algoritmen forkerte linjer ved siden af hinanden, eller du vil  sammenligne et stykke tekst med tekst på en helt anden position i den anden fil. I disse tilfælde kan du manuelt fortælle  Kdiff3 at visse linjer skal arrangeres i bestemte linjer linje. Markér teksten som du vil arrangere med musen, som du ville gøre ved kopi og indsæt, i det første diff-vindue og vælg derefter "Tilføj manuel justering af sammenligning" i menuen "Sammenligning" (genvejstasten "Ctrl+Y"). En orange linje vises i sammenfatningssøjlen udfor den markerede tekst. Gentag det for den anden og (hvis tilgængelig) tredje sammenligningsvisning. Kdiff3 genberegner med det samme sammenligningen hver gang du gør det, og justerer de markerede linjer. Naturligvis matcher nogle af linjerne tidligere matchede ikke længere. </para
+><para
+>For øjeblikket understøttes ikke sammenfletning ved brug af manuel hjælp til sammenligning. </para
+></sect2>
 </sect1>
 
 
@@ -535,83 +640,255 @@ Please at least include KDE, the KDE package it is in, the name
 </mediaobject
 ></screenshot>
 <para
->Editorvinduet for sammenfletning af uddata (under inddatavinduet for sammenligning) har også en informationslinje længst oppe som viser "Udskrift", filnavnet og "[Ændret]" hvis du har redigeret noget. Oftest indeholder det en tekst fra de automatiske sammenfletningsfunktioner, men det indeholder også ofte konflikter. </para
+>Editorvinduet for sammenfletning af uddata (under inddatavinduet for sammenligning) har også en informationslinje længst oppe som viser "Uddata", filnavnet og "[Ændret]" hvis du har redigeret noget. Oftest indeholder det en tekst fra de automatiske sammenfletningsfunktioner, men det indeholder også ofte konflikter. </para
 ><para
->!!! Gem er deaktiveret indtil alle konflikter er løst!!! (Brug knapperne "Gå til foregående/næste uløste konflikt" for at finde de tilbageværende konflikter.) </para
+>Gem er deaktiveret indtil alle konflikter er løst!!! (Brug knapperne "Gå til foregående/næste uløste konflikt" for at finde de tilbageværende konflikter.) </para
 ><para
 >Med kun to filer er hver forskel også en konflikt, som skal løses manuelt. </para
 ><para
 >Med tre inddatafiler behandles den første som basis, mens den anden og tredje inddatafil indeholder ændringer. Hvis kun inddata B eller C er ændret for en vis linje, men ikke begge vælges den ændrede kilde automatisk. Kun hvis B og C er ændret på samme linjer, detekterer værktøjet en konflikt som skal løses manuelt. Når B og C er ens, men ikke det samme som A, vælges C.  </para
+><sect2
+><title
+>Sammenfatningssøjlen</title
 ><para
->Editorvinduet for sammenfletning af uddata har også en sammendragssøjle til venstre. Den viser bogstaverne for inddata fra hvilken  linjen valgtes, eller ingenting hvis alle tre kilder var ens for linjen. Ved konflikter viser den et spørgsmølstegn "?" og linjen viser "&lt; Konflikter ved sammenfletning &gt;", alt med rødt. Eftersom det ville tage meget lang tid at løse konflikter linje for linje, grupperes linjer i grupper som har samme forskelle og konfliktkarakter. Konflikter med kun blanke tegn adskilles dog fra andre konflikter for at forbedre sammenfletningen af filer hvor indrykningen er ændret på mange linjer. </para
+>Editorvinduet for sammenfletning af uddata har også en sammendragssøjle til venstre. Den viser bogstaverne for inddata fra hvilken  linjen valgtes, eller ingenting hvis alle tre kilder var ens for linjen. Ved konflikter viser den et spørgsmålstegn "?" og linjen viser "&lt; Konflikter ved sammenfletning &gt;", alt med rødt. Eftersom det ville tage meget lang tid at løse konflikter linje for linje, grupperes linjer i grupper som har samme forskelle og konfliktkarakter. Konflikter med kun blanke tegn adskilles dog fra andre konflikter for at forbedre sammenfletningen af filer hvor indrykningen er ændret på mange linjer. </para
+></sect2
+><sect2 id="synchronise_views"
+><title
+>Indstil nuværende gruppe og synkronisér sammenfletnings- og sammenligningsvisningen position</title
 ><para
->Når du klikker på sammendragssøjlen med venstre museknap i et af vinduerne, så markeres gruppen som hører til denne linje i alle vinduer og gruppens begyndelse vises. (Dette kan indebære et automatisk spring i positionen i vinduerne hvis gruppens begyndelse ikke ses.) Gruppen bliver så til den "aktuelle gruppe". Den markeres med "Baggrundsfarven for aktuelt sammenligninginterval" og en sort linje vises til venstre for teksten. </para
+>Når du klikker på sammenfatningssøjlen med venstre museknap i et af  vinduerne, så markeres gruppen som hører til den linje i alle vinduer og gruppens begyndelse vises. (Dette kan indebære et automatisk skift af position i vinduerne hvis gruppens begyndelse ikke ses.) Gruppen bliver så til den "nuværende gruppe". Den markeres med "Baggrundsfarven for nuværende sammenligningsområde" og en sort linje vises til venstre for teksten. </para
+></sect2
+><sect2
+><title
+>Vælg inddata A, B eller C for nuværende konflikt og redigering</title
 ><para
->Bemærk knapperne for inddatavalg som indeholder bogstaverne "A", "B" og "C" i værktøjslinjen under menulinjen. Når du klikker på en af knapperne for inddatavalg, tilføjes linjerne fra disse inddata til sidst i den markerede gruppe, hvis gruppen ikke allerede indeholdt denne kilde. Ellers fjernes linjerne fra disse inddata. </para
+>Knaplinjen under menulinjen indeholder tre knapper for inddatavalg som indeholder bogstaverne "A", "B" og "C". Klik på knappen for inddatavalg for at indsætte linjer (eller fjerne dem hvis de allerede er indsat) fra de respektive kildefil. For at vælge linjer fra flere inddatafiler klikkes på de respektive knapper i den nødvendige rækkefølge. Hvis du for eksempel ønsker at linjer fra "B" skal havne før linjer fra "A" i uddata, klikkes først på "B" og derefter på "A". </para
 ><para
->Desuden kan du redigere en hvilken som helst linje. Sammendragssøjlen viser "m" for hvert linje der er ændret. </para
+>Hvis du bruger tilvalget automatisk at gå videre (<link linkend="autoadvance"
+>Gå automatisk til næste uløste konflikt efter valg af kilde</link
+>), skal du deaktivere dette inden du vælger linjer fra flere inddatafiler eller hvis du vil redigere linjerne efter du valgt dem. Ellers går Kdiff3 til næste konflikt efter den første inddatafil er valgt. </para
 ><para
->Sommetider, når en linje fjernes enten på grund af automatisk fletning eller ved redigering og ingen andre linjer er tilbage i gruppen, vises teksten &lt;Ingen kildelinjer&gt; på linjen. Det er kun en pladsmarkør for gruppen hvis du ændrer mening og vælger en kilde igen. Teksten ses ikke i gemte filer eller i nogen markeringer som du vil kopiere og indsætte. </para
+>Det er ofte nyttigt direkte at redigere sammenflettet uddata. Sammenfatningssøjlen viser "m" for hver linje som er ændret manuelt. Når forskellene for eksempel justeres på en måde så et enkelt valg af inddata ikke er tilfredsstillende, kan du markere teksten som behøves og bruge normal <link linkend="selections"
+>kopiér og indsæt</link
+> for at placere den i sammenflettet uddata. </para
 ><para
->Teksten "&lt; Konflikter ved indfletning &gt;" vises i klippebordet hvis du kopierer og indsætter noget tekst som indeholder en sådan linje. Men vær stadigvæk forsigtig med at gøre det. </para
+>Sommetider, når en linje fjernes enten på grund af automatisk fletning eller ved redigering og ingen andre linjer er tilbage i gruppen, vises teksten  &lt;No src line&gt; på linjen. Det er kun en pladsmarkør for gruppen hvis du ændrer mening og vælger en kilde igen. Teksten ses ikke i gemte filer eller i nogen markeringer som du vil kopiere og indsætte. </para
 ><para
->Den normale sammenfletning vil starte med at løse simple konflikter automatisk. Men "Flet"-menu sørger for handlinger for andre almindelige behov. Hvis du skal vælge samme kilde for de fleste konflikter, så kan du vælge "A", "B" eller "C" overalt, eller kun for de tiloversblevne uløste konflikter, eller for uløste konflikter med blanke tegn. Hvis du ønsker at afgøre hver lille forskel selv, kan du "Sætte lille forskel til konflikt". Eller hvis du ønsker at vende tilbage de automatiske valg udført af KDiff3 så  vælg "Løs simple konflikter automatisk". KDiff3 starter så sammenfletningen forfra. For handlinger der ændrer dine  tidligere ændringer vil KDiff3 bede om bekræftelse før den går videre. </para
+>Teksten "&lt;Merge Conflict&gt;" vises i klippebordet hvis du kopierer og indsætter noget tekst som indeholder en sådan linje. Men vær satdig forsigtig med at gøre det. </para
+></sect2
+><sect2
+><title
+>Vælg inddata A, B eller C for alle konflikter</title
 ><para
->Bemærk: Når en af kilderne for uløste konflikter med blanke tegn vælges og tilvalgene "Ignorér tal" eller "Ignorér C/C++ kommentarer" bruges så  bliver ændringer i tal eller kommentarer også behandlet som blanke tegn. </para>
+>Den normale sammenfletning vil starte med at løse simple konflikter automatisk. Men "Flet"-menu sørger for handlinger for andre almindelige behov. Hvis du skal vælge samme kilde for de fleste konflikter, så kan du vælge"A", "B" eller "C" overalt, eller kun for de tiloversblevne uløste konflikter, eller for uløste konflikter med blanke tegn. Hvis du ønsker at afgøre hver lille forskel selv, kan du "Sætte lille forskel til konflikt". Eller hvis du ønsker at vende tilbage de automatiske valg udført af &kdiff3; så  vælg "Løs simple konflikter automatisk". &kdiff3; starter så sammenfletningen forfra. For handlinger der ændrer dine  tidligere ændringer vil &kdiff3; bede om bekræftelse før den går videre. </para
+><para
+>Bemærk: Når en af kilderne for uløste konflikter med blanke tegn vælges og tilvalgene "Ignorér tal" eller "Ignorér C/C++ kommentarer" bruges så  bliver ændringer i tal eller kommentarer også behandlet som blanke tegn. </para
+></sect2
+><sect2 id="vcskeywordsmergesupport"
+><title
+>Sammenflet automatisk nøgleord for versionshåndtering og historik (log)</title
+><para
+>Many version control systems support special keywords in the file. (e.g. "$Date$", "$Header$", "$Author$", "$Log$
+>Many version control systems support special keywords in the file. (e.g. "$Date$", "$Header$", "$Author$", "Revision 1.2  2006/04/10 08:33:34  joachim99
+>Many version control systems support special keywords in the file. (e.g. "$Date$", "$Header$", "$Author$", "KDiff3 0.9.89
+>Many version control systems support special keywords in the file. (e.g. "$Date$", "$Header$", "$Author$", "" etc.) During the check-in the version control system (VCS) changes these lines. For instance "$Date$" will turn into "$Date$". Since this line will be different in every version of the file, it would require manual interaction during the merge. </para
+><para
+>Kdiff3 tilbyder automatisk sammenfletning af disse indgange. For enkle linjer som matcher tilvalget "Regulært udtryk for automatisk sammenfletning" i alle inddatafiler vælger Kdiff3 linjen fra B, eller om tilgængelig, den fra C. (Desuden er det nødvendigt at linjerne det drejer sig om linjes op i sammenligningen og at foregående linje ikke indeholder en konflikt.) Den automatiske sammenfletning kan enten udføres med det samme når sammenfletningen startes (aktivér tilvalget "Kør automatisk sammenfletning med regulært udtryk når sammenfletning starter") eller senere via "Kør automatisk sammenfletning med regulært udtryk" i menuen Sammenflet. </para
+><para
+>Automatisk sammenfletning for versionshåndteringshistorik (også kaldet "log") understøttes også. Automatisk sammenfletning af historik kan enten udføres med det samme når sammenfletningen startes ved at aktivere tilvalget  "Sammenfletning ifølge versionshåndteringshistorik når sammenfletning starter" eller senere via "Løs automatisk historikkonflikter" i menuen Sammenflet. </para
+><para
+>Oftest begynder versionshåndteringshistorikken med en linje som indeholder nøgleordet "$Log$
+>Oftest begynder versionshåndteringshistorikken med en linje som indeholder nøgleordet "Revision 1.2  2006/04/10 08:33:34  joachim99
+>Oftest begynder versionshåndteringshistorikken med en linje som indeholder nøgleordet "KDiff3 0.9.89
+>Oftest begynder versionshåndteringshistorikken med en linje som indeholder nøgleordet "". Den skal matches af tilvalget "Regulært udtryk for historikkens begyndelse". Kdiff3 detekterer hvilke efterfølgende linjer som indgår i historikken ved at analysere de indledende tegn som fandtes før nøgleordet "$Log$
+>Oftest begynder versionshåndteringshistorikken med en linje som indeholder nøgleordet "$Log$". Den skal matches af tilvalget "Regulært udtryk for historikkens begyndelse". Kdiff3 detekterer hvilke efterfølgende linjer som indgår i historikken ved at analysere de indledende tegn som fandtes før nøgleordet "Revision 1.2  2006/04/10 08:33:34  joachim99
+>Oftest begynder versionshåndteringshistorikken med en linje som indeholder nøgleordet "$Log$". Den skal matches af tilvalget "Regulært udtryk for historikkens begyndelse". Kdiff3 detekterer hvilke efterfølgende linjer som indgår i historikken ved at analysere de indledende tegn som fandtes før nøgleordet "KDiff3 0.9.89
+>Oftest begynder versionshåndteringshistorikken med en linje som indeholder nøgleordet "$Log$". Den skal matches af tilvalget "Regulært udtryk for historikkens begyndelse". Kdiff3 detekterer hvilke efterfølgende linjer som indgår i historikken ved at analysere de indledende tegn som fandtes før nøgleordet "". Hvis samme "indledende kommentar" også findes på følgende linjer inkluderes de også i historikken. </para
+><para
+>Ved hver arkivering skriver VCS en entydig linje som angiver version, dato- og tidsinformation fulgt af linjer med brugerens kommentarer. Disse linjer udgør en historikindgang. Historikafsnittet vokser ved hver arkivering og de seneste indgange vises længst oppe (efter historikkens startlinje). </para
+><para
+>Når to udvikler arkiverer grene af en fil under parallel udvikling, kommer historikken for sammenfletning til at indeholde flere indgange som vises som konflikter under sammefletning af grenene. Eftersom sammenfletning af dem kan blive meget trættende, tilbyder Kdiff3 understøttelse for den med to mulige strategier: Blot indsætte historikinformationen fra begge bidragsyderne længst oppe, eller sortere historikinformationen ifølge en brugerdefineret nøgle. </para
+><para
+>Metoden kun at indsætte alle indgange er nemmest at indstille. Kdiff3 behøver kun en metode til at detektere hvilke linjer som hører til en historikindgang. De fleste VCS indsætter en tom linje efter hver historikindgang. Hvis der ikke findes andre tomme linjer, er det en tilstrækkelig betingelse for Kdiff3. Angiv blot et tomt "Regulært udtryk for historikkens begyndelse". Hvis kriteriet med en tom linje ikke er tilstrækkeligt kan du angive et regulært udtryk for at detektere historikindgangen begyndelse. </para
+><para
+>Hvis du vil sortere historikken skal du angive hvordan sorteringsnøglen skal bygges. Brug parenteser som i "Regulært udtryk for historikindgangens begyndelse" for at gruppere dele af det regulære udtryk som senere skal bruges i sorteringsnøglen. Angiv derefter "Sorteringsnøglernes rækkefølge fra historikindgangens begyndelse" med en liste af tal som refererer til gruppens position i det regulære udtryk adskilt af kommategn ",". </para
+><para
+>Eftersom det ikke er så enkelt at få det rigtigt med det samme, kan du teste  og forbedre det regulære udtryk og nøglegenereringen i en særlig dialog ved at klikke på knappen "Test dine regulære udtryk". </para
+><para
+>Antag at historikken ser ud så her: <screen>
+/**************************************************************************
+** HISTORIK:    $Log$
+** HISTORIK:    Revision 1.2  2006/04/10 08:33:34  joachim99
+** HISTORIK:    KDiff3 0.9.89
+** HISTORIK:
+**
+**     \head\integreringsgren_12   2 Apr 2001 10:45:41   tom
+**  Sammenflettede grenen simongren_15.
+**
+**     \main\henry_felretningsgren_7\1   30 Mar 2001 19:22:05   henry
+**  Forbedrede hastigheden for delrutinen forvandleTil().
+**  Ordnede sammenbrud.
+**************************************************************************/
+</screen
+> Historikkens indledende linje matcher det regulære udtryk ".*\$Log.*\$.*". Derefter følger historikindgangene. </para
+><para
+>Linjen med nøgleordet "$Log$
+>Linjen med nøgleordet "Revision 1.2  2006/04/10 08:33:34  joachim99
+>Linjen med nøgleordet "KDiff3 0.9.89
+>Linjen med nøgleordet "" begynder med to "*" og derefter følger et mellemrum. Kdiff3 bruger den første streng uden blanke tegn som "indledende kommentar" og antager at historikken slutter med den første linje uden denne indledende kommentar. I eksemplet slutter den sidste linje med en streng som også begynder med to "*", men i stedet for et mellemrum følger flere "*". Derfor afslutter denne linje historikken. </para
+><para
+>Hvis sortering af historikken ikke kræves kan det regulære udtryk for historikindgangens begyndelsen se sådan her ud. (Linjen er delt i to eftersom den ikke ville få plads ellers.) <screen>
+\s*\\main\\\S+\s+[0-9]+ (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
+ [0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]\s+.*
+</screen
+> For detaljer om regulære udtryk se <ulink url="http://doc.trolltech.com/3.3/qregexp.html#details"
+>Trolltechs dokumentation af regulære udtryk</ulink
+>. Bemærk at "\s" (med et lille "s") matcher alle blanke tegn og  "\S" (med et stort "S") matcher alle tegn som ikke er blanke. I vort eksempel indeholder historikindgangens begyndelse først versionsinformation med det regulære udtryk "\\main\\\S+", datoen som består af dagen "[0-9]+", månaden "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)" og året "[0-9][0-9][0-9][0-9]", tiden "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]" og til sidst udviklerens brugernavn ".*". Bemærk at den indledende kommentar (i eksemplet "**") allerede er fjernet af Kdiff3 inden matcheforsøget, derfor begynder det regulære udtryk med at matche et eller flere blanke tegn "\s*". </para
+><para
+>Hvis du kræver sorteret historik skal sorteringsnøglen beregnes. For at gøre dette skal relevante dele i det regulære udtryk grupperes med parenteser. (De ekstra parenteser kan også forblive hvis historiksortering deaktiveres.) <screen>
+\s*\\main\\(\S+)\s+([0-9]+) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
+ ([0-9][0-9][0-9][0-9]) ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])\s+(.*)
+</screen
+> Parenteserne indeholder nu 1. versionsinformation, 2. dag, 3. måned, 4. år, 5. tid, 6. navn. Men hvis vi vil sortere efter dato og tid skal vi oprette en nøgle med elementerne synlige i en anden rækkefølge: Først året, fulgt af måned, dag, tid, versionsinformation og navn. Derfor skal sorteringsnøglens rækkefølge som angives være  "4,3,2,5,1,6". </para
+><para
+>Eftersom månednavne ikke er gode at sortere efter ("Apr" ville være først) detekterer Kdiff3 hvilken rækkefølge månednavnene angives og bruger dette nummer i stedet  for ("Apr"->"04"). Og hvis et rent nummer findes forvandles det til en fireciffers værdi med indledende nuller for sortering. Endelig bliver den resulterende sorteringsnøgle for den første historikindgangens indledende linje: <screen
+>2001 04 0002 10:45:41 integreringsgren_12   tom 
+</screen>
+</para
+><para
+>For mere information, se også <link linkend="diffmergeoptions"
+>Opsætning af sammenlign og sammenflet</link
+>. </para>
+</sect2>
 </sect1>
 
 <sect1 id="navigation"
 ><title
 >Navigering og redigering</title>
 <para
->Meget navigering gøres med rullebjælkerne og musen, men du kan også navigere med tastaturet. Hvis du klikker på et vindue kan du bruge markørtasterne venstre pil, højre pil, opad pil, nedad pil, Page Up, Page Down, Home, End, Ctrl+Home og Ctrl+End som du kan i andre programmer. </para
+>Meget navigering gøres med rullelisterne og musen, men du kan også navigere med tastaturet. Hvis du klikker på et vindue kan du bruge markørtasterne venstrepil, højrepil, opadpil, nedadpil, Page Up, Page Down, Home, End, Ctrl+Home og Ctrl+End ligesom du kan i andre programmer. Sammenfatningssøjlen ved siden af inddatafilernes lodrette rulleliste kan også bruges til at navigere ved at klikke i den. </para
 ><para
 >Du kan også bruge musehjulet til at rulle opad og nedad. </para
 ><para
->I editoren for fletning kan du også bruge andre taster til redigering. Du kan skifte mellem indsætnings- og erstatningstilstand med tasten Insert. (Normaltilstanden er at indsætte.) </para
+>I editoren for fletning kan du også bruge andre taster til redigering. Du kan skifte mellem indsætnings- og erstatningstilstand med Insert-tasten. (Normaltilstanden er at indsætte.) </para
 ><para
->Et klik med venstre museknap i en sammendragssøjle synkroniserer alle vinduer til at vise begyndelsen af samme gruppe linjer (som forklares i afsnittet <link linkend="merging"
->Fletning</link
+>Et klik med venstre museknap i en sammenfatningssøjle synkroniserer alle vinduer til at vise begyndelsen af samme gruppe af linjer (som forklaret i afsnittet <link linkend="synchronise_views"
+>Indstil nuværende gruppe og synkronisér sammenfletnings- og sammenligningsvisningens position</link
 >). </para
 ><para
->Værktøjslinjen indeholder også syv navigeringsknapper som du kan bruge til at gå til nuværende/første/sidste forskel, til næste/foregående forskel (Ctrl+Nedad pil eller Ctrl+Opad pil), til næste/foregående konflikt (Ctrl+Page Down eller Ctrl+Page Up) eller til næste/foregående uløste konflikt. Bemærk at for KDiff3 forbliver en "konflikt" som ikke automatisk løstes ved start af sammenfletningen altid en "konflikt" også selv om den er løst. Deraf nødvendigheden for at adskille "uløst konflikt". </para
-><para
->Der er også en knap som hedder "Gå automatisk til næste uløste konflikt efter valg af kilde" (automatisk fortsættelse). Hvis du aktiverer dette, så går KDiff3 automatisk frem til næste uløste konflikt når en kilde vælges. Det kan hjælpe når du kun vil vælge en kilde. Når du behøver begge kilder, eller du vil redigere efter valget, bør du formodentlig lukke for dette. Inden KDiff3 fortsætter til næste uløste konflikt, vises effekten af valget en kort tid. Denne forsinkelse kan justeres i indstillingerne under Sammenlign og sammenflet. Du kan angive "Forsinkelse ved automatisk fortsættelse" i millisekunder mellem 0 og 2000. Vink: Træt af mange klik? Brug en kort forsinkelse og genvejstasterne Ctrl+1, Ctrl+2 eller Ctrl+3 for mange konflikter. </para>
+>Værktøjslinjen indeholder også ni navigeringsknapper som du kan bruge til at gå til nuværendel/førsea/sidste forskel, til næste/foregående forskel (Ctrl+Nedadpil eller Ctrl+Opadpil), til næste/foregående konflikt (Ctrl+Page Down eller Ctrl+Page Up) eller til næste/foregående uløste konflikt. Bemærk at for Kdiff3 forbliver en "konflikt" som ikke automatisk blev løst ved start af sammenfletningen altid en "konflikt" også selvom den er løst. Deraf nødvendigheden af at skelne "uløste konflikter". </para>
+<sect2 id="autoadvance"
+><title
+>Automatisk fortsættelse</title>
+<para
+>Der er også en knap som hedder "Gå automatisk til næste uløste konflikt efter valg af kilde" (automatisk fortsættelse). Hvis du aktiverer dette, så går &kdiff3; automatisk til næste uløste konflikt når en kilde vælges. Dette kan hjælpe til når du kun vil vælge en kilde. Når du behøver begge kilder, eller du vil redigere efter valget, bør du formodentlig slå dette fra. Inden &kdiff3; fortsætter til næste uløste konflikt, vises effekten af valget en kort tid. Denne forsinkelse kan justeres i indstillingerne under Sammenlign og sammenflet. Du kan angive <guilabel
+>Forsinkelse ved automatisk fortsættelse</guilabel
+> i millisekunder mellem 0 og 2000. </para>
+</sect2>
 </sect1>
 
 <sect1 id="selections"
 ><title
 >Markér, kopiér og indsæt</title>
 <para
->Inddatavinduerne viser ikke nogen markør, så markeringer skal gøres med musen, ved at klikke med venstre museknap på begyndelsen, holde museknappen nede og gå til slutningen, hvor museknappen slippes igen. Du kan også markere et ord ved at dobbeltklikke på det. I editoren for sammenfletningsuddata kan du også markere med tastaturet, ved at holde tasten "Shift" nede og navigere med piltasterne. </para
+>Inddatavinduerne viser ikke nogen markør, så markeringer skal udføres med musen, ved at klikke med venstre museknap på begyndelsen, holde museknappen nede og gå til slutningen, hvor museknappen slippes igen. Du kan også markere et ord ved at dobbeltklikke på det. I editoren for sammenfletningsuddata kan du også markere med tastaturet, ved at holde shift-tasten nede og navigere med piletasterne. </para
 ><para
->For at kopiere til klippebordet skal du trykke på knappen "Kopiér" (Ctrl+C eller Ctrl+Insert). Men der er et valg som hedder "Kopiér markering automatisk". Hvis det er markeret, kopieres hvad du end vælger med det samme, og du behøver aldrig eksplicit at kopiere. Men vær forsigtig når du bruger dette, eftersom klippebordets indhold kan ødelægges ved en fejl. </para
+>For at kopiere til klippebordet skal du trykke på knappen "Kopiér" (Ctrl+C eller Ctrl+Insert). Men der er et tilvalg som hedder "Kopiér automatisk markering". Hvis det er aktiveret, kopieres hvad du end vælger med det samme, og du behøver aldrig eksplicit kopiere. Men vær forsigtig når du bruger dette, eftersom klippebordets indhold kan ødelægges ved en fejl. </para
 ><para
->"Klip" (Ctrl+X eller Shift+Delete) kopierer til klippebordet og fjerner den markerede tekst, og "Indsæt" (Ctrl+V eller Shift+Insert) indsætter teksten fra klippebordet på markørens position eller over nuværende markering. </para>
+>"Klip ud" (Ctrl+X eller Shift+Delete) kopierer til klippebordet og fjerner markeret tekst, mens "Indsæt" (Ctrl+V eller Shift+Insert) indsætter teksten fra klippebordet på markørpositionen eller over nuværende markering. </para>
 </sect1>
 
 <sect1 id="saving"
 ><title
 >Gemmer</title>
 <para
->At gemme tillades kun når alle konflikter er løste. Hvis filen allerede findes og punktet "Sikkerhedskopiér filer" er markeret, ændres originalversionens navn med tilføjelse af filendelsen ".orig", og hvis en sådan fil allerede findes fjernes den. Når du afslutter eller starter en ny sammenligninganalyse og data ikke er gemt endnu, spørger KDiff3 om du vil gemme, annullere eller fortsætte uden at gemme. (KDiff3 fanger ingen signaler, så hvis du "dræber" KDiff3 går data tabt.) </para
+>At gemme tillades kun når alle konflikter er løste. Hvis filen allerede findes og tilvalget "Sikkerhedskopiér filer" er markeret, ændres originalversionens navn med tilføjelse af filendelsen .orig, og hvis en sådan fil allerede findes fjernes den. Når du afslutter eller starter en ny sammenligningsanalyse og data ikke er gemt endnu, spørger Kdiff3 om du vil gemme, annullere eller fortsætte uden at gemme. (Kdiff3 fanger ingen signaler, så hvis du "dræber" Kdiff3 går data tabt.) </para
 ><para
->Linjeslut gemmes følgende den normale metode i det underliggende operativsystem. For Unix slutter hver linje med et nylinjetegn "\n", mens hver linje for Windows-baserede system slutter med et returtegn og et nylinjetegn "\r\n". KDiff3 beholder ikke linjeslut for inddatafilerne, hvilket også betyder at du ikke skal bruge KDiff3 med binær filer. </para>
+>Linjeslut gemmes ifølge den normale metoden i det underliggende operativsystem. For Unix slutter hver linje med et nylinjetegn "\n", mens for Windows-baserede systemer slutter hvert linje med et returtegn og et nylinjetegn "\r\n". Kdiff3 beholder ikke linjeslut for inddatafilerne, hvilket også betyder at du ikke skal bruge Kdiff3 med binære filer. </para>
 </sect1>
 
 <sect1 id="find"
 ><title
 >Søg efter strenge</title>
 <para
->Du kan søge efter en streng i et hvilket som helst tekstvindue i KDiff3. Kommandoen "Søg..." (Ctrl+F) i menuen Redigér, viser en dialog som lader dig angive strengen at søge efter. Du kan også vælge de vinduer som skal gennemsøges. Søgning starter altid fra begyndelsen. Brug kommandoen "Søg igen" (F3) for at fortsætte til næste forekomst. Hvis du vælger at søge i flere vinduer, gennemsøges det første vindue fra begyndelsen til slutningen inden søgningen fortsætter fra begyndelsen i næste vindue, osv. </para>
+>Du kan søge efter en streng i et hvilket som helst tekstvindue i Kdiff3. Kommandoen "Søg..." (Ctrl+F) i menuen Redigér, viser en dialog som lader dig angive strengen at søge efter. Du kan også vælge de vinduer som skal søges. Søgning starter altid fra begyndelsen. Brug kommandoen "Søg igen" (F3) for at fortsætte til næste forekomst. Hvis du vælger at søge i flere vinduer, gennemsøges det første vindue fra begyndelsen til slutningen inden søgningen fortsætter fra begyndelsen i næste vindue, osv. </para>
 </sect1>
 
+<sect1 id="printing"
+><title
+>Udskrift</title>
+<para
+>Kdiff3 understøtter udskrift af forskelle mellem tekstfiler. Kommandoen "Skriv ud..." (Ctrl+P) i menuen Fil viser en dialog som lader dig vælge printer og justere andre tilvalg. </para
+><para
+>Der er flere muligheder for at justere området. Afhængig af forskellige udskriftsdialoger på forskellige operativsystemer, varierer metoden for at opnå valg af et vist område. </para>
+<variablelist>
+   <varlistentry
+><term
+>Alle:</term
+><listitem
+><para
+>Udskriv alt.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Nuværende:</term
+><listitem
+><para
+>Udskriv en side som begynder på den første synlige linje i vinduet. (På systemer uden dette tilvalg kan dette opnås ved at angive sidenummeret 10000 for udskrift.)</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Markering:</term
+><listitem
+><para
+>Inden du vælger at udskrive, markeres tekst med musen (som for kopiere og indsætte) i et af sammenligningsvinduerne for at definere start- og slutlinje. Hvis ingen tekst er markeret i et af sammenligningsvinduerne, er dette tilvalg ikke tilgængeligt. (På systemer uden dette tilvalg kan dette opnås ved at angive sidenummeret 9999 for udskrift.)</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Område:</term
+><listitem
+><para
+>Angiv første og sidste side. </para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Andre vigtige indstillinger for udskrift tages fra de normale indstillinger: </para
+><itemizedlist>
+   <listitem
+><para
+>Skrifttype, tegnstørrelse</para
+></listitem>
+   <listitem
+><para
+>Vis linjenummer</para
+></listitem>
+   <listitem
+><para
+>Linjebrud</para
+></listitem>
+   <listitem
+><para
+>Farver</para
+></listitem>
+   <listitem
+><para
+>osv.</para
+></listitem>
+</itemizedlist>
+<para
+>Landskabsformatering anbefales også for udskrift. </para>
+</sect1>
 
 <sect1 id="options"
 ><title
 >Tilvalg</title>
 <para
->Tilvalg og listen med de nyligste filer gemmes når du afslutter programmet, og indlæses igen når du starter det. (Menuen Opsætning -> Indstil KDiff3...) </para>
+>Tilvalg og listen med nylige filer gemmes når du afslutter programmet, og indlæses igen når du starter det. (Menuen Opsætning->Indstil KDiff3 ...) </para>
 <sect2
 ><title
 >Skrifttype</title>
@@ -725,9 +1002,61 @@ Please at least include KDE, the KDE package it is in, the name
 >Oftest mørkegul.</para
 ></listitem
 ></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Farve for manuelt valgte sammenligningsområder:</emphasis
+></term
+><listitem
+><para
+>Oftest orange.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Farve for nyeste fil i mappesammenligning:</emphasis
+></term
+><listitem
+><para
+>Oftest grøn.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Farve for ældste fil i en mappesammenligning:</emphasis
+></term
+><listitem
+><para
+>Oftest rød.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Farve for middelgamle filer i en mappesammenligning:</emphasis
+></term
+><listitem
+><para
+>Oftest mørkegul.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Farve for manglende filer i et mappesammenligning:</emphasis
+></term
+><listitem
+><para
+>Oftest sort.</para
+></listitem
+></varlistentry>
 </variablelist>
 <para
->For systemer der kun har 16 eller 256 farver er visse rene farver ikke tilgængelige. For sådanne systemer vælger knappen "Standard" rene farver. </para>
+>At ændre farverne for mappesammenligninger får ikke nogen virkning før end næste mappesammenligning startes. </para>
+<para
+>For systemer med kun 16 eller 256 farver er visse rene farver ikke tilgængelige. For sådanne systemer vælger knappen "Standard" en ren farve. </para>
 </sect2>
 
 <sect2
@@ -761,7 +1090,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Når du trykker på Enter eller returtasten, bruges de foregående linjers indrykning for den nye linje. </para
+>Når du trykker på Enter eller returtasten, bruges foregående linjes indrykning for den nye linje. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -777,21 +1106,21 @@ Please at least include KDE, the KDE package it is in, the name
    <varlistentry
 ><term
 ><emphasis
->Brug lokalt tegnsæt:</emphasis
+>Stil for linjeafslutning:</emphasis
 ></term
 ><listitem
 ><para
->For at vise specielle tegn. Prøv at ændre dette hvis nogle tegn i dit sprog ikke vises rigtigt. </para
+>Når du gemmer kan du vælge den stil for linjeafslutning du foretrækker. Standardindstillingen er det almindelige valg for det operativsystem der bruges. </para
 ></listitem
 ></varlistentry>
 </variablelist>
 </sect2>
 
-<sect2
+<sect2 id="diffmergeoptions"
 ><title
 >Opsætning af sammenligning og fletning</title>
 <para
->Når filer sammenlignes forsøger KDiff3 først at matche linjer som er ens i alle inddata-filer. Det er kun under dette skridt at blanke tegn kan ignoreres. Det andet skridt sammenligner hver linje. Under dette skridt ignoreres blanke tegn ikke. Under sammenfletning ignoreres blanke tegn heller ikke. </para>
+>Når filer sammenlignes forsøger &kdiff3; først at matche linjer som er ens i alle inddatafiler. Det er kun under dette skridt at blanke tegn kan ignoreres. Det næste skridt sammenligner hver linje. Under dette skridt ignoreres  blanke tegn ikke. Under sammenfletning ignoreres blanke tegn heller ikke. </para>
 
 <variablelist>
    <varlistentry
@@ -801,7 +1130,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Visse editorer (på visse systemer) gemmer returtegn '\r' og nylinjetegn '\n' i slutningen af linjen, mens andre kun gemmer nylinjetegnet '\n'. Oftest ignorerer KDiff3 returtegnet, men så ser filer som ikke har samme størrelse ens ud ved sammenligning side om side. Når dette tilvalg er markeret, gøres returtegn synlige, men behandles som blanke tegn. Dette skal være slået fra under en sammenfletning. Normalværdien er fra.</para
+>Visse editorer (på visse systemer) gemmer returtegn '\r' og nylinjetegn '\n' i slutningen på linjen, mens andre kun gemmer nylinjetegnet '\n'. Oftest ignorerer &kdiff3; returtegnet, men så ser filer som ikke har samme størrelse ens ud ved sammenligning side for side. Når dette tilvalg  er markeret, gøres returtegn synlige, men behandles som blanke tegn. Dette tilvalg skal være slået fra under en sammenfletning. Standardværdien er fra.</para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -811,7 +1140,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Normalværdien er fra. Ciffertegn ('0'-'9','.', '-') ignoreres under første del af analysen når linjematchningen udføres. Forskellene for resultatet vises ikke desto mindre, men de behandles som blanke tegn. </para
+>Standardværdien er fra. Ciffertegn ('0'-'9','.','-') ignoreres under første del af analysen når linjematchningen udføres. Forskellene for resultatet vises alligevel, men de behandles som blanke tegn. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -827,11 +1156,11 @@ Please at least include KDE, the KDE package it is in, the name
    <varlistentry
 ><term
 ><emphasis
->Konvertér til store bogstaver:</emphasis
+>Ignorér versaltype:</emphasis
 ></term
 ><listitem
 ><para
->Normalværdien er fra. Konverterer inddata til store bogstaver under læsning. Altså er sammenligningen ikke versalfølsom. Vær forsigtig under sammenfletning, eftersom versalinformationen også går tabt i sammenfletningsresultatet. </para
+>Standardværdien er fra. Ændringer i versaltilstand for tegn (såsom 'A' eller 'a') håndteres som ændringer i blanke tegn. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -841,7 +1170,9 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Når en fil læses, sendes den gennem denne eksterne kommando. Udskriften fra denne kommando vises i stedet for den oprindelige fil. Du kan skrive din egen præprocessor som opfylder dine specielle behov. Brug dette for at fjerne forstyrrende dele af filen, eller for automatisk at korrigere indrykning, osv. </para
+>Se <link linkend="preprocessors"
+>næste afsnit</link
+>. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -851,7 +1182,9 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Når en fil læses, sendes den via denne eksterne kommando. Hvis en præprocessorkommando (se ovenfor) også angives er udskriften fra præprocessoren input til kommandoen for linjematchning. Udskriften bruges kun under linjematchningsfasen af analysen. Du kan skrive din egen præprocessor som opfylder dine specielle behov. Hvert inddatalinje skal have en tilsvarende uddatalinje. </para
+>Se <link linkend="preprocessors"
+>næste afsnit</link
+>. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -881,7 +1214,106 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Løs alle konflikter med blanke tegn ved at vælge den angivne fil. (Normalværdien er manuelt valg.) Nyttigt når blanke tegn virkelig ikke er vigtige i mange filer. Hvis du kun behøver dette af og til er det bedre at bruge "Vælg A/B/C til alle uløste konflikter med blanke tegn" i flet-menuen. Bemærk at hvis du aktiverer enten "Ignorér tal" eller "Ignorér C/C++ kommentarer" så anvendes dette auto-valg også på konflikter i tal eller kommentarer. </para
+>Løs automatisk alle konflikter for blanke tegn ved at vælge angiven fil. (Standardværdien er manuelt valg.) Nyttigt hvis blanke tegn virkelig ikke er vigtige i mange filer. Hvis du kun behøver det ind iblandt, er det bedre at bruge "Vælg A/B/C for uløste konflikter med blanke tegn" i menuen "Sammenflet". Bemærk at hvis du enten aktiverer Ignorér cifre eller "Ignorere C/C++ kommentarer" gælder det automatiske valg også ved konflikter for cifre eller kommentarer. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Regulært udtryk for automatisk sammenfletning:</emphasis
+></term
+><listitem
+><para
+>Regulært udtryk for linjer hvor Kdiff3 automatisk skal vælge en kilde. Se også <link linkend="vcskeywordsmergesupport"
+>Automatisk sammenfletning ...</link
+> </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Kør automatisk sammenfletning med regulært udtryk når sammenfletning starter:</emphasis
+></term
+><listitem
+><para
+>Hvis aktiveret udfører Kdiff3 den automatiske sammenfletning med "Regulært udtryk for automatisk sammenfletning" når en sammenfletning startes. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Regulært udtryk for historikkens begyndelse:</emphasis
+></term
+><listitem
+><para
+>Regulært udtryk for begyndelsen af historikindgangen for sammenfletning. Som oftest indeholder linjen nøgleordet "$Log$
+>Regulært udtryk for begyndelsen af historikindgangen for sammenfletning. Som oftest indeholder linjen nøgleordet "Revision 1.2  2006/04/10 08:33:34  joachim99
+>Regulært udtryk for begyndelsen af historikindgangen for sammenfletning. Som oftest indeholder linjen nøgleordet "KDiff3 0.9.89
+>Regulært udtryk for begyndelsen af historikindgangen for sammenfletning. Som oftest indeholder linjen nøgleordet "". Standardværdi: ".*\$Log.*\$.*" </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Regulært udtryk for historikindgangens begyndelse:</emphasis
+></term
+><listitem
+><para
+>En historikindgang for sammenfletning består af flere linjer. Angiv det regulære udtryk for at detektere den første linje (uden indledende kommentar). Brug parenteser for at gruppere nøglerne du vil bruge til sortering. Hvis det efterlades tomt, antager Kdiff3 at tomme linjer skiller historikindgangene ad. Se også <link linkend="vcskeywordsmergesupport"
+>Automatisk sammenfletning ...</link
+> </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Sortering af historiksammenfletning:</emphasis
+></term
+><listitem
+><para
+>Aktivér sortering af versionshåndteringshistorik. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Sorteringsnøglernes rækkefølge fra historikindgangens begyndelse:</emphasis
+></term
+><listitem
+><para
+>Hver parentes som bruges i det regulære udtrykket for historikkens startindgang grupperer en nøgle som kan bruges til sortering. Angiv listen med nøgler (som nummereres i rækkefølge de optræder med begyndelsen på 1) med ',' som skilletegn (f.eks. "4,5,6,1,2,3,7"). Hvis det efterlades tomt udføres ingen sortering. Se også <link linkend="vcskeywordsmergesupport"
+>Automatisk sammenfletning ...</link
+> </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Sammenfletning ifølge versionshåndteringshistorik når sammenfletningen starter:</emphasis
+></term
+><listitem
+><para
+>Hvis aktiveret udfører Kdiff3 den automatiske sammefletning af historik med tidligere nævnte tilvalg når en sammenfletning startes. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Test dine regulære udtryk</emphasis
+></term
+><listitem
+><para
+>Denne knap viser en dialog som lader dig forbedre og teste det regulære udtryk ovenfor. Kopiér blot de respektive data fra dine filer til eksempellinjerne. "Matcheresultaterne" viser med det samme om det lykkes at matche eller ej. "Sorteringsnøgleresultat" viser nøglen som bruges til sortering ved sammenfletning af historik. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Irrelevant sammenfletningskommando:</emphasis
+></term
+><listitem
+><para
+>Angiv en egen kommando som skal kaldes når Kdiff3 detekterer at filen fra B ikke bidrager med relevant data som ikke allerede findes i filen fra C. Denne kommando kaldes med de tre filnavne som parametre. Data som matches af "Regulært udtryk for automatisk sammenfletning" eller i historikken anses ikke for at være relevant. </para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -905,10 +1337,88 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Når en fil gemmes og en ældre version allerede findes, ændres originalversionens navn med tilføjelse af filendelsen ".orig". Hvis en gammel sikkerhedskopi med filendelsen "orig" allerede findes fjernes den uden sikkerhedskopiering. </para
+>Når en fil gemmes og en ældre version allerede eksisterer, ændres originalversionens navn med tilføjelse af filendelsen ".orig". Hvis en gammel sikkerhedskopi med ".orig" allerede eksisterer slettes den uden sikkerhedskopiering. </para
 ></listitem
 ></varlistentry>
 </variablelist>
+</sect2>
+
+<sect2
+><title
+>Indstillinger for region og sprog</title>
+  <variablelist>
+    <varlistentry
+><term
+><emphasis
+>Sprog:</emphasis
+></term
+><listitem
+><para
+>Justér brugergrænsefladens sprog. At ændre dette påvirker ikke programmet som kører. Du skal afslutte og genstarte &kdiff3; for at ændre sprog. (Dette er ikke tilgængeligt i &kde;-versionen af &kdiff3;, eftersom sproget kan justeres i de generelle &kde;-indstillinger.) </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Brug samme kodning til alt:</emphasis
+></term
+><listitem
+><para
+>Følgende kodningstilvalg kan justeres separat for hvert objekt, eller hvis tilvalget er sandt, indstilles alle værdier til den første værdi. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Lokal kodning:</emphasis
+></term
+><listitem
+><para
+>Ovenfor kodningsvælgerne vises en note som fortæller dig hvad den lokale kodning er (Den kan ikke justeres, men er kun til information hvis du ikke ved hvad den lokale kodning er, men har brug for at kunne vælge den.) </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Filkodning for A/B/C:</emphasis
+></term
+><listitem
+><para
+>Justér filkodningen for inddatafiler. Dette har en effekt på hvordan specialtegn tolkes. Eftersom du kan justere hvert kodning separat, kan du til og med sammenligne og sammenflette filer som blev gemt med forskellige kodninger. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Filkodning for sammenflettet uddata og ved at gemme:</emphasis
+></term
+><listitem
+><para
+>Når du har redigeret en fil, kan du justere hvilken kodning som bruges når den gemmes til disk. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Filkodning for præprocessorfiler:</emphasis
+></term
+><listitem
+><para
+>Når du definerer præprocessorer, kan de måske ikke håndtere din kodning (eksempelvis hvis dine filer bruger 16-bit Unicode og præprocessoren kun kan håndtere 8-bit ASCII). Med dette kan du definere kodningen for præprocessorens uddata. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><emphasis
+>Sprog som læses fra højre til venstre</emphasis
+></term
+><listitem
+><para
+>Visse sprog skrives fra højre til venstre. Når dette er aktiveret, tegner &kdiff3; tekst fra højre til venstre i sammenligningsvinduerne og i sammenfletningsvinduet. Bemærk at hvis du starter &kdiff3; med kommandolinjeflaget "--reverse" så vises al layout også fra højre til venstre. (Dette er en funktion som &Qt; sørger for.) Denne dokumentation er skrevet under antagelse af at "Sprog som læses fra højre til venstre" eller omvendt layout ikke er aktiverede. Visse referencer til "venstre" eller "højre" skal erstattes af det modsatte hvis du bruger disse valgmuligheder. </para
+></listitem
+></varlistentry>
+
+  </variablelist>
 </sect2>
 
 <sect2
@@ -944,7 +1454,27 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Slå dette fra for at undertrykke al fremhævning af ændringer der kun er i blanke tegn i teksten eller overblikssøjlerne. (Bemærk at dette også gælder ændringer i tal eller kommentarer hvis tilvalgene "Ignorér tal" eller "Ignorér C/C++ kommentarer" er aktive.)</para
+>Luk af for dette for ikke at vise ændringer af kun blanke tegn i teksten eller oversigtssøjlerne. (Bemærk at dette også gælder ændringer af cifre eller kommentarer hvis valgmulighederne "Ignorér cifre" eller "Ignorér C/C++ kommentarer" er aktive.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><emphasis
+>Overblikstilvalg:</emphasis
+></term
+><listitem
+><para
+>Disse tilvalg er kun tilgængelige når du sammenligner tre filer. I standardtilstand vises alle forskelle i en farvekodet oversigtssøjle, men sommetider er du især interesseret i forskellene mellem to af de tre filer. Ved at vælge oversigten "A mod B", "A mod C" eller "B mod C" vises en anden oversigtssøjle med den forespurgte information ved siden af den almindelige oversigt. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><emphasis
+>Tekstombrydning af diff-vinduer:</emphasis
+></term
+><listitem
+><para
+>Ombryd linjer når deres længde ville have været større end vinduets bredde. </para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -954,7 +1484,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Sommetider vil du bruge skærmpladsen bedre for lange linjer. Skjul vinduer som ikke er vigtige. (I vinduesmenuen.)</para
+>Sommetider vil du gerne bruge skærmpladsen bedre for lange linjer. Skjul vinduer som ikke er vigtige. (I menuen Vinduer.)</para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -964,7 +1494,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Skift mellem sammenligningvinduer som vises ved siden af hinanden (A til venstre for B til venstre for C) eller ovenover hinanden (A over B over C). Det bør også hjælpe for lange linjer. (I vinduesmenuen.) </para
+>Skift mellem sammenligningsvinduer som vises ved siden af hinanden (A til venstre for B til venstre for C) eller ovenfor hinanden (A over B over C). Dette bør også hjælpe med lange linjer. (I menuen Vinduer.) </para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -978,7 +1508,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><imageobject
 ><imagedata fileref="merge_current.png" format="PNG"/></imageobject
 ></inlinemediaobject
-> "Flet markerede filer" i menuen Flet virker også selvom du kun sammenligner to filer. Et enkelklik starter sammenfletningen og bruger filnavnet på den sidste inddatafil som standard udskriftsfilnavn. (Når dette bruges til at genstarte en sammenfletning, beholdes udskriftsfilnavnet.)</para
+> "Sammenflet denne fil" i menuen Mappe virker også hvis du kun sammenligner to filer. Et enkelklik starter sammenfletningen og bruger filnavnet på den sidste inddatafil som standarduddatafilnavn. (Når dette bruges til at genstarte en sammenfletning, beholdes uddatafilnavnet.)</para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -988,7 +1518,330 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Indstil genvejstaster</title>
 <para
->For øjeblikket understøtter kun KDE-versionen indstillelige genvejstaster (Menuen Opsætning -> Indstil genveje...) </para>
+>For øjeblikket understøtter kun &kde;-versionen indstillelige genvejstaster (Menuen Opsætning->Indstil genveje...) </para>
+</sect2>
+</sect1>
+
+<sect1 id="preprocessors"
+><title
+>Præprocessorkommandoer</title>
+<para
+>&kdiff3; understøtter to præprocessortilvalg. </para
+><para>
+<variablelist>
+   <varlistentry
+><term
+><emphasis
+>Præprocessorkommando:</emphasis
+></term
+><listitem
+><para
+>Når en fil læses, sendes den via denne eksterne kommando. Uddata fra denne kommando vises i stedet for den oprindelige fil. Du kan skrive din egen præprocessor som opfylder dine specielle behov. Brug dette til at fjerne forstyrrende dele af filen, eller for automatisk at korrigere indrykning, osv. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Præprocessorkommando for linjematchning:</emphasis
+></term
+><listitem
+><para
+>Når en fil læses, sendes den via denne eksterne kommando. Hvis en præprocessorkommando (se ovenfor) også angives er udskriften fra præprocessoren input til kommandoen for linjematchning. Udskriften bruges kun under linjematchningsfasen af analysen. Du kan skrive din egen præprocessor som opfylder dine specielle behov. Hvert inddatalinje skal have en tilsvarende uddatalinje. </para
+></listitem
+></varlistentry>
+</variablelist>
+</para>
+<para
+>Idéen er at tillade brugeren større fleksibilitet mens diff-resultatet indstilles. Men dette kræver et eksternt program, og mange brugere ønsker ikke selv at skrive et sådant. Heldigvis er det meget ofte sådan at  <command
+>sed</command
+> or <command
+>perl</command
+> vil kunne klare det. </para>
+<para
+>For eksempel et enkelt tilfælde at teste: Betragt filen a.txt (6 linjer): <screen>
+      aa
+      ba
+      ca
+      da
+      ea
+      fa
+</screen
+> Og filen b.txt (3 linjer): <screen>
+      cg
+      dg
+      eg
+</screen
+> Uden en præprocessor ville følgende linjer placeres ud for hinanden: <screen>
+      aa - cg
+      ba - dg
+      ca - eg
+      da
+      ea
+      fa
+</screen
+> Det er formodentlig ikke det der ønskes eftersom det første bogstav indeholder den interessante information. For at hjælpe matchealgoritmen med at ignorere det andet bogstav kan man bruge en linjematchende præprocessorkommando som erstatter 'g' med 'a': <screen>
+   <command
+>sed</command
+> 's/g/a/'
+</screen
+> Med den kommando bliver resultatet af at matche: <screen>
+      aa
+      ba
+      ca - cg
+      da - dg
+      ea - eg
+      fa
+</screen
+> Internt ser matchealgoritmen filerne efter den linjematchende præprocessor er kørt, men på skærmen er filen uforandret. (Den normale præprocessor ville også ændre data på skærmen.) </para>
+
+<sect2 id="sedbasics"
+><title
+>Basal <command
+>sed</command
+></title>
+<para
+>Dette afsnit introducerer blot nogle meget grundlæggende funktioner i <command
+>sed</command
+>. For mere information se <ulink url="info:/sed"
+>info:/sed</ulink
+> eller <ulink url="http://www.gnu.org/software/sed/manual/html_mono/sed.html"
+>http://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink
+>. En forkompileret version for &Windows; eksisterer på <ulink url="http://unxutils.sourceforge.net"
+>http://unxutils.sourceforge.net</ulink
+>. Bemærk at følgende eksempel antager at <command
+>sed</command
+> eksisterer i en mappe i miljøvariablen PATH. Hvis dette ikke er tilfældet, skal du angive fuldstændig absolut søgesti til kommandoen.  </para>
+<note
+><para
+>Bemærk også at følgende eksempel bruger enkle citationstegn ('), hvilket ikke virker i Windows. I Windows skal du i stedet bruge dobbelte citationstegn (").</para
+></note>
+<para
+>I denne sammenhæng bruges kun erstatningskommandoen i <command
+>sed</command
+>: <screen>
+   <command
+>sed</command
+> 's/<replaceable
+>REGUDTRYK</replaceable
+>/<replaceable
+>ERSTATNING</replaceable
+>/<replaceable
+>FLAG</replaceable
+>'
+</screen
+> Inden du bruger en ny kommando inde i Kdiff3, bør du først teste den i en terminal. Her er kommandoen <command
+>echo</command
+> nyttig. For eksempel: <screen>
+   <command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/'
+   -> obrakadabra
+</screen
+> Dette eksempel viser en meget enkel sed-kommando som erstatter den første forekomst af "a" med "o". Hvis du vil erstatte alle forekomster behøver du flaget "g": <screen>
+   <command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g'
+   -> obrokodobro
+</screen
+> Symbolet "|" er en pipe-kommando som overfører uddata fra foregående kommando til inddata i efterfølgende kommando. Hvis du vil teste med en længere fil kan du bruge <command
+>cat</command
+> på Unix-lignende systemer eller <command
+>type</command
+> på Windows-lignende systemer. <command
+>sed</command
+> udfører erstatningen for hver linje. <screen
+><command
+>cat</command
+> <replaceable
+>filnavn</replaceable
+> | <command
+>sed</command
+> <replaceable
+>flag</replaceable
+>
+</screen>
+</para>
+</sect2>
+<sect2 id="sedforkdiff3"
+><title
+>Eksempel på brug af <command
+>sed</command
+> i &kdiff3;</title>
+<sect3
+><title
+>Ignorering af andre typer kommentarer</title>
+<para
+>For øjeblikket forstår Kdiff3 kun C/C++ kommentarer. Ved at bruge en linjematchende præprocessorkommando kan du også ignorere andre typer af kommentarer ved at konvertere dem til C/C++ kommentarer. For eksempel for at  ignorere kommentarer som begynder med "#", skulle du ville konvertera dem til "//". Bemærk at du også skal aktivere tilvalget "Ignorér C/C++ kommentarer" for at få nogen virkning. En passende linjematchende præprocessorkommando ville være: <screen>
+   <command
+>sed</command
+> 's/#/\/\//'
+</screen
+> Eftersom tegnet "/" har en særlig betydning i <command
+>sed</command
+>, er det nødvendigt at tilføje tegnet "\" inden hver "/" i erstatningsstrengen. Sommetider behøves "\" for at tilføje eller fjerne en særlig betydning for visse tegn. De enkle citationstegn (') inden og efter erstatningskommandoen er nu vigtige, eftersom skallen ellers ville forsøge at tolke visse specialtegn som '#', '$' eller '\' inden de sendes til <command
+>sed</command
+>. <emphasis
+>Bemærk at i Windows behøver du dobbelte citationstegn (") her. Windows erstatter andre tegn som '%', så du kan få brug for at eksperimentere noget.</emphasis
+> </para>
+</sect3>
+<sect3
+><title
+>Ikke versalfølsom Diff</title>
+<para
+>Brug følgende linjematchende præprocessorkommando til at forvandle al inddata til store bogstaver: <screen>
+   <command
+>sed</command
+> 's/\(.*\)/\U\1/'
+</screen
+> Her er ".*" et regulært udtryk som matcher alle strenge, og i denne sammenhæng matcher alle tegn på linjen. Tegnet "\1" i erstatningsstrengen svarer til den matchede tekst mellem det første par "\(" og "\)". "\U" konverterer den indsatte tekst til store bogstaver. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorering af nøgleord for versionskontrol</title>
+<para
+>CVS og andre versionshåndteringssystemer bruger flere nøgleord til at indsætte automatisk genererede strenge (<ulink url="info:/cvs/Keyword substitution"
+>info:/cvs/Keyword substitution</ulink
+>). Alle følger mønstret "$NØGLEORD genereret tekst$". Nu behøver vi en linjematchende præprocessorkommando som kun fjerner den genererede tekst: <screen>
+   <command
+>sed</command
+> 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'
+</screen
+> Strengen "\|" skiller de mulige nøgleord ad. Du vil måske ændre listen ifølge dine behov. Tegnet "\" ud for "$" behøves eftersom "$" ellers matcher linjeslut. </para>
+<para
+>Mens du eksperimenterer med <command
+>sed</command
+> kommer du måske til at forstå og endog at kunne lide disse regulære udtryk. De er nyttige fordi der er mange andre programmer der også understøtter lignende ting. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorér cifre</title>
+<para
+>At ignorere tal er i virkeligheden et indbygget tilvalg, men som et andet eksempel, vises hvordan det ville se ud som en linjematchende præprocessorkommando. <screen>
+   <command
+>sed</command
+> 's/[0123456789.-]//g'
+</screen
+> Alle tegn indenfor '[' og ']' matcher og vil blive erstattet af ingenting. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorering af visse søjler</title>
+<para
+>Sommetider er teksten meget strengt formateret, og indeholder søjler som du altid vil ignorere, mens der er andre søjler du vil bevare for analyse. I følgende eksempel ignoreres de fem første søjler (tegn), de følgende ti søjler bevares, derefter ignoreres igen fem søjler og resten af linjen bevares. <screen>
+   <command
+>sed</command
+> 's/.....\(..........\).....\(.*\)/\1\2/'
+</screen
+> Hvert punktum '.' svarer til et hvilket som helst enkelt tegn. Strengene "\1" og "\2" i erstatningsstrengen refererer til den matchende tekst indenfor det første og andre par af  "\(" og "\)" som angiver teksten at bevare. </para>
+</sect3>
+
+<sect3
+><title
+>Kombination af flere substitutioner</title>
+<para
+>Sommetider vil du tilpasse flere erstatninger samtidigt. Så kan du bruge semikolon ';' for at skille dem fra hinanden. For eksempel: <screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g;s/\(.*\)/\U\1/'
+ -> OBROKODOBRO
+</screen>
+</para>
+</sect3>
+
+<sect3
+><title
+>Brug af <command
+>perl</command
+> i stedet for <command
+>sed</command
+></title>
+<para
+>I stællet for <command
+>sed</command
+> måske du vil bruge noget andet som <command
+>perl</command
+>. <screen>
+   <command
+>perl</command
+> -p -e 's/<replaceable
+>REGUTTRYCK</replaceable
+>/<replaceable
+>ERSÆTTNING</replaceable
+>/<replaceable
+>FLAGGOR</replaceable
+>'
+</screen
+> Men visse detaljer er anderledes i <command
+>perl</command
+>. Bemærk at hvor <command
+>sed</command
+> behøver "\(" og "\)" kræver <command
+>perl</command
+> det enklare  "(" og ")" uden indledende '\'. Till eksempel: <screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+  <command
+>perl</command
+> -p -e 's/(.*)/\U\1/'
+</screen>
+</para>
+</sect3>
+</sect2>
+
+<sect2
+><title
+>Rækkefølge for præprocessor-udførsel</title>
+<para
+>Data sendes gennem alle interne og eksterne præprocessorer i følgende rækkefølge: </para>
+<itemizedlist>
+<listitem
+><para
+>Normal præprocessor,</para
+></listitem>
+<listitem
+><para
+>Præprocessor for linjematchning,</para
+></listitem>
+<listitem
+><para
+>Ignorér versaler (konvertér til store bogstaver),</para
+></listitem>
+<listitem
+><para
+>Detektion af C/C++ kommentarer,</para
+></listitem>
+<listitem
+><para
+>Ignorér cifre,</para
+></listitem>
+<listitem
+><para
+>Ignorér blanke tegn</para
+></listitem>
+</itemizedlist>
+<para
+>Data efter den normale præprocessor vil blive bevaret til visning og indfletning. De andre operationer ændrer kun de data som den linjematchende diff-algoritme ser. </para
+><para
+>I de sjældne tilfælde hvor du bruger en normal præprocessor, bemærk at den linjematchende præprocessor ser uddata fra den normale præprocessor som inddata. </para>
+</sect2>
+
+<sect2
+><title
+>Advarsel</title>
+<para
+>Forbehandlingskommandoer er ofte meget nyttige, men som med alle tilvalg som ændrer teksten eller skjuler visse forskelle automatisk, kan du ved en fejl springe over visse forskelle og i værste fald ødelægge vigtige data. </para
+><para
+>Af denne grund, hvis en normal præprocessorkommando bruges under en sammenfletning, fortæller &kdiff3; dig om det og spørger om det skal deaktiveres eller ej. Men du får ingen advarsel hvis en linjematchende præprocessorkommando er aktiv. Sammenfletningen sker ikke førend alle konflikter er løste. Hvis du deaktiverede "Vis blanke tegn" bliver også forskellene som blev fjernet med den linjematchende præprocessorkommando usynlige. Hvis knappen Gem forbliver inaktiv under en sammenfletning (på grund af tilbageværende konflikter), så sørg for at aktivere "Vis blanke tegn". Hvis du ikke vil sammenflette disse mindre vigtige forskelle manuelt kan du vælge "Vælg [A|B|C] for uløste konflikter med blanke tegn" i menuen "Sammenflet". </para>
 </sect2>
 </sect1>
 </chapter>
@@ -996,14 +1849,14 @@ Please at least include KDE, the KDE package it is in, the name
 
 <chapter id="dirmerge"
 ><title
->Mappesammenligning og sammenfletning med KDiff3</title>
+>Mappesammenligning og sammenfletning med &kdiff3;</title>
 <sect1 id="dirmergeintro"
 ><title
->Indledning</title>
+>Introduktion til mappesammenligning og sammenfletning</title>
 <para
->Ofte skal programmører ændre mange filer i en mappe for at opnå deres formål. For at opnå dette lader KDiff3 dig også sammenligne og sammenflette hele mapper rekursivt! </para
+>Ofte skal programmører ændre mange filer i en mappe for at opnå deres formål. For at opnå dette lader &kdiff3; dig også sammenligne og sammenflette hele mapper rekursivt! </para
 ><para
->Selv om sammenligning og sammenfletning af mapper synes at være ganske selvklart, er der flere detaljer som du bør kende til. Det vigtigste er naturligvis  det faktum at mange filer nu kan påvirkes af hver handling. Hvis du ikke har sikkerhedskopier af originaldata, kan det være meget svært eller til og med umuligt at gå tilbage til originaltilstanden. Så inden du påbegynder en sammenfletning, skal du sørge for at data er sikrede, og at det er muligt at nulstille. Om du laver et arkiv, eller bruger et versionskontrolsystem er din egen beslutning, men til og med erfarne programmører og integratører behøver ind i mellem gammel kildekode. Bemærk også at selvom jeg (forfatteren til KDiff3) forsøger at gøre mit bedste, kan jeg ikke garantere at der ikke er fejl. Ifølge  GNU GPL er der INGEN GARANTI af nogen slags for dette program. Så vær ydmyg, og husk altid: </para>
+>Selvom sammenligning og sammenfletning af mapper synes at være ganske selvklart, er der flere detaljer som du bør kende til. Det vigtigste er naturligvis det faktum at mange filer nu kan påvirkes af hver handling. Hvis du ikke har sikkerhedskopier af originale data, kan det være meget svært eller til og med umuligt at komme tilbage til originaltilstanden. Så inden du påbegynder en sammenfletning, skal du sørge for at data er sikret, og at det er muligt at nulstille. Om du laver et arkiv, eller bruger et versionskontrolsystem er din egen beslutning, men til og med erfarne programmører og integratører behøver sommetider gammel kildekode. Bemærk også at også selvom jeg (forfatteren til &kdiff3;) forsøger at gøre mit bedste, kan jeg ikke garantere at der ikke er fejl. Ifølge GNU GPL er der INGEN GARANTI af nogen slags for dette program. Så hvor ydmyg, og husk altid: </para>
 <blockquote
 ><para>
    <emphasis
@@ -1011,7 +1864,7 @@ Please at least include KDE, the KDE package it is in, the name
 </para
 ></blockquote>
 <para
->Så dette er hvad programmet kan gøre for dig: KDiff3 ... </para>
+>Så dette er hvad programmet kan gøre for dig: &kdiff3; ... </para>
 <itemizedlist>
      <listitem
 ><para
@@ -1039,7 +1892,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
      <listitem
 ><para
->... lader dig køre den valgte operation for alle punkter (tasten F7) eller det valgte punkt (tasten F6),</para
+>... lader dig udføre valgt handling for alle punkter (tasten F7) eller markeret punkt (tasten F6),</para
 ></listitem>
      <listitem
 ><para
@@ -1047,7 +1900,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
      <listitem
 ><para
->... laver sikkerhedskopier, hvis du vil,med filendelsen ".orig".</para
+>... laver valgfrie sikkerhedskopier, med filendelsen ".orig".</para
 ></listitem>
      <listitem
 ><para
@@ -1074,11 +1927,11 @@ Please at least include KDE, the KDE package it is in, the name
 > <replaceable
 >kat1 kat2</replaceable
 > -o <replaceable
->målmappe</replaceable
+>målkat</replaceable
 >
 </screen>
 <para
->Hvis ingen målmappe angives, anvender KDiff3 <replaceable
+>Hvis ingen målmappe angives, bruger &kdiff3; <replaceable
 >kat2</replaceable
 >. </para>
 </sect2>
@@ -1096,28 +1949,28 @@ Please at least include KDE, the KDE package it is in, the name
 > <replaceable
 >kat1 kat2 kat3</replaceable
 > -o <replaceable
->målmappe</replaceable
+>målkat</replaceable
 >
 </screen>
 <para
 >Når tre mapper sammenflettes, bruges <replaceable
 >kat1</replaceable
-> som basis for sammenfletningen. Hvis ingen målmappe angives, bruger KDiff3 <replaceable
+> som basen for sammenfletningen. Hvis ingen målmappe angives, bruger &kdiff3; <replaceable
 >kat3</replaceable
 > som målmappe for sammenfletningen. </para>
 
 <para
->Bemærk at kun sammenligningen startes automatisk, ikke sammenfletningen. For det skal du først vælge et menupunkt eller tasten F7. (Mere information om det senere.) </para>
+>Bemærk at kun sammenligningen startes automatisk, ikke sammenfletningen. For det skal du først vælge et menupunkt eller tasten F7. (Mere information kommer senere.) </para>
 </sect2>
 </sect1>
 
 <sect1 id="dirmergevisible"
 ><title
->Synlig information</title>
+>Katalogsammenfletning af synlig information</title>
 <para
->Mens mapperne læses vises en meddelelsesboks som informerer dig om forløbet. Hvis du afbryder mappesøgningen, vises kun filer som hidtil er sammenlignet. </para
+>Mens mapperne læses vises et meddelelsesfelt som informerer dig om forløbet. Hvis du afbryder mappesøgningen, vises kun filer som hidtil er sammenlignet. </para
 ><para
->Når mappesøgningen er færdig, viser KDiff3 en listeboks med tilbageværende resultater, ... </para>
+>Når mappegennemsøgningen er færdig, viser &kdiff3; et listefelt med tilbageværende resultater, ... </para>
 <screenshot
 ><mediaobject>
 <imageobject
@@ -1141,7 +1994,7 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >Hver fil og mappe som blev fundet under søgningen vises her i et træ. Du kan vælge et punkt ved at klikke en gang på det med musen. </para
 ><para
->Mapperne er normalt lukkede. Du kan ekspandere og kollapse dem ved at klikke på "+"/"-", eller ved at dobbeltklikke på punktet eller ved at bruge tasterne venstre pil og højre pil. Menuen "Mappe" indeholder også to valgmuligheder "Fold alle undermapper sammen" og "Ekspandér alle undermapper" som du kan bruge til at kollapse eller ekspandere alle mapper på en gang. </para
+>Mapperne er normalt sammentrukket. Du kan ekspandere og trække dem sammen ved at klikke på "+"/"-", ved at dobbeltklikke på punktet eller ved at bruge tasterne "venstrepil" og "højrepil". Menuen "Mappe" indeholder også to tilvalg "Træk alle undermapper sammen" og "Ekspandér alle undermapper" som du kan bruge til at trække sammen eller ekspandere alle mapper på én gang. </para
 ><para
 >Hvis du dobbeltklikker på et filpunkt, udføres filsammenligning og sammenligningvinduet for filer vises. </para>
 <para
@@ -1176,7 +2029,7 @@ Please at least include KDE, the KDE package it is in, the name
 <itemizedlist>
      <listitem
 ><para
->Sort: Dette punkt findes ikke i denne mappe.</para
+>Sort: Dette punkt eksisterer ikke i denne mappe.</para
 ></listitem>
      <listitem
 ><para
@@ -1205,7 +2058,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Handlingssøjlen</title>
 <para
->Efter at have sammenlignet mapperne evaluerer KDiff3 også et forslag til en sammenfletningshandling. Det vises i søjlen "Handling". Du kan ændre den ved at klikke på handlingen du vil ændre. En lille menu dukker op og lader dig vælge en handling for punktet. (Du kan også vælge de mest nødvendige operationer via tastaturet. Ctrl+1/2/3/4/Del vil vælge henholdsvis A/B/C/Flet/Slet om muligt.) Handlingen udføres under sammenfletningen. Hvilke handlinger der er tilgængelige afhænger af objektet og sammenfletningstilstanden som bruges. Sammenfletningstilstanden er en af: </para>
+>Efter at have sammenlignet mapperne evaluerer &kdiff3; også et forslag til sammenfletningshandling. Den vises i søjlen "Handling". Du kan ændre den ved at klikke på handlingen du vil ændre. En lille menu dukker op og lader dig vælge en handling for dette punkt. (Du kan også vælge den oftest bruge handling via tastaturet. Ctrl+1/2/3/4/Delete vælger A/B/C/Sammenflet/Slet hvis de er tilgængelige.) Denne handling udføres under sammenfletningen. Hvilke handlinger som er tilgængelige afhænger af punktet og sammenfletningstilstanden som bruges. Sammenfletningstilstanden er en af: </para>
 <itemizedlist>
      <listitem
 ><para
@@ -1217,7 +2070,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
      <listitem
 ><para
->Tomappes-synkroniseringstilstand (aktiveres med punktet "Synkronisér mapper").</para
+>To-mappes synkroniseringstilstand (aktiveres med tilvalget "Synkronisér mapper").</para
 ></listitem>
 </itemizedlist>
 <para
@@ -1225,31 +2078,31 @@ Please at least include KDE, the KDE package it is in, the name
 <itemizedlist>
      <listitem
 ><para
->... alle tre mapperne er ens: Kopiér fra C</para
+>... alle tre mapper er ens: Kopiér fra C</para
 ></listitem>
      <listitem
 ><para
->... A og C er ens men B er det ikke: Kopiér fra B (eller hvis B ikke findes, fjern hvis det findes)</para
+>... A og C er ens med B er det ikke: Kopiér fra B (eller hvis B ikke eksisterer, slet målet hvis det eksisterer)</para
 ></listitem>
      <listitem
 ><para
->... A og B er ens men C er det ikke: Kopiér fra C (eller hvis C ikke findes, fjern målet hvis det findes)</para
+>... A og B er ens men C er det ikke: Kopiér fra C (eller hvis C ikke eksisterer, slet målet hvis det eksisterer)</para
 ></listitem>
      <listitem
 ><para
->... B og C er ens men A er det ikke: Kopiér fra C (eller hvis C ikke findes, fjern målet hvis det findes)</para
+>... B og C er ens med A er det ikke: Kopiér fra C (eller hvis C ikke eksisterer, slet målet hvis det eksisterer)</para
 ></listitem>
      <listitem
 ><para
->... kun A findes: Fjern målet (hvis det findes)</para
+>... kun A eksisterer: Slet målet (hvis det eksisterer)</para
 ></listitem>
      <listitem
 ><para
->... kun B findes: Kopiér fra B</para
+>... kun B eksisterer: Kopiér fra B</para
 ></listitem>
      <listitem
 ><para
->... kun C findes: Kopiér fra C</para
+>... kun C eksisterer: Kopiér fra C</para
 ></listitem>
      <listitem
 ><para
@@ -1257,7 +2110,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
      <listitem
 ><para
->... A, B og C har ikke samme filtype (f.eks. A er en mappe, B er en fil): "Fejl: Konflikt i filtyper". Så længe sådanne objekter findes, kan mappesammenfletningen ikke startes.</para
+>A, B og C har ikke samme filtype (f.eks. A er en mappe, B er en fil): "Fejl: Konflikt i filtyper". Så længe sådanne punkter eksisterer, kan mappesammenfletningen ikke startes.</para
 ></listitem>
 </itemizedlist>
 <para
@@ -1269,93 +2122,138 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
      <listitem
 ><para
->... A findes men B ikke: Kopiér fra A</para
+>...A eksisterer men ikke B: Kopiér fra A</para
 ></listitem>
      <listitem
 ><para
->... B findes men A ikke: Kopiér fra B</para
+>... B eksisterer men ikke A: Kopiér fra B</para
 ></listitem>
      <listitem
 ><para
->... A og B findes men er ikke ens: Sammenflet</para
+>... A og B eksisterer men er ikke ens: Sammenflet</para
 ></listitem>
      <listitem
 ><para
->... A og B har ikke samme filtype (f.eks. A er en mappe, B er en fil): "Fejl: Konflikt i filtyper". Hvis sådanne objekter findes, kan mappesammenfletningen ikke startes.</para
+>A og B har ikke samme filtype (f.eks. A er en mappe, B er en fil): "Fejl: Konflikt i filtyper". Så længe sådanne punkter eksisterer, kan mappesammenfletningen ikke startes.</para
 ></listitem>
 </itemizedlist>
 <para
->Synkroniseringstilstand er kun aktiv hvis to mapper og ingen eksplicit målmappe angives, og hvis punktet "Synkronisér mapper" er aktivt. KDiff3 vælger så en standardhandling så begge mapper er ens bagefter. Hvis for et objekt... </para>
+>Synkroniseringstilstand er kun aktiv hvis to mapper og ingen eksplicit målmappe angives, og hvis tilvalget "Synkronisér mapper" er aktivt. &kdiff3; vælger så en standardhandling så begge mapper er ens bagefter. Hvis for et punkt ... </para>
 <itemizedlist>
      <listitem
 ><para
->... begge mapper er ens: Gøres ingenting.</para
+>... begge mapper er ens: Ingenting gøres.</para
 ></listitem>
      <listitem
 ><para
->... A findes, men B ikke: Kopiér A til B</para
+>... A eksisterer, men ikke B: Kopiér A til B</para
 ></listitem>
      <listitem
 ><para
->... B findes, men A ikke: Kopiér B til A</para
+>... B eksisterer, men ikke A: Kopiér B til A</para
 ></listitem>
      <listitem
 ><para
->... A og B findes, men er ikke ens: Sammenflet og gem resultatet i begge mapper. (For brugeren er det synlige filnavnet for at gemme B, men derefter kopierer KDiff3 også B til A.)</para
+>... A og B eksisterer, men er ikke ens: Sammenflet og opbevar resultatet i begge mapper. (For brugeren er det synlige filnavn for at gemme B, men derefter kopierer &kdiff3; også B til A.)</para
 ></listitem>
      <listitem
 ><para
->... A og B har ikke samme filtype (f.eks. A er en mappe, B er en fil): "Fejl: Konflikt i filtyper". Hvis sådanne objekter findes, kan mappesammenfletningen ikke startes.</para
+>A og B har ikke samme filtype (f.eks. A er en mappe, B er en fil): "Fejl: Konflikt i filtyper". Så længe sådanne punkter eksisterer, kan mappesammenfletningen ikke startes.</para
 ></listitem>
 </itemizedlist>
 <para
->Når to mapper sammenflettes og punktet "Kopiér nyere i stedet for at sammenflette" er markeret, kigger KDiff3 på datoen og foreslår at vælge den nyeste fil. Hvis filerne ikke er ens men har samme dato, indeholder handlingen "Fejl: Dato er ens men filerne er det ikke." Hvis sådanne objekter findes, kan mappesammenfletningen ikke startes. </para>
+>Når to mapper sammenflettes og tilvalget "Kopiér nyere i stedet for at sammenflette" er markeret, kigger &kdiff3; på datoen og foreslår at vælge den nyere fil. Hvis filerne ikke er ens men har samme dato, indeholder handlingen "Fejl: Dato er ens men filerne er det ikke." Så længe sådanne punkter eksisterer, kan  mappesammenfletningen ikke startes. </para>
 </sect2>
 
 <sect2 id="status"
 ><title
 >Statussøjlen</title>
 <para
->Under sammenfletningen behandles en fil af gangen. Statussøjlen viser "Færdig" for objekter hvor sammenfletningshandlingen er lykkedes, og en anden tekst hvis noget uventet indtraf. Når en sammenfletning er færdig, bør du lave en sidste kontrol for at se at status for alle objekter er acceptabel. </para>
+>Under sammenfletningen behandles en fil af gangen. Statussøjlen viser "Færdig" for punkter hvor sammenfletningshandlingen er lykkedes, og en anden tekst hvis noget uventet indtraf. Når en sammenfletning er færdig, bør du udføre en sidste kontrol for at se at status for alle punkter er acceptabel. </para>
 </sect2>
+
+<sect2 id="statisticscolulmns"
+><title
+>Statistiske søjler</title>
+<para
+>Når filsammenligningtilstanden "Fuldstændig analyse" er aktiveret i valgmulighederne, viser &kdiff3; ekstra søjler som indeholder antal uløste, løste, ikke blanke og blanke konflikter. (Søjlen løste vises kun når mapper sammenlignes eller sammenflettes.) </para>
+</sect2>
+
+<sect2 id="selectingvisiblefiles"
+><title
+>Vælg listede filer</title>
+<para
+>Flere tilvalg påvirker hvilke filer som listes her. Nogle er tilgængelige i <link linkend="dirmergeoptions"
+>indstillingsdialogen</link
+>. Menuen Mappe indeholder punkterne: </para
+><para
+><itemizedlist>
+     <listitem
+><para
+>"Vis identiske filer": Filer som er detekteret som ens i alle inddatamapper.</para
+></listitem>
+     <listitem
+><para
+>"Vis forskellige filer": Filer som findes i to eller flere mapper men ikke er ens.</para
+></listitem>
+     <listitem
+><para
+>"Vis kun filer i A": Filer som kun findes i A, men ikke i B eller C.</para
+></listitem>
+     <listitem
+><para
+>"Vis kun filer i B": Filer som kun findes i B, men ikke i A eller C.</para
+></listitem>
+     <listitem
+><para
+>"Vis kun filer i C": Filer som kun findes i C, men ikke i A eller B.</para
+></listitem>
+</itemizedlist
+></para>
+<para
+>Aktivér kun valgmulighederne "Vis" for de punkter du vil liste. Hvis du for eksempel kun vil liste alle punkter som enten findes i A eller i B men ikke i begge, skal du aktivere "Vis kun filer i A" og "Vis kun filer i B" og deaktivere alle andre ("Vis identiske filer", "Vis forskellige filer", "Vis kun filer i C"). Listen opdateres med det samme for at svare til ændringen. </para
+><para
+>Disse tilvalg gælder også for mapper med en undtagelse: At deaktivere "Vis forskellige filer" skjuler ikke hele mapper. Dette fungerer kun for filer inde i dem. </para>
+</sect2>
+
 </sect1>
 
 
 <sect1 id="dothemerge"
 ><title
->Udfør en sammenfletning</title>
+>Udfør en mappesammenfletning</title>
 <para
 >Du kan enten sammenflette det valgte punkt (fil eller mappe), eller alle punkter. Når du har lavet alle valg af handlinger (også i alle undermapper), kan du udføre sammenfletningen. </para
 ><para
->Vær klar over at hvis du ikke eksplicit angav en målmappe, bliver målet "C" i tremappestilstand, "B" i tomappestilstand, og i synkroniseringstilstand er det "A" og/eller "B". </para
+>Vær klar over at hvis du ikke eksplicit angav en målmappe, bliver målet "C" i tre-mappetilstand, "B" i to-mappetilstand, og i synkroniseringstilstand er det "A" og/eller "B". </para
 ><para
->Hvis du også har angivet en målmappe, kontrollér at alle objekter som skal findes i udskriften findes i træet. Der er nogle valgmuligheder som får visse objekter til at blive udeladt fra mappesammenligningen og sammenfletningen. Kontrollér disse valgmuligheder for at undgå ubehagelige overraskelser: </para>
+>Hvis du også har angivet en målmappe, kontrollér at alle objekter som skal eksisterer i udskriften eksisterer i træet. Der er nogle valgmuligheder som får visse objekter til at blive udeladt fra mappesammenligningen og sammenfletningen. Kontrollér disse valgmuligheder for at undgå ubehagelige overraskelser: </para>
 <itemizedlist>
      <listitem
 ><para
->"Rekursive mapper": Hvis det er fra, findes objekter i undermapper ikke.</para
+>"Rekursive mapper": Hvis det er fra, er der ikke punkter i undermapper.</para
 ></listitem>
      <listitem
 ><para
->"Mønster" eller "undtagelsesmønster": Inkludér eller undtag objekter som matcher.</para
+>"Mønster" eller "Undtagelsesmønster": Inkludér eller undtag punkter som matcher.</para
 ></listitem>
      <listitem
 ><para
->"Undtag skjulte filer"</para
+>"Undtag gemte filer"</para
 ></listitem>
      <listitem
 ><para
->"Kun forskelle på listen": Filer som matcher i alle mapper vises ikke i træet, og altså heller ikke i målet.</para
+>"List kun forskelle": Filer som matcher i alle mapper vises ikke i træet, og altså heller ikke i målet.</para
 ></listitem>
 </itemizedlist>
 <para
->(I nuværende version skal du gøre en ekstra skanning selv via menuen "Mappe"->"Skan igen", efter at have ændret tilvalg som påvirker mappeskanningen.) </para
+>(I nuværende version skal du selv udføre en omsøgning via menuen "Mappe"-> "Skan igen", efter at have ændret tilvalg som påvirker mappegennemsøgningen.) </para
 ><para
 >Hvis du er tilfreds indtil videre, er resten enkelt. </para
 ><para
->For at sammenflette alle punkter: Vælg "Start/fortsæt mappesammenfletning" i "Mappe"-menuen eller tryk på F7 (som er genvejstatsen). For kun at flette det  nuværende punkt: Vælg  "Kør operation for dette punkt" eller tryk på F6. </para
+>For at sammenflette alle punkter: Vælg "Start eller fortsæt mappesammenfletning"  i menuen "Mappe" eller tryk på F7 (som er genvejstasten). For kun at sammenflette nuværende punkt: Vælg "Udfør handling for nuværende punkt" eller tryk på F6. </para
 ><para
->Hvis visse objekter med ugyldige filtyper stadigvæk findes, på grund af filtyper med konflikter, vises en meddelelseboks og objektet udpeges, så du kan vælge en gyldig handling for objektet. </para
+>Hvis visse objekter med ugyldige filtyper stadigvæk eksisterer, på grund af filtyper med konflikter, vises et meddelelsefelt og objektet udpeges, så du kan vælge en gyldig handling for objektet. </para
 ><para
 >Hvis du sammenfletter alle punkter vises en dialog som giver dig valgmulighederne "Gør det", "Simulér det" og "Annullér". </para>
 <itemizedlist>
@@ -1365,28 +2263,28 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
      <listitem
 ><para
->Ellers vælges "Gør det" for virkelig at udføre sammenfletningen.</para
+>Vælg ellers "Gør det" for virkelig at udføre sammenfletningen.</para
 ></listitem>
 </itemizedlist>
 <para
->Derefter kører KDiff3 den angivne handling for alle objekter. Hvis manuel interaktion kræves (sammenfletning af en enkelt fil), vises et sammenfletningsvindue (<link linkend="dirmergebigscreenshot"
+>Derefter udfører &kdiff3; den angivne handling for alle punkter. Hvis manuel interaktion kræves (sammenfletning af enkelt fil), vises et sammenfletningsvindue (<link linkend="dirmergebigscreenshot"
 >se det store skærmaftryk</link
 >). </para
 ><para
->Når du er klar med en fil, vælges igen "Start eller fortsæt mappesammenfletning" eller der trykkes på F7. Hvis du ikke har gemt endnu, beder en dialog dig om at gøre det. Derefter fortsætter KDiff3 til næste objekt. </para
+>Når du er færdig med en fil, vælges igen "Start eller fortsæt mappesammenfletning"  eller tryk på F7. Hvis du ikke har gemt endnu, beder en dialog dig om at gøre det. Derefter fortsætter &kdiff3; til næste punkt. </para
 ><para
->Når KDiff3 støder på et fejl, meddeles dette og udførlig statusinformation vises. Længst nede på listen er der nogle fejlmeddelelser som bør hjælpe dig til at forstå grunden til problemet. Når du fortsætter sammenfletningen (tasten F7), giver KDiff3 dig valget mellem at forsøge igen eller hoppe over objektet som forårsagede problemet. Det betyder at du kan vælge en anden handling, eller løse problemet på anden måde, inden du fortsætter. </para
+>Når &kdiff3; støder på en fejl, meddeles det og udførlig statusinformation vises. Længst nede i listen er der nogen fejlmeddelelser som bør hjælpe dig til at forstå problemets grund. Når du fortsætter sammenfletningen (tasten F7), giver &kdiff3; dig valget at forsøge igen eller springe over punktet som forårsagede problemet. Dette betyder at du kan vælge en anden handling, eller løse problemet på anden måde, inden du fortsætter. </para
 ><para
->Når sammenfletningen er færdig, informerer KDiff3 dig med en meddelelsesboks. </para
+>Når sammenfletningen er færdig, informerer &kdiff3; dig med et meddelelsesfelt. </para
 ><para
->Hvis nogen punkter blev sammenflettet individuelt så husker KDiff3 dette (mens denne flette-session er igang), og fletter dem ikke igen når den senere fletning for alle punkter foregår. Selv når sammenfletningen blev sprunget over eller intet blev gemt tæller disse punkter som færdige. Kun når du ændrer indfletningsoperationen vil punktet blive sammenflettet igen. </para>
+>Hvis visse punkter sammenflettedes individuelt, husker &kdiff3; det (mens sammenfletningssessionen er i gang), og sammenfletter dem ikke igen når sammenfletningen for alle punkter udføres. Selv når sammenfletningen springes over eller ingenting gemmes regnes disse punkter som færdige. Kun når sammenfletningshandlingen ændres, sammenflettes punkterne igen. </para>
 </sect1>
 
 <sect1 id="dirmergeoptions"
 ><title
 >Tilvalg for at sammenligne og sammenflette mapper</title>
 <para
->Indstilling af KDiff3 (menuen "Opsætning" -&gt; "Indstil KDiff3") har nu en side som hedder "Mappesammenfletning" med følgende punkter: </para>
+>Indstilling af &kdiff3; (menuen "Opsætning"-&gt;"Indstil KDiff3") har nu en side som hedder "Mappesammenfletning" med følgende tilvalg: </para>
 
 <variablelist>
    <varlistentry
@@ -1406,7 +2304,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Kun filer som matcher et mønstret her tilføjes til træet. Mere end et mønster kan angives ved at bruge semikolon ";" som skilletegn. Gyldige jokertegn: '*' og '?'. (f.eks. "*.cpp;*.h"). Normalværdien er "*". Mapper behøver ikke at  matche mønstret.</para
+>Kun filer som matcher et mønster her tilføjes i træet. Mere end et mønster kan angives ved at bruge semikolon ";" som skilletegn. Gyldige jokertegn: "*" og "?". (f.eks. "*.cpp;*.h"). Standardværdien er "*". Mapper behøver ikke at matche mønstret.</para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1416,7 +2314,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Filer og mapper som matcher et mønster undtages fra træet. Mere end et mønster kan angives ved at bruge semikolon ";" som skilletegn. Gyldige jokertegn: '*' og '?'. (f.eks. "*.cpp;*.h"). Normalværdien er "*.orig;*.o".</para
+>Filer og mapper som matcher et mønster undtages fra træet. Mere end et mønster kan angives ved at bruge semikolon ";" som skilletegn. Gyldige jokertegn: '*' og '?'. Standardværdien er "*.orig;*.o".</para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1426,7 +2324,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Ignorér filer og mapper som også skulle ignoreres af CVS. Mange automatisk genererede filer ignoreres af CVS. Den store fordel er at dette kan være mappespecifikt via en lokal ".cvsignore" fil. (Se <ulink url="info:/cvs/cvsignore"
+>Ignorér filer og mapper som også ville blive ignoreret af CVS. Mange automatisk genererede filer ignoreres af CVS. Den store fordel er at dette kan være mappespecifikt via en lokal ".cvsignore" fil. (Se <ulink url="info:/cvs/cvsignore"
 >info:/cvs/cvsignore</ulink
 >.)</para
 ></listitem
@@ -1438,7 +2336,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->For visse filsystemer har filer en "Skjult"-attribut. For andre systemer skjules et filnavn som begynder med et punktum. Denne valgmulighed lader dig bestemme om disse filer skal indgå i træet eller ej. Normalværdien er til.</para
+>For visse filsystemer har filer egenskaben "Skjult". For andre systemer skjules et filnavn som begynder med et punktum ("."). Dette lader dig bestemme om disse filer skal indgå i træet eller ej. Standardværdien er til.</para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1458,9 +2356,10 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->For link til mapper: Hvis det er deaktiveret, sammenlignes symbolske link. Hvis det er aktiveret behandles linket som en mappe og skannes rekursivt. (Bemærk at programmet ikke kontrollerer om linket er "rekursivt". En mappe som indeholder et link til samme mappe vil forårsage en uendelig løkke, og efter en vis tid når stakken bliver fuld eller hukommelsen er slut, bryder programmet sammen.) Normalværdien er fra.</para
+>For link til mapper: Hvis deaktiveret, sammenlignes symbolske link. Hvis aktiveret behandles linket som et mappe og gennemsøges rekursivt. (Bemærk at programmet ikke kontrollerer om linket er "rekursivt". En mappe som indeholder et link til samme mappe vil forårsage en uendelig løkke, og efter en vis tid når stakken bliver fuld eller hukommelsen løber ud, bryder programmet sammen.) Standardværdien er fra.</para
 ></listitem
-></varlistentry>
+></varlistentry
+>   
    <varlistentry
 ><term
 ><emphasis
@@ -1471,6 +2370,38 @@ Please at least include KDE, the KDE package it is in, the name
 >Kun objekter som ikke er ens i alle inddatamapper er på listen, og kun ændrede filer er synlige. Derfor kopieres filer ikke som er ens i alle mapper ved en sammenfletning og hvis målmappen ikke indeholder filerne før sammenfletningen, kan du muligvis senere mangle nogle filer. (Tilvalget bliver formodentlig ændret i en senere version.) Normalværdien er fra.</para
 ></listitem
 ></varlistentry>
+
+   <varlistentry
+><term
+><emphasis
+>Filsammenligningstilstand:</emphasis
+></term
+><listitem
+><para>
+<variablelist
+>            
+   <varlistentry
+><term
+><emphasis
+>Binær sammenligning:</emphasis
+></term
+><listitem
+><para
+>Dette er standardsammenligningstilstanden. </para
+></listitem
+></varlistentry
+>         
+   <varlistentry
+><term
+><emphasis
+>Fuld analyse:</emphasis
+></term
+><listitem
+><para
+>Udfør en fuld analyse for hver fil og vis de statistiske informationssøjler. (Antal løste, uløste, ikke blanke og blanke konflikter.) Den fulde analyse er langsommere end en simpel binær analyse, og meget langsommere når den bruges på filer der ikke indeholder tekst. (Angiv de passende fil-antimønstre.) </para
+></listitem
+></varlistentry
+>         
    <varlistentry
 ><term
 ><emphasis
@@ -1491,6 +2422,11 @@ Please at least include KDE, the KDE package it is in, the name
 >Ligesom at stile på ændringsdatoen. Ingen egentlig sammenligning foregår. To filer betragtes som ens hvis deres filstørrelser er ens. Dette er nyttigt når filkopieringsoperationen ikke bevarer ændringsdatoen. Brug dette med forsigtighed. Normalværdien er fra.</para
 ></listitem
 ></varlistentry>
+</variablelist
+></para
+></listitem
+></varlistentry>
+         
    <varlistentry
 ><term
 ><emphasis
@@ -1518,7 +2454,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Hvis en fil eller hel mappe erstattes af en anden eller fjernes, så ændres originalversionens navn med tilføjelsen af filendelsen ".orig". Hvis en gammel sikkerhedskopi med filendelsen "orig" allerede findes slettes den uden sikkerhedskopiering. Dette gælder også normal sammenfletning af enkelte filer, ikke kun sammenfletningstilstand for mapper. Normalværdien er til.</para
+>Hvis en fil eller hel mappe erstattes med en anden eller slettes, så ændres originalversionens navn med tilføjelse af filendelsen ".orig". Hvis en gammel sikkerhedskopi med filendelsen ".orig" allerede eksisterer slettes den uden sikkerhedskopiering. Dette gælder også normal sammenfletning af enkelte filer, ikke kun sammenfletningstilstand for mapper. Standardværdien er til.</para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -1526,21 +2462,33 @@ Please at least include KDE, the KDE package it is in, the name
 
 <sect1 id="other"
 ><title
->Øvrige funktioner</title>
+>Andre funktioner i mappesammenfletningsvinduet</title>
 <sect2
 ><title
 >Opdelt eller fuldskærmstilstand</title>
 <para
->Sædvanligvis forbliver listevinduet for mappesammenfletning synligt mens en enkelt fil sammenlignes eller sammenflettes. Du kan flytte linjen som opdeler fillisten fra vinduet for tekstsammenligning med musen. Hvis du ikke vil gøre dette, kan du deaktivere "Opdelt skærmvisning" i menuen "Vindue" for at skifte mellem fillisten og vinduet for tekstsammenligning, som så optager hele vinduet. </para>
+>Sædvanligvis forbliver listevinduet for mappesammenfletning synligt mens en enkelt fil sammenlignes eller sammenflettes. Du kan flytte linjen som opdeler fillisten fra vinduerne til tekstsammenligning med musen. Hvis du ikke vil gøre dette, kan du deaktivere "Opdelt skærmvisning" i menuen "Mappe". Derefter kan du bruge "Skift visning" i menuen "Mappe" til at skifte mellem fillisten og vinduerne til tekstsammenligning, som så optager hele vinduet. </para>
 </sect2>
 <sect2
 ><title
 >Sammenlign og sammenflette en enkelt fil</title>
 <para
->Du foretrækker formodentlig et almindeligt dobbeltklik på musen for at sammenligne en fil. Ikke desto mindre er der også en valgmulighed i menuen "Mappe". Du kan også sammenflette en enkelt fil direkte, uden at starte mappesammenfletningen via "Sammenflet markerede filer" i menuen "Sammenflet". Når resultatet gemmes, sættes status til klar, og filen sammenflettes ikke igen hvis en mappesammenfletning startes. </para
+>Du foretrækker formodentlig et almindeligt dobbeltklik på musen for at sammenligne en fil. Ikke desto mindre er der også en indgang i menuen "Mappe". Du kan også direkte sammenflette en enkelt fil, uden at starte mappesammenfletning via "Sammenflet markerede filer" i menuen "Mappe". Når resultatet gemmes, sættes status til færdig, og filen sammenflettes ikke igen hvis en mappesammenfletning startes. </para
 ><para
->Men bemærk at statusinformationen går tabt når du kører en mappeskanning igen: "Skan igen" i menuen "Mappe". </para>
+>Men observér at statusinformationen går tabt når du kører en mappegennemsøgning igen: "Mappe"-menuen "Skan igen". </para>
 </sect2>
+<sect2
+><title
+>Sammenlign og sammenflet filer med forskellige navne</title>
+<para
+>Sommetider behøver du at sammenligne eller sammenflette filer med forskellige navne (f.eks. nuværende fil og sikkerhedskopi i samme mappe). </para
+><para
+>Markér den nøjagtige fil ved at klikke på ikonen i søjlen A, B eller C. Filen som først markeres på den måde markeres med "A", den anden og tredje med "B" og "C" uafhængig af hvilken søjle de findes i. Kun op til tre filer kan markeres på denne måde. </para
+><para
+>Fortsæt ved at vælge "Sammenlign eksplicit markerede filer" eller "Sammenflet eksplicit markerede filer" fra menuen "Mappe". Af bekvemmelighedsgrunder findes også menuvalgmulighederne som en sammenhængsafhængig menu som vises når du klikker på den senest markerede fil. </para
+><para
+>Sammenligningen eller sammenfletningen af en fil sker i samme vindue. Hvis denne metode bruges for mapper åbnes et nyt vindue. </para
+></sect2>
 </sect1>
 </chapter>
 
@@ -1554,7 +2502,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >I/O-slaver</title>
 <para
->KDE understøtter netværksgennemsigtighed via I/O-slaver. KDiff3 bruger dem til at indlæse indddatafiler og gennemsøge mapper. Det betyder at du kan angive filer og mapper på lokal- og fjern-ressourcer via URL'er. </para
+>&kde; understøtter netværkstransparens via I/O-slaver. &kdiff3; bruger dem til at indlæse datafiler og gennemsøge mapper. Det betyder at du kan angive filer og mapper på lokal- og fjern-ressourcer via &URL;'er. </para
 ><para
 >Eksempel: </para
 ><para>
@@ -1568,7 +2516,7 @@ Please at least include KDE, the KDE package it is in, the name
 </screen>
 </para>
 <para
->Den første linje sammenligner en lokal fil med en fil på en FTP-server. Den anden linje sammenligner en mappe i et komprimeret arkiv med en lokal mappe. </para
+>Den første linje sammenligner en lokal fil med en fil på en &FTP;-server. Den anden linje sammenligner en mappe i et komprimerat arkiv med en lokal mappe. </para
 ><para
 >Andre I/O-slaver som er interessante er: </para>
 <itemizedlist>
@@ -1609,21 +2557,21 @@ Please at least include KDE, the KDE package it is in, the name
 
 <sect2
 ><title
->Hvordan man skriver URL'er</title>
+>Hvordan man skriver &URL;'er</title>
 <para
->En URL har en anderledes syntaks sammenlignet med søgestier til lokale filer og mapper. Der skal tages hensyn til visse ting: </para>
+>En &URL; har en anderledes syntaks sammenlignet med søgestier til lokale filer og mapper. Visse ting skal der tages hensyn til: </para>
 <itemizedlist>
 <listitem
 ><para
->En søgesti kan være relativ, og kan indeholde "." eller "..". Det er ikke muligt for URL'er, som altid er absolutte. </para
+>En søgesti kan være relativ, og kan indeholde "." eller "..". Dette er ikke muligt for &URL;'er, som altid er absolutte. </para
 ></listitem
 ><listitem
 ><para
->Specialtegn skal skrives med særlige "escape". ("#" -> "%23", mellemrum -> "%20", osv.) For eksempel skulle en fil med navnet "/#foo#" have URL'en "file:/%23foo%23". </para
+>Specialtegn skal skrives med særlige "escape". ("#"->"%23", mellemrum bliver til "%20", osv.) For eksempel ville en fil med navnet "/#foo#" have &URL; "file:/%23foo%23". </para
 ></listitem
 ><listitem
 ><para
->Når URL'er ikke virker som forventet, så forsøg at åbne dem i Konqueror først. </para
+>Når &URL;'er ikke virker som ventet, så forsøg at åbne dem i &konqueror; først. </para
 ></listitem>
 </itemizedlist>
 
@@ -1633,7 +2581,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Muligheder med I/O-slaver</title>
 <para
->Netværksgennemsigtighed har en bagdel: Ikke alle ressourcer har samme muligheder. </para
+>Netværkstransparens har en bagdel: Ikke alle ressourcer har samme muligheder. </para
 ><para
 >Sommetider skyldes det serverens filsystem, sommetider protokollen. Her er en kort liste med begrænsninger: </para>
 <itemizedlist>
@@ -1655,7 +2603,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem
 ><listitem
 ><para
->Ingen mulighed at ændre rettigheder eller ændringstid, så rettigheder eller tiden for en kopi adskiller sig fra originalen. (Se tilvalget "Stol på størrelse".) (Kun muligt for lokale filer.) </para
+>Ingen mulighed at ændre rettigheder eller ændringstid, så rettigheder eller tiden for en kopi adskiller sig fra originalen. (Se tilvalget "Stol på størrelse".)  (At ændre af tilladelser eller ændringstidspunkt er kun muligt for lokale filer.) </para
 ></listitem>
 </itemizedlist>
 </sect2>
@@ -1667,15 +2615,15 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >&kdiff3; er en Kpart. For øjeblikket implementeres grænsefladen KParts::ReadOnlyPart. </para
 ><para
->Hovedbrugen er til forskelsvisning i KDevelop. KDevelop starter altid den interne forskelsvisning først. For at bruge KDiff3, klikkes med højre museknap i forskelsvisningens vindue og "Vis i KDiff3Part" vælges i den sammenhængsafhængige menu. </para
+>Hovedanvendelsen er til forskelsvisning i KDevelop. KDevelop starter altid den interne forskelsvisning først. For at bruge &kdiff3;, klik med højre museknap i forskelsvisningens vindue og vælg "Vis i KDiff3-part" i den sammenhængsafhængige menuen. </para
 ><para
->KDiff3 kræver normalt to fuldstændige filer som inddata. Når den bruges som en part, antager KDiff3 at inddatafilen er en patch-fil med det forenede format. KDiff3 henter derefter originalfilernes navne i patch-filen. I det mindste en af de to filer skal være tilgængelig. KDiff3 starter så kommandoen <command
+>&kdiff3; kræver normalt to fuldstændige filer som inddata. Når det bruges som en part, antager &kdiff3; at inddatafilen er en programrettelsesfil i forenet format. &kdiff3; henter derefter originalfilernes navn i programrettelsesfilen. I det mindste en af de to filer skal være tilgængelig. &kdiff3; starter så kommandoen <command
 >patch</command
 > for at genoprette den anden fil. </para
 ><para
->Du kan vælge en patch-fil i Konqueror og vælge "Forhåndsvis i" - "Kdiff3Part" i den sammenhængsafhængige menu. Vær klar over om at det ikke virker hvis ingen af originalfilerne er tilgængelige, og er ikke tilforladeligt hvis originalfilen eller filerne er ændret siden patch-filen blev oprettet. </para
+>Du kan vælge en programrettelsesfil i &konqueror; og vælge "Forhåndsvis i"-"Kdiff3-part"i den sammenhængsafhængige menu. Vær klar over at dette ikke virker hvis ingen af originalfilerne er tilgængelige, og er ikke tilforladeligt hvis originalfilen eller filerne er ændret siden programrettelsesfilen blev oprettet. </para
 ><para
->Når den kører som en Kpart sørger KDiff3 kun for sammenligning mellem to filer, en meget lille værktøjslinje og menu. Sammenfletning eller mappesammenligning understøttes ikke i dette tilfælde. </para>
+>Når det kører som en Kpart sørger &kdiff3; kun for sammenligning mellem to filer, en meget lille værktøjslinje og menu. Sammenfletning eller mappesammenligning understøttes ikke. </para>
 </sect1>
 </chapter>
 
@@ -1687,22 +2635,22 @@ Please at least include KDE, the KDE package it is in, the name
 <qandaentry
 ><question
 ><para
->Hvorfor hedder den "KDiff3"? </para
+>Hvorfor kaldes det &kdiff3;? </para
 ></question
 ><answer
 ><para
->Værktøjer som hedder "KDiff" og "KDiff2" (som nu hedder "Kompare") fandtes allerede. Desuden skal "KDiff3" antyde at programmet kan sammenflette ligesom værktøjet "diff3" fra samlingen med diff-værktøj. </para
+>Værktøjer som hedder "KDiff" og "KDiff2" (som nu kaldes &kompare;) fandtes allerede. Desuden skal &kdiff3; antyde at programmet kan sammenflette ligesom værktøjet "diff3" fra samlingen med diff-værktøjer. </para
 ></answer
 ></qandaentry>
 
 <qandaentry
 ><question
 ><para
->Hvorfor er licensen GPL? </para
+>Hvorfor udgives det under GPL? </para
 ></question
 ><answer
 ><para
->Jeg har brugt GPL-programmer i meget lang tid nu, og lært mig meget ved at kigge på en hel del af kildekoden. Altså er dette min "tak" til alle de programmører som også gjorde dette eller vil gøre det samme. </para
+>Jeg har brugt GPL-programmer i meget lang tid nu, og lært mig meget ved at kigge på en hel del af kildekoden. Altså er dette min "tak" til alle programmører som også gjorde eller kommer til at gøre det samme. </para
 ></answer
 ></qandaentry>
 
@@ -1713,7 +2661,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></question
 ><answer
 ><para
->Du kompilerede fra kildekode, men angav formodentlig ikke det rigtige KDE-præfiks med configure. Normalt vil configure installere i /usr/local, men så kan KDE ikke finde ressourcefilerne for brugergrænsefladen (dvs. kdiff3ui.rc). Filen README indeholder mere information om rigtig præfiks. </para
+>Du kompilerede fra kildekode, men angav formodentlig ikke rigtigt &kde;-præfiks med 'configure'. Som standard vil configure installere i /usr/local, men så kan &kde; ikke finde ressourcefilerne for brugergrænsefladen (dvs. kdiff3ui.rc). README-filen indeholder mere information om rigtig præfiks. </para
 ></answer
 ></qandaentry>
 
@@ -1724,7 +2672,9 @@ Please at least include KDE, the KDE package it is in, the name
 ></question
 ><answer
 ><para
->Linjer hvor kun antal blanke tegn er forskellige behandles som "ens" i første omgang, mens blot et anderledes blankt tegn gør at linjerne er "forskellige". Hvis lignende linjer er ved siden af hinanden, er dette i virkeligheden et tilfælde men det sker heldigvis som regel ikke. </para
+>Linjer hvor kun antal blanke tegn er forskellige behandles først som "ens", mens kun et andet slags blankt tegn gør at linjerne er "forskellige". Hvis lignende linjer er ved siden af hinanden, er dette i virkeligheden et tilfælde men det er heldigvis ofte noget der sker. Se også manualen <link linkend="manualdiffhelp"
+>Diff Help</link
+>. </para
 ></answer
 ></qandaentry>
 
@@ -1742,7 +2692,20 @@ Please at least include KDE, the KDE package it is in, the name
 <qandaentry
 ><question
 ><para
->Hvorfor har editoren i resultatvinduet for sammenfletning ikke en "fortryd"-funktion? </para
+>Hvordan kan jeg synkronisere sammenligningsvisningen og sammenfletningsvisningen så alle visninger viser samme tekstposition? </para
+></question
+><answer
+><para
+>Klik på sammenfatningssøjlen til venstre for teksten. (<link linkend="synchronise_views"
+>Se også her.</link
+>) </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Hvorfor har editoren i resultatvinduet for sammenfletning ikke en "fortryde"-funktion? </para
 ></question
 ><answer
 ><para
@@ -1753,22 +2716,37 @@ Please at least include KDE, the KDE package it is in, the name
 <qandaentry
 ><question
 ><para
->Da jeg fjernede noget tekst, vistes pludseligt "&lt;Ingen kildelinje&gt;" og det kan ikke fjernes. Hvad betyder det og hvordan kan man fjerne det? </para
+>Når jeg fjernede en del tekst, vistes pludselig "&lt;Ingen kildelinje&gt;" og dette kan ikke slettes. Hvad betyder det og hvordan kan man fjerne det? </para
 ></question
 ><answer
 ><para
->For hvert ens eller forskelligt afsnit husker editoren i vinduet med sammenfletningsresultatet hvor det begynder og slutter. "&lt;Ingen kildelinje&gt;" betyder at der ikke er noget tilbage i et afsnit, ikke engang et nylinjetegn. Dette kan indtræffe enten ved automatisk sammenfletning eller efter redigering. Det er ikke noget problem, eftersom denne information ikke er med i den gemte fil. Hvis du vil have originalkilden tilbage, markeres kilden blot (klik på sammendragssøjlen til venstre) og klik derefter på kildeknappen med indholdet som ønskes (A, B eller C). </para
+>For hvert afsnit der er ligedan eller anderledes husker editoren i vinduet med sammenfletningsresultatet hvor det begynder og slutter. "&lt;Ingen kildelinje&gt;" betyder at der ikke er noget tilbage i et afsnit, ikke engang et nylinjetegn. Dette kan indtræffe enten ved automatisk sammenfletning eller efter redigering. Det er intet problem, eftersom denne information ikke eksisterer i den gemte fil. Hvis du vil have  originalkilden igen, markeres kilden blot (klikke på sammenfatningssøjlen til venstre) og klik derefter på kildeknappen med indholdet som ønskes (A, B eller C). </para
 ></answer
 ></qandaentry>
 
 <qandaentry
 ><question
 ><para
->Hvorfor understøtter KDiff3 ikke syntaksfremhævning? </para
+>Hvorfor understøtter &kdiff3; ikke syntaksfremhævning? </para
 ></question
 ><answer
 ><para
->KDiff3 bruger allerede mange farver til fremhævning af sammenligninger. Yderligere farvelægning ville være forvirrende. Brug en anden editor til dette. </para
+>&kdiff3; bruger allerede mange farver til fremhævning af sammenligninger. Yderligere frem,hævning ville være forvirrende. Burg en anden editor til dette. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Kan jeg bruge Kdiff3 til at sammenligne filer fra OpenOffice.Org, Word, Excel, PDF, og så videre? </para
+></question
+><answer
+><para
+>Selvom Kdiff3 kan analysere alle slags filer, vil resultatet formodentlig ikke være særligt tilfredsstillende for dig. </para
+><para
+>Kdiff3 blev lavet til at sammenligne rene tekstfiler. OpenOffice, Word, Excel, og så videre, opbevarer meget mere information i filerne (om skrifttype, billeder, sider, farver, osv.), som Kdiff3 ikke kender til. Altså viser Kdiff3 dig indholdet i filen tolket som ren tekst, men det er ikke den visning du er vant til. </para
+><para
+>Eftersom de fleste programmer nu om dage opbevarer deres indhold i XML-format, kan du måske læse det som ren tekst. Hvis ændringen kun var lille, kan Kdiff3 måske stadigvæk hjælpe dig. </para
 ></answer
 ></qandaentry>
 
@@ -1794,18 +2772,18 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >&kdiff3;: Værktøj til sammenligning og sammenfletning af filer og mapper </para>
 <para
->Program ophavsret 2002-2003 Joachim Eibl <email
->joachim.eibl@gmx.de</email
+>Program ophavsret 2002-2005 Joachim Eibl <email
+>joachim.eibl at gmx.de</email
 > </para>
 <para
 >Flere fede idéer og fejlrapporter kom fra kolleger og mange personer ude på www. Tak! </para>
 
 <para
->Dokumentation ophavsret &copy; 2002-2003 Joachim Eibl <email
->joachim. eibl@gmx.de</email
+>Dokumentation ophavsret &copy; 2002-2005 Joachim Eibl <email
+>joachim.eibl at gmx.de</email
 > </para>
 
-<para>Dansk oversættelse Erik Kjær Pedersen <email>erik@binghamton.edu</email></para>
+&erik.kjaer.pedersen.credit; 
 &underFDL; &underGPL; </chapter>
 
 <appendix id="installation">
@@ -1817,11 +2795,11 @@ Please at least include KDE, the KDE package it is in, the name
 >Hvordan får man fat på &kdiff3;</title>
 
 <para
->Du kan hente den nyeste version af KDiff3 fra hjemmesiden <ulink url="http://kdiff3.sourceforge.net"
+>Du kan hente seneste version af &kdiff3; fra hjemmesiden <ulink url="http://kdiff3.sourceforge.net"
 >http://kdiff3.sourceforge.net</ulink
 >. </para
 ><para
->KDiff3 er også tilgængelig for andre platforme. Se hjemmesiden for detaljer. </para>
+>&kdiff3; er også tilgængelig for andre platforme. Se hjemmesiden for detaljer. </para>
 
 
 </sect1>
@@ -1831,16 +2809,13 @@ Please at least include KDE, the KDE package it is in, the name
 >Krav</title>
 
 <para
->For at skal lykkes at bruge alle funktioner i &kdiff3;, har du brug for du &kde; 
-> 3.1. Sammenligningsværktøjet fra <ulink url="http://www.gnu.org/software/diffutils/diffutils.html"
->GNU-diff-utils</ulink
-> anbefales for bedste resultat. </para
+>For at bruge alle funktioner i &kdiff3; med godt resultat har du brug for &kde; 3.1 eller nyere. </para
 ><para
->For information om hvordan KDiff3 kan køres på andre platforme end KDE, se <ulink url="http://kdiff3.sourceforge.net"
+>For information om hvordan &kdiff3; kan køres på andre platforme uden &kde;, se <ulink url="http://kdiff3.sourceforge.net"
 >hjemmesiden</ulink
 >. </para
 ><para
->Du kan finde en liste med ændringer på <ulink url="http://kdiff3.sourceforge.net/ChangeLog"
+>Du finder en liste med ændringer på <ulink url="http://kdiff3.sourceforge.net/ChangeLog"
 >http://kdiff3.sourceforge.net/ChangeLog</ulink
 > eller i filen "ChangeLog" i kildekodepakken. </para>
 </sect1>
@@ -1850,7 +2825,7 @@ Please at least include KDE, the KDE package it is in, the name
 >Kompilering og installation</title>
 
 <para
->For at kompilere og installere &kdiff3; på et system med KDE, skrives følgende i basismappen for &kdiff3;'s distribution:</para>
+>For at kompilere og installere &kdiff3; på et system med KDE, skriv følgende i basismappen for distributionen af &kdiff3;:</para>
 
 <screen
 ><prompt
@@ -1858,7 +2833,7 @@ Please at least include KDE, the KDE package it is in, the name
 > <userinput
 ><command
 >./configure --prefix=<replaceable
->kde-dir</replaceable
+>kde-mappe</replaceable
 ></command
 ></userinput>
 <prompt
@@ -1877,14 +2852,18 @@ Please at least include KDE, the KDE package it is in, the name
 </screen>
 <para
 ><replaceable
->kde-dir</replaceable
-> angiver mappen hvor KDE findes på systemet. Hvis du ikke er sikker, læs filen README for detaljer. </para>
+>kde-mappe</replaceable
+> angiver mappen som indeholder KDE på dit system. Hvis du ikke er sikker, læs filen README for detaljer. </para>
+<para
+>Hvis du ikke bruger KDE, så brug ikke <command
+>configure</command
+> men følg instruktionerne for systemer som kun bruger Qt i filen README.</para>
 <para
 >Eftersom &kdiff3; bruger <command
 >autoconf</command
 > og <command
 >automake</command
-> bør du ikke have nogen problemer med at kompilere den. Skulle du støde på problemer, så vær venlig at rapportere dem til &kde;'s e-postlister.</para>
+> skulle du ikke have problemer med at kompilere det. Skulle du støde på problemer, så rapportér dem gerne til &kde;'s e-mail-lister.</para>
 
 </sect1>
 

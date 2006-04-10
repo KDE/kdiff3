@@ -2,8 +2,8 @@
                           mergeresultwindow.cpp  -  description
                              -------------------
     begin                : Sun Apr 14 2002
-    copyright            : (C) 2002-2004 by Joachim Eibl
-    email                : joachim.eibl@gmx.de
+    copyright            : (C) 2002-2006 by Joachim Eibl
+    email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
 /***************************************************************************
@@ -15,8 +15,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "diff.h"
-#include <stdio.h>
+#include "mergeresultwindow.h"
+#include "optiondialog.h"
+
 #include <qpainter.h>
 #include <qapplication.h>
 #include <qclipboard.h>
@@ -24,11 +25,12 @@
 #include <qfile.h>
 #include <qcursor.h>
 #include <qpopupmenu.h>
-#include <optiondialog.h>
+#include <qstatusbar.h>
+#include <qregexp.h>
+
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <iostream>
-#include <qstatusbar.h>
 
 int g_bAutoSolve = true;
 
@@ -54,11 +56,15 @@ MergeResultWindow::MergeResultWindow(
    m_scrollDeltaX = 0;
    m_scrollDeltaY = 0;
    m_bModified = false;
+   m_eOverviewMode=Overview::eOMNormal;
 
    m_fileName = "";
    m_pldA = 0;
    m_pldB = 0;
    m_pldC = 0;
+   m_sizeA = 0;
+   m_sizeB = 0;
+   m_sizeC = 0;
 
    m_pDiff3LineList = 0;
    m_pTotalDiffStatus = 0;
@@ -66,11 +72,13 @@ MergeResultWindow::MergeResultWindow(
 
    m_pOptionDialog = pOptionDialog;
    m_bPaintingAllowed = false;
+   m_delayedDrawTimer = 0;
 
    m_cursorXPos=0;
    m_cursorOldXPos=0;
    m_cursorYPos=0;
    m_bCursorOn = true;
+   m_bCursorUpdate = false;
    connect( &m_cursorTimer, SIGNAL(timeout()), this, SLOT( slotCursorUpdate() ) );
    m_cursorTimer.start( 500 /*ms*/, true /*single shot*/ );
    m_selection.reset();
@@ -80,9 +88,9 @@ MergeResultWindow::MergeResultWindow(
 }
 
 void MergeResultWindow::init(
-   const LineData* pLineDataA,
-   const LineData* pLineDataB,
-   const LineData* pLineDataC,
+   const LineData* pLineDataA, int sizeA,
+   const LineData* pLineDataB, int sizeB,
+   const LineData* pLineDataC, int sizeC,
    const Diff3LineList* pDiff3LineList,
    TotalDiffStatus* pTotalDiffStatus,
    QString fileName
@@ -102,6 +110,9 @@ void MergeResultWindow::init(
    m_pldA = pLineDataA;
    m_pldB = pLineDataB;
    m_pldC = pLineDataC;
+   m_sizeA = sizeA;
+   m_sizeB = sizeB;
+   m_sizeC = sizeC;
 
    m_pDiff3LineList = pDiff3LineList;
    m_pTotalDiffStatus = pTotalDiffStatus;
@@ -117,10 +128,20 @@ void MergeResultWindow::init(
    updateSourceMask();
 
    int wsc;
+   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
    m_pStatusBar->message( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)")
-         .arg(getNrOfUnsolvedConflicts(&wsc)).arg(wsc) );
+         .arg(nofUnsolved).arg(wsc) );
 }
 
+void MergeResultWindow::reset()
+{
+   m_pDiff3LineList = 0;
+   m_pTotalDiffStatus = 0;
+   m_pldA = 0;
+   m_pldB = 0;
+   m_pldC = 0;
+   m_fileName = "";
+}
 
 // Calculate the merge information for the given Diff3Line.
 // Results will be stored in mergeDetails, bConflict, bLineRemoved and src.
@@ -321,14 +342,14 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
          if ( ! ml.bConflict )
          {
             MergeLine& tmpBack = m_mergeLineList.back();
-            MergeEditLine mel;
-            mel.setSource( ml.srcSelect, ml.id3l, bLineRemoved );
+            MergeEditLine mel(ml.id3l);
+            mel.setSource( ml.srcSelect, bLineRemoved );
             tmpBack.mergeEditLineList.push_back(mel);
          }
          else if ( back==0  || ! back->bConflict || !bSame )
          {
             MergeLine& tmpBack = m_mergeLineList.back();
-            MergeEditLine mel;
+            MergeEditLine mel(ml.id3l);
             mel.setConflict();
             tmpBack.mergeEditLineList.push_back(mel);
          }
@@ -348,7 +369,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
             ml.mergeEditLineList.clear();
             if ( defaultSelector==-1 && ml.bDelta )
             {
-               MergeEditLine mel;
+               MergeEditLine mel(ml.id3l);;
                mel.setConflict();
                ml.bConflict = true;
                ml.mergeEditLineList.push_back(mel);
@@ -360,8 +381,8 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
 
                for( j=0; j<ml.srcRangeLength; ++j )
                {
-                  MergeEditLine mel;
-                  mel.setSource( defaultSelector, d3llit, false );
+                  MergeEditLine mel(d3llit);
+                  mel.setSource( defaultSelector, false );
 
                   int srcLine = defaultSelector==1 ? d3llit->lineA :
                                 defaultSelector==2 ? d3llit->lineB :
@@ -377,8 +398,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
 
                if ( ml.mergeEditLineList.empty() ) // Make a line nevertheless
                {
-                  MergeEditLine mel;
-                  mel.setSource( defaultSelector, ml.id3l, false );
+                  MergeEditLine mel(ml.id3l);
                   mel.setRemoved( defaultSelector );
                   ml.mergeEditLineList.push_back(mel);
                }
@@ -401,10 +421,13 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
          MergeEditLine& mel = *melIt;
          int melsrc = mel.src();
 
-         int srcLine = melsrc==1 ? mel.id3l()->lineA :
+         int srcLine = mel.isRemoved() ? -1 :
+                       melsrc==1 ? mel.id3l()->lineA :
                        melsrc==2 ? mel.id3l()->lineB :
                        melsrc==3 ? mel.id3l()->lineC : -1;
 
+         // At least one line remains because oldSrc != melsrc for first line in list
+         // Other empty lines will be removed
          if ( srcLine == -1 && oldSrcLine==-1 && oldSrc == melsrc )
             melIt = ml.mergeEditLineList.erase( melIt );
          else
@@ -413,6 +436,16 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
          oldSrcLine = srcLine;
          oldSrc = melsrc;
       }
+   }
+
+   if ( bAutoSolve && !bConflictsOnly )
+   {
+      if ( m_pOptionDialog->m_bRunHistoryAutoMergeOnMergeStart )
+         slotMergeHistory();
+      if ( m_pOptionDialog->m_bRunRegExpAutoMergeOnMergeStart )
+         slotRegExpAutoMerge();
+      if ( m_pldC != 0 && ! doRelevantChangesExist() )
+         emit noRelevantChangesDetected();
    }
 
    int nrOfSolvedConflicts = 0;
@@ -491,6 +524,29 @@ void MergeResultWindow::resizeEvent( QResizeEvent* e )
    emit resizeSignal();
 }
 
+Overview::e_OverviewMode MergeResultWindow::getOverviewMode()
+{
+   return m_eOverviewMode;
+}
+
+void MergeResultWindow::setOverviewMode( Overview::e_OverviewMode eOverviewMode )
+{
+   m_eOverviewMode = eOverviewMode;
+}
+
+// Check whether we should ignore current delta when moving to next/previous delta
+bool MergeResultWindow::checkOverviewIgnore(MergeLineList::iterator &i)
+{
+   if (m_eOverviewMode == Overview::eOMNormal) return false;
+   if (m_eOverviewMode == Overview::eOMAvsB)
+      return i->mergeDetails == eCAdded || i->mergeDetails == eCDeleted || i->mergeDetails == eCChanged;
+   if (m_eOverviewMode == Overview::eOMAvsC)
+      return i->mergeDetails == eBAdded || i->mergeDetails == eBDeleted || i->mergeDetails == eBChanged;
+   if (m_eOverviewMode == Overview::eOMBvsC)
+      return i->mergeDetails == eBCAddedAndEqual || i->mergeDetails == eBCDeleted || i->mergeDetails == eBCChangedAndEqual;
+   return false;
+}
+
 // Go to prev/next delta/conflict or first/last delta.
 void MergeResultWindow::go( e_Direction eDir, e_EndPoint eEndPoint )
 {
@@ -515,7 +571,7 @@ void MergeResultWindow::go( e_Direction eDir, e_EndPoint eEndPoint )
          if ( eDir==eUp )  --i;
          else              ++i;
       }
-      while ( i!=m_mergeLineList.end() && ( i->bDelta == false || bSkipWhiteConflicts && i->bWhiteSpaceConflict ) );
+      while ( i!=m_mergeLineList.end() && ( i->bDelta == false || checkOverviewIgnore(i) || bSkipWhiteConflicts && i->bWhiteSpaceConflict ) );
    }
    else if ( eEndPoint == eConflict  &&  i!=m_mergeLineList.end() )
    {
@@ -604,7 +660,7 @@ bool MergeResultWindow::isConflictBelowCurrent()
          if ( i->bConflict ) return true;
       }
    }
-   return false;   
+   return false;
 }
 
 bool MergeResultWindow::isUnsolvedConflictAboveCurrent()
@@ -726,16 +782,12 @@ int MergeResultWindow::getNrOfUnsolvedConflicts( int* pNrOfWhiteSpaceConflicts )
 
 void MergeResultWindow::showNrOfConflicts()
 {
-   int nrOfSolvedConflicts = 0;
-   int nrOfUnsolvedConflicts = 0;
-
+   int nrOfConflicts = 0;
    MergeLineList::iterator i;
    for ( i = m_mergeLineList.begin();  i!=m_mergeLineList.end(); ++i )
    {
-      if ( i->bConflict )
-         ++nrOfUnsolvedConflicts;
-      else if ( i->bDelta )
-         ++nrOfSolvedConflicts;
+      if ( i->bConflict || i->bDelta )
+         ++nrOfConflicts;
    }
    QString totalInfo;
    if ( m_pTotalDiffStatus->bBinaryAEqB && m_pTotalDiffStatus->bBinaryAEqC )
@@ -750,9 +802,12 @@ void MergeResultWindow::showNrOfConflicts()
       if    ( m_pTotalDiffStatus->bBinaryBEqC ) totalInfo += i18n("Files B and C are binary equal.\n");
       else if ( m_pTotalDiffStatus->bTextBEqC ) totalInfo += i18n("Files B and C have equal text. \n");
    }
+
+   int nrOfUnsolvedConflicts = getNrOfUnsolvedConflicts();
+
    KMessageBox::information( this,
-      i18n("Total number of conflicts: ") + QString::number(nrOfSolvedConflicts + nrOfUnsolvedConflicts) +
-      i18n("\nNr of automatically solved conflicts: ") + QString::number(nrOfSolvedConflicts) +
+      i18n("Total number of conflicts: ") + QString::number(nrOfConflicts) +
+      i18n("\nNr of automatically solved conflicts: ") + QString::number(nrOfConflicts-nrOfUnsolvedConflicts) +
       i18n("\nNr of unsolved conflicts: ") + QString::number(nrOfUnsolvedConflicts) +
       "\n"+totalInfo,
       i18n("Conflicts")
@@ -830,8 +885,8 @@ void MergeResultWindow::choose( int selector )
 
       for( j=0; j<ml.srcRangeLength; ++j )
       {
-         MergeEditLine mel;
-         mel.setSource( selector, d3llit, false );
+         MergeEditLine mel(d3llit);
+         mel.setSource( selector, false );
          ml.mergeEditLineList.push_back(mel);
 
          ++d3llit;
@@ -859,7 +914,7 @@ void MergeResultWindow::choose( int selector )
    if ( ml.mergeEditLineList.empty() )
    {
       // Insert a dummy line:
-      MergeEditLine mel;
+      MergeEditLine mel(ml.id3l);
 
       if ( bActive )  mel.setConflict();         // All src entries deleted => conflict
       else            mel.setRemoved(selector);  // No lines in corresponding src found.
@@ -877,8 +932,9 @@ void MergeResultWindow::choose( int selector )
    updateSourceMask();
    emit updateAvailabilities();
    int wsc;
+   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
    m_pStatusBar->message( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)")
-         .arg(getNrOfUnsolvedConflicts(&wsc)).arg(wsc) );
+         .arg(nofUnsolved).arg(wsc) );
 }
 
 // bConflictsOnly: automatically choose for conflicts only (true) or for everywhere (false)
@@ -890,8 +946,9 @@ void MergeResultWindow::chooseGlobal(int selector, bool bConflictsOnly, bool bWh
    emit modified();
    update();
    int wsc;
+   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
    m_pStatusBar->message( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)")
-         .arg(getNrOfUnsolvedConflicts(&wsc)).arg(wsc) );
+         .arg(nofUnsolved).arg(wsc) );
 }
 
 void MergeResultWindow::slotAutoSolve()
@@ -901,8 +958,9 @@ void MergeResultWindow::slotAutoSolve()
    emit modified();
    update();
    int wsc;
+   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
    m_pStatusBar->message( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)")
-         .arg(getNrOfUnsolvedConflicts(&wsc)).arg(wsc) );
+         .arg(nofUnsolved).arg(wsc) );
 }
 
 void MergeResultWindow::slotUnsolve()
@@ -912,24 +970,508 @@ void MergeResultWindow::slotUnsolve()
    emit modified();
    update();
    int wsc;
+   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
    m_pStatusBar->message( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)")
-         .arg(getNrOfUnsolvedConflicts(&wsc)).arg(wsc) );
+         .arg(nofUnsolved).arg(wsc) );
+}
+
+
+static void findHistoryRange( bool bThreeFiles, const Diff3LineList* pD3LList, 
+                             Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd )
+{
+   QRegExp historyStart(".*\\$Log.*\\$.*");
+   QString historyLead;
+   // Search for start of history
+   for( iBegin = pD3LList->begin(), idxBegin=0; iBegin!=pD3LList->end(); ++iBegin, ++idxBegin )
+   {
+      if ( historyStart.exactMatch( iBegin->getString(A) ) && 
+           historyStart.exactMatch( iBegin->getString(B) ) && 
+           ( !bThreeFiles || historyStart.exactMatch( iBegin->getString(C) ) ) )
+      {
+         historyLead = iBegin->getString(A).section(' ', 0, 0, QString::SectionIncludeLeadingSep);
+         break;
+      }
+   }
+   // Search for end of history
+   for( iEnd = iBegin, idxEnd = idxBegin; iEnd!=pD3LList->end(); ++iEnd, ++idxEnd )
+   {
+      QString sA = iEnd->getString(A);
+      QString sB = iEnd->getString(B);
+      QString sC = iEnd->getString(C);
+      if ( ! ((sA.isNull() || historyLead == sA.section(' ',0,0,QString::SectionIncludeLeadingSep)) &&
+           (sB.isNull() || historyLead == sB.section(' ',0,0,QString::SectionIncludeLeadingSep)) &&
+           (!bThreeFiles || sC.isNull() || historyLead == sC.section(' ',0,0,QString::SectionIncludeLeadingSep))
+         ))
+      {
+         break; // End of the history
+      }
+   }
+}
+
+bool findParenthesesGroups( const QString& s, QStringList& sl )
+{
+   sl.clear();
+   int i=0;
+   std::list<int> startPosStack;
+   int length = s.length();
+   for( i=0; i<length; ++i )
+   {
+      if ( s[i]=='\\' && i+1<length && ( s[i+1]=='\\' || s[i+1]=='(' || s[i+1]==')' ) )
+      {
+         ++i;
+         continue;
+      }
+      if ( s[i]=='(' )
+      {
+         startPosStack.push_back(i);
+      }
+      else if ( s[i]==')' )
+      {
+         if (startPosStack.empty())
+            return false; // Parentheses don't match
+         int startPos = startPosStack.back();
+         startPosStack.pop_back();
+         sl.push_back( s.mid( startPos+1, i-startPos-1 ) );
+      }
+   }
+   return startPosStack.empty(); // false if parentheses don't match
+}
+
+QString calcHistorySortKey( const QString& keyOrder, QRegExp& matchedRegExpr, const QStringList& parenthesesGroupList )
+{
+   QStringList keyOrderList = QStringList::split(',', keyOrder );
+   QString key;
+   for ( QStringList::iterator keyIt = keyOrderList.begin(); keyIt!=keyOrderList.end(); ++keyIt )
+   {
+      if ( (*keyIt).isEmpty() )
+         continue;
+      bool bOk=false;
+      int groupIdx = (*keyIt).toInt(&bOk);
+      if (!bOk || groupIdx<0 || groupIdx >(int)parenthesesGroupList.size() )
+         continue;
+      QString s = matchedRegExpr.cap( groupIdx );
+      if ( groupIdx == 0 )
+      {
+         key += s + " ";
+         continue;
+      }
+
+      QString groupRegExp = parenthesesGroupList[groupIdx-1];
+      if( groupRegExp.find('|')<0 || groupRegExp.find('(')>=0 )
+      {
+         bool bOk = false;
+         int i = s.toInt( &bOk );
+         if ( bOk && i>=0 && i<10000 )
+            s.sprintf("%04d", i);  // This should help for correct sorting of numbers.
+         key += s + " ";
+      }
+      else
+      {
+         // Assume that the groupRegExp consists of something like "Jan|Feb|Mar|Apr"
+         // s is the string that managed to match.
+         // Now we want to know at which position it occurred. e.g. Jan=0, Feb=1, Mar=2, etc.
+         QStringList sl = QStringList::split( '|', groupRegExp );
+         int idx = sl.findIndex( s );
+         if (idx<0)
+         {
+            // Didn't match
+         }
+         else
+         {
+            QString sIdx;
+            sIdx.sprintf("%02d", idx+1 ); // Up to 99 words in the groupRegExp (more than 12 aren't expected)
+            key += sIdx + " ";
+         }
+      }
+   }
+   return key;
+}
+
+void MergeResultWindow::collectHistoryInformation(
+   int src, Diff3LineList::const_iterator iHistoryBegin, Diff3LineList::const_iterator iHistoryEnd,
+   HistoryMap& historyMap,
+   std::list< HistoryMap::iterator >& hitList  // list of iterators
+   )
+{
+   std::list< HistoryMap::iterator >::iterator itHitListFront = hitList.begin();
+   Diff3LineList::const_iterator id3l = iHistoryBegin;
+   QString historyLead;
+   {
+      const LineData* pld = id3l->getLineData(src);
+      QString s( pld->pLine, pld->size );
+      historyLead = s.section(' ',0,0,QString::SectionIncludeLeadingSep);
+   }
+   QRegExp historyStart = m_pOptionDialog->m_historyStartRegExp;
+   ++id3l; // Skip line with "$Log ... $"
+   QRegExp newHistoryEntry = m_pOptionDialog->m_historyEntryStartRegExp;
+   QStringList parenthesesGroups;
+   findParenthesesGroups( m_pOptionDialog->m_historyEntryStartRegExp, parenthesesGroups );
+   QString key;
+   MergeEditLineList melList;
+   bool bPrevLineIsEmpty = true;
+   bool bUseRegExp = !m_pOptionDialog->m_historyEntryStartRegExp.isEmpty();
+   for(; id3l != iHistoryEnd; ++id3l )
+   {
+      const LineData* pld = id3l->getLineData(src);
+      if ( !pld ) continue;
+      QString s( pld->pLine, pld->size );
+      if (historyLead.isNull()) historyLead = s.section(' ',0,0,QString::SectionIncludeLeadingSep);
+      QString sLine = s.mid(historyLead.length());
+      if ( ( !bUseRegExp && !sLine.stripWhiteSpace().isEmpty() && bPrevLineIsEmpty )
+           || bUseRegExp && newHistoryEntry.exactMatch( sLine ) 
+         )
+      {
+         if ( !key.isEmpty() && !melList.empty() )
+         {
+            // Only insert new HistoryMapEntry if key not found; in either case p.first is a valid iterator to element key.
+            std::pair<HistoryMap::iterator, bool> p = historyMap.insert(HistoryMap::value_type(key,HistoryMapEntry()));
+            HistoryMapEntry& hme = p.first->second;
+            if ( src==A ) hme.mellA = melList;
+            if ( src==B ) hme.mellB = melList;
+            if ( src==C ) hme.mellC = melList;
+            if ( p.second ) // Not in list yet?
+            {
+               hitList.insert( itHitListFront, p.first );
+            }
+         }
+
+         if ( ! bUseRegExp )
+            key = sLine;
+         else
+            key = calcHistorySortKey(m_pOptionDialog->m_historyEntryStartSortKeyOrder,newHistoryEntry,parenthesesGroups);
+
+         melList.clear();
+         melList.push_back( MergeEditLine(id3l,src) );
+      }
+      else if ( ! historyStart.exactMatch( s ) )
+      {
+         melList.push_back( MergeEditLine(id3l,src) );
+      }
+
+      bPrevLineIsEmpty = sLine.stripWhiteSpace().isEmpty();
+   }
+   if ( !key.isEmpty() )
+   {
+      // Only insert new HistoryMapEntry if key not found; in either case p.first is a valid iterator to element key.
+      std::pair<HistoryMap::iterator, bool> p = historyMap.insert(HistoryMap::value_type(key,HistoryMapEntry()));
+      HistoryMapEntry& hme = p.first->second;
+      if ( src==A ) hme.mellA = melList;
+      if ( src==B ) hme.mellB = melList;
+      if ( src==C ) hme.mellC = melList;
+      if ( p.second ) // Not in list yet?
+      {
+         hitList.insert( itHitListFront, p.first );
+      }
+   }
+   // End of the history
+}
+
+MergeResultWindow::MergeEditLineList& MergeResultWindow::HistoryMapEntry::choice( bool bThreeInputs )
+{
+   if ( !bThreeInputs )
+      return mellA.empty() ? mellB : mellA;
+   else
+   {
+      if ( mellA.empty() )
+         return mellC.empty() ? mellB : mellC;       // A doesn't exist, return one that exists
+      else if ( ! mellB.empty() && ! mellC.empty() )
+      {                                              // A, B and C exist
+         return mellA;
+      }
+      else
+         return mellB.empty() ? mellB : mellC;       // A exists, return the one that doesn't exist
+   }
+}
+
+bool MergeResultWindow::HistoryMapEntry::staysInPlace( bool bThreeInputs, Diff3LineList::const_iterator& iHistoryEnd )
+{
+   // The entry should stay in place if the decision made by the automerger is correct.
+   Diff3LineList::const_iterator& iHistoryLast = iHistoryEnd;
+   --iHistoryLast;
+   if ( !bThreeInputs )
+   {
+      if ( !mellA.empty() && !mellB.empty() && mellA.begin()->id3l()==mellB.begin()->id3l() && 
+           mellA.back().id3l() == iHistoryLast && mellB.back().id3l() == iHistoryLast )
+      {
+         iHistoryEnd = mellA.begin()->id3l();
+         return true;
+      }
+      else
+      {
+         return false;
+      }
+   }
+   else
+   {
+      if ( !mellA.empty() && !mellB.empty() && !mellC.empty() 
+           && mellA.begin()->id3l()==mellB.begin()->id3l() && mellA.begin()->id3l()==mellC.begin()->id3l()
+           && mellA.back().id3l() == iHistoryLast && mellB.back().id3l() == iHistoryLast && mellC.back().id3l() == iHistoryLast )
+      {
+         iHistoryEnd = mellA.begin()->id3l();
+         return true;
+      }
+      else
+      {
+         return false;
+      }
+   }
+}
+
+void MergeResultWindow::slotMergeHistory()
+{
+   Diff3LineList::const_iterator iD3LHistoryBegin;
+   Diff3LineList::const_iterator iD3LHistoryEnd;
+   int d3lHistoryBeginLineIdx = -1;
+   int d3lHistoryEndLineIdx = -1;
+
+   // Search for history start, history end in the diff3LineList
+   findHistoryRange( m_pldC!=0, m_pDiff3LineList, iD3LHistoryBegin, iD3LHistoryEnd, d3lHistoryBeginLineIdx, d3lHistoryEndLineIdx );
+
+   if (  iD3LHistoryBegin != m_pDiff3LineList->end() )
+   {
+      // Now collect the historyMap information
+      HistoryMap historyMap;
+      std::list< HistoryMap::iterator > hitList;
+      if (m_pldC==0)
+      {
+         collectHistoryInformation( A, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList );
+         collectHistoryInformation( B, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList );
+      }
+      else
+      {
+         collectHistoryInformation( A, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList );
+         collectHistoryInformation( B, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList );
+         collectHistoryInformation( C, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList );
+      }
+
+      Diff3LineList::const_iterator iD3LHistoryOrigEnd = iD3LHistoryEnd;
+
+      bool bHistoryMergeSorting = m_pOptionDialog->m_bHistoryMergeSorting  && ! m_pOptionDialog->m_historyEntryStartSortKeyOrder.isEmpty() && 
+                                  ! m_pOptionDialog->m_historyEntryStartRegExp.isEmpty();
+
+      // Remove parts from the historyMap and hitList that stay in place
+      if ( bHistoryMergeSorting )
+      {
+         while ( ! historyMap.empty() )
+         {
+            HistoryMap::iterator hMapIt = historyMap.begin();
+            if( hMapIt->second.staysInPlace( m_pldC!=0, iD3LHistoryEnd ) )
+               historyMap.erase(hMapIt);
+            else
+               break;
+         }
+      }
+      else
+      {
+         while ( ! hitList.empty() )
+         {
+            HistoryMap::iterator hMapIt = hitList.back();
+            if( hMapIt->second.staysInPlace( m_pldC!=0, iD3LHistoryEnd ) )
+               hitList.pop_back();
+            else
+               break;
+         }
+      }
+      while (iD3LHistoryOrigEnd != iD3LHistoryEnd)
+      {
+         --iD3LHistoryOrigEnd;
+         --d3lHistoryEndLineIdx;
+      }
+
+      MergeLineList::iterator iMLLStart = splitAtDiff3LineIdx(d3lHistoryBeginLineIdx);
+      MergeLineList::iterator iMLLEnd   = splitAtDiff3LineIdx(d3lHistoryEndLineIdx);
+      // Now join all MergeLines in the history
+      MergeLineList::iterator i = iMLLStart;
+      if ( i != iMLLEnd )
+      {
+         ++i;
+         while ( i!=iMLLEnd )
+         {
+            iMLLStart->join(*i);
+            i = m_mergeLineList.erase( i );
+         }
+      }
+      iMLLStart->mergeEditLineList.clear();
+      // Now insert the complete history into the first MergeLine of the history
+      iMLLStart->mergeEditLineList.push_back( MergeEditLine( iD3LHistoryBegin, m_pldC == 0 ? B : C ) );
+      QString lead = iD3LHistoryBegin->getString(A).section(' ',0,0,QString::SectionIncludeLeadingSep);
+      MergeEditLine mel( m_pDiff3LineList->end() );
+      mel.setString( lead );
+      iMLLStart->mergeEditLineList.push_back(mel);
+
+      if ( bHistoryMergeSorting )
+      {
+         // Create a sorted history
+         HistoryMap::reverse_iterator hmit;
+         for ( hmit = historyMap.rbegin(); hmit != historyMap.rend(); ++hmit )
+         {
+            HistoryMapEntry& hme = hmit->second;
+            MergeEditLineList& mell = hme.choice(m_pldC!=0);
+            if (!mell.empty())
+               iMLLStart->mergeEditLineList.splice( iMLLStart->mergeEditLineList.end(), mell, mell.begin(), mell.end() );
+         }
+      }
+      else
+      {
+         // Create history in order of appearance
+         std::list< HistoryMap::iterator >::iterator hlit;
+         for ( hlit = hitList.begin(); hlit != hitList.end(); ++hlit )
+         {
+            HistoryMapEntry& hme = (*hlit)->second;
+            MergeEditLineList& mell = hme.choice(m_pldC!=0);
+            if (!mell.empty())
+               iMLLStart->mergeEditLineList.splice( iMLLStart->mergeEditLineList.end(), mell, mell.begin(), mell.end() );
+         }
+      }
+      setFastSelector( iMLLStart );
+      update();
+   }
+}
+
+void MergeResultWindow::slotRegExpAutoMerge()
+{
+   if ( m_pOptionDialog->m_autoMergeRegExp.isEmpty() )
+      return;
+
+   QRegExp vcsKeywords = m_pOptionDialog->m_autoMergeRegExp;
+   MergeLineList::iterator i;
+   for ( i=m_mergeLineList.begin(); i!=m_mergeLineList.end(); ++i )
+   {
+      if (i->bConflict )
+      {
+         Diff3LineList::const_iterator id3l = i->id3l;
+         if ( vcsKeywords.exactMatch( id3l->getString(A) ) && 
+              vcsKeywords.exactMatch( id3l->getString(B) ) &&
+              (m_pldC==0 || vcsKeywords.exactMatch( id3l->getString(C) )))
+         {
+            MergeEditLine& mel = *i->mergeEditLineList.begin();
+            mel.setSource( m_pldC==0 ? B : C, false );
+            splitAtDiff3LineIdx( i->d3lLineIdx+1 );
+         }
+      }
+   }
+   update();
+}
+
+// This doesn't detect user modifications and should only be called after automatic merge
+// This will only do something for three file merge.
+// Irrelevant changes are those where all contributions from B are already contained in C.
+// Also irrelevant are conflicts automatically solved (automerge regexp and history automerge)
+// Precondition: The VCS-keyword would also be C.
+bool MergeResultWindow::doRelevantChangesExist()
+{
+   if ( m_pldC==0 || m_mergeLineList.size() <= 1 )
+      return true;
+
+   MergeLineList::iterator i;
+   for ( i=m_mergeLineList.begin(); i!=m_mergeLineList.end(); ++i )
+   {
+      if ( ( i->bConflict && i->mergeEditLineList.begin()->src()!=C )
+         || i->srcSelect == B )
+      {
+         return true;
+      }
+   }
+
+   return false;
+}
+
+// Returns the iterator to the MergeLine after the split
+MergeResultWindow::MergeLineList::iterator MergeResultWindow::splitAtDiff3LineIdx( int d3lLineIdx )
+{
+   MergeLineList::iterator i;
+   for ( i = m_mergeLineList.begin();  i!=m_mergeLineList.end(); ++i )
+   {
+      if ( i->d3lLineIdx==d3lLineIdx )
+      {
+         // No split needed, this is the beginning of a MergeLine
+         return i;
+      }
+      else if ( i->d3lLineIdx > d3lLineIdx )
+      {
+         // The split must be in the previous MergeLine
+         --i;
+         MergeLine& ml = *i;
+         MergeLine newML;
+         ml.split(newML,d3lLineIdx);
+         ++i;
+         return m_mergeLineList.insert( i, newML );
+      }
+   }
+   // The split must be in the previous MergeLine
+   --i;
+   MergeLine& ml = *i;
+   MergeLine newML;
+   ml.split(newML,d3lLineIdx);
+   ++i;
+   return m_mergeLineList.insert( i, newML );
+}
+
+void MergeResultWindow::slotSplitDiff( int firstD3lLineIdx, int lastD3lLineIdx )
+{
+   if (lastD3lLineIdx>=0)
+      splitAtDiff3LineIdx( lastD3lLineIdx + 1 );
+   setFastSelector( splitAtDiff3LineIdx(firstD3lLineIdx) );
+}
+
+void MergeResultWindow::slotJoinDiffs( int firstD3lLineIdx, int lastD3lLineIdx )
+{
+   MergeLineList::iterator i;
+   MergeLineList::iterator iMLLStart = m_mergeLineList.end();
+   MergeLineList::iterator iMLLEnd   = m_mergeLineList.end();
+   for ( i=m_mergeLineList.begin(); i!=m_mergeLineList.end(); ++i )
+   {
+      MergeLine& ml = *i;
+      if ( firstD3lLineIdx >= ml.d3lLineIdx && firstD3lLineIdx < ml.d3lLineIdx + ml.srcRangeLength )
+      {
+         iMLLStart = i;
+      }
+      if ( lastD3lLineIdx >= ml.d3lLineIdx && lastD3lLineIdx < ml.d3lLineIdx + ml.srcRangeLength )
+      {
+         iMLLEnd = i;
+         ++iMLLEnd;
+         break;
+      }
+   }
+
+   bool bJoined = false;
+   for( i=iMLLStart;  i!=iMLLEnd && i!=m_mergeLineList.end(); )
+   {
+      if ( i==iMLLStart )
+      {
+         ++i;
+      }
+      else
+      {
+         iMLLStart->join(*i);
+         i = m_mergeLineList.erase( i );
+         bJoined = true;
+      }
+   }
+   if (bJoined)
+   {
+      iMLLStart->mergeEditLineList.clear();
+      // Insert a conflict line as placeholder
+      iMLLStart->mergeEditLineList.push_back( MergeEditLine( iMLLStart->id3l ) );
+   }
+   setFastSelector( iMLLStart );
 }
 
 void MergeResultWindow::myUpdate(int afterMilliSecs)
 {
-   killTimers();
+   killTimer(m_delayedDrawTimer);
    m_bMyUpdate = true;
-   startTimer( afterMilliSecs );
+   m_delayedDrawTimer = startTimer( afterMilliSecs );
 }
 
 void MergeResultWindow::timerEvent(QTimerEvent*)
 {
-   killTimers();
+   killTimer(m_delayedDrawTimer);
+   m_delayedDrawTimer = 0;
 
    if ( m_bMyUpdate )
    {
-      update();//paintEvent( 0 );
+      update();
       m_bMyUpdate = false;
    }
 
@@ -937,8 +1479,8 @@ void MergeResultWindow::timerEvent(QTimerEvent*)
    {
       m_selection.end( m_selection.lastLine + m_scrollDeltaY, m_selection.lastPos +  m_scrollDeltaX );
       emit scroll( m_scrollDeltaX, m_scrollDeltaY );
-      killTimers();
-      startTimer(50);
+      killTimer(m_delayedDrawTimer);
+      m_delayedDrawTimer = startTimer(50);
    }
 }
 
@@ -974,7 +1516,7 @@ QString MergeResultWindow::MergeEditLine::getString( const MergeResultWindow* mr
 }
 
 /// Converts the cursor-posOnScreen into a text index, considering tabulators.
-int convertToPosInText( const QString& s, int posOnScreen )
+int convertToPosInText( const QString& s, int posOnScreen, int tabSize )
 {
    int localPosOnScreen = 0;
    int size=s.length();
@@ -984,7 +1526,7 @@ int convertToPosInText( const QString& s, int posOnScreen )
          return i;
 
       // All letters except tabulator have width one.
-      int letterWidth = s[i]!='\t' ? 1 : tabber( localPosOnScreen, g_tabSize );
+      int letterWidth = s[i]!='\t' ? 1 : tabber( localPosOnScreen, tabSize );
 
       localPosOnScreen += letterWidth;
 
@@ -996,13 +1538,13 @@ int convertToPosInText( const QString& s, int posOnScreen )
 
 
 /// Converts the index into the text to a cursor-posOnScreen considering tabulators.
-int convertToPosOnScreen( const QString& p, int posInText )
+int convertToPosOnScreen( const QString& p, int posInText, int tabSize )
 {
    int posOnScreen = 0;
    for ( int i=0; i<posInText; ++i )
    {
       // All letters except tabulator have width one.
-      int letterWidth = p[i]!='\t' ? 1 : tabber( posOnScreen, g_tabSize );
+      int letterWidth = p[i]!='\t' ? 1 : tabber( posOnScreen, tabSize );
 
       posOnScreen += letterWidth;
    }
@@ -1049,7 +1591,7 @@ void MergeResultWindow::writeLine(
          int spaces = 1;
          if ( str[i]=='\t' )
          {
-            spaces = tabber( outPos, g_tabSize );
+            spaces = tabber( outPos, m_pOptionDialog->m_tabSize );
             for( int j=0; j<spaces; ++j )
                s+=' ';
          }
@@ -1062,8 +1604,8 @@ void MergeResultWindow::writeLine(
 
       if ( m_selection.lineWithin( line ) )
       {
-         int firstPosInLine = convertToPosOnScreen( str, convertToPosInText( str, m_selection.firstPosInLine(line) ) );
-         int lastPosInLine  = convertToPosOnScreen( str, convertToPosInText( str, m_selection.lastPosInLine(line) ) );
+         int firstPosInLine = convertToPosOnScreen( str, convertToPosInText( str, m_selection.firstPosInLine(line), m_pOptionDialog->m_tabSize ),m_pOptionDialog->m_tabSize );
+         int lastPosInLine  = convertToPosOnScreen( str, convertToPosInText( str, m_selection.lastPosInLine(line), m_pOptionDialog->m_tabSize ), m_pOptionDialog->m_tabSize );
          int lengthInLine = max2(0,lastPosInLine - firstPosInLine);
          if (lengthInLine>0) m_selection.bSelectionContainsData = true;
 
@@ -1078,7 +1620,7 @@ void MergeResultWindow::writeLine(
          if( m_selection.lineWithin( line+1 ) )
             p.fillRect( xOffset + fontWidth*(firstPosInLine2-m_firstColumn), yOffset,
                width(), fontHeight, colorGroup().highlight() );
-         else
+         else if ( lengthInLine2>0 )
             p.fillRect( xOffset + fontWidth*(firstPosInLine2-m_firstColumn), yOffset,
                fontWidth*lengthInLine2, fontHeight, colorGroup().highlight() );
 
@@ -1096,7 +1638,7 @@ void MergeResultWindow::writeLine(
       if ( m_cursorYPos==line )
       {
          m_cursorXPos = minMaxLimiter( m_cursorXPos, 0, outPos );
-         m_cursorXPos = convertToPosOnScreen( str, convertToPosInText( str, m_cursorXPos ) );
+         m_cursorXPos = convertToPosOnScreen( str, convertToPosInText( str, m_cursorXPos, m_pOptionDialog->m_tabSize ),m_pOptionDialog->m_tabSize );
       }
 
       p.drawText( 1, yOffset+fontAscent, srcName, true );
@@ -1155,10 +1697,13 @@ void MergeResultWindow::setPaintingAllowed(bool bPaintingAllowed)
 {
    m_bPaintingAllowed = bPaintingAllowed;
    if ( !m_bPaintingAllowed )
+   {
       m_currentMergeLineIt = m_mergeLineList.end();
+      reset();
+   }
 }
 
-void MergeResultWindow::paintEvent( QPaintEvent* e )
+void MergeResultWindow::paintEvent( QPaintEvent*  )
 {
    if (m_pDiff3LineList==0 || !m_bPaintingAllowed) return;
 
@@ -1168,7 +1713,7 @@ void MergeResultWindow::paintEvent( QPaintEvent* e )
    int fontWidth = fm.width("W");
    int fontAscent = fm.ascent();
 
-   if ( e!= 0 )  // e==0 for blinking cursor
+   if ( !m_bCursorUpdate )  // Don't redraw everything for blinking cursor?
    {
       m_selection.bSelectionContainsData = false;
       if ( size() != m_pixmap.size() )
@@ -1189,7 +1734,7 @@ void MergeResultWindow::paintEvent( QPaintEvent* e )
 
          if (hasFocus())
          {
-            p.fillRect( 0, 0, width(), topLineYOffset, lightGray /*m_pOptionDialog->m_diffBgColor*/ );
+            p.fillRect( 0, 0, width(), topLineYOffset, Qt::lightGray /*m_pOptionDialog->m_diffBgColor*/ );
          }
          else
          {
@@ -1230,7 +1775,7 @@ void MergeResultWindow::paintEvent( QPaintEvent* e )
 
                   QString s;
                   s = mel.getString( this );
-                  if ( convertToPosOnScreen(s,s.length()) >nofColumns)
+                  if ( convertToPosOnScreen(s,s.length(),m_pOptionDialog->m_tabSize) >nofColumns)
                      nofColumns = s.length();
 
                   writeLine( p, line, s, mel.src(), ml.mergeDetails, rangeMark,
@@ -1254,17 +1799,13 @@ void MergeResultWindow::paintEvent( QPaintEvent* e )
    }
 
    QPainter painter(this);
-   if ( e!= 0 )
-   {
-      painter.drawPixmap(0,0, m_pixmap);
-   }
 
    int topLineYOffset = fontHeight + 3;
    int xOffset = fontWidth * leftInfoWidth;
    int yOffset = ( m_cursorYPos - m_firstLine ) * fontHeight + topLineYOffset;
    int xCursor = ( m_cursorXPos - m_firstColumn ) * fontWidth + xOffset;
 
-   if ( e!= 0 )
+   if ( !m_bCursorUpdate )
       painter.drawPixmap(0,0, m_pixmap);
    else
    {
@@ -1274,7 +1815,9 @@ void MergeResultWindow::paintEvent( QPaintEvent* e )
       else
          painter.drawPixmap(width()-1-4-(xCursor-2), yOffset, m_pixmap,
                             width()-1-4-(xCursor-2), yOffset, 5, fontAscent+2 );
+      m_bCursorUpdate = false;
    }
+   painter.end();
 
    if ( m_bCursorOn && hasFocus() && m_cursorYPos>=m_firstLine )
    {
@@ -1324,7 +1867,7 @@ void MergeResultWindow::updateSourceMask()
       }
 
       if ( ml.mergeDetails == eNoChange ) 
-      { 
+      {
          srcMask = 0; 
          enabledMask = bModified ? 1 : 0; 
       }
@@ -1364,9 +1907,9 @@ void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
    int pos;
    convertToLinePos( e->x(), e->y(), line, pos );
 
-   bool bLMB = e->button() == LeftButton;
-   bool bMMB = e->button() == MidButton;
-   bool bRMB = e->button() == RightButton;
+   bool bLMB = e->button() == Qt::LeftButton;
+   bool bMMB = e->button() == Qt::MidButton;
+   bool bRMB = e->button() == Qt::RightButton;
 
    if ( bLMB && pos < m_firstColumn || bRMB )       // Fast range selection
    {
@@ -1398,7 +1941,7 @@ void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
    {
       pos = max2(pos,0);
       line = max2(line,0);
-      if ( e->state() & ShiftButton )
+      if ( e->state() & Qt::ShiftButton )
       {
          if (m_selection.firstLine==-1)
             m_selection.start( line, pos );
@@ -1434,7 +1977,7 @@ void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
 
 void MergeResultWindow::mouseDoubleClickEvent( QMouseEvent* e )
 {
-   if ( e->button() == LeftButton )
+   if ( e->button() == Qt::LeftButton )
    {
       int line;
       int pos;
@@ -1454,11 +1997,11 @@ void MergeResultWindow::mouseDoubleClickEvent( QMouseEvent* e )
       {
          int pos1, pos2;
 
-         calcTokenPos( s, pos, pos1, pos2 );
+         calcTokenPos( s, pos, pos1, pos2, m_pOptionDialog->m_tabSize );
 
          resetSelection();
-         m_selection.start( line, convertToPosOnScreen( s, pos1 ) );
-         m_selection.end( line, convertToPosOnScreen( s, pos2 ) );
+         m_selection.start( line, convertToPosOnScreen( s, pos1, m_pOptionDialog->m_tabSize ) );
+         m_selection.end( line, convertToPosOnScreen( s, pos2, m_pOptionDialog->m_tabSize ) );
 
          update();
          // emit selectionEnd() happens in the mouseReleaseEvent.
@@ -1468,9 +2011,10 @@ void MergeResultWindow::mouseDoubleClickEvent( QMouseEvent* e )
 
 void MergeResultWindow::mouseReleaseEvent ( QMouseEvent * e )
 {
-   if ( e->button() == LeftButton )
+   if ( e->button() == Qt::LeftButton )
    {
-      killTimers();
+      killTimer(m_delayedDrawTimer);
+      m_delayedDrawTimer = 0;
 
       if (m_selection.firstLine != -1 )
       {
@@ -1529,7 +2073,23 @@ void MergeResultWindow::slotCursorUpdate()
    m_bCursorOn = !m_bCursorOn;
 
    if ( isVisible() )
-      paintEvent(0);
+   {
+      m_bCursorUpdate = true;
+
+      const QFontMetrics& fm = fontMetrics();
+      int fontWidth = fm.width("W");
+      int topLineYOffset = fm.height() + 3;
+      int xOffset = fontWidth * leftInfoWidth;
+      int yOffset = ( m_cursorYPos - m_firstLine ) * fm.height() + topLineYOffset;
+      int xCursor = ( m_cursorXPos - m_firstColumn ) * fontWidth + xOffset;
+
+      if (!m_pOptionDialog->m_bRightToLeftLanguage)
+         repaint( xCursor-2, yOffset, 5, fm.ascent()+2 );
+      else
+         repaint( width()-1-4-(xCursor-2), yOffset, 5, fm.ascent()+2 );
+
+      m_bCursorUpdate=false;
+   }
 
    m_cursorTimer.start(500,true);
 }
@@ -1551,12 +2111,12 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
    calcIteratorFromLineNr( y, mlIt, melIt );
 
    QString str = melIt->getString( this );
-   int x = convertToPosInText( str, m_cursorXPos );
+   int x = convertToPosInText( str, m_cursorXPos, m_pOptionDialog->m_tabSize );
 
-   bool bCtrl  = ( e->state() & ControlButton ) != 0 ;
-   bool bShift = ( e->state() & ShiftButton   ) != 0 ;
+   bool bCtrl  = ( e->state() & Qt::ControlButton ) != 0 ;
+   bool bShift = ( e->state() & Qt::ShiftButton   ) != 0 ;
    #ifdef _WIN32
-   bool bAlt   = ( e->state() & AltButton     ) != 0 ;
+   bool bAlt   = ( e->state() & Qt::AltButton     ) != 0 ;
    if ( bCtrl && bAlt ){ bCtrl=false; bAlt=false; }  // AltGr-Key pressed.
    #endif
 
@@ -1564,10 +2124,10 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
    // Special keys
    switch ( e->key() )
    {
-      case  Key_Escape:       break;
+      case  Qt::Key_Escape:       break;
       //case  Key_Tab:          break;
-      case  Key_Backtab:      break;
-      case  Key_Delete:
+      case  Qt::Key_Backtab:      break;
+      case  Qt::Key_Delete:
       {
          if ( deleteSelection2( str, x, y, mlIt, melIt )) break;
          if( !melIt->isEditableText() )  break;
@@ -1601,7 +2161,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
          }
          break;
       }
-      case  Key_Backspace:
+      case  Qt::Key_Backspace:
       {
          if ( deleteSelection2( str, x, y, mlIt, melIt )) break;
          if( !melIt->isEditableText() )  break;
@@ -1639,8 +2199,8 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
          }
          break;
       }
-      case  Key_Return:
-      case  Key_Enter:
+      case  Qt::Key_Return:
+      case  Qt::Key_Enter:
       {
          if( !melIt->isEditableText() )  break;
          deleteSelection2( str, x, y, mlIt, melIt );
@@ -1669,7 +2229,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
                }
             }
          }
-         MergeEditLine mel;
+         MergeEditLine mel(mlIt->id3l);  // Associate every mel with an id3l, even if not really valid.
          mel.setString( indentation + str.mid(x) );
 
          if ( x<(int)str.length() ) // Cut off the old line.
@@ -1685,16 +2245,16 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
          ++y;
          break;
       }
-      case  Key_Insert:   m_bInsertMode = !m_bInsertMode;    break;
-      case  Key_Pause:        break;
-      case  Key_Print:        break;
-      case  Key_SysReq:       break;
-      case  Key_Home:     x=0;        if(bCtrl){y=0;      }  break;   // cursor movement
-      case  Key_End:      x=INT_MAX;  if(bCtrl){y=INT_MAX;}  break;
+      case  Qt::Key_Insert:   m_bInsertMode = !m_bInsertMode;    break;
+      case  Qt::Key_Pause:        break;
+      case  Qt::Key_Print:        break;
+      case  Qt::Key_SysReq:       break;
+      case  Qt::Key_Home:     x=0;        if(bCtrl){y=0;      }  break;   // cursor movement
+      case  Qt::Key_End:      x=INT_MAX;  if(bCtrl){y=INT_MAX;}  break;
 
-      case  Key_Left:
-      case  Key_Right:
-         if ( (e->key()==Key_Left) ^ m_pOptionDialog->m_bRightToLeftLanguage ) // operator^: XOR
+      case  Qt::Key_Left:
+      case  Qt::Key_Right:
+         if ( (e->key()==Qt::Key_Left) ^ m_pOptionDialog->m_bRightToLeftLanguage ) // operator^: XOR
          {
             if ( !bCtrl )
             {
@@ -1722,10 +2282,10 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
          }
          break;
 
-      case  Key_Up:       --y;                     bYMoveKey=true;   break;
-      case  Key_Down:     ++y;                     bYMoveKey=true;    break;
-      case  Key_PageUp:   y-=getNofVisibleLines(); bYMoveKey=true;    break;
-      case  Key_PageDown: y+=getNofVisibleLines(); bYMoveKey=true;    break;
+      case  Qt::Key_Up:       --y;                     bYMoveKey=true;   break;
+      case  Qt::Key_Down:     ++y;                     bYMoveKey=true;    break;
+      case  Qt::Key_PageUp:   y-=getNofVisibleLines(); bYMoveKey=true;    break;
+      case  Qt::Key_PageDown: y+=getNofVisibleLines(); bYMoveKey=true;    break;
       default:
       {
          QString t = e->text();
@@ -1747,7 +2307,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
                QString s=str;
                if ( t[0]=='\t' && m_pOptionDialog->m_bReplaceTabs )
                {
-                  int spaces = (m_cursorXPos / g_tabSize + 1)*g_tabSize - m_cursorXPos;
+                  int spaces = (m_cursorXPos / m_pOptionDialog->m_tabSize + 1)*m_pOptionDialog->m_tabSize - m_cursorXPos;
                   t.fill( ' ', spaces );
                }
                if ( m_bInsertMode )
@@ -1779,9 +2339,9 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
       newFirstLine = y - getNofVisibleLines();
 
    if (bYMoveKey)
-      x=convertToPosInText( str, m_cursorOldXPos );
+      x=convertToPosInText( str, m_cursorOldXPos, m_pOptionDialog->m_tabSize );
 
-   int xOnScreen = convertToPosOnScreen( str, x );
+   int xOnScreen = convertToPosOnScreen( str, x, m_pOptionDialog->m_tabSize );
    if ( xOnScreen<m_firstColumn )
       newFirstColumn = xOnScreen;
    else if ( xOnScreen > m_firstColumn + getNofVisibleColumns() )
@@ -1869,7 +2429,7 @@ QString MergeResultWindow::getSelection()
                   int spaces = 1;
                   if ( str[i]=='\t' )
                   {
-                     spaces = tabber( outPos, g_tabSize );
+                     spaces = tabber( outPos, m_pOptionDialog->m_tabSize );
                   }
 
                   if( m_selection.within( line, outPos ) )
@@ -1910,7 +2470,7 @@ bool MergeResultWindow::deleteSelection2( QString& s, int& x, int& y,
       y = m_cursorYPos;
       calcIteratorFromLineNr( y, mlIt, melIt );
       s = melIt->getString( this );
-      x = convertToPosInText( s, m_cursorXPos );
+      x = convertToPosInText( s, m_cursorXPos, m_pOptionDialog->m_tabSize );
       return true;
    }
    return false;
@@ -1979,14 +2539,14 @@ void MergeResultWindow::deleteSelection()
             {
                mlItFirst = mlIt;
                melItFirst = melIt;
-               int pos = convertToPosInText( lineString, firstPosInLine );
+               int pos = convertToPosInText( lineString, firstPosInLine, m_pOptionDialog->m_tabSize );
                firstLineString = lineString.left( pos );
             }
 
             if ( line==lastLine )
             {
                // This is the last line in the selection
-               int pos = convertToPosInText( lineString, lastPosInLine );
+               int pos = convertToPosInText( lineString, lastPosInLine, m_pOptionDialog->m_tabSize );
                firstLineString += lineString.mid( pos ); // rest of line
                melItFirst->setString( firstLineString );
             }
@@ -2027,7 +2587,7 @@ void MergeResultWindow::pasteClipboard( bool bFromSelection )
    melItAfter = melIt;
    ++melItAfter;
    QString str = melIt->getString( this );
-   int x = convertToPosInText( str, m_cursorXPos );
+   int x = convertToPosInText( str, m_cursorXPos, m_pOptionDialog->m_tabSize );
 
    if ( !QApplication::clipboard()->supportsSelection() )
       bFromSelection = false;
@@ -2045,8 +2605,8 @@ void MergeResultWindow::pasteClipboard( bool bFromSelection )
       if ( c == '\n' )
       {
          melIt->setString( currentLine );
-
-         melIt = mlIt->mergeEditLineList.insert( melItAfter, MergeEditLine() );
+         MergeEditLine mel(mlIt->id3l); // Associate every mel with an id3l, even if not really valid.
+         melIt = mlIt->mergeEditLineList.insert( melItAfter, mel );
          currentLine = "";
          x=0;
          ++y;
@@ -2062,7 +2622,7 @@ void MergeResultWindow::pasteClipboard( bool bFromSelection )
    melIt->setString( currentLine );
 
    m_cursorYPos = y;
-   m_cursorXPos = convertToPosOnScreen( currentLine, x );
+   m_cursorXPos = convertToPosOnScreen( currentLine, x, m_pOptionDialog->m_tabSize );
    m_cursorOldXPos = m_cursorXPos;
 
    update();
@@ -2193,9 +2753,15 @@ bool MergeResultWindow::findString( const QString& s, int& d3vLine, int& posInLi
 
 void MergeResultWindow::setSelection( int firstLine, int startPos, int lastLine, int endPos )
 {
+   if ( lastLine >= getNofLines() )
+   {
+      lastLine = getNofLines()-1;
+      QString s = getString( lastLine );
+      endPos = s.length();
+   }
    m_selection.reset();
-   m_selection.start( firstLine, convertToPosOnScreen( getString(firstLine), startPos ) );
-   m_selection.end( lastLine, convertToPosOnScreen( getString(lastLine), endPos ) );
+   m_selection.start( firstLine, convertToPosOnScreen( getString(firstLine), startPos, m_pOptionDialog->m_tabSize ) );
+   m_selection.end( lastLine, convertToPosOnScreen( getString(lastLine), endPos, m_pOptionDialog->m_tabSize ) );
    update();
 }
 
@@ -2207,6 +2773,7 @@ Overview::Overview( QWidget* pParent, OptionDialog* pOptions )
    m_bTripleDiff = false;
    m_eOverviewMode = eOMNormal;
    m_nofLines = 1;
+   m_bPaintingAllowed = false;
    setFixedWidth(20);
 }
 
@@ -2216,6 +2783,11 @@ void Overview::init( Diff3LineList* pDiff3LineList, bool bTripleDiff )
    m_bTripleDiff = bTripleDiff;
    m_pixmap.resize( QSize(0,0) );   // make sure that a redraw happens
    update();
+}
+
+void Overview::reset()
+{
+   m_pDiff3LineList = 0;
 }
 
 void Overview::slotRedraw()
@@ -2239,7 +2811,7 @@ void Overview::setFirstLine( int firstLine )
 void Overview::setOverviewMode( e_OverviewMode eOverviewMode )
 {
    m_eOverviewMode = eOverviewMode;
-   slotRedraw();   
+   slotRedraw();
 }
 
 Overview::e_OverviewMode Overview::getOverviewMode()
@@ -2266,12 +2838,13 @@ void Overview::setPaintingAllowed( bool bAllowPainting )
    {
       m_bPaintingAllowed = bAllowPainting;
       if ( m_bPaintingAllowed ) update();
+      else reset();
    }
 }
 
 void Overview::drawColumn( QPainter& p, e_OverviewMode eOverviewMode, int x, int w, int h, int nofLines )
 {
-   p.setPen(black);
+   p.setPen(Qt::black);
    p.drawLine( x, 0, x, h );
 
    if (nofLines==0) return;
@@ -2355,7 +2928,7 @@ void Overview::drawColumn( QPainter& p, e_OverviewMode eOverviewMode, int x, int
          case eBChanged:  break;
          default:         c = m_pOptions->m_colorForConflict;
                           bWhiteSpaceChange = d3l.bAEqC || d3l.bWhiteLineA && d3l.bWhiteLineC;
-                          break;         
+                          break;
          }
       }
       else if ( eOverviewMode==eOMBvsC )
@@ -2378,12 +2951,12 @@ void Overview::drawColumn( QPainter& p, e_OverviewMode eOverviewMode, int x, int
          // Make sure that lines with conflict are not overwritten.
          if (  c == m_pOptions->m_colorForConflict )
          {
-            p.fillRect(x+1, oldY, w, max2(1,y-oldY), bWhiteSpaceChange ? QBrush(c,Dense4Pattern) : c );
+            p.fillRect(x+1, oldY, w, max2(1,y-oldY), bWhiteSpaceChange ? QBrush(c,Qt::Dense4Pattern) : QBrush(c) );
             oldConflictY = oldY;
          }
          else if ( c!=m_pOptions->m_bgColor  &&  oldY>oldConflictY )
          {
-            p.fillRect(x+1, oldY, w, max2(1,y-oldY), bWhiteSpaceChange ? QBrush(c,Dense4Pattern) : c );
+            p.fillRect(x+1, oldY, w, max2(1,y-oldY), bWhiteSpaceChange ? QBrush(c,Qt::Dense4Pattern) : QBrush(c) );
          }
       }
 
@@ -2422,7 +2995,7 @@ void Overview::paintEvent( QPaintEvent* )
          for( i = m_pDiff3LineList->begin(); i!= m_pDiff3LineList->end(); ++i )
          {
             m_nofLines += i->linesNeededForDisplay;
-         }      
+         }
       }
       else
       {
@@ -2442,7 +3015,7 @@ void Overview::paintEvent( QPaintEvent* )
       {
          drawColumn( p, eOMNormal, 0, w/2, h, m_nofLines );
          drawColumn( p, m_eOverviewMode, w/2, w/2, h, m_nofLines );
-      }      
+      }
    }
 
    QPainter painter( this );
@@ -2450,8 +3023,9 @@ void Overview::paintEvent( QPaintEvent* )
 
    int y1 = h * m_firstLine / m_nofLines-1;
    int h1 = h * m_pageHeight / m_nofLines+3;
-   painter.setPen(black);
+   painter.setPen(Qt::black);
    painter.drawRect( 1, y1, w-1, h1 );
 }
 
 
+#include "mergeresultwindow.moc"

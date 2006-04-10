@@ -1,0 +1,3051 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+  <!ENTITY kdiff3 "<application
+>KDiff3</application
+>">
+  <!ENTITY kappname "&kdiff3;">
+  <!ENTITY package "extragear-utils">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Portuguese "INCLUDE">
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title
+>O Manual do &kdiff3;</title>
+
+<authorgroup>
+<author
+><personname
+> <firstname
+>Joachim</firstname
+> <surname
+>Eibl</surname
+></personname
+> <email
+>joachim.eibl at gmx.de</email
+> </author>
+<othercredit role="translator"
+><firstname
+>Pedro</firstname
+><surname
+>Morais</surname
+><affiliation
+><address
+><email
+>morais@kde.org</email
+></address
+></affiliation
+><contrib
+>Tradução</contrib
+></othercredit
+> 
+
+</authorgroup>
+
+<copyright>
+<year
+>2002</year
+><year
+>2005</year>
+<holder
+>Joachim Eibl</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2005-01-30</date>
+<releaseinfo
+>0.9.87</releaseinfo>
+
+<abstract>
+<para
+>O &kdiff3; é uma ferramenta de diferenças e junção das mesmas para ficheiros e pasta que: <itemizedlist>
+<listitem
+><para
+>compara e junta dois ou três ficheiros de texto ou pastas de entrada,</para
+></listitem>
+<listitem
+><para
+>mostra as diferenças linha-a-linha e carácter-a-carácter(!),</para
+></listitem>
+<listitem
+><para
+>oferece uma funcionalidade de junção automática,</para
+></listitem>
+<listitem
+><para
+>tem um editor para resolver confortavelmente os conflitos de junção,</para
+></listitem>
+<listitem
+><para
+>oferece a transparência de rede através do KIO,</para
+></listitem>
+<listitem
+><para
+>tem opções para realçar ou esconder as alterações nos espaços em branco ou comentários,</para
+></listitem>
+<listitem
+><para
+>suporta o Unicode, o UTF-8 e outras codificações de ficheiros.</para
+></listitem>
+</itemizedlist>
+</para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdeextragear</keyword>
+<keyword
+>kdiff3</keyword>
+<keyword
+>diff</keyword>
+<keyword
+>juntar</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>'diff' triplo</keyword>
+<keyword
+>comparar</keyword>
+<keyword
+>ficheiros</keyword>
+<keyword
+>pastas</keyword>
+<keyword
+>controlo de versões</keyword>
+<keyword
+>junção-por-três-vias</keyword>
+<keyword
+>diferenças-nas-linhas</keyword>
+<keyword
+>sincronizar</keyword>
+<keyword
+>kpart</keyword>
+<keyword
+>kio</keyword>
+<keyword
+>transparente na rede</keyword>
+<keyword
+>editor</keyword>
+<keyword
+>espaços em branco</keyword>
+<keyword
+>comentários</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction"
+><title
+>Introdução</title>
+<sect1 id="why"
+><title
+>Outra Interface para o Diff?</title>
+<para
+>Existem várias ferramentas de detecção de diferenças. Porquê escolher o &kdiff3;? Deixe que o autor diga porque o escreveu.</para>
+
+<para
+>O &kdiff3; começou porque eu tinha de fazer uma junção difícil. A junção é necessária quando várias pessoas trabalham nos mesmos ficheiros de um projecto. Uma junção poderá de alguma forma ser automatizada, quando a ferramenta de junção não só tem os novos ficheiros modificados (chamados de 'ramificações' ou 'branches'), mas também o ficheiro original (chamado de 'base'). A ferramenta de junção irá escolher automaticamente as modificações que só foram feitas numa das ramificações. Quando vários contribuintes alteram as mesmas linhas, então a  ferramenta de junção detecta um conflito que terá de ser resolvido manualmente.</para>
+
+<para
+>"A junção foi então difícil porque um dos colaboradores alterou várias coisas e corrigiu a indentação em vários sítios. Outro também alterou bastante texto, o que resultou em vários conflitos de junção".</para>
+
+<para
+>"A ferramenta que usei então só mostrava as linhas modificadas, mas não o que tinha sido alterado dentro dessas linhas. E não havia nenhuma informação sobre os locais em que só a indentação tinha sido alterada. A junção foi um pequeno pesadelo por isso".</para>
+
+<para
+>"Daí, foi este o início. A primeira versão podia mostrar as diferenças dentro de uma linha e mostrava as diferenças de espaços em branco. Depois, muitas outras funcionalidades foram adicionada para aumentar a utilidade".</para>
+
+<para
+>"Por exemplo, se você quiser comparar algum texto rapidamente, então poderá copiá-lo para a área de transferência e colá-lo noutra janela de diferenças".</para>
+
+<para
+>"Uma funcionalidade que necessitou de um grande esforço foi a comparação de pastas e a funcionalidade de junção, o que transformou o programa quase num navegador de ficheiros completo".</para>
+
+<para
+>Espero que o &kdiff3; funcione para si também. Divirta-se!</para>
+
+<para
+>Joachim Eibl (2003)</para>
+</sect1>
+
+<sect1 id="screenshots"
+><title
+>Imagens e Funcionalidades</title>
+<para
+>Esta imagem mostra a diferença entre dois ficheiros de texto</para>
+<para
+>(A usar uma versão anterior do &kdiff3;):</para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+
+<para
+>A junção por 3-vias é suportada por completo. Isto é útil se duas pessoas alterarem o código de forma independente.</para>
+<para
+>O ficheiro original (a base) é usado para ajudar o &kdiff3; a seleccionar automaticamente as alterações correctas.</para>
+<para
+>O editor de junções, por baixo das janelas de diferenças, permite-lhe resolver os conflitos, enquanto lhe mostra o resultado que irá obter.</para>
+<para
+>Poderá até editar o resultado.</para>
+
+<para
+>Esta imagem mostra três ficheiros de entrada a serem reunidos:</para>
+
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+
+<para id="dirmergebigscreenshot"
+>O &kdiff3; também o ajuda a comparar e a juntar pastas completas. Esta imagem mostra o &kdiff3; durante a junção de pastas:</para>
+
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="dirmergebig.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+
+</sect1>
+
+<sect1 id="features"
+><title
+>Mais Funcionalidades</title>
+<sect2
+><title
+>Visualizador de Diferenças Linha-a-Linha e Carácter-a-Carácter</title>
+
+<para
+>Usando as possibilidades de um ambiente gráfico a cores, o &kdiff3; mostra exactamente o que é a diferença. Quando tiver de fazer várias revisões de código, irá gostar disto.</para>
+
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="letter_by_letter.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Ver as Diferenças de Espaços em Branco de uma Vez</title>
+<para
+>Os espaços e as tabulações que são diferentes aparecem visivelmente. Quando as linhas diferem apenas pelo número de espaços em branco, isto poderá ser visto num instante se olhar para a coluna do resumo do lado esquerdo. (Não há mais problemas quando as pessoas mudam a indentação). </para>
+
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="white_space.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Diferenças Triplas</title>
+<para
+>Analise três ficheiros e veja no que eles diferem. </para
+><para
+>As janelas da esquerda/meio/direita são intituladas A/B/C e têm as cores azul/verde/magenta, respectivamente. </para
+><para
+>Se um dos ficheiros for igual e o outro for diferente numa linha, então a cor mostra qual o ficheiro que é diferente. A cor vermelha indica que ambos os ficheiros são diferentes. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="triple_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Junção Confortável de Dois ou Três Ficheiros de Entrada</title>
+<para
+>O &kdiff3; pode ser usado para juntar dois ou três ficheiros de entrada e junta automaticamente o máximo possível. O resultado é apresentado numa janela editável em que a maioria dos conflitos poderá ser resolvida com um simples 'click' do rato: Seleccione os botões A/B/C na barra de botões para seleccionar a origem que deverá ser usada. Dado que esta janela de resultado é um editor, até mesmo os conflitos que necessitem de mais correcções poderão ser resolvidos aqui sem necessitarem de outra ferramenta. </para>
+</sect2>
+
+<sect2
+><title
+>E ...</title>
+<itemizedlist>
+   <listitem
+><para
+>Navegação rápida através de botões.</para
+></listitem>
+   <listitem
+><para
+>Um 'click' do rato numa coluna de resumo sincroniza todas as janelas para mostrarem a mesma posição.</para
+></listitem>
+   <listitem
+><para
+>Seleccionar e copiar de qualquer janela para colar na janela do resultado da junção.</para
+></listitem>
+   <listitem
+><para
+>Uma coluna de visão geral que mostra onde estão as alterações e os conflitos.</para
+></listitem>
+   <listitem
+><para
+>As cores são ajustáveis de acordo com as suas preferências específicas.</para
+></listitem>
+   <listitem
+><para
+>Um tamanho de tabulação ajustável.</para
+></listitem>
+   <listitem
+><para
+>Uma opção para inserir espaço em vez de tabulações.</para
+></listitem>
+   <listitem
+><para
+>Abertura confortável dos ficheiros através de uma janela ou da linha de comandos.</para
+></listitem>
+   <listitem
+><para
+>Procurar por sequências de texto em todas as janelas de texto. Procurar (<keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) e Procurar o Próximo (<keycap
+>F3</keycap
+>).</para
+></listitem>
+   <listitem
+><para
+>Mostrar os números de linha para cada linha. </para
+></listitem>
+   <listitem
+><para
+>Colar o conteúdo da área de transferência e arrastar o texto para uma janela de introdução de diferenças.</para
+></listitem>
+   <listitem
+><para
+>Transparência na rede através do KIO.</para
+></listitem>
+   <listitem
+><para
+>Pode ser usado como visualizador de diferenças no KDevelop 3.</para
+></listitem>
+   <listitem
+><para
+>Mudança de linha para as linhas compridas para as repartir.</para
+></listitem>
+   <listitem
+><para
+>Suporte para o Unicode, UTF-8 e outras codificações.</para
+></listitem>
+   <listitem
+><para
+>Suporte para as línguas escritas da direita-para-esquerda.</para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="documentation"
+><title
+>Documentação da Comparação e Junção de Ficheiros</title>
+
+<sect1 id="commandline"
+><title
+>Opções da Linha de Comandos</title>
+
+<sect2
+><title
+>Comparar 2 ficheiros: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>ficheiro1 ficheiro2</replaceable
+></screen>
+</sect2>
+
+<sect2
+><title
+>Juntar 2 ficheiros: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>ficheiro1 ficheiro2</replaceable
+> <option
+>-m</option>
+<command
+>kdiff3</command
+> <replaceable
+>ficheiro1 ficheiro2</replaceable
+> <option
+>-o</option
+> <replaceable
+>resultado</replaceable
+></screen>
+</sect2>
+
+<sect2
+><title
+>Comparar 3 ficheiros: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>ficheiro1 ficheiro2 ficheiro3</replaceable
+></screen>
+</sect2>
+
+<sect2
+><title
+>Juntar 3 ficheiros: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>ficheiro1 ficheiro2 ficheiro3</replaceable
+> <option
+>-m</option>
+<command
+>kdiff3</command
+> <replaceable
+>ficheiro1 ficheiro2 ficheiro3</replaceable
+> <option
+>-o</option
+> <replaceable
+>resultado</replaceable
+></screen>
+<para
+>Repare que o <replaceable
+>ficheiro1</replaceable
+> será tratado como base para o <replaceable
+>ficheiro2</replaceable
+> e o <replaceable
+>ficheiro3</replaceable
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Caso especial: Ficheiros com o mesmo nome </title>
+<para
+>Se todos os ficheiros tiverem o mesmo nome mas estiverem em pastas diferentes, poderá reduzir o trabalho de escrita se indicar apenas o nome do ficheiro para o primeiro parâmetro. &eg;: </para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>pasta1/ficheiro pasta2 pasta3</replaceable
+></screen>
+</sect2>
+
+<sect2
+><title
+>Linha de comandos para iniciar uma comparação ou junção de pastas: </title>
+<para
+>É bastante semelhante, mas diz respeito agora apenas às pastas.</para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2</replaceable>
+<command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2</replaceable
+> <option
+>-o</option
+> <replaceable
+>destino</replaceable>
+<command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2 pasta3</replaceable>
+<command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2 pasta3</replaceable
+> <option
+>-o</option
+> <replaceable
+>destino</replaceable
+>
+</screen>
+<para
+>Para a comparação e junção de pastas, poderá continuar a ler <link linkend="dirmerge"
+>aqui</link
+>.</para>
+</sect2>
+
+<sect2
+><title
+>Para mais informações sobre as opções da linha de comandos use: </title>
+<screen
+><command
+>kdiff3</command
+> --help
+Opções:
+  -m, --merge               Junta o resultado.
+  -b, --base ficheiro       Ficheiro de base explícito. Para compatibilidade com certas ferramentas.
+  -o, --output ficheiro     Ficheiro de resultado. O -m é implícito. P.ex.: -o novo_ficheiro.txt
+  --out ficheiro            O ficheiro de resultado, mais uma vez. (Para compatibilidade com certas ferramentas.)
+  --auto                    Sem interface gráfica se todos os conflitos são resolúveis. (Necessita do -o)
+  --qall                    Não resolve os conflitos automaticamente. (Para compatibilidade...)
+  --L1 nome1                Substituto visível do nome do ficheiro 1 (base).
+  --L2 nome2                Substituto visível do nome do ficheiro 2.
+  --L3 nome3                Substituto visível do nome do ficheiro 3.
+  -L, --fname nome          Um substituto visível alternativo para o nome. Use este uma vez para cada ficheiro de entrada.
+  -u                        Não faz efeito. Para compatibilidade com certas ferramentas.</screen>
+</sect2>
+
+</sect1>
+
+<sect1 id="opendialog"
+><title
+>Janela de Abertura</title>
+<para
+>Dado que é necessário seleccionar vários ficheiros, o programa tem uma janela de abertura especial: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="open_dialog.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>A janela de abertura permite editar os nomes dos ficheiros à mão, seleccionando um ficheiro através do navegador dos ficheiros (<guilabel
+>Ficheiro...</guilabel
+>) ou permite escolher os ficheiros recentes a partir das listas respectivas. Se abrir a janela de novo, então os nomes actuais irão nela permanecer. O terceiro ficheiro de entrada não é obrigatório. Se o item do <quote
+>C</quote
+> continuar em branco, então só será efectuada uma análise de diferenças com dois ficheiros. </para
+><para
+>Poderá também seleccionar uma pasta com o <guilabel
+>Dir...</guilabel
+>. Se for indicado como A uma pasta, então será iniciada uma comparação/junção de pastas. Se o A se referir a um ficheiro, mas o B, o C ou o destino corresponderem a pastas, então o &kdiff3; usa o nome do ficheiro em A nas pastas indicadas. </para
+><para
+>Se a <guilabel
+>Junção</guilabel
+> estiver seleccionada, então o campo <guilabel
+>Resultado</guilabel
+> fica editável. Mas não é obrigatório indicar o nome do ficheiro do resultado imediatamente. Você poderá também adiar isto até à gravação. </para
+><para
+>O botão <guibutton
+>Configurar...</guibutton
+> abre a janela de opções, para que possa definir as opções antes de executar a análise. </para>
+</sect1>
+
+<sect1 id="pasteinput"
+><title
+>Colar e Arrastar Dados</title>
+<para
+>Em algumas ocasiões, você poderá querer comparar partes de um texto que não está em nenhum ficheiro próprio. O &kdiff3; também lhe permite colar texto da área de transferência para a janela de introdução de diferenças que esteja em primeiro plano. A análise de diferenças irá ocorrer então. Na janela de abertura, você não irá necessitar de indicar ficheiros, fechando-a então com o <guibutton
+>Cancelar</guibutton
+>. </para
+><para
+>O utilizador também poderá usar o 'drag and drop': Arraste um ficheiro de um gestor de ficheiros ou o texto seleccionado de um editor e arrastá-lo para uma janela de introdução de diferenças. </para
+><para
+>Qual é a ideia? Algumas vezes um ficheiro contém duas funções semelhantes, mas a verificação sobre as semelhanças entre elas é um grande esforço, se você precisar de criar primeiro dois ficheiros e depois carregá-los. Assim, poderá simplesmente copiar, colar e comparar as secções relevantes. </para>
+<note
+><para
+>De momento, você não poderá arrastar nada a partir do &kdiff3;. Só é permitido largar dados nas janelas de introdução de diferenças. </para
+></note>
+<warning
+><para
+>Alguns editores ainda interpretam à mesma o 'drag and drop' noutro programa como o Cortar (em vez do Copiar) e Colar. Os seus dados originais poderão deste modo perder-se. </para
+></warning>
+</sect1>
+
+<sect1 id="interpretinginformation"
+><title
+>Interpretar a Informação nas Janelas de Introdução</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>No cimo de cada janela de texto existe a sua <quote
+>linha de informação</quote
+>. As linhas de informação das janelas de introdução de diferenças contêm uma letra <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> ou <guilabel
+>C</guilabel
+>, o nome do ficheiro e o número da primeira linha visível da janela. (Lembre-se que a janela <guilabel
+>C</guilabel
+> é opcional). Cada linha de informação aparece com uma cor diferente. (Se as localizações forem demasiado extensas para caberem, poderá mover o cursor do rato para cima da linha de informação, de modo a que apareça uma dica com o nome completo). </para
+><para
+>As três janelas de entrada têm atribuídas as letras <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> e <guilabel
+>C</guilabel
+>. O <guilabel
+>A</guilabel
+> tem uma cor azul, o <guilabel
+>B</guilabel
+> tem uma verde e o <guilabel
+>C</guilabel
+> magenta. (Estas são as cores por omissão, mas podem ser alteradas no menu de configuração). </para
+><para
+>Quando é detectada uma diferença, então a cor mostra qual o ficheiro de entrada que é diferente. Quando os outros ficheiros de entrada diferem todos, então a cor usada para exprimir isto é a vermelha por omissão (<guilabel
+>Cor do conflito</guilabel
+> na Configuração). Este esquema de cores é particularmente útil no caso de três ficheiros de entrada, os quais serão vistos na próxima secção (<link linkend="merging"
+>Juntar</link
+>). </para
+><para
+>À esquerda de cada texto está a <quote
+>coluna de resumo</quote
+>. Se ocorrerem diferenças numa linha, então a coluna do resumo mostra a cor respectiva. Para uma diferença por espaços em branco, o resumo fica axadrezado. Para as linguagens de programação em que os espaços em branco não são muito importantes, isto é útil para ver de um modo geral se existe algo de importante modificado. (No C/C++, os espaços em branco só são importantes dentro de cadeias de caracteres, comentários, pré-processador e em algumas outras situações esotéricas. </para
+><para
+>A linha vertical que separa a coluna do resumo e o texto é interrompida (tracejada), se o ficheiro de entrada não tiver aí nenhuma linha. Quando a mudança de linha estiver activa, então esta linha vertical aparece ponteada para as linhas repartidas. </para
+><para
+>Do lado direito, aparece uma coluna de <quote
+>resumo</quote
+> à esquerda da barra de posicionamento vertical. Ela mostra a coluna de resumo comprimida dos dados de <guilabel
+>A</guilabel
+>. Todas as diferenças e conflitos ficam visíveis numa vista rápida. Quando só são usadas duas janelas de entrada, então todas as diferenças aparecem a vermelho, dado que cada diferença é também um conflito. Um rectângulo preto delimita a parte visível dos dados de entrada. Para as linhas de dados bastante compridas, quando o número de linhas de dados é maior do que a altura da coluna de resumo em pixels, então várias linhas de dados de entrada irão partilhar uma linha de resumo. Um conflito, neste caso, terá então uma prioridade elevada sobre as diferenças simples, que por sua vez têm prioridade sobre a ausência de alterações, como tal não se perde nenhuma diferença ou conflito neste caso. Se carregar nesta coluna de resumo, será mostrado o texto correspondente. </para>
+</sect1>
+
+
+<sect1 id="merging"
+><title
+>Juntar e a Janela do Editor do Resultado da Junção</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>A janela do editor do resultado da junção (por baixo das janelas de introdução de diferenças) também tem uma linha de informação no topo que mostra <guilabel
+>Resultado:</guilabel
+>, o nome do ficheiro e <guilabel
+>[Modificado]</guilabel
+> se você tiver alterado alguma coisa. Normalmente irá conter algum texto resultante das funcionalidades de junção automática, mas frequentemente irá conter também conflitos. </para
+><para
+>A gravação está desactivada até que todos os conflitos estejam resolvidos. (Use os botões para <guibutton
+>Ir para o Conflito por Resolver Anterior/Seguinte</guibutton
+> para descobrir os conflitos que faltam.) </para
+><para
+>Com apenas dois ficheiros de entrada, todas as diferenças são também conflitos que necessitam de ser resolvidos manualmente. </para
+><para
+>Com três ficheiros de entrada, o primeiro ficheiro é tratado como a base, enquanto que o segundo e o terceiro contêm as modificações. Quando, em qualquer linha, só o ficheiro B ou o C tiverem sido alterados mas não ambos, então será seleccionada a origem alterada. Só quando o B e o C alteraram as mesmas linhas é que a ferramenta detecta um conflito que deverá ser resolvido manualmente. Quando o B e o C são iguais mas não são o mesmo que o A, é seleccionado o C. </para
+><para
+>A janela do editor do resultado da junção também tem uma coluna de resumo à esquerda. Mostra a letra do ficheiro de entrada para o qual foi seleccionada a linha ou nada, se todas as três origens são iguais nessa linha. Para os conflitos, ela mostra um ponto de interrogação <guilabel
+>?</guilabel
+> e a linha mostra <guilabel
+>&lt;Conflito na Junção&gt;</guilabel
+>, tudo a vermelho. Dado que a resolução de conflitos linha a linha poderá levar bastante tempo, as linhas são reunidas em grupos com as mesmas características de diferenças e conflitos. Mas os conflitos só com espaços em branco são separados dos outros conflitos para facilitar a junção dos ficheiros em que a indentação foi alterada em várias linhas. </para
+><para
+>Ao carregar na coluna do resumo com o &LMB; em ambas as janelas, o grupo que pertença a essa linha será seleccionado em todas as janelas e o início desse grupo será mostrado. (Isto poderá envolver um salto de posição automático para a janelas se o início do grupo não estiver visível). Este grupo fica então o <quote
+>grupo actual</quote
+>. Fica realçado com a <quote
+>Cor de fundo do intervalo actual</quote
+> e aparece uma barra preta do lado esquerdo do texto. </para
+><para
+>Repare nos botões de selecção que contêm as letras <guibutton
+>A</guibutton
+>, <guibutton
+>B</guibutton
+> e <guibutton
+>C</guibutton
+> na barra de botões por baixo do menu. Quando carregar num desses botões de selecção, as linhas desse ficheiro de entrada serão adicionadas ao fim do grupo seleccionado se esse grupo não contiver essa origem antes. Caso contrário, as linhas serão removidas. </para
+><para
+>Para além disso, o utilizador poderá editar qualquer linha. A coluna de resumo irá mostrar um <guibutton
+>m</guibutton
+> para cada linha modificada. </para
+><para
+>Algumas das vezes, quando uma linha é removida tanto por junção automática como por edição e não ficam mais nenhumas linhas nesse grupo, então o texto <computeroutput
+>&lt;Sem linha de origem&gt;</computeroutput
+> irá aparecer nessa linha. Isto é apenas um substituto para o grupo, quando decidir mudar de ideias e seleccionar algum texto de origem de novo. Este texto não irá aparecer no ficheiro gravado ou em qualquer selecção que deseje copiar e colar. </para
+><para
+>O texto <quote
+>&lt;Conflito na Junção&gt;</quote
+> irá aparecer na área de transferência se copiar e colar algum texto que tenha uma dessas linhas. Mas tenha à mesma cuidado ao fazê-lo. </para
+><para
+>A junção normal irá começar por resolver os conflitos simples automaticamente. Mas o menu <guimenu
+>Juntar</guimenu
+> oferece algumas acções para outros usos comuns. Se você tiver de seleccionar a mesma origem para a maioria dos conflitos, então poderá escolher <quote
+>A</quote
+>, <quote
+>B</quote
+> ou <quote
+>C</quote
+> em qualquer lado ou apenas para os conflitos que continuem ainda por resolver ou então para os conflitos de espaços em branco por resolver. Se quiser decidir cada um dos deltas por si próprio, poderá <guilabel
+>Passar os deltas para conflitos</guilabel
+>. Ou, se preferir voltar às escolhas automáticas do &kdiff3;, seleccione então a opção <guilabel
+>Resolver automaticamente os conflitos simples</guilabel
+>. Nesse caso, o &kdiff3; irá reiniciar a junção. Para as acções que alteram as suas modificações anteriores, o &kdiff3; pedir-lhe-á uma confirmação antes de prosseguir. </para>
+
+<note
+><para
+>Ao escolher uma das origens para os conflitos que não sejam de espaços em branco e as opções <guilabel
+>Ignorar os Números</guilabel
+> ou <guilabel
+>Ignorar os Comentários de C/C++</guilabel
+> forem usadas, então as alterações nos números ou comentários serão tratadas como espaços em branco também. </para
+></note>
+</sect1>
+
+<sect1 id="navigation"
+><title
+>Navegação e Edição</title>
+<para
+>Muita da navegação será feita com as barras de posicionamento e com o rato, mas você poderá também navegar com as teclas. Se carregar numa das janelas, então poderá usar as teclas de cursores, o <keycap
+>Page Up</keycap
+>, o <keycap
+>Page Down</keycap
+>, o <keycap
+>Home</keycap
+>, o <keycap
+>End</keycap
+>, o <keycombo action="simul"
+>&Ctrl;<keycap
+>Home</keycap
+></keycombo
+> ou o <keycombo action="simul"
+>&Ctrl;<keycap
+>End</keycap
+></keycombo
+> como iria usar noutros programas. A coluna de resumo ao lado da barra de posicionamento vertical dos ficheiros de entrada poderá também ser usada para navegar se carregar nela. </para
+><para
+>Poderá também usar a roda do rato para subir ou descer. </para
+><para
+>No editor do resultado da junção, poderá também usar as outras teclas para editar. Poderá alternar entre o modo de inserção ou sobreposição com a tecla <keycap
+>Insert</keycap
+>. (Por omissão, está no modo de inserção). </para
+><para
+>Um 'click' com o &LMB; em qualquer coluna de resumo irá sincronizar todas as janelas para mostrar o início do mesmo grupo de linhas (tal como é explicado em <link linkend="merging"
+>Junção</link
+>). </para
+><para
+>A barra de botões também contém sete botões de navegação com os quais poderá saltar para a primeira/última/actual diferença, para a diferença seguinte/anterior  (<keycombo action="simul"
+>&Ctrl;<keycap
+>Baixo</keycap
+></keycombo
+>/<keycombo action="simul"
+>&Ctrl;<keycap
+>Cima</keycap
+></keycombo
+>), para o conflito seguinte/anterior (<keycombo action="simul"
+>&Ctrl;<keycap
+>Pg Down</keycap
+></keycombo
+>/<keycombo action="simul"
+>&Ctrl;<keycap
+>Pg Up</keycap
+></keycombo
+>) ou para o conflito seguinte/anterior por resolver. Repare que, para o &kdiff3;, um <quote
+>conflito</quote
+> que não foi resolvido automaticamente no início da junção irá permanecer como <quote
+>conflito</quote
+>, mesmo que resolvido. Daí a necessidade de distinguir os <quote
+>conflitos por resolver</quote
+>. </para
+><para
+>Existe também um botão <guibutton
+>Ir automaticamente para o próximo conflito por resolver após a selecção do código</guibutton
+> (Avanço Automático). Se activar esta opção, então sempre que seleccionar uma origem, o &kdiff3; irá saltar para o próximo conflito por resolver automaticamente. Isto poderá ajudar quando quiser sempre escolher apenas uma origem. Quando precisar de ambas as origens, ou se quiser editar depois de seleccionar, então provavelmente irá querer desligar esta opção. Antes de prosseguir para o próximo conflito por resolver, o &kdiff3; mostra-lhe o efeito da sua escolha durante algum tempo. Este atraso é ajustável na Configuração da Diferença &amp; Junção: Poderá indicar o <guilabel
+>Atraso no avanço automático</guilabel
+> num valor entre 0 e 2 000 milisegundos.</para>
+<tip
+><para
+>Está farto de carregar consecutivamente? Use um pequeno atraso de Avanço Automático e os atalhos <keycombo action="simul"
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>, <keycombo action="simul"
+>&Ctrl;<keycap
+>2</keycap
+></keycombo
+> e <keycombo action="simul"
+>&Ctrl;<keycap
+>3</keycap
+></keycombo
+> para seleccionar os ficheiros A, B ou C para muitos dos conflitos.</para
+></tip>
+</sect1>
+
+<sect1 id="selections"
+><title
+>Seleccionar, Copiar e Colar</title>
+<para
+>As janelas de entrada não mostram nenhum cursor, como tal as selecções necessitam de ser feitas com o rato, ao carregar com o &LMB; no início, mantendo o botão do rato carregado e indo até ao fim, momento em que larga o botão do rato de novo. Poderá também seleccionar uma palavra se fizer duplo-click nela. No editor do resultado da junção poderá também seleccionar com o teclado se mantiver a tecla &Shift; carregada enquanto navega com as teclas de cursores. </para
+><para
+>Para copiar para a área de transferência, precisa de carregar no botão "Copiar" (<keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> ou <keycombo action="simul"
+>&Ctrl;<keycap
+>Insert</keycap
+></keycombo
+>). Porém, existe uma opção para <quote
+>Copiar Automaticamente a Selecção</quote
+>. Se esta estiver activa, então tudo o que seleccionar será copiado imediatamente, sem que você tenha de copiar explicitamente. Todavia, preste atenção ao usar isto, dado que o conteúdo da área de transferência poderá ficar assim destruído por acidente. </para
+><para
+>O <guimenuitem
+>Cortar</guimenuitem
+> (<keycombo action="simul"
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> ou o <keycombo action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+>) copia para a área de transferência e remove o texto seleccionado, enquanto o <guimenuitem
+>Colar</guimenuitem
+> (<keycombo action="simul"
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> ou <keycombo action="simul"
+>&Shift;<keycap
+>Insert</keycap
+></keycombo
+>) insere o texto na área de transferência, na posição do cursor, ou sobre a selecção actual. </para>
+</sect1>
+
+<sect1 id="saving"
+><title
+>Gravar</title>
+<para
+>A gravação só será permitida quando todos os conflitos tiverem sido resolvidos. Se o ficheiro já existir e a opção de <quote
+>Salvaguarda dos ficheiros</quote
+> estiver activa, então o ficheiro existente verá o seu nome mudado de modo a ter uma extensão <filename role="extension"
+>.orig</filename
+>, mas se existir um destes ficheiros será removido. Quando você sair ou iniciar outra análise de diferenças e os dados não tiverem sido gravados ainda, então o &kdiff3; irá perguntar se você deseja gravar, cancelar ou prosseguir sem gravar. (O &kdiff3; não lida com nenhuns sinais ('signals') do sistema. Por isso, se fizer um <quote
+>kill</quote
+> ao &kdiff3;, então os seus dados serão perdidos.) </para
+><para
+>Os fins de linha são gravados de acordo com o método normal do sistema operativo subjacente. Para os UNIXes, cada linha terminada com um carácter de 'linefeed' <literal
+>\n</literal
+>, enquanto que nos sistemas baseados em Win32, cada linha termina com um 'carriage-return' + um 'linefeed' <literal
+>\r\n</literal
+>. O &kdiff3; não preserva os fins de linha dos ficheiros de entrada, o que também significa que você não deverá usar o &kdiff3; com ficheiros binários. </para>
+</sect1>
+
+<sect1 id="find"
+><title
+>Procurar Sequências de Texto</title>
+<para
+>Você poderá procurar por uma sequência de texto em qualquer janela de texto do &kdiff3;. O comando <guimenuitem
+>Procurar ...</guimenuitem
+> (<keycombo action="simul"
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) no menu <guimenu
+>Editar</guimenu
+> abre uma janela que lhe permite indicar o texto a procurar. Poderá também seleccionar as janelas que deverão ser pesquisadas. A procura irá ter início sempre no topo do ficheiro. Use o comando <guimenuitem
+>Procurar o Próximo</guimenuitem
+> (F3) para prosseguir com a próxima ocorrência. Se optar por procurar em várias janelas, então a primeira janela será percorrida de alto a baixo antes de a procura começar na próxima janela a partir do topo de novo, &etc; </para>
+</sect1>
+
+
+<sect1 id="options"
+><title
+>Opções</title>
+<para
+>As opções e a lista de ficheiros recentes serão gravadas quando você sair do programa e serão carregadas de novo quando o iniciar. (Menu <menuchoice
+><guimenu
+>Configuração</guimenu
+><guimenuitem
+>Configurar o KDiff3...</guimenuitem
+></menuchoice
+>) </para>
+<sect2
+><title
+>Tipo de Letra</title>
+<para
+>Seleccione um tipo de letra monoespaçado. (Em alguns sistemas, esta janela irá também apresentar os tipos de letra de tamanho variável, mas você não os deverá usar.) </para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Texto Itálico para os Deltas:</guilabel
+></term
+><listitem
+><para
+>Se seleccionar isto, então as diferenças no texto serão escritas com a versão itálica do tipo de letra seleccionado. Se o tipo de letra não suportar caracteres itálicos, isto não fará nada.</para>
+   </listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>Cores</title>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Cor principal:</guilabel
+></term
+><listitem
+><para
+>Normalmente preto. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Cor de fundo:</guilabel
+></term
+><listitem
+><para
+>Normalmente branco. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Cor de Fundo das Diferenças:</guilabel
+></term
+><listitem
+><para
+>Normalmente a cinzento claro. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Cor A:</guilabel
+></term
+><listitem
+><para
+>Normalmente a azul escuro. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Cor B:</guilabel
+></term
+><listitem
+><para
+>Normalmente a verde escuro. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Cor C:</guilabel
+></term
+><listitem
+><para
+>Normalmente a magenta escuro. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Cor do Conflito:</guilabel
+></term
+><listitem
+><para
+>Normalmente a vermelho.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Cor de fundo do intervalo actual:</guilabel
+></term
+><listitem
+><para
+>Normalmente a amarelo claro.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Cor de fundo da diferença do intervalo actual:</guilabel
+></term
+><listitem
+><para
+>Normalmente a amarelo escuro.</para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Nos sistemas com apenas 16 ou 256 cores, alguns dos tons acima descritos não estão disponíveis de forma pura. Nesses sistemas, o botão <guibutton
+>Predefinições</guibutton
+> irá escolher uma cor pura. </para>
+</sect2>
+
+<sect2
+><title
+>Configuração do Editor</title>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>O Tab insere espaços:</guilabel
+></term
+><listitem
+><para
+>Se isto estiver desactivado e você carregar na tecla do tabulador, será inserido um carácter de tabulação, caso contrário serão inseridos os espaços com a quantidade apropriada.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Tamanho das tabulações:</guilabel
+></term
+><listitem
+><para
+>Poderá ser ajustado de acordo com as suas necessidades específicas. Por omissão é igual a 8. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Indentação automática:</guilabel
+></term
+><listitem
+><para
+>Ao carregar em &Enter; ou <keycap
+>Return</keycap
+> a indentação da linha anterior é usada para uma nova linha. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Copiar automaticamente a selecção:</guilabel
+></term
+><listitem
+><para
+>Quando activo, qualquer selecção é posta automaticamente na área de transferência e não precisa de a copiar explicitamente. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Estilo de fim de linha:</guilabel
+></term
+><listitem
+><para
+>Ao gravar, o utilizador poderá seleccionar o estilo do fim de linha que prefere.O valor por omissão é a escolha comum para o sistema operativo usado. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Utilizar a codificação local:</guilabel
+></term
+><listitem
+><para
+>Para mostrar os caracteres estrangeiros. Tente alterar isto se alguns dos caracteres da sua língua não forem mostrados correctamente. </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>Configuração da Diferença e da Junção</title>
+<para
+>Ao comparar os ficheiros, o &kdiff3; tenta primeiro corresponder as linhas iguais em todos os ficheiros de entrada. Só durante este passo é que poderá ignorar os espaços em branco. O segundo passo compara cada uma das linhas. Neste passo, os espaços em branco não serão ignorados. Também durante a junção os espaços em branco não serão ignorados. </para>
+
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Manter o 'Carriage Return':</guilabel
+></term
+><listitem
+><para
+>Alguns editores (em alguns sistemas) gravam os caracteres de 'carriage return' <literal
+>\r</literal
+> e 'linefeed' <literal
+>\n</literal
+> no fim da linha, enquanto que outros só irão gravar o 'linefeed' <literal
+>\n</literal
+>. Normalmente o &kdiff3; ignora o 'carriage return', mas aí os ficheiros que não tenham tamanhos iguais pareçam de facto iguais numa comparação lado-a-lado. Quando esta opção estiver activa, então os caracteres de 'carriage return' ficarão visíveis mas serão tratados como espaços em branco. Ela necessita estar desligada durante uma junção. Por omissão, está desligada.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ignorar os números:</guilabel
+></term
+><listitem
+><para
+>Por omissão está desligado. Os caracteres dos números (<quote
+><literal
+>0-9</literal
+></quote
+>, <quote
+><literal
+>.</literal
+></quote
+>, <quote
+><literal
+>-</literal
+></quote
+>) serão ignorados na primeira parte da análise, na qual é feita a correspondência de linhas. No resultado, as diferenças serão mostradas de qualquer forma, mas serão tratadas como espaços em branco. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ignorar comentários de C/C++:</guilabel
+></term
+><listitem
+><para
+>Por omissão está desligado. As alterações nos comentários serão tratadas como as alterações nos espaços em branco. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ignorar a capitalização:</guilabel
+></term
+><listitem
+><para
+>Por omissão está desligado. As diferenças de capitalização (como o <quote
+><literal
+>A</literal
+></quote
+> vs. o <quote
+><literal
+>a</literal
+></quote
+>) serão tratadas como diferenças de espaços em branco. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Comando do pré-processador:</guilabel
+></term
+><listitem
+><para
+>Veja a <link linkend="preprocessors"
+>próxima secção</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Comando do Pré-processador para a Correspondência de Linhas:</guilabel
+></term
+><listitem
+><para
+>Veja a <link linkend="preprocessors"
+>próxima secção</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Tentar com Persistência:</guilabel
+></term
+><listitem
+><para
+>Tenta com mais afinco encontrar um delta ainda menor. (Por omissão está ligado). Isto irá ser efectivo provavelmente para os ficheiros grandes e complicados. Será também lento para os ficheiros muito grandes. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Atraso no Avanço Automático (ms):</guilabel
+></term
+><listitem
+><para
+>Quando estiver no modo de avanço automático esta opção indica o intervalo de tempo durante o qual mostrar o resultado da selecção antes de saltar para o próximo conflito não resolvido. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Predefinição da junção de espaço em branco com 2/3 ficheiros:</guilabel
+></term
+><listitem
+><para
+>Resolve automaticamente todos os conflitos de espaços em branco, seleccionando o ficheiro indicado. (Por omissão, é com uma escolha manual). É útil se os espaços em branco não serão importantes em muitos dos ficheiros. Se precisar disto apenas ocasionalmente, é melhor usar o <guimenuitem
+>Escolher A/B/C nos Conflitos de Espaços em Branco Por Resolver</guimenuitem
+> no menu <guimenu
+>Junção</guimenu
+>. Lembre-se que, se activar o <guilabel
+>Ignorar os Números</guilabel
+> ou o <guilabel
+>Ignorar os Comentários de C/C++</guilabel
+>, então esta escolha automática também se aplica para os conflitos nos números ou nos comentários. </para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2
+><title
+>Junção de Pastas</title>
+<para
+>Estas opções dizem respeito à análise da pasta e ao tratamento da junção: Veja em <link linkend="dirmergeoptions"
+>Comparação de Pastas/Juntar</link
+> para mais detalhes. </para
+><para
+>Existe aqui ainda uma opção que também é relevante para gravar os ficheiros únicos: </para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Ficheiros de segurança:</guilabel
+></term
+><listitem
+><para
+>Quando um ficheiro é gravado e já existe uma versão anterior, então a versão original irá mudar para um nome com uma extensão <filename role="extension"
+>.orig</filename
+>. Se já existir um ficheiro de cópia de segurança antigo com uma extensão <filename role="extension"
+>.orig</filename
+>, então este será removido sem ficar nenhuma cópia de segurança. </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>Opções Regionais e da Língua</title>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Língua:</guilabel
+></term
+><listitem
+><para
+>Ajusta a língua da interface do utilizador. Se mudar esta opção não afectará o programa em execução. Terá de sair e reiniciar o &kdiff3; para que a língua seja alterada. (Esta opção não está disponível na versão para &kde; do &kdiff3;, porque a língua é ajustável na configuração global do &kde;). </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Utilizar a mesma codificação para tudo:</guilabel
+></term
+><listitem
+><para
+>As seguintes opções de codificação poderão ser ajustadas em separado para cada item ou, se esta opção for verdadeira, todos os valores irão usar o primeiro valor. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Codificação Local:</guilabel
+></term
+><listitem
+><para
+>Por cima dos selectores de codificação, aparece uma nota que lhe indica a sua codificação local. (Esta não é ajustável, mas está aqui apenas para o informar, no caso de não saber qual é a sua codificação local e tiver de a seleccionar). </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Codificação do Ficheiro para o A/B/C:</guilabel
+></term
+><listitem
+><para
+>Ajuste a codificação do ficheiro para os ficheiros de entrada. Isto provoca algum efeito na forma como os caracteres especiais são interpretados. Dado que poderá ajustar cada codificação em separado, poderá até comparar e juntar ficheiros que foram gravados com codificações diferentes. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Codificação do Ficheiro para Junção de Resultado e Gravação:</guilabel
+></term
+><listitem
+><para
+>Quando tiver editado um ficheiro, poderá então ajustar a codificação que será usada ao gravar para o disco. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Codificação do Ficheiro dos Ficheiros de Pré-processador:</guilabel
+></term
+><listitem
+><para
+>Quando definir pré-processadores, este poderão não ser capazes de lidar com a sua codificação. (p.ex.: Os seus ficheiros estão em Unicode de 16 bits e o seu pré-processador só consegue lidar com ASCII de 8 bits). Com esta opção, poderá definir a codificação do resultado do pré-processador. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Língua da Esquerda-para-a-Direita:</guilabel
+></term
+><listitem
+><para
+>Algumas línguas são escritas da direita para a esquerda. Quando esta opção está activa, o &kdiff3; desenha o texto da direita para a esquerda nas janelas de diferenças dos ficheiros de entrada e na janela do resultado da junção. Repare que, se iniciar o &kdiff3; com a opção da linha de comandos <option
+>--reverse</option
+>, então toda a disposição será feita também da direita para a esquerda. (Esta é uma funcionalidade oferecida pelo &Qt;.) Esta documentação foi escrita a assumir que a <quote
+>Língua da direita-para-a-esquerda</quote
+> ou a disposição inversa estão desactivadas. Por isso, algumas das referências a <quote
+>esquerda</quote
+> ou <quote
+>direita</quote
+> deverão ser substituídas pela versão inversa, se usar estas opções. </para
+></listitem
+></varlistentry>
+
+  </variablelist>
+</sect2>
+
+<sect2
+><title
+>Diversos</title>
+<para
+>Estas opções e acções estão disponíveis nos menus ou na barra de botões.</para>
+<variablelist>
+  <varlistentry
+><term
+><guilabel
+>Mostrar os números de linha:</guilabel
+></term
+><listitem
+><para
+>O utilizador pode seleccionar se os números de linhas são mostrados para os ficheiros de entrada.</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guilabel
+>Mostrar as diferenças de espaços e tabulações:</guilabel
+></term
+><listitem
+><para
+>Algumas das vezes os espaços e tabulações visíveis são incómodos. Poderá com isto desactivar esta funcionalidade.</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guilabel
+>Mostrar os espaços em branco:</guilabel
+></term
+><listitem
+><para
+>Desligue isto para suprimir o realce das alterações apenas nos espaços em branco no texto ou nas colunas de vista geral. (Lembre-se que isto também se aplica às alterações nos números ou comentários se as opções <guilabel
+>Ignorar os números</guilabel
+> ou <guilabel
+>Ignorar os Comentários de C/C++</guilabel
+> estiverem activas.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guilabel
+>Opções da vista geral:</guilabel
+></term
+><listitem
+><para
+>Estas opções só estão disponíveis quando você compara três ficheiros. No modo normal, todas as diferenças são mostradas na coluna de resumo codificada a cores. Mas, em alguns casos, você está especialmente interessado nas diferenças entre apenas dois desses três ficheiros. Se seleccionar <guilabel
+>A vs. B</guilabel
+>, <guilabel
+>A vs. C</guilabel
+> ou <guilabel
+>B vs. C</guilabel
+> na coluna de resumo irá aparecer uma segunda coluna com a informação necessária ao lado do resumo normal. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guilabel
+>Quebrar linha nas janelas de diferenças:</guilabel
+></term
+><listitem
+><para
+>Reparte as linhas quando o seu tamanho exceder a largura de uma janela. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guimenuitem
+>Mostrar a Janela A/B/C:</guimenuitem
+></term
+><listitem
+><para
+>Em algumas vezes, você poderá usar melhor o espaço no ecrã para as linhas compridas. Esconda as janelas que não são importantes. (No menu <guimenu
+>Janelas</guimenu
+>.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guimenuitem
+>Comutar a Orientação da Repartição:</guimenuitem
+></term
+><listitem
+><para
+>Define se as janelas de diferenças são mostradas uma ao lado da outra (a A à esquerda da B, que está à esquerda da C) ou uma por cima da outra (a A sobre a B, que está sobre a C). Isto também deverá ajudar para as linhas compridas (No menu <guimenu
+>Janelas</guimenu
+>). </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guilabel
+>Iniciar uma junção rapidamente:</guilabel
+></term
+><listitem
+><para
+>Às vezes, você está a ver os deltas e decide juntá-los. <inlinemediaobject
+><imageobject
+><imagedata fileref="merge_current.png" format="PNG"/></imageobject
+></inlinemediaobject
+> O <guimenuitem
+>Juntar o ficheiro actual</guimenuitem
+> no menu <guimenu
+>Directoria</guimenu
+> também resulta se só comparar dois ficheiros. Um único 'click' começa a junção e usa o nome do último ficheiro de entrada como nome do ficheiro do resultado por omissão. (Quando isto for usado para reiniciar uma junção, então o nome do ficheiro do resultado será mantido.)</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="shortcuts"
+><title
+>Configurar os Atalhos de Teclado</title>
+<para
+>De momento, só a versão para &kde; suporta os atalhos de teclado configuráveis pelo utilizador. (No menu <menuchoice
+><guimenu
+>Configuração</guimenu
+><guimenuitem
+>Configurar os Atalhos...)</guimenuitem
+></menuchoice
+>) </para>
+</sect2>
+</sect1>
+
+<sect1 id="preprocessors"
+><title
+>Comandos do Pré-processador</title>
+<para
+>O &kdiff3; suporta duas opções do pré-processador. </para
+><para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Comando do pré-processador:</guilabel
+></term
+><listitem
+><para
+>Quando for lido qualquer ficheiro, ele será encaminhado através deste comando externo. O resultado deste comando será visível em vez do ficheiro original. O utilizador poderá criar o seu próprio pré-processador que corresponda às suas necessidades específicas. Use isto para cortar partes desnecessárias do ficheiro ou para corrigir automaticamente a indentação, &etc;. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Comando do Pré-processador para a Correspondência de Linhas:</guilabel
+></term
+><listitem
+><para
+>Quando for lido qualquer ficheiro, ele será encaminhado através deste comando externo. Se um comando de pré-processador (ver acima) for também indicado, então o resultado do pré-processador é a entrada para o pré-processador de correspondência de linhas. O resultado só será usado durante a fase de correspondência de linhas da análise. O utilizador poderá escrever o seu próprio pré-processador que corresponda às suas necessidades específicas. Cada linha de entrada terá de ter uma linha de resultado correspondente. </para
+></listitem
+></varlistentry>
+</variablelist>
+</para>
+<para
+>A ideia é permitir ao utilizador uma maior flexibilidade ao configurar o resultado das diferenças. Mas isto necessita de um programa externo e muitos dos utilizadores não querem escrever um. As boas notícias é que, muitas das vezes, o <command
+>sed</command
+> ou o <command
+>perl</command
+> encarregar-se-ão disso. </para>
+<para
+>Exemplo: Simples caso de teste: Considere o ficheiro <filename
+>a.txt</filename
+> (6 linhas):</para>
+<screen
+>aa
+ba
+ca
+da
+eafa
+</screen>
+
+<para
+>E o ficheiro <filename
+>b.txt</filename
+> (3 linhas):</para>
+
+<screen
+>cg
+dg
+eg</screen>
+
+<para
+>Sem um pré-processador, as seguintes linhas seriam colocadas umas a seguir às outras:</para>
+
+<screen
+>aa - cg
+ba - dg
+ca - eg
+da
+ea
+fa</screen>
+
+<para
+>Isto poderá não ser o desejado, dado que a primeira letra contém a informação realmente interessante. Para ajudar no algoritmo de correspondência, de modo a ignorar a segunda letra, pode ser usado um comando de pré-processamento de correspondência de linhas que substitua o <literal
+>g</literal
+> por um <literal
+>a</literal
+>:</para>
+
+<screen
+><command
+>sed</command
+> 's/g/a/'</screen>
+
+<para
+>Com este comando, o resultado da comparação seria:</para>
+
+<screen
+>aa
+ba
+ca - cg
+da - dg
+ea - eg
+fa</screen>
+
+<para
+>Internamente, o algoritmo de correspondência vê os ficheiros após ter corrido o pré-processador de correspondência de linhas, mas no ecrã, o ficheiro está inalterado. (O pré-processador normal iria mudar os dados também no ecrã.)</para>
+
+<sect2 id="sedbasics"
+><title
+>Bases do <command
+>sed</command
+></title>
+<para
+>Esta secção só introduz algumas funcionalidades muito básicas do <command
+>sed</command
+>. Para mais informações veja as páginas <ulink url="info:/sed"
+>info:/sed</ulink
+> ou <ulink url="http://www.gnu.org/software/sed/manual/html_mono/sed.html"
+> http://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink
+>. Existe uma versão pré-compilada para o &Windows; em <ulink url="http://unxutils.sourceforge.net"
+> http://unxutils.sourceforge.net</ulink
+>. Repare no facto de que os exemplos seguintes assumem que o comando <command
+>sed</command
+> está numa pasta referida pela sua variável de ambiente <envar
+>PATH</envar
+>. Se não for este o caso, você terá de indicar a localização absoluta completa para o comando. Repare também que os seguintes exemplos usam a plica simples (<literal
+>'</literal
+>) que não irá funcionar para o &Windows;. No &Windows;, você deverá usar as aspas (<literal
+>"</literal
+>) em alternativa.</para>
+<para
+>Neste contexto, só é usado o comando de substituição do <command
+>sed</command
+>:</para>
+<screen
+><command
+>sed</command
+> 's/<replaceable
+>EXP_REG</replaceable
+>/<replaceable
+>SUBSTITUIÇÃO</replaceable
+>/<replaceable
+>OPÇÕES</replaceable
+>'</screen>
+<para
+>Antes de usar um comando novo dentro do &kdiff3;, deverá primeiro testá-lo numa consola. Aqui, o comando <command
+>echo</command
+> é útil. Exemplo:</para>
+
+<screen
+><command
+>echo</command
+> abracadabra | <command
+>sed</command
+> 's/a/o/'
+<computeroutput
+>obracadabra</computeroutput
+></screen>
+
+<para
+>Este exemplo mostra um comando muito simples do 'sed' que substitui a primeira ocorrência do <quote
+>a</quote
+> por um <quote
+>o</quote
+>. Se quiser substituir todas as ocorrências, então irá necessitar da opção <parameter
+>g</parameter
+>:</para>
+
+<screen
+><command
+>echo</command
+> abracadabra | <command
+>sed</command
+> 's/a/o/g'
+<computeroutput
+>obrocodobro</computeroutput
+></screen>
+
+<para
+>O símbolo <quote
+><literal
+>|</literal
+></quote
+> é o comando de 'pipe' (tubo) que transfere o resultado do comando anterior para os dados de entrada do comando seguinte. Se quiser testar com um ficheiro maior, então poderá usar o <command
+>cat</command
+> nos sistemas Unix ou o <command
+>type</command
+> nos sistemas &Windows;. O <command
+>sed</command
+> fará a substituição para cada linha.</para>
+
+<screen
+><command
+>cat</command
+> <replaceable
+>ficheiro</replaceable
+> |<command
+>sed</command
+> <replaceable
+>opções</replaceable
+></screen>
+
+
+</sect2>
+<sect2 id="sedforkdiff3"
+><title
+>Exemplos para a Utilização do <command
+>sed</command
+> no &kdiff3;</title>
+<sect3
+><title
+>Ignorar Outros Tipos de Comentários</title>
+<para
+>De momento, o &kdiff3; só compreende comentários de C/C++. Se usar o Comando do Pré-Processador-de-Correspondência-de-Linhas, poderá também ignorar outros tipos de comentários, se os converter para comentários de C/C++.</para>
+
+<informalexample>
+<para
+>Para ignorar os comentários que começam por <literal
+>#</literal
+>, poderia convertê-los para <literal
+>//</literal
+>. Lembre-se que também terá de activar a opção <guilabel
+>Ignorar os Comentários de C/C++</guilabel
+> para fazer efeito. Um Comando-de-Pré-Processador-de-Correspondência-de-Linhas seria:</para>
+
+<screen
+><command
+>sed</command
+> 's/#/\/\//'</screen>
+</informalexample>
+
+<para
+>Dado que para o <command
+>sed</command
+> o carácter <literal
+>/</literal
+> tem um significado especial, é necessário colocar o carácter <literal
+>\</literal
+> antes de cada <literal
+>/</literal
+> no texto de substituição. Algumas das vezes o <literal
+>\</literal
+> é necessário para adicionar ou remover um significado especial para certos caracteres. As plicas simples (<literal
+>'</literal
+>) antes e depois do comando de substituição são importantes, caso contrário a linha de comandos iria tentar interpretar alguns caracteres especiais como o <literal
+>#</literal
+>, o <literal
+>$</literal
+> ou o <literal
+>\</literal
+> antes de os passar para o <command
+>sed</command
+>. Lembre-se que no &Windows; irá necessitar aqui das aspas (<literal
+>"</literal
+>). O &Windows; substitui os outros caracteres como o <literal
+>%</literal
+>, por isso você terá de fazer algumas experiências.</para>
+</sect3>
+
+<sect3
+><title
+>Diff sem Distinguir Capitalização</title>
+
+<para
+>Use o seguinte Comando-de-Pré-Processador-de-Correspondência-de-Linhas para converter os dados de entrada para maiúsculas:</para>
+
+<screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'</screen>
+
+<para
+>Aqui o <literal
+>.*</literal
+> é uma expressão regular que corresponde a qualquer texto e, no seu contexto, irá corresponder a todos os caracteres da linha. O <literal
+>\1</literal
+> no texto de substituição refere-se ao texto correspondente ao primeiro par de <literal
+>\(</literal
+> e <literal
+>\)</literal
+>. O <literal
+>\U</literal
+> converte o texto inserido para maiúsculas. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorar as Palavras-Chave do Controlo de Versões</title>
+<para
+>O <acronym
+>CVS</acronym
+> e os outros sistemas de controlo de versões usam várias palavras-chave para inserir automaticamente sequências de texto geradas (<ulink url="info:/cvs/Keyword substitution"
+>Substituição de palavras-chave</ulink
+>). Todas elas seguem o padrão "$PALAVRA-CHAVE texto gerado$". É necessário agora um Comando de Pré-Processador por Correspondência de Linha que remova apenas o texto gerado:</para>
+<screen
+><command
+>sed</command
+> 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'</screen>
+
+<para
+>O <literal
+>\|</literal
+> separa as palavras-chave possíveis. Poderá querer modificar esta lista, de acordo com as suas necessidades. O <literal
+>\</literal
+> antes do <literal
+>$</literal
+> é necessário porque, caso contrário, o <literal
+>$</literal
+> irá corresponder ao fim da linha. </para>
+<para
+>Ao experimentar com o <command
+>sed</command
+>, você poderá vir a compreender e até a gostar destas expressões regulares. Elas são úteis porque existem muitos outros programas que suportam algumas coisas desse género. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorar os Números</title>
+<para
+>A indiferença em relação aos números é de facto uma opção incorporada. Mas, como outro exemplo, seria assim como iria ficar como um comando do Pré-Processador da Correspondência de Linhas.</para>
+<screen
+><command
+>sed</command
+> 's/[0123456789.-]//g'</screen>
+<para
+>Todos os caracteres dentro do <literal
+>[</literal
+> e do <literal
+>]</literal
+> são uma correspondência que será substituída por nada. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorar Certas Colunas</title>
+<para
+>Em algumas ocasiões um determinado texto tem uma formatação demasiado restrita e contém colunas que deseja sempre ignorar, enquanto que existem outras colunas que deseje preservar para análise. No exemplo seguinte, as primeiras cinco colunas (caracteres) são ignoradas, as próximas dez são preservadas, depois as próximas cinco colunas serão ignoradas de novo e o resto da linha é preservada.</para>
+
+<screen
+><command
+>sed</command
+> 's/.....\(..........\).....\(.*\)/\1\2/'</screen>
+
+<para
+>Cada ponto <literal
+>.</literal
+> corresponde a um único carácter. O <literal
+>\1</literal
+> e o <literal
+>\2</literal
+> no texto de substituição referem-se ao texto correspondente dentro do primeiro e segundo pares de <literal
+>\(</literal
+> e <literal
+>\)</literal
+>, correspondendo ao texto a preservar.</para>
+</sect3>
+
+<sect3
+><title
+>Combinar Várias Substituições</title>
+
+<para
+>Em algumas situações você deseja aplicar várias substituições de uma vez. Poderá então usar o ponto-e-vírgula <literal
+>;</literal
+> para separar uma da outra.</para>
+
+<screen
+><command
+>echo</command
+> abracadabra | <command
+>sed</command
+> 's/a/o/g;s/\(.*\)/\U\1/'
+<computeroutput
+>OBROCODOBRO</computeroutput
+></screen>
+
+</sect3>
+
+<sect3
+><title
+>Usar o <command
+>perl</command
+> em vez do <command
+>sed</command
+></title>
+<para
+>Em vez do <command
+>sed</command
+>, poderá querer usar algo diferente, como o <command
+>perl</command
+>.</para>
+<screen
+><command
+>perl</command
+> -p -e 's/<replaceable
+>EXP_REG</replaceable
+>/<replaceable
+>SUBSTITUIÇÃO</replaceable
+>/<replaceable
+>OPÇÕES</replaceable
+>'</screen>
+<para
+>Mas alguns detalhes são diferentes no <command
+>perl</command
+>. Lembre-se que, onde o <command
+>sed</command
+> necessitava do <literal
+>\(</literal
+> e do <literal
+>\)</literal
+>, o <command
+>perl</command
+> necessita da versão mais simples <literal
+>(</literal
+> e <literal
+>)</literal
+> sem o <literal
+>\</literal
+> precedente.</para>
+
+<screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+<command
+>perl</command
+> -p -e 's/(.*)/\U\1/'</screen>
+
+</sect3>
+</sect2>
+
+<sect2
+><title
+>Order de Execução de Pré-processadores</title>
+<para
+>Os dados são encaminhados através de todos os pré-processadores internos e externos pela seguinte ordem: </para>
+<itemizedlist>
+<listitem
+><para
+>Pré-processador normal,</para
+></listitem>
+<listitem
+><para
+>Pré-processador de Correspondência de Linhas,</para
+></listitem>
+<listitem
+><para
+>Ignorar capitalização (conversão para maiúsculas),</para
+></listitem>
+<listitem
+><para
+>Detecção de Comentários de C/C++,</para
+></listitem>
+<listitem
+><para
+>Ignorar os números,</para
+></listitem>
+<listitem
+><para
+>Ignorar os espaços em branco</para
+></listitem>
+</itemizedlist>
+<para
+>Os dados após o pré-processador normal serão preservados para a apresentação e para a junção. As outras operações só modificam os dados que o algoritmo para a correspondência de linhas nas diferenças vê. </para
+><para
+>Nos casos raros em que você usa um pré-processador normal, repare que o pré-processador da correspondência de linhas vê o resultado no pré-processador normal como dados de entrada. </para>
+</sect2>
+
+<sect2
+><title
+>Aviso</title>
+<para
+>Os comandos do pré-processador são normalmente muito úteis, mas como acontece com qualquer opção que modifica os seus textos ou esconde algumas diferenças automaticamente, você poderá saltar por cima de certas diferenças e, no pior dos casos, destruir dados importantes. </para
+><para
+>Por esta razão, durante uma junção, se for usado um comando pré-processador normal, o &kdiff3; dizer-lhe-á isso e perguntar-lhe-á se deverá ser desactivado ou não. Mas não o irá avisar se estiver um Pré-Processador de Correspondência de Linhas activo. A junção não irá ficar completa até que todos os conflitos tenham sido resolvidos. Se tiver desactivado o <guilabel
+>Mostrar os Espaços em Branco</guilabel
+>, então as diferenças que foram removidas com o Pré-Processador de Correspondência de Linhas ficarão também invisíveis. Se o botão para Gravar continuar inactivo durante uma junção (devido a conflitos por resolver), verifique se activa o <guilabel
+>Mostrar os Espaços em Branco</guilabel
+>. Se não quiser juntar essas diferenças menos importantes poderá escolher a opção <guimenuitem
+>Escolher [A|B|C] nos Conflitos de Espaço em Branco por Resolver</guimenuitem
+> no menu <guimenu
+>Juntar</guimenu
+>. </para>
+</sect2>
+</sect1>
+</chapter>
+
+
+<chapter id="dirmerge"
+><title
+>Comparação e Junção de Directorias com o &kdiff3;</title>
+<sect1 id="dirmergeintro"
+><title
+>Introdução</title>
+<para
+>Normalmente, os programadores precisam de modificar vários ficheiros numa pasta para atingir os seus fins. Para isso, o &kdiff3; também lhe permite comparar e juntar várias pastas de forma recursiva! </para
+><para
+>Ainda que a comparação e junção de pastas pareça ser bastante óbvia, existem vários detalhes que o utilizador deverá conhecer. O mais importante é, obviamente, o facto de que vários ficheiros poderão ser afectados por cada operação. Se não tiver cópias de segurança dos seus dados originais, então poderá ser bastante difícil ou mesmo impossível de voltar ao estado original. Por isso, antes de começar uma junção, certifique-se que os seus dados estão a salvo e que é possível voltar atrás. Se cria um pacote ou usa um sistema de controlo de versões é uma decisão sua, mas mesmo os programadores experientes e os integradores precisam do código antigo e do novo. E repare que até ao autor do &kdiff3; tenta fazer o seu melhor, mas não pode garantir que não existam erros. De acordo com a GPL da &GNU;, não existe NENHUMA GARANTIA de qualquer forma para este programa. Por isso, seja humilde e tenha sempre em mente: </para>
+<blockquote
+><para>
+   <emphasis
+>Errar é humano, mas para realmente baralhar as coisas é preciso um computador.</emphasis>
+</para
+></blockquote>
+<para
+>Por isso, este é o programa que poderá fazer isto por si: o &kdiff3; ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... lê e compara duas ou três pastas recursivamente,</para
+></listitem>
+     <listitem
+><para
+>... tem um cuidado especial com as ligações simbólicas,</para
+></listitem>
+     <listitem
+><para
+>... permite-lhe navegar nos ficheiros com um duplo-click do rato,</para
+></listitem>
+     <listitem
+><para
+>... propõe para cada item uma operação de junção, a qual poderá alterar antes de iniciar a junção de pastas,</para
+></listitem>
+     <listitem
+><para
+>... permite-lhe simular a junção e lista as acções que iriam tomar lugar, sem fazer nada de facto,</para
+></listitem>
+     <listitem
+><para
+>... permite-lhe fazer realmente a junção, possibilitando também a você interagir nas situações em que é necessária uma interacção manual,</para
+></listitem>
+     <listitem
+><para
+>... permite-lhe executar a operação seleccionada para todos os itens (tecla <keycap
+>F7</keycap
+>) ou para o item seleccionado (tecla <keycap
+>F6</keycap
+>),</para
+></listitem>
+     <listitem
+><para
+>... permite-lhe continuar a junção depois de uma interacção manual com a tecla <keycap
+>F7</keycap
+>,</para
+></listitem>
+     <listitem
+><para
+>... cria opcionalmente cópias de segurança com a extensão <filename role="extension"
+>.orig</filename
+>,</para
+></listitem>
+     <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="startingdirmerge"
+><title
+>Iniciar a Comparação ou Junção de Directoria</title>
+<para
+>Isto é bastante semelhante à junção e comparação simples com ficheiros únicos. O utilizador apenas terá de indicar nomes de pastas na linha de comandos ou na janela de abertura de ficheiros. </para>
+<sect2
+><title
+>Comparar/Juntar duas directorias: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2</replaceable
+> <option
+>-o</option
+> <replaceable
+>pastadest</replaceable
+>
+</screen>
+<para
+>Se não for indicada nenhuma pasta de destino, então o &kdiff3; irá usar a <replaceable
+>pasta2</replaceable
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Comparar/Juntar estas pastas: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2 pasta3</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>pasta1 pasta2 pasta3</replaceable
+> <option
+>-o</option
+> <replaceable
+>pastadest</replaceable
+>
+</screen>
+<para
+>Quando forem reunidas três pastas, então a <replaceable
+>pasta1</replaceable
+> será usada como a base para a junção. Se não for indicada nenhuma pasta de destino, então o &kdiff3; irá usar a <replaceable
+>pasta3</replaceable
+> como pasta de destino para a junção. </para>
+
+<para
+>Repare que só a comparação é que começa automaticamente, não a junção. Para tal, terá de seleccionar primeiro um item do menu ou a tecla <keycap
+>F7</keycap
+>. (Mais detalhes posteriormente.) </para>
+</sect2>
+</sect1>
+
+<sect1 id="dirmergevisible"
+><title
+>Informação Visível</title>
+<para
+>Ao ler as pastas, aparece uma mensagem que o informa do progresso. Se você interromper a pesquisa das pastas, então só os ficheiros que tenham sido comparados até então serão listados. </para
+><para
+>Quando a pesquisa de pastas estiver completa, então o &kdiff3; irá mostrar uma lista com os resultados restantes, ... </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="dirbrowser.png" format="PNG"/></imageobject
+> <!--alt="Image of the directory browser."-->
+</mediaobject
+></screenshot>
+<para
+>... e os detalhes sobre o item seleccionado de momento à direita: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="iteminfo.png" format="PNG"/></imageobject>
+   <!--alt="Image with information about the selected item."-->
+</mediaobject
+></screenshot>
+
+<sect2 id="name"
+><title
+>A Coluna do Nome</title>
+<para
+>Cada ficheiro e pasta encontrado durante a pesquisa é aqui mostrado numa árvore. Você poderá seleccionar um item se carregar nele uma vez com o rato. </para
+><para
+>As pastas estão fechadas por omissão. Você poderá expandi-las e fechá-las se carregar no <guiicon
+>+</guiicon
+>/<guiicon
+>-</guiicon
+> ou se fizer duplo-click no item ou ainda usando as teclas de cursores esquerda/direita. O menu <guimenu
+>Directoria</guimenu
+> também contém duas acções <guimenuitem
+>Fechar Todas as Sub-Directorias</guimenuitem
+> e <guimenuitem
+>Expandir Todas as Sub-Directorias</guimenuitem
+>, com as quais poderá fechar ou abrir todas as subpastas de uma vez. </para
+><para
+>Se fizer duplo-click num item de um ficheiro, então a comparação do ficheiro irá começar e irá aparecer a janela de diferenças do ficheiro. </para>
+<para
+>A imagem na coluna do nome reflecte o tio de ficheiro na primeira pasta (<quote
+>A</quote
+>). Poderá ser um dos seguintes: </para>
+<itemizedlist>
+     <listitem
+><para
+>Ficheiro normal</para
+></listitem>
+     <listitem
+><para
+>Pasta normal (imagem de pasta)</para
+></listitem>
+     <listitem
+><para
+>Ligação para um ficheiro (imagem de ficheiro com uma seta de ligação)</para
+></listitem>
+     <listitem
+><para
+>Ligação para uma pasta (imagem de pasta com uma seta de ligação)</para
+></listitem>
+</itemizedlist>
+<para
+>Se o tipo de ficheiro for diferente nas outras pastas, então isso é visível nas colunas A/B/C e na janela que mostra os detalhes sobre o item seleccionado. Repare que, neste caso, não poderá ser seleccionada nenhuma operação de junção automaticamente. Ao iniciar a junção, então o utilizador será informado dos problemas desse tipo. </para>
+</sect2>
+
+<sect2 id="coloring"
+><title
+>As Colunas A/B/C e o Esquema de Cores</title>
+<para
+>Como pode ser visto na imagem acima, as cores vermelha, verde, amarela e preta são usadas nas colunas A/B/C. </para>
+<itemizedlist>
+     <listitem
+><para
+>Preto: O item não existe nesta pasta.</para
+></listitem>
+     <listitem
+><para
+>Verde: Item mais recente.</para
+></listitem>
+     <listitem
+><para
+>Amarelo: Mais antigo que o verde, mais recente que o vermelho.</para
+></listitem>
+     <listitem
+><para
+>Vermelho: O item mais antigo.</para
+></listitem>
+</itemizedlist>
+<para
+>Contudo, para os itens que eram idênticos na comparação, a sua cor é também idêntica mesmo que a idade seja diferente. </para
+><para
+>As pastas são consideradas iguais se todos os itens que contêm forem idênticos. Nesse caso, elas terão a mesma cor. Porém, a idade de uma pasta não é tida em consideração de acordo com a sua cor. </para
+><para
+>A ideia do autor para este esquema de coloração veio do <ulink url="http://samba.org/cgi-bin/cvsweb/dirdiff"
+>dirdiff</ulink
+>. As cores lembram as cores de uma folha que é verde quando é nova, vai-se tornando amarela com o tempo e é vermelha quando é antiga. </para>
+
+</sect2
+><sect2 id="operation"
+><title
+>A Coluna de Operação</title>
+<para
+>Depois de comparar as patas, o &kdiff3; avalia também uma proposta para uma operação de junção. Esta é mostrada na coluna de <guilabel
+>Operação</guilabel
+>. O utilizador poderá modificar a operação se carregar na operação que deseja alterar. Irá aparecer um pequeno menu que lhe permite seleccionar uma operação para esse item (Poderá também seleccionar as operações mais necessárias através do teclado. O Ctrl+1/2/3/4/Del irá seleccionar o A/B/C/Juntar/Remover, respectivamente, se estiver disponível.) Esta operação será executada durante a junção. Depende do item e do modo de junção em que se encontra e de que operações estão disponíveis. O modo de junção é um dos seguintes </para>
+<itemizedlist>
+     <listitem
+><para
+>Junção de três pastas (a <quote
+>A</quote
+> é tratada como a base mais antiga de ambas).</para
+></listitem>
+     <listitem
+><para
+>Junção de duas pastas.</para
+></listitem>
+     <listitem
+><para
+>Modo de sincronização de duas pastas (activado com a opção <guimenuitem
+>Sincronizar as Directorias</guimenuitem
+>).</para
+></listitem>
+</itemizedlist>
+<para
+>Na junção de três pastas, a proposta de operação será: Se para um item ... </para>
+<itemizedlist>
+     <listitem
+><para
+>todas as três pastas forem iguais: Copiar do C</para
+></listitem>
+     <listitem
+><para
+>o A e o C são iguais mas o B não: Copiar a partir do B (ou se o B não existir, remover o destino se existir)</para
+></listitem>
+     <listitem
+><para
+>o A e o B são iguais mas o C não: Copiar a partir do C (ou se o C não existir, remover o destino se existir)</para
+></listitem>
+     <listitem
+><para
+>o B e o C são iguais mas o A não: Copiar a partir do C (ou se o C não existir, remover o destino se existir)</para
+></listitem>
+     <listitem
+><para
+>só o A existir: Remover o destino (se existir)</para
+></listitem>
+     <listitem
+><para
+>só o B existir: Copiar a partir do B</para
+></listitem>
+     <listitem
+><para
+>só o C existir: Copiar a partir do C</para
+></listitem>
+     <listitem
+><para
+>o A, o B e o C não são iguais: Juntar</para
+></listitem>
+     <listitem
+><para
+>o A, o B e o C não tiverem o mesmo tipo de ficheiro (&eg; o A é uma pasta e o B um ficheiro): <errorname
+>Erro: Tipo de Ficheiros em Conflito</errorname
+>. Enquanto existirem itens nesta situação, a junção de pastas não poderá começar.</para
+></listitem>
+</itemizedlist>
+<para
+>Na junção de duas pastas, a proposta de operação será: Se para um item ... </para>
+<itemizedlist>
+     <listitem
+><para
+>ambas as pastas forem iguais: Copiar do B</para
+></listitem>
+     <listitem
+><para
+>o A existir, mas o B não: Copiar a partir do A</para
+></listitem>
+     <listitem
+><para
+>o B existir, mas o A não: Copiar a partir do B</para
+></listitem>
+     <listitem
+><para
+>o A e o B existirem mas não forem iguais: Juntar</para
+></listitem>
+     <listitem
+><para
+>o A e o B não tiverem o mesmo tipo de ficheiro (&eg; o A é uma pasta e o B um ficheiro): <errorname
+>Erro: Tipo de Ficheiros em Conflito</errorname
+>. Enquanto existirem itens nesta situação, a junção de pastas não poderá começar.</para
+></listitem>
+</itemizedlist>
+<para
+>O modo de sincronização só está activo se forem indicadas duas pastas e não se não for indicado nenhum destino explícito, assim como a opção <guilabel
+>Sincronizar as directorias</guilabel
+> terá de estar activa. Nesse caso, o &kdiff3; irá seleccionar uma operação por omissão, de modo a que ambas as pastas fiquem iguais no fim. Se, para um item ... </para>
+<itemizedlist>
+     <listitem
+><para
+>ambas as pastas forem iguais: Não será feito nada.</para
+></listitem>
+     <listitem
+><para
+>o A existir mas o B não: Copiar o A para o B</para
+></listitem>
+     <listitem
+><para
+>o B existir mas o A não: Copiar o B para o A</para
+></listitem>
+     <listitem
+><para
+>o A e o B existirem, mas não forem iguais: Juntar e guardar o resultado em ambas as pastas. (Para o utilizador, o nome do ficheiro gravado visível será o B, mas o KDiff3 irá copiar o B também para o A.)</para
+></listitem>
+     <listitem
+><para
+>o A e o B não tiverem o mesmo tipo de ficheiro (&eg; o A é uma pasta e o B um ficheiro): <errorname
+>Erro: Tipo de Ficheiros em Conflito</errorname
+>. Enquanto existirem itens nesta situação, a junção de pastas não poderá começar.</para
+></listitem>
+</itemizedlist>
+<para
+>Quando duas pastas forem reunidas e a opção <guilabel
+>Copiar o mais recente em vez de juntar</guilabel
+> estiver seleccionada, então o KDiff3 irá olhar para as datas e irá optar por escolher o ficheiro mais recente. Se os ficheiros não forem iguais mas tiverem datas iguais, então a operação irá conter <errorname
+>Erro: As datas são iguais mas os ficheiros não.</errorname
+>. Enquanto esses itens existirem a junção de pastas não poderá começar. </para>
+</sect2>
+
+<sect2 id="status"
+><title
+>A Coluna de Estado</title>
+<para
+>Durante a junção, os ficheiros serão processados um a seguir ao outro. A coluna de estado irá mostrar <computeroutput
+>Terminado</computeroutput
+> para os itens em que a operação de junção foi bem sucedida e outros textos se algo ocorreu de inesperado. Quando se terminar uma junção, o utilizador deverá então fazer uma última verificação para confirmar se o estado de todos os itens é aceitável. </para>
+</sect2>
+
+<sect2 id="statisticscolulmns"
+><title
+>Colunas de Estatísticas</title>
+<para
+>Quando o modo de comparação de ficheiros <guilabel
+>Análise Completa</guilabel
+> estiver activo nas opções, então o &kdiff3; irá mostrar colunas extra que contêm o número de conflitos não resolvidos, resolvidos, de espaços em branco e dos outros conflitos. (A coluna de resolvidos só irá aparecer ao comparar ou ao juntar três pastas.) </para>
+</sect2>
+
+</sect1>
+
+
+<sect1 id="dothemerge"
+><title
+>Fazer uma Junção</title>
+<para
+>O utilizador tanto poderá reunir o item seleccionado de momento (ficheiro ou pasta) ou todos os itens. Quando tiver feito todas as suas opções de operação (em todas as subpastas também), aí então poderá iniciar a junção. </para
+><para
+>Tenha em atenção que, se não tiver indicado explicitamente uma pasta de destino, então o destino será o <quote
+>C</quote
+> no modo de três pastas, o <quote
+>B</quote
+> no modo de junção de duas pastas e no modo de sincronização será o <quote
+>A</quote
+> e/ou o <quote
+>B</quote
+>. </para
+><para
+>Se tiver indicado uma pasta de destino, verifique também que todos os itens que deverão estar no resultado, estão na árvore respectiva. Existem algumas opções que fazem com que certos itens sejam omitidos na comparação e junção de pastas. Assinale estas opções para evitar surpresas desagradáveis: </para>
+<itemizedlist>
+     <listitem
+><para
+><guilabel
+>Directorias Recursivas</guilabel
+>: Se estiver desligada, então os itens em todas as subpastas não serão tratados.</para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Padrão</guilabel
+>/<guilabel
+>Anti-Padrão</guilabel
+>: Inclui/exclui os itens que correspondam ao padrão</para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Excluir os Ficheiros Escondidos</guilabel
+></para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Listar apenas os Deltas</guilabel
+>: Os ficheiros que correspondam em todas as pastas não aparecem na árvore e, por isso, também não aparecem no destino.</para
+></listitem>
+</itemizedlist>
+<para
+>(Na versão actual, é necessário o próprio utilizador fazer uma nova pesquisa através do menu <menuchoice
+><guimenu
+>Directoria</guimenu
+><guimenuitem
+>Analisar de Novo</guimenuitem
+></menuchoice
+>, depois de alterar as opções que afectam a pesquisa da pasta.) </para
+><para
+>Se estiver satisfeito até agora, o resto é simples. </para
+><para
+>Para juntar todos os itens: Seleccione <guimenuitem
+>Iniciar/Continuar a Junção da Directoria</guimenuitem
+> no menu <guimenu
+>Directoria</guimenu
+> ou carregue em <keycap
+>F7</keycap
+> (que é o atalho). Para juntar apenas o item actual: Seleccione <guimenuitem
+>Executar a Operação no Item Actual</guimenuitem
+> ou carregue em <keycap
+>F6</keycap
+>. </para
+><para
+>Se, devido à existência de tipos de ficheiro em conflito, ainda permanecerem alguns itens com operações inválidas, então irá aparecer uma mensagem onde serão evidenciados esses itens, para que possa seleccionar uma operação válida para cada item. </para
+><para
+>Se juntar todos os itens, irá aparecer uma janela que lhe apresenta as opções <guibutton
+>Fazê-lo</guibutton
+>, <guibutton
+>Simulá-lo</guibutton
+> e <guibutton
+>Cancelar</guibutton
+>. </para>
+<itemizedlist>
+     <listitem
+><para
+>Seleccione <guibutton
+>Simulá-lo</guibutton
+> se quiser ver o que seria feito sobre o item sem aplicar de facto as modificações. Será apresentada uma lista descritiva com todas as operações.</para
+></listitem>
+     <listitem
+><para
+>Caso contrário, seleccione <guibutton
+>Fazê-lo</guibutton
+> para iniciar de facto a junção.</para
+></listitem>
+</itemizedlist>
+<para
+>Nesse caso, o &kdiff3; irá executar a operação indicada para todos os itens. Se for necessária alguma intervenção manual (na junção de ficheiros simples), então irá aparecer uma janela de junção (<link linkend="dirmergebigscreenshot"
+>ver a imagem grande</link
+>). </para
+><para
+>Quando tiver terminado um ficheiro, seleccione de novo <guimenuitem
+>Iniciar/continuar a junção da directoria</guimenuitem
+> ou a tecla <keycap
+>F7</keycap
+>. Se não tiver ainda gravado nada, irá aparecer uma janela a pedir-lhe isso. Aí, o &kdiff3; irá passar ao próximo item. </para
+><para
+>Quando o &kdiff3; encontrar um erro, indicar-lhe-á tal facto e irá mostrar a informação descritiva do estado. No fundo desta lista, existirão algumas mensagens de erro que o deverão ajudar a compreender a causa do problema. Quando continuar a junção (com a tecla <keycap
+>F7</keycap
+>), o &kdiff3; indicar-lhe-á a opção para repetir ou saltar o item que causou o problema. Isto significa que, antes de continuar, poderá escolher outra operação ou resolver o problema por outros meios. </para
+><para
+>Quando a junção estiver completa, o &kdiff3; informá-lo-á então com uma mensagem. </para
+><para
+>Se alguns dos itens foram reunidos individualmente, então o &kdiff3; irá recordar isto (enquanto esta sessão de junção prosseguir) e não os juntará de novo, até que a junção para todos os itens tenha sido executada. Mesmo quando a junção tenha sido ignorada ou não tenha sido gravado nada, estes itens irão contar como completos. Só quando tiver alterado a operação de junção é que o item será reunido de novo. </para>
+</sect1>
+
+<sect1 id="dirmergeoptions"
+><title
+>Opções para Comparar e Juntar Pastas</title>
+<para
+>As preferências do &kdiff3; (no menu <menuchoice
+><guimenu
+>Configuração</guimenu
+><guimenuitem
+>Configurar o KDiff3</guimenuitem
+></menuchoice
+>) têm agora uma secção intitulada <guilabel
+>Junção de Directorias</guilabel
+> com as seguintes opções: </para>
+
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Directorias Recursivas:</guilabel
+></term
+><listitem
+><para
+>Indica se você deseja pesquisar as pastas de forma recursiva.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Padrões de Ficheiros:</guilabel
+></term
+><listitem
+><para
+>Só os ficheiros que correspondam ao padrão ou padrões aqui indicados é que serão colocados na árvore. Poderá ser indicado mais do que um padrão através do separador ponto-e-vírgula <literal
+>;</literal
+>. São considerados caracteres especiais válidos o <literal
+>*</literal
+> e o <literal
+>?</literal
+>. (&eg; <literal
+>*.cpp;*.h</literal
+>). Por omissão, este campo é igual a <literal
+>*</literal
+>. As pastas não precisam de corresponder a este padrão.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Anti-padrões:</guilabel
+></term
+><listitem
+><para
+>Os ficheiros e pastas que correspondam ao padrão ou padrões aqui indicados serão excluídos da árvore. Poderá ser indicado mais do que um padrão através do separador ponto-e-vírgula <literal
+>;</literal
+>. São considerados caracteres especiais válidos o <literal
+>*</literal
+> e o <literal
+>?</literal
+>. Por omissão, este campo é igual a <literal
+>*.orig;*.o</literal
+>.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Usar CVS-Ignore:</guilabel
+></term
+><listitem
+><para
+>Ignora os ficheiros e pastas que são também ignorados pelo <acronym
+>CVS</acronym
+>. Muitos dos ficheiros gerados automaticamente são ignorados pelo <acronym
+>CVS</acronym
+>. A grande vantagem é que esta funcionalidade é específica para cada pasta através de um ficheiro <filename
+>.cvsignore</filename
+> local. (Veja em <ulink url="info:/cvs/cvsignore"
+>info:/cvs/cvsignore</ulink
+>.)</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Procurar os Ficheiros e Directorias Escondidos:</guilabel
+></term
+><listitem
+><para
+>Em alguns sistemas de ficheiros, existe um atributo <quote
+>Escondido</quote
+>. Em outros sistemas, um nome de ficheiro que comece por <literal
+>.</literal
+> faz com que este seja considerados escondido. Esta opção permite-lhe decidir se deve incluir estes ficheiros na árvore ou não. Por omissão, são incluídos.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Seguir as Ligações de Ficheiros:</guilabel
+></term
+><listitem
+><para
+>Para as ligações aos ficheiros: Quando a opção estiver desactivada, as ligações simbólicas serão comparadas. Caso contrário, serão compilados os ficheiros para os quais apontam as ligações. Por omissão, a opção está desligada.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Seguir as Ligações de Directorias:</guilabel
+></term
+><listitem
+><para
+>Para as ligações a pastas: Quando a opção estiver desactivada, as ligações simbólicas serão comparadas. Se estiver activa, então a ligação será tratada como uma pasta e será pesquisada recursivamente. (Lembre-se que o programa não verifica se a ligação é <quote
+>recursiva</quote
+>. Por isso, se uma pasta contiver por exemplo uma ligação para ela própria irá causar um ciclo infinito, pelo que ao fim de algum tempo a pilha estoira ou toda a memória será usada e o programa irá estoirar deste modo). Por omissão, a opção está desligada.</para
+></listitem
+></varlistentry
+>   
+   <varlistentry
+><term
+><guilabel
+>Listar apenas os deltas:</guilabel
+></term
+><listitem
+><para
+>Somente os itens que não sejam iguais em todas as pastas de entrada é que serão listados, assim como os ficheiros alterados. Como tal, os ficheiros que sejam iguais em todas as pastas não serão copiados numa junção e, se a pasta de destino não contiver os ficheiros antes da junção, o utilizador poderá perder alguns ficheiros mais tarde. (Esta opção poderá ser alterada numa versão posterior). Por omissão, esta opção está desligada.</para
+></listitem
+></varlistentry>
+
+   <varlistentry
+><term
+><guilabel
+>Modo de Comparação de Ficheiros:</guilabel
+></term
+><listitem
+><para>
+<variablelist
+>            
+   <varlistentry
+><term
+><guilabel
+>Comparação Binária:</guilabel
+></term
+><listitem
+><para
+>Este é o modo de comparação de ficheiros por omissão. </para
+></listitem
+></varlistentry
+>         
+   <varlistentry
+><term
+><guilabel
+>Análise Completa:</guilabel
+></term
+><listitem
+><para
+>Faz uma análise completa de cada ficheiro e mostra os resultados nas colunas de informação das estatísticas. (O número de conflitos resolvidos, por resolver, devido a espaços em branco ou a outros casos). A análise completa é mais lenta que uma simples comparação binária e é muito mais lenta se for usada em ficheiros que não contenham texto. (Indique os tipos de anti-padrões necessários.) </para
+></listitem
+></varlistentry
+>         
+   <varlistentry
+><term
+><guilabel
+>Confiar na data de modificação:</guilabel
+></term
+><listitem
+><para
+>Se comparar pastas grandes numa rede lenta, poderá ser mais rápido comparar somente as datas de modificação e os tamanhos dos ficheiros. Porém, este melhoramento de velocidade traz alguma incerteza. Use esta opção com cuidado. Por omissão, está desligada.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Confiar no tamanho:</guilabel
+></term
+><listitem
+><para
+>É semelhante à comparação da data de modificação. Não ocorre nenhuma comparação em si. Dois ficheiros quaisquer são considerados iguais se os seus tamanhos de ficheiros forem iguais. Isto é útil quando a operação de cópia de ficheiros não preservar a data de modificação. Use esta opção com cuidado. Por omissão, está desligada.</para
+></listitem
+></varlistentry>
+</variablelist
+></para
+></listitem
+></varlistentry>
+         
+   <varlistentry
+><term
+><guilabel
+>Sincronizar as Directorias:</guilabel
+></term
+><listitem
+><para
+>Activa o "Modo de Sincronização" em que duas pastas são comparadas e não foi indicada nenhuma pasta de destino. Neste modo, as operações propostas serão escolhidas de modo a que ambas as pastas de origem fiquem iguais no fim. Do mesmo modo, o resultado da junção será gravado em ambas as pastas. Por omissão, esta opção está desligada.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Copiar o mais recente em vez de juntar:</guilabel
+></term
+><listitem
+><para
+>Em vez de juntar, a operação proposta irá copiar os ficheiros mais recentes se ocorreram algumas alterações. (É considerado inseguro, porque implica saber se o outro ficheiro não foi também alterado. Verifique para se certificar em qualquer um dos casos.). Por omissão, a opção está desligada.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ficheiros de segurança:</guilabel
+></term
+><listitem
+><para
+>Se um ficheiro ou uma pasta completa for substituído por outro ou for removido, então a versão original mudará para um nome com uma extensão <filename role="extension"
+>.orig</filename
+>. Se já existir um ficheiro antigo com uma extensão <filename role="extension"
+>.orig</filename
+>, então este será removido sem ser criada nenhuma cópia de segurança. Isto também afecta a junção normal de ficheiros simples, não só no modo de junção de pastas. Por omissão, a opção está activa.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="other"
+><title
+>Outras Funções</title>
+<sect2
+><title
+>Modo de Ecrã Repartido/Completo</title>
+<para
+>Normalmente a lista de junção da pasta fica visível enquanto um único ficheiro é comparado ou reunido. Com o rato, o utilizador poderá mover a barra separadora que delimita a lista de ficheiros das janelas de diferenças do texto. Se não a quiser, poderá desactivar a <guimenuitem
+>Janela Repartida</guimenuitem
+> no menu <guimenu
+>Directoria</guimenu
+>. Aí, poderá usar a opção <guimenuitem
+>Comutar a Vista</guimenuitem
+> no menu <guimenu
+>Directoria</guimenu
+> para alternar entre a lista de ficheiros e a janela de diferenças no texto que irá então ocupar o ecrã completo. </para>
+</sect2>
+<sect2
+><title
+>Comparar ou Juntar um Único Ficheiro</title>
+<para
+>Provavelmente, você irá preferir um duplo-click do rato simples sobre um ficheiro para o poder comparar. Contudo, existe também um item no menu <guimenu
+>Directoria</guimenu
+>. Poderá também juntar directamente um único ficheiro sem iniciar a junção de pastas, através da opção <guimenuitem
+>Juntar um único ficheiro</guimenuitem
+> do menu <guimenu
+>Directoria</guimenu
+>. Ao gravar o resultado, o estado ficará como terminado e o ficheiro não será reunido de novo se for iniciada uma junção de pastas. </para
+><para
+>Mas repare que esta informação de estado será perdida quando voltar a executar uma pesquisa de pastas: menu <menuchoice
+><guimenu
+>Directoria</guimenu
+><guimenuitem
+>Pesquisar de novo</guimenuitem
+></menuchoice
+> </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="misc">
+<title
+>Tópicos Diversos</title>
+<sect1 id="networktransparency">
+<title
+>Transparência na Rede Através do KIO</title>
+<sect2
+><title
+>KIO-Slaves</title>
+<para
+>O &kde; suporta a transparência na rede através dos 'KIO-slaves'. O &kdiff3; usa isto para ler os ficheiros de entrada e para pesquisar as pastas. Isto significa que você poderá indicar ficheiros e pastas em recursos locais e remotos através dos &URL;s. </para
+><para
+>Exemplo: </para
+><para>
+<screen
+><command
+>kdiff3</command
+> teste.cpp  ftp://ftp.longe.org/teste.cpp
+   <command
+>kdiff3</command
+> tar:/home/eu/pacote.tar.gz/pasta ./pasta
+</screen>
+</para>
+<para
+>A primeira linha compara um ficheiro local com outro ficheiro num servidor de &FTP;. A segunda linha compara uma pasta dentro de um pacote comprimido com uma pasta local. </para
+><para
+>Outros 'KIO-slaves' que serão interessantes: </para>
+<itemizedlist>
+<listitem
+><para
+>Ficheiros da WWW (http:),</para
+></listitem>
+<listitem
+><para
+>Ficheiros de FTP (ftp:),</para
+></listitem>
+<listitem
+><para
+>Transferência de ficheiros cifrada (fish:, sftp:),</para
+></listitem>
+<listitem
+><para
+>Recursos do Windows (smb:),</para
+></listitem>
+<listitem
+><para
+>Ficheiros locais (file:),</para
+></listitem>
+</itemizedlist>
+<para
+>Outras coisas que são possíveis, mas provavelmente serão menos interessantes: </para>
+<itemizedlist>
+<listitem
+><para
+>Páginas do 'man' (man:),</para
+></listitem>
+<listitem
+><para
+>Páginas do 'info' (info:),</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2
+><title
+>Como Escrever &URL;s</title>
+<para
+>Um dado &URL; tem uma sintaxe diferente, em comparação com as localizações dos ficheiros e pastas locais. Alguns factores terão de ser tidos em consideração: </para>
+<itemizedlist>
+<listitem
+><para
+>Uma localização poderá ser relativa e conter <literal
+>.</literal
+> ou <literal
+>..</literal
+>. Isto não é possível para os &URL;s, dado que estes são sempre absolutos. </para
+></listitem
+><listitem
+><para
+>Os caracteres especiais têm de ser escritos <quote
+>escapados</quote
+>. (<quote
+>#</quote
+>-><quote
+>%23</quote
+>, espaço-><quote
+>%20</quote
+>, etc.) &eg; Um ficheiro com o nome <quote
+>/#xpto#</quote
+> iria ter o URL <literal
+>file:/%23xpto%23</literal
+>. </para
+></listitem
+><listitem
+><para
+>Quando os &URL;s não funcionarem como seria de esperar, tente abri-los primeiro no &konqueror;. </para
+></listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2
+><title
+>Capacidades dos 'KIO-Slaves'</title>
+<para
+>A transparência na rede tem um senão. Nem todos os recursos têm as mesmas capacidades. </para
+><para
+>Algumas das vezes estas são devidas ao sistema de ficheiros do servidor, enquanto que noutras ocasiões poderá ser devido ao protocolo. Aqui está uma pequena lista das restrições: </para>
+<itemizedlist>
+<listitem
+><para
+>Em alguns casos não existe o suporte para ligações simbólicas. </para
+></listitem
+><listitem
+><para
+>Ou não existe forma de distinguir se uma ligação aponta para um ficheiro ou uma pasta; é assumido sempre um ficheiro. (ftp:, sftp:). </para
+></listitem
+><listitem
+><para
+>Não é sempre possível determinar o tamanho do ficheiro. </para
+></listitem
+><listitem
+><para
+>Existe um suporte de permissões limitado. </para
+></listitem
+><listitem
+><para
+>Não existe a possibilidade de modificar as permissões ou a data de modificação, como tal as permissões ou a data de uma cópia poderão ser diferentes do original. (Veja a opção "Confiar no tamanho".) (A modificação de permissões ou das datas só é possível para os ficheiros locais.) </para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+<sect1 id="kpart">
+<title
+>Usar o &kdiff3; como uma KPart</title>
+<para
+>O &kdiff3; é uma KPart. De momento, implementa a interface <interface
+>KParts::ReadOnlyPart</interface
+>. </para
+><para
+>A sua utilização principal é como visualizador de diferenças no <application
+>KDevelop</application
+>. O <application
+>KDevelop</application
+> inicia sempre o visualizador de diferenças interno em primeiro lugar. Para invocar o &kdiff3;, carregue no &RMB; na janela do visualizador de diferenças e seleccionar <guimenuitem
+>Mostrar no KDiff3Part</guimenuitem
+> no menu de contexto. </para
+><para
+>O &kdiff3; necessita normalmente de dois ficheiros completos como entrada. Se for usado como componente KPart, o &kdiff3; irá assumir que o ficheiro de entrada é um ficheiro de 'patch' no formato unificado. O &kdiff3; irá então obter os nomes dos ficheiros originais do ficheiro de 'patch'. Pelo menos um dos dois ficheiros terá de estar disponível. O &kdiff3; irá então invocar o <command
+>patch</command
+> para criar de novo o segundo ficheiro. </para
+><para
+>No &konqueror;, o utilizador poderá seleccionar um ficheiro de 'patch' e seleccionar <menuchoice
+><guisubmenu
+>Antevisão em</guisubmenu
+><guimenuitem
+>KDiff3Part</guimenuitem
+></menuchoice
+> no menu de contexto. Tenha em atenção que isto não irá funcionar se nenhum dos ficheiros originais estiver disponível e não é fiável se os ficheiros originais tiverem sido alterados desde que o ficheiro de 'patch' foi gerado. </para
+><para
+>Quando é executado como um componente, o &kdiff3; só oferece uma diferença de dois ficheiros, uma barra de ferramentas muito pequena e um menu. A junção ou a comparação de pastas não é suportada nesse caso. </para>
+</sect1>
+</chapter>
+
+<chapter id="faq">
+<title
+>Perguntas e Respostas</title>
+&reporting.bugs; &updating.documentation; <qandaset id="faqlist">
+
+<qandaentry
+><question
+><para
+>Porque é que se chama &kdiff3;? </para
+></question
+><answer
+><para
+>As ferramentas <application
+>KDiff</application
+> e <application
+>KDiff2</application
+> (agora chamada &kompare;) já existiam. Para além disso, o &kdiff3; deveria sugerir que consegue juntar ficheiros como a ferramenta <command
+>diff3</command
+> da colecção de ferramentas do Diff. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Porque é que é lançado segundo a <acronym
+>GPL</acronym
+>? </para
+></question
+><answer
+><para
+>O autor usou programas <acronym
+>GPL</acronym
+> durante bastante tempo até agora e aprendeu bastante ao olhar para bastante código. Daí, este é o <quote
+>Muito Obrigado</quote
+> para todos os programadores que também o fizeram ou irão fazer no futuro. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Faltam alguns botões e funções. O que é que se passa? </para
+></question
+><answer
+><para
+>Você compilou a partir do código mas não indicou provavelmente o prefixo correcto do &kde; com o <command
+>configure</command
+>. Por omissão, o <command
+>configure</command
+> deseja instalar no <filename class="directory"
+>/usr/local</filename
+>, mas aí o &kde; não consegue encontrar o ficheiro de recursos da interface do utilizador (&ie;, o <filename
+>kdiff3ui.rc</filename
+>). O ficheiro <filename
+>README</filename
+> contém mais informações sobre o prefixo correcto. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Muitas das vezes as linhas que são semelhantes mas não idênticas aparecem umas ao lado das outras mas noutros casos não. Porquê? </para
+></question
+><answer
+><para
+>As linhas em que apenas a quantidade de espaços em branco é diferente são tratadas como <quote
+>iguais</quote
+> à primeira vista, embora apenas um carácter que não seja um espaço em branco faça com que as linhas sejam <quote
+>diferentes</quote
+>. Se as linhas semelhantes aparecerem uma ao lado da outra, isto poderá ser de facto uma coincidência, mas é felizmente o caso mais frequente. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Porque é que todos os conflitos deverão ser resolvidos para que o resultado da gravação possa ser gravado? </para
+></question
+><answer
+><para
+>Para cada secção igual ou diferente, o editor na janela do resultado da junção recorda onde é que esta começa ou termina. Isto é necessário para que os conflitos possam ser resolvidos manualmente ao seleccionar simplesmente o botão da origem (A, B ou C). Esta informação é perdida durante a gravação como texto e corresponde a demasiado esforço criar um formato de ficheiro especial que suporte a gravação e a reposição de toda a informação necessária. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Porque é que o editor na janela do resultado da junção não tem uma função para <quote
+>desfazer</quote
+>? </para
+></question
+><answer
+><para
+>Isso era demasiado difícil até agora. Você poderá sempre repor uma versão de uma origem (A, B ou C) se carregar no botão respectivo. Para uma edição extensa, recomenda-se a utilização de outro editor, de qualquer forma. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Quando eu removi algum texto, apareceu de repente <quote
+>&lt;Sem linha de origem&gt;</quote
+> e esta não pode ser removida. O que é que significa e como é que se poderá removê-la? </para
+></question
+><answer
+><para
+>Para cada secção igual ou diferente, o editor na janela do resultado da junção recorda onde é que esta começa ou termina. O <quote
+>&lt;Sem linha de origem&gt;</quote
+> significa que não existe mais nada livre numa secção, nem mesmo um carácter de mudança de linha. Isto poderá acontecer durante a junção automática ou durante a edição. Isto não é nenhum problema, dado que esta dica não irá aparecer no ficheiro gravado. Se você quiser os dados originais de volta, basta seleccionar a secção (carregue na coluna de resumo à esquerda) e depois no botão da origem com o conteúdo necessário (A/B ou C). </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Porque é que o &kdiff3; não suporta o realce de sintaxe? </para
+></question
+><answer
+><para
+>O &kdiff3; já usa demasiadas cores para o realce das diferenças. Se suportasse o realce de sintaxe, tornar-se-ia confuso. Use outro editor para esse efeito. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Existe demasiada informação aqui, mas a sua dúvida ainda não foi respondida? </para
+></question
+><answer
+><para
+>Por favor envie ao autor a sua dúvida. Agradece-se qualquer comentário. </para
+></answer
+></qandaentry>
+
+</qandaset>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Créditos e Licença</title>
+
+<para
+>&kdiff3; - Ferramenta de Comparação e Junção de Ficheiros e Pastas </para>
+<para
+>Programa com 'copyright' 2002-2005 de Joachim Eibl <email
+>joachim.eibl@gmx.de</email
+> </para>
+<para
+>Vieram várias ideias giras e relatórios de erros dos colegas do autor e de pessoas da Wild Wild Web. Muito obrigado! </para>
+
+<para
+>Documentação Copyright &copy; 2002-2005 Joachim Eibl <email
+>joachim.eibl at gmx.de</email
+> </para>
+
+<para
+>Tradução de Pedro Morais <email
+>morais@kde.org</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+<appendix id="installation">
+<title
+>Instalação</title>
+
+<sect1 id="getting-kdiff3">
+<title
+>Como obter o &kdiff3;</title>
+
+<para
+>Você poderá obter a última versão do &kdiff3; na sua página pessoal em <ulink url="http://kdiff3.sourceforge.net"
+>http://kdiff3.sourceforge.net</ulink
+>. </para
+><para
+>O &kdiff3; está também disponível para outras plataformas. Veja a página pessoal para mais detalhes. </para>
+
+
+</sect1>
+
+<sect1 id="requirements">
+<title
+>Requisitos</title>
+
+<para
+>Para poder usar todas as funcionalidades com sucesso do &kdiff3;, precisa do &kde; 3.1 ou posterior. </para
+><para
+>Para mais informações sobre como correr o  &kdiff3; noutras plataformas sem o KDE, veja por favor a <ulink url="http://kdiff3.sourceforge.net"
+>página pessoal</ulink
+>. </para
+><para
+>O utilizador poderá encontrar uma lista das alterações em <ulink url="http://kdiff3.sourceforge.net/ChangeLog"
+>http://kdiff3.sourceforge.net/ChangeLog</ulink
+> ou no ficheiro <filename
+>ChangeLog</filename
+> do pacote de código. </para>
+</sect1>
+
+<sect1 id="compilation">
+<title
+>Compilação e Instalação</title>
+&install.compile.documentation; </sect1>
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab
+-->

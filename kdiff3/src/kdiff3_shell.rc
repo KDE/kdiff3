@@ -9,13 +9,24 @@
     <Action name="dir_run_operation_for_current_item"/>
     <Action name="dir_compare_current"/>
     <Action name="dir_rescan"/>
+    <!-- <Action name="dir_save_merge_state"/>
+    <Action name="dir_load_merge_state"/> -->
     <Action name="dir_fold_all"/>
     <Action name="dir_unfold_all"/>
+    <Action name="dir_show_identical_files"/>
+    <Action name="dir_show_different_files"/>
+    <Action name="dir_show_files_only_in_a"/>
+    <Action name="dir_show_files_only_in_b"/>
+    <Action name="dir_show_files_only_in_c"/>
     <Action name="dir_choose_a_everywhere"/>
     <Action name="dir_choose_b_everywhere"/>
     <Action name="dir_choose_c_everywhere"/>
     <Action name="dir_autochoose_everywhere"/>
     <Action name="dir_nothing_everywhere"/>
+    <Action name="dir_synchronize_directories"/>
+    <Action name="dir_choose_newer_files"/>
+    <Action name="dir_compare_explicitly_selected_files"/>
+    <Action name="dir_merge_explicitly_selected_files"/>
     <Menu name="dir_current_merge_menu"><text>Current Item Merge Operation</text>
        <Action name="dir_current_do_nothing"/>
        <Action name="dir_current_choose_a"/>
@@ -56,6 +67,8 @@
     <Action name="diff_overview_ac"/>
     <Action name="diff_overview_bc"/>
     <Action name="diff_wordwrap"/>
+    <Action name="diff_add_manual_diff_help"/>
+    <Action name="diff_clear_manual_diff_help_list"/>
   </Menu>  
   <Menu name="merge"><text>&amp;Merge</text>
     <Action name="merge_current"/>
@@ -74,6 +87,10 @@
     <Action name="merge_choose_c_for_unsolved_whitespace_conflicts"/>
     <Action name="merge_autosolve"/>
     <Action name="merge_autounsolve"/>
+    <Action name="merge_splitdiff"/>
+    <Action name="merge_joindiffs"/>
+    <Action name="merge_regexp_automerge"/>
+    <Action name="merge_versioncontrol_history"/>
   </Menu>
   <Menu name="window"><text>&amp;Window</text>
     <Action name="win_focus_prev"/>
@@ -104,5 +121,8 @@
   <Action name="diff_show_whitespace"/>
   <Action name="diff_show_whitespace_characters"/>
   <Action name="diff_showlinenumbers"/>
+  <Action name="dir_show_identical_files"/>
+  <Action name="dir_show_files_only_in_a"/>
+  <Action name="dir_show_files_only_in_b"/>
 </ToolBar>
 </kpartgui>

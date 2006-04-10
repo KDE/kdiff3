@@ -28,12 +28,9 @@ TODO
 - kdiff3 does not preserve the permissions of files it overwrites during a 'save' operation.
 
 - Insbesondere Ausführbarkeit "x" und Schreibschutz "w" sollten erhalten bleiben. 
-- Edit Select All, Ctrl-A
 
 - Under Windows: Shortcut Ctrl-Shift-2 (for select B everywhere doesn't work.)
 -                Paste from Clipboard doesn't work.
-
-- Improve message about WinCVS in the Installer.
 
 - Bug: Comment section isn't recognized as nonwhite difference if several lines are between /* and */ on one side.
 
@@ -43,15 +40,9 @@ TODO
 - ??? The gutters (kdiff3 have 2 "gutters") fonts and background-foreground colors sholud be configured other
   than the "general" foreground-background colors. Otherwise they are confused with the main dialog.
 
-- Unicode and UTF8 support
 - Try to autodetect the line-end-style
 - Ignore cvs-keywords like $Revision$
-- Correct Christof crash with the Find-function.
 
-- Windows: Check if folders can match case-insensitive.
-- Close diff/merge window-menu-action.
-
-- Printing of the diff-windows (requires automatic line wrap)
 - Undo function in the merge-editor.
 - More viewing options for directory widget.
 
@@ -93,3 +84,4 @@ More Statistics before the merge begins:
 
 - Allow analysis of unified directory-diff/patch-file.
 
+- LineEdit for Save-Filename

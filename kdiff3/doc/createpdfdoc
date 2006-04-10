@@ -1,0 +1,8 @@
+for i in `find * -maxdepth 0 -type d`; do
+cd $i
+echo $i
+LANG=de_DE meinproc --check index.docbook --stylesheet /opt/kde3/share/apps/ksgmltools2/customization/kde-nochunk.xsl
+html2ps -D -u -n index.html >index.ps
+ps2pdf index.ps ../kdiff3_$i.pdf
+cd ..
+done

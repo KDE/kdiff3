@@ -1,6 +1,21 @@
-/*
- * Copyright (C) 2003 Joachim Eibl <joachim@gmx.de>
- */
+/***************************************************************************
+ * Copyright (C) 2003-2006 Joachim Eibl <joachim.eibl at gmx.de>           *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA.           *
+ ***************************************************************************/
 
 #include "kdiff3_shell.h"
 #include "kdiff3.h"
@@ -22,7 +37,7 @@
 
 #include <iostream>
 
-KDiff3Shell::KDiff3Shell()
+KDiff3Shell::KDiff3Shell(bool bCompleteInit)
     : KParts::MainWindow( 0L, "kdiff3" )
 {
     m_bUnderConstruction = true;
@@ -51,9 +66,9 @@ KDiff3Shell::KDiff3Shell()
             // tell the KParts::MainWindow that this is indeed the main widget
             setCentralWidget(m_part->widget());
 
-            show();
-
-            ((KDiff3App*)m_part->widget())->completeInit();
+            if (bCompleteInit)
+               ((KDiff3App*)m_part->widget())->completeInit();
+            connect(((KDiff3App*)m_part->widget()), SIGNAL(createNewInstance(const QString&, const QString&, const QString&)), this, SLOT(slotNewInstance(const QString&, const QString&, const QString&)));
         }
     }
     else
@@ -98,8 +113,17 @@ bool KDiff3Shell::queryExit()
    return true;
 }
 
-
-
+void KDiff3Shell::closeEvent(QCloseEvent*e)
+{
+   if ( queryClose() )
+   {
+      e->accept();
+      bool bFileSaved = ((KDiff3App*)m_part->widget())->isFileSaved();
+      KApplication::exit( bFileSaved ? 0 : 1 );
+   }
+   else
+      e->ignore();
+}
 
 void KDiff3Shell::optionsShowToolbar()
 {
@@ -156,6 +180,12 @@ void KDiff3Shell::applyNewToolbarConfig()
 #else
     applyMainWindowSettings(KGlobal::config());
 #endif
+}
+
+void KDiff3Shell::slotNewInstance( const QString& fn1, const QString& fn2, const QString& fn3 )
+{
+   KDiff3Shell* pKDiff3Shell = new KDiff3Shell(false);
+   ((KDiff3App*)pKDiff3Shell->m_part->widget())->completeInit(fn1,fn2,fn3);
 }
 
 #include "kdiff3_shell.moc"

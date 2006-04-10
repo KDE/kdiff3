@@ -2,8 +2,8 @@
                           directorymergewindow.h
                              -------------------
     begin                : Sat Oct 19 2002
-    copyright            : (C) 2002-2004 by Joachim Eibl
-    email                : joachim.eibl@gmx.de
+    copyright            : (C) 2002-2005 by Joachim Eibl
+    email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
 /***************************************************************************
@@ -30,7 +30,6 @@
 
 class OptionDialog;
 class KIconLoader;
-class StatusMessageBox;
 class StatusInfo;
 class DirectoryMergeInfo;
 class OneDirectoryInfo;
@@ -110,9 +109,8 @@ public:
    DirMergeItem( DirMergeItem* pParent, const QString&, MergeFileInfos*);
    ~DirMergeItem();
    MergeFileInfos* m_pMFI;
-#if QT_VERSION!=230
    virtual int compare(QListViewItem *i, int col, bool ascending) const;
-#endif
+   virtual void paintCell(QPainter * p, const QColorGroup & cg, int column, int width, int align );
    void init(MergeFileInfos* pMFI);
 };
 
@@ -139,6 +137,7 @@ public:
    void initDirectoryMergeActions( QObject* pKDiff3App, KActionCollection* ac );
    void updateAvailabilities( bool bDirCompare, bool bDiffWindowVisible,
       KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC );
+   void updateFileVisibilities();
 
    virtual void keyPressEvent( QKeyEvent* e );
    virtual void focusInEvent( QFocusEvent* e );
@@ -158,6 +157,18 @@ public slots:
    void slotNoOpEverywhere();
    void slotFoldAllSubdirs();
    void slotUnfoldAllSubdirs();
+   void slotShowIdenticalFiles();
+   void slotShowDifferentFiles();
+   void slotShowFilesOnlyInA();
+   void slotShowFilesOnlyInB();
+   void slotShowFilesOnlyInC();
+
+   void slotSynchronizeDirectories();
+   void slotChooseNewerFiles();
+
+   void slotCompareExplicitlySelectedFiles();
+   void slotMergeExplicitlySelectedFiles();
+
    // Merge current item (merge mode)
    void slotCurrentDoNothing();
    void slotCurrentChooseA();
@@ -174,6 +185,9 @@ public slots:
    void slotCurrentMergeToA();
    void slotCurrentMergeToB();
    void slotCurrentMergeToAAndB();
+
+   void slotSaveMergeState();
+   void slotLoadMergeState();
 
 protected:
    void mergeContinue( bool bStart, bool bVerbose );
@@ -217,6 +231,8 @@ protected:
    FileAccess m_dirDest;
    FileAccess m_dirDestInternal;
 
+   QString m_dirMergeStateFilename;
+
    std::map<QString, MergeFileInfos> m_fileMergeMap;
 
    bool m_bFollowDirLinks;
@@ -226,12 +242,12 @@ protected:
    bool m_bError;
    bool m_bSyncMode;
    bool m_bDirectoryMerge; // if true, then merge is the default operation, otherwise it's diff.
+   bool m_bCaseSensitive;
    
    bool m_bScanning; // true while in init()
 
    OptionDialog* m_pOptions;
    KIconLoader* m_pIconLoader;
-   StatusMessageBox* m_pStatusMessageBox;
    DirectoryMergeInfo* m_pDirectoryMergeInfo;
    StatusInfo* m_pStatusInfo;
 
@@ -239,35 +255,59 @@ protected:
    MergeItemList m_mergeItemList;
    MergeItemList::iterator m_currentItemForOperation;
 
-   KAction* dirStartOperation;
-   KAction* dirRunOperationForCurrentItem;
-   KAction* dirCompareCurrent;
-   KAction* dirMergeCurrent;
-   KAction* dirRescan;
-   KAction* dirChooseAEverywhere;
-   KAction* dirChooseBEverywhere;
-   KAction* dirChooseCEverywhere;
-   KAction* dirAutoChoiceEverywhere;
-   KAction* dirDoNothingEverywhere;
-   KAction* dirFoldAll;
-   KAction* dirUnfoldAll;
+   DirMergeItem* m_pSelection1Item;
+   int m_selection1Column;
+   DirMergeItem* m_pSelection2Item;
+   int m_selection2Column;
+   DirMergeItem* m_pSelection3Item;
+   int m_selection3Column;
+   void selectItemAndColumn(DirMergeItem* pDMI, int c, bool bContextMenu);
+   friend class DirMergeItem;
 
-   KAction* dirCurrentDoNothing;
-   KAction* dirCurrentChooseA;
-   KAction* dirCurrentChooseB;
-   KAction* dirCurrentChooseC;
-   KAction* dirCurrentMerge;
-   KAction* dirCurrentDelete;
+   KAction* m_pDirStartOperation;
+   KAction* m_pDirRunOperationForCurrentItem;
+   KAction* m_pDirCompareCurrent;
+   KAction* m_pDirMergeCurrent;
+   KAction* m_pDirRescan;
+   KAction* m_pDirChooseAEverywhere;
+   KAction* m_pDirChooseBEverywhere;
+   KAction* m_pDirChooseCEverywhere;
+   KAction* m_pDirAutoChoiceEverywhere;
+   KAction* m_pDirDoNothingEverywhere;
+   KAction* m_pDirFoldAll;
+   KAction* m_pDirUnfoldAll;
 
-   KAction* dirCurrentSyncDoNothing;
-   KAction* dirCurrentSyncCopyAToB;
-   KAction* dirCurrentSyncCopyBToA;
-   KAction* dirCurrentSyncDeleteA;
-   KAction* dirCurrentSyncDeleteB;
-   KAction* dirCurrentSyncDeleteAAndB;
-   KAction* dirCurrentSyncMergeToA;
-   KAction* dirCurrentSyncMergeToB;
-   KAction* dirCurrentSyncMergeToAAndB;
+   KToggleAction* m_pDirShowIdenticalFiles;
+   KToggleAction* m_pDirShowDifferentFiles;
+   KToggleAction* m_pDirShowFilesOnlyInA;
+   KToggleAction* m_pDirShowFilesOnlyInB;
+   KToggleAction* m_pDirShowFilesOnlyInC;
+
+   KToggleAction* m_pDirSynchronizeDirectories;
+   KToggleAction* m_pDirChooseNewerFiles;
+
+   KAction* m_pDirCompareExplicit;
+   KAction* m_pDirMergeExplicit;
+
+   KAction* m_pDirCurrentDoNothing;
+   KAction* m_pDirCurrentChooseA;
+   KAction* m_pDirCurrentChooseB;
+   KAction* m_pDirCurrentChooseC;
+   KAction* m_pDirCurrentMerge;
+   KAction* m_pDirCurrentDelete;
+
+   KAction* m_pDirCurrentSyncDoNothing;
+   KAction* m_pDirCurrentSyncCopyAToB;
+   KAction* m_pDirCurrentSyncCopyBToA;
+   KAction* m_pDirCurrentSyncDeleteA;
+   KAction* m_pDirCurrentSyncDeleteB;
+   KAction* m_pDirCurrentSyncDeleteAAndB;
+   KAction* m_pDirCurrentSyncMergeToA;
+   KAction* m_pDirCurrentSyncMergeToB;
+   KAction* m_pDirCurrentSyncMergeToAAndB;
+
+   KAction* m_pDirSaveMergeState;
+   KAction* m_pDirLoadMergeState;
 signals:
    void startDiffMerge(QString fn1,QString fn2, QString fn3, QString ofn, QString,QString,QString,TotalDiffStatus*);
    void checkIfCanContinue( bool* pbContinue );
@@ -275,7 +315,8 @@ signals:
    void statusBarMessage( const QString& msg );
 protected slots:
    void onDoubleClick( QListViewItem* lvi );
-   void onClick( QListViewItem* lvi, const QPoint&, int c );
+   void onClick( int button, QListViewItem* lvi, const QPoint&, int c );
+   void slotShowContextMenu(QListViewItem* lvi,const QPoint &,int c);
    void onSelectionChanged(QListViewItem* lvi);
 };
 
