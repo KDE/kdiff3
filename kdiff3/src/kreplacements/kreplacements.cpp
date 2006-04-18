@@ -212,7 +212,8 @@ Q3VBox* KDialogBase::addVBoxPage( const QString& name, const QString& /*info*/, 
 
 Q3Frame* KDialogBase::addPage(  const QString& name, const QString& /*info*/, int )
 {
-   Q3Frame* p = new Q3Frame( this, name.ascii() );
+   Q3Frame* p = new Q3Frame(0);
+   p->setObjectName( name );
    addTab( p, name );
    return p;
 }
