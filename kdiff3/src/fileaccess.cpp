@@ -19,6 +19,10 @@
 #include <qpushbutton.h>
 
 #include <qeventloop.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <QTimerEvent>
+#include <Q3VBoxLayout>
 
 #include "common.h"
 #include <ktempfile.h>
@@ -349,14 +353,14 @@ bool FileAccess::readFile( void* pDestBuffer, unsigned long maxLength )
    if ( !m_localCopy.isEmpty() )
    {
       QFile f( m_localCopy );
-      if ( f.open( IO_ReadOnly ) )
+      if ( f.open( QIODevice::ReadOnly ) )
          return interruptableReadFile(f, pDestBuffer, maxLength);// maxLength == f.readBlock( (char*)pDestBuffer, maxLength );
    }
    else if (m_bLocal)
    {
       QFile f( filePath() );
 
-      if ( f.open( IO_ReadOnly ) )
+      if ( f.open( QIODevice::ReadOnly ) )
          return interruptableReadFile(f, pDestBuffer, maxLength); //maxLength == f.readBlock( (char*)pDestBuffer, maxLength );
    }
    else
@@ -373,7 +377,7 @@ bool FileAccess::writeFile( const void* pSrcBuffer, unsigned long length )
    if (m_bLocal)
    {
       QFile f( filePath() );
-      if ( f.open( IO_WriteOnly ) )
+      if ( f.open( QIODevice::WriteOnly ) )
       {
          const unsigned long maxChunkSize = 100000;
          unsigned long i=0;
@@ -454,13 +458,13 @@ QString FileAccess::tempFileName()
       {
          // short filenames for WIN98 because for system() the command must not exceed 120 characters.
          #ifdef _WIN32
-         if ( QApplication::winVersion() & Qt::WV_DOS_based ) // Win95, 98, ME
+         if ( QApplication::winVersion() & QSysInfo::WV_DOS_based ) // Win95, 98, ME
             fileName = tmpDir + "\\" + QString::number(i);
          else
          #endif
             fileName = tmpDir + "/kdiff3_" + QString::number(i) +".tmp";
          if ( ! FileAccess::exists(fileName) && 
-              QFile(fileName).open(IO_WriteOnly) ) // open, truncate and close the file, true if successful
+              QFile(fileName).open(QIODevice::WriteOnly) ) // open, truncate and close the file, true if successful
 		{
             break;
 		}
@@ -685,8 +689,8 @@ void FileAccessJobHandler::slotPutData( KIO::Job* pJob, QByteArray& data )
    {
       long maxChunkSize = 100000;
       long length = min2( maxChunkSize, m_maxLength - m_transferredBytes );
-      bool bSuccess = data.resize( length );
-      if ( bSuccess )
+      data.resize( length );
+      if ( data.size()==length )
       {
          if ( length>0 )
          {
@@ -855,13 +859,13 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
    QString destName = dest;
    QFile srcFile( srcName );
    QFile destFile( destName );
-   bool bReadSuccess = srcFile.open( IO_ReadOnly );
+   bool bReadSuccess = srcFile.open( QIODevice::ReadOnly );
    if ( bReadSuccess == false )
    {
       m_pFileAccess->m_statusText = i18n("Error during file copy operation: Opening file for reading failed. Filename: %1").arg(srcName);
       return false;
    }
-   bool bWriteSuccess = destFile.open( IO_WriteOnly );
+   bool bWriteSuccess = destFile.open( QIODevice::WriteOnly );
    if ( bWriteSuccess == false )
    {
       m_pFileAccess->m_statusText = i18n("Error during file copy operation: Opening file for writing failed. Filename: %1").arg(destName);
@@ -1027,10 +1031,10 @@ void CvsIgnoreList::addEntriesFromFile(const QString &name)
 {
     QFile file(name);
 
-    if( file.open(IO_ReadOnly) )
+    if( file.open(QIODevice::ReadOnly) )
     {
         QTextStream stream(&file);
-        while( !stream.eof() )
+        while( !stream.atEnd() )
         {
             addEntriesFromString(stream.readLine());
         }
@@ -1200,22 +1204,20 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
          dir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden );
          dir.setMatchAllDirs( true );
 
-         const QFileInfoList *fiList = dir.entryInfoList();
-         if ( fiList == 0 )
+         QFileInfoList fiList = dir.entryInfoList();
+         if ( fiList.isEmpty() )
          {
             // No Permission to read directory or other error.
             m_bSuccess = false;
          }
          else
          {
-            QFileInfoListIterator it( *fiList );      // create list iterator
-            for ( ; it.current() != 0; ++it )       // for each file...
+            foreach ( QFileInfo fi, fiList )       // for each file...
             {
-               QFileInfo* fi = it.current();
-               if ( fi->fileName() == "." ||  fi->fileName()==".." )
+               if ( fi.fileName() == "." ||  fi.fileName()==".." )
                   continue;
 
-               pDirList->push_back( FileAccess( nicePath(*fi) ) );
+               pDirList->push_back( FileAccess( nicePath(fi) ) );
             }
          }
 #else
@@ -1223,7 +1225,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
          WIN32_FIND_DATA findData;
          WIN32_FIND_DATAA& findDataA=*(WIN32_FIND_DATAA*)&findData;  // Needed for Win95
 
-         HANDLE searchHandle = QT_WA_INLINE(
+         Qt::HANDLE searchHandle = QT_WA_INLINE(
                  FindFirstFile( (TCHAR*)pattern.ucs2(), &findData ),
                  FindFirstFileA( pattern.local8Bit(), &findDataA )
               );
@@ -1422,7 +1424,7 @@ void FileAccessJobHandler::slotPercent( KIO::Job*, unsigned long percent )
 ProgressDialog::ProgressDialog( QWidget* pParent )
 : QDialog( pParent, 0, true )
 {
-   QVBoxLayout* layout = new QVBoxLayout(this);
+   Q3VBoxLayout* layout = new Q3VBoxLayout(this);
 
    m_pInformation = new QLabel( " ", this );
    layout->addWidget( m_pInformation );
@@ -1439,7 +1441,7 @@ ProgressDialog::ProgressDialog( QWidget* pParent )
    m_pSlowJobInfo = new QLabel( " ", this);
    layout->addWidget( m_pSlowJobInfo );
 
-   QHBoxLayout* hlayout = new QHBoxLayout( layout );
+   Q3HBoxLayout* hlayout = new Q3HBoxLayout( layout );
    hlayout->addStretch(1);
    m_pAbortButton = new QPushButton( i18n("&Cancel"), this);
    hlayout->addWidget( m_pAbortButton );
@@ -1583,13 +1585,13 @@ void ProgressDialog::enterEventLoop( KIO::Job* pJob, const QString& jobInfo )
    m_progressDelayTimer = startTimer( 3000 ); /* 3 s delay */
 
    // instead of using exec() the eventloop is entered and exited often without hiding/showing the window.
-#if QT_VERSION==230
-   //qApp->enter_loop();
-#else
-   qt_enter_modal(this);
-   qApp->eventLoop()->enterLoop();
-   qt_leave_modal(this);
-#endif
+   //qt_enter_modal(this);
+   QEventLoop* pEventLoop = new QEventLoop(this);
+   m_eventLoopStack.push_back( pEventLoop );
+   pEventLoop->exec(); // this function only returns after ProgressDialog::exitEventLoop() is called.
+   delete pEventLoop;
+   m_eventLoopStack.pop_back();
+   //qt_leave_modal(this);
 }
 
 void ProgressDialog::exitEventLoop()
@@ -1597,7 +1599,8 @@ void ProgressDialog::exitEventLoop()
    killTimer( m_progressDelayTimer );
    m_progressDelayTimer = 0;
    m_pJob = 0;
-   qApp->eventLoop()->exitLoop();
+   if (!m_eventLoopStack.empty())
+      m_eventLoopStack.back()->exit();
 }
 
 void ProgressDialog::recalc( bool bUpdate )
@@ -1758,4 +1761,4 @@ void ProgressProxy::setSubRangeTransformation( double dMin, double dMax )
 
 
 
-#include "fileaccess.moc"
+//#include "fileaccess.moc"

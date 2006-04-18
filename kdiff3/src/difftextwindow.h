@@ -21,6 +21,14 @@
 #include "diff.h"
 
 #include <qwidget.h>
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <QDragEnterEvent>
+#include <QTimerEvent>
+#include <QFocusEvent>
+#include <QResizeEvent>
+#include <QEvent>
+#include <QPaintEvent>
 
 class QStatusBar;
 class OptionDialog;
@@ -123,6 +131,7 @@ signals:
    void fileNameChanged(const QString&, int);
 protected:
    bool eventFilter( QObject*, QEvent* );
+   void paintEvent(QPaintEvent*);
 private slots:
    void slotReturnPressed();
    void slotBrowseButtonClicked();

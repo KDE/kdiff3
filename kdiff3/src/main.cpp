@@ -24,6 +24,8 @@
 #include <qtextcodec.h>
 #include <qfile.h>
 #include <qtextstream.h>
+//Added by qt3to4:
+#include <QTranslator>
 #include <vector>
 
 #ifdef KREPLACEMENTS_H
@@ -67,7 +69,7 @@ void initialiseCmdLineArgs(std::vector<KCmdLineOptions>& vOptions, QStringList& 
    vOptions.insert( vOptions.end(), options, (KCmdLineOptions*)((char*)options+sizeof(options)));
    QString configFileName = KStandardDirs().findResource("config","kdiff3rc");
    QFile configFile( configFileName );
-   if ( configFile.open( IO_ReadOnly ) )
+   if ( configFile.open( QIODevice::ReadOnly ) )
    {
       QTextStream ts( &configFile );
       while(!ts.atEnd())

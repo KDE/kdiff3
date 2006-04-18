@@ -26,6 +26,8 @@
 
 #include <qfile.h>
 #include <qtextstream.h>
+//Added by qt3to4:
+#include <Q3CString>
 #include "kdiff3.h"
 #include "fileaccess.h"
 
@@ -102,9 +104,9 @@ static void getNameAndVersion( const QString& str, const QString& lineStart, QSt
 {
    if ( str.left( lineStart.length() )==lineStart && fileName.isEmpty() )
    {
-      unsigned int pos = lineStart.length();
+      int pos = lineStart.length();
       while ( pos<str.length() && (str[pos]==' ' || str[pos]=='\t') ) ++pos;
-      unsigned int pos2 = str.length()-1;
+      int pos2 = str.length()-1;
       while ( pos2>pos )
       { 
          while (pos2>pos && str[pos2]!=' ' && str[pos2]!='\t') --pos2;
@@ -130,7 +132,7 @@ bool KDiff3Part::openFile()
    // m_file is always local so we can use QFile on it
    std::cerr << "KDiff3: " << m_file.latin1() << std::endl;
    QFile file(m_file);
-   if (file.open(IO_ReadOnly) == false)
+   if (file.open(QIODevice::ReadOnly) == false)
       return false;
 
    // our example widget is text-based, so we use QTextStream instead
@@ -141,7 +143,7 @@ bool KDiff3Part::openFile()
    QString fileName2;
    QString version1;
    QString version2;
-   while (!stream.eof() && (fileName1.isEmpty() || fileName2.isEmpty()) )
+   while (!stream.atEnd() && (fileName1.isEmpty() || fileName2.isEmpty()) )
    {
       str = stream.readLine() + "\n";
       getNameAndVersion( str, "---", fileName1, version1 );
@@ -277,7 +279,7 @@ KParts::Part* KDiff3PartFactory::createPartObject( QWidget *parentWidget, const 
     KDiff3Part* obj = new KDiff3Part( parentWidget, widgetName, parent, name );
 
     // See if we are to be read-write or not
-    if (QCString(classname) == "KParts::ReadOnlyPart")
+    if (Q3CString(classname) == "KParts::ReadOnlyPart")
         obj->setReadWrite(false);
 
     return obj;
@@ -305,4 +307,4 @@ extern "C"
 // Suppress warning with --enable-final
 #undef VERSION
 
-#include "kdiff3_part.moc"
+//#include "kdiff3_part.moc"

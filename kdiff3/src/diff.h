@@ -21,9 +21,11 @@
 #include <qwidget.h>
 #include <qpixmap.h>
 #include <qtimer.h>
-#include <qframe.h>
+#include <q3frame.h>
 #include <qtextstream.h>
 #include <qpainter.h>
+//Added by qt3to4:
+#include <Q3CString>
 #include <list>
 #include <vector>
 #include <assert.h>
@@ -362,7 +364,7 @@ public:
 
 class OptionDialog;
 
-QCString encodeString( const QString& s );
+Q3CString encodeString( const QString& s );
 
 
 // Helper class that swaps left and right for some commands.
@@ -372,7 +374,7 @@ class MyPainter : public QPainter
    int m_xOffset;
    int m_fontWidth;
 public:
-   MyPainter(const QPaintDevice* pd, bool bRTL, int width, int fontWidth) 
+   MyPainter(QPaintDevice* pd, bool bRTL, int width, int fontWidth) 
    : QPainter(pd)
    {
       if (bRTL) 
@@ -399,8 +401,9 @@ public:
 
    void drawText( int x, int y, const QString& s, bool bAdapt=false )
    {
-      TextDirection td = (m_factor==1 || bAdapt == false) ? LTR : RTL;
-      QPainter::drawText( m_xOffset-m_fontWidth*s.length() + m_factor*x, y, s, -1, td );
+      Qt::LayoutDirection ld = (m_factor==1 || bAdapt == false) ? Qt::LeftToRight : Qt::RightToLeft;
+      QPainter::setLayoutDirection( ld );
+      QPainter::drawText( m_xOffset-m_fontWidth*s.length() + m_factor*x, y, s, -1 );
    }
 
    void drawLine( int x1, int y1, int x2, int y2 )

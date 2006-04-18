@@ -28,11 +28,16 @@
 #include <qlineedit.h>
 #include <qcheckbox.h>
 #include <qpushbutton.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qlabel.h>
-#include <qtextedit.h>
+#include <q3textedit.h>
 #include <qlayout.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3ValueList>
+#include <Q3VBoxLayout>
+#include <QDesktopWidget>
 
 // include files for KDE
 #include <kiconloader.h>
@@ -153,11 +158,11 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
          //KMessageBox::information(0, s,i18n("KDiff3-Usage"));
          QDialog* pDialog = new QDialog(this,"",true,Qt::WDestructiveClose);
          pDialog->setCaption(title);
-         QVBoxLayout* pVBoxLayout = new QVBoxLayout( pDialog );
-         QTextEdit* pTextEdit = new QTextEdit(pDialog);
+         Q3VBoxLayout* pVBoxLayout = new Q3VBoxLayout( pDialog );
+         Q3TextEdit* pTextEdit = new Q3TextEdit(pDialog);
          pTextEdit->setText(s);
          pTextEdit->setReadOnly(true);
-         pTextEdit->setWordWrap(QTextEdit::NoWrap);
+         pTextEdit->setWordWrap(Q3TextEdit::NoWrap);
          pVBoxLayout->addWidget(pTextEdit);
          pDialog->resize(600,400);
          pDialog->exec();
@@ -264,10 +269,10 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    slotRefresh();
 
    m_pMainSplitter = this; //new QSplitter(this);
-   m_pMainSplitter->setOrientation( Vertical );
+   m_pMainSplitter->setOrientation( Qt::Vertical );
 //   setCentralWidget( m_pMainSplitter );
    m_pDirectoryMergeSplitter = new QSplitter( m_pMainSplitter );
-   m_pDirectoryMergeSplitter->setOrientation( Horizontal );
+   m_pDirectoryMergeSplitter->setOrientation( Qt::Horizontal );
    m_pDirectoryMergeWindow = new DirectoryMergeWindow( m_pDirectoryMergeSplitter, m_pOptionDialog,
       KApplication::kApplication()->iconLoader() );
    m_pDirectoryMergeInfo = new DirectoryMergeInfo( m_pDirectoryMergeSplitter );
@@ -275,7 +280,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    connect( m_pDirectoryMergeWindow, SIGNAL(startDiffMerge(QString,QString,QString,QString,QString,QString,QString,TotalDiffStatus*)),
             this, SLOT( slotFileOpen2(QString,QString,QString,QString,QString,QString,QString,TotalDiffStatus*)));
    connect( m_pDirectoryMergeWindow, SIGNAL(selectionChanged()), this, SLOT(slotUpdateAvailabilities()));
-   connect( m_pDirectoryMergeWindow, SIGNAL(currentChanged(QListViewItem*)), this, SLOT(slotUpdateAvailabilities()));
+   connect( m_pDirectoryMergeWindow, SIGNAL(currentChanged(Q3ListViewItem*)), this, SLOT(slotUpdateAvailabilities()));
    connect( m_pDirectoryMergeWindow, SIGNAL(checkIfCanContinue(bool*)), this, SLOT(slotCheckIfCanContinue(bool*)));
    connect( m_pDirectoryMergeWindow, SIGNAL(updateAvailabilities()), this, SLOT(slotUpdateAvailabilities()));
    connect( m_pDirectoryMergeWindow, SIGNAL(statusBarMessage(const QString&)), this, SLOT(slotStatusMsg(const QString&)));
@@ -412,7 +417,7 @@ void KDiff3App::initActions( KActionCollection* ac )
    fileOpen = KStdAction::open(this, SLOT(slotFileOpen()), ac);
    fileOpen->setStatusText(i18n("Opens documents for comparison..."));
 
-   fileReload  = new KAction(i18n("Reload"), /*QIconSet(QPixmap(reloadIcon)),*/ Key_F5, this, SLOT(slotReload()), ac, "file_reload");
+   fileReload  = new KAction(i18n("Reload"), /*QIconSet(QPixmap(reloadIcon)),*/ Qt::Key_F5, this, SLOT(slotReload()), ac, "file_reload");
    
    fileSave = KStdAction::save(this, SLOT(slotFileSave()), ac);
    fileSave->setStatusText(i18n("Saves the merge result. All conflicts must be solved!"));
@@ -462,35 +467,35 @@ void KDiff3App::initActions( KActionCollection* ac )
 #include "xpm/showlinenumbers.xpm"
 //#include "reload.xpm"
 
-   goCurrent = new KAction(i18n("Go to Current Delta"), QIconSet(QPixmap(currentpos)), CTRL+Key_Space, this, SLOT(slotGoCurrent()), ac, "go_current");
-   goTop = new KAction(i18n("Go to First Delta"), QIconSet(QPixmap(upend)), 0, this, SLOT(slotGoTop()), ac, "go_top");
-   goBottom = new KAction(i18n("Go to Last Delta"), QIconSet(QPixmap(downend)), 0, this, SLOT(slotGoBottom()), ac, "go_bottom");
+   goCurrent = new KAction(i18n("Go to Current Delta"), QIcon(QPixmap(currentpos)), Qt::CTRL+Qt::Key_Space, this, SLOT(slotGoCurrent()), ac, "go_current");
+   goTop = new KAction(i18n("Go to First Delta"), QIcon(QPixmap(upend)), 0, this, SLOT(slotGoTop()), ac, "go_top");
+   goBottom = new KAction(i18n("Go to Last Delta"), QIcon(QPixmap(downend)), 0, this, SLOT(slotGoBottom()), ac, "go_bottom");
    QString omitsWhitespace = ".\n" + i18n("(Skips white space differences when \"Show White Space\" is disabled.)");
    QString includeWhitespace = ".\n" + i18n("(Does not skip white space differences even when \"Show White Space\" is disabled.)");
-   goPrevDelta = new KAction(i18n("Go to Previous Delta"), QIconSet(QPixmap(up1arrow)), CTRL+Key_Up, this, SLOT(slotGoPrevDelta()), ac, "go_prev_delta");
+   goPrevDelta = new KAction(i18n("Go to Previous Delta"), QIcon(QPixmap(up1arrow)), Qt::CTRL+Qt::Key_Up, this, SLOT(slotGoPrevDelta()), ac, "go_prev_delta");
    goPrevDelta->setToolTip( goPrevDelta->text() + omitsWhitespace );
-   goNextDelta = new KAction(i18n("Go to Next Delta"), QIconSet(QPixmap(down1arrow)), CTRL+Key_Down, this, SLOT(slotGoNextDelta()), ac, "go_next_delta");
+   goNextDelta = new KAction(i18n("Go to Next Delta"), QIcon(QPixmap(down1arrow)), Qt::CTRL+Qt::Key_Down, this, SLOT(slotGoNextDelta()), ac, "go_next_delta");
    goNextDelta->setToolTip( goNextDelta->text() + omitsWhitespace );
-   goPrevConflict = new KAction(i18n("Go to Previous Conflict"), QIconSet(QPixmap(up2arrow)), CTRL+Key_PageUp, this, SLOT(slotGoPrevConflict()), ac, "go_prev_conflict");
+   goPrevConflict = new KAction(i18n("Go to Previous Conflict"), QIcon(QPixmap(up2arrow)), Qt::CTRL+Qt::Key_PageUp, this, SLOT(slotGoPrevConflict()), ac, "go_prev_conflict");
    goPrevConflict->setToolTip( goPrevConflict->text() + omitsWhitespace );
-   goNextConflict = new KAction(i18n("Go to Next Conflict"), QIconSet(QPixmap(down2arrow)), CTRL+Key_PageDown, this, SLOT(slotGoNextConflict()), ac, "go_next_conflict");
+   goNextConflict = new KAction(i18n("Go to Next Conflict"), QIcon(QPixmap(down2arrow)), Qt::CTRL+Qt::Key_PageDown, this, SLOT(slotGoNextConflict()), ac, "go_next_conflict");
    goNextConflict->setToolTip( goNextConflict->text() + omitsWhitespace );
-   goPrevUnsolvedConflict = new KAction(i18n("Go to Previous Unsolved Conflict"), QIconSet(QPixmap(prevunsolved)), 0, this, SLOT(slotGoPrevUnsolvedConflict()), ac, "go_prev_unsolved_conflict");
+   goPrevUnsolvedConflict = new KAction(i18n("Go to Previous Unsolved Conflict"), QIcon(QPixmap(prevunsolved)), 0, this, SLOT(slotGoPrevUnsolvedConflict()), ac, "go_prev_unsolved_conflict");
    goPrevUnsolvedConflict->setToolTip( goPrevUnsolvedConflict->text() + includeWhitespace );
-   goNextUnsolvedConflict = new KAction(i18n("Go to Next Unsolved Conflict"), QIconSet(QPixmap(nextunsolved)), 0, this, SLOT(slotGoNextUnsolvedConflict()), ac, "go_next_unsolved_conflict");
+   goNextUnsolvedConflict = new KAction(i18n("Go to Next Unsolved Conflict"), QIcon(QPixmap(nextunsolved)), 0, this, SLOT(slotGoNextUnsolvedConflict()), ac, "go_next_unsolved_conflict");
    goNextUnsolvedConflict->setToolTip( goNextUnsolvedConflict->text() + includeWhitespace );
-   chooseA = new KToggleAction(i18n("Select Line(s) From A"), QIconSet(QPixmap(iconA)), CTRL+Key_1, this, SLOT(slotChooseA()), ac, "merge_choose_a");
-   chooseB = new KToggleAction(i18n("Select Line(s) From B"), QIconSet(QPixmap(iconB)), CTRL+Key_2, this, SLOT(slotChooseB()), ac, "merge_choose_b");
-   chooseC = new KToggleAction(i18n("Select Line(s) From C"), QIconSet(QPixmap(iconC)), CTRL+Key_3, this, SLOT(slotChooseC()), ac, "merge_choose_c");
-   autoAdvance = new KToggleAction(i18n("Automatically Go to Next Unsolved Conflict After Source Selection"), QIconSet(QPixmap(autoadvance)), 0, this, SLOT(slotAutoAdvanceToggled()), ac, "merge_autoadvance");
+   chooseA = new KToggleAction(i18n("Select Line(s) From A"), QIcon(QPixmap(iconA)), Qt::CTRL+Qt::Key_1, this, SLOT(slotChooseA()), ac, "merge_choose_a");
+   chooseB = new KToggleAction(i18n("Select Line(s) From B"), QIcon(QPixmap(iconB)), Qt::CTRL+Qt::Key_2, this, SLOT(slotChooseB()), ac, "merge_choose_b");
+   chooseC = new KToggleAction(i18n("Select Line(s) From C"), QIcon(QPixmap(iconC)), Qt::CTRL+Qt::Key_3, this, SLOT(slotChooseC()), ac, "merge_choose_c");
+   autoAdvance = new KToggleAction(i18n("Automatically Go to Next Unsolved Conflict After Source Selection"), QIcon(QPixmap(autoadvance)), 0, this, SLOT(slotAutoAdvanceToggled()), ac, "merge_autoadvance");
 
-   showWhiteSpaceCharacters = new KToggleAction(i18n("Show Space && Tabulator Characters for Differences"), QIconSet(QPixmap(showwhitespacechars)), 0, this, SLOT(slotShowWhiteSpaceToggled()), ac, "diff_show_whitespace_characters");
-   showWhiteSpace = new KToggleAction(i18n("Show White Space"), QIconSet(QPixmap(showwhitespace)), 0, this, SLOT(slotShowWhiteSpaceToggled()), ac, "diff_show_whitespace");
+   showWhiteSpaceCharacters = new KToggleAction(i18n("Show Space && Tabulator Characters for Differences"), QIcon(QPixmap(showwhitespacechars)), 0, this, SLOT(slotShowWhiteSpaceToggled()), ac, "diff_show_whitespace_characters");
+   showWhiteSpace = new KToggleAction(i18n("Show White Space"), QIcon(QPixmap(showwhitespace)), 0, this, SLOT(slotShowWhiteSpaceToggled()), ac, "diff_show_whitespace");
 
-   showLineNumbers = new KToggleAction(i18n("Show Line Numbers"), QIconSet(QPixmap(showlinenumbers)), 0, this, SLOT(slotShowLineNumbersToggled()), ac, "diff_showlinenumbers");
-   chooseAEverywhere = new KAction(i18n("Choose A Everywhere"), CTRL+SHIFT+Key_1, this, SLOT(slotChooseAEverywhere()), ac, "merge_choose_a_everywhere");
-   chooseBEverywhere = new KAction(i18n("Choose B Everywhere"), CTRL+SHIFT+Key_2, this, SLOT(slotChooseBEverywhere()), ac, "merge_choose_b_everywhere");
-   chooseCEverywhere = new KAction(i18n("Choose C Everywhere"), CTRL+SHIFT+Key_3, this, SLOT(slotChooseCEverywhere()), ac, "merge_choose_c_everywhere");
+   showLineNumbers = new KToggleAction(i18n("Show Line Numbers"), QIcon(QPixmap(showlinenumbers)), 0, this, SLOT(slotShowLineNumbersToggled()), ac, "diff_showlinenumbers");
+   chooseAEverywhere = new KAction(i18n("Choose A Everywhere"), Qt::CTRL+Qt::SHIFT+Qt::Key_1, this, SLOT(slotChooseAEverywhere()), ac, "merge_choose_a_everywhere");
+   chooseBEverywhere = new KAction(i18n("Choose B Everywhere"), Qt::CTRL+Qt::SHIFT+Qt::Key_2, this, SLOT(slotChooseBEverywhere()), ac, "merge_choose_b_everywhere");
+   chooseCEverywhere = new KAction(i18n("Choose C Everywhere"), Qt::CTRL+Qt::SHIFT+Qt::Key_3, this, SLOT(slotChooseCEverywhere()), ac, "merge_choose_c_everywhere");
    chooseAForUnsolvedConflicts = new KAction(i18n("Choose A for All Unsolved Conflicts"), 0, this, SLOT(slotChooseAForUnsolvedConflicts()), ac, "merge_choose_a_for_unsolved_conflicts");
    chooseBForUnsolvedConflicts = new KAction(i18n("Choose B for All Unsolved Conflicts"), 0, this, SLOT(slotChooseBForUnsolvedConflicts()), ac, "merge_choose_b_for_unsolved_conflicts");
    chooseCForUnsolvedConflicts = new KAction(i18n("Choose C for All Unsolved Conflicts"), 0, this, SLOT(slotChooseCForUnsolvedConflicts()), ac, "merge_choose_c_for_unsolved_conflicts");
@@ -507,7 +512,7 @@ void KDiff3App::initActions( KActionCollection* ac )
    showWindowA = new KToggleAction(i18n("Show Window A"), 0, this, SLOT(slotShowWindowAToggled()), ac, "win_show_a");
    showWindowB = new KToggleAction(i18n("Show Window B"), 0, this, SLOT(slotShowWindowBToggled()), ac, "win_show_b");
    showWindowC = new KToggleAction(i18n("Show Window C"), 0, this, SLOT(slotShowWindowCToggled()), ac, "win_show_c");
-   winFocusNext = new KAction(i18n("Focus Next Window"), ALT+Key_Right, this, SLOT(slotWinFocusNext()), ac, "win_focus_next");
+   winFocusNext = new KAction(i18n("Focus Next Window"), Qt::ALT+Qt::Key_Right, this, SLOT(slotWinFocusNext()), ac, "win_focus_next");
 
    overviewModeNormal = new KToggleAction(i18n("Normal Overview"), 0, this, SLOT(slotOverviewNormal()), ac, "diff_overview_normal");
    overviewModeAB     = new KToggleAction(i18n("A vs. B Overview"), 0, this, SLOT(slotOverviewAB()), ac, "diff_overview_ab");
@@ -527,7 +532,7 @@ void KDiff3App::initActions( KActionCollection* ac )
    dirShowBoth->setChecked( true );
    dirViewToggle = new KAction(i18n("Toggle Between Dir && Text View"), 0, this, SLOT(slotDirViewToggle()), actionCollection(), "win_dir_view_toggle");
 
-   m_pMergeEditorPopupMenu = new QPopupMenu( this );
+   m_pMergeEditorPopupMenu = new Q3PopupMenu( this );
    chooseA->plug( m_pMergeEditorPopupMenu );
    chooseB->plug( m_pMergeEditorPopupMenu );
    chooseC->plug( m_pMergeEditorPopupMenu );
@@ -663,10 +668,10 @@ void printDiffTextWindow( MyPainter& painter, const QRect& view, const QString& 
    {
       // A simple wrapline algorithm
       int l=0;
-      for (unsigned int p=0; p<headerText.length(); )
+      for (int p=0; p<headerText.length(); )
       {
          QString s = headerText.mid(p);
-         unsigned int i;
+         int i;
          for(i=2;i<s.length();++i) 
             if (fm.width(s,i)>view.width())
             {
@@ -728,7 +733,7 @@ void KDiff3App::slotFilePrint()
          slotStatusMsg( i18n( "Printing aborted." ) );
          return;
       }
-      QPaintDeviceMetrics metrics( painter.device() );
+      Q3PaintDeviceMetrics metrics( painter.device() );
       int dpiy = metrics.logicalDpiY();
       int columnDistance = (int) ( (0.5/2.54)*dpiy ); // 0.5 cm between the columns
 
@@ -765,7 +770,7 @@ void KDiff3App::slotFilePrint()
       if ( m_bTripleDiff && m_pDiffTextWindow3)
          totalNofLines = max2(totalNofLines, m_pDiffTextWindow3->getNofLines());
 
-      QValueList<int> pageList = printer.pageList();
+      Q3ValueList<int> pageList = printer.pageList();
 
       bool bPrintCurrentPage=false;
       bool bFirstPrintedPage = false;
@@ -801,7 +806,7 @@ void KDiff3App::slotFilePrint()
 
       int page = 1;
 
-      QValueList<int>::iterator pageListIt = pageList.begin();
+      Q3ValueList<int>::iterator pageListIt = pageList.begin();
       for(;;)
       {
          if (!bPrintSelection)
@@ -960,4 +965,4 @@ void KDiff3App::slotStatusMsg(const QString &text)
 
 
 
-#include "kdiff3.moc"
+//#include "kdiff3.moc"

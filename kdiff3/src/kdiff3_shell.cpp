@@ -36,6 +36,8 @@
 #include <klocale.h>
 
 #include <iostream>
+//Added by qt3to4:
+#include <QCloseEvent>
 
 KDiff3Shell::KDiff3Shell(bool bCompleteInit)
     : KParts::MainWindow( 0L, "kdiff3" )
@@ -188,4 +190,4 @@ void KDiff3Shell::slotNewInstance( const QString& fn1, const QString& fn2, const
    ((KDiff3App*)pKDiff3Shell->m_part->widget())->completeInit(fn1,fn2,fn3);
 }
 
-#include "kdiff3_shell.moc"
+//#include "kdiff3_shell.moc"

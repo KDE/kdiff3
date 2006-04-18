@@ -27,11 +27,17 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
-#include <qdragobject.h>
+#include <q3dragobject.h>
 #include <qregexp.h>
 #include <qtooltip.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qcursor.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <QEvent>
+#include <QDropEvent>
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
 
 
 #include <kfiledialog.h>
@@ -46,8 +52,8 @@ OpenDialog::OpenDialog(
 {
    m_pOptions = pOptions;
 
-   QVBoxLayout* v = new QVBoxLayout( this, 5 );
-   QGridLayout* h = new QGridLayout( v, 5, 4, 5 );
+   Q3VBoxLayout* v = new Q3VBoxLayout( this, 5 );
+   Q3GridLayout* h = new Q3GridLayout( v, 5, 4, 5 );
    h->setColStretch( 1, 10 );
 
    QLabel* label  = new QLabel( i18n("A (Base):"), this );
@@ -102,14 +108,14 @@ OpenDialog::OpenDialog(
    m_pMerge = new QCheckBox( i18n("Merge"), this );
    h->addWidget( m_pMerge, 3, 0 );
 
-   QHBoxLayout* hl = new QHBoxLayout();
+   Q3HBoxLayout* hl = new Q3HBoxLayout();
    h->addLayout( hl, 3, 1 );
    hl->addStretch(2);
    button = new QPushButton(i18n("Swap/Copy Names ..."), this);
    //button->setToggleButton(false);
    hl->addWidget( button );
 
-   QPopupMenu* m = new QPopupMenu(this);
+   Q3PopupMenu* m = new Q3PopupMenu(this);
    int id=0;
    m->insertItem( i18n("Swap %1<->%2").arg("A").arg("B"), id++ );
    m->insertItem( i18n("Swap %1<->%2").arg("B").arg("C"), id++ );
@@ -153,7 +159,7 @@ OpenDialog::OpenDialog(
 
    h->addColSpacing( 1, 200 );
 
-   QHBoxLayout* l = new QHBoxLayout( v, 5 );
+   Q3HBoxLayout* l = new Q3HBoxLayout( v, 5 );
 
    button = new QPushButton( i18n("Configure..."), this );
    connect( button, SIGNAL(clicked()), pParent, slotConfigure );
@@ -191,12 +197,12 @@ bool OpenDialog::eventFilter(QObject* o, QEvent* e)
    {
       QDropEvent* d = static_cast<QDropEvent*>(e);
 
-      if ( !QUriDrag::canDecode( d ) ) {
+      if ( !Q3UriDrag::canDecode( d ) ) {
          return false;
       }
 
       QStringList lst;
-      QUriDrag::decodeLocalFiles( d, lst );
+      Q3UriDrag::decodeLocalFiles( d, lst );
 
       if ( lst.count() > 0 )
       {
@@ -254,7 +260,7 @@ void OpenDialog::inputFilenameChanged()
 
 void OpenDialog::accept()
 {
-   unsigned int maxNofRecentFiles = 10;
+   int maxNofRecentFiles = 10;
 
    QString s = m_pLineA->currentText();
    s = KURL::fromPathOrURL(s).prettyURL();
@@ -262,28 +268,28 @@ void OpenDialog::accept()
    // If an item exist, remove it from the list and reinsert it at the beginning.
    sl->remove(s);
    if ( !s.isEmpty() ) sl->prepend( s );
-   if (sl->count()>maxNofRecentFiles) sl->erase( sl->at(maxNofRecentFiles), sl->end() );
+   if (sl->count()>maxNofRecentFiles) sl->erase( sl->begin()+maxNofRecentFiles, sl->end() );
 
    s = m_pLineB->currentText();
    s = KURL::fromPathOrURL(s).prettyURL();
    sl = &m_pOptions->m_recentBFiles;
    sl->remove(s);
    if ( !s.isEmpty() ) sl->prepend( s );
-   if (sl->count()>maxNofRecentFiles) sl->erase( sl->at(maxNofRecentFiles), sl->end() );
+   if (sl->count()>maxNofRecentFiles) sl->erase( sl->begin()+maxNofRecentFiles, sl->end() );
 
    s = m_pLineC->currentText();
    s = KURL::fromPathOrURL(s).prettyURL();
    sl = &m_pOptions->m_recentCFiles;
    sl->remove(s);
    if ( !s.isEmpty() ) sl->prepend( s );
-   if (sl->count()>maxNofRecentFiles) sl->erase( sl->at(maxNofRecentFiles), sl->end() );
+   if (sl->count()>maxNofRecentFiles) sl->erase( sl->begin()+maxNofRecentFiles, sl->end() );
 
    s = m_pLineOut->currentText();
    s = KURL::fromPathOrURL(s).prettyURL();
    sl = &m_pOptions->m_recentOutputFiles;
    sl->remove(s);
    if ( !s.isEmpty() ) sl->prepend( s );
-   if (sl->count()>maxNofRecentFiles) sl->erase( sl->at(maxNofRecentFiles), sl->end() );
+   if (sl->count()>maxNofRecentFiles) sl->erase( sl->begin()+maxNofRecentFiles, sl->end() );
 
    QDialog::accept();
 }
@@ -321,7 +327,7 @@ void OpenDialog::slotSwapCopyNames( int id ) // id selected in the popup menu
 FindDialog::FindDialog(QWidget* pParent)
 : QDialog( pParent )
 {
-   QGridLayout* layout = new QGridLayout( this );
+   Q3GridLayout* layout = new Q3GridLayout( this );
    layout->setMargin(5);
    layout->setSpacing(5);
 
@@ -374,7 +380,7 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
 {
    int line=0;
    setCaption(i18n("Regular Expression Tester"));
-   QGridLayout* pGrid = new QGridLayout( this, 11, 2, 5, 5 );
+   Q3GridLayout* pGrid = new Q3GridLayout( this, 11, 2, 5, 5 );
 
    QLabel* l = new QLabel(i18n("Auto merge regular expression:"), this);
    pGrid->addWidget(l,line,0);
@@ -513,7 +519,7 @@ QString RegExpTester::historySortKeyOrder()
 
 void RegExpTester::slotRecalc()
 {
-   QRegExp autoMergeRegExp = m_pAutoMergeRegExpEdit->text();
+   QRegExp autoMergeRegExp( m_pAutoMergeRegExpEdit->text() );
    if ( autoMergeRegExp.exactMatch( m_pAutoMergeExampleEdit->text() ) )
    {
       m_pAutoMergeMatchResult->setText( i18n("Match success.") );
@@ -523,7 +529,7 @@ void RegExpTester::slotRecalc()
       m_pAutoMergeMatchResult->setText( i18n("Match failed.") );
    }
 
-   QRegExp historyStartRegExp = m_pHistoryStartRegExpEdit->text();
+   QRegExp historyStartRegExp( m_pHistoryStartRegExpEdit->text() );
    if ( historyStartRegExp.exactMatch( m_pHistoryStartExampleEdit->text() ) )
    {
       m_pHistoryStartMatchResult->setText( i18n("Match success.") );
@@ -542,7 +548,7 @@ void RegExpTester::slotRecalc()
       m_pHistorySortKeyResult->setText( i18n("") );
       return;
    }
-   QRegExp historyEntryStartRegExp = m_pHistoryEntryStartRegExpEdit->text();
+   QRegExp historyEntryStartRegExp( m_pHistoryEntryStartRegExpEdit->text() );
    QString s = m_pHistoryEntryStartExampleEdit->text();
 
    if ( historyEntryStartRegExp.exactMatch( s ) )
@@ -558,4 +564,4 @@ void RegExpTester::slotRecalc()
    }
 }
 
-#include "smalldialogs.moc"
+//#include "smalldialogs.moc"

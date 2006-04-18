@@ -21,16 +21,19 @@
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qfont.h>
-#include <qframe.h>
+#include <q3frame.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qlineedit.h> 
-#include <qvbox.h>
+#include <q3vbox.h>
 #include <qvalidator.h>
 #include <qtooltip.h>
 #include <qtextcodec.h>
 #include <qradiobutton.h>
-#include <qvbuttongroup.h>
+#include <Q3VButtonGroup>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <Q3VBoxLayout>
 
 #include <kapplication.h>
 #include <kcolorbtn.h>
@@ -228,7 +231,7 @@ public:
    void apply()       { *m_pVar = currentText(); insertText();            }
    void write(ValueMap* config){ config->writeEntry( m_saveName, m_list, '|' );      }
    void read (ValueMap* config){ 
-      m_list = config->readListEntry( m_saveName, m_defaultVal, '|' ); 
+      m_list = config->readListEntry( m_saveName, QStringList(m_defaultVal), '|' ); 
       if ( !m_list.empty() ) *m_pVar = m_list.front();
       clear();
       insertStringList(m_list);
@@ -241,7 +244,7 @@ private:
       m_list.push_front( current );
       clear();
       if ( m_list.size()>10 ) 
-         m_list.erase( m_list.at(10),m_list.end() );
+         m_list.erase( m_list.begin()+10, m_list.end() );
       insertStringList(m_list);
    }
    OptionLineEdit( const OptionLineEdit& ); // private copy constructor without implementation
@@ -364,10 +367,10 @@ public:
 
       // First sort codec names:
       std::map<QString, QTextCodec*> names;
-      int i;
-      for(i=0;;++i)
+      QList<int> mibs = QTextCodec::availableMibs();
+      foreach(int i, mibs)
       {
-         QTextCodec* c = QTextCodec::codecForIndex(i);
+         QTextCodec* c = QTextCodec::codecForMib(i);
          if ( c==0 ) break;
          else  names[QString(c->name()).upper()]=c;
       }
@@ -432,7 +435,7 @@ public:
    }
    void write(ValueMap* config)
    {
-      if (m_ppVarCodec!=0) config->writeEntry(m_saveName, (*m_ppVarCodec)->name() );
+      if (m_ppVarCodec!=0) config->writeEntry(m_saveName, QString((*m_ppVarCodec)->name()) );
    }
    void read (ValueMap* config)
    {
@@ -504,10 +507,10 @@ void OptionDialog::setupOtherOptions()
 
 void OptionDialog::setupFontPage( void )
 {
-   QFrame *page = addPage( i18n("Font"), i18n("Editor & Diff Output Font" ),
+   Q3Frame *page = addPage( i18n("Font"), i18n("Editor & Diff Output Font" ),
                              BarIcon("fonts", KIcon::SizeMedium ) );
 
-   QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
+   Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 
    QFont defaultFont =
 #ifdef _WIN32
@@ -521,7 +524,7 @@ void OptionDialog::setupFontPage( void )
    OptionFontChooser* pFontChooser = new OptionFontChooser( defaultFont, "Font", &m_font, page, this );
    topLayout->addWidget( pFontChooser );
 
-   QGridLayout *gbox = new QGridLayout( 1, 2 );
+   Q3GridLayout *gbox = new Q3GridLayout( 1, 2 );
    topLayout->addLayout( gbox );
    int line=0;
 
@@ -536,18 +539,18 @@ void OptionDialog::setupFontPage( void )
 
 void OptionDialog::setupColorPage( void )
 {
-  QFrame *page = addPage( i18n("Color"), i18n("Colors Settings"),
+  Q3Frame *page = addPage( i18n("Color"), i18n("Colors Settings"),
      BarIcon("colorize", KIcon::SizeMedium ) );
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
+  Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 
-  QGridLayout *gbox = new QGridLayout( 7, 2 );
+  Q3GridLayout *gbox = new Q3GridLayout( 7, 2 );
   gbox->setColStretch(1,5);
   topLayout->addLayout(gbox);
 
   QLabel* label;
   int line = 0;
 
-  int depth = QColor::numBitPlanes();
+  int depth = QPixmap::defaultDepth();
   bool bLowColor = depth<=8;
 
   label = new QLabel( i18n("Editor and Diff Views:"), page );
@@ -664,11 +667,11 @@ void OptionDialog::setupColorPage( void )
 
 void OptionDialog::setupEditPage( void )
 {
-   QFrame *page = addPage( i18n("Editor"), i18n("Editor Behavior"),
+   Q3Frame *page = addPage( i18n("Editor"), i18n("Editor Behavior"),
                            BarIcon("edit", KIcon::SizeMedium ) );
-   QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
+   Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 
-   QGridLayout *gbox = new QGridLayout( 4, 2 );
+   Q3GridLayout *gbox = new Q3GridLayout( 4, 2 );
    gbox->setColStretch(1,5);
    topLayout->addLayout( gbox );
    QLabel* label;
@@ -726,11 +729,11 @@ void OptionDialog::setupEditPage( void )
 
 void OptionDialog::setupDiffPage( void )
 {
-   QFrame *page = addPage( i18n("Diff and Merge"), i18n("Diff and Merge Settings"),
+   Q3Frame *page = addPage( i18n("Diff and Merge"), i18n("Diff and Merge Settings"),
                            BarIcon("misc", KIcon::SizeMedium ) );
-   QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
+   Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 
-   QGridLayout *gbox = new QGridLayout( 3, 2 );
+   Q3GridLayout *gbox = new Q3GridLayout( 3, 2 );
    gbox->setColStretch(1,5);
    topLayout->addLayout( gbox );
    int line=0;
@@ -825,12 +828,12 @@ void OptionDialog::setupDiffPage( void )
       );
    ++line;
 
-   QGroupBox* pGroupBox = new QGroupBox( 2, Qt::Horizontal, i18n("Automatic Merge Regular Expression"), page);
+   Q3GroupBox* pGroupBox = new Q3GroupBox( 2, Qt::Horizontal, i18n("Automatic Merge Regular Expression"), page);
    gbox->addMultiCellWidget( pGroupBox, line,line,0,1);
    ++line;
    {
       QWidget* page = new QWidget( pGroupBox );
-      QGridLayout* gbox = new QGridLayout( page, 2, 2, spacingHint() );
+      Q3GridLayout* gbox = new Q3GridLayout( page, 2, 2, spacingHint() );
       gbox->setColStretch(1,10);
       int line = 0;
 
@@ -851,12 +854,12 @@ void OptionDialog::setupDiffPage( void )
       ++line;
    }
 
-   pGroupBox = new QGroupBox( 2, Qt::Horizontal, i18n("Version Control History Merging"), page);
+   pGroupBox = new Q3GroupBox( 2, Qt::Horizontal, i18n("Version Control History Merging"), page);
    gbox->addMultiCellWidget( pGroupBox, line,line,0,1);
    ++line;
    {
       QWidget* page = new QWidget( pGroupBox );
-      QGridLayout* gbox = new QGridLayout( page, 2, 2, spacingHint() );
+      Q3GridLayout* gbox = new Q3GridLayout( page, 2, 2, spacingHint() );
       gbox->setColStretch(1,10);
       int line = 0;
 
@@ -865,10 +868,7 @@ void OptionDialog::setupDiffPage( void )
       m_pHistoryStartRegExpLineEdit = new OptionLineEdit( ".*\\$Log.*\\$.*", "HistoryStartRegExp", &m_historyStartRegExp, page, this );
       gbox->addWidget( m_pHistoryStartRegExpLineEdit, line, 1 );
       s_historyStartRegExpToolTip = i18n("Regular expression for the start of the version control history entry.\n"
-                                 "Usually this line contains the \"$Log$
-                                 "Usually this line contains the \"Revision 1.7  2006/04/10 08:37:33  joachim99
-                                 "Usually this line contains the \"KDiff3 0.9.89
-                                 "Usually this line contains the \"\"-keyword.\n"
+                                 "Usually this line contains the \"$Log$\"-keyword.\n"
                                  "Default value: \".*\\$Log.*\\$.*\"");
       QToolTip::add( label, s_historyStartRegExpToolTip );
       ++line;
@@ -945,11 +945,11 @@ void OptionDialog::setupDiffPage( void )
 
 void OptionDialog::setupDirectoryMergePage( void )
 {
-   QFrame *page = addPage( i18n("Directory Merge"), i18n("Directory Merge"),
+   Q3Frame *page = addPage( i18n("Directory Merge"), i18n("Directory Merge"),
                            BarIcon("folder", KIcon::SizeMedium ) );
-   QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
+   Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 
-   QGridLayout *gbox = new QGridLayout( 11, 2 );
+   Q3GridLayout *gbox = new Q3GridLayout( 11, 2 );
    gbox->setColStretch(1,5);
    topLayout->addLayout( gbox );
    int line=0;
@@ -1042,7 +1042,7 @@ void OptionDialog::setupDirectoryMergePage( void )
                  "Set this option if the case of the names must match. (Default for Windows is off, otherwise on.)"));
    ++line;
 
-   QVButtonGroup* pBG = new QVButtonGroup(i18n("File Comparison Mode"),page);
+   Q3VButtonGroup* pBG = new Q3VButtonGroup(i18n("File Comparison Mode"),page);
    gbox->addMultiCellWidget( pBG, line, line, 0, 1 );
    ++line;
    
@@ -1118,11 +1118,11 @@ static void insertCodecs(OptionComboBox* p)
 
 void OptionDialog::setupRegionalPage( void )
 {
-   QFrame *page = addPage( i18n("Regional Settings"), i18n("Regional Settings"),
+   Q3Frame *page = addPage( i18n("Regional Settings"), i18n("Regional Settings"),
                            BarIcon("locale"/*"charset"*/, KIcon::SizeMedium ) );
-   QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
+   Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 
-   QGridLayout *gbox = new QGridLayout( 3, 2 );
+   Q3GridLayout *gbox = new Q3GridLayout( 3, 2 );
    gbox->setColStretch(1,5);
    topLayout->addLayout( gbox );
    int line=0;
@@ -1318,11 +1318,11 @@ static char* countryMap[]={
 
 void OptionDialog::setupIntegrationPage( void )
 {
-   QFrame *page = addPage( i18n("Integration"), i18n("Integration Settings"),
+   Q3Frame *page = addPage( i18n("Integration"), i18n("Integration Settings"),
                            BarIcon("launch"/*"charset"*/, KIcon::SizeMedium ) );
-   QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
+   Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 
-   QGridLayout *gbox = new QGridLayout( 3, 2 );
+   Q3GridLayout *gbox = new Q3GridLayout( 3, 2 );
    gbox->setColStretch(1,5);
    topLayout->addLayout( gbox );
    int line=0;
@@ -1572,4 +1572,4 @@ void OptionDialog::slotHistoryMergeRegExpTester()
 }
 
 
-#include "optiondialog.moc"
+//#include "optiondialog.moc"

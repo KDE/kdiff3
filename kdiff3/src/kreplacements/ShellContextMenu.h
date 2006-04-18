@@ -19,7 +19,7 @@ public:
 	void SetObjects (LPITEMIDLIST pidl);
 	void SetObjects (const QString& strObject);
 	void SetObjects (const QStringList& strList);
-	UINT ShowContextMenu (QWidget* pParent, QPoint pt, QPopupMenu* pMenu);
+	UINT ShowContextMenu (QWidget* pParent, QPoint pt, QMenu* pMenu);
 	CShellContextMenu();
 	virtual ~CShellContextMenu();
 

@@ -61,7 +61,7 @@ QString ValueMap::getAsString()
 
 void ValueMap::load( QTextStream& ts )
 {
-   while ( !ts.eof() )
+   while ( !ts.atEnd() )
    {                                 // until end of file...	   
       QString s = ts.readLine();         // line of text excluding '\n'
       int pos = s.find('=');

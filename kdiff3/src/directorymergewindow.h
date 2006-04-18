@@ -19,9 +19,16 @@
 #define DIRECTORY_MERGE_WINDOW_H
 
 #include <qfileinfo.h>
-#include <qlistview.h>
+#include <q3listview.h>
 #include <qtimer.h>
 #include <qdir.h>
+//Added by qt3to4:
+#include <QLabel>
+#include <QFocusEvent>
+#include <Q3Frame>
+#include <QKeyEvent>
+#include <QResizeEvent>
+#include <QEvent>
 #include <list>
 #include <map>
 #include "common.h"
@@ -102,19 +109,19 @@ public:
    TotalDiffStatus m_totalDiffStatus;   
 };
 
-class DirMergeItem : public QListViewItem
+class DirMergeItem : public Q3ListViewItem
 {
 public:
-   DirMergeItem( QListView* pParent, const QString&, MergeFileInfos*);
+   DirMergeItem( Q3ListView* pParent, const QString&, MergeFileInfos*);
    DirMergeItem( DirMergeItem* pParent, const QString&, MergeFileInfos*);
    ~DirMergeItem();
    MergeFileInfos* m_pMFI;
-   virtual int compare(QListViewItem *i, int col, bool ascending) const;
+   virtual int compare(Q3ListViewItem *i, int col, bool ascending) const;
    virtual void paintCell(QPainter * p, const QColorGroup & cg, int column, int width, int align );
    void init(MergeFileInfos* pMFI);
 };
 
-class DirectoryMergeWindow : public QListView
+class DirectoryMergeWindow : public Q3ListView
 {
    Q_OBJECT
 public:
@@ -200,7 +207,7 @@ protected:
    friend class MergeFileInfos;
 
    bool canContinue();
-   void prepareMergeStart( QListViewItem* pBegin, QListViewItem* pEnd, bool bVerbose );
+   void prepareMergeStart( Q3ListViewItem* pBegin, Q3ListViewItem* pEnd, bool bVerbose );
    bool executeMergeOperation( MergeFileInfos& mfi, bool& bSingleFileMerge );
 
    void scanDirectory( const QString& dirName, t_DirectoryList& dirList );
@@ -314,13 +321,13 @@ signals:
    void updateAvailabilities();
    void statusBarMessage( const QString& msg );
 protected slots:
-   void onDoubleClick( QListViewItem* lvi );
-   void onClick( int button, QListViewItem* lvi, const QPoint&, int c );
-   void slotShowContextMenu(QListViewItem* lvi,const QPoint &,int c);
-   void onSelectionChanged(QListViewItem* lvi);
+   void onDoubleClick( Q3ListViewItem* lvi );
+   void onClick( int button, Q3ListViewItem* lvi, const QPoint&, int c );
+   void slotShowContextMenu(Q3ListViewItem* lvi,const QPoint &,int c);
+   void onSelectionChanged(Q3ListViewItem* lvi);
 };
 
-class DirectoryMergeInfo : public QFrame
+class DirectoryMergeInfo : public Q3Frame
 {
    Q_OBJECT
 public:
@@ -331,7 +338,7 @@ public:
       const FileAccess& CPath,
       const FileAccess& DestPath,
       MergeFileInfos& mfi );
-   QListView* getInfoList() {return m_pInfoList;}
+   Q3ListView* getInfoList() {return m_pInfoList;}
    virtual bool eventFilter( QObject* o, QEvent* e );
 signals:
    void gotFocus();
@@ -346,7 +353,7 @@ private:
    QLabel* m_pC;
    QLabel* m_pDest;
 
-   QListView* m_pInfoList;
+   Q3ListView* m_pInfoList;
 };
 
 

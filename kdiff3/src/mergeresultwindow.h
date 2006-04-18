@@ -23,6 +23,14 @@
 #include <qwidget.h>
 #include <qpixmap.h>
 #include <qtimer.h>
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <QTimerEvent>
+#include <QWheelEvent>
+#include <QFocusEvent>
+#include <QResizeEvent>
+#include <QKeyEvent>
+#include <QPaintEvent>
 
 class QPainter;
 

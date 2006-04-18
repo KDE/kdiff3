@@ -24,16 +24,27 @@
 #include <qapplication.h>
 #include <qpixmap.h>
 #include <qimage.h>
+//Added by qt3to4:
+#include <QFocusEvent>
+#include <QTextStream>
+#include <Q3GridLayout>
+#include <QKeyEvent>
+#include <QEvent>
+#include <Q3Frame>
+#include <Q3ValueList>
+#include <QResizeEvent>
+#include <Q3PopupMenu>
+#include <Q3VBoxLayout>
 #include <kpopupmenu.h>
 #include <kaction.h>
 #include <qregexp.h>
 #include <qmessagebox.h>
 #include <qlayout.h>
 #include <qlabel.h>
-#include <qtable.h>
+#include <q3table.h>
 #include <qsplitter.h>
-#include <qtextedit.h>
-#include <qprogressdialog.h>
+#include <q3textedit.h>
+#include <q3progressdialog.h>
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 #include <kiconloader.h>
@@ -67,13 +78,13 @@ public:
    }
 };
 */
-class StatusInfo : public QTextEdit
+class StatusInfo : public Q3TextEdit
 {
 public:
-   StatusInfo(QWidget* pParent) : QTextEdit( pParent, "StatusInfo" )
+   StatusInfo(QWidget* pParent) : Q3TextEdit( pParent, "StatusInfo" )
    {
-      setWFlags(Qt::WShowModal);
-      setWordWrap(QTextEdit::NoWrap);
+      setWindowFlags(Qt::Dialog);
+      setWordWrap(Q3TextEdit::NoWrap);
       setReadOnly(true);
       showMaximized();
    }
@@ -88,7 +99,7 @@ public:
    void show()
    {
       scrollToBottom();
-      QTextEdit::show();
+      Q3TextEdit::show();
    }
 };
 
@@ -191,7 +202,7 @@ void DirectoryMergeWindow::fastFileComparison(
 
    QFile file1( tr1.name() );
 
-   if ( ! file1.open(IO_ReadOnly) )
+   if ( ! file1.open(QIODevice::ReadOnly) )
    {
       status = i18n("Opening %1 failed.").arg(fileName1);
       return;
@@ -199,7 +210,7 @@ void DirectoryMergeWindow::fastFileComparison(
 
    QFile file2( tr2.name() );
 
-   if ( ! file2.open(IO_ReadOnly) )
+   if ( ! file2.open(QIODevice::ReadOnly) )
    {
       status = i18n("Opening %1 failed.").arg(fileName2);
       return;
@@ -254,15 +265,15 @@ static int s_SolvedCol = 7;      // Nr of auto-solvable conflicts (for 3 input f
 static int s_NonWhiteCol = 8;    // Nr of nonwhite deltas (for 2 input files)
 static int s_WhiteCol = 9;       // Nr of white deltas (for 2 input files)
 DirectoryMergeWindow::DirectoryMergeWindow( QWidget* pParent, OptionDialog* pOptions, KIconLoader* pIconLoader )
-   : QListView( pParent )
+   : Q3ListView( pParent )
 {
-   connect( this, SIGNAL(doubleClicked(QListViewItem*)), this, SLOT(onDoubleClick(QListViewItem*)));
-   connect( this, SIGNAL(returnPressed(QListViewItem*)), this, SLOT(onDoubleClick(QListViewItem*)));
-   connect( this, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&, int)),
-            this, SLOT(   onClick(int,QListViewItem*,const QPoint&, int))  );
-   connect( this, SIGNAL(contextMenuRequested(QListViewItem*,const QPoint &,int)),
-            this, SLOT(   slotShowContextMenu(QListViewItem*,const QPoint &,int)));
-   connect( this, SIGNAL(selectionChanged(QListViewItem*)), this, SLOT(onSelectionChanged(QListViewItem*)));
+   connect( this, SIGNAL(doubleClicked(Q3ListViewItem*)), this, SLOT(onDoubleClick(Q3ListViewItem*)));
+   connect( this, SIGNAL(returnPressed(Q3ListViewItem*)), this, SLOT(onDoubleClick(Q3ListViewItem*)));
+   connect( this, SIGNAL( mouseButtonPressed(int,Q3ListViewItem*,const QPoint&, int)),
+            this, SLOT(   onClick(int,Q3ListViewItem*,const QPoint&, int))  );
+   connect( this, SIGNAL(contextMenuRequested(Q3ListViewItem*,const QPoint &,int)),
+            this, SLOT(   slotShowContextMenu(Q3ListViewItem*,const QPoint &,int)));
+   connect( this, SIGNAL(selectionChanged(Q3ListViewItem*)), this, SLOT(onSelectionChanged(Q3ListViewItem*)));
    m_pOptions = pOptions;
    m_pIconLoader = pIconLoader;
    m_pDirectoryMergeInfo = 0;
@@ -392,7 +403,7 @@ static void calcDirStatus( bool bThreeDirs, DirMergeItem* i, int& nofFiles,
             ++nofManualMerges;
       }
    }
-   for( QListViewItem* p = i->firstChild();  p!=0; p = p->nextSibling() )
+   for( Q3ListViewItem* p = i->firstChild();  p!=0; p = p->nextSibling() )
       calcDirStatus( bThreeDirs, static_cast<DirMergeItem*>(p), nofFiles, nofDirs, nofEqualFiles, nofManualMerges );
 }
 
@@ -503,10 +514,10 @@ bool DirectoryMergeWindow::init
    double nofScans = ( m_dirA.isValid() ? 1 : 0 )+( m_dirB.isValid() ? 1 : 0 )+( m_dirC.isValid() ? 1 : 0 );
    int currentScan = 0;
 
-   setColumnWidthMode(s_UnsolvedCol, QListView::Manual);
-   setColumnWidthMode(s_SolvedCol,   QListView::Manual);
-   setColumnWidthMode(s_WhiteCol,    QListView::Manual);
-   setColumnWidthMode(s_NonWhiteCol, QListView::Manual);
+   setColumnWidthMode(s_UnsolvedCol, Q3ListView::Manual);
+   setColumnWidthMode(s_SolvedCol,   Q3ListView::Manual);
+   setColumnWidthMode(s_WhiteCol,    Q3ListView::Manual);
+   setColumnWidthMode(s_NonWhiteCol, Q3ListView::Manual);
    if ( !m_pOptions->m_bDmFullAnalysis )
    {
       setColumnWidth( s_WhiteCol,    0 );
@@ -617,7 +628,7 @@ bool DirectoryMergeWindow::init
    {
       prepareListView(pp);
 
-      for( QListViewItem* p = firstChild();  p!=0; p = p->nextSibling() )
+      for( Q3ListViewItem* p = firstChild();  p!=0; p = p->nextSibling() )
       {
          DirMergeItem* pDMI = static_cast<DirMergeItem*>( p );
          calcSuggestedOperation( *pDMI->m_pMFI, eDefaultMergeOp );
@@ -635,7 +646,7 @@ bool DirectoryMergeWindow::init
    QSplitter* pSplitter = static_cast<QSplitter*>(pParent);
    if (pSplitter!=0)
    {
-      QValueList<int> sizes = pSplitter->sizes();
+      Q3ValueList<int> sizes = pSplitter->sizes();
       int total = sizes[0] + sizes[1];
       sizes[0]=total*6/10;
       sizes[1]=total - sizes[0];
@@ -652,7 +663,7 @@ bool DirectoryMergeWindow::init
       int nofDirs=0;
       int nofEqualFiles=0;
       int nofManualMerges=0;
-      for( QListViewItem* p = firstChild();  p!=0; p = p->nextSibling() )
+      for( Q3ListViewItem* p = firstChild();  p!=0; p = p->nextSibling() )
          calcDirStatus( m_dirC.isValid(), static_cast<DirMergeItem*>(p),
                         nofFiles, nofDirs, nofEqualFiles, nofManualMerges );
 
@@ -688,9 +699,9 @@ void DirectoryMergeWindow::slotAutoChooseEverywhere()
 
 void DirectoryMergeWindow::slotNoOpEverywhere(){ setAllMergeOperations(eNoOperation); }
 
-static void setListViewItemOpen( QListViewItem* p, bool bOpen )
+static void setListViewItemOpen( Q3ListViewItem* p, bool bOpen )
 {
-   for( QListViewItem* pChild = p->firstChild();  pChild!=0; pChild = pChild->nextSibling() )
+   for( Q3ListViewItem* pChild = p->firstChild();  pChild!=0; pChild = pChild->nextSibling() )
       setListViewItemOpen( pChild, bOpen );
 
    p->setOpen( bOpen );
@@ -698,17 +709,17 @@ static void setListViewItemOpen( QListViewItem* p, bool bOpen )
 
 void DirectoryMergeWindow::slotFoldAllSubdirs()
 {
-   for( QListViewItem* p = firstChild();  p!=0; p = p->nextSibling() )
+   for( Q3ListViewItem* p = firstChild();  p!=0; p = p->nextSibling() )
       setListViewItemOpen( p, false );
 }
 
 void DirectoryMergeWindow::slotUnfoldAllSubdirs()
 {
-   for( QListViewItem* p = firstChild();  p!=0; p = p->nextSibling() )
+   for( Q3ListViewItem* p = firstChild();  p!=0; p = p->nextSibling() )
       setListViewItemOpen( p, true );
 }
 
-static void setMergeOperation( QListViewItem* pLVI, e_MergeOperation eMergeOp )
+static void setMergeOperation( Q3ListViewItem* pLVI, e_MergeOperation eMergeOp )
 {
    if ( pLVI==0 ) return;
 
@@ -742,11 +753,11 @@ void DirectoryMergeWindow::slotCurrentMergeToAAndB() { setMergeOperation(current
 
 void DirectoryMergeWindow::keyPressEvent( QKeyEvent* e )
 {
-   if ( (e->state() & Qt::ControlButton)!=0 )
+   if ( (e->state() & Qt::ControlModifier)!=0 )
    {
       bool bThreeDirs = m_dirC.isValid();
 
-      QListViewItem* lvi = currentItem();
+      Q3ListViewItem* lvi = currentItem();
       DirMergeItem* pDMI = lvi==0 ? 0 : static_cast<DirMergeItem*>(lvi);
       MergeFileInfos* pMFI = pDMI==0 ? 0 : pDMI->m_pMFI;
 
@@ -758,12 +769,12 @@ void DirectoryMergeWindow::keyPressEvent( QKeyEvent* e )
       {
          switch(e->key())
          {
-         case Key_1:      if(pMFI->m_bExistsInA){ slotCurrentChooseA(); }  return;
-         case Key_2:      if(pMFI->m_bExistsInB){ slotCurrentChooseB(); }  return;
-         case Key_3:      if(pMFI->m_bExistsInC){ slotCurrentChooseC(); }  return;
-         case Key_Space:  slotCurrentDoNothing();                          return;
-         case Key_4:      if ( !bFTConflict )   { slotCurrentMerge();   }  return;
-         case Key_Delete: slotCurrentDelete();                             return;
+         case Qt::Key_1:      if(pMFI->m_bExistsInA){ slotCurrentChooseA(); }  return;
+         case Qt::Key_2:      if(pMFI->m_bExistsInB){ slotCurrentChooseB(); }  return;
+         case Qt::Key_3:      if(pMFI->m_bExistsInC){ slotCurrentChooseC(); }  return;
+         case Qt::Key_Space:  slotCurrentDoNothing();                          return;
+         case Qt::Key_4:      if ( !bFTConflict )   { slotCurrentMerge();   }  return;
+         case Qt::Key_Delete: slotCurrentDelete();                             return;
          default: break;
          }
       }
@@ -771,11 +782,11 @@ void DirectoryMergeWindow::keyPressEvent( QKeyEvent* e )
       {
          switch(e->key())
          {
-         case Key_1:      if(pMFI->m_bExistsInA){ slotCurrentCopyAToB(); }  return;
-         case Key_2:      if(pMFI->m_bExistsInB){ slotCurrentCopyBToA(); }  return;
-         case Key_Space:  slotCurrentDoNothing();                           return;
-         case Key_4:      if ( !bFTConflict ) { slotCurrentMergeToAAndB(); }  return;
-         case Key_Delete: if( pMFI->m_bExistsInA && pMFI->m_bExistsInB ) slotCurrentDeleteAAndB();
+         case Qt::Key_1:      if(pMFI->m_bExistsInA){ slotCurrentCopyAToB(); }  return;
+         case Qt::Key_2:      if(pMFI->m_bExistsInB){ slotCurrentCopyBToA(); }  return;
+         case Qt::Key_Space:  slotCurrentDoNothing();                           return;
+         case Qt::Key_4:      if ( !bFTConflict ) { slotCurrentMergeToAAndB(); }  return;
+         case Qt::Key_Delete: if( pMFI->m_bExistsInA && pMFI->m_bExistsInB ) slotCurrentDeleteAAndB();
                           else if( pMFI->m_bExistsInA ) slotCurrentDeleteA();
                           else if( pMFI->m_bExistsInB ) slotCurrentDeleteB();
                           return;
@@ -784,7 +795,7 @@ void DirectoryMergeWindow::keyPressEvent( QKeyEvent* e )
       }
    }
 
-   QListView::keyPressEvent(e);
+   Q3ListView::keyPressEvent(e);
 }
 
 void DirectoryMergeWindow::focusInEvent(QFocusEvent*)
@@ -802,7 +813,7 @@ void DirectoryMergeWindow::setAllMergeOperations( e_MergeOperation eDefaultOpera
         i18n("This affects all merge operations."),
         i18n("Changing All Merge Operations"),i18n("C&ontinue"), i18n("&Cancel") ) )
    {
-      for( QListViewItem* p = firstChild(); p!=0; p = p->nextSibling() )
+      for( Q3ListViewItem* p = firstChild(); p!=0; p = p->nextSibling() )
       {
          DirMergeItem* pDMI = static_cast<DirMergeItem*>( p );
          calcSuggestedOperation( *pDMI->m_pMFI, eDefaultOperation );
@@ -1042,7 +1053,7 @@ static void initPixmaps( QColor newest, QColor oldest, QColor middle, QColor not
 }
 
 
-static void setOnePixmap( QListViewItem* pLVI, int col, e_Age eAge, bool bLink, bool bDir )
+static void setOnePixmap( Q3ListViewItem* pLVI, int col, e_Age eAge, bool bLink, bool bDir )
 {
    static QPixmap* ageToPm[]=       { pmNew,     pmMiddle,     pmOld,     pmNotThere, s_pm_file  };
    static QPixmap* ageToPmLink[]=   { pmNewLink, pmMiddleLink, pmOldLink, pmNotThere, pmFileLink };
@@ -1100,7 +1111,7 @@ static void setPixmaps( MergeFileInfos& mfi, bool bCheckC )
 }
 
 // Iterate through the complete tree. Start by specifying QListView::firstChild().
-static QListViewItem* treeIterator( QListViewItem* p, bool bVisitChildren=true, bool bFindInvisible=false )
+static Q3ListViewItem* treeIterator( Q3ListViewItem* p, bool bVisitChildren=true, bool bFindInvisible=false )
 {
    if( p!=0 )
    {
@@ -1430,7 +1441,7 @@ void DirectoryMergeWindow::calcSuggestedOperation( MergeFileInfos& mfi, e_MergeO
    }
 }
 
-void DirectoryMergeWindow::onDoubleClick( QListViewItem* lvi )
+void DirectoryMergeWindow::onDoubleClick( Q3ListViewItem* lvi )
 {
    if (lvi==0) return;
 
@@ -1440,7 +1451,7 @@ void DirectoryMergeWindow::onDoubleClick( QListViewItem* lvi )
       compareCurrentFile();
 }
 
-void DirectoryMergeWindow::onSelectionChanged( QListViewItem* lvi )
+void DirectoryMergeWindow::onSelectionChanged( Q3ListViewItem* lvi )
 {
    if ( lvi==0 ) return;
 
@@ -1452,7 +1463,7 @@ void DirectoryMergeWindow::onSelectionChanged( QListViewItem* lvi )
    m_pDirectoryMergeInfo->setInfo( m_dirA, m_dirB, m_dirC, m_dirDestInternal, mfi );
 }
 
-void DirectoryMergeWindow::onClick( int button, QListViewItem* lvi, const QPoint& p, int c )
+void DirectoryMergeWindow::onClick( int button, Q3ListViewItem* lvi, const QPoint& p, int c )
 {
    if ( lvi==0 ) return;
 
@@ -1519,7 +1530,7 @@ void DirectoryMergeWindow::onClick( int button, QListViewItem* lvi, const QPoint
    }
 }
 
-void DirectoryMergeWindow::slotShowContextMenu(QListViewItem* lvi,const QPoint & p,int c)
+void DirectoryMergeWindow::slotShowContextMenu(Q3ListViewItem* lvi,const QPoint & p,int c)
 {
    if ( lvi==0 ) return;
 
@@ -1544,7 +1555,7 @@ void DirectoryMergeWindow::slotShowContextMenu(QListViewItem* lvi,const QPoint &
 #ifndef _WIN32
          m.exec( p );
 #else
-         void showShellContextMenu( const QString&, QPoint, QWidget*, QPopupMenu* );
+         void showShellContextMenu( const QString&, QPoint, QWidget*, QMenu* );
          showShellContextMenu( itemPath, p, this, &m );
 #endif
       }
@@ -1640,14 +1651,14 @@ void DirectoryMergeWindow::selectItemAndColumn(DirMergeItem* pDMI, int c, bool b
 #define DIRSORT(x) x
 #endif
 
-DirMergeItem::DirMergeItem( QListView* pParent, const QString& fileName, MergeFileInfos* pMFI )
-: QListViewItem( pParent, DIRSORT( fileName ), "","","", i18n("To do."), "" )
+DirMergeItem::DirMergeItem( Q3ListView* pParent, const QString& fileName, MergeFileInfos* pMFI )
+: Q3ListViewItem( pParent, DIRSORT( fileName ), "","","", i18n("To do."), "" )
 {
    init(pMFI);
 }
 
 DirMergeItem::DirMergeItem( DirMergeItem* pParent, const QString& fileName, MergeFileInfos* pMFI )
-: QListViewItem( pParent, DIRSORT( fileName ), "","","", i18n("To do."), "" )
+: Q3ListViewItem( pParent, DIRSORT( fileName ), "","","", i18n("To do."), "" )
 {
    init(pMFI);
 }
@@ -1670,7 +1681,7 @@ void DirMergeItem::init(MergeFileInfos* pMFI)
    }
 }
 
-int DirMergeItem::compare(QListViewItem *i, int col, bool ascending) const
+int DirMergeItem::compare(Q3ListViewItem *i, int col, bool ascending) const
 {
    DirMergeItem* pDMI = static_cast<DirMergeItem*>(i);
    bool bDir1 =  m_pMFI->m_bDirA || m_pMFI->m_bDirB || m_pMFI->m_bDirC;
@@ -1680,7 +1691,7 @@ int DirMergeItem::compare(QListViewItem *i, int col, bool ascending) const
       if(col==s_UnsolvedCol || col==s_SolvedCol || col==s_NonWhiteCol || col==s_WhiteCol)
          return key(col,ascending).toInt() > i->key(col,ascending).toInt() ? -1 : 1;
       else
-         return QListViewItem::compare( i, col, ascending );
+         return Q3ListViewItem::compare( i, col, ascending );
    }
    else
       return bDir1 ? -1 : 1;
@@ -1725,7 +1736,7 @@ void DirMergeItem::paintCell(QPainter * p, const QColorGroup & cg, int column, i
          return;
       }
    }
-   QListViewItem::paintCell(p,cg,column,width,align);
+   Q3ListViewItem::paintCell(p,cg,column,width,align);
 }
 
 DirMergeItem::~DirMergeItem()
@@ -1771,7 +1782,7 @@ void MergeFileInfos::setMergeOperation( e_MergeOperation eMOp )
 
       e_MergeOperation eChildrenMergeOp = m_eMergeOperation;
       if ( eChildrenMergeOp == eConflictingFileTypes ) eChildrenMergeOp = eMergeABCToDest;
-      QListViewItem* p = m_pDMI->firstChild();
+      Q3ListViewItem* p = m_pDMI->firstChild();
       while ( p!=0 )
       {
          DirMergeItem* pDMI = static_cast<DirMergeItem*>( p );
@@ -2003,7 +2014,7 @@ bool DirectoryMergeWindow::executeMergeOperation( MergeFileInfos& mfi, bool& bSi
 
 // Check if the merge can start, and prepare the m_mergeItemList which then contains all
 // items that must be merged.
-void DirectoryMergeWindow::prepareMergeStart( QListViewItem* pBegin, QListViewItem* pEnd, bool bVerbose )
+void DirectoryMergeWindow::prepareMergeStart( Q3ListViewItem* pBegin, Q3ListViewItem* pEnd, bool bVerbose )
 {
    if ( bVerbose )
    {
@@ -2027,7 +2038,7 @@ void DirectoryMergeWindow::prepareMergeStart( QListViewItem* pBegin, QListViewIt
    if (pBegin == 0)
       return;
 
-   for( QListViewItem* p = pBegin; p!= pEnd; p = treeIterator( p ) )
+   for( Q3ListViewItem* p = pBegin; p!= pEnd; p = treeIterator( p ) )
    {
       DirMergeItem* pDMI = static_cast<DirMergeItem*>(p);
 
@@ -2067,8 +2078,8 @@ void DirectoryMergeWindow::slotRunOperationForCurrentItem()
    bool bVerbose = false;
    if ( m_mergeItemList.empty() )
    {
-      QListViewItem* pBegin = currentItem();
-      QListViewItem* pEnd = treeIterator(pBegin,false,false); // find next visible sibling (no children)
+      Q3ListViewItem* pBegin = currentItem();
+      Q3ListViewItem* pEnd = treeIterator(pBegin,false,false); // find next visible sibling (no children)
 
       prepareMergeStart( pBegin, pEnd, bVerbose );
       mergeContinue(true, bVerbose);
@@ -2084,7 +2095,7 @@ void DirectoryMergeWindow::slotRunOperationForAllItems()
    bool bVerbose = true;
    if ( m_mergeItemList.empty() )
    {
-      QListViewItem* pBegin = firstChild();
+      Q3ListViewItem* pBegin = firstChild();
 
       prepareMergeStart( pBegin, 0, bVerbose );
       mergeContinue(true, bVerbose);
@@ -2210,17 +2221,17 @@ void DirectoryMergeWindow::mergeContinue(bool bStart, bool bVerbose)
       if ( ! bContinueWithCurrentItem )
       {
          // Depth first
-         QListViewItem* pPrevItem = pCurrentItemForOperation;
+         Q3ListViewItem* pPrevItem = pCurrentItemForOperation;
          ++m_currentItemForOperation;
          pCurrentItemForOperation = m_currentItemForOperation==m_mergeItemList.end() ? 0 : *m_currentItemForOperation;
          if ( (pCurrentItemForOperation==0 || pCurrentItemForOperation->parent()!=pPrevItem->parent()) && pPrevItem->parent()!=0 )
          {
             // Check if the parent may be set to "Done"
-            QListViewItem* pParent = pPrevItem->parent();
+            Q3ListViewItem* pParent = pPrevItem->parent();
             bool bDone = true;
             while ( bDone && pParent!=0 )
             {
-               for( QListViewItem* p = pParent->firstChild(); p!=0; p=p->nextSibling() )
+               for( Q3ListViewItem* p = pParent->firstChild(); p!=0; p=p->nextSibling() )
                {
                   DirMergeItem* pDMI = static_cast<DirMergeItem*>(p);
                   if ( !bSim && ! pDMI->m_pMFI->m_bOperationComplete   ||  bSim && pDMI->m_pMFI->m_bSimOpComplete )
@@ -2258,7 +2269,7 @@ void DirectoryMergeWindow::mergeContinue(bool bStart, bool bVerbose)
          if ( m_bSimulatedMergeStarted )
          {
             m_bSimulatedMergeStarted = false;
-            for( QListViewItem* p=firstChild(); p!=0; p=treeIterator(p) )
+            for( Q3ListViewItem* p=firstChild(); p!=0; p=treeIterator(p) )
             {
                static_cast<DirMergeItem*>(p)->m_pMFI->m_bSimOpComplete = false;
             }
@@ -2327,7 +2338,7 @@ void DirectoryMergeWindow::allowResizeEvents(bool bAllowResizeEvents )
 void DirectoryMergeWindow::resizeEvent( QResizeEvent* e )
 {
    if (m_bAllowResizeEvents)
-      QListView::resizeEvent(e);
+      Q3ListView::resizeEvent(e);
 }
 
 bool DirectoryMergeWindow::deleteFLD( const QString& name, bool bCreateBackup )
@@ -2586,11 +2597,11 @@ bool DirectoryMergeWindow::makeDir( const QString& name, bool bQuiet )
 
 
 DirectoryMergeInfo::DirectoryMergeInfo( QWidget* pParent )
-: QFrame(pParent)
+: Q3Frame(pParent)
 {
-   QVBoxLayout *topLayout = new QVBoxLayout( this );
+   Q3VBoxLayout *topLayout = new Q3VBoxLayout( this );
 
-   QGridLayout *grid = new QGridLayout( topLayout );
+   Q3GridLayout *grid = new Q3GridLayout( topLayout );
    grid->setColStretch(1,10);
 
    int line=0;
@@ -2604,7 +2615,7 @@ DirectoryMergeInfo::DirectoryMergeInfo( QWidget* pParent )
    m_pDest = new QLabel(i18n("Dest"),this);  grid->addWidget( m_pDest,line, 0 );
    m_pInfoDest = new QLabel(this);     grid->addWidget( m_pInfoDest,line,1 ); ++line;
 
-   m_pInfoList = new QListView(this);  topLayout->addWidget( m_pInfoList );
+   m_pInfoList = new Q3ListView(this);  topLayout->addWidget( m_pInfoList );
    m_pInfoList->addColumn(i18n("Dir"));
    m_pInfoList->addColumn(i18n("Type"));
    m_pInfoList->addColumn(i18n("Size"));
@@ -2623,7 +2634,7 @@ bool DirectoryMergeInfo::eventFilter(QObject*o, QEvent* e)
    return false;
 }
 
-static void addListViewItem( QListView* pListView, const QString& dir,
+static void addListViewItem( Q3ListView* pListView, const QString& dir,
    const QString& basePath, FileAccess& fi )
 {
    if ( basePath.isEmpty() )
@@ -2640,7 +2651,7 @@ static void addListViewItem( QListView* pListView, const QString& dir,
          QString dateString = fi.lastModified().toString("yyyy-MM-dd hh:mm:ss");
 #endif
 
-         new QListViewItem(
+         new Q3ListViewItem(
             pListView,
             dir,
             QString( fi.isDir() ? i18n("Dir") : i18n("File") ) + (fi.isSymLink() ? "-Link" : ""),
@@ -2657,7 +2668,7 @@ static void addListViewItem( QListView* pListView, const QString& dir,
       }
       else
       {
-         new QListViewItem(
+         new Q3ListViewItem(
             pListView,
             dir,
             i18n("not available"),
@@ -2775,12 +2786,12 @@ void DirectoryMergeWindow::slotSaveMergeState()
 
 
       QFile file(m_dirMergeStateFilename);
-      bool bSuccess = file.open( IO_WriteOnly );
+      bool bSuccess = file.open( QIODevice::WriteOnly );
       if ( bSuccess )
       {
          QTextStream ts( &file );
 
-         QListViewItemIterator it( this );
+         Q3ListViewItemIterator it( this );
          while ( it.current() ) {
             DirMergeItem* item = static_cast<DirMergeItem*>(it.current());
             MergeFileInfos* pMFI = item->m_pMFI;
@@ -2810,7 +2821,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
    m_pSelection2Item = 0;
    m_pSelection3Item = 0;
 
-   QListViewItem* p = firstChild();
+   Q3ListViewItem* p = firstChild();
    while(p)
    {
       DirMergeItem* pDMI = static_cast<DirMergeItem*>(p);
@@ -2858,7 +2869,7 @@ void DirectoryMergeWindow::initDirectoryMergeActions( QObject* pKDiff3App, KActi
    m_pDirStartOperation = new KAction(i18n("Start/Continue Directory Merge"), Qt::Key_F7, p, SLOT(slotRunOperationForAllItems()), ac, "dir_start_operation");
    m_pDirRunOperationForCurrentItem = new KAction(i18n("Run Operation for Current Item"), Qt::Key_F6, p, SLOT(slotRunOperationForCurrentItem()), ac, "dir_run_operation_for_current_item");
    m_pDirCompareCurrent = new KAction(i18n("Compare Selected File"), 0, p, SLOT(compareCurrentFile()), ac, "dir_compare_current");
-   m_pDirMergeCurrent = new KAction(i18n("Merge Current File"), QIconSet(QPixmap(startmerge)), 0, pKDiff3App, SLOT(slotMergeCurrentFile()), ac, "merge_current");
+   m_pDirMergeCurrent = new KAction(i18n("Merge Current File"), QIcon(QPixmap(startmerge)), 0, pKDiff3App, SLOT(slotMergeCurrentFile()), ac, "merge_current");
    m_pDirFoldAll = new KAction(i18n("Fold All Subdirs"), 0, p, SLOT(slotFoldAllSubdirs()), ac, "dir_fold_all");
    m_pDirUnfoldAll = new KAction(i18n("Unfold All Subdirs"), 0, p, SLOT(slotUnfoldAllSubdirs()), ac, "dir_unfold_all");
    m_pDirRescan = new KAction(i18n("Rescan"), Qt::SHIFT+Qt::Key_F5, p, SLOT(reload()), ac, "dir_rescan");
@@ -2873,11 +2884,11 @@ void DirectoryMergeWindow::initDirectoryMergeActions( QObject* pKDiff3App, KActi
 //   m_pDirSynchronizeDirectories = new KToggleAction(i18n("Synchronize Directories"), 0, this, SLOT(slotSynchronizeDirectories()), ac, "dir_synchronize_directories");
 //   m_pDirChooseNewerFiles = new KToggleAction(i18n("Copy Newer Files Instead of Merging"), 0, this, SLOT(slotChooseNewerFiles()), ac, "dir_choose_newer_files");
 
-   m_pDirShowIdenticalFiles = new KToggleAction(i18n("Show Identical Files"), QIconSet(QPixmap(showequalfiles)), 0, this, SLOT(slotShowIdenticalFiles()), ac, "dir_show_identical_files");
+   m_pDirShowIdenticalFiles = new KToggleAction(i18n("Show Identical Files"), QIcon(QPixmap(showequalfiles)), 0, this, SLOT(slotShowIdenticalFiles()), ac, "dir_show_identical_files");
    m_pDirShowDifferentFiles = new KToggleAction(i18n("Show Different Files"), 0, this, SLOT(slotShowDifferentFiles()), ac, "dir_show_different_files");
-   m_pDirShowFilesOnlyInA   = new KToggleAction(i18n("Show Files only in A"), QIconSet(QPixmap(showfilesonlyina)), 0, this, SLOT(slotShowFilesOnlyInA()), ac, "dir_show_files_only_in_a");
-   m_pDirShowFilesOnlyInB   = new KToggleAction(i18n("Show Files only in B"), QIconSet(QPixmap(showfilesonlyinb)), 0, this, SLOT(slotShowFilesOnlyInB()), ac, "dir_show_files_only_in_b");
-   m_pDirShowFilesOnlyInC   = new KToggleAction(i18n("Show Files only in C"), QIconSet(QPixmap(showfilesonlyinc)), 0, this, SLOT(slotShowFilesOnlyInC()), ac, "dir_show_files_only_in_c");
+   m_pDirShowFilesOnlyInA   = new KToggleAction(i18n("Show Files only in A"), QIcon(QPixmap(showfilesonlyina)), 0, this, SLOT(slotShowFilesOnlyInA()), ac, "dir_show_files_only_in_a");
+   m_pDirShowFilesOnlyInB   = new KToggleAction(i18n("Show Files only in B"), QIcon(QPixmap(showfilesonlyinb)), 0, this, SLOT(slotShowFilesOnlyInB()), ac, "dir_show_files_only_in_b");
+   m_pDirShowFilesOnlyInC   = new KToggleAction(i18n("Show Files only in C"), QIcon(QPixmap(showfilesonlyinc)), 0, this, SLOT(slotShowFilesOnlyInC()), ac, "dir_show_files_only_in_c");
 
    m_pDirShowIdenticalFiles->setChecked( m_pOptions->m_bDmShowIdenticalFiles );
 
@@ -2928,7 +2939,7 @@ void DirectoryMergeWindow::updateAvailabilities( bool bDirCompare, bool bDiffWin
 
    bool bThreeDirs = m_dirC.isValid();
 
-   QListViewItem* lvi = currentItem();
+   Q3ListViewItem* lvi = currentItem();
    DirMergeItem* pDMI = lvi==0 ? 0 : static_cast<DirMergeItem*>(lvi);
    MergeFileInfos* pMFI = pDMI==0 ? 0 : pDMI->m_pMFI;
 
@@ -2975,4 +2986,4 @@ void DirectoryMergeWindow::updateAvailabilities( bool bDirCompare, bool bDiffWin
 }
 
 
-#include "directorymergewindow.moc"
+//#include "directorymergewindow.moc"

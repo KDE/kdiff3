@@ -23,7 +23,16 @@
 #include <iostream>
 #include <algorithm>
 #include <ctype.h>
-#include <qaccel.h>
+#include <q3accel.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QKeyEvent>
+#include <QEvent>
+#include <QDropEvent>
+#include <Q3ValueList>
+#include <Q3HBoxLayout>
+#include <QResizeEvent>
+#include <Q3VBoxLayout>
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -38,8 +47,8 @@
 #include <qsplitter.h>
 #include <qdir.h>
 #include <qfile.h>
-#include <qvbuttongroup.h>
-#include <qdragobject.h>
+#include <Q3VButtonGroup>
+#include <q3dragobject.h>
 #include <qlineedit.h>
 #include <qcombobox.h>
 #include <assert.h>
@@ -618,7 +627,7 @@ void addWidget( L* layout, W* widget)
 void KDiff3App::initView()
 {
    // set the main widget here
-   QValueList<int> oldHeights;
+   Q3ValueList<int> oldHeights;
    if ( m_pDirectoryMergeSplitter->isVisible() )
    {
       oldHeights = m_pMainSplitter->sizes();
@@ -631,14 +640,14 @@ void KDiff3App::initView()
    }
    m_pMainWidget = new QWidget(m_pMainSplitter);
 
-   QVBoxLayout* pVLayout = new QVBoxLayout(m_pMainWidget,0,0);
+   Q3VBoxLayout* pVLayout = new Q3VBoxLayout(m_pMainWidget,0,0);
 
    QSplitter* pVSplitter = new QSplitter( m_pMainWidget );
    pVSplitter->setOrientation( Qt::Vertical );
    pVLayout->addWidget( pVSplitter );
 
    QWidget* pDiffWindowFrame = new QWidget( pVSplitter );
-   QHBoxLayout* pDiffHLayout = new QHBoxLayout( pDiffWindowFrame,0,0 );
+   Q3HBoxLayout* pDiffHLayout = new Q3HBoxLayout( pDiffWindowFrame,0,0 );
 
    m_pDiffWindowSplitter = new QSplitter( pDiffWindowFrame );
    m_pDiffWindowSplitter->setOrientation( m_pOptionDialog->m_bHorizDiffWindowSplitting ?  Qt::Horizontal : Qt::Vertical );
@@ -664,7 +673,7 @@ void KDiff3App::initView()
 
    // Merge window
    m_pMergeWindowFrame = new QWidget( pVSplitter );
-   QHBoxLayout* pMergeHLayout = new QHBoxLayout( m_pMergeWindowFrame,0,0 );
+   Q3HBoxLayout* pMergeHLayout = new Q3HBoxLayout( m_pMergeWindowFrame,0,0 );
 
    m_pMergeResultWindow = new MergeResultWindow( m_pMergeWindowFrame, m_pOptionDialog, statusBar() );
    pMergeHLayout->addWidget( m_pMergeResultWindow );
@@ -674,14 +683,14 @@ void KDiff3App::initView()
 
    autoAdvance->setEnabled(true);
 
-   QValueList<int> sizes = pVSplitter->sizes();
+   Q3ValueList<int> sizes = pVSplitter->sizes();
    int total = sizes[0] + sizes[1];
    sizes[0]=total/2; sizes[1]=total/2;
    pVSplitter->setSizes( sizes );
 
    m_pMergeResultWindow->installEventFilter( this );       // for Cut/Copy/Paste-shortcuts
 
-   QHBoxLayout* pHScrollBarLayout = new QHBoxLayout( pVLayout );
+   Q3HBoxLayout* pHScrollBarLayout = new Q3HBoxLayout( pVLayout );
    m_pHScrollBar = new ReversibleScrollBar( Qt::Horizontal, m_pMainWidget, &m_pOptionDialog->m_bRightToLeftLanguage );
    pHScrollBarLayout->addWidget( m_pHScrollBar );
    m_pCornerWidget = new QWidget( m_pMainWidget );
@@ -828,17 +837,17 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
       if ( e->type() == QEvent::KeyPress )
       {  // key press
          QKeyEvent *k = (QKeyEvent*)e;
-         if (k->key()==Qt::Key_Insert &&  (k->state() & Qt::ControlButton)!=0 )
+         if (k->key()==Qt::Key_Insert &&  (k->state() & Qt::ControlModifier)!=0 )
          {
             slotEditCopy();
             return true;
          }
-         if (k->key()==Qt::Key_Insert &&  (k->state() & Qt::ShiftButton)!=0 )
+         if (k->key()==Qt::Key_Insert &&  (k->state() & Qt::ShiftModifier)!=0 )
          {
             slotEditPaste();
             return true;
          }
-         if (k->key()==Qt::Key_Delete &&  (k->state() & Qt::ShiftButton)!=0 )
+         if (k->key()==Qt::Key_Delete &&  (k->state() & Qt::ShiftModifier)!=0 )
          {
             slotEditCut();
             return true;
@@ -851,13 +860,13 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
    {
        QKeyEvent *k = (QKeyEvent*)e;
 
-       bool bCtrl = (k->state() & Qt::ControlButton) != 0;
+       bool bCtrl = (k->state() & Qt::ControlModifier) != 0;
        if (k->key()==Qt::Key_Insert &&  bCtrl )
        {
           slotEditCopy();
           return true;
        }
-       if (k->key()==Qt::Key_Insert &&  (k->state() & Qt::ShiftButton)!=0 )
+       if (k->key()==Qt::Key_Insert &&  (k->state() & Qt::ShiftModifier)!=0 )
        {
           slotEditPaste();
           return true;
@@ -904,11 +913,11 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
       QDropEvent* pDropEvent = static_cast<QDropEvent*>(e);
       pDropEvent->accept();
 
-      if ( QUriDrag::canDecode(pDropEvent) )
+      if ( Q3UriDrag::canDecode(pDropEvent) )
       {
 #ifdef KREPLACEMENTS_H
          QStringList stringList;
-         QUriDrag::decodeLocalFiles( pDropEvent, stringList );
+         Q3UriDrag::decodeLocalFiles( pDropEvent, stringList );
          if ( canContinue() && !stringList.isEmpty() )
          {
             raise();
@@ -932,10 +941,10 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
          }
 #endif
       }
-      else if ( QTextDrag::canDecode(pDropEvent) )
+      else if ( Q3TextDrag::canDecode(pDropEvent) )
       {
          QString text;
-         bool bDecodeSuccess = QTextDrag::decode( pDropEvent, text );
+         bool bDecodeSuccess = Q3TextDrag::decode( pDropEvent, text );
          if ( bDecodeSuccess && canContinue() )
          {
             raise();

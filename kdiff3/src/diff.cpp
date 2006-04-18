@@ -27,6 +27,8 @@
 #include <qfileinfo.h>
 #include <qdir.h>
 #include <qtextcodec.h>
+//Added by qt3to4:
+#include <QTextStream>
 
 #include <map>
 #include <assert.h>
@@ -354,13 +356,13 @@ static bool convertFileEncoding( const QString& fileNameIn, QTextCodec* pCodecIn
                                  const QString& fileNameOut, QTextCodec* pCodecOut )
 {
    QFile in( fileNameIn );
-   if ( ! in.open(IO_ReadOnly ) )
+   if ( ! in.open(QIODevice::ReadOnly ) )
       return false;
    QTextStream inStream( &in );
    inStream.setCodec( pCodecIn );
 
    QFile out( fileNameOut );
-   if ( ! out.open( IO_WriteOnly ) )
+   if ( ! out.open( QIODevice::WriteOnly ) )
       return false;
    QTextStream outStream( &out );
    outStream.setCodec( pCodecOut );
@@ -566,7 +568,7 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
 
    QByteArray ba;
    ba.setRawData( m_pBuf, m_size );
-   QTextStream ts( ba, IO_ReadOnly );
+   QTextStream ts( ba, QIODevice::ReadOnly );
    ts.setCodec( pEncoding);
    m_unicodeBuf = ts.read();
    ba.resetRawData( m_pBuf, m_size );
@@ -711,7 +713,7 @@ static void checkLineForComments(
       {
          return;
       }
-      else if ( !isspace(p[i]) )
+      else if ( !p[i].isSpace() )
       {
          bWhite = false;
       }

@@ -9,7 +9,7 @@
 #include <qstringlist.h>
 #include <qwidget.h>
 #include <qdir.h>
-#include <qpopupmenu.h>
+#include <QMenu>
 #include "ShellContextMenu.h"
 
 #ifdef _DEBUG
@@ -26,7 +26,7 @@ static char THIS_FILE[]=__FILE__;
 #define MAX_ID 10000
 
 
-void showShellContextMenu( const QString& itemPath, QPoint pt, QWidget* pParentWidget, QPopupMenu* pMenu )
+void showShellContextMenu( const QString& itemPath, QPoint pt, QWidget* pParentWidget, QMenu* pMenu )
 {
     CShellContextMenu scm;
     scm.SetObjects(QDir::convertSeparators(itemPath));
@@ -127,7 +127,7 @@ LRESULT CALLBACK CShellContextMenu::HookWndProc(HWND hWnd, UINT message, WPARAM 
 }
 
 
-UINT CShellContextMenu::ShowContextMenu(QWidget * pParentWidget, QPoint pt, QPopupMenu* pMenu )
+UINT CShellContextMenu::ShowContextMenu(QWidget * pParentWidget, QPoint pt, QMenu* pMenu )
 {
         HWND hWnd = pParentWidget->winId();
         int iMenuType = 0;	// to know which version of IContextMenu is supported

@@ -18,6 +18,18 @@
 #include "difftextwindow.h"
 #include "merger.h"
 #include <qpainter.h>
+//Added by qt3to4:
+#include <QPaintEvent>
+#include <QResizeEvent>
+#include <QMouseEvent>
+#include <QFocusEvent>
+#include <Q3VBoxLayout>
+#include <QTimerEvent>
+#include <QEvent>
+#include <Q3CString>
+#include <QDropEvent>
+#include <QDragEnterEvent>
+#include <Q3HBoxLayout>
 #include <assert.h>
 #include <qpixmap.h>
 #include <qstatusbar.h>
@@ -32,7 +44,7 @@
 #include <qtextcodec.h>
 #include <optiondialog.h>
 #include <math.h>
-#include <qdragobject.h>
+#include <q3dragobject.h>
 #include <klocale.h>
 #include <kfiledialog.h>
 
@@ -137,11 +149,11 @@ DiffTextWindow::DiffTextWindow(
    OptionDialog* pOptionDialog,
    int winIdx
    )
-   : QWidget(pParent, 0, Qt::WNoAutoErase | WRepaintNoErase)
+   : QWidget(pParent, 0, Qt::WNoAutoErase | Qt::WNoAutoErase)
 {
    d = new DiffTextWindowData(this);
    d->m_pDiffTextWindowFrame = pParent;
-   setFocusPolicy( ClickFocus );
+   setFocusPolicy( Qt::ClickFocus );
    setAcceptDrops( true );
 
    d->m_pOptionDialog = pOptionDialog;
@@ -155,6 +167,7 @@ DiffTextWindow::DiffTextWindow(
    d->m_winIdx = winIdx;
 
    setFont(d->m_pOptionDialog->m_font);
+   setAutoFillBackground( true );
 }
 
 DiffTextWindow::~DiffTextWindow()
@@ -219,7 +232,7 @@ void DiffTextWindow::setPaintingAllowed( bool bAllowPainting )
 
 void DiffTextWindow::dragEnterEvent( QDragEnterEvent* e )
 {
-   e->accept( QUriDrag::canDecode(e) || QTextDrag::canDecode(e) );
+   e->accept( Q3UriDrag::canDecode(e) || Q3TextDrag::canDecode(e) );
    // Note that the corresponding drop is handled in KDiff3App::eventFilter().
 }
 
@@ -948,12 +961,12 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
 
    //if ( invalidRect.size()==size() )
    {  // double buffering, obsolete with Qt4
-      QPainter painter(this); // Remove for Qt4
-      QPixmap pixmap( invalidRect.size() );// Remove for Qt4
+      //QPainter painter(this); // Remove for Qt4
+      //QPixmap pixmap( invalidRect.size() );// Remove for Qt4
 
-      MyPainter p( &pixmap, d->m_pOptionDialog->m_bRightToLeftLanguage, width(), fontMetrics().width('W') ); // For Qt4 change pixmap to this
+      MyPainter p( this, d->m_pOptionDialog->m_bRightToLeftLanguage, width(), fontMetrics().width('W') ); // For Qt4 change pixmap to this
 
-      p.translate( -invalidRect.x(), -invalidRect.y() );// Remove for Qt4
+      //p.translate( -invalidRect.x(), -invalidRect.y() );// Remove for Qt4
 
       p.setFont( font() );
       p.QPainter::fillRect( invalidRect, d->m_pOptionDialog->m_bgColor );
@@ -962,7 +975,7 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
       // p.drawLine( m_invalidRect.x(), m_invalidRect.y(), m_invalidRect.right(), m_invalidRect.bottom() ); // For test only
       p.end();
 
-      painter.drawPixmap( invalidRect.x(), invalidRect.y(), pixmap );// Remove for Qt4
+      //painter.drawPixmap( invalidRect.x(), invalidRect.y(), pixmap );// Remove for Qt4
    }
 //    else
 //    {  // no double buffering
@@ -1578,7 +1591,7 @@ DiffTextWindowFrame::DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusB
    d->m_pTopLine = new QLabel(d->m_pTopLineWidget);
    d->m_pDiffTextWindow = 0;
    d->m_pDiffTextWindow = new DiffTextWindow( this, pStatusBar, pOptionDialog, winIdx );
-   QHBoxLayout* pHL = new QHBoxLayout(d->m_pTopLineWidget);
+   Q3HBoxLayout* pHL = new Q3HBoxLayout(d->m_pTopLineWidget);
    pHL->setMargin(2);
    pHL->setSpacing(2);
 
@@ -1587,7 +1600,7 @@ DiffTextWindowFrame::DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusB
    pHL->addWidget( d->m_pBrowseButton, 0 );
    pHL->addWidget( d->m_pTopLine, 0 );
 
-   QVBoxLayout* pVL = new QVBoxLayout( this, 0, 0 );
+   Q3VBoxLayout* pVL = new Q3VBoxLayout( this, 0, 0 );
    pVL->addWidget( d->m_pTopLineWidget, 0 );
    pVL->addWidget( d->m_pDiffTextWindow, 1 );
 
@@ -1669,12 +1682,10 @@ bool DiffTextWindowFrame::eventFilter( QObject* o, QEvent* e )
       if ( e->type()==QEvent::FocusOut )
          std::swap(c1,c2);
 
-      p.setColor(QColorGroup::Background, c2);
-      d->m_pTopLineWidget->setPalette( p );
-      d->m_pBrowseButton->setPalette( p );
-      d->m_pFileSelection->setPalette( p );
+      p.setColor(QPalette::Window, c2);
+      setPalette( p );
 
-      p.setColor(QColorGroup::Foreground, c1);
+      p.setColor(QPalette::WindowText, c1);
       d->m_pLabel->setPalette( p );
       d->m_pTopLine->setPalette( p );
    }
@@ -1682,10 +1693,10 @@ bool DiffTextWindowFrame::eventFilter( QObject* o, QEvent* e )
    {
       QDropEvent* d = static_cast<QDropEvent*>(e);
       
-      if ( QUriDrag::canDecode( d ) ) 
+      if ( Q3UriDrag::canDecode( d ) ) 
       {
          QStringList lst;
-         QUriDrag::decodeLocalFiles( d, lst );
+         Q3UriDrag::decodeLocalFiles( d, lst );
 
          if ( lst.count() > 0 )
          {
@@ -1711,6 +1722,12 @@ bool DiffTextWindowFrame::eventFilter( QObject* o, QEvent* e )
    return false;
 }
 
+void DiffTextWindowFrame::paintEvent(QPaintEvent*)
+{
+   QPainter p(this);
+   p.fillRect( rect(), palette().window() );
+}
+
 void DiffTextWindowFrame::slotReturnPressed()
 {
    DiffTextWindow* pDTW = d->m_pDiffTextWindow;
@@ -1732,13 +1749,13 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
    }
 }
 
-QCString encodeString( const QString& s )
+Q3CString encodeString( const QString& s )
 {
    QTextCodec* c = QTextCodec::codecForLocale();
    if (c!=0)
       return c->fromUnicode( s );
    else
-      return QCString( s.latin1() );
+      return Q3CString( s.latin1() );
 }
 
-#include "difftextwindow.moc"
+//#include "difftextwindow.moc"

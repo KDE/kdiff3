@@ -1,3 +1,5 @@
+//Added by qt3to4:
+#include <QLabel>
 /*
  *   kdiff3 - Text Diff And Merge Tool
  *   Copyright (C) 2002-2006  Joachim Eibl, joachim.eibl at gmx.de

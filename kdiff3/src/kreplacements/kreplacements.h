@@ -21,19 +21,26 @@
 #include "common.h"
 
 #include <qobject.h>
-#include <qtabdialog.h>
-#include <qmainwindow.h>
+#include <q3tabdialog.h>
+#include <q3mainwindow.h>
 #include <qaction.h>
-#include <qfiledialog.h>
+#include <q3filedialog.h>
 #include <qapplication.h>
-#include <qvbox.h>
+#include <q3vbox.h>
 #include <qpushbutton.h>
 #include <qstatusbar.h>
-#include <qtoolbar.h>
-#include <qprogressbar.h>
-#include <qpopupmenu.h>
+#include <q3toolbar.h>
+#include <q3progressbar.h>
+#include <q3popupmenu.h>
 #include <qstringlist.h>
 #include <qprinter.h>
+//Added by qt3to4:
+#include <Q3CString>
+#include <QPixmap>
+#include <QPaintEvent>
+#include <Q3Frame>
+#include <QLabel>
+#include <Q3ValueList>
 
 #include <map>
 #include <list>
@@ -83,9 +90,9 @@ public:
 #define RESTORE(x)
 #define _UNLOAD(x)
 
-typedef QPopupMenu KPopupMenu;
+typedef Q3PopupMenu KPopupMenu;
 
-class KDialogBase : public QTabDialog
+class KDialogBase : public Q3TabDialog
 {
    Q_OBJECT
 public:
@@ -99,8 +106,8 @@ public:
 
    int BarIcon(const QString& iconName, int );
 
-   QVBox* addVBoxPage( const QString& name, const QString& info, int );
-   QFrame* addPage(  const QString& name, const QString& info, int );
+   Q3VBox* addVBoxPage( const QString& name, const QString& info, int );
+   Q3Frame* addPage(  const QString& name, const QString& info, int );
    int spacingHint();
 
    virtual void accept();
@@ -115,7 +122,7 @@ protected slots:
     virtual void slotDefault( void );
 };
 
-class KFileDialog : public QFileDialog
+class KFileDialog : public Q3FileDialog
 {
 public:
    static KURL getSaveURL( const QString &startDir=QString::null,
@@ -136,16 +143,16 @@ public:
 
 typedef QStatusBar KStatusBar;
 
-class KToolBar : public QToolBar
+class KToolBar : public Q3ToolBar
 {
 public:
-   KToolBar(QMainWindow* parent);
+   KToolBar(Q3MainWindow* parent);
 
    enum BarPosition {Top, Bottom, Left, Right};
    BarPosition barPos();
    void setBarPos(BarPosition);
 private:
-   QMainWindow* m_pMainWindow;
+   Q3MainWindow* m_pMainWindow;
 };
 
 class KActionCollection
@@ -168,7 +175,7 @@ namespace KParts
    class ReadWritePart;
 }
 
-class KMainWindow : public QMainWindow
+class KMainWindow : public Q3MainWindow
 {
    Q_OBJECT
 private:
@@ -178,17 +185,17 @@ protected:
    virtual bool queryClose() = 0;
    virtual bool queryExit() = 0;
 public:
-   QPopupMenu* fileMenu;
-   QPopupMenu* editMenu;
-   QPopupMenu* directoryMenu;
-   QPopupMenu* dirCurrentItemMenu;
-   QPopupMenu* dirCurrentSyncItemMenu;
-   QPopupMenu* movementMenu;
-   QPopupMenu* mergeMenu;
-   QPopupMenu* diffMenu;
-   QPopupMenu* windowsMenu;
-   QPopupMenu* settingsMenu;
-   QPopupMenu* helpMenu;
+   Q3PopupMenu* fileMenu;
+   Q3PopupMenu* editMenu;
+   Q3PopupMenu* directoryMenu;
+   Q3PopupMenu* dirCurrentItemMenu;
+   Q3PopupMenu* dirCurrentSyncItemMenu;
+   Q3PopupMenu* movementMenu;
+   Q3PopupMenu* mergeMenu;
+   Q3PopupMenu* diffMenu;
+   Q3PopupMenu* windowsMenu;
+   Q3PopupMenu* settingsMenu;
+   Q3PopupMenu* helpMenu;
 
    KToolBar*  m_pToolBar;
 
@@ -198,7 +205,7 @@ public:
    void createGUI();
    void createGUI(KParts::ReadWritePart*){createGUI();}
 
-   QList<KMainWindow>* memberList;
+   QList<KMainWindow*>* memberList;
 public slots:
    void slotHelp();
    void slotAbout();
@@ -219,20 +226,20 @@ class KAction : public QAction
 {
    Q_OBJECT
 public:
-   KAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bToggle=false, bool bMenu=true);
+   KAction(const QString& text, const QIcon& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bToggle=false, bool bMenu=true);
    KAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bToggle=false, bool bMenu=true);
    void init(QObject* receiver, const char* slot, KActionCollection* actionCollection, 
         const char* name, bool bToggle, bool bMenu);
    void setStatusText(const QString&);
-   void plug(QPopupMenu*);
+   void plug(Q3PopupMenu*);
 };
 
 class KToggleAction : public KAction
 {
 public:
-   KToggleAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu=true);
+   KToggleAction(const QString& text, const QIcon& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu=true);
    KToggleAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu=true);
-   KToggleAction(const QString& text, const QIconSet& icon, int accel, KActionCollection* actionCollection, const char* name, bool bMenu=true);
+   KToggleAction(const QString& text, const QIcon& icon, int accel, KActionCollection* actionCollection, const char* name, bool bMenu=true);
    void setChecked(bool);
    bool isChecked();
 };
@@ -300,7 +307,7 @@ class KPrinter : public QPrinter
 public:
    KPrinter();
    enum e_PageSelection {ApplicationSide};
-   QValueList<int> pageList();
+   Q3ValueList<int> pageList();
    void setCurrentPage(int);
    void setPageSelection(e_PageSelection);
 };
@@ -346,7 +353,7 @@ public:
    std::list<AboutDataEntry> m_creditList;
 };
 
-typedef QValueList<QCString> QCStringList;
+typedef Q3ValueList<Q3CString> QCStringList;
 
 class KCmdLineArgs
 {
@@ -413,7 +420,7 @@ public:
 namespace KIO
 {
    enum UDSEntry {};
-   typedef QValueList<UDSEntry> UDSEntryList;
+   typedef Q3ValueList<UDSEntry> UDSEntryList;
    class Job : public QObject
    {
    public:
@@ -442,7 +449,7 @@ namespace KIO
    TransferJob* put( KURL, int, bool, bool, bool );
 };
 
-typedef QProgressBar KProgress;
+typedef Q3ProgressBar KProgress;
 
 class KInstance : public QObject
 {
@@ -479,7 +486,7 @@ namespace KParts
    {
    public:
    ReadOnlyPart(){}
-   ReadOnlyPart(QObject*,const QCString&){}
+   ReadOnlyPart(QObject*,const Q3CString&){}
    void setInstance( KInstance* ){}
    QString m_file;
    };
@@ -487,7 +494,7 @@ namespace KParts
    class ReadWritePart : public ReadOnlyPart
    {
    public:
-   ReadWritePart(QObject*,const QCString&){}
+   ReadWritePart(QObject*,const Q3CString&){}
    void setReadWrite(bool){}
    };
 

@@ -13,6 +13,9 @@
 
 #include <qdialog.h>
 #include <qfileinfo.h>
+//Added by qt3to4:
+#include <QLabel>
+#include <QTimerEvent>
 #include <kprogress.h>
 #include <kio/job.h>
 #include <kio/jobclasses.h>
@@ -216,6 +219,7 @@ private:
    std::list<ProgressLevelData> m_progressStack;
    
    int m_progressDelayTimer;
+   std::list<QEventLoop*> m_eventLoopStack;
 
    KProgress* m_pProgressBar;
    KProgress* m_pSubProgressBar;

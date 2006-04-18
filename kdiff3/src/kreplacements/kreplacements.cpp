@@ -23,16 +23,23 @@
 
 #include <qnamespace.h>
 #include <qmessagebox.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qmenubar.h>
 #include <qpainter.h>
 #include <qcolordialog.h>
 #include <qfontdialog.h>
 #include <qlabel.h>
-#include <qtextbrowser.h>
+#include <q3textbrowser.h>
 #include <qtextstream.h>
 #include <qlayout.h>
-#include <qdockarea.h>
+#include <q3dockarea.h>
+//Added by qt3to4:
+#include <QPaintEvent>
+#include <Q3VBoxLayout>
+#include <Q3Frame>
+#include <Q3CString>
+#include <Q3ValueList>
+#include <QPixmap>
 
 #include <vector>
 #include <iostream>
@@ -79,10 +86,10 @@ static void showHelp()
       HINSTANCE hi = FindExecutableA( helpFile.fileName().ascii(), helpFile.dirPath(true).ascii(), buf );
       if ( int(hi)<=32 )
       {
-         static QTextBrowser* pBrowser = 0;
+         static Q3TextBrowser* pBrowser = 0;
          if (pBrowser==0)
          {
-            pBrowser = new QTextBrowser( 0 );
+            pBrowser = new Q3TextBrowser( 0 );
             pBrowser->setMinimumSize( 600, 400 );
          }
          pBrowser->setSource(helpFile.filePath());
@@ -95,10 +102,10 @@ static void showHelp()
       }
 
    #else
-      static QTextBrowser* pBrowser = 0;
+      static Q3TextBrowser* pBrowser = 0;
       if (pBrowser==0)
       {
-         pBrowser = new QTextBrowser( 0 );
+         pBrowser = new Q3TextBrowser( 0 );
          pBrowser->setMinimumSize( 600, 400 );
       }
       pBrowser->setSource("/usr/local/share/doc/kdiff3/en/index.html");
@@ -162,7 +169,7 @@ int KMessageBox::warningYesNoCancel( QWidget* parent, const QString& text, const
 
 KDialogBase::KDialogBase( int, const QString& caption, int, int, QWidget* parent, const char* name,
   bool /*modal*/, bool )
-: QTabDialog( parent, name, true /* modal */ )
+: Q3TabDialog( parent, name, true /* modal */ )
 {
    setCaption( caption );
    setDefaultButton();
@@ -196,16 +203,16 @@ int KDialogBase::BarIcon(const QString& /*iconName*/, int )
 }
 
 
-QVBox* KDialogBase::addVBoxPage( const QString& name, const QString& /*info*/, int )
+Q3VBox* KDialogBase::addVBoxPage( const QString& name, const QString& /*info*/, int )
 {
-   QVBox* p = new QVBox(this, name.ascii());
+   Q3VBox* p = new Q3VBox(this, name.ascii());
    addTab( p, name );
    return p;
 }
 
-QFrame* KDialogBase::addPage(  const QString& name, const QString& /*info*/, int )
+Q3Frame* KDialogBase::addPage(  const QString& name, const QString& /*info*/, int )
 {
-   QFrame* p = new QFrame( this, name.ascii() );
+   Q3Frame* p = new Q3Frame( this, name.ascii() );
    addTab( p, name );
    return p;
 }
@@ -226,7 +233,7 @@ void KDialogBase::accept()
       slotOk();
       s_inAccept = false;
       if ( s_bAccepted )
-         QTabDialog::accept();
+         Q3TabDialog::accept();
    }
    else
    {
@@ -256,7 +263,7 @@ KURL KFileDialog::getSaveURL( const QString &startDir,
                               const QString &filter,
                               QWidget *parent, const QString &caption)
 {
-   QString s = QFileDialog::getSaveFileName(startDir, filter, parent, 0, caption);
+   QString s = Q3FileDialog::getSaveFileName(startDir, filter, parent, 0, caption);
    return KURL(s);
 }
 
@@ -265,7 +272,7 @@ KURL KFileDialog::getOpenURL( const QString &  startDir,
                            QWidget *  parent,
                            const QString &  caption )
 {
-   QString s = QFileDialog::getOpenFileName(startDir, filter, parent, 0, caption);
+   QString s = Q3FileDialog::getOpenFileName(startDir, filter, parent, 0, caption);
    return KURL(s);
 }
 
@@ -273,7 +280,7 @@ KURL KFileDialog::getExistingURL( const QString &  startDir,
                                QWidget *  parent,
                                const QString &  caption)
 {
-   QString s = QFileDialog::getExistingDirectory(startDir, parent, 0, caption);
+   QString s = Q3FileDialog::getExistingDirectory(startDir, parent, 0, caption);
    return KURL(s);
 }
 
@@ -282,7 +289,7 @@ QString KFileDialog::getSaveFileName (const QString &startDir,
                         QWidget *parent, 
                         const QString &caption)
 {
-   return QFileDialog::getSaveFileName( startDir, filter, parent, 0, caption );
+   return Q3FileDialog::getSaveFileName( startDir, filter, parent, 0, caption );
 }
 
 
@@ -297,46 +304,46 @@ KToolBar::BarPosition KToolBar::barPos()
 
 void KToolBar::setBarPos(BarPosition bp)
 {
-   if ( bp == Left ) m_pMainWindow->moveDockWindow( this, DockLeft );
-   else if ( bp == Right ) m_pMainWindow->moveDockWindow( this, DockRight );
-   else if ( bp == Bottom ) m_pMainWindow->moveDockWindow( this, DockBottom );
-   else if ( bp == Top ) m_pMainWindow->moveDockWindow( this, DockTop );
+   if ( bp == Left ) m_pMainWindow->moveDockWindow( this, Qt::DockLeft );
+   else if ( bp == Right ) m_pMainWindow->moveDockWindow( this, Qt::DockRight );
+   else if ( bp == Bottom ) m_pMainWindow->moveDockWindow( this, Qt::DockBottom );
+   else if ( bp == Top ) m_pMainWindow->moveDockWindow( this, Qt::DockTop );
 }
 
-KToolBar::KToolBar( QMainWindow* parent )
-: QToolBar( parent )
+KToolBar::KToolBar( Q3MainWindow* parent )
+: Q3ToolBar( parent )
 {
    m_pMainWindow = parent;
 }
 
 
 KMainWindow::KMainWindow( QWidget* parent, const char* name )
-: QMainWindow( parent, name ), m_actionCollection(this)
+: Q3MainWindow( parent, name ), m_actionCollection(this)
 {
-   fileMenu = new QPopupMenu();
+   fileMenu = new Q3PopupMenu();
    menuBar()->insertItem(i18n("&File"), fileMenu);
-   editMenu = new QPopupMenu();
+   editMenu = new Q3PopupMenu();
    menuBar()->insertItem(i18n("&Edit"), editMenu);
-   directoryMenu = new QPopupMenu();
+   directoryMenu = new Q3PopupMenu();
    menuBar()->insertItem(i18n("&Directory"), directoryMenu);
    dirCurrentItemMenu = 0;
    dirCurrentSyncItemMenu = 0;
-   movementMenu = new QPopupMenu();
+   movementMenu = new Q3PopupMenu();
    menuBar()->insertItem(i18n("&Movement"), movementMenu);
-   diffMenu = new QPopupMenu();
+   diffMenu = new Q3PopupMenu();
    menuBar()->insertItem(i18n("D&iffview"), diffMenu);
-   mergeMenu = new QPopupMenu();
+   mergeMenu = new Q3PopupMenu();
    menuBar()->insertItem(i18n("&Merge"), mergeMenu);
-   windowsMenu = new QPopupMenu();
+   windowsMenu = new Q3PopupMenu();
    menuBar()->insertItem(i18n("&Window"), windowsMenu);
-   settingsMenu = new QPopupMenu();
+   settingsMenu = new Q3PopupMenu();
    menuBar()->insertItem(i18n("&Settings"), settingsMenu);
-   helpMenu = new QPopupMenu();
+   helpMenu = new Q3PopupMenu();
    menuBar()->insertItem(i18n("&Help"), helpMenu);
 
    m_pToolBar = new KToolBar(this);
       
-   memberList = new QList<KMainWindow>;
+   memberList = new QList<KMainWindow*>;
    memberList->append(this);
 }
 
@@ -359,10 +366,10 @@ void KMainWindow::createGUI()
 
 void KMainWindow::slotAbout()
 {
-   QTabDialog d;
+   Q3TabDialog d;
    d.setCaption("About " + s_appName);
-   QTextBrowser* tb1 = new QTextBrowser(&d);
-   tb1->setWordWrap( QTextEdit::NoWrap );
+   Q3TextBrowser* tb1 = new Q3TextBrowser(&d);
+   tb1->setWordWrap( Q3TextEdit::NoWrap );
    tb1->setText(
       s_appName + " Version " + s_version +
       "\n\n" + s_description + 
@@ -383,8 +390,8 @@ void KMainWindow::slotAbout()
       if ( !i->m_weblink.isEmpty() ) s2 += "   " + i->m_weblink + "\n";
       s2 += "\n";
    }
-   QTextBrowser* tb2 = new QTextBrowser(&d);
-   tb2->setWordWrap( QTextEdit::NoWrap );
+   Q3TextBrowser* tb2 = new Q3TextBrowser(&d);
+   tb2->setWordWrap( Q3TextEdit::NoWrap );
    tb2->setText(s2);
    d.addTab(tb2,i18n("A&uthor"));
    
@@ -397,8 +404,8 @@ void KMainWindow::slotAbout()
       if ( !i->m_weblink.isEmpty() ) s3 += "   " + i->m_weblink + "\n";
       s3 += "\n";
    }
-   QTextBrowser* tb3 = new QTextBrowser(&d);
-   tb3->setWordWrap( QTextEdit::NoWrap );
+   Q3TextBrowser* tb3 = new Q3TextBrowser(&d);
+   tb3->setWordWrap( Q3TextEdit::NoWrap );
    tb3->setText(s3);
    d.addTab(tb3,i18n("&Thanks To"));
    
@@ -449,7 +456,7 @@ void KConfig::readConfigFile( const QString& configFileName )
    }
 
    QFile f( m_fileName );
-   if ( f.open(IO_ReadOnly) )
+   if ( f.open(QIODevice::ReadOnly) )
    {                               // file opened successfully
       QTextStream t( &f );         // use a text stream
       load(t);
@@ -460,7 +467,7 @@ void KConfig::readConfigFile( const QString& configFileName )
 KConfig::~KConfig()
 {
    QFile f(m_fileName);
-   if ( f.open( IO_WriteOnly | IO_Translate ) )
+   if ( f.open( QIODevice::WriteOnly | QIODevice::Text ) )
    {                               // file opened successfully
        QTextStream t( &f );        // use a text stream
        save(t);
@@ -494,9 +501,9 @@ void KAction::init(QObject* receiver, const char* slot, KActionCollection* actio
       {
          if ( p->dirCurrentItemMenu==0 )
          {
-            p->dirCurrentItemMenu = new QPopupMenu();
+            p->dirCurrentItemMenu = new Q3PopupMenu();
             p->directoryMenu->insertItem(i18n("Current Item Merge Operation"), p->dirCurrentItemMenu);
-            p->dirCurrentSyncItemMenu = new QPopupMenu();
+            p->dirCurrentSyncItemMenu = new Q3PopupMenu();
             p->directoryMenu->insertItem(i18n("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
          }
          addTo( p->dirCurrentItemMenu );
@@ -505,9 +512,9 @@ void KAction::init(QObject* receiver, const char* slot, KActionCollection* actio
       {
          if ( p->dirCurrentItemMenu==0 )
          {
-            p->dirCurrentItemMenu = new QPopupMenu();
+            p->dirCurrentItemMenu = new Q3PopupMenu();
             p->directoryMenu->insertItem(i18n("Current Item Merge Operation"), p->dirCurrentItemMenu);
-            p->dirCurrentSyncItemMenu = new QPopupMenu();
+            p->dirCurrentSyncItemMenu = new Q3PopupMenu();
             p->directoryMenu->insertItem(i18n("Current Item Sync Operation"), p->dirCurrentSyncItemMenu);
          }
          addTo( p->dirCurrentSyncItemMenu );
@@ -521,12 +528,13 @@ void KAction::init(QObject* receiver, const char* slot, KActionCollection* actio
 }
 
 
-KAction::KAction(const QString& text, const QIconSet& icon, int accel,
+KAction::KAction(const QString& text, const QIcon& icon, int accel,
  QObject* receiver, const char* slot, KActionCollection* actionCollection,
  const char* name, bool bToggle, bool bMenu
  )
-: QAction ( text, icon, text, accel, actionCollection->m_pMainWindow, name, bToggle )
+: QAction ( icon, text, accel, actionCollection->m_pMainWindow, name )
 {
+   setToggleAction( bToggle );
    KMainWindow* p = actionCollection->m_pMainWindow;
    if ( !icon.isNull() && p ) this->addTo( p->m_pToolBar );
 
@@ -537,8 +545,9 @@ KAction::KAction(const QString& text, int accel,
  QObject* receiver, const char* slot, KActionCollection* actionCollection,
  const char* name, bool bToggle, bool bMenu
  )
-: QAction ( text, text, accel, actionCollection->m_pMainWindow, name, bToggle )
+: QAction ( text, accel, actionCollection->m_pMainWindow, name )
 {
+   setToggleAction( bToggle );
    init(receiver,slot,actionCollection,name,bToggle,bMenu);
 }
 
@@ -546,13 +555,13 @@ void KAction::setStatusText(const QString&)
 {
 }
 
-void KAction::plug(QPopupMenu* menu)
+void KAction::plug(Q3PopupMenu* menu)
 {
    addTo(menu);
 }
 
 
-KToggleAction::KToggleAction(const QString& text, const QIconSet& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu)
+KToggleAction::KToggleAction(const QString& text, const QIcon& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu)
 : KAction( text, icon, accel, receiver, slot, actionCollection, name, true, bMenu)
 {
 }
@@ -562,7 +571,7 @@ KToggleAction::KToggleAction(const QString& text, int accel, QObject* receiver, 
 {
 }
 
-KToggleAction::KToggleAction(const QString& text, const QIconSet& icon, int accel, KActionCollection* actionCollection, const char* name, bool bMenu)
+KToggleAction::KToggleAction(const QString& text, const QIcon& icon, int accel, KActionCollection* actionCollection, const char* name, bool bMenu)
 : KAction( text, icon, accel, 0, 0, actionCollection, name, true, bMenu)
 {
 }
@@ -586,7 +595,7 @@ KAction* KStdAction::open( QWidget* parent, const char* slot, KActionCollection*
 {
    #include "../xpm/fileopen.xpm"
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Open"), QIconSet(QPixmap(fileopen)), Qt::CTRL+Qt::Key_O, parent, slot, actionCollection, "open", false, false);
+   KAction* a = new KAction( i18n("Open"), QIcon(QPixmap(fileopen)), Qt::CTRL+Qt::Key_O, parent, slot, actionCollection, "open", false, false);
    if(p){ a->addTo( p->fileMenu ); }
    return a;
 }
@@ -595,7 +604,7 @@ KAction* KStdAction::save( QWidget* parent, const char* slot, KActionCollection*
 {
    #include "../xpm/filesave.xpm"
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Save"), QIconSet(QPixmap(filesave)), Qt::CTRL+Qt::Key_S, parent, slot, actionCollection, "save", false, false);
+   KAction* a = new KAction( i18n("Save"), QIcon(QPixmap(filesave)), Qt::CTRL+Qt::Key_S, parent, slot, actionCollection, "save", false, false);
    if(p){ a->addTo( p->fileMenu ); }
    return a;
 }
@@ -612,7 +621,7 @@ KAction* KStdAction::print( QWidget* parent, const char* slot, KActionCollection
 {
    #include "../xpm/fileprint.xpm"
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Print..."), QIconSet(QPixmap(fileprint)),Qt::CTRL+Qt::Key_P, parent, slot, actionCollection, "print", false, false);
+   KAction* a = new KAction( i18n("Print..."), QIcon(QPixmap(fileprint)),Qt::CTRL+Qt::Key_P, parent, slot, actionCollection, "print", false, false);
    if(p) a->addTo( p->fileMenu );
    return a;
 }
@@ -731,7 +740,7 @@ KFontChooser::KFontChooser( QWidget* pParent, const QString& /*name*/, bool, con
 : QWidget(pParent)
 {
    m_pParent = pParent;
-   QVBoxLayout* pLayout = new QVBoxLayout( this );
+   Q3VBoxLayout* pLayout = new Q3VBoxLayout( this );
    m_pSelectFont = new QPushButton(i18n("Select Font"), this );
    connect(m_pSelectFont, SIGNAL(clicked()), this, SLOT(slotSelectFont()));
    pLayout->addWidget(m_pSelectFont);
@@ -824,9 +833,9 @@ void KColorButton::slotClicked()
 KPrinter::KPrinter()
 {
 }
-QValueList<int> KPrinter::pageList()
+Q3ValueList<int> KPrinter::pageList()
 {
-   QValueList<int> vl;
+   Q3ValueList<int> vl;
    int to = toPage();
    for(int i=fromPage(); i<=to; ++i)
    {
@@ -932,7 +941,7 @@ QString KCmdLineArgs::getOption( const QString& s )
       const char* pos = strchr( optName,' ' );
       int len = pos==0 ? strlen( optName ) : pos - optName;
 
-      if( s == (const char*)( QCString( optName, len+1) ) )
+      if( s == (const char*)( Q3CString( optName, len+1) ) )
       {
          return s_vOption[j].isEmpty() ? QString() : s_vOption[j].last();
       }
@@ -951,7 +960,7 @@ QCStringList KCmdLineArgs::getOptionList( const QString& s )
       const char* pos = strchr( optName,' ' );
       int len = pos==0 ? strlen( optName ) : pos - optName;
 
-      if( s == (const char*)( QCString( optName, len+1) ) )
+      if( s == (const char*)( Q3CString( optName, len+1) ) )
       {
          return s_vOption[j];
       }
@@ -1010,7 +1019,7 @@ KApplication::KApplication()
    }
    m_config.readConfigFile(configFileName);
 
-   QStringList ignorableCmdLineOptionsList = m_config.readListEntry("IgnorableCmdLineOptions", QString("-u;-query;-html;-abort"), '|');
+   QStringList ignorableCmdLineOptionsList = m_config.readListEntry("IgnorableCmdLineOptions", QStringList("-u;-query;-html;-abort"), '|');
    QString ignorableCmdLineOptions;
    if ( !ignorableCmdLineOptionsList.isEmpty() ) 
       ignorableCmdLineOptions = ignorableCmdLineOptionsList.front() + ";";
@@ -1049,7 +1058,7 @@ KApplication::KApplication()
          if (j==nofOptions)
          {
             QString s;
-            s = QString("Unknown option: ") +  s_argv[i] + "\n";
+            s = QString("Unknown option: ") +  QString(s_argv[i]) + "\n";
             s += "If KDiff3 should ignore this option, run KDiff3 normally and edit\n"
                  "the \"Command line options to ignore\" in the \"Integration Settings\".\n\n";
 

@@ -24,9 +24,18 @@
 #include <qdir.h>
 #include <qfile.h>
 #include <qcursor.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qstatusbar.h>
 #include <qregexp.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QFocusEvent>
+#include <QTextStream>
+#include <QPaintEvent>
+#include <QKeyEvent>
+#include <QTimerEvent>
+#include <QResizeEvent>
+#include <QMouseEvent>
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -42,9 +51,9 @@ MergeResultWindow::MergeResultWindow(
    OptionDialog* pOptionDialog,
    QStatusBar* pStatusBar
    )
-: QWidget( pParent, 0, WRepaintNoErase )
+: QWidget( pParent, 0, Qt::WNoAutoErase )
 {
-   setFocusPolicy( QWidget::ClickFocus );
+   setFocusPolicy( Qt::ClickFocus );
 
    m_firstLine = 0;
    m_firstColumn = 0;
@@ -1101,9 +1110,9 @@ void MergeResultWindow::collectHistoryInformation(
       QString s( pld->pLine, pld->size );
       historyLead = s.section(' ',0,0,QString::SectionIncludeLeadingSep);
    }
-   QRegExp historyStart = m_pOptionDialog->m_historyStartRegExp;
+   QRegExp historyStart( m_pOptionDialog->m_historyStartRegExp );
    ++id3l; // Skip line with "$Log ... $"
-   QRegExp newHistoryEntry = m_pOptionDialog->m_historyEntryStartRegExp;
+   QRegExp newHistoryEntry( m_pOptionDialog->m_historyEntryStartRegExp );
    QStringList parenthesesGroups;
    findParenthesesGroups( m_pOptionDialog->m_historyEntryStartRegExp, parenthesesGroups );
    QString key;
@@ -1333,7 +1342,7 @@ void MergeResultWindow::slotRegExpAutoMerge()
    if ( m_pOptionDialog->m_autoMergeRegExp.isEmpty() )
       return;
 
-   QRegExp vcsKeywords = m_pOptionDialog->m_autoMergeRegExp;
+   QRegExp vcsKeywords( m_pOptionDialog->m_autoMergeRegExp );
    MergeLineList::iterator i;
    for ( i=m_mergeLineList.begin(); i!=m_mergeLineList.end(); ++i )
    {
@@ -1941,7 +1950,7 @@ void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
    {
       pos = max2(pos,0);
       line = max2(line,0);
-      if ( e->state() & Qt::ShiftButton )
+      if ( e->state() & Qt::ShiftModifier )
       {
          if (m_selection.firstLine==-1)
             m_selection.start( line, pos );
@@ -2113,10 +2122,10 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
    QString str = melIt->getString( this );
    int x = convertToPosInText( str, m_cursorXPos, m_pOptionDialog->m_tabSize );
 
-   bool bCtrl  = ( e->state() & Qt::ControlButton ) != 0 ;
-   bool bShift = ( e->state() & Qt::ShiftButton   ) != 0 ;
+   bool bCtrl  = ( e->state() & Qt::ControlModifier ) != 0 ;
+   bool bShift = ( e->state() & Qt::ShiftModifier   ) != 0 ;
    #ifdef _WIN32
-   bool bAlt   = ( e->state() & Qt::AltButton     ) != 0 ;
+   bool bAlt   = ( e->state() & Qt::AltModifier     ) != 0 ;
    if ( bCtrl && bAlt ){ bCtrl=false; bAlt=false; }  // AltGr-Key pressed.
    #endif
 
@@ -2213,7 +2222,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
             for(;;) {
                const QString s = melIt1->getString(this);
                if ( !s.isEmpty() ) {
-                  unsigned int i;
+                  int i;
                   for( i=0; i<s.length(); ++i ){ if(s[i]!=' ' && s[i]!='\t') break; }
                   if (i<s.length()) {
                      indentation = s.left(i);
@@ -2424,7 +2433,7 @@ QString MergeResultWindow::getSelection()
 
                // Consider tabs
 
-               for( unsigned int i=0; i<str.length(); ++i )
+               for( int i=0; i<str.length(); ++i )
                {
                   int spaces = 1;
                   if ( str[i]=='\t' )
@@ -2672,7 +2681,7 @@ bool MergeResultWindow::saveDocument( const QString& fileName )
    }
 
    QByteArray dataArray;
-   QTextStream textOutStream(dataArray, IO_WriteOnly);
+   QTextStream textOutStream(dataArray, QIODevice::WriteOnly);
    textOutStream.setCodec( m_pOptionDialog->m_pEncodingOut );
 
    int line = 0;
@@ -2766,7 +2775,7 @@ void MergeResultWindow::setSelection( int firstLine, int startPos, int lastLine,
 }
 
 Overview::Overview( QWidget* pParent, OptionDialog* pOptions )
-: QWidget( pParent, 0, WRepaintNoErase )
+: QWidget( pParent, 0, Qt::WNoAutoErase )
 {
    m_pDiff3LineList = 0;
    m_pOptions = pOptions;
@@ -3028,4 +3037,4 @@ void Overview::paintEvent( QPaintEvent* )
 }
 
 
-#include "mergeresultwindow.moc"
+//#include "mergeresultwindow.moc"

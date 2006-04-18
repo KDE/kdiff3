@@ -22,6 +22,9 @@
 #define SMALLDIALOGS_H
 
 #include <qdialog.h>
+//Added by qt3to4:
+#include <QLabel>
+#include <QEvent>
 #include "diff.h"
 
 class OptionDialog;

@@ -28,6 +28,10 @@
 #include <qdialog.h>
 #include <qsplitter.h>
 #include <qscrollbar.h>
+//Added by qt3to4:
+#include <QResizeEvent>
+#include <QEvent>
+#include <Q3PopupMenu>
 
 // include files for KDE
 #include <kapplication.h>
@@ -65,7 +69,7 @@ class ReversibleScrollBar : public QScrollBar
    bool* m_pbRightToLeftLanguage;
    int m_realVal;
 public:
-   ReversibleScrollBar( Orientation o, QWidget* pParent, bool* pbRightToLeftLanguage )
+   ReversibleScrollBar( Qt::Orientation o, QWidget* pParent, bool* pbRightToLeftLanguage )
       : QScrollBar( o, pParent )
    {
       m_pbRightToLeftLanguage=pbRightToLeftLanguage;
@@ -248,7 +252,7 @@ class KDiff3App : public QSplitter
     KToggleAction *overviewModeBC;
 
 
-    QPopupMenu* m_pMergeEditorPopupMenu;
+    Q3PopupMenu* m_pMergeEditorPopupMenu;
 
     QSplitter*  m_pMainSplitter;
     QWidget*    m_pMainWidget;
