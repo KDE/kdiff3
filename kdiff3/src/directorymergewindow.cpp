@@ -2873,8 +2873,8 @@ void DirectoryMergeWindow::initDirectoryMergeActions( QObject* pKDiff3App, KActi
    m_pDirFoldAll = new KAction(i18n("Fold All Subdirs"), 0, p, SLOT(slotFoldAllSubdirs()), ac, "dir_fold_all");
    m_pDirUnfoldAll = new KAction(i18n("Unfold All Subdirs"), 0, p, SLOT(slotUnfoldAllSubdirs()), ac, "dir_unfold_all");
    m_pDirRescan = new KAction(i18n("Rescan"), Qt::SHIFT+Qt::Key_F5, p, SLOT(reload()), ac, "dir_rescan");
-   m_pDirSaveMergeState = new KAction(i18n("Save Directory Merge State ..."), 0, p, SLOT(slotSaveMergeState()), ac, "dir_save_merge_state");
-   m_pDirLoadMergeState = new KAction(i18n("Load Directory Merge State ..."), 0, p, SLOT(slotLoadMergeState()), ac, "dir_load_merge_state");
+   m_pDirSaveMergeState = 0;//new KAction(i18n("Save Directory Merge State ..."), 0, p, SLOT(slotSaveMergeState()), ac, "dir_save_merge_state");
+   m_pDirLoadMergeState = 0;//new KAction(i18n("Load Directory Merge State ..."), 0, p, SLOT(slotLoadMergeState()), ac, "dir_load_merge_state");
    m_pDirChooseAEverywhere = new KAction(i18n("Choose A for All Items"), 0, p, SLOT(slotChooseAEverywhere()), ac, "dir_choose_a_everywhere");
    m_pDirChooseBEverywhere = new KAction(i18n("Choose B for All Items"), 0, p, SLOT(slotChooseBEverywhere()), ac, "dir_choose_b_everywhere");
    m_pDirChooseCEverywhere = new KAction(i18n("Choose C for All Items"), 0, p, SLOT(slotChooseCEverywhere()), ac, "dir_choose_c_everywhere");
