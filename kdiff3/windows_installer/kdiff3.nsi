@@ -1,77 +1,88 @@
-;NSIS Modern User Interface version 1.63
-;MultiLanguage Example Script
-;Written by Joost Verburg
+;KDiff3-NSIS configuration
+;Based on Modern User Interface example files
 ;Apdapted for KDiff3 by Sebastien Fricker and Joachim Eibl
-;Requires nsis20b3
-;
-;c:\Programme\NSIS\makensis kdiff3
-;
-!define MUI_PRODUCT "KDiff3" ;Define your own software name here
-!include "version.nsi"
-!ifndef MUI_VERSION
-!define MUI_VERSION "" ;Define your own software version here
-!endif
-!ifndef QTDIR
-!define QTDIR "f:\qt\3.3.5"
-!endif
-!ifndef WINDOWS_DIR
-!define WINDOWS_DIR "c:\windows"
-!endif
-!include "MUI.nsh"
+;Requires nsis_v2.16
 
-
+!define KDIFF3_VERSION "0.9.90"
 
 ;--------------------------------
-;Configuration
-    InstallDir "$PROGRAMFILES\KDiff3"
-    InstallDirRegKey HKEY_LOCAL_MACHINE "SOFTWARE\${MUI_PRODUCT}" ""
-    ;DirShow show ; (make this hide to not let the user change it)
-    ;DirText "Select the directory to install ${MUI_PRODUCT} in:"
+;Include Modern UI
 
-  ;General
-  OutFile "KDiff3Setup_${MUI_VERSION}.exe"
-  setCompressor bzip2
+  !include "MUI.nsh"
 
+;--------------------------------
+;General
+
+  ;Name and file
+  Name "KDiff3"
+  OutFile "KDiff3Setup_${KDIFF3_VERSION}.exe"
+
+  ;Default installation folder
+  InstallDir "$PROGRAMFILES\KDiff3"
   
+  ;Get installation folder from registry if available
+  InstallDirRegKey HKCU "Software\KDiff3" ""
+
+;--------------------------------
+;Variables
+
+  Var MUI_TEMP
+  Var STARTMENU_FOLDER
+
+;--------------------------------
+;Interface Settings
+
+  !define MUI_ABORTWARNING
+  !define MUI_HEADERIMAGE
+  !define MUI_HEADERIMAGE_BITMAP "kdiff3.bmp" ; optional
+
+;--------------------------------
+;Language Selection Dialog Settings
+
   ;Remember the installer language
   !define MUI_LANGDLL_REGISTRY_ROOT "HKCU" 
-  !define MUI_LANGDLL_REGISTRY_KEY "Software\${MUI_PRODUCT}" 
+  !define MUI_LANGDLL_REGISTRY_KEY "Software\KDiff3" 
   !define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
-  ;Remember the Start Menu Folder
-  !define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKCU" 
-  !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\${MUI_PRODUCT}" 
-  !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "${MUI_PRODUCT}"
-  !define TEMP $R0
 
 ;--------------------------------
-;Modern UI Configuration
+;Pages
 
-  !define MUI_LICENSEPAGE
-  !define MUI_COMPONENTSPAGE
-  !define MUI_DIRECTORYPAGE
-  !define MUI_STARTMENUPAGE
+  !insertmacro MUI_PAGE_LICENSE $(MUILicense)
+  !insertmacro MUI_PAGE_COMPONENTS
+  !insertmacro MUI_PAGE_DIRECTORY
   
-  !define MUI_ABORTWARNING
+  ;Start Menu Folder Page Configuration
+  !define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKCU" 
+  !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\KDiff3" 
+  !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "Start Menu Folder"
   
-  !define MUI_UNINSTALLER
-  !define MUI_UNCONFIRMPAGE
-  !define MUI_HEADERBITMAP "kdiff3.bmp"
+  !insertmacro MUI_PAGE_STARTMENU Application $STARTMENU_FOLDER
+  
+  !insertmacro MUI_PAGE_INSTFILES
+  
+  !insertmacro MUI_UNPAGE_CONFIRM
+  !insertmacro MUI_UNPAGE_INSTFILES
+
 ;--------------------------------
 ;Languages
 
-  !insertmacro MUI_LANGUAGE "English"
+  !insertmacro MUI_LANGUAGE "English" # first language is the default language
   !insertmacro MUI_LANGUAGE "French"
   !insertmacro MUI_LANGUAGE "German"
   !insertmacro MUI_LANGUAGE "Spanish"
   !insertmacro MUI_LANGUAGE "SimpChinese"
-  !insertmacro MUI_LANGUAGE "TradChinese"    
+  !insertmacro MUI_LANGUAGE "TradChinese"
   !insertmacro MUI_LANGUAGE "Japanese"
   !insertmacro MUI_LANGUAGE "Korean"
   !insertmacro MUI_LANGUAGE "Italian"
   !insertmacro MUI_LANGUAGE "Dutch"
   !insertmacro MUI_LANGUAGE "Danish"
+  !insertmacro MUI_LANGUAGE "Swedish"
+  !insertmacro MUI_LANGUAGE "Norwegian"
+  !insertmacro MUI_LANGUAGE "Finnish"
   !insertmacro MUI_LANGUAGE "Greek"
   !insertmacro MUI_LANGUAGE "Russian"
+  !insertmacro MUI_LANGUAGE "Portuguese"
   !insertmacro MUI_LANGUAGE "PortugueseBR"
   !insertmacro MUI_LANGUAGE "Polish"
   !insertmacro MUI_LANGUAGE "Ukrainian"
@@ -82,204 +93,172 @@
   !insertmacro MUI_LANGUAGE "Hungarian"
   !insertmacro MUI_LANGUAGE "Thai"
   !insertmacro MUI_LANGUAGE "Romanian"
+  !insertmacro MUI_LANGUAGE "Latvian"
   !insertmacro MUI_LANGUAGE "Macedonian"
+  !insertmacro MUI_LANGUAGE "Estonian"
   !insertmacro MUI_LANGUAGE "Turkish"
-  
+  !insertmacro MUI_LANGUAGE "Lithuanian"
+  !insertmacro MUI_LANGUAGE "Catalan"
+  !insertmacro MUI_LANGUAGE "Slovenian"
+  !insertmacro MUI_LANGUAGE "Serbian"
+  !insertmacro MUI_LANGUAGE "SerbianLatin"
+  !insertmacro MUI_LANGUAGE "Arabic"
+  !insertmacro MUI_LANGUAGE "Farsi"
+  !insertmacro MUI_LANGUAGE "Hebrew"
+  !insertmacro MUI_LANGUAGE "Indonesian"
+  !insertmacro MUI_LANGUAGE "Mongolian"
+  !insertmacro MUI_LANGUAGE "Luxembourgish"
+  !insertmacro MUI_LANGUAGE "Albanian"
+  !insertmacro MUI_LANGUAGE "Breton"
+  !insertmacro MUI_LANGUAGE "Belarusian"
+  !insertmacro MUI_LANGUAGE "Icelandic"
+  !insertmacro MUI_LANGUAGE "Malay"
+  !insertmacro MUI_LANGUAGE "Bosnian"
+  !insertmacro MUI_LANGUAGE "Kurdish"
+
 ;--------------------------------
-;Language Strings
-    
-  ;Descriptions
-  LangString DESC_SecCopyUI ${LANG_ENGLISH} "Software: English description"
-  LangString DESC_SecCopyUI ${LANG_FRENCH} "Software: French description"
-  LangString DESC_SecCopyUI ${LANG_GERMAN} "Software: German description"
-  LangString DESC_SecCopyUI ${LANG_SPANISH} "Software: Spanish description"
-  LangString DESC_SecCopyUI ${LANG_SIMPCHINESE} "Software: Simplified Chinese description"
-  LangString DESC_SecCopyUI ${LANG_TRADCHINESE} "Software: Traditional Chinese description"
-  LangString DESC_SecCopyUI ${LANG_JAPANESE} "Software: Japanese description"
-  LangString DESC_SecCopyUI ${LANG_KOREAN} "Software: Korean description"
-  LangString DESC_SecCopyUI ${LANG_ITALIAN} "Software: Italian description"
-  LangString DESC_SecCopyUI ${LANG_DUTCH} "Software: Dutch description"
-  LangString DESC_SecCopyUI ${LANG_DANISH} "Software: Danish description"
-  LangString DESC_SecCopyUI ${LANG_GREEK} "Software: Greek description"
-  LangString DESC_SecCopyUI ${LANG_RUSSIAN} "Software: Russian description"
-  LangString DESC_SecCopyUI ${LANG_PORTUGUESEBR} "Software: Portuguese (Brasil) description"
-  LangString DESC_SecCopyUI ${LANG_POLISH} "Software: Polish description"
-  LangString DESC_SecCopyUI ${LANG_UKRAINIAN} "Software: Ukrainian description"
-  LangString DESC_SecCopyUI ${LANG_CZECH} "Software: Czechian description"
-  LangString DESC_SecCopyUI ${LANG_SLOVAK} "Software: Slovakian description"
-  LangString DESC_SecCopyUI ${LANG_CROATIAN} "Software: Slovakian description"
-  LangString DESC_SecCopyUI ${LANG_BULGARIAN} "Software: Bulgarian description"
-  LangString DESC_SecCopyUI ${LANG_HUNGARIAN} "Software: Hungarian description"
-  LangString DESC_SecCopyUI ${LANG_THAI} "Software: Thai description"
-  LangString DESC_SecCopyUI ${LANG_ROMANIAN} "Software: Romanian description"
-  LangString DESC_SecCopyUI ${LANG_MACEDONIAN} "Software: Macedonian description"
-  LangString DESC_SecCopyUI ${LANG_TURKISH} "Software: Turkish description"
-  
-;--------------------------------
-;Data
-  
-  LicenseData /LANG=${LANG_ENGLISH} "COPYING"
-  LicenseData /LANG=${LANG_FRENCH} "COPYING"
-  LicenseData /LANG=${LANG_GERMAN} "COPYING"
-  LicenseData /LANG=${LANG_SPANISH} "COPYING"
-  LicenseData /LANG=${LANG_SIMPCHINESE} "COPYING"
-  LicenseData /LANG=${LANG_TRADCHINESE} "COPYING"
-  LicenseData /LANG=${LANG_JAPANESE} "COPYING"
-  LicenseData /LANG=${LANG_KOREAN} "COPYING"
-  LicenseData /LANG=${LANG_ITALIAN} "COPYING"
-  LicenseData /LANG=${LANG_DUTCH} "COPYING"
-  LicenseData /LANG=${LANG_DANISH} "COPYING"
-  LicenseData /LANG=${LANG_GREEK} "COPYING"
-  LicenseData /LANG=${LANG_RUSSIAN} "COPYING"
-  LicenseData /LANG=${LANG_PORTUGUESEBR} "COPYING"
-  LicenseData /LANG=${LANG_POLISH} "COPYING"
-  LicenseData /LANG=${LANG_UKRAINIAN} "COPYING"
-  LicenseData /LANG=${LANG_CZECH} "COPYING"
-  LicenseData /LANG=${LANG_SLOVAK} "COPYING"
-  LicenseData /LANG=${LANG_CROATIAN} "COPYING"
-  LicenseData /LANG=${LANG_BULGARIAN} "COPYING"
-  LicenseData /LANG=${LANG_HUNGARIAN} "COPYING"
-  LicenseData /LANG=${LANG_THAI} "COPYING"
-  LicenseData /LANG=${LANG_ROMANIAN} "COPYING"
-  LicenseData /LANG=${LANG_MACEDONIAN} "COPYING"
-  LicenseData /LANG=${LANG_TURKISH} "COPYING"
+;License Language String
+
+  LicenseLangString MUILicense ${LANG_ENGLISH} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_FRENCH} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_GERMAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_SPANISH} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_SIMPCHINESE} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_TRADCHINESE} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_JAPANESE} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_KOREAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_ITALIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_DUTCH} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_DANISH} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_SWEDISH} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_NORWEGIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_FINNISH} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_GREEK} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_RUSSIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_PORTUGUESE} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_PORTUGUESEBR} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_POLISH} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_UKRAINIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_CZECH} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_SLOVAK} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_CROATIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_BULGARIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_HUNGARIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_THAI} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_ROMANIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_LATVIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_MACEDONIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_ESTONIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_TURKISH} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_LITHUANIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_CATALAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_SLOVENIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_SERBIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_SERBIANLATIN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_ARABIC} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_FARSI} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_HEBREW} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_INDONESIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_MONGOLIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_LUXEMBOURGISH} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_ALBANIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_BRETON} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_BELARUSIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_ICELANDIC} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_MALAY} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_BOSNIAN} "COPYING.txt"
+  LicenseLangString MUILicense ${LANG_KURDISH} "COPYING.txt"
 
 ;--------------------------------
 ;Reserve Files
   
-  ;Things that need to be extracted on first (keep these lines before any File command!)
-  ;Only useful for BZIP2 compression
-  !insertmacro MUI_RESERVEFILE_LANGDLL
+  ;These files should be inserted before other files in the data block
+  ;Keep these lines before any File command
+  ;Only for solid compression (by default, solid compression is enabled for BZIP2 and LZMA)
   
+  !insertmacro MUI_RESERVEFILE_LANGDLL
+
 ;--------------------------------
 ;Installer Sections
-  
-Section "Software" SecCopyUI 2
-SectionIn 2 RO
 
-    SetOutPath "$INSTDIR"
-    ; add files / whatever that need to be installed here.
-    WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\${MUI_PRODUCT}" "" "$INSTDIR"
-    WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}" "DisplayName" "${MUI_PRODUCT} (remove only)"
-    WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}" "UninstallString" '"$INSTDIR\uninst.exe"'
-  DetailPrint "Writing files"
+Section "Software" SecSoftware
+SectionIn RO
+
+    ; Make the KDiff3 uninstaller visible via "System Settings: Add or Remove Programs", (Systemsteuerung/Software)
+    WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\KDiff3" "" "$INSTDIR"
+    WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\KDiff3" "DisplayName" "KDiff3 (remove only)"
+    WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\KDiff3" "UninstallString" '"$INSTDIR\Uninstall.exe"'
+
+
+  SetOutPath "$INSTDIR"
+  
+  ;ADD YOUR OWN FILES HERE...
+    DetailPrint "Writing files"
     File "kdiff3.exe"
-    File "kdiff3_da.qm"
-    File "kdiff3_de.qm"
-    File "kdiff3_en_GB.qm"
-    File "kdiff3_es.qm"
-    File "kdiff3_et.qm"
-    File "kdiff3_fr.qm"
-    File "kdiff3_hi.qm"
-    File "kdiff3_hu.qm"
-    File "kdiff3_it.qm"
-    File "kdiff3_ja.qm"
-    File "kdiff3_lt.qm"
-    File "kdiff3_nl.qm"
-    File "kdiff3_pl.qm"
-    File "kdiff3_pt.qm"
-    File "kdiff3_pt_BR.qm"
-    File "kdiff3_ru.qm"
-    File "kdiff3_sr.qm"
-    File "kdiff3_sr@Latn.qm"
-    File "kdiff3_sv.qm"
-    File "kdiff3_ta.qm"
-    File "kdiff3_tg.qm"
-    File "kdiff3_tr.qm"
-    File "kdiff3_zh_CN.qm"
-    File "kdiff3_bg.qm"
-    File "kdiff3_br.qm"
-    File "kdiff3_cs.qm"
-    File "kdiff3_el.qm"
-    File "kdiff3_ga.qm"
-    File "kdiff3_ka.qm"
-    File "kdiff3_rw.qm"
-    File "qt_ar.qm"
-    File "qt_cs.qm"
-    File "qt_de.qm"
-    File "qt_fr.qm"
-    File "qt_iw.qm"
-    File "qt_ru.qm"
-    File "qt_sk.qm"
-    File "qt_es.qm"
-    File "qt_he.qm"
-    File "COPYING"
+    File "COPYING.txt"
     File "Readme_Win.txt"
     File "ChangeLog.txt"
 
-  !insertmacro MUI_STARTMENU_WRITE_BEGIN
+  
+  ;Store installation folder
+  WriteRegStr HKCU "Software\KDiff3" "" $INSTDIR
+  
+  ;Create uninstaller
+  WriteUninstaller "$INSTDIR\Uninstall.exe"
+
+  !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     
-    DetailPrint "Creating shortcuts"
-    CreateDirectory "$SMPROGRAMS\${MUI_STARTMENUPAGE_VARIABLE}"
-    CreateShortCut "$SMPROGRAMS\${MUI_STARTMENUPAGE_VARIABLE}\KDiff3.lnk" "$INSTDIR\kdiff3.exe"
-    CreateShortCut "$SMPROGRAMS\${MUI_STARTMENUPAGE_VARIABLE}\Uninstall.lnk" "$INSTDIR\uninst.exe"
-    CreateShortCut "$SMPROGRAMS\${MUI_STARTMENUPAGE_VARIABLE}\Readme.lnk" "$INSTDIR\Readme_Win.txt"
+    ;Create shortcuts
+    CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
+    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\KDiff3.lnk" "$INSTDIR\kdiff3.exe"
+    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Readme.lnk" "$INSTDIR\Readme_Win.txt"
+    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+    CreateShortCut "$QUICKLAUNCH\KDiff3.lnk" "$INSTDIR\kdiff3.exe"     
   
   !insertmacro MUI_STARTMENU_WRITE_END
-  
-    
-    ; write out uninstaller
-    WriteUninstaller "$INSTDIR\uninst.exe"
-    
-    
-  ;Store install folder
-  WriteRegStr HKCU "Software\${MUI_PRODUCT}" "" $INSTDIR
-    CreateShortCut "$QUICKLAUNCH\KDiff3.lnk" "$INSTDIR\kdiff3.exe"
-     
-SectionEnd
- 
-Section "Documentation"
 
+SectionEnd
+
+Section "Documentation" SecDocumentation
     DetailPrint "Writing the documentation"
     SetOutPath "$INSTDIR"
     File /r doc
-    SetOutPath "$INSTDIR"
-    CreateShortCut "$SMPROGRAMS\${MUI_STARTMENUPAGE_VARIABLE}\Documentation.lnk" "$INSTDIR\doc\index.html"
-    WriteRegStr HKCR "Application\kdiff3.exe\shell\open\command" "" '"$INSTDIR\kdiff3.exe" "%1"'    
+    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Documentation.lnk" "$INSTDIR\doc\index.html"
 SectionEnd
 
-SubSection "Integration"
-Section "WinCVS"
-  DetailPrint "Integration to WinCVS"
-  MessageBox  MB_OK "If WinCVS is running, please close it before proceeding."
-  WriteRegStr HKCU "Software\WinCvs\wincvs\CVS settings" "P_Extdiff" '$INSTDIR\kdiff3.exe'
-  WriteRegBin HKCU "Software\WinCvs\wincvs\CVS settings" "P_DiffUseExtDiff" 01
+Section "Translations" SecTranslations
+    DetailPrint "Writing the translation messages"
+    SetOutPath "$INSTDIR"
+    File /r translations
+SectionEnd
 
-SectionEnd 
-Section "Explorer"
+SubSection "Integration" SecIntegration
+
+Section "Explorer" SecIntegrationExplorer
   DetailPrint "Integration to Explorer"
 ;  WriteRegStr HKCR "Directory\shell\KDiff3" "" '&KDiff3'
 ;  WriteRegStr HKCR "Directory\shell\KDiff3\command" "" '"$INSTDIR\kdiff3.exe" "%1"'
     CreateShortCut "$SMPROGRAMS\..\..\SendTo\KDiff3.lnk" '"$INSTDIR\kdiff3.exe"'
-SectionEnd 
-Section "TortoiseSVN"
+SectionEnd
+
+Section "WinCVS" SecIntegrationWinCVS
+  DetailPrint "Integration to WinCVS"
+  #MessageBox  MB_OK "If WinCVS is running, please close it before proceeding."
+  WriteRegStr HKCU "Software\WinCvs\wincvs\CVS settings" "P_Extdiff" '$INSTDIR\kdiff3.exe'
+  WriteRegBin HKCU "Software\WinCvs\wincvs\CVS settings" "P_DiffUseExtDiff" 01
+SectionEnd
+
+Section "TortoiseSVN" SecIntegrationTortoiseSVN
   DetailPrint "Integration to TortoiseSVN"
   WriteRegStr HKCU "Software\TortoiseSVN\" "Diff" '$INSTDIR\kdiff3.exe %base %mine  --L1 Base --L2 Mine'
   WriteRegStr HKCU "Software\TortoiseSVN\" "Merge" '$INSTDIR\kdiff3.exe %base %mine %theirs -o %merged --L1 Base --L2 Mine --L3 Theirs'
 SectionEnd
 SubSectionEnd
- 
-;Display the Finish header
-;Insert this macro after the sections if you are not using a finish page
-!insertmacro MUI_SECTIONS_FINISHHEADER
 
 ;--------------------------------
 ;Installer Functions
 
 Function .onInit
-;  SetOutPath $TEMP1
-;  File /oname=spltmp.bmp "promotion.bmp"
-
-; optional
-; File /oname=spltmp.wav "my_splashshit.wav"
-
-;  advsplash::show 5000 600 40 0 $TEMP1\spltmp
-
-;  Pop $0 ; $0 has '1' if the user closed the splash screen early,
-         ; '0' if everything closed normal, and '-1' if some error occured.
-
-;  Delete $TEMP1\spltmp.bmp
-;  Delete $TEMP1\spltmp.wav
 
   !insertmacro MUI_LANGDLL_DISPLAY
 
@@ -288,35 +267,60 @@ FunctionEnd
 ;--------------------------------
 ;Descriptions
 
-!insertmacro MUI_FUNCTIONS_DESCRIPTION_BEGIN
-  !insertmacro MUI_DESCRIPTION_TEXT ${SecCopyUI} $(DESC_SecCopyUI)
-!insertmacro MUI_FUNCTIONS_DESCRIPTION_END
+  ;USE A LANGUAGE STRING IF YOU WANT YOUR DESCRIPTIONS TO BE LANGUAGE SPECIFIC
+
+  ;Assign descriptions to sections
+  !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecSoftware} "Main program."
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecDocumentation} "English documentation in HTML-format (Docs for other languages are available on the homepage.)"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecTranslations}  "Translations for visible strings in many languages. Not needed for US-English."
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegration}   "Integrate KDiff3 with certain programs."
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationExplorer}  "Integrate KDiff3 with Explorer. Adds an entry for KDiff3 in the Send-To context menu."
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationWinCVS}  "Integrate KDiff3 with WinCVS. (Please close WinCVS before proceeding.)"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationTortoiseSVN}  "Integrate KDiff3 with TortoiseSVN."
+  !insertmacro MUI_FUNCTION_DESCRIPTION_END
+
  
 ;--------------------------------
 ;Uninstaller Section
 
 Section "Uninstall"
 
-; add delete commands to delete whatever files/registry keys/etc you installed here.
-  ReadRegStr ${TEMP} "${MUI_STARTMENUPAGE_REGISTRY_ROOT}" "${MUI_STARTMENUPAGE_REGISTRY_KEY}" "${MUI_STARTMENUPAGE_REGISTRY_VALUENAME}"
-  StrCmp ${TEMP} "" noshortcuts
+  Delete "$INSTDIR\Uninstall.exe"
+  Delete "$INSTDIR\kdiff3.exe"
+  Delete "$INSTDIR\COPYING.txt"
+  Delete "$INSTDIR\Readme_Win.txt"
+  Delete "$INSTDIR\ChangeLog.txt"
+
+  RMDir /r "$INSTDIR\doc"
+  RMDir /r "$INSTDIR\translations"
+  RMDir "$INSTDIR"                   # without /r the dir is only removed if completely empty
   
-    RMDir /r "$SMPROGRAMS\${TEMP}"
+  !insertmacro MUI_STARTMENU_GETFOLDER Application $MUI_TEMP
     
-  noshortcuts:
-
-  RMDir "$INSTDIR"
-  Delete "$INSTDIR\uninst.exe"
-    DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}"
-
+  Delete "$SMPROGRAMS\$MUI_TEMP\Uninstall.lnk"
+  Delete "$SMPROGRAMS\$MUI_TEMP\KDiff3.lnk"
+  Delete "$SMPROGRAMS\$MUI_TEMP\Readme.lnk"
+  Delete "$SMPROGRAMS\$MUI_TEMP\Documentation.lnk"
   Delete "$QUICKLAUNCH\KDiff3.lnk"
-    RMDir /r "$INSTDIR"
-  DetailPrint "Integration to Explorer"
-;  DeleteRegKey HKCR "Directory\shell\KDiff3\command"
-;  DeleteRegKey HKCR "Directory\shell\KDiff3"
   Delete "$SMPROGRAMS\..\..\SendTo\KDiff3.lnk"
+  
+  ;Delete empty start menu parent diretories
+  StrCpy $MUI_TEMP "$SMPROGRAMS\$MUI_TEMP"
+ 
+  startMenuDeleteLoop:
+	ClearErrors
+    RMDir $MUI_TEMP
+    GetFullPathName $MUI_TEMP "$MUI_TEMP\.."
+    
+    IfErrors startMenuDeleteLoopDone
+  
+    StrCmp $MUI_TEMP $SMPROGRAMS startMenuDeleteLoopDone startMenuDeleteLoop
+  startMenuDeleteLoopDone:
 
-    !insertmacro MUI_UNFINISHHEADER
+  DeleteRegKey /ifempty HKCU "Software\KDiff3"
+  DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\KDiff3"
+  DeleteRegKey HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\KDiff3"
 
 SectionEnd
 
@@ -325,8 +329,6 @@ SectionEnd
 
 Function un.onInit
 
-  ;Get language from registry
-  ReadRegStr $LANGUAGE HKCU "Software\${MUI_PRODUCT}" "Installer Language"
+  !insertmacro MUI_UNGETLANGUAGE
   
 FunctionEnd
-
