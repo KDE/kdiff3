@@ -21,7 +21,7 @@
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qfont.h>
-#include <q3frame.h>
+#include <QFrame>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qlineedit.h> 
@@ -507,7 +507,7 @@ void OptionDialog::setupOtherOptions()
 
 void OptionDialog::setupFontPage( void )
 {
-   Q3Frame *page = addPage( i18n("Font"), i18n("Editor & Diff Output Font" ),
+   QFrame *page = addPage( i18n("Font"), i18n("Editor & Diff Output Font" ),
                              BarIcon("fonts", KIcon::SizeMedium ) );
 
    Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
@@ -539,7 +539,7 @@ void OptionDialog::setupFontPage( void )
 
 void OptionDialog::setupColorPage( void )
 {
-  Q3Frame *page = addPage( i18n("Color"), i18n("Colors Settings"),
+  QFrame *page = addPage( i18n("Color"), i18n("Colors Settings"),
      BarIcon("colorize", KIcon::SizeMedium ) );
   Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 
@@ -667,7 +667,7 @@ void OptionDialog::setupColorPage( void )
 
 void OptionDialog::setupEditPage( void )
 {
-   Q3Frame *page = addPage( i18n("Editor"), i18n("Editor Behavior"),
+   QFrame *page = addPage( i18n("Editor"), i18n("Editor Behavior"),
                            BarIcon("edit", KIcon::SizeMedium ) );
    Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 
@@ -729,7 +729,7 @@ void OptionDialog::setupEditPage( void )
 
 void OptionDialog::setupDiffPage( void )
 {
-   Q3Frame *page = addPage( i18n("Diff and Merge"), i18n("Diff and Merge Settings"),
+   QFrame *page = addPage( i18n("Diff and Merge"), i18n("Diff and Merge Settings"),
                            BarIcon("misc", KIcon::SizeMedium ) );
    Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 
@@ -945,7 +945,7 @@ void OptionDialog::setupDiffPage( void )
 
 void OptionDialog::setupDirectoryMergePage( void )
 {
-   Q3Frame *page = addPage( i18n("Directory Merge"), i18n("Directory Merge"),
+   QFrame *page = addPage( i18n("Directory Merge"), i18n("Directory Merge"),
                            BarIcon("folder", KIcon::SizeMedium ) );
    Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 
@@ -1118,7 +1118,7 @@ static void insertCodecs(OptionComboBox* p)
 
 void OptionDialog::setupRegionalPage( void )
 {
-   Q3Frame *page = addPage( i18n("Regional Settings"), i18n("Regional Settings"),
+   QFrame *page = addPage( i18n("Regional Settings"), i18n("Regional Settings"),
                            BarIcon("locale"/*"charset"*/, KIcon::SizeMedium ) );
    Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 
@@ -1318,7 +1318,7 @@ static char* countryMap[]={
 
 void OptionDialog::setupIntegrationPage( void )
 {
-   Q3Frame *page = addPage( i18n("Integration"), i18n("Integration Settings"),
+   QFrame *page = addPage( i18n("Integration"), i18n("Integration Settings"),
                            BarIcon("launch"/*"charset"*/, KIcon::SizeMedium ) );
    Q3VBoxLayout *topLayout = new Q3VBoxLayout( page, 5, spacingHint() );
 

@@ -75,7 +75,7 @@ FileAccess::~FileAccess()
 {
    if( !m_localCopy.isEmpty() )
    {
-      removeFile( m_localCopy );
+      removeTempFile( m_localCopy );
    }
 }
 
@@ -149,12 +149,8 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
          {
             // Try reading a clearcase file
             m_localCopy = FileAccess::tempFileName();
-            QString ctName = m_localCopy + ".cleartool"; // Because cleartool can't overwrite existing file
-            QString cmd = "cleartool get -to \"" + ctName + "\"  \"" + m_absFilePath + "\"";
+            QString cmd = "cleartool get -to \"" + m_localCopy + "\"  \"" + m_absFilePath + "\"";
             ::system( cmd.local8Bit() );
-            FileAccess ctFile(ctName);
-            ctFile.copyFile(m_localCopy);
-            ctFile.removeFile();
 
             QFileInfo fi( m_localCopy );
             m_bReadable    = fi.isReadable();
@@ -394,6 +390,20 @@ bool FileAccess::writeFile( const void* pSrcBuffer, unsigned long length )
             pp.setCurrent( double(i)/length );
             if ( pp.wasCancelled() ) return false;
          }
+         f.close();
+#ifndef _WIN32
+         if ( isExecutable() )  // value is true if the old file was executable
+         {
+            // Preserve attributes
+            struct stat srcFileStatus;
+            int statResult = ::stat( filePath().ascii(), &srcFileStatus );
+            if (statResult==0)
+            {
+               ::chmod ( filePath().ascii(), srcFileStatus.st_mode | S_IXUSR );
+            }
+         }
+#endif
+
          return true;
       }
    }
@@ -465,21 +475,29 @@ QString FileAccess::tempFileName()
             fileName = tmpDir + "/kdiff3_" + QString::number(i) +".tmp";
          if ( ! FileAccess::exists(fileName) && 
               QFile(fileName).open(QIODevice::WriteOnly) ) // open, truncate and close the file, true if successful
-		{
+         {
             break;
-		}
+         }
       }
-      return QDir::convertSeparators(fileName);
+      return QDir::convertSeparators(fileName+".2");
 
    #else  // using KDE
 
       KTempFile tmpFile;
       //tmpFile.setAutoDelete( true );  // We only want the name. Delete the precreated file immediately.
       tmpFile.close();
-      return tmpFile.name();
+      return tmpFile.name()+".2";
 
    #endif
 }
+
+bool FileAccess::removeTempFile( const QString& name ) // static
+{
+   if (name.endsWith(".2"))
+      FileAccess(name.left(name.length()-2)).removeFile();
+   return FileAccess(name).removeFile();
+}
+
 
 bool FileAccess::makeDir( const QString& dirName )
 {

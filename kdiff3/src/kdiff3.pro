@@ -44,7 +44,7 @@ win32 {
 
    QMAKE_CXXFLAGS_DEBUG  += -DQT_NO_ASCII_CAST
    QMAKE_CXXFLAGS_RELEASE  += -DNDEBUG -DQT_NO_ASCII_CAST
-   RC_FILE = kdiff3.rc
+   RC_FILE = kdiff3win.rc
 }
 unix {
   documentation.path = /usr/local/share/doc/kdiff3

@@ -1998,8 +1998,9 @@ void KDiff3App::slotWinFocusPrev()
    //if ( m_pDirectoryMergeInfo->isVisible() ) visibleWidgetList.push_back(m_pDirectoryMergeInfo->getInfoList());
 
    std::list<QWidget*>::iterator i = std::find( visibleWidgetList.begin(),  visibleWidgetList.end(), focus);
+   if ( i==visibleWidgetList.begin() )
+      i=visibleWidgetList.end();
    --i;
-   if ( i==visibleWidgetList.end() ) --i;
    if ( i!=visibleWidgetList.end() )
    {
       if ( *i == m_pDirectoryMergeWindow  && ! dirShowBoth->isChecked() )

@@ -149,7 +149,7 @@ DiffTextWindow::DiffTextWindow(
    OptionDialog* pOptionDialog,
    int winIdx
    )
-   : QWidget(pParent, 0, Qt::WNoAutoErase | Qt::WNoAutoErase)
+   : QWidget(pParent, 0, Qt::WNoAutoErase )
 {
    d = new DiffTextWindowData(this);
    d->m_pDiffTextWindowFrame = pParent;

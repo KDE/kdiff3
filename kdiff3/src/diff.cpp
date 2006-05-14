@@ -459,7 +459,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding)
          }
          if (fileNameInPP != fileNameIn1)
          {
-            FileAccess::removeFile( fileNameInPP );
+            FileAccess::removeTempFile( fileNameInPP );
          }
       }
 
@@ -491,10 +491,10 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding)
             m_pOptionDialog->m_LineMatchingPreProcessorCmd = "";
             m_lmppData.readFile( fileNameIn2 );
          }
-         FileAccess::removeFile( fileNameOut2 );
+         FileAccess::removeTempFile( fileNameOut2 );
          if (fileNameInPP != fileNameIn2)
          {
-            FileAccess::removeFile( fileNameInPP );
+            FileAccess::removeTempFile( fileNameInPP );
          }
       }
       else if ( m_pOptionDialog->m_bIgnoreComments || m_pOptionDialog->m_bIgnoreCase )
@@ -549,13 +549,13 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding)
    // Remove unneeded temporary files. (A temp file from clipboard must not be deleted.)
    if ( !bTempFileFromClipboard && !m_tempInputFileName.isEmpty() )
    {
-      FileAccess::removeFile( m_tempInputFileName );
+      FileAccess::removeTempFile( m_tempInputFileName );
       m_tempInputFileName = "";
    }
 
    if ( !fileNameOut1.isEmpty() )
    {
-      FileAccess::removeFile( fileNameOut1 );
+      FileAccess::removeTempFile( fileNameOut1 );
       fileNameOut1="";
    }
 }
@@ -1265,66 +1265,36 @@ void correctManualDiffAlignment( Diff3LineList& d3ll, ManualDiffHelpList* pManua
                      int wi3 = missingWinIdx;
                      if ( i3->getLineInFile(wi3) >= 0 )
                      {
-                        if ( iMDHL->firstLine(wi3) == i3->getLineInFile(wi3) )
+                        // not found, move the line before iDest
+                        Diff3Line d3l;
+                        if ( wi3==1 )
                         {
-                           // found, align the line with iDest
-                           if ( wi3==1 )
-                           {
-                              iDest->lineA = i3->lineA;
-                              i3->lineA = -1;
-                              i3->bAEqB = false;
-                              i3->bAEqC = false;
-                           }
-                           if ( wi3==2 )
-                           {
-                              iDest->lineB = i3->lineB;
-                              i3->lineB = -1;
-                              i3->bAEqB = false;
-                              i3->bBEqC = false;
-                           }
-                           if ( wi3==3 )
-                           {
-                              iDest->lineC = i3->lineC;
-                              i3->lineC = -1;
-                              i3->bAEqC = false;
-                              i3->bBEqC = false;
-                           }
-
-                           break;
+                           if (i3->bAEqB)  // Stop moving lines up if one equal is found.
+                              break;
+                           d3l.lineA = i3->lineA;
+                           i3->lineA = -1;
+                           i3->bAEqB = false;
+                           i3->bAEqC = false;
                         }
-                        else
+                        if ( wi3==2 )
                         {
-                           // not found, move the line before iDest
-                           Diff3Line d3l;
-                           if ( wi3==1 )
-                           {
-                              if (i3->bAEqB)
-                                 continue;
-                              d3l.lineA = i3->lineA;
-                              i3->lineA = -1;
-                              i3->bAEqB = false;
-                              i3->bAEqC = false;
-                           }
-                           if ( wi3==2 )
-                           {
-                              if (i3->bAEqB)
-                                 continue;
-                              d3l.lineB = i3->lineB;
-                              i3->lineB = -1;
-                              i3->bAEqB = false;
-                              i3->bBEqC = false;
-                           }
-                           if ( wi3==3 )
-                           {
-                              if (i3->bAEqC)
-                                 continue;
-                              d3l.lineC = i3->lineC;
-                              i3->lineC = -1;
-                              i3->bAEqC = false;
-                              i3->bBEqC = false;
-                           }
-                           d3ll.insert( iDest, d3l );
+                           if (i3->bAEqB)
+                              break;
+                           d3l.lineB = i3->lineB;
+                           i3->lineB = -1;
+                           i3->bAEqB = false;
+                           i3->bBEqC = false;
                         }
+                        if ( wi3==3 )
+                        {
+                           if (i3->bAEqC)
+                              break;
+                           d3l.lineC = i3->lineC;
+                           i3->lineC = -1;
+                           i3->bAEqC = false;
+                           i3->bBEqC = false;
+                        }
+                        d3ll.insert( iDest, d3l );
                      }
                   } // for(), searching for wi3
                }

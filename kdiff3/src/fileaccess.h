@@ -70,6 +70,7 @@ public:
    bool createBackup( const QString& bakExtension );
 
    static QString tempFileName();
+   static bool removeTempFile( const QString& );
    bool removeFile();
    static bool removeFile( const QString& );
    static bool makeDir( const QString& );

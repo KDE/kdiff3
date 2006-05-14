@@ -62,7 +62,7 @@
 
 <abstract>
 <para
->O &kdiff3; é uma ferramenta de diferenças e junção das mesmas para ficheiros e pasta que: <itemizedlist>
+>&kdiff3; is a file and directory diff and merge tool which: <itemizedlist>
 <listitem
 ><para
 >compara e junta dois ou três ficheiros de texto ou pastas de entrada,</para
@@ -89,7 +89,7 @@
 ></listitem>
 <listitem
 ><para
->suporta o Unicode, o UTF-8 e outras codificações de ficheiros.</para
+>supports Unicode, UTF-8 and other file encodings.</para
 ></listitem>
 </itemizedlist>
 </para>
@@ -150,7 +150,11 @@
 >Existem várias ferramentas de detecção de diferenças. Porquê escolher o &kdiff3;? Deixe que o autor diga porque o escreveu.</para>
 
 <para
->O &kdiff3; começou porque eu tinha de fazer uma junção difícil. A junção é necessária quando várias pessoas trabalham nos mesmos ficheiros de um projecto. Uma junção poderá de alguma forma ser automatizada, quando a ferramenta de junção não só tem os novos ficheiros modificados (chamados de 'ramificações' ou 'branches'), mas também o ficheiro original (chamado de 'base'). A ferramenta de junção irá escolher automaticamente as modificações que só foram feitas numa das ramificações. Quando vários contribuintes alteram as mesmas linhas, então a  ferramenta de junção detecta um conflito que terá de ser resolvido manualmente.</para>
+>&kdiff3; started because I had to do a difficult merge. Merging is necessary when several people work on the same files in a project. A merge can be somewhat automated, when the merge-tool not only has the new modified files (called <quote
+>branches</quote
+>), but also the original file (called <quote
+>base</quote
+>). The merge tool will automatically choose any modification that was only done in one branch. When several contributors change the same lines, then the merge tool detects a conflict which must be solved manually.</para>
 
 <para
 >"A junção foi então difícil porque um dos colaboradores alterou várias coisas e corrigiu a indentação em vários sítios. Outro também alterou bastante texto, o que resultou em vários conflitos de junção".</para>
@@ -189,16 +193,16 @@
 ></screenshot>
 
 <para
->A junção por 3-vias é suportada por completo. Isto é útil se duas pessoas alterarem o código de forma independente.</para>
+>3-way-merging is fully supported. This is useful if two people change code independently.</para>
 <para
->O ficheiro original (a base) é usado para ajudar o &kdiff3; a seleccionar automaticamente as alterações correctas.</para>
+>The original file (the base) is used to help &kdiff3; to automatically select the correct changes.</para>
 <para
->O editor de junções, por baixo das janelas de diferenças, permite-lhe resolver os conflitos, enquanto lhe mostra o resultado que irá obter.</para>
+>The merge-editor below the diff-windows allows you to solve conflicts, while showing you the output you will get.</para>
 <para
->Poderá até editar o resultado.</para>
+>You can even edit the output.</para>
 
 <para
->Esta imagem mostra três ficheiros de entrada a serem reunidos:</para>
+>This screenshot shows three input files being merged:</para>
 
 <screenshot
 ><mediaobject>
@@ -313,13 +317,13 @@
 ></listitem>
    <listitem
 ><para
->Procurar por sequências de texto em todas as janelas de texto. Procurar (<keycombo
+>Search for strings in all text windows. Find (<keycombo
 >&Ctrl;<keycap
 >F</keycap
 ></keycombo
->) e Procurar o Próximo (<keycap
+>) and Find Next (<keycap
 >F3</keycap
->).</para
+>)</para
 ></listitem>
    <listitem
 ><para
@@ -356,7 +360,7 @@
 
 <chapter id="documentation"
 ><title
->Documentação da Comparação e Junção de Ficheiros</title>
+>Documentation of File Comparison And Merge</title>
 
 <sect1 id="commandline"
 ><title
@@ -380,17 +384,17 @@
 ><command
 >kdiff3</command
 > <replaceable
->ficheiro1 ficheiro2</replaceable
+>file1 file2</replaceable
 > <option
 >-m</option>
 <command
 >kdiff3</command
 > <replaceable
->ficheiro1 ficheiro2</replaceable
+>file1 file2</replaceable
 > <option
 >-o</option
 > <replaceable
->resultado</replaceable
+>outputfile</replaceable
 ></screen>
 </sect2>
 
@@ -412,17 +416,17 @@
 ><command
 >kdiff3</command
 > <replaceable
->ficheiro1 ficheiro2 ficheiro3</replaceable
+>file1 file2 file3</replaceable
 > <option
 >-m</option>
 <command
 >kdiff3</command
 > <replaceable
->ficheiro1 ficheiro2 ficheiro3</replaceable
+>file1 file2 file3</replaceable
 > <option
 >-o</option
 > <replaceable
->resultado</replaceable
+>outputfile</replaceable
 ></screen>
 <para
 >Repare que o <replaceable
@@ -438,7 +442,7 @@
 ><title
 >Caso especial: Ficheiros com o mesmo nome </title>
 <para
->Se todos os ficheiros tiverem o mesmo nome mas estiverem em pastas diferentes, poderá reduzir o trabalho de escrita se indicar apenas o nome do ficheiro para o primeiro parâmetro. &eg;: </para>
+>If all files have the same name but are in different directories, you can reduce typework by specifying the filename only for the first file. &eg;: </para>
 <screen
 ><command
 >kdiff3</command
@@ -456,27 +460,27 @@
 ><command
 >kdiff3</command
 > <replaceable
->pasta1 pasta2</replaceable>
+>dir1 dir2</replaceable>
 <command
 >kdiff3</command
 > <replaceable
->pasta1 pasta2</replaceable
+>dir1 dir2</replaceable
 > <option
 >-o</option
 > <replaceable
->destino</replaceable>
+>destdir</replaceable>
 <command
 >kdiff3</command
 > <replaceable
->pasta1 pasta2 pasta3</replaceable>
+>dir1 dir2 dir3</replaceable>
 <command
 >kdiff3</command
 > <replaceable
->pasta1 pasta2 pasta3</replaceable
+>dir1 dir2 dir3</replaceable
 > <option
 >-o</option
 > <replaceable
->destino</replaceable
+>destdir</replaceable
 >
 </screen>
 <para
@@ -487,23 +491,26 @@
 
 <sect2
 ><title
->Para mais informações sobre as opções da linha de comandos use: </title>
+>For more information on command line options use: </title>
 <screen
 ><command
 >kdiff3</command
-> --help
-Opções:
-  -m, --merge               Junta o resultado.
-  -b, --base ficheiro       Ficheiro de base explícito. Para compatibilidade com certas ferramentas.
-  -o, --output ficheiro     Ficheiro de resultado. O -m é implícito. P.ex.: -o novo_ficheiro.txt
-  --out ficheiro            O ficheiro de resultado, mais uma vez. (Para compatibilidade com certas ferramentas.)
-  --auto                    Sem interface gráfica se todos os conflitos são resolúveis. (Necessita do -o)
-  --qall                    Não resolve os conflitos automaticamente. (Para compatibilidade...)
-  --L1 nome1                Substituto visível do nome do ficheiro 1 (base).
-  --L2 nome2                Substituto visível do nome do ficheiro 2.
-  --L3 nome3                Substituto visível do nome do ficheiro 3.
-  -L, --fname nome          Um substituto visível alternativo para o nome. Use este uma vez para cada ficheiro de entrada.
-  -u                        Não faz efeito. Para compatibilidade com certas ferramentas.</screen>
+> <option
+>--help</option>
+<computeroutput
+>Options:
+  -m, --merge               Merge the input.
+  -b, --base file           Explicit base file. For compatibility with certain tools.
+  -o, --output file         Output file. Implies -m. E.g.: -o newfile.txt
+  --out file                Output file, again. (For compatibility with certain tools.)
+  --auto                    No GUI if all conflicts are auto-solvable. (Needs -o file)
+  --qall                    Don't solve conflicts automatically. (For compatibility...)
+  --L1 alias1               Visible name replacement for input file 1 (base).
+  --L2 alias2               Visible name replacement for input file 2.
+  --L3 alias3               Visible name replacement for input file 3.
+  -L, --fname alias         Alternative visible name replacement. Supply this once for every input.
+  -u                        Has no effect. For compatibility with certain tools.</computeroutput
+></screen>
 </sect2>
 
 </sect1>
@@ -520,33 +527,33 @@ Opções:
 </mediaobject
 ></screenshot>
 <para
->A janela de abertura permite editar os nomes dos ficheiros à mão, seleccionando um ficheiro através do navegador dos ficheiros (<guilabel
->Ficheiro...</guilabel
->) ou permite escolher os ficheiros recentes a partir das listas respectivas. Se abrir a janela de novo, então os nomes actuais irão nela permanecer. O terceiro ficheiro de entrada não é obrigatório. Se o item do <quote
+>The open dialog allows to edit the filenames by hand, selecting a file via the file-browser (<guilabel
+>File...</guilabel
+>) or allows to choose recent files from the drop-down lists. If you open the dialog again, then the current names still remain there. The third input file is not required. If the entry for <quote
 >C</quote
-> continuar em branco, então só será efectuada uma análise de diferenças com dois ficheiros. </para
+> remains empty, then only a two file diff analysis will be done. </para
 ><para
->Poderá também seleccionar uma pasta com o <guilabel
+>You can also select a directory via <guilabel
 >Dir...</guilabel
->. Se for indicado como A uma pasta, então será iniciada uma comparação/junção de pastas. Se o A se referir a um ficheiro, mas o B, o C ou o destino corresponderem a pastas, então o &kdiff3; usa o nome do ficheiro em A nas pastas indicadas. </para
+>. If for A a directory is specified then a directory-comparison/merge starts. If A specifies a file but B, C or the output specify a directory, then &kdiff3; uses the filename from A in the specified directories. </para
 ><para
->Se a <guilabel
->Junção</guilabel
-> estiver seleccionada, então o campo <guilabel
->Resultado</guilabel
-> fica editável. Mas não é obrigatório indicar o nome do ficheiro do resultado imediatamente. Você poderá também adiar isto até à gravação. </para
+>If <guilabel
+>Merge</guilabel
+> is selected, then the <guilabel
+>Output</guilabel
+> line becomes editable. But it is not required to specify the output filename immediately. You can also postpone this until saving. </para
 ><para
->O botão <guibutton
->Configurar...</guibutton
-> abre a janela de opções, para que possa definir as opções antes de executar a análise. </para>
+>The <guibutton
+>Configure...</guibutton
+> button opens the options-dialog, so that you can set the options before running the analysis. </para>
 </sect1>
 
 <sect1 id="pasteinput"
 ><title
 >Colar e Arrastar Dados</title>
 <para
->Em algumas ocasiões, você poderá querer comparar partes de um texto que não está em nenhum ficheiro próprio. O &kdiff3; também lhe permite colar texto da área de transferência para a janela de introdução de diferenças que esteja em primeiro plano. A análise de diferenças irá ocorrer então. Na janela de abertura, você não irá necessitar de indicar ficheiros, fechando-a então com o <guibutton
->Cancelar</guibutton
+>Sometimes you want to compare parts of a text that is not an own file. &kdiff3; also allows you to paste text from the clipboard into the diff input window that has the focus. The diff analysis happens immediately then. In the open dialog you need not specify files then, but just close it via <guibutton
+>Cancel</guibutton
 >. </para
 ><para
 >O utilizador também poderá usar o 'drag and drop': Arraste um ficheiro de um gestor de ficheiros ou o texto seleccionado de um editor e arrastá-lo para uma janela de introdução de diferenças. </para
@@ -554,17 +561,17 @@ Opções:
 >Qual é a ideia? Algumas vezes um ficheiro contém duas funções semelhantes, mas a verificação sobre as semelhanças entre elas é um grande esforço, se você precisar de criar primeiro dois ficheiros e depois carregá-los. Assim, poderá simplesmente copiar, colar e comparar as secções relevantes. </para>
 <note
 ><para
->De momento, você não poderá arrastar nada a partir do &kdiff3;. Só é permitido largar dados nas janelas de introdução de diferenças. </para
+>Currently you can't drag anything from &kdiff3;. Only dropping in the diff input is supported. </para
 ></note>
 <warning
 ><para
->Alguns editores ainda interpretam à mesma o 'drag and drop' noutro programa como o Cortar (em vez do Copiar) e Colar. Os seus dados originais poderão deste modo perder-se. </para
+>Some editors still interpret the drag and drop into another program like cut (instead of copy) and paste. Your original data might be lost then. </para
 ></warning>
 </sect1>
 
 <sect1 id="interpretinginformation"
 ><title
->Interpretar a Informação nas Janelas de Introdução</title>
+>Interpreting The Information In The Input Windows</title>
 <screenshot
 ><mediaobject>
 <imageobject
@@ -572,49 +579,51 @@ Opções:
 </mediaobject
 ></screenshot>
 <para
->No cimo de cada janela de texto existe a sua <quote
->linha de informação</quote
->. As linhas de informação das janelas de introdução de diferenças contêm uma letra <guilabel
+>At the top of each text window is its <quote
+>info line</quote
+>. The info lines of the input windows contain a letter <guilabel
 >A</guilabel
 >, <guilabel
 >B</guilabel
-> ou <guilabel
+> or <guilabel
 >C</guilabel
->, o nome do ficheiro e o número da primeira linha visível da janela. (Lembre-se que a janela <guilabel
+>, the filename and the line number of the first visible line in the window. (Note that window <guilabel
 >C</guilabel
-> é opcional). Cada linha de informação aparece com uma cor diferente. (Se as localizações forem demasiado extensas para caberem, poderá mover o cursor do rato para cima da linha de informação, de modo a que apareça uma dica com o nome completo). </para
+> is optional.) Each info line appears in a different color. (If the paths are too long to fit, then you can move the mouse onto the info line and a tooltip will show the complete name.) </para
 ><para
->As três janelas de entrada têm atribuídas as letras <guilabel
+>The three input windows are assigned the letters <guilabel
 >A</guilabel
 >, <guilabel
 >B</guilabel
-> e <guilabel
+> and <guilabel
 >C</guilabel
->. O <guilabel
+>. <guilabel
 >A</guilabel
-> tem uma cor azul, o <guilabel
+> has color blue, <guilabel
 >B</guilabel
-> tem uma verde e o <guilabel
+> has green and <guilabel
 >C</guilabel
-> magenta. (Estas são as cores por omissão, mas podem ser alteradas no menu de configuração). </para
+> has magenta. (These are the defaults, but can be changed in the <guimenu
+>Settings</guimenu
+> menu.) </para
 ><para
->Quando é detectada uma diferença, então a cor mostra qual o ficheiro de entrada que é diferente. Quando os outros ficheiros de entrada diferem todos, então a cor usada para exprimir isto é a vermelha por omissão (<guilabel
->Cor do conflito</guilabel
-> na Configuração). Este esquema de cores é particularmente útil no caso de três ficheiros de entrada, os quais serão vistos na próxima secção (<link linkend="merging"
->Juntar</link
+>When a difference is detected then the color shows which input file differs. When both other input files differ then the color used to express this is red by default (<guilabel
+>Conflict color</guilabel
+> in the settings). This colorscheme is especially useful in the case of three input files, which will be seen in the next section (<link linkend="merging"
+>Merging</link
 >). </para
 ><para
->À esquerda de cada texto está a <quote
->coluna de resumo</quote
->. Se ocorrerem diferenças numa linha, então a coluna do resumo mostra a cor respectiva. Para uma diferença por espaços em branco, o resumo fica axadrezado. Para as linguagens de programação em que os espaços em branco não são muito importantes, isto é útil para ver de um modo geral se existe algo de importante modificado. (No C/C++, os espaços em branco só são importantes dentro de cadeias de caracteres, comentários, pré-processador e em algumas outras situações esotéricas. </para
+>Left of each text is the <quote
+>summary column</quote
+>. If differences occurred on a line then the summary column shows the respective color. For a white-space-only difference the summary is chequered. For programming languages where white space is not so important this is useful to see at one glance if anything of importance was modified. (In C/C++ white space is only interesting within strings, comments, for the preprocessor, and some only very esoteric situations.) </para
 ><para
 >A linha vertical que separa a coluna do resumo e o texto é interrompida (tracejada), se o ficheiro de entrada não tiver aí nenhuma linha. Quando a mudança de linha estiver activa, então esta linha vertical aparece ponteada para as linhas repartidas. </para
 ><para
->Do lado direito, aparece uma coluna de <quote
->resumo</quote
-> à esquerda da barra de posicionamento vertical. Ela mostra a coluna de resumo comprimida dos dados de <guilabel
+>On the right side a <quote
+>overview</quote
+> column is visible left of the vertical scrollbar. It shows the compressed summary column of input <guilabel
 >A</guilabel
->. Todas as diferenças e conflitos ficam visíveis numa vista rápida. Quando só são usadas duas janelas de entrada, então todas as diferenças aparecem a vermelho, dado que cada diferença é também um conflito. Um rectângulo preto delimita a parte visível dos dados de entrada. Para as linhas de dados bastante compridas, quando o número de linhas de dados é maior do que a altura da coluna de resumo em pixels, então várias linhas de dados de entrada irão partilhar uma linha de resumo. Um conflito, neste caso, terá então uma prioridade elevada sobre as diferenças simples, que por sua vez têm prioridade sobre a ausência de alterações, como tal não se perde nenhuma diferença ou conflito neste caso. Se carregar nesta coluna de resumo, será mostrado o texto correspondente. </para>
+>. All the differences and conflicts are visible at one glance. When only two input windows are used, then all differences appear red here because every difference is also a conflict. A black rectangle frames the visible part of the inputs. For very long input files, when the number of input lines is bigger than the height of the overview column in pixels, then several input lines share one overview line. A conflict then has top priority over simple differences, which have priority over no change, so that no difference or conflict is lost here. By clicking into this overview column the corresponding text will be shown. </para>
 </sect1>
 
 
@@ -628,73 +637,73 @@ Opções:
 </mediaobject
 ></screenshot>
 <para
->A janela do editor do resultado da junção (por baixo das janelas de introdução de diferenças) também tem uma linha de informação no topo que mostra <guilabel
->Resultado:</guilabel
->, o nome do ficheiro e <guilabel
->[Modificado]</guilabel
-> se você tiver alterado alguma coisa. Normalmente irá conter algum texto resultante das funcionalidades de junção automática, mas frequentemente irá conter também conflitos. </para
+>The merge output editor window (below the diff input windows) also has an info line at the top showing <guilabel
+>Output:</guilabel
+>, the filename and <guilabel
+>[Modified]</guilabel
+> if you edited something. Usually it will contain some text through the automatic merge facilities, but often it will also contain conflicts. </para
 ><para
->A gravação está desactivada até que todos os conflitos estejam resolvidos. (Use os botões para <guibutton
->Ir para o Conflito por Resolver Anterior/Seguinte</guibutton
-> para descobrir os conflitos que faltam.) </para
+>Saving is disabled until all conflicts are resolved. (Use the <guibutton
+>Go to prev/next unsolved conflicts</guibutton
+> buttons to find the remaining conflicts.) </para
 ><para
 >Com apenas dois ficheiros de entrada, todas as diferenças são também conflitos que necessitam de ser resolvidos manualmente. </para
 ><para
 >Com três ficheiros de entrada, o primeiro ficheiro é tratado como a base, enquanto que o segundo e o terceiro contêm as modificações. Quando, em qualquer linha, só o ficheiro B ou o C tiverem sido alterados mas não ambos, então será seleccionada a origem alterada. Só quando o B e o C alteraram as mesmas linhas é que a ferramenta detecta um conflito que deverá ser resolvido manualmente. Quando o B e o C são iguais mas não são o mesmo que o A, é seleccionado o C. </para
 ><para
->A janela do editor do resultado da junção também tem uma coluna de resumo à esquerda. Mostra a letra do ficheiro de entrada para o qual foi seleccionada a linha ou nada, se todas as três origens são iguais nessa linha. Para os conflitos, ela mostra um ponto de interrogação <guilabel
+>The merge output editor window also has a summary column on the left. It shows the letter of the input from which a line was selected or nothing if all three sources where equal on a line. For conflicts it shows a questionmark <guilabel
 >?</guilabel
-> e a linha mostra <guilabel
->&lt;Conflito na Junção&gt;</guilabel
->, tudo a vermelho. Dado que a resolução de conflitos linha a linha poderá levar bastante tempo, as linhas são reunidas em grupos com as mesmas características de diferenças e conflitos. Mas os conflitos só com espaços em branco são separados dos outros conflitos para facilitar a junção dos ficheiros em que a indentação foi alterada em várias linhas. </para
+> and the line shows <guilabel
+>&lt;Merge Conflict&gt;</guilabel
+>, all in red. Because solving conflicts line by line would take very long, the lines are grouped into groups that have the same difference and conflict characteristics. But only-white-space-conflicts are separated from non-white-space-conflicts in order to ease the merging of files were the indentation changed for many lines. </para
 ><para
->Ao carregar na coluna do resumo com o &LMB; em ambas as janelas, o grupo que pertença a essa linha será seleccionado em todas as janelas e o início desse grupo será mostrado. (Isto poderá envolver um salto de posição automático para a janelas se o início do grupo não estiver visível). Este grupo fica então o <quote
->grupo actual</quote
->. Fica realçado com a <quote
->Cor de fundo do intervalo actual</quote
-> e aparece uma barra preta do lado esquerdo do texto. </para
+>When clicking into the summary column with the left mouse button in either window then the group belonging to that line will be selected in all windows and the beginning of that group will be shown. (This might involve an automatic position jump in the windows if the beginning of a group is not visible.) This group then becomes the <quote
+>current group</quote
+>. It is highlighted with the <quote
+>Current range (diff) background color</quote
+> and a black bar appears on the left side of the text. </para
 ><para
->Repare nos botões de selecção que contêm as letras <guibutton
+>Note the input selector buttons containing the letters <guibutton
 >A</guibutton
 >, <guibutton
 >B</guibutton
-> e <guibutton
+> and <guibutton
 >C</guibutton
-> na barra de botões por baixo do menu. Quando carregar num desses botões de selecção, as linhas desse ficheiro de entrada serão adicionadas ao fim do grupo seleccionado se esse grupo não contiver essa origem antes. Caso contrário, as linhas serão removidas. </para
+> in the button bar below the menu bar. When clicking on either input selector button, the lines from that input will be added at the end of the selected group if that group didn't contain that source before. Otherwise the lines from that input will be removed. </para
 ><para
->Para além disso, o utilizador poderá editar qualquer linha. A coluna de resumo irá mostrar um <guibutton
+>Besides, you can directly edit any line. The summary column will show <guibutton
 >m</guibutton
-> para cada linha modificada. </para
+> for every line that was modified. </para
 ><para
->Algumas das vezes, quando uma linha é removida tanto por junção automática como por edição e não ficam mais nenhumas linhas nesse grupo, então o texto <computeroutput
->&lt;Sem linha de origem&gt;</computeroutput
-> irá aparecer nessa linha. Isto é apenas um substituto para o grupo, quando decidir mudar de ideias e seleccionar algum texto de origem de novo. Este texto não irá aparecer no ficheiro gravado ou em qualquer selecção que deseje copiar e colar. </para
+>Sometimes, when a line is removed either by automatic merge or by editing and no other lines remain in that group, then the text <computeroutput
+>&lt;No src line&gt;</computeroutput
+> will appear in that line. This is just a placeholder for the group for when you might change your mind and select some source again. This text won't appear in the saved file or in any selections you want to copy and paste. </para
 ><para
->O texto <quote
->&lt;Conflito na Junção&gt;</quote
-> irá aparecer na área de transferência se copiar e colar algum texto que tenha uma dessas linhas. Mas tenha à mesma cuidado ao fazê-lo. </para
+>The text <quote
+>&lt;Merge Conflict&gt;</quote
+> will appear in the clipboard if you copy and paste some text containing such a line. </para
 ><para
->A junção normal irá começar por resolver os conflitos simples automaticamente. Mas o menu <guimenu
->Juntar</guimenu
-> oferece algumas acções para outros usos comuns. Se você tiver de seleccionar a mesma origem para a maioria dos conflitos, então poderá escolher <quote
+>The normal merge will start by solving simple conflicts automatically. But the <guimenu
+>Merge</guimenu
+> menu provides some actions for other common needs. If you have to select the same source for most conflicts, then you can choose <quote
 >A</quote
 >, <quote
 >B</quote
-> ou <quote
+> or <quote
 >C</quote
-> em qualquer lado ou apenas para os conflitos que continuem ainda por resolver ou então para os conflitos de espaços em branco por resolver. Se quiser decidir cada um dos deltas por si próprio, poderá <guilabel
->Passar os deltas para conflitos</guilabel
->. Ou, se preferir voltar às escolhas automáticas do &kdiff3;, seleccione então a opção <guilabel
->Resolver automaticamente os conflitos simples</guilabel
->. Nesse caso, o &kdiff3; irá reiniciar a junção. Para as acções que alteram as suas modificações anteriores, o &kdiff3; pedir-lhe-á uma confirmação antes de prosseguir. </para>
+> everywhere, or only for the remaining unsolved conflicts, or for unsolved whitespace conflicts. If you want to decide every single delta yourself, you can <guilabel
+>Set deltas to conflicts</guilabel
+>. Or if you want to return to the automatic choices of &kdiff3; then select <quote
+>Automatically solve simple conflicts</quote
+>. &kdiff3; then restarts the merge. For actions that change your previous modifications KDiff3 will ask for your confirmation before proceeding. </para>
 
 <note
 ><para
->Ao escolher uma das origens para os conflitos que não sejam de espaços em branco e as opções <guilabel
->Ignorar os Números</guilabel
-> ou <guilabel
->Ignorar os Comentários de C/C++</guilabel
-> forem usadas, então as alterações nos números ou comentários serão tratadas como espaços em branco também. </para
+>When choosing either source for unsolved whitespace conflicts and the options <guilabel
+>Ignore Numbers</guilabel
+> or <guilabel
+>Ignore C/C++ Comments</guilabel
+> are used then changes in numbers or comments will be treated like whitespace too. </para
 ></note>
 </sect1>
 
@@ -702,66 +711,74 @@ Opções:
 ><title
 >Navegação e Edição</title>
 <para
->Muita da navegação será feita com as barras de posicionamento e com o rato, mas você poderá também navegar com as teclas. Se carregar numa das janelas, então poderá usar as teclas de cursores, o <keycap
+>Much navigation will be done with the scroll bars and the mouse but you can also navigate with the keys. If you click into either window then you can use the cursor buttons <keycap
+>Left Arrow</keycap
+>, <keycap
+>Right Arrow</keycap
+>, <keycap
+>Up Arrow</keycap
+>, <keycap
+>Down Arrow</keycap
+>, <keycap
 >Page Up</keycap
->, o <keycap
+>, <keycap
 >Page Down</keycap
->, o <keycap
+>, <keycap
 >Home</keycap
->, o <keycap
+>, <keycap
 >End</keycap
->, o <keycombo action="simul"
+>, <keycombo action="simul"
 >&Ctrl;<keycap
 >Home</keycap
 ></keycombo
-> ou o <keycombo action="simul"
+>, <keycombo action="simul"
 >&Ctrl;<keycap
 >End</keycap
 ></keycombo
-> como iria usar noutros programas. A coluna de resumo ao lado da barra de posicionamento vertical dos ficheiros de entrada poderá também ser usada para navegar se carregar nela. </para
+> as you would in other programs. The overview-column next to the vertical scroll bar of the input files can also be used for navigating by clicking into it. </para
 ><para
->Poderá também usar a roda do rato para subir ou descer. </para
+>You can also use a wheel mouse to scroll up and down. </para
 ><para
->No editor do resultado da junção, poderá também usar as outras teclas para editar. Poderá alternar entre o modo de inserção ou sobreposição com a tecla <keycap
+>In the merge output editor you can also use the other keys for editing. You can toggle between insert and overwrite mode with the <keycap
 >Insert</keycap
->. (Por omissão, está no modo de inserção). </para
+> key. (Default is insert-mode.) </para
 ><para
->Um 'click' com o &LMB; em qualquer coluna de resumo irá sincronizar todas as janelas para mostrar o início do mesmo grupo de linhas (tal como é explicado em <link linkend="merging"
->Junção</link
+>A &LMB; click into any summary column will synchronise all windows to show the beginning of the same group of lines (as explained in section <link linkend="merging"
+>"Merging"</link
 >). </para
 ><para
->A barra de botões também contém sete botões de navegação com os quais poderá saltar para a primeira/última/actual diferença, para a diferença seguinte/anterior  (<keycombo action="simul"
+>The button bar also contains seven navigation buttons with which you can jump to the current/first/last difference, to the next/previous difference (<keycombo action="simul"
 >&Ctrl;<keycap
->Baixo</keycap
+>Down Arrow</keycap
 ></keycombo
 >/<keycombo action="simul"
 >&Ctrl;<keycap
->Cima</keycap
+>Up Arrow</keycap
 ></keycombo
->), para o conflito seguinte/anterior (<keycombo action="simul"
+>), to the next/previous conflict (<keycombo action="simul"
 >&Ctrl;<keycap
->Pg Down</keycap
+>Page Down</keycap
 ></keycombo
 >/<keycombo action="simul"
 >&Ctrl;<keycap
->Pg Up</keycap
+>Page Up</keycap
 ></keycombo
->) ou para o conflito seguinte/anterior por resolver. Repare que, para o &kdiff3;, um <quote
->conflito</quote
-> que não foi resolvido automaticamente no início da junção irá permanecer como <quote
->conflito</quote
->, mesmo que resolvido. Daí a necessidade de distinguir os <quote
->conflitos por resolver</quote
+>), or to the next/previous unsolved conflict. Note that for &kdiff3; a <quote
+>conflict</quote
+> that was not automatically solved at the start of the merge stays a <quote
+>conflict</quote
+> even if it is solved. Hence the necessity to distinguish <quote
+>unsolved conflicts</quote
 >. </para
 ><para
->Existe também um botão <guibutton
->Ir automaticamente para o próximo conflito por resolver após a selecção do código</guibutton
-> (Avanço Automático). Se activar esta opção, então sempre que seleccionar uma origem, o &kdiff3; irá saltar para o próximo conflito por resolver automaticamente. Isto poderá ajudar quando quiser sempre escolher apenas uma origem. Quando precisar de ambas as origens, ou se quiser editar depois de seleccionar, então provavelmente irá querer desligar esta opção. Antes de prosseguir para o próximo conflito por resolver, o &kdiff3; mostra-lhe o efeito da sua escolha durante algum tempo. Este atraso é ajustável na Configuração da Diferença &amp; Junção: Poderá indicar o <guilabel
->Atraso no avanço automático</guilabel
-> num valor entre 0 e 2 000 milisegundos.</para>
+>There also is a button <guibutton
+>Automatically go to next unsolved conflict after source selection</guibutton
+> (Auto-Advance). If you enable this, then, when one source is selected, then &kdiff3; will jump to and select the next unsolved conflict automatically. This can help when you always want to choose one source only. When you need both sources, or you want to edit after selecting, then you probably want to switch this off. Before proceeding to the next unsolved conflict &kdiff3; shows you the effect of your choice for a short time. This delay is adjustable in the Diff &amp; Merge Settings: You can specify the <guilabel
+>Auto-Advance delay</guilabel
+> in milli seconds between 0 and 2000.</para>
 <tip
 ><para
->Está farto de carregar consecutivamente? Use um pequeno atraso de Avanço Automático e os atalhos <keycombo action="simul"
+>Tired of many clicks? Use a small Auto-Advance-delay and the shortcuts <keycombo action="simul"
 >&Ctrl;<keycap
 >1</keycap
 ></keycombo
@@ -769,11 +786,11 @@ Opções:
 >&Ctrl;<keycap
 >2</keycap
 ></keycombo
-> e <keycombo action="simul"
+> and <keycombo action="simul"
 >&Ctrl;<keycap
 >3</keycap
 ></keycombo
-> para seleccionar os ficheiros A, B ou C para muitos dos conflitos.</para
+> to select files A, B or C for many conflicts.</para
 ></tip>
 </sect1>
 
@@ -781,77 +798,87 @@ Opções:
 ><title
 >Seleccionar, Copiar e Colar</title>
 <para
->As janelas de entrada não mostram nenhum cursor, como tal as selecções necessitam de ser feitas com o rato, ao carregar com o &LMB; no início, mantendo o botão do rato carregado e indo até ao fim, momento em que larga o botão do rato de novo. Poderá também seleccionar uma palavra se fizer duplo-click nela. No editor do resultado da junção poderá também seleccionar com o teclado se mantiver a tecla &Shift; carregada enquanto navega com as teclas de cursores. </para
+>The input windows don't show a cursor, so selections must be made with the mouse by clicking with the &LMB; at the start, holding down the mousebutton and moving to the end, where you release the mouse button again. You can also select a word by double clicking it. In the merge output editor you can also select via the keyboard by holding the &Shift; button and navigation with the cursor keys. </para
 ><para
->Para copiar para a área de transferência, precisa de carregar no botão "Copiar" (<keycombo action="simul"
+>To copy to the clipboard you must press the <guibutton
+>Copy</guibutton
+> button (<keycombo action="simul"
 >&Ctrl;<keycap
 >C</keycap
 ></keycombo
-> ou <keycombo action="simul"
+> or <keycombo action="simul"
 >&Ctrl;<keycap
 >Insert</keycap
 ></keycombo
->). Porém, existe uma opção para <quote
->Copiar Automaticamente a Selecção</quote
->. Se esta estiver activa, então tudo o que seleccionar será copiado imediatamente, sem que você tenha de copiar explicitamente. Todavia, preste atenção ao usar isto, dado que o conteúdo da área de transferência poderá ficar assim destruído por acidente. </para
+>). But there exists an option <quote
+>Auto Copy Selection</quote
+>. If this is enabled, then whatever you select is copied immediately and you don't need to explicitly copy. But pay attention when using this because the contents of the clipboard might then be destroyed accidentally. </para
 ><para
->O <guimenuitem
->Cortar</guimenuitem
+><guimenuitem
+>Cut</guimenuitem
 > (<keycombo action="simul"
 >&Ctrl;<keycap
 >X</keycap
 ></keycombo
-> ou o <keycombo action="simul"
+> or <keycombo action="simul"
 >&Shift;<keycap
 >Delete</keycap
 ></keycombo
->) copia para a área de transferência e remove o texto seleccionado, enquanto o <guimenuitem
->Colar</guimenuitem
+>) copies to the clipboard and deletes the selected text and <guimenuitem
+>Paste</guimenuitem
 > (<keycombo action="simul"
 >&Ctrl;<keycap
 >V</keycap
 ></keycombo
-> ou <keycombo action="simul"
+> or <keycombo action="simul"
 >&Shift;<keycap
 >Insert</keycap
 ></keycombo
->) insere o texto na área de transferência, na posição do cursor, ou sobre a selecção actual. </para>
+>) inserts the text in the clipboard at the cursor position or over the current selection. </para>
 </sect1>
 
 <sect1 id="saving"
 ><title
 >Gravar</title>
 <para
->A gravação só será permitida quando todos os conflitos tiverem sido resolvidos. Se o ficheiro já existir e a opção de <quote
->Salvaguarda dos ficheiros</quote
-> estiver activa, então o ficheiro existente verá o seu nome mudado de modo a ter uma extensão <filename role="extension"
+>Saving will only be allowed, when all conflicts were solved. If the file already exists and the <quote
+>Backup files</quote
+> option is enabled then the existing file will be renamed with an <filename role="extension"
 >.orig</filename
->, mas se existir um destes ficheiros será removido. Quando você sair ou iniciar outra análise de diferenças e os dados não tiverem sido gravados ainda, então o &kdiff3; irá perguntar se você deseja gravar, cancelar ou prosseguir sem gravar. (O &kdiff3; não lida com nenhuns sinais ('signals') do sistema. Por isso, se fizer um <quote
+> extension, but if such a file exists it will be deleted. When you exit or start another diff-analysis and data wasn't saved yet, then &kdiff3; will ask if you want to <guibutton
+>Save</guibutton
+>, <guibutton
+>Cancel</guibutton
+> or <guibutton
+>Proceed without saving</guibutton
+>. &kdiff3; does not catch any signals. So if you <quote
 >kill</quote
-> ao &kdiff3;, então os seus dados serão perdidos.) </para
+> &kdiff3; then your data will be lost.) </para
 ><para
->Os fins de linha são gravados de acordo com o método normal do sistema operativo subjacente. Para os UNIXes, cada linha terminada com um carácter de 'linefeed' <literal
+>Line endings are saved according to the normal method on the underlying operating system. For Unices each line ends with an linefeed-character <literal
 >\n</literal
->, enquanto que nos sistemas baseados em Win32, cada linha termina com um 'carriage-return' + um 'linefeed' <literal
+>, while for &Windows; based systems each line ends with a carriage-return + a linefeed <literal
 >\r\n</literal
->. O &kdiff3; não preserva os fins de linha dos ficheiros de entrada, o que também significa que você não deverá usar o &kdiff3; com ficheiros binários. </para>
+>. &kdiff3; does not preserve the line-endings of the input files, which also means that you shouldn't use &kdiff3; with binary files. </para>
 </sect1>
 
 <sect1 id="find"
 ><title
 >Procurar Sequências de Texto</title>
 <para
->Você poderá procurar por uma sequência de texto em qualquer janela de texto do &kdiff3;. O comando <guimenuitem
->Procurar ...</guimenuitem
-> (<keycombo action="simul"
+>You can search for a string in any text-window of &kdiff3;. The <guimenuitem
+>Find ...</guimenuitem
+> command (<keycombo action="simul"
 >&Ctrl;<keycap
 >F</keycap
 ></keycombo
->) no menu <guimenu
->Editar</guimenu
-> abre uma janela que lhe permite indicar o texto a procurar. Poderá também seleccionar as janelas que deverão ser pesquisadas. A procura irá ter início sempre no topo do ficheiro. Use o comando <guimenuitem
->Procurar o Próximo</guimenuitem
-> (F3) para prosseguir com a próxima ocorrência. Se optar por procurar em várias janelas, então a primeira janela será percorrida de alto a baixo antes de a procura começar na próxima janela a partir do topo de novo, &etc; </para>
+>) in the <guimenu
+>Edit</guimenu
+> menu opens a dialog that lets you specify the string to search for. You can also select the windows which should be searched. Searching will always start at the top. Use the <guimenuitem
+>Find Next</guimenuitem
+> command (<keycap
+>F3</keycap
+>) to proceed to the next occurence. If you select to search several windows then the first window will be searched from top to bottom before the search starts in the next window at the top again, &etc; </para>
 </sect1>
 
 
@@ -859,13 +886,13 @@ Opções:
 ><title
 >Opções</title>
 <para
->As opções e a lista de ficheiros recentes serão gravadas quando você sair do programa e serão carregadas de novo quando o iniciar. (Menu <menuchoice
+>Options and the recent-file-list will be saved when you exit the program, and reloaded when you start it. (Menu <menuchoice
 ><guimenu
->Configuração</guimenu
+>Settings</guimenu
 ><guimenuitem
->Configurar o KDiff3...</guimenuitem
+>Configure KDiff3</guimenuitem
 ></menuchoice
->) </para>
+> ...) </para>
 <sect2
 ><title
 >Tipo de Letra</title>
@@ -887,7 +914,7 @@ Opções:
 
 <sect2
 ><title
->Cores</title>
+>Colors</title>
 <variablelist>
    <varlistentry
 ><term
@@ -981,9 +1008,9 @@ Opções:
 ></varlistentry>
 </variablelist>
 <para
->Nos sistemas com apenas 16 ou 256 cores, alguns dos tons acima descritos não estão disponíveis de forma pura. Nesses sistemas, o botão <guibutton
->Predefinições</guibutton
-> irá escolher uma cor pura. </para>
+>On systems with only 16 or 256 colors some colors are not available in pure form. On such systems the <guibutton
+>Defaults</guibutton
+> button will choose a pure color. </para>
 </sect2>
 
 <sect2
@@ -1017,9 +1044,9 @@ Opções:
 ></term
 ><listitem
 ><para
->Ao carregar em &Enter; ou <keycap
+>When pressing &Enter; or <keycap
 >Return</keycap
-> a indentação da linha anterior é usada para uma nova linha. </para
+> the indentation of the previous line is used for the new line. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1045,11 +1072,11 @@ Opções:
    <varlistentry
 ><term
 ><guilabel
->Utilizar a codificação local:</guilabel
+>Use locale encoding:</guilabel
 ></term
 ><listitem
 ><para
->Para mostrar os caracteres estrangeiros. Tente alterar isto se alguns dos caracteres da sua língua não forem mostrados correctamente. </para
+>For displaying foreign characters. Try changing this if some characters of your language aren't displayed correctly. </para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -1057,7 +1084,7 @@ Opções:
 
 <sect2
 ><title
->Configuração da Diferença e da Junção</title>
+>Diff &amp; Merge Settings</title>
 <para
 >Ao comparar os ficheiros, o &kdiff3; tenta primeiro corresponder as linhas iguais em todos os ficheiros de entrada. Só durante este passo é que poderá ignorar os espaços em branco. O segundo passo compara cada uma das linhas. Neste passo, os espaços em branco não serão ignorados. Também durante a junção os espaços em branco não serão ignorados. </para>
 
@@ -1069,13 +1096,13 @@ Opções:
 ></term
 ><listitem
 ><para
->Alguns editores (em alguns sistemas) gravam os caracteres de 'carriage return' <literal
+>Some editors (on some systems) save carriage return <literal
 >\r</literal
-> e 'linefeed' <literal
+> and linefeed <literal
 >\n</literal
-> no fim da linha, enquanto que outros só irão gravar o 'linefeed' <literal
+> characters at the end of line, while others will only save the linefeed <literal
 >\n</literal
->. Normalmente o &kdiff3; ignora o 'carriage return', mas aí os ficheiros que não tenham tamanhos iguais pareçam de facto iguais numa comparação lado-a-lado. Quando esta opção estiver activa, então os caracteres de 'carriage return' ficarão visíveis mas serão tratados como espaços em branco. Ela necessita estar desligada durante uma junção. Por omissão, está desligada.</para
+>. Usually &kdiff3; ignores the carriage return, but then files that don't have equal sizes, look equal in side by side comparison. When this option is on, then the carriage return characters are made visible but are treated as white space. This option must be off during a merge. Default is off.</para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1085,7 +1112,7 @@ Opções:
 ></term
 ><listitem
 ><para
->Por omissão está desligado. Os caracteres dos números (<quote
+>Default is off. Number characters (<quote
 ><literal
 >0-9</literal
 ></quote
@@ -1097,7 +1124,7 @@ Opções:
 ><literal
 >-</literal
 ></quote
->) serão ignorados na primeira parte da análise, na qual é feita a correspondência de linhas. No resultado, as diferenças serão mostradas de qualquer forma, mas serão tratadas como espaços em branco. </para
+>) will be ignored in the first part of the analysis in which the line matching is done. In the result the differences will be shown nevertheless, but they are treated as white space. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1117,15 +1144,15 @@ Opções:
 ></term
 ><listitem
 ><para
->Por omissão está desligado. As diferenças de capitalização (como o <quote
+>Default is off. Case-differences of characters (like <quote
 ><literal
 >A</literal
 ></quote
-> vs. o <quote
+> vs. <quote
 ><literal
 >a</literal
 ></quote
->) serão tratadas como diferenças de espaços em branco. </para
+>) will be treated like changes in white space. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1179,15 +1206,15 @@ Opções:
 ></term
 ><listitem
 ><para
->Resolve automaticamente todos os conflitos de espaços em branco, seleccionando o ficheiro indicado. (Por omissão, é com uma escolha manual). É útil se os espaços em branco não serão importantes em muitos dos ficheiros. Se precisar disto apenas ocasionalmente, é melhor usar o <guimenuitem
->Escolher A/B/C nos Conflitos de Espaços em Branco Por Resolver</guimenuitem
-> no menu <guimenu
->Junção</guimenu
->. Lembre-se que, se activar o <guilabel
->Ignorar os Números</guilabel
-> ou o <guilabel
->Ignorar os Comentários de C/C++</guilabel
->, então esta escolha automática também se aplica para os conflitos nos números ou nos comentários. </para
+>Automatically solve all white-space conflict by choosing the specified file. (Default is manual choice.) Useful if white-space really isn't important in many files. If you need this only occasionally better use <guimenuitem
+>Choose A/B/C For All Unsolved Whitespace Conflicts</guimenuitem
+> in the <guimenu
+>Merge</guimenu
+> menu. Note that if you enable either <guilabel
+>Ignore numbers</guilabel
+> or <guilabel
+>Ignore C/C++ comments</guilabel
+> then this auto-choice also applies for conflicts in numbers or comments. </para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -1211,11 +1238,11 @@ Opções:
 ></term
 ><listitem
 ><para
->Quando um ficheiro é gravado e já existe uma versão anterior, então a versão original irá mudar para um nome com uma extensão <filename role="extension"
+>When a file is saved and an older version already exists, then the original version will be renamed with an <filename role="extension"
 >.orig</filename
->. Se já existir um ficheiro de cópia de segurança antigo com uma extensão <filename role="extension"
+> extension. If an old backup file with <filename role="extension"
 >.orig</filename
->, então este será removido sem ficar nenhuma cópia de segurança. </para
+> extension already exists then this will be deleted without backup. </para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -1232,7 +1259,7 @@ Opções:
 ></term
 ><listitem
 ><para
->Ajusta a língua da interface do utilizador. Se mudar esta opção não afectará o programa em execução. Terá de sair e reiniciar o &kdiff3; para que a língua seja alterada. (Esta opção não está disponível na versão para &kde; do &kdiff3;, porque a língua é ajustável na configuração global do &kde;). </para
+>Adjust the language of the user interface. Changing this option doesn't affect the running program. You have to exit and restart &kdiff3; so that the language is changed. (This option is not available in the &kde; version of &kdiff3; because the language is adjustable in the global &kde; settings.) </para
 ></listitem
 ></varlistentry>
     <varlistentry
@@ -1292,15 +1319,15 @@ Opções:
 ></term
 ><listitem
 ><para
->Algumas línguas são escritas da direita para a esquerda. Quando esta opção está activa, o &kdiff3; desenha o texto da direita para a esquerda nas janelas de diferenças dos ficheiros de entrada e na janela do resultado da junção. Repare que, se iniciar o &kdiff3; com a opção da linha de comandos <option
+>Some languages are written right to left. When this option is enabled, &kdiff3; draws the text from right to left in the diff input windows and in the merge output window. Note that if you start &kdiff3; with the command line option <option
 >--reverse</option
->, então toda a disposição será feita também da direita para a esquerda. (Esta é uma funcionalidade oferecida pelo &Qt;.) Esta documentação foi escrita a assumir que a <quote
->Língua da direita-para-a-esquerda</quote
-> ou a disposição inversa estão desactivadas. Por isso, algumas das referências a <quote
->esquerda</quote
-> ou <quote
->direita</quote
-> deverão ser substituídas pela versão inversa, se usar estas opções. </para
+> then all layouting will be done right to left too. (This is a feature provided by &Qt;.) This handbook was written assuming that <quote
+>Right To Left Language</quote
+> or reverse layout are disabled. So some references to <quote
+>left</quote
+> or <quote
+>right</quote
+> must be replaced by their respective counterpart if you use these options. </para
 ></listitem
 ></varlistentry>
 
@@ -1311,7 +1338,7 @@ Opções:
 ><title
 >Diversos</title>
 <para
->Estas opções e acções estão disponíveis nos menus ou na barra de botões.</para>
+>These options and actions are available in menus or the buttonbar.</para>
 <variablelist>
   <varlistentry
 ><term
@@ -1340,11 +1367,9 @@ Opções:
 ></term
 ><listitem
 ><para
->Desligue isto para suprimir o realce das alterações apenas nos espaços em branco no texto ou nas colunas de vista geral. (Lembre-se que isto também se aplica às alterações nos números ou comentários se as opções <guilabel
->Ignorar os números</guilabel
-> ou <guilabel
->Ignorar os Comentários de C/C++</guilabel
-> estiverem activas.)</para
+>Turn this off to suppress any highlighting of white-space-only changes in the text or overview-columns. (Note that this also applies to changes in numbers or comments if the options <guilabel
+>Ignore numbers</guilabel
+> or "Ignore C/C++ comments" are active.)</para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -1354,13 +1379,13 @@ Opções:
 ></term
 ><listitem
 ><para
->Estas opções só estão disponíveis quando você compara três ficheiros. No modo normal, todas as diferenças são mostradas na coluna de resumo codificada a cores. Mas, em alguns casos, você está especialmente interessado nas diferenças entre apenas dois desses três ficheiros. Se seleccionar <guilabel
+>These choices are only available when you compare three files. In normal mode all differences are shown in one color-coded overview-column. But sometimes you are especially interested in the differences between only two of these three files. Selecting <guilabel
 >A vs. B</guilabel
 >, <guilabel
 >A vs. C</guilabel
-> ou <guilabel
+> or <guilabel
 >B vs. C</guilabel
-> na coluna de resumo irá aparecer uma segunda coluna com a informação necessária ao lado do resumo normal. </para
+> overview will show a second overview column with the required information next to the normal overview. </para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -1380,9 +1405,9 @@ Opções:
 ></term
 ><listitem
 ><para
->Em algumas vezes, você poderá usar melhor o espaço no ecrã para as linhas compridas. Esconda as janelas que não são importantes. (No menu <guimenu
->Janelas</guimenu
->.)</para
+>Sometimes you want to use the space on the screen better for long lines. Hide the windows that are not important. (In the <guimenu
+>Windows</guimenu
+> menu.)</para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -1392,9 +1417,9 @@ Opções:
 ></term
 ><listitem
 ><para
->Define se as janelas de diferenças são mostradas uma ao lado da outra (a A à esquerda da B, que está à esquerda da C) ou uma por cima da outra (a A sobre a B, que está sobre a C). Isto também deverá ajudar para as linhas compridas (No menu <guimenu
->Janelas</guimenu
->). </para
+>Switch between diff windows shown next to each other (A left of B left of C) or above each other (A above B above C). This should also help for long lines. (In the <guimenu
+>Windows</guimenu
+> menu.) </para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -1404,15 +1429,15 @@ Opções:
 ></term
 ><listitem
 ><para
->Às vezes, você está a ver os deltas e decide juntá-los. <inlinemediaobject
+>Sometimes you are viewing the deltas and decide to merge. <inlinemediaobject
 ><imageobject
 ><imagedata fileref="merge_current.png" format="PNG"/></imageobject
 ></inlinemediaobject
-> O <guimenuitem
->Juntar o ficheiro actual</guimenuitem
-> no menu <guimenu
->Directoria</guimenu
-> também resulta se só comparar dois ficheiros. Um único 'click' começa a junção e usa o nome do último ficheiro de entrada como nome do ficheiro do resultado por omissão. (Quando isto for usado para reiniciar uma junção, então o nome do ficheiro do resultado será mantido.)</para
+> <guimenuitem
+>Merge current file</guimenuitem
+> in the <guimenu
+>Directory</guimenu
+> menu also works if you only compare two files. A single click starts the merge and uses the filename of the last input-file as the default output filename. (When this is used to restart a merge, then the output filename will be preserved.)</para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -1422,11 +1447,11 @@ Opções:
 ><title
 >Configurar os Atalhos de Teclado</title>
 <para
->De momento, só a versão para &kde; suporta os atalhos de teclado configuráveis pelo utilizador. (No menu <menuchoice
+>Currently only the &kde; version supports user-configurable keyboard-shortcuts. (<menuchoice
 ><guimenu
->Configuração</guimenu
+>Settings</guimenu
 ><guimenuitem
->Configurar os Atalhos...)</guimenuitem
+>Configure Shortcuts...</guimenuitem
 ></menuchoice
 >) </para>
 </sect2>
@@ -1446,7 +1471,7 @@ Opções:
 ></term
 ><listitem
 ><para
->Quando for lido qualquer ficheiro, ele será encaminhado através deste comando externo. O resultado deste comando será visível em vez do ficheiro original. O utilizador poderá criar o seu próprio pré-processador que corresponda às suas necessidades específicas. Use isto para cortar partes desnecessárias do ficheiro ou para corrigir automaticamente a indentação, &etc;. </para
+>When any file is read, it will be piped through this external command. The output of this command will be visible instead of the original file. You can write your own preprocessor that fulfills your specific needs. Use this to cut away disturbing parts of the file, or to automatically correct the indentation &etc;. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1468,9 +1493,9 @@ Opções:
 >perl</command
 > encarregar-se-ão disso. </para>
 <para
->Exemplo: Simples caso de teste: Considere o ficheiro <filename
+>Example: Simple testcase: Consider file <filename
 >a.txt</filename
-> (6 linhas):</para>
+> (6 lines):</para>
 <screen
 >aa
 ba
@@ -1480,9 +1505,9 @@ eafa
 </screen>
 
 <para
->E o ficheiro <filename
+>And file <filename
 >b.txt</filename
-> (3 linhas):</para>
+> (3 lines):</para>
 
 <screen
 >cg
@@ -1490,7 +1515,7 @@ dg
 eg</screen>
 
 <para
->Sem um pré-processador, as seguintes linhas seriam colocadas umas a seguir às outras:</para>
+>Without a preprocessor the following lines would be placed next to each other:</para>
 
 <screen
 >aa - cg
@@ -1501,9 +1526,9 @@ ea
 fa</screen>
 
 <para
->Isto poderá não ser o desejado, dado que a primeira letra contém a informação realmente interessante. Para ajudar no algoritmo de correspondência, de modo a ignorar a segunda letra, pode ser usado um comando de pré-processamento de correspondência de linhas que substitua o <literal
+>This is probably not wanted since the first letter contains the actually interesting information. To help the matching algorithm to ignore the second letter we can use a line matching preprocessor command, that replaces <literal
 >g</literal
-> por um <literal
+> with <literal
 >a</literal
 >:</para>
 
@@ -1513,7 +1538,7 @@ fa</screen>
 > 's/g/a/'</screen>
 
 <para
->Com este comando, o resultado da comparação seria:</para>
+>With this command the result of the comparison would be:</para>
 
 <screen
 >aa
@@ -1524,7 +1549,7 @@ ea - eg
 fa</screen>
 
 <para
->Internamente, o algoritmo de correspondência vê os ficheiros após ter corrido o pré-processador de correspondência de linhas, mas no ecrã, o ficheiro está inalterado. (O pré-processador normal iria mudar os dados também no ecrã.)</para>
+>Internally the matching algorithm sees the files after running the line matching preprocessor, but on the screen the file is unchanged. (The normal preprocessor would change the data also on the screen.)</para>
 
 <sect2 id="sedbasics"
 ><title
@@ -1532,93 +1557,93 @@ fa</screen>
 >sed</command
 ></title>
 <para
->Esta secção só introduz algumas funcionalidades muito básicas do <command
+>This section only introduces some very basic features of <command
 >sed</command
->. Para mais informações veja as páginas <ulink url="info:/sed"
+>. For more information see <ulink url="info:/sed"
 >info:/sed</ulink
-> ou <ulink url="http://www.gnu.org/software/sed/manual/html_mono/sed.html"
+> or <ulink url="http://www.gnu.org/software/sed/manual/html_mono/sed.html"
 > http://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink
->. Existe uma versão pré-compilada para o &Windows; em <ulink url="http://unxutils.sourceforge.net"
+>. A precompiled version for &Windows; can be found at <ulink url="http://unxutils.sourceforge.net"
 > http://unxutils.sourceforge.net</ulink
->. Repare no facto de que os exemplos seguintes assumem que o comando <command
+>. Note that the following examples assume that the <command
 >sed</command
-> está numa pasta referida pela sua variável de ambiente <envar
+> command is in some directory in the <envar
 >PATH</envar
->. Se não for este o caso, você terá de indicar a localização absoluta completa para o comando. Repare também que os seguintes exemplos usam a plica simples (<literal
+> environment variable. If this is not the case, you have to specify the full absolute path for the command. Also note that the following examples use the single quotation mark (<literal
 >'</literal
->) que não irá funcionar para o &Windows;. No &Windows;, você deverá usar as aspas (<literal
+>) which won't work for &Windows;. On &Windows; you should use the double quotation marks (<literal
 >"</literal
->) em alternativa.</para>
+>) instead.</para>
 <para
->Neste contexto, só é usado o comando de substituição do <command
+>In this context only the <command
 >sed</command
->:</para>
+> substitute command is used:</para>
 <screen
 ><command
 >sed</command
 > 's/<replaceable
->EXP_REG</replaceable
+>REGEXP</replaceable
 >/<replaceable
->SUBSTITUIÇÃO</replaceable
+>REPLACEMENT</replaceable
 >/<replaceable
->OPÇÕES</replaceable
+>FLAGS</replaceable
 >'</screen>
 <para
->Antes de usar um comando novo dentro do &kdiff3;, deverá primeiro testá-lo numa consola. Aqui, o comando <command
+>Before you use a new command within &kdiff3;, you should first test it in a console. Here the <command
 >echo</command
-> é útil. Exemplo:</para>
+>-command is useful. Example:</para>
 
 <screen
 ><command
 >echo</command
-> abracadabra | <command
+> abrakadabra | <command
 >sed</command
 > 's/a/o/'
 <computeroutput
->obracadabra</computeroutput
+>obrakadabra</computeroutput
 ></screen>
 
 <para
->Este exemplo mostra um comando muito simples do 'sed' que substitui a primeira ocorrência do <quote
+>This example shows a very simple sed-command that replaces the first occurance of <quote
 >a</quote
-> por um <quote
+> with <quote
 >o</quote
->. Se quiser substituir todas as ocorrências, então irá necessitar da opção <parameter
+>. If you want to replace all occurances then you need the <parameter
 >g</parameter
->:</para>
+> flag:</para>
 
 <screen
 ><command
 >echo</command
-> abracadabra | <command
+> abrakadabra | <command
 >sed</command
 > 's/a/o/g'
 <computeroutput
->obrocodobro</computeroutput
+>obrokodobro</computeroutput
 ></screen>
 
 <para
->O símbolo <quote
+>The <quote
 ><literal
 >|</literal
 ></quote
-> é o comando de 'pipe' (tubo) que transfere o resultado do comando anterior para os dados de entrada do comando seguinte. Se quiser testar com um ficheiro maior, então poderá usar o <command
+> symbol is the pipe-command that transfers the output of the previous command to the input of the following command. If you want to test with a longer file then you can use <command
 >cat</command
-> nos sistemas Unix ou o <command
+> on Unix-like systems or <command
 >type</command
-> nos sistemas &Windows;. O <command
+> on &Windows;-like systems. <command
 >sed</command
-> fará a substituição para cada linha.</para>
+> will do the substitution for each line.</para>
 
 <screen
 ><command
 >cat</command
 > <replaceable
->ficheiro</replaceable
+>filename</replaceable
 > |<command
 >sed</command
 > <replaceable
->opções</replaceable
+>options</replaceable
 ></screen>
 
 
@@ -1632,17 +1657,17 @@ fa</screen>
 ><title
 >Ignorar Outros Tipos de Comentários</title>
 <para
->De momento, o &kdiff3; só compreende comentários de C/C++. Se usar o Comando do Pré-Processador-de-Correspondência-de-Linhas, poderá também ignorar outros tipos de comentários, se os converter para comentários de C/C++.</para>
+>Currently &kdiff3; understands only C/C++ comments. Using the Line-Matching-Preprocessor-Command you can also ignore other types of comments, by converting them into C/C++-comments.</para>
 
 <informalexample>
 <para
->Para ignorar os comentários que começam por <literal
+>To ignore comments starting with <literal
 >#</literal
->, poderia convertê-los para <literal
+>, you would like to convert them to <literal
 >//</literal
->. Lembre-se que também terá de activar a opção <guilabel
->Ignorar os Comentários de C/C++</guilabel
-> para fazer efeito. Um Comando-de-Pré-Processador-de-Correspondência-de-Linhas seria:</para>
+>. Note that you also must enable the <guilabel
+>Ignore C/C++-Comments</guilabel
+> option to get an effect. An appropriate Line-Matching-Preprocessor-Command would be:</para>
 
 <screen
 ><command
@@ -1651,31 +1676,31 @@ fa</screen>
 </informalexample>
 
 <para
->Dado que para o <command
+>Since for <command
 >sed</command
-> o carácter <literal
+> the <literal
 >/</literal
-> tem um significado especial, é necessário colocar o carácter <literal
+> character has a special meaning, it is necessary to place the <literal
 >\</literal
-> antes de cada <literal
+> character before each <literal
 >/</literal
-> no texto de substituição. Algumas das vezes o <literal
+> in the replacement string. Sometimes the <literal
 >\</literal
-> é necessário para adicionar ou remover um significado especial para certos caracteres. As plicas simples (<literal
+> is required to add or remove a special meaning of certain characters. The single quotation marks (<literal
 >'</literal
->) antes e depois do comando de substituição são importantes, caso contrário a linha de comandos iria tentar interpretar alguns caracteres especiais como o <literal
+>) before and after the substitution-command are important now, because otherwise the shell will try to interpret some special characters like <literal
 >#</literal
->, o <literal
+>, <literal
 >$</literal
-> ou o <literal
+> or <literal
 >\</literal
-> antes de os passar para o <command
+> before passing them to <command
 >sed</command
->. Lembre-se que no &Windows; irá necessitar aqui das aspas (<literal
+>. Note that on &Windows; you will need the double quotation marks (<literal
 >"</literal
->). O &Windows; substitui os outros caracteres como o <literal
+>) here. &Windows; substitutes other characters like <literal
 >%</literal
->, por isso você terá de fazer algumas experiências.</para>
+>, so you might have to experiment a little bit.</para>
 </sect3>
 
 <sect3
@@ -1683,7 +1708,7 @@ fa</screen>
 >Diff sem Distinguir Capitalização</title>
 
 <para
->Use o seguinte Comando-de-Pré-Processador-de-Correspondência-de-Linhas para converter os dados de entrada para maiúsculas:</para>
+>Use the following Line-Matching-Preprocessor-Command to convert all input to uppercase:</para>
 
 <screen
 ><command
@@ -1691,43 +1716,47 @@ fa</screen>
 > 's/\(.*\)/\U\1/'</screen>
 
 <para
->Aqui o <literal
+>Here the <quote
+><literal
 >.*</literal
-> é uma expressão regular que corresponde a qualquer texto e, no seu contexto, irá corresponder a todos os caracteres da linha. O <literal
+></quote
+> is a regular expression that matches any string and in this context matches all characters in the line. The <literal
 >\1</literal
-> no texto de substituição refere-se ao texto correspondente ao primeiro par de <literal
+> in the replacement string refers to the matched text within the first pair of <literal
 >\(</literal
-> e <literal
+> and <literal
 >\)</literal
->. O <literal
+>. The <literal
 >\U</literal
-> converte o texto inserido para maiúsculas. </para>
+> converts the inserted text to uppercase. </para>
 </sect3>
 
 <sect3
 ><title
 >Ignorar as Palavras-Chave do Controlo de Versões</title>
 <para
->O <acronym
+><acronym
 >CVS</acronym
-> e os outros sistemas de controlo de versões usam várias palavras-chave para inserir automaticamente sequências de texto geradas (<ulink url="info:/cvs/Keyword substitution"
->Substituição de palavras-chave</ulink
->). Todas elas seguem o padrão "$PALAVRA-CHAVE texto gerado$". É necessário agora um Comando de Pré-Processador por Correspondência de Linha que remova apenas o texto gerado:</para>
+> and other version control systems use several keywords to insert automatically generated strings (<ulink url="info:/cvs/Keyword substitution"
+>info:/cvs/Keyword substitution</ulink
+>). All of them follow the pattern <literal
+>$KEYWORD generated text$</literal
+>. We now need a Line-Matching-Preprocessor-Command that removes only the generated text:</para>
 <screen
 ><command
 >sed</command
 > 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'</screen>
 
 <para
->O <literal
+>The <literal
 >\|</literal
-> separa as palavras-chave possíveis. Poderá querer modificar esta lista, de acordo com as suas necessidades. O <literal
+> separates the possible keywords. You might want to modify this list according to your needs. The <literal
 >\</literal
-> antes do <literal
+> before the <literal
 >$</literal
-> é necessário porque, caso contrário, o <literal
+> is necessary because otherwise the <literal
 >$</literal
-> irá corresponder ao fim da linha. </para>
+> matches the end of the line. </para>
 <para
 >Ao experimentar com o <command
 >sed</command
@@ -1738,24 +1767,24 @@ fa</screen>
 ><title
 >Ignorar os Números</title>
 <para
->A indiferença em relação aos números é de facto uma opção incorporada. Mas, como outro exemplo, seria assim como iria ficar como um comando do Pré-Processador da Correspondência de Linhas.</para>
+>Ignoring numbers actually is a built-in option. But as another example, this is how it would look as a Line-Matching-Preprocessor-command.</para>
 <screen
 ><command
 >sed</command
 > 's/[0123456789.-]//g'</screen>
 <para
->Todos os caracteres dentro do <literal
+>Any character within <literal
 >[</literal
-> e do <literal
+> and <literal
 >]</literal
-> são uma correspondência que será substituída por nada. </para>
+> is a match and will be replaced with nothing. </para>
 </sect3>
 
 <sect3
 ><title
 >Ignorar Certas Colunas</title>
 <para
->Em algumas ocasiões um determinado texto tem uma formatação demasiado restrita e contém colunas que deseja sempre ignorar, enquanto que existem outras colunas que deseje preservar para análise. No exemplo seguinte, as primeiras cinco colunas (caracteres) são ignoradas, as próximas dez são preservadas, depois as próximas cinco colunas serão ignoradas de novo e o resto da linha é preservada.</para>
+>Sometimes a text is very strictly formatted, and contains columns that you always want to ignore, while there are other columns you want to preserve for analysis. In the following example the first five columns (characters) are ignored, the next ten columns are preserved, then again five columns are ignored and the rest of the line is preserved.</para>
 
 <screen
 ><command
@@ -1763,17 +1792,17 @@ fa</screen>
 > 's/.....\(..........\).....\(.*\)/\1\2/'</screen>
 
 <para
->Cada ponto <literal
+>Each dot <literal
 >.</literal
-> corresponde a um único carácter. O <literal
+> matches any single character. The <literal
 >\1</literal
-> e o <literal
+> and <literal
 >\2</literal
-> no texto de substituição referem-se ao texto correspondente dentro do primeiro e segundo pares de <literal
+> in the replacement string refer to the matched text within the first and second pair of <literal
 >\(</literal
-> e <literal
+> and <literal
 >\)</literal
->, correspondendo ao texto a preservar.</para>
+> denoting the text to be preserved.</para>
 </sect3>
 
 <sect3
@@ -1781,18 +1810,18 @@ fa</screen>
 >Combinar Várias Substituições</title>
 
 <para
->Em algumas situações você deseja aplicar várias substituições de uma vez. Poderá então usar o ponto-e-vírgula <literal
+>Sometimes you want to apply several substitutions at once. You can then use the semicolon <literal
 >;</literal
-> para separar uma da outra.</para>
+> to separate these from each other.</para>
 
 <screen
 ><command
 >echo</command
-> abracadabra | <command
+> abrakadabra | <command
 >sed</command
 > 's/a/o/g;s/\(.*\)/\U\1/'
 <computeroutput
->OBROCODOBRO</computeroutput
+>OBROKODOBRO</computeroutput
 ></screen>
 
 </sect3>
@@ -1805,39 +1834,39 @@ fa</screen>
 >sed</command
 ></title>
 <para
->Em vez do <command
+>Instead of <command
 >sed</command
->, poderá querer usar algo diferente, como o <command
+> you might want to use something else like <command
 >perl</command
 >.</para>
 <screen
 ><command
 >perl</command
 > -p -e 's/<replaceable
->EXP_REG</replaceable
+>REGEXP</replaceable
 >/<replaceable
->SUBSTITUIÇÃO</replaceable
+>REPLACEMENT</replaceable
 >/<replaceable
->OPÇÕES</replaceable
+>FLAGS</replaceable
 >'</screen>
 <para
->Mas alguns detalhes são diferentes no <command
+>But some details are different in <command
 >perl</command
->. Lembre-se que, onde o <command
+>. Note that where <command
 >sed</command
-> necessitava do <literal
+> needed <literal
 >\(</literal
-> e do <literal
+> and <literal
 >\)</literal
->, o <command
+> <command
 >perl</command
-> necessita da versão mais simples <literal
+> requires the simpler <literal
 >(</literal
-> e <literal
+> and <literal
 >)</literal
-> sem o <literal
+> without preceding <literal
 >\</literal
-> precedente.</para>
+>.</para>
 
 <screen
 ><command
@@ -1893,15 +1922,15 @@ fa</screen>
 <para
 >Os comandos do pré-processador são normalmente muito úteis, mas como acontece com qualquer opção que modifica os seus textos ou esconde algumas diferenças automaticamente, você poderá saltar por cima de certas diferenças e, no pior dos casos, destruir dados importantes. </para
 ><para
->Por esta razão, durante uma junção, se for usado um comando pré-processador normal, o &kdiff3; dizer-lhe-á isso e perguntar-lhe-á se deverá ser desactivado ou não. Mas não o irá avisar se estiver um Pré-Processador de Correspondência de Linhas activo. A junção não irá ficar completa até que todos os conflitos tenham sido resolvidos. Se tiver desactivado o <guilabel
->Mostrar os Espaços em Branco</guilabel
->, então as diferenças que foram removidas com o Pré-Processador de Correspondência de Linhas ficarão também invisíveis. Se o botão para Gravar continuar inactivo durante uma junção (devido a conflitos por resolver), verifique se activa o <guilabel
->Mostrar os Espaços em Branco</guilabel
->. Se não quiser juntar essas diferenças menos importantes poderá escolher a opção <guimenuitem
->Escolher [A|B|C] nos Conflitos de Espaço em Branco por Resolver</guimenuitem
-> no menu <guimenu
->Juntar</guimenu
->. </para>
+>For this reason during a merge if a normal preprocessor-command is being used &kdiff3; will tell you so and ask you if it should be disabled or not. But it won't warn you if a Line-Matching-Preprocessor-command is active. The merge will not complete until all conflicts are solved. If you disabled <guilabel
+>Show White Space</guilabel
+> then the differences that were removed with the Line-Matching-Preprocessor-command will also be invisible. If the Save-button remains disabled during a merge (because of remaining conflicts), make sure to enable <guilabel
+>Show White Space</guilabel
+>. If you don't wan't to merge these less important differences manually you can select <guimenuitem
+>Choose [A|B|C] For All Unsolved Whitespace Conflicts</guimenuitem
+> in the <guimenu
+>Merge</guimenu
+> menu. </para>
 </sect2>
 </sect1>
 </chapter>
@@ -1916,7 +1945,7 @@ fa</screen>
 <para
 >Normalmente, os programadores precisam de modificar vários ficheiros numa pasta para atingir os seus fins. Para isso, o &kdiff3; também lhe permite comparar e juntar várias pastas de forma recursiva! </para
 ><para
->Ainda que a comparação e junção de pastas pareça ser bastante óbvia, existem vários detalhes que o utilizador deverá conhecer. O mais importante é, obviamente, o facto de que vários ficheiros poderão ser afectados por cada operação. Se não tiver cópias de segurança dos seus dados originais, então poderá ser bastante difícil ou mesmo impossível de voltar ao estado original. Por isso, antes de começar uma junção, certifique-se que os seus dados estão a salvo e que é possível voltar atrás. Se cria um pacote ou usa um sistema de controlo de versões é uma decisão sua, mas mesmo os programadores experientes e os integradores precisam do código antigo e do novo. E repare que até ao autor do &kdiff3; tenta fazer o seu melhor, mas não pode garantir que não existam erros. De acordo com a GPL da &GNU;, não existe NENHUMA GARANTIA de qualquer forma para este programa. Por isso, seja humilde e tenha sempre em mente: </para>
+>Even though comparing and merging directories seems to be quite obvious, there are several details that you should know about. Most important is of course the fact that now many files might be affected by each operation. If you don't have backups of your original data, then it can be very hard or even impossible to return to the original state. So before starting a merge, make sure that your data is safe, and going back is possible. If you make an archive or use some version control system is your decision, but even experienced programmers and integrators need the old sources now and then. And note that even though I (the author of &kdiff3;) try to do my best, I can't guarantee that there are no bugs. According to the GNU GPL there is NO WARRANTY whatsoever for this program. So be humble and always keep in mind: </para>
 <blockquote
 ><para>
    <emphasis
@@ -1952,23 +1981,23 @@ fa</screen>
 ></listitem>
      <listitem
 ><para
->... permite-lhe executar a operação seleccionada para todos os itens (tecla <keycap
+>... lets you run the selected operation for all items (key <keycap
 >F7</keycap
->) ou para o item seleccionado (tecla <keycap
+>) or the selected item (key <keycap
 >F6</keycap
 >),</para
 ></listitem>
      <listitem
 ><para
->... permite-lhe continuar a junção depois de uma interacção manual com a tecla <keycap
+>... lets you continue the merge after manual interaction with key <keycap
 >F7</keycap
 >,</para
 ></listitem>
      <listitem
 ><para
->... cria opcionalmente cópias de segurança com a extensão <filename role="extension"
+>... optionally creates backups, with the <filename role="extension"
 >.orig</filename
->,</para
+> extension,</para
 ></listitem>
      <listitem
 ><para
@@ -1989,15 +2018,15 @@ fa</screen>
 ><command
 >kdiff3</command
 > <replaceable
->pasta1 pasta2</replaceable>
+>dir1 dir2</replaceable>
    <command
 >kdiff3</command
 > <replaceable
->pasta1 pasta2</replaceable
+>dir1 dir2</replaceable
 > <option
 >-o</option
 > <replaceable
->pastadest</replaceable
+>destdir</replaceable
 >
 </screen>
 <para
@@ -2013,15 +2042,15 @@ fa</screen>
 ><command
 >kdiff3</command
 > <replaceable
->pasta1 pasta2 pasta3</replaceable>
+>dir1 dir2 dir3</replaceable>
    <command
 >kdiff3</command
 > <replaceable
->pasta1 pasta2 pasta3</replaceable
+>dir1 dir2 dir3</replaceable
 > <option
 >-o</option
 > <replaceable
->pastadest</replaceable
+>destdir</replaceable
 >
 </screen>
 <para
@@ -2032,15 +2061,15 @@ fa</screen>
 > como pasta de destino para a junção. </para>
 
 <para
->Repare que só a comparação é que começa automaticamente, não a junção. Para tal, terá de seleccionar primeiro um item do menu ou a tecla <keycap
+>Note that only the comparison starts automatically, not the merge. For this you first must select a menu entry or the key <keycap
 >F7</keycap
->. (Mais detalhes posteriormente.) </para>
+>. (More details later.) </para>
 </sect2>
 </sect1>
 
 <sect1 id="dirmergevisible"
 ><title
->Informação Visível</title>
+>Visible Information</title>
 <para
 >Ao ler as pastas, aparece uma mensagem que o informa do progresso. Se você interromper a pesquisa das pastas, então só os ficheiros que tenham sido comparados até então serão listados. </para
 ><para
@@ -2068,23 +2097,27 @@ fa</screen>
 <para
 >Cada ficheiro e pasta encontrado durante a pesquisa é aqui mostrado numa árvore. Você poderá seleccionar um item se carregar nele uma vez com o rato. </para
 ><para
->As pastas estão fechadas por omissão. Você poderá expandi-las e fechá-las se carregar no <guiicon
+>The directories are collapsed by default. You can expand and collapse them by clicking on the <guiicon
 >+</guiicon
 >/<guiicon
 >-</guiicon
-> ou se fizer duplo-click no item ou ainda usando as teclas de cursores esquerda/direita. O menu <guimenu
->Directoria</guimenu
-> também contém duas acções <guimenuitem
->Fechar Todas as Sub-Directorias</guimenuitem
-> e <guimenuitem
->Expandir Todas as Sub-Directorias</guimenuitem
->, com as quais poderá fechar ou abrir todas as subpastas de uma vez. </para
+> or by double-clicking the item or by using the <keycap
+>Left Arrow</keycap
+> or <keycap
+>Right Arrow</keycap
+> keys. The <guimenu
+>Directory</guimenu
+> menu also contains two actions <guimenuitem
+>Fold all subdirs</guimenuitem
+> and <guimenuitem
+>Unfold all subdirs</guimenuitem
+> with which you can collapse or expand all directories at once. </para
 ><para
 >Se fizer duplo-click num item de um ficheiro, então a comparação do ficheiro irá começar e irá aparecer a janela de diferenças do ficheiro. </para>
 <para
->A imagem na coluna do nome reflecte o tio de ficheiro na primeira pasta (<quote
+>The image in the name column reflects the file type in the first directory (<quote
 >A</quote
->). Poderá ser um dos seguintes: </para>
+>). It can be one of these: </para>
 <itemizedlist>
      <listitem
 ><para
@@ -2144,15 +2177,15 @@ fa</screen>
 ><title
 >A Coluna de Operação</title>
 <para
->Depois de comparar as patas, o &kdiff3; avalia também uma proposta para uma operação de junção. Esta é mostrada na coluna de <guilabel
->Operação</guilabel
->. O utilizador poderá modificar a operação se carregar na operação que deseja alterar. Irá aparecer um pequeno menu que lhe permite seleccionar uma operação para esse item (Poderá também seleccionar as operações mais necessárias através do teclado. O Ctrl+1/2/3/4/Del irá seleccionar o A/B/C/Juntar/Remover, respectivamente, se estiver disponível.) Esta operação será executada durante a junção. Depende do item e do modo de junção em que se encontra e de que operações estão disponíveis. O modo de junção é um dos seguintes </para>
+>After comparing the directories &kdiff3; also evaluates a proposal for a merge operation. This is shown in the <guilabel
+>Operation</guilabel
+> column. You can modify the operation by clicking on the operation you want to change. A small menu will popup and allows you to select an operation for that item. (You can also select the most needed operations via keyboard. Ctrl+1/2/3/4/Del will select A/B/C/Merge/Delete respectively if available.) This operation will be executed during the merge. It depends on the item and on the merge-mode you are in, what operations are available. The merge-mode is one of </para>
 <itemizedlist>
      <listitem
 ><para
->Junção de três pastas (a <quote
+>Three directory-merge (<quote
 >A</quote
-> é tratada como a base mais antiga de ambas).</para
+> is treated as older base of both).</para
 ></listitem>
      <listitem
 ><para
@@ -2160,8 +2193,8 @@ fa</screen>
 ></listitem>
      <listitem
 ><para
->Modo de sincronização de duas pastas (activado com a opção <guimenuitem
->Sincronizar as Directorias</guimenuitem
+>Two directory-sync-mode (activate via option <guimenuitem
+>Synchronize Directories</guimenuitem
 >).</para
 ></listitem>
 </itemizedlist>
@@ -2170,41 +2203,41 @@ fa</screen>
 <itemizedlist>
      <listitem
 ><para
->todas as três pastas forem iguais: Copiar do C</para
+>all three directories are equal: Copy from C</para
 ></listitem>
      <listitem
 ><para
->o A e o C são iguais mas o B não: Copiar a partir do B (ou se o B não existir, remover o destino se existir)</para
+>A and C are equal but B is not: Copy from B (or if B does not exist, delete the destination if exists)</para
 ></listitem>
      <listitem
 ><para
->o A e o B são iguais mas o C não: Copiar a partir do C (ou se o C não existir, remover o destino se existir)</para
+>A and B are equal but C is not: Copy from C (or if C does not exist, delete the destination if exists)</para
 ></listitem>
      <listitem
 ><para
->o B e o C são iguais mas o A não: Copiar a partir do C (ou se o C não existir, remover o destino se existir)</para
+>B and C are equal but A is not: Copy from C (or if C does not exist, delete the destination if exists)</para
 ></listitem>
      <listitem
 ><para
->só o A existir: Remover o destino (se existir)</para
+>only A exists: Delete the destination (if exists)</para
 ></listitem>
      <listitem
 ><para
->só o B existir: Copiar a partir do B</para
+>only B exists: Copy from B</para
 ></listitem>
      <listitem
 ><para
->só o C existir: Copiar a partir do C</para
+>only C exists: Copy from C</para
 ></listitem>
      <listitem
 ><para
->o A, o B e o C não são iguais: Juntar</para
+>A, B and C are not equal: Merge</para
 ></listitem>
      <listitem
 ><para
->o A, o B e o C não tiverem o mesmo tipo de ficheiro (&eg; o A é uma pasta e o B um ficheiro): <errorname
->Erro: Tipo de Ficheiros em Conflito</errorname
->. Enquanto existirem itens nesta situação, a junção de pastas não poderá começar.</para
+>A, B and C don't have the same file type (&eg; A is a directory, B is a file): <errorname
+>Error: Conflicting File Types</errorname
+>. While such items exist the directory merge cannot start.</para
 ></listitem>
 </itemizedlist>
 <para
@@ -2212,79 +2245,79 @@ fa</screen>
 <itemizedlist>
      <listitem
 ><para
->ambas as pastas forem iguais: Copiar do B</para
+>both directories are equal: Copy from B</para
 ></listitem>
      <listitem
 ><para
->o A existir, mas o B não: Copiar a partir do A</para
+>A exists, but not B: Copy from A</para
 ></listitem>
      <listitem
 ><para
->o B existir, mas o A não: Copiar a partir do B</para
+>B exists, but not A: Copy from B</para
 ></listitem>
      <listitem
 ><para
->o A e o B existirem mas não forem iguais: Juntar</para
+>A and B exist but are not equal: Merge</para
 ></listitem>
      <listitem
 ><para
->o A e o B não tiverem o mesmo tipo de ficheiro (&eg; o A é uma pasta e o B um ficheiro): <errorname
->Erro: Tipo de Ficheiros em Conflito</errorname
->. Enquanto existirem itens nesta situação, a junção de pastas não poderá começar.</para
+>A and B don't have the same file type (&eg; A is a directory, B is a file): <errorname
+>Error: Conflicting File Types</errorname
+>. While such items exist the directory merge cannot start.</para
 ></listitem>
 </itemizedlist>
 <para
->O modo de sincronização só está activo se forem indicadas duas pastas e não se não for indicado nenhum destino explícito, assim como a opção <guilabel
->Sincronizar as directorias</guilabel
-> terá de estar activa. Nesse caso, o &kdiff3; irá seleccionar uma operação por omissão, de modo a que ambas as pastas fiquem iguais no fim. Se, para um item ... </para>
+>Sync-mode is active if only two directories and no explicit destination were specified and if the option <guilabel
+>Synchronize directories</guilabel
+> is active. &kdiff3; then selects a default operation so that both directories are the same afterwards. If for an item </para>
 <itemizedlist>
      <listitem
 ><para
->ambas as pastas forem iguais: Não será feito nada.</para
+>both directories are equal: Nothing will be done.</para
 ></listitem>
      <listitem
 ><para
->o A existir mas o B não: Copiar o A para o B</para
+>A exists, but not B: Copy A to B</para
 ></listitem>
      <listitem
 ><para
->o B existir mas o A não: Copiar o B para o A</para
+>B exists, but not A: Copy B to A</para
 ></listitem>
      <listitem
 ><para
->o A e o B existirem, mas não forem iguais: Juntar e guardar o resultado em ambas as pastas. (Para o utilizador, o nome do ficheiro gravado visível será o B, mas o KDiff3 irá copiar o B também para o A.)</para
+>A and B exist, but are not equal: Merge and store the result in both directories. (For the user the visible save-filename is B, but then &kdiff3; copies B also to A.)</para
 ></listitem>
      <listitem
 ><para
->o A e o B não tiverem o mesmo tipo de ficheiro (&eg; o A é uma pasta e o B um ficheiro): <errorname
->Erro: Tipo de Ficheiros em Conflito</errorname
->. Enquanto existirem itens nesta situação, a junção de pastas não poderá começar.</para
+>A and B don't have the same file type (&eg; A is a directory, B is a file): <errorname
+>Error: Conflicting File Types</errorname
+>. While such items exist the directory merge cannot start.</para
 ></listitem>
 </itemizedlist>
 <para
->Quando duas pastas forem reunidas e a opção <guilabel
->Copiar o mais recente em vez de juntar</guilabel
-> estiver seleccionada, então o KDiff3 irá olhar para as datas e irá optar por escolher o ficheiro mais recente. Se os ficheiros não forem iguais mas tiverem datas iguais, então a operação irá conter <errorname
->Erro: As datas são iguais mas os ficheiros não.</errorname
->. Enquanto esses itens existirem a junção de pastas não poderá começar. </para>
+>When two directories are merged and the option <guilabel
+>Copy newer instead of merging</guilabel
+> is selected, then &kdiff3; looks at the dates and proposes to choose the newer file. If the files are not equal but have equal dates, then the operation will contain <errorname
+>Error: Dates are equal but files are not.</errorname
+> While such items exist the directory merge cannot start. </para>
 </sect2>
 
 <sect2 id="status"
 ><title
 >A Coluna de Estado</title>
 <para
->Durante a junção, os ficheiros serão processados um a seguir ao outro. A coluna de estado irá mostrar <computeroutput
->Terminado</computeroutput
-> para os itens em que a operação de junção foi bem sucedida e outros textos se algo ocorreu de inesperado. Quando se terminar uma junção, o utilizador deverá então fazer uma última verificação para confirmar se o estado de todos os itens é aceitável. </para>
+>During the merge one file after the other will be processed. The status column will show <computeroutput
+>Done</computeroutput
+> for items where the merge operation has succeeded, and other texts if something unexpected happened. When a merge is complete, then you should make a last check to see if the status for all items is agreeable. </para>
 </sect2>
 
 <sect2 id="statisticscolulmns"
 ><title
 >Colunas de Estatísticas</title>
 <para
->Quando o modo de comparação de ficheiros <guilabel
->Análise Completa</guilabel
-> estiver activo nas opções, então o &kdiff3; irá mostrar colunas extra que contêm o número de conflitos não resolvidos, resolvidos, de espaços em branco e dos outros conflitos. (A coluna de resolvidos só irá aparecer ao comparar ou ao juntar três pastas.) </para>
+>When the file comparison mode <guilabel
+>Full Analysis</guilabel
+> is enabled in the options, then &kdiff3; will show extra columns containing the numbers of unsolved, solved, nonwhite and whitespace conflicts. (The solved-column will only show when comparing or merging three directories.) </para>
 </sect2>
 
 </sect1>
@@ -2292,17 +2325,17 @@ fa</screen>
 
 <sect1 id="dothemerge"
 ><title
->Fazer uma Junção</title>
+>Doing A Merge</title>
 <para
 >O utilizador tanto poderá reunir o item seleccionado de momento (ficheiro ou pasta) ou todos os itens. Quando tiver feito todas as suas opções de operação (em todas as subpastas também), aí então poderá iniciar a junção. </para
 ><para
->Tenha em atenção que, se não tiver indicado explicitamente uma pasta de destino, então o destino será o <quote
+>Be aware that if you didn't specify a destination directory explicitely, then the destination will be <quote
 >C</quote
-> no modo de três pastas, o <quote
+> in three directory mode, <quote
 >B</quote
-> no modo de junção de duas pastas e no modo de sincronização será o <quote
+> in two directory merge mode, and in sync-mode it will be <quote
 >A</quote
-> e/ou o <quote
+> and/or <quote
 >B</quote
 >. </para
 ><para
@@ -2311,74 +2344,74 @@ fa</screen>
      <listitem
 ><para
 ><guilabel
->Directorias Recursivas</guilabel
->: Se estiver desligada, então os itens em todas as subpastas não serão tratados.</para
+>Recursive Directories</guilabel
+>: If this is off, then items in subdirectories will not be found.</para
 ></listitem>
      <listitem
 ><para
 ><guilabel
->Padrão</guilabel
+>Pattern</guilabel
 >/<guilabel
->Anti-Padrão</guilabel
->: Inclui/exclui os itens que correspondam ao padrão</para
+>Anti-Pattern</guilabel
+>: Include/exclude items that match</para
 ></listitem>
      <listitem
 ><para
 ><guilabel
->Excluir os Ficheiros Escondidos</guilabel
+>Exclude Hidden Files</guilabel
 ></para
 ></listitem>
      <listitem
 ><para
 ><guilabel
->Listar apenas os Deltas</guilabel
->: Os ficheiros que correspondam em todas as pastas não aparecem na árvore e, por isso, também não aparecem no destino.</para
+>List only Deltas</guilabel
+>: Files that match in all directories don't appear in the tree, and hence also not in the destination.</para
 ></listitem>
 </itemizedlist>
 <para
->(Na versão actual, é necessário o próprio utilizador fazer uma nova pesquisa através do menu <menuchoice
+>(In the current version, you must do a rescan via menu <menuchoice
 ><guimenu
->Directoria</guimenu
+>Directory</guimenu
 ><guimenuitem
->Analisar de Novo</guimenuitem
+>Rescan</guimenuitem
 ></menuchoice
->, depois de alterar as opções que afectam a pesquisa da pasta.) </para
+> yourself, after changing options affecting the directory scan.) </para
 ><para
 >Se estiver satisfeito até agora, o resto é simples. </para
 ><para
->Para juntar todos os itens: Seleccione <guimenuitem
->Iniciar/Continuar a Junção da Directoria</guimenuitem
-> no menu <guimenu
->Directoria</guimenu
-> ou carregue em <keycap
+>To merge all items: Select <guimenuitem
+>Start/Continue directory merge</guimenuitem
+> in the <guimenu
+>Directory</guimenu
+> menu or press <keycap
 >F7</keycap
-> (que é o atalho). Para juntar apenas o item actual: Seleccione <guimenuitem
->Executar a Operação no Item Actual</guimenuitem
-> ou carregue em <keycap
+> (which is the shortcut). To merge only the current item: Select <guimenuitem
+>Run Operation For Current Item</guimenuitem
+> or press <keycap
 >F6</keycap
 >. </para
 ><para
 >Se, devido à existência de tipos de ficheiro em conflito, ainda permanecerem alguns itens com operações inválidas, então irá aparecer uma mensagem onde serão evidenciados esses itens, para que possa seleccionar uma operação válida para cada item. </para
 ><para
->Se juntar todos os itens, irá aparecer uma janela que lhe apresenta as opções <guibutton
->Fazê-lo</guibutton
+>If you merge all items a dialog will appear giving you the options <guibutton
+>Do it</guibutton
 >, <guibutton
->Simulá-lo</guibutton
-> e <guibutton
->Cancelar</guibutton
+>Simulate it</guibutton
+> and <guibutton
+>Cancel</guibutton
 >. </para>
 <itemizedlist>
      <listitem
 ><para
->Seleccione <guibutton
->Simulá-lo</guibutton
-> se quiser ver o que seria feito sobre o item sem aplicar de facto as modificações. Será apresentada uma lista descritiva com todas as operações.</para
+>Select <guibutton
+>Simulate it</guibutton
+> if you want to see what would be done without actually doing it. A verbose list of all operations will be shown.</para
 ></listitem>
      <listitem
 ><para
->Caso contrário, seleccione <guibutton
->Fazê-lo</guibutton
-> para iniciar de facto a junção.</para
+>Otherwise select <guibutton
+>Do it</guibutton
+> to really start merging.</para
 ></listitem>
 </itemizedlist>
 <para
@@ -2386,34 +2419,34 @@ fa</screen>
 >ver a imagem grande</link
 >). </para
 ><para
->Quando tiver terminado um ficheiro, seleccione de novo <guimenuitem
->Iniciar/continuar a junção da directoria</guimenuitem
-> ou a tecla <keycap
+>When you have finished with a file, again select <guimenuitem
+>Start/Continue directory merge</guimenuitem
+> or the key <keycap
 >F7</keycap
->. Se não tiver ainda gravado nada, irá aparecer uma janela a pedir-lhe isso. Aí, o &kdiff3; irá passar ao próximo item. </para
+>. If you haven't saved yet, a dialog will ask you to do so. Then &kdiff3; will continue with the next item. </para
 ><para
->Quando o &kdiff3; encontrar um erro, indicar-lhe-á tal facto e irá mostrar a informação descritiva do estado. No fundo desta lista, existirão algumas mensagens de erro que o deverão ajudar a compreender a causa do problema. Quando continuar a junção (com a tecla <keycap
+>When &kdiff3; encounters an error, it will tell you so and will show the verbose-status-information. At the bottom of this list, there will be some error messages which should help you to understand the cause of the problem. When you continue merging (<keycap
 >F7</keycap
->), o &kdiff3; indicar-lhe-á a opção para repetir ou saltar o item que causou o problema. Isto significa que, antes de continuar, poderá escolher outra operação ou resolver o problema por outros meios. </para
+> key) &kdiff3; will give you the choice to retry or skip the item that caused the problem. This means that before continuing you can choose another operation or solve the problem by other means. </para
 ><para
 >Quando a junção estiver completa, o &kdiff3; informá-lo-á então com uma mensagem. </para
 ><para
->Se alguns dos itens foram reunidos individualmente, então o &kdiff3; irá recordar isto (enquanto esta sessão de junção prosseguir) e não os juntará de novo, até que a junção para todos os itens tenha sido executada. Mesmo quando a junção tenha sido ignorada ou não tenha sido gravado nada, estes itens irão contar como completos. Só quando tiver alterado a operação de junção é que o item será reunido de novo. </para>
+>If some items were merged individually then &kdiff3; remembers this (while this merge-session goes on), and doesn't merge them again when later the merge for all items is run. Even when the merge was skipped or nothing was saved these items count as completed. Only when you change the merge operation the item will be merged again. </para>
 </sect1>
 
 <sect1 id="dirmergeoptions"
 ><title
 >Opções para Comparar e Juntar Pastas</title>
 <para
->As preferências do &kdiff3; (no menu <menuchoice
+>The &kdiff3; preferences (menu <menuchoice
 ><guimenu
->Configuração</guimenu
+>Settings</guimenu
 ><guimenuitem
->Configurar o KDiff3</guimenuitem
+>Configure KDiff3</guimenuitem
 ></menuchoice
->) têm agora uma secção intitulada <guilabel
->Junção de Directorias</guilabel
-> com as seguintes opções: </para>
+>) now has a section called <guilabel
+>Directory Merge</guilabel
+> with these options: </para>
 
 <variablelist>
    <varlistentry
@@ -2433,33 +2466,33 @@ fa</screen>
 ></term
 ><listitem
 ><para
->Só os ficheiros que correspondam ao padrão ou padrões aqui indicados é que serão colocados na árvore. Poderá ser indicado mais do que um padrão através do separador ponto-e-vírgula <literal
+>Only files that match any pattern here will be put in the tree. More than one pattern may be specified here via using the semicolon <literal
 >;</literal
->. São considerados caracteres especiais válidos o <literal
+> as separator. Valid wildcards: <literal
 >*</literal
-> e o <literal
+> and <literal
 >?</literal
 >. (&eg; <literal
 >*.cpp;*.h</literal
->). Por omissão, este campo é igual a <literal
+>). Default is <literal
 >*</literal
->. As pastas não precisam de corresponder a este padrão.</para
+>. Directories need not match this pattern.</para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><guilabel
->Anti-padrões:</guilabel
+>Anti-Pattern(s):</guilabel
 ></term
 ><listitem
 ><para
->Os ficheiros e pastas que correspondam ao padrão ou padrões aqui indicados serão excluídos da árvore. Poderá ser indicado mais do que um padrão através do separador ponto-e-vírgula <literal
+>Files and directories that match this pattern will be excluded from the tree. More than one pattern may be specified here via using the semicolon <literal
 >;</literal
->. São considerados caracteres especiais válidos o <literal
+> as separator. Valid wildcards: <literal
 >*</literal
-> e o <literal
+> and <literal
 >?</literal
->. Por omissão, este campo é igual a <literal
+>. Default is <literal
 >*.orig;*.o</literal
 >.</para
 ></listitem
@@ -2471,13 +2504,13 @@ fa</screen>
 ></term
 ><listitem
 ><para
->Ignora os ficheiros e pastas que são também ignorados pelo <acronym
+>Ignore files and directories that would also be ignored by <acronym
 >CVS</acronym
->. Muitos dos ficheiros gerados automaticamente são ignorados pelo <acronym
+>. Many automatically generated files are ignored by <acronym
 >CVS</acronym
->. A grande vantagem é que esta funcionalidade é específica para cada pasta através de um ficheiro <filename
+>. The big advantage is that this can be directory specific via a local <filename
 >.cvsignore</filename
-> local. (Veja em <ulink url="info:/cvs/cvsignore"
+> file. (See <ulink url="info:/cvs/cvsignore"
 >info:/cvs/cvsignore</ulink
 >.)</para
 ></listitem
@@ -2489,11 +2522,11 @@ fa</screen>
 ></term
 ><listitem
 ><para
->Em alguns sistemas de ficheiros, existe um atributo <quote
->Escondido</quote
->. Em outros sistemas, um nome de ficheiro que comece por <literal
+>On some filesystems files have an <quote
+>Hidden</quote
+> attribute. On other systems a filename starting with a dot (<literal
 >.</literal
-> faz com que este seja considerados escondido. Esta opção permite-lhe decidir se deve incluir estes ficheiros na árvore ou não. Por omissão, são incluídos.</para
+>) causes it to be hidden. This option allows you to decide whether to include these files in the tree or not. Default is on.</para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -2513,20 +2546,20 @@ fa</screen>
 ></term
 ><listitem
 ><para
->Para as ligações a pastas: Quando a opção estiver desactivada, as ligações simbólicas serão comparadas. Se estiver activa, então a ligação será tratada como uma pasta e será pesquisada recursivamente. (Lembre-se que o programa não verifica se a ligação é <quote
->recursiva</quote
->. Por isso, se uma pasta contiver por exemplo uma ligação para ela própria irá causar um ciclo infinito, pelo que ao fim de algum tempo a pilha estoira ou toda a memória será usada e o programa irá estoirar deste modo). Por omissão, a opção está desligada.</para
+>For links to directories: When disabled, then the symbolic links will be compared. When enabled then the link will be treated like a directory and it will be scanned recursively. (Note that the program doesn't check if the link is <quote
+>recursive</quote
+>. So for example a directory that contains a link to the directory would cause an infinite loop, and after some time when the stack overflows or all memory is used up, crash the program.) Default is off.</para
 ></listitem
 ></varlistentry
 >   
    <varlistentry
 ><term
 ><guilabel
->Listar apenas os deltas:</guilabel
+>List only deltas:</guilabel
 ></term
 ><listitem
 ><para
->Somente os itens que não sejam iguais em todas as pastas de entrada é que serão listados, assim como os ficheiros alterados. Como tal, os ficheiros que sejam iguais em todas as pastas não serão copiados numa junção e, se a pasta de destino não contiver os ficheiros antes da junção, o utilizador poderá perder alguns ficheiros mais tarde. (Esta opção poderá ser alterada numa versão posterior). Por omissão, esta opção está desligada.</para
+>Only items that are not equal in all input directories will be listed and only the changed files are visible. Hence files that are equal in all directories won't be copied during a merge and if the destination dir does not contain the files before the merge, you might miss some files later. (This option is likely to be changed in a later version.) Default is off.</para
 ></listitem
 ></varlistentry>
 
@@ -2603,7 +2636,7 @@ fa</screen>
 ></term
 ><listitem
 ><para
->Em vez de juntar, a operação proposta irá copiar os ficheiros mais recentes se ocorreram algumas alterações. (É considerado inseguro, porque implica saber se o outro ficheiro não foi também alterado. Verifique para se certificar em qualquer um dos casos.). Por omissão, a opção está desligada.</para
+>Instead of merging the proposed operation will copy the newer source if changes happened. (Considered unsafe, because it implies that the knowledge, that the other file hasn't been edited too. Check to make sure in every case.) Default is off.</para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -2613,11 +2646,11 @@ fa</screen>
 ></term
 ><listitem
 ><para
->Se um ficheiro ou uma pasta completa for substituído por outro ou for removido, então a versão original mudará para um nome com uma extensão <filename role="extension"
->.orig</filename
->. Se já existir um ficheiro antigo com uma extensão <filename role="extension"
->.orig</filename
->, então este será removido sem ser criada nenhuma cópia de segurança. Isto também afecta a junção normal de ficheiros simples, não só no modo de junção de pastas. Por omissão, a opção está activa.</para
+>If a file or complete directory is replaced by another or is deleted then the original version will be renamed with an <literal role="extension"
+>.orig</literal
+> extension. If an old backup file with <literal role="extension"
+>.orig</literal
+> extension already exists then this will be deleted without backup. This also affects the normal merging of single files, not only in directory-merge mode. Default is on.</para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -2625,38 +2658,38 @@ fa</screen>
 
 <sect1 id="other"
 ><title
->Outras Funções</title>
+>Other Functions</title>
 <sect2
 ><title
 >Modo de Ecrã Repartido/Completo</title>
 <para
->Normalmente a lista de junção da pasta fica visível enquanto um único ficheiro é comparado ou reunido. Com o rato, o utilizador poderá mover a barra separadora que delimita a lista de ficheiros das janelas de diferenças do texto. Se não a quiser, poderá desactivar a <guimenuitem
->Janela Repartida</guimenuitem
-> no menu <guimenu
->Directoria</guimenu
->. Aí, poderá usar a opção <guimenuitem
->Comutar a Vista</guimenuitem
-> no menu <guimenu
->Directoria</guimenu
-> para alternar entre a lista de ficheiros e a janela de diferenças no texto que irá então ocupar o ecrã completo. </para>
+>Usually the directory merge list view remains visible while a single file is compared or merged. With the mouse you can move the the splitter bar that separates the file list from the text-diff windows. If you don't want this, you can disable <guimenuitem
+>Split Screen View</guimenuitem
+> in the <guimenu
+>Directory</guimenu
+> menu. Then you can use <guimenuitem
+>Toggle View</guimenuitem
+> in the <guimenu
+>Directory</guimenu
+> menu to switch between the file list and the text-diff view that then occupy the full screen. </para>
 </sect2>
 <sect2
 ><title
 >Comparar ou Juntar um Único Ficheiro</title>
 <para
->Provavelmente, você irá preferir um duplo-click do rato simples sobre um ficheiro para o poder comparar. Contudo, existe também um item no menu <guimenu
->Directoria</guimenu
->. Poderá também juntar directamente um único ficheiro sem iniciar a junção de pastas, através da opção <guimenuitem
->Juntar um único ficheiro</guimenuitem
-> do menu <guimenu
->Directoria</guimenu
->. Ao gravar o resultado, o estado ficará como terminado e o ficheiro não será reunido de novo se for iniciada uma junção de pastas. </para
+>Probably you will prefer a simple double mouse click on a file in order to compare it. Nevertheless there also exists an entry in the <guimenu
+>Directory</guimenu
+> menu. You can also directly merge a single file, without starting the directory merge via the <guimenuitem
+>Merge single file</guimenuitem
+> in the <guimenu
+>Directory</guimenu
+> Menu. On saving the result, the status will be set to done, and the file will not be merged again if a directory merge is started. </para
 ><para
->Mas repare que esta informação de estado será perdida quando voltar a executar uma pesquisa de pastas: menu <menuchoice
+>But note that this status information will be lost when you rerun a directory scan: <menuchoice
 ><guimenu
->Directoria</guimenu
+>Directory</guimenu
 ><guimenuitem
->Pesquisar de novo</guimenuitem
+>Rescan</guimenuitem
 ></menuchoice
 > </para>
 </sect2>
@@ -2668,12 +2701,12 @@ fa</screen>
 >Tópicos Diversos</title>
 <sect1 id="networktransparency">
 <title
->Transparência na Rede Através do KIO</title>
+>Network Transparency via KIO</title>
 <sect2
 ><title
 >KIO-Slaves</title>
 <para
->O &kde; suporta a transparência na rede através dos 'KIO-slaves'. O &kdiff3; usa isto para ler os ficheiros de entrada e para pesquisar as pastas. Isto significa que você poderá indicar ficheiros e pastas em recursos locais e remotos através dos &URL;s. </para
+>&kde; supports networktransparency via KIO-slaves. &kdiff3; uses this for reading input files and for scanning directories. This means that you can specify files and directories on local and remote resources via &URL;s. </para
 ><para
 >Exemplo: </para
 ><para>
@@ -2687,7 +2720,7 @@ fa</screen>
 </screen>
 </para>
 <para
->A primeira linha compara um ficheiro local com outro ficheiro num servidor de &FTP;. A segunda linha compara uma pasta dentro de um pacote comprimido com uma pasta local. </para
+>The first line compares a local file with a file on an &FTP; server. The second line compares a directory within an compressed archive with a local directory. </para
 ><para
 >Outros 'KIO-slaves' que serão interessantes: </para>
 <itemizedlist>
@@ -2705,7 +2738,7 @@ fa</screen>
 ></listitem>
 <listitem
 ><para
->Recursos do Windows (smb:),</para
+>Windows-resources (smb:),</para
 ></listitem>
 <listitem
 ><para
@@ -2728,37 +2761,37 @@ fa</screen>
 
 <sect2
 ><title
->Como Escrever &URL;s</title>
+>How To Write &URL;s</title>
 <para
->Um dado &URL; tem uma sintaxe diferente, em comparação com as localizações dos ficheiros e pastas locais. Alguns factores terão de ser tidos em consideração: </para>
+>A &URL; has a different syntax compared with paths for local files and directories. Some things should be considered: </para>
 <itemizedlist>
 <listitem
 ><para
->Uma localização poderá ser relativa e conter <literal
+>A path can be relative and can contain <literal
 >.</literal
-> ou <literal
+> or <literal
 >..</literal
->. Isto não é possível para os &URL;s, dado que estes são sempre absolutos. </para
+>. This is not possible for &URL;s which are always absolute. </para
 ></listitem
 ><listitem
 ><para
->Os caracteres especiais têm de ser escritos <quote
->escapados</quote
+>Special characters must be written with <quote
+>escaping</quote
 >. (<quote
 >#</quote
->-><quote
+> becomes <quote
 >%23</quote
->, espaço-><quote
+>, spaces become <quote
 >%20</quote
->, etc.) &eg; Um ficheiro com o nome <quote
->/#xpto#</quote
-> iria ter o URL <literal
->file:/%23xpto%23</literal
+> and so on.) &eg; A file with the name <quote
+>/#foo#</quote
+> would have the &URL; <literal
+>file:///%23foo%23</literal
 >. </para
 ></listitem
 ><listitem
 ><para
->Quando os &URL;s não funcionarem como seria de esperar, tente abri-los primeiro no &konqueror;. </para
+>When &URL;s don't work as expected, try to open them in &konqueror; first. </para
 ></listitem>
 </itemizedlist>
 
@@ -2768,9 +2801,9 @@ fa</screen>
 ><title
 >Capacidades dos 'KIO-Slaves'</title>
 <para
->A transparência na rede tem um senão. Nem todos os recursos têm as mesmas capacidades. </para
+>Network transparency has one drawback: Not all ressources have the same capabilities. </para
 ><para
->Algumas das vezes estas são devidas ao sistema de ficheiros do servidor, enquanto que noutras ocasiões poderá ser devido ao protocolo. Aqui está uma pequena lista das restrições: </para>
+>Sometimes this is due to the filesystem of the server, sometimes due to the protocol. Here is a short list of restrictions: </para>
 <itemizedlist>
 <listitem
 ><para
@@ -2800,31 +2833,31 @@ fa</screen>
 <title
 >Usar o &kdiff3; como uma KPart</title>
 <para
->O &kdiff3; é uma KPart. De momento, implementa a interface <interface
+>&kdiff3; is a KPart. Currently it implements the <interface
 >KParts::ReadOnlyPart</interface
->. </para
+> interface. </para
 ><para
->A sua utilização principal é como visualizador de diferenças no <application
+>It's main use is as difference-viewer in <application
 >KDevelop</application
->. O <application
->KDevelop</application
-> inicia sempre o visualizador de diferenças interno em primeiro lugar. Para invocar o &kdiff3;, carregue no &RMB; na janela do visualizador de diferenças e seleccionar <guimenuitem
->Mostrar no KDiff3Part</guimenuitem
-> no menu de contexto. </para
+>. <application
+>Kdevelop</application
+> always starts the internal difference viewer first. To invoke &kdiff3; press the &RMB; on the difference viewer window and select <guimenuitem
+>Show in KDiff3Part</guimenuitem
+> from the contextmenu. </para
 ><para
 >O &kdiff3; necessita normalmente de dois ficheiros completos como entrada. Se for usado como componente KPart, o &kdiff3; irá assumir que o ficheiro de entrada é um ficheiro de 'patch' no formato unificado. O &kdiff3; irá então obter os nomes dos ficheiros originais do ficheiro de 'patch'. Pelo menos um dos dois ficheiros terá de estar disponível. O &kdiff3; irá então invocar o <command
 >patch</command
 > para criar de novo o segundo ficheiro. </para
 ><para
->No &konqueror;, o utilizador poderá seleccionar um ficheiro de 'patch' e seleccionar <menuchoice
+>In &konqueror; you can select a patch file and select <menuchoice
 ><guisubmenu
->Antevisão em</guisubmenu
+>Preview in</guisubmenu
 ><guimenuitem
 >KDiff3Part</guimenuitem
 ></menuchoice
-> no menu de contexto. Tenha em atenção que isto não irá funcionar se nenhum dos ficheiros originais estiver disponível e não é fiável se os ficheiros originais tiverem sido alterados desde que o ficheiro de 'patch' foi gerado. </para
+> from the contextmenu. Be aware that this won't work if none of the original files are available, and it is not reliable if the original file(s) have changed since the patch-file was generated. </para
 ><para
->Quando é executado como um componente, o &kdiff3; só oferece uma diferença de dois ficheiros, uma barra de ferramentas muito pequena e um menu. A junção ou a comparação de pastas não é suportada nesse caso. </para>
+>When run as a part &kdiff3; only provides the a two file diff, a very small toolbar and menu. Merging or directory comparison are not supported. </para>
 </sect1>
 </chapter>
 
@@ -2836,34 +2869,34 @@ fa</screen>
 <qandaentry
 ><question
 ><para
->Porque é que se chama &kdiff3;? </para
+>Why is it called &kdiff3;? </para
 ></question
 ><answer
 ><para
->As ferramentas <application
+>Tools named <application
 >KDiff</application
-> e <application
+> and <application
 >KDiff2</application
-> (agora chamada &kompare;) já existiam. Para além disso, o &kdiff3; deveria sugerir que consegue juntar ficheiros como a ferramenta <command
+> (now called &kompare;) already exist. Also &kdiff3; should suggest that it can merge like the <command
 >diff3</command
-> da colecção de ferramentas do Diff. </para
+> tool in the Diff-Tool collection. </para
 ></answer
 ></qandaentry>
 
 <qandaentry
 ><question
 ><para
->Porque é que é lançado segundo a <acronym
+>Why did I release it under <acronym
 >GPL</acronym
 >? </para
 ></question
 ><answer
 ><para
->O autor usou programas <acronym
+>I'm using <acronym
 >GPL</acronym
-> durante bastante tempo até agora e aprendeu bastante ao olhar para bastante código. Daí, este é o <quote
->Muito Obrigado</quote
-> para todos os programadores que também o fizeram ou irão fazer no futuro. </para
+> programs for a very long time now and learned very much by having a look at many of the sources. Hence this is my <quote
+>Thank You</quote
+> to all programmers that also did so or will do the same. </para
 ></answer
 ></qandaentry>
 
@@ -2874,17 +2907,15 @@ fa</screen>
 ></question
 ><answer
 ><para
->Você compilou a partir do código mas não indicou provavelmente o prefixo correcto do &kde; com o <command
+>You compiled from source but you probably didn't specify the correct &kde; prefix with <command
 >configure</command
->. Por omissão, o <command
->configure</command
-> deseja instalar no <filename class="directory"
+>. By default configure wants to install in <filename class="directory"
 >/usr/local</filename
->, mas aí o &kde; não consegue encontrar o ficheiro de recursos da interface do utilizador (&ie;, o <filename
+> but then &kde; can't find the user interface ressource file (&ie; <filename
 >kdiff3ui.rc</filename
->). O ficheiro <filename
+>). The <filename
 >README</filename
-> contém mais informações sobre o prefixo correcto. </para
+> file contains more information about the correct prefix. </para
 ></answer
 ></qandaentry>
 
@@ -2895,11 +2926,11 @@ fa</screen>
 ></question
 ><answer
 ><para
->As linhas em que apenas a quantidade de espaços em branco é diferente são tratadas como <quote
->iguais</quote
-> à primeira vista, embora apenas um carácter que não seja um espaço em branco faça com que as linhas sejam <quote
->diferentes</quote
->. Se as linhas semelhantes aparecerem uma ao lado da outra, isto poderá ser de facto uma coincidência, mas é felizmente o caso mais frequente. </para
+>Lines where only the amount of white space characters is different are treated as <quote
+>equal</quote
+>at first, while just one different non-white character causes the lines to be <quote
+>different</quote
+>. If similar lines appear next to each other, this actually is coincidence but this fortunately is often the case. </para
 ></answer
 ></qandaentry>
 
@@ -2917,9 +2948,9 @@ fa</screen>
 <qandaentry
 ><question
 ><para
->Porque é que o editor na janela do resultado da junção não tem uma função para <quote
->desfazer</quote
->? </para
+>Why does the editor in the merge result window not have an <quote
+>undo</quote
+> function? </para
 ></question
 ><answer
 ><para
@@ -2930,15 +2961,15 @@ fa</screen>
 <qandaentry
 ><question
 ><para
->Quando eu removi algum texto, apareceu de repente <quote
->&lt;Sem linha de origem&gt;</quote
-> e esta não pode ser removida. O que é que significa e como é que se poderá removê-la? </para
+>When I removed some text, then suddenly <quote
+>&lt;No src line&gt;</quote
+> appeared and can't be deleted. What does that mean and how can one remove this? </para
 ></question
 ><answer
 ><para
->Para cada secção igual ou diferente, o editor na janela do resultado da junção recorda onde é que esta começa ou termina. O <quote
->&lt;Sem linha de origem&gt;</quote
-> significa que não existe mais nada livre numa secção, nem mesmo um carácter de mudança de linha. Isto poderá acontecer durante a junção automática ou durante a edição. Isto não é nenhum problema, dado que esta dica não irá aparecer no ficheiro gravado. Se você quiser os dados originais de volta, basta seleccionar a secção (carregue na coluna de resumo à esquerda) e depois no botão da origem com o conteúdo necessário (A/B ou C). </para
+>For each equal or different section the editor in the merge result window remembers where it begins or ends. <quote
+>&lt;No src line&gt;</quote
+> means that there is nothing left in a section, not even a new line character. This can happen either while merging automatically or by editing. This is no problem, since this hint won't appear in the saved file. If you want the orignal source back just select the section (click on the left summary column) and then click the source button with the needed contents (A/B or C). </para
 ></answer
 ></qandaentry>
 
@@ -2975,7 +3006,7 @@ fa</screen>
 <para
 >&kdiff3; - Ferramenta de Comparação e Junção de Ficheiros e Pastas </para>
 <para
->Programa com 'copyright' 2002-2005 de Joachim Eibl <email
+>Program copyright 2002-2005 Joachim Eibl <email
 >joachim.eibl@gmx.de</email
 > </para>
 <para
@@ -3016,17 +3047,17 @@ fa</screen>
 >Requisitos</title>
 
 <para
->Para poder usar todas as funcionalidades com sucesso do &kdiff3;, precisa do &kde; 3.1 ou posterior. </para
+>In order to successfully use all features of &kdiff3;, you need &kde; 3.1 or greater. </para
 ><para
->Para mais informações sobre como correr o  &kdiff3; noutras plataformas sem o KDE, veja por favor a <ulink url="http://kdiff3.sourceforge.net"
->página pessoal</ulink
+>For information about how to run &kdiff3; on other platforms without &kde; please see the <ulink url="http://kdiff3.sourceforge.net"
+>homepage</ulink
 >. </para
 ><para
->O utilizador poderá encontrar uma lista das alterações em <ulink url="http://kdiff3.sourceforge.net/ChangeLog"
+>You can find a list of changes at <ulink url="http://kdiff3.sourceforge.net/ChangeLog"
 >http://kdiff3.sourceforge.net/ChangeLog</ulink
-> ou no ficheiro <filename
+> or in the <filename
 >ChangeLog</filename
-> do pacote de código. </para>
+> file of the source package. </para>
 </sect1>
 
 <sect1 id="compilation">

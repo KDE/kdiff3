@@ -138,7 +138,8 @@ void MergeResultWindow::init(
 
    int wsc;
    int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
-   m_pStatusBar->message( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)")
+   if (m_pStatusBar)
+      m_pStatusBar->message( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)")
          .arg(nofUnsolved).arg(wsc) );
 }
 

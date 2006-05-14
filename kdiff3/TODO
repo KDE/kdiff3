@@ -3,6 +3,8 @@ This file contains some feature-wishes for future KDiff3-versions.
 
 TODO
 ====
+- Only show different lines.
+
 - ftp: Abbruch beim Einlesen von Verzeichnis stoppt nicht vollständig
 
 - Projekt-Verwaltung: Die ganze Config-Datei (=Projektdatei) an einen benutzerdefinierten Ort zu legen. (Keine Angabe->Default)
@@ -36,12 +38,13 @@ TODO
 
 
 - Overview-option to show only remaining conflicts.
-- Colors for disabled and enabled arrow are very similar
+- Overview bar for merge-window and for directory-window.
+
 - ??? The gutters (kdiff3 have 2 "gutters") fonts and background-foreground colors sholud be configured other
   than the "general" foreground-background colors. Otherwise they are confused with the main dialog.
 
 - Try to autodetect the line-end-style
-- Ignore cvs-keywords like $Revision$
+- Ignore cvs-keywords like $Revision: x.y$
 
 - Undo function in the merge-editor.
 - More viewing options for directory widget.
@@ -58,8 +61,8 @@ TODO
    - Optionally show size/date for A/B/C
    - Choose what to see (all or only different items)
    - If only different items are visible: copy the others nevertheless to destdir.
-   - Warnung wenn Datum in B oder C �ter als A ist.
-   - Zielverzeichnis nachtr�lich �derbar
+   - Warnung wenn Datum in B oder C älter als A ist.
+   - Zielverzeichnis nachträglich änderbar
    - Bei Kopie von Remote nach lokal: Auf jeden Fall das modification Datum setzen.
    - Ctrl-Space doesn't work when a file comparison takes place.
    - Option to allow case-insensitive filename-matching.

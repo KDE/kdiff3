@@ -178,8 +178,8 @@ bool KDiff3Part::openFile()
 
       m_widget->slotFileOpen2( fileName1, tempFileName, "", "",
                                "", version2.isEmpty() ? fileName2 : "REV:"+version2+":"+fileName2, "", 0 ); // alias names
-   std::cerr << "KDiff3: f1:" << fileName1.latin1() <<"<->"<<tempFileName.latin1()<< std::endl;
-//      FileAccess::removeFile( tempFileName );
+//    std::cerr << "KDiff3: f1:" << fileName1.latin1() <<"<->"<<tempFileName.latin1()<< std::endl;
+      FileAccess::removeTempFile( tempFileName );
    }
    else if ( version2.isEmpty() && f2.exists() )
    {
@@ -193,7 +193,8 @@ bool KDiff3Part::openFile()
 
       m_widget->slotFileOpen2( tempFileName, fileName2, "", "",
                                version1.isEmpty() ? fileName1 : "REV:"+version1+":"+fileName1, "", "", 0 ); // alias name
-   std::cerr << "KDiff3: f2:" << fileName2.latin1() <<"<->"<<tempFileName.latin1()<< std::endl;
+//    std::cerr << "KDiff3: f2:" << fileName2.latin1() <<"<->"<<tempFileName.latin1()<< std::endl;
+      FileAccess::removeTempFile( tempFileName );
    }
    else if ( !version1.isEmpty() && !version2.isEmpty() )
    {
@@ -215,9 +216,9 @@ bool KDiff3Part::openFile()
          "", 0
       );
 
-   std::cerr << "KDiff3: f1/2:" << tempFileName1.latin1() <<"<->"<<tempFileName2.latin1()<< std::endl;
-//      FileAccess::removeFile( tempFileName1 );
- //     FileAccess::removeFile( tempFileName2 );
+//    std::cerr << "KDiff3: f1/2:" << tempFileName1.latin1() <<"<->"<<tempFileName2.latin1()<< std::endl;
+      FileAccess::removeTempFile( tempFileName1 );
+      FileAccess::removeTempFile( tempFileName2 );
       return true;
    }
    else

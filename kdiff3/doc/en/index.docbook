@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY kdiff3 "<application>KDiff3</application>">
   <!ENTITY kappname "&kdiff3;">
   <!ENTITY package "extragear-utils">
@@ -25,9 +25,8 @@ as Authors, publish date, the abstract, and Keywords -->
    <email>joachim.eibl at gmx.de</email>
 </address></affiliation>
 </author>
-</authorgroup>
-
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
+</authorgroup>
 
 <copyright>
 <year>2002-2006</year>
@@ -45,12 +44,11 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2006-04-09</date>
-<releaseinfo>0.9.89</releaseinfo>
+<date>2006-05-14</date>
+<releaseinfo>0.9.90</releaseinfo>
 
 
 <abstract>
-<para></para>
 <para>
    &kdiff3; is a file and directory diff and merge tool which
 <itemizedlist>
@@ -65,7 +63,7 @@ Do NOT change these in the translation. -->
 <listitem><para>supports version control keyword and history merging.</para></listitem>
 </itemizedlist>
 </para><para>
-   This document describes KDiff3-version 0.9.89.
+   This document describes &kdiff3;-version 0.9.89.
 </para>
 </abstract>
 
@@ -101,9 +99,9 @@ Please at least include KDE, the KDE package it is in, the name
 <chapter id="introduction"><title>Introduction</title>
 <sect1 id="why"><title>Yet Another Diff Frontend?</title>
 <para>
-Several graphical diff tools exist. Why choose KDiff3? Let me say, why I wrote it.
+Several graphical diff tools exist. Why choose &kdiff3;? Let me say, why I wrote it.
 </para><para>
-KDiff3 started because I had to do a difficult merge. Merging is necessary when several
+&kdiff3; started because I had to do a difficult merge. Merging is necessary when several
 people work on the same files in a project. A merge can be somewhat automated, when the
 merge-tool not only has the new modified files (called "branches"), but also the original file
 (called "base"). The merge tool will automatically choose any modification that was only
@@ -127,7 +125,7 @@ paste it into either diff window.
 A feature that required a big effort was the directory comparison and merge facility, which turned
 the program almost into a full file browser.
 </para><para>
-I hope KDiff3 works for you too. Have fun!
+I hope &kdiff3; works for you too. Have fun!
 </para><para>
 Joachim Eibl (2003)
 </para>
@@ -135,14 +133,14 @@ Joachim Eibl (2003)
 
 <sect1 id="screenshots"><title>Screenshots and Features</title>
 <para>This screenshot shows the difference between two text files</para>
-<para>(Using an early version of KDiff3):</para>
+<para>(Using an early version of &kdiff3;):</para>
 <screenshot><mediaobject>
    <imageobject><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
 </mediaobject></screenshot>
 
 <para>
    3-way-merging is fully supported. This is useful if two people change code independently.
-   The original file (the base) is used to help KDiff3 to automatically select the correct
+   The original file (the base) is used to help &kdiff3; to automatically select the correct
    changes.
    The merge-editor below the diff-windows allows you to solve conflicts, while showing you the output you will get.
    You can even edit the output.
@@ -153,8 +151,8 @@ Joachim Eibl (2003)
 </mediaobject></screenshot>
 </para>
 
-<para id="dirmergebigscreenshot">KDiff3 also helps you to compare and merge complete directories.
-This screenshot shows KDiff3 during a directory merge:
+<para id="dirmergebigscreenshot">&kdiff3; also helps you to compare and merge complete directories.
+This screenshot shows &kdiff3; during a directory merge:
 </para><para>
 <screenshot><mediaobject>
    <imageobject><imagedata fileref="dirmergebig.png" format="PNG"/></imageobject>
@@ -164,7 +162,7 @@ This screenshot shows KDiff3 during a directory merge:
 
 <sect1 id="features"><title>More Features</title>
 <sect2><title> Line-By-Line And Char-By-Char Diff-Viewer</title>
-<para>By using the possiblities of a graphical color display KDiff3 shows
+<para>By using the possiblities of a graphical color display &kdiff3; shows
    exactly what the difference is. When you have to do many code-reviews, you will like this.
 </para>
 <screenshot><mediaobject>
@@ -198,7 +196,7 @@ This screenshot shows KDiff3 during a directory merge:
 </sect2>
 
 <sect2><title> Comfortable Merge Of Two Or Three Input Files</title>
-<para> KDiff3 can be used to merge two or three input files and automatically
+<para> &kdiff3; can be used to merge two or three input files and automatically
    merges as much as possible. The result is presented in an editable window
    where most conflicts can be solved with a single mouseclick: Select the
    buttons  A/B/C from the button-bar to select the source that should be used.
@@ -311,15 +309,15 @@ Options:
   --config file             Use a different config file.
 </screen>
 <para>The option <option>--cs</option> allows you to adjust a configuration value that is otherwise only adjustable via the configure dialogs. 
-But be aware that when KDiff3 then terminates the changed value will be stored along with the other settings. 
+But be aware that when &kdiff3; then terminates the changed value will be stored along with the other settings. 
 With <option>--confighelp</option> you can find out the names of the available items and current values.</para>
-<para>Via <option>--config</option> you can specify a different config file. When you often use KDiff3 
+<para>Via <option>--config</option> you can specify a different config file. When you often use &kdiff3; 
 with completely different setups this allows you to easily switch between them.</para>
 </sect2>
 <sect2><title>Ignorable command line options</title>
-<para>Many people want to use KDiff3 with some version control system. 
-But when that version control system calls KDiff3 using command line parameters that KDiff3 doesn't recognise, then KDiff3 terminates with an error.
-The integration settings allow to specify command line parameters that should be ignored by KDiff3. 
+<para>Many people want to use &kdiff3; with some version control system. 
+But when that version control system calls &kdiff3; using command line parameters that &kdiff3; doesn't recognise, then &kdiff3; terminates with an error.
+The integration settings allow to specify command line parameters that should be ignored by &kdiff3;. 
 They will appear in the usage help like in this example:</para>
 <screen>
   --<replaceable>foo</replaceable>                     Ignored. (User defined.)
@@ -327,7 +325,7 @@ They will appear in the usage help like in this example:</para>
 <variablelist>
   <varlistentry><term><emphasis>Command line options to ignore:</emphasis></term><listitem><para>
      A list of options, separated via semicolon ';'. When one of these options appears on the commandline, 
-     then KDiff3 will ignore it and run without reporting an error. 
+     then &kdiff3; will ignore it and run without reporting an error. 
      (Default is "u;query;html;abort").</para></listitem></varlistentry>
 </variablelist>
 <para>When this isn't enough, then it is recommended to write a shell script that does the option translation.</para>
@@ -352,7 +350,7 @@ They will appear in the usage help like in this example:</para>
 </para><para>
    You can also select a directory via "Dir...". If for A a directory is specified
    then a directory-comparison/merge starts. If A specifies a file but B, C or
-   the output specify a directory, then KDiff3 uses the filename from A in the
+   the output specify a directory, then &kdiff3; uses the filename from A in the
    specified directories.
 </para><para>
    If "Merge" is selected, then the "Output"-line becomes editable. But it
@@ -366,7 +364,7 @@ They will appear in the usage help like in this example:</para>
 
 <sect1 id="pasteinput"><title>Paste and Drop Input</title>
 <para>
-   Sometimes you want to compare parts of a text that is not an own file. KDiff3 also
+   Sometimes you want to compare parts of a text that is not an own file. &kdiff3; also
    allows you to paste text from the clipboard into the diff input window that has the focus.
    The diff analysis happens immediately then.
    In the open dialog you need not specify files then, but just close it via "Cancel".
@@ -378,7 +376,7 @@ They will appear in the usage help like in this example:</para>
    they really are is a big effort if you first must create two files and then load them. Now
    you can simply copy, paste and compare the relevant sections.
 </para><para>
-   Note: Currently you can't drag anything from KDiff3. Only dropping in the diff input
+   Note: Currently you cannot drag anything from &kdiff3;. Only dropping in the diff input
    is supported.
 </para><para>
    Warning: Some editors still interpret the drag and drop into another program like cut
@@ -435,12 +433,12 @@ They will appear in the usage help like in this example:</para>
 </para></sect2><sect2 id="manualdiffhelp"><title>Manually Aligning Lines</title><para>
    Sometimes the algorithm places the wrong lines next to each other. Or you want to compare 
    one piece of text with text at a completely different position in the other file.
-   For these situations you can manually instruct KDiff3 to align certain lines. 
+   For these situations you can manually instruct &kdiff3; to align certain lines. 
    Mark the text for which you want to improve the alignment with the mouse as you would 
    for copy and paste in the first diff view and then choose "Add Manual Diff Alignment" 
    in the "Diffview"-menu (keyboard shortcut "Ctrl-Y") . An orange bar will appear in 
    the summary column next to the chosen text. Repeat this for the second and 
-   (if available) third diff view. KDiff3 will immediately recalculate the differences everytime you do this.
+   (if available) third diff view. &kdiff3; will immediately recalculate the differences everytime you do this.
    and will align the chosen lines. Of course some of the previously matching lines in between 
    might not match anymore.
 </para><para>
@@ -488,7 +486,7 @@ They will appear in the usage help like in this example:</para>
    "Current range (diff) background color" and
    a black bar appears on the left side of the text.
 </para></sect2><sect2><title>Choosing Inputs A, B or C For Current Conflict And Editing</title><para>
-   The button bar below the menu bar contains three input selector buttons 
+   The button bar below the menubar contains three input selector buttons 
    containing the letters "A", "B" and "C". Click the input selector 
    button to insert (or remove if already inserted) the lines from the respective source.
    To choose the lines from several inputs click the respective buttons in the
@@ -498,7 +496,7 @@ They will appear in the usage help like in this example:</para>
    If you use the auto-advance option 
    (<link linkend="autoadvance">"Automatically go to next unsolved conflict after source selection"</link>),
    you should disable this before choosing lines from several inputs or if you want to
-   edit the lines after your choice. Otherwise KDiff3 will jump to the next
+   edit the lines after your choice. Otherwise &kdiff3; will jump to the next
    conflict after choosing the first input.
 </para><para>
    It is often helpful directly edit the merge output. 
@@ -521,30 +519,27 @@ They will appear in the usage help like in this example:</para>
    But the "Merge"-menu provides some actions for other common needs.
    If you have to select the same source for most conflicts, then you can
    choose "A", "B" or "C" everywhere, or only for the remaining unsolved
-   conflicts, or for unsolved whitespace conflicts. If you want to decide every
+   conflicts, or for unsolved white space conflicts. If you want to decide every
    single delta yourself, you can "Set deltas to conflicts". Or if you want to
-   return to the automatic choices of KDiff3 then select
-   "Automatically solve simple conflicts". KDiff3 then restarts the merge.
-   For actions that change your previous modifications KDiff3 will ask for your
+   return to the automatic choices of &kdiff3; then select
+   "Automatically solve simple conflicts". &kdiff3; then restarts the merge.
+   For actions that change your previous modifications &kdiff3; will ask for your
    confirmation before proceeding.
 </para><para>
-   Note: When choosing either source for unsolved whitespace conflicts and
+   Note: When choosing either source for unsolved white space conflicts and
    the options "Ignore Numbers" or "Ignore C/C++ Comments" are used then changes in
-   numbers or comments will be treated like whitespace too.
+   numbers or comments will be treated like white space too.
 
 </para></sect2><sect2 id="vcskeywordsmergesupport"><title>Automatic Merge of Version Control Keywords and History (Log)</title><para>
-Many version control systems support special keywords in the file. (e.g. "$Date$", 
-"$Header$", "$Author$", "$Log$
-"$Header$", "$Author$", "Revision 1.5  2006/04/10 08:33:34  joachim99
-"$Header$", "$Author$", "KDiff3 0.9.89
-"$Header$", "$Author$", "" etc.) During the 
+Many version control systems support special keywords in the file. (e.g. "&#36;Date&#36;", 
+"&#36;Header&#36;", "&#36;Author&#36;", "&#36;Log&#36;" etc.) During the 
 check-in the version control system (VCS) changes these lines. For instance 
-"$Date$" will turn into "$Date$". Since this line will 
+"&#36;Date&#36;" will turn into "&#36;Date: 2005/03/22 18:45:01 &#36;". Since this line will 
 be different in every version of the file, it would require manual interaction 
 during the merge.
 </para><para>
-KDiff3 offers automatic merge for these items. For simple lines that match the 
-"Auto merge regular expression"-option in all input-files KDiff3 will choose 
+&kdiff3; offers automatic merge for these items. For simple lines that match the 
+"Auto merge regular expression"-option in all input-files &kdiff3; will choose 
 the line from B or - if available - from C. (Additionally it is necessary that the lines 
 in question line up in the comparison and the previous line contains no conflict.)
 This auto merge can either be run immediately after a merge starts (activate the option 
@@ -556,16 +551,10 @@ The history automerge can either run immediately when the merge starts by activa
 option "Merge version control history on merge start" or later via the merge menu 
 "Automatically Solve History Conflicts".
 </para><para>
-Usually the version control history begins with a line containing the keyword "$Log$
-Usually the version control history begins with a line containing the keyword "Revision 1.5  2006/04/10 08:33:34  joachim99
-Usually the version control history begins with a line containing the keyword "KDiff3 0.9.89
-Usually the version control history begins with a line containing the keyword "".
+Usually the version control history begins with a line containing the keyword "&#36;Log&#36;".
 This must be matched by the "History start regular expression"-option.
-KDiff3 detects which subsequent lines are in the history by analysing the leading characters 
-that came before the "$Log$
-that came before the "Revision 1.5  2006/04/10 08:33:34  joachim99
-that came before the "KDiff3 0.9.89
-that came before the ""-keyword. If the same "leading comment" also appears in the following
+&kdiff3; detects which subsequent lines are in the history by analysing the leading characters 
+that came before the "&#36;Log&#36;"-keyword. If the same "leading comment" also appears in the following
 lines, then they are also included in the history.
 </para><para>
 During each check-in the VCS writes a unique line specifying version-, date- and time-information 
@@ -575,17 +564,17 @@ most recent entries appear at the top (after the history start line).
 </para><para>
 When for parallel development two or more developers check-in a branch of the file then 
 the merge history will contain several entries that appear as conflicts during the merge 
-of the branches. Since merging these can become very tedious, KDiff3 offers support with two 
+of the branches. Since merging these can become very tedious, &kdiff3; offers support with two 
 possible strategies: Just insert the history information from both contributors at the top
 or sort the history information by a user defined key.
 </para><para>
-The just-insert-all-entries-method is easier to configure. KDiff3 just needs a method to
+The just-insert-all-entries-method is easier to configure. &kdiff3; just needs a method to
 detect, which lines belong to one history entry. Most VCS insert an empty line after each
-history entry. If there are no other empty lines, this is a sufficient criterion for KDiff3.
+history entry. If there are no other empty lines, this is a sufficient criterion for &kdiff3;.
 Just set an empty "History entry start regular expression". If the empty line criterion 
 isn't sufficient, you can specify a regular expression to detect the history entry start.
 </para><para>
-Note that KDiff3 will remove duplicate history entrys. If a history entry appeared several times
+Note that &kdiff3; will remove duplicate history entrys. If a history entry appeared several times
 in the history of a input file, only one entry will remain in the output.
 </para><para>
 If you want to sort the history, then you have to specify how the sort key should be built.
@@ -600,10 +589,7 @@ the regular expressions and key-generation in a dedicated dialog by pressing the
 </para><para>Example: Assume a history that looks like this:
 <screen>
 /**************************************************************************
-** HISTORY:    $Log$
-** HISTORY:    Revision 1.5  2006/04/10 08:33:34  joachim99
-** HISTORY:    KDiff3 0.9.89
-** HISTORY:
+** HISTORY:    &#36;Log: \toms_merge_main_view\MyApplication\src\complexalgorithm.cpp &#36;
 **
 **     \main\integration_branch_12   2 Apr 2001 10:45:41   tom
 **  Merged branch simon_branch_15.
@@ -613,14 +599,11 @@ the regular expressions and key-generation in a dedicated dialog by pressing the
 **  Fixed crash.
 **************************************************************************/
 </screen>
-The history start line matches the regular expression ".*\$Log.*\$.*". Then follow 
+The history start line matches the regular expression ".*\&#36;Log.*\&#36;.*". Then follow 
 the history entries.
 </para><para>
-The line with the "$Log$
-The line with the "Revision 1.5  2006/04/10 08:33:34  joachim99
-The line with the "KDiff3 0.9.89
-The line with the ""-keyword begins with two "*" after which follows a space. 
-KDiff3 uses the first non-white-space string as "leading comment" and assumes that
+The line with the "&#36;Log&#36;"-keyword begins with two "*" after which follows a space. 
+&kdiff3; uses the first non-white-space string as "leading comment" and assumes that
 the history ends in the first line without this leading comment. In this example the
 last line ends with a string that also starts with two "*", but instead of a space 
 character more "*" follow. Hence this line ends the history.
@@ -635,7 +618,7 @@ For details about regular expressions please see the
 <ulink url="http://doc.trolltech.com/3.3/qregexp.html#details">regular expression documentation by Trolltech</ulink>.
 Note that "\s" (with lowercase "s") matches any white space and "\S" (with uppercase "S") matches any non-white-space.
 In our example the history entry start contains first the version info with reg. exp. "\\main\\\S+", the date consisting of day "[0-9]+", month "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)" and year "[0-9][0-9][0-9][0-9]", the time "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]" and finally the developers login name ".*".
-Note that the leading comment (in the example "**") will already be removed by KDiff3 
+Note that the leading comment (in the example "**") will already be removed by &kdiff3; 
 before trying to match, hence the regular expression begins with a match for none or more white-space characters "\s*".
 </para><para>
 If you require a sorted history. Then the sortkey must be calculated. For this the 
@@ -649,7 +632,7 @@ The parentheses now contain 1. version info, 2. day, 3. month, 4. year, 5. time,
 But if we want to sort by date and time, we need to construct a key with the elements in a different order of appearance:
 First the year, followed by month, day, time, version info and name. Hence the sortkey order to specify is "4,3,2,5,1,6".
 </para><para>
-Because  month names aren't good for sorting ("Apr" would be first) KDiff3 detects in which order 
+Because  month names aren't good for sorting ("Apr" would be first) &kdiff3; detects in which order 
 the month names were given and uses that number instead ("Apr"->"04"). 
 And if a pure number is found it will be transformed to a 4-digit value with leading zeros for sorting.
 Finally the resulting sort key for the first history entry start line will be:
@@ -684,7 +667,7 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
    The button bar also contains nine navigation buttons with which you can
    jump to the current/first/last difference, to the next/previous difference
    (ctrl-down/ctrl-up), to the next/previous conflict (ctrl-pgdown/ctrl-pgup),
-   or to the next/previous unsolved conflict. Note that for KDiff3 a "conflict"
+   or to the next/previous unsolved conflict. Note that for &kdiff3; a "conflict"
    that was not automatically solved at the start of the merge stays a "conflict"
    even if it is solved. Hence the necessity to distinguish "unsolved conflicts".
 </para>
@@ -692,11 +675,11 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
 <para>
    There also is a button "Automatically go to next unsolved conflict after
    source selection" (Auto-Advance). If you enable this, then, when one source
-   is selected, KDiff3 will jump to and select the next unsolved conflict
+   is selected, &kdiff3; will jump to and select the next unsolved conflict
    automatically. This can help when you always want to choose one source only.
    When you need both sources, or you want to edit after selecting, then you
    probably want to switch this off. Before proceeding to the next unsolved conflict
-   KDiff3 shows you the effect of your choice for a short time. This delay is
+   &kdiff3; shows you the effect of your choice for a short time. This delay is
    adjustable in the Diff- &amp; Merge-Settings: You can
    specify the "Auto-Advance delay" in milli seconds between 0 and 2000. Hint:
    Tired of many clicks? - Use a small Auto-Advance-delay and the shortcuts
@@ -715,7 +698,7 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
    and navigation with the cursor keys.
 </para><para>
    If the selection exceeds the visible range you can move the mouse over the 
-   window borders which causes KDiff3 to scroll in that direction. 
+   window borders which causes &kdiff3; to scroll in that direction. 
 </para><para>
    For very large selections you can also use the navigation keys while holding down 
    the mouse. E.g. use page up and page down to quickly go to a certain position. At the 
@@ -747,21 +730,21 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
    already exists and the "Backup files"-option is enabled then the existing
    file will be renamed with an ".orig"-extension, but if such a file exists
    it will be deleted. When you exit or start another diff-analysis and data
-   wasn't saved yet, then KDiff3 will ask if you want to save, cancel or proceed
-   without saving. (KDiff3 does not catch any signals. So if you "kill" KDiff3
+   wasn't saved yet, then &kdiff3; will ask if you want to save, cancel or proceed
+   without saving. (&kdiff3; does not catch any signals. So if you "kill" &kdiff3;
    then your data will be lost.)
 </para><para>
    Line endings are saved according to the normal method on the underlying
    operating system. For Unices each line ends with an linefeed-character "\n",
    while for Win32-based systems each line ends with a carriage-return + a linefeed
-   "\r\n". KDiff3 does not preserve the line-endings of the input files, which
-   also means that you shouldn't use KDiff3 with binary files.
+   "\r\n". &kdiff3; does not preserve the line-endings of the input files, which
+   also means that you shouldn't use &kdiff3; with binary files.
 </para>
 </sect1>
 
 <sect1 id="find"><title>Finding Strings</title>
 <para>
-   You can search for a string in any text-window of KDiff3. The "Find ..."-command
+   You can search for a string in any text-window of &kdiff3;. The "Find ..."-command
    (Ctrl-F) in the Edit-menu opens a dialog that lets you specify the string
    to search for. You can also select the windows which should be searched.
    Searching will always start at the top. Use the "Find Next"-command (F3)
@@ -773,7 +756,7 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
 
 <sect1 id="printing"><title>Printing</title>
 <para>
-   KDiff3 supports printing for textfile differences. The "Print..."-command (Ctrl-P) 
+   &kdiff3; supports printing for textfile differences. The "Print..."-command (Ctrl-P) 
    in the File-menu opens a dialog that allows you to select the printer and to adjust
    other options.
 </para><para>
@@ -810,7 +793,7 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
 <sect1 id="options"><title>Options</title>
 <para>
    Options and the recent-file-list will be saved when you exit the program,
-   and reloaded when you start it. (Menu Settings->Configure KDiff3 ...)
+   and reloaded when you start it. (Menu Settings->Configure &kdiff3; ...)
 </para>
 <sect2><title>Font</title>
 <para>
@@ -868,7 +851,7 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
 
 <sect2 id="diffmergeoptions"><title>Diff and Merge Settings</title>
 <para>
-   When comparing files, KDiff3 first it tries to match lines that are equal
+   When comparing files, &kdiff3; first it tries to match lines that are equal
    in all input files. Only during this step it might ignore white space. The
    second step compares each line. In this step white space will not be ignored.
    Also during the merge white space will not be ignored.
@@ -877,7 +860,7 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
 <variablelist>
    <varlistentry><term><emphasis>Preserve Carriage Return:</emphasis></term><listitem><para> Some editors (on some systems) save
       carriage return '\r' and linefeed '\n'-characters at the end of line, while
-      others will only save the linefeed '\n'. Usually KDiff3 ignores the carriage
+      others will only save the linefeed '\n'. Usually &kdiff3; ignores the carriage
       return, but then files that don't have equal sizes, look equal in side by
       side comparison. When this option is on, then the carriage return characters
       are made visible but are treated as white space. This option must be off
@@ -909,30 +892,27 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>White space 2/3-file merge default:</emphasis></term><listitem><para>
       Automatically solve all white-space conflict by choosing the specified file.
-      (Default is manual choice.) Useful if white-space really isn't important in many files.
+      (Default is manual choice.) Useful if white space really isn't important in many files.
       If you need this only occasionally better use "Choose A/B/C For All Unsolved Whitespace Conflicts"
       in the merge menu. Note that if you enable either "Ignore numbers" or "Ignore C/C++ comments"
       then this auto-choice also applies for conflicts in numbers or comments.
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Auto merge regular expression:</emphasis></term><listitem><para>
-      Regular expression for lines where KDiff3 should automatically choose one source. See also <link linkend="vcskeywordsmergesupport">Automatic Merge ...</link>
+      Regular expression for lines where &kdiff3; should automatically choose one source. See also <link linkend="vcskeywordsmergesupport">Automatic Merge ...</link>
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Run regular expression auto merge on merge start:</emphasis></term><listitem><para>
-      If activated KDiff3 runs the automatic merge using the "Auto merge regular expression" when a merge is started.
+      If activated &kdiff3; runs the automatic merge using the "Auto merge regular expression" when a merge is started.
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>History start regular expression:</emphasis></term><listitem><para>
       Regular expression for the start of the merge history entry.
-      Usually this line contains the "$Log$
-      Usually this line contains the "Revision 1.5  2006/04/10 08:33:34  joachim99
-      Usually this line contains the "KDiff3 0.9.89
-      Usually this line contains the ""-keyword.
-      Default value: ".*\$Log.*\$.*"
+      Usually this line contains the "&#36;Log&#36;"-keyword.
+      Default value: ".*\&#36;Log.*\&#36;.*"
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>History entry start regular expression:</emphasis></term><listitem><para>
       A merge history entry consists of several lines.
       Specify the regular expression to detect the first line (without the leading comment).
       Use parentheses to group the keys you want to use for sorting.
-      If left empty, then KDiff3 assumes that empty lines separate history entries.
+      If left empty, then &kdiff3; assumes that empty lines separate history entries.
       See also <link linkend="vcskeywordsmergesupport">Automatic Merge ...</link>
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>History merge sorting:</emphasis></term><listitem><para>
@@ -947,7 +927,7 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
       See also <link linkend="vcskeywordsmergesupport">Automatic Merge ...</link>
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Merge version control history on merge start:</emphasis></term><listitem><para>
-      If activated KDiff3 runs the automatic history merging using aforementioned options when a merge is started.
+      If activated &kdiff3; runs the automatic history merging using aforementioned options when a merge is started.
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Test your regular expressions</emphasis></term><listitem><para>
       This button shows a dialog that allows you to improve and test the regular expressions above.
@@ -956,7 +936,7 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
       The "Sort key result" will display the key used for history merge sorting.
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Irrelevant merge command:</emphasis></term><listitem><para>
-      Specify a command of your own that should be called when KDiff3 detects 
+      Specify a command of your own that should be called when &kdiff3; detects 
       that for a three file merge the file from B doesn't contribute any 
       relevant data that isn't already contained in the file from C.
       The command is called with the three filenames as parameters.
@@ -986,7 +966,7 @@ Yet there is one option here that is also relevant for saving single files:
 
 <sect2><title>Regional and Language Options</title>
   <variablelist>
-    <varlistentry><term><emphasis>Language:</emphasis></term><listitem><para>Adjust the language of the user interface. Changing this option doesn't affect the running program. You have to exit and restart KDiff3 so that the language is changed. (This option is not available in the KDE version of KDiff3 because the language is adjustable in the global KDE settings.) 
+    <varlistentry><term><emphasis>Language:</emphasis></term><listitem><para>Adjust the language of the user interface. Changing this option doesn't affect the running program. You have to exit and restart &kdiff3; so that the language is changed. (This option is not available in the KDE version of &kdiff3; because the language is adjustable in the global KDE settings.) 
 	</para></listitem></varlistentry>
     <varlistentry><term><emphasis>Use the same encoding for everything:</emphasis></term><listitem><para> The following encoding options can be adjusted separately for each item or if this option is true, all values will take the first value.
 	</para></listitem></varlistentry>
@@ -998,7 +978,7 @@ Yet there is one option here that is also relevant for saving single files:
 	</para></listitem></varlistentry>
     <varlistentry><term><emphasis>File Encoding for Preprocessor Files:</emphasis></term><listitem><para>When you define preprocessors then they might not be able to operate on your codec. (e.g.: Your files are 16-bit-unicode and your preprocessor can only take 8-bit-ascii.) With this option you can define the encoding of preprocessor output.
 	</para></listitem></varlistentry>
-    <varlistentry><term><emphasis>Right To Left Language:</emphasis></term><listitem><para>Some languages are written right to left. When this option is enabled, KDiff3 draws the text from right to left in the diff input windows and in the merge output window. Note that if you start KDiff3 with the command line option "--reverse" then all layouting will be done right to left too. (This is a feature provided by Qt.) This documentation was written assuming that "Right To Left Language" or reverse layout are disabled. So some references to "left" or "right" must be replaced by their respective counterpart if you use these options.
+    <varlistentry><term><emphasis>Right To Left Language:</emphasis></term><listitem><para>Some languages are written right to left. When this option is enabled, &kdiff3; draws the text from right to left in the diff input windows and in the merge output window. Note that if you start &kdiff3; with the command line option "--reverse" then all layouting will be done right to left too. (This is a feature provided by Qt.) This documentation was written assuming that "Right To Left Language" or reverse layout are disabled. So some references to "left" or "right" must be replaced by their respective counterpart if you use these options.
 	</para></listitem></varlistentry>
 
   </variablelist>
@@ -1052,7 +1032,7 @@ Yet there is one option here that is also relevant for saving single files:
 
 <sect1 id="preprocessors"><title>Preprocessor Commands</title>
 <para>
-KDiff3 supports two preprocessor options.
+&kdiff3; supports two preprocessor options.
 </para><para>
 <variablelist>
    <varlistentry><term><emphasis>Preprocessor-Command:</emphasis></term><listitem><para>
@@ -1141,7 +1121,7 @@ In this context only the <command>sed</command>-substitute-command is used:
 <screen>
    <command>sed</command> 's/<replaceable>REGEXP</replaceable>/<replaceable>REPLACEMENT</replaceable>/<replaceable>FLAGS</replaceable>'
 </screen>
-Before you use a new command within KDiff3, you should first test it in a console.
+Before you use a new command within &kdiff3;, you should first test it in a console.
 Here the <command>echo</command>-command is useful. Example:
 <screen>
    <command>echo</command> abrakadabra | <command>sed</command> 's/a/o/'
@@ -1162,10 +1142,10 @@ on Windows-like systems. <command>sed</command> will do the substitution for eac
 </screen>
 </para>
 </sect2>
-<sect2 id="sedforkdiff3"><title>Examples For <command>sed</command>-Use In KDiff3</title>
+<sect2 id="sedforkdiff3"><title>Examples For <command>sed</command>-Use In &kdiff3;</title>
 <sect3><title>Ignoring Other Types Of Comments</title>
 <para>
-Currently KDiff3 understands only C/C++ comments. Using the
+Currently &kdiff3; understands only C/C++ comments. Using the
 Line-Matching-Preprocessor-Command you can also ignore
 other types of comments, by converting them into C/C++-comments.
 
@@ -1299,25 +1279,25 @@ The preprocessor-commands are often very useful, but as with any option that mod
 your texts or hides away certain differences automatically, you might accidentally overlook 
 certain differences and in the worst case destroy important data.
 </para><para>
-For this reason during a merge if a normal preprocessor-command is being used KDiff3 
+For this reason during a merge if a normal preprocessor-command is being used &kdiff3; 
 will tell you so and ask you if it should be disabled or not. 
 But it won't warn you if a Line-Matching-Preprocessor-command is active. The merge will not complete until
 all conflicts are solved. If you disabled "Show White Space" then the differences that
 were removed with the Line-Matching-Preprocessor-command will also be invisible. If the 
 Save-button remains disabled during a merge (because of remaining conflicts), make sure to enable 
 "Show White Space". If you don't wan't to merge these less important differences manually
-you can select "Choose [A|B|C] For All Unsolved Whitespace Conflicts" in the Merge-menu.
+you can select "Choose [A|B|C] For All Unsolved White space Conflicts" in the Merge-menu.
 </para>
 </sect2>
 </sect1>
 </chapter>
 
 
-<chapter id="dirmerge"><title>Directory Comparison and Merge with KDiff3</title>
+<chapter id="dirmerge"><title>Directory Comparison and Merge with &kdiff3;</title>
 <sect1 id="dirmergeintro"><title>Introduction into Directory Comparison and Merge</title>
 <para>
    Often programmers must modify many files in a directory to achieve their
-   purpose. For this KDiff3 also lets you compare and merge complete directories
+   purpose. For this &kdiff3; also lets you compare and merge complete directories
    recursively!
 </para><para>
    Even though comparing and merging directories seems to be quite obvious,
@@ -1328,7 +1308,7 @@ you can select "Choose [A|B|C] For All Unsolved Whitespace Conflicts" in the Mer
    make sure that your data is safe, and going back is possible. If you make
    an archive or use some version control system is your decision, but even
    experienced programmers and integrators need the old sources now and then.
-   And note that even though I (the author of KDiff3) try to do my best, I can't
+   And note that even though I (the author of &kdiff3;) try to do my best, I can't
    guarantee that there are no bugs. According to the GNU-GPL there is NO WARRANTY
    whatsoever for this program. So be humble and always keep in mind:
 </para>
@@ -1336,7 +1316,7 @@ you can select "Choose [A|B|C] For All Unsolved Whitespace Conflicts" in the Mer
    <emphasis>To err is human, but to really mess things up you need a computer.</emphasis>
 </para></blockquote>
 <para>
-So this is what this program can do for you: KDiff3 ...
+So this is what this program can do for you: &kdiff3; ...
 </para>
 <itemizedlist>
      <listitem><para>... reads and compares two or three directories recursively,</para></listitem>
@@ -1367,7 +1347,7 @@ So this is what this program can do for you: KDiff3 ...
    <command>kdiff3</command> <replaceable>dir1 dir2</replaceable> -o <replaceable>destdir</replaceable>
 </screen>
 <para>
-   If no destination directory is specified, then KDiff3 will use <replaceable>dir2</replaceable>.
+   If no destination directory is specified, then &kdiff3; will use <replaceable>dir2</replaceable>.
 </para>
 </sect2>
 
@@ -1379,7 +1359,7 @@ So this is what this program can do for you: KDiff3 ...
 <para>
    When three directories are merged then <replaceable>dir1</replaceable>
    is used as the base for the merge.
-   If no destination directory is specified, then KDiff3 will use <replaceable>dir3</replaceable>
+   If no destination directory is specified, then &kdiff3; will use <replaceable>dir3</replaceable>
    as the  destination directory for the merge.
 </para>
 
@@ -1396,7 +1376,7 @@ So this is what this program can do for you: KDiff3 ...
    the progress. If you abort the directory scan, then only files that have
    been  compared until then will be listed.
 </para><para>
-   When the directory scan is complete then KDiff3 will show a listbox with
+   When the directory scan is complete then &kdiff3; will show a listbox with
    the results left, ...
 </para>
 <screenshot><mediaobject>
@@ -1470,7 +1450,7 @@ So this is what this program can do for you: KDiff3 ...
 
 </sect2><sect2 id="operation"><title>The Operation Column</title>
 <para>
-   After comparing the directories KDiff3 also evaluates a proposal for a
+   After comparing the directories &kdiff3; also evaluates a proposal for a
    merge  operation. This is shown in the "Operation" column. You can modify
    the operation  by clicking on the operation you want to change. A small menu
    will popup and allows you to select an operation for that item. (You can also
@@ -1517,7 +1497,7 @@ So this is what this program can do for you: KDiff3 ...
 </itemizedlist>
 <para>
    Sync-mode is active if only two directories and no explicit destination
-   were specified and if the option "Synchronize directories" is active. KDiff3
+   were specified and if the option "Synchronize directories" is active. &kdiff3;
    then selects a default operation so that both directories are the same afterwards.
    If for an item ...
 </para>
@@ -1527,14 +1507,14 @@ So this is what this program can do for you: KDiff3 ...
      <listitem><para>... B exists, but not A: Copy B to A</para></listitem>
      <listitem><para>... A and B exist, but are not equal: Merge and store the result
                          in  both directories. (For the user the visible save-filename is B,
-                         but then KDiff3 copies B also to A.)</para></listitem>
+                         but then &kdiff3; copies B also to A.)</para></listitem>
      <listitem><para>... A and B don't have the same file type (e.g. A is a directory,
                          B is a file): "Error: Conflicting File Types". While such items exist the
                          directory merge cannot start.</para></listitem>
 </itemizedlist>
 <para>
    When two directories are merged and the option "Copy newer instead of merging" is selected,
-   then KDiff3 looks at the dates and proposes to choose the newer file. If the files are not
+   then &kdiff3; looks at the dates and proposes to choose the newer file. If the files are not
    equal but have equal dates, then the operation will contain
    "Error: Dates are equal but files are not." While such items exist the
    directory merge cannot start.
@@ -1554,7 +1534,7 @@ So this is what this program can do for you: KDiff3 ...
 <sect2 id="statisticscolulmns"><title>Statistics Columns</title>
 <para>
    When the file comparison mode "Full Analysis" is enabled in the options, then
-   KDiff3 will show extra columns containing the numbers of unsolved, solved, nonwhite and whitespace
+   &kdiff3; will show extra columns containing the numbers of unsolved, solved, nonwhite and whitespace
    conflicts. (The solved-column will only show when comparing or merging three directories.)
 </para>
 </sect2>
@@ -1579,7 +1559,7 @@ So this is what this program can do for you: KDiff3 ...
    These options also apply for directories with one exception: Disabling "Show Different Files" will not hide 
    any complete directories. This will work only for files within.
 </para><para>
-   Note that of these only the "Show Identical Files"-option is persistant. The others are enabled when starting KDiff3. 
+   Note that of these only the "Show Identical Files"-option is persistant. The others are enabled when starting &kdiff3;. 
 </para>
 </sect2>
 
@@ -1610,7 +1590,7 @@ So this is what this program can do for you: KDiff3 ...
 </itemizedlist>
 <para>
    If you change the settings in order to list more files, you must do a rescan via menu "Directory"->"Rescan" yourself.
-   (The reason for this is that for faster comparison-speed KDiff3 omits the comparison for files suppressed by these criteria.)
+   (The reason for this is that for faster comparison-speed &kdiff3; omits the comparison for files suppressed by these criteria.)
    If you changed your file and dir patterns to exclude files, then the file-list will immediately be updated on closing
    the options-dialog.
 </para><para>
@@ -1638,26 +1618,26 @@ So this is what this program can do for you: KDiff3 ...
      <listitem><para>Otherwise select "Do it" to really start merging.</para></listitem>
 </itemizedlist>
 <para>
-   Then KDiff3 will run the specified operation for all items. If manual
+   Then &kdiff3; will run the specified operation for all items. If manual
    interaction  is required (single file merge), then a merge window will open
    (<link linkend="dirmergebigscreenshot">see the big screenshot</link>).
 </para><para>
    When you have finished with manually merging a file, again select "Start/Continue directory
    merge" or the key F7. If you haven't saved it yet, a dialog will ask you to
-   do so. Then KDiff3 will continue with the next item.
+   do so. Then &kdiff3; will continue with the next item.
 </para><para>
-   When KDiff3 encounters an error, it will tell you so and will show the
+   When &kdiff3; encounters an error, it will tell you so and will show the
    verbose-status-information. At the bottom of this list, there will be some
    error messages which should help you to understand the cause of the problem.
-   When you continue merging (F7 key) KDiff3 will give you the choice to retry
+   When you continue merging (F7 key) &kdiff3; will give you the choice to retry
    or skip the item that caused the problem. This means that before continuing
    you can choose another operation or solve the problem by other means.
 </para><para>
-   When the merge is complete, then KDiff3 will inform you via a message
+   When the merge is complete, then &kdiff3; will inform you via a message
    box.
 </para><para>
    If some items were merged individually before running the directorymerge then 
-   KDiff3 remembers this (while this
+   &kdiff3; remembers this (while this
    merge-session goes on), and doesn't merge them again when later the merge for
    all items is run. Even when the merge was skipped or nothing was saved these
    items count as completed. Only when you change the merge operation the 
@@ -1667,7 +1647,7 @@ So this is what this program can do for you: KDiff3 ...
 
 <sect1 id="dirmergeoptions"><title>Options for Comparing and Merging Directories</title>
 <para>
-   The KDiff3-preferences (menu "Settings"-&gt;"Configure KDiff3") has
+   The &kdiff3;-preferences (menu "Settings"-&gt;"Configure &kdiff3;") has
    a section called "Directory Merge" with these options:
 </para>
 
@@ -1691,7 +1671,7 @@ So this is what this program can do for you: KDiff3 ...
          Many automatically generated files are ignored by CVS.
          The big advantage is that this can be directory specific via a local ".cvsignore"-file.
          (See <ulink url="info:/cvs/cvsignore">info:/cvs/cvsignore</ulink>.)</para></listitem></varlistentry>
-   <varlistentry><term><emphasis>Find Hidden Files and Directories:</emphasis></term><listitem><para> On some filesystems files
+   <varlistentry><term><emphasis>Find Hidden Files and Directories:</emphasis></term><listitem><para> On some file systems files
          have an "Hidden"-attribute. On other systems a filename starting with a dot
          "." causes it to be hidden. This option allows you to decide whether to
          include  these files in the tree or not. Default is on.</para></listitem></varlistentry>
@@ -1796,7 +1776,7 @@ So this is what this program can do for you: KDiff3 ...
 <title>Networktransparency via KIO</title>
 <sect2><title>KIO-Slaves</title>
 <para>
-KDE supports networktransparency via KIO-slaves. KDiff3 uses this
+KDE supports networktransparency via KIO-slaves. &kdiff3; uses this
 for reading input files and for scanning directories.
 This means that you can specify files and directories on local and
 remote resources via URLs.
@@ -1852,7 +1832,7 @@ Other things that are possible, but probably less useful are:
 <para>
    Networktransparency has one drawback: Not all ressources have the same cababilities.
 </para><para>
-   Sometimes this is due to the filesystem of the server, sometimes due to the protocol.
+   Sometimes this is due to the file system of the server, sometimes due to the protocol.
    Here is a short list of restrictions:
 </para>
 <itemizedlist>
@@ -1880,13 +1860,13 @@ Other things that are possible, but probably less useful are:
 &kdiff3; is a KPart. Currently it implements the KParts::ReadOnlyPart-interface.
 </para><para>
 It's main use is as difference-viewer in KDevelop. KDevelop always starts the
-internal difference viewer first. To invoke KDiff3 press the right mouse button
+internal difference viewer first. To invoke &kdiff3; press the right mouse button
 on the difference viewer window and select "Show in KDiff3Part" from the contextmenu.
 </para><para>
-KDiff3 normally requires two complete files as input. When used as part KDiff3
-will assume that the inputfile is a patch-file in the unified format. KDiff3
+&kdiff3; normally requires two complete files as input. When used as part &kdiff3;
+will assume that the inputfile is a patch-file in the unified format. &kdiff3;
 then retrieves the original filenames from the patch-file. At least one of
-the two files must be available. KDiff3 will then invoke <command>patch</command> to
+the two files must be available. &kdiff3; will then invoke <command>patch</command> to
 recreate the second file.
 </para><para>
 In Konqueror you can select a patch-file and select "Preview in"-"KDiff3Part" from
@@ -1894,7 +1874,7 @@ the contextmenu. Be aware that this won't work if none of the original files are
 available, and it is not reliable if the original file(s) have changed since the
 patch-file was generated.
 </para><para>
-When run as a part KDiff3 only provides the a two-file-diff, a very small toolbar
+When run as a part &kdiff3; only provides the a two-file-diff, a very small toolbar
 and menu. Merging or directory-comparison are not supported then.
 </para>
 </sect1>
@@ -1909,7 +1889,7 @@ and menu. Merging or directory-comparison are not supported then.
 <qandaset id="faqlist">
 
 <qandaentry><question><para>
-   Why is it called "KDiff3"?
+   Why is it called "&kdiff3;"?
 </para></question><answer><para>
    Tools named "KDiff" and "KDiff2" (now called "Kompare") already exist. Also "KDiff3" should suggest
    that it can merge like the "diff3"-tool in the Diff-Tool collection.
@@ -1970,7 +1950,7 @@ and menu. Merging or directory-comparison are not supported then.
 
 <qandaentry><question><para>
    When I removed some text, then suddenly "&lt;No src line&gt;" appeared
-   and can't be deleted. What does that mean and how can one remove this?
+   and cannot be deleted. What does that mean and how can one remove this?
 </para></question><answer><para>
    For each equal or different section the editor in the merge result
    window    remembers where it begins or ends. "&lt;No src line&gt;" means
@@ -1983,31 +1963,31 @@ and menu. Merging or directory-comparison are not supported then.
 </para></answer></qandaentry>
 
 <qandaentry><question><para>
-   Why doesn't KDiff3 support syntax-highlighting?
+   Why doesn't &kdiff3; support syntax-highlighting?
 </para></question><answer><para>
-   KDiff3 already uses many colors for difference highlighting. More
+   &kdiff3; already uses many colors for difference highlighting. More
    highlighting    would be confusing. Use another editor for this.
 </para></answer></qandaentry>
 
 <qandaentry><question><para>
-   Can I use KDiff3 to compare OpenOffice.Org, Word, Excel, PDF-, etc. files?
+   Can I use &kdiff3; to compare OpenOffice.Org, Word, Excel, PDF-, &etc; files?
 </para></question><answer><para>
-   Although KDiff3 will analyse any kind of file the result will probably
+   Although &kdiff3; will analyse any kind of file the result will probably
    not be very satisfactory for you.
 </para><para>
-   KDiff3 was made to compare pure text files. OpenOffice, Word, Excel etc.
+   &kdiff3; was made to compare pure text files. OpenOffice, Word, Excel etc.
    store much more information in the files (about fonts, pictures, pages,
-   colors etc.) which KDiff3 doesn't know about. So KDiff3 will 
+   colors etc.) which &kdiff3; doesn't know about. So &kdiff3; will 
    show you the contents of the file interpreted as pure text, but 
    this might be unreadable or at least it will look very odd.
 </para><para>
    Since most programs nowadays store their contents in XML-format, you might 
    be able to read it as pure text. So if the change was only small,
-   KDiff3 still might help you.
+   &kdiff3; still might help you.
 </para><para>
    The best solution if you only want to compare the text (without embedded 
    objects like pictures) is to use "Select All" and "Copy" in your program 
-   to copy the interesting text to the clipoard and then in KDiff3 paste the 
+   to copy the interesting text to the clipoard and then in &kdiff3; paste the 
    text into either diff input window. 
    (See also <link linkend="selections">Select, Copy And Paste</link>.)
 </para></answer></qandaentry>
@@ -2048,7 +2028,7 @@ and menu. Merging or directory-comparison are not supported then.
 Program copyright 2002-2006 Joachim Eibl <email>joachim.eibl at gmx.de</email>
 </para>
 <para>
-Several cool ideas and bugreports came from colleagues and many people out in the World Wild Web. Thank you!
+Several cool ideas and bugreports came from colleagues and many people out in the Wild Wild Web. Thank you!
 </para>
 
 <para>
@@ -2071,9 +2051,9 @@ Documentation Copyright &copy; 2002-2006 Joachim Eibl <email>joachim.eibl at gmx
 <title>How to obtain &kdiff3;</title>
 
 <para>
-You can download the latest version of KDiff3 from its homepage <ulink url="http://kdiff3.sourceforge.net">http://kdiff3.sourceforge.net</ulink>.
+You can download the latest version of &kdiff3; from its homepage <ulink url="http://kdiff3.sourceforge.net">http://kdiff3.sourceforge.net</ulink>.
 </para><para>
-KDiff3 is also available for other platforms. See the homepage for details.
+&kdiff3; is also available for other platforms. See the homepage for details.
 </para>
 
 
@@ -2085,7 +2065,7 @@ KDiff3 is also available for other platforms. See the homepage for details.
 <para>
    In order to successfully use all features of &kdiff3;, you need &kde; >3.1.
 </para><para>
-   For information about how to run KDiff3 on other platforms without KDE please see the
+   For information about how to run &kdiff3; on other platforms without KDE please see the
    <ulink url="http://kdiff3.sourceforge.net">homepage</ulink>.
 </para><para>
 You can find a list of changes at <ulink

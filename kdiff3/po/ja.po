@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
-"POT-Creation-Date: 2006-03-27 11:45+0200\n"
-"PO-Revision-Date: 2004-02-06 23:23+0900\n"
-"Last-Translator: SATOH Satoru <ss@kde.gr.jp>\n"
+"POT-Creation-Date: 2006-04-10 11:07+0200\n"
+"PO-Revision-Date: 2006-04-14 21:25+0900\n"
+"Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <Kdeveloper@kde.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgstr "ss@kde.gr.jp"
 
 #: diff.cpp:245
 msgid "Writing clipboard data to temp file failed."
-msgstr ""
+msgstr "クリップボードのデータを一時ファイルに書き込めませんでした。"
 
 #: diff.cpp:249
 msgid "From Clipboard"
@@ -64,12 +64,11 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "深刻な内部エラー"
 
-#: difftextwindow.cpp:1590 kdiff3.cpp:742
-#, fuzzy
+#: difftextwindow.cpp:1637 kdiff3.cpp:743
 msgid "Top line"
-msgstr "上部行 %1"
+msgstr "上部行"
 
-#: difftextwindow.cpp:1600
+#: difftextwindow.cpp:1647
 msgid "End"
 msgstr "最後"
 
@@ -79,7 +78,7 @@ msgstr "リンクのミックスと普通のファイル"
 
 #: directorymergewindow.cpp:149
 msgid "Link: "
-msgstr "リンク "
+msgstr "リンク: "
 
 #: directorymergewindow.cpp:157
 msgid "Size. "
@@ -98,9 +97,8 @@ msgid "Opening %1 failed."
 msgstr "%1 を開けません"
 
 #: directorymergewindow.cpp:208
-#, fuzzy
 msgid "Comparing file..."
-msgstr "ファイルを保存中..."
+msgstr "ファイルを比較中..."
 
 #: directorymergewindow.cpp:218 directorymergewindow.cpp:224
 #, c-format
@@ -121,19 +119,19 @@ msgstr "状態"
 
 #: directorymergewindow.cpp:288
 msgid "Unsolved"
-msgstr ""
+msgstr "未解決"
 
 #: directorymergewindow.cpp:289
 msgid "Solved"
-msgstr ""
+msgstr "解決済み"
 
 #: directorymergewindow.cpp:290
 msgid "Nonwhite"
-msgstr ""
+msgstr "空白以外"
 
 #: directorymergewindow.cpp:291
 msgid "White"
-msgstr ""
+msgstr "空白"
 
 #: directorymergewindow.cpp:319
 msgid ""
@@ -141,11 +139,11 @@ msgid ""
 "merge and rescan the directory?"
 msgstr "今ディレクトリマージ中です. 本当にマージを中止し、ディレクトリを再スキャンしますか?"
 
-#: directorymergewindow.cpp:320 directorymergewindow.cpp:2859
+#: directorymergewindow.cpp:320 directorymergewindow.cpp:2864
 msgid "Rescan"
 msgstr "再スキャン"
 
-#: directorymergewindow.cpp:320 kdiff3.cpp:593 pdiff.cpp:965
+#: directorymergewindow.cpp:320 kdiff3.cpp:594 pdiff.cpp:965
 msgid "Continue Merging"
 msgstr "マージを続行"
 
@@ -189,9 +187,8 @@ msgid "Parameter Warning"
 msgstr "パラメータ警告"
 
 #: directorymergewindow.cpp:488
-#, fuzzy
 msgid "Scanning directories..."
-msgstr "ディレクトリを同期"
+msgstr "ディレクトリをスキャン中..."
 
 #: directorymergewindow.cpp:537
 msgid "Reading Directory A"
@@ -213,8 +210,8 @@ msgstr "いくつかのサブディレクトリが読み込み不可でした"
 msgid "Check the permissions of the subdirectories."
 msgstr "サブディレクトリの許可属性を確かめて下さい"
 
-#: directorymergewindow.cpp:646 kdiff3.cpp:546 kdiff3.cpp:626 kdiff3.cpp:650
-#: kdiff3.cpp:923 kdiff3.cpp:944 pdiff.cpp:1045 pdiff.cpp:1117 pdiff.cpp:1155
+#: directorymergewindow.cpp:646 kdiff3.cpp:547 kdiff3.cpp:627 kdiff3.cpp:651
+#: kdiff3.cpp:924 kdiff3.cpp:945 pdiff.cpp:1045 pdiff.cpp:1117 pdiff.cpp:1155
 #: pdiff.cpp:1171 pdiff.cpp:1201 pdiff.cpp:1212
 msgid "Ready."
 msgstr "準備完了."
@@ -259,19 +256,19 @@ msgstr "処理中"
 msgid "To do."
 msgstr "To do."
 
-#: directorymergewindow.cpp:1752 directorymergewindow.cpp:2888
+#: directorymergewindow.cpp:1752 directorymergewindow.cpp:2895
 msgid "Copy A to B"
 msgstr "A を B にコピー"
 
-#: directorymergewindow.cpp:1753 directorymergewindow.cpp:2889
+#: directorymergewindow.cpp:1753 directorymergewindow.cpp:2896
 msgid "Copy B to A"
 msgstr "B を A にコピー"
 
-#: directorymergewindow.cpp:1754 directorymergewindow.cpp:2890
+#: directorymergewindow.cpp:1754 directorymergewindow.cpp:2897
 msgid "Delete A"
 msgstr "A を削除"
 
-#: directorymergewindow.cpp:1755 directorymergewindow.cpp:2891
+#: directorymergewindow.cpp:1755 directorymergewindow.cpp:2898
 msgid "Delete B"
 msgstr "B を削除"
 
@@ -279,11 +276,11 @@ msgstr "B を削除"
 msgid "Delete A & B"
 msgstr "A と B を削除"
 
-#: directorymergewindow.cpp:1757 directorymergewindow.cpp:2893
+#: directorymergewindow.cpp:1757 directorymergewindow.cpp:2900
 msgid "Merge to A"
 msgstr "A にマージ"
 
-#: directorymergewindow.cpp:1758 directorymergewindow.cpp:2894
+#: directorymergewindow.cpp:1758 directorymergewindow.cpp:2901
 msgid "Merge to B"
 msgstr "B にマージ"
 
@@ -291,12 +288,12 @@ msgstr "B にマージ"
 msgid "Merge to A & B"
 msgstr "A と B にマージ"
 
-#: directorymergewindow.cpp:1763 directorymergewindow.cpp:2885
+#: directorymergewindow.cpp:1763 directorymergewindow.cpp:2892
 msgid "Delete (if exists)"
 msgstr "(存在すれば)削除"
 
 #: directorymergewindow.cpp:1764 directorymergewindow.cpp:1765
-#: directorymergewindow.cpp:2884 smalldialogs.cpp:102
+#: directorymergewindow.cpp:2891 smalldialogs.cpp:102
 msgid "Merge"
 msgstr "マージ"
 
@@ -415,7 +412,6 @@ msgid ""
 msgstr "ファイルの更新日時は等しいですがファイルは異なっています. 何をするか選択して下さい"
 
 #: directorymergewindow.cpp:2102
-#, fuzzy
 msgid ""
 "This operation is currently not possible because directory merge is currently "
 "running."
@@ -498,7 +494,6 @@ msgid "manual merge( %1, %2, %3 -> %4)"
 msgstr "手作業でのマージ( %1, %2, %3 -> %4)"
 
 #: directorymergewindow.cpp:2426
-#, fuzzy
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
 msgstr "     注意: 手作業でのマージ後に続行するには F7 を押して下さい"
@@ -604,124 +599,109 @@ msgstr "先: "
 msgid "Save Directory Merge State As..."
 msgstr "ディレクトリマージ"
 
-#: directorymergewindow.cpp:2853
+#: directorymergewindow.cpp:2858
 msgid "Start/Continue Directory Merge"
 msgstr "ディレクトリマージを開始/続行"
 
-#: directorymergewindow.cpp:2854
+#: directorymergewindow.cpp:2859
 msgid "Run Operation for Current Item"
 msgstr "現在の項目について操作を実行"
 
-#: directorymergewindow.cpp:2855
+#: directorymergewindow.cpp:2860
 msgid "Compare Selected File"
 msgstr "選択ファイルを比較 "
 
-#: directorymergewindow.cpp:2856
+#: directorymergewindow.cpp:2861
 msgid "Merge Current File"
 msgstr "現在のファイルをマージ "
 
-#: directorymergewindow.cpp:2857
+#: directorymergewindow.cpp:2862
 msgid "Fold All Subdirs"
 msgstr "すべてのサブディレクトリを畳み込み"
 
-#: directorymergewindow.cpp:2858
+#: directorymergewindow.cpp:2863
 msgid "Unfold All Subdirs"
 msgstr "すべてのサブディレクトリを展開"
 
-#: directorymergewindow.cpp:2860
+#: directorymergewindow.cpp:2865
 #, fuzzy
 msgid "Save Directory Merge State ..."
 msgstr "ディレクトリマージ"
 
-#: directorymergewindow.cpp:2861
+#: directorymergewindow.cpp:2866
 #, fuzzy
 msgid "Load Directory Merge State ..."
 msgstr "ディレクトリマージ"
 
-#: directorymergewindow.cpp:2862
+#: directorymergewindow.cpp:2867
 msgid "Choose A for All Items"
 msgstr "すべての項目について A を選択"
 
-#: directorymergewindow.cpp:2863
+#: directorymergewindow.cpp:2868
 msgid "Choose B for All Items"
 msgstr "すべての項目について B を選択"
 
-#: directorymergewindow.cpp:2864
+#: directorymergewindow.cpp:2869
 msgid "Choose C for All Items"
 msgstr "すべての項目について C を選択"
 
-#: directorymergewindow.cpp:2865
+#: directorymergewindow.cpp:2870
 msgid "Auto-Choose Operation for All Items"
 msgstr "すべての項目について自動選択"
 
-#: directorymergewindow.cpp:2866
+#: directorymergewindow.cpp:2871
 msgid "No Operation for All Items"
 msgstr "すべての項目について操作なし"
 
-#: directorymergewindow.cpp:2868
-#, fuzzy
-msgid "Synchronize Directories"
-msgstr "ディレクトリを同期"
-
-#: directorymergewindow.cpp:2869
-#, fuzzy
-msgid "Copy Newer Files Instead of Merging"
-msgstr "マージではなくより新しいものをコピー(安全ではありません)"
-
-#: directorymergewindow.cpp:2871
+#: directorymergewindow.cpp:2876
 msgid "Show Identical Files"
-msgstr ""
-
-#: directorymergewindow.cpp:2872
-#, fuzzy
-msgid "Show Different Files"
-msgstr "異なるファイルの数:"
-
-#: directorymergewindow.cpp:2873
-msgid "Show Files only in A"
-msgstr ""
-
-#: directorymergewindow.cpp:2874
-msgid "Show Files only in B"
-msgstr ""
-
-#: directorymergewindow.cpp:2875
-msgid "Show Files only in C"
-msgstr ""
+msgstr "等しいファイルを表示"
 
 #: directorymergewindow.cpp:2877
-#, fuzzy
-msgid "Compare Explicitly Selected Files"
-msgstr "選択ファイルを比較 "
+msgid "Show Different Files"
+msgstr "異なるファイルを表示"
 
 #: directorymergewindow.cpp:2878
-#, fuzzy
-msgid "Merge Explicitly Selected Files"
-msgstr "選択ファイルを比較 "
+msgid "Show Files only in A"
+msgstr "A にのみ存在するファイルを表示"
 
-#: directorymergewindow.cpp:2880 directorymergewindow.cpp:2887
+#: directorymergewindow.cpp:2879
+msgid "Show Files only in B"
+msgstr "B にのみ存在するファイルを表示"
+
+#: directorymergewindow.cpp:2880
+msgid "Show Files only in C"
+msgstr "C にのみ存在するファイルを表示"
+
+#: directorymergewindow.cpp:2884
+msgid "Compare Explicitly Selected Files"
+msgstr "明示的に選択したファイルを比較 "
+
+#: directorymergewindow.cpp:2885
+msgid "Merge Explicitly Selected Files"
+msgstr "明示的に選択したファイルをマージ "
+
+#: directorymergewindow.cpp:2887 directorymergewindow.cpp:2894
 msgid "Do Nothing"
 msgstr "何もしない"
 
-#: directorymergewindow.cpp:2881
+#: directorymergewindow.cpp:2888
 msgid "A"
 msgstr "A"
 
-#: directorymergewindow.cpp:2882
+#: directorymergewindow.cpp:2889
 msgid "B"
 msgstr "B"
 
-#: directorymergewindow.cpp:2883
+#: directorymergewindow.cpp:2890
 msgid "C"
 msgstr "C"
 
-#: directorymergewindow.cpp:2892
-#, fuzzy
+#: directorymergewindow.cpp:2899
 msgid "Delete A && B"
 msgstr "A と B を削除"
 
-#: directorymergewindow.cpp:2895
-#, fuzzy
+#: directorymergewindow.cpp:2902
 msgid "Merge to A && B"
 msgstr "A と B にマージ"
 
@@ -819,14 +799,12 @@ msgid "Listing directory: %1"
 msgstr "ディレクトリをリスト中: %1"
 
 #: kdiff3.cpp:142
-#, fuzzy
 msgid "Current Configuration:"
-msgstr "現在の項目の同期操作"
+msgstr "現在の設定:"
 
 #: kdiff3.cpp:147
-#, fuzzy
 msgid "Config Option Error:"
-msgstr "ファイルを開く際にエラー"
+msgstr "設定オプションエラー:"
 
 #: kdiff3.cpp:187
 msgid "Option --auto used, but no output file specified."
@@ -862,7 +840,7 @@ msgstr "現在の文書を別名で保存..."
 
 #: kdiff3.cpp:422
 msgid "Print the differences"
-msgstr ""
+msgstr "差異を印刷"
 
 #: kdiff3.cpp:424
 msgid "Quits the application"
@@ -882,7 +860,7 @@ msgstr "クリップボードの内容を現在の位置に貼付け"
 
 #: kdiff3.cpp:432
 msgid "Select everything in current window"
-msgstr ""
+msgstr "現在のウィンドウの全てを選択"
 
 #: kdiff3.cpp:434
 msgid "Search for a string"
@@ -918,13 +896,13 @@ msgstr "最後の異なる部分に移動"
 
 #: kdiff3.cpp:468
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
-msgstr ""
+msgstr "(\"空白文字を表示\"が無効な時は空白の差異をスキップする)"
 
 #: kdiff3.cpp:469
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
-msgstr ""
+msgstr "(\"空白文字を表示\"が無効な時も空白の差異をスキップしない)"
 
 #: kdiff3.cpp:470
 msgid "Go to Previous Delta"
@@ -991,32 +969,26 @@ msgid "Choose C Everywhere"
 msgstr "常に C を選択"
 
 #: kdiff3.cpp:494
-#, fuzzy
 msgid "Choose A for All Unsolved Conflicts"
 msgstr "未解決の衝突について常に A を選択"
 
 #: kdiff3.cpp:495
-#, fuzzy
 msgid "Choose B for All Unsolved Conflicts"
 msgstr "未解決の衝突について常に B を選択"
 
 #: kdiff3.cpp:496
-#, fuzzy
 msgid "Choose C for All Unsolved Conflicts"
 msgstr "未解決の衝突について常に C を選択"
 
 #: kdiff3.cpp:497
-#, fuzzy
 msgid "Choose A for All Unsolved Whitespace Conflicts"
 msgstr "未解決の空白の衝突について常に A を選択"
 
 #: kdiff3.cpp:498
-#, fuzzy
 msgid "Choose B for All Unsolved Whitespace Conflicts"
 msgstr "未解決の空白の衝突について常に B を選択"
 
 #: kdiff3.cpp:499
-#, fuzzy
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr "未解決の空白の衝突について常に C を選択"
 
@@ -1039,124 +1011,126 @@ msgstr "単純な衝突について自動的に解決"
 
 #: kdiff3.cpp:504
 msgid "Split Diff At Selection"
-msgstr ""
+msgstr "選択した差異を分離"
 
-#: kdiff3.cpp:506
+#: kdiff3.cpp:505
+msgid "Join Selected Diffs"
+msgstr "選択した差異を結合"
+
+#: kdiff3.cpp:507
 msgid "Show Window A"
 msgstr "ウィンドウ A を表示"
 
-#: kdiff3.cpp:507
+#: kdiff3.cpp:508
 msgid "Show Window B"
 msgstr "ウィンドウ B を表示"
 
-#: kdiff3.cpp:508
+#: kdiff3.cpp:509
 msgid "Show Window C"
 msgstr "ウィンドウ C を表示"
 
-#: kdiff3.cpp:509 kdiff3.cpp:520
+#: kdiff3.cpp:510 kdiff3.cpp:521
 msgid "Focus Next Window"
 msgstr "次のウィンドウにフォーカス"
 
-#: kdiff3.cpp:511
-msgid "Normal Overview"
-msgstr ""
-
 #: kdiff3.cpp:512
-msgid "A vs. B Overview"
-msgstr ""
+msgid "Normal Overview"
+msgstr "全て比較 (標準)"
 
 #: kdiff3.cpp:513
-msgid "A vs. C Overview"
-msgstr ""
+msgid "A vs. B Overview"
+msgstr "A と B を比較"
 
 #: kdiff3.cpp:514
-msgid "B vs. C Overview"
-msgstr ""
+msgid "A vs. C Overview"
+msgstr "A と C を比較"
 
 #: kdiff3.cpp:515
-msgid "Word Wrap Diff Windows"
-msgstr ""
+msgid "B vs. C Overview"
+msgstr "B と C を比較"
 
 #: kdiff3.cpp:516
+msgid "Word Wrap Diff Windows"
+msgstr "Diffウィンドウで行を折り返す"
+
+#: kdiff3.cpp:517
 msgid "Add Manual Diff Alignment"
 msgstr ""
 
-#: kdiff3.cpp:517
+#: kdiff3.cpp:518
 msgid "Clear All Manual Diff Alignments"
 msgstr ""
 
-#: kdiff3.cpp:522
+#: kdiff3.cpp:523
 msgid "Focus Prev Window"
 msgstr "前のウィンドウにフォーカス"
 
-#: kdiff3.cpp:523
+#: kdiff3.cpp:524
 msgid "Toggle Split Orientation"
 msgstr "分割軸を切替"
 
-#: kdiff3.cpp:525
+#: kdiff3.cpp:526
 msgid "Dir && Text Split Screen View"
 msgstr "ディレクトリ/テキスト分割画面表示"
 
-#: kdiff3.cpp:527
+#: kdiff3.cpp:528
 msgid "Toggle Between Dir && Text View"
 msgstr "ディレクトリ/テキスト表示を切替"
 
-#: kdiff3.cpp:572 pdiff.cpp:1684
+#: kdiff3.cpp:573 pdiff.cpp:1698
 msgid "The merge result hasn't been saved."
 msgstr "マージ結果は保存されませんでした."
 
-#: kdiff3.cpp:573
+#: kdiff3.cpp:574
 msgid "Save && Quit"
 msgstr "保存/終了"
 
-#: kdiff3.cpp:573
+#: kdiff3.cpp:574
 msgid "Quit Without Saving"
 msgstr "保存しないで終了"
 
-#: kdiff3.cpp:581 pdiff.cpp:1693
+#: kdiff3.cpp:582 pdiff.cpp:1707
 msgid "Saving the merge result failed."
 msgstr "マージ結果保存に失敗"
 
-#: kdiff3.cpp:592 pdiff.cpp:964
+#: kdiff3.cpp:593 pdiff.cpp:964
 msgid ""
 "You are currently doing a directory merge. Are you sure, you want to abort?"
 msgstr "ディレクトリマージ実行中です. 本当に中止しますか?"
 
-#: kdiff3.cpp:615
+#: kdiff3.cpp:616
 msgid "Saving file..."
 msgstr "ファイルを保存中..."
 
-#: kdiff3.cpp:632
+#: kdiff3.cpp:633
 msgid "Saving file with a new filename..."
 msgstr "名前を付けてファイルを保存中..."
 
-#: kdiff3.cpp:721
-#, fuzzy
+#: kdiff3.cpp:722
 msgid "Printing..."
-msgstr "終了中..."
+msgstr "印刷中..."
 
-#: kdiff3.cpp:727 kdiff3.cpp:889
+#: kdiff3.cpp:728 kdiff3.cpp:890
 msgid "Printing aborted."
-msgstr ""
+msgstr "印刷を中止しました。"
 
-#: kdiff3.cpp:859
+#: kdiff3.cpp:860
 msgid "Selection"
-msgstr ""
+msgstr "選択"
 
-#: kdiff3.cpp:885
-#, fuzzy
+#: kdiff3.cpp:886
 msgid "Printing completed."
-msgstr "マージ操作完了"
+msgstr "印刷が完了しました。"
 
-#: kdiff3.cpp:895
+#: kdiff3.cpp:896
 msgid "Exiting..."
 msgstr "終了中..."
 
-#: kdiff3.cpp:907
+#: kdiff3.cpp:908
 msgid "Toggling toolbar..."
 msgstr "ツールバー切替中..."
 
-#: kdiff3.cpp:928
+#: kdiff3.cpp:929
 msgid "Toggle the statusbar..."
 msgstr "状態表示バーの表示を切替..."
 
@@ -1179,7 +1153,7 @@ msgstr ""
 
 #: main.cpp:35
 msgid "Tool for Comparison and Merge of Files and Directories"
-msgstr ""
+msgstr "ファイルとディレクトリを比較/マージするためのツール"
 
 #: main.cpp:40
 msgid "Merge the input."
@@ -1236,9 +1210,8 @@ msgid "Show list of config settings and current values."
 msgstr ""
 
 #: main.cpp:55
-#, fuzzy
 msgid "Use a different config file."
-msgstr "異なるファイルの数:"
+msgstr "異なる設定ファイルを使用"
 
 #: main.cpp:59
 msgid "file1 to open (base, if not specified via --base)"
@@ -1269,11 +1242,8 @@ msgstr ""
 #: mergeresultwindow.cpp:132 mergeresultwindow.cpp:936
 #: mergeresultwindow.cpp:950 mergeresultwindow.cpp:962
 #: mergeresultwindow.cpp:974
-#, fuzzy
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
-msgstr ""
-"\n"
-"未解決の衝突の数: "
+msgstr "未解決の衝突の数: %1 (内 %2 は空白)"
 
 #: mergeresultwindow.cpp:282
 msgid ""
@@ -1287,41 +1257,41 @@ msgstr ""
 msgid "All input files are binary equal."
 msgstr "すべての入力ファイルバイナリは同じです"
 
-#: mergeresultwindow.cpp:796 pdiff.cpp:509
+#: mergeresultwindow.cpp:796
 msgid "All input files contain the same text."
 msgstr "すべての入力ファイルは同じテキストです"
 
-#: mergeresultwindow.cpp:798 pdiff.cpp:511
+#: mergeresultwindow.cpp:798
 msgid ""
 "Files A and B are binary equal.\n"
 msgstr ""
 "ファイル A と B は同じバイナリです\n"
 
-#: mergeresultwindow.cpp:799 pdiff.cpp:512
+#: mergeresultwindow.cpp:799
 msgid ""
 "Files A and B have equal text. \n"
 msgstr ""
 "ファイル A と B は同じテキストです\n"
 
-#: mergeresultwindow.cpp:800 pdiff.cpp:513
+#: mergeresultwindow.cpp:800
 msgid ""
 "Files A and C are binary equal.\n"
 msgstr ""
 "ファイル A と C は同じバイナリです\n"
 
-#: mergeresultwindow.cpp:801 pdiff.cpp:514
+#: mergeresultwindow.cpp:801
 msgid ""
 "Files A and C have equal text. \n"
 msgstr ""
 "ファイル A と C は同じテキストです\n"
 
-#: mergeresultwindow.cpp:802 pdiff.cpp:515
+#: mergeresultwindow.cpp:802
 msgid ""
 "Files B and C are binary equal.\n"
 msgstr ""
 "ファイル B と C は同じバイナリです\n"
 
-#: mergeresultwindow.cpp:803 pdiff.cpp:516
+#: mergeresultwindow.cpp:803
 msgid ""
 "Files B and C have equal text. \n"
 msgstr ""
@@ -1351,28 +1321,27 @@ msgstr ""
 msgid "Conflicts"
 msgstr "衝突"
 
-#: mergeresultwindow.cpp:1506
+#: mergeresultwindow.cpp:1649
 msgid "<No src line>"
 msgstr "<ソース行なし>"
 
-#: mergeresultwindow.cpp:1514
-#, fuzzy
+#: mergeresultwindow.cpp:1657
 msgid "<Merge Conflict (Whitespace only)>"
-msgstr "<衝突をマージ>"
+msgstr "<マージ衝突 (空白のみ)>"
 
-#: mergeresultwindow.cpp:1516 mergeresultwindow.cpp:2302
+#: mergeresultwindow.cpp:1659 mergeresultwindow.cpp:2445
 msgid "<Merge Conflict>"
-msgstr "<衝突をマージ>"
+msgstr "<マージ衝突>"
 
-#: mergeresultwindow.cpp:1586 smalldialogs.cpp:115
+#: mergeresultwindow.cpp:1729
 msgid "Output"
-msgstr ""
+msgstr "出力"
 
-#: mergeresultwindow.cpp:1588
+#: mergeresultwindow.cpp:1731
 msgid "[Modified]"
 msgstr "[更新]"
 
-#: mergeresultwindow.cpp:2512
+#: mergeresultwindow.cpp:2655
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved.\n"
@@ -1380,51 +1349,53 @@ msgstr ""
 "すべての衝突がまだ解決されていません\n"
 "ファイルは保存されません\n"
 
-#: mergeresultwindow.cpp:2514
+#: mergeresultwindow.cpp:2657
 msgid "Conflicts Left"
 msgstr "衝突(左)"
 
-#: mergeresultwindow.cpp:2526
+#: mergeresultwindow.cpp:2669
 msgid ""
 "\n"
 "\n"
 "Creating backup failed. File not saved."
 msgstr ""
+"\n"
+"\n"
+"バックアップファイルの作成に失敗。ファイルは保存されません。"
 
-#: mergeresultwindow.cpp:2526 mergeresultwindow.cpp:2566
+#: mergeresultwindow.cpp:2669 mergeresultwindow.cpp:2709
 msgid "File Save Error"
 msgstr "ファイル保存エラー"
 
-#: mergeresultwindow.cpp:2566
+#: mergeresultwindow.cpp:2709
 msgid "Error while writing."
 msgstr "書き込み中にエラー"
 
 #: optiondialog.cpp:361
 msgid "Unicode, 8 bit"
-msgstr ""
+msgstr "Unicode, 8 bit"
 
 #: optiondialog.cpp:362
 msgid "Unicode"
-msgstr ""
+msgstr "Unicode"
 
 #: optiondialog.cpp:363
 msgid "Latin1"
-msgstr ""
+msgstr "Latin1"
 
 #: optiondialog.cpp:382
-#, fuzzy
 msgid "Change this if non-ASCII characters are not displayed correctly."
-msgstr "非 ASCII 文字が適切に表示されなければ変更"
+msgstr "非 ASCII 文字が適切に表示されなければ、これを変更してください。"
 
-#: optiondialog.cpp:504
+#: optiondialog.cpp:507
 msgid "Editor & Diff Output Font"
 msgstr "エディタ/Diff 出力フォント"
 
-#: optiondialog.cpp:525
-msgid "Italic font for deltas"
-msgstr "異なる部分にイタリックフォントを"
-
 #: optiondialog.cpp:528
+msgid "Italic font for deltas"
+msgstr "異なる部分をイタリック体で表示"
+
+#: optiondialog.cpp:531
 msgid ""
 "Selects the italic version of the font for differences.\n"
 "If the font doesn't support italic characters, then this does nothing."
@@ -1432,99 +1403,97 @@ msgstr ""
 "差異を表示するのにフォントのイタリック体を選択\n"
 "イタリック体が含まれていなければ、通常のままです"
 
-#: optiondialog.cpp:536
+#: optiondialog.cpp:539
 msgid "Color"
 msgstr "色"
 
-#: optiondialog.cpp:536
+#: optiondialog.cpp:539
 msgid "Colors Settings"
-msgstr ""
+msgstr "色の設定"
 
-#: optiondialog.cpp:550
+#: optiondialog.cpp:553
 msgid "Editor and Diff Views:"
-msgstr ""
+msgstr "エディタ/Diff ビュー:"
 
-#: optiondialog.cpp:558
+#: optiondialog.cpp:561
 msgid "Foreground color:"
 msgstr "前景色:"
 
-#: optiondialog.cpp:564
+#: optiondialog.cpp:567
 msgid "Background color:"
 msgstr "背景色:"
 
-#: optiondialog.cpp:572
+#: optiondialog.cpp:575
 msgid "Diff background color:"
 msgstr "Diff 背景色:"
 
-#: optiondialog.cpp:579
+#: optiondialog.cpp:582
 msgid "Color A:"
 msgstr "色 (A):"
 
-#: optiondialog.cpp:586
+#: optiondialog.cpp:589
 msgid "Color B:"
 msgstr "色 (B):"
 
-#: optiondialog.cpp:593
+#: optiondialog.cpp:596
 msgid "Color C:"
 msgstr "色 (C):"
 
-#: optiondialog.cpp:599
+#: optiondialog.cpp:602
 msgid "Conflict color:"
 msgstr "色 (衝突):"
 
-#: optiondialog.cpp:606
+#: optiondialog.cpp:609
 msgid "Current range background color:"
 msgstr "現在の範囲での背景色:"
 
-#: optiondialog.cpp:613
+#: optiondialog.cpp:616
 msgid "Current range diff background color:"
 msgstr "現在の範囲での diff 背景色:"
 
-#: optiondialog.cpp:619
-msgid "Color for manually selected difference ranges:"
+#: optiondialog.cpp:622
+msgid "Color for manually aligned difference ranges:"
 msgstr ""
 
-#: optiondialog.cpp:624
-#, fuzzy
+#: optiondialog.cpp:627
 msgid "Directory Comparison View:"
-msgstr "ディレクトリ比較状態"
-
-#: optiondialog.cpp:630
-msgid "Newest file color:"
-msgstr ""
+msgstr "ディレクトリ比較ビュー:"
 
 #: optiondialog.cpp:633
+msgid "Newest file color:"
+msgstr "最も新しいファイルの色:"
+
+#: optiondialog.cpp:636
 msgid ""
 "Changing this color will only be effective when starting the next directory "
 "comparison."
-msgstr ""
+msgstr "この色の変更は次のディレクトリ比較を開始した時に有効になります。"
 
-#: optiondialog.cpp:638
+#: optiondialog.cpp:641
 msgid "Oldest file color:"
-msgstr ""
+msgstr "最も古いファイルの色:"
 
-#: optiondialog.cpp:645
+#: optiondialog.cpp:648
 msgid "Middle age file color:"
-msgstr ""
+msgstr "中間のファイルの色:"
 
-#: optiondialog.cpp:652
+#: optiondialog.cpp:655
 msgid "Color for missing files:"
-msgstr ""
+msgstr "欠落したファイルの色:"
 
-#: optiondialog.cpp:664
+#: optiondialog.cpp:667
 msgid "Editor"
 msgstr "エディタ"
 
-#: optiondialog.cpp:664
-#, fuzzy
+#: optiondialog.cpp:667
 msgid "Editor Behavior"
 msgstr "エディタの動作"
 
-#: optiondialog.cpp:674
-msgid "Tab inserts spaces"
-msgstr "タブで空白をいくつ挿入するか"
-
 #: optiondialog.cpp:677
+msgid "Tab inserts spaces"
+msgstr "タブで空白を挿入"
+
+#: optiondialog.cpp:680
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
 "Off: A Tab-character will be inserted."
@@ -1532,25 +1501,25 @@ msgstr ""
 "オン: タブを押すと適切な数の空白を挿入\n"
 "オフ: タブそのものを挿入"
 
-#: optiondialog.cpp:683
+#: optiondialog.cpp:686
 msgid "Tab size:"
 msgstr "タブサイズ:"
 
-#: optiondialog.cpp:688
+#: optiondialog.cpp:691
 msgid "Auto indentation"
 msgstr "自動字下げ"
 
-#: optiondialog.cpp:691
+#: optiondialog.cpp:694
 msgid ""
 "On: The indentation of the previous line is used for a new line.\n"
 msgstr ""
 "オン: 新規改行に前の行の字下げを使う\n"
 
-#: optiondialog.cpp:695
-msgid "Auto copy selection"
-msgstr "自動コピー選択"
-
 #: optiondialog.cpp:698
+msgid "Auto copy selection"
+msgstr "選択を自動的にコピー"
+
+#: optiondialog.cpp:701
 msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
 "Off: You must explicitely copy e.g. via Ctrl-C."
@@ -1558,31 +1527,31 @@ msgstr ""
 "オン: すべての選択は即座にクリップボードへ\n"
 "オフ: 明示的なコピーが必要. 例: Ctrl-C で"
 
-#: optiondialog.cpp:703
+#: optiondialog.cpp:706
 msgid "Line end style:"
-msgstr ""
+msgstr "改行コード:"
 
-#: optiondialog.cpp:715
+#: optiondialog.cpp:718
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
 "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
 msgstr ""
+"編集したファイルの保存時に使用する改行コードを設定します。\n"
+"DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
 
-#: optiondialog.cpp:726
-#, fuzzy
+#: optiondialog.cpp:729
 msgid "Diff and Merge"
 msgstr "Diff/マージ"
 
-#: optiondialog.cpp:726
-#, fuzzy
+#: optiondialog.cpp:729
 msgid "Diff and Merge Settings"
-msgstr "Diff/マージ設定"
+msgstr "Diff/マージの設定"
 
-#: optiondialog.cpp:737
+#: optiondialog.cpp:740
 msgid "Preserve carriage return"
 msgstr "キャリッジリターンを保存"
 
-#: optiondialog.cpp:740
+#: optiondialog.cpp:743
 msgid ""
 "Show carriage return characters '\\r' if they exist.\n"
 "Helps to compare files that were modified under different operating systems."
@@ -1590,11 +1559,11 @@ msgstr ""
 "キャリッジリターンがあれば `\\r` と表示\n"
 "異なる OS で更新されたファイルを比較するのを手助け"
 
-#: optiondialog.cpp:745
+#: optiondialog.cpp:748
 msgid "Ignore numbers"
 msgstr "数字を無視"
 
-#: optiondialog.cpp:748
+#: optiondialog.cpp:751
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore white "
 "space.)\n"
@@ -1603,37 +1572,35 @@ msgstr ""
 "行マッチ時に数字の違いを無視. (空白を無視に類似)\n"
 "数字データファイルの比較を手助け"
 
-#: optiondialog.cpp:753
-#, fuzzy
+#: optiondialog.cpp:756
 msgid "Ignore C/C++ comments"
 msgstr "C/C++ コメントを無視 "
 
-#: optiondialog.cpp:755
+#: optiondialog.cpp:758
 msgid "Treat C/C++ comments like white space."
 msgstr "C/C++ コメントを空白と同じように扱う"
 
-#: optiondialog.cpp:759
-#, fuzzy
-msgid "Ignore case"
-msgstr "数字を無視"
-
 #: optiondialog.cpp:762
-msgid "Treat case differences like white space changes. ('a'<=>'A')"
-msgstr ""
+msgid "Ignore case"
+msgstr "大文字小文字の差を無視"
 
-#: optiondialog.cpp:766
+#: optiondialog.cpp:765
+msgid "Treat case differences like white space changes. ('a'<=>'A')"
+msgstr "大文字小文字の差を空白と同じように扱う ('a' <=>'A')"
+
+#: optiondialog.cpp:769
 msgid "Preprocessor command:"
 msgstr "プリプロセッサコマンド:"
 
-#: optiondialog.cpp:770
+#: optiondialog.cpp:773
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr "ユーザ定義プリプロセッサ (詳細については文書を参照)"
 
-#: optiondialog.cpp:773
+#: optiondialog.cpp:776
 msgid "Line-matching preprocessor command:"
 msgstr "行マッチプリプロセッサコマンド:"
 
-#: optiondialog.cpp:777
+#: optiondialog.cpp:780
 msgid ""
 "This pre-processor is only used during line matching.\n"
 "(See the docs for details.)"
@@ -1641,11 +1608,11 @@ msgstr ""
 "このプリプロセッサは行マッチ時にだけ使われます\n"
 "(詳細については文書を参照)"
 
-#: optiondialog.cpp:780
+#: optiondialog.cpp:783
 msgid "Try hard (slower)"
 msgstr "厳密に試行(遅い)"
 
-#: optiondialog.cpp:783
+#: optiondialog.cpp:786
 msgid ""
 "Enables the --minimal option for the external diff.\n"
 "The analysis of big files will be much slower."
@@ -1653,11 +1620,11 @@ msgstr ""
 "外部 diff コマンドについて --minimal オプションを有効に\n"
 "大きなファイルでは解析がより遅くなります"
 
-#: optiondialog.cpp:788
+#: optiondialog.cpp:791
 msgid "Auto advance delay (ms):"
 msgstr "自動前進遅延(ミリ秒):"
 
-#: optiondialog.cpp:793
+#: optiondialog.cpp:796
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
 "for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
@@ -1665,76 +1632,72 @@ msgstr ""
 "自動前進モードでは選択結果が、次の衝突に行く前に指定時間毎に\n"
 "表示されます (レンジ: 0-2000 ミリ秒)"
 
-#: optiondialog.cpp:798
+#: optiondialog.cpp:801
 msgid "White space 2-file merge default:"
 msgstr "空白 2 ファイルマージ標準:"
 
-#: optiondialog.cpp:802 optiondialog.cpp:815
-#, fuzzy
+#: optiondialog.cpp:805 optiondialog.cpp:818
 msgid "Manual Choice"
 msgstr "手作業での選択"
 
-#: optiondialog.cpp:806 optiondialog.cpp:820
+#: optiondialog.cpp:809 optiondialog.cpp:823
 msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-only "
 "changes."
 msgstr "マージアルゴリズムが空白の変更だけについて入力を自動的に選択するように"
 
-#: optiondialog.cpp:811
+#: optiondialog.cpp:814
 msgid "White space 3-file merge default:"
 msgstr "空白 3 ファイルマージ標準:"
 
-#: optiondialog.cpp:825
+#: optiondialog.cpp:828
 msgid "Automatic Merge Regular Expression"
 msgstr ""
 
-#: optiondialog.cpp:834 smalldialogs.cpp:501
+#: optiondialog.cpp:837 smalldialogs.cpp:379
 msgid "Auto merge regular expression:"
 msgstr ""
 
-#: optiondialog.cpp:838
+#: optiondialog.cpp:841
 msgid ""
 "Regular expression for lines where KDiff3 should automatically choose one "
 "source.\n"
-"When a line with a conflict matches the regular expression then/n- if available "
-"- C, otherwise B will be chosen."
+"When a line with a conflict matches the regular expression then\n"
+"- if available - C, otherwise B will be chosen."
 msgstr ""
 
-#: optiondialog.cpp:844
+#: optiondialog.cpp:847
 msgid "Run regular expression auto merge on merge start"
 msgstr ""
 
-#: optiondialog.cpp:846
+#: optiondialog.cpp:849
 msgid ""
 "Run the merge for auto merge regular expressions\n"
 "immediately when a merge starts.\n"
 msgstr ""
 
-#: optiondialog.cpp:851
+#: optiondialog.cpp:854
 msgid "Version Control History Merging"
 msgstr ""
 
-#: optiondialog.cpp:860 smalldialogs.cpp:528
+#: optiondialog.cpp:863 smalldialogs.cpp:406
 msgid "History start regular expression:"
 msgstr ""
 
-#: optiondialog.cpp:864
+#: optiondialog.cpp:867
 msgid ""
-"Regular expression for the start of the merge history entry.\n"
-"Usually this line contains the \"$Log$
-"Usually this line contains the \"Revision 1.1  2006/04/10 08:33:34  joachim99
-"Usually this line contains the \"KDiff3 0.9.89
-"Usually this line contains the \"\"-keyword.\n"
+"Regular expression for the start of the version control history entry.\n"
+"Usually this line contains the \"$Log$\"-keyword.\n"
 "Default value: \".*\\$Log.*\\$.*\""
 msgstr ""
 
-#: optiondialog.cpp:870 smalldialogs.cpp:557
+#: optiondialog.cpp:873 smalldialogs.cpp:435
 msgid "History entry start regular expression:"
 msgstr ""
 
-#: optiondialog.cpp:882
+#: optiondialog.cpp:885
 msgid ""
-"A merge history entry consists of several lines.\n"
+"A version control history entry consists of several lines.\n"
 "Specify the regular expression to detect the first line (without the leading "
 "comment).\n"
 "Use parentheses to group the keys you want to use for sorting.\n"
@@ -1742,19 +1705,19 @@ msgid ""
 "See the documentation for details."
 msgstr ""
 
-#: optiondialog.cpp:890
+#: optiondialog.cpp:893
 msgid "History merge sorting"
 msgstr ""
 
-#: optiondialog.cpp:892
+#: optiondialog.cpp:895
 msgid "Sort version control history by a key."
 msgstr ""
 
-#: optiondialog.cpp:902
+#: optiondialog.cpp:905
 msgid "History entry start sort key order:"
 msgstr ""
 
-#: optiondialog.cpp:906
+#: optiondialog.cpp:909
 msgid ""
 "Each parentheses used in the regular expression for the history start entry\n"
 "groups a key that can be used for sorting.\n"
@@ -1764,46 +1727,46 @@ msgid ""
 "See the documentation for details."
 msgstr ""
 
-#: optiondialog.cpp:917
+#: optiondialog.cpp:920
 msgid "Merge version control history on merge start"
 msgstr ""
 
-#: optiondialog.cpp:919
+#: optiondialog.cpp:922
 msgid "Run version control history automerge on merge start."
 msgstr ""
 
-#: optiondialog.cpp:923
+#: optiondialog.cpp:926
 msgid "Test your regular expressions"
 msgstr ""
 
-#: optiondialog.cpp:928
+#: optiondialog.cpp:931
 msgid "Irrelevant merge command:"
 msgstr ""
 
-#: optiondialog.cpp:932
+#: optiondialog.cpp:935
 msgid ""
 "If specified this script is run after automerge\n"
 "when no other relevant changes were detected.\n"
 "Called with the parameters: filename1 filename2 filename3"
 msgstr ""
 
-#: optiondialog.cpp:942
+#: optiondialog.cpp:945
 msgid "Directory Merge"
 msgstr "ディレクトリマージ"
 
-#: optiondialog.cpp:951
+#: optiondialog.cpp:954
 msgid "Recursive directories"
 msgstr "ディレクトリを再帰"
 
-#: optiondialog.cpp:953
+#: optiondialog.cpp:956
 msgid "Whether to analyze subdirectories or not."
 msgstr "サブディレクトリを解析するかどうか"
 
-#: optiondialog.cpp:955
+#: optiondialog.cpp:958
 msgid "File pattern(s):"
 msgstr "ファイルパターン:"
 
-#: optiondialog.cpp:960
+#: optiondialog.cpp:963
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
 "Wildcards: '*' and '?'\n"
@@ -1813,11 +1776,11 @@ msgstr ""
 "ワイルドカード: `*` と `?`\n"
 "複数のパターンは `:` で区切って指定できます"
 
-#: optiondialog.cpp:966
+#: optiondialog.cpp:969
 msgid "File-anti-pattern(s):"
 msgstr "ファイル否定パターン:"
 
-#: optiondialog.cpp:971
+#: optiondialog.cpp:974
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
 "Wildcards: '*' and '?'\n"
@@ -1827,11 +1790,11 @@ msgstr ""
 "ワイルドカード: `*` と `?`\n"
 "複数のパターンは `:` で区切って指定できます"
 
-#: optiondialog.cpp:977
+#: optiondialog.cpp:980
 msgid "Dir-anti-pattern(s):"
 msgstr "ディレクトリ否定パターン:"
 
-#: optiondialog.cpp:982
+#: optiondialog.cpp:985
 msgid ""
 "Pattern(s) of directories to be excluded from analysis. \n"
 "Wildcards: '*' and '?'\n"
@@ -1841,11 +1804,11 @@ msgstr ""
 "ワイルドカード: `*` と `?`\n"
 "複数のパターンは `:` で区切って指定できます"
 
-#: optiondialog.cpp:988
+#: optiondialog.cpp:991
 msgid "Use .cvsignore"
 msgstr ".cvsignore を使用"
 
-#: optiondialog.cpp:991
+#: optiondialog.cpp:994
 msgid ""
 "Extends the antipattern to anything that would be ignored by CVS.\n"
 "Via local \".cvsignore\"-files this can be directory specific."
@@ -1853,23 +1816,23 @@ msgstr ""
 "CVS で無視されるすべてについて否定パターンを拡張\n"
 "ローカルの \".cvsignore\" ファイルによってディレクトリ固有に利用できます"
 
-#: optiondialog.cpp:996
+#: optiondialog.cpp:999
 msgid "Find hidden files and directories"
 msgstr "隠しファイルとディレクトリを検索 "
 
-#: optiondialog.cpp:999
+#: optiondialog.cpp:1002
 msgid "Finds files and directories with the hidden attribute."
 msgstr "隠し属性を持つファイルとディレクトリを検索"
 
-#: optiondialog.cpp:1001
+#: optiondialog.cpp:1004
 msgid "Finds files and directories starting with '.'."
 msgstr "`.` で始まるファイルとディレクトリを検索"
 
-#: optiondialog.cpp:1005
+#: optiondialog.cpp:1008
 msgid "Follow file links"
 msgstr "ファイルリンクを追跡"
 
-#: optiondialog.cpp:1008
+#: optiondialog.cpp:1011
 msgid ""
 "On: Compare the file the link points to.\n"
 "Off: Compare the links."
@@ -1877,11 +1840,11 @@ msgstr ""
 "オン: ファイルのリンク先を比較\n"
 "オフ: リンクを比較"
 
-#: optiondialog.cpp:1013
+#: optiondialog.cpp:1016
 msgid "Follow directory links"
 msgstr "ディレクトリリンクを追跡"
 
-#: optiondialog.cpp:1016
+#: optiondialog.cpp:1019
 msgid ""
 "On: Compare the directory the link points to.\n"
 "Off: Compare the links."
@@ -1889,54 +1852,50 @@ msgstr ""
 "オン: ディレクトリのリンク先を比較\n"
 "オフ: リンクを比較"
 
-#: optiondialog.cpp:1021
-msgid "List only deltas"
-msgstr "差分のみをリスト"
-
-#: optiondialog.cpp:1024
-msgid "Files and directories without change will not appear in the list."
-msgstr "同じファイルとディレクトリはリストされません"
-
-#: optiondialog.cpp:1032
-msgid "Case sensitive filename comparison"
-msgstr ""
-
 #: optiondialog.cpp:1035
+msgid "Case sensitive filename comparison"
+msgstr "大文字小文字を区別してファイル名を比較"
+
+#: optiondialog.cpp:1038
 msgid ""
 "The directory comparison will compare files or directories when their names "
 "match.\n"
 "Set this option if the case of the names must match. (Default for Windows is "
 "off, otherwise on.)"
 msgstr ""
+"ディレクトリ比較は名前が一致するファイルおよびディレクトリを比較します。\n"
+"名前の大文字小文字も一致しなければならない場合は、このオプションを有効にしてください。\n"
+"(Windowsの標準はオフ、その他はオンです)"
 
-#: optiondialog.cpp:1039
+#: optiondialog.cpp:1042
 msgid "File Comparison Mode"
-msgstr ""
-
-#: optiondialog.cpp:1043
-#, fuzzy
-msgid "Binary comparison"
-msgstr "ディレクトリ比較状態"
-
-#: optiondialog.cpp:1044
-msgid "Binary comparison of each file. (Default)"
-msgstr ""
+msgstr "ファイル比較モード"
 
 #: optiondialog.cpp:1046
-msgid "Full analysis"
-msgstr ""
+msgid "Binary comparison"
+msgstr "バイナリ比較"
 
 #: optiondialog.cpp:1047
+msgid "Binary comparison of each file. (Default)"
+msgstr "それぞれのファイルをバイナリ比較します。(標準)"
+
+#: optiondialog.cpp:1049
+msgid "Full analysis"
+msgstr "完全分析"
+
+#: optiondialog.cpp:1050
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
 "(Slower than a binary comparison, much slower for binary files.)"
 msgstr ""
+"完全な比較を実行し、統計情報を別のカラムに表示します。\n"
+"(バイナリ比較より遅く、バイナリファイルの場合は非常に時間がかかります)"
 
-#: optiondialog.cpp:1050
+#: optiondialog.cpp:1053
 msgid "Trust the modification date (unsafe)"
 msgstr "更新日時を信用 (安全ではありません)"
 
-#: optiondialog.cpp:1051
+#: optiondialog.cpp:1054
 msgid ""
 "Assume that files are equal if the modification date and file length are "
 "equal.\n"
@@ -1945,11 +1904,11 @@ msgstr ""
 "ファイルの更新日時とファイル長が等しければ同じものとみなす\n"
 "大きなディレクトリや遅いネットワークで有効"
 
-#: optiondialog.cpp:1054
+#: optiondialog.cpp:1057
 msgid "Trust the size (unsafe)"
 msgstr "容量を信用 (安全ではありません)"
 
-#: optiondialog.cpp:1055
+#: optiondialog.cpp:1058
 msgid ""
 "Assume that files are equal if their file lengths are equal.\n"
 "Useful for big directories or slow networks when the date is modified during "
@@ -1958,11 +1917,11 @@ msgstr ""
 "ファイル長が等しいならファイルは同じとみなす\n"
 "大きなディレクトリやダウンロード間に更新日時が変わるような遅いネットワークで有効"
 
-#: optiondialog.cpp:1059
+#: optiondialog.cpp:1062
 msgid "Synchronize directories"
 msgstr "ディレクトリを同期"
 
-#: optiondialog.cpp:1062
+#: optiondialog.cpp:1065
 msgid ""
 "Offers to store files in both directories so that\n"
 "both directories are the same afterwards.\n"
@@ -1971,22 +1930,23 @@ msgstr ""
 "両ディレクトリに以後同じになるようにファイルを置く\n"
 "方向を未指定で二つのディレクトリを比較する際のみ機能します"
 
-#: optiondialog.cpp:1068
-#, fuzzy
-msgid "White space differences considered equal"
-msgstr "空白 3 ファイルマージ標準:"
-
 #: optiondialog.cpp:1071
+msgid "White space differences considered equal"
+msgstr "空白の違いを無視"
+
+#: optiondialog.cpp:1074
 msgid ""
 "If files differ only by white space consider them equal.\n"
 "This is only active when full analysis is chosen."
 msgstr ""
-
-#: optiondialog.cpp:1077
-msgid "Copy newer instead of merging (unsafe)"
-msgstr "マージではなくより新しいものをコピー(安全ではありません)"
+"ファイルの差異が空白だけの場合は等しいものとみなします。\n"
+"このオプションは完全分析が選択されている時にのみアクティブになります。"
 
 #: optiondialog.cpp:1080
+msgid "Copy newer instead of merging (unsafe)"
+msgstr "マージではなくより新しいものをコピー (安全ではありません)"
+
+#: optiondialog.cpp:1083
 msgid ""
 "Don't look inside, just take the newer file.\n"
 "(Use this only if you know what you are doing!)\n"
@@ -1996,97 +1956,100 @@ msgstr ""
 "(何をしているのかわかっている場合だけ使用して下さい!)\n"
 "二つのディレクトリを比較しているときのみ有効です"
 
-#: optiondialog.cpp:1085
+#: optiondialog.cpp:1088
 msgid "Backup files (.orig)"
 msgstr "バックアップファイル (.orig)"
 
-#: optiondialog.cpp:1088
+#: optiondialog.cpp:1091
 msgid ""
 "When a file would be saved over an old file, then the old file\n"
 "will be renamed with a '.orig'-extension instead of being deleted."
 msgstr "古いファイルも削除せずに `.orig` 拡張子をつけて保存されます"
 
-#: optiondialog.cpp:1115
+#: optiondialog.cpp:1118
 msgid "Regional Settings"
-msgstr ""
+msgstr "言語の設定"
 
-#: optiondialog.cpp:1208
+#: optiondialog.cpp:1211
 msgid "Language (restart required)"
-msgstr ""
+msgstr "言語 (再スタートが必要)"
 
-#: optiondialog.cpp:1240
+#: optiondialog.cpp:1243
 msgid ""
 "Choose the language of the GUI-strings or \"Auto\".\n"
 "For a change of language to take place, quit and restart KDiff3."
 msgstr ""
 
-#: optiondialog.cpp:1258
-msgid "Use the same encoding for everything:"
-msgstr ""
-
 #: optiondialog.cpp:1261
+msgid "Use the same encoding for everything:"
+msgstr "全てに同じエンコーディングを使用:"
+
+#: optiondialog.cpp:1264
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
 msgstr ""
+"このオプションを有効にすると、最初を変更するだけで全てのエンコーディングを同時に変更できます。\n"
+"それぞれに個別に設定する必要がある場合は、これを無効にしてください。"
 
-#: optiondialog.cpp:1266
-#, fuzzy
+#: optiondialog.cpp:1269
 msgid "Note: Local Encoding is "
-msgstr "ロカールエンコーディングを使用 "
+msgstr "現在のロカールエンコーディング: "
 
-#: optiondialog.cpp:1270
+#: optiondialog.cpp:1273
 msgid "File Encoding for A:"
-msgstr ""
+msgstr "A のファイルのエンコーディング:"
 
-#: optiondialog.cpp:1275
+#: optiondialog.cpp:1278
 msgid "File Encoding for B:"
-msgstr ""
+msgstr "B のファイルのエンコーディング:"
 
-#: optiondialog.cpp:1280
+#: optiondialog.cpp:1283
 msgid "File Encoding for C:"
-msgstr ""
+msgstr "C のファイルのエンコーディング:"
 
-#: optiondialog.cpp:1285
+#: optiondialog.cpp:1288
 msgid "File Encoding for Merge Output and Saving:"
-msgstr ""
+msgstr "マージ出力と保存時のエンコーディング:"
 
-#: optiondialog.cpp:1290
+#: optiondialog.cpp:1293
 msgid "File Encoding for Preprocessor Files:"
-msgstr ""
-
-#: optiondialog.cpp:1299
-msgid "Right To Left Language"
-msgstr ""
+msgstr "プリプロセッサファイルのエンコーディング:"
 
 #: optiondialog.cpp:1302
+msgid "Right To Left Language"
+msgstr "右から左に読む言語"
+
+#: optiondialog.cpp:1305
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
 msgstr ""
 
-#: optiondialog.cpp:1312
-#, fuzzy
+#: optiondialog.cpp:1315
 msgid "Integration"
-msgstr "操作"
+msgstr "統合"
 
-#: optiondialog.cpp:1312
+#: optiondialog.cpp:1315
 msgid "Integration Settings"
-msgstr ""
+msgstr "統合の設定"
 
-#: optiondialog.cpp:1322
+#: optiondialog.cpp:1325
 msgid "Command line options to ignore:"
-msgstr ""
+msgstr "無視するコマンドラインオプション:"
 
-#: optiondialog.cpp:1327
+#: optiondialog.cpp:1330
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
 "other tools.\n"
 "Several values can be specified if separated via ';'\n"
 "This will suppress the \"Unknown option\"-error."
 msgstr ""
+"KDiff3が他のツールによって使用される時に無視すべきコマンドラインオプションのリストです。\n"
+"複数のオプションはセミコロン(;)で区切って指定してください。\n"
+"これによって \"不明なオプション\" エラーを抑制できます。"
 
-#: optiondialog.cpp:1380
+#: optiondialog.cpp:1383
 msgid ""
 "You selected a variable width font.\n"
 "\n"
@@ -2102,26 +2065,25 @@ msgstr ""
 "\n"
 "続行するか、他のフォントを選択して下さい"
 
-#: optiondialog.cpp:1384
+#: optiondialog.cpp:1387
 msgid "Incompatible Font"
 msgstr "非互換なフォント"
 
-#: optiondialog.cpp:1385
+#: optiondialog.cpp:1388
 msgid "Continue at Own Risk"
 msgstr "自己責任で続行"
 
-#: optiondialog.cpp:1385
+#: optiondialog.cpp:1388
 msgid "Select Another Font"
 msgstr "他のフォントを選択"
 
-#: optiondialog.cpp:1410
+#: optiondialog.cpp:1413
 msgid "This resets all options. Not only those of the current topic."
 msgstr "現在のトピックだけでなくすべてのオプションをリセット"
 
 #: pdiff.cpp:258
-#, fuzzy
 msgid "PreprocessorCmd: "
-msgstr "プリプロセッサコマンド:"
+msgstr "プリプロセッサコマンド: "
 
 #: pdiff.cpp:263
 msgid ""
@@ -2183,6 +2145,22 @@ msgstr "Linediff: B <-> C"
 msgid "Linediff: A <-> C"
 msgstr "Linediff: A <-> C"
 
+#: pdiff.cpp:509
+msgid "All input files contain the same text, but are not binary equal."
+msgstr "すべての入力ファイルのテキストは同じですが、バイナリ的に等しくありません。"
+
+#: pdiff.cpp:511 pdiff.cpp:513 pdiff.cpp:515
+msgid ""
+"Files %1 and %2 are binary equal.\n"
+msgstr ""
+"ファイル %1 と %2 はバイナリ的に同じです。\n"
+
+#: pdiff.cpp:512 pdiff.cpp:514 pdiff.cpp:516
+msgid ""
+"Files %1 and %2 have equal text, but are not binary equal. \n"
+msgstr ""
+"ファイル %1 と %2 のテキストは同じですが、バイナリ的に等しくありません。\n"
+
 #: pdiff.cpp:526
 msgid ""
 "Some inputfiles don't seem to be pure textfiles.\n"
@@ -2217,31 +2195,27 @@ msgstr "選択範囲をクリップボードにコピー..."
 msgid "Inserting clipboard contents..."
 msgstr "クリップボードの内容を挿入..."
 
-#: pdiff.cpp:1685
+#: pdiff.cpp:1699
 msgid "Save && Continue"
 msgstr "保存/続行"
 
-#: pdiff.cpp:1685
+#: pdiff.cpp:1699
 msgid "Continue Without Saving"
 msgstr "保存しないで続行"
 
-#: pdiff.cpp:1892
+#: pdiff.cpp:1906
 msgid "Search complete."
 msgstr "検索完了"
 
-#: pdiff.cpp:1892
+#: pdiff.cpp:1906
 msgid "Search Complete"
 msgstr "検索完了"
 
-#: pdiff.cpp:2107
-msgid "Please click the lines that should match in all windows."
-msgstr ""
-
-#: pdiff.cpp:2116
+#: pdiff.cpp:2129
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2116
+#: pdiff.cpp:2129
 #, fuzzy
 msgid "Error while adding manual diff range"
 msgstr "ディレクトリ作成中にエラー"
@@ -2286,7 +2260,7 @@ msgstr "移動(&M)"
 #: rc.cpp:27
 #, no-c-format
 msgid "D&iffview"
-msgstr ""
+msgstr "Diffビュー(&I)"
 
 #. i18n: file kdiff3_shell.rc line 73
 #: rc.cpp:30
@@ -2294,7 +2268,7 @@ msgstr ""
 msgid "&Merge"
 msgstr "マージ(&M)"
 
-#. i18n: file kdiff3_shell.rc line 94
+#. i18n: file kdiff3_shell.rc line 95
 #: rc.cpp:33
 #, no-c-format
 msgid "&Window"
@@ -2305,12 +2279,12 @@ msgid "A (Base):"
 msgstr "A (ベース):"
 
 #: smalldialogs.cpp:59 smalldialogs.cpp:75 smalldialogs.cpp:91
-#: smalldialogs.cpp:137
+#: smalldialogs.cpp:134
 msgid "File..."
 msgstr "ファイル..."
 
 #: smalldialogs.cpp:61 smalldialogs.cpp:77 smalldialogs.cpp:93
-#: smalldialogs.cpp:139
+#: smalldialogs.cpp:136
 msgid "Dir..."
 msgstr "ディレクトリ..."
 
@@ -2320,164 +2294,109 @@ msgstr "C (オプション):"
 
 #: smalldialogs.cpp:108
 msgid "Swap/Copy Names ..."
-msgstr ""
+msgstr "名前の交換/コピー..."
 
-#: smalldialogs.cpp:114
-msgid "Swap"
-msgstr ""
+#: smalldialogs.cpp:114 smalldialogs.cpp:115 smalldialogs.cpp:116
+msgid "Swap %1<->%2"
+msgstr "交換 %1<->%2"
 
-#: smalldialogs.cpp:132
+#: smalldialogs.cpp:117 smalldialogs.cpp:118 smalldialogs.cpp:119
+msgid "Copy %1->Output"
+msgstr "コピー %1->出力"
+
+#: smalldialogs.cpp:120 smalldialogs.cpp:121 smalldialogs.cpp:122
+msgid "Swap %1<->Output"
+msgstr "交換 %1<->出力"
+
+#: smalldialogs.cpp:129
 msgid "Output (optional):"
 msgstr "出力 (オプション):"
 
-#: smalldialogs.cpp:161
+#: smalldialogs.cpp:158
 msgid "Configure..."
 msgstr "設定..."
 
-#: smalldialogs.cpp:332
-#, fuzzy
+#: smalldialogs.cpp:329
 msgid "Search text:"
-msgstr "検索文字列:"
+msgstr "検索テキスト:"
 
-#: smalldialogs.cpp:339
+#: smalldialogs.cpp:336
 msgid "Case sensitive"
 msgstr "大文字と小文字を区別"
 
-#: smalldialogs.cpp:342
+#: smalldialogs.cpp:339
 msgid "Search A"
 msgstr "A を検索"
 
-#: smalldialogs.cpp:347
+#: smalldialogs.cpp:344
 msgid "Search B"
 msgstr "B を検索"
 
-#: smalldialogs.cpp:352
+#: smalldialogs.cpp:349
 msgid "Search C"
 msgstr "C を検索"
 
-#: smalldialogs.cpp:357
+#: smalldialogs.cpp:354
 msgid "Search output"
 msgstr "検索出力"
 
-#: smalldialogs.cpp:362
+#: smalldialogs.cpp:359
 msgid "&Search"
 msgstr "検索(&S)"
 
-#: smalldialogs.cpp:382 smalldialogs.cpp:406
-#, fuzzy
-msgid "no selection"
-msgstr "自動コピー選択"
-
-#: smalldialogs.cpp:396
-#, fuzzy
-msgid "Manually match lines"
-msgstr "手作業での選択"
-
-#: smalldialogs.cpp:498
+#: smalldialogs.cpp:376
 msgid "Regular Expression Tester"
 msgstr ""
 
-#: smalldialogs.cpp:509
-msgid "Example auto merge start line:"
+#: smalldialogs.cpp:387
+msgid "Example auto merge line:"
 msgstr ""
 
-#: smalldialogs.cpp:511
+#: smalldialogs.cpp:389
 msgid "For auto merge test copy a line as used in your files."
 msgstr ""
 
-#: smalldialogs.cpp:517 smalldialogs.cpp:546 smalldialogs.cpp:583
+#: smalldialogs.cpp:395 smalldialogs.cpp:424 smalldialogs.cpp:461
 msgid "Match result:"
 msgstr ""
 
-#: smalldialogs.cpp:536
+#: smalldialogs.cpp:414
 msgid "Example history start line (with leading comment):"
 msgstr ""
 
-#: smalldialogs.cpp:539
+#: smalldialogs.cpp:417
 msgid ""
 "Copy a history start line as used in your files,\n"
-"but omit the leading comment."
+"including the leading comment."
 msgstr ""
 
-#: smalldialogs.cpp:565
+#: smalldialogs.cpp:443
 msgid "History sort key order:"
 msgstr ""
 
-#: smalldialogs.cpp:573
+#: smalldialogs.cpp:451
 msgid "Example history entry start line (without leading comment):"
 msgstr ""
 
-#: smalldialogs.cpp:575
+#: smalldialogs.cpp:453
 msgid ""
 "Copy a history entry start line as used in your files,\n"
 "but omit the leading comment."
 msgstr ""
 
-#: smalldialogs.cpp:590
+#: smalldialogs.cpp:468
 msgid "Sort key result:"
 msgstr ""
 
-#: smalldialogs.cpp:597
-msgid "Ok"
-msgstr ""
-
-#: smalldialogs.cpp:641 smalldialogs.cpp:651 smalldialogs.cpp:672
+#: smalldialogs.cpp:519 smalldialogs.cpp:529 smalldialogs.cpp:550
 msgid "Match success."
 msgstr ""
 
-#: smalldialogs.cpp:645 smalldialogs.cpp:655 smalldialogs.cpp:678
+#: smalldialogs.cpp:523 smalldialogs.cpp:533 smalldialogs.cpp:556
 #, fuzzy
 msgid "Match failed."
 msgstr "保存に失敗"
 
-#: smalldialogs.cpp:663
+#: smalldialogs.cpp:541
 msgid "Opening and closing parentheses don't match in regular expression."
 msgstr ""
-
-#, fuzzy
-#~ msgid "Has no effect. For compatibility with certain tools."
-#~ msgstr "既存ツールの互換性のため"
-
-#~ msgid "For compatibility with certain tools."
-#~ msgstr "既存ツールの互換性のため"
-
-#~ msgid "Colors in Editor & Diff Output"
-#~ msgstr "エディタ/Diff 出力の色"
-
-#~ msgid "Text Diff and Merge Tool"
-#~ msgstr "テキスト Diff/マージツール"
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "File not saved."
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "ファイルは保存されません"
-
-#~ msgid "Out of memory while preparing to save."
-#~ msgstr "保存準備中にメモリ不足"
-
-#~ msgid "Delete (If Exists)"
-#~ msgstr "削除(存在するなら)"
-
-#~ msgid "Delete A and B"
-#~ msgstr "A と B を削除"
-
-#~ msgid "Merge to A and B"
-#~ msgstr "A と B にマージ"
-
-#~ msgid "Convert to upper case"
-#~ msgstr "大文字に変換"
-
-#~ msgid "Turn all lower case characters to upper case on reading. (e.g.: 'a'->'A')"
-#~ msgstr "読み込み時にすべての小文字を大文字に変換. (例: `a` -> `A`)"
-
-#~ msgid ""
-#~ "Running the external diff failed.\n"
-#~ "Check if the diff works, if the program can write in the temp folder or if the disk is full.\n"
-#~ "The external diff option will be disabled now and the internal diff will be used."
-#~ msgstr ""
-#~ "外部 diff プログラム実行に失敗\n"
-#~ "diff がちゃんと動くか、プログラムが一時フォルダに書き込めるか、あるいはディスクが一杯でないか確認して下さい外部 diff オプションは無効にされ、内部 diff を使うようにします"

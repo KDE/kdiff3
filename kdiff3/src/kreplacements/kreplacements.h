@@ -107,7 +107,7 @@ public:
    int BarIcon(const QString& iconName, int );
 
    Q3VBox* addVBoxPage( const QString& name, const QString& info, int );
-   Q3Frame* addPage(  const QString& name, const QString& info, int );
+   QFrame* addPage(  const QString& name, const QString& info, int );
    int spacingHint();
 
    virtual void accept();

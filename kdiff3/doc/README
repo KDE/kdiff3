@@ -64,7 +64,8 @@ for i in `ls ../en | grep png`; do ln -s ../en/$i $i; done
 Command to retrieve other translations from cvs:
 
 cvs co kde-i18n/subdirs
-for i in `cat kde-i18n/subdirs`; do  cvs co kde-i18n/$i/docs/kdeextragear-1/kdiff3/index.docbook; done
+#for i in `cat kde-i18n/subdirs`; do  cvs co kde-i18n/$i/docs/kdeextragear-1/kdiff3/index.docbook; done
+for i in `cat subdirs`; do wget http://websvn.kde.org/*checkout*/trunk/l10n/$i/docs/extragear-utils/kdiff3/index.docbook -O $i.docbook; done
 
 If a new translation is available, 
 - create a new directory, 

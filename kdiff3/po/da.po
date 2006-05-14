@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
-"POT-Creation-Date: 2006-03-27 11:45+0200\n"
-"PO-Revision-Date: 2006-03-27 17:22-0500\n"
+"POT-Creation-Date: 2006-04-10 11:07+0200\n"
+"PO-Revision-Date: 2006-04-11 11:47-0400\n"
 "Last-Translator: Erik Kjær Pedersen <erik@binghamton.edu>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -76,11 +76,11 @@ msgstr ""
 msgid "Severe Internal Error"
 msgstr "Alvorlig intern fejl"
 
-#: difftextwindow.cpp:1590 kdiff3.cpp:742
+#: difftextwindow.cpp:1637 kdiff3.cpp:743
 msgid "Top line"
 msgstr "Toplinje"
 
-#: difftextwindow.cpp:1600
+#: difftextwindow.cpp:1647
 msgid "End"
 msgstr "Slut"
 
@@ -153,11 +153,11 @@ msgstr ""
 "Du er ved at udføre en mappeindfletning. Er du sikker på at du ønsker at "
 "afbryde indfletningen og skanne mappen igen?"
 
-#: directorymergewindow.cpp:320 directorymergewindow.cpp:2859
+#: directorymergewindow.cpp:320 directorymergewindow.cpp:2864
 msgid "Rescan"
 msgstr "Genskan"
 
-#: directorymergewindow.cpp:320 kdiff3.cpp:593 pdiff.cpp:965
+#: directorymergewindow.cpp:320 kdiff3.cpp:594 pdiff.cpp:965
 msgid "Continue Merging"
 msgstr "Fortsæt med indfletning"
 
@@ -224,8 +224,8 @@ msgstr "Nogle undermapper kunne ikke læses i"
 msgid "Check the permissions of the subdirectories."
 msgstr "Tjek tilladelser for undermapperne."
 
-#: directorymergewindow.cpp:646 kdiff3.cpp:546 kdiff3.cpp:626 kdiff3.cpp:650
-#: kdiff3.cpp:923 kdiff3.cpp:944 pdiff.cpp:1045 pdiff.cpp:1117 pdiff.cpp:1155
+#: directorymergewindow.cpp:646 kdiff3.cpp:547 kdiff3.cpp:627 kdiff3.cpp:651
+#: kdiff3.cpp:924 kdiff3.cpp:945 pdiff.cpp:1045 pdiff.cpp:1117 pdiff.cpp:1155
 #: pdiff.cpp:1171 pdiff.cpp:1201 pdiff.cpp:1212
 msgid "Ready."
 msgstr "Klar."
@@ -270,19 +270,19 @@ msgstr "Behandler"
 msgid "To do."
 msgstr "At gøre."
 
-#: directorymergewindow.cpp:1752 directorymergewindow.cpp:2888
+#: directorymergewindow.cpp:1752 directorymergewindow.cpp:2895
 msgid "Copy A to B"
 msgstr "Kopiér A til B"
 
-#: directorymergewindow.cpp:1753 directorymergewindow.cpp:2889
+#: directorymergewindow.cpp:1753 directorymergewindow.cpp:2896
 msgid "Copy B to A"
 msgstr "Kopiér B til A"
 
-#: directorymergewindow.cpp:1754 directorymergewindow.cpp:2890
+#: directorymergewindow.cpp:1754 directorymergewindow.cpp:2897
 msgid "Delete A"
 msgstr "Slet A"
 
-#: directorymergewindow.cpp:1755 directorymergewindow.cpp:2891
+#: directorymergewindow.cpp:1755 directorymergewindow.cpp:2898
 msgid "Delete B"
 msgstr "Slet B"
 
@@ -290,11 +290,11 @@ msgstr "Slet B"
 msgid "Delete A & B"
 msgstr "Slet A & B"
 
-#: directorymergewindow.cpp:1757 directorymergewindow.cpp:2893
+#: directorymergewindow.cpp:1757 directorymergewindow.cpp:2900
 msgid "Merge to A"
 msgstr "Indflet til A"
 
-#: directorymergewindow.cpp:1758 directorymergewindow.cpp:2894
+#: directorymergewindow.cpp:1758 directorymergewindow.cpp:2901
 msgid "Merge to B"
 msgstr "Indflet til B"
 
@@ -302,12 +302,12 @@ msgstr "Indflet til B"
 msgid "Merge to A & B"
 msgstr "Indflet til A & B"
 
-#: directorymergewindow.cpp:1763 directorymergewindow.cpp:2885
+#: directorymergewindow.cpp:1763 directorymergewindow.cpp:2892
 msgid "Delete (if exists)"
 msgstr "Slet (hvis det eksisterer)"
 
 #: directorymergewindow.cpp:1764 directorymergewindow.cpp:1765
-#: directorymergewindow.cpp:2884 smalldialogs.cpp:102
+#: directorymergewindow.cpp:2891 smalldialogs.cpp:102
 msgid "Merge"
 msgstr "Indflet"
 
@@ -624,115 +624,107 @@ msgstr "Dest: "
 msgid "Save Directory Merge State As..."
 msgstr "Gem tilstand for mappesammenfletning som..."
 
-#: directorymergewindow.cpp:2853
+#: directorymergewindow.cpp:2858
 msgid "Start/Continue Directory Merge"
 msgstr "Start/Fortsæt mappeindfletning"
 
-#: directorymergewindow.cpp:2854
+#: directorymergewindow.cpp:2859
 msgid "Run Operation for Current Item"
 msgstr "Kør operation for dette punkt"
 
-#: directorymergewindow.cpp:2855
+#: directorymergewindow.cpp:2860
 msgid "Compare Selected File"
 msgstr "Sammenlign udvalgt fil"
 
-#: directorymergewindow.cpp:2856
+#: directorymergewindow.cpp:2861
 msgid "Merge Current File"
 msgstr "Indflet udvalgt fil"
 
-#: directorymergewindow.cpp:2857
+#: directorymergewindow.cpp:2862
 msgid "Fold All Subdirs"
 msgstr "Fold alle undermapper sammen"
 
-#: directorymergewindow.cpp:2858
+#: directorymergewindow.cpp:2863
 msgid "Unfold All Subdirs"
 msgstr "Fold alle undermapper ud"
 
-#: directorymergewindow.cpp:2860
+#: directorymergewindow.cpp:2865
 msgid "Save Directory Merge State ..."
 msgstr "Gem tilstand for mappesammenfletning..."
 
-#: directorymergewindow.cpp:2861
+#: directorymergewindow.cpp:2866
 msgid "Load Directory Merge State ..."
 msgstr "Indlæs tilstand for mappesammenfletning..."
 
-#: directorymergewindow.cpp:2862
+#: directorymergewindow.cpp:2867
 msgid "Choose A for All Items"
 msgstr "Vælg A for alle punkter"
 
-#: directorymergewindow.cpp:2863
+#: directorymergewindow.cpp:2868
 msgid "Choose B for All Items"
 msgstr "Vælg B for alle punkter"
 
-#: directorymergewindow.cpp:2864
+#: directorymergewindow.cpp:2869
 msgid "Choose C for All Items"
 msgstr "Vælg C for alle punkter"
 
-#: directorymergewindow.cpp:2865
+#: directorymergewindow.cpp:2870
 msgid "Auto-Choose Operation for All Items"
 msgstr "Auto-vælg operation for alle punkter"
 
-#: directorymergewindow.cpp:2866
+#: directorymergewindow.cpp:2871
 msgid "No Operation for All Items"
 msgstr "Ingen operation for alle punkter"
 
-#: directorymergewindow.cpp:2868
-msgid "Synchronize Directories"
-msgstr "Synkronisér mapper"
-
-#: directorymergewindow.cpp:2869
-msgid "Copy Newer Files Instead of Merging"
-msgstr "Kopiér nyere filer i stedet for at sammenflette"
-
-#: directorymergewindow.cpp:2871
+#: directorymergewindow.cpp:2876
 msgid "Show Identical Files"
 msgstr "Vis identiske filer"
 
-#: directorymergewindow.cpp:2872
+#: directorymergewindow.cpp:2877
 msgid "Show Different Files"
 msgstr "Vis forskellige filer"
 
-#: directorymergewindow.cpp:2873
+#: directorymergewindow.cpp:2878
 msgid "Show Files only in A"
 msgstr "Vis kun filer i A"
 
-#: directorymergewindow.cpp:2874
+#: directorymergewindow.cpp:2879
 msgid "Show Files only in B"
 msgstr "Vis kun filer i B"
 
-#: directorymergewindow.cpp:2875
+#: directorymergewindow.cpp:2880
 msgid "Show Files only in C"
 msgstr "Vis kun filer i C"
 
-#: directorymergewindow.cpp:2877
+#: directorymergewindow.cpp:2884
 msgid "Compare Explicitly Selected Files"
 msgstr "Sammenlign eksplicit markerede filer"
 
-#: directorymergewindow.cpp:2878
+#: directorymergewindow.cpp:2885
 msgid "Merge Explicitly Selected Files"
 msgstr "Sammenflet eksplicit markerede filer"
 
-#: directorymergewindow.cpp:2880 directorymergewindow.cpp:2887
+#: directorymergewindow.cpp:2887 directorymergewindow.cpp:2894
 msgid "Do Nothing"
 msgstr "Gør intet"
 
-#: directorymergewindow.cpp:2881
+#: directorymergewindow.cpp:2888
 msgid "A"
 msgstr "A"
 
-#: directorymergewindow.cpp:2882
+#: directorymergewindow.cpp:2889
 msgid "B"
 msgstr "B"
 
-#: directorymergewindow.cpp:2883
+#: directorymergewindow.cpp:2890
 msgid "C"
 msgstr "C"
 
-#: directorymergewindow.cpp:2892
+#: directorymergewindow.cpp:2899
 msgid "Delete A && B"
 msgstr "Slet A && B"
 
-#: directorymergewindow.cpp:2895
+#: directorymergewindow.cpp:2902
 msgid "Merge to A && B"
 msgstr "Indflet til A && B"
 
@@ -1050,121 +1042,125 @@ msgstr "Løs historikkonflikter automatisk"
 msgid "Split Diff At Selection"
 msgstr "Opdel sammenligning ved markering"
 
-#: kdiff3.cpp:506
+#: kdiff3.cpp:505
+msgid "Join Selected Diffs"
+msgstr "Føj markerede sammenligninger sammen"
+
+#: kdiff3.cpp:507
 msgid "Show Window A"
 msgstr "Vis vindue A"
 
-#: kdiff3.cpp:507
+#: kdiff3.cpp:508
 msgid "Show Window B"
 msgstr "Vis vindue B"
 
-#: kdiff3.cpp:508
+#: kdiff3.cpp:509
 msgid "Show Window C"
 msgstr "Vis vindue V"
 
-#: kdiff3.cpp:509 kdiff3.cpp:520
+#: kdiff3.cpp:510 kdiff3.cpp:521
 msgid "Focus Next Window"
 msgstr "Fokus på næste vindue"
 
-#: kdiff3.cpp:511
+#: kdiff3.cpp:512
 msgid "Normal Overview"
 msgstr "Normalt overblik"
 
-#: kdiff3.cpp:512
+#: kdiff3.cpp:513
 msgid "A vs. B Overview"
 msgstr "A vs. B overblik"
 
-#: kdiff3.cpp:513
+#: kdiff3.cpp:514
 msgid "A vs. C Overview"
 msgstr "A vs. C overblik"
 
-#: kdiff3.cpp:514
+#: kdiff3.cpp:515
 msgid "B vs. C Overview"
 msgstr "B vs. C overblik"
 
-#: kdiff3.cpp:515
+#: kdiff3.cpp:516
 msgid "Word Wrap Diff Windows"
 msgstr "Tekstombrydning i diff-vinduer"
 
-#: kdiff3.cpp:516
+#: kdiff3.cpp:517
 msgid "Add Manual Diff Alignment"
 msgstr "Tilføj manuel justering af sammenligning"
 
-#: kdiff3.cpp:517
+#: kdiff3.cpp:518
 msgid "Clear All Manual Diff Alignments"
 msgstr "Ryd alle manuelle justeringer af sammenligning"
 
-#: kdiff3.cpp:522
+#: kdiff3.cpp:523
 msgid "Focus Prev Window"
 msgstr "Fokus på forrige vindue"
 
-#: kdiff3.cpp:523
+#: kdiff3.cpp:524
 msgid "Toggle Split Orientation"
 msgstr "Slå opdelt orientering til og fra"
 
-#: kdiff3.cpp:525
+#: kdiff3.cpp:526
 msgid "Dir && Text Split Screen View"
 msgstr "Mappe && tekst opdelt skærmvisning"
 
-#: kdiff3.cpp:527
+#: kdiff3.cpp:528
 msgid "Toggle Between Dir && Text View"
 msgstr "Skift mellem Mappe && tekstvisning"
 
-#: kdiff3.cpp:572 pdiff.cpp:1684
+#: kdiff3.cpp:573 pdiff.cpp:1698
 msgid "The merge result hasn't been saved."
 msgstr "Indfletningsresultatet er ikke blevet gemt."
 
-#: kdiff3.cpp:573
+#: kdiff3.cpp:574
 msgid "Save && Quit"
 msgstr "Gem && afslut"
 
-#: kdiff3.cpp:573
+#: kdiff3.cpp:574
 msgid "Quit Without Saving"
 msgstr "Afslut uden at gemme"
 
-#: kdiff3.cpp:581 pdiff.cpp:1693
+#: kdiff3.cpp:582 pdiff.cpp:1707
 msgid "Saving the merge result failed."
 msgstr "Det mislykkedes at gemme indfletningsresultatet."
 
-#: kdiff3.cpp:592 pdiff.cpp:964
+#: kdiff3.cpp:593 pdiff.cpp:964
 msgid ""
 "You are currently doing a directory merge. Are you sure, you want to abort?"
 msgstr ""
 "Du er ved at udføre en mappeindfletning. Er du sikker på du ønskler at afbryde?"
 
-#: kdiff3.cpp:615
+#: kdiff3.cpp:616
 msgid "Saving file..."
 msgstr "Gemmer fil..."
 
-#: kdiff3.cpp:632
+#: kdiff3.cpp:633
 msgid "Saving file with a new filename..."
 msgstr "Gemmer fil med nyt filnavn..."
 
-#: kdiff3.cpp:721
+#: kdiff3.cpp:722
 msgid "Printing..."
 msgstr "Udskriver..."
 
-#: kdiff3.cpp:727 kdiff3.cpp:889
+#: kdiff3.cpp:728 kdiff3.cpp:890
 msgid "Printing aborted."
 msgstr "Udskrift afbrudt."
 
-#: kdiff3.cpp:859
+#: kdiff3.cpp:860
 msgid "Selection"
 msgstr "Markering"
 
-#: kdiff3.cpp:885
+#: kdiff3.cpp:886
 msgid "Printing completed."
 msgstr "Udskrift færdig."
 
-#: kdiff3.cpp:895
+#: kdiff3.cpp:896
 msgid "Exiting..."
 msgstr "Går ud..."
 
-#: kdiff3.cpp:907
+#: kdiff3.cpp:908
 msgid "Toggling toolbar..."
 msgstr "Slår værktøjslinje til/fra"
 
-#: kdiff3.cpp:928
+#: kdiff3.cpp:929
 msgid "Toggle the statusbar..."
 msgstr "Slå statuslinje til/fra..."
 
@@ -1293,41 +1289,41 @@ msgstr ""
 msgid "All input files are binary equal."
 msgstr "Alle inddata-filer er binært ens."
 
-#: mergeresultwindow.cpp:796 pdiff.cpp:509
+#: mergeresultwindow.cpp:796
 msgid "All input files contain the same text."
 msgstr "Alle inddata-filer indeholder den samme tekst."
 
-#: mergeresultwindow.cpp:798 pdiff.cpp:511
+#: mergeresultwindow.cpp:798
 msgid ""
 "Files A and B are binary equal.\n"
 msgstr ""
 "Filerne A og B er binært ens.\n"
 
-#: mergeresultwindow.cpp:799 pdiff.cpp:512
+#: mergeresultwindow.cpp:799
 msgid ""
 "Files A and B have equal text. \n"
 msgstr ""
 "Filerne A og B har samme tekst.\n"
 
-#: mergeresultwindow.cpp:800 pdiff.cpp:513
+#: mergeresultwindow.cpp:800
 msgid ""
 "Files A and C are binary equal.\n"
 msgstr ""
 "Filerne A og C er binært ens.\n"
 
-#: mergeresultwindow.cpp:801 pdiff.cpp:514
+#: mergeresultwindow.cpp:801
 msgid ""
 "Files A and C have equal text. \n"
 msgstr ""
 "Filerne A og C har samme tekst.\n"
 
-#: mergeresultwindow.cpp:802 pdiff.cpp:515
+#: mergeresultwindow.cpp:802
 msgid ""
 "Files B and C are binary equal.\n"
 msgstr ""
 "Filerne B og C er binært ens.\n"
 
-#: mergeresultwindow.cpp:803 pdiff.cpp:516
+#: mergeresultwindow.cpp:803
 msgid ""
 "Files B and C have equal text. \n"
 msgstr ""
@@ -1357,27 +1353,27 @@ msgstr ""
 msgid "Conflicts"
 msgstr "Konflikter"
 
-#: mergeresultwindow.cpp:1506
+#: mergeresultwindow.cpp:1649
 msgid "<No src line>"
 msgstr "<Nr kilde linje>"
 
-#: mergeresultwindow.cpp:1514
+#: mergeresultwindow.cpp:1657
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Indfletningskonflikt (kun blanke tegn)>"
 
-#: mergeresultwindow.cpp:1516 mergeresultwindow.cpp:2302
+#: mergeresultwindow.cpp:1659 mergeresultwindow.cpp:2445
 msgid "<Merge Conflict>"
 msgstr "<Indfletningskonflikt>"
 
-#: mergeresultwindow.cpp:1586 smalldialogs.cpp:115
+#: mergeresultwindow.cpp:1729
 msgid "Output"
 msgstr "Uddata"
 
-#: mergeresultwindow.cpp:1588
+#: mergeresultwindow.cpp:1731
 msgid "[Modified]"
 msgstr "[Ændret]"
 
-#: mergeresultwindow.cpp:2512
+#: mergeresultwindow.cpp:2655
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved.\n"
@@ -1385,11 +1381,11 @@ msgstr ""
 "Ikke alle konflikter er løst endnu.\n"
 "Filen er ikke gemt.\n"
 
-#: mergeresultwindow.cpp:2514
+#: mergeresultwindow.cpp:2657
 msgid "Conflicts Left"
 msgstr "Konflikter tilovers"
 
-#: mergeresultwindow.cpp:2526
+#: mergeresultwindow.cpp:2669
 msgid ""
 "\n"
 "\n"
@@ -1399,11 +1395,11 @@ msgstr ""
 "\n"
 "Mislykkedes at oprette sikkerhedskopi. Filen blev ikke gemt."
 
-#: mergeresultwindow.cpp:2526 mergeresultwindow.cpp:2566
+#: mergeresultwindow.cpp:2669 mergeresultwindow.cpp:2709
 msgid "File Save Error"
 msgstr "Fejl ved at gemme fil"
 
-#: mergeresultwindow.cpp:2566
+#: mergeresultwindow.cpp:2709
 msgid "Error while writing."
 msgstr "Fejl ved skrivning."
 
@@ -1423,15 +1419,15 @@ msgstr "Latin1"
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "Ændr dette hvis ikke-ASCII tegn ikke vises rigtigt."
 
-#: optiondialog.cpp:504
+#: optiondialog.cpp:507
 msgid "Editor & Diff Output Font"
 msgstr "Editor & Diff uddata-skrifttype"
 
-#: optiondialog.cpp:525
+#: optiondialog.cpp:528
 msgid "Italic font for deltas"
 msgstr "Kursiv skrifttype for deltaer"
 
-#: optiondialog.cpp:528
+#: optiondialog.cpp:531
 msgid ""
 "Selects the italic version of the font for differences.\n"
 "If the font doesn't support italic characters, then this does nothing."
@@ -1439,97 +1435,97 @@ msgstr ""
 "Vælg den kursive udgave af skrifttypen til forskelle.\n"
 "Hvis skrifttypen ikke understøtter kursive tegn, så gør dette intet."
 
-#: optiondialog.cpp:536
+#: optiondialog.cpp:539
 msgid "Color"
 msgstr "Farve"
 
-#: optiondialog.cpp:536
+#: optiondialog.cpp:539
 msgid "Colors Settings"
 msgstr "Farveindstillinger"
 
-#: optiondialog.cpp:550
+#: optiondialog.cpp:553
 msgid "Editor and Diff Views:"
 msgstr "Editor- og forskelsvisninger:"
 
-#: optiondialog.cpp:558
+#: optiondialog.cpp:561
 msgid "Foreground color:"
 msgstr "Forgrundsfarve:"
 
-#: optiondialog.cpp:564
+#: optiondialog.cpp:567
 msgid "Background color:"
 msgstr "Baggrundsfarve:"
 
-#: optiondialog.cpp:572
+#: optiondialog.cpp:575
 msgid "Diff background color:"
 msgstr "Diff baggrundsfarve:"
 
-#: optiondialog.cpp:579
+#: optiondialog.cpp:582
 msgid "Color A:"
 msgstr "Farve A:"
 
-#: optiondialog.cpp:586
+#: optiondialog.cpp:589
 msgid "Color B:"
 msgstr "Farve B:"
 
-#: optiondialog.cpp:593
+#: optiondialog.cpp:596
 msgid "Color C:"
 msgstr "Farve C:"
 
-#: optiondialog.cpp:599
+#: optiondialog.cpp:602
 msgid "Conflict color:"
 msgstr "Konfliktfarve:"
 
-#: optiondialog.cpp:606
+#: optiondialog.cpp:609
 msgid "Current range background color:"
 msgstr "Baggrundsfarve for aktuelt område:"
 
-#: optiondialog.cpp:613
+#: optiondialog.cpp:616
 msgid "Current range diff background color:"
 msgstr "Diff baggrundsfarve for aktuelt område:"
 
-#: optiondialog.cpp:619
-msgid "Color for manually selected difference ranges:"
-msgstr "Farvelæg for manuelt valgte sammenligningsområder:"
+#: optiondialog.cpp:622
+msgid "Color for manually aligned difference ranges:"
+msgstr "Farvelæg for manuelt justerede sammenligningsområder:"
 
-#: optiondialog.cpp:624
+#: optiondialog.cpp:627
 msgid "Directory Comparison View:"
 msgstr "Mappesammenligningsvisning:"
 
-#: optiondialog.cpp:630
+#: optiondialog.cpp:633
 msgid "Newest file color:"
 msgstr "Farve for nyeste fil:"
 
-#: optiondialog.cpp:633
+#: optiondialog.cpp:636
 msgid ""
 "Changing this color will only be effective when starting the next directory "
 "comparison."
 msgstr "At ændre farven får kun virkning når næste mappesammenligning startes."
 
-#: optiondialog.cpp:638
+#: optiondialog.cpp:641
 msgid "Oldest file color:"
 msgstr "Farve for ældste fil:"
 
-#: optiondialog.cpp:645
+#: optiondialog.cpp:648
 msgid "Middle age file color:"
 msgstr "Farve for middelgammel fil:"
 
-#: optiondialog.cpp:652
+#: optiondialog.cpp:655
 msgid "Color for missing files:"
 msgstr "Farve for manglende filer:"
 
-#: optiondialog.cpp:664
+#: optiondialog.cpp:667
 msgid "Editor"
 msgstr "Editor"
 
-#: optiondialog.cpp:664
+#: optiondialog.cpp:667
 msgid "Editor Behavior"
 msgstr "Editor-opførsel"
 
-#: optiondialog.cpp:674
+#: optiondialog.cpp:677
 msgid "Tab inserts spaces"
 msgstr "Tab indsætter mellemrum"
 
-#: optiondialog.cpp:677
+#: optiondialog.cpp:680
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
 "Off: A Tab-character will be inserted."
@@ -1537,25 +1533,25 @@ msgstr ""
 "Til: Tryk på tab genererer et passende antal mellemrum.\n"
 "Fra: Et Tab-tegn bliver indsat."
 
-#: optiondialog.cpp:683
+#: optiondialog.cpp:686
 msgid "Tab size:"
 msgstr "Tab-størrelse:"
 
-#: optiondialog.cpp:688
+#: optiondialog.cpp:691
 msgid "Auto indentation"
 msgstr "Auto-indrykning"
 
-#: optiondialog.cpp:691
+#: optiondialog.cpp:694
 msgid ""
 "On: The indentation of the previous line is used for a new line.\n"
 msgstr ""
 "Til: Indrykningen for den tidligere linje bruges for en ny linje.\n"
 
-#: optiondialog.cpp:695
+#: optiondialog.cpp:698
 msgid "Auto copy selection"
 msgstr "Autokopi udvalg"
 
-#: optiondialog.cpp:698
+#: optiondialog.cpp:701
 msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
 "Off: You must explicitely copy e.g. via Ctrl-C."
@@ -1563,11 +1559,11 @@ msgstr ""
 "Til: Enhver markering bliver umiddelbart skrevet til klippebordet.\n"
 "Fra: Du skal eksplicit kopiere f.eks. via Ctrl-C."
 
-#: optiondialog.cpp:703
+#: optiondialog.cpp:706
 msgid "Line end style:"
 msgstr "Linjeslut-stil:"
 
-#: optiondialog.cpp:715
+#: optiondialog.cpp:718
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
 "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
@@ -1575,19 +1571,19 @@ msgstr ""
 "Sætter linjeafslutninger for når en redigeret fil gemmes.\n"
 "DOS/Windows: CR+LF; UNIX: LF; med CR=0D, LF=0A"
 
-#: optiondialog.cpp:726
+#: optiondialog.cpp:729
 msgid "Diff and Merge"
 msgstr "Sammenlign og sammenflet"
 
-#: optiondialog.cpp:726
+#: optiondialog.cpp:729
 msgid "Diff and Merge Settings"
 msgstr "Opsætning af sammenlign og sammenflet"
 
-#: optiondialog.cpp:737
+#: optiondialog.cpp:740
 msgid "Preserve carriage return"
 msgstr "Bevar vognretur"
 
-#: optiondialog.cpp:740
+#: optiondialog.cpp:743
 msgid ""
 "Show carriage return characters '\\r' if they exist.\n"
 "Helps to compare files that were modified under different operating systems."
@@ -1596,11 +1592,11 @@ msgstr ""
 "Hjælper med at sammenligne filer der blev ændrede under forskellige "
 "operativsystemer."
 
-#: optiondialog.cpp:745
+#: optiondialog.cpp:748
 msgid "Ignore numbers"
 msgstr "Ignorér numre"
 
-#: optiondialog.cpp:748
+#: optiondialog.cpp:751
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore white "
 "space.)\n"
@@ -1610,37 +1606,37 @@ msgstr ""
 "tegn.)\n"
 "Kan muligvis hjælpe med at sammenligne numeriske data."
 
-#: optiondialog.cpp:753
+#: optiondialog.cpp:756
 msgid "Ignore C/C++ comments"
 msgstr "Ignorér C/C++ kommentarer"
 
-#: optiondialog.cpp:755
+#: optiondialog.cpp:758
 msgid "Treat C/C++ comments like white space."
 msgstr "Behandl C/C++ kommentarersom hvide tegn."
 
-#: optiondialog.cpp:759
+#: optiondialog.cpp:762
 msgid "Ignore case"
 msgstr "Ignorér versaltype"
 
-#: optiondialog.cpp:762
+#: optiondialog.cpp:765
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr ""
 "Behandl forskel mellem store og små bogstaver som ændringer i blanke tegn.  "
 "('a'<=>'A')"
 
-#: optiondialog.cpp:766
+#: optiondialog.cpp:769
 msgid "Preprocessor command:"
 msgstr "Præprocessor kommando:"
 
-#: optiondialog.cpp:770
+#: optiondialog.cpp:773
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr "Brugerdefineret præ-proces. (Se dokumentationen for detaljer.)"
 
-#: optiondialog.cpp:773
+#: optiondialog.cpp:776
 msgid "Line-matching preprocessor command:"
 msgstr "Linje-matchende præprocessor kommando:"
 
-#: optiondialog.cpp:777
+#: optiondialog.cpp:780
 msgid ""
 "This pre-processor is only used during line matching.\n"
 "(See the docs for details.)"
@@ -1648,11 +1644,11 @@ msgstr ""
 "Denne præ-processor bruges kun når du matcher linjer.\n"
 "(Se dokumentationen for detaljer.)"
 
-#: optiondialog.cpp:780
+#: optiondialog.cpp:783
 msgid "Try hard (slower)"
 msgstr "Prøv hårdt (langsommere)"
 
-#: optiondialog.cpp:783
+#: optiondialog.cpp:786
 msgid ""
 "Enables the --minimal option for the external diff.\n"
 "The analysis of big files will be much slower."
@@ -1660,11 +1656,11 @@ msgstr ""
 "Aktiverer --minimal tilvalget for den eksterne diff.\n"
 "Analysen af store filer vil være meget langsommere."
 
-#: optiondialog.cpp:788
+#: optiondialog.cpp:791
 msgid "Auto advance delay (ms):"
 msgstr "Auto fremad-tøven (ms):"
 
-#: optiondialog.cpp:793
+#: optiondialog.cpp:796
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
 "for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
@@ -1673,15 +1669,15 @@ msgstr ""
 "i det angiven tidsrum tid, før der springes frem til den næste konflikt. "
 "Område: 0-2000 ms"
 
-#: optiondialog.cpp:798
+#: optiondialog.cpp:801
 msgid "White space 2-file merge default:"
 msgstr "Standard for 2-fils indfletning af hvide tegn:"
 
-#: optiondialog.cpp:802 optiondialog.cpp:815
+#: optiondialog.cpp:805 optiondialog.cpp:818
 msgid "Manual Choice"
 msgstr "Manuelt valg"
 
-#: optiondialog.cpp:806 optiondialog.cpp:820
+#: optiondialog.cpp:809 optiondialog.cpp:823
 msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-only "
 "changes."
@@ -1689,35 +1685,35 @@ msgstr ""
 "Tillad indfletningsalgoritmen automatisk at vælge et input for ændringer kun af "
 "hvide tegn."
 
-#: optiondialog.cpp:811
+#: optiondialog.cpp:814
 msgid "White space 3-file merge default:"
 msgstr "Standard for 3-fils indfletning:"
 
-#: optiondialog.cpp:825
+#: optiondialog.cpp:828
 msgid "Automatic Merge Regular Expression"
 msgstr "Automatisk sammenfletning med regulært udtryk"
 
-#: optiondialog.cpp:834 smalldialogs.cpp:501
+#: optiondialog.cpp:837 smalldialogs.cpp:379
 msgid "Auto merge regular expression:"
 msgstr "Regulært udtryk for automatisk sammenfletning:"
 
-#: optiondialog.cpp:838
+#: optiondialog.cpp:841
 msgid ""
 "Regular expression for lines where KDiff3 should automatically choose one "
 "source.\n"
-"When a line with a conflict matches the regular expression then/n- if available "
-"- C, otherwise B will be chosen."
+"When a line with a conflict matches the regular expression then\n"
+"- if available - C, otherwise B will be chosen."
 msgstr ""
 "Regulært udtryk for linjer hvor Kdiff3 automatisk skal vælge en kilde.\n"
-"Når en linje med en konflikt matcher det regulære udtryk vælges -C om "
-"tilgængeligt, ellers vælges B."
+"Når en linje med en konflikt matcher det regulære udtryk vælges -C \n"
+"om tilgængeligt, ellers vælges B."
 
-#: optiondialog.cpp:844
+#: optiondialog.cpp:847
 msgid "Run regular expression auto merge on merge start"
 msgstr ""
 "Kør automatisk sammenfletning med regulært udtryk når sammenfletning starter"
 
-#: optiondialog.cpp:846
+#: optiondialog.cpp:849
 msgid ""
 "Run the merge for auto merge regular expressions\n"
 "immediately when a merge starts.\n"
@@ -1725,44 +1721,38 @@ msgstr ""
 "Kør automatisk sammenfletning med regulært\n"
 "udtryk med det samme når en sammenfletning starter.\n"
 
-#: optiondialog.cpp:851
+#: optiondialog.cpp:854
 msgid "Version Control History Merging"
 msgstr "Sammenfletning ifølge versionskontrolhistorik"
 
-#: optiondialog.cpp:860 smalldialogs.cpp:528
+#: optiondialog.cpp:863 smalldialogs.cpp:406
 msgid "History start regular expression:"
 msgstr "Regulært udtryk for historikkens begyndelse:"
 
-#: optiondialog.cpp:864
+#: optiondialog.cpp:867
 msgid ""
-"Regular expression for the start of the merge history entry.\n"
-"Usually this line contains the \"$Log$
-"Usually this line contains the \"Revision 1.3  2006/04/10 08:33:34  joachim99
-"Usually this line contains the \"KDiff3 0.9.89
-"Usually this line contains the \"\"-keyword.\n"
+"Regular expression for the start of the version control history entry.\n"
+"Usually this line contains the \"$Log$\"-keyword.\n"
 "Default value: \".*\\$Log.*\\$.*\""
 msgstr ""
-"Regulært udtryk for historikindgangens begyndelse.\n"
-"Oftest indeholder linjen nøgleordet  \"$Log$
-"Oftest indeholder linjen nøgleordet  \"Revision 1.3  2006/04/10 08:33:34  joachim99
-"Oftest indeholder linjen nøgleordet  \"KDiff3 0.9.89
-"Oftest indeholder linjen nøgleordet  \"\".\n"
+"Regulært udtryk for begyndelsen af versionshåndteringens historikindgang.\n"
+"Som oftest indeholder linjen nøgleordet  \"$Log$\".\n"
 "Standardværdi:  \".*\\$Log.*\\$.*\""
 
-#: optiondialog.cpp:870 smalldialogs.cpp:557
+#: optiondialog.cpp:873 smalldialogs.cpp:435
 msgid "History entry start regular expression:"
 msgstr "Regulært udtryk for historikindgangens begyndelse:"
 
-#: optiondialog.cpp:882
+#: optiondialog.cpp:885
 msgid ""
-"A merge history entry consists of several lines.\n"
+"A version control history entry consists of several lines.\n"
 "Specify the regular expression to detect the first line (without the leading "
 "comment).\n"
 "Use parentheses to group the keys you want to use for sorting.\n"
 "If left empty, then KDiff3 assumes that empty lines separate history entries.\n"
 "See the documentation for details."
 msgstr ""
-"En historikindgang består af flere linjer.\n"
+"En versionskontrol historikindgang består af flere linjer.\n"
 "Angiv det regulære udtryk for at detektere første linje (uden den indledende "
 "kommentar).\n"
 "Brug parenteser for at gruppere nøglerne du vil bruge til sortering.\n"
@@ -1770,19 +1760,19 @@ msgstr ""
 "historikposterne ad.\n"
 "Se dokumentationen for detaljer."
 
-#: optiondialog.cpp:890
+#: optiondialog.cpp:893
 msgid "History merge sorting"
 msgstr "Sortering af historiksammenfletning"
 
-#: optiondialog.cpp:892
+#: optiondialog.cpp:895
 msgid "Sort version control history by a key."
 msgstr "Sortér versionskontrolhistorikken med en nøgle."
 
-#: optiondialog.cpp:902
+#: optiondialog.cpp:905
 msgid "History entry start sort key order:"
 msgstr "Sorteringsnøglernes rækkefølge fra historikpostens begyndelse:"
 
-#: optiondialog.cpp:906
+#: optiondialog.cpp:909
 msgid ""
 "Each parentheses used in the regular expression for the history start entry\n"
 "groups a key that can be used for sorting.\n"
@@ -1800,26 +1790,26 @@ msgstr ""
 "Hvis det efterlades tomt, gøres ingen sortering.\n"
 "Se dokumentationen for detaljer."
 
-#: optiondialog.cpp:917
+#: optiondialog.cpp:920
 msgid "Merge version control history on merge start"
 msgstr ""
 "Sammenfletning ifølge versionskontrolhistorik når sammenfletning starter"
 
-#: optiondialog.cpp:919
+#: optiondialog.cpp:922
 msgid "Run version control history automerge on merge start."
 msgstr ""
 "Kør automatisk sammenfletning ifølge versionskontrolhistorik når sammenfletning "
 "starter."
 
-#: optiondialog.cpp:923
+#: optiondialog.cpp:926
 msgid "Test your regular expressions"
 msgstr "Test dine regulære udtryk"
 
-#: optiondialog.cpp:928
+#: optiondialog.cpp:931
 msgid "Irrelevant merge command:"
 msgstr "Ikke relevant sammenfletningskommando:"
 
-#: optiondialog.cpp:932
+#: optiondialog.cpp:935
 msgid ""
 "If specified this script is run after automerge\n"
 "when no other relevant changes were detected.\n"
@@ -1829,23 +1819,23 @@ msgstr ""
 "når ingen andre relevante ændringer blev detekteret.\n"
 "Kaldes med parametrene: filnavn1 filnavn2 filnavn3"
 
-#: optiondialog.cpp:942
+#: optiondialog.cpp:945
 msgid "Directory Merge"
 msgstr "Mappeindfletning"
 
-#: optiondialog.cpp:951
+#: optiondialog.cpp:954
 msgid "Recursive directories"
 msgstr "Rekursive mapper"
 
-#: optiondialog.cpp:953
+#: optiondialog.cpp:956
 msgid "Whether to analyze subdirectories or not."
 msgstr "Om undermapper skal analyseres eller ej."
 
-#: optiondialog.cpp:955
+#: optiondialog.cpp:958
 msgid "File pattern(s):"
 msgstr "Filmønstre:"
 
-#: optiondialog.cpp:960
+#: optiondialog.cpp:963
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
 "Wildcards: '*' and '?'\n"
@@ -1855,11 +1845,11 @@ msgstr ""
 "Jokertegn: '*' og '?'\n"
 "Flere mønstre kan angives ved brug af adskillertegnet: ';'"
 
-#: optiondialog.cpp:966
+#: optiondialog.cpp:969
 msgid "File-anti-pattern(s):"
 msgstr "Fil-anti-mønstre:"
 
-#: optiondialog.cpp:971
+#: optiondialog.cpp:974
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
 "Wildcards: '*' and '?'\n"
@@ -1869,11 +1859,11 @@ msgstr ""
 "Jokertegn: '*' og '?'\n"
 "Flere mønstre kan angives ved brug af adskillertegnet: ';'"
 
-#: optiondialog.cpp:977
+#: optiondialog.cpp:980
 msgid "Dir-anti-pattern(s):"
 msgstr "Mappe-anti-mønstre:"
 
-#: optiondialog.cpp:982
+#: optiondialog.cpp:985
 msgid ""
 "Pattern(s) of directories to be excluded from analysis. \n"
 "Wildcards: '*' and '?'\n"
@@ -1883,11 +1873,11 @@ msgstr ""
 "Jokertegn: '*' og '?'\n"
 "Flere mønstre kan angives ved brug af adskillertegnet: ';'"
 
-#: optiondialog.cpp:988
+#: optiondialog.cpp:991
 msgid "Use .cvsignore"
 msgstr "Brug .cvsignore"
 
-#: optiondialog.cpp:991
+#: optiondialog.cpp:994
 msgid ""
 "Extends the antipattern to anything that would be ignored by CVS.\n"
 "Via local \".cvsignore\"-files this can be directory specific."
@@ -1895,23 +1885,23 @@ msgstr ""
 "Udvider anti-mønstret til hvadsomhelst der ville blive ignoreret af CVS.\n"
 "Via lokale \".cvsignore\"-filer kan dette være specifikt for en enkel mappe."
 
-#: optiondialog.cpp:996
+#: optiondialog.cpp:999
 msgid "Find hidden files and directories"
 msgstr "Find skjulte filer og mapper"
 
-#: optiondialog.cpp:999
+#: optiondialog.cpp:1002
 msgid "Finds files and directories with the hidden attribute."
 msgstr "Finder filer og mapper med en skjulte attribut."
 
-#: optiondialog.cpp:1001
+#: optiondialog.cpp:1004
 msgid "Finds files and directories starting with '.'."
 msgstr "Finder filer og mapper der begynder med '.'."
 
-#: optiondialog.cpp:1005
+#: optiondialog.cpp:1008
 msgid "Follow file links"
 msgstr "Følger fil-link"
 
-#: optiondialog.cpp:1008
+#: optiondialog.cpp:1011
 msgid ""
 "On: Compare the file the link points to.\n"
 "Off: Compare the links."
@@ -1919,11 +1909,11 @@ msgstr ""
 "Til: Sammenlign med filen som linket peger på.\n"
 "Fra: Sammenlign link."
 
-#: optiondialog.cpp:1013
+#: optiondialog.cpp:1016
 msgid "Follow directory links"
 msgstr "Følg mappe-link"
 
-#: optiondialog.cpp:1016
+#: optiondialog.cpp:1019
 msgid ""
 "On: Compare the directory the link points to.\n"
 "Off: Compare the links."
@@ -1931,19 +1921,11 @@ msgstr ""
 "Til: Sammenlign med mappen som linket peger på.\n"
 "Fra: Sammenlign link."
 
-#: optiondialog.cpp:1021
-msgid "List only deltas"
-msgstr "Kun deltaer på listen"
-
-#: optiondialog.cpp:1024
-msgid "Files and directories without change will not appear in the list."
-msgstr "Filer og mapper uden ændring vil ikke ses på listen."
-
-#: optiondialog.cpp:1032
+#: optiondialog.cpp:1035
 msgid "Case sensitive filename comparison"
 msgstr "Versalfølsom filnavnesammenligning"
 
-#: optiondialog.cpp:1035
+#: optiondialog.cpp:1038
 msgid ""
 "The directory comparison will compare files or directories when their names "
 "match.\n"
@@ -1954,23 +1936,23 @@ msgstr ""
 "Angiv dette tilvalg hvis navnenes versaltilstand skal matche. (Standardværdien "
 "for Windows er fra, ellers til.)"
 
-#: optiondialog.cpp:1039
+#: optiondialog.cpp:1042
 msgid "File Comparison Mode"
 msgstr "Filsammenligningstilstand"
 
-#: optiondialog.cpp:1043
+#: optiondialog.cpp:1046
 msgid "Binary comparison"
 msgstr "Binær sammenligning"
 
-#: optiondialog.cpp:1044
+#: optiondialog.cpp:1047
 msgid "Binary comparison of each file. (Default)"
 msgstr "Binær sammenligning af hver fil. (Standard)"
 
-#: optiondialog.cpp:1046
+#: optiondialog.cpp:1049
 msgid "Full analysis"
 msgstr "Fuld analyse"
 
-#: optiondialog.cpp:1047
+#: optiondialog.cpp:1050
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
 "(Slower than a binary comparison, much slower for binary files.)"
@@ -1978,11 +1960,11 @@ msgstr ""
 "Udfør en fuld analyse og vis statistisk information i ekstra søjler.\n"
 "(Langsommere end en binær sammenligning, meget langsommere for binære filer.)"
 
-#: optiondialog.cpp:1050
+#: optiondialog.cpp:1053
 msgid "Trust the modification date (unsafe)"
 msgstr "Stol på ændringsdato (usikker)"
 
-#: optiondialog.cpp:1051
+#: optiondialog.cpp:1054
 msgid ""
 "Assume that files are equal if the modification date and file length are "
 "equal.\n"
@@ -1991,11 +1973,11 @@ msgstr ""
 "Antag at filer er ens hvis ændringsdatoen og fillængden er ens.\n"
 "Nyttigt for store mapper eller langsomme netværk."
 
-#: optiondialog.cpp:1054
+#: optiondialog.cpp:1057
 msgid "Trust the size (unsafe)"
 msgstr "Stol på størrelsen (usikker)"
 
-#: optiondialog.cpp:1055
+#: optiondialog.cpp:1058
 msgid ""
 "Assume that files are equal if their file lengths are equal.\n"
 "Useful for big directories or slow networks when the date is modified during "
@@ -2005,11 +1987,11 @@ msgstr ""
 "Nyttigt for store mapper eller langsomme netværk, når datoen er ændret efter "
 "filer er hentet."
 
-#: optiondialog.cpp:1059
+#: optiondialog.cpp:1062
 msgid "Synchronize directories"
 msgstr "Synkronisér mapper"
 
-#: optiondialog.cpp:1062
+#: optiondialog.cpp:1065
 msgid ""
 "Offers to store files in both directories so that\n"
 "both directories are the same afterwards.\n"
@@ -2019,11 +2001,11 @@ msgstr ""
 "begge mapper er ens bagefter.\n"
 "Virker kun når to mapper sammenlignes uden at angive nogen destination."
 
-#: optiondialog.cpp:1068
+#: optiondialog.cpp:1071
 msgid "White space differences considered equal"
 msgstr "Forskelle i blanke tegn anses for ens"
 
-#: optiondialog.cpp:1071
+#: optiondialog.cpp:1074
 msgid ""
 "If files differ only by white space consider them equal.\n"
 "This is only active when full analysis is chosen."
@@ -2031,11 +2013,11 @@ msgstr ""
 "Hvis filer kun adskiller sig med blanke tegn, anses dem for ens.\n"
 "Dette er kun aktiveret når fuldstændig analyse vælges."
 
-#: optiondialog.cpp:1077
+#: optiondialog.cpp:1080
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "Kopiér nyere i stedet for at indflette (usikker)"
 
-#: optiondialog.cpp:1080
+#: optiondialog.cpp:1083
 msgid ""
 "Don't look inside, just take the newer file.\n"
 "(Use this only if you know what you are doing!)\n"
@@ -2045,11 +2027,11 @@ msgstr ""
 "(Brug kun dette hvis du ved hvad du foretager dig!)\n"
 "Kun effektivt når to mapper sammenlignes."
 
-#: optiondialog.cpp:1085
+#: optiondialog.cpp:1088
 msgid "Backup files (.orig)"
 msgstr "Sikkerhedskopieringsfiler (.orig)"
 
-#: optiondialog.cpp:1088
+#: optiondialog.cpp:1091
 msgid ""
 "When a file would be saved over an old file, then the old file\n"
 "will be renamed with a '.orig'-extension instead of being deleted."
@@ -2057,15 +2039,15 @@ msgstr ""
 "Når en fil ville blive gemt over en gammel fil, så vil den gamle\n"
 "fil blive omdøbt med en '.orig'-endelse i stedet for at blive slettet."
 
-#: optiondialog.cpp:1115
+#: optiondialog.cpp:1118
 msgid "Regional Settings"
 msgstr "Regional opsætning"
 
-#: optiondialog.cpp:1208
+#: optiondialog.cpp:1211
 msgid "Language (restart required)"
 msgstr "Sprog (genstart krævet)"
 
-#: optiondialog.cpp:1240
+#: optiondialog.cpp:1243
 msgid ""
 "Choose the language of the GUI-strings or \"Auto\".\n"
 "For a change of language to take place, quit and restart KDiff3."
@@ -2073,11 +2055,11 @@ msgstr ""
 "Vælg sproget for GUI-strengene eller \"Auto\".\n"
 "For at en ændring af sprog skal ske, afslut og start KDiff3 igen."
 
-#: optiondialog.cpp:1258
+#: optiondialog.cpp:1261
 msgid "Use the same encoding for everything:"
 msgstr "Brug samme tegnsæt til alt:"
 
-#: optiondialog.cpp:1261
+#: optiondialog.cpp:1264
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
@@ -2085,35 +2067,35 @@ msgstr ""
 "At aktivere dette lader dig ændre alle tegnsæt ved at kun ændre den første.\n"
 "Deaktivér det hvis forskellige individuelle indstillinger behøves."
 
-#: optiondialog.cpp:1266
+#: optiondialog.cpp:1269
 msgid "Note: Local Encoding is "
 msgstr "Bemærk: Lokalt tegnsæt er "
 
-#: optiondialog.cpp:1270
+#: optiondialog.cpp:1273
 msgid "File Encoding for A:"
 msgstr "Filtegnsæt for A:"
 
-#: optiondialog.cpp:1275
+#: optiondialog.cpp:1278
 msgid "File Encoding for B:"
 msgstr "Filtegnsæt for B:"
 
-#: optiondialog.cpp:1280
+#: optiondialog.cpp:1283
 msgid "File Encoding for C:"
 msgstr "Filtegnsæt for C:"
 
-#: optiondialog.cpp:1285
+#: optiondialog.cpp:1288
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "Filtegnsæt for sammenflettede uddata og når der gemmes:"
 
-#: optiondialog.cpp:1290
+#: optiondialog.cpp:1293
 msgid "File Encoding for Preprocessor Files:"
 msgstr "Filtegnsæt for forbehandlingsfiler:"
 
-#: optiondialog.cpp:1299
+#: optiondialog.cpp:1302
 msgid "Right To Left Language"
 msgstr "Sprog som læses fra højre til venstre"
 
-#: optiondialog.cpp:1302
+#: optiondialog.cpp:1305
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
@@ -2121,19 +2103,19 @@ msgstr ""
 "Nogle sprog læses fra højre til venstre.\n"
 "Indstillingen ændrer visningen og editoren på tilsvarende måde."
 
-#: optiondialog.cpp:1312
+#: optiondialog.cpp:1315
 msgid "Integration"
 msgstr "Integrering"
 
-#: optiondialog.cpp:1312
+#: optiondialog.cpp:1315
 msgid "Integration Settings"
 msgstr "Integreringsindstillinger"
 
-#: optiondialog.cpp:1322
+#: optiondialog.cpp:1325
 msgid "Command line options to ignore:"
 msgstr "Kommandolinjeflag at ignorere:"
 
-#: optiondialog.cpp:1327
+#: optiondialog.cpp:1330
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
 "other tools.\n"
@@ -2145,7 +2127,7 @@ msgstr ""
 "Flere værdier kan angives hvis de adskilles af ';'\n"
 "Dette undertrykker fejlmeddelelsen \"Ukendt flag\"."
 
-#: optiondialog.cpp:1380
+#: optiondialog.cpp:1383
 msgid ""
 "You selected a variable width font.\n"
 "\n"
@@ -2161,19 +2143,19 @@ msgstr ""
 "\n"
 "Ønsker du at fortsætte eller at vælge en anden skrifttype."
 
-#: optiondialog.cpp:1384
+#: optiondialog.cpp:1387
 msgid "Incompatible Font"
 msgstr "Inkompatibel skrifttype"
 
-#: optiondialog.cpp:1385
+#: optiondialog.cpp:1388
 msgid "Continue at Own Risk"
 msgstr "Fortsæt på eget ansvar."
 
-#: optiondialog.cpp:1385
+#: optiondialog.cpp:1388
 msgid "Select Another Font"
 msgstr "Vælg en anden skrifttype"
 
-#: optiondialog.cpp:1410
+#: optiondialog.cpp:1413
 msgid "This resets all options. Not only those of the current topic."
 msgstr "Dette nulstiller alle tilvalg. Ikke kun dem der angår dette emne."
 
@@ -2246,6 +2228,23 @@ msgstr "Linjeforskel: B <-> C"
 msgid "Linediff: A <-> C"
 msgstr "Linjeforskel: A <-> C"
 
+#: pdiff.cpp:509
+msgid "All input files contain the same text, but are not binary equal."
+msgstr ""
+"Alle inddata-filer indeholder den samme tekst, men er ikke binært ækvivalente."
+
+#: pdiff.cpp:511 pdiff.cpp:513 pdiff.cpp:515
+msgid ""
+"Files %1 and %2 are binary equal.\n"
+msgstr ""
+"Filerne %1 og %2 er binært ens.\n"
+
+#: pdiff.cpp:512 pdiff.cpp:514 pdiff.cpp:516
+msgid ""
+"Files %1 and %2 have equal text, but are not binary equal. \n"
+msgstr ""
+"Filerne %1 og %2 har samme tekst men er ikke binært ens.\n"
+
 #: pdiff.cpp:526
 msgid ""
 "Some inputfiles don't seem to be pure textfiles.\n"
@@ -2280,31 +2279,27 @@ msgstr "Kopierer valgene til klippebord..."
 msgid "Inserting clipboard contents..."
 msgstr "Indsætter klippebordets indhold..."
 
-#: pdiff.cpp:1685
+#: pdiff.cpp:1699
 msgid "Save && Continue"
 msgstr "Gem && Fortsæt"
 
-#: pdiff.cpp:1685
+#: pdiff.cpp:1699
 msgid "Continue Without Saving"
 msgstr "Fortsæt uden at gemme"
 
-#: pdiff.cpp:1892
+#: pdiff.cpp:1906
 msgid "Search complete."
 msgstr "Søgning færdig."
 
-#: pdiff.cpp:1892
+#: pdiff.cpp:1906
 msgid "Search Complete"
 msgstr "Søgning færdig"
 
-#: pdiff.cpp:2107
-msgid "Please click the lines that should match in all windows."
-msgstr "Klik på linjerne som skal matche i alle vinduer."
-
-#: pdiff.cpp:2116
+#: pdiff.cpp:2129
 msgid "Nothing is selected in either diff input window."
 msgstr "Ingenting er markeret i inddatavindue med sammenligning."
 
-#: pdiff.cpp:2116
+#: pdiff.cpp:2129
 msgid "Error while adding manual diff range"
 msgstr "Fejl ved tilføjelse manuelt sammenligningsområde"
 
@@ -2356,7 +2351,7 @@ msgstr "D&iff-visning"
 msgid "&Merge"
 msgstr "Ind&flet"
 
-#. i18n: file kdiff3_shell.rc line 94
+#. i18n: file kdiff3_shell.rc line 95
 #: rc.cpp:33
 #, no-c-format
 msgid "&Window"
@@ -2367,12 +2362,12 @@ msgid "A (Base):"
 msgstr "A (Basis):"
 
 #: smalldialogs.cpp:59 smalldialogs.cpp:75 smalldialogs.cpp:91
-#: smalldialogs.cpp:137
+#: smalldialogs.cpp:134
 msgid "File..."
 msgstr "Fil..."
 
 #: smalldialogs.cpp:61 smalldialogs.cpp:77 smalldialogs.cpp:93
-#: smalldialogs.cpp:139
+#: smalldialogs.cpp:136
 msgid "Dir..."
 msgstr "Mappe..."
 
@@ -2384,94 +2379,94 @@ msgstr "C (Frivillig):"
 msgid "Swap/Copy Names ..."
 msgstr "Skift eller kopiér navne..."
 
-#: smalldialogs.cpp:114
-msgid "Swap"
-msgstr "Skift"
+#: smalldialogs.cpp:114 smalldialogs.cpp:115 smalldialogs.cpp:116
+msgid "Swap %1<->%2"
+msgstr "Skift %1 ud mod %2"
 
-#: smalldialogs.cpp:132
+#: smalldialogs.cpp:117 smalldialogs.cpp:118 smalldialogs.cpp:119
+msgid "Copy %1->Output"
+msgstr "Kopiér %1 til uddata"
+
+#: smalldialogs.cpp:120 smalldialogs.cpp:121 smalldialogs.cpp:122
+msgid "Swap %1<->Output"
+msgstr "Skift %1 ud mod uddata"
+
+#: smalldialogs.cpp:129
 msgid "Output (optional):"
 msgstr "Uddata (frivillig):"
 
-#: smalldialogs.cpp:161
+#: smalldialogs.cpp:158
 msgid "Configure..."
 msgstr "Indstil..."
 
-#: smalldialogs.cpp:332
+#: smalldialogs.cpp:329
 msgid "Search text:"
 msgstr "Søgetekst:"
 
-#: smalldialogs.cpp:339
+#: smalldialogs.cpp:336
 msgid "Case sensitive"
 msgstr "Versalfølsom"
 
-#: smalldialogs.cpp:342
+#: smalldialogs.cpp:339
 msgid "Search A"
 msgstr "Gennemsøg A"
 
-#: smalldialogs.cpp:347
+#: smalldialogs.cpp:344
 msgid "Search B"
 msgstr "Gennemsøg B"
 
-#: smalldialogs.cpp:352
+#: smalldialogs.cpp:349
 msgid "Search C"
 msgstr "Gennemsøg C"
 
-#: smalldialogs.cpp:357
+#: smalldialogs.cpp:354
 msgid "Search output"
 msgstr "Søgeuddata"
 
-#: smalldialogs.cpp:362
+#: smalldialogs.cpp:359
 msgid "&Search"
 msgstr "&Søg"
 
-#: smalldialogs.cpp:382 smalldialogs.cpp:406
-msgid "no selection"
-msgstr "ingen markering"
-
-#: smalldialogs.cpp:396
-msgid "Manually match lines"
-msgstr "Manuelt valg af linjer"
-
-#: smalldialogs.cpp:498
+#: smalldialogs.cpp:376
 msgid "Regular Expression Tester"
 msgstr "Test af regulære udtryk"
 
-#: smalldialogs.cpp:509
-msgid "Example auto merge start line:"
-msgstr "Eksempel på startlinje for automatisk sammenfletning:"
+#: smalldialogs.cpp:387
+msgid "Example auto merge line:"
+msgstr "Eksempel på linje for automatisk sammenfletning:"
 
-#: smalldialogs.cpp:511
+#: smalldialogs.cpp:389
 msgid "For auto merge test copy a line as used in your files."
 msgstr ""
 "For at teste automatisk sammenfletning, kopieres en linje som bruges i dine "
 "filer."
 
-#: smalldialogs.cpp:517 smalldialogs.cpp:546 smalldialogs.cpp:583
+#: smalldialogs.cpp:395 smalldialogs.cpp:424 smalldialogs.cpp:461
 msgid "Match result:"
 msgstr "Matchningsresultat:"
 
-#: smalldialogs.cpp:536
+#: smalldialogs.cpp:414
 msgid "Example history start line (with leading comment):"
 msgstr "Eksempel på startlinje for historik (med indledende kommentar):"
 
-#: smalldialogs.cpp:539
+#: smalldialogs.cpp:417
 msgid ""
 "Copy a history start line as used in your files,\n"
-"but omit the leading comment."
+"including the leading comment."
 msgstr ""
 "Kopiér en startlinje for historik som bruges i dine filer,\n"
-"men udelad den indledende kommentar."
+"inkluderende den indledende kommentar."
 
-#: smalldialogs.cpp:565
+#: smalldialogs.cpp:443
 msgid "History sort key order:"
 msgstr "Sorteringsnøglerækkefølge for historik:"
 
-#: smalldialogs.cpp:573
+#: smalldialogs.cpp:451
 msgid "Example history entry start line (without leading comment):"
 msgstr ""
 "Eksempel på startlinje for en historikindgang (uden indledende kommentar):"
 
-#: smalldialogs.cpp:575
+#: smalldialogs.cpp:453
 msgid ""
 "Copy a history entry start line as used in your files,\n"
 "but omit the leading comment."
@@ -2479,25 +2474,48 @@ msgstr ""
 "Kopiér en startlinje for en historikindgang som bruges i dine filer,\n"
 "men udelad den indledende kommentar."
 
-#: smalldialogs.cpp:590
+#: smalldialogs.cpp:468
 msgid "Sort key result:"
 msgstr "Sorteringsnøgleresultat:"
 
-#: smalldialogs.cpp:597
-msgid "Ok"
-msgstr "O.k."
-
-#: smalldialogs.cpp:641 smalldialogs.cpp:651 smalldialogs.cpp:672
+#: smalldialogs.cpp:519 smalldialogs.cpp:529 smalldialogs.cpp:550
 msgid "Match success."
 msgstr "Matchning lykkedes."
 
-#: smalldialogs.cpp:645 smalldialogs.cpp:655 smalldialogs.cpp:678
+#: smalldialogs.cpp:523 smalldialogs.cpp:533 smalldialogs.cpp:556
 msgid "Match failed."
 msgstr "Matchning mislykkedes."
 
-#: smalldialogs.cpp:663
+#: smalldialogs.cpp:541
 msgid "Opening and closing parentheses don't match in regular expression."
 msgstr "Indledende og afsluttende parenteser matcher ikke i regulært udtryk."
+
+#~ msgid "Synchronize Directories"
+#~ msgstr "Synkronisér mapper"
+
+#~ msgid "Copy Newer Files Instead of Merging"
+#~ msgstr "Kopiér nyere filer i stedet for at sammenflette"
+
+#~ msgid "List only deltas"
+#~ msgstr "Kun deltaer på listen"
+
+#~ msgid "Files and directories without change will not appear in the list."
+#~ msgstr "Filer og mapper uden ændring vil ikke ses på listen."
+
+#~ msgid "Please click the lines that should match in all windows."
+#~ msgstr "Klik på linjerne som skal matche i alle vinduer."
+
+#~ msgid "Swap"
+#~ msgstr "Skift"
+
+#~ msgid "no selection"
+#~ msgstr "ingen markering"
+
+#~ msgid "Manually match lines"
+#~ msgstr "Manuelt valg af linjer"
+
+#~ msgid "Ok"
+#~ msgstr "O.k."
 
 #~ msgid "Has no effect. For compatibility with certain tools."
 #~ msgstr "Har ingen virkning. For kompatibilitet med visse værktøjer."

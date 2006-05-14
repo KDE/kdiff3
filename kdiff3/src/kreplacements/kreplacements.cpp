@@ -33,6 +33,7 @@
 #include <qtextstream.h>
 #include <qlayout.h>
 #include <q3dockarea.h>
+#include <QTabWidget>
 //Added by qt3to4:
 #include <QPaintEvent>
 #include <Q3VBoxLayout>
@@ -122,7 +123,7 @@ QString getTranslationDir()
       QString exePath;
       if (r!=0)  {  exePath = buf; }
       else       {  exePath = "."; }
-      return exePath;
+      return exePath+"/translations";
    #else
       return ".";
    #endif
@@ -210,9 +211,9 @@ Q3VBox* KDialogBase::addVBoxPage( const QString& name, const QString& /*info*/, 
    return p;
 }
 
-Q3Frame* KDialogBase::addPage(  const QString& name, const QString& /*info*/, int )
+QFrame* KDialogBase::addPage(  const QString& name, const QString& /*info*/, int )
 {
-   Q3Frame* p = new Q3Frame(0);
+   QFrame* p = new QFrame();
    p->setObjectName( name );
    addTab( p, name );
    return p;
@@ -367,9 +368,17 @@ void KMainWindow::createGUI()
 
 void KMainWindow::slotAbout()
 {
-   Q3TabDialog d;
+   QDialog d;
+   QVBoxLayout* l = new QVBoxLayout( &d );
+   QTabWidget* pTabWidget = new QTabWidget;
+   l->addWidget( pTabWidget );
+
+   QPushButton* pOkButton = new QPushButton(i18n("Ok"));
+   connect( pOkButton, SIGNAL(clicked()), &d, SLOT(accept()));
+   l->addWidget( pOkButton );
+
    d.setCaption("About " + s_appName);
-   Q3TextBrowser* tb1 = new Q3TextBrowser(&d);
+   Q3TextBrowser* tb1 = new Q3TextBrowser();
    tb1->setWordWrap( Q3TextEdit::NoWrap );
    tb1->setText(
       s_appName + " Version " + s_version +
@@ -378,7 +387,7 @@ void KMainWindow::slotAbout()
       "\n\nHomepage: " + s_homepage +
       "\n\nLicence: GNU GPL Version 2"
       );
-   d.addTab(tb1,i18n("&About"));
+   pTabWidget->addTab(tb1,i18n("&About"));
       
    std::list<KAboutData::AboutDataEntry>::iterator i;
    
@@ -391,10 +400,10 @@ void KMainWindow::slotAbout()
       if ( !i->m_weblink.isEmpty() ) s2 += "   " + i->m_weblink + "\n";
       s2 += "\n";
    }
-   Q3TextBrowser* tb2 = new Q3TextBrowser(&d);
+   Q3TextBrowser* tb2 = new Q3TextBrowser();
    tb2->setWordWrap( Q3TextEdit::NoWrap );
    tb2->setText(s2);
-   d.addTab(tb2,i18n("A&uthor"));
+   pTabWidget->addTab(tb2,i18n("A&uthor"));
    
    QString s3;
    for( i=s_pAboutData->m_creditList.begin(); i!=s_pAboutData->m_creditList.end(); ++i )
@@ -405,10 +414,10 @@ void KMainWindow::slotAbout()
       if ( !i->m_weblink.isEmpty() ) s3 += "   " + i->m_weblink + "\n";
       s3 += "\n";
    }
-   Q3TextBrowser* tb3 = new Q3TextBrowser(&d);
+   Q3TextBrowser* tb3 = new Q3TextBrowser();
    tb3->setWordWrap( Q3TextEdit::NoWrap );
    tb3->setText(s3);
-   d.addTab(tb3,i18n("&Thanks To"));
+   pTabWidget->addTab(tb3,i18n("&Thanks To"));
    
    d.resize(400,300);
    d.exec();

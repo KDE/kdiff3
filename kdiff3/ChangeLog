@@ -1,3 +1,14 @@
+Version 0.9.90 - 2006/05/14
+===========================
+- Fixed KIO-problems of type "File exists" with tempfiles (introduced in 0.9.89)
+- Fix for manual alignment with 3 files which caused crash (new feature in 0.9.89)
+- Fix for Alt-Left caused crash for leftmost window on windows (due to changed compiler)
+- Use of WResizeNoErase|WRepaintNoErase instead of WNoAutoErase (fix for compiler error with Qt3.1)
+- Removed #include <konq_popupmenu.h> which is (currently) unneeded and required extra dependencies.
+- Removed "Save/Load Directory Merge State ..." in directory menu. (These aren't working yet.)
+- Fixed crash when used as Diff-part with KDevelop.
+- Preserve executable bit when overwriting an existing file.
+
 Version 0.9.89 - 2006/04/09
 ===========================
 New features:
