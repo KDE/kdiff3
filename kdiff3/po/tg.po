@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
-"POT-Creation-Date: 2006-04-10 11:07+0200\n"
+"POT-Creation-Date: 2006-05-15 11:12+0200\n"
 "PO-Revision-Date: 2005-09-17 13:29+0500\n"
 "Last-Translator: Victor Ibragimov <youth_opportunities@tajikngo.org>\n"
 "Language-Team: Tajik\n"
@@ -70,7 +70,7 @@ msgstr ""
 "\n"
 "Хати-ҷамъ кунии- пешкоркардкунии фармон ҳоло аз кор мемонад."
 
-#: diff.cpp:1617 diff.cpp:1631
+#: diff.cpp:1587 diff.cpp:1601
 msgid ""
 "Data loss error:\n"
 "If it is reproducable please contact the author.\n"
@@ -78,7 +78,7 @@ msgstr ""
 "Маълумотҳои гумкарда:\n"
 "Агар ин зиёд карда шавад илтимос бо муаллиф алоқа кунед.\n"
 
-#: diff.cpp:1619 diff.cpp:1633
+#: diff.cpp:1589 diff.cpp:1603
 msgid "Severe Internal Error"
 msgstr "Хатогии даруни"
 
@@ -268,7 +268,7 @@ msgstr "Ин ба ҳамаи якҷошавӣ таъсир мерасонад."
 msgid "Changing All Merge Operations"
 msgstr "Тағйироти ҳамаи якҷошавиҳо"
 
-#: directorymergewindow.cpp:803 mergeresultwindow.cpp:284
+#: directorymergewindow.cpp:803 mergeresultwindow.cpp:285
 msgid "C&ontinue"
 msgstr "&Давом додан"
 
@@ -653,16 +653,6 @@ msgstr "Дохили ҳамаи зеркаталогҳо"
 msgid "Unfold All Subdirs"
 msgstr "Дохилнашудаи ҳамаи зеркаталогҳо"
 
-#: directorymergewindow.cpp:2865
-#, fuzzy
-msgid "Save Directory Merge State ..."
-msgstr "Хатогӣ дар вақти хониши каталог"
-
-#: directorymergewindow.cpp:2866
-#, fuzzy
-msgid "Load Directory Merge State ..."
-msgstr "Хатогӣ дар вақти хониши каталог"
-
 #: directorymergewindow.cpp:2867
 msgid "Choose A for All Items"
 msgstr "Интихоби A барои ҳама"
@@ -740,7 +730,7 @@ msgstr "Нест кардани А ва В"
 msgid "Merge to A && B"
 msgstr "Пайваст кардан ба A & В"
 
-#: fileaccess.cpp:563
+#: fileaccess.cpp:581
 msgid ""
 "While trying to make a backup, deleting an older backup failed. \n"
 "Filename: "
@@ -748,7 +738,7 @@ msgstr ""
 "Наметавонам нусхаи кӯҳнаи захираро нест кунам. \n"
 "Номи файл: "
 
-#: fileaccess.cpp:570
+#: fileaccess.cpp:588
 msgid ""
 "While trying to make a backup, renaming failed. \n"
 "Filenames: "
@@ -756,53 +746,53 @@ msgstr ""
 "Наметавонам номгузориро ҳал кунам. \n"
 "Номи файлҳо: "
 
-#: fileaccess.cpp:592
+#: fileaccess.cpp:610
 #, c-format
 msgid "Getting file status: %1"
 msgstr "Гирифтани ҳолати файл: %1"
 
-#: fileaccess.cpp:635
+#: fileaccess.cpp:653
 #, c-format
 msgid "Reading file: %1"
 msgstr "Хониши файл: %1"
 
-#: fileaccess.cpp:671
+#: fileaccess.cpp:689
 #, c-format
 msgid "Writing file: %1"
 msgstr "Навишти файл: %1"
 
-#: fileaccess.cpp:699
+#: fileaccess.cpp:717
 msgid "Out of memory"
 msgstr "Аз хотира"
 
-#: fileaccess.cpp:734
+#: fileaccess.cpp:752
 #, c-format
 msgid "Making directory: %1"
 msgstr "Эҷоди каталогҳо : %1"
 
-#: fileaccess.cpp:754
+#: fileaccess.cpp:772
 #, c-format
 msgid "Removing directory: %1"
 msgstr "Дур кардани директория: %1"
 
-#: fileaccess.cpp:769
+#: fileaccess.cpp:787
 #, c-format
 msgid "Removing file: %1"
 msgstr "Дур кардани файл: %1"
 
-#: fileaccess.cpp:785
+#: fileaccess.cpp:803
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Сохтани пайвасти рамзӣ: %1-> %2"
 
-#: fileaccess.cpp:811
+#: fileaccess.cpp:829
 msgid "Renaming file: %1 -> %2"
 msgstr "Аз нав номгузории файл: %1-> %2"
 
-#: fileaccess.cpp:847
+#: fileaccess.cpp:865
 msgid "Copying file: %1 -> %2"
 msgstr "Нусха бардошатани: %1-> %2"
 
-#: fileaccess.cpp:861
+#: fileaccess.cpp:879
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for reading failed. Filename: %1"
@@ -810,7 +800,7 @@ msgstr ""
 "Хато дар вақти амалиёти нусхабардории файл: Кушодани файл барои хондан "
 "нашуд.Номи Файл: %1"
 
-#: fileaccess.cpp:867
+#: fileaccess.cpp:885
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for writing failed. Filename: %1"
@@ -818,23 +808,23 @@ msgstr ""
 "Хато дар вақти амалиёти нусхабардории файл: Кушодани файл барои хондан "
 "нашуд.Номи Файл: %1"
 
-#: fileaccess.cpp:882
+#: fileaccess.cpp:900
 #, c-format
 msgid "Error during file copy operation: Reading failed. Filename: %1"
 msgstr ""
 "Хато дар вақти амалиёти нусхабардории файл: Хондани нашуд.Номи Файл: %1"
 
-#: fileaccess.cpp:891
+#: fileaccess.cpp:909
 #, c-format
 msgid "Error during file copy operation: Writing failed. Filename: %1"
 msgstr ""
 "Хато дар вақти амалиёти нусхабардории файл: Навиштан нашуд.Номи Файл: %1"
 
-#: fileaccess.cpp:1187
+#: fileaccess.cpp:1205
 msgid "Reading directory: "
 msgstr "Хондани директория: "
 
-#: fileaccess.cpp:1316
+#: fileaccess.cpp:1334
 #, c-format
 msgid "Listing directory: %1"
 msgstr "Нигоҳ кардани директория: %1"
@@ -1187,11 +1177,11 @@ msgstr "Тасвир кардан/панели асбобҳои пинҳонӣ..
 msgid "Toggle the statusbar..."
 msgstr "Тасвир кардан/вазъияти панели пинҳонӣ..."
 
-#: kdiff3_part.cpp:155 kdiff3_part.cpp:223
+#: kdiff3_part.cpp:155 kdiff3_part.cpp:224
 msgid "Couldn't find files for comparison."
 msgstr "Файл барои муқоиса ёфт нашуд."
 
-#: kdiff3_part.cpp:290
+#: kdiff3_part.cpp:291
 msgid "KDiff3Part"
 msgstr "KDiff3Part"
 
@@ -1291,123 +1281,123 @@ msgstr "KDiff3Part"
 msgid "+ Many thanks to those who reported bugs and contributed ideas!"
 msgstr ""
 
-#: mergeresultwindow.cpp:132 mergeresultwindow.cpp:936
-#: mergeresultwindow.cpp:950 mergeresultwindow.cpp:962
-#: mergeresultwindow.cpp:974
+#: mergeresultwindow.cpp:133 mergeresultwindow.cpp:937
+#: mergeresultwindow.cpp:951 mergeresultwindow.cpp:963
+#: mergeresultwindow.cpp:975
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 
-#: mergeresultwindow.cpp:282
+#: mergeresultwindow.cpp:283
 msgid ""
 "The output has been modified.\n"
 "If you continue your changes will be lost."
 msgstr ""
 
-#: mergeresultwindow.cpp:794 pdiff.cpp:507
+#: mergeresultwindow.cpp:795 pdiff.cpp:507
 msgid "All input files are binary equal."
 msgstr ""
 
-#: mergeresultwindow.cpp:796
+#: mergeresultwindow.cpp:797
 msgid "All input files contain the same text."
-msgstr ""
-
-#: mergeresultwindow.cpp:798
-msgid ""
-"Files A and B are binary equal.\n"
 msgstr ""
 
 #: mergeresultwindow.cpp:799
 msgid ""
-"Files A and B have equal text. \n"
+"Files A and B are binary equal.\n"
 msgstr ""
 
 #: mergeresultwindow.cpp:800
 msgid ""
-"Files A and C are binary equal.\n"
+"Files A and B have equal text. \n"
 msgstr ""
 
 #: mergeresultwindow.cpp:801
 msgid ""
-"Files A and C have equal text. \n"
+"Files A and C are binary equal.\n"
 msgstr ""
 
 #: mergeresultwindow.cpp:802
 msgid ""
-"Files B and C are binary equal.\n"
+"Files A and C have equal text. \n"
 msgstr ""
 
 #: mergeresultwindow.cpp:803
 msgid ""
+"Files B and C are binary equal.\n"
+msgstr ""
+
+#: mergeresultwindow.cpp:804
+msgid ""
 "Files B and C have equal text. \n"
 msgstr ""
 
-#: mergeresultwindow.cpp:809
+#: mergeresultwindow.cpp:810
 msgid "Total number of conflicts: "
 msgstr ""
 
-#: mergeresultwindow.cpp:810
+#: mergeresultwindow.cpp:811
 #, fuzzy
 msgid ""
 "\n"
 "Nr of automatically solved conflicts: "
 msgstr "Зуд ҳал мекунад ҷанҷолҳои оддиро"
 
-#: mergeresultwindow.cpp:811
+#: mergeresultwindow.cpp:812
 #, fuzzy
 msgid ""
 "\n"
 "Nr of unsolved conflicts: "
 msgstr "Равед ба Ҷанҷоли Дар пеш интизори Ҳалнашуда"
 
-#: mergeresultwindow.cpp:813
+#: mergeresultwindow.cpp:814
 msgid "Conflicts"
 msgstr ""
 
-#: mergeresultwindow.cpp:1649
+#: mergeresultwindow.cpp:1650
 msgid "<No src line>"
 msgstr ""
 
-#: mergeresultwindow.cpp:1657
+#: mergeresultwindow.cpp:1658
 #, fuzzy
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: mergeresultwindow.cpp:1659 mergeresultwindow.cpp:2445
+#: mergeresultwindow.cpp:1660 mergeresultwindow.cpp:2446
 #, fuzzy
 msgid "<Merge Conflict>"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: mergeresultwindow.cpp:1729
+#: mergeresultwindow.cpp:1730
 msgid "Output"
 msgstr ""
 
-#: mergeresultwindow.cpp:1731
+#: mergeresultwindow.cpp:1732
 msgid "[Modified]"
 msgstr ""
 
-#: mergeresultwindow.cpp:2655
+#: mergeresultwindow.cpp:2656
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved.\n"
 msgstr ""
 
-#: mergeresultwindow.cpp:2657
+#: mergeresultwindow.cpp:2658
 msgid "Conflicts Left"
 msgstr ""
 
-#: mergeresultwindow.cpp:2669
+#: mergeresultwindow.cpp:2670
 msgid ""
 "\n"
 "\n"
 "Creating backup failed. File not saved."
 msgstr ""
 
-#: mergeresultwindow.cpp:2669 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2670 mergeresultwindow.cpp:2710
 #, fuzzy
 msgid "File Save Error"
 msgstr "Хатогӣ дар кушодани файл"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2710
 #, fuzzy
 msgid "Error while writing."
 msgstr "Хатогӣ дар вақти эҷод кардани каталог."
@@ -1969,74 +1959,74 @@ msgstr ""
 msgid "Regional Settings"
 msgstr ""
 
-#: optiondialog.cpp:1211
+#: optiondialog.cpp:1214
 msgid "Language (restart required)"
 msgstr ""
 
-#: optiondialog.cpp:1243
+#: optiondialog.cpp:1246
 msgid ""
 "Choose the language of the GUI-strings or \"Auto\".\n"
 "For a change of language to take place, quit and restart KDiff3."
 msgstr ""
 
-#: optiondialog.cpp:1261
+#: optiondialog.cpp:1264
 msgid "Use the same encoding for everything:"
 msgstr ""
 
-#: optiondialog.cpp:1264
+#: optiondialog.cpp:1267
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
 msgstr ""
 
-#: optiondialog.cpp:1269
+#: optiondialog.cpp:1272
 msgid "Note: Local Encoding is "
 msgstr ""
 
-#: optiondialog.cpp:1273
+#: optiondialog.cpp:1276
 msgid "File Encoding for A:"
 msgstr ""
 
-#: optiondialog.cpp:1278
+#: optiondialog.cpp:1281
 msgid "File Encoding for B:"
 msgstr ""
 
-#: optiondialog.cpp:1283
+#: optiondialog.cpp:1286
 msgid "File Encoding for C:"
 msgstr ""
 
-#: optiondialog.cpp:1288
+#: optiondialog.cpp:1291
 msgid "File Encoding for Merge Output and Saving:"
 msgstr ""
 
-#: optiondialog.cpp:1293
+#: optiondialog.cpp:1296
 msgid "File Encoding for Preprocessor Files:"
 msgstr ""
 
-#: optiondialog.cpp:1302
+#: optiondialog.cpp:1305
 msgid "Right To Left Language"
 msgstr ""
 
-#: optiondialog.cpp:1305
+#: optiondialog.cpp:1308
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
 msgstr ""
 
-#: optiondialog.cpp:1315
+#: optiondialog.cpp:1318
 #, fuzzy
 msgid "Integration"
 msgstr "Амал"
 
-#: optiondialog.cpp:1315
+#: optiondialog.cpp:1318
 msgid "Integration Settings"
 msgstr ""
 
-#: optiondialog.cpp:1325
+#: optiondialog.cpp:1328
 msgid "Command line options to ignore:"
 msgstr ""
 
-#: optiondialog.cpp:1330
+#: optiondialog.cpp:1333
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
 "other tools.\n"
@@ -2044,7 +2034,7 @@ msgid ""
 "This will suppress the \"Unknown option\"-error."
 msgstr ""
 
-#: optiondialog.cpp:1383
+#: optiondialog.cpp:1386
 msgid ""
 "You selected a variable width font.\n"
 "\n"
@@ -2054,20 +2044,20 @@ msgid ""
 "Do you want to continue or do you want to select another font."
 msgstr ""
 
-#: optiondialog.cpp:1387
+#: optiondialog.cpp:1390
 msgid "Incompatible Font"
 msgstr ""
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1391
 msgid "Continue at Own Risk"
 msgstr ""
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1391
 #, fuzzy
 msgid "Select Another Font"
 msgstr "Интихоб кунед Рах(ҳо)-ро Аз С"
 
-#: optiondialog.cpp:1413
+#: optiondialog.cpp:1416
 msgid "This resets all options. Not only those of the current topic."
 msgstr ""
 
@@ -2203,11 +2193,11 @@ msgstr "Ҷустуҷу дар ҷамъбаст"
 msgid "Search Complete"
 msgstr "Якҷояшавӣ ба анҷом расид"
 
-#: pdiff.cpp:2129
+#: pdiff.cpp:2130
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2129
+#: pdiff.cpp:2130
 #, fuzzy
 msgid "Error while adding manual diff range"
 msgstr "Хатогӣ дар вақти эҷод кардани каталог."
@@ -2396,6 +2386,14 @@ msgstr "Нигоҳ куни нашуд."
 #: smalldialogs.cpp:541
 msgid "Opening and closing parentheses don't match in regular expression."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Save Directory Merge State ..."
+#~ msgstr "Хатогӣ дар вақти хониши каталог"
+
+#, fuzzy
+#~ msgid "Load Directory Merge State ..."
+#~ msgstr "Хатогӣ дар вақти хониши каталог"
 
 #, fuzzy
 #~ msgid "Synchronize Directories"

@@ -88,7 +88,7 @@ translation is within KDE-libs or within Qt. But the translations are available:
 
 For Qt-strings in $QTDIR/translations (already as .qm-files)
 
-For KDE-libs in the CVS-repository, where we can reuse the previous trick to get 
+For KDE-libs in the SVN-repository, where we can reuse the previous trick to get 
 all kdelibs*.po-files:
 
    for i in `cat subdirs`; do wget http://websvn.kde.org/*checkout*/trunk/l10n/$i/messages/kdelibs/kdelibs.po -O kdelibs_$i.po; done

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
-"POT-Creation-Date: 2006-04-10 11:07+0200\n"
+"POT-Creation-Date: 2006-05-15 11:12+0200\n"
 "PO-Revision-Date: 2005-02-26 19:41+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian\n"
@@ -63,7 +63,7 @@ msgstr ""
 "\n"
 "Predobrada poklapanja linija će sada biti isključena."
 
-#: diff.cpp:1617 diff.cpp:1631
+#: diff.cpp:1587 diff.cpp:1601
 msgid ""
 "Data loss error:\n"
 "If it is reproducable please contact the author.\n"
@@ -71,7 +71,7 @@ msgstr ""
 "Greška, gubitak podataka:\n"
 "Ako je možete ponoviti, kontaktirajte autora.\n"
 
-#: diff.cpp:1619 diff.cpp:1633
+#: diff.cpp:1589 diff.cpp:1603
 msgid "Severe Internal Error"
 msgstr "Ozbiljna unutrašnja greška"
 
@@ -259,7 +259,7 @@ msgstr "Ovo utiče na sve operacije stapanja."
 msgid "Changing All Merge Operations"
 msgstr "Menjam sve operacije stapanja"
 
-#: directorymergewindow.cpp:803 mergeresultwindow.cpp:284
+#: directorymergewindow.cpp:803 mergeresultwindow.cpp:285
 msgid "C&ontinue"
 msgstr "&Nastavi"
 
@@ -652,16 +652,6 @@ msgstr "Sažmi sve poddirektorijume"
 msgid "Unfold All Subdirs"
 msgstr "Raširi sve poddirektorijume"
 
-#: directorymergewindow.cpp:2865
-#, fuzzy
-msgid "Save Directory Merge State ..."
-msgstr "Stapanje direktorijuma"
-
-#: directorymergewindow.cpp:2866
-#, fuzzy
-msgid "Load Directory Merge State ..."
-msgstr "Stapanje direktorijuma"
-
 #: directorymergewindow.cpp:2867
 msgid "Choose A for All Items"
 msgstr "Izaberi A za sve stavke"
@@ -737,7 +727,7 @@ msgstr "Obriši A i B"
 msgid "Merge to A && B"
 msgstr "Stopi u A i B"
 
-#: fileaccess.cpp:563
+#: fileaccess.cpp:581
 msgid ""
 "While trying to make a backup, deleting an older backup failed. \n"
 "Filename: "
@@ -745,7 +735,7 @@ msgstr ""
 "U toku pokušaja da se napravi rezerva, brisanje starije rezerve nije uspelo.\n"
 "Ime fajla: "
 
-#: fileaccess.cpp:570
+#: fileaccess.cpp:588
 msgid ""
 "While trying to make a backup, renaming failed. \n"
 "Filenames: "
@@ -753,53 +743,53 @@ msgstr ""
 "U toku pokušaja da se napravi rezerva, preimenovanje nije uspelo.\n"
 "Imena fajlova: "
 
-#: fileaccess.cpp:592
+#: fileaccess.cpp:610
 #, c-format
 msgid "Getting file status: %1"
 msgstr "Dobavljam status fajla: %1"
 
-#: fileaccess.cpp:635
+#: fileaccess.cpp:653
 #, c-format
 msgid "Reading file: %1"
 msgstr "Čitam fajl: %1"
 
-#: fileaccess.cpp:671
+#: fileaccess.cpp:689
 #, c-format
 msgid "Writing file: %1"
 msgstr "Pišem fajl: %1"
 
-#: fileaccess.cpp:699
+#: fileaccess.cpp:717
 msgid "Out of memory"
 msgstr "Nema memorije"
 
-#: fileaccess.cpp:734
+#: fileaccess.cpp:752
 #, c-format
 msgid "Making directory: %1"
 msgstr "Pravim direktorijum: %1"
 
-#: fileaccess.cpp:754
+#: fileaccess.cpp:772
 #, c-format
 msgid "Removing directory: %1"
 msgstr "Uklanjam direktorijum: %1"
 
-#: fileaccess.cpp:769
+#: fileaccess.cpp:787
 #, c-format
 msgid "Removing file: %1"
 msgstr "Uklanjam fajl: %1"
 
-#: fileaccess.cpp:785
+#: fileaccess.cpp:803
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Pravim simboličku vezu: %1 -> %2"
 
-#: fileaccess.cpp:811
+#: fileaccess.cpp:829
 msgid "Renaming file: %1 -> %2"
 msgstr "Uklanjam fajl: %1 -> %2"
 
-#: fileaccess.cpp:847
+#: fileaccess.cpp:865
 msgid "Copying file: %1 -> %2"
 msgstr "Kopiram fajl: %1 -> %2"
 
-#: fileaccess.cpp:861
+#: fileaccess.cpp:879
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for reading failed. Filename: %1"
@@ -807,7 +797,7 @@ msgstr ""
 "Greška tokom operacije kopiranja fajlova: Otvaranje fajla za čitanje nije "
 "uspelo. Ime fajla: %1"
 
-#: fileaccess.cpp:867
+#: fileaccess.cpp:885
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for writing failed. Filename: %1"
@@ -815,23 +805,23 @@ msgstr ""
 "Greška tokom operacije kopiranja fajlova: Otvaranje fajla za pisanje nije "
 "uspelo. Ime fajla: %1"
 
-#: fileaccess.cpp:882
+#: fileaccess.cpp:900
 #, c-format
 msgid "Error during file copy operation: Reading failed. Filename: %1"
 msgstr ""
 "Greška tokom operacije kopiranja fajlova: Čitanje nije uspelo. Ime fajla: %1"
 
-#: fileaccess.cpp:891
+#: fileaccess.cpp:909
 #, c-format
 msgid "Error during file copy operation: Writing failed. Filename: %1"
 msgstr ""
 "Greška tokom operacije kopiranja fajlova: Pisanje nije uspelo. Ime fajla: %1"
 
-#: fileaccess.cpp:1187
+#: fileaccess.cpp:1205
 msgid "Reading directory: "
 msgstr "Čitam direktorijum: "
 
-#: fileaccess.cpp:1316
+#: fileaccess.cpp:1334
 #, c-format
 msgid "Listing directory: %1"
 msgstr "Listam direktorijum: %1"
@@ -1180,11 +1170,11 @@ msgstr "Uključujem/isključujem traku sa alatom..."
 msgid "Toggle the statusbar..."
 msgstr "Uključi/isključi statusnu traku..."
 
-#: kdiff3_part.cpp:155 kdiff3_part.cpp:223
+#: kdiff3_part.cpp:155 kdiff3_part.cpp:224
 msgid "Couldn't find files for comparison."
 msgstr "Nisam mogao da nađem fajlove za poređenje."
 
-#: kdiff3_part.cpp:290
+#: kdiff3_part.cpp:291
 msgid "KDiff3Part"
 msgstr "KDiff3Part"
 
@@ -1284,13 +1274,13 @@ msgid "+ Many thanks to those who reported bugs and contributed ideas!"
 msgstr ""
 "+ Mnogo hvala onima koji su prijavljivali greške i doprineli svojim idejama!"
 
-#: mergeresultwindow.cpp:132 mergeresultwindow.cpp:936
-#: mergeresultwindow.cpp:950 mergeresultwindow.cpp:962
-#: mergeresultwindow.cpp:974
+#: mergeresultwindow.cpp:133 mergeresultwindow.cpp:937
+#: mergeresultwindow.cpp:951 mergeresultwindow.cpp:963
+#: mergeresultwindow.cpp:975
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "Broj preostalih nerešenih sukoba: %1 (od kojih su %2 beli razmaci)"
 
-#: mergeresultwindow.cpp:282
+#: mergeresultwindow.cpp:283
 msgid ""
 "The output has been modified.\n"
 "If you continue your changes will be lost."
@@ -1298,55 +1288,55 @@ msgstr ""
 "Izlaz je izmenjen.\n"
 "Ako nastavite, vaše izmene će biti izgubljene."
 
-#: mergeresultwindow.cpp:794 pdiff.cpp:507
+#: mergeresultwindow.cpp:795 pdiff.cpp:507
 msgid "All input files are binary equal."
 msgstr "Svi ulazni fajlovi su binarno jednaki."
 
-#: mergeresultwindow.cpp:796
+#: mergeresultwindow.cpp:797
 msgid "All input files contain the same text."
 msgstr "Svi ulazni fajlovi sadrže isti tekst."
 
-#: mergeresultwindow.cpp:798
+#: mergeresultwindow.cpp:799
 msgid ""
 "Files A and B are binary equal.\n"
 msgstr ""
 "Fajlovi A i B su binarno jednaki.\n"
 
-#: mergeresultwindow.cpp:799
+#: mergeresultwindow.cpp:800
 msgid ""
 "Files A and B have equal text. \n"
 msgstr ""
 "Fajlovi A i B imaju jednak tekst.\n"
 
-#: mergeresultwindow.cpp:800
+#: mergeresultwindow.cpp:801
 msgid ""
 "Files A and C are binary equal.\n"
 msgstr ""
 "Fajlovi A i C su binarno jednaki.\n"
 
-#: mergeresultwindow.cpp:801
+#: mergeresultwindow.cpp:802
 msgid ""
 "Files A and C have equal text. \n"
 msgstr ""
 "Fajlovi A i C imaju jednak tekst.\n"
 
-#: mergeresultwindow.cpp:802
+#: mergeresultwindow.cpp:803
 msgid ""
 "Files B and C are binary equal.\n"
 msgstr ""
 "Fajlovi B i C su binarno jednaki.\n"
 
-#: mergeresultwindow.cpp:803
+#: mergeresultwindow.cpp:804
 msgid ""
 "Files B and C have equal text. \n"
 msgstr ""
 "Fajlovi B i C imaju jednak tekst.\n"
 
-#: mergeresultwindow.cpp:809
+#: mergeresultwindow.cpp:810
 msgid "Total number of conflicts: "
 msgstr "Ukupan broj sukoba: "
 
-#: mergeresultwindow.cpp:810
+#: mergeresultwindow.cpp:811
 msgid ""
 "\n"
 "Nr of automatically solved conflicts: "
@@ -1354,7 +1344,7 @@ msgstr ""
 "\n"
 "Broj automatski rešenih sukoba: "
 
-#: mergeresultwindow.cpp:811
+#: mergeresultwindow.cpp:812
 msgid ""
 "\n"
 "Nr of unsolved conflicts: "
@@ -1362,31 +1352,31 @@ msgstr ""
 "\n"
 "Broj nerešenih sukoba: "
 
-#: mergeresultwindow.cpp:813
+#: mergeresultwindow.cpp:814
 msgid "Conflicts"
 msgstr "Sukobi"
 
-#: mergeresultwindow.cpp:1649
+#: mergeresultwindow.cpp:1650
 msgid "<No src line>"
 msgstr "<Nema izv. linije>"
 
-#: mergeresultwindow.cpp:1657
+#: mergeresultwindow.cpp:1658
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Sukob u stapanju (samo beli razmaci)>"
 
-#: mergeresultwindow.cpp:1659 mergeresultwindow.cpp:2445
+#: mergeresultwindow.cpp:1660 mergeresultwindow.cpp:2446
 msgid "<Merge Conflict>"
 msgstr "<Sukob u stapanju>"
 
-#: mergeresultwindow.cpp:1729
+#: mergeresultwindow.cpp:1730
 msgid "Output"
 msgstr "Izlaz"
 
-#: mergeresultwindow.cpp:1731
+#: mergeresultwindow.cpp:1732
 msgid "[Modified]"
 msgstr "[Izmenjen]"
 
-#: mergeresultwindow.cpp:2655
+#: mergeresultwindow.cpp:2656
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved.\n"
@@ -1394,11 +1384,11 @@ msgstr ""
 "Još uvek nisu rešeni svi sukobi.\n"
 "Fajl nije snimljen.\n"
 
-#: mergeresultwindow.cpp:2657
+#: mergeresultwindow.cpp:2658
 msgid "Conflicts Left"
 msgstr "Preostali sukobi"
 
-#: mergeresultwindow.cpp:2669
+#: mergeresultwindow.cpp:2670
 msgid ""
 "\n"
 "\n"
@@ -1408,11 +1398,11 @@ msgstr ""
 "\n"
 "Pravljenje rezerve nije uspelo. Fajl nije snimljen."
 
-#: mergeresultwindow.cpp:2669 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2670 mergeresultwindow.cpp:2710
 msgid "File Save Error"
 msgstr "Greška u snimanju fajla"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2710
 msgid "Error while writing."
 msgstr "Greška prilikom pisanja."
 
@@ -2025,11 +2015,11 @@ msgstr ""
 msgid "Regional Settings"
 msgstr "Regionalna podešavanja"
 
-#: optiondialog.cpp:1211
+#: optiondialog.cpp:1214
 msgid "Language (restart required)"
 msgstr "Jezik (potrebno ponovno pokretanje)"
 
-#: optiondialog.cpp:1243
+#: optiondialog.cpp:1246
 msgid ""
 "Choose the language of the GUI-strings or \"Auto\".\n"
 "For a change of language to take place, quit and restart KDiff3."
@@ -2037,11 +2027,11 @@ msgstr ""
 "Izaberite jezik za ispise u programu ili „Auto“.\n"
 "Da bi izmena jezika bila primenjena, zatvorite i ponovo pokrenite KDiff3."
 
-#: optiondialog.cpp:1261
+#: optiondialog.cpp:1264
 msgid "Use the same encoding for everything:"
 msgstr "Koristi isto kodiranje za sve:"
 
-#: optiondialog.cpp:1264
+#: optiondialog.cpp:1267
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
@@ -2049,35 +2039,35 @@ msgstr ""
 "Uključivanjem ovog možete promeniti sva kodiranja promenom samo prvog.\n"
 "Isključite ovo ako su potrebna različita pojedina podešavanja."
 
-#: optiondialog.cpp:1269
+#: optiondialog.cpp:1272
 msgid "Note: Local Encoding is "
 msgstr "Napomna: Lokalno kodiranje je "
 
-#: optiondialog.cpp:1273
+#: optiondialog.cpp:1276
 msgid "File Encoding for A:"
 msgstr "Kodiranje fajla za A:"
 
-#: optiondialog.cpp:1278
+#: optiondialog.cpp:1281
 msgid "File Encoding for B:"
 msgstr "Kodiranje fajla za B:"
 
-#: optiondialog.cpp:1283
+#: optiondialog.cpp:1286
 msgid "File Encoding for C:"
 msgstr "Kodiranje fajla za C:"
 
-#: optiondialog.cpp:1288
+#: optiondialog.cpp:1291
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "Kodiranje fajla za stopljeni izlaz i snimanje:"
 
-#: optiondialog.cpp:1293
+#: optiondialog.cpp:1296
 msgid "File Encoding for Preprocessor Files:"
 msgstr "Kodiranje fajla za preprocesorke fajlove:"
 
-#: optiondialog.cpp:1302
+#: optiondialog.cpp:1305
 msgid "Right To Left Language"
 msgstr "Jezici s desna u levo"
 
-#: optiondialog.cpp:1305
+#: optiondialog.cpp:1308
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
@@ -2085,21 +2075,21 @@ msgstr ""
 "Neki jezici se čitaju s desna u levo.\n"
 "Ovo podešavanje će prilagoditi tome prikazivač i uređivač."
 
-#: optiondialog.cpp:1315
+#: optiondialog.cpp:1318
 #, fuzzy
 msgid "Integration"
 msgstr "Operacija"
 
-#: optiondialog.cpp:1315
+#: optiondialog.cpp:1318
 #, fuzzy
 msgid "Integration Settings"
 msgstr "Regionalna podešavanja"
 
-#: optiondialog.cpp:1325
+#: optiondialog.cpp:1328
 msgid "Command line options to ignore:"
 msgstr ""
 
-#: optiondialog.cpp:1330
+#: optiondialog.cpp:1333
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
 "other tools.\n"
@@ -2107,7 +2097,7 @@ msgid ""
 "This will suppress the \"Unknown option\"-error."
 msgstr ""
 
-#: optiondialog.cpp:1383
+#: optiondialog.cpp:1386
 msgid ""
 "You selected a variable width font.\n"
 "\n"
@@ -2123,19 +2113,19 @@ msgstr ""
 "\n"
 "Želite li da nastavite ili ćete izabrati drugi font?"
 
-#: optiondialog.cpp:1387
+#: optiondialog.cpp:1390
 msgid "Incompatible Font"
 msgstr "Nekompatibilan font"
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1391
 msgid "Continue at Own Risk"
 msgstr "Nastavite na sopstveni rizik"
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1391
 msgid "Select Another Font"
 msgstr "Izaberite drugi font"
 
-#: optiondialog.cpp:1413
+#: optiondialog.cpp:1416
 msgid "This resets all options. Not only those of the current topic."
 msgstr "Ovo resetuje sve opcije. Ne samo one u tekućoj temi."
 
@@ -2276,11 +2266,11 @@ msgstr "Pretraga je završena."
 msgid "Search Complete"
 msgstr "Pretraga je gotova"
 
-#: pdiff.cpp:2129
+#: pdiff.cpp:2130
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2129
+#: pdiff.cpp:2130
 #, fuzzy
 msgid "Error while adding manual diff range"
 msgstr "Greška u toku pravljenja direktorijuma."
@@ -2465,6 +2455,14 @@ msgstr "Snimanje nije uspelo."
 #: smalldialogs.cpp:541
 msgid "Opening and closing parentheses don't match in regular expression."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Save Directory Merge State ..."
+#~ msgstr "Stapanje direktorijuma"
+
+#, fuzzy
+#~ msgid "Load Directory Merge State ..."
+#~ msgstr "Stapanje direktorijuma"
 
 #, fuzzy
 #~ msgid "Synchronize Directories"

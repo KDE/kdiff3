@@ -1,0 +1,41 @@
+Diff-Ext for KDiff3 - Readme
+============================
+
+Authors: 
+   Sergey Zorin (Author of diff-ext, see http://diff-ext.sourceforge.net)
+   Joachim Eibl (KDiff3-specific extensions and integration, see http://kdiff3.sourceforge.net)
+
+
+Copyright (c):
+Original Diff-Ext:     Copyright (c) 2003-2006, Sergey Zorin, All rights reserved.
+Extensions for KDiff3: Copyright (c) 2006, Joachim Eibl
+
+
+License: See file LICENSE in this subdirectory
+
+
+Building:
+Via MinGW-compiler package (http://www.mingw.org/): Compile via gnu-make (Makefile)
+Via MSVC2005: Use vcproj-file.
+
+
+Installation:
+For basic testing you can run "regsvr32 diff_ext_for_kdiff3.dll".
+To use all features the installation that comes with the KDiff3-setup*.exe is recommended.
+See also the nsi-file available on the KDiff3-subversion-repository:
+http://svn.sourceforge.net/viewvc/*checkout*/kdiff3/trunk/kdiff3/windows_installer/kdiff3.nsi
+
+
+Translation:
+If you would like help translating diff-ext-for-kdiff3 please copy the diff_ext.pot to
+diff_ext_xx.po (where xx is the language-shortcut).
+Then edit that file and fill in the msgstr-string for each respective msgid-string.
+Then place the for in the KDiff3-translations subdirectory.
+Use the language selection within KDiff3 to switch the language or set the language shortcut
+in the registry HKEY_CURRENT_USER\Software\KDiff3\diff-ext: Language
+If everything works, please send me the created file.
+
+
+Have fun,
+Joachim
+

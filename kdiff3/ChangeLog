@@ -1,3 +1,21 @@
+Version 0.9.91 - 2006/10/29
+===========================
+- Encoding auto detection
+- Fix for crash after double click below last line
+- Saving of maximized window-state (Patch by Robert Vock)
+- Separated Merge-options in own tab because "Diff and Merge"-options tab got too big.
+- When pasting multiple lines into openfile dialog only first line is kept
+- Drawing in directory view fixed.
+- When specifying a separate output dir then for equal files a copy operation will also be offered.
+- Windows specific:
+  - Windows installer problems fixed for users without admin-rights
+  - Fix for slow startup problem on Windows (Patch by Manfred Koehler)
+  - New: diff-ext-for-kdiff3 - Shell extension (originally by Sergey Zorin)
+- Qt4-version:
+  - Saving of merge-result didn't work.
+  - Start external processes directly without cmd.exe-window
+  - Rewrote everything requiring Qt3-support
+
 Version 0.9.90 - 2006/05/14
 ===========================
 - Fixed KIO-problems of type "File exists" with tempfiles (introduced in 0.9.89)

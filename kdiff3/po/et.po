@@ -1,13 +1,13 @@
 # translation of kdiff3.po to Estonian
 # Copyright (C) 2003 Free Software Foundation, Inc.
-# Marek Laane <bald@online.ee>, 2003-2005.
+# Marek Laane <bald@starman.ee>, 2003-2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
-"POT-Creation-Date: 2006-04-10 11:07+0200\n"
-"PO-Revision-Date: 2005-02-07 13:24+0300\n"
-"Last-Translator: Marek Laane <bald@online.ee>\n"
+"POT-Creation-Date: 2006-05-15 11:12+0200\n"
+"PO-Revision-Date: 2006-07-15 19:10+0300\n"
+"Last-Translator: Marek Laane <bald@starman.ee>\n"
 "Language-Team: Estonian <kde-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgstr "Marek Laane"
 msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
-msgstr "bald@online.ee"
+msgstr "bald@starman.ee"
 
 #: diff.cpp:245
 msgid "Writing clipboard data to temp file failed."
@@ -62,7 +62,7 @@ msgstr ""
 "\n"
 "Praegu lülitatakse reasobivuse eeltöötluse käsu rakendamine välja."
 
-#: diff.cpp:1617 diff.cpp:1631
+#: diff.cpp:1587 diff.cpp:1601
 msgid ""
 "Data loss error:\n"
 "If it is reproducable please contact the author.\n"
@@ -70,14 +70,13 @@ msgstr ""
 "Andmekaotuse viga:\n"
 "Kui see on korratav, võta palun ühendust autoriga.\n"
 
-#: diff.cpp:1619 diff.cpp:1633
+#: diff.cpp:1589 diff.cpp:1603
 msgid "Severe Internal Error"
 msgstr "Tõsine seesmine viga"
 
 #: difftextwindow.cpp:1637 kdiff3.cpp:743
-#, fuzzy
 msgid "Top line"
-msgstr "Ülarida %1"
+msgstr "Ülarida"
 
 #: difftextwindow.cpp:1647
 msgid "End"
@@ -257,7 +256,7 @@ msgstr "See mõjutab kõiki ühendamisoperatsioone."
 msgid "Changing All Merge Operations"
 msgstr "Kõigi ühendamisoperatsioonide muutmine"
 
-#: directorymergewindow.cpp:803 mergeresultwindow.cpp:284
+#: directorymergewindow.cpp:803 mergeresultwindow.cpp:285
 msgid "C&ontinue"
 msgstr "&Jätka"
 
@@ -621,9 +620,8 @@ msgid "Dest: "
 msgstr "Sihtkoht: "
 
 #: directorymergewindow.cpp:2771
-#, fuzzy
 msgid "Save Directory Merge State As..."
-msgstr "Kataloogi ühendamine"
+msgstr "Kataloogi ühendamisoleku salvestamine..."
 
 #: directorymergewindow.cpp:2858
 msgid "Start/Continue Directory Merge"
@@ -649,16 +647,6 @@ msgstr "Ava kõik alamkataloogid"
 msgid "Unfold All Subdirs"
 msgstr "Sule kõik alamkataloogid"
 
-#: directorymergewindow.cpp:2865
-#, fuzzy
-msgid "Save Directory Merge State ..."
-msgstr "Kataloogi ühendamine"
-
-#: directorymergewindow.cpp:2866
-#, fuzzy
-msgid "Load Directory Merge State ..."
-msgstr "Kataloogi ühendamine"
-
 #: directorymergewindow.cpp:2867
 msgid "Choose A for All Items"
 msgstr "Vali A kõigile elementidele"
@@ -681,34 +669,31 @@ msgstr "Ei ühtki operatsiooni kõigile elementidele"
 
 #: directorymergewindow.cpp:2876
 msgid "Show Identical Files"
-msgstr ""
+msgstr "Näita identseid faile"
 
 #: directorymergewindow.cpp:2877
-#, fuzzy
 msgid "Show Different Files"
-msgstr "Erinevate failide arv:"
+msgstr "Näita erinevaid faile"
 
 #: directorymergewindow.cpp:2878
 msgid "Show Files only in A"
-msgstr ""
+msgstr "Näita ainult A faile"
 
 #: directorymergewindow.cpp:2879
 msgid "Show Files only in B"
-msgstr ""
+msgstr "Näita ainult B faile"
 
 #: directorymergewindow.cpp:2880
 msgid "Show Files only in C"
-msgstr ""
+msgstr "Näita ainult C faile"
 
 #: directorymergewindow.cpp:2884
-#, fuzzy
 msgid "Compare Explicitly Selected Files"
-msgstr "Võrdle valitud faili"
+msgstr "Võrdle valitud faile"
 
 #: directorymergewindow.cpp:2885
-#, fuzzy
 msgid "Merge Explicitly Selected Files"
-msgstr "Võrdle valitud faili"
+msgstr "Ühenda valitud failid"
 
 #: directorymergewindow.cpp:2887 directorymergewindow.cpp:2894
 msgid "Do Nothing"
@@ -734,7 +719,7 @@ msgstr "Kustuta A ja B"
 msgid "Merge to A && B"
 msgstr "Ühenda A-sse ja B-sse"
 
-#: fileaccess.cpp:563
+#: fileaccess.cpp:581
 msgid ""
 "While trying to make a backup, deleting an older backup failed. \n"
 "Filename: "
@@ -742,7 +727,7 @@ msgstr ""
 "Varukoopia tegemisel ebaõnnestus vanema varukoopia kustutamine. \n"
 "Faili nimi: "
 
-#: fileaccess.cpp:570
+#: fileaccess.cpp:588
 msgid ""
 "While trying to make a backup, renaming failed. \n"
 "Filenames: "
@@ -750,53 +735,53 @@ msgstr ""
 "Varukoopia tegemisel ebaõnnestus ümbernimetamine. \n"
 "Failide nimed: "
 
-#: fileaccess.cpp:592
+#: fileaccess.cpp:610
 #, c-format
 msgid "Getting file status: %1"
 msgstr "Faili staatuse hankimine: %1"
 
-#: fileaccess.cpp:635
+#: fileaccess.cpp:653
 #, c-format
 msgid "Reading file: %1"
 msgstr "Faili lugemine: %1"
 
-#: fileaccess.cpp:671
+#: fileaccess.cpp:689
 #, c-format
 msgid "Writing file: %1"
 msgstr "Faili kirjutamine: %1"
 
-#: fileaccess.cpp:699
+#: fileaccess.cpp:717
 msgid "Out of memory"
 msgstr "Mälu napib"
 
-#: fileaccess.cpp:734
+#: fileaccess.cpp:752
 #, c-format
 msgid "Making directory: %1"
 msgstr "Kataloogi loomine: %1"
 
-#: fileaccess.cpp:754
+#: fileaccess.cpp:772
 #, c-format
 msgid "Removing directory: %1"
 msgstr "Kataloogi eemaldamine: %1"
 
-#: fileaccess.cpp:769
+#: fileaccess.cpp:787
 #, c-format
 msgid "Removing file: %1"
 msgstr "Faili eemaldamine: %1"
 
-#: fileaccess.cpp:785
+#: fileaccess.cpp:803
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Nimeviida loomine: %1 -> %2"
 
-#: fileaccess.cpp:811
+#: fileaccess.cpp:829
 msgid "Renaming file: %1 -> %2"
 msgstr "Faili ümbernimetamine: %1 -> %2"
 
-#: fileaccess.cpp:847
+#: fileaccess.cpp:865
 msgid "Copying file: %1 -> %2"
 msgstr "Faili kopeerimine: %1 -> %2"
 
-#: fileaccess.cpp:861
+#: fileaccess.cpp:879
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for reading failed. Filename: %1"
@@ -804,7 +789,7 @@ msgstr ""
 "Viga faili kopeerimise operatsioonil: faili avamine lugemiseks ebaõnnestus. "
 "Failinimi: %1"
 
-#: fileaccess.cpp:867
+#: fileaccess.cpp:885
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for writing failed. Filename: %1"
@@ -812,36 +797,34 @@ msgstr ""
 "Viga faili kopeerimise operatsioonil: faili avamine kirjutamiseks ebaõnnestus. "
 "Failinimi: %1"
 
-#: fileaccess.cpp:882
+#: fileaccess.cpp:900
 #, c-format
 msgid "Error during file copy operation: Reading failed. Filename: %1"
 msgstr ""
 "Viga faili kopeerimise operatsioonil: lugemine ebaõnnestus. Failinimi: %1"
 
-#: fileaccess.cpp:891
+#: fileaccess.cpp:909
 #, c-format
 msgid "Error during file copy operation: Writing failed. Filename: %1"
 msgstr ""
 "Viga faili kopeerimise operatsioonil: kirjutamine ebaõnnestus. Failinimi: %1"
 
-#: fileaccess.cpp:1187
+#: fileaccess.cpp:1205
 msgid "Reading directory: "
 msgstr "Kataloogi lugemine: "
 
-#: fileaccess.cpp:1316
+#: fileaccess.cpp:1334
 #, c-format
 msgid "Listing directory: %1"
 msgstr "Kataloogi uurimine: %1"
 
 #: kdiff3.cpp:142
-#, fuzzy
 msgid "Current Configuration:"
-msgstr "Käesoleva elemendi sünkroniseerimisoperatsioon"
+msgstr "Aktiivne seadistus:"
 
 #: kdiff3.cpp:147
-#, fuzzy
 msgid "Config Option Error:"
-msgstr "Viga faili avamisel"
+msgstr "Seadistusvõtme viga:"
 
 #: kdiff3.cpp:187
 msgid "Option --auto used, but no output file specified."
@@ -878,7 +861,7 @@ msgstr "Salvestab käesoleva dokumendi nimega..."
 
 #: kdiff3.cpp:422
 msgid "Print the differences"
-msgstr ""
+msgstr "Trükib erinevused"
 
 #: kdiff3.cpp:424
 msgid "Quits the application"
@@ -898,7 +881,7 @@ msgstr "Lõikepuhvri sisu asetamine praegusesse asukohta"
 
 #: kdiff3.cpp:432
 msgid "Select everything in current window"
-msgstr ""
+msgstr "Kogu aktiivse akna sisu valimine"
 
 #: kdiff3.cpp:434
 msgid "Search for a string"
@@ -1045,21 +1028,19 @@ msgstr "Määra erinevused konfliktideks"
 
 #: kdiff3.cpp:502
 msgid "Run Regular Expression Auto Merge"
-msgstr ""
+msgstr "Käivita regulaaravaldis automaatühendamisel"
 
 #: kdiff3.cpp:503
-#, fuzzy
 msgid "Automatically Solve History Conflicts"
-msgstr "Lahenda automaatselt lihtsad konfliktid"
+msgstr "Lahenda automaatselt ajalookonfliktid"
 
 #: kdiff3.cpp:504
 msgid "Split Diff At Selection"
-msgstr ""
+msgstr "Jaga erinevused valiku juures"
 
 #: kdiff3.cpp:505
-#, fuzzy
 msgid "Join Selected Diffs"
-msgstr "Võrdle valitud faili"
+msgstr "Ühenda valitud erinevused"
 
 #: kdiff3.cpp:507
 msgid "Show Window A"
@@ -1099,11 +1080,11 @@ msgstr "Reamurdmine võrdlusakendes"
 
 #: kdiff3.cpp:517
 msgid "Add Manual Diff Alignment"
-msgstr ""
+msgstr "Lisa käsitsi samasus"
 
 #: kdiff3.cpp:518
 msgid "Clear All Manual Diff Alignments"
-msgstr ""
+msgstr "Eemalda kõik käsitsi määratud samasused"
 
 #: kdiff3.cpp:523
 msgid "Focus Prev Window"
@@ -1151,22 +1132,20 @@ msgid "Saving file with a new filename..."
 msgstr "Faili salvestamine uue nimega..."
 
 #: kdiff3.cpp:722
-#, fuzzy
 msgid "Printing..."
-msgstr "Väljumine..."
+msgstr "Trükkimine..."
 
 #: kdiff3.cpp:728 kdiff3.cpp:890
 msgid "Printing aborted."
-msgstr ""
+msgstr "Trükkimine katkestati"
 
 #: kdiff3.cpp:860
 msgid "Selection"
-msgstr ""
+msgstr "Valik"
 
 #: kdiff3.cpp:886
-#, fuzzy
 msgid "Printing completed."
-msgstr "Ühendamisoperatsioon lõpetatud."
+msgstr "Trükkimine lõpetatud."
 
 #: kdiff3.cpp:896
 msgid "Exiting..."
@@ -1180,11 +1159,11 @@ msgstr "Tööriistariba lülitamine..."
 msgid "Toggle the statusbar..."
 msgstr "Olekuriba lülitamine..."
 
-#: kdiff3_part.cpp:155 kdiff3_part.cpp:223
+#: kdiff3_part.cpp:155 kdiff3_part.cpp:224
 msgid "Couldn't find files for comparison."
 msgstr "Faile võrdlemiseks ei leitud."
 
-#: kdiff3_part.cpp:290
+#: kdiff3_part.cpp:291
 msgid "KDiff3Part"
 msgstr "KDiff3 komponent"
 
@@ -1247,15 +1226,16 @@ msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
 "\"AutoAdvance=1\""
 msgstr ""
+"Seadistusvõtme tühistamine. Tuleb kasutada iga võtme jaoks eraldi, nt. --cs "
+"\"AutoAdvance=1\""
 
 #: main.cpp:54
 msgid "Show list of config settings and current values."
-msgstr ""
+msgstr "Seadistuste nimekirja ja võtmete kehtivate väärtuste näitamine."
 
 #: main.cpp:55
-#, fuzzy
 msgid "Use a different config file."
-msgstr "Erinevate failide arv:"
+msgstr "Muu seadistustefaili kasutamine."
 
 #: main.cpp:59
 msgid "file1 to open (base, if not specified via --base)"
@@ -1271,7 +1251,7 @@ msgstr "avatav fail3"
 
 #: main.cpp:93
 msgid "Ignored. (User defined.)"
-msgstr ""
+msgstr "Ignoreeritakse (kasutaja määratud)"
 
 #. i18n: file kdiff3_part.rc line 16
 #: main.cpp:171 rc.cpp:9
@@ -1284,13 +1264,13 @@ msgid "+ Many thanks to those who reported bugs and contributed ideas!"
 msgstr ""
 "+ palju tänu kõigile, kes andsid teada vigadest ja pakkusid välja uusi mõtteid!"
 
-#: mergeresultwindow.cpp:132 mergeresultwindow.cpp:936
-#: mergeresultwindow.cpp:950 mergeresultwindow.cpp:962
-#: mergeresultwindow.cpp:974
+#: mergeresultwindow.cpp:133 mergeresultwindow.cpp:937
+#: mergeresultwindow.cpp:951 mergeresultwindow.cpp:963
+#: mergeresultwindow.cpp:975
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "Lahendamata konfliktide arv: %1 (neist %2 on tühimärgierinevused)"
 
-#: mergeresultwindow.cpp:282
+#: mergeresultwindow.cpp:283
 msgid ""
 "The output has been modified.\n"
 "If you continue your changes will be lost."
@@ -1298,55 +1278,55 @@ msgstr ""
 "Väljundit on muudetud.\n"
 "Kui jätkad, lähevad sinu muudatused kaotsi."
 
-#: mergeresultwindow.cpp:794 pdiff.cpp:507
+#: mergeresultwindow.cpp:795 pdiff.cpp:507
 msgid "All input files are binary equal."
 msgstr "Kõik sisendfailid on binaarselt võrdsed."
 
-#: mergeresultwindow.cpp:796
+#: mergeresultwindow.cpp:797
 msgid "All input files contain the same text."
 msgstr "Kõik sisendfailid sisaldavad ühesugust teksti."
 
-#: mergeresultwindow.cpp:798
+#: mergeresultwindow.cpp:799
 msgid ""
 "Files A and B are binary equal.\n"
 msgstr ""
 "Failid A ja B on binaarselt võrdsed.\n"
 
-#: mergeresultwindow.cpp:799
+#: mergeresultwindow.cpp:800
 msgid ""
 "Files A and B have equal text. \n"
 msgstr ""
 "Failid A ja B on ühesuguse tekstiga. \n"
 
-#: mergeresultwindow.cpp:800
+#: mergeresultwindow.cpp:801
 msgid ""
 "Files A and C are binary equal.\n"
 msgstr ""
 "Failid A ja C on binaarselt võrdsed.\n"
 
-#: mergeresultwindow.cpp:801
+#: mergeresultwindow.cpp:802
 msgid ""
 "Files A and C have equal text. \n"
 msgstr ""
 "Failid A ja C on ühesuguse tekstiga. \n"
 
-#: mergeresultwindow.cpp:802
+#: mergeresultwindow.cpp:803
 msgid ""
 "Files B and C are binary equal.\n"
 msgstr ""
 "Failid B ja C on binaarselt võrdsed.\n"
 
-#: mergeresultwindow.cpp:803
+#: mergeresultwindow.cpp:804
 msgid ""
 "Files B and C have equal text. \n"
 msgstr ""
 "Failid B ja C on ühesuguse tekstiga. \n"
 
-#: mergeresultwindow.cpp:809
+#: mergeresultwindow.cpp:810
 msgid "Total number of conflicts: "
 msgstr "Konfliktide koguarv: "
 
-#: mergeresultwindow.cpp:810
+#: mergeresultwindow.cpp:811
 msgid ""
 "\n"
 "Nr of automatically solved conflicts: "
@@ -1354,7 +1334,7 @@ msgstr ""
 "\n"
 "Automaatselt lahendatud konfliktide arv: "
 
-#: mergeresultwindow.cpp:811
+#: mergeresultwindow.cpp:812
 msgid ""
 "\n"
 "Nr of unsolved conflicts: "
@@ -1362,31 +1342,31 @@ msgstr ""
 "\n"
 "Lahendamata konfliktide arv: "
 
-#: mergeresultwindow.cpp:813
+#: mergeresultwindow.cpp:814
 msgid "Conflicts"
 msgstr "Konfliktid"
 
-#: mergeresultwindow.cpp:1649
+#: mergeresultwindow.cpp:1650
 msgid "<No src line>"
 msgstr "<Lähterida puudub>"
 
-#: mergeresultwindow.cpp:1657
+#: mergeresultwindow.cpp:1658
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Ühendamise konflikt (ainult tühimärgid)>"
 
-#: mergeresultwindow.cpp:1659 mergeresultwindow.cpp:2445
+#: mergeresultwindow.cpp:1660 mergeresultwindow.cpp:2446
 msgid "<Merge Conflict>"
 msgstr "<Ühendamise konflikt>"
 
-#: mergeresultwindow.cpp:1729
+#: mergeresultwindow.cpp:1730
 msgid "Output"
 msgstr "Väljund"
 
-#: mergeresultwindow.cpp:1731
+#: mergeresultwindow.cpp:1732
 msgid "[Modified]"
 msgstr "[Muudetud]"
 
-#: mergeresultwindow.cpp:2655
+#: mergeresultwindow.cpp:2656
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved.\n"
@@ -1394,11 +1374,11 @@ msgstr ""
 "Kõik konfliktid pole veel lahendatud.\n"
 "Faili ei salvestatud.\n"
 
-#: mergeresultwindow.cpp:2657
+#: mergeresultwindow.cpp:2658
 msgid "Conflicts Left"
 msgstr "Järelejäänud konfliktid"
 
-#: mergeresultwindow.cpp:2669
+#: mergeresultwindow.cpp:2670
 msgid ""
 "\n"
 "\n"
@@ -1408,11 +1388,11 @@ msgstr ""
 "\n"
 "Varukoopia loomine ebaõnnestus. Faili ei salvestatud."
 
-#: mergeresultwindow.cpp:2669 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2670 mergeresultwindow.cpp:2710
 msgid "File Save Error"
 msgstr "Faili salvestamise viga"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2710
 msgid "Error while writing."
 msgstr "Kirjutamise viga."
 
@@ -1453,13 +1433,12 @@ msgid "Color"
 msgstr "Värv"
 
 #: optiondialog.cpp:539
-#, fuzzy
 msgid "Colors Settings"
-msgstr "Lokaale seadistused"
+msgstr "Värviseadistused"
 
 #: optiondialog.cpp:553
 msgid "Editor and Diff Views:"
-msgstr ""
+msgstr "Redaktori ja erinevuse vaated:"
 
 #: optiondialog.cpp:561
 msgid "Foreground color:"
@@ -1499,34 +1478,34 @@ msgstr "Praeguse vahemiku erinevuse tausta värv:"
 
 #: optiondialog.cpp:622
 msgid "Color for manually aligned difference ranges:"
-msgstr ""
+msgstr "Käsitsi määratud samasuse vahemiku värv:"
 
 #: optiondialog.cpp:627
-#, fuzzy
 msgid "Directory Comparison View:"
-msgstr "Kataloogi võrdlemise olek"
+msgstr "Kataloogi võrdlemise vaade:"
 
 #: optiondialog.cpp:633
 msgid "Newest file color:"
-msgstr ""
+msgstr "Uusima faili värv:"
 
 #: optiondialog.cpp:636
 msgid ""
 "Changing this color will only be effective when starting the next directory "
 "comparison."
 msgstr ""
+"Seda värvi muudetakse alles siis, kui alustad järgmist kataloogide võrdlemist."
 
 #: optiondialog.cpp:641
 msgid "Oldest file color:"
-msgstr ""
+msgstr "Vanima faili värv:"
 
 #: optiondialog.cpp:648
 msgid "Middle age file color:"
-msgstr ""
+msgstr "Keskmise vanusega faili värv:"
 
 #: optiondialog.cpp:655
 msgid "Color for missing files:"
-msgstr ""
+msgstr "Puuduvate failide värv:"
 
 #: optiondialog.cpp:667
 msgid "Editor"
@@ -1587,12 +1566,10 @@ msgstr ""
 "DOS/Windows: CR+LF; Unix: LF; sealjuures CR=0D, LF=0A"
 
 #: optiondialog.cpp:729
-#, fuzzy
 msgid "Diff and Merge"
 msgstr "Erinevus ja ühendamine"
 
 #: optiondialog.cpp:729
-#, fuzzy
 msgid "Diff and Merge Settings"
 msgstr "Erinevuse ja ühendamise seadistused"
 
@@ -1704,11 +1681,11 @@ msgstr "Tühimärkide käsitlemine kolme faili ühendamisel:"
 
 #: optiondialog.cpp:828
 msgid "Automatic Merge Regular Expression"
-msgstr ""
+msgstr "Automaatühendamise regulaaravaldis"
 
 #: optiondialog.cpp:837 smalldialogs.cpp:379
 msgid "Auto merge regular expression:"
-msgstr ""
+msgstr "Automaatühendamise regulaaravaldis:"
 
 #: optiondialog.cpp:841
 msgid ""
@@ -1717,24 +1694,30 @@ msgid ""
 "When a line with a conflict matches the regular expression then\n"
 "- if available - C, otherwise B will be chosen."
 msgstr ""
+"Regulaaravaldis ridadele, kus KDiff3 peab automaatselt valima ühe allika.\n"
+"Kui konflikti sisaldav rida sobib regulaaravaldisega, siis\n"
+"valitakse - kui võimalik - C, vastasel juhul B."
 
 #: optiondialog.cpp:847
 msgid "Run regular expression auto merge on merge start"
 msgstr ""
+"Regulaarühendusega automaatühendamise käivitamine ühendamise alustamisel"
 
 #: optiondialog.cpp:849
 msgid ""
 "Run the merge for auto merge regular expressions\n"
 "immediately when a merge starts.\n"
 msgstr ""
+"Regulaarühendusega automaatühendamine käivitatakse\n"
+"kohe ühendamise alustamisel.\n"
 
 #: optiondialog.cpp:854
 msgid "Version Control History Merging"
-msgstr ""
+msgstr "Versioonikonrolli ajaloo ühendamine"
 
 #: optiondialog.cpp:863 smalldialogs.cpp:406
 msgid "History start regular expression:"
-msgstr ""
+msgstr "Ajaloo alguse regulaaravaldis:"
 
 #: optiondialog.cpp:867
 msgid ""
@@ -1742,10 +1725,13 @@ msgid ""
 "Usually this line contains the \"$Log$\"-keyword.\n"
 "Default value: \".*\\$Log.*\\$.*\""
 msgstr ""
+"Regulaaravaldis versioonikontrolli ajaloo kirje alguse jaoks.\n"
+"Tavaliselt leidub seal real võtmesõna \"$Log$\".\n"
+"Vaikimisi: \".*\\$Log.*\\$.*\""
 
 #: optiondialog.cpp:873 smalldialogs.cpp:435
 msgid "History entry start regular expression:"
-msgstr ""
+msgstr "Ajaloo kirje alguse regulaaravaldis:"
 
 #: optiondialog.cpp:885
 msgid ""
@@ -1756,18 +1742,24 @@ msgid ""
 "If left empty, then KDiff3 assumes that empty lines separate history entries.\n"
 "See the documentation for details."
 msgstr ""
+"Versioonikontrolli ajaloo kirje koosneb mitmest reast.\n"
+"Siin saab määrata esimese rea (ilma alustava kommentaarita) tuvastamiseks "
+"mõeldud regulaaravaldise.\n"
+"Sulgudega saab rühmitada võtmeid, mida tahad kasutada sortimiseks.\n"
+"Kui see tühjaks jätta, eeldab KDiff3, et ajaloo kirjeid eraldavad tühjad read.\n"
+"Täpsemalt räägib sellest käsiraamat."
 
 #: optiondialog.cpp:893
 msgid "History merge sorting"
-msgstr ""
+msgstr "Ajaloo ühendamise sortimine"
 
 #: optiondialog.cpp:895
 msgid "Sort version control history by a key."
-msgstr ""
+msgstr "Versioonikontrolli ajaloo sortimine võtmete järgi."
 
 #: optiondialog.cpp:905
 msgid "History entry start sort key order:"
-msgstr ""
+msgstr "Ajaloo sortimisvõtmete järjekord:"
 
 #: optiondialog.cpp:909
 msgid ""
@@ -1778,22 +1770,30 @@ msgid ""
 "If left empty, then no sorting will be done.\n"
 "See the documentation for details."
 msgstr ""
+"Kõik ajalookirjete alguse määramiseks mõeldud regulaaravaldistes\n"
+"kasutatud sulud rühmitavad võtmed, mida saab tarvitada sortimiseks.\n"
+"Määra siin võtmete järjekord (need on siin järjekorras alates 1),\n"
+"kasutades eraldajana koma ',' (nt. \"4,5,6,1,2,3,7\").\n"
+"Kui see tühjaks jätta, siis midagi ei sordita.\n"
+"Täpsemalt räägib sellest käsiraamat."
 
 #: optiondialog.cpp:920
 msgid "Merge version control history on merge start"
-msgstr ""
+msgstr "Versioonikontrolli ajaloo ühendamine ühendamise alustamisel"
 
 #: optiondialog.cpp:922
 msgid "Run version control history automerge on merge start."
 msgstr ""
+"Versioonikontrolli ajaloo automaatühendamise käivitamine kohe ühendamise "
+"alustamisel."
 
 #: optiondialog.cpp:926
 msgid "Test your regular expressions"
-msgstr ""
+msgstr "Regulaaravaldiste test"
 
 #: optiondialog.cpp:931
 msgid "Irrelevant merge command:"
-msgstr ""
+msgstr "Ebaolulise ühendamise käsk:"
 
 #: optiondialog.cpp:935
 msgid ""
@@ -1801,6 +1801,9 @@ msgid ""
 "when no other relevant changes were detected.\n"
 "Called with the parameters: filename1 filename2 filename3"
 msgstr ""
+"Määramise korral käivitatakse see skript\n"
+"pärast automaatühendamist, kui muid muudatusi ei avastada.\n"
+"See kutsutakse välja parameetritega: failinimi1 failinimi2 failinimi3"
 
 #: optiondialog.cpp:945
 msgid "Directory Merge"
@@ -1906,7 +1909,7 @@ msgstr ""
 
 #: optiondialog.cpp:1035
 msgid "Case sensitive filename comparison"
-msgstr ""
+msgstr "Tõstutundlik failinimede võrdlemine"
 
 #: optiondialog.cpp:1038
 msgid ""
@@ -1915,6 +1918,9 @@ msgid ""
 "Set this option if the case of the names must match. (Default for Windows is "
 "off, otherwise on.)"
 msgstr ""
+"Kataloogide võrdlemisel võrreldakse failide või kataloogide nimesid.\n"
+"Selle valiku sisselülitamisel peab sobima ka nimede tähesuurus (Windowsis on "
+"see vaikimisi välja lülitatud, muidu sees)."
 
 #: optiondialog.cpp:1042
 msgid "File Comparison Mode"
@@ -2024,11 +2030,11 @@ msgstr ""
 msgid "Regional Settings"
 msgstr "Lokaale seadistused"
 
-#: optiondialog.cpp:1211
+#: optiondialog.cpp:1214
 msgid "Language (restart required)"
 msgstr "Keel (vajalik taaskäivitus)"
 
-#: optiondialog.cpp:1243
+#: optiondialog.cpp:1246
 msgid ""
 "Choose the language of the GUI-strings or \"Auto\".\n"
 "For a change of language to take place, quit and restart KDiff3."
@@ -2036,11 +2042,11 @@ msgstr ""
 "Vali GUI stringide keel või \"Auto\".\n"
 "Keele tegelikuks muutmiseks tuleb KDiff3 sulgeda ja uuesti käivitada."
 
-#: optiondialog.cpp:1261
+#: optiondialog.cpp:1264
 msgid "Use the same encoding for everything:"
 msgstr "Kõikjal kasutatakse kodeeringut:"
 
-#: optiondialog.cpp:1264
+#: optiondialog.cpp:1267
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
@@ -2048,35 +2054,35 @@ msgstr ""
 "Lubab muuta kõiki kodeeringuid ainult esimest kodeeringut muutes.\n"
 "Kui vaja on erinevaid määratlusi, lülita välja."
 
-#: optiondialog.cpp:1269
+#: optiondialog.cpp:1272
 msgid "Note: Local Encoding is "
 msgstr "Märkus: kohalik kodeering on "
 
-#: optiondialog.cpp:1273
+#: optiondialog.cpp:1276
 msgid "File Encoding for A:"
 msgstr "A kodeering:"
 
-#: optiondialog.cpp:1278
+#: optiondialog.cpp:1281
 msgid "File Encoding for B:"
 msgstr "B kodeering:"
 
-#: optiondialog.cpp:1283
+#: optiondialog.cpp:1286
 msgid "File Encoding for C:"
 msgstr "C kodeering"
 
-#: optiondialog.cpp:1288
+#: optiondialog.cpp:1291
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "Kodeering ühendamisväljundil ja salvestamisel:"
 
-#: optiondialog.cpp:1293
+#: optiondialog.cpp:1296
 msgid "File Encoding for Preprocessor Files:"
 msgstr "Eelprotsessori failide kodeering:"
 
-#: optiondialog.cpp:1302
+#: optiondialog.cpp:1305
 msgid "Right To Left Language"
 msgstr "Paremalt-vasakule keeled"
 
-#: optiondialog.cpp:1305
+#: optiondialog.cpp:1308
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
@@ -2084,29 +2090,31 @@ msgstr ""
 "Mõningaid keeli loetakse ja kirjutatakse paremalt vasakule.\n"
 "Selle valikuga saab vastavalt muuta näitajat ja redaktorit."
 
-#: optiondialog.cpp:1315
-#, fuzzy
+#: optiondialog.cpp:1318
 msgid "Integration"
-msgstr "Operatsioon"
+msgstr "Integreerimine"
 
-#: optiondialog.cpp:1315
-#, fuzzy
+#: optiondialog.cpp:1318
 msgid "Integration Settings"
-msgstr "Lokaale seadistused"
+msgstr "Integreerimisseadistused"
 
-#: optiondialog.cpp:1325
+#: optiondialog.cpp:1328
 msgid "Command line options to ignore:"
-msgstr ""
+msgstr "Ignoreeritavad käsurea võtmed:"
 
-#: optiondialog.cpp:1330
+#: optiondialog.cpp:1333
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
 "other tools.\n"
 "Several values can be specified if separated via ';'\n"
 "This will suppress the \"Unknown option\"-error."
 msgstr ""
+"Käsurea võtmete nimekiri, mida ignoreeritakse, kui KDiff3 kasutavad teised "
+"tööriistad.\n"
+"Mitme väärtuse andmisel tuleb need eraldada semikooloniga (;).\n"
+"See väldib vigu \"Tundmatu võti\"."
 
-#: optiondialog.cpp:1383
+#: optiondialog.cpp:1386
 msgid ""
 "You selected a variable width font.\n"
 "\n"
@@ -2122,19 +2130,19 @@ msgstr ""
 "\n"
 "Kas soovid jätkata või valid uue fondi?"
 
-#: optiondialog.cpp:1387
+#: optiondialog.cpp:1390
 msgid "Incompatible Font"
 msgstr "Sobimatu font"
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1391
 msgid "Continue at Own Risk"
 msgstr "Jätkan oma riskil"
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1391
 msgid "Select Another Font"
 msgstr "Valin uue fondi"
 
-#: optiondialog.cpp:1413
+#: optiondialog.cpp:1416
 msgid "This resets all options. Not only those of the current topic."
 msgstr "See lähtestab kõik valikud, mitte ainult praeguse teema omad."
 
@@ -2207,23 +2215,21 @@ msgid "Linediff: A <-> C"
 msgstr "Reaerinevus: A <-> C"
 
 #: pdiff.cpp:509
-#, fuzzy
 msgid "All input files contain the same text, but are not binary equal."
-msgstr "Kõik sisendfailid sisaldavad ühesugust teksti."
+msgstr ""
+"Kõik sisendfailid sisaldavad ühesugust teksti, aga pole binaarselt võrdsed."
 
 #: pdiff.cpp:511 pdiff.cpp:513 pdiff.cpp:515
-#, fuzzy
 msgid ""
 "Files %1 and %2 are binary equal.\n"
 msgstr ""
-"Failid B ja C on binaarselt võrdsed.\n"
+"Failid %1 ja %2 on binaarselt võrdsed.\n"
 
 #: pdiff.cpp:512 pdiff.cpp:514 pdiff.cpp:516
-#, fuzzy
 msgid ""
 "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
-"Failid A ja B on binaarselt võrdsed.\n"
+"Failid %1 ja %2 sisaldavad ühesugust teksti, aga pole binaarselt võrdsed. \n"
 
 #: pdiff.cpp:526
 msgid ""
@@ -2275,14 +2281,13 @@ msgstr "Otsing lõpetatud."
 msgid "Search Complete"
 msgstr "Otsing lõpetatud"
 
-#: pdiff.cpp:2129
+#: pdiff.cpp:2130
 msgid "Nothing is selected in either diff input window."
-msgstr ""
+msgstr "Erinevuste sisendakendes pole midagi valitud."
 
-#: pdiff.cpp:2129
-#, fuzzy
+#: pdiff.cpp:2130
 msgid "Error while adding manual diff range"
-msgstr "Viga kataloogi loomisel."
+msgstr "Viga käsitsi määratud samasuse vahemiku lisamisel"
 
 #. i18n: file kdiff3_part.rc line 4
 #: rc.cpp:3
@@ -2358,19 +2363,19 @@ msgstr "C (lisavõimalus):"
 
 #: smalldialogs.cpp:108
 msgid "Swap/Copy Names ..."
-msgstr ""
+msgstr "Vaheta/kopeeri nimed..."
 
 #: smalldialogs.cpp:114 smalldialogs.cpp:115 smalldialogs.cpp:116
 msgid "Swap %1<->%2"
-msgstr ""
+msgstr "Vaheta %1<->%2"
 
 #: smalldialogs.cpp:117 smalldialogs.cpp:118 smalldialogs.cpp:119
 msgid "Copy %1->Output"
-msgstr ""
+msgstr "Kopeeri %1->väljund"
 
 #: smalldialogs.cpp:120 smalldialogs.cpp:121 smalldialogs.cpp:122
 msgid "Swap %1<->Output"
-msgstr ""
+msgstr "Vaheta %1<->väljund"
 
 #: smalldialogs.cpp:129
 msgid "Output (optional):"
@@ -2410,88 +2415,60 @@ msgstr "&Otsi"
 
 #: smalldialogs.cpp:376
 msgid "Regular Expression Tester"
-msgstr ""
+msgstr "Regulaaravaldise test"
 
 #: smalldialogs.cpp:387
 msgid "Example auto merge line:"
-msgstr ""
+msgstr "Automaatühendamise näidisrida:"
 
 #: smalldialogs.cpp:389
 msgid "For auto merge test copy a line as used in your files."
-msgstr ""
+msgstr "Kopeeri automaatühendamise testimiseks rida oma failist."
 
 #: smalldialogs.cpp:395 smalldialogs.cpp:424 smalldialogs.cpp:461
 msgid "Match result:"
-msgstr ""
+msgstr "Sobivuse tulemus:"
 
 #: smalldialogs.cpp:414
 msgid "Example history start line (with leading comment):"
-msgstr ""
+msgstr "Ajaloo alguse näidisrida (alustava kommentaariga):"
 
 #: smalldialogs.cpp:417
 msgid ""
 "Copy a history start line as used in your files,\n"
 "including the leading comment."
 msgstr ""
+"Kopeeri oma failist ajaloo alguse rida,\n"
+"kaasa arvatud alustav kommentaar."
 
 #: smalldialogs.cpp:443
 msgid "History sort key order:"
-msgstr ""
+msgstr "Ajaloo sortimisvõtme järjekord:"
 
 #: smalldialogs.cpp:451
 msgid "Example history entry start line (without leading comment):"
-msgstr ""
+msgstr "Ajalookirje alguse näidisrida (alustava kommentaarita):"
 
 #: smalldialogs.cpp:453
 msgid ""
 "Copy a history entry start line as used in your files,\n"
 "but omit the leading comment."
 msgstr ""
+"Kopeeri oma failist ajalookirje alguse rida,\n"
+"kuid ilma alustava kommentaarita."
 
 #: smalldialogs.cpp:468
 msgid "Sort key result:"
-msgstr ""
+msgstr "Sorteerimisvõtme tulemus:"
 
 #: smalldialogs.cpp:519 smalldialogs.cpp:529 smalldialogs.cpp:550
 msgid "Match success."
-msgstr ""
+msgstr "Leiti sobivus."
 
 #: smalldialogs.cpp:523 smalldialogs.cpp:533 smalldialogs.cpp:556
-#, fuzzy
 msgid "Match failed."
-msgstr "Salvestamine ebaõnnestus."
+msgstr "Sobivust ei leitud."
 
 #: smalldialogs.cpp:541
 msgid "Opening and closing parentheses don't match in regular expression."
-msgstr ""
-
-#, fuzzy
-#~ msgid "Synchronize Directories"
-#~ msgstr "Kataloogide sünkroniseerimine"
-
-#, fuzzy
-#~ msgid "Copy Newer Files Instead of Merging"
-#~ msgstr "Ühendamise asemel kopeeritakse uuem (ebaturvaline)"
-
-#~ msgid "List only deltas"
-#~ msgstr "Ainult erinevuste näitamine"
-
-#~ msgid "Files and directories without change will not appear in the list."
-#~ msgstr "Nimekirjas ei näidata muutusteta faile ja katalooge."
-
-#, fuzzy
-#~ msgid "no selection"
-#~ msgstr "Valiku automaatne kopeerimine"
-
-#, fuzzy
-#~ msgid "Manually match lines"
-#~ msgstr "Käsitsivalik"
-
-#~ msgid "Has no effect. For compatibility with certain tools."
-#~ msgstr "Toimeta. Ühilduvuseks teatud tööriistadega."
-
-#~ msgid "For compatibility with certain tools."
-#~ msgstr "Ühilduvuseks teatud tööriistadega."
-
-#~ msgid "Colors in Editor & Diff Output"
-#~ msgstr "Redaktori ja erinevuse väljundi värvid"
+msgstr "Regulaaravaldises ei sobi alustavad ja lõpetavad sulud."

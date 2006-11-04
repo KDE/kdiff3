@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
-"POT-Creation-Date: 2006-04-10 11:07+0200\n"
+"POT-Creation-Date: 2006-05-15 11:12+0200\n"
 "PO-Revision-Date: 2006-04-12 20:37+0300\n"
 "Last-Translator: Spiros Georgaras <sngeorgaras@otenet.gr>\n"
 "Language-Team: Greek <i18ngr@lists.hellug.gr>\n"
@@ -63,7 +63,7 @@ msgstr ""
 "\n"
 "Η δυνατότητα προεπεξεργασίας αντιστοίχησης γραμμών θα απενεργοποιηθεί τώρα."
 
-#: diff.cpp:1617 diff.cpp:1631
+#: diff.cpp:1587 diff.cpp:1601
 msgid ""
 "Data loss error:\n"
 "If it is reproducable please contact the author.\n"
@@ -71,7 +71,7 @@ msgstr ""
 "Σφάλμα απώλειας δεδομένων:\n"
 "Αν αναπαράγεται το σφάλμα, παρακαλώ επικοινωνήστε με το συγγραφέα.\n"
 
-#: diff.cpp:1619 diff.cpp:1633
+#: diff.cpp:1589 diff.cpp:1603
 msgid "Severe Internal Error"
 msgstr "Σοβαρό εσωτερικό σφάλμα"
 
@@ -258,7 +258,7 @@ msgstr "Αυτό επηρεάζει όλες τις συγχωνεύσεις."
 msgid "Changing All Merge Operations"
 msgstr "Αλλαγή όλων των λειτουργιών συγχώνευσης"
 
-#: directorymergewindow.cpp:803 mergeresultwindow.cpp:284
+#: directorymergewindow.cpp:803 mergeresultwindow.cpp:285
 msgid "C&ontinue"
 msgstr "Συνέ&χεια"
 
@@ -661,14 +661,6 @@ msgstr "Αναδίπλωση όλων των υποκαταλόγων"
 msgid "Unfold All Subdirs"
 msgstr "Ανάπτυξη όλων των υποκαταλόγων"
 
-#: directorymergewindow.cpp:2865
-msgid "Save Directory Merge State ..."
-msgstr "Αποθήκευση κατάστασης συγχώνευσης καταλόγου..."
-
-#: directorymergewindow.cpp:2866
-msgid "Load Directory Merge State ..."
-msgstr "Φόρτωμα κατάστασης συγχώνευσης καταλόγου..."
-
 #: directorymergewindow.cpp:2867
 msgid "Choose A for All Items"
 msgstr "Επιλογή του Α για όλα τα αντικείμενα"
@@ -741,7 +733,7 @@ msgstr "Διαγραφή των A && B"
 msgid "Merge to A && B"
 msgstr "Συγχώνευση σε A && B"
 
-#: fileaccess.cpp:563
+#: fileaccess.cpp:581
 msgid ""
 "While trying to make a backup, deleting an older backup failed. \n"
 "Filename: "
@@ -750,7 +742,7 @@ msgstr ""
 "αντιγράφου ασφαλείας. \n"
 "Όνομα αρχείου: "
 
-#: fileaccess.cpp:570
+#: fileaccess.cpp:588
 msgid ""
 "While trying to make a backup, renaming failed. \n"
 "Filenames: "
@@ -758,53 +750,53 @@ msgstr ""
 "Αποτυχία μετονομασίας, κατά τη δημιουργία αντιγράφου ασφαλείας. \n"
 "Ονόματα αρχείων: "
 
-#: fileaccess.cpp:592
+#: fileaccess.cpp:610
 #, c-format
 msgid "Getting file status: %1"
 msgstr "Ανάκτηση κατάστασης αρχείου: %1"
 
-#: fileaccess.cpp:635
+#: fileaccess.cpp:653
 #, c-format
 msgid "Reading file: %1"
 msgstr "Ανάγνωση αρχείου: %1"
 
-#: fileaccess.cpp:671
+#: fileaccess.cpp:689
 #, c-format
 msgid "Writing file: %1"
 msgstr "Εγγραφή αρχείου: %1"
 
-#: fileaccess.cpp:699
+#: fileaccess.cpp:717
 msgid "Out of memory"
 msgstr "Τέλος μνήμης"
 
-#: fileaccess.cpp:734
+#: fileaccess.cpp:752
 #, c-format
 msgid "Making directory: %1"
 msgstr "Δημιουργία καταλόγου: %1"
 
-#: fileaccess.cpp:754
+#: fileaccess.cpp:772
 #, c-format
 msgid "Removing directory: %1"
 msgstr "Αφαίρεση καταλόγου: %1"
 
-#: fileaccess.cpp:769
+#: fileaccess.cpp:787
 #, c-format
 msgid "Removing file: %1"
 msgstr "Αφαίρεση αρχείου: %1"
 
-#: fileaccess.cpp:785
+#: fileaccess.cpp:803
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Δημιουργία συμβολικού δεσμού: %1 -> %2"
 
-#: fileaccess.cpp:811
+#: fileaccess.cpp:829
 msgid "Renaming file: %1 -> %2"
 msgstr "Μετονομασία αρχείου: %1 -> %2"
 
-#: fileaccess.cpp:847
+#: fileaccess.cpp:865
 msgid "Copying file: %1 -> %2"
 msgstr "Αντιγραφή αρχείου: %1 -> %2"
 
-#: fileaccess.cpp:861
+#: fileaccess.cpp:879
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for reading failed. Filename: %1"
@@ -812,7 +804,7 @@ msgstr ""
 "Σφάλμα κατά την αντιγραφή: Το άνοιγμα του αρχείου για ανάγνωση απέτυχε. Όνομα "
 "αρχείου: %1"
 
-#: fileaccess.cpp:867
+#: fileaccess.cpp:885
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for writing failed. Filename: %1"
@@ -820,21 +812,21 @@ msgstr ""
 "Σφάλμα κατά την αντιγραφή: Το άνοιγμα του αρχείου για εγγραφή απέτυχε. Όνομα "
 "αρχείου: %1"
 
-#: fileaccess.cpp:882
+#: fileaccess.cpp:900
 #, c-format
 msgid "Error during file copy operation: Reading failed. Filename: %1"
 msgstr "Σφάλμα κατά την αντιγραφή: Η ανάγνωση απέτυχε. Όνομα αρχείου: %1"
 
-#: fileaccess.cpp:891
+#: fileaccess.cpp:909
 #, c-format
 msgid "Error during file copy operation: Writing failed. Filename: %1"
 msgstr "Σφάλμα κατά την αντιγραφή: Η εγγραφή απέτυχε. Όνομα αρχείου: %1"
 
-#: fileaccess.cpp:1187
+#: fileaccess.cpp:1205
 msgid "Reading directory: "
 msgstr "Ανάγνωση καταλόγου: "
 
-#: fileaccess.cpp:1316
+#: fileaccess.cpp:1334
 #, c-format
 msgid "Listing directory: %1"
 msgstr "Εμφάνιση καταλόγου: %1"
@@ -927,7 +919,7 @@ msgstr "Ρύθμιση του KDiff3..."
 
 #: kdiff3.cpp:465
 msgid "Go to Current Delta"
-msgstr "Μετάβαση στη τρέχουσα διαφορά"
+msgstr "Μετάβαση στην τρέχουσα διαφορά"
 
 #: kdiff3.cpp:466
 msgid "Go to First Delta"
@@ -1183,11 +1175,11 @@ msgstr "Εναλλαγή γραμμής εργαλείων..."
 msgid "Toggle the statusbar..."
 msgstr "Εναλλαγή της γραμμής κατάστασης..."
 
-#: kdiff3_part.cpp:155 kdiff3_part.cpp:223
+#: kdiff3_part.cpp:155 kdiff3_part.cpp:224
 msgid "Couldn't find files for comparison."
 msgstr "Δε βρέθηκαν αρχεία για σύγκριση."
 
-#: kdiff3_part.cpp:290
+#: kdiff3_part.cpp:291
 msgid "KDiff3Part"
 msgstr "KDiff3Part"
 
@@ -1291,15 +1283,15 @@ msgid "+ Many thanks to those who reported bugs and contributed ideas!"
 msgstr ""
 "+ Πολλές ευχαριστίες σε όσους ανέφεραν σφάλματα και συνεισέφεραν ιδέες!"
 
-#: mergeresultwindow.cpp:132 mergeresultwindow.cpp:936
-#: mergeresultwindow.cpp:950 mergeresultwindow.cpp:962
-#: mergeresultwindow.cpp:974
+#: mergeresultwindow.cpp:133 mergeresultwindow.cpp:937
+#: mergeresultwindow.cpp:951 mergeresultwindow.cpp:963
+#: mergeresultwindow.cpp:975
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 "Αριθμός εναπομείναντων μη λυμένων συγκρούσεων: %1 ( %2 από τις οποίες αφορούν "
 "κενά)"
 
-#: mergeresultwindow.cpp:282
+#: mergeresultwindow.cpp:283
 msgid ""
 "The output has been modified.\n"
 "If you continue your changes will be lost."
@@ -1307,55 +1299,55 @@ msgstr ""
 "Η έξοδος έχει τροποποιηθεί.\n"
 "Αν συνεχίσετε οι αλλαγές σας θα χαθούν."
 
-#: mergeresultwindow.cpp:794 pdiff.cpp:507
+#: mergeresultwindow.cpp:795 pdiff.cpp:507
 msgid "All input files are binary equal."
 msgstr "Όλα τα αρχεία εισόδου είναι δυαδικά ίσα."
 
-#: mergeresultwindow.cpp:796
+#: mergeresultwindow.cpp:797
 msgid "All input files contain the same text."
 msgstr "Όλα τα αρχεία εισόδου περιέχουν το ίδιο κείμενο."
 
-#: mergeresultwindow.cpp:798
+#: mergeresultwindow.cpp:799
 msgid ""
 "Files A and B are binary equal.\n"
 msgstr ""
 "Τα αρχεία Α και Β είναι δυαδικά ίσα.\n"
 
-#: mergeresultwindow.cpp:799
+#: mergeresultwindow.cpp:800
 msgid ""
 "Files A and B have equal text. \n"
 msgstr ""
 "Τα αρχεία Α και Β περιέχουν το ίδιο κείμενο. \n"
 
-#: mergeresultwindow.cpp:800
+#: mergeresultwindow.cpp:801
 msgid ""
 "Files A and C are binary equal.\n"
 msgstr ""
 "Τα αρχεία Α και Γ είναι δυαδικά ίσα.\n"
 
-#: mergeresultwindow.cpp:801
+#: mergeresultwindow.cpp:802
 msgid ""
 "Files A and C have equal text. \n"
 msgstr ""
 "Τα αρχεία Α και Γ περιέχουν το ίδιο κείμενο. \n"
 
-#: mergeresultwindow.cpp:802
+#: mergeresultwindow.cpp:803
 msgid ""
 "Files B and C are binary equal.\n"
 msgstr ""
 "Τα αρχεία Β και Γ είναι δυαδικά ίσα.\n"
 
-#: mergeresultwindow.cpp:803
+#: mergeresultwindow.cpp:804
 msgid ""
 "Files B and C have equal text. \n"
 msgstr ""
 "Τα αρχεία Β και Γ περιέχουν το ίδιο κείμενο. \n"
 
-#: mergeresultwindow.cpp:809
+#: mergeresultwindow.cpp:810
 msgid "Total number of conflicts: "
 msgstr "Συνολικός αριθμός συγκρούσεων: "
 
-#: mergeresultwindow.cpp:810
+#: mergeresultwindow.cpp:811
 msgid ""
 "\n"
 "Nr of automatically solved conflicts: "
@@ -1363,7 +1355,7 @@ msgstr ""
 "\n"
 "Αριθμός αυτόματα λυμένων συγκρούσεων: "
 
-#: mergeresultwindow.cpp:811
+#: mergeresultwindow.cpp:812
 msgid ""
 "\n"
 "Nr of unsolved conflicts: "
@@ -1371,31 +1363,31 @@ msgstr ""
 "\n"
 "Αριθμός μη λυμένων συγκρούσεων: "
 
-#: mergeresultwindow.cpp:813
+#: mergeresultwindow.cpp:814
 msgid "Conflicts"
 msgstr "Συγκρούσεις"
 
-#: mergeresultwindow.cpp:1649
+#: mergeresultwindow.cpp:1650
 msgid "<No src line>"
 msgstr "<Χωρίς γραμμή πηγής>"
 
-#: mergeresultwindow.cpp:1657
+#: mergeresultwindow.cpp:1658
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Σύγκρουση συγχώνευσης (μόνο κενών)>"
 
-#: mergeresultwindow.cpp:1659 mergeresultwindow.cpp:2445
+#: mergeresultwindow.cpp:1660 mergeresultwindow.cpp:2446
 msgid "<Merge Conflict>"
 msgstr "<Σύγκρουση συγχώνευσης>"
 
-#: mergeresultwindow.cpp:1729
+#: mergeresultwindow.cpp:1730
 msgid "Output"
 msgstr "Έξοδος"
 
-#: mergeresultwindow.cpp:1731
+#: mergeresultwindow.cpp:1732
 msgid "[Modified]"
 msgstr "[Τροποποιημένο]"
 
-#: mergeresultwindow.cpp:2655
+#: mergeresultwindow.cpp:2656
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved.\n"
@@ -1403,11 +1395,11 @@ msgstr ""
 "Δεν έχουν επιλυθεί ακόμη όλες οι συγκρούσεις.\n"
 "Το αρχείο δεν αποθηκεύτηκε.\n"
 
-#: mergeresultwindow.cpp:2657
+#: mergeresultwindow.cpp:2658
 msgid "Conflicts Left"
 msgstr "Συγκρούσεις που απομένουν"
 
-#: mergeresultwindow.cpp:2669
+#: mergeresultwindow.cpp:2670
 msgid ""
 "\n"
 "\n"
@@ -1417,11 +1409,11 @@ msgstr ""
 "\n"
 "Η δημιουργία αντιγράφου ασφαλείας απέτυχε. Το αρχείο δεν αποθηκεύτηκε."
 
-#: mergeresultwindow.cpp:2669 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2670 mergeresultwindow.cpp:2710
 msgid "File Save Error"
 msgstr "Σφάλμα εγγραφής αρχείου"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2710
 msgid "Error while writing."
 msgstr "Σφάλμα κατά την εγγραφή."
 
@@ -2074,11 +2066,11 @@ msgstr ""
 msgid "Regional Settings"
 msgstr "Ρυθμίσεις περιοχής"
 
-#: optiondialog.cpp:1211
+#: optiondialog.cpp:1214
 msgid "Language (restart required)"
 msgstr "Γλώσσα (απαιτείται επανεκκίνηση)"
 
-#: optiondialog.cpp:1243
+#: optiondialog.cpp:1246
 msgid ""
 "Choose the language of the GUI-strings or \"Auto\".\n"
 "For a change of language to take place, quit and restart KDiff3."
@@ -2087,11 +2079,11 @@ msgstr ""
 "\"Αυτόματη\".\n"
 "Για να γίνει η αλλαγή της γλώσσας, επανεκκινήστε το KDiff3."
 
-#: optiondialog.cpp:1261
+#: optiondialog.cpp:1264
 msgid "Use the same encoding for everything:"
 msgstr "Χρήση της ίδιας κωδικοποίησης παντού:"
 
-#: optiondialog.cpp:1264
+#: optiondialog.cpp:1267
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
@@ -2101,35 +2093,35 @@ msgstr ""
 "Απενεργοποιήστε αυτήν την επιλογή αν χρειάζεστε διαφορετικές επί μέρους "
 "επιλογές."
 
-#: optiondialog.cpp:1269
+#: optiondialog.cpp:1272
 msgid "Note: Local Encoding is "
 msgstr "Σημείωση: Η τοπική κωδικοποίηση είναι "
 
-#: optiondialog.cpp:1273
+#: optiondialog.cpp:1276
 msgid "File Encoding for A:"
 msgstr "Κωδικοποίηση αρχείου για το Α:"
 
-#: optiondialog.cpp:1278
+#: optiondialog.cpp:1281
 msgid "File Encoding for B:"
 msgstr "Κωδικοποίηση αρχείου για το Β:"
 
-#: optiondialog.cpp:1283
+#: optiondialog.cpp:1286
 msgid "File Encoding for C:"
 msgstr "Κωδικοποίηση αρχείου για το Γ:"
 
-#: optiondialog.cpp:1288
+#: optiondialog.cpp:1291
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "Κωδικοποίηση αρχείου για την έξοδο συγχώνευσης και την αποθήκευση:"
 
-#: optiondialog.cpp:1293
+#: optiondialog.cpp:1296
 msgid "File Encoding for Preprocessor Files:"
 msgstr "Κωδικοποίηση για τα αρχεία του προεπεξεργαστή:"
 
-#: optiondialog.cpp:1302
+#: optiondialog.cpp:1305
 msgid "Right To Left Language"
 msgstr "Γλώσσας αναγνώσιμη από δεξιά στα  αριστερά"
 
-#: optiondialog.cpp:1305
+#: optiondialog.cpp:1308
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
@@ -2137,19 +2129,19 @@ msgstr ""
 "Μερικές γλώσσες διαβάζονται από δεξιά στα αριστερά.\n"
 "Αυτή η ρύθμιση θα τροποποίηση τον προβολέα και τον επεξεργαστή κατάλληλα."
 
-#: optiondialog.cpp:1315
+#: optiondialog.cpp:1318
 msgid "Integration"
 msgstr "Ενσωμάτωση"
 
-#: optiondialog.cpp:1315
+#: optiondialog.cpp:1318
 msgid "Integration Settings"
 msgstr "Ρυθμίσεις ενσωμάτωσης"
 
-#: optiondialog.cpp:1325
+#: optiondialog.cpp:1328
 msgid "Command line options to ignore:"
 msgstr "Επιλογές γραμμής εντολών για αγνόηση:"
 
-#: optiondialog.cpp:1330
+#: optiondialog.cpp:1333
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
 "other tools.\n"
@@ -2161,7 +2153,7 @@ msgstr ""
 "Μπορούν να ορισθούν πολλές τιμές διαχωρισμένες με το ';'\n"
 "Αυτό καταστέλλει το σφάλμα \"Άγνωστης επιλογής\"."
 
-#: optiondialog.cpp:1383
+#: optiondialog.cpp:1386
 msgid ""
 "You selected a variable width font.\n"
 "\n"
@@ -2176,19 +2168,19 @@ msgstr ""
 "μήκους ίσως έχετε προβλήματα κατά την επεξεργασία.\n"
 "Επιθυμείτε τη συνέχεια ή την επιλογή μιας άλλης γραμματοσειράς;"
 
-#: optiondialog.cpp:1387
+#: optiondialog.cpp:1390
 msgid "Incompatible Font"
 msgstr "Μη συμβατή γραμματοσειρά"
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1391
 msgid "Continue at Own Risk"
 msgstr "Συνέχεια με δικιά σας ευθύνη"
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1391
 msgid "Select Another Font"
 msgstr "Επιλέξτε μία άλλη γραμματοσειρά"
 
-#: optiondialog.cpp:1413
+#: optiondialog.cpp:1416
 msgid "This resets all options. Not only those of the current topic."
 msgstr ""
 "Αυτό επαναφέρει όλες τις επιλογές. Όχι μόνο αυτές του τρέχοντος θέματος."
@@ -2328,11 +2320,11 @@ msgstr "Η αναζήτηση ολοκληρώθηκε."
 msgid "Search Complete"
 msgstr "Η αναζήτηση ολοκληρώθηκε"
 
-#: pdiff.cpp:2129
+#: pdiff.cpp:2130
 msgid "Nothing is selected in either diff input window."
 msgstr "Δεν έχει επιλεγεί τίποτα σε κανένα παράθυρο εισαγωγής διαφορών."
 
-#: pdiff.cpp:2129
+#: pdiff.cpp:2130
 msgid "Error while adding manual diff range"
 msgstr "Σφάλμα κατά την προσθήκη χειροκίνητου εύρους διαφορών"
 
@@ -2527,3 +2519,9 @@ msgid "Opening and closing parentheses don't match in regular expression."
 msgstr ""
 "Αδυναμία ταιριάσματος παρενθέσεων ανοίγματος και κλεισίματος στην κανονική "
 "έκφραση."
+
+#~ msgid "Save Directory Merge State ..."
+#~ msgstr "Αποθήκευση κατάστασης συγχώνευσης καταλόγου..."
+
+#~ msgid "Load Directory Merge State ..."
+#~ msgstr "Φόρτωμα κατάστασης συγχώνευσης καταλόγου..."

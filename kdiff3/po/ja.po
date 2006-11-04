@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
-"POT-Creation-Date: 2006-04-10 11:07+0200\n"
+"POT-Creation-Date: 2006-05-15 11:12+0200\n"
 "PO-Revision-Date: 2006-04-14 21:25+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <Kdeveloper@kde.gr.jp>\n"
@@ -52,7 +52,7 @@ msgid ""
 "The line-matching-preprocessing command will be disabled now."
 msgstr ""
 
-#: diff.cpp:1617 diff.cpp:1631
+#: diff.cpp:1587 diff.cpp:1601
 msgid ""
 "Data loss error:\n"
 "If it is reproducable please contact the author.\n"
@@ -60,7 +60,7 @@ msgstr ""
 "データ損失エラー:\n"
 "もし再現するようなら作者にコンタクトをとって下さい\n"
 
-#: diff.cpp:1619 diff.cpp:1633
+#: diff.cpp:1589 diff.cpp:1603
 msgid "Severe Internal Error"
 msgstr "深刻な内部エラー"
 
@@ -244,7 +244,7 @@ msgstr "これはすべてのマージ操作に影響します"
 msgid "Changing All Merge Operations"
 msgstr "すべてのマージ操作を更新中"
 
-#: directorymergewindow.cpp:803 mergeresultwindow.cpp:284
+#: directorymergewindow.cpp:803 mergeresultwindow.cpp:285
 msgid "C&ontinue"
 msgstr "続行(&O)"
 
@@ -623,16 +623,6 @@ msgstr "すべてのサブディレクトリを畳み込み"
 msgid "Unfold All Subdirs"
 msgstr "すべてのサブディレクトリを展開"
 
-#: directorymergewindow.cpp:2865
-#, fuzzy
-msgid "Save Directory Merge State ..."
-msgstr "ディレクトリマージ"
-
-#: directorymergewindow.cpp:2866
-#, fuzzy
-msgid "Load Directory Merge State ..."
-msgstr "ディレクトリマージ"
-
 #: directorymergewindow.cpp:2867
 msgid "Choose A for All Items"
 msgstr "すべての項目について A を選択"
@@ -705,7 +695,7 @@ msgstr "A と B を削除"
 msgid "Merge to A && B"
 msgstr "A と B にマージ"
 
-#: fileaccess.cpp:563
+#: fileaccess.cpp:581
 msgid ""
 "While trying to make a backup, deleting an older backup failed. \n"
 "Filename: "
@@ -713,7 +703,7 @@ msgstr ""
 "バックアップ作成中、古いバックアップを削除に失敗.\n"
 "ファイル名: "
 
-#: fileaccess.cpp:570
+#: fileaccess.cpp:588
 msgid ""
 "While trying to make a backup, renaming failed. \n"
 "Filenames: "
@@ -721,79 +711,79 @@ msgstr ""
 "バックアップ作成中、名前変更に失敗\n"
 "ファイル名: "
 
-#: fileaccess.cpp:592
+#: fileaccess.cpp:610
 #, c-format
 msgid "Getting file status: %1"
 msgstr "ファイルの状態を取得中: %1"
 
-#: fileaccess.cpp:635
+#: fileaccess.cpp:653
 #, c-format
 msgid "Reading file: %1"
 msgstr "ファイルを読み込み中: %1"
 
-#: fileaccess.cpp:671
+#: fileaccess.cpp:689
 #, c-format
 msgid "Writing file: %1"
 msgstr "ファイルに書き込み中: %1"
 
-#: fileaccess.cpp:699
+#: fileaccess.cpp:717
 msgid "Out of memory"
 msgstr "メモリが足りません"
 
-#: fileaccess.cpp:734
+#: fileaccess.cpp:752
 #, c-format
 msgid "Making directory: %1"
 msgstr "ディレクトリ作成中: %1"
 
-#: fileaccess.cpp:754
+#: fileaccess.cpp:772
 #, c-format
 msgid "Removing directory: %1"
 msgstr "ディレクトリ削除中: %1"
 
-#: fileaccess.cpp:769
+#: fileaccess.cpp:787
 #, c-format
 msgid "Removing file: %1"
 msgstr "ファイル削除中: %1"
 
-#: fileaccess.cpp:785
+#: fileaccess.cpp:803
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "シンボリックリンク作成中: %1 -> %2"
 
-#: fileaccess.cpp:811
+#: fileaccess.cpp:829
 msgid "Renaming file: %1 -> %2"
 msgstr "ファイルの名称変更中: %1 -> %2"
 
-#: fileaccess.cpp:847
+#: fileaccess.cpp:865
 msgid "Copying file: %1 -> %2"
 msgstr "ファイルをコピー中: %1 -> %2"
 
-#: fileaccess.cpp:861
+#: fileaccess.cpp:879
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for reading failed. Filename: %1"
 msgstr "ファイルコピー中にエラー: ファイル読み込みに失敗. ファイル名: %1"
 
-#: fileaccess.cpp:867
+#: fileaccess.cpp:885
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for writing failed. Filename: %1"
 msgstr "ファイルコピー中にエラー: ファイル書き込みに失敗. ファイル名: %1"
 
-#: fileaccess.cpp:882
+#: fileaccess.cpp:900
 #, c-format
 msgid "Error during file copy operation: Reading failed. Filename: %1"
 msgstr "ファイルコピー中にエラー: 読み込みに失敗. ファイル名: %1"
 
-#: fileaccess.cpp:891
+#: fileaccess.cpp:909
 #, c-format
 msgid "Error during file copy operation: Writing failed. Filename: %1"
 msgstr "ファイルコピー中にエラー: 書き込みに失敗. ファイル名: %1"
 
-#: fileaccess.cpp:1187
+#: fileaccess.cpp:1205
 msgid "Reading directory: "
 msgstr "ディレクトリを読み込み中: "
 
-#: fileaccess.cpp:1316
+#: fileaccess.cpp:1334
 #, c-format
 msgid "Listing directory: %1"
 msgstr "ディレクトリをリスト中: %1"
@@ -860,7 +850,7 @@ msgstr "クリップボードの内容を現在の位置に貼付け"
 
 #: kdiff3.cpp:432
 msgid "Select everything in current window"
-msgstr "現在のウィンドウの全てを選択"
+msgstr "現在のウィンドウのすべてを選択"
 
 #: kdiff3.cpp:434
 msgid "Search for a string"
@@ -1035,7 +1025,7 @@ msgstr "次のウィンドウにフォーカス"
 
 #: kdiff3.cpp:512
 msgid "Normal Overview"
-msgstr "全て比較 (標準)"
+msgstr "すべて比較 (標準)"
 
 #: kdiff3.cpp:513
 msgid "A vs. B Overview"
@@ -1134,11 +1124,11 @@ msgstr "ツールバー切替中..."
 msgid "Toggle the statusbar..."
 msgstr "状態表示バーの表示を切替..."
 
-#: kdiff3_part.cpp:155 kdiff3_part.cpp:223
+#: kdiff3_part.cpp:155 kdiff3_part.cpp:224
 msgid "Couldn't find files for comparison."
 msgstr "比較するファイルをみつけることができませんでした"
 
-#: kdiff3_part.cpp:290
+#: kdiff3_part.cpp:291
 msgid "KDiff3Part"
 msgstr "KDiff3Part"
 
@@ -1239,13 +1229,13 @@ msgstr "KDiff3"
 msgid "+ Many thanks to those who reported bugs and contributed ideas!"
 msgstr ""
 
-#: mergeresultwindow.cpp:132 mergeresultwindow.cpp:936
-#: mergeresultwindow.cpp:950 mergeresultwindow.cpp:962
-#: mergeresultwindow.cpp:974
+#: mergeresultwindow.cpp:133 mergeresultwindow.cpp:937
+#: mergeresultwindow.cpp:951 mergeresultwindow.cpp:963
+#: mergeresultwindow.cpp:975
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "未解決の衝突の数: %1 (内 %2 は空白)"
 
-#: mergeresultwindow.cpp:282
+#: mergeresultwindow.cpp:283
 msgid ""
 "The output has been modified.\n"
 "If you continue your changes will be lost."
@@ -1253,55 +1243,55 @@ msgstr ""
 "出力が更新されました\n"
 "続行すると更新内容は失なわれます"
 
-#: mergeresultwindow.cpp:794 pdiff.cpp:507
+#: mergeresultwindow.cpp:795 pdiff.cpp:507
 msgid "All input files are binary equal."
 msgstr "すべての入力ファイルバイナリは同じです"
 
-#: mergeresultwindow.cpp:796
+#: mergeresultwindow.cpp:797
 msgid "All input files contain the same text."
 msgstr "すべての入力ファイルは同じテキストです"
 
-#: mergeresultwindow.cpp:798
+#: mergeresultwindow.cpp:799
 msgid ""
 "Files A and B are binary equal.\n"
 msgstr ""
 "ファイル A と B は同じバイナリです\n"
 
-#: mergeresultwindow.cpp:799
+#: mergeresultwindow.cpp:800
 msgid ""
 "Files A and B have equal text. \n"
 msgstr ""
 "ファイル A と B は同じテキストです\n"
 
-#: mergeresultwindow.cpp:800
+#: mergeresultwindow.cpp:801
 msgid ""
 "Files A and C are binary equal.\n"
 msgstr ""
 "ファイル A と C は同じバイナリです\n"
 
-#: mergeresultwindow.cpp:801
+#: mergeresultwindow.cpp:802
 msgid ""
 "Files A and C have equal text. \n"
 msgstr ""
 "ファイル A と C は同じテキストです\n"
 
-#: mergeresultwindow.cpp:802
+#: mergeresultwindow.cpp:803
 msgid ""
 "Files B and C are binary equal.\n"
 msgstr ""
 "ファイル B と C は同じバイナリです\n"
 
-#: mergeresultwindow.cpp:803
+#: mergeresultwindow.cpp:804
 msgid ""
 "Files B and C have equal text. \n"
 msgstr ""
 "ファイル B と C は同じテキストです\n"
 
-#: mergeresultwindow.cpp:809
+#: mergeresultwindow.cpp:810
 msgid "Total number of conflicts: "
 msgstr "衝突の総計: "
 
-#: mergeresultwindow.cpp:810
+#: mergeresultwindow.cpp:811
 msgid ""
 "\n"
 "Nr of automatically solved conflicts: "
@@ -1309,7 +1299,7 @@ msgstr ""
 "\n"
 "自動的に解決された衝突の数: "
 
-#: mergeresultwindow.cpp:811
+#: mergeresultwindow.cpp:812
 msgid ""
 "\n"
 "Nr of unsolved conflicts: "
@@ -1317,31 +1307,31 @@ msgstr ""
 "\n"
 "未解決の衝突の数: "
 
-#: mergeresultwindow.cpp:813
+#: mergeresultwindow.cpp:814
 msgid "Conflicts"
 msgstr "衝突"
 
-#: mergeresultwindow.cpp:1649
+#: mergeresultwindow.cpp:1650
 msgid "<No src line>"
 msgstr "<ソース行なし>"
 
-#: mergeresultwindow.cpp:1657
+#: mergeresultwindow.cpp:1658
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<マージ衝突 (空白のみ)>"
 
-#: mergeresultwindow.cpp:1659 mergeresultwindow.cpp:2445
+#: mergeresultwindow.cpp:1660 mergeresultwindow.cpp:2446
 msgid "<Merge Conflict>"
 msgstr "<マージ衝突>"
 
-#: mergeresultwindow.cpp:1729
+#: mergeresultwindow.cpp:1730
 msgid "Output"
 msgstr "出力"
 
-#: mergeresultwindow.cpp:1731
+#: mergeresultwindow.cpp:1732
 msgid "[Modified]"
 msgstr "[更新]"
 
-#: mergeresultwindow.cpp:2655
+#: mergeresultwindow.cpp:2656
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved.\n"
@@ -1349,11 +1339,11 @@ msgstr ""
 "すべての衝突がまだ解決されていません\n"
 "ファイルは保存されません\n"
 
-#: mergeresultwindow.cpp:2657
+#: mergeresultwindow.cpp:2658
 msgid "Conflicts Left"
 msgstr "衝突(左)"
 
-#: mergeresultwindow.cpp:2669
+#: mergeresultwindow.cpp:2670
 msgid ""
 "\n"
 "\n"
@@ -1363,11 +1353,11 @@ msgstr ""
 "\n"
 "バックアップファイルの作成に失敗。ファイルは保存されません。"
 
-#: mergeresultwindow.cpp:2669 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2670 mergeresultwindow.cpp:2710
 msgid "File Save Error"
 msgstr "ファイル保存エラー"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2710
 msgid "Error while writing."
 msgstr "書き込み中にエラー"
 
@@ -1970,75 +1960,75 @@ msgstr "古いファイルも削除せずに `.orig` 拡張子をつけて保存
 msgid "Regional Settings"
 msgstr "言語の設定"
 
-#: optiondialog.cpp:1211
+#: optiondialog.cpp:1214
 msgid "Language (restart required)"
 msgstr "言語 (再スタートが必要)"
 
-#: optiondialog.cpp:1243
+#: optiondialog.cpp:1246
 msgid ""
 "Choose the language of the GUI-strings or \"Auto\".\n"
 "For a change of language to take place, quit and restart KDiff3."
 msgstr ""
 
-#: optiondialog.cpp:1261
-msgid "Use the same encoding for everything:"
-msgstr "全てに同じエンコーディングを使用:"
-
 #: optiondialog.cpp:1264
+msgid "Use the same encoding for everything:"
+msgstr "すべてに同じエンコーディングを使用:"
+
+#: optiondialog.cpp:1267
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
 msgstr ""
-"このオプションを有効にすると、最初を変更するだけで全てのエンコーディングを同時に変更できます。\n"
+"このオプションを有効にすると、最初を変更するだけですべてのエンコーディングを同時に変更できます。\n"
 "それぞれに個別に設定する必要がある場合は、これを無効にしてください。"
 
-#: optiondialog.cpp:1269
+#: optiondialog.cpp:1272
 msgid "Note: Local Encoding is "
 msgstr "現在のロカールエンコーディング: "
 
-#: optiondialog.cpp:1273
+#: optiondialog.cpp:1276
 msgid "File Encoding for A:"
 msgstr "A のファイルのエンコーディング:"
 
-#: optiondialog.cpp:1278
+#: optiondialog.cpp:1281
 msgid "File Encoding for B:"
 msgstr "B のファイルのエンコーディング:"
 
-#: optiondialog.cpp:1283
+#: optiondialog.cpp:1286
 msgid "File Encoding for C:"
 msgstr "C のファイルのエンコーディング:"
 
-#: optiondialog.cpp:1288
+#: optiondialog.cpp:1291
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "マージ出力と保存時のエンコーディング:"
 
-#: optiondialog.cpp:1293
+#: optiondialog.cpp:1296
 msgid "File Encoding for Preprocessor Files:"
 msgstr "プリプロセッサファイルのエンコーディング:"
 
-#: optiondialog.cpp:1302
+#: optiondialog.cpp:1305
 msgid "Right To Left Language"
 msgstr "右から左に読む言語"
 
-#: optiondialog.cpp:1305
+#: optiondialog.cpp:1308
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
 msgstr ""
 
-#: optiondialog.cpp:1315
+#: optiondialog.cpp:1318
 msgid "Integration"
 msgstr "統合"
 
-#: optiondialog.cpp:1315
+#: optiondialog.cpp:1318
 msgid "Integration Settings"
 msgstr "統合の設定"
 
-#: optiondialog.cpp:1325
+#: optiondialog.cpp:1328
 msgid "Command line options to ignore:"
 msgstr "無視するコマンドラインオプション:"
 
-#: optiondialog.cpp:1330
+#: optiondialog.cpp:1333
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
 "other tools.\n"
@@ -2049,7 +2039,7 @@ msgstr ""
 "複数のオプションはセミコロン(;)で区切って指定してください。\n"
 "これによって \"不明なオプション\" エラーを抑制できます。"
 
-#: optiondialog.cpp:1383
+#: optiondialog.cpp:1386
 msgid ""
 "You selected a variable width font.\n"
 "\n"
@@ -2065,19 +2055,19 @@ msgstr ""
 "\n"
 "続行するか、他のフォントを選択して下さい"
 
-#: optiondialog.cpp:1387
+#: optiondialog.cpp:1390
 msgid "Incompatible Font"
 msgstr "非互換なフォント"
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1391
 msgid "Continue at Own Risk"
 msgstr "自己責任で続行"
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1391
 msgid "Select Another Font"
 msgstr "他のフォントを選択"
 
-#: optiondialog.cpp:1413
+#: optiondialog.cpp:1416
 msgid "This resets all options. Not only those of the current topic."
 msgstr "現在のトピックだけでなくすべてのオプションをリセット"
 
@@ -2211,11 +2201,11 @@ msgstr "検索完了"
 msgid "Search Complete"
 msgstr "検索完了"
 
-#: pdiff.cpp:2129
+#: pdiff.cpp:2130
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2129
+#: pdiff.cpp:2130
 #, fuzzy
 msgid "Error while adding manual diff range"
 msgstr "ディレクトリ作成中にエラー"
@@ -2400,3 +2390,11 @@ msgstr "保存に失敗"
 #: smalldialogs.cpp:541
 msgid "Opening and closing parentheses don't match in regular expression."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Save Directory Merge State ..."
+#~ msgstr "ディレクトリマージ"
+
+#, fuzzy
+#~ msgid "Load Directory Merge State ..."
+#~ msgstr "ディレクトリマージ"

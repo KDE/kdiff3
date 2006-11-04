@@ -54,9 +54,9 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date
->2006-04-09</date>
+>2006-05-14</date>
 <releaseinfo
->0.9.89</releaseinfo>
+>0.9.90</releaseinfo>
 
 
 <abstract>
@@ -686,13 +686,13 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Sammenflet automatisk nøgleord for versionshåndtering og historik (log)</title
 ><para
->Mange versionskontrolsystemer understøtter specielle nøgleord i filen. (f.eks. "&#36;Date: 2006-05-02 10:41:21 -0400 (Tue, 02 May 2006) &#36;", "&#36;Header&#36;", "&#36;Author: scripty &#36;", "&#36;Log&#36;" etc.) Ved check-in ændrer versionskontrolsystemet (VCS) disse linjer. For eksempel bliver "&#36;Date: 2006-04-21 17:24:21 -0400 (Fri, 21 Apr 2006) &#36;" til "&#36;Date: 2006-04-21 17:24:21 -0400 (Fri, 21 Apr 2006) &#36;". Idet denne linje vil være forskellig i hver version af filen, ville det kræve manuel interaktion under sammenfletningen. </para
+>Mange versionskontrolsystemer understøtter specielle nøgleord i filen. (f.eks. "&#36;Date:&#36;", "&#36;Header&#36;", "&#36;Author&#36;", "&#36;&#36;" osv.) Ved check-in ændrer versionskontrolsystemet (VCS) disse linjer. For eksempel bliver "&#36;Date:&#36;" til "&#36; Date:2005/03/22 18:45:01 &#36;". Idet denne linje vil være forskellig i hver version af filen, ville det kræve manuel interaktion under sammenfletningen. </para
 ><para
 >&kdiff3; tilbyder automatisk sammenfletning af disse indgange. For enkle linjer som matcher tilvalget "Regulært udtryk for automatisk sammenfletning" i alle inddatafiler vælger &kdiff3; linjen fra B, eller om tilgængelig, den fra C. (Desuden er det nødvendigt at linjerne det drejer sig om linjes op i sammenligningen og at foregående linje ikke indeholder en konflikt.) Den automatiske sammenfletning kan enten udføres med det samme når sammenfletningen startes (aktivér tilvalget "Kør automatisk sammenfletning med regulært udtryk når sammenfletning starter") eller senere via "Kør automatisk sammenfletning med regulært udtryk" i menuen Sammenflet. </para
 ><para
 >Automatisk sammenfletning for versionshåndteringshistorik (også kaldet "log") understøttes også. Automatisk sammenfletning af historik kan enten udføres med det samme når sammenfletningen startes ved at aktivere tilvalget  "Sammenfletning ifølge versionshåndteringshistorik når sammenfletning starter" eller senere via "Løs automatisk historikkonflikter" i menuen Sammenflet. </para
 ><para
->Oftest begynder versionshåndteringshistorikken med en linje som indeholder nøgleordet "$Log$". Den skal matches af tilvalget "Regulært udtryk for historikkens begyndelse". &kdiff3; detekterer hvilke efterfølgende linjer som indgår i historikken ved at analysere de indledende tegn som fandtes før nøgleordet "$Log$". Hvis samme "indledende kommentar" også findes på følgende linjer inkluderes de også i historikken. </para
+>Oftest begynder versionshåndteringshistorikken med en linje som indeholder nøgleordet "&#36;Log&#36;". Den skal matches af tilvalget "Regulært udtryk for historikkens begyndelse". &kdiff3; detekterer hvilke efterfølgende linjer som indgår i historikken ved at analysere de indledende tegn som fandtes før nøgleordet "&#36;Log&#36;". Hvis samme "indledende kommentar" også findes på følgende linjer inkluderes de også i historikken. </para
 ><para
 >Ved hver arkivering skriver VCS en entydig linje som angiver version, dato- og tidsinformation fulgt af linjer med brugerens kommentarer. Disse linjer udgør en historikindgang. Historikafsnittet vokser ved hver arkivering og de seneste indgange vises længst oppe (efter historikkens startlinje). </para
 ><para
@@ -708,7 +708,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >Antag at historikken ser ud så her: <screen>
 /**************************************************************************
-** HISTORIK:    $Log: \toms_sammenfletning_hovedvisning\Mit_program\kode\komplexalgoritm.cpp $
+** HISTORIK:    &#36;Log: \toms_sammenfletning_hovedvisning\Mit_program\kode\komplexalgoritm.cpp &#36;
 **
 **     \head\integreringsgren_12   2 Apr 2001 10:45:41   tom
 **  Sammenflettede grenen simongren_15.
@@ -718,9 +718,9 @@ Please at least include KDE, the KDE package it is in, the name
 **  Ordnede sammenbrud.
 **************************************************************************/
 </screen
-> Historikkens indledende linje matcher det regulære udtryk ".*\$Log.*\$.*". Derefter følger historikindgangene. </para
+> Historikkens indledende linje matcher det regulære udtryk ".*\&#36;Log.*\&#36;.*". Derefter følger historikindgangene. </para
 ><para
->Linjen med nøgleordet "$Log$" begynder med to "*" og derefter følger et mellemrum. &kdiff3; bruger den første streng uden blanke tegn som "indledende kommentar" og antager at historikken slutter med den første linje uden denne indledende kommentar. I eksemplet slutter den sidste linje med en streng som også begynder med to "*", men i stedet for et mellemrum følger flere "*". Derfor afslutter denne linje historikken. </para
+>Linjen med nøgleordet "&#36;Log&#36;" begynder med to "*" og derefter følger et mellemrum. &kdiff3; bruger den første streng uden blanke tegn som "indledende kommentar" og antager at historikken slutter med den første linje uden denne indledende kommentar. I eksemplet slutter den sidste linje med en streng som også begynder med to "*", men i stedet for et mellemrum følger flere "*". Derfor afslutter denne linje historikken. </para
 ><para
 >Hvis sortering af historikken ikke kræves kan det regulære udtryk for historikindgangens begyndelsen se sådan her ud. (Linjen er delt i to eftersom den ikke ville få plads ellers.) <screen>
 \s*\\main\\\S+\s+[0-9]+ (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
@@ -1238,7 +1238,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Regulært udtryk for begyndelsen af historikindgangen for sammenfletning. Som oftest indeholder linjen nøgleordet "$Log$". Standardværdi: ".*\$Log.*\$.*" </para
+>Regulært udtryk for begyndelsen af historikindgangen for sammenfletning. Som oftest indeholder linjen nøgleordet "&#36;Log&#36;". Standardværdi: ".*\&#36;Log.*\&#36;.*" </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -2805,14 +2805,14 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >&kdiff3;: Værktøj til sammenligning og sammenfletning af filer og mapper </para>
 <para
->Program ophavsret 2002-2005 Joachim Eibl <email
+>Program ophavsret 2002-2006 Joachim Eibl <email
 >joachim.eibl at gmx.de</email
 > </para>
 <para
 >Flere fede idéer og fejlrapporter kom fra kolleger og mange personer ude på www. Tak! </para>
 
 <para
->Dokumentation ophavsret &copy; 2002-2005 Joachim Eibl <email
+>Dokumentation ophavsret &copy; 2002-2006 Joachim Eibl <email
 >joachim.eibl at gmx.de</email
 > </para>
 

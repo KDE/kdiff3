@@ -1,8 +1,37 @@
-
 This file contains some feature-wishes for future KDiff3-versions.
 
 TODO
 ====
+
+- Fix drawing in columns A/B/C-directory window
+- Qt4-translation files
+- Double clicking into empty area causes crash
+- Option window is too big (within KDE). (Scrollable?)
+- Windows issues: 
+  - Diff-Ext-For-KDiff3 included in the installer 
+    - language selection from within KDiff3
+- Export to html-format file
+- Export to diff-format output (and import?)
+- Export to diff3-format output (and import?)
+- Use diff-output as input
+- Variable width fonts.
+
+  - Use regular expression to ignore certain patterns
+  - Start without visible compare widgets. (? what did I mean by that)
+
+- Hardlinks -performance support
+- Manual alignment during merge should tell user his data will be lost
+- Installer for windows for users.
+- "List Only Deltas" causes directory merge to delete files
+  (https://sourceforge.net/tracker/index.php?func=detail&aid=1004853&group_id=58666&atid=488548)
+- Diff-view for binary files
+- Diff-view for pictures
+
+> > What I find weird is that KDiff3 first creates the 3-way merge view (so
+> > the window splits in 4 parts), then closes that and reopens in 2-way
+> > diff view. I've never seen the binary package do that. Can this be fixed?
+
+
 - Only show different lines.
 
 - ftp: Abbruch beim Einlesen von Verzeichnis stoppt nicht vollständig

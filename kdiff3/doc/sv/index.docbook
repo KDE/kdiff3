@@ -68,9 +68,9 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date
->2006-04-09</date>
+>2006-05-14</date>
 <releaseinfo
->0.9.89</releaseinfo>
+>0.9.90</releaseinfo>
 
 
 <abstract>
@@ -700,13 +700,13 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Sammanfoga automatiskt nyckelord för versionshantering och historik (logg)</title
 ><para
->Many version control systems support special keywords in the file. (e.g. "$Date$", "$Header$", "$Author$", "$Log$" etc.) During the check-in the version control system (VCS) changes these lines. For instance "$Date$" will turn into "$Date$". Since this line will be different in every version of the file, it would require manual interaction during the merge. </para
+>Många versionshanteringssystem stöder särskilda nyckelord i filen (t.ex. "&#36;Date&#36;", "&#36;Header&#36;", "&#36;Author&#36;", "&#36;Log&#36;" etc.) Vid arkivering ändrar versionshanteringssystemet (VCN) dessa rader. Till exempel ändras "&#36;Date&#36;" till "&#36;Date: 2005/03/22 18:45:01 &#36;". Eftersom raden är olika i varje version av filen, skulle den kräva manuell interaktion under sammanfogningen. </para
 ><para
 >&kdiff3; erbjuder automatisk sammanfogning av dessa poster. För enkla rader som matchar alternativet "Reguljärt uttryck för automatisk sammanfogning" i alla indatafiler väljer &kdiff3; raden från B, eller om tillgänglig, den från C. (Dessutom är det nödvändigt att raderna i fråga radas upp i jämförelsen och att föregående rad inte innehåller en konflikt.) Den automatiska sammanfogningen kan antingen utföras omedelbart när sammanfogningen startas (aktivera alternativet "Kör automatisk sammanfogning med reguljärt uttryck när sammanfogning startar") eller senare via "Kör automatisk sammanfogning med reguljärt uttryck" i menyn Sammanfoga. </para
 ><para
 >Automatisk sammanfogning för versionshanteringshistorik (också kallat "logg") stöds också. Automatisk sammanfogning av historik kan antingen utföras omedelbart när sammanfogningen startas genom att aktivera alternativet "Sammanfogning enligt versionshanteringshistorik när sammanfogning startar" eller senare via "Lös automatiskt historikkonflikter" i menyn Sammanfoga. </para
 ><para
->Oftast börjar versionshanteringshistoriken med en rad som innehåller nyckelordet "$Log$". Den måste matchas av alternativet "Reguljärt uttryck för historikens början". &kdiff3; detekterar vilka efterföljande rader som ingår i historiken genom att analysera de inledande tecknen som fanns före nyckelordet "$Log$". Om samma "inledande kommentar" också finns på följande rader inkluderas de också i historiken. </para
+>Oftast börjar versionshanteringshistoriken med en rad som innehåller nyckelordet "&#36;Log&#36;". Den måste matchas av alternativet "Reguljärt uttryck för historikens början". &kdiff3; detekterar vilka efterföljande rader som ingår i historiken genom att analysera de inledande tecknen som fanns före nyckelordet "&#36;Log&#36;". Om samma "inledande kommentar" också finns på följande rader inkluderas de också i historiken. </para
 ><para
 >Vid varje arkivering skriver VCS en unik rad som anger version, datum- och tidsinformation följd av rader med användarens kommentarer. Raderna utgör en historikpost. Historikavsnittet växer vid varje arkivering och de senaste posterna visas längst upp (efter historikens startrad). </para
 ><para
@@ -722,7 +722,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >Antag att historiken ser ut så här: <screen>
 /**************************************************************************
-** HISTORIK:    $Log: \toms_sammanfogning_huvudvy\Mitt_program\kod\komplexalgoritm.cpp $
+** HISTORIK:    &#36;Log: \toms_sammanfogning_huvudvy\Mitt_program\kod\komplexalgoritm.cpp &#36;
 **
 **     \head\integreringsgren_12   2 Apr 2001 10:45:41   tom
 **  Sammanfogade grenen simongren_15.
@@ -732,9 +732,9 @@ Please at least include KDE, the KDE package it is in, the name
 **  Fixade krasch.
 **************************************************************************/
 </screen
-> Historikens inledande rad matchar det reguljära uttrycket ".*\$Log.*\$.*". Därefter följer historikposterna. </para
+> Historikens inledande rad matchar det reguljära uttrycket ".*\&#36;Log.*\&#36;.*". Därefter följer historikposterna. </para
 ><para
->Raden med nyckelordet "$Log$" börjar med två "*" och därefter följer ett mellanslag. &kdiff3; använder den första strängen utan blanktecken som "inledande kommentar" och antar att historiken slutar med den första raden utan denna inledande kommentar. I exemplet slutar den sista raden med en sträng som också börjar med två "*", men istället för ett mellanslag följer fler "*". Därför avslutar denna rad historiken. </para
+>Raden med nyckelordet "&#36;Log&#36;" börjar med två "*" och därefter följer ett mellanslag. &kdiff3; använder den första strängen utan blanktecken som "inledande kommentar" och antar att historiken slutar med den första raden utan denna inledande kommentar. I exemplet slutar den sista raden med en sträng som också börjar med två "*", men istället för ett mellanslag följer fler "*". Därför avslutar denna rad historiken. </para
 ><para
 >Om sortering av historiken inte krävs kan det reguljära uttrycket för historikpostens början se ut så här. (Raden är delad i två eftersom den inte skulle få plats annars.) <screen>
 \s*\\main\\\S+\s+[0-9]+ (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
@@ -1250,7 +1250,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Reguljärt uttryck för början av historikposten för sammanfogning. Oftast innehåller raden nyckelordet "$Log$". Förvalt värde: ".*\$Log.*\$.*" </para
+>Reguljärt uttryck för början av historikposten för sammanfogning. Oftast innehåller raden nyckelordet "&#36;Log&#36;". Förvalt värde: ".*\&#36;Log.*\&#36;.*" </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -2821,14 +2821,14 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >&kdiff3;: Verktyg för jämförelser och sammanfogning av filer och kataloger </para>
 <para
->Program copyright 2002-2005 Joachim Eibl <email
+>Program copyright 2002-2006 Joachim Eibl <email
 >joachim.eibl snabela gmx.de</email
 > </para>
 <para
 >Flera häftiga idéer och felrapporter kom från kolleger och många personer ute i den Vida Vilda Världen. Tack! </para>
 
 <para
->Dokumentation Copyright &copy; 2002-2005 Joachim Eibl <email
+>Dokumentation Copyright &copy; 2002-2006 Joachim Eibl <email
 >joachim. eibl snabela gmx.de</email
 > </para>
 

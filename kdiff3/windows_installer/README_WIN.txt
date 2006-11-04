@@ -3,7 +3,7 @@ KDiff3-Readme for Windows
 
 Author: Joachim Eibl  (joachim.eibl@gmx.de)
 Copyright: (C) 2002-2006 by Joachim Eibl
-KDiff3-Version: 0.9.89
+KDiff3-Version: 0.9.91
 Homepage: http://kdiff3.sourceforge.net
 
 KDiff3 is a program that
@@ -29,7 +29,7 @@ You may redistribute it under the terms of the GNU GENERAL PUBLIC LICENCE.
 Note that there is NO WARRANTY for this program.
 
 Installation:
-- The installer was created by Sebastien Fricker (sebastien.fricker@web.de).
+- The installer was initially created by Sebastien Fricker (sebastien.fricker@web.de).
   It is based on the Nullsoft Scriptable Install System (http://nsis.sourceforge.net)
 
 - You can place the directory where you want it. But don't separate the file
@@ -37,10 +37,28 @@ Installation:
 
 - Integration with WinCVS: When selected the installer sets KDiff3 to be the
   default diff-tool for WinCVS if available.
+  Registry HKEY_CURRENT_USER\Software\WinCvs\wincvs\CVS settings: "P_Extdiff" and "P_DiffUseExtDiff"
 
-- Integration with Explorer: When selected KDiff3 will be added to the "Send To"
+- Integration with TortoiseSVN: When selected the installer sets KDiff3 to be the
+  default diff-tool for TortoiseSVN if available.
+  Registry HKEY_CURRENT_USER\Software\TortoiseSVN: "Diff" and "Merge"
+
+- Integration with Explorer (1): When selected KDiff3 will be added to the "Send To"
   menu in the context menu. If you then select two files or two directories and
   choose "Send To"->"KDiff3" then KDiff3 will start and compare the specified files.
+
+- Integration with Explorer (2): When selected Diff-Ext-For-KDiff3 will be installed.
+  This is a Shell-Extension which adds an entry "KDiff3" into the context menu of 
+  Windows Explorer. (e.g. when right-clicking a file or directory) With this it
+  is possible to select files and directories sequentially and in separate directories 
+  for comparison with KDiff3. This is based on Diff-Ext by Sergey Zorin 
+  (http://diff-ext.sourceforge.net) with extensions for KDiff3 by Joachim Eibl. 
+  This extension is not under GPL but under a BSD-style licence. (See file DIFF-EXT-LICENSE.txt.)
+
+- SVN Merge Tool: Allows to use KDiff3 for explicit graphical merges with Subversion.
+  This installation option copies a file diff3_cmd.bat into your Application Data subdirectory.
+  (C:\Documents and Settings\Username\Application Data\Subversion\config\diff3_cmd.bat)
+  (Installation is disabled by default) 
 
 Since this program was actually developed for GNU/Linux, there might be Windows
 specific problems I don't know of yet. Please write me about problems you encounter.

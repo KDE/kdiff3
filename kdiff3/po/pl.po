@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
-"POT-Creation-Date: 2006-04-10 11:07+0200\n"
+"POT-Creation-Date: 2006-05-15 11:12+0200\n"
 "PO-Revision-Date: 2005-12-30 14:10+0100\n"
 "Last-Translator: Robert Gomulka <rgom@o2.pl>\n"
 "Language-Team: polish <pl@li.org>\n"
@@ -74,7 +74,7 @@ msgstr ""
 "\n"
 "Polecenie przetwarzenia wstępnego dopasowywania wierszy zostanie wyłączone."
 
-#: diff.cpp:1617 diff.cpp:1631
+#: diff.cpp:1587 diff.cpp:1601
 msgid ""
 "Data loss error:\n"
 "If it is reproducable please contact the author.\n"
@@ -82,7 +82,7 @@ msgstr ""
 "Błąd utraty danych:\n"
 "Jeśli jest powtarzalny, to skontaktuj się z autorem programu.\n"
 
-#: diff.cpp:1619 diff.cpp:1633
+#: diff.cpp:1589 diff.cpp:1603
 msgid "Severe Internal Error"
 msgstr "Poważny błąd wewnętrzny"
 
@@ -270,7 +270,7 @@ msgstr "To wpłynie na wszystkie operacje łączenia."
 msgid "Changing All Merge Operations"
 msgstr "Zmiana wszystkich operacji łączenia"
 
-#: directorymergewindow.cpp:803 mergeresultwindow.cpp:284
+#: directorymergewindow.cpp:803 mergeresultwindow.cpp:285
 msgid "C&ontinue"
 msgstr "K&ontynuuj"
 
@@ -660,16 +660,6 @@ msgstr "Uwzględnij podkatalogi"
 msgid "Unfold All Subdirs"
 msgstr "Nie uwzględniaj podkatalogów"
 
-#: directorymergewindow.cpp:2865
-#, fuzzy
-msgid "Save Directory Merge State ..."
-msgstr "Połączenia katalogów"
-
-#: directorymergewindow.cpp:2866
-#, fuzzy
-msgid "Load Directory Merge State ..."
-msgstr "Połączenia katalogów"
-
 #: directorymergewindow.cpp:2867
 msgid "Choose A for All Items"
 msgstr "Wybierz A dla wszystkich pozycji"
@@ -745,7 +735,7 @@ msgstr "Usuń A i B"
 msgid "Merge to A && B"
 msgstr "Połącz z A i B"
 
-#: fileaccess.cpp:563
+#: fileaccess.cpp:581
 msgid ""
 "While trying to make a backup, deleting an older backup failed. \n"
 "Filename: "
@@ -753,7 +743,7 @@ msgstr ""
 "Błąd w trakcie wykonywania kopii zapasowej. Nieudane kasowanie starej kopii. \n"
 "Nazwa pliku: "
 
-#: fileaccess.cpp:570
+#: fileaccess.cpp:588
 msgid ""
 "While trying to make a backup, renaming failed. \n"
 "Filenames: "
@@ -761,60 +751,60 @@ msgstr ""
 "Błąd w trakcie wykonywania kopii zapasowej. Nieudana zmiana nazwy. \n"
 "Nazwa plików: "
 
-#: fileaccess.cpp:592
+#: fileaccess.cpp:610
 #, c-format
 msgid "Getting file status: %1"
 msgstr "Pobranie statusu pliku: %1"
 
-#: fileaccess.cpp:635
+#: fileaccess.cpp:653
 #, c-format
 msgid "Reading file: %1"
 msgstr "Czytanie pliku: %1"
 
-#: fileaccess.cpp:671
+#: fileaccess.cpp:689
 #, c-format
 msgid "Writing file: %1"
 msgstr "Zapisywanie pliku: %1"
 
-#: fileaccess.cpp:699
+#: fileaccess.cpp:717
 msgid "Out of memory"
 msgstr "Brak pamięci"
 
-#: fileaccess.cpp:734
+#: fileaccess.cpp:752
 #, c-format
 msgid "Making directory: %1"
 msgstr "Tworzenie katalogu: %1"
 
-#: fileaccess.cpp:754
+#: fileaccess.cpp:772
 #, c-format
 msgid "Removing directory: %1"
 msgstr "Usuwanie katalogu: %1"
 
-#: fileaccess.cpp:769
+#: fileaccess.cpp:787
 #, c-format
 msgid "Removing file: %1"
 msgstr "Usuwanie pliku: %1"
 
-#: fileaccess.cpp:785
+#: fileaccess.cpp:803
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "Tworzenie dowiązania symbolicznego:%1 -> %2"
 
-#: fileaccess.cpp:811
+#: fileaccess.cpp:829
 msgid "Renaming file: %1 -> %2"
 msgstr "Zmiana nazwy pliku: %1 -> %2"
 
-#: fileaccess.cpp:847
+#: fileaccess.cpp:865
 msgid "Copying file: %1 -> %2"
 msgstr "Kopiowanie pliku: %1 -> %2"
 
-#: fileaccess.cpp:861
+#: fileaccess.cpp:879
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for reading failed. Filename: %1"
 msgstr ""
 "Błąd podczas kopiowania pliku: Nieudane otwarcie pliku. Nazwa pliku: %1"
 
-#: fileaccess.cpp:867
+#: fileaccess.cpp:885
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for writing failed. Filename: %1"
@@ -822,21 +812,21 @@ msgstr ""
 "Błąd podczas kopiowania pliku: Nieudane otwarcie pliku do zapisu. Nazwa pliku: "
 "%1"
 
-#: fileaccess.cpp:882
+#: fileaccess.cpp:900
 #, c-format
 msgid "Error during file copy operation: Reading failed. Filename: %1"
 msgstr "Błąd w czasie kopiowania. Nieudany odczyt. Nazwa pliku: %1"
 
-#: fileaccess.cpp:891
+#: fileaccess.cpp:909
 #, c-format
 msgid "Error during file copy operation: Writing failed. Filename: %1"
 msgstr "Błąd w czasie kopiowania. Nieudany zapis. Nazwa pliku: %1"
 
-#: fileaccess.cpp:1187
+#: fileaccess.cpp:1205
 msgid "Reading directory: "
 msgstr "Czytanie katalogu: "
 
-#: fileaccess.cpp:1316
+#: fileaccess.cpp:1334
 #, c-format
 msgid "Listing directory: %1"
 msgstr "Wyświetlenie zawartości katalogu: %1"
@@ -1189,11 +1179,11 @@ msgstr "Przełączanie paska narzędzi..."
 msgid "Toggle the statusbar..."
 msgstr "Przełączanie paska statusu..."
 
-#: kdiff3_part.cpp:155 kdiff3_part.cpp:223
+#: kdiff3_part.cpp:155 kdiff3_part.cpp:224
 msgid "Couldn't find files for comparison."
 msgstr "Nie można znaleźć plików do porównania."
 
-#: kdiff3_part.cpp:290
+#: kdiff3_part.cpp:291
 msgid "KDiff3Part"
 msgstr "KDiff3Part"
 
@@ -1299,15 +1289,15 @@ msgstr "KDiff3"
 msgid "+ Many thanks to those who reported bugs and contributed ideas!"
 msgstr "+ Wielkie dzięki zgłaszającym błędy i wnoszącym nowe pomysły!"
 
-#: mergeresultwindow.cpp:132 mergeresultwindow.cpp:936
-#: mergeresultwindow.cpp:950 mergeresultwindow.cpp:962
-#: mergeresultwindow.cpp:974
+#: mergeresultwindow.cpp:133 mergeresultwindow.cpp:937
+#: mergeresultwindow.cpp:951 mergeresultwindow.cpp:963
+#: mergeresultwindow.cpp:975
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 "Liczba pozostałych nie rozwiązanych konfliktów: %1 (z których %2 dotyczy znaków "
 "odstępu)"
 
-#: mergeresultwindow.cpp:282
+#: mergeresultwindow.cpp:283
 msgid ""
 "The output has been modified.\n"
 "If you continue your changes will be lost."
@@ -1315,55 +1305,55 @@ msgstr ""
 "Plik wyjściowy został zmieniony.\n"
 "Jeśli będziesz kontynuować zmiany zostaną utracone."
 
-#: mergeresultwindow.cpp:794 pdiff.cpp:507
+#: mergeresultwindow.cpp:795 pdiff.cpp:507
 msgid "All input files are binary equal."
 msgstr "Wszystkie pliki wejściowe są binarnie równe."
 
-#: mergeresultwindow.cpp:796
+#: mergeresultwindow.cpp:797
 msgid "All input files contain the same text."
 msgstr "Wszystkie wejściowe pliki zawierając ten sam tekst."
 
-#: mergeresultwindow.cpp:798
+#: mergeresultwindow.cpp:799
 msgid ""
 "Files A and B are binary equal.\n"
 msgstr ""
 "Pliki A i B są binarnie identyczne.\n"
 
-#: mergeresultwindow.cpp:799
+#: mergeresultwindow.cpp:800
 msgid ""
 "Files A and B have equal text. \n"
 msgstr ""
 "Pliki A i B mają identyczny tekst.\n"
 
-#: mergeresultwindow.cpp:800
+#: mergeresultwindow.cpp:801
 msgid ""
 "Files A and C are binary equal.\n"
 msgstr ""
 "Pliki A i C są binarnie identyczne.\n"
 
-#: mergeresultwindow.cpp:801
+#: mergeresultwindow.cpp:802
 msgid ""
 "Files A and C have equal text. \n"
 msgstr ""
 "Pliki A i C mają identyczny tekst.\n"
 
-#: mergeresultwindow.cpp:802
+#: mergeresultwindow.cpp:803
 msgid ""
 "Files B and C are binary equal.\n"
 msgstr ""
 "Pliki B i C są binarnie identyczne.\n"
 
-#: mergeresultwindow.cpp:803
+#: mergeresultwindow.cpp:804
 msgid ""
 "Files B and C have equal text. \n"
 msgstr ""
 "Pliki B i C mają identyczny tekst. \n"
 
-#: mergeresultwindow.cpp:809
+#: mergeresultwindow.cpp:810
 msgid "Total number of conflicts: "
 msgstr "Całkowita liczba konfliktów: "
 
-#: mergeresultwindow.cpp:810
+#: mergeresultwindow.cpp:811
 msgid ""
 "\n"
 "Nr of automatically solved conflicts: "
@@ -1371,7 +1361,7 @@ msgstr ""
 "\n"
 "Liczba automatycznie rozwiązanych konfliktów: "
 
-#: mergeresultwindow.cpp:811
+#: mergeresultwindow.cpp:812
 msgid ""
 "\n"
 "Nr of unsolved conflicts: "
@@ -1379,31 +1369,31 @@ msgstr ""
 "\n"
 "Liczba nie rozwiązanych konfliktów: "
 
-#: mergeresultwindow.cpp:813
+#: mergeresultwindow.cpp:814
 msgid "Conflicts"
 msgstr "Konflikty"
 
-#: mergeresultwindow.cpp:1649
+#: mergeresultwindow.cpp:1650
 msgid "<No src line>"
 msgstr "<Brak wiersza źr.>"
 
-#: mergeresultwindow.cpp:1657
+#: mergeresultwindow.cpp:1658
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Konflikt łączenia (tylko znaki odstępu)>"
 
-#: mergeresultwindow.cpp:1659 mergeresultwindow.cpp:2445
+#: mergeresultwindow.cpp:1660 mergeresultwindow.cpp:2446
 msgid "<Merge Conflict>"
 msgstr "<Konflikt połączenia>"
 
-#: mergeresultwindow.cpp:1729
+#: mergeresultwindow.cpp:1730
 msgid "Output"
 msgstr "Wyjście"
 
-#: mergeresultwindow.cpp:1731
+#: mergeresultwindow.cpp:1732
 msgid "[Modified]"
 msgstr "[zmodyfikowane]"
 
-#: mergeresultwindow.cpp:2655
+#: mergeresultwindow.cpp:2656
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved.\n"
@@ -1411,11 +1401,11 @@ msgstr ""
 "Nie wszystkie konflikty zostały rozwiązane.\n"
 "Plik nie został zapisany.\n"
 
-#: mergeresultwindow.cpp:2657
+#: mergeresultwindow.cpp:2658
 msgid "Conflicts Left"
 msgstr "Pozostałe konflikty"
 
-#: mergeresultwindow.cpp:2669
+#: mergeresultwindow.cpp:2670
 msgid ""
 "\n"
 "\n"
@@ -1425,11 +1415,11 @@ msgstr ""
 "\n"
 "Tworzenie pliku zapasowego nie powiodło się. Plik nezapisany."
 
-#: mergeresultwindow.cpp:2669 mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2670 mergeresultwindow.cpp:2710
 msgid "File Save Error"
 msgstr "Błąd zapisu pliku"
 
-#: mergeresultwindow.cpp:2709
+#: mergeresultwindow.cpp:2710
 msgid "Error while writing."
 msgstr "Błąd w czasie zapisu."
 
@@ -2044,11 +2034,11 @@ msgstr ""
 msgid "Regional Settings"
 msgstr "Ustawienia regionalne"
 
-#: optiondialog.cpp:1211
+#: optiondialog.cpp:1214
 msgid "Language (restart required)"
 msgstr "Język(wymaga ponownego uruchomienia)"
 
-#: optiondialog.cpp:1243
+#: optiondialog.cpp:1246
 msgid ""
 "Choose the language of the GUI-strings or \"Auto\".\n"
 "For a change of language to take place, quit and restart KDiff3."
@@ -2056,11 +2046,11 @@ msgstr ""
 "Wybierz język dla GUI lub ustaw na\"Automatycznie\". \n"
 "Po zmianie języka należy uruchomić ponownie KDiff3."
 
-#: optiondialog.cpp:1261
+#: optiondialog.cpp:1264
 msgid "Use the same encoding for everything:"
 msgstr "Używanie tego samego kodowania dla wszystkiego:"
 
-#: optiondialog.cpp:1264
+#: optiondialog.cpp:1267
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
@@ -2069,35 +2059,35 @@ msgstr ""
 "pierwsze. \n"
 "Proszę wyłączyć jeśli potrzebne są różne ustawienia indywidualne. "
 
-#: optiondialog.cpp:1269
+#: optiondialog.cpp:1272
 msgid "Note: Local Encoding is "
 msgstr "Uwaga: lokalne kodowanie to "
 
-#: optiondialog.cpp:1273
+#: optiondialog.cpp:1276
 msgid "File Encoding for A:"
 msgstr "Kodowanie pliku A:"
 
-#: optiondialog.cpp:1278
+#: optiondialog.cpp:1281
 msgid "File Encoding for B:"
 msgstr "Kodowanie pliku B:"
 
-#: optiondialog.cpp:1283
+#: optiondialog.cpp:1286
 msgid "File Encoding for C:"
 msgstr "Kodowanie pliku C:"
 
-#: optiondialog.cpp:1288
+#: optiondialog.cpp:1291
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "Kodowanie pliku wynikowego i przy zapisywaniu:"
 
-#: optiondialog.cpp:1293
+#: optiondialog.cpp:1296
 msgid "File Encoding for Preprocessor Files:"
 msgstr "Kodowanie plików preprocesora:"
 
-#: optiondialog.cpp:1302
+#: optiondialog.cpp:1305
 msgid "Right To Left Language"
 msgstr "Język z pismem prawy-do-lewego"
 
-#: optiondialog.cpp:1305
+#: optiondialog.cpp:1308
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
@@ -2105,21 +2095,21 @@ msgstr ""
 "Niektóre języka pisze się od prawej strony do lewej. \n"
 "Ustawienie to zmieni odpowiednio za równo przeglądarkę jak i edutor."
 
-#: optiondialog.cpp:1315
+#: optiondialog.cpp:1318
 #, fuzzy
 msgid "Integration"
 msgstr "Operacja"
 
-#: optiondialog.cpp:1315
+#: optiondialog.cpp:1318
 #, fuzzy
 msgid "Integration Settings"
 msgstr "Ustawienia regionalne"
 
-#: optiondialog.cpp:1325
+#: optiondialog.cpp:1328
 msgid "Command line options to ignore:"
 msgstr ""
 
-#: optiondialog.cpp:1330
+#: optiondialog.cpp:1333
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
 "other tools.\n"
@@ -2127,7 +2117,7 @@ msgid ""
 "This will suppress the \"Unknown option\"-error."
 msgstr ""
 
-#: optiondialog.cpp:1383
+#: optiondialog.cpp:1386
 msgid ""
 "You selected a variable width font.\n"
 "\n"
@@ -2143,19 +2133,19 @@ msgstr ""
 "\n"
 "Chcesz kontynuować czy też wybrać inną czcionkę."
 
-#: optiondialog.cpp:1387
+#: optiondialog.cpp:1390
 msgid "Incompatible Font"
 msgstr "Niekompatybilna czcionka"
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1391
 msgid "Continue at Own Risk"
 msgstr "Kontynuacja na własne ryzyko"
 
-#: optiondialog.cpp:1388
+#: optiondialog.cpp:1391
 msgid "Select Another Font"
 msgstr "Wybierz inną czcionkę"
 
-#: optiondialog.cpp:1413
+#: optiondialog.cpp:1416
 msgid "This resets all options. Not only those of the current topic."
 msgstr "Kasuje wszystkie ustawienia. Działa nie tylko na bieżącej zakładce."
 
@@ -2296,11 +2286,11 @@ msgstr "Wynik szukania."
 msgid "Search Complete"
 msgstr "Połączenie zakończone"
 
-#: pdiff.cpp:2129
+#: pdiff.cpp:2130
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2129
+#: pdiff.cpp:2130
 #, fuzzy
 msgid "Error while adding manual diff range"
 msgstr "Błąd w trakcie tworzenia katalogu."
@@ -2485,6 +2475,14 @@ msgstr "Nieudany zapis."
 #: smalldialogs.cpp:541
 msgid "Opening and closing parentheses don't match in regular expression."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Save Directory Merge State ..."
+#~ msgstr "Połączenia katalogów"
+
+#, fuzzy
+#~ msgid "Load Directory Merge State ..."
+#~ msgstr "Połączenia katalogów"
 
 #, fuzzy
 #~ msgid "Synchronize Directories"

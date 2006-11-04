@@ -2,8 +2,8 @@
 <kdevelop>
   <general>
     <author>Joachim Eibl</author>
-    <email>joachim@gmx.de</email>
-    <version>0.9.88</version>
+    <email>joachim dot eibl at gmx dot de</email>
+    <version>0.9.91</version>
     <projectmanagement>KDevKDEAutoProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <keywords>
@@ -31,7 +31,7 @@
       <terminal>true</terminal>
       <autocompile>true</autocompile>
       <envvars>
-        <envvar value="/home/joachim/kdiff3-0.9.89/debug/src/.libs/libkdiff3part.so" name="LD_PRELOAD" />
+        <envvar value="/home/joachim/kdiff3-0.9.91/debug/src/.libs/libkdiff3part.so" name="LD_PRELOAD" />
       </envvars>
     </run>
     <configurations>
@@ -155,7 +155,9 @@
       <automaticHeaderCompletion>true</automaticHeaderCompletion>
       <headerCompletionDelay>250</headerCompletionDelay>
     </codecompletion>
-    <references/>
+    <references>
+      <pcs>Qt</pcs>
+    </references>
     <creategettersetter>
       <prefixGet/>
       <prefixSet>set</prefixSet>
@@ -165,7 +167,7 @@
       <inlineSet>true</inlineSet>
     </creategettersetter>
     <qt>
-      <used>false</used>
+      <used>true</used>
       <version>3</version>
       <root>/usr/lib/qt3</root>
     </qt>

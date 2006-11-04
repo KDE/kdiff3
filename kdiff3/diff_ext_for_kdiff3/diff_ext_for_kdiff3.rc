@@ -1,0 +1,47 @@
+/*
+ * Copyright (c) 2003-2006, Sergey Zorin. All rights reserved.
+ *
+ * This software is distributable under the BSD license. See the terms
+ * of the BSD license in the LICENSE file provided with this software.
+ *
+ */
+
+#include <windows.h>
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+VS_VERSION_INFO VERSIONINFO
+  FILEVERSION 1,6,1,145
+  PRODUCTVERSION 1,6,1,145
+  FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+  FILEFLAGS VS_FF_DEBUG
+#else
+  FILEFLAGS 0L
+#endif
+  FILEOS VOS_NT_WINDOWS32
+  FILETYPE VFT_DLL
+  FILESUBTYPE VFT_UNKNOWN
+{
+    BLOCK "StringFileInfo"
+    {
+        BLOCK "040904b0"
+        {
+            VALUE "Comments", ""
+            VALUE "CompanyName", ""
+            VALUE "FileDescription", "diff shell extension"
+            VALUE "FileVersion", "Release 1.6.1"
+            VALUE "InternalName", "diff shell extension"
+            VALUE "LegalCopyright", "Copyright © 2003-2005 Sergey Zorin"
+            VALUE "LegalTrademarks", ""
+            VALUE "OriginalFilename", "diff_ext.dll"
+            VALUE "PrivateBuild", ""
+            VALUE "ProductName", "Diff Context Menu Extension"
+            VALUE "ProductVersion", "Release 1.6.1"
+        }
+    }
+    BLOCK "VarFileInfo"
+    {
+        VALUE "Translation", 0x409, 1200
+    }
+}
