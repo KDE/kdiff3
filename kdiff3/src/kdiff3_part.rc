@@ -1,0 +1,24 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="kdiff3_part" version="9">
+<MenuBar>
+  <Menu name="movement"><text>&amp;KDiff3</text>
+    <Action name="go_top"/>
+    <Action name="go_bottom"/>
+    <Action name="go_prev_delta"/>
+    <Action name="go_next_delta"/>
+    <Action name="diff_showwhitespace"/>
+    <Action name="diff_showlinenumbers"/>
+    <Action name="diff_wordwrap"/>
+    <Action name="win_toggle_split_orientation"/>
+    <Action name="options_configure"><text>Configure KDiff3</text></Action>
+  </Menu>
+</MenuBar>
+<ToolBar name="mainToolBar"><text>KDiff3</text>
+  <Action name="go_top"/>
+  <Action name="go_bottom"/>
+  <Action name="go_prev_delta"/>
+  <Action name="go_next_delta"/>
+  <Action name="diff_showwhitespace"/>
+  <Action name="diff_showlinenumbers"/>
+</ToolBar>
+</kpartgui>

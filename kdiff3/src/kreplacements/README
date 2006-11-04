@@ -1,0 +1,30 @@
+About the "kreplacements"-directory:
+====================================
+
+I want to be able to compile and use KDiff3 without KDE too.
+Since KDiff3 is a KDE program, which uses many KDE-classes and
+functions there must be some replacement.
+
+In many cases this is just the corresponding Qt-class, but often
+I wrote something myself. For several very KDE-specific functions
+there is no real replacement, but only stub functions that allow
+the program to compile and link.
+
+This stuff is not intended to be used for anything else but KDiff3.
+Think of it rather as a big hack, that only has the advantage
+that I need not mess up the normal program with many ugly
+#ifdef/#endif-clauses.
+
+Most include files in this directory only include kreplacements.h
+where the actual declarations are. The implementions are in
+kreplacements.cpp.
+
+The *.moc-files are dummies. The new KDE-philosophy seems to be
+that *.moc-files are directly included into the sources.  
+The Qt-philosophy still is to generate moc*.cpp files which will
+be compiled seperately. With these dummy-moc-files both versions
+can be compiled.
+
+
+Joachim
+(2003-10-02)
