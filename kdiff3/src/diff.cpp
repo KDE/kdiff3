@@ -2,7 +2,7 @@
                           diff.cpp  -  description
                              -------------------
     begin                : Mon Mar 18 2002
-    copyright            : (C) 2002-2004 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
@@ -15,6 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <cstdlib>
 #include <stdio.h>
 #include <iostream>
 
@@ -292,7 +293,8 @@ bool SourceData::isFromBuffer()
 
 bool SourceData::isBinaryEqualWith( const SourceData& other ) const
 {
-   return getSizeBytes() == other.getSizeBytes() && 
+   return m_fileAccess.exists() && other.m_fileAccess.exists() &&
+          getSizeBytes() == other.getSizeBytes() && 
           ( getSizeBytes()==0 || memcmp( getBuf(), other.getBuf(), getSizeBytes() )==0 );
 }
 

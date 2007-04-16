@@ -29,7 +29,7 @@ as Authors, publish date, the abstract, and Keywords -->
 </authorgroup>
 
 <copyright>
-<year>2002-2006</year>
+<year>2002-2007</year>
 <holder>Joachim Eibl</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
@@ -44,8 +44,8 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2006-05-14</date>
-<releaseinfo>0.9.90</releaseinfo>
+<date>2007-31-03</date>
+<releaseinfo>0.9.92</releaseinfo>
 
 
 <abstract>
@@ -63,7 +63,7 @@ Do NOT change these in the translation. -->
 <listitem><para>supports version control keyword and history merging.</para></listitem>
 </itemizedlist>
 </para><para>
-   This document describes &kdiff3;-version 0.9.89.
+   This document describes &kdiff3;-version 0.9.92.
 </para>
 </abstract>
 
@@ -443,6 +443,17 @@ They will appear in the usage help like in this example:</para>
    might not match anymore.
 </para><para>
    Currently merging doesn't support the use of manual diff help.
+</para></sect2><sect2 id="joinsplitsections"><title>Manually Joining and Splitting Diff Sections</title><para>
+   In some cases &kdiff3; will see too many or too few diff sections for merging. In such a 
+   case you can join or split existing sections.
+</para><para>
+   Add new sections by first selecting text in the lines that belong together in either input window (as for copying to the clipboard). 
+   Then choose "Split Diff At Selection" in the "Merge" menu.
+   Splits will be added above the first line and below the last line of the selected text.
+   If you only want to add one section, then select text beginning at another section-split.
+</para><para>
+   For joining sections in either input window select something in the lines from the sections to join.
+   (You can join several sections in one step too.) Then choose "Join selected Diffs" in the "Merge"-menu.
 </para></sect2>
 </sect1>
 
@@ -554,7 +565,7 @@ option "Merge version control history on merge start" or later via the merge men
 Usually the version control history begins with a line containing the keyword "&#36;Log&#36;".
 This must be matched by the "History start regular expression"-option.
 &kdiff3; detects which subsequent lines are in the history by analysing the leading characters 
-that came before the "&#36;Log&#36;"-keyword. If the same "leading comment" also appears in the following
+that came before the "&#36;Log&#36;"-keyword. If the same "leading comment"-characters also appears in the following
 lines, then they are also included in the history.
 </para><para>
 During each check-in the VCS writes a unique line specifying version-, date- and time-information 
@@ -618,8 +629,11 @@ For details about regular expressions please see the
 <ulink url="http://doc.trolltech.com/3.3/qregexp.html#details">regular expression documentation by Trolltech</ulink>.
 Note that "\s" (with lowercase "s") matches any white space and "\S" (with uppercase "S") matches any non-white-space.
 In our example the history entry start contains first the version info with reg. exp. "\\main\\\S+", the date consisting of day "[0-9]+", month "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)" and year "[0-9][0-9][0-9][0-9]", the time "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]" and finally the developers login name ".*".
-Note that the leading comment (in the example "**") will already be removed by &kdiff3; 
+</para><para>
+Note that the "leading comment"-characters (in the example "**") will already be removed by &kdiff3; 
 before trying to match, hence the regular expression begins with a match for none or more white-space characters "\s*".
+Because comment characters can differ in each file (e.g. C/C++ uses other comment characters than a Perl script)
+&kdiff3; takes care of the leading comment characters and you should not specify them in the regular expression.
 </para><para>
 If you require a sorted history. Then the sortkey must be calculated. For this the 
 relevant parts in the regular expression must be grouped by parentheses. 
@@ -640,7 +654,7 @@ Finally the resulting sort key for the first history entry start line will be:
 2001 04 0002 10:45:41 integration_branch_12   tom 
 </screen>
 </para><para>
-For more information also see <link linkend="diffmergeoptions">Diff and Merge Settings</link>.
+For more information also see <link linkend="mergeoptions">Merge Settings</link>.
 </para>
 </sect2>
 </sect1>
@@ -849,7 +863,7 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
 </variablelist>
 </sect2>
 
-<sect2 id="diffmergeoptions"><title>Diff and Merge Settings</title>
+<sect2 id="diffoptions"><title>Diff Settings</title>
 <para>
    When comparing files, &kdiff3; first it tries to match lines that are equal
    in all input files. Only during this step it might ignore white space. The
@@ -886,6 +900,11 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
       Try hard to find an even smaller delta. (Default is on.) This will probably
       be effective for complicated and big files. And slow for very big files.
    </para></listitem></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="mergeoptions"><title>Merge Settings</title>
+<variablelist>
    <varlistentry><term><emphasis>Auto Advance Delay (ms):</emphasis></term><listitem><para> When in auto-advance-mode this setting specifies
       how long to show the result of the selection before jumping to the next unsolved
       conflict.
@@ -928,6 +947,9 @@ For more information also see <link linkend="diffmergeoptions">Diff and Merge Se
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Merge version control history on merge start:</emphasis></term><listitem><para>
       If activated &kdiff3; runs the automatic history merging using aforementioned options when a merge is started.
+   </para></listitem></varlistentry>
+   <varlistentry><term><emphasis>Max number of history entries:</emphasis></term><listitem><para>
+      &kdiff3; truncates the history list after the specified number of entries. Use -1 to avoid truncation. (Default is -1).
    </para></listitem></varlistentry>
    <varlistentry><term><emphasis>Test your regular expressions</emphasis></term><listitem><para>
       This button shows a dialog that allows you to improve and test the regular expressions above.
@@ -2025,14 +2047,14 @@ and menu. Merging or directory-comparison are not supported then.
 &kdiff3; - File and Directory Comparison and Merge Tool
 </para>
 <para>
-Program copyright 2002-2006 Joachim Eibl <email>joachim.eibl at gmx.de</email>
+Program copyright 2002-2007 Joachim Eibl <email>joachim.eibl at gmx.de</email>
 </para>
 <para>
 Several cool ideas and bugreports came from colleagues and many people out in the Wild Wild Web. Thank you!
 </para>
 
 <para>
-Documentation Copyright &copy; 2002-2006 Joachim Eibl <email>joachim.eibl at gmx.de</email>
+Documentation Copyright &copy; 2002-2007 Joachim Eibl <email>joachim.eibl at gmx.de</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->

@@ -2,7 +2,7 @@
                           mergeresultwindow.h  -  description
                              -------------------
     begin                : Mon Mar 18 2002
-    copyright            : (C) 2002-2006 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
@@ -129,6 +129,7 @@ public:
    bool isDeltaBelowCurrent();
    bool isConflictAboveCurrent();
    bool isConflictBelowCurrent();
+   bool isUnsolvedConflictAtCurrent();
    bool isUnsolvedConflictAboveCurrent();
    bool isUnsolvedConflictBelowCurrent();
    bool findString( const QString& s, int& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive );
@@ -223,6 +224,7 @@ private:
       int* m_pTotalSize;
    public:
       typedef std::list<MergeEditLine>::iterator iterator;
+      typedef std::list<MergeEditLine>::reverse_iterator reverse_iterator;
       typedef std::list<MergeEditLine>::const_iterator const_iterator;
       MergeEditLineList(){m_size=0; m_pTotalSize=0; }
       void clear()                             { ds(-m_size); BASE::clear();          }
@@ -233,6 +235,8 @@ private:
       int size(){ if (!m_pTotalSize) m_size = BASE::size(); return m_size; }
       iterator begin(){return BASE::begin();}
       iterator end(){return BASE::end();}
+      reverse_iterator rbegin(){return BASE::rbegin();}
+      reverse_iterator rend(){return BASE::rend();}
       MergeEditLine& front(){return BASE::front();}
       MergeEditLine& back(){return BASE::back();}
       bool empty() { return m_size==0; }
@@ -341,6 +345,12 @@ private:
    typedef std::list<MergeLine> MergeLineList;
    MergeLineList m_mergeLineList;
    MergeLineList::iterator m_currentMergeLineIt;
+   bool isItAtEnd( bool bIncrement, MergeLineList::iterator i )
+   {
+      if ( bIncrement ) return i!=m_mergeLineList.end();
+      else              return i!=m_mergeLineList.begin();
+   }
+
    int m_currentPos;
    bool checkOverviewIgnore(MergeLineList::iterator &i);
 

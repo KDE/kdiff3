@@ -63,15 +63,18 @@ if test -z "$top_srcdir" ; then
 	echo "Usage: doxygen.sh <top_srcdir>"
 	exit 1
 fi
-if ! test -d "$top_srcdir" ; then
+if test ! -d "$top_srcdir" ; then
 	echo "top_srcdir ($top_srcdir) is not a directory."
 	exit 1
 fi
 
 ### Normalize top_srcdir so it is an absolute path.
-if ! expr "x$top_srcdir" : "x/" > /dev/null ; then
+if expr "x$top_srcdir" : "x/" > /dev/null ; then
+	# top_srcdir is absolute already
+	:
+else
 	top_srcdir=`cd "$top_srcdir" 2> /dev/null && pwd`
-	if ! test -d "$top_srcdir" ; then
+	if test ! -d "$top_srcdir" ; then
 		echo "top_srcdir ($top_srcdir) is not a directory."
 		exit 1
 	fi
@@ -95,7 +98,7 @@ if test -z "$QTDOCDIR" ; then
 		done
 	fi
 fi
-if test -z "$QTDOCDIR"  || test \! -d "$QTDOCDIR" ; then
+if test -z "$QTDOCDIR"  || test ! -d "$QTDOCDIR" ; then
 	if test -z "$QTDOCDIR" ; then
 		echo "* QTDOCDIR could not be guessed."
 	else
@@ -137,7 +140,7 @@ if test -z "$DOXDATA" || test ! -d "$DOXDATA" ; then
 	DOXDATA="$top_srcdir/doc/common"
 fi
 
-if ! test -d "$DOXDATA" ; then
+if test ! -d "$DOXDATA" ; then
 	echo "* \$DOXDATA does not name a directory ( or is unset ), tried \"$DOXDATA\""
 	exit 1
 fi
@@ -155,7 +158,7 @@ create_doxyfile_in()
 {
 	eval `grep 'VERSION="' "$top_srcdir/admin/cvs.sh"`
 	echo "PROJECT_NUMBER = $VERSION" > Doxyfile.in
-	grep ^KDE_INIT_DOXYGEN "$top_srcdir/configure.in.in" | \
+	grep '^KDE_INIT_DOXYGEN' "$top_srcdir/configure.in.in" | \
 		sed -e 's+[^[]*\[\([^]]*\)+PROJECT_NAME = "\1"+' \
 			-e 's+].*++' >> Doxyfile.in
 }
@@ -167,13 +170,13 @@ test "x$use_modulename" = "x0" && apidoxdir="apidocs"
 ### for the apidox and initialize it. Otherwise, just use the
 ### structure assumed to be there.
 if test -z "$subdir" ; then
-	if ! test -d "$apidoxdir" ; then
+	if test ! -d "$apidoxdir" ; then
 		mkdir "$apidoxdir" > /dev/null 2>&1
 	fi
-	if ! cd "$apidoxdir" > /dev/null 2>&1 ; then
+	cd "$apidoxdir" > /dev/null 2>&1 || { 
 		echo "Cannot create and cd into $apidoxdir"
 		exit 1
-	fi
+	}
 
 	test -f "Doxyfile.in" || create_doxyfile_in
 
@@ -192,15 +195,15 @@ if test -z "$subdir" ; then
 	srcdir="$1"
 	subdir="."
 else
-	if ! cd "$apidoxdir" > /dev/null 2>&1 ; then
+	cd "$apidoxdir" > /dev/null 2>&1 || {
 		echo "Cannot cd into $apidoxdir -- maybe you need to"
 		echo "build the top-level dox first."
 		exit 1
-	fi
+	}
 
 	if test "x1" = "x$recurse" ; then
 		# OK, so --recurse was requested
-		if ! test -f "subdirs.top" ; then
+		if test ! -f "subdirs.top" ; then
 			echo "* No subdirs.top available in the $apidoxdir."
 			echo "* The --recurse option will be ignored."
 			recurse=0
@@ -389,7 +392,10 @@ doxyndex()
 		test -f "$subdir/classmap.inc" && \
 		CMENU=`grep '=>' "$subdir/classmap.inc" | sed -e 's+"\([^"]*\)" => "'"$subdir/html/"'\([^"]*\)"+<option value="\2">\1<\/option>+' | tr -d '\n'`
 
-		if ! test -f "$subdir/classmap.inc" || ! grep "=>" "$subdir/classmap.inc" > /dev/null 2>&1 ; then
+		if test -f "$subdir/classmap.inc" && grep "=>" "$subdir/classmap.inc" > /dev/null 2>&1 ; then
+			# Keep the menu, it's useful
+			:
+		else
 			CMENUBEGIN="<!--"
 			CMENUEND="-->"
 		fi
@@ -467,7 +473,7 @@ apidox_toplevel()
 
 	doxygen Doxyfile
 
-	( cd "$top_srcdir" && grep -l ^include.*Doxyfile.am `find . -name Makefile.am` ) | sed -e 's+/Makefile.am$++' -e 's+^\./++' | sort > subdirs.in
+	( cd "$top_srcdir" && grep -l '^include.*Doxyfile.am' `find . -name Makefile.am` ) | sed -e 's+/Makefile.am$++' -e 's+^\./++' | sort > subdirs.in
 	for i in `cat subdirs.in`
 	do
 		test "x." = "x$i" && continue;
@@ -500,7 +506,7 @@ apidox_subdir()
 	echo "*** Creating apidox in $subdir"
 	echo "*"
 	rm -f "$subdir/Doxyfile"
-	if ! test -d "$top_srcdir/$subdir" ; then
+	if test ! -d "$top_srcdir/$subdir" ; then
 		echo "* No source (sub)directory $subdir"
 		return
 	fi
@@ -623,7 +629,12 @@ apidox_subdir()
 
 	apidox_local
 
-	if ! grep '^DOXYGEN_EMPTY' "$srcdir/Makefile.am" > /dev/null 2>&1 ; then
+	if grep '^DOXYGEN_EMPTY' "$srcdir/Makefile.am" > /dev/null 2>&1 ; then
+		# This directory is empty, so don't process it, but
+		# *do* handle subdirs that might have dox.
+		:
+	else
+		# Regular processing
 		doxygen "$subdir/Doxyfile"
 		doxyndex
 	fi
@@ -636,7 +647,7 @@ do_subdir()
 	srcdir="$top_srcdir/$subdir"
 	subdirname=`basename "$subdir"`
 	mkdir -p "$subdir" 2> /dev/null
-	if ! test -d "$subdir" ; then
+	if test ! -d "$subdir" ; then
 		echo "Can't create dox subdirectory $subdir"
 		return
 	fi

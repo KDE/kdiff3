@@ -2,7 +2,7 @@
                          pdiff.cpp  -  Implementation for class KDiff3App
                          ---------------
     begin                : Mon March 18 20:04:50 CET 2002
-    copyright            : (C) 2002-2005 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
@@ -826,6 +826,8 @@ void KDiff3App::slotAfterFirstPaint()
    else
    {
       m_pMergeResultWindow->slotGoTop();
+      if ( ! m_outputFilename.isEmpty() && ! m_pMergeResultWindow->isUnsolvedConflictAtCurrent() )
+         m_pMergeResultWindow->slotGoNextUnsolvedConflict();
    }
 
    if (m_pCornerWidget)

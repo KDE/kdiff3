@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
-"POT-Creation-Date: 2006-05-15 11:12+0200\n"
+"POT-Creation-Date: 2006-11-05 08:45+0100\n"
 "PO-Revision-Date: 2006-03-28 01:44+0400\n"
 "Last-Translator: Giasher <giasher@telenet.ge>\n"
 "Language-Team:  <www.gia.ge>\n"
@@ -26,15 +26,15 @@ msgid ""
 "Your emails"
 msgstr "tsiskreli@gmail.com"
 
-#: diff.cpp:245
+#: diff.cpp:246
 msgid "Writing clipboard data to temp file failed."
 msgstr "ბუფერის მონაცემის დროებით ფაილში ჩაწერა ვერ შედგა."
 
-#: diff.cpp:249
+#: diff.cpp:250
 msgid "From Clipboard"
 msgstr "გაცვლის ბუფერიდან "
 
-#: diff.cpp:451
+#: diff.cpp:491
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
 "\n"
@@ -48,7 +48,7 @@ msgstr ""
 "\n"
 "გაგრძელების ბრძანება ახლა გამოირთვება."
 
-#: diff.cpp:486
+#: diff.cpp:526
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
 "\n"
@@ -62,7 +62,7 @@ msgstr ""
 "\n"
 "ხაზთა დამთხვევა ახლა გამოირთვება."
 
-#: diff.cpp:1587 diff.cpp:1601
+#: diff.cpp:1631 diff.cpp:1645
 msgid ""
 "Data loss error:\n"
 "If it is reproducable please contact the author.\n"
@@ -70,16 +70,16 @@ msgstr ""
 "მონაცემების დაკარგვის შეცდომა:\n"
 "თუ ეს მეორდება, გთხოვთ დაუკავშირდეთ ავტორს.\n"
 
-#: diff.cpp:1589 diff.cpp:1603
+#: diff.cpp:1633 diff.cpp:1647
 msgid "Severe Internal Error"
 msgstr "მკაცრი შინაგანი შეცდომა"
 
-#: difftextwindow.cpp:1637 kdiff3.cpp:743
+#: difftextwindow.cpp:1643 kdiff3.cpp:753
 #, fuzzy
 msgid "Top line"
 msgstr "ზედა ხაზი %1"
 
-#: difftextwindow.cpp:1647
+#: difftextwindow.cpp:1653
 msgid "End"
 msgstr "დასასრული"
 
@@ -152,11 +152,11 @@ msgstr ""
 "თქვენ ახლა დირექტორიების შერწყმას ახორციელებთ.დარწმუნებული ხართ რომ გსურთ "
 "შერწყმის შეწყვეტა და დირექტორიის თავიდან სკანირება?"
 
-#: directorymergewindow.cpp:320 directorymergewindow.cpp:2864
+#: directorymergewindow.cpp:320 directorymergewindow.cpp:2868
 msgid "Rescan"
 msgstr "თავიდან სკანირება"
 
-#: directorymergewindow.cpp:320 kdiff3.cpp:594 pdiff.cpp:965
+#: directorymergewindow.cpp:320 kdiff3.cpp:603 pdiff.cpp:979
 msgid "Continue Merging"
 msgstr "შერწყმის გაგრძელება"
 
@@ -224,9 +224,9 @@ msgstr "ზოგიერთი ქვედირექტორიის წ�
 msgid "Check the permissions of the subdirectories."
 msgstr "ქვედირექტორიების უფლებების შემოწმება."
 
-#: directorymergewindow.cpp:646 kdiff3.cpp:547 kdiff3.cpp:627 kdiff3.cpp:651
-#: kdiff3.cpp:924 kdiff3.cpp:945 pdiff.cpp:1045 pdiff.cpp:1117 pdiff.cpp:1155
-#: pdiff.cpp:1171 pdiff.cpp:1201 pdiff.cpp:1212
+#: directorymergewindow.cpp:646 kdiff3.cpp:552 kdiff3.cpp:636 kdiff3.cpp:661
+#: kdiff3.cpp:934 kdiff3.cpp:955 pdiff.cpp:1059 pdiff.cpp:1131 pdiff.cpp:1169
+#: pdiff.cpp:1185 pdiff.cpp:1215 pdiff.cpp:1226
 msgid "Ready."
 msgstr "მზად."
 
@@ -258,7 +258,7 @@ msgstr "ეს მოსდის ყველა შერწყმის ო�
 msgid "Changing All Merge Operations"
 msgstr "ყველა შერწყმის ოპერაციების შეცვლა"
 
-#: directorymergewindow.cpp:803 mergeresultwindow.cpp:285
+#: directorymergewindow.cpp:803 mergeresultwindow.cpp:287
 msgid "C&ontinue"
 msgstr "&გაგრძელება"
 
@@ -266,74 +266,74 @@ msgstr "&გაგრძელება"
 msgid "Processing "
 msgstr "მიმდინარეობა "
 
-#: directorymergewindow.cpp:1644 directorymergewindow.cpp:1650
+#: directorymergewindow.cpp:1647 directorymergewindow.cpp:1653
 msgid "To do."
 msgstr "გასაკეთებელი."
 
-#: directorymergewindow.cpp:1752 directorymergewindow.cpp:2895
+#: directorymergewindow.cpp:1756 directorymergewindow.cpp:2899
 msgid "Copy A to B"
 msgstr "A-ს ასლი B-ში"
 
-#: directorymergewindow.cpp:1753 directorymergewindow.cpp:2896
+#: directorymergewindow.cpp:1757 directorymergewindow.cpp:2900
 msgid "Copy B to A"
 msgstr "B-ს ასლი A-ში"
 
-#: directorymergewindow.cpp:1754 directorymergewindow.cpp:2897
+#: directorymergewindow.cpp:1758 directorymergewindow.cpp:2901
 msgid "Delete A"
 msgstr "A-ს წაშლა"
 
-#: directorymergewindow.cpp:1755 directorymergewindow.cpp:2898
+#: directorymergewindow.cpp:1759 directorymergewindow.cpp:2902
 msgid "Delete B"
 msgstr "B-ს წაშლა"
 
-#: directorymergewindow.cpp:1756
+#: directorymergewindow.cpp:1760
 msgid "Delete A & B"
 msgstr "A და B-ს წაშლა"
 
-#: directorymergewindow.cpp:1757 directorymergewindow.cpp:2900
+#: directorymergewindow.cpp:1761 directorymergewindow.cpp:2904
 msgid "Merge to A"
 msgstr "შერწყმა A-სკენ"
 
-#: directorymergewindow.cpp:1758 directorymergewindow.cpp:2901
+#: directorymergewindow.cpp:1762 directorymergewindow.cpp:2905
 msgid "Merge to B"
 msgstr "შერწყმა B-სკენ"
 
-#: directorymergewindow.cpp:1759
+#: directorymergewindow.cpp:1763
 msgid "Merge to A & B"
 msgstr "შერწყმა A და B-სკენ"
 
-#: directorymergewindow.cpp:1763 directorymergewindow.cpp:2892
+#: directorymergewindow.cpp:1767 directorymergewindow.cpp:2896
 msgid "Delete (if exists)"
 msgstr "წაშლა (თუ არსებობს)"
 
-#: directorymergewindow.cpp:1764 directorymergewindow.cpp:1765
-#: directorymergewindow.cpp:2891 smalldialogs.cpp:102
+#: directorymergewindow.cpp:1768 directorymergewindow.cpp:1769
+#: directorymergewindow.cpp:2895 optiondialog.cpp:809 smalldialogs.cpp:102
 msgid "Merge"
 msgstr "შერწყმა"
 
-#: directorymergewindow.cpp:1764 directorymergewindow.cpp:1765
+#: directorymergewindow.cpp:1768 directorymergewindow.cpp:1769
 msgid "Merge (manual)"
 msgstr "შერწყმა (ხელით)"
 
-#: directorymergewindow.cpp:1766
+#: directorymergewindow.cpp:1770
 msgid "Error: Conflicting File Types"
 msgstr "შეცდომა: კონფლიქტურ ფაილთა ტიპები"
 
-#: directorymergewindow.cpp:1767
+#: directorymergewindow.cpp:1771
 msgid "Error: Dates are equal but files are not."
 msgstr "შეცდომა: თარიღები იდენტურია, მარა ფაილები არა."
 
-#: directorymergewindow.cpp:1791 directorymergewindow.cpp:1820
-#: directorymergewindow.cpp:1845
+#: directorymergewindow.cpp:1795 directorymergewindow.cpp:1824
+#: directorymergewindow.cpp:1849
 msgid "This operation is currently not possible."
 msgstr "ეს ოპერაცია ახლა შეუძლებელია."
 
-#: directorymergewindow.cpp:1791 directorymergewindow.cpp:1820
-#: directorymergewindow.cpp:1845 directorymergewindow.cpp:2102
+#: directorymergewindow.cpp:1795 directorymergewindow.cpp:1824
+#: directorymergewindow.cpp:1849 directorymergewindow.cpp:2106
 msgid "Operation Not Possible"
 msgstr "ოპერაცია შეუძლებელია"
 
-#: directorymergewindow.cpp:1884
+#: directorymergewindow.cpp:1888
 msgid ""
 "This should never happen: \n"
 "\n"
@@ -347,42 +347,42 @@ msgstr ""
 "\n"
 "თუ იცით როგორ განახორციალოთ ეს, გთხოვთ დაუკავსირდეთ პროგრამის ავტორს."
 
-#: directorymergewindow.cpp:1884
+#: directorymergewindow.cpp:1888
 msgid "Program Error"
 msgstr "პროგრამის შეცდომა"
 
-#: directorymergewindow.cpp:1895
+#: directorymergewindow.cpp:1899
 msgid ""
 "An error occurred while copying.\n"
 msgstr ""
 "ასლის გაკეთებისას შეცდომა მოხდა.\n"
 
-#: directorymergewindow.cpp:1896 directorymergewindow.cpp:2302
+#: directorymergewindow.cpp:1900 directorymergewindow.cpp:2306
 msgid "Merge Error"
 msgstr "შერწმის შეცდომა"
 
-#: directorymergewindow.cpp:1901 directorymergewindow.cpp:2307
+#: directorymergewindow.cpp:1905 directorymergewindow.cpp:2311
 msgid "Error."
 msgstr "შეცდომა."
 
-#: directorymergewindow.cpp:1906 directorymergewindow.cpp:2198
-#: directorymergewindow.cpp:2238
+#: directorymergewindow.cpp:1910 directorymergewindow.cpp:2202
+#: directorymergewindow.cpp:2242
 msgid "Done."
 msgstr "შესრულებულია."
 
-#: directorymergewindow.cpp:1929
+#: directorymergewindow.cpp:1933
 msgid "Not saved."
 msgstr "არაა შენახული."
 
-#: directorymergewindow.cpp:1964
+#: directorymergewindow.cpp:1968
 msgid "Unknown merge operation. (This must never happen!)"
 msgstr "შერწყმის უცნობი ოპერაცია. (ეს არასდროს არ უნდა მომხდარიყო!)"
 
-#: directorymergewindow.cpp:1996
+#: directorymergewindow.cpp:2000
 msgid "Unknown merge operation."
 msgstr "შერწყმის უცნობი ოპერაცია."
 
-#: directorymergewindow.cpp:2011
+#: directorymergewindow.cpp:2015
 msgid ""
 "The merge is about to begin.\n"
 "\n"
@@ -401,40 +401,40 @@ msgstr ""
 "გაითვალისწინეთ ეს პროგრამა ჯერ კიდევ ბეტაა და არანაერი გარანტია არ არსებობს! "
 "სასიცოცხლო მნიშვნელობის მონაცემების სარეზერვო ასლები გააკეთეთ!"
 
-#: directorymergewindow.cpp:2016
+#: directorymergewindow.cpp:2020
 msgid "Starting Merge"
 msgstr "შერწყმის დაწყება"
 
-#: directorymergewindow.cpp:2016
+#: directorymergewindow.cpp:2020
 msgid "Do It"
 msgstr "გააკეთე"
 
-#: directorymergewindow.cpp:2016
+#: directorymergewindow.cpp:2020
 msgid "Simulate It"
 msgstr "სიმულაცია"
 
-#: directorymergewindow.cpp:2042
+#: directorymergewindow.cpp:2046
 msgid ""
 "The highlighted item has a different type in the different directories. Select "
 "what to do."
 msgstr ""
 "მარკირებული ელემენტი სხვადასხვა დირექტორიებში სხვადასხვაა. აირჩიეთ რა ქნათ."
 
-#: directorymergewindow.cpp:2051
+#: directorymergewindow.cpp:2055
 msgid ""
 "The modification dates of the file are equal but the files are not. Select what "
 "to do."
 msgstr ""
 "ფაილის მოდიფიკაციის თარიღები იდენტურია მარა ფაილები არა. აირჩიეთ რა გააკეთოთ."
 
-#: directorymergewindow.cpp:2102
+#: directorymergewindow.cpp:2106
 msgid ""
 "This operation is currently not possible because directory merge is currently "
 "running."
 msgstr ""
 "ოპერაცია ახლა შეუძლებელია, რადგან დირექტორიათა შერწყმა უკვე გაშვებულია."
 
-#: directorymergewindow.cpp:2162
+#: directorymergewindow.cpp:2166
 msgid ""
 "There was an error in the last step.\n"
 "Do you want to continue with the item that caused the error or do you want to "
@@ -444,287 +444,287 @@ msgstr ""
 "გსურთ ამ ელემენტით გაგრძელება, რომლის გამოც გდება შეცდომა, თუ გსურთ გადაახტეთ "
 "მას?"
 
-#: directorymergewindow.cpp:2164
+#: directorymergewindow.cpp:2168
 msgid "Continue merge after an error"
 msgstr "შეცდომის შემდეგ შერწმის გაგრძელება"
 
-#: directorymergewindow.cpp:2164
+#: directorymergewindow.cpp:2168
 msgid "Continue With Last Item"
 msgstr "უკანასკნელი ელემენტით გაგრძელება"
 
-#: directorymergewindow.cpp:2164
+#: directorymergewindow.cpp:2168
 msgid "Skip Item"
 msgstr "ელემენტის გაცდენა"
 
-#: directorymergewindow.cpp:2198
+#: directorymergewindow.cpp:2202
 msgid "Skipped."
 msgstr "გაცდენილია."
 
-#: directorymergewindow.cpp:2205 directorymergewindow.cpp:2431
+#: directorymergewindow.cpp:2209 directorymergewindow.cpp:2435
 msgid "In progress..."
 msgstr "მიმდინარეობს..."
 
-#: directorymergewindow.cpp:2253
+#: directorymergewindow.cpp:2257
 msgid "Merge operation complete."
 msgstr "შერწყმის ოპერაცია დასრულდა."
 
-#: directorymergewindow.cpp:2253 directorymergewindow.cpp:2256
+#: directorymergewindow.cpp:2257 directorymergewindow.cpp:2260
 msgid "Merge Complete"
 msgstr "შერწყმა დასრულდა"
 
-#: directorymergewindow.cpp:2265
+#: directorymergewindow.cpp:2269
 msgid ""
 "Simulated merge complete: Check if you agree with the proposed operations."
 msgstr ""
 "შერწყმის სიმულაცია დასრულდა: შეამოწმეთ თუ ეთანხმებით შემოთავაზებულ ოპერაციებს."
 
-#: directorymergewindow.cpp:2301
+#: directorymergewindow.cpp:2305
 msgid ""
 "An error occurred. Press OK to see detailed information.\n"
 msgstr ""
 "შეცდომა მოხდა. დააწკაპუნეთ OK დეტალური ცნობების სანახავად.\n"
 
-#: directorymergewindow.cpp:2344
+#: directorymergewindow.cpp:2348
 msgid "Error: While deleting %1: Creating backup failed."
 msgstr "შეცდომა: %1-ს წასლის დროს: სარეზერვო ასლის შექმნა ვერ შედგა."
 
-#: directorymergewindow.cpp:2351
+#: directorymergewindow.cpp:2355
 msgid "delete directory recursively( %1 )"
 msgstr "დირექტორიის რეკურსიულად წაშლა( %1 )"
 
-#: directorymergewindow.cpp:2353
+#: directorymergewindow.cpp:2357
 msgid "delete( %1 )"
 msgstr "წაშლა( %1 )"
 
-#: directorymergewindow.cpp:2368
+#: directorymergewindow.cpp:2372
 msgid "Error: delete dir operation failed while trying to read the directory."
 msgstr "შეცდომა: დირექტორიის წაშლის ოპერაცია ვერ შედგა წაკითხვის მცდელობისას."
 
-#: directorymergewindow.cpp:2387
+#: directorymergewindow.cpp:2391
 msgid "Error: rmdir( %1 ) operation failed."
 msgstr "შეცდომა: rmdir( %1 ) ოპერაცია ვერ შედგა."
 
-#: directorymergewindow.cpp:2397
+#: directorymergewindow.cpp:2401
 msgid "Error: delete operation failed."
 msgstr "შეცდომა: წაშლის ოპპერაცია ვერ შედგა."
 
-#: directorymergewindow.cpp:2423
+#: directorymergewindow.cpp:2427
 msgid "manual merge( %1, %2, %3 -> %4)"
 msgstr "ხელით შერწყმა( %1, %2, %3 -> %4)"
 
-#: directorymergewindow.cpp:2426
+#: directorymergewindow.cpp:2430
 msgid ""
 "     Note: After a manual merge the user should continue by pressing F7."
 msgstr ""
 "     გაითვალისწინეთ: ხელით შერწყმის შემდეგ მომხმარებელმა უნდა გააგრძელოს F7-ის "
 "დაჭერით."
 
-#: directorymergewindow.cpp:2449
+#: directorymergewindow.cpp:2453
 msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
 msgstr ""
 "შეცდომა: ასლი( %1 -> %2 ) ვერ შედგა.არსებული დანიშნულების ფაილის წაშლა ვერ "
 "შედგა."
 
-#: directorymergewindow.cpp:2459
+#: directorymergewindow.cpp:2463
 msgid "copyLink( %1 -> %2 )"
 msgstr "copyLink( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2470
+#: directorymergewindow.cpp:2474
 msgid "Error: copyLink failed: Remote links are not yet supported."
 msgstr ""
 "შეცდომა copyLink ვერ შედგა: დაშორებული ბმულები ჯერ არ არის მხარდაჭერილი."
 
-#: directorymergewindow.cpp:2476
+#: directorymergewindow.cpp:2480
 msgid "Error: copyLink failed."
 msgstr "შეცდომა: copyLink ვერ შედგა."
 
-#: directorymergewindow.cpp:2496
+#: directorymergewindow.cpp:2500
 msgid "copy( %1 -> %2 )"
 msgstr "ასლი( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2522
+#: directorymergewindow.cpp:2526
 msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
 msgstr ""
 "შეცდომა სახელის გადარქმევისას( %1 -> %2 ): არსებული დანიშნულების წაშლა "
 "შეუძლებელია."
 
-#: directorymergewindow.cpp:2528
+#: directorymergewindow.cpp:2532
 msgid "rename( %1 -> %2 )"
 msgstr "rename( %1 -> %2 )"
 
-#: directorymergewindow.cpp:2537
+#: directorymergewindow.cpp:2541
 msgid "Error: Rename failed."
 msgstr "შეცდომა: სახელის გადარქმევა ვერ შედგა."
 
-#: directorymergewindow.cpp:2555
+#: directorymergewindow.cpp:2559
 msgid "Error during makeDir of %1. Cannot delete existing file."
 msgstr "შეცდომა %1-ს makeDir-ის დროს. არსებული ფაილის წაშლა შეუძლებელია,"
 
-#: directorymergewindow.cpp:2571
+#: directorymergewindow.cpp:2575
 msgid "makeDir( %1 )"
 msgstr "makeDir( %1 )"
 
-#: directorymergewindow.cpp:2581
+#: directorymergewindow.cpp:2585
 msgid "Error while creating directory."
 msgstr "დირექტორიის შექმნისას შეცდომა."
 
-#: directorymergewindow.cpp:2604 directorymergewindow.cpp:2721
+#: directorymergewindow.cpp:2608 directorymergewindow.cpp:2725
 msgid "Dest"
 msgstr "Dest"
 
-#: directorymergewindow.cpp:2608 directorymergewindow.cpp:2646
+#: directorymergewindow.cpp:2612 directorymergewindow.cpp:2650
 msgid "Dir"
 msgstr "Dir"
 
-#: directorymergewindow.cpp:2609
+#: directorymergewindow.cpp:2613
 msgid "Type"
 msgstr "ტიპი"
 
-#: directorymergewindow.cpp:2610
+#: directorymergewindow.cpp:2614
 msgid "Size"
 msgstr "ზომა"
 
-#: directorymergewindow.cpp:2611
+#: directorymergewindow.cpp:2615
 msgid "Attr"
 msgstr "Attr"
 
-#: directorymergewindow.cpp:2612
+#: directorymergewindow.cpp:2616
 msgid "Last Modification"
 msgstr "უკანასკნელად ჩასწორებულია"
 
-#: directorymergewindow.cpp:2613
+#: directorymergewindow.cpp:2617
 msgid "Link-Destination"
 msgstr "ბმულის დანიშნულება"
 
-#: directorymergewindow.cpp:2663
+#: directorymergewindow.cpp:2667
 msgid "not available"
 msgstr "ხელმიუწვდომელია"
 
-#: directorymergewindow.cpp:2683
+#: directorymergewindow.cpp:2687
 msgid "A (Dest): "
 msgstr "A (Dest): "
 
-#: directorymergewindow.cpp:2686
+#: directorymergewindow.cpp:2690
 msgid "A (Base): "
 msgstr "A (ფუძე): "
 
-#: directorymergewindow.cpp:2692
+#: directorymergewindow.cpp:2696
 msgid "B (Dest): "
 msgstr "B (Dest): "
 
-#: directorymergewindow.cpp:2700
+#: directorymergewindow.cpp:2704
 msgid "C (Dest): "
 msgstr "C (Dest): "
 
-#: directorymergewindow.cpp:2706
+#: directorymergewindow.cpp:2710
 msgid "Dest: "
 msgstr "Dest:"
 
-#: directorymergewindow.cpp:2771
+#: directorymergewindow.cpp:2775
 #, fuzzy
 msgid "Save Directory Merge State As..."
 msgstr "დირექტორიათა შერწყმა"
 
-#: directorymergewindow.cpp:2858
+#: directorymergewindow.cpp:2862
 msgid "Start/Continue Directory Merge"
 msgstr "დირექტორიის შერწყმის დაწყება/გაგრძელება"
 
-#: directorymergewindow.cpp:2859
+#: directorymergewindow.cpp:2863
 msgid "Run Operation for Current Item"
 msgstr "მიმდინარე ელემენტიდან ოპერაციის გაშვება"
 
-#: directorymergewindow.cpp:2860
+#: directorymergewindow.cpp:2864
 msgid "Compare Selected File"
 msgstr "მონიშნული ფაილების შედარება"
 
-#: directorymergewindow.cpp:2861
+#: directorymergewindow.cpp:2865
 msgid "Merge Current File"
 msgstr "მიმდინარე ფაილის შერწყმა"
 
-#: directorymergewindow.cpp:2862
+#: directorymergewindow.cpp:2866
 msgid "Fold All Subdirs"
 msgstr "ყველა ქვედირექტორიის ჩაკეცვა"
 
-#: directorymergewindow.cpp:2863
+#: directorymergewindow.cpp:2867
 msgid "Unfold All Subdirs"
 msgstr "ყველა ქვედირექტორიის არჩაკეცვა"
 
-#: directorymergewindow.cpp:2867
+#: directorymergewindow.cpp:2871
 msgid "Choose A for All Items"
 msgstr "A -თვის ყველა ელემენტების არჩევა"
 
-#: directorymergewindow.cpp:2868
+#: directorymergewindow.cpp:2872
 msgid "Choose B for All Items"
 msgstr "B -თვის ყველა ელემენტების არჩევა"
 
-#: directorymergewindow.cpp:2869
+#: directorymergewindow.cpp:2873
 msgid "Choose C for All Items"
 msgstr "C -თვის ყველა ელემენტების არჩევა"
 
-#: directorymergewindow.cpp:2870
+#: directorymergewindow.cpp:2874
 msgid "Auto-Choose Operation for All Items"
 msgstr "ყველა ელემენტების ოპერაციების ავტო-არჩევა"
 
-#: directorymergewindow.cpp:2871
+#: directorymergewindow.cpp:2875
 msgid "No Operation for All Items"
 msgstr "ყველა ელემენტისთვის არავითარი ოპერაცია"
 
-#: directorymergewindow.cpp:2876
+#: directorymergewindow.cpp:2880
 msgid "Show Identical Files"
 msgstr ""
 
-#: directorymergewindow.cpp:2877
+#: directorymergewindow.cpp:2881
 #, fuzzy
 msgid "Show Different Files"
 msgstr "განსხვავებული ფაილების რაოდენობა:"
 
-#: directorymergewindow.cpp:2878
+#: directorymergewindow.cpp:2882
 msgid "Show Files only in A"
 msgstr ""
 
-#: directorymergewindow.cpp:2879
+#: directorymergewindow.cpp:2883
 msgid "Show Files only in B"
 msgstr ""
 
-#: directorymergewindow.cpp:2880
+#: directorymergewindow.cpp:2884
 msgid "Show Files only in C"
 msgstr ""
 
-#: directorymergewindow.cpp:2884
+#: directorymergewindow.cpp:2888
 #, fuzzy
 msgid "Compare Explicitly Selected Files"
 msgstr "მონიშნული ფაილების შედარება"
 
-#: directorymergewindow.cpp:2885
+#: directorymergewindow.cpp:2889
 #, fuzzy
 msgid "Merge Explicitly Selected Files"
 msgstr "მონიშნული ფაილების შედარება"
 
-#: directorymergewindow.cpp:2887 directorymergewindow.cpp:2894
+#: directorymergewindow.cpp:2891 directorymergewindow.cpp:2898
 msgid "Do Nothing"
 msgstr "არაფრის არ გაკეთება"
 
-#: directorymergewindow.cpp:2888
+#: directorymergewindow.cpp:2892
 msgid "A"
 msgstr "A"
 
-#: directorymergewindow.cpp:2889
+#: directorymergewindow.cpp:2893
 msgid "B"
 msgstr "B"
 
-#: directorymergewindow.cpp:2890
+#: directorymergewindow.cpp:2894
 msgid "C"
 msgstr "C"
 
-#: directorymergewindow.cpp:2899
+#: directorymergewindow.cpp:2903
 msgid "Delete A && B"
 msgstr "A და B წაშლა"
 
-#: directorymergewindow.cpp:2902
+#: directorymergewindow.cpp:2906
 msgid "Merge to A && B"
 msgstr "შერწყმა A და B-სკენ"
 
-#: fileaccess.cpp:581
+#: fileaccess.cpp:595
 msgid ""
 "While trying to make a backup, deleting an older backup failed. \n"
 "Filename: "
@@ -732,7 +732,7 @@ msgstr ""
 "სარეზერვო ასლის გაკეთების მცდელობისას, ძველი სარეზერვო ასლის წაშლა ვერ შედგა. \n"
 "ფაილის სახელი: "
 
-#: fileaccess.cpp:588
+#: fileaccess.cpp:602
 msgid ""
 "While trying to make a backup, renaming failed. \n"
 "Filenames: "
@@ -740,53 +740,53 @@ msgstr ""
 "სარეზერვო ასლის გაკეთების მცდელობისას, სახელის გადარქმევა ვერ შედგა. \n"
 "ფაილის სახელები: "
 
-#: fileaccess.cpp:610
+#: fileaccess.cpp:624
 #, c-format
 msgid "Getting file status: %1"
 msgstr "ფაილის მდგომარეობის მიღება: %1"
 
-#: fileaccess.cpp:653
+#: fileaccess.cpp:667
 #, c-format
 msgid "Reading file: %1"
 msgstr "ფაილის წაკითხვა: %1"
 
-#: fileaccess.cpp:689
+#: fileaccess.cpp:703
 #, c-format
 msgid "Writing file: %1"
 msgstr "ფაილის ჩაწერა: %1"
 
-#: fileaccess.cpp:717
+#: fileaccess.cpp:731
 msgid "Out of memory"
 msgstr "მეხსიერება არაა საკმარისი"
 
-#: fileaccess.cpp:752
+#: fileaccess.cpp:766
 #, c-format
 msgid "Making directory: %1"
 msgstr "დირექტორიის შექმნა: %1"
 
-#: fileaccess.cpp:772
+#: fileaccess.cpp:786
 #, c-format
 msgid "Removing directory: %1"
 msgstr "დირექტორიის წაშლა: %1"
 
-#: fileaccess.cpp:787
+#: fileaccess.cpp:801
 #, c-format
 msgid "Removing file: %1"
 msgstr "ფაილის წაშლა: %1"
 
-#: fileaccess.cpp:803
+#: fileaccess.cpp:817
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "სიმბოლური ბმულის შექმნა: %1 -> %2"
 
-#: fileaccess.cpp:829
+#: fileaccess.cpp:843
 msgid "Renaming file: %1 -> %2"
 msgstr "ფაილის სახელის გადარქმევა: %1 -> %2"
 
-#: fileaccess.cpp:865
+#: fileaccess.cpp:879
 msgid "Copying file: %1 -> %2"
 msgstr "ფაილის ასლი: %1 -> %2"
 
-#: fileaccess.cpp:879
+#: fileaccess.cpp:893
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for reading failed. Filename: %1"
@@ -794,7 +794,7 @@ msgstr ""
 "შეცდომა ასლის გაკეთების ოპერაციისას: ფაილის წასაკითხად გახსნა ვერ შედგა. ფაილის "
 "სახელი: %1"
 
-#: fileaccess.cpp:885
+#: fileaccess.cpp:899
 #, c-format
 msgid ""
 "Error during file copy operation: Opening file for writing failed. Filename: %1"
@@ -802,23 +802,23 @@ msgstr ""
 "შეცდომა ასლის გაკეთების ოპერაციისას: ფაილის ჩასაწერად გახსნა ვერ შედგა. ფაილის "
 "სახელი: %1"
 
-#: fileaccess.cpp:900
+#: fileaccess.cpp:914
 #, c-format
 msgid "Error during file copy operation: Reading failed. Filename: %1"
 msgstr ""
 "შეცდომა ასლის გაკეთების ოპერაციისას: წაკითხვა ვერ შედგა. ფაილის სახელი: %1"
 
-#: fileaccess.cpp:909
+#: fileaccess.cpp:923
 #, c-format
 msgid "Error during file copy operation: Writing failed. Filename: %1"
 msgstr ""
 "შეცდომა ასლის გაკეთების ოპერაციისას: ჩაწერა ვერ შედგა. ფაილის სახელი: %1"
 
-#: fileaccess.cpp:1205
+#: fileaccess.cpp:1219
 msgid "Reading directory: "
 msgstr "დირექტორიის წაკითხვა:"
 
-#: fileaccess.cpp:1334
+#: fileaccess.cpp:1348
 #, c-format
 msgid "Listing directory: %1"
 msgstr "დირექტორიის სია: %1"
@@ -838,330 +838,330 @@ msgid "Option --auto used, but no output file specified."
 msgstr ""
 "პარამეტრი --auto გამოყენებულია, მაგრამ გამონატანი ფაილი არაა მითითებული."
 
-#: kdiff3.cpp:318
+#: kdiff3.cpp:323
 msgid "Option --auto ignored for directory comparison."
 msgstr "პარამეტრი --auto დირექტორიების შედარებისთვის იგნორირებულია."
 
-#: kdiff3.cpp:354
+#: kdiff3.cpp:359
 msgid "Saving failed."
 msgstr "შენახვა ვერ შედგა."
 
-#: kdiff3.cpp:381 pdiff.cpp:1027 pdiff.cpp:1098
+#: kdiff3.cpp:386 pdiff.cpp:1041 pdiff.cpp:1112
 msgid "Opening of these files failed:"
 msgstr "ამ ფაილების გახსნა ვერ შედგა:"
 
-#: kdiff3.cpp:390
+#: kdiff3.cpp:395
 msgid "File Open Error"
 msgstr "ფაილის გახსნის შეცდომა"
 
-#: kdiff3.cpp:413
+#: kdiff3.cpp:418
 msgid "Opens documents for comparison..."
 msgstr "ხსნის დოკუმენტებს შესადარებლად..."
 
-#: kdiff3.cpp:418
+#: kdiff3.cpp:423
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "ინახავს შერწყმის შედეგებს. ყველა კონფლიქტი უნდა გადაიჭრას!"
 
-#: kdiff3.cpp:420
+#: kdiff3.cpp:425
 msgid "Saves the current document as..."
 msgstr "მიმდინარე დოკუმენტს ინახავს როგორც..."
 
-#: kdiff3.cpp:422
+#: kdiff3.cpp:427
 msgid "Print the differences"
 msgstr ""
 
-#: kdiff3.cpp:424
+#: kdiff3.cpp:429
 msgid "Quits the application"
 msgstr "პროგრამის დახურვა"
 
-#: kdiff3.cpp:426
+#: kdiff3.cpp:431
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "ჭრის მონიშნულ სექციას და გაცვლით ბუფერში ათავსებს"
 
-#: kdiff3.cpp:428
+#: kdiff3.cpp:433
 msgid "Copies the selected section to the clipboard"
 msgstr "მონიშნულ სექციის ასლს ქმნის გაცვლით ბუფერში"
 
-#: kdiff3.cpp:430
+#: kdiff3.cpp:435
 msgid "Pastes the clipboard contents to actual position"
 msgstr "გაცვლის ბუფერის შემადგენლობას სვამს მიმდინარე პოზიციაზე"
 
-#: kdiff3.cpp:432
+#: kdiff3.cpp:437
 msgid "Select everything in current window"
 msgstr ""
 
-#: kdiff3.cpp:434
+#: kdiff3.cpp:439
 msgid "Search for a string"
 msgstr "სტრიქონის ძიება"
 
-#: kdiff3.cpp:436
+#: kdiff3.cpp:441
 msgid "Search again for the string"
 msgstr "სტრიქონის თავიდან ძიება"
 
-#: kdiff3.cpp:438
+#: kdiff3.cpp:443
 msgid "Enables/disables the toolbar"
 msgstr "ხელსაწყოთა პანელს რთავს"
 
-#: kdiff3.cpp:440
+#: kdiff3.cpp:445
 msgid "Enables/disables the statusbar"
 msgstr "სტატუსის ველს რთავს"
 
-#: kdiff3.cpp:444
+#: kdiff3.cpp:449
 msgid "Configure KDiff3..."
 msgstr "KDiff3 კონფიგურაცია..."
 
-#: kdiff3.cpp:465
+#: kdiff3.cpp:470
 msgid "Go to Current Delta"
 msgstr "მიმდინარე დელტაზე გადასვლა"
 
-#: kdiff3.cpp:466
+#: kdiff3.cpp:471
 msgid "Go to First Delta"
 msgstr "პირველ დელტაზე გადასვლა"
 
-#: kdiff3.cpp:467
+#: kdiff3.cpp:472
 msgid "Go to Last Delta"
 msgstr "უკანასკნელ დელტაზე გადასვლა"
 
-#: kdiff3.cpp:468
+#: kdiff3.cpp:473
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 
-#: kdiff3.cpp:469
+#: kdiff3.cpp:474
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
 msgstr ""
 
-#: kdiff3.cpp:470
+#: kdiff3.cpp:475
 msgid "Go to Previous Delta"
 msgstr "წინა დელტაზე გადასვლა"
 
-#: kdiff3.cpp:472
+#: kdiff3.cpp:477
 msgid "Go to Next Delta"
 msgstr "შემდეგ დელტაზე გადასვლა"
 
-#: kdiff3.cpp:474
+#: kdiff3.cpp:479
 msgid "Go to Previous Conflict"
 msgstr "წინა კონფლიქტზე გადასვლა"
 
-#: kdiff3.cpp:476
+#: kdiff3.cpp:481
 msgid "Go to Next Conflict"
 msgstr "შემდეგ კონფლიქტზე გადასვლა"
 
-#: kdiff3.cpp:478
+#: kdiff3.cpp:483
 msgid "Go to Previous Unsolved Conflict"
 msgstr "წინა გადაუჭრელ კონფლიქტზე გადასვლა"
 
-#: kdiff3.cpp:480
+#: kdiff3.cpp:485
 msgid "Go to Next Unsolved Conflict"
 msgstr "შემდეგ გადაუჭრელ კონფლიქტზე გადასვლა"
 
-#: kdiff3.cpp:482
+#: kdiff3.cpp:487
 msgid "Select Line(s) From A"
 msgstr "აირჩიეთ ხაზ(ებ)ი A-დან"
 
-#: kdiff3.cpp:483
+#: kdiff3.cpp:488
 msgid "Select Line(s) From B"
 msgstr "აირჩიეთ ხაზ(ებ)ი B-დან"
 
-#: kdiff3.cpp:484
+#: kdiff3.cpp:489
 msgid "Select Line(s) From C"
 msgstr "აირჩიეთ ხაზ(ებ)ი C-დან"
 
-#: kdiff3.cpp:485
+#: kdiff3.cpp:490
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "წყაროს არჩევისას ავტომატურად გადასვლა შემდეგ გადაუჭრელ კონფლიკტზე"
 
-#: kdiff3.cpp:487
+#: kdiff3.cpp:492
 msgid "Show Space && Tabulator Characters for Differences"
 msgstr "ღარების ჩვენება და ტაბულაციის სიმბოლოების განსხვავებისთვის"
 
-#: kdiff3.cpp:488
+#: kdiff3.cpp:493
 msgid "Show White Space"
 msgstr ""
 
-#: kdiff3.cpp:490
+#: kdiff3.cpp:495
 msgid "Show Line Numbers"
 msgstr "ხაზების ნომრების ჩვენება"
 
-#: kdiff3.cpp:491
+#: kdiff3.cpp:496
 msgid "Choose A Everywhere"
 msgstr "ყველგან A-ს არჩევა"
 
-#: kdiff3.cpp:492
+#: kdiff3.cpp:497
 msgid "Choose B Everywhere"
 msgstr "ყველგან B-ს არჩევა"
 
-#: kdiff3.cpp:493
+#: kdiff3.cpp:498
 msgid "Choose C Everywhere"
 msgstr "ყველგან C-ს არჩევა"
 
-#: kdiff3.cpp:494
+#: kdiff3.cpp:499
 msgid "Choose A for All Unsolved Conflicts"
 msgstr "A-ს არჩევა ყველა გადაუჭრელი კონფლიქტისთვის"
 
-#: kdiff3.cpp:495
+#: kdiff3.cpp:500
 msgid "Choose B for All Unsolved Conflicts"
 msgstr "B-ს არჩევა ყველა გადაუჭრელი კონფლიქტისთვის"
 
-#: kdiff3.cpp:496
+#: kdiff3.cpp:501
 msgid "Choose C for All Unsolved Conflicts"
 msgstr "C-ს არჩევა ყველა გადაუჭრელი კონფლიქტისთვის"
 
-#: kdiff3.cpp:497
+#: kdiff3.cpp:502
 msgid "Choose A for All Unsolved Whitespace Conflicts"
 msgstr ""
 
-#: kdiff3.cpp:498
+#: kdiff3.cpp:503
 msgid "Choose B for All Unsolved Whitespace Conflicts"
 msgstr ""
 
-#: kdiff3.cpp:499
+#: kdiff3.cpp:504
 msgid "Choose C for All Unsolved Whitespace Conflicts"
 msgstr ""
 
-#: kdiff3.cpp:500
+#: kdiff3.cpp:505
 msgid "Automatically Solve Simple Conflicts"
 msgstr "მარტივი კონფლიქტების ავრომატურად გადაჭრა"
 
-#: kdiff3.cpp:501
+#: kdiff3.cpp:506
 msgid "Set Deltas to Conflicts"
 msgstr "კონფლიქტებისთვის დელტას მინიჭება"
 
-#: kdiff3.cpp:502
+#: kdiff3.cpp:507
 msgid "Run Regular Expression Auto Merge"
 msgstr ""
 
-#: kdiff3.cpp:503
+#: kdiff3.cpp:508
 #, fuzzy
 msgid "Automatically Solve History Conflicts"
 msgstr "მარტივი კონფლიქტების ავრომატურად გადაჭრა"
 
-#: kdiff3.cpp:504
+#: kdiff3.cpp:509
 msgid "Split Diff At Selection"
 msgstr ""
 
-#: kdiff3.cpp:505
+#: kdiff3.cpp:510
 #, fuzzy
 msgid "Join Selected Diffs"
 msgstr "მონიშნული ფაილების შედარება"
 
-#: kdiff3.cpp:507
+#: kdiff3.cpp:512
 msgid "Show Window A"
 msgstr "ფანჯარა A-ს ჩვენება "
 
-#: kdiff3.cpp:508
+#: kdiff3.cpp:513
 msgid "Show Window B"
 msgstr "ფანჯარა B-ს ჩვენება"
 
-#: kdiff3.cpp:509
+#: kdiff3.cpp:514
 msgid "Show Window C"
 msgstr "ფანჯარა C-ს ჩვენება"
 
-#: kdiff3.cpp:510 kdiff3.cpp:521
+#: kdiff3.cpp:515 kdiff3.cpp:526
 msgid "Focus Next Window"
 msgstr "ფოკუსი შემდეგ ფანჯარაზე"
 
-#: kdiff3.cpp:512
+#: kdiff3.cpp:517
 msgid "Normal Overview"
 msgstr "ჩვეულებრივი გადახედვა"
 
-#: kdiff3.cpp:513
+#: kdiff3.cpp:518
 msgid "A vs. B Overview"
 msgstr "A წინააღმდეგ B გადახედვა"
 
-#: kdiff3.cpp:514
+#: kdiff3.cpp:519
 msgid "A vs. C Overview"
 msgstr "A წინააღმდეგ C გადახედვა"
 
-#: kdiff3.cpp:515
+#: kdiff3.cpp:520
 msgid "B vs. C Overview"
 msgstr "B წინააღმდეგ C გადახედვა"
 
-#: kdiff3.cpp:516
+#: kdiff3.cpp:521
 msgid "Word Wrap Diff Windows"
 msgstr "Word Wrap Diff ფანჯრები"
 
-#: kdiff3.cpp:517
+#: kdiff3.cpp:522
 msgid "Add Manual Diff Alignment"
 msgstr ""
 
-#: kdiff3.cpp:518
+#: kdiff3.cpp:523
 msgid "Clear All Manual Diff Alignments"
 msgstr ""
 
-#: kdiff3.cpp:523
+#: kdiff3.cpp:528
 msgid "Focus Prev Window"
 msgstr "ფოკუსი წინა ფანჯარაზე"
 
-#: kdiff3.cpp:524
+#: kdiff3.cpp:529
 msgid "Toggle Split Orientation"
 msgstr "გახლეჩვის ორიენტაციის გადართვა"
 
-#: kdiff3.cpp:526
+#: kdiff3.cpp:531
 msgid "Dir && Text Split Screen View"
 msgstr "დირექტორიისა და ტექსტი განლაგების ეკრანის ხედი"
 
-#: kdiff3.cpp:528
+#: kdiff3.cpp:533
 msgid "Toggle Between Dir && Text View"
 msgstr "დირექტორიათა და ტექსტის ხედებს შორის გადართვა"
 
-#: kdiff3.cpp:573 pdiff.cpp:1698
+#: kdiff3.cpp:582 pdiff.cpp:1712
 msgid "The merge result hasn't been saved."
 msgstr "შერწყმის შედეგები არ იყო შენახული."
 
-#: kdiff3.cpp:574
+#: kdiff3.cpp:583
 msgid "Save && Quit"
 msgstr "შენახვა და გასვლა"
 
-#: kdiff3.cpp:574
+#: kdiff3.cpp:583
 msgid "Quit Without Saving"
 msgstr "გასვლა შენახვის გარეშე"
 
-#: kdiff3.cpp:582 pdiff.cpp:1707
+#: kdiff3.cpp:591 pdiff.cpp:1721
 msgid "Saving the merge result failed."
 msgstr "შერწყმის შედეგების შენახვა ვერ შედგა."
 
-#: kdiff3.cpp:593 pdiff.cpp:964
+#: kdiff3.cpp:602 pdiff.cpp:978
 msgid ""
 "You are currently doing a directory merge. Are you sure, you want to abort?"
 msgstr "თქვენ ახლა დირექტორიათა შერწყმას აკეთებთ. ნამდვილად გსურთ შეწყვეტა?"
 
-#: kdiff3.cpp:616
+#: kdiff3.cpp:625
 msgid "Saving file..."
 msgstr "ფაილის შენახვა..."
 
-#: kdiff3.cpp:633
+#: kdiff3.cpp:642
 msgid "Saving file with a new filename..."
 msgstr "ფაილის ახალი სახელით შენახვა..."
 
-#: kdiff3.cpp:722
+#: kdiff3.cpp:732
 #, fuzzy
 msgid "Printing..."
 msgstr "გამოსვლა..."
 
-#: kdiff3.cpp:728 kdiff3.cpp:890
+#: kdiff3.cpp:738 kdiff3.cpp:900
 msgid "Printing aborted."
 msgstr ""
 
-#: kdiff3.cpp:860
+#: kdiff3.cpp:870
 msgid "Selection"
 msgstr ""
 
-#: kdiff3.cpp:886
+#: kdiff3.cpp:896
 #, fuzzy
 msgid "Printing completed."
 msgstr "შერწყმის ოპერაცია დასრულდა."
 
-#: kdiff3.cpp:896
+#: kdiff3.cpp:906
 msgid "Exiting..."
 msgstr "გამოსვლა..."
 
-#: kdiff3.cpp:908
+#: kdiff3.cpp:918
 msgid "Toggling toolbar..."
 msgstr "ხელსაწყოთა პანელის გადართვა..."
 
-#: kdiff3.cpp:929
+#: kdiff3.cpp:939
 msgid "Toggle the statusbar..."
 msgstr "სტატუსის ზოლის გადართვა..."
 
@@ -1261,24 +1261,24 @@ msgid "Ignored. (User defined.)"
 msgstr ""
 
 #. i18n: file kdiff3_part.rc line 16
-#: main.cpp:171 rc.cpp:9
+#: main.cpp:173 rc.cpp:9
 #, no-c-format
 msgid "KDiff3"
 msgstr "KDiff3"
 
-#: main.cpp:184
+#: main.cpp:186
 msgid "+ Many thanks to those who reported bugs and contributed ideas!"
 msgstr ""
 "+ დიდი მადლობა მათ ვინც გვატყობინებს ბზიკების შესახებ და გვაწოდებს იდეებს!"
 
-#: mergeresultwindow.cpp:133 mergeresultwindow.cpp:937
-#: mergeresultwindow.cpp:951 mergeresultwindow.cpp:963
-#: mergeresultwindow.cpp:975
+#: mergeresultwindow.cpp:136 mergeresultwindow.cpp:939
+#: mergeresultwindow.cpp:953 mergeresultwindow.cpp:965
+#: mergeresultwindow.cpp:977
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr ""
 "დარჩენილი გადაუჭრელი კონფლიქტების რაოდენობა: %1 (საიდანაც %2 არის ღარი)"
 
-#: mergeresultwindow.cpp:283
+#: mergeresultwindow.cpp:285
 msgid ""
 "The output has been modified.\n"
 "If you continue your changes will be lost."
@@ -1286,55 +1286,55 @@ msgstr ""
 "გამონატანი ჩასწორებულია.\n"
 "თუ გააგრძელებთ ცვლილებები დაგეკარგებათ."
 
-#: mergeresultwindow.cpp:795 pdiff.cpp:507
+#: mergeresultwindow.cpp:797 pdiff.cpp:511
 msgid "All input files are binary equal."
 msgstr "ყველა შეტანილი ბაილის ბინარი ტოლია."
 
-#: mergeresultwindow.cpp:797
+#: mergeresultwindow.cpp:799
 msgid "All input files contain the same text."
 msgstr "ყველა შეტანილი ფაილის შეიცავს ერთიდაიგივე ტექსტი."
 
-#: mergeresultwindow.cpp:799
+#: mergeresultwindow.cpp:801
 msgid ""
 "Files A and B are binary equal.\n"
 msgstr ""
 "A და B ბინარულად ტოლია.\n"
 
-#: mergeresultwindow.cpp:800
+#: mergeresultwindow.cpp:802
 msgid ""
 "Files A and B have equal text. \n"
 msgstr ""
 "A და B აქვთ ერთიდაიგივე ტექსტი. \n"
 
-#: mergeresultwindow.cpp:801
+#: mergeresultwindow.cpp:803
 msgid ""
 "Files A and C are binary equal.\n"
 msgstr ""
 "A და C ბინარულად ტოლია.\n"
 
-#: mergeresultwindow.cpp:802
+#: mergeresultwindow.cpp:804
 msgid ""
 "Files A and C have equal text. \n"
 msgstr ""
 "A და C აქვთ ერთიდაიგივე ტექსტი. \n"
 
-#: mergeresultwindow.cpp:803
+#: mergeresultwindow.cpp:805
 msgid ""
 "Files B and C are binary equal.\n"
 msgstr ""
 "B და C ბინარულად ტოლია.\n"
 
-#: mergeresultwindow.cpp:804
+#: mergeresultwindow.cpp:806
 msgid ""
 "Files B and C have equal text. \n"
 msgstr ""
 "B და C აქვთ ერთიდაიგივე ტექსტი. \n"
 
-#: mergeresultwindow.cpp:810
+#: mergeresultwindow.cpp:812
 msgid "Total number of conflicts: "
 msgstr "კონფლიქტების სრული რაოდენობა: "
 
-#: mergeresultwindow.cpp:811
+#: mergeresultwindow.cpp:813
 msgid ""
 "\n"
 "Nr of automatically solved conflicts: "
@@ -1342,7 +1342,7 @@ msgstr ""
 "\n"
 "ავტომატურად გადაჭრილი კონფლიქტების რაოდენობა: "
 
-#: mergeresultwindow.cpp:812
+#: mergeresultwindow.cpp:814
 msgid ""
 "\n"
 "Nr of unsolved conflicts: "
@@ -1350,31 +1350,23 @@ msgstr ""
 "\n"
 "გადაუჭრელი კონფლიქტების რაოდენობა: "
 
-#: mergeresultwindow.cpp:814
+#: mergeresultwindow.cpp:816
 msgid "Conflicts"
 msgstr "კონფლიქტები"
 
-#: mergeresultwindow.cpp:1650
+#: mergeresultwindow.cpp:1652
 msgid "<No src line>"
 msgstr "<No src line>"
 
-#: mergeresultwindow.cpp:1658
+#: mergeresultwindow.cpp:1660
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<Merge Conflict (Whitespace only)>"
 
-#: mergeresultwindow.cpp:1660 mergeresultwindow.cpp:2446
+#: mergeresultwindow.cpp:1662 mergeresultwindow.cpp:2427
 msgid "<Merge Conflict>"
 msgstr "<Merge Conflict>"
 
-#: mergeresultwindow.cpp:1730
-msgid "Output"
-msgstr "გამონატანი"
-
-#: mergeresultwindow.cpp:1732
-msgid "[Modified]"
-msgstr "[ჩასწორებულია]"
-
-#: mergeresultwindow.cpp:2656
+#: mergeresultwindow.cpp:2635
 msgid ""
 "Not all conflicts are solved yet.\n"
 "File not saved.\n"
@@ -1382,11 +1374,11 @@ msgstr ""
 "ყველა კონფლიქტი ჯერ არაა გადაჭრილი.\n"
 "ფაილი არაა შენახული.\n"
 
-#: mergeresultwindow.cpp:2658
+#: mergeresultwindow.cpp:2637
 msgid "Conflicts Left"
 msgstr "დარჩენილი კონფლიქტები"
 
-#: mergeresultwindow.cpp:2670
+#: mergeresultwindow.cpp:2649
 msgid ""
 "\n"
 "\n"
@@ -1396,39 +1388,57 @@ msgstr ""
 "\n"
 "სარეზერვო ასლის შექმნა ვერ შედგა. ფაილი არაა შენახული."
 
-#: mergeresultwindow.cpp:2670 mergeresultwindow.cpp:2710
+#: mergeresultwindow.cpp:2649 mergeresultwindow.cpp:2689
 msgid "File Save Error"
 msgstr "ფაილის შენახვის შეცდომა"
 
-#: mergeresultwindow.cpp:2710
+#: mergeresultwindow.cpp:2689
 msgid "Error while writing."
 msgstr "ჩაწერისას შეცდომა."
 
-#: optiondialog.cpp:361
+#: mergeresultwindow.cpp:3020
+msgid "Output"
+msgstr "გამონატანი"
+
+#: mergeresultwindow.cpp:3032 mergeresultwindow.cpp:3139
+msgid "[Modified]"
+msgstr "[ჩასწორებულია]"
+
+#: mergeresultwindow.cpp:3039
+#, fuzzy
+msgid "Encoding for saving"
+msgstr "ფაილის კოდირება C-თვის:"
+
+#: mergeresultwindow.cpp:3075 mergeresultwindow.cpp:3081
+#: mergeresultwindow.cpp:3087
+msgid "Codec from"
+msgstr ""
+
+#: optiondialog.cpp:362
 msgid "Unicode, 8 bit"
 msgstr "უნიკოდი, 8 bit"
 
-#: optiondialog.cpp:362
+#: optiondialog.cpp:363
 msgid "Unicode"
 msgstr "უნიკოდი"
 
-#: optiondialog.cpp:363
+#: optiondialog.cpp:364
 msgid "Latin1"
 msgstr "Latin1"
 
-#: optiondialog.cpp:382
+#: optiondialog.cpp:383
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "შეცვალე თუ არა ASCII სიმბოლოები არ აისახება მართებულად."
 
-#: optiondialog.cpp:507
+#: optiondialog.cpp:510
 msgid "Editor & Diff Output Font"
 msgstr "რედაქტორი და Diff გამონატანის შრიფტი"
 
-#: optiondialog.cpp:528
+#: optiondialog.cpp:531
 msgid "Italic font for deltas"
 msgstr "დელტასთვის კურსივი"
 
-#: optiondialog.cpp:531
+#: optiondialog.cpp:534
 msgid ""
 "Selects the italic version of the font for differences.\n"
 "If the font doesn't support italic characters, then this does nothing."
@@ -1436,99 +1446,99 @@ msgstr ""
 "ირჩევს კურსივ შრიფტებს განსხვავებისთვის.\n"
 "თუ შრიფტს არ აქვს კურსივის მხარდაჭერა, მაშინ ეს არაფერს არ აკეთებს."
 
-#: optiondialog.cpp:539
+#: optiondialog.cpp:542
 msgid "Color"
 msgstr "ფერი"
 
-#: optiondialog.cpp:539
+#: optiondialog.cpp:542
 #, fuzzy
 msgid "Colors Settings"
 msgstr "რეგიონალური პარამეტრები"
 
-#: optiondialog.cpp:553
+#: optiondialog.cpp:556
 msgid "Editor and Diff Views:"
 msgstr ""
 
-#: optiondialog.cpp:561
+#: optiondialog.cpp:564
 msgid "Foreground color:"
 msgstr "ზედაპირის ფერი:"
 
-#: optiondialog.cpp:567
+#: optiondialog.cpp:570
 msgid "Background color:"
 msgstr "ფონის ფერი:"
 
-#: optiondialog.cpp:575
+#: optiondialog.cpp:578
 msgid "Diff background color:"
 msgstr "Diff ფონის ფერი:"
 
-#: optiondialog.cpp:582
+#: optiondialog.cpp:585
 msgid "Color A:"
 msgstr "ფერი A:"
 
-#: optiondialog.cpp:589
+#: optiondialog.cpp:592
 msgid "Color B:"
 msgstr "ფერი B:"
 
-#: optiondialog.cpp:596
+#: optiondialog.cpp:599
 msgid "Color C:"
 msgstr "ფერი C:"
 
-#: optiondialog.cpp:602
+#: optiondialog.cpp:605
 msgid "Conflict color:"
 msgstr "კონფლიქტის ფერი:"
 
-#: optiondialog.cpp:609
+#: optiondialog.cpp:612
 msgid "Current range background color:"
 msgstr "მიმდინარე შუალედის ფონის ფერი:"
 
-#: optiondialog.cpp:616
+#: optiondialog.cpp:619
 msgid "Current range diff background color:"
 msgstr "მიმდინარე შუალედის diff ფონის ფერი:"
 
-#: optiondialog.cpp:622
+#: optiondialog.cpp:625
 msgid "Color for manually aligned difference ranges:"
 msgstr ""
 
-#: optiondialog.cpp:627
+#: optiondialog.cpp:630
 #, fuzzy
 msgid "Directory Comparison View:"
 msgstr "დირექტორიის შედარების სტატუსი"
 
-#: optiondialog.cpp:633
+#: optiondialog.cpp:636
 msgid "Newest file color:"
 msgstr ""
 
-#: optiondialog.cpp:636
+#: optiondialog.cpp:639
 msgid ""
 "Changing this color will only be effective when starting the next directory "
 "comparison."
 msgstr ""
 
-#: optiondialog.cpp:641
+#: optiondialog.cpp:644
 msgid "Oldest file color:"
 msgstr ""
 
-#: optiondialog.cpp:648
+#: optiondialog.cpp:651
 msgid "Middle age file color:"
 msgstr ""
 
-#: optiondialog.cpp:655
+#: optiondialog.cpp:658
 msgid "Color for missing files:"
 msgstr ""
 
-#: optiondialog.cpp:667
+#: optiondialog.cpp:670
 msgid "Editor"
 msgstr "რედაქტორი"
 
-#: optiondialog.cpp:667
+#: optiondialog.cpp:670
 msgid "Editor Behavior"
 msgstr "რედაქტორის ქცევა"
 
-#: optiondialog.cpp:677
+#: optiondialog.cpp:680
 msgid "Tab inserts spaces"
 msgstr "Tab სვავს ღარებს"
 
-#: optiondialog.cpp:680
+#: optiondialog.cpp:683
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
 "Off: A Tab-character will be inserted."
@@ -1536,25 +1546,25 @@ msgstr ""
 "ჩართულია: tab-ის დაჭერა აგენერირებს ღარების განსაზღვრულ რაოდენობას.\n"
 "გამორთულია: ტაბულაციის სიმბოლო იქნება ჩასმული."
 
-#: optiondialog.cpp:686
+#: optiondialog.cpp:689
 msgid "Tab size:"
 msgstr "ჩანართის ზომა:"
 
-#: optiondialog.cpp:691
+#: optiondialog.cpp:694
 msgid "Auto indentation"
 msgstr "ავტო შეწევა"
 
-#: optiondialog.cpp:694
+#: optiondialog.cpp:697
 msgid ""
 "On: The indentation of the previous line is used for a new line.\n"
 msgstr ""
 "ჩართულია: წინა ხაზის შეწევა გამოიყენება ახალი ხაზისთვის.\n"
 
-#: optiondialog.cpp:698
+#: optiondialog.cpp:701
 msgid "Auto copy selection"
 msgstr "მონიშვნის ავტო ასლი"
 
-#: optiondialog.cpp:701
+#: optiondialog.cpp:704
 msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
 "Off: You must explicitely copy e.g. via Ctrl-C."
@@ -1562,11 +1572,11 @@ msgstr ""
 "ჩართულია: ნებისმიერი მონიშვნა ჯდება გაცვლის ბუფერში.\n"
 "გამორთულია: თქვენ ასლი უნდა გააკეთოთ მაგ. Ctrl-C."
 
-#: optiondialog.cpp:706
+#: optiondialog.cpp:709
 msgid "Line end style:"
 msgstr "ხაზის დასარულის სტილი:"
 
-#: optiondialog.cpp:718
+#: optiondialog.cpp:721
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
 "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
@@ -1574,31 +1584,31 @@ msgstr ""
 "აყენებს ხაზის ბოლოს როდესაც რედაქტურებული ფაილი ინახება.\n"
 "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
 
-#: optiondialog.cpp:729
+#: optiondialog.cpp:732
 #, fuzzy
-msgid "Diff and Merge"
-msgstr "Diff & შერწყმა"
+msgid "Diff"
+msgstr "KDiff3"
 
-#: optiondialog.cpp:729
+#: optiondialog.cpp:732
 #, fuzzy
-msgid "Diff and Merge Settings"
+msgid "Diff Settings"
 msgstr "Diff & შერწყმის პარამეტრები"
 
-#: optiondialog.cpp:740
+#: optiondialog.cpp:743
 msgid "Preserve carriage return"
 msgstr ""
 
-#: optiondialog.cpp:743
+#: optiondialog.cpp:746
 msgid ""
 "Show carriage return characters '\\r' if they exist.\n"
 "Helps to compare files that were modified under different operating systems."
 msgstr ""
 
-#: optiondialog.cpp:748
+#: optiondialog.cpp:751
 msgid "Ignore numbers"
 msgstr "როცხვების იგნორირება"
 
-#: optiondialog.cpp:751
+#: optiondialog.cpp:754
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore white "
 "space.)\n"
@@ -1608,46 +1618,46 @@ msgstr ""
 "იგნორირება.)\n"
 "შეიძლება დაგეხმაროთ ციფრული მონაცემებით ფაილების შედარებისას."
 
-#: optiondialog.cpp:756
+#: optiondialog.cpp:759
 msgid "Ignore C/C++ comments"
 msgstr "C/C++ კომენტარების იგნორირება"
 
-#: optiondialog.cpp:758
+#: optiondialog.cpp:761
 msgid "Treat C/C++ comments like white space."
 msgstr "C/C++ კომენტარების ღარებად განხილვა."
 
-#: optiondialog.cpp:762
+#: optiondialog.cpp:765
 msgid "Ignore case"
 msgstr "რეგისტრის იგნორირება"
 
-#: optiondialog.cpp:765
+#: optiondialog.cpp:768
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr "რეგისტრის სხვაობის ღარებად განხილვა. ('a'<=>'A')"
 
-#: optiondialog.cpp:769
+#: optiondialog.cpp:772
 msgid "Preprocessor command:"
 msgstr "Preprocessor ბრძანება:"
 
-#: optiondialog.cpp:773
+#: optiondialog.cpp:776
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr ""
 "მომხმარებლის მიერ განსაზღვრული processing. (დეტალებისთვის იხ. დოკუმენტაცია.)"
 
-#: optiondialog.cpp:776
+#: optiondialog.cpp:779
 msgid "Line-matching preprocessor command:"
 msgstr "ხაზის დამთხვევის preprocessor ბრძანება:"
 
-#: optiondialog.cpp:780
+#: optiondialog.cpp:783
 msgid ""
 "This pre-processor is only used during line matching.\n"
 "(See the docs for details.)"
 msgstr ""
 
-#: optiondialog.cpp:783
+#: optiondialog.cpp:786
 msgid "Try hard (slower)"
 msgstr "მაგრად ცდა (ნელია)"
 
-#: optiondialog.cpp:786
+#: optiondialog.cpp:789
 msgid ""
 "Enables the --minimal option for the external diff.\n"
 "The analysis of big files will be much slower."
@@ -1655,43 +1665,48 @@ msgstr ""
 "გარე diff-სთვის რთავს --minimal პარამეტრს.\n"
 "დიდი ფაილების ანალიზი ბევრად შენელდება."
 
-#: optiondialog.cpp:791
+#: optiondialog.cpp:794
 msgid "Auto advance delay (ms):"
 msgstr ""
 
-#: optiondialog.cpp:796
+#: optiondialog.cpp:799
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
 "for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
 msgstr ""
 
-#: optiondialog.cpp:801
+#: optiondialog.cpp:809
+#, fuzzy
+msgid "Merge Settings"
+msgstr "Diff & შერწყმის პარამეტრები"
+
+#: optiondialog.cpp:822
 msgid "White space 2-file merge default:"
 msgstr ""
 
-#: optiondialog.cpp:805 optiondialog.cpp:818
+#: optiondialog.cpp:826 optiondialog.cpp:839
 msgid "Manual Choice"
 msgstr "ხელით არჩევა"
 
-#: optiondialog.cpp:809 optiondialog.cpp:823
+#: optiondialog.cpp:830 optiondialog.cpp:844
 msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-only "
 "changes."
 msgstr ""
 
-#: optiondialog.cpp:814
+#: optiondialog.cpp:835
 msgid "White space 3-file merge default:"
 msgstr ""
 
-#: optiondialog.cpp:828
+#: optiondialog.cpp:849
 msgid "Automatic Merge Regular Expression"
 msgstr ""
 
-#: optiondialog.cpp:837 smalldialogs.cpp:379
+#: optiondialog.cpp:858 smalldialogs.cpp:397
 msgid "Auto merge regular expression:"
 msgstr ""
 
-#: optiondialog.cpp:841
+#: optiondialog.cpp:862
 msgid ""
 "Regular expression for lines where KDiff3 should automatically choose one "
 "source.\n"
@@ -1699,36 +1714,36 @@ msgid ""
 "- if available - C, otherwise B will be chosen."
 msgstr ""
 
-#: optiondialog.cpp:847
+#: optiondialog.cpp:868
 msgid "Run regular expression auto merge on merge start"
 msgstr ""
 
-#: optiondialog.cpp:849
+#: optiondialog.cpp:870
 msgid ""
 "Run the merge for auto merge regular expressions\n"
 "immediately when a merge starts.\n"
 msgstr ""
 
-#: optiondialog.cpp:854
+#: optiondialog.cpp:875
 msgid "Version Control History Merging"
 msgstr ""
 
-#: optiondialog.cpp:863 smalldialogs.cpp:406
+#: optiondialog.cpp:884 smalldialogs.cpp:424
 msgid "History start regular expression:"
 msgstr ""
 
-#: optiondialog.cpp:867
+#: optiondialog.cpp:888
 msgid ""
 "Regular expression for the start of the version control history entry.\n"
 "Usually this line contains the \"$Log$\"-keyword.\n"
 "Default value: \".*\\$Log.*\\$.*\""
 msgstr ""
 
-#: optiondialog.cpp:873 smalldialogs.cpp:435
+#: optiondialog.cpp:894 smalldialogs.cpp:453
 msgid "History entry start regular expression:"
 msgstr ""
 
-#: optiondialog.cpp:885
+#: optiondialog.cpp:906
 msgid ""
 "A version control history entry consists of several lines.\n"
 "Specify the regular expression to detect the first line (without the leading "
@@ -1738,19 +1753,19 @@ msgid ""
 "See the documentation for details."
 msgstr ""
 
-#: optiondialog.cpp:893
+#: optiondialog.cpp:914
 msgid "History merge sorting"
 msgstr ""
 
-#: optiondialog.cpp:895
+#: optiondialog.cpp:916
 msgid "Sort version control history by a key."
 msgstr ""
 
-#: optiondialog.cpp:905
+#: optiondialog.cpp:926
 msgid "History entry start sort key order:"
 msgstr ""
 
-#: optiondialog.cpp:909
+#: optiondialog.cpp:930
 msgid ""
 "Each parentheses used in the regular expression for the history start entry\n"
 "groups a key that can be used for sorting.\n"
@@ -1760,46 +1775,46 @@ msgid ""
 "See the documentation for details."
 msgstr ""
 
-#: optiondialog.cpp:920
+#: optiondialog.cpp:941
 msgid "Merge version control history on merge start"
 msgstr ""
 
-#: optiondialog.cpp:922
+#: optiondialog.cpp:943
 msgid "Run version control history automerge on merge start."
 msgstr ""
 
-#: optiondialog.cpp:926
+#: optiondialog.cpp:947
 msgid "Test your regular expressions"
 msgstr ""
 
-#: optiondialog.cpp:931
+#: optiondialog.cpp:952
 msgid "Irrelevant merge command:"
 msgstr ""
 
-#: optiondialog.cpp:935
+#: optiondialog.cpp:956
 msgid ""
 "If specified this script is run after automerge\n"
 "when no other relevant changes were detected.\n"
 "Called with the parameters: filename1 filename2 filename3"
 msgstr ""
 
-#: optiondialog.cpp:945
+#: optiondialog.cpp:966
 msgid "Directory Merge"
 msgstr "დირექტორიათა შერწყმა"
 
-#: optiondialog.cpp:954
+#: optiondialog.cpp:975
 msgid "Recursive directories"
 msgstr "დირექტორიათა რეკურსია"
 
-#: optiondialog.cpp:956
+#: optiondialog.cpp:977
 msgid "Whether to analyze subdirectories or not."
 msgstr "ქვესაქაღალდეები გაანალიზდეს თუ არა."
 
-#: optiondialog.cpp:958
+#: optiondialog.cpp:979
 msgid "File pattern(s):"
 msgstr "ფაილის შაბლონ(ებ)ი:"
 
-#: optiondialog.cpp:963
+#: optiondialog.cpp:984
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
 "Wildcards: '*' and '?'\n"
@@ -1809,11 +1824,11 @@ msgstr ""
 "Wildcards: '*' და '?'\n"
 "რამდენიმე შაბლონის მითითება შეიძლება ';' გამყოფით"
 
-#: optiondialog.cpp:969
+#: optiondialog.cpp:990
 msgid "File-anti-pattern(s):"
 msgstr "ფაილის-ანტი-შაბლონ(ებ)ი:"
 
-#: optiondialog.cpp:974
+#: optiondialog.cpp:995
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
 "Wildcards: '*' and '?'\n"
@@ -1823,11 +1838,11 @@ msgstr ""
 "Wildcards: '*' და '?'\n"
 "რამდენიმე შაბლონის მითითება შეიძლება ';' გამყოფით"
 
-#: optiondialog.cpp:980
+#: optiondialog.cpp:1001
 msgid "Dir-anti-pattern(s):"
 msgstr "Dir-ანტი-შაბლონ(ებ)ი:"
 
-#: optiondialog.cpp:985
+#: optiondialog.cpp:1006
 msgid ""
 "Pattern(s) of directories to be excluded from analysis. \n"
 "Wildcards: '*' and '?'\n"
@@ -1837,33 +1852,33 @@ msgstr ""
 "Wildcards: '*' და '?'\n"
 "რამდენიმე შაბლონის მითითება შეიძლება ';' გამყოფით"
 
-#: optiondialog.cpp:991
+#: optiondialog.cpp:1012
 msgid "Use .cvsignore"
 msgstr ".cvsignore-ის გამოყენება"
 
-#: optiondialog.cpp:994
+#: optiondialog.cpp:1015
 msgid ""
 "Extends the antipattern to anything that would be ignored by CVS.\n"
 "Via local \".cvsignore\"-files this can be directory specific."
 msgstr ""
 
-#: optiondialog.cpp:999
+#: optiondialog.cpp:1020
 msgid "Find hidden files and directories"
 msgstr "დამალული ფაილების და დირექტორიების ძიება"
 
-#: optiondialog.cpp:1002
+#: optiondialog.cpp:1023
 msgid "Finds files and directories with the hidden attribute."
 msgstr "ფაილების და დირექტორიების ძიება დამალული ატრიბუტით."
 
-#: optiondialog.cpp:1004
+#: optiondialog.cpp:1025
 msgid "Finds files and directories starting with '.'."
 msgstr "'.'-ით დაწყებული ფაილების და დირექტორიების ძიება."
 
-#: optiondialog.cpp:1008
+#: optiondialog.cpp:1029
 msgid "Follow file links"
 msgstr "ფაილთა ბმულზე გადასვლა"
 
-#: optiondialog.cpp:1011
+#: optiondialog.cpp:1032
 msgid ""
 "On: Compare the file the link points to.\n"
 "Off: Compare the links."
@@ -1871,11 +1886,11 @@ msgstr ""
 "ჩართულია: იმ ფაილთა შედარება რაზეც მიუთითებს ბმული.\n"
 "გამორთულია: ბმულების შედარება."
 
-#: optiondialog.cpp:1016
+#: optiondialog.cpp:1037
 msgid "Follow directory links"
 msgstr "დირექტორიათა ბმულზე გადასვლა"
 
-#: optiondialog.cpp:1019
+#: optiondialog.cpp:1040
 msgid ""
 "On: Compare the directory the link points to.\n"
 "Off: Compare the links."
@@ -1883,11 +1898,11 @@ msgstr ""
 "ჩართულია: იმ დირექტორიათა შედარება რაზეც მიუთითებს ბმული.\n"
 "გამორთულია: ბმულების შედარება."
 
-#: optiondialog.cpp:1035
+#: optiondialog.cpp:1056
 msgid "Case sensitive filename comparison"
 msgstr ""
 
-#: optiondialog.cpp:1038
+#: optiondialog.cpp:1059
 msgid ""
 "The directory comparison will compare files or directories when their names "
 "match.\n"
@@ -1895,23 +1910,23 @@ msgid ""
 "off, otherwise on.)"
 msgstr ""
 
-#: optiondialog.cpp:1042
+#: optiondialog.cpp:1063
 msgid "File Comparison Mode"
 msgstr "ფაილთა შედარების რეჟიმი"
 
-#: optiondialog.cpp:1046
+#: optiondialog.cpp:1067
 msgid "Binary comparison"
 msgstr "ორობითი შედარება"
 
-#: optiondialog.cpp:1047
+#: optiondialog.cpp:1068
 msgid "Binary comparison of each file. (Default)"
 msgstr "ყოველი ფაილის ორობითი შედარება. (ნაგულისხმები)"
 
-#: optiondialog.cpp:1049
+#: optiondialog.cpp:1070
 msgid "Full analysis"
 msgstr "სრული ანალიზი"
 
-#: optiondialog.cpp:1050
+#: optiondialog.cpp:1071
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
 "(Slower than a binary comparison, much slower for binary files.)"
@@ -1919,11 +1934,11 @@ msgstr ""
 "სრული ანალიზის გაკეთება და სტატისტიკური ინფორმაციის ექსტრა სვეტში ასახვა.\n"
 "(უფრო ნელია ვიდრე ბინარული შედარება, ბევრად ნელი ბინარული ფაილებისთვის.)"
 
-#: optiondialog.cpp:1053
+#: optiondialog.cpp:1074
 msgid "Trust the modification date (unsafe)"
 msgstr "მოდიფიცირების თარიღი ნდობა (არაა სანდო)"
 
-#: optiondialog.cpp:1054
+#: optiondialog.cpp:1075
 msgid ""
 "Assume that files are equal if the modification date and file length are "
 "equal.\n"
@@ -1932,11 +1947,11 @@ msgstr ""
 "თუ მოდიფიცირების თარიღი და ფაილის ზომა ტოლია, მათ იდენტურად მიჩნევა.\n"
 "კარგია დიდი დირექტორიებისთვის და ნელი ქსელებისთვის."
 
-#: optiondialog.cpp:1057
+#: optiondialog.cpp:1078
 msgid "Trust the size (unsafe)"
 msgstr "ზომის ნდობა (არაა სანდო)"
 
-#: optiondialog.cpp:1058
+#: optiondialog.cpp:1079
 msgid ""
 "Assume that files are equal if their file lengths are equal.\n"
 "Useful for big directories or slow networks when the date is modified during "
@@ -1946,22 +1961,22 @@ msgstr ""
 "კარგია დიდი დირექტორიებისთვის და ნელი ქსელებისთვის, როდესაც მოდიფიკაციის დრო "
 "ჩამოქაჩვისას იცვლება."
 
-#: optiondialog.cpp:1062
+#: optiondialog.cpp:1083
 msgid "Synchronize directories"
 msgstr "დირექტორიების სინქრონიზაცია"
 
-#: optiondialog.cpp:1065
+#: optiondialog.cpp:1086
 msgid ""
 "Offers to store files in both directories so that\n"
 "both directories are the same afterwards.\n"
 "Works only when comparing two directories without specifying a destination."
 msgstr ""
 
-#: optiondialog.cpp:1071
+#: optiondialog.cpp:1092
 msgid "White space differences considered equal"
 msgstr "ინტერვალების სხვაობის ტოლად ჩათვლა"
 
-#: optiondialog.cpp:1074
+#: optiondialog.cpp:1095
 msgid ""
 "If files differ only by white space consider them equal.\n"
 "This is only active when full analysis is chosen."
@@ -1969,11 +1984,11 @@ msgstr ""
 "თუ ფაილები მხოლოდ ინტერვალებით განსხვავდება, მათი ტოლად ჩათთვლა.\n"
 "ეს აქტიურია მხოლოდ თუ სრული ანალიზია არჩეული."
 
-#: optiondialog.cpp:1080
+#: optiondialog.cpp:1101
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "შერწმის ნაცვლად ახლის ასლი (სახიფათო)"
 
-#: optiondialog.cpp:1083
+#: optiondialog.cpp:1104
 msgid ""
 "Don't look inside, just take the newer file.\n"
 "(Use this only if you know what you are doing!)\n"
@@ -1983,11 +1998,11 @@ msgstr ""
 "(გამოიყენეთ ეს მარტო მაშინ თუ იცით რას აკეთებთ!)\n"
 "მაშინაა ეფექტური, როდესაც ორ დირექტორიას ადარებთ."
 
-#: optiondialog.cpp:1088
+#: optiondialog.cpp:1109
 msgid "Backup files (.orig)"
 msgstr "სარეზერვო ასლის ფაილი (.orig)"
 
-#: optiondialog.cpp:1091
+#: optiondialog.cpp:1112
 msgid ""
 "When a file would be saved over an old file, then the old file\n"
 "will be renamed with a '.orig'-extension instead of being deleted."
@@ -1995,15 +2010,15 @@ msgstr ""
 "როდესაც ფაილი ძველ ფაილზე უნდა იქნას შენახული, მაშინ ძველ ფაილს\n"
 "სახელი გადაერქმევა '.orig' გაფართოვებით იმის მაგივრად რომ წაიშალოს."
 
-#: optiondialog.cpp:1118
+#: optiondialog.cpp:1176
 msgid "Regional Settings"
 msgstr "რეგიონალური პარამეტრები"
 
-#: optiondialog.cpp:1214
+#: optiondialog.cpp:1272
 msgid "Language (restart required)"
 msgstr "ენა (გადატვირთვაა საჭირო)"
 
-#: optiondialog.cpp:1246
+#: optiondialog.cpp:1304
 msgid ""
 "Choose the language of the GUI-strings or \"Auto\".\n"
 "For a change of language to take place, quit and restart KDiff3."
@@ -2011,11 +2026,11 @@ msgstr ""
 "GUI-სტრიქონისთვის ენის შეცვლა ან \"ავტო\".\n"
 "ენის ცვლილება რომ გააქტიურდეს დახურეთ და გადატვირთეთ KDiff3."
 
-#: optiondialog.cpp:1264
+#: optiondialog.cpp:1322
 msgid "Use the same encoding for everything:"
 msgstr "ყველასთვის იგივე კოდირების გამოყენება:"
 
-#: optiondialog.cpp:1267
+#: optiondialog.cpp:1325
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
@@ -2024,35 +2039,60 @@ msgstr ""
 "შეცვლით.\n"
 "გამორთეთ ეს თუ განსხვავებული ინდივიდუალურუი პარამეტრებია საჭირო."
 
-#: optiondialog.cpp:1272
+#: optiondialog.cpp:1330
 msgid "Note: Local Encoding is "
 msgstr "შენიშვნა: ლოკალური კოდირება არის"
 
-#: optiondialog.cpp:1276
+#: optiondialog.cpp:1334
 msgid "File Encoding for A:"
 msgstr "ფაილის კოდირება A-თვის:"
 
-#: optiondialog.cpp:1281
+#: optiondialog.cpp:1340
+msgid ""
+"If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
+"If the file encoding is not detected then the selected encoding will be used as "
+"fallback.\n"
+"(Unicode detection depends on the first bytes of a file - the byte order mark "
+"\"BOM\".)"
+msgstr ""
+
+#: optiondialog.cpp:1344 optiondialog.cpp:1353 optiondialog.cpp:1362
+msgid "Auto Detect Unicode"
+msgstr ""
+
+#: optiondialog.cpp:1349
 msgid "File Encoding for B:"
 msgstr "ფაილის კოდირება B-თვის:"
 
-#: optiondialog.cpp:1286
+#: optiondialog.cpp:1358
 msgid "File Encoding for C:"
 msgstr "ფაილის კოდირება C-თვის:"
 
-#: optiondialog.cpp:1291
+#: optiondialog.cpp:1367
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "ფაილის კოდირება გამონატანის შერწყმისა და შენახვისთვის:"
 
-#: optiondialog.cpp:1296
+#: optiondialog.cpp:1371
+#, fuzzy
+msgid "Auto Select"
+msgstr "მონიშვნის ავტო ასლი"
+
+#: optiondialog.cpp:1374
+msgid ""
+"If enabled then the encoding from the input files is used.\n"
+"In ambiguous cases a dialog will ask the user to choose the encoding for "
+"saving."
+msgstr ""
+
+#: optiondialog.cpp:1378
 msgid "File Encoding for Preprocessor Files:"
 msgstr "ფაილის კოდირება -პრეპროცესორის ფაილებისთვის:"
 
-#: optiondialog.cpp:1305
+#: optiondialog.cpp:1389
 msgid "Right To Left Language"
 msgstr "მარჯვნიდან მარცხნივ ენა"
 
-#: optiondialog.cpp:1308
+#: optiondialog.cpp:1392
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
@@ -2060,21 +2100,21 @@ msgstr ""
 "ზოგი ენა მარჯვნიდან მარცხნივ იკითხება.\n"
 "ეს პარამეტრი შეცვლის ხედს და რედაქტორს."
 
-#: optiondialog.cpp:1318
+#: optiondialog.cpp:1402
 #, fuzzy
 msgid "Integration"
 msgstr "ოპერაცია"
 
-#: optiondialog.cpp:1318
+#: optiondialog.cpp:1402
 #, fuzzy
 msgid "Integration Settings"
 msgstr "რეგიონალური პარამეტრები"
 
-#: optiondialog.cpp:1328
+#: optiondialog.cpp:1412
 msgid "Command line options to ignore:"
 msgstr ""
 
-#: optiondialog.cpp:1333
+#: optiondialog.cpp:1417
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
 "other tools.\n"
@@ -2082,7 +2122,7 @@ msgid ""
 "This will suppress the \"Unknown option\"-error."
 msgstr ""
 
-#: optiondialog.cpp:1386
+#: optiondialog.cpp:1480
 msgid ""
 "You selected a variable width font.\n"
 "\n"
@@ -2098,19 +2138,19 @@ msgstr ""
 "\n"
 "გსურთ გააგრძელოთ თუ სხვა შრიფტს აირჩევთ."
 
-#: optiondialog.cpp:1390
+#: optiondialog.cpp:1484
 msgid "Incompatible Font"
 msgstr "შეუთავსებელი შრიფტი"
 
-#: optiondialog.cpp:1391
+#: optiondialog.cpp:1485
 msgid "Continue at Own Risk"
 msgstr "საკუთარი თავის იმედათ გაგრძელება"
 
-#: optiondialog.cpp:1391
+#: optiondialog.cpp:1485
 msgid "Select Another Font"
 msgstr "სხვა შრიფტის ამორჩევა"
 
-#: optiondialog.cpp:1416
+#: optiondialog.cpp:1521
 msgid "This resets all options. Not only those of the current topic."
 msgstr ""
 "ეს ყველა პარამეტრს საწყის მდგომარეობაზე აბრუნებს. არა მხოლოდ მიმდინარე თემისას."
@@ -2183,26 +2223,26 @@ msgstr "Linediff: B <-> C"
 msgid "Linediff: A <-> C"
 msgstr "Linediff: A <-> C"
 
-#: pdiff.cpp:509
+#: pdiff.cpp:513
 #, fuzzy
 msgid "All input files contain the same text, but are not binary equal."
 msgstr "ყველა შეტანილი ფაილის შეიცავს ერთიდაიგივე ტექსტი."
 
-#: pdiff.cpp:511 pdiff.cpp:513 pdiff.cpp:515
+#: pdiff.cpp:515 pdiff.cpp:517 pdiff.cpp:519
 #, fuzzy
 msgid ""
 "Files %1 and %2 are binary equal.\n"
 msgstr ""
 "B და C ბინარულად ტოლია.\n"
 
-#: pdiff.cpp:512 pdiff.cpp:514 pdiff.cpp:516
+#: pdiff.cpp:516 pdiff.cpp:518 pdiff.cpp:520
 #, fuzzy
 msgid ""
 "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr ""
 "A და B ბინარულად ტოლია.\n"
 
-#: pdiff.cpp:526
+#: pdiff.cpp:530
 msgid ""
 "Some inputfiles don't seem to be pure textfiles.\n"
 "Note that the KDiff3-merge was not meant for binary data.\n"
@@ -2212,51 +2252,51 @@ msgstr ""
 "გაითვალისწინეთ რომ KDiff3-შერწყმა არ გულისხმობს ბინარულ მონაცემებს.\n"
 "გააგრძელეთ საკუთარი თავის იმედათ."
 
-#: pdiff.cpp:965
+#: pdiff.cpp:979
 msgid "Abort"
 msgstr "შეწყვეტა"
 
-#: pdiff.cpp:971 pdiff.cpp:1059
+#: pdiff.cpp:985 pdiff.cpp:1073
 msgid "Opening files..."
 msgstr "ფაილთა გახსნა..."
 
-#: pdiff.cpp:1036 pdiff.cpp:1107
+#: pdiff.cpp:1050 pdiff.cpp:1121
 msgid "File open error"
 msgstr "ფაილის გახსნის შეცდომა"
 
-#: pdiff.cpp:1139
+#: pdiff.cpp:1153
 msgid "Cutting selection..."
 msgstr "მონიშნული ფრაგმენტის მოჭრა..."
 
-#: pdiff.cpp:1160
+#: pdiff.cpp:1174
 msgid "Copying selection to clipboard..."
 msgstr "მონიშნულის გაცვლით ბიფერში განთავსება..."
 
-#: pdiff.cpp:1176
+#: pdiff.cpp:1190
 msgid "Inserting clipboard contents..."
 msgstr "გაცვლის ბუფერის შიგთავსის ჩასმა..."
 
-#: pdiff.cpp:1699
+#: pdiff.cpp:1713
 msgid "Save && Continue"
 msgstr "შენახვა და გაგრძელება"
 
-#: pdiff.cpp:1699
+#: pdiff.cpp:1713
 msgid "Continue Without Saving"
 msgstr "შენახვის გარეშე გაგრძელება"
 
-#: pdiff.cpp:1906
+#: pdiff.cpp:1920
 msgid "Search complete."
 msgstr "ძიება დასრულდა."
 
-#: pdiff.cpp:1906
+#: pdiff.cpp:1920
 msgid "Search Complete"
 msgstr "ძიება დასრულდა"
 
-#: pdiff.cpp:2130
+#: pdiff.cpp:2144
 msgid "Nothing is selected in either diff input window."
 msgstr ""
 
-#: pdiff.cpp:2130
+#: pdiff.cpp:2144
 #, fuzzy
 msgid "Error while adding manual diff range"
 msgstr "დირექტორიის შექმნისას შეცდომა."
@@ -2357,90 +2397,94 @@ msgstr "გამონატანი (არასავალდებულ�
 msgid "Configure..."
 msgstr "კონფიგურაცია..."
 
-#: smalldialogs.cpp:329
+#: smalldialogs.cpp:347
 msgid "Search text:"
 msgstr "ტექსტის ძიება:"
 
-#: smalldialogs.cpp:336
+#: smalldialogs.cpp:354
 msgid "Case sensitive"
 msgstr "რეგისტრისადმი მგძნობიარე"
 
-#: smalldialogs.cpp:339
+#: smalldialogs.cpp:357
 msgid "Search A"
 msgstr "ძიება A"
 
-#: smalldialogs.cpp:344
+#: smalldialogs.cpp:362
 msgid "Search B"
 msgstr "ძიება B"
 
-#: smalldialogs.cpp:349
+#: smalldialogs.cpp:367
 msgid "Search C"
 msgstr "ძიება C"
 
-#: smalldialogs.cpp:354
+#: smalldialogs.cpp:372
 msgid "Search output"
 msgstr "გამონატანის ძიება"
 
-#: smalldialogs.cpp:359
+#: smalldialogs.cpp:377
 msgid "&Search"
 msgstr "ძიე&ბა"
 
-#: smalldialogs.cpp:376
+#: smalldialogs.cpp:394
 msgid "Regular Expression Tester"
 msgstr ""
 
-#: smalldialogs.cpp:387
+#: smalldialogs.cpp:405
 msgid "Example auto merge line:"
 msgstr ""
 
-#: smalldialogs.cpp:389
+#: smalldialogs.cpp:407
 msgid "For auto merge test copy a line as used in your files."
 msgstr ""
 
-#: smalldialogs.cpp:395 smalldialogs.cpp:424 smalldialogs.cpp:461
+#: smalldialogs.cpp:413 smalldialogs.cpp:442 smalldialogs.cpp:479
 msgid "Match result:"
 msgstr ""
 
-#: smalldialogs.cpp:414
+#: smalldialogs.cpp:432
 msgid "Example history start line (with leading comment):"
 msgstr ""
 
-#: smalldialogs.cpp:417
+#: smalldialogs.cpp:435
 msgid ""
 "Copy a history start line as used in your files,\n"
 "including the leading comment."
 msgstr ""
 
-#: smalldialogs.cpp:443
+#: smalldialogs.cpp:461
 msgid "History sort key order:"
 msgstr ""
 
-#: smalldialogs.cpp:451
+#: smalldialogs.cpp:469
 msgid "Example history entry start line (without leading comment):"
 msgstr ""
 
-#: smalldialogs.cpp:453
+#: smalldialogs.cpp:471
 msgid ""
 "Copy a history entry start line as used in your files,\n"
 "but omit the leading comment."
 msgstr ""
 
-#: smalldialogs.cpp:468
+#: smalldialogs.cpp:486
 msgid "Sort key result:"
 msgstr ""
 
-#: smalldialogs.cpp:519 smalldialogs.cpp:529 smalldialogs.cpp:550
+#: smalldialogs.cpp:537 smalldialogs.cpp:547 smalldialogs.cpp:568
 msgid "Match success."
 msgstr ""
 
-#: smalldialogs.cpp:523 smalldialogs.cpp:533 smalldialogs.cpp:556
+#: smalldialogs.cpp:541 smalldialogs.cpp:551 smalldialogs.cpp:574
 #, fuzzy
 msgid "Match failed."
 msgstr "შენახვა ვერ შედგა."
 
-#: smalldialogs.cpp:541
+#: smalldialogs.cpp:559
 msgid "Opening and closing parentheses don't match in regular expression."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Diff and Merge"
+#~ msgstr "Diff & შერწყმა"
 
 #, fuzzy
 #~ msgid "Save Directory Merge State ..."

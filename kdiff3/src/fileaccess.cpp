@@ -10,6 +10,7 @@
 
 #include "fileaccess.h"
 #include <iostream>
+#include <cstdlib>
 #include <kio/global.h>
 #include <kmessagebox.h>
 #include "optiondialog.h"
@@ -35,6 +36,7 @@
 #include <sys/utime.h>
 #include <io.h>
 #include <windows.h>
+#include <process.h>
 #else
 #include <unistd.h>          // Needed for creating symbolic links via symlink().
 #include <utime.h>
@@ -481,8 +483,10 @@ QString FileAccess::tempFileName()
          if ( QApplication::winVersion() & Qt::WV_DOS_based ) // Win95, 98, ME
             fileName = tmpDir + "\\" + QString::number(i);
          else
+            fileName = tmpDir + "/kdiff3_" + QString::number(_getpid()) + "_" + QString::number(i) +".tmp";
+         #else
+            fileName = tmpDir + "/kdiff3_" + QString::number(getpid()) + "_" + QString::number(i) +".tmp";
          #endif
-            fileName = tmpDir + "/kdiff3_" + QString::number(i) +".tmp";
          if ( ! FileAccess::exists(fileName) && 
               QFile(fileName).open(IO_WriteOnly) ) // open, truncate and close the file, true if successful
          {
@@ -821,10 +825,14 @@ bool FileAccessJobHandler::symLink( const QString& linkTarget, const QString& li
 
 bool FileAccessJobHandler::rename( const QString& dest )
 {
-   KURL kurl = KURL::fromPathOrURL( dest );
    if ( dest.isEmpty() )
       return false;
-   else if ( m_pFileAccess->isLocal() && kurl.isLocalFile() )
+
+   KURL kurl = KURL::fromPathOrURL( dest );
+   if ( !kurl.isValid() )
+      kurl = KURL::fromPathOrURL( QDir().absFilePath(dest) ); // assuming that invalid means relative
+
+   if ( m_pFileAccess->isLocal() && kurl.isLocalFile() )
    {
       return QDir().rename( m_pFileAccess->absFilePath(), kurl.path() );
    }
@@ -1454,6 +1462,7 @@ void FileAccessJobHandler::slotPercent( KIO::Job*, unsigned long percent )
 ProgressDialog::ProgressDialog( QWidget* pParent )
 : QDialog( pParent, 0, true )
 {
+   m_bStayHidden = false;
    QVBoxLayout* layout = new QVBoxLayout(this);
 
    m_pInformation = new QLabel( " ", this );
@@ -1485,6 +1494,11 @@ ProgressDialog::ProgressDialog( QWidget* pParent )
    m_pJob = 0;
 }
 
+void ProgressDialog::setStayHidden( bool bStayHidden )
+{
+   m_bStayHidden = bStayHidden;
+}
+
 void ProgressDialog::push()
 {
    ProgressLevelData pld;
@@ -1498,7 +1512,8 @@ void ProgressDialog::push()
       m_bWasCancelled = false;
       m_t1.restart();
       m_t2.restart();
-      show();
+      if ( !m_bStayHidden )
+         show();
    }
 
    m_progressStack.push_back( pld );
@@ -1656,7 +1671,8 @@ void ProgressDialog::recalc( bool bUpdate )
             m_pSubProgressBar->setProgress( int( 1000.0 * m_progressStack.front().m_dSubRangeMin ) );
       }
 
-      if ( !isVisible() ) show();
+      if ( !m_bStayHidden && !isVisible() )
+         show();
       qApp->processEvents();
       m_t1.restart();
    }

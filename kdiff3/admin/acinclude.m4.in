@@ -784,7 +784,7 @@ support])
    # CoreAudio framework
    AC_CHECK_HEADER(CoreAudio/CoreAudio.h, [
      AC_DEFINE(HAVE_COREAUDIO, 1, [Define if you have the CoreAudio API])
-     FRAMEWORK_COREAUDIO="-Xlinker -framework -Xlinker CoreAudio"
+     FRAMEWORK_COREAUDIO="-Wl,-framework,CoreAudio"
    ])
 
    AC_CHECK_RES_INIT
@@ -2747,7 +2747,7 @@ AC_CACHE_VAL(ac_cv_libexr,
            EXRSTATUS=old
         else
            kde_save_LIBS="$LIBS"
-           LIBS="$LIBS $all_libraries $USER_LDFLAGS $LIBZ `pkg-config --libs OpenEXR`"
+           LIBS="$LIBS $all_libraries $USER_LDFLAGS `pkg-config --libs OpenEXR` $LIBZ"
            AC_LANG_SAVE
            AC_LANG_CPLUSPLUS
            kde_save_CXXFLAGS="$CXXFLAGS"
@@ -3015,6 +3015,35 @@ fi
 
 ])
 
+
+AC_DEFUN([KDE_CHECK_FOR_OPT_NOINLINE_MATCH],
+[
+  AC_CACHE_CHECK([whether system headers can cope with -O2 -fno-inline],
+    kde_cv_opt_noinline_match,
+  [
+  kde_cv_opt_noinline_match=irrelevant
+  dnl if we don't use both -O2 and -fno-inline, this check is moot
+  if echo "$CFLAGS" | grep -e -O2 >/dev/null 2>/dev/null \
+     && echo "$CFLAGS" | grep -e -fno-inline >/dev/null 2>/dev/null ; then
+
+    ac_cflags_save="$CFLAGS"
+    CFLAGS="$CFLAGS -D_USE_GNU"
+
+    AC_TRY_LINK([
+  #include <string.h>
+], [  const char *pt, *et;
+  et = __extension__      ({ char __a0, __a1, __a2;       (__builtin_constant_p (  ";,"  ) && ((size_t)(const void *)((   ";,"   )+ 1) - (size_t)(const void *)(   ";,"   ) == 1)        ? ((__a0 =((__const char  *) (  ";,"  ))[0], __a0 == '\0')     ? ((void) (  pt ),((void *)0) )        : ((__a1 = ((__const char *) (  ";,"  ))[1], __a1== '\0')      ? (__extension__ (__builtin_constant_p (  __a0 ) && ( __a0 ) == '\0'   ? (char *) __rawmemchr (   pt  ,   __a0)       : strchr(   pt  ,   __a0 )))   : ((__a2 = ((__const char *) (  ";,"  ))[2], __a2 == '\0')      ? __strpbrk_c2 (  pt , __a0, __a1)      :(((__const char *) (  ";,"  ))[3] == '\0'     ? __strpbrk_c3 (  pt ,__a0, __a1, __a2): strpbrk (  pt ,   ";,"  ))))) : strpbrk (  pt ,  ";,"  )); }) ;
+],
+    kde_cv_opt_noinline_match=yes,
+    kde_cv_opt_noinline_match=no
+    )
+
+    CFLAGS="$ac_cflags_save"
+  fi
+  ])
+])
+
+
 dnl AC_VALIDIFY_CXXFLAGS checks for forbidden flags the user may have given
 AC_DEFUN([AC_VALIDIFY_CXXFLAGS],
 [dnl
@@ -3099,7 +3128,7 @@ AC_DEFUN([AC_CHECK_COMPILERS],
       if test $kde_use_debug_code = "full"; then
         CFLAGS="-g3 -fno-inline $CFLAGS"
       else
-        CFLAGS="-g -O2 $CFLAGS"
+        CFLAGS="-g -O2 -fno-schedule-insns -fno-inline $CFLAGS"
       fi
     else
       CFLAGS="-O2 $CFLAGS"
@@ -3134,7 +3163,7 @@ AC_DEFUN([AC_CHECK_COMPILERS],
         if test "$kde_use_debug_code" = "full"; then
           CXXFLAGS="-g3 -fno-inline $CXXFLAGS"
         else
-          CXXFLAGS="-g -O2 $CXXFLAGS"
+          CXXFLAGS="-g -O2 -fno-schedule-insns -fno-inline $CXXFLAGS"
         fi
       fi
       KDE_CHECK_COMPILER_FLAG(fno-builtin,[CXXFLAGS="-fno-builtin $CXXFLAGS"])
@@ -3147,7 +3176,7 @@ AC_DEFUN([AC_CHECK_COMPILERS],
         CXXFLAGS="+K3 $CXXFLAGS"
       else
         CXXFLAGS="-O2 $CXXFLAGS"
-      fi  
+      fi
     fi
   fi
 
@@ -3194,6 +3223,14 @@ AC_DEFUN([AC_CHECK_COMPILERS],
   AC_SUBST([HAVE_GCC_VISIBILITY])
 
   if test "$GXX" = "yes"; then
+    gcc_no_reorder_blocks=NO
+    KDE_CHECK_COMPILER_FLAG(fno-reorder-blocks,[gcc_no_reorder_blocks=YES])
+    if test $kde_use_debug_code != "no" && \
+       test $kde_use_debug_code != "full" && \
+       test "YES" = "$gcc_no_reorder_blocks" ; then
+          CXXFLAGS="$CXXFLAGS -fno-reorder-blocks"
+          CFLAGS="$CFLAGS -fno-reorder-blocks"
+    fi
     KDE_CHECK_COMPILER_FLAG(fno-exceptions,[CXXFLAGS="$CXXFLAGS -fno-exceptions"])
     KDE_CHECK_COMPILER_FLAG(fno-check-new, [CXXFLAGS="$CXXFLAGS -fno-check-new"])
     KDE_CHECK_COMPILER_FLAG(fno-common, [CXXFLAGS="$CXXFLAGS -fno-common"])
@@ -3221,6 +3258,11 @@ AC_DEFUN([AC_CHECK_COMPILERS],
             fi
         fi
         rm -f conftest.h conftest.h.gch
+    fi
+
+    KDE_CHECK_FOR_OPT_NOINLINE_MATCH
+    if test "x$kde_cv_opt_noinline_match" = "xno" ; then
+       CFLAGS="`echo "$CFLAGS" | sed "s/ -fno-inline//"`"
     fi
   fi
   AM_CONDITIONAL(unsermake_enable_pch, test "$kde_use_pch" = "yes" && test "$kde_gcc_supports_pch" = "yes")
@@ -3457,17 +3499,27 @@ AC_SUBST(AUTOCONF,'$(SHELL) $(top_srcdir)/admin/cvs.sh configure || touch config
 
 AC_DEFUN([KDE_CHECK_LIB64],
 [
-    kdelibsuff="$kde_libs_suffix"
-    if test -z "$kdelibsuff"; then
-       kdelibsuff=no
-    fi
     AC_ARG_ENABLE(libsuffix,
         AC_HELP_STRING([--enable-libsuffix],
-            [/lib directory suffix (64,32,none[=default])]),
-            kdelibsuff=$enableval)
-    # TODO: add an auto case that compiles a little C app to check
-    # where the glibc is
-    if test "$kdelibsuff" = "no"; then
+            [/lib directory suffix (64,32,none,auto[=default])]),
+            kdelibsuff=$enableval, kdelibsuff="auto")
+    
+    if test "$kdelibsuff" = "auto"; then
+    
+cat > conftest.c << EOF
+#include <stdio.h>
+int main() {
+ return 0;
+}
+EOF
+        kdelibsuff=`$CC conftest.c -o conftest.out; ldd conftest.out |sed -ne '/libc.so/{
+    s,.*/lib\([[^\/]]*\)/.*,\1, 
+    p 
+}'`
+	rm -rf conftest.*
+    fi	
+	
+    if test "$kdelibsuff" = "no" || test "$kdelibsuff" = "none"; then
        kdelibsuff=
     fi
     if test -z "$kdelibsuff"; then
@@ -4572,12 +4624,14 @@ fi
 
 AC_DEFUN([KDE_CHECK_PYTHON],
 [
-  KDE_CHECK_PYTHON_INTERN("2.4",
-   [KDE_CHECK_PYTHON_INTERN("2.3", 
-     [KDE_CHECK_PYTHON_INTERN("2.2", 
-       [KDE_CHECK_PYTHON_INTERN("2.1", 
-         [KDE_CHECK_PYTHON_INTERN("2.0", 
-           [KDE_CHECK_PYTHON_INTERN($1, $2) ])
+  KDE_CHECK_PYTHON_INTERN("2.5",
+    [KDE_CHECK_PYTHON_INTERN("2.4",
+     [KDE_CHECK_PYTHON_INTERN("2.3", 
+       [KDE_CHECK_PYTHON_INTERN("2.2", 
+         [KDE_CHECK_PYTHON_INTERN("2.1", 
+           [KDE_CHECK_PYTHON_INTERN("2.0", 
+             [KDE_CHECK_PYTHON_INTERN($1, $2) ])
+           ])
          ])
        ])
      ])
@@ -4946,7 +5000,6 @@ AC_DEFUN([KDE_SET_PREFIX],
                     ])
   fi
   kde_libs_htmldir=`$KDECONFIG --install html --expandvars`
-  kde_libs_suffix=`$KDECONFIG --libsuffix`
 
   AC_MSG_CHECKING([where to install])
   if test "x$prefix" = "xNONE"; then
@@ -5322,7 +5375,7 @@ elif test -d "/Library/Java/Home"; then
   JAVAC=$kde_java_bindir/javac
   JAVAH=$kde_java_bindir/javah
   JAR=$kde_java_bindir/jar
-  JVMLIBS="-Xlinker -framework -Xlinker JavaVM"
+  JVMLIBS="-Wl,-framework,JavaVM"
 
   AC_DEFINE_UNQUOTED(PATH_JAVA, "$kde_java_bindir/java", [Define where your java executable is])
   AC_MSG_RESULT([Apple Java Framework])
@@ -5865,12 +5918,12 @@ dnl defines KSTUFF_LIBS, KSTUFF_CFLAGS, see pkg-config man page
 dnl also defines KSTUFF_PKG_ERRORS on error
 AC_DEFUN([KDE_PKG_CHECK_MODULES], [
 
-   PKG_CONFIG_PATH="$prefix/lib/pkgconfig:$PKG_CONFIG_PATH"
+   PKG_CONFIG_PATH="$prefix/lib${kdelibsuff}/pkgconfig:$PKG_CONFIG_PATH"
    if test "$prefix" != "$kde_libs_prefix"; then
-       PKG_CONFIG_PATH="$kde_libs_prefix/lib/pkgconfig:$PKG_CONFIG_PATH"
+       PKG_CONFIG_PATH="$kde_libs_prefix/lib${kdelibsuff}/pkgconfig:$PKG_CONFIG_PATH"
    fi
    export PKG_CONFIG_PATH
-   PKG_CHECK_MODULES($1,$2,$3,$4)
+   PKG_CHECK_MODULES([$1],[$2],[$3],[$4])
 ])
 
 
@@ -5883,7 +5936,7 @@ AC_DEFUN([KDE_CHECK_PIE_SUPPORT],
     AC_LANG_CPLUSPLUS
     safe_CXXFLAGS=$CXXFLAGS
     safe_LDFLAGS=$LDFLAGS
-    CXXFLAGS="$CXXFLAGS -fpie"
+    CXXFLAGS="$CXXFLAGS -fPIE"
     LDFLAGS="$LDFLAGS -pie"
 
     AC_TRY_LINK([int foo;], [], [kde_cv_val_pie_support=yes], [kde_cv_val_pie_support=no])
@@ -5893,7 +5946,7 @@ AC_DEFUN([KDE_CHECK_PIE_SUPPORT],
     AC_LANG_RESTORE
   ])
 
-  AC_MSG_CHECKING(if enabling -pie/fpie support)
+  AC_MSG_CHECKING(if enabling -pie/fPIE support)
 
   AC_ARG_ENABLE(pie,
     AC_HELP_STRING([--enable-pie],[platform supports PIE linking [default=detect]]),
@@ -5913,7 +5966,7 @@ AC_DEFUN([KDE_CHECK_PIE_SUPPORT],
   AC_SUBST([KDE_USE_PIE])
 
   if test "$kde_has_pie_support" = "yes"; then
-    KDE_USE_FPIE="-fpie"
+    KDE_USE_FPIE="-fPIE"
     KDE_USE_PIE="-pie"
   fi
 ])

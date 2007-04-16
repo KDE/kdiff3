@@ -2,7 +2,7 @@
                           kdiff3.cpp  -  description
                              -------------------
     begin                : Don Jul 11 12:31:29 CEST 2002
-    copyright            : (C) 2002-2004 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
@@ -121,7 +121,10 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
 
    // Needed before any file operations via FileAccess happen.
    if (!g_pProgressDialog)
+   {
       g_pProgressDialog = new ProgressDialog(0);
+      g_pProgressDialog->setStayHidden( true );
+   }
 
    // All default values must be set before calling readOptions().
    m_pOptionDialog = new OptionDialog( m_pKDiff3Shell!=0, this );
@@ -180,13 +183,18 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
          m_outputFilename = args->getOption("out");
    }
 
-   m_bAuto = args!=0  && args->isSet("auto");
-   if ( m_bAuto && m_outputFilename.isEmpty() )
+   m_bAutoFlag = args!=0  && args->isSet("auto");
+   m_bAutoMode = m_bAutoFlag || m_pOptionDialog->m_bAutoSaveAndQuitOnMergeWithoutConflicts;
+   if ( m_bAutoMode && m_outputFilename.isEmpty() )
    {
+      if ( m_bAutoFlag )
+      {
       //KMessageBox::information(this, i18n("Option --auto used, but no output file specified."));
-      std::cerr << i18n("Option --auto used, but no output file specified.").ascii()<<std::endl;
-      m_bAuto = false;
+         std::cerr << i18n("Option --auto used, but no output file specified.").ascii()<<std::endl;
+      }
+      m_bAutoMode = false;
    }
+   g_pProgressDialog->setStayHidden( m_bAutoMode );
 
    if ( m_outputFilename.isEmpty() && args!=0 && args->isSet("merge") )
    {
@@ -303,7 +311,7 @@ void KDiff3App::completeInit( const QString& fn1, const QString& fn2, const QStr
          QRect visibleRect = QRect( pos, size ) & QApplication::desktop()->rect();
          if ( visibleRect.width()>100 && visibleRect.height()>100 )
             m_pKDiff3Shell->move( pos );
-         if (!m_bAuto)
+         if (!m_bAutoMode)
          {
             if ( m_pOptionDialog->m_bMaximised )
                m_pKDiff3Shell->showMaximized();
@@ -318,17 +326,17 @@ void KDiff3App::completeInit( const QString& fn1, const QString& fn2, const QStr
 
    bool bSuccess = improveFilenames(false);
 
-   if ( m_bAuto && m_bDirCompare )
+   if ( m_bAutoFlag && m_bAutoMode && m_bDirCompare )
    {
       std::cerr << i18n("Option --auto ignored for directory comparison.").ascii()<<std::endl;
-      m_bAuto = false;
+      m_bAutoMode = false;
    }
    if (!m_bDirCompare)
    {
       m_pDirectoryMergeSplitter->hide();
 
-      init( m_bAuto );
-      if ( m_bAuto )
+      init( m_bAutoMode );
+      if ( m_bAutoMode )
       {
          SourceData* pSD=0;
          if ( m_sd3.isEmpty() )
@@ -365,9 +373,17 @@ void KDiff3App::completeInit( const QString& fn1, const QString& fn2, const QStr
          }
       }
    }
+   m_bAutoMode = false;
 
    if (m_pKDiff3Shell)
-      m_pKDiff3Shell->show();
+   {
+      if ( m_pOptionDialog->m_bMaximised )
+         m_pKDiff3Shell->showMaximized();
+      else
+         m_pKDiff3Shell->show();
+   }
+
+   g_pProgressDialog->setStayHidden( false );
 
    if (statusBar() !=0 )
       statusBar()->setSizeGripEnabled(true);
@@ -554,19 +570,22 @@ void KDiff3App::initStatusBar()
 
 void KDiff3App::saveOptions( KConfig* config )
 {
-   if (!isPart())
+   if ( !m_bAutoMode )
    {
-      m_pOptionDialog->m_bMaximised = m_pKDiff3Shell->isMaximized();
-      if( ! m_pKDiff3Shell->isMaximized() )
+      if (!isPart())
       {
-         m_pOptionDialog->m_geometry = m_pKDiff3Shell->size();
-         m_pOptionDialog->m_position = m_pKDiff3Shell->pos();
+         m_pOptionDialog->m_bMaximised = m_pKDiff3Shell->isMaximized();
+         if( ! m_pKDiff3Shell->isMaximized() && m_pKDiff3Shell->isVisible() )
+         {
+            m_pOptionDialog->m_geometry = m_pKDiff3Shell->size();
+            m_pOptionDialog->m_position = m_pKDiff3Shell->pos();
+         }
+         if ( toolBar("mainToolBar")!=0 )
+            m_pOptionDialog->m_toolBarPos = (int) toolBar("mainToolBar")->barPos();
       }
-      if ( toolBar("mainToolBar")!=0 )
-         m_pOptionDialog->m_toolBarPos = (int) toolBar("mainToolBar")->barPos();
-   }
 
-   m_pOptionDialog->saveOptions( config );
+      m_pOptionDialog->saveOptions( config );
+   }
 }
 
 

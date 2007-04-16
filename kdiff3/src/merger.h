@@ -2,7 +2,7 @@
                           merger.h  -  description
                              -------------------
     begin                : Sun Mar 24 2002
-    copyright            : (C) 2002-2004 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 

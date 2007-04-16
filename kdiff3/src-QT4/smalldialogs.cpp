@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Joachim Eibl                               *
+ *   Copyright (C) 2005-2007 by Joachim Eibl                               *
  *   joachim.eibl at gmx.de                                                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *

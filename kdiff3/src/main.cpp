@@ -2,7 +2,7 @@
                           main.cpp  -  Where everything starts.
                              -------------------
     begin                : Don Jul 11 12:31:29 CEST 2002
-    copyright            : (C) 2002-2006 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
@@ -172,7 +172,7 @@ int main(int argc, char *argv[])
 
    KAboutData aboutData( "kdiff3", I18N_NOOP("KDiff3"),
       VERSION, description, KAboutData::License_GPL,
-      "(c) 2002-2006 Joachim Eibl", 0, "http://kdiff3.sourceforge.net/", "joachim.eibl" "@" "gmx.de");
+      "(c) 2002-2007 Joachim Eibl", 0, "http://kdiff3.sourceforge.net/", "joachim.eibl" "@" "gmx.de");
    aboutData.addAuthor("Joachim Eibl",0, "joachim.eibl" "@" "gmx.de");
    aboutData.addCredit("Eike Sauer", "Bugfixes, Debian package maintainer" );
    aboutData.addCredit("Sebastien Fricker", "Windows installer" );
@@ -182,7 +182,12 @@ int main(int argc, char *argv[])
    aboutData.addCredit("Bernd Gehrmann", "Class CvsIgnoreList from Cervisia" );
    aboutData.addCredit("Andre Woebbeking", "Class StringMatcher" );
    aboutData.addCredit("Michael Denio", "Directory Equality-Coloring patch");
+   aboutData.addCredit("Manfred Koehler", "Fix for slow startup on Windows");
+   aboutData.addCredit("Sergey Zorin", "Diff Ext for Windows");
    aboutData.addCredit("Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower", "GNU-Diffutils");
+   aboutData.addCredit("Tino Boellsterling, Timothy Mee", "Intensive test, use and feedback");
+   aboutData.addCredit("Michael Schmidt", "Mac support");
+
    aboutData.addCredit(I18N_NOOP("+ Many thanks to those who reported bugs and contributed ideas!"));
 
    KCmdLineArgs::init( argc, argv, &aboutData );

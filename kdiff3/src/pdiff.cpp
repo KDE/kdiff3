@@ -2,7 +2,7 @@
                          pdiff.cpp  -  Implementation for class KDiff3App
                          ---------------
     begin                : Mon March 18 20:04:50 CET 2002
-    copyright            : (C) 2002-2005 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
@@ -817,6 +817,8 @@ void KDiff3App::slotAfterFirstPaint()
    else
    {
       m_pMergeResultWindow->slotGoTop();
+      if ( ! m_outputFilename.isEmpty() && ! m_pMergeResultWindow->isUnsolvedConflictAtCurrent() )
+         m_pMergeResultWindow->slotGoNextUnsolvedConflict();
    }
 
    if (m_pCornerWidget)
@@ -986,13 +988,22 @@ void KDiff3App::slotFileOpen()
 
    for(;;)
    {
-      OpenDialog d(this,
+   
+     OpenDialog d(this,
+         QDir::convertSeparators( m_bDirCompare ? m_pDirectoryMergeWindow->getDirNameA() : m_sd1.isFromBuffer() ? QString("") : m_sd1.getAliasName() ),
+         QDir::convertSeparators( m_bDirCompare ? m_pDirectoryMergeWindow->getDirNameB() : m_sd2.isFromBuffer() ? QString("") : m_sd2.getAliasName() ),
+         QDir::convertSeparators( m_bDirCompare ? m_pDirectoryMergeWindow->getDirNameC() : m_sd3.isFromBuffer() ? QString("") : m_sd3.getAliasName() ),
+         m_bDirCompare ? ! m_pDirectoryMergeWindow->getDirNameDest().isEmpty() : !m_outputFilename.isEmpty(),
+         QDir::convertSeparators( m_bDirCompare ? m_pDirectoryMergeWindow->getDirNameDest() : m_bDefaultFilename ? QString("") : m_outputFilename ),
+         SLOT(slotConfigure()), m_pOptionDialog );
+         
+      /*OpenDialog d(this,
          m_sd1.isFromBuffer() ? QString("") : m_sd1.getAliasName(),
          m_sd2.isFromBuffer() ? QString("") : m_sd2.getAliasName(),
          m_sd3.isFromBuffer() ? QString("") : m_sd3.getAliasName(),
          !m_outputFilename.isEmpty(),
          m_bDefaultFilename ? QString("") : m_outputFilename,
-         SLOT(slotConfigure()), m_pOptionDialog );
+         SLOT(slotConfigure()), m_pOptionDialog );*/
       int status = d.exec();
       if ( status == QDialog::Accepted )
       {

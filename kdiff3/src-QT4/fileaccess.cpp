@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2003-2006 by Joachim Eibl                               *
+ *   Copyright (C) 2003-2007 by Joachim Eibl                               *
  *   joachim.eibl at gmx.de                                                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -23,6 +23,7 @@
 #include <QProcess>
 
 #include <vector>
+#include <cstdlib>
 #include <iostream>
 #include <klocale.h>
 #include <ktempfile.h>
@@ -36,6 +37,7 @@
 #include <sys/utime.h>
 #include <io.h>
 #include <windows.h>
+#include <process.h>
 #else
 #include <unistd.h>          // Needed for creating symbolic links via symlink().
 #include <utime.h>
@@ -486,8 +488,10 @@ QString FileAccess::tempFileName()
          if ( QSysInfo::WindowsVersion & QSysInfo::WV_DOS_based ) // Win95, 98, ME
             fileName = tmpDir + "\\" + QString::number(i);
          else
+            fileName = tmpDir + "/kdiff3_" + QString::number(_getpid()) + "_" + QString::number(i) +".tmp";
+         #else
+            fileName = tmpDir + "/kdiff3_" + QString::number(getpid()) + "_" + QString::number(i) +".tmp";
          #endif
-            fileName = tmpDir + "/kdiff3_" + QString::number(i) +".tmp";
          if ( ! FileAccess::exists(fileName) && 
               QFile(fileName).open(QIODevice::WriteOnly) ) // open, truncate and close the file, true if successful
          {
@@ -829,10 +833,14 @@ bool FileAccessJobHandler::symLink( const QString& linkTarget, const QString& li
 
 bool FileAccessJobHandler::rename( const QString& dest )
 {
-   KURL kurl = KURL::fromPathOrURL( dest );
    if ( dest.isEmpty() )
       return false;
-   else if ( m_pFileAccess->isLocal() && kurl.isLocalFile() )
+
+   KURL kurl = KURL::fromPathOrURL( dest );
+   if ( !kurl.isValid() )
+      kurl = KURL::fromPathOrURL( QDir().absoluteFilePath(dest) ); // assuming that invalid means relative
+
+   if ( m_pFileAccess->isLocal() && kurl.isLocalFile() )
    {
       return QDir().rename( m_pFileAccess->absFilePath(), kurl.path() );
    }
@@ -1460,6 +1468,7 @@ ProgressDialog::ProgressDialog( QWidget* pParent )
 : QDialog( pParent )
 {
    setObjectName("ProgressDialog");
+   m_bStayHidden = false;
    setModal(true);
    QVBoxLayout* layout = new QVBoxLayout(this);
 
@@ -1495,6 +1504,11 @@ ProgressDialog::ProgressDialog( QWidget* pParent )
    m_pJob = 0;
 }
 
+void ProgressDialog::setStayHidden( bool bStayHidden )
+{
+   m_bStayHidden = bStayHidden;
+}
+
 void ProgressDialog::push()
 {
    ProgressLevelData pld;
@@ -1508,7 +1522,8 @@ void ProgressDialog::push()
       m_bWasCancelled = false;
       m_t1.restart();
       m_t2.restart();
-      show();
+      if ( !m_bStayHidden )
+         show();
    }
 
    m_progressStack.push_back( pld );
@@ -1670,7 +1685,8 @@ void ProgressDialog::recalc( bool bUpdate )
             m_pSubProgressBar->setValue( int( 1000.0 * m_progressStack.front().m_dSubRangeMin ) );
       }
 
-      if ( !isVisible() ) show();
+      if ( !m_bStayHidden && !isVisible() )
+         show();
       qApp->processEvents();
       m_t1.restart();
    }

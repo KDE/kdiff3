@@ -1,7 +1,7 @@
 
 /*
  *   kdiff3 - Text Diff And Merge Tool
- *   Copyright (C) 2002-2006  Joachim Eibl, joachim.eibl at gmx.de
+ *   Copyright (C) 2002-2007  Joachim Eibl, joachim.eibl at gmx.de
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -123,7 +123,9 @@ public:
     QString m_historyEntryStartRegExp;
     bool m_bHistoryMergeSorting;
     QString m_historyEntryStartSortKeyOrder;
+    int m_maxNofHistoryEntries;
     QString m_IrrelevantMergeCmd;
+    bool m_bAutoSaveAndQuitOnMergeWithoutConflicts;
 
     bool m_bAutoAdvance;
     int  m_autoAdvanceDelay;
@@ -144,6 +146,7 @@ public:
     bool m_bDmBinaryComparison;
     bool m_bDmFullAnalysis;
     bool m_bDmTrustDate;
+    bool m_bDmTrustDateFallbackToBinary;
     bool m_bDmTrustSize;
     bool m_bDmCopyNewer;
     //bool m_bDmShowOnlyDeltas;
@@ -159,6 +162,7 @@ public:
     bool m_bRightToLeftLanguage;
 
     QString m_ignorableCmdLineOptions;
+    bool m_bIntegrateWithClearCase;
 
     void saveOptions(KConfig* config);
     void readOptions(KConfig* config);
@@ -175,6 +179,8 @@ protected slots:
 
     void slotEncodingChanged();
     void slotHistoryMergeRegExpTester();
+    void slotIntegrateWithClearCase();
+    void slotRemoveClearCaseIntegration();
 private:
     void resetToDefaults();
 

@@ -1,6 +1,6 @@
 /*
  *   kdiff3 - Text Diff And Merge Tool
- *   Copyright (C) 2002-2006  Joachim Eibl, joachim.eibl at gmx.de
+ *   Copyright (C) 2002-2007  Joachim Eibl, joachim.eibl at gmx.de
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -740,15 +740,16 @@ void OptionDialog::setupDiffPage( void )
 
    QLabel* label=0;
 
-   OptionCheckBox* pPreserveCarriageReturn = new OptionCheckBox( i18n("Preserve carriage return"), false, "PreserveCarriageReturn", &m_bPreserveCarriageReturn, page, this );
-   gbox->addMultiCellWidget( pPreserveCarriageReturn, line, line, 0, 1 );
-   QToolTip::add( pPreserveCarriageReturn, i18n(
-      "Show carriage return characters '\\r' if they exist.\n"
-      "Helps to compare files that were modified under different operating systems.")
-      );
-   ++line;
+//   OptionCheckBox* pPreserveCarriageReturn = new OptionCheckBox( i18n("Preserve carriage return"), false, "PreserveCarriageReturn", &m_bPreserveCarriageReturn, page, this );
+//   gbox->addMultiCellWidget( pPreserveCarriageReturn, line, line, 0, 1 );
+//   QToolTip::add( pPreserveCarriageReturn, i18n(
+//      "Show carriage return characters '\\r' if they exist.\n"
+//      "Helps to compare files that were modified under different operating systems.")
+//      );
+//   ++line;
+   QString treatAsWhiteSpace = " ("+i18n("Treat as white space.")+")";
 
-   OptionCheckBox* pIgnoreNumbers = new OptionCheckBox( i18n("Ignore numbers"), false, "IgnoreNumbers", &m_bIgnoreNumbers, page, this );
+   OptionCheckBox* pIgnoreNumbers = new OptionCheckBox( i18n("Ignore numbers")+treatAsWhiteSpace, false, "IgnoreNumbers", &m_bIgnoreNumbers, page, this );
    gbox->addMultiCellWidget( pIgnoreNumbers, line, line, 0, 1 );
    QToolTip::add( pIgnoreNumbers, i18n(
       "Ignore number characters during line matching phase. (Similar to Ignore white space.)\n"
@@ -756,13 +757,13 @@ void OptionDialog::setupDiffPage( void )
       );
    ++line;
 
-   OptionCheckBox* pIgnoreComments = new OptionCheckBox( i18n("Ignore C/C++ comments"), false, "IgnoreComments", &m_bIgnoreComments, page, this );
+   OptionCheckBox* pIgnoreComments = new OptionCheckBox( i18n("Ignore C/C++ comments")+treatAsWhiteSpace, false, "IgnoreComments", &m_bIgnoreComments, page, this );
    gbox->addMultiCellWidget( pIgnoreComments, line, line, 0, 1 );
    QToolTip::add( pIgnoreComments, i18n( "Treat C/C++ comments like white space.")
       );
    ++line;
 
-   OptionCheckBox* pIgnoreCase = new OptionCheckBox( i18n("Ignore case"), false, "IgnoreCase", &m_bIgnoreCase, page, this );
+   OptionCheckBox* pIgnoreCase = new OptionCheckBox( i18n("Ignore case")+treatAsWhiteSpace, false, "IgnoreCase", &m_bIgnoreCase, page, this );
    gbox->addMultiCellWidget( pIgnoreCase, line, line, 0, 1 );
    QToolTip::add( pIgnoreCase, i18n(
       "Treat case differences like white space changes. ('a'<=>'A')")
@@ -791,16 +792,6 @@ void OptionDialog::setupDiffPage( void )
       );
    ++line;
 
-   label = new QLabel( i18n("Auto advance delay (ms):"), page );
-   gbox->addWidget( label, line, 0 );
-   OptionIntEdit* pAutoAdvanceDelay = new OptionIntEdit( 500, "AutoAdvanceDelay", &m_autoAdvanceDelay, 0, 2000, page, this );
-   gbox->addWidget( pAutoAdvanceDelay, line, 1 );
-   QToolTip::add( label,i18n(
-      "When in Auto-Advance mode the result of the current selection is shown \n"
-      "for the specified time, before jumping to the next conflict. Range: 0-2000 ms")
-      );
-   ++line;
-
    topLayout->addStretch(10);
 }
 
@@ -818,6 +809,16 @@ void OptionDialog::setupMergePage( void )
    int line=0;
 
    QLabel* label=0;
+
+   label = new QLabel( i18n("Auto advance delay (ms):"), page );
+   gbox->addWidget( label, line, 0 );
+   OptionIntEdit* pAutoAdvanceDelay = new OptionIntEdit( 500, "AutoAdvanceDelay", &m_autoAdvanceDelay, 0, 2000, page, this );
+   gbox->addWidget( pAutoAdvanceDelay, line, 1 );
+   QToolTip::add( label,i18n(
+      "When in Auto-Advance mode the result of the current selection is shown \n"
+      "for the specified time, before jumping to the next conflict. Range: 0-2000 ms")
+      );
+   ++line;
 
    label = new QLabel( i18n("White space 2-file merge default:"), page );
    gbox->addWidget( label, line, 0 );
@@ -942,6 +943,13 @@ void OptionDialog::setupMergePage( void )
       gbox->addMultiCellWidget( m_pHistoryAutoMerge, line, line, 0, 1 );
       QToolTip::add( m_pHistoryAutoMerge, i18n("Run version control history automerge on merge start.") );
       ++line;
+
+      OptionIntEdit* pMaxNofHistoryEntries = new OptionIntEdit( -1, "MaxNofHistoryEntries", &m_maxNofHistoryEntries, -1, 1000, page, this );
+      label = new QLabel( pMaxNofHistoryEntries, i18n("Max number of history entries:"), page );
+      gbox->addWidget( label, line, 0 );
+      gbox->addWidget( pMaxNofHistoryEntries, line, 1 );
+      QToolTip::add( pMaxNofHistoryEntries, i18n("Cut off after specified number. Use -1 for infinite number of entries.") );
+      ++line;
    }
 
    QPushButton* pButton = new QPushButton( i18n("Test your regular expressions"), page );
@@ -956,6 +964,15 @@ void OptionDialog::setupMergePage( void )
    QToolTip::add( label, i18n("If specified this script is run after automerge\n"
                               "when no other relevant changes were detected.\n"
                               "Called with the parameters: filename1 filename2 filename3") );
+   ++line;
+
+
+   OptionCheckBox* pAutoSaveAndQuit = new OptionCheckBox( i18n("Auto save and quit on merge without conflicts"), false,
+      "AutoSaveAndQuitOnMergeWithoutConflicts", &m_bAutoSaveAndQuitOnMergeWithoutConflicts, page, this );
+   gbox->addMultiCellWidget( pAutoSaveAndQuit, line, line, 0, 1 );
+   QToolTip::add( pAutoSaveAndQuit, i18n("When KDiff3 was started for a file-merge from the commandline and all\n" 
+                                         "conflicts are solvable without user interaction then automatically save and quit.\n"
+                                         "(Similar to command line option \"--auto\".") );
    ++line;
 
    topLayout->addStretch(10);
@@ -1071,8 +1088,14 @@ void OptionDialog::setupDirectoryMergePage( void )
    QToolTip::add( pFullAnalysis, i18n("Do a full analysis and show statistics information in extra columns.\n"
                                       "(Slower than a binary comparison, much slower for binary files.)") );
    
-   OptionRadioButton* pTrustDate = new OptionRadioButton( i18n("Trust the modification date (unsafe)"), false, "TrustDate", &m_bDmTrustDate, pBG, this );
+   OptionRadioButton* pTrustDate = new OptionRadioButton( i18n("Trust the size and modification date (unsafe)"), false, "TrustDate", &m_bDmTrustDate, pBG, this );
    QToolTip::add( pTrustDate, i18n("Assume that files are equal if the modification date and file length are equal.\n"
+                                   "Files with equal contents but different modification dates will appear as different.\n"
+                                     "Useful for big directories or slow networks.") );
+   
+   OptionRadioButton* pTrustDateFallbackToBinary = new OptionRadioButton( i18n("Trust the size and date, but use binary comparison if date doesn't match (unsafe)"), false, "TrustDateFallbackToBinary", &m_bDmTrustDateFallbackToBinary, pBG, this );
+   QToolTip::add( pTrustDateFallbackToBinary, i18n("Assume that files are equal if the modification date and file length are equal.\n"
+                                     "If the date isn't equal but the sizes are, use binary comparison.\n"
                                      "Useful for big directories or slow networks.") );
 
    OptionRadioButton* pTrustSize = new OptionRadioButton( i18n("Trust the size (unsafe)"), false, "TrustSize", &m_bDmTrustSize, pBG, this );
@@ -1089,7 +1112,7 @@ void OptionDialog::setupDirectoryMergePage( void )
    ++line;
 
    // Allow white-space only differences to be considered equal
-   OptionCheckBox* pWhiteSpaceDiffsEqual = new OptionCheckBox( i18n("White space differences considered equal"), false,"WhiteSpaceEqual", &m_bDmWhiteSpaceEqual, page, this );
+   OptionCheckBox* pWhiteSpaceDiffsEqual = new OptionCheckBox( i18n("White space differences considered equal"), true,"WhiteSpaceEqual", &m_bDmWhiteSpaceEqual, page, this );
    gbox->addMultiCellWidget( pWhiteSpaceDiffsEqual, line, line, 0, 1 );
    QToolTip::add( pWhiteSpaceDiffsEqual, i18n(
                   "If files differ only by white space consider them equal.\n"
@@ -1141,22 +1164,18 @@ class Utf8BOMCodec : public QTextCodec
    const char * name () const { return "UTF-8-BOM"; }
    int mibEnum () const { return 2123; }
    int heuristicContentMatch(const char*, int) const { return 0; }
-   QString toUnicode( const char* p, int len) const 
-   {
-      return QString::fromUtf8 ( p, len );
-   }
    class UTF8BOMEncoder : public QTextEncoder
    {
       bool bBOMAdded;
    public:
-      UTF8BOMEncoder(){bBOMAdded=false;}
+      UTF8BOMEncoder()  {  bBOMAdded=false;  }
       QCString fromUnicode(const QString& uc, int& lenInOut )
       {
          QCString r;
          if (!bBOMAdded)
          {
             r += "\xEF\xBB\xBF";
-            bBOMAdded=true; 
+            bBOMAdded=true;
          }
          r += uc.utf8();
          lenInOut = r.length();
@@ -1166,6 +1185,24 @@ class Utf8BOMCodec : public QTextCodec
    QTextEncoder* makeEncoder() const
    {
       return new UTF8BOMEncoder;
+   }
+
+   class UTF8BOMDecoder : public QTextDecoder
+   {
+      QTextDecoder *m_pDecoder;
+   public:
+      UTF8BOMDecoder() {   m_pDecoder = QTextCodec::codecForName("UTF-8")->makeDecoder();  }
+      ~UTF8BOMDecoder() {
+         delete m_pDecoder;
+      }
+      QString toUnicode( const char* p, int len)
+      {
+         return m_pDecoder->toUnicode( p, len );
+      }
+   };
+   QTextDecoder* makeDecoder() const
+   {
+      return new UTF8BOMDecoder;
    }
 };
 
@@ -1397,14 +1434,18 @@ static char* countryMap[]={
    topLayout->addStretch(10);
 }
 
+#ifdef _WIN32
+#include "ccInstHelper.cpp"
+#endif
+
 void OptionDialog::setupIntegrationPage( void )
 {
    QFrame *page = addPage( i18n("Integration"), i18n("Integration Settings"),
                            BarIcon("launch"/*"charset"*/, KIcon::SizeMedium ) );
    QVBoxLayout *topLayout = new QVBoxLayout( page, 5, spacingHint() );
 
-   QGridLayout *gbox = new QGridLayout( 3, 2 );
-   gbox->setColStretch(1,5);
+   QGridLayout *gbox = new QGridLayout( 3, 3 );
+   gbox->setColStretch(2,5);
    topLayout->addLayout( gbox );
    int line=0;
 
@@ -1412,7 +1453,7 @@ void OptionDialog::setupIntegrationPage( void )
    label = new QLabel( i18n("Command line options to ignore:"), page );
    gbox->addWidget( label, line, 0 );
    OptionLineEdit* pIgnorableCmdLineOptions = new OptionLineEdit( "-u;-query;-html;-abort", "IgnorableCmdLineOptions", &m_ignorableCmdLineOptions, page, this );
-   gbox->addWidget( pIgnorableCmdLineOptions, line, 1 );
+   gbox->addMultiCellWidget( pIgnorableCmdLineOptions, line, line, 1,2 );
    QToolTip::add( label, i18n(
       "List of command line options that should be ignored when KDiff3 is used by other tools.\n"
       "Several values can be specified if separated via ';'\n"
@@ -1420,9 +1461,46 @@ void OptionDialog::setupIntegrationPage( void )
       ));
    ++line;
 
+#ifdef _WIN32
+   QPushButton* pIntegrateWithClearCase = new QPushButton( i18n("Integrate with ClearCase"), page);
+   gbox->addWidget( pIntegrateWithClearCase, line, 0 );
+   QToolTip::add( pIntegrateWithClearCase, i18n(
+                 "Integrate with Rational ClearCase from IBM.\n"
+                 "Modifies the \"map\" file in ClearCase-subdir \"lib/mgrs\"\n"
+                 "(Only enabled when ClearCase \"bin\" directory is in the path.)"));
+   connect(pIntegrateWithClearCase, SIGNAL(clicked()),this, SLOT(slotIntegrateWithClearCase()) );
+   pIntegrateWithClearCase->setEnabled( integrateWithClearCase( "existsClearCase", "" )!=0 );
+
+   QPushButton* pRemoveClearCaseIntegration = new QPushButton( i18n("Remove ClearCase Integration"), page);
+   gbox->addWidget( pRemoveClearCaseIntegration, line, 1 );
+   QToolTip::add( pRemoveClearCaseIntegration, i18n(
+                 "Restore the old \"map\" file from before doing the Clearcase integration."));
+   connect(pRemoveClearCaseIntegration, SIGNAL(clicked()),this, SLOT(slotRemoveClearCaseIntegration()) );
+   pRemoveClearCaseIntegration->setEnabled( integrateWithClearCase( "existsClearCase", "" )!=0 );
+
+   ++line;
+#endif
+
    topLayout->addStretch(10);
 }
 
+void OptionDialog::slotIntegrateWithClearCase()
+{
+#ifdef _WIN32
+   char kdiff3CommandPath[1000];
+   GetModuleFileNameA( 0, kdiff3CommandPath, sizeof(kdiff3CommandPath)-1 );
+   integrateWithClearCase( "install", kdiff3CommandPath );
+#endif
+}
+
+void OptionDialog::slotRemoveClearCaseIntegration()
+{
+#ifdef _WIN32
+   char kdiff3CommandPath[1000];
+   GetModuleFileNameA( 0, kdiff3CommandPath, sizeof(kdiff3CommandPath)-1 );
+   integrateWithClearCase( "uninstall", kdiff3CommandPath );
+#endif
+}
 
 void OptionDialog::slotEncodingChanged()
 {

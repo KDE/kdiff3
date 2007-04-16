@@ -114,8 +114,8 @@ while (<>) {
     }
 }
 
-die "wrong input (flag != 4)" unless $flag == 4;
-print STDERR "hmm, don't know autoconf version\n" unless $ac_version;
+#die "wrong input (flag != 4)" unless $flag == 4;
+#print STDERR "hmm, don't know autoconf version\n" unless $ac_version;
 
 sub insert_main_loop {
 

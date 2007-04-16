@@ -2028,7 +2028,7 @@ sub tag_DOCFILES ()
 
       $lines .= "\n";
       $lines .= "uninstall-docs:\n";
-      $lines .= "\t-rm -rf \$(kde_htmldir)/$kdelang/$appname\n";
+      $lines .= "\t-rm -rf \$(DESTDIR)\$(kde_htmldir)/$kdelang/$appname\n";
       $lines .= "\n";
       $lines .= "clean-docs:\n";
       $lines .= "\t-rm -f index.cache.bz2\n";

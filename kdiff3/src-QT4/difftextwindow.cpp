@@ -2,7 +2,7 @@
                           difftextwindow.cpp  -  description
                              -------------------
     begin                : Mon Apr 8 2002
-    copyright            : (C) 2002-2006 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
@@ -35,7 +35,8 @@
 #include <klocale.h>
 #include <kfiledialog.h>
 
-#include <math.h>
+#include <cmath>
+#include <cstdlib>
 #include <assert.h>
 
 

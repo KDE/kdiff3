@@ -2,7 +2,7 @@
                           mergeresultwindow.cpp  -  description
                              -------------------
     begin                : Sun Apr 14 2002
-    copyright            : (C) 2002-2006 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
@@ -561,38 +561,38 @@ void MergeResultWindow::go( e_Direction eDir, e_EndPoint eEndPoint )
       if (eDir==eUp) i = m_mergeLineList.begin();     // first mergeline
       else           i = --m_mergeLineList.end();     // last mergeline
 
-      while ( i!=m_mergeLineList.end() && ! i->bDelta )
+      while ( isItAtEnd(eDir==eUp, i) && ! i->bDelta )
       {
          if ( eDir==eUp )  ++i;                       // search downwards
          else              --i;                       // search upwards
       }
    }
-   else if ( eEndPoint == eDelta  &&  i!=m_mergeLineList.end())
+   else if ( eEndPoint == eDelta  &&  isItAtEnd(eDir!=eUp, i) )
    {
       do
       {
          if ( eDir==eUp )  --i;
          else              ++i;
       }
-      while ( i!=m_mergeLineList.end() && ( i->bDelta == false || checkOverviewIgnore(i) || bSkipWhiteConflicts && i->bWhiteSpaceConflict ) );
+      while ( isItAtEnd(eDir!=eUp, i) && ( i->bDelta == false || checkOverviewIgnore(i) || bSkipWhiteConflicts && i->bWhiteSpaceConflict ) );
    }
-   else if ( eEndPoint == eConflict  &&  i!=m_mergeLineList.end() )
+   else if ( eEndPoint == eConflict  &&  isItAtEnd(eDir!=eUp, i) )
    {
       do
       {
          if ( eDir==eUp )  --i;
          else              ++i;
       }
-      while ( i!=m_mergeLineList.end() && (i->bConflict == false || bSkipWhiteConflicts && i->bWhiteSpaceConflict ) );
+      while ( isItAtEnd(eDir!=eUp, i) && (i->bConflict == false || bSkipWhiteConflicts && i->bWhiteSpaceConflict ) );
    }
-   else if ( i!=m_mergeLineList.end()  &&  eEndPoint == eUnsolvedConflict )
+   else if ( isItAtEnd(eDir!=eUp, i)  &&  eEndPoint == eUnsolvedConflict )
    {
       do
       {
          if ( eDir==eUp )  --i;
          else              ++i;
       }
-      while ( i!=m_mergeLineList.end() && ! i->mergeEditLineList.begin()->isConflict() );
+      while ( isItAtEnd(eDir!=eUp, i) && ! i->mergeEditLineList.begin()->isConflict() );
    }
 
    if ( isVisible() )
@@ -610,7 +610,7 @@ bool MergeResultWindow::isDeltaAboveCurrent()
    do
    {
       --i;
-      if ( i->bDelta && !( bSkipWhiteConflicts && i->bWhiteSpaceConflict ) ) return true;
+      if ( i->bDelta && !checkOverviewIgnore(i) && !( bSkipWhiteConflicts && i->bWhiteSpaceConflict ) ) return true;
    }
    while (i!=m_mergeLineList.begin());
 
@@ -628,7 +628,7 @@ bool MergeResultWindow::isDeltaBelowCurrent()
       ++i;
       for( ; i!=m_mergeLineList.end(); ++i )
       {
-         if ( i->bDelta && !( bSkipWhiteConflicts && i->bWhiteSpaceConflict ) ) return true;
+         if ( i->bDelta && !checkOverviewIgnore(i) && !( bSkipWhiteConflicts && i->bWhiteSpaceConflict ) ) return true;
       }
    }
    return false;
@@ -640,10 +640,12 @@ bool MergeResultWindow::isConflictAboveCurrent()
    MergeLineList::iterator i = m_currentMergeLineIt;
    if (i == m_mergeLineList.begin()) return false;
 
+   bool bSkipWhiteConflicts = ! m_pOptionDialog->m_bShowWhiteSpace;
+
    do
    {
       --i;
-      if ( i->bConflict ) return true;
+      if ( i->bConflict && !(bSkipWhiteConflicts && i->bWhiteSpaceConflict) ) return true;
    } 
    while (i!=m_mergeLineList.begin());
    
@@ -654,16 +656,25 @@ bool MergeResultWindow::isConflictBelowCurrent()
 {
    MergeLineList::iterator i = m_currentMergeLineIt;
    if (m_mergeLineList.empty()) return false;
-   
+
+   bool bSkipWhiteConflicts = ! m_pOptionDialog->m_bShowWhiteSpace;
+
    if (i!=m_mergeLineList.end())
    {
       ++i;
       for( ; i!=m_mergeLineList.end(); ++i )
       {
-         if ( i->bConflict ) return true;
+         if ( i->bConflict && !(bSkipWhiteConflicts && i->bWhiteSpaceConflict) ) return true;
       }
    }
    return false;
+}
+
+bool MergeResultWindow::isUnsolvedConflictAtCurrent()
+{
+   if (m_mergeLineList.empty()) return false;
+   MergeLineList::iterator i = m_currentMergeLineIt;
+   return i->mergeEditLineList.begin()->isConflict();
 }
 
 bool MergeResultWindow::isUnsolvedConflictAboveCurrent()
@@ -798,12 +809,12 @@ void MergeResultWindow::showNrOfConflicts()
    else  if ( m_pTotalDiffStatus->bTextAEqB && m_pTotalDiffStatus->bTextAEqC )
       totalInfo += i18n("All input files contain the same text.");
    else {
-      if    ( m_pTotalDiffStatus->bBinaryAEqB ) totalInfo += i18n("Files A and B are binary equal.\n");
-      else if ( m_pTotalDiffStatus->bTextAEqB ) totalInfo += i18n("Files A and B have equal text. \n");
-      if    ( m_pTotalDiffStatus->bBinaryAEqC ) totalInfo += i18n("Files A and C are binary equal.\n");
-      else if ( m_pTotalDiffStatus->bTextAEqC ) totalInfo += i18n("Files A and C have equal text. \n");
-      if    ( m_pTotalDiffStatus->bBinaryBEqC ) totalInfo += i18n("Files B and C are binary equal.\n");
-      else if ( m_pTotalDiffStatus->bTextBEqC ) totalInfo += i18n("Files B and C have equal text. \n");
+      if    ( m_pTotalDiffStatus->bBinaryAEqB ) totalInfo += i18n("Files %1 and %2 are binary equal.\n").arg("A").arg("B");
+      else if ( m_pTotalDiffStatus->bTextAEqB ) totalInfo += i18n("Files %1 and %2 have equal text.\n").arg("A").arg("B");
+      if    ( m_pTotalDiffStatus->bBinaryAEqC ) totalInfo += i18n("Files %1 and %2 are binary equal.\n").arg("A").arg("C");
+      else if ( m_pTotalDiffStatus->bTextAEqC ) totalInfo += i18n("Files %1 and %2 have equal text.\n").arg("A").arg("C");
+      if    ( m_pTotalDiffStatus->bBinaryBEqC ) totalInfo += i18n("Files %1 and %2 are binary equal.\n").arg("B").arg("C");
+      else if ( m_pTotalDiffStatus->bTextBEqC ) totalInfo += i18n("Files %1 and %2 have equal text.\n").arg("B").arg("C");
    }
 
    int nrOfUnsolvedConflicts = getNrOfUnsolvedConflicts();
@@ -978,11 +989,30 @@ void MergeResultWindow::slotUnsolve()
          .arg(nofUnsolved).arg(wsc) );
 }
 
+static QString calcHistoryLead(const QString& s )
+{
+   // Return the start of the line until the first white char after the first non white char.
+   unsigned int i;
+   for( i=0; i<s.length(); ++i )
+   {
+      if (s[i]!=' ' && s[i]!='\t')
+      {
+         for( ; i<s.length(); ++i )
+         {
+            if (s[i]==' ' || s[i]=='\t')
+            {
+               return s.left(i);
+            }
+         }
+         return s;  // Very unlikely
+      }
+   }
+   return "";  // Must be an empty string, not a null string.
+}
 
-static void findHistoryRange( bool bThreeFiles, const Diff3LineList* pD3LList, 
+static void findHistoryRange( const QRegExp& historyStart, bool bThreeFiles, const Diff3LineList* pD3LList, 
                              Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd )
 {
-   QRegExp historyStart(".*\\$Log.*\\$.*");
    QString historyLead;
    // Search for start of history
    for( iBegin = pD3LList->begin(), idxBegin=0; iBegin!=pD3LList->end(); ++iBegin, ++idxBegin )
@@ -991,7 +1021,7 @@ static void findHistoryRange( bool bThreeFiles, const Diff3LineList* pD3LList,
            historyStart.exactMatch( iBegin->getString(B) ) && 
            ( !bThreeFiles || historyStart.exactMatch( iBegin->getString(C) ) ) )
       {
-         historyLead = iBegin->getString(A).section(' ', 0, 0, QString::SectionIncludeLeadingSep);
+         historyLead = calcHistoryLead( iBegin->getString(A) );
          break;
       }
    }
@@ -1001,9 +1031,9 @@ static void findHistoryRange( bool bThreeFiles, const Diff3LineList* pD3LList,
       QString sA = iEnd->getString(A);
       QString sB = iEnd->getString(B);
       QString sC = iEnd->getString(C);
-      if ( ! ((sA.isNull() || historyLead == sA.section(' ',0,0,QString::SectionIncludeLeadingSep)) &&
-           (sB.isNull() || historyLead == sB.section(' ',0,0,QString::SectionIncludeLeadingSep)) &&
-           (!bThreeFiles || sC.isNull() || historyLead == sC.section(' ',0,0,QString::SectionIncludeLeadingSep))
+      if ( ! ((sA.isNull() || historyLead == calcHistoryLead(sA) ) &&
+              (sB.isNull() || historyLead == calcHistoryLead(sB) ) &&
+           (!bThreeFiles || sC.isNull() || historyLead == calcHistoryLead(sC) )
          ))
       {
          break; // End of the history
@@ -1102,7 +1132,7 @@ void MergeResultWindow::collectHistoryInformation(
    {
       const LineData* pld = id3l->getLineData(src);
       QString s( pld->pLine, pld->size );
-      historyLead = s.section(' ',0,0,QString::SectionIncludeLeadingSep);
+      historyLead = calcHistoryLead(s);
    }
    QRegExp historyStart = m_pOptionDialog->m_historyStartRegExp;
    ++id3l; // Skip line with "$Log ... $"
@@ -1118,7 +1148,7 @@ void MergeResultWindow::collectHistoryInformation(
       const LineData* pld = id3l->getLineData(src);
       if ( !pld ) continue;
       QString s( pld->pLine, pld->size );
-      if (historyLead.isNull()) historyLead = s.section(' ',0,0,QString::SectionIncludeLeadingSep);
+      if (historyLead.isNull()) historyLead = calcHistoryLead(s);
       QString sLine = s.mid(historyLead.length());
       if ( ( !bUseRegExp && !sLine.stripWhiteSpace().isEmpty() && bPrevLineIsEmpty )
            || bUseRegExp && newHistoryEntry.exactMatch( sLine ) 
@@ -1228,7 +1258,7 @@ void MergeResultWindow::slotMergeHistory()
    int d3lHistoryEndLineIdx = -1;
 
    // Search for history start, history end in the diff3LineList
-   findHistoryRange( m_pldC!=0, m_pDiff3LineList, iD3LHistoryBegin, iD3LHistoryEnd, d3lHistoryBeginLineIdx, d3lHistoryEndLineIdx );
+   findHistoryRange( m_pOptionDialog->m_historyStartRegExp, m_pldC!=0, m_pDiff3LineList, iD3LHistoryBegin, iD3LHistoryEnd, d3lHistoryBeginLineIdx, d3lHistoryEndLineIdx );
 
    if (  iD3LHistoryBegin != m_pDiff3LineList->end() )
    {
@@ -1252,33 +1282,36 @@ void MergeResultWindow::slotMergeHistory()
       bool bHistoryMergeSorting = m_pOptionDialog->m_bHistoryMergeSorting  && ! m_pOptionDialog->m_historyEntryStartSortKeyOrder.isEmpty() && 
                                   ! m_pOptionDialog->m_historyEntryStartRegExp.isEmpty();
 
-      // Remove parts from the historyMap and hitList that stay in place
-      if ( bHistoryMergeSorting )
+      if ( m_pOptionDialog->m_maxNofHistoryEntries==-1 )
       {
-         while ( ! historyMap.empty() )
+         // Remove parts from the historyMap and hitList that stay in place
+         if ( bHistoryMergeSorting )
          {
-            HistoryMap::iterator hMapIt = historyMap.begin();
-            if( hMapIt->second.staysInPlace( m_pldC!=0, iD3LHistoryEnd ) )
-               historyMap.erase(hMapIt);
-            else
-               break;
+            while ( ! historyMap.empty() )
+            {
+               HistoryMap::iterator hMapIt = historyMap.begin();
+               if( hMapIt->second.staysInPlace( m_pldC!=0, iD3LHistoryEnd ) )
+                  historyMap.erase(hMapIt);
+               else
+                  break;
+            }
          }
-      }
-      else
-      {
-         while ( ! hitList.empty() )
+         else
          {
-            HistoryMap::iterator hMapIt = hitList.back();
-            if( hMapIt->second.staysInPlace( m_pldC!=0, iD3LHistoryEnd ) )
-               hitList.pop_back();
-            else
-               break;
+            while ( ! hitList.empty() )
+            {
+               HistoryMap::iterator hMapIt = hitList.back();
+               if( hMapIt->second.staysInPlace( m_pldC!=0, iD3LHistoryEnd ) )
+                  hitList.pop_back();
+               else
+                  break;
+            }
          }
-      }
-      while (iD3LHistoryOrigEnd != iD3LHistoryEnd)
-      {
-         --iD3LHistoryOrigEnd;
-         --d3lHistoryEndLineIdx;
+         while (iD3LHistoryOrigEnd != iD3LHistoryEnd)
+         {
+            --iD3LHistoryOrigEnd;
+            --d3lHistoryEndLineIdx;
+         }
       }
 
       MergeLineList::iterator iMLLStart = splitAtDiff3LineIdx(d3lHistoryBeginLineIdx);
@@ -1297,17 +1330,21 @@ void MergeResultWindow::slotMergeHistory()
       iMLLStart->mergeEditLineList.clear();
       // Now insert the complete history into the first MergeLine of the history
       iMLLStart->mergeEditLineList.push_back( MergeEditLine( iD3LHistoryBegin, m_pldC == 0 ? B : C ) );
-      QString lead = iD3LHistoryBegin->getString(A).section(' ',0,0,QString::SectionIncludeLeadingSep);
+      QString lead = calcHistoryLead( iD3LHistoryBegin->getString(A) );
       MergeEditLine mel( m_pDiff3LineList->end() );
       mel.setString( lead );
       iMLLStart->mergeEditLineList.push_back(mel);
 
+      int historyCount = 0;
       if ( bHistoryMergeSorting )
       {
          // Create a sorted history
          HistoryMap::reverse_iterator hmit;
          for ( hmit = historyMap.rbegin(); hmit != historyMap.rend(); ++hmit )
          {
+            if ( historyCount==m_pOptionDialog->m_maxNofHistoryEntries )
+               break;
+            ++historyCount;
             HistoryMapEntry& hme = hmit->second;
             MergeEditLineList& mell = hme.choice(m_pldC!=0);
             if (!mell.empty())
@@ -1320,6 +1357,9 @@ void MergeResultWindow::slotMergeHistory()
          std::list< HistoryMap::iterator >::iterator hlit;
          for ( hlit = hitList.begin(); hlit != hitList.end(); ++hlit )
          {
+            if ( historyCount==m_pOptionDialog->m_maxNofHistoryEntries )
+               break;
+            ++historyCount;
             HistoryMapEntry& hme = (*hlit)->second;
             MergeEditLineList& mell = hme.choice(m_pldC!=0);
             if (!mell.empty())
@@ -1494,9 +1534,8 @@ QString MergeResultWindow::MergeEditLine::getString( const MergeResultWindow* mr
    if ( ! isModified() )
    {
       int src = m_src;
-      const Diff3Line& d3l = *m_id3l;
       if ( src == 0 )   { return QString(); }
-
+      const Diff3Line& d3l = *m_id3l;
       const LineData* pld = 0;
       assert( src == A || src == B || src == C );
       if      ( src == A && d3l.lineA!=-1 ) pld = &mrw->m_pldA[ d3l.lineA ];
@@ -2202,10 +2241,13 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
                      break;
                   }
                }
-               --melIt1;
-               if ( melIt1 == mlIt1->mergeEditLineList.end() ) {
+               // Go back one line
+               if ( melIt1 != mlIt1->mergeEditLineList.begin() )
+                  --melIt1;
+               else
+               {
+                  if ( mlIt1 == m_mergeLineList.begin() ) break;
                   --mlIt1;
-                  if ( mlIt1 == m_mergeLineList.end() ) break;
                   melIt1 = mlIt1->mergeEditLineList.end();
                   --melIt1;
                }
@@ -2678,9 +2720,8 @@ bool MergeResultWindow::saveDocument( const QString& fileName, QTextCodec* pEnco
             }
 
             textOutStream << str;
+            ++line;
          }
-
-         ++line;
       }
    }
    bool bSuccess = file.writeFile( dataArray.data(), dataArray.size() );

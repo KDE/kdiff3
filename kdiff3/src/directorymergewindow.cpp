@@ -2,7 +2,7 @@
                           directorymergewindow.cpp
                              -----------------
     begin                : Sat Oct 19 2002
-    copyright            : (C) 2002-2005 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
@@ -75,7 +75,7 @@ public:
       setWFlags(Qt::WShowModal);
       setWordWrap(QTextEdit::NoWrap);
       setReadOnly(true);
-      showMaximized();
+      //showMaximized();
    }
 
    bool isEmpty(){ return text().isEmpty(); }
@@ -169,6 +169,17 @@ void DirectoryMergeWindow::fastFileComparison(
       bError = false;
       status = i18n("Date & Size: ");
       return;
+   }
+
+   if ( m_pOptions->m_bDmTrustDateFallbackToBinary )
+   {
+      bEqual = ( fi1.lastModified() == fi2.lastModified()  &&  fi1.size()==fi2.size() );
+      if ( bEqual )
+      {
+         bError = false;
+         status = i18n("Date & Size: ");
+         return;
+      }
    }
 
    QString fileName1 = fi1.absFilePath();
@@ -322,7 +333,7 @@ void DirectoryMergeWindow::reload()
          return;
    }
 
-   init( m_dirA, m_dirB, m_dirC, m_dirDest, m_bDirectoryMerge );
+   init( m_dirA, m_dirB, m_dirC, m_dirDest, m_bDirectoryMerge, true );
 }
 
 // Copy pm2 onto pm1, but preserve the alpha value from pm1 where pm2 is transparent.
@@ -404,13 +415,22 @@ static QString sortString(const QString& s, bool bCaseSensitive)
       return s.upper();
 }
 
+struct t_ItemInfo 
+{
+   bool bExpanded; 
+   bool bOperationComplete; 
+   QString status; 
+   e_MergeOperation eMergeOperation; 
+};
+
 bool DirectoryMergeWindow::init
    (
    FileAccess& dirA,
    FileAccess& dirB,
    FileAccess& dirC,
    FileAccess& dirDest,
-   bool bDirectoryMerge
+   bool bDirectoryMerge,
+   bool bReload
    )
 {
    if ( m_pOptions->m_bDmFullAnalysis )
@@ -425,6 +445,24 @@ bool DirectoryMergeWindow::init
    }
 
    show();
+
+   std::map<QString,t_ItemInfo> expandedDirsMap;
+
+   if ( bReload )
+   {
+      // Remember expandes items
+      QListViewItemIterator it( this );
+      while ( it.current() )
+      {
+         DirMergeItem* pDMI = static_cast<DirMergeItem*>( it.current() );
+         t_ItemInfo& ii = expandedDirsMap[ pDMI->m_pMFI->m_subPath ];
+         ii.bExpanded = pDMI->isOpen();
+         ii.bOperationComplete = pDMI->m_pMFI->m_bOperationComplete;
+         ii.status = pDMI->text( s_OpStatusCol );
+         ii.eMergeOperation = pDMI->m_pMFI->m_eMergeOperation;
+         ++it;
+      }
+   }
 
    ProgressProxy pp;
    m_bFollowDirLinks = m_pOptions->m_bDmFollowDirLinks;
@@ -448,11 +486,14 @@ bool DirectoryMergeWindow::init
    m_dirC = dirC;
    m_dirDest = dirDest;
 
-   m_pDirShowIdenticalFiles->setChecked(true);
-   m_pDirShowDifferentFiles->setChecked(true);
-   m_pDirShowFilesOnlyInA->setChecked(true);
-   m_pDirShowFilesOnlyInB->setChecked(true);
-   m_pDirShowFilesOnlyInC->setChecked(true);
+   if ( !bReload )
+   {
+      m_pDirShowIdenticalFiles->setChecked(true);
+      m_pDirShowDifferentFiles->setChecked(true);
+      m_pDirShowFilesOnlyInA->setChecked(true);
+      m_pDirShowFilesOnlyInB->setChecked(true);
+      m_pDirShowFilesOnlyInC->setChecked(true);
+   }
 
    // Check if all input directories exist and are valid. The dest dir is not tested now.
    // The test will happen only when we are going to write to it.
@@ -668,6 +709,26 @@ bool DirectoryMergeWindow::init
       setSelected( firstChild(), true );
    }
 
+   updateFileVisibilities();
+   if ( bReload )
+   {
+      // Remember expandes items
+      QListViewItemIterator it( this );
+      while ( it.current() )
+      {
+         DirMergeItem* pDMI = static_cast<DirMergeItem*>( it.current() );
+         std::map<QString,t_ItemInfo>::iterator i = expandedDirsMap.find( pDMI->m_pMFI->m_subPath );
+         if ( i!=expandedDirsMap.end() )
+         {
+            t_ItemInfo& ii = i->second;
+            pDMI->setOpen( ii.bExpanded );
+            pDMI->m_pMFI->setMergeOperation( ii.eMergeOperation, false );
+            pDMI->m_pMFI->m_bOperationComplete = ii.bOperationComplete;
+            pDMI->setText( s_OpStatusCol, ii.status );
+         }
+         ++it;
+      }
+   }
    return true;
 }
 
@@ -857,7 +918,9 @@ void DirectoryMergeWindow::compareFilesAndCalcAges( MergeFileInfos& mfi )
 
          if (m_pOptions->m_bDmWhiteSpaceEqual && nofNonwhiteConflicts == 0)
          {
-            mfi.m_bEqualAB =  mfi.m_bEqualBC =  mfi.m_bEqualAC = true;
+            mfi.m_bEqualAB = mfi.m_bExistsInA && mfi.m_bExistsInB;
+            mfi.m_bEqualAC = mfi.m_bExistsInA && mfi.m_bExistsInC;
+            mfi.m_bEqualBC = mfi.m_bExistsInB && mfi.m_bExistsInC;
          }
          else
          {
@@ -1583,8 +1646,8 @@ static bool isDir( DirMergeItem* pDMI, int column )
 void DirectoryMergeWindow::selectItemAndColumn(DirMergeItem* pDMI, int c, bool bContextMenu)
 {
    if ( bContextMenu && (
-        pDMI==m_pSelection1Item && c==m_selection1Column && m_pSelection2Item==0 ||
-        pDMI==m_pSelection2Item && c==m_selection2Column && m_pSelection3Item==0 ||
+        pDMI==m_pSelection1Item && c==m_selection1Column  ||
+        pDMI==m_pSelection2Item && c==m_selection2Column  ||
         pDMI==m_pSelection3Item && c==m_selection3Column ) )
       return;
 
@@ -1737,7 +1800,7 @@ DirMergeItem::~DirMergeItem()
    m_pMFI->m_pDMI = 0;
 }
 
-void MergeFileInfos::setMergeOperation( e_MergeOperation eMOp )
+void MergeFileInfos::setMergeOperation( e_MergeOperation eMOp, bool bRecursive )
 {
    if ( eMOp != m_eMergeOperation )
    {
@@ -1773,15 +1836,18 @@ void MergeFileInfos::setMergeOperation( e_MergeOperation eMOp )
       }
       m_pDMI->setText(s_OpCol,s);
 
-      e_MergeOperation eChildrenMergeOp = m_eMergeOperation;
-      if ( eChildrenMergeOp == eConflictingFileTypes ) eChildrenMergeOp = eMergeABCToDest;
-      QListViewItem* p = m_pDMI->firstChild();
-      while ( p!=0 )
+      if ( bRecursive )
       {
-         DirMergeItem* pDMI = static_cast<DirMergeItem*>( p );
-         DirectoryMergeWindow* pDMW = static_cast<DirectoryMergeWindow*>( p->listView() );
-         pDMW->calcSuggestedOperation( *pDMI->m_pMFI, eChildrenMergeOp );
-         p = p->nextSibling();
+         e_MergeOperation eChildrenMergeOp = m_eMergeOperation;
+         if ( eChildrenMergeOp == eConflictingFileTypes ) eChildrenMergeOp = eMergeABCToDest;
+         QListViewItem* p = m_pDMI->firstChild();
+         while ( p!=0 )
+         {
+            DirMergeItem* pDMI = static_cast<DirMergeItem*>( p );
+            DirectoryMergeWindow* pDMW = static_cast<DirectoryMergeWindow*>( p->listView() );
+            pDMW->calcSuggestedOperation( *pDMI->m_pMFI, eChildrenMergeOp );
+            p = p->nextSibling();
+         }
       }
    }
 }

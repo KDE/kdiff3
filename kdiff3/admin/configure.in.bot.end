@@ -31,6 +31,10 @@ if test x$GXX = "xyes" -a x$kde_have_gcc_visibility = "xyes" -a x$kde_cv_val_qt_
   echo ""
 fi
 
+if (test $warn_konq);
+   then echo "NOTICE: Since the Konqueror-headers were not found KDiff3 will be built without support for its service-menus and the KDiff3-service menu will not be built. (Install the package containing konq_popupmenu.h. Possibly kdebase-devel or on Debian libkonq4-dev etc.)"
+fi
+
 if test "$all_tests" = "bad"; then
   if test ! "$cache_file" = "/dev/null"; then
     echo ""

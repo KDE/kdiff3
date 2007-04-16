@@ -1,3 +1,19 @@
+/***************************************************************************
+                          ShellContextMenu.cpp  -  description
+                             -------------------
+    begin                : Sat Mar 4 2006
+    copyright            : (C) 2005-2007 by Joachim Eibl
+    email                : joachim dot eibl at gmx dot de
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
 // ShellContextMenu.cpp: Implementierung der Klasse CShellContextMenu.
 //
 //////////////////////////////////////////////////////////////////////
@@ -29,7 +45,7 @@ static char THIS_FILE[]=__FILE__;
 void showShellContextMenu( const QString& itemPath, QPoint pt, QWidget* pParentWidget, QMenu* pMenu )
 {
     CShellContextMenu scm;
-    scm.SetObjects(QDir::convertSeparators(itemPath));
+    scm.SetObjects(QDir::toNativeSeparators(QDir::cleanPath(itemPath)));
     int id = scm.ShowContextMenu (pParentWidget, pt, pMenu);
     if (id>=1)
        pMenu->actions().value(id-1)->trigger();
@@ -66,6 +82,9 @@ BOOL CShellContextMenu::GetContextMenu (void ** ppContextMenu, int & iMenuType)
 {
 	*ppContextMenu = NULL;
 	LPCONTEXTMENU icm1 = NULL;
+
+        if ( m_psfFolder==0 )
+           return FALSE;
 	
 	// first we retrieve the normal IContextMenu interface (every object should have it)
 	m_psfFolder->GetUIObjectOf (NULL, nItems, (LPCITEMIDLIST *) m_pidlArray, IID_IContextMenu, NULL, (void**) &icm1);

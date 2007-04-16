@@ -191,11 +191,11 @@ DIFF_EXT::DIFF_EXT()
 DIFF_EXT::~DIFF_EXT() 
 {
    LOG();
-  if(_resource != SERVER::instance()->handle()) {
-    FreeLibrary(_resource);
-  }
+   if(_resource != SERVER::instance()->handle()) {
+      FreeLibrary(_resource);
+   }
   
-  SERVER::instance()->release();
+   SERVER::instance()->release();
 }
 
 STDMETHODIMP
@@ -337,6 +337,7 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
    m_id_Merge3 = UINT(-1);
    m_id_Diff3 = UINT(-1);
    m_id_DiffWith_Base = UINT(-1);
+   m_id_ClearList = UINT(-1);
    m_id_About = UINT(-1);
 
    HRESULT ret = MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_NULL, 0);
@@ -365,14 +366,15 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
       if(m_nrOfSelectedFiles == 1) 
       {  
          size_t nrOfRecentFiles = m_recentFiles.size();
-         tstring menuStringCompare = i18n("Compare with");
-         tstring menuStringMerge   = i18n("Merge with");
+         tstring menuStringCompare = i18n("Compare with %1");
+         tstring menuStringMerge   = i18n("Merge with %1");
+         tstring firstFileName;
          if( nrOfRecentFiles>=1 )
          {
-            tstring firstFileName = cut_to_length( m_recentFiles.front() );        
-            menuStringCompare += TEXT(" '") + firstFileName + TEXT("'");
-            menuStringMerge   += TEXT(" '") + firstFileName + TEXT("'");
+            tstring firstFileName = TEXT("'") + cut_to_length( m_recentFiles.front() ) + TEXT("'");
          } 
+         replaceArgs( menuStringCompare, firstFileName );
+         replaceArgs( menuStringMerge,   firstFileName );
          m_id_DiffWith  = insertMenuItemHelper( subMenu, id++, pos2++, menuStringCompare, nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
          m_id_MergeWith = insertMenuItemHelper( subMenu, id++, pos2++, menuStringMerge, nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
 
@@ -384,7 +386,7 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
          m_id_Merge3 = insertMenuItemHelper( subMenu, id++, pos2++, i18n("3-way merge with base"), 
             nrOfRecentFiles >=2 ? MFS_ENABLED : MFS_DISABLED );
 
-         menuString = i18n("Save '%1' for later comparison or merge");
+         menuString = i18n("Save '%1' for later");
          replaceArgs( menuString, _file_name1 );
          m_id_DiffLater = insertMenuItemHelper( subMenu, id++, pos2++, menuString );
 
@@ -399,8 +401,10 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
             ++n;
          }
 
-         insertMenuItemHelper( subMenu, id++, pos2++, i18n("Compare with"), 
+         insertMenuItemHelper( subMenu, id++, pos2++, i18n("Compare with ..."), 
             nrOfRecentFiles > 0 ? MFS_ENABLED : MFS_DISABLED, file_list );
+
+         m_id_ClearList = insertMenuItemHelper( subMenu, id++, pos2++, i18n("Clear list"), nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
       }
       else if(m_nrOfSelectedFiles == 2) 
       {      
@@ -464,6 +468,11 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
       {
          LOG();
          diff_with(0, true);
+      } 
+      else if(id == m_id_ClearList) 
+      {
+         LOG();
+         m_recentFiles.clear();
       } 
       else if(id == m_id_DiffLater) 
       {
@@ -592,7 +601,7 @@ DIFF_EXT::diff_with(unsigned int num, bool bMerge)
    if ( i!=m_recentFiles.end() )
       _file_name2 = *i;
 
-   diff( (bMerge ? TEXT("-m \"") : TEXT("\"") ) + _file_name1 + TEXT("\" \"") + _file_name2 + TEXT("\"") );
+   diff( (bMerge ? TEXT("-m \"") : TEXT("\"") ) + _file_name2 + TEXT("\" \"") + _file_name1 + TEXT("\"") );
 }
 
 

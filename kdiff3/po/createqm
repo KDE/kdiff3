@@ -1,7 +1,7 @@
 for i in `cat subdirs` ; do
    if [ -a $i.po ]; then 
       echo $i
-      msgmerge --no-fuzzy-matching kdelibs_$i.po kreplacements.pot >kreplacements_$i.po
+      msgmerge --no-fuzzy-matching kdelibspo/kdelibs_$i.po kreplacements.pot >kreplacements_$i.po
       msgcat --use-first $i.po kreplacements_$i.po >kdiff3_$i.po
       /usr/lib/qt3/bin/msg2qm kdiff3_$i.po kdiff3_$i.qm
       rm kdiff3_$i.po kreplacements_$i.po

@@ -2,7 +2,7 @@
                           difftextwindow.cpp  -  description
                              -------------------
     begin                : Mon Apr 8 2002
-    copyright            : (C) 2002-2006 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
@@ -32,6 +32,7 @@
 #include <qtextcodec.h>
 #include <optiondialog.h>
 #include <math.h>
+#include <cstdlib>
 #include <qdragobject.h>
 #include <klocale.h>
 #include <kfiledialog.h>
@@ -1614,7 +1615,7 @@ void DiffTextWindowFrame::init()
    if ( pDTW )
    {
       QString s = pDTW->d->m_filename ;
-      d->m_pFileSelection->setText( s );
+      d->m_pFileSelection->setText( QDir::convertSeparators(s) );
       QString winId = pDTW->d->m_winIdx==1 ? 
                              ( pDTW->d->m_bTriple?"A (Base)":"A") :
                              ( pDTW->d->m_winIdx==2 ? "B" : "C" );

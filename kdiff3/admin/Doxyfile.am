@@ -73,11 +73,11 @@ uninstall-apidox:
 	@if test "$(subdir)" != "."; then \
 		if test -d $(DESTDIR)$(kde_htmldir)/en/$(PACKAGE)-apidocs/$(subdir); then \
 			rm -rfv $(DESTDIR)$(kde_htmldir)/en/$(PACKAGE)-apidocs/$(subdir); \
-		fi\
-	else\
+		fi \
+	else \
 		if test -d $(DESTDIR)$(kde_htmldir)/en/$(PACKAGE)-apidocs; then \
 			rm -rfv $(DESTDIR)$(kde_htmldir)/en/$(PACKAGE)-apidocs; \
-		fi\
+		fi \
 	fi
 
 install-apidox-recurse: install-apidox

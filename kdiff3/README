@@ -3,7 +3,7 @@ KDiff3-Readme
 
 Author: Joachim Eibl  (joachim.eibl at gmx.de)
 Copyright: (C) 2002-2006 by Joachim Eibl
-KDiff3-Version: 0.9.91
+KDiff3-Version: 0.9.92
 
 
 KDiff3 is a program that
@@ -12,13 +12,14 @@ KDiff3 is a program that
 - provides an automatic merge-facility and
 - an integrated editor for comfortable solving of merge-conflicts
 - has support for KDE-KIO (ftp, sftp, http, fish, smb)
-- and has an intuitive graphical user interface.
+- and has an intuitive graphical user interface,
+- also supports 64 bit systems. (Some build issues are discussed in here.)
 
 
 Do you want help translating? Read the README in the po-subdirectory!
 
 
-Licence:
+License:
     GNU GENERAL PUBLIC LICENSE, Version 2, June 1991
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -147,6 +148,9 @@ Installation for the Qt-only-platforms for Un*x:
            qmake kdiff3.pro -o Makefile.qt
    If you want to build the Qt-only version _and_ the KDE-version, do this
    in separate directories, otherwise there will be errors. 
+   - A user reported that on his 64-bit machine running FC4 he had to edit his Makefile.qt
+     LIBS = $(SUBLIBS) -L/usr/lib64/ -L$(QTDIR)/lib64/ -L/usr/lib -L$(QTDIR)/lib/ -L/usr/X11R6/lib/ -L/usr/X11R6/lib64/ -lqt-mt -lXext -lX11 -lm -lpthread 
+ 
 
 Build for Windows:
  Use qmake and kdiff3.pro to generate
@@ -154,21 +158,31 @@ Build for Windows:
      qmake kdiff3.pro -o Makefile
 
 
-Building Kdiff3 for Mac OSX 10.3.8 (by Mark Teel)
---------------------------------------------------
+Building KDiff3 (Qt3) for Mac OSX 10.3.8 (by Mark Teel)
+-------------------------------------------------------
    1) Install Qt/Mac with thread support and static libraries.
-   2) cd .../kdiff3-0.9.91
+   2) cd .../kdiff3-0.9.91/src
    3) Create a makefile for kdiff3 by executing:
-      qmake src/kdiff3.pro -o Makefile.qt
-   4) Edit Makefile.qt and add the definition "KDIFF3" to the following two lines:
-      CFLAGS   = -pipe -Wall -W -Os  -DKDIFF3 -DQT_NO_DEBUG ...
-      CXXFLAGS = -pipe -Wall -W -Os  -DKDIFF3 -DQT_NO_DEBUG ...
-   5) Edit Makefile.qt and change the include path like so:
+      qmake kdiff3.pro -o Makefile.qt
+   4) Edit Makefile.qt and change the include path like so:
       (old) INCPATH  = -I/Library/qt3/mkspecs/default -Isrc ...
       (new) INCPATH  = -I/Library/qt3/mkspecs/macx-g++ -Isrc ...
-   6) Execute:
+   5) Execute:
       make -f Makefile.qt
-   7) After the build completes copy kdiff3 from the kdiff3-0.9.91 directory to
+   6) After the build completes copy kdiff3 from the kdiff3-0.9.91/src directory to
+      /Applications
+
+Building KDiff3 (Qt4) for Mac OSX (with Intel processor) as a universal binary (by Michael Schmidt)
+---------------------------------------------------------------------------------------------------
+   1) Install Qt/Mac 4.x with thread support, static libraries and universal flag.
+   2) cd .../kdiff3-0.9.91/src-QT4
+   3a) Create a makefile for kdiff3 by executing:
+      qmake kdiff3.pro
+   3b) optionally generate XCode-Project (for debugging purposes only) by executing:
+      qmake -spec macx-xcode kdiff3.pro
+   4) Execute:
+      make
+   5) After the build completes copy kdiff3 from the kdiff3-0.9.91/src-QT4 directory to
       /Applications
 
 ----------------------------------------------------------------

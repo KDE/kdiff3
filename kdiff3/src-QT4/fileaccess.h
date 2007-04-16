@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2003-2006 by Joachim Eibl                               *
+ *   Copyright (C) 2003-2007 by Joachim Eibl                               *
  *   joachim.eibl at gmx.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -175,6 +175,7 @@ class ProgressDialog : public QDialog
 public:
    ProgressDialog( QWidget* pParent );
 
+   void setStayHidden( bool bStayHidden );
    void setInformation( const QString& info, bool bRedrawUpdate=true );
    void setInformation( const QString& info, double dCurrent, bool bRedrawUpdate=true );
    void setCurrent( double dCurrent, bool bRedrawUpdate=true  );
@@ -231,6 +232,7 @@ private:
    bool m_bWasCancelled;
    KIO::Job* m_pJob;
    QString m_currentJobInfo;  // Needed if the job doesn't stop after a reasonable time.
+   bool m_bStayHidden;
 protected:
    virtual void reject();
 private slots:

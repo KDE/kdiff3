@@ -61,6 +61,7 @@ class DIFF_EXT : public IContextMenu, IShellExtInit {
     UINT m_id_Diff3;
     UINT m_id_DiffWith_Base;
     UINT m_id_About;
+    UINT m_id_ClearList;
 };
 
 #endif // __diff_ext_h__

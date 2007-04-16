@@ -1,6 +1,6 @@
 TEMPLATE = app
 # When unresolved items remain during linking: Try adding "shared" in the CONFIG.
-CONFIG  += qt warn_on thread release 
+CONFIG  += qt warn_on thread debug 
 HEADERS  = version.h                     \
            diff.h                        \
            difftextwindow.h              \

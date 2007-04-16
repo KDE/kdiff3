@@ -2,7 +2,7 @@
                           kdiff3.h  -  description
                              -------------------
     begin                : Don Jul 11 12:31:29 CEST 2002
-    copyright            : (C) 2002-2004 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
@@ -326,7 +326,8 @@ class KDiff3App : public QSplitter
    KToolBar*          toolBar(const char*);
    KDiff3Part*        m_pKDiff3Part;
    KParts::MainWindow*       m_pKDiff3Shell;
-   bool m_bAuto;
+   bool m_bAutoFlag;
+   bool m_bAutoMode;
    void recalcWordWrap(int nofVisibleColumns=-1);
 
 public slots:

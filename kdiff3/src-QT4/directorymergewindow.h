@@ -2,7 +2,7 @@
                           directorymergewindow.h
                              -------------------
     begin                : Sat Oct 19 2002
-    copyright            : (C) 2002-2005 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 
@@ -78,7 +78,7 @@ public:
    DirMergeItem* m_pDMI;
    MergeFileInfos* m_pParent;
    e_MergeOperation m_eMergeOperation;
-   void setMergeOperation( e_MergeOperation eMOp );
+   void setMergeOperation( e_MergeOperation eMOp, bool bRecursive=true );
    bool m_bDirA;
    bool m_bDirB;
    bool m_bDirC;
@@ -123,7 +123,8 @@ public:
       FileAccess& dirB,
       FileAccess& dirC,
       FileAccess& dirDest,
-      bool bDirectoryMerge
+      bool bDirectoryMerge,
+      bool bReload = false
    );
    bool isFileSelected();
    void allowResizeEvents(bool bAllowResizeEvents);
@@ -214,13 +215,16 @@ protected:
    void compareFilesAndCalcAges( MergeFileInfos& mfi );
 
    QString fullNameA( const MergeFileInfos& mfi )
-   { return m_dirA.absFilePath() + "/" + mfi.m_subPath; }
+   { return mfi.m_bExistsInA ? mfi.m_fileInfoA.absFilePath() : m_dirA.absFilePath() + "/" + mfi.m_subPath; }
    QString fullNameB( const MergeFileInfos& mfi )
-   { return m_dirB.absFilePath() + "/" + mfi.m_subPath; }
+   { return mfi.m_bExistsInB ? mfi.m_fileInfoB.absFilePath() : m_dirB.absFilePath() + "/" + mfi.m_subPath; }
    QString fullNameC( const MergeFileInfos& mfi )
-   { return m_dirC.absFilePath() + "/" + mfi.m_subPath; }
+   { return mfi.m_bExistsInC ? mfi.m_fileInfoC.absFilePath() : m_dirC.absFilePath() + "/" + mfi.m_subPath; }
    QString fullNameDest( const MergeFileInfos& mfi )
-   { return m_dirDestInternal.absFilePath() + "/" + mfi.m_subPath; }
+   { if       ( m_dirDestInternal.prettyAbsPath() == m_dirC.prettyAbsPath() ) return fullNameC(mfi);
+     else if ( m_dirDestInternal.prettyAbsPath() == m_dirB.prettyAbsPath() ) return fullNameB(mfi);
+     else return m_dirDestInternal.absFilePath() + "/" + mfi.m_subPath; 
+   }
 
    bool copyFLD( const QString& srcName, const QString& destName );
    bool deleteFLD( const QString& name, bool bCreateBackup );

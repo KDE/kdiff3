@@ -1,3 +1,23 @@
+Version 0.9.92 - 2007/04/15
+===========================
+- Windows installer now allows to install KDiff3 as Clearcase Diff and Merge Tool
+- Windows installer "SVN Merge tool" corrected: Not creating $AppData\Subversion\config subdir anymore.
+- KDE-Konqueror plugin: Launch KDiff3 from Konqueror. (Similar to Diff-Ext on Windows.)
+- Qt4-version
+  - Printing crash fixed
+  - Compilation issue for Mac fixed
+- Dir Rescan keeps settings for Show identical files etc.
+- Bugfix: Empty file and not existing file were detected as binary equal.
+- Temp file names use the process id in file name to allow several instances.
+- Suppress flicker during startup. (Don't show status info window on creation.)
+- New File comparison mode: Trust the size and date, but use binary comparison if date doesn't match (unsafe)
+- After explicitely selecting files any file of the selected may be right clicked for context menu.
+- Open dialog also shows current directories in directory comparison mode.
+- Writing a file via --auto option didn't work for relative files. (Reported by Guilhem Bichot)
+- New option for history merge: Max number of history entries
+- New option "Auto save and quit on merge without conflicts"
+- Directory Merge with Case sensitivity disabled: Correct destination filename chosen for merge.
+
 Version 0.9.91 - 2006/10/29
 ===========================
 - Encoding auto detection

@@ -2,7 +2,7 @@
                           diff.h  -  description
                              -------------------
     begin                : Mon Mar 18 2002
-    copyright            : (C) 2002-2004 by Joachim Eibl
+    copyright            : (C) 2002-2007 by Joachim Eibl
     email                : joachim.eibl at gmx.de
  ***************************************************************************/
 

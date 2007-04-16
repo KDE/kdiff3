@@ -3,7 +3,7 @@
   <general>
     <author>Joachim Eibl</author>
     <email>joachim dot eibl at gmx dot de</email>
-    <version>0.9.91</version>
+    <version>0.9.92</version>
     <projectmanagement>KDevKDEAutoProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <keywords>
@@ -24,14 +24,14 @@
       <useconfiguration>debug</useconfiguration>
     </general>
     <run>
-      <mainprogram/>
-      <directoryradio>executable</directoryradio>
-      <customdirectory>/</customdirectory>
+      <mainprogram>/daten/home/joachim/kdiff3-0.9.92a/debug/src/kdiff3</mainprogram>
+      <directoryradio>custom</directoryradio>
+      <customdirectory>/daten/home/joachim/kdiff3_testdir/</customdirectory>
       <programargs/>
       <terminal>true</terminal>
       <autocompile>true</autocompile>
       <envvars>
-        <envvar value="/home/joachim/kdiff3-0.9.91/debug/src/.libs/libkdiff3part.so" name="LD_PRELOAD" />
+        <envvar value="/home/joachim/kdiff3-0.9.92a/debug/src/.libs/libkdiff3part.so" name="LD_PRELOAD" />
       </envvars>
     </run>
     <configurations>
@@ -70,6 +70,7 @@
       <dontact>false</dontact>
       <makebin/>
       <prio>0</prio>
+      <runmultiplejobs>false</runmultiplejobs>
     </make>
   </kdevautoproject>
   <kdevfileview>
@@ -155,9 +156,7 @@
       <automaticHeaderCompletion>true</automaticHeaderCompletion>
       <headerCompletionDelay>250</headerCompletionDelay>
     </codecompletion>
-    <references>
-      <pcs>Qt</pcs>
-    </references>
+    <references/>
     <creategettersetter>
       <prefixGet/>
       <prefixSet>set</prefixSet>
@@ -185,4 +184,8 @@
       <usermanualurl/>
     </projectdoc>
   </kdevdocumentation>
+  <ctagspart>
+    <customArguments/>
+    <customTagfilePath/>
+  </ctagspart>
 </kdevelop>
