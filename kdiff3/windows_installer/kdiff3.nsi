@@ -3,7 +3,7 @@
 ;Apdapted for KDiff3 by Sebastien Fricker and Joachim Eibl
 ;Requires nsis_v2.19
 
-!define KDIFF3_VERSION "0.9.91"
+!define KDIFF3_VERSION "0.9.92"
 !define DIFF_EXT_CLSID "{9F8528E4-AB20-456E-84E5-3CE69D8720F3}"
 
 ;--------------------------------
@@ -23,6 +23,8 @@
   
   ;Get installation folder from registry if available
   InstallDirRegKey HKCU "Software\KDiff3" ""
+  
+  !addplugindir ".\nsisplugins"
 
 ;--------------------------------
 ;Variables
@@ -66,7 +68,7 @@
   !define MUI_FINISHPAGE_RUN KDiff3.exe
   !define MUI_FINISHPAGE_RUN_NOTCHECKED
   !define MUI_FINISHPAGE_SHOWREADME README_WIN.txt
-  !define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
+  !define MUI_FINISHPAGE_SHOWREADME_CHECKED
 
   !insertmacro MUI_PAGE_FINISH
   
@@ -222,6 +224,9 @@ SectionIn RO
   ;ADD YOUR OWN FILES HERE...
     DetailPrint "Writing files"
     File "kdiff3.exe"
+    File "kdiff3-QT4.exe"
+    File "QtGui4.dll"
+    File "QtCore4.dll"
     File "COPYING.txt"
     File "Readme_Win.txt"
     File "ChangeLog.txt"
@@ -238,6 +243,7 @@ SectionIn RO
     ;Create shortcuts
     CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\KDiff3.lnk" "$INSTDIR\kdiff3.exe"
+    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\KDiff3-Qt4.lnk" "$INSTDIR\kdiff3-QT4.exe"
     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Readme.lnk" "$INSTDIR\Readme_Win.txt"
     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\GPL.lnk"    "$INSTDIR\Copying.txt"
     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
@@ -309,9 +315,19 @@ SectionEnd
 Section /o "SVN Merge tool" SecIntegrationSubversionDiff3Cmd
   DetailPrint "Integrate diff3_cmd.bat for Subversion"
   File "diff3_cmd.bat"
-  CreateDirectory '$APPDATA\Subversion\config'
-  CopyFiles '$INSTDIR\diff3_cmd.bat' '$APPDATA\Subversion\config'
+  CreateDirectory '$APPDATA\Subversion'
+  CopyFiles '$INSTDIR\diff3_cmd.bat' '$APPDATA\Subversion'
 SectionEnd
+
+
+Section /o "ClearCase" SecIntegrationClearCase
+  DetailPrint "Integrate with Rational ClearCase from IBM"
+  ccInstallHelper::nsisPlugin "install" "$INSTDIR\kdiff3.exe"
+
+  ;File "ccInstHelper.exe"
+  ;ExecWait '"$INSTDIR\ccInstHelper.exe" install "$INSTDIR\kdiff3.exe"'
+SectionEnd
+
 SubSectionEnd
 
 ;--------------------------------
@@ -347,6 +363,7 @@ FunctionEnd
     !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationWinCVS}  "Integrate KDiff3 with WinCVS. (Please close WinCVS before proceeding.)"
     !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationTortoiseSVN}  "Integrate KDiff3 with TortoiseSVN."
     !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationSubversionDiff3Cmd}  "Install diff3_cmd.bat for Subversion merge"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationClearCase}  "Integrate KDiff3 with Rational Clearcase from IBM"
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
  
@@ -363,10 +380,14 @@ Section "Uninstall"
 
   Delete "$INSTDIR\Uninstall.exe"
   Delete "$INSTDIR\kdiff3.exe"
+  Delete "$INSTDIR\kdiff3-QT4.exe"
+  Delete "$INSTDIR\QtGui4.dll"
+  Delete "$INSTDIR\QtCore4.dll"
   Delete "$INSTDIR\COPYING.txt"
   Delete "$INSTDIR\Readme_Win.txt"
   Delete "$INSTDIR\ChangeLog.txt"
   Delete "$INSTDIR\diff_ext_for_kdiff3.dll"
+  Delete "$INSTDIR\diff_ext_for_kdiff3_old.dll"
   Delete "$INSTDIR\DIFF-EXT-LICENSE.txt"
 
   RMDir /r "$INSTDIR\doc"
@@ -377,6 +398,7 @@ Section "Uninstall"
     
   Delete "$SMPROGRAMS\$MUI_TEMP\Uninstall.lnk"
   Delete "$SMPROGRAMS\$MUI_TEMP\KDiff3.lnk"
+  Delete "$SMPROGRAMS\$MUI_TEMP\KDiff3-Qt4.lnk"
   Delete "$SMPROGRAMS\$MUI_TEMP\Readme.lnk"
   Delete "$SMPROGRAMS\$MUI_TEMP\GPL.lnk"
   Delete "$SMPROGRAMS\$MUI_TEMP\Diff-Ext License.lnk"
@@ -408,6 +430,11 @@ Section "Uninstall"
   DeleteRegKey SHCTX "Software\Classes\Folder\shellex\ContextMenuHandlers\diff-ext-for-kdiff3"
   DeleteRegKey SHCTX "Software\Classes\Directory\shellex\ContextMenuHandlers\diff-ext-for-kdiff3"
   DeleteRegValue SHCTX "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "${DIFF_EXT_CLSID}"
+
+  ; clearcase
+  ccInstallHelper::nsisPlugin "uninstall" "$INSTDIR\kdiff3.exe"
+  ;ExecWait '"$INSTDIR\ccInstHelper.exe" uninstall "$INSTDIR\kdiff3.exe"'
+  ;Delete "$INSTDIR\ccInstHelper.exe"
 
 SectionEnd
 

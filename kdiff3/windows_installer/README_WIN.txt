@@ -2,8 +2,8 @@ KDiff3-Readme for Windows
 =========================
 
 Author: Joachim Eibl  (joachim.eibl@gmx.de)
-Copyright: (C) 2002-2006 by Joachim Eibl
-KDiff3-Version: 0.9.91
+Copyright: (C) 2002-2007 by Joachim Eibl
+KDiff3-Version: 0.9.92
 Homepage: http://kdiff3.sourceforge.net
 
 KDiff3 is a program that
@@ -18,11 +18,21 @@ Now KDiff3-strings are translated into some languages by the KDE-I18N-team.
 
 See the Changelog.txt for a list of fixed bugs and new features.
 
+Switching to Qt4
+================
+
+The current binary kdiff3.exe is Qt3 based. In the long run I will 
+switch to Qt4. For testing purposes a KDiff3-Qt4.exe binary is 
+included in the installation also. It has the big advantage that no
+console windows will open for external commands like the preprocessors.
+Please report bugs for the Qt4-based version too.
+
+
 Windows-specific information for the precompiled KDiff3 version:
 ================================================================
 
 This executable is provided for the convenience of users who don't have a
-VC6-compiler at hand.
+compiler at hand.
 
 You may redistribute it under the terms of the GNU GENERAL PUBLIC LICENCE.
 
@@ -33,7 +43,8 @@ Installation:
   It is based on the Nullsoft Scriptable Install System (http://nsis.sourceforge.net)
 
 - You can place the directory where you want it. But don't separate the file
-  kdiff3.exe from the others, since they are needed for correct execution.
+  kdiff3.exe from the others, since they are needed for correct execution.  
+  (Using kdiff3.exe standalone is possible except for translations and help.)
 
 - Integration with WinCVS: When selected the installer sets KDiff3 to be the
   default diff-tool for WinCVS if available.
@@ -57,8 +68,17 @@ Installation:
 
 - SVN Merge Tool: Allows to use KDiff3 for explicit graphical merges with Subversion.
   This installation option copies a file diff3_cmd.bat into your Application Data subdirectory.
-  (C:\Documents and Settings\Username\Application Data\Subversion\config\diff3_cmd.bat)
+  (C:\Documents and Settings\Username\Application Data\Subversion\diff3_cmd.bat)
   (Installation is disabled by default) 
+
+- Integration with Rational ClearCase from IBM: Allows to use KDiff3 as comparison 
+  and merge tool for text files under Clearcase. KDiff3 tries to locate the "map"-file 
+  (e.g.: C:\Program Files\Rational\Clearcase\lib\mgrs\map) which tells clearcase 
+  which tool to use for which filetype and operation. KDiff3 stores a backup in 
+  map.preKDiff3Install (if is doesn't exist yet) and modifies the map file so that 
+  KDiff3 is used for text files. On KDiff3-uninstallation the entries containing 
+  "KDiff3" are restored. The map-file is normal text, so you can also adjust it 
+  yourself. (Installation for ClearCase is disabled by default) 
 
 Since this program was actually developed for GNU/Linux, there might be Windows
 specific problems I don't know of yet. Please write me about problems you encounter.
