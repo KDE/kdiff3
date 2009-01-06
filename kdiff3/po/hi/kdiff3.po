@@ -1,0 +1,2989 @@
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdiff3\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2008-12-08 10:27+0100\n"
+"PO-Revision-Date: 2005-01-22 16:10+0530\n"
+"Last-Translator: Ravishankar Shrivastava <raviratlami@gmail.com>\n"
+"Language-Team: indlinux-hindi <indlinux-hindi@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Hindi\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: kdiff3.cpp:167
+#, fuzzy
+msgid "Current Configuration:"
+msgstr "मौजूदा वस्तु सिंक ऑपरेशन"
+
+#: kdiff3.cpp:172
+#, fuzzy
+msgid "Config Option Error:"
+msgstr "फ़ाइल खोलने में त्रुटि"
+
+#: kdiff3.cpp:217
+msgid "Option --auto used, but no output file specified."
+msgstr "विकल्प --auto का उपयोग किया गया, परंतु कोई आउटपुट फ़ाइल निर्दिष्ट नहीं."
+
+#: kdiff3.cpp:366
+msgid "Option --auto ignored for directory comparison."
+msgstr "विकल्प --auto को डिरेक्ट्री तुलना करने में छोड़ा गया."
+
+#: kdiff3.cpp:402
+msgid "Saving failed."
+msgstr "सहेजने में असफल."
+
+#: kdiff3.cpp:437 pdiff.cpp:1080 pdiff.cpp:1151
+msgid "Opening of these files failed:"
+msgstr "इन फ़ाइलों को खोलना असफल:"
+
+#: kdiff3.cpp:446
+msgid "File Open Error"
+msgstr "फ़ाइल खोलने में त्रुटि"
+
+#: kdiff3.cpp:474
+msgid "Opens documents for comparison..."
+msgstr "दस्तावेज़ों को तुलना के लिए खोलता है..."
+
+#: kdiff3.cpp:476
+#, fuzzy
+msgid "Reload"
+msgstr "तैयार."
+
+#: kdiff3.cpp:479
+msgid "Saves the merge result. All conflicts must be solved!"
+msgstr ""
+
+#: kdiff3.cpp:481
+msgid "Saves the current document as..."
+msgstr "मौजूदा दस्तावेज़ ऐसे सहेजता है..."
+
+#: kdiff3.cpp:483
+msgid "Print the differences"
+msgstr ""
+
+#: kdiff3.cpp:485
+msgid "Quits the application"
+msgstr "अनुप्रयोग से बाहर होता है"
+
+#: kdiff3.cpp:487
+msgid "Cuts the selected section and puts it to the clipboard"
+msgstr ""
+
+#: kdiff3.cpp:489
+msgid "Copies the selected section to the clipboard"
+msgstr "चुने हुए अंश को क्लिपबोर्ड पर नक़ल करता है"
+
+#: kdiff3.cpp:491
+msgid "Pastes the clipboard contents to actual position"
+msgstr "क्लिपबोर्ड अवयवों को सही स्थान पर चिपकाता है"
+
+#: kdiff3.cpp:493
+msgid "Select everything in current window"
+msgstr ""
+
+#: kdiff3.cpp:495
+msgid "Search for a string"
+msgstr "स्ट्रिंग के लिए ढूंढें"
+
+#: kdiff3.cpp:497
+msgid "Search again for the string"
+msgstr "स्ट्रिंग के लिए फिर से ढूंढें"
+
+#: kdiff3.cpp:502
+msgid "Enables/disables the statusbar"
+msgstr "स्थिति-पट्टी सक्षम/अक्षम करें"
+
+#: kdiff3.cpp:506
+msgid "Configure KDiff3..."
+msgstr "के-डिफ3 को कॉन्फ़िगर करें..."
+
+#: kdiff3.cpp:527
+msgid "Go to Current Delta"
+msgstr "मौज़ूदा डेल्टा में जाएँ"
+
+#: kdiff3.cpp:527
+#, fuzzy
+msgid ""
+"Current\n"
+"Delta"
+msgstr "मौज़ूदा डेल्टा में जाएँ"
+
+#: kdiff3.cpp:529
+msgid "Go to First Delta"
+msgstr "प्रथम डेल्टा में जाएँ"
+
+#: kdiff3.cpp:529
+#, fuzzy
+msgid ""
+"First\n"
+"Delta"
+msgstr "प्रथम डेल्टा में जाएँ"
+
+#: kdiff3.cpp:531
+msgid "Go to Last Delta"
+msgstr "अंतिम डेल्टा में जाएँ"
+
+#: kdiff3.cpp:531
+#, fuzzy
+msgid ""
+"Last\n"
+"Delta"
+msgstr "अंतिम डेल्टा में जाएँ"
+
+#: kdiff3.cpp:533
+msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
+msgstr ""
+
+#: kdiff3.cpp:534
+msgid ""
+"(Does not skip white space differences even when \"Show White Space\" is "
+"disabled.)"
+msgstr ""
+
+#: kdiff3.cpp:535
+msgid "Go to Previous Delta"
+msgstr "पिछला डेल्टा में जाएँ"
+
+#: kdiff3.cpp:535
+#, fuzzy
+msgid ""
+"Prev\n"
+"Delta"
+msgstr "पिछला डेल्टा में जाएँ"
+
+#: kdiff3.cpp:537
+msgid "Go to Next Delta"
+msgstr "अगला डेल्टा में जाएँ"
+
+#: kdiff3.cpp:537
+#, fuzzy
+msgid ""
+"Next\n"
+"Delta"
+msgstr "अगला डेल्टा में जाएँ"
+
+#: kdiff3.cpp:539
+msgid "Go to Previous Conflict"
+msgstr "पिछले परस्पर विरोधों में जाएँ"
+
+#: kdiff3.cpp:539
+#, fuzzy
+msgid ""
+"Prev\n"
+"Conflict"
+msgstr "परस्पर विरोध"
+
+#: kdiff3.cpp:541
+msgid "Go to Next Conflict"
+msgstr "अगले परस्पर विरोधों में जाएँ"
+
+#: kdiff3.cpp:541
+#, fuzzy
+msgid ""
+"Next\n"
+"Conflict"
+msgstr "अगले परस्पर विरोधों में जाएँ"
+
+#: kdiff3.cpp:543
+msgid "Go to Previous Unsolved Conflict"
+msgstr "पिछले समाधान-रहित परस्पर विरोधों में जाएँ"
+
+#: kdiff3.cpp:543
+#, fuzzy
+msgid ""
+"Prev\n"
+"Unsolved"
+msgstr "हल नहीं"
+
+#: kdiff3.cpp:545
+msgid "Go to Next Unsolved Conflict"
+msgstr "अगले समाधान-रहित परस्पर विरोधों में जाएँ"
+
+#: kdiff3.cpp:545
+#, fuzzy
+msgid ""
+"Next\n"
+"Unsolved"
+msgstr "हल नहीं"
+
+#: kdiff3.cpp:547
+msgid "Select Line(s) From A"
+msgstr "अ से लाइन चुनें"
+
+#: kdiff3.cpp:547
+msgid ""
+"Choose\n"
+"A"
+msgstr ""
+
+#: kdiff3.cpp:548
+msgid "Select Line(s) From B"
+msgstr "ब से लाइन चुनें"
+
+#: kdiff3.cpp:548
+msgid ""
+"Choose\n"
+"B"
+msgstr ""
+
+#: kdiff3.cpp:549
+msgid "Select Line(s) From C"
+msgstr "स से लाइन चुनें"
+
+#: kdiff3.cpp:549
+msgid ""
+"Choose\n"
+"C"
+msgstr ""
+
+#: kdiff3.cpp:550
+msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
+msgstr ""
+
+#: kdiff3.cpp:550
+#, fuzzy
+msgid ""
+"Auto\n"
+"Next"
+msgstr "स्वचालित नक़ल चयन"
+
+#: kdiff3.cpp:552
+msgid "Show Space && Tabulator Characters for Differences"
+msgstr "भिन्नताओं के लिए टेबुलेटर अक्षर तथा जगह दिखाएँ "
+
+#: kdiff3.cpp:552
+msgid ""
+"White\n"
+"Characters"
+msgstr ""
+
+#: kdiff3.cpp:553
+msgid "Show White Space"
+msgstr "सफेद जगह दिखाएँ"
+
+#: kdiff3.cpp:553
+msgid ""
+"White\n"
+"Deltas"
+msgstr ""
+
+#: kdiff3.cpp:555
+msgid "Show Line Numbers"
+msgstr "पंक्ति क्रमांक दिखाएँ"
+
+#: kdiff3.cpp:555
+#, fuzzy
+msgid ""
+"Line\n"
+"Numbers"
+msgstr "पंक्ति क्रमांक दिखाएँ"
+
+#: kdiff3.cpp:556
+msgid "Choose A Everywhere"
+msgstr "सभी जगह अ चुनें"
+
+#: kdiff3.cpp:557
+msgid "Choose B Everywhere"
+msgstr "सभी जगह ब चुनें"
+
+#: kdiff3.cpp:558
+msgid "Choose C Everywhere"
+msgstr "सभी जगह स चुनें"
+
+#: kdiff3.cpp:559
+msgid "Choose A for All Unsolved Conflicts"
+msgstr "सभी समाधान-रहित परस्पर विरोधों के लिए अ चुनें"
+
+#: kdiff3.cpp:560
+msgid "Choose B for All Unsolved Conflicts"
+msgstr "सभी समाधान-रहित परस्पर विरोधों के लिए ब चुनें"
+
+#: kdiff3.cpp:561
+msgid "Choose C for All Unsolved Conflicts"
+msgstr "सभी समाधान-रहित परस्पर विरोधों के लिए स चुनें"
+
+#: kdiff3.cpp:562
+msgid "Choose A for All Unsolved Whitespace Conflicts"
+msgstr "सभी समाधान-रहित सफेद-जगह परस्पर विरोधों के लिए अ चुनें"
+
+#: kdiff3.cpp:563
+msgid "Choose B for All Unsolved Whitespace Conflicts"
+msgstr "सभी समाधान-रहित सफेद-जगह परस्पर विरोधों के लिए ब चुनें"
+
+#: kdiff3.cpp:564
+msgid "Choose C for All Unsolved Whitespace Conflicts"
+msgstr "सभी समाधान-रहित सफेद-जगह परस्पर विरोधों के लिए स चुनें"
+
+#: kdiff3.cpp:565
+msgid "Automatically Solve Simple Conflicts"
+msgstr "सादा परस्पर विरोधों का स्वचालित समाधान करें"
+
+#: kdiff3.cpp:566
+msgid "Set Deltas to Conflicts"
+msgstr "डेल्टा को परस्पर विरोधों में सेट करें"
+
+#: kdiff3.cpp:567
+msgid "Run Regular Expression Auto Merge"
+msgstr ""
+
+#: kdiff3.cpp:568
+#, fuzzy
+msgid "Automatically Solve History Conflicts"
+msgstr "सादा परस्पर विरोधों का स्वचालित समाधान करें"
+
+#: kdiff3.cpp:569
+msgid "Split Diff At Selection"
+msgstr ""
+
+#: kdiff3.cpp:570
+#, fuzzy
+msgid "Join Selected Diffs"
+msgstr "चयनित फ़ाइल की तुलना करें"
+
+#: kdiff3.cpp:572
+msgid "Show Window A"
+msgstr "विंडो अ दिखाएँ"
+
+#: kdiff3.cpp:573
+msgid "Show Window B"
+msgstr "विंडो ब दिखाएँ"
+
+#: kdiff3.cpp:574
+msgid "Show Window C"
+msgstr "विंडो स दिखाएँ"
+
+#: kdiff3.cpp:575 kdiff3.cpp:586
+msgid "Focus Next Window"
+msgstr "अगले विंडो पर फोकस"
+
+#: kdiff3.cpp:577
+msgid "Normal Overview"
+msgstr "सामान्य ओवरव्यू"
+
+#: kdiff3.cpp:578
+msgid "A vs. B Overview"
+msgstr "अ वि. ब ओवरव्यू"
+
+#: kdiff3.cpp:579
+msgid "A vs. C Overview"
+msgstr "अ वि. स ओवरव्यू"
+
+#: kdiff3.cpp:580
+msgid "B vs. C Overview"
+msgstr "ब वि. स ओवरव्यू"
+
+#: kdiff3.cpp:581
+msgid "Word Wrap Diff Windows"
+msgstr "वर्ड व्रेप डिफ विंडोज़"
+
+#: kdiff3.cpp:582
+msgid "Add Manual Diff Alignment"
+msgstr ""
+
+#: kdiff3.cpp:583
+msgid "Clear All Manual Diff Alignments"
+msgstr ""
+
+#: kdiff3.cpp:588
+msgid "Focus Prev Window"
+msgstr "पिछले विंडो में फोकस"
+
+#: kdiff3.cpp:589
+msgid "Toggle Split Orientation"
+msgstr "अलग करने की दिशा टॉगल करें"
+
+#: kdiff3.cpp:591
+msgid "Dir && Text Split Screen View"
+msgstr "डिरेक्ट्री तथा पाठ स्प्लिट स्क्रीन दृश्य"
+
+#: kdiff3.cpp:593
+msgid "Toggle Between Dir && Text View"
+msgstr "डिरेक्ट्री तथा पाठ दृश्य के बीच टॉगल करें"
+
+#: kdiff3.cpp:615 kdiff3.cpp:707 kdiff3.cpp:732 kdiff3.cpp:1003
+#: kdiff3.cpp:1024 pdiff.cpp:1098 pdiff.cpp:1170 pdiff.cpp:1208 pdiff.cpp:1224
+#: pdiff.cpp:1254 pdiff.cpp:1265 directorymergewindow.cpp:739
+msgid "Ready."
+msgstr "तैयार."
+
+#: kdiff3.cpp:649 pdiff.cpp:1753
+msgid "The merge result hasn't been saved."
+msgstr "सम्मिलित करने का परिणाम अभी सहेजा नहीं गया."
+
+#: kdiff3.cpp:650 kdiff3.cpp:660 kdiff3.cpp:672 pdiff.cpp:1016 pdiff.cpp:1754
+#: pdiff.cpp:1764 directorymergewindow.cpp:407 mergeresultwindow.cpp:303
+msgid "Warning"
+msgstr ""
+
+#: kdiff3.cpp:651
+msgid "Save && Quit"
+msgstr "सहेजें तथा बाहर हों"
+
+#: kdiff3.cpp:652
+msgid "Quit Without Saving"
+msgstr "सहेजे बगैर बाहर हों"
+
+#: kdiff3.cpp:660 pdiff.cpp:1764
+msgid "Saving the merge result failed."
+msgstr "सम्मिलित किया जाने का परिणाम सहेजना असफल."
+
+#: kdiff3.cpp:671 pdiff.cpp:1015
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort?"
+msgstr ""
+
+#: kdiff3.cpp:696
+msgid "Saving file..."
+msgstr "फ़ाइल सहेजा जा रहा है..."
+
+#: kdiff3.cpp:713
+msgid "Saving file with a new filename..."
+msgstr "फ़ाइल नए फ़ाइलनाम के साथ सहेजा जा रहा है..."
+
+#: kdiff3.cpp:715 kreplacements/kreplacements.cpp:620
+msgid "Save As..."
+msgstr ""
+
+#: kdiff3.cpp:974
+msgid "Exiting..."
+msgstr "बाहर हो रहे हैं..."
+
+#: kdiff3.cpp:987
+msgid "Toggling toolbar..."
+msgstr "टूलबार टॉगल किया जा रहा है..."
+
+#: kdiff3.cpp:1008
+msgid "Toggle the statusbar..."
+msgstr "स्थिति पट्टी टॉगल करें..."
+
+#: fileaccess.cpp:612
+msgid ""
+"While trying to make a backup, deleting an older backup failed. \n"
+"Filename: "
+msgstr ""
+
+#: fileaccess.cpp:619
+msgid ""
+"While trying to make a backup, renaming failed. \n"
+"Filenames: "
+msgstr ""
+
+#: fileaccess.cpp:643
+#, kde-format
+msgid "Getting file status: %1"
+msgstr "फ़ाइल स्थिति प्राप्त की जा रही है: %1"
+
+#: fileaccess.cpp:686
+#, kde-format
+msgid "Reading file: %1"
+msgstr "फ़ाइल पढ़ा जा रहा है: %1"
+
+#: fileaccess.cpp:723
+#, kde-format
+msgid "Writing file: %1"
+msgstr "फ़ाइल: %1 लिखा जा रहा है"
+
+#: fileaccess.cpp:751
+msgid "Out of memory"
+msgstr "मेमोरी कम पड़ गई"
+
+#: fileaccess.cpp:786
+#, kde-format
+msgid "Making directory: %1"
+msgstr "डिरेक्ट्री बनाया जा रहा है: %1"
+
+#: fileaccess.cpp:806
+#, kde-format
+msgid "Removing directory: %1"
+msgstr "डिरेक्ट्री मिटाया जा रहा है: %1"
+
+#: fileaccess.cpp:821
+#, kde-format
+msgid "Removing file: %1"
+msgstr "फ़ाइल मिटाया जा रहा है: %1"
+
+#: fileaccess.cpp:837
+#, kde-format
+msgid "Creating symbolic link: %1 -> %2"
+msgstr "सिंबालिक कड़ी बनाई जा रही है: %1 -> %2"
+
+#: fileaccess.cpp:864
+#, kde-format
+msgid "Renaming file: %1 -> %2"
+msgstr "फ़ाइलनाम बदला जा रहा है: %1 -> %2"
+
+#: fileaccess.cpp:897
+#, kde-format
+msgid "Copying file: %1 -> %2"
+msgstr "फ़ाइल नक़ल की जा रही है: %1 -> %2"
+
+#: fileaccess.cpp:911
+#, kde-format
+msgid ""
+"Error during file copy operation: Opening file for reading failed. Filename: "
+"%1"
+msgstr ""
+"फ़ाइल की नक़ल करने की क्रिया के दौरान त्रुटि: फ़ाइल को पढ़ने के लिए खोलने में असफल. फ़ाइल-"
+"नाम: %1"
+
+#: fileaccess.cpp:917
+#, kde-format
+msgid ""
+"Error during file copy operation: Opening file for writing failed. Filename: "
+"%1"
+msgstr ""
+"फ़ाइल की नक़ल करने की क्रिया के दौरान त्रुटि: फ़ाइल को लिखने के लिए खोलने में असफल. फ़ाइल-"
+"नाम: %1"
+
+#: fileaccess.cpp:932
+#, kde-format
+msgid "Error during file copy operation: Reading failed. Filename: %1"
+msgstr "फ़ाइल की नक़ल करने की क्रिया के दौरान त्रुटि: पढ़ने में असफल. फ़ाइल-नाम: %1"
+
+#: fileaccess.cpp:941
+#, kde-format
+msgid "Error during file copy operation: Writing failed. Filename: %1"
+msgstr "फ़ाइल की नक़ल करने की क्रिया के दौरान त्रुटि: लिखने में असफल. फ़ाइल-नाम: %1"
+
+#: fileaccess.cpp:1237
+msgid "Reading directory: "
+msgstr "डिरेक्ट्री को पढ़ा जा रहा है:"
+
+#: fileaccess.cpp:1361
+#, kde-format
+msgid "Listing directory: %1"
+msgstr "डिरेक्ट्री सूचीबद्ध की जा रही है: %1"
+
+#: fileaccess.cpp:1495 smalldialogs.cpp:179 smalldialogs.cpp:396
+msgid "&Cancel"
+msgstr ""
+
+#: diff.cpp:250
+msgid "Writing clipboard data to temp file failed."
+msgstr "क्लिपबोर्ड डाटा को अस्थाई फ़ाइल में लिखना असफल."
+
+#: diff.cpp:254
+msgid "From Clipboard"
+msgstr "क्लिपबोर्ड से"
+
+#: diff.cpp:502
+#, kde-format
+msgid ""
+"Preprocessing possibly failed. Check this command:\n"
+"\n"
+"  %1\n"
+"\n"
+"The preprocessing command will be disabled now."
+msgstr ""
+
+#: diff.cpp:542
+#, kde-format
+msgid ""
+"The line-matching-preprocessing possibly failed. Check this command:\n"
+"\n"
+"  %1\n"
+"\n"
+"The line-matching-preprocessing command will be disabled now."
+msgstr ""
+
+#: diff.cpp:1658 diff.cpp:1672
+msgid ""
+"Data loss error:\n"
+"If it is reproducable please contact the author.\n"
+msgstr ""
+
+#: diff.cpp:1660 diff.cpp:1674
+msgid "Severe Internal Error"
+msgstr "गंभीर आंतरिक त्रुटि"
+
+#: smalldialogs.cpp:58
+msgid "A (Base):"
+msgstr "अ (बेस):"
+
+#: smalldialogs.cpp:65 smalldialogs.cpp:82 smalldialogs.cpp:99
+#: smalldialogs.cpp:142
+msgid "File..."
+msgstr "फ़ाइल..."
+
+#: smalldialogs.cpp:67 smalldialogs.cpp:84 smalldialogs.cpp:101
+#: smalldialogs.cpp:144
+msgid "Dir..."
+msgstr "डिर.:"
+
+#: smalldialogs.cpp:93
+msgid "C (Optional):"
+msgstr "स (वैकल्पिक):"
+
+#: smalldialogs.cpp:110 optiondialog.cpp:873 directorymergewindow.cpp:1893
+#: directorymergewindow.cpp:1894 directorymergewindow.cpp:3011
+msgid "Merge"
+msgstr "सम्मिलित करें"
+
+#: smalldialogs.cpp:116
+msgid "Swap/Copy Names ..."
+msgstr ""
+
+#: smalldialogs.cpp:121 smalldialogs.cpp:122 smalldialogs.cpp:123
+#, kde-format
+msgid "Swap %1<->%2"
+msgstr ""
+
+#: smalldialogs.cpp:124 smalldialogs.cpp:125 smalldialogs.cpp:126
+#, kde-format
+msgid "Copy %1->Output"
+msgstr ""
+
+#: smalldialogs.cpp:127 smalldialogs.cpp:128 smalldialogs.cpp:129
+#, kde-format
+msgid "Swap %1<->Output"
+msgstr ""
+
+#: smalldialogs.cpp:136
+msgid "Output (optional):"
+msgstr "आउटपुट (वैकल्पिक):"
+
+#: smalldialogs.cpp:168
+msgid "Configure..."
+msgstr "कॉन्फ़िगर...."
+
+#: smalldialogs.cpp:174
+msgid "&OK"
+msgstr ""
+
+#: smalldialogs.cpp:362
+msgid "Search text:"
+msgstr "पाठ ढूंढें:"
+
+#: smalldialogs.cpp:369
+msgid "Case sensitive"
+msgstr "केस सेंसिटिव"
+
+#: smalldialogs.cpp:372
+msgid "Search A"
+msgstr "ढूंढें अ"
+
+#: smalldialogs.cpp:377
+msgid "Search B"
+msgstr "ढूंढें ब"
+
+#: smalldialogs.cpp:382
+msgid "Search C"
+msgstr "ढूंढें स"
+
+#: smalldialogs.cpp:387
+msgid "Search output"
+msgstr "ढूंढने के पश्चात् आउटपुट"
+
+#: smalldialogs.cpp:392
+msgid "&Search"
+msgstr "ढूंढें (&S)"
+
+#: smalldialogs.cpp:409
+msgid "Regular Expression Tester"
+msgstr ""
+
+#: smalldialogs.cpp:414 optiondialog.cpp:940
+msgid "Auto merge regular expression:"
+msgstr ""
+
+#: smalldialogs.cpp:422
+msgid "Example auto merge line:"
+msgstr ""
+
+#: smalldialogs.cpp:424
+msgid "For auto merge test copy a line as used in your files."
+msgstr ""
+
+#: smalldialogs.cpp:430 smalldialogs.cpp:459 smalldialogs.cpp:496
+msgid "Match result:"
+msgstr ""
+
+#: smalldialogs.cpp:441 optiondialog.cpp:966
+msgid "History start regular expression:"
+msgstr ""
+
+#: smalldialogs.cpp:449
+msgid "Example history start line (with leading comment):"
+msgstr ""
+
+#: smalldialogs.cpp:452
+msgid ""
+"Copy a history start line as used in your files,\n"
+"including the leading comment."
+msgstr ""
+
+#: smalldialogs.cpp:470 optiondialog.cpp:976
+msgid "History entry start regular expression:"
+msgstr ""
+
+#: smalldialogs.cpp:478
+msgid "History sort key order:"
+msgstr ""
+
+#: smalldialogs.cpp:486
+msgid "Example history entry start line (without leading comment):"
+msgstr ""
+
+#: smalldialogs.cpp:488
+msgid ""
+"Copy a history entry start line as used in your files,\n"
+"but omit the leading comment."
+msgstr ""
+
+#: smalldialogs.cpp:503
+msgid "Sort key result:"
+msgstr ""
+
+#: smalldialogs.cpp:510
+msgid "OK"
+msgstr ""
+
+#: smalldialogs.cpp:514 kreplacements/kreplacements.h:103
+#: kreplacements/kreplacements.cpp:164 kreplacements/kreplacements.cpp:195
+msgid "Cancel"
+msgstr ""
+
+#: smalldialogs.cpp:554 smalldialogs.cpp:564 smalldialogs.cpp:585
+msgid "Match success."
+msgstr ""
+
+#: smalldialogs.cpp:558 smalldialogs.cpp:568 smalldialogs.cpp:591
+#, fuzzy
+msgid "Match failed."
+msgstr "सहेजने में असफल."
+
+#: smalldialogs.cpp:576
+msgid "Opening and closing parentheses don't match in regular expression."
+msgstr ""
+
+#: optiondialog.cpp:367
+msgid "Unicode, 8 bit"
+msgstr ""
+
+#: optiondialog.cpp:368
+msgid "Unicode"
+msgstr ""
+
+#: optiondialog.cpp:369
+msgid "Latin1"
+msgstr ""
+
+#: optiondialog.cpp:388
+msgid "Change this if non-ASCII characters are not displayed correctly."
+msgstr ""
+
+#: optiondialog.cpp:465
+#, fuzzy
+msgid "Configure"
+msgstr "कॉन्फ़िगर...."
+
+#: optiondialog.cpp:531
+msgid "Font"
+msgstr ""
+
+#: optiondialog.cpp:532
+msgid "Editor & Diff Output Font"
+msgstr "संपादक तथा डिफ़ आउटपुट फ़ॉन्ट"
+
+#: optiondialog.cpp:556
+msgid "Italic font for deltas"
+msgstr "डेल्टाज़ के लिए इटैलिक फ़ॉन्ट"
+
+#: optiondialog.cpp:559
+msgid ""
+"Selects the italic version of the font for differences.\n"
+"If the font doesn't support italic characters, then this does nothing."
+msgstr ""
+
+#: optiondialog.cpp:568
+msgid "Color"
+msgstr "रंग"
+
+#: optiondialog.cpp:569
+#, fuzzy
+msgid "Colors Settings"
+msgstr "क्षेत्रीय विन्यास"
+
+#: optiondialog.cpp:588
+msgid "Editor and Diff Views:"
+msgstr ""
+
+#: optiondialog.cpp:596
+msgid "Foreground color:"
+msgstr "अग्रभूमि का रंगः"
+
+#: optiondialog.cpp:603
+msgid "Background color:"
+msgstr "पृष्ठभूमि का रंगः"
+
+#: optiondialog.cpp:612
+msgid "Diff background color:"
+msgstr "डिफ पृष्ठभूमि रंगः"
+
+#: optiondialog.cpp:620
+msgid "Color A:"
+msgstr "रंग अ:"
+
+#: optiondialog.cpp:628
+msgid "Color B:"
+msgstr "रंग ब:"
+
+#: optiondialog.cpp:636
+msgid "Color C:"
+msgstr "रंग स:"
+
+#: optiondialog.cpp:643
+msgid "Conflict color:"
+msgstr "विरोधाभास के लिए रंग:"
+
+#: optiondialog.cpp:651
+msgid "Current range background color:"
+msgstr "वर्तमान सीमा पृष्ठभूमि रंग:"
+
+#: optiondialog.cpp:659
+msgid "Current range diff background color:"
+msgstr "वर्तमान सीमा डिफ पृष्ठभूमि रंग:"
+
+#: optiondialog.cpp:666
+msgid "Color for manually aligned difference ranges:"
+msgstr ""
+
+#: optiondialog.cpp:672
+#, fuzzy
+msgid "Directory Comparison View:"
+msgstr "डिरेक्ट्री तुलना स्थिति"
+
+#: optiondialog.cpp:678
+msgid "Newest file color:"
+msgstr ""
+
+#: optiondialog.cpp:682
+msgid ""
+"Changing this color will only be effective when starting the next directory "
+"comparison."
+msgstr ""
+
+#: optiondialog.cpp:687
+msgid "Oldest file color:"
+msgstr ""
+
+#: optiondialog.cpp:695
+msgid "Middle age file color:"
+msgstr ""
+
+#: optiondialog.cpp:703
+msgid "Color for missing files:"
+msgstr ""
+
+#: optiondialog.cpp:717
+msgid "Editor"
+msgstr "संपादक"
+
+#: optiondialog.cpp:718
+msgid "Editor Behavior"
+msgstr "संपादक व्यवहार"
+
+#: optiondialog.cpp:732
+msgid "Tab inserts spaces"
+msgstr "टैब जगह प्रविष्ट करता है"
+
+#: optiondialog.cpp:735
+msgid ""
+"On: Pressing tab generates the appropriate number of spaces.\n"
+"Off: A Tab-character will be inserted."
+msgstr ""
+
+#: optiondialog.cpp:741
+msgid "Tab size:"
+msgstr "टैब आकारः"
+
+#: optiondialog.cpp:747
+msgid "Auto indentation"
+msgstr "स्वचालित हाशिया छोड़ना"
+
+#: optiondialog.cpp:750
+msgid "On: The indentation of the previous line is used for a new line.\n"
+msgstr ""
+
+#: optiondialog.cpp:754
+msgid "Auto copy selection"
+msgstr "स्वचालित नक़ल चयन"
+
+#: optiondialog.cpp:757
+msgid ""
+"On: Any selection is immediately written to the clipboard.\n"
+"Off: You must explicitely copy e.g. via Ctrl-C."
+msgstr ""
+
+#: optiondialog.cpp:762
+msgid "Line end style:"
+msgstr "पंक्ति ख़त्म होने की शैलीः"
+
+#: optiondialog.cpp:776
+msgid ""
+"Sets the line endings for when an edited file is saved.\n"
+"DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
+msgstr ""
+
+#: optiondialog.cpp:788
+#, fuzzy
+msgid "Diff"
+msgstr "के-डिफ3"
+
+#: optiondialog.cpp:789
+#, fuzzy
+msgid "Diff Settings"
+msgstr "डिफ तथा सम्मिलित करने का विन्यास"
+
+#: optiondialog.cpp:813
+#, fuzzy
+msgid "Treat as white space."
+msgstr "C/C++ कमेंट्स को सफेद जगह के रूप में समझें"
+
+#: optiondialog.cpp:815
+msgid "Ignore numbers"
+msgstr "संख्याओं को अनदेखा करें"
+
+#: optiondialog.cpp:818
+msgid ""
+"Ignore number characters during line matching phase. (Similar to Ignore "
+"white space.)\n"
+"Might help to compare files with numeric data."
+msgstr ""
+
+#: optiondialog.cpp:823
+msgid "Ignore C/C++ comments"
+msgstr "C/C++ कमेंट्स को अनदेखा करें"
+
+#: optiondialog.cpp:825
+msgid "Treat C/C++ comments like white space."
+msgstr "C/C++ कमेंट्स को सफेद जगह के रूप में समझें"
+
+#: optiondialog.cpp:829
+msgid "Ignore case"
+msgstr "केस अनदेखा करें"
+
+#: optiondialog.cpp:832
+msgid "Treat case differences like white space changes. ('a'<=>'A')"
+msgstr "केस डिफरेंसेस को सफेद जगह परिवर्तन के रूप में समझें. ('a'<=>'A')"
+
+#: optiondialog.cpp:836
+msgid "Preprocessor command:"
+msgstr "प्री-प्रोसेसर कमांड:"
+
+#: optiondialog.cpp:840
+msgid "User defined pre-processing. (See the docs for details.)"
+msgstr "उपयोक्ता पारिभाषित प्री-प्रोसेसिंग. (विवरण के लिए दस्तावेज़ देखें.)"
+
+#: optiondialog.cpp:843
+msgid "Line-matching preprocessor command:"
+msgstr "लाइन-मैचिंग प्री-प्रोसेसर कमांड:"
+
+#: optiondialog.cpp:847
+msgid ""
+"This pre-processor is only used during line matching.\n"
+"(See the docs for details.)"
+msgstr ""
+
+#: optiondialog.cpp:850
+msgid "Try hard (slower)"
+msgstr "गंभीर कोशिश करें (धीमा)"
+
+#: optiondialog.cpp:853
+msgid ""
+"Enables the --minimal option for the external diff.\n"
+"The analysis of big files will be much slower."
+msgstr ""
+
+#: optiondialog.cpp:858
+msgid "Align B and C for 3 input files"
+msgstr ""
+
+#: optiondialog.cpp:861
+msgid ""
+"Try to align B and C when comparing or merging three input files.\n"
+"Not recommended for merging because merge might get more complicated.\n"
+"(Default is off.)"
+msgstr ""
+
+#: optiondialog.cpp:874
+#, fuzzy
+msgid "Merge Settings"
+msgstr "डिफ तथा सम्मिलित करने का विन्यास"
+
+#: optiondialog.cpp:889
+msgid "Auto advance delay (ms):"
+msgstr "स्वचालित एडवान्स देरी (मि.से.):"
+
+#: optiondialog.cpp:894
+msgid ""
+"When in Auto-Advance mode the result of the current selection is shown \n"
+"for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
+msgstr ""
+
+#: optiondialog.cpp:899
+#, fuzzy
+#| msgid "Show Window A"
+msgid "Show info dialogs"
+msgstr "विंडो अ दिखाएँ"
+
+#: optiondialog.cpp:901
+msgid "Show a dialog with information about the number of conflicts."
+msgstr ""
+
+#: optiondialog.cpp:904
+msgid "White space 2-file merge default:"
+msgstr "सफेद जगह 2-फ़ाइल सम्मिलित डिफ़ॉल्ट:"
+
+#: optiondialog.cpp:908 optiondialog.cpp:921
+msgid "Manual Choice"
+msgstr "हस्तचालित चुनाव"
+
+#: optiondialog.cpp:912 optiondialog.cpp:926
+msgid ""
+"Allow the merge algorithm to automatically select an input for white-space-"
+"only changes."
+msgstr ""
+
+#: optiondialog.cpp:917
+msgid "White space 3-file merge default:"
+msgstr "सफेद जगह 3-फ़ाइल सम्मिलित डिफ़ॉल्ट:"
+
+#: optiondialog.cpp:931
+msgid "Automatic Merge Regular Expression"
+msgstr ""
+
+#: optiondialog.cpp:944
+msgid ""
+"Regular expression for lines where KDiff3 should automatically choose one "
+"source.\n"
+"When a line with a conflict matches the regular expression then\n"
+"- if available - C, otherwise B will be chosen."
+msgstr ""
+
+#: optiondialog.cpp:950
+msgid "Run regular expression auto merge on merge start"
+msgstr ""
+
+#: optiondialog.cpp:952
+msgid ""
+"Run the merge for auto merge regular expressions\n"
+"immediately when a merge starts.\n"
+msgstr ""
+
+#: optiondialog.cpp:957
+msgid "Version Control History Merging"
+msgstr ""
+
+#: optiondialog.cpp:970
+msgid ""
+"Regular expression for the start of the version control history entry.\n"
+"Usually this line contains the \"$Log$\"-keyword.\n"
+"Default value: \".*\\$Log.*\\$.*\""
+msgstr ""
+
+#: optiondialog.cpp:988
+msgid ""
+"A version control history entry consists of several lines.\n"
+"Specify the regular expression to detect the first line (without the leading "
+"comment).\n"
+"Use parentheses to group the keys you want to use for sorting.\n"
+"If left empty, then KDiff3 assumes that empty lines separate history "
+"entries.\n"
+"See the documentation for details."
+msgstr ""
+
+#: optiondialog.cpp:996
+msgid "History merge sorting"
+msgstr ""
+
+#: optiondialog.cpp:998
+msgid "Sort version control history by a key."
+msgstr ""
+
+#: optiondialog.cpp:1008
+msgid "History entry start sort key order:"
+msgstr ""
+
+#: optiondialog.cpp:1012
+msgid ""
+"Each parentheses used in the regular expression for the history start entry\n"
+"groups a key that can be used for sorting.\n"
+"Specify the list of keys (that are numbered in order of occurrence\n"
+"starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
+"If left empty, then no sorting will be done.\n"
+"See the documentation for details."
+msgstr ""
+
+#: optiondialog.cpp:1023
+msgid "Merge version control history on merge start"
+msgstr ""
+
+#: optiondialog.cpp:1025
+msgid "Run version control history automerge on merge start."
+msgstr ""
+
+#: optiondialog.cpp:1029
+#, fuzzy
+msgid "Max number of history entries:"
+msgstr "सबडिरेक्ट्रीज़ की संख्या:"
+
+#: optiondialog.cpp:1032
+msgid "Cut off after specified number. Use -1 for infinite number of entries."
+msgstr ""
+
+#: optiondialog.cpp:1036
+msgid "Test your regular expressions"
+msgstr ""
+
+#: optiondialog.cpp:1041
+msgid "Irrelevant merge command:"
+msgstr ""
+
+#: optiondialog.cpp:1045
+msgid ""
+"If specified this script is run after automerge\n"
+"when no other relevant changes were detected.\n"
+"Called with the parameters: filename1 filename2 filename3"
+msgstr ""
+
+#: optiondialog.cpp:1051
+msgid "Auto save and quit on merge without conflicts"
+msgstr ""
+
+#: optiondialog.cpp:1054
+msgid ""
+"When KDiff3 was started for a file-merge from the commandline and all\n"
+"conflicts are solvable without user interaction then automatically save and "
+"quit.\n"
+"(Similar to command line option \"--auto\"."
+msgstr ""
+
+#: optiondialog.cpp:1065 optiondialog.cpp:1066
+msgid "Directory Merge"
+msgstr "डिरेक्ट्री सम्मिलित करें"
+
+#: optiondialog.cpp:1079
+msgid "Recursive directories"
+msgstr "डिरेक्ट्रीज़ रिकर्सिव करें"
+
+#: optiondialog.cpp:1081
+msgid "Whether to analyze subdirectories or not."
+msgstr "क्या सबडिरेक्ट्रीज़ को विश्लेषण करना है या नहीं. "
+
+#: optiondialog.cpp:1083
+msgid "File pattern(s):"
+msgstr "फ़ाइल पैटर्न:"
+
+#: optiondialog.cpp:1088
+msgid ""
+"Pattern(s) of files to be analyzed. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+
+#: optiondialog.cpp:1094
+msgid "File-anti-pattern(s):"
+msgstr "फ़ाइल-एन्टी-पैटर्न:"
+
+#: optiondialog.cpp:1099
+msgid ""
+"Pattern(s) of files to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+
+#: optiondialog.cpp:1105
+msgid "Dir-anti-pattern(s):"
+msgstr "डिर-एन्टी-पैटर्न:"
+
+#: optiondialog.cpp:1110
+msgid ""
+"Pattern(s) of directories to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+
+#: optiondialog.cpp:1116
+msgid "Use .cvsignore"
+msgstr ".cvsignore का उपयोग करें"
+
+#: optiondialog.cpp:1119
+msgid ""
+"Extends the antipattern to anything that would be ignored by CVS.\n"
+"Via local \".cvsignore\"-files this can be directory specific."
+msgstr ""
+
+#: optiondialog.cpp:1124
+msgid "Find hidden files and directories"
+msgstr "छुपी फ़ाइलों तथा डिरेक्ट्रीज़ ढूंढें"
+
+#: optiondialog.cpp:1127
+msgid "Finds files and directories with the hidden attribute."
+msgstr "हिडन एट्रिब्यूट वाली फ़ाइल तथा डिरेक्ट्रीज़ को ढूंढें."
+
+#: optiondialog.cpp:1129
+msgid "Finds files and directories starting with '.'."
+msgstr "'.'. से प्रारंभ हो रहे फ़ाइल तथा डिरेक्ट्रीज़ को ढूंढें"
+
+#: optiondialog.cpp:1133
+msgid "Follow file links"
+msgstr "फ़ाइल कड़ियों का अनुसरण करें"
+
+#: optiondialog.cpp:1136
+msgid ""
+"On: Compare the file the link points to.\n"
+"Off: Compare the links."
+msgstr ""
+
+#: optiondialog.cpp:1141
+msgid "Follow directory links"
+msgstr "डिरेक्ट्री कड़ियों का अनुसरण करें"
+
+#: optiondialog.cpp:1144
+msgid ""
+"On: Compare the directory the link points to.\n"
+"Off: Compare the links."
+msgstr ""
+
+#: optiondialog.cpp:1160
+msgid "Case sensitive filename comparison"
+msgstr ""
+
+#: optiondialog.cpp:1163
+msgid ""
+"The directory comparison will compare files or directories when their names "
+"match.\n"
+"Set this option if the case of the names must match. (Default for Windows is "
+"off, otherwise on.)"
+msgstr ""
+
+#: optiondialog.cpp:1167
+msgid "File Comparison Mode"
+msgstr "फ़ाइल तुलना मोड"
+
+#: optiondialog.cpp:1173
+msgid "Binary comparison"
+msgstr "बाइनरी तुलना"
+
+#: optiondialog.cpp:1174
+msgid "Binary comparison of each file. (Default)"
+msgstr "प्रत्येक फ़ाइल की बाइनरी तुलना. (डिफ़ॉल्ट)"
+
+#: optiondialog.cpp:1177
+msgid "Full analysis"
+msgstr "पूर्ण विश्लेषण"
+
+#: optiondialog.cpp:1178
+msgid ""
+"Do a full analysis and show statistics information in extra columns.\n"
+"(Slower than a binary comparison, much slower for binary files.)"
+msgstr ""
+
+#: optiondialog.cpp:1182
+#, fuzzy
+msgid "Trust the size and modification date (unsafe)"
+msgstr "परिवर्धन तारीख पर भरोसा करें (असुरक्षित)"
+
+#: optiondialog.cpp:1183
+msgid ""
+"Assume that files are equal if the modification date and file length are "
+"equal.\n"
+"Files with equal contents but different modification dates will appear as "
+"different.\n"
+"Useful for big directories or slow networks."
+msgstr ""
+
+#: optiondialog.cpp:1188
+msgid ""
+"Trust the size and date, but use binary comparison if date doesn't match "
+"(unsafe)"
+msgstr ""
+
+#: optiondialog.cpp:1189
+msgid ""
+"Assume that files are equal if the modification date and file length are "
+"equal.\n"
+"If the date isn't equal but the sizes are, use binary comparison.\n"
+"Useful for big directories or slow networks."
+msgstr ""
+
+#: optiondialog.cpp:1194
+msgid "Trust the size (unsafe)"
+msgstr "आकार पर भरोसा करें (असुरक्षित)"
+
+#: optiondialog.cpp:1195
+msgid ""
+"Assume that files are equal if their file lengths are equal.\n"
+"Useful for big directories or slow networks when the date is modified during "
+"download."
+msgstr ""
+
+#: optiondialog.cpp:1203
+msgid "Synchronize directories"
+msgstr "डिरेक्ट्रीज़ सिंक्रोनाइज़ करें"
+
+#: optiondialog.cpp:1206
+msgid ""
+"Offers to store files in both directories so that\n"
+"both directories are the same afterwards.\n"
+"Works only when comparing two directories without specifying a destination."
+msgstr ""
+
+#: optiondialog.cpp:1212
+#, fuzzy
+msgid "White space differences considered equal"
+msgstr "सफेद जगह 3-फ़ाइल सम्मिलित डिफ़ॉल्ट:"
+
+#: optiondialog.cpp:1215
+msgid ""
+"If files differ only by white space consider them equal.\n"
+"This is only active when full analysis is chosen."
+msgstr ""
+
+#: optiondialog.cpp:1221
+msgid "Copy newer instead of merging (unsafe)"
+msgstr "सम्मिलित करने के बजाए नए की नक़ल करें (असुरक्षित)"
+
+#: optiondialog.cpp:1224
+msgid ""
+"Don't look inside, just take the newer file.\n"
+"(Use this only if you know what you are doing!)\n"
+"Only effective when comparing two directories."
+msgstr ""
+
+#: optiondialog.cpp:1229
+msgid "Backup files (.orig)"
+msgstr "बैकअप फ़ाइलें (.orig)"
+
+#: optiondialog.cpp:1232
+msgid ""
+"When a file would be saved over an old file, then the old file\n"
+"will be renamed with a '.orig'-extension instead of being deleted."
+msgstr ""
+
+#: optiondialog.cpp:1328 optiondialog.cpp:1329
+msgid "Regional Settings"
+msgstr "क्षेत्रीय विन्यास"
+
+#: optiondialog.cpp:1429
+msgid "Language (restart required)"
+msgstr "भाषा (फिर से प्रारंभ करना आवश्यक है)"
+
+#: optiondialog.cpp:1461
+msgid ""
+"Choose the language of the GUI-strings or \"Auto\".\n"
+"For a change of language to take place, quit and restart KDiff3."
+msgstr ""
+
+#: optiondialog.cpp:1479
+msgid "Use the same encoding for everything:"
+msgstr ""
+
+#: optiondialog.cpp:1482
+msgid ""
+"Enable this allows to change all encodings by changing the first only.\n"
+"Disable this if different individual settings are needed."
+msgstr ""
+
+#: optiondialog.cpp:1487
+#, fuzzy
+msgid "Note: Local Encoding is "
+msgstr "स्थानीय एनकोडिंग इस्तेमाल करें"
+
+#: optiondialog.cpp:1491
+msgid "File Encoding for A:"
+msgstr ""
+
+#: optiondialog.cpp:1497
+msgid ""
+"If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
+"If the file is not Unicode then the selected encoding will be used as "
+"fallback.\n"
+"(Unicode detection depends on the first bytes of a file.)"
+msgstr ""
+
+#: optiondialog.cpp:1501 optiondialog.cpp:1510 optiondialog.cpp:1519
+msgid "Auto Detect Unicode"
+msgstr ""
+
+#: optiondialog.cpp:1506
+msgid "File Encoding for B:"
+msgstr ""
+
+#: optiondialog.cpp:1515
+msgid "File Encoding for C:"
+msgstr ""
+
+#: optiondialog.cpp:1524
+msgid "File Encoding for Merge Output and Saving:"
+msgstr ""
+
+#: optiondialog.cpp:1528
+#, fuzzy
+msgid "Auto Select"
+msgstr "स्वचालित नक़ल चयन"
+
+#: optiondialog.cpp:1531
+msgid ""
+"If enabled then the encoding from the input files is used.\n"
+"In ambiguous cases a dialog will ask the user to choose the encoding for "
+"saving."
+msgstr ""
+
+#: optiondialog.cpp:1535
+msgid "File Encoding for Preprocessor Files:"
+msgstr ""
+
+#: optiondialog.cpp:1546
+msgid "Right To Left Language"
+msgstr ""
+
+#: optiondialog.cpp:1549
+msgid ""
+"Some languages are read from right to left.\n"
+"This setting will change the viewer and editor accordingly."
+msgstr ""
+
+#: optiondialog.cpp:1564
+#, fuzzy
+msgid "Integration"
+msgstr "ऑपरेशन"
+
+#: optiondialog.cpp:1565
+#, fuzzy
+msgid "Integration Settings"
+msgstr "क्षेत्रीय विन्यास"
+
+#: optiondialog.cpp:1579
+msgid "Command line options to ignore:"
+msgstr ""
+
+#: optiondialog.cpp:1584
+msgid ""
+"List of command line options that should be ignored when KDiff3 is used by "
+"other tools.\n"
+"Several values can be specified if separated via ';'\n"
+"This will suppress the \"Unknown option\"-error."
+msgstr ""
+
+#: optiondialog.cpp:1591
+msgid "Quit also via Escape key"
+msgstr ""
+
+#: optiondialog.cpp:1594
+msgid ""
+"Fast method to exit.\n"
+"For those who are used to using the Escape-key."
+msgstr ""
+
+#: optiondialog.cpp:1599
+msgid "Integrate with ClearCase"
+msgstr ""
+
+#: optiondialog.cpp:1602
+msgid ""
+"Integrate with Rational ClearCase from IBM.\n"
+"Modifies the \"map\" file in ClearCase-subdir \"lib/mgrs\"\n"
+"(Only enabled when ClearCase \"bin\" directory is in the path.)"
+msgstr ""
+
+#: optiondialog.cpp:1608
+msgid "Remove ClearCase Integration"
+msgstr ""
+
+#: optiondialog.cpp:1611
+msgid ""
+"Restore the old \"map\" file from before doing the Clearcase integration."
+msgstr ""
+
+#: optiondialog.cpp:1692 kreplacements/kreplacements.cpp:794
+msgid ""
+"You selected a variable width font.\n"
+"\n"
+"Because this program doesn't handle variable width fonts\n"
+"correctly, you might experience problems while editing.\n"
+"\n"
+"Do you want to continue or do you want to select another font."
+msgstr ""
+
+#: optiondialog.cpp:1696
+msgid "Incompatible Font"
+msgstr "फ़ॉन्ट असंगत है"
+
+#: optiondialog.cpp:1697
+msgid "Continue at Own Risk"
+msgstr "अपने स्वयं के जोखिम पर जारी रखें"
+
+#: optiondialog.cpp:1698
+msgid "Select Another Font"
+msgstr "अन्य फ़ॉन्ट चुनें"
+
+#: optiondialog.cpp:1733
+msgid "This resets all options. Not only those of the current topic."
+msgstr "यह सभी विकल्पों को रीसेट करता है. सिर्फ उनको ही नहीं जो मौजूदा विषय में हैं. "
+
+#: main.cpp:187
+#, fuzzy
+msgid "kdiff3"
+msgstr "के-डिफ3"
+
+#: main.cpp:189
+msgid "Tool for Comparison and Merge of Files and Directories"
+msgstr ""
+
+#: main.cpp:190
+msgid "(c) 2002-2008 Joachim Eibl"
+msgstr ""
+
+#: main.cpp:197 kdiff3_part.cpp:303
+msgid "Joachim Eibl"
+msgstr ""
+
+#: main.cpp:198
+msgid "Eike Sauer"
+msgstr ""
+
+#: main.cpp:198
+msgid "Bugfixes, Debian package maintainer"
+msgstr ""
+
+#: main.cpp:199
+msgid "Sebastien Fricker"
+msgstr ""
+
+#: main.cpp:199
+msgid "Windows installer"
+msgstr ""
+
+#: main.cpp:200
+msgid "Stephan Binner"
+msgstr ""
+
+#: main.cpp:200
+msgid "i18n-help"
+msgstr ""
+
+#: main.cpp:201
+msgid "Stefan Partheymueller"
+msgstr ""
+
+#: main.cpp:201
+#, fuzzy
+msgid "Clipboard-patch"
+msgstr "क्लिपबोर्ड से"
+
+#: main.cpp:202
+msgid "David Faure"
+msgstr ""
+
+#: main.cpp:202
+msgid "KIO-Help"
+msgstr ""
+
+#: main.cpp:203
+msgid "Bernd Gehrmann"
+msgstr ""
+
+#: main.cpp:203
+msgid "Class CvsIgnoreList from Cervisia"
+msgstr ""
+
+#: main.cpp:204
+msgid "Andre Woebbeking"
+msgstr ""
+
+#: main.cpp:204
+msgid "Class StringMatcher"
+msgstr ""
+
+#: main.cpp:205
+msgid "Michael Denio"
+msgstr ""
+
+#: main.cpp:205
+#, fuzzy
+msgid "Directory Equality-Coloring patch"
+msgstr "डिरेक्ट्री तुलना स्थिति"
+
+#: main.cpp:206
+msgid "Manfred Koehler"
+msgstr ""
+
+#: main.cpp:206
+msgid "Fix for slow startup on Windows"
+msgstr ""
+
+#: main.cpp:207
+#, fuzzy
+msgid "Sergey Zorin"
+msgstr "सम्मिलित करने में त्रुटि"
+
+#: main.cpp:207
+msgid "Diff Ext for Windows"
+msgstr ""
+
+#: main.cpp:208
+msgid "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
+msgstr ""
+
+#: main.cpp:208
+msgid "GNU-Diffutils"
+msgstr ""
+
+#: main.cpp:209
+msgid "Tino Boellsterling, Timothy Mee"
+msgstr ""
+
+#: main.cpp:209
+msgid "Intensive test, use and feedback"
+msgstr ""
+
+#: main.cpp:210
+msgid "Michael Schmidt"
+msgstr ""
+
+#: main.cpp:210
+msgid "Mac support"
+msgstr ""
+
+#: main.cpp:211
+msgid "Valentin Rusu"
+msgstr ""
+
+#: main.cpp:211 main.cpp:212
+#, fuzzy
+msgid "KDE4 porting"
+msgstr "कुछ नहीं करें"
+
+#: main.cpp:212
+msgid "Albert Astals Cid"
+msgstr ""
+
+#: main.cpp:214
+msgid "+ Many thanks to those who reported bugs and contributed ideas!"
+msgstr ""
+
+#: main.cpp:220
+msgid "Merge the input."
+msgstr "इनपुट सम्मिलित करें."
+
+#: main.cpp:221
+msgid "Explicit base file. For compatibility with certain tools."
+msgstr ""
+
+#: main.cpp:222
+msgid "Output file. Implies -m. E.g.: -o newfile.txt"
+msgstr "आउटपुट फ़ाइल. इम्प्लाइस -m. उदा.: -o newfile.txt"
+
+#: main.cpp:223
+msgid "Output file, again. (For compatibility with certain tools.)"
+msgstr "आउटपुट फ़ाइल, फिर से. (कुछ औज़ारों के साथ कम्पेटिबिलिटी के लिए.)"
+
+#: main.cpp:224
+msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
+msgstr ""
+
+#: main.cpp:225
+msgid "Don't solve conflicts automatically. (For compatibility...)"
+msgstr ""
+
+#: main.cpp:226
+msgid "Visible name replacement for input file 1 (base)."
+msgstr "इनपुट फ़ाइल 1 (आधार) के लिए विजिबल नाम रीप्लेसमेंट."
+
+#: main.cpp:227
+msgid "Visible name replacement for input file 2."
+msgstr "इनपुट फ़ाइल 2 के लिए विजिबल नाम रीप्लेसमेंट."
+
+#: main.cpp:228
+msgid "Visible name replacement for input file 3."
+msgstr "इनपुट फ़ाइल 3 के लिए विजिबल नाम रीप्लेसमेंट."
+
+#: main.cpp:229
+msgid "Alternative visible name replacement. Supply this once for every input."
+msgstr ""
+
+#: main.cpp:230
+msgid ""
+"Override a config setting. Use once for every setting. E.g.: --cs "
+"\"AutoAdvance=1\""
+msgstr ""
+
+#: main.cpp:231
+msgid "Show list of config settings and current values."
+msgstr ""
+
+#: main.cpp:232
+#, fuzzy
+msgid "Use a different config file."
+msgstr "भिन्न फ़ाइलों की संख्या:"
+
+#: main.cpp:235
+msgid "file1 to open (base, if not specified via --base)"
+msgstr "खोलने के लिए फ़ाइल1 (आधार, यदि इसके द्वारा निर्दिष्ट नहीं --base)"
+
+#: main.cpp:236
+msgid "file2 to open"
+msgstr "खोलने के लिए फ़ाइल2"
+
+#: main.cpp:237
+msgid "file3 to open"
+msgstr "खोलने के लिए फ़ाइल3"
+
+#: difftextwindow.cpp:388 directorymergewindow.cpp:2764
+#, fuzzy
+msgid "File"
+msgstr "फ़ाइल..."
+
+#: difftextwindow.cpp:390
+#, fuzzy
+msgid "Line"
+msgstr "कड़ी"
+
+#: difftextwindow.cpp:392
+#, fuzzy
+msgid "Line not available"
+msgstr "उपलब्ध नहीं"
+
+#: difftextwindow.cpp:1721
+#, fuzzy
+msgid "Top line"
+msgstr "शीर्ष पंक्ति %1"
+
+#: difftextwindow.cpp:1731
+msgid "End"
+msgstr "अंत"
+
+#: pdiff.cpp:260
+msgid "PreprocessorCmd: "
+msgstr "प्री-प्रोसेसर-कमांड:"
+
+#: pdiff.cpp:265
+msgid "The following option(s) you selected might change data:\n"
+msgstr "निम्न विकल्प जो आपने चुने हैं वे डाटा को बदल सकते हैं:\n"
+
+#: pdiff.cpp:266
+msgid ""
+"\n"
+"Most likely this is not wanted during a merge.\n"
+"Do you want to disable these settings or continue with these settings active?"
+msgstr ""
+
+#: pdiff.cpp:268
+msgid "Option Unsafe for Merging"
+msgstr "सम्मिलित करने के लिए विकल्प असुरक्षित हैं"
+
+#: pdiff.cpp:269
+msgid "Use These Options During Merge"
+msgstr "इन विकल्पों का उपयोग सम्मिलित करने के दौरान करें"
+
+#: pdiff.cpp:270
+msgid "Disable Unsafe Options"
+msgstr "असुरक्षित विकल्प अक्षम करें"
+
+#: pdiff.cpp:300
+msgid "Loading A"
+msgstr "अ लोड किया जा रहा है"
+
+#: pdiff.cpp:304
+msgid "Loading B"
+msgstr "ब लोड किया जा रहा है"
+
+#: pdiff.cpp:321 pdiff.cpp:347
+msgid "Diff: A <-> B"
+msgstr "डिफ: अ <-> ब"
+
+#: pdiff.cpp:327 pdiff.cpp:372
+msgid "Linediff: A <-> B"
+msgstr "लाइनडिफ: अ <-> ब"
+
+#: pdiff.cpp:338
+msgid "Loading C"
+msgstr "स लोड किया जा रहा है"
+
+#: pdiff.cpp:350
+msgid "Diff: B <-> C"
+msgstr "डिफ: ब <-> स"
+
+#: pdiff.cpp:353
+msgid "Diff: A <-> C"
+msgstr "डिफ: अ <-> स"
+
+#: pdiff.cpp:375
+msgid "Linediff: B <-> C"
+msgstr "लाइनडिफ: ब <-> स"
+
+#: pdiff.cpp:378
+msgid "Linediff: A <-> C"
+msgstr "लाइनडिफ: अ <-> स"
+
+#: pdiff.cpp:528 mergeresultwindow.cpp:828
+msgid "All input files are binary equal."
+msgstr "सभी इनपुट फ़ाइलें बाइनरी समान हैं."
+
+#: pdiff.cpp:530
+#, fuzzy
+msgid "All input files contain the same text, but are not binary equal."
+msgstr "सभी इनपुट फ़ाइलें एक ही पाठ रखे हैं."
+
+#: pdiff.cpp:532 pdiff.cpp:534 pdiff.cpp:536 mergeresultwindow.cpp:832
+#: mergeresultwindow.cpp:834 mergeresultwindow.cpp:836
+#, fuzzy, kde-format
+msgid "Files %1 and %2 are binary equal.\n"
+msgstr "फ़ाइलें ब तथा स बाइनरी समान हैं.\n"
+
+#: pdiff.cpp:533 pdiff.cpp:535 pdiff.cpp:537
+#, fuzzy, kde-format
+msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
+msgstr "फ़ाइलें अ तथा ब बाइनरी समान हैं.\n"
+
+#: pdiff.cpp:547
+msgid ""
+"Some inputfiles don't seem to be pure textfiles.\n"
+"Note that the KDiff3-merge was not meant for binary data.\n"
+"Continue at your own risk."
+msgstr ""
+
+#: pdiff.cpp:1017
+msgid "Abort"
+msgstr "छोड़ें"
+
+#: pdiff.cpp:1018 directorymergewindow.cpp:409
+msgid "Continue Merging"
+msgstr "मिलाया जाना जारी रखें"
+
+#: pdiff.cpp:1024 pdiff.cpp:1112
+msgid "Opening files..."
+msgstr "फ़ाइलें खोली जा रही हैं..."
+
+#: pdiff.cpp:1089 pdiff.cpp:1160
+msgid "File open error"
+msgstr "फ़ाइल खोलने में त्रुटि"
+
+#: pdiff.cpp:1192
+msgid "Cutting selection..."
+msgstr "चयन को काटा जा रहा है..."
+
+#: pdiff.cpp:1213
+msgid "Copying selection to clipboard..."
+msgstr "चुने हुए की नकल क्लिपबोर्ड पर बनाया जा रहा है..."
+
+#: pdiff.cpp:1229
+msgid "Inserting clipboard contents..."
+msgstr "क्लिपबोर्ड के वस्तुओं को प्रविष्ट किया जा रहा है..."
+
+#: pdiff.cpp:1755
+msgid "Save && Continue"
+msgstr "सहेजें तथा जारी रखें"
+
+#: pdiff.cpp:1756
+msgid "Continue Without Saving"
+msgstr "सहेजे बगैर जारी रखें"
+
+#: pdiff.cpp:1958
+msgid "Search complete."
+msgstr "ढूंढना सम्पन्न"
+
+#: pdiff.cpp:1958
+msgid "Search Complete"
+msgstr "ढूंढना सम्पन्न"
+
+#: pdiff.cpp:2192
+msgid "Nothing is selected in either diff input window."
+msgstr ""
+
+#: pdiff.cpp:2192
+#, fuzzy
+msgid "Error while adding manual diff range"
+msgstr "डिरेक्ट्री बनाने के दौरान त्रुटि."
+
+#: kdiff3_shell.cpp:76
+msgid ""
+"Could not initialize our part!\n"
+"This usually happens due to an installation problem. Please read the README-"
+"file in the source package for details."
+msgstr ""
+
+#: directorymergewindow.cpp:154
+msgid "Mix of links and normal files."
+msgstr "कड़ियों की मिलावटें तथा सामान्य फ़ाइलें."
+
+#: directorymergewindow.cpp:161
+msgid "Link: "
+msgstr "कड़ी"
+
+#: directorymergewindow.cpp:169
+msgid "Size. "
+msgstr "आकार."
+
+#: directorymergewindow.cpp:182 directorymergewindow.cpp:192
+msgid "Date & Size: "
+msgstr "तारीख व आकार:"
+
+#: directorymergewindow.cpp:202 directorymergewindow.cpp:208
+#, kde-format
+msgid "Creating temp copy of %1 failed."
+msgstr "%1 की अस्थाई नक़ल बनाना असफल."
+
+#: directorymergewindow.cpp:219 directorymergewindow.cpp:227
+#, kde-format
+msgid "Opening %1 failed."
+msgstr "%1 को खोलना असफल"
+
+#: directorymergewindow.cpp:231
+msgid "Comparing file..."
+msgstr "फ़ाइल की तुलना की जा रही है..."
+
+#: directorymergewindow.cpp:241 directorymergewindow.cpp:247
+#, kde-format
+msgid "Error reading from %1"
+msgstr "%1 से पढ़ने में त्रुटि"
+
+#: directorymergewindow.cpp:376
+msgid "Name"
+msgstr "नाम"
+
+#: directorymergewindow.cpp:376
+msgid "Operation"
+msgstr "ऑपरेशन"
+
+#: directorymergewindow.cpp:376
+msgid "Status"
+msgstr "स्थिति"
+
+#: directorymergewindow.cpp:377
+msgid "Unsolved"
+msgstr "हल नहीं"
+
+#: directorymergewindow.cpp:377
+msgid "Solved"
+msgstr "हल कर लिया गया"
+
+#: directorymergewindow.cpp:377
+msgid "Nonwhite"
+msgstr "सफेद-नहीं"
+
+#: directorymergewindow.cpp:377
+msgid "White"
+msgstr "सफेद"
+
+#: directorymergewindow.cpp:406
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort "
+"the merge and rescan the directory?"
+msgstr ""
+
+#: directorymergewindow.cpp:408 directorymergewindow.cpp:2984
+msgid "Rescan"
+msgstr "री-स्कैन"
+
+#: directorymergewindow.cpp:566
+msgid "Opening of directories failed:"
+msgstr "डिरेक्ट्रीज़ खोलना असफल:"
+
+#: directorymergewindow.cpp:569
+#, kde-format
+msgid "Dir A \"%1\" does not exist or is not a directory.\n"
+msgstr "डिरेक्ट्री अ \"%1\" या तो मौजूद नहीं है या फिर वह डिरेक्ट्री नहीं है.\n"
+
+#: directorymergewindow.cpp:572
+#, kde-format
+msgid "Dir B \"%1\" does not exist or is not a directory.\n"
+msgstr "डिरेक्ट्री ब \"%1\" या तो मौजूद नहीं है या फिर वह डिरेक्ट्री नहीं है.\n"
+
+#: directorymergewindow.cpp:575
+#, kde-format
+msgid "Dir C \"%1\" does not exist or is not a directory.\n"
+msgstr "डिरेक्ट्री स \"%1\" या तो मौजूद नहीं है या फिर वह डिरेक्ट्री नहीं है.\n"
+
+#: directorymergewindow.cpp:577
+msgid "Directory Open Error"
+msgstr "डिरेक्ट्री खोलने में त्रुटि"
+
+#: directorymergewindow.cpp:585
+msgid ""
+"The destination directory must not be the same as A or B when three "
+"directories are merged.\n"
+"Check again before continuing."
+msgstr ""
+
+#: directorymergewindow.cpp:587
+msgid "Parameter Warning"
+msgstr "पैरामीटर चेतावनी"
+
+#: directorymergewindow.cpp:592
+msgid "Scanning directories..."
+msgstr "डिरेक्ट्रीज़ स्कैन किया जा रहा है..."
+
+#: directorymergewindow.cpp:625
+msgid "Reading Directory A"
+msgstr "डिरेक्ट्री अ को पढ़ा जा रहा है"
+
+#: directorymergewindow.cpp:647
+msgid "Reading Directory B"
+msgstr "डिरेक्ट्री ब को पढ़ा जा रहा है"
+
+#: directorymergewindow.cpp:669
+msgid "Reading Directory C"
+msgstr "डिरेक्ट्री स को पढ़ा जा रहा है"
+
+#: directorymergewindow.cpp:695
+msgid "Some subdirectories were not readable in"
+msgstr "कुछ सबडिरेक्ट्रीज़ इसमें पढ़े नहीं जा सकने वाले हैं"
+
+#: directorymergewindow.cpp:700
+msgid "Check the permissions of the subdirectories."
+msgstr "सबडिरेक्ट्रीज़ की अनुमतियाँ जाँचें."
+
+#: directorymergewindow.cpp:753
+msgid "Directory Comparison Status"
+msgstr "डिरेक्ट्री तुलना स्थिति"
+
+#: directorymergewindow.cpp:754
+msgid "Number of subdirectories:"
+msgstr "सबडिरेक्ट्रीज़ की संख्या:"
+
+#: directorymergewindow.cpp:755
+msgid "Number of equal files:"
+msgstr "समान फ़ाइलों की संख्या:"
+
+#: directorymergewindow.cpp:756
+msgid "Number of different files:"
+msgstr "भिन्न फ़ाइलों की संख्या:"
+
+#: directorymergewindow.cpp:759
+msgid "Number of manual merges:"
+msgstr "हस्तचालित सम्मिलित करने की संख्या:"
+
+#: directorymergewindow.cpp:928
+msgid "This affects all merge operations."
+msgstr "यह सभी सम्मिलित ऑपरेशन को प्रभावित करेगा"
+
+#: directorymergewindow.cpp:929
+msgid "Changing All Merge Operations"
+msgstr "सभी सम्मिलित करने के ऑपरेशन को बदला जा रहा है"
+
+#: directorymergewindow.cpp:1328
+msgid "Processing "
+msgstr "प्रोसेसिंग"
+
+#: directorymergewindow.cpp:1807 directorymergewindow.cpp:1813
+msgid "To do."
+msgstr "कार्य-सूची"
+
+#: directorymergewindow.cpp:1881 directorymergewindow.cpp:3015
+msgid "Copy A to B"
+msgstr "अ की नक़ल ब में करें"
+
+#: directorymergewindow.cpp:1882 directorymergewindow.cpp:3016
+msgid "Copy B to A"
+msgstr "ब की नक़ल अ में करें"
+
+#: directorymergewindow.cpp:1883 directorymergewindow.cpp:3017
+msgid "Delete A"
+msgstr "अ को मिटाएँ"
+
+#: directorymergewindow.cpp:1884 directorymergewindow.cpp:3018
+msgid "Delete B"
+msgstr "ब को मिटाएँ"
+
+#: directorymergewindow.cpp:1885
+msgid "Delete A & B"
+msgstr "अ तथा ब को मिटाएँ"
+
+#: directorymergewindow.cpp:1886 directorymergewindow.cpp:3020
+msgid "Merge to A"
+msgstr "अ में सम्मिलित करें"
+
+#: directorymergewindow.cpp:1887 directorymergewindow.cpp:3021
+msgid "Merge to B"
+msgstr "ब में सम्मिलित करें"
+
+#: directorymergewindow.cpp:1888
+msgid "Merge to A & B"
+msgstr "अ तथा ब में सम्मिलित करें"
+
+#: directorymergewindow.cpp:1892 directorymergewindow.cpp:3012
+msgid "Delete (if exists)"
+msgstr "मिटाएँ (यदि मौजूद है)"
+
+#: directorymergewindow.cpp:1893 directorymergewindow.cpp:1894
+msgid "Merge (manual)"
+msgstr "सम्मिलित करें (हस्तचालित)"
+
+#: directorymergewindow.cpp:1895
+msgid "Error: Conflicting File Types"
+msgstr "त्रुटि: परस्पर विरोधी फ़ाइल क़िस्में"
+
+#: directorymergewindow.cpp:1896
+msgid "Error: Dates are equal but files are not."
+msgstr "त्रुटि: तारीखें तो एक समान हैं, परंतु फ़ाइलें नहीं."
+
+#: directorymergewindow.cpp:1922 directorymergewindow.cpp:1951
+#: directorymergewindow.cpp:1976
+msgid "This operation is currently not possible."
+msgstr "यह ऑपरेशन वर्तमान में संभव नहीं है."
+
+#: directorymergewindow.cpp:1922 directorymergewindow.cpp:1951
+#: directorymergewindow.cpp:1976 directorymergewindow.cpp:2235
+msgid "Operation Not Possible"
+msgstr "ऑपरेशन वर्तमान में संभव नहीं"
+
+#: directorymergewindow.cpp:2015
+msgid ""
+"This should never happen: \n"
+"\n"
+"mergeResultSaved: m_pMFI=0\n"
+"\n"
+"If you know how to reproduce this, please contact the program author."
+msgstr ""
+
+#: directorymergewindow.cpp:2015
+msgid "Program Error"
+msgstr "प्रोग्राम त्रुटि"
+
+#: directorymergewindow.cpp:2026
+msgid "An error occurred while copying.\n"
+msgstr "नक़ल करने के दौरान एक त्रुटि हुई.\n"
+
+#: directorymergewindow.cpp:2026 directorymergewindow.cpp:2095
+#: directorymergewindow.cpp:2127 directorymergewindow.cpp:2175
+#: directorymergewindow.cpp:2184 directorymergewindow.cpp:2435
+#, fuzzy
+msgid "Error"
+msgstr "त्रुटि."
+
+#: directorymergewindow.cpp:2027 directorymergewindow.cpp:2436
+msgid "Merge Error"
+msgstr "सम्मिलित करने में त्रुटि"
+
+#: directorymergewindow.cpp:2032 directorymergewindow.cpp:2441
+msgid "Error."
+msgstr "त्रुटि."
+
+#: directorymergewindow.cpp:2037 directorymergewindow.cpp:2333
+#: directorymergewindow.cpp:2373
+msgid "Done."
+msgstr "सम्पन्न."
+
+#: directorymergewindow.cpp:2060
+msgid "Not saved."
+msgstr "सहेजा नहीं गया."
+
+#: directorymergewindow.cpp:2095
+msgid "Unknown merge operation. (This must never happen!)"
+msgstr "सम्मिलित करने का अज्ञात ऑपरेशन. (ऐसा कभी नहीं होना चाहिए!)"
+
+#: directorymergewindow.cpp:2127
+msgid "Unknown merge operation."
+msgstr "सम्मिलित करने का अज्ञात ऑपरेशन. "
+
+#: directorymergewindow.cpp:2142
+msgid ""
+"The merge is about to begin.\n"
+"\n"
+"Choose \"Do it\" if you have read the instructions and know what you are "
+"doing.\n"
+"Choosing \"Simulate it\" will tell you what would happen.\n"
+"\n"
+"Be aware that this program still has beta status and there is NO WARRANTY "
+"whatsoever! Make backups of your vital data!"
+msgstr ""
+
+#: directorymergewindow.cpp:2147
+msgid "Starting Merge"
+msgstr "सम्मिलित करना प्रारंभ किया जा रहा है"
+
+#: directorymergewindow.cpp:2148
+msgid "Do It"
+msgstr "इसे करें"
+
+#: directorymergewindow.cpp:2149
+msgid "Simulate It"
+msgstr "इसे सिमुलेट करें"
+
+#: directorymergewindow.cpp:2175
+msgid ""
+"The highlighted item has a different type in the different directories. "
+"Select what to do."
+msgstr ""
+
+#: directorymergewindow.cpp:2184
+msgid ""
+"The modification dates of the file are equal but the files are not. Select "
+"what to do."
+msgstr ""
+
+#: directorymergewindow.cpp:2235
+msgid ""
+"This operation is currently not possible because directory merge is "
+"currently running."
+msgstr ""
+
+#: directorymergewindow.cpp:2295
+msgid ""
+"There was an error in the last step.\n"
+"Do you want to continue with the item that caused the error or do you want "
+"to skip this item?"
+msgstr ""
+
+#: directorymergewindow.cpp:2297
+msgid "Continue merge after an error"
+msgstr "त्रुटि के बाद भी सम्मिलित करना जारी रखें"
+
+#: directorymergewindow.cpp:2298
+msgid "Continue With Last Item"
+msgstr "पिछली वस्तु के साथ जारी रखें"
+
+#: directorymergewindow.cpp:2299
+msgid "Skip Item"
+msgstr "वस्तु छोड़ें"
+
+#: directorymergewindow.cpp:2333
+msgid "Skipped."
+msgstr "छोड़ा."
+
+#: directorymergewindow.cpp:2340 directorymergewindow.cpp:2554
+msgid "In progress..."
+msgstr "प्रगति पर है..."
+
+#: directorymergewindow.cpp:2388
+msgid "Merge operation complete."
+msgstr "सम्मिलित करने की क्रिया पूरी हुई."
+
+#: directorymergewindow.cpp:2388 directorymergewindow.cpp:2391
+msgid "Merge Complete"
+msgstr "सम्मिलित करना सम्पन्न"
+
+#: directorymergewindow.cpp:2401
+msgid ""
+"Simulated merge complete: Check if you agree with the proposed operations."
+msgstr ""
+
+#: directorymergewindow.cpp:2435
+msgid "An error occurred. Press OK to see detailed information.\n"
+msgstr "एक त्रुटि हुई. विस्तृत जानकारी देखने के लिए ठीक को दबाएँ\n"
+
+#: directorymergewindow.cpp:2467
+#, kde-format
+msgid "Error: While deleting %1: Creating backup failed."
+msgstr "त्रुटि: %1 को मिटाने के दौरान: बैकअप बनाने में असफल."
+
+#: directorymergewindow.cpp:2474
+#, kde-format
+msgid "delete directory recursively( %1 )"
+msgstr "डिरेक्ट्री ( %1 ) को रिकर्सिवली मिटाएँ"
+
+#: directorymergewindow.cpp:2476
+#, kde-format
+msgid "delete( %1 )"
+msgstr "मिटाएं (%1)"
+
+#: directorymergewindow.cpp:2491
+msgid "Error: delete dir operation failed while trying to read the directory."
+msgstr "त्रुटि: डिरेक्ट्री को पढ़ने की कोशिश में डिरेक्ट्री मिटाने का कार्य असफल."
+
+#: directorymergewindow.cpp:2510
+#, kde-format
+msgid "Error: rmdir( %1 ) operation failed."
+msgstr "त्रुटि: rmdir( %1 ) क्रिया असफल."
+
+#: directorymergewindow.cpp:2520
+msgid "Error: delete operation failed."
+msgstr "त्रुटि: डिरेक्ट्री मिटाने का कार्य असफल."
+
+#: directorymergewindow.cpp:2546
+#, kde-format
+msgid "manual merge( %1, %2, %3 -> %4)"
+msgstr "हस्तचालित सम्मिलित करें( %1, %2, %3 -> %4)"
+
+#: directorymergewindow.cpp:2549
+msgid ""
+"     Note: After a manual merge the user should continue by pressing F7."
+msgstr ""
+"टीप: हस्तचालित सम्मिलित करने के बाद उपयोक्ता को F7 को दबाकर जारी रखना चाहिए."
+
+#: directorymergewindow.cpp:2572
+#, kde-format
+msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
+msgstr "त्रुटि: नक़ल ( %1 -> %2 ) असफल. मौजूदा गंतव्य को मिटाना असफल."
+
+#: directorymergewindow.cpp:2582
+#, kde-format
+msgid "copyLink( %1 -> %2 )"
+msgstr "कापीलिंक ( %1 -> %2 )"
+
+#: directorymergewindow.cpp:2593
+msgid "Error: copyLink failed: Remote links are not yet supported."
+msgstr "त्रुटि: कापीलिंक असफल: रिमोट कड़ियाँ अभी समर्थित नहीं हैं."
+
+#: directorymergewindow.cpp:2599
+msgid "Error: copyLink failed."
+msgstr "त्रुटि: कापीलिंक असफल."
+
+#: directorymergewindow.cpp:2619
+#, kde-format
+msgid "copy( %1 -> %2 )"
+msgstr "नक़ल( %1 -> %2 )"
+
+#: directorymergewindow.cpp:2645
+#, kde-format
+msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
+msgstr ""
+
+#: directorymergewindow.cpp:2651
+#, kde-format
+msgid "rename( %1 -> %2 )"
+msgstr "नाम बदलें( %1 -> %2 )"
+
+#: directorymergewindow.cpp:2660
+msgid "Error: Rename failed."
+msgstr "त्रुटि: नाम-बदलना असफल."
+
+#: directorymergewindow.cpp:2678
+#, kde-format
+msgid "Error during makeDir of %1. Cannot delete existing file."
+msgstr "%1 के मेकडिर के दौरान त्रुटि. मौजूदा फ़ाइल मिटा नहीं सकते."
+
+#: directorymergewindow.cpp:2694
+#, kde-format
+msgid "makeDir( %1 )"
+msgstr "मेकडिर( %1 )"
+
+#: directorymergewindow.cpp:2704
+msgid "Error while creating directory."
+msgstr "डिरेक्ट्री बनाने के दौरान त्रुटि."
+
+#: directorymergewindow.cpp:2729 directorymergewindow.cpp:2839
+msgid "Dest"
+msgstr "गंतव्य"
+
+#: directorymergewindow.cpp:2733 directorymergewindow.cpp:2764
+msgid "Dir"
+msgstr "डिर."
+
+#: directorymergewindow.cpp:2733
+msgid "Type"
+msgstr "क़िस्म"
+
+#: directorymergewindow.cpp:2733
+msgid "Size"
+msgstr "आकार"
+
+#: directorymergewindow.cpp:2734
+msgid "Attr"
+msgstr "एट्रि."
+
+#: directorymergewindow.cpp:2734
+msgid "Last Modification"
+msgstr "अंतिम परिवर्धन"
+
+#: directorymergewindow.cpp:2734
+msgid "Link-Destination"
+msgstr "लिंक-गंतव्य"
+
+#: directorymergewindow.cpp:2781
+msgid "not available"
+msgstr "उपलब्ध नहीं"
+
+#: directorymergewindow.cpp:2801
+msgid "A (Dest): "
+msgstr "A (गंत.): "
+
+#: directorymergewindow.cpp:2804
+msgid "A (Base): "
+msgstr "A (आधार): "
+
+#: directorymergewindow.cpp:2810
+msgid "B (Dest): "
+msgstr "B (गंत.): "
+
+#: directorymergewindow.cpp:2818
+msgid "C (Dest): "
+msgstr "C (गंत.): "
+
+#: directorymergewindow.cpp:2824
+msgid "Dest: "
+msgstr "गंतव्य:"
+
+#: directorymergewindow.cpp:2891
+#, fuzzy
+msgid "Save Directory Merge State As..."
+msgstr "डिरेक्ट्री सम्मिलित करें"
+
+#: directorymergewindow.cpp:2978
+msgid "Start/Continue Directory Merge"
+msgstr "डिरेक्ट्री सम्मिलित करना प्रारंभ करें/जारी रखें"
+
+#: directorymergewindow.cpp:2979
+msgid "Run Operation for Current Item"
+msgstr "मौज़ूदा वस्तु के लिए ऑपरेशन चलाएँ"
+
+#: directorymergewindow.cpp:2980
+msgid "Compare Selected File"
+msgstr "चयनित फ़ाइल की तुलना करें"
+
+#: directorymergewindow.cpp:2981
+msgid "Merge Current File"
+msgstr "मौज़ूदा फ़ाइल सम्मिलित करें"
+
+#: directorymergewindow.cpp:2981
+#, fuzzy
+msgid ""
+"Merge\n"
+"File"
+msgstr "सम्मिलित करें"
+
+#: directorymergewindow.cpp:2982
+msgid "Fold All Subdirs"
+msgstr "सभी सबडिरेक्ट्रीज फ़ोल्ड करें"
+
+#: directorymergewindow.cpp:2983
+msgid "Unfold All Subdirs"
+msgstr "सभी सबडिरेक्ट्रीज अनफ़ोल्ड करें"
+
+#: directorymergewindow.cpp:2987
+msgid "Choose A for All Items"
+msgstr "सभी वस्तुओं के लिए अ का चयन करें"
+
+#: directorymergewindow.cpp:2988
+msgid "Choose B for All Items"
+msgstr "सभी वस्तुओं के लिए ब का चयन करें"
+
+#: directorymergewindow.cpp:2989
+msgid "Choose C for All Items"
+msgstr "सभी वस्तुओं के लिए स का चयन करें"
+
+#: directorymergewindow.cpp:2990
+msgid "Auto-Choose Operation for All Items"
+msgstr "सभी वस्तुओं के लिए क्रिया स्वचालित चयन करें"
+
+#: directorymergewindow.cpp:2991
+msgid "No Operation for All Items"
+msgstr "सभी वस्तुओं के लिए कोई क्रिया नहीं"
+
+#: directorymergewindow.cpp:2996
+msgid "Show Identical Files"
+msgstr ""
+
+#: directorymergewindow.cpp:2996
+msgid ""
+"Identical\n"
+"Files"
+msgstr ""
+
+#: directorymergewindow.cpp:2997
+#, fuzzy
+msgid "Show Different Files"
+msgstr "भिन्न फ़ाइलों की संख्या:"
+
+#: directorymergewindow.cpp:2998
+msgid "Show Files only in A"
+msgstr ""
+
+#: directorymergewindow.cpp:2998
+msgid ""
+"Files\n"
+"only in A"
+msgstr ""
+
+#: directorymergewindow.cpp:2999
+msgid "Show Files only in B"
+msgstr ""
+
+#: directorymergewindow.cpp:2999
+msgid ""
+"Files\n"
+"only in B"
+msgstr ""
+
+#: directorymergewindow.cpp:3000
+msgid "Show Files only in C"
+msgstr ""
+
+#: directorymergewindow.cpp:3000
+msgid ""
+"Files\n"
+"only in C"
+msgstr ""
+
+#: directorymergewindow.cpp:3004
+#, fuzzy
+msgid "Compare Explicitly Selected Files"
+msgstr "चयनित फ़ाइल की तुलना करें"
+
+#: directorymergewindow.cpp:3005
+#, fuzzy
+msgid "Merge Explicitly Selected Files"
+msgstr "चयनित फ़ाइल की तुलना करें"
+
+#: directorymergewindow.cpp:3007 directorymergewindow.cpp:3014
+msgid "Do Nothing"
+msgstr "कुछ नहीं करें"
+
+#: directorymergewindow.cpp:3008
+msgid "A"
+msgstr "अ"
+
+#: directorymergewindow.cpp:3009
+msgid "B"
+msgstr "ब"
+
+#: directorymergewindow.cpp:3010
+msgid "C"
+msgstr "स"
+
+#: directorymergewindow.cpp:3019
+msgid "Delete A && B"
+msgstr "अ तथा ब को मिटाएँ"
+
+#: directorymergewindow.cpp:3022
+msgid "Merge to A && B"
+msgstr "अ तथा ब में सम्मिलित करें"
+
+#: kdiff3_part.cpp:157 kdiff3_part.cpp:234
+msgid "Couldn't find files for comparison."
+msgstr "तुलना के लिए फ़ाइलों को नहीं ढूंढ सका"
+
+#: kdiff3_part.cpp:302
+msgid "KDiff3Part"
+msgstr "के-डिफ3पार्ट"
+
+#: kreplacements/kreplacements.h:102
+#, fuzzy
+#| msgid "C&ontinue"
+msgid "Continue"
+msgstr "जारी रखें (&o)"
+
+#: kreplacements/kreplacements.h:104 kreplacements/kreplacements.cpp:637
+msgid "Quit"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:183 kreplacements/kreplacements.cpp:345
+msgid "Ok"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:187 kreplacements/kreplacements.cpp:721
+msgid "Help"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:191
+msgid "Defaults"
+msgstr ""
+
+#. i18n: file: kdiff3_shell.rc:4
+#. i18n: ectx: Menu (file)
+#: kreplacements/kreplacements.cpp:302 rc.cpp:12
+#, fuzzy
+msgid "&File"
+msgstr "फ़ाइल..."
+
+#: kreplacements/kreplacements.cpp:303
+#, fuzzy
+msgid "&Edit"
+msgstr "संपादक"
+
+#. i18n: file: kdiff3_shell.rc:7
+#. i18n: ectx: Menu (directory)
+#: kreplacements/kreplacements.cpp:304 rc.cpp:15
+msgid "&Directory"
+msgstr "डिरेक्ट्री (&D)"
+
+#. i18n: file: kdiff3_shell.rc:50
+#. i18n: ectx: Menu (movement)
+#: kreplacements/kreplacements.cpp:307 rc.cpp:24
+msgid "&Movement"
+msgstr "गतिविधि (&M)"
+
+#. i18n: file: kdiff3_shell.rc:61
+#. i18n: ectx: Menu (diff)
+#: kreplacements/kreplacements.cpp:308 rc.cpp:27
+msgid "D&iffview"
+msgstr "डिफव्यू (&i)"
+
+#. i18n: file: kdiff3_shell.rc:73
+#. i18n: ectx: Menu (merge)
+#: kreplacements/kreplacements.cpp:309 rc.cpp:30
+msgid "&Merge"
+msgstr "सम्मिलित करें (&M)"
+
+#. i18n: file: kdiff3_shell.rc:95
+#. i18n: ectx: Menu (window)
+#: kreplacements/kreplacements.cpp:310 rc.cpp:33
+msgid "&Window"
+msgstr "विंडो (&W)"
+
+#: kreplacements/kreplacements.cpp:311
+#, fuzzy
+msgid "&Settings"
+msgstr "डिफ तथा सम्मिलित करने का विन्यास"
+
+#: kreplacements/kreplacements.cpp:312
+msgid "&Help"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:359
+#, fuzzy
+msgid "&About"
+msgstr "छोड़ें"
+
+#: kreplacements/kreplacements.cpp:375
+msgid "A&uthor"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:389
+msgid "&Thanks To"
+msgstr ""
+
+#. i18n: file: kdiff3_shell.rc:30
+#. i18n: ectx: Menu (dir_current_merge_menu)
+#: kreplacements/kreplacements.cpp:494 kreplacements/kreplacements.cpp:503
+#: rc.cpp:18
+msgid "Current Item Merge Operation"
+msgstr "मौजूदा वस्तु सम्मिलित करने की क्रिया"
+
+#. i18n: file: kdiff3_shell.rc:38
+#. i18n: ectx: Menu (dir_current_sync_menu)
+#: kreplacements/kreplacements.cpp:495 kreplacements/kreplacements.cpp:504
+#: rc.cpp:21
+msgid "Current Item Sync Operation"
+msgstr "मौजूदा वस्तु सिंक ऑपरेशन"
+
+#: kreplacements/kreplacements.cpp:603
+#, fuzzy
+msgid "Open"
+msgstr "ऑपरेशन"
+
+#: kreplacements/kreplacements.cpp:612
+#, fuzzy
+msgid "Save"
+msgstr "हल कर लिया गया"
+
+#: kreplacements/kreplacements.cpp:629
+#, fuzzy
+msgid "Print..."
+msgstr "बाहर हो रहे हैं..."
+
+#: kreplacements/kreplacements.cpp:645
+msgid "Cut"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:653
+msgid "Copy"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:661
+msgid "Paste"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:669
+#, fuzzy
+msgid "Select All"
+msgstr "अ को मिटाएँ"
+
+#: kreplacements/kreplacements.cpp:677
+msgid "Show Toolbar"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:685
+msgid "Show &Statusbar"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:693
+#, fuzzy, kde-format
+msgid "&Configure %1..."
+msgstr "कॉन्फ़िगर...."
+
+#: kreplacements/kreplacements.cpp:705 kreplacements/kreplacements.cpp:713
+#, fuzzy
+msgid "About"
+msgstr "छोड़ें"
+
+#: kreplacements/kreplacements.cpp:728
+msgid "Find"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:736
+msgid "Find Next"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:756
+#, fuzzy
+msgid "Select Font"
+msgstr "अन्य फ़ॉन्ट चुनें"
+
+#: kreplacements/kreplacements.cpp:798
+#, fuzzy
+msgid "Incompatible font."
+msgstr "फ़ॉन्ट असंगत है"
+
+#: kreplacements/kreplacements.cpp:799
+#, fuzzy
+msgid "Continue at my own risk"
+msgstr "अपने स्वयं के जोखिम पर जारी रखें"
+
+#: kreplacements/kreplacements.cpp:799
+#, fuzzy
+msgid "Select another font"
+msgstr "अन्य फ़ॉन्ट चुनें"
+
+#: kreplacements/kreplacements.cpp:1138
+msgid "For more documentation, see the help-menu or the subdirectory doc."
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:1141
+#, fuzzy
+msgid "KDiff3-Usage"
+msgstr "के-डिफ3"
+
+#: kreplacements/kreplacements.cpp:1141
+#, fuzzy
+msgid "Ignore"
+msgstr "केस अनदेखा करें"
+
+#: kreplacements/kreplacements.cpp:1141
+#, fuzzy
+msgid "Exit"
+msgstr "संपादक"
+
+#: mergeresultwindow.cpp:152 mergeresultwindow.cpp:970
+#: mergeresultwindow.cpp:984 mergeresultwindow.cpp:996
+#: mergeresultwindow.cpp:1008
+#, fuzzy, kde-format
+msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
+msgstr "बचे हुए समाधान-रहित विरोधाभासों की संख्या: %1"
+
+#: mergeresultwindow.cpp:301
+msgid ""
+"The output has been modified.\n"
+"If you continue your changes will be lost."
+msgstr ""
+"आउटपुट परिवर्धित किया जा चुका है.\n"
+"यदि आप जारी रखते हैं तो आपके परिवर्तन खो जाएँगे."
+
+#: mergeresultwindow.cpp:830
+msgid "All input files contain the same text."
+msgstr "सभी इनपुट फ़ाइलें एक ही पाठ रखे हैं."
+
+#: mergeresultwindow.cpp:833 mergeresultwindow.cpp:835
+#: mergeresultwindow.cpp:837
+#, fuzzy, kde-format
+msgid "Files %1 and %2 have equal text.\n"
+msgstr "फ़ाइलें अ तथा ब में पाठ समान हैं.\n"
+
+#: mergeresultwindow.cpp:843
+msgid "Total number of conflicts: "
+msgstr "परस्पर विरोधों की कुल संख्या:"
+
+#: mergeresultwindow.cpp:844
+msgid ""
+"\n"
+"Nr of automatically solved conflicts: "
+msgstr ""
+"\n"
+"स्वचालित समाधान किए विरोधाभासों की संख्या: "
+
+#: mergeresultwindow.cpp:845
+msgid ""
+"\n"
+"Nr of unsolved conflicts: "
+msgstr ""
+"\n"
+"समाधान-रहित विरोधाभासों की संख्या: "
+
+#: mergeresultwindow.cpp:847
+msgid "Conflicts"
+msgstr "परस्पर विरोध"
+
+#: mergeresultwindow.cpp:1714
+msgid "<No src line>"
+msgstr "<कोई स्रोत पंक्ति नहीं>"
+
+#: mergeresultwindow.cpp:1722
+#, fuzzy
+msgid "<Merge Conflict (Whitespace only)>"
+msgstr "<विरोधाभास सम्मिलित करें>"
+
+#: mergeresultwindow.cpp:1724 mergeresultwindow.cpp:2498
+msgid "<Merge Conflict>"
+msgstr "<विरोधाभास सम्मिलित करें>"
+
+#: mergeresultwindow.cpp:2706
+msgid ""
+"Not all conflicts are solved yet.\n"
+"File not saved.\n"
+msgstr ""
+"अब तक सभी विरोधाभासों का समाधान नहीं किया गया है.\n"
+"फ़ाइल सहेजा नहीं गया.\n"
+
+#: mergeresultwindow.cpp:2708
+msgid "Conflicts Left"
+msgstr "विरोधाभास बायाँ "
+
+#: mergeresultwindow.cpp:2720
+msgid ""
+"\n"
+"\n"
+"Creating backup failed. File not saved."
+msgstr ""
+
+#: mergeresultwindow.cpp:2720 mergeresultwindow.cpp:2761
+msgid "File Save Error"
+msgstr "फ़ाइल सहेजने में त्रुटि"
+
+#: mergeresultwindow.cpp:2761
+msgid "Error while writing."
+msgstr "लिखने के दौरान त्रुटि."
+
+#: mergeresultwindow.cpp:3091
+msgid "Output"
+msgstr "आउटपुट"
+
+#: mergeresultwindow.cpp:3103 mergeresultwindow.cpp:3256
+msgid "[Modified]"
+msgstr "[परिवर्धित]"
+
+#: mergeresultwindow.cpp:3110
+msgid "Encoding for saving"
+msgstr ""
+
+#: mergeresultwindow.cpp:3203 mergeresultwindow.cpp:3205
+#: mergeresultwindow.cpp:3207
+msgid "Codec from"
+msgstr ""
+
+#. i18n: file: kdiff3_part.rc:4
+#. i18n: ectx: Menu (movement)
+#: rc.cpp:3
+msgid "&KDiff3"
+msgstr "के-डिफ3 (&K)"
+
+#. i18n: file: kdiff3_part.rc:13
+#. i18n: ectx: Menu (movement)
+#: rc.cpp:6
+msgid "Configure KDiff3"
+msgstr "के-डिफ3 को कॉन्फ़िगर करें"
+
+#. i18n: file: kdiff3_part.rc:16
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:9
+msgid "KDiff3"
+msgstr "के-डिफ3"
+
+#. i18n: file: kdiff3_shell.rc:106
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:36
+msgid "Main Toolbar"
+msgstr ""
+
+#: rc.cpp:37
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#: rc.cpp:38
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#~ msgid "C&ontinue"
+#~ msgstr "जारी रखें (&o)"
+
+#~ msgid ""
+#~ "_: NAME OF TRANSLATORS\n"
+#~ "Your names"
+#~ msgstr "रविशंकर श्रीवास्तव"
+
+#~ msgid ""
+#~ "_: EMAIL OF TRANSLATORS\n"
+#~ "Your emails"
+#~ msgstr "raviratlami@yahoo.com"
+
+#~ msgid "Enables/disables the toolbar"
+#~ msgstr "औज़ार-पट्टी सक्षम/अक्षम करें"
+
+#, fuzzy
+#~ msgid "Printing completed."
+#~ msgstr "सम्मिलित करने की क्रिया पूरी हुई."
+
+#~ msgid "Files A and B are binary equal.\n"
+#~ msgstr "फ़ाइलें अ तथा ब बाइनरी समान हैं.\n"
+
+#~ msgid "Files A and C are binary equal.\n"
+#~ msgstr "फ़ाइलें अ तथा स बाइनरी समान हैं.\n"
+
+#~ msgid "Files A and C have equal text. \n"
+#~ msgstr "फ़ाइलें अ तथा स में पाठ समान हैं.\n"
+
+#~ msgid "Files B and C are binary equal.\n"
+#~ msgstr "फ़ाइलें ब तथा स बाइनरी समान हैं.\n"
+
+#~ msgid "Files B and C have equal text. \n"
+#~ msgstr "फ़ाइलें ब तथा स में पाठ समान हैं.\n"
+
+#~ msgid "Preserve carriage return"
+#~ msgstr "कैरिज रिटर्न बनाए रखें"
+
+#, fuzzy
+#~ msgid "Diff and Merge"
+#~ msgstr "डिफ तथा सम्मिलित"
+
+#, fuzzy
+#~ msgid "Save Directory Merge State ..."
+#~ msgstr "डिरेक्ट्री सम्मिलित करें"
+
+#, fuzzy
+#~ msgid "Load Directory Merge State ..."
+#~ msgstr "डिरेक्ट्री सम्मिलित करें"
+
+#, fuzzy
+#~ msgid "Synchronize Directories"
+#~ msgstr "डिरेक्ट्रीज़ सिंक्रोनाइज़ करें"
+
+#, fuzzy
+#~ msgid "Copy Newer Files Instead of Merging"
+#~ msgstr "सम्मिलित करने के बजाए नए की नक़ल करें (असुरक्षित)"
+
+#~ msgid "List only deltas"
+#~ msgstr "सिर्फ डेल्टाज़ की सूची दें"
+
+#~ msgid "Files and directories without change will not appear in the list."
+#~ msgstr "बिना परिवर्तनों के फ़ाइल तथा डिरेक्ट्रीज़ सूची में प्रकट नहीं होंगे."
+
+#, fuzzy
+#~ msgid "no selection"
+#~ msgstr "स्वचालित नक़ल चयन"
+
+#, fuzzy
+#~ msgid "Manually match lines"
+#~ msgstr "हस्तचालित चुनाव"
+
+#~ msgid "Has no effect. For compatibility with certain tools."
+#~ msgstr "कोई प्रभाव नहीं. कुछ औज़ारों के साथ कम्पेटिबिलिटी के लिए."
+
+#~ msgid "For compatibility with certain tools."
+#~ msgstr "कुछ औज़ारों के साथ कम्पेटिबिलिटी के लिए."
+
+#~ msgid "Colors in Editor & Diff Output"
+#~ msgstr "संपादक तथा डिफ़ आउटपुट में रंग"
+
+#~ msgid "Text Diff and Merge Tool"
+#~ msgstr "पाठ डिफ तथा सम्मिलित करने का औज़ार"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "File not saved."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "फ़ाइल सहेजा नहीं गया."
+
+#~ msgid "Out of memory while preparing to save."
+#~ msgstr "सहेजने के लिए तैयारी करने के दौरान मेमोरी कम पड़ गई."

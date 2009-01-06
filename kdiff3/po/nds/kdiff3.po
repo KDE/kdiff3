@@ -1,0 +1,3097 @@
+# Translation of kdiff3.po to Low Saxon
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Sönke Dibbern <s_dibbern@web.de>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdiff3\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2008-12-08 10:27+0100\n"
+"PO-Revision-Date: 2008-10-28 00:44+0100\n"
+"Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
+"Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kdiff3.cpp:167
+msgid "Current Configuration:"
+msgstr "Aktuell Instellen:"
+
+#: kdiff3.cpp:172
+msgid "Config Option Error:"
+msgstr "Fehler binnen de Instellen:"
+
+#: kdiff3.cpp:217
+msgid "Option --auto used, but no output file specified."
+msgstr "Optschoon \"--auto\" bruukt, man keen Utgaavdatei angeven."
+
+#: kdiff3.cpp:366
+msgid "Option --auto ignored for directory comparison."
+msgstr "Optschoon \"--auto\" warrt bi't Verglieken vun Ornern övergahn."
+
+#: kdiff3.cpp:402
+msgid "Saving failed."
+msgstr "Sekern fehlslaan."
+
+#: kdiff3.cpp:437 pdiff.cpp:1080 pdiff.cpp:1151
+msgid "Opening of these files failed:"
+msgstr "Disse Dateien laat sik nich opmaken:"
+
+#: kdiff3.cpp:446
+msgid "File Open Error"
+msgstr "Fehler bi't Opmaken"
+
+#: kdiff3.cpp:474
+msgid "Opens documents for comparison..."
+msgstr "Dokmenten warrt för't Verglieken opmaakt..."
+
+#: kdiff3.cpp:476
+msgid "Reload"
+msgstr "Nieg laden"
+
+#: kdiff3.cpp:479
+msgid "Saves the merge result. All conflicts must be solved!"
+msgstr ""
+"Sekert dat Resultaat vun't Tosamenföhren. All Konflikten mööt oplööst wesen!"
+
+#: kdiff3.cpp:481
+msgid "Saves the current document as..."
+msgstr "Sekert dat aktuelle Dokment as..."
+
+#: kdiff3.cpp:483
+msgid "Print the differences"
+msgstr "Verscheel drucken"
+
+#: kdiff3.cpp:485
+msgid "Quits the application"
+msgstr "Maakt dat Programm ut"
+
+#: kdiff3.cpp:487
+msgid "Cuts the selected section and puts it to the clipboard"
+msgstr "Knippt dat utsöchte Rebeet un föögt dat na de Twischenaflaag in"
+
+#: kdiff3.cpp:489
+msgid "Copies the selected section to the clipboard"
+msgstr "Kopeert den utsöchten Afsnitt na de Twischenaflaag"
+
+#: kdiff3.cpp:491
+msgid "Pastes the clipboard contents to actual position"
+msgstr "Föögt de Twischenaflaag ehr Inholt bi de aktuelle Steed in"
+
+#: kdiff3.cpp:493
+msgid "Select everything in current window"
+msgstr "Allens binnen dat aktuelle Finster utsöken"
+
+#: kdiff3.cpp:495
+msgid "Search for a string"
+msgstr "Na en Tekenkeed söken"
+
+#: kdiff3.cpp:497
+msgid "Search again for the string"
+msgstr "Nochmaal na en Tekenkeed söken"
+
+#: kdiff3.cpp:502
+msgid "Enables/disables the statusbar"
+msgstr "Maakt den Statusbalken an oder ut"
+
+#: kdiff3.cpp:506
+msgid "Configure KDiff3..."
+msgstr "KDiff3 instellen..."
+
+#: kdiff3.cpp:527
+msgid "Go to Current Delta"
+msgstr "Na aktuellen Verscheel gahn"
+
+#: kdiff3.cpp:527
+msgid ""
+"Current\n"
+"Delta"
+msgstr ""
+"Aktuell\n"
+"Verscheel"
+
+#: kdiff3.cpp:529
+msgid "Go to First Delta"
+msgstr "Na eersten Verscheel gahn"
+
+#: kdiff3.cpp:529
+msgid ""
+"First\n"
+"Delta"
+msgstr ""
+"Eerst\n"
+"Verscheel"
+
+#: kdiff3.cpp:531
+msgid "Go to Last Delta"
+msgstr "Na lesten Verscheel gahn"
+
+#: kdiff3.cpp:531
+msgid ""
+"Last\n"
+"Delta"
+msgstr ""
+"Lest\n"
+"Verscheel"
+
+#: kdiff3.cpp:533
+msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
+msgstr "(Övergeiht Freeruum-Verschelen, wenn \"Freerüüm wiesen\" utmaakt is.)"
+
+#: kdiff3.cpp:534
+msgid ""
+"(Does not skip white space differences even when \"Show White Space\" is "
+"disabled.)"
+msgstr ""
+"(Övergeiht Freeruum-Verschelen nich, ok wenn \"Freerüüm wiesen\" utmaakt is.)"
+
+#: kdiff3.cpp:535
+msgid "Go to Previous Delta"
+msgstr "Na verleden Verscheel gahn"
+
+#: kdiff3.cpp:535
+msgid ""
+"Prev\n"
+"Delta"
+msgstr ""
+"Verleden\n"
+"Verscheel"
+
+#: kdiff3.cpp:537
+msgid "Go to Next Delta"
+msgstr "Na nakamen Verscheel gahn"
+
+#: kdiff3.cpp:537
+msgid ""
+"Next\n"
+"Delta"
+msgstr ""
+"Nakamen\n"
+"Verscheel"
+
+#: kdiff3.cpp:539
+msgid "Go to Previous Conflict"
+msgstr "Na verleden Konflikt gahn"
+
+#: kdiff3.cpp:539
+msgid ""
+"Prev\n"
+"Conflict"
+msgstr ""
+"Verleden\n"
+"Konflikt"
+
+#: kdiff3.cpp:541
+msgid "Go to Next Conflict"
+msgstr "Na nakamen Konflikt gahn"
+
+#: kdiff3.cpp:541
+msgid ""
+"Next\n"
+"Conflict"
+msgstr ""
+"Nakamen\n"
+"Konflikt"
+
+#: kdiff3.cpp:543
+msgid "Go to Previous Unsolved Conflict"
+msgstr "Na verleden Konflikt gahn, de nich oplööst is"
+
+#: kdiff3.cpp:543
+msgid ""
+"Prev\n"
+"Unsolved"
+msgstr ""
+"Verleden\n"
+"n. oplööst"
+
+#: kdiff3.cpp:545
+msgid "Go to Next Unsolved Conflict"
+msgstr "Na nakamen Konflikt gahn, de nich oplööst is"
+
+#: kdiff3.cpp:545
+msgid ""
+"Next\n"
+"Unsolved"
+msgstr ""
+"Nakamen\n"
+"n. oplööst"
+
+#: kdiff3.cpp:547
+msgid "Select Line(s) From A"
+msgstr "Reeg ut A bruken"
+
+#: kdiff3.cpp:547
+msgid ""
+"Choose\n"
+"A"
+msgstr ""
+"A\n"
+"bruken"
+
+#: kdiff3.cpp:548
+msgid "Select Line(s) From B"
+msgstr "Reeg ut B bruken"
+
+#: kdiff3.cpp:548
+msgid ""
+"Choose\n"
+"B"
+msgstr ""
+"B\n"
+"bruken"
+
+#: kdiff3.cpp:549
+msgid "Select Line(s) From C"
+msgstr "Reeg ut C bruken"
+
+#: kdiff3.cpp:549
+msgid ""
+"Choose\n"
+"C"
+msgstr ""
+"C\n"
+"bruken"
+
+#: kdiff3.cpp:550
+msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
+msgstr "Na Bornköör automaatsch na nakamen nich oplöösten Konflikt gahn"
+
+#: kdiff3.cpp:550
+msgid ""
+"Auto\n"
+"Next"
+msgstr ""
+"Autom.\n"
+"Nakamen"
+
+#: kdiff3.cpp:552
+msgid "Show Space && Tabulator Characters for Differences"
+msgstr "Free- un Tab-Tekens as Verscheel wiesen"
+
+#: kdiff3.cpp:552
+msgid ""
+"White\n"
+"Characters"
+msgstr "Freerüüm"
+
+#: kdiff3.cpp:553
+msgid "Show White Space"
+msgstr "Freerüüm wiesen"
+
+#: kdiff3.cpp:553
+msgid ""
+"White\n"
+"Deltas"
+msgstr ""
+"Freeruum-\n"
+"Verschelen"
+
+#: kdiff3.cpp:555
+msgid "Show Line Numbers"
+msgstr "Reegnummern wiesen"
+
+#: kdiff3.cpp:555
+msgid ""
+"Line\n"
+"Numbers"
+msgstr ""
+"Reeg-\n"
+"nummern"
+
+#: kdiff3.cpp:556
+msgid "Choose A Everywhere"
+msgstr "Jümmers A bruken"
+
+#: kdiff3.cpp:557
+msgid "Choose B Everywhere"
+msgstr "Jümmers B bruken"
+
+#: kdiff3.cpp:558
+msgid "Choose C Everywhere"
+msgstr "Jümmers C bruken"
+
+#: kdiff3.cpp:559
+msgid "Choose A for All Unsolved Conflicts"
+msgstr "A för all nich oplööst Konflikten bruken"
+
+#: kdiff3.cpp:560
+msgid "Choose B for All Unsolved Conflicts"
+msgstr "B för all nich oplööst Konflikten bruken"
+
+#: kdiff3.cpp:561
+msgid "Choose C for All Unsolved Conflicts"
+msgstr "C för all nich oplööst Konflikten bruken"
+
+#: kdiff3.cpp:562
+msgid "Choose A for All Unsolved Whitespace Conflicts"
+msgstr "A för all nich oplööst Freeruum-Konflikten bruken"
+
+#: kdiff3.cpp:563
+msgid "Choose B for All Unsolved Whitespace Conflicts"
+msgstr "B för all nich oplööst Freeruum-Konflikten bruken"
+
+#: kdiff3.cpp:564
+msgid "Choose C for All Unsolved Whitespace Conflicts"
+msgstr "C för all nich oplööst Freeruum-Konflikten bruken"
+
+#: kdiff3.cpp:565
+msgid "Automatically Solve Simple Conflicts"
+msgstr "Eenfach Konflikten automaatsch oplösen"
+
+#: kdiff3.cpp:566
+msgid "Set Deltas to Conflicts"
+msgstr "All Verschelen as Konflikten markeren"
+
+#: kdiff3.cpp:567
+msgid "Run Regular Expression Auto Merge"
+msgstr "Automaatsch Tosamenföhren mit reguleer Utdruck"
+
+#: kdiff3.cpp:568
+msgid "Automatically Solve History Conflicts"
+msgstr "Vörgeschicht-Konflikten automaatsch oplösen"
+
+#: kdiff3.cpp:569
+msgid "Split Diff At Selection"
+msgstr "Verscheel bi Köör delen"
+
+#: kdiff3.cpp:570
+msgid "Join Selected Diffs"
+msgstr "Utsöcht Verschelen tosamenstellen"
+
+#: kdiff3.cpp:572
+msgid "Show Window A"
+msgstr "Finster A wiesen"
+
+#: kdiff3.cpp:573
+msgid "Show Window B"
+msgstr "Finster B wiesen"
+
+#: kdiff3.cpp:574
+msgid "Show Window C"
+msgstr "Finster C wiesen"
+
+#: kdiff3.cpp:575 kdiff3.cpp:586
+msgid "Focus Next Window"
+msgstr "Nakamen Finster anmaken"
+
+#: kdiff3.cpp:577
+msgid "Normal Overview"
+msgstr "Normaal Översicht"
+
+#: kdiff3.cpp:578
+msgid "A vs. B Overview"
+msgstr "A-B-Översicht"
+
+#: kdiff3.cpp:579
+msgid "A vs. C Overview"
+msgstr "A-C-Översicht"
+
+#: kdiff3.cpp:580
+msgid "B vs. C Overview"
+msgstr "B-C-Översicht"
+
+#: kdiff3.cpp:581
+msgid "Word Wrap Diff Windows"
+msgstr "Regen ümbreken"
+
+#: kdiff3.cpp:582
+msgid "Add Manual Diff Alignment"
+msgstr "Verscheel-Utrichten vun Hand tofögen"
+
+#: kdiff3.cpp:583
+msgid "Clear All Manual Diff Alignments"
+msgstr "All Vun-Hand-Utrichten wegmaken"
+
+#: kdiff3.cpp:588
+msgid "Focus Prev Window"
+msgstr "Verleden Finster anmaken"
+
+#: kdiff3.cpp:589
+msgid "Toggle Split Orientation"
+msgstr "Deelricht wesseln"
+
+#: kdiff3.cpp:591
+msgid "Dir && Text Split Screen View"
+msgstr "Deelt Ansicht för Orner un Text"
+
+#: kdiff3.cpp:593
+msgid "Toggle Between Dir && Text View"
+msgstr "Orner- un Text-Ansicht wesseln"
+
+#: kdiff3.cpp:615 kdiff3.cpp:707 kdiff3.cpp:732 kdiff3.cpp:1003
+#: kdiff3.cpp:1024 pdiff.cpp:1098 pdiff.cpp:1170 pdiff.cpp:1208 pdiff.cpp:1224
+#: pdiff.cpp:1254 pdiff.cpp:1265 directorymergewindow.cpp:739
+msgid "Ready."
+msgstr "Praat."
+
+#: kdiff3.cpp:649 pdiff.cpp:1753
+msgid "The merge result hasn't been saved."
+msgstr "Tosamenföhr-Resultaat wöör nich sekert"
+
+#: kdiff3.cpp:650 kdiff3.cpp:660 kdiff3.cpp:672 pdiff.cpp:1016 pdiff.cpp:1754
+#: pdiff.cpp:1764 directorymergewindow.cpp:407 mergeresultwindow.cpp:303
+msgid "Warning"
+msgstr "Wohrschoen"
+
+#: kdiff3.cpp:651
+msgid "Save && Quit"
+msgstr "Sekern && Utmaken"
+
+#: kdiff3.cpp:652
+msgid "Quit Without Saving"
+msgstr "Utmaken un nich Sekern"
+
+#: kdiff3.cpp:660 pdiff.cpp:1764
+msgid "Saving the merge result failed."
+msgstr "Tosamenföhr-Resultaat lett sik nich sekern"
+
+#: kdiff3.cpp:671 pdiff.cpp:1015
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort?"
+msgstr "Du föhrst jüst Ornern tosamen. Wullt Du dat redig afbreken?"
+
+#: kdiff3.cpp:696
+msgid "Saving file..."
+msgstr "Datei warrt sekert..."
+
+#: kdiff3.cpp:713
+msgid "Saving file with a new filename..."
+msgstr "Datei warrt mit en nieg Dateinaam sekert..."
+
+#: kdiff3.cpp:715 kreplacements/kreplacements.cpp:620
+msgid "Save As..."
+msgstr "Sekern as..."
+
+#: kdiff3.cpp:974
+msgid "Exiting..."
+msgstr "Bi to utstiegen..."
+
+#: kdiff3.cpp:987
+msgid "Toggling toolbar..."
+msgstr "Warktüüchbalken warrt an-/utmaakt..."
+
+#: kdiff3.cpp:1008
+msgid "Toggle the statusbar..."
+msgstr "Statusbalken an-/utmaken..."
+
+#: fileaccess.cpp:612
+msgid ""
+"While trying to make a backup, deleting an older backup failed. \n"
+"Filename: "
+msgstr ""
+"Bi't Opstellen vun en Sekerheitkopie lett sik en öller Sekerheitkopie nich "
+"wegdoon.\n"
+"Dateinaam: "
+
+#: fileaccess.cpp:619
+msgid ""
+"While trying to make a backup, renaming failed. \n"
+"Filenames: "
+msgstr ""
+"Bi't Opstellen vun en Sekerheitkopie lett sik en Datei nich ümnömen.\n"
+"Dateinaams: "
+
+#: fileaccess.cpp:643
+#, kde-format
+msgid "Getting file status: %1"
+msgstr "Dateistatus warrt leest: %1"
+
+#: fileaccess.cpp:686
+#, kde-format
+msgid "Reading file: %1"
+msgstr "Datei warrt leest: %1"
+
+#: fileaccess.cpp:723
+#, kde-format
+msgid "Writing file: %1"
+msgstr "Datei warrt schreven: %1"
+
+#: fileaccess.cpp:751
+msgid "Out of memory"
+msgstr "Nich noog Spieker"
+
+#: fileaccess.cpp:786
+#, kde-format
+msgid "Making directory: %1"
+msgstr "Orner warrt opstellt: %1"
+
+#: fileaccess.cpp:806
+#, kde-format
+msgid "Removing directory: %1"
+msgstr "Orner warrt wegmaakt: %1"
+
+#: fileaccess.cpp:821
+#, kde-format
+msgid "Removing file: %1"
+msgstr "Datei warrt wegmaakt: %1"
+
+#: fileaccess.cpp:837
+#, kde-format
+msgid "Creating symbolic link: %1 -> %2"
+msgstr "Symboolsch Link warrt opstellt: %1 -> %2"
+
+#: fileaccess.cpp:864
+#, kde-format
+msgid "Renaming file: %1 -> %2"
+msgstr "Datei warrt ümnöömt: %1 -> %2"
+
+#: fileaccess.cpp:897
+#, kde-format
+msgid "Copying file: %1 -> %2"
+msgstr "Datei warrt kopeert: %1 -> %2"
+
+#: fileaccess.cpp:911
+#, kde-format
+msgid ""
+"Error during file copy operation: Opening file for reading failed. Filename: "
+"%1"
+msgstr "Fehler bi't Koperen: Datei lett sik nich lesen. Dateinaam: %1"
+
+#: fileaccess.cpp:917
+#, kde-format
+msgid ""
+"Error during file copy operation: Opening file for writing failed. Filename: "
+"%1"
+msgstr "Fehler bi't Koperen: Datei lett sik nich schrieven. Dateinaam: %1"
+
+#: fileaccess.cpp:932
+#, kde-format
+msgid "Error during file copy operation: Reading failed. Filename: %1"
+msgstr "Fehler bi't Koperen: Lesen fehlslaan. Dateinaam: %1"
+
+#: fileaccess.cpp:941
+#, kde-format
+msgid "Error during file copy operation: Writing failed. Filename: %1"
+msgstr "Fehler bi't Koperen: Schrieven fehlslaan. Dateinaam: %1"
+
+#: fileaccess.cpp:1237
+msgid "Reading directory: "
+msgstr "Orner warrt leest: "
+
+#: fileaccess.cpp:1361
+#, kde-format
+msgid "Listing directory: %1"
+msgstr "Orner warrt oplist: %1"
+
+#: fileaccess.cpp:1495 smalldialogs.cpp:179 smalldialogs.cpp:396
+msgid "&Cancel"
+msgstr "&Afbreken"
+
+#: diff.cpp:250
+msgid "Writing clipboard data to temp file failed."
+msgstr "Twischenaflaag-Daten laat sik nich as Temporeerdatei sekern."
+
+#: diff.cpp:254
+msgid "From Clipboard"
+msgstr "Ut Twischenaflaag"
+
+#: diff.cpp:502
+#, kde-format
+msgid ""
+"Preprocessing possibly failed. Check this command:\n"
+"\n"
+"  %1\n"
+"\n"
+"The preprocessing command will be disabled now."
+msgstr ""
+"Dat Vörverarbeiden is villicht fehlslaan. Prööv dissen Befehl:\n"
+"\n"
+"  %1\n"
+"\n"
+"De Vörverarbeid-Befehl warrt nu utmaakt."
+
+#: diff.cpp:542
+#, kde-format
+msgid ""
+"The line-matching-preprocessing possibly failed. Check this command:\n"
+"\n"
+"  %1\n"
+"\n"
+"The line-matching-preprocessing command will be disabled now."
+msgstr ""
+"De Vörverarbeiden för de Regenutrichten is villicht fehlslaan. Prööv dissen "
+"Befehl:\n"
+"\n"
+"  %1\n"
+"\n"
+"De Vörverarbeid-Befehl för de Regenutrichten warrt nu utmaakt."
+
+#: diff.cpp:1658 diff.cpp:1672
+msgid ""
+"Data loss error:\n"
+"If it is reproducable please contact the author.\n"
+msgstr ""
+"Daten sünd wegkamen:\n"
+"Lett sik dit wedderhalen, snack dor bitte den Autor op an.\n"
+
+#: diff.cpp:1660 diff.cpp:1674
+msgid "Severe Internal Error"
+msgstr "Swoor intern Fehler"
+
+#: smalldialogs.cpp:58
+msgid "A (Base):"
+msgstr "A (Basis):"
+
+#: smalldialogs.cpp:65 smalldialogs.cpp:82 smalldialogs.cpp:99
+#: smalldialogs.cpp:142
+msgid "File..."
+msgstr "Datei..."
+
+#: smalldialogs.cpp:67 smalldialogs.cpp:84 smalldialogs.cpp:101
+#: smalldialogs.cpp:144
+msgid "Dir..."
+msgstr "Orner..."
+
+#: smalldialogs.cpp:93
+msgid "C (Optional):"
+msgstr "C (köörwies):"
+
+#: smalldialogs.cpp:110 optiondialog.cpp:873 directorymergewindow.cpp:1893
+#: directorymergewindow.cpp:1894 directorymergewindow.cpp:3011
+msgid "Merge"
+msgstr "Tosamenföhren"
+
+#: smalldialogs.cpp:116
+msgid "Swap/Copy Names ..."
+msgstr "Naams tuschen/koperen..."
+
+#: smalldialogs.cpp:121 smalldialogs.cpp:122 smalldialogs.cpp:123
+#, kde-format
+msgid "Swap %1<->%2"
+msgstr "%1<->%2 tuschen"
+
+#: smalldialogs.cpp:124 smalldialogs.cpp:125 smalldialogs.cpp:126
+#, kde-format
+msgid "Copy %1->Output"
+msgstr "%1 -> Utgaav koperen"
+
+#: smalldialogs.cpp:127 smalldialogs.cpp:128 smalldialogs.cpp:129
+#, kde-format
+msgid "Swap %1<->Output"
+msgstr "%1 <-> Utgaav tuschen"
+
+#: smalldialogs.cpp:136
+msgid "Output (optional):"
+msgstr "Utgaav (köörwies):"
+
+#: smalldialogs.cpp:168
+msgid "Configure..."
+msgstr "Instellen..."
+
+#: smalldialogs.cpp:174
+msgid "&OK"
+msgstr "&OK"
+
+#: smalldialogs.cpp:362
+msgid "Search text:"
+msgstr "Sööktext:"
+
+#: smalldialogs.cpp:369
+msgid "Case sensitive"
+msgstr "Op Groot-/Lüttschrieven kieken"
+
+#: smalldialogs.cpp:372
+msgid "Search A"
+msgstr "A dörkieken"
+
+#: smalldialogs.cpp:377
+msgid "Search B"
+msgstr "B dörkieken"
+
+#: smalldialogs.cpp:382
+msgid "Search C"
+msgstr "C dörkieken"
+
+#: smalldialogs.cpp:387
+msgid "Search output"
+msgstr "Utgaav dörkieken"
+
+#: smalldialogs.cpp:392
+msgid "&Search"
+msgstr "&Söken"
+
+#: smalldialogs.cpp:409
+msgid "Regular Expression Tester"
+msgstr "Reguleer Utdrück utproberen"
+
+#: smalldialogs.cpp:414 optiondialog.cpp:940
+msgid "Auto merge regular expression:"
+msgstr "Reguleer Utdruck för't autom. Tosamenföhren:"
+
+#: smalldialogs.cpp:422
+msgid "Example auto merge line:"
+msgstr "Bispillreeg för't autom. Tosamenföhren:"
+
+#: smalldialogs.cpp:424
+msgid "For auto merge test copy a line as used in your files."
+msgstr ""
+"Kopeer en Reeg, as se binnen Dien Dateien vörkamen kann, wenn Du dat autom. "
+"Tosamenföhren utproberen wullt."
+
+#: smalldialogs.cpp:430 smalldialogs.cpp:459 smalldialogs.cpp:496
+msgid "Match result:"
+msgstr "Passen Resultaat:"
+
+#: smalldialogs.cpp:441 optiondialog.cpp:966
+msgid "History start regular expression:"
+msgstr "Reguleer Utdruck för Vörgeschicht-Anfang:"
+
+#: smalldialogs.cpp:449
+msgid "Example history start line (with leading comment):"
+msgstr "Bispillreeg för en Vörgeschicht-Anfang (mit vöranstellt Kommentar):"
+
+#: smalldialogs.cpp:452
+msgid ""
+"Copy a history start line as used in your files,\n"
+"including the leading comment."
+msgstr ""
+"Kopeer en Vörgeschicht-Anfangreeg, as se binnen\n"
+"Dien Dateien vörkamen kann, un ok den vöranstellten\n"
+"Kommentar."
+
+#: smalldialogs.cpp:470 optiondialog.cpp:976
+msgid "History entry start regular expression:"
+msgstr "Reguleer Utdruck för Vörgeschichtindrag-Anfang:"
+
+#: smalldialogs.cpp:478
+msgid "History sort key order:"
+msgstr "Vörgeschicht-Sorteerreeg:"
+
+#: smalldialogs.cpp:486
+msgid "Example history entry start line (without leading comment):"
+msgstr ""
+"Bispillreeg för en Vörgeschichtindrag-Anfang (ahn vöranstellt Kommentar):"
+
+#: smalldialogs.cpp:488
+msgid ""
+"Copy a history entry start line as used in your files,\n"
+"but omit the leading comment."
+msgstr ""
+"Kopeer en Vörgeschichtindrag-Anfangreeg, as se\n"
+"binnen Dien Dateien vörkamen kann, man nich den\n"
+"vöranstellten Kommentar."
+
+#: smalldialogs.cpp:503
+msgid "Sort key result:"
+msgstr "Sorteerresultaat:"
+
+#: smalldialogs.cpp:510
+msgid "OK"
+msgstr "OK"
+
+#: smalldialogs.cpp:514 kreplacements/kreplacements.h:103
+#: kreplacements/kreplacements.cpp:164 kreplacements/kreplacements.cpp:195
+msgid "Cancel"
+msgstr "Afbreken"
+
+#: smalldialogs.cpp:554 smalldialogs.cpp:564 smalldialogs.cpp:585
+msgid "Match success."
+msgstr "Dreper funnen."
+
+#: smalldialogs.cpp:558 smalldialogs.cpp:568 smalldialogs.cpp:591
+msgid "Match failed."
+msgstr "Keen Dreper funnen."
+
+#: smalldialogs.cpp:576
+msgid "Opening and closing parentheses don't match in regular expression."
+msgstr ""
+"Binnen den reguleren Utdruck passt de linken un rechten Klemmen nich tosamen."
+
+#: optiondialog.cpp:367
+msgid "Unicode, 8 bit"
+msgstr "Unicode, 8 Bit"
+
+#: optiondialog.cpp:368
+msgid "Unicode"
+msgstr "Unicode"
+
+#: optiondialog.cpp:369
+msgid "Latin1"
+msgstr "Latin1"
+
+#: optiondialog.cpp:388
+msgid "Change this if non-ASCII characters are not displayed correctly."
+msgstr ""
+"Änner dit, wenn Tekens buten dat ASCII-Rebeet nich propper wiest warrt."
+
+#: optiondialog.cpp:465
+msgid "Configure"
+msgstr "Instellen"
+
+#: optiondialog.cpp:531
+msgid "Font"
+msgstr "Schriftoort"
+
+#: optiondialog.cpp:532
+msgid "Editor & Diff Output Font"
+msgstr "Editor- un Verscheel-Schriftoort"
+
+#: optiondialog.cpp:556
+msgid "Italic font for deltas"
+msgstr "Kursievschrift för Verschelen"
+
+#: optiondialog.cpp:559
+msgid ""
+"Selects the italic version of the font for differences.\n"
+"If the font doesn't support italic characters, then this does nothing."
+msgstr ""
+"Bruukt för Verschelen de Schriftoort in kursiev.\n"
+"Gifft dat för de Schriftoort keen kursive Tekens, deit disse Optschoon nix."
+
+#: optiondialog.cpp:568
+msgid "Color"
+msgstr "Klöör"
+
+#: optiondialog.cpp:569
+msgid "Colors Settings"
+msgstr "Klören instellen"
+
+#: optiondialog.cpp:588
+msgid "Editor and Diff Views:"
+msgstr "Editor- un Verscheel-Ansichten:"
+
+#: optiondialog.cpp:596
+msgid "Foreground color:"
+msgstr "Vörgrundklöör:"
+
+#: optiondialog.cpp:603
+msgid "Background color:"
+msgstr "Achtergrundklöör:"
+
+#: optiondialog.cpp:612
+msgid "Diff background color:"
+msgstr "Verscheel-Achtergrundklöör:"
+
+#: optiondialog.cpp:620
+msgid "Color A:"
+msgstr "Klöör A:"
+
+#: optiondialog.cpp:628
+msgid "Color B:"
+msgstr "Klöör B:"
+
+#: optiondialog.cpp:636
+msgid "Color C:"
+msgstr "Klöör C:"
+
+#: optiondialog.cpp:643
+msgid "Conflict color:"
+msgstr "Konflikt-Klöör:"
+
+#: optiondialog.cpp:651
+msgid "Current range background color:"
+msgstr "Achtergrundklöör för aktuell Rebeet:"
+
+#: optiondialog.cpp:659
+msgid "Current range diff background color:"
+msgstr "Verscheel-Achtergrundklöör för aktuell Rebeet:"
+
+#: optiondialog.cpp:666
+msgid "Color for manually aligned difference ranges:"
+msgstr "Klöör för vun Hand utricht Verscheelrebeden:"
+
+#: optiondialog.cpp:672
+msgid "Directory Comparison View:"
+msgstr "Ornerverscheel-Ansicht:"
+
+#: optiondialog.cpp:678
+msgid "Newest file color:"
+msgstr "Klöör för niegst Datei:"
+
+#: optiondialog.cpp:682
+msgid ""
+"Changing this color will only be effective when starting the next directory "
+"comparison."
+msgstr ""
+"Ännern an disse Klöör warrt eerst bi't nakamen Verglieken vun Ornern bruukt."
+
+#: optiondialog.cpp:687
+msgid "Oldest file color:"
+msgstr "Klöör för öllst Datei:"
+
+#: optiondialog.cpp:695
+msgid "Middle age file color:"
+msgstr "Klöör för en middeloolt Datei:"
+
+#: optiondialog.cpp:703
+msgid "Color for missing files:"
+msgstr "Klöör för fehlen Dateien:"
+
+#: optiondialog.cpp:717
+msgid "Editor"
+msgstr "Editor"
+
+#: optiondialog.cpp:718
+msgid "Editor Behavior"
+msgstr "Editor-Bedregen"
+
+#: optiondialog.cpp:732
+msgid "Tab inserts spaces"
+msgstr "Tabtast föögt Freetekens in"
+
+#: optiondialog.cpp:735
+msgid ""
+"On: Pressing tab generates the appropriate number of spaces.\n"
+"Off: A Tab-character will be inserted."
+msgstr ""
+"An: De Tabtast föögt en propper Tall vun Freetekens in.\n"
+"Ut: De Tabtast föögt en Tabteken in."
+
+#: optiondialog.cpp:741
+msgid "Tab size:"
+msgstr "Tab-Breed:"
+
+#: optiondialog.cpp:747
+msgid "Auto indentation"
+msgstr "Autom. inrücken"
+
+#: optiondialog.cpp:750
+msgid "On: The indentation of the previous line is used for a new line.\n"
+msgstr "An: De Inrückdeepde ut de verleden Reeg warrt för de niege bruukt.\n"
+
+#: optiondialog.cpp:754
+msgid "Auto copy selection"
+msgstr "Köör autom. koperen"
+
+#: optiondialog.cpp:757
+msgid ""
+"On: Any selection is immediately written to the clipboard.\n"
+"Off: You must explicitely copy e.g. via Ctrl-C."
+msgstr ""
+"An: All Kören warrt fuurts na de Twischenaflaag kopeert.\n"
+"Ut: Du muttst dat Koperen sülven maken, a.B. mit Strg+C."
+
+#: optiondialog.cpp:762
+msgid "Line end style:"
+msgstr "Reegenn-Stil:"
+
+#: optiondialog.cpp:776
+msgid ""
+"Sets the line endings for when an edited file is saved.\n"
+"DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
+msgstr ""
+"Leggt de Tekens fast, de bi't Sekern för Reegennen bruukt warrt.\n"
+"DOS/Windows: CR+LF, UNIX: LF (CR = 0D, LF = 0A)"
+
+#: optiondialog.cpp:788
+msgid "Diff"
+msgstr "Verscheel"
+
+#: optiondialog.cpp:789
+msgid "Diff Settings"
+msgstr "Verscheel-Instellen"
+
+#: optiondialog.cpp:813
+msgid "Treat as white space."
+msgstr "As Freeruum hanteren"
+
+#: optiondialog.cpp:815
+msgid "Ignore numbers"
+msgstr "Tallen övergahn"
+
+#: optiondialog.cpp:818
+msgid ""
+"Ignore number characters during line matching phase. (Similar to Ignore "
+"white space.)\n"
+"Might help to compare files with numeric data."
+msgstr ""
+"Talltekens bi't Regenutrichten övergahn (liek to \"Freerüüm övergahn\").\n"
+"Mag bi't Verglieken vun Dateien mit Tallen beter Resultaten geven."
+
+#: optiondialog.cpp:823
+msgid "Ignore C/C++ comments"
+msgstr "C/C++-Kommentaren övergahn"
+
+#: optiondialog.cpp:825
+msgid "Treat C/C++ comments like white space."
+msgstr "C/C++-Kommentaren liek as Freerüüm hanteren."
+
+#: optiondialog.cpp:829
+msgid "Ignore case"
+msgstr "Groot-/Lüttschrieven övergahn"
+
+#: optiondialog.cpp:832
+msgid "Treat case differences like white space changes. ('a'<=>'A')"
+msgstr ""
+"Verschelen in Groot- un Lüttschrieven liek as Freerüüm-Verschelen hanteren."
+
+#: optiondialog.cpp:836
+msgid "Preprocessor command:"
+msgstr "Vörverarbeid-Befehl:"
+
+#: optiondialog.cpp:840
+msgid "User defined pre-processing. (See the docs for details.)"
+msgstr ""
+"Vun Bruker fastleggt Vörverarbeiden (Enkelheiten binnen de Dokmentatschoon)."
+
+#: optiondialog.cpp:843
+msgid "Line-matching preprocessor command:"
+msgstr "Vörverarbeid-Befehl för't Regenutrichten:"
+
+#: optiondialog.cpp:847
+msgid ""
+"This pre-processor is only used during line matching.\n"
+"(See the docs for details.)"
+msgstr ""
+"Disse Vörverarbeiden warrt bloots bi't Regenutrichten bruukt.\n"
+"(Enkelheiten binnen de Dokmentatschoon)"
+
+#: optiondialog.cpp:850
+msgid "Try hard (slower)"
+msgstr "In't Tüüch leggen (langsamer)"
+
+#: optiondialog.cpp:853
+msgid ""
+"Enables the --minimal option for the external diff.\n"
+"The analysis of big files will be much slower."
+msgstr ""
+"Bruukt de Optschoon \"--minimal\" vun't Diff-Programm.\n"
+"Dat Dörkieken vun groot Dateien warrt denn bannig wat langsamer."
+
+#: optiondialog.cpp:858
+msgid "Align B and C for 3 input files"
+msgstr "B un C för 3 Ingaavdateien utrichten"
+
+#: optiondialog.cpp:861
+msgid ""
+"Try to align B and C when comparing or merging three input files.\n"
+"Not recommended for merging because merge might get more complicated.\n"
+"(Default is off.)"
+msgstr ""
+"B un C bi't Verglieken oder Tosamenföhren vun 3 Ingaavdateien toenanner "
+"utrichten.\n"
+"Bi't Tosamenföhren nich anraadt, dat mag to vigeliensch warrn.\n"
+"(Standard is Ut.)"
+
+#: optiondialog.cpp:874
+msgid "Merge Settings"
+msgstr "Tosamenföhr-Instellen"
+
+#: optiondialog.cpp:889
+msgid "Auto advance delay (ms):"
+msgstr "Töövtiet för't autom. Wiedergahn (ms):"
+
+#: optiondialog.cpp:894
+msgid ""
+"When in Auto-Advance mode the result of the current selection is shown \n"
+"for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
+msgstr ""
+"Is dat Automaatsche Wiedergahn anmaakt, warrt dat Resultaat vun de aktuelle "
+"Köör\n"
+"för de angeven Tiet wiest, ehr dat Programm na den nakamen Konflikt jumpt. "
+"Weerten: 0 - 2000 ms."
+
+#: optiondialog.cpp:899
+msgid "Show info dialogs"
+msgstr "Infodialogen wiesen"
+
+#: optiondialog.cpp:901
+msgid "Show a dialog with information about the number of conflicts."
+msgstr "En Dialoog mit de Tall vun Konflikten wiesen"
+
+#: optiondialog.cpp:904
+msgid "White space 2-file merge default:"
+msgstr "Freeruum-Standard bi 2-Dateien-Tosamenföhren:"
+
+#: optiondialog.cpp:908 optiondialog.cpp:921
+msgid "Manual Choice"
+msgstr "Köör vun Hand"
+
+#: optiondialog.cpp:912 optiondialog.cpp:926
+msgid ""
+"Allow the merge algorithm to automatically select an input for white-space-"
+"only changes."
+msgstr ""
+"Den Tosamenföhr-Algoritmus bi Freeruum-Konflikten automaatsch en Born "
+"utsöken laten"
+
+#: optiondialog.cpp:917
+msgid "White space 3-file merge default:"
+msgstr "Freeruum-Standard bi 3-Dateien-Tosamenföhren:"
+
+#: optiondialog.cpp:931
+msgid "Automatic Merge Regular Expression"
+msgstr "Reguleer Utdruck för't autom. Tosamenföhren"
+
+#: optiondialog.cpp:944
+msgid ""
+"Regular expression for lines where KDiff3 should automatically choose one "
+"source.\n"
+"When a line with a conflict matches the regular expression then\n"
+"- if available - C, otherwise B will be chosen."
+msgstr ""
+"Reguleer Utdruck för Regen, bi de KDiff3 automaatsch een Born utsöken "
+"schall.\n"
+"Passt de Utdruck op en Reeg mit en Konflikt, warrt - wenn verföögbor - de "
+"Reeg\n"
+"ut Born C, sünst de Reeg ut Born B bruukt."
+
+#: optiondialog.cpp:950
+msgid "Run regular expression auto merge on merge start"
+msgstr ""
+"Bi't Starten vun't Tosamenföhren automaatsch na reguleer Utdruck "
+"tosamenföhren"
+
+#: optiondialog.cpp:952
+msgid ""
+"Run the merge for auto merge regular expressions\n"
+"immediately when a merge starts.\n"
+msgstr ""
+"Dat automaatsche Tosamenföhren langs de reguleren\n"
+"Utdrück för't automaatsche Tosamenföhren direktemang\n"
+"utföhren, wenn dat Tosamenföhren anfangt.\n"
+
+#: optiondialog.cpp:957
+msgid "Version Control History Merging"
+msgstr "Tosamenföhren mit Verschoonkuntrull-Vörgeschicht"
+
+#: optiondialog.cpp:970
+msgid ""
+"Regular expression for the start of the version control history entry.\n"
+"Usually this line contains the \"$Log$\"-keyword.\n"
+"Default value: \".*\\$Log.*\\$.*\""
+msgstr ""
+"Reguleer Utdruck för den Anfang vun den Verschoonkuntrull-"
+"Vörgeschichtindrag.\n"
+"Normalerwies bargt disse Reeg dat Slötelwoort \"$Log$\".\n"
+"Standardweert: \".*\\$Log.*\\$.*\""
+
+#: optiondialog.cpp:988
+msgid ""
+"A version control history entry consists of several lines.\n"
+"Specify the regular expression to detect the first line (without the leading "
+"comment).\n"
+"Use parentheses to group the keys you want to use for sorting.\n"
+"If left empty, then KDiff3 assumes that empty lines separate history "
+"entries.\n"
+"See the documentation for details."
+msgstr ""
+"En Verschoonkuntrull-Vörgeschichtindrag geiht över mehr Regen.\n"
+"Hier kannst Du den reguleren Utdruck angeven, mit den sik de eerste Reeg "
+"kennen lett (ahn den vöranstellten Kommentar).\n"
+"Mit Klemmen kannst Du Slötels för't Sorteren tosamenkoppeln.\n"
+"Lettst Du dat leddig, nimmt KDiff3 an, dat leddig Regen twischen "
+"Vörgeschichtindrääg staht.\n"
+"De Enkelheiten staht binnen de Dokmentatschoon."
+
+#: optiondialog.cpp:996
+msgid "History merge sorting"
+msgstr "Sorteren bi Vörgeschicht-Tosamenföhren"
+
+#: optiondialog.cpp:998
+msgid "Sort version control history by a key."
+msgstr "Verschoonkuntrull-Vörgeschicht na Slötel sorteren"
+
+#: optiondialog.cpp:1008
+msgid "History entry start sort key order:"
+msgstr "Sorteerreeg för Vörgeschichtindrag-Anfang:"
+
+#: optiondialog.cpp:1012
+msgid ""
+"Each parentheses used in the regular expression for the history start entry\n"
+"groups a key that can be used for sorting.\n"
+"Specify the list of keys (that are numbered in order of occurrence\n"
+"starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
+"If left empty, then no sorting will be done.\n"
+"See the documentation for details."
+msgstr ""
+"Elkeen Klemmenpoor binnen den reguleren Utdruck för den Vörgeschichtindrag-"
+"Anfang\n"
+"koppelt en Slötel tosamen, de sik bi't Sorteren bruken lett.\n"
+"Hier kannst Du de Reeg för de Slötels över ehr Nummern angeven\n"
+"(fangt bi 1 an, nummereert na de Reeg, in de se in den reguleren Utdruck "
+"staht).\n"
+"Bruuk Kommas (\",\") as Trennteken (a.B.: \"4,5,6,1,2,3,7\").\n"
+"Lettst Du dat leddig, warrt nich sorteert.\n"
+"De Enkelheiten staht binnen de Dokmentatschoon."
+
+#: optiondialog.cpp:1023
+msgid "Merge version control history on merge start"
+msgstr ""
+"Verschoonkuntrull-Vörgeschicht bi't Starten vun't Tosamenföhren tosamenföhren"
+
+#: optiondialog.cpp:1025
+msgid "Run version control history automerge on merge start."
+msgstr ""
+"Bi't Starten vun't Tosamenföhren automaatsch Verschoonkuntrull-Vörgeschicht "
+"tosamenföhren"
+
+#: optiondialog.cpp:1029
+msgid "Max number of history entries:"
+msgstr "Hööchsttall vun Vörgeschichtindrääg:"
+
+#: optiondialog.cpp:1032
+msgid "Cut off after specified number. Use -1 for infinite number of entries."
+msgstr "Na angeven Tall ophollen. Bi -1 nich ophollen."
+
+#: optiondialog.cpp:1036
+msgid "Test your regular expressions"
+msgstr "Regulere Utdrück utproberen"
+
+#: optiondialog.cpp:1041
+msgid "Irrelevant merge command:"
+msgstr "Tosamenföhr-Befehl bi fehlen Ännern:"
+
+#: optiondialog.cpp:1045
+msgid ""
+"If specified this script is run after automerge\n"
+"when no other relevant changes were detected.\n"
+"Called with the parameters: filename1 filename2 filename3"
+msgstr ""
+"Wenn angeven, warrt dit Skript na't automaatsche\n"
+"Tosamenföhren opropen, wenn dat sünst keen Ännern geven hett.\n"
+"Warrt mit disse Parameters opropen: Dateinaam1 Dateinaam2 Dateinaam3"
+
+#: optiondialog.cpp:1051
+msgid "Auto save and quit on merge without conflicts"
+msgstr "Na't Tosamenföhren ahn Konflikten autom. sekern un utmaken"
+
+#: optiondialog.cpp:1054
+msgid ""
+"When KDiff3 was started for a file-merge from the commandline and all\n"
+"conflicts are solvable without user interaction then automatically save and "
+"quit.\n"
+"(Similar to command line option \"--auto\"."
+msgstr ""
+"Wenn KDiff3 för't Tosamenföhren vun Dateien opropen warrt un sik all\n"
+"Konflikten oplösen laat un de Bruker nix bidregen mutt, denn\n"
+"dat Resultaat automaatsch sekern un dat Programm utmaken.\n"
+"(Liek to de Befehlsreegoptschoon \"--auto\".)"
+
+#: optiondialog.cpp:1065 optiondialog.cpp:1066
+msgid "Directory Merge"
+msgstr "Orner-Tosamenföhren"
+
+#: optiondialog.cpp:1079
+msgid "Recursive directories"
+msgstr "Rekursiev"
+
+#: optiondialog.cpp:1081
+msgid "Whether to analyze subdirectories or not."
+msgstr "Leggt fast, wat ok Ünnerornern dörkeken warrt."
+
+#: optiondialog.cpp:1083
+msgid "File pattern(s):"
+msgstr "Dateimuster(n):"
+
+#: optiondialog.cpp:1088
+msgid ""
+"Pattern(s) of files to be analyzed. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"Muster(n) vun Dateien, de Du bekieken wullt.\n"
+"Platzholltekens: \"*\" un \"?\"\n"
+"Trennteken twischen Mustern: \";\""
+
+#: optiondialog.cpp:1094
+msgid "File-anti-pattern(s):"
+msgstr "Datei-Utsluutmuster(n):"
+
+#: optiondialog.cpp:1099
+msgid ""
+"Pattern(s) of files to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"Muster(n) för Dateien, de Du vun't Bekieken utsluten wullt.\n"
+"Platzholltekens: \"*\" un \"?\"\n"
+"Trennteken twischen Mustern: \";\""
+
+#: optiondialog.cpp:1105
+msgid "Dir-anti-pattern(s):"
+msgstr "Orner-Utsluutmuster(n):"
+
+#: optiondialog.cpp:1110
+msgid ""
+"Pattern(s) of directories to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"Muster(n) för Ornern, de Du vun't Bekieken utsluten wullt.\n"
+"Platzholltekens: \"*\" un \"?\"\n"
+"Trennteken twischen Mustern: \";\""
+
+#: optiondialog.cpp:1116
+msgid "Use .cvsignore"
+msgstr "\".cvsignore\" bruken"
+
+#: optiondialog.cpp:1119
+msgid ""
+"Extends the antipattern to anything that would be ignored by CVS.\n"
+"Via local \".cvsignore\"-files this can be directory specific."
+msgstr ""
+"Verwiedert dat Utsluutmuster op allens, wat CVS övergahn dee.\n"
+"Bi lokaal \".cvsignore\"-Dateien kann dat vun den Orner afhangen."
+
+#: optiondialog.cpp:1124
+msgid "Find hidden files and directories"
+msgstr "Versteken Dateien un Ornern bekieken"
+
+#: optiondialog.cpp:1127
+msgid "Finds files and directories with the hidden attribute."
+msgstr "Ok Ornern un Dateien mit dat \"Versteken\"-Attribut bekieken"
+
+#: optiondialog.cpp:1129
+msgid "Finds files and directories starting with '.'."
+msgstr "Ok Dateien un Ornern bekieken, de mit en Punkt anfangt"
+
+#: optiondialog.cpp:1133
+msgid "Follow file links"
+msgstr "Dateilinks nagahn"
+
+#: optiondialog.cpp:1136
+msgid ""
+"On: Compare the file the link points to.\n"
+"Off: Compare the links."
+msgstr ""
+"An: De Datei verglieken, op de de Link wiest.\n"
+"Ut: De Links verglieken."
+
+#: optiondialog.cpp:1141
+msgid "Follow directory links"
+msgstr "Ornerlinks nagahn"
+
+#: optiondialog.cpp:1144
+msgid ""
+"On: Compare the directory the link points to.\n"
+"Off: Compare the links."
+msgstr ""
+"An: Den Orner verglieken, op den de Link wiest.\n"
+"Ut: De Links verglieken."
+
+#: optiondialog.cpp:1160
+msgid "Case sensitive filename comparison"
+msgstr "Bi Dateinaam-Vergliek op Groot- un Lüttschrieven kieken"
+
+#: optiondialog.cpp:1163
+msgid ""
+"The directory comparison will compare files or directories when their names "
+"match.\n"
+"Set this option if the case of the names must match. (Default for Windows is "
+"off, otherwise on.)"
+msgstr ""
+"De Ornervergliek vergliekt Dateien oder Ornern, wenn ehr Naams liek sünd.\n"
+"Maakt dit an, wenn de Groot-/Lüttschrieven liek wesen mutt. (Op Windows "
+"standardwies ut, sünst an)."
+
+#: optiondialog.cpp:1167
+msgid "File Comparison Mode"
+msgstr "Dateivergliek-Bedriefoort"
+
+#: optiondialog.cpp:1173
+msgid "Binary comparison"
+msgstr "Bineervergliek"
+
+#: optiondialog.cpp:1174
+msgid "Binary comparison of each file. (Default)"
+msgstr "Bineervergliek bi all Dateien (Standard)"
+
+#: optiondialog.cpp:1177
+msgid "Full analysis"
+msgstr "Heel Dörkiek"
+
+#: optiondialog.cpp:1178
+msgid ""
+"Do a full analysis and show statistics information in extra columns.\n"
+"(Slower than a binary comparison, much slower for binary files.)"
+msgstr ""
+"En heel Dörkiek doon un bito Statistik binnen besünner Striepen wiesen.\n"
+"(Langsamer as en Bineervergliek, veel langsamer bi Bineerdateien.)"
+
+#: optiondialog.cpp:1182
+msgid "Trust the size and modification date (unsafe)"
+msgstr "Grött un Ännerdatum bruken (nich seker)"
+
+#: optiondialog.cpp:1183
+msgid ""
+"Assume that files are equal if the modification date and file length are "
+"equal.\n"
+"Files with equal contents but different modification dates will appear as "
+"different.\n"
+"Useful for big directories or slow networks."
+msgstr ""
+"Dateien mit liek Ännerdatum un Längde as liek hanteren.\n"
+"Dateien mit liek Inholt, man verscheden Ännerdatum warrt as verscheden "
+"wiest.\n"
+"Goot bi groot Ornern oder binnen langsam Nettwarken."
+
+#: optiondialog.cpp:1188
+msgid ""
+"Trust the size and date, but use binary comparison if date doesn't match "
+"(unsafe)"
+msgstr ""
+"Grött un Ännerdatum bruken, man bi nich liek Datum bineer verglieken (nich "
+"seker)"
+
+#: optiondialog.cpp:1189
+msgid ""
+"Assume that files are equal if the modification date and file length are "
+"equal.\n"
+"If the date isn't equal but the sizes are, use binary comparison.\n"
+"Useful for big directories or slow networks."
+msgstr ""
+"Dateien mit liek Ännerdatum un Längde as liek hanteren.\n"
+"Is de Grött liek, man dat Datum nich, de Dateien bineer verglieken.\n"
+"Goot bi groot Ornern oder binnen langsam Nettwarken."
+
+#: optiondialog.cpp:1194
+msgid "Trust the size (unsafe)"
+msgstr "Grött bruken (nich seker)"
+
+#: optiondialog.cpp:1195
+msgid ""
+"Assume that files are equal if their file lengths are equal.\n"
+"Useful for big directories or slow networks when the date is modified during "
+"download."
+msgstr ""
+"Dateien mit liek Längde as liek hanteren.\n"
+"Goot bi groot Ornern oder binnen langsam Nettwarken, wenn sik dat Datum bi't "
+"Daalladen ännert."
+
+#: optiondialog.cpp:1203
+msgid "Synchronize directories"
+msgstr "Ornern synkroniseren"
+
+#: optiondialog.cpp:1206
+msgid ""
+"Offers to store files in both directories so that\n"
+"both directories are the same afterwards.\n"
+"Works only when comparing two directories without specifying a destination."
+msgstr ""
+"Dateien ut un na beed Ornern so koperen, dat\n"
+"se achteran liek sünd.\n"
+"Funkscheneert bloots bi't Verglieken vun twee Ornern, un wenn keen Teel "
+"angeven is."
+
+#: optiondialog.cpp:1212
+msgid "White space differences considered equal"
+msgstr "Freeruum-Verschelen as liek hanteren"
+
+#: optiondialog.cpp:1215
+msgid ""
+"If files differ only by white space consider them equal.\n"
+"This is only active when full analysis is chosen."
+msgstr ""
+"Dateien as liek hanteren, wenn se bloots in de Freerüüm verscheden sünd.\n"
+"Dit is bloots anmaakt, wenn Du \"Heel Dörkiek\" utsöcht hest."
+
+#: optiondialog.cpp:1221
+msgid "Copy newer instead of merging (unsafe)"
+msgstr "Nieger Datei koperen, nich tosamenföhren (nich seker)"
+
+#: optiondialog.cpp:1224
+msgid ""
+"Don't look inside, just take the newer file.\n"
+"(Use this only if you know what you are doing!)\n"
+"Only effective when comparing two directories."
+msgstr ""
+"Inholt nich bekieken, eenfach de niegere Datei nehmen.\n"
+"(Bruuk dit bloots, wenn Du nau weetst, wat Du dor deist!)\n"
+"Funkscheneert bloots bi't Verglieken vun twee Ornern."
+
+#: optiondialog.cpp:1229
+msgid "Backup files (.orig)"
+msgstr "Sekerheitkopie (.orig) opstellen"
+
+#: optiondialog.cpp:1232
+msgid ""
+"When a file would be saved over an old file, then the old file\n"
+"will be renamed with a '.orig'-extension instead of being deleted."
+msgstr ""
+"Schull en Datei över en öller Datei schreven warrn, denn warrt de\n"
+"öllere Datei ümnöömt un \".orig\" na ehr Naam anhangt."
+
+#: optiondialog.cpp:1328 optiondialog.cpp:1329
+msgid "Regional Settings"
+msgstr "Regiooninstellen"
+
+#: optiondialog.cpp:1429
+msgid "Language (restart required)"
+msgstr "Spraak (Niegstart nödig)"
+
+#: optiondialog.cpp:1461
+msgid ""
+"Choose the language of the GUI-strings or \"Auto\".\n"
+"For a change of language to take place, quit and restart KDiff3."
+msgstr ""
+"Hier kannst Du de Spraak för de Böversiet utsöken, oder \"Auto\".\n"
+"Ännerst Du de Spraak, muttst Du KDiff3 utmaken un nieg opropen, ehr de "
+"Ännern övernahmen warrt."
+
+#: optiondialog.cpp:1479
+msgid "Use the same encoding for everything:"
+msgstr "De sülve Koderen för allens bruken:"
+
+#: optiondialog.cpp:1482
+msgid ""
+"Enable this allows to change all encodings by changing the first only.\n"
+"Disable this if different individual settings are needed."
+msgstr ""
+"Is dit anmaakt, kannst Du all Koderen över de eerste ännern.\n"
+"Maak dit ut, wenn verscheden Instellen för de Dateien nödig sünd."
+
+#: optiondialog.cpp:1487
+msgid "Note: Local Encoding is "
+msgstr "Beacht: De lokale Koderen is "
+
+#: optiondialog.cpp:1491
+msgid "File Encoding for A:"
+msgstr "Koderen för Datei A:"
+
+#: optiondialog.cpp:1497
+msgid ""
+"If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
+"If the file is not Unicode then the selected encoding will be used as "
+"fallback.\n"
+"(Unicode detection depends on the first bytes of a file.)"
+msgstr ""
+"Is dit anmaakt, warrt Unicode (UTF-8 oder UTF-16) as Koderen opdeckt.\n"
+"Is de Datei nich in Unicode, warrt de utsöchte Koderen bruukt.\n"
+"(Dat Opdecken vun Unicode hangt vun de eersten Bytes vun en Datei af.)"
+
+#: optiondialog.cpp:1501 optiondialog.cpp:1510 optiondialog.cpp:1519
+msgid "Auto Detect Unicode"
+msgstr "Unicode automaatsch opdecken"
+
+#: optiondialog.cpp:1506
+msgid "File Encoding for B:"
+msgstr "Koderen för Datei B:"
+
+#: optiondialog.cpp:1515
+msgid "File Encoding for C:"
+msgstr "Koderen för Datei C:"
+
+#: optiondialog.cpp:1524
+msgid "File Encoding for Merge Output and Saving:"
+msgstr "Koderen för't Tosamenföhren un Sekern:"
+
+#: optiondialog.cpp:1528
+msgid "Auto Select"
+msgstr "Autom. Köör"
+
+#: optiondialog.cpp:1531
+msgid ""
+"If enabled then the encoding from the input files is used.\n"
+"In ambiguous cases a dialog will ask the user to choose the encoding for "
+"saving."
+msgstr ""
+"Wenn anmaakt, warrt de Koderen vun de Ingaavdateien bruukt.\n"
+"Is dat nich eenkennig, warrt de Bruker na de Koderen för't Sekern fraagt."
+
+#: optiondialog.cpp:1535
+msgid "File Encoding for Preprocessor Files:"
+msgstr "Koderen för de Vörverarbeid-Dateien:"
+
+#: optiondialog.cpp:1546
+msgid "Right To Left Language"
+msgstr "Rechts-Na-Links-Spraak"
+
+#: optiondialog.cpp:1549
+msgid ""
+"Some languages are read from right to left.\n"
+"This setting will change the viewer and editor accordingly."
+msgstr ""
+"En Reeg Schriften warrt vun rechts na links leest.\n"
+"Disse Optschoon passt dor de Ansicht un den Editor op to."
+
+#: optiondialog.cpp:1564
+msgid "Integration"
+msgstr "Inbinnen"
+
+#: optiondialog.cpp:1565
+msgid "Integration Settings"
+msgstr "Inbinnen instellen"
+
+#: optiondialog.cpp:1579
+msgid "Command line options to ignore:"
+msgstr "Befehlsreeg-Optschonen, de övergahn warrt:"
+
+#: optiondialog.cpp:1584
+msgid ""
+"List of command line options that should be ignored when KDiff3 is used by "
+"other tools.\n"
+"Several values can be specified if separated via ';'\n"
+"This will suppress the \"Unknown option\"-error."
+msgstr ""
+"List vun Befehlsreeg-Optschonen, de övergahn warrt, wenn anner Programmen "
+"KDiff3 oproopt.\n"
+"Du kannst mehr Weerten angeven, wenn dor twischen en \";\" steiht.\n"
+"Dit verhöödt den \"Nich begäng Optschoon\"-Fehler."
+
+#: optiondialog.cpp:1591
+msgid "Quit also via Escape key"
+msgstr "Ok mit ESC-Tast utmaken"
+
+#: optiondialog.cpp:1594
+msgid ""
+"Fast method to exit.\n"
+"For those who are used to using the Escape-key."
+msgstr ""
+"Gau Metood för't Utmaken.\n"
+"För de Lüüd, de de ESC-Tast anworrn sünd."
+
+#: optiondialog.cpp:1599
+msgid "Integrate with ClearCase"
+msgstr "Na \"ClearCase\" inbinnen"
+
+#: optiondialog.cpp:1602
+msgid ""
+"Integrate with Rational ClearCase from IBM.\n"
+"Modifies the \"map\" file in ClearCase-subdir \"lib/mgrs\"\n"
+"(Only enabled when ClearCase \"bin\" directory is in the path.)"
+msgstr ""
+"Na \"Rational ClearCase\" vun IBM inbinnen.\n"
+"Ännert de Datei \"map\" binnen den ClearCase-Ünnerorner \"lib/mgrs\".\n"
+"(Funkscheneert bloots, wenn sik de ClearCase-Orner \"bin\" över de PATH-"
+"Ümgevenvariabel finnen lett.)"
+
+#: optiondialog.cpp:1608
+msgid "Remove ClearCase Integration"
+msgstr "Inbinnen na ClearCase lösen"
+
+#: optiondialog.cpp:1611
+msgid ""
+"Restore the old \"map\" file from before doing the Clearcase integration."
+msgstr ""
+"De ole \"map\"-Datei ut de Tiet vör't Inbinnen na ClearCase wedderherstellen"
+
+#: optiondialog.cpp:1692 kreplacements/kreplacements.cpp:794
+msgid ""
+"You selected a variable width font.\n"
+"\n"
+"Because this program doesn't handle variable width fonts\n"
+"correctly, you might experience problems while editing.\n"
+"\n"
+"Do you want to continue or do you want to select another font."
+msgstr ""
+"Du hest en Schriftoort mit variabel Breed utsöcht.\n"
+"\n"
+"Dit Programm kann Schriftoorden mit variabel Breed nich richtig\n"
+"bruken, Du hest villicht Problemen bi't Bewerken vun Dateien.\n"
+"\n"
+"Wullt Du wiedermaken oder en anner Schriftoort utsöken?"
+
+#: optiondialog.cpp:1696
+msgid "Incompatible Font"
+msgstr "Inkompatibel Schriftoort"
+
+#: optiondialog.cpp:1697
+msgid "Continue at Own Risk"
+msgstr "Op egen Riskanz wiedermaken"
+
+#: optiondialog.cpp:1698
+msgid "Select Another Font"
+msgstr "Anner Schriftoort utsöken"
+
+#: optiondialog.cpp:1733
+msgid "This resets all options. Not only those of the current topic."
+msgstr ""
+"Disse Funkschoon sett all Optschonen torüch, nich bloots de för't aktuelle "
+"Thema."
+
+#: main.cpp:187
+msgid "kdiff3"
+msgstr "kdiff3"
+
+#: main.cpp:189
+msgid "Tool for Comparison and Merge of Files and Directories"
+msgstr "Tosamenföhr-Warktüüch för Dateien un Ornern"
+
+#: main.cpp:190
+msgid "(c) 2002-2008 Joachim Eibl"
+msgstr "(c) 2002-2008 Joachim Eibl"
+
+#: main.cpp:197 kdiff3_part.cpp:303
+msgid "Joachim Eibl"
+msgstr "Joachim Eibl"
+
+#: main.cpp:198
+msgid "Eike Sauer"
+msgstr "Eike Sauer"
+
+#: main.cpp:198
+msgid "Bugfixes, Debian package maintainer"
+msgstr "Fehlerrichten, Pleger för de Debian-Paketen"
+
+#: main.cpp:199
+msgid "Sebastien Fricker"
+msgstr "Sebastien Fricker"
+
+#: main.cpp:199
+msgid "Windows installer"
+msgstr "Windows-Installeerprogramm"
+
+#: main.cpp:200
+msgid "Stephan Binner"
+msgstr "Stephan Binner"
+
+#: main.cpp:200
+msgid "i18n-help"
+msgstr "i18n-Hülp"
+
+#: main.cpp:201
+msgid "Stefan Partheymueller"
+msgstr "Stefan Partheymueller"
+
+#: main.cpp:201
+msgid "Clipboard-patch"
+msgstr "Twischenaflaag-Kodeplaster"
+
+#: main.cpp:202
+msgid "David Faure"
+msgstr "David Faure"
+
+#: main.cpp:202
+msgid "KIO-Help"
+msgstr "KIO-Hülp"
+
+#: main.cpp:203
+msgid "Bernd Gehrmann"
+msgstr "Bernd Gehrmann"
+
+#: main.cpp:203
+msgid "Class CvsIgnoreList from Cervisia"
+msgstr "Klass \"CvsIgnoreList\" ut \"Cervisia\""
+
+#: main.cpp:204
+msgid "Andre Woebbeking"
+msgstr "Andre Woebbeking"
+
+#: main.cpp:204
+msgid "Class StringMatcher"
+msgstr "Klass \"StringMatcher\""
+
+#: main.cpp:205
+msgid "Michael Denio"
+msgstr "Michael Denio"
+
+#: main.cpp:205
+msgid "Directory Equality-Coloring patch"
+msgstr "Kodeplaster för Orner-Liekheitklören"
+
+#: main.cpp:206
+msgid "Manfred Koehler"
+msgstr "Manfred Koehler"
+
+#: main.cpp:206
+msgid "Fix for slow startup on Windows"
+msgstr "Richten vun langsam Start op Windows"
+
+#: main.cpp:207
+msgid "Sergey Zorin"
+msgstr "Sergey Zorin"
+
+#: main.cpp:207
+msgid "Diff Ext for Windows"
+msgstr "Extern Diff för Windows"
+
+#: main.cpp:208
+msgid "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
+msgstr "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
+
+#: main.cpp:208
+msgid "GNU-Diffutils"
+msgstr "GNU-Diffutils"
+
+#: main.cpp:209
+msgid "Tino Boellsterling, Timothy Mee"
+msgstr "Tino Boellsterling, Timothy Mee"
+
+#: main.cpp:209
+msgid "Intensive test, use and feedback"
+msgstr "Deegt Proberen, Bruuk un Resonanz"
+
+#: main.cpp:210
+msgid "Michael Schmidt"
+msgstr "Michael Schmidt"
+
+#: main.cpp:210
+msgid "Mac support"
+msgstr "Mac-Ünnerstütten"
+
+#: main.cpp:211
+msgid "Valentin Rusu"
+msgstr "Valentin Rusu"
+
+#: main.cpp:211 main.cpp:212
+msgid "KDE4 porting"
+msgstr "Porteren na KDE4"
+
+#: main.cpp:212
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: main.cpp:214
+msgid "+ Many thanks to those who reported bugs and contributed ideas!"
+msgstr ""
+"Un velen Dank to all de Lüüd, de Fehlerberichten schreven un Vörslääg maakt "
+"hebbt!"
+
+#: main.cpp:220
+msgid "Merge the input."
+msgstr "De Ingaav tosamenföhren"
+
+#: main.cpp:221
+msgid "Explicit base file. For compatibility with certain tools."
+msgstr "Utspraken Basisdatei. För de Kompatibiliteet mit anner Warktüüch."
+
+#: main.cpp:222
+msgid "Output file. Implies -m. E.g.: -o newfile.txt"
+msgstr "Utgaavdatei. Slutt \"-m\" in. Bispill: -o niegdatei.txt"
+
+#: main.cpp:223
+msgid "Output file, again. (For compatibility with certain tools.)"
+msgstr "Utgaavdatei, nochmaal. (För de Kompatibiliteet  mit anner Warktüüch.)"
+
+#: main.cpp:224
+msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
+msgstr ""
+"Keen Böversiet, wenn sik all Konflikten automaatsch oplösen laat (\"-o "
+"Utgaavdatei\" nödig)"
+
+#: main.cpp:225
+msgid "Don't solve conflicts automatically. (For compatibility...)"
+msgstr "Konflikt nich automaatsch oplösen. (För de Kompatibiliteet...)"
+
+#: main.cpp:226
+msgid "Visible name replacement for input file 1 (base)."
+msgstr "Sichtbor Tuuschnaam för Ingaavdatei 1 (Grundlaag)."
+
+#: main.cpp:227
+msgid "Visible name replacement for input file 2."
+msgstr "Sichtbor Tuuschnaam för Ingaavdatei 2."
+
+#: main.cpp:228
+msgid "Visible name replacement for input file 3."
+msgstr "Sichtbor Tuuschnaam för Ingaavdatei 3."
+
+#: main.cpp:229
+msgid "Alternative visible name replacement. Supply this once for every input."
+msgstr "Anner sichtbor Tuuschnaam. Eenmaal för elkeen Ingaavdatei angeven."
+
+#: main.cpp:230
+msgid ""
+"Override a config setting. Use once for every setting. E.g.: --cs "
+"\"AutoAdvance=1\""
+msgstr ""
+"En Instellen överschrieven. Eenmaal för elkeen Instellen bruken, a.B.: »--cs "
+"\"AutoAdvance=1\"«"
+
+#: main.cpp:231
+msgid "Show list of config settings and current values."
+msgstr "List vun Instellenoptschonen un Weerten wiesen"
+
+#: main.cpp:232
+msgid "Use a different config file."
+msgstr "En anner Instellendatei bruken"
+
+#: main.cpp:235
+msgid "file1 to open (base, if not specified via --base)"
+msgstr ""
+"Eerste Datei, de Du opmaken wullt (Grundlaag, wenn nich mit \"--base\" "
+"angeven)"
+
+#: main.cpp:236
+msgid "file2 to open"
+msgstr "Twete Datei, de Du opmakern wullt"
+
+#: main.cpp:237
+msgid "file3 to open"
+msgstr "Drüdde Datei, de Du opmaken wullt"
+
+#: difftextwindow.cpp:388 directorymergewindow.cpp:2764
+msgid "File"
+msgstr "Datei"
+
+#: difftextwindow.cpp:390
+msgid "Line"
+msgstr "Reeg"
+
+#: difftextwindow.cpp:392
+msgid "Line not available"
+msgstr "Reeg nich verföögbor"
+
+#: difftextwindow.cpp:1721
+msgid "Top line"
+msgstr "Böverst Reeg"
+
+#: difftextwindow.cpp:1731
+msgid "End"
+msgstr "Enn"
+
+#: pdiff.cpp:260
+msgid "PreprocessorCmd: "
+msgstr "Vörverarbeid-Befehl: "
+
+#: pdiff.cpp:265
+msgid "The following option(s) you selected might change data:\n"
+msgstr "Disse vun Di utsöchten Optschonen köönt Daten ännern:\n"
+
+#: pdiff.cpp:266
+msgid ""
+"\n"
+"Most likely this is not wanted during a merge.\n"
+"Do you want to disable these settings or continue with these settings active?"
+msgstr ""
+"\n"
+"Dat will Een normalerwies bi't Tosamenföhren nich hebben.\n"
+"Wullt Du disse Instellen ut- oder dor mit wiedermaken?"
+
+#: pdiff.cpp:268
+msgid "Option Unsafe for Merging"
+msgstr "Optschoon för't Tosamenföhren nich seker"
+
+#: pdiff.cpp:269
+msgid "Use These Options During Merge"
+msgstr "Disse Optschonen bruken"
+
+#: pdiff.cpp:270
+msgid "Disable Unsafe Options"
+msgstr "Nich seker Optschonen utmaken"
+
+#: pdiff.cpp:300
+msgid "Loading A"
+msgstr "A warrt laadt"
+
+#: pdiff.cpp:304
+msgid "Loading B"
+msgstr "B warrt laadt"
+
+#: pdiff.cpp:321 pdiff.cpp:347
+msgid "Diff: A <-> B"
+msgstr "Verscheel: A <-> B"
+
+#: pdiff.cpp:327 pdiff.cpp:372
+msgid "Linediff: A <-> B"
+msgstr "Reegverscheel: A <-> B"
+
+#: pdiff.cpp:338
+msgid "Loading C"
+msgstr "C warrt laadt"
+
+#: pdiff.cpp:350
+msgid "Diff: B <-> C"
+msgstr "Verscheel: B <-> C"
+
+#: pdiff.cpp:353
+msgid "Diff: A <-> C"
+msgstr "Verscheel: A <-> C"
+
+#: pdiff.cpp:375
+msgid "Linediff: B <-> C"
+msgstr "Reegverscheel: B <-> C"
+
+#: pdiff.cpp:378
+msgid "Linediff: A <-> C"
+msgstr "Reegverscheel: A <-> C"
+
+#: pdiff.cpp:528 mergeresultwindow.cpp:828
+msgid "All input files are binary equal."
+msgstr "All Ingaavdateien sünd bineer liek."
+
+#: pdiff.cpp:530
+msgid "All input files contain the same text, but are not binary equal."
+msgstr "All Ingaavdateien bargt den sülven Text, man sünd bineer nich liek."
+
+#: pdiff.cpp:532 pdiff.cpp:534 pdiff.cpp:536 mergeresultwindow.cpp:832
+#: mergeresultwindow.cpp:834 mergeresultwindow.cpp:836
+#, kde-format
+msgid "Files %1 and %2 are binary equal.\n"
+msgstr "De Dateien %1 un %2 sünd bineer liek.\n"
+
+#: pdiff.cpp:533 pdiff.cpp:535 pdiff.cpp:537
+#, kde-format
+msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
+msgstr ""
+"De Dateien %1 un %2 bargt den sülven Text, man sünd bineer nich liek.\n"
+
+#: pdiff.cpp:547
+msgid ""
+"Some inputfiles don't seem to be pure textfiles.\n"
+"Note that the KDiff3-merge was not meant for binary data.\n"
+"Continue at your own risk."
+msgstr ""
+"As't lett sünd nich all Ingaavdateien reen Textdateien.\n"
+"Beacht, KDiff3 is nich för't Tosamenföhren vun Bineerdaten maakt.\n"
+"Maak man op Dien egen Riskanz wieder."
+
+#: pdiff.cpp:1017
+msgid "Abort"
+msgstr "Afbreken"
+
+#: pdiff.cpp:1018 directorymergewindow.cpp:409
+msgid "Continue Merging"
+msgstr "Tosamenföhren wiedermaken"
+
+#: pdiff.cpp:1024 pdiff.cpp:1112
+msgid "Opening files..."
+msgstr "Dateien warrt opmaakt..."
+
+#: pdiff.cpp:1089 pdiff.cpp:1160
+msgid "File open error"
+msgstr "Fehler bi't Datei-Opmaken"
+
+#: pdiff.cpp:1192
+msgid "Cutting selection..."
+msgstr "Köör warrt knippt..."
+
+#: pdiff.cpp:1213
+msgid "Copying selection to clipboard..."
+msgstr "Köör warrt na de Twischenaflaag kopeert..."
+
+#: pdiff.cpp:1229
+msgid "Inserting clipboard contents..."
+msgstr "Twischenaflaag-Inholt warrt inföögt..."
+
+#: pdiff.cpp:1755
+msgid "Save && Continue"
+msgstr "Sekern un wiedermaken"
+
+#: pdiff.cpp:1756
+msgid "Continue Without Saving"
+msgstr "Ahn Sekern wiedermaken"
+
+#: pdiff.cpp:1958
+msgid "Search complete."
+msgstr "Söök afslaten."
+
+#: pdiff.cpp:1958
+msgid "Search Complete"
+msgstr "Söök afslaten"
+
+#: pdiff.cpp:2192
+msgid "Nothing is selected in either diff input window."
+msgstr "Binnen keen Verscheel-Ingaavfinster is wat utsöcht."
+
+#: pdiff.cpp:2192
+msgid "Error while adding manual diff range"
+msgstr "Fehler bi't Tofögen vun en Verscheelrebeet vun Hand"
+
+#: kdiff3_shell.cpp:76
+msgid ""
+"Could not initialize our part!\n"
+"This usually happens due to an installation problem. Please read the README-"
+"file in the source package for details."
+msgstr ""
+"De Komponent lett sik nich torechtmaken!\n"
+"Dit kummt normalerwies bi Problemen mit de Installatschoon vör. De "
+"Enkelheiten staht binnen de README-Datei vun't Born-Paket."
+
+#: directorymergewindow.cpp:154
+msgid "Mix of links and normal files."
+msgstr "Mischen vun Links un normaal Dateien"
+
+#: directorymergewindow.cpp:161
+msgid "Link: "
+msgstr "Link: "
+
+#: directorymergewindow.cpp:169
+msgid "Size. "
+msgstr "Grött: "
+
+#: directorymergewindow.cpp:182 directorymergewindow.cpp:192
+msgid "Date & Size: "
+msgstr "Datum un Grött: "
+
+#: directorymergewindow.cpp:202 directorymergewindow.cpp:208
+#, kde-format
+msgid "Creating temp copy of %1 failed."
+msgstr "Temporeerkopie vun \"%1\" lett sik nich opstellen"
+
+#: directorymergewindow.cpp:219 directorymergewindow.cpp:227
+#, kde-format
+msgid "Opening %1 failed."
+msgstr "\"%1\" lett sik nich opmaken"
+
+#: directorymergewindow.cpp:231
+msgid "Comparing file..."
+msgstr "Datei warrt vergleken..."
+
+#: directorymergewindow.cpp:241 directorymergewindow.cpp:247
+#, kde-format
+msgid "Error reading from %1"
+msgstr "\"%1\" lett sik nich lesen"
+
+#: directorymergewindow.cpp:376
+msgid "Name"
+msgstr "Naam"
+
+#: directorymergewindow.cpp:376
+msgid "Operation"
+msgstr "Akschoon"
+
+#: directorymergewindow.cpp:376
+msgid "Status"
+msgstr "Status"
+
+#: directorymergewindow.cpp:377
+msgid "Unsolved"
+msgstr "Nich oplööst"
+
+#: directorymergewindow.cpp:377
+msgid "Solved"
+msgstr "Oplööst"
+
+#: directorymergewindow.cpp:377
+msgid "Nonwhite"
+msgstr "Nichfree"
+
+#: directorymergewindow.cpp:377
+msgid "White"
+msgstr "Free"
+
+#: directorymergewindow.cpp:406
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort "
+"the merge and rescan the directory?"
+msgstr ""
+"Du büst jüst togang un föhrst Ornern tosamen. Wullt Du dat Tosamenföhren "
+"redig afbreken un den Orner nieg dörkieken?"
+
+#: directorymergewindow.cpp:408 directorymergewindow.cpp:2984
+msgid "Rescan"
+msgstr "Nieg dörkieken"
+
+#: directorymergewindow.cpp:566
+msgid "Opening of directories failed:"
+msgstr "Opmaken vun Ornern fehlslaan:"
+
+#: directorymergewindow.cpp:569
+#, kde-format
+msgid "Dir A \"%1\" does not exist or is not a directory.\n"
+msgstr "Orner A \"%1\" gifft dat nich oder is keen Orner.\n"
+
+#: directorymergewindow.cpp:572
+#, kde-format
+msgid "Dir B \"%1\" does not exist or is not a directory.\n"
+msgstr "Orner B \"%1\" gifft dat nich oder is keen Orner.\n"
+
+#: directorymergewindow.cpp:575
+#, kde-format
+msgid "Dir C \"%1\" does not exist or is not a directory.\n"
+msgstr "Orner C \"%1\" gifft dat nich oder is keen Orner.\n"
+
+#: directorymergewindow.cpp:577
+msgid "Directory Open Error"
+msgstr "Fehler bi't Ornern-Opmaken"
+
+#: directorymergewindow.cpp:585
+msgid ""
+"The destination directory must not be the same as A or B when three "
+"directories are merged.\n"
+"Check again before continuing."
+msgstr ""
+"De Teelorner mutt bi't Tosamenföhren vun 3 Dateien nich de sülve wesen as A "
+"oder B.\n"
+"\n"
+"Prööv dat bitte, ehr Du wiedermaakst."
+
+#: directorymergewindow.cpp:587
+msgid "Parameter Warning"
+msgstr "Parameter-Wohrschoen"
+
+#: directorymergewindow.cpp:592
+msgid "Scanning directories..."
+msgstr "Ornern warrt dörkeken..."
+
+#: directorymergewindow.cpp:625
+msgid "Reading Directory A"
+msgstr "Orner A warrt leest"
+
+#: directorymergewindow.cpp:647
+msgid "Reading Directory B"
+msgstr "Orner B warrt leest"
+
+#: directorymergewindow.cpp:669
+msgid "Reading Directory C"
+msgstr "Orner C warrt leest"
+
+#: directorymergewindow.cpp:695
+msgid "Some subdirectories were not readable in"
+msgstr "En Reeg Ünnerornern lett sik nich lesen binnen"
+
+#: directorymergewindow.cpp:700
+msgid "Check the permissions of the subdirectories."
+msgstr "Prööv bitte de Verlöven vun de Ünnerornern."
+
+#: directorymergewindow.cpp:753
+msgid "Directory Comparison Status"
+msgstr "Ornervergliek-Status"
+
+#: directorymergewindow.cpp:754
+msgid "Number of subdirectories:"
+msgstr "Tall vun Ünnerornern:"
+
+#: directorymergewindow.cpp:755
+msgid "Number of equal files:"
+msgstr "Tall vun liek Dateien:"
+
+#: directorymergewindow.cpp:756
+msgid "Number of different files:"
+msgstr "Tall vun verscheden Dateien:"
+
+#: directorymergewindow.cpp:759
+msgid "Number of manual merges:"
+msgstr "Tall vun Tosamenföhren vun Hand:"
+
+#: directorymergewindow.cpp:928
+msgid "This affects all merge operations."
+msgstr "Dit bedröppt all Tosamenföhr-Akschonen"
+
+#: directorymergewindow.cpp:929
+msgid "Changing All Merge Operations"
+msgstr "All Tosamenföhr-Akschonen ännern"
+
+#: directorymergewindow.cpp:1328
+msgid "Processing "
+msgstr "Bi to verarbeiden: "
+
+#: directorymergewindow.cpp:1807 directorymergewindow.cpp:1813
+msgid "To do."
+msgstr "Opgaav"
+
+#: directorymergewindow.cpp:1881 directorymergewindow.cpp:3015
+msgid "Copy A to B"
+msgstr "A op B koperen"
+
+#: directorymergewindow.cpp:1882 directorymergewindow.cpp:3016
+msgid "Copy B to A"
+msgstr "B op A koperen"
+
+#: directorymergewindow.cpp:1883 directorymergewindow.cpp:3017
+msgid "Delete A"
+msgstr "A wegdoon"
+
+#: directorymergewindow.cpp:1884 directorymergewindow.cpp:3018
+msgid "Delete B"
+msgstr "B wegdoon"
+
+#: directorymergewindow.cpp:1885
+msgid "Delete A & B"
+msgstr "A un B wegdoon"
+
+#: directorymergewindow.cpp:1886 directorymergewindow.cpp:3020
+msgid "Merge to A"
+msgstr "Mit A tosamenföhren"
+
+#: directorymergewindow.cpp:1887 directorymergewindow.cpp:3021
+msgid "Merge to B"
+msgstr "Mit B tosamenföhren"
+
+#: directorymergewindow.cpp:1888
+msgid "Merge to A & B"
+msgstr "Mit A un B tosamenföhren"
+
+#: directorymergewindow.cpp:1892 directorymergewindow.cpp:3012
+msgid "Delete (if exists)"
+msgstr "Wegdoon (wenn vörhannen)"
+
+#: directorymergewindow.cpp:1893 directorymergewindow.cpp:1894
+msgid "Merge (manual)"
+msgstr "Tosamenföhren (vun Hand)"
+
+#: directorymergewindow.cpp:1895
+msgid "Error: Conflicting File Types"
+msgstr "Fehler: Inkompatibel Dateitypen"
+
+#: directorymergewindow.cpp:1896
+msgid "Error: Dates are equal but files are not."
+msgstr "Fehler: De Daten sünd liek, man de Dateien nich."
+
+#: directorymergewindow.cpp:1922 directorymergewindow.cpp:1951
+#: directorymergewindow.cpp:1976
+msgid "This operation is currently not possible."
+msgstr "Disse Akschoon is opstunns nich mööglich."
+
+#: directorymergewindow.cpp:1922 directorymergewindow.cpp:1951
+#: directorymergewindow.cpp:1976 directorymergewindow.cpp:2235
+msgid "Operation Not Possible"
+msgstr "Akschoon nich mööglich"
+
+#: directorymergewindow.cpp:2015
+msgid ""
+"This should never happen: \n"
+"\n"
+"mergeResultSaved: m_pMFI=0\n"
+"\n"
+"If you know how to reproduce this, please contact the program author."
+msgstr ""
+"Dit schull nienich vörkamen.\n"
+"\n"
+"mergeResultSaved: m_pMFI=0\n"
+"\n"
+"Lett sik dit wedderhalen, snack dor bitte den Programmschriever op an."
+
+#: directorymergewindow.cpp:2015
+msgid "Program Error"
+msgstr "Programmfehler"
+
+#: directorymergewindow.cpp:2026
+msgid "An error occurred while copying.\n"
+msgstr "Dat geev en Fehler bi't Koperen.\n"
+
+#: directorymergewindow.cpp:2026 directorymergewindow.cpp:2095
+#: directorymergewindow.cpp:2127 directorymergewindow.cpp:2175
+#: directorymergewindow.cpp:2184 directorymergewindow.cpp:2435
+msgid "Error"
+msgstr "Fehler"
+
+#: directorymergewindow.cpp:2027 directorymergewindow.cpp:2436
+msgid "Merge Error"
+msgstr "Tosamenföhr-Fehler"
+
+#: directorymergewindow.cpp:2032 directorymergewindow.cpp:2441
+msgid "Error."
+msgstr "Fehler."
+
+#: directorymergewindow.cpp:2037 directorymergewindow.cpp:2333
+#: directorymergewindow.cpp:2373
+msgid "Done."
+msgstr "Afslaten."
+
+#: directorymergewindow.cpp:2060
+msgid "Not saved."
+msgstr "Nich sekert"
+
+#: directorymergewindow.cpp:2095
+msgid "Unknown merge operation. (This must never happen!)"
+msgstr "Nich begäng Tosamenföhrakschoon (Dit mutt nienich vörkamen!)"
+
+#: directorymergewindow.cpp:2127
+msgid "Unknown merge operation."
+msgstr "Nich begäng Tosamenföhrakschoon"
+
+#: directorymergewindow.cpp:2142
+msgid ""
+"The merge is about to begin.\n"
+"\n"
+"Choose \"Do it\" if you have read the instructions and know what you are "
+"doing.\n"
+"Choosing \"Simulate it\" will tell you what would happen.\n"
+"\n"
+"Be aware that this program still has beta status and there is NO WARRANTY "
+"whatsoever! Make backups of your vital data!"
+msgstr ""
+"Dat Tosamenföhren kann nu loosgahn.\n"
+"\n"
+"Klick op \"Utföhren\", wenn Du de Anwiesen leest hest un weetst, wat Du "
+"deist.\n"
+"Klick op \"Simuleren\", wenn Du weten wullt, wat passeren dee.\n"
+"\n"
+"Beacht bitte, dit Programm hett jümmers noch Beta-Status un dat gifft keen "
+"Garantien, för gor nix. Maak Sekerheitkopien vun Dien wichtige Daten!"
+
+#: directorymergewindow.cpp:2147
+msgid "Starting Merge"
+msgstr "Tosamenföhren starten"
+
+#: directorymergewindow.cpp:2148
+msgid "Do It"
+msgstr "Doon"
+
+#: directorymergewindow.cpp:2149
+msgid "Simulate It"
+msgstr "Simuleren"
+
+#: directorymergewindow.cpp:2175
+msgid ""
+"The highlighted item has a different type in the different directories. "
+"Select what to do."
+msgstr ""
+"De rutheevte Indrag hett binnen de verscheden Ornern verscheden Typen. Wat "
+"wullt Du doon?"
+
+#: directorymergewindow.cpp:2184
+msgid ""
+"The modification dates of the file are equal but the files are not. Select "
+"what to do."
+msgstr ""
+"De Ännerdaten vun de Dateien sünd liek, man de Dateien sünd dat nich. Wat "
+"wullt Du doon?"
+
+#: directorymergewindow.cpp:2235
+msgid ""
+"This operation is currently not possible because directory merge is "
+"currently running."
+msgstr ""
+"Disse Akschoon lett sik opstunns nich utföhren, dor löppt en Orner-"
+"Tosamenföhren."
+
+#: directorymergewindow.cpp:2295
+msgid ""
+"There was an error in the last step.\n"
+"Do you want to continue with the item that caused the error or do you want "
+"to skip this item?"
+msgstr ""
+"Bi den verleden Schritt hett dat en Fehler geven.\n"
+"Wullt Du mit dat Element wiedermaken, dat den Fehler utlööst hett, oder "
+"wullt Du dat utlaten?"
+
+#: directorymergewindow.cpp:2297
+msgid "Continue merge after an error"
+msgstr "Tosamenföhren na Fehler wiedermaken"
+
+#: directorymergewindow.cpp:2298
+msgid "Continue With Last Item"
+msgstr "Mit verleden Element wiedermaken"
+
+#: directorymergewindow.cpp:2299
+msgid "Skip Item"
+msgstr "Element utlaten"
+
+#: directorymergewindow.cpp:2333
+msgid "Skipped."
+msgstr "Utlaten."
+
+#: directorymergewindow.cpp:2340 directorymergewindow.cpp:2554
+msgid "In progress..."
+msgstr "In de Maak..."
+
+#: directorymergewindow.cpp:2388
+msgid "Merge operation complete."
+msgstr "Tosamenföhren afslaten."
+
+#: directorymergewindow.cpp:2388 directorymergewindow.cpp:2391
+msgid "Merge Complete"
+msgstr "Tosamenföhren afslaten"
+
+#: directorymergewindow.cpp:2401
+msgid ""
+"Simulated merge complete: Check if you agree with the proposed operations."
+msgstr ""
+"Dat simuleerte Tosamensmölten is afslaten Kiek, wat Du de vörslaan Akschonen "
+"utföhren wullt."
+
+#: directorymergewindow.cpp:2435
+msgid "An error occurred. Press OK to see detailed information.\n"
+msgstr ""
+"Dat hett en Fehler geven. Klick op OK, wenn Du de Enkelheiten ankieken "
+"wullt.\n"
+
+#: directorymergewindow.cpp:2467
+#, kde-format
+msgid "Error: While deleting %1: Creating backup failed."
+msgstr ""
+"Fehler bi't Wegdoon vun \"%1\": Opstellen vun Sekerheitkopie fehlslaan."
+
+#: directorymergewindow.cpp:2474
+#, kde-format
+msgid "delete directory recursively( %1 )"
+msgstr "Orner un Ünnerornern wegdoon (%1)"
+
+#: directorymergewindow.cpp:2476
+#, kde-format
+msgid "delete( %1 )"
+msgstr "wegdoon (%1)"
+
+#: directorymergewindow.cpp:2491
+msgid "Error: delete dir operation failed while trying to read the directory."
+msgstr "Fehler: Wegdoon vun Orner fehlslaan, bides he leest wöör."
+
+#: directorymergewindow.cpp:2510
+#, kde-format
+msgid "Error: rmdir( %1 ) operation failed."
+msgstr "Fehler: rmdir-Akschoon (%1) fehlslaan."
+
+#: directorymergewindow.cpp:2520
+msgid "Error: delete operation failed."
+msgstr "Fehler: Wegdoon fehlslaan."
+
+#: directorymergewindow.cpp:2546
+#, kde-format
+msgid "manual merge( %1, %2, %3 -> %4)"
+msgstr "Vun Hand tosamenföhren (%1, %2, %3 -> %4)"
+
+#: directorymergewindow.cpp:2549
+msgid ""
+"     Note: After a manual merge the user should continue by pressing F7."
+msgstr ""
+"     Beacht bitte: Na't Tosamenföhren vun Hand schull de Bruker mit F7 "
+"wiedermaken"
+
+#: directorymergewindow.cpp:2572
+#, kde-format
+msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
+msgstr ""
+"Fehler: Koperen (%1 -> %2) fehlslaan. Wegdoon vun vörhannen Teel fehlslaan."
+
+#: directorymergewindow.cpp:2582
+#, kde-format
+msgid "copyLink( %1 -> %2 )"
+msgstr "Link koperen (%1 -> %2)"
+
+#: directorymergewindow.cpp:2593
+msgid "Error: copyLink failed: Remote links are not yet supported."
+msgstr ""
+"Fehler: Koperen vun Link fehlslaan. Feern links warrt noch nich ünnerstütt."
+
+#: directorymergewindow.cpp:2599
+msgid "Error: copyLink failed."
+msgstr "Fehler: Koperen vun Link fehlslaan."
+
+#: directorymergewindow.cpp:2619
+#, kde-format
+msgid "copy( %1 -> %2 )"
+msgstr "Koperen (%1 -> %2)"
+
+#: directorymergewindow.cpp:2645
+#, kde-format
+msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
+msgstr "Fehler bi't Ümnömen (%1 -> %2): Vörhannen Teel lett sik nich wegmaken."
+
+#: directorymergewindow.cpp:2651
+#, kde-format
+msgid "rename( %1 -> %2 )"
+msgstr "Ümnömen (%1 -> %2)"
+
+#: directorymergewindow.cpp:2660
+msgid "Error: Rename failed."
+msgstr "Fehler: Ümnömen fehlslaan."
+
+#: directorymergewindow.cpp:2678
+#, kde-format
+msgid "Error during makeDir of %1. Cannot delete existing file."
+msgstr ""
+"Fehler bi't Opstellen vun Orner \"%1\". Vörhannen Datei lett sik nich "
+"wegdoon."
+
+#: directorymergewindow.cpp:2694
+#, kde-format
+msgid "makeDir( %1 )"
+msgstr "Orner opstellen (%1)"
+
+#: directorymergewindow.cpp:2704
+msgid "Error while creating directory."
+msgstr "Fehler bi't Opstellen vun Orner."
+
+#: directorymergewindow.cpp:2729 directorymergewindow.cpp:2839
+msgid "Dest"
+msgstr "Teel"
+
+#: directorymergewindow.cpp:2733 directorymergewindow.cpp:2764
+msgid "Dir"
+msgstr "Orner"
+
+#: directorymergewindow.cpp:2733
+msgid "Type"
+msgstr "Typ"
+
+#: directorymergewindow.cpp:2733
+msgid "Size"
+msgstr "Grött"
+
+#: directorymergewindow.cpp:2734
+msgid "Attr"
+msgstr "Attr"
+
+#: directorymergewindow.cpp:2734
+msgid "Last Modification"
+msgstr "Verleden Ännern"
+
+#: directorymergewindow.cpp:2734
+msgid "Link-Destination"
+msgstr "Link-Teel"
+
+#: directorymergewindow.cpp:2781
+msgid "not available"
+msgstr "nich verföögbor"
+
+#: directorymergewindow.cpp:2801
+msgid "A (Dest): "
+msgstr "A (Teel): "
+
+#: directorymergewindow.cpp:2804
+msgid "A (Base): "
+msgstr "B (Grundl.): "
+
+#: directorymergewindow.cpp:2810
+msgid "B (Dest): "
+msgstr "B (Teel): "
+
+#: directorymergewindow.cpp:2818
+msgid "C (Dest): "
+msgstr "C (Teel): "
+
+#: directorymergewindow.cpp:2824
+msgid "Dest: "
+msgstr "Teel: "
+
+#: directorymergewindow.cpp:2891
+msgid "Save Directory Merge State As..."
+msgstr "Orner-Tosamenföhrstatus sekern as..."
+
+#: directorymergewindow.cpp:2978
+msgid "Start/Continue Directory Merge"
+msgstr "Orner-Tosamenföhren starten/wiedermaken"
+
+#: directorymergewindow.cpp:2979
+msgid "Run Operation for Current Item"
+msgstr "Akschoon mit aktuell Element utföhren"
+
+#: directorymergewindow.cpp:2980
+msgid "Compare Selected File"
+msgstr "Utsöcht Datei verglieken"
+
+#: directorymergewindow.cpp:2981
+msgid "Merge Current File"
+msgstr "Aktuell Datei tosamenföhren"
+
+#: directorymergewindow.cpp:2981
+msgid ""
+"Merge\n"
+"File"
+msgstr ""
+"Datei\n"
+"tosamenföhren"
+
+#: directorymergewindow.cpp:2982
+msgid "Fold All Subdirs"
+msgstr "All Ünnerornern infoolden"
+
+#: directorymergewindow.cpp:2983
+msgid "Unfold All Subdirs"
+msgstr "All Ünnerornern utfoolden"
+
+#: directorymergewindow.cpp:2987
+msgid "Choose A for All Items"
+msgstr "A bi all Indrääg utsöken"
+
+#: directorymergewindow.cpp:2988
+msgid "Choose B for All Items"
+msgstr "B bi all Indrääg utsöken"
+
+#: directorymergewindow.cpp:2989
+msgid "Choose C for All Items"
+msgstr "C bi all Indrääg utsöken"
+
+#: directorymergewindow.cpp:2990
+msgid "Auto-Choose Operation for All Items"
+msgstr "Akschoon bi all Indrääg automaatsch utsöken"
+
+#: directorymergewindow.cpp:2991
+msgid "No Operation for All Items"
+msgstr "Keen Akschoon för all Indrääg"
+
+#: directorymergewindow.cpp:2996
+msgid "Show Identical Files"
+msgstr "Liek Dateien wiesen"
+
+#: directorymergewindow.cpp:2996
+msgid ""
+"Identical\n"
+"Files"
+msgstr ""
+"Liek\n"
+"Dateien"
+
+#: directorymergewindow.cpp:2997
+msgid "Show Different Files"
+msgstr "Verscheden Dateien wiesen"
+
+#: directorymergewindow.cpp:2998
+msgid "Show Files only in A"
+msgstr "Dateien bloots in A wiesen"
+
+#: directorymergewindow.cpp:2998
+msgid ""
+"Files\n"
+"only in A"
+msgstr ""
+"Dateien\n"
+"bloots in A"
+
+#: directorymergewindow.cpp:2999
+msgid "Show Files only in B"
+msgstr "Dateien bloots in B wiesen"
+
+#: directorymergewindow.cpp:2999
+msgid ""
+"Files\n"
+"only in B"
+msgstr ""
+"Dateien\n"
+"bloots in B"
+
+#: directorymergewindow.cpp:3000
+msgid "Show Files only in C"
+msgstr "Dateien bloots in C wiesen"
+
+#: directorymergewindow.cpp:3000
+msgid ""
+"Files\n"
+"only in C"
+msgstr ""
+"Dateien\n"
+"bloots in C"
+
+#: directorymergewindow.cpp:3004
+msgid "Compare Explicitly Selected Files"
+msgstr "Utsöcht Dateien verglieken"
+
+#: directorymergewindow.cpp:3005
+msgid "Merge Explicitly Selected Files"
+msgstr "Utsöcht Dateien tosamenföhren"
+
+#: directorymergewindow.cpp:3007 directorymergewindow.cpp:3014
+msgid "Do Nothing"
+msgstr "Nix doon"
+
+#: directorymergewindow.cpp:3008
+msgid "A"
+msgstr "A"
+
+#: directorymergewindow.cpp:3009
+msgid "B"
+msgstr "B"
+
+#: directorymergewindow.cpp:3010
+msgid "C"
+msgstr "C"
+
+#: directorymergewindow.cpp:3019
+msgid "Delete A && B"
+msgstr "A un B wegdoon"
+
+#: directorymergewindow.cpp:3022
+msgid "Merge to A && B"
+msgstr "Na A un B tosamenföhren"
+
+#: kdiff3_part.cpp:157 kdiff3_part.cpp:234
+msgid "Couldn't find files for comparison."
+msgstr "Dateien för't Verglieken laat sik nich finnen."
+
+#: kdiff3_part.cpp:302
+msgid "KDiff3Part"
+msgstr "KDiff3Part"
+
+#: kreplacements/kreplacements.h:102
+msgid "Continue"
+msgstr "Wiedermaken"
+
+#: kreplacements/kreplacements.h:104 kreplacements/kreplacements.cpp:637
+msgid "Quit"
+msgstr "Utmaken"
+
+#: kreplacements/kreplacements.cpp:183 kreplacements/kreplacements.cpp:345
+msgid "Ok"
+msgstr "OK"
+
+#: kreplacements/kreplacements.cpp:187 kreplacements/kreplacements.cpp:721
+msgid "Help"
+msgstr "Hülp"
+
+#: kreplacements/kreplacements.cpp:191
+msgid "Defaults"
+msgstr "Vörinstellen"
+
+#. i18n: file: kdiff3_shell.rc:4
+#. i18n: ectx: Menu (file)
+#: kreplacements/kreplacements.cpp:302 rc.cpp:12
+msgid "&File"
+msgstr "&Datei"
+
+#: kreplacements/kreplacements.cpp:303
+msgid "&Edit"
+msgstr "&Bewerken"
+
+#. i18n: file: kdiff3_shell.rc:7
+#. i18n: ectx: Menu (directory)
+#: kreplacements/kreplacements.cpp:304 rc.cpp:15
+msgid "&Directory"
+msgstr "&Orner"
+
+#. i18n: file: kdiff3_shell.rc:50
+#. i18n: ectx: Menu (movement)
+#: kreplacements/kreplacements.cpp:307 rc.cpp:24
+msgid "&Movement"
+msgstr "&Verschuven"
+
+#. i18n: file: kdiff3_shell.rc:61
+#. i18n: ectx: Menu (diff)
+#: kreplacements/kreplacements.cpp:308 rc.cpp:27
+msgid "D&iffview"
+msgstr "Verscheel&ansicht"
+
+#. i18n: file: kdiff3_shell.rc:73
+#. i18n: ectx: Menu (merge)
+#: kreplacements/kreplacements.cpp:309 rc.cpp:30
+msgid "&Merge"
+msgstr "&Tosamenföhren"
+
+#. i18n: file: kdiff3_shell.rc:95
+#. i18n: ectx: Menu (window)
+#: kreplacements/kreplacements.cpp:310 rc.cpp:33
+msgid "&Window"
+msgstr "&Finster"
+
+#: kreplacements/kreplacements.cpp:311
+msgid "&Settings"
+msgstr "&Instellen"
+
+#: kreplacements/kreplacements.cpp:312
+msgid "&Help"
+msgstr "&Hülp"
+
+#: kreplacements/kreplacements.cpp:359
+msgid "&About"
+msgstr "&Vertell wat över"
+
+#: kreplacements/kreplacements.cpp:375
+msgid "A&uthor"
+msgstr "A&utor"
+
+#: kreplacements/kreplacements.cpp:389
+msgid "&Thanks To"
+msgstr "&Dank"
+
+#. i18n: file: kdiff3_shell.rc:30
+#. i18n: ectx: Menu (dir_current_merge_menu)
+#: kreplacements/kreplacements.cpp:494 kreplacements/kreplacements.cpp:503
+#: rc.cpp:18
+msgid "Current Item Merge Operation"
+msgstr "Tosamenföhr-Akschoon för aktuell Element"
+
+#. i18n: file: kdiff3_shell.rc:38
+#. i18n: ectx: Menu (dir_current_sync_menu)
+#: kreplacements/kreplacements.cpp:495 kreplacements/kreplacements.cpp:504
+#: rc.cpp:21
+msgid "Current Item Sync Operation"
+msgstr "Synkroniseer-Akschoon för aktuell Element"
+
+#: kreplacements/kreplacements.cpp:603
+msgid "Open"
+msgstr "Opmaken"
+
+#: kreplacements/kreplacements.cpp:612
+msgid "Save"
+msgstr "Sekern"
+
+#: kreplacements/kreplacements.cpp:629
+msgid "Print..."
+msgstr "Drucken..."
+
+#: kreplacements/kreplacements.cpp:645
+msgid "Cut"
+msgstr "Knippen"
+
+#: kreplacements/kreplacements.cpp:653
+msgid "Copy"
+msgstr "Koperen"
+
+#: kreplacements/kreplacements.cpp:661
+msgid "Paste"
+msgstr "Infögen"
+
+#: kreplacements/kreplacements.cpp:669
+msgid "Select All"
+msgstr "All utsöken"
+
+#: kreplacements/kreplacements.cpp:677
+msgid "Show Toolbar"
+msgstr "Warktüüchbalken wiesen"
+
+#: kreplacements/kreplacements.cpp:685
+msgid "Show &Statusbar"
+msgstr "&Statusbalken wiesen"
+
+#: kreplacements/kreplacements.cpp:693
+#, kde-format
+msgid "&Configure %1..."
+msgstr "%1 &instellen..."
+
+#: kreplacements/kreplacements.cpp:705 kreplacements/kreplacements.cpp:713
+msgid "About"
+msgstr "Över"
+
+#: kreplacements/kreplacements.cpp:728
+msgid "Find"
+msgstr "Söken"
+
+#: kreplacements/kreplacements.cpp:736
+msgid "Find Next"
+msgstr "Nakamen söken"
+
+#: kreplacements/kreplacements.cpp:756
+msgid "Select Font"
+msgstr "Schriftoort utsöken"
+
+#: kreplacements/kreplacements.cpp:798
+msgid "Incompatible font."
+msgstr "Schriftoort is nich kompatibel."
+
+#: kreplacements/kreplacements.cpp:799
+msgid "Continue at my own risk"
+msgstr "Op mien egen Riskanz wiedermaken"
+
+#: kreplacements/kreplacements.cpp:799
+msgid "Select another font"
+msgstr "En anner Schriftoort utsöken"
+
+#: kreplacements/kreplacements.cpp:1138
+msgid "For more documentation, see the help-menu or the subdirectory doc."
+msgstr ""
+"Anner Dokmentatschoon gifft dat in't Hülp-Menü oder in't Kapitel Ünnerornern."
+
+#: kreplacements/kreplacements.cpp:1141
+msgid "KDiff3-Usage"
+msgstr "KDiff3-Bruuk"
+
+#: kreplacements/kreplacements.cpp:1141
+msgid "Ignore"
+msgstr "Övergahn"
+
+#: kreplacements/kreplacements.cpp:1141
+msgid "Exit"
+msgstr "Utstiegen"
+
+#: mergeresultwindow.cpp:152 mergeresultwindow.cpp:970
+#: mergeresultwindow.cpp:984 mergeresultwindow.cpp:996
+#: mergeresultwindow.cpp:1008
+#, kde-format
+msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
+msgstr ""
+"Tall vun överbleven nich oplööst Konflikten: %1 (dor sünd %2 vun Freeruum-"
+"Konflikten)"
+
+#: mergeresultwindow.cpp:301
+msgid ""
+"The output has been modified.\n"
+"If you continue your changes will be lost."
+msgstr ""
+"Du hest de Utgaav ännert.\n"
+"Maakst Du wieder, kaamt Dien Ännern weg."
+
+#: mergeresultwindow.cpp:830
+msgid "All input files contain the same text."
+msgstr "All Ingaavdateien bargt den sülven Text."
+
+#: mergeresultwindow.cpp:833 mergeresultwindow.cpp:835
+#: mergeresultwindow.cpp:837
+#, kde-format
+msgid "Files %1 and %2 have equal text.\n"
+msgstr "De Dateien %1 un %2 bargt den sülven Text.\n"
+
+#: mergeresultwindow.cpp:843
+msgid "Total number of conflicts: "
+msgstr "Heel Tall vun Konflikt: "
+
+#: mergeresultwindow.cpp:844
+msgid ""
+"\n"
+"Nr of automatically solved conflicts: "
+msgstr ""
+"\n"
+"Tall vun automaatsch oplööst Konflikten: "
+
+#: mergeresultwindow.cpp:845
+msgid ""
+"\n"
+"Nr of unsolved conflicts: "
+msgstr ""
+"\n"
+"Tall vun nich oplööst Konflikten: "
+
+#: mergeresultwindow.cpp:847
+msgid "Conflicts"
+msgstr "Konflikten"
+
+#: mergeresultwindow.cpp:1714
+msgid "<No src line>"
+msgstr "<Keen Bornreeg>"
+
+#: mergeresultwindow.cpp:1722
+msgid "<Merge Conflict (Whitespace only)>"
+msgstr "<Tosamenföhrkonflikt (Freeruum)>"
+
+#: mergeresultwindow.cpp:1724 mergeresultwindow.cpp:2498
+msgid "<Merge Conflict>"
+msgstr "<Tosamenförkonflikt>"
+
+#: mergeresultwindow.cpp:2706
+msgid ""
+"Not all conflicts are solved yet.\n"
+"File not saved.\n"
+msgstr ""
+"Noch sünd nich all Konflikten oplööst.\n"
+"Datei nich sekert.\n"
+
+#: mergeresultwindow.cpp:2708
+msgid "Conflicts Left"
+msgstr "Konflikten na"
+
+#: mergeresultwindow.cpp:2720
+msgid ""
+"\n"
+"\n"
+"Creating backup failed. File not saved."
+msgstr ""
+"\n"
+"\n"
+"Sekerheitkopie lett sik nich opstellen. Datei nich sekert."
+
+#: mergeresultwindow.cpp:2720 mergeresultwindow.cpp:2761
+msgid "File Save Error"
+msgstr "Fehler bi't Sekern"
+
+#: mergeresultwindow.cpp:2761
+msgid "Error while writing."
+msgstr "Fehler bi't Schrieven"
+
+#: mergeresultwindow.cpp:3091
+msgid "Output"
+msgstr "Utgaav"
+
+#: mergeresultwindow.cpp:3103 mergeresultwindow.cpp:3256
+msgid "[Modified]"
+msgstr "[Ännert]"
+
+#: mergeresultwindow.cpp:3110
+msgid "Encoding for saving"
+msgstr "Koderen bi't Sekern"
+
+#: mergeresultwindow.cpp:3203 mergeresultwindow.cpp:3205
+#: mergeresultwindow.cpp:3207
+msgid "Codec from"
+msgstr "Koderen vun"
+
+#. i18n: file: kdiff3_part.rc:4
+#. i18n: ectx: Menu (movement)
+#: rc.cpp:3
+msgid "&KDiff3"
+msgstr "&KDiff3"
+
+#. i18n: file: kdiff3_part.rc:13
+#. i18n: ectx: Menu (movement)
+#: rc.cpp:6
+msgid "Configure KDiff3"
+msgstr "KDiff3 instellen"
+
+#. i18n: file: kdiff3_part.rc:16
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:9
+msgid "KDiff3"
+msgstr "KDiff3"
+
+#. i18n: file: kdiff3_shell.rc:106
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:36
+msgid "Main Toolbar"
+msgstr "Hööft-Warktüüchbalken"
+
+#: rc.cpp:37
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Sönke Dibbern"
+
+#: rc.cpp:38
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "s_dibbern@web.de"
+
+#~ msgid "C&ontinue"
+#~ msgstr "Wieder&maken"

@@ -1,0 +1,74 @@
+# Copyright (C) 2008 by Joachim Eibl
+# Licence: GPL V2
+#   GNU GENERAL PUBLIC LICENSE, Version 2, June 1991
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software
+#   Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA  02111-1307  USA
+#
+#   For details see file "COPYING".
+
+# update_po_dir: 
+# automatically fetch the most recent translations from the websvn.kde.org server
+# and update all files for translations
+# Requirements: wget, gettext-tools, qt3-devel-tools
+
+# extract extra strings
+xgettext --keyword=i18n --keyword=I18N_NOOP -C ../src-QT4/kreplacements/kreplacements.cpp -o kreplacements.pot
+sed -i /add_subdirectory/d CMakeLists.txt
+wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/subdirs
+for i in `cat subdirs` ; do
+   # Many languages don't have translations so don't worry about errors too much.
+   wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/extragear-utils/kdiff3.po -O $i.po
+   # if file exists and has size greater than zero
+   if [ $i != "x-test" -a -s $i.po ]; then
+      echo $i
+      # if directory exists delete it recursively and recreate it
+      if [ -d $i ]; then
+         rm -R $i
+      fi
+      mkdir $i
+      cp $i.po $i/kdiff3.po
+      sed s/xx/$i/ CMakeLists_xx.txt >$i/CMakeLists.txt
+
+      # Same for the kdiff3plugin.po-file
+      wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/extragear-utils/kdiff3plugin.po -O kdiff3plugin_$i.po
+      if [ -s kdiff3plugin_$i.po ]; then
+         cp kdiff3plugin_$i.po $i/kdiff3plugin.po
+      fi
+      rm kdiff3plugin_$i.po
+
+      # Create qm-files
+      # The qm files are only needed for the qt-only version, not for the KDE-version.
+      wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/kdelibs/kdelibs4.po -O kdelibs_$i.po
+      # (msgmerge and msgcat are from "gettext-tools"-package.)
+      msgmerge --no-fuzzy-matching kdelibs_$i.po kreplacements.pot >kreplacements_$i.po
+      msgcat --use-first $i.po kreplacements_$i.po >kdiff3_$i.po
+      # (msg2qm is from "qt3-devel-tools"-package.)
+      /usr/lib/qt3/bin/msg2qm kdiff3_$i.po kdiff3_$i.qm
+      rm kdelibs_$i.po kdiff3_$i.po kreplacements_$i.po
+      echo add_subdirectory\($i\) >>CMakeLists.txt
+   fi
+   rm $i.po
+done
+
+# Print some info
+echo Translated items per language:
+for i in `cat subdirs` ; do
+   if [ -s $i/kdiff3.po ]; then
+      echo $i `grep msgstr $i/kdiff3.po | grep -v \"\" | wc -l`
+   fi
+done
+
+rm subdirs
+rm kreplacements.pot
+

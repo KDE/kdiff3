@@ -1,0 +1,3039 @@
+# Translation of kdiff3 into Japanese.
+# SATOH Satoru <ss@kde.gr.jp>, 2004.
+# Yukiko Bando <ybando@k6.dion.ne.jp>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdiff3\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2008-12-08 10:27+0100\n"
+"PO-Revision-Date: 2008-09-23 23:41+0900\n"
+"Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
+"Language-Team: Japanese <Kdeveloper@kde.gr.jp>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: kdiff3.cpp:167
+msgid "Current Configuration:"
+msgstr "現在の設定:"
+
+#: kdiff3.cpp:172
+msgid "Config Option Error:"
+msgstr "設定オプションのエラー:"
+
+#: kdiff3.cpp:217
+msgid "Option --auto used, but no output file specified."
+msgstr ""
+"オプション <icode>--auto</icode> を使用していますが、出力ファイルが指定されて"
+"いません。"
+
+#: kdiff3.cpp:366
+msgid "Option --auto ignored for directory comparison."
+msgstr ""
+"オプション <icode>--auto</icode> はディレクトリ比較時には無視されます。"
+
+#: kdiff3.cpp:402
+msgid "Saving failed."
+msgstr "保存に失敗しました。"
+
+#: kdiff3.cpp:437 pdiff.cpp:1080 pdiff.cpp:1151
+msgid "Opening of these files failed:"
+msgstr "以下のファイルを開けませんでした:"
+
+#: kdiff3.cpp:446
+msgid "File Open Error"
+msgstr "ファイルのオープンエラー"
+
+#: kdiff3.cpp:474
+msgid "Opens documents for comparison..."
+msgstr "比較のために文書を開きます..."
+
+#: kdiff3.cpp:476
+msgid "Reload"
+msgstr "再読み込み"
+
+#: kdiff3.cpp:479
+msgid "Saves the merge result. All conflicts must be solved!"
+msgstr "マージ結果を保存します。すべての衝突を解決しなければなりません。"
+
+#: kdiff3.cpp:481
+msgid "Saves the current document as..."
+msgstr "現在の文書を別名で保存します..."
+
+#: kdiff3.cpp:483
+msgid "Print the differences"
+msgstr "差異を印刷します"
+
+#: kdiff3.cpp:485
+msgid "Quits the application"
+msgstr "アプリケーションを終了します"
+
+#: kdiff3.cpp:487
+msgid "Cuts the selected section and puts it to the clipboard"
+msgstr "選択範囲を切り取り、クリップボードに格納します"
+
+#: kdiff3.cpp:489
+msgid "Copies the selected section to the clipboard"
+msgstr "選択範囲をコピーし、クリップボードに格納します"
+
+#: kdiff3.cpp:491
+msgid "Pastes the clipboard contents to actual position"
+msgstr "クリップボードの内容を現在の位置に貼り付けます"
+
+#: kdiff3.cpp:493
+msgid "Select everything in current window"
+msgstr "現在のウィンドウのすべてを選択します"
+
+#: kdiff3.cpp:495
+msgid "Search for a string"
+msgstr "文字列を検索します"
+
+# StatusTip for FindNext
+#: kdiff3.cpp:497
+msgid "Search again for the string"
+msgstr "文字列の次のマッチを検索します"
+
+#: kdiff3.cpp:502
+msgid "Enables/disables the statusbar"
+msgstr "ステータスバーの表示/非表示を切り替えます"
+
+#: kdiff3.cpp:506
+msgid "Configure KDiff3..."
+msgstr "KDiff3 を設定..."
+
+#: kdiff3.cpp:527
+msgid "Go to Current Delta"
+msgstr "現在の異なる部分に移動"
+
+#: kdiff3.cpp:527
+msgid ""
+"Current\n"
+"Delta"
+msgstr ""
+"現在の\n"
+"異なる部分"
+
+#: kdiff3.cpp:529
+msgid "Go to First Delta"
+msgstr "最初の異なる部分に移動"
+
+#: kdiff3.cpp:529
+msgid ""
+"First\n"
+"Delta"
+msgstr ""
+"最初の\n"
+"異なる部分"
+
+#: kdiff3.cpp:531
+msgid "Go to Last Delta"
+msgstr "最後の異なる部分に移動"
+
+#: kdiff3.cpp:531
+msgid ""
+"Last\n"
+"Delta"
+msgstr ""
+"最後の\n"
+"異なる部分"
+
+#: kdiff3.cpp:533
+msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
+msgstr ""
+"(ホワイトスペースの表示が無効なときはホワイトスペースの差異をスキップする)"
+
+#: kdiff3.cpp:534
+msgid ""
+"(Does not skip white space differences even when \"Show White Space\" is "
+"disabled.)"
+msgstr ""
+"(ホワイトスペースの表示が無効なときもホワイトスペースの差異をスキップしない)"
+
+#: kdiff3.cpp:535
+msgid "Go to Previous Delta"
+msgstr "前の異なる部分に移動"
+
+#: kdiff3.cpp:535
+msgid ""
+"Prev\n"
+"Delta"
+msgstr ""
+"前の\n"
+"異なる部分"
+
+#: kdiff3.cpp:537
+msgid "Go to Next Delta"
+msgstr "次の異なる部分に移動"
+
+#: kdiff3.cpp:537
+msgid ""
+"Next\n"
+"Delta"
+msgstr ""
+"次の\n"
+"異なる部分"
+
+#: kdiff3.cpp:539
+msgid "Go to Previous Conflict"
+msgstr "前の衝突に移動"
+
+#: kdiff3.cpp:539
+msgid ""
+"Prev\n"
+"Conflict"
+msgstr ""
+"前の\n"
+"衝突"
+
+#: kdiff3.cpp:541
+msgid "Go to Next Conflict"
+msgstr "次の衝突に移動"
+
+#: kdiff3.cpp:541
+msgid ""
+"Next\n"
+"Conflict"
+msgstr ""
+"次の\n"
+"衝突"
+
+#: kdiff3.cpp:543
+msgid "Go to Previous Unsolved Conflict"
+msgstr "前の未解決の衝突に移動"
+
+#: kdiff3.cpp:543
+msgid ""
+"Prev\n"
+"Unsolved"
+msgstr ""
+"前の\n"
+"未解決"
+
+#: kdiff3.cpp:545
+msgid "Go to Next Unsolved Conflict"
+msgstr "次の未解決の衝突に移動"
+
+#: kdiff3.cpp:545
+msgid ""
+"Next\n"
+"Unsolved"
+msgstr ""
+"次の\n"
+"未解決"
+
+#: kdiff3.cpp:547
+msgid "Select Line(s) From A"
+msgstr "A からの選択行"
+
+#: kdiff3.cpp:547
+msgid ""
+"Choose\n"
+"A"
+msgstr ""
+"選択\n"
+"A"
+
+#: kdiff3.cpp:548
+msgid "Select Line(s) From B"
+msgstr "B からの選択行"
+
+#: kdiff3.cpp:548
+msgid ""
+"Choose\n"
+"B"
+msgstr ""
+"選択\n"
+"B"
+
+#: kdiff3.cpp:549
+msgid "Select Line(s) From C"
+msgstr "C からの選択行"
+
+#: kdiff3.cpp:549
+msgid ""
+"Choose\n"
+"C"
+msgstr ""
+"選択\n"
+"C"
+
+#: kdiff3.cpp:550
+msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
+msgstr "ソース選択後に自動的に次の未解決の衝突に移動"
+
+#: kdiff3.cpp:550
+msgid ""
+"Auto\n"
+"Next"
+msgstr "自動"
+
+#: kdiff3.cpp:552
+msgid "Show Space && Tabulator Characters for Differences"
+msgstr "スペースとタブ文字を表示"
+
+#: kdiff3.cpp:552
+msgid ""
+"White\n"
+"Characters"
+msgstr ""
+"ホワイト\n"
+"スペース文字"
+
+#: kdiff3.cpp:553
+msgid "Show White Space"
+msgstr "ホワイトスペースを表示"
+
+#: kdiff3.cpp:553
+msgid ""
+"White\n"
+"Deltas"
+msgstr ""
+"ホワイト\n"
+"スペース"
+
+#: kdiff3.cpp:555
+msgid "Show Line Numbers"
+msgstr "行番号を表示"
+
+#: kdiff3.cpp:555
+msgid ""
+"Line\n"
+"Numbers"
+msgstr "行番号"
+
+#: kdiff3.cpp:556
+msgid "Choose A Everywhere"
+msgstr "常に A を選択"
+
+#: kdiff3.cpp:557
+msgid "Choose B Everywhere"
+msgstr "常に B を選択"
+
+#: kdiff3.cpp:558
+msgid "Choose C Everywhere"
+msgstr "常に C を選択"
+
+#: kdiff3.cpp:559
+msgid "Choose A for All Unsolved Conflicts"
+msgstr "未解決の衝突について常に A を選択"
+
+#: kdiff3.cpp:560
+msgid "Choose B for All Unsolved Conflicts"
+msgstr "未解決の衝突について常に B を選択"
+
+#: kdiff3.cpp:561
+msgid "Choose C for All Unsolved Conflicts"
+msgstr "未解決の衝突について常に C を選択"
+
+#: kdiff3.cpp:562
+msgid "Choose A for All Unsolved Whitespace Conflicts"
+msgstr "未解決のホワイトスペースの衝突について常に A を選択"
+
+#: kdiff3.cpp:563
+msgid "Choose B for All Unsolved Whitespace Conflicts"
+msgstr "未解決のホワイトスペースの衝突について常に B を選択"
+
+#: kdiff3.cpp:564
+msgid "Choose C for All Unsolved Whitespace Conflicts"
+msgstr "未解決のホワイトスペースの衝突について常に C を選択"
+
+#: kdiff3.cpp:565
+msgid "Automatically Solve Simple Conflicts"
+msgstr "単純な衝突を自動的に解決"
+
+#: kdiff3.cpp:566
+msgid "Set Deltas to Conflicts"
+msgstr "異なる部分を衝突として設定"
+
+#: kdiff3.cpp:567
+msgid "Run Regular Expression Auto Merge"
+msgstr "正規表現による自動マージを実行"
+
+#: kdiff3.cpp:568
+msgid "Automatically Solve History Conflicts"
+msgstr "履歴の衝突を自動的に解決"
+
+#: kdiff3.cpp:569
+msgid "Split Diff At Selection"
+msgstr "選択した差異を分離"
+
+#: kdiff3.cpp:570
+msgid "Join Selected Diffs"
+msgstr "選択した差異を結合"
+
+#: kdiff3.cpp:572
+msgid "Show Window A"
+msgstr "ウィンドウ A を表示"
+
+#: kdiff3.cpp:573
+msgid "Show Window B"
+msgstr "ウィンドウ B を表示"
+
+#: kdiff3.cpp:574
+msgid "Show Window C"
+msgstr "ウィンドウ C を表示"
+
+#: kdiff3.cpp:575 kdiff3.cpp:586
+msgid "Focus Next Window"
+msgstr "次のウィンドウにフォーカス"
+
+#: kdiff3.cpp:577
+msgid "Normal Overview"
+msgstr "すべて比較 (標準)"
+
+#: kdiff3.cpp:578
+msgid "A vs. B Overview"
+msgstr "A と B を比較"
+
+#: kdiff3.cpp:579
+msgid "A vs. C Overview"
+msgstr "A と C を比較"
+
+#: kdiff3.cpp:580
+msgid "B vs. C Overview"
+msgstr "B と C を比較"
+
+#: kdiff3.cpp:581
+msgid "Word Wrap Diff Windows"
+msgstr "Diff ウィンドウで行を折り返す"
+
+#: kdiff3.cpp:582
+msgid "Add Manual Diff Alignment"
+msgstr ""
+
+#: kdiff3.cpp:583
+msgid "Clear All Manual Diff Alignments"
+msgstr ""
+
+#: kdiff3.cpp:588
+msgid "Focus Prev Window"
+msgstr "前のウィンドウにフォーカス"
+
+#: kdiff3.cpp:589
+msgid "Toggle Split Orientation"
+msgstr "分割方向を切り替え"
+
+#: kdiff3.cpp:591
+msgid "Dir && Text Split Screen View"
+msgstr "ディレクトリ/テキスト分割画面表示"
+
+#: kdiff3.cpp:593
+msgid "Toggle Between Dir && Text View"
+msgstr "ディレクトリ表示/テキスト表示を切り替え"
+
+#: kdiff3.cpp:615 kdiff3.cpp:707 kdiff3.cpp:732 kdiff3.cpp:1003
+#: kdiff3.cpp:1024 pdiff.cpp:1098 pdiff.cpp:1170 pdiff.cpp:1208 pdiff.cpp:1224
+#: pdiff.cpp:1254 pdiff.cpp:1265 directorymergewindow.cpp:739
+msgid "Ready."
+msgstr "準備完了。"
+
+#: kdiff3.cpp:649 pdiff.cpp:1753
+msgid "The merge result hasn't been saved."
+msgstr "マージ結果は保存されていません。"
+
+#: kdiff3.cpp:650 kdiff3.cpp:660 kdiff3.cpp:672 pdiff.cpp:1016 pdiff.cpp:1754
+#: pdiff.cpp:1764 directorymergewindow.cpp:407 mergeresultwindow.cpp:303
+msgid "Warning"
+msgstr "警告"
+
+#: kdiff3.cpp:651
+msgid "Save && Quit"
+msgstr "保存/終了"
+
+#: kdiff3.cpp:652
+msgid "Quit Without Saving"
+msgstr "保存せずに終了"
+
+#: kdiff3.cpp:660 pdiff.cpp:1764
+msgid "Saving the merge result failed."
+msgstr "マージ結果の保存に失敗しました。"
+
+#: kdiff3.cpp:671 pdiff.cpp:1015
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort?"
+msgstr "ディレクトリマージを実行中です。本当に中止しますか？"
+
+#: kdiff3.cpp:696
+msgid "Saving file..."
+msgstr "ファイルを保存中..."
+
+#: kdiff3.cpp:713
+msgid "Saving file with a new filename..."
+msgstr "名前を付けてファイルを保存中..."
+
+#: kdiff3.cpp:715 kreplacements/kreplacements.cpp:620
+msgid "Save As..."
+msgstr "名前を付けて保存..."
+
+#: kdiff3.cpp:974
+msgid "Exiting..."
+msgstr "終了中..."
+
+#: kdiff3.cpp:987
+msgid "Toggling toolbar..."
+msgstr "ツールバーの表示/非表示を切り替え中..."
+
+#: kdiff3.cpp:1008
+msgid "Toggle the statusbar..."
+msgstr "ステータスバーの表示/非表示を切り替え中..."
+
+#: fileaccess.cpp:612
+msgid ""
+"While trying to make a backup, deleting an older backup failed. \n"
+"Filename: "
+msgstr ""
+"バックアップの作成中に古いバックアップを削除できませんでした。\n"
+"ファイル名: "
+
+#: fileaccess.cpp:619
+msgid ""
+"While trying to make a backup, renaming failed. \n"
+"Filenames: "
+msgstr ""
+"バックアップの作成中に名前変更に失敗しました。\n"
+"ファイル名: "
+
+#: fileaccess.cpp:643
+#, kde-format
+msgid "Getting file status: %1"
+msgstr "ファイルの状態を取得中: %1"
+
+#: fileaccess.cpp:686
+#, kde-format
+msgid "Reading file: %1"
+msgstr "ファイルを読み込み中: %1"
+
+#: fileaccess.cpp:723
+#, kde-format
+msgid "Writing file: %1"
+msgstr "ファイルに書き込み中: %1"
+
+#: fileaccess.cpp:751
+msgid "Out of memory"
+msgstr "メモリが足りません"
+
+#: fileaccess.cpp:786
+#, kde-format
+msgid "Making directory: %1"
+msgstr "ディレクトリを作成中: %1"
+
+#: fileaccess.cpp:806
+#, kde-format
+msgid "Removing directory: %1"
+msgstr "ディレクトリを削除中: %1"
+
+#: fileaccess.cpp:821
+#, kde-format
+msgid "Removing file: %1"
+msgstr "ファイルを削除中: %1"
+
+#: fileaccess.cpp:837
+#, kde-format
+msgid "Creating symbolic link: %1 -> %2"
+msgstr "シンボリックリンクを作成中: %1 -> %2"
+
+#: fileaccess.cpp:864
+#, kde-format
+msgid "Renaming file: %1 -> %2"
+msgstr "ファイル名を変更中: %1 -> %2"
+
+#: fileaccess.cpp:897
+#, kde-format
+msgid "Copying file: %1 -> %2"
+msgstr "ファイルをコピー中: %1 -> %2"
+
+#: fileaccess.cpp:911
+#, kde-format
+msgid ""
+"Error during file copy operation: Opening file for reading failed. Filename: "
+"%1"
+msgstr ""
+"ファイルコピー中にエラー: ファイルを読み込みのために開けませんでした。ファイ"
+"ル名: %1"
+
+#: fileaccess.cpp:917
+#, kde-format
+msgid ""
+"Error during file copy operation: Opening file for writing failed. Filename: "
+"%1"
+msgstr ""
+"ファイルコピー中にエラー: ファイルを書き込みのために開けませんでした。ファイ"
+"ル名: %1"
+
+#: fileaccess.cpp:932
+#, kde-format
+msgid "Error during file copy operation: Reading failed. Filename: %1"
+msgstr "ファイルコピー中にエラー: 読み込みに失敗しました。ファイル名: %1"
+
+#: fileaccess.cpp:941
+#, kde-format
+msgid "Error during file copy operation: Writing failed. Filename: %1"
+msgstr "ファイルコピー中にエラー: 書き込みに失敗しました。ファイル名: %1"
+
+#: fileaccess.cpp:1237
+msgid "Reading directory: "
+msgstr "ディレクトリを読み込み中: "
+
+#: fileaccess.cpp:1361
+#, kde-format
+msgid "Listing directory: %1"
+msgstr "ディレクトリの内容一覧を作成中: %1"
+
+#: fileaccess.cpp:1495 smalldialogs.cpp:179 smalldialogs.cpp:396
+msgid "&Cancel"
+msgstr "キャンセル(&C)"
+
+#: diff.cpp:250
+msgid "Writing clipboard data to temp file failed."
+msgstr "クリップボードのデータを一時ファイルに書き込めませんでした。"
+
+#: diff.cpp:254
+msgid "From Clipboard"
+msgstr "クリップボードから"
+
+#: diff.cpp:502
+#, kde-format
+msgid ""
+"Preprocessing possibly failed. Check this command:\n"
+"\n"
+"  %1\n"
+"\n"
+"The preprocessing command will be disabled now."
+msgstr ""
+
+#: diff.cpp:542
+#, kde-format
+msgid ""
+"The line-matching-preprocessing possibly failed. Check this command:\n"
+"\n"
+"  %1\n"
+"\n"
+"The line-matching-preprocessing command will be disabled now."
+msgstr ""
+
+#: diff.cpp:1658 diff.cpp:1672
+msgid ""
+"Data loss error:\n"
+"If it is reproducable please contact the author.\n"
+msgstr ""
+"データ消失エラー:\n"
+"再現可能であれば、プログラムの作者に連絡してください。\n"
+
+#: diff.cpp:1660 diff.cpp:1674
+msgid "Severe Internal Error"
+msgstr "深刻な内部エラー"
+
+#: smalldialogs.cpp:58
+msgid "A (Base):"
+msgstr "A (ベース):"
+
+#: smalldialogs.cpp:65 smalldialogs.cpp:82 smalldialogs.cpp:99
+#: smalldialogs.cpp:142
+msgid "File..."
+msgstr "ファイル..."
+
+#: smalldialogs.cpp:67 smalldialogs.cpp:84 smalldialogs.cpp:101
+#: smalldialogs.cpp:144
+msgid "Dir..."
+msgstr "ディレクトリ..."
+
+#: smalldialogs.cpp:93
+msgid "C (Optional):"
+msgstr "C (オプション):"
+
+#: smalldialogs.cpp:110 optiondialog.cpp:873 directorymergewindow.cpp:1893
+#: directorymergewindow.cpp:1894 directorymergewindow.cpp:3011
+msgid "Merge"
+msgstr "マージ"
+
+#: smalldialogs.cpp:116
+msgid "Swap/Copy Names ..."
+msgstr "名前を交換/コピー..."
+
+#: smalldialogs.cpp:121 smalldialogs.cpp:122 smalldialogs.cpp:123
+#, kde-format
+msgid "Swap %1<->%2"
+msgstr "交換 %1<->%2"
+
+#: smalldialogs.cpp:124 smalldialogs.cpp:125 smalldialogs.cpp:126
+#, kde-format
+msgid "Copy %1->Output"
+msgstr "コピー %1->出力"
+
+#: smalldialogs.cpp:127 smalldialogs.cpp:128 smalldialogs.cpp:129
+#, kde-format
+msgid "Swap %1<->Output"
+msgstr "交換 %1<->出力"
+
+#: smalldialogs.cpp:136
+msgid "Output (optional):"
+msgstr "出力 (オプション):"
+
+#: smalldialogs.cpp:168
+msgid "Configure..."
+msgstr "設定..."
+
+#: smalldialogs.cpp:174
+msgid "&OK"
+msgstr "&OK"
+
+#: smalldialogs.cpp:362
+msgid "Search text:"
+msgstr "検索テキスト:"
+
+#: smalldialogs.cpp:369
+msgid "Case sensitive"
+msgstr "大文字と小文字を区別する"
+
+#: smalldialogs.cpp:372
+msgid "Search A"
+msgstr "A を検索"
+
+#: smalldialogs.cpp:377
+msgid "Search B"
+msgstr "B を検索"
+
+#: smalldialogs.cpp:382
+msgid "Search C"
+msgstr "C を検索"
+
+#: smalldialogs.cpp:387
+msgid "Search output"
+msgstr "出力を検索"
+
+#: smalldialogs.cpp:392
+msgid "&Search"
+msgstr "検索(&S)"
+
+#: smalldialogs.cpp:409
+msgid "Regular Expression Tester"
+msgstr "正規表現テスター"
+
+#: smalldialogs.cpp:414 optiondialog.cpp:940
+msgid "Auto merge regular expression:"
+msgstr "自動マージの正規表現:"
+
+#: smalldialogs.cpp:422
+msgid "Example auto merge line:"
+msgstr "自動マージのテスト行:"
+
+#: smalldialogs.cpp:424
+msgid "For auto merge test copy a line as used in your files."
+msgstr "自動マージをテストするために、既存のファイルから 1 行コピーします。"
+
+#: smalldialogs.cpp:430 smalldialogs.cpp:459 smalldialogs.cpp:496
+msgid "Match result:"
+msgstr "マッチ結果:"
+
+#: smalldialogs.cpp:441 optiondialog.cpp:966
+msgid "History start regular expression:"
+msgstr "履歴開始の正規表現:"
+
+#: smalldialogs.cpp:449
+msgid "Example history start line (with leading comment):"
+msgstr "履歴開始行の例 (先行するコメントを含めて):"
+
+#: smalldialogs.cpp:452
+msgid ""
+"Copy a history start line as used in your files,\n"
+"including the leading comment."
+msgstr "履歴の開始行を先行するコメントを含めて既存のファイルからコピーします。"
+
+#: smalldialogs.cpp:470 optiondialog.cpp:976
+msgid "History entry start regular expression:"
+msgstr "履歴エントリ開始の正規表現:"
+
+#: smalldialogs.cpp:478
+msgid "History sort key order:"
+msgstr "履歴ソートキーの順序:"
+
+#: smalldialogs.cpp:486
+msgid "Example history entry start line (without leading comment):"
+msgstr "履歴エントリ開始行の例 (先行するコメントを含めずに):"
+
+#: smalldialogs.cpp:488
+msgid ""
+"Copy a history entry start line as used in your files,\n"
+"but omit the leading comment."
+msgstr ""
+"履歴エントリの開始行を先行するコメントを含めずに既存のファイルからコピーしま"
+"す。"
+
+#: smalldialogs.cpp:503
+msgid "Sort key result:"
+msgstr "ソートキーの結果:"
+
+#: smalldialogs.cpp:510
+msgid "OK"
+msgstr "OK"
+
+#: smalldialogs.cpp:514 kreplacements/kreplacements.h:103
+#: kreplacements/kreplacements.cpp:164 kreplacements/kreplacements.cpp:195
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: smalldialogs.cpp:554 smalldialogs.cpp:564 smalldialogs.cpp:585
+msgid "Match success."
+msgstr "マッチ成功"
+
+#: smalldialogs.cpp:558 smalldialogs.cpp:568 smalldialogs.cpp:591
+msgid "Match failed."
+msgstr "マッチ失敗"
+
+#: smalldialogs.cpp:576
+msgid "Opening and closing parentheses don't match in regular expression."
+msgstr "正規表現中の左右の括弧が一致していません。"
+
+#: optiondialog.cpp:367
+msgid "Unicode, 8 bit"
+msgstr "Unicode, 8 ビット"
+
+#: optiondialog.cpp:368
+msgid "Unicode"
+msgstr "Unicode"
+
+#: optiondialog.cpp:369
+msgid "Latin1"
+msgstr "Latin1"
+
+#: optiondialog.cpp:388
+msgid "Change this if non-ASCII characters are not displayed correctly."
+msgstr "ASCII 以外の文字が適切に表示されなければ、これを変更してください。"
+
+#: optiondialog.cpp:465
+msgid "Configure"
+msgstr "設定"
+
+#: optiondialog.cpp:531
+msgid "Font"
+msgstr "フォント"
+
+#: optiondialog.cpp:532
+msgid "Editor & Diff Output Font"
+msgstr "エディタ/Diff 出力のフォント"
+
+#: optiondialog.cpp:556
+msgid "Italic font for deltas"
+msgstr "異なる部分をイタリック体で表示する"
+
+#: optiondialog.cpp:559
+msgid ""
+"Selects the italic version of the font for differences.\n"
+"If the font doesn't support italic characters, then this does nothing."
+msgstr ""
+"異なる部分をフォントのイタリック体で表示します。\n"
+"フォントにイタリック体がない場合は、通常のフォントで表示します。"
+
+#: optiondialog.cpp:568
+msgid "Color"
+msgstr "色"
+
+#: optiondialog.cpp:569
+msgid "Colors Settings"
+msgstr "色の設定"
+
+#: optiondialog.cpp:588
+msgid "Editor and Diff Views:"
+msgstr "エディタ/Diff ビュー:"
+
+#: optiondialog.cpp:596
+msgid "Foreground color:"
+msgstr "前景色:"
+
+#: optiondialog.cpp:603
+msgid "Background color:"
+msgstr "背景色:"
+
+#: optiondialog.cpp:612
+msgid "Diff background color:"
+msgstr "Diff 背景色:"
+
+#: optiondialog.cpp:620
+msgid "Color A:"
+msgstr "色 (A):"
+
+#: optiondialog.cpp:628
+msgid "Color B:"
+msgstr "色 (B):"
+
+#: optiondialog.cpp:636
+msgid "Color C:"
+msgstr "色 (C):"
+
+#: optiondialog.cpp:643
+msgid "Conflict color:"
+msgstr "色 (衝突):"
+
+#: optiondialog.cpp:651
+msgid "Current range background color:"
+msgstr "現在の範囲の背景色:"
+
+#: optiondialog.cpp:659
+msgid "Current range diff background color:"
+msgstr "現在の範囲の diff 背景色:"
+
+#: optiondialog.cpp:666
+msgid "Color for manually aligned difference ranges:"
+msgstr ""
+
+#: optiondialog.cpp:672
+msgid "Directory Comparison View:"
+msgstr "ディレクトリ比較ビュー:"
+
+#: optiondialog.cpp:678
+msgid "Newest file color:"
+msgstr "最も新しいファイルの色:"
+
+#: optiondialog.cpp:682
+msgid ""
+"Changing this color will only be effective when starting the next directory "
+"comparison."
+msgstr "色の変更は次回ディレクトリ比較を開始したときに有効になります。"
+
+#: optiondialog.cpp:687
+msgid "Oldest file color:"
+msgstr "最も古いファイルの色:"
+
+#: optiondialog.cpp:695
+msgid "Middle age file color:"
+msgstr "中間のファイルの色:"
+
+#: optiondialog.cpp:703
+msgid "Color for missing files:"
+msgstr "欠落したファイルの色:"
+
+#: optiondialog.cpp:717
+msgid "Editor"
+msgstr "エディタ"
+
+#: optiondialog.cpp:718
+msgid "Editor Behavior"
+msgstr "エディタの挙動"
+
+#: optiondialog.cpp:732
+msgid "Tab inserts spaces"
+msgstr "タブでスペースを挿入する"
+
+#: optiondialog.cpp:735
+msgid ""
+"On: Pressing tab generates the appropriate number of spaces.\n"
+"Off: A Tab-character will be inserted."
+msgstr ""
+"オン: タブを押すと適切な数のスペースが挿入されます。\n"
+"オフ: タブ文字が挿入されます。"
+
+#: optiondialog.cpp:741
+msgid "Tab size:"
+msgstr "タブサイズ:"
+
+#: optiondialog.cpp:747
+msgid "Auto indentation"
+msgstr "自動字下げ"
+
+#: optiondialog.cpp:750
+msgid "On: The indentation of the previous line is used for a new line.\n"
+msgstr "オン: 新しい改行に前の行の字下げを使います。\n"
+
+#: optiondialog.cpp:754
+msgid "Auto copy selection"
+msgstr "選択を自動的にコピーする"
+
+#: optiondialog.cpp:757
+msgid ""
+"On: Any selection is immediately written to the clipboard.\n"
+"Off: You must explicitely copy e.g. via Ctrl-C."
+msgstr ""
+"オン: すべての選択は直ちにクリップボードに格納されます。\n"
+"オフ: Ctrl+C などで明示的にコピーする必要があります。"
+
+#: optiondialog.cpp:762
+msgid "Line end style:"
+msgstr "改行コード:"
+
+#: optiondialog.cpp:776
+msgid ""
+"Sets the line endings for when an edited file is saved.\n"
+"DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
+msgstr ""
+"編集したファイルの保存時に使用する改行コードを設定します。\n"
+"DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
+
+#: optiondialog.cpp:788
+msgid "Diff"
+msgstr "Diff"
+
+#: optiondialog.cpp:789
+msgid "Diff Settings"
+msgstr "Diff の設定"
+
+# 「...を無視する」オプションの補足説明として括弧内に表示される
+#: optiondialog.cpp:813
+msgid "Treat as white space."
+msgstr "ホワイトスペースとして扱う"
+
+#: optiondialog.cpp:815
+msgid "Ignore numbers"
+msgstr "数字を無視する"
+
+#: optiondialog.cpp:818
+msgid ""
+"Ignore number characters during line matching phase. (Similar to Ignore "
+"white space.)\n"
+"Might help to compare files with numeric data."
+msgstr ""
+"行マッチ時に数字の違いを無視します。(ホワイトスペースの違いを無視に類似)\n"
+"数字データファイルを比較する際に有効です。"
+
+#: optiondialog.cpp:823
+msgid "Ignore C/C++ comments"
+msgstr "C/C++ コメントを無視する"
+
+#: optiondialog.cpp:825
+msgid "Treat C/C++ comments like white space."
+msgstr "C/C++ コメントをホワイトスペースとして扱います。"
+
+#: optiondialog.cpp:829
+msgid "Ignore case"
+msgstr "大文字と小文字の違いを無視する"
+
+#: optiondialog.cpp:832
+msgid "Treat case differences like white space changes. ('a'<=>'A')"
+msgstr ""
+"大文字と小文字の違いをホワイトスペースの違いと同様に扱います。('a'<=>'A')"
+
+#: optiondialog.cpp:836
+msgid "Preprocessor command:"
+msgstr "プリプロセッサコマンド:"
+
+#: optiondialog.cpp:840
+msgid "User defined pre-processing. (See the docs for details.)"
+msgstr "ユーザ定義プリプロセッサ (詳細についてはドキュメントを参照)"
+
+#: optiondialog.cpp:843
+msgid "Line-matching preprocessor command:"
+msgstr "行マッチプリプロセッサコマンド:"
+
+#: optiondialog.cpp:847
+msgid ""
+"This pre-processor is only used during line matching.\n"
+"(See the docs for details.)"
+msgstr ""
+"このプリプロセッサは行マッチ時にだけ使われます。\n"
+"(詳細についてはドキュメントを参照)"
+
+#: optiondialog.cpp:850
+msgid "Try hard (slower)"
+msgstr "より小さい差分を見つける (遅い)"
+
+#: optiondialog.cpp:853
+msgid ""
+"Enables the --minimal option for the external diff.\n"
+"The analysis of big files will be much slower."
+msgstr ""
+"外部 diff コマンドについて <icode>--minimal</icode> オプションを有効にしま"
+"す。\n"
+"大きなファイルでは処理速度が非常に遅くなります。"
+
+#: optiondialog.cpp:858
+msgid "Align B and C for 3 input files"
+msgstr ""
+
+#: optiondialog.cpp:861
+msgid ""
+"Try to align B and C when comparing or merging three input files.\n"
+"Not recommended for merging because merge might get more complicated.\n"
+"(Default is off.)"
+msgstr ""
+
+#: optiondialog.cpp:874
+msgid "Merge Settings"
+msgstr "マージの設定"
+
+#: optiondialog.cpp:889
+msgid "Auto advance delay (ms):"
+msgstr "自動前進の遅延 (ミリ秒):"
+
+#: optiondialog.cpp:894
+msgid ""
+"When in Auto-Advance mode the result of the current selection is shown \n"
+"for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
+msgstr ""
+"自動前進モードでは、指定した時間 (0-2000 ミリ秒) ごとに自動的に次の衝突に移動"
+"します。"
+
+#: optiondialog.cpp:899
+msgid "Show info dialogs"
+msgstr "情報ダイアログを表示"
+
+#: optiondialog.cpp:901
+msgid "Show a dialog with information about the number of conflicts."
+msgstr ""
+
+#: optiondialog.cpp:904
+msgid "White space 2-file merge default:"
+msgstr "ホワイトスペース 2 ファイルマージのデフォルト:"
+
+#: optiondialog.cpp:908 optiondialog.cpp:921
+msgid "Manual Choice"
+msgstr "手作業で選択"
+
+#: optiondialog.cpp:912 optiondialog.cpp:926
+msgid ""
+"Allow the merge algorithm to automatically select an input for white-space-"
+"only changes."
+msgstr ""
+"差異がホワイトスペースのみの場合にマージアルゴリズムが自動的に入力を選択する"
+"ようにできます。"
+
+#: optiondialog.cpp:917
+msgid "White space 3-file merge default:"
+msgstr "ホワイトスペース 3 ファイルマージのデフォルト:"
+
+#: optiondialog.cpp:931
+msgid "Automatic Merge Regular Expression"
+msgstr "自動マージの正規表現"
+
+#: optiondialog.cpp:944
+msgid ""
+"Regular expression for lines where KDiff3 should automatically choose one "
+"source.\n"
+"When a line with a conflict matches the regular expression then\n"
+"- if available - C, otherwise B will be chosen."
+msgstr ""
+"KDiff3 に自動的にソースを選択させる行を正規表現で指定します。\n"
+"正規表現にマッチした行に衝突がある場合、\n"
+"C があれば C が、C がなければ B が選択されます。"
+
+#: optiondialog.cpp:950
+msgid "Run regular expression auto merge on merge start"
+msgstr "マージ開始時に正規表現による自動マージを実行する"
+
+#: optiondialog.cpp:952
+msgid ""
+"Run the merge for auto merge regular expressions\n"
+"immediately when a merge starts.\n"
+msgstr "マージ開始時に正規表現による自動マージを実行します。\n"
+
+#: optiondialog.cpp:957
+msgid "Version Control History Merging"
+msgstr "バージョンコントロール履歴マージ"
+
+#: optiondialog.cpp:970
+msgid ""
+"Regular expression for the start of the version control history entry.\n"
+"Usually this line contains the \"$Log$\"-keyword.\n"
+"Default value: \".*\\$Log.*\\$.*\""
+msgstr ""
+"バージョンコントロール履歴エントリの開始を正規表現で指定します。\n"
+"通常、開始行には \"$Log$\" キーワードが含まれています。\n"
+"標準設定の値: \".*\\$Log.*\\$.*\""
+
+#: optiondialog.cpp:988
+msgid ""
+"A version control history entry consists of several lines.\n"
+"Specify the regular expression to detect the first line (without the leading "
+"comment).\n"
+"Use parentheses to group the keys you want to use for sorting.\n"
+"If left empty, then KDiff3 assumes that empty lines separate history "
+"entries.\n"
+"See the documentation for details."
+msgstr ""
+"バージョンコントロール履歴のエントリは複数の行から成ります。\n"
+"その最初の行 (先行するコメントを除く) を検出する正規表現を指定します。\n"
+"ソートキーをグループ化するには括弧を使います。\n"
+"このフィールドを空のままにしておくと、KDiff3 は空行をエントリの区切りと見なし"
+"ます。\n"
+"詳細についてはドキュメントを参照してください。"
+
+#: optiondialog.cpp:996
+msgid "History merge sorting"
+msgstr "履歴マージのソート"
+
+#: optiondialog.cpp:998
+msgid "Sort version control history by a key."
+msgstr "バージョンコントロール履歴をキーでソートします。"
+
+#: optiondialog.cpp:1008
+msgid "History entry start sort key order:"
+msgstr ""
+
+#: optiondialog.cpp:1012
+msgid ""
+"Each parentheses used in the regular expression for the history start entry\n"
+"groups a key that can be used for sorting.\n"
+"Specify the list of keys (that are numbered in order of occurrence\n"
+"starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
+"If left empty, then no sorting will be done.\n"
+"See the documentation for details."
+msgstr ""
+
+#: optiondialog.cpp:1023
+msgid "Merge version control history on merge start"
+msgstr "マージ開始時にバージョン履歴をマージする"
+
+#: optiondialog.cpp:1025
+msgid "Run version control history automerge on merge start."
+msgstr "マージ開始時に自動的にバージョン履歴をマージします。"
+
+#: optiondialog.cpp:1029
+msgid "Max number of history entries:"
+msgstr "履歴の最大エントリ数:"
+
+#: optiondialog.cpp:1032
+msgid "Cut off after specified number. Use -1 for infinite number of entries."
+msgstr ""
+"指定した数以降のエントリは削除されます。数を制限しない場合は -1 に設定してく"
+"ださい。"
+
+#: optiondialog.cpp:1036
+msgid "Test your regular expressions"
+msgstr "正規表現をテスト"
+
+#: optiondialog.cpp:1041
+msgid "Irrelevant merge command:"
+msgstr ""
+
+#: optiondialog.cpp:1045
+msgid ""
+"If specified this script is run after automerge\n"
+"when no other relevant changes were detected.\n"
+"Called with the parameters: filename1 filename2 filename3"
+msgstr ""
+
+#: optiondialog.cpp:1051
+msgid "Auto save and quit on merge without conflicts"
+msgstr "衝突がなければマージ後に自動的に保存して終了する"
+
+#: optiondialog.cpp:1054
+msgid ""
+"When KDiff3 was started for a file-merge from the commandline and all\n"
+"conflicts are solvable without user interaction then automatically save and "
+"quit.\n"
+"(Similar to command line option \"--auto\"."
+msgstr ""
+"ファイルマージのために KDiff3 がコマンドラインから起動された場合、\n"
+"すべての衝突が自動解決できるときは、自動的に保存して終了します。\n"
+"(コマンドラインオプションの <icode>--auto</icode> に類似)"
+
+#: optiondialog.cpp:1065 optiondialog.cpp:1066
+msgid "Directory Merge"
+msgstr "ディレクトリマージ"
+
+#: optiondialog.cpp:1079
+msgid "Recursive directories"
+msgstr "ディレクトリを再帰的に解析する"
+
+#: optiondialog.cpp:1081
+msgid "Whether to analyze subdirectories or not."
+msgstr "サブディレクトリを解析するかどうかを指定します。"
+
+#: optiondialog.cpp:1083
+msgid "File pattern(s):"
+msgstr "ファイルパターン:"
+
+#: optiondialog.cpp:1088
+msgid ""
+"Pattern(s) of files to be analyzed. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"解析するファイルのパターン。\n"
+"ワイルドカード: アスタリスク (*) とクエスチョンマーク (?)\n"
+"複数のパターンを指定する場合はセミコロン (;) で区切ります。"
+
+#: optiondialog.cpp:1094
+msgid "File-anti-pattern(s):"
+msgstr "ファイル否定パターン:"
+
+#: optiondialog.cpp:1099
+msgid ""
+"Pattern(s) of files to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"解析から除外するファイルのパターン。\n"
+"ワイルドカード: アスタリスク (*) とクエスチョンマーク (?)\n"
+"複数のパターンを指定する場合はセミコロン (;) で区切ります。"
+
+#: optiondialog.cpp:1105
+msgid "Dir-anti-pattern(s):"
+msgstr "ディレクトリ否定パターン:"
+
+#: optiondialog.cpp:1110
+msgid ""
+"Pattern(s) of directories to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"解析から除外するディレクトリのパターン。\n"
+"ワイルドカード: アスタリスク (*) とクエスチョンマーク (?)\n"
+"複数のパターンを指定する場合はセミコロン (;) で区切ります。"
+
+#: optiondialog.cpp:1116
+msgid "Use .cvsignore"
+msgstr ".cvsignore を使う"
+
+#: optiondialog.cpp:1119
+msgid ""
+"Extends the antipattern to anything that would be ignored by CVS.\n"
+"Via local \".cvsignore\"-files this can be directory specific."
+msgstr ""
+"CVS で無視されるすべてについて否定パターンを拡張します。\n"
+"ローカルの <filename>.cvsignore</filename> ファイルによってディレクトリ固有に"
+"利用できます。"
+
+#: optiondialog.cpp:1124
+msgid "Find hidden files and directories"
+msgstr "隠しファイル/ディレクトリを検索する"
+
+#: optiondialog.cpp:1127
+msgid "Finds files and directories with the hidden attribute."
+msgstr "隠し属性を持つファイルとディレクトリを検索します。"
+
+#: optiondialog.cpp:1129
+msgid "Finds files and directories starting with '.'."
+msgstr "ドット (.) で始まるファイルとディレクトリを検索します。"
+
+#: optiondialog.cpp:1133
+msgid "Follow file links"
+msgstr "ファイルリンクを追跡する"
+
+#: optiondialog.cpp:1136
+msgid ""
+"On: Compare the file the link points to.\n"
+"Off: Compare the links."
+msgstr ""
+"オン: リンク先のファイルを比較します。\n"
+"オフ: リンクを比較します。"
+
+#: optiondialog.cpp:1141
+msgid "Follow directory links"
+msgstr "ディレクトリリンクを追跡"
+
+#: optiondialog.cpp:1144
+msgid ""
+"On: Compare the directory the link points to.\n"
+"Off: Compare the links."
+msgstr ""
+"オン: リンク先のディレクトリを比較します。\n"
+"オフ: リンクを比較します。"
+
+#: optiondialog.cpp:1160
+msgid "Case sensitive filename comparison"
+msgstr "大文字と小文字を区別してファイル名を比較する"
+
+#: optiondialog.cpp:1163
+msgid ""
+"The directory comparison will compare files or directories when their names "
+"match.\n"
+"Set this option if the case of the names must match. (Default for Windows is "
+"off, otherwise on.)"
+msgstr ""
+"ディレクトリ比較は名前が一致するファイルおよびディレクトリを比較します。\n"
+"名前の大文字/小文字も一致しなければならない場合は、このオプションを有効にして"
+"ください。\n"
+"(Windows の標準はオフ、その他ではオンです)"
+
+#: optiondialog.cpp:1167
+msgid "File Comparison Mode"
+msgstr "ファイル比較モード"
+
+#: optiondialog.cpp:1173
+msgid "Binary comparison"
+msgstr "バイナリ比較"
+
+#: optiondialog.cpp:1174
+msgid "Binary comparison of each file. (Default)"
+msgstr "それぞれのファイルをバイナリ比較します。(標準)"
+
+#: optiondialog.cpp:1177
+msgid "Full analysis"
+msgstr "完全分析"
+
+#: optiondialog.cpp:1178
+msgid ""
+"Do a full analysis and show statistics information in extra columns.\n"
+"(Slower than a binary comparison, much slower for binary files.)"
+msgstr ""
+"完全な比較を実行し、統計情報を別のカラムに表示します。\n"
+"(バイナリ比較より遅く、バイナリファイルの場合は非常に時間がかかります)"
+
+#: optiondialog.cpp:1182
+msgid "Trust the size and modification date (unsafe)"
+msgstr "サイズと更新日時を信用する (危険)"
+
+#: optiondialog.cpp:1183
+msgid ""
+"Assume that files are equal if the modification date and file length are "
+"equal.\n"
+"Files with equal contents but different modification dates will appear as "
+"different.\n"
+"Useful for big directories or slow networks."
+msgstr ""
+"ファイルのサイズと更新日時が等しければ、同一のファイルと見なします。\n"
+"内容が同じで更新日時が異なるファイルは、異なるファイルとして示されます。\n"
+"大きなディレクトリや遅いネットワークで有用です。"
+
+#: optiondialog.cpp:1188
+msgid ""
+"Trust the size and date, but use binary comparison if date doesn't match "
+"(unsafe)"
+msgstr "サイズと更新日時を信用し、日時が異なる場合はバイナリ比較する (危険)"
+
+#: optiondialog.cpp:1189
+msgid ""
+"Assume that files are equal if the modification date and file length are "
+"equal.\n"
+"If the date isn't equal but the sizes are, use binary comparison.\n"
+"Useful for big directories or slow networks."
+msgstr ""
+"ファイルのサイズと更新日時が等しければ、同一のファイルと見なします。\n"
+"サイズが同じで日時が異なる場合は、バイナリ比較を行います。\n"
+"大きなディレクトリや遅いネットワークで有用です。"
+
+#: optiondialog.cpp:1194
+msgid "Trust the size (unsafe)"
+msgstr "サイズを信用する (危険)"
+
+#: optiondialog.cpp:1195
+msgid ""
+"Assume that files are equal if their file lengths are equal.\n"
+"Useful for big directories or slow networks when the date is modified during "
+"download."
+msgstr ""
+"ファイルのサイズが等しければ、同一のファイルと見なします。\n"
+"大きなディレクトリやダウンロード中に更新日時が変わってしまうような遅いネット"
+"ワークで有用です。"
+
+#: optiondialog.cpp:1203
+msgid "Synchronize directories"
+msgstr "ディレクトリを同期する"
+
+#: optiondialog.cpp:1206
+msgid ""
+"Offers to store files in both directories so that\n"
+"both directories are the same afterwards.\n"
+"Works only when comparing two directories without specifying a destination."
+msgstr ""
+"両方のディレクトリが同じになるようにファイルを配置します。\n"
+"方向を指定せずに二つのディレクトリをマージする場合にのみ機能します。"
+
+#: optiondialog.cpp:1212
+msgid "White space differences considered equal"
+msgstr "ホワイトスペースの違いを無視する"
+
+#: optiondialog.cpp:1215
+msgid ""
+"If files differ only by white space consider them equal.\n"
+"This is only active when full analysis is chosen."
+msgstr ""
+"ファイルの差異がホワイトスペースだけの場合は等しいものと見なします。\n"
+"このオプションは完全分析が選択されているときにのみアクティブになります。"
+
+#: optiondialog.cpp:1221
+msgid "Copy newer instead of merging (unsafe)"
+msgstr "マージではなく、より新しいものをコピー (危険)"
+
+#: optiondialog.cpp:1224
+msgid ""
+"Don't look inside, just take the newer file.\n"
+"(Use this only if you know what you are doing!)\n"
+"Only effective when comparing two directories."
+msgstr ""
+"内容を調べずに単により新しいファイルを取ります。\n"
+"(何をしているのか分かっている場合にのみ使用してください)\n"
+"二つのディレクトリを比較しているときのみ有効です。"
+
+#: optiondialog.cpp:1229
+msgid "Backup files (.orig)"
+msgstr "バックアップファイル (.orig) を残す"
+
+#: optiondialog.cpp:1232
+msgid ""
+"When a file would be saved over an old file, then the old file\n"
+"will be renamed with a '.orig'-extension instead of being deleted."
+msgstr ""
+"ファイルを上書き保存する際に、<filename>.orig</filename> 拡張子を付けて元の"
+"ファイルを残します。"
+
+#: optiondialog.cpp:1328 optiondialog.cpp:1329
+msgid "Regional Settings"
+msgstr "言語の設定"
+
+#: optiondialog.cpp:1429
+msgid "Language (restart required)"
+msgstr "言語 (再スタートが必要)"
+
+#: optiondialog.cpp:1461
+msgid ""
+"Choose the language of the GUI-strings or \"Auto\".\n"
+"For a change of language to take place, quit and restart KDiff3."
+msgstr ""
+"GUI の言語を選択するか<interface>自動</interface>を選択します。\n"
+"言語の変更を適用するには、KDiff3 を再スタートする必要があります。"
+
+#: optiondialog.cpp:1479
+msgid "Use the same encoding for everything:"
+msgstr "すべてに同じエンコーディングを使う:"
+
+#: optiondialog.cpp:1482
+msgid ""
+"Enable this allows to change all encodings by changing the first only.\n"
+"Disable this if different individual settings are needed."
+msgstr ""
+"このオプションを有効にすると、最初を変更するだけですべてのエンコーディングを"
+"同時に変更できます。\n"
+"それぞれに個別に設定する必要がある場合は、無効にしてください。"
+
+#: optiondialog.cpp:1487
+msgid "Note: Local Encoding is "
+msgstr "現在のロカールエンコーディング: "
+
+#: optiondialog.cpp:1491
+msgid "File Encoding for A:"
+msgstr "A のファイルのエンコーディング:"
+
+#: optiondialog.cpp:1497
+msgid ""
+"If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
+"If the file is not Unicode then the selected encoding will be used as "
+"fallback.\n"
+"(Unicode detection depends on the first bytes of a file.)"
+msgstr ""
+"これを有効にすると、Unicode (UTF-16 または UTF-8) を自動検出します。\n"
+"ファイルのエンコーディングが Unicode でない場合は、選択されたエンコーディング"
+"を使います。\n"
+"(Unicode 自動検出はファイルの最初の数バイトを調べます)"
+
+#: optiondialog.cpp:1501 optiondialog.cpp:1510 optiondialog.cpp:1519
+msgid "Auto Detect Unicode"
+msgstr "Unicode 自動検出"
+
+#: optiondialog.cpp:1506
+msgid "File Encoding for B:"
+msgstr "B のファイルのエンコーディング:"
+
+#: optiondialog.cpp:1515
+msgid "File Encoding for C:"
+msgstr "C のファイルのエンコーディング:"
+
+#: optiondialog.cpp:1524
+msgid "File Encoding for Merge Output and Saving:"
+msgstr "マージ出力と保存時のエンコーディング:"
+
+#: optiondialog.cpp:1528
+msgid "Auto Select"
+msgstr "自動選択"
+
+#: optiondialog.cpp:1531
+msgid ""
+"If enabled then the encoding from the input files is used.\n"
+"In ambiguous cases a dialog will ask the user to choose the encoding for "
+"saving."
+msgstr ""
+"これを有効にすると、入力ファイルのエンコーディングが使われます。\n"
+"不確かな場合はダイアログが表示され、保存時のエンコーディングを選択するよう促"
+"されます。"
+
+#: optiondialog.cpp:1535
+msgid "File Encoding for Preprocessor Files:"
+msgstr "プリプロセッサファイルのエンコーディング:"
+
+#: optiondialog.cpp:1546
+msgid "Right To Left Language"
+msgstr "右から左に読む言語"
+
+#: optiondialog.cpp:1549
+msgid ""
+"Some languages are read from right to left.\n"
+"This setting will change the viewer and editor accordingly."
+msgstr ""
+"右から左に読む言語で有効にします。\n"
+"この設定によってビューアとエディタの表示が変わります。"
+
+#: optiondialog.cpp:1564
+msgid "Integration"
+msgstr "統合"
+
+#: optiondialog.cpp:1565
+msgid "Integration Settings"
+msgstr "統合の設定"
+
+#: optiondialog.cpp:1579
+msgid "Command line options to ignore:"
+msgstr "無視するコマンドラインオプション:"
+
+#: optiondialog.cpp:1584
+msgid ""
+"List of command line options that should be ignored when KDiff3 is used by "
+"other tools.\n"
+"Several values can be specified if separated via ';'\n"
+"This will suppress the \"Unknown option\"-error."
+msgstr ""
+"KDiff3 が他のツールによって使用されるときに無視すべきコマンドラインオプション"
+"のリストです。\n"
+"複数のオプションはセミコロン (;) で区切って指定してください。\n"
+"これによって \"不明なオプション\" エラーを抑制できます。"
+
+#: optiondialog.cpp:1591
+msgid "Quit also via Escape key"
+msgstr ""
+
+#: optiondialog.cpp:1594
+msgid ""
+"Fast method to exit.\n"
+"For those who are used to using the Escape-key."
+msgstr ""
+
+#: optiondialog.cpp:1599
+msgid "Integrate with ClearCase"
+msgstr ""
+
+#: optiondialog.cpp:1602
+msgid ""
+"Integrate with Rational ClearCase from IBM.\n"
+"Modifies the \"map\" file in ClearCase-subdir \"lib/mgrs\"\n"
+"(Only enabled when ClearCase \"bin\" directory is in the path.)"
+msgstr ""
+
+#: optiondialog.cpp:1608
+msgid "Remove ClearCase Integration"
+msgstr ""
+
+#: optiondialog.cpp:1611
+msgid ""
+"Restore the old \"map\" file from before doing the Clearcase integration."
+msgstr ""
+
+#: optiondialog.cpp:1692 kreplacements/kreplacements.cpp:794
+msgid ""
+"You selected a variable width font.\n"
+"\n"
+"Because this program doesn't handle variable width fonts\n"
+"correctly, you might experience problems while editing.\n"
+"\n"
+"Do you want to continue or do you want to select another font."
+msgstr ""
+"可変幅なフォントを選択しています。\n"
+"\n"
+"このプログラムは可変幅フォントを適切に扱えないので、\n"
+"編集中に問題が発生する可能性があります。\n"
+"\n"
+"自己責任で続行するか、他のフォントを選択してください。"
+
+#: optiondialog.cpp:1696
+msgid "Incompatible Font"
+msgstr "非互換なフォント"
+
+#: optiondialog.cpp:1697
+msgid "Continue at Own Risk"
+msgstr "自己責任で続行"
+
+#: optiondialog.cpp:1698
+msgid "Select Another Font"
+msgstr "他のフォントを選択"
+
+#: optiondialog.cpp:1733
+msgid "This resets all options. Not only those of the current topic."
+msgstr ""
+"現在のトピックだけでなく、すべてのオプションを標準設定にリセットします。"
+
+#: main.cpp:187
+msgid "kdiff3"
+msgstr "kdiff3"
+
+#: main.cpp:189
+msgid "Tool for Comparison and Merge of Files and Directories"
+msgstr "ファイルとディレクトリを比較/マージするためのツール"
+
+#: main.cpp:190
+msgid "(c) 2002-2008 Joachim Eibl"
+msgstr "(c) 2002-2008 Joachim Eibl"
+
+#: main.cpp:197 kdiff3_part.cpp:303
+msgid "Joachim Eibl"
+msgstr "Joachim Eibl"
+
+#: main.cpp:198
+msgid "Eike Sauer"
+msgstr "Eike Sauer"
+
+#: main.cpp:198
+msgid "Bugfixes, Debian package maintainer"
+msgstr "バグ修正、Debian パッケージのメンテナ"
+
+#: main.cpp:199
+msgid "Sebastien Fricker"
+msgstr "Sebastien Fricker"
+
+#: main.cpp:199
+msgid "Windows installer"
+msgstr "Windows 用インストーラ"
+
+#: main.cpp:200
+msgid "Stephan Binner"
+msgstr "Stephan Binner"
+
+#: main.cpp:200
+msgid "i18n-help"
+msgstr "ローカライゼーションに関する手助け"
+
+#: main.cpp:201
+msgid "Stefan Partheymueller"
+msgstr "Stefan Partheymueller"
+
+#: main.cpp:201
+msgid "Clipboard-patch"
+msgstr "クリップボードのパッチ"
+
+#: main.cpp:202
+msgid "David Faure"
+msgstr "David Faure"
+
+#: main.cpp:202
+msgid "KIO-Help"
+msgstr ""
+
+#: main.cpp:203
+msgid "Bernd Gehrmann"
+msgstr "Bernd Gehrmann"
+
+#: main.cpp:203
+msgid "Class CvsIgnoreList from Cervisia"
+msgstr ""
+
+#: main.cpp:204
+msgid "Andre Woebbeking"
+msgstr "Andre Woebbeking"
+
+#: main.cpp:204
+msgid "Class StringMatcher"
+msgstr ""
+
+#: main.cpp:205
+msgid "Michael Denio"
+msgstr "Michael Denio"
+
+#: main.cpp:205
+#, fuzzy
+#| msgid "Directory Comparison Status"
+msgid "Directory Equality-Coloring patch"
+msgstr "ディレクトリ比較状態"
+
+#: main.cpp:206
+msgid "Manfred Koehler"
+msgstr "Manfred Koehler"
+
+#: main.cpp:206
+msgid "Fix for slow startup on Windows"
+msgstr ""
+
+#: main.cpp:207
+msgid "Sergey Zorin"
+msgstr "Sergey Zorin"
+
+#: main.cpp:207
+msgid "Diff Ext for Windows"
+msgstr ""
+
+#: main.cpp:208
+msgid "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
+msgstr "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
+
+#: main.cpp:208
+msgid "GNU-Diffutils"
+msgstr ""
+
+#: main.cpp:209
+msgid "Tino Boellsterling, Timothy Mee"
+msgstr "Tino Boellsterling, Timothy Mee"
+
+#: main.cpp:209
+msgid "Intensive test, use and feedback"
+msgstr ""
+
+#: main.cpp:210
+msgid "Michael Schmidt"
+msgstr "Michael Schmidt"
+
+#: main.cpp:210
+msgid "Mac support"
+msgstr "Mac サポート"
+
+#: main.cpp:211
+msgid "Valentin Rusu"
+msgstr "Valentin Rusu"
+
+#: main.cpp:211 main.cpp:212
+msgid "KDE4 porting"
+msgstr "KDE4 への移植"
+
+#: main.cpp:212
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: main.cpp:214
+msgid "+ Many thanks to those who reported bugs and contributed ideas!"
+msgstr "バグやアイデアを報告してくれた方々に感謝します。"
+
+#: main.cpp:220
+msgid "Merge the input."
+msgstr "入力をマージ"
+
+#: main.cpp:221
+msgid "Explicit base file. For compatibility with certain tools."
+msgstr "明示的にベースファイルを指定 (一部のツールとの互換性のため)"
+
+#: main.cpp:222
+msgid "Output file. Implies -m. E.g.: -o newfile.txt"
+msgstr "出力ファイルを指定。暗示的に -m を指定。例: -o newfile.txt"
+
+#: main.cpp:223
+msgid "Output file, again. (For compatibility with certain tools.)"
+msgstr "出力ファイルを指定 (一部のツールとの互換性のため)"
+
+#: main.cpp:224
+msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
+msgstr "すべての衝突を自動解決できる場合は GUI を使用しない (-o file が必要)"
+
+#: main.cpp:225
+msgid "Don't solve conflicts automatically. (For compatibility...)"
+msgstr "衝突を自動解決しない (互換性のため)"
+
+#: main.cpp:226
+msgid "Visible name replacement for input file 1 (base)."
+msgstr "入力ファイル 1 (ベース) の代替表示名"
+
+#: main.cpp:227
+msgid "Visible name replacement for input file 2."
+msgstr "入力ファイル 2 の代替表示名"
+
+#: main.cpp:228
+msgid "Visible name replacement for input file 3."
+msgstr "入力ファイル 3 の代替表示名"
+
+#: main.cpp:229
+msgid "Alternative visible name replacement. Supply this once for every input."
+msgstr "代替表示名。一度設定するとすべての入力に適用されます。"
+
+#: main.cpp:230
+msgid ""
+"Override a config setting. Use once for every setting. E.g.: --cs "
+"\"AutoAdvance=1\""
+msgstr ""
+
+#: main.cpp:231
+msgid "Show list of config settings and current values."
+msgstr "設定項目と現在の値を一覧表示"
+
+#: main.cpp:232
+msgid "Use a different config file."
+msgstr "使用する設定ファイルを指定"
+
+#: main.cpp:235
+msgid "file1 to open (base, if not specified via --base)"
+msgstr "開く file1 (ベース, --base が未指定の場合)"
+
+#: main.cpp:236
+msgid "file2 to open"
+msgstr "開く file2"
+
+#: main.cpp:237
+msgid "file3 to open"
+msgstr "開く file3"
+
+#: difftextwindow.cpp:388 directorymergewindow.cpp:2764
+msgid "File"
+msgstr "ファイル"
+
+#: difftextwindow.cpp:390
+msgid "Line"
+msgstr "行"
+
+#: difftextwindow.cpp:392
+msgid "Line not available"
+msgstr "行がありません"
+
+#: difftextwindow.cpp:1721
+msgid "Top line"
+msgstr "上部行"
+
+#: difftextwindow.cpp:1731
+msgid "End"
+msgstr "最後"
+
+#: pdiff.cpp:260
+msgid "PreprocessorCmd: "
+msgstr "プリプロセッサコマンド: "
+
+#: pdiff.cpp:265
+msgid "The following option(s) you selected might change data:\n"
+msgstr "選択された以下のオプションはデータを変えてしまう可能性があります:\n"
+
+#: pdiff.cpp:266
+msgid ""
+"\n"
+"Most likely this is not wanted during a merge.\n"
+"Do you want to disable these settings or continue with these settings active?"
+msgstr ""
+"\n"
+"通常これはマージ中には望ましくないと考えられます。\n"
+"これらのオプションを無効にしますか？それともこのままマージを続行しますか？"
+
+#: pdiff.cpp:268
+msgid "Option Unsafe for Merging"
+msgstr "危険なマージオプション"
+
+#: pdiff.cpp:269
+msgid "Use These Options During Merge"
+msgstr "このまま続行"
+
+#: pdiff.cpp:270
+msgid "Disable Unsafe Options"
+msgstr "危険なオプションを無効にする"
+
+#: pdiff.cpp:300
+msgid "Loading A"
+msgstr "A を読み込み中"
+
+#: pdiff.cpp:304
+msgid "Loading B"
+msgstr "B を読み込み中"
+
+#: pdiff.cpp:321 pdiff.cpp:347
+msgid "Diff: A <-> B"
+msgstr "Diff: A <-> B"
+
+#: pdiff.cpp:327 pdiff.cpp:372
+msgid "Linediff: A <-> B"
+msgstr "Linediff: A <-> B"
+
+#: pdiff.cpp:338
+msgid "Loading C"
+msgstr "C を読み込み中"
+
+#: pdiff.cpp:350
+msgid "Diff: B <-> C"
+msgstr "Diff: B <-> C"
+
+#: pdiff.cpp:353
+msgid "Diff: A <-> C"
+msgstr "Diff: A <-> C"
+
+#: pdiff.cpp:375
+msgid "Linediff: B <-> C"
+msgstr "Linediff: B <-> C"
+
+#: pdiff.cpp:378
+msgid "Linediff: A <-> C"
+msgstr "Linediff: A <-> C"
+
+#: pdiff.cpp:528 mergeresultwindow.cpp:828
+msgid "All input files are binary equal."
+msgstr "すべての入力ファイルはバイナリ的に同じです。"
+
+#: pdiff.cpp:530
+msgid "All input files contain the same text, but are not binary equal."
+msgstr ""
+"すべての入力ファイルのテキストは同じですが、バイナリ的に等しくありません。"
+
+#: pdiff.cpp:532 pdiff.cpp:534 pdiff.cpp:536 mergeresultwindow.cpp:832
+#: mergeresultwindow.cpp:834 mergeresultwindow.cpp:836
+#, kde-format
+msgid "Files %1 and %2 are binary equal.\n"
+msgstr "ファイル %1 と %2 はバイナリ的に同じです。\n"
+
+#: pdiff.cpp:533 pdiff.cpp:535 pdiff.cpp:537
+#, kde-format
+msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
+msgstr ""
+"ファイル %1 と %2 のテキストは同じですが、バイナリ的に等しくありません。\n"
+
+#: pdiff.cpp:547
+msgid ""
+"Some inputfiles don't seem to be pure textfiles.\n"
+"Note that the KDiff3-merge was not meant for binary data.\n"
+"Continue at your own risk."
+msgstr ""
+"入力ファイルのいくつかはテキストファイルではないようです。\n"
+"KDiff3 のマージはバイナリデータでの使用を想定していません。\n"
+"自己責任で続行してください。"
+
+#: pdiff.cpp:1017
+msgid "Abort"
+msgstr "中止"
+
+#: pdiff.cpp:1018 directorymergewindow.cpp:409
+msgid "Continue Merging"
+msgstr "マージを続行"
+
+#: pdiff.cpp:1024 pdiff.cpp:1112
+msgid "Opening files..."
+msgstr "ファイルを開いています..."
+
+#: pdiff.cpp:1089 pdiff.cpp:1160
+msgid "File open error"
+msgstr "ファイルのオープンエラー"
+
+#: pdiff.cpp:1192
+msgid "Cutting selection..."
+msgstr "選択範囲を切り取り..."
+
+#: pdiff.cpp:1213
+msgid "Copying selection to clipboard..."
+msgstr "選択範囲をクリップボードにコピー..."
+
+#: pdiff.cpp:1229
+msgid "Inserting clipboard contents..."
+msgstr "クリップボードの内容を挿入..."
+
+#: pdiff.cpp:1755
+msgid "Save && Continue"
+msgstr "保存/続行"
+
+#: pdiff.cpp:1756
+msgid "Continue Without Saving"
+msgstr "保存せずに続行"
+
+#: pdiff.cpp:1958
+msgid "Search complete."
+msgstr "検索が完了しました。"
+
+#: pdiff.cpp:1958
+msgid "Search Complete"
+msgstr "検索完了"
+
+#: pdiff.cpp:2192
+msgid "Nothing is selected in either diff input window."
+msgstr ""
+
+#: pdiff.cpp:2192
+#, fuzzy
+msgid "Error while adding manual diff range"
+msgstr "ディレクトリ作成中にエラー"
+
+#: kdiff3_shell.cpp:76
+msgid ""
+"Could not initialize our part!\n"
+"This usually happens due to an installation problem. Please read the README-"
+"file in the source package for details."
+msgstr ""
+"コンポーネントを初期化できませんでした。\n"
+"普通これはインストールの問題です。詳細についてはソースパッケージの README "
+"ファイルを参照してください。"
+
+#: directorymergewindow.cpp:154
+msgid "Mix of links and normal files."
+msgstr "リンクと普通のファイルが混在しています。"
+
+#: directorymergewindow.cpp:161
+msgid "Link: "
+msgstr "リンク: "
+
+#: directorymergewindow.cpp:169
+msgid "Size. "
+msgstr "サイズ"
+
+#: directorymergewindow.cpp:182 directorymergewindow.cpp:192
+msgid "Date & Size: "
+msgstr "日付とサイズ: "
+
+#: directorymergewindow.cpp:202 directorymergewindow.cpp:208
+#, kde-format
+msgid "Creating temp copy of %1 failed."
+msgstr "%1 の一時コピーの作成に失敗しました。"
+
+#: directorymergewindow.cpp:219 directorymergewindow.cpp:227
+#, kde-format
+msgid "Opening %1 failed."
+msgstr "%1 を開けませんでした。"
+
+#: directorymergewindow.cpp:231
+msgid "Comparing file..."
+msgstr "ファイルを比較中..."
+
+#: directorymergewindow.cpp:241 directorymergewindow.cpp:247
+#, kde-format
+msgid "Error reading from %1"
+msgstr "%1 からの読み込みエラー"
+
+#: directorymergewindow.cpp:376
+msgid "Name"
+msgstr "名前"
+
+#: directorymergewindow.cpp:376
+msgid "Operation"
+msgstr "操作"
+
+#: directorymergewindow.cpp:376
+msgid "Status"
+msgstr "状態"
+
+#: directorymergewindow.cpp:377
+msgid "Unsolved"
+msgstr "未解決"
+
+#: directorymergewindow.cpp:377
+msgid "Solved"
+msgstr "解決済み"
+
+#: directorymergewindow.cpp:377
+msgid "Nonwhite"
+msgstr "ホワイトスペース以外"
+
+#: directorymergewindow.cpp:377
+msgid "White"
+msgstr "ホワイトスペース"
+
+#: directorymergewindow.cpp:406
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort "
+"the merge and rescan the directory?"
+msgstr ""
+"ディレクトリマージを実行中です。本当にマージを中止し、ディレクトリを再スキャ"
+"ンしますか？"
+
+#: directorymergewindow.cpp:408 directorymergewindow.cpp:2984
+msgid "Rescan"
+msgstr "再スキャン"
+
+#: directorymergewindow.cpp:566
+msgid "Opening of directories failed:"
+msgstr "ディレクトリを開けませんでした:"
+
+#: directorymergewindow.cpp:569
+#, kde-format
+msgid "Dir A \"%1\" does not exist or is not a directory.\n"
+msgstr ""
+"ディレクトリ A <filename>%1</filename> は存在しないか、ディレクトリではありま"
+"せん。\n"
+
+#: directorymergewindow.cpp:572
+#, kde-format
+msgid "Dir B \"%1\" does not exist or is not a directory.\n"
+msgstr ""
+"ディレクトリ B <filename>%1</filename> は存在しないか、ディレクトリではありま"
+"せん。\n"
+
+#: directorymergewindow.cpp:575
+#, kde-format
+msgid "Dir C \"%1\" does not exist or is not a directory.\n"
+msgstr ""
+"ディレクトリ C <filename>%1</filename> は存在しないか、ディレクトリではありま"
+"せん。\n"
+
+#: directorymergewindow.cpp:577
+msgid "Directory Open Error"
+msgstr "ディレクトリのオープンエラー"
+
+#: directorymergewindow.cpp:585
+msgid ""
+"The destination directory must not be the same as A or B when three "
+"directories are merged.\n"
+"Check again before continuing."
+msgstr ""
+"3 つのディレクトリをマージする場合、マージ先ディレクトリは A や B と同じで"
+"あってはいけません。\n"
+"続行する前にもう一度確認してください。"
+
+#: directorymergewindow.cpp:587
+msgid "Parameter Warning"
+msgstr "パラメータ警告"
+
+#: directorymergewindow.cpp:592
+msgid "Scanning directories..."
+msgstr "ディレクトリをスキャン中..."
+
+#: directorymergewindow.cpp:625
+msgid "Reading Directory A"
+msgstr "ディレクトリ A を読み込み中"
+
+#: directorymergewindow.cpp:647
+msgid "Reading Directory B"
+msgstr "ディレクトリ B を読み込み中"
+
+#: directorymergewindow.cpp:669
+msgid "Reading Directory C"
+msgstr "ディレクトリ C を読み込み中"
+
+#: directorymergewindow.cpp:695
+msgid "Some subdirectories were not readable in"
+msgstr "いくつかのサブディレクトリが読み込み不可でした"
+
+#: directorymergewindow.cpp:700
+msgid "Check the permissions of the subdirectories."
+msgstr "サブディレクトリのパーミッションを確認してください。"
+
+#: directorymergewindow.cpp:753
+msgid "Directory Comparison Status"
+msgstr "ディレクトリ比較状態"
+
+#: directorymergewindow.cpp:754
+msgid "Number of subdirectories:"
+msgstr "サブディレクトリ数:"
+
+#: directorymergewindow.cpp:755
+msgid "Number of equal files:"
+msgstr "等しいファイルの数:"
+
+#: directorymergewindow.cpp:756
+msgid "Number of different files:"
+msgstr "異なるファイルの数:"
+
+#: directorymergewindow.cpp:759
+msgid "Number of manual merges:"
+msgstr "手作業でのマージ数:"
+
+#: directorymergewindow.cpp:928
+msgid "This affects all merge operations."
+msgstr "これはすべてのマージ操作に影響します。"
+
+#: directorymergewindow.cpp:929
+msgid "Changing All Merge Operations"
+msgstr "すべてのマージ操作を更新中"
+
+#: directorymergewindow.cpp:1328
+msgid "Processing "
+msgstr "処理中"
+
+#: directorymergewindow.cpp:1807 directorymergewindow.cpp:1813
+msgid "To do."
+msgstr "To do."
+
+#: directorymergewindow.cpp:1881 directorymergewindow.cpp:3015
+msgid "Copy A to B"
+msgstr "A を B にコピー"
+
+#: directorymergewindow.cpp:1882 directorymergewindow.cpp:3016
+msgid "Copy B to A"
+msgstr "B を A にコピー"
+
+#: directorymergewindow.cpp:1883 directorymergewindow.cpp:3017
+msgid "Delete A"
+msgstr "A を削除"
+
+#: directorymergewindow.cpp:1884 directorymergewindow.cpp:3018
+msgid "Delete B"
+msgstr "B を削除"
+
+#: directorymergewindow.cpp:1885
+msgid "Delete A & B"
+msgstr "A と B を削除"
+
+#: directorymergewindow.cpp:1886 directorymergewindow.cpp:3020
+msgid "Merge to A"
+msgstr "A にマージ"
+
+#: directorymergewindow.cpp:1887 directorymergewindow.cpp:3021
+msgid "Merge to B"
+msgstr "B にマージ"
+
+#: directorymergewindow.cpp:1888
+msgid "Merge to A & B"
+msgstr "A と B にマージ"
+
+#: directorymergewindow.cpp:1892 directorymergewindow.cpp:3012
+msgid "Delete (if exists)"
+msgstr "(存在すれば) 削除"
+
+#: directorymergewindow.cpp:1893 directorymergewindow.cpp:1894
+msgid "Merge (manual)"
+msgstr "マージ (手作業)"
+
+#: directorymergewindow.cpp:1895
+msgid "Error: Conflicting File Types"
+msgstr "エラー: ファイルタイプが衝突しています"
+
+#: directorymergewindow.cpp:1896
+msgid "Error: Dates are equal but files are not."
+msgstr "エラー: 日付は同じですが、ファイルは等しくありません。"
+
+#: directorymergewindow.cpp:1922 directorymergewindow.cpp:1951
+#: directorymergewindow.cpp:1976
+msgid "This operation is currently not possible."
+msgstr "この操作は今はできません。"
+
+#: directorymergewindow.cpp:1922 directorymergewindow.cpp:1951
+#: directorymergewindow.cpp:1976 directorymergewindow.cpp:2235
+msgid "Operation Not Possible"
+msgstr "操作不可"
+
+#: directorymergewindow.cpp:2015
+msgid ""
+"This should never happen: \n"
+"\n"
+"mergeResultSaved: m_pMFI=0\n"
+"\n"
+"If you know how to reproduce this, please contact the program author."
+msgstr ""
+"これは起きてはならないことです: \n"
+"\n"
+"mergeResultSaved: m_pMFI=0\n"
+"\n"
+"再現可能であれば、プログラムの作者に連絡してください。"
+
+#: directorymergewindow.cpp:2015
+msgid "Program Error"
+msgstr "プログラムエラー"
+
+#: directorymergewindow.cpp:2026
+msgid "An error occurred while copying.\n"
+msgstr "コピー中にエラーが発生しました。\n"
+
+#: directorymergewindow.cpp:2026 directorymergewindow.cpp:2095
+#: directorymergewindow.cpp:2127 directorymergewindow.cpp:2175
+#: directorymergewindow.cpp:2184 directorymergewindow.cpp:2435
+msgid "Error"
+msgstr "エラー"
+
+#: directorymergewindow.cpp:2027 directorymergewindow.cpp:2436
+msgid "Merge Error"
+msgstr "マージエラー"
+
+#: directorymergewindow.cpp:2032 directorymergewindow.cpp:2441
+msgid "Error."
+msgstr "エラー"
+
+#: directorymergewindow.cpp:2037 directorymergewindow.cpp:2333
+#: directorymergewindow.cpp:2373
+msgid "Done."
+msgstr "完了"
+
+#: directorymergewindow.cpp:2060
+msgid "Not saved."
+msgstr "未保存"
+
+#: directorymergewindow.cpp:2095
+msgid "Unknown merge operation. (This must never happen!)"
+msgstr "不明なマージ操作 (これは起きてはならないことです)"
+
+#: directorymergewindow.cpp:2127
+msgid "Unknown merge operation."
+msgstr "不明なマージ操作です。"
+
+#: directorymergewindow.cpp:2142
+msgid ""
+"The merge is about to begin.\n"
+"\n"
+"Choose \"Do it\" if you have read the instructions and know what you are "
+"doing.\n"
+"Choosing \"Simulate it\" will tell you what would happen.\n"
+"\n"
+"Be aware that this program still has beta status and there is NO WARRANTY "
+"whatsoever! Make backups of your vital data!"
+msgstr ""
+"マージ準備完了\n"
+"\n"
+"説明を読んで何をしているか分かっているなら<interface>実行</interface>を選択し"
+"てください。\n"
+"\n"
+"実行する前にマージの結果を知りたいなら<interface>試行</interface>を選択してく"
+"ださい。\n"
+"\n"
+"このプログラムはまだベータ段階で何が起きても無保証だということに注意してくだ"
+"さい!重要なデータはバックアップを取ってください!"
+
+#: directorymergewindow.cpp:2147
+msgid "Starting Merge"
+msgstr "マージ開始"
+
+#: directorymergewindow.cpp:2148
+msgid "Do It"
+msgstr "実行"
+
+#: directorymergewindow.cpp:2149
+msgid "Simulate It"
+msgstr "試行"
+
+#: directorymergewindow.cpp:2175
+msgid ""
+"The highlighted item has a different type in the different directories. "
+"Select what to do."
+msgstr ""
+"強調表示された項目は異なるディレクトリの異なるタイプです。何をするか選択して"
+"ください。"
+
+#: directorymergewindow.cpp:2184
+msgid ""
+"The modification dates of the file are equal but the files are not. Select "
+"what to do."
+msgstr ""
+"ファイルの更新日時は同じですが、ファイルは等しくありません。何をするか選択し"
+"てください。"
+
+#: directorymergewindow.cpp:2235
+msgid ""
+"This operation is currently not possible because directory merge is "
+"currently running."
+msgstr "ディレクトリマージ中なのでこの操作を実行することはできません。"
+
+#: directorymergewindow.cpp:2295
+msgid ""
+"There was an error in the last step.\n"
+"Do you want to continue with the item that caused the error or do you want "
+"to skip this item?"
+msgstr ""
+"最終段階でエラーが発生しました。\n"
+"エラーを起した項目について続行しますか？それともスキップしますか？"
+
+# @title:window?
+#: directorymergewindow.cpp:2297
+msgid "Continue merge after an error"
+msgstr "エラー後のマージ続行"
+
+#: directorymergewindow.cpp:2298
+msgid "Continue With Last Item"
+msgstr "最後の項目について続行"
+
+#: directorymergewindow.cpp:2299
+msgid "Skip Item"
+msgstr "項目をスキップ"
+
+#: directorymergewindow.cpp:2333
+msgid "Skipped."
+msgstr "スキップしました。"
+
+#: directorymergewindow.cpp:2340 directorymergewindow.cpp:2554
+msgid "In progress..."
+msgstr "進行中..."
+
+#: directorymergewindow.cpp:2388
+msgid "Merge operation complete."
+msgstr "マージ操作が完了しました。"
+
+#: directorymergewindow.cpp:2388 directorymergewindow.cpp:2391
+msgid "Merge Complete"
+msgstr "マージ完了"
+
+#: directorymergewindow.cpp:2401
+msgid ""
+"Simulated merge complete: Check if you agree with the proposed operations."
+msgstr "マージ試行完了: この操作をしてもよいか確認してください。"
+
+#: directorymergewindow.cpp:2435
+msgid "An error occurred. Press OK to see detailed information.\n"
+msgstr ""
+"エラーが発生しました。詳細情報を見るには<interface>OK</interface>をクリックし"
+"てください。\n"
+
+#: directorymergewindow.cpp:2467
+#, kde-format
+msgid "Error: While deleting %1: Creating backup failed."
+msgstr "エラー: %1 の削除中にバックアップファイルを作成できませんでした。"
+
+#: directorymergewindow.cpp:2474
+#, kde-format
+msgid "delete directory recursively( %1 )"
+msgstr "再帰的にディレクトリを削除 (%1)"
+
+#: directorymergewindow.cpp:2476
+#, kde-format
+msgid "delete( %1 )"
+msgstr "削除 (%1)"
+
+#: directorymergewindow.cpp:2491
+msgid "Error: delete dir operation failed while trying to read the directory."
+msgstr "エラー: ディレクトリの削除がディレクトリの読み込み中に失敗しました。"
+
+#: directorymergewindow.cpp:2510
+#, kde-format
+msgid "Error: rmdir( %1 ) operation failed."
+msgstr "エラー: ディレクトリの削除 (%1) に失敗しました。"
+
+#: directorymergewindow.cpp:2520
+msgid "Error: delete operation failed."
+msgstr "エラー: 削除に失敗しました。"
+
+#: directorymergewindow.cpp:2546
+#, kde-format
+msgid "manual merge( %1, %2, %3 -> %4)"
+msgstr "手作業でのマージ (%1, %2, %3 -> %4)"
+
+#: directorymergewindow.cpp:2549
+msgid ""
+"     Note: After a manual merge the user should continue by pressing F7."
+msgstr ""
+"<note label='注'>手作業でのマージ後に続行するには F7 を押してください。</"
+"note>"
+
+#: directorymergewindow.cpp:2572
+#, kde-format
+msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
+msgstr ""
+"エラー: コピー (%1 -> %2) に失敗しました。既存のコピー先を削除できませんでし"
+"た。"
+
+#: directorymergewindow.cpp:2582
+#, kde-format
+msgid "copyLink( %1 -> %2 )"
+msgstr "リンクをコピー (%1 -> %2)"
+
+#: directorymergewindow.cpp:2593
+msgid "Error: copyLink failed: Remote links are not yet supported."
+msgstr "エラー: リンクのコピーに失敗しました。リモートリンクは未サポートです。"
+
+#: directorymergewindow.cpp:2599
+msgid "Error: copyLink failed."
+msgstr "エラー: リンクのコピーに失敗しました。"
+
+#: directorymergewindow.cpp:2619
+#, kde-format
+msgid "copy( %1 -> %2 )"
+msgstr "コピー (%1 -> %2)"
+
+#: directorymergewindow.cpp:2645
+#, kde-format
+msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
+msgstr "名前変更 (%1 -> %2) 中にエラー: 既存のコピー先を削除できません。"
+
+#: directorymergewindow.cpp:2651
+#, kde-format
+msgid "rename( %1 -> %2 )"
+msgstr "名前変更 (%1 -> %2)"
+
+#: directorymergewindow.cpp:2660
+msgid "Error: Rename failed."
+msgstr "エラー: 名前変更に失敗しました。"
+
+#: directorymergewindow.cpp:2678
+#, kde-format
+msgid "Error during makeDir of %1. Cannot delete existing file."
+msgstr ""
+"ディレクトリの作成 (%1) 中にエラーが発生しました。既存のファイルを削除できま"
+"せん。"
+
+#: directorymergewindow.cpp:2694
+#, kde-format
+msgid "makeDir( %1 )"
+msgstr "ディレクトリを作成 (%1)"
+
+#: directorymergewindow.cpp:2704
+msgid "Error while creating directory."
+msgstr "ディレクトリの作成中にエラーが発生しました。"
+
+#: directorymergewindow.cpp:2729 directorymergewindow.cpp:2839
+msgid "Dest"
+msgstr "先"
+
+#: directorymergewindow.cpp:2733 directorymergewindow.cpp:2764
+msgid "Dir"
+msgstr "ディレクトリ"
+
+#: directorymergewindow.cpp:2733
+msgid "Type"
+msgstr "タイプ"
+
+#: directorymergewindow.cpp:2733
+msgid "Size"
+msgstr "サイズ"
+
+#: directorymergewindow.cpp:2734
+msgid "Attr"
+msgstr "属性"
+
+#: directorymergewindow.cpp:2734
+msgid "Last Modification"
+msgstr "最終更新"
+
+#: directorymergewindow.cpp:2734
+msgid "Link-Destination"
+msgstr "リンク先"
+
+#: directorymergewindow.cpp:2781
+msgid "not available"
+msgstr "利用不可"
+
+#: directorymergewindow.cpp:2801
+msgid "A (Dest): "
+msgstr "A (先): "
+
+#: directorymergewindow.cpp:2804
+msgid "A (Base): "
+msgstr "A (元): "
+
+#: directorymergewindow.cpp:2810
+msgid "B (Dest): "
+msgstr "B (先): "
+
+#: directorymergewindow.cpp:2818
+msgid "C (Dest): "
+msgstr "C (先): "
+
+#: directorymergewindow.cpp:2824
+msgid "Dest: "
+msgstr "先: "
+
+#: directorymergewindow.cpp:2891
+msgid "Save Directory Merge State As..."
+msgstr "ディレクトリマージの状態を保存..."
+
+#: directorymergewindow.cpp:2978
+msgid "Start/Continue Directory Merge"
+msgstr "ディレクトリマージを開始/続行"
+
+#: directorymergewindow.cpp:2979
+msgid "Run Operation for Current Item"
+msgstr "現在の項目について操作を実行"
+
+#: directorymergewindow.cpp:2980
+msgid "Compare Selected File"
+msgstr "選択ファイルを比較 "
+
+#: directorymergewindow.cpp:2981
+msgid "Merge Current File"
+msgstr "現在のファイルをマージ "
+
+#: directorymergewindow.cpp:2981
+msgid ""
+"Merge\n"
+"File"
+msgstr ""
+"ファイル\n"
+"をマージ"
+
+#: directorymergewindow.cpp:2982
+msgid "Fold All Subdirs"
+msgstr "すべてのサブディレクトリをたたむ"
+
+#: directorymergewindow.cpp:2983
+msgid "Unfold All Subdirs"
+msgstr "すべてのサブディレクトリを展開"
+
+#: directorymergewindow.cpp:2987
+msgid "Choose A for All Items"
+msgstr "すべての項目について A を選択"
+
+#: directorymergewindow.cpp:2988
+msgid "Choose B for All Items"
+msgstr "すべての項目について B を選択"
+
+#: directorymergewindow.cpp:2989
+msgid "Choose C for All Items"
+msgstr "すべての項目について C を選択"
+
+#: directorymergewindow.cpp:2990
+msgid "Auto-Choose Operation for All Items"
+msgstr "すべての項目について自動選択"
+
+#: directorymergewindow.cpp:2991
+msgid "No Operation for All Items"
+msgstr "すべての項目について操作なし"
+
+#: directorymergewindow.cpp:2996
+msgid "Show Identical Files"
+msgstr "等しいファイルを表示"
+
+#: directorymergewindow.cpp:2996
+msgid ""
+"Identical\n"
+"Files"
+msgstr ""
+"等しい\n"
+"ファイル"
+
+#: directorymergewindow.cpp:2997
+msgid "Show Different Files"
+msgstr "異なるファイルを表示"
+
+#: directorymergewindow.cpp:2998
+msgid "Show Files only in A"
+msgstr "A にのみ存在するファイルを表示"
+
+#: directorymergewindow.cpp:2998
+msgid ""
+"Files\n"
+"only in A"
+msgstr ""
+"A にのみ存在\n"
+"するファイル"
+
+#: directorymergewindow.cpp:2999
+msgid "Show Files only in B"
+msgstr "B にのみ存在するファイルを表示"
+
+#: directorymergewindow.cpp:2999
+msgid ""
+"Files\n"
+"only in B"
+msgstr ""
+"B にのみ存在\n"
+"するファイル"
+
+#: directorymergewindow.cpp:3000
+msgid "Show Files only in C"
+msgstr "C にのみ存在するファイルを表示"
+
+#: directorymergewindow.cpp:3000
+msgid ""
+"Files\n"
+"only in C"
+msgstr ""
+"C にのみ存在\n"
+"するファイル"
+
+#: directorymergewindow.cpp:3004
+msgid "Compare Explicitly Selected Files"
+msgstr "明示的に選択したファイルを比較"
+
+#: directorymergewindow.cpp:3005
+msgid "Merge Explicitly Selected Files"
+msgstr "明示的に選択したファイルをマージ"
+
+#: directorymergewindow.cpp:3007 directorymergewindow.cpp:3014
+msgid "Do Nothing"
+msgstr "何もしない"
+
+#: directorymergewindow.cpp:3008
+msgid "A"
+msgstr "A"
+
+#: directorymergewindow.cpp:3009
+msgid "B"
+msgstr "B"
+
+#: directorymergewindow.cpp:3010
+msgid "C"
+msgstr "C"
+
+#: directorymergewindow.cpp:3019
+msgid "Delete A && B"
+msgstr "A と B を削除"
+
+#: directorymergewindow.cpp:3022
+msgid "Merge to A && B"
+msgstr "A と B にマージ"
+
+#: kdiff3_part.cpp:157 kdiff3_part.cpp:234
+msgid "Couldn't find files for comparison."
+msgstr "比較するファイルを見つけることができませんでした。"
+
+#: kdiff3_part.cpp:302
+msgid "KDiff3Part"
+msgstr "KDiff3Part"
+
+#: kreplacements/kreplacements.h:102
+msgid "Continue"
+msgstr "続行"
+
+#: kreplacements/kreplacements.h:104 kreplacements/kreplacements.cpp:637
+msgid "Quit"
+msgstr "終了"
+
+#: kreplacements/kreplacements.cpp:183 kreplacements/kreplacements.cpp:345
+msgid "Ok"
+msgstr "OK"
+
+#: kreplacements/kreplacements.cpp:187 kreplacements/kreplacements.cpp:721
+msgid "Help"
+msgstr "ヘルプ"
+
+#: kreplacements/kreplacements.cpp:191
+msgid "Defaults"
+msgstr "標準設定"
+
+#. i18n: file: kdiff3_shell.rc:4
+#. i18n: ectx: Menu (file)
+#: kreplacements/kreplacements.cpp:302 rc.cpp:12
+msgid "&File"
+msgstr "ファイル(&F)"
+
+#: kreplacements/kreplacements.cpp:303
+msgid "&Edit"
+msgstr "編集(&E)"
+
+#. i18n: file: kdiff3_shell.rc:7
+#. i18n: ectx: Menu (directory)
+#: kreplacements/kreplacements.cpp:304 rc.cpp:15
+msgid "&Directory"
+msgstr "ディレクトリ(&D)"
+
+#. i18n: file: kdiff3_shell.rc:50
+#. i18n: ectx: Menu (movement)
+#: kreplacements/kreplacements.cpp:307 rc.cpp:24
+msgid "&Movement"
+msgstr "移動(&M)"
+
+#. i18n: file: kdiff3_shell.rc:61
+#. i18n: ectx: Menu (diff)
+#: kreplacements/kreplacements.cpp:308 rc.cpp:27
+msgid "D&iffview"
+msgstr "Diff ビュー(&I)"
+
+#. i18n: file: kdiff3_shell.rc:73
+#. i18n: ectx: Menu (merge)
+#: kreplacements/kreplacements.cpp:309 rc.cpp:30
+msgid "&Merge"
+msgstr "マージ(&M)"
+
+#. i18n: file: kdiff3_shell.rc:95
+#. i18n: ectx: Menu (window)
+#: kreplacements/kreplacements.cpp:310 rc.cpp:33
+msgid "&Window"
+msgstr "ウィンドウ(&W)"
+
+#: kreplacements/kreplacements.cpp:311
+msgid "&Settings"
+msgstr "設定(&S)"
+
+#: kreplacements/kreplacements.cpp:312
+msgid "&Help"
+msgstr "ヘルプ(&H)"
+
+#: kreplacements/kreplacements.cpp:359
+msgid "&About"
+msgstr "情報(&A)"
+
+#: kreplacements/kreplacements.cpp:375
+msgid "A&uthor"
+msgstr "作者(&U)"
+
+#: kreplacements/kreplacements.cpp:389
+msgid "&Thanks To"
+msgstr "&Thanks To"
+
+#. i18n: file: kdiff3_shell.rc:30
+#. i18n: ectx: Menu (dir_current_merge_menu)
+#: kreplacements/kreplacements.cpp:494 kreplacements/kreplacements.cpp:503
+#: rc.cpp:18
+msgid "Current Item Merge Operation"
+msgstr "現在の項目のマージ操作"
+
+#. i18n: file: kdiff3_shell.rc:38
+#. i18n: ectx: Menu (dir_current_sync_menu)
+#: kreplacements/kreplacements.cpp:495 kreplacements/kreplacements.cpp:504
+#: rc.cpp:21
+msgid "Current Item Sync Operation"
+msgstr "現在の項目の同期操作"
+
+#: kreplacements/kreplacements.cpp:603
+msgid "Open"
+msgstr "開く"
+
+#: kreplacements/kreplacements.cpp:612
+msgid "Save"
+msgstr "保存"
+
+#: kreplacements/kreplacements.cpp:629
+msgid "Print..."
+msgstr "印刷..."
+
+#: kreplacements/kreplacements.cpp:645
+msgid "Cut"
+msgstr "切り取り"
+
+#: kreplacements/kreplacements.cpp:653
+msgid "Copy"
+msgstr "コピー"
+
+#: kreplacements/kreplacements.cpp:661
+msgid "Paste"
+msgstr "貼り付け"
+
+#: kreplacements/kreplacements.cpp:669
+msgid "Select All"
+msgstr "すべて選択"
+
+#: kreplacements/kreplacements.cpp:677
+msgid "Show Toolbar"
+msgstr "ツールバーを表示"
+
+#: kreplacements/kreplacements.cpp:685
+msgid "Show &Statusbar"
+msgstr "ステータスバーを表示(&S)"
+
+#: kreplacements/kreplacements.cpp:693
+#, kde-format
+msgid "&Configure %1..."
+msgstr "%1 を設定(&C)..."
+
+#: kreplacements/kreplacements.cpp:705 kreplacements/kreplacements.cpp:713
+msgid "About"
+msgstr "情報"
+
+#: kreplacements/kreplacements.cpp:728
+msgid "Find"
+msgstr "検索"
+
+#: kreplacements/kreplacements.cpp:736
+msgid "Find Next"
+msgstr "次を検索"
+
+#: kreplacements/kreplacements.cpp:756
+msgid "Select Font"
+msgstr "フォントを選択"
+
+#: kreplacements/kreplacements.cpp:798
+msgid "Incompatible font."
+msgstr "非互換なフォント"
+
+#: kreplacements/kreplacements.cpp:799
+msgid "Continue at my own risk"
+msgstr "自己責任で続行"
+
+#: kreplacements/kreplacements.cpp:799
+msgid "Select another font"
+msgstr "他のフォントを選択"
+
+#: kreplacements/kreplacements.cpp:1138
+msgid "For more documentation, see the help-menu or the subdirectory doc."
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:1141
+#, fuzzy
+#| msgid "KDiff3"
+msgid "KDiff3-Usage"
+msgstr "KDiff3"
+
+#: kreplacements/kreplacements.cpp:1141
+msgid "Ignore"
+msgstr "無視"
+
+#: kreplacements/kreplacements.cpp:1141
+msgid "Exit"
+msgstr "終了"
+
+#: mergeresultwindow.cpp:152 mergeresultwindow.cpp:970
+#: mergeresultwindow.cpp:984 mergeresultwindow.cpp:996
+#: mergeresultwindow.cpp:1008
+#, kde-format
+msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
+msgstr "未解決の衝突の数: %1 (内 %2 はホワイトスペース)"
+
+#: mergeresultwindow.cpp:301
+msgid ""
+"The output has been modified.\n"
+"If you continue your changes will be lost."
+msgstr ""
+"出力が更新されました。\n"
+"続行すると更新内容は失われます。"
+
+#: mergeresultwindow.cpp:830
+msgid "All input files contain the same text."
+msgstr "すべての入力ファイルのテキストは同じです。"
+
+#: mergeresultwindow.cpp:833 mergeresultwindow.cpp:835
+#: mergeresultwindow.cpp:837
+#, kde-format
+msgid "Files %1 and %2 have equal text.\n"
+msgstr "ファイル %1 と %2 のテキストは同じです。\n"
+
+#: mergeresultwindow.cpp:843
+msgid "Total number of conflicts: "
+msgstr "衝突の総計: "
+
+#: mergeresultwindow.cpp:844
+msgid ""
+"\n"
+"Nr of automatically solved conflicts: "
+msgstr ""
+"\n"
+"自動解決された衝突の数: "
+
+#: mergeresultwindow.cpp:845
+msgid ""
+"\n"
+"Nr of unsolved conflicts: "
+msgstr ""
+"\n"
+"未解決の衝突の数: "
+
+#: mergeresultwindow.cpp:847
+msgid "Conflicts"
+msgstr "衝突"
+
+#: mergeresultwindow.cpp:1714
+msgid "<No src line>"
+msgstr "<ソース行なし>"
+
+#: mergeresultwindow.cpp:1722
+msgid "<Merge Conflict (Whitespace only)>"
+msgstr "<マージ衝突 (ホワイトスペースのみ)>"
+
+#: mergeresultwindow.cpp:1724 mergeresultwindow.cpp:2498
+msgid "<Merge Conflict>"
+msgstr "<マージ衝突>"
+
+#: mergeresultwindow.cpp:2706
+msgid ""
+"Not all conflicts are solved yet.\n"
+"File not saved.\n"
+msgstr ""
+"未解決の衝突がまだ残っています。\n"
+"ファイルは保存されていません。\n"
+
+#: mergeresultwindow.cpp:2708
+msgid "Conflicts Left"
+msgstr "未解決の衝突があります"
+
+#: mergeresultwindow.cpp:2720
+msgid ""
+"\n"
+"\n"
+"Creating backup failed. File not saved."
+msgstr ""
+"\n"
+"\n"
+"バックアップファイルの作成に失敗しました。ファイルは保存されていません。"
+
+#: mergeresultwindow.cpp:2720 mergeresultwindow.cpp:2761
+msgid "File Save Error"
+msgstr "ファイルの保存エラー"
+
+#: mergeresultwindow.cpp:2761
+msgid "Error while writing."
+msgstr "書き込み中にエラーが発生しました。"
+
+#: mergeresultwindow.cpp:3091
+msgid "Output"
+msgstr "出力"
+
+#: mergeresultwindow.cpp:3103 mergeresultwindow.cpp:3256
+msgid "[Modified]"
+msgstr "[更新]"
+
+#: mergeresultwindow.cpp:3110
+msgid "Encoding for saving"
+msgstr "保存時のエンコーディング"
+
+#: mergeresultwindow.cpp:3203 mergeresultwindow.cpp:3205
+#: mergeresultwindow.cpp:3207
+msgid "Codec from"
+msgstr ""
+
+#. i18n: file: kdiff3_part.rc:4
+#. i18n: ectx: Menu (movement)
+#: rc.cpp:3
+msgid "&KDiff3"
+msgstr "KDiff3(&K)"
+
+#. i18n: file: kdiff3_part.rc:13
+#. i18n: ectx: Menu (movement)
+#: rc.cpp:6
+msgid "Configure KDiff3"
+msgstr "KDiff3 を設定"
+
+#. i18n: file: kdiff3_part.rc:16
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:9
+msgid "KDiff3"
+msgstr "KDiff3"
+
+#. i18n: file: kdiff3_shell.rc:106
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:36
+msgid "Main Toolbar"
+msgstr "メインツールバー"
+
+#: rc.cpp:37
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "SATOH Satoru,Yukiko Bando"
+
+#: rc.cpp:38
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "ss@kde.gr.jp,ybando@k6.dion.ne.jp"

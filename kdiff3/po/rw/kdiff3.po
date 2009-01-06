@@ -1,0 +1,3442 @@
+# translation of kdiff3 to Kinyarwanda.
+# Copyright (C) 
+# This file is distributed under the same license as the kdiff3 package.
+# Steve Murphy <murf@e-tools.com>, 2005.
+# Steve performed initial rough translation from compendium built from translations provided by the following translators:
+# Philibert Ndandali  <ndandali@yahoo.fr>, 2005.
+# Viateur MUGENZI <muvia1@yahoo.fr>, 2005.
+# Noëlla Mupole <s24211045@tuks.co.za>, 2005.
+# Carole Karema <karemacarole@hotmail.com>, 2005.
+# JEAN BAPTISTE NGENDAHAYO <ngenda_denis@yahoo.co.uk>, 2005.
+# Augustin KIBERWA  <akiberwa@yahoo.co.uk>, 2005.
+# Donatien NSENGIYUMVA <ndonatienuk@yahoo.co.uk>, 2005.
+# Antoine Bigirimana <antoine@e-tools.com>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdiff3 3.4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2008-12-08 10:27+0100\n"
+"PO-Revision-Date: 2005-05-25 18:07-0600\n"
+"Last-Translator: Steve Murphy <murf@e-tools.com>\n"
+"Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: kdiff3.cpp:167
+#, fuzzy
+msgid "Current Configuration:"
+msgstr "Iki cyiciro"
+
+#: kdiff3.cpp:172
+#, fuzzy
+msgid "Config Option Error:"
+msgstr "Ikosa gufungura idosiye"
+
+#: kdiff3.cpp:217
+#, fuzzy
+msgid "Option --auto used, but no output file specified."
+msgstr "- - Ikiyega Byakoreshejwe , Oya Ibisohoka Idosiye . "
+
+#: kdiff3.cpp:366
+#, fuzzy
+msgid "Option --auto ignored for directory comparison."
+msgstr "- - Ikiyega ya:  Ububiko . "
+
+#: kdiff3.cpp:402
+#, fuzzy
+msgid "Saving failed."
+msgstr "Byanze . "
+
+#: kdiff3.cpp:437 pdiff.cpp:1080 pdiff.cpp:1151
+#, fuzzy
+msgid "Opening of these files failed:"
+msgstr "Bya Idosiye Byanze : "
+
+#: kdiff3.cpp:446
+#, fuzzy
+msgid "File Open Error"
+msgstr "Ikosa gufungura idosiye"
+
+#: kdiff3.cpp:474
+#, fuzzy
+msgid "Opens documents for comparison..."
+msgstr "Inyandiko ya:  ... "
+
+#: kdiff3.cpp:476
+#, fuzzy
+#| msgid "Ready."
+msgid "Reload"
+msgstr "Cyiteguye."
+
+#: kdiff3.cpp:479
+#, fuzzy
+msgid "Saves the merge result. All conflicts must be solved!"
+msgstr "i Gukomatanya Igisubizo . ! "
+
+#: kdiff3.cpp:481
+#, fuzzy
+msgid "Saves the current document as..."
+msgstr "i KIGEZWEHO Inyandiko Nka ... "
+
+#: kdiff3.cpp:483
+msgid "Print the differences"
+msgstr ""
+
+#: kdiff3.cpp:485
+#, fuzzy
+msgid "Quits the application"
+msgstr "i Porogaramu "
+
+#: kdiff3.cpp:487
+#, fuzzy
+msgid "Cuts the selected section and puts it to the clipboard"
+msgstr "i Byahiswemo Icyiciro na Kuri i Ububikokoporora "
+
+#: kdiff3.cpp:489
+#, fuzzy
+msgid "Copies the selected section to the clipboard"
+msgstr "i Byahiswemo Icyiciro Kuri i Ububikokoporora "
+
+#: kdiff3.cpp:491
+#, fuzzy
+msgid "Pastes the clipboard contents to actual position"
+msgstr "i Ububikokoporora Ibigize Kuri Ibirindiro: "
+
+#: kdiff3.cpp:493
+msgid "Select everything in current window"
+msgstr ""
+
+#: kdiff3.cpp:495
+#, fuzzy
+msgid "Search for a string"
+msgstr "ya:  A Ikurikiranyanyuguti "
+
+#: kdiff3.cpp:497
+#, fuzzy
+msgid "Search again for the string"
+msgstr "Nanone ya:  i Ikurikiranyanyuguti "
+
+#: kdiff3.cpp:502
+#, fuzzy
+msgid "Enables/disables the statusbar"
+msgstr "/i Umurongomiterere "
+
+#: kdiff3.cpp:506
+#, fuzzy
+msgid "Configure KDiff3..."
+msgstr "Kugena imiterere..."
+
+#: kdiff3.cpp:527
+#, fuzzy
+msgid "Go to Current Delta"
+msgstr "Kuri "
+
+#: kdiff3.cpp:527
+#, fuzzy
+msgid ""
+"Current\n"
+"Delta"
+msgstr "Kuri "
+
+#: kdiff3.cpp:529
+#, fuzzy
+msgid "Go to First Delta"
+msgstr "Kuri "
+
+#: kdiff3.cpp:529
+#, fuzzy
+msgid ""
+"First\n"
+"Delta"
+msgstr "Kuri "
+
+#: kdiff3.cpp:531
+#, fuzzy
+msgid "Go to Last Delta"
+msgstr "Kuri "
+
+#: kdiff3.cpp:531
+#, fuzzy
+msgid ""
+"Last\n"
+"Delta"
+msgstr "Kuri "
+
+#: kdiff3.cpp:533
+#, fuzzy
+msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
+msgstr "( Umweru Umwanya Ibinyuranyo Ryari: \" \" ni Yahagaritswe . ) "
+
+#: kdiff3.cpp:534
+#, fuzzy
+msgid ""
+"(Does not skip white space differences even when \"Show White Space\" is "
+"disabled.)"
+msgstr ""
+"( OYA Gusimbuka Umweru Umwanya Ibinyuranyo ATARIIGIHARWE Ryari: \" \" ni "
+"Yahagaritswe . ) "
+
+#: kdiff3.cpp:535
+#, fuzzy
+msgid "Go to Previous Delta"
+msgstr "Kuri "
+
+#: kdiff3.cpp:535
+#, fuzzy
+msgid ""
+"Prev\n"
+"Delta"
+msgstr "Kuri "
+
+#: kdiff3.cpp:537
+#, fuzzy
+msgid "Go to Next Delta"
+msgstr "Kuri "
+
+#: kdiff3.cpp:537
+#, fuzzy
+msgid ""
+"Next\n"
+"Delta"
+msgstr "Kuri "
+
+#: kdiff3.cpp:539
+#, fuzzy
+msgid "Go to Previous Conflict"
+msgstr "Kuri "
+
+#: kdiff3.cpp:539
+#, fuzzy
+msgid ""
+"Prev\n"
+"Conflict"
+msgstr "Ishyamirana ry'ingenzi"
+
+#: kdiff3.cpp:541
+#, fuzzy
+msgid "Go to Next Conflict"
+msgstr "Kuri "
+
+#: kdiff3.cpp:541
+#, fuzzy
+msgid ""
+"Next\n"
+"Conflict"
+msgstr "Kuri "
+
+#: kdiff3.cpp:543
+#, fuzzy
+msgid "Go to Previous Unsolved Conflict"
+msgstr "Kuri "
+
+#: kdiff3.cpp:543
+#, fuzzy
+msgid ""
+"Prev\n"
+"Unsolved"
+msgstr "Kidakoreshwa"
+
+#: kdiff3.cpp:545
+#, fuzzy
+msgid "Go to Next Unsolved Conflict"
+msgstr "Kuri "
+
+#: kdiff3.cpp:545
+#, fuzzy
+msgid ""
+"Next\n"
+"Unsolved"
+msgstr "Kidakoreshwa"
+
+#: kdiff3.cpp:547
+#, fuzzy
+msgid "Select Line(s) From A"
+msgstr "( S ) A "
+
+#: kdiff3.cpp:547
+msgid ""
+"Choose\n"
+"A"
+msgstr ""
+
+#: kdiff3.cpp:548
+#, fuzzy
+msgid "Select Line(s) From B"
+msgstr "( S ) "
+
+#: kdiff3.cpp:548
+msgid ""
+"Choose\n"
+"B"
+msgstr ""
+
+#: kdiff3.cpp:549
+#, fuzzy
+msgid "Select Line(s) From C"
+msgstr "( S ) "
+
+#: kdiff3.cpp:549
+msgid ""
+"Choose\n"
+"C"
+msgstr ""
+
+#: kdiff3.cpp:550
+#, fuzzy
+msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
+msgstr "Kuri "
+
+#: kdiff3.cpp:550
+#, fuzzy
+msgid ""
+"Auto\n"
+"Next"
+msgstr "Gukoporora Ihitamo "
+
+#: kdiff3.cpp:552
+#, fuzzy
+msgid "Show Space && Tabulator Characters for Differences"
+msgstr "& & ya:  "
+
+#: kdiff3.cpp:552
+msgid ""
+"White\n"
+"Characters"
+msgstr ""
+
+#: kdiff3.cpp:553
+#, fuzzy
+msgid "Show White Space"
+msgstr "Umwanya w'Umweru"
+
+#: kdiff3.cpp:553
+msgid ""
+"White\n"
+"Deltas"
+msgstr ""
+
+#: kdiff3.cpp:555
+#, fuzzy
+msgid "Show Line Numbers"
+msgstr "Kwerekana nomero z'umurongo"
+
+#: kdiff3.cpp:555
+#, fuzzy
+msgid ""
+"Line\n"
+"Numbers"
+msgstr "Kwerekana nomero z'umurongo"
+
+#: kdiff3.cpp:556
+#, fuzzy
+msgid "Choose A Everywhere"
+msgstr "A "
+
+#: kdiff3.cpp:557
+#, fuzzy
+msgid "Choose B Everywhere"
+msgstr "Hitamo darayiva"
+
+#: kdiff3.cpp:558
+#, fuzzy
+msgid "Choose C Everywhere"
+msgstr "Hitamo darayiva"
+
+#: kdiff3.cpp:559
+#, fuzzy
+msgid "Choose A for All Unsolved Conflicts"
+msgstr "A ya:  "
+
+#: kdiff3.cpp:560
+#, fuzzy
+msgid "Choose B for All Unsolved Conflicts"
+msgstr "ya:  "
+
+#: kdiff3.cpp:561
+#, fuzzy
+msgid "Choose C for All Unsolved Conflicts"
+msgstr "ya:  "
+
+#: kdiff3.cpp:562
+#, fuzzy
+msgid "Choose A for All Unsolved Whitespace Conflicts"
+msgstr "A ya:  "
+
+#: kdiff3.cpp:563
+#, fuzzy
+msgid "Choose B for All Unsolved Whitespace Conflicts"
+msgstr "ya:  "
+
+#: kdiff3.cpp:564
+#, fuzzy
+msgid "Choose C for All Unsolved Whitespace Conflicts"
+msgstr "ya:  "
+
+#: kdiff3.cpp:565
+#, fuzzy
+msgid "Automatically Solve Simple Conflicts"
+msgstr "Gufunga mu buryo bwikoresha impago zidakoreshwa"
+
+#: kdiff3.cpp:566
+#, fuzzy
+msgid "Set Deltas to Conflicts"
+msgstr "Kuri "
+
+#: kdiff3.cpp:567
+msgid "Run Regular Expression Auto Merge"
+msgstr ""
+
+#: kdiff3.cpp:568
+#, fuzzy
+msgid "Automatically Solve History Conflicts"
+msgstr "Gufunga mu buryo bwikoresha impago zidakoreshwa"
+
+#: kdiff3.cpp:569
+msgid "Split Diff At Selection"
+msgstr ""
+
+#: kdiff3.cpp:570
+#, fuzzy
+msgid "Join Selected Diffs"
+msgstr "Idosiye "
+
+#: kdiff3.cpp:572
+#, fuzzy
+msgid "Show Window A"
+msgstr "A "
+
+#: kdiff3.cpp:573
+#, fuzzy
+msgid "Show Window B"
+msgstr "Kwerekana Ilisiti y'Amadirishya"
+
+#: kdiff3.cpp:574
+#, fuzzy
+msgid "Show Window C"
+msgstr "Kwerekana Ilisiti y'Amadirishya"
+
+#: kdiff3.cpp:575 kdiff3.cpp:586
+#, fuzzy
+msgid "Focus Next Window"
+msgstr "idirishya rikurikira"
+
+#: kdiff3.cpp:577
+#, fuzzy
+msgid "Normal Overview"
+msgstr "Gahunda-Nyamwaka"
+
+#: kdiff3.cpp:578
+#, fuzzy
+msgid "A vs. B Overview"
+msgstr "A . "
+
+#: kdiff3.cpp:579
+#, fuzzy
+msgid "A vs. C Overview"
+msgstr "A . "
+
+#: kdiff3.cpp:580
+#, fuzzy
+msgid "B vs. C Overview"
+msgstr "Incamake"
+
+#: kdiff3.cpp:581
+msgid "Word Wrap Diff Windows"
+msgstr ""
+
+#: kdiff3.cpp:582
+msgid "Add Manual Diff Alignment"
+msgstr ""
+
+#: kdiff3.cpp:583
+msgid "Clear All Manual Diff Alignments"
+msgstr ""
+
+#: kdiff3.cpp:588
+#, fuzzy
+msgid "Focus Prev Window"
+msgstr "Kwerekeza ku idirishya: "
+
+#: kdiff3.cpp:589
+#, fuzzy
+msgid "Toggle Split Orientation"
+msgstr "Icyerekezo mwandiko"
+
+#: kdiff3.cpp:591
+msgid "Dir && Text Split Screen View"
+msgstr ""
+
+#: kdiff3.cpp:593
+msgid "Toggle Between Dir && Text View"
+msgstr ""
+
+#: kdiff3.cpp:615 kdiff3.cpp:707 kdiff3.cpp:732 kdiff3.cpp:1003
+#: kdiff3.cpp:1024 pdiff.cpp:1098 pdiff.cpp:1170 pdiff.cpp:1208 pdiff.cpp:1224
+#: pdiff.cpp:1254 pdiff.cpp:1265 directorymergewindow.cpp:739
+msgid "Ready."
+msgstr "Cyiteguye."
+
+#: kdiff3.cpp:649 pdiff.cpp:1753
+#, fuzzy
+msgid "The merge result hasn't been saved."
+msgstr "Gukomatanya Igisubizo . "
+
+#: kdiff3.cpp:650 kdiff3.cpp:660 kdiff3.cpp:672 pdiff.cpp:1016 pdiff.cpp:1754
+#: pdiff.cpp:1764 directorymergewindow.cpp:407 mergeresultwindow.cpp:303
+msgid "Warning"
+msgstr ""
+
+#: kdiff3.cpp:651
+#, fuzzy
+msgid "Save && Quit"
+msgstr "Kubika & & "
+
+#: kdiff3.cpp:652
+#, fuzzy
+msgid "Quit Without Saving"
+msgstr "Komeka utahinduye imiterere"
+
+#: kdiff3.cpp:660 pdiff.cpp:1764
+#, fuzzy
+msgid "Saving the merge result failed."
+msgstr "i Gukomatanya Igisubizo Byanze . "
+
+#: kdiff3.cpp:671 pdiff.cpp:1015
+#, fuzzy
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort?"
+msgstr "A Ububiko Gukomatanya . , Kuri Kureka ? "
+
+#: kdiff3.cpp:696
+#, fuzzy
+msgid "Saving file..."
+msgstr "Idosiye ... "
+
+#: kdiff3.cpp:713
+#, fuzzy
+msgid "Saving file with a new filename..."
+msgstr "Idosiye Na: A Gishya Izina ry'idosiye: ... "
+
+#: kdiff3.cpp:715 kreplacements/kreplacements.cpp:620
+msgid "Save As..."
+msgstr ""
+
+#: kdiff3.cpp:974
+#, fuzzy
+msgid "Exiting..."
+msgstr "Tegereza..."
+
+#: kdiff3.cpp:987
+#, fuzzy
+msgid "Toggling toolbar..."
+msgstr "Umwanyabikoresho ... "
+
+#: kdiff3.cpp:1008
+#, fuzzy
+msgid "Toggle the statusbar..."
+msgstr "i Umurongomiterere ... "
+
+#: fileaccess.cpp:612
+#, fuzzy
+msgid ""
+"While trying to make a backup, deleting an older backup failed. \n"
+"Filename: "
+msgstr ""
+"Kuri Ubwoko A Inyibutsa , Gusiba Inyibutsa Byanze . \n"
+": "
+
+#: fileaccess.cpp:619
+#, fuzzy
+msgid ""
+"While trying to make a backup, renaming failed. \n"
+"Filenames: "
+msgstr ""
+"Kuri Ubwoko A Inyibutsa , Guhindura izina Byanze . \n"
+": "
+
+#: fileaccess.cpp:643
+#, fuzzy, kde-format
+msgid "Getting file status: %1"
+msgstr "Idosiye Imimerere : %1 "
+
+#: fileaccess.cpp:686
+#, fuzzy, kde-format
+msgid "Reading file: %1"
+msgstr "Idosiye : %1 "
+
+#: fileaccess.cpp:723
+#, fuzzy, kde-format
+msgid "Writing file: %1"
+msgstr "Idosiye : %1 "
+
+#: fileaccess.cpp:751
+msgid "Out of memory"
+msgstr "Ububiko bwarenzwe"
+
+#: fileaccess.cpp:786
+#, fuzzy, kde-format
+msgid "Making directory: %1"
+msgstr "Ububiko : %1 "
+
+#: fileaccess.cpp:806
+#, fuzzy, kde-format
+msgid "Removing directory: %1"
+msgstr "Ububiko : %1 "
+
+#: fileaccess.cpp:821
+#, fuzzy, kde-format
+msgid "Removing file: %1"
+msgstr "Idosiye : %1 "
+
+#: fileaccess.cpp:837
+#, fuzzy, kde-format
+msgid "Creating symbolic link: %1 -> %2"
+msgstr "Ihuza : %1 - > %2 "
+
+#: fileaccess.cpp:864
+#, fuzzy, kde-format
+msgid "Renaming file: %1 -> %2"
+msgstr "Idosiye : %1 - > %2 "
+
+#: fileaccess.cpp:897
+#, fuzzy, kde-format
+msgid "Copying file: %1 -> %2"
+msgstr "Idosiye : %1 - > %2 "
+
+#: fileaccess.cpp:911
+#, fuzzy, kde-format
+msgid ""
+"Error during file copy operation: Opening file for reading failed. Filename: "
+"%1"
+msgstr "Ikosa Idosiye Gukoporora Igikorwa : Idosiye ya:  Byanze . : %1 "
+
+#: fileaccess.cpp:917
+#, fuzzy, kde-format
+msgid ""
+"Error during file copy operation: Opening file for writing failed. Filename: "
+"%1"
+msgstr "Ikosa Idosiye Gukoporora Igikorwa : Idosiye ya:  Byanze . : %1 "
+
+#: fileaccess.cpp:932
+#, fuzzy, kde-format
+msgid "Error during file copy operation: Reading failed. Filename: %1"
+msgstr "Ikosa Idosiye Gukoporora Igikorwa : Byanze . : %1 "
+
+#: fileaccess.cpp:941
+#, fuzzy, kde-format
+msgid "Error during file copy operation: Writing failed. Filename: %1"
+msgstr "Ikosa Idosiye Gukoporora Igikorwa : Byanze . : %1 "
+
+#: fileaccess.cpp:1237
+#, fuzzy
+msgid "Reading directory: "
+msgstr "Ububiko : "
+
+#: fileaccess.cpp:1361
+#, fuzzy, kde-format
+msgid "Listing directory: %1"
+msgstr "Ububiko : %1 "
+
+#: fileaccess.cpp:1495 smalldialogs.cpp:179 smalldialogs.cpp:396
+msgid "&Cancel"
+msgstr ""
+
+#: diff.cpp:250
+#, fuzzy
+msgid "Writing clipboard data to temp file failed."
+msgstr "Ububikokoporora Ibyatanzwe Kuri Idosiye Byanze . "
+
+#: diff.cpp:254
+#, fuzzy
+msgid "From Clipboard"
+msgstr "Ububikokoporora"
+
+#: diff.cpp:502
+#, fuzzy, kde-format
+msgid ""
+"Preprocessing possibly failed. Check this command:\n"
+"\n"
+"  %1\n"
+"\n"
+"The preprocessing command will be disabled now."
+msgstr ""
+"Byanze . iyi command : \n"
+"\n"
+"%1 \n"
+"\n"
+"command Yahagaritswe NONEAHA . "
+
+#: diff.cpp:542
+#, fuzzy, kde-format
+msgid ""
+"The line-matching-preprocessing possibly failed. Check this command:\n"
+"\n"
+"  %1\n"
+"\n"
+"The line-matching-preprocessing command will be disabled now."
+msgstr ""
+"Umurongo: - - Byanze . iyi command : \n"
+"\n"
+"%1 \n"
+"\n"
+"Umurongo: - - command Yahagaritswe NONEAHA . "
+
+#: diff.cpp:1658 diff.cpp:1672
+#, fuzzy
+msgid ""
+"Data loss error:\n"
+"If it is reproducable please contact the author.\n"
+msgstr ""
+"Ikosa : \n"
+"ni Umuntu i Umwanditsi: . \n"
+
+#: diff.cpp:1660 diff.cpp:1674
+#, fuzzy
+msgid "Severe Internal Error"
+msgstr "Ikosa "
+
+#: smalldialogs.cpp:58
+#, fuzzy
+msgid "A (Base):"
+msgstr "A ( Base ) : "
+
+#: smalldialogs.cpp:65 smalldialogs.cpp:82 smalldialogs.cpp:99
+#: smalldialogs.cpp:142
+#, fuzzy
+msgid "File..."
+msgstr "Idosiye..."
+
+#: smalldialogs.cpp:67 smalldialogs.cpp:84 smalldialogs.cpp:101
+#: smalldialogs.cpp:144
+#, fuzzy
+msgid "Dir..."
+msgstr "..."
+
+#: smalldialogs.cpp:93
+#, fuzzy
+msgid "C (Optional):"
+msgstr "(bitari ngombwa)"
+
+#: smalldialogs.cpp:110 optiondialog.cpp:873 directorymergewindow.cpp:1893
+#: directorymergewindow.cpp:1894 directorymergewindow.cpp:3011
+msgid "Merge"
+msgstr "Gukomatanya"
+
+#: smalldialogs.cpp:116
+msgid "Swap/Copy Names ..."
+msgstr ""
+
+#: smalldialogs.cpp:121 smalldialogs.cpp:122 smalldialogs.cpp:123
+#, kde-format
+msgid "Swap %1<->%2"
+msgstr ""
+
+#: smalldialogs.cpp:124 smalldialogs.cpp:125 smalldialogs.cpp:126
+#, kde-format
+msgid "Copy %1->Output"
+msgstr ""
+
+#: smalldialogs.cpp:127 smalldialogs.cpp:128 smalldialogs.cpp:129
+#, kde-format
+msgid "Swap %1<->Output"
+msgstr ""
+
+#: smalldialogs.cpp:136
+#, fuzzy
+msgid "Output (optional):"
+msgstr "( Bitari ngombwa ) : "
+
+#: smalldialogs.cpp:168
+msgid "Configure..."
+msgstr "Kugena imiterere..."
+
+#: smalldialogs.cpp:174
+msgid "&OK"
+msgstr ""
+
+#: smalldialogs.cpp:362
+#, fuzzy
+msgid "Search text:"
+msgstr "Umwandiko : "
+
+#: smalldialogs.cpp:369
+msgid "Case sensitive"
+msgstr "Imyandikire y'inyuguti nkuru/nto"
+
+#: smalldialogs.cpp:372
+#, fuzzy
+msgid "Search A"
+msgstr "A "
+
+#: smalldialogs.cpp:377
+#, fuzzy
+msgid "Search B"
+msgstr "Gushaka"
+
+#: smalldialogs.cpp:382
+#, fuzzy
+msgid "Search C"
+msgstr "Gushaka"
+
+#: smalldialogs.cpp:387
+#, fuzzy
+msgid "Search output"
+msgstr "Ibisohoka "
+
+#: smalldialogs.cpp:392
+msgid "&Search"
+msgstr "Shakisha"
+
+#: smalldialogs.cpp:409
+msgid "Regular Expression Tester"
+msgstr ""
+
+#: smalldialogs.cpp:414 optiondialog.cpp:940
+msgid "Auto merge regular expression:"
+msgstr ""
+
+#: smalldialogs.cpp:422
+msgid "Example auto merge line:"
+msgstr ""
+
+#: smalldialogs.cpp:424
+msgid "For auto merge test copy a line as used in your files."
+msgstr ""
+
+#: smalldialogs.cpp:430 smalldialogs.cpp:459 smalldialogs.cpp:496
+msgid "Match result:"
+msgstr ""
+
+#: smalldialogs.cpp:441 optiondialog.cpp:966
+msgid "History start regular expression:"
+msgstr ""
+
+#: smalldialogs.cpp:449
+msgid "Example history start line (with leading comment):"
+msgstr ""
+
+#: smalldialogs.cpp:452
+msgid ""
+"Copy a history start line as used in your files,\n"
+"including the leading comment."
+msgstr ""
+
+#: smalldialogs.cpp:470 optiondialog.cpp:976
+msgid "History entry start regular expression:"
+msgstr ""
+
+#: smalldialogs.cpp:478
+msgid "History sort key order:"
+msgstr ""
+
+#: smalldialogs.cpp:486
+msgid "Example history entry start line (without leading comment):"
+msgstr ""
+
+#: smalldialogs.cpp:488
+msgid ""
+"Copy a history entry start line as used in your files,\n"
+"but omit the leading comment."
+msgstr ""
+
+#: smalldialogs.cpp:503
+msgid "Sort key result:"
+msgstr ""
+
+#: smalldialogs.cpp:510
+msgid "OK"
+msgstr ""
+
+#: smalldialogs.cpp:514 kreplacements/kreplacements.h:103
+#: kreplacements/kreplacements.cpp:164 kreplacements/kreplacements.cpp:195
+msgid "Cancel"
+msgstr ""
+
+#: smalldialogs.cpp:554 smalldialogs.cpp:564 smalldialogs.cpp:585
+msgid "Match success."
+msgstr ""
+
+#: smalldialogs.cpp:558 smalldialogs.cpp:568 smalldialogs.cpp:591
+#, fuzzy
+msgid "Match failed."
+msgstr "Byanze . "
+
+#: smalldialogs.cpp:576
+msgid "Opening and closing parentheses don't match in regular expression."
+msgstr ""
+
+#: optiondialog.cpp:367
+#, fuzzy
+msgid "Unicode, 8 bit"
+msgstr ", 8 "
+
+#: optiondialog.cpp:368
+msgid "Unicode"
+msgstr "Inikode"
+
+#: optiondialog.cpp:369
+#, fuzzy
+msgid "Latin1"
+msgstr "Ikilatini-1"
+
+#: optiondialog.cpp:388
+#, fuzzy
+msgid "Change this if non-ASCII characters are not displayed correctly."
+msgstr "iyi NIBA - Inyuguti OYA . "
+
+#: optiondialog.cpp:465
+#, fuzzy
+#| msgid "Configure..."
+msgid "Configure"
+msgstr "Kugena imiterere..."
+
+#: optiondialog.cpp:531
+msgid "Font"
+msgstr ""
+
+#: optiondialog.cpp:532
+msgid "Editor & Diff Output Font"
+msgstr ""
+
+#: optiondialog.cpp:556
+#, fuzzy
+msgid "Italic font for deltas"
+msgstr "Imyandikire ya:  "
+
+#: optiondialog.cpp:559
+#, fuzzy
+msgid ""
+"Selects the italic version of the font for differences.\n"
+"If the font doesn't support italic characters, then this does nothing."
+msgstr ""
+"i Biberamye Verisiyo Bya i Imyandikire ya:  Ibinyuranyo . \n"
+"i Imyandikire Gushigikira Biberamye Inyuguti , Hanyuma iyi Nta na kimwe . "
+
+#: optiondialog.cpp:568
+msgid "Color"
+msgstr "Ibara"
+
+#: optiondialog.cpp:569
+#, fuzzy
+msgid "Colors Settings"
+msgstr "Amagenamiterere y'Akarere"
+
+#: optiondialog.cpp:588
+msgid "Editor and Diff Views:"
+msgstr ""
+
+#: optiondialog.cpp:596
+msgid "Foreground color:"
+msgstr "Ibara ry'imbugambanza:"
+
+#: optiondialog.cpp:603
+msgid "Background color:"
+msgstr "Ibara ry'imbuganyuma:"
+
+#: optiondialog.cpp:612
+#, fuzzy
+msgid "Diff background color:"
+msgstr "Mbuganyuma Ibara: : "
+
+#: optiondialog.cpp:620
+#, fuzzy
+msgid "Color A:"
+msgstr "A : "
+
+#: optiondialog.cpp:628
+#, fuzzy
+msgid "Color B:"
+msgstr "Ibara:"
+
+#: optiondialog.cpp:636
+#, fuzzy
+msgid "Color C:"
+msgstr "Ibara:"
+
+#: optiondialog.cpp:643
+#, fuzzy
+msgid "Conflict color:"
+msgstr "Ibara: : "
+
+#: optiondialog.cpp:651
+#, fuzzy
+msgid "Current range background color:"
+msgstr "Urutonde Mbuganyuma Ibara: : "
+
+#: optiondialog.cpp:659
+#, fuzzy
+msgid "Current range diff background color:"
+msgstr "Urutonde Mbuganyuma Ibara: : "
+
+#: optiondialog.cpp:666
+msgid "Color for manually aligned difference ranges:"
+msgstr ""
+
+#: optiondialog.cpp:672
+#, fuzzy
+msgid "Directory Comparison View:"
+msgstr "Inzira y'ububiko"
+
+#: optiondialog.cpp:678
+msgid "Newest file color:"
+msgstr ""
+
+#: optiondialog.cpp:682
+msgid ""
+"Changing this color will only be effective when starting the next directory "
+"comparison."
+msgstr ""
+
+#: optiondialog.cpp:687
+msgid "Oldest file color:"
+msgstr ""
+
+#: optiondialog.cpp:695
+msgid "Middle age file color:"
+msgstr ""
+
+#: optiondialog.cpp:703
+msgid "Color for missing files:"
+msgstr ""
+
+#: optiondialog.cpp:717
+msgid "Editor"
+msgstr "Muhinduzi"
+
+#: optiondialog.cpp:718
+#, fuzzy
+msgid "Editor Behavior"
+msgstr "imyitwarire"
+
+#: optiondialog.cpp:732
+#, fuzzy
+msgid "Tab inserts spaces"
+msgstr "Imyanya "
+
+#: optiondialog.cpp:735
+#, fuzzy
+msgid ""
+"On: Pressing tab generates the appropriate number of spaces.\n"
+"Off: A Tab-character will be inserted."
+msgstr ""
+": tab i Umubare Bya Imyanya . \n"
+": A - Inyuguti: Byinjijwemo . "
+
+#: optiondialog.cpp:741
+#, fuzzy
+msgid "Tab size:"
+msgstr "Ingano: : "
+
+#: optiondialog.cpp:747
+#, fuzzy
+msgid "Auto indentation"
+msgstr "Isunika "
+
+#: optiondialog.cpp:750
+#, fuzzy
+msgid "On: The indentation of the previous line is used for a new line.\n"
+msgstr ""
+": Isunika Bya i Ibanjirije Umurongo: ni Byakoreshejwe ya:  A Gishya "
+"Umurongo: . \n"
+
+#: optiondialog.cpp:754
+#, fuzzy
+msgid "Auto copy selection"
+msgstr "Gukoporora Ihitamo "
+
+#: optiondialog.cpp:757
+#, fuzzy
+msgid ""
+"On: Any selection is immediately written to the clipboard.\n"
+"Off: You must explicitely copy e.g. via Ctrl-C."
+msgstr "G."
+
+#: optiondialog.cpp:762
+#, fuzzy
+msgid "Line end style:"
+msgstr "Impera Imisusire : "
+
+#: optiondialog.cpp:776
+#, fuzzy
+msgid ""
+"Sets the line endings for when an edited file is saved.\n"
+"DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
+msgstr ""
+"i Umurongo: ya:  Ryari: Idosiye ni . \n"
+"/: + ; : ; Na: = , = "
+
+#: optiondialog.cpp:788
+#, fuzzy
+msgid "Diff"
+msgstr "Igabanya"
+
+#: optiondialog.cpp:789
+#, fuzzy
+msgid "Diff Settings"
+msgstr "Iganamiterere rya musomyi"
+
+#: optiondialog.cpp:813
+#, fuzzy
+msgid "Treat as white space."
+msgstr "/+ + Ibisobanuro nka Umweru Umwanya . "
+
+#: optiondialog.cpp:815
+#, fuzzy
+msgid "Ignore numbers"
+msgstr "Imibare "
+
+#: optiondialog.cpp:818
+#, fuzzy
+msgid ""
+"Ignore number characters during line matching phase. (Similar to Ignore "
+"white space.)\n"
+"Might help to compare files with numeric data."
+msgstr ""
+"Umubare Inyuguti Umurongo: . ( Kuri Umweru Umwanya . ) \n"
+"Ifashayobora Kuri Kugereranya # Idosiye Na: Bikurikije umubare Ibyatanzwe . "
+
+#: optiondialog.cpp:823
+#, fuzzy
+msgid "Ignore C/C++ comments"
+msgstr "/+ + Ibisobanuro "
+
+#: optiondialog.cpp:825
+#, fuzzy
+msgid "Treat C/C++ comments like white space."
+msgstr "/+ + Ibisobanuro nka Umweru Umwanya . "
+
+#: optiondialog.cpp:829
+#, fuzzy
+msgid "Ignore case"
+msgstr "Kwirengagiza Inshuro Imwe"
+
+#: optiondialog.cpp:832
+#, fuzzy
+msgid "Treat case differences like white space changes. ('a'<=>'A')"
+msgstr "Ibinyuranyo nka Umweru Umwanya Amahinduka . ( ' < = > ' ) "
+
+#: optiondialog.cpp:836
+#, fuzzy
+msgid "Preprocessor command:"
+msgstr "command : "
+
+#: optiondialog.cpp:840
+#, fuzzy
+msgid "User defined pre-processing. (See the docs for details.)"
+msgstr "Byahawe imiterere mbere - Inonosora . ( i ya:  Birambuye . ) "
+
+#: optiondialog.cpp:843
+#, fuzzy
+msgid "Line-matching preprocessor command:"
+msgstr "- command : "
+
+#: optiondialog.cpp:847
+#, fuzzy
+msgid ""
+"This pre-processor is only used during line matching.\n"
+"(See the docs for details.)"
+msgstr ""
+"Byahawe imiterere mbere - ni Byakoreshejwe Umurongo: . \n"
+"( i ya:  Birambuye . ) "
+
+#: optiondialog.cpp:850
+#, fuzzy
+msgid "Try hard (slower)"
+msgstr "Ikomeye ( ) "
+
+#: optiondialog.cpp:853
+#, fuzzy
+msgid ""
+"Enables the --minimal option for the external diff.\n"
+"The analysis of big files will be much slower."
+msgstr ""
+"i - - Ihitamo ya:  i external . \n"
+"Bya Idosiye . "
+
+#: optiondialog.cpp:858
+msgid "Align B and C for 3 input files"
+msgstr ""
+
+#: optiondialog.cpp:861
+msgid ""
+"Try to align B and C when comparing or merging three input files.\n"
+"Not recommended for merging because merge might get more complicated.\n"
+"(Default is off.)"
+msgstr ""
+
+#: optiondialog.cpp:874
+#, fuzzy
+msgid "Merge Settings"
+msgstr "Iganamiterere rya musomyi"
+
+#: optiondialog.cpp:889
+#, fuzzy
+msgid "Auto advance delay (ms):"
+msgstr "Gutinda ( Madamu ) : "
+
+#: optiondialog.cpp:894
+#, fuzzy
+msgid ""
+"When in Auto-Advance mode the result of the current selection is shown \n"
+"for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
+msgstr ""
+"in - Ubwoko i Igisubizo Bya i KIGEZWEHO Ihitamo ni \n"
+"ya:  i Igihe , Mbere Kuri i Ibikurikira > . : 0 %S - Madamu "
+
+#: optiondialog.cpp:899
+#, fuzzy
+msgid "Show info dialogs"
+msgstr "A "
+
+#: optiondialog.cpp:901
+msgid "Show a dialog with information about the number of conflicts."
+msgstr ""
+
+#: optiondialog.cpp:904
+#, fuzzy
+msgid "White space 2-file merge default:"
+msgstr "Umwanya 2 - Idosiye Gukomatanya Mburabuzi : "
+
+#: optiondialog.cpp:908 optiondialog.cpp:921
+#, fuzzy
+msgid "Manual Choice"
+msgstr "Ibishushanyo by'Intoki"
+
+#: optiondialog.cpp:912 optiondialog.cpp:926
+#, fuzzy
+msgid ""
+"Allow the merge algorithm to automatically select an input for white-space-"
+"only changes."
+msgstr ""
+"i Gukomatanya Kuri mu buryo bwikora: Guhitamo Iyinjiza ya:  Umweru - Umwanya "
+"- Amahinduka . "
+
+#: optiondialog.cpp:917
+#, fuzzy
+msgid "White space 3-file merge default:"
+msgstr "Umwanya 3 - Idosiye Gukomatanya Mburabuzi : "
+
+#: optiondialog.cpp:931
+msgid "Automatic Merge Regular Expression"
+msgstr ""
+
+#: optiondialog.cpp:944
+msgid ""
+"Regular expression for lines where KDiff3 should automatically choose one "
+"source.\n"
+"When a line with a conflict matches the regular expression then\n"
+"- if available - C, otherwise B will be chosen."
+msgstr ""
+
+#: optiondialog.cpp:950
+msgid "Run regular expression auto merge on merge start"
+msgstr ""
+
+#: optiondialog.cpp:952
+msgid ""
+"Run the merge for auto merge regular expressions\n"
+"immediately when a merge starts.\n"
+msgstr ""
+
+#: optiondialog.cpp:957
+msgid "Version Control History Merging"
+msgstr ""
+
+#: optiondialog.cpp:970
+msgid ""
+"Regular expression for the start of the version control history entry.\n"
+"Usually this line contains the \"$Log$\"-keyword.\n"
+"Default value: \".*\\$Log.*\\$.*\""
+msgstr ""
+
+#: optiondialog.cpp:988
+msgid ""
+"A version control history entry consists of several lines.\n"
+"Specify the regular expression to detect the first line (without the leading "
+"comment).\n"
+"Use parentheses to group the keys you want to use for sorting.\n"
+"If left empty, then KDiff3 assumes that empty lines separate history "
+"entries.\n"
+"See the documentation for details."
+msgstr ""
+
+#: optiondialog.cpp:996
+msgid "History merge sorting"
+msgstr ""
+
+#: optiondialog.cpp:998
+msgid "Sort version control history by a key."
+msgstr ""
+
+#: optiondialog.cpp:1008
+msgid "History entry start sort key order:"
+msgstr ""
+
+#: optiondialog.cpp:1012
+msgid ""
+"Each parentheses used in the regular expression for the history start entry\n"
+"groups a key that can be used for sorting.\n"
+"Specify the list of keys (that are numbered in order of occurrence\n"
+"starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
+"If left empty, then no sorting will be done.\n"
+"See the documentation for details."
+msgstr ""
+
+#: optiondialog.cpp:1023
+msgid "Merge version control history on merge start"
+msgstr ""
+
+#: optiondialog.cpp:1025
+msgid "Run version control history automerge on merge start."
+msgstr ""
+
+#: optiondialog.cpp:1029
+#, fuzzy
+msgid "Max number of history entries:"
+msgstr "Bya Ububiko bwungirije : "
+
+#: optiondialog.cpp:1032
+msgid "Cut off after specified number. Use -1 for infinite number of entries."
+msgstr ""
+
+#: optiondialog.cpp:1036
+msgid "Test your regular expressions"
+msgstr ""
+
+#: optiondialog.cpp:1041
+msgid "Irrelevant merge command:"
+msgstr ""
+
+#: optiondialog.cpp:1045
+msgid ""
+"If specified this script is run after automerge\n"
+"when no other relevant changes were detected.\n"
+"Called with the parameters: filename1 filename2 filename3"
+msgstr ""
+
+#: optiondialog.cpp:1051
+msgid "Auto save and quit on merge without conflicts"
+msgstr ""
+
+#: optiondialog.cpp:1054
+msgid ""
+"When KDiff3 was started for a file-merge from the commandline and all\n"
+"conflicts are solvable without user interaction then automatically save and "
+"quit.\n"
+"(Similar to command line option \"--auto\"."
+msgstr ""
+
+#: optiondialog.cpp:1065 optiondialog.cpp:1066
+#, fuzzy
+msgid "Directory Merge"
+msgstr "Seriveri y'ububiko:"
+
+#: optiondialog.cpp:1079
+#, fuzzy
+msgid "Recursive directories"
+msgstr "ububiko bw'amaderese "
+
+#: optiondialog.cpp:1081
+#, fuzzy
+msgid "Whether to analyze subdirectories or not."
+msgstr "Kuri Ububiko bwungirije Cyangwa OYA . "
+
+#: optiondialog.cpp:1083
+#, fuzzy
+msgid "File pattern(s):"
+msgstr "Idosiye Ishusho ( S ) : "
+
+#: optiondialog.cpp:1088
+#, fuzzy
+msgid ""
+"Pattern(s) of files to be analyzed. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"( S ) Bya Idosiye Kuri . \n"
+": ' * ' na ' ? ' \n"
+"ku ikoresha i Mutandukanya : ' ; ' "
+
+#: optiondialog.cpp:1094
+#, fuzzy
+msgid "File-anti-pattern(s):"
+msgstr "Idosiye - - Ishusho ( S ) : "
+
+#: optiondialog.cpp:1099
+#, fuzzy
+msgid ""
+"Pattern(s) of files to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"( S ) Bya Idosiye Kuri Kuva: . \n"
+": ' * ' na ' ? ' \n"
+"ku ikoresha i Mutandukanya : ' ; ' "
+
+#: optiondialog.cpp:1105
+#, fuzzy
+msgid "Dir-anti-pattern(s):"
+msgstr "- - Ishusho ( S ) : "
+
+#: optiondialog.cpp:1110
+#, fuzzy
+msgid ""
+"Pattern(s) of directories to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"( S ) Bya ububiko bw'amaderese Kuri Kuva: . \n"
+": ' * ' na ' ? ' \n"
+"ku ikoresha i Mutandukanya : ' "
+
+#: optiondialog.cpp:1116
+msgid "Use .cvsignore"
+msgstr ""
+
+#: optiondialog.cpp:1119
+#, fuzzy
+msgid ""
+"Extends the antipattern to anything that would be ignored by CVS.\n"
+"Via local \".cvsignore\"-files this can be directory specific."
+msgstr ""
+"i Kuri ku . \n"
+"Bya hafi \" . \" - Idosiye iyi Ububiko . "
+
+#: optiondialog.cpp:1124
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Birahishe Idosiye na ububiko bw'amaderese "
+
+#: optiondialog.cpp:1127
+#, fuzzy
+msgid "Finds files and directories with the hidden attribute."
+msgstr "Idosiye na ububiko bw'amaderese Na: i Birahishe Ikiranga: . "
+
+#: optiondialog.cpp:1129
+#, fuzzy
+msgid "Finds files and directories starting with '.'."
+msgstr "Idosiye na ububiko bw'amaderese Itangira... Na: ' . ' . "
+
+#: optiondialog.cpp:1133
+#, fuzzy
+msgid "Follow file links"
+msgstr "Idosiye amahuza "
+
+#: optiondialog.cpp:1136
+#, fuzzy
+msgid ""
+"On: Compare the file the link points to.\n"
+"Off: Compare the links."
+msgstr ""
+": i Idosiye i Ihuza Utudomo Kuri . \n"
+": i amahuza . "
+
+#: optiondialog.cpp:1141
+#, fuzzy
+msgid "Follow directory links"
+msgstr "Ububiko amahuza "
+
+#: optiondialog.cpp:1144
+#, fuzzy
+msgid ""
+"On: Compare the directory the link points to.\n"
+"Off: Compare the links."
+msgstr ""
+": i Ububiko i Ihuza Utudomo Kuri . \n"
+": i amahuza . "
+
+#: optiondialog.cpp:1160
+msgid "Case sensitive filename comparison"
+msgstr ""
+
+#: optiondialog.cpp:1163
+msgid ""
+"The directory comparison will compare files or directories when their names "
+"match.\n"
+"Set this option if the case of the names must match. (Default for Windows is "
+"off, otherwise on.)"
+msgstr ""
+
+#: optiondialog.cpp:1167
+#, fuzzy
+msgid "File Comparison Mode"
+msgstr "Idosiye "
+
+#: optiondialog.cpp:1173
+msgid "Binary comparison"
+msgstr ""
+
+#: optiondialog.cpp:1174
+#, fuzzy
+msgid "Binary comparison of each file. (Default)"
+msgstr "Bya Idosiye . ( ) "
+
+#: optiondialog.cpp:1177
+#, fuzzy
+msgid "Full analysis"
+msgstr "Kwikaraga hose"
+
+#: optiondialog.cpp:1178
+#, fuzzy
+msgid ""
+"Do a full analysis and show statistics information in extra columns.\n"
+"(Slower than a binary comparison, much slower for binary files.)"
+msgstr ""
+"A Cyuzuye na Herekana %S Sitatisitiki Ibisobanuro: in Birenga Inkingi: . \n"
+"( A Nyabibiri , ya:  Nyabibiri Idosiye . ) "
+
+#: optiondialog.cpp:1182
+#, fuzzy
+msgid "Trust the size and modification date (unsafe)"
+msgstr "i Itariki: ( ) "
+
+#: optiondialog.cpp:1183
+#, fuzzy
+msgid ""
+"Assume that files are equal if the modification date and file length are "
+"equal.\n"
+"Files with equal contents but different modification dates will appear as "
+"different.\n"
+"Useful for big directories or slow networks."
+msgstr ""
+"Idosiye bingana NIBA i Itariki: na Idosiye Uburebure bingana . \n"
+"ya:  ububiko bw'amaderese Cyangwa Buhoro . "
+
+#: optiondialog.cpp:1188
+msgid ""
+"Trust the size and date, but use binary comparison if date doesn't match "
+"(unsafe)"
+msgstr ""
+
+#: optiondialog.cpp:1189
+#, fuzzy
+msgid ""
+"Assume that files are equal if the modification date and file length are "
+"equal.\n"
+"If the date isn't equal but the sizes are, use binary comparison.\n"
+"Useful for big directories or slow networks."
+msgstr ""
+"Idosiye bingana NIBA i Itariki: na Idosiye Uburebure bingana . \n"
+"ya:  ububiko bw'amaderese Cyangwa Buhoro . "
+
+#: optiondialog.cpp:1194
+#, fuzzy
+msgid "Trust the size (unsafe)"
+msgstr "i Ingano: ( ) "
+
+#: optiondialog.cpp:1195
+#, fuzzy
+msgid ""
+"Assume that files are equal if their file lengths are equal.\n"
+"Useful for big directories or slow networks when the date is modified during "
+"download."
+msgstr ""
+"Idosiye bingana NIBA Idosiye bingana . \n"
+"ya:  ububiko bw'amaderese Cyangwa Buhoro Ryari: i Itariki: ni Byahinduwe: "
+"Iyimura . "
+
+#: optiondialog.cpp:1203
+#, fuzzy
+msgid "Synchronize directories"
+msgstr "ububiko bw'amaderese "
+
+#: optiondialog.cpp:1206
+#, fuzzy
+msgid ""
+"Offers to store files in both directories so that\n"
+"both directories are the same afterwards.\n"
+"Works only when comparing two directories without specifying a destination."
+msgstr ""
+"Kuri Idosiye in Byombi ububiko bw'amaderese ububiko bw'amaderese i . \n"
+"Ryari: Kabiri ububiko bw'amaderese A Ishyika: . "
+
+#: optiondialog.cpp:1212
+#, fuzzy
+msgid "White space differences considered equal"
+msgstr "Umwanya Ibinyuranyo bingana "
+
+#: optiondialog.cpp:1215
+#, fuzzy
+msgid ""
+"If files differ only by white space consider them equal.\n"
+"This is only active when full analysis is chosen."
+msgstr ""
+"Idosiye ku Umweru Umwanya bingana . \n"
+"ni Gikora Ryari: Cyuzuye ni . "
+
+#: optiondialog.cpp:1221
+#, fuzzy
+msgid "Copy newer instead of merging (unsafe)"
+msgstr "Bya ( ) "
+
+#: optiondialog.cpp:1224
+#, fuzzy
+msgid ""
+"Don't look inside, just take the newer file.\n"
+"(Use this only if you know what you are doing!)\n"
+"Only effective when comparing two directories."
+msgstr ""
+"Kureba Mo Imbere , i Idosiye . \n"
+"( iyi NIBA ! ) \n"
+"CYUZUYE Ryari: Kabiri ububiko bw'amaderese . "
+
+#: optiondialog.cpp:1229
+#, fuzzy
+msgid "Backup files (.orig)"
+msgstr "Idosiye ( . ) "
+
+#: optiondialog.cpp:1232
+#, fuzzy
+msgid ""
+"When a file would be saved over an old file, then the old file\n"
+"will be renamed with a '.orig'-extension instead of being deleted."
+msgstr ""
+"A Idosiye KURI ki/bishaje Idosiye , Hanyuma i ki/bishaje Na: A ' . - "
+"Umugereka: Bya Kyasibwe: %S . "
+
+#: optiondialog.cpp:1328 optiondialog.cpp:1329
+#, fuzzy
+msgid "Regional Settings"
+msgstr "Amagenamiterere y'Akarere"
+
+#: optiondialog.cpp:1429
+#, fuzzy
+msgid "Language (restart required)"
+msgstr "( Ongera utangire Bya ngombwa ) "
+
+#: optiondialog.cpp:1461
+#, fuzzy
+msgid ""
+"Choose the language of the GUI-strings or \"Auto\".\n"
+"For a change of language to take place, quit and restart KDiff3."
+msgstr ""
+"i Ururimi: Bya i - Ikurikiranyanyuguti Cyangwa \" \" . \n"
+"A Guhindura... Bya Ururimi: Kuri , &Kuvamo na Ongera utangire . "
+
+#: optiondialog.cpp:1479
+#, fuzzy
+msgid "Use the same encoding for everything:"
+msgstr "i Imisobekere: ya:  : "
+
+#: optiondialog.cpp:1482
+#, fuzzy
+msgid ""
+"Enable this allows to change all encodings by changing the first only.\n"
+"Disable this if different individual settings are needed."
+msgstr ""
+"iyi Kuri Guhindura... Byose ku i Itangira . \n"
+"iyi NIBA Igenamiterere . "
+
+#: optiondialog.cpp:1487
+#, fuzzy
+msgid "Note: Local Encoding is "
+msgstr "icyitonderwa : ni "
+
+#: optiondialog.cpp:1491
+#, fuzzy
+msgid "File Encoding for A:"
+msgstr "Idosiye ya:  A : "
+
+#: optiondialog.cpp:1497
+msgid ""
+"If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
+"If the file is not Unicode then the selected encoding will be used as "
+"fallback.\n"
+"(Unicode detection depends on the first bytes of a file.)"
+msgstr ""
+
+#: optiondialog.cpp:1501 optiondialog.cpp:1510 optiondialog.cpp:1519
+msgid "Auto Detect Unicode"
+msgstr ""
+
+#: optiondialog.cpp:1506
+#, fuzzy
+msgid "File Encoding for B:"
+msgstr "Idosiye ya:  : "
+
+#: optiondialog.cpp:1515
+#, fuzzy
+msgid "File Encoding for C:"
+msgstr "Idosiye ya:  : "
+
+#: optiondialog.cpp:1524
+#, fuzzy
+msgid "File Encoding for Merge Output and Saving:"
+msgstr "Idosiye ya:  na : "
+
+#: optiondialog.cpp:1528
+#, fuzzy
+msgid "Auto Select"
+msgstr "Gukoporora Ihitamo "
+
+#: optiondialog.cpp:1531
+msgid ""
+"If enabled then the encoding from the input files is used.\n"
+"In ambiguous cases a dialog will ask the user to choose the encoding for "
+"saving."
+msgstr ""
+
+#: optiondialog.cpp:1535
+#, fuzzy
+msgid "File Encoding for Preprocessor Files:"
+msgstr "Idosiye ya:  : "
+
+#: optiondialog.cpp:1546
+#, fuzzy
+msgid "Right To Left Language"
+msgstr "Iburyo ku ibumoso"
+
+#: optiondialog.cpp:1549
+#, fuzzy
+msgid ""
+"Some languages are read from right to left.\n"
+"This setting will change the viewer and editor accordingly."
+msgstr ""
+"Indimi Soma Kuva: Iburyo: Kuri Ibumoso: . \n"
+"Igenamiterere Guhindura... i na Muhinduzi . "
+
+#: optiondialog.cpp:1564
+#, fuzzy
+msgid "Integration"
+msgstr "Igikorwa"
+
+#: optiondialog.cpp:1565
+#, fuzzy
+msgid "Integration Settings"
+msgstr "Amagenamiterere y'Akarere"
+
+#: optiondialog.cpp:1579
+msgid "Command line options to ignore:"
+msgstr ""
+
+#: optiondialog.cpp:1584
+msgid ""
+"List of command line options that should be ignored when KDiff3 is used by "
+"other tools.\n"
+"Several values can be specified if separated via ';'\n"
+"This will suppress the \"Unknown option\"-error."
+msgstr ""
+
+#: optiondialog.cpp:1591
+msgid "Quit also via Escape key"
+msgstr ""
+
+#: optiondialog.cpp:1594
+msgid ""
+"Fast method to exit.\n"
+"For those who are used to using the Escape-key."
+msgstr ""
+
+#: optiondialog.cpp:1599
+msgid "Integrate with ClearCase"
+msgstr ""
+
+#: optiondialog.cpp:1602
+msgid ""
+"Integrate with Rational ClearCase from IBM.\n"
+"Modifies the \"map\" file in ClearCase-subdir \"lib/mgrs\"\n"
+"(Only enabled when ClearCase \"bin\" directory is in the path.)"
+msgstr ""
+
+#: optiondialog.cpp:1608
+msgid "Remove ClearCase Integration"
+msgstr ""
+
+#: optiondialog.cpp:1611
+msgid ""
+"Restore the old \"map\" file from before doing the Clearcase integration."
+msgstr ""
+
+#: optiondialog.cpp:1692 kreplacements/kreplacements.cpp:794
+#, fuzzy
+msgid ""
+"You selected a variable width font.\n"
+"\n"
+"Because this program doesn't handle variable width fonts\n"
+"correctly, you might experience problems while editing.\n"
+"\n"
+"Do you want to continue or do you want to select another font."
+msgstr ""
+"Byahiswemo A Impinduragaciro Ubugari: Imyandikire . \n"
+"\n"
+"iyi Porogaramu Impinduragaciro Ubugari: , Guhindura . \n"
+"\n"
+"Kuri Gukomeza Cyangwa Kuri Guhitamo Imyandikire . "
+
+#: optiondialog.cpp:1696
+#, fuzzy
+msgid "Incompatible Font"
+msgstr "%S Itakorana"
+
+#: optiondialog.cpp:1697
+#, fuzzy
+msgid "Continue at Own Risk"
+msgstr "Gukomeza Ku "
+
+#: optiondialog.cpp:1698
+#, fuzzy
+msgid "Select Another Font"
+msgstr "Gutoranya imyandikire"
+
+#: optiondialog.cpp:1733
+#, fuzzy
+msgid "This resets all options. Not only those of the current topic."
+msgstr "Byose Amahitamo . Bya i KIGEZWEHO . "
+
+#: main.cpp:187
+#, fuzzy
+msgid "kdiff3"
+msgstr "Igabanya"
+
+#: main.cpp:189
+#, fuzzy
+msgid "Tool for Comparison and Merge of Files and Directories"
+msgstr "ya:  na Bya na "
+
+#: main.cpp:190
+msgid "(c) 2002-2008 Joachim Eibl"
+msgstr ""
+
+#: main.cpp:197 kdiff3_part.cpp:303
+msgid "Joachim Eibl"
+msgstr ""
+
+#: main.cpp:198
+msgid "Eike Sauer"
+msgstr ""
+
+#: main.cpp:198
+msgid "Bugfixes, Debian package maintainer"
+msgstr ""
+
+#: main.cpp:199
+msgid "Sebastien Fricker"
+msgstr ""
+
+#: main.cpp:199
+msgid "Windows installer"
+msgstr ""
+
+#: main.cpp:200
+msgid "Stephan Binner"
+msgstr ""
+
+#: main.cpp:200
+msgid "i18n-help"
+msgstr ""
+
+#: main.cpp:201
+msgid "Stefan Partheymueller"
+msgstr ""
+
+#: main.cpp:201
+#, fuzzy
+msgid "Clipboard-patch"
+msgstr "Ububikokoporora"
+
+#: main.cpp:202
+msgid "David Faure"
+msgstr ""
+
+#: main.cpp:202
+msgid "KIO-Help"
+msgstr ""
+
+#: main.cpp:203
+msgid "Bernd Gehrmann"
+msgstr ""
+
+#: main.cpp:203
+msgid "Class CvsIgnoreList from Cervisia"
+msgstr ""
+
+#: main.cpp:204
+msgid "Andre Woebbeking"
+msgstr ""
+
+#: main.cpp:204
+msgid "Class StringMatcher"
+msgstr ""
+
+#: main.cpp:205
+msgid "Michael Denio"
+msgstr ""
+
+#: main.cpp:205
+#, fuzzy
+msgid "Directory Equality-Coloring patch"
+msgstr "Inzira y'ububiko"
+
+#: main.cpp:206
+msgid "Manfred Koehler"
+msgstr ""
+
+#: main.cpp:206
+msgid "Fix for slow startup on Windows"
+msgstr ""
+
+#: main.cpp:207
+#, fuzzy
+msgid "Sergey Zorin"
+msgstr "Ikosa "
+
+#: main.cpp:207
+msgid "Diff Ext for Windows"
+msgstr ""
+
+#: main.cpp:208
+msgid "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
+msgstr ""
+
+#: main.cpp:208
+msgid "GNU-Diffutils"
+msgstr ""
+
+#: main.cpp:209
+msgid "Tino Boellsterling, Timothy Mee"
+msgstr ""
+
+#: main.cpp:209
+msgid "Intensive test, use and feedback"
+msgstr ""
+
+#: main.cpp:210
+msgid "Michael Schmidt"
+msgstr ""
+
+#: main.cpp:210
+msgid "Mac support"
+msgstr ""
+
+#: main.cpp:211
+msgid "Valentin Rusu"
+msgstr ""
+
+#: main.cpp:211 main.cpp:212
+#, fuzzy
+#| msgid "Do Nothing"
+msgid "KDE4 porting"
+msgstr "Ntugire icyo Ukora"
+
+#: main.cpp:212
+msgid "Albert Astals Cid"
+msgstr ""
+
+#: main.cpp:214
+#, fuzzy
+msgid "+ Many thanks to those who reported bugs and contributed ideas!"
+msgstr "+ Kuri na ! "
+
+#: main.cpp:220
+#, fuzzy
+msgid "Merge the input."
+msgstr "i Iyinjiza . "
+
+#: main.cpp:221
+#, fuzzy
+msgid "Explicit base file. For compatibility with certain tools."
+msgstr "SHINGIRO Idosiye . Bihuye neza Na: Ibikoresho . "
+
+#: main.cpp:222
+#, fuzzy
+msgid "Output file. Implies -m. E.g.: -o newfile.txt"
+msgstr "E. G."
+
+#: main.cpp:223
+#, fuzzy
+msgid "Output file, again. (For compatibility with certain tools.)"
+msgstr "Idosiye , Nanone . ( Bihuye neza Na: Ibikoresho . ) "
+
+#: main.cpp:224
+#, fuzzy
+msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
+msgstr "NIBA Byose Ikiyega - . ( - o Idosiye ) "
+
+#: main.cpp:225
+#, fuzzy
+msgid "Don't solve conflicts automatically. (For compatibility...)"
+msgstr "mu buryo bwikora: . ( Bihuye neza ... ) "
+
+#: main.cpp:226
+#, fuzzy
+msgid "Visible name replacement for input file 1 (base)."
+msgstr "Izina: ya:  Iyinjiza Idosiye 1 ( SHINGIRO ) . "
+
+#: main.cpp:227
+#, fuzzy
+msgid "Visible name replacement for input file 2."
+msgstr "Izina: ya:  Iyinjiza Idosiye 2 . "
+
+#: main.cpp:228
+#, fuzzy
+msgid "Visible name replacement for input file 3."
+msgstr "Izina: ya:  Iyinjiza Idosiye 3 . "
+
+#: main.cpp:229
+#, fuzzy
+msgid "Alternative visible name replacement. Supply this once for every input."
+msgstr "Kigaragara Izina: . iyi Rimwe ya:  buri Iyinjiza . "
+
+#: main.cpp:230
+msgid ""
+"Override a config setting. Use once for every setting. E.g.: --cs "
+"\"AutoAdvance=1\""
+msgstr ""
+
+#: main.cpp:231
+msgid "Show list of config settings and current values."
+msgstr ""
+
+#: main.cpp:232
+#, fuzzy
+msgid "Use a different config file."
+msgstr "Bya Idosiye : "
+
+#: main.cpp:235
+#, fuzzy
+msgid "file1 to open (base, if not specified via --base)"
+msgstr "Kuri Gufungura ( SHINGIRO , NIBA OYA Biturutse - - SHINGIRO ) "
+
+#: main.cpp:236
+#, fuzzy
+msgid "file2 to open"
+msgstr "Kuri Gufungura "
+
+#: main.cpp:237
+#, fuzzy
+msgid "file3 to open"
+msgstr "Kuri Gufungura "
+
+#: difftextwindow.cpp:388 directorymergewindow.cpp:2764
+#, fuzzy
+msgid "File"
+msgstr "Idosiye..."
+
+#: difftextwindow.cpp:390
+#, fuzzy
+msgid "Line"
+msgstr "Ihuza..."
+
+#: difftextwindow.cpp:392
+#, fuzzy
+msgid "Line not available"
+msgstr "Ntibonetse"
+
+#: difftextwindow.cpp:1721
+#, fuzzy
+msgid "Top line"
+msgstr "Umurongo: %1 "
+
+#: difftextwindow.cpp:1731
+msgid "End"
+msgstr "Impera"
+
+#: pdiff.cpp:260
+#, fuzzy
+msgid "PreprocessorCmd: "
+msgstr "Munonosora"
+
+#: pdiff.cpp:265
+#, fuzzy
+msgid "The following option(s) you selected might change data:\n"
+msgstr "Ihitamo ( S ) Byahiswemo Guhindura... Ibyatanzwe : \n"
+
+#: pdiff.cpp:266
+#, fuzzy
+msgid ""
+"\n"
+"Most likely this is not wanted during a merge.\n"
+"Do you want to disable these settings or continue with these settings active?"
+msgstr ""
+"\n"
+"iyi ni OYA A Gukomatanya . \n"
+"Kuri Kwangira Igenamiterere Cyangwa Gukomeza Na: Igenamiterere Gikora ? "
+
+#: pdiff.cpp:268
+#, fuzzy
+msgid "Option Unsafe for Merging"
+msgstr "ya:  "
+
+#: pdiff.cpp:269
+msgid "Use These Options During Merge"
+msgstr ""
+
+#: pdiff.cpp:270
+#, fuzzy
+msgid "Disable Unsafe Options"
+msgstr "Anga amahitamo y'ishakisha y'urwego rwo hejuru"
+
+#: pdiff.cpp:300
+#, fuzzy
+msgid "Loading A"
+msgstr "A "
+
+#: pdiff.cpp:304
+#, fuzzy
+msgid "Loading B"
+msgstr "Ifungura"
+
+#: pdiff.cpp:321 pdiff.cpp:347
+#, fuzzy
+msgid "Diff: A <-> B"
+msgstr ": A < - > "
+
+#: pdiff.cpp:327 pdiff.cpp:372
+#, fuzzy
+msgid "Linediff: A <-> B"
+msgstr ": A < - > "
+
+#: pdiff.cpp:338
+#, fuzzy
+msgid "Loading C"
+msgstr "Ifungura"
+
+#: pdiff.cpp:350
+msgid "Diff: B <-> C"
+msgstr ""
+
+#: pdiff.cpp:353
+#, fuzzy
+msgid "Diff: A <-> C"
+msgstr ": A < - > "
+
+#: pdiff.cpp:375
+msgid "Linediff: B <-> C"
+msgstr ""
+
+#: pdiff.cpp:378
+#, fuzzy
+msgid "Linediff: A <-> C"
+msgstr ": A < - > "
+
+#: pdiff.cpp:528 mergeresultwindow.cpp:828
+#, fuzzy
+msgid "All input files are binary equal."
+msgstr "Iyinjiza Idosiye Nyabibiri bingana . "
+
+#: pdiff.cpp:530
+#, fuzzy
+msgid "All input files contain the same text, but are not binary equal."
+msgstr "Iyinjiza Idosiye i Umwandiko . "
+
+#: pdiff.cpp:532 pdiff.cpp:534 pdiff.cpp:536 mergeresultwindow.cpp:832
+#: mergeresultwindow.cpp:834 mergeresultwindow.cpp:836
+#, fuzzy, kde-format
+msgid "Files %1 and %2 are binary equal.\n"
+msgstr "na Nyabibiri bingana . \n"
+
+#: pdiff.cpp:533 pdiff.cpp:535 pdiff.cpp:537
+#, fuzzy, kde-format
+msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
+msgstr "A na Nyabibiri bingana . \n"
+
+#: pdiff.cpp:547
+#, fuzzy
+msgid ""
+"Some inputfiles don't seem to be pure textfiles.\n"
+"Note that the KDiff3-merge was not meant for binary data.\n"
+"Continue at your own risk."
+msgstr ""
+"Kuri . \n"
+"icyitonderwa i - Gukomatanya OYA ya:  Nyabibiri Ibyatanzwe . \n"
+"Gukomeza Ku . "
+
+#: pdiff.cpp:1017
+msgid "Abort"
+msgstr "Ntibyakunze"
+
+#: pdiff.cpp:1018 directorymergewindow.cpp:409
+#, fuzzy
+msgid "Continue Merging"
+msgstr "Gukomeza "
+
+#: pdiff.cpp:1024 pdiff.cpp:1112
+#, fuzzy
+msgid "Opening files..."
+msgstr "Mu Gufungura dosiye"
+
+#: pdiff.cpp:1089 pdiff.cpp:1160
+msgid "File open error"
+msgstr "Ikosa gufungura idosiye"
+
+#: pdiff.cpp:1192
+#, fuzzy
+msgid "Cutting selection..."
+msgstr "Ihitamo ... "
+
+#: pdiff.cpp:1213
+#, fuzzy
+msgid "Copying selection to clipboard..."
+msgstr "Ihitamo Kuri Ububikokoporora ... "
+
+#: pdiff.cpp:1229
+#, fuzzy
+msgid "Inserting clipboard contents..."
+msgstr "Ububikokoporora Ibigize ... "
+
+#: pdiff.cpp:1755
+#, fuzzy
+msgid "Save && Continue"
+msgstr "Kubika & & Gukomeza "
+
+#: pdiff.cpp:1756
+#, fuzzy
+msgid "Continue Without Saving"
+msgstr "Gukomeza "
+
+#: pdiff.cpp:1958
+#, fuzzy
+msgid "Search complete."
+msgstr "Byuzuye . "
+
+#: pdiff.cpp:1958
+#, fuzzy
+msgid "Search Complete"
+msgstr "Igishushanyombonera cy'Ishakisha"
+
+#: pdiff.cpp:2192
+msgid "Nothing is selected in either diff input window."
+msgstr ""
+
+#: pdiff.cpp:2192
+#, fuzzy
+msgid "Error while adding manual diff range"
+msgstr "Ikosa Kurema Ububiko . "
+
+#: kdiff3_shell.cpp:76
+#, fuzzy
+msgid ""
+"Could not initialize our part!\n"
+"This usually happens due to an installation problem. Please read the README-"
+"file in the source package for details."
+msgstr ""
+"OYA Gushaka Inzira %s ! \n"
+"Kuri iyinjizaporogaramu . Soma i - Idosiye in i Inkomoko Porogaramu ya:  "
+"Birambuye . "
+
+#: directorymergewindow.cpp:154
+#, fuzzy
+msgid "Mix of links and normal files."
+msgstr "Bya amahuza na Bisanzwe Idosiye . "
+
+#: directorymergewindow.cpp:161
+#, fuzzy
+msgid "Link: "
+msgstr "Ihuza..."
+
+#: directorymergewindow.cpp:169
+#, fuzzy
+msgid "Size. "
+msgstr "Ingano:"
+
+#: directorymergewindow.cpp:182 directorymergewindow.cpp:192
+#, fuzzy
+msgid "Date & Size: "
+msgstr "Itariki & Igihe"
+
+#: directorymergewindow.cpp:202 directorymergewindow.cpp:208
+#, fuzzy, kde-format
+msgid "Creating temp copy of %1 failed."
+msgstr "Gukoporora Bya %1 Byanze . "
+
+#: directorymergewindow.cpp:219 directorymergewindow.cpp:227
+#, fuzzy, kde-format
+msgid "Opening %1 failed."
+msgstr "%1 Byanze . "
+
+#: directorymergewindow.cpp:231
+#, fuzzy
+msgid "Comparing file..."
+msgstr "Idosiye ... "
+
+#: directorymergewindow.cpp:241 directorymergewindow.cpp:247
+#, fuzzy, kde-format
+msgid "Error reading from %1"
+msgstr "Ikosa Kuva: %1 "
+
+#: directorymergewindow.cpp:376
+msgid "Name"
+msgstr "Izina"
+
+#: directorymergewindow.cpp:376
+msgid "Operation"
+msgstr "Igikorwa"
+
+#: directorymergewindow.cpp:376
+msgid "Status"
+msgstr "Imimerere"
+
+#: directorymergewindow.cpp:377
+#, fuzzy
+msgid "Unsolved"
+msgstr "Kidakoreshwa"
+
+#: directorymergewindow.cpp:377
+#, fuzzy
+msgid "Solved"
+msgstr "Gikomeye"
+
+#: directorymergewindow.cpp:377
+#, fuzzy
+msgid "Nonwhite"
+msgstr "Nta na kimwe"
+
+#: directorymergewindow.cpp:377
+msgid "White"
+msgstr "Umweru"
+
+#: directorymergewindow.cpp:406
+#, fuzzy
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort "
+"the merge and rescan the directory?"
+msgstr "A Ububiko Gukomatanya . , Kuri Kureka i Gukomatanya na i Ububiko ? "
+
+#: directorymergewindow.cpp:408 directorymergewindow.cpp:2984
+#, fuzzy
+msgid "Rescan"
+msgstr "Urukiramende"
+
+#: directorymergewindow.cpp:566
+#, fuzzy
+msgid "Opening of directories failed:"
+msgstr "Bya ububiko bw'amaderese Byanze : "
+
+#: directorymergewindow.cpp:569
+#, fuzzy, kde-format
+msgid "Dir A \"%1\" does not exist or is not a directory.\n"
+msgstr "A \" %1 \" OYA Cyangwa ni OYA A Ububiko . \n"
+
+#: directorymergewindow.cpp:572
+#, fuzzy, kde-format
+msgid "Dir B \"%1\" does not exist or is not a directory.\n"
+msgstr "\" %1 \" OYA Cyangwa ni OYA A Ububiko . \n"
+
+#: directorymergewindow.cpp:575
+#, fuzzy, kde-format
+msgid "Dir C \"%1\" does not exist or is not a directory.\n"
+msgstr "\" %1 \" OYA Cyangwa ni OYA A Ububiko . \n"
+
+#: directorymergewindow.cpp:577
+#, fuzzy
+msgid "Directory Open Error"
+msgstr "Gufungura Ikosa "
+
+#: directorymergewindow.cpp:585
+#, fuzzy
+msgid ""
+"The destination directory must not be the same as A or B when three "
+"directories are merged.\n"
+"Check again before continuing."
+msgstr ""
+"Ishyika: Ububiko OYA i Nka A Cyangwa Ryari: ububiko bw'amaderese . \n"
+"Nanone Mbere . "
+
+#: directorymergewindow.cpp:587
+#, fuzzy
+msgid "Parameter Warning"
+msgstr "Kuburira bijyanye na mucapyi"
+
+#: directorymergewindow.cpp:592
+#, fuzzy
+msgid "Scanning directories..."
+msgstr "ububiko bw'amaderese ... "
+
+#: directorymergewindow.cpp:625
+#, fuzzy
+msgid "Reading Directory A"
+msgstr "A "
+
+#: directorymergewindow.cpp:647
+#, fuzzy
+msgid "Reading Directory B"
+msgstr "Guhanga ububiko "
+
+#: directorymergewindow.cpp:669
+#, fuzzy
+msgid "Reading Directory C"
+msgstr "Guhanga ububiko "
+
+#: directorymergewindow.cpp:695
+#, fuzzy
+msgid "Some subdirectories were not readable in"
+msgstr "Ububiko bwungirije OYA in "
+
+#: directorymergewindow.cpp:700
+#, fuzzy
+msgid "Check the permissions of the subdirectories."
+msgstr "i Uruhushya Bya i Ububiko bwungirije . "
+
+#: directorymergewindow.cpp:753
+#, fuzzy
+msgid "Directory Comparison Status"
+msgstr "Inzira y'ububiko"
+
+#: directorymergewindow.cpp:754
+#, fuzzy
+msgid "Number of subdirectories:"
+msgstr "Bya Ububiko bwungirije : "
+
+#: directorymergewindow.cpp:755
+#, fuzzy
+msgid "Number of equal files:"
+msgstr "Bya bingana Idosiye : "
+
+#: directorymergewindow.cpp:756
+#, fuzzy
+msgid "Number of different files:"
+msgstr "Bya Idosiye : "
+
+#: directorymergewindow.cpp:759
+#, fuzzy
+msgid "Number of manual merges:"
+msgstr "Bya Bikorwa : "
+
+#: directorymergewindow.cpp:928
+#, fuzzy
+msgid "This affects all merge operations."
+msgstr "Byose Gukomatanya Ibikorwa: . "
+
+#: directorymergewindow.cpp:929
+#, fuzzy
+msgid "Changing All Merge Operations"
+msgstr "Ibikorerwa Ishusho"
+
+#: directorymergewindow.cpp:1328
+#, fuzzy
+msgid "Processing "
+msgstr "Inonosora"
+
+#: directorymergewindow.cpp:1807 directorymergewindow.cpp:1813
+#, fuzzy
+msgid "To do."
+msgstr "Gukora"
+
+#: directorymergewindow.cpp:1881 directorymergewindow.cpp:3015
+#, fuzzy
+msgid "Copy A to B"
+msgstr "A Kuri "
+
+#: directorymergewindow.cpp:1882 directorymergewindow.cpp:3016
+#, fuzzy
+msgid "Copy B to A"
+msgstr "Kuri A "
+
+#: directorymergewindow.cpp:1883 directorymergewindow.cpp:3017
+#, fuzzy
+msgid "Delete A"
+msgstr "A "
+
+#: directorymergewindow.cpp:1884 directorymergewindow.cpp:3018
+#, fuzzy
+msgid "Delete B"
+msgstr "Gusiba #"
+
+#: directorymergewindow.cpp:1885
+#, fuzzy
+msgid "Delete A & B"
+msgstr "A & "
+
+#: directorymergewindow.cpp:1886 directorymergewindow.cpp:3020
+#, fuzzy
+msgid "Merge to A"
+msgstr "Kuri A "
+
+#: directorymergewindow.cpp:1887 directorymergewindow.cpp:3021
+#, fuzzy
+msgid "Merge to B"
+msgstr "Kuri "
+
+#: directorymergewindow.cpp:1888
+#, fuzzy
+msgid "Merge to A & B"
+msgstr "Kuri A & "
+
+#: directorymergewindow.cpp:1892 directorymergewindow.cpp:3012
+#, fuzzy
+msgid "Delete (if exists)"
+msgstr "( NIBA ) "
+
+#: directorymergewindow.cpp:1893 directorymergewindow.cpp:1894
+#, fuzzy
+msgid "Merge (manual)"
+msgstr "( Bikorwa ) "
+
+#: directorymergewindow.cpp:1895
+#, fuzzy
+msgid "Error: Conflicting File Types"
+msgstr "Ikosa : Idosiye "
+
+#: directorymergewindow.cpp:1896
+#, fuzzy
+msgid "Error: Dates are equal but files are not."
+msgstr "Ikosa : bingana Idosiye OYA . "
+
+#: directorymergewindow.cpp:1922 directorymergewindow.cpp:1951
+#: directorymergewindow.cpp:1976
+#, fuzzy
+msgid "This operation is currently not possible."
+msgstr "Igikorwa ni OYA . "
+
+#: directorymergewindow.cpp:1922 directorymergewindow.cpp:1951
+#: directorymergewindow.cpp:1976 directorymergewindow.cpp:2235
+#, fuzzy
+msgid "Operation Not Possible"
+msgstr "Igikorwa nticyashobotse"
+
+#: directorymergewindow.cpp:2015
+#, fuzzy
+msgid ""
+"This should never happen: \n"
+"\n"
+"mergeResultSaved: m_pMFI=0\n"
+"\n"
+"If you know how to reproduce this, please contact the program author."
+msgstr ""
+"Nta na rimwe : \n"
+"\n"
+": = Kuri iyi , Umuntu i Porogaramu Umwanditsi: . "
+
+#: directorymergewindow.cpp:2015
+#, fuzzy
+msgid "Program Error"
+msgstr "Ikosa "
+
+#: directorymergewindow.cpp:2026
+#, fuzzy
+msgid "An error occurred while copying.\n"
+msgstr "Ikosa Gukoporora . \n"
+
+#: directorymergewindow.cpp:2026 directorymergewindow.cpp:2095
+#: directorymergewindow.cpp:2127 directorymergewindow.cpp:2175
+#: directorymergewindow.cpp:2184 directorymergewindow.cpp:2435
+#, fuzzy
+#| msgid "Error."
+msgid "Error"
+msgstr "Ikosa."
+
+#: directorymergewindow.cpp:2027 directorymergewindow.cpp:2436
+#, fuzzy
+msgid "Merge Error"
+msgstr "Ikosa "
+
+#: directorymergewindow.cpp:2032 directorymergewindow.cpp:2441
+msgid "Error."
+msgstr "Ikosa."
+
+#: directorymergewindow.cpp:2037 directorymergewindow.cpp:2333
+#: directorymergewindow.cpp:2373
+msgid "Done."
+msgstr "Byakozwe."
+
+#: directorymergewindow.cpp:2060
+#, fuzzy
+msgid "Not saved."
+msgstr "Bidasangiwe"
+
+#: directorymergewindow.cpp:2095
+#, fuzzy
+msgid "Unknown merge operation. (This must never happen!)"
+msgstr "Gukomatanya Igikorwa . ( Nta na rimwe ! ) "
+
+#: directorymergewindow.cpp:2127
+#, fuzzy
+msgid "Unknown merge operation."
+msgstr "Gukomatanya Igikorwa . "
+
+#: directorymergewindow.cpp:2142
+#, fuzzy
+msgid ""
+"The merge is about to begin.\n"
+"\n"
+"Choose \"Do it\" if you have read the instructions and know what you are "
+"doing.\n"
+"Choosing \"Simulate it\" will tell you what would happen.\n"
+"\n"
+"Be aware that this program still has beta status and there is NO WARRANTY "
+"whatsoever! Make backups of your vital data!"
+msgstr ""
+"Gukomatanya ni Bigyanye Kuri . \n"
+"\n"
+"\" \" NIBA Soma i Amabwiriza na . \n"
+"\" \" . \n"
+"\n"
+"iyi Porogaramu beta Imimerere na ni ! Ibyashyinguwe Bya Ibyatanzwe ! "
+
+#: directorymergewindow.cpp:2147
+#, fuzzy
+msgid "Starting Merge"
+msgstr "Gutangiza serivise"
+
+#: directorymergewindow.cpp:2148
+#, fuzzy
+msgid "Do It"
+msgstr "Akadomo"
+
+#: directorymergewindow.cpp:2149
+#, fuzzy
+msgid "Simulate It"
+msgstr "Kwigana Igaragaza"
+
+#: directorymergewindow.cpp:2175
+#, fuzzy
+msgid ""
+"The highlighted item has a different type in the different directories. "
+"Select what to do."
+msgstr "Ikintu A Ubwoko: in i ububiko bw'amaderese . Kuri . "
+
+#: directorymergewindow.cpp:2184
+#, fuzzy
+msgid ""
+"The modification dates of the file are equal but the files are not. Select "
+"what to do."
+msgstr "Amatariki Bya i Idosiye bingana i Idosiye OYA . Kuri . "
+
+#: directorymergewindow.cpp:2235
+#, fuzzy
+msgid ""
+"This operation is currently not possible because directory merge is "
+"currently running."
+msgstr "Igikorwa ni OYA Ububiko Gukomatanya ni . "
+
+#: directorymergewindow.cpp:2295
+#, fuzzy
+msgid ""
+"There was an error in the last step.\n"
+"Do you want to continue with the item that caused the error or do you want "
+"to skip this item?"
+msgstr ""
+"Ikosa in i Iheruka Intera . \n"
+"Kuri Gukomeza Na: i Ikintu i Ikosa Cyangwa Kuri Gusimbuka iyi Ikintu ? "
+
+#: directorymergewindow.cpp:2297
+#, fuzzy
+msgid "Continue merge after an error"
+msgstr "Gukomeza Gukomatanya Nyuma Ikosa "
+
+#: directorymergewindow.cpp:2298
+#, fuzzy
+msgid "Continue With Last Item"
+msgstr "Gukomeza "
+
+#: directorymergewindow.cpp:2299
+#, fuzzy
+msgid "Skip Item"
+msgstr "Ibigize by'ilisiti"
+
+#: directorymergewindow.cpp:2333
+#, fuzzy
+msgid "Skipped."
+msgstr "Byoherejwe ku"
+
+#: directorymergewindow.cpp:2340 directorymergewindow.cpp:2554
+#, fuzzy
+msgid "In progress..."
+msgstr "Aho bigeze: ... "
+
+#: directorymergewindow.cpp:2388
+#, fuzzy
+msgid "Merge operation complete."
+msgstr "Igikorwa Byuzuye . "
+
+#: directorymergewindow.cpp:2388 directorymergewindow.cpp:2391
+#, fuzzy
+msgid "Merge Complete"
+msgstr "Gushyira ku gihe byarangiye"
+
+#: directorymergewindow.cpp:2401
+#, fuzzy
+msgid ""
+"Simulated merge complete: Check if you agree with the proposed operations."
+msgstr "Gukomatanya Byuzuye : NIBA Na: i Ibikorwa: . "
+
+#: directorymergewindow.cpp:2435
+#, fuzzy
+msgid "An error occurred. Press OK to see detailed information.\n"
+msgstr "Habayemoikosa."
+
+#: directorymergewindow.cpp:2467
+#, fuzzy, kde-format
+msgid "Error: While deleting %1: Creating backup failed."
+msgstr "Ikosa : Gusiba %1 : Inyibutsa Byanze . "
+
+#: directorymergewindow.cpp:2474
+#, fuzzy, kde-format
+msgid "delete directory recursively( %1 )"
+msgstr "Gusiba Ububiko ( %1 ) "
+
+#: directorymergewindow.cpp:2476
+#, fuzzy, kde-format
+msgid "delete( %1 )"
+msgstr "Gusiba"
+
+#: directorymergewindow.cpp:2491
+#, fuzzy
+msgid "Error: delete dir operation failed while trying to read the directory."
+msgstr "Ikosa : Gusiba Igikorwa Byanze Kuri Soma i Ububiko . "
+
+#: directorymergewindow.cpp:2510
+#, fuzzy, kde-format
+msgid "Error: rmdir( %1 ) operation failed."
+msgstr "Ikosa : ( %1 ) Igikorwa Byanze . "
+
+#: directorymergewindow.cpp:2520
+#, fuzzy
+msgid "Error: delete operation failed."
+msgstr "Ikosa : Gusiba Igikorwa Byanze . "
+
+#: directorymergewindow.cpp:2546
+#, fuzzy, kde-format
+msgid "manual merge( %1, %2, %3 -> %4)"
+msgstr "Bikorwa Gukomatanya ( %1 , %2 , %3 - > %4 ) "
+
+#: directorymergewindow.cpp:2549
+#, fuzzy
+msgid ""
+"     Note: After a manual merge the user should continue by pressing F7."
+msgstr "icyitonderwa : A Bikorwa Gukomatanya i Umukoresha Gukomeza ku . "
+
+#: directorymergewindow.cpp:2572
+#, fuzzy, kde-format
+msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
+msgstr "Ikosa : Gukoporora ( %1 - > %2 ) Byanze . Ishyika: Byanze . "
+
+#: directorymergewindow.cpp:2582
+#, fuzzy, kde-format
+msgid "copyLink( %1 -> %2 )"
+msgstr "Ihuza ku %1 (%2)"
+
+#: directorymergewindow.cpp:2593
+#, fuzzy
+msgid "Error: copyLink failed: Remote links are not yet supported."
+msgstr "Ikosa : Byanze : amahuza OYA . "
+
+#: directorymergewindow.cpp:2599
+#, fuzzy
+msgid "Error: copyLink failed."
+msgstr "Ikosa : Byanze . "
+
+#: directorymergewindow.cpp:2619
+#, fuzzy, kde-format
+msgid "copy( %1 -> %2 )"
+msgstr "Gukoporora"
+
+#: directorymergewindow.cpp:2645
+#, fuzzy, kde-format
+msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
+msgstr "Ikosa Guhindura izina ( %1 - > %2 ) : Gusiba Ishyika: . "
+
+#: directorymergewindow.cpp:2651
+#, fuzzy, kde-format
+msgid "rename( %1 -> %2 )"
+msgstr "Guhindura izina"
+
+#: directorymergewindow.cpp:2660
+#, fuzzy
+msgid "Error: Rename failed."
+msgstr "Ikosa : Byanze . "
+
+#: directorymergewindow.cpp:2678
+#, fuzzy, kde-format
+msgid "Error during makeDir of %1. Cannot delete existing file."
+msgstr "Ikosa Bya %1 . Gusiba Idosiye . "
+
+#: directorymergewindow.cpp:2694
+#, kde-format
+msgid "makeDir( %1 )"
+msgstr ""
+
+#: directorymergewindow.cpp:2704
+#, fuzzy
+msgid "Error while creating directory."
+msgstr "Ikosa Kurema Ububiko . "
+
+#: directorymergewindow.cpp:2729 directorymergewindow.cpp:2839
+#, fuzzy
+msgid "Dest"
+msgstr "Kugogora"
+
+#: directorymergewindow.cpp:2733 directorymergewindow.cpp:2764
+#, fuzzy
+msgid "Dir"
+msgstr "Muhamagazatelefoni"
+
+#: directorymergewindow.cpp:2733
+msgid "Type"
+msgstr "Ubwoko"
+
+#: directorymergewindow.cpp:2733
+msgid "Size"
+msgstr "Ingano"
+
+#: directorymergewindow.cpp:2734
+#, fuzzy
+msgid "Attr"
+msgstr "Nyuma"
+
+#: directorymergewindow.cpp:2734
+#, fuzzy
+msgid "Last Modification"
+msgstr "Iherutse guhindurwa"
+
+#: directorymergewindow.cpp:2734
+#, fuzzy
+msgid "Link-Destination"
+msgstr "Ishyika"
+
+#: directorymergewindow.cpp:2781
+#, fuzzy
+msgid "not available"
+msgstr "Ntibonetse"
+
+#: directorymergewindow.cpp:2801
+#, fuzzy
+msgid "A (Dest): "
+msgstr "A ( ) : "
+
+#: directorymergewindow.cpp:2804
+#, fuzzy
+msgid "A (Base): "
+msgstr "A ( Base ) : "
+
+#: directorymergewindow.cpp:2810
+msgid "B (Dest): "
+msgstr ""
+
+#: directorymergewindow.cpp:2818
+msgid "C (Dest): "
+msgstr ""
+
+#: directorymergewindow.cpp:2824
+#, fuzzy
+msgid "Dest: "
+msgstr "Ibiro: %1"
+
+#: directorymergewindow.cpp:2891
+#, fuzzy
+msgid "Save Directory Merge State As..."
+msgstr "Seriveri y'ububiko:"
+
+#: directorymergewindow.cpp:2978
+#, fuzzy
+msgid "Start/Continue Directory Merge"
+msgstr "Gutangira /Gukomeza "
+
+#: directorymergewindow.cpp:2979
+#, fuzzy
+msgid "Run Operation for Current Item"
+msgstr "ya:  "
+
+#: directorymergewindow.cpp:2980
+#, fuzzy
+msgid "Compare Selected File"
+msgstr "Idosiye "
+
+#: directorymergewindow.cpp:2981
+#, fuzzy
+msgid "Merge Current File"
+msgstr "Idosiye "
+
+#: directorymergewindow.cpp:2981
+#, fuzzy
+#| msgid "Merge"
+msgid ""
+"Merge\n"
+"File"
+msgstr "Gukomatanya"
+
+#: directorymergewindow.cpp:2982
+#, fuzzy
+msgid "Fold All Subdirs"
+msgstr "Amajwi Yose"
+
+#: directorymergewindow.cpp:2983
+msgid "Unfold All Subdirs"
+msgstr ""
+
+#: directorymergewindow.cpp:2987
+#, fuzzy
+msgid "Choose A for All Items"
+msgstr "A ya:  "
+
+#: directorymergewindow.cpp:2988
+#, fuzzy
+msgid "Choose B for All Items"
+msgstr "ya:  "
+
+#: directorymergewindow.cpp:2989
+#, fuzzy
+msgid "Choose C for All Items"
+msgstr "ya:  "
+
+#: directorymergewindow.cpp:2990
+#, fuzzy
+msgid "Auto-Choose Operation for All Items"
+msgstr "- ya:  "
+
+#: directorymergewindow.cpp:2991
+#, fuzzy
+msgid "No Operation for All Items"
+msgstr "ya:  "
+
+#: directorymergewindow.cpp:2996
+msgid "Show Identical Files"
+msgstr ""
+
+#: directorymergewindow.cpp:2996
+msgid ""
+"Identical\n"
+"Files"
+msgstr ""
+
+#: directorymergewindow.cpp:2997
+#, fuzzy
+msgid "Show Different Files"
+msgstr "Bya Idosiye : "
+
+#: directorymergewindow.cpp:2998
+msgid "Show Files only in A"
+msgstr ""
+
+#: directorymergewindow.cpp:2998
+msgid ""
+"Files\n"
+"only in A"
+msgstr ""
+
+#: directorymergewindow.cpp:2999
+msgid "Show Files only in B"
+msgstr ""
+
+#: directorymergewindow.cpp:2999
+msgid ""
+"Files\n"
+"only in B"
+msgstr ""
+
+#: directorymergewindow.cpp:3000
+msgid "Show Files only in C"
+msgstr ""
+
+#: directorymergewindow.cpp:3000
+msgid ""
+"Files\n"
+"only in C"
+msgstr ""
+
+#: directorymergewindow.cpp:3004
+#, fuzzy
+msgid "Compare Explicitly Selected Files"
+msgstr "Idosiye "
+
+#: directorymergewindow.cpp:3005
+#, fuzzy
+msgid "Merge Explicitly Selected Files"
+msgstr "Idosiye "
+
+#: directorymergewindow.cpp:3007 directorymergewindow.cpp:3014
+msgid "Do Nothing"
+msgstr "Ntugire icyo Ukora"
+
+#: directorymergewindow.cpp:3008
+msgid "A"
+msgstr "A"
+
+#: directorymergewindow.cpp:3009
+msgid "B"
+msgstr "B"
+
+#: directorymergewindow.cpp:3010
+msgid "C"
+msgstr "C"
+
+#: directorymergewindow.cpp:3019
+#, fuzzy
+msgid "Delete A && B"
+msgstr "A & & "
+
+#: directorymergewindow.cpp:3022
+#, fuzzy
+msgid "Merge to A && B"
+msgstr "Kuri A & & "
+
+#: kdiff3_part.cpp:157 kdiff3_part.cpp:234
+#, fuzzy
+msgid "Couldn't find files for comparison."
+msgstr "Gushaka Idosiye ya:  . "
+
+#: kdiff3_part.cpp:302
+msgid "KDiff3Part"
+msgstr ""
+
+#: kreplacements/kreplacements.h:102
+#, fuzzy
+#| msgid "C&ontinue"
+msgid "Continue"
+msgstr "Komeza"
+
+#: kreplacements/kreplacements.h:104 kreplacements/kreplacements.cpp:637
+msgid "Quit"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:183 kreplacements/kreplacements.cpp:345
+msgid "Ok"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:187 kreplacements/kreplacements.cpp:721
+msgid "Help"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:191
+msgid "Defaults"
+msgstr ""
+
+#. i18n: file: kdiff3_shell.rc:4
+#. i18n: ectx: Menu (file)
+#: kreplacements/kreplacements.cpp:302 rc.cpp:12
+#, fuzzy
+msgid "&File"
+msgstr "Idosiye..."
+
+#: kreplacements/kreplacements.cpp:303
+#, fuzzy
+#| msgid "Editor"
+msgid "&Edit"
+msgstr "Muhinduzi"
+
+#. i18n: file: kdiff3_shell.rc:7
+#. i18n: ectx: Menu (directory)
+#: kreplacements/kreplacements.cpp:304 rc.cpp:15
+#, fuzzy
+msgid "&Directory"
+msgstr "Ububiko"
+
+#. i18n: file: kdiff3_shell.rc:50
+#. i18n: ectx: Menu (movement)
+#: kreplacements/kreplacements.cpp:307 rc.cpp:24
+#, fuzzy
+msgid "&Movement"
+msgstr "Igenda"
+
+#. i18n: file: kdiff3_shell.rc:61
+#. i18n: ectx: Menu (diff)
+#: kreplacements/kreplacements.cpp:308 rc.cpp:27
+#, fuzzy
+msgid "D&iffview"
+msgstr "Igabanya"
+
+#. i18n: file: kdiff3_shell.rc:73
+#. i18n: ectx: Menu (merge)
+#: kreplacements/kreplacements.cpp:309 rc.cpp:30
+#, fuzzy
+msgid "&Merge"
+msgstr "Gukomatanya"
+
+#. i18n: file: kdiff3_shell.rc:95
+#. i18n: ectx: Menu (window)
+#: kreplacements/kreplacements.cpp:310 rc.cpp:33
+msgid "&Window"
+msgstr "Idirishya"
+
+#: kreplacements/kreplacements.cpp:311
+#, fuzzy
+msgid "&Settings"
+msgstr "Iganamiterere rya musomyi"
+
+#: kreplacements/kreplacements.cpp:312
+msgid "&Help"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:359
+#, fuzzy
+#| msgid "Abort"
+msgid "&About"
+msgstr "Ntibyakunze"
+
+#: kreplacements/kreplacements.cpp:375
+msgid "A&uthor"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:389
+msgid "&Thanks To"
+msgstr ""
+
+#. i18n: file: kdiff3_shell.rc:30
+#. i18n: ectx: Menu (dir_current_merge_menu)
+#: kreplacements/kreplacements.cpp:494 kreplacements/kreplacements.cpp:503
+#: rc.cpp:18
+#, fuzzy
+msgid "Current Item Merge Operation"
+msgstr "Ibikorerwa Ishusho"
+
+#. i18n: file: kdiff3_shell.rc:38
+#. i18n: ectx: Menu (dir_current_sync_menu)
+#: kreplacements/kreplacements.cpp:495 kreplacements/kreplacements.cpp:504
+#: rc.cpp:21
+#, fuzzy
+msgid "Current Item Sync Operation"
+msgstr "Iki cyiciro"
+
+#: kreplacements/kreplacements.cpp:603
+#, fuzzy
+#| msgid "Operation"
+msgid "Open"
+msgstr "Igikorwa"
+
+#: kreplacements/kreplacements.cpp:612
+#, fuzzy
+msgid "Save"
+msgstr "Gikomeye"
+
+#: kreplacements/kreplacements.cpp:629
+#, fuzzy
+msgid "Print..."
+msgstr "Tegereza..."
+
+#: kreplacements/kreplacements.cpp:645
+msgid "Cut"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:653
+msgid "Copy"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:661
+msgid "Paste"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:669
+#, fuzzy
+msgid "Select All"
+msgstr "A "
+
+#: kreplacements/kreplacements.cpp:677
+msgid "Show Toolbar"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:685
+msgid "Show &Statusbar"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:693
+#, fuzzy, kde-format
+#| msgid "Configure..."
+msgid "&Configure %1..."
+msgstr "Kugena imiterere..."
+
+#: kreplacements/kreplacements.cpp:705 kreplacements/kreplacements.cpp:713
+#, fuzzy
+#| msgid "Abort"
+msgid "About"
+msgstr "Ntibyakunze"
+
+#: kreplacements/kreplacements.cpp:728
+msgid "Find"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:736
+msgid "Find Next"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:756
+#, fuzzy
+msgid "Select Font"
+msgstr "Gutoranya imyandikire"
+
+#: kreplacements/kreplacements.cpp:798
+#, fuzzy
+msgid "Incompatible font."
+msgstr "%S Itakorana"
+
+#: kreplacements/kreplacements.cpp:799
+#, fuzzy
+msgid "Continue at my own risk"
+msgstr "Gukomeza Ku "
+
+#: kreplacements/kreplacements.cpp:799
+#, fuzzy
+msgid "Select another font"
+msgstr "Gutoranya imyandikire"
+
+#: kreplacements/kreplacements.cpp:1138
+msgid "For more documentation, see the help-menu or the subdirectory doc."
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:1141
+msgid "KDiff3-Usage"
+msgstr ""
+
+#: kreplacements/kreplacements.cpp:1141
+#, fuzzy
+msgid "Ignore"
+msgstr "Kwirengagiza Inshuro Imwe"
+
+#: kreplacements/kreplacements.cpp:1141
+#, fuzzy
+#| msgid "Editor"
+msgid "Exit"
+msgstr "Muhinduzi"
+
+#: mergeresultwindow.cpp:152 mergeresultwindow.cpp:970
+#: mergeresultwindow.cpp:984 mergeresultwindow.cpp:996
+#: mergeresultwindow.cpp:1008
+#, fuzzy, kde-format
+msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
+msgstr "Bya : %1 ( Bya %2 ) "
+
+#: mergeresultwindow.cpp:301
+#, fuzzy
+msgid ""
+"The output has been modified.\n"
+"If you continue your changes will be lost."
+msgstr ""
+"Ibisohoka Byahinduwe: . \n"
+"Gukomeza Amahinduka . "
+
+#: mergeresultwindow.cpp:830
+#, fuzzy
+msgid "All input files contain the same text."
+msgstr "Iyinjiza Idosiye i Umwandiko . "
+
+#: mergeresultwindow.cpp:833 mergeresultwindow.cpp:835
+#: mergeresultwindow.cpp:837
+#, fuzzy, kde-format
+msgid "Files %1 and %2 have equal text.\n"
+msgstr "A na bingana Umwandiko . \n"
+
+#: mergeresultwindow.cpp:843
+#, fuzzy
+msgid "Total number of conflicts: "
+msgstr "Umubare Bya : "
+
+#: mergeresultwindow.cpp:844
+#, fuzzy
+msgid ""
+"\n"
+"Nr of automatically solved conflicts: "
+msgstr ""
+"\n"
+"Bya mu buryo bwikora: : "
+
+#: mergeresultwindow.cpp:845
+#, fuzzy
+msgid ""
+"\n"
+"Nr of unsolved conflicts: "
+msgstr ""
+"\n"
+"Bya : "
+
+#: mergeresultwindow.cpp:847
+#, fuzzy
+msgid "Conflicts"
+msgstr "Ishyamirana ry'ingenzi"
+
+#: mergeresultwindow.cpp:1714
+#, fuzzy
+msgid "<No src line>"
+msgstr "< Umurongo: > "
+
+#: mergeresultwindow.cpp:1722
+msgid "<Merge Conflict (Whitespace only)>"
+msgstr ""
+
+#: mergeresultwindow.cpp:1724 mergeresultwindow.cpp:2498
+#, fuzzy
+msgid "<Merge Conflict>"
+msgstr "Ishyamirana ry'ingenzi"
+
+#: mergeresultwindow.cpp:2706
+#, fuzzy
+msgid ""
+"Not all conflicts are solved yet.\n"
+"File not saved.\n"
+msgstr ""
+"Byose . \n"
+"Idosiye OYA . \n"
+
+#: mergeresultwindow.cpp:2708
+#, fuzzy
+msgid "Conflicts Left"
+msgstr "Guhitamo Ibumoso"
+
+#: mergeresultwindow.cpp:2720
+#, fuzzy
+msgid ""
+"\n"
+"\n"
+"Creating backup failed. File not saved."
+msgstr ""
+"\n"
+"\n"
+"Inyibutsa Byanze . Idosiye OYA . "
+
+#: mergeresultwindow.cpp:2720 mergeresultwindow.cpp:2761
+#, fuzzy
+msgid "File Save Error"
+msgstr "Idosiye Kubika Ikosa "
+
+#: mergeresultwindow.cpp:2761
+#, fuzzy
+msgid "Error while writing."
+msgstr "Ikosa . "
+
+#: mergeresultwindow.cpp:3091
+msgid "Output"
+msgstr "Ibisohoka"
+
+#: mergeresultwindow.cpp:3103 mergeresultwindow.cpp:3256
+#, fuzzy
+msgid "[Modified]"
+msgstr "Byahinduwe"
+
+#: mergeresultwindow.cpp:3110
+#, fuzzy
+msgid "Encoding for saving"
+msgstr "Idosiye ya:  : "
+
+#: mergeresultwindow.cpp:3203 mergeresultwindow.cpp:3205
+#: mergeresultwindow.cpp:3207
+msgid "Codec from"
+msgstr ""
+
+#. i18n: file: kdiff3_part.rc:4
+#. i18n: ectx: Menu (movement)
+#: rc.cpp:3
+msgid "&KDiff3"
+msgstr ""
+
+#. i18n: file: kdiff3_part.rc:13
+#. i18n: ectx: Menu (movement)
+#: rc.cpp:6
+#, fuzzy
+msgid "Configure KDiff3"
+msgstr "Kuboneza Gucapa na KDE"
+
+#. i18n: file: kdiff3_part.rc:16
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:9
+msgid "KDiff3"
+msgstr ""
+
+#. i18n: file: kdiff3_shell.rc:106
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:36
+msgid "Main Toolbar"
+msgstr ""
+
+#: rc.cpp:37
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#: rc.cpp:38
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#~ msgid ""
+#~ "_: NAME OF TRANSLATORS\n"
+#~ "Your names"
+#~ msgstr ""
+#~ "Viateur MUGENZI, JEAN BAPTISTE NGENDAHAYO, Augustin KIBERWA, Donatien "
+#~ "NSENGIYUMVA"
+
+#~ msgid ""
+#~ "_: EMAIL OF TRANSLATORS\n"
+#~ "Your emails"
+#~ msgstr ""
+#~ "muvia1@yahoo.fr, ngenda_denis@yahoo.co.uk, akiberwa@yahoo.co.uk, "
+#~ "ndonatienuk@yahoo.co.uk"
+
+#, fuzzy
+#~ msgid "Enables/disables the toolbar"
+#~ msgstr "/i Umwanyabikoresho "
+
+#, fuzzy
+#~ msgid "Printing completed."
+#~ msgstr "Igikorwa Byuzuye . "
+
+#, fuzzy
+#~ msgid "Files A and B are binary equal.\n"
+#~ msgstr "A na Nyabibiri bingana . \n"
+
+#, fuzzy
+#~ msgid "Files A and C are binary equal.\n"
+#~ msgstr "A na Nyabibiri bingana . \n"
+
+#, fuzzy
+#~ msgid "Files A and C have equal text. \n"
+#~ msgstr "A na bingana Umwandiko . \n"
+
+#, fuzzy
+#~ msgid "Files B and C are binary equal.\n"
+#~ msgstr "na Nyabibiri bingana . \n"
+
+#, fuzzy
+#~ msgid "Files B and C have equal text. \n"
+#~ msgstr "na bingana Umwandiko . \n"
+
+#, fuzzy
+#~ msgid "Preserve carriage return"
+#~ msgstr "Garuka "
+
+#, fuzzy
+#~ msgid ""
+#~ "Show carriage return characters '\\r' if they exist.\n"
+#~ "Helps to compare files that were modified under different operating "
+#~ "systems."
+#~ msgstr ""
+#~ "Garuka Inyuguti ' \\r ' NIBA . \n"
+#~ "Kuri Kugereranya # Idosiye Byahinduwe: . "
+
+#, fuzzy
+#~ msgid "Diff and Merge"
+#~ msgstr "Ikinyuranyo/Itandukaniro"
+
+#, fuzzy
+#~ msgid "Save Directory Merge State ..."
+#~ msgstr "Seriveri y'ububiko:"
+
+#, fuzzy
+#~ msgid "Load Directory Merge State ..."
+#~ msgstr "Seriveri y'ububiko:"
+
+#, fuzzy
+#~ msgid "Synchronize Directories"
+#~ msgstr "ububiko bw'amaderese "
+
+#, fuzzy
+#~ msgid "Copy Newer Files Instead of Merging"
+#~ msgstr "Bya ( ) "
+
+#, fuzzy
+#~ msgid "List only deltas"
+#~ msgstr "Ibiri ku rutonde"
+
+#, fuzzy
+#~ msgid "Files and directories without change will not appear in the list."
+#~ msgstr ""
+#~ "na ububiko bw'amaderese Guhindura... OYA Kugaragara in i Urutonde . "
+
+#, fuzzy
+#~ msgid "no selection"
+#~ msgstr "Gukoporora Ihitamo "
+
+#, fuzzy
+#~ msgid "Manually match lines"
+#~ msgstr "Ibishushanyo by'Intoki"
+
+#, fuzzy
+#~ msgid "Has no effect. For compatibility with certain tools."
+#~ msgstr "Oya INGARUKA . Bihuye neza Na: Ibikoresho . "
+
+#, fuzzy
+#~ msgid "For compatibility with certain tools."
+#~ msgstr "Bihuye neza Na: Ibikoresho . "
+
+#, fuzzy
+#~ msgid "Colors in Editor & Diff Output"
+#~ msgstr "in & "
