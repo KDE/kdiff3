@@ -139,6 +139,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    m_bFileSaved = false;
    m_bTimerBlock = false;
    m_pHScrollBar = 0;
+   m_pDiffVScrollBar = 0;
+   m_pMergeVScrollBar = 0;
    viewToolBar = 0;
 
    // Needed before any file operations via FileAccess happen.

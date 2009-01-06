@@ -2733,7 +2733,10 @@ bool MergeResultWindow::saveDocument( const QString& fileName, QTextCodec* pEnco
 
    QByteArray dataArray;
    QTextStream textOutStream(&dataArray, QIODevice::WriteOnly);
-   textOutStream.setGenerateByteOrderMark( true ); // Only for UTF-16
+   if ( pEncoding->name()=="UTF-8" )
+      textOutStream.setGenerateByteOrderMark( false ); // Shouldn't be necessary. Bug in Qt or docs
+   else
+      textOutStream.setGenerateByteOrderMark( true ); // Only for UTF-16
    textOutStream.setCodec( pEncoding );
 
    int line = 0;

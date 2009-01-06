@@ -1628,7 +1628,8 @@ void KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
       m_pDiffTextWindow3->update();
    }
 
-   m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines+1 - m_DTWHeight) );
+   if ( m_pDiffVScrollBar )
+      m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines+1 - m_DTWHeight) );
    if ( m_pDiffTextWindow1 )
    {
       m_pDiffVScrollBar->setValue( m_pDiffTextWindow1->convertDiff3LineIdxToLine( firstD3LIdx ) );
