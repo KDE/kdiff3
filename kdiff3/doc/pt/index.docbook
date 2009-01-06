@@ -33,13 +33,13 @@ as Authors, publish date, the abstract, and Keywords -->
 </author>
 <othercredit role="translator"
 ><firstname
->Pedro</firstname
+>José</firstname
 ><surname
->Morais</surname
+>Pires</surname
 ><affiliation
 ><address
 ><email
->morais@kde.org</email
+>jncp@netcabo.pt</email
 ></address
 ></affiliation
 ><contrib
@@ -50,7 +50,7 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <copyright>
 <year
->2002-2006</year>
+>2002-2007</year>
 <holder
 >Joachim Eibl</holder>
 </copyright>
@@ -68,9 +68,9 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date
->2006-05-14</date>
+>2007-31-03</date>
 <releaseinfo
->0.9.90</releaseinfo>
+>0.9.92</releaseinfo>
 
 
 <abstract>
@@ -115,7 +115,7 @@ Do NOT change these in the translation. -->
 </itemizedlist>
 </para
 ><para
->Este documento descreve o &kdiff3; versão 0.9.89. </para>
+>Este documento descreve o &kdiff3; versão 0.9.92. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -650,6 +650,16 @@ Opções:
 >Em alguns casos, o algoritmo coloca as linhas erradas a seguir umas às outras. Ou se deseja comparar um pedaço de texto com outro que se encontra numa posição completamente diferente no outro ficheiro. Para esses casos, poderá indicar manualmente ao &kdiff3; para alinhar certas linhas. Marque o texto, com o qual deseja melhorar o alinhamento, com o rato como faria na cópia e colagem na primeira janela de diferenças e escolhe então o "Adicionar o Alinhamento Manual das Diferenças" na janela de "Diferenças" (atalho de teclado "Ctrl-Y") . Irá aparecer uma barra laranja na coluna do resumo, a seguir ao texto escolhido. Repita isto para a segunda e (se disponível) a terceira janela de diferenças. O &kdiff3; irá calcular imediatamente de novo as diferenças sempre que fizer isto, alinhando as linhas escolhidas. Obviamente, algumas das linhas anteriormente correspondentes poderão não corresponder mais de novo. </para
 ><para
 >De momento, a junção não suporta a utilização da ajuda de diferenças manual. </para
+></sect2
+><sect2 id="joinsplitsections"
+><title
+>Juntar e Dividir Manualmente Secções de Diferenças</title
+><para
+>Em alguns casos, o &kdiff3; irá ver secções de diferenças a mais ou a menos para a junção. Nesse caso, poderá juntar ou dividir as secções existentes. </para
+><para
+>Adicione secções novas, seleccionando primeiro o texto nas linhas que pertencem em conjunto a qualquer uma das janelas de entrada (como acontece na cópia para a área de transferência). Depois, seleccione a opção "Dividir a Diferença na Selecção", do menu "Juntar". Serão adicionadas divisões antes da primeira linha e depois da última linha do texto seleccionado. Se só quiser adicionar uma secção, então seleccione o texto que começa noutra divisão de secção. </para
+><para
+>Para juntar as secções, seleccione algo nas linhas das secções a juntar, em qualquer uma das janelas de entrada. (Poderá também juntar diversas secções de uma vez). Depois, escolha "Juntar as diferenças seleccionadas" do menu "Juntar". </para
 ></sect2>
 </sect1>
 
@@ -755,7 +765,9 @@ Opções:
 </screen
 > Para mais detalhes sobre as expressões regulares, veja por favor a <ulink url="http://doc.trolltech.com/3.3/qregexp.html#details"
 >documentação da Trolltech sobre expressões regulares</ulink
->. Repare que o "\s" (com o "s" minúsculo) corresponde a qualquer espaço em branco e o "\S" (com o "S" maiúsculo) corresponde a qualquer carácter não-branco. No nosso exemplo, o início do item de histórico, contém primeiro a informação da versão com a expressão regular "\\principal\\\S+", a data consiste no dia "[0-9]+", mês "(Jan|Fev|Mar|Abr|Mai|Jun|Jul|Ago|Set|Out|Nov|Dez)" e no ano "[0-9][0-9][0-9][0-9]", a hora "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]" e, finalmente, o nomes do programador ".*". Lembre-se que o comentário inicial (no exemplo "**") já será removido pelo &kdiff3; antes de tentar a correspondência, logo a expressão regular começa com uma correspondência para zero ou mais caracteres em branco "\s*". </para
+>. Repare que o "\s" (com o "s" minúsculo) corresponde a qualquer espaço em branco e o "\S" (com o "S" maiúsculo) corresponde a qualquer carácter não-branco. No nosso exemplo, o início do item de histórico, contém primeiro a informação da versão com a expressão regular "\\principal\\\S+", a data consiste no dia "[0-9]+", mês "(Jan|Fev|Mar|Abr|Mai|Jun|Jul|Ago|Set|Out|Nov|Dez)" e no ano "[0-9][0-9][0-9][0-9]", a hora "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]" e, finalmente, o nomes do programador ".*". </para
+><para
+>Repare nos caracteres do "comentário inicial" (no exemplo "**"), que terão já sido removidos pelo &kdiff3; antes de tentar a junção; como tal, a expressão regular começa com uma correspondência a zero ou mais espaços em branco "\s*". Dado que os caracteres de comentários poderão ser diferentes para cada ficheiro (p.ex., o C/C++ usa caracteres de comentários diferentes de um programa em Perl), o &kdiff3; toma conta dos caracteres de comentário iniciais e você não os deverá definir na expressão regular. </para
 ><para
 >Se precisar de um histórico ordenado, então deverá ser calculada a chave de ordenação. Para tal, as partes relevantes da expressão regular deverão ser agrupadas entre parêntesis. (os parêntesis extra poderão ficar à mesma, mesmo que a ordenação do histórico esteja desactivada.) <screen>
 \s*\\principal\\(\S+)\s+([0-9]+) (Jan|Fev|Mar|Abr|Mai|Jun|Jul|Ago|Set|Out|Nov|Dez)
@@ -768,8 +780,8 @@ Opções:
 </screen>
 </para
 ><para
->Para mais informações, veja também a <link linkend="diffmergeoptions"
->Configuração de Diferenças e Junção</link
+>Para mais informações, veja também a <link linkend="mergeoptions"
+>Opções de Junção</link
 >. </para>
 </sect2>
 </sect1>
@@ -1133,9 +1145,9 @@ Opções:
 </variablelist>
 </sect2>
 
-<sect2 id="diffmergeoptions"
+<sect2 id="diffoptions"
 ><title
->Configuração da Diferença e Junção</title>
+>Opções do Diff</title>
 <para
 >Ao comparar os ficheiros, o &kdiff3; tenta primeiro corresponder as linhas iguais em todos os ficheiros de entrada. Só durante este passo é que poderá ignorar os espaços em branco. O segundo passo compara cada uma das linhas. Neste passo, os espaços em branco não serão ignorados. Também durante a junção os espaços em branco não serão ignorados. </para>
 
@@ -1214,6 +1226,13 @@ Opções:
 >Tenta com mais afinco encontrar um delta ainda menor. (Por omissão está ligado). Isto irá ser efectivo provavelmente para os ficheiros grandes e complicados. Será também lento para os ficheiros muito grandes. </para
 ></listitem
 ></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="mergeoptions"
+><title
+>Configuração da Junção</title>
+<variablelist>
    <varlistentry
 ><term
 ><emphasis
@@ -1308,6 +1327,16 @@ Opções:
 ><listitem
 ><para
 >Se estiver activado, o &kdiff3; executa a junção automática do histórico, usando as opções acima mencionadas, quando for iniciada uma junção. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Número máximo de itens do histórico:</emphasis
+></term
+><listitem
+><para
+>O &kdiff3; limita a lista do histórico ao número de itens indicado. Use -1 para evitar a limitação. (Por omissão, é igual a -1). </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -2858,20 +2887,20 @@ Opções:
 <para
 >&kdiff3; - Ferramenta de Comparação e Junção de Ficheiros e Pastas </para>
 <para
->Programa com 'copyright' 2002-2006 de Joachim Eibl <email
+>Programa com 'copyright' 2002-2007 de Joachim Eibl <email
 >joachim.eibl at gmx.de</email
 > </para>
 <para
 >Vieram várias ideias giras e relatórios de erros dos colegas do autor e de pessoas da Wild Wild Web. Muito obrigado! </para>
 
 <para
->Documentação Copyright &copy; 2002-2006 Joachim Eibl <email
+>Documentação Copyright &copy; 2002-2007 Joachim Eibl <email
 >joachim.eibl at gmx.de</email
 > </para>
 
 <para
->Tradução de Pedro Morais <email
->morais@kde.org</email
+>Tradução de José Nuno Pires <email
+>jncp@netcabo.pt</email
 ></para
 > 
 &underFDL; &underGPL; </chapter>

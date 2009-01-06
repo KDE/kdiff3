@@ -23,6 +23,7 @@
 #include <QWidget>
 #include <QPixmap>
 #include <QTimer>
+#include <QStatusBar>
 
 class QPainter;
 
@@ -113,7 +114,7 @@ public:
 
    void reset();
 
-   bool saveDocument( const QString& fileName, QTextCodec* pEncoding );
+   bool saveDocument( const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle );
    int getNrOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts=0);
    void choose(int selector);
    void chooseGlobal(int selector, bool bConflictsOnly, bool bWhiteSpaceOnly );
@@ -429,6 +430,8 @@ private:
    QLineEdit*   m_pFileNameLineEdit;
    //QPushButton* m_pBrowseButton;
    QLabel*      m_pModifiedLabel;
+   QLabel*      m_pLineEndStyleLabel;
+   QComboBox*   m_pLineEndStyleSelector;
    QLabel*      m_pEncodingLabel;
    QComboBox*   m_pEncodingSelector;
    OptionDialog* m_pOptionDialog;
@@ -439,6 +442,8 @@ public:
    QString     getFileName();
    void setEncodings( QTextCodec* pCodecForA, QTextCodec* pCodecForB, QTextCodec* pCodecForC );
    void setEncoding( QTextCodec* pCodec );
+   void setLineEndStyles( e_LineEndStyle eLineEndStyleA, e_LineEndStyle eLineEndStyleB, e_LineEndStyle eLineEndStyleC);
+   e_LineEndStyle getLineEndStyle();
 
    bool eventFilter( QObject* o, QEvent* e );
 public slots:

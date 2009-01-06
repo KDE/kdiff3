@@ -20,9 +20,7 @@
 
 #include "diff.h"
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include <config-kdiff3.h>
 
 // include files for Qt
 #include <QSplitter>
@@ -31,10 +29,10 @@
 // include files for KDE
 #include <kapplication.h>
 #include <kmainwindow.h>
-#include <kaccel.h>
 #include <kaction.h>
 #include <kurl.h>
 #include <kparts/mainwindow.h>
+#include <ktoggleaction.h>
 
 
 // forward declaration of the KDiff3 classes
@@ -48,9 +46,6 @@ class WindowTitleWidget;
 class Overview;
 
 class QScrollBar;
-class QComboBox;
-class QLineEdit;
-class QCheckBox;
 class QSplitter;
 
 
@@ -109,10 +104,10 @@ class KDiff3App : public QSplitter
 
     /** save general Options like all bar positions and status as well as the geometry
         and the recent file list to the configuration file */
-    void saveOptions( KConfig* );
+    void saveOptions( KSharedConfigPtr );
 
     /** read general Options again and initialize all variables like the recent file list */
-    void readOptions( KConfig* );
+    void readOptions( KSharedConfigPtr );
 
     // Finish initialisation (virtual, so that it can be called from the shell too.)
     virtual void completeInit(const QString& fn1="", const QString& fn2="", const QString& fn3="");
@@ -125,6 +120,7 @@ class KDiff3App : public QSplitter
      */
     virtual bool queryClose();
     virtual bool isFileSaved();
+    virtual bool isDirComparison();
 
   signals:
      void createNewInstance( const QString& fn1, const QString& fn2, const QString& fn3 );
@@ -308,6 +304,7 @@ class KDiff3App : public QSplitter
    FindDialog*   m_pFindDialog;
 
    void init( bool bAuto=false, TotalDiffStatus* pTotalDiffStatus=0, bool bLoadFiles=true );
+
 
    virtual bool eventFilter( QObject* o, QEvent* e );
    virtual void resizeEvent(QResizeEvent*);

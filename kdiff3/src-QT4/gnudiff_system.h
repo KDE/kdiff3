@@ -24,8 +24,6 @@
 #ifndef GNUDIFF_SYSTEM_H
 #define GNUDIFF_SYSTEM_H
 
-//#include <config.h>
-
 
 
 /* Don't bother to support K&R C compilers any more; it's not worth

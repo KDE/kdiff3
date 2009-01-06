@@ -41,7 +41,6 @@
 #include <kmessagebox.h>
 #include <kfontdialog.h>
 #include <kstatusbar.h>
-#include <kkeydialog.h>
 
 
 #include <assert.h>
@@ -53,6 +52,7 @@
 #include <windows.h>
 #else
 #include <unistd.h>
+#include <kshortcutsdialog.h>
 #endif
 
 #include "gnudiff_diff.h"
@@ -266,7 +266,8 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
                                i18n("\nMost likely this is not wanted during a merge.\n"
                                     "Do you want to disable these settings or continue with these settings active?"),
                                i18n("Option Unsafe for Merging"), 
-                               i18n("Use These Options During Merge"), i18n("Disable Unsafe Options")
+                               KGuiItem( i18n("Use These Options During Merge") ), 
+                               KGuiItem( i18n("Disable Unsafe Options") )
                                );
 
          if (result == KMessageBox::No )
@@ -358,9 +359,12 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
       correctManualDiffAlignment( m_diff3LineList, &m_manualDiffHelpList );
       calcDiff3LineListTrim( m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList );
 
-      calcDiff3LineListUsingBC( &m_diffList23, m_diff3LineList );
-      correctManualDiffAlignment( m_diff3LineList, &m_manualDiffHelpList );
-      calcDiff3LineListTrim( m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList );
+      if ( m_pOptionDialog->m_bDiff3AlignBC )
+      {
+         calcDiff3LineListUsingBC( &m_diffList23, m_diff3LineList );
+         correctManualDiffAlignment( m_diff3LineList, &m_manualDiffHelpList );
+         calcDiff3LineListTrim( m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList );
+      }
       debugLineCheck( m_diff3LineList, m_sd1.getSizeLines(), 1 );
       debugLineCheck( m_diff3LineList, m_sd2.getSizeLines(), 2 );
       debugLineCheck( m_diff3LineList, m_sd3.getSizeLines(), 3 );
@@ -387,8 +391,6 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
    // Calc needed lines for display
    m_neededLines = m_diff3LineList.size();
 
-   m_pDirectoryMergeWindow->allowResizeEvents(false);
-
    QList<int> oldHeights;
    if ( m_pDirectoryMergeSplitter->isVisible() )
       oldHeights = m_pMainSplitter->sizes();
@@ -408,13 +410,14 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
    }
 
    m_pMainWidget->setVisible( bGUI );
-   m_pDirectoryMergeWindow->allowResizeEvents(true);
 
    m_bTripleDiff = ! m_sd3.isEmpty();
 
    m_pMergeResultWindowTitle->setEncodings( m_sd1.getEncoding(), m_sd2.getEncoding(), m_sd3.getEncoding() );
    if ( ! m_pOptionDialog->m_bAutoSelectOutEncoding )
       m_pMergeResultWindowTitle->setEncoding( m_pOptionDialog->m_pEncodingOut );
+
+   m_pMergeResultWindowTitle->setLineEndStyles( m_sd1.getLineEndStyle(), m_sd2.getLineEndStyle(), m_sd3.getLineEndStyle() );
 
    if ( bGUI )
    {
@@ -528,12 +531,12 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
          else  if ( pTotalDiffStatus->bTextAEqB && pTotalDiffStatus->bTextAEqC )
             totalInfo += i18n("All input files contain the same text, but are not binary equal.");
          else {
-            if    ( pTotalDiffStatus->bBinaryAEqB ) totalInfo += i18n("Files %1 and %2 are binary equal.\n"                          ).arg("A").arg("B");
-            else if ( pTotalDiffStatus->bTextAEqB ) totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n").arg("A").arg("B");
-            if    ( pTotalDiffStatus->bBinaryAEqC ) totalInfo += i18n("Files %1 and %2 are binary equal.\n"                          ).arg("A").arg("C");
-            else if ( pTotalDiffStatus->bTextAEqC ) totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n").arg("A").arg("C");
-            if    ( pTotalDiffStatus->bBinaryBEqC ) totalInfo += i18n("Files %1 and %2 are binary equal.\n"                          ).arg("B").arg("C");
-            else if ( pTotalDiffStatus->bTextBEqC ) totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n").arg("B").arg("C");
+            if    ( pTotalDiffStatus->bBinaryAEqB ) totalInfo += i18n("Files %1 and %2 are binary equal.\n",QString("A"),QString("B"));
+            else if ( pTotalDiffStatus->bTextAEqB ) totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n",QString("A"),QString("B"));
+            if    ( pTotalDiffStatus->bBinaryAEqC ) totalInfo += i18n("Files %1 and %2 are binary equal.\n",QString("A"),QString("C"));
+            else if ( pTotalDiffStatus->bTextAEqC ) totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n",QString("A"),QString("C"));
+            if    ( pTotalDiffStatus->bBinaryBEqC ) totalInfo += i18n("Files %1 and %2 are binary equal.\n",QString("B"),QString("C"));
+            else if ( pTotalDiffStatus->bTextBEqC ) totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n",QString("B"),QString("C"));
          }
 
          if ( !totalInfo.isEmpty() )
@@ -615,9 +618,15 @@ void KDiff3App::setDiff3Line( int line )
 
 void KDiff3App::sourceMask( int srcMask, int enabledMask )
 {
+   chooseA->blockSignals(true);
+   chooseB->blockSignals(true);
+   chooseC->blockSignals(true);
    chooseA->setChecked( (srcMask & 1) != 0 );
    chooseB->setChecked( (srcMask & 2) != 0 );
    chooseC->setChecked( (srcMask & 4) != 0 );
+   chooseA->blockSignals(false);
+   chooseB->blockSignals(false);
+   chooseC->blockSignals(false);
    chooseA->setEnabled( (enabledMask & 1) != 0 );
    chooseB->setEnabled( (enabledMask & 2) != 0 );
    chooseC->setEnabled( (enabledMask & 4) != 0 );
@@ -658,13 +667,14 @@ void KDiff3App::initView()
    QHBoxLayout* pDiffHLayout = new QHBoxLayout( pDiffWindowFrame );
    pDiffHLayout->setMargin(0);
    pDiffHLayout->setSpacing(0);
-   pDiffWindowFrame->show();
+   pVSplitter->addWidget(pDiffWindowFrame);
+   //pDiffWindowFrame->show();
    m_pDiffWindowSplitter = new QSplitter();
    m_pDiffWindowSplitter->setOpaqueResize(false);
 
    m_pDiffWindowSplitter->setOrientation( m_pOptionDialog->m_bHorizDiffWindowSplitting ?  Qt::Horizontal : Qt::Vertical );
    pDiffHLayout->addWidget( m_pDiffWindowSplitter );
-   m_pDiffWindowSplitter->show();
+   //m_pDiffWindowSplitter->show();
 
    m_pOverview = new Overview( m_pOptionDialog );
    pDiffHLayout->addWidget(m_pOverview);
@@ -675,10 +685,13 @@ void KDiff3App::initView()
    pDiffHLayout->addWidget( m_pDiffVScrollBar );
 
    m_pDiffTextWindowFrame1 = new DiffTextWindowFrame( m_pDiffWindowSplitter, statusBar(), m_pOptionDialog, 1 );
-   m_pDiffTextWindowFrame1->show();
+   m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame1);
+   //m_pDiffTextWindowFrame1->show();
    m_pDiffTextWindowFrame2 = new DiffTextWindowFrame( m_pDiffWindowSplitter, statusBar(), m_pOptionDialog, 2 );
-   m_pDiffTextWindowFrame2->show();
+   m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame2);
+   //m_pDiffTextWindowFrame2->show();
    m_pDiffTextWindowFrame3 = new DiffTextWindowFrame( m_pDiffWindowSplitter, statusBar(), m_pOptionDialog, 3 );
+   m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame3);
    m_pDiffTextWindow1 = m_pDiffTextWindowFrame1->getDiffTextWindow();
    m_pDiffTextWindow2 = m_pDiffTextWindowFrame2->getDiffTextWindow();
    m_pDiffTextWindow3 = m_pDiffTextWindowFrame3->getDiffTextWindow();
@@ -688,6 +701,7 @@ void KDiff3App::initView()
 
    // Merge window
    m_pMergeWindowFrame = new QWidget( pVSplitter );
+   pVSplitter->addWidget(m_pMergeWindowFrame);
    QHBoxLayout* pMergeHLayout = new QHBoxLayout( m_pMergeWindowFrame );
    pMergeHLayout->setMargin(0);
    pMergeHLayout->setSpacing(0);
@@ -702,6 +716,8 @@ void KDiff3App::initView()
 
    m_pMergeVScrollBar = new QScrollBar( Qt::Vertical, m_pMergeWindowFrame );
    pMergeHLayout->addWidget( m_pMergeVScrollBar );
+
+   m_pMainSplitter->addWidget(m_pMainWidget);
 
    autoAdvance->setEnabled(true);
 
@@ -791,9 +807,9 @@ static int calcManualDiffFirstDiff3LineIdx( const Diff3LineVector& d3lv, const M
    for( i = 0; i<d3lv.size(); ++i )
    {
       const Diff3Line& d3l = *d3lv[i];
-      if ( mdhe.lineA1>=0  &&  mdhe.lineA1==d3l.lineA ||
-           mdhe.lineB1>=0  &&  mdhe.lineB1==d3l.lineB ||
-           mdhe.lineC1>=0  &&  mdhe.lineC1==d3l.lineC )
+      if ( (mdhe.lineA1>=0  &&  mdhe.lineA1==d3l.lineA) ||
+           (mdhe.lineB1>=0  &&  mdhe.lineB1==d3l.lineB) ||
+           (mdhe.lineC1>=0  &&  mdhe.lineC1==d3l.lineC) )
          return i;
    }
    return -1;
@@ -834,6 +850,13 @@ void KDiff3App::slotAfterFirstPaint()
       m_pCornerWidget->setFixedSize( m_pDiffVScrollBar->width(), m_pHScrollBar->height() );
 
    slotUpdateAvailabilities();
+   setUpdatesEnabled(true);
+   // Workaround for a Qt-bug
+   QList<QTreeView*> treeViews = findChildren<QTreeView*>();
+   foreach( QTreeView* pTreeView, treeViews )
+   {
+      pTreeView->setUpdatesEnabled(true);
+   }
 }
 
 void KDiff3App::resizeEvent(QResizeEvent* e)
@@ -866,6 +889,11 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
             slotEditCut();
             return true;
          }
+         if ( k->key()==Qt::Key_Escape && m_pKDiff3Shell && m_pOptionDialog->m_bEscapeKeyQuits )
+         {
+            m_pKDiff3Shell->close();
+            return true;
+         }
       }
       return QSplitter::eventFilter( o, e );    // standard event processing
    }
@@ -873,6 +901,11 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
    if ( e->type() == QEvent::KeyPress )   // key press
    {
        QKeyEvent *k = (QKeyEvent*)e;
+       if ( k->key()==Qt::Key_Escape && m_pKDiff3Shell && m_pOptionDialog->m_bEscapeKeyQuits )
+       {
+          m_pKDiff3Shell->close();
+          return true;
+       }
 
        bool bCtrl = (k->QInputEvent::modifiers() & Qt::ControlModifier) != 0;
        if (k->key()==Qt::Key_Insert &&  bCtrl )
@@ -941,8 +974,7 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
             init();
          }
 #else
-         KURL::List urlList;
-         KURLDrag::decode( pDropEvent, urlList );
+         KUrl::List urlList = KUrl::List::fromMimeData( pDropEvent->mimeData() );
          if ( canContinue() && !urlList.isEmpty() )
          {
             raise();
@@ -983,7 +1015,9 @@ void KDiff3App::slotFileOpen()
    {
       int result = KMessageBox::warningYesNo(this,
          i18n("You are currently doing a directory merge. Are you sure, you want to abort?"),
-         i18n("Warning"), i18n("Abort"), i18n("Continue Merging") );
+         i18n("Warning"), 
+         KGuiItem( i18n("Abort") ), 
+         KGuiItem( i18n("Continue Merging") ) );
       if ( result!=KMessageBox::Yes )
          return;
    }
@@ -1041,9 +1075,9 @@ void KDiff3App::slotFileOpen()
             m_pDirectoryMergeSplitter->hide();
             init();
 
-            if ( ! m_sd1.isEmpty() && !m_sd1.hasData()  ||
-                 ! m_sd2.isEmpty() && !m_sd2.hasData()  ||
-                 ! m_sd3.isEmpty() && !m_sd3.hasData() )
+            if ( (! m_sd1.isEmpty() && !m_sd1.hasData())  ||
+                 (! m_sd2.isEmpty() && !m_sd2.hasData())  ||
+                 (! m_sd3.isEmpty() && !m_sd3.hasData()) )
             {
                QString text( i18n("Opening of these files failed:") );
                text += "\n\n";
@@ -1112,9 +1146,9 @@ void KDiff3App::slotFileOpen2(QString fn1, QString fn2, QString fn3, QString ofn
       if ( pTotalDiffStatus!=0 )
          return;
 
-      if ( ! m_sd1.isEmpty() && ! m_sd1.hasData()  ||
-           ! m_sd2.isEmpty() && ! m_sd2.hasData()  ||
-           ! m_sd3.isEmpty() && ! m_sd3.hasData() )
+      if ( (! m_sd1.isEmpty() && ! m_sd1.hasData())  ||
+           (! m_sd2.isEmpty() && ! m_sd2.hasData())  ||
+           (! m_sd3.isEmpty() && ! m_sd3.hasData()) )
       {
          QString text( i18n("Opening of these files failed:") );
          text += "\n\n";
@@ -1392,14 +1426,14 @@ void KDiff3App::slotJoinDiffs()
 void KDiff3App::slotConfigure()
 {
    m_pOptionDialog->setState();
-   m_pOptionDialog->incInitialSize ( QSize(0,40) );
+   m_pOptionDialog->incrementInitialSize ( QSize(0,40) );
    m_pOptionDialog->exec();
    slotRefresh();
 }
 
 void KDiff3App::slotConfigureKeys()
 {
-    KKeyDialog::configure(actionCollection(), this);
+    KShortcutsDialog::configure(actionCollection(), KShortcutsEditor::LetterShortcutsAllowed, this);
 }
 
 void KDiff3App::slotRefresh()
@@ -1576,7 +1610,8 @@ void KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
    if (bPrinting)
       return;
 
-   m_pOverview->slotRedraw();
+   if (m_pOverview)
+      m_pOverview->slotRedraw();
    if ( m_pDiffTextWindow1 )
    {
       m_pDiffTextWindow1->setFirstLine( m_pDiffTextWindow1->convertDiff3LineIdxToLine( firstD3LIdx ) );
@@ -1662,7 +1697,7 @@ bool KDiff3App::improveFilenames( bool bCreateNewInstance )
       {
          f4.addPath( f1.fileName() );
          if ( f4.isFile() && f4.exists() )
-            m_outputFilename = f4.absFilePath();
+            m_outputFilename = f4.absoluteFilePath();
       }
    }
    else if ( f1.isDir() )
@@ -1670,7 +1705,7 @@ bool KDiff3App::improveFilenames( bool bCreateNewInstance )
       m_bDirCompare = true;
       if (bCreateNewInstance)
       {
-         emit createNewInstance( f1.absFilePath(), f2.absFilePath(), f3.absFilePath() );
+         emit createNewInstance( f1.absoluteFilePath(), f2.absoluteFilePath(), f3.absoluteFilePath() );
       }
       else
       {
@@ -1678,6 +1713,7 @@ bool KDiff3App::improveFilenames( bool bCreateNewInstance )
          if (!m_bDefaultFilename) destDir = f4;
          m_pDirectoryMergeSplitter->show();
          if (m_pMainWidget!=0) m_pMainWidget->hide();
+         setUpdatesEnabled(true);
 
          bool bSuccess = m_pDirectoryMergeWindow->init(
             f1, f2, f3,
@@ -1717,7 +1753,9 @@ bool KDiff3App::canContinue()
    {
       int result = KMessageBox::warningYesNoCancel(this,
          i18n("The merge result hasn't been saved."),
-         i18n("Warning"), i18n("Save && Continue"), i18n("Continue Without Saving") );
+         i18n("Warning"), 
+         KGuiItem( i18n("Save && Continue") ), 
+         KGuiItem( i18n("Continue Without Saving") ) );
       if ( result==KMessageBox::Cancel )
          return false;
       else if ( result==KMessageBox::Yes )
@@ -1745,10 +1783,8 @@ void KDiff3App::slotDirShowBoth()
 {
    if( dirShowBoth->isChecked() )
    {
-      if ( m_bDirCompare )
-         m_pDirectoryMergeSplitter->show();
-      else
-         m_pDirectoryMergeSplitter->hide();
+      if ( m_pDirectoryMergeSplitter )
+         m_pDirectoryMergeSplitter->setVisible( m_bDirCompare );
 
       if ( m_pMainWidget!=0 )
          m_pMainWidget->show();
@@ -2034,29 +2070,36 @@ void KDiff3App::slotWinToggleSplitterOrientation()
 
 void KDiff3App::slotOverviewNormal()
 {
-   m_pOverview->setOverviewMode( Overview::eOMNormal );
-   m_pMergeResultWindow->setOverviewMode( Overview::eOMNormal );
+   if ( m_pOverview != 0 )
+      m_pOverview->setOverviewMode( Overview::eOMNormal );
+   if ( m_pMergeResultWindow !=0 )
+      m_pMergeResultWindow->setOverviewMode( Overview::eOMNormal );
    slotUpdateAvailabilities();
 }
 
 void KDiff3App::slotOverviewAB()
 {
-   m_pOverview->setOverviewMode( Overview::eOMAvsB );
+   if ( m_pOverview != 0 )
+      m_pOverview->setOverviewMode( Overview::eOMAvsB );
    m_pMergeResultWindow->setOverviewMode( Overview::eOMAvsB );
    slotUpdateAvailabilities();
 }
 
 void KDiff3App::slotOverviewAC()
 {
-   m_pOverview->setOverviewMode( Overview::eOMAvsC );
-   m_pMergeResultWindow->setOverviewMode( Overview::eOMAvsC );
+   if ( m_pOverview != 0 )
+      m_pOverview->setOverviewMode( Overview::eOMAvsC );
+   if ( m_pMergeResultWindow !=0 )
+      m_pMergeResultWindow->setOverviewMode( Overview::eOMAvsC );
    slotUpdateAvailabilities();
 }
 
 void KDiff3App::slotOverviewBC()
 {
-   m_pOverview->setOverviewMode( Overview::eOMBvsC );
-   m_pMergeResultWindow->setOverviewMode( Overview::eOMBvsC );
+   if ( m_pOverview != 0 )
+      m_pOverview->setOverviewMode( Overview::eOMBvsC );
+   if ( m_pMergeResultWindow !=0 )
+      m_pMergeResultWindow->setOverviewMode( Overview::eOMBvsC );
    slotUpdateAvailabilities();
 }
 
@@ -2095,7 +2138,7 @@ static void insertManualDiffHelp( ManualDiffHelpList* pManualDiffHelpList, int w
       int& l2 = i->lastLine( winIdx );
       if (l1>=0 && l2>=0)
       {
-         if ( firstLine<=l1 && lastLine>=l1  ||  firstLine <=l2 && lastLine>=l2 )
+         if ( (firstLine<=l1 && lastLine>=l1)  ||  (firstLine <=l2 && lastLine>=l2) )
          {
             // overlap
             l1 = -1;
@@ -2177,14 +2220,15 @@ void KDiff3App::slotClearManualDiffHelpList()
 
 void KDiff3App::slotUpdateAvailabilities()
 {
+   if (m_pMainSplitter==0)
+      return;
+
    bool bTextDataAvailable = ( m_sd1.hasData() || m_sd2.hasData() || m_sd3.hasData() );
 
    if( dirShowBoth->isChecked() )
    {
-      if ( m_bDirCompare )
-         m_pDirectoryMergeSplitter->show();
-      else
-         m_pDirectoryMergeSplitter->hide();
+      if ( m_pDirectoryMergeSplitter!=0 )
+         m_pDirectoryMergeSplitter->setVisible( m_bDirCompare );
 
       if ( m_pMainWidget!=0 && !m_pMainWidget->isVisible() &&
            bTextDataAvailable && !m_pDirectoryMergeWindow->isScanning()
@@ -2201,8 +2245,8 @@ void KDiff3App::slotUpdateAvailabilities()
    dirShowBoth->setEnabled( m_bDirCompare );
    dirViewToggle->setEnabled(
       m_bDirCompare &&
-      (!m_pDirectoryMergeSplitter->isVisible()  &&  m_pMainWidget!=0 && m_pMainWidget->isVisible() ||
-        m_pDirectoryMergeSplitter->isVisible()  &&  m_pMainWidget!=0 && !m_pMainWidget->isVisible() && bTextDataAvailable )
+      ((!m_pDirectoryMergeSplitter->isVisible()  &&  m_pMainWidget!=0 && m_pMainWidget->isVisible()) ||
+        (m_pDirectoryMergeSplitter->isVisible()  &&  m_pMainWidget!=0 && !m_pMainWidget->isVisible() && bTextDataAvailable) )
       );
 
    bool bDirWindowHasFocus = m_pDirectoryMergeSplitter->isVisible() && m_pDirectoryMergeWindow->hasFocus();

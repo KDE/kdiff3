@@ -165,7 +165,7 @@ SourceData::~SourceData()
 
 void SourceData::reset()
 {
-   m_pEncoding = 0;
+   m_pEncoding = 0;   
    m_fileAccess = FileAccess();
    m_normalData.reset();
    m_lmppData.reset();
@@ -211,7 +211,7 @@ void SourceData::setOptionDialog( OptionDialog* pOptionDialog )
 
 QString SourceData::getFilename()
 {
-   return m_fileAccess.absFilePath();
+   return m_fileAccess.absoluteFilePath();
 }
 
 QString SourceData::getAliasName()
@@ -309,6 +309,7 @@ void SourceData::FileData::reset()
    m_size = 0;
    m_vSize = 0;
    m_bIsText = true;
+   m_eLineEndStyle = eLineEndStyleUndefined;
 }
 
 bool SourceData::FileData::readFile( const QString& filename )
@@ -429,7 +430,7 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
    {
       if ( m_fileAccess.isLocal() )
       {
-         fileNameIn1 = m_fileAccess.absFilePath();
+         fileNameIn1 = m_fileAccess.absoluteFilePath();
       }
       else    // File is not local: create a temporary local copy:
       {
@@ -620,6 +621,21 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
 {
    //m_unicodeBuf = decodeString( m_pBuf, m_size, eEncoding );
 
+   qint64 i;
+   // detect line end style
+   m_eLineEndStyle = eLineEndStyleUndefined;
+   for( i=0; i<m_size; ++i )
+   {
+      if ( m_pBuf[i]=='\n' )
+      {
+         if ( i>0 && m_pBuf[i-1]=='\r' ||  // normal file
+              i>3 && m_pBuf[i-1]=='\0' && m_pBuf[i-2]=='\r' && m_pBuf[i-3]=='\0') // 16-bit unicode
+            m_eLineEndStyle = eLineEndStyleDos;
+         else
+            m_eLineEndStyle = eLineEndStyleUnix;
+         break;   // Only analyze first line
+      }
+   }
    qint64 skipBytes = 0;
    QTextCodec* pCodec = ::detectEncoding( m_pBuf, m_size, skipBytes );
    if ( pCodec != pEncoding )
@@ -637,7 +653,6 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
 
    m_bIsText = true;
    int lines = 1;
-   int i;
    for( i=0; i<ucSize; ++i )
    {
       if ( isLineOrBufEnd(p,i,ucSize) )

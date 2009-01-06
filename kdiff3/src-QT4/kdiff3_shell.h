@@ -20,9 +20,7 @@
 #ifndef _KDIFF3SHELL_H_
 #define _KDIFF3SHELL_H_
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include <config-kdiff3.h>
 
 #include <kapplication.h>
 #include <kparts/mainwindow.h>

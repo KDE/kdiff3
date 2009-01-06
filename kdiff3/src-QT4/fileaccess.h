@@ -13,11 +13,13 @@
 
 #include <QDialog>
 #include <QDateTime>
+#include <QEventLoop>
+#include <QLabel>
+#include <QProgressBar>
 
-#include <kprogress.h>
+#include <kprogressdialog.h>
 #include <kio/job.h>
 #include <kio/jobclasses.h>
-#include <kurldrag.h>
 
 #include <list>
 
@@ -53,8 +55,8 @@ public:
    QString fileName() const; // Just the name-part of the path, without parent directories
    QString filePath() const; // The path-string that was used during construction
    QString prettyAbsPath() const;
-   KURL url() const;
-   QString absFilePath() const;
+   KUrl url() const;
+   QString absoluteFilePath() const;
 
    bool isLocal() const;
 
@@ -73,7 +75,7 @@ public:
    static bool makeDir( const QString& );
    static bool removeDir( const QString& );
    static bool exists( const QString& );
-   static QString cleanDirPath( const QString& );
+   static QString cleanPath( const QString& );
 
    //bool chmod( const QString& );
    bool rename( const QString& );
@@ -83,7 +85,7 @@ public:
    QString getStatusText();
 private:
    void setUdsEntry( const KIO::UDSEntry& e );
-   KURL m_url;
+   KUrl m_url;
    bool m_bLocal;
    bool m_bValidData;
 
@@ -106,7 +108,7 @@ private:
    QString m_group;
    QString m_name;
    QString m_path;
-   QString m_absFilePath;
+   QString m_absoluteFilePath;
    QString m_localCopy;
    QString m_statusText;  // Might contain an error string, when the last operation didn't succeed.
 
@@ -156,17 +158,17 @@ private:
    bool scanLocalDirectory( const QString& dirName, t_DirectoryList* dirList );
 
 private slots:
-   void slotStatResult( KIO::Job* );
-   void slotSimpleJobResult( KIO::Job* pJob );
-   void slotPutJobResult( KIO::Job* pJob );
+   void slotStatResult( KJob* );
+   void slotSimpleJobResult( KJob* pJob );
+   void slotPutJobResult( KJob* pJob );
 
-   void slotGetData(KIO::Job*,const QByteArray&);
-   void slotPutData(KIO::Job*, QByteArray&);
+   void slotGetData(KJob*,const QByteArray&);
+   void slotPutData(KJob*, QByteArray&);
 
-   void slotListDirInfoMessage( KIO::Job*, const QString& msg );
+   void slotListDirInfoMessage( KJob*, const QString& msg );
    void slotListDirProcessNewEntries( KIO::Job *, const KIO::UDSEntryList& l );
 
-   void slotPercent( KIO::Job* pJob, unsigned long percent );
+   void slotPercent( KJob* pJob, unsigned long percent );
 };
 
 class ProgressDialog : public QDialog
@@ -192,7 +194,7 @@ public:
    void setSubRangeTransformation( double dMin, double dMax );
 
    void exitEventLoop();
-   void enterEventLoop( KIO::Job* pJob, const QString& jobInfo );
+   void enterEventLoop( KJob* pJob, const QString& jobInfo );
 
    bool wasCancelled();
    void show();
@@ -220,8 +222,8 @@ private:
    int m_progressDelayTimer;
    std::list<QEventLoop*> m_eventLoopStack;
 
-   KProgress* m_pProgressBar;
-   KProgress* m_pSubProgressBar;
+   QProgressBar* m_pProgressBar;
+   QProgressBar* m_pSubProgressBar;
    QLabel* m_pInformation;
    QLabel* m_pSubInformation;
    QLabel* m_pSlowJobInfo;
@@ -230,7 +232,7 @@ private:
    QTime m_t1;
    QTime m_t2;
    bool m_bWasCancelled;
-   KIO::Job* m_pJob;
+   KJob* m_pJob;
    QString m_currentJobInfo;  // Needed if the job doesn't stop after a reasonable time.
    bool m_bStayHidden;
 protected:

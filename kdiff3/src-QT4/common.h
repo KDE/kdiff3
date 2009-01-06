@@ -20,6 +20,7 @@
 
 #include <assert.h>
 
+
 template< class T >
 T min2( T x, T y )
 {
@@ -93,18 +94,28 @@ public:
    virtual void writeEntry(const QString&, const QPoint& );
    virtual void writeEntry(const QString&, int );
    virtual void writeEntry(const QString&, bool );
-   virtual void writeEntry(const QString&, const QStringList&, char separator );
+   virtual void writeEntry(const QString&, const QStringList&, char separator='|' );
    virtual void writeEntry(const QString&, const QString& );
    virtual void writeEntry(const QString&, const char* );
 
-   virtual QFont       readFontEntry (const QString&, QFont* defaultVal );
-   virtual QColor      readColorEntry(const QString&, QColor* defaultVal );
-   virtual QSize       readSizeEntry (const QString&, QSize* defaultVal );
-   virtual QPoint      readPointEntry(const QString&, QPoint* defaultVal );
+   virtual QFont       readFontEntry (const QString&, const QFont* defaultVal );
+   virtual QColor      readColorEntry(const QString&, const QColor* defaultVal );
+   virtual QSize       readSizeEntry (const QString&, const QSize* defaultVal );
+   virtual QPoint      readPointEntry(const QString&, const QPoint* defaultVal );
    virtual bool        readBoolEntry (const QString&, bool bDefault );
    virtual int         readNumEntry  (const QString&, int iDefault );
-   virtual QStringList readListEntry (const QString&, const QStringList& defaultVal, char separator );
-   virtual QString     readEntry     (const QString&, const QString& );
+   virtual QStringList readListEntry (const QString&, const QStringList& defaultVal, char separator='|' );
+   virtual QString     readStringEntry(const QString&, const QString& );
+
+   QString     readEntry (const QString& s, const QString& defaultVal );
+   QString     readEntry (const QString& s, const char* defaultVal );
+   QFont       readEntry (const QString& s, const QFont& defaultVal );
+   QColor      readEntry(const QString& s, const QColor defaultVal );
+   QSize       readEntry (const QString& s, const QSize defaultVal );
+   QPoint      readEntry(const QString& s, const QPoint defaultVal );
+   bool        readEntry (const QString& s, bool bDefault );
+   int         readEntry  (const QString& s, int iDefault );
+   QStringList readEntry (const QString& s, const QStringList& defaultVal, char separator='|' );
 };
 
 QStringList safeStringSplit(const QString& s, char sepChar=',', char metaChar='\\' );

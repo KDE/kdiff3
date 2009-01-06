@@ -3,7 +3,7 @@
 ;Apdapted for KDiff3 by Sebastien Fricker and Joachim Eibl
 ;Requires nsis_v2.19
 
-!define KDIFF3_VERSION "0.9.92"
+!define KDIFF3_VERSION "0.9.93"
 !define DIFF_EXT_CLSID "{9F8528E4-AB20-456E-84E5-3CE69D8720F3}"
 
 ;--------------------------------
@@ -224,9 +224,6 @@ SectionIn RO
   ;ADD YOUR OWN FILES HERE...
     DetailPrint "Writing files"
     File "kdiff3.exe"
-    File "kdiff3-QT4.exe"
-    File "QtGui4.dll"
-    File "QtCore4.dll"
     File "COPYING.txt"
     File "Readme_Win.txt"
     File "ChangeLog.txt"
@@ -243,7 +240,6 @@ SectionIn RO
     ;Create shortcuts
     CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\KDiff3.lnk" "$INSTDIR\kdiff3.exe"
-    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\KDiff3-Qt4.lnk" "$INSTDIR\kdiff3-QT4.exe"
     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Readme.lnk" "$INSTDIR\Readme_Win.txt"
     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\GPL.lnk"    "$INSTDIR\Copying.txt"
     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
@@ -272,7 +268,7 @@ Section "Explorer" SecIntegrationExplorer
   DetailPrint "Integration to Explorer"
 ;  WriteRegStr HKCR "Directory\shell\KDiff3" "" '&KDiff3'
 ;  WriteRegStr HKCR "Directory\shell\KDiff3\command" "" '"$INSTDIR\kdiff3.exe" "%1"'
-    CreateShortCut "$SMPROGRAMS\..\..\SendTo\KDiff3.lnk" '"$INSTDIR\kdiff3.exe"'
+    CreateShortCut "$SENDTO\KDiff3.lnk" '"$INSTDIR\kdiff3.exe"'
 SectionEnd
 
 Section "Diff-Ext" SecIntegrationDiffExtForKDiff3
@@ -381,8 +377,6 @@ Section "Uninstall"
   Delete "$INSTDIR\Uninstall.exe"
   Delete "$INSTDIR\kdiff3.exe"
   Delete "$INSTDIR\kdiff3-QT4.exe"
-  Delete "$INSTDIR\QtGui4.dll"
-  Delete "$INSTDIR\QtCore4.dll"
   Delete "$INSTDIR\COPYING.txt"
   Delete "$INSTDIR\Readme_Win.txt"
   Delete "$INSTDIR\ChangeLog.txt"
@@ -405,7 +399,7 @@ Section "Uninstall"
 
   Delete "$SMPROGRAMS\$MUI_TEMP\Documentation.lnk"
   Delete "$QUICKLAUNCH\KDiff3.lnk"
-  Delete "$SMPROGRAMS\..\..\SendTo\KDiff3.lnk"
+  Delete "$SENDTO\KDiff3.lnk"
   
   ;Delete empty start menu parent diretories
   StrCpy $MUI_TEMP "$SMPROGRAMS\$MUI_TEMP"

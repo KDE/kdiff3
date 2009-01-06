@@ -50,7 +50,7 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <copyright>
 <year
->2002-2006</year>
+>2002-2007</year>
 <holder
 >Joachim Eibl</holder>
 </copyright>
@@ -68,9 +68,9 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date
->2006-05-14</date>
+>2007-31-03</date>
 <releaseinfo
->0.9.90</releaseinfo>
+>0.9.92</releaseinfo>
 
 
 <abstract>
@@ -115,7 +115,7 @@ Do NOT change these in the translation. -->
 </itemizedlist>
 </para
 ><para
->Det här dokumentet beskriver &kdiff3; version 0.9.89. </para>
+>Det här dokumentet beskriver &kdiff3; version 0.9.92. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -637,6 +637,16 @@ Please at least include KDE, the KDE package it is in, the name
 >Ibland placerar algoritmen fel rader intill varandra, eller så vill du jämföra ett textstycke med text på en helt annan position i den andra filen. I dessa fall kan du manuellt tala om för &kdiff3; att vissa rader ska arrangeras i rak linje. Markera texten som du vill arrangera med musen, som du skulle göra vid kopiera och klistra in, i det första jämförelsefönstret och välj därefter "Lägg till manuell justering av jämförelse" i menyn "Jämförelsevy" (snabbtangenten "Ctrl+Y"). En orange rad visas i sammanfattningskolumnen intill den markerade texten. Upprepa det för den andra och (om tillgänglig) tredje jämförelsevyn. &kdiff3; beräknar omedelbart om jämförelsen varje gång du gör det, och radar upp de markerade raderna. Naturligtvis kanske några av raderna som tidigare matchade inte längre matchar. </para
 ><para
 >För närvarande stöder inte sammanfogning användning av manuell hjälp vid jämförelse. </para
+></sect2
+><sect2 id="joinsplitsections"
+><title
+>Manuell ihopfogning och delning av jämförelseavsnitt</title
+><para
+>I vissa fall ser &kdiff3; för många eller för få avsnitt att sammanfoga. I ett sådant fall kan du foga ihop eller dela befintliga avsnitt. </para
+><para
+>Lägg till nya avsnitt genom att först markera texten på raderna som hör ihop i något av indatafönstren (som vid kopiering till klippbordet). Välj därefter "Dela jämförelse vid markering" i menyn "Sammanfoga". Delningen görs ovanför den första raden och under den sista raden i den markerade texten. Om du bara vill lägga till ett avsnitt, markera text som börjar på ett annat avsnitts delning. </para
+><para
+>För att foga ihop avsnitt i något indatafönster, markera någonting på raderna i avsnitten som ska fogas ihop. (Du kan också foga ihop flera avsnitt i ett steg.) Välj därefter "Foga ihop markerade jämförelser" i menyn "Sammanfoga". </para
 ></sect2>
 </sect1>
 
@@ -742,7 +752,9 @@ Please at least include KDE, the KDE package it is in, the name
 </screen
 > För detaljinformation om reguljära uttryck se <ulink url="http://doc.trolltech.com/3.3/qregexp.html#details"
 >Trolltechs dokumentation av reguljära uttryck</ulink
->. Observera att "\s" (med ett litet "s") matchar alla blanktecken och  "\S" (med ett stort "S") matchar alla tecken som inte är blanktecken. I vårt exempel innehåller historikpostens början först versionsinformation med det reguljära uttrycket "\\main\\\S+", datumet som består av dagen "[0-9]+", månaden "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)" och året "[0-9][0-9][0-9][0-9]", tiden "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]" och till sist utvecklarens inloggningsnamn ".*". Observera att den inledande kommentaren (i exemplet "**") redan har tagits bort av &kdiff3; innan matchningsförsöket, därför börjar det reguljära uttrycket med en matchning av en eller flera blanktecken "\s*". </para
+>. Observera att "\s" (med ett litet "s") matchar alla blanktecken och  "\S" (med ett stort "S") matchar alla tecken som inte är blanktecken. I vårt exempel innehåller historikpostens början först versionsinformation med det reguljära uttrycket "\\main\\\S+", datumet som består av dagen "[0-9]+", månaden "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)" och året "[0-9][0-9][0-9][0-9]", tiden "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]" och till sist utvecklarens inloggningsnamn ".*". </para
+><para
+>Observera att de "inledande kommentartecknen" (i exemplet "**") redan har tagits bort av &kdiff3; innan försöket att matcha, alltså börjar det reguljära uttrycket med att matcha ett eller flera blanktecken "\s*". Eftersom kommentartecken kan skilja sig åt i varje fil (C/C++ använder t.ex. andra kommentartecken än ett Perl-skript), tar &kdiff3; hand om de inledande kommentartecknen och du ska inte ange dem i det reguljära uttrycket. </para
 ><para
 >Om du kräver sorterad historik måste sorteringsnyckeln beräknas. För att göra det måste relevanta delar i det reguljära uttrycket grupperas med parenteser. (De extra parenteserna kan också vara kvar även om historiksortering inaktiveras.) <screen>
 \s*\\main\\(\S+)\s+([0-9]+) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
@@ -755,8 +767,8 @@ Please at least include KDE, the KDE package it is in, the name
 </screen>
 </para
 ><para
->För mer information, se också <link linkend="diffmergeoptions"
->Inställningar av jämför och sammanfoga</link
+>För mer information, se också <link linkend="mergeoptions"
+>Inställningar av sammanfoga</link
 >. </para>
 </sect2>
 </sect1>
@@ -1120,9 +1132,9 @@ Please at least include KDE, the KDE package it is in, the name
 </variablelist>
 </sect2>
 
-<sect2 id="diffmergeoptions"
+<sect2 id="diffoptions"
 ><title
->Inställningar av jämför och sammanfoga</title>
+>Inställningar av jämför</title>
 <para
 >När filer jämförs försöker &kdiff3; först att matcha rader som är lika i alla indatafiler. Det är bara under detta steg som blanktecken kan ignoreras. Det andra steget jämför varje rad. Under detta steg ignoreras inte blanktecken. Under sammanfogning ignoreras inte heller blanktecken. </para>
 
@@ -1201,6 +1213,13 @@ Please at least include KDE, the KDE package it is in, the name
 >Gör en ansträngning att hitta en ännu mindre skillnad (Normalvärdet är på). Det här är troligen effektivt för komplicerade och stora filer, och långsamt för mycket stora filer. </para
 ></listitem
 ></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="mergeoptions"
+><title
+>Inställningar av sammanfoga</title>
+<variablelist>
    <varlistentry
 ><term
 ><emphasis
@@ -1295,6 +1314,16 @@ Please at least include KDE, the KDE package it is in, the name
 ><listitem
 ><para
 >Om aktiverad utför &kdiff3; den automatiska sammafogningen av historik med tidigarenämnda alternativ när en sammanfogning startas. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Maximalt antal historikposter:</emphasis
+></term
+><listitem
+><para
+>&kdiff3; kortar av historiklistan till angivet antal poster. Använd -1 för att undvika avkortning. (Standardvärde är -1). </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -2821,14 +2850,14 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >&kdiff3;: Verktyg för jämförelser och sammanfogning av filer och kataloger </para>
 <para
->Program copyright 2002-2006 Joachim Eibl <email
+>Program copyright 2002-2007 Joachim Eibl <email
 >joachim.eibl snabela gmx.de</email
 > </para>
 <para
 >Flera häftiga idéer och felrapporter kom från kolleger och många personer ute i den Vida Vilda Världen. Tack! </para>
 
 <para
->Dokumentation Copyright &copy; 2002-2006 Joachim Eibl <email
+>Dokumentation Copyright &copy; 2002-2007 Joachim Eibl <email
 >joachim. eibl snabela gmx.de</email
 > </para>
 

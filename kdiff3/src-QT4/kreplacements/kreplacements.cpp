@@ -98,8 +98,7 @@ static void showHelp()
       else
       {
          QFileInfo prog( buf );
-         //_spawnlp( _P_NOWAIT , prog.filePath().toAscii(), prog.fileName().toAscii(), (""+.absFilePath()).toAscii(), NULL );
-         QProcess::startDetached ( prog.filePath() + " \"file:///" + helpFile.absolutePath() + "\"" );
+         QProcess::startDetached ( prog.filePath(), QStringList( "file:///"+helpFile.absoluteFilePath() ) );
       }
 
    #else
@@ -117,11 +116,12 @@ static void showHelp()
 QString getTranslationDir()
 {
    #ifdef _WIN32
-      char buf[200];
-      int r= SearchPathA( 0, ".",  0, sizeof(buf), buf, 0 );
+      wchar_t buf[200];
+      int r= SearchPathW( 0, L".",  0, sizeof(buf)/sizeof(wchar_t), buf, 0 );
 
+      buf[ sizeof(buf)/sizeof(wchar_t) -1 ] = 0;
       QString exePath;
-      if (r!=0)  {  exePath = buf; }
+      if (r!=0)  {  exePath = QString::fromUtf16( (ushort*)&buf[0] ); }
       else       {  exePath = "."; }
       return exePath+"/translations";
    #else
@@ -168,11 +168,9 @@ int KMessageBox::warningYesNoCancel( QWidget* parent, const QString& text, const
 }
 
 
-KDialogBase::KDialogBase( int, const QString& caption, int, int, QWidget* parent, const char* name,
-  bool /*modal*/, bool )
+KPageDialog::KPageDialog(  QWidget* parent )
 : QDialog( parent )
 {
-   setObjectName(name);
    setModal(true);
    QVBoxLayout *pMainLayout = new QVBoxLayout(this);
    m_pTabWidget = new QTabWidget();
@@ -183,44 +181,46 @@ KDialogBase::KDialogBase( int, const QString& caption, int, int, QWidget* parent
 
    pButtonLayout->addStretch(1);
    QPushButton* pOk = new QPushButton( i18n("Ok") );
-   connect( pOk, SIGNAL( clicked() ), this, SLOT(accept()) );
+   connect( pOk, SIGNAL( clicked() ), this, SIGNAL(okClicked()) );
    pButtonLayout->addWidget( pOk );
 
    QPushButton* pHelp = new QPushButton( i18n("Help") );
-   connect( pHelp, SIGNAL( clicked() ), this, SLOT(slotHelp()));
+   connect( pHelp, SIGNAL( clicked() ), this, SLOT(slotHelpClicked()));
    pButtonLayout->addWidget( pHelp );
 
    QPushButton* pDefaults = new QPushButton( i18n("Defaults") );
-   connect( pDefaults, SIGNAL( clicked() ), this, SLOT(slotDefault()) );
+   connect( pDefaults, SIGNAL( clicked() ), this, SIGNAL(defaultClicked()) );
    pButtonLayout->addWidget( pDefaults );
 
    QPushButton* pCancel = new QPushButton( i18n("Cancel") );
    connect( pCancel, SIGNAL( clicked() ), this, SLOT(reject()));
    pButtonLayout->addWidget( pCancel );
-
-   setWindowTitle( caption );
 }
 
-KDialogBase::~KDialogBase()
+KPageDialog::~KPageDialog()
 {
 }
 
-void KDialogBase::incInitialSize ( const QSize& )
+void KPageDialog::incrementInitialSize ( const QSize& )
 {
 }
 
-void KDialogBase::setHelp(const QString&, const QString& )
+void KPageDialog::setHelp(const QString&, const QString& )
 {
 }
 
+void KPageDialog::slotHelpClicked()
+{
+   showHelp();
+}
 
-int KDialogBase::BarIcon(const QString& /*iconName*/, int )
+int KPageDialog::BarIcon(const QString& /*iconName*/, int )
 {
    return 0; // Not used for replacement.
 }
 
 
-QFrame* KDialogBase::addPage(  const QString& name, const QString& /*info*/, int )
+QFrame* KPageDialog::addPage(  const QString& name, const QString& /*info*/, int )
 {
    QFrame* p = new QFrame();
    p->setObjectName( name );
@@ -228,71 +228,39 @@ QFrame* KDialogBase::addPage(  const QString& name, const QString& /*info*/, int
    return p;
 }
 
-int KDialogBase::spacingHint()
+void KPageDialog::addPage( KPageWidgetItem * p )
+{
+   m_pTabWidget->addTab( p->m_pWidget, p->m_title );
+}
+
+int KPageDialog::spacingHint()
 {
    return 3;
 }
 
-static bool s_inAccept = false;
-static bool s_bAccepted = false;
-void KDialogBase::accept()
-{
-   if( ! s_inAccept )
-   {
-      s_bAccepted = false;
-      s_inAccept = true;
-      slotOk();
-      s_inAccept = false;
-      if ( s_bAccepted )
-         QDialog::accept();
-   }
-   else
-   {
-      s_bAccepted = true;   
-   }   
-}
-
-void KDialogBase::slotDefault( )
-{
-}
-void KDialogBase::slotOk()
-{
-}
-void KDialogBase::slotCancel( )
-{
-}
-void KDialogBase::slotApply( )
-{
-   emit applyClicked();
-}
-void KDialogBase::slotHelp( )
-{
-   showHelp();
-}
-
-KURL KFileDialog::getSaveURL( const QString &startDir,
+KUrl KFileDialog::getSaveUrl( const QString &startDir,
                               const QString &filter,
                               QWidget *parent, const QString &caption)
 {
    QString s = QFileDialog::getSaveFileName(parent, caption, startDir, filter, 0/*, QFileDialog::DontUseNativeDialog*/);
-   return KURL(s);
+   return KUrl(s);
 }
 
-KURL KFileDialog::getOpenURL( const QString &  startDir,
+KUrl KFileDialog::getOpenUrl( const QString &  startDir,
                            const QString &  filter,
                            QWidget *  parent,
                            const QString &  caption )
 {
    QString s = QFileDialog::getOpenFileName(parent, caption, startDir, filter );
-   return KURL(s);
+   return KUrl(s);
 }
 
-KURL KFileDialog::getExistingURL( const QString &  startDir,
+KUrl KFileDialog::getExistingDirectoryUrl( const QString &  startDir,
                                QWidget *  parent,
                                const QString &  caption)
 {
    QString s = QFileDialog::getExistingDirectory(parent, caption, startDir);
-   return KURL(s);
+   return KUrl(s);
 }
 
 QString KFileDialog::getSaveFileName (const QString &startDir, 
@@ -328,10 +296,9 @@ KToolBar::KToolBar( QMainWindow* parent )
 }
 
 
-KMainWindow::KMainWindow( QWidget* parent, const char* name )
+KMainWindow::KMainWindow( QWidget* parent )
 : QMainWindow( parent ), m_actionCollection(this)
 {
-   setObjectName(name);
    fileMenu =      menuBar()->addMenu( i18n("&File") );
    editMenu =      menuBar()->addMenu(i18n("&Edit") );
    directoryMenu = menuBar()->addMenu(i18n("&Directory") );
@@ -345,6 +312,7 @@ KMainWindow::KMainWindow( QWidget* parent, const char* name )
    helpMenu =     menuBar()->addMenu(i18n("&Help") );
 
    m_pToolBar = new KToolBar(this);
+   addToolBar( m_pToolBar );
       
    memberList = new QList<KMainWindow*>;
    memberList->append(this);
@@ -362,9 +330,9 @@ KActionCollection* KMainWindow::actionCollection()
 
 void KMainWindow::createGUI()
 {
-   KStdAction::help(this, SLOT(slotHelp()), actionCollection());
-   KStdAction::about(this, SLOT(slotAbout()), actionCollection());
-   KStdAction::aboutQt(actionCollection());
+   KStandardAction::help(this, SLOT(appHelpActivated()), actionCollection());
+   KStandardAction::about(this, SLOT(slotAbout()), actionCollection());
+   KStandardAction::aboutQt(actionCollection());
 }
 
 void KMainWindow::slotAbout()
@@ -435,7 +403,7 @@ void KMainWindow::slotAbout()
 */
 }
 
-void KMainWindow::slotHelp()
+void KMainWindow::appHelpActivated()
 {
    showHelp();
 }
@@ -451,63 +419,74 @@ QString KStandardDirs::findResource(const QString& resource, const QString& /*ap
    return QString();
 }
 
-KConfig::KConfig()
-{
-}
-
-void KConfig::readConfigFile( const QString& configFileName )
-{
-   if ( !configFileName.isEmpty() )
-   {
-      m_fileName = configFileName;
-   }
-   else
-   {
-      m_fileName = KStandardDirs().findResource("config","kdiff3rc");
-   }
-
-   QFile f( m_fileName );
-   if ( f.open(QIODevice::ReadOnly) )
-   {                               // file opened successfully
-      QTextStream t( &f );         // use a text stream
-      load(t);
-      f.close();
-   }
-}
-
-KConfig::~KConfig()
+KConfigGroupData::~KConfigGroupData()
 {
    QFile f(m_fileName);
    if ( f.open( QIODevice::WriteOnly | QIODevice::Text ) )
    {                               // file opened successfully
-       QTextStream t( &f );        // use a text stream
-       save(t);
-       f.close();
+      QTextStream t( &f );        // use a text stream
+      save(t);
+      f.close();
    }
 }
 
-void KConfig::setGroup(const QString&)
+KConfigGroup::KConfigGroup()
+{
+   d = new KConfigGroupData;
+}
+
+void KConfigGroup::readConfigFile( const QString& configFileName )
+{
+   if ( !configFileName.isEmpty() )
+   {
+      d->m_fileName = configFileName;
+   }
+   else
+   {
+      d->m_fileName = KStandardDirs().findResource("config","kdiff3rc");
+   }
+
+   QFile f( d->m_fileName );
+   if ( f.open(QIODevice::ReadOnly) )
+   {                               // file opened successfully
+      QTextStream t( &f );         // use a text stream
+      d->load(t);
+      f.close();
+   }
+}
+
+KConfigGroup::~KConfigGroup()
 {
 }
 
-void KAction::init(QObject* receiver, const char* slot, KActionCollection* actionCollection, 
-                   const char* name, bool bToggle, bool bMenu)
+void KConfigGroup::setGroup(const QString&)
+{
+}
+
+KConfigGroup& KConfigGroup::group( const QString& )
+{
+   KApplication* pKApp = static_cast<KApplication*>(QApplication::instance());
+   return *pKApp->config();
+}
+
+static void initAction( QAction* pAction, QObject* receiver, const char* slot, KActionCollection* actionCollection, 
+                   const QString& name, bool bToggle, bool bMenu)
 {
    QString n(name);
    KMainWindow* p = actionCollection->m_pMainWindow;
    if( slot!=0 )
    {
       if (!bToggle)
-         connect(this, SIGNAL(triggered()), receiver, slot);
+         QObject::connect(pAction, SIGNAL(triggered()), receiver, slot);
       else
       {
-         connect(this, SIGNAL(toggled(bool)), receiver, slot);
+         QObject::connect(pAction, SIGNAL(toggled(bool)), receiver, slot);
       }
    }
 
    if (bMenu)
    {
-      if( n[0]=='g')       p->movementMenu->addAction( this );
+      if( n[0]=='g')       p->movementMenu->addAction( pAction );
       else if( n.left(16)=="dir_current_sync")
       {
          if ( p->dirCurrentItemMenu==0 )
@@ -515,7 +494,7 @@ void KAction::init(QObject* receiver, const char* slot, KActionCollection* actio
             p->dirCurrentItemMenu = p->directoryMenu->addMenu( i18n("Current Item Merge Operation") );
             p->dirCurrentSyncItemMenu = p->directoryMenu->addMenu( i18n("Current Item Sync Operation") );
          }
-         p->dirCurrentItemMenu->addAction( this );
+         p->dirCurrentItemMenu->addAction( pAction );
       }
       else if( n.left(11)=="dir_current")
       {
@@ -524,16 +503,26 @@ void KAction::init(QObject* receiver, const char* slot, KActionCollection* actio
             p->dirCurrentItemMenu = p->directoryMenu->addMenu( i18n("Current Item Merge Operation") );
             p->dirCurrentSyncItemMenu = p->directoryMenu->addMenu( i18n("Current Item Sync Operation") );
          }
-         p->dirCurrentSyncItemMenu->addAction( this );
+         p->dirCurrentSyncItemMenu->addAction( pAction );
       }
-      else if( n.left(4)=="diff")  p->diffMenu->addAction( this );
-      else if( name[0]=='d')  p->directoryMenu->addAction( this );
-      else if( name[0]=='f')  p->fileMenu->addAction( this );
-      else if( name[0]=='w')  p->windowsMenu->addAction( this );
-      else                    p->mergeMenu->addAction( this );
+      else if( n.left(4)=="diff")  p->diffMenu->addAction( pAction );
+      else if( name[0]=='d')  p->directoryMenu->addAction( pAction );
+      else if( name[0]=='f')  p->fileMenu->addAction( pAction );
+      else if( name[0]=='w')  p->windowsMenu->addAction( pAction );
+      else                    p->mergeMenu->addAction( pAction );
    }
 }
 
+KAction::KAction(const QString& name, KActionCollection* actionCollection )
+: QAction ( actionCollection->m_pMainWindow )
+{
+   initAction( this, 0,0, actionCollection, name, false, true );
+}
+
+KAction::KAction(  KActionCollection* actionCollection )
+: QAction ( actionCollection->m_pMainWindow )
+{
+}
 
 KAction::KAction(const QString& text, const QIcon& icon, int accel,
  QObject* receiver, const char* slot, KActionCollection* actionCollection,
@@ -547,7 +536,7 @@ KAction::KAction(const QString& text, const QIcon& icon, int accel,
    KMainWindow* p = actionCollection->m_pMainWindow;
    if ( !icon.isNull() && p ) p->m_pToolBar->addAction( this );
 
-   init(receiver,slot,actionCollection,name,bToggle,bMenu);
+   initAction(this, receiver,slot,actionCollection,name,bToggle,bMenu);
 }
 
 KAction::KAction(const QString& text, int accel,
@@ -559,7 +548,7 @@ KAction::KAction(const QString& text, int accel,
    setObjectName(name);
    setShortcut( accel );
    setCheckable( bToggle );
-   init(receiver,slot,actionCollection,name,bToggle,bMenu);
+   initAction(this,receiver,slot,actionCollection,name,bToggle,bMenu);
 }
 
 void KAction::setStatusText(const QString&)
@@ -571,10 +560,21 @@ void KAction::plug(QMenu* menu)
    menu->addAction( this );
 }
 
-
-KToggleAction::KToggleAction(const QString& text, const QIcon& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu)
-: KAction( text, icon, accel, receiver, slot, actionCollection, name, true, bMenu)
+void KAction::setIcon( const QIcon& icon )
 {
+   QAction::setIcon(icon);
+   if ( !icon.isNull() )
+   {
+      KMainWindow* pMW = static_cast<KMainWindow*>( parent() );
+      pMW->toolBar()->addAction(this);
+   }
+}
+
+
+KToggleAction::KToggleAction( KActionCollection* actionCollection )
+: KAction( actionCollection )
+{
+   setCheckable(true);
 }
 
 KToggleAction::KToggleAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu)
@@ -596,7 +596,7 @@ void KToggleAction::setChecked(bool bChecked)
 
 
 //static
-KAction* KStdAction::open( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::open( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    #include "../xpm/fileopen.xpm"
    KMainWindow* p = actionCollection->m_pMainWindow;
@@ -605,7 +605,7 @@ KAction* KStdAction::open( QWidget* parent, const char* slot, KActionCollection*
    return a;
 }
 
-KAction* KStdAction::save( QWidget* parent, const char* slot, KActionCollection* actionCollection )
+KAction* KStandardAction::save( QWidget* parent, const char* slot, KActionCollection* actionCollection )
 {
    #include "../xpm/filesave.xpm"
    KMainWindow* p = actionCollection->m_pMainWindow;
@@ -614,7 +614,7 @@ KAction* KStdAction::save( QWidget* parent, const char* slot, KActionCollection*
    return a;
 }
 
-KAction* KStdAction::saveAs( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::saveAs( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
    KAction* a = new KAction( i18n("Save As..."), 0, parent, slot, actionCollection, "saveas", false, false);
@@ -622,7 +622,7 @@ KAction* KStdAction::saveAs( QWidget* parent, const char* slot, KActionCollectio
    return a;
 }
 
-KAction* KStdAction::print( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::print( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    #include "../xpm/fileprint.xpm"
    KMainWindow* p = actionCollection->m_pMainWindow;
@@ -631,7 +631,7 @@ KAction* KStdAction::print( QWidget* parent, const char* slot, KActionCollection
    return a;
 }
 
-KAction* KStdAction::quit( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::quit( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
    KAction* a = new KAction( i18n("Quit"), Qt::CTRL+Qt::Key_Q, parent, slot, actionCollection, "quit", false, false);
@@ -639,7 +639,7 @@ KAction* KStdAction::quit( QWidget* parent, const char* slot, KActionCollection*
    return a;
 }
 
-KAction* KStdAction::cut( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::cut( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
    KAction* a = new KAction( i18n("Cut"), Qt::CTRL+Qt::Key_X, parent, slot, actionCollection, "cut", false, false );
@@ -647,7 +647,7 @@ KAction* KStdAction::cut( QWidget* parent, const char* slot, KActionCollection* 
    return a;
 }
 
-KAction* KStdAction::copy( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::copy( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
    KAction* a = new KAction( i18n("Copy"), Qt::CTRL+Qt::Key_C, parent, slot, actionCollection, "copy", false, false );
@@ -655,7 +655,7 @@ KAction* KStdAction::copy( QWidget* parent, const char* slot, KActionCollection*
    return a;
 }
 
-KAction* KStdAction::paste( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::paste( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
    KAction* a = new KAction( i18n("Paste"), Qt::CTRL+Qt::Key_V, parent, slot, actionCollection, "paste", false, false );
@@ -663,7 +663,7 @@ KAction* KStdAction::paste( QWidget* parent, const char* slot, KActionCollection
    return a;
 }
 
-KAction* KStdAction::selectAll( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::selectAll( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
    KAction* a = new KAction( i18n("Select All"), Qt::CTRL+Qt::Key_A, parent, slot, actionCollection, "selectall", false, false );
@@ -671,7 +671,7 @@ KAction* KStdAction::selectAll( QWidget* parent, const char* slot, KActionCollec
    return a;
 }
 
-KToggleAction* KStdAction::showToolbar( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KToggleAction* KStandardAction::showToolbar( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
    KToggleAction* a = new KToggleAction( i18n("Show Toolbar"), 0, parent, slot, actionCollection, "showtoolbar", false );
@@ -679,7 +679,7 @@ KToggleAction* KStdAction::showToolbar( QWidget* parent, const char* slot, KActi
    return a;
 }
 
-KToggleAction* KStdAction::showStatusbar( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KToggleAction* KStandardAction::showStatusbar( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
    KToggleAction* a = new KToggleAction( i18n("Show &Statusbar"), 0, parent, slot, actionCollection, "showstatusbar", false );
@@ -687,19 +687,19 @@ KToggleAction* KStdAction::showStatusbar( QWidget* parent, const char* slot, KAc
    return a;
 }
 
-KAction* KStdAction::preferences( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::preferences( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("&Configure %1...").arg("KDiff3"), 0, parent, slot, actionCollection, "settings", false, false );
+   KAction* a = new KAction( i18n("&Configure %1...",QString("KDiff3")), 0, parent, slot, actionCollection, "settings", false, false );
    if(p) p->settingsMenu->addAction( a );
    return a;
 }
-KAction* KStdAction::keyBindings( QWidget*, const char*, KActionCollection*)
+KAction* KStandardAction::keyBindings( QWidget*, const char*, KActionCollection*)
 {
    return 0;
 }
 
-KAction* KStdAction::about( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::about( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
    KAction* a = new KAction( i18n("About")+" KDiff3", 0, parent, slot, actionCollection, "about_kdiff3", false, false );
@@ -707,7 +707,7 @@ KAction* KStdAction::about( QWidget* parent, const char* slot, KActionCollection
    return a;
 }
 
-KAction* KStdAction::aboutQt( KActionCollection* actionCollection )
+KAction* KStandardAction::aboutQt( KActionCollection* actionCollection )
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
    KAction* a = new KAction( i18n("About")+" Qt", 0, qApp, SLOT(aboutQt()), actionCollection, "about_qt", false, false );
@@ -715,22 +715,22 @@ KAction* KStdAction::aboutQt( KActionCollection* actionCollection )
    return a;
 }
 
-KAction* KStdAction::help( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::help( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Help"), Qt::Key_F1, parent, slot, actionCollection, "help", false, false );
+   KAction* a = new KAction( i18n("Help"), Qt::Key_F1, parent, slot, actionCollection, "help-contents", false, false );
    if(p) p->helpMenu->addAction( a );
    return a;
 }
-KAction* KStdAction::find( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::find( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Find"), Qt::CTRL+Qt::Key_F, parent, slot, actionCollection, "find", false, false );
+   KAction* a = new KAction( i18n("Find"), Qt::CTRL+Qt::Key_F, parent, slot, actionCollection, "edit-find", false, false );
    if(p) p->editMenu->addAction( a );
    return a;
 }
 
-KAction* KStdAction::findNext( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+KAction* KStandardAction::findNext( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
    KAction* a = new KAction( i18n("Find Next"), Qt::Key_F3, parent, slot, actionCollection, "findNext", false, false );
@@ -738,10 +738,17 @@ KAction* KStdAction::findNext( QWidget* parent, const char* slot, KActionCollect
    return a;
 }
 
+KAction* KActionCollection::addAction(const QString& name )
+{
+   return new KAction( name, this );
+}
 
+void KActionCollection::addAction( const QString& name, QAction* pAction )
+{
+   initAction( pAction, 0,0,this,name,false,true);
+}
 
-
-KFontChooser::KFontChooser( QWidget* pParent, const QString& /*name*/, bool, const QStringList&, bool, int )
+KFontChooser::KFontChooser( QWidget* pParent )
 : QWidget(pParent)
 {
    m_pParent = pParent;
@@ -856,33 +863,34 @@ void KPrinter::setPageSelection(e_PageSelection)
 }
 
 
-QPixmap KIconLoader::loadIcon( const QString&, int )
+QPixmap KIconLoader::loadIcon( const QString&, int, int )
 {
    return QPixmap();
 }
 
-KAboutData::KAboutData( const QString& /*name*/, const QString& appName, const QString& version,
-      const QString& description, int,
-      const QString& copyright, int, const QString& homepage, const QString& email)
+KAboutData::KAboutData(const QByteArray &appName, const QByteArray & /*catalogName*/, const KLocalizedString & /*programName*/, 
+      const QByteArray &version, const KLocalizedString &shortDescription, LicenseKey /*licenseType*/, 
+      const KLocalizedString &copyrightStatement, const KLocalizedString & /*text*/, 
+      const QByteArray &homePageAddress, const QByteArray &bugsEmailAddress)
 {
-   s_copyright = copyright;
-   s_email = email;
+   s_copyright = copyrightStatement;
+   s_email = bugsEmailAddress;
    s_appName = appName;
-   s_description = description;
+   s_description = shortDescription;
    s_version = version;
-   s_homepage = homepage;
+   s_homepage = homePageAddress;
 }
 
-KAboutData::KAboutData( const QString& /*name*/, const QString& /*appName*/, const QString& /*version*/ )
+KAboutData::KAboutData( const QString& /*name*/, const QString& /*appName*/, const QString& /*appName2*/, const QString& /*version*/ )
 {
 }
 
-void KAboutData::addAuthor(const char* name, const char* task, const char* email, const char* weblink)
+void KAboutData::addAuthor(const QString&  name, const QString& task, const QString& email, const QString& weblink)
 {
    m_authorList.push_back( AboutDataEntry( name, task, email, weblink) );
 }
 
-void KAboutData::addCredit(const char* name, const char* task, const char* email, const char* weblink)
+void KAboutData::addCredit(const QString& name, const QString& task, const QString& email, const QString& weblink)
 {
    m_creditList.push_back( AboutDataEntry( name, task, email, weblink) );
 }
@@ -900,10 +908,27 @@ void KAboutData::addCredit(const char* name, const char* task, const char* email
 static KCmdLineArgs s_cmdLineArgs;
 static int s_argc;
 static char** s_argv;
-static KCmdLineOptions* s_pOptions;
+
+struct KCmdLineOptionsItem
+{
+   QString name;
+   QString description;
+   int def;
+};
+static QList<KCmdLineOptionsItem> s_options;
 
 static std::vector<QCStringList> s_vOption;
-static std::vector<const char*> s_vArg;
+static std::vector<QString> s_vArg;
+
+KCmdLineOptions& KCmdLineOptions::add( const QString& name, const QString& description )
+{
+   KCmdLineOptionsItem i;
+   i.name = name;
+   i.description = description;
+   i.def = 0;
+   s_options.push_back(i);
+   return *this;
+}
 
 KCmdLineArgs* KCmdLineArgs::parsedArgs()  // static
 {
@@ -917,9 +942,9 @@ void KCmdLineArgs::init( int argc, char**argv, KAboutData* pAboutData )  // stat
    s_pAboutData = pAboutData;
 }
 
-void KCmdLineArgs::addCmdLineOptions( KCmdLineOptions* options ) // static
+void KCmdLineArgs::addCmdLineOptions( const KCmdLineOptions& /*options*/ ) // static
 {
-   s_pOptions = options;
+   //s_pOptions = &options;
 }
 
 int KCmdLineArgs::count()
@@ -929,7 +954,7 @@ int KCmdLineArgs::count()
 
 QString KCmdLineArgs::arg(int idx)
 {
-   return QString::fromLocal8Bit( s_vArg[idx] );
+   return s_vArg[idx];
 }
 
 void KCmdLineArgs::clear()
@@ -942,11 +967,11 @@ QString KCmdLineArgs::getOption( const QString& s )
    int j=0;
    for( j=0; j<(int)s_vOption.size(); ++j )
    {
-      const char* optName = s_pOptions[j].name;
-      const char* pos = strchr( optName,' ' );
-      int len = pos==0 ? strlen( optName ) : pos - optName;
+      QString optName = s_options[j].name;
+      int pos = optName.indexOf( ' ' );
+      int len = pos==-1 ? optName.length() : pos;
 
-      if( s == QString::fromLatin1( optName, len ) )
+      if( s == optName.left( len ) )
       {
          return s_vOption[j].isEmpty() ? QString() : s_vOption[j].last();
       }
@@ -955,24 +980,24 @@ QString KCmdLineArgs::getOption( const QString& s )
    return QString();
 }
 
-QCStringList KCmdLineArgs::getOptionList( const QString& s )
+QStringList KCmdLineArgs::getOptionList( const QString& s )
 {   
    // Find the option
    int j=0;
    for( j=0; j<(int)s_vOption.size(); ++j )
    {
-      const char* optName = s_pOptions[j].name;
-      const char* pos = strchr( optName,' ' );
-      int len = pos==0 ? strlen( optName ) : pos - optName;
+      QString optName = s_options[j].name;
+      int pos = optName.indexOf( ' ' );
+      int len = pos==-1 ? optName.length() : pos;
 
-      if( s == QString::fromLatin1( optName, len) )
+      if( s == optName.left( len ) )
       {
          return s_vOption[j];
       }
    }
 
    assert(false);
-   return QCStringList();
+   return QStringList();
 }
 
 bool KCmdLineArgs::isSet(const QString& s)
@@ -981,8 +1006,8 @@ bool KCmdLineArgs::isSet(const QString& s)
    int j=0;
    for( j=0; j<(int)s_vOption.size(); ++j )
    {
-      const char* optName = s_pOptions[j].name;
-      if( s == QString( optName ) )
+      QString optName = s_options[j].name;
+      if( s == optName )
       {
          return ! s_vOption[j].isEmpty();
       }
@@ -990,6 +1015,7 @@ bool KCmdLineArgs::isSet(const QString& s)
    assert(false);
    return false;
 }
+
 
 ///////////////////
 KApplication* kapp;
@@ -999,12 +1025,14 @@ KApplication::KApplication()
 {
    kapp = this;
 
+   //setStyle( new QWindowsStyle ); // doesn't show checkmarks on checkable icons in menu
+
    int nofOptions=0;
    int nofArgs=0;
    int i=0;
-   while( s_pOptions[i].name != 0 )
+   while( i < s_options.size() )
    {
-      if ( s_pOptions[i].name[0]=='[' )
+      if ( s_options[i].name[0]=='[' )
          nofArgs++;
       else
          nofOptions++;
@@ -1024,7 +1052,7 @@ KApplication::KApplication()
    }
    m_config.readConfigFile(configFileName);
 
-   QStringList ignorableCmdLineOptionsList = m_config.readListEntry("IgnorableCmdLineOptions", QStringList("-u;-query;-html;-abort"), '|');
+   QStringList ignorableCmdLineOptionsList = m_config.readEntry("IgnorableCmdLineOptions", QStringList("-u;-query;-html;-abort"), '|');
    QString ignorableCmdLineOptions;
    if ( !ignorableCmdLineOptionsList.isEmpty() ) 
       ignorableCmdLineOptions = ignorableCmdLineOptionsList.front() + ";";
@@ -1033,37 +1061,38 @@ KApplication::KApplication()
 
    for( i=1; i<s_argc; ++i )
    {
-      if ( s_argv[i][0]=='-' )  // An option
+      QString arg = s_argv[i];
+      if ( arg[0]=='-' )  // An option
       {
-         if ( ignorableCmdLineOptions.contains(QString(s_argv[i])+";") )
+         if ( ignorableCmdLineOptions.contains( arg +";") )
             continue;
          // Find the option
          int j=0;
          for( j=0; j<nofOptions; ++j )
          {
-            const char* optName = s_pOptions[j].name;
-            const char* pos = strchr( optName,' ' );
-            int len = pos==0 ? strlen( optName ) : pos - optName;
-            int len2 = strlen(s_argv[i]);
+            QString optName = s_options[j].name;
+            int pos = optName.indexOf( ' ' );
+            int len = pos==-1 ? optName.length() : pos;
+            int len2 = arg.length();
 
-            if( len>0 && ( s_argv[i][1]=='-' && len2-2==len && memcmp( &s_argv[i][2], optName, len )==0  ||
-                                                len2-1==len && memcmp( &s_argv[i][1], optName, len )==0  ))
+            if( len>0 && ( arg[1]=='-' && len2-2==len && optName.left(len) ==  arg.mid(2,len) ||
+                                          len2-1==len && optName.left(len) ==  arg.mid(1,len) ))
             {
-               if (s_pOptions[j].description == 0)  // alias, because without description.
+               if (s_options[j].description == 0)  // alias, because without description.
                {
                   ++j;
-                  optName = s_pOptions[j].name;
-                  pos = strchr( optName,' ' );
+                  optName = s_options[j].name;
+                  pos = optName.indexOf( ' ' );
                }
-               if (pos!=0){ ++i; s_vOption[j].append(s_argv[i]); } //use param
-               else       { s_vOption[j].append("1"); }           //set state
+               if (pos!=-1){ ++i; s_vOption[j].append( s_argv[i] ); } //use param
+               else        { s_vOption[j].append("1"); }           //set state
                break;
             }
          }
          if (j==nofOptions)
          {
             QString s;
-            s = QString("Unknown option: ") +  QString(s_argv[i]) + "\n";
+            s = QString("Unknown option: ") + arg + "\n";
             s += "If KDiff3 should ignore this option, run KDiff3 normally and edit\n"
                  "the \"Command line options to ignore\" in the \"Integration Settings\".\n\n";
 
@@ -1084,24 +1113,24 @@ KApplication::KApplication()
             int pos=s.length();
             for( j=0; j<nofOptions; ++j )
             {
-               if ( s_pOptions[j].description!=0 )
+               if ( s_options[j].description!=0 )
                {
-                  if (s_pOptions[j].name[0]!='+')
+                  if (s_options[j].name[0]!='+')
                   {
                      s += "-";
-                     if ( strlen(s_pOptions[j].name)>1 ) s += "-";
+                     if ( s_options[j].name.length()>1 ) s += "-";
                   }
-                  s += s_pOptions[j].name;
+                  s += s_options[j].name;
                   s += QString().fill(' ', minMaxLimiter( 20 - ((int)s.length()-pos), 3, 20 ) );
-                  s += s_pOptions[j].description;
+                  s += s_options[j].description;
                   s +="\n";
                   pos=s.length();
                }
                else
                {
                   s += "-";
-                  if ( strlen(s_pOptions[j].name)>1 ) s += "-";
-                  s += s_pOptions[j].name;
+                  if ( s_options[j].name.length()>1 ) s += "-";
+                  s += s_options[j].name;
                   s += ", ";
                }
             }
@@ -1119,11 +1148,11 @@ KApplication::KApplication()
          }
       }
       else
-         s_vArg.push_back( s_argv[i] );
+         s_vArg.push_back( arg );
    }
 }
 
-KConfig* KApplication::config()
+KConfigGroup* KApplication::config()
 {
    return &m_config;
 }
@@ -1146,17 +1175,17 @@ KIconLoader* KApplication::iconLoader()
 
 namespace KIO
 {
-   SimpleJob* mkdir( KURL ){return 0;}
-   SimpleJob* rmdir( KURL ){return 0;}
-   SimpleJob* file_delete( KURL, bool ){return 0;}
-   FileCopyJob* file_move(  KURL, KURL, int, bool, bool, bool ) {return 0;}
-   FileCopyJob* file_copy(  KURL, KURL, int, bool, bool, bool ) {return 0;}
-   CopyJob* link(  KURL, KURL, bool ) {return 0;}
-   ListJob* listRecursive( KURL, bool, bool ){return 0;}
-   ListJob* listDir( KURL, bool, bool ){return 0;}
-   StatJob* stat( KURL, bool, int, bool ){return 0;}
-   TransferJob* get( KURL, bool, bool ){return (TransferJob*)0;}
-   TransferJob* put( KURL, int, bool, bool, bool ){return (TransferJob*)0;}
+   SimpleJob* mkdir( KUrl ){return 0;}
+   SimpleJob* rmdir( KUrl ){return 0;}
+   SimpleJob* file_delete( KUrl, int ){return 0;}
+   FileCopyJob* file_move(  KUrl, KUrl, int, int ) {return 0;}
+   FileCopyJob* file_copy(  KUrl, KUrl, int, int ) {return 0;}
+   CopyJob* link(  KUrl, KUrl, bool ) {return 0;}
+   ListJob* listRecursive( KUrl, bool, bool ){return 0;}
+   ListJob* listDir( KUrl, bool, bool ){return 0;}
+   StatJob* stat( KUrl, bool, int, int ){return 0;}
+   TransferJob* get( KUrl, int ){return (TransferJob*)0;}
+   TransferJob* put( KUrl, int, int ){return (TransferJob*)0;}
 };
 
 KActionCollection* KParts::Part::actionCollection()
@@ -1196,4 +1225,4 @@ QObject* KLibFactory::create(QObject* pParent, const QString& name, const QStrin
 
 
 
-#include "kreplacements.moc"
+//#include "kreplacements.moc"

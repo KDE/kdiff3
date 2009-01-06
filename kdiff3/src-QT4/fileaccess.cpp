@@ -21,14 +21,17 @@
 #include <qtextstream.h>
 #include <qeventloop.h>
 #include <QProcess>
+#include <QProgressBar>
 
 #include <vector>
 #include <cstdlib>
 #include <iostream>
 #include <klocale.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <kio/global.h>
 #include <kmessagebox.h>
+#include <kio/jobuidelegate.h>
+#include <kio/copyjob.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -80,7 +83,7 @@ FileAccess::~FileAccess()
 
 void FileAccess::setFile( const QString& name, bool bWantToWrite )
 {
-   m_url = KURL::fromPathOrURL( name );
+   m_url = KUrl( name );
    m_bValidData = false;
 
    m_size = 0;
@@ -113,7 +116,7 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
       //   2. When the local file doesn't exist and should be written to.
 
       bool bExistsLocal = QDir().exists(name);
-      if ( m_url.isLocalFile() || !m_url.isValid() || bExistsLocal ) // assuming that invalid means relative
+      if ( m_url.isLocalFile() || m_url.isRelative() || !m_url.isValid() || bExistsLocal ) // assuming that invalid means relative
       {
          QString localName = name;
          if ( !bExistsLocal && m_url.isLocalFile() && name.left(5).toLower()=="file:" )
@@ -143,20 +146,20 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
          m_bExists    = fi.exists();
          m_name       = fi.fileName();
          m_path       = fi.filePath();
-         m_absFilePath= fi.absoluteFilePath();
+         m_absoluteFilePath= fi.absoluteFilePath();
          if ( m_bSymLink ) m_linkTarget = fi.readLink();
          m_bLocal = true;
          m_bValidData = true;
          if ( ! m_url.isValid() )
          {
-            m_url.setPath( m_absFilePath );
+            m_url.setPath( m_absoluteFilePath );
          }
 
-         if ( !m_bExists  && m_absFilePath.contains("@@") )
+         if ( !m_bExists  && m_absoluteFilePath.contains("@@") )
          {
             // Try reading a clearcase file
             m_localCopy = FileAccess::tempFileName();
-            QString cmd = "cleartool get -to \"" + m_localCopy + "\"  \"" + m_absFilePath + "\"";
+            QString cmd = "cleartool get -to \"" + m_localCopy + "\"  \"" + m_absoluteFilePath + "\"";
             QProcess process;
             process.start( cmd );
             process.waitForFinished(-1);
@@ -185,7 +188,7 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
       }
       else
       {
-         m_absFilePath = name;
+         m_absoluteFilePath = name;
          m_name   = m_url.fileName();
          m_bLocal = false;
 
@@ -210,7 +213,7 @@ void FileAccess::addPath( const QString& txt )
    else
    {
       QString slash = (txt.isEmpty() || txt[0]=='/') ? "" : "/";
-      setFile( absFilePath() + slash + txt );
+      setFile( absoluteFilePath() + slash + txt );
    }
 }
 
@@ -247,33 +250,33 @@ void FileAccess::setUdsEntry( const KIO::UDSEntry& ){}  // not needed if KDE is 
 #else
 void FileAccess::setUdsEntry( const KIO::UDSEntry& e )
 {
-   KIO::UDSEntry::const_iterator ei;
    long acc = 0;
    long fileType = 0;
-   for( ei=e.begin(); ei!=e.end(); ++ei )
+   QList< uint > fields = e.listFields();
+   for( QList< uint >::ConstIterator ei=fields.constBegin(); ei!=fields.constEnd(); ++ei )
    {
-      const KIO::UDSAtom& a = *ei;
-      switch( a.m_uds )
+      uint f = *ei;
+      switch( f )
       {
-         case KIO::UDS_SIZE :              m_size   = a.m_long;   break;
-         case KIO::UDS_USER :              m_user   = a.m_str;    break;
-         case KIO::UDS_GROUP :             m_group  = a.m_str;    break;
-         case KIO::UDS_NAME :              m_path   = a.m_str;    break;  // During listDir the relative path is given here.
-         case KIO::UDS_MODIFICATION_TIME : m_modificationTime.setTime_t( a.m_long ); break;
-         case KIO::UDS_ACCESS_TIME :       m_accessTime.setTime_t( a.m_long ); break;
-         case KIO::UDS_CREATION_TIME :     m_creationTime.setTime_t( a.m_long ); break;
-         case KIO::UDS_LINK_DEST :         m_linkTarget       = a.m_str; break;
-         case KIO::UDS_ACCESS :
+         case KIO::UDSEntry::UDS_SIZE :              m_size   = e.numberValue(f);   break;
+         case KIO::UDSEntry::UDS_USER :              m_user   = e.stringValue(f);    break;
+         case KIO::UDSEntry::UDS_GROUP :             m_group  = e.stringValue(f);    break;
+         case KIO::UDSEntry::UDS_NAME :              m_path   = e.stringValue(f);    break;  // During listDir the relative path is given here.
+         case KIO::UDSEntry::UDS_MODIFICATION_TIME : m_modificationTime.setTime_t( e.numberValue(f) ); break;
+         case KIO::UDSEntry::UDS_ACCESS_TIME :       m_accessTime.setTime_t( e.numberValue(f) ); break;
+         case KIO::UDSEntry::UDS_CREATION_TIME :     m_creationTime.setTime_t( e.numberValue(f) ); break;
+         case KIO::UDSEntry::UDS_LINK_DEST :         m_linkTarget       = e.stringValue(f); break;
+         case KIO::UDSEntry::UDS_ACCESS :
          {
-            acc = a.m_long;
+            acc = e.numberValue(f);
             m_bReadable   = (acc & S_IRUSR)!=0;
             m_bWritable   = (acc & S_IWUSR)!=0;
             m_bExecutable = (acc & S_IXUSR)!=0;
             break;
          }
-         case KIO::UDS_FILE_TYPE :
+         case KIO::UDSEntry::UDS_FILE_TYPE :
          {
-            fileType = a.m_long;
+            fileType = e.numberValue(f);
             m_bDir     = ( fileType & S_IFMT ) == S_IFDIR;
             m_bFile    = ( fileType & S_IFMT ) == S_IFREG;
             m_bSymLink = ( fileType & S_IFMT ) == S_IFLNK;
@@ -282,11 +285,11 @@ void FileAccess::setUdsEntry( const KIO::UDSEntry& e )
             break;
          }
 
-         case KIO::UDS_URL :               // m_url = KURL( a.str );
+         case KIO::UDSEntry::UDS_URL :               // m_url = KUrl( e.stringValue(f) );
                                            break;
-         case KIO::UDS_MIME_TYPE :         break;
-         case KIO::UDS_GUESSED_MIME_TYPE : break;
-         case KIO::UDS_XML_PROPERTIES :    break;
+         case KIO::UDSEntry::UDS_MIME_TYPE :         break;
+         case KIO::UDSEntry::UDS_GUESSED_MIME_TYPE : break;
+         case KIO::UDSEntry::UDS_XML_PROPERTIES :    break;
          default: break;
       }
    }
@@ -298,7 +301,7 @@ void FileAccess::setUdsEntry( const KIO::UDSEntry& e )
    m_bSymLink = !m_linkTarget.isEmpty();
    if ( m_name.isEmpty() )
    {
-      int pos = m_path.findRev('/') + 1;
+      int pos = m_path.lastIndexOf('/') + 1;
       m_name = m_path.mid( pos );
    }
    m_bHidden = m_name[0]=='.';
@@ -312,17 +315,17 @@ bool FileAccess::isDir() const         {   return m_bDir;        }
 bool FileAccess::isSymLink() const     {   return m_bSymLink;    }
 bool FileAccess::exists() const        {   return m_bExists;     }
 long FileAccess::size() const          {   return m_size;        }
-KURL FileAccess::url() const           {   return m_url;         }
+KUrl FileAccess::url() const           {   return m_url;         }
 bool FileAccess::isLocal() const       {   return m_bLocal;      }
 bool FileAccess::isReadable() const    {   return m_bReadable;   }
 bool FileAccess::isWritable() const    {   return m_bWritable;   }
 bool FileAccess::isExecutable() const  {   return m_bExecutable; }
 bool FileAccess::isHidden() const      {   return m_bHidden;     }
 QString FileAccess::readLink() const   {   return m_linkTarget;  }
-QString FileAccess::absFilePath() const{   return m_absFilePath; }  // Full abs path
+QString FileAccess::absoluteFilePath() const{   return m_absoluteFilePath; }  // Full abs path
 QString FileAccess::fileName() const   {   return m_name;        }  // Just the name-part of the path, without parent directories
 QString FileAccess::filePath() const   {   return m_path;        }  // The path-string that was used during construction
-QString FileAccess::prettyAbsPath() const { return isLocal() ? m_absFilePath : m_url.prettyURL(); }
+QString FileAccess::prettyAbsPath() const { return isLocal() ? m_absoluteFilePath : m_url.prettyUrl(); }
 
 QDateTime FileAccess::created() const
 {
@@ -366,14 +369,14 @@ bool FileAccess::readFile( void* pDestBuffer, unsigned long maxLength )
    {
       QFile f( m_localCopy );
       if ( f.open( QIODevice::ReadOnly ) )
-         return interruptableReadFile(f, pDestBuffer, maxLength);// maxLength == f.readBlock( (char*)pDestBuffer, maxLength );
+         return interruptableReadFile(f, pDestBuffer, maxLength);// maxLength == f.read( (char*)pDestBuffer, maxLength );
    }
    else if (m_bLocal)
    {
       QFile f( filePath() );
 
       if ( f.open( QIODevice::ReadOnly ) )
-         return interruptableReadFile(f, pDestBuffer, maxLength); //maxLength == f.readBlock( (char*)pDestBuffer, maxLength );
+         return interruptableReadFile(f, pDestBuffer, maxLength); //maxLength == f.read( (char*)pDestBuffer, maxLength );
    }
    else
    {
@@ -448,12 +451,12 @@ bool FileAccess::removeFile()
 {
    if ( isLocal() )
    {
-      return QDir().remove( absFilePath() );
+      return QDir().remove( absoluteFilePath() );
    }
    else
    {
       FileAccessJobHandler jh( this );
-      return jh.removeFile( absFilePath() );
+      return jh.removeFile( absoluteFilePath() );
    }
 }
 
@@ -502,10 +505,12 @@ QString FileAccess::tempFileName()
 
    #else  // using KDE
 
-      KTempFile tmpFile;
+      KTemporaryFile tmpFile;
+      tmpFile.open();
       //tmpFile.setAutoDelete( true );  // We only want the name. Delete the precreated file immediately.
+      QString name = tmpFile.fileName()+".2";
       tmpFile.close();
-      return tmpFile.name()+".2";
+      return name;
 
    #endif
 }
@@ -579,9 +584,9 @@ QString FileAccess::getStatusText()
    return m_statusText;
 }
 
-QString FileAccess::cleanDirPath( const QString& path ) // static
+QString FileAccess::cleanPath( const QString& path ) // static
 {
-   KURL url(path);
+   KUrl url(path);
    if ( url.isLocalFile() || ! url.isValid() )
    {
       return QDir().cleanPath( path );
@@ -597,7 +602,7 @@ bool FileAccess::createBackup( const QString& bakExtension )
    if ( exists() )
    {
       // First rename the existing file to the bak-file. If a bak-file file exists, delete that.
-      QString bakName = absFilePath() + bakExtension;
+      QString bakName = absoluteFilePath() + bakExtension;
       FileAccess bakFile( bakName, true /*bWantToWrite*/ );
       if ( bakFile.exists() )
       {
@@ -612,7 +617,7 @@ bool FileAccess::createBackup( const QString& bakExtension )
       if (!bSuccess)
       {
          m_statusText = i18n("While trying to make a backup, renaming failed. \nFilenames: ") +
-               absFilePath() + " -> " + bakName;
+               absoluteFilePath() + " -> " + bakName;
          return false;
       }
    }
@@ -629,20 +634,22 @@ bool FileAccessJobHandler::stat( int detail, bool bWantToWrite )
 {
    m_bSuccess = false;
    m_pFileAccess->m_statusText = QString();
-   KIO::StatJob* pStatJob = KIO::stat( m_pFileAccess->m_url, ! bWantToWrite, detail, false );
+   KIO::StatJob* pStatJob = KIO::stat( m_pFileAccess->m_url, 
+         bWantToWrite ? KIO::StatJob::DestinationSide : KIO::StatJob::SourceSide, 
+         detail, KIO::HideProgressInfo );
 
-   connect( pStatJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotStatResult(KIO::Job*)));
+   connect( pStatJob, SIGNAL(result(KJob*)), this, SLOT(slotStatResult(KJob*)));
 
-   g_pProgressDialog->enterEventLoop( pStatJob, i18n("Getting file status: %1").arg(m_pFileAccess->prettyAbsPath()) );
+   g_pProgressDialog->enterEventLoop( pStatJob, i18n("Getting file status: %1",m_pFileAccess->prettyAbsPath()) );
 
    return m_bSuccess;
 }
 
-void FileAccessJobHandler::slotStatResult(KIO::Job* pJob)
+void FileAccessJobHandler::slotStatResult(KJob* pJob)
 {
    if ( pJob->error() )
    {
-      //pJob->showErrorDialog(g_pProgressDialog);
+      //pJob->uiDelegate()->showErrorMessage();
       m_pFileAccess->m_bExists = false;
       m_bSuccess = true;
    }
@@ -665,29 +672,29 @@ bool FileAccessJobHandler::get(void* pDestBuffer, long maxLength )
    ProgressProxy pp; // Implicitly used in slotPercent()
    if ( maxLength>0 && !pp.wasCancelled() )
    {
-      KIO::TransferJob* pJob = KIO::get( m_pFileAccess->m_url, false /*reload*/, false );
+      KIO::TransferJob* pJob = KIO::get( m_pFileAccess->m_url, KIO::NoReload );
       m_transferredBytes = 0;
       m_pTransferBuffer = (char*)pDestBuffer;
       m_maxLength = maxLength;
       m_bSuccess = false;
       m_pFileAccess->m_statusText = QString();
 
-      connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
-      connect( pJob, SIGNAL(data(KIO::Job*,const QByteArray &)), this, SLOT(slotGetData(KIO::Job*, const QByteArray&)));
-      connect( pJob, SIGNAL(percent(KIO::Job*,unsigned long)), this, SLOT(slotPercent(KIO::Job*, unsigned long)));
+      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
+      connect( pJob, SIGNAL(data(KJob*,const QByteArray &)), this, SLOT(slotGetData(KJob*, const QByteArray&)));
+      connect( pJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
 
-      g_pProgressDialog->enterEventLoop( pJob, i18n("Reading file: %1").arg(m_pFileAccess->prettyAbsPath()) );
+      g_pProgressDialog->enterEventLoop( pJob, i18n("Reading file: %1",m_pFileAccess->prettyAbsPath()) );
       return m_bSuccess;
    }
    else
       return true;
 }
 
-void FileAccessJobHandler::slotGetData( KIO::Job* pJob, const QByteArray& newData )
+void FileAccessJobHandler::slotGetData( KJob* pJob, const QByteArray& newData )
 {
    if ( pJob->error() )
    {
-      pJob->showErrorDialog(g_pProgressDialog);
+      pJob->uiDelegate()->showErrorMessage();
    }
    else
    {
@@ -701,29 +708,30 @@ bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOve
 {
    if ( maxLength>0 )
    {
-      KIO::TransferJob* pJob = KIO::put( m_pFileAccess->m_url, permissions, bOverwrite, bResume, false );
+      KIO::TransferJob* pJob = KIO::put( m_pFileAccess->m_url, permissions, 
+            (bOverwrite ? KIO::Overwrite : KIO::DefaultFlags) | (bResume ? KIO::Resume : KIO::DefaultFlags) );
       m_transferredBytes = 0;
       m_pTransferBuffer = (char*)pSrcBuffer;
       m_maxLength = maxLength;
       m_bSuccess = false;
       m_pFileAccess->m_statusText = QString();
 
-      connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotPutJobResult(KIO::Job*)));
-      connect( pJob, SIGNAL(dataReq(KIO::Job*, QByteArray&)), this, SLOT(slotPutData(KIO::Job*, QByteArray&)));
-      connect( pJob, SIGNAL(percent(KIO::Job*,unsigned long)), this, SLOT(slotPercent(KIO::Job*, unsigned long)));
+      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotPutJobResult(KJob*)));
+      connect( pJob, SIGNAL(dataReq(KJob*, QByteArray&)), this, SLOT(slotPutData(KJob*, QByteArray&)));
+      connect( pJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
 
-      g_pProgressDialog->enterEventLoop( pJob, i18n("Writing file: %1").arg(m_pFileAccess->prettyAbsPath()) );
+      g_pProgressDialog->enterEventLoop( pJob, i18n("Writing file: %1",m_pFileAccess->prettyAbsPath()) );
       return m_bSuccess;
    }
    else
       return true;
 }
 
-void FileAccessJobHandler::slotPutData( KIO::Job* pJob, QByteArray& data )
+void FileAccessJobHandler::slotPutData( KJob* pJob, QByteArray& data )
 {
    if ( pJob->error() )
    {
-      pJob->showErrorDialog(g_pProgressDialog);
+      pJob->uiDelegate()->showErrorMessage();
    }
    else
    {
@@ -747,11 +755,11 @@ void FileAccessJobHandler::slotPutData( KIO::Job* pJob, QByteArray& data )
    }
 }
 
-void FileAccessJobHandler::slotPutJobResult(KIO::Job* pJob)
+void FileAccessJobHandler::slotPutJobResult(KJob* pJob)
 {
    if ( pJob->error() )
    {
-      pJob->showErrorDialog(g_pProgressDialog);
+      pJob->uiDelegate()->showErrorMessage();
    }
    else
    {
@@ -762,10 +770,10 @@ void FileAccessJobHandler::slotPutJobResult(KIO::Job* pJob)
 
 bool FileAccessJobHandler::mkDir( const QString& dirName )
 {
-   KURL dirURL = KURL::fromPathOrURL( dirName );
+   KUrl dirURL = KUrl( dirName );
    if ( dirName.isEmpty() )
       return false;
-   else if ( dirURL.isLocalFile() )
+   else if ( dirURL.isLocalFile() || dirURL.isRelative() )
    {
       return QDir().mkdir( dirURL.path() );
    }
@@ -773,16 +781,16 @@ bool FileAccessJobHandler::mkDir( const QString& dirName )
    {
       m_bSuccess = false;
       KIO::SimpleJob* pJob = KIO::mkdir( dirURL );
-      connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
+      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
 
-      g_pProgressDialog->enterEventLoop( pJob, i18n("Making directory: %1").arg(dirName) );
+      g_pProgressDialog->enterEventLoop( pJob, i18n("Making directory: %1", dirName) );
       return m_bSuccess;
    }
 }
 
 bool FileAccessJobHandler::rmDir( const QString& dirName )
 {
-   KURL dirURL = KURL::fromPathOrURL( dirName );
+   KUrl dirURL = KUrl( dirName );
    if ( dirName.isEmpty() )
       return false;
    else if ( dirURL.isLocalFile() )
@@ -793,9 +801,9 @@ bool FileAccessJobHandler::rmDir( const QString& dirName )
    {
       m_bSuccess = false;
       KIO::SimpleJob* pJob = KIO::rmdir( dirURL );
-      connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
+      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
 
-      g_pProgressDialog->enterEventLoop(pJob, i18n("Removing directory: %1").arg(dirName));
+      g_pProgressDialog->enterEventLoop(pJob, i18n("Removing directory: %1",dirName));
       return m_bSuccess;
    }
 }
@@ -807,10 +815,10 @@ bool FileAccessJobHandler::removeFile( const QString& fileName )
    else
    {
       m_bSuccess = false;
-      KIO::SimpleJob* pJob = KIO::file_delete( KURL::fromPathOrURL(fileName), false );
-      connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
+      KIO::SimpleJob* pJob = KIO::file_delete( fileName, KIO::HideProgressInfo );
+      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
 
-      g_pProgressDialog->enterEventLoop( pJob, i18n("Removing file: %1").arg(fileName) );
+      g_pProgressDialog->enterEventLoop( pJob, i18n("Removing file: %1",fileName) );
       return m_bSuccess;
    }
 }
@@ -822,11 +830,11 @@ bool FileAccessJobHandler::symLink( const QString& linkTarget, const QString& li
    else
    {
       m_bSuccess = false;
-      KIO::CopyJob* pJob = KIO::link( KURL::fromPathOrURL(linkTarget), KURL::fromPathOrURL(linkLocation), false );
-      connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
+      KIO::CopyJob* pJob = KIO::link( linkTarget, linkLocation, false );
+      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
 
       g_pProgressDialog->enterEventLoop( pJob,
-         i18n("Creating symbolic link: %1 -> %2").arg(linkLocation).arg(linkTarget) );
+         i18n("Creating symbolic link: %1 -> %2",linkLocation,linkTarget) );
       return m_bSuccess;
    }
 }
@@ -836,36 +844,33 @@ bool FileAccessJobHandler::rename( const QString& dest )
    if ( dest.isEmpty() )
       return false;
 
-   KURL kurl = KURL::fromPathOrURL( dest );
+   KUrl kurl( dest );
    if ( !kurl.isValid() )
-      kurl = KURL::fromPathOrURL( QDir().absoluteFilePath(dest) ); // assuming that invalid means relative
+      kurl = KUrl( QDir().absoluteFilePath(dest) ); // assuming that invalid means relative
 
    if ( m_pFileAccess->isLocal() && kurl.isLocalFile() )
    {
-      return QDir().rename( m_pFileAccess->absFilePath(), kurl.path() );
+      return QDir().rename( m_pFileAccess->absoluteFilePath(), kurl.path() );
    }
    else
    {
-      bool bOverwrite = false;
-      bool bResume = false;
-      bool bShowProgress = false;
       int permissions=-1;
       m_bSuccess = false;
-      KIO::FileCopyJob* pJob = KIO::file_move( m_pFileAccess->m_url, kurl, permissions, bOverwrite, bResume, bShowProgress );
-      connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
-      connect( pJob, SIGNAL(percent(KIO::Job*,unsigned long)), this, SLOT(slotPercent(KIO::Job*, unsigned long)));
+      KIO::FileCopyJob* pJob = KIO::file_move( m_pFileAccess->m_url, kurl, permissions, KIO::DefaultFlags );
+      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
+      connect( pJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
 
       g_pProgressDialog->enterEventLoop( pJob,
-         i18n("Renaming file: %1 -> %2").arg(m_pFileAccess->prettyAbsPath()).arg(dest) );
+         i18n("Renaming file: %1 -> %2",m_pFileAccess->prettyAbsPath(),dest) );
       return m_bSuccess;
    }
 }
 
-void FileAccessJobHandler::slotSimpleJobResult(KIO::Job* pJob)
+void FileAccessJobHandler::slotSimpleJobResult(KJob* pJob)
 {
    if ( pJob->error() )
    {
-      pJob->showErrorDialog(g_pProgressDialog);
+      pJob->uiDelegate()->showErrorMessage();
    }
    else
    {
@@ -879,40 +884,37 @@ void FileAccessJobHandler::slotSimpleJobResult(KIO::Job* pJob)
 bool FileAccessJobHandler::copyFile( const QString& dest )
 {
    ProgressProxy pp;
-   KURL destUrl = KURL::fromPathOrURL( dest );
+   KUrl destUrl( dest );
    m_pFileAccess->m_statusText = QString();
    if ( ! m_pFileAccess->isLocal() || ! destUrl.isLocalFile() ) // if either url is nonlocal
    {
-      bool bOverwrite = false;
-      bool bResume = false;
-      bool bShowProgress = false;
       int permissions = (m_pFileAccess->isExecutable()?0111:0)+(m_pFileAccess->isWritable()?0222:0)+(m_pFileAccess->isReadable()?0444:0);
       m_bSuccess = false;
-      KIO::FileCopyJob* pJob = KIO::file_copy ( m_pFileAccess->m_url, destUrl, permissions, bOverwrite, bResume, bShowProgress );
-      connect( pJob, SIGNAL(result(KIO::Job*)), this, SLOT(slotSimpleJobResult(KIO::Job*)));
-      connect( pJob, SIGNAL(percent(KIO::Job*,unsigned long)), this, SLOT(slotPercent(KIO::Job*, unsigned long)));
+      KIO::FileCopyJob* pJob = KIO::file_copy ( m_pFileAccess->m_url, destUrl, permissions, KIO::DefaultFlags );
+      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
+      connect( pJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
       g_pProgressDialog->enterEventLoop( pJob,
-         i18n("Copying file: %1 -> %2").arg(m_pFileAccess->prettyAbsPath()).arg(dest) );
+         i18n("Copying file: %1 -> %2",m_pFileAccess->prettyAbsPath(),dest) );
 
       return m_bSuccess;
       // Note that the KIO-slave preserves the original date, if this is supported.
    }
 
    // Both files are local:
-   QString srcName = m_pFileAccess->absFilePath();
+   QString srcName = m_pFileAccess->absoluteFilePath();
    QString destName = dest;
    QFile srcFile( srcName );
    QFile destFile( destName );
    bool bReadSuccess = srcFile.open( QIODevice::ReadOnly );
    if ( bReadSuccess == false )
    {
-      m_pFileAccess->m_statusText = i18n("Error during file copy operation: Opening file for reading failed. Filename: %1").arg(srcName);
+      m_pFileAccess->m_statusText = i18n("Error during file copy operation: Opening file for reading failed. Filename: %1",srcName);
       return false;
    }
    bool bWriteSuccess = destFile.open( QIODevice::WriteOnly );
    if ( bWriteSuccess == false )
    {
-      m_pFileAccess->m_statusText = i18n("Error during file copy operation: Opening file for writing failed. Filename: %1").arg(destName);
+      m_pFileAccess->m_statusText = i18n("Error during file copy operation: Opening file for writing failed. Filename: %1",destName);
       return false;
    }
 
@@ -927,7 +929,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
       qint64 readSize = srcFile.read( &buffer[0], min2( srcSize, bufSize ) );
       if ( readSize==-1 || readSize==0 )
       {
-         m_pFileAccess->m_statusText = i18n("Error during file copy operation: Reading failed. Filename: %1").arg(srcName);
+         m_pFileAccess->m_statusText = i18n("Error during file copy operation: Reading failed. Filename: %1",srcName);
          return false;
       }
       srcSize -= readSize;
@@ -936,7 +938,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
          qint64 writeSize = destFile.write( &buffer[0], readSize );
          if ( writeSize==-1 || writeSize==0 )
          {
-            m_pFileAccess->m_statusText = i18n("Error during file copy operation: Writing failed. Filename: %1").arg(destName);
+            m_pFileAccess->m_statusText = i18n("Error during file copy operation: Writing failed. Filename: %1",destName);
             return false;
          }
          readSize -= writeSize;
@@ -1182,14 +1184,8 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive ) const
    for ( it = m_generalPatterns.begin(); it != m_generalPatterns.end(); ++it )
    {
       QRegExp pattern( *it, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::Wildcard );
-#if QT_VERSION==230
-      int len=0;
-      if ( pattern.match( text, 0, &len )!=-1 && len==text.length())
-         return true;
-#else
       if ( pattern.exactMatch( text ) )
          return true;
-#endif
    }
 
    return false;
@@ -1232,12 +1228,12 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
    if ( pp.wasCancelled() )
       return true; // Cancelled is not an error.
 
-   pp.setInformation( i18n("Reading directory: ") + m_pFileAccess->absFilePath(), 0, false );
+   pp.setInformation( i18n("Reading directory: ") + m_pFileAccess->absoluteFilePath(), 0, false );
 
    if( m_pFileAccess->isLocal() )
    {
       QString currentPath = QDir::currentPath();
-      m_bSuccess = QDir::setCurrent( m_pFileAccess->absFilePath() );
+      m_bSuccess = QDir::setCurrent( m_pFileAccess->absoluteFilePath() );
       if ( m_bSuccess )
       {
 #ifndef _WIN32
@@ -1245,7 +1241,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
          QDir dir( "." );
 
          dir.setSorting( QDir::Name | QDir::DirsFirst );
-         dir.setFilter( QDir::Files | QDir::Dirs | QDir::AllDirs | QDir::Hidden );
+         dir.setFilter( QDir::Files | QDir::Dirs | /* from KDE3 QDir::TypeMaskDirs | */ QDir::Hidden );
 
          QFileInfoList fiList = dir.entryInfoList();
          if ( fiList.isEmpty() )
@@ -1275,7 +1271,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
 
          if ( searchHandle != INVALID_HANDLE_VALUE )
          {
-            QString absPath = m_pFileAccess->absFilePath();
+            QString absPath = m_pFileAccess->absoluteFilePath();
             QString relPath = m_pFileAccess->filePath();
             bool bFirst=true;
             while( ! pp.wasCancelled() )
@@ -1320,8 +1316,8 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
                   );
 
                fa.m_path = fa.m_name;
-               fa.m_absFilePath = absPath + "/" + fa.m_name;
-               fa.m_url.setPath( fa.m_absFilePath );
+               fa.m_absoluteFilePath = absPath + "/" + fa.m_name;
+               fa.m_url.setPath( fa.m_absoluteFilePath );
                if ( fa.m_name!="." && fa.m_name!=".." )
                   pDirList->push_back( fa );
             }
@@ -1338,27 +1334,25 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
    }
    else
    {
-      bool bShowProgress = false;
-
       KIO::ListJob* pListJob=0;
-      pListJob = KIO::listDir( m_pFileAccess->m_url, bShowProgress, true /*bFindHidden*/ );
+      pListJob = KIO::listDir( m_pFileAccess->m_url, KIO::DefaultFlags, true /*bFindHidden*/ );
 
       m_bSuccess = false;
       if ( pListJob!=0 )
       {
-         connect( pListJob, SIGNAL( entries( KIO::Job *, const KIO::UDSEntryList& ) ),
-                  this,     SLOT( slotListDirProcessNewEntries( KIO::Job *, const KIO::UDSEntryList& )) );
-         connect( pListJob, SIGNAL( result( KIO::Job* )),
-                  this,     SLOT( slotSimpleJobResult(KIO::Job*) ) );
+         connect( pListJob, SIGNAL( entries( KIO::Job*, const KIO::UDSEntryList& ) ),
+                  this,     SLOT( slotListDirProcessNewEntries( KIO::Job*, const KIO::UDSEntryList& )) );
+         connect( pListJob, SIGNAL( result( KJob* )),
+                  this,     SLOT( slotSimpleJobResult(KJob*) ) );
 
-         connect( pListJob, SIGNAL( infoMessage(KIO::Job*, const QString&)),
-                  this,     SLOT( slotListDirInfoMessage(KIO::Job*, const QString&) ));
+         connect( pListJob, SIGNAL( infoMessage(KJob*, const QString&)),
+                  this,     SLOT( slotListDirInfoMessage(KJob*, const QString&) ));
 
          // This line makes the transfer via fish unreliable.:-(
-         //connect( pListJob, SIGNAL(percent(KIO::Job*,unsigned long)), this, SLOT(slotPercent(KIO::Job*, unsigned long)));
+         //connect( pListJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
 
          g_pProgressDialog->enterEventLoop( pListJob,
-            i18n("Listing directory: %1").arg(m_pFileAccess->prettyAbsPath()) );
+            i18n("Listing directory: %1",m_pFileAccess->prettyAbsPath()) );
       }
    }
 
@@ -1432,9 +1426,9 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
 }
 
 
-void FileAccessJobHandler::slotListDirProcessNewEntries( KIO::Job *, const KIO::UDSEntryList& l )
+void FileAccessJobHandler::slotListDirProcessNewEntries( KIO::Job*, const KIO::UDSEntryList& l )
 {
-   KURL parentUrl( m_pFileAccess->m_absFilePath );
+   KUrl parentUrl( m_pFileAccess->m_absoluteFilePath );
 
    KIO::UDSEntryList::ConstIterator i;
    for ( i=l.begin(); i!=l.end(); ++i )
@@ -1447,18 +1441,18 @@ void FileAccessJobHandler::slotListDirProcessNewEntries( KIO::Job *, const KIO::
       {
          fa.m_url = parentUrl;
          fa.m_url.addPath( fa.filePath() );
-         fa.m_absFilePath = fa.m_url.url();
+         fa.m_absoluteFilePath = fa.m_url.url();
          m_pDirList->push_back( fa );
       }
    }
 }
 
-void FileAccessJobHandler::slotListDirInfoMessage( KIO::Job*, const QString& msg )
+void FileAccessJobHandler::slotListDirInfoMessage( KJob*, const QString& msg )
 {
    g_pProgressDialog->setInformation( msg, 0.0 );
 }
 
-void FileAccessJobHandler::slotPercent( KIO::Job*, unsigned long percent )
+void FileAccessJobHandler::slotPercent( KJob*, unsigned long percent )
 {
    g_pProgressDialog->setCurrent( percent/100.0 );
 }
@@ -1475,14 +1469,14 @@ ProgressDialog::ProgressDialog( QWidget* pParent )
    m_pInformation = new QLabel( " ", this );
    layout->addWidget( m_pInformation );
 
-   m_pProgressBar = new KProgress();
+   m_pProgressBar = new QProgressBar();
    m_pProgressBar->setRange(0,1000);
    layout->addWidget( m_pProgressBar );
 
    m_pSubInformation = new QLabel( " ", this);
    layout->addWidget( m_pSubInformation );
 
-   m_pSubProgressBar = new KProgress();
+   m_pSubProgressBar = new QProgressBar();
    m_pSubProgressBar->setRange(0,1000);
    layout->addWidget( m_pSubProgressBar );
 
@@ -1631,7 +1625,7 @@ void ProgressDialog::setSubRangeTransformation( double dMin, double dMax )
 void qt_enter_modal(QWidget*);
 void qt_leave_modal(QWidget*);
 
-void ProgressDialog::enterEventLoop( KIO::Job* pJob, const QString& jobInfo )
+void ProgressDialog::enterEventLoop( KJob* pJob, const QString& jobInfo )
 {
    m_pJob = pJob;
    m_pSlowJobInfo->setText("");
@@ -1718,7 +1712,7 @@ void ProgressDialog::delayedHide()
 {
    if (m_pJob!=0)
    {
-      m_pJob->kill(false);
+      m_pJob->kill( KJob::Quietly );
       m_pJob = 0;
    }
    QDialog::hide();

@@ -19,6 +19,7 @@
 #define DIRECTORY_MERGE_WINDOW_H
 
 #include <QTreeWidget>
+#include <QEvent>
 #include <list>
 #include <map>
 #include "common.h"
@@ -127,7 +128,6 @@ public:
       bool bReload = false
    );
    bool isFileSelected();
-   void allowResizeEvents(bool bAllowResizeEvents);
    bool isDirectoryMergeInProgress() { return m_bRealMergeStarted; }
    int totalColumnWidth();
    bool isSyncMode() { return m_bSyncMode; }
@@ -196,8 +196,6 @@ public slots:
 protected:
    class DirMergeItemDelegate;
    void mergeContinue( bool bStart, bool bVerbose );
-   void resizeEvent(QResizeEvent* e);
-   bool m_bAllowResizeEvents;
 
    void prepareListView(ProgressProxy& pp);
    void calcSuggestedOperation( MergeFileInfos& mfi, e_MergeOperation eDefaultOperation );
@@ -215,15 +213,15 @@ protected:
    void compareFilesAndCalcAges( MergeFileInfos& mfi );
 
    QString fullNameA( const MergeFileInfos& mfi )
-   { return mfi.m_bExistsInA ? mfi.m_fileInfoA.absFilePath() : m_dirA.absFilePath() + "/" + mfi.m_subPath; }
+   { return mfi.m_bExistsInA ? mfi.m_fileInfoA.absoluteFilePath() : m_dirA.absoluteFilePath() + "/" + mfi.m_subPath; }
    QString fullNameB( const MergeFileInfos& mfi )
-   { return mfi.m_bExistsInB ? mfi.m_fileInfoB.absFilePath() : m_dirB.absFilePath() + "/" + mfi.m_subPath; }
+   { return mfi.m_bExistsInB ? mfi.m_fileInfoB.absoluteFilePath() : m_dirB.absoluteFilePath() + "/" + mfi.m_subPath; }
    QString fullNameC( const MergeFileInfos& mfi )
-   { return mfi.m_bExistsInC ? mfi.m_fileInfoC.absFilePath() : m_dirC.absFilePath() + "/" + mfi.m_subPath; }
+   { return mfi.m_bExistsInC ? mfi.m_fileInfoC.absoluteFilePath() : m_dirC.absoluteFilePath() + "/" + mfi.m_subPath; }
    QString fullNameDest( const MergeFileInfos& mfi )
    { if       ( m_dirDestInternal.prettyAbsPath() == m_dirC.prettyAbsPath() ) return fullNameC(mfi);
      else if ( m_dirDestInternal.prettyAbsPath() == m_dirB.prettyAbsPath() ) return fullNameB(mfi);
-     else return m_dirDestInternal.absFilePath() + "/" + mfi.m_subPath; 
+     else return m_dirDestInternal.absoluteFilePath() + "/" + mfi.m_subPath; 
    }
 
    bool copyFLD( const QString& srcName, const QString& destName );

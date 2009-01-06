@@ -30,15 +30,20 @@
 
 #include <QSettings>
 #include <QLocale>
+#include <QGridLayout>
+#include <QPixmap>
+#include <QFrame>
+#include <QVBoxLayout>
 
 #include <kapplication.h>
-#include <kcolorbtn.h>
+#include <kcolorbutton.h>
 #include <kfontdialog.h> // For KFontChooser
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kconfig.h>
 #include <kmessagebox.h>
 #include <kmainwindow.h> //For ktoolbar.h
+#include <ktoolbar.h>
 
 //#include <kkeydialog.h>
 #include <map>
@@ -52,6 +57,8 @@
 #ifndef KREPLACEMENTS_H
 #include <kglobalsettings.h>
 #endif
+
+#define KDIFF3_CONFIG_GROUP "KDiff3 Options"
 
 static QString s_historyEntryStartRegExpToolTip;
 static QString s_historyEntryStartSortKeyOrderToolTip;
@@ -145,7 +152,7 @@ public:
    void setToCurrent(){}
    void apply()       {}
    void write(ValueMap* vm){ writeEntry( vm, m_saveName, *m_pVar ); }
-   void read (ValueMap* vm){ readEntry ( vm, m_saveName, *m_pVar ); }
+   void read (ValueMap* vm){ *m_pVar = vm->readEntry ( m_saveName, *m_pVar ); }
 private:
    OptionT( const OptionT& ); // private copy constructor without implementation
    T* m_pVar;
@@ -154,11 +161,11 @@ private:
 template <class T> void writeEntry(ValueMap* vm, const QString& saveName, const T& v ) {   vm->writeEntry( saveName, v ); }
 static void writeEntry(ValueMap* vm, const QString& saveName, const QStringList& v )   {   vm->writeEntry( saveName, v, '|' ); }
 
-static void readEntry(ValueMap* vm, const QString& saveName, bool& v )       {   v = vm->readBoolEntry( saveName, v ); }
-static void readEntry(ValueMap* vm, const QString& saveName, int&  v )       {   v = vm->readNumEntry( saveName, v ); }
-static void readEntry(ValueMap* vm, const QString& saveName, QSize& v )      {   v = vm->readSizeEntry( saveName, &v ); }
-static void readEntry(ValueMap* vm, const QString& saveName, QPoint& v )     {   v = vm->readPointEntry( saveName, &v ); }
-static void readEntry(ValueMap* vm, const QString& saveName, QStringList& v ){   v = vm->readListEntry( saveName, QStringList(), '|' ); }
+//static void readEntry(ValueMap* vm, const QString& saveName, bool& v )       {   v = vm->readBoolEntry( saveName, v ); }
+//static void readEntry(ValueMap* vm, const QString& saveName, int&  v )       {   v = vm->readNumEntry( saveName, v ); }
+//static void readEntry(ValueMap* vm, const QString& saveName, QSize& v )      {   v = vm->readSizeEntry( saveName, &v ); }
+//static void readEntry(ValueMap* vm, const QString& saveName, QPoint& v )     {   v = vm->readPointEntry( saveName, &v ); }
+//static void readEntry(ValueMap* vm, const QString& saveName, QStringList& v ){   v = vm->readListEntry( saveName, QStringList(), '|' ); }
 
 typedef OptionT<bool> OptionToggleAction;
 typedef OptionT<int>  OptionNum;
@@ -169,9 +176,9 @@ typedef OptionT<QStringList> OptionStringList;
 class OptionFontChooser : public KFontChooser, public OptionItem
 {
 public:
-   OptionFontChooser( const QFont& defaultVal, const QString& saveName, QFont* pbVar, QWidget* pParent, OptionDialog* pOD )
-   :KFontChooser( pParent,"font",true/*onlyFixed*/,QStringList(),false,6 ),
-    OptionItem( pOD, saveName )
+   OptionFontChooser( const QFont& defaultVal, const QString& saveName, QFont* pbVar, QWidget* pParent, OptionDialog* pOD ) :
+       KFontChooser( pParent ),
+       OptionItem( pOD, saveName )
    {
       m_pbVar = pbVar;
       *m_pbVar = defaultVal;
@@ -435,7 +442,7 @@ public:
    }
    void read (ValueMap* config)
    {
-      QString codecName = config->readEntry( m_saveName, m_codecVec[ currentIndex() ]->name() );
+      QString codecName = config->readEntry( m_saveName, QString(m_codecVec[ currentIndex() ]->name()) );
       for(unsigned int i=0; i<m_codecVec.size(); ++i)
       {
          if ( codecName == m_codecVec[i]->name() )
@@ -449,10 +456,18 @@ public:
 };
 
 
-OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *name )
-  :KDialogBase( IconList, i18n("Configure"), Help|Default|Apply|Ok|Cancel,
-                Ok, parent, name, true /*modal*/, true )
+OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *name ) : 
+//    KPageDialog( IconList, i18n("Configure"), Help|Default|Apply|Ok|Cancel,
+//                 Ok, parent, name, true /*modal*/, true )
+    KPageDialog( parent )
 {
+   setFaceType( List );
+   setWindowTitle( i18n("Configure") );
+   setButtons( Help|Default|Apply|Ok|Cancel );
+   setDefaultButton( Ok );
+   setObjectName( name );
+   setModal( true  );
+   showButtonSeparator( true );
    setHelp( "kdiff3/index.html", QString::null );
 
    setupFontPage();
@@ -472,6 +487,10 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
    // Initialize all values in the dialog
    resetToDefaults();
    slotApply();
+   connect(this, SIGNAL(applyClicked()), this, SLOT(slotApply()));
+   connect(this, SIGNAL(okClicked()), this, SLOT(slotOk()));
+   //helpClicked() is connected in KDiff3App::KDiff3App
+   connect(this, SIGNAL(defaultClicked()), this, SLOT(slotDefault()));
 }
 
 OptionDialog::~OptionDialog( void )
@@ -492,7 +511,10 @@ void OptionDialog::setupOtherOptions()
    new OptionToggleAction( true,  "Show Toolbar", &m_bShowToolBar, this );
    new OptionToggleAction( true,  "Show Statusbar", &m_bShowStatusBar, this );
 
+/*
+   TODO manage toolbar positioning
    new OptionNum( (int)KToolBar::Top, "ToolBarPos", &m_toolBarPos, this );
+*/
    new OptionSize( QSize(600,400),"Geometry", &m_geometry, this );
    new OptionPoint( QPoint(0,22), "Position", &m_position, this );
    new OptionToggleAction( false, "WindowStateMaximised", &m_bMaximised, this );
@@ -505,8 +527,11 @@ void OptionDialog::setupOtherOptions()
 
 void OptionDialog::setupFontPage( void )
 {
-   QFrame *page = addPage( i18n("Font"), i18n("Editor & Diff Output Font" ),
-                             BarIcon("fonts", KIcon::SizeMedium ) );
+   QFrame* page = new QFrame();
+   KPageWidgetItem *pageItem = new KPageWidgetItem( page, i18n("Font") );
+   pageItem->setHeader( i18n("Editor & Diff Output Font" ) );
+   pageItem->setIcon( KIcon( "preferences-desktop-font" ) );
+   addPage( pageItem );
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
@@ -539,8 +564,12 @@ void OptionDialog::setupFontPage( void )
 
 void OptionDialog::setupColorPage( void )
 {
-   QFrame *page = addPage( i18n("Color"), i18n("Colors Settings"),
-      BarIcon("colorize", KIcon::SizeMedium ) );
+   QFrame* page = new QFrame();
+   KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Color") );
+   pageItem->setHeader( i18n("Colors Settings") );
+   pageItem->setIcon( KIcon("preferences-desktop-color") );
+   addPage( pageItem );
+
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
    topLayout->setSpacing( spacingHint() );
@@ -684,12 +713,15 @@ void OptionDialog::setupColorPage( void )
 
 void OptionDialog::setupEditPage( void )
 {
-   QFrame *page = addPage( i18n("Editor"), i18n("Editor Behavior"),
-                           BarIcon("edit", KIcon::SizeMedium ) );
+   QFrame* page = new QFrame();
+   KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Editor") );
+   pageItem->setHeader( i18n("Editor Behavior") );
+   pageItem->setIcon( KIcon( "accessories-text-editor") );
+   addPage( pageItem );
+
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
    topLayout->setSpacing( spacingHint() );
-
 
    QGridLayout *gbox = new QGridLayout();
    gbox->setColumnStretch(1,5);
@@ -730,14 +762,16 @@ void OptionDialog::setupEditPage( void )
    label = new QLabel( i18n("Line end style:"), page );
    gbox->addWidget( label, line, 0 );
    #ifdef _WIN32
-   int defaultLineEndStyle = eLineEndDos;
+   int defaultLineEndStyle = eLineEndStyleDos;
    #else
-   int defaultLineEndStyle = eLineEndUnix;
+   int defaultLineEndStyle = eLineEndStyleUnix;
    #endif
-   OptionComboBox* pLineEndStyle = new OptionComboBox( defaultLineEndStyle, "LineEndStyle", &m_lineEndStyle, page, this );
+   OptionComboBox* pLineEndStyle = new OptionComboBox( eLineEndStyleAutoDetect, "LineEndStyle", &m_lineEndStyle, page, this );
    gbox->addWidget( pLineEndStyle, line, 1 );
-   pLineEndStyle->insertItem( eLineEndUnix, "Unix" );
-   pLineEndStyle->insertItem( eLineEndDos, "Dos/Windows" );
+   pLineEndStyle->insertItem( eLineEndStyleUnix, "Unix" );
+   pLineEndStyle->insertItem( eLineEndStyleDos, "Dos/Windows" );
+   pLineEndStyle->insertItem( eLineEndStyleAutoDetect, "Autodetect" );
+
    label->setToolTip( i18n(
       "Sets the line endings for when an edited file is saved.\n"
       "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A")
@@ -750,8 +784,13 @@ void OptionDialog::setupEditPage( void )
 
 void OptionDialog::setupDiffPage( void )
 {
-   QFrame *page = addPage( i18n("Diff"), i18n("Diff Settings"),
-                           BarIcon("misc", KIcon::SizeMedium ) );
+   QFrame* page = new QFrame();
+   KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Diff") );
+   pageItem->setHeader( i18n("Diff Settings") );
+   pageItem->setIcon( KIcon( "preferences-other" ) );
+   addPage( pageItem );
+
+
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
    topLayout->setSpacing( spacingHint() );
@@ -816,13 +855,26 @@ void OptionDialog::setupDiffPage( void )
       );
    ++line;
 
+   OptionCheckBox* pDiff3AlignBC = new OptionCheckBox( i18n("Align B and C for 3 input files"), false, "Diff3AlignBC", &m_bDiff3AlignBC, page, this );
+   gbox->addWidget( pDiff3AlignBC, line, 0, 1, 2 );
+   pDiff3AlignBC->setToolTip( i18n(
+      "Try to align B and C when comparing or merging three input files.\n"
+      "Not recommended for merging because merge might get more complicated.\n"
+      "(Default is off.)")
+      );
+   ++line;
+
    topLayout->addStretch(10);
 }
 
 void OptionDialog::setupMergePage( void )
 {
-   QFrame *page = addPage( i18n("Merge"), i18n("Merge Settings"),
-                           BarIcon("misc", KIcon::SizeMedium ) );
+   QFrame* page = new QFrame();
+   KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Merge") );
+   pageItem->setHeader( i18n("Merge Settings") );
+   pageItem->setIcon( KIcon( "plasmagik" ) );
+   addPage( pageItem );
+
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
    topLayout->setSpacing( spacingHint() );
@@ -842,6 +894,11 @@ void OptionDialog::setupMergePage( void )
       "When in Auto-Advance mode the result of the current selection is shown \n"
       "for the specified time, before jumping to the next conflict. Range: 0-2000 ms")
       );
+   ++line;
+
+   OptionCheckBox* pShowInfoDialogs = new OptionCheckBox( i18n("Show info dialogs"), true, "ShowInfoDialogs", &m_bShowInfoDialogs, page, this );
+   gbox->addWidget( pShowInfoDialogs, line, 0, 1, 2 );
+   pShowInfoDialogs->setToolTip( i18n("Show a dialog with information about the number of conflicts.") );
    ++line;
 
    label = new QLabel( i18n("White space 2-file merge default:"), page );
@@ -1004,8 +1061,12 @@ void OptionDialog::setupMergePage( void )
 
 void OptionDialog::setupDirectoryMergePage( void )
 {
-   QFrame *page = addPage( i18n("Directory Merge"), i18n("Directory Merge"),
-                           BarIcon("folder", KIcon::SizeMedium ) );
+   QFrame* page = new QFrame();
+   KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Directory Merge") );
+   pageItem->setHeader( i18n("Directory Merge") );
+   pageItem->setIcon( KIcon( "folder" ) );
+   addPage( pageItem );
+
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
    topLayout->setSpacing( spacingHint() );
@@ -1182,7 +1243,7 @@ static void insertCodecs(OptionComboBox* p)
    for(i=0;;++i)
    {
       QTextCodec* pCodec = QTextCodec::codecForIndex ( i );
-      if ( pCodec != 0 )  m.insert( std::make_pair( QString(pCodec->mimeName()).upper(), pCodec->mimeName()) );
+      if ( pCodec != 0 )  m.insert( std::make_pair( QString(pCodec->mimeName()).toUpper(), pCodec->mimeName()) );
       else                break;
    }
    
@@ -1263,8 +1324,12 @@ void OptionDialog::setupRegionalPage( void )
 {
    new Utf8BOMCodec();
 
-   QFrame *page = addPage( i18n("Regional Settings"), i18n("Regional Settings"),
-                           BarIcon("locale"/*"charset"*/, KIcon::SizeMedium ) );
+   QFrame* page = new QFrame();
+   KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Regional Settings") );
+   pageItem->setHeader( i18n("Regional Settings") );
+   pageItem->setIcon( KIcon("locale" ) );
+   addPage( pageItem );
+
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
    topLayout->setSpacing( spacingHint() );
@@ -1278,7 +1343,7 @@ void OptionDialog::setupRegionalPage( void )
 
 #ifdef KREPLACEMENTS_H
 
-static char* countryMap[]={
+static const char* countryMap[]={
 "af Afrikaans",
 "ar Arabic",
 "az Azerbaijani",
@@ -1495,8 +1560,12 @@ static char* countryMap[]={
 
 void OptionDialog::setupIntegrationPage( void )
 {
-   QFrame *page = addPage( i18n("Integration"), i18n("Integration Settings"),
-                           BarIcon("launch"/*"charset"*/, KIcon::SizeMedium ) );
+   QFrame* page = new QFrame();
+   KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Integration") );
+   pageItem->setHeader( i18n("Integration Settings") );
+   pageItem->setIcon( KIcon( "preferences-desktop-launch-feedback" ) );
+   addPage( pageItem );
+
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
    topLayout->setSpacing( spacingHint() );
@@ -1516,6 +1585,14 @@ void OptionDialog::setupIntegrationPage( void )
       "Several values can be specified if separated via ';'\n"
       "This will suppress the \"Unknown option\"-error."
       ));
+   ++line;
+
+
+   OptionCheckBox* pEscapeKeyQuits = new OptionCheckBox( i18n("Quit also via Escape key"), false, "EscapeKeyQuits", &m_bEscapeKeyQuits, page, this );
+   gbox->addWidget( pEscapeKeyQuits, line, 0, 1, 2 );
+   pEscapeKeyQuits->setToolTip( i18n(
+                  "Fast method to exit.\n"
+                  "For those who are used to using the Escape-key."  ) );
    ++line;
 
 #ifdef _WIN32
@@ -1594,7 +1671,7 @@ void OptionDialog::slotEncodingChanged()
 void OptionDialog::setupKeysPage( void )
 {
    //QVBox *page = addVBoxPage( i18n("Keys"), i18n("KeyDialog" ),
-   //                          BarIcon("fonts", KIcon::SizeMedium ) );
+   //                          BarIcon("fonts", KIconLoader::SizeMedium ) );
 
    //QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
     //           new KFontChooser( page,"font",false/*onlyFixed*/,QStringList(),false,6 );
@@ -1617,7 +1694,8 @@ void OptionDialog::slotOk( void )
          "correctly, you might experience problems while editing.\n\n"
          "Do you want to continue or do you want to select another font."),
          i18n("Incompatible Font"),
-         i18n("Continue at Own Risk"), i18n("Select Another Font"));
+         KGuiItem( i18n("Continue at Own Risk") ),
+         KGuiItem( i18n("Select Another Font")) );
       if (result==KMessageBox::No)
          return;
    }
@@ -1635,7 +1713,7 @@ void OptionDialog::slotApply( void )
       (*i)->apply();
    }
 
-   emit applyClicked();   
+   emit applyDone();
 
 #ifdef _WIN32
    QString locale = m_language;
@@ -1683,37 +1761,41 @@ void OptionDialog::setState()
 class ConfigValueMap : public ValueMap
 {
 private:
-   KConfig* m_pConfig;
+   KConfigGroup m_config;
 public:
-   ConfigValueMap( KConfig* pConfig ) { m_pConfig = pConfig; }
+   ConfigValueMap( const KConfigGroup& config ) : m_config( config ){ }
 
-   void writeEntry(const QString& s, const QFont&  v ){ m_pConfig->writeEntry(s,v); }
-   void writeEntry(const QString& s, const QColor& v ){ m_pConfig->writeEntry(s,v); }
-   void writeEntry(const QString& s, const QSize&  v ){ m_pConfig->writeEntry(s,v); }
-   void writeEntry(const QString& s, const QPoint& v ){ m_pConfig->writeEntry(s,v); }
-   void writeEntry(const QString& s, int v )          { m_pConfig->writeEntry(s,v); }
-   void writeEntry(const QString& s, bool v )         { m_pConfig->writeEntry(s,v); }
-   void writeEntry(const QString& s, const QStringList& v, char separator ){ m_pConfig->writeEntry(s,v,separator); }
-   void writeEntry(const QString& s, const QString& v ){ m_pConfig->writeEntry(s,v); }
-   void writeEntry(const QString& s, const char* v )   { m_pConfig->writeEntry(s,v); }
+   void writeEntry(const QString& s, const QFont&  v ){ m_config.writeEntry(s,v); }
+   void writeEntry(const QString& s, const QColor& v ){ m_config.writeEntry(s,v); }
+   void writeEntry(const QString& s, const QSize&  v ){ m_config.writeEntry(s,v); }
+   void writeEntry(const QString& s, const QPoint& v ){ m_config.writeEntry(s,v); }
+   void writeEntry(const QString& s, int v )          { m_config.writeEntry(s,v); }
+   void writeEntry(const QString& s, bool v )         { m_config.writeEntry(s,v); }
+   void writeEntry(const QString& s, const QString& v ){ m_config.writeEntry(s,v); }
+   void writeEntry(const QString& s, const char* v )   { m_config.writeEntry(s,v); }
 
-   QFont       readFontEntry (const QString& s, QFont* defaultVal ) { return m_pConfig->readFontEntry(s,defaultVal); }
-   QColor      readColorEntry(const QString& s, QColor* defaultVal ){ return m_pConfig->readColorEntry(s,defaultVal); }
-   QSize       readSizeEntry (const QString& s, QSize* defaultVal ) { return m_pConfig->readSizeEntry(s,defaultVal); }
-   QPoint      readPointEntry(const QString& s, QPoint* defaultVal) { return m_pConfig->readPointEntry(s,defaultVal); }
-   bool        readBoolEntry (const QString& s, bool defaultVal )   { return m_pConfig->readBoolEntry(s,defaultVal); }
-   int         readNumEntry  (const QString& s, int defaultVal )    { return m_pConfig->readNumEntry(s,defaultVal); }
-   QStringList readListEntry (const QString& s, const QStringList& def, char separator )    { return m_pConfig->readListEntry(s.toLatin1(),def,separator); }
-   QString     readEntry     (const QString& s, const QString& defaultVal){ return m_pConfig->readEntry(s,defaultVal); }
+   QFont       readFontEntry (const QString& s, const QFont* defaultVal ) { return m_config.readEntry(s,*defaultVal); }
+   QColor      readColorEntry(const QString& s, const QColor* defaultVal ){ return m_config.readEntry(s,*defaultVal); }
+   QSize       readSizeEntry (const QString& s, const QSize* defaultVal ) { return m_config.readEntry(s,*defaultVal); }
+   QPoint      readPointEntry(const QString& s, const QPoint* defaultVal) { return m_config.readEntry(s,*defaultVal); }
+   bool        readBoolEntry (const QString& s, bool defaultVal )   { return m_config.readEntry(s,defaultVal); }
+   int         readNumEntry  (const QString& s, int defaultVal )    { return m_config.readEntry(s,defaultVal); }
+   QString     readStringEntry(const QString& s, const QString& defaultVal){ return m_config.readEntry(s,defaultVal); }
+#ifdef KREPLACEMENTS_H
+   void writeEntry(const QString& s, const QStringList& v, char separator ){ m_config.writeEntry(s,v,separator); }
+   QStringList readListEntry (const QString& s, const QStringList& def, char separator )    { return m_config.readEntry(s, def ,separator ); }
+#else
+   void writeEntry(const QString& s, const QStringList& v, char separator ){ m_config.writeEntry(s,v); }
+   QStringList readListEntry (const QString& s, const QStringList& def, char separator )    { return m_config.readEntry(s, def ); }
+#endif
 };
 
-void OptionDialog::saveOptions( KConfig* config )
+
+void OptionDialog::saveOptions( KSharedConfigPtr config )
 {
    // No i18n()-Translations here!
 
-   config->setGroup("KDiff3 Options");
-
-   ConfigValueMap cvm(config);
+   ConfigValueMap cvm(config->group(KDIFF3_CONFIG_GROUP));
    std::list<OptionItem*>::iterator i;
    for(i=m_optionItemList.begin(); i!=m_optionItemList.end(); ++i)
    {
@@ -1721,13 +1803,11 @@ void OptionDialog::saveOptions( KConfig* config )
    }
 }
 
-void OptionDialog::readOptions( KConfig* config )
+void OptionDialog::readOptions( KSharedConfigPtr config )
 {
    // No i18n()-Translations here!
 
-   config->setGroup("KDiff3 Options");
-
-   ConfigValueMap cvm(config);
+   ConfigValueMap cvm(config->group(KDIFF3_CONFIG_GROUP));
    std::list<OptionItem*>::iterator i;
    for(i=m_optionItemList.begin(); i!=m_optionItemList.end(); ++i)
    {
@@ -1737,15 +1817,10 @@ void OptionDialog::readOptions( KConfig* config )
    setState();
 }
 
-void OptionDialog::slotHelp( void )
-{
-   KDialogBase::slotHelp();
-}
-
-QString OptionDialog::parseOptions( const QCStringList& optionList )
+QString OptionDialog::parseOptions( const QStringList& optionList )
 {
    QString result;
-   QCStringList::const_iterator i;
+   QStringList::const_iterator i;
    for ( i=optionList.begin(); i!=optionList.end(); ++i )
    {
       QString s = *i;

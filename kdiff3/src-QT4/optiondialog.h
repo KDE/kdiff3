@@ -21,14 +21,8 @@
 #ifndef OPTION_DIALOG_H
 #define OPTION_DIALOG_H
 
-class QCheckBox;
-class QLabel;
-class QLineEdit;
-class KColorButton;
-class KFontChooser;
-class KConfig;
 
-#include <kdialogbase.h>
+#include <kpagedialog.h>
 #include <qstringlist.h>
 #include <list>
 #include <kcmdlineargs.h>
@@ -41,11 +35,14 @@ class KKeyDialog;
 
 enum e_LineEndStyle
 {
-   eLineEndUnix=0,
-   eLineEndDos
+   eLineEndStyleUnix=0,
+   eLineEndStyleDos,
+   eLineEndStyleAutoDetect,
+   eLineEndStyleUndefined, // only one line exists
+   eLineEndStyleConflict,   // User must resolve manually
 };
 
-class OptionDialog : public KDialogBase
+class OptionDialog : public KPageDialog
 {
    Q_OBJECT
 
@@ -53,7 +50,7 @@ public:
 
     OptionDialog( bool bShowDirMergeSettings, QWidget *parent = 0, char *name = 0 );
     ~OptionDialog( void );
-    QString parseOptions( const QCStringList& optionList );
+    QString parseOptions( const QStringList& optionList );
     QString calcOptionHelp();
 
     // Some settings are not available in the option dialog:
@@ -107,6 +104,8 @@ public:
     bool m_bShowWhiteSpace;
     bool m_bShowLineNumbers;
     bool m_bHorizDiffWindowSplitting;
+    bool m_bShowInfoDialogs;
+    bool m_bDiff3AlignBC;
 
     int  m_whiteSpace2FileMergeDefault;
     int  m_whiteSpace3FileMergeDefault;
@@ -162,9 +161,10 @@ public:
 
     QString m_ignorableCmdLineOptions;
     bool m_bIntegrateWithClearCase;
+    bool m_bEscapeKeyQuits;
 
-    void saveOptions(KConfig* config);
-    void readOptions(KConfig* config);
+    void saveOptions(KSharedConfigPtr config);
+    void readOptions(KSharedConfigPtr config);
 
     void setState(); // Must be called before calling exec();
 
@@ -174,12 +174,13 @@ protected slots:
     virtual void slotDefault( void );
     virtual void slotOk( void );
     virtual void slotApply( void );
-    virtual void slotHelp( void );
 
     void slotEncodingChanged();
     void slotHistoryMergeRegExpTester();
     void slotIntegrateWithClearCase();
     void slotRemoveClearCaseIntegration();
+signals:
+    void applyDone();
 private:
     void resetToDefaults();
 

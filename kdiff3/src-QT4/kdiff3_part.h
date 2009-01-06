@@ -24,8 +24,6 @@
 #include <kparts/factory.h>
 
 class QWidget;
-class QPainter;
-class KURL;
 class KDiff3App;
 
 /**
@@ -35,7 +33,7 @@ class KDiff3App;
  * @short Main Part
  * @author Joachim Eibl <joachim.eibl at gmx.de>
  */
-class KDiff3Part : public KParts::ReadOnlyPart
+class KDiff3Part : public KParts::ReadWritePart
 {
     Q_OBJECT
 public:
@@ -43,7 +41,7 @@ public:
      * Default constructor
      */
     KDiff3Part(QWidget *parentWidget, const char *widgetName,
-                    QObject *parent, const char *name);
+                    QObject *parent );
 
     /**
      * Destructor
@@ -78,7 +76,7 @@ private:
     bool m_bIsShell;
 };
 
-class KInstance;
+class KComponentData;
 class KAboutData;
 
 class KDiff3PartFactory : public KParts::Factory
@@ -87,13 +85,14 @@ class KDiff3PartFactory : public KParts::Factory
 public:
     KDiff3PartFactory();
     virtual ~KDiff3PartFactory();
-    virtual KParts::Part* createPartObject( QWidget *parentWidget, const char *widgetName,
-                                            QObject *parent, const char *name,
-                                            const char *classname, const QStringList &args );
-    static KInstance* instance();
+    virtual KParts::Part* createPartObject( QWidget *parentWidget,
+                                            QObject *parent,
+                                            const char *classname, 
+                                            const QStringList &args );
+    static KComponentData* instance();
 
 private:
-    static KInstance* s_instance;
+    static KComponentData* s_instance;
     static KAboutData* s_about;
 };
 

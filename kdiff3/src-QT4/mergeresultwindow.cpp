@@ -36,6 +36,17 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QUrl>
+//Added by qt3to4:
+#include <QTimerEvent>
+#include <QResizeEvent>
+#include <QWheelEvent>
+#include <QPixmap>
+#include <QFocusEvent>
+#include <QEvent>
+#include <QInputEvent>
+#include <QDropEvent>
+#include <QPaintEvent>
+#include <QTextStream>
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -138,8 +149,8 @@ void MergeResultWindow::init(
    int wsc;
    int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
    if (m_pStatusBar)
-      m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)")
-         .arg(nofUnsolved).arg(wsc) );
+      m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
+         ,nofUnsolved,wsc) );
 }
 
 void MergeResultWindow::reset()
@@ -289,7 +300,9 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
          int result = KMessageBox::warningYesNo(this,
             i18n("The output has been modified.\n"
                "If you continue your changes will be lost."),
-            i18n("Warning"), i18n("C&ontinue"), i18n("&Cancel"));
+            i18n("Warning"), 
+            KStandardGuiItem::cont(),
+            KStandardGuiItem::cancel());
          if ( result==KMessageBox::No )
             return;
       }
@@ -801,6 +814,8 @@ int MergeResultWindow::getNrOfUnsolvedConflicts( int* pNrOfWhiteSpaceConflicts )
 
 void MergeResultWindow::showNrOfConflicts()
 {
+   if (!m_pOptionDialog->m_bShowInfoDialogs)
+      return;
    int nrOfConflicts = 0;
    MergeLineList::iterator i;
    for ( i = m_mergeLineList.begin();  i!=m_mergeLineList.end(); ++i )
@@ -814,12 +829,12 @@ void MergeResultWindow::showNrOfConflicts()
    else  if ( m_pTotalDiffStatus->bTextAEqB && m_pTotalDiffStatus->bTextAEqC )
       totalInfo += i18n("All input files contain the same text.");
    else {
-      if    ( m_pTotalDiffStatus->bBinaryAEqB ) totalInfo += i18n("Files %1 and %2 are binary equal.\n").arg("A").arg("B");
-      else if ( m_pTotalDiffStatus->bTextAEqB ) totalInfo += i18n("Files %1 and %2 have equal text.\n").arg("A").arg("B");
-      if    ( m_pTotalDiffStatus->bBinaryAEqC ) totalInfo += i18n("Files %1 and %2 are binary equal.\n").arg("A").arg("C");
-      else if ( m_pTotalDiffStatus->bTextAEqC ) totalInfo += i18n("Files %1 and %2 have equal text.\n").arg("A").arg("C");
-      if    ( m_pTotalDiffStatus->bBinaryBEqC ) totalInfo += i18n("Files %1 and %2 are binary equal.\n").arg("B").arg("C");
-      else if ( m_pTotalDiffStatus->bTextBEqC ) totalInfo += i18n("Files %1 and %2 have equal text.\n").arg("B").arg("C");
+      if    ( m_pTotalDiffStatus->bBinaryAEqB ) totalInfo += i18n("Files %1 and %2 are binary equal.\n",QString("A"),QString("B"));
+      else if ( m_pTotalDiffStatus->bTextAEqB ) totalInfo += i18n("Files %1 and %2 have equal text.\n",QString("A"),QString("B"));
+      if    ( m_pTotalDiffStatus->bBinaryAEqC ) totalInfo += i18n("Files %1 and %2 are binary equal.\n",QString("A"),QString("C"));
+      else if ( m_pTotalDiffStatus->bTextAEqC ) totalInfo += i18n("Files %1 and %2 have equal text.\n",QString("A"),QString("C"));
+      if    ( m_pTotalDiffStatus->bBinaryBEqC ) totalInfo += i18n("Files %1 and %2 are binary equal.\n",QString("B"),QString("C"));
+      else if ( m_pTotalDiffStatus->bTextBEqC ) totalInfo += i18n("Files %1 and %2 have equal text.\n",QString("B"),QString("C"));
    }
 
    int nrOfUnsolvedConflicts = getNrOfUnsolvedConflicts();
@@ -952,8 +967,8 @@ void MergeResultWindow::choose( int selector )
    emit updateAvailabilities();
    int wsc;
    int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
-   m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)")
-         .arg(nofUnsolved).arg(wsc) );
+   m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
+         ,nofUnsolved,wsc) );
 }
 
 // bConflictsOnly: automatically choose for conflicts only (true) or for everywhere (false)
@@ -966,8 +981,8 @@ void MergeResultWindow::chooseGlobal(int selector, bool bConflictsOnly, bool bWh
    update();
    int wsc;
    int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
-   m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)")
-         .arg(nofUnsolved).arg(wsc) );
+   m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
+         ,nofUnsolved,wsc) );
 }
 
 void MergeResultWindow::slotAutoSolve()
@@ -978,8 +993,8 @@ void MergeResultWindow::slotAutoSolve()
    update();
    int wsc;
    int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
-   m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)")
-         .arg(nofUnsolved).arg(wsc) );
+   m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
+         ,nofUnsolved,wsc) );
 }
 
 void MergeResultWindow::slotUnsolve()
@@ -990,8 +1005,8 @@ void MergeResultWindow::slotUnsolve()
    update();
    int wsc;
    int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
-   m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)")
-         .arg(nofUnsolved).arg(wsc) );
+   m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
+         ,nofUnsolved,wsc) );
 }
 
 static QString calcHistoryLead(const QString& s )
@@ -1140,6 +1155,8 @@ void MergeResultWindow::collectHistoryInformation(
       historyLead = calcHistoryLead(s);
    }
    QRegExp historyStart( m_pOptionDialog->m_historyStartRegExp );
+   if ( id3l == iHistoryEnd )
+      return;
    ++id3l; // Skip line with "$Log ... $"
    QRegExp newHistoryEntry( m_pOptionDialog->m_historyEntryStartRegExp );
    QStringList parenthesesGroups;
@@ -1749,11 +1766,13 @@ void MergeResultWindow::setPaintingAllowed(bool bPaintingAllowed)
       m_currentMergeLineIt = m_mergeLineList.end();
       reset();
    }
+   update();
 }
 
-void MergeResultWindow::paintEvent( QPaintEvent*  )
+void MergeResultWindow::paintEvent( QPaintEvent* )
 {
-   if (m_pDiff3LineList==0 || !m_bPaintingAllowed) return;
+   if (m_pDiff3LineList==0 || !m_bPaintingAllowed) 
+      return;
 
    bool bOldSelectionContainsData = m_selection.bSelectionContainsData;
    const QFontMetrics& fm = fontMetrics();
@@ -1837,12 +1856,13 @@ void MergeResultWindow::paintEvent( QPaintEvent*  )
       painter.drawPixmap(0,0, m_pixmap);
    else
    {
-      if (!m_pOptionDialog->m_bRightToLeftLanguage)
-         painter.drawPixmap(xCursor-2, yOffset, m_pixmap,
-                            xCursor-2, yOffset, 5, fontAscent+2 );
-      else
-         painter.drawPixmap(width()-1-4-(xCursor-2), yOffset, m_pixmap,
-                            width()-1-4-(xCursor-2), yOffset, 5, fontAscent+2 );
+      painter.drawPixmap(0,0, m_pixmap ); // Draw everything. (Internally cursor rect is clipped anyway.)
+      //if (!m_pOptionDialog->m_bRightToLeftLanguage)
+      //   painter.drawPixmap(xCursor-2, yOffset, m_pixmap,
+      //                      xCursor-2, yOffset, 5, fontAscent+2 );
+      //else
+      //   painter.drawPixmap(width()-1-4-(xCursor-2), yOffset, m_pixmap,
+      //                      width()-1-4-(xCursor-2), yOffset, 5, fontAscent+2 );
       m_bCursorUpdate = false;
    }
    painter.end();
@@ -2677,13 +2697,22 @@ void MergeResultWindow::setModified(bool bModified)
 }
 
 /// Saves and returns true when successful.
-bool MergeResultWindow::saveDocument( const QString& fileName, QTextCodec* pEncoding )
+bool MergeResultWindow::saveDocument( const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle )
 {
    // Are still conflicts somewhere?
    if ( getNrOfUnsolvedConflicts()>0 )
    {
       KMessageBox::error( this,
          i18n("Not all conflicts are solved yet.\n"
+              "File not saved.\n"),
+         i18n("Conflicts Left"));
+      return false;
+   }
+
+   if ( eLineEndStyle==eLineEndStyleConflict || eLineEndStyle==eLineEndStyleUndefined )
+   {
+      KMessageBox::error( this,
+         i18n("There is a line end style conflict. Please choose the line end style manually.\n"
               "File not saved.\n"),
          i18n("Conflicts Left"));
       return false;
@@ -2723,7 +2752,7 @@ bool MergeResultWindow::saveDocument( const QString& fileName, QTextCodec* pEnco
 
             if (line>0) // Prepend line feed, but not for first line
             {
-               if ( m_pOptionDialog->m_lineEndStyle == eLineEndDos )
+               if ( eLineEndStyle == eLineEndStyleDos )
                {   str.prepend("\r\n"); }
                else
                {   str.prepend("\n");   }
@@ -3091,8 +3120,16 @@ WindowTitleWidget::WindowTitleWidget(OptionDialog* pOptionDialog)
    pHLayout->addWidget( m_pEncodingLabel );
 
    m_pEncodingSelector = new QComboBox();
+   m_pEncodingSelector->setSizeAdjustPolicy( QComboBox::AdjustToContents );
    pHLayout->addWidget( m_pEncodingSelector, 2 );
    setEncodings(0,0,0);
+
+   m_pLineEndStyleLabel = new QLabel( i18n("Line end style:") );
+   pHLayout->addWidget( m_pLineEndStyleLabel );
+   m_pLineEndStyleSelector = new QComboBox();
+   m_pLineEndStyleSelector->setSizeAdjustPolicy( QComboBox::AdjustToContents );
+   pHLayout->addWidget( m_pLineEndStyleSelector );
+   setLineEndStyles(eLineEndStyleUndefined,eLineEndStyleUndefined,eLineEndStyleUndefined);
 }
 
 void WindowTitleWidget::setFileName( const QString& fileName )
@@ -3103,6 +3140,85 @@ void WindowTitleWidget::setFileName( const QString& fileName )
 QString WindowTitleWidget::getFileName()
 {
    return m_pFileNameLineEdit->text();
+}
+
+static QString getLineEndStyleName( e_LineEndStyle eLineEndStyle )
+{
+   if ( eLineEndStyle == eLineEndStyleDos )
+      return "DOS";
+   else if ( eLineEndStyle == eLineEndStyleUnix )
+      return "Unix";
+   return QString();
+}
+
+void WindowTitleWidget::setLineEndStyles( e_LineEndStyle eLineEndStyleA, e_LineEndStyle eLineEndStyleB, e_LineEndStyle eLineEndStyleC)
+{
+   m_pLineEndStyleSelector->clear();
+   QString dosUsers;
+   if ( eLineEndStyleA == eLineEndStyleDos )
+      dosUsers += "A";
+   if ( eLineEndStyleB == eLineEndStyleDos )
+      dosUsers += (dosUsers.isEmpty() ? "" : ", ") + QString("B");
+   if ( eLineEndStyleC == eLineEndStyleDos )
+      dosUsers += (dosUsers.isEmpty() ? "" : ", ") + QString("C");
+   QString unxUsers;
+   if ( eLineEndStyleA == eLineEndStyleUnix )
+      unxUsers += "A";
+   if ( eLineEndStyleB == eLineEndStyleUnix )
+      unxUsers += (unxUsers.isEmpty() ? "" : ", ") + QString("B");
+   if ( eLineEndStyleC == eLineEndStyleUnix )
+      unxUsers += (unxUsers.isEmpty() ? "" : ", ") + QString("C");
+
+   m_pLineEndStyleSelector->addItem( i18n("Unix") + (unxUsers.isEmpty() ? "" : " (" + unxUsers + ")" )  );
+   m_pLineEndStyleSelector->addItem( i18n("DOS")  + (dosUsers.isEmpty() ? "" : " (" + dosUsers + ")" )  );
+
+   e_LineEndStyle autoChoice = (e_LineEndStyle)m_pOptionDialog->m_lineEndStyle;
+
+   if ( m_pOptionDialog->m_lineEndStyle == eLineEndStyleAutoDetect )
+   {
+      if ( eLineEndStyleA != eLineEndStyleUndefined && eLineEndStyleB != eLineEndStyleUndefined && eLineEndStyleC != eLineEndStyleUndefined )
+      {
+         if ( eLineEndStyleA == eLineEndStyleB )
+            autoChoice = eLineEndStyleC;
+         else if ( eLineEndStyleA == eLineEndStyleC )
+            autoChoice = eLineEndStyleB;
+         else
+            autoChoice = eLineEndStyleConflict;          //conflict (not likely while only two values exist)
+      }
+      else 
+      {
+         e_LineEndStyle c1, c2;
+         if     ( eLineEndStyleA == eLineEndStyleUndefined ) { c1 = eLineEndStyleB; c2 = eLineEndStyleC; }
+         else if( eLineEndStyleB == eLineEndStyleUndefined ) { c1 = eLineEndStyleA; c2 = eLineEndStyleC; }
+         else /*if( eLineEndStyleC == eLineEndStyleUndefined )*/ { c1 = eLineEndStyleA; c2 = eLineEndStyleB; }
+         if ( c1 == c2 && c1!=eLineEndStyleUndefined )
+            autoChoice = c1;
+         else
+            autoChoice = eLineEndStyleConflict;
+      }
+   }
+
+   if ( autoChoice == eLineEndStyleUnix )
+      m_pLineEndStyleSelector->setCurrentIndex(0);
+   else if ( autoChoice == eLineEndStyleDos )
+      m_pLineEndStyleSelector->setCurrentIndex(1);
+   else if ( autoChoice == eLineEndStyleConflict )
+   {
+      m_pLineEndStyleSelector->addItem( i18n("Conflict") );
+      m_pLineEndStyleSelector->setCurrentIndex(2);
+   }
+}
+
+e_LineEndStyle WindowTitleWidget::getLineEndStyle( )
+{
+   
+   int current = m_pLineEndStyleSelector->currentIndex();
+   if (current == 0)
+      return eLineEndStyleUnix;
+   else if (current == 1)
+      return eLineEndStyleDos;
+   else
+      return eLineEndStyleConflict;
 }
 
 void WindowTitleWidget::setEncodings( QTextCodec* pCodecForA, QTextCodec* pCodecForB, QTextCodec* pCodecForC )
@@ -3164,7 +3280,7 @@ void WindowTitleWidget::setEncoding(QTextCodec* pEncoding)
 //{
 //   QString current = m_pFileNameLineEdit->text();
 //
-//   KURL newURL = KFileDialog::getSaveURL( current, 0, this, i18n("Select file (not saving yet)"));
+//   KUrl newURL = KFileDialog::getSaveUrl( current, 0, this, i18n("Select file (not saving yet)"));
 //   if ( !newURL.isEmpty() )
 //   {
 //      m_pFileNameLineEdit->setText( newURL.url() ); 

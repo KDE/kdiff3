@@ -20,23 +20,23 @@ struct ReplacementItem
 { char* fileType; char* operationType; };
 
 ReplacementItem g_replacementTable[] = {
-   "text_file_delta",   "xcompare",
-   "text_file_delta",   "xmerge",
-   "whole_copy",        "xcompare",
-   "whole_copy",        "xmerge",
-   "z_text_file_delta", "xcompare",
-   "z_text_file_delta", "xmerge",
-   "z_whole_copy",      "xcompare",
-   "z_whole_copy",      "xmerge",
-   "_xml",              "xcompare",
-   "_xml",              "xmerge",
-   "_xml2",             "xcompare",
-   "_xml2",             "xmerge",
-   "_rftdef",           "xcompare",
-   "_rftmap",           "xcompare",
-   "_rftvp",            "xcompare",
-   "_xtools",           "xcompare",
-   0,0
+   {"text_file_delta",   "xcompare"},
+   {"text_file_delta",   "xmerge"},
+   {"whole_copy",        "xcompare"},
+   {"whole_copy",        "xmerge"},
+   {"z_text_file_delta", "xcompare"},
+   {"z_text_file_delta", "xmerge"},
+   {"z_whole_copy",      "xcompare"},
+   {"z_whole_copy",      "xmerge"},
+   {"_xml",              "xcompare"},
+   {"_xml",              "xmerge"},
+   {"_xml2",             "xcompare"},
+   {"_xml2",             "xmerge"},
+   {"_rftdef",           "xcompare"},
+   {"_rftmap",           "xcompare"},
+   {"_rftvp",            "xcompare"},
+   {"_xtools",           "xcompare"},
+   {0,0}
 };
 
 struct LineItem

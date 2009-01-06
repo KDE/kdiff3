@@ -371,7 +371,7 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
          tstring firstFileName;
          if( nrOfRecentFiles>=1 )
          {
-            tstring firstFileName = TEXT("'") + cut_to_length( m_recentFiles.front() ) + TEXT("'");
+            firstFileName = TEXT("'") + cut_to_length( m_recentFiles.front() ) + TEXT("'");
          } 
          replaceArgs( menuStringCompare, firstFileName );
          replaceArgs( menuStringMerge,   firstFileName );
@@ -503,6 +503,10 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
          verb[79]=0;
          ERRORLOG(verb);
       }
+   }
+   else
+   {
+      ret = E_INVALIDARG;
    }
 
    return ret;

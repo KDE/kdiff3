@@ -2,8 +2,8 @@ KDiff3-Readme for Windows
 =========================
 
 Author: Joachim Eibl  (joachim.eibl@gmx.de)
-Copyright: (C) 2002-2007 by Joachim Eibl
-KDiff3-Version: 0.9.92
+Copyright: (C) 2002-2009 by Joachim Eibl
+KDiff3-Version: 0.9.93
 Homepage: http://kdiff3.sourceforge.net
 
 KDiff3 is a program that
@@ -17,15 +17,6 @@ Now KDiff3-strings are translated into some languages by the KDE-I18N-team.
 (*.qm-files in the KDiff3-directory)
 
 See the Changelog.txt for a list of fixed bugs and new features.
-
-Switching to Qt4
-================
-
-The current binary kdiff3.exe is Qt3 based. In the long run I will 
-switch to Qt4. For testing purposes a KDiff3-Qt4.exe binary is 
-included in the installation also. It has the big advantage that no
-console windows will open for external commands like the preprocessors.
-Please report bugs for the Qt4-based version too.
 
 
 Windows-specific information for the precompiled KDiff3 version:

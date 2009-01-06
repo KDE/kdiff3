@@ -32,6 +32,7 @@
 #include <QDir>
 #include <QDropEvent>
 #include <QMenu>
+#include <QPushButton>
 
 #include <kfiledialog.h>
 #include <klocale.h>
@@ -59,7 +60,7 @@ OpenDialog::OpenDialog(
    m_pLineA = new QComboBox();
    m_pLineA->setEditable(true);
    m_pLineA->insertItems( 0, m_pOptions->m_recentAFiles );
-   m_pLineA->setEditText( KURL(n1).prettyURL() );
+   m_pLineA->setEditText( KUrl(n1).prettyUrl() );
    m_pLineA->setMinimumWidth( 200 );
    QPushButton * button = new QPushButton( i18n("File..."), this );
    connect( button, SIGNAL(clicked()), this, SLOT( selectFileA() ) );
@@ -76,7 +77,7 @@ OpenDialog::OpenDialog(
    m_pLineB  = new QComboBox();
    m_pLineB->setEditable(true);
    m_pLineB->insertItems( 0, m_pOptions->m_recentBFiles );
-   m_pLineB->setEditText( KURL(n2).prettyURL() );
+   m_pLineB->setEditText( KUrl(n2).prettyUrl() );
    m_pLineB->setMinimumWidth( 200 );
    button   = new QPushButton( i18n("File..."), this );
    connect( button, SIGNAL(clicked()), this, SLOT( selectFileB() ) );
@@ -93,7 +94,7 @@ OpenDialog::OpenDialog(
    m_pLineC= new QComboBox();
    m_pLineC->setEditable(true);
    m_pLineC->insertItems( 0, m_pOptions->m_recentCFiles );
-   m_pLineC->setEditText( KURL(n3).prettyURL() );
+   m_pLineC->setEditText( KUrl(n3).prettyUrl() );
    m_pLineC->setMinimumWidth( 200 );
    button = new QPushButton( i18n("File..."), this );
    connect( button, SIGNAL(clicked()), this, SLOT( selectFileC() ) );
@@ -117,15 +118,15 @@ OpenDialog::OpenDialog(
    hl->addWidget( button );
 
    QMenu* m = new QMenu(this);
-   m->addAction( i18n("Swap %1<->%2").arg("A").arg("B") );
-   m->addAction( i18n("Swap %1<->%2").arg("B").arg("C") );
-   m->addAction( i18n("Swap %1<->%2").arg("C").arg("A") );
-   m->addAction( i18n("Copy %1->Output").arg("A")  );
-   m->addAction( i18n("Copy %1->Output").arg("B")  );
-   m->addAction( i18n("Copy %1->Output").arg("C")  );
-   m->addAction( i18n("Swap %1<->Output").arg("A") );
-   m->addAction( i18n("Swap %1<->Output").arg("B") );
-   m->addAction( i18n("Swap %1<->Output").arg("C") );
+   m->addAction( i18n("Swap %1<->%2", QString("A"),QString("B") ));
+   m->addAction( i18n("Swap %1<->%2",QString("B"),QString("C") ));
+   m->addAction( i18n("Swap %1<->%2",QString("C"),QString("A") ));
+   m->addAction( i18n("Copy %1->Output",QString("A")  ));
+   m->addAction( i18n("Copy %1->Output",QString("B")  ));
+   m->addAction( i18n("Copy %1->Output",QString("C")  ));
+   m->addAction( i18n("Swap %1<->Output",QString("A") ));
+   m->addAction( i18n("Swap %1<->Output",QString("B") ));
+   m->addAction( i18n("Swap %1<->Output",QString("C") ));
    connect( m, SIGNAL(triggered(QAction*)), this, SLOT(slotSwapCopyNames(QAction*)));
    button->setMenu(m);
 
@@ -136,7 +137,7 @@ OpenDialog::OpenDialog(
    m_pLineOut = new QComboBox();
    m_pLineOut->setEditable(true);
    m_pLineOut->insertItems( 0, m_pOptions->m_recentOutputFiles );
-   m_pLineOut->setEditText( KURL(outputName).prettyURL() );
+   m_pLineOut->setEditText( KUrl(outputName).prettyUrl() );
    m_pLineOut->setMinimumWidth( 200 );
    button = new QPushButton( i18n("File..."), this );
    connect( button, SIGNAL(clicked()), this, SLOT( selectOutputName() ) );
@@ -229,9 +230,9 @@ void OpenDialog::selectURL( QComboBox* pLine, bool bDir, int i, bool bSave )
    if (current.isEmpty() && i>3 ){  current = m_pLineC->currentText(); }
    if (current.isEmpty()        ){  current = m_pLineB->currentText(); }
    if (current.isEmpty()        ){  current = m_pLineA->currentText(); }
-   KURL newURL = bDir ? KFileDialog::getExistingURL( current, this)
-                      : bSave ? KFileDialog::getSaveURL( current, 0, this)
-                              : KFileDialog::getOpenURL( current, 0, this);
+   KUrl newURL = bDir ? KFileDialog::getExistingDirectoryUrl( current, this)
+                      : bSave ? KFileDialog::getSaveUrl( current, 0, this)
+                              : KFileDialog::getOpenUrl( current, 0, this);
    if ( !newURL.isEmpty() )
    {
       pLine->setEditText( newURL.url() );
@@ -285,7 +286,7 @@ void OpenDialog::accept()
    fixCurrentText( m_pLineA );
 
    QString s = m_pLineA->currentText();
-   s = KURL::fromPathOrURL(s).prettyURL();
+   s = QUrl::fromLocalFile(s).toLocalFile();
    QStringList* sl = &m_pOptions->m_recentAFiles;
    // If an item exist, remove it from the list and reinsert it at the beginning.
    sl->removeAll(s);
@@ -294,7 +295,7 @@ void OpenDialog::accept()
 
    fixCurrentText( m_pLineB );
    s = m_pLineB->currentText();
-   s = KURL::fromPathOrURL(s).prettyURL();
+   s = QUrl::fromLocalFile(s).toLocalFile();
    sl = &m_pOptions->m_recentBFiles;
    sl->removeAll(s);
    if ( !s.isEmpty() ) sl->prepend( s );
@@ -302,7 +303,7 @@ void OpenDialog::accept()
 
    fixCurrentText( m_pLineC );
    s = m_pLineC->currentText();
-   s = KURL::fromPathOrURL(s).prettyURL();
+   s = QUrl::fromLocalFile(s).toLocalFile();
    sl = &m_pOptions->m_recentCFiles;
    sl->removeAll(s);
    if ( !s.isEmpty() ) sl->prepend( s );
@@ -310,7 +311,7 @@ void OpenDialog::accept()
 
    fixCurrentText( m_pLineOut );
    s = m_pLineOut->currentText();
-   s = KURL::fromPathOrURL(s).prettyURL();
+   s = QUrl::fromLocalFile(s).toLocalFile();
    sl = &m_pOptions->m_recentOutputFiles;
    sl->removeAll(s);
    if ( !s.isEmpty() ) sl->prepend( s );
@@ -573,7 +574,7 @@ void RegExpTester::slotRecalc()
    if ( ! bSuccess )
    {
       m_pHistoryEntryStartMatchResult->setText( i18n("Opening and closing parentheses don't match in regular expression.") );
-      m_pHistorySortKeyResult->setText( i18n("") );
+      m_pHistorySortKeyResult->setText( "" );
       return;
    }
    QRegExp historyEntryStartRegExp( m_pHistoryEntryStartRegExpEdit->text() );
@@ -588,7 +589,7 @@ void RegExpTester::slotRecalc()
    else
    {
       m_pHistoryEntryStartMatchResult->setText( i18n("Match failed.") );
-      m_pHistorySortKeyResult->setText( i18n("") );
+      m_pHistorySortKeyResult->setText( "" );
    }
 }
 

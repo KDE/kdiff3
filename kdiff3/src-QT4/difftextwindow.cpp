@@ -145,7 +145,7 @@ DiffTextWindow::DiffTextWindow(
 {
    setObjectName(QString("DiffTextWindow%1").arg(winIdx));
    setAttribute( Qt::WA_OpaquePaintEvent );
-   setAttribute( Qt::WA_PaintOnScreen );
+   //setAttribute( Qt::WA_PaintOnScreen );
 
    d = new DiffTextWindowData(this);
    d->m_pDiffTextWindowFrame = pParent;
@@ -552,12 +552,13 @@ void DiffTextWindow::mouseMoveEvent ( QMouseEvent * e )
       }
       if ( e->y() < 0 )          deltaY = -1 - sqr( e->y() ) / sqr(fm.height());
       if ( e->y() > height() )   deltaY = +1 + sqr( e->y() - height() ) / sqr(fm.height());
-      if ( deltaX != 0 && d->m_scrollDeltaX!=deltaX || deltaY!= 0 && d->m_scrollDeltaY!=deltaY )
+      if ( (deltaX != 0 && d->m_scrollDeltaX!=deltaX) || (deltaY!= 0 && d->m_scrollDeltaY!=deltaY) )
       {
          d->m_scrollDeltaX = deltaX;
          d->m_scrollDeltaY = deltaY;
          emit scroll( deltaX, deltaY );
-         killTimer( d->m_delayedDrawTimer );
+         if (d->m_delayedDrawTimer)
+            killTimer( d->m_delayedDrawTimer );
          d->m_delayedDrawTimer = startTimer(50);
       }
       else
@@ -711,6 +712,66 @@ bool Selection::lineWithin( int l )
    return ( l1 <= l && l <= l2 );
 }
 
+class DrawTextOptimizer
+// Drawing continuous text is much faster than drawing one char after another.
+{
+private:
+   QFont m_font;
+   QPen m_pen;
+   QString m_text;
+   QPoint m_pos;
+   MyPainter* m_pPainter;
+   QFontMetrics m_fm;
+   void draw()
+   {
+      if ( m_pPainter && !m_text.isEmpty() )
+      {
+         m_pPainter->setFont( m_font );
+         m_pPainter->setPen( m_pen );
+         m_pPainter->drawText( m_pos.x(), m_pos.y(), m_text, true );
+         m_text = QString();
+      }
+   }
+public:
+   DrawTextOptimizer( MyPainter* pPainter ) 
+      : m_fm(pPainter->fontMetrics())
+   { 
+      m_pPainter = pPainter;
+      m_font = m_pPainter->font();
+      m_pen = m_pPainter->pen();
+   }
+   ~DrawTextOptimizer() { end(); }
+   void setFont( const QFont& f )
+   {
+      if ( f!=m_font )
+      {
+         draw();
+         m_font = f;
+         m_fm = m_pPainter->fontMetrics();
+      }
+   }
+   void setPen( const QPen& pen )
+   {
+      if ( pen!=m_pen )
+      {
+         draw();
+         m_pen = pen;
+      }
+   }
+   void drawText( int x, int y, const QString& s )
+   {
+      if ( y!=m_pos.y() || x != m_pos.x()+m_text.length()*m_fm.width("W") )
+      {
+         draw();
+         m_pos = QPoint(x,y);
+      }
+      m_text += s;
+   }
+   void end()
+   {
+      draw();
+   }
+};
 
 void DiffTextWindowData::writeLine(
    MyPainter& p,
@@ -767,6 +828,7 @@ void DiffTextWindowData::writeLine(
    if ( pLineDiff2 != 0 ) changed |= 2;
 
    QColor c = m_pOptionDialog->m_fgColor;
+   p.setPen(c);
    if ( changed == 2 ) {
       c = m_cDiff2;
    } else if ( changed == 1 ) {
@@ -781,27 +843,26 @@ void DiffTextWindowData::writeLine(
    {
       // First calculate the "changed" information for each character.
       int i=0;
+      QString lineString( pld->pLine, pld->size );
       std::vector<UINT8> charChanged( pld->size );
-      if ( pLineDiff1!=0 || pLineDiff2 != 0 )
+      Merger merger( pLineDiff1, pLineDiff2 );
+      while( ! merger.isEndReached() &&  i<pld->size )
       {
-         Merger merger( pLineDiff1, pLineDiff2 );
-         while( ! merger.isEndReached() &&  i<pld->size )
+         if ( i < pld->size )
          {
-            if ( i < pld->size )
-            {
-               charChanged[i] = merger.whatChanged();
-               ++i;
-            }
-            merger.next();
+            charChanged[i] = merger.whatChanged();
+            ++i;
          }
+         merger.next();
       }
 
       QString s=" ";
       // Convert tabs
       int outPos = 0;
 
-      QString lineString( pld->pLine, pld->size );
       int lineLength = m_bWordWrap ? wrapLineOffset+wrapLineLength : lineString.length();
+
+      DrawTextOptimizer dto( &p );
 
       for( i=wrapLineOffset; i<lineLength; ++i )
       {
@@ -847,40 +908,39 @@ void DiffTextWindowData::writeLine(
                   QColor lightc = diffBgColor;
                   p.fillRect( xOffset + fontWidth*outPos, yOffset,
                            fontWidth*spaces, fontHeight, lightc );
-                  p.setFont(diffFont);
+                  dto.setFont(diffFont);
                }
 
-               p.setPen( c );
+               dto.setPen( c );
                if ( s[0]==' '  &&  c!=m_pOptionDialog->m_fgColor  &&  charChanged[i]!=0 )
                {
                   if ( m_pOptionDialog->m_bShowWhiteSpaceCharacters && m_pOptionDialog->m_bShowWhiteSpace)
                   {
                      p.fillRect( xOffset + fontWidth*outPos, yOffset+fontAscent,
-                                 fontWidth*spaces-1, fontDescent, c );  // QT3
-                                 //fontWidth*spaces-1, fontDescent, c );  // QT4
+                                 fontWidth*spaces-1, fontDescent, c );
                   }
                }
                else
                {
-                  p.drawText( xOffset + fontWidth*outPos, yOffset + fontAscent, s );
+                  dto.drawText( xOffset + fontWidth*outPos, yOffset + fontAscent, s );
                }
-               p.setFont(normalFont);
+               dto.setFont(normalFont);
             }
             else
             {
                p.fillRect( xOffset + fontWidth*outPos, yOffset,
                            fontWidth*(spaces), fontHeight, m_pDiffTextWindow->palette().highlight() );
 
-               p.setPen( m_pDiffTextWindow->palette().highlightedText().color() );
-               p.drawText( xOffset + fontWidth*outPos, yOffset + fontAscent, s );
+               dto.setPen( m_pDiffTextWindow->palette().highlightedText().color() );
+               dto.drawText( xOffset + fontWidth*outPos, yOffset + fontAscent, s );
 
                m_selection.bSelectionContainsData = true;
             }
          }
 
          outPos += spaces;
-      }
-
+      } // end for
+      dto.end();
       if( m_selection.lineWithin( line ) && m_selection.lineWithin( line+1 ) )
       {
          p.fillRect( xOffset + fontWidth*outPos, yOffset,
@@ -1185,6 +1245,9 @@ int DiffTextWindow::getNofVisibleColumns()
 
 QString DiffTextWindow::getSelection()
 {
+   if ( d->m_pLineData==0 )
+      return QString();
+
    QString selectionString;
 
    int line=0;
@@ -1576,12 +1639,14 @@ public:
    QLabel*       m_pLabel;
    QLabel*       m_pTopLine;
    QWidget*      m_pTopLineWidget;
+   int           m_winIdx;
 };
 
 DiffTextWindowFrame::DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusBar, OptionDialog* pOptionDialog, int winIdx )
    : QWidget( pParent )
 {
    d = new DiffTextWindowFrameData;
+   d->m_winIdx = winIdx;
    setAutoFillBackground(true);
    d->m_pOptionDialog = pOptionDialog;
    d->m_pTopLineWidget = new QWidget(this);
@@ -1683,7 +1748,11 @@ bool DiffTextWindowFrame::eventFilter( QObject* o, QEvent* e )
    if ( e->type()==QEvent::FocusIn || e->type()==QEvent::FocusOut )
    {
       QColor c1 = d->m_pOptionDialog->m_bgColor;
-      QColor c2 = pDTW->d->m_cThis;
+      QColor c2;
+      if      ( d->m_winIdx==1 ) c2 = d->m_pOptionDialog->m_colorA;
+      else if ( d->m_winIdx==2 ) c2 = d->m_pOptionDialog->m_colorB;
+      else if ( d->m_winIdx==3 ) c2 = d->m_pOptionDialog->m_colorC;
+
       QPalette p = d->m_pTopLineWidget->palette();
       if ( e->type()==QEvent::FocusOut )
          std::swap(c1,c2);
@@ -1728,7 +1797,7 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
 {
    QString current = d->m_pFileSelection->text();
 
-   KURL newURL = KFileDialog::getOpenURL( current, 0, this);
+   KUrl newURL = KFileDialog::getOpenUrl( current, 0, this);
    if ( !newURL.isEmpty() )
    {
       DiffTextWindow* pDTW = d->m_pDiffTextWindow;

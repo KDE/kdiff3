@@ -24,6 +24,8 @@
 #include <assert.h>
 #include "common.h"
 #include "fileaccess.h"
+#include "optiondialog.h"
+
 
 class OptionDialog;
 
@@ -273,6 +275,7 @@ public:
    void reset();
 
    QTextCodec* getEncoding() const { return m_pEncoding; }
+   e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
 
 private:
    QTextCodec* detectEncoding( const QString& fileName, QTextCodec* pFallbackCodec );
@@ -283,7 +286,7 @@ private:
 
    struct FileData
    {
-      FileData(){ m_pBuf=0; m_size=0; m_vSize=0; m_bIsText=false; }
+      FileData(){ m_pBuf=0; m_size=0; m_vSize=0; m_bIsText=false; m_eLineEndStyle=eLineEndStyleUndefined; }
       ~FileData(){ reset(); }
       const char* m_pBuf;
       int m_size;
@@ -291,6 +294,7 @@ private:
       QString m_unicodeBuf;
       std::vector<LineData> m_v;
       bool m_bIsText;
+      e_LineEndStyle m_eLineEndStyle;
       bool readFile( const QString& filename );
       bool writeFile( const QString& filename );
       void preprocess(bool bPreserveCR, QTextCodec* pEncoding );
@@ -310,7 +314,6 @@ void calcDiff3LineVector( Diff3LineList& d3ll, Diff3LineVector& d3lv );
 
 void debugLineCheck( Diff3LineList& d3ll, int size, int idx );
 
-class QStatusBar;
 
 
 class Selection
@@ -396,7 +399,17 @@ public:
    void drawText( int x, int y, const QString& s, bool bAdapt=false )
    {
       Qt::LayoutDirection ld = (m_factor==1 || bAdapt == false) ? Qt::LeftToRight : Qt::RightToLeft;
-      QPainter::setLayoutDirection( ld );
+      //QPainter::setLayoutDirection( ld );
+      if ( ld==Qt::RightToLeft ) // Reverse the text
+      {
+         QString s2;
+         for( int i=s.length()-1; i>=0; --i )
+         {
+            s2 += s[i];
+         }
+         QPainter::drawText( m_xOffset-m_fontWidth*s.length() + m_factor*x, y, s2 );
+         return;
+      }
       QPainter::drawText( m_xOffset-m_fontWidth*s.length() + m_factor*x, y, s );
    }
 

@@ -27,7 +27,6 @@ class OptionDialog;
 class QComboBox;
 class QCheckBox;
 class QLineEdit;
-class QLabel;
 
 class OpenDialog : public QDialog
 {

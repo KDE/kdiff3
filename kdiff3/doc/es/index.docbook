@@ -50,7 +50,7 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <copyright>
 <year
->2002-2006</year>
+>2002-2007</year>
 <holder
 >Joachim Eibl</holder>
 </copyright>
@@ -68,9 +68,9 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date
->2006-04-09</date>
+>2007-31-03</date>
 <releaseinfo
->0.9.89</releaseinfo>
+>0.9.92</releaseinfo>
 
 
 <abstract>
@@ -115,7 +115,7 @@ Do NOT change these in the translation. -->
 </itemizedlist>
 </para
 ><para
->Este documento describe la versión 0.9.89 de &kdiff3;. </para>
+>Este documento describe la versión 0.9.92 de &kdiff3;. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -637,6 +637,16 @@ Please at least include KDE, the KDE package it is in, the name
 >Algunas veces el algoritmo sitúa líneas incorrectas unas al lado de otras. O desea comparar un trozo de texto con otro texto que está en una posición completamente diferente en el otro archivo. Para estas situaciones puede indicar a &kdiff3; manualmente que alinee algunas líneas. Marque el texto que quiera alinear con el ratón, como si estuviera copiando y pegando, en la primera vista de diferencia y seleccione «Añadir alineación manual de diferencias» en el menú «Diffview» (acceso rápido de teclado «Ctrl-Y»). Aparecerá una barra naranja en la columna resumen al lado del texto seleccionado. Repita esto para la segunda y (si está disponible) para la tercera vista. &kdiff3; recalculará inmediatamente las diferencias cada vez que haga esto, y alineará las líneas elegidas. Por supuesto, alguna de las líneas que antes coincidían puede que ya no coincidan. </para
 ><para
 >En estos momentos el fusionado no soporta el uso de ayuda de diff manual. </para
+></sect2
+><sect2 id="joinsplitsections"
+><title
+>Secciones de división y unión manual</title
+><para
+>En algunos casos &kdiff3; verá muy pocas o demasiadas secciones diff para fusionar. Si éste es el caso puede unir o dividir las secciones existentes. </para
+><para
+>Añada secciones nuevas seleccionando primero el texto de las líneas situadas junto a las ventanas de entrada (para copiarlo al portapapeles). A continuación elija «Dividir Diff en la selección» en el menú «Fusionar». Las divisiones se añadirán encima de la primera línea bajo el texto seleccionado. Si solo desea añadir una sección, seleccione el texto por el que comienza la sección que desea dividir. </para
+><para
+>Para unir secciones en las ventanas de entrada seleccione varias líneas en las secciones que desea unir (puede unir varias secciones en un solo paso). A continuación elija «Unir las diferencias seleccionadas» en el menú «Fusionar». </para
 ></sect2>
 </sect1>
 
@@ -700,13 +710,13 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Fusión automática de las claves de control de versión y del historial (registro)</title
 ><para
->Many version control systems support special keywords in the file. (e.g. "&#36;Date: 2006-04-21 17:24:21 -0400 (Fri, 21 Apr 2006) &#36;", "&#36;Header&#36;", "&#36;Author: toma &#36;", "&#36;Log&#36;" etc.) During the check-in the version control system (VCS) changes these lines. For instance "&#36;Date: 2006-04-21 17:24:21 -0400 (Fri, 21 Apr 2006) &#36;" will turn into "&#36;Date: 2006-04-21 17:24:21 -0400 (Fri, 21 Apr 2006) &#36;". Since this line will be different in every version of the file, it would require manual interaction during the merge. </para
+>Muchos sistemas de control de versión soportan claves especiales en el archivo (p. ej.: «&#36;Date&#36;$», «&#36;Header&#36;», «&#36;Author&#36;», «&#36;Log&#36;», etc.) Durante la descarga el sistema de control de versiones (VCS) cambia estas líneas. Por ejemplo, «&#36;Date&#36;» se cambiará por «&#36;Date: 2005/03/22 18:45:01 &#36;». Como esta línea será diferente en cada versión del archivo, podría requerir interacción manual durante la fusión. </para
 ><para
 >&kdiff3; ofrece fusionado automático para estos elementos. Para las líneas que coincidan con la opción «Fusionar automáticamente expresión regular» en todos los archivos de entrada de &kdiff3; se elegirá la línea desde B o -si está disponible- desde C (adicionalmente es necesario que las líneas en cuestión si las comparamos con las líneas anteriores no han de tener conflictos). Esta fusión automática también se puede ejecutar de forma inmediata después de iniciar la fusión (active la opción «Ejecutar expresión regular de fusión automática al iniciar la fusión») o posteriormente a través del menú de fusión «Ejecutar expresión regular de fusión automática»). </para
 ><para
 >También está soportada la fusión automática para el historial de control de versión (también llamado «registro»). El historial de fusión automática se puede ejecutar automáticamente cuando se inicie la fusión activando la opción «Resolver automáticamente los conflictos del historial». </para
 ><para
->Usually the version control history begins with a line containing the keyword "$Log$". This must be matched by the "History start regular expression"-option. &kdiff3; detects which subsequent lines are in the history by analysing the leading characters that came before the "$Log$"-keyword. If the same "leading comment" also appears in the following lines, then they are also included in the history. </para
+>Normalmente el historial de control de versión comienza con una línea que contiene la palabra clave «&#36;Log&#36;». Ésta deberá coincidir con la opción «El historial comienza con la expresión regular». &kdiff3; detecta que las siguientes líneas se encuentran en el historial analizando los caracteres importantes que se encuentran delante de la palabra clave «&#36;Log&#36;». Si el mismo «comentario importante» también aparece en las siguientes líneas, también éstas se incluirán en el historial. </para
 ><para
 >Durante cada descarga el VCS escribe una única línea especificando la versión, fecha, e información horaria seguida de líneas con comentarios del usuario. Estas líneas forman una entrada de historial. Esta sección del historial crece cada vez que descarga de forma que las entrada más recientes aparecerán en la parte superior (después de la línea de inicio del historial). </para
 ><para
@@ -720,29 +730,31 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >Debido a que no es sencillo de hacer al primer intento, podrá comprobar y mejorar la expresión regular y la generación de clave en un diálogo dedicado pulsando el botón «Comprobar sus expresiones regulares». </para
 ><para
->Example: Assume a history that looks like this: <screen>
+>Ejemplo: Supongamos que tenemos un historial similar a este: <screen>
 /**************************************************************************
-** HISTORY:    $Log: \toms_merge_main_view\MyApplication\src\complexalgorithm.cpp $
+** HISTORIAL:    &#36;Log: \vista_principal_de_tom\MiAplicación\src\algoritmocomplejo.cpp &#36;
 **
-**     \main\integration_branch_12   2 Apr 2001 10:45:41   tom
-**  Merged branch simon_branch_15.
+**     \main\rama_integración_12   2 Abr 2001 10:45:41   tom
+**  rama fusionada simon_rama_15.
 **
-**     \main\henry_bugfix_branch_7\1   30 Mar 2001 19:22:05   henry
-**  Improved the speed for subroutine convertToMesh().
-**  Fixed crash.
+**     \main\henry_correccionerrores_rama_7\1   30 Mar 2001 19:22:05   henry
+**  mejora la velocidad de la subrutina convertToMesh().
+**  Eliminación de fallo.
 **************************************************************************/
 </screen
-> The history start line matches the regular expression ".*\$Log.*\$.*". Then follow the history entries. </para
+> La línea de comienzo del historial es la que coincida con la expresión regular ".*\&#36;Log.*\&#36;.*". Las siguientes son las entradas del historial. </para
 ><para
->The line with the "$Log$"-keyword begins with two "*" after which follows a space. &kdiff3; uses the first non-white-space string as "leading comment" and assumes that the history ends in the first line without this leading comment. In this example the last line ends with a string that also starts with two "*", but instead of a space character more "*" follow. Hence this line ends the history. </para
+>La línea con «&#36;Log&#36;» -la palabra clave comienza con dos «*» seguidos de un espacio. &kdiff3; utiliza la cadena con el primer espacio no vacío como «comentario importante» y asume que el historial finaliza en la primera línea sin este comentario importante. En este ejemplo la última línea finaliza con una cadena que también comienza con dos «*», pero en lugar de un caracter de espacio le siguen más «*». Por tanto, esta línea finalizará el historial. </para
 ><para
->Sino es necesaria la ordenación del historial entonces la entrada del historial comenzará con una línea de expresión regular como esta (esta línea se divide en dos porque sino no se puede ajustar) <screen>
+>Sino es necesaria la ordenación del historial entonces la entrada del historial comenzará con una línea de expresión regular como ésta (esta línea se divide en dos porque sino no se puede ajustar) <screen>
 \s*\\main\\\S+\s+[0-9]+ (Ene|Feb|Mar|Abr|May|Jun|Jul|Ago|Sep|Oct|Nov|Dic)
  [0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]\s+.*
 </screen
 > Para obtener detalles sobre las expresiones regulares por favor, consulte la <ulink url="http://doc.trolltech.com/3.3/qregexp.html#details"
 >documentación de las expresiones regulares de Trolltech</ulink
->. Tenga en cuenta que "\s" (con la «s» minúscula) coincidirá con cualquier espacio y "\S" (con «S» mayúscula) coincidirá con lo que no sean espacios en blanco. En nuestro ejemplo la entrada del historial deberá contener primero la versión de información de la expresión regular "\\main\\\S+", la fecha formada por el día «[0-9]+», més «(Ene|Feb|Mar|Abr|May|Jun|Jul|Ago|Sep|Oct|Nov|Dic)» y año «[0-9][0-9][0-9][0-9]», la hora «[0-9][0-9]:[0-9][0-9]:[0-9][0-9]» y finalmente el nombre de registro del desarrollador «.*». Vea que el comentario importante (en el ejemplo «**») lo eliminará KDiff3 antes de buscar la coincidencia, de ahí que la expresión regular comience con con una expresión regular para ninguno o más espacios en blanco «\s*». </para
+>. Tenga en cuenta que «\s» (con la «s» minúscula) coincidirá con cualquier espacio y «\S» (con «S» mayúscula) coincidirá con lo que no sean espacios en blanco. En nuestro ejemplo la entrada del historial deberá contener primero la versión de información de la expresión regular "\\main\\\S+", la fecha formada por el día «[0-9]+», més «(Ene|Feb|Mar|Abr|May|Jun|Jul|Ago|Sep|Oct|Nov|Dic)» y año «[0-9][0-9][0-9][0-9]», la hora «[0-9][0-9]:[0-9][0-9]:[0-9][0-9]» y finalmente el nombre de registro del desarrollador «.*». </para
+><para
+>Observe que el «comentario importante» (en el ejemplo «**») lo eliminará &kdiff3; antes de buscar la coincidencia, de ahí que la expresión regular comience con con una expresión regular para ninguno o más espacios en blanco «.*». Puesto que los caracteres de comentario puede ser diferentes en cada archivo (por ejemplo, C/C++ utilizan caracteres de comentarios diferentes a los que utiliza Perl script) &kdiff3; tiene en cuenta los caracteres de los comentarios y no debería especificarlos en la expresión regular. </para
 ><para
 >Si necesita un historial ordenado, se calculará la clave de ordenación. Para esta las partes relevantes en la expresión regular se deben agrupar entre paréntesis (los paréntesis adicionales puede mantenerse aunque desactive la ordenación del historial). <screen>
 (Ene|Feb|Mar|Abr|May|Jun|Jul|Ago|Sep|Oct|Nov|Dic)
@@ -755,8 +767,8 @@ Please at least include KDE, the KDE package it is in, the name
 </screen>
 </para
 ><para
->Para obtener más detalles consulte también <link linkend="diffmergeoptions"
->Configuración de Diff y Merge</link
+>Para obtener más detalles consulte también <link linkend="mergeoptions"
+>Preferencias de fusionado</link
 >. </para>
 </sect2>
 </sect1>
@@ -1120,9 +1132,9 @@ Please at least include KDE, the KDE package it is in, the name
 </variablelist>
 </sect2>
 
-<sect2 id="diffmergeoptions"
+<sect2 id="diffoptions"
 ><title
->Preferencias de Diff y fusión</title>
+>Preferencias de fusionado</title>
 <para
 >Cuando se comparan archivos, &kdiff3; primero intenta hacer coincidir las líneas que sean iguales en todos los archivos de entrada. Solo durante este paso se ignorarán los espacios en blanco. El segundo paso compara cada línea. En este paso los espacios en blanco no se ignorarán. Los espacios en blanco tampoco se ignorarán durante la fusión. </para>
 
@@ -1201,6 +1213,13 @@ Please at least include KDE, the KDE package it is in, the name
 >Intenta encontrar más a fondo una delta más pequeña (de forma predeterminada estará activada). Debería ser efectivo para archivos grandes y complicados. Y lento para archivos muy grandes. </para
 ></listitem
 ></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="mergeoptions"
+><title
+>Preferencias de fusionado</title>
+<variablelist>
    <varlistentry
 ><term
 ><emphasis
@@ -1250,7 +1269,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></term
 ><listitem
 ><para
->Regular expression for the start of the merge history entry. Usually this line contains the "$Log$"-keyword. Default value: ".*\$Log.*\$.*" </para
+>Expresión regular para el inicio de la entrada del historial de fusionado. Normalmente esta línea contiene la palabra clave «&#36;Log&#36;». El valor predeterminado es «.*\&#36;Log.*\&#36;.*». </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1295,6 +1314,16 @@ Please at least include KDE, the KDE package it is in, the name
 ><listitem
 ><para
 >Si está activado &kdiff3; ejecuta automáticamente el fusionado del historial utilizando las opciones antes mencionadas cuando se inicia una fusión. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Número máximo  de entradas en el historial:</emphasis
+></term
+><listitem
+><para
+>&kdiff3; corta la lista del historial después del número especificado de entradas. Utilice -1 para evitar el corte (el valor predeterminado es -1). </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1999,7 +2028,7 @@ Please at least include KDE, the KDE package it is in, the name
 ><para
 >De forma predeterminada los directorios están contraídos. Puede expandirlos y contraerlos pulsando en «+»/«-», con una doble pulsación, o utilizando las teclas Flecha izquierda o Flecha derecha. El menú «Directorio» también contiene dos acciones «Plegar todos los subdirectorios» y «Desplegar todos los subdirectorios» con los que podrá contraer y expandir todos los directorios de una vez. </para
 ><para
->Si hace una doble pulsación sobre un elemento de fichero comenzará la comparación y aparecerá la ventana de diferencias de archivos. </para>
+>Si hace una doble pulsación sobre un elemento de archivo comenzará la comparación y aparecerá la ventana de diferencias de archivos. </para>
 <para
 >La imagen de la columna nombre reflejará el tipo de archivo en el primer directorio («A»). Puede ser uno de estos: </para>
 <itemizedlist>
@@ -2819,16 +2848,16 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >&kdiff3; - Herramienta de comparación y fusionado de archivos y directorios. </para>
 <para
->Program copyright 2002-2005 Joachim Eibl <email
->joachim.eibl at gmx.de</email
-> </para>
+>Derechos de autor del programa. 2002-2007. Joachim Eibl <email
+>joachim.eibl en gmx.de</email
+>. </para>
 <para
 >Algunas buenas ideas e informes de fallos me llegaron de colegas y de mucha gente a lo largo de la red ¡Gracias! </para>
 
 <para
->Documentation Copyright &copy; 2002-2005 Joachim Eibl <email
->joachim.eibl at gmx.de</email
-> </para>
+>Derechos de autor de la documentación. &copy; 2002-2007. Joachim Eibl <email
+>joachim.eibl en gmx.de</email
+>. </para>
 
 <para
 >Traducido por Santiago Fernández Sancho <email

@@ -1,6 +1,7 @@
 TEMPLATE = app
 # When unresolved items remain during linking: Try adding "shared" in the CONFIG.
-CONFIG  += qt warn_on thread debug 
+CONFIG  += qt warn_on thread precompile_header
+PRECOMPILED_HEADER = stable.h
 HEADERS  = version.h                     \
            diff.h                        \
            difftextwindow.h              \
@@ -31,6 +32,7 @@ SOURCES  = main.cpp                      \
            gnudiff_io.cpp                \
            gnudiff_xmalloc.cpp           \
            common.cpp                    \
+           stable.cpp                    \
            kreplacements/kreplacements.cpp \
            kreplacements/ShellContextMenu.cpp
 TARGET   = kdiff3
@@ -44,9 +46,15 @@ win32 {
 
    QMAKE_CXXFLAGS_DEBUG  += -DQT_NO_ASCII_CAST
    QMAKE_CXXFLAGS_RELEASE  += -DNDEBUG -DQT_NO_ASCII_CAST
-   QMAKE_LFLAGS += user32.lib shell32.lib
    RC_FILE = kdiff3win.rc
+   win32-g++ {
+           QMAKE_LFLAGS += -luser32 -lshell32
+   } else {
+           QMAKE_LFLAGS += user32.lib shell32.lib
+   }
 }
+
+
 unix {
   documentation.path = /usr/local/share/doc/kdiff3
   documentation.files = ../doc/*

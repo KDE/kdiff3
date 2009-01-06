@@ -233,7 +233,7 @@ void ValueMap::writeEntry(const QString& k, const QStringList& v, char separator
 }
 
 
-QFont ValueMap::readFontEntry(const QString& k, QFont* defaultVal )
+QFont ValueMap::readFontEntry(const QString& k, const QFont* defaultVal )
 {
    QFont f = *defaultVal;
    std::map<QString,QString>::iterator i = m_map.find( k );
@@ -248,7 +248,7 @@ QFont ValueMap::readFontEntry(const QString& k, QFont* defaultVal )
    return f;
 }
 
-QColor ValueMap::readColorEntry(const QString& k, QColor* defaultVal )
+QColor ValueMap::readColorEntry(const QString& k, const QColor* defaultVal )
 {
    QColor c= *defaultVal;
    std::map<QString,QString>::iterator i = m_map.find( k );
@@ -261,7 +261,7 @@ QColor ValueMap::readColorEntry(const QString& k, QColor* defaultVal )
    return c;
 }
 
-QSize ValueMap::readSizeEntry(const QString& k, QSize* defaultVal )
+QSize ValueMap::readSizeEntry(const QString& k, const QSize* defaultVal )
 {
    QSize size = defaultVal ? *defaultVal : QSize(600,400);
    std::map<QString,QString>::iterator i = m_map.find( k );
@@ -275,7 +275,7 @@ QSize ValueMap::readSizeEntry(const QString& k, QSize* defaultVal )
    return size;
 }
 
-QPoint ValueMap::readPointEntry(const QString& k, QPoint* defaultVal)
+QPoint ValueMap::readPointEntry(const QString& k, const QPoint* defaultVal)
 {
    QPoint point = defaultVal ? *defaultVal : QPoint(0,0);
    std::map<QString,QString>::iterator i = m_map.find( k );
@@ -314,7 +314,7 @@ int ValueMap::readNumEntry(const QString& k, int iDefault )
    return ival;
 }
 
-QString ValueMap::readEntry(const QString& k, const QString& sDefault )
+QString ValueMap::readStringEntry(const QString& k, const QString& sDefault )
 {
    QString sval = sDefault;
    std::map<QString,QString>::iterator i = m_map.find( k );
@@ -339,3 +339,13 @@ QStringList ValueMap::readListEntry(const QString& k, const QStringList& default
    else
       return defaultVal;
 }
+
+QString     ValueMap::readEntry (const QString& s, const QString& defaultVal ) { return readStringEntry(s, defaultVal); }
+QString     ValueMap::readEntry (const QString& s, const char* defaultVal ) { return readStringEntry(s, QString::fromLatin1(defaultVal) ); }
+QFont       ValueMap::readEntry (const QString& s, const QFont& defaultVal ){ return readFontEntry(s,&defaultVal); }
+QColor      ValueMap::readEntry(const QString& s, const QColor defaultVal ){ return readColorEntry(s,&defaultVal); }
+QSize       ValueMap::readEntry (const QString& s, const QSize defaultVal ){ return readSizeEntry(s,&defaultVal); }
+QPoint      ValueMap::readEntry(const QString& s, const QPoint defaultVal ){ return readPointEntry(s,&defaultVal); }
+bool        ValueMap::readEntry (const QString& s, bool bDefault ){ return readBoolEntry(s,bDefault); }
+int         ValueMap::readEntry  (const QString& s, int iDefault ){ return readNumEntry(s,iDefault); }
+QStringList ValueMap::readEntry (const QString& s, const QStringList& defaultVal, char separator ){ return readListEntry(s,defaultVal,separator); }

@@ -17,6 +17,7 @@
 
 #ifndef KREPLACEMENTS_H
 #define KREPLACEMENTS_H
+#pragma once
 
 #include "common.h"
 
@@ -28,8 +29,12 @@
 #include <QToolBar>
 #include <QProgressBar>
 #include <QPrinter>
+//Added by qt3to4:
+#include <QLabel>
+#include <QPixmap>
+#include <QFrame>
+#include <QPaintEvent>
 
-class Q3CString;
 class QTabWidget;
 class QLabel;
 
@@ -39,17 +44,47 @@ class QLabel;
 QString getTranslationDir();
 
 class KMainWindow;
+class KAction;
+class KIcon;
 
-class KURL
+typedef QString KGuiItem;
+
+inline QString i18n( const char* x ){ return QObject::tr(x); }
+
+template <typename A1>
+inline QString i18n (const char *text, const A1 &a1)
+{ return QObject::tr(text).arg(a1); }
+
+template <typename A1, typename A2>
+inline QString i18n (const char *text, const A1 &a1, const A2 &a2)
+{ return QObject::tr(text).arg(a1).arg(a2); }
+
+template <typename A1, typename A2, typename A3>
+inline QString i18n (const char *text, const A1 &a1, const A2 &a2, const A3 &a3)
+{ return QObject::tr(text).arg(a1).arg(a2).arg(a3); }
+
+template <typename A1, typename A2, typename A3, typename A4>
+inline QString i18n (const char *text, const A1 &a1, const A2 &a2, const A3 &a3, const A4 &a4)
+{ return QObject::tr(text).arg(a1).arg(a2).arg(a3).arg(a4); }
+
+
+typedef QString KLocalizedString;
+#define ki18n(x) QObject::tr(x)
+#define I18N_NOOP(x) x
+#define RESTORE(x)
+#define _UNLOAD(x)
+
+class KUrl
 {
 public:
-   KURL(){}
-   KURL(const QString& s){ m_s = s; }
-   static KURL fromPathOrURL( const QString& s ){ return KURL(s); }
+   KUrl(){}
+   KUrl(const QString& s){ m_s = s; }
+   static KUrl fromPathOrUrl( const QString& s ){ return KUrl(s); }
    QString url() const { return m_s; }
    bool isEmpty() const { return m_s.isEmpty(); }
-   QString prettyURL() const { return m_s; }
+   QString prettyUrl() const { return m_s; }
    bool isLocalFile() const { return true; }
+   bool isRelative() const { return true; }
    bool isValid() const { return true; }
    QString path() const { return m_s; }
    void setPath( const QString& s ){ m_s=s; }
@@ -57,6 +92,16 @@ public:
    void addPath( const QString& s ){ m_s += "/" + s; }
 private:
    QString m_s;
+};
+
+typedef QString KGuiItem;
+
+class KStandardGuiItem
+{
+public:
+   static QString cont() { return i18n("Continue"); }
+   static QString cancel() { return i18n("Cancel"); }
+   static QString quit() { return i18n("Quit"); }
 };
 
 class KMessageBox
@@ -76,54 +121,69 @@ public:
    enum {Cancel=-1, No=0, Yes=1, Continue=1};
 };
 
-#define i18n(x) QObject::tr(x)
-#define I18N_NOOP(x) x
-#define RESTORE(x)
-#define _UNLOAD(x)
 
-typedef QMenu KPopupMenu;
 
-class KDialogBase : public QDialog
+typedef QMenu KMenu;
+
+class KPageWidgetItem : public QObject
+{
+public:
+   QWidget* m_pWidget;
+   QString m_title;
+
+   KPageWidgetItem( QWidget* pPage, const QString& title )
+   {
+      m_pWidget = pPage;
+      m_title = title;
+   }
+   void setHeader( const QString& ) {}
+   void setIcon( const KIcon& ) {}
+};
+
+
+class KPageDialog : public QDialog
 {
    Q_OBJECT
    QTabWidget* m_pTabWidget;
 public:
-   KDialogBase( int, const QString& caption, int, int, QWidget* parent, const char* name,
-     bool /*modal*/, bool );
-   ~KDialogBase();
+   KPageDialog( QWidget* parent );
+   ~KPageDialog();
 
-   void incInitialSize ( const QSize& );
+   void incrementInitialSize ( const QSize& );
    void setHelp(const QString& helpfilename, const QString& );
    enum {IconList, Help, Default, Apply, Ok, Cancel };
 
    int BarIcon(const QString& iconName, int );
 
+   void addPage( KPageWidgetItem* );
    QFrame* addPage(  const QString& name, const QString& info, int );
    int spacingHint();
 
-   virtual void accept();
+   enum FaceType { List };
+   void setFaceType(FaceType){}
+   void setButtons(int){}
+   void setDefaultButton(int){}
+   void showButtonSeparator(bool){}
+private slots:
+   void slotHelpClicked();
 signals:
    void applyClicked();
-
-protected slots:
-    virtual void slotOk( void );
-    virtual void slotApply( void );
-    virtual void slotHelp( void );
-    virtual void slotCancel( void );
-    virtual void slotDefault( void );
+   void okClicked();
+   void helpClicked();
+   void defaultClicked();
 };
 
 class KFileDialog //: public QFileDialog
 {
 public:
-   static KURL getSaveURL( const QString &startDir=QString::null,
+   static KUrl getSaveUrl( const QString &startDir=QString::null,
                            const QString &filter=QString::null,
                            QWidget *parent=0, const QString &caption=QString::null);
-   static KURL getOpenURL( const QString &  startDir = QString::null,
+   static KUrl getOpenUrl( const QString &  startDir = QString::null,
                            const QString &  filter = QString::null,
                            QWidget *  parent = 0,
                            const QString &  caption = QString::null );
-   static KURL getExistingURL( const QString &  startDir = QString::null,
+   static KUrl getExistingDirectoryUrl( const QString &  startDir = QString::null,
                                QWidget *  parent = 0,
                                const QString &  caption = QString::null );
    static QString getSaveFileName (const QString &startDir=QString::null, 
@@ -151,14 +211,24 @@ class KActionCollection
 public:
    KMainWindow* m_pMainWindow;
    KActionCollection( KMainWindow* p){ m_pMainWindow=p; }
+   void addAction(const QString& name, QAction* );
+   KAction* addAction(const QString& name );
 };
 
-class KKeyDialog
+typedef QKeySequence KShortcut;
+
+class KShortcutsEditor
 {
 public:
-   static void configure(void*, QWidget*){}
+   enum { LetterShortcutsAllowed };
+};
+
+class KShortcutsDialog
+{
+public:
+   static void configure(KActionCollection*){}
    static void configureKeys(KActionCollection*, const QString&){}
-   static void configure(KActionCollection*, const QString&){}
+   static void configure(KActionCollection*, int, QWidget*){}
 };
 
 namespace KParts
@@ -189,7 +259,7 @@ public:
 
    KToolBar*  m_pToolBar;
 
-   KMainWindow( QWidget* parent, const char* name );
+   KMainWindow( QWidget* parent );
    KToolBar* toolBar(const QString& s = QString::null);
    KActionCollection* actionCollection();
    void createGUI();
@@ -197,36 +267,58 @@ public:
 
    QList<KMainWindow*>* memberList;
 public slots:
-   void slotHelp();
+   void appHelpActivated();
    void slotAbout();
 };
 
-class KConfig : public ValueMap
+class KConfigGroupData : public ValueMap, public QSharedData
 {
-   QString m_fileName;
 public:
-   KConfig();
-   ~KConfig();
+   QString m_fileName;
+   ~KConfigGroupData();
+};
+
+class KConfigGroup
+{
+private:
+   QExplicitlySharedDataPointer<KConfigGroupData> d;
+public:
+   KConfigGroup(const KConfigGroup*, const QString& ){}
+   KConfigGroup();
+   ~KConfigGroup();
    void readConfigFile(const QString& configFileName);
 
    void setGroup(const QString&);
+   KConfigGroup& group( const QString& groupName );
+
+   template <class T>  void writeEntry(const QString& s, const T& v){ d->writeEntry(s,v); }
+   void writeEntry(const QString& s, const QStringList& v, char separator ){ d->writeEntry(s,v,separator); }
+   void writeEntry(const QString& s, const char* v){ d->writeEntry(s,v); }
+
+   template <class T>  T readEntry (const QString& s, const T& defaultVal ){ return d->readEntry(s,defaultVal); }
+   QString     readEntry (const QString& s, const char* defaultVal ){ return d->readEntry(s,defaultVal); }
+   QStringList readEntry (const QString& s, const QStringList& defaultVal, char separator='|' ){ return d->readEntry(s,defaultVal,separator); }
 };
+
+typedef KConfigGroup* KSharedConfigPtr;
 
 class KAction : public QAction
 {
    Q_OBJECT
 public:
+   KAction( KActionCollection* actionCollection );
+   KAction(const QString& text, KActionCollection* actionCollection );
    KAction(const QString& text, const QIcon& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bToggle=false, bool bMenu=true);
    KAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bToggle=false, bool bMenu=true);
-   void init(QObject* receiver, const char* slot, KActionCollection* actionCollection, 
-        const char* name, bool bToggle, bool bMenu);
    void setStatusText(const QString&);
    void plug(QMenu*);
+   void setIcon( const QIcon& icon );
 };
 
 class KToggleAction : public KAction
 {
 public:
+   KToggleAction(KActionCollection* actionCollection);
    KToggleAction(const QString& text, const QIcon& icon, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu=true);
    KToggleAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu=true);
    KToggleAction(const QString& text, const QIcon& icon, int accel, KActionCollection* actionCollection, const char* name, bool bMenu=true);
@@ -234,7 +326,7 @@ public:
 };
 
 
-class KStdAction
+class KStandardAction
 {
 public:
    static KAction* open( QWidget* parent, const char* slot, KActionCollection* );
@@ -261,6 +353,7 @@ class KIcon
 {
 public:
    enum {SizeMedium,Small};
+   KIcon( const QString& ) {}
 };
 
 class KFontChooser : public QWidget
@@ -271,7 +364,7 @@ class KFontChooser : public QWidget
    QLabel* m_pLabel;
    QWidget* m_pParent;
 public:
-   KFontChooser( QWidget* pParent, const QString& name, bool, const QStringList&, bool, int );
+   KFontChooser( QWidget* pParent );
    QFont font();
    void setFont( const QFont&, bool );
 private slots:
@@ -307,11 +400,10 @@ public:
    QString findResource(const QString& resource, const QString& appName);
 };   
 
-struct KCmdLineOptions
+class KCmdLineOptions
 {
-   const char* name;
-   const char* description;
-   int def;
+public:
+   KCmdLineOptions& add( const QString& name, const QString& description = 0 );
 };
 
 #define KCmdLineLastOption {0,0,0}
@@ -319,13 +411,19 @@ struct KCmdLineOptions
 class KAboutData
 {
 public:
-   KAboutData( const QString& name, const QString& appName, const QString& version,
-      const QString& description, int licence,
-      const QString& copyright, int w, const QString& homepage, const QString& email);
-   KAboutData( const QString& name, const QString& appName, const QString& version );
-   void addAuthor(const char* name=0, const char* task=0, const char* email=0, const char* weblink=0);
-   void addCredit(const char* name=0, const char* task=0, const char* email=0, const char* weblink=0);
-   enum { License_GPL };
+   enum LicenseKey { License_GPL, License_GPL_V2, License_Unknown };
+
+   //KAboutData( const QString& name, const QString& appName, const QString& version,
+   //   const QString& description, int licence,
+   //   const QString& copyright, int w, const QString& homepage, const QString& email);
+
+   KAboutData (const QByteArray &appName, const QByteArray &catalogName, const KLocalizedString &programName, 
+      const QByteArray &version, const KLocalizedString &shortDescription, LicenseKey licenseType, 
+      const KLocalizedString &copyrightStatement, const KLocalizedString &text, 
+      const QByteArray &homePageAddress, const QByteArray &bugsEmailAddress);
+   KAboutData( const QString& name, const QString& appName, const QString& appName2, const QString& version );
+   void addAuthor(const QString& name, const QString& task=0, const QString& email=0, const QString& weblink=0);
+   void addCredit(const QString& name, const QString& task=0, const QString& email=0, const QString& weblink=0);
    
    struct AboutDataEntry
    {
@@ -349,32 +447,34 @@ class KCmdLineArgs
 public:
    static KCmdLineArgs* parsedArgs();
    static void init( int argc, char**argv, KAboutData* );
-   static void addCmdLineOptions( KCmdLineOptions* options ); // Add our own options.
+   static void addCmdLineOptions( const KCmdLineOptions& options ); // Add our own options.
 
    int count();
    QString arg(int);
-   KURL url(int i){ return KURL(arg(i)); }
+   KUrl url(int i){ return KUrl(arg(i)); }
    void clear();
    QString getOption(const QString&);
-   QCStringList getOptionList( const QString& );
+   QStringList getOptionList( const QString& );
    bool isSet(const QString&);
 };
 
 class KIconLoader
 {
 public:
-   QPixmap loadIcon(const QString& name, int);
+   enum { Small, NoGroup };
+   QPixmap loadIcon(const QString& name, int, int =0);
+   static KIconLoader* global() { return 0; }
 };
 
 class KApplication : public QApplication
 {
-   KConfig m_config;
+   KConfigGroup m_config;
    KIconLoader m_iconLoader;
 public:
    KApplication();
    static KApplication* kApplication();
    KIconLoader* iconLoader();
-   KConfig* config();
+   KConfigGroup* config();
    bool isRestored();
 };
 
@@ -394,48 +494,62 @@ public:
    KLibFactory* factory(const QString&);
 };
 
-class KEditToolbar : public QDialog
+class KEditToolBar : public QDialog
 {
 public:
-   KEditToolbar( int ){}
+   KEditToolBar( int ){}
 };
 
 class KGlobal
 {
 public:
-   static KConfig* config() { return 0; }
+   static KConfigGroup* config() { return 0; }
+};
+
+class KJobUiDelegate
+{
+public:
+   void showErrorMessage() {}
+};
+
+class KJob : public QObject
+{
+public:
+   bool error() {return false;}
+   enum KillVerbosity { Quietly };
+   bool kill( KillVerbosity ){return false;}
+   KJobUiDelegate* uiDelegate() {return 0;}
 };
 
 namespace KIO
 {
+   enum { Overwrite, DefaultFlags, Resume, HideProgressInfo, NoReload };
    enum UDSEntry {};
    typedef QList<UDSEntry> UDSEntryList;
-   class Job : public QObject
-   {
-   public:
-      void kill(bool){}
-      bool error() {return false;}
-      void showErrorDialog( QWidget* ) {}
+   class Job : public KJob
+   {   
    };
-   class SimpleJob : public Job {};
-   SimpleJob* mkdir( KURL );
-   SimpleJob* rmdir( KURL );
-   SimpleJob* file_delete( KURL, bool );
-   class FileCopyJob : public Job {};
-   FileCopyJob* file_move(  KURL, KURL, int, bool, bool, bool );
-   FileCopyJob* file_copy(  KURL, KURL, int, bool, bool, bool );
-   class CopyJob : public Job {};
-   CopyJob* link( KURL, KURL, bool );
-   class ListJob : public Job {};
-   ListJob* listRecursive( KURL, bool, bool );
-   ListJob* listDir( KURL, bool, bool );
-   class StatJob : public Job {
-      public: UDSEntry statResult(){ return (UDSEntry)0; }
+   class SimpleJob : public KJob {};
+   SimpleJob* mkdir( KUrl );
+   SimpleJob* rmdir( KUrl );
+   SimpleJob* file_delete( KUrl, int );
+   class FileCopyJob : public KJob {};
+   FileCopyJob* file_move(  KUrl, KUrl, int, int );
+   FileCopyJob* file_copy(  KUrl, KUrl, int, int );
+   class CopyJob : public KJob {};
+   CopyJob* link( KUrl, KUrl, bool );
+   class ListJob : public KJob {};
+   ListJob* listRecursive( KUrl, bool, bool );
+   ListJob* listDir( KUrl, bool, bool );
+   class StatJob : public KJob {
+      public: 
+         enum {SourceSide,DestinationSide};
+         UDSEntry statResult(){ return (UDSEntry)0; }
    };
-   StatJob* stat( KURL, bool, int, bool );
-   class TransferJob : public Job {};
-   TransferJob* get( KURL, bool, bool );
-   TransferJob* put( KURL, int, bool, bool, bool );
+   StatJob* stat( KUrl, bool, int, int );
+   class TransferJob : public KJob {};
+   TransferJob* get( KUrl, int );
+   TransferJob* put( KUrl, int, int );
 };
 
 typedef QProgressBar KProgress;
@@ -446,16 +560,23 @@ public:
    KInstance(KAboutData*){}
 };
 
+class KComponentData : public QObject
+{
+public:
+   KComponentData(KAboutData*){}
+   KConfigGroup* config() {return 0;}
+};
+
 namespace KParts
 {
    class MainWindow : public KMainWindow
    {
    public:
-      MainWindow( QWidget* parent, const char* name ) : KMainWindow(parent,name) {}
+      MainWindow( QWidget* parent=0 ) : KMainWindow(parent) {}
       void setXMLFile(const QString&){}
       void setAutoSaveSettings(){}
-      void saveMainWindowSettings(KConfig*){}
-      void applyMainWindowSettings(KConfig*){}
+      void saveMainWindowSettings(KConfigGroup&){}
+      void applyMainWindowSettings(KConfigGroup&){}
       int factory(){return 0;}
    };
 
@@ -476,14 +597,16 @@ namespace KParts
    public:
    ReadOnlyPart(){}
    ReadOnlyPart(QObject*,const QString&){}
-   void setInstance( KInstance* ){}
+   QString localFilePath() {return QString(); }
+   void setComponentData(const KComponentData&){} // actually member of PartBase
+   KComponentData& componentData() { return *(KComponentData*)0;}
    QString m_file;
    };
 
    class ReadWritePart : public ReadOnlyPart
    {
    public:
-   ReadWritePart(QObject*,const Q3CString&){}
+   ReadWritePart(QObject*){}
    void setReadWrite(bool){}
    };
 
@@ -491,9 +614,9 @@ namespace KParts
    {
       Q_OBJECT
    public:
-   virtual KParts::Part* createPartObject( QWidget *parentWidget, const char *widgetName,
-                                            QObject *parent, const char *name,
-                                            const char *classname, const QStringList &args )=0;
+   virtual KParts::Part* createPartObject( QWidget* /*parentWidget*/, const char * /*widgetName*/,
+                                            QObject* /*parent*/, const char * /*name*/,
+                                            const char* /*classname*/, const QStringList& /*args*/ ){return 0;}
    };
 };
 #endif

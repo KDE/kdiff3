@@ -26,6 +26,7 @@
 #include <qtextstream.h>
 #include <QTranslator>
 #include <QLocale>
+#include <QFont>
 #include <vector>
 
 #ifdef KREPLACEMENTS_H
@@ -33,83 +34,80 @@
 #endif
 #include "common.h"
 
-static const char *description =
-   I18N_NOOP("Tool for Comparison and Merge of Files and Directories");
 
-static KCmdLineOptions options[] =
-{
-  { "m", 0, 0 },
-  { "merge", I18N_NOOP("Merge the input."), 0 },
-  { "b", 0, 0 },
-  { "base file", I18N_NOOP("Explicit base file. For compatibility with certain tools."), 0 },
-  { "o", 0, 0 },
-  { "output file", I18N_NOOP("Output file. Implies -m. E.g.: -o newfile.txt"), 0 },
-  { "out file",    I18N_NOOP("Output file, again. (For compatibility with certain tools.)"), 0 },
-  { "auto",        I18N_NOOP("No GUI if all conflicts are auto-solvable. (Needs -o file)"), 0 },
-  { "qall",        I18N_NOOP("Don't solve conflicts automatically. (For compatibility...)"), 0 },
-  { "L1 alias1",   I18N_NOOP("Visible name replacement for input file 1 (base)."), 0 },
-  { "L2 alias2",   I18N_NOOP("Visible name replacement for input file 2."), 0 },
-  { "L3 alias3",   I18N_NOOP("Visible name replacement for input file 3."), 0 },
-  { "L", 0, 0 },
-  { "fname alias", I18N_NOOP("Alternative visible name replacement. Supply this once for every input."), 0 },
-  { "cs string",   I18N_NOOP("Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\""), 0 },
-  { "confighelp",  I18N_NOOP("Show list of config settings and current values."), 0 },
-  { "config file", I18N_NOOP("Use a different config file."), 0 }
-};
-static KCmdLineOptions options2[] =
-{
-  { "+[File1]", I18N_NOOP("file1 to open (base, if not specified via --base)"), 0 },
-  { "+[File2]", I18N_NOOP("file2 to open"), 0 },
-  { "+[File3]", I18N_NOOP("file3 to open"), 0 }
-};
+// static KCmdLineOptions options[] =
+// {
+//   { "m", 0, 0 },
+//   { "merge", I18N_NOOP("Merge the input."), 0 },
+//   { "b", 0, 0 },
+//   { "base file", I18N_NOOP("Explicit base file. For compatibility with certain tools."), 0 },
+//   { "o", 0, 0 },
+//   { "output file", I18N_NOOP("Output file. Implies -m. E.g.: -o newfile.txt"), 0 },
+//   { "out file",    I18N_NOOP("Output file, again. (For compatibility with certain tools.)"), 0 },
+//   { "auto",        I18N_NOOP("No GUI if all conflicts are auto-solvable. (Needs -o file)"), 0 },
+//   { "qall",        I18N_NOOP("Don't solve conflicts automatically. (For compatibility...)"), 0 },
+//   { "L1 alias1",   I18N_NOOP("Visible name replacement for input file 1 (base)."), 0 },
+//   { "L2 alias2",   I18N_NOOP("Visible name replacement for input file 2."), 0 },
+//   { "L3 alias3",   I18N_NOOP("Visible name replacement for input file 3."), 0 },
+//   { "L", 0, 0 },
+//   { "fname alias", I18N_NOOP("Alternative visible name replacement. Supply this once for every input."), 0 },
+//   { "cs string",   I18N_NOOP("Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\""), 0 },
+//   { "confighelp",  I18N_NOOP("Show list of config settings and current values."), 0 },
+//   { "config file", I18N_NOOP("Use a different config file."), 0 }
+// };
+// static KCmdLineOptions options2[] =
+// {
+//   { "+[File1]", I18N_NOOP("file1 to open (base, if not specified via --base)"), 0 },
+//   { "+[File2]", I18N_NOOP("file2 to open"), 0 },
+//   { "+[File3]", I18N_NOOP("file3 to open"), 0 }
+// };
+// 
 
-
-void initialiseCmdLineArgs(std::vector<KCmdLineOptions>& vOptions, QStringList& ignorableOptions)
-{
-   vOptions.insert( vOptions.end(), options, (KCmdLineOptions*)((char*)options+sizeof(options)));
-   QString configFileName = KStandardDirs().findResource("config","kdiff3rc");
-   QFile configFile( configFileName );
-   if ( configFile.open( QIODevice::ReadOnly ) )
-   {
-      QTextStream ts( &configFile );
-      while(!ts.atEnd())
-      {
-         QString line = ts.readLine();
-         if ( line.startsWith("IgnorableCmdLineOptions=") )
-         {
-            int pos = line.indexOf('=');
-            if (pos>=0)
-            {
-               QString s = line.mid(pos+1);
-               QStringList sl = s.split( '|' );
-               if (!sl.isEmpty())
-               {
-                  ignorableOptions = sl.front().split( ';' );
-                  for (QStringList::iterator i=ignorableOptions.begin(); i!=ignorableOptions.end(); ++i)
-                  {
-                     KCmdLineOptions ignoreOption;
-                     (*i).remove('-');
-                     if (!(*i).isEmpty())
-                     {
-                        ignoreOption.name = (new QByteArray( (*i).toLatin1() ))->constData();
-                        ignoreOption.description = I18N_NOOP("Ignored. (User defined.)");
-                        ignoreOption.def = 0;
-                        vOptions.push_back(ignoreOption);
-                     }
-                  }
-               }
-            }
-            break;
-         }
-      }
-   }
-   vOptions.insert(vOptions.end(),options2,(KCmdLineOptions*)((char*)options2+sizeof(options2)));
-
-   KCmdLineOptions last = KCmdLineLastOption;
-   vOptions.push_back(last);
-   KCmdLineArgs::addCmdLineOptions( &vOptions[0] ); // Add our own options.
-}
-
+// void initialiseCmdLineArgs(std::vector<KCmdLineOptions>& vOptions, QStringList& ignorableOptions)
+// {
+//    vOptions.insert( vOptions.end(), options, (KCmdLineOptions*)((char*)options+sizeof(options)));
+//    QString configFileName = KStandardDirs().findResource("config","kdiff3rc");
+//    QFile configFile( configFileName );
+//    if ( configFile.open( QIODevice::ReadOnly ) )
+//    {
+//       QTextStream ts( &configFile );
+//       while(!ts.atEnd())
+//       {
+//          QString line = ts.readLine();
+//          if ( line.startsWith("IgnorableCmdLineOptions=") )
+//          {
+//             int pos = line.indexOf('=');
+//             if (pos>=0)
+//             {
+//                QString s = line.mid(pos+1);
+//                QStringList sl = s.split( '|' );
+//                if (!sl.isEmpty())
+//                {
+//                   ignorableOptions = sl.front().split( ';' );
+//                   for (QStringList::iterator i=ignorableOptions.begin(); i!=ignorableOptions.end(); ++i)
+//                   {
+//                      KCmdLineOptions ignoreOption;
+//                      (*i).remove('-');
+//                      if (!(*i).isEmpty())
+//                      {
+//                         ignoreOption.name = (new QByteArray( (*i).toLatin1() ))->constData();
+//                         ignoreOption.description = I18N_NOOP("Ignored. (User defined.)");
+//                         ignoreOption.def = 0;
+//                         vOptions.push_back(ignoreOption);
+//                      }
+//                   }
+//                }
+//             }
+//             break;
+//          }
+//       }
+//    }
+//    vOptions.insert(vOptions.end(),options2,(KCmdLineOptions*)((char*)options2+sizeof(options2)));
+// 
+//    KCmdLineOptions last = KCmdLineLastOption;
+//    vOptions.push_back(last);
+//    KCmdLineArgs::addCmdLineOptions( &vOptions[0] ); // Add our own options.
+// }
 
 #ifdef _WIN32
 #include <process.h>
@@ -126,6 +124,19 @@ static bool isOptionUsed(const QString& s, int argc, char* argv[])
    return false;
 }
 #endif
+
+class ContextFreeTranslator : public QTranslator
+{
+public:
+   ContextFreeTranslator( QObject* pParent ) : QTranslator(pParent) {}
+   QString translate(const char* context, const char* sourceText, const char* comment ) const
+   {
+      if ( context != 0 )
+         return QTranslator::translate(0,sourceText,comment);
+      else
+         return QString();
+   }
+};
 
 int main(int argc, char *argv[])
 {
@@ -149,10 +160,11 @@ int main(int argc, char *argv[])
 
    // Write all args into a temporary file. Uncomment this for debugging purposes.
    /*
-   FILE* f = fopen("c:\\t.txt","w");
+   FILE* f = fopen(QDir::toNativeSeparators(QDir::homePath()+"//kdiff3_call_args.txt").toLatin1().data(),"w");
    for(int i=0; i< argc; ++i)
       fprintf(f,"Arg %d: %s\n", i, argv[i]);
-
+   fclose(f);
+   
    // Call orig cleardiffmrg.exe to see what result it returns.
    int result=0;
    result = ::_spawnvp(_P_WAIT , "C:\\Programme\\Rational\\ClearCase\\bin\\cleardiffmrg.exe", argv );
@@ -170,30 +182,65 @@ int main(int argc, char *argv[])
 #endif
    //QApplication::setColorSpec( QApplication::ManyColor ); // Grab all 216 colors
 
-   KAboutData aboutData( "kdiff3", I18N_NOOP("KDiff3"),
-      VERSION, description, KAboutData::License_GPL,
-      "(c) 2002-2007 Joachim Eibl", 0, "http://kdiff3.sourceforge.net/", "joachim.eibl" "@" "gmx.de");
-   aboutData.addAuthor("Joachim Eibl",0, "joachim.eibl" "@" "gmx.de");
-   aboutData.addCredit("Eike Sauer", "Bugfixes, Debian package maintainer" );
-   aboutData.addCredit("Sebastien Fricker", "Windows installer" );
-   aboutData.addCredit("Stephan Binner", "i18n-help", "binner" "@" "kde.org" );
-   aboutData.addCredit("Stefan Partheymueller", "Clipboard-patch" );
-   aboutData.addCredit("David Faure", "KIO-Help", "faure" "@" "kde.org" );
-   aboutData.addCredit("Bernd Gehrmann", "Class CvsIgnoreList from Cervisia" );
-   aboutData.addCredit("Andre Woebbeking", "Class StringMatcher" );
-   aboutData.addCredit("Michael Denio", "Directory Equality-Coloring patch");
-   aboutData.addCredit("Manfred Koehler", "Fix for slow startup on Windows");
-   aboutData.addCredit("Sergey Zorin", "Diff Ext for Windows");
-   aboutData.addCredit("Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower", "GNU-Diffutils");
-   aboutData.addCredit("Tino Boellsterling, Timothy Mee", "Intensive test, use and feedback");
-   aboutData.addCredit("Michael Schmidt", "Mac support");
+   const QByteArray& appName = QByteArray("kdiff3");
+   const QByteArray& appCatalog = appName;
+   const KLocalizedString i18nName = ki18n("kdiff3");
+   const QByteArray& appVersion = QByteArray( VERSION );
+   const KLocalizedString description = ki18n("Tool for Comparison and Merge of Files and Directories");
+   const KLocalizedString copyright = ki18n("(c) 2002-2008 Joachim Eibl");
+   const QByteArray& homePage = "http://kdiff3.sourceforge.net/";
+   const QByteArray& bugsAddress = "joachim.eibl" "@" "gmx.de";
+   KAboutData aboutData( appName, appCatalog, i18nName, 
+         appVersion, description, KAboutData::License_GPL_V2, copyright, description, 
+         homePage, bugsAddress );
 
-   aboutData.addCredit(I18N_NOOP("+ Many thanks to those who reported bugs and contributed ideas!"));
+   aboutData.addAuthor(ki18n("Joachim Eibl"), KLocalizedString(), QByteArray("joachim.eibl" "@" "gmx.de"));
+   aboutData.addCredit(ki18n("Eike Sauer"), ki18n("Bugfixes, Debian package maintainer") );
+   aboutData.addCredit(ki18n("Sebastien Fricker"), ki18n("Windows installer") );
+   aboutData.addCredit(ki18n("Stephan Binner"), ki18n("i18n-help"), QByteArray("binner" "@" "kde.org") );
+   aboutData.addCredit(ki18n("Stefan Partheymueller"), ki18n("Clipboard-patch" ));
+   aboutData.addCredit(ki18n("David Faure"), ki18n("KIO-Help"), QByteArray("faure" "@" "kde.org" ));
+   aboutData.addCredit(ki18n("Bernd Gehrmann"), ki18n("Class CvsIgnoreList from Cervisia" ));
+   aboutData.addCredit(ki18n("Andre Woebbeking"), ki18n("Class StringMatcher" ));
+   aboutData.addCredit(ki18n("Michael Denio"), ki18n("Directory Equality-Coloring patch"));
+   aboutData.addCredit(ki18n("Manfred Koehler"), ki18n("Fix for slow startup on Windows"));
+   aboutData.addCredit(ki18n("Sergey Zorin"), ki18n("Diff Ext for Windows"));
+   aboutData.addCredit(ki18n("Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"), ki18n("GNU-Diffutils"));
+   aboutData.addCredit(ki18n("Tino Boellsterling, Timothy Mee"), ki18n("Intensive test, use and feedback"));
+   aboutData.addCredit(ki18n("Michael Schmidt"), ki18n("Mac support"));
+   aboutData.addCredit(ki18n("Valentin Rusu"), ki18n("KDE4 porting"), QByteArray("kde" "@" "rusu.info"));
+   aboutData.addCredit(ki18n("Albert Astals Cid"), ki18n("KDE4 porting"), QByteArray("aacid" "@" "kde.org"));
+
+   aboutData.addCredit(ki18n("+ Many thanks to those who reported bugs and contributed ideas!"));
 
    KCmdLineArgs::init( argc, argv, &aboutData );
-   std::vector<KCmdLineOptions> vOptions;
-   QStringList ignorableOptions;
-   initialiseCmdLineArgs(vOptions, ignorableOptions);
+
+   KCmdLineOptions options;
+   // ignorable command options
+   options.add( "m" ).add( "merge", ki18n("Merge the input."));
+   options.add( "b" ).add( "base file", ki18n("Explicit base file. For compatibility with certain tools.") );
+   options.add( "o" ).add( "output file", ki18n("Output file. Implies -m. E.g.: -o newfile.txt"));
+   options.add( "out file",    ki18n("Output file, again. (For compatibility with certain tools.)") );
+   options.add( "auto",        ki18n("No GUI if all conflicts are auto-solvable. (Needs -o file)") );
+   options.add( "qall",        ki18n("Don't solve conflicts automatically. (For compatibility...)") );
+   options.add( "L1 alias1",   ki18n("Visible name replacement for input file 1 (base).") );
+   options.add( "L2 alias2",   ki18n("Visible name replacement for input file 2.") );
+   options.add( "L3 alias3",   ki18n("Visible name replacement for input file 3.") );
+   options.add( "L" ).add( "fname alias", ki18n("Alternative visible name replacement. Supply this once for every input.") );
+   options.add( "cs string",   ki18n("Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\"") );
+   options.add( "confighelp",  ki18n("Show list of config settings and current values.") );
+   options.add( "config file", ki18n("Use a different config file.") );
+
+   // other command options
+   options.add( "+[File1]", ki18n("file1 to open (base, if not specified via --base)") );
+   options.add( "+[File2]", ki18n("file2 to open") );
+   options.add( "+[File3]", ki18n("file3 to open") );
+
+   KCmdLineArgs::addCmdLineOptions( options );
+
+//    std::vector<KCmdLineOptions> vOptions;
+//    QStringList ignorableOptions;
+//    initialiseCmdLineArgs(vOptions, ignorableOptions);
 
    KApplication app;
 
@@ -203,7 +250,7 @@ int main(int argc, char *argv[])
    locale = app.config()->readEntry("Language", "Auto");
    int spacePos = locale.indexOf(' ');
    if (spacePos>0) locale = locale.left(spacePos);
-   QTranslator kdiff3Translator( 0 );
+   ContextFreeTranslator kdiff3Translator( 0 );
    QTranslator qtTranslator( 0 );
    if (locale != "en_orig")
    {
@@ -219,15 +266,16 @@ int main(int argc, char *argv[])
    }
 #endif
 
-  if (app.isRestored())
+  if (app.isSessionRestored())
   {
      RESTORE(KDiff3Shell);
   }
   else
   {
-     new KDiff3Shell();
+     KDiff3Shell* p = new KDiff3Shell();
+     p->show();
   }
-
+//app.installEventFilter( new CFilter );
   int retVal = app.exec();
   return retVal;
 }
