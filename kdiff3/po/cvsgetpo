@@ -1,3 +1,0 @@
-cvs co kde-i18n/subdirs
-for i in `cat kde-i18n/subdirs`; do  cvs co kde-i18n/$i/messages/kdeextragear-1/kdiff3.po; done
-for i in `cat kde-i18n/subdirs`; do  cp -p kde-i18n/$i/messages/kdeextragear-1/kdiff3.po $i.po; done
