@@ -1,0 +1,67 @@
+# Copyright (C) 2008 by Joachim Eibl
+# Licence: GPL V2
+#   GNU GENERAL PUBLIC LICENSE, Version 2, June 1991
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software
+#   Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA  02111-1307  USA
+#
+#   For details see file "COPYING".
+
+# update_doc_dir:
+# automatically fetch the most recent translations from the websvn.kde.org server
+# and update all files for translations
+# Requirements: wget
+
+#http://websvn.kde.org/trunk/l10n-kde4/templates/docmessages/extragear-utils/kdiff3.pot
+
+# extract extra strings
+sed -i /add_subdirectory/d CMakeLists.txt
+echo add_subdirectory\(en\) >>CMakeLists.txt
+wget -nv -nc http://websvn.kde.org/*checkout*/trunk/l10n-kde4/subdirs
+#for i in `cat subdirs` ; do
+for i in da  de  en  es  et  fr  it  nl  pt; do
+   if [ $i != "en" ]; then
+      # Many languages don't have translations so don't worry about errors too much.
+      if [ ! -a $i.docbook ]; then
+         wget -nv -nc http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/docs/extragear-utils/kdiff3/index.docbook -O $i.docbook
+      fi
+      if [ ! -s $i.docbook ]; then
+         wget -nv http://websvn.kde.org/*checkout*/trunk/l10n-kde3/$i/docs/extragear-utils/kdiff3/index.docbook -O $i.docbook
+      fi
+      # if file exists and has size greater than zero, 
+      # but don't fetch the english version, because this is the original version.
+      if [ -s $i.docbook ]; then
+         echo $i
+         # if directory exists delete it recursively and recreate it
+         if [ -d $i ]; then
+            rm -R $i
+         fi
+         mkdir $i
+         cp $i.docbook $i/index.docbook
+         echo kde4_create_handbook\(index.docbook INSTALL_DESTINATION \${HTML_INSTALL_DIR}/$i SUBDIR kdiff3\) >$i/CMakeLists.txt
+         # Note: png files are found automatically in en/kdiff3 directory. No need to link or copy.
+         echo add_subdirectory\($i\) >>CMakeLists.txt
+      fi
+      #rm $i.docbook
+   fi
+done
+
+# Print some info
+#echo Translated items per language:
+#for i in `cat subdirs` ; do
+#   if [ -s $i/kdiff3.po ]; then
+#      echo $i `grep msgstr $i/kdiff3.po | grep -v \"\" | wc -l`
+#   fi
+#done
+
+#rm subdirs
