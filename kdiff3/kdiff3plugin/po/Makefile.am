@@ -1,2 +1,0 @@
-PACKAGE=kdiff3_plugin
-POFILES = AUTO
