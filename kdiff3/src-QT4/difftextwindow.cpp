@@ -68,9 +68,17 @@ public:
       m_scrollDeltaY = 0;
       m_bMyUpdate = false;
       m_bSelectionInProgress = false;
+      m_pTextCodec = 0;
+      #ifdef _WIN32
+      m_eLineEndStyle = eLineEndStyleDos;
+      #else
+      m_eLineEndStyle = eLineEndStyleUnix;
+      #endif
    }
    DiffTextWindow* m_pDiffTextWindow;
    DiffTextWindowFrame* m_pDiffTextWindowFrame;
+   QTextCodec* m_pTextCodec;
+   e_LineEndStyle m_eLineEndStyle;
 
    bool m_bPaintingAllowed;
    const LineData* m_pLineData;
@@ -153,7 +161,7 @@ DiffTextWindow::DiffTextWindow(
    setAcceptDrops( true );
 
    d->m_pOptionDialog = pOptionDialog;
-   init( 0, 0, 0, 0, 0, false );
+   init( 0, 0, d->m_eLineEndStyle, 0, 0, 0, 0, false );
 
    setMinimumSize(QSize(20,20));
 
@@ -172,6 +180,8 @@ DiffTextWindow::~DiffTextWindow()
 
 void DiffTextWindow::init(
    const QString& filename,
+   QTextCodec* pTextCodec,
+   e_LineEndStyle eLineEndStyle,
    const LineData* pLineData,
    int size,
    const Diff3LineVector* pDiff3LineVector,
@@ -201,6 +211,9 @@ void DiffTextWindow::init(
    d->m_selection.oldFirstLine = -1; // reset is not enough here.
    d->m_selection.oldLastLine = -1;
    d->m_selection.lastLine = -1;
+
+   d->m_pTextCodec = pTextCodec;
+   d->m_eLineEndStyle = eLineEndStyle;
 
    update();
    d->m_pDiffTextWindowFrame->init();
@@ -1638,6 +1651,8 @@ public:
    OptionDialog* m_pOptionDialog;
    QLabel*       m_pLabel;
    QLabel*       m_pTopLine;
+   QLabel*       m_pEncoding;
+   QLabel*       m_pLineEndStyle;
    QWidget*      m_pTopLineWidget;
    int           m_winIdx;
 };
@@ -1660,14 +1675,32 @@ DiffTextWindowFrame::DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusB
    d->m_pTopLine = new QLabel(d->m_pTopLineWidget);
    d->m_pDiffTextWindow = 0;
    d->m_pDiffTextWindow = new DiffTextWindow( this, pStatusBar, pOptionDialog, winIdx );
-   QHBoxLayout* pHL = new QHBoxLayout(d->m_pTopLineWidget);
-   pHL->setMargin(2);
+
+   QVBoxLayout* pVTopLayout = new QVBoxLayout(d->m_pTopLineWidget);
+   pVTopLayout->setMargin(2);
+   pVTopLayout->setSpacing(0);
+   QHBoxLayout* pHL = new QHBoxLayout();
+   QHBoxLayout* pHL2 = new QHBoxLayout();
+   pVTopLayout->addLayout(pHL);
+   pVTopLayout->addLayout(pHL2);
+
+   // Upper line:
+   pHL->setMargin(0);
    pHL->setSpacing(2);
 
    pHL->addWidget( d->m_pLabel, 0 );
    pHL->addWidget( d->m_pFileSelection, 1 );
    pHL->addWidget( d->m_pBrowseButton, 0 );
    pHL->addWidget( d->m_pTopLine, 0 );
+
+   // Lower line
+   pHL2->setMargin(0);
+   pHL2->setSpacing(2);
+   pHL2->addWidget( d->m_pTopLine, 0 );
+   d->m_pEncoding = new QLabel(i18n("Encoding:"));
+   d->m_pLineEndStyle = new QLabel(i18n("Line end style:"));
+   pHL2->addWidget(d->m_pEncoding);
+   pHL2->addWidget(d->m_pLineEndStyle);
 
    QVBoxLayout* pVL = new QVBoxLayout( this );
    pVL->setMargin(0);
@@ -1697,6 +1730,8 @@ void DiffTextWindowFrame::init()
                              ( pDTW->d->m_bTriple?"A (Base)":"A") :
                              ( pDTW->d->m_winIdx==2 ? "B" : "C" );
       d->m_pLabel->setText( winId + ":" );
+      d->m_pEncoding->setText( i18n("Encoding:") + " " + (pDTW->d->m_pTextCodec!=0 ? pDTW->d->m_pTextCodec->name() : QString()) );
+      d->m_pLineEndStyle->setText( i18n("Line end style:") + " " + (pDTW->d->m_eLineEndStyle==eLineEndStyleDos ? i18n("DOS") : i18n("Unix")) );
    }
 }
 
@@ -1763,11 +1798,13 @@ bool DiffTextWindowFrame::eventFilter( QObject* o, QEvent* e )
       p.setColor(QPalette::WindowText, c1);
       d->m_pLabel->setPalette( p );
       d->m_pTopLine->setPalette( p );
+      d->m_pEncoding->setPalette( p );
+      d->m_pLineEndStyle->setPalette( p );
    }
    if (o == d->m_pFileSelection && e->type()==QEvent::Drop)
    {
       QDropEvent* d = static_cast<QDropEvent*>(e);
-      
+
       if ( d->mimeData()->hasUrls() ) 
       {
          QList<QUrl> lst = d->mimeData()->urls();
@@ -1804,5 +1841,3 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
       emit fileNameChanged( newURL.url(), pDTW->d->m_winIdx );
    }
 }
-
-//#include "difftextwindow.moc"

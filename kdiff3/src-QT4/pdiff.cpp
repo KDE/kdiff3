@@ -406,6 +406,11 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
          oldHeights[1] = oldHeights[0]/2;
          oldHeights[0] -= oldHeights[1];
       }
+      if ( oldHeights[0]==0 && oldHeights[1]==0 )
+      {
+         oldHeights[1] = 100;
+         oldHeights[0] = 100;
+      }
       m_pMainSplitter->setSizes( oldHeights );
    }
 
@@ -422,11 +427,11 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
    if ( bGUI )
    {
       const ManualDiffHelpList* pMDHL = &m_manualDiffHelpList;
-      m_pDiffTextWindow1->init( m_sd1.getAliasName(),
+      m_pDiffTextWindow1->init( m_sd1.getAliasName(), m_sd1.getEncoding(), m_sd1.getLineEndStyle(),
          m_sd1.getLineDataForDisplay(), m_sd1.getSizeLines(), &m_diff3LineVector, pMDHL, m_bTripleDiff );
-      m_pDiffTextWindow2->init( m_sd2.getAliasName(),
+      m_pDiffTextWindow2->init( m_sd2.getAliasName(), m_sd2.getEncoding(), m_sd2.getLineEndStyle(),
          m_sd2.getLineDataForDisplay(), m_sd2.getSizeLines(), &m_diff3LineVector, pMDHL, m_bTripleDiff );
-      m_pDiffTextWindow3->init( m_sd3.getAliasName(),
+      m_pDiffTextWindow3->init( m_sd3.getAliasName(), m_sd3.getEncoding(), m_sd3.getLineEndStyle(),
          m_sd3.getLineDataForDisplay(), m_sd3.getSizeLines(), &m_diff3LineVector, pMDHL, m_bTripleDiff );
 
       m_pDiffTextWindowFrame3->setVisible(m_bTripleDiff);
@@ -469,10 +474,7 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
    else
       m_pMergeWindowFrame->show();
 
-   // Calc max width for display
-   m_maxWidth = max2( m_pDiffTextWindow1->getNofColumns(), m_pDiffTextWindow2->getNofColumns() );
-   m_maxWidth = max2( m_maxWidth, m_pDiffTextWindow3->getNofColumns() );
-   m_maxWidth += 5;
+   setHScrollBarRange();
 
    // Try to create a meaningful but not too long caption
    if ( !isPart() )
@@ -565,7 +567,45 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
 }
 
 
-void KDiff3App::resizeDiffTextWindow(int newWidth, int newHeight)
+void KDiff3App::setHScrollBarRange()
+{
+   int w1 = m_pDiffTextWindow1!=0 && m_pDiffTextWindow1->isVisible() ? m_pDiffTextWindow1->getNofColumns() : 0;
+   int w2 = m_pDiffTextWindow2!=0 && m_pDiffTextWindow2->isVisible() ? m_pDiffTextWindow2->getNofColumns() : 0;
+   int w3 = m_pDiffTextWindow3!=0 && m_pDiffTextWindow3->isVisible() ? m_pDiffTextWindow3->getNofColumns() : 0;
+
+   int wm = m_pMergeResultWindow!=0 && m_pMergeResultWindow->isVisible() ? m_pMergeResultWindow->getNofColumns() : 0;
+
+   int v1 = m_pDiffTextWindow1!=0 && m_pDiffTextWindow1->isVisible() ? m_pDiffTextWindow1->getNofVisibleColumns() : 0;
+   int v2 = m_pDiffTextWindow2!=0 && m_pDiffTextWindow2->isVisible() ? m_pDiffTextWindow2->getNofVisibleColumns() : 0;
+   int v3 = m_pDiffTextWindow3!=0 && m_pDiffTextWindow3->isVisible() ? m_pDiffTextWindow3->getNofVisibleColumns() : 0;
+   int vm = m_pMergeResultWindow!=0 && m_pMergeResultWindow->isVisible() ? m_pMergeResultWindow->getNofVisibleColumns() : 0;
+
+   // Find the minimum, but don't consider 0.
+   int pageStep = 0;
+   if ( (pageStep==0 || pageStep>v1) && v1>0 )
+      pageStep = v1;
+   if ( (pageStep==0 || pageStep>v2) && v2>0  )
+      pageStep = v2;
+   if ( (pageStep==0 || pageStep>v3) && v3>0  )
+      pageStep = v3;
+   if ( (pageStep==0 || pageStep>vm) && vm>0  )
+      pageStep = vm;
+
+   int rangeMax = 0;
+   if ( w1>v1 && w1-v1>rangeMax && v1>0 )
+      rangeMax = w1-v1;
+   if ( w2>v2 && w2-v2>rangeMax && v2>0 )
+      rangeMax = w2-v2;
+   if ( w3>v3 && w3-v3>rangeMax && v3>0 )
+      rangeMax = w3-v3;
+   if ( wm>vm && wm-vm>rangeMax && vm>0 )
+      rangeMax = wm-vm;
+
+   m_pHScrollBar->setRange(0, rangeMax );
+   m_pHScrollBar->setPageStep( pageStep );
+}
+
+void KDiff3App::resizeDiffTextWindow(int /*newWidth*/, int newHeight)
 {
    m_DTWHeight = newHeight;
 
@@ -575,10 +615,7 @@ void KDiff3App::resizeDiffTextWindow(int newWidth, int newHeight)
    m_pDiffVScrollBar->setPageStep( newHeight );
    m_pOverview->setRange( m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep() );
 
-   // The second window has a somewhat inverse width
-
-   m_pHScrollBar->setRange(0, max2(0, m_maxWidth - newWidth) );
-   m_pHScrollBar->setPageStep( newWidth );
+   setHScrollBarRange();
 }
 
 void KDiff3App::resizeMergeResultWindow()
@@ -587,9 +624,7 @@ void KDiff3App::resizeMergeResultWindow()
    m_pMergeVScrollBar->setRange(0, max2(0, p->getNofLines() - p->getNofVisibleLines()) );
    m_pMergeVScrollBar->setPageStep( p->getNofVisibleLines() );
 
-   // The second window has a somewhat inverse width
-//   m_pHScrollBar->setRange(0, max2(0, m_maxWidth - newWidth) );
-//   m_pHScrollBar->setPageStep( newWidth );
+   setHScrollBarRange();
 }
 
 void KDiff3App::scrollDiffTextWindow( int deltaX, int deltaY )
@@ -652,24 +687,30 @@ void KDiff3App::initView()
       return;
       //delete m_pMainWidget;
    }
-   m_pMainWidget = new QWidget(m_pMainSplitter); // Contains vertical splitter and horiz scrollbar
+   m_pMainWidget = new QWidget(); // Contains vertical splitter and horiz scrollbar   
+   m_pMainSplitter->addWidget( m_pMainWidget );
+   m_pMainWidget->setObjectName("MainWidget");
    QVBoxLayout* pVLayout = new QVBoxLayout(m_pMainWidget);
    pVLayout->setMargin(0);
    pVLayout->setSpacing(0);
 
    QSplitter* pVSplitter = new QSplitter();
+   pVSplitter->setObjectName("VSplitter");
    pVSplitter->setOpaqueResize(false);
    pVSplitter->setOrientation( Qt::Vertical );
    pVLayout->addWidget( pVSplitter );
    pVSplitter->show();
 
-   QWidget* pDiffWindowFrame = new QWidget( pVSplitter ); // Contains diff windows, overview and vert scrollbar
+   QWidget* pDiffWindowFrame = new QWidget(); // Contains diff windows, overview and vert scrollbar
+   pDiffWindowFrame->setObjectName("DiffWindowFrame");
    QHBoxLayout* pDiffHLayout = new QHBoxLayout( pDiffWindowFrame );
    pDiffHLayout->setMargin(0);
    pDiffHLayout->setSpacing(0);
-   pVSplitter->addWidget(pDiffWindowFrame);
    //pDiffWindowFrame->show();
+   pVSplitter->addWidget(pDiffWindowFrame);
+
    m_pDiffWindowSplitter = new QSplitter();
+   m_pDiffWindowSplitter->setObjectName("DiffWindowSplitter");
    m_pDiffWindowSplitter->setOpaqueResize(false);
 
    m_pDiffWindowSplitter->setOrientation( m_pOptionDialog->m_bHorizDiffWindowSplitting ?  Qt::Horizontal : Qt::Vertical );
@@ -677,6 +718,7 @@ void KDiff3App::initView()
    //m_pDiffWindowSplitter->show();
 
    m_pOverview = new Overview( m_pOptionDialog );
+   m_pOverview->setObjectName("Overview");
    pDiffHLayout->addWidget(m_pOverview);
    connect( m_pOverview, SIGNAL(setLine(int)), this, SLOT(setDiff3Line(int)) );
    //connect( m_pOverview, SIGNAL(afterFirstPaint()), this, SLOT(slotAfterFirstPaint()));
@@ -701,6 +743,7 @@ void KDiff3App::initView()
 
    // Merge window
    m_pMergeWindowFrame = new QWidget( pVSplitter );
+   m_pMergeWindowFrame->setObjectName("MergeWindowFrame");
    pVSplitter->addWidget(m_pMergeWindowFrame);
    QHBoxLayout* pMergeHLayout = new QHBoxLayout( m_pMergeWindowFrame );
    pMergeHLayout->setMargin(0);
@@ -723,6 +766,8 @@ void KDiff3App::initView()
 
    QList<int> sizes = pVSplitter->sizes();
    int total = sizes[0] + sizes[1];
+   if ( total<10 )
+      total = 100;
    sizes[0]=total/2; sizes[1]=total/2;
    pVSplitter->setSizes( sizes );
 
@@ -818,7 +863,7 @@ static int calcManualDiffFirstDiff3LineIdx( const Diff3LineVector& d3lv, const M
 void KDiff3App::slotAfterFirstPaint()
 {
    int newHeight = m_pDiffTextWindow1->getNofVisibleLines();
-   int newWidth  = m_pDiffTextWindow1->getNofVisibleColumns();
+   /*int newWidth  = m_pDiffTextWindow1->getNofVisibleColumns();*/
    m_DTWHeight = newHeight;
 
    recalcWordWrap();
@@ -826,10 +871,6 @@ void KDiff3App::slotAfterFirstPaint()
    m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines+1 - newHeight) );
    m_pDiffVScrollBar->setPageStep( newHeight );
    m_pOverview->setRange( m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep() );
-
-   // The second window has a somewhat inverse width
-   m_pHScrollBar->setRange(0, max2(0, m_maxWidth - newWidth) );
-   m_pHScrollBar->setPageStep( newWidth );
 
    int d3l=-1;
    if ( ! m_manualDiffHelpList.empty() )
@@ -1634,12 +1675,7 @@ void KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
    {
       m_pDiffVScrollBar->setValue( m_pDiffTextWindow1->convertDiff3LineIdxToLine( firstD3LIdx ) );
 
-      m_maxWidth = max3( m_pDiffTextWindow1->getNofColumns(), 
-                         m_pDiffTextWindow2->getNofColumns(),
-                         m_pDiffTextWindow3->getNofColumns() ) + (m_pOptionDialog->m_bWordWrap ? 0 : 5);
-
-      m_pHScrollBar->setRange(0, max2( 0, m_maxWidth - m_pDiffTextWindow1->getNofVisibleColumns() ) );
-      m_pHScrollBar->setPageStep( m_pDiffTextWindow1->getNofVisibleColumns() );
+      setHScrollBarRange();
       m_pHScrollBar->setValue(0);
    }
 }
@@ -1727,11 +1763,11 @@ bool KDiff3App::improveFilenames( bool bCreateNewInstance )
          if (bSuccess)
          {
             m_sd1.reset();
-            if (m_pDiffTextWindow1!=0) m_pDiffTextWindow1->init(0,0,0,0,0,false);
+            if (m_pDiffTextWindow1!=0) m_pDiffTextWindow1->init(0,0,eLineEndStyleDos,0,0,0,0,false);
             m_sd2.reset();
-            if (m_pDiffTextWindow2!=0) m_pDiffTextWindow2->init(0,0,0,0,0,false);
+            if (m_pDiffTextWindow2!=0) m_pDiffTextWindow2->init(0,0,eLineEndStyleDos,0,0,0,0,false);
             m_sd3.reset();
-            if (m_pDiffTextWindow3!=0) m_pDiffTextWindow3->init(0,0,0,0,0,false);
+            if (m_pDiffTextWindow3!=0) m_pDiffTextWindow3->init(0,0,eLineEndStyleDos,0,0,0,0,false);
          }
          slotUpdateAvailabilities();
          return bSuccess;

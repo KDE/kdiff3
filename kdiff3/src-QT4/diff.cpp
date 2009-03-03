@@ -244,7 +244,8 @@ void SourceData::setData( const QString& data )
    }
 
    FileAccess f( m_tempInputFileName );
-   bool bSuccess = f.writeFile( QTextCodec::codecForName("UTF-8")->fromUnicode(data), data.length() );
+   QByteArray ba = QTextCodec::codecForName("UTF-8")->fromUnicode(data);
+   bool bSuccess = f.writeFile( ba.constData(), ba.length() );
    if ( !bSuccess )
    {
       KMessageBox::error( m_pOptionDialog, i18n("Writing clipboard data to temp file failed.") );

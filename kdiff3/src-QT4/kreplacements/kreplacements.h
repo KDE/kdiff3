@@ -21,6 +21,7 @@
 
 #include "common.h"
 
+#include <QSharedData>
 #include <QMainWindow>
 #include <QAction>
 #include <QDialog>
@@ -41,7 +42,7 @@ class QLabel;
 #include <map>
 #include <list>
 
-QString getTranslationDir();
+QString getTranslationDir(const QString&);
 
 class KMainWindow;
 class KAction;

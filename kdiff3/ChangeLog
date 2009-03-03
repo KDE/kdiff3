@@ -1,10 +1,32 @@
-Version 0.9.93 - 2008/01/06
+Version 0.9.95 - 2009/03/03
+===========================
+- Show line end style for each file.
+- Updated message translations.
+- Fixed permissions when writing executable file. (Un*x only)
+- Fixed IgnorableCmdLineOptions (important for SVNs '-u'-option)
+- Directory merge: Error when either B or C is changed and the other is deleted. (User choice required.)
+- Qt-only Un*x-version looks for translations in /usr/share/locale/<lang>/LC_MESSAGES/kdiff3.qm
+  (for Debian, by Eike Sauer)
+- New script: po/create_qm_files: To create and install translations for Qt-only version.
+
+Version 0.9.94 - 2009/01/17
+===========================
+- Fix for hidden text windows with --auto-flag.
+- Fix for pasting clipboard truncated text if it contained characters that needed more than one byte in UTF-8 encoding.
+- Fix for horizontal scrolling if word wrap is enabled.
+- Directory tree: files hidden due to options (e.g. patterns etc.) don't affect folder equality any more.
+- KDE: KIO-progress dialog is now hidden. (KDiff3 has its own progress dialog.)
+- Directory merge: Default op for change in either B or C and delete in the other is now merge (previously copy).
+- Directory merge: Not preserving merge operation after reload, because it might have changed.
+
+Version 0.9.93 - 2009/01/06
 ===========================
 - Support for KDE4 (with much porting help from Valentin Rusu)
 - Fix for diff_ext_for_kdiff3 (by Sergey Zorin)
 - Win32-Installation: SendTo-integration fixed for Vista.
 - Optional auto detection of line end style for saving.
 - Option to close on ESC (default is off)
+- Option to align B and C for 3 input files (default is off which is usually better for merging).
 
 Version 0.9.92 - 2007/04/15
 ===========================

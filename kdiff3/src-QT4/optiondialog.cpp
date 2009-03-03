@@ -1,6 +1,6 @@
 /*
  *   kdiff3 - Text Diff And Merge Tool
- *   Copyright (C) 2002-2007  Joachim Eibl, joachim.eibl at gmx.de
+ *   Copyright (C) 2002-2009  Joachim Eibl, joachim.eibl at gmx.de
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -761,11 +761,7 @@ void OptionDialog::setupEditPage( void )
    
    label = new QLabel( i18n("Line end style:"), page );
    gbox->addWidget( label, line, 0 );
-   #ifdef _WIN32
-   int defaultLineEndStyle = eLineEndStyleDos;
-   #else
-   int defaultLineEndStyle = eLineEndStyleUnix;
-   #endif
+
    OptionComboBox* pLineEndStyle = new OptionComboBox( eLineEndStyleAutoDetect, "LineEndStyle", &m_lineEndStyle, page, this );
    gbox->addWidget( pLineEndStyle, line, 1 );
    pLineEndStyle->insertItem( eLineEndStyleUnix, "Unix" );
@@ -1062,8 +1058,8 @@ void OptionDialog::setupMergePage( void )
 void OptionDialog::setupDirectoryMergePage( void )
 {
    QFrame* page = new QFrame();
-   KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Directory Merge") );
-   pageItem->setHeader( i18n("Directory Merge") );
+   KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Directory") );
+   pageItem->setHeader( i18n("Directory") );
    pageItem->setIcon( KIcon( "folder" ) );
    addPage( pageItem );
 
@@ -1433,17 +1429,28 @@ static const char* countryMap[]={
    pLanguage->addItem( "Auto" );  // Must not translate, won't work otherwise!
    pLanguage->addItem( "en_orig" );
       
-   // Read directory: Find all kdiff3_*.qm-files and insert the found files here selection   
-   FileAccess fa( getTranslationDir() );
-   t_DirectoryList dirList;
-   fa.listDir( &dirList, false, false, "kdiff3_*.qm", "", "*", false, false );
-   t_DirectoryList::iterator i;
-   for( i=dirList.begin(); i!=dirList.end(); ++i)
+#ifndef _WIN32
+   // Read directory: Find all kdiff3_*.qm-files and insert the found files here
+   QDir localeDir( "/usr/share/locale" ); // See also kreplacements.cpp: getTranslationDir()
+   QStringList dirList = localeDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+
+   for( int i = 0; i<dirList.size(); ++i )
+   {
+       QString languageId = dirList[i];
+       if ( ! QFile::exists( "/usr/share/locale/" + languageId + "/LC_MESSAGES/kdiff3.qm" ) )
+           continue;
+#else
+   // Read directory: Find all kdiff3_*.qm-files and insert the found files here
+   
+   QDir localeDir( getTranslationDir(QString()) );
+   QStringList fileList = localeDir.entryList( QStringList("kdiff3_*.qm") , QDir::Files, QDir::Name );
+   for( int i=0; i<fileList.size(); ++i )
    {      
-      QString fileName = i->fileName();
+      QString fileName = fileList[i];
       // Skip the "kdiff3_" and omit the .qm
       QString languageId = fileName.mid(7, fileName.length()-10 );
-      
+#endif
+
       unsigned int countryIdx=0;
       for(countryIdx=0; countryIdx< sizeof(countryMap)/sizeof(countryMap[0]); ++countryIdx )
       {
@@ -1456,6 +1463,7 @@ static const char* countryMap[]={
       
       pLanguage->addItem( languageId );
    }
+   
    
    label->setToolTip( i18n(
       "Choose the language of the GUI-strings or \"Auto\".\n" 

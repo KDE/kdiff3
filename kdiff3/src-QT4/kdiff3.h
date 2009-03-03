@@ -294,7 +294,6 @@ class KDiff3App : public QSplitter
    ManualDiffHelpList m_manualDiffHelpList;
 
    int m_neededLines;
-   int m_maxWidth;
    int m_DTWHeight;
    bool m_bOutputModified;
    bool m_bFileSaved;
@@ -325,6 +324,7 @@ class KDiff3App : public QSplitter
    bool m_bAutoFlag;
    bool m_bAutoMode;
    void recalcWordWrap(int nofVisibleColumns=-1);
+   void setHScrollBarRange();
 
 public slots:
    void resizeDiffTextWindow(int newWidth, int newHeight);

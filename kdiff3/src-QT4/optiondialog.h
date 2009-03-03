@@ -39,7 +39,7 @@ enum e_LineEndStyle
    eLineEndStyleDos,
    eLineEndStyleAutoDetect,
    eLineEndStyleUndefined, // only one line exists
-   eLineEndStyleConflict,   // User must resolve manually
+   eLineEndStyleConflict   // User must resolve manually
 };
 
 class OptionDialog : public KPageDialog

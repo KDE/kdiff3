@@ -1,16 +1,15 @@
 # tradução do kdiff3plugin.po para Brazilian Portuguese
-# translation of kdiff3plugin.po to Brazilian Portuguese
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2008.
-# André Marcelo Alvarenga <andrealvarenga@gmx.net>, 2008.
+# André Marcelo Alvarenga <andrealvarenga@gmx.net>, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3plugin\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2008-08-05 08:32+0200\n"
-"PO-Revision-Date: 2008-11-26 00:22-0200\n"
+"PO-Revision-Date: 2009-01-10 01:35-0200\n"
 "Last-Translator: André Marcelo Alvarenga <andrealvarenga@gmx.net>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_br@mail.kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -36,11 +35,11 @@ msgstr "Mesclar com %1"
 #: kdiff3plugin.cpp:126
 #, kde-format
 msgid "Save '%1' for later"
-msgstr ""
+msgstr "Salvar '%1' para mais tarde"
 
 #: kdiff3plugin.cpp:132
 msgid "3-way merge with base"
-msgstr ""
+msgstr "Mescar 3 níveis com a base"
 
 #: kdiff3plugin.cpp:139
 msgid "Compare with ..."
@@ -56,7 +55,7 @@ msgstr "Comparar"
 
 #: kdiff3plugin.cpp:163
 msgid "3 way comparison"
-msgstr ""
+msgstr "Comparação em 3 níveis"
 
 #: kdiff3plugin.cpp:167
 msgid "About KDiff3 menu plugin ..."
@@ -84,3 +83,13 @@ msgid ""
 "destination.\n"
 "Same also applies to directory comparison and merge."
 msgstr ""
+"Utilização da extensão do menu de contexto:\n"
+"Para uma comparação simples de dois arquivos selecionados, escolha a opção "
+"\"Comparar\".\n"
+"Se o outro arquivo não estiver no mesmo local, você pode \"Salvar\" o "
+"primeiro arquivo mais tarde. Aparecerá então no submenu \"Comparar com...\". "
+"Então poderá usar a opção \"Comparar com\" no segundo arquivo.\n"
+"Para uma mesclagem em 3 níveis, primeiro pode \"Salvar\" o arquivo de base, "
+"depois a ramificação a reunir e depois escolha a opção \"mesclar a 3 níveis "
+"com a base\" sobre a ramificação que servirá de destino.\n"
+"O mesmo se aplica à comparação e reunião de pastas."

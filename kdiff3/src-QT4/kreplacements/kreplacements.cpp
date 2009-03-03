@@ -113,7 +113,7 @@ static void showHelp()
    #endif
 }
 
-QString getTranslationDir()
+QString getTranslationDir(const QString& locale)
 {
    #ifdef _WIN32
       wchar_t buf[200];
@@ -125,7 +125,7 @@ QString getTranslationDir()
       else       {  exePath = "."; }
       return exePath+"/translations";
    #else
-      return ".";
+      return  (QString)"/usr/share/locale/" + locale + "/LC_MESSAGES";
    #endif
 }
 

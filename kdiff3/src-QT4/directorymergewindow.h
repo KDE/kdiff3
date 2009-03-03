@@ -48,6 +48,7 @@ enum e_MergeOperation
    eCopyAToDest, eCopyBToDest, eCopyCToDest, eDeleteFromDest, eMergeABCToDest,
    eMergeABToDest,
    eConflictingFileTypes, // Error
+   eChangedAndDeleted,    // Error
    eConflictingAges       // Equal age but files are not!
 };
 

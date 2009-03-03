@@ -108,10 +108,10 @@ bool KDiff3App::isDirComparison()
    return m_bDirCompare;
 }
 
-KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part )
+KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3Part )
    : QSplitter(pParent)  //previously KMainWindow
 {
-   setObjectName( name );
+   setObjectName( "KDiff3App" );
    m_pKDiff3Part = pKDiff3Part;
    m_pKDiff3Shell = dynamic_cast<KParts::MainWindow*>(pParent);
 
@@ -307,6 +307,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* name, KDiff3Part* pKDiff3Part
    m_pMainSplitter->setOrientation( Qt::Vertical );
 //   setCentralWidget( m_pMainSplitter );
    m_pDirectoryMergeSplitter = new QSplitter( m_pMainSplitter );
+   m_pDirectoryMergeSplitter->setObjectName("DirectoryMergeSplitter");
    m_pMainSplitter->addWidget( m_pDirectoryMergeSplitter );
    m_pDirectoryMergeSplitter->setOrientation( Qt::Horizontal );
    m_pDirectoryMergeWindow = new DirectoryMergeWindow( m_pDirectoryMergeSplitter, m_pOptionDialog,

@@ -687,21 +687,19 @@ bool DirectoryMergeWindow::init
    {
       prepareListView(pp);
 
-      for( int childIdx = 0; childIdx<topLevelItemCount(); ++childIdx )//Q3ListViewItem* p = firstChild();  p!=0; p = p->nextSibling() )
+      updateFileVisibilities();
+
+      for( int childIdx = 0; childIdx<topLevelItemCount(); ++childIdx )
       {
          DirMergeItem* pDMI = static_cast<DirMergeItem*>( topLevelItem(childIdx) );
          calcSuggestedOperation( *pDMI->m_pMFI, eDefaultMergeOp );
       }
    }
-   //else
-   //{
-   //   setSelected( 0, true );
-   //}
+
+   sortItems(0,Qt::AscendingOrder);
 
    for (int i=0;i<columnCount();++i)
       resizeColumnToContents(i);
-
-   QDir::setCurrent(origCurrentDirectory);
 
    // Try to improve the view a little bit.
    QWidget* pParent = parentWidget();
@@ -710,12 +708,14 @@ bool DirectoryMergeWindow::init
    {
       QList<int> sizes = pSplitter->sizes();
       int total = sizes[0] + sizes[1];
+      if ( total < 10 )
+         total = 100;
       sizes[0]=total*6/10;
       sizes[1]=total - sizes[0];
       pSplitter->setSizes( sizes );
    }
 
-   sortItems(0,Qt::AscendingOrder);
+   QDir::setCurrent(origCurrentDirectory);
 
    m_bScanning = false;
    statusBarMessage(i18n("Ready."));
@@ -744,10 +744,9 @@ bool DirectoryMergeWindow::init
          topLevelItem(0)->setSelected(true);
    }
 
-   updateFileVisibilities();
    if ( bReload )
    {
-      // Remember expandes items
+      // Remember expanded items
       QTreeWidgetItemIterator it( this );
       while ( *it )
       {
@@ -757,7 +756,7 @@ bool DirectoryMergeWindow::init
          {
             t_ItemInfo& ii = i->second;
             pDMI->setExpanded( ii.bExpanded );
-            pDMI->m_pMFI->setMergeOperation( ii.eMergeOperation, false );
+            //pDMI->m_pMFI->setMergeOperation( ii.eMergeOperation, false ); unsafe, might have changed
             pDMI->m_pMFI->m_bOperationComplete = ii.bOperationComplete;
             pDMI->setText( s_OpStatusCol, ii.status );
          }
@@ -1312,15 +1311,8 @@ void DirectoryMergeWindow::prepareListView( ProgressProxy& pp )
       if ( pp.wasCancelled() ) break;
       ++currentIdx;
 
-
       // The comparisons and calculations for each file take place here.
       compareFilesAndCalcAges( mfi );
-
-      bool bEqual = bCheckC ? mfi.m_bEqualAB && mfi.m_bEqualAC : mfi.m_bEqualAB;
-      //bool bDir = mfi.m_bDirA || mfi.m_bDirB || mfi.m_bDirC;
-
-      //if ( m_pOptions->m_bDmShowOnlyDeltas && !bDir && bEqual )
-      //   continue;
 
       // Get dirname from fileName: Search for "/" from end:
       int pos = fileName.lastIndexOf('/');
@@ -1348,60 +1340,11 @@ void DirectoryMergeWindow::prepareListView( ProgressProxy& pp )
          new DirMergeItem( dirMfi.m_pDMI, filePart, &mfi );
          mfi.m_pParent = &dirMfi;
 
-         if ( !bEqual )  // Set all parents to "not equal"
-         {
-            MergeFileInfos* p = mfi.m_pParent;
-            while(p!=0)
-            {
-               bool bChange = false;
-               if ( !mfi.m_bEqualAB && p->m_bEqualAB ){ p->m_bEqualAB = false; bChange=true; }
-               if ( !mfi.m_bEqualAC && p->m_bEqualAC ){ p->m_bEqualAC = false; bChange=true; }
-               if ( !mfi.m_bEqualBC && p->m_bEqualBC ){ p->m_bEqualBC = false; bChange=true; }
-
-               if ( bChange )
-                  setPixmaps( *p, bCheckC );
-               else
-                  break;
-
-               p = p->m_pParent;
-            }
-         }
+         // Equality for parent dirs is set in updateFileVisibilities()
       }
 
       setPixmaps( mfi, bCheckC );
    }
-
-   /*if ( m_pOptions->m_bDmShowOnlyDeltas )
-   {
-      // Remove all equals. (Search tree depth first)
-      QListViewItem* p = firstChild();
-      while( p!=0 && firstChild() != 0 )
-      {
-         QListViewItem* pParent = p->parent();
-         QListViewItem* pNextSibling = p->nextSibling();
-
-         DirMergeItem* pDMI = static_cast<DirMergeItem*>(p);
-         bool bDirEqual = bCheckC ? pDMI->m_pMFI->m_bEqualAB && pDMI->m_pMFI->m_bEqualAC
-                                  : pDMI->m_pMFI->m_bEqualAB;
-         if ( pDMI!=0  && pDMI->m_pMFI->m_bDirA && bDirEqual )
-         {
-            delete p;
-            p=0;
-         }
-
-         if ( p!=0 && p->firstChild() != 0 )    p = p->firstChild();
-         else if ( pNextSibling!=0 )            p = pNextSibling;
-         else
-         {
-            p=pParent;
-            while ( p!=0 )
-            {
-               if( p->nextSibling()!=0 ) { p = p->nextSibling(); break; }
-               else                      { p = p->parent();             }
-            }
-         }
-      }
-   }*/
 }
 
 static bool conflictingFileTypes(MergeFileInfos& mfi)
@@ -1505,14 +1448,14 @@ void DirectoryMergeWindow::calcSuggestedOperation( MergeFileInfos& mfi, e_MergeO
             if ( mfi.m_bEqualAB )
                mfi.setMergeOperation( eDeleteFromDest );
             else
-               mfi.setMergeOperation( eCopyBToDest );
+               mfi.setMergeOperation( eChangedAndDeleted );
          }
          else if ( mfi.m_bExistsInA && !mfi.m_bExistsInB && mfi.m_bExistsInC )
          {
             if ( mfi.m_bEqualAC )
                mfi.setMergeOperation( eDeleteFromDest );
             else
-               mfi.setMergeOperation( eCopyCToDest );
+               mfi.setMergeOperation( eChangedAndDeleted );
          }
          else if ( !mfi.m_bExistsInA && mfi.m_bExistsInB && mfi.m_bExistsInC )
          {
@@ -1551,6 +1494,7 @@ void DirectoryMergeWindow::calcSuggestedOperation( MergeFileInfos& mfi, e_MergeO
       switch ( eDefaultMergeOp )
       {
       case eConflictingFileTypes:
+      case eChangedAndDeleted:
       case eConflictingAges:
       case eDeleteA:
       case eDeleteB:
@@ -1875,6 +1819,7 @@ void MergeFileInfos::setMergeOperation( e_MergeOperation eMOp, bool bRecursive )
       case eMergeABCToDest:   s= bDir ? i18n("Merge") : i18n("Merge (manual)");    break;
       case eMergeABToDest:    s= bDir ? i18n("Merge") : i18n("Merge (manual)");    break;
       case eConflictingFileTypes: s=i18n("Error: Conflicting File Types");         break;
+      case eChangedAndDeleted: s=i18n("Error: Changed and Deleted");               break;
       case eConflictingAges:  s=i18n("Error: Dates are equal but files are not."); break;
       default:                assert(false); break;
       }
@@ -2164,6 +2109,15 @@ void DirectoryMergeWindow::prepareMergeStart( QTreeWidgetItem* pBegin, QTreeWidg
             scrollToItem ( pDMI, QAbstractItemView::EnsureVisible );
             pDMI->setSelected( true );
             KMessageBox::error(this, i18n("The modification dates of the file are equal but the files are not. Select what to do."), i18n("Error"));
+            m_mergeItemList.clear();
+            m_bRealMergeStarted=false;
+            return;
+         }
+         if (pDMI!=0 && pDMI->m_pMFI->m_eMergeOperation == eChangedAndDeleted )
+         {
+            scrollToItem( pDMI, QAbstractItemView::EnsureVisible );
+            pDMI->setSelected( true );
+            KMessageBox::error(this, i18n("The highlighted item was changed in one directory and deleted in the other. Select what to do."), i18n("Error"));
             m_mergeItemList.clear();
             m_bRealMergeStarted=false;
             return;
@@ -2912,29 +2866,65 @@ void DirectoryMergeWindow::updateFileVisibilities()
    m_pSelection2Item = 0;
    m_pSelection3Item = 0;
 
-   QTreeWidgetItem* p = topLevelItemCount()>0 ? topLevelItem(0) : 0;
-   while(p)
+   // in first run set all dirs to equal and determine if they are not equal.
+   // on second run don't change the equal-status anymore; it is needed to
+   // set the visibility (when bShowIdentical is false).
+   for( int loop=0; loop<2; ++loop )
    {
-      DirMergeItem* pDMI = static_cast<DirMergeItem*>(p);
-      MergeFileInfos* pMFI = pDMI->m_pMFI;
-      bool bDir = pMFI->m_bDirA || pMFI->m_bDirB || pMFI->m_bDirC;
-      bool bExistsEverywhere = pMFI->m_bExistsInA && pMFI->m_bExistsInB && (pMFI->m_bExistsInC || !bThreeDirs);
-      int existCount = int(pMFI->m_bExistsInA) + int(pMFI->m_bExistsInB) + int(pMFI->m_bExistsInC);
-      bool bVisible =
-               ( bShowIdentical && bExistsEverywhere && pMFI->m_bEqualAB && (pMFI->m_bEqualAC || !bThreeDirs) )
-            || ( (bShowDifferent||bDir) && existCount>=2 && (!pMFI->m_bEqualAB || !(pMFI->m_bEqualAC || !bThreeDirs)))
-            || ( bShowOnlyInA &&  pMFI->m_bExistsInA && !pMFI->m_bExistsInB && !pMFI->m_bExistsInC )
-            || ( bShowOnlyInB && !pMFI->m_bExistsInA &&  pMFI->m_bExistsInB && !pMFI->m_bExistsInC )
-            || ( bShowOnlyInC && !pMFI->m_bExistsInA && !pMFI->m_bExistsInB &&  pMFI->m_bExistsInC );
+      QTreeWidgetItem* p = topLevelItemCount()>0 ? topLevelItem(0) : 0;
+      while(p)
+      {
+         DirMergeItem* pDMI = static_cast<DirMergeItem*>(p);
+         MergeFileInfos* pMFI = pDMI->m_pMFI;
+         bool bDir = pMFI->m_bDirA || pMFI->m_bDirB || pMFI->m_bDirC;
+         if ( loop==0 && bDir )
+         {
+            bool bChange = false;
+            if ( !pMFI->m_bEqualAB ){ pMFI->m_bEqualAB = true; bChange=true; }
+            if ( !pMFI->m_bEqualBC ){ pMFI->m_bEqualBC = true; bChange=true; }
+            if ( !pMFI->m_bEqualAC ){ pMFI->m_bEqualAC = true; bChange=true; }
 
-      QString fileName = pMFI->m_subPath.section( '/', -1 );
-      bVisible = bVisible && (
-            (bDir && ! wildcardMultiMatch( m_pOptions->m_DmDirAntiPattern, fileName, m_bCaseSensitive ))
-            || (wildcardMultiMatch( m_pOptions->m_DmFilePattern, fileName, m_bCaseSensitive )
-               && !wildcardMultiMatch( m_pOptions->m_DmFileAntiPattern, fileName, m_bCaseSensitive )) );
+            if ( bChange )
+               setPixmaps( *pMFI, bThreeDirs );
+         }
+         bool bExistsEverywhere = pMFI->m_bExistsInA && pMFI->m_bExistsInB && (pMFI->m_bExistsInC || !bThreeDirs);
+         int existCount = int(pMFI->m_bExistsInA) + int(pMFI->m_bExistsInB) + int(pMFI->m_bExistsInC);
+         bool bVisible =
+                  ( bShowIdentical && bExistsEverywhere && pMFI->m_bEqualAB && (pMFI->m_bEqualAC || !bThreeDirs) )
+               || ( (bShowDifferent||bDir) && existCount>=2 && (!pMFI->m_bEqualAB || !(pMFI->m_bEqualAC || !bThreeDirs)))
+               || ( bShowOnlyInA &&  pMFI->m_bExistsInA && !pMFI->m_bExistsInB && !pMFI->m_bExistsInC )
+               || ( bShowOnlyInB && !pMFI->m_bExistsInA &&  pMFI->m_bExistsInB && !pMFI->m_bExistsInC )
+               || ( bShowOnlyInC && !pMFI->m_bExistsInA && !pMFI->m_bExistsInB &&  pMFI->m_bExistsInC );
 
-      p->setHidden(!bVisible);
-      p = treeIterator( p, true, true );
+         QString fileName = pMFI->m_subPath.section( '/', -1 );
+         bVisible = bVisible && (
+               (bDir && ! wildcardMultiMatch( m_pOptions->m_DmDirAntiPattern, fileName, m_bCaseSensitive ))
+               || (wildcardMultiMatch( m_pOptions->m_DmFilePattern, fileName, m_bCaseSensitive )
+                  && !wildcardMultiMatch( m_pOptions->m_DmFileAntiPattern, fileName, m_bCaseSensitive )) );
+
+         p->setHidden(!bVisible);
+
+         bool bEqual = bThreeDirs ? pMFI->m_bEqualAB && pMFI->m_bEqualAC : pMFI->m_bEqualAB;
+         if ( !bEqual && bVisible && loop==0 )  // Set all parents to "not equal"
+         {
+            MergeFileInfos* p2 = pMFI->m_pParent;
+            while(p2!=0)
+            {
+               bool bChange = false;
+               if ( !pMFI->m_bEqualAB && p2->m_bEqualAB ){ p2->m_bEqualAB = false; bChange=true; }
+               if ( !pMFI->m_bEqualAC && p2->m_bEqualAC ){ p2->m_bEqualAC = false; bChange=true; }
+               if ( !pMFI->m_bEqualBC && p2->m_bEqualBC ){ p2->m_bEqualBC = false; bChange=true; }
+
+               if ( bChange )
+                  setPixmaps( *p2, bThreeDirs );
+               else
+                  break;
+
+               p2 = p2->m_pParent;
+            }
+         }
+         p = treeIterator( p, true, true );
+      }
    }
 }
 

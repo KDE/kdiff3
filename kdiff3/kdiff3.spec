@@ -1,5 +1,5 @@
 Name: kdiff3
-Version: 0.9.93
+Version: 0.9.95
 Release: 1
 
 URL: http://www.kde-apps.org/content/show.php?content=9807
@@ -15,6 +15,7 @@ BuildRequires: gcc-c++ >= 4.1
 BuildRequires: xorg-x11-devel
 BuildRequires: qt-devel >= 4.4
 BuildRequires: kdelibs-devel >= 4.1
+BuildRequires: libkonq-devel >= 4.1
 
 %description
 Shows the differences line by line and character by character (!).
@@ -56,7 +57,7 @@ source  /etc/profile.d/qt.sh
 %{_libdir}/kde4/libkdiff3*
 
 %changelog
-* Fri Nov 21 2008 Joachim Eibl - 0.9.93-1
+* Fri Nov 21 2008 Joachim Eibl - 0.9.94-1
 - Untested changes for KDE4.
 * Mon May 15 2006 Vadim Likhota <vadim-lvv@yandex.ru> - 0.9.90-1.fc
 - write spec for fc/rhel/centos/asp for kdiff3

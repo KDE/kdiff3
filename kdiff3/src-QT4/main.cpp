@@ -34,80 +34,50 @@
 #endif
 #include "common.h"
 
+void initialiseCmdLineArgs( KCmdLineOptions& options )
+{
+   QString configFileName = KStandardDirs().findResource("config","kdiff3rc");
+   QFile configFile( configFileName );
+   QString ignorableOptionsLine = "-u;-query;-html;-abort";
+   if ( configFile.open( QIODevice::ReadOnly ) )
+   {
+      QTextStream ts( &configFile );
+      while(!ts.atEnd())
+      {
+         QString line = ts.readLine();
+         if ( line.startsWith("IgnorableCmdLineOptions=") )
+         {
+            int pos = line.indexOf('=');
+            if (pos>=0)
+            {
+               ignorableOptionsLine = line.mid(pos+1);
+            }
+            break;
+         }
+      }
+   }
 
-// static KCmdLineOptions options[] =
-// {
-//   { "m", 0, 0 },
-//   { "merge", I18N_NOOP("Merge the input."), 0 },
-//   { "b", 0, 0 },
-//   { "base file", I18N_NOOP("Explicit base file. For compatibility with certain tools."), 0 },
-//   { "o", 0, 0 },
-//   { "output file", I18N_NOOP("Output file. Implies -m. E.g.: -o newfile.txt"), 0 },
-//   { "out file",    I18N_NOOP("Output file, again. (For compatibility with certain tools.)"), 0 },
-//   { "auto",        I18N_NOOP("No GUI if all conflicts are auto-solvable. (Needs -o file)"), 0 },
-//   { "qall",        I18N_NOOP("Don't solve conflicts automatically. (For compatibility...)"), 0 },
-//   { "L1 alias1",   I18N_NOOP("Visible name replacement for input file 1 (base)."), 0 },
-//   { "L2 alias2",   I18N_NOOP("Visible name replacement for input file 2."), 0 },
-//   { "L3 alias3",   I18N_NOOP("Visible name replacement for input file 3."), 0 },
-//   { "L", 0, 0 },
-//   { "fname alias", I18N_NOOP("Alternative visible name replacement. Supply this once for every input."), 0 },
-//   { "cs string",   I18N_NOOP("Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\""), 0 },
-//   { "confighelp",  I18N_NOOP("Show list of config settings and current values."), 0 },
-//   { "config file", I18N_NOOP("Use a different config file."), 0 }
-// };
-// static KCmdLineOptions options2[] =
-// {
-//   { "+[File1]", I18N_NOOP("file1 to open (base, if not specified via --base)"), 0 },
-//   { "+[File2]", I18N_NOOP("file2 to open"), 0 },
-//   { "+[File3]", I18N_NOOP("file3 to open"), 0 }
-// };
-// 
-
-// void initialiseCmdLineArgs(std::vector<KCmdLineOptions>& vOptions, QStringList& ignorableOptions)
-// {
-//    vOptions.insert( vOptions.end(), options, (KCmdLineOptions*)((char*)options+sizeof(options)));
-//    QString configFileName = KStandardDirs().findResource("config","kdiff3rc");
-//    QFile configFile( configFileName );
-//    if ( configFile.open( QIODevice::ReadOnly ) )
-//    {
-//       QTextStream ts( &configFile );
-//       while(!ts.atEnd())
-//       {
-//          QString line = ts.readLine();
-//          if ( line.startsWith("IgnorableCmdLineOptions=") )
-//          {
-//             int pos = line.indexOf('=');
-//             if (pos>=0)
-//             {
-//                QString s = line.mid(pos+1);
-//                QStringList sl = s.split( '|' );
-//                if (!sl.isEmpty())
-//                {
-//                   ignorableOptions = sl.front().split( ';' );
-//                   for (QStringList::iterator i=ignorableOptions.begin(); i!=ignorableOptions.end(); ++i)
-//                   {
-//                      KCmdLineOptions ignoreOption;
-//                      (*i).remove('-');
-//                      if (!(*i).isEmpty())
-//                      {
-//                         ignoreOption.name = (new QByteArray( (*i).toLatin1() ))->constData();
-//                         ignoreOption.description = I18N_NOOP("Ignored. (User defined.)");
-//                         ignoreOption.def = 0;
-//                         vOptions.push_back(ignoreOption);
-//                      }
-//                   }
-//                }
-//             }
-//             break;
-//          }
-//       }
-//    }
-//    vOptions.insert(vOptions.end(),options2,(KCmdLineOptions*)((char*)options2+sizeof(options2)));
-// 
-//    KCmdLineOptions last = KCmdLineLastOption;
-//    vOptions.push_back(last);
-//    KCmdLineArgs::addCmdLineOptions( &vOptions[0] ); // Add our own options.
-// }
+#ifdef KREPLACEMENTS_H
+   QStringList sl = ignorableOptionsLine.split( '|' );
+#else
+   QStringList sl = ignorableOptionsLine.split( ',' );
+#endif
+   if (!sl.isEmpty())
+   {
+      QStringList ignorableOptions = sl.front().split( ';' );
+      for (QStringList::iterator i=ignorableOptions.begin(); i!=ignorableOptions.end(); ++i)
+      {
+         (*i).remove('-');
+         if (!(*i).isEmpty())
+         {
+            if ( i->length()==1 )
+               options.add( i->toLatin1() ).add("ignore", ki18n("Ignored. (User defined.)") );
+            else
+               options.add( i->toLatin1(), ki18n("Ignored. (User defined.)") );
+         }
+      }
+   }
+}
 
 #ifdef _WIN32
 #include <process.h>
@@ -187,7 +157,7 @@ int main(int argc, char *argv[])
    const KLocalizedString i18nName = ki18n("kdiff3");
    const QByteArray& appVersion = QByteArray( VERSION );
    const KLocalizedString description = ki18n("Tool for Comparison and Merge of Files and Directories");
-   const KLocalizedString copyright = ki18n("(c) 2002-2008 Joachim Eibl");
+   const KLocalizedString copyright = ki18n("(c) 2002-2009 Joachim Eibl");
    const QByteArray& homePage = "http://kdiff3.sourceforge.net/";
    const QByteArray& bugsAddress = "joachim.eibl" "@" "gmx.de";
    KAboutData aboutData( appName, appCatalog, i18nName, 
@@ -236,11 +206,9 @@ int main(int argc, char *argv[])
    options.add( "+[File2]", ki18n("file2 to open") );
    options.add( "+[File3]", ki18n("file3 to open") );
 
-   KCmdLineArgs::addCmdLineOptions( options );
+   initialiseCmdLineArgs( options );
 
-//    std::vector<KCmdLineOptions> vOptions;
-//    QStringList ignorableOptions;
-//    initialiseCmdLineArgs(vOptions, ignorableOptions);
+   KCmdLineArgs::addCmdLineOptions( options );
 
    KApplication app;
 
@@ -257,7 +225,7 @@ int main(int argc, char *argv[])
       if ( locale == "Auto" || locale.isEmpty() )
          locale = locale = QLocale::system().name().left(2);
          
-      QString translationDir = getTranslationDir();
+      QString translationDir = getTranslationDir(locale);
       kdiff3Translator.load( QString("kdiff3_")+locale, translationDir );
       app.installTranslator( &kdiff3Translator );
       

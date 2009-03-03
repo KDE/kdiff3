@@ -414,7 +414,7 @@ bool FileAccess::writeFile( const void* pSrcBuffer, unsigned long length )
          if ( isExecutable() )  // value is true if the old file was executable
          {
             // Preserve attributes
-            f.setPermissions(QFile::ExeUser);
+            f.setPermissions(f.permissions() | QFile::ExeUser);
             //struct stat srcFileStatus;
             //int statResult = ::stat( filePath().toLocal8Bit().constData(), &srcFileStatus );
             //if (statResult==0)
@@ -709,7 +709,7 @@ bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOve
    if ( maxLength>0 )
    {
       KIO::TransferJob* pJob = KIO::put( m_pFileAccess->m_url, permissions, 
-            (bOverwrite ? KIO::Overwrite : KIO::DefaultFlags) | (bResume ? KIO::Resume : KIO::DefaultFlags) );
+         KIO::HideProgressInfo | (bOverwrite ? KIO::Overwrite : KIO::DefaultFlags) | (bResume ? KIO::Resume : KIO::DefaultFlags) );
       m_transferredBytes = 0;
       m_pTransferBuffer = (char*)pSrcBuffer;
       m_maxLength = maxLength;
@@ -856,7 +856,7 @@ bool FileAccessJobHandler::rename( const QString& dest )
    {
       int permissions=-1;
       m_bSuccess = false;
-      KIO::FileCopyJob* pJob = KIO::file_move( m_pFileAccess->m_url, kurl, permissions, KIO::DefaultFlags );
+      KIO::FileCopyJob* pJob = KIO::file_move( m_pFileAccess->m_url, kurl, permissions, KIO::HideProgressInfo );
       connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
       connect( pJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
 
@@ -890,7 +890,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
    {
       int permissions = (m_pFileAccess->isExecutable()?0111:0)+(m_pFileAccess->isWritable()?0222:0)+(m_pFileAccess->isReadable()?0444:0);
       m_bSuccess = false;
-      KIO::FileCopyJob* pJob = KIO::file_copy ( m_pFileAccess->m_url, destUrl, permissions, KIO::DefaultFlags );
+      KIO::FileCopyJob* pJob = KIO::file_copy ( m_pFileAccess->m_url, destUrl, permissions, KIO::HideProgressInfo );
       connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
       connect( pJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
       g_pProgressDialog->enterEventLoop( pJob,
@@ -1335,7 +1335,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
    else
    {
       KIO::ListJob* pListJob=0;
-      pListJob = KIO::listDir( m_pFileAccess->m_url, KIO::DefaultFlags, true /*bFindHidden*/ );
+      pListJob = KIO::listDir( m_pFileAccess->m_url, KIO::HideProgressInfo, true /*bFindHidden*/ );
 
       m_bSuccess = false;
       if ( pListJob!=0 )

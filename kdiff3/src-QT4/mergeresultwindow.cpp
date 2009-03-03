@@ -2412,6 +2412,11 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
 
    m_cursorYPos = y;
    m_cursorXPos = xOnScreen;
+   if ( m_cursorXPos>m_nofColumns )
+   {
+      m_nofColumns = m_cursorXPos;
+      emit resizeSignal();
+   }
    if ( ! bYMoveKey )
       m_cursorOldXPos = m_cursorXPos;
 

@@ -40,6 +40,8 @@ public:
    ~DiffTextWindow();
    void init(
       const QString& fileName,
+      QTextCodec* pCodec,
+      e_LineEndStyle eLineEndStyle,
       const LineData* pLineData,
       int size,
       const Diff3LineVector* pDiff3LineVector,
