@@ -479,7 +479,7 @@ QString FileAccess::tempFileName()
    #ifdef KREPLACEMENTS_H
 
       QString fileName;
-      #ifdef _WIN32
+      #if defined(_WIN32) || defined(Q_OS_OS2)
          QString tmpDir = getenv("TEMP");
       #else
          QString tmpDir = "/tmp";
@@ -535,7 +535,7 @@ bool FileAccess::removeDir( const QString& dirName )
    return fh.rmDir( dirName );
 }
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(Q_OS_OS2)
 bool FileAccess::symLink( const QString& /*linkTarget*/, const QString& /*linkLocation*/ )
 {
    return false;
@@ -717,7 +717,7 @@ bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOve
       m_pFileAccess->m_statusText = QString();
 
       connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotPutJobResult(KJob*)));
-      connect( pJob, SIGNAL(dataReq(KJob*, QByteArray&)), this, SLOT(slotPutData(KJob*, QByteArray&)));
+      connect( pJob, SIGNAL(dataReq(KIO::Job*, QByteArray&)), this, SLOT(slotPutData(KIO::Job*, QByteArray&)));
       connect( pJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
 
       g_pProgressDialog->enterEventLoop( pJob, i18n("Writing file: %1",m_pFileAccess->prettyAbsPath()) );
@@ -727,7 +727,7 @@ bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOve
       return true;
 }
 
-void FileAccessJobHandler::slotPutData( KJob* pJob, QByteArray& data )
+void FileAccessJobHandler::slotPutData( KIO::Job* pJob, QByteArray& data )
 {
    if ( pJob->error() )
    {
@@ -1361,7 +1361,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
    {
       cvsIgnoreList.init( *m_pFileAccess, cvsIgnoreExists(pDirList) );
    }
-#ifdef _WIN32
+#if defined(_WIN32) || defined(Q_OS_OS2)
    bool bCaseSensitive = false;
 #else
    bool bCaseSensitive = true;

@@ -17,7 +17,9 @@
 
 #ifndef KREPLACEMENTS_H
 #define KREPLACEMENTS_H
+#ifndef __OS2__
 #pragma once
+#endif
 
 #include "common.h"
 
@@ -385,6 +387,7 @@ public slots:
    void slotClicked();
 };
 
+#ifndef QT_NO_PRINTER
 class KPrinter : public QPrinter
 {
 public:
@@ -394,6 +397,7 @@ public:
    void setCurrentPage(int);
    void setPageSelection(e_PageSelection);
 };
+#endif
 
 class KStandardDirs
 {

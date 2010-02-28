@@ -1,7 +1,7 @@
 TEMPLATE = app
 # When unresolved items remain during linking: Try adding "shared" in the CONFIG.
 CONFIG  += qt warn_on thread precompile_header
-PRECOMPILED_HEADER = stable.h
+!os2:PRECOMPILED_HEADER = stable.h
 HEADERS  = version.h                     \
            diff.h                        \
            difftextwindow.h              \
@@ -53,7 +53,9 @@ win32 {
            QMAKE_LFLAGS += user32.lib shell32.lib
    }
 }
-
+os2 {
+  RC_FILE = kdiff3os2.rc
+}
 
 unix {
   documentation.path = /usr/local/share/doc/kdiff3

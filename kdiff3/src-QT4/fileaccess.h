@@ -163,7 +163,7 @@ private slots:
    void slotPutJobResult( KJob* pJob );
 
    void slotGetData(KJob*,const QByteArray&);
-   void slotPutData(KJob*, QByteArray&);
+   void slotPutData(KIO::Job*, QByteArray&);
 
    void slotListDirInfoMessage( KJob*, const QString& msg );
    void slotListDirProcessNewEntries( KIO::Job *, const KIO::UDSEntryList& l );

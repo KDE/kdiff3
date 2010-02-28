@@ -175,7 +175,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
       }
       if (!s.isEmpty())
       {
-#ifdef _WIN32 
+#if defined(_WIN32) || defined(Q_OS_OS2) 
          // A windows program has no console
          //KMessageBox::information(0, s,i18n("KDiff3-Usage"));
          QDialog* pDialog = new QDialog(this);
@@ -482,8 +482,10 @@ void KDiff3App::initActions( KActionCollection* ac )
    fileSave->setStatusTip(i18n("Saves the merge result. All conflicts must be solved!"));
    fileSaveAs = KStandardAction::saveAs(this, SLOT(slotFileSaveAs()), ac);
    fileSaveAs->setStatusTip(i18n("Saves the current document as..."));
+#ifndef QT_NO_PRINTER
    filePrint = KStandardAction::print(this, SLOT(slotFilePrint()), ac);
    filePrint->setStatusTip(i18n("Print the differences"));
+#endif
    fileQuit = KStandardAction::quit(this, SLOT(slotFileQuit()), ac);
    fileQuit->setStatusTip(i18n("Quits the application"));
    editCut = KStandardAction::cut(this, SLOT(slotEditCut()), ac);
@@ -585,7 +587,7 @@ void KDiff3App::initActions( KActionCollection* ac )
    addManualDiffHelp  = KDiff3::createAction< KAction >(i18n("Add Manual Diff Alignment"), KShortcut( Qt::CTRL+Qt::Key_Y ), this, SLOT(slotAddManualDiffHelp()), ac, "diff_add_manual_diff_help");
    clearManualDiffHelpList  = KDiff3::createAction< KAction >(i18n("Clear All Manual Diff Alignments"), KShortcut( Qt::CTRL+Qt::SHIFT+Qt::Key_Y ), this, SLOT(slotClearManualDiffHelpList()), ac, "diff_clear_manual_diff_help_list");
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(Q_OS_OS2)
    KDiff3::createAction< KAction >(i18n("Focus Next Window"), KShortcut(Qt::CTRL+Qt::Key_Tab), this, SLOT(slotWinFocusNext()), ac, "win_focus_next");
 #endif
    winFocusPrev = KDiff3::createAction< KAction >(i18n("Focus Prev Window"), KShortcut( Qt::ALT+Qt::Key_Left ), this, SLOT(slotWinFocusPrev()), ac, "win_focus_prev");
@@ -775,7 +777,10 @@ void KDiff3App::slotFilePrint()
 {
    if ( !m_pDiffTextWindow1 )
       return;
-
+#ifdef QT_NO_PRINTER
+   slotStatusMsg( i18n( "Printing not implemented." ) );
+#endif
+#ifndef QT_NO_PRINTER
    QPrinter printer;
    QPrintDialog printDialog(&printer, this);
 
@@ -980,6 +985,7 @@ void KDiff3App::slotFilePrint()
    {
       slotStatusMsg( i18n( "Printing aborted." ) );
    }
+#endif
 }
 
 void KDiff3App::slotFileQuit()

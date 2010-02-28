@@ -150,6 +150,11 @@ int main(int argc, char *argv[])
    }
 
 #endif
+#ifdef Q_OS_OS2
+   // expand wildcards on the command line
+   _wildcard(&argc, &argv);
+#endif
+
    //QApplication::setColorSpec( QApplication::ManyColor ); // Grab all 216 colors
 
    const QByteArray& appName = QByteArray("kdiff3");

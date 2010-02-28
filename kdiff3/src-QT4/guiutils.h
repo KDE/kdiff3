@@ -52,7 +52,7 @@ namespace KDiff3 {
       KToggleAction* theAction = new KToggleAction(ac);
       ac->addAction( actionName, theAction );
       theAction->setText( text );
-      QObject::connect( theAction, SIGNAL( toggled(bool) ), receiver, slot );
+      QObject::connect( theAction, SIGNAL( triggered(bool) ), receiver, slot );
       return theAction;
    }
    

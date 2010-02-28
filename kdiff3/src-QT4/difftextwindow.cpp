@@ -69,7 +69,7 @@ public:
       m_bMyUpdate = false;
       m_bSelectionInProgress = false;
       m_pTextCodec = 0;
-      #ifdef _WIN32
+      #if defined(_WIN32) || defined(Q_OS_OS2)
       m_eLineEndStyle = eLineEndStyleDos;
       #else
       m_eLineEndStyle = eLineEndStyleUnix;
@@ -1089,7 +1089,7 @@ void DiffTextWindow::print( MyPainter& p, const QRect&, int firstLine, int nofLi
 
 void DiffTextWindowData::draw( MyPainter& p, const QRect& invalidRect, int deviceWidth, int beginLine, int endLine )
 {
-   m_lineNumberWidth =  m_pOptionDialog->m_bShowLineNumbers ? (int)log10((double)m_size)+1 : 0;
+   m_lineNumberWidth = m_pOptionDialog->m_bShowLineNumbers ? (int)log10((double)qMax(m_size,1))+1 : 0;
 
    if ( m_winIdx==1 )
    {
@@ -1310,7 +1310,7 @@ QString DiffTextWindow::getSelection()
             !( d->m_bWordWrap && it+1<vectorSize && d3l == d->m_diff3WrapLineVector[it+1].pD3L ) 
            )
          {
-            #ifdef _WIN32
+            #if defined(_WIN32) || defined(Q_OS_OS2)
             selectionString += '\r';
             #endif
             selectionString += '\n';
@@ -1754,7 +1754,7 @@ void DiffTextWindowFrame::setFirstLine( int firstLine )
    if ( pDTW && pDTW->d->m_pDiff3LineVector )
    {
       QString s= i18n("Top line");
-      int lineNumberWidth = (int)log10((double)pDTW->d->m_size)+1;
+      int lineNumberWidth = (int)log10((double)qMax(pDTW->d->m_size,1))+1;
 
       int l=pDTW->calcTopLineInFile(firstLine);
 

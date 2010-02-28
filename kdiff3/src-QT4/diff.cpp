@@ -462,7 +462,7 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
    if ( faIn.exists() ) // fileInSize > 0 )
    {
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(Q_OS_OS2)
       QString catCmd = "type";
       fileNameIn1.replace( '/', "\\" );
 #else

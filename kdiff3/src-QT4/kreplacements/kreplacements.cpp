@@ -62,13 +62,8 @@ static KAboutData* s_pAboutData;
 
 static void showHelp()
 {
-   #ifdef _WIN32
-      char buf[200];
-      int r= SearchPathA( 0, ".",  0, sizeof(buf), buf, 0 );
-
-      QString exePath;
-      if (r!=0)  {  exePath = buf; }
-      else       {  exePath = "."; }
+   #if defined(_WIN32) || defined(Q_OS_OS2)
+      QString exePath = QCoreApplication::applicationDirPath();
 
       QFileInfo helpFile( exePath + "\\doc\\en\\index.html" );
       if ( ! helpFile.exists() ) {  helpFile.setFile( exePath + "\\..\\doc\\en\\index.html" );     }
@@ -83,24 +78,27 @@ static void showHelp()
          return;
       }
 
+#ifndef Q_OS_OS2
       HINSTANCE hi = FindExecutableA( helpFile.fileName().toAscii(), helpFile.absolutePath().toAscii(), buf );
       if ( int(hi)<=32 )
       {
+#endif
          static QTextBrowser* pBrowser = 0;
          if (pBrowser==0)
          {
             pBrowser = new QTextBrowser( 0 );
             pBrowser->setMinimumSize( 600, 400 );
          }
-         pBrowser->setSource(helpFile.filePath());
+         pBrowser->setSource(QUrl("file:///"+helpFile.filePath()));
          pBrowser->show();
+#ifndef Q_OS_OS2
       }
       else
       {
          QFileInfo prog( buf );
          QProcess::startDetached ( prog.filePath(), QStringList( "file:///"+helpFile.absoluteFilePath() ) );
       }
-
+#endif
    #else
       static QTextBrowser* pBrowser = 0;
       if (pBrowser==0)
@@ -115,14 +113,9 @@ static void showHelp()
 
 QString getTranslationDir(const QString& locale)
 {
-   #ifdef _WIN32
-      wchar_t buf[200];
-      int r= SearchPathW( 0, L".",  0, sizeof(buf)/sizeof(wchar_t), buf, 0 );
-
-      buf[ sizeof(buf)/sizeof(wchar_t) -1 ] = 0;
+   #if defined(_WIN32) || defined(Q_OS_OS2)
       QString exePath;
-      if (r!=0)  {  exePath = QString::fromUtf16( (ushort*)&buf[0] ); }
-      else       {  exePath = "."; }
+      exePath = QCoreApplication::applicationDirPath();
       return exePath+"/translations";
    #else
       return  (QString)"/usr/share/locale/" + locale + "/LC_MESSAGES";
@@ -842,6 +835,7 @@ void KColorButton::slotClicked()
    update();
 }
 
+#ifndef QT_NO_PRINTER
 KPrinter::KPrinter()
 {
 }
@@ -861,7 +855,7 @@ void KPrinter::setCurrentPage(int)
 void KPrinter::setPageSelection(e_PageSelection)
 {
 }
-
+#endif
 
 QPixmap KIconLoader::loadIcon( const QString&, int, int )
 {
@@ -1136,7 +1130,7 @@ KApplication::KApplication()
             }
 
             s += "\n"+i18n("For more documentation, see the help-menu or the subdirectory doc.")+"\n";
-#ifdef _WIN32
+#if defined(_WIN32) || defined(Q_OS_OS2)
             // A windows program has no console
             if ( 0==QMessageBox::information(0, i18n("KDiff3-Usage"), s, i18n("Ignore"),i18n("Exit") ) )
                continue;

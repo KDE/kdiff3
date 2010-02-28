@@ -2516,7 +2516,7 @@ bool DirectoryMergeWindow::copyFLD( const QString& srcName, const QString& destN
    if ( fi.isSymLink() && ((fi.isDir() && !m_bFollowDirLinks)  ||  (!fi.isDir() && !m_bFollowFileLinks)) )
    {
       m_pStatusInfo->addText(i18n("copyLink( %1 -> %2 )",srcName,destName));
-#ifdef _WIN32
+#if defined(_WIN32) || defined(Q_OS_OS2)
       // What are links?
 #else
       if ( m_bSimulatedMergeStarted )
