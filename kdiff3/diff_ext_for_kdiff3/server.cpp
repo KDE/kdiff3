@@ -33,9 +33,9 @@
 
 // registry key util struct
 struct REGSTRUCT {
-  LPTSTR subkey;
-  LPTSTR name;
-  LPTSTR value;
+  LPCTSTR subkey;
+  LPCTSTR name;
+  LPCTSTR value;
 };
 
 SERVER* SERVER::_instance = 0;
@@ -43,8 +43,12 @@ static HINSTANCE server_instance; // Handle to this DLL itself.
 
 //DEFINE_GUID(CLSID_DIFF_EXT, 0xA0482097, 0xC69D, 0x4DEC, 0x8A, 0xB6, 0xD3, 0xA2, 0x59, 0xAC, 0xC1, 0x51);
 // New class id for DIFF_EXT for KDiff3
+#ifdef _WIN64
+// {34471FFB-4002-438b-8952-E4588D0C0FE9}
+DEFINE_GUID( CLSID_DIFF_EXT, 0x34471FFB, 0x4002, 0x438b, 0x89, 0x52, 0xE4, 0x58, 0x8D, 0x0C, 0x0F, 0xE9 );
+#else
 DEFINE_GUID( CLSID_DIFF_EXT, 0x9f8528e4, 0xab20, 0x456e, 0x84, 0xe5, 0x3c, 0xe6, 0x9d, 0x87, 0x20, 0xf3 );
-
+#endif
 
 tstring SERVER::getRegistryKeyString( const tstring& subKey, const tstring& value )
 {

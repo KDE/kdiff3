@@ -3,13 +3,15 @@
 ;Apdapted for KDiff3 by Sebastien Fricker and Joachim Eibl
 ;Requires nsis_v2.19
 
-!define KDIFF3_VERSION "0.9.93"
-!define DIFF_EXT_CLSID "{9F8528E4-AB20-456E-84E5-3CE69D8720F3}"
+!define KDIFF3_VERSION "0.9.95"
+!define DIFF_EXT32_CLSID "{9F8528E4-AB20-456E-84E5-3CE69D8720F3}"
+!define DIFF_EXT64_CLSID "{34471FFB-4002-438b-8952-E4588D0C0FE9}"
 
 ;--------------------------------
 ;Include Modern UI
 
   !include "MUI.nsh"
+  !include "x64.nsh"
 
 ;--------------------------------
 ;General
@@ -31,7 +33,10 @@
 
   Var MUI_TEMP
   Var STARTMENU_FOLDER
-
+  Var DIFF_EXT_CLSID
+  Var DIFF_EXT_DLL
+  Var DIFF_EXT_OLD_DLL
+  
 ;--------------------------------
 ;Interface Settings
 
@@ -227,7 +232,7 @@ SectionIn RO
     File "COPYING.txt"
     File "Readme_Win.txt"
     File "ChangeLog.txt"
-
+  Delete "$INSTDIR\kdiff3-QT4.exe"
   
   ;Store installation folder
   WriteRegStr HKCU "Software\KDiff3" "" $INSTDIR
@@ -273,26 +278,48 @@ SectionEnd
 
 Section "Diff-Ext" SecIntegrationDiffExtForKDiff3
   DetailPrint "Diff-Ext for KDiff3"
-  
-  IfFileExists "$INSTDIR\diff_ext_for_kdiff3_old.dll" 0 +2
-     Delete "$INSTDIR\diff_ext_for_kdiff3_old.dll"
-     
-  IfFileExists "$INSTDIR\diff_ext_for_kdiff3.dll" 0 +2
-     Rename "$INSTDIR\diff_ext_for_kdiff3.dll" "$INSTDIR\diff_ext_for_kdiff3_old.dll"
 
-  File "diff_ext_for_kdiff3.dll"
-  File "DIFF-EXT-LICENSE.txt"
-  CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Diff-Ext License.lnk"    "$INSTDIR\DIFF-EXT-LICENSE.txt"
+${If} ${RunningX64}
+  StrCpy $DIFF_EXT_CLSID ${DIFF_EXT64_CLSID}
+  StrCpy $DIFF_EXT_DLL "diff_ext_for_kdiff3_64.dll"
+  StrCpy $DIFF_EXT_OLD_DLL "diff_ext_for_kdiff3_64_old.dll"
+${Else}
+  StrCpy $DIFF_EXT_CLSID ${DIFF_EXT32_CLSID}
+  StrCpy $DIFF_EXT_DLL "diff_ext_for_kdiff3.dll"
+  StrCpy $DIFF_EXT_OLD_DLL "diff_ext_for_kdiff3_old.dll"
+${EndIf}
+
+  IfFileExists "$INSTDIR\$DIFF_EXT_OLD_DLL" 0 +2
+     Delete "$INSTDIR\$DIFF_EXT_OLD_DLL"
+     
+  IfFileExists "$INSTDIR\$DIFF_EXT_DLL" 0 +2
+     Rename "$INSTDIR\$DIFF_EXT_DLL" "$INSTDIR\$DIFF_EXT_OLD_DLL"
+
+  
+${If} ${RunningX64}
+	File "diff_ext_for_kdiff3_64.dll"
+${Else}
+	File "diff_ext_for_kdiff3.dll"
+${EndIf}
+
+  SetRegView 64
+
   WriteRegStr HKCU  "Software\KDiff3\diff-ext" "" ""
   WriteRegStr SHCTX "Software\KDiff3\diff-ext" "InstallDir" "$INSTDIR"
   WriteRegStr SHCTX "Software\KDiff3\diff-ext" "diffcommand" "$INSTDIR\kdiff3.exe"
-  WriteRegStr SHCTX "Software\Classes\CLSID\${DIFF_EXT_CLSID}"                ""  "diff-ext-for-kdiff3"
-  WriteRegStr SHCTX "Software\Classes\CLSID\${DIFF_EXT_CLSID}\InProcServer32" ""  "$INSTDIR\diff_ext_for_kdiff3.dll"
-  WriteRegStr SHCTX "Software\Classes\CLSID\${DIFF_EXT_CLSID}\InProcServer32" "ThreadingModel" "Apartment"
-  WriteRegStr SHCTX "Software\Classes\*\shellex\ContextMenuHandlers\diff-ext-for-kdiff3" "" "${DIFF_EXT_CLSID}"
-  WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "${DIFF_EXT_CLSID}" "diff-ext-for-kdiff3"
-  WriteRegStr SHCTX "Software\Classes\Folder\shellex\ContextMenuHandlers\diff-ext-for-kdiff3" "" "${DIFF_EXT_CLSID}"
-  WriteRegStr SHCTX "Software\Classes\Directory\shellex\ContextMenuHandlers\diff-ext-for-kdiff3" "" "${DIFF_EXT_CLSID}"
+  WriteRegStr SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID"                ""  "diff-ext-for-kdiff3"
+  WriteRegStr SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID\InProcServer32" ""  "$INSTDIR\$DIFF_EXT_DLL"
+  WriteRegStr SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID\InProcServer32" "ThreadingModel" "Apartment"
+  WriteRegStr SHCTX "Software\Classes\*\shellex\ContextMenuHandlers\diff-ext-for-kdiff3" "" "$DIFF_EXT_CLSID"
+  WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "$DIFF_EXT_CLSID" "diff-ext-for-kdiff3"
+  WriteRegStr SHCTX "Software\Classes\Folder\shellex\ContextMenuHandlers\diff-ext-for-kdiff3" "" "$DIFF_EXT_CLSID"
+  WriteRegStr SHCTX "Software\Classes\Directory\shellex\ContextMenuHandlers\diff-ext-for-kdiff3" "" "$DIFF_EXT_CLSID"
+
+  SetRegView 32
+
+  File "DIFF-EXT-LICENSE.txt"  
+  CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Diff-Ext License.lnk"    "$INSTDIR\DIFF-EXT-LICENSE.txt"
+  
 SectionEnd
 
 Section "WinCVS" SecIntegrationWinCVS
@@ -343,6 +370,7 @@ Function CustomPageC
 
 FunctionEnd
 
+
 ;--------------------------------
 ;Descriptions
 
@@ -373,15 +401,16 @@ Section "Uninstall"
     SetShellVarContext current
     Goto +2
     SetShellVarContext all
-
+	
   Delete "$INSTDIR\Uninstall.exe"
   Delete "$INSTDIR\kdiff3.exe"
-  Delete "$INSTDIR\kdiff3-QT4.exe"
   Delete "$INSTDIR\COPYING.txt"
   Delete "$INSTDIR\Readme_Win.txt"
   Delete "$INSTDIR\ChangeLog.txt"
   Delete "$INSTDIR\diff_ext_for_kdiff3.dll"
   Delete "$INSTDIR\diff_ext_for_kdiff3_old.dll"
+  Delete "$INSTDIR\diff_ext_for_kdiff3_64.dll"
+  Delete "$INSTDIR\diff_ext_for_kdiff3_64_old.dll"
   Delete "$INSTDIR\DIFF-EXT-LICENSE.txt"
 
   RMDir /r "$INSTDIR\doc"
@@ -413,17 +442,24 @@ Section "Uninstall"
   
     StrCmp $MUI_TEMP $SMPROGRAMS startMenuDeleteLoopDone startMenuDeleteLoop
   startMenuDeleteLoopDone:
-
+  
   DeleteRegKey HKCU  "Software\KDiff3"
   DeleteRegKey SHCTX "Software\KDiff3"
   DeleteRegKey SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\KDiff3"
 
   ; diff_ext_for_kdiff3
-  DeleteRegKey SHCTX "Software\Classes\CLSID\${DIFF_EXT_CLSID}"
+${If} ${RunningX64}
+  StrCpy $DIFF_EXT_CLSID ${DIFF_EXT64_CLSID}
+${Else}
+  StrCpy $DIFF_EXT_CLSID ${DIFF_EXT32_CLSID}
+${EndIf}
+  SetRegView 64
+  DeleteRegKey SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID"
   DeleteRegKey SHCTX "Software\Classes\*\shellex\ContextMenuHandlers\diff-ext-for-kdiff3"
   DeleteRegKey SHCTX "Software\Classes\Folder\shellex\ContextMenuHandlers\diff-ext-for-kdiff3"
   DeleteRegKey SHCTX "Software\Classes\Directory\shellex\ContextMenuHandlers\diff-ext-for-kdiff3"
-  DeleteRegValue SHCTX "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "${DIFF_EXT_CLSID}"
+  DeleteRegValue SHCTX "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "$DIFF_EXT_CLSID"
+  SetRegView 32
 
   ; clearcase
   ccInstallHelper::nsisPlugin "uninstall" "$INSTDIR\kdiff3.exe"
