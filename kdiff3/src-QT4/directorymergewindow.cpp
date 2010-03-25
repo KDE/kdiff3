@@ -2500,7 +2500,9 @@ bool DirectoryMergeWindow::copyFLD( const QString& srcName, const QString& destN
    if ( srcName == destName )
       return true;
 
-   if ( FileAccess(destName, true).exists() )
+   FileAccess fi( srcName );
+   FileAccess faDest(destName, true);
+   if ( faDest.exists() && !( fi.isDir() && faDest.isDir() && (fi.isSymLink()==faDest.isSymLink())) )
    {
       bool bSuccess = deleteFLD( destName, m_pOptions->m_bDmCreateBakFiles );
       if ( !bSuccess )
@@ -2511,7 +2513,6 @@ bool DirectoryMergeWindow::copyFLD( const QString& srcName, const QString& destN
       }
    }
 
-   FileAccess fi( srcName );
 
    if ( fi.isSymLink() && ((fi.isDir() && !m_bFollowDirLinks)  ||  (!fi.isDir() && !m_bFollowFileLinks)) )
    {
@@ -2539,8 +2540,13 @@ bool DirectoryMergeWindow::copyFLD( const QString& srcName, const QString& destN
 
    if ( fi.isDir() )
    {
-      bool bSuccess = makeDir( destName );
-      return bSuccess;
+      if ( faDest.exists() )
+	 return true;
+      else
+      {
+         bool bSuccess = makeDir( destName );
+         return bSuccess;
+      }
    }
 
    int pos=destName.lastIndexOf('/');
