@@ -1660,7 +1660,7 @@ void debugLineCheck( Diff3LineList& d3ll, int size, int idx )
          {
             KMessageBox::error(0, i18n(
                "Data loss error:\n"
-               "If it is reproducable please contact the author.\n"
+               "If it is reproducible please contact the author.\n"
                ), i18n("Severe Internal Error") );
             assert(false);
             std::cerr << "Severe Internal Error.\n";
@@ -1674,7 +1674,7 @@ void debugLineCheck( Diff3LineList& d3ll, int size, int idx )
    {
       KMessageBox::error(0, i18n(
          "Data loss error:\n"
-         "If it is reproducable please contact the author.\n"
+         "If it is reproducible please contact the author.\n"
          ), i18n("Severe Internal Error") );
       assert(false);
       std::cerr << "Severe Internal Error.\n";

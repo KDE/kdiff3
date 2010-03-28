@@ -48,7 +48,7 @@ install(TARGETS kdiff3 ${INSTALL_TARGETS_DEFAULT_ARGS})
 ########### install files ###############
 
 install( FILES  kdiff3part.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-install( FILES  kdiff3_part.rc DESTINATION ${DATA_INSTALL_DIR}/kdiff3 )
+install( FILES  kdiff3_part.rc DESTINATION ${DATA_INSTALL_DIR}/kdiff3part )
 install( FILES  kdiff3_shell.rc DESTINATION ${DATA_INSTALL_DIR}/kdiff3 )
 install( FILES  kdiff3.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 
