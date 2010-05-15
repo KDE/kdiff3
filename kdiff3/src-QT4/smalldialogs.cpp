@@ -416,15 +416,15 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
    l->setToolTip( autoMergeRegExpToolTip );
    m_pAutoMergeRegExpEdit = new QLineEdit(this);
    pGrid->addWidget(m_pAutoMergeRegExpEdit,line,1);
-   connect( m_pAutoMergeRegExpEdit, SIGNAL(editTextChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect( m_pAutoMergeRegExpEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
    ++line;
 
    l = new QLabel(i18n("Example auto merge line:"), this);
-   pGrid->addWidget(l,line,line,0,1);
+   pGrid->addWidget(l,line,0);
    l->setToolTip( i18n("For auto merge test copy a line as used in your files.") );
    m_pAutoMergeExampleEdit = new QLineEdit(this);
    pGrid->addWidget(m_pAutoMergeExampleEdit,line,1);
-   connect( m_pAutoMergeExampleEdit, SIGNAL(editTextChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect( m_pAutoMergeExampleEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
    ++line;
 
    l = new QLabel(i18n("Match result:"), this);
@@ -443,17 +443,16 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
    l->setToolTip( historyStartRegExpToolTip );
    m_pHistoryStartRegExpEdit = new QLineEdit(this);
    pGrid->addWidget(m_pHistoryStartRegExpEdit,line,1);
-   connect( m_pHistoryStartRegExpEdit, SIGNAL(editTextChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect( m_pHistoryStartRegExpEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
    ++line;
 
    l = new QLabel(i18n("Example history start line (with leading comment):"), this);
-   pGrid->addWidget(l,line,line,0,1);
-   ++line;
+   pGrid->addWidget(l,line,0);
    l->setToolTip( i18n("Copy a history start line as used in your files,\n"
                           "including the leading comment.") );
    m_pHistoryStartExampleEdit = new QLineEdit(this);
    pGrid->addWidget(m_pHistoryStartExampleEdit,line,1);
-   connect( m_pHistoryStartExampleEdit, SIGNAL(editTextChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect( m_pHistoryStartExampleEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
    ++line;
 
    l = new QLabel(i18n("Match result:"), this);
@@ -472,7 +471,7 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
    l->setToolTip( historyEntryStartRegExpToolTip );
    m_pHistoryEntryStartRegExpEdit = new QLineEdit(this);
    pGrid->addWidget(m_pHistoryEntryStartRegExpEdit,line,1);
-   connect( m_pHistoryEntryStartRegExpEdit, SIGNAL(editTextChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect( m_pHistoryEntryStartRegExpEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
    ++line;
 
    l = new QLabel(i18n("History sort key order:"), this);
@@ -480,17 +479,16 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
    l->setToolTip( historySortKeyOrderToolTip );
    m_pHistorySortKeyOrderEdit = new QLineEdit(this);
    pGrid->addWidget(m_pHistorySortKeyOrderEdit,line,1);
-   connect( m_pHistorySortKeyOrderEdit, SIGNAL(editTextChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect( m_pHistorySortKeyOrderEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
    ++line;
 
    l = new QLabel(i18n("Example history entry start line (without leading comment):"), this);
-   pGrid->addWidget(l,line,line,0,1);
+   pGrid->addWidget(l,line,0);
    l->setToolTip( i18n("Copy a history entry start line as used in your files,\n"
                           "but omit the leading comment.") );
-   ++line;
    m_pHistoryEntryStartExampleEdit = new QLineEdit(this);
    pGrid->addWidget(m_pHistoryEntryStartExampleEdit,line,1);
-   connect( m_pHistoryEntryStartExampleEdit, SIGNAL(editTextChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect( m_pHistoryEntryStartExampleEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
    ++line;
 
    l = new QLabel(i18n("Match result:"), this);

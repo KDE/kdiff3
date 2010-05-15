@@ -1828,7 +1828,8 @@ void KDiff3App::slotDirShowBoth()
    }
    else
    {
-      if ( m_pMainWidget!=0 )
+      bool bTextDataAvailable = ( m_sd1.hasData() || m_sd2.hasData() || m_sd3.hasData() );
+      if ( m_pMainWidget!=0 &&  bTextDataAvailable )
       {
          m_pMainWidget->show();
          m_pDirectoryMergeSplitter->hide();

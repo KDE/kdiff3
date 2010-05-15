@@ -231,6 +231,7 @@ private:
       void clear()                             { ds(-m_size); BASE::clear();          }
       void push_back( const MergeEditLine& m)  { ds(+1); BASE::push_back(m);     }
       void push_front( const MergeEditLine& m) { ds(+1); BASE::push_front(m);    }
+      void pop_back()                          { ds(-1); BASE::pop_back();    }
       iterator erase( iterator i )             { ds(-1); return BASE::erase(i);  }
       iterator insert( iterator i, const MergeEditLine& m ) { ds(+1); return BASE::insert(i,m); }
       int size(){ if (!m_pTotalSize) m_size = BASE::size(); return m_size; }

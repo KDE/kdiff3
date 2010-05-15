@@ -1387,6 +1387,14 @@ void MergeResultWindow::slotMergeHistory()
             if (!mell.empty())
                iMLLStart->mergeEditLineList.splice( iMLLStart->mergeEditLineList.end(), mell, mell.begin(), mell.end() );
          }
+         // If the end of start is empty and the first line at the end is empty remove the last line of start
+         if ( !iMLLStart->mergeEditLineList.empty() && !iMLLEnd->mergeEditLineList.empty() )
+         {
+            QString lastLineOfStart = iMLLStart->mergeEditLineList.back().getString(this);
+            QString firstLineOfEnd = iMLLEnd->mergeEditLineList.front().getString(this);
+            if ( lastLineOfStart.mid(lead.length()).trimmed().isEmpty() && firstLineOfEnd.mid(lead.length()).trimmed().isEmpty() )
+               iMLLStart->mergeEditLineList.pop_back();
+         }
       }
       setFastSelector( iMLLStart );
       update();

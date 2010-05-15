@@ -391,7 +391,7 @@ void DiffTextWindow::setFastSelectorRange( int line1, int nofLines )
 void DiffTextWindow::showStatusLine(int line )
 {
    int d3lIdx = convertLineToDiff3LineIdx( line );
-   if(d3lIdx >= 0 && d3lIdx<(int)d->m_pDiff3LineVector->size() )
+   if( d->m_pDiff3LineVector!=0 && d3lIdx >= 0 && d3lIdx<(int)d->m_pDiff3LineVector->size() )
    {
       const Diff3Line* pD3l = (*d->m_pDiff3LineVector)[d3lIdx];
       if ( pD3l != 0 )
@@ -1020,14 +1020,17 @@ void DiffTextWindowData::writeLine(
 
 void DiffTextWindow::paintEvent( QPaintEvent* e )
 {
-   if ( d->m_pDiff3LineVector==0 || ! d->m_bPaintingAllowed ||
-        ( d->m_diff3WrapLineVector.empty() && d->m_bWordWrap ) ) 
-      return;
-
    QRect invalidRect = e->rect();
-   if ( invalidRect.isEmpty() )
+   if ( invalidRect.isEmpty() || ! d->m_bPaintingAllowed )
       return;
 
+   if ( d->m_pDiff3LineVector==0  ||  ( d->m_diff3WrapLineVector.empty() && d->m_bWordWrap ) ) 
+   {
+      QPainter p(this);
+      p.fillRect( invalidRect, d->m_pOptionDialog->m_bgColor );
+      return;
+   }
+   
    bool bOldSelectionContainsData = d->m_selection.bSelectionContainsData;
    d->m_selection.bSelectionContainsData = false;
 

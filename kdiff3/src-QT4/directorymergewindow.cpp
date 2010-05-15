@@ -741,7 +741,10 @@ bool DirectoryMergeWindow::init
          s += "\n" + i18n("Number of manual merges:")   +" "+ QString::number(nofManualMerges);
       KMessageBox::information( this, s );
       if ( topLevelItemCount()>0 )
+      {
          topLevelItem(0)->setSelected(true);
+         setCurrentItem( topLevelItem(0) );
+      }
    }
 
    if ( bReload )
