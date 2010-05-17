@@ -49,6 +49,9 @@ win32 {
    RC_FILE = kdiff3win.rc
    win32-g++ {
            QMAKE_LFLAGS += -luser32 -lshell32
+           QMAKE_LFLAGS_RELEASE += -static-libgcc  # Remove dependency to libgcc_s_dw2-1.dll
+           QMAKE_LFLAGS_EXCEPTIONS_ON -= -mthreads # Remove dependency to mingwm10.dll (hack, yet no problem if not multithreaded)
+                                                   # Better: configure -static -release -no-exceptions -fast
    } else {
            QMAKE_LFLAGS += user32.lib shell32.lib
    }

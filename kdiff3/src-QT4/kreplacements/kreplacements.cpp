@@ -79,6 +79,7 @@ static void showHelp()
       }
 
 #ifndef Q_OS_OS2
+      char buf[256];
       HINSTANCE hi = FindExecutableA( helpFile.fileName().toAscii(), helpFile.absolutePath().toAscii(), buf );
       if ( int(hi)<=32 )
       {
@@ -1069,8 +1070,8 @@ KApplication::KApplication()
             int len = pos==-1 ? optName.length() : pos;
             int len2 = arg.length();
 
-            if( len>0 && ( arg[1]=='-' && len2-2==len && optName.left(len) ==  arg.mid(2,len) ||
-                                          len2-1==len && optName.left(len) ==  arg.mid(1,len) ))
+            if( len>0 && ( (arg[1]=='-' && len2-2==len && optName.left(len) ==  arg.mid(2,len)) ||
+                                          (len2-1==len && optName.left(len) ==  arg.mid(1,len)) ))
             {
                if (s_options[j].description == 0)  // alias, because without description.
                {
