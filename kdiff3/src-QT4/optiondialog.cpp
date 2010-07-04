@@ -1254,65 +1254,42 @@ static void insertCodecs(OptionComboBox* p)
 // UTF8-Codec that saves a BOM
 class Utf8BOMCodec : public QTextCodec
 {
+   QTextCodec* m_pUtf8Codec;
+   class PublicTextCodec : public QTextCodec
+   {
    public:
+      QString publicConvertToUnicode ( const char * p, int len, ConverterState* pState ) const
+      {
+         return convertToUnicode( p, len, pState );
+      }
+      QByteArray publicConvertFromUnicode ( const QChar * input, int number, ConverterState * pState ) const
+      {
+         return convertFromUnicode( input, number, pState );
+      }
+   };
+public:
+   Utf8BOMCodec()
+   {
+      m_pUtf8Codec = QTextCodec::codecForName("UTF-8");
+   }
    QByteArray name () const { return "UTF-8-BOM"; }
    int mibEnum () const { return 2123; }
    QByteArray convertFromUnicode ( const QChar * input, int number, ConverterState * pState ) const
    {
       QByteArray r;
-      if ( pState && pState->state_data[0]==0)
+      if ( pState && pState->state_data[2]==0)  // state_data[2] not used by QUtf8::convertFromUnicode (see qutfcodec.cpp)
       {
         r += "\xEF\xBB\xBF";
-        pState->state_data[0]=1;
+        pState->state_data[2]=1;
+        pState->flags |= QTextCodec::IgnoreHeader;
       }
 
-      r += QString::fromRawData( input, number ).toUtf8();
+      r += ((PublicTextCodec*)m_pUtf8Codec)->publicConvertFromUnicode( input, number, pState );
       return r;
    }
-   QString convertToUnicode ( const char * p, int len, ConverterState* ) const
+   QString convertToUnicode ( const char * p, int len, ConverterState* pState ) const
    {
-      return QString::fromUtf8 ( p, len );
-   }
-
-   class UTF8BOMEncoder : public QTextEncoder
-   {
-      bool bBOMAdded;
-   public:
-      UTF8BOMEncoder(const QTextCodec* pTC):QTextEncoder(pTC)  {  bBOMAdded=false;  }
-      QByteArray fromUnicode(const QString& uc, int& lenInOut )
-      {
-         QByteArray r;
-         if (!bBOMAdded)
-         {
-            r += "\xEF\xBB\xBF";
-            bBOMAdded=true;
-         }
-         r += uc.toUtf8();
-         lenInOut = r.length();
-         return r;
-      }
-   };
-   QTextEncoder* makeEncoder() const
-   {
-      return new UTF8BOMEncoder(this);
-   }
-
-   class UTF8BOMDecoder : public QTextDecoder
-   {
-      QTextDecoder *m_pDecoder;
-   public:
-      UTF8BOMDecoder(const QTextCodec* pTC) : QTextDecoder(pTC)  {  m_pDecoder = QTextCodec::codecForName("UTF-8")->makeDecoder();  }
-      ~UTF8BOMDecoder() {
-         delete m_pDecoder;
-      }
-      QString toUnicode( const char* p, int len)
-      {
-         return m_pDecoder->toUnicode( p, len );
-      }
-   };
-   QTextDecoder* makeDecoder() const
-   {
-      return new UTF8BOMDecoder(this);
+      return ((PublicTextCodec*)m_pUtf8Codec)->publicConvertToUnicode( p, len, pState );
    }
 };
 
