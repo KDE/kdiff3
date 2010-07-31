@@ -314,7 +314,7 @@ bool FileAccess::isFile() const        {   return m_bFile;       }
 bool FileAccess::isDir() const         {   return m_bDir;        }
 bool FileAccess::isSymLink() const     {   return m_bSymLink;    }
 bool FileAccess::exists() const        {   return m_bExists;     }
-long FileAccess::size() const          {   return m_size;        }
+qint64 FileAccess::size() const        {   return m_size;        }
 KUrl FileAccess::url() const           {   return m_url;         }
 bool FileAccess::isLocal() const       {   return m_bLocal;      }
 bool FileAccess::isReadable() const    {   return m_bReadable;   }
@@ -556,7 +556,7 @@ bool FileAccess::exists( const QString& name )
 }
 
 // If the size couldn't be determined by stat() then the file is copied to a local temp file.
-long FileAccess::sizeForReading()
+qint64 FileAccess::sizeForReading()
 {
    if ( m_size == 0 && !isLocal() )
    {
@@ -698,7 +698,7 @@ void FileAccessJobHandler::slotGetData( KJob* pJob, const QByteArray& newData )
    }
    else
    {
-      long length = min2( long(newData.size()), m_maxLength - m_transferredBytes );
+      qint64 length = min2( qint64(newData.size()), m_maxLength - m_transferredBytes );
       ::memcpy( m_pTransferBuffer + m_transferredBytes, newData.data(), newData.size() );
       m_transferredBytes += length;
    }
@@ -735,8 +735,8 @@ void FileAccessJobHandler::slotPutData( KIO::Job* pJob, QByteArray& data )
    }
    else
    {
-      long maxChunkSize = 100000;
-      long length = min2( maxChunkSize, m_maxLength - m_transferredBytes );
+      qint64 maxChunkSize = 100000;
+      qint64 length = min2( maxChunkSize, m_maxLength - m_transferredBytes );
       data.resize( length );
       if ( data.size()==length )
       {
@@ -1285,7 +1285,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
                }
                bFirst = false;
                FileAccess fa;
-               fa.m_size = findData.nFileSizeLow ;//+ findData.nFileSizeHigh;
+               fa.m_size = ( qint64( findData.nFileSizeHigh ) << 32 ) + findData.nFileSizeLow;
 
                FILETIME ft;
                SYSTEMTIME t;

@@ -40,8 +40,8 @@ public:
    bool isDir() const;
    bool isSymLink() const;
    bool exists() const;
-   long size() const;            // Size as returned by stat().
-   long sizeForReading();  // If the size can't be determined by stat() then the file is copied to a local temp file.
+   qint64 size() const;            // Size as returned by stat().
+   qint64 sizeForReading();  // If the size can't be determined by stat() then the file is copied to a local temp file.
    bool isReadable() const;
    bool isWritable() const;
    bool isExecutable() const;
@@ -89,7 +89,7 @@ private:
    bool m_bLocal;
    bool m_bValidData;
 
-   unsigned long m_size;
+   qint64 m_size;
    QDateTime m_modificationTime;
    QDateTime m_accessTime;
    QDateTime m_creationTime;
@@ -143,9 +143,9 @@ private:
    bool m_bSuccess;
 
    // Data needed during Job
-   long m_transferredBytes;
+   qint64 m_transferredBytes;
    char* m_pTransferBuffer;  // Needed during get or put
-   long m_maxLength;
+   qint64 m_maxLength;
 
    QString m_filePattern;
    QString m_fileAntiPattern;
