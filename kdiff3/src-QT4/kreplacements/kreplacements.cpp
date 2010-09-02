@@ -912,7 +912,7 @@ struct KCmdLineOptionsItem
 };
 static QList<KCmdLineOptionsItem> s_options;
 
-static std::vector<QCStringList> s_vOption;
+static std::vector<QStringList> s_vOption;
 static std::vector<QString> s_vArg;
 
 KCmdLineOptions& KCmdLineOptions::add( const QString& name, const QString& description )
@@ -1035,14 +1035,15 @@ KApplication::KApplication()
       ++i;
    }
 
+   QStringList args = QCoreApplication::arguments();
    // First find the option "-config" or "--config" to allow loading of options
    QString configFileName;
-   for( i=1; i<s_argc-1; ++i )
+   for( i=1; i<args.size()-1; ++i )
    {
-      QString arg = s_argv[i];
+      QString arg = args[i];
       if ( arg == "-config" || arg == "--config" )
       {
-         configFileName = s_argv[i+1];
+         configFileName = args[i+1];
       }
    }
    m_config.readConfigFile(configFileName);
@@ -1054,9 +1055,9 @@ KApplication::KApplication()
 
    s_vOption.resize(nofOptions);
 
-   for( i=1; i<s_argc; ++i )
+   for( i=1; i<args.size(); ++i )
    {
-      QString arg = s_argv[i];
+      QString arg = args[i];
       if ( arg[0]=='-' )  // An option
       {
          if ( ignorableCmdLineOptions.contains( arg +";") )
@@ -1079,7 +1080,7 @@ KApplication::KApplication()
                   optName = s_options[j].name;
                   pos = optName.indexOf( ' ' );
                }
-               if (pos!=-1){ ++i; s_vOption[j].append( s_argv[i] ); } //use param
+               if (pos!=-1){ ++i; s_vOption[j].append( args[i] ); } //use param
                else        { s_vOption[j].append("1"); }           //set state
                break;
             }
