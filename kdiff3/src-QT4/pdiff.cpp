@@ -771,6 +771,10 @@ void KDiff3App::initView()
    sizes[0]=total/2; sizes[1]=total/2;
    pVSplitter->setSizes( sizes );
 
+   QList<int> hSizes;
+   hSizes << 1 << 1 << 1;
+   m_pDiffWindowSplitter->setSizes( hSizes );
+   
    m_pMergeResultWindow->installEventFilter( this );       // for Cut/Copy/Paste-shortcuts
    m_pMergeResultWindow->installEventFilter( m_pMergeResultWindowTitle ); // for focus tracking
 

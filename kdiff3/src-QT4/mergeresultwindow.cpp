@@ -286,7 +286,9 @@ bool MergeResultWindow::sameKindCheck( const MergeLine& ml1, const MergeLine& ml
    }
    else
       return (
-         !ml1.bConflict && !ml2.bConflict && ml1.bDelta && ml2.bDelta && ml1.srcSelect == ml2.srcSelect ||
+         !ml1.bConflict && !ml2.bConflict && ml1.bDelta && ml2.bDelta && ml1.srcSelect == ml2.srcSelect 
+         && (ml1.mergeDetails==ml2.mergeDetails || ml1.mergeDetails!=eBCAddedAndEqual && ml2.mergeDetails!=eBCAddedAndEqual )
+         ||
          !ml1.bDelta && !ml2.bDelta
          );
 }
