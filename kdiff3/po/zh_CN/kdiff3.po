@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2009-01-18 10:49+0100\n"
+"POT-Creation-Date: 2010-03-15 04:35+0100\n"
 "PO-Revision-Date: 2005-02-07 10:03+0800\n"
 "Last-Translator: Mai Hao Hui <mhh@ricetons.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -15,489 +15,1344 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Language: zh_CN\n"
 
-#: kdiff3.cpp:169
-#, fuzzy
-msgid "Current Configuration:"
+#: kreplacements/kreplacements.h:103
+#| msgid "C&ontinue"
+msgid "Continue"
+msgstr "继续"
+
+#: kreplacements/kreplacements.h:104 kreplacements/kreplacements.cpp:164
+#: kreplacements/kreplacements.cpp:195 smalldialogs.cpp:514
+msgid "Cancel"
+msgstr "取消"
+
+#: kreplacements/kreplacements.h:105 kreplacements/kreplacements.cpp:637
+msgid "Quit"
+msgstr "退出"
+
+#: kreplacements/kreplacements.cpp:183 kreplacements/kreplacements.cpp:345
+msgid "Ok"
+msgstr "确定"
+
+#: kreplacements/kreplacements.cpp:187 kreplacements/kreplacements.cpp:721
+msgid "Help"
+msgstr "帮助"
+
+#: kreplacements/kreplacements.cpp:191
+msgid "Defaults"
+msgstr "默认"
+
+#. i18n: file: kdiff3_shell.rc:4
+#. i18n: ectx: Menu (file)
+#: kreplacements/kreplacements.cpp:302 rc.cpp:12
+#| msgid "File..."
+msgid "&File"
+msgstr "文件(&F)"
+
+#: kreplacements/kreplacements.cpp:303
+#| msgid "Editor"
+msgid "&Edit"
+msgstr "编辑(&E)"
+
+#. i18n: file: kdiff3_shell.rc:7
+#. i18n: ectx: Menu (directory)
+#: kreplacements/kreplacements.cpp:304 rc.cpp:15
+msgid "&Directory"
+msgstr "目录(&D)"
+
+#. i18n: file: kdiff3_shell.rc:50
+#. i18n: ectx: Menu (movement)
+#: kreplacements/kreplacements.cpp:307 rc.cpp:24
+msgid "&Movement"
+msgstr "移动(&M)"
+
+#. i18n: file: kdiff3_shell.rc:61
+#. i18n: ectx: Menu (diff)
+#: kreplacements/kreplacements.cpp:308 rc.cpp:27
+msgid "D&iffview"
+msgstr "查看 Diff(&I)"
+
+#. i18n: file: kdiff3_shell.rc:73
+#. i18n: ectx: Menu (merge)
+#: kreplacements/kreplacements.cpp:309 rc.cpp:30
+msgid "&Merge"
+msgstr "合并(&M)"
+
+#. i18n: file: kdiff3_shell.rc:95
+#. i18n: ectx: Menu (window)
+#: kreplacements/kreplacements.cpp:310 rc.cpp:33
+msgid "&Window"
+msgstr "窗口(&W)"
+
+#: kreplacements/kreplacements.cpp:311
+msgid "&Settings"
+msgstr "设置(&S)"
+
+#: kreplacements/kreplacements.cpp:312
+msgid "&Help"
+msgstr "帮助(&H)"
+
+#: kreplacements/kreplacements.cpp:359
+#| msgid "Abort"
+msgid "&About"
+msgstr "关于(&A)"
+
+#: kreplacements/kreplacements.cpp:375
+msgid "A&uthor"
+msgstr "作者(&u)"
+
+#: kreplacements/kreplacements.cpp:389
+msgid "&Thanks To"
+msgstr "感谢(&T)"
+
+#. i18n: file: kdiff3_shell.rc:30
+#. i18n: ectx: Menu (dir_current_merge_menu)
+#: kreplacements/kreplacements.cpp:494 kreplacements/kreplacements.cpp:503
+#: rc.cpp:18
+msgid "Current Item Merge Operation"
+msgstr "当前项目合并操作"
+
+#. i18n: file: kdiff3_shell.rc:38
+#. i18n: ectx: Menu (dir_current_sync_menu)
+#: kreplacements/kreplacements.cpp:495 kreplacements/kreplacements.cpp:504
+#: rc.cpp:21
+msgid "Current Item Sync Operation"
 msgstr "当前项目同步操作"
 
-#: kdiff3.cpp:174
-#, fuzzy
-msgid "Config Option Error:"
-msgstr "文件打开出错"
+#: kreplacements/kreplacements.cpp:603
+#| msgid "Operation"
+msgid "Open"
+msgstr "打开"
 
-#: kdiff3.cpp:219
-msgid "Option --auto used, but no output file specified."
-msgstr "选项 -- 自动使用，但没有指定输出文件。"
+#: kreplacements/kreplacements.cpp:612
+#| msgid "Solved"
+msgid "Save"
+msgstr "保存"
 
-#: kdiff3.cpp:369
-msgid "Option --auto ignored for directory comparison."
-msgstr "选项 -- 自动忽略目录比较。"
+#: kreplacements/kreplacements.cpp:620 kdiff3.cpp:718
+msgid "Save As..."
+msgstr "另存为..."
 
-#: kdiff3.cpp:405
-msgid "Saving failed."
-msgstr "保存失败。"
+#: kreplacements/kreplacements.cpp:629
+msgid "Print..."
+msgstr "打印..."
 
-#: kdiff3.cpp:440 pdiff.cpp:1123 pdiff.cpp:1194
-msgid "Opening of these files failed:"
-msgstr "打开以下文件失败："
+#: kreplacements/kreplacements.cpp:645
+msgid "Cut"
+msgstr "剪切"
 
-#: kdiff3.cpp:449
-msgid "File Open Error"
-msgstr "文件打开出错"
+#: kreplacements/kreplacements.cpp:653
+msgid "Copy"
+msgstr "复制"
 
-#: kdiff3.cpp:477
-msgid "Opens documents for comparison..."
-msgstr "打开文档比较..."
+#: kreplacements/kreplacements.cpp:661
+msgid "Paste"
+msgstr "粘贴"
 
-#: kdiff3.cpp:479
-#, fuzzy
-#| msgid "Ready."
-msgid "Reload"
-msgstr "就绪。"
+#: kreplacements/kreplacements.cpp:669
+#| msgid "Delete A"
+msgid "Select All"
+msgstr "全选"
 
-#: kdiff3.cpp:482
-msgid "Saves the merge result. All conflicts must be solved!"
-msgstr "保存合并结果。必须解决全部冲突！"
+#: kreplacements/kreplacements.cpp:677
+msgid "Show Toolbar"
+msgstr "显示工具栏"
 
-#: kdiff3.cpp:484
-msgid "Saves the current document as..."
-msgstr "保存当前文档为..."
+#: kreplacements/kreplacements.cpp:685
+msgid "Show &Status Bar"
+msgstr "显示状态栏(&S)"
 
-#: kdiff3.cpp:486
-msgid "Print the differences"
+#: kreplacements/kreplacements.cpp:693
+#, kde-format
+#| msgid "Configure..."
+msgid "&Configure %1..."
+msgstr "配置 %1(&C)..."
+
+#: kreplacements/kreplacements.cpp:705 kreplacements/kreplacements.cpp:713
+#| msgid "Abort"
+msgid "About"
+msgstr "关于"
+
+#: kreplacements/kreplacements.cpp:728
+msgid "Find"
+msgstr "查找"
+
+#: kreplacements/kreplacements.cpp:736
+msgid "Find Next"
+msgstr "查找下一个"
+
+#: kreplacements/kreplacements.cpp:756
+#| msgid "Select Another Font"
+msgid "Select Font"
+msgstr "选择字体"
+
+#: kreplacements/kreplacements.cpp:794 optiondialog.cpp:1699
+msgid ""
+"You selected a variable width font.\n"
+"\n"
+"Because this program doesn't handle variable width fonts\n"
+"correctly, you might experience problems while editing.\n"
+"\n"
+"Do you want to continue or do you want to select another font."
+msgstr ""
+"您选择了一个可变宽度字体。\n"
+"\n"
+"因为此程序不能正确处理可变宽度字体\n"
+"您可能在编辑时遇到问题。\n"
+"\n"
+"您要继续，还是另选一种字体。"
+
+#: kreplacements/kreplacements.cpp:798
+#| msgid "Incompatible Font"
+msgid "Incompatible font."
+msgstr "不兼容字体"
+
+#: kreplacements/kreplacements.cpp:799
+#| msgid "Continue at Own Risk"
+msgid "Continue at my own risk"
+msgstr "自愿冒险继续"
+
+#: kreplacements/kreplacements.cpp:799
+#| msgid "Select Another Font"
+msgid "Select another font"
+msgstr "选择另一种字体"
+
+#: kreplacements/kreplacements.cpp:1138
+msgid "For more documentation, see the help-menu or the subdirectory doc."
+msgstr "需更多文档，请见帮助菜单或doc目录。"
+
+#: kreplacements/kreplacements.cpp:1141
+#| msgid "KDiff3"
+msgid "KDiff3-Usage"
 msgstr ""
 
-#: kdiff3.cpp:488
-msgid "Quits the application"
-msgstr "退出程序"
+#: kreplacements/kreplacements.cpp:1141
+#| msgid "Ignore case"
+msgid "Ignore"
+msgstr "忽略"
 
-#: kdiff3.cpp:490
-msgid "Cuts the selected section and puts it to the clipboard"
-msgstr "剪切所选节，将其放入剪贴板"
+#: kreplacements/kreplacements.cpp:1141
+#| msgid "Editor"
+msgid "Exit"
+msgstr "退出"
 
-#: kdiff3.cpp:492
-msgid "Copies the selected section to the clipboard"
-msgstr "复制所选节至剪贴板"
+#: diff.cpp:251
+msgid "Writing clipboard data to temp file failed."
+msgstr "将剪贴板数据写入临时文件失败。"
 
-#: kdiff3.cpp:494
-msgid "Pastes the clipboard contents to actual position"
-msgstr "粘贴剪贴板内容到实际位置"
+#: diff.cpp:255
+msgid "From Clipboard"
+msgstr "从剪贴板"
 
-#: kdiff3.cpp:496
-msgid "Select everything in current window"
+#: diff.cpp:504
+#, kde-format
+msgid ""
+"Preprocessing possibly failed. Check this command:\n"
+"\n"
+"  %1\n"
+"\n"
+"The preprocessing command will be disabled now."
 msgstr ""
+"预处理可能失败了。请检查这个命令：\n"
+"\n"
+"  %1\n"
+"\n"
+"现在预处理命令会被禁用。"
 
-#: kdiff3.cpp:498
-msgid "Search for a string"
-msgstr "搜索字符串"
-
-#: kdiff3.cpp:500
-msgid "Search again for the string"
-msgstr "再次搜索该字符串"
-
-#: kdiff3.cpp:505
-msgid "Enables/disables the statusbar"
-msgstr "启用/禁止状态栏"
-
-#: kdiff3.cpp:509
-msgid "Configure KDiff3..."
-msgstr "配置 KDiff3..."
-
-#: kdiff3.cpp:530
-msgid "Go to Current Delta"
-msgstr "到当前 Delta"
-
-#: kdiff3.cpp:530
-#, fuzzy
-#| msgid "Go to Current Delta"
+#: diff.cpp:544
+#, kde-format
 msgid ""
-"Current\n"
-"Delta"
-msgstr "到当前 Delta"
+"The line-matching-preprocessing possibly failed. Check this command:\n"
+"\n"
+"  %1\n"
+"\n"
+"The line-matching-preprocessing command will be disabled now."
+msgstr ""
+"行匹配处理可能失败。请检查这个命令：\n"
+"\n"
+"  %1\n"
+"\n"
+"现在行匹配处理命令会被禁用。"
 
-#: kdiff3.cpp:532
-msgid "Go to First Delta"
-msgstr "到第一个 Delta"
-
-#: kdiff3.cpp:532
-#, fuzzy
-#| msgid "Go to First Delta"
+#: diff.cpp:1662 diff.cpp:1676
+#| msgid ""
+#| "Data loss error:\n"
+#| "If it is reproducable please contact the author.\n"
 msgid ""
-"First\n"
-"Delta"
-msgstr "到第一个 Delta"
+"Data loss error:\n"
+"If it is reproducible please contact the author.\n"
+msgstr ""
+"数据丢失错误：\n"
+"如果它是可复现的，请联系作者。\n"
 
-#: kdiff3.cpp:534
-msgid "Go to Last Delta"
-msgstr "到最后一个 Delta"
+#: diff.cpp:1664 diff.cpp:1678
+msgid "Severe Internal Error"
+msgstr "严重内部错误"
 
-#: kdiff3.cpp:534
-#, fuzzy
-#| msgid "Go to Last Delta"
-msgid ""
-"Last\n"
-"Delta"
-msgstr "到最后一个 Delta"
+#: directorymergewindow.cpp:136
+msgid "Mix of links and normal files."
+msgstr "链接和普通文件混合"
 
-#: kdiff3.cpp:536
-msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
-msgstr "(禁用“显示空白字符”时跳过空白差异。)"
+#: directorymergewindow.cpp:143
+msgid "Link: "
+msgstr "链接："
 
-#: kdiff3.cpp:537
-msgid ""
-"(Does not skip white space differences even when \"Show White Space\" is "
-"disabled.)"
-msgstr "(禁用“显示空白字符”时也不跳过空白差异。)"
+#: directorymergewindow.cpp:151
+msgid "Size. "
+msgstr "大小。"
 
-#: kdiff3.cpp:538
-msgid "Go to Previous Delta"
-msgstr "到上一个 Delta"
+#: directorymergewindow.cpp:164 directorymergewindow.cpp:174
+msgid "Date & Size: "
+msgstr "日期和大小："
 
-#: kdiff3.cpp:538
-#, fuzzy
-#| msgid "Go to Previous Delta"
-msgid ""
-"Prev\n"
-"Delta"
-msgstr "到上一个 Delta"
+#: directorymergewindow.cpp:184 directorymergewindow.cpp:190
+#, kde-format
+msgid "Creating temp copy of %1 failed."
+msgstr "创建临时 %1 副本失败。"
 
-#: kdiff3.cpp:540
-msgid "Go to Next Delta"
-msgstr "到下一个 Delta"
+#: directorymergewindow.cpp:201 directorymergewindow.cpp:209
+#, kde-format
+msgid "Opening %1 failed."
+msgstr "打开 %1 失败。"
 
-#: kdiff3.cpp:540
-#, fuzzy
-#| msgid "Go to Next Delta"
-msgid ""
-"Next\n"
-"Delta"
-msgstr "到下一个 Delta"
+#: directorymergewindow.cpp:213
+msgid "Comparing file..."
+msgstr "正在比较文件..."
 
-#: kdiff3.cpp:542
-msgid "Go to Previous Conflict"
-msgstr "到上一个冲突"
+#: directorymergewindow.cpp:223 directorymergewindow.cpp:229
+#, kde-format
+msgid "Error reading from %1"
+msgstr "读取 %1 时错误"
 
-#: kdiff3.cpp:542
-#, fuzzy
-#| msgid "Conflicts"
-msgid ""
-"Prev\n"
-"Conflict"
-msgstr "冲突"
+#: directorymergewindow.cpp:358
+msgid "Name"
+msgstr "名称"
 
-#: kdiff3.cpp:544
-msgid "Go to Next Conflict"
-msgstr "到下一个冲突"
+#: directorymergewindow.cpp:358
+msgid "Operation"
+msgstr "操作"
 
-#: kdiff3.cpp:544
-#, fuzzy
-#| msgid "Go to Next Conflict"
-msgid ""
-"Next\n"
-"Conflict"
-msgstr "到下一个冲突"
+#: directorymergewindow.cpp:358
+msgid "Status"
+msgstr "状态"
 
-#: kdiff3.cpp:546
-msgid "Go to Previous Unsolved Conflict"
-msgstr "到上一个未解决冲突"
-
-#: kdiff3.cpp:546
-#, fuzzy
-#| msgid "Unsolved"
-msgid ""
-"Prev\n"
-"Unsolved"
+#: directorymergewindow.cpp:359
+msgid "Unsolved"
 msgstr "未解决的"
 
-#: kdiff3.cpp:548
-msgid "Go to Next Unsolved Conflict"
-msgstr "到下一个未解决冲突"
+#: directorymergewindow.cpp:359
+msgid "Solved"
+msgstr "已解决的"
 
-#: kdiff3.cpp:548
+#: directorymergewindow.cpp:359
+msgid "Nonwhite"
+msgstr "非空白"
+
+#: directorymergewindow.cpp:359
+msgid "White"
+msgstr "空白"
+
+#: directorymergewindow.cpp:388
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort "
+"the merge and rescan the directory?"
+msgstr "您当前正在合并目录。您确定要放弃合并，重新扫描目录吗？"
+
+#: directorymergewindow.cpp:389 mergeresultwindow.cpp:303 kdiff3.cpp:653
+#: kdiff3.cpp:663 kdiff3.cpp:675 pdiff.cpp:1059 pdiff.cpp:1793 pdiff.cpp:1803
 #, fuzzy
-#| msgid "Unsolved"
-msgid ""
-"Next\n"
-"Unsolved"
-msgstr "未解决的"
+msgid "Warning"
+msgstr "警告"
 
-#: kdiff3.cpp:550
-msgid "Select Line(s) From A"
-msgstr "从 A 选择 行"
+#: directorymergewindow.cpp:390 directorymergewindow.cpp:2956
+msgid "Rescan"
+msgstr "重新扫描"
 
-#: kdiff3.cpp:550
-msgid ""
-"Choose\n"
-"A"
-msgstr ""
+#: directorymergewindow.cpp:391 pdiff.cpp:1061
+msgid "Continue Merging"
+msgstr "继续合并"
 
-#: kdiff3.cpp:551
-msgid "Select Line(s) From B"
-msgstr "从 B 选择行"
-
-#: kdiff3.cpp:551
-msgid ""
-"Choose\n"
-"B"
-msgstr ""
-
-#: kdiff3.cpp:552
-msgid "Select Line(s) From C"
-msgstr "从 C 选择行"
-
-#: kdiff3.cpp:552
-msgid ""
-"Choose\n"
-"C"
-msgstr ""
-
-#: kdiff3.cpp:553
-msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
-msgstr "源码选择后自动到下一个未解决冲突"
-
-#: kdiff3.cpp:553
+#: directorymergewindow.cpp:548
 #, fuzzy
+msgid "Opening of directories failed:"
+msgstr "打开目录失败："
+
+#: directorymergewindow.cpp:551
+#, kde-format
+msgid "Dir A \"%1\" does not exist or is not a directory.\n"
+msgstr "目录 A “%1”不存在或者不是目录。\n"
+
+#: directorymergewindow.cpp:554
+#, kde-format
+msgid "Dir B \"%1\" does not exist or is not a directory.\n"
+msgstr "目录 B “%1”不存在或者不是目录。\n"
+
+#: directorymergewindow.cpp:557
+#, kde-format
+msgid "Dir C \"%1\" does not exist or is not a directory.\n"
+msgstr "目录 C “%1”不存在或者不是目录。\n"
+
+#: directorymergewindow.cpp:559
+msgid "Directory Open Error"
+msgstr "打开目录错误"
+
+#: directorymergewindow.cpp:567
 msgid ""
-"Auto\n"
-"Next"
-msgstr "自动复制选择"
-
-#: kdiff3.cpp:555
-msgid "Show Space && Tabulator Characters for Differences"
-msgstr "显示间距和制表符的不同"
-
-#: kdiff3.cpp:555
-msgid ""
-"White\n"
-"Characters"
+"The destination directory must not be the same as A or B when three "
+"directories are merged.\n"
+"Check again before continuing."
 msgstr ""
+"当三个目录合并时，目标目录不能是 A 或者 B。\n"
+"在继续进行前，请再核对一遍。"
 
-#: kdiff3.cpp:556
-msgid "Show White Space"
-msgstr "显示空白字符"
+#: directorymergewindow.cpp:569
+msgid "Parameter Warning"
+msgstr "参数警告"
 
-#: kdiff3.cpp:556
-msgid ""
-"White\n"
-"Deltas"
-msgstr ""
+#: directorymergewindow.cpp:574
+msgid "Scanning directories..."
+msgstr "正在扫描目录..."
 
-#: kdiff3.cpp:558
-msgid "Show Line Numbers"
-msgstr "显示行数"
+#: directorymergewindow.cpp:607
+msgid "Reading Directory A"
+msgstr "读取目录 A"
 
-#: kdiff3.cpp:558
-#, fuzzy
-#| msgid "Show Line Numbers"
-msgid ""
-"Line\n"
-"Numbers"
-msgstr "显示行数"
+#: directorymergewindow.cpp:629
+msgid "Reading Directory B"
+msgstr "读取目录 B"
 
-#: kdiff3.cpp:559
-msgid "Choose A Everywhere"
-msgstr "选择 A 全部"
+#: directorymergewindow.cpp:651
+msgid "Reading Directory C"
+msgstr "读取目录 C"
 
-#: kdiff3.cpp:560
-msgid "Choose B Everywhere"
-msgstr "选择 B 全部"
+#: directorymergewindow.cpp:677
+msgid "Some subdirectories were not readable in"
+msgstr "不能进入读取一些子目录"
 
-#: kdiff3.cpp:561
-msgid "Choose C Everywhere"
-msgstr "选择 C 全部"
+#: directorymergewindow.cpp:682
+msgid "Check the permissions of the subdirectories."
+msgstr "检查子目录权限。"
 
-#: kdiff3.cpp:562
-msgid "Choose A for All Unsolved Conflicts"
-msgstr "选择 A 全部未解决冲突"
-
-#: kdiff3.cpp:563
-msgid "Choose B for All Unsolved Conflicts"
-msgstr "选择 B 全部未解决冲突"
-
-#: kdiff3.cpp:564
-msgid "Choose C for All Unsolved Conflicts"
-msgstr "选择 C 全部未解决冲突"
-
-#: kdiff3.cpp:565
-msgid "Choose A for All Unsolved Whitespace Conflicts"
-msgstr "选择 A 全部未解决空白字符冲突"
-
-#: kdiff3.cpp:566
-msgid "Choose B for All Unsolved Whitespace Conflicts"
-msgstr "选择 B 全部未解决空白字符冲突"
-
-#: kdiff3.cpp:567
-msgid "Choose C for All Unsolved Whitespace Conflicts"
-msgstr "选择 C 全部未解决空白字符冲突"
-
-#: kdiff3.cpp:568
-msgid "Automatically Solve Simple Conflicts"
-msgstr "自动解决简单冲突"
-
-#: kdiff3.cpp:569
-msgid "Set Deltas to Conflicts"
-msgstr "设置 Delta 为冲突"
-
-#: kdiff3.cpp:570
-msgid "Run Regular Expression Auto Merge"
-msgstr ""
-
-#: kdiff3.cpp:571
-#, fuzzy
-msgid "Automatically Solve History Conflicts"
-msgstr "自动解决简单冲突"
-
-#: kdiff3.cpp:572
-msgid "Split Diff At Selection"
-msgstr ""
-
-#: kdiff3.cpp:573
-#, fuzzy
-msgid "Join Selected Diffs"
-msgstr "比较所选文件"
-
-#: kdiff3.cpp:575
-msgid "Show Window A"
-msgstr "显示窗口 A"
-
-#: kdiff3.cpp:576
-msgid "Show Window B"
-msgstr "显示窗口 B"
-
-#: kdiff3.cpp:577
-msgid "Show Window C"
-msgstr "显示窗口 C"
-
-#: kdiff3.cpp:578 kdiff3.cpp:589
-msgid "Focus Next Window"
-msgstr "聚焦于下一个窗口"
-
-#: kdiff3.cpp:580
-msgid "Normal Overview"
-msgstr "普通概览"
-
-#: kdiff3.cpp:581
-msgid "A vs. B Overview"
-msgstr "A 和 B 概览"
-
-#: kdiff3.cpp:582
-msgid "A vs. C Overview"
-msgstr "A 和 C 概览"
-
-#: kdiff3.cpp:583
-msgid "B vs. C Overview"
-msgstr "B 和 C 概览"
-
-#: kdiff3.cpp:584
-msgid "Word Wrap Diff Windows"
-msgstr "在 Diff 窗口自动换行"
-
-#: kdiff3.cpp:585
-msgid "Add Manual Diff Alignment"
-msgstr ""
-
-#: kdiff3.cpp:586
-msgid "Clear All Manual Diff Alignments"
-msgstr ""
-
-#: kdiff3.cpp:591
-msgid "Focus Prev Window"
-msgstr "聚焦于上一个窗口"
-
-#: kdiff3.cpp:592
-msgid "Toggle Split Orientation"
-msgstr "切换分隔方向"
-
-#: kdiff3.cpp:594
-msgid "Dir && Text Split Screen View"
-msgstr "目录和文本分屏视图"
-
-#: kdiff3.cpp:596
-msgid "Toggle Between Dir && Text View"
-msgstr "切换目录和文本视图"
-
-#: kdiff3.cpp:618 kdiff3.cpp:710 kdiff3.cpp:735 kdiff3.cpp:1016
-#: kdiff3.cpp:1037 pdiff.cpp:1141 pdiff.cpp:1213 pdiff.cpp:1251 pdiff.cpp:1267
-#: pdiff.cpp:1297 pdiff.cpp:1308 directorymergewindow.cpp:721
+#: directorymergewindow.cpp:721 kdiff3.cpp:618 kdiff3.cpp:710 kdiff3.cpp:735
+#: kdiff3.cpp:1016 kdiff3.cpp:1037 pdiff.cpp:1141 pdiff.cpp:1213 pdiff.cpp:1251
+#: pdiff.cpp:1267 pdiff.cpp:1297 pdiff.cpp:1308
 msgid "Ready."
 msgstr "就绪。"
 
-#: kdiff3.cpp:652 pdiff.cpp:1792
-msgid "The merge result hasn't been saved."
-msgstr "合并结果未保存。"
+#: directorymergewindow.cpp:735
+msgid "Directory Comparison Status"
+msgstr "目录比较状态"
 
-#: kdiff3.cpp:653 kdiff3.cpp:663 kdiff3.cpp:675 pdiff.cpp:1059 pdiff.cpp:1793
-#: pdiff.cpp:1803 directorymergewindow.cpp:389 mergeresultwindow.cpp:303
-msgid "Warning"
-msgstr ""
+#: directorymergewindow.cpp:736
+msgid "Number of subdirectories:"
+msgstr "子目录数："
 
-#: kdiff3.cpp:654
-msgid "Save && Quit"
-msgstr "保存并退出"
+#: directorymergewindow.cpp:737
+msgid "Number of equal files:"
+msgstr "相同文件数："
 
-#: kdiff3.cpp:655
-msgid "Quit Without Saving"
-msgstr "退出不保存"
+#: directorymergewindow.cpp:738
+msgid "Number of different files:"
+msgstr "不同文件数："
 
-#: kdiff3.cpp:663 pdiff.cpp:1803
-msgid "Saving the merge result failed."
-msgstr "保存合并结果失败。"
+#: directorymergewindow.cpp:741
+msgid "Number of manual merges:"
+msgstr "手动合并数："
 
-#: kdiff3.cpp:674 pdiff.cpp:1058
+#: directorymergewindow.cpp:909
+msgid "This affects all merge operations."
+msgstr "这将影响全部合并操作。"
+
+#: directorymergewindow.cpp:910
+msgid "Changing All Merge Operations"
+msgstr "更改全部合并操作"
+
+#: directorymergewindow.cpp:1309
+msgid "Processing "
+msgstr "处理 "
+
+#: directorymergewindow.cpp:1733 directorymergewindow.cpp:1739
+msgid "To do."
+msgstr "执行。"
+
+#: directorymergewindow.cpp:1807 directorymergewindow.cpp:2987
+msgid "Copy A to B"
+msgstr "复制 A 到 B"
+
+#: directorymergewindow.cpp:1808 directorymergewindow.cpp:2988
+msgid "Copy B to A"
+msgstr "复制 B 到 A"
+
+#: directorymergewindow.cpp:1809 directorymergewindow.cpp:2989
+msgid "Delete A"
+msgstr "删除 A"
+
+#: directorymergewindow.cpp:1810 directorymergewindow.cpp:2990
+msgid "Delete B"
+msgstr "删除 B"
+
+#: directorymergewindow.cpp:1811
+msgid "Delete A & B"
+msgstr "删除 A 和 B"
+
+#: directorymergewindow.cpp:1812 directorymergewindow.cpp:2992
+msgid "Merge to A"
+msgstr "合并到 A"
+
+#: directorymergewindow.cpp:1813 directorymergewindow.cpp:2993
+msgid "Merge to B"
+msgstr "合并到 B"
+
+#: directorymergewindow.cpp:1814
+msgid "Merge to A & B"
+msgstr "合并到 A 和 B"
+
+#: directorymergewindow.cpp:1818 directorymergewindow.cpp:2984
+msgid "Delete (if exists)"
+msgstr "删除(如果存在)"
+
+#: directorymergewindow.cpp:1819 directorymergewindow.cpp:1820
+#: directorymergewindow.cpp:2983 smalldialogs.cpp:110 optiondialog.cpp:869
+msgid "Merge"
+msgstr "合并"
+
+#: directorymergewindow.cpp:1819 directorymergewindow.cpp:1820
+msgid "Merge (manual)"
+msgstr "合并(手动)"
+
+#: directorymergewindow.cpp:1821
+msgid "Error: Conflicting File Types"
+msgstr "错误：文件类型冲突"
+
+#: directorymergewindow.cpp:1822
+#, fuzzy
+msgid "Error: Changed and Deleted"
+msgstr "错误：变化并删除"
+
+#: directorymergewindow.cpp:1823
+msgid "Error: Dates are equal but files are not."
+msgstr "错误：日期相同但是文件不同。"
+
+#: directorymergewindow.cpp:1849 directorymergewindow.cpp:1878
+#: directorymergewindow.cpp:1903
+msgid "This operation is currently not possible."
+msgstr "现在不能执行此操作。"
+
+#: directorymergewindow.cpp:1849 directorymergewindow.cpp:1878
+#: directorymergewindow.cpp:1903 directorymergewindow.cpp:2171
+msgid "Operation Not Possible"
+msgstr "操作不可行"
+
+#: directorymergewindow.cpp:1942
 msgid ""
-"You are currently doing a directory merge. Are you sure, you want to abort?"
-msgstr "您当前正在合并目录。您确认要放弃吗？"
+"This should never happen: \n"
+"\n"
+"mergeResultSaved: m_pMFI=0\n"
+"\n"
+"If you know how to reproduce this, please contact the program author."
+msgstr ""
+"此情况不应再发生：\n"
+"\n"
+"合并结果保存：m_pMFI=0\n"
+"\n"
+"如果您知道如何重现错误，请联系程序作者。"
 
-#: kdiff3.cpp:699
-msgid "Saving file..."
-msgstr "正在保存文件..."
+#: directorymergewindow.cpp:1942
+msgid "Program Error"
+msgstr "程序错误"
 
-#: kdiff3.cpp:716
-msgid "Saving file with a new filename..."
-msgstr "正在用新文件名保存文件..."
+#: directorymergewindow.cpp:1953
+msgid "An error occurred while copying.\n"
+msgstr "复制时发生错误。\n"
 
-#: kdiff3.cpp:718 kreplacements/kreplacements.cpp:620
-msgid "Save As..."
+#: directorymergewindow.cpp:1953 directorymergewindow.cpp:2022
+#: directorymergewindow.cpp:2054 directorymergewindow.cpp:2102
+#: directorymergewindow.cpp:2111 directorymergewindow.cpp:2120
+#: directorymergewindow.cpp:2371
+#| msgid "Error."
+msgid "Error"
+msgstr "错误"
+
+#: directorymergewindow.cpp:1954 directorymergewindow.cpp:2372
+msgid "Merge Error"
+msgstr "合并错误"
+
+#: directorymergewindow.cpp:1959 directorymergewindow.cpp:2377
+msgid "Error."
+msgstr "错误。"
+
+#: directorymergewindow.cpp:1964 directorymergewindow.cpp:2269
+#: directorymergewindow.cpp:2309
+msgid "Done."
+msgstr "完成。"
+
+#: directorymergewindow.cpp:1987
+msgid "Not saved."
+msgstr "未保存。"
+
+#: directorymergewindow.cpp:2022
+msgid "Unknown merge operation. (This must never happen!)"
+msgstr "未知合并操作。(绝不可以发生！)"
+
+#: directorymergewindow.cpp:2054
+msgid "Unknown merge operation."
+msgstr "未知合并操作。"
+
+#: directorymergewindow.cpp:2069
+msgid ""
+"The merge is about to begin.\n"
+"\n"
+"Choose \"Do it\" if you have read the instructions and know what you are "
+"doing.\n"
+"Choosing \"Simulate it\" will tell you what would happen.\n"
+"\n"
+"Be aware that this program still has beta status and there is NO WARRANTY "
+"whatsoever! Make backups of your vital data!"
+msgstr ""
+"合并将开始。\n"
+"\n"
+"选择“执行”如果您已经阅读了指南并知道您在做什么。\n"
+"选择“模拟”将告诉您将发生什么。\n"
+"\n"
+"注意此程序依然处于 beta 状态，没有任何保证！备份您的重要数据！"
+
+#: directorymergewindow.cpp:2074
+msgid "Starting Merge"
+msgstr "开始合并"
+
+#: directorymergewindow.cpp:2075
+msgid "Do It"
+msgstr "执行"
+
+#: directorymergewindow.cpp:2076
+msgid "Simulate It"
+msgstr "模拟"
+
+#: directorymergewindow.cpp:2102
+msgid ""
+"The highlighted item has a different type in the different directories. "
+"Select what to do."
+msgstr "高亮的项目在不同的目录有不同类型。选择做什么。"
+
+#: directorymergewindow.cpp:2111
+msgid ""
+"The modification dates of the file are equal but the files are not. Select "
+"what to do."
+msgstr "文件的修改日期相同但是文件不同。选择做什么。"
+
+#: directorymergewindow.cpp:2120
+#| msgid ""
+#| "The highlighted item has a different type in the different directories. "
+#| "Select what to do."
+msgid ""
+"The highlighted item was changed in one directory and deleted in the other. "
+"Select what to do."
+msgstr "高亮的项目在一个目录被修改，在另一个目录被删除。请选择如何处理。"
+
+#: directorymergewindow.cpp:2171
+msgid ""
+"This operation is currently not possible because directory merge is "
+"currently running."
+msgstr "此操作当前不可行，因为目录合并正在运行。"
+
+#: directorymergewindow.cpp:2231
+msgid ""
+"There was an error in the last step.\n"
+"Do you want to continue with the item that caused the error or do you want "
+"to skip this item?"
+msgstr ""
+"最后一步有错误。\n"
+"您要继续进行导致错误的项目还是跳过该项？"
+
+#: directorymergewindow.cpp:2233
+msgid "Continue merge after an error"
+msgstr "出错后继续合并"
+
+#: directorymergewindow.cpp:2234
+msgid "Continue With Last Item"
+msgstr "继续进行上一项"
+
+#: directorymergewindow.cpp:2235
+msgid "Skip Item"
+msgstr "跳过项目"
+
+#: directorymergewindow.cpp:2269
+msgid "Skipped."
+msgstr "已跳过。"
+
+#: directorymergewindow.cpp:2276 directorymergewindow.cpp:2490
+msgid "In progress..."
+msgstr "进行中..."
+
+#: directorymergewindow.cpp:2324
+msgid "Merge operation complete."
+msgstr "合并操作完成。"
+
+#: directorymergewindow.cpp:2324 directorymergewindow.cpp:2327
+msgid "Merge Complete"
+msgstr "合并完成"
+
+#: directorymergewindow.cpp:2337
+msgid ""
+"Simulated merge complete: Check if you agree with the proposed operations."
+msgstr "模拟合并完成：核对您是否赞同被提议的操作。"
+
+#: directorymergewindow.cpp:2371
+msgid "An error occurred. Press OK to see detailed information.\n"
+msgstr "错误发生。按 OK 看详细信息。\n"
+
+#: directorymergewindow.cpp:2403
+#, kde-format
+msgid "Error: While deleting %1: Creating backup failed."
+msgstr "错误：在删除 %1 时：创建备份失败。"
+
+#: directorymergewindow.cpp:2410
+#, kde-format
+msgid "delete directory recursively( %1 )"
+msgstr "递归删除目录( %1 )"
+
+#: directorymergewindow.cpp:2412
+#, kde-format
+msgid "delete( %1 )"
+msgstr "删除( %1 )"
+
+#: directorymergewindow.cpp:2427
+msgid "Error: delete dir operation failed while trying to read the directory."
+msgstr "错误：在试图读取目录时删除目录操作失败。"
+
+#: directorymergewindow.cpp:2446
+#, kde-format
+msgid "Error: rmdir( %1 ) operation failed."
+msgstr "错误：rmdir( %1 )操作失败。"
+
+#: directorymergewindow.cpp:2456
+msgid "Error: delete operation failed."
+msgstr "错误：删除操作失败。"
+
+#: directorymergewindow.cpp:2482
+#, kde-format
+msgid "manual merge( %1, %2, %3 -> %4)"
+msgstr "手动合并( %1，%2，%3 -> %4)"
+
+#: directorymergewindow.cpp:2485
+msgid ""
+"     Note: After a manual merge the user should continue by pressing F7."
+msgstr "     注意：在手动合并之后用户应该按 F7 继续。"
+
+#: directorymergewindow.cpp:2508
+#, kde-format
+msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
+msgstr "错误：复制( %1 -> %2 )失败。删除现存目标失败。"
+
+#: directorymergewindow.cpp:2518
+#, kde-format
+msgid "copyLink( %1 -> %2 )"
+msgstr "复制链接( %1 -> %2 )"
+
+#: directorymergewindow.cpp:2529
+msgid "Error: copyLink failed: Remote links are not yet supported."
+msgstr "错误：复制链接失败：远程链接尚未支持。"
+
+#: directorymergewindow.cpp:2535
+msgid "Error: copyLink failed."
+msgstr "错误：复制链接失败。"
+
+#: directorymergewindow.cpp:2555
+#, kde-format
+msgid "copy( %1 -> %2 )"
+msgstr "复制(  %1 -> %2 )"
+
+#: directorymergewindow.cpp:2581
+#, kde-format
+msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
+msgstr "重命名( %1 -> %2 )错误：无法删除现存目标。"
+
+#: directorymergewindow.cpp:2587
+#, kde-format
+msgid "rename( %1 -> %2 )"
+msgstr "重命名( %1 -> %2 )"
+
+#: directorymergewindow.cpp:2596
+msgid "Error: Rename failed."
+msgstr "错误：重命名失败。"
+
+#: directorymergewindow.cpp:2614
+#, kde-format
+msgid "Error during makeDir of %1. Cannot delete existing file."
+msgstr "建立目录 %1 出错。无法删除现存文件。"
+
+#: directorymergewindow.cpp:2630
+#, kde-format
+msgid "makeDir( %1 )"
+msgstr "建立目录( %1 )"
+
+#: directorymergewindow.cpp:2640
+msgid "Error while creating directory."
+msgstr "创建目录时出错。"
+
+#: directorymergewindow.cpp:2665 directorymergewindow.cpp:2775
+msgid "Dest"
+msgstr "目标"
+
+#: directorymergewindow.cpp:2669 directorymergewindow.cpp:2700
+msgid "Dir"
+msgstr "目录"
+
+#: directorymergewindow.cpp:2669
+msgid "Type"
+msgstr "类型"
+
+#: directorymergewindow.cpp:2669
+msgid "Size"
+msgstr "大小"
+
+#: directorymergewindow.cpp:2670
+msgid "Attr"
+msgstr "属性"
+
+#: directorymergewindow.cpp:2670
+msgid "Last Modification"
+msgstr "上次修改"
+
+#: directorymergewindow.cpp:2670
+msgid "Link-Destination"
+msgstr "链接目标"
+
+#: directorymergewindow.cpp:2700 difftextwindow.cpp:401
+#| msgid "File..."
+msgid "File"
+msgstr "文件"
+
+#: directorymergewindow.cpp:2717
+msgid "not available"
+msgstr "不可用"
+
+#: directorymergewindow.cpp:2737
+msgid "A (Dest): "
+msgstr "A (目标)："
+
+#: directorymergewindow.cpp:2740
+msgid "A (Base): "
+msgstr "A 基准"
+
+#: directorymergewindow.cpp:2746
+msgid "B (Dest): "
+msgstr "B (目标)："
+
+#: directorymergewindow.cpp:2754
+msgid "C (Dest): "
+msgstr "C (目标)："
+
+#: directorymergewindow.cpp:2760
+msgid "Dest: "
+msgstr "目标："
+
+#: directorymergewindow.cpp:2827
+msgid "Save Directory Merge State As..."
+msgstr "另存目录合并状态..."
+
+#: directorymergewindow.cpp:2950
+msgid "Start/Continue Directory Merge"
+msgstr "开始/继续目录合并"
+
+#: directorymergewindow.cpp:2951
+msgid "Run Operation for Current Item"
+msgstr "开始当前项目操作"
+
+#: directorymergewindow.cpp:2952
+msgid "Compare Selected File"
+msgstr "比较所选文件"
+
+#: directorymergewindow.cpp:2953
+msgid "Merge Current File"
+msgstr "合并当前文件"
+
+#: directorymergewindow.cpp:2953
+#| msgid "Merge"
+msgid ""
+"Merge\n"
+"File"
+msgstr "合并文件"
+
+#: directorymergewindow.cpp:2954
+msgid "Fold All Subdirs"
+msgstr "折叠全部子文件夹"
+
+#: directorymergewindow.cpp:2955
+msgid "Unfold All Subdirs"
+msgstr "打开全部子文件夹"
+
+#: directorymergewindow.cpp:2959
+msgid "Choose A for All Items"
+msgstr "选择 A 的全部项目"
+
+#: directorymergewindow.cpp:2960
+msgid "Choose B for All Items"
+msgstr "选择 B 的全部项目"
+
+#: directorymergewindow.cpp:2961
+msgid "Choose C for All Items"
+msgstr "选择 C 的全部项目"
+
+#: directorymergewindow.cpp:2962
+msgid "Auto-Choose Operation for All Items"
+msgstr "为全部项目自动选择操作"
+
+#: directorymergewindow.cpp:2963
+msgid "No Operation for All Items"
+msgstr "全部项目无操作"
+
+#: directorymergewindow.cpp:2968
+msgid "Show Identical Files"
+msgstr "显示相同的文件"
+
+#: directorymergewindow.cpp:2968
+#, fuzzy
+msgid ""
+"Identical\n"
+"Files"
+msgstr "相同文件"
+
+#: directorymergewindow.cpp:2969
+msgid "Show Different Files"
+msgstr "显示不同的文件："
+
+#: directorymergewindow.cpp:2970
+msgid "Show Files only in A"
+msgstr "显示只在A中有的文件"
+
+#: directorymergewindow.cpp:2970
+#, fuzzy
+msgid ""
+"Files\n"
+"only in A"
+msgstr "只在A中有的文件"
+
+#: directorymergewindow.cpp:2971
+msgid "Show Files only in B"
+msgstr "显示只在B中有的文件"
+
+#: directorymergewindow.cpp:2971
+#, fuzzy
+msgid ""
+"Files\n"
+"only in B"
+msgstr "只在B中有的文件"
+
+#: directorymergewindow.cpp:2972
+msgid "Show Files only in C"
+msgstr "显示只在C中有的文件"
+
+#: directorymergewindow.cpp:2972
+#, fuzzy
+msgid ""
+"Files\n"
+"only in C"
+msgstr "只在C中有的文件"
+
+#: directorymergewindow.cpp:2976
+msgid "Compare Explicitly Selected Files"
+msgstr "比较所选文件"
+
+#: directorymergewindow.cpp:2977
+msgid "Merge Explicitly Selected Files"
+msgstr "合并所选文件"
+
+#: directorymergewindow.cpp:2979 directorymergewindow.cpp:2986
+msgid "Do Nothing"
+msgstr "什么也不做"
+
+#: directorymergewindow.cpp:2980
+msgid "A"
+msgstr "A"
+
+#: directorymergewindow.cpp:2981
+msgid "B"
+msgstr "B"
+
+#: directorymergewindow.cpp:2982
+msgid "C"
+msgstr "C"
+
+#: directorymergewindow.cpp:2991
+msgid "Delete A && B"
+msgstr "删除 A 和 B"
+
+#: directorymergewindow.cpp:2994
+msgid "Merge to A && B"
+msgstr "合并到 A 和 B"
+
+#: main.cpp:74 main.cpp:76
+#, fuzzy
+msgid "Ignored. (User defined.)"
+msgstr "忽略的。（用户自定义的。）"
+
+#: main.cpp:157
+#| msgid "KDiff3"
+msgid "kdiff3"
+msgstr "KDiff3"
+
+#: main.cpp:159
+msgid "Tool for Comparison and Merge of Files and Directories"
+msgstr "比较及合并文件和目录的工具"
+
+#: main.cpp:160
+msgid "(c) 2002-2009 Joachim Eibl"
 msgstr ""
 
-#: kdiff3.cpp:810
+#: main.cpp:167 kdiff3_part.cpp:303
+msgid "Joachim Eibl"
+msgstr ""
+
+#: main.cpp:168
+msgid "Eike Sauer"
+msgstr ""
+
+#: main.cpp:168
+msgid "Bugfixes, Debian package maintainer"
+msgstr ""
+
+#: main.cpp:169
+msgid "Sebastien Fricker"
+msgstr ""
+
+#: main.cpp:169
+msgid "Windows installer"
+msgstr ""
+
+#: main.cpp:170
+msgid "Stephan Binner"
+msgstr ""
+
+#: main.cpp:170
+msgid "i18n-help"
+msgstr ""
+
+#: main.cpp:171
+msgid "Stefan Partheymueller"
+msgstr ""
+
+#: main.cpp:171
 #, fuzzy
-msgid "Printing..."
-msgstr "正在退出..."
+#| msgid "From Clipboard"
+msgid "Clipboard-patch"
+msgstr "从剪贴板"
 
-#: kdiff3.cpp:826 difftextwindow.cpp:1721
+#: main.cpp:172
+msgid "David Faure"
+msgstr ""
+
+#: main.cpp:172
+msgid "KIO-Help"
+msgstr ""
+
+#: main.cpp:173
+msgid "Bernd Gehrmann"
+msgstr ""
+
+#: main.cpp:173
+msgid "Class CvsIgnoreList from Cervisia"
+msgstr ""
+
+#: main.cpp:174
+msgid "Andre Woebbeking"
+msgstr ""
+
+#: main.cpp:174
+msgid "Class StringMatcher"
+msgstr ""
+
+#: main.cpp:175
+msgid "Michael Denio"
+msgstr ""
+
+#: main.cpp:175
 #, fuzzy
-msgid "Top line"
-msgstr "顶端行数 %1"
+#| msgid "Directory Comparison Status"
+msgid "Directory Equality-Coloring patch"
+msgstr ""
 
-#: kdiff3.cpp:951
+#: main.cpp:176
+msgid "Manfred Koehler"
+msgstr ""
+
+#: main.cpp:176
+msgid "Fix for slow startup on Windows"
+msgstr ""
+
+#: main.cpp:177
 #, fuzzy
-#| msgid "Select Another Font"
-msgid "Selection"
-msgstr "选择另一种字体"
+#| msgid "Merge Error"
+msgid "Sergey Zorin"
+msgstr ""
 
-#: kdiff3.cpp:977
+#: main.cpp:177
+msgid "Diff Ext for Windows"
+msgstr ""
+
+#: main.cpp:178
+msgid "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
+msgstr ""
+
+#: main.cpp:178
+msgid "GNU-Diffutils"
+msgstr ""
+
+#: main.cpp:179
+msgid "Tino Boellsterling, Timothy Mee"
+msgstr ""
+
+#: main.cpp:179
+msgid "Intensive test, use and feedback"
+msgstr ""
+
+#: main.cpp:180
+msgid "Michael Schmidt"
+msgstr ""
+
+#: main.cpp:180
+msgid "Mac support"
+msgstr ""
+
+#: main.cpp:181
+msgid "Valentin Rusu"
+msgstr ""
+
+#: main.cpp:181 main.cpp:182
 #, fuzzy
-msgid "Printing completed."
-msgstr "合并操作完成。"
+#| msgid "Do Nothing"
+msgid "KDE4 porting"
+msgstr ""
 
-#: kdiff3.cpp:981
+#: main.cpp:182
+msgid "Albert Astals Cid"
+msgstr ""
+
+#: main.cpp:184
+msgid "+ Many thanks to those who reported bugs and contributed ideas!"
+msgstr "+ 十分感谢报告错误和贡献想法的人们！"
+
+#: main.cpp:190
+msgid "Merge the input."
+msgstr "合并输入。"
+
+#: main.cpp:191
+msgid "Explicit base file. For compatibility with certain tools."
+msgstr "明确基准文件，以便与某些工具兼容。"
+
+#: main.cpp:192
+msgid "Output file. Implies -m. E.g.: -o newfile.txt"
+msgstr "输出文件。Implies -m。例如：-o newfile.txt"
+
+#: main.cpp:193
+msgid "Output file, again. (For compatibility with certain tools.)"
+msgstr "再次输出文件。(为与某些工具兼容。)"
+
+#: main.cpp:194
+msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
+msgstr "如果全部冲突自动解决无图形用户界面。(需要 -o file)"
+
+#: main.cpp:195
+msgid "Don't solve conflicts automatically. (For compatibility...)"
+msgstr "不自动解决冲突。(为了兼容性...)"
+
+#: main.cpp:196
+msgid "Visible name replacement for input file 1 (base)."
+msgstr "为输入文件1(基准文件)做的可见名替换。"
+
+#: main.cpp:197
+msgid "Visible name replacement for input file 2."
+msgstr "为输入文件2做的可见名替换。"
+
+#: main.cpp:198
+msgid "Visible name replacement for input file 3."
+msgstr "为输入文件3做的可见名替换。"
+
+#: main.cpp:199
+msgid "Alternative visible name replacement. Supply this once for every input."
+msgstr "候选可见名替换。每次输入提供。"
+
+#: main.cpp:200
+msgid ""
+"Override a config setting. Use once for every setting. E.g.: --cs "
+"\"AutoAdvance=1\""
+msgstr ""
+
+#: main.cpp:201
 #, fuzzy
-msgid "Printing aborted."
-msgstr "合并操作完成。"
+msgid "Show list of config settings and current values."
+msgstr "显示配置及值。"
 
-#: kdiff3.cpp:987
-msgid "Exiting..."
-msgstr "正在退出..."
+#: main.cpp:202
+#, fuzzy
+msgid "Use a different config file."
+msgstr "使用不同的配置文件。"
 
-#: kdiff3.cpp:1000
-msgid "Toggling toolbar..."
-msgstr "切换工具栏..."
+#: main.cpp:205
+msgid "file1 to open (base, if not specified via --base)"
+msgstr "要打开的文件(基准文件，如果未通过 --base 指定)"
 
-#: kdiff3.cpp:1021
-msgid "Toggle the statusbar..."
-msgstr "切换状态栏..."
+#: main.cpp:206
+msgid "file2 to open"
+msgstr "要打开的文件 2"
+
+#: main.cpp:207
+msgid "file3 to open"
+msgstr "要打开的文件 3"
+
+#: mergeresultwindow.cpp:152 mergeresultwindow.cpp:970
+#: mergeresultwindow.cpp:984 mergeresultwindow.cpp:996
+#: mergeresultwindow.cpp:1008
+#, kde-format
+msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
+msgstr "还未解决的冲突数目：%1(其中 %2 项为空白字符)"
+
+#: mergeresultwindow.cpp:301
+msgid ""
+"The output has been modified.\n"
+"If you continue your changes will be lost."
+msgstr ""
+"已修改输出。\n"
+"如果您继续您的更改将丢失。"
+
+#: mergeresultwindow.cpp:828 pdiff.cpp:532
+msgid "All input files are binary equal."
+msgstr "全部输入文件二进制数据相同。"
+
+#: mergeresultwindow.cpp:830
+msgid "All input files contain the same text."
+msgstr "全部输入文件包含相同文本。"
+
+#: mergeresultwindow.cpp:832 mergeresultwindow.cpp:834
+#: mergeresultwindow.cpp:836 pdiff.cpp:536 pdiff.cpp:538 pdiff.cpp:540
+#, kde-format
+msgid "Files %1 and %2 are binary equal.\n"
+msgstr "文件 %1 和 %2 二进制数据相同。\n"
+
+#: mergeresultwindow.cpp:833 mergeresultwindow.cpp:835 mergeresultwindow.cpp:837
+#, kde-format
+msgid "Files %1 and %2 have equal text.\n"
+msgstr "文件%1和%2文本相同。\n"
+
+#: mergeresultwindow.cpp:843
+msgid "Total number of conflicts: "
+msgstr "冲突总数："
+
+#: mergeresultwindow.cpp:844
+msgid ""
+"\n"
+"Nr of automatically solved conflicts: "
+msgstr ""
+"\n"
+"自动解决的冲突数目："
+
+#: mergeresultwindow.cpp:845
+msgid ""
+"\n"
+"Nr of unsolved conflicts: "
+msgstr ""
+"\n"
+"未解决冲突数目："
+
+#: mergeresultwindow.cpp:847
+msgid "Conflicts"
+msgstr "冲突"
+
+#: mergeresultwindow.cpp:1714
+msgid "<No src line>"
+msgstr "<无源行>"
+
+#: mergeresultwindow.cpp:1722
+msgid "<Merge Conflict (Whitespace only)>"
+msgstr "<合并冲突(只有空白字符)>"
+
+#: mergeresultwindow.cpp:1724 mergeresultwindow.cpp:2503
+msgid "<Merge Conflict>"
+msgstr "<合并冲突>"
+
+#: mergeresultwindow.cpp:2711
+msgid ""
+"Not all conflicts are solved yet.\n"
+"File not saved.\n"
+msgstr ""
+"尚未解决全部冲突。\n"
+"文件未保存。\n"
+
+#: mergeresultwindow.cpp:2713 mergeresultwindow.cpp:2722
+msgid "Conflicts Left"
+msgstr "遗留的冲突"
+
+#: mergeresultwindow.cpp:2720
+#, fuzzy
+msgid ""
+"There is a line end style conflict. Please choose the line end style "
+"manually.\n"
+"File not saved.\n"
+msgstr ""
+"有一处行尾风格冲突。请手动选择行尾风格。\n"
+"文件未保存。"
+
+#: mergeresultwindow.cpp:2734
+msgid ""
+"\n"
+"\n"
+"Creating backup failed. File not saved."
+msgstr ""
+"\n"
+"\n"
+"创建备份失败。文件未保存。"
+
+#: mergeresultwindow.cpp:2734 mergeresultwindow.cpp:2778
+msgid "File Save Error"
+msgstr "保存文件错误"
+
+#: mergeresultwindow.cpp:2778
+msgid "Error while writing."
+msgstr "写入时出错。"
+
+#: mergeresultwindow.cpp:3108
+msgid "Output"
+msgstr "输出"
+
+#: mergeresultwindow.cpp:3120 mergeresultwindow.cpp:3300
+msgid "[Modified]"
+msgstr "[已修改]"
+
+#: mergeresultwindow.cpp:3127
+msgid "Encoding for saving"
+msgstr "保存用的文件编码："
+
+#: mergeresultwindow.cpp:3135 difftextwindow.cpp:1701 difftextwindow.cpp:1734
+#: optiondialog.cpp:762
+msgid "Line end style:"
+msgstr "行尾风格："
+
+#: mergeresultwindow.cpp:3180 difftextwindow.cpp:1734
+msgid "Unix"
+msgstr ""
+
+#: mergeresultwindow.cpp:3181 difftextwindow.cpp:1734
+msgid "DOS"
+msgstr ""
+
+#: mergeresultwindow.cpp:3215
+#| msgid "Conflicts"
+msgid "Conflict"
+msgstr "冲突"
+
+#: mergeresultwindow.cpp:3247 mergeresultwindow.cpp:3249
+#: mergeresultwindow.cpp:3251
+msgid "Codec from"
+msgstr ""
+
+#: kdiff3_part.cpp:157 kdiff3_part.cpp:234
+msgid "Couldn't find files for comparison."
+msgstr "无法找到文件比较。"
+
+#: kdiff3_part.cpp:302
+msgid "KDiff3Part"
+msgstr "KDiff3Part"
 
 #: fileaccess.cpp:612
 msgid ""
@@ -599,57 +1454,506 @@ msgstr "目录列表：%1"
 
 #: fileaccess.cpp:1489 smalldialogs.cpp:179 smalldialogs.cpp:396
 msgid "&Cancel"
-msgstr ""
+msgstr "取消(&C)"
 
-#: diff.cpp:251
-msgid "Writing clipboard data to temp file failed."
-msgstr "将剪贴板数据写入临时文件失败。"
+#: difftextwindow.cpp:403
+#| msgid "Link: "
+msgid "Line"
+msgstr "行"
 
-#: diff.cpp:255
-msgid "From Clipboard"
-msgstr "从剪贴板"
+#: difftextwindow.cpp:405
+#, fuzzy
+#| msgid "not available"
+msgid "Line not available"
+msgstr "不可用"
 
-#: diff.cpp:504
-#, kde-format
+#: difftextwindow.cpp:1700 difftextwindow.cpp:1733
+#| msgid "File Encoding for A:"
+msgid "Encoding:"
+msgstr "编码："
+
+#: difftextwindow.cpp:1756 kdiff3.cpp:826
+msgid "Top line"
+msgstr "顶端行数"
+
+#: difftextwindow.cpp:1766
+msgid "End"
+msgstr "末尾"
+
+#: kdiff3.cpp:169
+#, fuzzy
+msgid "Current Configuration:"
+msgstr "当前配置："
+
+#: kdiff3.cpp:174
+#, fuzzy
+msgid "Config Option Error:"
+msgstr "配置选项错误："
+
+#: kdiff3.cpp:219
+msgid "Option --auto used, but no output file specified."
+msgstr "选项 -- 自动使用，但没有指定输出文件。"
+
+#: kdiff3.cpp:369
+msgid "Option --auto ignored for directory comparison."
+msgstr "选项 -- 自动忽略目录比较。"
+
+#: kdiff3.cpp:405
+msgid "Saving failed."
+msgstr "保存失败。"
+
+#: kdiff3.cpp:440 pdiff.cpp:1123 pdiff.cpp:1194
+msgid "Opening of these files failed:"
+msgstr "打开以下文件失败："
+
+#: kdiff3.cpp:449
+msgid "File Open Error"
+msgstr "文件打开出错"
+
+#: kdiff3.cpp:477
+msgid "Opens documents for comparison..."
+msgstr "打开文档比较..."
+
+#: kdiff3.cpp:479
+#, fuzzy
+#| msgid "Ready."
+msgid "Reload"
+msgstr "刷新"
+
+#: kdiff3.cpp:482
+msgid "Saves the merge result. All conflicts must be solved!"
+msgstr "保存合并结果。必须解决全部冲突！"
+
+#: kdiff3.cpp:484
+msgid "Saves the current document as..."
+msgstr "保存当前文档为..."
+
+#: kdiff3.cpp:486
+#, fuzzy
+msgid "Print the differences"
+msgstr "打印差异"
+
+#: kdiff3.cpp:488
+msgid "Quits the application"
+msgstr "退出程序"
+
+#: kdiff3.cpp:490
+msgid "Cuts the selected section and puts it to the clipboard"
+msgstr "剪切所选节，将其放入剪贴板"
+
+#: kdiff3.cpp:492
+msgid "Copies the selected section to the clipboard"
+msgstr "复制所选节至剪贴板"
+
+#: kdiff3.cpp:494
+msgid "Pastes the clipboard contents to actual position"
+msgstr "粘贴剪贴板内容到实际位置"
+
+#: kdiff3.cpp:496
+#, fuzzy
+msgid "Select everything in current window"
+msgstr "选则本窗口所有东西"
+
+#: kdiff3.cpp:498
+msgid "Search for a string"
+msgstr "搜索字符串"
+
+#: kdiff3.cpp:500
+msgid "Search again for the string"
+msgstr "再次搜索该字符串"
+
+#: kdiff3.cpp:505
+msgid "Enables/disables the statusbar"
+msgstr "启用/禁止状态栏"
+
+#: kdiff3.cpp:509
+msgid "Configure KDiff3..."
+msgstr "配置 KDiff3..."
+
+#: kdiff3.cpp:530
+msgid "Go to Current Delta"
+msgstr "到当前 Delta"
+
+#: kdiff3.cpp:530
+#, fuzzy
+#| msgid "Go to Current Delta"
 msgid ""
-"Preprocessing possibly failed. Check this command:\n"
-"\n"
-"  %1\n"
-"\n"
-"The preprocessing command will be disabled now."
-msgstr ""
-"预处理可能失败了。请检查这个命令：\n"
-"\n"
-"  %1\n"
-"\n"
-"现在预处理命令会被禁用。"
+"Current\n"
+"Delta"
+msgstr "到当前 Delta"
 
-#: diff.cpp:544
-#, kde-format
+#: kdiff3.cpp:532
+msgid "Go to First Delta"
+msgstr "到第一个 Delta"
+
+#: kdiff3.cpp:532
+#, fuzzy
+#| msgid "Go to First Delta"
 msgid ""
-"The line-matching-preprocessing possibly failed. Check this command:\n"
-"\n"
-"  %1\n"
-"\n"
-"The line-matching-preprocessing command will be disabled now."
-msgstr ""
-"行匹配处理可能失败。请检查这个命令：\n"
-"\n"
-"  %1\n"
-"\n"
-"现在行匹配处理命令会被禁用。"
+"First\n"
+"Delta"
+msgstr "到第一个 Delta"
 
-#: diff.cpp:1662 diff.cpp:1676
+#: kdiff3.cpp:534
+msgid "Go to Last Delta"
+msgstr "到最后一个 Delta"
+
+#: kdiff3.cpp:534
+#, fuzzy
+#| msgid "Go to Last Delta"
 msgid ""
-"Data loss error:\n"
-"If it is reproducable please contact the author.\n"
-msgstr ""
-"数据丢失错误：\n"
-"如果它是可复制的，请联系作者。\n"
+"Last\n"
+"Delta"
+msgstr "到最后一个 Delta"
 
-#: diff.cpp:1664 diff.cpp:1678
-msgid "Severe Internal Error"
-msgstr "严重内部错误"
+#: kdiff3.cpp:536
+msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
+msgstr "(禁用“显示空白字符”时跳过空白差异。)"
+
+#: kdiff3.cpp:537
+msgid ""
+"(Does not skip white space differences even when \"Show White Space\" is "
+"disabled.)"
+msgstr "(禁用“显示空白字符”时也不跳过空白差异。)"
+
+#: kdiff3.cpp:538
+msgid "Go to Previous Delta"
+msgstr "到上一个 Delta"
+
+#: kdiff3.cpp:538
+#, fuzzy
+#| msgid "Go to Previous Delta"
+msgid ""
+"Prev\n"
+"Delta"
+msgstr "到上一个 Delta"
+
+#: kdiff3.cpp:540
+msgid "Go to Next Delta"
+msgstr "到下一个 Delta"
+
+#: kdiff3.cpp:540
+#, fuzzy
+#| msgid "Go to Next Delta"
+msgid ""
+"Next\n"
+"Delta"
+msgstr "到下一个 Delta"
+
+#: kdiff3.cpp:542
+msgid "Go to Previous Conflict"
+msgstr "到上一个冲突"
+
+#: kdiff3.cpp:542
+#| msgid "Conflicts"
+msgid ""
+"Prev\n"
+"Conflict"
+msgstr "上一个冲突"
+
+#: kdiff3.cpp:544
+msgid "Go to Next Conflict"
+msgstr "到下一个冲突"
+
+#: kdiff3.cpp:544
+#| msgid "Go to Next Conflict"
+msgid ""
+"Next\n"
+"Conflict"
+msgstr "下一个冲突"
+
+#: kdiff3.cpp:546
+msgid "Go to Previous Unsolved Conflict"
+msgstr "到上一个未解决冲突"
+
+#: kdiff3.cpp:546
+#| msgid "Unsolved"
+msgid ""
+"Prev\n"
+"Unsolved"
+msgstr "上一个未解决的"
+
+#: kdiff3.cpp:548
+msgid "Go to Next Unsolved Conflict"
+msgstr "到下一个未解决冲突"
+
+#: kdiff3.cpp:548
+#| msgid "Unsolved"
+msgid ""
+"Next\n"
+"Unsolved"
+msgstr "下一个未解决的"
+
+#: kdiff3.cpp:550
+msgid "Select Line(s) From A"
+msgstr "从 A 选择 行"
+
+#: kdiff3.cpp:550
+#, fuzzy
+msgid ""
+"Choose\n"
+"A"
+msgstr "选择A"
+
+#: kdiff3.cpp:551
+msgid "Select Line(s) From B"
+msgstr "从 B 选择行"
+
+#: kdiff3.cpp:551
+#, fuzzy
+msgid ""
+"Choose\n"
+"B"
+msgstr "选择B"
+
+#: kdiff3.cpp:552
+msgid "Select Line(s) From C"
+msgstr "从 C 选择行"
+
+#: kdiff3.cpp:552
+#, fuzzy
+msgid ""
+"Choose\n"
+"C"
+msgstr "选择C"
+
+#: kdiff3.cpp:553
+msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
+msgstr "源码选择后自动到下一个未解决冲突"
+
+#: kdiff3.cpp:553
+#, fuzzy
+msgid ""
+"Auto\n"
+"Next"
+msgstr "自动下一个"
+
+#: kdiff3.cpp:555
+msgid "Show Space && Tabulator Characters for Differences"
+msgstr "显示间距和制表符的不同"
+
+#: kdiff3.cpp:555
+#, fuzzy
+msgid ""
+"White\n"
+"Characters"
+msgstr "空白字符"
+
+#: kdiff3.cpp:556
+msgid "Show White Space"
+msgstr "显示空白字符"
+
+#: kdiff3.cpp:556
+msgid ""
+"White\n"
+"Deltas"
+msgstr ""
+
+#: kdiff3.cpp:558
+#, fuzzy
+msgid "Show Line Numbers"
+msgstr "显示行号"
+
+#: kdiff3.cpp:558
+#, fuzzy
+#| msgid "Show Line Numbers"
+msgid ""
+"Line\n"
+"Numbers"
+msgstr "行数"
+
+#: kdiff3.cpp:559
+#, fuzzy
+msgid "Choose A Everywhere"
+msgstr "总是选择 A"
+
+#: kdiff3.cpp:560
+#, fuzzy
+msgid "Choose B Everywhere"
+msgstr "总是选择 B"
+
+#: kdiff3.cpp:561
+#, fuzzy
+msgid "Choose C Everywhere"
+msgstr "总是选择 C"
+
+#: kdiff3.cpp:562
+#, fuzzy
+msgid "Choose A for All Unsolved Conflicts"
+msgstr "所有未解决冲突均选择 A"
+
+#: kdiff3.cpp:563
+#, fuzzy
+msgid "Choose B for All Unsolved Conflicts"
+msgstr "所有未解决冲突均选择 B"
+
+#: kdiff3.cpp:564
+#, fuzzy
+msgid "Choose C for All Unsolved Conflicts"
+msgstr "所有未解决冲突均选择 C"
+
+#: kdiff3.cpp:565
+#, fuzzy
+msgid "Choose A for All Unsolved Whitespace Conflicts"
+msgstr "所有未解决空白字符冲突均选择 A"
+
+#: kdiff3.cpp:566
+#, fuzzy
+msgid "Choose B for All Unsolved Whitespace Conflicts"
+msgstr "所有未解决空白字符冲突均选择 B"
+
+#: kdiff3.cpp:567
+#, fuzzy
+msgid "Choose C for All Unsolved Whitespace Conflicts"
+msgstr "所有未解决空白字符冲突均选择 C"
+
+#: kdiff3.cpp:568
+msgid "Automatically Solve Simple Conflicts"
+msgstr "自动解决简单冲突"
+
+#: kdiff3.cpp:569
+msgid "Set Deltas to Conflicts"
+msgstr "设置 Delta 为冲突"
+
+#: kdiff3.cpp:570
+#, fuzzy
+msgid "Run Regular Expression Auto Merge"
+msgstr "进行正则表达式自动合并"
+
+#: kdiff3.cpp:571
+msgid "Automatically Solve History Conflicts"
+msgstr "自动解决历史冲突"
+
+#: kdiff3.cpp:572
+msgid "Split Diff At Selection"
+msgstr ""
+
+#: kdiff3.cpp:573
+#, fuzzy
+msgid "Join Selected Diffs"
+msgstr "比较所选文件"
+
+#: kdiff3.cpp:575
+msgid "Show Window A"
+msgstr "显示窗口 A"
+
+#: kdiff3.cpp:576
+msgid "Show Window B"
+msgstr "显示窗口 B"
+
+#: kdiff3.cpp:577
+msgid "Show Window C"
+msgstr "显示窗口 C"
+
+#: kdiff3.cpp:578 kdiff3.cpp:589
+msgid "Focus Next Window"
+msgstr "聚焦于下一个窗口"
+
+#: kdiff3.cpp:580
+msgid "Normal Overview"
+msgstr "普通概览"
+
+#: kdiff3.cpp:581
+msgid "A vs. B Overview"
+msgstr "A 和 B 概览"
+
+#: kdiff3.cpp:582
+msgid "A vs. C Overview"
+msgstr "A 和 C 概览"
+
+#: kdiff3.cpp:583
+msgid "B vs. C Overview"
+msgstr "B 和 C 概览"
+
+#: kdiff3.cpp:584
+msgid "Word Wrap Diff Windows"
+msgstr "在 Diff 窗口自动换行"
+
+#: kdiff3.cpp:585
+#, fuzzy
+msgid "Add Manual Diff Alignment"
+msgstr "添加手工对齐"
+
+#: kdiff3.cpp:586
+msgid "Clear All Manual Diff Alignments"
+msgstr "清除所有的手工对齐"
+
+#: kdiff3.cpp:591
+msgid "Focus Prev Window"
+msgstr "聚焦于上一个窗口"
+
+#: kdiff3.cpp:592
+msgid "Toggle Split Orientation"
+msgstr "切换分隔方向"
+
+#: kdiff3.cpp:594
+msgid "Dir && Text Split Screen View"
+msgstr "目录和文本分屏视图"
+
+#: kdiff3.cpp:596
+msgid "Toggle Between Dir && Text View"
+msgstr "切换目录和文本视图"
+
+#: kdiff3.cpp:652 pdiff.cpp:1792
+msgid "The merge result hasn't been saved."
+msgstr "合并结果未保存。"
+
+#: kdiff3.cpp:654
+msgid "Save && Quit"
+msgstr "保存并退出"
+
+#: kdiff3.cpp:655
+msgid "Quit Without Saving"
+msgstr "退出不保存"
+
+#: kdiff3.cpp:663 pdiff.cpp:1803
+msgid "Saving the merge result failed."
+msgstr "保存合并结果失败。"
+
+#: kdiff3.cpp:674 pdiff.cpp:1058
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort?"
+msgstr "您当前正在合并目录。您确认要放弃吗？"
+
+#: kdiff3.cpp:699
+msgid "Saving file..."
+msgstr "正在保存文件..."
+
+#: kdiff3.cpp:716
+msgid "Saving file with a new filename..."
+msgstr "正在用新文件名保存文件..."
+
+#: kdiff3.cpp:810
+#, fuzzy
+msgid "Printing..."
+msgstr "打印..."
+
+#: kdiff3.cpp:951
+#, fuzzy
+#| msgid "Select Another Font"
+msgid "Selection"
+msgstr "选择"
+
+#: kdiff3.cpp:977
+msgid "Printing completed."
+msgstr "打印完成。"
+
+#: kdiff3.cpp:981
+#, fuzzy
+msgid "Printing aborted."
+msgstr "打印中止。"
+
+#: kdiff3.cpp:987
+msgid "Exiting..."
+msgstr "正在退出..."
+
+#: kdiff3.cpp:1000
+msgid "Toggling toolbar..."
+msgstr "切换工具栏..."
+
+#: kdiff3.cpp:1021
+msgid "Toggle the statusbar..."
+msgstr "切换状态栏..."
 
 #: smalldialogs.cpp:58
 msgid "A (Base):"
@@ -669,29 +1973,25 @@ msgstr "目录..."
 msgid "C (Optional):"
 msgstr "C (可选)："
 
-#: smalldialogs.cpp:110 optiondialog.cpp:873 directorymergewindow.cpp:1818
-#: directorymergewindow.cpp:1819 directorymergewindow.cpp:2972
-msgid "Merge"
-msgstr "合并"
-
 #: smalldialogs.cpp:116
+#, fuzzy
 msgid "Swap/Copy Names ..."
-msgstr ""
+msgstr "交换/复制文件名..."
 
 #: smalldialogs.cpp:121 smalldialogs.cpp:122 smalldialogs.cpp:123
 #, kde-format
 msgid "Swap %1<->%2"
-msgstr ""
+msgstr "交换 %1<->%2"
 
 #: smalldialogs.cpp:124 smalldialogs.cpp:125 smalldialogs.cpp:126
 #, kde-format
 msgid "Copy %1->Output"
-msgstr ""
+msgstr "复制 %1->输出"
 
 #: smalldialogs.cpp:127 smalldialogs.cpp:128 smalldialogs.cpp:129
 #, kde-format
 msgid "Swap %1<->Output"
-msgstr ""
+msgstr "交换 %1<->输出"
 
 #: smalldialogs.cpp:136
 msgid "Output (optional):"
@@ -703,7 +2003,7 @@ msgstr "配置..."
 
 #: smalldialogs.cpp:174
 msgid "&OK"
-msgstr ""
+msgstr "确定(&O)"
 
 #: smalldialogs.cpp:362
 msgid "Search text:"
@@ -734,28 +2034,31 @@ msgid "&Search"
 msgstr "搜索(&S)"
 
 #: smalldialogs.cpp:409
+#, fuzzy
 msgid "Regular Expression Tester"
-msgstr ""
+msgstr "正则表达式测试器"
 
-#: smalldialogs.cpp:414 optiondialog.cpp:940
+#: smalldialogs.cpp:414 optiondialog.cpp:936
 msgid "Auto merge regular expression:"
-msgstr ""
+msgstr "自动合并正则表达式："
 
 #: smalldialogs.cpp:422
 msgid "Example auto merge line:"
 msgstr ""
 
 #: smalldialogs.cpp:424
-msgid "For auto merge test copy a line as used in your files."
+msgid "To test auto merge, copy a line as used in your files."
 msgstr ""
 
 #: smalldialogs.cpp:430 smalldialogs.cpp:459 smalldialogs.cpp:496
+#, fuzzy
 msgid "Match result:"
-msgstr ""
+msgstr "匹配结果："
 
-#: smalldialogs.cpp:441 optiondialog.cpp:966
+#: smalldialogs.cpp:441 optiondialog.cpp:962
+#, fuzzy
 msgid "History start regular expression:"
-msgstr ""
+msgstr "历史记录起始正则表达式："
 
 #: smalldialogs.cpp:449
 msgid "Example history start line (with leading comment):"
@@ -767,11 +2070,13 @@ msgid ""
 "including the leading comment."
 msgstr ""
 
-#: smalldialogs.cpp:470 optiondialog.cpp:976
+#: smalldialogs.cpp:470 optiondialog.cpp:972
+#, fuzzy
 msgid "History entry start regular expression:"
-msgstr ""
+msgstr "历史记录条目起始正则表达式："
 
 #: smalldialogs.cpp:478
+#, fuzzy
 msgid "History sort key order:"
 msgstr ""
 
@@ -787,16 +2092,12 @@ msgstr ""
 
 #: smalldialogs.cpp:503
 msgid "Sort key result:"
-msgstr ""
+msgstr "排序结果："
 
 #: smalldialogs.cpp:510
+#, fuzzy
 msgid "OK"
-msgstr ""
-
-#: smalldialogs.cpp:514 kreplacements/kreplacements.h:104
-#: kreplacements/kreplacements.cpp:164 kreplacements/kreplacements.cpp:195
-msgid "Cancel"
-msgstr ""
+msgstr "确定"
 
 #: smalldialogs.cpp:554 smalldialogs.cpp:564 smalldialogs.cpp:585
 msgid "Match success."
@@ -805,10 +2106,10 @@ msgstr ""
 #: smalldialogs.cpp:558 smalldialogs.cpp:568 smalldialogs.cpp:591
 #, fuzzy
 msgid "Match failed."
-msgstr "保存失败。"
+msgstr "匹配失败。"
 
 #: smalldialogs.cpp:576
-msgid "Opening and closing parentheses don't match in regular expression."
+msgid "Opening and closing parentheses do not match in regular expression."
 msgstr ""
 
 #: optiondialog.cpp:367
@@ -831,11 +2132,12 @@ msgstr "如果非 ASCII 字符不能正确显示，请更改此选项。"
 #, fuzzy
 #| msgid "Configure..."
 msgid "Configure"
-msgstr "配置..."
+msgstr "配置"
 
 #: optiondialog.cpp:531
+#, fuzzy
 msgid "Font"
-msgstr ""
+msgstr "字体"
 
 #: optiondialog.cpp:532
 msgid "Editor & Diff Output Font"
@@ -858,13 +2160,13 @@ msgid "Color"
 msgstr "颜色"
 
 #: optiondialog.cpp:569
-#, fuzzy
 msgid "Colors Settings"
-msgstr "区域设置"
+msgstr "颜色设置"
 
 #: optiondialog.cpp:588
+#, fuzzy
 msgid "Editor and Diff Views:"
-msgstr ""
+msgstr "编辑器和Diff视图："
 
 #: optiondialog.cpp:596
 msgid "Foreground color:"
@@ -904,34 +2206,38 @@ msgstr "当前范围差别背景颜色："
 
 #: optiondialog.cpp:666
 msgid "Color for manually aligned difference ranges:"
-msgstr ""
+msgstr "手工对其区域颜色："
 
 #: optiondialog.cpp:672
 #, fuzzy
 msgid "Directory Comparison View:"
-msgstr "目录比较状态"
+msgstr "目录比较视图："
 
 #: optiondialog.cpp:678
+#, fuzzy
 msgid "Newest file color:"
-msgstr ""
+msgstr "最新文件的颜色"
 
 #: optiondialog.cpp:682
+#, fuzzy
 msgid ""
 "Changing this color will only be effective when starting the next directory "
 "comparison."
-msgstr ""
+msgstr "修改此颜色将在下次目录比较时生效。"
 
 #: optiondialog.cpp:687
+#, fuzzy
 msgid "Oldest file color:"
-msgstr ""
+msgstr "最老文件的颜色："
 
 #: optiondialog.cpp:695
+#, fuzzy
 msgid "Middle age file color:"
-msgstr ""
+msgstr "中等文件的颜色："
 
 #: optiondialog.cpp:703
 msgid "Color for missing files:"
-msgstr ""
+msgstr "缺失文件的颜色："
 
 #: optiondialog.cpp:717
 msgid "Editor"
@@ -942,13 +2248,18 @@ msgid "Editor Behavior"
 msgstr "编辑器行为"
 
 #: optiondialog.cpp:732
+#, fuzzy
 msgid "Tab inserts spaces"
-msgstr "跳格插入空格"
+msgstr "制表符插入空格"
 
 #: optiondialog.cpp:735
+#, fuzzy
+#| msgid ""
+#| "On: Pressing tab generates the appropriate number of spaces.\n"
+#| "Off: A Tab-character will be inserted."
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
-"Off: A Tab-character will be inserted."
+"Off: A tab character will be inserted."
 msgstr ""
 "打开：按下 Tab 则生成相应数量的空格。\n"
 "关闭：将插入一个制表符。"
@@ -977,11 +2288,7 @@ msgstr ""
 "打开：任何选择将被自动写入剪贴板。\n"
 "关闭：您必须明确复制内容，如通过 Ctrl-C。"
 
-#: optiondialog.cpp:762 mergeresultwindow.cpp:3135
-msgid "Line end style:"
-msgstr "行尾风格："
-
-#: optiondialog.cpp:776
+#: optiondialog.cpp:772
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
 "DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
@@ -989,26 +2296,26 @@ msgstr ""
 "设置保存文件的行尾。\n"
 "DOS/Windows：CR+LF；Unix：LF；而 CR=0D，LF=0A"
 
-#: optiondialog.cpp:788
+#: optiondialog.cpp:784
 #, fuzzy
 msgid "Diff"
 msgstr "KDiff3"
 
-#: optiondialog.cpp:789
+#: optiondialog.cpp:785
 #, fuzzy
 msgid "Diff Settings"
-msgstr "Diff 和 Merge 设置"
+msgstr "Diff设置"
 
-#: optiondialog.cpp:813
+#: optiondialog.cpp:809
 #, fuzzy
 msgid "Treat as white space."
-msgstr "按空白字符处理 C/C++ 注解"
+msgstr "按空白字符处理。"
 
-#: optiondialog.cpp:815
+#: optiondialog.cpp:811
 msgid "Ignore numbers"
 msgstr "忽略数字"
 
-#: optiondialog.cpp:818
+#: optiondialog.cpp:814
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore "
 "white space.)\n"
@@ -1017,35 +2324,37 @@ msgstr ""
 "在行匹配阶段，忽略数字字符。(与忽略空白字符相似。)\n"
 "可能帮助比较带数值数据的文件。"
 
-#: optiondialog.cpp:823
+#: optiondialog.cpp:819
 msgid "Ignore C/C++ comments"
 msgstr "忽略 C/C++ 注解"
 
-#: optiondialog.cpp:825
+#: optiondialog.cpp:821
+#, fuzzy
 msgid "Treat C/C++ comments like white space."
-msgstr "按空白字符处理 C/C++ 注解"
+msgstr "C/C++ 注解按空白字符处理。"
 
-#: optiondialog.cpp:829
+#: optiondialog.cpp:825
 msgid "Ignore case"
 msgstr "忽略大小写"
 
-#: optiondialog.cpp:832
+#: optiondialog.cpp:828
+#, fuzzy
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
-msgstr "按处理空格更改的方法处理大小写更改。(“a”<=>“A”)"
+msgstr "将大小写变化当成空白字符更改。(“a”<=>“A”)"
 
-#: optiondialog.cpp:836
+#: optiondialog.cpp:832
 msgid "Preprocessor command:"
 msgstr "预处理程序命令："
 
-#: optiondialog.cpp:840
+#: optiondialog.cpp:836
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr "用户定义预处理。(详细内容见文档。)"
 
-#: optiondialog.cpp:843
+#: optiondialog.cpp:839
 msgid "Line-matching preprocessor command:"
 msgstr "行匹配预处理命令："
 
-#: optiondialog.cpp:847
+#: optiondialog.cpp:843
 msgid ""
 "This pre-processor is only used during line matching.\n"
 "(See the docs for details.)"
@@ -1053,11 +2362,11 @@ msgstr ""
 "此预处理仅在行匹配时使用。\n"
 "(详细内容见文档。)"
 
-#: optiondialog.cpp:850
+#: optiondialog.cpp:846
 msgid "Try hard (slower)"
 msgstr "尽量仔细(较慢)"
 
-#: optiondialog.cpp:853
+#: optiondialog.cpp:849
 msgid ""
 "Enables the --minimal option for the external diff.\n"
 "The analysis of big files will be much slower."
@@ -1065,67 +2374,71 @@ msgstr ""
 "为外部 diff 程序启用 --minimal 选项。\n"
 "大文件的分析会慢得多。"
 
-#: optiondialog.cpp:858
+#: optiondialog.cpp:854
+#, fuzzy
 msgid "Align B and C for 3 input files"
-msgstr ""
+msgstr "三方比较时对齐B和C"
 
-#: optiondialog.cpp:861
+#: optiondialog.cpp:857
+#, fuzzy
 msgid ""
 "Try to align B and C when comparing or merging three input files.\n"
 "Not recommended for merging because merge might get more complicated.\n"
 "(Default is off.)"
 msgstr ""
+"进行三方比较或合并时尝试对齐B与C。\n"
+"合并时不推荐，因为会导致情况更复杂。\n"
+"（默认关闭）"
 
-#: optiondialog.cpp:874
+#: optiondialog.cpp:870
 #, fuzzy
 msgid "Merge Settings"
-msgstr "Diff 和 Merge 设置"
+msgstr "Merge 设置"
 
-#: optiondialog.cpp:889
+#: optiondialog.cpp:885
 msgid "Auto advance delay (ms):"
 msgstr "自动前进延迟(毫秒)："
 
-#: optiondialog.cpp:894
+#: optiondialog.cpp:890
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
 "for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
-msgstr ""
-"在自动前进模式，当前选择结果显示一定时间，才会跳到下一个冲突。范围：0-2000 毫"
-"秒"
+msgstr "在自动前进模式，当前选择结果显示一定时间，才会跳到下一个冲突。范围：0-2000 毫秒"
 
-#: optiondialog.cpp:899
+#: optiondialog.cpp:895
 #, fuzzy
 #| msgid "Show Window A"
 msgid "Show info dialogs"
-msgstr "显示窗口 A"
+msgstr "显示比较结果对话框"
 
-#: optiondialog.cpp:901
+#: optiondialog.cpp:897
+#, fuzzy
 msgid "Show a dialog with information about the number of conflicts."
-msgstr ""
+msgstr "显示冲突数量对话框"
 
-#: optiondialog.cpp:904
+#: optiondialog.cpp:900
 msgid "White space 2-file merge default:"
 msgstr "2 文件合并默认空白字符："
 
-#: optiondialog.cpp:908 optiondialog.cpp:921
+#: optiondialog.cpp:904 optiondialog.cpp:917
 msgid "Manual Choice"
 msgstr "手动选择"
 
-#: optiondialog.cpp:912 optiondialog.cpp:926
+#: optiondialog.cpp:908 optiondialog.cpp:922
 msgid ""
-"Allow the merge algorithm to automatically select an input for white-space-"
-"only changes."
+"Allow the merge algorithm to automatically select an input for "
+"white-space-only changes."
 msgstr "允许合并算法为仅有空白字符变化自动选择输入。"
 
-#: optiondialog.cpp:917
+#: optiondialog.cpp:913
 msgid "White space 3-file merge default:"
 msgstr "默认 3 文件合并空白字符："
 
-#: optiondialog.cpp:931
+#: optiondialog.cpp:927
 msgid "Automatic Merge Regular Expression"
-msgstr ""
+msgstr "自动化合并正则表达式"
 
-#: optiondialog.cpp:944
+#: optiondialog.cpp:940
 msgid ""
 "Regular expression for lines where KDiff3 should automatically choose one "
 "source.\n"
@@ -1133,28 +2446,30 @@ msgid ""
 "- if available - C, otherwise B will be chosen."
 msgstr ""
 
-#: optiondialog.cpp:950
+#: optiondialog.cpp:946
+#, fuzzy
 msgid "Run regular expression auto merge on merge start"
-msgstr ""
+msgstr "合并开始时进行正则表达式自动合并"
 
-#: optiondialog.cpp:952
+#: optiondialog.cpp:948
 msgid ""
 "Run the merge for auto merge regular expressions\n"
 "immediately when a merge starts.\n"
 msgstr ""
 
-#: optiondialog.cpp:957
+#: optiondialog.cpp:953
+#, fuzzy
 msgid "Version Control History Merging"
-msgstr ""
+msgstr "版本控制历史合并"
 
-#: optiondialog.cpp:970
+#: optiondialog.cpp:966
 msgid ""
 "Regular expression for the start of the version control history entry.\n"
-"Usually this line contains the \"$Log$\"-keyword.\n"
+"Usually this line contains the \"$Log$\" keyword.\n"
 "Default value: \".*\\$Log.*\\$.*\""
 msgstr ""
 
-#: optiondialog.cpp:988
+#: optiondialog.cpp:984
 msgid ""
 "A version control history entry consists of several lines.\n"
 "Specify the regular expression to detect the first line (without the leading "
@@ -1165,21 +2480,23 @@ msgid ""
 "See the documentation for details."
 msgstr ""
 
-#: optiondialog.cpp:996
+#: optiondialog.cpp:992
+#, fuzzy
 msgid "History merge sorting"
-msgstr ""
+msgstr "历史合并排序"
 
-#: optiondialog.cpp:998
+#: optiondialog.cpp:994
 msgid "Sort version control history by a key."
 msgstr ""
 
-#: optiondialog.cpp:1008
+#: optiondialog.cpp:1004
 msgid "History entry start sort key order:"
 msgstr ""
 
-#: optiondialog.cpp:1012
+#: optiondialog.cpp:1008
 msgid ""
-"Each parentheses used in the regular expression for the history start entry\n"
+"Each pair of parentheses used in the regular expression for the history "
+"start entry\n"
 "groups a key that can be used for sorting.\n"
 "Specify the list of keys (that are numbered in order of occurrence\n"
 "starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
@@ -1187,69 +2504,71 @@ msgid ""
 "See the documentation for details."
 msgstr ""
 
-#: optiondialog.cpp:1023
+#: optiondialog.cpp:1019
+#, fuzzy
 msgid "Merge version control history on merge start"
-msgstr ""
+msgstr "开始合并时进行版本控制历史合并"
 
-#: optiondialog.cpp:1025
+#: optiondialog.cpp:1021
 msgid "Run version control history automerge on merge start."
 msgstr ""
 
-#: optiondialog.cpp:1029
+#: optiondialog.cpp:1025
 #, fuzzy
 msgid "Max number of history entries:"
-msgstr "子目录数："
+msgstr "最大历史记录数："
 
-#: optiondialog.cpp:1032
+#: optiondialog.cpp:1028
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr ""
 
-#: optiondialog.cpp:1036
+#: optiondialog.cpp:1032
 msgid "Test your regular expressions"
-msgstr ""
+msgstr "测试正则表达式"
 
-#: optiondialog.cpp:1041
+#: optiondialog.cpp:1037
+#, fuzzy
 msgid "Irrelevant merge command:"
 msgstr ""
 
-#: optiondialog.cpp:1045
+#: optiondialog.cpp:1041
 msgid ""
 "If specified this script is run after automerge\n"
 "when no other relevant changes were detected.\n"
 "Called with the parameters: filename1 filename2 filename3"
 msgstr ""
 
-#: optiondialog.cpp:1051
+#: optiondialog.cpp:1047
 msgid "Auto save and quit on merge without conflicts"
-msgstr ""
+msgstr "合并无冲突时自动保存并退出"
 
-#: optiondialog.cpp:1054
+#: optiondialog.cpp:1050
 msgid ""
-"When KDiff3 was started for a file-merge from the commandline and all\n"
+"If KDiff3 was started for a file-merge from the command line and all\n"
 "conflicts are solvable without user interaction then automatically save and "
 "quit.\n"
-"(Similar to command line option \"--auto\"."
+"(Similar to command line option \"--auto\".)"
 msgstr ""
 
-#: optiondialog.cpp:1065 optiondialog.cpp:1066
+#: optiondialog.cpp:1061 optiondialog.cpp:1062
 #, fuzzy
 #| msgid "&Directory"
 msgid "Directory"
-msgstr "目录(&D)"
+msgstr "目录"
 
-#: optiondialog.cpp:1079
+#: optiondialog.cpp:1075
 msgid "Recursive directories"
 msgstr "包含子目录"
 
-#: optiondialog.cpp:1081
+#: optiondialog.cpp:1077
 msgid "Whether to analyze subdirectories or not."
 msgstr "是否分析子目录。"
 
-#: optiondialog.cpp:1083
+#: optiondialog.cpp:1079
 msgid "File pattern(s):"
 msgstr "文件模式："
 
-#: optiondialog.cpp:1088
+#: optiondialog.cpp:1084
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
 "Wildcards: '*' and '?'\n"
@@ -1259,11 +2578,11 @@ msgstr ""
 "通配符：“*”和“?”\n"
 "几个模式可以使用分隔符：“;”指定"
 
-#: optiondialog.cpp:1094
+#: optiondialog.cpp:1090
 msgid "File-anti-pattern(s):"
 msgstr "排除文件模式："
 
-#: optiondialog.cpp:1099
+#: optiondialog.cpp:1095
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
 "Wildcards: '*' and '?'\n"
@@ -1273,11 +2592,11 @@ msgstr ""
 "通配符：“*”和“?”\n"
 "几个模式可以使用分隔符：“;”指定"
 
-#: optiondialog.cpp:1105
+#: optiondialog.cpp:1101
 msgid "Dir-anti-pattern(s):"
 msgstr "排除目录模式："
 
-#: optiondialog.cpp:1110
+#: optiondialog.cpp:1106
 msgid ""
 "Pattern(s) of directories to be excluded from analysis. \n"
 "Wildcards: '*' and '?'\n"
@@ -1287,35 +2606,39 @@ msgstr ""
 "通配符：“*”和“?”\n"
 "几个模式可以使用分隔符：“;”指定"
 
-#: optiondialog.cpp:1116
+#: optiondialog.cpp:1112
 msgid "Use .cvsignore"
 msgstr "使用 .cvsignore"
 
-#: optiondialog.cpp:1119
+#: optiondialog.cpp:1115
+#, fuzzy
+#| msgid ""
+#| "Extends the antipattern to anything that would be ignored by CVS.\n"
+#| "Via local \".cvsignore\"-files this can be directory specific."
 msgid ""
 "Extends the antipattern to anything that would be ignored by CVS.\n"
-"Via local \".cvsignore\"-files this can be directory specific."
+"Via local \".cvsignore\" files this can be directory specific."
 msgstr ""
 "扩展排除模式至任何被 CVS 忽略的类型。\n"
 "通过本地“.cvsignore”文件，可以指定目录。"
 
-#: optiondialog.cpp:1124
+#: optiondialog.cpp:1120
 msgid "Find hidden files and directories"
 msgstr "查找隐藏目录和文件"
 
-#: optiondialog.cpp:1127
+#: optiondialog.cpp:1123
 msgid "Finds files and directories with the hidden attribute."
 msgstr "查找具有隐藏属性的文件和目录。"
 
-#: optiondialog.cpp:1129
+#: optiondialog.cpp:1125
 msgid "Finds files and directories starting with '.'."
 msgstr "查找以“.”开头的文件和目录。"
 
-#: optiondialog.cpp:1133
+#: optiondialog.cpp:1129
 msgid "Follow file links"
 msgstr "追踪文件链接"
 
-#: optiondialog.cpp:1136
+#: optiondialog.cpp:1132
 msgid ""
 "On: Compare the file the link points to.\n"
 "Off: Compare the links."
@@ -1323,11 +2646,11 @@ msgstr ""
 "打开：比较链接指向的文件。\n"
 "关闭：比较链接。"
 
-#: optiondialog.cpp:1141
+#: optiondialog.cpp:1137
 msgid "Follow directory links"
 msgstr "追踪目录链接"
 
-#: optiondialog.cpp:1144
+#: optiondialog.cpp:1140
 msgid ""
 "On: Compare the directory the link points to.\n"
 "Off: Compare the links."
@@ -1335,35 +2658,38 @@ msgstr ""
 "打开：比较链接指向的目录。\n"
 "关闭：比较链接。"
 
-#: optiondialog.cpp:1160
+#: optiondialog.cpp:1156
 msgid "Case sensitive filename comparison"
-msgstr ""
+msgstr "文件名区分大小写"
 
-#: optiondialog.cpp:1163
+#: optiondialog.cpp:1159
+#, fuzzy
 msgid ""
 "The directory comparison will compare files or directories when their names "
 "match.\n"
 "Set this option if the case of the names must match. (Default for Windows is "
 "off, otherwise on.)"
 msgstr ""
+"目录比较将比较名字相同的文件或目录。\n"
+"设置此选项如果文件名大小写敏感。（Windows上默认关闭，其他操作系统默认设置。）"
 
-#: optiondialog.cpp:1167
+#: optiondialog.cpp:1163
 msgid "File Comparison Mode"
 msgstr "文件比较模式"
 
-#: optiondialog.cpp:1173
+#: optiondialog.cpp:1169
 msgid "Binary comparison"
 msgstr "二进制比较"
 
-#: optiondialog.cpp:1174
+#: optiondialog.cpp:1170
 msgid "Binary comparison of each file. (Default)"
-msgstr "用二进制比较模式比较每个文件。"
+msgstr "用二进制比较模式比较每个文件。（默认）"
 
-#: optiondialog.cpp:1177
+#: optiondialog.cpp:1173
 msgid "Full analysis"
 msgstr "完全分析"
 
-#: optiondialog.cpp:1178
+#: optiondialog.cpp:1174
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
 "(Slower than a binary comparison, much slower for binary files.)"
@@ -1371,12 +2697,12 @@ msgstr ""
 "进行完全分析并且在额外的列里显示统计信息。\n"
 "(比较二进制比较模式慢，比较二进制文件更慢。)"
 
-#: optiondialog.cpp:1182
+#: optiondialog.cpp:1178
 #, fuzzy
 msgid "Trust the size and modification date (unsafe)"
 msgstr "信任修改日期(不安全)"
 
-#: optiondialog.cpp:1183
+#: optiondialog.cpp:1179
 #, fuzzy
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -1385,44 +2711,48 @@ msgid ""
 "different.\n"
 "Useful for big directories or slow networks."
 msgstr ""
-"假定如果修改日期和文件长度相同，则文件相同。\n"
+"如果修改日期和文件长度相同，则假定文件相同。\n"
+"具有相同内容但修改日期不同的文件将被视作不同。\n"
 "对于大目录或较慢的网络有用。"
 
-#: optiondialog.cpp:1188
+#: optiondialog.cpp:1184
+#, fuzzy
 msgid ""
-"Trust the size and date, but use binary comparison if date doesn't match "
+"Trust the size and date, but use binary comparison if date does not match "
 "(unsafe)"
-msgstr ""
+msgstr "信任文件大小及修改日期，但日期不相同时使用二进制比较(不安全)"
 
-#: optiondialog.cpp:1189
+#: optiondialog.cpp:1185
 #, fuzzy
 msgid ""
 "Assume that files are equal if the modification date and file length are "
 "equal.\n"
-"If the date isn't equal but the sizes are, use binary comparison.\n"
+"If the dates are not equal but the sizes are, use binary comparison.\n"
 "Useful for big directories or slow networks."
 msgstr ""
-"假定如果修改日期和文件长度相同，则文件相同。\n"
+"如果修改日期和文件长度相同，则假定文件相同。\n"
+"如果修改日期不相同而文件长度相同，则使用二进制比较。\n"
 "对于大目录或较慢的网络有用。"
 
-#: optiondialog.cpp:1194
+#: optiondialog.cpp:1190
 msgid "Trust the size (unsafe)"
 msgstr "信任大小(不安全)"
 
-#: optiondialog.cpp:1195
+#: optiondialog.cpp:1191
+#, fuzzy
 msgid ""
 "Assume that files are equal if their file lengths are equal.\n"
 "Useful for big directories or slow networks when the date is modified during "
 "download."
 msgstr ""
-"假定文件长度相同文件相同。\n"
+"如果文件长度相同则假定文件相同。\n"
 "当下载过程中日期被修改时，对于大目录或较慢网络有用。"
 
-#: optiondialog.cpp:1203
+#: optiondialog.cpp:1199
 msgid "Synchronize directories"
 msgstr "同步目录"
 
-#: optiondialog.cpp:1206
+#: optiondialog.cpp:1202
 msgid ""
 "Offers to store files in both directories so that\n"
 "both directories are the same afterwards.\n"
@@ -1431,11 +2761,11 @@ msgstr ""
 "为了以后目录相同，提供在两个目录里存储文件。\n"
 "仅在比较两个目录并未指定目标目录时有效。"
 
-#: optiondialog.cpp:1212
+#: optiondialog.cpp:1208
 msgid "White space differences considered equal"
 msgstr "认为相同的空白字符数"
 
-#: optiondialog.cpp:1215
+#: optiondialog.cpp:1211
 msgid ""
 "If files differ only by white space consider them equal.\n"
 "This is only active when full analysis is chosen."
@@ -1443,11 +2773,11 @@ msgstr ""
 "如果文件只在空白字符上有差异，则认为它们相同。\n"
 "仅当选择完全比较时此选项才激活。"
 
-#: optiondialog.cpp:1221
+#: optiondialog.cpp:1217
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "复制较新而不合并(不安全)"
 
-#: optiondialog.cpp:1224
+#: optiondialog.cpp:1220
 msgid ""
 "Don't look inside, just take the newer file.\n"
 "(Use this only if you know what you are doing!)\n"
@@ -1457,38 +2787,45 @@ msgstr ""
 "(如果您知道自己在做什么再选此项！)\n"
 "仅在比较两个目录时有效。"
 
-#: optiondialog.cpp:1229
+#: optiondialog.cpp:1225
 msgid "Backup files (.orig)"
 msgstr "备份文件(.orig)"
 
-#: optiondialog.cpp:1232
+#: optiondialog.cpp:1228
+#, fuzzy
+#| msgid ""
+#| "When a file would be saved over an old file, then the old file\n"
+#| "will be renamed with a '.orig'-extension instead of being deleted."
 msgid ""
-"When a file would be saved over an old file, then the old file\n"
-"will be renamed with a '.orig'-extension instead of being deleted."
-msgstr ""
-"在已有旧文件的文件保存时，旧文件将被重命名为“.orig”扩展名，而不是被删除。"
+"If a file would be saved over an old file, then the old file\n"
+"will be renamed with a '.orig' extension instead of being deleted."
+msgstr "在已有旧文件的文件保存时，旧文件将被重命名为“.orig”扩展名，而不是被删除。"
 
-#: optiondialog.cpp:1328 optiondialog.cpp:1329
+#: optiondialog.cpp:1324 optiondialog.cpp:1325
 msgid "Regional Settings"
 msgstr "区域设置"
 
-#: optiondialog.cpp:1429
+#: optiondialog.cpp:1425
 msgid "Language (restart required)"
 msgstr "语言(需要重启)"
 
-#: optiondialog.cpp:1461
+#: optiondialog.cpp:1468
+#, fuzzy
+#| msgid ""
+#| "Choose the language of the GUI-strings or \"Auto\".\n"
+#| "For a change of language to take place, quit and restart KDiff3."
 msgid ""
-"Choose the language of the GUI-strings or \"Auto\".\n"
+"Choose the language of the GUI strings or \"Auto\".\n"
 "For a change of language to take place, quit and restart KDiff3."
 msgstr ""
 "选择 GUI 的语言或者选择“自动”。\n"
 "要让更改生效，请退出并重启 KDiff3。"
 
-#: optiondialog.cpp:1479
+#: optiondialog.cpp:1486
 msgid "Use the same encoding for everything:"
 msgstr "所有文件使用同一编码："
 
-#: optiondialog.cpp:1482
+#: optiondialog.cpp:1489
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
@@ -1496,15 +2833,15 @@ msgstr ""
 "启用此选项将使得只更改第一个编码设置即可更改全部文件的编码。\n"
 "如果需要为每个文件设置不同的编码，请禁用此选项。"
 
-#: optiondialog.cpp:1487
+#: optiondialog.cpp:1494
 msgid "Note: Local Encoding is "
 msgstr "注意：本地编码为"
 
-#: optiondialog.cpp:1491
+#: optiondialog.cpp:1498
 msgid "File Encoding for A:"
 msgstr "A 的文件编码："
 
-#: optiondialog.cpp:1497
+#: optiondialog.cpp:1504
 msgid ""
 "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
 "If the file is not Unicode then the selected encoding will be used as "
@@ -1512,43 +2849,42 @@ msgid ""
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
 
-#: optiondialog.cpp:1501 optiondialog.cpp:1510 optiondialog.cpp:1519
+#: optiondialog.cpp:1508 optiondialog.cpp:1517 optiondialog.cpp:1526
 msgid "Auto Detect Unicode"
-msgstr ""
+msgstr "自动检测Unicode"
 
-#: optiondialog.cpp:1506
+#: optiondialog.cpp:1513
 msgid "File Encoding for B:"
 msgstr "B 的文件编码："
 
-#: optiondialog.cpp:1515
+#: optiondialog.cpp:1522
 msgid "File Encoding for C:"
 msgstr "C 的文件编码："
 
-#: optiondialog.cpp:1524
+#: optiondialog.cpp:1531
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "合并输出和保存的文件编码："
 
-#: optiondialog.cpp:1528
-#, fuzzy
+#: optiondialog.cpp:1535
 msgid "Auto Select"
-msgstr "自动复制选择"
+msgstr "自动选择"
 
-#: optiondialog.cpp:1531
+#: optiondialog.cpp:1538
 msgid ""
 "If enabled then the encoding from the input files is used.\n"
 "In ambiguous cases a dialog will ask the user to choose the encoding for "
 "saving."
 msgstr ""
 
-#: optiondialog.cpp:1535
+#: optiondialog.cpp:1542
 msgid "File Encoding for Preprocessor Files:"
 msgstr "预处理文件的文件编码："
 
-#: optiondialog.cpp:1546
+#: optiondialog.cpp:1553
 msgid "Right To Left Language"
 msgstr "从右至左语言"
 
-#: optiondialog.cpp:1549
+#: optiondialog.cpp:1556
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
@@ -1556,324 +2892,86 @@ msgstr ""
 "某些语言是从右到左书写的。\n"
 "此设置将更改查看器和编辑器的设置。"
 
-#: optiondialog.cpp:1564
+#: optiondialog.cpp:1571
 #, fuzzy
 msgid "Integration"
-msgstr "操作"
+msgstr "集成"
 
-#: optiondialog.cpp:1565
+#: optiondialog.cpp:1572
 #, fuzzy
 msgid "Integration Settings"
-msgstr "区域设置"
+msgstr "集成设置"
 
-#: optiondialog.cpp:1579
+#: optiondialog.cpp:1586
 msgid "Command line options to ignore:"
-msgstr ""
+msgstr "需要忽略的命令行选项："
 
-#: optiondialog.cpp:1584
+#: optiondialog.cpp:1591
+#, fuzzy
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
 "other tools.\n"
 "Several values can be specified if separated via ';'\n"
-"This will suppress the \"Unknown option\"-error."
+"This will suppress the \"Unknown option\" error."
 msgstr ""
+"当KDiff3被其他工具使用时需要忽略的命令行选项。\n"
+"多个选项请用“;\"分隔。这可以避免出现未知参数的错误。"
 
-#: optiondialog.cpp:1591
+#: optiondialog.cpp:1598
+#, fuzzy
 msgid "Quit also via Escape key"
-msgstr ""
+msgstr "可以用ESC键退出"
 
-#: optiondialog.cpp:1594
+#: optiondialog.cpp:1601
+#, fuzzy
 msgid ""
 "Fast method to exit.\n"
-"For those who are used to using the Escape-key."
+"For those who are used to using the Escape key."
 msgstr ""
+"快速退出方法。\n"
+"给那些习惯使用ESC键退出的人使用。"
 
-#: optiondialog.cpp:1599
+#: optiondialog.cpp:1606
+#, fuzzy
 msgid "Integrate with ClearCase"
-msgstr ""
+msgstr "集成到ClearCase"
 
-#: optiondialog.cpp:1602
+#: optiondialog.cpp:1609
+#, fuzzy
 msgid ""
 "Integrate with Rational ClearCase from IBM.\n"
-"Modifies the \"map\" file in ClearCase-subdir \"lib/mgrs\"\n"
+"Modifies the \"map\" file in ClearCase subdir \"lib/mgrs\"\n"
 "(Only enabled when ClearCase \"bin\" directory is in the path.)"
 msgstr ""
+"集成到IBM Rational ClearCase。修改ClearCase "
+"“lib/mgrs”下的“map”文件（仅当ClearCase的“bin”目录在访问路径中时才可以使能）"
 
-#: optiondialog.cpp:1608
+#: optiondialog.cpp:1615
+#, fuzzy
 msgid "Remove ClearCase Integration"
-msgstr ""
+msgstr "取消与ClearCase的集成"
 
-#: optiondialog.cpp:1611
+#: optiondialog.cpp:1618
+#, fuzzy
 msgid ""
-"Restore the old \"map\" file from before doing the Clearcase integration."
-msgstr ""
+"Restore the old \"map\" file from before doing the ClearCase integration."
+msgstr "集成到ClearCase之前恢复老的“map”文件。"
 
-#: optiondialog.cpp:1692 kreplacements/kreplacements.cpp:794
-msgid ""
-"You selected a variable width font.\n"
-"\n"
-"Because this program doesn't handle variable width fonts\n"
-"correctly, you might experience problems while editing.\n"
-"\n"
-"Do you want to continue or do you want to select another font."
-msgstr ""
-"您选择了一个可变宽度字体。\n"
-"\n"
-"因为此程序不能正确处理可变宽度字体\n"
-"您可能在编辑时遇到问题。\n"
-"\n"
-"您要继续，还是另选一种字体。"
-
-#: optiondialog.cpp:1696
+#: optiondialog.cpp:1703
 msgid "Incompatible Font"
 msgstr "不兼容字体"
 
-#: optiondialog.cpp:1697
+#: optiondialog.cpp:1704
 msgid "Continue at Own Risk"
 msgstr "自愿冒险继续"
 
-#: optiondialog.cpp:1698
+#: optiondialog.cpp:1705
 msgid "Select Another Font"
 msgstr "选择另一种字体"
 
-#: optiondialog.cpp:1733
+#: optiondialog.cpp:1740
 msgid "This resets all options. Not only those of the current topic."
 msgstr "这将重置全部选项，而不仅是当前主题的选项。"
-
-#: main.cpp:187
-#, fuzzy
-#| msgid "KDiff3"
-msgid "kdiff3"
-msgstr "KDiff3"
-
-#: main.cpp:189
-msgid "Tool for Comparison and Merge of Files and Directories"
-msgstr "比较及合并文件和目录的工具"
-
-#: main.cpp:190
-msgid "(c) 2002-2008 Joachim Eibl"
-msgstr ""
-
-#: main.cpp:197 kdiff3_part.cpp:303
-msgid "Joachim Eibl"
-msgstr ""
-
-#: main.cpp:198
-msgid "Eike Sauer"
-msgstr ""
-
-#: main.cpp:198
-msgid "Bugfixes, Debian package maintainer"
-msgstr ""
-
-#: main.cpp:199
-msgid "Sebastien Fricker"
-msgstr ""
-
-#: main.cpp:199
-msgid "Windows installer"
-msgstr ""
-
-#: main.cpp:200
-msgid "Stephan Binner"
-msgstr ""
-
-#: main.cpp:200
-msgid "i18n-help"
-msgstr ""
-
-#: main.cpp:201
-msgid "Stefan Partheymueller"
-msgstr ""
-
-#: main.cpp:201
-#, fuzzy
-#| msgid "From Clipboard"
-msgid "Clipboard-patch"
-msgstr "从剪贴板"
-
-#: main.cpp:202
-msgid "David Faure"
-msgstr ""
-
-#: main.cpp:202
-msgid "KIO-Help"
-msgstr ""
-
-#: main.cpp:203
-msgid "Bernd Gehrmann"
-msgstr ""
-
-#: main.cpp:203
-msgid "Class CvsIgnoreList from Cervisia"
-msgstr ""
-
-#: main.cpp:204
-msgid "Andre Woebbeking"
-msgstr ""
-
-#: main.cpp:204
-msgid "Class StringMatcher"
-msgstr ""
-
-#: main.cpp:205
-msgid "Michael Denio"
-msgstr ""
-
-#: main.cpp:205
-#, fuzzy
-#| msgid "Directory Comparison Status"
-msgid "Directory Equality-Coloring patch"
-msgstr "目录比较状态"
-
-#: main.cpp:206
-msgid "Manfred Koehler"
-msgstr ""
-
-#: main.cpp:206
-msgid "Fix for slow startup on Windows"
-msgstr ""
-
-#: main.cpp:207
-#, fuzzy
-#| msgid "Merge Error"
-msgid "Sergey Zorin"
-msgstr "合并错误"
-
-#: main.cpp:207
-msgid "Diff Ext for Windows"
-msgstr ""
-
-#: main.cpp:208
-msgid "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
-msgstr ""
-
-#: main.cpp:208
-msgid "GNU-Diffutils"
-msgstr ""
-
-#: main.cpp:209
-msgid "Tino Boellsterling, Timothy Mee"
-msgstr ""
-
-#: main.cpp:209
-msgid "Intensive test, use and feedback"
-msgstr ""
-
-#: main.cpp:210
-msgid "Michael Schmidt"
-msgstr ""
-
-#: main.cpp:210
-msgid "Mac support"
-msgstr ""
-
-#: main.cpp:211
-msgid "Valentin Rusu"
-msgstr ""
-
-#: main.cpp:211 main.cpp:212
-#, fuzzy
-#| msgid "Do Nothing"
-msgid "KDE4 porting"
-msgstr "什么也不做"
-
-#: main.cpp:212
-msgid "Albert Astals Cid"
-msgstr ""
-
-#: main.cpp:214
-msgid "+ Many thanks to those who reported bugs and contributed ideas!"
-msgstr "+ 十分感谢报告错误和贡献想法的人们！"
-
-#: main.cpp:220
-msgid "Merge the input."
-msgstr "合并输入。"
-
-#: main.cpp:221
-msgid "Explicit base file. For compatibility with certain tools."
-msgstr "明确基准文件，以便与某些工具兼容。"
-
-#: main.cpp:222
-msgid "Output file. Implies -m. E.g.: -o newfile.txt"
-msgstr "输出文件。Implies -m。例如：-o newfile.txt"
-
-#: main.cpp:223
-msgid "Output file, again. (For compatibility with certain tools.)"
-msgstr "再次输出文件。(为与某些工具兼容。)"
-
-#: main.cpp:224
-msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
-msgstr "如果全部冲突自动解决无图形用户界面。(需要 -o file)"
-
-#: main.cpp:225
-msgid "Don't solve conflicts automatically. (For compatibility...)"
-msgstr "不自动解决冲突。(为了兼容性...)"
-
-#: main.cpp:226
-msgid "Visible name replacement for input file 1 (base)."
-msgstr "为输入文件1(基准文件)做的可见名替换。"
-
-#: main.cpp:227
-msgid "Visible name replacement for input file 2."
-msgstr "为输入文件2做的可见名替换。"
-
-#: main.cpp:228
-msgid "Visible name replacement for input file 3."
-msgstr "为输入文件3做的可见名替换。"
-
-#: main.cpp:229
-msgid "Alternative visible name replacement. Supply this once for every input."
-msgstr "候选可见名替换。每次输入提供。"
-
-#: main.cpp:230
-msgid ""
-"Override a config setting. Use once for every setting. E.g.: --cs "
-"\"AutoAdvance=1\""
-msgstr ""
-
-#: main.cpp:231
-msgid "Show list of config settings and current values."
-msgstr ""
-
-#: main.cpp:232
-#, fuzzy
-msgid "Use a different config file."
-msgstr "不同文件数："
-
-#: main.cpp:235
-msgid "file1 to open (base, if not specified via --base)"
-msgstr "要打开的文件(基准文件，如果未通过 --base 指定)"
-
-#: main.cpp:236
-msgid "file2 to open"
-msgstr "要打开的文件 2"
-
-#: main.cpp:237
-msgid "file3 to open"
-msgstr "要打开的文件 3"
-
-#: difftextwindow.cpp:388 directorymergewindow.cpp:2689
-#, fuzzy
-#| msgid "File..."
-msgid "File"
-msgstr "文件..."
-
-#: difftextwindow.cpp:390
-#, fuzzy
-#| msgid "Link: "
-msgid "Line"
-msgstr "链接："
-
-#: difftextwindow.cpp:392
-#, fuzzy
-#| msgid "not available"
-msgid "Line not available"
-msgstr "不可用"
-
-#: difftextwindow.cpp:1731
-msgid "End"
-msgstr "末尾"
 
 #: pdiff.cpp:260
 msgid "PreprocessorCmd: "
@@ -1941,43 +3039,30 @@ msgstr "Linediff：B <-> C"
 msgid "Linediff: A <-> C"
 msgstr "Linediff：A <-> C"
 
-#: pdiff.cpp:532 mergeresultwindow.cpp:828
-msgid "All input files are binary equal."
-msgstr "全部输入文件二进制数据相同。"
-
 #: pdiff.cpp:534
 #, fuzzy
 msgid "All input files contain the same text, but are not binary equal."
-msgstr "全部输入文件包含相同文本。"
-
-#: pdiff.cpp:536 pdiff.cpp:538 pdiff.cpp:540 mergeresultwindow.cpp:832
-#: mergeresultwindow.cpp:834 mergeresultwindow.cpp:836
-#, fuzzy, kde-format
-msgid "Files %1 and %2 are binary equal.\n"
-msgstr "文件 B 和 C 二进制数据相同。\n"
+msgstr "全部输入文件包含相同文本，但二进制不相同。"
 
 #: pdiff.cpp:537 pdiff.cpp:539 pdiff.cpp:541
 #, fuzzy, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
-msgstr "文件 A 和 B 二进制数据相同。\n"
+msgstr "文件%1和%2文本相同，但二进制数据不相同。\n"
 
 #: pdiff.cpp:551
+#, fuzzy
 msgid ""
 "Some inputfiles don't seem to be pure textfiles.\n"
 "Note that the KDiff3-merge was not meant for binary data.\n"
 "Continue at your own risk."
 msgstr ""
 "一些输入文件不是纯文本文件。\n"
-"注意 KDiff3-merge 用于二进制数据。\n"
+"注意 KDiff3-merge 不适用用于二进制数据。\n"
 "继续则您自己承担风险。"
 
 #: pdiff.cpp:1060
 msgid "Abort"
 msgstr "放弃"
-
-#: pdiff.cpp:1061 directorymergewindow.cpp:391
-msgid "Continue Merging"
-msgstr "继续合并"
 
 #: pdiff.cpp:1067 pdiff.cpp:1155
 msgid "Opening files..."
@@ -2016,13 +3101,14 @@ msgid "Search Complete"
 msgstr "搜索完成"
 
 #: pdiff.cpp:2231
+#, fuzzy
 msgid "Nothing is selected in either diff input window."
-msgstr ""
+msgstr "两个diff输入窗口均未选择。"
 
 #: pdiff.cpp:2231
 #, fuzzy
 msgid "Error while adding manual diff range"
-msgstr "创建目录时出错。"
+msgstr "添加手工Diff区域时出错"
 
 #: kdiff3_shell.cpp:76
 #, fuzzy
@@ -2031,1021 +3117,19 @@ msgstr "创建目录时出错。"
 #| "This usually happens due to an installation problem. Please read the "
 #| "README-file in the source package for details."
 msgid ""
-"Could not initialize our part!\n"
-"This usually happens due to an installation problem. Please read the README-"
-"file in the source package for details."
+"Could not initialize the KDiff part.\n"
+"This usually happens due to an installation problem. Please read the "
+"README-file in the source package for details."
 msgstr ""
-"无法找到我们的组件！\n"
+"无法初始化组件！\n"
 "发生此错误通常因为安装错误。详细内容请阅读源码包内的 README 文件。"
-
-#: directorymergewindow.cpp:136
-msgid "Mix of links and normal files."
-msgstr "链接和普通文件混合"
-
-#: directorymergewindow.cpp:143
-msgid "Link: "
-msgstr "链接："
-
-#: directorymergewindow.cpp:151
-msgid "Size. "
-msgstr "大小。"
-
-#: directorymergewindow.cpp:164 directorymergewindow.cpp:174
-msgid "Date & Size: "
-msgstr "日期和大小："
-
-#: directorymergewindow.cpp:184 directorymergewindow.cpp:190
-#, kde-format
-msgid "Creating temp copy of %1 failed."
-msgstr "创建临时 %1 副本失败。"
-
-#: directorymergewindow.cpp:201 directorymergewindow.cpp:209
-#, kde-format
-msgid "Opening %1 failed."
-msgstr "打开 %1 失败。"
-
-#: directorymergewindow.cpp:213
-msgid "Comparing file..."
-msgstr "正在比较文件..."
-
-#: directorymergewindow.cpp:223 directorymergewindow.cpp:229
-#, kde-format
-msgid "Error reading from %1"
-msgstr "读取 %1 时错误"
-
-#: directorymergewindow.cpp:358
-msgid "Name"
-msgstr "名称"
-
-#: directorymergewindow.cpp:358
-msgid "Operation"
-msgstr "操作"
-
-#: directorymergewindow.cpp:358
-msgid "Status"
-msgstr "状态"
-
-#: directorymergewindow.cpp:359
-msgid "Unsolved"
-msgstr "未解决的"
-
-#: directorymergewindow.cpp:359
-msgid "Solved"
-msgstr "已解决的"
-
-#: directorymergewindow.cpp:359
-msgid "Nonwhite"
-msgstr "非空白"
-
-#: directorymergewindow.cpp:359
-msgid "White"
-msgstr "空白"
-
-#: directorymergewindow.cpp:388
-msgid ""
-"You are currently doing a directory merge. Are you sure, you want to abort "
-"the merge and rescan the directory?"
-msgstr "您当前正在合并目录。您确定要放弃合并，重新扫描目录吗？"
-
-#: directorymergewindow.cpp:390 directorymergewindow.cpp:2945
-msgid "Rescan"
-msgstr "重新扫描"
-
-#: directorymergewindow.cpp:548
-msgid "Opening of directories failed:"
-msgstr "打开目录失败"
-
-#: directorymergewindow.cpp:551
-#, kde-format
-msgid "Dir A \"%1\" does not exist or is not a directory.\n"
-msgstr "目录 A “%1”不存在或者不是目录。\n"
-
-#: directorymergewindow.cpp:554
-#, kde-format
-msgid "Dir B \"%1\" does not exist or is not a directory.\n"
-msgstr "目录 B “%1”不存在或者不是目录。\n"
-
-#: directorymergewindow.cpp:557
-#, kde-format
-msgid "Dir C \"%1\" does not exist or is not a directory.\n"
-msgstr "目录 C “%1”不存在或者不是目录。\n"
-
-#: directorymergewindow.cpp:559
-msgid "Directory Open Error"
-msgstr "打开目录错误"
-
-#: directorymergewindow.cpp:567
-msgid ""
-"The destination directory must not be the same as A or B when three "
-"directories are merged.\n"
-"Check again before continuing."
-msgstr ""
-"当三个目录合并时，目标目录不能是 A 或者 B。\n"
-"在继续进行前，请再核对一遍。"
-
-#: directorymergewindow.cpp:569
-msgid "Parameter Warning"
-msgstr "参数警告"
-
-#: directorymergewindow.cpp:574
-msgid "Scanning directories..."
-msgstr "正在扫描目录..."
-
-#: directorymergewindow.cpp:607
-msgid "Reading Directory A"
-msgstr "读取目录 A"
-
-#: directorymergewindow.cpp:629
-msgid "Reading Directory B"
-msgstr "读取目录 B"
-
-#: directorymergewindow.cpp:651
-msgid "Reading Directory C"
-msgstr "读取目录 C"
-
-#: directorymergewindow.cpp:677
-msgid "Some subdirectories were not readable in"
-msgstr "不能进入读取一些子目录"
-
-#: directorymergewindow.cpp:682
-msgid "Check the permissions of the subdirectories."
-msgstr "检查子目录权限。"
-
-#: directorymergewindow.cpp:735
-msgid "Directory Comparison Status"
-msgstr "目录比较状态"
-
-#: directorymergewindow.cpp:736
-msgid "Number of subdirectories:"
-msgstr "子目录数："
-
-#: directorymergewindow.cpp:737
-msgid "Number of equal files:"
-msgstr "相同文件数："
-
-#: directorymergewindow.cpp:738
-msgid "Number of different files:"
-msgstr "不同文件数："
-
-#: directorymergewindow.cpp:741
-msgid "Number of manual merges:"
-msgstr "手动合并数："
-
-#: directorymergewindow.cpp:909
-msgid "This affects all merge operations."
-msgstr "这将影响全部合并操作。"
-
-#: directorymergewindow.cpp:910
-msgid "Changing All Merge Operations"
-msgstr "更改全部合并操作"
-
-#: directorymergewindow.cpp:1309
-msgid "Processing "
-msgstr "处理 "
-
-#: directorymergewindow.cpp:1732 directorymergewindow.cpp:1738
-msgid "To do."
-msgstr "执行。"
-
-#: directorymergewindow.cpp:1806 directorymergewindow.cpp:2976
-msgid "Copy A to B"
-msgstr "复制 A 到 B"
-
-#: directorymergewindow.cpp:1807 directorymergewindow.cpp:2977
-msgid "Copy B to A"
-msgstr "复制 B 到 A"
-
-#: directorymergewindow.cpp:1808 directorymergewindow.cpp:2978
-msgid "Delete A"
-msgstr "删除 A"
-
-#: directorymergewindow.cpp:1809 directorymergewindow.cpp:2979
-msgid "Delete B"
-msgstr "删除 B"
-
-#: directorymergewindow.cpp:1810
-msgid "Delete A & B"
-msgstr "删除 A 和 B"
-
-#: directorymergewindow.cpp:1811 directorymergewindow.cpp:2981
-msgid "Merge to A"
-msgstr "合并到 A"
-
-#: directorymergewindow.cpp:1812 directorymergewindow.cpp:2982
-msgid "Merge to B"
-msgstr "合并到 B"
-
-#: directorymergewindow.cpp:1813
-msgid "Merge to A & B"
-msgstr "合并到 A 和 B"
-
-#: directorymergewindow.cpp:1817 directorymergewindow.cpp:2973
-msgid "Delete (if exists)"
-msgstr "删除(如果存在)"
-
-#: directorymergewindow.cpp:1818 directorymergewindow.cpp:1819
-msgid "Merge (manual)"
-msgstr "合并(手动)"
-
-#: directorymergewindow.cpp:1820
-msgid "Error: Conflicting File Types"
-msgstr "错误：文件类型冲突"
-
-#: directorymergewindow.cpp:1821
-msgid "Error: Dates are equal but files are not."
-msgstr "错误：日期相同但是文件不同。"
-
-#: directorymergewindow.cpp:1847 directorymergewindow.cpp:1876
-#: directorymergewindow.cpp:1901
-msgid "This operation is currently not possible."
-msgstr "现在不能执行此操作。"
-
-#: directorymergewindow.cpp:1847 directorymergewindow.cpp:1876
-#: directorymergewindow.cpp:1901 directorymergewindow.cpp:2160
-msgid "Operation Not Possible"
-msgstr "操作不可行"
-
-#: directorymergewindow.cpp:1940
-msgid ""
-"This should never happen: \n"
-"\n"
-"mergeResultSaved: m_pMFI=0\n"
-"\n"
-"If you know how to reproduce this, please contact the program author."
-msgstr ""
-"此情况不应再发生：\n"
-"\n"
-"合并结果保存：m_pMFI=0\n"
-"\n"
-"如果您知道如何重现错误，请联系程序作者。"
-
-#: directorymergewindow.cpp:1940
-msgid "Program Error"
-msgstr "程序错误"
-
-#: directorymergewindow.cpp:1951
-msgid "An error occurred while copying.\n"
-msgstr "复制时发生错误。\n"
-
-#: directorymergewindow.cpp:1951 directorymergewindow.cpp:2020
-#: directorymergewindow.cpp:2052 directorymergewindow.cpp:2100
-#: directorymergewindow.cpp:2109 directorymergewindow.cpp:2360
-#, fuzzy
-#| msgid "Error."
-msgid "Error"
-msgstr "错误。"
-
-#: directorymergewindow.cpp:1952 directorymergewindow.cpp:2361
-msgid "Merge Error"
-msgstr "合并错误"
-
-#: directorymergewindow.cpp:1957 directorymergewindow.cpp:2366
-msgid "Error."
-msgstr "错误。"
-
-#: directorymergewindow.cpp:1962 directorymergewindow.cpp:2258
-#: directorymergewindow.cpp:2298
-msgid "Done."
-msgstr "完成。"
-
-#: directorymergewindow.cpp:1985
-msgid "Not saved."
-msgstr "未保存。"
-
-#: directorymergewindow.cpp:2020
-msgid "Unknown merge operation. (This must never happen!)"
-msgstr "未知合并操作。(绝不可以发生！)"
-
-#: directorymergewindow.cpp:2052
-msgid "Unknown merge operation."
-msgstr "未知合并操作。"
-
-#: directorymergewindow.cpp:2067
-msgid ""
-"The merge is about to begin.\n"
-"\n"
-"Choose \"Do it\" if you have read the instructions and know what you are "
-"doing.\n"
-"Choosing \"Simulate it\" will tell you what would happen.\n"
-"\n"
-"Be aware that this program still has beta status and there is NO WARRANTY "
-"whatsoever! Make backups of your vital data!"
-msgstr ""
-"合并将开始。\n"
-"\n"
-"选择“执行”如果您已经阅读了指南并知道您在做什么。\n"
-"选择“模拟”将告诉您将发生什么。\n"
-"\n"
-"注意此程序依然处于 beta 状态，没有任何保证！备份您的重要数据！"
-
-#: directorymergewindow.cpp:2072
-msgid "Starting Merge"
-msgstr "开始合并"
-
-#: directorymergewindow.cpp:2073
-msgid "Do It"
-msgstr "执行"
-
-#: directorymergewindow.cpp:2074
-msgid "Simulate It"
-msgstr "模拟"
-
-#: directorymergewindow.cpp:2100
-msgid ""
-"The highlighted item has a different type in the different directories. "
-"Select what to do."
-msgstr "高亮的项目在不同的目录有不同类型。选择做什么。"
-
-#: directorymergewindow.cpp:2109
-msgid ""
-"The modification dates of the file are equal but the files are not. Select "
-"what to do."
-msgstr "文件的修改日期相同但是文件不同。选择做什么。"
-
-#: directorymergewindow.cpp:2160
-msgid ""
-"This operation is currently not possible because directory merge is "
-"currently running."
-msgstr "此操作当前不可行，因为目录合并正在运行。"
-
-#: directorymergewindow.cpp:2220
-msgid ""
-"There was an error in the last step.\n"
-"Do you want to continue with the item that caused the error or do you want "
-"to skip this item?"
-msgstr ""
-"最后一步有错误。\n"
-"您要继续进行导致错误的项目还是跳过该项？"
-
-#: directorymergewindow.cpp:2222
-msgid "Continue merge after an error"
-msgstr "出错后继续合并"
-
-#: directorymergewindow.cpp:2223
-msgid "Continue With Last Item"
-msgstr "继续进行上一项"
-
-#: directorymergewindow.cpp:2224
-msgid "Skip Item"
-msgstr "跳过项目"
-
-#: directorymergewindow.cpp:2258
-msgid "Skipped."
-msgstr "已跳过。"
-
-#: directorymergewindow.cpp:2265 directorymergewindow.cpp:2479
-msgid "In progress..."
-msgstr "进行中..."
-
-#: directorymergewindow.cpp:2313
-msgid "Merge operation complete."
-msgstr "合并操作完成。"
-
-#: directorymergewindow.cpp:2313 directorymergewindow.cpp:2316
-msgid "Merge Complete"
-msgstr "合并完成"
-
-#: directorymergewindow.cpp:2326
-msgid ""
-"Simulated merge complete: Check if you agree with the proposed operations."
-msgstr "模拟合并完成：核对您是否赞同被提议的操作。"
-
-#: directorymergewindow.cpp:2360
-msgid "An error occurred. Press OK to see detailed information.\n"
-msgstr "错误发生。按 OK 看详细信息。\n"
-
-#: directorymergewindow.cpp:2392
-#, kde-format
-msgid "Error: While deleting %1: Creating backup failed."
-msgstr "错误：在删除 %1 时：创建备份失败。"
-
-#: directorymergewindow.cpp:2399
-#, kde-format
-msgid "delete directory recursively( %1 )"
-msgstr "递归删除目录( %1 )"
-
-#: directorymergewindow.cpp:2401
-#, kde-format
-msgid "delete( %1 )"
-msgstr "删除( %1 )"
-
-#: directorymergewindow.cpp:2416
-msgid "Error: delete dir operation failed while trying to read the directory."
-msgstr "错误：在试图读取目录时删除目录操作失败。"
-
-#: directorymergewindow.cpp:2435
-#, kde-format
-msgid "Error: rmdir( %1 ) operation failed."
-msgstr "错误：rmdir( %1 )操作失败。"
-
-#: directorymergewindow.cpp:2445
-msgid "Error: delete operation failed."
-msgstr "错误：删除操作失败。"
-
-#: directorymergewindow.cpp:2471
-#, kde-format
-msgid "manual merge( %1, %2, %3 -> %4)"
-msgstr "手动合并( %1，%2，%3 -> %4)"
-
-#: directorymergewindow.cpp:2474
-msgid ""
-"     Note: After a manual merge the user should continue by pressing F7."
-msgstr "     注意：在手动合并之后用户应该按 F7 继续。"
-
-#: directorymergewindow.cpp:2497
-#, kde-format
-msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
-msgstr "错误：复制( %1 -> %2 )失败。删除现存目标失败。"
-
-#: directorymergewindow.cpp:2507
-#, kde-format
-msgid "copyLink( %1 -> %2 )"
-msgstr "复制链接( %1 -> %2 )"
-
-#: directorymergewindow.cpp:2518
-msgid "Error: copyLink failed: Remote links are not yet supported."
-msgstr "错误：复制链接失败：远程链接尚未支持。"
-
-#: directorymergewindow.cpp:2524
-msgid "Error: copyLink failed."
-msgstr "错误：复制链接失败。"
-
-#: directorymergewindow.cpp:2544
-#, kde-format
-msgid "copy( %1 -> %2 )"
-msgstr "复制(  %1 -> %2 )"
-
-#: directorymergewindow.cpp:2570
-#, kde-format
-msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
-msgstr "重命名( %1 -> %2 )错误：无法删除现存目标。"
-
-#: directorymergewindow.cpp:2576
-#, kde-format
-msgid "rename( %1 -> %2 )"
-msgstr "重命名( %1 -> %2 )"
-
-#: directorymergewindow.cpp:2585
-msgid "Error: Rename failed."
-msgstr "错误：重命名失败。"
-
-#: directorymergewindow.cpp:2603
-#, kde-format
-msgid "Error during makeDir of %1. Cannot delete existing file."
-msgstr "建立目录 %1 出错。无法删除现存文件。"
-
-#: directorymergewindow.cpp:2619
-#, kde-format
-msgid "makeDir( %1 )"
-msgstr "建立目录( %1 )"
-
-#: directorymergewindow.cpp:2629
-msgid "Error while creating directory."
-msgstr "创建目录时出错。"
-
-#: directorymergewindow.cpp:2654 directorymergewindow.cpp:2764
-msgid "Dest"
-msgstr "目标"
-
-#: directorymergewindow.cpp:2658 directorymergewindow.cpp:2689
-msgid "Dir"
-msgstr "目录"
-
-#: directorymergewindow.cpp:2658
-msgid "Type"
-msgstr "类型"
-
-#: directorymergewindow.cpp:2658
-msgid "Size"
-msgstr "大小"
-
-#: directorymergewindow.cpp:2659
-msgid "Attr"
-msgstr "属性"
-
-#: directorymergewindow.cpp:2659
-msgid "Last Modification"
-msgstr "上次修改"
-
-#: directorymergewindow.cpp:2659
-msgid "Link-Destination"
-msgstr "链接目标"
-
-#: directorymergewindow.cpp:2706
-msgid "not available"
-msgstr "不可用"
-
-#: directorymergewindow.cpp:2726
-msgid "A (Dest): "
-msgstr "A (目标)："
-
-#: directorymergewindow.cpp:2729
-msgid "A (Base): "
-msgstr "A 基准"
-
-#: directorymergewindow.cpp:2735
-msgid "B (Dest): "
-msgstr "B (目标)："
-
-#: directorymergewindow.cpp:2743
-msgid "C (Dest): "
-msgstr "C (目标)："
-
-#: directorymergewindow.cpp:2749
-msgid "Dest: "
-msgstr "目标："
-
-#: directorymergewindow.cpp:2816
-#, fuzzy
-msgid "Save Directory Merge State As..."
-msgstr "目录合并"
-
-#: directorymergewindow.cpp:2939
-msgid "Start/Continue Directory Merge"
-msgstr "开始/继续目录合并"
-
-#: directorymergewindow.cpp:2940
-msgid "Run Operation for Current Item"
-msgstr "开始当前项目操作"
-
-#: directorymergewindow.cpp:2941
-msgid "Compare Selected File"
-msgstr "比较所选文件"
-
-#: directorymergewindow.cpp:2942
-msgid "Merge Current File"
-msgstr "合并当前文件"
-
-#: directorymergewindow.cpp:2942
-#, fuzzy
-#| msgid "Merge"
-msgid ""
-"Merge\n"
-"File"
-msgstr "合并"
-
-#: directorymergewindow.cpp:2943
-msgid "Fold All Subdirs"
-msgstr "折叠全部子文件夹"
-
-#: directorymergewindow.cpp:2944
-msgid "Unfold All Subdirs"
-msgstr "打开全部子文件夹"
-
-#: directorymergewindow.cpp:2948
-msgid "Choose A for All Items"
-msgstr "选择 A 的全部项目"
-
-#: directorymergewindow.cpp:2949
-msgid "Choose B for All Items"
-msgstr "选择 B 的全部项目"
-
-#: directorymergewindow.cpp:2950
-msgid "Choose C for All Items"
-msgstr "选择 C 的全部项目"
-
-#: directorymergewindow.cpp:2951
-msgid "Auto-Choose Operation for All Items"
-msgstr "为全部项目自动选择操作"
-
-#: directorymergewindow.cpp:2952
-msgid "No Operation for All Items"
-msgstr "全部项目无操作"
-
-#: directorymergewindow.cpp:2957
-msgid "Show Identical Files"
-msgstr ""
-
-#: directorymergewindow.cpp:2957
-msgid ""
-"Identical\n"
-"Files"
-msgstr ""
-
-#: directorymergewindow.cpp:2958
-#, fuzzy
-msgid "Show Different Files"
-msgstr "不同文件数："
-
-#: directorymergewindow.cpp:2959
-msgid "Show Files only in A"
-msgstr ""
-
-#: directorymergewindow.cpp:2959
-msgid ""
-"Files\n"
-"only in A"
-msgstr ""
-
-#: directorymergewindow.cpp:2960
-msgid "Show Files only in B"
-msgstr ""
-
-#: directorymergewindow.cpp:2960
-msgid ""
-"Files\n"
-"only in B"
-msgstr ""
-
-#: directorymergewindow.cpp:2961
-msgid "Show Files only in C"
-msgstr ""
-
-#: directorymergewindow.cpp:2961
-msgid ""
-"Files\n"
-"only in C"
-msgstr ""
-
-#: directorymergewindow.cpp:2965
-#, fuzzy
-msgid "Compare Explicitly Selected Files"
-msgstr "比较所选文件"
-
-#: directorymergewindow.cpp:2966
-#, fuzzy
-msgid "Merge Explicitly Selected Files"
-msgstr "比较所选文件"
-
-#: directorymergewindow.cpp:2968 directorymergewindow.cpp:2975
-msgid "Do Nothing"
-msgstr "什么也不做"
-
-#: directorymergewindow.cpp:2969
-msgid "A"
-msgstr "A"
-
-#: directorymergewindow.cpp:2970
-msgid "B"
-msgstr "B"
-
-#: directorymergewindow.cpp:2971
-msgid "C"
-msgstr "C"
-
-#: directorymergewindow.cpp:2980
-msgid "Delete A && B"
-msgstr "删除 A 和 B"
-
-#: directorymergewindow.cpp:2983
-msgid "Merge to A && B"
-msgstr "合并到 A 和 B"
-
-#: kdiff3_part.cpp:157 kdiff3_part.cpp:234
-msgid "Couldn't find files for comparison."
-msgstr "无法找到文件比较。"
-
-#: kdiff3_part.cpp:302
-msgid "KDiff3Part"
-msgstr "KDiff3Part"
-
-#: kreplacements/kreplacements.h:103
-#, fuzzy
-#| msgid "C&ontinue"
-msgid "Continue"
-msgstr "继续(&o)"
-
-#: kreplacements/kreplacements.h:105 kreplacements/kreplacements.cpp:637
-msgid "Quit"
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:183 kreplacements/kreplacements.cpp:345
-msgid "Ok"
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:187 kreplacements/kreplacements.cpp:721
-msgid "Help"
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:191
-msgid "Defaults"
-msgstr ""
-
-#. i18n: file: kdiff3_shell.rc:4
-#. i18n: ectx: Menu (file)
-#: kreplacements/kreplacements.cpp:302 rc.cpp:12
-#, fuzzy
-#| msgid "File..."
-msgid "&File"
-msgstr "文件..."
-
-#: kreplacements/kreplacements.cpp:303
-#, fuzzy
-#| msgid "Editor"
-msgid "&Edit"
-msgstr "编辑器"
-
-#. i18n: file: kdiff3_shell.rc:7
-#. i18n: ectx: Menu (directory)
-#: kreplacements/kreplacements.cpp:304 rc.cpp:15
-msgid "&Directory"
-msgstr "目录(&D)"
-
-#. i18n: file: kdiff3_shell.rc:50
-#. i18n: ectx: Menu (movement)
-#: kreplacements/kreplacements.cpp:307 rc.cpp:24
-msgid "&Movement"
-msgstr "移动(&M)"
-
-#. i18n: file: kdiff3_shell.rc:61
-#. i18n: ectx: Menu (diff)
-#: kreplacements/kreplacements.cpp:308 rc.cpp:27
-msgid "D&iffview"
-msgstr "查看 Diff(&I)"
-
-#. i18n: file: kdiff3_shell.rc:73
-#. i18n: ectx: Menu (merge)
-#: kreplacements/kreplacements.cpp:309 rc.cpp:30
-msgid "&Merge"
-msgstr "合并(&M)"
-
-#. i18n: file: kdiff3_shell.rc:95
-#. i18n: ectx: Menu (window)
-#: kreplacements/kreplacements.cpp:310 rc.cpp:33
-msgid "&Window"
-msgstr "窗口(&W)"
-
-#: kreplacements/kreplacements.cpp:311
-#, fuzzy
-msgid "&Settings"
-msgstr "Diff 和 Merge 设置"
-
-#: kreplacements/kreplacements.cpp:312
-msgid "&Help"
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:359
-#, fuzzy
-#| msgid "Abort"
-msgid "&About"
-msgstr "放弃"
-
-#: kreplacements/kreplacements.cpp:375
-msgid "A&uthor"
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:389
-msgid "&Thanks To"
-msgstr ""
-
-#. i18n: file: kdiff3_shell.rc:30
-#. i18n: ectx: Menu (dir_current_merge_menu)
-#: kreplacements/kreplacements.cpp:494 kreplacements/kreplacements.cpp:503
-#: rc.cpp:18
-msgid "Current Item Merge Operation"
-msgstr "当前项目合并操作"
-
-#. i18n: file: kdiff3_shell.rc:38
-#. i18n: ectx: Menu (dir_current_sync_menu)
-#: kreplacements/kreplacements.cpp:495 kreplacements/kreplacements.cpp:504
-#: rc.cpp:21
-msgid "Current Item Sync Operation"
-msgstr "当前项目同步操作"
-
-#: kreplacements/kreplacements.cpp:603
-#, fuzzy
-#| msgid "Operation"
-msgid "Open"
-msgstr "操作"
-
-#: kreplacements/kreplacements.cpp:612
-#, fuzzy
-#| msgid "Solved"
-msgid "Save"
-msgstr "已解决的"
-
-#: kreplacements/kreplacements.cpp:629
-#, fuzzy
-msgid "Print..."
-msgstr "正在退出..."
-
-#: kreplacements/kreplacements.cpp:645
-msgid "Cut"
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:653
-msgid "Copy"
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:661
-msgid "Paste"
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:669
-#, fuzzy
-#| msgid "Delete A"
-msgid "Select All"
-msgstr "删除 A"
-
-#: kreplacements/kreplacements.cpp:677
-msgid "Show Toolbar"
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:685
-msgid "Show &Statusbar"
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:693
-#, fuzzy, kde-format
-#| msgid "Configure..."
-msgid "&Configure %1..."
-msgstr "配置..."
-
-#: kreplacements/kreplacements.cpp:705 kreplacements/kreplacements.cpp:713
-#, fuzzy
-#| msgid "Abort"
-msgid "About"
-msgstr "放弃"
-
-#: kreplacements/kreplacements.cpp:728
-msgid "Find"
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:736
-msgid "Find Next"
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:756
-#, fuzzy
-#| msgid "Select Another Font"
-msgid "Select Font"
-msgstr "选择另一种字体"
-
-#: kreplacements/kreplacements.cpp:798
-#, fuzzy
-#| msgid "Incompatible Font"
-msgid "Incompatible font."
-msgstr "不兼容字体"
-
-#: kreplacements/kreplacements.cpp:799
-#, fuzzy
-#| msgid "Continue at Own Risk"
-msgid "Continue at my own risk"
-msgstr "自愿冒险继续"
-
-#: kreplacements/kreplacements.cpp:799
-#, fuzzy
-#| msgid "Select Another Font"
-msgid "Select another font"
-msgstr "选择另一种字体"
-
-#: kreplacements/kreplacements.cpp:1138
-msgid "For more documentation, see the help-menu or the subdirectory doc."
-msgstr ""
-
-#: kreplacements/kreplacements.cpp:1141
-#, fuzzy
-#| msgid "KDiff3"
-msgid "KDiff3-Usage"
-msgstr "KDiff3"
-
-#: kreplacements/kreplacements.cpp:1141
-#, fuzzy
-#| msgid "Ignore case"
-msgid "Ignore"
-msgstr "忽略大小写"
-
-#: kreplacements/kreplacements.cpp:1141
-#, fuzzy
-#| msgid "Editor"
-msgid "Exit"
-msgstr "编辑器"
-
-#: mergeresultwindow.cpp:152 mergeresultwindow.cpp:970
-#: mergeresultwindow.cpp:984 mergeresultwindow.cpp:996
-#: mergeresultwindow.cpp:1008
-#, kde-format
-msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
-msgstr "还未解决的冲突数目：%1(其中 %2 项为空白字符)"
-
-#: mergeresultwindow.cpp:301
-msgid ""
-"The output has been modified.\n"
-"If you continue your changes will be lost."
-msgstr ""
-"已修改输出。\n"
-"如果您继续您的更改将丢失。"
-
-#: mergeresultwindow.cpp:830
-msgid "All input files contain the same text."
-msgstr "全部输入文件包含相同文本。"
-
-#: mergeresultwindow.cpp:833 mergeresultwindow.cpp:835
-#: mergeresultwindow.cpp:837
-#, fuzzy, kde-format
-msgid "Files %1 and %2 have equal text.\n"
-msgstr "文件 A 和 B 文本相同。\n"
-
-#: mergeresultwindow.cpp:843
-msgid "Total number of conflicts: "
-msgstr "冲突总数："
-
-#: mergeresultwindow.cpp:844
-msgid ""
-"\n"
-"Nr of automatically solved conflicts: "
-msgstr ""
-"\n"
-"自动解决的冲突数目："
-
-#: mergeresultwindow.cpp:845
-msgid ""
-"\n"
-"Nr of unsolved conflicts: "
-msgstr ""
-"\n"
-"未解决冲突数目："
-
-#: mergeresultwindow.cpp:847
-msgid "Conflicts"
-msgstr "冲突"
-
-#: mergeresultwindow.cpp:1714
-msgid "<No src line>"
-msgstr "<无源行>"
-
-#: mergeresultwindow.cpp:1722
-msgid "<Merge Conflict (Whitespace only)>"
-msgstr "<合并冲突(只有空白字符)>"
-
-#: mergeresultwindow.cpp:1724 mergeresultwindow.cpp:2503
-msgid "<Merge Conflict>"
-msgstr "<合并冲突>"
-
-#: mergeresultwindow.cpp:2711
-msgid ""
-"Not all conflicts are solved yet.\n"
-"File not saved.\n"
-msgstr ""
-"尚未解决全部冲突。\n"
-"文件未保存。\n"
-
-#: mergeresultwindow.cpp:2713 mergeresultwindow.cpp:2722
-msgid "Conflicts Left"
-msgstr "遗留的冲突"
-
-#: mergeresultwindow.cpp:2720
-msgid ""
-"There is a line end style conflict. Please choose the line end style "
-"manually.\n"
-"File not saved.\n"
-msgstr ""
-
-#: mergeresultwindow.cpp:2734
-msgid ""
-"\n"
-"\n"
-"Creating backup failed. File not saved."
-msgstr ""
-"\n"
-"\n"
-"创建备份失败。文件未保存。"
-
-#: mergeresultwindow.cpp:2734 mergeresultwindow.cpp:2778
-msgid "File Save Error"
-msgstr "保存文件错误"
-
-#: mergeresultwindow.cpp:2778
-msgid "Error while writing."
-msgstr "写入时出错。"
-
-#: mergeresultwindow.cpp:3108
-msgid "Output"
-msgstr "输出"
-
-#: mergeresultwindow.cpp:3120 mergeresultwindow.cpp:3300
-msgid "[Modified]"
-msgstr "[已修改]"
-
-#: mergeresultwindow.cpp:3127
-#, fuzzy
-msgid "Encoding for saving"
-msgstr "C 的文件编码："
-
-#: mergeresultwindow.cpp:3180
-msgid "Unix"
-msgstr ""
-
-#: mergeresultwindow.cpp:3181
-msgid "DOS"
-msgstr ""
-
-#: mergeresultwindow.cpp:3215
-#, fuzzy
-#| msgid "Conflicts"
-msgid "Conflict"
-msgstr "冲突"
-
-#: mergeresultwindow.cpp:3247 mergeresultwindow.cpp:3249
-#: mergeresultwindow.cpp:3251
-msgid "Codec from"
-msgstr ""
 
 #. i18n: file: kdiff3_part.rc:4
 #. i18n: ectx: Menu (movement)
 #: rc.cpp:3
+#, fuzzy
 msgid "&KDiff3"
-msgstr "&KDiff3"
+msgstr ""
 
 #. i18n: file: kdiff3_part.rc:13
 #. i18n: ectx: Menu (movement)
@@ -3056,14 +3140,16 @@ msgstr "配置 KDiff3"
 #. i18n: file: kdiff3_part.rc:16
 #. i18n: ectx: ToolBar (mainToolBar)
 #: rc.cpp:9
+#, fuzzy
 msgid "KDiff3"
-msgstr "KDiff3"
+msgstr ""
 
 #. i18n: file: kdiff3_shell.rc:106
 #. i18n: ectx: ToolBar (mainToolBar)
 #: rc.cpp:36
+#, fuzzy
 msgid "Main Toolbar"
-msgstr ""
+msgstr "主工具栏"
 
 #: rc.cpp:37
 msgctxt "NAME OF TRANSLATORS"
@@ -3117,23 +3203,18 @@ msgstr ""
 #~ "如果存在，显示回车字符“\\r”。\n"
 #~ "这个选项帮助比较在不同操作系统下修改的文件。"
 
-#, fuzzy
 #~ msgid "Diff and Merge"
 #~ msgstr "Diff 和 Merge"
 
-#, fuzzy
 #~ msgid "Save Directory Merge State ..."
 #~ msgstr "目录合并"
 
-#, fuzzy
 #~ msgid "Load Directory Merge State ..."
 #~ msgstr "目录合并"
 
-#, fuzzy
 #~ msgid "Synchronize Directories"
 #~ msgstr "同步目录"
 
-#, fuzzy
 #~ msgid "Copy Newer Files Instead of Merging"
 #~ msgstr "复制较新而不合并(不安全)"
 
@@ -3143,11 +3224,9 @@ msgstr ""
 #~ msgid "Files and directories without change will not appear in the list."
 #~ msgstr "未更改的文件和目录不会在列表显示。"
 
-#, fuzzy
 #~ msgid "no selection"
 #~ msgstr "自动复制选择"
 
-#, fuzzy
 #~ msgid "Manually match lines"
 #~ msgstr "手动选择"
 
