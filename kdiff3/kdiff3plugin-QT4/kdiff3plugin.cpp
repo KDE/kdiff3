@@ -184,7 +184,7 @@ void KDiff3Plugin::slotCompareWith()
       QStringList args;
       args << s_pHistory->front();
       args << m_list.front();
-      KProcess::execute("kdiff3", args);
+      KProcess::startDetached("kdiff3", args);
    }
 }
 
@@ -196,7 +196,7 @@ void KDiff3Plugin::slotCompareWithHistoryItem()
       QStringList args;
       args << pAction->text();
       args << m_list.front();
-      KProcess::execute ("kdiff3", args);
+      KProcess::startDetached ("kdiff3", args);
    }
 }
 
@@ -207,7 +207,7 @@ void KDiff3Plugin::slotCompareTwoFiles()
       QStringList args;
       args << m_list.front();
       args << m_list.back();
-      KProcess::execute ("kdiff3", args);
+      KProcess::startDetached ("kdiff3", args);
    }
 }
 
@@ -219,7 +219,7 @@ void KDiff3Plugin::slotCompareThreeFiles()
       args << m_list[0];
       args << m_list[1];
       args << m_list[2];
-      KProcess::execute ("kdiff3", args);
+      KProcess::startDetached ("kdiff3", args);
    }
 }
 
@@ -231,7 +231,7 @@ void KDiff3Plugin::slotMergeWith()
       args << s_pHistory->front();
       args << m_list.front();
       args << ( "-o" + m_list.front() );
-      KProcess::execute ("kdiff3", args);
+      KProcess::startDetached ("kdiff3", args);
    }
 }
 
@@ -244,7 +244,7 @@ void KDiff3Plugin::slotMergeThreeWay()
       args << (*s_pHistory)[0];
       args << m_list.front();
       args << ("-o" + m_list.front());
-      KProcess::execute ("kdiff3", args);
+      KProcess::startDetached ("kdiff3", args);
    }
 }
 
