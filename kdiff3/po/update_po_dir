@@ -22,6 +22,7 @@
 # and update all files for translations
 # Requirements: wget, gettext-tools, qt3-devel-tools
 
+export LANG=en_US.UTF-8
 # extract extra strings
 xgettext --keyword=i18n --keyword=I18N_NOOP -C ../src-QT4/kreplacements/kreplacements.cpp -o kreplacements.pot
 sed -i /add_subdirectory/d CMakeLists.txt
@@ -54,7 +55,10 @@ for i in `cat subdirs` ; do
       msgmerge --no-fuzzy-matching kdelibs_$i.po kreplacements.pot >kreplacements_$i.po
       msgcat --use-first $i.po kreplacements_$i.po >kdiff3_$i.po
       # (msg2qm is from "qt3-devel-tools"-package.)
-      /usr/lib/qt3/bin/msg2qm kdiff3_$i.po kdiff3_$i.qm
+      #/usr/lib/qt3/bin/msg2qm kdiff3_$i.po kdiff3_$i.qm
+      # lconvert is from qt4 (libqt4-devel)
+      lconvert -if po -of qm -o kdiff3_$i.qm kdiff3_$i.po
+      
       rm kdelibs_$i.po kdiff3_$i.po kreplacements_$i.po
       echo add_subdirectory\($i\) >>CMakeLists.txt
    fi
