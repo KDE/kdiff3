@@ -286,10 +286,10 @@ bool MergeResultWindow::sameKindCheck( const MergeLine& ml1, const MergeLine& ml
    }
    else
       return (
-         !ml1.bConflict && !ml2.bConflict && ml1.bDelta && ml2.bDelta && ml1.srcSelect == ml2.srcSelect 
-         && (ml1.mergeDetails==ml2.mergeDetails || ml1.mergeDetails!=eBCAddedAndEqual && ml2.mergeDetails!=eBCAddedAndEqual )
+         ( !ml1.bConflict && !ml2.bConflict && ml1.bDelta && ml2.bDelta && ml1.srcSelect == ml2.srcSelect 
+         && (ml1.mergeDetails==ml2.mergeDetails || (ml1.mergeDetails!=eBCAddedAndEqual && ml2.mergeDetails!=eBCAddedAndEqual) ) )
          ||
-         !ml1.bDelta && !ml2.bDelta
+         (!ml1.bDelta && !ml2.bDelta)
          );
 }
 
@@ -323,8 +323,8 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
 
          // Automatic solving for only whitespace changes.
          if ( ml.bConflict &&
-              ( m_pldC==0 && (d.bAEqB || d.bWhiteLineA && d.bWhiteLineB)  ||
-                m_pldC!=0 && (d.bAEqB && d.bAEqC || d.bWhiteLineA && d.bWhiteLineB && d.bWhiteLineC ) ) )
+              ( (m_pldC==0 && (d.bAEqB || d.bWhiteLineA && d.bWhiteLineB))  ||
+                (m_pldC!=0 && (d.bAEqB && d.bAEqC || d.bWhiteLineA && d.bWhiteLineB && d.bWhiteLineC ) ) ) )
          {
             ml.bWhiteSpaceConflict = true;
          }
@@ -345,19 +345,6 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
          }
          else
          {
-            if (back!=0  &&  back->bWhiteSpaceConflict )
-            {
-               if ( m_pldC==0 && m_pOptionDialog->m_whiteSpace2FileMergeDefault != 0 )  // Only two inputs
-               {
-                  back->srcSelect = m_pOptionDialog->m_whiteSpace2FileMergeDefault;
-                  back->bConflict = false;
-               }
-               else if ( m_pldC!=0 && m_pOptionDialog->m_whiteSpace3FileMergeDefault != 0 )
-               {
-                  back->srcSelect = m_pOptionDialog->m_whiteSpace3FileMergeDefault;
-                  back->bConflict = false;
-               }
-            }
             ml.mergeEditLineList.setTotalSizePtr(&m_totalSize);
             m_mergeLineList.push_back( ml );
          }
@@ -379,7 +366,24 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
       }
    }
 
-   if ( !bAutoSolve )
+   bool bSolveWhiteSpaceConflicts = false;
+   if ( bAutoSolve ) // when true, then the other params are not used and we can change them here. (see all invocations of merge())
+   {
+      if ( m_pldC==0 && m_pOptionDialog->m_whiteSpace2FileMergeDefault != 0 )  // Only two inputs
+      {
+         defaultSelector = m_pOptionDialog->m_whiteSpace2FileMergeDefault;
+         bWhiteSpaceOnly = true;
+         bSolveWhiteSpaceConflicts = true;
+      }
+      else if ( m_pldC!=0 && m_pOptionDialog->m_whiteSpace3FileMergeDefault != 0 )
+      {
+         defaultSelector = m_pOptionDialog->m_whiteSpace3FileMergeDefault;
+         bWhiteSpaceOnly = true;
+         bSolveWhiteSpaceConflicts = true;
+      }
+   }
+
+   if ( !bAutoSolve || bSolveWhiteSpaceConflicts )
    {
       // Change all auto selections
       MergeLineList::iterator mlIt;
@@ -594,7 +598,7 @@ void MergeResultWindow::go( e_Direction eDir, e_EndPoint eEndPoint )
          if ( eDir==eUp )  --i;
          else              ++i;
       }
-      while ( isItAtEnd(eDir!=eUp, i) && ( i->bDelta == false || checkOverviewIgnore(i) || bSkipWhiteConflicts && i->bWhiteSpaceConflict ) );
+      while ( isItAtEnd(eDir!=eUp, i) && ( i->bDelta == false || checkOverviewIgnore(i) || (bSkipWhiteConflicts && i->bWhiteSpaceConflict) ) );
    }
    else if ( eEndPoint == eConflict  &&  isItAtEnd(eDir!=eUp, i) )
    {
@@ -603,7 +607,7 @@ void MergeResultWindow::go( e_Direction eDir, e_EndPoint eEndPoint )
          if ( eDir==eUp )  --i;
          else              ++i;
       }
-      while ( isItAtEnd(eDir!=eUp, i) && (i->bConflict == false || bSkipWhiteConflicts && i->bWhiteSpaceConflict ) );
+      while ( isItAtEnd(eDir!=eUp, i) && (i->bConflict == false || (bSkipWhiteConflicts && i->bWhiteSpaceConflict) ) );
    }
    else if ( isItAtEnd(eDir!=eUp, i)  &&  eEndPoint == eUnsolvedConflict )
    {
@@ -1175,7 +1179,7 @@ void MergeResultWindow::collectHistoryInformation(
       if (historyLead.isNull()) historyLead = calcHistoryLead(s);
       QString sLine = s.mid(historyLead.length());
       if ( ( !bUseRegExp && !sLine.trimmed().isEmpty() && bPrevLineIsEmpty )
-           || bUseRegExp && newHistoryEntry.exactMatch( sLine ) 
+           || (bUseRegExp && newHistoryEntry.exactMatch( sLine ) )
          )
       {
          if ( !key.isEmpty() && !melList.empty() )
@@ -1859,8 +1863,8 @@ void MergeResultWindow::paintEvent( QPaintEvent* )
 
    int topLineYOffset = 0;
    int xOffset = fontWidth * leftInfoWidth;
-   int yOffset = ( m_cursorYPos - m_firstLine ) * fontHeight + topLineYOffset;
-   int xCursor = ( m_cursorXPos - m_firstColumn ) * fontWidth + xOffset;
+   //int yOffset = ( m_cursorYPos - m_firstLine ) * fontHeight + topLineYOffset;
+   //int xCursor = ( m_cursorXPos - m_firstColumn ) * fontWidth + xOffset;
 
    if ( !m_bCursorUpdate )
       painter.drawPixmap(0,0, m_pixmap);
