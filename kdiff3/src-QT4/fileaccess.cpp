@@ -830,7 +830,7 @@ bool FileAccessJobHandler::symLink( const QString& linkTarget, const QString& li
    else
    {
       m_bSuccess = false;
-      KIO::CopyJob* pJob = KIO::link( linkTarget, linkLocation, false );
+      KIO::CopyJob* pJob = KIO::link( linkTarget, linkLocation, KIO::HideProgressInfo );
       connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
 
       g_pProgressDialog->enterEventLoop( pJob,

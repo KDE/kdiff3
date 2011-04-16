@@ -629,8 +629,8 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
    {
       if ( m_pBuf[i]=='\n' )
       {
-         if ( i>0 && m_pBuf[i-1]=='\r' ||  // normal file
-              i>3 && m_pBuf[i-1]=='\0' && m_pBuf[i-2]=='\r' && m_pBuf[i-3]=='\0') // 16-bit unicode
+         if ( (i>0 && m_pBuf[i-1]=='\r') ||  // normal file
+              (i>3 && m_pBuf[i-1]=='\0' && m_pBuf[i-2]=='\r' && m_pBuf[i-3]=='\0')) // 16-bit unicode
             m_eLineEndStyle = eLineEndStyleDos;
          else
             m_eLineEndStyle = eLineEndStyleUnix;
@@ -1200,13 +1200,13 @@ static bool isValidMove( ManualDiffHelpList* pManualDiffHelpList, int line1, int
 
          if ( l1>=0 && l2>=0 )
          {
-            if ( line1>=l1 && line2<l2 || line1<l1 && line2>=l2 )
+            if ( (line1>=l1 && line2<l2) || (line1<l1 && line2>=l2) )
                return false;
             l1 = winIdx1 == 1 ? mdhe.lineA2 : winIdx1==2 ? mdhe.lineB2 : mdhe.lineC2 ;
             l2 = winIdx2 == 1 ? mdhe.lineA2 : winIdx2==2 ? mdhe.lineB2 : mdhe.lineC2 ;
             ++l1;
             ++l2;
-            if ( line1>=l1 && line2<l2 || line1<l1 && line2>=l2 )
+            if ( (line1>=l1 && line2<l2) || (line1<l1 && line2>=l2) )
                return false;
          }
       }
@@ -1405,9 +1405,9 @@ void calcDiff3LineListTrim(
    {
       if ( iMDHL!=pManualDiffHelpList->end() )
       {
-         if ( i3->lineA >= 0 && i3->lineA==iMDHL->lineA1 || 
-              i3->lineB >= 0 && i3->lineB==iMDHL->lineB1 || 
-              i3->lineC >= 0 && i3->lineC==iMDHL->lineC1 )
+         if ( (i3->lineA >= 0 && i3->lineA==iMDHL->lineA1) || 
+              (i3->lineB >= 0 && i3->lineB==iMDHL->lineB1) || 
+              (i3->lineC >= 0 && i3->lineC==iMDHL->lineC1) )
          {
             i3A = i3;
             i3B = i3;
@@ -1880,7 +1880,7 @@ void fineDiff(
       else if (selector==2){ k1=i->lineB; k2=i->lineC; }
       else if (selector==3){ k1=i->lineC; k2=i->lineA; }
       else assert(false);
-      if( k1==-1 && k2!=-1  ||  k1!=-1 && k2==-1 ) bTextsTotalEqual=false;
+      if( (k1==-1 && k2!=-1)  ||  (k1!=-1 && k2==-1) ) bTextsTotalEqual=false;
       if( k1!=-1 && k2!=-1 )
       {
          if ( v1[k1].size != v2[k2].size || memcmp( v1[k1].pLine, v2[k2].pLine, v1[k1].size<<1)!=0 )
