@@ -288,7 +288,12 @@ bool SourceData::isText()
 {
    return m_normalData.m_bIsText;
 }
- 
+
+bool SourceData::isIncompleteConversion()
+{
+   return m_normalData.m_bIncompleteConversion;
+}
+
 bool SourceData::isFromBuffer()
 {
    return !m_fileAccess.isValid();
@@ -310,6 +315,7 @@ void SourceData::FileData::reset()
    m_size = 0;
    m_vSize = 0;
    m_bIsText = true;
+   m_bIncompleteConversion = false;
    m_eLineEndStyle = eLineEndStyleUndefined;
 }
 
@@ -416,6 +422,93 @@ QTextCodec* SourceData::detectEncoding( const QString& fileName, QTextCodec* pFa
    return pFallbackCodec;
 }
 
+/* Split the command line into arguments.
+ * Normally split at white space separators except when quoting with " or '.
+ * Backslash is treated as meta character within single quotes ' only.
+ * Detect parsing errors like unclosed quotes.
+ * The first item in the list will be the command itself.
+ * Returns the error reasor as string or an empty string on success.
+ * Eg. >"1" "2"<           => >1<, >2<
+ * Eg. >'\'\\'<            => >'\<   backslash is a meta character between single quotes
+ * Eg. > "\\" <            => >\\<   but not between double quotes
+ * Eg. >"c:\sed" 's/a/\' /g'<  => >c:\sed<, >s/a/' /g<
+ */
+static QString getArguments( QString cmd, QString& program, QStringList& args )
+{
+   program = QString();
+   args.clear();
+   for ( int i=0; i<cmd.length(); ++i )
+   {
+      while ( i<cmd.length() && cmd[i].isSpace() )
+      {
+         ++i;
+      }
+      if ( cmd[i]=='"' || cmd[i]=='\'' ) // argument beginning with a quote
+      {
+         QChar quoteChar = cmd[i];
+         ++i;
+         int argStart = i;
+         bool bSkip = false;
+         while ( i<cmd.length() && ( cmd[i]!=quoteChar || bSkip ) )
+         {
+            if ( bSkip )
+            {
+               bSkip = false;
+               if ( cmd[i]=='\\' || cmd[i]==quoteChar )
+               {
+                  cmd.remove( i-1, 1 );  // remove the backslash '\'
+                  continue;
+               }
+            }
+            else if ( cmd[i]=='\\' && quoteChar=='\'')
+               bSkip = true;
+            ++i;
+         }
+         if ( i<cmd.length() )
+         {
+            args << cmd.mid( argStart, i-argStart );
+            if ( i+1<cmd.length() && !cmd[i+1].isSpace() )
+               return i18n("Expecting space after closing apostroph.");
+         }
+         else
+            return i18n("Not matching apostrophs.");
+         continue;
+      }
+      else
+      {            
+         int argStart = i;
+         //bool bSkip = false;
+         while ( i<cmd.length() && ( !cmd[i].isSpace() /*|| bSkip*/ ) )
+         {
+            /*if ( bSkip )
+            {
+               bSkip = false;
+               if ( cmd[i]=='\\' || cmd[i]=='"' || cmd[i]=='\'' || cmd[i].isSpace() )
+               {
+                  cmd.remove( i-1, 1 );  // remove the backslash '\'
+                  continue;
+               }
+            }
+            else if ( cmd[i]=='\\' )
+               bSkip = true;
+            else */
+            if ( cmd[i]=='"' || cmd[i]=='\'' )
+               return i18n("Unexpected apostroph within argument.");
+            ++i;
+         }
+         args << cmd.mid( argStart, i-argStart );
+      }      
+   }
+   if ( args.isEmpty() )
+      return i18n("No program specified.");
+   else
+   {
+      program = args[0];
+      args.pop_front();
+   }
+   return QString();
+}
+
 void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnicode )
 {
    m_pEncoding = pEncoding;
@@ -493,17 +586,25 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
          QProcess ppProcess;
          ppProcess.setStandardInputFile( fileNameInPP );
          ppProcess.setStandardOutputFile( fileNameOut1 );
-         ppProcess.start( ppCmd );
-         ppProcess.waitForFinished(-1);
+         QString program;
+         QStringList args;
+         QString errorReason = getArguments(ppCmd, program, args);
+         if ( errorReason.isEmpty() )
+         {
+            ppProcess.start( program, args );
+            ppProcess.waitForFinished(-1);
+         }
+         else
+            errorReason = "\n("+errorReason+")";
          //QString cmd = catCmd + " \"" + fileNameInPP + "\" | " + ppCmd  + " >\"" + fileNameOut1+"\"";
          //::system( encodeString(cmd) );
-         bool bSuccess = m_normalData.readFile( fileNameOut1 );
+         bool bSuccess = errorReason.isEmpty() && m_normalData.readFile( fileNameOut1 );
          if ( fileInSize >0 && ( !bSuccess || m_normalData.m_size==0 ) )
          {
             KMessageBox::error(m_pOptionDialog, 
                i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
                   "\n\nThe preprocessing command will be disabled now."
-               ).arg(ppCmd) );
+               ).arg(ppCmd) + errorReason );
             m_pOptionDialog->m_PreProcessorCmd = "";
             m_normalData.readFile( fileNameIn1 );
             pEncoding1 = m_pEncoding;
@@ -533,17 +634,25 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
          QProcess ppProcess;
          ppProcess.setStandardInputFile( fileNameInPP );
          ppProcess.setStandardOutputFile( fileNameOut2 );
-         ppProcess.start( ppCmd );
-         ppProcess.waitForFinished(-1);
+         QString program;
+         QStringList args;
+         QString errorReason = getArguments(ppCmd, program, args);
+         if ( errorReason.isEmpty() )
+         {
+            ppProcess.start( program, args );
+            ppProcess.waitForFinished(-1);
+         }
+         else
+            errorReason = "\n("+errorReason+")";
          //QString cmd = catCmd + " \"" + fileNameInPP + "\" | " + ppCmd  + " >\"" + fileNameOut2 + "\"";
          //::system( encodeString(cmd) );
-         bool bSuccess = m_lmppData.readFile( fileNameOut2 );
+         bool bSuccess = errorReason.isEmpty() && m_lmppData.readFile( fileNameOut2 );
          if ( FileAccess(fileNameIn2).size()>0 && ( !bSuccess || m_lmppData.m_size==0 ) )
          {
             KMessageBox::error(m_pOptionDialog, 
                i18n("The line-matching-preprocessing possibly failed. Check this command:\n\n  %1"
                     "\n\nThe line-matching-preprocessing command will be disabled now."
-                   ).arg(ppCmd) );
+                   ).arg(ppCmd) + errorReason );
             m_pOptionDialog->m_LineMatchingPreProcessorCmd = "";
             m_lmppData.readFile( fileNameIn2 );
          }
@@ -654,6 +763,7 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
 
    m_bIsText = true;
    int lines = 1;
+   m_bIncompleteConversion = false;
    for( i=0; i<ucSize; ++i )
    {
       if ( isLineOrBufEnd(p,i,ucSize) )
@@ -663,6 +773,10 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
       if ( p[i]=='\0' )
       {
          m_bIsText = false;
+      }
+      if ( p[i]==QChar::ReplacementCharacter )
+      {
+         m_bIncompleteConversion = true;
       }
    }
 

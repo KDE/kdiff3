@@ -263,6 +263,7 @@ public:
    bool isEmpty();  // File was set
    bool hasData();  // Data was readable
    bool isText();   // is it pure text (vs. binary data)
+   bool isIncompleteConversion(); // true if some replacement characters were found
    bool isFromBuffer();  // was it set via setData() (vs. setFileAccess() or setFilename())
    void setData( const QString& data );
    bool isValid(); // Either no file is specified or reading was successful
@@ -286,7 +287,7 @@ private:
 
    struct FileData
    {
-      FileData(){ m_pBuf=0; m_size=0; m_vSize=0; m_bIsText=false; m_eLineEndStyle=eLineEndStyleUndefined; }
+      FileData(){ m_pBuf=0; m_size=0; m_vSize=0; m_bIsText=false; m_eLineEndStyle=eLineEndStyleUndefined; m_bIncompleteConversion=false;}
       ~FileData(){ reset(); }
       const char* m_pBuf;
       int m_size;
@@ -294,6 +295,7 @@ private:
       QString m_unicodeBuf;
       std::vector<LineData> m_v;
       bool m_bIsText;
+      bool m_bIncompleteConversion;
       e_LineEndStyle m_eLineEndStyle;
       bool readFile( const QString& filename );
       bool writeFile( const QString& filename );

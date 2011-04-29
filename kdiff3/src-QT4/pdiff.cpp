@@ -552,6 +552,22 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
             "Note that the KDiff3-merge was not meant for binary data.\n"
             "Continue at your own risk.") );
       }
+      if ( m_sd1.isIncompleteConversion() || m_sd2.isIncompleteConversion() || m_sd3.isIncompleteConversion() )
+      {
+         QString files;
+         if ( m_sd1.isIncompleteConversion() )
+            files += "A";
+         if ( m_sd2.isIncompleteConversion() )
+            files += files.isEmpty() ? "B" : ", B";
+         if ( m_sd3.isIncompleteConversion() )
+            files += files.isEmpty() ? "C" : ", C";
+            
+         KMessageBox::information( this, i18n(
+            "Some input characters could not be converted to valid unicode.\n"
+            "You might be using the wrong codec. (e.g. UTF-8 for non UTF-8 files).\n"
+            "Don't save the result if unsure. Continue at your own risk.\n"
+            "Affected input files are in %1.").arg(files) );
+      }
    }
 
    QTimer::singleShot( 10, this, SLOT(slotAfterFirstPaint()) );

@@ -59,7 +59,7 @@ void Merger::MergeData::update()
    else if ( idx==1 && d.diff2 > 0 )
       --d.diff2; 
 
-   while( d.nofEquals == 0  && (idx==0 && d.diff1 == 0 || idx==1 && d.diff2 == 0) 
+   while( d.nofEquals == 0  && ((idx==0 && d.diff1 == 0) || (idx==1 && d.diff2 == 0)) 
        && pDiffList!=0  &&  it != pDiffList->end() )
    {
       d = *it;
