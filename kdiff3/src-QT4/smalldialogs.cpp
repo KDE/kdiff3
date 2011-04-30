@@ -421,7 +421,7 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
 
    l = new QLabel(i18n("Example auto merge line:"), this);
    pGrid->addWidget(l,line,0);
-   l->setToolTip( i18n("For auto merge test copy a line as used in your files.") );
+   l->setToolTip( i18n("To test auto merge, copy a line as used in your files.") );
    m_pAutoMergeExampleEdit = new QLineEdit(this);
    pGrid->addWidget(m_pAutoMergeExampleEdit,line,1);
    connect( m_pAutoMergeExampleEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
@@ -571,7 +571,7 @@ void RegExpTester::slotRecalc()
    bool bSuccess = findParenthesesGroups( m_pHistoryEntryStartRegExpEdit->text(), parenthesesGroups );
    if ( ! bSuccess )
    {
-      m_pHistoryEntryStartMatchResult->setText( i18n("Opening and closing parentheses don't match in regular expression.") );
+      m_pHistoryEntryStartMatchResult->setText( i18n("Opening and closing parentheses do not match in regular expression.") );
       m_pHistorySortKeyResult->setText( "" );
       return;
    }

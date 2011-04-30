@@ -21,10 +21,10 @@
 #include <windows.h>
 #include <shlobj.h>
 #include <malloc.h>
-#include <qstring.h>
-#include <qstringlist.h>
+#include <QString>
+#include <QStringList>
 #include <qwidget.h>
-#include <qdir.h>
+#include <QDir>
 #include <QMenu>
 #include "ShellContextMenu.h"
 

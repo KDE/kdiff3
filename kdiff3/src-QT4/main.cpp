@@ -21,9 +21,9 @@
 #include "kdiff3_shell.h"
 #include <kstandarddirs.h>
 #include "version.h"
-#include <qtextcodec.h>
-#include <qfile.h>
-#include <qtextstream.h>
+#include <QTextCodec>
+#include <QFile>
+#include <QTextStream>
 #include <QTranslator>
 #include <QLocale>
 #include <QFont>
@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
    const KLocalizedString i18nName = ki18n("kdiff3");
    const QByteArray& appVersion = QByteArray( VERSION );
    const KLocalizedString description = ki18n("Tool for Comparison and Merge of Files and Directories");
-   const KLocalizedString copyright = ki18n("(c) 2002-2010 Joachim Eibl");
+   const KLocalizedString copyright = ki18n("(c) 2002-2011 Joachim Eibl");
    const QByteArray& homePage = "http://kdiff3.sourceforge.net/";
    const QByteArray& bugsAddress = "joachim.eibl" "@" "gmx.de";
    KAboutData aboutData( appName, appCatalog, i18nName, 
@@ -185,6 +185,7 @@ int main(int argc, char *argv[])
    aboutData.addCredit(ki18n("Michael Schmidt"), ki18n("Mac support"));
    aboutData.addCredit(ki18n("Valentin Rusu"), ki18n("KDE4 porting"), QByteArray("kde" "@" "rusu.info"));
    aboutData.addCredit(ki18n("Albert Astals Cid"), ki18n("KDE4 porting"), QByteArray("aacid" "@" "kde.org"));
+   aboutData.addCredit(ki18n("Silvan Scherrer"), ki18n("OS2 port") );
 
    aboutData.addCredit(ki18n("+ Many thanks to those who reported bugs and contributed ideas!"));
 

@@ -23,7 +23,7 @@
 
 
 #include <kpagedialog.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <list>
 #include <kcmdlineargs.h>
 

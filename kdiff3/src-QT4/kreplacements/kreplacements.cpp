@@ -21,17 +21,17 @@
 
 #include <assert.h>
 
-#include <qnamespace.h>
-#include <qmessagebox.h>
-#include <qmenu.h>
-#include <qmenubar.h>
-#include <qpainter.h>
-#include <qcolordialog.h>
-#include <qfontdialog.h>
-#include <qlabel.h>
-#include <qtextbrowser.h>
-#include <qtextstream.h>
-#include <qlayout.h>
+#include <Qt> //namespace
+#include <QMessageBox>
+#include <QMenu>
+#include <QMenuBar>
+#include <QPainter>
+#include <QColorDialog>
+#include <QFontDialog>
+#include <QLabel>
+#include <QTextBrowser>
+#include <QTextStream>
+#include <QLayout>
 #include <QTabWidget>
 #include <QPaintEvent>
 #include <QPixmap>
@@ -676,7 +676,7 @@ KToggleAction* KStandardAction::showToolbar( QWidget* parent, const char* slot, 
 KToggleAction* KStandardAction::showStatusbar( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KToggleAction* a = new KToggleAction( i18n("Show &Statusbar"), 0, parent, slot, actionCollection, "showstatusbar", false );
+   KToggleAction* a = new KToggleAction( i18n("Show &Status Bar"), 0, parent, slot, actionCollection, "showstatusbar", false );
    if(p) p->settingsMenu->addAction( a );
    return a;
 }

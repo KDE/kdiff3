@@ -73,7 +73,7 @@ KDiff3Shell::KDiff3Shell( bool bCompleteInit )
     {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
-        KMessageBox::error(this, i18n("Could not initialize our part!\n"
+        KMessageBox::error(this, i18n("Could not initialize the KDiff3 part.\n"
            "This usually happens due to an installation problem. "
            "Please read the README-file in the source package for details.")
            );

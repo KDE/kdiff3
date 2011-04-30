@@ -24,15 +24,15 @@
 #include <algorithm>
 #include <ctype.h>
 
-#include <qclipboard.h>
-#include <qscrollbar.h>
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qsplitter.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qlineedit.h>
-#include <qcombobox.h>
+#include <QClipboard>
+#include <QScrollBar>
+#include <QLayout>
+#include <QCheckBox>
+#include <QSplitter>
+#include <QDir>
+#include <QFile>
+#include <QLineEdit>
+#include <QComboBox>
 #include <QDropEvent>
 #include <QUrl>
 #include <QProcess>

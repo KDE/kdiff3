@@ -22,13 +22,13 @@
 #include <assert.h>
 
 // include files for QT
-#include <qdir.h>
-#include <qprinter.h>
-#include <qpainter.h>
-#include <qsplitter.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
+#include <QDir>
+#include <QPrinter>
+#include <QPainter>
+#include <QSplitter>
+#include <QLineEdit>
+#include <QCheckBox>
+#include <QPushButton>
 #include <QMenu>
 #include <QLabel>
 #include <QTextEdit>
@@ -493,7 +493,7 @@ void KDiff3App::initActions( KActionCollection* ac )
    editCopy = KStandardAction::copy(this, SLOT(slotEditCopy()), ac);
    editCopy->setStatusTip(i18n("Copies the selected section to the clipboard"));
    editPaste = KStandardAction::paste(this, SLOT(slotEditPaste()), ac);
-   editPaste->setStatusTip(i18n("Pastes the clipboard contents to actual position"));
+   editPaste->setStatusTip(i18n("Pastes the clipboard contents to current position"));
    editSelectAll = KStandardAction::selectAll(this, SLOT(slotEditSelectAll()), ac);
    editSelectAll->setStatusTip(i18n("Select everything in current window"));
    editFind = KStandardAction::find(this, SLOT(slotEditFind()), ac);

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2003-2007 by Joachim Eibl                               *
+ *   Copyright (C) 2003-2011 by Joachim Eibl                               *
  *   joachim.eibl at gmx.de                                                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -12,14 +12,14 @@
 #include "optiondialog.h"
 #include "common.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qapplication.h>
-#include <qpushbutton.h>
-#include <qdir.h>
-#include <qregexp.h>
-#include <qtextstream.h>
-#include <qeventloop.h>
+#include <QLayout>
+#include <QLabel>
+#include <QApplication>
+#include <QPushButton>
+#include <QDir>
+#include <QRegExp>
+#include <QTextStream>
+#include <QEventLoop>
 #include <QProcess>
 #include <QProgressBar>
 
@@ -1687,7 +1687,7 @@ void ProgressDialog::recalc( bool bUpdate )
 }
 
 
-#include <qtimer.h>
+#include <QTimer>
 void ProgressDialog::show()
 {
    if ( m_progressDelayTimer )

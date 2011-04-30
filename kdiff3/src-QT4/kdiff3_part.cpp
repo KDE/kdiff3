@@ -24,8 +24,8 @@
 #include <kstandardaction.h>
 #include <kfiledialog.h>
 
-#include <qfile.h>
-#include <qtextstream.h>
+#include <QFile>
+#include <QTextStream>
 #include <QProcess>
 
 #include "kdiff3.h"

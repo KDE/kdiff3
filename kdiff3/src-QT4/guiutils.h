@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qobject.h>
+#include <QObject>
 #include <kactioncollection.h>
 
 namespace KDiff3 {

@@ -21,11 +21,11 @@
 #include "common.h"
 #include <map>
 #include <qfont.h>
-#include <qcolor.h>
-#include <qsize.h>
+#include <QColor>
+#include <QSize>
 #include <qpoint.h>
-#include <qstringlist.h>
-#include <qtextstream.h>
+#include <QStringList>
+#include <QTextStream>
 
 ValueMap::ValueMap()
 {

@@ -733,7 +733,7 @@ void OptionDialog::setupEditPage( void )
    gbox->addWidget( pReplaceTabs, line, 0, 1, 2 );
    pReplaceTabs->setToolTip( i18n(
       "On: Pressing tab generates the appropriate number of spaces.\n"
-      "Off: A Tab-character will be inserted.")
+      "Off: A tab character will be inserted.")
       );
    ++line;
 
@@ -964,7 +964,7 @@ void OptionDialog::setupMergePage( void )
       m_pHistoryStartRegExpLineEdit = new OptionLineEdit( ".*\\$Log.*\\$.*", "HistoryStartRegExp", &m_historyStartRegExp, page, this );
       gbox->addWidget( m_pHistoryStartRegExpLineEdit, line, 1 );
       s_historyStartRegExpToolTip = i18n("Regular expression for the start of the version control history entry.\n"
-            "Usually this line contains the \"$Log$\"-keyword.\n"
+            "Usually this line contains the \"$Log$\" keyword.\n"
             "Default value: \".*\\$Log.*\\$.*\"");
       label->setToolTip( s_historyStartRegExpToolTip );
       ++line;
@@ -1005,7 +1005,7 @@ void OptionDialog::setupMergePage( void )
       gbox->addWidget( label, line, 0 );
       m_pHistorySortKeyOrderLineEdit = new OptionLineEdit( defaultSortKeyOrder, "HistoryEntryStartSortKeyOrder", &m_historyEntryStartSortKeyOrder, page, this );
       gbox->addWidget( m_pHistorySortKeyOrderLineEdit, line, 1 );
-      s_historyEntryStartSortKeyOrderToolTip = i18n("Each parentheses used in the regular expression for the history start entry\n"
+      s_historyEntryStartSortKeyOrderToolTip = i18n("Each pair of parentheses used in the regular expression for the history start entry\n"
             "groups a key that can be used for sorting.\n"
             "Specify the list of keys (that are numbered in order of occurrence\n"
             "starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
@@ -1047,9 +1047,9 @@ void OptionDialog::setupMergePage( void )
    OptionCheckBox* pAutoSaveAndQuit = new OptionCheckBox( i18n("Auto save and quit on merge without conflicts"), false,
       "AutoSaveAndQuitOnMergeWithoutConflicts", &m_bAutoSaveAndQuitOnMergeWithoutConflicts, page, this );
    gbox->addWidget( pAutoSaveAndQuit, line, 0, 1, 2 );
-   pAutoSaveAndQuit->setToolTip( i18n("When KDiff3 was started for a file-merge from the commandline and all\n" 
+   pAutoSaveAndQuit->setToolTip( i18n("If KDiff3 was started for a file-merge from the command line and all\n"
                                          "conflicts are solvable without user interaction then automatically save and quit.\n"
-                                         "(Similar to command line option \"--auto\".") );
+                                         "(Similar to command line option \"--auto\".)") );
    ++line;
 
    topLayout->addStretch(10);
@@ -1113,7 +1113,7 @@ void OptionDialog::setupDirectoryMergePage( void )
    gbox->addWidget( pUseCvsIgnore, line, 0, 1, 2 );
    pUseCvsIgnore->setToolTip( i18n(
       "Extends the antipattern to anything that would be ignored by CVS.\n"
-      "Via local \".cvsignore\"-files this can be directory specific."
+      "Via local \".cvsignore\" files this can be directory specific."
       ));
    ++line;
 
@@ -1181,9 +1181,9 @@ void OptionDialog::setupDirectoryMergePage( void )
                                      "Useful for big directories or slow networks.") );
    pBGLayout->addWidget( pTrustDate );
                                      
-   OptionRadioButton* pTrustDateFallbackToBinary = new OptionRadioButton( i18n("Trust the size and date, but use binary comparison if date doesn't match (unsafe)"), false, "TrustDateFallbackToBinary", &m_bDmTrustDateFallbackToBinary, pBG, this );
+   OptionRadioButton* pTrustDateFallbackToBinary = new OptionRadioButton( i18n("Trust the size and date, but use binary comparison if date does not match (unsafe)"), false, "TrustDateFallbackToBinary", &m_bDmTrustDateFallbackToBinary, pBG, this );
    pTrustDateFallbackToBinary->setToolTip( i18n("Assume that files are equal if the modification date and file length are equal.\n"
-                                     "If the date isn't equal but the sizes are, use binary comparison.\n"
+                                     "If the dates are not equal but the sizes are, use binary comparison.\n"
                                      "Useful for big directories or slow networks.") );
    pBGLayout->addWidget( pTrustDateFallbackToBinary );
 
@@ -1225,8 +1225,8 @@ void OptionDialog::setupDirectoryMergePage( void )
    OptionCheckBox* pCreateBakFiles = new OptionCheckBox( i18n("Backup files (.orig)"), true, "CreateBakFiles", &m_bDmCreateBakFiles, page, this );
    gbox->addWidget( pCreateBakFiles, line, 0, 1, 2 );
    pCreateBakFiles->setToolTip( i18n(
-                 "When a file would be saved over an old file, then the old file\n"
-                 "will be renamed with a '.orig'-extension instead of being deleted."));
+                 "If a file would be saved over an old file, then the old file\n"
+                 "will be renamed with a '.orig' extension instead of being deleted."));
    ++line;
 
    topLayout->addStretch(10);
@@ -1441,9 +1441,8 @@ static const char* countryMap[]={
       pLanguage->addItem( languageId );
    }
    
-   
    label->setToolTip( i18n(
-      "Choose the language of the GUI-strings or \"Auto\".\n" 
+      "Choose the language of the GUI strings or \"Auto\".\n"
       "For a change of language to take place, quit and restart KDiff3.") 
       );
    ++line;
@@ -1568,7 +1567,7 @@ void OptionDialog::setupIntegrationPage( void )
    label->setToolTip( i18n(
       "List of command line options that should be ignored when KDiff3 is used by other tools.\n"
       "Several values can be specified if separated via ';'\n"
-      "This will suppress the \"Unknown option\"-error."
+      "This will suppress the \"Unknown option\" error."
       ));
    ++line;
 
@@ -1577,7 +1576,7 @@ void OptionDialog::setupIntegrationPage( void )
    gbox->addWidget( pEscapeKeyQuits, line, 0, 1, 2 );
    pEscapeKeyQuits->setToolTip( i18n(
                   "Fast method to exit.\n"
-                  "For those who are used to using the Escape-key."  ) );
+                  "For those who are used to using the Escape key."  ) );
    ++line;
 
 #ifdef _WIN32
@@ -1585,7 +1584,7 @@ void OptionDialog::setupIntegrationPage( void )
    gbox->addWidget( pIntegrateWithClearCase, line, 0 );
    pIntegrateWithClearCase->setToolTip( i18n(
                  "Integrate with Rational ClearCase from IBM.\n"
-                 "Modifies the \"map\" file in ClearCase-subdir \"lib/mgrs\"\n"
+                 "Modifies the \"map\" file in ClearCase subdir \"lib/mgrs\"\n"
                  "(Only enabled when ClearCase \"bin\" directory is in the path.)"));
    connect(pIntegrateWithClearCase, SIGNAL(clicked()),this, SLOT(slotIntegrateWithClearCase()) );
    pIntegrateWithClearCase->setEnabled( integrateWithClearCase( "existsClearCase", "" )!=0 );
@@ -1593,7 +1592,7 @@ void OptionDialog::setupIntegrationPage( void )
    QPushButton* pRemoveClearCaseIntegration = new QPushButton( i18n("Remove ClearCase Integration"), page);
    gbox->addWidget( pRemoveClearCaseIntegration, line, 1 );
    pRemoveClearCaseIntegration->setToolTip( i18n(
-                 "Restore the old \"map\" file from before doing the Clearcase integration."));
+                 "Restore the old \"map\" file from before doing the ClearCase integration."));
    connect(pRemoveClearCaseIntegration, SIGNAL(clicked()),this, SLOT(slotRemoveClearCaseIntegration()) );
    pRemoveClearCaseIntegration->setEnabled( integrateWithClearCase( "existsClearCase", "" )!=0 );
 

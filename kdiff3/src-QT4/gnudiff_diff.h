@@ -27,7 +27,7 @@
 #include "gnudiff_system.h"
 
 #include <stdio.h>
-#include <qstring.h>
+#include <QString>
 
 #define TAB_WIDTH 8
 

@@ -67,7 +67,7 @@ T minMaxLimiter( T d, T minimum, T maximum )
 }
 
 #include <map>
-#include <qstring.h>
+#include <QString>
 class QFont;
 class QColor;
 class QSize;
