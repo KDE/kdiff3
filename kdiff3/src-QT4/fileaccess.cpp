@@ -997,7 +997,7 @@ bool wildcardMultiMatch( const QString& wildcard, const QString& testString, boo
 // class CvsIgnoreList from Cervisia cvsdir.cpp
 //    Copyright (C) 1999-2002 Bernd Gehrmann <bernd at mail.berlios.de>
 // with elements from class StringMatcher
-//    Copyright (c) 2003 Andr�Woebeking <Woebbeking at web.de>
+//    Copyright (c) 2003 Andre Woebbeking <Woebbeking at web.de>
 // Modifications for KDiff3 by Joachim Eibl
 class CvsIgnoreList
 {
