@@ -135,9 +135,9 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
          m_bWritable    = fi.isWritable();
          m_bExecutable  = fi.isExecutable();
 #endif
-         m_creationTime = fi.created();
+         //m_creationTime = fi.created();
          m_bHidden    = fi.isHidden();
-         m_modificationTime = fi.lastModified();
+         //m_modificationTime = fi.lastModified();
          m_accessTime = fi.lastRead();
          m_size       = fi.size();
          m_bSymLink   = fi.isSymLink();
@@ -330,11 +330,15 @@ QString FileAccess::prettyAbsPath() const { return isLocal() ? m_absoluteFilePat
 
 QDateTime FileAccess::created() const
 {
-   return ( m_creationTime.isValid() ?  m_creationTime : m_modificationTime );
+   if ( m_bLocal && m_creationTime.isNull() )
+      const_cast<FileAccess*>(this)->m_creationTime = QFileInfo( m_absoluteFilePath ).created();
+   return ( m_creationTime.isValid() ?  m_creationTime : lastModified() );
 }
 
 QDateTime FileAccess::lastModified() const
 {
+   if ( m_bLocal && m_modificationTime.isNull() )
+      const_cast<FileAccess*>(this)->m_modificationTime = QFileInfo( m_absoluteFilePath ).lastModified();
    return m_modificationTime;
 }
 
