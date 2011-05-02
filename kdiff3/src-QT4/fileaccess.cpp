@@ -164,6 +164,7 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
             process.start( cmd );
             process.waitForFinished(-1);
             //::system( cmd.local8Bit() );
+            QFile::setPermissions( m_localCopy, QFile::ReadUser | QFile::WriteUser ); // Clearcase creates a write protected file, allow delete.
 
             QFileInfo fi( m_localCopy );
 #if defined(Q_WS_WIN)
