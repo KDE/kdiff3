@@ -739,7 +739,7 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
       if ( m_pBuf[i]=='\n' )
       {
          if ( (i>0 && m_pBuf[i-1]=='\r') ||  // normal file
-              (i>3 && m_pBuf[i-1]=='\0' && m_pBuf[i-2]=='\r' && m_pBuf[i-3]=='\0')) // 16-bit unicode
+              (i>3 && m_pBuf[i-1]=='\0' && m_pBuf[i-2]=='\r' && m_pBuf[i-3]=='\0')) // 16-bit unicode: TODO only little endian covered here
             m_eLineEndStyle = eLineEndStyleDos;
          else
             m_eLineEndStyle = eLineEndStyleUnix;
@@ -752,6 +752,14 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
       skipBytes=0;
 
    QByteArray ba = QByteArray::fromRawData( m_pBuf+skipBytes, m_size-skipBytes );
+   if ( m_eLineEndStyle == eLineEndStyleUndefined ) // normally only for one liners except when old mac line end style is used
+   {
+      for( int j=0; j<ba.size(); ++j ) // uint because QByteArray does not support operator[](qint64)
+      {
+         if ( ba[j]=='\r' )
+            ba[j]='\n'; // We only fix the old mac line end style, but leave it as "undefined"
+      }
+   }
    QTextStream ts( ba, QIODevice::ReadOnly );
    ts.setCodec( pEncoding);
    ts.setAutoDetectUnicode( false );
