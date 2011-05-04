@@ -34,6 +34,7 @@
 #include <QSplitter>
 #include <QTextEdit>
 #include <QItemDelegate>
+#include <QPushButton>
 
 
 #include <kmenu.h>
@@ -65,8 +66,9 @@ public:
       setWindowFlags(Qt::Dialog);
       m_pTextEdit->setWordWrapMode(QTextOption::NoWrap);
       m_pTextEdit->setReadOnly(true);
-      //setWindowModality( Qt::ApplicationModal );
-      //showMaximized();
+      QPushButton* pClose = new QPushButton(tr("Close"));
+      connect( pClose, SIGNAL(clicked()), this, SLOT(accept()));
+      pVLayout->addWidget(pClose);
    }
 
    bool isEmpty(){ 
@@ -93,6 +95,8 @@ public:
       }
 
       QDialog::setVisible(bVisible);
+      if ( bVisible )
+         setWindowState( windowState() | Qt::WindowMaximized );
    }
 };
 
