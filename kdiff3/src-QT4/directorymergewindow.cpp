@@ -52,37 +52,47 @@
 
 static bool conflictingFileTypes(MergeFileInfos& mfi);
 
-class StatusInfo : public QTextEdit
+class StatusInfo : public QDialog
 {
+   QTextEdit* m_pTextEdit;
 public:
-   StatusInfo(QWidget* pParent) : QTextEdit( pParent )
+   StatusInfo(QWidget* pParent) : QDialog( pParent )
    {
+      QVBoxLayout* pVLayout = new QVBoxLayout( this );     
+      m_pTextEdit = new QTextEdit(this);
+      pVLayout->addWidget( m_pTextEdit );
       setObjectName("StatusInfo");
       setWindowFlags(Qt::Dialog);
-      setWordWrapMode(QTextOption::NoWrap);
-      setReadOnly(true);
-      setWindowModality( Qt::ApplicationModal );
+      m_pTextEdit->setWordWrapMode(QTextOption::NoWrap);
+      m_pTextEdit->setReadOnly(true);
+      //setWindowModality( Qt::ApplicationModal );
       //showMaximized();
    }
 
    bool isEmpty(){ 
-      return toPlainText().isEmpty(); }
+      return m_pTextEdit->toPlainText().isEmpty(); 
+   }
 
    void addText(const QString& s )
    {
-      append(s);
+      m_pTextEdit->append(s);
+   }
+
+   void clear()
+   {
+      m_pTextEdit->clear();
    }
 
    void setVisible(bool bVisible)
    {
       if (bVisible)
       {
-         moveCursor ( QTextCursor::End );
-         moveCursor ( QTextCursor::StartOfLine );
-         ensureCursorVisible();
+         m_pTextEdit->moveCursor ( QTextCursor::End );
+         m_pTextEdit->moveCursor ( QTextCursor::StartOfLine );
+         m_pTextEdit->ensureCursorVisible();
       }
 
-      QTextEdit::setVisible(bVisible);
+      QDialog::setVisible(bVisible);
    }
 };
 
@@ -346,7 +356,7 @@ DirectoryMergeWindow::DirectoryMergeWindow( QWidget* pParent, OptionDialog* pOpt
    m_bRealMergeStarted=false;
    m_bError = false;
    m_bSyncMode = false;
-   m_pStatusInfo = new StatusInfo(0);
+   m_pStatusInfo = new StatusInfo(this);
    m_pStatusInfo->hide();
    m_bScanning = false;
    m_pSelection1Item = 0;
@@ -1955,7 +1965,7 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
          {
             KMessageBox::error(this, i18n("An error occurred while copying.\n"), i18n("Error") );
             m_pStatusInfo->setWindowTitle(i18n("Merge Error"));
-            m_pStatusInfo->showMaximized();
+            m_pStatusInfo->exec();
             //if ( m_pStatusInfo->firstChild()!=0 )
             //   m_pStatusInfo->ensureItemVisible( m_pStatusInfo->last() );
             m_bError = true;
@@ -2338,7 +2348,7 @@ void DirectoryMergeWindow::mergeContinue(bool bStart, bool bVerbose)
                static_cast<DirMergeItem*>(p)->m_pMFI->m_bSimOpComplete = false;
             }
             m_pStatusInfo->setWindowTitle(i18n("Simulated merge complete: Check if you agree with the proposed operations."));
-            m_pStatusInfo->showMaximized();
+            m_pStatusInfo->exec();
          }
          m_mergeItemList.clear();
          m_bRealMergeStarted=false;
@@ -2373,7 +2383,7 @@ void DirectoryMergeWindow::mergeContinue(bool bStart, bool bVerbose)
    {
       KMessageBox::error(this, i18n("An error occurred. Press OK to see detailed information.\n"), i18n("Error") );
       m_pStatusInfo->setWindowTitle(i18n("Merge Error"));
-      m_pStatusInfo->showMaximized();
+      m_pStatusInfo->exec();
       //if ( m_pStatusInfo->firstChild()!=0 )
       //   m_pStatusInfo->ensureItemVisible( m_pStatusInfo->last() );
       m_bError = true;
