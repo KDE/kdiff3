@@ -1,0 +1,101 @@
+# Translation of kdiff3plugin.po to Catalan
+# Copyright (C) 2011 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2 or later
+#
+# Joan Maspons <joanmaspons@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2011-08-02 05:07+0200\n"
+"PO-Revision-Date: 2011-03-07 01:44+0100\n"
+"Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+
+#: kdiff3plugin.cpp:107
+msgid "KDiff3"
+msgstr "KDiff3"
+
+#: kdiff3plugin.cpp:114
+#, kde-format
+msgid "Compare with %1"
+msgstr "Compara amb %1"
+
+#: kdiff3plugin.cpp:120
+#, kde-format
+msgid "Merge with %1"
+msgstr "Fusiona amb %1"
+
+#: kdiff3plugin.cpp:126
+#, kde-format
+msgid "Save '%1' for later"
+msgstr "Alça «%1» per després"
+
+#: kdiff3plugin.cpp:132
+msgid "3-way merge with base"
+msgstr "Fusió a tres bandes amb base"
+
+#: kdiff3plugin.cpp:139
+msgid "Compare with ..."
+msgstr "Compara amb..."
+
+#: kdiff3plugin.cpp:149
+msgid "Clear list"
+msgstr "Neteja la llista"
+
+#: kdiff3plugin.cpp:157
+msgid "Compare"
+msgstr "Compara"
+
+#: kdiff3plugin.cpp:163
+msgid "3 way comparison"
+msgstr "Comparació a 3 bandes"
+
+#: kdiff3plugin.cpp:167
+msgid "About KDiff3 menu plugin ..."
+msgstr "Quant al connector del menú del KDiff3..."
+
+#: kdiff3plugin.cpp:269
+msgid ""
+"KDiff3 Menu Plugin: Copyright (C) 2008 Joachim Eibl\n"
+"KDiff3 homepage: http://kdiff3.sourceforge.net\n"
+"\n"
+msgstr ""
+"Connector del menú del KDiff3: Copyright (C) 2008 Joachim Eibl\n"
+"Lloc web del KDiff3: http://kdiff3.sourceforge.net\n"
+"\n"
+
+#: kdiff3plugin.cpp:271
+msgid ""
+"Using the context menu extension:\n"
+"For simple comparison of two selected files choose \"Compare\".\n"
+"If the other file is somewhere else, \"Save\" the first file for later, and "
+"it will appear in the \"Compare With ...\" submenu. Then, use \"Compare With"
+"\" on the second file.\n"
+"For a 3-way merge first, \"Save\" the base file, then the branch to merge, "
+"and then \"3-way merge with base\" on the other branch which will be used as "
+"the destination.\n"
+"The same also applies to directory comparison and merge."
+msgstr ""
+"Ús de l'extensió de menú contextual:\n"
+"Per una comparació simple de dos fitxers seleccionats escolliu «Compara».\n"
+"Si l'altre fitxer és en algun altra lloc, «Alça» el primer fitxer per "
+"després i apareixerà al submenú «Compara amb...». Després, useu «Compara "
+"amb» al segon fitxer.\n"
+"Per una fusió a tres bandes, primer «Alça» el fitxer base, després la branca "
+"a fusionar, i després «Fusió a tres bandes» a l'altra branca que s'usarà com "
+"a destinació.\n"
+"El mateix també s'aplica a la comparació i fusió de directoris."
+
+#: kdiff3plugin.cpp:279
+#, fuzzy
+#| msgid "About KDiff3 menu plugin ..."
+msgid "About KDiff3 Menu Plugin"
+msgstr "Quant al connector del menú del KDiff3..."

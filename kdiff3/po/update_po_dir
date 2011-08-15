@@ -48,6 +48,13 @@ for i in `cat subdirs` ; do
       fi
       rm kdiff3plugin_$i.po
 
+      # Same for the kdiff3fileitemactionplugin.po-file
+      wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/extragear-utils/kdiff3fileitemactionplugin.po -O kdiff3fileitemactionplugin_$i.po
+      if [ -s kdiff3fileitemactionplugin_$i.po ]; then
+         cp kdiff3fileitemactionplugin_$i.po $i/kdiff3fileitemactionplugin.po    
+      fi
+      rm kdiff3fileitemactionplugin_$i.po
+      
       # Create qm-files
       # The qm files are only needed for the qt-only version, not for the KDE-version.
       wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/kdelibs/kdelibs4.po -O kdelibs_$i.po

@@ -1,0 +1,3233 @@
+# Translation of kdiff3.po to Catalan
+# Copyright (C) 2011 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2 or later
+#
+# Joan Maspons <joanmaspons@gmail.com>, 2011.
+# Josep Ma. Ferrer <txemaq@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2011-08-02 05:07+0200\n"
+"PO-Revision-Date: 2011-03-07 01:12+0100\n"
+"Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+
+#: kreplacements/kreplacements.h:105
+msgid "Continue"
+msgstr "Continua"
+
+#: kreplacements/kreplacements.h:106 kreplacements/kreplacements.cpp:158
+#: kreplacements/kreplacements.cpp:189 smalldialogs.cpp:512
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#: kreplacements/kreplacements.h:107 kreplacements/kreplacements.cpp:631
+msgid "Quit"
+msgstr "Ix"
+
+#: kreplacements/kreplacements.cpp:177 kreplacements/kreplacements.cpp:339
+msgid "Ok"
+msgstr "D'acord"
+
+#: kreplacements/kreplacements.cpp:181 kreplacements/kreplacements.cpp:715
+msgid "Help"
+msgstr "Ajuda"
+
+#: kreplacements/kreplacements.cpp:185
+msgid "Defaults"
+msgstr "Valors per defecte"
+
+#. i18n: file: kdiff3_shell.rc:4
+#. i18n: ectx: Menu (file)
+#: kreplacements/kreplacements.cpp:296 rc.cpp:14
+msgid "&File"
+msgstr "&Fitxer"
+
+#: kreplacements/kreplacements.cpp:297
+msgid "&Edit"
+msgstr "&Edita"
+
+#. i18n: file: kdiff3_shell.rc:7
+#. i18n: ectx: Menu (directory)
+#: kreplacements/kreplacements.cpp:298 rc.cpp:17
+msgid "&Directory"
+msgstr "&Directori"
+
+#. i18n: file: kdiff3_shell.rc:50
+#. i18n: ectx: Menu (movement)
+#: kreplacements/kreplacements.cpp:301 rc.cpp:26
+msgid "&Movement"
+msgstr "&Moviment"
+
+#. i18n: file: kdiff3_shell.rc:61
+#. i18n: ectx: Menu (diff)
+#: kreplacements/kreplacements.cpp:302 rc.cpp:29
+msgid "D&iffview"
+msgstr "Vista de d&iferències"
+
+#. i18n: file: kdiff3_shell.rc:73
+#. i18n: ectx: Menu (merge)
+#: kreplacements/kreplacements.cpp:303 rc.cpp:32
+msgid "&Merge"
+msgstr "&Fusió"
+
+#. i18n: file: kdiff3_shell.rc:95
+#. i18n: ectx: Menu (window)
+#: kreplacements/kreplacements.cpp:304 rc.cpp:35
+msgid "&Window"
+msgstr "&Finestra"
+
+#: kreplacements/kreplacements.cpp:305
+msgid "&Settings"
+msgstr "A&rranjament"
+
+#: kreplacements/kreplacements.cpp:306
+msgid "&Help"
+msgstr "A&juda"
+
+#: kreplacements/kreplacements.cpp:353
+msgid "&About"
+msgstr "&Quant a"
+
+#: kreplacements/kreplacements.cpp:369
+msgid "A&uthor"
+msgstr "A&utor"
+
+#: kreplacements/kreplacements.cpp:383
+msgid "&Thanks To"
+msgstr "&Gràcies a"
+
+#. i18n: file: kdiff3_shell.rc:30
+#. i18n: ectx: Menu (dir_current_merge_menu)
+#: kreplacements/kreplacements.cpp:488 kreplacements/kreplacements.cpp:497
+#: rc.cpp:20
+msgid "Current Item Merge Operation"
+msgstr "Operació de fusió de l'element actual"
+
+#. i18n: file: kdiff3_shell.rc:38
+#. i18n: ectx: Menu (dir_current_sync_menu)
+#: kreplacements/kreplacements.cpp:489 kreplacements/kreplacements.cpp:498
+#: rc.cpp:23
+msgid "Current Item Sync Operation"
+msgstr "Operació de sincronització de l'element actual"
+
+#: kreplacements/kreplacements.cpp:597
+msgid "Open"
+msgstr "Obri"
+
+#: kreplacements/kreplacements.cpp:606
+msgid "Save"
+msgstr "Alça"
+
+#: kreplacements/kreplacements.cpp:614 kdiff3.cpp:720
+msgid "Save As..."
+msgstr "Alça com a..."
+
+#: kreplacements/kreplacements.cpp:623
+msgid "Print..."
+msgstr "Imprimeix..."
+
+#: kreplacements/kreplacements.cpp:639
+msgid "Cut"
+msgstr "Talla"
+
+#: kreplacements/kreplacements.cpp:647
+msgid "Copy"
+msgstr "Copia"
+
+#: kreplacements/kreplacements.cpp:655
+msgid "Paste"
+msgstr "Enganxa"
+
+#: kreplacements/kreplacements.cpp:663
+msgid "Select All"
+msgstr "Selecciona-ho tot"
+
+#: kreplacements/kreplacements.cpp:671
+msgid "Show Toolbar"
+msgstr "Mostra barra d'eines"
+
+#: kreplacements/kreplacements.cpp:679
+msgid "Show &Status Bar"
+msgstr "&Mostra la barra d'estat"
+
+#: kreplacements/kreplacements.cpp:687
+#, kde-format
+msgid "&Configure %1..."
+msgstr "&Configura %1..."
+
+#: kreplacements/kreplacements.cpp:699 kreplacements/kreplacements.cpp:707
+msgid "About"
+msgstr "Quant a"
+
+#: kreplacements/kreplacements.cpp:722
+msgid "Find"
+msgstr "Cerca"
+
+#: kreplacements/kreplacements.cpp:730
+msgid "Find Next"
+msgstr "Cerca el següent"
+
+#: kreplacements/kreplacements.cpp:750
+msgid "Select Font"
+msgstr "Tria el tipus de lletra"
+
+#: kreplacements/kreplacements.cpp:788 optiondialog.cpp:1676
+msgid ""
+"You selected a variable width font.\n"
+"\n"
+"Because this program doesn't handle variable width fonts\n"
+"correctly, you might experience problems while editing.\n"
+"\n"
+"Do you want to continue or do you want to select another font."
+msgstr ""
+"Heu seleccionat un tipus de lletra d'amplada variable.\n"
+"\n"
+"Com que este programa no usa correctament tipus de lletra\n"
+"d'amplada variable, podríeu experimentar problemes mentre editeu.\n"
+"\n"
+"Voleu continuar o seleccionar un altre tipus de lletra?"
+
+#: kreplacements/kreplacements.cpp:792
+msgid "Incompatible font."
+msgstr "Tipus de lletra incompatible."
+
+#: kreplacements/kreplacements.cpp:793
+msgid "Continue at my own risk"
+msgstr "Continua sota la meua responsabilitat"
+
+#: kreplacements/kreplacements.cpp:793
+msgid "Select another font"
+msgstr "Tria un altre tipus de lletra"
+
+#: kreplacements/kreplacements.cpp:1134
+msgid "For more documentation, see the help-menu or the subdirectory doc."
+msgstr "Per més documentació, vegeu el menú «Ajuda» o el subdirectori doc."
+
+#: kreplacements/kreplacements.cpp:1137
+msgid "KDiff3-Usage"
+msgstr "Ús del KDiff3"
+
+#: kreplacements/kreplacements.cpp:1137
+msgid "Ignore"
+msgstr "Ignora"
+
+#: kreplacements/kreplacements.cpp:1137
+msgid "Exit"
+msgstr "Ix"
+
+#: diff.cpp:251
+msgid "Writing clipboard data to temp file failed."
+msgstr "Ha fallat l'escriptura de dades del porta-retalls al fitxer temporal."
+
+#: diff.cpp:255
+msgid "From Clipboard"
+msgstr "Des del porta-retalls"
+
+#: diff.cpp:471
+msgid "Expecting space after closing quotation mark."
+msgstr ""
+
+#: diff.cpp:474
+msgid "Not matching quotation marks."
+msgstr ""
+
+#: diff.cpp:496
+msgid "Unexpected quotation mark within argument."
+msgstr ""
+
+#: diff.cpp:503
+msgid "No program specified."
+msgstr ""
+
+#: diff.cpp:605
+#, kde-format
+msgid ""
+"Preprocessing possibly failed. Check this command:\n"
+"\n"
+"  %1\n"
+"\n"
+"The preprocessing command will be disabled now."
+msgstr ""
+"Pot ser que el preprocessament haja fallat. Comproveu esta orde:\n"
+"\n"
+"  %1\n"
+"\n"
+"L'orde de preprocessament es deshabilitarà ara."
+
+#: diff.cpp:653
+#, kde-format
+msgid ""
+"The line-matching-preprocessing possibly failed. Check this command:\n"
+"\n"
+"  %1\n"
+"\n"
+"The line-matching-preprocessing command will be disabled now."
+msgstr ""
+"Pot ser que el preprocessament de l'encaix de línies haja fallat. Comproveu "
+"esta orde:\n"
+"\n"
+"  %1\n"
+"\n"
+"Ara es deshabilitarà l'orde de preprocessament d'encaix de línies."
+
+#: diff.cpp:1776 diff.cpp:1790
+msgid ""
+"Data loss error:\n"
+"If it is reproducible please contact the author.\n"
+msgstr ""
+"Error de pèrdua de dades:\n"
+"Per favor, si és replicable contacteu amb l'autor.\n"
+
+#: diff.cpp:1778 diff.cpp:1792
+msgid "Severe Internal Error"
+msgstr "Error intern sever"
+
+#: directorymergewindow.cpp:136
+msgid "Mix of links and normal files."
+msgstr "Barreja d'enllaços i fitxers normals."
+
+#: directorymergewindow.cpp:143
+msgid "Link: "
+msgstr "Enllaç: "
+
+#: directorymergewindow.cpp:151
+msgid "Size. "
+msgstr "Mida. "
+
+#: directorymergewindow.cpp:164 directorymergewindow.cpp:174
+msgid "Date & Size: "
+msgstr "Data i mida: "
+
+#: directorymergewindow.cpp:184 directorymergewindow.cpp:190
+#, kde-format
+msgid "Creating temp copy of %1 failed."
+msgstr "Ha fallat la creació de la copia temporal de %1."
+
+#: directorymergewindow.cpp:201 directorymergewindow.cpp:209
+#, kde-format
+msgid "Opening %1 failed."
+msgstr "Ha fallat l'obertura de %1."
+
+#: directorymergewindow.cpp:213
+msgid "Comparing file..."
+msgstr "S'està comparant el fitxer..."
+
+#: directorymergewindow.cpp:223 directorymergewindow.cpp:229
+#, kde-format
+msgid "Error reading from %1"
+msgstr "Error llegint des de %1"
+
+#: directorymergewindow.cpp:358
+msgid "Name"
+msgstr "Nom"
+
+#: directorymergewindow.cpp:358
+msgid "Operation"
+msgstr "Operació"
+
+#: directorymergewindow.cpp:358
+msgid "Status"
+msgstr "Estat"
+
+#: directorymergewindow.cpp:359
+msgid "Unsolved"
+msgstr "No resolt"
+
+#: directorymergewindow.cpp:359
+msgid "Solved"
+msgstr "Resolt"
+
+#: directorymergewindow.cpp:359
+msgid "Nonwhite"
+msgstr "No blanc"
+
+#: directorymergewindow.cpp:359
+msgid "White"
+msgstr "Blanc"
+
+#: directorymergewindow.cpp:388
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort "
+"the merge and rescan the directory?"
+msgstr ""
+"Actualment esteu fent una fusió de directoris. Segur que voleu interrompre "
+"la fusió i tornar a explorar el directori?"
+
+#: directorymergewindow.cpp:389 mergeresultwindow.cpp:305 kdiff3.cpp:655
+#: kdiff3.cpp:665 kdiff3.cpp:677 pdiff.cpp:1079 pdiff.cpp:1813 pdiff.cpp:1823
+msgid "Warning"
+msgstr "Atenció"
+
+#: directorymergewindow.cpp:390 directorymergewindow.cpp:2965
+msgid "Rescan"
+msgstr "Torna a explorar"
+
+#: directorymergewindow.cpp:391 pdiff.cpp:1081
+msgid "Continue Merging"
+msgstr "Continua fusionant"
+
+#: directorymergewindow.cpp:548
+msgid "Opening of directories failed:"
+msgstr "Ha fallat l'obertura dels directoris:"
+
+#: directorymergewindow.cpp:551
+#, kde-format
+msgid "Dir A \"%1\" does not exist or is not a directory.\n"
+msgstr "El directori A «%1» no existeix o no és un directori.\n"
+
+#: directorymergewindow.cpp:554
+#, kde-format
+msgid "Dir B \"%1\" does not exist or is not a directory.\n"
+msgstr "El directori B «%1» no existeix o no és un directori.\n"
+
+#: directorymergewindow.cpp:557
+#, kde-format
+msgid "Dir C \"%1\" does not exist or is not a directory.\n"
+msgstr "El directori C «%1» no existeix o no és un directori.\n"
+
+#: directorymergewindow.cpp:559
+msgid "Directory Open Error"
+msgstr "Error en obrir el directori"
+
+#: directorymergewindow.cpp:567
+msgid ""
+"The destination directory must not be the same as A or B when three "
+"directories are merged.\n"
+"Check again before continuing."
+msgstr ""
+"Quan es fusionen tres directoris, el directori de destí ha de ser diferent "
+"que l'A o el B.\n"
+"Torneu-ho a comprovar avanç de continuar."
+
+#: directorymergewindow.cpp:569
+msgid "Parameter Warning"
+msgstr "Alerta de paràmetres"
+
+#: directorymergewindow.cpp:574
+msgid "Scanning directories..."
+msgstr "S'estan explorant el directoris..."
+
+#: directorymergewindow.cpp:607
+msgid "Reading Directory A"
+msgstr "S'està llegint el directori A"
+
+#: directorymergewindow.cpp:629
+msgid "Reading Directory B"
+msgstr "S'està llegint el directori B"
+
+#: directorymergewindow.cpp:651
+msgid "Reading Directory C"
+msgstr "S'està llegint el directori C"
+
+#: directorymergewindow.cpp:677
+msgid "Some subdirectories were not readable in"
+msgstr "Alguns subdirectoris no eren llegibles a"
+
+#: directorymergewindow.cpp:682
+msgid "Check the permissions of the subdirectories."
+msgstr "Comproveu els permisos dels subdirectoris."
+
+#: directorymergewindow.cpp:721 kdiff3.cpp:620 kdiff3.cpp:712 kdiff3.cpp:737
+#: kdiff3.cpp:1022 kdiff3.cpp:1043 pdiff.cpp:1161 pdiff.cpp:1233
+#: pdiff.cpp:1271 pdiff.cpp:1287 pdiff.cpp:1317 pdiff.cpp:1328
+msgid "Ready."
+msgstr "Preparat."
+
+#: directorymergewindow.cpp:735
+msgid "Directory Comparison Status"
+msgstr "Estat de la comparació de carpetes"
+
+#: directorymergewindow.cpp:736
+msgid "Number of subdirectories:"
+msgstr "Nombre de subdirectoris:"
+
+#: directorymergewindow.cpp:737
+msgid "Number of equal files:"
+msgstr "Nombre de fitxers iguals:"
+
+#: directorymergewindow.cpp:738
+msgid "Number of different files:"
+msgstr "Nombre de fitxers diferents:"
+
+#: directorymergewindow.cpp:741
+msgid "Number of manual merges:"
+msgstr "Nombre de fusions manuals:"
+
+#: directorymergewindow.cpp:912
+msgid "This affects all merge operations."
+msgstr "Això afecta totes les operacions de fusió."
+
+#: directorymergewindow.cpp:913
+msgid "Changing All Merge Operations"
+msgstr "S'estan canviant totes les operacions de fusionat"
+
+#: directorymergewindow.cpp:1312
+msgid "Processing "
+msgstr "S'està processant "
+
+#: directorymergewindow.cpp:1736 directorymergewindow.cpp:1742
+msgid "To do."
+msgstr "Pendent."
+
+#: directorymergewindow.cpp:1810 directorymergewindow.cpp:2996
+msgid "Copy A to B"
+msgstr "Copia A a B"
+
+#: directorymergewindow.cpp:1811 directorymergewindow.cpp:2997
+msgid "Copy B to A"
+msgstr "Copia B a A"
+
+#: directorymergewindow.cpp:1812 directorymergewindow.cpp:2998
+msgid "Delete A"
+msgstr "Esborra A"
+
+#: directorymergewindow.cpp:1813 directorymergewindow.cpp:2999
+msgid "Delete B"
+msgstr "Esborra B"
+
+#: directorymergewindow.cpp:1814
+msgid "Delete A & B"
+msgstr "Esborra A i B"
+
+#: directorymergewindow.cpp:1815 directorymergewindow.cpp:3001
+msgid "Merge to A"
+msgstr "Fusiona a A"
+
+#: directorymergewindow.cpp:1816 directorymergewindow.cpp:3002
+msgid "Merge to B"
+msgstr "Fusiona a B"
+
+#: directorymergewindow.cpp:1817
+msgid "Merge to A & B"
+msgstr "Fusiona a A i B"
+
+#: directorymergewindow.cpp:1821 directorymergewindow.cpp:2993
+msgid "Delete (if exists)"
+msgstr "Esborra (si existeix)"
+
+#: directorymergewindow.cpp:1822 directorymergewindow.cpp:1823
+#: directorymergewindow.cpp:2992 smalldialogs.cpp:110 optiondialog.cpp:869
+msgid "Merge"
+msgstr "Fusiona"
+
+#: directorymergewindow.cpp:1822 directorymergewindow.cpp:1823
+msgid "Merge (manual)"
+msgstr "Fusiona (manualment)"
+
+#: directorymergewindow.cpp:1824
+msgid "Error: Conflicting File Types"
+msgstr "Error: tipus de fitxer en conflicte"
+
+#: directorymergewindow.cpp:1825
+msgid "Error: Changed and Deleted"
+msgstr "Error: canviat i esborrat"
+
+#: directorymergewindow.cpp:1826
+msgid "Error: Dates are equal but files are not."
+msgstr "Error: les dates són iguals però els fitxers no."
+
+#: directorymergewindow.cpp:1852 directorymergewindow.cpp:1881
+#: directorymergewindow.cpp:1906
+msgid "This operation is currently not possible."
+msgstr "Actualment esta opció no és possible."
+
+#: directorymergewindow.cpp:1852 directorymergewindow.cpp:1881
+#: directorymergewindow.cpp:1906 directorymergewindow.cpp:2174
+msgid "Operation Not Possible"
+msgstr "Operació no possible"
+
+#: directorymergewindow.cpp:1945
+msgid ""
+"This should never happen: \n"
+"\n"
+"mergeResultSaved: m_pMFI=0\n"
+"\n"
+"If you know how to reproduce this, please contact the program author."
+msgstr ""
+"Això no hauria de passar mai: \n"
+"\n"
+"mergeResultSaved: m_pMFI=0\n"
+"\n"
+"Per favor, si sabeu com replicar això contacteu amb l'autor del programa."
+
+#: directorymergewindow.cpp:1945
+msgid "Program Error"
+msgstr "Error del programa"
+
+#: directorymergewindow.cpp:1956
+msgid "An error occurred while copying.\n"
+msgstr "Hi ha hagut un error en copiar.\n"
+
+#: directorymergewindow.cpp:1956 directorymergewindow.cpp:2025
+#: directorymergewindow.cpp:2057 directorymergewindow.cpp:2105
+#: directorymergewindow.cpp:2114 directorymergewindow.cpp:2123
+#: directorymergewindow.cpp:2374
+msgid "Error"
+msgstr "Error"
+
+#: directorymergewindow.cpp:1957 directorymergewindow.cpp:2375
+msgid "Merge Error"
+msgstr "Error de fusionat"
+
+#: directorymergewindow.cpp:1962 directorymergewindow.cpp:2380
+msgid "Error."
+msgstr "Error."
+
+#: directorymergewindow.cpp:1967 directorymergewindow.cpp:2272
+#: directorymergewindow.cpp:2312
+msgid "Done."
+msgstr "Fet."
+
+#: directorymergewindow.cpp:1990
+msgid "Not saved."
+msgstr "No alçat."
+
+#: directorymergewindow.cpp:2025
+msgid "Unknown merge operation. (This must never happen!)"
+msgstr "Operació de fusionat desconeguda. (Això no hauria de passar mai!)"
+
+#: directorymergewindow.cpp:2057
+msgid "Unknown merge operation."
+msgstr "Operació de fusionat desconeguda."
+
+#: directorymergewindow.cpp:2072
+msgid ""
+"The merge is about to begin.\n"
+"\n"
+"Choose \"Do it\" if you have read the instructions and know what you are "
+"doing.\n"
+"Choosing \"Simulate it\" will tell you what would happen.\n"
+"\n"
+"Be aware that this program still has beta status and there is NO WARRANTY "
+"whatsoever! Make backups of your vital data!"
+msgstr ""
+"La fusió està a punt de començar.\n"
+"\n"
+"Escolliu «Fes-ho» si heu llegit les instruccions i sabeu que esteu fent.\n"
+"Si escolliu «Simula-ho» veureu què passaria.\n"
+"\n"
+"Sigueu conscient que este programa encara està en fase de proves i no hi ha "
+"CAP GARANTIA! Feu copies de seguretat de les vostres dades vitals!"
+
+#: directorymergewindow.cpp:2077
+msgid "Starting Merge"
+msgstr "S'està iniciant la fusió"
+
+#: directorymergewindow.cpp:2078
+msgid "Do It"
+msgstr "Fes-ho"
+
+#: directorymergewindow.cpp:2079
+msgid "Simulate It"
+msgstr "Simula-ho"
+
+#: directorymergewindow.cpp:2105
+msgid ""
+"The highlighted item has a different type in the different directories. "
+"Select what to do."
+msgstr ""
+"L'element ressaltat té un tipus diferent als diferents directoris. "
+"Seleccioneu què fer."
+
+#: directorymergewindow.cpp:2114
+msgid ""
+"The modification dates of the file are equal but the files are not. Select "
+"what to do."
+msgstr ""
+"Les dates de modificació dels fitxers són iguals però els fitxers no ho són. "
+"Seleccioneu què fer."
+
+#: directorymergewindow.cpp:2123
+msgid ""
+"The highlighted item was changed in one directory and deleted in the other. "
+"Select what to do."
+msgstr ""
+"L'element ressaltat va ser canviat en un directori i esborrat a l'altre. "
+"Seleccioneu què fer."
+
+#: directorymergewindow.cpp:2174
+msgid ""
+"This operation is currently not possible because directory merge is "
+"currently running."
+msgstr ""
+"Actualment esta operació no és possible perquè s'està a mig procés de fusió."
+
+#: directorymergewindow.cpp:2234
+msgid ""
+"There was an error in the last step.\n"
+"Do you want to continue with the item that caused the error or do you want "
+"to skip this item?"
+msgstr ""
+"Hi ha hagut un error en l'últim pas.\n"
+"Voleu continuar amb l'element que ha causat l'error o voleu ometre'l?"
+
+#: directorymergewindow.cpp:2236
+msgid "Continue merge after an error"
+msgstr "Després d'un error continua fusionant"
+
+#: directorymergewindow.cpp:2237
+msgid "Continue With Last Item"
+msgstr "Continua amb l'últim element"
+
+#: directorymergewindow.cpp:2238
+msgid "Skip Item"
+msgstr "Omet l'element"
+
+#: directorymergewindow.cpp:2272
+msgid "Skipped."
+msgstr "S'ha omés."
+
+#: directorymergewindow.cpp:2279 directorymergewindow.cpp:2493
+msgid "In progress..."
+msgstr "En curs..."
+
+#: directorymergewindow.cpp:2327
+msgid "Merge operation complete."
+msgstr "Operació de fusionat completada."
+
+#: directorymergewindow.cpp:2327 directorymergewindow.cpp:2330
+msgid "Merge Complete"
+msgstr "Fusió completada"
+
+#: directorymergewindow.cpp:2340
+msgid ""
+"Simulated merge complete: Check if you agree with the proposed operations."
+msgstr ""
+"Simulació de fusió completada: comproveu si esteu d'acord amb les operacions "
+"proposades."
+
+#: directorymergewindow.cpp:2374
+msgid "An error occurred. Press OK to see detailed information.\n"
+msgstr "Hi ha hagut un error. Per veure informació detallada premeu d'acord.\n"
+
+#: directorymergewindow.cpp:2406
+#, kde-format
+msgid "Error: While deleting %1: Creating backup failed."
+msgstr "Error: en esborrar %1: ha fallat en crear una còpia de seguretat."
+
+#: directorymergewindow.cpp:2413
+#, kde-format
+msgid "delete directory recursively( %1 )"
+msgstr "esborra el directori recursivament( %1 )"
+
+#: directorymergewindow.cpp:2415
+#, kde-format
+msgid "delete( %1 )"
+msgstr "esborra( %1 )"
+
+#: directorymergewindow.cpp:2430
+msgid "Error: delete dir operation failed while trying to read the directory."
+msgstr ""
+"Error: l'operació d'esborrar el directori ha fallat en intentar llegir-lo."
+
+#: directorymergewindow.cpp:2449
+#, kde-format
+msgid "Error: rmdir( %1 ) operation failed."
+msgstr "Error: ha fallat l'operació d'eliminar carpeta ( %1 )."
+
+#: directorymergewindow.cpp:2459
+msgid "Error: delete operation failed."
+msgstr "Error: ha fallat l'operació d'esborrat."
+
+#: directorymergewindow.cpp:2485
+#, kde-format
+msgid "manual merge( %1, %2, %3 -> %4)"
+msgstr "fusió manual ( %1, %2, %3 -> %4)"
+
+#: directorymergewindow.cpp:2488
+msgid ""
+"     Note: After a manual merge the user should continue by pressing F7."
+msgstr ""
+"     Nota: avanç de fusionar manualment, l'usuari ha de continuar prement F7."
+
+#: directorymergewindow.cpp:2513
+#, kde-format
+msgid "Error: copy( %1 -> %2 ) failed.Deleting existing destination failed."
+msgstr ""
+"Error: ha fallat la copia ( %1 -> %2 ). L'esborrat de la destinació existent "
+"ha fallat."
+
+#: directorymergewindow.cpp:2522
+#, kde-format
+msgid "copyLink( %1 -> %2 )"
+msgstr "copia enllaç ( %1 -> %2 )"
+
+#: directorymergewindow.cpp:2533
+msgid "Error: copyLink failed: Remote links are not yet supported."
+msgstr ""
+"Error: ha fallat la copia d'enllaç: els enllaços remots encara no estan "
+"implementats."
+
+#: directorymergewindow.cpp:2539
+msgid "Error: copyLink failed."
+msgstr "Error: ha fallat la copia d'enllaç."
+
+#: directorymergewindow.cpp:2564
+#, kde-format
+msgid "copy( %1 -> %2 )"
+msgstr "copia( %1 -> %2 )"
+
+#: directorymergewindow.cpp:2590
+#, kde-format
+msgid "Error during rename( %1 -> %2 ): Cannot delete existing destination."
+msgstr ""
+"Error en reanomenar( %1 -> %2 ): no es pot esborrar la destinació existent."
+
+#: directorymergewindow.cpp:2596
+#, kde-format
+msgid "rename( %1 -> %2 )"
+msgstr "reanomena( %1 -> %2 )"
+
+#: directorymergewindow.cpp:2605
+msgid "Error: Rename failed."
+msgstr "Error: el canvi de nom ha fallat."
+
+#: directorymergewindow.cpp:2623
+#, kde-format
+msgid "Error during makeDir of %1. Cannot delete existing file."
+msgstr "Error en crear fitxer de %1. No es pot esborrar el fitxer existent."
+
+#: directorymergewindow.cpp:2639
+#, kde-format
+msgid "makeDir( %1 )"
+msgstr "crea directori( %1 )"
+
+#: directorymergewindow.cpp:2649
+msgid "Error while creating directory."
+msgstr "Error en crear el directori."
+
+#: directorymergewindow.cpp:2674 directorymergewindow.cpp:2784
+msgid "Dest"
+msgstr "Destí"
+
+#: directorymergewindow.cpp:2678 directorymergewindow.cpp:2709
+msgid "Dir"
+msgstr "Directori"
+
+#: directorymergewindow.cpp:2678
+msgid "Type"
+msgstr "Tipus"
+
+#: directorymergewindow.cpp:2678
+msgid "Size"
+msgstr "Mida"
+
+#: directorymergewindow.cpp:2679
+msgid "Attr"
+msgstr "Atributs"
+
+#: directorymergewindow.cpp:2679
+msgid "Last Modification"
+msgstr "Darrera modificació"
+
+#: directorymergewindow.cpp:2679
+msgid "Link-Destination"
+msgstr "Destí de l'enllaç"
+
+#: directorymergewindow.cpp:2709 difftextwindow.cpp:401
+msgid "File"
+msgstr "Fitxer"
+
+#: directorymergewindow.cpp:2726
+msgid "not available"
+msgstr "no disponible"
+
+#: directorymergewindow.cpp:2746
+msgid "A (Dest): "
+msgstr "A (Destí): "
+
+#: directorymergewindow.cpp:2749
+msgid "A (Base): "
+msgstr "A (Base): "
+
+#: directorymergewindow.cpp:2755
+msgid "B (Dest): "
+msgstr "B (Destí): "
+
+#: directorymergewindow.cpp:2763
+msgid "C (Dest): "
+msgstr "C (Destí): "
+
+#: directorymergewindow.cpp:2769
+msgid "Dest: "
+msgstr "Destí: "
+
+#: directorymergewindow.cpp:2836
+msgid "Save Directory Merge State As..."
+msgstr "Alça l'estat de fusió de directoris com a..."
+
+#: directorymergewindow.cpp:2959
+msgid "Start/Continue Directory Merge"
+msgstr "Comença/Continua la fusió de directoris"
+
+#: directorymergewindow.cpp:2960
+msgid "Run Operation for Current Item"
+msgstr "Executa l'operació per l'element actual"
+
+#: directorymergewindow.cpp:2961
+msgid "Compare Selected File"
+msgstr "Compara el fitxer seleccionat"
+
+#: directorymergewindow.cpp:2962
+msgid "Merge Current File"
+msgstr "Fusiona el fitxer actual"
+
+#: directorymergewindow.cpp:2962
+msgid ""
+"Merge\n"
+"File"
+msgstr ""
+"Fitxer\n"
+"Fusionat"
+
+#: directorymergewindow.cpp:2963
+msgid "Fold All Subdirs"
+msgstr "Plega tots els subdirectoris"
+
+#: directorymergewindow.cpp:2964
+msgid "Unfold All Subdirs"
+msgstr "Desplega tots els subdirectoris"
+
+#: directorymergewindow.cpp:2968
+msgid "Choose A for All Items"
+msgstr "Tria A per tots els elements"
+
+#: directorymergewindow.cpp:2969
+msgid "Choose B for All Items"
+msgstr "Tria B per tots els elements"
+
+#: directorymergewindow.cpp:2970
+msgid "Choose C for All Items"
+msgstr "Tria C per tots els elements"
+
+#: directorymergewindow.cpp:2971
+msgid "Auto-Choose Operation for All Items"
+msgstr "Tria automàticament l'operació per tots els elements"
+
+#: directorymergewindow.cpp:2972
+msgid "No Operation for All Items"
+msgstr "No hi ha cap operació per tots els elements"
+
+#: directorymergewindow.cpp:2977
+msgid "Show Identical Files"
+msgstr "Mostra els fitxers idèntics"
+
+#: directorymergewindow.cpp:2977
+msgid ""
+"Identical\n"
+"Files"
+msgstr ""
+"Fitxers\n"
+"Idèntics"
+
+#: directorymergewindow.cpp:2978
+msgid "Show Different Files"
+msgstr "Mostra els fitxers diferents"
+
+#: directorymergewindow.cpp:2979
+msgid "Show Files only in A"
+msgstr "Mostra els fitxers que només són a A"
+
+#: directorymergewindow.cpp:2979
+msgid ""
+"Files\n"
+"only in A"
+msgstr ""
+"Fitxers\n"
+"que només són a A"
+
+#: directorymergewindow.cpp:2980
+msgid "Show Files only in B"
+msgstr "Mostra els fitxers que només són a B"
+
+#: directorymergewindow.cpp:2980
+msgid ""
+"Files\n"
+"only in B"
+msgstr ""
+"Fitxers\n"
+"que només són a B"
+
+#: directorymergewindow.cpp:2981
+msgid "Show Files only in C"
+msgstr "Mostra els fitxers que només són a C"
+
+#: directorymergewindow.cpp:2981
+msgid ""
+"Files\n"
+"only in C"
+msgstr ""
+"Fitxers\n"
+"que només són a C"
+
+#: directorymergewindow.cpp:2985
+msgid "Compare Explicitly Selected Files"
+msgstr "Compara els fitxers seleccionats explícitament"
+
+#: directorymergewindow.cpp:2986
+msgid "Merge Explicitly Selected Files"
+msgstr "Fusiona els fitxers seleccionats explícitament"
+
+#: directorymergewindow.cpp:2988 directorymergewindow.cpp:2995
+msgid "Do Nothing"
+msgstr "No faces res"
+
+#: directorymergewindow.cpp:2989
+msgid "A"
+msgstr "A"
+
+#: directorymergewindow.cpp:2990
+msgid "B"
+msgstr "B"
+
+#: directorymergewindow.cpp:2991
+msgid "C"
+msgstr "C"
+
+#: directorymergewindow.cpp:3000
+msgid "Delete A && B"
+msgstr "Esborra A i B"
+
+#: directorymergewindow.cpp:3003
+msgid "Merge to A && B"
+msgstr "Fusiona a A i B"
+
+#: main.cpp:74 main.cpp:76
+msgid "Ignored. (User defined.)"
+msgstr "Ignorat. (Definit per l'usuari)"
+
+#: main.cpp:162
+msgid "kdiff3"
+msgstr "kdiff3"
+
+#: main.cpp:164
+msgid "Tool for Comparison and Merge of Files and Directories"
+msgstr "Eina per comparar i fusionar fitxers i directoris"
+
+#: main.cpp:165
+#, fuzzy
+#| msgid "(c) 2002-2009 Joachim Eibl"
+msgid "(c) 2002-2011 Joachim Eibl"
+msgstr "(c) 2002-2009 Joachim Eibl"
+
+#: main.cpp:172 kdiff3_part.cpp:303
+msgid "Joachim Eibl"
+msgstr "Joachim Eibl"
+
+#: main.cpp:173
+msgid "Eike Sauer"
+msgstr "Eike Sauer"
+
+#: main.cpp:173
+msgid "Bugfixes, Debian package maintainer"
+msgstr "Correcció d'errades, mantenidor del paquet de Debian"
+
+#: main.cpp:174
+msgid "Sebastien Fricker"
+msgstr "Sebastien Fricker"
+
+#: main.cpp:174
+msgid "Windows installer"
+msgstr "Instal·lador de Windows"
+
+#: main.cpp:175
+msgid "Stephan Binner"
+msgstr "Stephan Binner"
+
+#: main.cpp:175
+msgid "i18n-help"
+msgstr "Ajuda amb l'i18n"
+
+#: main.cpp:176
+msgid "Stefan Partheymueller"
+msgstr "Stefan Partheymueller"
+
+#: main.cpp:176
+msgid "Clipboard-patch"
+msgstr "Pedaç del porta-retalls"
+
+#: main.cpp:177
+msgid "David Faure"
+msgstr "David Faure"
+
+#: main.cpp:177
+msgid "KIO-Help"
+msgstr "Ajuda amb KIO"
+
+#: main.cpp:178
+msgid "Bernd Gehrmann"
+msgstr "Bernd Gehrmann"
+
+#: main.cpp:178
+msgid "Class CvsIgnoreList from Cervisia"
+msgstr "Classe CvsIgnoreList del Cervisia"
+
+#: main.cpp:179
+msgid "Andre Woebbeking"
+msgstr "Andre Woebbeking"
+
+#: main.cpp:179
+msgid "Class StringMatcher"
+msgstr "Classe StringMatcher"
+
+#: main.cpp:180
+msgid "Michael Denio"
+msgstr "Michael Denio"
+
+#: main.cpp:180
+msgid "Directory Equality-Coloring patch"
+msgstr "Pedaç per acolorir les igualtats de directoris"
+
+#: main.cpp:181
+msgid "Manfred Koehler"
+msgstr "Manfred Koehler"
+
+#: main.cpp:181
+msgid "Fix for slow startup on Windows"
+msgstr "Solució a l'inici lent en Windows"
+
+#: main.cpp:182
+msgid "Sergey Zorin"
+msgstr "Sergey Zorin"
+
+#: main.cpp:182
+msgid "Diff Ext for Windows"
+msgstr "Diff Ext per Windows"
+
+#: main.cpp:183
+msgid "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
+msgstr "Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"
+
+#: main.cpp:183
+msgid "GNU-Diffutils"
+msgstr "GNU-Diffutils"
+
+#: main.cpp:184
+msgid "Tino Boellsterling, Timothy Mee"
+msgstr "Tino Boellsterling, Timothy Mee"
+
+#: main.cpp:184
+msgid "Intensive test, use and feedback"
+msgstr "Proves intensives, ús i comentaris"
+
+#: main.cpp:185
+msgid "Michael Schmidt"
+msgstr "Michael Schmidt"
+
+#: main.cpp:185
+msgid "Mac support"
+msgstr "Compatibilitat amb Mac"
+
+#: main.cpp:186
+msgid "Valentin Rusu"
+msgstr "Valentin Rusu"
+
+#: main.cpp:186 main.cpp:187
+msgid "KDE4 porting"
+msgstr "Adaptació al KDE 4"
+
+#: main.cpp:187
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: main.cpp:188
+msgid "Silvan Scherrer"
+msgstr ""
+
+#: main.cpp:188
+msgid "OS2 port"
+msgstr ""
+
+#: main.cpp:190
+msgid "+ Many thanks to those who reported bugs and contributed ideas!"
+msgstr "+ Moltes gràcies a tothom qui ha informat d'errors i ha aportat idees!"
+
+#: main.cpp:196
+msgid "Merge the input."
+msgstr "Fusiona l'entrada."
+
+#: main.cpp:197
+msgid "Explicit base file. For compatibility with certain tools."
+msgstr "Fitxer base explicit. Per compatibilitat amb certes eines."
+
+#: main.cpp:198
+msgid "Output file. Implies -m. E.g.: -o newfile.txt"
+msgstr "Fitxer d'eixida. Implica -m P. ex.: -o fitxernou.txt"
+
+#: main.cpp:199
+msgid "Output file, again. (For compatibility with certain tools.)"
+msgstr "Fitxer d'eixida, un altre cop. (Per compatibilitat amb certes eines)"
+
+#: main.cpp:200
+msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
+msgstr ""
+"Sense IGU si tots els conflictes es poden resoldre automàticament. (Cal -o "
+"fitxer)"
+
+#: main.cpp:201
+msgid "Don't solve conflicts automatically. (For compatibility...)"
+msgstr "No resolguis els conflictes automàticament. (Per compatibilitat...)"
+
+#: main.cpp:202
+msgid "Visible name replacement for input file 1 (base)."
+msgstr "Reemplaçament de nom visible pel fitxer d'eixida 1 (base)."
+
+#: main.cpp:203
+msgid "Visible name replacement for input file 2."
+msgstr "Reemplaçament de nom visible pel fitxer d'eixida 2."
+
+#: main.cpp:204
+msgid "Visible name replacement for input file 3."
+msgstr "Reemplaçament de nom visible pel fitxer d'eixida 3."
+
+#: main.cpp:205
+msgid "Alternative visible name replacement. Supply this once for every input."
+msgstr ""
+"Reemplaçament de nom visible alternatiu. Proporcioneu-lo per cada eixida."
+
+#: main.cpp:206
+msgid ""
+"Override a config setting. Use once for every setting. E.g.: --cs "
+"\"AutoAdvance=1\""
+msgstr ""
+"Sobreescriu l'arranjament de la configuració. Useu-ho per cada arranjament. "
+"P. ex.: --cs \"AutoAdvance=1\""
+
+#: main.cpp:207
+msgid "Show list of config settings and current values."
+msgstr "Mostra una llista d'arranjaments de configuració i el valor actual."
+
+#: main.cpp:208
+msgid "Use a different config file."
+msgstr "Usa un fitxer de configuració diferent."
+
+#: main.cpp:211
+msgid "file1 to open (base, if not specified via --base)"
+msgstr "fitxer 1 a obrir (base, si no s'especifica via --base)"
+
+#: main.cpp:212
+msgid "file2 to open"
+msgstr "fitxer 2 a obrir"
+
+#: main.cpp:213
+msgid "file3 to open"
+msgstr "fitxer 3 a obrir"
+
+#: mergeresultwindow.cpp:152 mergeresultwindow.cpp:976
+#: mergeresultwindow.cpp:990 mergeresultwindow.cpp:1002
+#: mergeresultwindow.cpp:1014
+#, kde-format
+msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
+msgstr ""
+"Número de conflictes sense resoldre pendents: %1 (dels quals %2 són espais "
+"en blanc)"
+
+#: mergeresultwindow.cpp:303
+msgid ""
+"The output has been modified.\n"
+"If you continue your changes will be lost."
+msgstr ""
+"S'ha modificat l'eixida.\n"
+"Si continueu es perdran els canvis."
+
+#: mergeresultwindow.cpp:834 pdiff.cpp:532
+msgid "All input files are binary equal."
+msgstr "Tots els fitxers d'entrada són binàriament iguals."
+
+#: mergeresultwindow.cpp:836
+msgid "All input files contain the same text."
+msgstr "Tots els fitxers d'entrada contenen el mateix text."
+
+#: mergeresultwindow.cpp:838 mergeresultwindow.cpp:840
+#: mergeresultwindow.cpp:842 pdiff.cpp:536 pdiff.cpp:538 pdiff.cpp:540
+#, kde-format
+msgid "Files %1 and %2 are binary equal.\n"
+msgstr "Els fitxers %1 i %2 són binàriament iguals.\n"
+
+#: mergeresultwindow.cpp:839 mergeresultwindow.cpp:841
+#: mergeresultwindow.cpp:843
+#, kde-format
+msgid "Files %1 and %2 have equal text.\n"
+msgstr "Els fitxers %1 i %2 tenen el mateix text.\n"
+
+#: mergeresultwindow.cpp:849
+msgid "Total number of conflicts: "
+msgstr "Nombre total de conflictes: "
+
+#: mergeresultwindow.cpp:850
+msgid ""
+"\n"
+"Nr of automatically solved conflicts: "
+msgstr ""
+"\n"
+"Núm. de conflictes resolts automàticament: "
+
+#: mergeresultwindow.cpp:851
+msgid ""
+"\n"
+"Nr of unsolved conflicts: "
+msgstr ""
+"\n"
+"Núm. de conflictes no resolts: "
+
+#: mergeresultwindow.cpp:853
+msgid "Conflicts"
+msgstr "Conflictes"
+
+#: mergeresultwindow.cpp:1728
+msgid "<No src line>"
+msgstr "<La línia no és codi>"
+
+#: mergeresultwindow.cpp:1736
+msgid "<Merge Conflict (Whitespace only)>"
+msgstr "<Conflicte de fusió (només espais en blanc)>"
+
+#: mergeresultwindow.cpp:1738 mergeresultwindow.cpp:2517
+msgid "<Merge Conflict>"
+msgstr "<Conflicte de fusió>"
+
+#: mergeresultwindow.cpp:2725
+msgid ""
+"Not all conflicts are solved yet.\n"
+"File not saved.\n"
+msgstr ""
+"Encara no s'han resolt tots els conflictes.\n"
+"El fitxer no s'ha alçat.\n"
+
+#: mergeresultwindow.cpp:2727 mergeresultwindow.cpp:2736
+msgid "Conflicts Left"
+msgstr "Conflictes pendents"
+
+#: mergeresultwindow.cpp:2734
+msgid ""
+"There is a line end style conflict. Please choose the line end style "
+"manually.\n"
+"File not saved.\n"
+msgstr ""
+"Hi ha un conflicte d'estil de finals de línia. Escolliu manualment l'estil "
+"de salt de línia.\n"
+"El fitxer no s'ha alçat.\n"
+
+#: mergeresultwindow.cpp:2748
+msgid ""
+"\n"
+"\n"
+"Creating backup failed. File not saved."
+msgstr ""
+"\n"
+"\n"
+"Ha fallat la creació de la còpia de seguretat. El fitxer no s'ha alçat."
+
+#: mergeresultwindow.cpp:2748 mergeresultwindow.cpp:2792
+msgid "File Save Error"
+msgstr "Error en alçar el fitxer"
+
+#: mergeresultwindow.cpp:2792
+msgid "Error while writing."
+msgstr "Error en escriure."
+
+#: mergeresultwindow.cpp:3122
+msgid "Output"
+msgstr "Eixida"
+
+#: mergeresultwindow.cpp:3134 mergeresultwindow.cpp:3314
+msgid "[Modified]"
+msgstr "[Modificat]"
+
+#: mergeresultwindow.cpp:3141
+msgid "Encoding for saving"
+msgstr "Codificació per alçar"
+
+#: mergeresultwindow.cpp:3149 difftextwindow.cpp:1704 difftextwindow.cpp:1737
+#: optiondialog.cpp:762
+msgid "Line end style:"
+msgstr "Estil de salt de línia:"
+
+#: mergeresultwindow.cpp:3194 difftextwindow.cpp:1737 optiondialog.cpp:767
+msgid "Unix"
+msgstr "Unix"
+
+#: mergeresultwindow.cpp:3195 difftextwindow.cpp:1737
+msgid "DOS"
+msgstr "DOS"
+
+#: mergeresultwindow.cpp:3229
+msgid "Conflict"
+msgstr "Conflicte"
+
+#: mergeresultwindow.cpp:3261 mergeresultwindow.cpp:3263
+#: mergeresultwindow.cpp:3265
+msgid "Codec from"
+msgstr "Còdec de"
+
+#: kdiff3_part.cpp:157 kdiff3_part.cpp:234
+msgid "Couldn't find files for comparison."
+msgstr "No s'han trobat fitxers per comparar."
+
+#: kdiff3_part.cpp:302
+msgid "KDiff3Part"
+msgstr "KDiff3Part"
+
+#: fileaccess.cpp:612
+msgid ""
+"While trying to make a backup, deleting an older backup failed. \n"
+"Filename: "
+msgstr ""
+"Ha fallat en esborrar una còpia de seguretat quan s'intentava fer-ne una de "
+"nova.\n"
+"Nom de fitxer: "
+
+#: fileaccess.cpp:619
+msgid ""
+"While trying to make a backup, renaming failed. \n"
+"Filenames: "
+msgstr ""
+"Ha fallat el reanomenament en intentar fer una còpia de seguretat. \n"
+"Noms de fitxer: "
+
+#: fileaccess.cpp:643
+#, kde-format
+msgid "Getting file status: %1"
+msgstr "S'està obtenint l'estat del fitxer: %1"
+
+#: fileaccess.cpp:686
+#, kde-format
+msgid "Reading file: %1"
+msgstr "S'està llegint el fitxer: %1"
+
+#: fileaccess.cpp:723
+#, kde-format
+msgid "Writing file: %1"
+msgstr "S'està escrivint el fitxer: %1"
+
+#: fileaccess.cpp:751
+msgid "Out of memory"
+msgstr "Sense memòria"
+
+#: fileaccess.cpp:786
+#, kde-format
+msgid "Making directory: %1"
+msgstr "S'està creant el directori: %1"
+
+#: fileaccess.cpp:806
+#, kde-format
+msgid "Removing directory: %1"
+msgstr "S'està eliminant el directori: %1"
+
+#: fileaccess.cpp:821
+#, kde-format
+msgid "Removing file: %1"
+msgstr "S'està eliminant el fitxer: %1"
+
+#: fileaccess.cpp:837
+#, kde-format
+msgid "Creating symbolic link: %1 -> %2"
+msgstr "S'està creant l'enllaç simbòlic: %1 -> %2"
+
+#: fileaccess.cpp:864
+#, kde-format
+msgid "Renaming file: %1 -> %2"
+msgstr "S'està reanomenant el fitxer: %1 -> %2"
+
+#: fileaccess.cpp:897
+#, kde-format
+msgid "Copying file: %1 -> %2"
+msgstr "S'està copiant el fitxer: %1 -> %2"
+
+#: fileaccess.cpp:911
+#, kde-format
+msgid ""
+"Error during file copy operation: Opening file for reading failed. Filename: "
+"%1"
+msgstr ""
+"Error durant l'operació de còpia de fitxer: ha fallat en obrir el fitxer per "
+"llegir-lo. Nom de fitxer: %1"
+
+#: fileaccess.cpp:917
+#, kde-format
+msgid ""
+"Error during file copy operation: Opening file for writing failed. Filename: "
+"%1"
+msgstr ""
+"Error durant l'operació de còpia de fitxer: ha fallat en obrir el fitxer per "
+"escriure-hi. Nom de fitxer: %1"
+
+#: fileaccess.cpp:932
+#, kde-format
+msgid "Error during file copy operation: Reading failed. Filename: %1"
+msgstr ""
+"Error durant l'operació de còpia de fitxer: ha fallat en llegir. Nom de "
+"fitxer: %1"
+
+#: fileaccess.cpp:941
+#, kde-format
+msgid "Error during file copy operation: Writing failed. Filename: %1"
+msgstr ""
+"Error durant l'operació de còpia de fitxer: ha fallat en escriure. Nom de "
+"fitxer: %1"
+
+#: fileaccess.cpp:1231
+msgid "Reading directory: "
+msgstr "S'està llegint el directori: "
+
+#: fileaccess.cpp:1355
+#, kde-format
+msgid "Listing directory: %1"
+msgstr "S'està llistant el directori: %1"
+
+#: fileaccess.cpp:1489 smalldialogs.cpp:179 smalldialogs.cpp:396
+msgid "&Cancel"
+msgstr "&Cancel·la"
+
+#: difftextwindow.cpp:403
+msgid "Line"
+msgstr "Línia"
+
+#: difftextwindow.cpp:405
+msgid "Line not available"
+msgstr "Línia no disponible"
+
+#: difftextwindow.cpp:1703 difftextwindow.cpp:1736
+msgid "Encoding:"
+msgstr "Codificació:"
+
+#: difftextwindow.cpp:1759 kdiff3.cpp:831
+msgid "Top line"
+msgstr "Línia superior"
+
+#: difftextwindow.cpp:1769
+msgid "End"
+msgstr "Final"
+
+#: kdiff3.cpp:169
+msgid "Current Configuration:"
+msgstr "Configuració actual:"
+
+#: kdiff3.cpp:174
+msgid "Config Option Error:"
+msgstr "Error de l'opció de configuració:"
+
+#: kdiff3.cpp:219
+msgid "Option --auto used, but no output file specified."
+msgstr "Heu usat l'opció --auto, però no heu especificat cap fitxer d'eixida."
+
+#: kdiff3.cpp:369
+msgid "Option --auto ignored for directory comparison."
+msgstr "L'opció --auto s'ignora en comparar directoris."
+
+#: kdiff3.cpp:405
+msgid "Saving failed."
+msgstr "Ha fallat l'alçat."
+
+#: kdiff3.cpp:440 pdiff.cpp:1143 pdiff.cpp:1214
+msgid "Opening of these files failed:"
+msgstr "Ha fallat en obrir estos fitxers:"
+
+#: kdiff3.cpp:449
+msgid "File Open Error"
+msgstr "S'ha produït un error en obrir el fitxer"
+
+#: kdiff3.cpp:477
+msgid "Opens documents for comparison..."
+msgstr "Obra documents per comparar-los..."
+
+#: kdiff3.cpp:479
+msgid "Reload"
+msgstr "Recarrega"
+
+#: kdiff3.cpp:482
+msgid "Saves the merge result. All conflicts must be solved!"
+msgstr "Alça el resultat de la fusió. S'han de resoldre tots els conflictes!"
+
+#: kdiff3.cpp:484
+msgid "Saves the current document as..."
+msgstr "Alça el document actual com a..."
+
+#: kdiff3.cpp:487
+msgid "Print the differences"
+msgstr "Imprimeix les diferències"
+
+#: kdiff3.cpp:490
+msgid "Quits the application"
+msgstr "Ix de l'aplicació"
+
+#: kdiff3.cpp:492
+msgid "Cuts the selected section and puts it to the clipboard"
+msgstr "Talla la secció seleccionada i la posa al porta-retalls"
+
+#: kdiff3.cpp:494
+msgid "Copies the selected section to the clipboard"
+msgstr "Copia la secció seleccionada al porta-retalls"
+
+#: kdiff3.cpp:496
+msgid "Pastes the clipboard contents to current position"
+msgstr "Enganxa el contingut del porta-retalls a la posició actual"
+
+#: kdiff3.cpp:498
+msgid "Select everything in current window"
+msgstr "Selecciona tot el què hi ha a la finestra actual"
+
+#: kdiff3.cpp:500
+msgid "Search for a string"
+msgstr "Cerca una cadena"
+
+#: kdiff3.cpp:502
+msgid "Search again for the string"
+msgstr "Torna a cercar la cadena"
+
+#: kdiff3.cpp:507
+msgid "Enables/disables the statusbar"
+msgstr "Habilita/deshabilita la barra d'estat"
+
+#: kdiff3.cpp:511
+msgid "Configure KDiff3..."
+msgstr "Configura el KDiff3..."
+
+#: kdiff3.cpp:532
+msgid "Go to Current Delta"
+msgstr "Vés a la diferència actual"
+
+#: kdiff3.cpp:532
+msgid ""
+"Current\n"
+"Delta"
+msgstr ""
+"Diferència\n"
+"actual"
+
+#: kdiff3.cpp:534
+msgid "Go to First Delta"
+msgstr "Vés a la primera diferència"
+
+#: kdiff3.cpp:534
+msgid ""
+"First\n"
+"Delta"
+msgstr ""
+"Primera\n"
+"diferència"
+
+#: kdiff3.cpp:536
+msgid "Go to Last Delta"
+msgstr "Vés a l'última diferència"
+
+#: kdiff3.cpp:536
+msgid ""
+"Last\n"
+"Delta"
+msgstr ""
+"Última\n"
+"diferència"
+
+#: kdiff3.cpp:538
+msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
+msgstr ""
+"(Se salten les diferències d'espais en blanc quan «Mostra espais en blanc» "
+"està deshabilitat)."
+
+#: kdiff3.cpp:539
+msgid ""
+"(Does not skip white space differences even when \"Show White Space\" is "
+"disabled.)"
+msgstr ""
+"(No se salten les diferències d'espais en blanc quan «Mostra espais en "
+"blanc» està deshabilitat)."
+
+#: kdiff3.cpp:540
+msgid "Go to Previous Delta"
+msgstr "Vés a la diferència anterior"
+
+#: kdiff3.cpp:540
+msgid ""
+"Prev\n"
+"Delta"
+msgstr ""
+"Diferència\n"
+"anterior"
+
+#: kdiff3.cpp:542
+msgid "Go to Next Delta"
+msgstr "Vés a diferència següent"
+
+#: kdiff3.cpp:542
+msgid ""
+"Next\n"
+"Delta"
+msgstr ""
+"Diferència\n"
+"següent"
+
+#: kdiff3.cpp:544
+msgid "Go to Previous Conflict"
+msgstr "Vés al conflicte anterior"
+
+#: kdiff3.cpp:544
+msgid ""
+"Prev\n"
+"Conflict"
+msgstr ""
+"Conflicte\n"
+"anterior"
+
+#: kdiff3.cpp:546
+msgid "Go to Next Conflict"
+msgstr "Vés al conflicte següent"
+
+#: kdiff3.cpp:546
+msgid ""
+"Next\n"
+"Conflict"
+msgstr ""
+"Conflicte\n"
+"següent"
+
+#: kdiff3.cpp:548
+msgid "Go to Previous Unsolved Conflict"
+msgstr "Vés al conflicte no resolt anterior"
+
+#: kdiff3.cpp:548
+msgid ""
+"Prev\n"
+"Unsolved"
+msgstr ""
+"No resolt\n"
+"anterior"
+
+#: kdiff3.cpp:550
+msgid "Go to Next Unsolved Conflict"
+msgstr "Vés al conflicte no resolt següent"
+
+#: kdiff3.cpp:550
+msgid ""
+"Next\n"
+"Unsolved"
+msgstr ""
+"No resolt\n"
+"següent"
+
+#: kdiff3.cpp:552
+msgid "Select Line(s) From A"
+msgstr "Selecciona línies d'A"
+
+#: kdiff3.cpp:552
+msgid ""
+"Choose\n"
+"A"
+msgstr ""
+"Trieu\n"
+"A"
+
+#: kdiff3.cpp:553
+msgid "Select Line(s) From B"
+msgstr "Seleccion línies de B"
+
+#: kdiff3.cpp:553
+msgid ""
+"Choose\n"
+"B"
+msgstr ""
+"Trieu\n"
+"B"
+
+#: kdiff3.cpp:554
+msgid "Select Line(s) From C"
+msgstr "Seleccion línies de C"
+
+#: kdiff3.cpp:554
+msgid ""
+"Choose\n"
+"C"
+msgstr ""
+"Trieu\n"
+"C"
+
+#: kdiff3.cpp:555
+msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
+msgstr ""
+"Vés automàticament al conflicte no resolt següent després de seleccionar una "
+"font"
+
+#: kdiff3.cpp:555
+msgid ""
+"Auto\n"
+"Next"
+msgstr ""
+"Automàticament\n"
+"al següent"
+
+#: kdiff3.cpp:557
+msgid "Show Space && Tabulator Characters for Differences"
+msgstr ""
+"Mostra com a diferències els caràcters d'espai en blanc i els de tabulador "
+
+#: kdiff3.cpp:557
+msgid ""
+"White\n"
+"Characters"
+msgstr ""
+"Caràcters\n"
+"en blanc"
+
+#: kdiff3.cpp:558
+msgid "Show White Space"
+msgstr "Mostra els espais en blanc"
+
+#: kdiff3.cpp:558
+msgid ""
+"White\n"
+"Deltas"
+msgstr ""
+"Diferències\n"
+"d'espais"
+
+#: kdiff3.cpp:560
+msgid "Show Line Numbers"
+msgstr "Mostra els números de les línies"
+
+#: kdiff3.cpp:560
+msgid ""
+"Line\n"
+"Numbers"
+msgstr ""
+"Números\n"
+"de línia"
+
+#: kdiff3.cpp:561
+msgid "Choose A Everywhere"
+msgstr "Trieu A a tot arreu"
+
+#: kdiff3.cpp:562
+msgid "Choose B Everywhere"
+msgstr "Trieu B a tot arreu"
+
+#: kdiff3.cpp:563
+msgid "Choose C Everywhere"
+msgstr "Trieu C a tot arreu"
+
+#: kdiff3.cpp:564
+msgid "Choose A for All Unsolved Conflicts"
+msgstr "Trieu A a tots els conflictes no resolts"
+
+#: kdiff3.cpp:565
+msgid "Choose B for All Unsolved Conflicts"
+msgstr "Trieu B a tots els conflictes no resolts"
+
+#: kdiff3.cpp:566
+msgid "Choose C for All Unsolved Conflicts"
+msgstr "Trieu C a tots els conflictes no resolts"
+
+#: kdiff3.cpp:567
+msgid "Choose A for All Unsolved Whitespace Conflicts"
+msgstr "Trieu A a tots els conflictes d'espais en blanc no resolts"
+
+#: kdiff3.cpp:568
+msgid "Choose B for All Unsolved Whitespace Conflicts"
+msgstr "Trieu B a tots els conflictes d'espais en blanc no resolts"
+
+#: kdiff3.cpp:569
+msgid "Choose C for All Unsolved Whitespace Conflicts"
+msgstr "Trieu C a tots els conflictes d'espais en blanc no resolts"
+
+#: kdiff3.cpp:570
+msgid "Automatically Solve Simple Conflicts"
+msgstr "Resol automàticament els conflictes senzills"
+
+#: kdiff3.cpp:571
+msgid "Set Deltas to Conflicts"
+msgstr "Estableix les diferències com a conflictes"
+
+#: kdiff3.cpp:572
+msgid "Run Regular Expression Auto Merge"
+msgstr "Executa la fusió automàtica d'expressions regulars"
+
+#: kdiff3.cpp:573
+msgid "Automatically Solve History Conflicts"
+msgstr "Resol automàticament els conflictes cronològics"
+
+#: kdiff3.cpp:574
+msgid "Split Diff At Selection"
+msgstr "Divideix les diferències a la selecció"
+
+#: kdiff3.cpp:575
+msgid "Join Selected Diffs"
+msgstr "Uneix les diferències seleccionades"
+
+#: kdiff3.cpp:577
+msgid "Show Window A"
+msgstr "Mostra la finestra A"
+
+#: kdiff3.cpp:578
+msgid "Show Window B"
+msgstr "Mostra la finestra B"
+
+#: kdiff3.cpp:579
+msgid "Show Window C"
+msgstr "Mostra la finestra C"
+
+#: kdiff3.cpp:580 kdiff3.cpp:591
+msgid "Focus Next Window"
+msgstr "Focus a la finestra següent"
+
+#: kdiff3.cpp:582
+msgid "Normal Overview"
+msgstr "Resum normal"
+
+#: kdiff3.cpp:583
+msgid "A vs. B Overview"
+msgstr "Resum d'A contra B"
+
+#: kdiff3.cpp:584
+msgid "A vs. C Overview"
+msgstr "Resum d'A contra C"
+
+#: kdiff3.cpp:585
+msgid "B vs. C Overview"
+msgstr "Resum de B contra C"
+
+#: kdiff3.cpp:586
+msgid "Word Wrap Diff Windows"
+msgstr "Ajusta les línies de les finestres de diferències"
+
+#: kdiff3.cpp:587
+msgid "Add Manual Diff Alignment"
+msgstr "Afig alineació manual de les diferències"
+
+#: kdiff3.cpp:588
+msgid "Clear All Manual Diff Alignments"
+msgstr "Treu totes les alineacions manuals de les diferències"
+
+#: kdiff3.cpp:593
+msgid "Focus Prev Window"
+msgstr "Focus a la finestra anterior"
+
+#: kdiff3.cpp:594
+msgid "Toggle Split Orientation"
+msgstr "Commuta l'orientació de les divisions"
+
+#: kdiff3.cpp:596
+msgid "Dir && Text Split Screen View"
+msgstr "Vista de pantalla dividida en text i directoris"
+
+#: kdiff3.cpp:598
+msgid "Toggle Between Dir && Text View"
+msgstr "Commuta entre la vista de directoris i text"
+
+#: kdiff3.cpp:654 pdiff.cpp:1812
+msgid "The merge result hasn't been saved."
+msgstr "El resultat de la fusió no s'ha alçat."
+
+#: kdiff3.cpp:656
+msgid "Save && Quit"
+msgstr "Alça i ix"
+
+#: kdiff3.cpp:657
+msgid "Quit Without Saving"
+msgstr "Ix sense alçar"
+
+#: kdiff3.cpp:665 pdiff.cpp:1823
+msgid "Saving the merge result failed."
+msgstr "Ha fallat en alçar el resultat de la fusió."
+
+#: kdiff3.cpp:676 pdiff.cpp:1078
+msgid ""
+"You are currently doing a directory merge. Are you sure, you want to abort?"
+msgstr ""
+"Actualment esteu fent una fusió de directoris. Segur que la voleu "
+"interrompre?"
+
+#: kdiff3.cpp:701
+msgid "Saving file..."
+msgstr "S'està alçant el fitxer..."
+
+#: kdiff3.cpp:718
+msgid "Saving file with a new filename..."
+msgstr "S'està alçant el fitxer amb un nom nou..."
+
+#: kdiff3.cpp:781
+#, fuzzy
+#| msgid "Printing completed."
+msgid "Printing not implemented."
+msgstr "Impressió completada."
+
+#: kdiff3.cpp:815
+msgid "Printing..."
+msgstr "S'està imprimint..."
+
+#: kdiff3.cpp:956
+msgid "Selection"
+msgstr "Selecció"
+
+#: kdiff3.cpp:982
+msgid "Printing completed."
+msgstr "Impressió completada."
+
+#: kdiff3.cpp:986
+msgid "Printing aborted."
+msgstr "S'ha interromput la impressió."
+
+#: kdiff3.cpp:993
+msgid "Exiting..."
+msgstr "S'està eixint..."
+
+#: kdiff3.cpp:1006
+msgid "Toggling toolbar..."
+msgstr "S'està commutant la barra d'eines..."
+
+#: kdiff3.cpp:1027
+msgid "Toggle the statusbar..."
+msgstr "Commuta la barra d'estat..."
+
+#: smalldialogs.cpp:58
+msgid "A (Base):"
+msgstr "A (Base):"
+
+#: smalldialogs.cpp:65 smalldialogs.cpp:82 smalldialogs.cpp:99
+#: smalldialogs.cpp:142
+msgid "File..."
+msgstr "Fitxer..."
+
+#: smalldialogs.cpp:67 smalldialogs.cpp:84 smalldialogs.cpp:101
+#: smalldialogs.cpp:144
+msgid "Dir..."
+msgstr "Directori..."
+
+#: smalldialogs.cpp:93
+msgid "C (Optional):"
+msgstr "C (opcional):"
+
+#: smalldialogs.cpp:116
+msgid "Swap/Copy Names ..."
+msgstr "Intercanvia/Copia els noms..."
+
+#: smalldialogs.cpp:121 smalldialogs.cpp:122 smalldialogs.cpp:123
+#, kde-format
+msgid "Swap %1<->%2"
+msgstr "Intercanvia %1<->%2"
+
+#: smalldialogs.cpp:124 smalldialogs.cpp:125 smalldialogs.cpp:126
+#, kde-format
+msgid "Copy %1->Output"
+msgstr "Copia %1 ->Eixida"
+
+#: smalldialogs.cpp:127 smalldialogs.cpp:128 smalldialogs.cpp:129
+#, kde-format
+msgid "Swap %1<->Output"
+msgstr "Intercanvia %1<->Eixida"
+
+#: smalldialogs.cpp:136
+msgid "Output (optional):"
+msgstr "Eixida (opcional):"
+
+#: smalldialogs.cpp:168
+msgid "Configure..."
+msgstr "Configura..."
+
+#: smalldialogs.cpp:174
+msgid "&OK"
+msgstr "&D'acord"
+
+#: smalldialogs.cpp:362
+msgid "Search text:"
+msgstr "Cerca el text:"
+
+#: smalldialogs.cpp:369
+msgid "Case sensitive"
+msgstr "Sensible a majúscules"
+
+#: smalldialogs.cpp:372
+msgid "Search A"
+msgstr "Cerca A"
+
+#: smalldialogs.cpp:377
+msgid "Search B"
+msgstr "Cerca B"
+
+#: smalldialogs.cpp:382
+msgid "Search C"
+msgstr "Cerca C"
+
+#: smalldialogs.cpp:387
+msgid "Search output"
+msgstr "Cerca l'eixida"
+
+#: smalldialogs.cpp:392
+msgid "&Search"
+msgstr "&Cerca"
+
+#: smalldialogs.cpp:409
+msgid "Regular Expression Tester"
+msgstr "Provador d'expressions regulars"
+
+#: smalldialogs.cpp:414 optiondialog.cpp:936
+msgid "Auto merge regular expression:"
+msgstr "Fusiona automàticament les expressions regulars:"
+
+#: smalldialogs.cpp:422
+msgid "Example auto merge line:"
+msgstr "Exemple de línia de fusió automàtica:"
+
+#: smalldialogs.cpp:424
+msgid "To test auto merge, copy a line as used in your files."
+msgstr ""
+"Per testar la fusió automàtica, copieu una línia com les dels vostres "
+"fitxers."
+
+#: smalldialogs.cpp:430 smalldialogs.cpp:458 smalldialogs.cpp:494
+msgid "Match result:"
+msgstr "Resultat coincident:"
+
+#: smalldialogs.cpp:441 optiondialog.cpp:962
+msgid "History start regular expression:"
+msgstr "Expressió regular d'inici d'historial:"
+
+#: smalldialogs.cpp:449
+msgid "Example history start line (with leading comment):"
+msgstr "Exemple de línia d'inici d'historial (amb el comentari inicial):"
+
+#: smalldialogs.cpp:451
+msgid ""
+"Copy a history start line as used in your files,\n"
+"including the leading comment."
+msgstr ""
+"Copieu una línia d'inici d'historial com les dels vostres fitxers,\n"
+"incloent el comentari inicial."
+
+#: smalldialogs.cpp:469 optiondialog.cpp:972
+msgid "History entry start regular expression:"
+msgstr "Expressió regular d'inici d'entrada d'historial:"
+
+#: smalldialogs.cpp:477
+msgid "History sort key order:"
+msgstr "Criteri d'ordenació de les claus de l'historial:"
+
+#: smalldialogs.cpp:485
+msgid "Example history entry start line (without leading comment):"
+msgstr ""
+"Exemple d'inici de línia d'entrada d'historial (sense el comentari inicial):"
+
+#: smalldialogs.cpp:487
+msgid ""
+"Copy a history entry start line as used in your files,\n"
+"but omit the leading comment."
+msgstr ""
+"Copieu una entrada de línia d'inici d'historial com les dels vostres "
+"fitxers,\n"
+"sense incloure el comentari inicial."
+
+#: smalldialogs.cpp:501
+msgid "Sort key result:"
+msgstr "Resultat de la clau d'ordenació:"
+
+# PERFER: alineament?
+#: smalldialogs.cpp:508
+msgid "OK"
+msgstr "D'acord"
+
+# PERFER: alineament?
+#: smalldialogs.cpp:552 smalldialogs.cpp:562 smalldialogs.cpp:583
+msgid "Match success."
+msgstr "Encaix correcte."
+
+#: smalldialogs.cpp:556 smalldialogs.cpp:566 smalldialogs.cpp:589
+msgid "Match failed."
+msgstr "Ha fallat l'encaix. "
+
+#: smalldialogs.cpp:574
+msgid "Opening and closing parentheses do not match in regular expression."
+msgstr ""
+"L'obertura i tancament de parèntesis no encaixa en l'expressió regular."
+
+#: optiondialog.cpp:367
+msgid "Unicode, 8 bit"
+msgstr "Unicode, 8 bits"
+
+#: optiondialog.cpp:368
+msgid "Unicode"
+msgstr "Unicode"
+
+#: optiondialog.cpp:369
+msgid "Latin1"
+msgstr "Latin1"
+
+#: optiondialog.cpp:388
+msgid "Change this if non-ASCII characters are not displayed correctly."
+msgstr "Canvia això si els caràcters no ASCII no es mostren correctament."
+
+#: optiondialog.cpp:465
+msgid "Configure"
+msgstr "Configura"
+
+#: optiondialog.cpp:531
+msgid "Font"
+msgstr "Tipus de lletra"
+
+#: optiondialog.cpp:532
+msgid "Editor & Diff Output Font"
+msgstr "Tipus de lletra de l'editor i eixida de diferències"
+
+#: optiondialog.cpp:556
+msgid "Italic font for deltas"
+msgstr "Tipus de lletra cursiva per les diferències"
+
+#: optiondialog.cpp:559
+msgid ""
+"Selects the italic version of the font for differences.\n"
+"If the font doesn't support italic characters, then this does nothing."
+msgstr ""
+"Per les diferències, selecciona la versió en cursiva del tipus de lletra.\n"
+"Si el tipus de lletra no implementa caràcters en cursiva, això no tindrà "
+"efecte."
+
+#: optiondialog.cpp:568
+msgid "Color"
+msgstr "Color"
+
+#: optiondialog.cpp:569
+msgid "Colors Settings"
+msgstr "Arranjament de colors"
+
+#: optiondialog.cpp:588
+msgid "Editor and Diff Views:"
+msgstr "vistes de l'editor i diferències:"
+
+#: optiondialog.cpp:596
+msgid "Foreground color:"
+msgstr "Color de primer pla:"
+
+#: optiondialog.cpp:603
+msgid "Background color:"
+msgstr "Color de fons:"
+
+#: optiondialog.cpp:612
+msgid "Diff background color:"
+msgstr "Color de fons de les diferències:"
+
+#: optiondialog.cpp:620
+msgid "Color A:"
+msgstr "Color A:"
+
+#: optiondialog.cpp:628
+msgid "Color B:"
+msgstr "Color B:"
+
+#: optiondialog.cpp:636
+msgid "Color C:"
+msgstr "Color C:"
+
+#: optiondialog.cpp:643
+msgid "Conflict color:"
+msgstr "Conflicte de color:"
+
+#: optiondialog.cpp:651
+msgid "Current range background color:"
+msgstr "Color de fons del rang actual:"
+
+#: optiondialog.cpp:659
+msgid "Current range diff background color:"
+msgstr "Color de fons de les diferències del rang actual:"
+
+#: optiondialog.cpp:666
+msgid "Color for manually aligned difference ranges:"
+msgstr "Color pels rangs de diferències alineades manualment:"
+
+#: optiondialog.cpp:672
+msgid "Directory Comparison View:"
+msgstr "Vista de la comparació de directoris:"
+
+#: optiondialog.cpp:678
+msgid "Newest file color:"
+msgstr "Color del fitxer més nou:"
+
+#: optiondialog.cpp:682
+msgid ""
+"Changing this color will only be effective when starting the next directory "
+"comparison."
+msgstr ""
+"El canvi d'este color només serà efectiu quan es comence la propera "
+"comparació de directoris."
+
+#: optiondialog.cpp:687
+msgid "Oldest file color:"
+msgstr "Color del fitxer més antic:"
+
+#: optiondialog.cpp:695
+msgid "Middle age file color:"
+msgstr "Color del fitxer d'edat intermèdia:"
+
+#: optiondialog.cpp:703
+msgid "Color for missing files:"
+msgstr "Color dels fitxer no disponibles:"
+
+#: optiondialog.cpp:717
+msgid "Editor"
+msgstr "Editor"
+
+#: optiondialog.cpp:718
+msgid "Editor Behavior"
+msgstr "Comportament de l'editor"
+
+#: optiondialog.cpp:732
+msgid "Tab inserts spaces"
+msgstr "El tabulador insereix espais"
+
+#: optiondialog.cpp:735
+msgid ""
+"On: Pressing tab generates the appropriate number of spaces.\n"
+"Off: A tab character will be inserted."
+msgstr ""
+"Activat: en prémer el tabulador es generaran el nombre apropat d'espais en "
+"blanc.\n"
+"Desactivat: s'inserirà un caràcter de tabulació."
+
+#: optiondialog.cpp:741
+msgid "Tab size:"
+msgstr "Mida de la tabulació:"
+
+#: optiondialog.cpp:747
+msgid "Auto indentation"
+msgstr "Sagnat automàtic"
+
+#: optiondialog.cpp:750
+msgid "On: The indentation of the previous line is used for a new line.\n"
+msgstr "Activat: s'usarà el sagnat de la línia prèvia per les línies noves.\n"
+
+#: optiondialog.cpp:754
+msgid "Auto copy selection"
+msgstr "Copia la selecció automàticament"
+
+#: optiondialog.cpp:757
+msgid ""
+"On: Any selection is immediately written to the clipboard.\n"
+"Off: You must explicitely copy e.g. via Ctrl-C."
+msgstr ""
+"Activat: totes les seleccions s'alçaran al porta-retalls.\n"
+"Desactivat: haureu de copiar explícitament, p. ex. mitjançant Ctrl-C."
+
+#: optiondialog.cpp:768
+#, fuzzy
+#| msgid "&Window"
+msgid "Dos/Windows"
+msgstr "&Finestra"
+
+#: optiondialog.cpp:769
+#, fuzzy
+#| msgid "Auto Select"
+msgid "Autodetect"
+msgstr "Selecciona automàticament"
+
+#: optiondialog.cpp:772
+msgid ""
+"Sets the line endings for when an edited file is saved.\n"
+"DOS/Windows: CR+LF; UNIX: LF; with CR=0D, LF=0A"
+msgstr ""
+"Estableix els finals de línia quan s'alcen els fitxers editats.\n"
+"Dos/Windows: CR+LF; UNIX: LF; amb CR=0D, LF=0A"
+
+#: optiondialog.cpp:784
+msgid "Diff"
+msgstr "Diferència"
+
+#: optiondialog.cpp:785
+msgid "Diff Settings"
+msgstr "Arranjament de les diferències "
+
+#: optiondialog.cpp:809
+msgid "Treat as white space."
+msgstr "Tracta-ho com a espais en blanc."
+
+#: optiondialog.cpp:811
+msgid "Ignore numbers"
+msgstr "Ignora els números"
+
+#: optiondialog.cpp:814
+msgid ""
+"Ignore number characters during line matching phase. (Similar to Ignore "
+"white space.)\n"
+"Might help to compare files with numeric data."
+msgstr ""
+"Ignora els caràcters numèrics durant la fase de d'encaix de línies. "
+"(Semblant a ignorar espais en blanc).\n"
+"Pot ajudar a comparar fitxers amb dades numèriques."
+
+#: optiondialog.cpp:819
+msgid "Ignore C/C++ comments"
+msgstr "Ignora els comentaris de C/C++"
+
+#: optiondialog.cpp:821
+msgid "Treat C/C++ comments like white space."
+msgstr "Tracta els comentaris de C/C++ com si fossin espais en blanc."
+
+#: optiondialog.cpp:825
+msgid "Ignore case"
+msgstr "Ignora majúscules/minúscules"
+
+#: optiondialog.cpp:828
+msgid "Treat case differences like white space changes. ('a'<=>'A')"
+msgstr ""
+"Tracta les diferències de caixa com si fossin canvis d'espais en blanc(«a» "
+"<=> «A»)"
+
+#: optiondialog.cpp:832
+msgid "Preprocessor command:"
+msgstr "Orde del preprocessador:"
+
+#: optiondialog.cpp:836
+msgid "User defined pre-processing. (See the docs for details.)"
+msgstr ""
+"Preprocessament definit per l'usuari. (Vegeu la documentació pels detalls)."
+
+#: optiondialog.cpp:839
+msgid "Line-matching preprocessor command:"
+msgstr "Orde del preprocessador d'encaix de línies:"
+
+#: optiondialog.cpp:843
+msgid ""
+"This pre-processor is only used during line matching.\n"
+"(See the docs for details.)"
+msgstr ""
+"Este preprocessador només s'usa durant l'encaix de línies.\n"
+"(Per més detalls vegeu la documentació)."
+
+#: optiondialog.cpp:846
+msgid "Try hard (slower)"
+msgstr "Esforçat-hi (més lent)"
+
+#: optiondialog.cpp:849
+msgid ""
+"Enables the --minimal option for the external diff.\n"
+"The analysis of big files will be much slower."
+msgstr ""
+"Habilita l'opció --minimal pel diff extern.\n"
+"L'anàlisi de fitxers grans serà encara més lenta."
+
+#: optiondialog.cpp:854
+msgid "Align B and C for 3 input files"
+msgstr "Alinea B i C per 3 fitxers d'entrada"
+
+#: optiondialog.cpp:857
+msgid ""
+"Try to align B and C when comparing or merging three input files.\n"
+"Not recommended for merging because merge might get more complicated.\n"
+"(Default is off.)"
+msgstr ""
+"Intenta alinear B i C quan es comparin o fusionin tres fitxers d'entrada.\n"
+"No recomanat per fusionar ja que pot ser més complicat.\n"
+"(Deshabilitat per defecte)"
+
+#: optiondialog.cpp:870
+msgid "Merge Settings"
+msgstr "Arranjaments de fusió"
+
+#: optiondialog.cpp:885
+msgid "Auto advance delay (ms):"
+msgstr "Retard de l'avanç automàtic (ms):"
+
+#: optiondialog.cpp:890
+msgid ""
+"When in Auto-Advance mode the result of the current selection is shown \n"
+"for the specified time, before jumping to the next conflict. Range: 0-2000 ms"
+msgstr ""
+"Quan el mode d'avanç automàtic estiga activat es mostrarà el resultat de la "
+"selecció \n"
+"actual durant el temps especificat, avanç de saltar al conflicte següent. "
+"Rang: 0-2000 ms"
+
+#: optiondialog.cpp:895
+msgid "Show info dialogs"
+msgstr "Mostra els diàlegs d'informació"
+
+#: optiondialog.cpp:897
+msgid "Show a dialog with information about the number of conflicts."
+msgstr "Mostra un diàleg amb informació sobre el nombre de conflictes."
+
+#: optiondialog.cpp:900
+msgid "White space 2-file merge default:"
+msgstr "Opció per defecte dels espais en blanc en la fusió de 2 fitxers:"
+
+#: optiondialog.cpp:904 optiondialog.cpp:917
+msgid "Manual Choice"
+msgstr "Selecció manual"
+
+#: optiondialog.cpp:908 optiondialog.cpp:922
+msgid ""
+"Allow the merge algorithm to automatically select an input for white-space-"
+"only changes."
+msgstr ""
+"Permet que l'algoritme de fusió seleccioni automàticament una entrada pels "
+"canvis d'espais en blanc."
+
+#: optiondialog.cpp:913
+msgid "White space 3-file merge default:"
+msgstr "Opció per defecte dels espais en blanc en la fusió de 2 fitxers:"
+
+#: optiondialog.cpp:927
+msgid "Automatic Merge Regular Expression"
+msgstr "Fusió automàticament les expressions regulars"
+
+#: optiondialog.cpp:940
+msgid ""
+"Regular expression for lines where KDiff3 should automatically choose one "
+"source.\n"
+"When a line with a conflict matches the regular expression then\n"
+"- if available - C, otherwise B will be chosen."
+msgstr ""
+"Expressió regular per les línies en què el KDiff3 hauria d'escollir una font "
+"automàticament.\n"
+"Quan una línia amb un conflicte concorda amb l'expressió regular aleshores\n"
+"- si està disponible - s'escollirà C, si no, B."
+
+#: optiondialog.cpp:946
+msgid "Run regular expression auto merge on merge start"
+msgstr ""
+"Executa la fusió automàtica d'expressions regulars a l'inici de la fusió"
+
+#: optiondialog.cpp:948
+msgid ""
+"Run the merge for auto merge regular expressions\n"
+"immediately when a merge starts.\n"
+msgstr ""
+"Fusiona automàticament les expressions regulars\n"
+"just en començar la fusió.\n"
+
+#: optiondialog.cpp:953
+msgid "Version Control History Merging"
+msgstr "Fusió d'historial del control de versions"
+
+#: optiondialog.cpp:966
+msgid ""
+"Regular expression for the start of the version control history entry.\n"
+"Usually this line contains the \"$Log$\" keyword.\n"
+"Default value: \".*\\$Log.*\\$.*\""
+msgstr ""
+"Expressió regular per l'inici de les entrades de l'historial del control de "
+"versions.\n"
+"Normalment esta línia conté la paraula clau «$Log$».\n"
+"Valor per defecte: «.*\\$Log.*\\$.*»"
+
+#: optiondialog.cpp:984
+msgid ""
+"A version control history entry consists of several lines.\n"
+"Specify the regular expression to detect the first line (without the leading "
+"comment).\n"
+"Use parentheses to group the keys you want to use for sorting.\n"
+"If left empty, then KDiff3 assumes that empty lines separate history "
+"entries.\n"
+"See the documentation for details."
+msgstr ""
+"Les entrades de l'historial del control de versions consten de varies "
+"línies.\n"
+"Especifiqueu l'expressió regular per detectar la primera línia (sense el "
+"comentari inicial).\n"
+"Useu parèntesis per agrupar les claus que vulgueu usar per ordenar-les.\n"
+"Si es deixa en blanc, el KDiff3 assumeix que les línies en blanc separen les "
+"entrades de l'historial.\n"
+"Per més detalls, vegeu la documentació."
+
+#: optiondialog.cpp:992
+msgid "History merge sorting"
+msgstr "Ordenació de la fusió d'historials"
+
+#: optiondialog.cpp:994
+msgid "Sort version control history by a key."
+msgstr "Ordena l'historial del control de versions per una clau."
+
+#: optiondialog.cpp:1004
+msgid "History entry start sort key order:"
+msgstr ""
+"Criteri d'ordenació de les claus de l'inici de les entrades d'historial:"
+
+#: optiondialog.cpp:1008
+msgid ""
+"Each pair of parentheses used in the regular expression for the history "
+"start entry\n"
+"groups a key that can be used for sorting.\n"
+"Specify the list of keys (that are numbered in order of occurrence\n"
+"starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
+"If left empty, then no sorting will be done.\n"
+"See the documentation for details."
+msgstr ""
+"Cada parell de parèntesis usats en l'expressió regular per l'inici de "
+"l'entrada de l'historial\n"
+"agrupa una clau que es pot usar per ordenar.\n"
+"Especifica la llista de claus (que estan numerades en orde d'ocurrència\n"
+"començant per 1) usant «,» com a separador (p. ex. «4,5,6,1,2,3,7»).\n"
+"Si es deixa en blanc, no s'ordenarà.\n"
+"Per més detalls, vegeu la documentació."
+
+#: optiondialog.cpp:1019
+msgid "Merge version control history on merge start"
+msgstr "Fusiona l'historial del control de versions quan es comence a fusionar"
+
+#: optiondialog.cpp:1021
+msgid "Run version control history automerge on merge start."
+msgstr ""
+"Executa la fusió automàtica de l'historial del control de versions quan es "
+"comence a fusionar."
+
+#: optiondialog.cpp:1025
+msgid "Max number of history entries:"
+msgstr "Nombre màxim d'entrades d'historial:"
+
+#: optiondialog.cpp:1028
+msgid "Cut off after specified number. Use -1 for infinite number of entries."
+msgstr ""
+"Talla a partir d'un número especificat. Useu -1 per un nombre infinit "
+"d'entrades."
+
+#: optiondialog.cpp:1032
+msgid "Test your regular expressions"
+msgstr "Comproveu les vostres expressions regulars"
+
+#: optiondialog.cpp:1037
+msgid "Irrelevant merge command:"
+msgstr "Orde de fusió irrellevant:"
+
+#: optiondialog.cpp:1041
+msgid ""
+"If specified this script is run after automerge\n"
+"when no other relevant changes were detected.\n"
+"Called with the parameters: filename1 filename2 filename3"
+msgstr ""
+"Si s'especifica, este script s'executarà després de la fusió automàtica\n"
+"quan no s'hagen detectats altres canvis apropiats.\n"
+"Cridat amb els paràmetres: nomdefitxer1 nomdefitxer2 nomdefitxer3"
+
+#: optiondialog.cpp:1047
+msgid "Auto save and quit on merge without conflicts"
+msgstr "En les fusions sense conflictes alça i ix automàticament"
+
+#: optiondialog.cpp:1050
+msgid ""
+"If KDiff3 was started for a file-merge from the command line and all\n"
+"conflicts are solvable without user interaction then automatically save and "
+"quit.\n"
+"(Similar to command line option \"--auto\".)"
+msgstr ""
+"Si el KDiff3 s'inicia des de la línia d'ordes per fusionar fitxers i tots\n"
+"els conflictes es poden resoldre sense la interacció de l'usuari, alça i "
+"ix.\n"
+"(Similar a l'opció de la línia de comandes «--auto»)."
+
+#: optiondialog.cpp:1061 optiondialog.cpp:1062
+msgid "Directory"
+msgstr "Directori"
+
+#: optiondialog.cpp:1075
+msgid "Recursive directories"
+msgstr "Directoris recursius"
+
+#: optiondialog.cpp:1077
+msgid "Whether to analyze subdirectories or not."
+msgstr "Si analitzar els subdirectoris o no"
+
+#: optiondialog.cpp:1079
+msgid "File pattern(s):"
+msgstr "Patró dels fitxers:"
+
+#: optiondialog.cpp:1084
+msgid ""
+"Pattern(s) of files to be analyzed. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"Patró dels fitxers a analitzar.\n"
+"Comodins: «*» i «?»\n"
+"Es poden especificar diversos patrons separant-los amb: «;»"
+
+#: optiondialog.cpp:1090
+msgid "File-anti-pattern(s):"
+msgstr "Negatiu del patró dels fitxers:"
+
+#: optiondialog.cpp:1095
+msgid ""
+"Pattern(s) of files to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"Patró dels fitxers a excloure de l'anàlisi. \n"
+"Comodins: «*» i «?»\n"
+"Es poden especificar diversos patrons separant-los amb: «;»"
+
+#: optiondialog.cpp:1101
+msgid "Dir-anti-pattern(s):"
+msgstr "Negatiu del patró dels directoris:"
+
+#: optiondialog.cpp:1106
+msgid ""
+"Pattern(s) of directories to be excluded from analysis. \n"
+"Wildcards: '*' and '?'\n"
+"Several Patterns can be specified by using the separator: ';'"
+msgstr ""
+"Patró dels directoris a excloure de l'anàlisi. \n"
+"Comodins: «*» i «?»\n"
+"Es poden especificar diversos patrons separant-los amb: «;»"
+
+#: optiondialog.cpp:1112
+msgid "Use .cvsignore"
+msgstr "Usa .cvsignore"
+
+#: optiondialog.cpp:1115
+msgid ""
+"Extends the antipattern to anything that would be ignored by CVS.\n"
+"Via local \".cvsignore\" files this can be directory specific."
+msgstr ""
+"Estén el negatiu del patró a tot el què ignora el CVS.\n"
+"Per mitjà dels fitxers «.cvsignore» locals això pot ser específic de cada "
+"directori."
+
+#: optiondialog.cpp:1120
+msgid "Find hidden files and directories"
+msgstr "Cerca fitxers i directoris ocults"
+
+#: optiondialog.cpp:1123
+msgid "Finds files and directories with the hidden attribute."
+msgstr "Cerca fitxers i directoris l'atribut ocult."
+
+#: optiondialog.cpp:1125
+msgid "Finds files and directories starting with '.'."
+msgstr "Cerca fitxers i directoris que comencen amb «.»."
+
+#: optiondialog.cpp:1129
+msgid "Follow file links"
+msgstr "Segueix els enllaços de fitxer"
+
+#: optiondialog.cpp:1132
+msgid ""
+"On: Compare the file the link points to.\n"
+"Off: Compare the links."
+msgstr ""
+"Activat: compara el fitxer al què apunta l'enllaç.\n"
+"Desactivat: compara els enllaços."
+
+#: optiondialog.cpp:1137
+msgid "Follow directory links"
+msgstr "Segueix els enllaços de directori"
+
+#: optiondialog.cpp:1140
+msgid ""
+"On: Compare the directory the link points to.\n"
+"Off: Compare the links."
+msgstr ""
+"Activat: compara el directori al què apunta l'enllaç.\n"
+"Desactivat: compara els enllaços."
+
+#: optiondialog.cpp:1156
+msgid "Case sensitive filename comparison"
+msgstr "Comparació de noms de fitxers sensible a majúscules i minúscules"
+
+#: optiondialog.cpp:1159
+msgid ""
+"The directory comparison will compare files or directories when their names "
+"match.\n"
+"Set this option if the case of the names must match. (Default for Windows is "
+"off, otherwise on.)"
+msgstr ""
+"La comparació de directoris compararà fitxers o directoris que coincidisquen "
+"en nom.\n"
+"Activeu esta opció si la caixa dels noms ha de coincidir. (Per defecte en "
+"Windows està desactivat, en altres entorns està activat)."
+
+#: optiondialog.cpp:1163
+msgid "File Comparison Mode"
+msgstr "Mode de comparació de fitxers"
+
+#: optiondialog.cpp:1169
+msgid "Binary comparison"
+msgstr "Comparació binària"
+
+#: optiondialog.cpp:1170
+msgid "Binary comparison of each file. (Default)"
+msgstr "Comparació binària de cada fitxer. (Per defecte)"
+
+#: optiondialog.cpp:1173
+msgid "Full analysis"
+msgstr "Anàlisi complet"
+
+#: optiondialog.cpp:1174
+msgid ""
+"Do a full analysis and show statistics information in extra columns.\n"
+"(Slower than a binary comparison, much slower for binary files.)"
+msgstr ""
+"Fes un anàlisi complet i mostra informació estadística en columnes "
+"addicionals.\n"
+"(Més lent que una comparació binària, més lent encara per fitxers binaris)."
+
+#: optiondialog.cpp:1178
+msgid "Trust the size and modification date (unsafe)"
+msgstr "Confia en la mida i la data de modificació (insegur)"
+
+#: optiondialog.cpp:1179
+msgid ""
+"Assume that files are equal if the modification date and file length are "
+"equal.\n"
+"Files with equal contents but different modification dates will appear as "
+"different.\n"
+"Useful for big directories or slow networks."
+msgstr ""
+"Assumeix que els fitxers són iguals si la data de modificació i la mida del "
+"fitxer coincideixen.\n"
+"Els fitxers amb continguts iguals però diferents dates de modificació es "
+"mostraran com si fossin diferents.\n"
+"Útil per directoris grans o xarxes lentes."
+
+#: optiondialog.cpp:1184
+msgid ""
+"Trust the size and date, but use binary comparison if date does not match "
+"(unsafe)"
+msgstr ""
+"Confia en la mida i data dels fitxers però compara binàriament si les dates "
+"no concorden (insegur)"
+
+#: optiondialog.cpp:1185
+msgid ""
+"Assume that files are equal if the modification date and file length are "
+"equal.\n"
+"If the dates are not equal but the sizes are, use binary comparison.\n"
+"Useful for big directories or slow networks."
+msgstr ""
+"Assumeix que els fitxers són iguals si les dates de modificació i les mides "
+"dels fitxers coincideixen.\n"
+"Si les dates no són iguals però les mides si, usa la comparació binària.\n"
+"Útil per directoris grans o xarxes lentes."
+
+#: optiondialog.cpp:1190
+msgid "Trust the size (unsafe)"
+msgstr "Confia en la mida (insegur)"
+
+#: optiondialog.cpp:1191
+msgid ""
+"Assume that files are equal if their file lengths are equal.\n"
+"Useful for big directories or slow networks when the date is modified during "
+"download."
+msgstr ""
+"Assumeix que els fitxers són iguals si la mida dels fitxer coincideixen.\n"
+"Útil per directoris grans o xarxes lentes quan la data es modifica durant la "
+"descarrega."
+
+#: optiondialog.cpp:1199
+msgid "Synchronize directories"
+msgstr "Sincronitza directoris"
+
+#: optiondialog.cpp:1202
+msgid ""
+"Offers to store files in both directories so that\n"
+"both directories are the same afterwards.\n"
+"Works only when comparing two directories without specifying a destination."
+msgstr ""
+"Ofereix emmagatzemar fitxers als dos directoris de manera que\n"
+"després els dos directoris siguen iguals.\n"
+"Només funciona quan es comparen dos directoris sense especificar una "
+"destinació."
+
+#: optiondialog.cpp:1208
+msgid "White space differences considered equal"
+msgstr "Les diferències d'espais en blanc no es consideren"
+
+#: optiondialog.cpp:1211
+msgid ""
+"If files differ only by white space consider them equal.\n"
+"This is only active when full analysis is chosen."
+msgstr ""
+"Si els fitxers difereixen en només un espai en blanc considera'ls iguals.\n"
+"Això només és actiu quan s'trieu l'anàlisi complet."
+
+#: optiondialog.cpp:1217
+msgid "Copy newer instead of merging (unsafe)"
+msgstr "Copia el més nou en comptes de fusionar-los (insegur)"
+
+#: optiondialog.cpp:1220
+msgid ""
+"Don't look inside, just take the newer file.\n"
+"(Use this only if you know what you are doing!)\n"
+"Only effective when comparing two directories."
+msgstr ""
+"No miris dins, simplement tria el fitxer més nou.\n"
+"(Useu això només si sabeu el què esteu fent).\n"
+"Només és efectiu quan es comparen dos directoris."
+
+#: optiondialog.cpp:1225
+msgid "Backup files (.orig)"
+msgstr "Fitxers de la còpia de seguretat (.orig)"
+
+#: optiondialog.cpp:1228
+msgid ""
+"If a file would be saved over an old file, then the old file\n"
+"will be renamed with a '.orig' extension instead of being deleted."
+msgstr ""
+"Si un fitxer es guarda sobre un fitxer més antic, llavors el fitxer antic\n"
+"es reanomenara amb una extensió «.orig» en comptes de ser esborrat."
+
+#: optiondialog.cpp:1301 optiondialog.cpp:1302
+msgid "Regional Settings"
+msgstr "Arranjament regional"
+
+#: optiondialog.cpp:1402
+msgid "Language (restart required)"
+msgstr "Idioma (cal reiniciar)"
+
+#: optiondialog.cpp:1445
+msgid ""
+"Choose the language of the GUI strings or \"Auto\".\n"
+"For a change of language to take place, quit and restart KDiff3."
+msgstr ""
+"Trieu l'idioma de les cadenes de la IGU o «Automàtic».\n"
+"Per què el canvi d'idioma tinga efecte, eixiu i reinicieu el KDiff3."
+
+#: optiondialog.cpp:1463
+msgid "Use the same encoding for everything:"
+msgstr "Usa la mateixa configuració a tot arreu:"
+
+#: optiondialog.cpp:1466
+msgid ""
+"Enable this allows to change all encodings by changing the first only.\n"
+"Disable this if different individual settings are needed."
+msgstr ""
+"Habilitar això permet canviar totes les codificacions canviant només la "
+"primera.\n"
+"Deshabiliteu-ho si necessiteu arranjaments diferents per cada fitxer."
+
+#: optiondialog.cpp:1471
+msgid "Note: Local Encoding is "
+msgstr "Nota: la codificació local és "
+
+#: optiondialog.cpp:1475
+msgid "File Encoding for A:"
+msgstr "Codificació pel fitxer A:"
+
+#: optiondialog.cpp:1481
+msgid ""
+"If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
+"If the file is not Unicode then the selected encoding will be used as "
+"fallback.\n"
+"(Unicode detection depends on the first bytes of a file.)"
+msgstr ""
+"Si està habilitat es detectaran les codificacions Unicode (UTF-16 o UTF-8).\n"
+"Si el fitxer no és Unicode s'usarà la codificació seleccionada com a "
+"alternativa\n"
+"(la detecció de l'Unicode depèn dels primers bytes dels fitxers)."
+
+#: optiondialog.cpp:1485 optiondialog.cpp:1494 optiondialog.cpp:1503
+msgid "Auto Detect Unicode"
+msgstr "Detecta automàticament l'Unicode"
+
+#: optiondialog.cpp:1490
+msgid "File Encoding for B:"
+msgstr "Codificació pel fitxer B:"
+
+#: optiondialog.cpp:1499
+msgid "File Encoding for C:"
+msgstr "Codificació pel fitxer C:"
+
+#: optiondialog.cpp:1508
+msgid "File Encoding for Merge Output and Saving:"
+msgstr "Codificació des fitxers d'eixida d'una fusió i en alçar:"
+
+#: optiondialog.cpp:1512
+msgid "Auto Select"
+msgstr "Selecciona automàticament"
+
+#: optiondialog.cpp:1515
+msgid ""
+"If enabled then the encoding from the input files is used.\n"
+"In ambiguous cases a dialog will ask the user to choose the encoding for "
+"saving."
+msgstr ""
+"Si està habilitat s'usarà la codificació dels fitxers d'entrada.\n"
+"En els casos ambigus un diàleg demanarà a l'usuari que esculli la "
+"codificació a usar per alçar."
+
+#: optiondialog.cpp:1519
+msgid "File Encoding for Preprocessor Files:"
+msgstr "Codificació dels fitxers del preprocessador:"
+
+#: optiondialog.cpp:1530
+msgid "Right To Left Language"
+msgstr "Idioma de dreta a esquerra"
+
+#: optiondialog.cpp:1533
+msgid ""
+"Some languages are read from right to left.\n"
+"This setting will change the viewer and editor accordingly."
+msgstr ""
+"Alguns idiomes es lligen de dreta a esquerra.\n"
+"Este arranjament canviarà el visor i l'editor per adaptar-s'hi."
+
+#: optiondialog.cpp:1548
+msgid "Integration"
+msgstr "Integració"
+
+#: optiondialog.cpp:1549
+msgid "Integration Settings"
+msgstr "Arranjaments d'integració"
+
+#: optiondialog.cpp:1563
+msgid "Command line options to ignore:"
+msgstr "Opcions de la línia d'ordes a ignorar:"
+
+#: optiondialog.cpp:1568
+msgid ""
+"List of command line options that should be ignored when KDiff3 is used by "
+"other tools.\n"
+"Several values can be specified if separated via ';'\n"
+"This will suppress the \"Unknown option\" error."
+msgstr ""
+"Llista d'opcions de la línia d'ordes que s'ignoraran quan el KDiff3 siga "
+"usat per altres eines.\n"
+"Es poden especificar varis valors separant-los amb «;».\n"
+"Això solucionarà l'error «Opció desconeguda»."
+
+#: optiondialog.cpp:1575
+msgid "Quit also via Escape key"
+msgstr "Ix també en prémer la tecla d'escapada"
+
+#: optiondialog.cpp:1578
+msgid ""
+"Fast method to exit.\n"
+"For those who are used to using the Escape key."
+msgstr ""
+"Mètode ràpid per eixir.\n"
+"Pels qui estigueu acostumats a usar la tecla d'escapada."
+
+#: optiondialog.cpp:1583
+msgid "Integrate with ClearCase"
+msgstr "Integra amb ClearCase"
+
+#: optiondialog.cpp:1586
+msgid ""
+"Integrate with Rational ClearCase from IBM.\n"
+"Modifies the \"map\" file in ClearCase subdir \"lib/mgrs\"\n"
+"(Only enabled when ClearCase \"bin\" directory is in the path.)"
+msgstr ""
+"Integra amb Rational ClearCase d'IBM.\n"
+"Modifica el fitxer «map» del subdirectori de ClearCase «lib/mgrs»\n"
+"(només s'activa quan directori «bin» de ClearCase estiga al camí)."
+
+#: optiondialog.cpp:1592
+msgid "Remove ClearCase Integration"
+msgstr "Elimina la integració amb ClearCase"
+
+#: optiondialog.cpp:1595
+msgid ""
+"Restore the old \"map\" file from before doing the ClearCase integration."
+msgstr ""
+"Restaura el fitxer «map» antic d'avanç de fer la integració de ClearCase."
+
+#: optiondialog.cpp:1680
+msgid "Incompatible Font"
+msgstr "Tipus de lletra incompatible"
+
+#: optiondialog.cpp:1681
+msgid "Continue at Own Risk"
+msgstr "Continua sota la meua responsabilitat"
+
+#: optiondialog.cpp:1682
+msgid "Select Another Font"
+msgstr "Tria un altre tipus de lletra"
+
+#: optiondialog.cpp:1717
+msgid "This resets all options. Not only those of the current topic."
+msgstr "Això restableix totes les opcions, no només les del tema actual."
+
+#: pdiff.cpp:260
+msgid "PreprocessorCmd: "
+msgstr "OrdreDePreprosessador: "
+
+#: pdiff.cpp:265
+msgid "The following option(s) you selected might change data:\n"
+msgstr "Les següents opcions que heu seleccionat poden canviar dades:\n"
+
+#: pdiff.cpp:266
+msgid ""
+"\n"
+"Most likely this is not wanted during a merge.\n"
+"Do you want to disable these settings or continue with these settings active?"
+msgstr ""
+"\n"
+"Probablement, durant una fusió no voldreu això.\n"
+"Voleu deshabilitar estos arranjaments o continuar amb estos arranjaments "
+"activats?"
+
+#: pdiff.cpp:268
+msgid "Option Unsafe for Merging"
+msgstr "Opció insegura per fusionar"
+
+#: pdiff.cpp:269
+msgid "Use These Options During Merge"
+msgstr "Usa estes opcions en fusionar"
+
+#: pdiff.cpp:270
+msgid "Disable Unsafe Options"
+msgstr "Deshabilita les opcions insegures"
+
+#: pdiff.cpp:300
+msgid "Loading A"
+msgstr "S'està carregant A"
+
+#: pdiff.cpp:304
+msgid "Loading B"
+msgstr "S'està carregant B"
+
+#: pdiff.cpp:321 pdiff.cpp:347
+msgid "Diff: A <-> B"
+msgstr "Dif: A <-> B"
+
+#: pdiff.cpp:327 pdiff.cpp:372
+msgid "Linediff: A <-> B"
+msgstr "Diferència de línia: A <-> B"
+
+#: pdiff.cpp:338
+msgid "Loading C"
+msgstr "S'està carregant C"
+
+#: pdiff.cpp:350
+msgid "Diff: B <-> C"
+msgstr "Dif: B <-> C"
+
+#: pdiff.cpp:353
+msgid "Diff: A <-> C"
+msgstr "Dif: A <-> C"
+
+#: pdiff.cpp:375
+msgid "Linediff: B <-> C"
+msgstr "Diferència de línia: B <-> C"
+
+#: pdiff.cpp:378
+msgid "Linediff: A <-> C"
+msgstr "Diferència de línia: A <-> C"
+
+#: pdiff.cpp:534
+msgid "All input files contain the same text, but are not binary equal."
+msgstr ""
+"Tots els fitxers d'entrada contenen el mateix text però no són binàriament "
+"iguals."
+
+#: pdiff.cpp:537 pdiff.cpp:539 pdiff.cpp:541
+#, kde-format
+msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
+msgstr ""
+"Els fitxers %1 i %2 tenen el mateix text, però binàriament no són iguals. \n"
+
+#: pdiff.cpp:551
+msgid ""
+"Some inputfiles don't seem to be pure textfiles.\n"
+"Note that the KDiff3-merge was not meant for binary data.\n"
+"Continue at your own risk."
+msgstr ""
+"Alguns fitxers d'entrada no pareixen fitxers de text pur.\n"
+"Noteu que la fusió del KDiff3 no està pensada per dades binàries.\n"
+"Continueu sota la vostra responsabilitat."
+
+#: pdiff.cpp:566
+#, kde-format
+msgid ""
+"Some input characters could not be converted to valid unicode.\n"
+"You might be using the wrong codec. (e.g. UTF-8 for non UTF-8 files).\n"
+"Don't save the result if unsure. Continue at your own risk.\n"
+"Affected input files are in %1."
+msgstr ""
+
+#: pdiff.cpp:1080
+msgid "Abort"
+msgstr "Interromp"
+
+#: pdiff.cpp:1087 pdiff.cpp:1175
+msgid "Opening files..."
+msgstr "S'estan obrint els fitxers..."
+
+#: pdiff.cpp:1152 pdiff.cpp:1223
+msgid "File open error"
+msgstr "S'ha produït un error en obrir el fitxer"
+
+#: pdiff.cpp:1255
+msgid "Cutting selection..."
+msgstr "S'està retallant la selecció..."
+
+#: pdiff.cpp:1276
+msgid "Copying selection to clipboard..."
+msgstr "S'està copiant la selecció al porta-retalls..."
+
+#: pdiff.cpp:1292
+msgid "Inserting clipboard contents..."
+msgstr "S'està inserint el contingut del porta-retalls..."
+
+#: pdiff.cpp:1814
+msgid "Save && Continue"
+msgstr "Alça i continua"
+
+#: pdiff.cpp:1815
+msgid "Continue Without Saving"
+msgstr "Continua sense alçar"
+
+#: pdiff.cpp:2018
+msgid "Search complete."
+msgstr "Cerca completa."
+
+#: pdiff.cpp:2018
+msgid "Search Complete"
+msgstr "Cerca completa"
+
+#: pdiff.cpp:2252
+msgid "Nothing is selected in either diff input window."
+msgstr "No hi ha res seleccionat en cap de les finestres de diferències."
+
+#: pdiff.cpp:2252
+msgid "Error while adding manual diff range"
+msgstr "Error en afegir un rang manual de diferències"
+
+#: kdiff3_shell.cpp:76
+#, fuzzy
+#| msgid ""
+#| "Could not initialize the KDiff part.\n"
+#| "This usually happens due to an installation problem. Please read the "
+#| "README-file in the source package for details."
+msgid ""
+"Could not initialize the KDiff3 part.\n"
+"This usually happens due to an installation problem. Please read the README-"
+"file in the source package for details."
+msgstr ""
+"No s'ha pogut inicialitzar el component KDiff.\n"
+"Això sol ser degut a problemes d'instal·lació. Per més detalls, llegiu el "
+"fitxer README del paquet de codi."
+
+#: rc.cpp:1
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Joan Maspons Ventura"
+
+#: rc.cpp:2
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "joanmaspons@gmail.com"
+
+#. i18n: file: kdiff3_part.rc:4
+#. i18n: ectx: Menu (movement)
+#: rc.cpp:5
+msgid "&KDiff3"
+msgstr "&KDiff3"
+
+#. i18n: file: kdiff3_part.rc:13
+#. i18n: ectx: Menu (movement)
+#: rc.cpp:8
+msgid "Configure KDiff3"
+msgstr "Configura el KDiff3"
+
+#. i18n: file: kdiff3_part.rc:16
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:11
+msgid "KDiff3"
+msgstr "KDiff3"
+
+#. i18n: file: kdiff3_shell.rc:106
+#. i18n: ectx: ToolBar (mainToolBar)
+#: rc.cpp:38
+msgid "Main Toolbar"
+msgstr "Barra d'eines principal"
