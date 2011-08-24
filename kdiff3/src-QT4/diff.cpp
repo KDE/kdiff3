@@ -386,24 +386,90 @@ static bool convertFileEncoding( const QString& fileNameIn, QTextCodec* pCodecIn
    return true;
 }
 
+static QTextCodec* getEncodingFromTag( const QByteArray& s, const QByteArray& encodingTag )
+{   
+   int encodingPos = s.indexOf( encodingTag );
+   if ( encodingPos>=0 )
+   {
+      int apostrophPos = s.indexOf( '"', encodingPos + encodingTag.length() );
+      int apostroph2Pos = s.indexOf( '\'', encodingPos + encodingTag.length() );
+      char apostroph = '"';
+      if ( apostroph2Pos>=0 && ( apostrophPos<0 || apostrophPos>=0 && apostroph2Pos < apostrophPos ) )
+      {
+         apostroph = '\'';
+         apostrophPos = apostroph2Pos;
+      }
+
+      int encodingEnd = s.indexOf( apostroph, apostrophPos+1 );
+      if ( encodingEnd>=0 ) // e.g.: <meta charset="utf-8"> or <?xml version="1.0" encoding="ISO-8859-1"?>
+      {
+         QByteArray encoding = s.mid( apostrophPos+1, encodingEnd - (apostrophPos + 1) );
+         return QTextCodec::codecForName( encoding );
+      }
+      else // e.g.: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      {
+         QByteArray encoding = s.mid( encodingPos+encodingTag.length(), apostrophPos - ( encodingPos+encodingTag.length() ) );
+         return QTextCodec::codecForName( encoding );
+      }
+   }
+   return 0;
+}
+
 static QTextCodec* detectEncoding( const char* buf, qint64 size, qint64& skipBytes )
 {
    if (size>=2)
    {
-      skipBytes = 2;
       if (buf[0]=='\xFF' && buf[1]=='\xFE' )
+      {
+         skipBytes = 2;
          return QTextCodec::codecForName( "UTF-16LE" );
+      }
 
       if (buf[0]=='\xFE' && buf[1]=='\xFF' )
+      {
+         skipBytes = 2;
          return QTextCodec::codecForName( "UTF-16BE" );
+      }
    }
    if (size>=3)
    {
-      skipBytes = 3;
       if (buf[0]=='\xEF' && buf[1]=='\xBB' && buf[2]=='\xBF' )
+      {
+         skipBytes = 3;
          return QTextCodec::codecForName( "UTF-8-BOM" );
+      }
    }
    skipBytes = 0;
+   QByteArray s( buf, size );
+   int xmlHeaderPos = s.indexOf( "<?xml" );
+   if ( xmlHeaderPos >= 0 )
+   {
+      int xmlHeaderEnd = s.indexOf( "?>", xmlHeaderPos );
+      if ( xmlHeaderEnd>=0 )
+      {
+         QTextCodec* pCodec = getEncodingFromTag( s.mid( xmlHeaderPos, xmlHeaderEnd - xmlHeaderPos ), "encoding=" );
+         if (pCodec)
+            return pCodec;
+      }
+   }
+   else // HTML
+   {
+      int metaHeaderPos = s.indexOf( "<meta" );
+      while ( metaHeaderPos >= 0)
+      {
+         int metaHeaderEnd = s.indexOf( ">", metaHeaderPos );
+         if (metaHeaderEnd>=0)
+         {
+            QTextCodec* pCodec = getEncodingFromTag( s.mid( metaHeaderPos, metaHeaderEnd - metaHeaderPos ), "charset=" );
+            if (pCodec)
+               return pCodec;
+
+            metaHeaderPos = s.indexOf( "<meta", metaHeaderEnd );
+         }
+         else
+            break;
+      }
+   }
    return 0;
 }
 
@@ -412,7 +478,7 @@ QTextCodec* SourceData::detectEncoding( const QString& fileName, QTextCodec* pFa
    QFile f(fileName);
    if ( f.open(QIODevice::ReadOnly) )
    {
-      char buf[4];
+      char buf[200];
       qint64 size = f.read( buf, sizeof(buf) );
       qint64 skipBytes = 0;
       QTextCodec* pCodec = ::detectEncoding( buf, size, skipBytes );
