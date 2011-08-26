@@ -4,7 +4,7 @@
 >KDiff3</application
 >">
   <!ENTITY kappname "&kdiff3;">
-  <!ENTITY package "kdeextragear-1">
+  <!ENTITY package "extragear-utils">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % Italian "INCLUDE">
 ]>
@@ -27,45 +27,50 @@ as Authors, publish date, the abstract, and Keywords -->
 > <affiliation
 ><address
 > <email
->joachim.eibl at gmx.de</email>
+>joachim.eibl@gmx.de</email>
 </address
 ></affiliation>
 </author>
-</authorgroup>
-
 <othercredit role="translator"
 ><firstname
 >Stelvio</firstname
 ><surname
 >Rosset</surname
 ><affiliation
-><address
-><email
->srosset@satelgroup.net</email
-></address
 ></affiliation
 ><contrib
->Traduzione della documentazione -2004</contrib
+>Traduzione della documentazione, 2004</contrib
 ></othercredit
-> <othercredit role="translator"
+><othercredit role="translator"
 ><firstname
->Andrea</firstname
+>Marcello</firstname
 ><surname
->Celli</surname
+>Anni</surname
+><affiliation
+></affiliation
+><contrib
+>Aggiornamento e revisione della traduzione, 2007</contrib
+></othercredit
+><othercredit role="translator"
+><firstname
+>Federico</firstname
+><surname
+>Zenith</surname
 ><affiliation
 ><address
 ><email
->a.celli@caltanet.it</email
+>federico.zenith@member.fsf.org</email
 ></address
 ></affiliation
 ><contrib
->Aggiornamento e revisione della traduzione - 2005</contrib
+>Aggiornamento della traduzione, 2009</contrib
 ></othercredit
 >  
+</authorgroup>
 
 <copyright>
 <year
->2002-2005</year>
+>2002-2007</year>
 <holder
 >Joachim Eibl</holder>
 </copyright>
@@ -83,48 +88,54 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date
->2005-01-30</date>
+>2007-31-03</date>
 <releaseinfo
->0.9.87</releaseinfo>
+>0.9.92</releaseinfo>
 
 
 <abstract>
 <para
-></para>
-<para
->&kdiff3; è uno strumento per verificare differenze ed eseguire fusioni tra file e directory, il quale <itemizedlist>
+>&kdiff3; è uno strumento per verificare le differenze ed eseguire fusioni tra file e cartelle, che: <itemizedlist>
 <listitem
 ><para
->confronta e fonde due o tre file di testo o directory in ingresso, </para
+>confronta e fonde due o tre file di testo o cartelle in ingresso,</para
 ></listitem>
 <listitem
 ><para
->mostra le loro differenze riga per riga o carattere per carattere(!), </para
+>ne mostra le differenze riga per riga o carattere per carattere,</para
 ></listitem>
 <listitem
 ><para
->fornisce semplici automatismi per fonderli,</para
+>dà un modo semplice per fonderli,</para
 ></listitem>
 <listitem
 ><para
->possiede un editor per la risoluzione dei conflitti di fusione,</para
+>ha un editor per risolvere comodamente i conflitti di fusione,</para
 ></listitem>
 <listitem
 ><para
->rende trasparente la rete con l'uso di KIO,</para
+>supporta la trasparenza di rete tramite KIO,</para
 ></listitem>
 <listitem
 ><para
->permette di nascondere o mostrare le differenze costituite da spazi bianchi o commenti,</para
+>ha delle opzioni per evidenziare o nascondere le differenze costituite da spazi o commenti nel codice,</para
 ></listitem>
 <listitem
 ><para
->supporta l'Unicode, UTF-8 e altre codifiche.</para
+>supporta Unicode, UTF-8 e altre codifiche,</para
+></listitem>
+<listitem
+><para
+>stampa le differenze,</para
+></listitem>
+<listitem
+><para
+>supporta la fusione delle parole chiave del controllo di versione e della cronologia.</para
 ></listitem>
 </itemizedlist>
 </para
 ><para
->Questo documento descrive la versione 0.9.87 di KDiff3. </para>
+>Questo documento descrive la versione 0.9.92 di &kdiff3;. </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
@@ -139,37 +150,37 @@ Please at least include KDE, the KDE package it is in, the name
 <keyword
 >kdiff3</keyword>
 <keyword
->diff</keyword>
+>differenze</keyword>
 <keyword
->merge</keyword>
+>fusione</keyword>
 <keyword
 >CVS</keyword>
 <keyword
->triplediff</keyword>
+>confronto tra tre file</keyword>
 <keyword
->compare</keyword>
+>confronta</keyword>
 <keyword
 >file</keyword>
 <keyword
->directory</keyword>
+>cartelle</keyword>
 <keyword
->controllo versione</keyword>
+>controllo di versione</keyword>
 <keyword
->three-way-merge</keyword>
+>fusione di tre file</keyword>
 <keyword
->in-line-differences</keyword>
+>differenze in riga</keyword>
 <keyword
->synchronise</keyword>
+>sincronizza</keyword>
 <keyword
 >kpart</keyword>
 <keyword
 >kio</keyword>
 <keyword
->networktransparent</keyword>
+>trasparenza di rete</keyword>
 <keyword
 >editor</keyword>
 <keyword
->spazio bianco</keyword>
+>spazio</keyword>
 <keyword
 >commenti</keyword>
 </keywordset>
@@ -183,32 +194,32 @@ Please at least include KDE, the KDE package it is in, the name
 ><title
 >Un'altra interfaccia per confrontare file?</title>
 <para
->Per la comparazione dei file esistono numerosi strumenti grafici. Perché dovresti scegliere KDiff3? Lascia che ti spieghi perché l'ho scritto. </para
+>Per il confronto dei file esistono numerosi strumenti grafici. Perché dovresti scegliere &kdiff3;? Lascia che ti spieghi perché l'ho scritto. </para
 ><para
->KDiff3 è nato perché dovevo eseguire una difficile fusione tra file. La fusione è necessaria quando molte persone, in un progetto, lavorano sugli stessi file. La fusione può essere piuttosto automatica, quando gli strumenti di fusione non solo permettono la modifica dei nuovi file ("rami") ma anche del file originale ("base"). Lo strumento per la fusione sceglierà automaticamente solo le modifiche eseguite all'interno di un ramo. Quando più persone cambiano le stesse righe, allora lo strumento di fusione trova un conflitto che dovrà essere risolto manualmente. </para
+>&kdiff3; è nato perché dovevo eseguire una difficile fusione tra file. La fusione è necessaria quando più persone lavorano sugli stessi file in un progetto. La fusione può essere per lo più automatica, quando gli strumenti di fusione non solo permettono la modifica dei nuovi file («rami») ma anche del file originale («base»). Lo strumento per la fusione sceglierà automaticamente solo le modifiche eseguite all'interno di un ramo. Quando più persone cambiano le stesse righe, allora lo strumento di fusione trova un conflitto che dovrà essere risolto manualmente. </para
 ><para
->In quel caso la fusione era difficile in quanto uno aveva cambiato molte cose e corretto l'indentazione in molti punti. Inoltre, un altro aveva variato molto testo in alcuni file, dando luogo a molti conflitti durante l'operazione di fusione. </para
+>In quel caso la fusione era difficile in quanto un collaboratore aveva cambiato molte cose e corretto l'indentazione in molti punti. Inoltre, un altro aveva cambiato molto testo nello stesso file, dando luogo a molti conflitti durante l'operazione di fusione. </para
 ><para
->Lo strumento che utilizzai mostrava solamente le righe variate, ma non cosa era cambiato all'interno di esse. Inoltre non c'era nessuna informazione riguardo la variazione di indentazione. La fusione era un piccolo incubo. </para
+>Lo strumento che usavo a quel tempo mostrava solamente le righe modificate, ma non cosa era cambiato dentro di loro. Inoltre non c'erano informazioni su dove fosse cambiata solo l'indentazione. La fusione fu un piccolo incubo. </para
 ><para
->Così fu l'inizio. La prima versione poteva mostrare le differenze all'interno di una riga e la differenza degli spazi bianchi. Successivamente molte altre caratteristiche furono introdotte per aumentarne l'utilità. </para
+>Così fu l'inizio. La prima versione poteva mostrare le differenze all'interno di una riga e tra gli spazi. Successivamente molte altre funzionalità sono state introdotte per aumentarne l'utilità. </para
 ><para
->Per esempio, se vuoi comparare velocemente alcuni testi, è possibile copiarne il contenuto negli appunti e quindi incollarlo in una finestra di KDiff3. </para
+>Per esempio, se vuoi confrontare velocemente alcuni testi, è possibile copiarne il contenuto negli appunti e quindi incollarlo in una delle finestre delle differenze. </para
 ><para
->Una caratteristica che ha richiesto un grosso sforzo è stata la comparazione tra directory e la funzione di fusione, le quali hanno trasformato il programma in un vero e proprio navigatore di file. </para
+>Una funzionalità che ha richiesto molto lavoro è stato il confronto tra cartelle e la funzione di fusione, che hanno trasformato il programma quasi in navigatore di file completo. </para
 ><para
->Spero che KDiff3 sia utile anche a te. Divertiti! </para
+>Spero che &kdiff3; sia utile anche a te. Divertiti! </para
 ><para
 >Joachim Eibl (2003) </para>
 </sect1>
 
 <sect1 id="screenshots"
 ><title
->Schermate e caratteristiche</title>
+>Schermate e funzionalità</title>
 <para
 >Questa schermata mostra la differenza tra due file di testo</para>
 <para
->(Usando una versione recente di KDiff3):</para>
+>(Usando una vecchia versione di &kdiff3;):</para>
 <screenshot
 ><mediaobject>
    <imageobject
@@ -217,7 +228,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></screenshot>
 
 <para
->È supportata la fusione di tre file. Questa è particolarmente utile se due persone variano indipendentemente il codice. Il file originale (il file base) è utilizzato per aiutare KDiff3 a selezionare automaticamente i cambiamenti da salvare. Sotto le finestre che evidenziano le differenze una finestra di modifica ti permetterà di risolvere i conflitti riscontrati, mostrandone il risultato ottenuto. Potrai inoltre modificare il risultato delle operazioni. Questa schermata mostra il risultato della fusione di tre file in ingresso: </para
+>La fusione di tre file è completamente supportata. Questa è particolarmente utile se due persone cambiano indipendentemente il codice. Si usa il file originale (la base) per aiutare &kdiff3; a selezionare automaticamente le modifiche giuste. Sotto le finestre che evidenziano le differenze, una finestra di modifica ti permetterà di risolvere i conflitti, mostrandone il risultato ottenuto. Puoi anche modificare il risultato delle operazioni. Questa schermata mostra il risultato della fusione di tre file in ingresso: </para
 ><para>
 <screenshot
 ><mediaobject>
@@ -228,7 +239,7 @@ Please at least include KDE, the KDE package it is in, the name
 </para>
 
 <para id="dirmergebigscreenshot"
->KDiff3 aiuta anche a comparare e fondere intere directory. Questa schermata mostra KDiff3 durante una fusione di directory: </para
+>&kdiff3; ti aiuta anche a confrontare e fondere intere cartelle. Questa schermata mostra &kdiff3; durante una fusione tra cartelle: </para
 ><para>
 <screenshot
 ><mediaobject>
@@ -241,12 +252,12 @@ Please at least include KDE, the KDE package it is in, the name
 
 <sect1 id="features"
 ><title
->Altre caratteristiche</title>
+>Altre funzionalità</title>
 <sect2
 ><title
->Indicazione delle differenze per riga e per carattere</title>
+>Visore delle differenze per riga e per carattere</title>
 <para
->Sfruttando le possibilità dei monitor grafici a colori, KDiff3 evidenzia accuratamente quali sono le differenze. Quando avrai la necessità di fare molte revisioni di codice, apprezzerai questo aiuto. </para>
+>Sfruttando le potenzialità dei monitor a colori, &kdiff3; evidenzia accuratamente le differenze. Quando dovrai fare molte revisioni di codice, apprezzerai questo aiuto. </para>
 <screenshot
 ><mediaobject>
    <imageobject
@@ -257,9 +268,9 @@ Please at least include KDE, the KDE package it is in, the name
 
 <sect2
 ><title
->Vedere le differenze di spazi bianchi a colpo d'occhio</title>
+>Vedere le differenze tra spazi a colpo d'occhio</title>
 <para
->Saranno visibili spazi e tabulatori che risultano diversi. Quando le righe differiscono solamente di uno spazio bianco questo potrà essere subito visibile nella colonna di sommario posizionata sul lato sinistro. Non dovrai più preoccuparti quando qualcuno cambia l'indentazione! </para>
+>Saranno ben visibili spazi e tabulatori che risultano diversi. Quando le righe differiscono soltanto per uno spazio, lo si potrà subito vedere nella colonna di sommario sul lato sinistro (non dovrai più preoccuparti quando qualcuno cambia l'indentazione). </para>
 <screenshot
 ><mediaobject>
    <imageobject
@@ -274,9 +285,9 @@ Please at least include KDE, the KDE package it is in, the name
 <para
 >Analizza tre file e verifica dove differiscono. </para
 ><para
->Le finestre sinistra/centrale/destra si chiamano A/B/C ed hanno rispettivamente il colore /blu/verde/magenta. </para
+>Le finestre sinistra, centrale e destra si chiamano A, B e C ed hanno rispettivamente i colori blu, verde e magenta. </para
 ><para
->Se per una riga due file sono uguali ed un altro è diverso, il colore mostrerà quello diverso. Il colore rosso significa che tutti i file sono diversi. </para>
+>Se per una riga due file sono uguali ed un altro è diverso, il colore indica quello diverso. Il colore rosso significa che tutti i file sono diversi. </para>
 <screenshot
 ><mediaobject>
    <imageobject
@@ -287,14 +298,14 @@ Please at least include KDE, the KDE package it is in, the name
 
 <sect2
 ><title
->Comoda fusione di due o tre file di input</title>
+>Comoda fusione di due o tre file in ingresso</title>
 <para
->KDiff3 può essere usato per fondere due o tre file di ingresso ed automaticamente fonde quanto è possibile. Il risultato è presentato in una finestra di modifica dove molti conflitti possono essere risolti con un semplice clic del mouse: Selezionando i pulsanti A/B/C dalla barra si seleziona la sorgente che deve essere utilizzata. È possibile selezionare più di un file sorgente. Dato che questa finestra è un editor anche i conflitti che hanno bisogno di ulteriori correzioni possono essere qui risolti senza bisogno di un altro strumento. </para>
+>&kdiff3; può essere usato per fondere due o tre file di ingresso e fonderli automaticamente il più possibile. Il risultato è presentato in una finestra di modifica dove la maggior parte dei conflitti possono essere risolti con un semplice clic del mouse: seleziona i pulsanti A, B e C dalla barra dei pulsanti per selezionare la sorgente da usare. È possibile anche selezionare più di una sorgente. Dato che questa finestra è un editor, qui si possono risolvere anche i conflitti che hanno bisogno di ulteriori correzioni, senza bisogno di altri strumenti. </para>
 </sect2>
 
 <sect2
 ><title
->Inoltre ...</title>
+>Inoltre...</title>
 <itemizedlist>
    <listitem
 ><para
@@ -302,7 +313,7 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
    <listitem
 ><para
->Un clic del mouse nella colonna di sommario sincronizzerà tutte le finestre per mostrare la stessa posizione.</para
+>Un clic del mouse nella colonna di sommario sincronizza tutte le finestre, facendo loro mostrare la stessa posizione.</para
 ></listitem>
    <listitem
 ><para
@@ -310,15 +321,15 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
    <listitem
 ><para
->Colonna riassuntiva, che mostra dove sono i cambiamenti ed i conflitti.</para
+>Colonna riassuntiva che mostra dove sono cambiamenti e conflitti.</para
 ></listitem>
    <listitem
 ><para
->È possibile modificare i colori secondo le tue preferenze personali.</para
+>È possibile regolare i colori come vuoi.</para
 ></listitem>
    <listitem
 ><para
->Dimensione della tabulazione modificabile.</para
+>Dimensione regolabile delle tabulazioni.</para
 ></listitem>
    <listitem
 ><para
@@ -326,19 +337,29 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
    <listitem
 ><para
->È possibile aprire i file comodamente dalla finestra di dialogo oppure specificandoli sulla riga di comando.</para
+>Apri i file comodamente da una finestra, oppure specificandoli dalla riga di comando.</para
 ></listitem>
    <listitem
 ><para
->Ricerca stringhe in tutto il testo della finestra. Trova (Ctrl-F) e Trova Successivo (F3)</para
+>Ricerca di stringhe in tutto il testo della finestra. <guilabel
+>Trova</guilabel
+> (<keycombo action="simul"
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) e <guilabel
+>Trova Successivo</guilabel
+> (<keycap
+>F3</keycap
+>).</para
 ></listitem>
    <listitem
 ><para
->Mostra il numero di riga per ogni riga. </para
+>Mostra il numero di ogni riga. </para
 ></listitem>
    <listitem
 ><para
->Incolla dagli appunti o trascina il testo nella finestra di KDiff3.</para
+>Incolla dagli appunti o trascina il testo in una finestra di confronto.</para
 ></listitem>
    <listitem
 ><para
@@ -346,15 +367,15 @@ Please at least include KDE, the KDE package it is in, the name
 ></listitem>
    <listitem
 ><para
->Può essere utilizzato come visualizzatore delle differenze in Kdevelop 3.</para
+>Può essere usato come visore delle differenze in KDevelop 3.</para
 ></listitem>
    <listitem
 ><para
->Accapo per righe lunghe.</para
+>A capo per righe lunghe.</para
 ></listitem>
    <listitem
 ><para
->Supporto per l'Unicode, UTF-8 e altri codec.</para
+>Supporto per Unicode, UTF-8 e altre codifiche.</para
 ></listitem>
    <listitem
 ><para
@@ -371,15 +392,15 @@ Please at least include KDE, the KDE package it is in, the name
 
 <chapter id="documentation"
 ><title
->Confronto e fusione tra file</title>
+>Confronto e fusione file</title>
 
 <sect1 id="commandline"
 ><title
->Opzioni della riga di comando</title>
+>Opzioni da riga di comando</title>
 
 <sect2
 ><title
->Confronta 2 file: </title>
+>Confrontare due file: </title>
 <screen
 ><command
 >kdiff3</command
@@ -391,7 +412,7 @@ Please at least include KDE, the KDE package it is in, the name
 
 <sect2
 ><title
->Fondi 2 file: </title>
+>Fondere due file: </title>
 <screen
 ><command
 >kdiff3</command
@@ -403,14 +424,14 @@ Please at least include KDE, the KDE package it is in, the name
 > <replaceable
 >file1 file2</replaceable
 > -o <replaceable
->outputfile</replaceable
+>file_di_uscita</replaceable
 >
 </screen>
 </sect2>
 
 <sect2
 ><title
->Confronta 3 file: </title>
+>Confrontare tre file: </title>
 <screen
 ><command
 >kdiff3</command
@@ -422,7 +443,7 @@ Please at least include KDE, the KDE package it is in, the name
 
 <sect2
 ><title
->Fondi 3 file: </title>
+>Fondere tre file: </title>
 <screen
 ><command
 >kdiff3</command
@@ -434,96 +455,139 @@ Please at least include KDE, the KDE package it is in, the name
 > <replaceable
 >file1 file2 file3</replaceable
 > -o <replaceable
->outputfile</replaceable
+>file_di_uscita</replaceable
 >
 </screen>
 <para
->Da notare che <replaceable
+>Nota che <replaceable
 >file1</replaceable
-> potrebbe essere trattato come base di <replaceable
+> sarà trattato come la base di <replaceable
 >file2</replaceable
-> e <replaceable
+> e il <replaceable
 >file3</replaceable
 >. </para>
 </sect2>
 
 <sect2
 ><title
->Caso particolare: File con lo stesso nome </title>
+>Caso particolare: file con lo stesso nome </title>
 <para
->Se tutti i file hanno lo stesso nome ma si trovano in directory diverse, è possibile specificare solamente il nome del primo file. Es.: </para>
+>Se tutti i file hanno lo stesso nome, ma si trovano in cartelle diverse, è possibile specificare solamente il nome del primo file. Per esempio: </para>
 <screen
 ><command
 >kdiff3</command
 > <replaceable
->dir1/filename dir2 dir3</replaceable
+>cartella1/file cartella2 cartella3</replaceable
 >
 </screen>
 </sect2>
 
 <sect2
 ><title
->Riga di comando per avviare il confronto e la fusione tra directory: </title>
+>Riga di comando per avviare un confronto o una fusione tra cartelle: </title>
 <para
->Non cambia molto, ma ora lavoriamo su delle directory.</para>
+>È molto simile, ma ora lavoriamo sulle cartelle.</para>
 <screen
 ><command
 >kdiff3</command
 > <replaceable
->dir1 dir2</replaceable>
+>cartella1 cartella2</replaceable>
    <command
 >kdiff3</command
 > <replaceable
->dir1 dir2</replaceable
+>cartella1 cartella2</replaceable
 > -o <replaceable
->destdir</replaceable>
+>cartella_destinazione</replaceable>
    <command
 >kdiff3</command
 > <replaceable
->dir1 dir2 dir3</replaceable>
+>cartella1 cartella2 cartella3</replaceable>
    <command
 >kdiff3</command
 > <replaceable
->dir1 dir2 dir3</replaceable
+>cartella1 cartella2 cartella3</replaceable
 > -o <replaceable
->destdir</replaceable
+>cartella_destinazione</replaceable
 >
 </screen>
 <para
->Per maggiori informazioni su confronto e fusione tra directory leggi <link linkend="dirmerge"
->qui</link
+>Per maggiori informazioni sul confronto e fusione tra cartelle leggi <link linkend="dirmerge"
+>qua</link
 >.</para>
 </sect2>
 
 <sect2
 ><title
->Per maggiori informazioni sulle opzioni della riga di comando usa: </title>
+>Altre opzioni da riga di comando</title>
+<para
+>Per vedere tutte le opzioni disponibili per la riga di comando scrivi:</para>
 <screen
 ><command
 >kdiff3</command
 > --help
-Opzioni:
+</screen>
+<para
+>Esempio di risultato:</para>
+<screen
+>Opzioni:
   -m, --merge               Fondi l'input.
   -b, --base file           Fissa il file di base. Per compatibilità con alcuni programmi.
-  -o, --output file           File di output. Implica -m. Es.: -o nuovofile.txt
-  --out file              File di output (Per compatibilità con alcuni programmi).
-  --auto                    Senza GUI se tutti i conflitti possono essere risolti automaticamente (richiede -o file)
-  --qall                    Non risolve i conflitti automaticamente. (Per compatibilità...)
-  --L1 alias1               Sostituzione del nome visibile per file input 1 (base).
-  --L2 alias2               Sostituzione del nome visibile per file input 2.
-  --L3 alias3               Sostituzione del nome visibile per file input 3.
-  -L, --fname alias         Sostituzione del nome visibile alternativo. Da specificare per ogni input.
-  -u                        Non ha effetti. Per compatibilità con alcuni programmi.
+  -o, --output file         File di uscita. Implica -m. Es.: -o nuovofile.txt
+  --out file                File di uscita (per compatibilità con alcuni programmi).
+  --auto                    Senza interfaccia grafica se tutti i conflitti possono essere risolti automaticamente (richiede -o file).
+  --qall                    Non risolve i conflitti automaticamente (per compatibilità).
+  --L1 alias1               Sostituzione del nome visibile per file di ingresso 1 (base).
+  --L2 alias2               Sostituzione del nome visibile per file di ingresso 2.
+  --L3 alias3               Sostituzione del nome visibile per file di ingresso 3.
+  -L, --fname alias         Sostituzione del nome visibile alternativo. Da specificare per ogni ingresso.
+  --cs string               Sovrascrive le impostazioni della configurazione. Usalo una volta per ogni impostazione. Per esempio: --cs "AutoAdvance=1"
+  --confighelp              Mostra una lista di impostazioni di configurazione e i loro valori attuali.
+  --config file             Usa un altro file di configurazione.
 </screen>
+<para
+>L'opzione <option
+>--cs</option
+> ti permette di regolare un valore di configurazione che altrimenti sarebbe modificabile solo tramite le finestre di configurazione. Stai però attento, perché quando &kdiff3; viene chiuso con il valore modificato, questa modifica verrà memorizzata con le altre impostazioni. Con <option
+>--confighelp</option
+> puoi trovare i nomi degli elementi disponibili e i loro valori attuali.</para>
+<para
+>Con <option
+>--config</option
+> puoi specificare un altro file di configurazione. Quando usi spesso &kdiff3; con configurazioni completamente diverse, questo ti permette di passare facilmente da una all'altra.</para>
+</sect2>
+<sect2
+><title
+>Opzioni da riga di comando ignorabili</title>
+<para
+>Molte persone vogliono usare &kdiff3; con qualche sistema di controllo di versione. Ma quando quel sistema di controllo di versione chiama &kdiff3; usando parametri della riga di comando che &kdiff3; non riconosce, allora &kdiff3; termina con un errore. Le impostazioni di integrazione permettono di specificare parametri della riga di comando che dovrebbero essere ignorati da &kdiff3;. Essi appariranno nell'aiuto all'uso come in questo esempio:</para>
+<screen
+>--<replaceable
+>pippo</replaceable
+>                     Ignorato (definito dall'utente).
+</screen>
+<variablelist>
+  <varlistentry
+><term
+><emphasis
+>Opzioni da riga di comando da ignorare:</emphasis
+></term
+><listitem
+><para
+>Una lista di opzioni, separate da un punto e virgola, «;». Quando una di queste opzioni appare nella riga di comando, &kdiff3; la ignorerà e verrà eseguito senza riportare errori (le opzioni predefinite sono «u;query;html;abort»).</para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Se questo non bastasse, si raccomanda di scrivere uno script per la shell per tradurre l'opzione.</para>
 </sect2>
 
 </sect1>
 
 <sect1 id="opendialog"
 ><title
->Dialogo di apertura file</title>
+>Finestra di apertura dei file</title>
 <para
->Poiché devono essere selezionati molti file, il programma ha un particolare dialogo di apertura file: </para>
+>Poiché devono essere selezionabili molti file, il programma ha una particolare finestra per aprirli: </para>
 <screenshot
 ><mediaobject>
 <imageobject
@@ -531,53 +595,121 @@ Opzioni:
 </mediaobject
 ></screenshot>
 <para
->Il dialogo di apertura file permette di digitare il nome del file, di selezionare un file con il navigatore ("File...") o di scegliere i file più recenti da una lista a comparsa. Quando aprirai nuovamente il dialogo di selezione dei file vi troverai i nomi dei file in uso. Il nome del terzo file non è richiesto. Se il campo per "C" rimane vuoto, le operazioni di confronto riguarderanno solo due file. </para
+>La finestra di apertura permette di scrivere il nome del file a mano, di selezionare un file con il navigatore (<guilabel
+>File...</guilabel
+>) o di scegliere i file più recenti da una lista a comparsa. Se riapri la finestra, i nomi attuali rimarranno lì. Il nome del terzo file di input non è necessario. Se il campo di «C» rimane vuoto, verrà fatta soltanto un'operazione di confronto tra due file. </para
 ><para
->Puoi anche selezionare una directory con "Directory...". Se per A è specificata una directory allora sarà automaticamente attivata la comparazione/fusione di directory. Se A specifica un file ma B e C o l'output specifica una directory, allora KDiff3 utilizza il nome del file di A nella directory specificata. </para
+>Puoi anche selezionare una cartella con <guilabel
+>Cartella...</guilabel
+>. Se per A è specificata una cartella sarà automaticamente attivato il confronto o la fusione di cartelle. Se A specifica un file ma B, C o l'uscita specificano una cartella, &kdiff3; usa il nome del file di A nella cartelle specificate. </para
 ><para
->Se viene selezionato "Fusione", allora l'opzione "Output" diverrà modificabile. Ma non è richiesto di specificare subito il nome del file in uscita. Potrai specificarlo successivamente. </para
+>Se viene selezionato <guilabel
+>Fondi</guilabel
+>, allora la riga <guilabel
+>Uscita</guilabel
+> diverrà modificabile. Però non è necessario specificare subito il nome del file in uscita: lo potrai specificare in seguito, fino al momento del salvataggio. </para
 ><para
->L'opzione "Configura..." apre un menu di opzioni, in modo che tu possa impostare le varie opzioni prima di avviare l'analisi. </para>
+>Il pulsante <guilabel
+>Configura...</guilabel
+> apre una finestra di opzioni, per poterle impostare prima di avviare l'analisi. </para>
 </sect1>
 
 <sect1 id="pasteinput"
 ><title
->Incolla e trascina l'input</title>
+>Incolla e trascina l'ingresso</title>
 <para
->Molte volte vuoi comparare parti di testo che non sono un file. KDiff3 permette anche di incollare testo dagli appunti nella finestra di verifica delle differenze selezionata. L'analisi delle differenze apparirà immediatamente. Nel dialogo di selezione file non avrai la necessità di specificare i file, potrai semplicemente chiudere con l'opzione "Annulla". </para
+>A volte vorresti confrontare parti di testo che non sono un file. &kdiff3; permette anche di incollare del testo dagli appunti nella finestra di confronto selezionata. L'analisi delle differenze apparirà immediatamente. Nella finestra di apertura dei file non dovrai specificare i file, basterà chiuderla con <guilabel
+>Annulla</guilabel
+>. </para
 ><para
->È possibile utilizzare il trascinamento: prendi un file dal file manager o seleziona un testo da un editor e trascinalo dentro una finestra di verifica. </para
+>È anche possibile usare il trascinamento: prendi un file dal gestore dei file o seleziona del testo da un editor, e trascinalo dentro una finestra di confronto. </para
 ><para
->Qual è l'idea? Alcune volte un file contiene due funzioni simili, ma per controllarne il grado di similitudine sarebbe dispendioso se tu dovessi prima creare due file e quindi ricaricarli. Ora puoi semplicemente copiare, incollare e comparare la sola parte di interesse. </para
+>Qual è l'idea? A volte un file contiene due funzioni simili, ma controllare quanto lo sono effettivamente è una seccatura se si devono prima creare due file e quindi caricarli. Ora puoi semplicemente copiare, incollare e confrontare le sezioni rilevanti. </para
 ><para
->Nota: Attualmente non è possibile trascinare qualsiasi cosa all'interno di KDiff3. Puoi solo portare qualcosa nella finestra di verifica delle differenze. </para
+>Nota: al momento non puoi trascinare niente da &kdiff3;. Solo l'inserimento nella finestra di confronto delle differenze è supportato. </para
 ><para
->Attenzione: Alcuni editor interpretano il trascinamento in altri programmi come operazioni di taglia (invece che copia) ed incolla. In tal caso i dati originali andrebbero quindi persi. </para>
+>Attenzione: alcuni editor interpretano il trascinamento in altri programmi come operazioni di taglia (invece che copia) e incolla. In tal caso i dati originali andrebbero quindi persi. </para>
 </sect1>
 
 <sect1 id="interpretinginformation"
 ><title
->Capire le informazioni della finestra di ingresso</title>
+>Confrontare i file e interpretare le informazioni nelle finestre di ingresso</title>
 <screenshot
 ><mediaobject>
 <imageobject
 ><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
 </mediaobject
 ></screenshot>
-<para
->Sopra ad ogni finestra di testo c'è una "riga informativa". Queste righe contengono una lettera "A", "B" o "C", il nome del file ed il numero della prima riga visibile nella finestra. (Nota che "C" è opzionale). Ogni riga informativa appare con colori diversi. (Se i percorsi sono troppo lunghi, è possibile muovere il mouse sulla riga informativa e un suggerimento visualizzerà l'intero nome). </para
+<sect2
+><title
+>Riga informativa</title
 ><para
->Alle tre finestre di input sono assegnate le lettere "A", "B" e "C". "A" è colorata di blu, "B" di verde e "C" di rosso. Questi sono i colori predefiniti, ma puoi cambiarli dal menu delle impostazioni. </para
+>Sopra ad ogni finestra di testo c'è una «riga informativa». Queste  contengono una lettera «A», «B» o «C», il nome del file modificabile, un pulsante per la navigazione e il numero della prima riga visibile nella finestra (nota che «C» è opzionale). Ogni riga informativa appare con un colore diverso. </para
 ><para
->Quando si trova una differenza allora il colore mostra quale file di ingresso differisce. Quando entrambi gli altri file di input differiscono il colore utilizzato per evidenziare questo sarà il rosso ("Colore di conflitto" nelle impostazioni). Questo schema di colori è molto utile nel caso di tre file di ingresso, che discuteremo nella prossima sezione (<link linkend="merging"
+>Quando hai selezionato un altro file con la navigazione, o hai finito di modificare il nome di un file premendo <keycap
+>Invio</keycap
+>, il nuovo file verrà caricato e confrontato con i file già caricati. </para
+></sect2
+><sect2
+><title
+>Colorazione</title
+><para
+>Alle tre finestre di ingresso sono assegnate le lettere «A», «B» e «C». «A» è colorata di blu, «B» di verde e «C» di magenta; questi sono i colori predefiniti, ma puoi cambiarli dal menu delle impostazioni. </para
+><para
+>Quando si trova una differenza, il colore mostra quale file di ingresso differisce. Quando entrambi gli altri file di ingresso differiscono, il colore usato per evidenziare la situazione sarà il rosso (<guilabel
+>Colore per i conflitti</guilabel
+> nelle impostazioni). Questo schema di colori è molto utile nel caso di tre file di ingresso, che discuteremo nella prossima sezione (<link linkend="merging"
 >Fusione</link
 >). </para
+></sect2
+><sect2
+><title
+>Colonna di sommario</title
 ><para
->A sinistra di ogni testo è posizionata la "colonna di sommario". Se ci sono differenze su una riga, la colonna di sommario mostrerà il colore corrispondente. Nel sommario le differenze di soli spazi bianchi saranno evidenziate con una griglia. Per i linguaggi di programmazione in cui non è importante la posizione degli spazi bianchi è molto utile notare a colpo d'occhio se qualcosa di importante è stato variato. (In C/C++ lo spazio bianco è importante solamente all'interno delle stringhe, commenti, istruzioni per il preprocessore e solo in altre situazioni molto particolari). </para
+>A sinistra di ogni testo c'è la «colonna di sommario». Se ci sono differenze su una riga, la colonna di sommario ne mostrerà il colore corrispondente. Nel sommario le differenze di soli spazi saranno evidenziate con una griglia. Per i linguaggi di programmazione in cui gli spazi non sono importanti è molto utile notare a colpo d'occhio se è stato cambiato qualcosa di importante (in C e C++ gli spazi sono importanti solamente dentro a stringhe, commenti, istruzioni di preprocesso e solo in altre situazioni molto particolari). </para
 ><para
->La linea verticale che separa la colonna di sommario ed il testo è interrotta se il file di input non presenta righe in questo punto. Quando è attivato il ritorno a capo questa linea verticale apparirà punteggiata in corrispondenza delle righe che vanno a capo. </para
+>La linea verticale che separa la colonna di sommario e il testo è interrotta se il file di ingresso non presenta righe in questo punto. Quando è attivato il ritorno a capo, questa linea verticale sarà punteggiata in corrispondenza delle righe mandate a capo. </para
+></sect2
+><sect2
+><title
+>Colonna riassuntiva</title
 ><para
->Sul lato destro, a sinistra della barra di scorrimento, è presente una colonna informativa. Essa mostra sinteticamente la colonna di sommario dell'ingresso "A". Differenze e conflitti sono visibili a colpo d'occhio. Quando vengono utilizzate solo due finestre di input, tutte le differenze appaiono in rosso, in quanto ogni differenza è un conflitto. Un rettangolo nero incornicia la parte visibile dell'input. Per file di ingresso molto lunghi, quando il numero delle righe è maggiore dell'altezza, in pixel, della colonna di sommario, molte righe di ingresso condividono un'unica riga di sommario. Un conflitto qui ha priorità sulle semplici differenze, che hanno priorità sui "non-cambiamenti". In tal modo così nessuna differenza o conflitto viene perso. Con un clic sopra questa colonna di sommario, il testo corrispondente verrà visualizzato. </para>
+>Sul lato destro, a sinistra della barra di scorrimento, si può vedere una colonna «riassuntiva». Essa mostra sinteticamente la colonna di sommario dell'ingresso «A». Tutte le differenze e i conflitti sono visibili a colpo d'occhio. Quando si usano solo due finestre di ingresso, tutte le differenze appaiono in rosso, perché ogni differenza è un conflitto. Un rettangolo nero incornicia la parte visibile dell'ingresso. Per file di ingresso molto lunghi, quando il numero delle righe è maggiore dell'altezza in pixel della colonna riassuntiva, più righe di ingresso condividono una riga di riassunto. Qui un conflitto ha maggiore priorità rispetto alle semplici differenze, che hanno priorità sul caso di nessuna modifica, così che nessuna differenza o conflitto viene perso. Facendo clic su questa colonna riassuntiva ne verrà visualizzato il testo corrispondente. </para
+></sect2
+><sect2 id="manualdiffhelp"
+><title
+>Allineare le righe manualmente</title
+><para
+>A volte l'algoritmo affianca le linee sbagliate. Oppure vuoi confrontare un estratto di testo con del testo in una posizione completamente diversa nell'altro file. Per queste situazioni puoi ordinare manualmente a &kdiff3; di allineare certe righe. Seleziona il testo per il quale vuoi migliorare l'allineamento con il mouse, come se volessi copiare e incollare nella prima vista delle differenze, e quindi scegli <guimenuitem
+>Aggiungi allineamento manuale delle differenze</guimenuitem
+> nel menu <guimenu
+>Vista di confronto</guimenu
+> (scorciatoia da tastiera <keycombo action="simul"
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+>). Apparirà una barra arancione nella colonna panoramica di fianco al testo scelto. Ripeti l'operazione per la seconda e (se disponibile) terza vista delle differenze. &kdiff3; ricalcolerà immediatamente le differenze ogni volta che lo farai, e allineerà automaticamente le righe scelte. Naturalmente qualcuna delle righe selezionate in precedenza potrebbe non corrispondere più. </para
+><para
+>Attualmente la fusione non supporta l'uso dell'aiuto per le differenze manuali. </para
+></sect2
+><sect2 id="joinsplitsections"
+><title
+>Unire e dividere manualmente sezioni di differenze</title
+><para
+>In alcuni casi &kdiff3; vedrà troppe o troppo poche sezioni di differenze per la fusione. In questo caso puoi unire o dividere le sezioni esistenti. </para
+><para
+>Aggiungi le nuove sezioni selezionando per prima cosa del testo nelle righe corrispondenti in una delle finestre di ingresso (come quando si copia negli appunti). Scegli quindi <guimenuitem
+>Dividi differenze alla selezione</guimenuitem
+> nel menu <guimenu
+>Fondi</guimenu
+>. Le divisioni saranno aggiunte sopra la prima riga e sotto l'ultima del testo selezionato. Se vuoi aggiungere solo una sezione, seleziona il testo partendo da un'altra divisione di sezioni. </para
+><para
+>Per unire le sezioni in una delle finestre di ingresso, seleziona qualcosa nelle righe che vuoi unire. Puoi anche unire diverse sezioni in un colpo solo. Seleziona quindi <guimenuitem
+>Unisci le differenze selezionate</guimenuitem
+> nel menu <guimenu
+>Fondi</guimenu
+>. </para
+></sect2>
 </sect1>
 
 
@@ -591,88 +723,475 @@ Opzioni:
 </mediaobject
 ></screenshot>
 <para
->Anche la finestra di modifica del risultato della fusione (sotto la finestra di ingresso) ha una riga informativa sovrastante che mostra "Output:", il nome del file e "[Modificato]" se qualcosa è stato variato. Normalmente essa contiene del testo creato dagli automatismi della fusione, ma spesso conterrà anche dei conflitti. </para
+>Anche la finestra di modifica del risultato della fusione (sotto la finestra di ingresso) ha una riga informativa sovrastante che mostra l'"Output:", il nome del file e "[Modificato]" se qualcosa è stato variato. Normalmente essa contiene del testo creato dagli automatismi della fusione, ma spesso conterrà anche dei conflitti. </para
 ><para
->!!! Il salvataggio è disabilitato fino a quando tutti i conflitti non sono risolti !!! (Usa l'opzione "Vai al precedente/prossimo conflitto non risolto" per ricercare i conflitti rimanenti). </para
+>!!! Il salvataggio è disabilitato fino a quando tutti i conflitti non sono risolti !!! (Usa il pulsante "Vai al precedente/prossimo conflitto non risolto" per ricercare i conflitti rimanenti) </para
 ><para
->Se i file di ingresso sono solodue, ogni differenza è un conflitto che deve essere risolto manualmente. </para
+>Se i file di ingresso sono solo due, ogni differenza è un conflitto che deve essere risolto manualmente. </para
 ><para
 >Con tre file di input il primo è considerato come base, mentre il secondo ed il terzo contengono le modifiche. Quando in qualche riga solo il file B o il file C presenta una differenza, ma non entrambi, allora il file modificato sarà automaticamente selezionato. Solo quando B e C hanno delle differenze sulle stesse righe il programma si accorgerà del conflitto il quale dovrà essere risolto manualmente. Quando B e C coincidono, ma differiscono con A, allora sarà selezionato C. </para
+><sect2
+><title
+>La colonna di sommario</title
 ><para
 >La finestra di modifica del risultato di fusione ha anche una colonna di sommario sulla sinistra. Essa mostra la lettera dell'input da dove la riga è stata selezionata o nulla se tutte le tre sorgenti hanno la stessa riga. Per i conflitti essa mostra un punto interrogativo "?" e la riga mostra "&lt;Conflitto nel fondere&gt;", tutto in rosso. Dato che risolvere conflitti riga per riga richiede molto tempo, le righe sono raggruppate per gruppi con le stesse caratteristiche di differenza e conflitto. Saranno separati solo i conflitti di spazi bianchi dai conflitti di spazi non bianchi in modo da facilitare la fusione dei file in cui l'indentazione, su molte righe, cambia. </para
+></sect2
+><sect2 id="synchronise_views"
+><title
+>Impostare il gruppo attuale e sincronizzare la posizione delle viste di fusione e differenze</title
 ><para
->Quando si fa clic sulla colonna di sommario con il tasto sinistro del mouse in una finestra, il gruppo appartenente a quella riga sarà selezionato in tutte le finestre e la parte iniziare del gruppo sarà visualizzata. (Questo potrebbe coinvolgere un posizionamento automatico nella finestra se l'inizio del gruppo non è visibile). Questo gruppo diverrà quindi il "gruppo corrente". Esso è visualizzato con il "Colore di fondo per questo intervallo corrente" e una barra nera apparirà sul lato sinistro del testo. </para
+>Quando si fa clic sulla colonna di sommario con il tasto sinistro del mouse in una finestra, l'inizio del gruppo appartenente a quella riga sarà selezionato in tutte le finestre. Questo gruppo diverrà il "gruppo attuale". Esso è evidenziato con il "Colore di fondo per questo intervallo attuale" e una barra nera apparirà sul lato sinistro del testo. </para
+></sect2
+><sect2
+><title
+>Scegliere gli input A, B o C per il conflitto attuale e per modificarlo</title
 ><para
->I pulsanti di selezione dell'ingresso contengono le lettere "A", "B" e "C" nella barra dei pulsanti sotto la barra dei menu. Quando si fa un clic su un pulsante di selezione dell'ingresso, le righe di questo input saranno aggiunte alla fine del gruppo selezionato se questo gruppo non conteneva già tale testo. Altrimenti le righe di questo file di ingresso saranno rimosse. </para
+>La barra dei pulsanti sotto la barra dei menu contiene tre pulsanti di selezione degli input contenenti le lettere «A», «B» e «C». Fai clic nel pulsante di selezione input per inserire (o rimuovere se già inserite) le righe dalle rispettive sorgenti. Per scegliere le righe da più input fai clic nei rispettivi pulsanti nell'ordine necessario. Per esempio se vuoi che nell'output le righe della «B» appaiano prima delle righe della «A», fai prima clic su «B», poi su «A». </para
 ><para
->Inoltre puoi modificare direttamente qualsiasi riga. La colonna di sommario mostrerà "m" su ogni riga che hai modificato. </para
+>Se usi l'opzione avanzamento automatico (<link linkend="autoadvance"
+>"Vai automaticamente al prossimo conflitto non risolto dopo la selezione del sorgente"</link
+>), dovresti disabilitarla prima di scegliere le righe da diversi input o se vuoi modificare le righe dopo aver scelto. Altrimenti &kdiff3; salterà al prossimo conflitto dopo aver scelto il primo input. </para
 ><para
->Alcune volte, quando una riga viene rimossa dalla fusione automatica o da una modifica manuale, e non rimangono altre righe nel gruppo, allora apparirà in questa riga il messaggio &lt;Riga origine mancante&gt;. Questa posizione verrà mantenuta dal gruppo nel caso tu cambiassi idea e volessi sezionare qualche altro sorgente. Questo testo non verrà reimmesso nel file salvato o in altre selezioni che desideri copiare ed incollare. </para
+>È spesso molto utile modificare direttamente l'output della fusione. La colonna di sommario mostrerà "m" per ogni riga che viene modificata manualmente. Quando per esempio le differenze sono allineate in modo che scegliere semplicemente gli input non sia soddisfacente, allora puoi marcare il testo necessario e usare il normale  <link linkend="selections"
+>copia e incolla</link
+> per inserirlo nell'output di fusione. </para
+><para
+>Alcune volte, quando una riga viene rimossa dalla fusione automatica o da una modifica manuale e non rimangono altre righe nel gruppo, allora apparirà in questa riga il messaggio <guilabel
+>&lt;Riga sorgente mancante&gt;</guilabel
+>. Questa posizione verrà mantenuta dal gruppo nel caso tu cambiassi idea e volessi sezionare qualche altro sorgente. Questo testo non verrà reimmesso nel file salvato o in altre selezioni che desideri copiare ed incollare. </para
 ><para
 >Il testo "&lt;Fondi conflitti&gt;" apparirà negli appunti se copi ed incolli del testo contenente questa riga. Fai comunque attenzione nell'eseguire tale operazione. </para
+></sect2
+><sect2
+><title
+>Scegliere l'input A, B o C per tutti i conflitti</title
 ><para
->La normale fusione partirà per la risoluzione automatica di semplici conflitti. Ma il menu "Fondi" permette alcune azioni per altre comuni necessità. Se devi selezionare lo stesso sorgente per molti conflitti, potrai selezionare sempre "A", "B" o "C", o solamente per i conflitti non risolti restanti, o per i conflitti di spazi bianchi non risolti. Se vuoi decidere tu stesso ogni singola differenza "Considera le differenze come conflitti". O se vuoi ritornare all'opzione automatica di KDiff3 seleziona "Risolvi automaticamente i conflitti semplici". KDiff3 riavvierà quindi la fusione. Per azioni che cambiano le tue precedenti modifiche KDiff3 ti chiederà la conferma prima di procedere. </para
+>La normale fusione inizierà risolvendo semplici conflitti automaticamente. Ma il menu <guimenu
+>Fondi</guimenu
+> permette altre azioni per altre necessità comuni. Se devi selezionare lo stesso sorgente per molti conflitti, potrai selezionare sempre «A», «B» o «C», o solamente per i conflitti non risolti restanti, o per i conflitti di spazi bianchi non risolti. Se vuoi decidere tu stesso ogni singola differenza, puoi «Impostare le differenze come conflitti», o se vuoi ritornare all'opzione automatica di &kdiff3; seleziona «Risolvi automaticamente i conflitti semplici». &kdiff3; riavvierà quindi la fusione. Per azioni che cambiano le tue precedenti modifiche &kdiff3; ti chiederà conferma prima di procedere. </para
 ><para
->Nota: Quando scegliendo un sorgente per conflitti non risolti di spazi bianchi e le opzioni "Ignora numeri" o "Ignora commenti C/C++" sono utilizzate allora variazioni nei numeri o nei commenti saranno anch'essi trattati come spazi bianchi. </para>
+>Nota: Quando si sceglie un sorgente per conflitti non risolti di spazi bianchi e quando vengono utilizzate le opzioni "Ignora numeri" o "Ignora commenti C/C++",le variazioni nei numeri o nei commenti saranno trattati anch'essi come spazi bianchi. </para
+></sect2
+><sect2 id="vcskeywordsmergesupport"
+><title
+>Fusione automatica della cronologia (log) e delle parole chiave del controllo di versione</title
+><para
+>Molti sistemi di controllo di versione supportano parole chiave speciali nel file. (es. "&#36;Date&#36;", "&#36;Header&#36;", "&#36;Author&#36;", "&#36;Log&#36;" etc.) Durante il controllo il sistema di controllo di versione (VCS) cambia queste righe. Per esempio "&#36;Date&#36;" cambierà in "&#36;Date: 2005/03/22 18:45:01 &#36;". Dato che questa riga sarà diversa in ogni versione del file, richiederà l'interazione manuale durante la fusione. </para
+><para
+>&kdiff3;offre la fusione automatica per questi elementi. Per righe semplici che corrispondono all'opzione "Fondi automaticamente le espressioni regolari" in tutti i file di input &kdiff3; sceglierà la riga dalla B o - se disponibile - dalla C. (Inoltre è necessario che le righe in questione corrispondano nel confronto e la riga precedente non contenga alcun conflitto). Questa fusione automatica può essere avviata sia immediatamente dopo l'avvio della fusione (attiva l'opzione "Avvia la fusione automatica delle espressioni regolari all'avvio di fusione") o in un secondo momento attraverso il menu di fusione "Avvia la fusione automatica delle espressioni regolari". </para
+><para
+>È supportata anche la fusione automatica per la cronologia del controllo di versione (nota anche come <quote
+>registro</quote
+>). La fusione automatica della cronologia può essere eseguita immediatamente all'avvio della fusione attivando l'opzione <guilabel
+>Fondi la cronologia del controllo di versione all'inizio della fusione</guilabel
+> o più tardi con il menu di fusione <guimenuitem
+>Risolvi automaticamente i conflitti di cronologia</guimenuitem
+>. </para
+><para
+>Normalmente la cronologia del controllo di versione comincia con una riga contenente la parola chiave <quote
+>&#36;Log&#36;</quote
+>. Questa deve essere corrisposta dall'opzione <guilabel
+>Espressione regolare dell'inizio di cronologia</guilabel
+>. &kdiff3; rileva quali righe successiva sono nella cronologia analizzando i caratteri iniziali che precedono la parola chiave <quote
+>&#36;Log&#36;</quote
+>. Se gli stessi caratteri di <quote
+>commento iniziale</quote
+> appaiono anche nelle righe seguenti, anche queste verranno incluse nella cronologia. </para
+><para
+>Durante il deposito, il VCS scrive una riga univoca che specifica informazioni di versione, data e ora, seguite da righe con commenti dell'utente. Queste righe costituiscono un elemento della cronologia. Questa sezione di cronologia cresce a ogni deposito, e le voci più recenti sono in cima (dopo la riga di inizio della cronologia). </para
+><para
+>Quando, in sviluppo parallelo, due o più sviluppatori depositano un ramo del file, la cronologia di fusione conterrà diversi elementi che risultano come conflitti durante la fusione dei rami. Siccome fonderli può essere molto noioso, &kdiff3; offre aiuto con due possibili strategie: basta che inserisci le informazioni sulla cronologia da entrambi gli sviluppatori in cima o ordini le informazioni della cronologia secondo una chiave definita dall'utente. </para
+><para
+>Il metodo <quote
+>inserisci tutti gli elementi e basta</quote
+> è più facile da configurare. &kdiff3; ha bisogno solo di un metodo per rilevare quali righe appartengano a un elemento di cronologia. La maggior parte dei VCS inserisce una riga vuota dopo ogni elemento di cronologia. Se non ci sono altre righe vuote, questo è un criterio sufficiente per &kdiff3;. Basta che imposti una <guilabel
+>Espressione regolare di inizio dell'elemento di cronologia</guilabel
+> vuota. Se il criterio della riga vuota non è sufficiente, puoi specificare un'espressione regolare per rilevare l'inizio degli elementi di cronologia. </para
+><para
+>Nota che &kdiff3; rimuoverà gli elementi di cronologia duplicati. Se un elemento di cronologia compare diverse volte nella cronologia di un file di ingresso, ne rimarrà solo uno nell'uscita. </para
+><para
+>Se vuoi ordinare la cronologia, devi specificare come costruire la chiave di ordinamento. Usa le parentesi nella <guilabel
+>Espressione regolare di inizio dell'elemento di cronologia</guilabel
+> per raggruppare parti dell'espressione regolare che dovrebbero essere usate in seguito per la chiave di ordinamento. Specifica quindi la <guilabel
+>Ordine della chiave d'ordinamento d'inizio degli elementi della cronologia</guilabel
+>, specificando un elenco separato da virgole di numeri che si riferiscono alla posizione del gruppo nell'espressione regolare. </para
+><para
+>Siccome questo non è così facile da azzeccare al primo colpo, devi poter provare e migliorare le espressioni regolari e la generazione delle chiavi in una finestra apposita premendo il pulsante <guibutton
+>Prova le espressioni regolari</guibutton
+>. </para
+><para
+>Esempio: consideriamo una cronologia simile a questa: <screen>
+/**************************************************************************
+** HISTORY:    &#36;Log: \toms_merge_main_view\MyApplication\src\complexalgorithm.cpp &#36;
+**
+**     \main\integration_branch_12   2 Apr 2001 10:45:41   tom
+**  Fuso il ramo simon_branch_15.
+**
+**     \main\henry_bugfix_branch_7\1   30 Mar 2001 19:22:05   henry
+**  Migliorata la velocità della funzione convertToMesh().
+**  Crash corretto.
+**************************************************************************/
+</screen
+>La riga di inizio della cronologia corrisponde all'espressione regolare <quote
+>.*\&#36;Log.*\&#36;.*</quote
+>. Seguono quindi i singoli elementi. </para
+><para
+>La riga con la parola chiave <quote
+>&#36;Log&#36;</quote
+> comincia con due <quote
+>*</quote
+> dopo i quali segue uno spazio. &kdiff3; usa la prima stringa non di spazi come <quote
+>commento iniziale</quote
+> e assume che la cronologia si concluda nella prima riga senza questo commento iniziale. In questo esempio l'ultima riga finisce con una stringa che comincia anch'essa con due <quote
+>*</quote
+>, ma invece di un carattere di spaziatura seguono degli altri <quote
+>*</quote
+>. Perciò questa riga conclude la cronologia. </para
+><para
+>Se l'ordinamento della cronologia non è necessario, l'espressione regolare dell'inizio degli elementi di cronologia potrebbe avere questo aspetto (questa riga è divisa in due parti per ragioni di spazio):<screen>
+\s*\\main\\\S+\s+[0-9]+ (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
+ [0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]\s+.*
+</screen
+>Per dettagli sulle espressioni regolari, vedi <ulink url="http://doc.trolltech.com/3.3/qregexp.html#details"
+>la documentazione sulle espressioni regolari della Trolltech</ulink
+>. Nota che <quote
+>\s</quote
+> (con la minuscola) corrisponde ai caratteri di spaziatura e <quote
+>\S</quote
+> (con la maiuscola) corrisponde a ogni carattere non di spaziatura. Nell'esempio l'inizio degli elementi di cronologia contiene prima le informazioni di versione, con espressione regolare <userinput
+>\\main\\\S+</userinput
+>, la data in forma di giorno <userinput
+>[0-9]+</userinput
+>, mese <userinput
+>(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)</userinput
+> e anno <userinput
+>[0-9][0-9][0-9][0-9]</userinput
+>, l'ora <userinput
+>[0-9][0-9]:[0-9][0-9]:[0-9][0-9]</userinput
+> e infine il nome dello sviluppatore <userinput
+>.*</userinput
+>. </para
+><para
+>Nota che i caratteri di <quote
+>commento iniziale</quote
+> (nell'esempio <userinput
+>**</userinput
+>) saranno già rimossi da &kdiff3; prima del confronto, quindi l'espressione regolare comincia con una corrispondenza per zero o più caratteri di spaziatura, <userinput
+>\s*</userinput
+>. Siccome i caratteri dei commenti possono essere diversi in ogni file (per esempio C e C++ usano dei caratteri diversi rispetto a Perl), &kdiff3; si prende cura dei caratteri iniziali dei commenti, e tu non devi specificarli nell'espressione regolare. </para
+><para
+>Se hai bisogno di una cronologia ordinata, deve essere calcolata la chiave di ordinamento. Per farlo, le parti rilevanti dell'espressione regolare devono essere raggruppate in parentesi (le parentesi aggiuntive possono essere lasciate se l'ordinamento della cronologia viene disabilitato).<screen>
+\s*\\main\\(\S+)\s+([0-9]+) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
+ ([0-9][0-9][0-9][0-9]) ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])\s+(.*)
+</screen
+>Le parentesi contengono ora:<orderedlist
+><listitem
+><para
+>informazioni di versione,</para
+></listitem
+><listitem
+><para
+>giorno,</para
+></listitem
+><listitem
+><para
+>mese,</para
+></listitem
+><listitem
+><para
+>anno,</para
+></listitem
+><listitem
+><para
+>ora,</para
+></listitem
+><listitem
+><para
+>nome.</para
+></listitem
+></orderedlist
+>Se vogliamo ordinare per data e ora, dobbiamo costruire una chiave con gli elementi in un altro ordine di apparizione: prima l'anno, poi il mese, il giorno, l'ora, le informazioni di versione e il nome. Quindi, la chiave di ordinamento da specificare è <userinput
+>4,3,2,5,1,6</userinput
+>. </para
+><para
+>Siccome i nomi dei mesi non sono facili da ordinare (<userinput
+>Apr</userinput
+> sarebbe il primo), &kdiff3; rileva l'ordine in cui i nomi dei mesi sono stati dati e usa quell'ordine (<userinput
+>Apr</userinput
+>-><userinput
+>04</userinput
+>). Se viene trovato un numero, verrà trasformato in un valore a quattro cifre con zeri iniziali per l'ordinamento. Infine, la chiave di ordinamento risultante per la prima riga di inizio degli elementi di cronologia sarà: <screen
+>2001 04 0002 10:45:41 integration_branch_12   tom 
+</screen>
+</para
+><para
+>Per ulteriori informazioni vedi anche <link linkend="mergeoptions"
+>Impostazioni di fusione</link
+>. </para>
+</sect2>
 </sect1>
 
 <sect1 id="navigation"
 ><title
 >Navigazione e modifica</title>
 <para
->È possibile navigare con le barre di scorrimento, con il mouse oppure con l'uso dei tasti. Se fai clic dentro una finestra potrai usare i pulsanti del cursore sinistra, destra, alto, basso, pagina successiva, pagina precedente, inizio, fine, ctrl-inizio, ctrl-fine come per gli altri programmi. La colonna descrittiva dopo la barra di scorrimento verticale del file di ingresso può anche essere utilizzata per la navigazione facendo clic su questa. </para
+>È possibile navigare con le barre di scorrimento e con il mouse, ma puoi anche usare i tasti. Se fai clic dentro una delle finestre, potrai usare i pulsanti sinistra, destra, alto, basso, pagina successiva, pagina precedente, inizio, fine, ctrl-inizio, ctrl-fine come faresti in altri programmi. La colonna riassuntiva di fianco alla barra di scorrimento verticale dei file di ingresso può anche essere usata per la navigazione facendoci clic. </para
 ><para
->È possibile utilizzare la rotellina del mouse solo per scorrere su e giù. </para
+>È anche possibile usare la rotellina del mouse per scorrere in alto e in basso. </para
 ><para
->Per modificare il risultato della fusione di file puoi utilizzare solamente i tasti di modifica. Puoi invertire la modalità di inserimento e sovrascrittura con il tasto insert. (la modalità di inserimento è quella predefinita). </para
+>Nella finestra di modifica del risultato puoi anche usare gli altri tasti. Puoi passare tra le modalità di inserimento e di sovrascrittura con il tasto <keycap
+>Ins</keycap
+>; la predefinita è quella di inserimento. </para
 ><para
->Premendo il pulsante sinistro del mouse dentro una colonna di sommario saranno aggiornate tutte le finestre, che mostreranno l'inizio dello stesso gruppo di righe (come spiegato nella sezione <link linkend="merging"
->"Fusione"</link
->). </para
+>Fare clic con il &LMB; in una qualsiasi colonna di sommario sincronizzerà tutte le finestre in modo da mostrare l'inizio dello stesso gruppo di righe (come spiegato nella sezione <link linkend="synchronise_views"
+>Impostare il gruppo attuale e sincronizzare la posizione delle viste di fusione e differenze</link
+>. </para
 ><para
->La barra dei pulsanti contiene inoltre altri pulsanti di navigazione con i quali è possibile saltare alla corrente/prima/ultima differenza, alla prossima/precedente differenza (ctrl-giù/ctrl-su), al prossimo/precedente conflitto (ctrl-pgdown/ctrl-pgup), o al prossimo/precedente conflitto non risolto. Nota che per KDiff3 un "conflitto" che non è stato automaticamente risolto all'inizio della fusione permane "conflitto"anche se risolto. Quindi la necessità di distinguere "conflitti non risolti". </para
-><para
->C'è anche un pulsante "Vai automaticamente al prossimo conflitto non risolto dopo aver selezionato la fonte" (Avanzamento automatico). Selezionandolo quando un sorgente è selezionato, KDiff3 salterà automaticamente alla selezione del prossimo conflitto non risolto. Questo può aiutare quando scegli solamente un unico file di ingresso. Quando hai bisogno di entrambi i sorgenti, o vuoi modificare dopo la selezione, vorrai probabilmente disattivarlo. Prima di procedere al prossimo conflitto non risolto KDiff3 mostrerà l'effetto della tua scelta per un breve periodo. Questo tempo è modificabile nell'impostazione di Verifica &amp; Fusione: È possibile specificare la "Pausa nell'avanzamento automatico" in millisecondi tra 0 e 2000. Suggerimento: Stanco di troppi Clic? - Quando ci sono molti conflitti usa un tempo basso di avanzamento automatico e le scorciatoie Ctrl-1/2/3 per selezionare A/B/C. </para>
+>La barra dei pulsanti contiene inoltre nove pulsanti di navigazione con cui puoi passare alla differenza attuale, alla prima o all'ultima, a quella successiva o precedente (<keycombo action="simul"
+>&Ctrl;<keycap
+>↓</keycap
+></keycombo
+> e <keycombo action="simul"
+>&Ctrl;<keycap
+>↑</keycap
+></keycombo
+>), al conflitto successivo o precedente (<keycombo action="simul"
+>&Ctrl;<keycap
+>Pag↓</keycap
+></keycombo
+> e <keycombo action="simul"
+>&Ctrl;<keycap
+>Pag↑</keycap
+></keycombo
+>), o al conflitto non risolto successivo o precedente. Nota che per &kdiff3; un <quote
+>conflitto</quote
+> che non è stato risolto automaticamente all'inizio della fusione rimane un <quote
+>conflitto</quote
+> anche se è stato risolto; da qui la necessità di distinguere i <quote
+>conflitti non risolti</quote
+>. </para>
+<sect2 id="autoadvance"
+><title
+>Avanzamento automatico</title>
+<para
+>C'è anche un pulsante <guilabel
+>Vai automaticamente al prossimo conflitto non risolto dopo aver selezionato la fonte</guilabel
+> (avanzamento automatico). Se lo usi, quando una fonte è selezionata, &kdiff3; passerà e selezionerà il prossimo conflitto non risolto automaticamente. Ciò è d'aiuto quando vuoi sempre scegliere un solo file di ingresso. Quando hai bisogno di entrambe le fonti, o vuoi cambiare qualcosa dopo aver selezionato, probabilmente lo vorrai disattivare. Prima di procedere al prossimo conflitto non risolto, &kdiff3; mostrerà l'effetto della tua scelta per un breve periodo. Questo tempo è regolabile nelle impostazioni delle differenze e di fusione: puoi specificare il <guilabel
+>Ritardo nell'avanzamento automatico</guilabel
+> in millisecondi tra i valori 0 e 2000. Se vuoi ridurre il numero di volte che fai clic, usa un ritardo di avanzamento breve e le scorciatoie <keycombo action="simul"
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>, <keycombo action="simul"
+>&Ctrl;<keycap
+>2</keycap
+></keycombo
+> e <keycombo action="simul"
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+> per selezionare A, B e C nel caso di molti conflitti. </para>
+</sect2>
 </sect1>
 
 <sect1 id="selections"
 ><title
 >Selezione, Copia ed Incolla</title>
 <para
->La finestre dell'ingresso non mostra un cursore, così le selezioni devono essere fatte con il mouse, fai clic con il tasto sinistro all'inizio, e, mantenendolo premuto, muoversi fino a fine selezione, dove dovrai rilasciare il tasto. Con un doppio clic è possibile selezionare una unica parola. Nella finestra del risultato è possibile selezionare anche tramite la tastiera, mantenendo il tasto "shift" e muovendosi con i tasti del cursore. </para
+>La finestre dell'ingresso non hanno un cursore, quindi le selezioni vanno fatte con il &LMB; partendo dall'inizio, tenendolo premuto e spostandolo fino alla fine della selezione, dove lo rilasci. È possibile selezionare una singola parola facendo doppio clic. Nella finestra del risultato di fusione puoi anche selezionare con la tastiera, tenendo premuto il tasto &Shift; e navigando con i tasti a freccia. </para
 ><para
->Per copiare negli appunti è necessario premere il pulsante "Copia" (Ctrl-C o Ctrl-Ins). Ma esiste anche l'opzione "Copia automatica". Se attiva, ogni volta che si seleziona del testo esso verrà copiato immediatamente e non dovrai esplicitarlo. Presta però attenzione all'utilizzo perché i contenuti degli appunti potrebbero accidentalmente essere distrutti. </para
+>Se la selezione deve andare oltre la parte visibile sullo schermo, puoi spostare il mouse ai bordi della finestra, il che fa scorrere &kdiff3; in quella direzione. </para
 ><para
->"Taglia" (Ctrl-X o Shift-Delete) copia il testo selezionato negli appunti e lo elimina, mentre "Incolla" (Ctrl-V o Shift-Insert) inserisce il testo contenuto negli appunti nella posizione corrente o in sostituzione all'attuale selezione. </para>
+>Per selezioni molto grandi, puoi anche usare i tasti di navigazione tenendo premuto il &LMB;. Per esempio, usa <keycap
+>Pag↑</keycap
+> e <keycap
+>Pag↓</keycap
+> per andare velocemente a un certo punto; a quel punto rilascia il mouse. </para
+><para
+>Per selezionare tutto nella finestra attuale, usa il menu <menuchoice
+><guimenu
+>Modifica</guimenu
+><guimenuitem
+>Seleziona tutto</guimenuitem
+></menuchoice
+> (<keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+>). </para
+><para
+>Per copiare negli appunti devi premere il pulsante <guilabel
+>Copia</guilabel
+> (<keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> o <keycombo action="simul"
+>&Ctrl;<keycap
+>Ins</keycap
+></keycombo
+>). Esiste anche l'opzione <guilabel
+>Copia automatica</guilabel
+>: se è attiva, tutto quello che selezioni verrà copiato immediatamente, senza farlo esplicitamente. Fai però attenzione, perché i contenuti degli appunti potrebbero andare accidentalmente persi. </para
+><para
+><guilabel
+>Taglia</guilabel
+> (<keycombo action="simul"
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> o <keycombo action="simul"
+>&Shift;<keycap
+>Canc</keycap
+></keycombo
+> copia negli appunti il testo selezionato e lo cancella. </para
+><para
+><guilabel
+>Incolla</guilabel
+> (<keycombo action="simul"
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> o <keycombo action="simul"
+>&Shift;<keycap
+>Ins</keycap
+></keycombo
+> inserisce il testo dagli appunti alla posizione del cursore o al posto della selezione attuale. Se incolli in una delle finestre di ingresso delle differenze, i contenuti degli appunti saranno mostrati in quella finestra, e il confronto verrà immediatamente riavviato. Ciò è utile se vuoi prendere del testo da qualche parte e confrontarlo con qualcos'altro senza prima dover creare dei file. </para>
 </sect1>
 
 <sect1 id="saving"
 ><title
 >Salvataggio</title>
 <para
->Il salvataggio sarà permesso solamente quando tutti i conflitti saranno risolti. Se il file esiste e l'opzione "File di copia" è abilitata allora il file esistente sarà rinominato con estensione ".orig", ma se tale file esiste sarà rimosso. All'uscita o all'avvio di un'altra analisi delle differenze se il risultato non è stato ancora salvato KDiff3 richiederà se si vuole salvare, annullare o procedere senza salvare. (KDiff3 non intercetta nessun segnale. Quindi se si esegue un "kill" di KDiff3 tutti i dati saranno persi). </para
+>Il salvataggio sarà permesso solo quando tutti i conflitti saranno stati risolti. Se il file esiste già, e l'opzione <guilabel
+>Copie di sicurezza</guilabel
+> è abilitata, il file esistente sarà rinominato con l'estensione <literal role="extension"
+>.orig</literal
+>, ma se quest'ultimo file esiste sarà rimosso. Se concludi o avvii una nuova analisi delle differenze, e i dati non sono stati ancora salvati, &kdiff3; ti chiederà se vuoi salvare, annullare o procedere senza salvare. &kdiff3; non intercetta nessun segnale, quindi se si uccide il processo di &kdiff3; tutti i dati andranno persi. </para
 ><para
->I terminatori di riga sono salvati secondo il metodo tradizionale del sistema operativo. Per i sistemi Unix la riga termina con il solo carattere "\n", mentre per i sistemi Win32 ogni riga termina con i caratteri ritorno a capo + nuova riga "\r\n". KDiff3 non mantiene il terminatore originale del file, quindi non utilizzare KDiff3 con i file binari. </para>
+>I caratteri di fine riga sono salvati secondo il metodo appropriato per il sistema operativo in uso. Sui sistemi Unix ogni riga termina con il carattere <quote
+>\n</quote
+>, mentre sui sistemi Windows ogni riga termina con i caratteri di ritorno a capo e di nuova riga, <quote
+>\r\n</quote
+>. &kdiff3; non mantiene i caratteri di fine riga originali del file, il che vuol dire che non dovresti usare &kdiff3; con i file binari. </para>
 </sect1>
 
 <sect1 id="find"
 ><title
->Ricerca Stringhe</title>
+>Trovare le stringhe</title>
 <para
->È possibile ricercare una stringa in ogni finestra di KDiff3. Il comando "Ricerca ..." (Ctrl-F) nel menu di Modifica apre un dialogo che permette di specificare la stringa da ricercare. È anche possibile selezionare la finestra sulla quale fare la ricerca. La ricerca partirà sempre dall'inizio. Usare il comando "Ricerca successivo" (F3) per la prossima occorrenza. Se decidi di cercare su più finestre allora la ricerca sarà dall'alto al basso nella prima finestra, poi dall'alto al basso nella seconda, ecc. </para>
+>Puoi cercare una stringa in ogni finestra di testo di &kdiff3;. Il comando <guilabel
+>Trova</guilabel
+> (<keycombo action="simul"
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) nel menu <guimenu
+>Modifica</guimenu
+> apre una finestra che ti permette di specificare la stringa da cercare. Puoi anche selezionare le finestre nella quali cercare. La ricerca partirà sempre dall'inizio. Usa il comando <guilabel
+>Trova successivo</guilabel
+> (<keycap
+>F3</keycap
+>) per passare alla prossima occorrenza. Se decidi di cercare su più finestre, la ricerca comincerà dalla prima finestra, poi passerà alla seconda, e così via. </para>
 </sect1>
 
+<sect1 id="printing"
+><title
+>Stampare</title>
+<para
+>&kdiff3; supporta la stampa delle differenze dei file di testo. Il comando <guilabel
+>Stampa</guilabel
+> (<keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+>) nel menu <guimenu
+>File</guimenu
+> apre una finestra che ti permette di selezionare la stampante e regolare altre opzioni. </para
+><para
+>Ci sono diverse possibilità per regolare l'intervallo di stampa. Siccome le finestre di stampa sono diverse a seconda del sistema operativo, il modo esatto in cui regolarlo varia. </para>
+<variablelist>
+   <varlistentry
+><term
+>Tutto:</term
+><listitem
+><para
+>Stampa tutto.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Attuale:</term
+><listitem
+><para
+>Stampa una pagina partendo dalla prima riga visibile nella finestra. Sui sistemi senza questa opzione, essa è ottenibile chiedendo di stampare il numero di pagina <userinput
+>10000</userinput
+>.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Selezione:</term
+><listitem
+><para
+>Prima di stampare, seleziona il testo con il mouse (come quando fai copia e incolla) in una delle finestre d'ingresso delle differenze per definire le righe di inizio e fine. Se non è stato selezionato del testo nelle finestre di ingresso delle differenze, questa scelta non sarà disponibile. Sui sistemi senza questa opzione, essa è ottenibile chiedendo di stampare il numero di pagina <userinput
+>9999</userinput
+>.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Intervallo:</term
+><listitem
+><para
+>Specifica la prima e l'ultima pagina. </para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Altre opzioni di stampa importanti saranno dedotte dalle opzioni normali: </para
+><itemizedlist>
+   <listitem
+><para
+>Carattere e sue dimensioni</para
+></listitem>
+   <listitem
+><para
+>Mostra i numeri di riga</para
+></listitem>
+   <listitem
+><para
+>A capo automatico</para
+></listitem>
+   <listitem
+><para
+>Colori</para
+></listitem>
+   <listitem
+><para
+>eccetera</para
+></listitem>
+</itemizedlist>
+<para
+>Si raccomanda inoltre di usare il formato orizzontale quando si stampa. </para>
+</sect1>
 
 <sect1 id="options"
 ><title
 >Opzioni</title>
 <para
->Le opzioni e la lista del file recenti saranno memorizzate all'uscita del programma, e ricaricate quando verrà avviato. (Menu Impostazioni->Configura KDiff3 ...) </para>
+>Le opzioni e l'elenco dei file recenti saranno salvate all'uscita del programma, e ricaricate quando verrà riavviato (<menuchoice
+><guimenu
+>Impostazioni</guimenu
+><guimenuitem
+>Configura &kdiff3;</guimenuitem
+> </menuchoice
+>). </para>
 <sect2
 ><title
->Tipo di caratteri</title>
+>Carattere</title>
 <para
->Seleziona un tipo carattere a larghezza fissa. (in alcuni sistemi questo dialogo potrebbe presentare anche la selezione della larghezza del font, ma non è consigliabile usarla). </para>
+>Seleziona un carattere a larghezza fissa. Su alcuni sistemi questa finestra potrebbe presentare anche caratteri a larghezza variabile, ma non dovresti usarli. </para>
 <variablelist>
    <varlistentry
 ><term
@@ -681,7 +1200,7 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Selezionando questo, le differenze di testo saranno rappresentate con il tipo di carattere scelto ma in stile corsivo. Se il tipo di carattere non supporta il corsivo l'opzione non avrà effetto.</para>
+>Selezionando questo, le differenze di testo saranno rappresentate con il carattere scelto in stile corsivo. Se il carattere non supporta il corsivo, l'opzione non avrà effetto.</para>
    </listitem
 ></varlistentry>
 </variablelist>
@@ -694,7 +1213,7 @@ Opzioni:
    <varlistentry
 ><term
 ><emphasis
->Colore primo piano:</emphasis
+>Colore di primo piano:</emphasis
 ></term
 ><listitem
 ><para
@@ -704,7 +1223,7 @@ Opzioni:
    <varlistentry
 ><term
 ><emphasis
->Colore di fondo:</emphasis
+>Colore di sfondo:</emphasis
 ></term
 ><listitem
 ><para
@@ -714,7 +1233,7 @@ Opzioni:
    <varlistentry
 ><term
 ><emphasis
->Colore di fondo per le differenze:</emphasis
+>Colore di sfondo per le differenze:</emphasis
 ></term
 ><listitem
 ><para
@@ -724,7 +1243,7 @@ Opzioni:
    <varlistentry
 ><term
 ><emphasis
->Colore A:</emphasis
+>Colore per A:</emphasis
 ></term
 ><listitem
 ><para
@@ -734,7 +1253,7 @@ Opzioni:
    <varlistentry
 ><term
 ><emphasis
->Colore B:</emphasis
+>Colore per B:</emphasis
 ></term
 ><listitem
 ><para
@@ -744,7 +1263,7 @@ Opzioni:
    <varlistentry
 ><term
 ><emphasis
->Colore C:</emphasis
+>Colore per C:</emphasis
 ></term
 ><listitem
 ><para
@@ -764,7 +1283,7 @@ Opzioni:
    <varlistentry
 ><term
 ><emphasis
->Colore di sfondo per questo intervallo corrente:</emphasis
+>Colore di sfondo per l'intervallo attuale:</emphasis
 ></term
 ><listitem
 ><para
@@ -774,16 +1293,70 @@ Opzioni:
    <varlistentry
 ><term
 ><emphasis
->Colore di sfondo per questo intervallo:</emphasis
+>Colore di sfondo per le differenze dell'intervallo attuale:</emphasis
 ></term
 ><listitem
 ><para
 >Normalmente giallo scuro.</para
 ></listitem
 ></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Colore per gli intervalli delle differenze selezionati manualmente:</emphasis
+></term
+><listitem
+><para
+>Normalmente arancione.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Colore del file più recente nel confronto tra cartelle:</emphasis
+></term
+><listitem
+><para
+>Normalmente verde.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Colore del file più vecchio nel confronto tra cartelle:</emphasis
+></term
+><listitem
+><para
+>Normalmente rosso.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Colore del file di età media nel confronto tra cartelle:</emphasis
+></term
+><listitem
+><para
+>Normalmente giallo scuro.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Colore per file mancanti nel confronto tra cartelle:</emphasis
+></term
+><listitem
+><para
+>Normalmente nero.</para
+></listitem
+></varlistentry>
 </variablelist>
 <para
->Su sistemi con soli 16 o 256 colori alcuni colori non sono disponibile nella forma originale. In tali sistemi l'opzione "Predefiniti" selezionerà un colore puro. </para>
+>Il cambio dei colori per il confronto tra cartelle avrà effetto solo all'avvio del prossimo confronto tra cartelle. </para>
+<para
+>Su sistemi con soli 16 o 256 colori, alcuni colori non sono disponibili nella forma esatta. In questi sistemi il pulsante <guibutton
+>Valori predefiniti</guibutton
+> selezionerà un colore puro. </para>
 </sect2>
 
 <sect2
@@ -793,21 +1366,21 @@ Opzioni:
    <varlistentry
 ><term
 ><emphasis
->I Tab inseriscono spazi:</emphasis
+>Il tabulatore inserisce spazi:</emphasis
 ></term
 ><listitem
 ><para
->Se questo è disabilitato e viene premuto il tasto di tabulazione, un carattere tabulatore verrà inserito, altrimenti verranno inseriti un numero appropriato di caratteri.</para
+>Se questo è disabilitato e premi il tasto di tabulazione, verrà inserito un carattere di tabulazione, altrimenti verranno inseriti il numero appropriato di spazi.</para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->Dimensione di Tab:</emphasis
+>Dimensione della tabulazione:</emphasis
 ></term
 ><listitem
 ><para
->Può essere modificato per le tue necessità. Il predefinito è 8. </para
+>Può essere regolata a seconda delle necessità. Il valore predefinito è 8. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -817,7 +1390,7 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Quando premi Invio o Return verrà utilizzata, per la nuova riga, l'indentazione della riga precedente. </para
+>Quando premi &Enter;, il rientro della riga precedente sarà usato per la nuova. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -827,7 +1400,7 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Ogni selezione è immediatamente copiata negli appunti quando attiva e non sarà necessario esplicitare la copia. </para
+>Ogni selezione è immediatamente copiata negli appunti quando attiva, e non sarà necessario copiarla esplicitamente. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -837,37 +1410,33 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Quando salvi un file puoi decidere il modo con cui vengono terminate le righe. La modalità preimpostata è quella abituale del sistema operativo in uso. </para
-></listitem
-></varlistentry>
-   <varlistentry
-><term
-><emphasis
->Usa la codifica locale:</emphasis
-></term
-><listitem
-><para
->Per la visualizzazione di caratteri non ASCII. Puoi provare a cambiarla se alcuni caratteri della tua lingua non vengono visualizzati correttamente. </para
+>Quando salvi un file puoi decidere quali caratteri di fine riga usare.L'impostazione predefinita è quella abituale del sistema operativo in uso. </para
 ></listitem
 ></varlistentry>
 </variablelist>
 </sect2>
 
-<sect2
+<sect2 id="diffoptions"
 ><title
->Impostazioni di verifica &amp; fusione</title>
+>Impostazioni delle differenze</title>
 <para
->Quando si comparano dei file, KDiff3 prima proverà a confrontare le righe che sono uguali in tutti i file di ingresso. Solo durante questa fase potrebbe ignorare gli spazi bianchi. La seconda fase confronta ogni riga. In tale fase gli spazi bianchi non saranno ignorati. Inoltre durante la fusione gli spazi bianchi non saranno ignorati. </para>
+>Nel confronto dei file, &kdiff3; prova prima a confrontare le righe uguali in tutti i file di ingresso. Solo durante questa fase potrebbe ignorare gli spazi. La seconda fase confronta ogni riga. In questa fase gli spazi non saranno ignorati. Anche durante la fusione gli spazi non saranno ignorati. </para>
 
 <variablelist>
    <varlistentry
 ><term
 ><emphasis
->Mantieni il ritorno a capo (CR):</emphasis
+>Mantieni il ritorno a capo:</emphasis
 ></term
 ><listitem
 ><para
->Alcuni editor (in alcuni sistemi) salvano il ritorno a capo '\r' e avanzamento riga '\n' mentre altri salvano solamente il ritorno a capo '\n'. Normalmente KDiff3 ignora il ritorno a capo, ma quando i file non hanno la stessa dimensione potrebbero comunque risultare uguali dopo una verifica parallela. Quando l'opzione è abilitata allora il ritorno a capo è reso visibile ma trattato come uno spazio bianco. Questa opzione deve essere disattivata durante la fusione. Normalmente disabilitata.</para
+>Alcuni editor (in alcuni sistemi) salvano il ritorno a capo <quote
+>\r</quote
+> e l'avanzamento di riga <quote
+>\n</quote
+> alla fine delle righe, mentre altri salvano solamente il ritorno a capo <quote
+>\n</quote
+>. Normalmente &kdiff3; ignora il ritorno a capo, ma alcuni file di diverse dimensioni potrebbero comunque risultare uguali in una verifica fianco a fianco. Quando questa opzione è abilitata, i caratteri di ritorno a capo sono resi visibili ma sono trattati come spazi. Questa opzione deve essere disattivata durante una fusione. Come impostazione predefinita è disattivata.</para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -877,33 +1446,45 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Normalmente disabilitato. I caratteri numerici ('0'-'9','.','-') saranno ignorati nella prima parte dell'analisi nella quale viene fatta la verifica delle righe. Nel risultato delle differenze saranno tuttavia mostrate, ma sono trattate come spazi bianchi. </para
+>Come impostazione predefinita questa opzione è disattivata. I caratteri numerici (da <quote
+>0</quote
+> a <quote
+>9</quote
+>, <quote
+>.</quote
+>, <quote
+>-</quote
+>) saranno ignorati nella prima parte dell'analisi nella quale si fanno corrispondere le righe. Nel risultato le differenze saranno comunque mostrate, ma i caratteri numerici saranno trattati come spazi. </para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->Ignora commenti C/C++:</emphasis
+>Ignora i commenti C e C++:</emphasis
 ></term
 ><listitem
 ><para
->Normalmente disabilitato. Le variazioni nei commenti saranno trattati come variazioni degli spazi bianchi. </para
+>Come impostazione predefinita questa opzione è disattivata. Le variazioni dei commenti saranno trattate come variazioni di spazi. </para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->Ignora maiuscole:</emphasis
+>Ignora le maiuscole:</emphasis
 ></term
 ><listitem
 ><para
->Normalmente disabilitato. I caratteri che differiscono solo per essere maiuscoli o minuscoli (come "A" e "a") saranno trattati come le variazioni nel numero di spazi bianchi. </para
+>Come impostazione predefinita questa opzione è disattivata. Le differenze tra maiuscole e minuscole (come tra <quote
+>A</quote
+> e <quote
+>a</quote
+>) saranno trattate come differenze tra spazi. </para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->Comandi del preprocessore</emphasis
+>Comando per il preprocessore</emphasis
 ></term
 ><listitem
 ><para
@@ -934,6 +1515,13 @@ Opzioni:
 >Ricerca approfondita per ricercare la più piccola differenza (Normalmente attiva). Questo sarà probabilmente utile per file complicati e lunghi. E lento per file molto lunghi. </para
 ></listitem
 ></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="mergeoptions"
+><title
+>Impostazioni di fusione</title>
+<variablelist>
    <varlistentry
 ><term
 ><emphasis
@@ -951,7 +1539,137 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Automaticamente risolve tutti i conflitti di spazi bianchi scegliendo lo specifico file (Scelta manuale predefinita). Utile se lo spazio bianco non è importante in molti file. Se hai bisogno di questo solo occasionalmente è meglio usare "Scegli A/B/C per tutti i conflitti non risolti di spazio bianco" nel menu di fusione. Nota che se hai abilitato l'opzione "Ignora numeri" o "Ignora commenti C/C++" allora questa auto selezione verrà applicata anche per i conflitti nei numeri o nei commenti. </para
+>Risolvi automaticamente tutti i conflitti di spazi scegliendo il file specifico (l'impostazione predefinita è la scelta manuale). Utile se gli spazi non sono importanti in molti file. Se ti serve solo di rado, è meglio usare <guimenuitem
+>Scegli A/B/C per tutti i conflitti di spazi non risolti</guimenuitem
+> nel menu di fusione. Nota che, se abiliti <guilabel
+>Ignora i numeri</guilabel
+> o <guilabel
+>Ignora i commenti C e C++</guilabel
+>, questa scelta automatica verrà applicata anche per i conflitti tra numeri o commenti. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Espressione regolare di fusione automatica:</emphasis
+></term
+><listitem
+><para
+>Espressione regolare per le righe dove &kdiff3; dovrebbe scegliere automaticamente una sorgente. Vedi anche <link linkend="vcskeywordsmergesupport"
+>Fusione automatica</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Esegui la fusione automatica con espressioni regolari all'avvio della fusione:</emphasis
+></term
+><listitem
+><para
+>Se attivo, &kdiff3; esegue la fusione automatica usando l'<guilabel
+>Espressione regolare di fusione automatica</guilabel
+> all'avvio di una fusione. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Espressione regolare dell'inizio di cronologia:</emphasis
+></term
+><listitem
+><para
+>Espressione regolare per l'inizio di un elemento di cronologia di fusione. Normalmente questa riga contiene la parola chiave <userinput
+>&#36;Log&#36;</userinput
+>. Il valore predefinito è <userinput
+>.*\&#36;Log.*\&#36;.*</userinput
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Espressione regolare di inizio dell'elemento di cronologia:</emphasis
+></term
+><listitem
+><para
+>Un elemento di cronologia di fusione consiste di diverse righe. Specifica l'espressione regolare per rilevarne la prima (senza il commento iniziale). Usa le parentesi per raggruppare le chiavi che vuoi usare per l'ordinamento. Se lasciato vuoto, &kdiff3; suppone che le righe vuote separino gli elementi di cronologia. Vedi anche <link linkend="vcskeywordsmergesupport"
+>Fusione automatica</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Ordinamento della fusione della cronologia:</emphasis
+></term
+><listitem
+><para
+>Abilita l'ordinamento della cronologia del controllo di versione. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Ordine della chiave d'ordinamento d'inizio degli elementi della cronologia:</emphasis
+></term
+><listitem
+><para
+>Ogni parentesi usata nell'espressione regolare per l'elemento iniziale della cronologia raccoglie una chiave disponibile per l'ordinamento. Specifica l'elenco di chiavi (numerate in ordine di apparizione partendo da 1) separandole con una virgola (<userinput
+>,</userinput
+>), per esempio <userinput
+>4,5,6,1,2,3,7</userinput
+>. Se lasciato vuoto, non verrà effettuato un riordinamento. Vedi anche <link linkend="vcskeywordsmergesupport"
+>Fusione automatica</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Fondi la cronologia del controllo di versione all'inizio della fusione</emphasis
+></term
+><listitem
+><para
+>Se attivato, &kdiff3; esegue la fusione automatica della cronologia usando le opzioni sunnominate all'avvio di una fusione. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Numero massimo di elementi nella cronologia:</emphasis
+></term
+><listitem
+><para
+>&kdiff3; tronca l'elenco della cronologia dopo il numero di elementi specificato. Usa <userinput
+>-1</userinput
+> per evitare il troncamento, il che è anche il valore predefinito. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Prova le espressioni regolari</emphasis
+></term
+><listitem
+><para
+>Questo pulsante mostra una finestra che permette di migliorare e provare le espressioni regolari indicate sopra. Basta copiare i dati dai file nelle righe d'esempio, e il <guilabel
+>Risultato di corrispondenza</guilabel
+> mostrerà subito se la corrispondenza avviene o meno. Il <guilabel
+>Risultato della chiave di ordinamento</guilabel
+> mostrerà la chiave usata per il riordinamento della fusione della cronologia. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><emphasis
+>Comando di fusione irrilevante:</emphasis
+></term
+><listitem
+><para
+>Specifica un comando da chiamare quando &kdiff3; rileva che, per una fusione a tre file, il file B non contribuisce alcun dato di rilievo che non sia già contenuto nel file C. Il comando viene chiamato con tre nomi di file come parametri. I dati corrispondenti alla <guilabel
+>Espressione regolare di fusione automatica</guilabel
+> o nella cronologia non sono considerati di rilievo. </para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -960,22 +1678,26 @@ Opzioni:
 
 <sect2
 ><title
->Fusione di directory </title>
+>Fusione di cartelle</title>
 <para
->Queste opzioni sono considerate con la scansione delle directory e la manipolazione della fusione: Vedi <link linkend="dirmergeoptions"
->Directory Comparazione/Fusione Documentazione</link
+>Queste opzioni riguardano la scansione delle cartelle e la gestione della fusione: vedi <link linkend="dirmergeoptions"
+>la documentazione sul confronto e la fusione tra cartelle</link
 > per maggiori dettagli. </para
 ><para
->Tuttavia qui esiste una opzione che è anche rilevante per il salvataggio di singoli file: </para>
+>Tuttavia, qui c'è un'opzione di rilievo anche per il salvataggio di file singoli: </para>
 <variablelist>
    <varlistentry
 ><term
 ><emphasis
->File di backup:</emphasis
+>Copie di sicurezza:</emphasis
 ></term
 ><listitem
 ><para
->Quando viene salvato un file ed esiste una versione meno recente, la versione originale sarà rinominata con l'estensione ".orig". Se già esiste una versione con estensione ".orig" questa verrà eliminata senza una copia di riserva. </para
+>Quando viene salvato un file e ne esiste una versione precedente, la versione originale sarà rinominata con un'estensione <literal role="extension"
+>.orig</literal
+>. Se esiste già una vecchia copia di sicurezza con estensione <literal role="extension"
+>.orig</literal
+>, questa verrà eliminata senza farne un'altra copia. </para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -983,7 +1705,7 @@ Opzioni:
 
 <sect2
 ><title
->Opzioni locali e per la lingua</title>
+>Lingua e paese</title>
   <variablelist>
     <varlistentry
 ><term
@@ -992,7 +1714,7 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Cambia la lingua usata per l'interfaccia utente. Le modifiche a questa opzione non hanno effetto immediato sul programma. Devi chiudere Kdiff3 e riavviarlo affinché la lingua venga cambiata. Questa opzione non è disponibile nella versione KDE di KDiff3 perché la lingua viene cambiata tramite le impostazioni globali di KDE. </para
+>Imposta la lingua usata per l'interfaccia utente. Le modifiche a questa opzione non hanno effetto immediato sul programma. Devi chiudere &kdiff3; e riavviarlo per far cambiare la lingua. Questa opzione non è disponibile nella versione &kde; di &kdiff3; perché la lingua viene cambiata nelle impostazioni globali di &kde;. </para
 ></listitem
 ></varlistentry>
     <varlistentry
@@ -1012,7 +1734,7 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Davanti al selettore di codec appare una nota che ti dice quale è la codifica locale. Non è modificabile, serve solo a ricordarti quale è la codifica locale nel caso che tu non lo sapessi già. tuttavia devi selezionarla. </para
+>Davanti al selettore di codec appare una nota che ti dice quale è la codifica locale. Non è modificabile, serve solo a ricordarti quale è la codifica locale nel caso che tu non lo sapessi già. Tuttavia devi selezionarla. </para
 ></listitem
 ></varlistentry>
     <varlistentry
@@ -1052,7 +1774,15 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Alcune lingue sono scritte sa destra a sinistra. Quando questa opzione è attivata KDiff3 scrive i testi da destra a sinistra nelle finestre per il confronto e per la fusione. Nota che se avvii KDiff3 da riga di comando con l'opzione "--reverse", anche tutta l'interfaccia grafica sarà scritta da destra a sinistra. Questa è una potenzialità fornita da Qt. Questa documentazione è stata scritta pensando che l'opzione "Lingue scritte da destra a sinistra" e l'aspetto grafico "reverse" non siano attivati. Altrimenti alcuni riferimenti a "destra" e "sinistra" dovranno essere scambiati per utilizzare correttamente queste opzioni. </para
+>Alcune lingue sono scritte sa destra a sinistra. Quando questa opzione è attivata, &kdiff3; scrive il testo da destra a sinistra nelle finestre di ingresso delle differenze e nella finestra di uscita della fusione. Nota che se avvii &kdiff3; dalla riga di comando con l'opzione <option
+>--reverse</option
+>, anche tutta l'interfaccia grafica sarà impostata da destra a sinistra (è una funzionalità fornita da &Qt;). Questa documentazione è stata scritta assumendo che l'opzione <guilabel
+>Lingue scritte da destra a sinistra</guilabel
+> e l'impostazione grafica inversa non siano state attivate. Quindi alcune occorrenze di <quote
+>destra</quote
+> e <quote
+>sinistra</quote
+> dovranno essere scambiate nel caso si usi questa possibilità. </para
 ></listitem
 ></varlistentry>
 
@@ -1063,7 +1793,7 @@ Opzioni:
 ><title
 >Varie</title>
 <para
->(Queste opzioni ed azioni sono disponibile nei menu o nelle barre dei pulsanti).</para>
+>Queste opzioni ed azioni sono disponibili nei menu o nelle barre dei pulsanti.</para>
 <variablelist>
   <varlistentry
 ><term
@@ -1092,17 +1822,27 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Disabilita questo per sopprimere ogni evidenziazione di spazi bianchi cambiati nel testo o nelle colonne di sommario (Nota che questo è anche applicato a cambiamenti nei numeri o nei commenti se sono attive le opzioni "Ignora numeri" o "Ignora commenti C/C++").</para
+>Disabilitalo per sopprimere l'evidenziazione delle modifiche di soli spazi nel testo o nelle colonne riassuntive. Nota che vale anche per le modifiche dei numeri o dei commenti se sono attive le opzioni <guilabel
+>Ignora i numeri</guilabel
+> o <guilabel
+>Ignora i commenti C e C++</guilabel
+>.</para
 ></listitem
 ></varlistentry>
   <varlistentry
 ><term
 ><emphasis
->Opzioni di impaginazione:</emphasis
+>Opzioni delle colonne riassuntive:</emphasis
 ></term
 ><listitem
 ><para
->Queste opzioni sono disponibili solo quando si confrontano tre file. Nella modalità normale tutte le differenze vengono mostrate in una colonna riassuntiva con colori codificati. Però, a volte, potrebbe servirti evidenziare solo le differenze tra due dei tre file. Selezionando confronto di "A con B", "A con C" o "B con C" si aprirà, a fianco di quella normale, una seconda colonna riassuntiva con le informazioni richieste. </para
+>Queste opzioni sono disponibili solo quando si confrontano tre file. Nella modalità normale tutte le differenze vengono mostrate in una sola colonna riassuntiva codificata con dei colori. Però, a volte, potrebbe interessarti evidenziare solo le differenze tra due dei tre file. Selezionare <guilabel
+>Riassunto tra A e B</guilabel
+>, <guilabel
+>Riassunto tra A e C</guilabel
+>, o <guilabel
+>Riassunto tra B e C</guilabel
+> aprirà una seconda colonna riassuntiva di fianco a quella normale con le informazioni richieste. </para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -1118,11 +1858,13 @@ Opzioni:
   <varlistentry
 ><term
 ><emphasis
->Mostra finestra A/B/C:</emphasis
+>Mostra finestra A, B o C:</emphasis
 ></term
 ><listitem
 ><para
->Alle volte vuoi usare meglio lo spazio dello schermo per righe lunghe. Nascondere le finestre che non sono importanti (Nel menu di Finestra).</para
+>Alle volte vuoi usare meglio lo spazio sullo schermo per le righe lunghe. Nascondi le finestre non importanti (nel menu <guimenu
+>Finestra</guimenu
+>).</para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -1132,7 +1874,9 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Inverti tra la finestra delle differenze e le altre (A a sinistra di B a sinistra di C) o sopra le altre (A sopra B sopra C). Questo potrebbe anche aiutare in presenza di molte righe (Nel menu di Finestra). </para
+>Passa tra mostrare le finestre delle differenze una di fianco all'altra (A a sinistra di B, che a sua volta è a sinistra di C) o una sopra l'altra (A sopra B, a sua volta sopra C). Questo potrebbe essere utile nel caso di righe lunghe (nel menu <guimenu
+>Finestra</guimenu
+>). </para
 ></listitem
 ></varlistentry>
   <varlistentry
@@ -1142,11 +1886,15 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Alcune volte stai visualizzando le differenze e decidi di fondere. <inlinemediaobject
+>A volte guardi le differenze e decidi di fondere. <inlinemediaobject
 ><imageobject
 ><imagedata fileref="merge_current.png" format="PNG"/></imageobject
 ></inlinemediaobject
-> "Fondi il file corrente" nel menu di Directory funziona anche solo comparando due file. Un solo clic ed inizia la fusione che utilizza, come predefinito, il nome del file dell'ultimo file considerato (Quando questo è utilizzato per far ripartire la fusione, allora il nome del file di output sarà mantenuto).</para
+> <guimenuitem
+>Fondi il file attuale</guimenuitem
+> nel menu <guimenu
+>Cartella</guimenu
+> funziona anche confrontando solo due file. Basta un clic per avviare la fusione, che usa il il nome dell'ultimo file di ingresso come predefinito. Quando si usa per riavviare una fusione, il nome del file di uscita sarà mantenuto.</para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -1156,7 +1904,13 @@ Opzioni:
 ><title
 >Configurazione delle scorciatoie da tastiera</title>
 <para
->Attualmente solo la versione KDE supporta la configurazione personalizzata dei tasti scorciatoia. (Menu Impostazioni->Configurazione Scorciatoie...) </para>
+>Attualmente solo la versione per &kde; supporta la configurazione personalizzata delle scorciatoie da tastiera (menu <menuchoice
+><guimenu
+>Impostazioni</guimenu
+><guimenuitem
+>Configura le scorciatoie</guimenuitem
+></menuchoice
+>). </para>
 </sect2>
 </sect1>
 
@@ -1164,17 +1918,17 @@ Opzioni:
 ><title
 >Comandi per il preprocessore</title>
 <para
->Kdiff3 prevede due opzioni per il preprocessore. </para
+>&kdiff3; supporta due opzioni del preprocessore. </para
 ><para>
 <variablelist>
    <varlistentry
 ><term
 ><emphasis
->Comandi del preprocessore</emphasis
+>Comando per il preprocessore</emphasis
 ></term
 ><listitem
 ><para
->Quando un file viene letto, esso sarà inoltrato come ingresso a questo comando esterno. Il risultato del comando sarà considerato al posto del file originale. Potrai scrivere un tuo preprocessore in base alle tue esigenze. Utilizzalo per tagliare parti di file che disturbano, o per correggere automaticamente l'indentazione,  ecc. </para
+>Quando un file viene letto viene incanalato come ingresso a questo comando esterno. Verrà visualizzato il risultato del comando invece del file iniziale. Puoi scrivere il tuo preprocessore secondo le tue esigenze specifiche. Usalo per esempio per tagliare parti di file che danno fastidio, per correggere automaticamente il rientro, eccetera. </para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -1190,7 +1944,7 @@ Opzioni:
 </variablelist>
 </para>
 <para
->L'idea è quella di permettere la maggior flessibilità possibile nell'impostare il risultato del confronto. Purtroppo ciò richiede l'uso di un programma esterno, e molti utenti non hanno voglia di scriversene uno. La buona notizia è che molto spesso<command
+>L'idea è quella di permettere la maggior flessibilità possibile nell'impostare il risultato del confronto. Purtroppo ciò richiede l'uso di un programma esterno, e molti utenti non hanno voglia di scriversene uno. La buona notizia è che molto spesso <command
 >sed</command
 > o <command
 >perl</command
@@ -1238,32 +1992,40 @@ Opzioni:
 >sed</command
 ></title>
 <para
->Questa sezione spiega sommariamente alcune possibilità elementari di <command
+>Questa sezione spiega sommariamente alcune funzionalità elementari di <command
 >sed</command
 >. Per maggiori informazioni vedi <ulink url="info:/sed"
 >info:/sed</ulink
 > o <ulink url="http://www.gnu.org/software/sed/manual/html_mono/sed.html"
-> http://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink
->. Puoi trovare una versione di sed precompilata per Windows a <ulink url="http://unxutils.sourceforge.net"
-> http://unxutils.sourceforge.net</ulink
->. nota che gli esempi che seguono danno per scontato che l'eseguibile di <command
+>http://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink
+>. Puoi trovare una versione di <command
 >sed</command
-> sia in una directory della variabile di ambiente PATH. Se non fosse vero, dovrai specificare il percorso completo dell'eseguibile. Nota anche che negli esempi si usano le virgolette semplici ('), che non funzionano in Windows. Sotto Windows dovrai usare al loro posto le virgolette doppie ("). </para>
+> precompilata per Windows a <ulink url="http://unxutils.sourceforge.net"
+>http://unxutils.sourceforge.net</ulink
+>. Nota che gli esempi seguenti danno per scontato che <command
+>sed</command
+> sia in una cartella compresa nella variabile d'ambiente <envar
+>PATH</envar
+>. Se ciò non fosse, dovrai specificare il percorso completo del comando. </para>
+<note
+><para
+>Nota anche che gli esempi seguenti usano le virgolette singole ('), che non funzionano su Windows: lì dovresti invece usare le doppie (").</para
+></note>
 <para
->In questo paragrafo userò solo il comando di <command
+>In questo paragrafo userò solo il comando di sostituzione <command
 >sed</command
-> per sostituire.: <screen>
+>: <screen>
    <command
 >sed</command
 > 's/<replaceable
->ESPR_REGOLARE</replaceable
+>ESPREG</replaceable
 >/<replaceable
 >NUOVO_TESTO</replaceable
 >/<replaceable
->FLAG</replaceable
+>CODICE</replaceable
 >'
 </screen
-> Prima di usare un nuovo comando in Kdiff3 sarebbe meglio provarlo in una console. Per farlo è utile il comando <command
+> Prima di usare un nuovo comando in &kdiff3; sarebbe meglio provarlo in una console. Per farlo è utile il comando <command
 >echo</command
 >. Ad esempio: <screen>
    <command
@@ -1271,23 +2033,33 @@ Opzioni:
 > abracadabra | <command
 >sed</command
 > 's/a/o/'
-   -> obracadabra
+   <computeroutput
+>obracadabra</computeroutput>
 </screen
-> Questo esempio mostra un semplicissimo comando sed che sostituisce la prima occorrenza di "a" con "o". Se tu volessi sostituire tutte le occorrenze, ti basterebbe aggiungere il flag "g": <screen>
+> Questo esempio mostra un semplicissimo comando sed che sostituisce la prima occorrenza di <userinput
+>a</userinput
+> con <computeroutput
+>o</computeroutput
+>. Volendo sostituire tutte le occorrenze, basta aggiungere il codice <userinput
+>g</userinput
+>: <screen>
    <command
 >echo</command
 > abracadabra | <command
 >sed</command
 > 's/a/o/g'
-   -> obrocodobro
+   <computeroutput
+>obrocodobro</computeroutput>
 </screen
-> Il simbolo "|" è il comando "pipe" che incanala l'uscita dal comando precedente nell'ingresso del comando successivo. Se vuoi fare una prova su un file più lungo, puoi usare <command
+> Il simbolo <userinput
+>|</userinput
+> è il comando di incanalamento, che invia il risultato del comando precedente all'ingresso del comando successivo. Se vuoi fare una prova su un file abbastanza lungo, puoi usare <command
 >cat</command
-> nei sistemi di tipo Unix o <command
+> sui sistemi simili a Unix, o <command
 >type</command
-> in sistemi di tipo Windows. <command
+> sui sistemi di tipo Windows. <command
 >sed</command
-> opererà una sostituzione riga per riga. <screen
+> farà una sostituzione riga per riga. <screen
 ><command
 >cat</command
 > <replaceable
@@ -1302,96 +2074,150 @@ Opzioni:
 </sect2>
 <sect2 id="sedforkdiff3"
 ><title
->Esempi di utilizzi di <command
+>Esempi per l'uso di <command
 >sed</command
-> in KDiff3</title>
+> in &kdiff3;</title>
 <sect3
 ><title
 >Ignorare altri tipi commenti</title>
 <para
->Attualmente KDiff3 riconosce solo i commenti di C/C++. Usando il preprocessore per il confronto delle righe in ingresso puoi fare in modo che altri tipi di commento vengano ignorati. basterà convertirli in commenti di tipo C/C++. Ad esempio, per ignorare commenti che iniziano con "#", potresti convertirli in "//". Tieni presente che dovrai anche attivare l'opzione "Ignora i commenti C/C++" affinché il trucco funzioni. Un appropriato comando per preprocessore le righe potrebbe essere: <screen>
+>Attualmente &kdiff3; riconosce solo i commenti C e C++. Usando il comando di preprocesso per il confronto delle righe puoi ignorare altri tipi di commenti, convertendoli in commenti di tipo C o C++. Per esempio, per ignorare i commenti che iniziano per <computeroutput
+>#</computeroutput
+>, potresti convertirli in <userinput
+>//</userinput
+>. Tieni presente che devi anche attivare l'opzione <guilabel
+>Ignora i commenti C e C++</guilabel
+> per far funzionare il trucco. Un comando di preprocesso delle righe appropriato potrebbe essere: <screen>
    <command
 >sed</command
 > 's/#/\/\//'
 </screen
 > Poiché per <command
 >sed</command
-> il carattere  "/" ha un significato speciale, è necessario porre un carattere "\" prima di ogni  "/" nella stringa del nuovo testo. Spesso il carattere "\" è richiesto per aggiungere o togliere un significato speciale a certi caratteri. La virgoletta semplice (') all'inizio e alla fine del comando di sostituzione è molto importante qui. Altrimenti la shell cercherebbe di interpretare cerci caratteri speciali (ad es.  '#', '$' or '\' ) prima di passarli a <command
+> il carattere <userinput
+>/</userinput
+> ha un significato speciale, è necessario porre un carattere <userinput
+>\</userinput
+> prima di ogni <userinput
+>/</userinput
+> nella stringa del nuovo testo. Spesso il carattere <userinput
+>\</userinput
+> è richiesto per aggiungere o togliere un significato speciale a certi caratteri. La virgoletta semplice (') all'inizio e alla fine del comando di sostituzione è molto importante qui: altrimenti, la shell cercherebbe di interpretare certi caratteri speciali (per esempio <userinput
+>#</userinput
+>, <userinput
+>$</userinput
+> o <userinput
+>\</userinput
+>) prima di passarli a <command
 >sed</command
->. Tieni presente che in Windows devi usare le virgolette doppie (") a questo scopo. Windows sostituisce altri caratteri come "%", quindi è meglio fare qualche prova. </para>
+>. <emphasis
+>Nota che su Windows dovrai usare le virgolette doppie (<userinput
+>"</userinput
+>). Windows sostituisce altri caratteri, come <userinput
+>%</userinput
+>, quindi è meglio fare qualche prova</emphasis
+>. </para>
 </sect3>
 <sect3
 ><title
->Ignorare distinzione maiuscole/minuscole</title>
+>Differenze senza distinzione delle maiuscole</title>
 <para
->Usa questo comando per preprocessare le righe in modo da convertire tutto in maiuscolo: <screen>
+>Usa questo comando di preprocesso delle righe per convertire tutto in maiuscolo: <screen>
    <command
 >sed</command
 > 's/\(.*\)/\U\1/'
 </screen
->  ".*" è un'espressione regolare che corrisponde con tutte le stringhe e, in questo contesto, con tutti i caratteri della riga. Il "\1" nella stringa di sostituzione rappresenta il testo trovato in corrispondenza al contenuto della prima coppia di parentesi "\(" e "\)". La "\U" converte in maiuscolo il testo inserito. </para>
+> <userinput
+>.*</userinput
+> è un'espressione regolare corrispondente a qualsiasi stringa, e, in questo caso, a tutti i caratteri della riga. Il <userinput
+>\1</userinput
+> nella stringa di sostituzione rappresenta il testo trovato nel contenuto della prima coppia di parentesi tonde. La <userinput
+>\U</userinput
+> converte in maiuscolo il testo inserito. </para>
 </sect3>
 
 <sect3
 ><title
->Ignorare le keyword per il controllo della versione</title>
+>Ignorare le parole chiave del controllo di versione</title>
 <para
->CVS ed altri sistemi per il controllo delle versioni utilizzano molte parole chiave per inserire stringhe generate automaticamente (<ulink url="info:/cvs/Keyword substitution"
->info:/cvs/Keyword substitution</ulink
->). Esse seguono lo schema comune "$KEYWORD testo generato$". A questo punto ci serve un comando per il preprocessore che rimuova solo il testo generato: <screen>
+>CVS ed altri sistemi per il controllo di versione usano molte parole chiave per inserire stringhe generate automaticamente (vedi la <ulink url="info:/cvs/Keyword substitution"
+>pagina Info di CVS</ulink
+>). Tutte queste seguono lo schema <userinput
+>$KEYWORD testo generato$</userinput
+>. A questo punto serve un comando di preprocesso che rimuova solo il testo generato: <screen>
    <command
 >sed</command
 > 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'
 </screen
-> Le "\|" separano le possibili parole chiave. Puoi modificare questa lista in base alle tue esigenze. La "\" prima del "$" è necessaria, altrimenti il "$" verrebbe interpretato come "fine della riga". </para>
+>I <userinput
+>\|</userinput
+> separano le possibili parole chiave. Puoi modificare questa lista secondo le tue esigenze. Il <userinput
+>\</userinput
+> prima di <userinput
+>$</userinput
+> è necessario, altrimenti <userinput
+>$</userinput
+> corrisponderebbe alla fine della riga. </para>
 <para
 >Nel provare <command
 >sed</command
-> potrai incominciare a capire ed apprezzare queste strane "espressioni regolari". Esse sono particolarmente utili perché molti altri programmi utilizzano cose molto simili. </para>
+> potrai incominciare a capire ed apprezzare queste strane espressioni regolari. Sono molto utili perché ci sono molti altri programmi che supportano cose molto simili. </para>
 </sect3>
 
 <sect3
 ><title
 >Ignorare i numeri</title>
 <para
->Attualmente c'è un'opzione interna che permette di ignorare i numeri. Però è utile vedere come lo si può fare con un comando per il preprocessore.  <screen>
+>Per ignorare i numeri, in realtà, c'è un'opzione interna. Però, come ulteriore esempio, ecco come funzionerebbe con un comando preprocesso.<screen>
    <command
 >sed</command
 > 's/[0123456789.-]//g'
 </screen
-> Ogni carattere compreso tra le parentesi quadre verrà riconosciuto e sostituito con nulla. </para>
+> Ogni carattere compreso tra le parentesi quadre verrà riconosciuto e rimosso (<quote
+>sostituito con nulla</quote
+>). </para>
 </sect3>
 
 <sect3
 ><title
 >Ignorare alcune colonne</title>
 <para
->A volte un testo è formattato molto rigorosamente e contiene delle colonne che tu vuoi ignorare, mentre ci sono altre colonne che tu vuoi esaminare. Nel seguente esempio le prime 5 colonne (ciascuna di un carattere) verranno ignorate, poi vengono salvate 10 colonne, ignorate altre cinque e salvato il resto della riga.  <screen>
+>A volte un testo è formattato molto rigorosamente, e contiene delle colonne da ignorare sempre, mentre ci sono altre colonne da tenere e analizzare. Nell'esempio seguente, le prime cinque colonne (cioè caratteri) verranno ignorate, le prossime dieci vengono salvate, ne vengono ignorate altre cinque, il resto della riga viene tenuto.<screen>
    <command
 >sed</command
 > 's/.....\(..........\).....\(.*\)/\1\2/'
 </screen
-> Ogni punto "." rappresenta un carattere. "\1" e "\2" nella stringa del nuovo testo indicano il contenuto della prima e seconda coppia "\(" e "\)", ossia il testo da preservare.  </para>
+> Ogni punto <userinput
+>.</userinput
+> corrisponde a un qualsiasi carattere singolo. <userinput
+>\1</userinput
+> e <userinput
+>\2</userinput
+> nella stringa di sostituzione si riferiscono al contenuto della prima e seconda coppia di parentesi tonde, indicanti il testo da tenere. </para>
 </sect3>
 
 <sect3
 ><title
->Combinare piùsostituzioni</title>
+>Combinare più sostituzioni</title>
 <para
->A volte, potresti voler applicare contemporaneamente diverse sostituzioni. In tal caso basta usare un punto e virgola ";" per separarle l'una dall'altra. Ad esempio: <screen
+>A volte, potresti voler applicare più sostituzioni in una volta. In tal caso si può usare un punto e virgola <userinput
+>;</userinput
+> per separarle l'una dall'altra. Ad esempio: <screen
 ><command
 >echo</command
 > abracadabra | <command
 >sed</command
 > 's/a/o/g;s/\(.*\)/\U\1/'
-   -> OBROCODOBRO
+   <computeroutput
+>OBROCODOBRO</computeroutput
+>
 </screen>
 </para>
 </sect3>
 
 <sect3
 ><title
->Utilizzare <command
+>Usare <command
 >perl</command
 > invece di <command
 >sed</command
@@ -1401,25 +2227,35 @@ Opzioni:
 >sed</command
 > potresti voler utilizzare un altro comando, ad esempio <command
 >perl</command
->.  <screen>
+>.<screen>
    <command
 >perl</command
 > -p -e 's/<replaceable
->ESPR_REGOLAR</replaceable
+>ESPREG</replaceable
 >/<replaceable
 >NUOVO_TESTO</replaceable
 >/<replaceable
->FLAGS</replaceable
+>CODICE</replaceable
 >'
 </screen
-> Ma in <command
+> Alcuni dettagli sono però diversi in <command
 >perl</command
-> alcuni particolari sono differenti. Nota, ad esempio, che mentre <command
+>. Nota che mentre <command
 >sed</command
-> vuole "\(" e "\)", in <command
+> vuole le parentesi tonde come <userinput
+>\(</userinput
+> e <userinput
+>\)</userinput
+>, in <command
 >perl</command
-> serve un più semplice "(" e ")", non precedute da '\'. Esempio: <screen
-><command
+> servono le più semplici <userinput
+>(</userinput
+> e <userinput
+>)</userinput
+>, senza farle precedere da <userinput
+>\</userinput
+>. Per esempio: <screen
+>   <command
 >sed</command
 > 's/\(.*\)/\U\1/'
    <command
@@ -1432,9 +2268,9 @@ Opzioni:
 
 <sect2
 ><title
->Precedenze nel preprocessare i dati</title>
+>Ordine di esecuzione del preprocessore</title>
 <para
->I dati sono incanalati (piped) attraverso tutti i preprocessori interni ed esterni nel seguente ordine: </para>
+>I dati sono incanalati attraverso tutti i preprocessori interni ed esterni nel seguente ordine: </para>
 <itemizedlist>
 <listitem
 ><para
@@ -1442,15 +2278,15 @@ Opzioni:
 ></listitem>
 <listitem
 ><para
->Preprocessore esterno riga per riga,</para
+>Preprocessore di confronto delle righe,</para
 ></listitem>
 <listitem
 ><para
->Ignorare differenze maiuscolo/minuscolo (tutto in maiuscolo),</para
+>Ignorare le lettere maiuscole (conversione in maiuscolo),</para
 ></listitem>
 <listitem
 ><para
->Individuare commenti C/C++:</para
+>Rilevamento dei commenti C e C++:</para
 ></listitem>
 <listitem
 ><para
@@ -1458,22 +2294,28 @@ Opzioni:
 ></listitem>
 <listitem
 ><para
->Ignorare spazi bianchi,</para
+>Ignorare gli spazi</para
 ></listitem>
 </itemizedlist>
 <para
->I dati, dopo essere passati dal preprocessore normale saranno utilizzati sia per essere mostrati che fusi. Le altre operazioni modificano solo i dati visti dall'algoritmo che controlla le differenze tra le righe corrispondenti. </para
+>I dati, dopo essere passati dal preprocessore normale, saranno tenuti per la visualizzazione e la fusione. Le altre operazioni modificano solo i dati visti dall'algoritmo che rileva le differenze tra le righe corrispondenti. </para
 ><para
->Nei rari casi in cui si usa il preprocessore normale bisogna tener presente che il preprocessore sul contenuto delle righe utilizza l'uscita del preprocessore normale come proprio ingresso. </para>
+>Nei rari casi in cui si usa il preprocessore normale, bisogna tener presente che il preprocessore di corrispondenza delle righe vede l'uscita del preprocessore normale come proprio ingresso. </para>
 </sect2>
 
 <sect2
 ><title
 >Attenzione</title>
 <para
->I comandi per il preprocessore sono spesso utilissimi ma, come succede con ogni opzione che modifichi i vostri testi o che nasconda automaticamente certe differenze, potrebbero farti sfuggire differenze significative o, nel peggiore dei casi, distruggere dati importanti. </para
+>I comandi di preprocesso sono spesso utilissimi, ma, come per ogni opzione che modifichi il testo o che nasconda automaticamente certe differenze, possono far sfuggire certe differenze, o nel peggiore dei casi distruggere dati importanti. </para
 ><para
->Per questa ragione, se durante una fusione è in funzione un comando del preprocessore normale, KDiff3 ti chiederà se vuoi disattivarlo. Però non ti avviserà se è attivo un comando del preprocessore sul contenuto delle righe. La fusione non sarà completata se prima non saranno risolti tutti i conflitti. Se hai disabilitato "Mostra gli spazi bianchi" anche le differenze che son state rimosse con il preprocessore sul contenuto delle righe saranno del tutto invisibili. Se il bottone "Salva" rimane disattivato durante una fusione (perché sussistono dei conflitti), assicurati di aver attivato "Mostra gli spazi bianchi". Se poi non vorrai sistemare manualmente le differenze meno importanti, potrai azionare "Scegli [A|B|C] per per risolvere tutti i conflitti di spazi bianchi" nel menu "Fondi". </para>
+>Per questa ragione, se durante una fusione è in funzione un comando del preprocessore normale, &kdiff3; te lo dirà e ti chiederà se vuoi disattivarlo. Però non ti avviserà se è attivo un comando del preprocessore sul contenuto delle righe. La fusione non sarà completata finché non saranno risolti tutti i conflitti. Se hai disabilitato <guilabel
+>Mostra spazi</guilabel
+>, anche le differenze che rimosse con il preprocessore sul contenuto delle righe saranno invisibili. Se il pulsante di salvataggio rimane disattivato durante una fusione (perché sussistono dei conflitti), assicurati di attivare <guilabel
+>Mostra spazi</guilabel
+>. Se non vuoi fondere manualmente queste differenze meno importanti, puoi selezionare <guilabel
+>Scegli [A|B|C] per tutti i conflitti di spazi non risolti</guilabel
+> nel menu di fusione. </para>
 </sect2>
 </sect1>
 </chapter>
@@ -1481,42 +2323,44 @@ Opzioni:
 
 <chapter id="dirmerge"
 ><title
->Comparazione e fusione di directory con KDiff3</title>
+>Confronto e fusione di cartelle con &kdiff3;</title>
 <sect1 id="dirmergeintro"
 ><title
->Introduzione</title>
+>Introduzione al confronto e alla fusione tra cartelle</title>
 <para
->Spesso i programmatori devono modificare molti file nelle directory per realizzare i loro scopi. Per questo KDiff3 permette anche di comparare e fondere intere directory ricorsivamente! </para
+>Spesso i programmatori devono modificare molti file in una cartella per realizzare i loro scopi. Per questo &kdiff3; permette anche di confrontare e fondere ricorsivamente intere cartelle. </para
 ><para
->Anche se comparare e fondere le directory sembra abbastanza ovvio, ci sono molti dettagli che bisogna considerare. Il più importante è il fatto che ora molti file potrebbero essere coinvolti in ogni operazione. Se non hai creato copia di riserva dei dati originali, può essere molto difficile se non impossibile recuperare lo stato originale. Quindi prima di avviare una fusione assicurati che i tuoi dati siano sicuri e sia possibile un recupero. Se crei un archivio o usi un sistema di controllo versioni è una tua decisione, ma anche gli esperti programmatori ed integratori hanno bisogno dei vecchi sorgenti prima o poi. E nota che anche se io (autore di KDiff3) cerco di fare del mio meglio, non posso garantire che non ci siano errori. In accordo con la licenza GNU-GPL NON CI SONO GARANZIE alcuna per questo programma. Quindi attenzione e ricordate: </para>
+>Anche se confrontare e fondere delle cartelle sembra abbastanza semplice, ci sono diversi dettagli da considerare. Il più importante è ovviamente che ora molti file potrebbero essere coinvolti in ogni operazione. Se non hai copie di sicurezza dei dati originali, può essere molto difficile se non impossibile tornare allo stato originale. Quindi, prima di avviare una fusione, assicurati che i tuoi dati siano al sicuro e che sia possibile tornare indietro. È una tua decisione se archiviarli o se usare un sistema di controllo delle versioni, ma anche i programmatori esperti hanno bisogno dei vecchi sorgenti ogni tanto. Nota che anche se io (l'autore di &kdiff3;) cerco di fare del mio meglio, non posso garantire che non ci siano errori. In accordo con la licenza GNU GPL, <emphasis
+>non c'è alcuna garanzia</emphasis
+> per questo programma. Quindi attenzione e ricordate: </para>
 <blockquote
 ><para>
    <emphasis
->Errare è umano, ma per incasinare davvero tutto è necessario un computer.</emphasis>
+>Errare è umano, ma per fare un gran casino è necessario un computer.</emphasis>
 </para
 ></blockquote>
 <para
->Questo è quello che questo programma può fare per te: KDiff3 ... </para>
+>Ecco quindi quello che questo programma può fare per te: &kdiff3;... </para>
 <itemizedlist>
      <listitem
 ><para
->... legge e compara due o tre directory ricorsivamente,</para
+>... legge e confronta due o tre cartelle ricorsivamente,</para
 ></listitem>
      <listitem
 ><para
->... fa particolare attenzione ai file simbolici,</para
+>... fa particolare attenzione ai collegamenti simbolici,</para
 ></listitem>
      <listitem
 ><para
->... permette di selezionare i file con un doppio clic del mouse,</para
+>... permette di sfogliare i file con un doppio clic del mouse,</para
 ></listitem>
      <listitem
 ><para
->... per ogni elemento propone una operazione di fusione, che puoi cambiare prima di avviare la fusione delle directory,</para
+>... per ogni elemento propone un'operazione di fusione, che puoi cambiare prima di avviare la fusione delle cartelle,</para
 ></listitem>
      <listitem
 ><para
->... permette la simulazione della fusione e visualizza le azioni che dovrebbero essere fatte, senza eseguirle,</para
+>... permette di simulare la fusione ed elenca le azioni che verrebbero fatte, senza eseguirle per davvero,</para
 ></listitem>
      <listitem
 ><para
@@ -1524,15 +2368,23 @@ Opzioni:
 ></listitem>
      <listitem
 ><para
->... ti permette di avviare l'operazione selezionata per tutti gli elementi (tasto F7) o per l'elemento selezionato (tasto F6),</para
+>... ti permette di avviare l'operazione selezionata per tutti gli elementi (tasto <keycap
+>F7</keycap
+>) o per l'elemento selezionato (tasto <keycap
+>F6</keycap
+>),</para
 ></listitem>
      <listitem
 ><para
->... permette di continuare la fusione dopo l'interazione manuale con il tasto F7,</para
+>... permette di continuare la fusione dopo l'interazione manuale con il tasto <keycap
+>F7</keycap
+>,</para
 ></listitem>
      <listitem
 ><para
->... opzionalmente crea una copia di riserva, con l'estensione ".orig",</para
+>... a scelta, crea delle copie di sicurezza, con l'estensione <literal role="extension"
+>.orig</literal
+>,</para
 ></listitem>
      <listitem
 ><para
@@ -1543,66 +2395,80 @@ Opzioni:
 
 <sect1 id="startingdirmerge"
 ><title
->Avviare la comparazione o la fusione di directory</title>
+>Avviare il confronto o la fusione di cartelle</title>
 <para
->Questa operazione è molto simile alla comparazione e fusione di un file. È necessario specificare le directory nella riga di comando o nel dialogo di selezione file. </para>
+>Questa operazione è molto simile al confronto e alla fusione di un file. È necessario specificare le cartelle nella riga di comando o nel dialogo di selezione dei file. </para>
 <sect2
 ><title
->Compara/Fondi due directory: </title>
+>Confronta o fondi due cartelle: </title>
 <screen
 ><command
 >kdiff3</command
 > <replaceable
->dir1 dir2</replaceable>
-   <command
+>cartella1</replaceable
+> <replaceable
+>cartella2</replaceable>
+<command
 >kdiff3</command
 > <replaceable
->dir1 dir2</replaceable
+>cartella1</replaceable
+> <replaceable
+>cartella2</replaceable
 > -o <replaceable
->destdir</replaceable
+>cartella_destinazione</replaceable
 >
 </screen>
 <para
->Se nessuna directory è stata specificata, KDiff3 utilizzerà <replaceable
->dir2</replaceable
+>Se non viene specificata una cartella di destinazione, &kdiff3; userà <replaceable
+>cartella2</replaceable
 >. </para>
 </sect2>
 
 <sect2
 ><title
->Compara/Fondi tre directory: </title>
+>Confronta o fondi tre cartelle: </title>
 <screen
 ><command
 >kdiff3</command
 > <replaceable
->dir1 dir2 dir3</replaceable>
-   <command
+>cartella1</replaceable
+> <replaceable
+>cartella2</replaceable
+> <replaceable
+>cartella3</replaceable>
+<command
 >kdiff3</command
 > <replaceable
->dir1 dir2 dir3</replaceable
+>cartella1</replaceable
+> <replaceable
+>cartella2</replaceable
+> <replaceable
+>cartella3</replaceable
 > -o <replaceable
->destdir</replaceable
+>cartella_destinazione</replaceable
 >
 </screen>
 <para
->Quando tre directory vengono fuse allora <replaceable
->dir1</replaceable
-> verrà utilizzata come base della fusione. Se nessuna directory di destinazione è stata specificata, KDiff3 utilizzerà <replaceable
->dir3</replaceable
-> come directory di destinazione per la fusione. </para>
+>Quando si fondono tre cartelle, <replaceable
+>cartella1</replaceable
+> viene usata come base della fusione. Se non è stata specificata nessuna cartella di destinazione per la fusione, &kdiff3; userà <replaceable
+>cartella3</replaceable
+>. </para>
 
 <para
->Si noti che solamente la comparazione inizia automaticamente, non la fusione. Per questo tu devi prima selezionare un elemento del menu o il tasto F7 (Ulteriori dettagli di seguito). </para>
+>Nota che solo il confronto inizia automaticamente, non la fusione. Per farla devi prima selezionare un elemento del menu o il tasto <keycap
+>F7</keycap
+> (maggiori dettagli di seguito). </para>
 </sect2>
 </sect1>
 
 <sect1 id="dirmergevisible"
 ><title
->Mostra informazioni</title>
+>Informazioni visibili sulla fusione delle cartelle</title>
 <para
->Durante la lettura delle directory un messaggio informativo appare per notificare lo stato di avanzamento. Se annulli l'operazione di scansione, solamente i file che sono stati comparati fino a quel momento saranno riportati. </para
+>Durante la lettura delle cartelle appare un messaggio per notificare lo stato di avanzamento. Se annulli la scansione delle cartelle, saranno elencati solo i file che sono stati confrontati fino a quel momento. </para
 ><para
->Quando la scansione del directory è stata completata KDiff3 mostra una lista dei risultati della sinistra, ... </para>
+>Quando la scansione delle cartelle è completata, &kdiff3; mostra un elenco dei risultati a sinistra, ... </para>
 <screenshot
 ><mediaobject>
 <imageobject
@@ -1611,7 +2477,7 @@ Opzioni:
 </mediaobject
 ></screenshot>
 <para
->... ed i dettagli dell'elemento attualmente selezionato sulla destra:  </para>
+>... e i dettagli dell'elemento attualmente selezionato a destra: </para>
 <screenshot
 ><mediaobject>
 <imageobject
@@ -1622,15 +2488,27 @@ Opzioni:
 
 <sect2 id="name"
 ><title
->Colonna del nome</title>
+>La colonna del nome</title>
 <para
->Ogni file e directory trovato durante la scansione è mostrato qui in un albero. Puoi selezionare un elemento facendo clic con il mouse. </para
+>Ogni file e cartella trovato durante la scansione è mostrato qui in un albero. Puoi selezionare un elemento facendoci clic con il mouse. </para
 ><para
->Normalmente le directory sono collassate. È possibile espanderle e collassarle con un clic su "+"/"-" o con un doppio clic sull'elemento o usando i tasti sinistra/destra. Il menu "Directory" contiene inoltre due azioni "Chiudi sottodirectory" e "Apri sottodirectory" con le quali puoi collassare o espandere tutte le directory in una sola volta. </para
+>Normalmente le cartelle sono chiuse. È possibile espanderle e richiuderle con un clic su <keycap
+>+</keycap
+> o <keycap
+>-</keycap
+> rispettivamente, facendo doppio clic sull'elemento, o usando i tasti freccia sinistra o destra. Il menu <guimenu
+>Cartella</guimenu
+> contiene inoltre due azioni, <guimenuitem
+>Chiudi sottocartelle</guimenuitem
+> e <guimenuitem
+>Apri sottocartelle</guimenuitem
+> con le quali puoi richiudere o espandere tutte le cartelle in una sola volta. </para
 ><para
->Se fai doppio clic sopra un file allora la comparazione verrà avviata e apparirà la finestra di verifica file. </para>
+>Se fai doppio clic su un file, il confronto verrà avviato e apparirà la finestra delle differenze dei file. </para>
 <para
->L'immagine nella colonna riflette il tipo di file nella prima directory ("A"). Può essere una di queste: </para>
+>L'immagine nella colonna del nome corrisponde al tipo di file nella prima cartella (<quote
+>A</quote
+>). Può essere una di queste: </para>
 <itemizedlist>
      <listitem
 ><para
@@ -1638,177 +2516,456 @@ Opzioni:
 ></listitem>
      <listitem
 ><para
->Directory normale (Immagine della directory)</para
+>Cartella normale (immagine di una cartella)</para
 ></listitem>
      <listitem
 ><para
->Collegamento ad un file (Immagine del file con una freccia di collegamento)</para
+>Collegamento a un file (immagine di un file con una freccia)</para
 ></listitem>
      <listitem
 ><para
->Collegamento ad una directory (Immagine della directory con una freccia di collegamento)</para
+>Collegamento a una cartella (immagine di una cartella con una freccia)</para
 ></listitem>
 </itemizedlist>
 <para
->Se il tipo di file è diverso nelle altre directory allora questo è visibile nelle colonne A/B/C e nella finestra che mostra i dettagli dell'elemento selezionato. Nota che in questo caso nessuna operazione di fusione potrà essere selezionata automaticamente. Quando la fusione partirà l'utente sarà informato di questo problema. </para>
+>Se il tipo di file è diverso nelle altre cartelle, questo è visibile nelle colonne <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> e <guilabel
+>C</guilabel
+> e nella finestra che mostra i dettagli dell'elemento selezionato. Nota che in questo caso nessuna operazione di fusione potrà essere selezionata automaticamente. Quando la fusione sarà avviata, l'utente sarà informato dei problemi di questo tipo. </para>
 </sect2>
 
 <sect2 id="coloring"
 ><title
->Le colonne A/B/C e lo schema dei colori</title>
+>Le colonne <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> e <guilabel
+>C</guilabel
+> e lo schema di colorazione</title>
 <para
->Come si può vedere, nell'immagine sopra, i colori rosso, verde, giallo e nero sono utilizzati nelle colonne A/B/C. </para>
+>Come si può vedere nell'immagine sopra, i colori rosso, verde, giallo e nero sono utilizzati nelle colonne <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> e <guilabel
+>C</guilabel
+>. </para>
 <itemizedlist>
      <listitem
 ><para
->Nero: Questo elemento non esiste in questa directory.</para
+>Nero: questo elemento non esiste in questa cartella.</para
 ></listitem>
      <listitem
 ><para
->Verde: Elemento più recente.</para
+>Verde: elemento più recente.</para
 ></listitem>
      <listitem
 ><para
->Giallo: Più vecchio del verde, più recente del rosso.</para
+>Giallo: più vecchio del verde, più recente del rosso.</para
 ></listitem>
      <listitem
 ><para
->Rosso: Elemento più vecchio.</para
+>Rosso: elemento più vecchio.</para
 ></listitem>
 </itemizedlist>
 <para
->Ma per gli elementi che erano identici nella comparazione il loro colore è anche identico anche se l'età non lo è. </para
+>Per gli elementi risultati identici dal confronto, il colore è identico anche se l'età non lo è. </para
 ><para
->Le directory sono considerate uguali se tutti gli elementi contenuti sono identici. Essi avranno quindi lo stesso colore. Ma l'età di una directory non è considerata per il proprio colore. </para
+>Le cartelle sono considerate uguali se tutti gli elementi in esse contenuti sono identici. In tal caso avranno anche lo stesso colore. L'età di una cartella, però, non è considerata per il suo colore. </para
 ><para
 >L'idea di questo schema di colorazione l'ho avuta da <ulink url="http://samba.org/cgi-bin/cvsweb/dirdiff"
 >dirdiff</ulink
->. I colori sembrano i colori di un foglio che è verde quando nuovo, diventa giallo successivamente e rosso quando è vecchio. </para>
+>. I colori sembrano i colori di una foglia, che è verde quando è nuova, successivamente ingiallisce diventa rossa quando è vecchia. </para>
 
 </sect2
 ><sect2 id="operation"
 ><title
->La colonna dell'operazione</title>
+>La colonna <guilabel
+>Operazione</guilabel
+></title>
 <para
->Dopo la comparazione delle directory KDiff3 valuterà inoltre una proposta per l'operazione di fusione. Questo è visibile nella colonna "Operazione". È possibile modificare l'operazione facendo clic sopra l'operazione che desideri cambiare. Apparirà un piccolo menu che permetterà di selezionare una operazione per quell'elemento (Puoi anche selezionare le operazioni necessarie tramite tastiera. Ctrl+1/2/3/4/Del seleziona rispettivamente, se disponibili, A/B/C/Fondi/Cancella). Questa operazione potrà essere eseguita durante la fusione. Dipende dall'elemento e dalla modalità di fusione in cui ti trovi, quale operazione è disponibile. La modalità di fusione è una delle </para>
+>Dopo aver confrontato le cartelle, &kdiff3; valuta anche una proposta di fusione. Questa è visibile nella colonna <guilabel
+>Operazione</guilabel
+>. Puoi modificare l'operazione facendo clic su quella che desideri cambiare. Apparirà un piccolo menu che permetterà di selezionare un'operazione per quell'elemento. Puoi anche selezionare le operazioni necessarie con la tastiera: <keycombo action="simul"
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>, <keycombo action="simul"
+>&Ctrl;<keycap
+>2</keycap
+></keycombo
+>, <keycombo action="simul"
+>&Ctrl;<keycap
+>3</keycap
+></keycombo
+>, <keycombo action="simul"
+>&Ctrl;<keycap
+>4</keycap
+></keycombo
+>, e <keycombo action="simul"
+>&Ctrl;<keycap
+>Canc</keycap
+></keycombo
+> selezionano rispettivamente, <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+>, <guilabel
+>C</guilabel
+>, <guilabel
+>Fondi</guilabel
+> e <guilabel
+>Cancella</guilabel
+>, se disponibili. Questa operazione verrà eseguita durante la fusione. Quali operazioni sono disponibili dipende dall'elemento e dalla modalità di fusione attuale. La modalità di fusione è una tra le seguenti: </para>
 <itemizedlist>
      <listitem
 ><para
->Fusione di tre directory ("A" è considerato la base più vecchia di entrambe).</para
+>Fusione di tre cartelle (<guilabel
+>A</guilabel
+> è considerato la base più vecchia di entrambe).</para
 ></listitem>
      <listitem
 ><para
->Fusione di due directory.</para
+>Fusione di due cartelle.</para
 ></listitem>
      <listitem
 ><para
->Modalità di sincronizzazione directory (attivabile con l'opzione "Sincronizza Directory").</para
+>Modalità di sincronizzazione di due cartelle (attivabile con l'opzione <guilabel
+>Sincronizza cartelle</guilabel
+>).</para
 ></listitem>
 </itemizedlist>
 <para
->Nella fusione di tre directory l'operazione proposta sarà: Se per un elemento ... </para>
+>Nella fusione di tre cartelle l'operazione proposta sarà: Se per un elemento… </para>
 <itemizedlist>
      <listitem
 ><para
->... le tre directory sono uguali: Copia da C</para
+>… le tre cartelle sono uguali: <action
+>copia da <guilabel
+>C</guilabel
+></action
+></para
 ></listitem>
      <listitem
 ><para
->... A e C sono uguali ma B no: Copia da B (o se B non esiste, cancella, se esiste, la destinazione)</para
+>… <guilabel
+>A</guilabel
+> e <guilabel
+>C</guilabel
+> sono uguali ma <guilabel
+>B</guilabel
+> no: <action
+>copia da <guilabel
+>B</guilabel
+>, o elimina la destinazione se <guilabel
+>B</guilabel
+> non esiste</action
+></para
 ></listitem>
      <listitem
 ><para
->... A e B sono uguali ma C no: Copia da C (o se C non esiste, cancella, se esiste, la destinazione)</para
+>… <guilabel
+>A</guilabel
+> e <guilabel
+>B</guilabel
+> sono uguali ma <guilabel
+>C</guilabel
+> no: <action
+>copia da <guilabel
+>C</guilabel
+>, o elimina la destinazione se <guilabel
+>C</guilabel
+> non esiste</action
+></para
 ></listitem>
      <listitem
 ><para
->... B e C sono uguali ma A no: Copia da C (o se C non esiste, cancella, se esiste, la destinazione)</para
+>… <guilabel
+>B</guilabel
+> e <guilabel
+>C</guilabel
+> sono uguali ma <guilabel
+>A</guilabel
+> no: <action
+>copia da <guilabel
+>C</guilabel
+>, o elimina la destinazione se <guilabel
+>C</guilabel
+> non esiste</action
+></para
 ></listitem>
      <listitem
 ><para
->... esiste solo A: Eliminare la destinazione (se esiste)</para
+>… esiste solo <guilabel
+>A</guilabel
+>: <action
+>elimina la destinazione, se esiste</action
+></para
 ></listitem>
      <listitem
 ><para
->... esiste solo B: Copia da B</para
+>… esiste solo <guilabel
+>B</guilabel
+>: <action
+>copia da <guilabel
+>B</guilabel
+></action
+></para
 ></listitem>
      <listitem
 ><para
->... esiste solo C: Copia da C</para
+>… esiste solo <guilabel
+>C</guilabel
+>: <action
+>copia da <guilabel
+>C</guilabel
+></action
+></para
 ></listitem>
      <listitem
 ><para
->... A,B e C non sono uguali: Fusione</para
+>… <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> e <guilabel
+>C</guilabel
+> non sono uguali: <action
+>fondi</action
+></para
 ></listitem>
      <listitem
 ><para
->... A, B e C non sono dello stesso tipo (es. A è una directory, B è un file): "Errore: Conflitto nel tipo di file". Fino a quando tali elementi esistono la fusione non può essere avviata.</para
+>… <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> e <guilabel
+>C</guilabel
+> non sono dello stesso tipo (per esempio <guilabel
+>A</guilabel
+> è una cartella e <guilabel
+>B</guilabel
+> è un file): <guilabel
+>Errore: tipi di file in conflitto</guilabel
+>. La fusione non può essere avviata finché esistono questi elementi.</para
 ></listitem>
 </itemizedlist>
 <para
->Nella fusione di due directory l'operazione proposta sarà: Se per un elemento ... </para>
+>Nella fusione di due cartelle l'operazione proposta sarà: se per un elemento… </para>
 <itemizedlist>
      <listitem
 ><para
->... entrambe le directory sono uguali: Copia da B</para
+>… entrambe le cartelle sono uguali: <action
+>copia da <guilabel
+>B</guilabel
+></action
+></para
 ></listitem>
      <listitem
 ><para
->... A esiste, ma non B: Copia da A</para
+>… <guilabel
+>A</guilabel
+> esiste, ma <guilabel
+>B</guilabel
+> no: <action
+>copia da <guilabel
+>A</guilabel
+></action
+></para
 ></listitem>
      <listitem
 ><para
->... B esiste, ma non A: Copia da B</para
+>… <guilabel
+>B</guilabel
+> esiste, ma <guilabel
+>A</guilabel
+> no: <action
+>copia da <guilabel
+>B</guilabel
+></action
+></para
 ></listitem>
      <listitem
 ><para
->... A e B esistono ma non sono uguali: Fusione</para
+>… <guilabel
+>A</guilabel
+> e <guilabel
+>B</guilabel
+> esistono ma non sono uguali: <action
+>fondi</action
+></para
 ></listitem>
      <listitem
 ><para
->... A e B non sono dello stesso tipo (es. A è una directory, B è un file): "Errore: Conflitto nel tipo di file". Fino a quando tale elemento esiste la fusione delle directory non può essere avviata.</para
+>… <guilabel
+>A</guilabel
+> e <guilabel
+>B</guilabel
+> non sono dello stesso tipo (per esempio <guilabel
+>A</guilabel
+> è una cartella, <guilabel
+>B</guilabel
+> è un file): <guilabel
+>Errore: tipi di file in conflitto</guilabel
+>. La fusione non può essere avviata finché esistono questi elementi.</para
 ></listitem>
 </itemizedlist>
 <para
->La modalità di sincronizzazione è attiva se solo due directory e nessuna destinazione è stata specificata e se l'opzione "Sincronizza directory" è attiva. KDiff3 selezionerà quindi una operazione predefinita così entrambe le directory, successivamente, sono uguali. Se per un elemento ... </para>
+>La modalità di sincronizzazione è attiva se solo sono state specificate due cartelle e nessuna destinazione, e se è attiva l'opzione <guilabel
+>Sincronizza cartelle</guilabel
+>. &kdiff3; selezionerà quindi un'operazione predefinita in modo che entrambe le cartelle divengano successivamente uguali. Se per un elemento… </para>
 <itemizedlist>
      <listitem
 ><para
->... entrambe le directory sono uguali: Nulla da fare.</para
+>… entrambe le cartelle sono uguali: non sarà fatto nulla</para
 ></listitem>
      <listitem
 ><para
->... A esiste, ma non B: Copia A su B</para
+>… <guilabel
+>A</guilabel
+> esiste, ma <guilabel
+>B</guilabel
+> no: copia <guilabel
+>A</guilabel
+> su <guilabel
+>B</guilabel
+></para
 ></listitem>
      <listitem
 ><para
->... B esiste, ma non A: Copia B su A</para
+>… <guilabel
+>B</guilabel
+> esiste, ma <guilabel
+>A</guilabel
+>: copia <guilabel
+>B</guilabel
+> su <guilabel
+>A</guilabel
+></para
 ></listitem>
      <listitem
 ><para
->... A e B esistono, ma non sono uguali: Fondi e memorizza il risultato in entrambe le directory. (...)</para
+>… <guilabel
+>A</guilabel
+> e <guilabel
+>B</guilabel
+> esistono, ma non sono uguali: fondi e memorizza il risultato in entrambe le cartelle. Il nome del file di salvataggio visibile all'utente è quello di <guilabel
+>B</guilabel
+>, ma &kdiff3; copia <guilabel
+>B</guilabel
+> anche su <guilabel
+>A</guilabel
+>.</para
 ></listitem>
      <listitem
 ><para
->... A e B non sono dello stesso tipo (es. A è una directory, B è un file): "Errore: Conflitto nel tipo di file". Fino a quando tale elemento esiste la fusione delle directory non può essere avviata.</para
+>… <guilabel
+>A</guilabel
+> e <guilabel
+>B</guilabel
+> non sono dello stesso tipo (per esempio <guilabel
+>A</guilabel
+> è una cartella, <guilabel
+>B</guilabel
+> è un file): <guilabel
+>Errore: tipi di file in conflitto</guilabel
+>. La fusione non può essere avviata finché esistono questi elementi.</para
 ></listitem>
 </itemizedlist>
 <para
->Se due directory vengono fuse e l'opzione "Copia il più recente invece di fondere" è selezionata, KDiff3 verificherà le date e proporrà di scegliere il file più recente. Se i file non sono uguali ma hanno data uguale, il risultato dell'operazione sarà "Errore: Le date sono uguali ma i file no." Finché esistono file in questa situazione la fusione delle directory non potrà iniziare. </para>
+>Quando due cartelle vengono fuse ed è selezionata l'opzione <guilabel
+>Copia il più recente invece di fondere</guilabel
+>, &kdiff3; verificherà le date e proporrà di scegliere il file più recente. Se i file non sono uguali ma hanno la stessa data, il risultato dell'operazione sarà <guilabel
+>Errore: le date coincidono ma i file sono diversi</guilabel
+>. La fusione delle cartelle non può essere avviata finché esistono questi elementi. </para>
 </sect2>
 
 <sect2 id="status"
 ><title
->La colonna di stato</title>
+>La colonna <guilabel
+>stato</guilabel
+></title>
 <para
->Durante la fusione i file saranno processati uno dopo l'altro. La colonna di stato mostrerà "Fatto" per gli elementi correttamente fusi, e altri messaggi se è accaduto qualcosa di inaspettato. Quando una fusione è completa, bisognerebbe fare un'ultima verifica per vedere se gli stati di tutti gli elementi concordano. </para>
+>Durante la fusione i file saranno elaborati uno per volta. La colonna di stato indicherà <guilabel
+>Fatto</guilabel
+> per gli elementi correttamente fusi, e altri messaggi se si è verificato qualche imprevisto. Quando una fusione è completa, si dovrebbe fare un'ultima verifica per vedere se gli stati di tutti gli elementi sono corretti. </para>
 </sect2>
 
 <sect2 id="statisticscolulmns"
 ><title
->La colonna delle statistiche</title>
+>Le colonne delle statistiche</title>
 <para
->Quando è attiva l'opzione "Analisi completa" per il  confronto, KDiff3 mostrerà delle colonne supplementari contenenti il numero di conflitti non risolti, risolti, relativi a spazi non bianchi e relativi a spazi bianchi. La colonna dei conflitti risolti verrà mostrata solo quando si confrontano o fondono tre directory. </para>
+>Quando la modalità di confronto dei file <guilabel
+>Analisi completa</guilabel
+> è stata abilitata nelle opzioni, &kdiff3; mostrerà delle colonne supplementari con il numero di conflitti non risolti, risolti, di spazi vuoti e non. La colonna dei risolti verrà mostrata solo quando si confrontano o fondono tre cartelle. </para>
+</sect2>
+
+<sect2 id="selectingvisiblefiles"
+><title
+>Selezionare i file elencati</title>
+<para
+>Diverse opzioni influenzano quali file vengono qui elencati. Ad alcune si può accedere nella <link linkend="dirmergeoptions"
+>finestra delle impostazioni</link
+>. Il menu delle cartelle contiene le voci: </para
+><para
+><itemizedlist>
+     <listitem
+><para
+><guimenuitem
+>Mostra file identici</guimenuitem
+>: i file che sono stati verificati essere identici in tutte le cartelle di ingresso.</para
+></listitem>
+     <listitem
+><para
+><guimenuitem
+>Mostra file diversi</guimenuitem
+>: file che esistono in due o più cartelle e che non sono uguali.</para
+></listitem>
+     <listitem
+><para
+><guimenuitem
+>Mostra file solo in A</guimenuitem
+>: file che esistono in A, ma non in B o C.</para
+></listitem>
+     <listitem
+><para
+><guimenuitem
+>Mostra file solo in B</guimenuitem
+>: file che esistono in B, ma non in A o C.</para
+></listitem>
+     <listitem
+><para
+><guimenuitem
+>Mostra file solo in C</guimenuitem
+>: file che esistono in C, ma non in A o B.</para
+></listitem>
+</itemizedlist
+></para>
+<para
+>Attiva le opzioni di visualizzazione solo per gli elementi che vuoi elencare. Se per esempio vuoi solo elencare tutti gli elementi che esistono in A o B, ma non in entrambi, dovrai attivare <guimenuitem
+>Mostra file solo in A</guimenuitem
+> e <guimenuitem
+>Mostra file solo in B</guimenuitem
+>, e disattivare tutti gli altri (<guimenuitem
+>Mostra file identici</guimenuitem
+>, <guimenuitem
+>Mostra file diversi</guimenuitem
+>, <guimenuitem
+>Mostra file solo in C</guimenuitem
+>). L'elenco sarà immediatamente aggiornato secondo le modifiche. </para
+><para
+>Queste opzioni valgono anche per le cartelle, con un'eccezione: disabilitare <guimenuitem
+>Mostra file diversi</guimenuitem
+> non nasconderà le cartelle complete, ma funzionerà solo per i loro file. </para
+><para
+>Nota che tra queste opzioni solo <guimenuitem
+>Mostra file identici</guimenuitem
+> è persistente; le altre sono abilitate quando si avvia &kdiff3;. </para>
 </sect2>
 
 </sect1>
@@ -1816,156 +2973,260 @@ Opzioni:
 
 <sect1 id="dothemerge"
 ><title
->Avviare una fusione</title>
+>Fondere le cartelle</title>
 <para
->Puoi inoltre fondere l'elemento attualmente selezionato (file o directory), o tutti gli elementi.Quando hai scelto tutte le tue operazioni (anche in tutte le sottodirectory) puoi far partire la fusione. </para
+>Puoi o fondere l'elemento attualmente selezionato (file o cartella), o tutti gli elementi. Quando hai scelto tutte le tue operazioni (anche in tutte le sottocartelle) puoi avviare la fusione. </para
 ><para
->Attenzione che se non viene specificata una directory di destinazione esplicitamente, allora la destinazione sarà "C" nella modalità di tre directory, "B" nella modalità di due directory, e nella modalità di sincronizzazione sarà "A" e/o "B". </para
+>Attenzione che se non specifichi esplicitamente una cartella di destinazione, questa sarà <symbol
+>C</symbol
+> nella modalità con tre cartelle, <symbol
+>B</symbol
+> nella modalità con due, e nella modalità di sincronizzazione sarà <symbol
+>A</symbol
+> o <symbol
+>B</symbol
+>. </para
 ><para
->Se è stata specificata la directory di destinazione verificare anche che tutti gli elementi di output siano anche nell'albero. Ci sono alcune opzioni che causano l'omissione di certi elementi dalla comparazione e dalla fusione delle directory. Verifica queste opzioni per non avere delle brutte sorprese: </para>
+>Se è stata specificata la cartella di destinazione, va verificato anche che tutti gli elementi di uscita siano nell'albero. Ci sono alcune opzioni che fanno omettere certi elementi dal confronto e dalla fusione delle cartelle. Verifica queste opzioni per non avere delle brutte sorprese: </para>
 <itemizedlist>
      <listitem
 ><para
->"Sottodirectory": Se disabilitato, gli elementi nelle sottodirectory non saranno esaminati.</para
+><guimenuitem
+>Cartelle ricorsive</guimenuitem
+>: se disabilitato, gli elementi nelle sottocartelle non saranno trovati.</para
 ></listitem>
      <listitem
 ><para
->"Categorie"/"Categorie escluse": Include/Esclude elementi dalla verifica</para
+><guimenuitem
+>Schemi di file</guimenuitem
+> e <guimenuitem
+>Schemi di file da escludere</guimenuitem
+>: include o esclude gli elementi corrispondenti</para
 ></listitem>
      <listitem
 ><para
->"Escludi file nascosti"</para
+><guimenuitem
+>Escludi file nascosti</guimenuitem
+></para
 ></listitem>
      <listitem
 ><para
->"Elenca solo le differenze": I file verificati in tutte le directory non appaiono nell'albero, così come anche della destinazione.</para
+><link linkend="selectingvisiblefiles"
+>Opzioni di visualizzazione</link
+></para
 ></listitem>
 </itemizedlist>
 <para
->(Nell'attuale versione devi eseguire manualmente una riscansione tramite il menu "Directory"->"Riscandisci" solo dopo aver cambiato le opzioni che hanno effetto sulla directory scansionata). </para
+>Se cambi le impostazioni per elencare più file, devi riesaminare la cartella con <menuchoice
+><guimenu
+>Cartella</guimenu
+><guimenuitem
+>Riesamina</guimenuitem
+></menuchoice
+>; questo perché &kdiff3; non confronta i file esclusi con questi criteri per accelerare il confronto. Se hai cambiato gli schemi per file o cartelle per escludere dei file, la lista dei file sarà aggiornata subito dopo la chiusura della finestra delle opzioni. </para
 ><para
->Se così sei soddisfatto, il resto è facile. </para
+>Nota che, quando scrivi in una cartella completamente nuova, di solito vuoi copiare anche i file identici. In tal caso abilita l'opzione <guimenuitem
+>Mostra file identici</guimenuitem
+>. Se la cartella di destinazione è uno degli ingressi, questo non è necessario perché il file è già lì. </para
 ><para
->Per fondere tutti gli elementi: Seleziona "Avvia/Continua la funzione directory" nel menu "Directory" o premi il tasto F7 (la scorciatoia). Per fondere solamente l'elemento attualmente selezionato: Seleziona "Avvia operazione per l'elemento corrente" o premi F6. </para
+>Se fin qui sei soddisfatto, il resto è facile. </para
 ><para
->Se per un conflitto nel tipo di file, persiste la non validità dell'operazione scelta per alcuni file, allora apparirà un messaggio che indica elementi, in modo che tu possa selezionare un'operazione valida per essi. </para
+>Per fondere tutti gli elementi: seleziona <menuchoice
+><guimenu
+>Cartella</guimenu
+><guimenuitem
+>Avvia o continua fusione tra cartelle</guimenuitem
+></menuchoice
+> o premi il tasto <keycap
+>F7</keycap
+>, che ne è la scorciatoia predefinita. Per fondere solo l'elemento attuale, seleziona <guimenuitem
+>Esegui operazione sull'elemento attuale</guimenuitem
+> o premi <keycap
+>F6</keycap
+>. </para
 ><para
->Se fondi tutti gli elementi allora apparirà un dialogo, proponendoti le opzioni "Fallo", "Simula" e "Annulla". </para>
+>Se esistono ancora elementi con operazioni non valide a causa di tipi di file in conflitto, apparirà una finestrella per indicarli e poter selezionare un'operazione valida. </para
+><para
+>Se fondi tutti gli elementi, apparirà una finestra con le opzioni <guilabel
+>Procedi</guilabel
+>, <guilabel
+>Simula</guilabel
+> e <guilabel
+>Annulla</guilabel
+>. </para>
 <itemizedlist>
      <listitem
 ><para
->Seleziona "Simula" se vuoi vedere cosa dovrebbe essere fatto senza effettivamente farlo. Una lista dettagliata di tutte le operazioni sarà mostrata.</para
+>Seleziona <guilabel
+>Simula</guilabel
+> se vuoi vedere cosa verrebbe fatto senza farlo per davvero. Verrà mostrato un elenco dettagliato di tutte le operazioni.</para
 ></listitem>
      <listitem
 ><para
->Altrimenti seleziona "Esegui" per avviare l'effettiva fusione.</para
+>Altrimenti, seleziona <guilabel
+>Procedi</guilabel
+> per avviare la fusione vera e propria.</para
 ></listitem>
 </itemizedlist>
 <para
->Quindi KDiff3 avvierà l'operazione specifica per tutti gli elementi. Se è richiesta una interazione manuale (fusione di un singolo file), sarà aperta la finestra di fusione (<link linkend="dirmergebigscreenshot"
->guarda la schermata grande</link
+>&kdiff3; avvierà quindi l'operazione specifica per tutti gli elementi. Se si richiede un'interazione manuale (fusione di un singolo file), sarà aperta la finestra di fusione (<link linkend="dirmergebigscreenshot"
+>vedi la schermata grande</link
 >). </para
 ><para
->Quando hai finito con il file, seleziona nuovamente "Avvia/Continua la fusione di directory" o il tasto F7. Se non hai ancora salvato, un dialogo chiederà di farlo. KDiff3 continuerà quindi con il prossimo elemento. </para
+>Quando hai finito con la fusione manuale di un file, riseleziona <guimenuitem
+>Avvia o continua fusione tra cartelle</guimenuitem
+> o il tasto <keycap
+>F7</keycap
+>. Se non hai ancora salvato, una finestra te lo chiederà. &kdiff3; procederà quindi al prossimo elemento. </para
 ><para
->Quando KDiff3 incontra un errore, avvertirà di questo e mostrerà un dettagliato stato informativo. Sul fondo di questa lista ci saranno alcuni messaggi di errore i quali dovrebbero aiutare a capire la causa del problema. Quando continui con la fusione (tasto F7) KDiff3 ti chiederà o di riprovare o di trascurare l'elemento che ha causato il problema.Ciò significa che prima di continuare puoi scegliere un'altra operazione o risolvere il problema attraverso altri mezzi. </para
+>Quando &kdiff3; incontra un errore, lo segnalerà e mostrerà le informazioni di stato in dettaglio. In fondo a questo elenco ci saranno alcuni messaggi d'errore che dovrebbero aiutare a capire la causa del problema. Quando si fa riprendere la fusione (tasto <keycap
+>F7</keycap
+>), &kdiff3; darà la scelta tra riprovare o saltare l'elemento che ha causato il problema. Ciò significa che prima di continuare puoi scegliere un'altra operazione, o risolvere il problema in altro modo. </para
 ><para
->Quando la fusione è completa, KDiff3 informerà quindi tramite un dialogo con messaggio. </para
+>&kdiff3; mostrerà infine una finestrella al completamento della fusione. </para
 ><para
->Se alcuni elementi sono stati fusi individualmente allora KDiff3 ne terrà conto (mentre la corrente sessione di fusione avanza) e non li fonderà nuovamente fino a quando la fusione per tutti gli altri elementi non sarà eseguita. Anche quando la fusione viene saltata o non è stato salvato nulla questi elementi sono considerati completati. Solo quando cambi le operazioni di fusione l'elemento sarà nuovamente fuso. </para>
+>Se alcuni elementi sono stati fusi individualmente prima di eseguire la fusione tra cartelle, &kdiff3; lo ricorderà per tutta la sessione di fusione, e non li fonderà di nuovo quando la fusione di tutti gli altri elementi verrà eseguita più tardi. Questi elementi sono considerati completati anche quando la fusione viene saltata o non viene salvato nulla. Solo quando cambi l'operazione di fusione lo stato di completamento dell'elemento sarà rimosso, e l'elemento sarà fuso di nuovo. </para>
 </sect1>
 
 <sect1 id="dirmergeoptions"
 ><title
->Opzioni per comparare e fondere directory</title>
+>Opzioni per il confronto e la fusione tra cartelle</title>
 <para
->Le preferenze di KDiff3 (menu"Impostazioni"-&gt;"Configura KDiff3") ora ha una sezione chiamata "Fusione directory" con queste opzioni: </para>
+>Le preferenze di &kdiff3; (<menuchoice
+><guimenu
+>Impostazioni</guimenu
+><guimenuitem
+>Configura &kdiff3;</guimenuitem
+></menuchoice
+>) ha una sezione chiamata <guilabel
+>Fusione tra cartelle</guilabel
+> con queste opzioni: </para>
 
 <variablelist>
    <varlistentry
 ><term
 ><emphasis
->Sottodirectory:</emphasis
+>Cartelle ricorsive:</emphasis
 ></term
 ><listitem
 ><para
->Seleziona se ricercare le directory ricorsivamente.</para
+>Seleziona se cercare ricorsivamente nelle cartelle.</para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->Tipi di file:</emphasis
+>Schemi di file:</emphasis
 ></term
 ><listitem
 ><para
->Solo i file che corrispondono al tipo saranno messi nell'albero. Più di un tipo può essere specificato utilizzando il punto e virgola ";" come separatore. Caratteri jolly possibili: '*' e '?'. (Es. "*.cpp;*.h"). Predefinito è "*". Le directory non hanno bisogni di tali tipi.</para
+>Solo i file che corrispondono ad uno schema saranno inseriti nell'albero. È possibile specificare più di uno schema usando il punto e virgola (<symbol
+>;</symbol
+>) come separatore. I caratteri jolly possibili sono <symbol
+>*</symbol
+> e <symbol
+>?</symbol
+>; per esempio <userinput
+>*.cpp;*.h</userinput
+>. Il valore predefinito è <userinput
+>*</userinput
+>. Questi schemi non vengono usati per le cartelle.</para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->File da escludere:</emphasis
+>Schemi di file da escludere:</emphasis
 ></term
 ><listitem
 ><para
->I file e le sottodirectory che corrispondono a questo tipo saranno esclusi dall'albero. Più di uno schema potrebbe essere specificato utilizzando il punto e virgola ";" come separatore. Caratteri jolly validi: '*' e '?'. Il predefinito è "*.orig;*.o".</para
+>I file che corrispondono a questi schemi saranno esclusi dall'albero. È possibile specificare più di uno schema usando il punto e virgola (<symbol
+>;</symbol
+>) come separatore. I caratteri jolly possibili sono <symbol
+>*</symbol
+> e <symbol
+>?</symbol
+>. Il valore predefinito è <userinput
+>*.orig;*.o;*.obj</userinput
+>.</para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->Utilizza CVS-Ignore:</emphasis
+>Schemi di cartelle da escludere:</emphasis
 ></term
 ><listitem
 ><para
->Ignora i file e le directory dovrebbero essere ignorate anche dal CVS. Molti file generati automaticamente sono ignorati dal CVS. Il grosso vantaggio è che questo può essere una directory specificata dal file locale ".cvsignore". (Vedi <ulink url="info:/cvs/cvsignore"
->info:/cvs/cvsignore</ulink
->).</para
+>Le cartelle che corrispondono a questi schemi saranno escluse dall'albero. È possibile specificare più di uno schema usando il punto e virgola (<symbol
+>;</symbol
+>) come separatore. I caratteri jolly possibili sono <symbol
+>*</symbol
+> e <symbol
+>?</symbol
+>. Il valore predefinito è <userinput
+>CVS;deps;.svn</userinput
+>.</para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->Esamina file e directory nascosti:</emphasis
+>Usa .cvsignore:</emphasis
 ></term
 ><listitem
 ><para
->Su alcuni file system esiste l'attributo "Nascosto". Su altri sistemi il nome del file inizia con il punto "." che significa nascosto. Questa opzione permette di decidere se includere questi file nell'albero oppure no. Normalmente attivo.</para
+>Ignora i file e le cartelle che verrebbero ignorati anche da CVS. Molti file generati automaticamente vengono ignorati da CVS. Il vantaggio principale è che questo può cambiare per ogni cartella, secondo il file locale <filename
+>.cvsignore</filename
+>. Vedi <ulink url="info:/cvs/cvsignore"
+>la pagina Info di .cvsignore</ulink
+>.</para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->Segui i link dei file:</emphasis
+>Trova file e cartelle nascosti:</emphasis
 ></term
 ><listitem
 ><para
->Per collegamenti a file: Quando disabilitato, il collegamenti simbolici verranno comparati. Quando abilitati, quindi i file collegati saranno comparati. Normalmente disabilitato.</para
+>Su alcuni filesystem esiste l'attributo <quote
+>nascosto</quote
+> per i file. Su altri un nome del file che comincia con un punto (<filename
+>.</filename
+>) lo rende nascosto. Questa opzione permette di decidere se includere questi file nell'albero oppure no. Come impostazione predefinita è attivato.</para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->Segui i link delle directory:</emphasis
+>Segui i collegamenti dei file:</emphasis
 ></term
 ><listitem
 ><para
->Per collegamenti a directory: Quando disabilitato, i collegamenti simbolici saranno comparati. Quando attivo i collegamenti saranno trattati come una directory e saranno scansionate ricorsivamente. (Notare che il programma non verifica se il collegamento è "ricorsivo". Quando per esempio una che contiene un collegamento ad una directory dovrebbe causare un ciclo infinito, e dopo un po' di tempo ciò causerebbe un riempimento dello stack o l'utilizzo di tutta la memoria, causando il blocco del programma). Normalmente disabilitato.</para
+>Per i collegamenti a file: quando disabilitato, vengono confrontati i collegamenti simbolici. Quando abilitato, vengono confrontati i file collegati. Come impostazione predefinita è disattivato.</para
 ></listitem
-></varlistentry
->   
+></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->Elenca solo le differenze:</emphasis
+>Segui i collegamenti delle cartelle:</emphasis
 ></term
 ><listitem
 ><para
->Solo gli elementi che non sono uguali in tutte le directory di ingresso saranno elencate e solo e file cambiati sono visibili. Quindi i file che sono uguali in tutte le directory non dovrebbero essere copiati durante una fusione e se la directory di destinazione non contiene il file prima della fusione, potresti perdere alcuni file successivamente. (Questa opzione è probabilmente diversa nelle future versioni). Normalmente disattiva.</para
+>Per collegamenti a cartelle: quando disabilitato, vengono confrontati i collegamenti simbolici. Quando attivato, i collegamenti saranno trattati come una cartella e saranno scansionati ricorsivamente. Nota che il programma non verifica se il collegamento è ricorsivo. Quindi, per esempio, se una cartella contenente un collegamento ad un'altra causa un ciclo infinito, dopo un po' ciò causerà un esaurimento della memoria e manderà il programma in crash. Come impostazione predefinita è disattivato.</para
 ></listitem
 ></varlistentry>
-
+   <varlistentry
+><term
+><emphasis
+>Confronto di nomi di file con distinzione delle maiuscole:</emphasis
+></term
+><listitem
+><para
+>Il valore predefinito è falso su Windows, vero per gli altri sistemi operativi.</para
+></listitem
+></varlistentry>
    <varlistentry
 ><term
 ><emphasis
@@ -1993,28 +3254,28 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Opera un analisi approfondita di ogni file e mostra le colonne con le informazioni statistiche (numero di conflitti non risolti, risolti, relativi a spazi non bianchi e relativi a spazi bianchi). L'analisi completa è più lenta di una semplice analisi binaria, e ancora più lenta se applicata a file non di testo. (Indica il "file-antipatterns" appropriato). </para
+>Opera un analisi approfondita di ogni file e mostra le colonne con le informazioni statistiche (numero di conflitti non risolti, risolti, relativi a spazi non bianchi e relativi a spazi bianchi). L'analisi completa è più lenta di una semplice analisi binaria, e ancora più lenta se applicata a file non di testo (indica gli schemi di file da escludere appropriati). </para
 ></listitem
 ></varlistentry
 >         
    <varlistentry
 ><term
 ><emphasis
->Basati sulla data di modifica:</emphasis
+>Fidati della data di modifica:</emphasis
 ></term
 ><listitem
 ><para
->Se si comparano directory lunghe in una rete lenta, potrebbe essere più veloce comparare solamente le date di modifica e la dimensione del file. Ma questo aumento di velocità ha il prezzo di un piccola incertezza. Usare questa opzione con cura. Normalmente disattiva.</para
+>Se si confrontano cartelle grandi in una rete lenta, potrebbe essere più veloce confrontare solamente le date di modifica e la dimensione dei file. Ma questo aumento di velocità ha il prezzo di una piccola incertezza. Usa questa opzione con cautela. Come impostazione predefinita è disattivata.</para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->Basati sulla dimensione:</emphasis
+>Fidati della dimensione:</emphasis
 ></term
 ><listitem
 ><para
->Simile a considerare la data di modifica. Non avviene una reale comparazione. Due file sono considerati uguali se la loro dimensione risulta uguale. Questo è utile quando l'operazione di copia file non ha mantenuto la data di modifica. Usa questa opzione con cautela. Normalmente disabilitata.</para
+>Simile a fidarsi delle date di modifica. Non c'è un vero confronto. Due file sono considerati uguali se la loro dimensione risulta uguale. Questo è utile quando l'operazione di copia file non ha mantenuto la data di modifica. Usa questa opzione con cautela. Come impostazione predefinita è disattivata.</para
 ></listitem
 ></varlistentry>
 </variablelist
@@ -2025,11 +3286,11 @@ Opzioni:
    <varlistentry
 ><term
 ><emphasis
->Sincronizza le directory:</emphasis
+>Sincronizza le cartelle:</emphasis
 ></term
 ><listitem
 ><para
->Attiva la modalità "Sincronizza" quanto vengono comparate due directory e non è stata indicata la directory di destinazione. In questa modalità le operazioni proposte saranno scelte in modo che entrambe le directory sorgenti sono uguali successivamente. Anche il risultato di fusione sarà scritto in entrambe le directory. Normalmente disabilitato.</para
+>Attiva la modalità di sincronizzazione quando vengono confrontate due cartelle e non è stata indicata una cartella di destinazione. In questa modalità le operazioni proposte saranno scelte in modo che entrambe le cartelle sorgenti siano in seguito uguali. Anche il risultato di fusione sarà scritto in entrambe le cartelle. Come impostazione predefinita è disattivato.</para
 ></listitem
 ></varlistentry>
    <varlistentry
@@ -2039,17 +3300,21 @@ Opzioni:
 ></term
 ><listitem
 ><para
->Invece di fondere l'operazione proposta copierà il sorgente più recente se appena cambiato. (Considerato pericoloso, perché ciò implica la conoscenza, che gli altri file non siano stati ancora modificati. Verifica in ogni caso per essere sicuro). Normalmente disattivata.</para
+>Invece di fondere, l'operazione proposta copierà il sorgente più recente se ci sono state modifiche; è potenzialmente pericoloso, perché si assume che l'altro file non sia stato modificato: controlla per assicurartene ogni volta. Come impostazione predefinita è disattivato.</para
 ></listitem
 ></varlistentry>
    <varlistentry
 ><term
 ><emphasis
->File di backup:</emphasis
+>Copie di sicurezza:</emphasis
 ></term
 ><listitem
 ><para
->Se un file o una intera directory è sostituita con un'altra o è cancellata la versione originale sarà rinominata con l'estensione ".orig". Se una vecchia copia con estensione ".orig" esiste già allora questa sarà eliminata senza copia. Questo inoltre interessa la normale fusione di singoli file, non solo nella fusione di directory. Normalmente attivo.</para
+>Se un file o un'intera cartella è sostituito con un altro o viene eliminato, la versione originale sarà rinominata con l'estensione <literal role="extension"
+>.orig</literal
+>. Se esiste già una copia precedente con estensione <literal role="extension"
+>.orig</literal
+>, sarà eliminata senza farne una copia. Inoltre, ciò ha effetto sulla comune fusione tra singoli file, non solo sulla fusione tra cartelle. Come impostazione predefinita è attivato.</para
 ></listitem
 ></varlistentry>
 </variablelist>
@@ -2057,21 +3322,67 @@ Opzioni:
 
 <sect1 id="other"
 ><title
->Altre funzioni</title>
+>Altre funzioni nella finestra di fusione tra cartelle</title>
 <sect2
 ><title
->Schermo intero/diviso</title>
+>Modalità a schermo intero o diviso</title>
 <para
->Normalmente la lista di visualizzazione della fusione delle directory rimane visibile fino il file è comparato e fuso. Con il mouse puoi muovere la barra di divisione che separa la lista dei file dalla finestra di verifica. Se non vuoi questo puoi disabilitare l'opzione "Mostra lo schermo diviso" nel menu "Directory". Sarà quindi possibile usare "Inverti vista" nel menu "Directory" per invertire tra la lista di file e la visualizzazione delle differenze che quindi occuperà tutto lo schermo. </para>
+>Normalmente l'elenco di visualizzazione della fusione delle cartelle rimane visibile mentre un file viene confrontato o fuso. Con il mouse puoi muovere la barra di separazione tra l'elenco dei file e le finestre delle differenze testuali. Se non lo vuoi, puoi disabilitare l'opzione <guimenuitem
+>Vista separata</guimenuitem
+> nel menu <guimenu
+>Cartella</guimenu
+>. Potrai quindi usare <guimenuitem
+>Inverti vista</guimenuitem
+> nel menu <guimenu
+>Cartella</guimenu
+> per passare tra l'elenco di file e la vista delle differenze, che quindi occuperà tutto lo schermo. </para>
 </sect2>
 <sect2
 ><title
->Comparare o fondere un singolo file</title>
+>Confrontare o fondere un file singolo</title>
 <para
->Probabilmente preferiresti un semplice doppio clic del mouse sul file in questione per compararlo. Tuttavia esiste anche una voce nel menu "Directory". È possibile anche fondere direttamente un singolo file, senza avviare l'operazione di fusione directory tramite "Fondi singolo file" nel menu "Directory". Successivamente al salvataggio lo stato sarà impostato a fatto e il file non sarà nuovamente fuso se una fusione di directory è avviata. </para
+>Probabilmente è più semplice fare doppio clic col mouse su un file per confrontarlo; esiste però anche una voce nel menu <guimenu
+>Cartella</guimenu
+>. Puoi anche fondere direttamente un file singolo selezionandolo e scegliendo <menuchoice
+><guimenu
+>Fondi</guimenu
+><guimenuitem
+>Fondi il file attuale</guimenuitem
+></menuchoice
+>. Al salvataggio del risultato, lo stato del file verrà segnato come completato, e il file non verrà fuso di nuovo se viene avviata una fusione tra cartelle. </para
 ><para
->Ma notare che queste informazioni di stato saranno perse quando si ritorna alla directory scandita: menu "Directory": "Riscandire" </para>
+>Nota però che queste informazioni di stato andranno perse al se viene effettuata una nuova scansione delle cartelle con <menuchoice
+><guimenu
+>Cartella</guimenu
+><guimenuitem
+>Riesamina</guimenuitem
+></menuchoice
+>. </para>
 </sect2>
+<sect2
+><title
+>Confrontare o fondere file con nomi diversi</title>
+<para
+>A volte devi confrontare o fondere file con nomi diversi, per esempio un file e la sua copia di sicurezza nella stessa cartella. </para
+><para
+>Seleziona il file facendo clic sull'icona nella colonna A, B o C. Il primo file selezionato sarà segnato con <guilabel
+>A</guilabel
+>, il secondo e il terzo con <guilabel
+>B</guilabel
+> e <guilabel
+>C</guilabel
+> indipendentemente dalla colonna in cui si trovano. Si possono scegliere tre file al massimo in questo modo. </para
+><para
+>Procedi scegliendo <guimenuitem
+>Confronta file selezionati esplicitamente</guimenuitem
+> o <guimenuitem
+>Fondi file selezionati esplicitamente</guimenuitem
+> dal menu <guimenu
+>Cartella</guimenu
+>. Per comodità, queste voci appaiono anche nel menu contestuale quando fai clic destro sull'ultimo file selezionato. </para
+><para
+>Il confronto o la fusione di un file avverrà nella stessa finestra. Se questo metodo viene usato per le cartelle, sarà aperta una nuova finestra. </para
+></sect2>
 </sect1>
 </chapter>
 
@@ -2085,76 +3396,127 @@ Opzioni:
 ><title
 >Gli slave KIO</title>
 <para
->KDE supporta la trasparenza di rete tramite gli slave KIO. KDiff3 utilizza questo metodo per leggere i file in ingresso e per la scansione delle directory. Questo significa che è possibile specificare file e directory in locale o in remoto tramite URL. </para
+>&kde; supporta la trasparenza di rete tramite gli slave KIO. &kdiff3; li usa per leggere i file in ingresso e per esaminare le cartelle. Ciò significa che è possibile specificare file e cartelle locali o remoti con un <acronym
+>URL</acronym
+>. </para
 ><para
 >Esempio: </para
 ><para>
 <screen
 ><command
 >kdiff3</command
-> test.cpp  ftp://ftp.faraway.org/test.cpp
-   <command
+> <replaceable
+>prova.cpp</replaceable
+> <replaceable
+>ftp://ftp.tantolontano.it/prova.cpp</replaceable>
+<command
 >kdiff3</command
-> tar:/home/hacker/archive.tar.gz/dir ./dir
+> <replaceable
+>tar:/home/pincopallino/archivio.tar.gz/cartella</replaceable
+> <replaceable
+>./dir</replaceable
+>
 </screen>
 </para>
 <para
->La prima riga confronta un file locale con un file su un server FTP. La seconda riga confronta una directory all'interno di un un archivio compresso con una directory locale. </para
+>La prima riga confronta un file locale con un file su un server <acronym
+>FTP</acronym
+>. La seconda riga confronta una cartella contenuta in un archivio compresso con una locale. </para
 ><para
 >Altri slave KIO interessanti sono: </para>
 <itemizedlist>
 <listitem
 ><para
->File da WWW (http:),</para
+>File dal Web (<userinput
+>http:</userinput
+>),</para
 ></listitem>
 <listitem
 ><para
->File da FTP (ftp:),</para
+>File da FTP (<userinput
+>ftp:</userinput
+>),</para
 ></listitem>
 <listitem
 ><para
->Trasferimento file crittografato (fish:, sftp:),</para
+>Trasferimento di file cifrato (<userinput
+>fish:</userinput
+>, <userinput
+>sftp:</userinput
+>),</para
 ></listitem>
 <listitem
 ><para
->Windows-resources (smb:),</para
+>Partizioni condivise di Windows (<userinput
+>smb:</userinput
+>),</para
 ></listitem>
 <listitem
 ><para
->File locali (file:),</para
+>File locali (<userinput
+>file:</userinput
+>),</para
 ></listitem>
 </itemizedlist>
 <para
->Altre cose che sono possibili, ma probabilmente meno utili sono: </para>
+>Altre cose possibili, ma probabilmente meno utili sono: </para>
 <itemizedlist>
 <listitem
 ><para
->Man-pages (man:),</para
+>Pagine Man (<userinput
+>man:</userinput
+>),</para
 ></listitem>
 <listitem
 ><para
->Info-pages (info:),</para
+>Pagine Info (<userinput
+>info:</userinput
+>),</para
 ></listitem>
 </itemizedlist>
 </sect2>
 
 <sect2
 ><title
->Come scrivere gli URL</title>
+>Come scrivere gli <acronym
+>URL</acronym
+></title>
 <para
->Un URL ha una sintassi diversa se comparata con un percorso per i file e le directory locali. Dovrebbe essere considerate alcune cose: </para>
+>Un <acronym
+>URL</acronym
+> ha una sintassi diversa rispetto ai percorsi dei file delle cartelle locali. Si dovrebbero considerare alcune cose: </para>
 <itemizedlist>
 <listitem
 ><para
->Un percorso può essere relativo e può contenere "." o "..". Quando non è possibile con URL che sono sempre assoluti. </para
+>Un percorso può essere relativo e può contenere <userinput
+>.</userinput
+> o <userinput
+>..</userinput
+>. Quando non è possibile per gli <acronym
+>URL</acronym
+>, che sono sempre assoluti. </para
 ></listitem
 ><listitem
 ><para
->I caratteri speciali devono essere scritti con l'"escaping". ("#"->"%23", spazio->"%20", ecc.) Es. Un file con nome "/#pippo#" dovrebbe avere l'URL "file:/%23pippo%23". </para
+>I caratteri speciali devono essere scritti con i caratteri di escape (<userinput
+>#</userinput
+> diventa <userinput
+>%23</userinput
+>, gli spazi diventano <userinput
+>%20</userinput
+>, eccetera). Per esempio un file chiamato <filename
+>#pippo#</filename
+> dovrebbe avere l'<acronym
+>URL</acronym
+> <userinput
+>file:/%23pippo%23</userinput
+>. </para
 ></listitem
 ><listitem
 ><para
->Quando un URL non funziona come ci si aspettava, prova ad aprirlo prima con Konqueror. </para
+>Quando gli <acronym
+>URL</acronym
+> non funzionano come ci si aspetta, prova ad aprirli con Konqueror e vedere cosa succede. </para
 ></listitem>
 </itemizedlist>
 
@@ -2162,31 +3524,37 @@ Opzioni:
 
 <sect2
 ><title
->Possibilità di KIO-Slaves</title>
+>Funzionalità degli slave KIO</title>
 <para
->La trasparenza della rete ha uno svantaggio. Non tutte le risorse hanno le stesse possibilità. </para
+>La trasparenza di rete ha uno svantaggio: non tutte le risorse hanno le stesse funzionalità. </para
 ><para
->Alcune volte questo è causato dal file system del server, altre volte dal protocollo. Di seguito una breve lista delle limitazioni: </para>
+>A volte ciò è dovuto al filesystem del server, altre volte al protocollo. Ecco un breve elenco di limitazioni: </para>
 <itemizedlist>
 <listitem
 ><para
->Alcune volte i collegamenti non sono supportati. </para
+>A volte manca il supporto per i collegamenti. </para
 ></listitem
 ><listitem
 ><para
->O non c'è modo di distinguere se il collegamento punti ad un file o ad una directory; spesso si assume a file. (ftp:, sftp:). </para
+>O non c'è modo di distinguere se il collegamento punti ad un file o ad una cartella; si assume sempre un file (<userinput
+>ftp:</userinput
+>, <userinput
+>sftp:</userinput
+>). </para
 ></listitem
 ><listitem
 ><para
->Dimensione del file non sempre determinabile. </para
+>Non si può sempre sapere la dimensione del file. </para
 ></listitem
 ><listitem
 ><para
->Supporto limitato per permessi. </para
+>Supporto limitato per i permessi. </para
 ></listitem
 ><listitem
 ><para
->Non è possibile cambiareare permessi o date di modifica, altrimenti i permessi e la data della copia sarebbero diversi dall'originale. (Vedere l'opzione "Basati sulla dimensione"). Queste operazioni sono permesse solo per i file locali. </para
+>Manca la possibilità di cambiare i permessi o la data di modifica, quindi i permessi e la data di modifica di una copia saranno diversi dall'originale (vedi l'opzione <guilabel
+>Fidati della dimensione</guilabel
+>). Queste operazioni sono permesse solo per i file locali. </para
 ></listitem>
 </itemizedlist>
 </sect2>
@@ -2194,19 +3562,33 @@ Opzioni:
 
 <sect1 id="kpart">
 <title
->Usare &kdiff3; come un KPart</title>
+>Usare &kdiff3; come un componente KPart</title>
 <para
->&kdiff3; è un KPart. Attualmente esso implementa l'interfaccia KParts::ReadOnlyPart. </para
+>&kdiff3; è un componente KPart. Attualmente implementa l'interfaccia <classname
+>KParts::ReadOnlyPart</classname
+>. </para
 ><para
->In KDevelop l'uso principale è come visualizzatore di differenze. KDevelop fa sempre partire prima il visualizzatore delle differenze interno. Per richiamare KDiff3 premi il tasto destro del mouse nella finestra delle differenze e seleziona "Mostra nel KDiff3Part" dal menu contestuale. </para
+>Il su impiego uso principale è come visore di differenze in <application
+>KDevelop</application
+>. <application
+>KDevelop</application
+> fa sempre partire prima il visore delle differenze interno. Per richiamare &kdiff3; premi il &RMB; nella finestra del visore e seleziona <guimenuitem
+>Mostra in KDiff3Part</guimenuitem
+> dal menu contestuale. </para
 ><para
->KDiff3 richiede normalmente due file completi in ingresso. Quando usato come componente KDiff3 assumerà che il file di input sia un file di patch con un formato indefinito. KDiff3 recupererà il nome del file originale dal file patch. Almeno uno dei due file deve essere disponibile. KDiff3 invocherà quindi <command
+>&kdiff3; richiede normalmente due file completi in ingresso. Quando viene usato come componente, &kdiff3; assumerà che il file di ingresso sia una patch nel formato unificato. &kdiff3; recupererà i nome originali dei file dalla patch. Deve essere disponibile almeno uno dei due file. &kdiff3; chiamerà quindi <command
 >patch</command
 > per ricreare il secondo file. </para
 ><para
->In Konqueror puoi selezionare un file di patch e selezionare dal menu contestuale "Preview in"-"KDiff3Part". Attenzione che questo non funzionerà se nessun file originale è disponibile e non è sicuro se i file originali sono stati modificati prima della generazione del file di patch. </para
+>In Konqueror puoi selezionare una patch e selezionare dal menu contestuale <menuchoice
+><guisubmenu
+>Anteprima in</guisubmenu
+><guimenuitem
+>KDiff3Part</guimenuitem
+></menuchoice
+>. Nota che ciò non funzionerà se nessuno dei file originali è disponibile, e non è affidabile se i file originali sono stati modificati prima della generazione della patch. </para
 ><para
->Quando avviato come componente KDiff3 ha due finestre di comparazione e una piccola barra degli strumenti e un piccolo menu. La fusione o la comparazione delle directory non sono quindi supportate. </para>
+>Quando avviato come componente, &kdiff3; include solo la differenza tra due file, e una barra degli strumenti e un menu ridotti. La fusione o il confronto tra cartelle non sono supportati. </para>
 </sect1>
 </chapter>
 
@@ -2218,99 +3600,215 @@ Opzioni:
 <qandaentry
 ><question
 ><para
->Perché il nome "KDiff3"? </para
+>Perché si chiama &kdiff3;? </para
 ></question
 ><answer
 ><para
->Gli strumenti "KDiff" e "KDiff2" (ora "Kompare") esistono già. Inoltre "KDiff3" dovrebbe suggerire che può fondere come il programma "diff3" presente nella collezione Diff-Tool. </para
+>Gli strumenti <application
+>KDiff</application
+> e <application
+>KDiff2</application
+> (ora &kompare;) esistono già. Inoltre <application
+>KDiff3</application
+> dovrebbe suggerire che può fondere come il programma <application
+>diff3</application
+> presente nella raccolta degli strumenti <application
+>diff</application
+>. </para
 ></answer
 ></qandaentry>
 
 <qandaentry
 ><question
 ><para
->Perché ho registrato sotto GPL? </para
+>Perché l'ho rilasciato con la GPL? </para
 ></question
 ><answer
 ><para
->Utilizzando programmi GPL da molto tempo ed ho imparato molto guardando altri sorgenti. Così questo è il mio "Grazie" a tutti i programmatori che a loro volta hanno fatto lo stesso. </para
+>Ho usato a lungo programmi GPL e ho imparato molto guardando il codice sorgente. Così questo è il mio <quote
+>Grazie</quote
+> a tutti i programmatori che a loro volta hanno fatto o faranno lo stesso. </para
 ></answer
 ></qandaentry>
 
 <qandaentry
 ><question
 ><para
->Mancano alcuni pulsanti e funzioni. Cos'è errato? </para
+>Mancano alcuni pulsanti e funzioni. Cosa c'è che non va? </para
 ></question
 ><answer
 ><para
->Si sta compilando dai sorgenti, ma probabilmente non è stato correttamente specificato KDE-prefix con configure. Se non specificato configure installerà in usr/local, ma in questa maniera KDE non potrà trovare il file delle informazioni di risorse dell'interfaccia utente (es: kdiff3ui.rc).Il file README contiene molte informazioni su come correggere il prefisso. </para
+>Hai compilato da sorgente, ma probabilmente non hai specificato correttamente il prefisso di &kde; durante la configurazione. Come impostazione predefinita <command
+>configure</command
+> cerca di installare in <filename class="directory"
+>/usr/local</filename
+>, ma in questo modo &kde; non può trovare il file delle risorse dell'interfaccia utente (per esempio <filename
+>kdiff3ui.rc</filename
+>). Il file <filename
+>README</filename
+> contiene maggiori informazioni su qual è il prefisso giusto. </para
 ></answer
 ></qandaentry>
 
 <qandaentry
 ><question
 ><para
->Spesso le righe che sono simili ma non uguali appaiono dopo le altre ma alcune volte no. Perché? </para
+>Spesso le righe simili ma non uguali appaiono fianco a fianco, ma a volte no. Perché? </para
 ></question
 ><answer
 ><para
->Le righe che presentano differenze per soli spazi bianchi sono trattate inizialmente come "uguali", mentre altre differenze porteranno al risultato di righe "differenti". Se righe simili appaiono dopo delle altre è una coincidenza ma questo fortunatamente è spesso il caso. </para
+>Le righe che presentano differenze di soli spazi sono inizialmente trattate come <quote
+>uguali</quote
+>, mentre una sola differenza non di spazi le rendono <quote
+>diverse</quote
+>. Che righe simili appaiano fianco a fianco è una coincidenza, ma questo fortunatamente è spesso il caso. Vedi anche <link linkend="manualdiffhelp"
+>l'aiuto per le differenze manuali</link
+>. </para
 ></answer
 ></qandaentry>
 
 <qandaentry
 ><question
 ><para
->Perché tutti i conflitti devono essere risolti prima salvare il risultato della fusione? </para
+>Perché tutti i conflitti devono essere risolti prima di poter salvare il risultato della fusione? </para
 ></question
 ><answer
 ><para
->Per ogni sezione diversa o uguale l'editor, nella finestra del risultato di fusione, ricorda dove queste iniziano e finiscono. Questo è necessario in quanto i conflitti possono essere risolti manualmente semplicemente selezionando il pulsante del sorgente (A/B o C). Questa informazione saranno perse successivamente al salvataggio del testo in quanto è troppo oneroso creare un file specializzato al mantenimento di tutte le informazioni per il ripristino. </para
+>Per ogni sezione uguale o diversa, l'editor nella finestra del risultato di fusione ricorda l'inizio e la fine. Questo è necessario per poter risolvere i conflitti manualmente semplicemente selezionando il pulsante del sorgente (<guibutton
+>A</guibutton
+>, <guibutton
+>B</guibutton
+> o <guibutton
+>C</guibutton
+>). Queste informazioni andranno perse in seguito al salvataggio del testo, perché è troppo oneroso creare un formato di file che supporti il salvataggio e il ripristino di tutte le informazioni necessarie. </para
 ></answer
 ></qandaentry>
 
 <qandaentry
 ><question
 ><para
->Perché l'editor nella finestra del risultato di fusione non presenta la funzione di annulla modifica? </para
+>Come posso sincronizzare le viste di differenze e fusioni, in modo che tutte le viste mostrino la stessa posizione del testo? </para
 ></question
 ><answer
 ><para
->Questa funzione richiedeva troppo sforzo. È sempre possibile ripristinare la versione facendo clic il pulsante rispettivo (A/B o C). </para
+>Fai clic nella colonna di sommario a sinistra del testo (<link linkend="synchronise_views"
+>vedi anche qui</link
+>). </para
 ></answer
 ></qandaentry>
 
 <qandaentry
 ><question
 ><para
->Quando rimuovo parte del testo, appare improvvisamente "&lt;No src line&gt;" e non può essere eliminato. Cosa significa e come può essere rimosso? </para
+>Perché l'editor nella finestra del risultato di fusione non ha una funzione di annullamento? </para
 ></question
 ><answer
 ><para
->Per ogni sezione diversa o uguale l'editor, nella finestra di risultato della fusione, ricorda dove inizia e dove finisce. "&lt;No src line&gt;"significa che non è rimasto nulla nella sezione, nemmeno un carattere di nuova riga. Questo può capitare sia nella fusione automatica che in quella manuale. Questo non è un problema, poiché non apparirà nel file salvato. Se vuoi tornare al file originale è sufficiente selezionare la sezione (fai un clic sulla colonna di sommario con il tasto sinistro del mouse) quindi fai clic sul pulsante del sorgente con il contenuto voluto (A/B e C). </para
+>Questa funzione richiedeva troppo sforzo. È sempre possibile ripristinare una versione da una sorgente (A, B o C) facendo clic il rispettivo pulsante. Per modifiche maggiori si raccomanda comunque l'uso di un altro editor. </para
 ></answer
 ></qandaentry>
 
 <qandaentry
 ><question
 ><para
->Perché KDiff3 non supporta l'evidenziazione della sintassi? </para
+>Quando ho rimosso del testo mi è apparso improvvisamente <guilabel
+>&lt;Riga sorgente mancante&gt;</guilabel
+>, e non può essere eliminato. Cosa significa e come si può rimuovere? </para
 ></question
 ><answer
 ><para
->KDiff3 già usa molti colori per le differenti evidenziazioni e molte di queste potrebbero essere confuse. Per questi scopi usa un altro editor. </para
+>L'editor nella finestra del risultato della fusione ricorda dove inizia e dove finisce ogni sezione diversa o uguale. <guilabel
+>&lt;Riga sorgente mancante&gt;</guilabel
+> significa che non è in una sezione non c'è più nulla, nemmeno un carattere di ritorno a capo. Questo può capitare sia nella fusione automatica che modificando il file a mano. Questo non è un problema, perché questa indicazione non apparirà nel file salvato. Se rivuoi il file originale basta selezionare la sezione (fai clic sulla colonna di sommario a sinistra) e fai quindi clic sul pulsante del sorgente con il contenuto voluto (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> o <guilabel
+>C</guilabel
+>). </para
 ></answer
 ></qandaentry>
 
 <qandaentry
 ><question
 ><para
->Qui si possono trovare molte informazioni, ma la tua domanda non ha ancora una risposta? </para
+>Perché &kdiff3; non supporta l'evidenziazione della sintassi? </para
 ></question
 ><answer
 ><para
->Sei pregato di inviarmi le tue domanda. Ogni commento sarà apprezzato. </para
+>&kdiff3; già usa molti colori per l'evidenziazione delle differenze. Altre evidenziazioni farebbero confusione. Per questi scopi usa un altro editor. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Posso usare &kdiff3; per confrontare file di OpenOffice.Org, Word, Excel, PDF, eccetera? </para
+></question
+><answer
+><para
+>Nonostante &kdiff3; possa analizzare ogni tipo di file, probabilmente il risultato non sarà molto soddisfacente. </para
+><para
+>&kdiff3; è stato fatto per confrontare file di testo semplice. OpenOffice, Word, Excel eccetera memorizzano molte più informazioni nei file (sul tipo di carattere, le immagini, le pagine, i colori eccetera) di cui &kdiff3; non sa nulla. Quindi &kdiff3; ti mostrerà i contenuti del file interpretato come testo semplice, ma ciò potrebbe essere illeggibile, o almeno sembrerà molto strano. </para
+><para
+>Siccome la maggior parte dei programmi oggigiorno memorizza i contenuti in formato <acronym
+>XML</acronym
+>, dovresti poterli leggere come testo semplice. Quindi se c'è stato solo un piccolo cambiamento, &kdiff3; potrebbe ancora essere d'aiuto. </para
+><para
+>La migliore soluzione se vuoi solo confrontare il testo (senza oggetti integrati, come le immagini) è usare <guilabel
+>Seleziona tutto</guilabel
+> e <guilabel
+>Copia</guilabel
+> nel programma per copiare il testo rilevante negli appunti, e in seguito incollare il testo in &kdiff3; in una finestra di confronto. Vedi anche la sezione <link linkend="selections"
+>seleziona, copia e incolla</link
+>. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Dov'è andata l'opzione delle cartelle <guilabel
+>Elenca solo le differenze</guilabel
+>? </para
+></question
+><answer
+><para
+>Ora ci sono varie <link linkend="selectingvisiblefiles"
+>opzioni di visualizzazione</link
+> nel menu delle cartelle. Disabilitare <guilabel
+>Mostra file identici</guilabel
+> produce la stessa cosa che faceva l'abilitazione di <guilabel
+>Elenca solo le differenze</guilabel
+>. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Come faccio a fare una grande selezione nella finestra di ingresso delle differenze, visto che ci vuole così tanto tempo per lo scorrimento? </para
+></question
+><answer
+><para
+>Comincia la selezione come al solito (fai clic e tieni premuto il &RMB;). Quindi usa i tasti di navigazione (Per esempio <keycap
+>Pag↑</keycap
+> e <keycap
+>Pag↓</keycap
+>) tenendo premuto il &RMB;. Vedi anche la sezione <link linkend="selections"
+>seleziona, copia e incolla</link
+>. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Qui ci sono molte informazioni, ma non hai trovato una risposta alla tua domanda? </para
+></question
+><answer
+><para
+>Sei pregato di inviarmi la tua domanda. Ogni commento sarà apprezzato. </para
 ></answer
 ></qandaentry>
 
@@ -2323,28 +3821,28 @@ Opzioni:
 >Riconoscimenti e Licenza</title>
 
 <para
->&kdiff3; - Strumento per comparare e fondere file e directory </para>
+>&kdiff3; - Strumento per confrontare e fondere file e cartelle </para>
 <para
->Copyright sul programma 2002-2005 Joachim Eibl <email
->joachim.eibl at gmx.de</email
+>Copyright del programma 2002-2007 di Joachim Eibl <email
+>joachim.eibl@gmx.de</email
 > </para>
 <para
->Sono ben accette nuove idee e segnalazioni di errori da colleghi e da tutte le persone della grande rete WWW. Grazie! </para>
+>Sono ben accette nuove idee e segnalazioni di errori da colleghi e da tutte le persone su Internet. Grazie! </para>
 
 <para
->Copyright della documentazione &copy; 2002-2005 Joachim Eibl <email
->joachim.eibl at gmx.de</email
+>Copyright della documentazione &copy; 2002-2007 di Joachim Eibl <email
+>joachim.eibl@gmx.de</email
 > </para>
 
 <para
->Traduzione 2004: Stelvio Rosset <email
->srosset@satelgroup.net</email
+>Aggiornamento e revisione della traduzione (2009), attuale responsabile: Federico Zenith <email
+>federico.zenith@member.fsf.org</email
 ></para
-><para
->Aggiornamento e revisione della traduzione (2005): AndreaCelli <email
->a.celli@caltanet.it</email
-></para
-> 
+> <para
+>Aggiornamento e revisione della traduzione (2005): Andrea Celli</para
+> <para
+>Traduzione 2004: Stelvio Rosset</para
+>  
 &underFDL; &underGPL; </chapter>
 
 <appendix id="installation">
@@ -2356,11 +3854,11 @@ Opzioni:
 >Come procurarsi &kdiff3;</title>
 
 <para
->È possibile scaricare la versione più recente di KDiff3 da <ulink url="http://kdiff3.sourceforge.net"
->http://kdiff3.sourceforge.net</ulink
+>È possibile scaricare la versione più recente di &kdiff3; da <ulink url="http://kdiff3.sourceforge.net"
+>SourceForge</ulink
 >. </para
 ><para
->KDiff3 è disponibile anche per altre piattaforme. Per maggiori dettagli consultare la homepage. </para>
+>&kdiff3; è disponibile anche per altre piattaforme. Per maggiori dettagli consultare la pagina Web. </para>
 
 
 </sect1>
@@ -2370,15 +3868,17 @@ Opzioni:
 >Requisiti</title>
 
 <para
->Per sfruttare tutte le potenzialità di &kdiff3; serve &kde;3.1 o successivo. </para
+>Per sfruttare appieno tutte le potenzialità di &kdiff3; serve &kde; 3.1 o successivo. </para
 ><para
->Per informazioni riguardanti KDiff3 su altre piattaforme sprovviste di KDE si rimanda a <ulink url="http://kdiff3.sourceforge.net"
->homepage</ulink
+>Per informazioni su come usare &kdiff3; su altre piattaforme sprovviste di &kde; si rimanda alla <ulink url="http://kdiff3.sourceforge.net"
+>pagina Web</ulink
 >. </para
 ><para
->La lista dei cambiamenti la puoi trovare sul sito <ulink url="http://kdiff3.sourceforge.net/ChangeLog"
+>La lista dei cambiamenti si trova all'indirizzo <ulink url="http://kdiff3.sourceforge.net/ChangeLog"
 >http://kdiff3.sourceforge.net/ChangeLog</ulink
-> oppure nel file "ChangeLog" del pacchetto dei sorgenti. </para>
+>, oppure nel file <filename
+>ChangeLog</filename
+> del pacchetto dei sorgenti. </para>
 </sect1>
 
 <sect1 id="compilation">
@@ -2386,7 +3886,7 @@ Opzioni:
 >Compilazione ed installazione</title>
 
 <para
->Al fine di compilare ed installare &kdiff3; sul tuo sistema con KDE, posizionati sulla directory base della distribuzione &kdiff3; e digita:</para>
+>Per compilare ed installare &kdiff3; su un sistema con &kde;, posizionati sulla cartella di base della distribuzione di &kdiff3; e digita:</para>
 
 <screen
 ><prompt
@@ -2394,7 +3894,7 @@ Opzioni:
 > <userinput
 ><command
 >./configure --prefix=<replaceable
->kde-dir</replaceable
+>cartella-kde</replaceable
 ></command
 ></userinput>
 <prompt
@@ -2413,14 +3913,22 @@ Opzioni:
 </screen>
 <para
 ><replaceable
->kde-dir</replaceable
-> specifica la directory contenente KDE nel tuo sistema. Se non sei sicuro, leggi il file README per maggiori dettagli. </para>
+>cartella-kde</replaceable
+> specifica la cartella contenente &kde; sul sistema. Se non sei sicuro, leggi il file <filename
+>README</filename
+> per maggiori dettagli. </para>
 <para
->Dato che &kdiff3; utilizza <command
->autoconf</command
-> e <command
->automake</command
-> non dovresti avere problemi nel compilarlo. Se invece pensi di aver trovato un problema sei pregato di segnalarlo alla &kde; mailing list.</para>
+>Se non usi &kde;, non usare <command
+>configure</command
+>, ma segui invece le istruzioni per i sistemi con solo &Qt; nel file <filename
+>README</filename
+>.</para>
+<para
+>Dato che &kdiff3; utilizza <application
+>autoconf</application
+> e <application
+>automake</application
+>, non dovresti avere problemi a compilarlo. Se invece pensi di aver trovato un problema sei pregato di segnalarlo alla lista di distribuzione di &kde;.</para>
 
 </sect1>
 
