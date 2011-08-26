@@ -22,54 +22,87 @@
 # and update all files for translations
 # Requirements: wget, gettext-tools, qt3-devel-tools
 
+export getFiles=1
+export rmFiles=1
+
+while getopts ":g:r:" opt; do
+  case $opt in
+    g)
+      getFiles=$OPTARG
+      ;;
+    r)
+      rmFiles=$OPTARG
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+  esac
+done
+echo "Remove temp files: $rmFiles"
+echo "Get files: $getFiles"
+
 export LANG=en_US.UTF-8
 # extract extra strings
 xgettext --keyword=i18n --keyword=I18N_NOOP -C ../src-QT4/kreplacements/kreplacements.cpp -o kreplacements.pot
 sed -i /add_subdirectory/d CMakeLists.txt
-wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/subdirs
+if [ $getFiles -eq 1 ]; then
+   wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/subdirs -O subdirs
+fi
 for i in `cat subdirs` ; do
    # Many languages don't have translations so don't worry about errors too much.
-   wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/extragear-utils/kdiff3.po -O $i.po
-   # if file exists and has size greater than zero
-   if [ $i != "x-test" -a -s $i.po ]; then
-      echo $i
-      # if directory exists delete it recursively and recreate it
-      if [ -d $i ]; then
-         rm -R $i
+   if [ $getFiles -eq 1 ]; then
+      wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/extragear-utils/kdiff3.po -O $i.po
+      # if file exists and has size greater than zero
+      if [ $i != "x-test" -a -s $i.po ]; then
+         if [ -s $i.po ]; then
+            # if directory exists delete it recursively and recreate it
+            if [ -d $i ]; then
+               rm -R $i
+            fi
+            mkdir $i
+            mv $i.po $i/kdiff3.po
+         fi
       fi
-      mkdir $i
-      cp $i.po $i/kdiff3.po
+      if [ -e $i.po ]; then
+         rm $i.po              # possibly empty file
+      fi
+   fi
+   if [ -s $i/kdiff3.po ]; then
+      echo $i
       sed s/xx/$i/ CMakeLists_xx.txt >$i/CMakeLists.txt
 
-      # Same for the kdiff3plugin.po-file
-      wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/extragear-utils/kdiff3plugin.po -O kdiff3plugin_$i.po
-      if [ -s kdiff3plugin_$i.po ]; then
-         cp kdiff3plugin_$i.po $i/kdiff3plugin.po
-      fi
-      rm kdiff3plugin_$i.po
+      if [ $getFiles -eq 1 ]; then
+         # Same for the kdiff3plugin.po-file
+         wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/extragear-utils/kdiff3plugin.po -O $i/kdiff3plugin.po
+         if [ ! -s $i/kdiff3plugin.po ]; then
+            rm $i/kdiff3plugin.po
+         fi
 
-      # Same for the kdiff3fileitemactionplugin.po-file
-      wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/extragear-utils/kdiff3fileitemactionplugin.po -O kdiff3fileitemactionplugin_$i.po
-      if [ -s kdiff3fileitemactionplugin_$i.po ]; then
-         cp kdiff3fileitemactionplugin_$i.po $i/kdiff3fileitemactionplugin.po    
+         # Same for the kdiff3fileitemactionplugin.po-file
+         wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/extragear-utils/kdiff3fileitemactionplugin.po -O $i/kdiff3fileitemactionplugin.po
+         if [ ! -s $i/kdiff3fileitemactionplugin.po ]; then
+            rm $i/kdiff3fileitemactionplugin.po    
+         fi
+         
+         # Create qm-files
+         # The qm files are only needed for the qt-only version, not for the KDE-version.
+         wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/kdelibs/kdelibs4.po -O kdelibs_$i.po
       fi
-      rm kdiff3fileitemactionplugin_$i.po
-      
-      # Create qm-files
-      # The qm files are only needed for the qt-only version, not for the KDE-version.
-      wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/$i/messages/kdelibs/kdelibs4.po -O kdelibs_$i.po
+
       # (msgmerge and msgcat are from "gettext-tools"-package.)
       msgmerge --no-fuzzy-matching kdelibs_$i.po kreplacements.pot >kreplacements_$i.po
-      msgcat --use-first $i.po kreplacements_$i.po >kdiff3_$i.po
+      msgcat --use-first $i/kdiff3.po kreplacements_$i.po >kdiff3_$i.po
       # (msg2qm is from "qt3-devel-tools"-package.)
       #/usr/lib/qt3/bin/msg2qm kdiff3_$i.po kdiff3_$i.qm
       # lconvert is from qt4 (libqt4-devel)
+      sed -i "/#~/d;/#,/d" kdiff3_$i.po
       lconvert -if po -of qm -o kdiff3_$i.qm kdiff3_$i.po
       
-      rm kdelibs_$i.po kdiff3_$i.po kreplacements_$i.po
+      if [ $rmFiles -eq 1 ]; then
+         rm kdelibs_$i.po kdiff3_$i.po kreplacements_$i.po
+      fi
       echo add_subdirectory\($i\) >>CMakeLists.txt
    fi
-   rm $i.po
 done
 
 # Print some info
@@ -80,6 +113,7 @@ for i in `cat subdirs` ; do
    fi
 done
 
-rm subdirs
-rm kreplacements.pot
-
+if [ $rmFiles -eq 1 ]; then
+   rm subdirs
+   rm kreplacements.pot
+fi

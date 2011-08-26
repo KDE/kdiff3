@@ -9,19 +9,20 @@
 # Krzysztof Lichota <lichota@mimuw.edu.pl>, 2005.
 # Robert Gomulka <rgom@o2.pl>, 2005.
 # Michał Smoczyk <msmoczyk@wp.pl>, 2009, 2010, 2011.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2011-08-02 05:07+0200\n"
-"PO-Revision-Date: 2011-03-13 18:23+0100\n"
-"Last-Translator: Michał Smoczyk <msmoczyk@wp.pl>\n"
+"PO-Revision-Date: 2011-08-12 11:03+0200\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
@@ -241,19 +242,19 @@ msgstr "ze schowka"
 
 #: diff.cpp:471
 msgid "Expecting space after closing quotation mark."
-msgstr ""
+msgstr "Oczekiwano spacji po zamknięciu znaku cytowania."
 
 #: diff.cpp:474
 msgid "Not matching quotation marks."
-msgstr ""
+msgstr "Niezgodne znaki cytowania."
 
 #: diff.cpp:496
 msgid "Unexpected quotation mark within argument."
-msgstr ""
+msgstr "Nieoczekiwany znak cytowania wewnątrz argumentu."
 
 #: diff.cpp:503
 msgid "No program specified."
-msgstr ""
+msgstr "Nie określono programu."
 
 #: diff.cpp:605
 #, kde-format
@@ -1021,10 +1022,9 @@ msgid "Tool for Comparison and Merge of Files and Directories"
 msgstr "Narzędzie do porównywania i łączenia plików i katalogów"
 
 #: main.cpp:165
-#, fuzzy
 #| msgid "(c) 2002-2009 Joachim Eibl"
 msgid "(c) 2002-2011 Joachim Eibl"
-msgstr "(c) 2002-2009 Joachim Eibl"
+msgstr "(c) 2002-2011 Joachim Eibl"
 
 #: main.cpp:172 kdiff3_part.cpp:303
 msgid "Joachim Eibl"
@@ -1148,11 +1148,11 @@ msgstr "Albert Astals Cid"
 
 #: main.cpp:188
 msgid "Silvan Scherrer"
-msgstr ""
+msgstr "Silvan Scherrer"
 
 #: main.cpp:188
 msgid "OS2 port"
-msgstr ""
+msgstr "port OS2"
 
 #: main.cpp:190
 msgid "+ Many thanks to those who reported bugs and contributed ideas!"
@@ -1786,7 +1786,6 @@ msgid "Show White Space"
 msgstr "Pokaż białe znaki"
 
 #: kdiff3.cpp:558
-#, fuzzy
 msgid ""
 "White\n"
 "Deltas"
@@ -1957,10 +1956,9 @@ msgid "Saving file with a new filename..."
 msgstr "Zapisywanie pliku pod nową nazwą..."
 
 #: kdiff3.cpp:781
-#, fuzzy
 #| msgid "Printing completed."
 msgid "Printing not implemented."
-msgstr "Drukowanie zakończone."
+msgstr "Drukowanie niezaimplementowane."
 
 #: kdiff3.cpp:815
 msgid "Printing..."
@@ -2085,9 +2083,8 @@ msgstr ""
 "Aby sprawdzić automatyczne łączenie, skopiuj wiersz używany w twoich plikach."
 
 #: smalldialogs.cpp:430 smalldialogs.cpp:458 smalldialogs.cpp:494
-#, fuzzy
 msgid "Match result:"
-msgstr "Pasujący rezultat:"
+msgstr "Pasujący wynik:"
 
 #: smalldialogs.cpp:441 optiondialog.cpp:962
 msgid "History start regular expression:"
@@ -2315,16 +2312,14 @@ msgstr ""
 "Wyłączone: Musisz jawnie skopiować np. poprzez Ctrl-C."
 
 #: optiondialog.cpp:768
-#, fuzzy
 #| msgid "&Window"
 msgid "Dos/Windows"
-msgstr "&Okno"
+msgstr "Dos/Windows"
 
 #: optiondialog.cpp:769
-#, fuzzy
 #| msgid "Auto Select"
 msgid "Autodetect"
-msgstr "Wybór automatyczny"
+msgstr "Wykryj automatycznie"
 
 #: optiondialog.cpp:772
 msgid ""
@@ -2410,7 +2405,6 @@ msgstr ""
 "Analizowanie dużych plików będzie znacznie wolniejsze."
 
 #: optiondialog.cpp:854
-#, fuzzy
 msgid "Align B and C for 3 input files"
 msgstr "Wyrównaj B i C dla 3 plików wejściowych"
 
@@ -2496,13 +2490,14 @@ msgid ""
 "Run the merge for auto merge regular expressions\n"
 "immediately when a merge starts.\n"
 msgstr ""
+"Uruchom scalanie do automatycznego scalenia wyrażeń regularnych\n"
+"zaraz po rozpoczęciu scalania.\n"
 
 #: optiondialog.cpp:953
 msgid "Version Control History Merging"
 msgstr "Łączenie historii kontroli wersji"
 
 #: optiondialog.cpp:966
-#, fuzzy
 #| msgid ""
 #| "Regular expression for the start of the version control history entry.\n"
 #| "Usually this line contains the \"$Log$\"-keyword.\n"
@@ -2547,7 +2542,6 @@ msgid "History entry start sort key order:"
 msgstr "Porządek sortowania wpisów historii:"
 
 #: optiondialog.cpp:1008
-#, fuzzy
 msgid ""
 "Each pair of parentheses used in the regular expression for the history "
 "start entry\n"
@@ -2558,11 +2552,11 @@ msgid ""
 "See the documentation for details."
 msgstr ""
 "Każdy nawias użyty w wyrażeniu regularnym dla wpisu początkowego historii\n"
-"grupuje klucz który może być użyty do sortowania wpisów.\n"
+"grupuje klucz który może zostać użyty do sortowania wpisów.\n"
 "Podaj listę kluczy (które są numerowane w kolejności wystąpienia\n"
-"zaczynając od 1) oddzielając je przecinkiem \",\" (np. \"4,5,6,1,2,3,7\").\n"
+"zaczynając od 1) oddzielając je przecinkiem ',' (np. \"4,5,6,1,2,3,7\").\n"
 "Jeśli pole pozostanie puste, nie zostanie wykonane żadne sortowanie.\n"
-"Zajrzyj do dokumentacji aby uzyskać szczegółowe informacje."
+"Zajrzyj do dokumentacji, aby uzyskać szczegółowe informacje."
 
 #: optiondialog.cpp:1019
 msgid "Merge version control history on merge start"
@@ -3138,6 +3132,11 @@ msgid ""
 "Don't save the result if unsure. Continue at your own risk.\n"
 "Affected input files are in %1."
 msgstr ""
+"Pewne znaki wejściowe nie mogły zostać przekształcone do prawidłowego unikodu."
+"\n"
+"Możesz używać złego kodeku. (np. UTF-8 dla plików nie-UTF-8).\n"
+"Nie zapisuj wyników, jeśli jesteś niepewny(a). Kontynuuj na własne ryzyko.\n"
+"Uwikłane pliki wejściowe to %1."
 
 #: pdiff.cpp:1080
 msgid "Abort"
@@ -3180,16 +3179,14 @@ msgid "Search Complete"
 msgstr "Połączenie zakończone"
 
 #: pdiff.cpp:2252
-#, fuzzy
 msgid "Nothing is selected in either diff input window."
-msgstr "Nic nie jest zaznaczone."
+msgstr "Nic nie wybrano w żadnym oknie wejściowym różnicy."
 
 #: pdiff.cpp:2252
 msgid "Error while adding manual diff range"
 msgstr "Błąd podczas dodawania ręcznego zakresu różnic"
 
 #: kdiff3_shell.cpp:76
-#, fuzzy
 #| msgid ""
 #| "Could not initialize the KDiff part.\n"
 #| "This usually happens due to an installation problem. Please read the "
@@ -3199,9 +3196,10 @@ msgid ""
 "This usually happens due to an installation problem. Please read the README-"
 "file in the source package for details."
 msgstr ""
-"Nie można znaleźć modułu programu!\n"
-"Może to być spowodowane niepoprawną instalacją. Przeczytaj plik README w "
-"pakiecie źródłowym aby uzyskać szczegółowe informacje."
+"Nie można zainicjować modułu KDiff3.\n"
+"Dzieje się tak zazwyczaj ze względu na problem instalacji. Proszę przeczytać "
+"plik "
+"README w pakiecie źródłowym po szczegóły."
 
 #: rc.cpp:1
 msgctxt "NAME OF TRANSLATORS"
@@ -3240,3 +3238,4 @@ msgstr "KDiff3"
 #: rc.cpp:38
 msgid "Main Toolbar"
 msgstr "Główny pasek narzędzi"
+
