@@ -1,3 +1,26 @@
+Version 0.9.96 - 2011-08-26
+============================
+- KDiff3FileItemActionPlugin : Context menu that also works in dolphin (for KDE>=4.6)
+- Parser for preprocessor commands. (Allows single apostrophs ')
+- Warn if conversion errors appear (Invalid characters)
+- Fix crash on A/B-overview (infinite recursion)
+- Fix clearcase temp files not deleted problem on windows
+- KDiff3 plugin: When launching KDiff3 konqueror isn't blocked anymore
+- String corrections (Frederik Schwarzer)
+- Fixed writing to KIO.
+- OS2-Port (Patch by Silvan Scherrer)
+- Fixed problem where destination directory would be renamed or deleted during copy operation. 
+  Now if the destination directory exists only the files inside will be copied.
+- In merge: Separate lines where the automatic choice would be the same but for different reasons.
+- Fixed some problems with huge files in directory comparison mode (>2GB) (but direct comparison is still not possible)
+- Fixed documentation compile errors with KDE>=4.5
+- Fixed white space merge default options
+- Fixed regexp test tool.
+- Exclude printing code if Qt was compiled without printing support.
+- For Windows: Fixed handling of unicode characters in command line parameters.
+- Improved "old mac" lineendstyle handling: Break lines.
+- Detect encoding specified in xml header or html "meta" tag. 
+
 Version 0.9.95 - 2009/03/03
 ===========================
 - Show line end style for each file.
