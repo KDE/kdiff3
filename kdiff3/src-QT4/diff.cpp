@@ -820,7 +820,7 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
    QByteArray ba = QByteArray::fromRawData( m_pBuf+skipBytes, m_size-skipBytes );
    if ( m_eLineEndStyle == eLineEndStyleUndefined ) // normally only for one liners except when old mac line end style is used
    {
-      for( int j=0; j<ba.size(); ++j ) // uint because QByteArray does not support operator[](qint64)
+      for( int j=0; j<ba.size(); ++j ) // int because QByteArray does not support operator[](qint64)
       {
          if ( ba[j]=='\r' )
             ba[j]='\n'; // We only fix the old mac line end style, but leave it as "undefined"
