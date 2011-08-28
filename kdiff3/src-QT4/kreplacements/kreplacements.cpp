@@ -81,7 +81,7 @@ static void showHelp()
 #ifndef Q_OS_OS2
       char buf[256];
       HINSTANCE hi = FindExecutableA( helpFile.fileName().toAscii(), helpFile.absolutePath().toAscii(), buf );
-      if ( int(hi)<=32 )
+      if ( (quintptr)hi<=32 )
       {
 #endif
          static QTextBrowser* pBrowser = 0;

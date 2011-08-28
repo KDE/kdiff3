@@ -160,7 +160,9 @@ int main(int argc, char *argv[])
    const QByteArray& appName = QByteArray("kdiff3");
    const QByteArray& appCatalog = appName;
    const KLocalizedString i18nName = ki18n("kdiff3");
-   const QByteArray& appVersion = QByteArray( VERSION );
+   QByteArray appVersion = QByteArray( VERSION );
+   if ( sizeof(void*)==8 )
+      appVersion += " (64 bit)";
    const KLocalizedString description = ki18n("Tool for Comparison and Merge of Files and Directories");
    const KLocalizedString copyright = ki18n("(c) 2002-2011 Joachim Eibl");
    const QByteArray& homePage = "http://kdiff3.sourceforge.net/";

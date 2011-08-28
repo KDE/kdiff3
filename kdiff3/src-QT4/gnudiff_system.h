@@ -116,6 +116,6 @@ typedef ptrdiff_t lin;
 #define LIN_MAX PTRDIFF_MAX
 verify (lin_is_signed, TYPE_SIGNED (lin));
 verify (lin_is_wide_enough, sizeof (ptrdiff_t) <= sizeof (lin));
-verify (lin_is_printable_as_long, sizeof (lin) <= sizeof (long));
+//verify (lin_is_printable_as_long, sizeof (lin) <= sizeof (long));
 
 #endif
