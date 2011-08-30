@@ -1315,7 +1315,7 @@ void OptionDialog::setupRegionalPage( void )
    QLabel* label;
 
 #ifdef KREPLACEMENTS_H
-
+ 
 static const char* countryMap[]={
 "af Afrikaans",
 "ar Arabic",
@@ -1327,6 +1327,7 @@ static const char* countryMap[]={
 "br Breton",
 "bs Bosnian",
 "ca Catalan",
+"ca@valencia Catalan (Valencian)",
 "cs Czech",
 "cy Welsh",
 "da Danish",
@@ -1346,6 +1347,7 @@ static const char* countryMap[]={
 "gu Gujarati",
 "he Hebrew",
 "hi Hindi",
+"hne Chhattisgarhi",
 "hr Croatian",
 "hsb Upper Sorbian",
 "hu Hungarian",
@@ -1361,6 +1363,7 @@ static const char* countryMap[]={
 "lv Latvian",
 "mi Maori",
 "mk Macedonian",
+"ml Malayalam"
 "mn Mongolian",
 "ms Malay",
 "mt Maltese",

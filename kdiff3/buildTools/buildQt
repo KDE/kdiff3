@@ -1,0 +1,38 @@
+# Crosscompile Qt for Windows on Linux (experimental, doesn't work for Qt4.7.3)
+
+
+# Assume cross-mingw and mingw64 are installed
+# See:
+# http://download.opensuse.org/repositories/CrossToolchain:/mingw/openSUSE_11.4/
+# http://download.opensuse.org/repositories/windows:/mingw:/win64/openSUSE_11.4/
+
+# Also install mingw64-fontconfig and mingw64-freetype + devel packages or use -no-fontconfig
+
+export ORIGDIR=`pwd`
+
+# For i386-mingw32msvc-g++
+#export PATH=/opt/cross/bin:$PATH
+
+# Assume qt is in the ~/Downloads path
+
+cd ~/Downloads
+
+echo Remove old Qt dir
+rm -Rf qt-everywhere-opensource-src-4.7.3
+
+echo Unpack
+tar xfz qt-everywhere-opensource-src-4.7.3.tar.gz
+cd qt-everywhere-opensource-src-4.7.3
+
+cp -R $ORIGDIR/win32-x86-g++ mkspecs
+cp -R $ORIGDIR/win32-64-g++ mkspecs 
+
+echo Configure
+echo y | ./configure -prefix /opt/xmingw -prefix-install -platform linux-g++-64 -xplatform win32-64-g++ -fast -static -release -opensource \
+-no-webkit -no-xmlpatterns -no-qt3support -no-opengl -no-phonon -nomake examples -nomake demos \
+-little-endian -host-little-endian -no-fontconfig
+# -no-largefile -no-reduce-exports -exceptions -no-accessibility -stl -no-pch  -force-pkg-config
+
+make -j2
+# This second seems to fix a problem (freetype: #include "sys/mman.h")
+make -j2

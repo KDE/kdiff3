@@ -1,0 +1,25 @@
+#!/bin/sh
+# Create a release package
+# Param $1 is the destination directory
+
+if [ ! -z $1 -a  -d $1 ]; then
+   export VERSION=`sed -n  "s/.*\"\(.*\)\"/\1/p" src-QT4/version.h`
+   export DEST=$1/kdiff3-$VERSION
+
+   echo $DEST
+
+   if [ -e $DEST ]; then
+      echo "Destination folder already exists."
+   else
+      # First step copy everything
+      cp -P -R . $DEST
+      rm -Rf `find $DEST -name ".svn"`
+      rm -Rf $DEST/windows_installer $DEST/binaries
+      rm $DEST/create_package `find $DEST -name "*~"` `find $DEST -name "*.orig"`
+   fi
+
+else
+   echo "Usage: create_package <folder>"
+   echo "Specify an existing folder as parameter."
+fi
+
