@@ -73,7 +73,7 @@ static KDiff3PluginHistory s_history;
 
 
 K_PLUGIN_FACTORY(KDiff3FileItemActionFactory, registerPlugin<KDiff3FileItemAction>();)
-K_EXPORT_PLUGIN(KDiff3FileItemActionFactory("KDiff3FileItemAction"))
+K_EXPORT_PLUGIN(KDiff3FileItemActionFactory("kdiff3fileitemactionplugin"))
 
 KDiff3FileItemAction::KDiff3FileItemAction (QObject* pParent, const QVariantList & /*args*/)
 : KFileItemActionPlugin(pParent)
@@ -291,6 +291,6 @@ void KDiff3FileItemAction::slotAbout()
              "For a 3-way merge first \"Save\" the base file, then the branch to merge and "
              "choose \"3-way merge with base\" on the other branch which will be used as destination.\n"
              "Same also applies to directory comparison and merge.");
-   KMessageBox::information(m_pParentWidget, s, tr("About KDiff3 File Item Action Plugin") );
+   KMessageBox::information(m_pParentWidget, s, i18n("About KDiff3 File Item Action Plugin") );
 }
 

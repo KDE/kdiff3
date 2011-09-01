@@ -74,7 +74,7 @@ K_EXPORT_COMPONENT_FACTORY (libkdiff3plugin, KDiff3PluginFactory ("kdiff3plugin"
 KDiff3Plugin::KDiff3Plugin( KonqPopupMenu* pPopupMenu, const QStringList & /* list */ )
 :KonqPopupMenuPlugin(pPopupMenu)
 {
-   KGlobal::locale()->insertCatalog("kdiff3_plugin");
+   KGlobal::locale()->insertCatalog("kdiff3plugin");
    m_pPopupMenu = pPopupMenu;
    m_pParentWidget = pPopupMenu->parentWidget();
 }
@@ -268,14 +268,14 @@ void KDiff3Plugin::slotAbout()
 {
    QString s = i18n("KDiff3 Menu Plugin: Copyright (C) 2008 Joachim Eibl\n"
                     "KDiff3 homepage: http://kdiff3.sourceforge.net\n\n");
-   s += i18n("Using the contextmenu extension:\n"
+   s += i18n("Using the context menu extension:\n"
              "For simple comparison of two selected files choose \"Compare\".\n"
-             "If the other file is somewhere else \"Save\" the first file for later. "
-             "It will appear in the \"Compare With ...\" submenu. "
-             "Then use \"Compare With\" on second file.\n"
-             "For a 3-way merge first \"Save\" the base file, then the branch to merge and "
-             "choose \"3-way merge with base\" on the other branch which will be used as destination.\n"
-             "Same also applies to directory comparison and merge.");
-   KMessageBox::information(m_pParentWidget, s, tr("About KDiff3 Menu Plugin") );
+             "If the other file is somewhere else, \"Save\" the first file for later, "
+             "and it will appear in the \"Compare With ...\" submenu. "
+             "Then, use \"Compare With\" on the second file.\n"
+             "For a 3-way merge first, \"Save\" the base file, then the branch to merge, and "
+             "then \"3-way merge with base\" on the other branch which will be used as the destination.\n"
+             "The same also applies to directory comparison and merge.");
+   KMessageBox::information(m_pParentWidget, s, i18n("About KDiff3 Menu Plugin") );
 }
 
