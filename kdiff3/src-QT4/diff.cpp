@@ -394,7 +394,7 @@ static QTextCodec* getEncodingFromTag( const QByteArray& s, const QByteArray& en
       int apostrophPos = s.indexOf( '"', encodingPos + encodingTag.length() );
       int apostroph2Pos = s.indexOf( '\'', encodingPos + encodingTag.length() );
       char apostroph = '"';
-      if ( apostroph2Pos>=0 && ( apostrophPos<0 || apostrophPos>=0 && apostroph2Pos < apostrophPos ) )
+      if ( apostroph2Pos>=0 && ( apostrophPos<0 || (apostrophPos>=0 && apostroph2Pos < apostrophPos) ) )
       {
          apostroph = '\'';
          apostrophPos = apostroph2Pos;
@@ -571,6 +571,24 @@ static QString getArguments( QString cmd, QString& program, QStringList& args )
    {
       program = args[0];
       args.pop_front();
+      #ifdef WIN32
+      if ( program=="sed" )
+      {
+         QString prg = QCoreApplication::applicationDirPath() + "/util/sed.exe"; // in subdir util
+         if ( QFile::exists( prg ) )
+         {
+            program = prg;
+         }
+         else
+         {
+            prg = QCoreApplication::applicationDirPath() + "/sed.exe"; // in same dir
+            if ( QFile::exists( prg ) )
+            {
+               program = prg;
+            }
+         }
+      }
+      #endif 
    }
    return QString();
 }
