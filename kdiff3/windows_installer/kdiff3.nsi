@@ -3,7 +3,7 @@
 ;Apdapted for KDiff3 by Sebastien Fricker and Joachim Eibl
 ;Requires nsis_v2.19
 
-!define KDIFF3_VERSION "0.9.95"
+!define KDIFF3_VERSION "0.9.96"
 !define DIFF_EXT32_CLSID "{9F8528E4-AB20-456E-84E5-3CE69D8720F3}"
 !define DIFF_EXT64_CLSID "{34471FFB-4002-438b-8952-E4588D0C0FE9}"
 
@@ -267,6 +267,12 @@ Section "Translations" SecTranslations
     File /r translations
 SectionEnd
 
+Section "Utilities" SecUtilities
+    DetailPrint "Writing the command line utilities (GNU sed, diff, diff3, etc.)"
+    SetOutPath "$INSTDIR"
+    File /r bin
+SectionEnd
+
 SubSection "Integration" SecIntegration
 
 Section "Explorer" SecIntegrationExplorer
@@ -381,6 +387,7 @@ FunctionEnd
     !insertmacro MUI_DESCRIPTION_TEXT ${SecSoftware} "Main program."
     !insertmacro MUI_DESCRIPTION_TEXT ${SecDocumentation} "English documentation in HTML-format (Docs for other languages are available on the homepage.)"
     !insertmacro MUI_DESCRIPTION_TEXT ${SecTranslations}  "Translations for visible strings in many languages. Not needed for US-English."
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecUtilities}  "Command Line Utilities: GNU sed, diff, diff3, etc. precompiled for Windows"
     !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegration}   "Integrate KDiff3 with certain programs. (See also the Readme for details.)"
     !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationExplorer}  "Integrate KDiff3 with Explorer. Adds an entry for KDiff3 in the Send-To context menu."
     !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationDiffExtForKDiff3}  "Installs Diff-Ext by Sergey Zorin. Adds entries for KDiff3 in Explorer context menu."
@@ -415,6 +422,7 @@ Section "Uninstall"
 
   RMDir /r "$INSTDIR\doc"
   RMDir /r "$INSTDIR\translations"
+  RMDir /r "$INSTDIR\bin"
   RMDir "$INSTDIR"                   # without /r the dir is only removed if completely empty
   
   !insertmacro MUI_STARTMENU_GETFOLDER Application $MUI_TEMP
