@@ -2,7 +2,7 @@ Version 0.9.96 - 2011-09-02
 ===========================
 - KDiff3FileItemActionPlugin : Context menu that also works in dolphin (for KDE>=4.6)
 - Parser for preprocessor commands. (Allows single apostrophs ')
-- On Windows if the preprocessor command is "sed" try to use a "util\sed.exe" next to the kdiff3.exe, if available.
+- On Windows if the preprocessor command is "sed" try to use a "bin\sed.exe" next to the kdiff3.exe, if available.
 - Warn if conversion errors appear (Invalid characters)
 - Fix crash on A/B-overview (infinite recursion)
 - Fix clearcase temp files not deleted problem on windows

@@ -574,7 +574,7 @@ static QString getArguments( QString cmd, QString& program, QStringList& args )
       #ifdef WIN32
       if ( program=="sed" )
       {
-         QString prg = QCoreApplication::applicationDirPath() + "/util/sed.exe"; // in subdir util
+         QString prg = QCoreApplication::applicationDirPath() + "/bin/sed.exe"; // in subdir bin
          if ( QFile::exists( prg ) )
          {
             program = prg;
