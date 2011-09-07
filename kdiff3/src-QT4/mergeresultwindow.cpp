@@ -3028,18 +3028,36 @@ void Overview::drawColumn( QPainter& p, e_OverviewMode eOverviewMode, int x, int
                                   break;
          }
       }
+      
+      int x2 = x;
+      int w2 = w;
+      
+      if ( ! m_bTripleDiff )
+      {
+         if ( d3l.lineA == -1 && d3l.lineB>=0 )
+         {
+            c = m_pOptions->m_colorA;
+            x2 = w/2;
+            w2 = x2;
+         }
+         if ( d3l.lineA >= 0 && d3l.lineB==-1 )
+         {
+            c = m_pOptions->m_colorB;
+            w2 = w/2;
+         }
+      }
 
       if (!bWhiteSpaceChange || m_pOptions->m_bShowWhiteSpace )
       {
          // Make sure that lines with conflict are not overwritten.
          if (  c == m_pOptions->m_colorForConflict )
          {
-            p.fillRect(x+1, oldY, w, max2(1,y-oldY), bWhiteSpaceChange ? QBrush(c,Qt::Dense4Pattern) : QBrush(c) );
+            p.fillRect(x2+1, oldY, w2, max2(1,y-oldY), bWhiteSpaceChange ? QBrush(c,Qt::Dense4Pattern) : QBrush(c) );
             oldConflictY = oldY;
          }
          else if ( c!=m_pOptions->m_bgColor  &&  oldY>oldConflictY )
          {
-            p.fillRect(x+1, oldY, w, max2(1,y-oldY), bWhiteSpaceChange ? QBrush(c,Qt::Dense4Pattern) : QBrush(c) );
+            p.fillRect(x2+1, oldY, w2, max2(1,y-oldY), bWhiteSpaceChange ? QBrush(c,Qt::Dense4Pattern) : QBrush(c) );
          }
       }
 

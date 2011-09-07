@@ -407,6 +407,12 @@ QString KStandardDirs::findResource(const QString& resource, const QString& /*ap
 {
    if (resource=="config")
    {
+#if defined(_WIN32) || defined(Q_OS_OS2)
+      QString exePath = QCoreApplication::applicationDirPath();
+      QString configPath = exePath + "/.kdiff3rc"; // This is useful for portable installations (e.g. on USB-Stick)
+      if ( QFile::exists( configPath ) )
+         return configPath;
+#endif
       QString home = QDir::homePath();
       return home + "/.kdiff3rc";
    }
