@@ -1718,13 +1718,17 @@ void KDiff3App::slotShowWhiteSpaceToggled()
 void KDiff3App::slotShowLineNumbersToggled()
 {
    m_pOptionDialog->m_bShowLineNumbers = showLineNumbers->isChecked();
+   
+   if ( wordWrap->isChecked() )
+      recalcWordWrap();
+
    if ( m_pDiffTextWindow1!=0 )
       m_pDiffTextWindow1->update();
    if ( m_pDiffTextWindow2!=0 )
       m_pDiffTextWindow2->update();
    if ( m_pDiffTextWindow3!=0 )
       m_pDiffTextWindow3->update();
-}
+ }
 
 /// Return true for success, else false
 bool KDiff3App::improveFilenames( bool bCreateNewInstance )

@@ -1575,6 +1575,8 @@ void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int
 
    if ( bWordWrap )
    {
+      d->m_lineNumberWidth = d->m_pOptionDialog->m_bShowLineNumbers ? (int)log10((double)qMax(d->m_size,1))+1 : 0;
+
       d->m_diff3WrapLineVector.resize( wrapLineVectorSize );
 
       if (nofVisibleColumns<0)
