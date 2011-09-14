@@ -325,6 +325,8 @@ class KDiff3App : public QSplitter
    void recalcWordWrap(int nofVisibleColumns=-1);
    void setHScrollBarRange();
 
+   int m_iCumulativeWheelDelta;
+
 public slots:
    void resizeDiffTextWindow(int newWidth, int newHeight);
    void resizeMergeResultWindow();

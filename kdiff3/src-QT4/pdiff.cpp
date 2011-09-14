@@ -590,6 +590,9 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
    {
       m_pDiffTextWindow1->setFocus();
    }
+
+   //initialize wheel tracking to zero
+   m_iCumulativeWheelDelta = 0;
 }
 
 
@@ -1019,16 +1022,33 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
    }
    else if (e->type() == QEvent::Wheel )   // wheel event
    {
-       QWheelEvent *w = (QWheelEvent*)e;
-       w->accept();
+      QWheelEvent *w = (QWheelEvent*)e;
+      w->accept();
 
-       int deltaX=0;
+      int deltaX=0;
 
-       int d=w->delta();
-       int deltaY = -d/120 * QApplication::wheelScrollLines();
+      int d=w->delta();
 
-       scrollDiffTextWindow( deltaX, deltaY );
-       return true;
+      //As per QT documentation, some mice/OS combos send delta values
+      //less than 120 units(15 degrees)
+      d = d + m_iCumulativeWheelDelta;
+      if ( d > -120 && d < 120)
+      {
+         //not enough for a full step in either direction, add it up
+         //to use on a successive call
+         m_iCumulativeWheelDelta = d;
+      }
+      else	
+      {
+         //reset cumulative tracking of the wheel since we have enough 
+         //for a 15 degree movement
+         m_iCumulativeWheelDelta= 0;
+      }
+
+      int deltaY = -d/120 * QApplication::wheelScrollLines();
+
+      scrollDiffTextWindow( deltaX, deltaY );
+      return true;
    }
    else if (e->type() == QEvent::Drop )
    {
