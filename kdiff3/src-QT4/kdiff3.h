@@ -302,8 +302,7 @@ class KDiff3App : public QSplitter
    OptionDialog* m_pOptionDialog;
    FindDialog*   m_pFindDialog;
 
-   void init( bool bAuto=false, TotalDiffStatus* pTotalDiffStatus=0, bool bLoadFiles=true );
-
+   void init( bool bAuto=false, TotalDiffStatus* pTotalDiffStatus=0, bool bLoadFiles=true, bool bUseCurrentEncoding = false);
 
    virtual bool eventFilter( QObject* o, QEvent* e );
    virtual void resizeEvent(QResizeEvent*);
@@ -399,8 +398,10 @@ public slots:
    void slotJoinDiffs();
    void slotAddManualDiffHelp();
    void slotClearManualDiffHelpList();
-
    void slotNoRelevantChangesDetected();
+   void slotEncodingChangedA(QTextCodec*);
+   void slotEncodingChangedB(QTextCodec*);
+   void slotEncodingChangedC(QTextCodec*);
 };
 
 #endif // KDIFF3_H

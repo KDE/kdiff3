@@ -256,6 +256,7 @@ public:
 
    void setFilename(const QString& filename);
    void setFileAccess( const FileAccess& fa );
+   void setEncoding(QTextCodec* pEncoding);
    //FileAccess& getFileAccess();
    QString getFilename();
    void setAliasName(const QString& a);

@@ -237,9 +237,10 @@ bool KDiff3App::runDiff( const LineData* p1, int size1, const LineData* p2, int 
    return true;
 }
 
-void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles )
+void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, bool bUseCurrentEncoding)
 {
    ProgressProxy pp;
+
    // When doing a full analysis in the directory-comparison, then the statistics-results
    // will be stored in the given TotalDiffStatus. Otherwise it will be 0.
    bool bGUI = pTotalDiffStatus == 0;
@@ -298,11 +299,17 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
 
       // First get all input data.
       pp.setInformation(i18n("Loading A"));
-      m_sd1.readAndPreprocess(m_pOptionDialog->m_pEncodingA, m_pOptionDialog->m_bAutoDetectUnicodeA );
+      if (bUseCurrentEncoding==true)
+          m_sd1.readAndPreprocess(m_sd1.getEncoding(), false);
+      else
+      m_sd1.readAndPreprocess(m_pOptionDialog->m_pEncodingA, m_pOptionDialog->m_bAutoDetectUnicodeA);
       pp.step();
 
       pp.setInformation(i18n("Loading B"));
-      m_sd2.readAndPreprocess(m_pOptionDialog->m_pEncodingB, m_pOptionDialog->m_bAutoDetectUnicodeB );
+      if (bUseCurrentEncoding==true)
+          m_sd2.readAndPreprocess(m_sd2.getEncoding(), false);
+      else
+      m_sd2.readAndPreprocess(m_pOptionDialog->m_pEncodingB, m_pOptionDialog->m_bAutoDetectUnicodeB);
       pp.step();
    }
    else
@@ -336,7 +343,10 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
       if (bLoadFiles)
       {
          pp.setInformation(i18n("Loading C"));
-         m_sd3.readAndPreprocess(m_pOptionDialog->m_pEncodingC, m_pOptionDialog->m_bAutoDetectUnicodeC );
+         if (bUseCurrentEncoding==true)
+             m_sd3.readAndPreprocess(m_sd3.getEncoding(), false);
+         else
+         m_sd3.readAndPreprocess(m_pOptionDialog->m_pEncodingC, m_pOptionDialog->m_bAutoDetectUnicodeC);
          pp.step();
       }
 
@@ -742,13 +752,13 @@ void KDiff3App::initView()
    m_pDiffVScrollBar = new QScrollBar( Qt::Vertical, pDiffWindowFrame );
    pDiffHLayout->addWidget( m_pDiffVScrollBar );
 
-   m_pDiffTextWindowFrame1 = new DiffTextWindowFrame( m_pDiffWindowSplitter, statusBar(), m_pOptionDialog, 1 );
+   m_pDiffTextWindowFrame1 = new DiffTextWindowFrame( m_pDiffWindowSplitter, statusBar(), m_pOptionDialog, 1, &m_sd1);
    m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame1);
    //m_pDiffTextWindowFrame1->show();
-   m_pDiffTextWindowFrame2 = new DiffTextWindowFrame( m_pDiffWindowSplitter, statusBar(), m_pOptionDialog, 2 );
+   m_pDiffTextWindowFrame2 = new DiffTextWindowFrame( m_pDiffWindowSplitter, statusBar(), m_pOptionDialog, 2, &m_sd2);
    m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame2);
    //m_pDiffTextWindowFrame2->show();
-   m_pDiffTextWindowFrame3 = new DiffTextWindowFrame( m_pDiffWindowSplitter, statusBar(), m_pOptionDialog, 3 );
+   m_pDiffTextWindowFrame3 = new DiffTextWindowFrame( m_pDiffWindowSplitter, statusBar(), m_pOptionDialog, 3, &m_sd3);
    m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame3);
    m_pDiffTextWindow1 = m_pDiffTextWindowFrame1->getDiffTextWindow();
    m_pDiffTextWindow2 = m_pDiffTextWindowFrame2->getDiffTextWindow();
@@ -756,6 +766,10 @@ void KDiff3App::initView()
    connect(m_pDiffTextWindowFrame1, SIGNAL(fileNameChanged(const QString&,int)), this, SLOT(slotFileNameChanged(const QString&,int)));
    connect(m_pDiffTextWindowFrame2, SIGNAL(fileNameChanged(const QString&,int)), this, SLOT(slotFileNameChanged(const QString&,int)));
    connect(m_pDiffTextWindowFrame3, SIGNAL(fileNameChanged(const QString&,int)), this, SLOT(slotFileNameChanged(const QString&,int)));
+
+   connect(m_pDiffTextWindowFrame1, SIGNAL(encodingChanged(QTextCodec*)), this, SLOT(slotEncodingChangedA(QTextCodec*)));
+   connect(m_pDiffTextWindowFrame2, SIGNAL(encodingChanged(QTextCodec*)), this, SLOT(slotEncodingChangedB(QTextCodec*)));
+   connect(m_pDiffTextWindowFrame3, SIGNAL(encodingChanged(QTextCodec*)), this, SLOT(slotEncodingChangedC(QTextCodec*)));
 
    // Merge window
    m_pMergeWindowFrame = new QWidget( pVSplitter );
@@ -1704,6 +1718,8 @@ void KDiff3App::slotShowWhiteSpaceToggled()
 {
    m_pOptionDialog->m_bShowWhiteSpaceCharacters = showWhiteSpaceCharacters->isChecked();
    m_pOptionDialog->m_bShowWhiteSpace = showWhiteSpace->isChecked();
+
+
    showWhiteSpaceCharacters->setEnabled( showWhiteSpace->isChecked() );
    if ( m_pDiffTextWindow1!=0 )
       m_pDiffTextWindow1->update();
@@ -1726,6 +1742,7 @@ void KDiff3App::slotShowLineNumbersToggled()
       m_pDiffTextWindow1->update();
    if ( m_pDiffTextWindow2!=0 )
       m_pDiffTextWindow2->update();
+
    if ( m_pDiffTextWindow3!=0 )
       m_pDiffTextWindow3->update();
  }
@@ -2278,6 +2295,27 @@ void KDiff3App::slotClearManualDiffHelpList()
    m_manualDiffHelpList.clear();
    init( false, 0, false ); // Init without reload
    slotRefresh();
+}
+
+void KDiff3App::slotEncodingChangedA(QTextCodec* c)
+{
+    m_sd1.setEncoding(c);
+    init( false, 0, true, true); // Init with reload
+    slotRefresh();
+}
+
+void KDiff3App::slotEncodingChangedB(QTextCodec* c)
+{
+    m_sd2.setEncoding(c);
+    init( false, 0, true, true); // Init with reload
+    slotRefresh();
+}
+
+void KDiff3App::slotEncodingChangedC(QTextCodec* c)
+{
+    m_sd3.setEncoding(c);
+    init( false, 0, true, true ); // Init with reload
+    slotRefresh();
 }
 
 void KDiff3App::slotUpdateAvailabilities()

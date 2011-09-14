@@ -234,6 +234,10 @@ void SourceData::setFileAccess( const FileAccess& fileAccess )
       m_tempInputFileName = "";
    }
 }
+void SourceData::setEncoding(QTextCodec* pEncoding)
+{
+    m_pEncoding = pEncoding;
+}
 
 void SourceData::setData( const QString& data )
 {

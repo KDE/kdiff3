@@ -523,6 +523,8 @@ void OptionDialog::setupOtherOptions()
    new OptionStringList( "RecentBFiles", &m_recentBFiles, this );
    new OptionStringList( "RecentCFiles", &m_recentCFiles, this );
    new OptionStringList( "RecentOutputFiles", &m_recentOutputFiles, this );
+   new OptionStringList( "RecentEncodings", &m_recentEncodings, this );
+
 }
 
 void OptionDialog::setupFontPage( void )

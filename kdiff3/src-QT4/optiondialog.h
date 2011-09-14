@@ -132,6 +132,8 @@ public:
     QStringList m_recentBFiles;
     QStringList m_recentCFiles;
 
+    QStringList m_recentEncodings;
+
     QStringList m_recentOutputFiles;
 
     // Directory Merge options

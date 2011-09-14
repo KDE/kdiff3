@@ -31,6 +31,7 @@
 #include <QLayout>
 #include <QTextCodec>
 #include <QUrl>
+#include <QMenu>
 
 #include <klocale.h>
 #include <kfiledialog.h>
@@ -1660,9 +1661,10 @@ public:
    QLabel*       m_pLineEndStyle;
    QWidget*      m_pTopLineWidget;
    int           m_winIdx;
+
 };
 
-DiffTextWindowFrame::DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusBar, OptionDialog* pOptionDialog, int winIdx )
+DiffTextWindowFrame::DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusBar, OptionDialog* pOptionDialog, int winIdx, SourceData* psd)
    : QWidget( pParent )
 {
    d = new DiffTextWindowFrameData;
@@ -1702,7 +1704,8 @@ DiffTextWindowFrame::DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusB
    pHL2->setMargin(0);
    pHL2->setSpacing(2);
    pHL2->addWidget( d->m_pTopLine, 0 );
-   d->m_pEncoding = new QLabel(i18n("Encoding:"));
+   d->m_pEncoding = new EncodingLabel(i18n("Encoding:"), this, psd, pOptionDialog);
+
    d->m_pLineEndStyle = new QLabel(i18n("Line end style:"));
    pHL2->addWidget(d->m_pEncoding);
    pHL2->addWidget(d->m_pLineEndStyle);
@@ -1823,6 +1826,7 @@ bool DiffTextWindowFrame::eventFilter( QObject* o, QEvent* e )
          }
       }
    }
+
    return false;
 }
 
@@ -1837,12 +1841,120 @@ void DiffTextWindowFrame::slotReturnPressed()
 
 void DiffTextWindowFrame::slotBrowseButtonClicked()
 {
-   QString current = d->m_pFileSelection->text();
+    QString current = d->m_pFileSelection->text();
 
-   KUrl newURL = KFileDialog::getOpenUrl( current, 0, this);
-   if ( !newURL.isEmpty() )
+    KUrl newURL = KFileDialog::getOpenUrl( current, 0, this);
+    if ( !newURL.isEmpty() )
+    {
+        DiffTextWindow* pDTW = d->m_pDiffTextWindow;
+        emit fileNameChanged( newURL.url(), pDTW->d->m_winIdx );
+    }
+}
+
+void DiffTextWindowFrame::sendEncodingChangedSignal(QTextCodec* c)
+{
+    emit encodingChanged(c);
+}
+
+EncodingLabel::EncodingLabel( const QString & text, DiffTextWindowFrame* pDiffTextWindowFrame, SourceData * pSD, OptionDialog* pOptionDialog)
+    : QLabel(text)
+{
+    m_pDiffTextWindowFrame = pDiffTextWindowFrame;
+    m_pOptionDialog = pOptionDialog;
+    m_pSourceData = pSD;
+    m_pContextEncodingMenu = 0;
+    setMouseTracking(true);
+}
+
+void EncodingLabel::mouseMoveEvent(QMouseEvent *)
+{
+    // When there is no data to display or it came from clipboard,
+    // we will be use UTF-8 only,
+    // in that case there is no possibility to change the encoding in the SourceData
+    // so, we should hide the HandCursor and display usual ArrowCursor
+    if (m_pSourceData->isFromBuffer()||m_pSourceData->isEmpty())
+        setCursor(QCursor(Qt::ArrowCursor));
+    else setCursor(QCursor(Qt::PointingHandCursor));
+}
+
+
+void EncodingLabel::mousePressEvent(QMouseEvent *)
+{    
+   if (!(m_pSourceData->isFromBuffer()||m_pSourceData->isEmpty()))
    {
-      DiffTextWindow* pDTW = d->m_pDiffTextWindow;
-      emit fileNameChanged( newURL.url(), pDTW->d->m_winIdx );
+      delete m_pContextEncodingMenu;
+      m_pContextEncodingMenu = new QMenu(this);
+      QMenu* pContextEncodingSubMenu = new QMenu(m_pContextEncodingMenu);
+
+      int currentTextCodecEnum = m_pSourceData->getEncoding()->mibEnum(); // the codec that will be checked in the context menu
+      QList<int> mibs = QTextCodec::availableMibs();
+      QList<int> codecEnumList;
+
+      // Adding "main" encodings
+      insertCodec( i18n("Unicode, 8 bit"),  QTextCodec::codecForName("UTF-8"), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
+      insertCodec( "", QTextCodec::codecForName("System"), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
+
+      // Adding recent encodings
+      if (m_pOptionDialog!=0)
+      {
+         QStringList& recentEncodings = m_pOptionDialog->m_recentEncodings;
+         foreach(QString s, recentEncodings)
+         {
+            insertCodec("", QTextCodec::codecForName(s.toAscii()), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
+         }
+      }
+      // Submenu to add the rest of available encodings
+      pContextEncodingSubMenu->setTitle(i18n("Other"));
+      foreach(int i, mibs)
+      {
+         QTextCodec* c = QTextCodec::codecForMib(i);
+         if ( c!=0 ) 
+            insertCodec("", c, codecEnumList, pContextEncodingSubMenu, currentTextCodecEnum);
+      }
+
+      m_pContextEncodingMenu->addMenu(pContextEncodingSubMenu);
+
+      m_pContextEncodingMenu->exec(QCursor::pos());
+   }
+}
+
+void EncodingLabel::insertCodec( const QString& visibleCodecName, QTextCodec* pCodec, QList<int> &codecEnumList, QMenu* pMenu, int currentTextCodecEnum)
+{
+   int CodecMIBEnum = pCodec->mibEnum();
+   if ( pCodec!=0 && !codecEnumList.contains(CodecMIBEnum) )
+   {
+      QAction* pAction = new QAction( pMenu ); // menu takes ownership, so deleting the menu deletes the action too.
+      pAction->setText( visibleCodecName.isEmpty() ? QString(pCodec->name()) : visibleCodecName+" ("+pCodec->name()+")" );
+      pAction->setData(CodecMIBEnum);
+      pAction->setCheckable(true);
+      if (currentTextCodecEnum==CodecMIBEnum) 
+         pAction->setChecked(true);
+      pMenu->addAction(pAction);
+      connect(pAction, SIGNAL(triggered()), this, SLOT(slotEncodingChanged()));
+      codecEnumList.append(CodecMIBEnum);
+   }
+}
+
+void EncodingLabel::slotEncodingChanged()
+{
+   QAction *pAction = qobject_cast<QAction *>(sender());
+   if (pAction)
+   {
+      QTextCodec * pCodec = QTextCodec::codecForMib(pAction->data().toInt());
+      if (pCodec!=0)
+      {
+         QString s( pCodec->name() );
+         QStringList& recentEncodings = m_pOptionDialog->m_recentEncodings;
+         if ( !recentEncodings.contains(s) && s!="UTF-8" && s!="System" )
+         {
+            int itemsToRemove = recentEncodings.size() - m_maxRecentEncodings + 1;
+            for (int i=0; i<itemsToRemove; ++i)
+            {
+               recentEncodings.removeFirst();
+            }
+            recentEncodings.append(s);
+         }
+      }
+      m_pDiffTextWindowFrame->sendEncodingChangedSignal(pCodec);
    }
 }

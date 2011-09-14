@@ -22,10 +22,12 @@
 
 #include <QWidget>
 
+class QMenu;
 class QStatusBar;
 class OptionDialog;
 class DiffTextWindowData;
 class DiffTextWindowFrame;
+class EncodingLabel;
 
 class DiffTextWindow : public QWidget
 {
@@ -35,6 +37,7 @@ public:
       DiffTextWindowFrame* pParent,
       QStatusBar* pStatusBar,
       OptionDialog* pOptionDialog,
+
       int winIdx
       );
    ~DiffTextWindow();
@@ -116,13 +119,15 @@ class DiffTextWindowFrame : public QWidget
 {
    Q_OBJECT
 public:
-   DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusBar, OptionDialog* pOptionDialog, int winIdx );
+   DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusBar, OptionDialog* pOptionDialog, int winIdx, SourceData* psd);
    ~DiffTextWindowFrame();
    DiffTextWindow* getDiffTextWindow();
    void init();
    void setFirstLine(int firstLine);
+   void sendEncodingChangedSignal(QTextCodec* c);
 signals:
    void fileNameChanged(const QString&, int);
+   void encodingChanged(QTextCodec*);
 protected:
    bool eventFilter( QObject*, QEvent* );
    //void paintEvent(QPaintEvent*);
@@ -133,6 +138,25 @@ private:
    DiffTextWindowFrameData* d;
 };
 
+class EncodingLabel : public QLabel
+{
+   Q_OBJECT
+public:
+   EncodingLabel( const QString & text, DiffTextWindowFrame* pDiffTextWindowFrame, SourceData* psd, OptionDialog* pOptionDialog);
+protected:
+   void mouseMoveEvent(QMouseEvent *ev);
+   void mousePressEvent(QMouseEvent *ev);
+private slots:
+   void slotEncodingChanged();
+private:
+   DiffTextWindowFrame* m_pDiffTextWindowFrame; //To send "EncodingChanged" signal
+   QMenu* m_pContextEncodingMenu;
+   SourceData* m_pSourceData; //SourceData to get access to "isEmpty()" and "isFromBuffer()" functions
+   static const int m_maxRecentEncodings  = 5;
+   OptionDialog* m_pOptionDialog;
+
+   void insertCodec( const QString& visibleCodecName, QTextCodec* pCodec, QList<int> &CodecEnumList, QMenu* pMenu, int currentTextCodecEnum);
+};
 
 #endif
 
