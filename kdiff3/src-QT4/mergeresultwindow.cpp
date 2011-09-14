@@ -2166,7 +2166,20 @@ void MergeResultWindow::wheelEvent( QWheelEvent* e )
     scroll( 0, min2(d, getNofVisibleLines()) );
 }
 
-
+bool MergeResultWindow::event( QEvent* e )
+{
+   if ( e->type()==QEvent::KeyPress )
+   {
+      QKeyEvent *ke = static_cast<QKeyEvent *>(e);
+      if (ke->key() == Qt::Key_Tab) 
+      {
+          // special tab handling here to avoid moving focus
+          keyPressEvent( ke );
+          return true;
+      }
+   }
+   return QWidget::event(e);
+}
 void MergeResultWindow::keyPressEvent( QKeyEvent* e )
 {
    int y = m_cursorYPos;

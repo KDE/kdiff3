@@ -377,6 +377,7 @@ private:
       );
    void setFastSelector(MergeLineList::iterator i);
    void convertToLinePos( int x, int y, int& line, int& pos );
+   bool event(QEvent*);
    virtual void mousePressEvent ( QMouseEvent* e );
    virtual void mouseDoubleClickEvent ( QMouseEvent* e );
    virtual void mouseReleaseEvent ( QMouseEvent * );
