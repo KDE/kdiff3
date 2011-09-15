@@ -1162,6 +1162,22 @@ void OptionDialog::setupDirectoryMergePage( void )
                  "Set this option if the case of the names must match. (Default for Windows is off, otherwise on.)"));
    ++line;
 
+   OptionCheckBox* pUnfoldSubdirs = new OptionCheckBox( i18n("Unfold all subdirectories on load"), false, "UnfoldSubdirs", &m_bDmUnfoldSubdirs, page, this );
+   gbox->addWidget( pUnfoldSubdirs, line, 0, 1, 2 );
+   pUnfoldSubdirs->setToolTip(    i18n(
+      "On: Unfold all subdirectories when starting a directory diff.\n"
+      "Off: Leave subdirectories folded."
+      ));
+   ++line;
+
+   OptionCheckBox* pSkipDirStatus = new OptionCheckBox( i18n("Skip directory status report"), false, "SkipDirStatus", &m_bDmSkipDirStatus, page, this );
+   gbox->addWidget( pSkipDirStatus, line, 0, 1, 2 );
+   pSkipDirStatus->setToolTip(    i18n(
+      "On: Do not show the Directory Comparison Status.\n"
+      "Off: Show the status dialog on start."
+      ));
+   ++line;
+
    QGroupBox* pBG = new QGroupBox( i18n("File Comparison Mode") );
    gbox->addWidget( pBG, line, 0, 1, 2 );
 

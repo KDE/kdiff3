@@ -154,6 +154,8 @@ public:
     bool m_bDmUseCvsIgnore;
     bool m_bDmWhiteSpaceEqual;
     bool m_bDmCaseSensitiveFilenameComparison;
+    bool m_bDmUnfoldSubdirs;
+    bool m_bDmSkipDirStatus;
     QString m_DmFilePattern;
     QString m_DmFileAntiPattern;
     QString m_DmDirAntiPattern;

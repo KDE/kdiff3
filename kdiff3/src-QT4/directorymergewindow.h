@@ -250,6 +250,8 @@ protected:
    bool m_bSyncMode;
    bool m_bDirectoryMerge; // if true, then merge is the default operation, otherwise it's diff.
    bool m_bCaseSensitive;
+   bool m_bUnfoldSubdirs;
+   bool m_bSkipDirStatus;
    
    bool m_bScanning; // true while in init()
 

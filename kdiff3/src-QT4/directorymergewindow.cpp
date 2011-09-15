@@ -534,6 +534,8 @@ bool DirectoryMergeWindow::init
    m_pSelection2Item = 0;
    m_pSelection3Item = 0;
    m_bCaseSensitive = m_pOptions->m_bDmCaseSensitiveFilenameComparison;
+   m_bUnfoldSubdirs = m_pOptions->m_bDmUnfoldSubdirs;
+   m_bSkipDirStatus = m_pOptions->m_bDmSkipDirStatus;
 
    clear();
 
@@ -734,7 +736,7 @@ bool DirectoryMergeWindow::init
    m_bScanning = false;
    statusBarMessage(i18n("Ready."));
 
-   if ( bContinue )
+   if ( bContinue && !m_bSkipDirStatus )
    {
       // Generate a status report
       int nofFiles=0;
@@ -780,6 +782,11 @@ bool DirectoryMergeWindow::init
          ++it;
       }
    }
+   else if (m_bUnfoldSubdirs)
+   {
+      m_pDirUnfoldAll->trigger();
+   }
+
    return true;
 }
 
