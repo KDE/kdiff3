@@ -330,6 +330,9 @@ STDMETHODIMP
 DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*last_cmd not used*/, UINT flags) 
 {
    LOG();
+   
+   SERVER::instance()->recent_files(); // updates recent files list (reads from registry)
+   
    m_id_Diff = UINT(-1);
    m_id_DiffWith = UINT(-1);
    m_id_DiffLater = UINT(-1);
@@ -473,12 +476,14 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
       {
          LOG();
          m_recentFiles.clear();
+         SERVER::instance()->save_history();
       } 
       else if(id == m_id_DiffLater) 
       {
          MESSAGELOG(TEXT("Diff Later: ")+_file_name1);
          m_recentFiles.remove( _file_name1 );
          m_recentFiles.push_front( _file_name1 );
+         SERVER::instance()->save_history();
       } 
       else if(id >= m_id_DiffWith_Base && id < m_id_DiffWith_Base+m_recentFiles.size()) 
       {

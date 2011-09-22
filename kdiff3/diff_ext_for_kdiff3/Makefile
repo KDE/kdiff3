@@ -12,7 +12,7 @@ else
   CXXFLAGS ?= -Os
   LDFLAGS += -s
 endif
-CXXFLAGS += -ansi -pedantic -Wall -W -D_UNICODE -DUNICODE
+CXXFLAGS += -pedantic -Wall -W -D_UNICODE -DUNICODE
 
 LIBS :=  -luuid -lole32
 DEFFILE = $(PROJ).def

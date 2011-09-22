@@ -243,16 +243,20 @@ SERVER::recent_files()
    LOG();
    if ( m_pRecentFiles==0 )
    {
-      MESSAGELOG(TEXT("Reading history from registry..."));
       m_pRecentFiles = new std::list<tstring>;
-      for( int i=0; i<32; ++i )  // Max history size
-      {
-         TCHAR numAsString[10];
-         _sntprintf( numAsString, 10, TEXT("%d"), i );
-         tstring historyItem = getRegistryKeyString( TEXT("history"), numAsString );
-         if ( ! historyItem.empty() )
-            m_pRecentFiles->push_back( historyItem );
-      }
+   }
+   else
+   {
+      m_pRecentFiles->clear();
+   }
+   MESSAGELOG(TEXT("Reading history from registry..."));
+   for( int i=0; i<32; ++i )  // Max history size
+   {
+      TCHAR numAsString[10];
+      _sntprintf( numAsString, 10, TEXT("%d"), i );
+      tstring historyItem = getRegistryKeyString( TEXT("history"), numAsString );
+      if ( ! historyItem.empty() )
+         m_pRecentFiles->push_back( historyItem );
    }
    return *m_pRecentFiles;
 }
@@ -260,7 +264,7 @@ SERVER::recent_files()
 void
 SERVER::save_history() const 
 {
-   if( m_pRecentFiles && !m_pRecentFiles->empty() ) 
+   if( m_pRecentFiles ) 
    {
       HKEY key;
       if( RegCreateKeyEx(HKEY_CURRENT_USER, (m_registryBaseName + TEXT("\\history")).c_str(), 0, 0, 
@@ -283,9 +287,15 @@ SERVER::save_history() const
                FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, 0,
                   GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
                   (LPTSTR) &message, 0, 0);
-               MessageBox(0, message, TEXT("Save history failed"), MB_OK | MB_ICONINFORMATION);
+               MessageBox(0, message, TEXT("KDiff3-diff-ext: Save history failed"), MB_OK | MB_ICONINFORMATION);
                LocalFree(message);
             }
+         }
+         for(; n<32; ++n )
+         {
+            TCHAR numAsString[10];
+            _sntprintf( numAsString, 10, TEXT("%d"), n );
+            RegDeleteValue(key, numAsString ); 
          }
 
          RegCloseKey(key);
