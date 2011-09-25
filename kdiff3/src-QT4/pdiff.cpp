@@ -14,6 +14,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+#include "stable.h"
 
 #include "difftextwindow.h"
 #include "mergeresultwindow.h"
@@ -333,7 +334,7 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
 
       pp.setInformation(i18n("Linediff: A <-> B"));
       calcDiff3LineListUsingAB( &m_diffList12, m_diff3LineList );
-      fineDiff( m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay(), pTotalDiffStatus->bTextAEqB );
+      pTotalDiffStatus->bTextAEqB = fineDiff( m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
       if ( m_sd1.getSizeBytes()==0 ) pTotalDiffStatus->bTextAEqB=false;
 
       pp.step();
@@ -380,13 +381,13 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
       debugLineCheck( m_diff3LineList, m_sd3.getSizeLines(), 3 );
 
       pp.setInformation(i18n("Linediff: A <-> B"));
-      fineDiff( m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay(), pTotalDiffStatus->bTextAEqB );
+      pTotalDiffStatus->bTextAEqB = fineDiff( m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
       pp.step();
       pp.setInformation(i18n("Linediff: B <-> C"));
-      fineDiff( m_diff3LineList, 2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay(), pTotalDiffStatus->bTextBEqC );
+      pTotalDiffStatus->bTextBEqC = fineDiff( m_diff3LineList, 2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay() );
       pp.step();
       pp.setInformation(i18n("Linediff: A <-> C"));
-      fineDiff( m_diff3LineList, 3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay(), pTotalDiffStatus->bTextAEqC );
+      pTotalDiffStatus->bTextAEqC = fineDiff( m_diff3LineList, 3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay() );
       pp.step();
       if ( m_sd1.getSizeBytes()==0 ) { pTotalDiffStatus->bTextAEqB=false;  pTotalDiffStatus->bTextAEqC=false; }
       if ( m_sd2.getSizeBytes()==0 ) { pTotalDiffStatus->bTextAEqB=false;  pTotalDiffStatus->bTextBEqC=false; }

@@ -175,13 +175,13 @@ public:
                  nofUnsolvedConflicts=0; nofSolvedConflicts=0;
                  nofWhitespaceConflicts=0;
                 }
-   bool bBinaryAEqC;
-   bool bBinaryBEqC;
-   bool bBinaryAEqB;
+   bool bBinaryAEqC : 1;
+   bool bBinaryBEqC : 1;
+   bool bBinaryAEqB : 1;
 
-   bool bTextAEqC;
-   bool bTextBEqC;
-   bool bTextAEqB;
+   bool bTextAEqC : 1;
+   bool bTextBEqC : 1;
+   bool bTextAEqB : 1;
 
    int nofUnsolvedConflicts;
    int nofSolvedConflicts;
@@ -251,6 +251,7 @@ public:
    int getSizeLines() const;
    int getSizeBytes() const;
    const char* getBuf() const;
+   const QString& getText() const;
    const LineData* getLineDataForDisplay() const;
    const LineData* getLineDataForDiff() const;
 
@@ -422,12 +423,11 @@ public:
    }
 };
 
-void fineDiff(
+bool fineDiff(
    Diff3LineList& diff3LineList,
    int selector,
    const LineData* v1,
-   const LineData* v2,
-   bool& bTextsTotalEqual
+   const LineData* v2
    );
 
 

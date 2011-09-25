@@ -26,6 +26,7 @@
 bool wildcardMultiMatch( const QString& wildcard, const QString& testString, bool bCaseSensitive );
 
 class t_DirectoryList;
+class QFileInfo;
 
 class FileAccess
 {
@@ -33,6 +34,8 @@ public:
    FileAccess();
    ~FileAccess();
    FileAccess( const QString& name, bool bWantToWrite=false ); // name: local file or dirname or url (when supported)
+   FileAccess(const FileAccess& other);
+   const FileAccess& operator=(const FileAccess& other);
    void setFile( const QString& name, bool bWantToWrite=false );
 
    bool isValid() const;
@@ -48,9 +51,9 @@ public:
    bool isHidden() const;
    QString readLink() const;
 
-   QDateTime   created()       const;
+   //QDateTime   created()       const;
    QDateTime   lastModified()  const;
-   QDateTime   lastRead()      const;
+   //QDateTime   lastRead()      const;
 
    QString fileName() const; // Just the name-part of the path, without parent directories
    QString filePath() const; // The path-string that was used during construction
@@ -83,34 +86,32 @@ public:
 
    void addPath( const QString& txt );
    QString getStatusText();
+
+   FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
+   void setSharedName( const QString& name ); // might reduce memory consumption
 private:
    void setUdsEntry( const KIO::UDSEntry& e );
-   KUrl m_url;
-   bool m_bLocal;
-   bool m_bValidData;
+   void setFile( const QFileInfo& fi, FileAccess* pParent );
 
+   class Data;
+   Data* d();
+   const Data* d() const;
+
+   union
+   {
+      Data* m_pData;
+      FileAccess* m_pParent;
+   };
+   QString m_filePath; // might be absolute or relative if m_pParent!=0
    qint64 m_size;
    QDateTime m_modificationTime;
-   QDateTime m_accessTime;
-   QDateTime m_creationTime;
-   bool m_bReadable;
-   bool m_bWritable;
-   bool m_bExecutable;
-   bool m_bExists;
-   bool m_bFile;
-   bool m_bDir;
-   bool m_bSymLink;
-   bool m_bHidden;
-   long m_fileType; // for testing only
-
-   QString m_linkTarget;
-   QString m_user;
-   QString m_group;
-   QString m_name;
-   QString m_path;
-   QString m_absoluteFilePath;
-   QString m_localCopy;
-   QString m_statusText;  // Might contain an error string, when the last operation didn't succeed.
+   bool m_bSymLink  : 1;
+   bool m_bFile     : 1;
+   bool m_bDir      : 1;
+   bool m_bExists   : 1;
+   bool m_bWritable : 1;
+   bool m_bHidden   : 1;
+   bool m_bUseData  : 1;
 
    friend class FileAccessJobHandler;
 };

@@ -7,7 +7,7 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  ***************************************************************************/
-
+#include "stable.h"
 #include "fileaccess.h"
 #include "optiondialog.h"
 #include "common.h"
@@ -49,64 +49,243 @@
 
 ProgressDialog* g_pProgressDialog=0;
 
+class FileAccess::Data
+{
+public:
+   Data()
+   {
+      reset();
+   }
+   void reset()
+   {
+      m_url = KUrl();
+      m_bValidData = false;
+      m_name = QString();
+      //m_creationTime = QDateTime();
+      //m_accessTime = QDateTime();
+      m_bReadable = false;
+      m_bExecutable = false;
+      m_linkTarget = "";
+      //m_fileType = -1;
+      m_bLocal = true;
+      m_pParent = 0;
+   }
+   
+   KUrl m_url;
+   bool m_bLocal;
+   bool m_bValidData;
+
+   //QDateTime m_accessTime;
+   //QDateTime m_creationTime;
+   bool m_bReadable;
+   bool m_bExecutable;
+   //long m_fileType; // for testing only
+   FileAccess* m_pParent;
+
+   QString m_linkTarget;
+   //QString m_user;
+   //QString m_group;
+   QString m_name;
+   QString m_localCopy;
+   QString m_statusText;  // Might contain an error string, when the last operation didn't succeed.
+};
+
 
 FileAccess::FileAccess( const QString& name, bool bWantToWrite )
 {
+   m_pData = 0;
+   m_bUseData = false;
    setFile( name, bWantToWrite );
 }
 
 FileAccess::FileAccess()
 {
-   m_bValidData = false;
-   m_size = 0;
-   m_creationTime = QDateTime();
-   m_accessTime = QDateTime();
-   m_modificationTime = QDateTime();
-   m_bReadable = false;
-   m_bWritable = false;
-   m_bExecutable = false;
-   m_bLocal = false;
-   m_bHidden = false;
+   m_bUseData = false;
    m_bExists = false;
    m_bFile = false;
    m_bDir  = false;
    m_bSymLink = false;
+   m_bWritable = false;
+   m_bHidden = false;
+   m_pParent = 0;
+   m_size = 0;   
+}
+
+FileAccess::FileAccess(const FileAccess& other)
+{
+   m_pData = 0;
+   m_bUseData = false;
+   *this = other;
+}
+
+const FileAccess& FileAccess::operator=(const FileAccess& other)
+{
+   m_size = other.m_size;
+   m_filePath = other.m_filePath;
+   m_modificationTime = other.m_modificationTime;
+   m_bSymLink = other.m_bSymLink;
+   m_bFile = other.m_bFile;
+   m_bDir = other.m_bDir;
+   m_bExists = other.m_bExists;
+   m_bWritable = other.m_bWritable;
+   m_bHidden = other.m_bHidden;
+
+   if ( other.m_bUseData )
+   {
+      if ( ! m_bUseData )
+         m_pData = new Data;
+      m_bUseData = true;
+      *m_pData = *other.m_pData;
+   }
+   else
+   {
+      if ( m_bUseData )
+      {
+         delete m_pData;
+      }
+      m_bUseData = false;
+      m_pParent = other.parent(); // should be 0 anyway
+   }
+   return *this;
 }
 
 FileAccess::~FileAccess()
 {
-   if( !m_localCopy.isEmpty() )
+   if ( m_bUseData )
    {
-      removeTempFile( m_localCopy );
+      if( ! d()->m_localCopy.isEmpty() )
+      {
+         removeTempFile( d()->m_localCopy );
+      }
+      delete m_pData;
+   }
+}
+
+static QString nicePath( const QFileInfo& fi )
+{
+   QString fp = fi.filePath();
+   if ( fp.length()>2 && fp[0] == '.' && fp[1] == '/' )
+   {
+      return fp.mid(2);
+   }
+   return fp;
+}
+
+// Two kinds of optimization are applied here:
+// 1. Speed: don't ask for data as long as it is not needed or cheap to get.
+//    When opening a file it is early enough to ask for details.
+// 2. Memory usage: Don't store data that is not needed, and avoid redundancy.
+//    For recursive directory trees don't store the full path if a parent is available.
+//    Store urls only if files are not local.
+
+void FileAccess::setFile( const QFileInfo& fi, FileAccess* pParent )
+{
+   m_bSymLink   = fi.isSymLink();
+   if ( m_bSymLink && !m_bUseData )
+   {
+      m_pData = new Data;
+      m_bUseData = true;
+   }
+
+   if ( m_bUseData )
+      d()->m_pParent = pParent;
+   else
+      m_pParent = pParent;
+   
+   m_filePath   = nicePath( fi.filePath() ); // remove "./" at start   
+
+   if ( parent() || d() ) // if a parent is specified then we arrive here because of listing a directory
+   {
+      m_bFile      = fi.isFile();
+      m_bDir       = fi.isDir();
+      m_bExists    = fi.exists();
+      m_size       = fi.size();
+      m_modificationTime = fi.lastModified();
+      m_bHidden    = fi.isHidden();
+
+#if defined(Q_WS_WIN)
+      m_bWritable    = pParent == 0 || fi.isWritable(); // in certain situations this might become a problem though
+#else
+      m_bWritable    = fi.isWritable();
+#endif
+   }
+   
+   if ( d() != 0 )
+   {
+#if defined(Q_WS_WIN)
+      // On some windows machines in a network this takes very long.
+      // and it's not so important anyway.
+      d()->m_bReadable    = true;
+      d()->m_bExecutable  = false;
+#else
+      d()->m_bReadable    = fi.isReadable();
+      d()->m_bExecutable  = fi.isExecutable();
+#endif
+
+      //d()->m_creationTime = fi.created();
+      //d()->m_modificationTime = fi.lastModified();
+      //d()->m_accessTime = fi.lastRead();
+      d()->m_name       = fi.fileName();
+      if ( m_bSymLink ) 
+         d()->m_linkTarget = fi.readLink();
+      d()->m_bLocal = true;
+      d()->m_bValidData = true;
+      d()->m_url = KUrl( fi.filePath() );
+      if ( ! d()->m_url.isValid() )
+      {
+         d()->m_url.setPath( absoluteFilePath() );
+      }
+
+      if ( !m_bExists  && absoluteFilePath().contains("@@") )
+      {
+         // Try reading a clearcase file
+         d()->m_localCopy = FileAccess::tempFileName();
+         QString cmd = "cleartool get -to \"" + d()->m_localCopy + "\"  \"" + absoluteFilePath() + "\"";
+         QProcess process;
+         process.start( cmd );
+         process.waitForFinished(-1);
+         //::system( cmd.local8Bit() );
+         QFile::setPermissions( d()->m_localCopy, QFile::ReadUser | QFile::WriteUser ); // Clearcase creates a write protected file, allow delete.
+
+         QFileInfo fi( d()->m_localCopy );
+#if defined(Q_WS_WIN)
+         d()->m_bReadable    = true;//fi.isReadable();
+         m_bWritable    = true;//fi.isWritable();
+         d()->m_bExecutable  = false;//fi.isExecutable();
+#else
+         d()->m_bReadable    = fi.isReadable();
+         d()->m_bExecutable  = fi.isExecutable();
+#endif
+         //d()->m_creationTime = fi.created();
+         //d()->m_accessTime = fi.lastRead();
+      }
    }
 }
 
 void FileAccess::setFile( const QString& name, bool bWantToWrite )
 {
-   m_url = KUrl( name );
-   m_bValidData = false;
-
-   m_size = 0;
-   m_creationTime = QDateTime();
-   m_accessTime = QDateTime();
-   m_modificationTime = QDateTime();
-   m_bReadable = false;
-   m_bWritable = false;
-   m_bExecutable = false;
-   m_bHidden = false;
    m_bExists = false;
    m_bFile = false;
    m_bDir  = false;
    m_bSymLink = false;
-   m_linkTarget = "";
-   m_fileType = -1;
-   m_bLocal = true;
+   m_size = 0;
+   m_modificationTime = QDateTime();
+
+   if ( d()!=0 )
+   {  
+      d()->reset();
+      d()->m_pParent = 0;
+   }
+   else
+      m_pParent = 0;
 
    // Note: Checking if the filename-string is empty is necessary for Win95/98/ME.
    //       The isFile() / isDir() queries would cause the program to crash.
    //       (This is a Win95-bug which has been corrected only in WinNT/2000/XP.)
    if ( !name.isEmpty() )
    {
+      KUrl url( name );
+      
       // FileAccess tries to detect if the given name is an URL or a local file.
       // This is a problem if the filename looks like an URL (i.e. contains a colon ':').
       // e.g. "file:f.txt" is a valid filename.
@@ -116,100 +295,44 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
       //   2. When the local file doesn't exist and should be written to.
 
       bool bExistsLocal = QDir().exists(name);
-      if ( m_url.isLocalFile() || m_url.isRelative() || !m_url.isValid() || bExistsLocal ) // assuming that invalid means relative
+      if ( url.isLocalFile() || url.isRelative() || !url.isValid() || bExistsLocal ) // assuming that invalid means relative
       {
          QString localName = name;
-         if ( !bExistsLocal && m_url.isLocalFile() && name.left(5).toLower()=="file:" )
+         if ( !bExistsLocal && url.isLocalFile() && name.left(5).toLower()=="file:" )
          {
-            localName = m_url.path(); // I want the path without preceding "file:"
+            localName = url.path(); // I want the path without preceding "file:"
          }
          QFileInfo fi( localName );
-#if defined(Q_WS_WIN)
-         // On some windows machines in a network this takes very long.
-         // and it's not so important anyway.
-         m_bReadable    = true;
-         m_bWritable    = true; // in certain situations this might become a problem though
-         m_bExecutable  = false;
-#else
-         m_bReadable    = fi.isReadable();
-         m_bWritable    = fi.isWritable();
-         m_bExecutable  = fi.isExecutable();
-#endif
-         //m_creationTime = fi.created();
-         m_bHidden    = fi.isHidden();
-         //m_modificationTime = fi.lastModified();
-         m_accessTime = fi.lastRead();
-         m_size       = fi.size();
-         m_bSymLink   = fi.isSymLink();
-         m_bFile      = fi.isFile();
-         m_bDir       = fi.isDir();
-         m_bExists    = fi.exists();
-         m_name       = fi.fileName();
-         m_path       = fi.filePath();
-         m_absoluteFilePath= fi.absoluteFilePath();
-         if ( m_bSymLink ) m_linkTarget = fi.readLink();
-         m_bLocal = true;
-         m_bValidData = true;
-         if ( ! m_url.isValid() )
-         {
-            m_url.setPath( m_absoluteFilePath );
-         }
-
-         if ( !m_bExists  && m_absoluteFilePath.contains("@@") )
-         {
-            // Try reading a clearcase file
-            m_localCopy = FileAccess::tempFileName();
-            QString cmd = "cleartool get -to \"" + m_localCopy + "\"  \"" + m_absoluteFilePath + "\"";
-            QProcess process;
-            process.start( cmd );
-            process.waitForFinished(-1);
-            //::system( cmd.local8Bit() );
-            QFile::setPermissions( m_localCopy, QFile::ReadUser | QFile::WriteUser ); // Clearcase creates a write protected file, allow delete.
-
-            QFileInfo fi( m_localCopy );
-#if defined(Q_WS_WIN)
-            m_bReadable    = true;//fi.isReadable();
-            m_bWritable    = true;//fi.isWritable();
-            m_bExecutable  = false;//fi.isExecutable();
-#else
-            m_bReadable    = fi.isReadable();
-            m_bWritable    = fi.isWritable();
-            m_bExecutable  = fi.isExecutable();
-#endif
-            m_creationTime = fi.created();
-            m_bHidden    = fi.isHidden();
-            m_modificationTime = fi.lastModified();
-            m_accessTime = fi.lastRead();
-            m_size       = fi.size();
-            m_bSymLink   = fi.isSymLink();
-            m_bFile      = fi.isFile();
-            m_bDir       = fi.isDir();
-            m_bExists    = fi.exists();
-         }
+         setFile( fi, 0 );
       }
       else
       {
-         m_absoluteFilePath = name;
-         m_name   = m_url.fileName();
-         m_bLocal = false;
+         if (d()==0)
+         {
+            m_pData = new Data;
+            m_bUseData = true;
+         }
+         d()->m_url = url;
+         d()->m_name   = d()->m_url.fileName();
+         d()->m_bLocal = false;
 
          FileAccessJobHandler jh( this ); // A friend, which writes to the parameters of this class!
          jh.stat(2/*all details*/, bWantToWrite); // returns bSuccess, ignored
 
-         m_path = name;
-         m_bValidData = true; // After running stat() the variables are initialised
-                              // and valid even if the file doesn't exist and the stat
-                              // query failed.
+         m_filePath = name;
+         d()->m_bValidData = true; // After running stat() the variables are initialised
+                                 // and valid even if the file doesn't exist and the stat
+                                 // query failed.
       }
    }
 }
 
 void FileAccess::addPath( const QString& txt )
 {
-   if ( m_url.isValid() )
+   if ( d()!=0 && d()->m_url.isValid() )
    {
-      m_url.addPath( txt );
-      setFile( m_url.url() );  // reinitialise
+      d()->m_url.addPath( txt );
+      setFile( d()->m_url.url() );  // reinitialise
    }
    else
    {
@@ -260,19 +383,19 @@ void FileAccess::setUdsEntry( const KIO::UDSEntry& e )
       switch( f )
       {
          case KIO::UDSEntry::UDS_SIZE :              m_size   = e.numberValue(f);   break;
-         case KIO::UDSEntry::UDS_USER :              m_user   = e.stringValue(f);    break;
-         case KIO::UDSEntry::UDS_GROUP :             m_group  = e.stringValue(f);    break;
-         case KIO::UDSEntry::UDS_NAME :              m_path   = e.stringValue(f);    break;  // During listDir the relative path is given here.
+         //case KIO::UDSEntry::UDS_USER :               d()->m_user   = e.stringValue(f);    break;
+         //case KIO::UDSEntry::UDS_GROUP :              d()->m_group  = e.stringValue(f);    break;
+         case KIO::UDSEntry::UDS_NAME :              m_filePath  = e.stringValue(f);    break;  // During listDir the relative path is given here.
          case KIO::UDSEntry::UDS_MODIFICATION_TIME : m_modificationTime.setTime_t( e.numberValue(f) ); break;
-         case KIO::UDSEntry::UDS_ACCESS_TIME :       m_accessTime.setTime_t( e.numberValue(f) ); break;
-         case KIO::UDSEntry::UDS_CREATION_TIME :     m_creationTime.setTime_t( e.numberValue(f) ); break;
-         case KIO::UDSEntry::UDS_LINK_DEST :         m_linkTarget       = e.stringValue(f); break;
+         //case KIO::UDSEntry::UDS_ACCESS_TIME :       d()->m_accessTime.setTime_t( e.numberValue(f) ); break;
+         //case KIO::UDSEntry::UDS_CREATION_TIME :     d()->m_creationTime.setTime_t( e.numberValue(f) ); break;
+         case KIO::UDSEntry::UDS_LINK_DEST :         d()->m_linkTarget       = e.stringValue(f); break;
          case KIO::UDSEntry::UDS_ACCESS :
          {
             acc = e.numberValue(f);
-            m_bReadable   = (acc & S_IRUSR)!=0;
-            m_bWritable   = (acc & S_IWUSR)!=0;
-            m_bExecutable = (acc & S_IXUSR)!=0;
+            d()->m_bReadable   = (acc & S_IRUSR)!=0;
+            m_bWritable      = (acc & S_IWUSR)!=0;
+            d()->m_bExecutable = (acc & S_IXUSR)!=0;
             break;
          }
          case KIO::UDSEntry::UDS_FILE_TYPE :
@@ -282,7 +405,7 @@ void FileAccess::setUdsEntry( const KIO::UDSEntry& e )
             m_bFile    = ( fileType & S_IFMT ) == S_IFREG;
             m_bSymLink = ( fileType & S_IFMT ) == S_IFLNK;
             m_bExists  = fileType != 0;
-            m_fileType = fileType;
+            //d()->m_fileType = fileType;
             break;
          }
 
@@ -297,55 +420,224 @@ void FileAccess::setUdsEntry( const KIO::UDSEntry& e )
 
    m_bExists = acc!=0 || fileType!=0;
 
-   m_bLocal = false;
-   m_bValidData = true;
-   m_bSymLink = !m_linkTarget.isEmpty();
-   if ( m_name.isEmpty() )
+   d()->m_bLocal = false;
+   d()->m_bValidData = true;
+   m_bSymLink = !d()->m_linkTarget.isEmpty();
+   if ( d()->m_name.isEmpty() )
    {
-      int pos = m_path.lastIndexOf('/') + 1;
-      m_name = m_path.mid( pos );
+      int pos = m_filePath.lastIndexOf('/') + 1;
+      d()->m_name = m_filePath.mid( pos );
    }
-   m_bHidden = m_name[0]=='.';
+   m_bHidden = d()->m_name[0]=='.';
 }
 #endif
 
 
-bool FileAccess::isValid() const       {   return m_bValidData;  }
-bool FileAccess::isFile() const        {   return m_bFile;       }
-bool FileAccess::isDir() const         {   return m_bDir;        }
-bool FileAccess::isSymLink() const     {   return m_bSymLink;    }
-bool FileAccess::exists() const        {   return m_bExists;     }
-qint64 FileAccess::size() const        {   return m_size;        }
-KUrl FileAccess::url() const           {   return m_url;         }
-bool FileAccess::isLocal() const       {   return m_bLocal;      }
-bool FileAccess::isReadable() const    {   return m_bReadable;   }
-bool FileAccess::isWritable() const    {   return m_bWritable;   }
-bool FileAccess::isExecutable() const  {   return m_bExecutable; }
-bool FileAccess::isHidden() const      {   return m_bHidden;     }
-QString FileAccess::readLink() const   {   return m_linkTarget;  }
-QString FileAccess::absoluteFilePath() const{   return m_absoluteFilePath; }  // Full abs path
-QString FileAccess::fileName() const   {   return m_name;        }  // Just the name-part of the path, without parent directories
-QString FileAccess::filePath() const   {   return m_path;        }  // The path-string that was used during construction
-QString FileAccess::prettyAbsPath() const { return isLocal() ? m_absoluteFilePath : m_url.prettyUrl(); }
+bool FileAccess::isValid() const       
+{   
+   return d()==0 ? !m_filePath.isEmpty() : d()->m_bValidData;  
+}
 
+bool FileAccess::isFile() const        
+{
+   if ( parent() || d() )
+      return m_bFile;
+   else
+      return QFileInfo( absoluteFilePath() ).isFile();
+}
+
+bool FileAccess::isDir() const         
+{   
+   if ( parent() || d() )
+      return m_bDir;        
+   else
+      return QFileInfo( absoluteFilePath() ).isDir();
+}
+
+bool FileAccess::isSymLink() const     
+{   
+   return m_bSymLink;    
+}
+
+bool FileAccess::exists() const        
+{   
+   if ( parent() || d())
+      return m_bExists;     
+   else
+      return QFileInfo( absoluteFilePath() ).exists();
+}
+
+qint64 FileAccess::size() const        
+{
+   if ( parent() || d())
+      return m_size;
+   else
+      return QFileInfo( absoluteFilePath() ).size();
+}
+
+KUrl FileAccess::url() const           
+{  
+   if ( d()!=0 )
+      return d()->m_url;
+   else
+   {
+      KUrl url( m_filePath );
+      if ( ! url.isValid() )
+      {
+         url.setPath( absoluteFilePath() );
+      }
+      return url;
+   }   
+}
+
+bool FileAccess::isLocal() const       
+{   
+   return d()==0 || d()->m_bLocal;   
+}
+
+bool FileAccess::isReadable() const    
+{
+#if defined(Q_WS_WIN)
+   // On some windows machines in a network this takes very long to find out and it's not so important anyway.
+   return true;
+#else
+   if ( d()!=0 )      
+      return d()->m_bReadable; 
+   else
+      return QFileInfo( absoluteFilePath() ).isReadable();
+#endif
+}
+
+bool FileAccess::isWritable() const    
+{
+   if ( parent() || d())
+      return m_bWritable;
+   else
+      return QFileInfo( absoluteFilePath() ).isWritable();
+}
+
+bool FileAccess::isExecutable() const    
+{
+#if defined(Q_WS_WIN)
+   // On some windows machines in a network this takes very long to find out and it's not so important anyway.
+   return true;
+#else
+   if ( d()!=0 )
+      return d()->m_bExecutable;
+   else
+      return QFileInfo( absoluteFilePath() ).isExecutable();
+#endif
+}
+
+bool FileAccess::isHidden() const      
+{  
+   if ( parent() || d() )
+      return m_bHidden;   
+   else
+      return QFileInfo( absoluteFilePath() ).isHidden();
+}
+
+QString FileAccess::readLink() const   
+{  
+   if ( d()!=0 )
+      return d()->m_linkTarget;
+   else
+      return QString();
+}
+
+QString FileAccess::absoluteFilePath() const
+{  
+   if ( parent() != 0 )
+      return parent()->absoluteFilePath() + "/" + m_filePath;
+   else
+      return m_filePath;
+}  // Full abs path
+
+// Just the name-part of the path, without parent directories
+QString FileAccess::fileName() const   
+{   
+   if ( d()!=0 )
+      return d()->m_name;          
+   else if ( parent() )
+      return m_filePath;
+   else
+      return QFileInfo( m_filePath ).fileName();
+}
+
+void FileAccess::setSharedName(const QString& name)
+{
+   if ( name == m_filePath )
+      m_filePath = name; // reduce memory because string is only used once.
+}
+
+QString FileAccess::filePath() const   
+{  
+   if ( parent() && parent()->parent() )
+      return parent()->filePath() + "/" + m_filePath;
+   else
+      return m_filePath;   // The path-string that was used during construction
+}
+
+FileAccess* FileAccess::parent() const
+{
+   if ( m_bUseData )
+      return d()->m_pParent;
+   else
+      return m_pParent;
+}
+
+FileAccess::Data* FileAccess::d()
+{
+   if ( m_bUseData )
+      return m_pData;
+   else
+      return 0;
+}
+
+const FileAccess::Data* FileAccess::d() const
+{
+   if ( m_bUseData )
+      return m_pData;
+   else
+      return 0;
+}
+
+QString FileAccess::prettyAbsPath() const 
+{ 
+   return isLocal() ? absoluteFilePath() : d()->m_url.prettyUrl();    
+}
+
+/*
 QDateTime FileAccess::created() const
 {
-   if ( m_bLocal && m_creationTime.isNull() )
-      const_cast<FileAccess*>(this)->m_creationTime = QFileInfo( m_absoluteFilePath ).created();
-   return ( m_creationTime.isValid() ?  m_creationTime : lastModified() );
+   if ( d()!=0 )
+   {
+      if ( isLocal() && d()->m_creationTime.isNull() )
+         const_cast<FileAccess*>(this)->d()->m_creationTime = QFileInfo( absoluteFilePath() ).created();
+      return ( d()->m_creationTime.isValid() ?  d()->m_creationTime : lastModified() );
+   }
+   else
+   {
+      QDateTime created = QFileInfo( absoluteFilePath() ).created();
+      return created.isValid() ? created : lastModified();
+   }
 }
+*/
 
 QDateTime FileAccess::lastModified() const
 {
-   if ( m_bLocal && m_modificationTime.isNull() )
-      const_cast<FileAccess*>(this)->m_modificationTime = QFileInfo( m_absoluteFilePath ).lastModified();
+   if ( isLocal() && m_modificationTime.isNull() )
+      const_cast<FileAccess*>(this)->m_modificationTime = QFileInfo( absoluteFilePath() ).lastModified();
    return m_modificationTime;
 }
 
+/*
 QDateTime FileAccess::lastRead() const
 {
-   return ( m_accessTime.isValid() ?  m_accessTime : m_modificationTime );
+   QDateTime accessTime = d()!=0 ? d()->m_accessTime : QFileInfo( absoluteFilePath() ).lastRead();
+   return ( accessTime.isValid() ?  accessTime : lastModified() );
 }
+*/
 
 static bool interruptableReadFile( QFile& f, void* pDestBuffer, unsigned long maxLength )
 {
@@ -370,15 +662,15 @@ static bool interruptableReadFile( QFile& f, void* pDestBuffer, unsigned long ma
 
 bool FileAccess::readFile( void* pDestBuffer, unsigned long maxLength )
 {
-   if ( !m_localCopy.isEmpty() )
+   if ( d()!=0 && !d()->m_localCopy.isEmpty() )
    {
-      QFile f( m_localCopy );
+      QFile f( d()->m_localCopy );
       if ( f.open( QIODevice::ReadOnly ) )
          return interruptableReadFile(f, pDestBuffer, maxLength);// maxLength == f.read( (char*)pDestBuffer, maxLength );
    }
-   else if (m_bLocal)
+   else if (isLocal())
    {
-      QFile f( filePath() );
+      QFile f( absoluteFilePath() );
 
       if ( f.open( QIODevice::ReadOnly ) )
          return interruptableReadFile(f, pDestBuffer, maxLength); //maxLength == f.read( (char*)pDestBuffer, maxLength );
@@ -394,9 +686,9 @@ bool FileAccess::readFile( void* pDestBuffer, unsigned long maxLength )
 bool FileAccess::writeFile( const void* pSrcBuffer, unsigned long length )
 {
    ProgressProxy pp;
-   if (m_bLocal)
+   if ( isLocal() )
    {
-      QFile f( filePath() );
+      QFile f( absoluteFilePath() );
       if ( f.open( QIODevice::WriteOnly ) )
       {
          const unsigned long maxChunkSize = 100000;
@@ -563,7 +855,7 @@ bool FileAccess::exists( const QString& name )
 // If the size couldn't be determined by stat() then the file is copied to a local temp file.
 qint64 FileAccess::sizeForReading()
 {
-   if ( m_size == 0 && !isLocal() )
+   if ( !isLocal() && m_size == 0 )
    {
       // Size couldn't be determined. Copy the file to a local temp place.
       QString localCopy = tempFileName();
@@ -572,7 +864,7 @@ qint64 FileAccess::sizeForReading()
       {
          QFileInfo fi( localCopy );
          m_size = fi.size();
-         m_localCopy = localCopy;
+         d()->m_localCopy = localCopy;
          return m_size;
       }
       else
@@ -581,12 +873,12 @@ qint64 FileAccess::sizeForReading()
       }
    }
    else
-      return m_size;
+      return size();
 }
 
 QString FileAccess::getStatusText()
 {
-   return m_statusText;
+   return d()==0 ? QString() : d()->m_statusText;
 }
 
 QString FileAccess::cleanPath( const QString& path ) // static
@@ -606,6 +898,12 @@ bool FileAccess::createBackup( const QString& bakExtension )
 {
    if ( exists() )
    {
+      if (d()==0)
+      {
+         m_pData = new Data;
+         m_bUseData = true;
+      }
+      setFile( absoluteFilePath() ); // make sure Data is initialized
       // First rename the existing file to the bak-file. If a bak-file file exists, delete that.
       QString bakName = absoluteFilePath() + bakExtension;
       FileAccess bakFile( bakName, true /*bWantToWrite*/ );
@@ -614,14 +912,14 @@ bool FileAccess::createBackup( const QString& bakExtension )
          bool bSuccess = bakFile.removeFile();
          if ( !bSuccess )
          {
-            m_statusText = i18n("While trying to make a backup, deleting an older backup failed. \nFilename: ") + bakName;
+            d()->m_statusText = i18n("While trying to make a backup, deleting an older backup failed. \nFilename: ") + bakName;
             return false;
          }
       }
       bool bSuccess = rename( bakName );
       if (!bSuccess)
       {
-         m_statusText = i18n("While trying to make a backup, renaming failed. \nFilenames: ") +
+         d()->m_statusText = i18n("While trying to make a backup, renaming failed. \nFilenames: ") +
                absoluteFilePath() + " -> " + bakName;
          return false;
       }
@@ -638,8 +936,8 @@ FileAccessJobHandler::FileAccessJobHandler( FileAccess* pFileAccess )
 bool FileAccessJobHandler::stat( int detail, bool bWantToWrite )
 {
    m_bSuccess = false;
-   m_pFileAccess->m_statusText = QString();
-   KIO::StatJob* pStatJob = KIO::stat( m_pFileAccess->m_url, 
+   m_pFileAccess->d()->m_statusText = QString();
+   KIO::StatJob* pStatJob = KIO::stat( m_pFileAccess->url(), 
          bWantToWrite ? KIO::StatJob::DestinationSide : KIO::StatJob::SourceSide, 
          detail, KIO::HideProgressInfo );
 
@@ -662,7 +960,7 @@ void FileAccessJobHandler::slotStatResult(KJob* pJob)
    {
       m_bSuccess = true;
 
-      m_pFileAccess->m_bValidData = true;
+      m_pFileAccess->d()->m_bValidData = true;
       const KIO::UDSEntry e = static_cast<KIO::StatJob*>(pJob)->statResult();
 
       m_pFileAccess->setUdsEntry( e );
@@ -677,12 +975,12 @@ bool FileAccessJobHandler::get(void* pDestBuffer, long maxLength )
    ProgressProxy pp; // Implicitly used in slotPercent()
    if ( maxLength>0 && !pp.wasCancelled() )
    {
-      KIO::TransferJob* pJob = KIO::get( m_pFileAccess->m_url, KIO::NoReload );
+      KIO::TransferJob* pJob = KIO::get( m_pFileAccess->url(), KIO::NoReload );
       m_transferredBytes = 0;
       m_pTransferBuffer = (char*)pDestBuffer;
       m_maxLength = maxLength;
       m_bSuccess = false;
-      m_pFileAccess->m_statusText = QString();
+      m_pFileAccess->d()->m_statusText = QString();
 
       connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
       connect( pJob, SIGNAL(data(KJob*,const QByteArray &)), this, SLOT(slotGetData(KJob*, const QByteArray&)));
@@ -713,13 +1011,13 @@ bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOve
 {
    if ( maxLength>0 )
    {
-      KIO::TransferJob* pJob = KIO::put( m_pFileAccess->m_url, permissions, 
+      KIO::TransferJob* pJob = KIO::put( m_pFileAccess->url(), permissions, 
          KIO::HideProgressInfo | (bOverwrite ? KIO::Overwrite : KIO::DefaultFlags) | (bResume ? KIO::Resume : KIO::DefaultFlags) );
       m_transferredBytes = 0;
       m_pTransferBuffer = (char*)pSrcBuffer;
       m_maxLength = maxLength;
       m_bSuccess = false;
-      m_pFileAccess->m_statusText = QString();
+      m_pFileAccess->d()->m_statusText = QString();
 
       connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotPutJobResult(KJob*)));
       connect( pJob, SIGNAL(dataReq(KIO::Job*, QByteArray&)), this, SLOT(slotPutData(KIO::Job*, QByteArray&)));
@@ -861,7 +1159,7 @@ bool FileAccessJobHandler::rename( const QString& dest )
    {
       int permissions=-1;
       m_bSuccess = false;
-      KIO::FileCopyJob* pJob = KIO::file_move( m_pFileAccess->m_url, kurl, permissions, KIO::HideProgressInfo );
+      KIO::FileCopyJob* pJob = KIO::file_move( m_pFileAccess->url(), kurl, permissions, KIO::HideProgressInfo );
       connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
       connect( pJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
 
@@ -890,12 +1188,12 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
 {
    ProgressProxy pp;
    KUrl destUrl( dest );
-   m_pFileAccess->m_statusText = QString();
+   m_pFileAccess->d()->m_statusText = QString();
    if ( ! m_pFileAccess->isLocal() || ! destUrl.isLocalFile() ) // if either url is nonlocal
    {
       int permissions = (m_pFileAccess->isExecutable()?0111:0)+(m_pFileAccess->isWritable()?0222:0)+(m_pFileAccess->isReadable()?0444:0);
       m_bSuccess = false;
-      KIO::FileCopyJob* pJob = KIO::file_copy ( m_pFileAccess->m_url, destUrl, permissions, KIO::HideProgressInfo );
+      KIO::FileCopyJob* pJob = KIO::file_copy ( m_pFileAccess->url(), destUrl, permissions, KIO::HideProgressInfo );
       connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
       connect( pJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
       g_pProgressDialog->enterEventLoop( pJob,
@@ -913,13 +1211,13 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
    bool bReadSuccess = srcFile.open( QIODevice::ReadOnly );
    if ( bReadSuccess == false )
    {
-      m_pFileAccess->m_statusText = i18n("Error during file copy operation: Opening file for reading failed. Filename: %1",srcName);
+      m_pFileAccess->d()->m_statusText = i18n("Error during file copy operation: Opening file for reading failed. Filename: %1",srcName);
       return false;
    }
    bool bWriteSuccess = destFile.open( QIODevice::WriteOnly );
    if ( bWriteSuccess == false )
    {
-      m_pFileAccess->m_statusText = i18n("Error during file copy operation: Opening file for writing failed. Filename: %1",destName);
+      m_pFileAccess->d()->m_statusText = i18n("Error during file copy operation: Opening file for writing failed. Filename: %1",destName);
       return false;
    }
 
@@ -934,7 +1232,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
       qint64 readSize = srcFile.read( &buffer[0], min2( srcSize, bufSize ) );
       if ( readSize==-1 || readSize==0 )
       {
-         m_pFileAccess->m_statusText = i18n("Error during file copy operation: Reading failed. Filename: %1",srcName);
+         m_pFileAccess->d()->m_statusText = i18n("Error during file copy operation: Reading failed. Filename: %1",srcName);
          return false;
       }
       srcSize -= readSize;
@@ -943,7 +1241,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
          qint64 writeSize = destFile.write( &buffer[0], readSize );
          if ( writeSize==-1 || writeSize==0 )
          {
-            m_pFileAccess->m_statusText = i18n("Error during file copy operation: Writing failed. Filename: %1",destName);
+            m_pFileAccess->d()->m_statusText = i18n("Error during file copy operation: Writing failed. Filename: %1",destName);
             return false;
          }
          readSize -= writeSize;
@@ -985,12 +1283,20 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
 
 bool wildcardMultiMatch( const QString& wildcard, const QString& testString, bool bCaseSensitive )
 {
+   static QHash<QString,QRegExp> s_patternMap;
+
    QStringList sl = wildcard.split( ";" );
 
    for ( QStringList::Iterator it = sl.begin(); it != sl.end(); ++it )
    {
-      QRegExp pattern( *it, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::Wildcard );
-      if ( pattern.exactMatch( testString ) )
+      QHash<QString,QRegExp>::iterator patIt = s_patternMap.find( *it );
+      if ( patIt == s_patternMap.end() )
+      {
+         QRegExp pattern( *it, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::Wildcard );
+         patIt = s_patternMap.insert( *it, pattern );
+      }
+      
+      if ( patIt.value().exactMatch( testString ) )
          return true;
    }
 
@@ -1196,16 +1502,6 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive ) const
    return false;
 }
 
-static QString nicePath( const QFileInfo& fi )
-{
-   QString fp = fi.filePath();
-   if ( fp.length()>2 && fp[0] == '.' && fp[1] == '/' )
-   {
-      return fp.mid(2);
-   }
-   return fp;
-}
-
 static bool cvsIgnoreExists( t_DirectoryList* pDirList )
 {
    t_DirectoryList::iterator i;
@@ -1246,7 +1542,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
          QDir dir( "." );
 
          dir.setSorting( QDir::Name | QDir::DirsFirst );
-         dir.setFilter( QDir::Files | QDir::Dirs | /* from KDE3 QDir::TypeMaskDirs | */ QDir::Hidden );
+         dir.setFilter( QDir::Files | QDir::Dirs | /* from KDE3 QDir::TypeMaskDirs | */ QDir::Hidden | QDir::System );
 
          QFileInfoList fiList = dir.entryInfoList();
          if ( fiList.isEmpty() )
@@ -1261,7 +1557,9 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
                if ( fi.fileName() == "." ||  fi.fileName()==".." )
                   continue;
 
-               pDirList->push_back( FileAccess( nicePath(fi) ) );
+               FileAccess fa;
+               fa.setFile( fi, m_pFileAccess );
+               pDirList->push_back( fa );
             }
          }
 #else
@@ -1290,41 +1588,48 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
                }
                bFirst = false;
                FileAccess fa;
-               fa.m_size = ( qint64( findData.nFileSizeHigh ) << 32 ) + findData.nFileSizeLow;
 
-               FILETIME ft;
-               SYSTEMTIME t;
-               FileTimeToLocalFileTime( &findData.ftLastWriteTime, &ft ); FileTimeToSystemTime(&ft,&t);
-               fa.m_modificationTime = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
-               FileTimeToLocalFileTime( &findData.ftLastAccessTime, &ft ); FileTimeToSystemTime(&ft,&t);
-               fa.m_accessTime       = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
-               FileTimeToLocalFileTime( &findData.ftCreationTime, &ft ); FileTimeToSystemTime(&ft,&t);
-               fa.m_creationTime     = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
-
-               int  a = findData.dwFileAttributes;
-               fa.m_bWritable   = ( a & FILE_ATTRIBUTE_READONLY) == 0;
-               fa.m_bDir        = ( a & FILE_ATTRIBUTE_DIRECTORY ) != 0;
-               fa.m_bFile       = !fa.m_bDir;
-               fa.m_bHidden     = ( a & FILE_ATTRIBUTE_HIDDEN) != 0;
-
-               fa.m_bExecutable = false; // Useless on windows
-               fa.m_bExists     = true;
-               fa.m_bReadable   = true;
-               fa.m_bLocal      = true;
-               fa.m_bValidData  = true;
-               fa.m_bSymLink    = false;
-               fa.m_fileType    = 0;
-
-               fa.m_name = QT_WA_INLINE(
+               fa.m_filePath = QT_WA_INLINE(
                   QString::fromUtf16((const ushort*)findData.cFileName),
                   QString::fromLocal8Bit(findDataA.cFileName)
                   );
+               if ( fa.m_filePath!="." && fa.m_filePath!=".." )
+               {               
+                  fa.m_size = ( qint64( findData.nFileSizeHigh ) << 32 ) + findData.nFileSizeLow;
 
-               fa.m_path = fa.m_name;
-               fa.m_absoluteFilePath = absPath + "/" + fa.m_name;
-               fa.m_url.setPath( fa.m_absoluteFilePath );
-               if ( fa.m_name!="." && fa.m_name!=".." )
+                  FILETIME ft;
+                  SYSTEMTIME t;
+                  FileTimeToLocalFileTime( &findData.ftLastWriteTime, &ft ); FileTimeToSystemTime(&ft,&t);
+                  fa.m_modificationTime = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
+                  //FileTimeToLocalFileTime( &findData.ftLastAccessTime, &ft ); FileTimeToSystemTime(&ft,&t);
+                  //fa.m_accessTime       = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
+                  //FileTimeToLocalFileTime( &findData.ftCreationTime, &ft ); FileTimeToSystemTime(&ft,&t);
+                  //fa.m_creationTime     = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
+
+                  int  a = findData.dwFileAttributes;
+                  fa.m_bWritable   = ( a & FILE_ATTRIBUTE_READONLY) == 0;
+                  fa.m_bDir        = ( a & FILE_ATTRIBUTE_DIRECTORY ) != 0;
+                  fa.m_bFile       = !fa.m_bDir;
+                  fa.m_bHidden     = ( a & FILE_ATTRIBUTE_HIDDEN) != 0;
+
+                  //fa.m_bExecutable = false; // Useless on windows
+                  fa.m_bExists     = true;
+                  //fa.m_bReadable   = true;
+                  //fa.m_bLocal      = true;
+                  //fa.m_bValidData  = true;
+                  fa.m_bSymLink    = false;
+                  //fa.m_fileType    = 0;
+
+
+                  //fa.m_filePath = fa.m_name;
+                  //fa.m_absoluteFilePath = absPath + "/" + fa.m_name;
+                  //fa.m_url.setPath( fa.m_absoluteFilePath );
+                  if ( fa.d() )
+                     fa.m_pData->m_pParent = m_pFileAccess;
+                  else
+                     fa.m_pParent = m_pFileAccess;
                   pDirList->push_back( fa );
+               }
             }
             FindClose( searchHandle );
          }
@@ -1340,7 +1645,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
    else
    {
       KIO::ListJob* pListJob=0;
-      pListJob = KIO::listDir( m_pFileAccess->m_url, KIO::HideProgressInfo, true /*bFindHidden*/ );
+      pListJob = KIO::listDir( m_pFileAccess->url(), KIO::HideProgressInfo, true /*bFindHidden*/ );
 
       m_bSuccess = false;
       if ( pListJob!=0 )
@@ -1382,12 +1687,12 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
       if (  (!bFindHidden && i->isHidden() )
             ||
             (i->isFile() &&
-               ( !wildcardMultiMatch( filePattern, i->fileName(), bCaseSensitive ) ||
-                 wildcardMultiMatch( fileAntiPattern, i->fileName(), bCaseSensitive ) ) )
+               ( !wildcardMultiMatch( filePattern, fn, bCaseSensitive ) ||
+                 wildcardMultiMatch( fileAntiPattern, fn, bCaseSensitive ) ) )
             ||
-            (i->isDir() && wildcardMultiMatch( dirAntiPattern, i->fileName(), bCaseSensitive ) )
+            (i->isDir() && wildcardMultiMatch( dirAntiPattern, fn, bCaseSensitive ) )
             ||
-            cvsIgnoreList.matches( i->fileName(), bCaseSensitive )
+            cvsIgnoreList.matches( fn, bCaseSensitive )
          )
       {
          // Remove it
@@ -1416,7 +1721,8 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
             t_DirectoryList::iterator j;
             for( j = dirList.begin(); j!=dirList.end(); ++j )
             {
-               j->m_path = i->fileName() + "/" + j->m_path;
+               if ( j->parent()==0 )
+                  j->m_filePath = i->fileName() + "/" + j->m_filePath;
             }
 
             // append data onto the main list
@@ -1433,20 +1739,23 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
 
 void FileAccessJobHandler::slotListDirProcessNewEntries( KIO::Job*, const KIO::UDSEntryList& l )
 {
-   KUrl parentUrl( m_pFileAccess->m_absoluteFilePath );
+   KUrl parentUrl( m_pFileAccess->absoluteFilePath() );
 
    KIO::UDSEntryList::ConstIterator i;
    for ( i=l.begin(); i!=l.end(); ++i )
    {
       const KIO::UDSEntry& e = *i;
       FileAccess fa;
+      fa.m_pData = new FileAccess::Data;
+      fa.m_bUseData = true;
+      fa.m_pData->m_pParent = m_pFileAccess;
       fa.setUdsEntry( e );
 
-      if ( fa.filePath() != "." && fa.filePath() != ".." )
+      if ( fa.fileName() != "." && fa.fileName() != ".." )
       {
-         fa.m_url = parentUrl;
-         fa.m_url.addPath( fa.filePath() );
-         fa.m_absoluteFilePath = fa.m_url.url();
+         fa.d()->m_url = parentUrl;
+         fa.d()->m_url.addPath( fa.fileName() );
+         //fa.d()->m_absoluteFilePath = fa.url().url();
          m_pDirList->push_back( fa );
       }
    }

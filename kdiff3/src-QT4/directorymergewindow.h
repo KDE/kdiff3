@@ -52,74 +52,17 @@ enum e_MergeOperation
    eConflictingAges       // Equal age but files are not!
 };
 
-class DirMergeItem;
-
 enum e_Age { eNew, eMiddle, eOld, eNotThere, eAgeEnd };
 
-class MergeFileInfos
-{
-public:
-   MergeFileInfos(){ m_bEqualAB=false; m_bEqualAC=false; m_bEqualBC=false;
-                     m_pDMI=0; m_pParent=0;
-                     m_bExistsInA=false;m_bExistsInB=false;m_bExistsInC=false;
-                     m_bDirA=false;  m_bDirB=false;  m_bDirC=false;
-                     m_bLinkA=false; m_bLinkB=false; m_bLinkC=false;
-                     m_bOperationComplete=false; m_bSimOpComplete = false;
-                     m_eMergeOperation=eNoOperation;
-                     m_ageA = eNotThere; m_ageB=eNotThere; m_ageC=eNotThere;
-                     m_bConflictingAges=false; }
-   bool operator>( const MergeFileInfos& );
-   QString m_subPath;
+class MergeFileInfos;
 
-   bool m_bExistsInA;
-   bool m_bExistsInB;
-   bool m_bExistsInC;
-   bool m_bEqualAB;
-   bool m_bEqualAC;
-   bool m_bEqualBC;
-   DirMergeItem* m_pDMI;
-   MergeFileInfos* m_pParent;
-   e_MergeOperation m_eMergeOperation;
-   void setMergeOperation( e_MergeOperation eMOp, bool bRecursive=true );
-   bool m_bDirA;
-   bool m_bDirB;
-   bool m_bDirC;
-   bool m_bLinkA;
-   bool m_bLinkB;
-   bool m_bLinkC;
-   bool m_bOperationComplete;
-   bool m_bSimOpComplete;
-   e_Age m_ageA;
-   e_Age m_ageB;
-   e_Age m_ageC;
-   bool m_bConflictingAges;       // Equal age but files are not!
-
-   FileAccess m_fileInfoA;
-   FileAccess m_fileInfoB;
-   FileAccess m_fileInfoC;
-
-   TotalDiffStatus m_totalDiffStatus;   
-};
-
-class DirMergeItem : public QTreeWidgetItem
-{
-public:
-   DirMergeItem( QTreeWidget* pParent, const QString&, MergeFileInfos*);
-   DirMergeItem( DirMergeItem* pParent, const QString&, MergeFileInfos*);
-   ~DirMergeItem();
-   MergeFileInfos* m_pMFI;
-   virtual bool operator<( const QTreeWidgetItem& other ) const;
-   //virtual void paintCell(QPainter * p, const QColorGroup & cg, int column, int width, int align );
-   void init(MergeFileInfos* pMFI);
-};
-
-class DirectoryMergeWindow : public QTreeWidget
+class DirectoryMergeWindow : public QTreeView
 {
    Q_OBJECT
 public:
    DirectoryMergeWindow( QWidget* pParent, OptionDialog* pOptions, KIconLoader* pIconLoader );
    ~DirectoryMergeWindow();
-   void setDirectoryMergeInfo(DirectoryMergeInfo* p){ m_pDirectoryMergeInfo=p; }
+   void setDirectoryMergeInfo(DirectoryMergeInfo* p);
    bool init(
       FileAccess& dirA,
       FileAccess& dirB,
@@ -129,10 +72,10 @@ public:
       bool bReload = false
    );
    bool isFileSelected();
-   bool isDirectoryMergeInProgress() { return m_bRealMergeStarted; }
+   bool isDirectoryMergeInProgress();
    int totalColumnWidth();
-   bool isSyncMode() { return m_bSyncMode; }
-   bool isScanning() { return m_bScanning; }
+   bool isSyncMode();
+   bool isScanning();
    void initDirectoryMergeActions( QObject* pKDiff3App, KActionCollection* ac );
    void updateAvailabilities( bool bDirCompare, bool bDiffWindowVisible,
       KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC );
@@ -143,10 +86,10 @@ public:
    virtual void focusInEvent( QFocusEvent* e );
    virtual void focusOutEvent( QFocusEvent* e );
    virtual void contextMenuEvent( QContextMenuEvent* e );
-   QString getDirNameA(){ return m_dirA.prettyAbsPath(); }
-   QString getDirNameB(){ return m_dirB.prettyAbsPath(); }
-   QString getDirNameC(){ return m_dirC.prettyAbsPath(); }
-   QString getDirNameDest(){ return m_dirDest.prettyAbsPath(); }
+   QString getDirNameA();
+   QString getDirNameB();
+   QString getDirNameC();
+   QString getDirNameDest();
 
 public slots:
    void reload();
@@ -194,138 +137,21 @@ public slots:
    void slotSaveMergeState();
    void slotLoadMergeState();
 
-protected:
-   class DirMergeItemDelegate;
-   void mergeContinue( bool bStart, bool bVerbose );
-
-   void prepareListView(ProgressProxy& pp);
-   void calcSuggestedOperation( MergeFileInfos& mfi, e_MergeOperation eDefaultOperation );
-   void setAllMergeOperations( e_MergeOperation eDefaultOperation );
-   friend class MergeFileInfos;
-
-   bool canContinue();
-   void prepareMergeStart( QTreeWidgetItem* pBegin, QTreeWidgetItem* pEnd, bool bVerbose );
-   bool executeMergeOperation( MergeFileInfos& mfi, bool& bSingleFileMerge );
-
-   void scanDirectory( const QString& dirName, t_DirectoryList& dirList );
-   void scanLocalDirectory( const QString& dirName, t_DirectoryList& dirList );
-   void fastFileComparison( FileAccess& fi1, FileAccess& fi2,
-                            bool& bEqual, bool& bError, QString& status );
-   void compareFilesAndCalcAges( MergeFileInfos& mfi );
-
-   QString fullNameA( const MergeFileInfos& mfi )
-   { return mfi.m_bExistsInA ? mfi.m_fileInfoA.absoluteFilePath() : m_dirA.absoluteFilePath() + "/" + mfi.m_subPath; }
-   QString fullNameB( const MergeFileInfos& mfi )
-   { return mfi.m_bExistsInB ? mfi.m_fileInfoB.absoluteFilePath() : m_dirB.absoluteFilePath() + "/" + mfi.m_subPath; }
-   QString fullNameC( const MergeFileInfos& mfi )
-   { return mfi.m_bExistsInC ? mfi.m_fileInfoC.absoluteFilePath() : m_dirC.absoluteFilePath() + "/" + mfi.m_subPath; }
-   QString fullNameDest( const MergeFileInfos& mfi )
-   { if       ( m_dirDestInternal.prettyAbsPath() == m_dirC.prettyAbsPath() ) return fullNameC(mfi);
-     else if ( m_dirDestInternal.prettyAbsPath() == m_dirB.prettyAbsPath() ) return fullNameB(mfi);
-     else return m_dirDestInternal.absoluteFilePath() + "/" + mfi.m_subPath; 
-   }
-
-   bool copyFLD( const QString& srcName, const QString& destName );
-   bool deleteFLD( const QString& name, bool bCreateBackup );
-   bool makeDir( const QString& name, bool bQuiet=false );
-   bool renameFLD( const QString& srcName, const QString& destName );
-   bool mergeFLD( const QString& nameA,const QString& nameB,const QString& nameC,
-                  const QString& nameDest, bool& bSingleFileMerge );
-
-   FileAccess m_dirA;
-   FileAccess m_dirB;
-   FileAccess m_dirC;
-   FileAccess m_dirDest;
-   FileAccess m_dirDestInternal;
-
-   QString m_dirMergeStateFilename;
-
-   std::map<QString, MergeFileInfos> m_fileMergeMap;
-
-   bool m_bFollowDirLinks;
-   bool m_bFollowFileLinks;
-   bool m_bSimulatedMergeStarted;
-   bool m_bRealMergeStarted;
-   bool m_bError;
-   bool m_bSyncMode;
-   bool m_bDirectoryMerge; // if true, then merge is the default operation, otherwise it's diff.
-   bool m_bCaseSensitive;
-   bool m_bUnfoldSubdirs;
-   bool m_bSkipDirStatus;
-   
-   bool m_bScanning; // true while in init()
-
-   OptionDialog* m_pOptions;
-   KIconLoader* m_pIconLoader;
-   DirectoryMergeInfo* m_pDirectoryMergeInfo;
-   StatusInfo* m_pStatusInfo;
-
-   typedef std::list<DirMergeItem*> MergeItemList;
-   MergeItemList m_mergeItemList;
-   MergeItemList::iterator m_currentItemForOperation;
-
-   DirMergeItem* m_pSelection1Item;
-   int m_selection1Column;
-   DirMergeItem* m_pSelection2Item;
-   int m_selection2Column;
-   DirMergeItem* m_pSelection3Item;
-   int m_selection3Column;
-   void selectItemAndColumn(DirMergeItem* pDMI, int c, bool bContextMenu);
-   friend class DirMergeItem;
-
-   KAction* m_pDirStartOperation;
-   KAction* m_pDirRunOperationForCurrentItem;
-   KAction* m_pDirCompareCurrent;
-   KAction* m_pDirMergeCurrent;
-   KAction* m_pDirRescan;
-   KAction* m_pDirChooseAEverywhere;
-   KAction* m_pDirChooseBEverywhere;
-   KAction* m_pDirChooseCEverywhere;
-   KAction* m_pDirAutoChoiceEverywhere;
-   KAction* m_pDirDoNothingEverywhere;
-   KAction* m_pDirFoldAll;
-   KAction* m_pDirUnfoldAll;
-
-   KToggleAction* m_pDirShowIdenticalFiles;
-   KToggleAction* m_pDirShowDifferentFiles;
-   KToggleAction* m_pDirShowFilesOnlyInA;
-   KToggleAction* m_pDirShowFilesOnlyInB;
-   KToggleAction* m_pDirShowFilesOnlyInC;
-
-   KToggleAction* m_pDirSynchronizeDirectories;
-   KToggleAction* m_pDirChooseNewerFiles;
-
-   KAction* m_pDirCompareExplicit;
-   KAction* m_pDirMergeExplicit;
-
-   KAction* m_pDirCurrentDoNothing;
-   KAction* m_pDirCurrentChooseA;
-   KAction* m_pDirCurrentChooseB;
-   KAction* m_pDirCurrentChooseC;
-   KAction* m_pDirCurrentMerge;
-   KAction* m_pDirCurrentDelete;
-
-   KAction* m_pDirCurrentSyncDoNothing;
-   KAction* m_pDirCurrentSyncCopyAToB;
-   KAction* m_pDirCurrentSyncCopyBToA;
-   KAction* m_pDirCurrentSyncDeleteA;
-   KAction* m_pDirCurrentSyncDeleteB;
-   KAction* m_pDirCurrentSyncDeleteAAndB;
-   KAction* m_pDirCurrentSyncMergeToA;
-   KAction* m_pDirCurrentSyncMergeToB;
-   KAction* m_pDirCurrentSyncMergeToAAndB;
-
-   KAction* m_pDirSaveMergeState;
-   KAction* m_pDirLoadMergeState;
 signals:
    void startDiffMerge(QString fn1,QString fn2, QString fn3, QString ofn, QString,QString,QString,TotalDiffStatus*);
    void checkIfCanContinue( bool* pbContinue );
    void updateAvailabilities();
    void statusBarMessage( const QString& msg );
 protected slots:
-   void onDoubleClick( QTreeWidgetItem* lvi );
-   void onCurrentChanged(QTreeWidgetItem*);
+   void onDoubleClick( const QModelIndex& );
    void onExpanded();
+   void	currentChanged( const QModelIndex & current, const QModelIndex & previous ); // override
+private:
+   class Data;
+   friend class Data;
+   Data* d;
+   class DirMergeItemDelegate;
+   friend class DirMergeItemDelegate;
 };
 
 class DirectoryMergeInfo : public QFrame

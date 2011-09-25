@@ -14,6 +14,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+#include "stable.h"
 
 #include <stdio.h>
 #include <cstdlib>
@@ -286,6 +287,11 @@ int SourceData::getSizeBytes() const
 const char* SourceData::getBuf() const
 {
    return m_normalData.m_pBuf;
+}
+
+const QString& SourceData::getText() const
+{
+   return m_normalData.m_unicodeBuf;
 }
 
 bool SourceData::isText()
@@ -2067,12 +2073,11 @@ void calcDiff( const T* p1, int size1, const T* p2, int size2, DiffList& diffLis
 #endif
 }
 
-void fineDiff(
+bool fineDiff(
    Diff3LineList& diff3LineList,
    int selector,
    const LineData* v1,
-   const LineData* v2,
-   bool& bTextsTotalEqual
+   const LineData* v2
    )
 {
    // Finetuning: Diff each line with deltas
@@ -2081,7 +2086,7 @@ void fineDiff(
    Diff3LineList::iterator i;
    int k1=0;
    int k2=0;
-   bTextsTotalEqual = true;
+   bool bTextsTotalEqual = true;
    int listSize = diff3LineList.size();
    int listIdx = 0;
    for( i= diff3LineList.begin(); i!= diff3LineList.end(); ++i)
@@ -2140,6 +2145,7 @@ void fineDiff(
       ++listIdx;
       pp.setCurrent(double(listIdx)/listSize);
    }
+   return bTextsTotalEqual;
 }
 
 
