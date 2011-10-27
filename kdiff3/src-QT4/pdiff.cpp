@@ -492,37 +492,44 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
    {
       // 1. If the filenames are equal then show only one filename
       QString caption;
-      QString a1 = m_sd1.getAliasName();
-      QString a2 = m_sd2.getAliasName();
-      QString a3 = m_sd3.getAliasName();
-      QString f1, f2, f3;
-      int p1,p2,p3;
-      if ( !a1.isEmpty() &&  (p1=a1.lastIndexOf('/'))>=0 )
-         f1 = a1.mid( p1+1 );
-      if ( !a2.isEmpty() &&  (p2=a2.lastIndexOf('/'))>=0 )
-         f2 = a2.mid( p2+1 );
-      if ( !a3.isEmpty() &&  (p3=a3.lastIndexOf('/'))>=0 )
-         f3 = a3.mid( p3+1 );
+      QString f1 = m_sd1.getAliasName();
+      QString f2 = m_sd2.getAliasName();
+      QString f3 = m_sd3.getAliasName();
+      int p;
+      if ( (p=f1.indexOf("@@"))>=0 )
+         f1 = f1.left( p );
+      if ( (p=f2.indexOf("@@"))>=0 )
+         f2 = f2.left( p );
+      if ( (p=f3.indexOf("@@"))>=0 )
+         f3 = f3.left( p );
+
+      if ( (p=f1.lastIndexOf('/'))>=0 || (p=f1.lastIndexOf('\\'))>=0 )
+         f1 = f1.mid( p+1 );
+      if ( (p=f2.lastIndexOf('/'))>=0 || (p=f2.lastIndexOf('\\'))>=0)
+         f2 = f2.mid( p+1 );
+      if ( (p=f3.lastIndexOf('/'))>=0 || (p=f3.lastIndexOf('\\'))>=0 )
+         f3 = f3.mid( p+1 );
+
       if ( !f1.isEmpty() ) 
       {
          if ( ( f2.isEmpty() && f3.isEmpty() ) || 
               (f2.isEmpty() && f1==f3) || ( f3.isEmpty() && f1==f2 ) || (f1==f2 && f1==f3)) 
-            caption = ".../"+f1;
+            caption = f1;
       }
       else if ( ! f2.isEmpty() ) 
       {
          if ( f3.isEmpty() || f2==f3 ) 
-            caption = ".../"+f2;
+            caption = f2;
       }
       else if ( ! f3.isEmpty() ) 
-         caption = ".../"+f3;
+         caption = f3;
 
       // 2. If the files don't have the same name then show all names
       if ( caption.isEmpty() && (!f1.isEmpty() || !f2.isEmpty() || !f3.isEmpty()) )
       {
-         caption = ( f1.isEmpty()? QString("") : QString(".../")+f1 );
-         caption += QString(caption.isEmpty() || f2.isEmpty() ? "" : " <-> ") + ( f2.isEmpty()? QString("") : QString(".../")+f2 );
-         caption += QString(caption.isEmpty() || f3.isEmpty() ? "" : " <-> ") + ( f3.isEmpty()? QString("") : QString(".../")+f3 ) ;
+         caption = ( f1.isEmpty()? QString("") : f1 );
+         caption += QString(caption.isEmpty() || f2.isEmpty() ? "" : " <-> ") + ( f2.isEmpty()? QString("") : f2 );
+         caption += QString(caption.isEmpty() || f3.isEmpty() ? "" : " <-> ") + ( f3.isEmpty()? QString("") : f3 ) ;
       }
 
       m_pKDiff3Shell->setWindowTitle( caption.isEmpty() ? QString("KDiff3") : caption+QString(" - KDiff3"));
