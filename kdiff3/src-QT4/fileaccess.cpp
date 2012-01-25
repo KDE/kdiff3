@@ -180,8 +180,10 @@ static QString nicePath( const QFileInfo& fi )
 
 void FileAccess::setFile( const QFileInfo& fi, FileAccess* pParent )
 {
+   m_filePath   = nicePath( fi.filePath() ); // remove "./" at start   
+
    m_bSymLink   = fi.isSymLink();
-   if ( m_bSymLink && !m_bUseData )
+   if ( ( m_bSymLink || (!m_bExists  && m_filePath.contains("@@") ) )&& !m_bUseData )
    {
       m_pData = new Data;
       m_bUseData = true;
@@ -192,8 +194,6 @@ void FileAccess::setFile( const QFileInfo& fi, FileAccess* pParent )
    else
       m_pParent = pParent;
    
-   m_filePath   = nicePath( fi.filePath() ); // remove "./" at start   
-
    if ( parent() || d() ) // if a parent is specified then we arrive here because of listing a directory
    {
       m_bFile      = fi.isFile();
@@ -258,6 +258,8 @@ void FileAccess::setFile( const QFileInfo& fi, FileAccess* pParent )
 #endif
          //d()->m_creationTime = fi.created();
          //d()->m_accessTime = fi.lastRead();
+         m_bExists = fi.exists();
+         m_size = fi.size();
       }
    }
 }
