@@ -92,10 +92,12 @@ public:
 private:
    void setUdsEntry( const KIO::UDSEntry& e );
    void setFile( const QFileInfo& fi, FileAccess* pParent );
+   void setStatusText( const QString& s );
 
    class Data;
    Data* d();
    const Data* d() const;
+   void createData();
 
    union
    {
