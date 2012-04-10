@@ -36,8 +36,6 @@
 #include <kstatusbar.h>
 #include <klocale.h>
 
-#include <iostream>
-
 #include <QStatusBar>
 #include <QCloseEvent>
 #include <ktoolbar.h>

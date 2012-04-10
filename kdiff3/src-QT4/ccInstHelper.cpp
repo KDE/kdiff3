@@ -1,6 +1,5 @@
 // uninstallHelper.cpp : Defines the entry point for the console application.
 //
-#include <iostream>
 #include <string>
 #include <vector>
 #include <list>
@@ -196,7 +195,7 @@ int integrateWithClearCase( const char* subCommand, const char* kdiff3CommandPat
          bool bSuccess = readAndParseMapFile( path, lineItemList );
          if ( !bSuccess )
          {
-            std::cerr << "Error reading original map file.\n";
+            fprintf(stderr, "Error reading original map file.\n");
             return -1;
          }
 
@@ -205,7 +204,7 @@ int integrateWithClearCase( const char* subCommand, const char* kdiff3CommandPat
          {
             if ( rename( path.c_str(), bakName.c_str() ) )
             {
-               std::cerr << "Error renaming original map file.\n";
+               fprintf(stderr, "Error renaming original map file.\n");
                return -1;
             }
          }
@@ -231,9 +230,9 @@ int integrateWithClearCase( const char* subCommand, const char* kdiff3CommandPat
          if ( !bSuccess )
          {
             if ( rename( bakName.c_str(), path.c_str() ) )
-               std::cerr << "Error writing new map file, restoring old file also failed.\n";
+               fprintf(stderr, "Error writing new map file, restoring old file also failed.\n");
             else
-               std::cerr << "Error writing new map file, old file restored.\n";
+               fprintf(stderr, "Error writing new map file, old file restored.\n");
 
             return -1;
          }
@@ -244,7 +243,7 @@ int integrateWithClearCase( const char* subCommand, const char* kdiff3CommandPat
          bool bSuccess = readAndParseMapFile( path, lineItemList );
          if ( !bSuccess )
          {
-            std::cerr << "Error reading original map file\n.";
+            fprintf(stderr, "Error reading original map file\n.");
             return -1;
          }
 
@@ -252,7 +251,7 @@ int integrateWithClearCase( const char* subCommand, const char* kdiff3CommandPat
          bSuccess = readAndParseMapFile( bakName, lineItemListBak );
          if ( !bSuccess )
          {
-            std::cerr << "Error reading backup map file.\n";
+            fprintf(stderr, "Error reading backup map file.\n");
             return -1;
          }
 
@@ -278,8 +277,7 @@ int integrateWithClearCase( const char* subCommand, const char* kdiff3CommandPat
          bSuccess = writeMapFile( path, lineItemList );
          if ( !bSuccess )
          {
-            std::cerr << "Error writing map file.";
-
+            fprintf(stderr, "Error writing map file.");
             return -1;
          }
       }
@@ -308,7 +306,7 @@ void __declspec(dllexport) nsisPlugin(HWND hwndParent, int string_size,
             install( param1.c_str(), param2.c_str() );
          return;
       }
-      std::cerr << "Not enough parameters." << std::endl;
+      fprintf(stderr, "Not enough parameters.\n");
    }
 }
 

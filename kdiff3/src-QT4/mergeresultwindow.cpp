@@ -50,7 +50,6 @@
 
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <iostream>
 
 int g_bAutoSolve = true;
 
@@ -3222,8 +3221,8 @@ void WindowTitleWidget::setLineEndStyles( e_LineEndStyle eLineEndStyleA, e_LineE
    if ( eLineEndStyleC == eLineEndStyleUnix )
       unxUsers += (unxUsers.isEmpty() ? "" : ", ") + QString("C");
 
-   m_pLineEndStyleSelector->addItem( i18n("Unix") + (unxUsers.isEmpty() ? "" : " (" + unxUsers + ")" )  );
-   m_pLineEndStyleSelector->addItem( i18n("DOS")  + (dosUsers.isEmpty() ? "" : " (" + dosUsers + ")" )  );
+   m_pLineEndStyleSelector->addItem( i18n("Unix") + (unxUsers.isEmpty() ? QString("") : " (" + unxUsers + ")" )  );
+   m_pLineEndStyleSelector->addItem( i18n("DOS")  + (dosUsers.isEmpty() ? QString("") : " (" + dosUsers + ")" )  );
 
    e_LineEndStyle autoChoice = (e_LineEndStyle)m_pOptionDialog->m_lineEndStyle;
 

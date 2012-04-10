@@ -17,8 +17,6 @@
 
 #include "merger.h"
 #include <assert.h>
-#include <iostream>
-#include <iomanip>
 
 Merger::Merger( const DiffList* pDiffListAB, const DiffList* pDiffListCA )
 : md1( pDiffListAB, 0 ), md2( pDiffListCA, 1 )

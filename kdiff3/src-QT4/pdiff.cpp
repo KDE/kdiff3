@@ -21,7 +21,6 @@
 #include "directorymergewindow.h"
 #include "smalldialogs.h"
 
-#include <iostream>
 #include <algorithm>
 #include <ctype.h>
 

@@ -52,8 +52,6 @@
 #include "diff.h"
 #include "smalldialogs.h"
 
-#include <iostream>
-
 #ifndef KREPLACEMENTS_H
 #include <kglobalsettings.h>
 #endif
@@ -1453,7 +1451,7 @@ static const char* countryMap[]={
       for(countryIdx=0; countryIdx< sizeof(countryMap)/sizeof(countryMap[0]); ++countryIdx )
       {
          QString fullName = countryMap[countryIdx];
-         if ( languageId+" " == fullName.left(languageId.length()+1) )
+         if ( QString(languageId+" ") == fullName.left(languageId.length()+1) )
          {
             languageId += " (" + fullName.mid(languageId.length()+1) + ")";
          }

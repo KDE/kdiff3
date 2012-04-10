@@ -33,7 +33,6 @@
 
 #include <kmessagebox.h>
 #include <klocale.h>
-#include <iostream>
 
 #include "version.h"
 
@@ -48,7 +47,7 @@ KDiff3Part::KDiff3Part( QWidget *parentWidget, const char *widgetName,
     m_widget = new KDiff3App( parentWidget, widgetName, this );
     
     // This hack is necessary to avoid a crash when the program terminates.
-    m_bIsShell = dynamic_cast<KParts::MainWindow*>(parentWidget)!=0;
+    m_bIsShell = qobject_cast<KParts::MainWindow*>(parentWidget)!=0;
 
     // notify the part that this is our internal widget
     setWidget(m_widget);
@@ -111,7 +110,7 @@ static void getNameAndVersion( const QString& str, const QString& lineStart, QSt
       { 
          while (pos2>pos && str[pos2]!=' ' && str[pos2]!='\t') --pos2;
          fileName = str.mid( pos, pos2-pos );
-         std::cerr << "KDiff3: " << fileName.toLatin1().constData() << std::endl;
+         fprintf(stderr, "KDiff3: %s\n", fileName.toLatin1().constData());
          if ( FileAccess(fileName).exists() ) break;
          --pos2;
       }
@@ -130,7 +129,7 @@ static void getNameAndVersion( const QString& str, const QString& lineStart, QSt
 bool KDiff3Part::openFile()
 {
    // m_file is always local so we can use QFile on it
-   std::cerr << "KDiff3: " << localFilePath().toLatin1().constData() << std::endl;
+   fprintf(stderr, "KDiff3: %s\n", localFilePath().toLatin1().constData());
    QFile file(localFilePath());
    if (file.open(QIODevice::ReadOnly) == false)
       return false;
@@ -202,7 +201,7 @@ bool KDiff3Part::openFile()
    }
    else if ( !version1.isEmpty() && !version2.isEmpty() )
    {
-   std::cerr << "KDiff3: f1/2:" << fileName1.toLatin1().constData() <<"<->"<<fileName2.toLatin1().constData()<< std::endl;
+      fprintf(stderr, "KDiff3: f1/2:%s<->%s\n", fileName1.toLatin1().constData(), fileName2.toLatin1().constData());
       // Assuming that files are on CVS: Try to get them
       // cvs update -p -r [REV] [FILE] > [OUTPUTFILE]
 

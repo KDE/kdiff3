@@ -577,6 +577,7 @@ namespace KParts
 {
    class MainWindow : public KMainWindow
    {
+      Q_OBJECT
    public:
       MainWindow( QWidget* parent=0 ) : KMainWindow(parent) {}
       void setXMLFile(const QString&){}

@@ -26,7 +26,11 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QPainter>
+
+#ifndef QT_NO_COLORDIALOG
 #include <QColorDialog>
+#endif
+
 #include <QFontDialog>
 #include <QLabel>
 #include <QTextBrowser>
@@ -42,7 +46,6 @@
 #include <QFileDialog>
 
 #include <vector>
-#include <iostream>
 #include <algorithm>
 
 
@@ -58,6 +61,7 @@ static KAboutData* s_pAboutData;
 #ifdef _WIN32
 #include <process.h>
 #include <windows.h>
+#include <shellapi.h>
 #endif
 
 static void showHelp()
@@ -310,6 +314,8 @@ KMainWindow::KMainWindow( QWidget* parent )
       
    memberList = new QList<KMainWindow*>;
    memberList->append(this);
+
+   raise();
 }
 
 KToolBar* KMainWindow::toolBar(const QString&)
@@ -836,9 +842,11 @@ void KColorButton::paintEvent( QPaintEvent* e )
 
 void KColorButton::slotClicked()
 {
+#ifndef QT_NO_COLORDIALOG
    // Under Windows ChooseColor() should be used. (Nicer if few colors exist.)
    QColor c = QColorDialog::getColor ( m_color, this );
    if ( c.isValid() ) m_color = c;
+#endif
    update();
 }
 
@@ -1143,7 +1151,7 @@ KApplication::KApplication()
             if ( 0==QMessageBox::information(0, i18n("KDiff3-Usage"), s, i18n("Ignore"),i18n("Exit") ) )
                continue;
 #else
-            std::cerr << s.toLatin1().constData() << std::endl;
+            fprintf(stderr, "%s\n", s.toLatin1().constData());
 #endif
 
             ::exit(-1);
@@ -1215,7 +1223,7 @@ KLibFactory* KLibLoader::factory(QString const&)
 
 QObject* KLibFactory::create(QObject* pParent, const QString& name, const QString& classname )
 {
-   KParts::Factory* f = dynamic_cast<KParts::Factory*>(this);
+   KParts::Factory* f = qobject_cast<KParts::Factory*>(this);
    if (f!=0)
       return f->createPartObject( (QWidget*)pParent, name.toAscii(),
                                             pParent, name.toAscii(),

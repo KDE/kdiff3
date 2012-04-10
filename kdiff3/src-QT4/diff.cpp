@@ -16,9 +16,8 @@
  ***************************************************************************/
 #include "stable.h"
 
-#include <stdio.h>
+#include <cstdio>
 #include <cstdlib>
-#include <iostream>
 
 #include "diff.h"
 #include "fileaccess.h"
@@ -1879,7 +1878,7 @@ void debugLineCheck( Diff3LineList& d3ll, int size, int idx )
                "If it is reproducible please contact the author.\n"
                ), i18n("Severe Internal Error") );
             assert(false);
-            std::cerr << "Severe Internal Error.\n";
+            fprintf(stderr, "Severe Internal Error.\n");
             ::exit(-1);
          }
          ++i;
@@ -1893,7 +1892,7 @@ void debugLineCheck( Diff3LineList& d3ll, int size, int idx )
          "If it is reproducible please contact the author.\n"
          ), i18n("Severe Internal Error") );
       assert(false);
-      std::cerr << "Severe Internal Error.\n";
+      fprintf(stderr, "Severe Internal Error.\n");
       ::exit(-1);
    }
 }

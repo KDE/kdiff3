@@ -18,8 +18,7 @@
 #include "difftextwindow.h"
 #include "mergeresultwindow.h"
 
-#include <iostream>
-#include <assert.h>
+#include <cassert>
 
 // include files for QT
 #include <QDir>
@@ -113,7 +112,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
 {
    setObjectName( "KDiff3App" );
    m_pKDiff3Part = pKDiff3Part;
-   m_pKDiff3Shell = dynamic_cast<KParts::MainWindow*>(pParent);
+   m_pKDiff3Shell = qobject_cast<KParts::MainWindow*>(pParent);
 
    setWindowTitle( "KDiff3" );
    setOpaqueResize(false); // faster resizing
@@ -191,8 +190,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
          pDialog->resize(600,400);
          pDialog->exec();
 #else
-         std::cerr << title.toLatin1().constData() << std::endl;
-         std::cerr << s.toLatin1().constData() << std::endl;
+         fprintf(stderr, "%s\n", title.toLatin1().constData());
+         fprintf(stderr, "%s\n", s.toLatin1().constData());
 #endif
          exit(1);
       }
@@ -216,7 +215,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
       if ( m_bAutoFlag )
       {
          //KMessageBox::information(this, i18n("Option --auto used, but no output file specified."));
-         std::cerr << (const char*)i18n("Option --auto used, but no output file specified.").toLatin1() << std::endl;
+         fprintf(stderr, "%s\n", (const char*)i18n("Option --auto used, but no output file specified.").toLatin1());
       }
       m_bAutoMode = false;
    }
@@ -366,7 +365,7 @@ void KDiff3App::completeInit( const QString& fn1, const QString& fn2, const QStr
 
    if ( m_bAutoFlag && m_bAutoMode && m_bDirCompare )
    {
-      std::cerr << (const char*)i18n("Option --auto ignored for directory comparison.").toLatin1()<<std::endl;
+      fprintf(stderr, "%s\n", (const char*)i18n("Option --auto ignored for directory comparison.").toLatin1());
       m_bAutoMode = false;
    }
    if (!m_bDirCompare)

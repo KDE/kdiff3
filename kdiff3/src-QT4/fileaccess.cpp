@@ -25,7 +25,7 @@
 
 #include <vector>
 #include <cstdlib>
-#include <iostream>
+
 #include <klocale.h>
 #include <ktemporaryfile.h>
 #include <kio/global.h>
@@ -308,10 +308,26 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
       if ( url.isLocalFile() || url.isRelative() || !url.isValid() || bExistsLocal ) // assuming that invalid means relative
       {
          QString localName = name;
+
+#if defined(Q_WS_WIN)
+         if ( !bExistsLocal )
+         {
+            // git on Cygwin will put files in /tmp
+            // A workaround for the a native kdiff3 binary to find them...
+         
+            QString cygwinBin = getenv("CYGWIN_BIN");
+            if (localName.startsWith("/tmp/") && !cygwinBin.isEmpty() )
+            {
+               localName = QString("%1\\..%2").arg(cygwinBin).arg(name);
+            }
+         }
+#endif
+
          if ( !bExistsLocal && url.isLocalFile() && name.left(5).toLower()=="file:" )
          {
             localName = url.path(); // I want the path without preceding "file:"
          }
+
          QFileInfo fi( localName );
          setFile( fi, 0 );
       }

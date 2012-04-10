@@ -45,7 +45,6 @@
 #include <klocale.h>
 #include <ktoggleaction.h>
 
-#include <iostream>
 #include <assert.h>
 //#include <konq_popupmenu.h>
 
