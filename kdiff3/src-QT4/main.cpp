@@ -27,6 +27,7 @@
 #include <QTranslator>
 #include <QLocale>
 #include <QFont>
+#include <QClipboard>
 #include <vector>
 
 #ifdef KREPLACEMENTS_H
@@ -250,9 +251,12 @@ int main(int argc, char *argv[])
   {
      KDiff3Shell* p = new KDiff3Shell();
      p->show();
+     p->setWindowState( p->windowState() | Qt::WindowActive ); // Patch for ubuntu: window not active on startup
   }
 //app.installEventFilter( new CFilter );
   int retVal = app.exec();
+  if (QApplication::clipboard()->text().size() == 0)
+     QApplication::clipboard()->clear(); // Patch for Ubuntu: Fix issue with Qt clipboard
   return retVal;
 }
 
