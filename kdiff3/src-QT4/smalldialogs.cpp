@@ -400,6 +400,12 @@ FindDialog::FindDialog(QWidget* pParent)
    hide();
 }
 
+void FindDialog::setVisible( bool bVisible )
+{
+   QDialog::setVisible( bVisible );
+   m_pSearchString->selectAll();
+   m_pSearchString->setFocus();
+}
 
 RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpToolTip,
    const QString& historyStartRegExpToolTip, const QString& historyEntryStartRegExpToolTip, const QString& historySortKeyOrderToolTip )

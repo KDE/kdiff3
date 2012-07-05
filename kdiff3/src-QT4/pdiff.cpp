@@ -1866,6 +1866,17 @@ void KDiff3App::slotEditFind()
    m_pFindDialog->currentLine = 0;
    m_pFindDialog->currentPos = 0;
    m_pFindDialog->currentWindow = 1;
+
+   // Use currently selected text:
+   QString s;
+   if (               m_pDiffTextWindow1!=0 )   s = m_pDiffTextWindow1->getSelection();
+   if ( s.isNull() && m_pDiffTextWindow2!=0 )   s = m_pDiffTextWindow2->getSelection();
+   if ( s.isNull() && m_pDiffTextWindow3!=0 )   s = m_pDiffTextWindow3->getSelection();
+   if ( s.isNull() && m_pMergeResultWindow!=0 ) s = m_pMergeResultWindow->getSelection();
+   if ( !s.isNull() && !s.contains('\n') )
+   {
+      m_pFindDialog->m_pSearchString->setText( s );
+   }   
    
    if ( QDialog::Accepted == m_pFindDialog->exec() )
    {
