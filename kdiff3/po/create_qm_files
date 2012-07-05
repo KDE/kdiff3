@@ -24,12 +24,19 @@
 export LANG=en_US.UTF-8
 echo "Create qm files (KDiff3 translation files for the qt-only version)"
 if [ "$1" = "local" ]; then
-   for i in `ls` ; do
+   if ["$2" = ""]; then
+      path=.
+   else
+      path=$2
+   fi
+   echo "destination: $path"
+
+   for i in `ls ` ; do
       if [ -s $i/kdiff3.po ]; then
          # (msg2qm is from "qt3-devel-tools"-package.)
          echo Creating ./kdiff3_$i.qm
          #/usr/lib/qt3/bin/msg2qm $i/kdiff3.po kdiff3_$i.qm
-         lconvert -if po -of qm -o kdiff3_$i.qm $i/kdiff3.po
+         lconvert -if po -of qm -o $path/kdiff3_$i.qm $i/kdiff3.po
       fi
    done
 elif [ "$1" = "install" ]; then
@@ -42,7 +49,7 @@ elif [ "$1" = "install" ]; then
       fi
    done
 else
-   echo Usage 1: sh create_qm_files local
-   echo Usage 2: sh create_qm_files install
+   echo "Usage 1: sh create_qm_files local <destination> (if empty current is used)"
+   echo "Usage 2: sh create_qm_files install"
 fi
 
