@@ -300,6 +300,7 @@ class KDiff3App : public QSplitter
    bool m_bTimerBlock;      // Synchronisation
 
    OptionDialog* m_pOptionDialog;
+   Options*      m_pOptions;
    FindDialog*   m_pFindDialog;
 
    void init( bool bAuto=false, TotalDiffStatus* pTotalDiffStatus=0, bool bLoadFiles=true, bool bUseCurrentEncoding = false);
@@ -309,8 +310,6 @@ class KDiff3App : public QSplitter
 
    bool improveFilenames(bool bCreateNewInstance);
 
-   bool runDiff( const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList, int winIdx1, int winIdx2 );
-   bool runDiff( const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList );
    bool canContinue();
 
    void choose(int choice);

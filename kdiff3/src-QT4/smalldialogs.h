@@ -23,7 +23,7 @@
 
 #include <QDialog>
 
-class OptionDialog;
+class Options;
 class QComboBox;
 class QCheckBox;
 class QLineEdit;
@@ -34,7 +34,7 @@ class OpenDialog : public QDialog
 public:
    OpenDialog(
       QWidget* pParent, const QString& n1, const QString& n2, const QString& n3,
-      bool bMerge, const QString& outputName, const char* slotConfigure, OptionDialog* pOptions  );
+      bool bMerge, const QString& outputName, const char* slotConfigure, Options* pOptions  );
 
    QComboBox* m_pLineA;
    QComboBox* m_pLineB;
@@ -45,7 +45,7 @@ public:
    virtual void accept();
    virtual bool eventFilter(QObject* o, QEvent* e);
 private:
-   OptionDialog* m_pOptions;
+   Options* m_pOptions;
    void selectURL( QComboBox* pLine, bool bDir, int i, bool bSave );
    bool m_bInputFileNameChanged;
 private slots:
@@ -102,7 +102,6 @@ private:
    QLineEdit* m_pHistoryEntryStartExampleEdit;
    QLineEdit* m_pHistoryEntryStartMatchResult;
    QLineEdit* m_pHistorySortKeyResult;
-   OptionDialog* m_pOptionDialog;
 public:
    RegExpTester( QWidget* pParent, const QString& autoMergeRegExpToolTip, const QString& historyStartRegExpToolTip, 
                                    const QString& historyEntryStartRegExpToolTip, const QString& historySortKeyOrderToolTip  );

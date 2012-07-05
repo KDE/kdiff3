@@ -20,7 +20,8 @@ set(kdiff3part_PART_SRCS
    gnudiff_io.cpp 
    gnudiff_xmalloc.cpp 
    common.cpp 
-   smalldialogs.cpp )
+   smalldialogs.cpp 
+   progress.cpp )
 
 kde4_add_plugin(kdiff3part WITH_PREFIX ${kdiff3part_PART_SRCS})
 

@@ -16,7 +16,8 @@
  ***************************************************************************/
 #include "stable.h"
 #include "directorymergewindow.h"
-#include "optiondialog.h"
+#include "options.h"
+#include "progress.h"
 #include <vector>
 #include <map>
 
@@ -320,7 +321,7 @@ public:
    FileAccess m_dirC;
    FileAccess m_dirDest;
    FileAccess m_dirDestInternal;
-   OptionDialog* m_pOptions;
+   Options* m_pOptions;
 
    void calcDirStatus( bool bThreeDirs, const QModelIndex& mi, 
       int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges );
@@ -646,8 +647,8 @@ public:
                                                    0 ;
             if ( i!=0 )
             {
-               OptionDialog* pOD = d->m_pOptions;
-               QColor c ( i==1 ? pOD->m_colorA : i==2 ? pOD->m_colorB : pOD->m_colorC );
+               Options* pOpts = d->m_pOptions;
+               QColor c ( i==1 ? pOpts->m_colorA : i==2 ? pOpts->m_colorB : pOpts->m_colorC );
                p->setPen( c );// highlight() );
                p->drawRect( x+2, y+yOffset, icon.width(), icon.height());
                p->setPen( QPen( c, 0, Qt::DotLine) );
@@ -681,7 +682,7 @@ public:
 };
 
 
-DirectoryMergeWindow::DirectoryMergeWindow( QWidget* pParent, OptionDialog* pOptions, KIconLoader* pIconLoader )
+DirectoryMergeWindow::DirectoryMergeWindow( QWidget* pParent, Options* pOptions, KIconLoader* pIconLoader )
    : QTreeView( pParent )
 {
    d = new Data(this);

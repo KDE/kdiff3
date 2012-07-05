@@ -24,10 +24,8 @@
 #include <assert.h>
 #include "common.h"
 #include "fileaccess.h"
-#include "optiondialog.h"
+#include "options.h"
 
-
-class OptionDialog;
 
 // Each range with matching elements is followed by a range with differences on either side.
 // Then again range of matching elements should follow.
@@ -246,7 +244,7 @@ public:
    SourceData();
    ~SourceData();
 
-   void setOptionDialog( OptionDialog* pOptionDialog );
+   void setOptions( Options* pOptions );
 
    int getSizeLines() const;
    int getSizeBytes() const;
@@ -267,10 +265,11 @@ public:
    bool isText();   // is it pure text (vs. binary data)
    bool isIncompleteConversion(); // true if some replacement characters were found
    bool isFromBuffer();  // was it set via setData() (vs. setFileAccess() or setFilename())
-   void setData( const QString& data );
+   QStringList setData( const QString& data );
    bool isValid(); // Either no file is specified or reading was successful
 
-   void readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode );
+   // Returns a list of error messages if anything went wrong
+   QStringList readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode );
    bool saveNormalDataAs( const QString& fileName );
 
    bool isBinaryEqualWith( const SourceData& other ) const;
@@ -284,7 +283,7 @@ private:
    QTextCodec* detectEncoding( const QString& fileName, QTextCodec* pFallbackCodec );
    QString m_aliasName;
    FileAccess m_fileAccess;
-   OptionDialog* m_pOptionDialog;
+   Options* m_pOptions;
    QString m_tempInputFileName;
 
    struct FileData
@@ -315,8 +314,6 @@ void calcDiff3LineListTrim( Diff3LineList& d3ll, const LineData* pldA, const Lin
 void calcWhiteDiff3Lines(   Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC );
 
 void calcDiff3LineVector( Diff3LineList& d3ll, Diff3LineVector& d3lv );
-
-void debugLineCheck( Diff3LineList& d3ll, int size, int idx );
 
 
 
@@ -364,8 +361,6 @@ public:
    int endPos()   { return firstLine==lastLine ? max2(firstPos,lastPos) :
                            firstLine<lastLine ? lastPos : firstPos;      }
 };
-
-class OptionDialog;
 
 
 // Helper class that swaps left and right for some commands.
@@ -422,6 +417,9 @@ public:
       QPainter::drawLine( m_xOffset + m_factor*x1, y1, m_xOffset + m_factor*x2, y2 );
    }
 };
+
+bool runDiff( const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList, int winIdx1, int winIdx2,
+              ManualDiffHelpList *pManualDiffHelpList, Options *pOptions);
 
 bool fineDiff(
    Diff3LineList& diff3LineList,

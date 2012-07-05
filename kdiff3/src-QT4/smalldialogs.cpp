@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 #include "smalldialogs.h"
-#include "optiondialog.h"
+#include "options.h"
 #include "diff.h"
 
 #include <QComboBox>
@@ -41,7 +41,7 @@
 
 OpenDialog::OpenDialog(
    QWidget* pParent, const QString& n1, const QString& n2, const QString& n3,
-   bool bMerge, const QString& outputName, const char* slotConfigure, OptionDialog* pOptions )
+   bool bMerge, const QString& outputName, const char* slotConfigure, Options* pOptions )
 : QDialog( pParent )
 {
    setObjectName("OpenDialog");

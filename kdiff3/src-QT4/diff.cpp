@@ -16,12 +16,13 @@
  ***************************************************************************/
 #include "stable.h"
 
-#include <cstdio>
 #include <cstdlib>
 
 #include "diff.h"
 #include "fileaccess.h"
-#include "optiondialog.h"
+#include "gnudiff_diff.h"
+#include "options.h"
+#include "progress.h"
 
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -154,7 +155,7 @@ Optimizations: Skip unneeded steps.
 
 SourceData::SourceData()
 {
-   m_pOptionDialog = 0;
+   m_pOptions = 0;
    reset();
 }
 
@@ -204,9 +205,9 @@ bool SourceData::isValid()
    return isEmpty() || hasData();
 }
 
-void SourceData::setOptionDialog( OptionDialog* pOptionDialog )
+void SourceData::setOptions( Options* pOptions )
 {
-   m_pOptionDialog = pOptionDialog;
+   m_pOptions = pOptions;
 }
 
 QString SourceData::getFilename()
@@ -239,8 +240,10 @@ void SourceData::setEncoding(QTextCodec* pEncoding)
     m_pEncoding = pEncoding;
 }
 
-void SourceData::setData( const QString& data )
+QStringList SourceData::setData( const QString& data )
 {
+   QStringList errors;
+
    // Create a temp file for preprocessing:
    if ( m_tempInputFileName.isEmpty() )
    {
@@ -252,12 +255,15 @@ void SourceData::setData( const QString& data )
    bool bSuccess = f.writeFile( ba.constData(), ba.length() );
    if ( !bSuccess )
    {
-      KMessageBox::error( m_pOptionDialog, i18n("Writing clipboard data to temp file failed.") );
-      return;
+      errors.append( i18n("Writing clipboard data to temp file failed.") );
+   }
+   else
+   {
+      m_aliasName = i18n("From Clipboard");
+      m_fileAccess = FileAccess("");  // Effect: m_fileAccess.isValid() is false
    }
 
-   m_aliasName = i18n("From Clipboard");
-   m_fileAccess = FileAccess("");  // Effect: m_fileAccess.isValid() is false
+   return errors;
 }
 
 const LineData* SourceData::getLineDataForDiff() const
@@ -602,13 +608,14 @@ static QString getArguments( QString cmd, QString& program, QStringList& args )
    return QString();
 }
 
-void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnicode )
+QStringList SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnicode )
 {
    m_pEncoding = pEncoding;
    QString fileNameIn1;
    QString fileNameOut1;
    QString fileNameIn2;
    QString fileNameOut2;
+   QStringList errors;
 
    bool bTempFileFromClipboard = !m_fileAccess.isValid();
 
@@ -656,7 +663,7 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
 #endif
 
       // Run the first preprocessor
-      if ( m_pOptionDialog->m_PreProcessorCmd.isEmpty() )
+      if ( m_pOptions->m_PreProcessorCmd.isEmpty() )
       {
          // No preprocessing: Read the file directly:
          m_normalData.readFile( fileNameIn1 );
@@ -665,15 +672,15 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
       {
          QString fileNameInPP = fileNameIn1;
 
-         if ( pEncoding1 != m_pOptionDialog->m_pEncodingPP )
+         if ( pEncoding1 != m_pOptions->m_pEncodingPP )
          {
             // Before running the preprocessor convert to the format that the preprocessor expects.
             fileNameInPP = FileAccess::tempFileName();
-            pEncoding1 = m_pOptionDialog->m_pEncodingPP;
+            pEncoding1 = m_pOptions->m_pEncodingPP;
             convertFileEncoding( fileNameIn1, pEncoding, fileNameInPP, pEncoding1 );
          }
 
-         QString ppCmd = m_pOptionDialog->m_PreProcessorCmd;
+         QString ppCmd = m_pOptions->m_PreProcessorCmd;
          fileNameOut1 = FileAccess::tempFileName();
 
          QProcess ppProcess;
@@ -694,11 +701,12 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
          bool bSuccess = errorReason.isEmpty() && m_normalData.readFile( fileNameOut1 );
          if ( fileInSize >0 && ( !bSuccess || m_normalData.m_size==0 ) )
          {
-            KMessageBox::error(m_pOptionDialog, 
+
+            errors.append(
                i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
                   "\n\nThe preprocessing command will be disabled now."
                ).arg(ppCmd) + errorReason );
-            m_pOptionDialog->m_PreProcessorCmd = "";
+            m_pOptions->m_PreProcessorCmd = "";
             m_normalData.readFile( fileNameIn1 );
             pEncoding1 = m_pEncoding;
          }
@@ -709,20 +717,20 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
       }
 
       // LineMatching Preprocessor
-      if ( ! m_pOptionDialog->m_LineMatchingPreProcessorCmd.isEmpty() )
+      if ( ! m_pOptions->m_LineMatchingPreProcessorCmd.isEmpty() )
       {
          fileNameIn2 = fileNameOut1.isEmpty() ? fileNameIn1 : fileNameOut1;
          QString fileNameInPP = fileNameIn2;
          pEncoding2 = pEncoding1;
-         if ( pEncoding2 != m_pOptionDialog->m_pEncodingPP )
+         if ( pEncoding2 != m_pOptions->m_pEncodingPP )
          {
             // Before running the preprocessor convert to the format that the preprocessor expects.
             fileNameInPP = FileAccess::tempFileName();
-            pEncoding2 = m_pOptionDialog->m_pEncodingPP;
+            pEncoding2 = m_pOptions->m_pEncodingPP;
             convertFileEncoding( fileNameIn2, pEncoding1, fileNameInPP, pEncoding2 );
          }
 
-         QString ppCmd = m_pOptionDialog->m_LineMatchingPreProcessorCmd;
+         QString ppCmd = m_pOptions->m_LineMatchingPreProcessorCmd;
          fileNameOut2 = FileAccess::tempFileName();
          QProcess ppProcess;
          ppProcess.setStandardInputFile( fileNameInPP );
@@ -742,11 +750,11 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
          bool bSuccess = errorReason.isEmpty() && m_lmppData.readFile( fileNameOut2 );
          if ( FileAccess(fileNameIn2).size()>0 && ( !bSuccess || m_lmppData.m_size==0 ) )
          {
-            KMessageBox::error(m_pOptionDialog, 
+            errors.append(
                i18n("The line-matching-preprocessing possibly failed. Check this command:\n\n  %1"
                     "\n\nThe line-matching-preprocessing command will be disabled now."
                    ).arg(ppCmd) + errorReason );
-            m_pOptionDialog->m_LineMatchingPreProcessorCmd = "";
+            m_pOptions->m_LineMatchingPreProcessorCmd = "";
             m_lmppData.readFile( fileNameIn2 );
          }
          FileAccess::removeTempFile( fileNameOut2 );
@@ -755,7 +763,7 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
             FileAccess::removeTempFile( fileNameInPP );
          }
       }
-      else if ( m_pOptionDialog->m_bIgnoreComments || m_pOptionDialog->m_bIgnoreCase )
+      else if ( m_pOptions->m_bIgnoreComments || m_pOptions->m_bIgnoreCase )
       {
          // We need a copy of the normal data.
          m_lmppData.copyBufFrom( m_normalData );
@@ -766,7 +774,7 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
       }
    }
 
-   m_normalData.preprocess( m_pOptionDialog->m_bPreserveCarriageReturn, pEncoding1 );
+   m_normalData.preprocess( m_pOptions->m_bPreserveCarriageReturn, pEncoding1 );
    m_lmppData.preprocess( false, pEncoding2 );
 
    if ( m_lmppData.m_vSize < m_normalData.m_vSize )
@@ -782,7 +790,7 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
    }
 
    // Internal Preprocessing: Uppercase-conversion   
-   if ( m_pOptionDialog->m_bIgnoreCase )
+   if ( m_pOptions->m_bIgnoreCase )
    {
       int i;
       QChar* pBuf = const_cast<QChar*>(m_lmppData.m_unicodeBuf.unicode());
@@ -794,7 +802,7 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
    }
 
    // Ignore comments
-   if ( m_pOptionDialog->m_bIgnoreComments )
+   if ( m_pOptions->m_bIgnoreComments )
    {
       m_lmppData.removeComments();
       int vSize = min2(m_normalData.m_vSize, m_lmppData.m_vSize);
@@ -816,6 +824,8 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
       FileAccess::removeTempFile( fileNameOut1 );
       fileNameOut1="";
    }
+
+   return errors;
 }
 
 
@@ -1429,6 +1439,185 @@ static bool isValidMove( ManualDiffHelpList* pManualDiffHelpList, int line1, int
    return true; // no barrier passed.
 }
 
+static bool runDiff( const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList,
+                     Options *pOptions)
+{
+   ProgressProxy pp;
+   static GnuDiff gnuDiff;  // All values are initialized with zeros.
+
+   pp.setCurrent(0);
+
+   diffList.clear();
+   if ( p1[0].pLine==0 || p2[0].pLine==0 || size1==0 || size2==0 )
+   {
+      Diff d( 0,0,0);
+      if ( p1[0].pLine==0 && p2[0].pLine==0 && size1 == size2 )
+         d.nofEquals = size1;
+      else
+      {
+         d.diff1=size1;
+         d.diff2=size2;
+      }
+
+      diffList.push_back(d);
+   }
+   else
+   {
+      GnuDiff::comparison comparisonInput;
+      memset( &comparisonInput, 0, sizeof(comparisonInput) );
+      comparisonInput.parent = 0;
+      comparisonInput.file[0].buffer = p1[0].pLine;//ptr to buffer
+      comparisonInput.file[0].buffered = (p1[size1-1].pLine-p1[0].pLine+p1[size1-1].size); // size of buffer
+      comparisonInput.file[1].buffer = p2[0].pLine;//ptr to buffer
+      comparisonInput.file[1].buffered = (p2[size2-1].pLine-p2[0].pLine+p2[size2-1].size); // size of buffer
+
+      gnuDiff.ignore_white_space = GnuDiff::IGNORE_ALL_SPACE;  // I think nobody needs anything else ...
+      gnuDiff.bIgnoreWhiteSpace = true;
+      gnuDiff.bIgnoreNumbers    = pOptions->m_bIgnoreNumbers;
+      gnuDiff.minimal = pOptions->m_bTryHard;
+      gnuDiff.ignore_case = false;
+      GnuDiff::change* script = gnuDiff.diff_2_files( &comparisonInput );
+
+      int equalLinesAtStart =  comparisonInput.file[0].prefix_lines;
+      int currentLine1 = 0;
+      int currentLine2 = 0;
+      GnuDiff::change* p=0;
+      for (GnuDiff::change* e = script; e; e = p)
+      {
+         Diff d(0,0,0);
+         d.nofEquals = e->line0 - currentLine1;
+         assert( d.nofEquals == e->line1 - currentLine2 );
+         d.diff1 = e->deleted;
+         d.diff2 = e->inserted;
+         currentLine1 += d.nofEquals + d.diff1;
+         currentLine2 += d.nofEquals + d.diff2;
+         diffList.push_back(d);
+
+         p = e->link;
+         free (e);
+      }
+
+      if ( diffList.empty() )
+      {
+         Diff d(0,0,0);
+         d.nofEquals = min2(size1,size2);
+         d.diff1 = size1 - d.nofEquals;
+         d.diff2 = size2 - d.nofEquals;
+         diffList.push_back(d);
+/*         Diff d(0,0,0);
+         d.nofEquals = equalLinesAtStart;
+         if ( gnuDiff.files[0].missing_newline != gnuDiff.files[1].missing_newline )
+         {
+            d.diff1 = gnuDiff.files[0].missing_newline ? 0 : 1;
+            d.diff2 = gnuDiff.files[1].missing_newline ? 0 : 1;
+            ++d.nofEquals;
+         }
+         else if ( !gnuDiff.files[0].missing_newline )
+         {
+            ++d.nofEquals;
+         }
+         diffList.push_back(d);
+*/
+      }
+      else
+      {
+         diffList.front().nofEquals += equalLinesAtStart;   
+         currentLine1 += equalLinesAtStart;
+         currentLine2 += equalLinesAtStart;
+
+         int nofEquals = min2(size1-currentLine1,size2-currentLine2);
+         if ( nofEquals==0 )
+         {
+            diffList.back().diff1 += size1-currentLine1;
+            diffList.back().diff2 += size2-currentLine2;
+         }
+         else
+         {
+            Diff d( nofEquals,size1-currentLine1-nofEquals,size2-currentLine2-nofEquals);
+            diffList.push_back(d);
+         }
+
+         /*
+         if ( gnuDiff.files[0].missing_newline != gnuDiff.files[1].missing_newline )
+         {
+            diffList.back().diff1 += gnuDiff.files[0].missing_newline ? 0 : 1;
+            diffList.back().diff2 += gnuDiff.files[1].missing_newline ? 0 : 1;
+         }
+         else if ( !gnuDiff.files[0].missing_newline )
+         {
+            ++ diffList.back().nofEquals;
+         }
+         */
+      }
+   }
+
+#ifndef NDEBUG
+   // Verify difflist
+   {
+      int l1=0;
+      int l2=0;
+      DiffList::iterator i;
+      for( i = diffList.begin(); i!=diffList.end(); ++i )
+      {
+         l1+= i->nofEquals + i->diff1;
+         l2+= i->nofEquals + i->diff2;
+      }
+
+      //if( l1!=p1-p1start || l2!=p2-p2start )
+      if( l1!=size1 || l2!=size2 )
+         assert( false );
+   }
+#endif
+
+   pp.setCurrent(1.0);
+
+   return true;
+}
+
+bool runDiff( const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList,
+              int winIdx1, int winIdx2,
+              ManualDiffHelpList *pManualDiffHelpList,
+              Options *pOptions)
+{
+   diffList.clear();
+   DiffList diffList2;
+
+   int l1begin = 0;
+   int l2begin = 0;
+   ManualDiffHelpList::const_iterator i;
+   for( i = pManualDiffHelpList->begin(); i!=pManualDiffHelpList->end(); ++i )
+   {
+      const ManualDiffHelpEntry& mdhe = *i;
+
+      int l1end = winIdx1 == 1 ? mdhe.lineA1 : winIdx1==2 ? mdhe.lineB1 : mdhe.lineC1 ;
+      int l2end = winIdx2 == 1 ? mdhe.lineA1 : winIdx2==2 ? mdhe.lineB1 : mdhe.lineC1 ;
+
+      if ( l1end>=0 && l2end>=0 )
+      {
+         runDiff( p1+l1begin, l1end-l1begin, p2+l2begin, l2end-l2begin, diffList2, pOptions);
+         diffList.splice( diffList.end(), diffList2 );
+         l1begin = l1end;
+         l2begin = l2end;
+
+         l1end = winIdx1 == 1 ? mdhe.lineA2 : winIdx1==2 ? mdhe.lineB2 : mdhe.lineC2 ;
+         l2end = winIdx2 == 1 ? mdhe.lineA2 : winIdx2==2 ? mdhe.lineB2 : mdhe.lineC2 ;
+
+         if ( l1end>=0 && l2end>=0 )
+         {
+            ++l1end; // point to line after last selected line
+            ++l2end;
+            runDiff( p1+l1begin, l1end-l1begin, p2+l2begin, l2end-l2begin, diffList2, pOptions);
+            diffList.splice( diffList.end(), diffList2 );
+            l1begin = l1end;
+            l2begin = l2end;
+         }
+      }
+   }
+   runDiff( p1+l1begin, size1-l1begin, p2+l2begin, size2-l2begin, diffList2, pOptions);
+   diffList.splice( diffList.end(), diffList2 );
+   return true;
+}
+
 void correctManualDiffAlignment( Diff3LineList& d3ll, ManualDiffHelpList* pManualDiffHelpList )
 {
    if ( pManualDiffHelpList->empty() )
@@ -1852,48 +2041,6 @@ void calcWhiteDiff3Lines(
       i3->bWhiteLineA = ( (*i3).lineA == -1  ||  pldA==0 ||  pldA[(*i3).lineA].whiteLine() || pldA[(*i3).lineA].bContainsPureComment );
       i3->bWhiteLineB = ( (*i3).lineB == -1  ||  pldB==0 ||  pldB[(*i3).lineB].whiteLine() || pldB[(*i3).lineB].bContainsPureComment );
       i3->bWhiteLineC = ( (*i3).lineC == -1  ||  pldC==0 ||  pldC[(*i3).lineC].whiteLine() || pldC[(*i3).lineC].bContainsPureComment );
-   }
-}
-
-// Just make sure that all input lines are in the output too, exactly once.
-void debugLineCheck( Diff3LineList& d3ll, int size, int idx )
-{
-   Diff3LineList::iterator it = d3ll.begin();
-   int i=0;
-
-   for ( it = d3ll.begin(); it!= d3ll.end(); ++it )
-   {
-      int l=0;
-      if      (idx==1) l=(*it).lineA;
-      else if (idx==2) l=(*it).lineB;
-      else if (idx==3) l=(*it).lineC;
-      else assert(false);
-
-      if ( l!=-1 )
-      {
-         if( l!=i )
-         {
-            KMessageBox::error(0, i18n(
-               "Data loss error:\n"
-               "If it is reproducible please contact the author.\n"
-               ), i18n("Severe Internal Error") );
-            assert(false);
-            fprintf(stderr, "Severe Internal Error.\n");
-            ::exit(-1);
-         }
-         ++i;
-      }
-   }
-
-   if( size!=i )
-   {
-      KMessageBox::error(0, i18n(
-         "Data loss error:\n"
-         "If it is reproducible please contact the author.\n"
-         ), i18n("Severe Internal Error") );
-      assert(false);
-      fprintf(stderr, "Severe Internal Error.\n");
-      ::exit(-1);
    }
 }
 

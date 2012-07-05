@@ -9,6 +9,8 @@ HEADERS  = version.h                     \
            kdiff3.h                      \
            merger.h                      \
            optiondialog.h                \
+           options.h                     \
+           progress.h                    \
            kreplacements/kreplacements.h \
            directorymergewindow.h        \
            fileaccess.h                  \
@@ -25,6 +27,7 @@ SOURCES  = main.cpp                      \
            pdiff.cpp                     \
            directorymergewindow.cpp      \
            fileaccess.cpp                \
+           progress.cpp                  \
            smalldialogs.cpp              \
            kdiff3_shell.cpp              \
            kdiff3_part.cpp               \

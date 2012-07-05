@@ -31,7 +31,7 @@ class Overview : public QWidget
 {
    Q_OBJECT
 public:
-   Overview( OptionDialog* pOptions );
+   Overview( Options* pOptions );
 
    void init( Diff3LineList* pDiff3LineList, bool bTripleDiff );
    void reset();
@@ -49,7 +49,7 @@ signals:
    void setLine(int);
 private:
    const Diff3LineList* m_pDiff3LineList;
-   OptionDialog* m_pOptions;
+   Options* m_pOptions;
    bool m_bTripleDiff;
    int m_firstLine;
    int m_pageHeight;
@@ -100,7 +100,7 @@ class MergeResultWindow : public QWidget
 public:
    MergeResultWindow(
       QWidget* pParent,
-      OptionDialog* pOptionDialog,
+      Options* pOptions,
       QStatusBar* pStatusBar
       );
 
@@ -176,7 +176,7 @@ private:
    void merge(bool bAutoSolve, int defaultSelector, bool bConflictsOnly=false, bool bWhiteSpaceOnly=false );
    QString getString( int lineIdx );
 
-   OptionDialog* m_pOptionDialog;
+   Options* m_pOptions;
 
    const LineData* m_pldA;
    const LineData* m_pldB;
@@ -436,9 +436,9 @@ private:
    QComboBox*   m_pLineEndStyleSelector;
    QLabel*      m_pEncodingLabel;
    QComboBox*   m_pEncodingSelector;
-   OptionDialog* m_pOptionDialog;
+   Options*     m_pOptions;
 public:
-   WindowTitleWidget(OptionDialog* pOptionDialog);
+   WindowTitleWidget(Options* pOptions);
    QTextCodec* getEncoding();
    void        setFileName(const QString& fileName );
    QString     getFileName();

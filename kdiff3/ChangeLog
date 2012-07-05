@@ -1,8 +1,12 @@
+- Memory usage optimized for comparison of large directories. (ca. 1/5 needed)
 - On Windows use config file .kdiff3rc next to kdiff3.exe if exists.
 - In overwiev for two way diff show if only one side contains text.
 - Fix for Fedora by Neal Becker in src-QT4/kdiff3part.desktop.
 - When word wrap is active toggling line numbers now recalculates the word wrap.
 - Removed confusing "For compatibility ..." hint from option -qall
+- Fixed mouse wheel problem. (Patch by David Hay)
+- Change an encoding in diff text window via click on encoding label. (Patch by Alexey Kostromin)
+- Fix for tab-key moving focus instead of adding a tab character in MergeResultWindow.
 
 Version 0.9.96 - 2011-09-02
 ===========================

@@ -26,7 +26,7 @@
 #include "fileaccess.h"
 #include "diff.h" //TotalDiffStatus
 
-class OptionDialog;
+class Options;
 class KIconLoader;
 class StatusInfo;
 class DirectoryMergeInfo;
@@ -60,7 +60,7 @@ class DirectoryMergeWindow : public QTreeView
 {
    Q_OBJECT
 public:
-   DirectoryMergeWindow( QWidget* pParent, OptionDialog* pOptions, KIconLoader* pIconLoader );
+   DirectoryMergeWindow( QWidget* pParent, Options* pOptions, KIconLoader* pIconLoader );
    ~DirectoryMergeWindow();
    void setDirectoryMergeInfo(DirectoryMergeInfo* p);
    bool init(

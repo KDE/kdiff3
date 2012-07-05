@@ -20,11 +20,11 @@
 
 #include "diff.h"
 
-#include <QWidget>
+#include <QLabel>
 
 class QMenu;
 class QStatusBar;
-class OptionDialog;
+class Options;
 class DiffTextWindowData;
 class DiffTextWindowFrame;
 class EncodingLabel;
@@ -36,7 +36,7 @@ public:
    DiffTextWindow(
       DiffTextWindowFrame* pParent,
       QStatusBar* pStatusBar,
-      OptionDialog* pOptionDialog,
+      Options* pOptions,
 
       int winIdx
       );
@@ -119,7 +119,7 @@ class DiffTextWindowFrame : public QWidget
 {
    Q_OBJECT
 public:
-   DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusBar, OptionDialog* pOptionDialog, int winIdx, SourceData* psd);
+   DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusBar, Options* pOptions, int winIdx, SourceData* psd);
    ~DiffTextWindowFrame();
    DiffTextWindow* getDiffTextWindow();
    void init();
@@ -142,7 +142,7 @@ class EncodingLabel : public QLabel
 {
    Q_OBJECT
 public:
-   EncodingLabel( const QString & text, DiffTextWindowFrame* pDiffTextWindowFrame, SourceData* psd, OptionDialog* pOptionDialog);
+   EncodingLabel( const QString & text, DiffTextWindowFrame* pDiffTextWindowFrame, SourceData* psd, Options* pOptions);
 protected:
    void mouseMoveEvent(QMouseEvent *ev);
    void mousePressEvent(QMouseEvent *ev);
@@ -153,7 +153,7 @@ private:
    QMenu* m_pContextEncodingMenu;
    SourceData* m_pSourceData; //SourceData to get access to "isEmpty()" and "isFromBuffer()" functions
    static const int m_maxRecentEncodings  = 5;
-   OptionDialog* m_pOptionDialog;
+   Options* m_pOptions;
 
    void insertCodec( const QString& visibleCodecName, QTextCodec* pCodec, QList<int> &CodecEnumList, QMenu* pMenu, int currentTextCodecEnum);
 };
