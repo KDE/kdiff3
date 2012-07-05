@@ -1089,7 +1089,7 @@ void OptionDialog::setupDirectoryMergePage( void )
 
    label = new QLabel( i18n("File-anti-pattern(s):"), page );
    gbox->addWidget( label, line, 0 );
-   OptionLineEdit* pFileAntiPattern = new OptionLineEdit( "*.orig;*.o;*.obj", "FileAntiPattern", &m_options.m_DmFileAntiPattern, page, this );
+   OptionLineEdit* pFileAntiPattern = new OptionLineEdit( "*.orig;*.o;*.obj;*.rej;*.bak", "FileAntiPattern", &m_options.m_DmFileAntiPattern, page, this );
    gbox->addWidget( pFileAntiPattern, line, 1 );
    label->setToolTip( i18n(
       "Pattern(s) of files to be excluded from analysis. \n"
@@ -1100,7 +1100,7 @@ void OptionDialog::setupDirectoryMergePage( void )
 
    label = new QLabel( i18n("Dir-anti-pattern(s):"), page );
    gbox->addWidget( label, line, 0 );
-   OptionLineEdit* pDirAntiPattern = new OptionLineEdit( "CVS;.deps;.svn", "DirAntiPattern", &m_options.m_DmDirAntiPattern, page, this );
+   OptionLineEdit* pDirAntiPattern = new OptionLineEdit( "CVS;.deps;.svn;.hg;.git", "DirAntiPattern", &m_options.m_DmDirAntiPattern, page, this );
    gbox->addWidget( pDirAntiPattern, line, 1 );
    label->setToolTip( i18n(
       "Pattern(s) of directories to be excluded from analysis. \n"
