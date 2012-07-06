@@ -16,7 +16,7 @@
 #endif
 
 struct ReplacementItem
-{ char* fileType; char* operationType; };
+{ const char* fileType; const char* operationType; };
 
 ReplacementItem g_replacementTable[] = {
    {"text_file_delta",   "xcompare"},

@@ -1588,12 +1588,8 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
 #else
          QString pattern ="*.*";
          WIN32_FIND_DATA findData;
-         WIN32_FIND_DATAA& findDataA=*(WIN32_FIND_DATAA*)&findData;  // Needed for Win95
 
-         Qt::HANDLE searchHandle = QT_WA_INLINE(
-                 FindFirstFile( (TCHAR*)pattern.utf16(), &findData ),
-                 FindFirstFileA( pattern.toLocal8Bit(), &findDataA )
-              );
+         Qt::HANDLE searchHandle = FindFirstFileW( (const wchar_t*)pattern.utf16(), &findData );
 
          if ( searchHandle != INVALID_HANDLE_VALUE )
          {
@@ -1604,18 +1600,13 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
             {
                if (!bFirst)
                {
-                  if ( ! QT_WA_INLINE(
-                            FindNextFile(searchHandle,&findData),
-                            FindNextFileA(searchHandle,&findDataA)) )
+                  if ( ! FindNextFileW(searchHandle,&findData) )
                      break;
                }
                bFirst = false;
                FileAccess fa;
 
-               fa.m_filePath = QT_WA_INLINE(
-                  QString::fromUtf16((const ushort*)findData.cFileName),
-                  QString::fromLocal8Bit(findDataA.cFileName)
-                  );
+               fa.m_filePath = QString::fromUtf16((const ushort*)findData.cFileName);
                if ( fa.m_filePath!="." && fa.m_filePath!=".." )
                {               
                   fa.m_size = ( qint64( findData.nFileSizeHigh ) << 32 ) + findData.nFileSizeLow;

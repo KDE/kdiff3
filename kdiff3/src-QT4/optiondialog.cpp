@@ -1719,7 +1719,7 @@ void OptionDialog::slotApply( void )
    emit applyDone();
 
 #ifdef _WIN32
-   QString locale = m_language;
+   QString locale = m_options.m_language;
    if ( locale == "Auto" || locale.isEmpty() )
       locale = QLocale::system().name().left(2);
    int spacePos = locale.indexOf(' ');

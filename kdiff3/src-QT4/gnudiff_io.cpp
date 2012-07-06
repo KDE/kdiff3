@@ -93,15 +93,15 @@ bool GnuDiff::lines_differ (const QChar *s1, size_t len1, const QChar *s2, size_
       else
       {
          while ( t1!=s1end &&
-                 ( bIgnoreWhiteSpace && isWhite( *t1 )  ||
-                   bIgnoreNumbers    && (t1->isDigit() || *t1=='-' || *t1=='.' )))
+                 ( (bIgnoreWhiteSpace && isWhite( *t1 ))  ||
+                   (bIgnoreNumbers    && (t1->isDigit()  || *t1=='-' || *t1=='.' ))))
          {
             ++t1;
          }
 
          while ( t2 != s2end &&
-                 ( bIgnoreWhiteSpace && isWhite( *t2 )  ||
-                   bIgnoreNumbers    && (t2->isDigit() || *t2=='-' || *t2=='.' )))
+                 ( (bIgnoreWhiteSpace && isWhite( *t2 ))  ||
+                   (bIgnoreNumbers    && (t2->isDigit() || *t2=='-' || *t2=='.' ))))
          {
             ++t2;
          }
@@ -168,7 +168,7 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 	  case IGNORE_ALL_SPACE:
 	    while ( p<bufend && (c = *p) != '\n' )
             {
-	      if (! (isWhite(c) || bIgnoreNumbers && (c.isDigit() || c=='-' || c=='.' ) ))
+          if (! (isWhite(c) || (bIgnoreNumbers && (c.isDigit() || c=='-' || c=='.' )) ))
                   h = HASH (h, c.toLower().unicode());
               ++p;
             }            
@@ -188,7 +188,7 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 	  case IGNORE_ALL_SPACE:
 	    while ( p<bufend && (c = *p) != '\n')
             {
-	      if (! (isWhite(c)|| bIgnoreNumbers && (c.isDigit() || c=='-' || c=='.' ) ))
+          if (! (isWhite(c)|| (bIgnoreNumbers && (c.isDigit() || c=='-' || c=='.' )) ))
                  h = HASH (h, c.unicode());
               ++p;
             }
