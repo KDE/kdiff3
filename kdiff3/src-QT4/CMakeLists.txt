@@ -23,13 +23,13 @@ set(kdiff3part_PART_SRCS
    smalldialogs.cpp 
    progress.cpp )
 
-kde4_add_plugin(kdiff3part WITH_PREFIX ${kdiff3part_PART_SRCS})
+#kde4_add_plugin(kdiff3part WITH_PREFIX ${kdiff3part_PART_SRCS})
 
-set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
+#set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
 
-target_link_libraries(kdiff3part  ${KDE4_KPARTS_LIBS} ${QT_QT3SUPPORT_LIBRARY})
+#target_link_libraries(kdiff3part  ${KDE4_KPARTS_LIBS} ${QT_QT3SUPPORT_LIBRARY})
 
-install(TARGETS kdiff3part DESTINATION ${PLUGIN_INSTALL_DIR} )
+#install(TARGETS kdiff3part DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 ########### kdiff3 executable ###############
 
