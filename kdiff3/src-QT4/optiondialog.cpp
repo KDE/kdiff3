@@ -76,6 +76,7 @@ public:
       assert(pOptionDialog!=0);
       pOptionDialog->addOptionItem( this );
       m_saveName = saveName;
+      m_bPreserved = false;
    }
    virtual ~OptionItem(){}
    virtual void setToDefault()=0;
@@ -83,77 +84,93 @@ public:
    virtual void apply()=0;
    virtual void write(ValueMap*)=0;
    virtual void read(ValueMap*)=0;
+   void doPreserve(){ if (!m_bPreserved){ m_bPreserved=true; preserve(); } }
+   void doUnpreserve(){ if( m_bPreserved ){ unpreserve(); } }
    QString getSaveName(){return m_saveName;}
 protected:
+   virtual void preserve()=0;
+   virtual void unpreserve()=0;
+   bool m_bPreserved;
    QString m_saveName;
 };
 
-class OptionCheckBox : public QCheckBox, public OptionItem
+template <class T>
+class OptionItemT : public OptionItem
+{
+public:
+  OptionItemT( OptionDialog* pOptionDialog, const QString& saveName ) 
+  : OptionItem(pOptionDialog,saveName ) 
+  {}
+  
+protected:
+   virtual void preserve(){ m_preservedVal = *m_pVar; }
+   virtual void unpreserve(){ *m_pVar = m_preservedVal; }
+   T* m_pVar;
+   T m_preservedVal;
+   T m_defaultVal;
+};
+
+class OptionCheckBox : public QCheckBox, public OptionItemT<bool>
 {
 public:
    OptionCheckBox( QString text, bool bDefaultVal, const QString& saveName, bool* pbVar,
                    QWidget* pParent, OptionDialog* pOD )
-   : QCheckBox( text, pParent ), OptionItem( pOD, saveName )
+   : QCheckBox( text, pParent ), OptionItemT<bool>( pOD, saveName )
    {
-      m_pbVar = pbVar;
-      m_bDefaultVal = bDefaultVal;
+      m_pVar = pbVar;
+      m_defaultVal = bDefaultVal;
    }
-   void setToDefault(){ setChecked( m_bDefaultVal );      }
-   void setToCurrent(){ setChecked( *m_pbVar );           }
-   void apply()       { *m_pbVar = isChecked();                              }
-   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pbVar );   }
-   void read (ValueMap* config){ *m_pbVar = config->readBoolEntry( m_saveName, *m_pbVar ); }
+   void setToDefault(){ setChecked( m_defaultVal );      }
+   void setToCurrent(){ setChecked( *m_pVar );           }
+   void apply()       { *m_pVar = isChecked();                              }
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pVar );   }
+   void read (ValueMap* config){ *m_pVar = config->readBoolEntry( m_saveName, *m_pVar ); }
 private:
    OptionCheckBox( const OptionCheckBox& ); // private copy constructor without implementation
-   bool* m_pbVar;
-   bool m_bDefaultVal;
 };
 
-class OptionRadioButton : public QRadioButton, public OptionItem
+class OptionRadioButton : public QRadioButton, public OptionItemT<bool>
 {
 public:
    OptionRadioButton( QString text, bool bDefaultVal, const QString& saveName, bool* pbVar,
                    QWidget* pParent, OptionDialog* pOD )
-   : QRadioButton( text, pParent ), OptionItem( pOD, saveName )
+   : QRadioButton( text, pParent ), OptionItemT<bool>( pOD, saveName )
    {
-      m_pbVar = pbVar;
-      m_bDefaultVal = bDefaultVal;
+      m_pVar = pbVar;
+      m_defaultVal = bDefaultVal;
    }
-   void setToDefault(){ setChecked( m_bDefaultVal );      }
-   void setToCurrent(){ setChecked( *m_pbVar );           }
-   void apply()       { *m_pbVar = isChecked();                              }
-   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pbVar );   }
-   void read (ValueMap* config){ *m_pbVar = config->readBoolEntry( m_saveName, *m_pbVar ); }
+   void setToDefault(){ setChecked( m_defaultVal );      }
+   void setToCurrent(){ setChecked( *m_pVar );           }
+   void apply()       { *m_pVar = isChecked();                              }
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pVar );   }
+   void read (ValueMap* config){ *m_pVar = config->readBoolEntry( m_saveName, *m_pVar ); }
 private:
    OptionRadioButton( const OptionRadioButton& ); // private copy constructor without implementation
-   bool* m_pbVar;
-   bool m_bDefaultVal;
 };
 
 
 template<class T>
-class OptionT : public OptionItem
+class OptionT : public OptionItemT<T>
 {
 public:
    OptionT( const T& defaultVal, const QString& saveName, T* pVar, OptionDialog* pOD )
-   : OptionItem( pOD, saveName )
+   : OptionItemT<T>( pOD, saveName )
    {
-      m_pVar = pVar;
-      *m_pVar = defaultVal;
+      this->m_pVar = pVar;
+      *this->m_pVar = defaultVal;
    }
    OptionT( const QString& saveName, T* pVar, OptionDialog* pOD )
-   : OptionItem( pOD, saveName )
+   : OptionItemT<T>( pOD, saveName )
    {
-      m_pVar = pVar;
+      this->m_pVar = pVar;
    }
    void setToDefault(){}
    void setToCurrent(){}
    void apply()       {}
-   void write(ValueMap* vm){ writeEntry( vm, m_saveName, *m_pVar ); }
-   void read (ValueMap* vm){ *m_pVar = vm->readEntry ( m_saveName, *m_pVar ); }
+   void write(ValueMap* vm){ writeEntry( vm, this->m_saveName, *this->m_pVar ); }
+   void read (ValueMap* vm){ *this->m_pVar = vm->readEntry ( this->m_saveName, *this->m_pVar ); }
 private:
    OptionT( const OptionT& ); // private copy constructor without implementation
-   T* m_pVar;
 };
 
 template <class T> void writeEntry(ValueMap* vm, const QString& saveName, const T& v ) {   vm->writeEntry( saveName, v ); }
@@ -171,33 +188,31 @@ typedef OptionT<QPoint> OptionPoint;
 typedef OptionT<QSize> OptionSize;
 typedef OptionT<QStringList> OptionStringList;
 
-class OptionFontChooser : public KFontChooser, public OptionItem
+class OptionFontChooser : public KFontChooser, public OptionItemT<QFont>
 {
 public:
-   OptionFontChooser( const QFont& defaultVal, const QString& saveName, QFont* pbVar, QWidget* pParent, OptionDialog* pOD ) :
+   OptionFontChooser( const QFont& defaultVal, const QString& saveName, QFont* pVar, QWidget* pParent, OptionDialog* pOD ) :
        KFontChooser( pParent ),
-       OptionItem( pOD, saveName )
+       OptionItemT<QFont>( pOD, saveName )
    {
-      m_pbVar = pbVar;
-      *m_pbVar = defaultVal;
-      m_default = defaultVal;
+      m_pVar = pVar;
+      *m_pVar = defaultVal;
+      m_defaultVal = defaultVal;
    }
-   void setToDefault(){ setFont( m_default, true /*only fixed*/ ); }
-   void setToCurrent(){ setFont( *m_pbVar, true /*only fixed*/ ); }
-   void apply()       { *m_pbVar = font();}
-   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pbVar );   }
-   void read (ValueMap* config){ *m_pbVar = config->readFontEntry( m_saveName, m_pbVar ); }
+   void setToDefault(){ setFont( m_defaultVal, true /*only fixed*/ ); }
+   void setToCurrent(){ setFont( *m_pVar, true /*only fixed*/ ); }
+   void apply()       { *m_pVar = font();}
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pVar );   }
+   void read (ValueMap* config){ *m_pVar = config->readFontEntry( m_saveName, m_pVar ); }
 private:
    OptionFontChooser( const OptionToggleAction& ); // private copy constructor without implementation
-   QFont* m_pbVar;
-   QFont m_default;
 };
 
-class OptionColorButton : public KColorButton, public OptionItem
+class OptionColorButton : public KColorButton, public OptionItemT<QColor>
 {
 public:
    OptionColorButton( QColor defaultVal, const QString& saveName, QColor* pVar, QWidget* pParent, OptionDialog* pOD )
-   : KColorButton( pParent ), OptionItem( pOD, saveName )
+   : KColorButton( pParent ), OptionItemT<QColor>( pOD, saveName )
    {
       m_pVar = pVar;
       m_defaultVal = defaultVal;
@@ -209,16 +224,14 @@ public:
    void read (ValueMap* config){ *m_pVar = config->readColorEntry( m_saveName, m_pVar ); }
 private:
    OptionColorButton( const OptionColorButton& ); // private copy constructor without implementation
-   QColor* m_pVar;
-   QColor m_defaultVal;
 };
 
-class OptionLineEdit : public QComboBox, public OptionItem
+class OptionLineEdit : public QComboBox, public OptionItemT<QString>
 {
 public:
    OptionLineEdit( const QString& defaultVal, const QString& saveName, QString* pVar,
                    QWidget* pParent, OptionDialog* pOD )
-   : QComboBox( pParent ), OptionItem( pOD, saveName )
+   : QComboBox( pParent ), OptionItemT<QString>( pOD, saveName )
    {
       setMinimumWidth(50);
       setEditable(true);
@@ -249,20 +262,18 @@ private:
       insertItems(0,m_list);
    }
    OptionLineEdit( const OptionLineEdit& ); // private copy constructor without implementation
-   QString* m_pVar;
-   QString m_defaultVal;
    QStringList m_list;
 };
 
 #if defined QT_NO_VALIDATOR
 #error No validator
 #endif
-class OptionIntEdit : public QLineEdit, public OptionItem
+class OptionIntEdit : public QLineEdit, public OptionItemT<int>
 {
 public:
    OptionIntEdit( int defaultVal, const QString& saveName, int* pVar, int rangeMin, int rangeMax,
                    QWidget* pParent, OptionDialog* pOD )
-   : QLineEdit( pParent ), OptionItem( pOD, saveName )
+   : QLineEdit( pParent ), OptionItemT<int>( pOD, saveName )
    {
       m_pVar = pVar;
       m_defaultVal = defaultVal;
@@ -279,8 +290,6 @@ public:
    void read (ValueMap* config){ *m_pVar = config->readNumEntry( m_saveName, *m_pVar ); }
 private:
    OptionIntEdit( const OptionIntEdit& ); // private copy constructor without implementation
-   int* m_pVar;
-   int m_defaultVal;
 };
 
 class OptionComboBox : public QComboBox, public OptionItem
@@ -330,10 +339,22 @@ public:
       if (m_pVarStr!=0)  setText( config->readEntry( m_saveName, currentText() ) );
       else               *m_pVarNum = config->readNumEntry( m_saveName, *m_pVarNum ); 
    }
+   void preserve()
+   {
+      if (m_pVarStr!=0)  { m_preservedStrVal = *m_pVarStr; }
+      else               { m_preservedNumVal = *m_pVarNum; }
+   }
+   void unpreserve()
+   {
+      if (m_pVarStr!=0)  { *m_pVarStr = m_preservedStrVal; }
+      else               { *m_pVarNum = m_preservedNumVal; }
+   }
 private:
    OptionComboBox( const OptionIntEdit& ); // private copy constructor without implementation
    int* m_pVarNum;
+   int m_preservedNumVal;
    QString* m_pVarStr;
+   QString m_preservedStrVal;
    int m_defaultVal;
    
    void setText(const QString& s)
@@ -451,6 +472,10 @@ public:
          }
       }
    }
+protected:
+   void preserve()   { m_preservedVal = currentIndex(); }
+   void unpreserve() { setCurrentIndex( m_preservedVal ); }
+   int m_preservedVal;
 };
 
 
@@ -1788,8 +1813,8 @@ public:
    void writeEntry(const QString& s, const QStringList& v, char separator ){ m_config.writeEntry(s,v,separator); }
    QStringList readListEntry (const QString& s, const QStringList& def, char separator )    { return m_config.readEntry(s, def ,separator ); }
 #else
-   void writeEntry(const QString& s, const QStringList& v, char separator ){ m_config.writeEntry(s,v); }
-   QStringList readListEntry (const QString& s, const QStringList& def, char separator )    { return m_config.readEntry(s, def ); }
+   void writeEntry(const QString& s, const QStringList& v, char /*separator*/ ){ m_config.writeEntry(s,v); }
+   QStringList readListEntry (const QString& s, const QStringList& def, char /*separator*/ )    { return m_config.readEntry(s, def ); }
 #endif
 };
 
@@ -1802,6 +1827,7 @@ void OptionDialog::saveOptions( KSharedConfigPtr config )
    std::list<OptionItem*>::iterator i;
    for(i=m_optionItemList.begin(); i!=m_optionItemList.end(); ++i)
    {
+      (*i)->doUnpreserve();
       (*i)->write(&cvm);
    }
 }
@@ -1839,8 +1865,9 @@ QString OptionDialog::parseOptions( const QStringList& optionList )
          {
             if ( (*j)->getSaveName()==key )
             {
+	       (*j)->doPreserve();
                ValueMap config;
-               config.writeEntry( key, val );  // Write the value as a string and
+               config.writeEntry( key, val );  // Write the value as a string and	       
                (*j)->read(&config);       // use the internal conversion from string to the needed value.
                bFound = true;
                break;
