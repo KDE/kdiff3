@@ -1,30 +1,74 @@
-#!/bin/sh
+#!/bin/bash
 # Manually created configure
+
+function showUsage {
+   printf "Usage: %s: [-d] [-o directory] [kde4|qt4] \n" $0
+   echo Example 1: $0 kde4
+   echo Example 2: $0 -d qt4
+   echo Options:
+   echo -d ... enable debug
+   echo -o \<dir\> ... specify other build directory
+   echo The default build directory is based on the specified arguments. E.g.: \"releaseKde\"
+   echo For requirements, more options and details in case of failure see the README.
+   exit 2
+}
+
 echo "configure for KDiff3 Qt4/KDE4 by Joachim Eibl"
+
+config=release
+outputDir=""
+currentDir=`pwd`
+
+while getopts do: flag
+do
+    case $flag in
+    d)   config="debug";;
+    o)   outputDir="$OPTARG";;
+    ?)   showUsage;;
+    esac
+done
+if [ ! -z "$debug" ]; then
+    printf "Option -d specified\n"
+fi
+
+shift $(($OPTIND - 1))
+#printf "Remaining arguments are: %s\n" "$*"
+
+
 if [ "$1" = "kde4" ]; then
+   if [ "$outputDir" = "" ]; then
+      outputDir="${config}Kde"
+   fi
    echo Trying to build for KDE4. If anything fails see the README for details.
-   echo Creating and entering subdir "release"
-   mkdir release                                  # create sub directory
-   cd release
-   echo "Running cmake .. -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`"
-   cmake .. -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`  # create Makefile
+   echo Creating and entering subdir "$outputDir"
+   mkdir "$outputDir"                                  # create sub directory
+   cd "$outputDir"
+   echo "Running cmake \"$currentDir\" -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`"
+   if [ config = "debug" ]; then
+     cmake "$currentDir" -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` -DCMAKE_BUILD_TYPE=debugfull
+   else
+     cmake "$currentDir" -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`  # create Makefile
+   fi
    echo Running make.
    make                                           # run make (compile and link)
-   echo "If everything went OK then KDiff3 was built in the release-subdir."
+   echo If everything went OK then KDiff3 was built in the subdir "$outputDir".
    echo "Install as root (requires password)."
    sudo make install                              # install as root user
 elif [ "$1" = "qt4" ]; then
+   if [ "$outputDir" = "" ]; then
+      outputDir="${config}Qt"
+   fi
    echo Trying to build for Qt4 without KDE
-   echo "Entering subdir src-QT4"
-   cd src-QT4
-   echo "Running qmake kdiff3.pro"
-   qmake kdiff3.pro
+   echo Creating and entering subdir "$outputDir"
+   mkdir "$outputDir"                                  # create sub directory
+   cd "$outputDir"
+   qmakecmd="qmake CONFIG+=$config \"$currentDir/src-QT4/kdiff3.pro\""
+   echo "Running $qmakecmd"
+   $qmakecmd
    echo "Running make"
    make
-   echo "If everything went OK then KDiff3 was built as src-QT4/kdiff3"
+   echo "If everything went OK then KDiff3 was built as $outputDir/kdiff3"
 else
-   echo Usage 1: configure kde4
-   echo Usage 2: configure qt4
-   echo For requirements, more options and details in case of failure see the README.
+   showUsage
 fi
 
