@@ -164,6 +164,8 @@ int main(int argc, char *argv[])
    QByteArray appVersion = QByteArray( VERSION );
    if ( sizeof(void*)==8 )
       appVersion += " (64 bit)";
+   else if ( sizeof(void*)==4 )
+       appVersion += " (32 bit)";
    const KLocalizedString description = ki18n("Tool for Comparison and Merge of Files and Directories");
    const KLocalizedString copyright = ki18n("(c) 2002-2011 Joachim Eibl");
    const QByteArray& homePage = "http://kdiff3.sourceforge.net/";

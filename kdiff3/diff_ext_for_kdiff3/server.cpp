@@ -61,7 +61,7 @@ tstring SERVER::getRegistryKeyString( const tstring& subKey, const tstring& valu
    tstring result;
    for(;;)
    {
-      if( RegOpenKeyEx( baseKey, keyName.c_str(), 0, KEY_READ, &key ) == ERROR_SUCCESS ) 
+      if( RegOpenKeyEx( baseKey, keyName.c_str(), 0, KEY_READ | KEY_WOW64_64KEY, &key ) == ERROR_SUCCESS )
       {
          DWORD neededSizeInBytes = 0;
          if (RegQueryValueEx(key, value.c_str(), 0, 0, 0, &neededSizeInBytes) == ERROR_SUCCESS) 
@@ -268,7 +268,7 @@ SERVER::save_history() const
    {
       HKEY key;
       if( RegCreateKeyEx(HKEY_CURRENT_USER, (m_registryBaseName + TEXT("\\history")).c_str(), 0, 0, 
-                         REG_OPTION_NON_VOLATILE, KEY_WRITE, 0, &key, 0) == ERROR_SUCCESS ) 
+                         REG_OPTION_NON_VOLATILE, KEY_WRITE | KEY_WOW64_64KEY, 0, &key, 0) == ERROR_SUCCESS )
       {
          LOG();
          //DWORD len = MAX_PATH;
