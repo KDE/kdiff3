@@ -6,6 +6,7 @@
  *
  */
 
+#define _WIN32_WINNT 0x0502
 #define _CRT_NON_CONFORMING_SWPRINTFS 
 #define _CRT_SECURE_NO_DEPRECATE
 

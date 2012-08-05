@@ -3,9 +3,17 @@
 ;Apdapted for KDiff3 by Sebastien Fricker and Joachim Eibl
 ;Requires nsis_v2.19
 
-!define KDIFF3_VERSION "0.9.96"
+!define KDIFF3_VERSION "0.9.97"
 !define DIFF_EXT32_CLSID "{9F8528E4-AB20-456E-84E5-3CE69D8720F3}"
 !define DIFF_EXT64_CLSID "{34471FFB-4002-438b-8952-E4588D0C0FE9}"
+
+!ifdef KDIFF3_64BIT
+  !define BITS 64
+!else
+  !define BITS 32
+!endif
+
+!define SetupFileName "KDiff3-${BITS}bit-Setup_${KDIFF3_VERSION}.exe"
 
 ;--------------------------------
 ;Include Modern UI
@@ -18,11 +26,15 @@
 
   ;Name and file
   Name "KDiff3"
-  OutFile "KDiff3Setup_${KDIFF3_VERSION}.exe"
+  OutFile ${SetupFileName}
 
   ;Default installation folder
+  !ifdef KDIFF3_64BIT
+  ;SetRegView 64
+  InstallDir "$PROGRAMFILES64\KDiff3"
+  !else
   InstallDir "$PROGRAMFILES\KDiff3"
-  
+  !endif
   ;Get installation folder from registry if available
   InstallDirRegKey HKCU "Software\KDiff3" ""
   
@@ -34,6 +46,7 @@
   Var MUI_TEMP
   Var STARTMENU_FOLDER
   Var DIFF_EXT_CLSID
+  Var DIFF_EXT_ID
   Var DIFF_EXT_DLL
   Var DIFF_EXT_OLD_DLL
   
@@ -228,11 +241,16 @@ SectionIn RO
   
   ;ADD YOUR OWN FILES HERE...
     DetailPrint "Writing files"
-    File "kdiff3.exe"
+    File  "${BITS}bit\kdiff3.exe"
+    File  "${BITS}bit\kdiff3.exe.manifest"
+    File  "${BITS}bit\qt.conf"
     File "COPYING.txt"
     File "Readme_Win.txt"
     File "ChangeLog.txt"
-  Delete "$INSTDIR\kdiff3-QT4.exe"
+    SetOutPath "$INSTDIR\bin"
+    File /r "${BITS}bit\bin\*.*"
+    SetOutPath "$INSTDIR"
+    Delete "$INSTDIR\kdiff3-QT4.exe"
   
   ;Store installation folder
   WriteRegStr HKCU "Software\KDiff3" "" $INSTDIR
@@ -269,8 +287,8 @@ SectionEnd
 
 Section "Utilities" SecUtilities
     DetailPrint "Writing the command line utilities (GNU sed, diff, diff3, etc.)"
-    SetOutPath "$INSTDIR"
-    File /r bin
+    SetOutPath "$INSTDIR\bin"
+    File /r "bin\*.*"
 SectionEnd
 
 SubSection "Integration" SecIntegration
@@ -284,16 +302,36 @@ SectionEnd
 
 Section "Diff-Ext" SecIntegrationDiffExtForKDiff3
   DetailPrint "Diff-Ext for KDiff3"
-
+  SetOutPath "$INSTDIR"
 ${If} ${RunningX64}
   StrCpy $DIFF_EXT_CLSID ${DIFF_EXT64_CLSID}
   StrCpy $DIFF_EXT_DLL "diff_ext_for_kdiff3_64.dll"
   StrCpy $DIFF_EXT_OLD_DLL "diff_ext_for_kdiff3_64_old.dll"
-${Else}
+  StrCpy $DIFF_EXT_ID "diff-ext-for-kdiff3-64"
+  IfFileExists "$INSTDIR\$DIFF_EXT_OLD_DLL" 0 +2
+     Delete "$INSTDIR\$DIFF_EXT_OLD_DLL"
+
+  IfFileExists "$INSTDIR\$DIFF_EXT_DLL" 0 +2
+     Rename "$INSTDIR\$DIFF_EXT_DLL" "$INSTDIR\$DIFF_EXT_OLD_DLL"
+  File "64bit\diff_ext_for_kdiff3_64.dll"
+
+  SetRegView 64
+
+  WriteRegStr SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID"                ""  "$DIFF_EXT_ID"
+  WriteRegStr SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID\InProcServer32" ""  "$INSTDIR\$DIFF_EXT_DLL"
+  WriteRegStr SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID\InProcServer32" "ThreadingModel" "Apartment"
+  WriteRegStr SHCTX "Software\Classes\*\shellex\ContextMenuHandlers\$DIFF_EXT_ID" "" "$DIFF_EXT_CLSID"
+  WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "$DIFF_EXT_CLSID" "$DIFF_EXT_ID"
+  WriteRegStr SHCTX "Software\Classes\Folder\shellex\ContextMenuHandlers\$DIFF_EXT_ID" "" "$DIFF_EXT_CLSID"
+  WriteRegStr SHCTX "Software\Classes\Directory\shellex\ContextMenuHandlers\$DIFF_EXT_ID" "" "$DIFF_EXT_CLSID"
+
+  SetRegView 32
+
+${EndIf}
   StrCpy $DIFF_EXT_CLSID ${DIFF_EXT32_CLSID}
   StrCpy $DIFF_EXT_DLL "diff_ext_for_kdiff3.dll"
   StrCpy $DIFF_EXT_OLD_DLL "diff_ext_for_kdiff3_old.dll"
-${EndIf}
+  StrCpy $DIFF_EXT_ID "diff-ext-for-kdiff3"
 
   IfFileExists "$INSTDIR\$DIFF_EXT_OLD_DLL" 0 +2
      Delete "$INSTDIR\$DIFF_EXT_OLD_DLL"
@@ -301,27 +339,24 @@ ${EndIf}
   IfFileExists "$INSTDIR\$DIFF_EXT_DLL" 0 +2
      Rename "$INSTDIR\$DIFF_EXT_DLL" "$INSTDIR\$DIFF_EXT_OLD_DLL"
 
-  
-${If} ${RunningX64}
-	File "diff_ext_for_kdiff3_64.dll"
-${Else}
-	File "diff_ext_for_kdiff3.dll"
-${EndIf}
+  File "32bit\diff_ext_for_kdiff3.dll"
 
   SetRegView 64
 
   WriteRegStr HKCU  "Software\KDiff3\diff-ext" "" ""
   WriteRegStr SHCTX "Software\KDiff3\diff-ext" "InstallDir" "$INSTDIR"
   WriteRegStr SHCTX "Software\KDiff3\diff-ext" "diffcommand" "$INSTDIR\kdiff3.exe"
-  WriteRegStr SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID"                ""  "diff-ext-for-kdiff3"
-  WriteRegStr SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID\InProcServer32" ""  "$INSTDIR\$DIFF_EXT_DLL"
-  WriteRegStr SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID\InProcServer32" "ThreadingModel" "Apartment"
-  WriteRegStr SHCTX "Software\Classes\*\shellex\ContextMenuHandlers\diff-ext-for-kdiff3" "" "$DIFF_EXT_CLSID"
-  WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "$DIFF_EXT_CLSID" "diff-ext-for-kdiff3"
-  WriteRegStr SHCTX "Software\Classes\Folder\shellex\ContextMenuHandlers\diff-ext-for-kdiff3" "" "$DIFF_EXT_CLSID"
-  WriteRegStr SHCTX "Software\Classes\Directory\shellex\ContextMenuHandlers\diff-ext-for-kdiff3" "" "$DIFF_EXT_CLSID"
 
   SetRegView 32
+
+  WriteRegStr SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID"                ""  "$DIFF_EXT_ID"
+  WriteRegStr SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID\InProcServer32" ""  "$INSTDIR\$DIFF_EXT_DLL"
+  WriteRegStr SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID\InProcServer32" "ThreadingModel" "Apartment"
+  WriteRegStr SHCTX "Software\Classes\*\shellex\ContextMenuHandlers\$DIFF_EXT_ID" "" "$DIFF_EXT_CLSID"
+  WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "$DIFF_EXT_CLSID" "$DIFF_EXT_ID"
+  WriteRegStr SHCTX "Software\Classes\Folder\shellex\ContextMenuHandlers\$DIFF_EXT_ID" "" "$DIFF_EXT_CLSID"
+  WriteRegStr SHCTX "Software\Classes\Directory\shellex\ContextMenuHandlers\$DIFF_EXT_ID" "" "$DIFF_EXT_CLSID"
+
 
   File "DIFF-EXT-LICENSE.txt"  
   CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Diff-Ext License.lnk"    "$INSTDIR\DIFF-EXT-LICENSE.txt"
@@ -458,16 +493,23 @@ Section "Uninstall"
   ; diff_ext_for_kdiff3
 ${If} ${RunningX64}
   StrCpy $DIFF_EXT_CLSID ${DIFF_EXT64_CLSID}
-${Else}
-  StrCpy $DIFF_EXT_CLSID ${DIFF_EXT32_CLSID}
-${EndIf}
+  StrCpy $DIFF_EXT_ID "diff-ext-for-kdiff3-64"
   SetRegView 64
   DeleteRegKey SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID"
-  DeleteRegKey SHCTX "Software\Classes\*\shellex\ContextMenuHandlers\diff-ext-for-kdiff3"
-  DeleteRegKey SHCTX "Software\Classes\Folder\shellex\ContextMenuHandlers\diff-ext-for-kdiff3"
-  DeleteRegKey SHCTX "Software\Classes\Directory\shellex\ContextMenuHandlers\diff-ext-for-kdiff3"
+  DeleteRegKey SHCTX "Software\Classes\*\shellex\ContextMenuHandlers\$DIFF_EXT_ID"
+  DeleteRegKey SHCTX "Software\Classes\Folder\shellex\ContextMenuHandlers\$DIFF_EXT_ID"
+  DeleteRegKey SHCTX "Software\Classes\Directory\shellex\ContextMenuHandlers\$DIFF_EXT_ID"
   DeleteRegValue SHCTX "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "$DIFF_EXT_CLSID"
   SetRegView 32
+${EndIf}
+
+  StrCpy $DIFF_EXT_CLSID ${DIFF_EXT32_CLSID}
+  StrCpy $DIFF_EXT_ID "diff-ext-for-kdiff3"
+  DeleteRegKey SHCTX "Software\Classes\CLSID\$DIFF_EXT_CLSID"
+  DeleteRegKey SHCTX "Software\Classes\*\shellex\ContextMenuHandlers\$DIFF_EXT_ID"
+  DeleteRegKey SHCTX "Software\Classes\Folder\shellex\ContextMenuHandlers\$DIFF_EXT_ID"
+  DeleteRegKey SHCTX "Software\Classes\Directory\shellex\ContextMenuHandlers\$DIFF_EXT_ID"
+  DeleteRegValue SHCTX "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "$DIFF_EXT_CLSID"
 
   ; clearcase
   ccInstallHelper::nsisPlugin "uninstall" "$INSTDIR\kdiff3.exe"

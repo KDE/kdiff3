@@ -1,4 +1,4 @@
-Version 0.9.97 - 2012-07-14
+Version 0.9.97 - 2012-08-05
 ===========================
 - Memory usage optimized for comparison of large directories. (ca. 1/5 needed)
 - On Windows use config file .kdiff3rc next to kdiff3.exe if exists.
@@ -10,13 +10,15 @@ Version 0.9.97 - 2012-07-14
 - Change an encoding in diff text window via click on encoding label. (Patch by Alexey Kostromin)
 - Fix for tab-key moving focus instead of adding a tab character in MergeResultWindow.
 - Regression test framework (by Maurice van der Pot)
-- Documentation patch (by Burkard Lück)
+- Documentation patch (by Burkard Lueck)
 - Select text in Find dialog (by Eike Sauer)
 - If text is selected in either input or output window use that in Find dialog.
 - Added default directory anti patterns ".hg" and ".git" and file anti patterns ".rej" and ".bak" for better mercurial and git integration.
 - Command line option --cs doesn't change the config value permanently anymore.
 - On KDE: Not creating a KDiff3Part anymore.
 - Windows (Vista or Win 7): Shell context menu in directory comparison view now again displays text.
+- Windows 64 bit: Diff-Ext-for-KDiff3 context menu now installed as 32 bit and 64 bit versions to allow other 32 bit programs to use it too.
+- Windows 64 bit specific installer.
 
 Version 0.9.96 - 2011-09-02
 ===========================

@@ -10,7 +10,7 @@ ifdef DEBUG
   CXXFLAGS ?= -g
 else
   CXXFLAGS ?= -Os
-  LDFLAGS += -s
+  LDFLAGS += -s -static-libgcc
 endif
 CXXFLAGS += -pedantic -Wall -W -D_UNICODE -DUNICODE
 
@@ -44,8 +44,8 @@ release:
 	
 include .depend
 
-clean: clean-custom
-	${RM}  $(OBJ) $(DLL) ${EXPLIB} $(STATICLIB)
+clean:
+	del  .depend $(OBJ) $(DLL) ${EXPLIB} $(STATICLIB)
 
 $(DLL): $(OBJ)
 	dllwrap.exe \
