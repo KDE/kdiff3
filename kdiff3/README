@@ -85,8 +85,8 @@ Requirements & Installation
    Typically in a terminal (e.g. konsole) you cd into the kdiff3-directory and
    run "./configure kde4". This script is essentially the same as these commands:
 
-      mkdir release
-      cd release
+      mkdir releaseKde
+      cd releaseKde
       # Find out your KDE4-directory and note the result
       kde4-config --prefix
       # create Makefile, replace <KDE4-prefix> with the prior result
@@ -152,18 +152,24 @@ Requirements & Installation
   Build-instructions (Un*x):
     Assuming Qt is correctly installed run "./configure qt4" which essentially
     does the same as:
-    - mkdir release
-    - cd release
+    - mkdir releaseQt
+    - cd releaseQt
     - qmake ../src-QT4/kdiff3.pro
     - make (or "gmake" for GNU-Make)
 
   Build-instructions (Windows):
+    - If you use Qt Creator from the SDK just load the src-QT4\kdiff3.pro 
+      file and build.
+    On the command line (cmd.exe):
     - set QTDIR=<QT4-dir>         e.g.: c:\qt\4.4.1
       set "PATH=%QTDIR%\bin;%PATH%"
+    - Prepare compiler settings:
+      For Visual Studio run the respective vsvars32.bat
+      For MinGW add the path: E.g. set "PATH=c:\mingw\bin;%PATH%"
     - cd into the directory kdiff3-0.9.97\src-Qt4 and type
     - qmake kdiff3.pro
     - Either "nmake" for Visual Studio or "mingw32-make" depending on what you
-      have.
+      have.  
 
   Debugging with MinGW under Windows:
     - Qt Creator worked very well as debugger frontend too!
