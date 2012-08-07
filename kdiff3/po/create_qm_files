@@ -20,7 +20,6 @@
 # create_qm_files: 
 # Create translation files needed by qt-only version.
 # Requirements: lconvert from qt4 (Thanks to Richard Hoyle for that tip)
-#               (previously: msg2qm from qt3-devel-tools)
 export LANG=en_US.UTF-8
 echo "Create qm files (KDiff3 translation files for the qt-only version)"
 if [ "$1" = "local" ]; then
@@ -33,18 +32,14 @@ if [ "$1" = "local" ]; then
 
    for i in `ls ` ; do
       if [ -s $i/kdiff3.po ]; then
-         # (msg2qm is from "qt3-devel-tools"-package.)
          echo Creating ./kdiff3_$i.qm
-         #/usr/lib/qt3/bin/msg2qm $i/kdiff3.po kdiff3_$i.qm
          lconvert -if po -of qm -o $path/kdiff3_$i.qm $i/kdiff3.po
       fi
    done
 elif [ "$1" = "install" ]; then
    for i in `ls` ; do
       if [ -s $i/kdiff3.po ]; then
-         # (msg2qm is from "qt3-devel-tools"-package.)
          echo Installing /usr/share/locale/$i/LC_MESSAGES/kdiff3.qm
-         #sudo /usr/lib/qt3/bin/msg2qm $i/kdiff3.po /usr/share/locale/$i/LC_MESSAGES/kdiff3.qm
          sudo lconvert -if po -of qm -o /usr/share/locale/$i/LC_MESSAGES/kdiff3.qm $i/kdiff3.po
       fi
    done

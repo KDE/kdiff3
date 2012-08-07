@@ -3194,14 +3194,14 @@ QString WindowTitleWidget::getFileName()
    return m_pFileNameLineEdit->text();
 }
 
-static QString getLineEndStyleName( e_LineEndStyle eLineEndStyle )
-{
-   if ( eLineEndStyle == eLineEndStyleDos )
-      return "DOS";
-   else if ( eLineEndStyle == eLineEndStyleUnix )
-      return "Unix";
-   return QString();
-}
+//static QString getLineEndStyleName( e_LineEndStyle eLineEndStyle )
+//{
+//   if ( eLineEndStyle == eLineEndStyleDos )
+//      return "DOS";
+//   else if ( eLineEndStyle == eLineEndStyleUnix )
+//      return "Unix";
+//   return QString();
+//}
 
 void WindowTitleWidget::setLineEndStyles( e_LineEndStyle eLineEndStyleA, e_LineEndStyle eLineEndStyleB, e_LineEndStyle eLineEndStyleC)
 {
