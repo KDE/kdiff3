@@ -304,13 +304,13 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
          QString localName = name;
 
 #if defined(Q_WS_WIN)
-         if ( !bExistsLocal )
+         if ( localName.startsWith("/tmp/") )
          {
             // git on Cygwin will put files in /tmp
             // A workaround for the a native kdiff3 binary to find them...
          
             QString cygwinBin = getenv("CYGWIN_BIN");
-            if (localName.startsWith("/tmp/") && !cygwinBin.isEmpty() )
+            if ( !cygwinBin.isEmpty() )
             {
                localName = QString("%1\\..%2").arg(cygwinBin).arg(name);
             }
