@@ -118,7 +118,7 @@ Requirements & Installation
     - for Windows
     - for Mac
 
-   The version 0.9.97 requires Qt 4.4.0 or newer (from qt.nokia.com) for
+   The version 0.9.97 requires Qt 4.4.0 or newer (from http://qt-project.org/) for
    compilation.
 
    You always need:
@@ -147,7 +147,7 @@ Requirements & Installation
       - for Mac:     gcc, g++ with version >=3.4.2
                      Qt-Mac-libraries
       - Optional: Qt Creator IDE: Development environment optimized for Qt
-        (http://qt.nokia.com)
+        (from http://qt-project.org)
 
   Build-instructions (Un*x):
     Assuming Qt is correctly installed run "./configure qt4" which essentially
@@ -191,8 +191,9 @@ Requirements & Installation
          Using break with c++-methods requires to specify the parameter types
          too. Breakpoints in constructors might not work.
 
-  Building KDiff3 (Qt4) for Mac OSX (with Intel processor) as a universal
-  binary (by Michael Schmidt)
+  Building KDiff3 (Qt4) for Mac OSX: 
+    0) Build with Qt Creator from the SDK and src-QT4\kdiff3.pro.
+    Building a universal binary (by Michael Schmidt, perhaps outdated):
     1) Install Qt/Mac 4.x with thread support, static libraries and universal
     flag. (For Qt4 run "configure -static"; only necessary if the final binary
     should not require shared Qt4-libs.)
@@ -205,7 +206,7 @@ Requirements & Installation
     4) Execute:
        make
     5) After the build completes copy kdiff3 from the kdiff3-0.9.97/src-QT4
-    directory to:
+       directory to:
        /Applications
 
   Creating and installing the translation messages
