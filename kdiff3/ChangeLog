@@ -1,4 +1,4 @@
-Version 0.9.97 - 2012-08-05
+Version 0.9.97 - 2012-08-10
 ===========================
 - Memory usage optimized for comparison of large directories. (ca. 1/5 needed)
 - On Windows use config file .kdiff3rc next to kdiff3.exe if exists.
@@ -9,6 +9,9 @@ Version 0.9.97 - 2012-08-05
 - Fixed mouse wheel problem. (Patch by David Hay)
 - Change an encoding in diff text window via click on encoding label. (Patch by Alexey Kostromin)
 - Fix for tab-key moving focus instead of adding a tab character in MergeResultWindow.
+- Workaround for git on Cygwin that allows KDiff3 to find files in a Cygwin "/tmp" directory 
+  when environment variable "CYGWIN_BIN" is set. (Patch by Nigel Stewart)
+- Removed iostream dependency (Patch by Nigel Stewart)
 - Regression test framework (by Maurice van der Pot)
 - Documentation patch (by Burkard Lueck)
 - Select text in Find dialog (by Eike Sauer)
