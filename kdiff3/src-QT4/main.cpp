@@ -191,6 +191,8 @@ int main(int argc, char *argv[])
    aboutData.addCredit(ki18n("Valentin Rusu"), ki18n("KDE4 porting"), QByteArray("kde" "@" "rusu.info"));
    aboutData.addCredit(ki18n("Albert Astals Cid"), ki18n("KDE4 porting"), QByteArray("aacid" "@" "kde.org"));
    aboutData.addCredit(ki18n("Silvan Scherrer"), ki18n("OS2 port") );
+   aboutData.addCredit(ki18n("Nigel Stewart"), ki18n("Cygwin support") );
+   aboutData.addCredit(ki18n("Maurice van der Pot"), ki18n("Framework for automated tests") );
 
    aboutData.addCredit(ki18n("+ Many thanks to those who reported bugs and contributed ideas!"));
 
