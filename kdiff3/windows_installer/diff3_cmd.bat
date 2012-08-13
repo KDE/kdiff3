@@ -7,7 +7,11 @@ REM automatic merge. Well, you need a batch file actually (based on
 REM http://svn.collab.net/repos/svn/trunk/contrib/client-side/diff3wrap.bat):
 
 REM Configure your favorite diff3/merge program here.
-SET DIFF3="C:\Program Files\KDiff3\kdiff3.exe"
+if exist "C:\Program Files\KDiff3" (
+  SET DIFF3="C:\Program Files\KDiff3\kdiff3.exe"
+) else (
+  SET DIFF3="C:\Program Files (x86)\KDiff3\kdiff3.exe"
+)
 
 REM Subversion provides the paths we need as the ninth, tenth, and eleventh 
 REM parameters.  But we only have access to nine parameters at a time, so we
