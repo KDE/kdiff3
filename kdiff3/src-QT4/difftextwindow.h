@@ -58,10 +58,10 @@ public:
    int getFirstLine();
    int calcTopLineInFile( int firstLine );
 
-   int getNofColumns();
+   int getMaxTextWidth();
    int getNofLines();
    int getNofVisibleLines();
-   int getNofVisibleColumns();
+   int getVisibleTextWidth();
 
    int convertLineToDiff3LineIdx( int line );
    int convertDiff3LineIdxToLine( int d3lIdx );
@@ -89,7 +89,7 @@ signals:
 
 public slots:
    void setFirstLine( int line );
-   void setFirstColumn( int col );
+   void setHorizScrollOffset( int horizScrollOffset );
    void resetSelection();
    void setFastSelectorRange( int line1, int nofLines );
 

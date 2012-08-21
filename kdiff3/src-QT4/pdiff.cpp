@@ -115,12 +115,12 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
    if (pTotalDiffStatus==0) 
       pTotalDiffStatus = &m_totalDiffStatus;
 
-   bool bPreserveCarriageReturn = m_pOptions->m_bPreserveCarriageReturn;
+   //bool bPreserveCarriageReturn = m_pOptions->m_bPreserveCarriageReturn;
 
    bool bVisibleMergeResultWindow = ! m_outputFilename.isEmpty();
    if ( bVisibleMergeResultWindow && bGUI )
    {
-      bPreserveCarriageReturn = false;
+      //bPreserveCarriageReturn = false;
 
       QString msg;
 
@@ -486,16 +486,16 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
 
 void KDiff3App::setHScrollBarRange()
 {
-   int w1 = m_pDiffTextWindow1!=0 && m_pDiffTextWindow1->isVisible() ? m_pDiffTextWindow1->getNofColumns() : 0;
-   int w2 = m_pDiffTextWindow2!=0 && m_pDiffTextWindow2->isVisible() ? m_pDiffTextWindow2->getNofColumns() : 0;
-   int w3 = m_pDiffTextWindow3!=0 && m_pDiffTextWindow3->isVisible() ? m_pDiffTextWindow3->getNofColumns() : 0;
+   int w1 = m_pDiffTextWindow1!=0 && m_pDiffTextWindow1->isVisible() ? m_pDiffTextWindow1->getMaxTextWidth() : 0;
+   int w2 = m_pDiffTextWindow2!=0 && m_pDiffTextWindow2->isVisible() ? m_pDiffTextWindow2->getMaxTextWidth() : 0;
+   int w3 = m_pDiffTextWindow3!=0 && m_pDiffTextWindow3->isVisible() ? m_pDiffTextWindow3->getMaxTextWidth() : 0;
 
-   int wm = m_pMergeResultWindow!=0 && m_pMergeResultWindow->isVisible() ? m_pMergeResultWindow->getNofColumns() : 0;
+   int wm = m_pMergeResultWindow!=0 && m_pMergeResultWindow->isVisible() ? m_pMergeResultWindow->getMaxTextWidth() : 0;
 
-   int v1 = m_pDiffTextWindow1!=0 && m_pDiffTextWindow1->isVisible() ? m_pDiffTextWindow1->getNofVisibleColumns() : 0;
-   int v2 = m_pDiffTextWindow2!=0 && m_pDiffTextWindow2->isVisible() ? m_pDiffTextWindow2->getNofVisibleColumns() : 0;
-   int v3 = m_pDiffTextWindow3!=0 && m_pDiffTextWindow3->isVisible() ? m_pDiffTextWindow3->getNofVisibleColumns() : 0;
-   int vm = m_pMergeResultWindow!=0 && m_pMergeResultWindow->isVisible() ? m_pMergeResultWindow->getNofVisibleColumns() : 0;
+   int v1 = m_pDiffTextWindow1!=0 && m_pDiffTextWindow1->isVisible() ? m_pDiffTextWindow1->getVisibleTextWidth() : 0;
+   int v2 = m_pDiffTextWindow2!=0 && m_pDiffTextWindow2->isVisible() ? m_pDiffTextWindow2->getVisibleTextWidth() : 0;
+   int v3 = m_pDiffTextWindow3!=0 && m_pDiffTextWindow3->isVisible() ? m_pDiffTextWindow3->getVisibleTextWidth() : 0;
+   int vm = m_pMergeResultWindow!=0 && m_pMergeResultWindow->isVisible() ? m_pMergeResultWindow->getVisibleTextWidth() : 0;
 
    // Find the minimum, but don't consider 0.
    int pageStep = 0;
@@ -709,21 +709,21 @@ void KDiff3App::initView()
 
    connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pOverview, SLOT(setFirstLine(int)));
    connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow1, SLOT(setFirstLine(int)));
-   connect( m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow1, SLOT(setFirstColumn(int)));
+   connect( m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow1, SLOT(setHorizScrollOffset(int)));
    connect( m_pDiffTextWindow1, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
    connect( m_pDiffTextWindow1, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
    connect( m_pDiffTextWindow1, SIGNAL(scroll(int,int)), this, SLOT(scrollDiffTextWindow(int,int)));
    m_pDiffTextWindow1->installEventFilter( this );
 
    connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow2, SLOT(setFirstLine(int)));
-   connect( m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow2, SLOT(setFirstColumn(int)));
+   connect( m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow2, SLOT(setHorizScrollOffset(int)));
    connect( m_pDiffTextWindow2, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
    connect( m_pDiffTextWindow2, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
    connect( m_pDiffTextWindow2, SIGNAL(scroll(int,int)), this, SLOT(scrollDiffTextWindow(int,int)));
    m_pDiffTextWindow2->installEventFilter( this );
 
    connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow3, SLOT(setFirstLine(int)));
-   connect( m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow3, SLOT(setFirstColumn(int)));
+   connect( m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow3, SLOT(setHorizScrollOffset(int)));
    connect( m_pDiffTextWindow3, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
    connect( m_pDiffTextWindow3, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
    connect( m_pDiffTextWindow3, SIGNAL(scroll(int,int)), this, SLOT(scrollDiffTextWindow(int,int)));
@@ -733,7 +733,7 @@ void KDiff3App::initView()
    MergeResultWindow* p = m_pMergeResultWindow;
    connect( m_pMergeVScrollBar, SIGNAL(valueChanged(int)), p, SLOT(setFirstLine(int)));
 
-   connect( m_pHScrollBar,      SIGNAL(valueChanged2(int)), p, SLOT(setFirstColumn(int)));
+   connect( m_pHScrollBar,      SIGNAL(valueChanged2(int)), p, SLOT(setHorizScrollOffset(int)));
    connect( p, SIGNAL(scroll(int,int)), this, SLOT(scrollMergeResultWindow(int,int)));
    connect( p, SIGNAL(sourceMask(int,int)), this, SLOT(sourceMask(int,int)));
    connect( p, SIGNAL( resizeSignal() ),this, SLOT(resizeMergeResultWindow()));
@@ -773,7 +773,7 @@ void KDiff3App::initView()
 
 static int calcManualDiffFirstDiff3LineIdx( const Diff3LineVector& d3lv, const ManualDiffHelpEntry& mdhe )
 {
-   unsigned int i;
+   int i;
    for( i = 0; i<d3lv.size(); ++i )
    {
       const Diff3Line& d3l = *d3lv[i];

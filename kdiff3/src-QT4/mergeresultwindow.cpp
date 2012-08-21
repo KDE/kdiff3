@@ -29,7 +29,7 @@
 #include <QTextStream>
 #include <QKeyEvent>
 #include <QMouseEvent>
-
+#include <QTextLayout>
 #include <QLineEdit>
 #include <QTextCodec>
 #include <QComboBox>
@@ -54,7 +54,6 @@
 int g_bAutoSolve = true;
 
 #undef leftInfoWidth
-#define leftInfoWidth 3
 
 MergeResultWindow::MergeResultWindow(
    QWidget* pParent,
@@ -67,7 +66,7 @@ MergeResultWindow::MergeResultWindow(
    setFocusPolicy( Qt::ClickFocus );
 
    m_firstLine = 0;
-   m_firstColumn = 0;
+   m_horizScrollOffset = 0;
    m_nofColumns = 0;
    m_nofLines = 0;
    m_totalSize = 0;
@@ -116,7 +115,7 @@ void MergeResultWindow::init(
    )
 {
    m_firstLine = 0;
-   m_firstColumn = 0;
+   m_horizScrollOffset = 0;
    m_nofColumns = 0;
    m_nofLines = 0;
    m_bMyUpdate = false;
@@ -499,7 +498,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
    m_cursorOldXPos=0;
    m_cursorYPos=0;
    //m_firstLine = 0; // Must not set line/column without scrolling there
-   //m_firstColumn = 0;
+   //m_horizScrollOffset = 0;
 
    setModified(false);
 
@@ -516,15 +515,27 @@ void MergeResultWindow::setFirstLine(int firstLine)
    update();
 }
 
-void MergeResultWindow::setFirstColumn(int firstCol)
+void MergeResultWindow::setHorizScrollOffset(int horizScrollOffset)
 {
-   m_firstColumn = max2(0,firstCol);
+   m_horizScrollOffset = max2(0,horizScrollOffset);
    update();
 }
 
-int MergeResultWindow::getNofColumns()
+int MergeResultWindow::getMaxTextWidth()
 {
-   return m_nofColumns;
+   int w=0;
+   for(int i=0; i<getNofLines(); ++i)
+   {
+      QTextLayout textLayout( getString(i), font(), this );
+      textLayout.beginLayout();
+      textLayout.createLine();
+      textLayout.endLayout();
+      if ( w < textLayout.maximumWidth() )
+      {
+         w = textLayout.maximumWidth();
+      }
+   }
+   return w;
 }
 
 int MergeResultWindow::getNofLines()
@@ -532,16 +543,22 @@ int MergeResultWindow::getNofLines()
    return m_totalSize;
 }
 
-int MergeResultWindow::getNofVisibleColumns()
+int MergeResultWindow::getVisibleTextWidth()
 {
    QFontMetrics fm = fontMetrics();
-   return width()/fm.width('W')-4;
+   return width() - 4 * fm.width('0');
 }
 
 int MergeResultWindow::getNofVisibleLines()
 {
    QFontMetrics fm = fontMetrics();
    return (height()-3)/fm.height()-2;
+}
+
+int MergeResultWindow::getTextXOffset()
+{
+   QFontMetrics fm = fontMetrics();
+   return 3 * fm.width('0');
 }
 
 void MergeResultWindow::resizeEvent( QResizeEvent* e )
@@ -1629,6 +1646,32 @@ int convertToPosOnScreen( const QString& p, int posInText, int tabSize )
    return posOnScreen;
 }
 
+QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(int line, const QString& str, QTextLayout& textLayout )
+{
+   // TODO tabs
+   QVector<QTextLayout::FormatRange> selectionFormat;
+   textLayout.beginLayout();
+   if ( m_selection.lineWithin( line ) )
+   {
+      int firstPosInText = convertToPosInText( str, m_selection.firstPosInLine(line), m_pOptions->m_tabSize );
+      int lastPosInText  = convertToPosInText( str, m_selection.lastPosInLine(line), m_pOptions->m_tabSize );
+      int lengthInText = max2(0,lastPosInText - firstPosInText);
+      if (lengthInText>0)
+         m_selection.bSelectionContainsData = true;
+
+      QTextLayout::FormatRange selection;
+      selection.start = firstPosInText;
+      selection.length = lengthInText;
+      selection.format.setBackground( palette().highlight() );
+      selection.format.setForeground( palette().highlightedText().color() );
+      selectionFormat.push_back( selection );
+   }
+   QTextLine textLine = textLayout.createLine();
+   textLine.setPosition(QPointF(0, fontMetrics().leading()));
+   textLayout.endLayout();
+   return selectionFormat;
+}
+
 void MergeResultWindow::writeLine(
    MyPainter& p, int line, const QString& str,
    int srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
@@ -1636,11 +1679,10 @@ void MergeResultWindow::writeLine(
 {
    const QFontMetrics& fm = fontMetrics();
    int fontHeight = fm.height();
-   int fontWidth = fm.width("W");
    int fontAscent = fm.ascent();
 
    int topLineYOffset = 0;
-   int xOffset = fontWidth * leftInfoWidth;
+   int xOffset = getTextXOffset();
 
    int yOffset = ( line-m_firstLine ) * fontHeight;
    if ( yOffset < 0 || yOffset > height() )
@@ -1661,6 +1703,8 @@ void MergeResultWindow::writeLine(
 
    if( (srcSelect > 0 || bUserModified ) && !bLineRemoved )
    {
+      p.setClipRect( QRectF(xOffset,0,width()-xOffset,height()) );
+
       int outPos = 0;
       QString s;
       int size = str.length();
@@ -1680,44 +1724,41 @@ void MergeResultWindow::writeLine(
          outPos += spaces;
       }
 
-      if ( m_selection.lineWithin( line ) )
+      p.setPen( m_pOptions->m_fgColor );
+
+      QTextLayout textLayout( str, font(), this );
+      QVector<QTextLayout::FormatRange> selectionFormat = getTextLayoutForLine( line, str, textLayout );
+//      // TODO tabs
+//      QVector<QTextLayout::FormatRange> selectionFormat;
+//      textLayout.beginLayout();
+//      if ( m_selection.lineWithin( line ) )
+//      {
+//         int firstPosInText = convertToPosInText( str, m_selection.firstPosInLine(line), m_pOptions->m_tabSize );
+//         int lastPosInText  = convertToPosInText( str, m_selection.lastPosInLine(line), m_pOptions->m_tabSize );
+//         int lengthInText = max2(0,lastPosInText - firstPosInText);
+//         if (lengthInText>0)
+//            m_selection.bSelectionContainsData = true;
+
+//         QTextLayout::FormatRange selection;
+//         selection.start = firstPosInText;
+//         selection.length = lengthInText;
+//         selection.format.setBackground( palette().highlight() );
+//         selection.format.setForeground( palette().highlightedText().color() );
+//         selectionFormat.push_back( selection );
+//      }
+//      QTextLine textLine = textLayout.createLine();
+//      textLine.setPosition(QPointF(0, fm.leading()));
+//      textLayout.endLayout();
+      textLayout.draw( &p, QPointF(xOffset - m_horizScrollOffset, yOffset), selectionFormat );
+
+      if ( line == m_cursorYPos )
       {
-         int firstPosInLine = convertToPosOnScreen( str, convertToPosInText( str, m_selection.firstPosInLine(line), m_pOptions->m_tabSize ),m_pOptions->m_tabSize );
-         int lastPosInLine  = convertToPosOnScreen( str, convertToPosInText( str, m_selection.lastPosInLine(line), m_pOptions->m_tabSize ), m_pOptions->m_tabSize );
-         int lengthInLine = max2(0,lastPosInLine - firstPosInLine);
-         if (lengthInLine>0) m_selection.bSelectionContainsData = true;
-
-         if ( lengthInLine < int(s.length()) )
-         {                                // Draw a normal line first
-            p.setPen( m_pOptions->m_fgColor );
-            p.drawText( xOffset, yOffset+fontAscent,  s.mid(m_firstColumn), true );
-         }
-         int firstPosInLine2 = max2( firstPosInLine, m_firstColumn );
-         int lengthInLine2 = max2(0,lastPosInLine - firstPosInLine2);
-
-         if( m_selection.lineWithin( line+1 ) )
-            p.fillRect( xOffset + fontWidth*(firstPosInLine2-m_firstColumn), yOffset,
-               width(), fontHeight, palette().highlight() );
-         else if ( lengthInLine2>0 )
-            p.fillRect( xOffset + fontWidth*(firstPosInLine2-m_firstColumn), yOffset,
-               fontWidth*lengthInLine2, fontHeight, palette().highlight() );
-
-         p.setPen( palette().highlightedText().color() );
-         p.drawText( xOffset + fontWidth*(firstPosInLine2-m_firstColumn), yOffset+fontAscent,
-            s.mid(firstPosInLine2,lengthInLine2), true );
+         m_cursorXPixelPos = textLayout.lineAt(0).cursorToX( m_cursorXPos );
       }
-      else
-      {
-         p.setPen( m_pOptions->m_fgColor );
-         p.drawText( xOffset, yOffset+fontAscent, s.mid(m_firstColumn), true );
-      }
+
+      p.setClipping( false );
 
       p.setPen( m_pOptions->m_fgColor );
-      if ( m_cursorYPos==line )
-      {
-         m_cursorXPos = minMaxLimiter( m_cursorXPos, 0, outPos );
-         m_cursorXPos = convertToPosOnScreen( str, convertToPosInText( str, m_cursorXPos, m_pOptions->m_tabSize ),m_pOptions->m_tabSize );
-      }
 
       p.drawText( 1, yOffset+fontAscent, srcName, true );
    }
@@ -1740,7 +1781,7 @@ void MergeResultWindow::writeLine(
    }
    else assert(false);
 
-   xOffset -= fontWidth;
+   xOffset -= fm.width('0');
    p.setPen( m_pOptions->m_fgColor );
    if ( rangeMark & 1 ) // begin mark
    {
@@ -1790,7 +1831,7 @@ void MergeResultWindow::paintEvent( QPaintEvent* )
    bool bOldSelectionContainsData = m_selection.bSelectionContainsData;
    const QFontMetrics& fm = fontMetrics();
    int fontHeight = fm.height();
-   int fontWidth = fm.width("W");
+   int fontWidth = fm.width('0');
    int fontAscent = fm.ascent();
 
    if ( !m_bCursorUpdate )  // Don't redraw everything for blinking cursor?
@@ -1860,22 +1901,11 @@ void MergeResultWindow::paintEvent( QPaintEvent* )
 
    QPainter painter(this);
 
-   //int topLineYOffset = 0;
-   //int xOffset = fontWidth * leftInfoWidth;
-   //int yOffset = ( m_cursorYPos - m_firstLine ) * fontHeight + topLineYOffset;
-   //int xCursor = ( m_cursorXPos - m_firstColumn ) * fontWidth + xOffset;
-
    if ( !m_bCursorUpdate )
       painter.drawPixmap(0,0, m_pixmap);
    else
    {
       painter.drawPixmap(0,0, m_pixmap ); // Draw everything. (Internally cursor rect is clipped anyway.)
-      //if (!m_pOptions->m_bRightToLeftLanguage)
-      //   painter.drawPixmap(xCursor-2, yOffset, m_pixmap,
-      //                      xCursor-2, yOffset, 5, fontAscent+2 );
-      //else
-      //   painter.drawPixmap(width()-1-4-(xCursor-2), yOffset, m_pixmap,
-      //                      width()-1-4-(xCursor-2), yOffset, 5, fontAscent+2 );
       m_bCursorUpdate = false;
    }
    painter.end();
@@ -1884,11 +1914,11 @@ void MergeResultWindow::paintEvent( QPaintEvent* )
    {
       MyPainter painter(this, m_pOptions->m_bRightToLeftLanguage, width(), fontWidth);
       int topLineYOffset = 0;
-      int xOffset = fontWidth * leftInfoWidth;
+      int xOffset = getTextXOffset();
 
       int yOffset = ( m_cursorYPos-m_firstLine ) * fontHeight + topLineYOffset;
 
-      int xCursor = ( m_cursorXPos - m_firstColumn ) * fontWidth + xOffset;
+      int xCursor = m_cursorXPixelPos - m_horizScrollOffset + xOffset;
 
       painter.setPen( m_pOptions->m_fgColor );
 
@@ -1947,15 +1977,22 @@ void MergeResultWindow::convertToLinePos( int x, int y, int& line, int& pos )
 {
    const QFontMetrics& fm = fontMetrics();
    int fontHeight = fm.height();
-   int fontWidth = fm.width('W');
-   int xOffset = (leftInfoWidth-m_firstColumn)*fontWidth;
+   int fontWidth = fm.width('0');
+   int xOffset = getTextXOffset() - m_horizScrollOffset;
    int topLineYOffset = 0;
 
    int yOffset = topLineYOffset - m_firstLine * fontHeight;
 
    line = min2( ( y - yOffset ) / fontHeight, m_totalSize-1 );
    if ( ! m_pOptions->m_bRightToLeftLanguage )
-      pos  = ( x - xOffset ) / fontWidth;
+   {
+      QString s = getString( line );
+      QTextLayout textLayout( s, font(), this );
+      textLayout.beginLayout();
+      QTextLine line = textLayout.createLine();
+      textLayout.endLayout();
+      pos = line.xToCursor(x-xOffset);
+   }
    else 
       pos  = ( (width() - 1 - x) - xOffset ) / fontWidth;
 }
@@ -1963,6 +2000,8 @@ void MergeResultWindow::convertToLinePos( int x, int y, int& line, int& pos )
 void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
 {
    m_bCursorOn = true;
+
+   int xOffset = getTextXOffset();
 
    int line;
    int pos;
@@ -1972,7 +2011,7 @@ void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
    bool bMMB = e->button() == Qt::MidButton;
    bool bRMB = e->button() == Qt::RightButton;
 
-   if ( (bLMB && (pos < m_firstColumn)) || bRMB )       // Fast range selection
+   if ( (bLMB && (e->x()< xOffset) ) || bRMB )       // Fast range selection
    {
       m_cursorXPos = 0;
       m_cursorOldXPos = 0;
@@ -2016,6 +2055,10 @@ void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
          m_selection.end( line, pos );
       }
       m_cursorXPos = pos;
+      QString s = getString(line);
+      QTextLayout textLayout( s, font(), this );
+      getTextLayoutForLine( line, s, textLayout );
+      m_cursorXPixelPos = textLayout.lineAt(0).cursorToX( m_cursorXPos );
       m_cursorOldXPos = pos;
       m_cursorYPos = line;
 
@@ -2104,19 +2147,19 @@ void MergeResultWindow::mouseMoveEvent ( QMouseEvent * e )
 
       // Scroll because mouse moved out of the window
       const QFontMetrics& fm = fontMetrics();
-      int fontWidth = fm.width('W');
+      int fontWidth = fm.width('0');
       int topLineYOffset = 0;
       int deltaX=0;
       int deltaY=0;
       if ( ! m_pOptions->m_bRightToLeftLanguage )
       {
-         if ( e->x() < leftInfoWidth*fontWidth )       deltaX=-1;
+         if ( e->x() < getTextXOffset() )              deltaX=-1;
          if ( e->x() > width()     )                   deltaX=+1;
       }
       else
       {
-         if ( e->x() > width()-1-leftInfoWidth*fontWidth )   deltaX=-1;
-         if ( e->x() < fontWidth )                           deltaX=+1;
+         if ( e->x() > width()-1-getTextXOffset() )   deltaX=-1;
+         if ( e->x() < fontWidth )                    deltaX=+1;
       }
       if ( e->y() < topLineYOffset )    deltaY=-1;
       if ( e->y() > height() )          deltaY=+1;
@@ -2140,16 +2183,16 @@ void MergeResultWindow::slotCursorUpdate()
       m_bCursorUpdate = true;
 
       const QFontMetrics& fm = fontMetrics();
-      int fontWidth = fm.width("W");
       int topLineYOffset = 0;
-      int xOffset = fontWidth * leftInfoWidth;
+      //int xOffset = getTextXOffset();
       int yOffset = ( m_cursorYPos - m_firstLine ) * fm.height() + topLineYOffset;
-      int xCursor = ( m_cursorXPos - m_firstColumn ) * fontWidth + xOffset;
+      //int xCursor = ( m_cursorXPos - m_firstColumn ) * fontWidth + xOffset;
 
-      if (!m_pOptions->m_bRightToLeftLanguage)
-         repaint( xCursor-2, yOffset, 5, fm.ascent()+2 );
-      else
-         repaint( width()-1-4-(xCursor-2), yOffset, 5, fm.ascent()+2 );
+      //if (!m_pOptions->m_bRightToLeftLanguage)
+      //   repaint( xCursor-2, yOffset, 5, fm.ascent()+2 );
+      //else
+         repaint( 0, yOffset, width(), fm.ascent()+2 );
+         //repaint( width()-1-4-(xCursor-2), yOffset, 5, fm.ascent()+2 );
 
       m_bCursorUpdate=false;
    }
@@ -2410,21 +2453,22 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
    x = minMaxLimiter( x, 0, (int)str.length() );
 
    int newFirstLine = m_firstLine;
-   int newFirstColumn = m_firstColumn;
+   int newHorizScrollOffset = m_horizScrollOffset;
 
    if ( y<m_firstLine )
       newFirstLine = y;
    else if ( y > m_firstLine + getNofVisibleLines() )
       newFirstLine = y - getNofVisibleLines();
 
+   // TODO try to preserve cursor x pixel position when moving to another line
    if (bYMoveKey)
       x=convertToPosInText( str, m_cursorOldXPos, m_pOptions->m_tabSize );
 
    int xOnScreen = convertToPosOnScreen( str, x, m_pOptions->m_tabSize );
-   if ( xOnScreen<m_firstColumn )
-      newFirstColumn = xOnScreen;
-   else if ( xOnScreen > m_firstColumn + getNofVisibleColumns() )
-      newFirstColumn = xOnScreen - getNofVisibleColumns();
+   //if ( xOnScreen<m_firstColumn )
+   //   newFirstColumn = xOnScreen;
+   // TODO else if ( xOnScreen > m_firstColumn + getNofVisibleColumns() )
+   //   newFirstColumn = xOnScreen - getNofVisibleColumns();
 
    if ( bShift )
    {
@@ -2438,6 +2482,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
 
    m_cursorYPos = y;
    m_cursorXPos = xOnScreen;
+   // TODO if width of current line exceeds the current maximum width then force recalculating the scrollbars
    if ( m_cursorXPos>m_nofColumns )
    {
       m_nofColumns = m_cursorXPos;
@@ -2448,10 +2493,10 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
 
    m_bCursorOn = false;
 
-   if ( newFirstLine!=m_firstLine  ||  newFirstColumn!=m_firstColumn )
+   if ( newFirstLine!=m_firstLine  ||  newHorizScrollOffset!=m_horizScrollOffset )
    {
       m_bCursorOn = true;
-      scroll( newFirstColumn-m_firstColumn, newFirstLine-m_firstLine );
+      scroll( newHorizScrollOffset-m_horizScrollOffset, newFirstLine-m_firstLine );
       return;
    }
 

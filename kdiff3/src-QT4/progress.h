@@ -13,7 +13,7 @@
 
 #include <QDialog>
 #include <QTime>
-#include <list>
+#include <QList>
 
 class KJob;
 class QEventLoop;
@@ -66,10 +66,10 @@ private:
       double m_dSubRangeMax;
       double m_dSubRangeMin;
    };
-   std::list<ProgressLevelData> m_progressStack;
+   QList<ProgressLevelData> m_progressStack;
    
    int m_progressDelayTimer;
-   std::list<QEventLoop*> m_eventLoopStack;
+   QList<QEventLoop*> m_eventLoopStack;
 
    QProgressBar* m_pProgressBar;
    QProgressBar* m_pSubProgressBar;

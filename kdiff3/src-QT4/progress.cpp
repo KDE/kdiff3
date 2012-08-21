@@ -233,7 +233,7 @@ void ProgressDialog::recalc( bool bUpdate )
       }
       else
       {
-         std::list<ProgressLevelData>::iterator i = m_progressStack.begin();
+         QList<ProgressLevelData>::iterator i = m_progressStack.begin();
          m_pProgressBar->setValue( int( 1000.0 * ( i->m_dCurrent * (i->m_dRangeMax - i->m_dRangeMin) + i->m_dRangeMin ) ) );
          ++i;
          if ( i!=m_progressStack.end() )

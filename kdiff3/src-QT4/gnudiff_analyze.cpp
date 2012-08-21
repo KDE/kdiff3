@@ -798,7 +798,7 @@ GnuDiff::change* GnuDiff::diff_2_files (struct comparison *cmp)
   int f;
   //struct change *e, *p;
   struct change *script;
-  int changes;
+  //int changes;
 
   read_files (cmp->file, files_can_be_treated_as_binary);
 
@@ -856,7 +856,7 @@ GnuDiff::change* GnuDiff::diff_2_files (struct comparison *cmp)
 
       script = build_script (cmp->file);
 
-      changes = (script != 0);
+      //changes = (script != 0);
 
       free (cmp->file[0].undiscarded);
 

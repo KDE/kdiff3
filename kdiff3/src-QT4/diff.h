@@ -19,8 +19,8 @@
 #define DIFF_H
 
 #include <QPainter>
-#include <list>
-#include <vector>
+#include <QLinkedList>
+#include <QVector>
 #include <assert.h>
 #include "common.h"
 #include "fileaccess.h"
@@ -145,10 +145,10 @@ struct Diff3Line
 };
 
 
-class Diff3LineList : public std::list<Diff3Line>
+class Diff3LineList : public QLinkedList<Diff3Line>
 {
 };
-class Diff3LineVector : public std::vector<Diff3Line*>
+class Diff3LineVector : public QVector<Diff3Line*>
 {
 };
 
@@ -161,7 +161,7 @@ public:
    int wrapLineLength;
 };
 
-typedef std::vector<Diff3WrapLine> Diff3WrapLineVector;
+typedef QVector<Diff3WrapLine> Diff3WrapLineVector;
 
 
 class TotalDiffStatus

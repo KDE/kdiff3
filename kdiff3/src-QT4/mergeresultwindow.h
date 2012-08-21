@@ -26,6 +26,7 @@
 #include <QStatusBar>
 
 class QPainter;
+class QTextLayout;
 
 class Overview : public QWidget
 {
@@ -119,9 +120,9 @@ public:
    void choose(int selector);
    void chooseGlobal(int selector, bool bConflictsOnly, bool bWhiteSpaceOnly );
 
-   int getNofColumns();
+   int getMaxTextWidth();     // width of longest text line
    int getNofLines();
-   int getNofVisibleColumns();
+   int getVisibleTextWidth(); // area width - border
    int getNofVisibleLines();
    QString getSelection();
    void resetSelection();
@@ -139,7 +140,7 @@ public:
    Overview::e_OverviewMode getOverviewMode();
 public slots:
    void setFirstLine(int firstLine);
-   void setFirstColumn(int firstCol);
+   void setHorizScrollOffset(int horizScrollOffset);
 
    void slotGoCurrent();
    void slotGoTop();
@@ -234,7 +235,7 @@ private:
       void pop_back()                          { ds(-1); BASE::pop_back();    }
       iterator erase( iterator i )             { ds(-1); return BASE::erase(i);  }
       iterator insert( iterator i, const MergeEditLine& m ) { ds(+1); return BASE::insert(i,m); }
-      int size(){ if (!m_pTotalSize) m_size = BASE::size(); return m_size; }
+      int size(){ if (!m_pTotalSize) m_size = (int) BASE::size(); return m_size; }
       iterator begin(){return BASE::begin();}
       iterator end(){return BASE::end();}
       reverse_iterator rbegin(){return BASE::rbegin();}
@@ -368,7 +369,8 @@ private:
 
    virtual void paintEvent( QPaintEvent* e );
 
-
+   int getTextXOffset();
+   QVector<QTextLayout::FormatRange> getTextLayoutForLine(int line, const QString& s, QTextLayout& textLayout );
    void myUpdate(int afterMilliSecs);
    virtual void timerEvent(QTimerEvent*);
    void writeLine(
@@ -389,7 +391,7 @@ private:
 
    QPixmap m_pixmap;
    int m_firstLine;
-   int m_firstColumn;
+   int m_horizScrollOffset;
    int m_nofColumns;
    int m_nofLines;
    int m_totalSize; //Same as m_nofLines, but calculated differently
@@ -401,6 +403,7 @@ private:
    int m_scrollDeltaX;
    int m_scrollDeltaY;
    int m_cursorXPos;
+   int m_cursorXPixelPos;
    int m_cursorYPos;
    int m_cursorOldXPos;
    bool m_bCursorOn; // blinking on and off each second
