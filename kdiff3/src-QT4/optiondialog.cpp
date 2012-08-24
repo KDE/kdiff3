@@ -1711,23 +1711,6 @@ void OptionDialog::slotOk( void )
 {
    slotApply();
 
-   // My system returns variable width fonts even though I
-   // disabled this. Even QFont::fixedPitch() doesn't work.
-   QFontMetrics fm(m_options.m_font);
-   if ( fm.width('W')!=fm.width('i') )
-   {
-      int result = KMessageBox::warningYesNo(this, i18n(
-         "You selected a variable width font.\n\n"
-         "Because this program doesn't handle variable width fonts\n"
-         "correctly, you might experience problems while editing.\n\n"
-         "Do you want to continue or do you want to select another font."),
-         i18n("Incompatible Font"),
-         KGuiItem( i18n("Continue at Own Risk") ),
-         KGuiItem( i18n("Select Another Font")) );
-      if (result==KMessageBox::No)
-         return;
-   }
-
    accept();
 }
 

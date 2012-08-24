@@ -318,7 +318,9 @@ int DiffTextWindow::getMaxTextWidth()
       for( int i = 0; i< d->m_size; ++i )
       {
          QTextLayout textLayout( d->getString(i), font(), this );
-         // TODO: Tabs
+         QTextOption textOption;
+         textOption.setTabStop( fontMetrics().width(' ') * d->m_pOptions->m_tabSize );
+         textLayout.setTextOption( textOption );
          textLayout.beginLayout();
          /*QTextLine textLine = */textLayout.createLine();
          textLayout.endLayout();
@@ -666,6 +668,9 @@ void DiffTextWindow::convertToLinePos( int x, int y, int& line, int& pos )
    {
       QString s = d->getLineString( line );
       QTextLayout textLayout( s, font(), this );
+      QTextOption textOption;
+      textOption.setTabStop( fontMetrics().width(' ') * d->m_pOptions->m_tabSize );
+      textLayout.setTextOption( textOption );
       textLayout.beginLayout();
       QTextLine line = textLayout.createLine();
       textLayout.endLayout();
@@ -754,12 +759,31 @@ private:
    qreal m_width;
    MyPainter* m_pPainter;
    QFontMetrics m_fm;
+   int m_tabStop;
+   bool m_bShowWhiteSpaceCharacters;
    QVector<QTextLayout::FormatRange> m_formatRanges;
    void draw()
    {
       if ( m_pPainter && !m_text.isEmpty() )
       {
          QTextLayout textLayout( m_text, m_font, m_pPainter->device() );
+         QTextOption textOption;
+         textOption.setTabStop( m_tabStop );
+         if ( m_bShowWhiteSpaceCharacters )
+            textOption.setFlags( QTextOption::ShowTabsAndSpaces );
+         textLayout.setTextOption( textOption );
+
+         if ( m_bShowWhiteSpaceCharacters )
+         {
+            // This additional format is only necessary for the tab arrow
+            QList<QTextLayout::FormatRange> formats;
+            QTextLayout::FormatRange formatRange;
+            formatRange.start = 0;
+            formatRange.length = m_text.length();
+            formatRange.format.setFont( m_font );
+            formats.append( formatRange );
+            textLayout.setAdditionalFormats(formats);
+         }
          textLayout.beginLayout();
          QTextLine line = textLayout.createLine();
          line.setPosition(QPointF(0, m_fm.leading()));
@@ -772,7 +796,7 @@ private:
       }
    }
 public:
-   DrawTextOptimizer( MyPainter* pPainter, int x, int y )
+   DrawTextOptimizer( MyPainter* pPainter, int x, int y, int tabStop, bool bShowWhiteSpaceCharacters )
       : m_fm(pPainter->fontMetrics())
    { 
       m_pos = QPoint(x,y);
@@ -781,6 +805,8 @@ public:
       m_pen = m_pPainter->pen();
       m_background = QColor(Qt::white); // TODO
       m_width = 0;
+      m_tabStop = tabStop;
+      m_bShowWhiteSpaceCharacters = bShowWhiteSpaceCharacters;
    }
    ~DrawTextOptimizer() { end(); }
    void setFont( const QFont& f )
@@ -920,21 +946,12 @@ void DiffTextWindowData::writeLine(
 
       int lineLength = m_bWordWrap ? wrapLineOffset+wrapLineLength : lineString.length();
 
-      DrawTextOptimizer dto( &p, xOffset, yOffset + fontAscent );
+      DrawTextOptimizer dto( &p, xOffset, yOffset + fontAscent, fm.width(' ') * m_pOptions->m_tabSize,
+                             m_pOptions->m_bShowWhiteSpaceCharacters );
 
       for( i=wrapLineOffset; i<lineLength; ++i )
       {
-         int spaces = 1;
-
-         if ( lineString[i]=='\t' )
-         {
-            spaces = tabber( outPos, m_pOptions->m_tabSize );
-            s[0] = ' ';
-         }
-         else
-         {
-            s[0] = lineString[i];
-         }
+         s[0] = lineString[i];
 
          QColor c = m_pOptions->m_fgColor;
          int cchanged = charChanged[i] | whatChanged;
@@ -970,17 +987,14 @@ void DiffTextWindowData::writeLine(
                }
 
                dto.setPen( c );
-               if ( s[0]==' '  &&  c!=m_pOptions->m_fgColor  &&  charChanged[i]!=0 )
-               {
-                  if ( m_pOptions->m_bShowWhiteSpaceCharacters && m_pOptions->m_bShowWhiteSpace)
-                  {
-                     dto.setBackground(c);
-                  }
-               }
-               else
-               {
-                  dto.drawText( s );
-               }
+//               if ( (s[0]==' ' || s[0]=='\t') &&  c!=m_pOptions->m_fgColor  &&  charChanged[i]!=0 )
+//               {
+//                  if ( m_pOptions->m_bShowWhiteSpaceCharacters && m_pOptions->m_bShowWhiteSpace)
+//                  {
+//                     dto.setBackground(c);
+//                  }
+//               }
+               dto.drawText( s );
                dto.setFont(normalFont);
             }
             else
@@ -993,7 +1007,7 @@ void DiffTextWindowData::writeLine(
             }
          }
 
-         outPos += spaces;
+         ++outPos;
       } // end for
       dto.end();
 //      if( m_selection.lineWithin( line ) && m_selection.lineWithin( line+1 ) )
@@ -1617,6 +1631,9 @@ void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int
          int leading = fontMetrics().leading();
          qreal height = 0;
          QTextLayout textLayout( s, font(), this);
+         QTextOption textOption;
+         textOption.setTabStop( fontMetrics().width(' ') * d->m_pOptions->m_tabSize );
+         textLayout.setTextOption( textOption );
          textLayout.beginLayout();
          while (1) {
              QTextLine line = textLayout.createLine();

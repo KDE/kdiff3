@@ -557,7 +557,7 @@ void KDiff3App::initActions( KActionCollection* ac )
    chooseC = KDiff3::createAction< KToggleAction >(i18n("Select Line(s) From C"), QIcon(QPixmap(iconC)), i18n("Choose\nC"), KShortcut( Qt::CTRL+Qt::Key_3 ), this, SLOT(slotChooseC()), ac, "merge_choose_c");
    autoAdvance = KDiff3::createAction< KToggleAction >(i18n("Automatically Go to Next Unsolved Conflict After Source Selection"), QIcon(QPixmap(autoadvance)), i18n("Auto\nNext"), this, SLOT(slotAutoAdvanceToggled()), ac, "merge_autoadvance");
 
-   showWhiteSpaceCharacters = KDiff3::createAction< KToggleAction >(i18n("Show Space && Tabulator Characters for Differences"), QIcon(QPixmap(showwhitespacechars)), i18n("White\nCharacters"), this, SLOT(slotShowWhiteSpaceToggled()), ac, "diff_show_whitespace_characters");
+   showWhiteSpaceCharacters = KDiff3::createAction< KToggleAction >(i18n("Show Space && Tabulator Characters"), QIcon(QPixmap(showwhitespacechars)), i18n("White\nCharacters"), this, SLOT(slotShowWhiteSpaceToggled()), ac, "diff_show_whitespace_characters");
    showWhiteSpace = KDiff3::createAction< KToggleAction >(i18n("Show White Space"), QIcon(QPixmap(showwhitespace)), i18n("White\nDeltas"), this, SLOT(slotShowWhiteSpaceToggled()), ac, "diff_show_whitespace");
 
    showLineNumbers = KDiff3::createAction< KToggleAction >(i18n("Show Line Numbers"), QIcon(QPixmap(showlinenumbers)), i18n("Line\nNumbers"), this, SLOT(slotShowLineNumbersToggled()), ac, "diff_showlinenumbers");

@@ -766,9 +766,11 @@ KFontChooser::KFontChooser( QWidget* pParent )
    m_pLabel = new QLabel( "", this );
    m_pLabel->setFont( m_font );
    m_pLabel->setMinimumWidth(200);
-   m_pLabel->setText( "The quick brown fox jumps over the river\n"
+   QChar visualTab(0x2192);
+   QChar visualSpace((ushort)0xb7);
+   m_pLabel->setText( QString("The quick brown fox jumps over the river\n"
                       "but the little red hen escapes with a shiver.\n"
-                      ":-)");
+                      ":-)")+visualTab+visualSpace);
    pLayout->addWidget(m_pLabel);
 }
 
@@ -786,29 +788,9 @@ void KFontChooser::setFont( const QFont& font, bool )
 
 void KFontChooser::slotSelectFont()
 {
-   for(;;)
-   {
-      bool bOk;
-      m_font = QFontDialog::getFont(&bOk, m_font );
-      m_pLabel->setFont( m_font );   
-      QFontMetrics fm(m_font);
-
-      // Variable width font.
-      if ( fm.width('W')!=fm.width('i') )
-      {
-         int result = KMessageBox::warningYesNo(m_pParent, i18n(
-            "You selected a variable width font.\n\n"
-            "Because this program doesn't handle variable width fonts\n"
-            "correctly, you might experience problems while editing.\n\n"
-            "Do you want to continue or do you want to select another font."),
-            i18n("Incompatible font."),
-            i18n("Continue at my own risk"), i18n("Select another font"));
-         if (result==KMessageBox::Yes)
-            return;
-      }
-      else
-         return;
-   }
+   bool bOk;
+   m_font = QFontDialog::getFont(&bOk, m_font );
+   m_pLabel->setFont( m_font );
 }
 
 

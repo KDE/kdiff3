@@ -67,7 +67,6 @@ MergeResultWindow::MergeResultWindow(
 
    m_firstLine = 0;
    m_horizScrollOffset = 0;
-   m_nofColumns = 0;
    m_nofLines = 0;
    m_totalSize = 0;
    m_bMyUpdate = false;
@@ -93,7 +92,7 @@ MergeResultWindow::MergeResultWindow(
    m_delayedDrawTimer = 0;
 
    m_cursorXPos=0;
-   m_cursorOldXPos=0;
+   m_cursorOldXPixelPos=0;
    m_cursorYPos=0;
    m_bCursorOn = true;
    m_bCursorUpdate = false;
@@ -116,7 +115,6 @@ void MergeResultWindow::init(
 {
    m_firstLine = 0;
    m_horizScrollOffset = 0;
-   m_nofColumns = 0;
    m_nofLines = 0;
    m_bMyUpdate = false;
    m_bInsertMode = true;
@@ -136,7 +134,7 @@ void MergeResultWindow::init(
    
    m_selection.reset();
    m_cursorXPos=0;
-   m_cursorOldXPos=0;
+   m_cursorOldXPixelPos=0;
    m_cursorYPos=0;
 
    merge( g_bAutoSolve, -1 );
@@ -495,7 +493,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
 
 
    m_cursorXPos=0;
-   m_cursorOldXPos=0;
+   m_cursorOldXPixelPos=0;
    m_cursorYPos=0;
    //m_firstLine = 0; // Must not set line/column without scrolling there
    //m_horizScrollOffset = 0;
@@ -897,7 +895,7 @@ void MergeResultWindow::setFastSelector(MergeLineList::iterator i)
    if ( m_selection.isEmpty() )
    {
       m_cursorXPos = 0;
-      m_cursorOldXPos = 0;
+      m_cursorOldXPixelPos = 0;
       m_cursorYPos = line1;
    }
 
@@ -1611,44 +1609,68 @@ QString MergeResultWindow::MergeEditLine::getString( const MergeResultWindow* mr
 }
 
 /// Converts the cursor-posOnScreen into a text index, considering tabulators.
-int convertToPosInText( const QString& s, int posOnScreen, int tabSize )
+int convertToPosInText( const QString& /*s*/, int posOnScreen, int /*tabSize*/ )
 {
-   int localPosOnScreen = 0;
-   int size=s.length();
-   for ( int i=0; i<size; ++i )
-   {
-      if ( localPosOnScreen>=posOnScreen )
-         return i;
-
-      // All letters except tabulator have width one.
-      int letterWidth = s[i]!='\t' ? 1 : tabber( localPosOnScreen, tabSize );
-
-      localPosOnScreen += letterWidth;
-
-      if ( localPosOnScreen>posOnScreen )
-         return i;
-   }
-   return size;
-}
-
-
-/// Converts the index into the text to a cursor-posOnScreen considering tabulators.
-int convertToPosOnScreen( const QString& p, int posInText, int tabSize )
-{
-   int posOnScreen = 0;
-   for ( int i=0; i<posInText; ++i )
-   {
-      // All letters except tabulator have width one.
-      int letterWidth = p[i]!='\t' ? 1 : tabber( posOnScreen, tabSize );
-
-      posOnScreen += letterWidth;
-   }
    return posOnScreen;
 }
 
+//   int localPosOnScreen = 0;
+//   int size=s.length();
+//   for ( int i=0; i<size; ++i )
+//   {
+//      if ( localPosOnScreen>=posOnScreen )
+//         return i;
+
+//      // All letters except tabulator have width one.
+//      int letterWidth = s[i]!='\t' ? 1 : tabber( localPosOnScreen, tabSize );
+
+//      localPosOnScreen += letterWidth;
+
+//      if ( localPosOnScreen>posOnScreen )
+//         return i;
+//   }
+//   return size;
+//}
+
+
+/// Converts the index into the text to a cursor-posOnScreen considering tabulators.
+int convertToPosOnScreen( const QString& /*p*/, int posInText, int /*tabSize*/ )
+{
+   return posInText;
+}
+//   int posOnScreen = 0;
+//   for ( int i=0; i<posInText; ++i )
+//   {
+//      // All letters except tabulator have width one.
+//      int letterWidth = p[i]!='\t' ? 1 : tabber( posOnScreen, tabSize );
+
+//      posOnScreen += letterWidth;
+//   }
+//   return posOnScreen;
+//}
+
 QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(int line, const QString& str, QTextLayout& textLayout )
 {
-   // TODO tabs
+   // tabs
+   QTextOption textOption;
+   textOption.setTabStop( fontMetrics().width(' ') * m_pOptions->m_tabSize );
+   if ( m_pOptions->m_bShowWhiteSpaceCharacters )
+   {
+      textOption.setFlags( QTextOption::ShowTabsAndSpaces );
+   }
+   textLayout.setTextOption( textOption );
+
+   if ( m_pOptions->m_bShowWhiteSpaceCharacters )
+   {
+      // This additional format is only necessary for the tab arrow
+      QList<QTextLayout::FormatRange> formats;
+      QTextLayout::FormatRange formatRange;
+      formatRange.start = 0;
+      formatRange.length = str.length();
+      formatRange.format.setFont( font() );
+      formats.append( formatRange );
+      textLayout.setAdditionalFormats(formats);
+   }
    QVector<QTextLayout::FormatRange> selectionFormat;
    textLayout.beginLayout();
    if ( m_selection.lineWithin( line ) )
@@ -1847,7 +1869,6 @@ void MergeResultWindow::paintEvent( QPaintEvent* )
       //int visibleLines = height() / fontHeight;
 
       int lastVisibleLine = m_firstLine + getNofVisibleLines() + 5;
-      int nofColumns = 0;
       int line = 0;
       MergeLineList::iterator mlIt = m_mergeLineList.begin();
       for(mlIt = m_mergeLineList.begin();mlIt!=m_mergeLineList.end(); ++mlIt)
@@ -1876,8 +1897,6 @@ void MergeResultWindow::paintEvent( QPaintEvent* )
 
                   QString s;
                   s = mel.getString( this );
-                  if ( convertToPosOnScreen(s,s.length(),m_pOptions->m_tabSize) >nofColumns)
-                     nofColumns = s.length();
 
                   writeLine( p, line, s, mel.src(), ml.mergeDetails, rangeMark,
                      mel.isModified(), mel.isRemoved(), ml.bWhiteSpaceConflict );
@@ -1887,12 +1906,11 @@ void MergeResultWindow::paintEvent( QPaintEvent* )
          }
       }
 
-      if ( line != m_nofLines || nofColumns != m_nofColumns )
+      if ( line != m_nofLines )
       {
          m_nofLines = line;
          assert( m_nofLines == m_totalSize );
 
-         m_nofColumns = nofColumns;
          emit resizeSignal();
       }
 
@@ -1973,28 +1991,16 @@ void MergeResultWindow::focusInEvent( QFocusEvent* e )
    QWidget::focusInEvent(e);
 }
 
-void MergeResultWindow::convertToLinePos( int x, int y, int& line, int& pos )
+int MergeResultWindow::convertToLine( int y )
 {
    const QFontMetrics& fm = fontMetrics();
    int fontHeight = fm.height();
-   int fontWidth = fm.width('0');
-   int xOffset = getTextXOffset() - m_horizScrollOffset;
    int topLineYOffset = 0;
 
    int yOffset = topLineYOffset - m_firstLine * fontHeight;
 
-   line = min2( ( y - yOffset ) / fontHeight, m_totalSize-1 );
-   if ( ! m_pOptions->m_bRightToLeftLanguage )
-   {
-      QString s = getString( line );
-      QTextLayout textLayout( s, font(), this );
-      textLayout.beginLayout();
-      QTextLine line = textLayout.createLine();
-      textLayout.endLayout();
-      pos = line.xToCursor(x-xOffset);
-   }
-   else 
-      pos  = ( (width() - 1 - x) - xOffset ) / fontWidth;
+   int line = min2( ( y - yOffset ) / fontHeight, m_totalSize-1 );
+   return line;
 }
 
 void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
@@ -2003,9 +2009,11 @@ void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
 
    int xOffset = getTextXOffset();
 
-   int line;
-   int pos;
-   convertToLinePos( e->x(), e->y(), line, pos );
+   int line = convertToLine( e->y() );
+   QString s = getString(line);
+   QTextLayout textLayout( s, font(), this );
+   getTextLayoutForLine( line, s, textLayout );
+   int pos = textLayout.lineAt(0).xToCursor( e->x() - xOffset - m_horizScrollOffset );
 
    bool bLMB = e->button() == Qt::LeftButton;
    bool bMMB = e->button() == Qt::MidButton;
@@ -2014,7 +2022,7 @@ void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
    if ( (bLMB && (e->x()< xOffset) ) || bRMB )       // Fast range selection
    {
       m_cursorXPos = 0;
-      m_cursorOldXPos = 0;
+      m_cursorOldXPixelPos = 0;
       m_cursorYPos = max2(line,0);
       int l = 0;
       MergeLineList::iterator i = m_mergeLineList.begin();
@@ -2038,7 +2046,7 @@ void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
       }
    }
    else if ( bLMB )                  // Normal cursor placement
-   {
+   {      
       pos = max2(pos,0);
       line = max2(line,0);
       if ( e->QInputEvent::modifiers() & Qt::ShiftModifier )
@@ -2055,11 +2063,8 @@ void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
          m_selection.end( line, pos );
       }
       m_cursorXPos = pos;
-      QString s = getString(line);
-      QTextLayout textLayout( s, font(), this );
-      getTextLayoutForLine( line, s, textLayout );
-      m_cursorXPixelPos = textLayout.lineAt(0).cursorToX( m_cursorXPos );
-      m_cursorOldXPos = pos;
+      m_cursorXPixelPos = textLayout.lineAt(0).cursorToX( pos );
+      m_cursorOldXPixelPos = m_cursorXPixelPos;
       m_cursorYPos = line;
 
       update();
@@ -2072,7 +2077,7 @@ void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
 
       m_selection.reset();
       m_cursorXPos = pos;
-      m_cursorOldXPos = pos;
+      m_cursorOldXPixelPos = m_cursorXPixelPos;
       m_cursorYPos = line;
 
       pasteClipboard( true );
@@ -2083,19 +2088,14 @@ void MergeResultWindow::mouseDoubleClickEvent( QMouseEvent* e )
 {
    if ( e->button() == Qt::LeftButton )
    {
-      int line;
-      int pos;
-      convertToLinePos( e->x(), e->y(), line, pos );
+      int line = convertToLine( e->y() );
+      QString s = getString(line);
+      QTextLayout textLayout( s, font(), this );
+      getTextLayoutForLine( line, s, textLayout );
+      int pos = textLayout.lineAt(0).xToCursor( e->x() - getTextXOffset() - m_horizScrollOffset );
       m_cursorXPos = pos;
-      m_cursorOldXPos = pos;
+      m_cursorOldXPixelPos = m_cursorXPixelPos;
       m_cursorYPos = line;
-
-      // Get the string data of the current line
-
-      MergeLineList::iterator mlIt;
-      MergeEditLineList::iterator melIt;
-      calcIteratorFromLineNr( line, mlIt, melIt );
-      QString s = melIt->getString( this );
 
       if ( !s.isEmpty() )
       {
@@ -2132,11 +2132,13 @@ void MergeResultWindow::mouseReleaseEvent ( QMouseEvent * e )
 
 void MergeResultWindow::mouseMoveEvent ( QMouseEvent * e )
 {
-   int line;
-   int pos;
-   convertToLinePos( e->x(), e->y(), line, pos );
+   int line = convertToLine( e->y() );
+   QString s = getString(line);
+   QTextLayout textLayout( s, font(), this );
+   getTextLayoutForLine( line, s, textLayout );
+   int pos = textLayout.lineAt(0).xToCursor( e->x() - getTextXOffset() - m_horizScrollOffset );
    m_cursorXPos = pos;
-   m_cursorOldXPos = pos;
+   m_cursorOldXPixelPos = m_cursorXPixelPos;
    m_cursorYPos = line;
    if (m_selection.firstLine != -1 )
    {
@@ -2460,36 +2462,43 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
    else if ( y > m_firstLine + getNofVisibleLines() )
       newFirstLine = y - getNofVisibleLines();
 
-   // TODO try to preserve cursor x pixel position when moving to another line
+   QTextLayout textLayout( str, font(), this );
+   getTextLayoutForLine( m_cursorYPos, str, textLayout );
+
+   // try to preserve cursor x pixel position when moving to another line
    if (bYMoveKey)
-      x=convertToPosInText( str, m_cursorOldXPos, m_pOptions->m_tabSize );
+   {
+      x = textLayout.lineAt(0).xToCursor( m_cursorOldXPixelPos );
+   }
 
-   int xOnScreen = convertToPosOnScreen( str, x, m_pOptions->m_tabSize );
-   //if ( xOnScreen<m_firstColumn )
-   //   newFirstColumn = xOnScreen;
-   // TODO else if ( xOnScreen > m_firstColumn + getNofVisibleColumns() )
-   //   newFirstColumn = xOnScreen - getNofVisibleColumns();
+   m_cursorXPixelPos = textLayout.lineAt(0).cursorToX( x );
+   if ( m_cursorXPixelPos < m_horizScrollOffset )
+      newHorizScrollOffset = m_cursorXPixelPos;
+   else if ( m_cursorXPixelPos > m_horizScrollOffset + width() - getTextXOffset() - fontMetrics().width('0') )
+      newHorizScrollOffset = m_cursorXPixelPos - (width() - getTextXOffset() - fontMetrics().width('0') );
 
+   int newCursorX = textLayout.lineAt(0).xToCursor( m_cursorXPixelPos );
    if ( bShift )
    {
       if (m_selection.firstLine==-1)
          m_selection.start( m_cursorYPos, m_cursorXPos );
 
-      m_selection.end( y, xOnScreen );
+      m_selection.end( y, newCursorX );
    }
    else
       m_selection.reset();
 
    m_cursorYPos = y;
-   m_cursorXPos = xOnScreen;
+   m_cursorXPos = newCursorX;
+
    // TODO if width of current line exceeds the current maximum width then force recalculating the scrollbars
-   if ( m_cursorXPos>m_nofColumns )
-   {
-      m_nofColumns = m_cursorXPos;
-      emit resizeSignal();
-   }
+//   if ( m_cursorXPos>m_nofColumns )
+//   {
+//      m_nofColumns = m_cursorXPos;
+//      emit resizeSignal();
+//   }
    if ( ! bYMoveKey )
-      m_cursorOldXPos = m_cursorXPos;
+      m_cursorOldXPixelPos = m_cursorXPixelPos;
 
    m_bCursorOn = false;
 
@@ -2697,7 +2706,7 @@ void MergeResultWindow::deleteSelection()
 
    m_cursorYPos = m_selection.beginLine();
    m_cursorXPos = m_selection.beginPos();
-   m_cursorOldXPos = m_cursorXPos;
+   m_cursorOldXPixelPos = m_cursorXPixelPos;
 
    m_selection.reset();
 }
@@ -2752,7 +2761,7 @@ void MergeResultWindow::pasteClipboard( bool bFromSelection )
 
    m_cursorYPos = y;
    m_cursorXPos = convertToPosOnScreen( currentLine, x, m_pOptions->m_tabSize );
-   m_cursorOldXPos = m_cursorXPos;
+   m_cursorOldXPixelPos = m_cursorXPixelPos;
 
    update();
 }

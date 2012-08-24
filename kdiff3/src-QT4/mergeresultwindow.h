@@ -378,7 +378,7 @@ private:
       int srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
       );
    void setFastSelector(MergeLineList::iterator i);
-   void convertToLinePos( int x, int y, int& line, int& pos );
+   int convertToLine( int y );
    bool event(QEvent*);
    virtual void mousePressEvent ( QMouseEvent* e );
    virtual void mouseDoubleClickEvent ( QMouseEvent* e );
@@ -392,7 +392,6 @@ private:
    QPixmap m_pixmap;
    int m_firstLine;
    int m_horizScrollOffset;
-   int m_nofColumns;
    int m_nofLines;
    int m_totalSize; //Same as m_nofLines, but calculated differently
    bool m_bMyUpdate;
@@ -405,7 +404,7 @@ private:
    int m_cursorXPos;
    int m_cursorXPixelPos;
    int m_cursorYPos;
-   int m_cursorOldXPos;
+   int m_cursorOldXPixelPos;
    bool m_bCursorOn; // blinking on and off each second
    QTimer m_cursorTimer;
    bool m_bCursorUpdate;

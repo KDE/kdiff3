@@ -1646,14 +1646,14 @@ void KDiff3App::slotShowWhiteSpaceToggled()
    m_pOptions->m_bShowWhiteSpaceCharacters = showWhiteSpaceCharacters->isChecked();
    m_pOptions->m_bShowWhiteSpace = showWhiteSpace->isChecked();
 
-
-   showWhiteSpaceCharacters->setEnabled( showWhiteSpace->isChecked() );
    if ( m_pDiffTextWindow1!=0 )
       m_pDiffTextWindow1->update();
    if ( m_pDiffTextWindow2!=0 )
       m_pDiffTextWindow2->update();
    if ( m_pDiffTextWindow3!=0 )
       m_pDiffTextWindow3->update();
+   if ( m_pMergeResultWindow !=0 )
+      m_pMergeResultWindow->update();
    if ( m_pOverview!=0 )
       m_pOverview->slotRedraw();
 }
