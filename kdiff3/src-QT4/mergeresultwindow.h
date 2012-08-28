@@ -122,7 +122,7 @@ public:
 
    int getMaxTextWidth();     // width of longest text line
    int getNofLines();
-   int getVisibleTextWidth(); // area width - border
+   int getVisibleTextAreaWidth(); // text area width without the border
    int getNofVisibleLines();
    QString getSelection();
    void resetSelection();

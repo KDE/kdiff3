@@ -61,7 +61,7 @@ public:
    int getMaxTextWidth();
    int getNofLines();
    int getNofVisibleLines();
-   int getVisibleTextWidth();
+   int getVisibleTextAreaWidth();
 
    int convertLineToDiff3LineIdx( int line );
    int convertDiff3LineIdxToLine( int d3lIdx );

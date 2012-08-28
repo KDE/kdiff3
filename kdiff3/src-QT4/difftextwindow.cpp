@@ -143,6 +143,7 @@ public:
 
    bool m_bSelectionInProgress;
    QPoint m_lastKnownMousePos;
+   void prepareTextLayout( QTextLayout& textLayout, bool bFirstLine, int visibleTextWidth=-1 );
 };
 
 DiffTextWindow::DiffTextWindow(
@@ -248,7 +249,7 @@ void DiffTextWindow::dragEnterEvent( QDragEnterEvent* e )
 
 void DiffTextWindow::setFirstLine(int firstLine)
 {
-   int fontHeight = fontMetrics().height();
+   int fontHeight = fontMetrics().lineSpacing();
 
    int newFirstLine = max2(0,firstLine);
 
@@ -309,7 +310,7 @@ int DiffTextWindow::getMaxTextWidth()
 {
    if (d->m_bWordWrap)
    {
-      return getVisibleTextWidth();
+      return getVisibleTextAreaWidth();
    }
    else
    {
@@ -318,12 +319,7 @@ int DiffTextWindow::getMaxTextWidth()
       for( int i = 0; i< d->m_size; ++i )
       {
          QTextLayout textLayout( d->getString(i), font(), this );
-         QTextOption textOption;
-         textOption.setTabStop( fontMetrics().width(' ') * d->m_pOptions->m_tabSize );
-         textLayout.setTextOption( textOption );
-         textLayout.beginLayout();
-         /*QTextLine textLine = */textLayout.createLine();
-         textLayout.endLayout();
+         d->prepareTextLayout( textLayout, true );
          if ( textLayout.maximumWidth() > w )
             w = textLayout.maximumWidth();
       }
@@ -340,7 +336,7 @@ int DiffTextWindow::getNofLines()
 
 int DiffTextWindow::convertLineToDiff3LineIdx( int line )
 {
-   if ( d->m_bWordWrap && d->m_diff3WrapLineVector.size()>0 )
+   if ( line>=0 && d->m_bWordWrap && d->m_diff3WrapLineVector.size()>0 )
       return d->m_diff3WrapLineVector[ min2( line, (int)d->m_diff3WrapLineVector.size()-1 ) ].diff3LineIndex;
    else
       return line;
@@ -574,8 +570,8 @@ void DiffTextWindow::mouseMoveEvent ( QMouseEvent * e )
          if ( e->x() > width()-1-d->leftInfoWidth()*fontWidth ) deltaX=+1+ abs(e->x() - (width()-1-d->leftInfoWidth()*fontWidth)) / fontWidth;
          if ( e->x() < fontWidth )                              deltaX=-1- abs(e->x()-fontWidth)/fontWidth;
       }
-      if ( e->y() < 0 )          deltaY = -1 - sqr( e->y() ) / sqr(fm.height());
-      if ( e->y() > height() )   deltaY = +1 + sqr( e->y() - height() ) / sqr(fm.height());
+      if ( e->y() < 0 )          deltaY = -1 - sqr( e->y() ) / sqr(fm.lineSpacing());
+      if ( e->y() > height() )   deltaY = +1 + sqr( e->y() - height() ) / sqr(fm.lineSpacing());
       if ( (deltaX != 0 && d->m_scrollDeltaX!=deltaX) || (deltaY!= 0 && d->m_scrollDeltaY!=deltaY) )
       {
          d->m_scrollDeltaX = deltaX;
@@ -610,7 +606,7 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
 
    if ( d->m_bMyUpdate )
    {
-      int fontHeight = fontMetrics().height();
+      int fontHeight = fontMetrics().lineSpacing();
 
       if ( d->m_selection.oldLastLine != -1 )
       {
@@ -631,7 +627,7 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
 
          if ( y1<height() && y2>0 )
          {
-            QRect invalidRect = QRect( 0, y1, width(), y2-y1 );
+            QRect invalidRect = QRect( 0, y1-1, width(), y2-y1+2 );
             update( invalidRect );
          }
       }
@@ -657,27 +653,27 @@ void DiffTextWindow::resetSelection()
 void DiffTextWindow::convertToLinePos( int x, int y, int& line, int& pos )
 {
    const QFontMetrics& fm = fontMetrics();
-   int fontHeight = fm.height();
+   int fontHeight = fm.lineSpacing();
    int fontWidth = fm.width('0');
    int xOffset = d->leftInfoWidth() * fontWidth - d->m_horizScrollOffset;
 
    int yOffset = - d->m_firstLine * fontHeight;
 
    line = ( y - yOffset ) / fontHeight;
-   if ( ! d->m_pOptions->m_bRightToLeftLanguage )
+   if ( line >= 0  )
    {
-      QString s = d->getLineString( line );
-      QTextLayout textLayout( s, font(), this );
-      QTextOption textOption;
-      textOption.setTabStop( fontMetrics().width(' ') * d->m_pOptions->m_tabSize );
-      textLayout.setTextOption( textOption );
-      textLayout.beginLayout();
-      QTextLine line = textLayout.createLine();
-      textLayout.endLayout();
-      pos = line.xToCursor(x-xOffset);
+      if ( ! d->m_pOptions->m_bRightToLeftLanguage )
+      {
+         QString s = d->getLineString( line );
+         QTextLayout textLayout( s, font(), this );
+         d->prepareTextLayout( textLayout, !d->m_pOptions->m_bWordWrap || d->m_diff3WrapLineVector[line].wrapLineOffset==0 );
+         pos = textLayout.lineAt(0).xToCursor(x-xOffset);
+      }
+      else
+         pos  = ( (width() - 1 - x) - xOffset ) / fontWidth;
    }
-   else 
-      pos  = ( (width() - 1 - x) - xOffset ) / fontWidth;
+   else
+      pos = -1;
 }
 
 int Selection::firstPosInLine(int l)
@@ -747,87 +743,36 @@ bool Selection::lineWithin( int l )
 }
 
 
-class DrawTextOptimizer
-// Drawing continuous text is much faster than drawing one char after another.
+class FormatRangeHelper
 {
 private:
    QFont m_font;
    QPen m_pen;
    QColor m_background;
-   QString m_text;
-   QPoint m_pos;
-   qreal m_width;
-   MyPainter* m_pPainter;
-   QFontMetrics m_fm;
-   int m_tabStop;
-   bool m_bShowWhiteSpaceCharacters;
-   QVector<QTextLayout::FormatRange> m_formatRanges;
-   void draw()
-   {
-      if ( m_pPainter && !m_text.isEmpty() )
-      {
-         QTextLayout textLayout( m_text, m_font, m_pPainter->device() );
-         QTextOption textOption;
-         textOption.setTabStop( m_tabStop );
-         if ( m_bShowWhiteSpaceCharacters )
-            textOption.setFlags( QTextOption::ShowTabsAndSpaces );
-         textLayout.setTextOption( textOption );
-
-         if ( m_bShowWhiteSpaceCharacters )
-         {
-            // This additional format is only necessary for the tab arrow
-            QList<QTextLayout::FormatRange> formats;
-            QTextLayout::FormatRange formatRange;
-            formatRange.start = 0;
-            formatRange.length = m_text.length();
-            formatRange.format.setFont( m_font );
-            formats.append( formatRange );
-            textLayout.setAdditionalFormats(formats);
-         }
-         textLayout.beginLayout();
-         QTextLine line = textLayout.createLine();
-         line.setPosition(QPointF(0, m_fm.leading()));
-         textLayout.endLayout();
-         m_width = textLayout.maximumWidth();
-         textLayout.draw ( m_pPainter, m_pos - QPoint(0,m_fm.ascent()), m_formatRanges /*, const QRectF & clip = QRectF() */);
-
-         m_text = QString();
-         m_formatRanges.clear();
-      }
-   }
+   int m_currentPos;
 public:
-   DrawTextOptimizer( MyPainter* pPainter, int x, int y, int tabStop, bool bShowWhiteSpaceCharacters )
-      : m_fm(pPainter->fontMetrics())
+   QVector<QTextLayout::FormatRange> m_formatRanges;
+
+   FormatRangeHelper()
    { 
-      m_pos = QPoint(x,y);
-      m_pPainter = pPainter;
-      m_font = m_pPainter->font();
-      m_pen = m_pPainter->pen();
-      m_background = QColor(Qt::white); // TODO
-      m_width = 0;
-      m_tabStop = tabStop;
-      m_bShowWhiteSpaceCharacters = bShowWhiteSpaceCharacters;
+      m_pen = QColor(Qt::black);
+      m_background = QColor(Qt::white);
+      m_currentPos = 0;
    }
-   ~DrawTextOptimizer() { end(); }
    void setFont( const QFont& f )
    {
-      if ( f!=m_font )
-      {
-         m_font = f;
-         m_fm = m_pPainter->fontMetrics();
-      }
+      m_font = f;
    }
    void setPen( const QPen& pen )
    {
       m_pen = pen;
    }
-
    void setBackground( const QColor& background )
    {
       m_background = background;
    }
 
-   void drawText( const QString& s )
+   void next()
    {
       if ( m_formatRanges.isEmpty()
            || m_formatRanges.back().format.foreground().color() != m_pen.color()
@@ -835,27 +780,70 @@ public:
            )
       {
          QTextLayout::FormatRange fr;
-         fr.length = s.length();
-         fr.start = m_text.length();
+         fr.length = 1;
+         fr.start = m_currentPos;
          fr.format.setForeground( m_pen.color() );
          fr.format.setBackground( m_background );
          m_formatRanges.append( fr );
       }
       else
       {
-         m_formatRanges.back().length += s.length();
+         ++m_formatRanges.back().length;
       }
-      m_text += s;
-   }
-   void end()
-   {
-      draw();
-   }
-   qreal getTextWidth() // only valid after drawing
-   {
-      return m_width;
+      ++m_currentPos;
    }
 };
+
+void DiffTextWindowData::prepareTextLayout( QTextLayout& textLayout, bool bFirstLine, int visibleTextWidth )
+{
+   QTextOption textOption;
+   textOption.setTabStop( m_pDiffTextWindow->fontMetrics().width(' ') * m_pOptions->m_tabSize );
+   if ( m_pOptions->m_bShowWhiteSpaceCharacters )
+      textOption.setFlags( QTextOption::ShowTabsAndSpaces );
+   textLayout.setTextOption( textOption );
+
+   if ( m_pOptions->m_bShowWhiteSpaceCharacters )
+   {
+      // This additional format is only necessary for the tab arrow
+      QList<QTextLayout::FormatRange> formats;
+      QTextLayout::FormatRange formatRange;
+      formatRange.start = 0;
+      formatRange.length = textLayout.text().length();
+      formatRange.format.setFont( m_pDiffTextWindow->font() );
+      formats.append( formatRange );
+      textLayout.setAdditionalFormats(formats);
+   }
+   textLayout.beginLayout();
+
+   int leading = m_pDiffTextWindow->fontMetrics().leading();
+   int height = 0;
+
+   int indentation = 0;
+   while (1)
+   {
+      QTextLine line = textLayout.createLine();
+      if (!line.isValid())
+         break;
+
+      height += leading;
+      if ( !bFirstLine )
+         indentation = m_pDiffTextWindow->fontMetrics().width(' ') * m_pOptions->m_tabSize;
+      if ( visibleTextWidth>=0 )
+      {
+         line.setLineWidth( visibleTextWidth -indentation );
+         line.setPosition(QPointF(indentation, height));
+         height += line.height();
+         bFirstLine = false;
+      }
+      else // only one line
+      {
+         line.setPosition(QPointF(indentation, height));
+         break;
+      }
+   }
+
+   textLayout.endLayout();
+}
 
 void DiffTextWindowData::writeLine(
    MyPainter& p,
@@ -877,9 +865,8 @@ void DiffTextWindowData::writeLine(
    QFont diffFont = normalFont;
    diffFont.setItalic( m_pOptions->m_bItalicForDeltas );
    const QFontMetrics& fm = p.fontMetrics();
-   int fontHeight = fm.height();
+   int fontHeight = fm.lineSpacing();
    int fontAscent = fm.ascent();
-   //int fontDescent = fm.descent();
    int fontWidth = fm.width('0');
 
    int xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
@@ -921,8 +908,6 @@ void DiffTextWindowData::writeLine(
       c = m_cDiffBoth;
    }
 
-   p.fillRect( leftInfoWidth()*fontWidth, yOffset, deviceWidth, fontHeight, bgColor );
-
    if (pld!=0)
    {
       // First calculate the "changed" information for each character.
@@ -940,19 +925,14 @@ void DiffTextWindowData::writeLine(
          merger.next();
       }
 
-      QString s=" ";
-      // Convert tabs
       int outPos = 0;
 
       int lineLength = m_bWordWrap ? wrapLineOffset+wrapLineLength : lineString.length();
 
-      DrawTextOptimizer dto( &p, xOffset, yOffset + fontAscent, fm.width(' ') * m_pOptions->m_tabSize,
-                             m_pOptions->m_bShowWhiteSpaceCharacters );
+      FormatRangeHelper frh;
 
       for( i=wrapLineOffset; i<lineLength; ++i )
       {
-         s[0] = lineString[i];
-
          QColor c = m_pOptions->m_fgColor;
          int cchanged = charChanged[i] | whatChanged;
 
@@ -975,33 +955,26 @@ void DiffTextWindowData::writeLine(
          //   outRect = QRect( deviceWidth-1-(xOffset + outPixelPos), yOffset, -charWidth*spaces, fontHeight ).normalized();
          //if ( invalidRect.intersects( outRect ) )
          {
-            dto.setBackground( bgColor );
+            frh.setBackground( bgColor );
             if( !m_selection.within( line, outPos ) )
             {
 
                if( c!=m_pOptions->m_fgColor )
                {
                   QColor lightc = diffBgColor;
-                  dto.setBackground(lightc);
-                  dto.setFont(diffFont);
+                  frh.setBackground(lightc);
+                  frh.setFont(diffFont);
                }
 
-               dto.setPen( c );
-//               if ( (s[0]==' ' || s[0]=='\t') &&  c!=m_pOptions->m_fgColor  &&  charChanged[i]!=0 )
-//               {
-//                  if ( m_pOptions->m_bShowWhiteSpaceCharacters && m_pOptions->m_bShowWhiteSpace)
-//                  {
-//                     dto.setBackground(c);
-//                  }
-//               }
-               dto.drawText( s );
-               dto.setFont(normalFont);
+               frh.setPen( c );
+               frh.next();
+               frh.setFont(normalFont);
             }
             else
             {
-               dto.setBackground(m_pDiffTextWindow->palette().highlight().color());
-               dto.setPen( m_pDiffTextWindow->palette().highlightedText().color() );
-               dto.drawText( s );
+               frh.setBackground(m_pDiffTextWindow->palette().highlight().color());
+               frh.setPen( m_pDiffTextWindow->palette().highlightedText().color() );
+               frh.next();
 
                m_selection.bSelectionContainsData = true;
             }
@@ -1009,12 +982,10 @@ void DiffTextWindowData::writeLine(
 
          ++outPos;
       } // end for
-      dto.end();
-//      if( m_selection.lineWithin( line ) && m_selection.lineWithin( line+1 ) )
-//      {
-//         p.fillRect( xOffset + int(dto.getTextWidth()), yOffset,
-//                     deviceWidth, fontHeight, m_pDiffTextWindow->palette().highlight() );
-//      }
+
+      QTextLayout textLayout( lineString.mid( wrapLineOffset, lineLength), m_pDiffTextWindow->font(), m_pDiffTextWindow );
+      prepareTextLayout( textLayout, !m_bWordWrap || wrapLineOffset==0 );
+      textLayout.draw ( &p, QPoint(xOffset, yOffset), frh.m_formatRanges /*, const QRectF & clip = QRectF() */);
    }
 
    p.fillRect( 0, yOffset, leftInfoWidth()*fontWidth, fontHeight, m_pOptions->m_bgColor );
@@ -1095,12 +1066,11 @@ void DiffTextWindow::paintEvent( QPaintEvent* e )
 
    MyPainter p( this, d->m_pOptions->m_bRightToLeftLanguage, width(), fontMetrics().width('0') );
 
-      p.setFont( font() );
-      p.QPainter::fillRect( invalidRect, d->m_pOptions->m_bgColor );
+   p.setFont( font() );
+   p.QPainter::fillRect( invalidRect, d->m_pOptions->m_bgColor );
 
-      d->draw( p, invalidRect, width(), d->m_firstLine, endLine );
-      // p.drawLine( m_invalidRect.x(), m_invalidRect.y(), m_invalidRect.right(), m_invalidRect.bottom() ); // For test only
-      p.end();
+   d->draw( p, invalidRect, width(), d->m_firstLine, endLine );
+   p.end();
 
    d->m_oldFirstLine = d->m_firstLine;
    d->m_selection.oldLastLine = -1;
@@ -1117,7 +1087,6 @@ void DiffTextWindow::print( MyPainter& p, const QRect&, int firstLine, int nofLi
         ( d->m_diff3WrapLineVector.empty() && d->m_bWordWrap ) ) 
       return;
    resetSelection();
-//   MyPainter p( this, d->m_pOptions->m_bRightToLeftLanguage, width(), fontMetrics().width('0') );
    int oldFirstLine = d->m_firstLine;
    d->m_firstLine = firstLine;
    QRect invalidRect = QRect(0,0,1000000000,1000000000);
@@ -1277,7 +1246,7 @@ void DiffTextWindow::resizeEvent( QResizeEvent* e )
 {
    QSize s = e->size();
    QFontMetrics fm = fontMetrics();
-   int visibleLines = s.height()/fm.height()-2;
+   int visibleLines = s.height()/fm.lineSpacing()-2;
    int visibleColumns = s.width()/fm.width('0') - d->leftInfoWidth();
    emit resizeSignal( visibleColumns, visibleLines );
    QWidget::resizeEvent(e);
@@ -1286,12 +1255,12 @@ void DiffTextWindow::resizeEvent( QResizeEvent* e )
 int DiffTextWindow::getNofVisibleLines()
 {
    QFontMetrics fm = fontMetrics();
-   int fmh = fm.height();
+   int fmh = fm.lineSpacing();
    int h = height();
-   return h/fmh -1;//height()/fm.height()-2;
+   return h/fmh -1;
 }
 
-int DiffTextWindow::getVisibleTextWidth()
+int DiffTextWindow::getVisibleTextAreaWidth()
 {
    QFontMetrics fm = fontMetrics();
    return width() - d->leftInfoWidth() * fm.width('0');
@@ -1520,69 +1489,13 @@ void DiffTextWindow::getSelectionRange( int* pFirstLine, int* pLastLine, e_Coord
       *pLastLine = d->convertLineOnScreenToLineInSource( d->m_selection.endLine(), coordType, false );
 }
 
-// Returns the number of wrapped lines
-// if pWrappedLines != 0 then the stringlist will contain the wrapped lines.
-//int wordWrap( const QString& origLine, int nofColumns, Diff3WrapLine* pDiff3WrapLine )
-//{
-//   if (nofColumns<=0)
-//      nofColumns = 1;
-
-//   int nofNeededLines = 0;
-//   int length = origLine.length();
-
-//   if (length==0)
-//   {
-//      nofNeededLines = 1;
-//      if( pDiff3WrapLine )
-//      {
-//         pDiff3WrapLine->wrapLineOffset=0;
-//         pDiff3WrapLine->wrapLineLength=0;
-//      }
-//   }
-//   else
-//   {
-//      int pos = 0;
-
-//      while ( pos < length )
-//      {
-//         int wrapPos = pos + nofColumns;
-
-//         if ( length-pos <= nofColumns  )
-//         {
-//            wrapPos = length;
-//         }
-//         else
-//         {
-//            int wsPos = max2( origLine.lastIndexOf( ' ', wrapPos ), origLine.lastIndexOf( '\t', wrapPos ) );
-
-//            if ( wsPos > pos )
-//            {
-//               // Wrap line at wsPos
-//               wrapPos = wsPos;
-//            }
-//         }
-
-//         if ( pDiff3WrapLine )
-//         {
-//            pDiff3WrapLine->wrapLineOffset = pos;
-//            pDiff3WrapLine->wrapLineLength = wrapPos-pos;
-//            ++pDiff3WrapLine;
-//         }
-
-//         pos = wrapPos;
-
-//         ++nofNeededLines;
-//      }
-//   }
-//   return nofNeededLines;
-//}
-
 void DiffTextWindow::convertSelectionToD3LCoords()
 {
    if ( d->m_pDiff3LineVector==0 || ! d->m_bPaintingAllowed || !isVisible() || d->m_selection.isEmpty() )
    {
       return;
    }
+
 
    // convert the d->m_selection to unwrapped coordinates: Later restore to new coords
    int firstD3LIdx, firstD3LPos;
@@ -1595,7 +1508,6 @@ void DiffTextWindow::convertSelectionToD3LCoords()
    int lastPosInText = convertToPosInText( s, d->m_selection.endPos(), d->m_pOptions->m_tabSize );
    convertLineCoordsToD3LCoords( d->m_selection.endLine(), lastPosInText, lastD3LIdx, lastD3LPos );
 
-   //d->m_selection.reset();
    d->m_selection.start( firstD3LIdx, firstD3LPos );
    d->m_selection.end( lastD3LIdx, lastD3LPos );
 }
@@ -1618,7 +1530,7 @@ void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int
       d->m_diff3WrapLineVector.resize( wrapLineVectorSize );
 
       if (visibleTextWidth<0)
-         visibleTextWidth = getVisibleTextWidth();
+         visibleTextWidth = getVisibleTextAreaWidth();
       else
          visibleTextWidth-= d->leftInfoWidth() * fontMetrics().width('0');
       int i;
@@ -1627,26 +1539,19 @@ void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int
       for( i=0; i<size; ++i )
       {
          QString s = d->getString( i );
-         //int linesNeeded = wordWrap( s, nofVisibleColumns, wrapLineVectorSize==0 ? 0 : &d->m_diff3WrapLineVector[wrapLineIdx] );
-         int leading = fontMetrics().leading();
-         qreal height = 0;
          QTextLayout textLayout( s, font(), this);
-         QTextOption textOption;
-         textOption.setTabStop( fontMetrics().width(' ') * d->m_pOptions->m_tabSize );
-         textLayout.setTextOption( textOption );
-         textLayout.beginLayout();
-         while (1) {
-             QTextLine line = textLayout.createLine();
-             if (!line.isValid())
-                 break;
-
-             line.setLineWidth(visibleTextWidth);
-             height += leading;
-             line.setPosition(QPointF(0, height));
-             height += line.height();
-         }
-         textLayout.endLayout();
+         d->prepareTextLayout( textLayout, true, visibleTextWidth );
          int linesNeeded = textLayout.lineCount();
+         if ( wrapLineVectorSize > 0 )
+         {
+            for( int l=0; l<linesNeeded; ++l )
+            {
+               Diff3WrapLine* pDiff3WrapLine = &d->m_diff3WrapLineVector[ wrapLineIdx + l ];
+               QTextLine line = textLayout.lineAt(l);
+               pDiff3WrapLine->wrapLineOffset = line.textStart();
+               pDiff3WrapLine->wrapLineLength = line.textLength();
+            }
+         }
 
          Diff3Line& d3l = *(*d->m_pDiff3LineVector)[i];
          if ( d3l.linesNeededForDisplay<linesNeeded )
@@ -1698,7 +1603,6 @@ void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int
       int lastLine, lastPos;
       convertD3LCoordsToLineCoords( d->m_selection.endLine(), d->m_selection.endPos(), lastLine, lastPos );
 
-      //d->m_selection.reset();
       d->m_selection.start( firstLine, convertToPosOnScreen( d->getLineString( firstLine ), firstPos, d->m_pOptions->m_tabSize ) );
       d->m_selection.end( lastLine, convertToPosOnScreen( d->getLineString( lastLine ),lastPos, d->m_pOptions->m_tabSize ) );
    }

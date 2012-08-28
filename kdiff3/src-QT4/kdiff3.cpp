@@ -844,12 +844,11 @@ void KDiff3App::slotFilePrint()
       QRect view2( 1*(columnWidth + columnDistance), view.top(), columnWidth, view.height() );
       QRect view3( 2*(columnWidth + columnDistance), view.top(), columnWidth, view.height() );
 
-      int linesPerPage = view.height() / fm.height();
-      int charactersPerLine = columnWidth / fm.width("W");
+      int linesPerPage = view.height() / fm.lineSpacing();
       if ( m_pOptions->m_bWordWrap )
       {
          // For printing the lines are wrapped differently (this invalidates the first line)
-         recalcWordWrap( charactersPerLine );
+         recalcWordWrap( columnWidth );
       }
 
       int totalNofLines = max2(m_pDiffTextWindow1->getNofLines(), m_pDiffTextWindow2->getNofLines());

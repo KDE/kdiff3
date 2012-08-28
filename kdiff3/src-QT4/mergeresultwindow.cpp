@@ -541,7 +541,7 @@ int MergeResultWindow::getNofLines()
    return m_totalSize;
 }
 
-int MergeResultWindow::getVisibleTextWidth()
+int MergeResultWindow::getVisibleTextAreaWidth()
 {
    QFontMetrics fm = fontMetrics();
    return width() - 4 * fm.width('0');
@@ -550,7 +550,7 @@ int MergeResultWindow::getVisibleTextWidth()
 int MergeResultWindow::getNofVisibleLines()
 {
    QFontMetrics fm = fontMetrics();
-   return (height()-3)/fm.height()-2;
+   return (height()-3)/fm.lineSpacing()-2;
 }
 
 int MergeResultWindow::getTextXOffset()
@@ -1700,7 +1700,7 @@ void MergeResultWindow::writeLine(
    )
 {
    const QFontMetrics& fm = fontMetrics();
-   int fontHeight = fm.height();
+   int fontHeight = fm.lineSpacing();
    int fontAscent = fm.ascent();
 
    int topLineYOffset = 0;
@@ -1750,27 +1750,6 @@ void MergeResultWindow::writeLine(
 
       QTextLayout textLayout( str, font(), this );
       QVector<QTextLayout::FormatRange> selectionFormat = getTextLayoutForLine( line, str, textLayout );
-//      // TODO tabs
-//      QVector<QTextLayout::FormatRange> selectionFormat;
-//      textLayout.beginLayout();
-//      if ( m_selection.lineWithin( line ) )
-//      {
-//         int firstPosInText = convertToPosInText( str, m_selection.firstPosInLine(line), m_pOptions->m_tabSize );
-//         int lastPosInText  = convertToPosInText( str, m_selection.lastPosInLine(line), m_pOptions->m_tabSize );
-//         int lengthInText = max2(0,lastPosInText - firstPosInText);
-//         if (lengthInText>0)
-//            m_selection.bSelectionContainsData = true;
-
-//         QTextLayout::FormatRange selection;
-//         selection.start = firstPosInText;
-//         selection.length = lengthInText;
-//         selection.format.setBackground( palette().highlight() );
-//         selection.format.setForeground( palette().highlightedText().color() );
-//         selectionFormat.push_back( selection );
-//      }
-//      QTextLine textLine = textLayout.createLine();
-//      textLine.setPosition(QPointF(0, fm.leading()));
-//      textLayout.endLayout();
       textLayout.draw( &p, QPointF(xOffset - m_horizScrollOffset, yOffset), selectionFormat );
 
       if ( line == m_cursorYPos )
@@ -1852,7 +1831,7 @@ void MergeResultWindow::paintEvent( QPaintEvent* )
 
    bool bOldSelectionContainsData = m_selection.bSelectionContainsData;
    const QFontMetrics& fm = fontMetrics();
-   int fontHeight = fm.height();
+   int fontHeight = fm.lineSpacing();
    int fontWidth = fm.width('0');
    int fontAscent = fm.ascent();
 
@@ -1994,7 +1973,7 @@ void MergeResultWindow::focusInEvent( QFocusEvent* e )
 int MergeResultWindow::convertToLine( int y )
 {
    const QFontMetrics& fm = fontMetrics();
-   int fontHeight = fm.height();
+   int fontHeight = fm.lineSpacing();
    int topLineYOffset = 0;
 
    int yOffset = topLineYOffset - m_firstLine * fontHeight;
@@ -2187,7 +2166,7 @@ void MergeResultWindow::slotCursorUpdate()
       const QFontMetrics& fm = fontMetrics();
       int topLineYOffset = 0;
       //int xOffset = getTextXOffset();
-      int yOffset = ( m_cursorYPos - m_firstLine ) * fm.height() + topLineYOffset;
+      int yOffset = ( m_cursorYPos - m_firstLine ) * fm.lineSpacing() + topLineYOffset;
       //int xCursor = ( m_cursorXPos - m_firstColumn ) * fontWidth + xOffset;
 
       //if (!m_pOptions->m_bRightToLeftLanguage)
