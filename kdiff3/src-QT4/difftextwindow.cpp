@@ -66,6 +66,7 @@ public:
       m_oldFirstLine = 0;
       m_horizScrollOffset = 0;
       m_lineNumberWidth = 0;
+      m_maxTextWidth = -1;
       m_pStatusBar = 0;
       m_scrollDeltaX = 0;
       m_scrollDeltaY = 0;
@@ -109,6 +110,7 @@ public:
    int m_oldFirstLine;
    int m_horizScrollOffset;
    int m_lineNumberWidth;
+   int m_maxTextWidth;
 
    void getLineInfo(
            const Diff3Line& d,
@@ -209,6 +211,7 @@ void DiffTextWindow::init(
    d->m_fastSelectorLine1 = 0;
    d->m_fastSelectorNofLines = 0;
    d->m_lineNumberWidth = 0;
+   d->m_maxTextWidth = -1;
    d->m_selection.reset();
    d->m_selection.oldFirstLine = -1; // reset is not enough here.
    d->m_selection.oldLastLine = -1;
@@ -312,19 +315,19 @@ int DiffTextWindow::getMaxTextWidth()
    {
       return getVisibleTextAreaWidth();
    }
-   else
+   else if ( d->m_maxTextWidth < 0 )
    {
-      int w = 0;
+      d->m_maxTextWidth = 0;
       QFontMetrics fm( fontMetrics() );
       for( int i = 0; i< d->m_size; ++i )
       {
          QTextLayout textLayout( d->getString(i), font(), this );
          d->prepareTextLayout( textLayout, true );
-         if ( textLayout.maximumWidth() > w )
-            w = textLayout.maximumWidth();
+         if ( textLayout.maximumWidth() > d->m_maxTextWidth )
+            d->m_maxTextWidth = textLayout.maximumWidth();
       }
-      return w;
    }
+   return d->m_maxTextWidth;
 }
 
 int DiffTextWindow::getNofLines()

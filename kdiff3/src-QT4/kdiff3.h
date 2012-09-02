@@ -322,6 +322,7 @@ class KDiff3App : public QSplitter
    bool m_bAutoFlag;
    bool m_bAutoMode;
    void recalcWordWrap(int nofVisibleColumns=-1);
+   bool m_bRecalcWordWrapPosted;
    void setHScrollBarRange();
 
    int m_iCumulativeWheelDelta;
@@ -330,6 +331,7 @@ public slots:
    void resizeDiffTextWindow(int newWidth, int newHeight);
    void resizeMergeResultWindow();
    void slotRecalcWordWrap();
+   void postRecalcWordWrap();
 
    void showPopupMenu( const QPoint& point );
 

@@ -526,7 +526,7 @@ void KDiff3App::resizeDiffTextWindow(int /*newWidth*/, int newHeight)
 {
    m_DTWHeight = newHeight;
 
-   recalcWordWrap();
+   postRecalcWordWrap();
 
    m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines+1 - newHeight) );
    m_pDiffVScrollBar->setPageStep( newHeight );
@@ -760,8 +760,8 @@ void KDiff3App::initView()
 
    connect( m_pDiffTextWindow1, SIGNAL( resizeSignal(int,int) ),this, SLOT(resizeDiffTextWindow(int,int)));
    // The following two connects cause the wordwrap to be recalced thrice, just to make sure. Better than forgetting one.
-   connect( m_pDiffTextWindow2, SIGNAL( resizeSignal(int,int) ),this, SLOT(slotRecalcWordWrap()));
-   connect( m_pDiffTextWindow3, SIGNAL( resizeSignal(int,int) ),this, SLOT(slotRecalcWordWrap()));
+   connect( m_pDiffTextWindow2, SIGNAL( resizeSignal(int,int) ),this, SLOT(postRecalcWordWrap()));
+   connect( m_pDiffTextWindow3, SIGNAL( resizeSignal(int,int) ),this, SLOT(postRecalcWordWrap()));
 
    m_pDiffTextWindow1->setFocus();
    m_pMainWidget->setMinimumSize(50,50);
@@ -791,7 +791,7 @@ void KDiff3App::slotAfterFirstPaint()
    /*int newWidth  = m_pDiffTextWindow1->getNofVisibleColumns();*/
    m_DTWHeight = newHeight;
 
-   recalcWordWrap();
+   postRecalcWordWrap();
 
    m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines+1 - newHeight) );
    m_pDiffVScrollBar->setPageStep( newHeight );
@@ -1540,9 +1540,19 @@ void KDiff3App::slotWordWrapToggled()
    recalcWordWrap();
 }
 
+void KDiff3App::postRecalcWordWrap()
+{
+   if ( ! m_bRecalcWordWrapPosted )
+   {
+      QTimer::singleShot( 1, this, SLOT(slotRecalcWordWrap()) );
+      m_bRecalcWordWrapPosted = true;
+   }
+}
+
 void KDiff3App::slotRecalcWordWrap()
 {
    recalcWordWrap();
+   m_bRecalcWordWrapPosted = false;
 }
 
 void KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=0 only for printing, otherwise the really visible width is used

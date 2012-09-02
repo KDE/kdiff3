@@ -96,6 +96,7 @@ MergeResultWindow::MergeResultWindow(
    m_cursorYPos=0;
    m_bCursorOn = true;
    m_bCursorUpdate = false;
+   m_maxTextWidth = -1;
    connect( &m_cursorTimer, SIGNAL(timeout()), this, SLOT( slotCursorUpdate() ) );
    m_cursorTimer.setSingleShot(true);
    m_cursorTimer.start( 500 /*ms*/ );
@@ -136,6 +137,8 @@ void MergeResultWindow::init(
    m_cursorXPos=0;
    m_cursorOldXPixelPos=0;
    m_cursorYPos=0;
+
+   m_maxTextWidth = -1;
 
    merge( g_bAutoSolve, -1 );
    g_bAutoSolve = true;
@@ -495,6 +498,8 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
    m_cursorXPos=0;
    m_cursorOldXPixelPos=0;
    m_cursorYPos=0;
+   m_maxTextWidth = -1;
+
    //m_firstLine = 0; // Must not set line/column without scrolling there
    //m_horizScrollOffset = 0;
 
@@ -521,19 +526,32 @@ void MergeResultWindow::setHorizScrollOffset(int horizScrollOffset)
 
 int MergeResultWindow::getMaxTextWidth()
 {
-   int w=0;
-   for(int i=0; i<getNofLines(); ++i)
+   if ( m_maxTextWidth < 0 )
    {
-      QTextLayout textLayout( getString(i), font(), this );
-      textLayout.beginLayout();
-      textLayout.createLine();
-      textLayout.endLayout();
-      if ( w < textLayout.maximumWidth() )
+      m_maxTextWidth=0;
+
+      MergeLineList::iterator mlIt = m_mergeLineList.begin();
+      for(mlIt = m_mergeLineList.begin();mlIt!=m_mergeLineList.end(); ++mlIt)
       {
-         w = textLayout.maximumWidth();
+         MergeLine& ml = *mlIt;
+         MergeEditLineList::iterator melIt;
+         for( melIt = ml.mergeEditLineList.begin(); melIt != ml.mergeEditLineList.end(); ++melIt )
+         {
+            MergeEditLine& mel = *melIt;
+            QString s = mel.getString( this );
+
+            QTextLayout textLayout( s, font(), this );
+            textLayout.beginLayout();
+            textLayout.createLine();
+            textLayout.endLayout();
+            if ( m_maxTextWidth < textLayout.maximumWidth() )
+            {
+               m_maxTextWidth = textLayout.maximumWidth();
+            }
+         }
       }
    }
-   return w;
+   return m_maxTextWidth;
 }
 
 int MergeResultWindow::getNofLines()
@@ -982,6 +1000,7 @@ void MergeResultWindow::choose( int selector )
       m_cursorXPos = 0;
    }
 
+   m_maxTextWidth = -1;
    update();
    updateSourceMask();
    emit updateAvailabilities();
@@ -2213,6 +2232,9 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
    QString str = melIt->getString( this );
    int x = convertToPosInText( str, m_cursorXPos, m_pOptions->m_tabSize );
 
+   QTextLayout textLayoutOrig( str, font(), this );
+   getTextLayoutForLine( y, str, textLayoutOrig );
+
    bool bCtrl  = ( e->QInputEvent::modifiers() & Qt::ControlModifier ) != 0 ;
    bool bShift = ( e->QInputEvent::modifiers() & Qt::ShiftModifier   ) != 0 ;
    #ifdef _WIN32
@@ -2361,26 +2383,48 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
          {
             if ( !bCtrl )
             {
-               --x;
-               if(x<0 && y>0){--y; x=INT_MAX;}
+               int newX = textLayoutOrig.previousCursorPosition(x);
+               if( newX == x && y>0 ){--y; x=INT_MAX;}
+               else                  { x = newX; }
             }
             else
             {
-               while( x>0  &&  (str[x-1]==' ' || str[x-1]=='\t') ) --x;
-               while( x>0  &&  (str[x-1]!=' ' && str[x-1]!='\t') ) --x;
+               while( x>0 && (str[x-1]==' ' || str[x-1]=='\t') )
+               {
+                  int newX = textLayoutOrig.previousCursorPosition(x);
+                  if ( newX==x ) break;
+                  x = newX;
+               }
+               while( x>0  &&  (str[x-1]!=' ' && str[x-1]!='\t') )
+               {
+                  int newX = textLayoutOrig.previousCursorPosition(x);
+                  if ( newX==x ) break;
+                  x = newX;
+               }
             }
          }
          else
          {
             if ( !bCtrl )
             {
-               ++x;  if(x>(int)str.length() && y<m_totalSize-1){ ++y; x=0; }
+               int newX = textLayoutOrig.nextCursorPosition(x);
+               if( newX == x && y<m_totalSize-1){ ++y; x=0; }
+               else                             { x = newX; }
             }
-
             else
             {
-               while( x<(int)str.length()  &&  (str[x]==' ' || str[x]=='\t') ) ++x;
-               while( x<(int)str.length()  &&  (str[x]!=' ' && str[x]!='\t') ) ++x;
+               while( x<(int)str.length()  &&  (str[x]==' ' || str[x]=='\t') )
+               {
+                  int newX = textLayoutOrig.nextCursorPosition(x);
+                  if ( newX==x ) break;
+                  x = newX;
+               }
+               while( x<(int)str.length()  &&  (str[x]!=' ' && str[x]!='\t') )
+               {
+                  int newX = textLayoutOrig.nextCursorPosition(x);
+                  if ( newX==x ) break;
+                  x = newX;
+               }
             }
          }
          break;
@@ -2441,6 +2485,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
    else if ( y > m_firstLine + getNofVisibleLines() )
       newFirstLine = y - getNofVisibleLines();
 
+
    QTextLayout textLayout( str, font(), this );
    getTextLayoutForLine( m_cursorYPos, str, textLayout );
 
@@ -2456,7 +2501,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
    else if ( m_cursorXPixelPos > m_horizScrollOffset + width() - getTextXOffset() - fontMetrics().width('0') )
       newHorizScrollOffset = m_cursorXPixelPos - (width() - getTextXOffset() - fontMetrics().width('0') );
 
-   int newCursorX = textLayout.lineAt(0).xToCursor( m_cursorXPixelPos );
+   int newCursorX = x;
    if ( bShift )
    {
       if (m_selection.firstLine==-1)
@@ -2753,6 +2798,8 @@ void MergeResultWindow::resetSelection()
 
 void MergeResultWindow::setModified(bool bModified)
 {
+   if ( bModified )
+      m_maxTextWidth = -1;
    if (bModified != m_bModified)
    {
       m_bModified = bModified;

@@ -394,6 +394,7 @@ private:
    int m_horizScrollOffset;
    int m_nofLines;
    int m_totalSize; //Same as m_nofLines, but calculated differently
+   int m_maxTextWidth;
    bool m_bMyUpdate;
    bool m_bInsertMode;
    bool m_bModified;
