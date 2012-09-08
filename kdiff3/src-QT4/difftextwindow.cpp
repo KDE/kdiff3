@@ -293,7 +293,7 @@ void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
    if ( d->m_pOptions->m_bRightToLeftLanguage )
    {
       deltaX = -deltaX;
-      r = QRect( width()-1-xOffset, 0, -(width()-xOffset), height() ).normalized();
+      r = QRect( width()-xOffset-2, 0, -(width()-xOffset), height() ).normalized();
    }
 
    if ( d->m_bSelectionInProgress && d->m_selection.firstLine != -1 )
@@ -433,7 +433,8 @@ void DiffTextWindow::mousePressEvent ( QMouseEvent* e )
       int fontWidth = fontMetrics().width('0');
       int xOffset = d->leftInfoWidth() * fontWidth;
 
-      if ( e->x() < xOffset )
+      if ( (! d->m_pOptions->m_bRightToLeftLanguage && e->x() < xOffset )
+           || ( d->m_pOptions->m_bRightToLeftLanguage && e->x() > width() - xOffset ) )
       {
          emit setFastSelectorLine( convertLineToDiff3LineIdx(line) );
          d->m_selection.firstLine = -1;     // Disable current d->m_selection
@@ -630,7 +631,7 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
 
          if ( y1<height() && y2>0 )
          {
-            QRect invalidRect = QRect( 0, y1-1, width(), y2-y1+2 );
+            QRect invalidRect = QRect( 0, y1-1, width(), y2-y1+fontHeight);  // Some characters in exotic exceed the regular bottom.
             update( invalidRect );
          }
       }
@@ -657,23 +658,16 @@ void DiffTextWindow::convertToLinePos( int x, int y, int& line, int& pos )
 {
    const QFontMetrics& fm = fontMetrics();
    int fontHeight = fm.lineSpacing();
-   int fontWidth = fm.width('0');
-   int xOffset = d->leftInfoWidth() * fontWidth - d->m_horizScrollOffset;
 
    int yOffset = - d->m_firstLine * fontHeight;
 
    line = ( y - yOffset ) / fontHeight;
    if ( line >= 0  )
    {
-      if ( ! d->m_pOptions->m_bRightToLeftLanguage )
-      {
-         QString s = d->getLineString( line );
-         QTextLayout textLayout( s, font(), this );
-         d->prepareTextLayout( textLayout, !d->m_pOptions->m_bWordWrap || d->m_diff3WrapLineVector[line].wrapLineOffset==0 );
-         pos = textLayout.lineAt(0).xToCursor(x-xOffset);
-      }
-      else
-         pos  = ( (width() - 1 - x) - xOffset ) / fontWidth;
+      QString s = d->getLineString( line );
+      QTextLayout textLayout( s, font(), this );
+      d->prepareTextLayout( textLayout, !d->m_pOptions->m_bWordWrap || d->m_diff3WrapLineVector[line].wrapLineOffset==0 );
+      pos = textLayout.lineAt(0).xToCursor( x - textLayout.position().x() );
    }
    else
       pos = -1;
@@ -803,6 +797,8 @@ void DiffTextWindowData::prepareTextLayout( QTextLayout& textLayout, bool bFirst
    textOption.setTabStop( m_pDiffTextWindow->fontMetrics().width(' ') * m_pOptions->m_tabSize );
    if ( m_pOptions->m_bShowWhiteSpaceCharacters )
       textOption.setFlags( QTextOption::ShowTabsAndSpaces );
+   if ( m_pOptions->m_bRightToLeftLanguage )
+      textOption.setAlignment(Qt::AlignRight); // only relevant for multi line text layout
    textLayout.setTextOption( textOption );
 
    if ( m_pOptions->m_bShowWhiteSpaceCharacters )
@@ -820,6 +816,13 @@ void DiffTextWindowData::prepareTextLayout( QTextLayout& textLayout, bool bFirst
 
    int leading = m_pDiffTextWindow->fontMetrics().leading();
    int height = 0;
+
+
+   int fontWidth = m_pDiffTextWindow->fontMetrics().width('0');
+   int xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
+   int textWidth = visibleTextWidth;
+   if ( textWidth<0 )
+      textWidth = m_pDiffTextWindow->width() - xOffset;
 
    int indentation = 0;
    while (1)
@@ -840,12 +843,17 @@ void DiffTextWindowData::prepareTextLayout( QTextLayout& textLayout, bool bFirst
       }
       else // only one line
       {
-         line.setPosition(QPointF(indentation, height));
+         line.setPosition( QPointF(indentation, height));
          break;
       }
    }
 
    textLayout.endLayout();
+   if ( m_pOptions->m_bRightToLeftLanguage )
+      textLayout.setPosition( QPointF( textWidth - textLayout.maximumWidth(),0) );
+   else
+      textLayout.setPosition( QPointF( xOffset,0) );
+
 }
 
 void DiffTextWindowData::writeLine(
@@ -988,7 +996,7 @@ void DiffTextWindowData::writeLine(
 
       QTextLayout textLayout( lineString.mid( wrapLineOffset, lineLength), m_pDiffTextWindow->font(), m_pDiffTextWindow );
       prepareTextLayout( textLayout, !m_bWordWrap || wrapLineOffset==0 );
-      textLayout.draw ( &p, QPoint(xOffset, yOffset), frh.m_formatRanges /*, const QRectF & clip = QRectF() */);
+      textLayout.draw ( &p, QPoint(0, yOffset), frh.m_formatRanges /*, const QRectF & clip = QRectF() */);
    }
 
    p.fillRect( 0, yOffset, leftInfoWidth()*fontWidth, fontHeight, m_pOptions->m_bgColor );

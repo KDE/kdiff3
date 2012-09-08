@@ -83,6 +83,10 @@ public slots:
       else
          QScrollBar::setValue( i );
    }
+   int value() const
+   {
+      return m_realVal;
+   }
 signals:
    void valueChanged2(int);
 };
