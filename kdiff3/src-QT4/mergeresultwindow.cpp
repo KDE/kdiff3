@@ -550,6 +550,7 @@ int MergeResultWindow::getMaxTextWidth()
             }
          }
       }
+      m_maxTextWidth += 5; // cursorwidth
    }
    return m_maxTextWidth;
 }
@@ -2525,11 +2526,11 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
    m_cursorXPos = newCursorX;
 
    // TODO if width of current line exceeds the current maximum width then force recalculating the scrollbars
-//   if ( m_cursorXPos>m_nofColumns )
-//   {
-//      m_nofColumns = m_cursorXPos;
-//      emit resizeSignal();
-//   }
+   if ( textLayout.maximumWidth()>getMaxTextWidth() )
+   {
+      m_maxTextWidth = textLayout.maximumWidth();
+      emit resizeSignal();
+   }
    if ( ! bYMoveKey )
       m_cursorOldXPixelPos = m_cursorXPixelPos;
 
@@ -2805,8 +2806,6 @@ void MergeResultWindow::resetSelection()
 
 void MergeResultWindow::setModified(bool bModified)
 {
-   if ( bModified )
-      m_maxTextWidth = -1;
    if (bModified != m_bModified)
    {
       m_bModified = bModified;

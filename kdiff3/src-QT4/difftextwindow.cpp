@@ -799,6 +799,9 @@ void DiffTextWindowData::prepareTextLayout( QTextLayout& textLayout, bool bFirst
       textOption.setFlags( QTextOption::ShowTabsAndSpaces );
    if ( m_pOptions->m_bRightToLeftLanguage )
       textOption.setAlignment(Qt::AlignRight); // only relevant for multi line text layout
+   if ( visibleTextWidth>=0 )
+      textOption.setWrapMode( QTextOption::WrapAtWordBoundaryOrAnywhere );
+
    textLayout.setTextOption( textOption );
 
    if ( m_pOptions->m_bShowWhiteSpaceCharacters )

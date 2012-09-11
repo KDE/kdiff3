@@ -1,3 +1,11 @@
+Version 0.9.98a - 2012-09-11
+============================
+- Text rendering now with QTextLayout fixes the following issues
+  - Correct handling for variable width fonts.
+  - Corrected display of highlighted text with Qt4.8.x on Ubuntu and Mac.
+  - Improved handling of texts with both right to left and left to right languages (mixed Arabic and western texts).
+  - Improved handling of Chinese and Japanese.
+
 Version 0.9.97 - 2012-08-10
 ===========================
 - Memory usage optimized for comparison of large directories. (ca. 1/5 needed)
