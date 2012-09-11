@@ -19,6 +19,7 @@
 #include <kio/job.h>
 #include <kio/jobclasses.h>
 #include <kurl.h>
+#include <list>
 
 
 bool wildcardMultiMatch( const QString& wildcard, const QString& testString, bool bCaseSensitive );

@@ -927,7 +927,7 @@ void DiffTextWindowData::writeLine(
       // First calculate the "changed" information for each character.
       int i=0;
       QString lineString( pld->pLine, pld->size );
-      std::vector<UINT8> charChanged( pld->size );
+      QVector<UINT8> charChanged( pld->size );
       Merger merger( pLineDiff1, pLineDiff2 );
       while( ! merger.isEndReached() &&  i<pld->size )
       {

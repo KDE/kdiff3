@@ -294,7 +294,7 @@ private:
       int m_size;
       int m_vSize; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
       QString m_unicodeBuf;
-      std::vector<LineData> m_v;
+      QVector<LineData> m_v;
       bool m_bIsText;
       bool m_bIncompleteConversion;
       e_LineEndStyle m_eLineEndStyle;

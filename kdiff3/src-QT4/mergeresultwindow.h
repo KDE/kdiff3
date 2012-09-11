@@ -24,9 +24,9 @@
 #include <QPixmap>
 #include <QTimer>
 #include <QStatusBar>
+#include <QTextLayout>
 
 class QPainter;
-class QTextLayout;
 
 class Overview : public QWidget
 {

@@ -1629,7 +1629,6 @@ void correctManualDiffAlignment( Diff3LineList& d3ll, ManualDiffHelpList* pManua
    for( iMDHL =  pManualDiffHelpList->begin(); iMDHL != pManualDiffHelpList->end(); ++iMDHL )
    {
       Diff3LineList::iterator i3 = d3ll.begin();
-      //int winIdxPreferred = 0;
       int missingWinIdx = 0;
       int alignedSum = (iMDHL->lineA1<0?0:1) + (iMDHL->lineB1<0?0:1) + (iMDHL->lineC1<0?0:1);
       if (alignedSum==2)
@@ -1638,7 +1637,6 @@ void correctManualDiffAlignment( Diff3LineList& d3ll, ManualDiffHelpList* pManua
          // If only A & C are aligned then let B rather be aligned with A
          // If only B & C are aligned then let A rather be aligned with B
          missingWinIdx = iMDHL->lineA1<0 ? 1 : (iMDHL->lineB1<0 ? 2 : 3 );
-         //winIdxPreferred = missingWinIdx == 1 ? 2 : 1;
       }
       else if (alignedSum<=1)
       {

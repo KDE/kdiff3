@@ -375,7 +375,7 @@ private:
 
 class OptionEncodingComboBox : public QComboBox, public OptionItem
 {
-   std::vector<QTextCodec*> m_codecVec;
+   QVector<QTextCodec*> m_codecVec;
    QTextCodec** m_ppVarCodec;
 public:
    OptionEncodingComboBox( const QString& saveName, QTextCodec** ppVarCodec,
@@ -411,7 +411,7 @@ public:
    {
       if (c!=0)
       {
-         for( unsigned int i=0; i<m_codecVec.size(); ++i )
+         for( int i=0; i<m_codecVec.size(); ++i )
          {
             if ( c==m_codecVec[i] )
                return;  // don't insert any codec twice
@@ -441,7 +441,7 @@ public:
    {
       if (m_ppVarCodec!=0)
       {
-         for(unsigned int i=0; i<m_codecVec.size(); ++i)
+         for( int i=0; i<m_codecVec.size(); ++i)
          {
             if ( *m_ppVarCodec==m_codecVec[i] )
             {
@@ -462,7 +462,7 @@ public:
    void read (ValueMap* config)
    {
       QString codecName = config->readEntry( m_saveName, QString(m_codecVec[ currentIndex() ]->name()) );
-      for(unsigned int i=0; i<m_codecVec.size(); ++i)
+      for( int i=0; i<m_codecVec.size(); ++i)
       {
          if ( codecName == m_codecVec[i]->name() )
          {
