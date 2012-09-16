@@ -199,8 +199,8 @@ public:
       *m_pVar = defaultVal;
       m_defaultVal = defaultVal;
    }
-   void setToDefault(){ setFont( m_defaultVal, true /*only fixed*/ ); }
-   void setToCurrent(){ setFont( *m_pVar, true /*only fixed*/ ); }
+   void setToDefault(){ setFont( m_defaultVal, false ); }
+   void setToCurrent(){ setFont( *m_pVar, false ); }
    void apply()       { *m_pVar = font();}
    void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pVar );   }
    void read (ValueMap* config){ *m_pVar = config->readFontEntry( m_saveName, m_pVar ); }
