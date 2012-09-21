@@ -228,7 +228,7 @@ public:
    bool m_bConflictingAges       : 1;       // Equal age but files are not!
 };
 
-
+static Qt::CaseSensitivity s_eCaseSensitivity = Qt::CaseSensitive;
 
 class DirectoryMergeWindow::Data : public QAbstractItemModel
 {
@@ -389,7 +389,7 @@ public:
         
          for( int i=0; i<v1Size && i<v2Size; ++i )
          {
-            int r = v1[v1Size-i-1]->fileName().compare( v2[v2Size-i-1]->fileName() );
+            int r = v1[v1Size-i-1]->fileName().compare( v2[v2Size-i-1]->fileName(), s_eCaseSensitivity );
             if (  r < 0  )
                return true;
             else if ( r > 0  )
@@ -1059,6 +1059,7 @@ bool DirectoryMergeWindow::Data::init
    QString origCurrentDirectory = QDir::currentPath();
 
    m_fileMergeMap.clear();
+   s_eCaseSensitivity = m_bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
    t_DirectoryList::iterator i;
 
    // calc how many directories will be read:
