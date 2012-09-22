@@ -211,6 +211,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
       m_outputFilename = args->getOption("output");
       if ( m_outputFilename.isEmpty() )
          m_outputFilename = args->getOption("out");
+      if ( ! m_outputFilename.isEmpty() )
+         m_outputFilename = FileAccess( m_outputFilename, true ).absoluteFilePath();
    }
 
    m_bAutoFlag = args!=0  && args->isSet("auto");
