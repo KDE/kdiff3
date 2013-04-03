@@ -84,7 +84,7 @@ static void showHelp()
 
 #ifndef Q_OS_OS2
       char buf[256];
-      HINSTANCE hi = FindExecutableA( helpFile.fileName().toAscii(), helpFile.absolutePath().toAscii(), buf );
+      HINSTANCE hi = FindExecutableA( helpFile.fileName().toLatin1(), helpFile.absolutePath().toLatin1(), buf );
       if ( (quintptr)hi<=32 )
       {
 #endif
@@ -1207,9 +1207,9 @@ QObject* KLibFactory::create(QObject* pParent, const QString& name, const QStrin
 {
    KParts::Factory* f = qobject_cast<KParts::Factory*>(this);
    if (f!=0)
-      return f->createPartObject( (QWidget*)pParent, name.toAscii(),
-                                            pParent, name.toAscii(),
-                                            classname.toAscii(),  QStringList() );
+      return f->createPartObject( (QWidget*)pParent, name.toLatin1(),
+                                            pParent, name.toLatin1(),
+                                            classname.toLatin1(),  QStringList() );
    else
       return 0;
 }
