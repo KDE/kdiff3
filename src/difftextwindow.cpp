@@ -94,6 +94,16 @@ public:
    Diff3WrapLineVector m_diff3WrapLineVector;
    const ManualDiffHelpList* m_pManualDiffHelpList;
 
+   class WrapLineCacheData 
+   { 
+   public:
+      WrapLineCacheData() : m_d3LineIdx(0), m_textStart(0), m_textLength(0) {}
+      WrapLineCacheData( int d3LineIdx, int textStart, int textLength )
+      : m_d3LineIdx(d3LineIdx), m_textStart(textStart), m_textLength(textLength) {}
+      int m_d3LineIdx; int m_textStart; int m_textLength; 
+   };
+   QVector<WrapLineCacheData> m_wrapLineCache;
+
    Options* m_pOptions;
    QColor m_cThis;
    QColor m_cDiff1;
@@ -834,8 +844,8 @@ void DiffTextWindowData::prepareTextLayout( QTextLayout& textLayout, bool bFirst
          break;
 
       height += leading;
-      if ( !bFirstLine )
-         indentation = m_pDiffTextWindow->fontMetrics().width(' ') * m_pOptions->m_tabSize;
+      //if ( !bFirstLine )
+      //   indentation = m_pDiffTextWindow->fontMetrics().width(' ') * m_pOptions->m_tabSize;
       if ( visibleTextWidth>=0 )
       {
          line.setLineWidth( visibleTextWidth -indentation );
@@ -996,7 +1006,7 @@ void DiffTextWindowData::writeLine(
          ++outPos;
       } // end for
 
-      QTextLayout textLayout( lineString.mid( wrapLineOffset, lineLength), m_pDiffTextWindow->font(), m_pDiffTextWindow );
+      QTextLayout textLayout( lineString.mid( wrapLineOffset, lineLength-wrapLineOffset), m_pDiffTextWindow->font(), m_pDiffTextWindow );
       prepareTextLayout( textLayout, !m_bWordWrap || wrapLineOffset==0 );
       textLayout.draw ( &p, QPoint(0, yOffset), frh.m_formatRanges /*, const QRectF & clip = QRectF() */);
    }
@@ -1526,6 +1536,9 @@ void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int
 
    d->m_bWordWrap = bWordWrap;
 
+   if ( !bWordWrap || wrapLineVectorSize==0 )
+      d->m_wrapLineCache.clear();
+
    if ( bWordWrap )
    {
       ProgressProxy pp;
@@ -1539,27 +1552,45 @@ void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int
          visibleTextWidth-= d->leftInfoWidth() * fontMetrics().width('0');
       int i;
       int wrapLineIdx = 0;
+      int wrapLineCacheIdx = 0;
       int size = d->m_pDiff3LineVector->size();
       pp.setMaxNofSteps(size);
       for( i=0; i<size; ++i )
       {
          pp.setInformation( i18n("Word wrap"), double(i)/size, false );
          if ( pp.wasCancelled() ) 
-            break;
+            return;
 
-         QString s = d->getString( i );
-         QTextLayout textLayout( s, font(), this);
-         d->prepareTextLayout( textLayout, true, visibleTextWidth );
-         int linesNeeded = textLayout.lineCount();
-         if ( wrapLineVectorSize > 0 )
+         int linesNeeded = 0;
+         if ( wrapLineVectorSize==0 )
          {
+            QString s = d->getString( i );
+            QTextLayout textLayout( s, font(), this);
+            d->prepareTextLayout( textLayout, true, visibleTextWidth );
+            linesNeeded = textLayout.lineCount();
             for( int l=0; l<linesNeeded; ++l )
             {
-               Diff3WrapLine* pDiff3WrapLine = &d->m_diff3WrapLineVector[ wrapLineIdx + l ];
+               //Diff3WrapLine* pDiff3WrapLine = &d->m_diff3WrapLineVector[ wrapLineIdx + l ];
                QTextLine line = textLayout.lineAt(l);
-               pDiff3WrapLine->wrapLineOffset = line.textStart();
-               pDiff3WrapLine->wrapLineLength = line.textLength();
+               d->m_wrapLineCache.push_back( DiffTextWindowData::WrapLineCacheData(i,line.textStart(),line.textLength()) );
             }
+         }
+         else if ( wrapLineVectorSize > 0 )
+         {
+            while( wrapLineCacheIdx<d->m_wrapLineCache.count() &&
+               d->m_wrapLineCache[wrapLineCacheIdx].m_d3LineIdx<i )
+               ++wrapLineCacheIdx;
+            int l=0;
+            while( wrapLineCacheIdx<d->m_wrapLineCache.count() && 
+               d->m_wrapLineCache[wrapLineCacheIdx].m_d3LineIdx==i )
+            {
+               Diff3WrapLine* pDiff3WrapLine = &d->m_diff3WrapLineVector[ wrapLineIdx + l ];
+               pDiff3WrapLine->wrapLineOffset = d->m_wrapLineCache[wrapLineCacheIdx].m_textStart;
+               pDiff3WrapLine->wrapLineLength = d->m_wrapLineCache[wrapLineCacheIdx].m_textLength;
+               ++l;
+               ++wrapLineCacheIdx;
+            }
+            linesNeeded = l;
          }
 
          Diff3Line& d3l = *(*d->m_pDiff3LineVector)[i];

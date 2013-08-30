@@ -1523,7 +1523,12 @@ void KDiff3App::slotAutoAdvanceToggled()
 void KDiff3App::slotWordWrapToggled()
 {
    m_pOptions->m_bWordWrap = wordWrap->isChecked();
-   recalcWordWrap();
+   bool bSuccess = recalcWordWrap();
+   if ( ! bSuccess )
+   {
+      wordWrap->setChecked(false);
+      slotWordWrapToggled();
+   }
 }
 
 void KDiff3App::postRecalcWordWrap()
@@ -1537,11 +1542,17 @@ void KDiff3App::postRecalcWordWrap()
 
 void KDiff3App::slotRecalcWordWrap()
 {
-   recalcWordWrap();
+   bool bSuccess = recalcWordWrap();
    m_bRecalcWordWrapPosted = false;
+
+   if ( ! bSuccess )
+   {
+      wordWrap->setChecked(false);
+      slotWordWrapToggled();
+   }
 }
 
-void KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=0 only for printing, otherwise the really visible width is used
+bool KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=0 only for printing, otherwise the really visible width is used
 {
    bool bPrinting = nofVisibleColumns>=0;
    int firstD3LIdx = 0;
@@ -1570,22 +1581,28 @@ void KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
       }
 
       ProgressProxy pp;
-      pp.setMaxNofSteps(  (m_bTripleDiff ? 6 : 4 ) );
-      pp.setInformation("Word wrap",false);
+      pp.setMaxNofSteps(  (m_bTripleDiff ? 4 : 3 ) );
+      pp.setInformation(i18n("Word wrap (Cancel disables word wrap)"),false);
       // Let every window calc how many lines will be needed.
       if ( m_pDiffTextWindow1 )
       {
          m_pDiffTextWindow1->recalcWordWrap(true,0,nofVisibleColumns);
+         if ( pp.wasCancelled() )
+            return false;
          pp.step();
       }
       if ( m_pDiffTextWindow2 )
       {
          m_pDiffTextWindow2->recalcWordWrap(true,0,nofVisibleColumns);
+         if ( pp.wasCancelled() )
+            return false;
          pp.step();
       }
       if ( m_pDiffTextWindow3 )
       {
          m_pDiffTextWindow3->recalcWordWrap(true,0,nofVisibleColumns);
+         if ( pp.wasCancelled() )
+            return false;
          pp.step();
       }
 
@@ -1601,18 +1618,22 @@ void KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
       if ( m_pDiffTextWindow1 )
       {
          m_pDiffTextWindow1->recalcWordWrap(true,sumOfLines,nofVisibleColumns);
-         pp.step();
+         if ( pp.wasCancelled() )
+            return false;
       }
       if ( m_pDiffTextWindow2 )
       {
          m_pDiffTextWindow2->recalcWordWrap(true,sumOfLines,nofVisibleColumns);
-         pp.step();
+         if ( pp.wasCancelled() )
+            return false;
       }
       if ( m_pDiffTextWindow3 )
       {
          m_pDiffTextWindow3->recalcWordWrap(true,sumOfLines,nofVisibleColumns);
-         pp.step();
+         if ( pp.wasCancelled() )
+            return false;
       }
+      pp.step();
 
       m_neededLines = sumOfLines;
    }
@@ -1627,7 +1648,7 @@ void KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
          m_pDiffTextWindow3->recalcWordWrap(false,0,0);
    }
    if (bPrinting)
-      return;
+      return true;
 
    if (m_pOverview)
       m_pOverview->slotRedraw();
@@ -1656,6 +1677,7 @@ void KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
       setHScrollBarRange();
       m_pHScrollBar->setValue(0);
    }
+   return true;
 }
 
 void KDiff3App::slotShowWhiteSpaceToggled()

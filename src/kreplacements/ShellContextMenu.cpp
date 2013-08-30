@@ -22,6 +22,7 @@
 #include "stable.h"
 #include <windows.h>
 #include <shlobj.h>
+#include <shlguid.h>
 #include <malloc.h>
 //#include <QString>
 //#include <QStringList>
