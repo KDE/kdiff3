@@ -121,7 +121,7 @@ static bool isLineOrBufEnd( const QChar* p, int i, int size )
 {
    return 
       i>=size        // End of file
-      || p[i]=='\n'  // Normal end of line
+      || isEndOfLine(p[i])  // Normal end of line
 
       // No support for Mac-end of line yet, because incompatible with GNU-diff-routines.      
       // || ( p[i]=='\r' && (i>=size-1 || p[i+1]!='\n') 
@@ -836,34 +836,44 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
 
    qint64 i;
    // detect line end style
+   QVector<e_LineEndStyle> vOrigDataLineEndStyle;
    m_eLineEndStyle = eLineEndStyleUndefined;
    for( i=0; i<m_size; ++i )
    {
-      if ( m_pBuf[i]=='\n' )
+      if ( m_pBuf[i]=='\r' )
       {
-         if ( (i>0 && m_pBuf[i-1]=='\r') ||  // normal file
-              (i>3 && m_pBuf[i-1]=='\0' && m_pBuf[i-2]=='\r' && m_pBuf[i-3]=='\0')) // 16-bit unicode: TODO only little endian covered here
-            m_eLineEndStyle = eLineEndStyleDos;
-         else
-            m_eLineEndStyle = eLineEndStyleUnix;
-         break;   // Only analyze first line
+         if ( i+1<m_size && m_pBuf[i+1]=='\n' ) // not 16-bit unicode
+         {
+            vOrigDataLineEndStyle.push_back( eLineEndStyleDos );
+            ++i;
+         }
+         else if( i>0 && i+2<m_size && m_pBuf[i-1]=='\0' && m_pBuf[i+1]=='\0' && m_pBuf[i+2]=='\n' ) // 16-bit unicode
+         {
+            vOrigDataLineEndStyle.push_back( eLineEndStyleDos );
+            i+=2;
+         }
+         else // old mac line end style ?
+         {
+            vOrigDataLineEndStyle.push_back( eLineEndStyleUndefined );
+            const_cast<char*>(m_pBuf)[i]='\n'; // fix it in original data
+         }
+      }
+      else if ( m_pBuf[i]=='\n' )
+      {
+         vOrigDataLineEndStyle.push_back( eLineEndStyleUnix );
       }
    }
+
+   if ( ! vOrigDataLineEndStyle.isEmpty() )
+      m_eLineEndStyle = vOrigDataLineEndStyle[0];
+
    qint64 skipBytes = 0;
    QTextCodec* pCodec = ::detectEncoding( m_pBuf, m_size, skipBytes );
    if ( pCodec != pEncoding )
       skipBytes=0;
 
    QByteArray ba = QByteArray::fromRawData( m_pBuf+skipBytes, m_size-skipBytes );
-   if ( m_eLineEndStyle == eLineEndStyleUndefined ) // normally only for one liners except when old mac line end style is used
-   {
-      for( int j=0; j<ba.size(); ++j ) // int because QByteArray does not support operator[](qint64)
-      {
-         if ( ba[j]=='\r' )
-            ba[j]='\n'; // We only fix the old mac line end style, but leave it as "undefined"
-      }
-   }
-   QTextStream ts( ba, QIODevice::ReadOnly );
+   QTextStream ts( ba, QIODevice::ReadOnly | QIODevice::Text );
    ts.setCodec( pEncoding);
    ts.setAutoDetectUnicode( false );
    m_unicodeBuf = ts.readAll();
@@ -877,7 +887,7 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
    m_bIncompleteConversion = false;
    for( i=0; i<ucSize; ++i )
    {
-      if ( isLineOrBufEnd(p,i,ucSize) )
+      if ( i>=ucSize || p[i]=='\n' )
       {
          ++lines;
       }
@@ -898,15 +908,25 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
    int whiteLength = 0;
    for( i=0; i<=ucSize; ++i )
    {
-      if ( isLineOrBufEnd( p, i, ucSize ) )
+      if ( i>=ucSize || p[i]=='\n' )
       {
          m_v[lineIdx].pLine = &p[ i-lineLength ];
-         while ( !bPreserveCR  &&  lineLength>0  &&  m_v[lineIdx].pLine[lineLength-1]=='\r'  )
+         while ( /*!bPreserveCR  &&*/  lineLength>0  &&  m_v[lineIdx].pLine[lineLength-1]=='\r'  )
          {
             --lineLength;
          }
          m_v[lineIdx].pFirstNonWhiteChar = m_v[lineIdx].pLine + min2(whiteLength,lineLength);
          m_v[lineIdx].size = lineLength;
+         if ( lineIdx < vOrigDataLineEndStyle.count() && bPreserveCR && i<ucSize)
+         {
+            ++m_v[lineIdx].size;
+            switch ( vOrigDataLineEndStyle[lineIdx] )
+            {
+            case eLineEndStyleUnix: const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\n'; break;
+            case eLineEndStyleDos:  const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\r'; break;
+            case eLineEndStyleUndefined: const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\x0b'; break;
+            }
+         }
          lineLength = 0;
          bNonWhiteFound = false;
          whiteLength = 0;
@@ -1129,6 +1149,10 @@ void calcDiff3LineListUsingAB(
          d3l.lineB = lineB;
          --d.diff2;
          ++lineB;
+      }
+      else if ( d.nofEquals < 0 )
+      {
+         assert(false);
       }
 
       d3ll.push_back( d3l );
@@ -2232,6 +2256,7 @@ bool fineDiff(
    int k2=0;
    bool bTextsTotalEqual = true;
    int listSize = diff3LineList.size();
+   pp.setMaxNofSteps( listSize );
    int listIdx = 0;
    for( i= diff3LineList.begin(); i!= diff3LineList.end(); ++i)
    {
@@ -2287,7 +2312,7 @@ bool fineDiff(
          }
       }
       ++listIdx;
-      pp.setCurrent(double(listIdx)/listSize);
+      pp.step();
    }
    return bTextsTotalEqual;
 }

@@ -863,13 +863,13 @@ void OptionDialog::setupDiffPage( void ) {
     QLabel* label = 0;
 
     m_options.m_bPreserveCarriageReturn = false;
-    //OptionCheckBox* pPreserveCarriageReturn = new OptionCheckBox( i18n("Preserve carriage return"), false, "PreserveCarriageReturn", &m_bPreserveCarriageReturn, page, this );
-    //gbox->addWidget( pPreserveCarriageReturn, line, 0, 1, 2 );
-    //pPreserveCarriageReturn->setToolTip( i18n(
-    //   "Show carriage return characters '\\r' if they exist.\n"
-    //   "Helps to compare files that were modified under different operating systems.")
-    //   );
-    //++line;
+    OptionCheckBox* pPreserveCarriageReturn = new OptionCheckBox( i18n("Preserve carriage return"), false, "PreserveCarriageReturn", &m_options.m_bPreserveCarriageReturn, page, this );
+    gbox->addWidget( pPreserveCarriageReturn, line, 0, 1, 2 );
+    pPreserveCarriageReturn->setToolTip( i18n(
+       "Show carriage return characters '\\r' if they exist.\n"
+       "Helps to compare files that were modified under different operating systems.")
+       );
+    ++line;
     QString treatAsWhiteSpace = " (" + i18n( "Treat as white space." ) + ")";
 
     OptionCheckBox* pIgnoreNumbers = new OptionCheckBox( i18n( "Ignore numbers" ) + treatAsWhiteSpace, false, "IgnoreNumbers", &m_options.m_bIgnoreNumbers, page, this );

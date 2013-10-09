@@ -806,6 +806,8 @@ bool DirectoryMergeWindow::Data::fastFileComparison(
    t_FileSize fullSize = file1.size();
    t_FileSize sizeLeft = fullSize;
 
+   pp.setMaxNofSteps( fullSize / buf1.size() );
+
    while( sizeLeft>0 && ! pp.wasCancelled() )
    {
       int len = min2( sizeLeft, (t_FileSize)buf1.size() );
@@ -827,7 +829,8 @@ bool DirectoryMergeWindow::Data::fastFileComparison(
          return bEqual;
       }
       sizeLeft-=len;
-      pp.setCurrent(double(fullSize-sizeLeft)/fullSize, false );
+      //pp.setCurrent(double(fullSize-sizeLeft)/fullSize, false );
+      pp.step();
    }
 
    // If the program really arrives here, then the files are really equal.
@@ -2647,6 +2650,8 @@ void DirectoryMergeWindow::Data::mergeContinue(bool bStart, bool bVerbose)
       m_bError = false;
    }
 
+   pp.setMaxNofSteps( nrOfItems );
+
    bool bSuccess = true;
    bool bSingleFileMerge = false;
    bool bSim = m_bSimulatedMergeStarted;
@@ -2755,7 +2760,7 @@ void DirectoryMergeWindow::Data::mergeContinue(bool bStart, bool bVerbose)
       MergeFileInfos& mfi = *getMFI(miCurrent);
 
       pp.setInformation( mfi.subPath(),
-         bSim ? double(nrOfCompletedSimItems)/nrOfItems : double(nrOfCompletedItems)/nrOfItems,
+         bSim ? nrOfCompletedSimItems : nrOfCompletedItems,
          false // bRedrawUpdate
          );
 

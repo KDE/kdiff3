@@ -29,6 +29,11 @@
 #include <stdio.h>
 #include <QString>
 
+inline bool isEndOfLine( QChar c )
+{
+   return c=='\n' || c=='\r' || c=='\x0b';
+}
+
 #define TAB_WIDTH 8
 
 class GnuDiff

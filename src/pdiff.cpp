@@ -1554,6 +1554,9 @@ void KDiff3App::slotRecalcWordWrap()
 
 bool KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=0 only for printing, otherwise the really visible width is used
 {
+   QElapsedTimer et;
+   et.start();
+   int tel1 = 0;
    bool bPrinting = nofVisibleColumns>=0;
    int firstD3LIdx = 0;
    if( m_pDiffTextWindow1 ) 
@@ -1581,31 +1584,41 @@ bool KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
       }
 
       ProgressProxy pp;
-      pp.setMaxNofSteps(  (m_bTripleDiff ? 4 : 3 ) );
+      //pp.setMaxNofSteps(  (m_bTripleDiff ? 4 : 3 ) );
       pp.setInformation(i18n("Word wrap (Cancel disables word wrap)"),false);
       // Let every window calc how many lines will be needed.
       if ( m_pDiffTextWindow1 )
       {
-         m_pDiffTextWindow1->recalcWordWrap(true,0,nofVisibleColumns);
+         m_pDiffTextWindow1->recalcWordWrap(true,0,nofVisibleColumns,&pp);
          if ( pp.wasCancelled() )
             return false;
-         pp.step();
+         //pp.step();
       }
       if ( m_pDiffTextWindow2 )
       {
-         m_pDiffTextWindow2->recalcWordWrap(true,0,nofVisibleColumns);
+         m_pDiffTextWindow2->recalcWordWrap(true,0,nofVisibleColumns,&pp);
          if ( pp.wasCancelled() )
             return false;
-         pp.step();
+         //pp.step();
       }
       if ( m_pDiffTextWindow3 )
       {
-         m_pDiffTextWindow3->recalcWordWrap(true,0,nofVisibleColumns);
+         m_pDiffTextWindow3->recalcWordWrap(true,0,nofVisibleColumns,&pp);
          if ( pp.wasCancelled() )
             return false;
-         pp.step();
+         //pp.step();
       }
 
+      while( ! QThreadPool::globalInstance()->waitForDone(100) )
+      {
+         pp.recalc(); // implicit process events and redraw
+      }
+
+      if ( pp.wasCancelled() )
+         return false;
+
+      tel1 = et.elapsed();
+      et.restart();
       sumOfLines=0;
       for ( i=m_diff3LineList.begin(); i!=m_diff3LineList.end(); ++i )
       {
@@ -1617,23 +1630,25 @@ bool KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
       // Finish the initialisation:
       if ( m_pDiffTextWindow1 )
       {
-         m_pDiffTextWindow1->recalcWordWrap(true,sumOfLines,nofVisibleColumns);
+         m_pDiffTextWindow1->recalcWordWrap(true,sumOfLines,nofVisibleColumns, &pp);
          if ( pp.wasCancelled() )
             return false;
       }
       if ( m_pDiffTextWindow2 )
       {
-         m_pDiffTextWindow2->recalcWordWrap(true,sumOfLines,nofVisibleColumns);
+         m_pDiffTextWindow2->recalcWordWrap(true,sumOfLines,nofVisibleColumns, &pp);
          if ( pp.wasCancelled() )
             return false;
       }
       if ( m_pDiffTextWindow3 )
       {
-         m_pDiffTextWindow3->recalcWordWrap(true,sumOfLines,nofVisibleColumns);
+         m_pDiffTextWindow3->recalcWordWrap(true,sumOfLines,nofVisibleColumns, &pp);
          if ( pp.wasCancelled() )
             return false;
       }
       pp.step();
+
+      int tel = et.elapsed();
 
       m_neededLines = sumOfLines;
    }
@@ -1641,11 +1656,11 @@ bool KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
    {
       m_neededLines = m_diff3LineVector.size();
       if ( m_pDiffTextWindow1 )
-         m_pDiffTextWindow1->recalcWordWrap(false,0,0);
+         m_pDiffTextWindow1->recalcWordWrap(false,0,0,0);
       if ( m_pDiffTextWindow2 )
-         m_pDiffTextWindow2->recalcWordWrap(false,0,0);
+         m_pDiffTextWindow2->recalcWordWrap(false,0,0,0);
       if ( m_pDiffTextWindow3 )
-         m_pDiffTextWindow3->recalcWordWrap(false,0,0);
+         m_pDiffTextWindow3->recalcWordWrap(false,0,0,0);
    }
    if (bPrinting)
       return true;
@@ -1677,6 +1692,7 @@ bool KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
       setHScrollBarRange();
       m_pHScrollBar->setValue(0);
    }
+
    return true;
 }
 

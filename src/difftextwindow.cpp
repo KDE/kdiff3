@@ -41,6 +41,8 @@
 #include <cstdlib>
 #include <assert.h>
 #include <QFileDialog>
+#include <QRunnable>
+#include <QThreadPool>
 
 
 class DiffTextWindowData
@@ -102,7 +104,7 @@ public:
       : m_d3LineIdx(d3LineIdx), m_textStart(textStart), m_textLength(textLength) {}
       int m_d3LineIdx; int m_textStart; int m_textLength; 
    };
-   QVector<WrapLineCacheData> m_wrapLineCache;
+   QList< QVector<WrapLineCacheData> > m_wrapLineCacheList;
 
    Options* m_pOptions;
    QColor m_cThis;
@@ -936,6 +938,15 @@ void DiffTextWindowData::writeLine(
       // First calculate the "changed" information for each character.
       int i=0;
       QString lineString( pld->pLine, pld->size );
+      if ( !lineString.isEmpty() )
+      {
+         switch ( lineString[lineString.length()-1].unicode() )
+         {
+         case '\n' : lineString[lineString.length()-1] = 0x00B6; break; // "Pilcrow", "paragraph mark"
+         case '\r' : lineString[lineString.length()-1] = 0x00A4; break; // Currency sign ;0x2761 "curved stem paragraph sign ornament"
+         case '\0b' : lineString[lineString.length()-1] = 0x2756; break; // some other nice looking character
+         }
+      }
       QVector<UINT8> charChanged( pld->size );
       Merger merger( pLineDiff1, pLineDiff2 );
       while( ! merger.isEndReached() &&  i<pld->size )
@@ -1525,7 +1536,25 @@ void DiffTextWindow::convertSelectionToD3LCoords()
    d->m_selection.end( lastD3LIdx, lastD3LPos );
 }
 
-void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth )
+class RecalcWordWrapRunnable : public QRunnable
+{
+   DiffTextWindow* m_pDTW;
+   int m_nofVisibleColumns;
+   int m_cacheIdx;
+   ProgressProxy* m_pProgressProxy;
+public:
+   RecalcWordWrapRunnable( DiffTextWindow* p, int nofVisibleColumns, int cacheIdx, ProgressProxy* pPP ) 
+      : m_pDTW(p), m_nofVisibleColumns(nofVisibleColumns), m_cacheIdx(cacheIdx), m_pProgressProxy(pPP)
+   {
+      setAutoDelete(true);
+   }
+   void run()
+   {
+      m_pDTW->recalcWordWrapHelper(true,0,m_nofVisibleColumns,m_cacheIdx,m_pProgressProxy);
+   }
+};
+
+void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth, ProgressProxy* pPP )
 {
    if ( d->m_pDiff3LineVector==0 || ! d->m_bPaintingAllowed || !isVisible() )
    {
@@ -1536,16 +1565,40 @@ void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int
 
    d->m_bWordWrap = bWordWrap;
 
-   if ( !bWordWrap || wrapLineVectorSize==0 )
-      d->m_wrapLineCache.clear();
-
    if ( bWordWrap )
    {
-      ProgressProxy pp;
+      //ProgressProxy pp;
       d->m_lineNumberWidth = d->m_pOptions->m_bShowLineNumbers ? (int)log10((double)qMax(d->m_size,1))+1 : 0;
 
       d->m_diff3WrapLineVector.resize( wrapLineVectorSize );
+   }
 
+   if ( !bWordWrap || wrapLineVectorSize==0 )
+      d->m_wrapLineCacheList.clear();
+
+   if ( wrapLineVectorSize == 0 )
+   {
+      pPP->addNofSteps( d->m_pDiff3LineVector->size()/2000 );
+      for( int i=0,j=0; i<d->m_pDiff3LineVector->size(); i+=2000, ++j )
+      //int i=0;
+      {
+         d->m_wrapLineCacheList.append(QVector<DiffTextWindowData::WrapLineCacheData>());
+         QThreadPool::globalInstance()->start( new RecalcWordWrapRunnable(this,visibleTextWidth,j,pPP) );
+      }
+      //recalcWordWrap( bWordWrap, wrapLineVectorSize, visibleTextWidth, 0 );
+   }
+   else
+   {
+      recalcWordWrapHelper( bWordWrap, wrapLineVectorSize, visibleTextWidth, 0, pPP );
+   }
+}
+
+void DiffTextWindow::recalcWordWrapHelper( bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth, int cacheListIdx, ProgressProxy* pPP )
+{
+   if ( bWordWrap )
+   {
+      if ( pPP->wasCancelled() ) 
+         return;
       if (visibleTextWidth<0)
          visibleTextWidth = getVisibleTextAreaWidth();
       else
@@ -1554,41 +1607,64 @@ void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int
       int wrapLineIdx = 0;
       int wrapLineCacheIdx = 0;
       int size = d->m_pDiff3LineVector->size();
-      pp.setMaxNofSteps(size);
-      for( i=0; i<size; ++i )
+      //pp.setMaxNofSteps(size);
+      int firstD3LineIdx = wrapLineVectorSize > 0 ? 0 : cacheListIdx * 2000;
+      int endIdx = wrapLineVectorSize > 0 ? size : qMin(firstD3LineIdx+2000,size);
+      QVector<DiffTextWindowData::WrapLineCacheData>& wrapLineCache = d->m_wrapLineCacheList[cacheListIdx];
+      int cacheListIdx2 = 0;
+      QTextLayout textLayout( QString(), font(), this);
+      for( i=firstD3LineIdx; i<endIdx; ++i )
       {
-         pp.setInformation( i18n("Word wrap"), double(i)/size, false );
-         if ( pp.wasCancelled() ) 
-            return;
+         //pp.setInformation( i18n("Word wrap"), double(i)/size, false );
 
          int linesNeeded = 0;
          if ( wrapLineVectorSize==0 )
          {
             QString s = d->getString( i );
-            QTextLayout textLayout( s, font(), this);
+            textLayout.clearLayout();
+            textLayout.setText( s );
             d->prepareTextLayout( textLayout, true, visibleTextWidth );
             linesNeeded = textLayout.lineCount();
             for( int l=0; l<linesNeeded; ++l )
             {
                //Diff3WrapLine* pDiff3WrapLine = &d->m_diff3WrapLineVector[ wrapLineIdx + l ];
                QTextLine line = textLayout.lineAt(l);
-               d->m_wrapLineCache.push_back( DiffTextWindowData::WrapLineCacheData(i,line.textStart(),line.textLength()) );
+               wrapLineCache.push_back( DiffTextWindowData::WrapLineCacheData(i,line.textStart(),line.textLength()) );
             }
          }
          else if ( wrapLineVectorSize > 0 )
          {
-            while( wrapLineCacheIdx<d->m_wrapLineCache.count() &&
-               d->m_wrapLineCache[wrapLineCacheIdx].m_d3LineIdx<i )
-               ++wrapLineCacheIdx;
+            DiffTextWindowData::WrapLineCacheData* pWrapLineCache = d->m_wrapLineCacheList[cacheListIdx2].data();
+            int cacheIdx = 0;
+            int clc = d->m_wrapLineCacheList.count()-1 ;
+            int cllc = d->m_wrapLineCacheList.last().count() ;
+            int curCount = d->m_wrapLineCacheList[0].count()-1;
             int l=0;
-            while( wrapLineCacheIdx<d->m_wrapLineCache.count() && 
-               d->m_wrapLineCache[wrapLineCacheIdx].m_d3LineIdx==i )
+            while( (cacheListIdx2 < clc
+               || cacheListIdx2 == clc && cacheIdx < cllc) 
+               && pWrapLineCache->m_d3LineIdx<=i )
             {
-               Diff3WrapLine* pDiff3WrapLine = &d->m_diff3WrapLineVector[ wrapLineIdx + l ];
-               pDiff3WrapLine->wrapLineOffset = d->m_wrapLineCache[wrapLineCacheIdx].m_textStart;
-               pDiff3WrapLine->wrapLineLength = d->m_wrapLineCache[wrapLineCacheIdx].m_textLength;
-               ++l;
-               ++wrapLineCacheIdx;
+               if ( pWrapLineCache->m_d3LineIdx==i )
+               {
+                  Diff3WrapLine* pDiff3WrapLine = &d->m_diff3WrapLineVector[ wrapLineIdx + l ];
+                  pDiff3WrapLine->wrapLineOffset = pWrapLineCache->m_textStart;
+                  pDiff3WrapLine->wrapLineLength = pWrapLineCache->m_textLength;
+                  ++l;
+               }
+               if (cacheIdx < curCount )
+               {
+                  ++cacheIdx;
+                  ++pWrapLineCache;
+               }
+               else
+               {
+                  ++cacheListIdx2;
+                  if (cacheListIdx2 >= d->m_wrapLineCacheList.count())
+                     break;
+                  pWrapLineCache = d->m_wrapLineCacheList[cacheListIdx2].data();
+                  curCount = d->m_wrapLineCacheList[cacheListIdx2].count();
+                  cacheIdx = 0;
+               }
             }
             linesNeeded = l;
          }
@@ -1615,6 +1691,7 @@ void DiffTextWindow::recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int
             }
          }
       }
+      pPP->step(false);
 
       if ( wrapLineVectorSize>0 )
       {
