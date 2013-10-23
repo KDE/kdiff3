@@ -181,8 +181,8 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
             pDialog->exec();
 #if !defined(_WIN32) && !defined(Q_OS_OS2)
             // A windows program has no console
-            fprintf( stderr, "%s\n", title.toLatin1().constData() );
-            fprintf( stderr, "%s\n", s.toLatin1().constData() );
+            fprintf( "%s\n", title.toLatin1().constData() );
+            fprintf( "%s\n", s.toLatin1().constData() );
 #endif
             exit( 1 );
         }
