@@ -3490,7 +3490,7 @@ void DirectoryMergeWindow::updateAvailabilities( bool bDirCompare, bool bDiffWin
    d->m_pDirCurrentSyncCopyBToA->setEnabled( bItemActive && !bMergeMode && pMFI->existsInB() );
    d->m_pDirCurrentSyncDeleteA->setEnabled( bItemActive && !bMergeMode && pMFI->existsInA() );
    d->m_pDirCurrentSyncDeleteB->setEnabled( bItemActive && !bMergeMode && pMFI->existsInB() );
-   d->m_pDirCurrentSyncDeleteAAndB->setEnabled( bItemActive && !bMergeMode && pMFI->existsInB() && pMFI->existsInB() );
+   d->m_pDirCurrentSyncDeleteAAndB->setEnabled( bItemActive && !bMergeMode && pMFI->existsInA() && pMFI->existsInB() );
    d->m_pDirCurrentSyncMergeToA->setEnabled( bItemActive && !bMergeMode && !bFTConflict );
    d->m_pDirCurrentSyncMergeToB->setEnabled( bItemActive && !bMergeMode && !bFTConflict );
    d->m_pDirCurrentSyncMergeToAAndB->setEnabled( bItemActive && !bMergeMode && !bFTConflict );
