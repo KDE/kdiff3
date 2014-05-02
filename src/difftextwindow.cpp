@@ -673,7 +673,7 @@ void DiffTextWindow::convertToLinePos( int x, int y, int& line, int& pos )
    int yOffset = - d->m_firstLine * fontHeight;
 
    line = ( y - yOffset ) / fontHeight;
-   if ( line >= 0  )
+   if ( line >= 0 && (!d->m_pOptions->m_bWordWrap || line < d->m_diff3WrapLineVector.count()) )
    {
       QString s = d->getLineString( line );
       QTextLayout textLayout( s, font(), this );
@@ -1226,8 +1226,13 @@ QString DiffTextWindowData::getLineString( int line )
 {
    if ( m_bWordWrap )
    {
-      int d3LIdx = m_pDiffTextWindow->convertLineToDiff3LineIdx(line);
-      return getString( d3LIdx ).mid( m_diff3WrapLineVector[line].wrapLineOffset, m_diff3WrapLineVector[line].wrapLineLength );
+      if ( line < m_diff3WrapLineVector.count() )
+      {
+         int d3LIdx = m_pDiffTextWindow->convertLineToDiff3LineIdx(line);
+         return getString( d3LIdx ).mid( m_diff3WrapLineVector[line].wrapLineOffset, m_diff3WrapLineVector[line].wrapLineLength );
+      }
+      else
+         return QString();
    }
    else
    {
@@ -1632,13 +1637,13 @@ void DiffTextWindow::recalcWordWrapHelper( bool bWordWrap, int wrapLineVectorSiz
                wrapLineCache.push_back( DiffTextWindowData::WrapLineCacheData(i,line.textStart(),line.textLength()) );
             }
          }
-         else if ( wrapLineVectorSize > 0 )
+         else if ( wrapLineVectorSize > 0 && cacheListIdx2 < d->m_wrapLineCacheList.count() )
          {
             DiffTextWindowData::WrapLineCacheData* pWrapLineCache = d->m_wrapLineCacheList[cacheListIdx2].data();
             int cacheIdx = 0;
             int clc = d->m_wrapLineCacheList.count()-1 ;
             int cllc = d->m_wrapLineCacheList.last().count() ;
-            int curCount = d->m_wrapLineCacheList[0].count()-1;
+            int curCount = d->m_wrapLineCacheList[cacheListIdx2].count()-1;
             int l=0;
             while( (cacheListIdx2 < clc
                || cacheListIdx2 == clc && cacheIdx < cllc) 
@@ -1672,6 +1677,7 @@ void DiffTextWindow::recalcWordWrapHelper( bool bWordWrap, int wrapLineVectorSiz
          Diff3Line& d3l = *(*d->m_pDiff3LineVector)[i];
          if ( d3l.linesNeededForDisplay<linesNeeded )
          {
+            assert(wrapLineVectorSize==0);
             d3l.linesNeededForDisplay = linesNeeded;
          }
 
