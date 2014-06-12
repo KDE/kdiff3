@@ -248,10 +248,18 @@ void ProgressDialog::recalc( bool bUpdate )
          else
          {
             QList<ProgressLevelData>::iterator i = m_progressStack.begin();
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+            m_pProgressBar->setValue( int( 1000.0 * ( i->m_current.load() * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps.load() + i->m_dRangeMin ) ) );
+#else
             m_pProgressBar->setValue( int( 1000.0 * ( i->m_current * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps + i->m_dRangeMin ) ) );
+#endif
             ++i;
             if ( i!=m_progressStack.end() )
-               m_pSubProgressBar->setValue( int( 1000.0 * ( i->m_current * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps + i->m_dRangeMin ) ) );
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+                m_pSubProgressBar->setValue( int( 1000.0 * ( i->m_current.load() * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps.load() + i->m_dRangeMin ) ) );
+#else
+                m_pSubProgressBar->setValue( int( 1000.0 * ( i->m_current * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps + i->m_dRangeMin ) ) );
+#endif
             else
                m_pSubProgressBar->setValue( int( 1000.0 * m_progressStack.front().m_dSubRangeMin ) );
          }

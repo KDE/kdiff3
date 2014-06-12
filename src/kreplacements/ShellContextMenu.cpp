@@ -20,7 +20,14 @@
 //////////////////////////////////////////////////////////////////////
 #ifdef _WIN32
 #include "stable.h"
+
 #include <windows.h>
+
+#if __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8 ) /* Test for GCC > 4.8.0 */
+#define INITGUID     // needed for MinGW 4.8 otherwise IID_IContextMenu etc. produce undefined references during linking.
+#include <guiddef.h>
+#endif
+
 #include <shlobj.h>
 #include <shlguid.h>
 #include <malloc.h>
