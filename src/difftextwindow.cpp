@@ -332,7 +332,6 @@ int DiffTextWindow::getMaxTextWidth()
    else if ( getAtomic( d->m_maxTextWidth ) < 0 )
    {
       d->m_maxTextWidth = 0;
-      QFontMetrics fm( fontMetrics() );
       QTextLayout textLayout(QString(), font(), this);
       for( int i = 0; i< d->m_size; ++i )
       {
@@ -1559,13 +1558,14 @@ int s_maxNofRunnables = 0;
 class RecalcWordWrapRunnable : public QRunnable
 {
    DiffTextWindow* m_pDTW;
-   DiffTextWindowData* m_pDTWData;
+   // DiffTextWindowData* m_pDTWData; // TODO unused?
    int m_visibleTextWidth;
    int m_cacheIdx;
 public:
    RecalcWordWrapRunnable( DiffTextWindow* p, DiffTextWindowData* pData, int visibleTextWidth, int cacheIdx ) 
-      : m_pDTW(p), m_pDTWData(pData), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
+      : m_pDTW(p), /* m_pDTWData(pData),*/ m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
    {
+       Q_UNUSED(pData) // TODO really unused?
       setAutoDelete(true);
       //++s_runnableCount; // in Qt>=5.3 only
       s_runnableCount.fetchAndAddOrdered(1);
@@ -1790,7 +1790,6 @@ void DiffTextWindow::recalcWordWrapHelper( int wrapLineVectorSize, int visibleTe
       int endIdx = qMin(firstD3LineIdx + s_linesPerRunnable, size);
 
       int maxTextWidth = getAtomic( d->m_maxTextWidth ); // current value
-      QFontMetrics fm(fontMetrics());
       QTextLayout textLayout(QString(), font(), this);
       for (int i = firstD3LineIdx; i< endIdx; ++i)
       {
@@ -2085,7 +2084,7 @@ void EncodingLabel::mousePressEvent(QMouseEvent *)
       if (m_pOptions!=0)
       {
          QStringList& recentEncodings = m_pOptions->m_recentEncodings;
-         foreach(QString s, recentEncodings)
+         foreach(const QString &s, recentEncodings)
          {
             insertCodec("", QTextCodec::codecForName(s.toLatin1()), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
          }

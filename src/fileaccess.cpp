@@ -500,7 +500,7 @@ bool FileAccess::exists() const
    if ( parent() || d())
       return m_bExists;     
    else
-      return QFileInfo( absoluteFilePath() ).exists();
+      return QFileInfo::exists(absoluteFilePath());
 }
 
 qint64 FileAccess::size() const        
@@ -1584,7 +1584,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
          }
          else
          {
-            foreach ( QFileInfo fi, fiList )       // for each file...
+            foreach ( const QFileInfo &fi, fiList )       // for each file...
             {
                if ( fi.fileName() == "." ||  fi.fileName()==".." )
                   continue;

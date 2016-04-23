@@ -586,7 +586,7 @@ int MergeResultWindow::getNofLines()
 
 int MergeResultWindow::getVisibleTextAreaWidth()
 {
-   QFontMetrics fm = fontMetrics();
+   // QFontMetrics fm = fontMetrics(); // FIXME used?
    return width() - getTextXOffset();
 }
 
@@ -2289,7 +2289,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
          else
          {
             QString s = str.left(x);
-            s += str.mid( x+1 );
+            s += str.midRef( x+1 );
             melIt->setString( s );
             setModified();
          }
@@ -2326,7 +2326,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
          else
          {
             QString s = str.left( x-1 );
-            s += str.mid( x );
+            s += str.midRef( x );
             --x;
             melIt->setString( s );
             setModified();
@@ -2729,7 +2729,7 @@ void MergeResultWindow::deleteSelection()
             {
                // This is the last line in the selection
                int pos = convertToPosInText( lineString, lastPosInLine, m_pOptions->m_tabSize );
-               firstLineString += lineString.mid( pos ); // rest of line
+               firstLineString += lineString.midRef( pos ); // rest of line
                melItFirst->setString( firstLineString );
             }
 

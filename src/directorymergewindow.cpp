@@ -2251,7 +2251,6 @@ void DirectoryMergeWindow::Data::setMergeOperation( const QModelIndex& mi, e_Mer
    }
 
    mfi.m_eMergeOperation = eMOp;
-   QString s;
    if ( bRecursive )
    {
       e_MergeOperation eChildrenMergeOp = mfi.m_eMergeOperation;
