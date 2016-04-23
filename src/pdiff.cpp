@@ -171,7 +171,7 @@ void KDiff3App::mainInit( TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, bo
           errors = m_sd1.readAndPreprocess(m_sd1.getEncoding(), false);
       else
           errors = m_sd1.readAndPreprocess(m_pOptions->m_pEncodingA, m_pOptions->m_bAutoDetectUnicodeA);
-      foreach(QString error, errors)
+      foreach(const QString &error, errors)
       {
          KMessageBox::error( m_pOptionDialog, error );
       }
@@ -182,7 +182,7 @@ void KDiff3App::mainInit( TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, bo
           errors = m_sd2.readAndPreprocess(m_sd2.getEncoding(), false);
       else
           errors = m_sd2.readAndPreprocess(m_pOptions->m_pEncodingB, m_pOptions->m_bAutoDetectUnicodeB);
-      foreach(QString error, errors)
+      foreach(const QString &error, errors)
       {
          KMessageBox::error( m_pOptionDialog, error );
       }
@@ -976,7 +976,7 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
             if      ( o == m_pDiffTextWindow1 ) errors = m_sd1.setData(text);
             else if ( o == m_pDiffTextWindow2 ) errors = m_sd2.setData(text);
             else if ( o == m_pDiffTextWindow3 ) errors = m_sd3.setData(text);
-            foreach(QString error, errors)
+            foreach(const QString &error, errors)
             {
                KMessageBox::error( m_pOptionDialog, error );
             }
@@ -1240,7 +1240,7 @@ void KDiff3App::slotEditPaste()
          do_init = true;
       }
 
-      foreach(QString error, errors)
+      foreach(const QString &error, errors)
       {
          KMessageBox::error( m_pOptionDialog, error );
       }
