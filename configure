@@ -1,0 +1,30 @@
+#!/bin/sh
+# Manually created configure
+echo "configure for KDiff3 Qt4/KDE4 by Joachim Eibl"
+if [ "$1" = "kde4" ]; then
+   echo Trying to build for KDE4. If anything fails see the README for details.
+   echo Creating and entering subdir "release"
+   mkdir release                                  # create sub directory
+   cd release
+   echo "Running cmake .. -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`"
+   cmake .. -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`  # create Makefile
+   echo Running make.
+   make                                           # run make (compile and link)
+   echo "If everything went OK then KDiff3 was built in the release-subdir."
+   echo "Install as root (requires password)."
+   sudo make install                              # install as root user
+elif [ "$1" = "qt4" ]; then
+   echo Trying to build for Qt4 without KDE
+   echo "Entering subdir src-QT4"
+   cd src-QT4
+   echo "Running qmake kdiff3.pro"
+   qmake kdiff3.pro
+   echo "Running make"
+   make
+   echo "If everything went OK then KDiff3 was built as src-QT4/kdiff3"
+else
+   echo Usage 1: configure kde4
+   echo Usage 2: configure qt4
+   echo For requirements, more options and details in case of failure see the README.
+fi
+

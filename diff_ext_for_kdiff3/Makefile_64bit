@@ -1,0 +1,64 @@
+# Project: diff_ext
+# Generates diff_ext_for_kdiff3.dll with gcc.
+# Can be used for Cygwin and MingW (MingW ignores -mno-cygwin)
+#
+PROJ := diff_ext_for_kdiff3
+
+CXX  := x86_64-w64-mingw32-g++.exe
+
+ifdef DEBUG
+  CXXFLAGS ?= -g
+else
+  CXXFLAGS ?= -Os
+  LDFLAGS += -s
+endif
+CXXFLAGS += -ansi -pedantic -Wall -W -D_UNICODE -DUNICODE
+
+LIBS := -luuid -lole32
+DEFFILE = $(PROJ).def
+STATICLIB = $(PROJ).a
+EXPLIB = $(PROJ).exp
+
+SRC-CXX = $(wildcard *.cpp)
+SRC-RC = $(wildcard *.rc)
+
+OBJ  := $(SRC-CXX:.cpp=.o)
+RES  := $(SRC-RC:.rc=.res)
+OBJ += $(RES)
+DLL  := $(PROJ).dll
+
+.PHONY: all clean
+
+.SUFFIXES: .rc .res
+
+all: .depend $(DLL)
+
+debug:
+	$(MAKE) DEBUG=YES UNICODE=YES
+
+release:
+	$(MAKE) 
+
+.depend: Makefile $(SRC-RC) $(SRC-CXX)
+	$(CXX) -M $(CXXFLAGS) $(SRC-RC) $(SRC-CXX) > .depend
+	
+include .depend
+
+clean: clean-custom
+	${RM}  $(OBJ) $(DLL) ${EXPLIB} $(STATICLIB)
+	
+$(DLL): $(OBJ)
+	x86_64-w64-mingw32-dllwrap.exe \
+		--mno-cygwin \
+		--def $(DEFFILE) \
+		--output-exp ${EXPLIB} \
+		--driver-name x86_64-w64-mingw32-g++ -static-libgcc  -L/Users/Joachim/qt/mingw-w64-bin_i686-mingw_20100105/mingw/lib \
+		--implib $(STATICLIB) \
+		$(OBJ) $(LDFLAGS) $(LIBS) \
+		-o $@
+
+.cpp.o:
+	$(CXX) $(CXXFLAGS) -c $< -o $@ 
+
+.rc.res:
+	x86_64-w64-mingw32-windres.exe  $< -J rc -o $@ -O coff -DMING

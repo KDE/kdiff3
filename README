@@ -1,0 +1,220 @@
+KDiff3-Readme
+=============
+
+Author: Joachim Eibl  (joachim.eibl at gmx.de)
+Copyright: (C) 2002-2009 by Joachim Eibl
+KDiff3-Version: 0.9.94
+
+KDiff3 runs best on KDE but can be built without it, depending only on Qt-libs.
+These are available for Un*x, Windows, Mac.
+Thus there are many setup possibilities to consider.
+
+From version 0.9.94 on the main target platform is KDE4/Qt4.
+For KDiff3 for KDE3/Qt3 use KDiff3-0.9.92 or older.
+
+Contents
+--------
+
+- Introduction
+- License
+- Requirements & Installation
+  - For KDE4
+  - With Qt4-libs, without KDE
+    - for Linux/Un*x
+    - for Windows
+    - Debugging with MinGW under Windows:
+    - for Mac: Building KDiff3 for Mac OSX (with Intel processor) as a universal binary
+    - Creating and installing translation messages
+- Additional hints
+
+
+Introduction
+------------
+
+KDiff3 is a program that
+- compares and merges two or three input files or directories,
+- shows the differences line by line and character by character (!),
+- provides an automatic merge-facility and
+- an integrated editor for comfortable solving of merge-conflicts
+- has support for KDE-KIO (ftp, sftp, http, fish, smb),
+- has an intuitive graphical user interface,
+- provides a context menu for KDE-Konqueror and Windows-Explorer,
+- supports 64 bit systems. (Some build issues are discussed in here.)
+
+Do you want help translating? Read the README in the po-subdirectory!
+
+
+License
+-------
+
+    GNU GENERAL PUBLIC LICENSE, Version 2, June 1991
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA  02111-1307  USA
+
+    For details see file "COPYING".
+
+Exception from the GPL:
+    As a special exception, the copyright holder Joachim Eibl gives permission
+    to link this program with the Qt-library (commercial or open source edition)
+    from Trolltech (www.trolltech.com), and he permits to distribute the resulting
+    executable, without including the source code for the Qt-library in the
+    source distribution.
+
+
+Requirements & Installation
+---------------------------
+
+- for KDE4:
+   From version 0.9.94 on KDiff3 supports KDE4.
+   For installation on most distributions you usually also require these packages (names as on opensuse):
+   - g++ (g++, version 3.4 or newer)
+   - libqt4-devel (Qt4-libs, version 4.4.0 or newer)
+   - libkde4-devel (KDE4 Header files and development libraries)
+   - libkonq-devel (optional, needed for the kdiff3-plugin, if not installed 
+                    then the contextmenu plugin for konqueror won't be built.)
+   - cmake (>2.6, checks dependencies and creates the Makefiles appopriate for your system)
+
+   Typically in a terminal (e.g. konsole) you cd into the kdiff3-directory and run these commands.
+
+      mkdir release                                  # create sub directory
+      cd release                                     # cd into that directory
+      kde4-config --prefix                           # Find out your KDE4-directory and note the result
+      cmake .. -DCMAKE_INSTALL_PREFIX=<KDE4-prefix>  # create Makefile, replace <KDE4-prefix> with the prior result
+      make                                           # run make (compile and link)
+      sudo make install                              # install as root user
+
+   Now KDiff3 should be ready to use. Type "kdiff3" to start it.
+   There should also be a entry in your KDE-start menu in "(Applications->)Development".
+
+   For creating a debug version:
+      mkdir debug
+      cd debug
+      kde4-config --prefix                           # Find out your KDE4-directory and note the result
+      cmake .. -DCMAKE_INSTALL_PREFIX=<KDE4-prefix>  -DCMAKE_BUILD_TYPE=debugfull
+      make
+      sudo make install
+
+   The <KDE4-prefix> depends on your distribution:
+   The command "kde4-config --prefix" should tell you.
+   - For opensuse 11 use "/usr".
+
+- Building KDiff3 with Qt4-libs, but without KDE
+    - for Linux/Un*x
+    - for Windows
+    - for Mac
+
+   The version 0.9.94 requires Qt 4.4.0 or newer (from www.trolltech.com) for compilation. 
+
+   You always need
+      - kdiff3-0.9.94.tar.gz
+
+      - for Un*x:    gcc, g++ with version >=3.4.2
+                     Qt-X11-libraries
+
+      - for Windows: Qt-win-libs
+                     If you have the Qt4 commercial edition, then compile with Visual Studio.NET2003 or newer.
+                     If you use the Qt4 open source edition, then you'll need MinGW.
+                     I verified that compilation and debugging works with these packages (probably newer ones will also work):
+                     - Use MinGW-5.1.4.exe or newer to install the following or newer:
+                       - gcc-core-3.4.5-20060117-1.tar.gz
+                       - binutils-2.17.50-20060824-1.tar.gz
+                       - gcc-g++-3.4.5-20060117-1.tar.gz
+                       - mingw-runtime-3.14.tar.gz
+                       - mingw32-make-3.81-2.tar.gz
+                       - w32api-3.11.tar.gz
+                     - gdb-6.3-2.exe (for debugging)
+
+      - for Mac:     gcc, g++ with version >=3.4.2
+                     Qt-Mac-libraries
+      - Optional: Qt Creator IDE: Development environment optimized for Qt (http://trolltech.com/developer/qt-creator)
+
+  Build-instructions (Un*x):
+    - Make sure your shell-variable QTDIR is correct and that 
+      your path contains the Qt4-bin-directory.
+    - cd into the directory kdiff3-0.9.94/src-QT4 and type
+    - qmake kdiff3.pro
+    - make (or "gmake" for GNU-Make)
+
+  Build-instructions (Windows):
+    - set QTDIR=<QT4-dir>         e.g.: c:\qt\4.4.1
+      set "PATH=%QTDIR%\bin;%PATH%"
+    - cd into the directory kdiff3-0.9.94\src-Qt4 and type
+    - qmake kdiff3.pro
+    - Either "nmake" for Visual Studio or "mingw32-make" depending on what you have.
+
+  Debugging with MinGW under Windows:
+    - Qt Creator worked very good as debugger frontend too!
+    - Debugging without gdb on the console:
+      - The qt-win-opensource-4.4.1-mingw.exe only installs release dlls. You will have to compile the
+         debug dlls yourself. Enter the qt-4.4.1-directory and run "configure -debug" and then "mingw32-make".
+      - cd into the directory kdiff3-0.9.94\src-Qt4
+      - edit the file "Makefile.Debug" and in the LFLAGS replace "-Wl,-subsystem,windows" with "-Wl,-subsystem,console"
+         (this is necessary so that gdb can send a break signal to the running program)
+      - mingw32-make debug (create a debuggable executable)
+      - gdb debug\kdiff3.exe
+      - At the "(gdb)"-prompt type "run" and enter to start.
+      - While the program runs you can't set breakpoints, first interrupt it with Ctrl-C.
+      - Use "help" to find out about how to use gdb. (Important commands: run, break, backtrace, print, quit)
+         Using break with c++-methods requires to specify the parameter types too. Breakpoints in constructors might not work.
+
+  Building KDiff3 (Qt4) for Mac OSX (with Intel processor) as a universal binary (by Michael Schmidt)
+    1) Install Qt/Mac 4.x with thread support, static libraries and universal flag.
+       (For Qt4 run "configure -static"; only necessary if the final binary should not require shared Qt4-libs.)
+    2) cd .../kdiff3-0.9.94/src-QT4
+    3a) Create a makefile for kdiff3 by executing:
+       qmake kdiff3.pro
+    3b) optionally generate XCode-Project (for debugging purposes only) by executing:
+       qmake -spec macx-xcode kdiff3.pro
+    4) Execute:
+       make
+    5) After the build completes copy kdiff3 from the kdiff3-0.9.94/src-QT4 directory to
+       /Applications
+
+  Creating and installing the translation messages
+    The po directory contains translations from the KDE-translation teams.
+    If you use the Qt-only-version of KDiff3, then the installation described above 
+    won't install translations automatically.
+    To create and install the translations:
+    0) Make sure /usr/lib/qt3/bin/msg2qm exists 
+       (comes with qt3-devel-tools. [Yes, really Qt3. There is no Qt4 replacement yet.])
+    1) cd .../kdiff3-0.9.95/po
+    2) sh create_qm_files install    (asks for a super user password)
+    Just to create the files in the po directory (as needed for the windows version): 
+    2) sh create_qm_files local
+
+
+(End of KDiff3 with Qt4-instructions)
+------------------------------------------------------------------------
+
+Additional hints
+----------------
+
+   Start from commandline:
+   - Comparing 2 files:     kdiff3 file1 file2
+   - Merging 2 files:       kdiff3 file1 file2 -o outputfile
+   - Comparing 3 files:     kdiff3 file1 file2 file3
+   - Merging 3 files:       kdiff3 file1 file2 file3 -o outputfile
+        Note that file1 will be treated as base of file2 and file3.
+
+   If all files have the same name but are in different directories, you can
+   reduce typework by specifying the filename only for the first file. E.g.:
+   - Comparing 3 files:     kdiff3 dir1/filename dir2 dir3
+   (This also works in the open-dialog.)
+
+   If you start without arguments, then a dialog will appear where you can
+   select your files via a filebrowser.
+
+   For more documentation, see the help-menu or the subdirectory doc.
+
+   Have fun!
