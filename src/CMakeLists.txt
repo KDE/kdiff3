@@ -23,11 +23,11 @@ set(kdiff3part_PART_SRCS
    smalldialogs.cpp 
    progress.cpp )
 
-kde4_add_plugin(kdiff3part WITH_PREFIX ${kdiff3part_PART_SRCS})
+add_library(kdiff3part MODULE WITH_PREFIX ${kdiff3part_PART_SRCS})
 
 set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
 
-target_link_libraries(kdiff3part  ${KDE4_KPARTS_LIBS} ${QT_QT3SUPPORT_LIBRARY})
+target_link_libraries(kdiff3part  KF5::Parts ${QT_QT3SUPPORT_LIBRARY})
 
 install(TARGETS kdiff3part DESTINATION ${PLUGIN_INSTALL_DIR} )
 
@@ -39,9 +39,9 @@ set(kdiff3_SRCS
    ${kdiff3part_PART_SRCS}
     )
 
-kde4_add_executable(kdiff3 ${kdiff3_SRCS})
+add_executable(kdiff3 ${kdiff3_SRCS})
 
-target_link_libraries(kdiff3  ${KDE4_KPARTS_LIBS} ${QT_QT3SUPPORT_LIBRARY} )
+target_link_libraries(kdiff3  KF5::Parts ${QT_QT3SUPPORT_LIBRARY} )
 
 install(TARGETS kdiff3 ${INSTALL_TARGETS_DEFAULT_ARGS})
 
@@ -53,6 +53,18 @@ install( FILES  kdiff3_part.rc DESTINATION ${DATA_INSTALL_DIR}/kdiff3part )
 install( FILES  kdiff3_shell.rc DESTINATION ${DATA_INSTALL_DIR}/kdiff3 )
 install( PROGRAMS  kdiff3.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 
-kde4_install_icons( ${ICON_INSTALL_DIR} )
+ecm_install_icons(ICONS
+    hicolor/16-apps-kdiff3.png
+    hicolor/32-apps-kdiff3.png
+    DESTINATION ${ICON_INSTALL_DIR}
+    THEME hicolor
+)
+
+ecm_install_icons(ICONS
+    lowcolor/16-apps-kdiff3.png
+    lowcolor/32-apps-kdiff3.png
+    DESTINATION ${ICON_INSTALL_DIR}
+    THEME locolor
+)
 
 

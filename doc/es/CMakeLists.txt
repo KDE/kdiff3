@@ -1,1 +1,1 @@
-kde4_create_handbook(index.docbook INSTALL_DESTINATION ${HTML_INSTALL_DIR}/es SUBDIR kdiff3)
+kdoctools_create_handbook(index.docbook INSTALL_DESTINATION ${HTML_INSTALL_DIR}/es SUBDIR kdiff3)

@@ -1,5 +1,12 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.6)
 project(kdiff3)
+
+find_package(ECM REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(ECMInstallIcons)
 
 find_package(KDE4 REQUIRED)
 include (MacroLibrary)
@@ -8,8 +15,8 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
 add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
 include_directories( 
-    ${KDE4_INCLUDE_DIR} 
-    ${QT_INCLUDES}  
+     
+      
     ${CMAKE_CURRENT_BINARY_DIR}
     )
 
@@ -24,7 +31,7 @@ add_subdirectory(src)
 add_subdirectory(doc)
 
 
-find_file(KFILEITEMACTIONPLUGIN_FOUND kabstractfileitemactionplugin.h PATHS ${KDE4_INCLUDE_DIR} NO_DEFAULT_PATH)
+find_file(KFILEITEMACTIONPLUGIN_FOUND kabstractfileitemactionplugin.h PATHS  NO_DEFAULT_PATH)
 if(KFILEITEMACTIONPLUGIN_FOUND)
   message(STATUS "")
   message(STATUS "kabstractfileitemactionplugin.h found........... YES")

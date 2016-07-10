@@ -3,10 +3,10 @@ find_package(LibKonq REQUIRED)
 set(kdiff3plugin_SRCS 
    kdiff3plugin.cpp ) 
 
-kde4_add_plugin(kdiff3plugin WITH_PREFIX ${kdiff3plugin_SRCS})
+add_library(kdiff3plugin MODULE WITH_PREFIX ${kdiff3plugin_SRCS})
 
-target_link_libraries(kdiff3plugin ${KDE4_KDECORE_LIBS} ${KDE4_KPARTS_LIBS} konq )
-#${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${KDE4_KIO_LIBRARY} QtGui QtCore konq )
+target_link_libraries(kdiff3plugin KF5::KDELibs4Support KF5::Parts konq )
+#  KF5::KIOCore QtGui QtCore konq )
 
 install(TARGETS kdiff3plugin DESTINATION ${PLUGIN_INSTALL_DIR} )
 
