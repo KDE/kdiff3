@@ -19,7 +19,7 @@ link_directories(
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config-kdiff3.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kdiff3.h )
 
-add_subdirectory(src-QT4)
+add_subdirectory(src)
 #add_subdirectory(po)
 add_subdirectory(doc)
 
@@ -43,7 +43,7 @@ else(KFILEITEMACTIONPLUGIN_FOUND)
     message(STATUS "libkonq module found........... YES")
     message(STATUS "   => kdiff3plugin (KDiff3 contextmenu plugin for Konqueror) will be built.")
     message(STATUS "")
-    add_subdirectory(kdiff3plugin-QT4)
+    add_subdirectory(kdiff3plugin)
   else(LIBKONQ_FOUND)
     message(STATUS "")
     message(STATUS "libkonq module found........... NO")
