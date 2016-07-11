@@ -1,9 +1,7 @@
 
 
-#add_definitions(-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
-
-
 ########### kdiff3 KPart ###############
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts)
 
 set(kdiff3part_PART_SRCS 
    kdiff3_part.cpp 
@@ -23,11 +21,11 @@ set(kdiff3part_PART_SRCS
    smalldialogs.cpp 
    progress.cpp )
 
-add_library(kdiff3part MODULE WITH_PREFIX ${kdiff3part_PART_SRCS})
+add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
 set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
 
-target_link_libraries(kdiff3part  KF5::Parts ${QT_QT3SUPPORT_LIBRARY})
+target_link_libraries(kdiff3part KF5::Parts ${QT_QT3SUPPORT_LIBRARY})
 
 install(TARGETS kdiff3part DESTINATION ${PLUGIN_INSTALL_DIR} )
 
