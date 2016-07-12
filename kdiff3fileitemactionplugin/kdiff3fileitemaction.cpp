@@ -91,7 +91,7 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
    //pThis->m_fileItemInfos = fileItemInfos;
    pThis->m_pParentWidget = pParentWidget;
 
-   QAction *pMenuAction = new QAction(KIcon("kdiff3"), i18n("KDiff3 ..."), pThis);
+   QAction *pMenuAction = new QAction(QIcon::fromTheme(QStringLiteral("kdiff3")), i18n("KDiff3 ..."), pThis);
    QMenu *pActionMenu = new QMenu();
    pMenuAction->setMenu( pActionMenu );
    

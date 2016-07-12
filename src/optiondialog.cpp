@@ -555,7 +555,7 @@ void OptionDialog::setupFontPage( void )
    QFrame* page = new QFrame();
    KPageWidgetItem *pageItem = new KPageWidgetItem( page, i18n("Font") );
    pageItem->setHeader( i18n("Editor & Diff Output Font" ) );
-   pageItem->setIcon( KIcon( "preferences-desktop-font" ) );
+   pageItem->setIcon( QIcon::fromTheme(QStringLiteral("preferences-desktop-font")) );
    addPage( pageItem );
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
@@ -592,7 +592,7 @@ void OptionDialog::setupColorPage( void )
    QFrame* page = new QFrame();
    KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Color") );
    pageItem->setHeader( i18n("Colors Settings") );
-   pageItem->setIcon( KIcon("preferences-desktop-color") );
+   pageItem->setIcon( QIcon::fromTheme(QStringLiteral("preferences-desktop-color")) );
    addPage( pageItem );
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
@@ -741,7 +741,7 @@ void OptionDialog::setupEditPage( void )
    QFrame* page = new QFrame();
    KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Editor") );
    pageItem->setHeader( i18n("Editor Behavior") );
-   pageItem->setIcon( KIcon( "accessories-text-editor") );
+   pageItem->setIcon( QIcon::fromTheme(QStringLiteral("accessories-text-editor")) );
    addPage( pageItem );
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
@@ -808,7 +808,7 @@ void OptionDialog::setupDiffPage( void )
    QFrame* page = new QFrame();
    KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Diff") );
    pageItem->setHeader( i18n("Diff Settings") );
-   pageItem->setIcon( KIcon( "preferences-other" ) );
+   pageItem->setIcon( QIcon::fromTheme(QStringLiteral("preferences-other")) );
    addPage( pageItem );
 
 
@@ -893,7 +893,7 @@ void OptionDialog::setupMergePage( void )
    QFrame* page = new QFrame();
    KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Merge") );
    pageItem->setHeader( i18n("Merge Settings") );
-   pageItem->setIcon( KIcon( "plasmagik" ) );
+   pageItem->setIcon( QIcon::fromTheme(QStringLiteral("plasmagik")) );
    addPage( pageItem );
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
@@ -1085,7 +1085,7 @@ void OptionDialog::setupDirectoryMergePage( void )
    QFrame* page = new QFrame();
    KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Directory") );
    pageItem->setHeader( i18n("Directory") );
-   pageItem->setIcon( KIcon( "folder" ) );
+   pageItem->setIcon( QIcon::fromTheme(QStringLiteral("folder")) );
    addPage( pageItem );
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
@@ -1341,7 +1341,7 @@ void OptionDialog::setupRegionalPage( void )
    QFrame* page = new QFrame();
    KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Regional Settings") );
    pageItem->setHeader( i18n("Regional Settings") );
-   pageItem->setIcon( KIcon("locale" ) );
+   pageItem->setIcon( QIcon::fromTheme(QStringLiteral("locale")) );
    addPage( pageItem );
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
@@ -1591,7 +1591,7 @@ void OptionDialog::setupIntegrationPage( void )
    QFrame* page = new QFrame();
    KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Integration") );
    pageItem->setHeader( i18n("Integration Settings") );
-   pageItem->setIcon( KIcon( "preferences-desktop-launch-feedback" ) );
+   pageItem->setIcon( QIcon::fromTheme(QStringLiteral("preferences-desktop-launch-feedback")) );
    addPage( pageItem );
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
