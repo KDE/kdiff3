@@ -97,7 +97,7 @@ MergeResultWindow::MergeResultWindow(
    m_bCursorOn = true;
    m_bCursorUpdate = false;
    m_maxTextWidth = -1;
-   connect( &m_cursorTimer, SIGNAL(timeout()), this, SLOT( slotCursorUpdate() ) );
+   connect(&m_cursorTimer, &QTimer::timeout, this, &MergeResultWindow::slotCursorUpdate);
    m_cursorTimer.setSingleShot(true);
    m_cursorTimer.start( 500 /*ms*/ );
    m_selection.reset();

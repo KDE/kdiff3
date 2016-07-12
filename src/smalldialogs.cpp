@@ -64,10 +64,10 @@ OpenDialog::OpenDialog(
    m_pLineA->setEditText( KUrl(n1).prettyUrl() );
    m_pLineA->setMinimumWidth( 200 );
    QPushButton * button = new QPushButton( i18n("File..."), this );
-   connect( button, SIGNAL(clicked()), this, SLOT( selectFileA() ) );
+   connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileA);
    QPushButton * button2 = new QPushButton( i18n("Dir..."), this );
-   connect( button2, SIGNAL(clicked()), this, SLOT( selectDirA() ) );
-   connect( m_pLineA, SIGNAL(editTextChanged(const QString&)), this, SLOT(inputFilenameChanged() ) );
+   connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirA);
+   connect(m_pLineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
    h->addWidget( label,    0, 0 );
    h->addWidget( m_pLineA,  0, 1 );
@@ -81,10 +81,10 @@ OpenDialog::OpenDialog(
    m_pLineB->setEditText( KUrl(n2).prettyUrl() );
    m_pLineB->setMinimumWidth( 200 );
    button   = new QPushButton( i18n("File..."), this );
-   connect( button, SIGNAL(clicked()), this, SLOT( selectFileB() ) );
+   connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileB);
    button2   = new QPushButton( i18n("Dir..."), this );
-   connect( button2, SIGNAL(clicked()), this, SLOT( selectDirB() ) );
-   connect( m_pLineB, SIGNAL(editTextChanged(const QString&)), this, SLOT(inputFilenameChanged() ) );
+   connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirB);
+   connect(m_pLineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
    h->addWidget( label,     1, 0 );
    h->addWidget( m_pLineB,  1, 1 );
@@ -98,10 +98,10 @@ OpenDialog::OpenDialog(
    m_pLineC->setEditText( KUrl(n3).prettyUrl() );
    m_pLineC->setMinimumWidth( 200 );
    button = new QPushButton( i18n("File..."), this );
-   connect( button, SIGNAL(clicked()), this, SLOT( selectFileC() ) );
+   connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileC);
    button2   = new QPushButton( i18n("Dir..."), this );
-   connect( button2, SIGNAL(clicked()), this, SLOT( selectDirC() ) );
-   connect( m_pLineC, SIGNAL(editTextChanged(const QString&)), this, SLOT(inputFilenameChanged() ) );
+   connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirC);
+   connect(m_pLineC, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
    h->addWidget( label,     2, 0 );
    h->addWidget( m_pLineC,   2, 1 );
@@ -128,7 +128,7 @@ OpenDialog::OpenDialog(
    m->addAction( i18n("Swap %1<->Output",QString("A") ));
    m->addAction( i18n("Swap %1<->Output",QString("B") ));
    m->addAction( i18n("Swap %1<->Output",QString("C") ));
-   connect( m, SIGNAL(triggered(QAction*)), this, SLOT(slotSwapCopyNames(QAction*)));
+   connect(m, &QMenu::triggered, this, &OpenDialog::slotSwapCopyNames);
    button->setMenu(m);
 
 
@@ -141,13 +141,13 @@ OpenDialog::OpenDialog(
    m_pLineOut->setEditText( KUrl(outputName).prettyUrl() );
    m_pLineOut->setMinimumWidth( 200 );
    button = new QPushButton( i18n("File..."), this );
-   connect( button, SIGNAL(clicked()), this, SLOT( selectOutputName() ) );
+   connect(button, &QPushButton::clicked, this, &OpenDialog::selectOutputName);
    button2   = new QPushButton( i18n("Dir..."), this );
-   connect( button2, SIGNAL(clicked()), this, SLOT( selectOutputDir() ) );
-   connect( m_pMerge, SIGNAL(stateChanged(int)), this, SLOT(internalSlot(int)) );
-   connect( this, SIGNAL(internalSignal(bool)), m_pLineOut, SLOT(setEnabled(bool)) );
-   connect( this, SIGNAL(internalSignal(bool)), button, SLOT(setEnabled(bool)) );
-   connect( this, SIGNAL(internalSignal(bool)), button2, SLOT(setEnabled(bool)) );
+   connect(button2, &QPushButton::clicked, this, &OpenDialog::selectOutputDir);
+   connect(m_pMerge, &QCheckBox::stateChanged, this, &OpenDialog::internalSlot);
+   connect(this, &OpenDialog::internalSignal, m_pLineOut, &QComboBox::setEnabled);
+   connect(this, &OpenDialog::internalSignal, button, &QPushButton::setEnabled);
+   connect(this, &OpenDialog::internalSignal, button2, &QPushButton::setEnabled);
 
    m_pMerge->setChecked( !bMerge );
    m_pMerge->setChecked( bMerge );
@@ -174,11 +174,11 @@ OpenDialog::OpenDialog(
 
    button = new QPushButton( i18n("&OK"), this );
    button->setDefault( true );
-   connect( button, SIGNAL(clicked()), this, SLOT( accept() ) );
+   connect(button, &QPushButton::clicked, this, &OpenDialog::accept);
    l->addWidget( button, 1 );
 
    button = new QPushButton( i18n("&Cancel"), this );
-   connect( button, SIGNAL(clicked()), this, SLOT( reject() ) );
+   connect(button, &QPushButton::clicked, this, &OpenDialog::reject);
    l->addWidget( button,1 );
 
    QSize sh = sizeHint();
@@ -414,11 +414,11 @@ FindDialog::FindDialog(QWidget* pParent)
 
    QPushButton* pButton = new QPushButton( i18n("&Search"), this );
    layout->addWidget( pButton, line, 0 );
-   connect( pButton, SIGNAL(clicked()), this, SLOT(accept()));
+   connect(pButton, &QPushButton::clicked, this, &FindDialog::accept);
 
    pButton = new QPushButton( i18n("&Cancel"), this );
    layout->addWidget( pButton, line, 1 );
-   connect( pButton, SIGNAL(clicked()), this, SLOT(reject()));
+   connect(pButton, &QPushButton::clicked, this, &FindDialog::reject);
 
    hide();
 }
@@ -445,7 +445,7 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
    l->setToolTip( autoMergeRegExpToolTip );
    m_pAutoMergeRegExpEdit = new QLineEdit(this);
    pGrid->addWidget(m_pAutoMergeRegExpEdit,line,1);
-   connect( m_pAutoMergeRegExpEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect(m_pAutoMergeRegExpEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
    ++line;
 
    l = new QLabel(i18n("Example auto merge line:"), this);
@@ -453,7 +453,7 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
    l->setToolTip( i18n("To test auto merge, copy a line as used in your files.") );
    m_pAutoMergeExampleEdit = new QLineEdit(this);
    pGrid->addWidget(m_pAutoMergeExampleEdit,line,1);
-   connect( m_pAutoMergeExampleEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect(m_pAutoMergeExampleEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
    ++line;
 
    l = new QLabel(i18n("Match result:"), this);
@@ -472,7 +472,7 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
    l->setToolTip( historyStartRegExpToolTip );
    m_pHistoryStartRegExpEdit = new QLineEdit(this);
    pGrid->addWidget(m_pHistoryStartRegExpEdit,line,1);
-   connect( m_pHistoryStartRegExpEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect(m_pHistoryStartRegExpEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
    ++line;
 
    l = new QLabel(i18n("Example history start line (with leading comment):"), this);
@@ -481,7 +481,7 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
                           "including the leading comment.") );
    m_pHistoryStartExampleEdit = new QLineEdit(this);
    pGrid->addWidget(m_pHistoryStartExampleEdit,line,1);
-   connect( m_pHistoryStartExampleEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect(m_pHistoryStartExampleEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
    ++line;
 
    l = new QLabel(i18n("Match result:"), this);
@@ -500,7 +500,7 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
    l->setToolTip( historyEntryStartRegExpToolTip );
    m_pHistoryEntryStartRegExpEdit = new QLineEdit(this);
    pGrid->addWidget(m_pHistoryEntryStartRegExpEdit,line,1);
-   connect( m_pHistoryEntryStartRegExpEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect(m_pHistoryEntryStartRegExpEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
    ++line;
 
    l = new QLabel(i18n("History sort key order:"), this);
@@ -508,7 +508,7 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
    l->setToolTip( historySortKeyOrderToolTip );
    m_pHistorySortKeyOrderEdit = new QLineEdit(this);
    pGrid->addWidget(m_pHistorySortKeyOrderEdit,line,1);
-   connect( m_pHistorySortKeyOrderEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect(m_pHistorySortKeyOrderEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
    ++line;
 
    l = new QLabel(i18n("Example history entry start line (without leading comment):"), this);
@@ -517,7 +517,7 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
                           "but omit the leading comment.") );
    m_pHistoryEntryStartExampleEdit = new QLineEdit(this);
    pGrid->addWidget(m_pHistoryEntryStartExampleEdit,line,1);
-   connect( m_pHistoryEntryStartExampleEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotRecalc()));
+   connect(m_pHistoryEntryStartExampleEdit, &QLineEdit::textChanged, this, &RegExpTester::slotRecalc);
    ++line;
 
    l = new QLabel(i18n("Match result:"), this);
@@ -536,11 +536,11 @@ RegExpTester::RegExpTester( QWidget* pParent, const QString& autoMergeRegExpTool
 
    QPushButton* pButton = new QPushButton(i18n("OK"), this);
    pGrid->addWidget(pButton,line,0);
-   connect( pButton, SIGNAL(clicked()), this, SLOT(accept()));
+   connect(pButton, &QPushButton::clicked, this, &RegExpTester::accept);
 
    pButton = new QPushButton(i18n("Cancel"), this);
    pGrid->addWidget(pButton,line,1);
-   connect( pButton, SIGNAL(clicked()), this, SLOT(reject()));
+   connect(pButton, &QPushButton::clicked, this, &RegExpTester::reject);
 
    resize( 800, sizeHint().height() );
 }

@@ -153,7 +153,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
 
    // All default values must be set before calling readOptions().
    m_pOptionDialog = new OptionDialog( m_pKDiff3Shell!=0, this );
-   connect( m_pOptionDialog, SIGNAL(applyDone()), this, SLOT(slotRefresh()) );
+   connect(m_pOptionDialog, &OptionDialog::applyDone, this, &KDiff3App::slotRefresh);
 
    // This is just a convenience variable to make code that accesses options more readable
    m_pOptions = &m_pOptionDialog->m_options;
@@ -276,7 +276,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
    initStatusBar();
 
    m_pFindDialog = new FindDialog( this );
-   connect( m_pFindDialog, SIGNAL(findNext()), this, SLOT(slotEditFindNext()));
+   connect(m_pFindDialog, &FindDialog::findNext, this, &KDiff3App::slotEditFindNext);
 
    autoAdvance->setChecked( m_pOptions->m_bAutoAdvance );
    showWhiteSpaceCharacters->setChecked( m_pOptions->m_bShowWhiteSpaceCharacters );
@@ -323,13 +323,12 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
    m_pDirectoryMergeWindow->setDirectoryMergeInfo( m_pDirectoryMergeInfo );
    m_pDirectoryMergeSplitter->addWidget(m_pDirectoryMergeInfo);
 
-   connect( m_pDirectoryMergeWindow, SIGNAL(startDiffMerge(QString,QString,QString,QString,QString,QString,QString,TotalDiffStatus*)),
-            this, SLOT( slotFileOpen2(QString,QString,QString,QString,QString,QString,QString,TotalDiffStatus*)));
+   connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::startDiffMerge, this, &KDiff3App::slotFileOpen2);
    connect( m_pDirectoryMergeWindow->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)), this, SLOT(slotUpdateAvailabilities()));
    connect( m_pDirectoryMergeWindow->selectionModel(), SIGNAL(currentChanged(const QModelIndex&,const QModelIndex&)), this, SLOT(slotUpdateAvailabilities()));
-   connect( m_pDirectoryMergeWindow, SIGNAL(checkIfCanContinue(bool*)), this, SLOT(slotCheckIfCanContinue(bool*)));
-   connect( m_pDirectoryMergeWindow, SIGNAL(updateAvailabilities()), this, SLOT(slotUpdateAvailabilities()));
-   connect( m_pDirectoryMergeWindow, SIGNAL(statusBarMessage(const QString&)), this, SLOT(slotStatusMsg(const QString&)));
+   connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
+   connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::updateAvailabilities, this, &KDiff3App::slotUpdateAvailabilities);
+   connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::statusBarMessage, this, &KDiff3App::slotStatusMsg);
 
    m_pDirectoryMergeWindow->initDirectoryMergeActions( this, actionCollection() );
 

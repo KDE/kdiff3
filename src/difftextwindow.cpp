@@ -1646,8 +1646,8 @@ DiffTextWindowFrame::DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusB
    d->m_pFileSelection = new QLineEdit(d->m_pTopLineWidget);
    d->m_pBrowseButton = new QPushButton( "...",d->m_pTopLineWidget );
    d->m_pBrowseButton->setFixedWidth( 30 );
-   connect(d->m_pBrowseButton,SIGNAL(clicked()), this, SLOT(slotBrowseButtonClicked()));
-   connect(d->m_pFileSelection,SIGNAL(returnPressed()), this, SLOT(slotReturnPressed()));
+   connect(d->m_pBrowseButton, &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
+   connect(d->m_pFileSelection, &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
 
    d->m_pLabel = new QLabel("A:",d->m_pTopLineWidget);
    d->m_pTopLine = new QLabel(d->m_pTopLineWidget);
@@ -1901,7 +1901,7 @@ void EncodingLabel::insertCodec( const QString& visibleCodecName, QTextCodec* pC
       if (currentTextCodecEnum==CodecMIBEnum) 
          pAction->setChecked(true);
       pMenu->addAction(pAction);
-      connect(pAction, SIGNAL(triggered()), this, SLOT(slotEncodingChanged()));
+      connect(pAction, &QAction::triggered, this, &EncodingLabel::slotEncodingChanged);
       codecEnumList.append(CodecMIBEnum);
    }
 }

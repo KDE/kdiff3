@@ -707,7 +707,7 @@ void KDiff3App::initView()
    pHScrollBarLayout->addWidget( m_pCornerWidget );
 
 
-   connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pOverview, SLOT(setFirstLine(int)));
+   connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pOverview, &Overview::setFirstLine);
    connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow1, SLOT(setFirstLine(int)));
    connect( m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow1, SLOT(setHorizScrollOffset(int)));
    connect( m_pDiffTextWindow1, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
@@ -731,16 +731,16 @@ void KDiff3App::initView()
 
 
    MergeResultWindow* p = m_pMergeResultWindow;
-   connect( m_pMergeVScrollBar, SIGNAL(valueChanged(int)), p, SLOT(setFirstLine(int)));
+   connect(m_pMergeVScrollBar, &QScrollBar::valueChanged, p, &MergeResultWindow::setFirstLine);
 
-   connect( m_pHScrollBar,      SIGNAL(valueChanged2(int)), p, SLOT(setHorizScrollOffset(int)));
+   connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, p, &MergeResultWindow::setHorizScrollOffset);
    connect( p, SIGNAL(scroll(int,int)), this, SLOT(scrollMergeResultWindow(int,int)));
    connect( p, SIGNAL(sourceMask(int,int)), this, SLOT(sourceMask(int,int)));
    connect( p, SIGNAL( resizeSignal() ),this, SLOT(resizeMergeResultWindow()));
    connect( p, SIGNAL( selectionEnd() ), this, SLOT( slotSelectionEnd() ) );
    connect( p, SIGNAL( newSelection() ), this, SLOT( slotSelectionStart() ) );
    connect( p, SIGNAL( modifiedChanged(bool) ), this, SLOT( slotOutputModified(bool) ) );
-   connect( p, SIGNAL( modifiedChanged(bool) ), m_pMergeResultWindowTitle, SLOT( slotSetModified(bool) ) );
+   connect(p, &MergeResultWindow::modifiedChanged, m_pMergeResultWindowTitle, &WindowTitleWidget::slotSetModified);
    connect( p, SIGNAL( updateAvailabilities() ), this, SLOT( slotUpdateAvailabilities() ) );
    connect( p, SIGNAL( showPopupMenu(const QPoint&) ), this, SLOT(showPopupMenu(const QPoint&)));
    connect( p, SIGNAL( noRelevantChangesDetected() ), this, SLOT(slotNoRelevantChangesDetected()));

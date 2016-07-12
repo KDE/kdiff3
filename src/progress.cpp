@@ -51,7 +51,7 @@ ProgressDialog::ProgressDialog( QWidget* pParent )
    hlayout->addStretch(1);
    m_pAbortButton = new QPushButton( i18n("&Cancel"), this);
    hlayout->addWidget( m_pAbortButton );
-   connect( m_pAbortButton, SIGNAL(clicked()), this, SLOT(slotAbort()) );
+   connect(m_pAbortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
 
    m_progressDelayTimer = 0;
    resize( 400, 100 );

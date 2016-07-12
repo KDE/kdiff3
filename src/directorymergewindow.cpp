@@ -68,7 +68,7 @@ public:
       m_pTextEdit->setWordWrapMode(QTextOption::NoWrap);
       m_pTextEdit->setReadOnly(true);
       QPushButton* pClose = new QPushButton(tr("Close"));
-      connect( pClose, SIGNAL(clicked()), this, SLOT(accept()));
+      connect(pClose, &QPushButton::clicked, this, &DirectoryMergeInfo::accept);
       pVLayout->addWidget(pClose);
    }
 
@@ -688,8 +688,8 @@ DirectoryMergeWindow::DirectoryMergeWindow( QWidget* pParent, Options* pOptions,
    d = new Data(this);
    setModel( d );
    setItemDelegate( new DirMergeItemDelegate(this) );
-   connect( this, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(onDoubleClick(const QModelIndex&)));
-   connect( this, SIGNAL(expanded(const QModelIndex&)), this, SLOT(onExpanded()));
+   connect(this, &DirectoryMergeWindow::doubleClicked, this, &DirectoryMergeWindow::onDoubleClick);
+   connect(this, &DirectoryMergeWindow::expanded, this, &DirectoryMergeWindow::onExpanded);
 
    d->m_pOptions = pOptions;
    d->m_pIconLoader = pIconLoader;

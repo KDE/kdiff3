@@ -510,10 +510,10 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
    // Initialize all values in the dialog
    resetToDefaults();
    slotApply();
-   connect(this, SIGNAL(applyClicked()), this, SLOT(slotApply()));
-   connect(this, SIGNAL(okClicked()), this, SLOT(slotOk()));
+   connect(this, &OptionDialog::applyClicked, this, &OptionDialog::slotApply);
+   connect(this, &OptionDialog::okClicked, this, &OptionDialog::slotOk);
    //helpClicked() is connected in KDiff3App::KDiff3App
-   connect(this, SIGNAL(defaultClicked()), this, SLOT(slotDefault()));
+   connect(this, &OptionDialog::defaultClicked, this, &OptionDialog::slotDefault);
 }
 
 OptionDialog::~OptionDialog( void )
@@ -1038,7 +1038,7 @@ void OptionDialog::setupMergePage( void )
             "See the documentation for details.");
       label->setToolTip( s_historyEntryStartSortKeyOrderToolTip );
       m_pHistorySortKeyOrderLineEdit->setEnabled(false);
-      connect( m_pHistoryMergeSorting, SIGNAL(toggled(bool)), m_pHistorySortKeyOrderLineEdit, SLOT(setEnabled(bool)));
+      connect(m_pHistoryMergeSorting, &OptionCheckBox::toggled, m_pHistorySortKeyOrderLineEdit, &OptionLineEdit::setEnabled);
       ++line;
 
       m_pHistoryAutoMerge = new OptionCheckBox( i18n("Merge version control history on merge start"), false, "RunHistoryAutoMergeOnMergeStart", &m_options.m_bRunHistoryAutoMergeOnMergeStart, page, this );
@@ -1056,7 +1056,7 @@ void OptionDialog::setupMergePage( void )
 
    QPushButton* pButton = new QPushButton( i18n("Test your regular expressions"), page );
    gbox->addWidget( pButton, line, 0 );
-   connect( pButton, SIGNAL(clicked()), this, SLOT(slotHistoryMergeRegExpTester()));
+   connect(pButton, &QPushButton::clicked, this, &OptionDialog::slotHistoryMergeRegExpTester);
    ++line;
 
    label = new QLabel( i18n("Irrelevant merge command:"), page );
@@ -1251,7 +1251,7 @@ void OptionDialog::setupDirectoryMergePage( void )
    pWhiteSpaceDiffsEqual->setToolTip( i18n(
                   "If files differ only by white space consider them equal.\n"
                   "This is only active when full analysis is chosen."  ) );
-   connect(pFullAnalysis, SIGNAL(toggled(bool)), pWhiteSpaceDiffsEqual, SLOT(setEnabled(bool)));
+   connect(pFullAnalysis, &OptionRadioButton::toggled, pWhiteSpaceDiffsEqual, &OptionCheckBox::setEnabled);
    pWhiteSpaceDiffsEqual->setEnabled(false);
    ++line;
 
@@ -1566,10 +1566,10 @@ static const char* countryMap[]={
    gbox->addWidget( m_pEncodingPPComboBox, line, 1 );   
    ++line;
 
-   connect(m_pSameEncoding, SIGNAL(toggled(bool)), this, SLOT(slotEncodingChanged()));
-   connect(m_pEncodingAComboBox, SIGNAL(activated(int)), this, SLOT(slotEncodingChanged()));
-   connect(m_pAutoDetectUnicodeA, SIGNAL(toggled(bool)), this, SLOT(slotEncodingChanged()));
-   connect(m_pAutoSelectOutEncoding, SIGNAL(toggled(bool)), this, SLOT(slotEncodingChanged()));
+   connect(m_pSameEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
+   connect(m_pEncodingAComboBox, static_cast<void (OptionEncodingComboBox::*)(int)>(&OptionEncodingComboBox::activated), this, &OptionDialog::slotEncodingChanged);
+   connect(m_pAutoDetectUnicodeA, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
+   connect(m_pAutoSelectOutEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
 
    OptionCheckBox* pRightToLeftLanguage = new OptionCheckBox( i18n("Right To Left Language"), false, "RightToLeftLanguage", &m_options.m_bRightToLeftLanguage, page, this );
    gbox->addWidget( pRightToLeftLanguage, line, 0, 1, 2 );
@@ -1630,14 +1630,14 @@ void OptionDialog::setupIntegrationPage( void )
                  "Integrate with Rational ClearCase from IBM.\n"
                  "Modifies the \"map\" file in ClearCase subdir \"lib/mgrs\"\n"
                  "(Only enabled when ClearCase \"bin\" directory is in the path.)"));
-   connect(pIntegrateWithClearCase, SIGNAL(clicked()),this, SLOT(slotIntegrateWithClearCase()) );
+   connect(pIntegrateWithClearCase, &QPushButton::clicked, this, &OptionDialog::slotIntegrateWithClearCase);
    pIntegrateWithClearCase->setEnabled( integrateWithClearCase( "existsClearCase", "" )!=0 );
 
    QPushButton* pRemoveClearCaseIntegration = new QPushButton( i18n("Remove ClearCase Integration"), page);
    gbox->addWidget( pRemoveClearCaseIntegration, line, 1 );
    pRemoveClearCaseIntegration->setToolTip( i18n(
                  "Restore the old \"map\" file from before doing the ClearCase integration."));
-   connect(pRemoveClearCaseIntegration, SIGNAL(clicked()),this, SLOT(slotRemoveClearCaseIntegration()) );
+   connect(pRemoveClearCaseIntegration, &QPushButton::clicked, this, &OptionDialog::slotRemoveClearCaseIntegration);
    pRemoveClearCaseIntegration->setEnabled( integrateWithClearCase( "existsClearCase", "" )!=0 );
 
    ++line;

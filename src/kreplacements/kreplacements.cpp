@@ -179,19 +179,19 @@ KPageDialog::KPageDialog(  QWidget* parent )
 
    pButtonLayout->addStretch(1);
    QPushButton* pOk = new QPushButton( i18n("Ok") );
-   connect( pOk, SIGNAL( clicked() ), this, SIGNAL(okClicked()) );
+   connect(pOk, &QPushButton::clicked, this, &KPageDialog::okClicked);
    pButtonLayout->addWidget( pOk );
 
    QPushButton* pHelp = new QPushButton( i18n("Help") );
-   connect( pHelp, SIGNAL( clicked() ), this, SLOT(slotHelpClicked()));
+   connect(pHelp, &QPushButton::clicked, this, &KPageDialog::slotHelpClicked);
    pButtonLayout->addWidget( pHelp );
 
    QPushButton* pDefaults = new QPushButton( i18n("Defaults") );
-   connect( pDefaults, SIGNAL( clicked() ), this, SIGNAL(defaultClicked()) );
+   connect(pDefaults, &QPushButton::clicked, this, &KPageDialog::defaultClicked);
    pButtonLayout->addWidget( pDefaults );
 
    QPushButton* pCancel = new QPushButton( i18n("Cancel") );
-   connect( pCancel, SIGNAL( clicked() ), this, SLOT(reject()));
+   connect(pCancel, &QPushButton::clicked, this, &KPageDialog::reject);
    pButtonLayout->addWidget( pCancel );
 }
 
@@ -341,7 +341,7 @@ void KMainWindow::slotAbout()
    l->addWidget( pTabWidget );
 
    QPushButton* pOkButton = new QPushButton(i18n("Ok"));
-   connect( pOkButton, SIGNAL(clicked()), &d, SLOT(accept()));
+   connect(pOkButton, &QPushButton::clicked, &d, &QDialog::accept);
    l->addWidget( pOkButton );
 
    d.setWindowTitle("About " + s_appName);
@@ -752,7 +752,7 @@ KFontChooser::KFontChooser( QWidget* pParent )
    m_pParent = pParent;
    QVBoxLayout* pLayout = new QVBoxLayout( this );
    m_pSelectFont = new QPushButton(i18n("Select Font"), this );
-   connect(m_pSelectFont, SIGNAL(clicked()), this, SLOT(slotSelectFont()));
+   connect(m_pSelectFont, &QPushButton::clicked, this, &KFontChooser::slotSelectFont);
    pLayout->addWidget(m_pSelectFont);
 
    m_pLabel = new QLabel( "", this );
@@ -809,7 +809,7 @@ void KFontChooser::slotSelectFont()
 KColorButton::KColorButton(QWidget* parent)
 : QPushButton(parent)
 {
-   connect( this, SIGNAL(clicked()), this, SLOT(slotClicked()));
+   connect(this, &KColorButton::clicked, this, &KColorButton::slotClicked);
 }
 
 QColor KColorButton::color()

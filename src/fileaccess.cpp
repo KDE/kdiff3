@@ -992,7 +992,7 @@ bool FileAccessJobHandler::stat( int detail, bool bWantToWrite )
          bWantToWrite ? KIO::StatJob::DestinationSide : KIO::StatJob::SourceSide, 
          detail, KIO::HideProgressInfo );
 
-   connect( pStatJob, SIGNAL(result(KJob*)), this, SLOT(slotStatResult(KJob*)));
+   connect(pStatJob, &KIO::StatJob::result, this, &FileAccessJobHandler::slotStatResult);
 
    ProgressProxy::enterEventLoop( pStatJob, i18n("Getting file status: %1",m_pFileAccess->prettyAbsPath()) );
 
@@ -1033,9 +1033,9 @@ bool FileAccessJobHandler::get(void* pDestBuffer, long maxLength )
       m_bSuccess = false;
       m_pFileAccess->setStatusText( QString() );
 
-      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
-      connect( pJob, SIGNAL(data(KJob*,const QByteArray &)), this, SLOT(slotGetData(KJob*, const QByteArray&)));
-      connect( pJob, SIGNAL(percent(KJob*,unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+      connect(pJob, &KIO::TransferJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
+      connect(pJob, &KIO::TransferJob::data, this, &FileAccessJobHandler::slotGetData);
+      connect(pJob, &KIO::TransferJob::percent, &pp, &ProgressProxyExtender::slotPercent);
 
       ProgressProxy::enterEventLoop( pJob, i18n("Reading file: %1",m_pFileAccess->prettyAbsPath()) );
       return m_bSuccess;
@@ -1071,9 +1071,9 @@ bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOve
       m_bSuccess = false;
       m_pFileAccess->setStatusText( QString() );
 
-      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotPutJobResult(KJob*)));
-      connect( pJob, SIGNAL(dataReq(KIO::Job*, QByteArray&)), this, SLOT(slotPutData(KIO::Job*, QByteArray&)));
-      connect( pJob, SIGNAL(percent(KJob*,unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+      connect(pJob, &KIO::TransferJob::result, this, &FileAccessJobHandler::slotPutJobResult);
+      connect(pJob, &KIO::TransferJob::dataReq, this, &FileAccessJobHandler::slotPutData);
+      connect(pJob, &KIO::TransferJob::percent, &pp, &ProgressProxyExtender::slotPercent);
 
       ProgressProxy::enterEventLoop( pJob, i18n("Writing file: %1",m_pFileAccess->prettyAbsPath()) );
       return m_bSuccess;
@@ -1136,7 +1136,7 @@ bool FileAccessJobHandler::mkDir( const QString& dirName )
    {
       m_bSuccess = false;
       KIO::SimpleJob* pJob = KIO::mkdir( dirURL );
-      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
+      connect(pJob, &KIO::SimpleJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
 
       ProgressProxy::enterEventLoop( pJob, i18n("Making directory: %1", dirName) );
       return m_bSuccess;
@@ -1156,7 +1156,7 @@ bool FileAccessJobHandler::rmDir( const QString& dirName )
    {
       m_bSuccess = false;
       KIO::SimpleJob* pJob = KIO::rmdir( dirURL );
-      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
+      connect(pJob, &KIO::SimpleJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
 
       ProgressProxy::enterEventLoop(pJob, i18n("Removing directory: %1",dirName));
       return m_bSuccess;
@@ -1171,7 +1171,7 @@ bool FileAccessJobHandler::removeFile( const QString& fileName )
    {
       m_bSuccess = false;
       KIO::SimpleJob* pJob = KIO::file_delete( fileName, KIO::HideProgressInfo );
-      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
+      connect(pJob, &KIO::SimpleJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
 
       ProgressProxy::enterEventLoop( pJob, i18n("Removing file: %1",fileName) );
       return m_bSuccess;
@@ -1186,7 +1186,7 @@ bool FileAccessJobHandler::symLink( const QString& linkTarget, const QString& li
    {
       m_bSuccess = false;
       KIO::CopyJob* pJob = KIO::link( linkTarget, linkLocation, KIO::HideProgressInfo );
-      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
+      connect(pJob, &KIO::CopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
 
       ProgressProxy::enterEventLoop( pJob,
          i18n("Creating symbolic link: %1 -> %2",linkLocation,linkTarget) );
@@ -1213,8 +1213,8 @@ bool FileAccessJobHandler::rename( const QString& dest )
       int permissions=-1;
       m_bSuccess = false;
       KIO::FileCopyJob* pJob = KIO::file_move( m_pFileAccess->url(), kurl, permissions, KIO::HideProgressInfo );
-      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
-      connect( pJob, SIGNAL(percent(KJob*,unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+      connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
+      connect(pJob, &KIO::FileCopyJob::percent, &pp, &ProgressProxyExtender::slotPercent);
 
       ProgressProxy::enterEventLoop( pJob,
          i18n("Renaming file: %1 -> %2",m_pFileAccess->prettyAbsPath(),dest) );
@@ -1247,8 +1247,8 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
       int permissions = (m_pFileAccess->isExecutable()?0111:0)+(m_pFileAccess->isWritable()?0222:0)+(m_pFileAccess->isReadable()?0444:0);
       m_bSuccess = false;
       KIO::FileCopyJob* pJob = KIO::file_copy ( m_pFileAccess->url(), destUrl, permissions, KIO::HideProgressInfo );
-      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
-      connect( pJob, SIGNAL(percent(KJob*,unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+      connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
+      connect(pJob, &KIO::FileCopyJob::percent, &pp, &ProgressProxyExtender::slotPercent);
       ProgressProxy::enterEventLoop( pJob,
          i18n("Copying file: %1 -> %2",m_pFileAccess->prettyAbsPath(),dest) );
 
@@ -1694,13 +1694,10 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
       m_bSuccess = false;
       if ( pListJob!=0 )
       {
-         connect( pListJob, SIGNAL( entries( KIO::Job*, const KIO::UDSEntryList& ) ),
-                  this,     SLOT( slotListDirProcessNewEntries( KIO::Job*, const KIO::UDSEntryList& )) );
-         connect( pListJob, SIGNAL( result( KJob* )),
-                  this,     SLOT( slotSimpleJobResult(KJob*) ) );
+         connect(pListJob, &KIO::ListJob::entries, this, &FileAccessJobHandler::slotListDirProcessNewEntries);
+         connect(pListJob, &KIO::ListJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
 
-         connect( pListJob, SIGNAL( infoMessage(KJob*, const QString&)),
-                  &pp,      SLOT( slotListDirInfoMessage(KJob*, const QString&) ));
+         connect(pListJob, &KIO::ListJob::infoMessage, &pp, &ProgressProxyExtender::slotListDirInfoMessage);
 
          // This line makes the transfer via fish unreliable.:-(
          //connect( pListJob, SIGNAL(percent(KJob*,unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
