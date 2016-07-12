@@ -38,7 +38,7 @@
 #include <QPushButton>
 #include <algorithm>
 
-#include <kmenu.h>
+#include <QMenu>
 #include <QAction>
 #include <kmessagebox.h>
 #include <kfiledialog.h>
@@ -2003,7 +2003,7 @@ void DirectoryMergeWindow::mousePressEvent( QMouseEvent* e )
    {
       bool bThreeDirs = d->m_dirC.isValid();
 
-      KMenu m(this);
+      QMenu m(this);
       if ( bThreeDirs )
       {
          m.addAction( d->m_pDirCurrentDoNothing );
@@ -2076,7 +2076,7 @@ void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
       if (!itemPath.isEmpty())
       {
          d->selectItemAndColumn(mi, true);
-         KMenu m(this);
+         QMenu m(this);
          m.addAction( d->m_pDirCompareExplicit );
          m.addAction( d->m_pDirMergeExplicit );
 

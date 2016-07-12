@@ -54,6 +54,9 @@
 
 #ifndef KREPLACEMENTS_H
 #include <kglobalsettings.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
 #endif
 
 #define KDIFF3_CONFIG_GROUP "KDiff3 Options"
@@ -486,11 +489,21 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
 {
    setFaceType( List );
    setWindowTitle( i18n("Configure") );
-   setButtons( Help|Default|Apply|Ok|Cancel );
-   setDefaultButton( Ok );
+   QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::RestoreDefaults|QDialogButtonBox::Apply);
+   QWidget *mainWidget = new QWidget(this);
+   QVBoxLayout *mainLayout = new QVBoxLayout;
+   setLayout(mainLayout);
+   mainLayout->addWidget(mainWidget);
+   QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+   okButton->setDefault(true);
+   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+   connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+   connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+   //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+   mainLayout->addWidget(buttonBox);
+   okButton->setDefault(true);
    setObjectName( name );
    setModal( true  );
-   showButtonSeparator( true );
    setHelp( "kdiff3/index.html", QString::null );
 
    setupFontPage();

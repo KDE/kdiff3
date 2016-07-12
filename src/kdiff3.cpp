@@ -54,6 +54,7 @@
 #include <ktoolbar.h>
 #include <kiconloader.h>
 #include <kactioncollection.h>
+#include <KConfigGroup>
 
 // application specific includes
 #include "kdiff3.h"
@@ -734,7 +735,7 @@ void KDiff3App::slotFileSaveAs()
         if ( m_bDirCompare )
            m_pDirectoryMergeWindow->mergeResultSaved( m_outputFilename );
      }
-     //setCaption(url.fileName(),doc->isModified());
+     //setWindowTitle(url.fileName(),doc->isModified());
 
      m_bDefaultFilename = false;
   }
