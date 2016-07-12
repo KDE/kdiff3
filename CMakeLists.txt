@@ -16,14 +16,14 @@ include(FeatureSummary)
 
 include(ECMInstallIcons)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Gui)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n DocTools)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 add_definitions(${QT_DEFINITIONS} ${KF5_DEFINITIONS})
 
 include_directories( 
-    ${QT_INCLUDES} ${KF5_INCLUDES}
+    ${QT_INCLUDES} ${KF5_INCLUDES} ${Qt5Core_INCLUDE_DIRS} ${Qt5Core_INCLUDE_DIRS}
     ${CMAKE_CURRENT_BINARY_DIR}
     )
 
@@ -34,7 +34,7 @@ add_subdirectory(src)
 add_subdirectory(doc)
 
 
-find_file(KFILEITEMACTIONPLUGIN_FOUND kabstractfileitemactionplugin.h PATHS  NO_DEFAULT_PATH)
+find_file(KFILEITEMACTIONPLUGIN_FOUND kabstractfileitemactionplugin.h PATHS)
 if(KFILEITEMACTIONPLUGIN_FOUND)
   message(STATUS "")
   message(STATUS "kabstractfileitemactionplugin.h found........... YES")
