@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 
-#include <kaboutdata.h>
+#include <K4AboutData>
 #include <klocale.h>
 #include "kdiff3_shell.h"
 #include <kstandarddirs.h>
@@ -83,7 +83,7 @@ void initialiseCmdLineArgs( KCmdLineOptions& options )
 #ifdef _WIN32
 #include <process.h>
 #include <QApplication>
-#include <KAboutData>
+#include <K4AboutData>
 #include <KLocalizedString>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
@@ -175,7 +175,7 @@ int main(int argc, char *argv[])
    const KLocalizedString copyright = ki18n("(c) 2002-2012 Joachim Eibl");
    const QByteArray& homePage = "http://kdiff3.sourceforge.net/";
    const QByteArray& bugsAddress = "joachim.eibl" "@" "gmx.de";
-   KAboutData aboutData( appName, appCatalog, i18nName, 
+   K4AboutData aboutData( appName, appCatalog, i18nName, 
          appVersion, description, KAboutLicense::GPL_V2, copyright, description, 
          homePage, bugsAddress );
 
@@ -201,9 +201,9 @@ int main(int argc, char *argv[])
 
    aboutData.addCredit(ki18n("+ Many thanks to those who reported bugs and contributed ideas!"));
 
-    QApplication app(argc, argv); // PORTING SCRIPT: move this to before the KAboutData initialization
+    QApplication app(argc, argv); // PORTING SCRIPT: move this to before the K4AboutData initialization
     QCommandLineParser parser;
-    KAboutData::setApplicationData(aboutData);
+    K4AboutData::setApplicationData(aboutData);
     parser.addVersionOption();
     parser.addHelpOption();
     //PORTING SCRIPT: adapt aboutdata variable if necessary

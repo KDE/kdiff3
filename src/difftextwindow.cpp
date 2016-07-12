@@ -42,6 +42,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <assert.h>
+#include <QFileDialog>
 
 
 class DiffTextWindowData
@@ -1814,7 +1815,7 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
 {
     QString current = d->m_pFileSelection->text();
 
-    KUrl newURL = KFileDialog::getOpenUrl( current, 0, this);
+    KUrl newURL = QFileDialog::getOpenFileUrl(this, QString(), current, 0);
     if ( !newURL.isEmpty() )
     {
         DiffTextWindow* pDTW = d->m_pDiffTextWindow;

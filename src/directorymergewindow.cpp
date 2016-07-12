@@ -48,6 +48,7 @@
 
 #include <assert.h>
 //#include <konq_popupmenu.h>
+#include <QFileDialog>
 
 #include "guiutils.h"
 
@@ -3243,7 +3244,7 @@ void DirectoryMergeWindow::slotSaveMergeState()
    //slotStatusMsg(i18n("Saving Directory Merge State ..."));
 
    //QString s = KFileDialog::getSaveUrl( QDir::currentPath(), 0, this, i18n("Save As...") ).url();
-   QString s = KFileDialog::getSaveFileName( QDir::currentPath(), 0, this, i18n("Save Directory Merge State As...") );
+   QString s = QFileDialog::getSaveFileName(this, i18n("Save Directory Merge State As...") , QDir::currentPath(), 0);
    if(!s.isEmpty())
    {
       d->m_dirMergeStateFilename = s;

@@ -259,13 +259,13 @@ bool KDiff3Part::saveFile()
 
 
 // It's usually safe to leave the factory code alone.. with the
-// notable exception of the KAboutData data
-#include <kaboutdata.h>
+// notable exception of the K4AboutData data
+#include <K4AboutData>
 #include <klocale.h>
 #include <kglobal.h>
 
 KComponentData*  KDiff3PartFactory::s_instance = 0L;
-KAboutData* KDiff3PartFactory::s_about = 0L;
+K4AboutData* KDiff3PartFactory::s_about = 0L;
 
 KDiff3PartFactory::KDiff3PartFactory()
     : KParts::Factory()
@@ -298,7 +298,7 @@ KComponentData* KDiff3PartFactory::instance()
 {
     if( !s_instance )
     {
-        s_about = new KAboutData(QByteArray("kdiff3part"), QByteArray("kdiff3part"), ki18n("KDiff3Part"), QByteArray(VERSION));
+        s_about = new K4AboutData(QByteArray("kdiff3part"), QByteArray("kdiff3part"), ki18n("KDiff3Part"), QByteArray(VERSION));
         s_about->addAuthor(ki18n("Joachim Eibl"), KLocalizedString(), QByteArray("joachim.eibl at gmx.de"));
         s_instance = new KComponentData(s_about);
     }

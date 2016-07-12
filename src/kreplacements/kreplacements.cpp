@@ -55,7 +55,7 @@ static QString s_description;
 static QString s_appName;
 static QString s_version;
 static QString s_homepage;
-static KAboutData* s_pAboutData;
+static K4AboutData* s_pAboutData;
 
 
 #ifdef _WIN32
@@ -357,7 +357,7 @@ void KMainWindow::slotAbout()
       );
    pTabWidget->addTab(tb1,i18n("&About"));
       
-   std::list<KAboutData::AboutDataEntry>::iterator i;
+   std::list<K4AboutData::AboutDataEntry>::iterator i;
    
    QString s2;   
    for( i=s_pAboutData->m_authorList.begin(); i!=s_pAboutData->m_authorList.end(); ++i )
@@ -872,7 +872,7 @@ QPixmap KIconLoader::loadIcon( const QString&, int, int )
    return QPixmap();
 }
 
-KAboutData::KAboutData(const QByteArray &appName, const QByteArray & /*catalogName*/, const KLocalizedString & /*programName*/, 
+K4AboutData::K4AboutData(const QByteArray &appName, const QByteArray & /*catalogName*/, const KLocalizedString & /*programName*/, 
       const QByteArray &version, const KLocalizedString &shortDescription, LicenseKey /*licenseType*/, 
       const KLocalizedString &copyrightStatement, const KLocalizedString & /*text*/, 
       const QByteArray &homePageAddress, const QByteArray &bugsEmailAddress)
@@ -885,16 +885,16 @@ KAboutData::KAboutData(const QByteArray &appName, const QByteArray & /*catalogNa
    s_homepage = homePageAddress;
 }
 
-KAboutData::KAboutData( const QString& /*name*/, const QString& /*appName*/, const QString& /*appName2*/, const QString& /*version*/ )
+K4AboutData::K4AboutData( const QString& /*name*/, const QString& /*appName*/, const QString& /*appName2*/, const QString& /*version*/ )
 {
 }
 
-void KAboutData::addAuthor(const QString&  name, const QString& task, const QString& email, const QString& weblink)
+void K4AboutData::addAuthor(const QString&  name, const QString& task, const QString& email, const QString& weblink)
 {
    m_authorList.push_back( AboutDataEntry( name, task, email, weblink) );
 }
 
-void KAboutData::addCredit(const QString& name, const QString& task, const QString& email, const QString& weblink)
+void K4AboutData::addCredit(const QString& name, const QString& task, const QString& email, const QString& weblink)
 {
    m_creditList.push_back( AboutDataEntry( name, task, email, weblink) );
 }
@@ -939,9 +939,9 @@ KCmdLineArgs* KCmdLineArgs::parsedArgs()  // static
    return &s_cmdLineArgs;
 }
 
-    QApplication app(argc, argv); // PORTING SCRIPT: move this to before the KAboutData initialization
+    QApplication app(argc, argv); // PORTING SCRIPT: move this to before the K4AboutData initialization
     QCommandLineParser parser;
-    KAboutData::setApplicationData(aboutData);
+    K4AboutData::setApplicationData(aboutData);
     parser.addVersionOption();
     parser.addHelpOption();
     //PORTING SCRIPT: adapt aboutdata variable if necessary
