@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <kcmdlineargs.h>
+
 #include <kaboutdata.h>
 #include <klocale.h>
 #include "kdiff3_shell.h"
@@ -82,6 +82,11 @@ void initialiseCmdLineArgs( KCmdLineOptions& options )
 
 #ifdef _WIN32
 #include <process.h>
+#include <QApplication>
+#include <KAboutData>
+#include <KLocalizedString>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
 // This command checks the comm
 static bool isOptionUsed(const QString& s, int argc, char* argv[])
 {
@@ -171,7 +176,7 @@ int main(int argc, char *argv[])
    const QByteArray& homePage = "http://kdiff3.sourceforge.net/";
    const QByteArray& bugsAddress = "joachim.eibl" "@" "gmx.de";
    KAboutData aboutData( appName, appCatalog, i18nName, 
-         appVersion, description, KAboutData::License_GPL_V2, copyright, description, 
+         appVersion, description, KAboutLicense::GPL_V2, copyright, description, 
          homePage, bugsAddress );
 
    aboutData.addAuthor(ki18n("Joachim Eibl"), KLocalizedString(), QByteArray("joachim.eibl" "@" "gmx.de"));
@@ -196,35 +201,40 @@ int main(int argc, char *argv[])
 
    aboutData.addCredit(ki18n("+ Many thanks to those who reported bugs and contributed ideas!"));
 
-   KCmdLineArgs::init( argc, argv, &aboutData );
+    QApplication app(argc, argv); // PORTING SCRIPT: move this to before the KAboutData initialization
+    QCommandLineParser parser;
+    KAboutData::setApplicationData(aboutData);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    //PORTING SCRIPT: adapt aboutdata variable if necessary
+    aboutData.setupCommandLine(&parser);
+    parser.process(app); // PORTING SCRIPT: move this to after any parser.addOption
+    aboutData.processCommandLine(&parser);
 
-   KCmdLineOptions options;
    initialiseCmdLineArgs( options );
 
    // ignorable command options
-   options.add( "m" ).add( "merge", ki18n("Merge the input."));
-   options.add( "b" ).add( "base file", ki18n("Explicit base file. For compatibility with certain tools.") );
-   options.add( "o" ).add( "output file", ki18n("Output file. Implies -m. E.g.: -o newfile.txt"));
-   options.add( "out file",    ki18n("Output file, again. (For compatibility with certain tools.)") );
-   options.add( "auto",        ki18n("No GUI if all conflicts are auto-solvable. (Needs -o file)") );
-   options.add( "qall",        ki18n("Don't solve conflicts automatically.") );
-   options.add( "L1 alias1",   ki18n("Visible name replacement for input file 1 (base).") );
-   options.add( "L2 alias2",   ki18n("Visible name replacement for input file 2.") );
-   options.add( "L3 alias3",   ki18n("Visible name replacement for input file 3.") );
-   options.add( "L" ).add( "fname alias", ki18n("Alternative visible name replacement. Supply this once for every input.") );
-   options.add( "cs string",   ki18n("Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\"") );
-   options.add( "confighelp",  ki18n("Show list of config settings and current values.") );
-   options.add( "config file", ki18n("Use a different config file.") );
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("m") << QLatin1String("merge"), i18n("Merge the input.")));
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("b") << QLatin1String("base file"), i18n("Explicit base file. For compatibility with certain tools.")));
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("o") << QLatin1String("output file"), i18n("Output file. Implies -m. E.g.: -o newfile.txt")));
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("out file"), i18n("Output file, again. (For compatibility with certain tools.)")));
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("auto"), i18n("No GUI if all conflicts are auto-solvable. (Needs -o file)")));
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("qall"), i18n("Don't solve conflicts automatically.")));
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("L1 alias1"), i18n("Visible name replacement for input file 1 (base).")));
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("L2 alias2"), i18n("Visible name replacement for input file 2.")));
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("L3 alias3"), i18n("Visible name replacement for input file 3.")));
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("L") << QLatin1String("fname alias"), i18n("Alternative visible name replacement. Supply this once for every input.")));
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("cs string"), i18n("Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\"")));
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("confighelp"), i18n("Show list of config settings and current values.")));
+   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("config file"), i18n("Use a different config file.")));
 
    // other command options
-   options.add( "+[File1]", ki18n("file1 to open (base, if not specified via --base)") );
-   options.add( "+[File2]", ki18n("file2 to open") );
-   options.add( "+[File3]", ki18n("file3 to open") );
+   parser.addPositionalArgument(QLatin1String("[File1]"), i18n("file1 to open (base, if not specified via --base)"));
+   parser.addPositionalArgument(QLatin1String("[File2]"), i18n("file2 to open"));
+   parser.addPositionalArgument(QLatin1String("[File3]"), i18n("file3 to open"));
 
 
-   KCmdLineArgs::addCmdLineOptions( options );
 
-   KApplication app;
 
 #ifdef KREPLACEMENTS_H
    QString locale;

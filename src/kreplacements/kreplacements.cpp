@@ -62,6 +62,7 @@ static KAboutData* s_pAboutData;
 #include <process.h>
 #include <windows.h>
 #include <shellapi.h>
+#include <QCommandLineParser>
 #endif
 
 static void showHelp()
@@ -938,7 +939,15 @@ KCmdLineArgs* KCmdLineArgs::parsedArgs()  // static
    return &s_cmdLineArgs;
 }
 
-void KCmdLineArgs::init( int argc, char**argv, KAboutData* pAboutData )  // static
+    QApplication app(argc, argv); // PORTING SCRIPT: move this to before the KAboutData initialization
+    QCommandLineParser parser;
+    KAboutData::setApplicationData(aboutData);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    //PORTING SCRIPT: adapt aboutdata variable if necessary
+    aboutData.setupCommandLine(&parser);
+    parser.process(app); // PORTING SCRIPT: move this to after any parser.addOption
+    aboutData.processCommandLine(&parser);
 {
    s_argc = argc;
    s_argv = argv;
