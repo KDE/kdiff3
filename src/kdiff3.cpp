@@ -42,7 +42,7 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kfiledialog.h>
-#include <kmenubar.h>
+#include <QMenuBar>
 #include <kstatusbar.h>
 #include <klocale.h>
 #include <kconfig.h>
