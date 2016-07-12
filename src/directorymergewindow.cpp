@@ -39,7 +39,7 @@
 #include <algorithm>
 
 #include <kmenu.h>
-#include <kaction.h>
+#include <QAction>
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 #include <kiconloader.h>
@@ -430,18 +430,18 @@ public:
    void selectItemAndColumn( const QModelIndex& mi, bool bContextMenu);
    friend class DirMergeItem;
 
-   KAction* m_pDirStartOperation;
-   KAction* m_pDirRunOperationForCurrentItem;
-   KAction* m_pDirCompareCurrent;
-   KAction* m_pDirMergeCurrent;
-   KAction* m_pDirRescan;
-   KAction* m_pDirChooseAEverywhere;
-   KAction* m_pDirChooseBEverywhere;
-   KAction* m_pDirChooseCEverywhere;
-   KAction* m_pDirAutoChoiceEverywhere;
-   KAction* m_pDirDoNothingEverywhere;
-   KAction* m_pDirFoldAll;
-   KAction* m_pDirUnfoldAll;
+   QAction * m_pDirStartOperation;
+   QAction * m_pDirRunOperationForCurrentItem;
+   QAction * m_pDirCompareCurrent;
+   QAction * m_pDirMergeCurrent;
+   QAction * m_pDirRescan;
+   QAction * m_pDirChooseAEverywhere;
+   QAction * m_pDirChooseBEverywhere;
+   QAction * m_pDirChooseCEverywhere;
+   QAction * m_pDirAutoChoiceEverywhere;
+   QAction * m_pDirDoNothingEverywhere;
+   QAction * m_pDirFoldAll;
+   QAction * m_pDirUnfoldAll;
 
    KToggleAction* m_pDirShowIdenticalFiles;
    KToggleAction* m_pDirShowDifferentFiles;
@@ -452,28 +452,28 @@ public:
    KToggleAction* m_pDirSynchronizeDirectories;
    KToggleAction* m_pDirChooseNewerFiles;
 
-   KAction* m_pDirCompareExplicit;
-   KAction* m_pDirMergeExplicit;
+   QAction * m_pDirCompareExplicit;
+   QAction * m_pDirMergeExplicit;
 
-   KAction* m_pDirCurrentDoNothing;
-   KAction* m_pDirCurrentChooseA;
-   KAction* m_pDirCurrentChooseB;
-   KAction* m_pDirCurrentChooseC;
-   KAction* m_pDirCurrentMerge;
-   KAction* m_pDirCurrentDelete;
+   QAction * m_pDirCurrentDoNothing;
+   QAction * m_pDirCurrentChooseA;
+   QAction * m_pDirCurrentChooseB;
+   QAction * m_pDirCurrentChooseC;
+   QAction * m_pDirCurrentMerge;
+   QAction * m_pDirCurrentDelete;
 
-   KAction* m_pDirCurrentSyncDoNothing;
-   KAction* m_pDirCurrentSyncCopyAToB;
-   KAction* m_pDirCurrentSyncCopyBToA;
-   KAction* m_pDirCurrentSyncDeleteA;
-   KAction* m_pDirCurrentSyncDeleteB;
-   KAction* m_pDirCurrentSyncDeleteAAndB;
-   KAction* m_pDirCurrentSyncMergeToA;
-   KAction* m_pDirCurrentSyncMergeToB;
-   KAction* m_pDirCurrentSyncMergeToAAndB;
+   QAction * m_pDirCurrentSyncDoNothing;
+   QAction * m_pDirCurrentSyncCopyAToB;
+   QAction * m_pDirCurrentSyncCopyBToA;
+   QAction * m_pDirCurrentSyncDeleteA;
+   QAction * m_pDirCurrentSyncDeleteB;
+   QAction * m_pDirCurrentSyncDeleteAAndB;
+   QAction * m_pDirCurrentSyncMergeToA;
+   QAction * m_pDirCurrentSyncMergeToB;
+   QAction * m_pDirCurrentSyncMergeToAAndB;
 
-   KAction* m_pDirSaveMergeState;
-   KAction* m_pDirLoadMergeState;
+   QAction * m_pDirSaveMergeState;
+   QAction * m_pDirLoadMergeState;
 
    bool init( FileAccess& dirA, FileAccess& dirB, FileAccess& dirC, FileAccess& dirDest, bool bDirectoryMerge, bool bReload );
    void setOpStatus( const QModelIndex& mi, e_OperationStatus eOpStatus )
@@ -3378,20 +3378,20 @@ void DirectoryMergeWindow::initDirectoryMergeActions( QObject* pKDiff3App, KActi
 #include "xpm/showfilesonlyinc.xpm"
    DirectoryMergeWindow* p = this;
 
-   d->m_pDirStartOperation = KDiff3::createAction< KAction >(i18n("Start/Continue Directory Merge"), KShortcut( Qt::Key_F7 ), p, SLOT(slotRunOperationForAllItems()), ac, "dir_start_operation");
-   d->m_pDirRunOperationForCurrentItem = KDiff3::createAction< KAction >(i18n("Run Operation for Current Item"), KShortcut( Qt::Key_F6 ), p, SLOT(slotRunOperationForCurrentItem()), ac, "dir_run_operation_for_current_item");
-   d->m_pDirCompareCurrent = KDiff3::createAction< KAction >(i18n("Compare Selected File"), p, SLOT(compareCurrentFile()), ac, "dir_compare_current");
-   d->m_pDirMergeCurrent = KDiff3::createAction< KAction >(i18n("Merge Current File"), QIcon(QPixmap(startmerge)), i18n("Merge\nFile"), pKDiff3App, SLOT(slotMergeCurrentFile()), ac, "merge_current");
-   d->m_pDirFoldAll = KDiff3::createAction< KAction >(i18n("Fold All Subdirs"), p, SLOT(collapseAll()), ac, "dir_fold_all");
-   d->m_pDirUnfoldAll = KDiff3::createAction< KAction >(i18n("Unfold All Subdirs"), p, SLOT(expandAll()), ac, "dir_unfold_all");
-   d->m_pDirRescan = KDiff3::createAction< KAction >(i18n("Rescan"), KShortcut( Qt::SHIFT+Qt::Key_F5 ), p, SLOT(reload()), ac, "dir_rescan");
-   d->m_pDirSaveMergeState = 0; //KDiff3::createAction< KAction >(i18n("Save Directory Merge State ..."), 0, p, SLOT(slotSaveMergeState()), ac, "dir_save_merge_state");
-   d->m_pDirLoadMergeState = 0; //KDiff3::createAction< KAction >(i18n("Load Directory Merge State ..."), 0, p, SLOT(slotLoadMergeState()), ac, "dir_load_merge_state");
-   d->m_pDirChooseAEverywhere = KDiff3::createAction< KAction >(i18n("Choose A for All Items"), p, SLOT(slotChooseAEverywhere()), ac, "dir_choose_a_everywhere");
-   d->m_pDirChooseBEverywhere = KDiff3::createAction< KAction >(i18n("Choose B for All Items"), p, SLOT(slotChooseBEverywhere()), ac, "dir_choose_b_everywhere");
-   d->m_pDirChooseCEverywhere = KDiff3::createAction< KAction >(i18n("Choose C for All Items"), p, SLOT(slotChooseCEverywhere()), ac, "dir_choose_c_everywhere");
-   d->m_pDirAutoChoiceEverywhere = KDiff3::createAction< KAction >(i18n("Auto-Choose Operation for All Items"), p, SLOT(slotAutoChooseEverywhere()), ac, "dir_autochoose_everywhere");
-   d->m_pDirDoNothingEverywhere = KDiff3::createAction< KAction >(i18n("No Operation for All Items"), p, SLOT(slotNoOpEverywhere()), ac, "dir_nothing_everywhere");
+   d->m_pDirStartOperation = KDiff3::createAction< QAction >(i18n("Start/Continue Directory Merge"), KShortcut( Qt::Key_F7 ), p, SLOT(slotRunOperationForAllItems()), ac, "dir_start_operation");
+   d->m_pDirRunOperationForCurrentItem = KDiff3::createAction< QAction >(i18n("Run Operation for Current Item"), KShortcut( Qt::Key_F6 ), p, SLOT(slotRunOperationForCurrentItem()), ac, "dir_run_operation_for_current_item");
+   d->m_pDirCompareCurrent = KDiff3::createAction< QAction >(i18n("Compare Selected File"), p, SLOT(compareCurrentFile()), ac, "dir_compare_current");
+   d->m_pDirMergeCurrent = KDiff3::createAction< QAction >(i18n("Merge Current File"), QIcon(QPixmap(startmerge)), i18n("Merge\nFile"), pKDiff3App, SLOT(slotMergeCurrentFile()), ac, "merge_current");
+   d->m_pDirFoldAll = KDiff3::createAction< QAction >(i18n("Fold All Subdirs"), p, SLOT(collapseAll()), ac, "dir_fold_all");
+   d->m_pDirUnfoldAll = KDiff3::createAction< QAction >(i18n("Unfold All Subdirs"), p, SLOT(expandAll()), ac, "dir_unfold_all");
+   d->m_pDirRescan = KDiff3::createAction< QAction >(i18n("Rescan"), KShortcut( Qt::SHIFT+Qt::Key_F5 ), p, SLOT(reload()), ac, "dir_rescan");
+   d->m_pDirSaveMergeState = 0; //KDiff3::createAction< QAction >(i18n("Save Directory Merge State ..."), 0, p, SLOT(slotSaveMergeState()), ac, "dir_save_merge_state");
+   d->m_pDirLoadMergeState = 0; //KDiff3::createAction< QAction >(i18n("Load Directory Merge State ..."), 0, p, SLOT(slotLoadMergeState()), ac, "dir_load_merge_state");
+   d->m_pDirChooseAEverywhere = KDiff3::createAction< QAction >(i18n("Choose A for All Items"), p, SLOT(slotChooseAEverywhere()), ac, "dir_choose_a_everywhere");
+   d->m_pDirChooseBEverywhere = KDiff3::createAction< QAction >(i18n("Choose B for All Items"), p, SLOT(slotChooseBEverywhere()), ac, "dir_choose_b_everywhere");
+   d->m_pDirChooseCEverywhere = KDiff3::createAction< QAction >(i18n("Choose C for All Items"), p, SLOT(slotChooseCEverywhere()), ac, "dir_choose_c_everywhere");
+   d->m_pDirAutoChoiceEverywhere = KDiff3::createAction< QAction >(i18n("Auto-Choose Operation for All Items"), p, SLOT(slotAutoChooseEverywhere()), ac, "dir_autochoose_everywhere");
+   d->m_pDirDoNothingEverywhere = KDiff3::createAction< QAction >(i18n("No Operation for All Items"), p, SLOT(slotNoOpEverywhere()), ac, "dir_nothing_everywhere");
 
 //   d->m_pDirSynchronizeDirectories = KDiff3::createAction< KToggleAction >(i18n("Synchronize Directories"), 0, this, SLOT(slotSynchronizeDirectories()), ac, "dir_synchronize_directories");
 //   d->m_pDirChooseNewerFiles = KDiff3::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, SLOT(slotChooseNewerFiles()), ac, "dir_choose_newer_files");
@@ -3404,25 +3404,25 @@ void DirectoryMergeWindow::initDirectoryMergeActions( QObject* pKDiff3App, KActi
 
    d->m_pDirShowIdenticalFiles->setChecked( d->m_pOptions->m_bDmShowIdenticalFiles );
 
-   d->m_pDirCompareExplicit = KDiff3::createAction< KAction >(i18n("Compare Explicitly Selected Files"), p, SLOT(slotCompareExplicitlySelectedFiles()), ac, "dir_compare_explicitly_selected_files");
-   d->m_pDirMergeExplicit = KDiff3::createAction< KAction >(i18n("Merge Explicitly Selected Files"), p, SLOT(slotMergeExplicitlySelectedFiles()), ac, "dir_merge_explicitly_selected_files");
+   d->m_pDirCompareExplicit = KDiff3::createAction< QAction >(i18n("Compare Explicitly Selected Files"), p, SLOT(slotCompareExplicitlySelectedFiles()), ac, "dir_compare_explicitly_selected_files");
+   d->m_pDirMergeExplicit = KDiff3::createAction< QAction >(i18n("Merge Explicitly Selected Files"), p, SLOT(slotMergeExplicitlySelectedFiles()), ac, "dir_merge_explicitly_selected_files");
 
-   d->m_pDirCurrentDoNothing = KDiff3::createAction< KAction >(i18n("Do Nothing"), p, SLOT(slotCurrentDoNothing()), ac, "dir_current_do_nothing");
-   d->m_pDirCurrentChooseA = KDiff3::createAction< KAction >(i18n("A"), p, SLOT(slotCurrentChooseA()), ac, "dir_current_choose_a");
-   d->m_pDirCurrentChooseB = KDiff3::createAction< KAction >(i18n("B"), p, SLOT(slotCurrentChooseB()), ac, "dir_current_choose_b");
-   d->m_pDirCurrentChooseC = KDiff3::createAction< KAction >(i18n("C"), p, SLOT(slotCurrentChooseC()), ac, "dir_current_choose_c");
-   d->m_pDirCurrentMerge   = KDiff3::createAction< KAction >(i18n("Merge"), p, SLOT(slotCurrentMerge()), ac, "dir_current_merge");
-   d->m_pDirCurrentDelete  = KDiff3::createAction< KAction >(i18n("Delete (if exists)"), p, SLOT(slotCurrentDelete()), ac, "dir_current_delete");
+   d->m_pDirCurrentDoNothing = KDiff3::createAction< QAction >(i18n("Do Nothing"), p, SLOT(slotCurrentDoNothing()), ac, "dir_current_do_nothing");
+   d->m_pDirCurrentChooseA = KDiff3::createAction< QAction >(i18n("A"), p, SLOT(slotCurrentChooseA()), ac, "dir_current_choose_a");
+   d->m_pDirCurrentChooseB = KDiff3::createAction< QAction >(i18n("B"), p, SLOT(slotCurrentChooseB()), ac, "dir_current_choose_b");
+   d->m_pDirCurrentChooseC = KDiff3::createAction< QAction >(i18n("C"), p, SLOT(slotCurrentChooseC()), ac, "dir_current_choose_c");
+   d->m_pDirCurrentMerge   = KDiff3::createAction< QAction >(i18n("Merge"), p, SLOT(slotCurrentMerge()), ac, "dir_current_merge");
+   d->m_pDirCurrentDelete  = KDiff3::createAction< QAction >(i18n("Delete (if exists)"), p, SLOT(slotCurrentDelete()), ac, "dir_current_delete");
 
-   d->m_pDirCurrentSyncDoNothing = KDiff3::createAction< KAction >(i18n("Do Nothing"), p, SLOT(slotCurrentDoNothing()), ac, "dir_current_sync_do_nothing");
-   d->m_pDirCurrentSyncCopyAToB = KDiff3::createAction< KAction >(i18n("Copy A to B"), p, SLOT(slotCurrentCopyAToB()), ac, "dir_current_sync_copy_a_to_b" );
-   d->m_pDirCurrentSyncCopyBToA = KDiff3::createAction< KAction >(i18n("Copy B to A"), p, SLOT(slotCurrentCopyBToA()), ac, "dir_current_sync_copy_b_to_a" );
-   d->m_pDirCurrentSyncDeleteA  = KDiff3::createAction< KAction >(i18n("Delete A"), p, SLOT(slotCurrentDeleteA()), ac,"dir_current_sync_delete_a");
-   d->m_pDirCurrentSyncDeleteB  = KDiff3::createAction< KAction >(i18n("Delete B"), p, SLOT(slotCurrentDeleteB()), ac,"dir_current_sync_delete_b");
-   d->m_pDirCurrentSyncDeleteAAndB  = KDiff3::createAction< KAction >(i18n("Delete A && B"), p, SLOT(slotCurrentDeleteAAndB()), ac,"dir_current_sync_delete_a_and_b");
-   d->m_pDirCurrentSyncMergeToA   = KDiff3::createAction< KAction >(i18n("Merge to A"), p, SLOT(slotCurrentMergeToA()), ac,"dir_current_sync_merge_to_a");
-   d->m_pDirCurrentSyncMergeToB   = KDiff3::createAction< KAction >(i18n("Merge to B"), p, SLOT(slotCurrentMergeToB()), ac,"dir_current_sync_merge_to_b");
-   d->m_pDirCurrentSyncMergeToAAndB   = KDiff3::createAction< KAction >(i18n("Merge to A && B"), p, SLOT(slotCurrentMergeToAAndB()), ac,"dir_current_sync_merge_to_a_and_b");
+   d->m_pDirCurrentSyncDoNothing = KDiff3::createAction< QAction >(i18n("Do Nothing"), p, SLOT(slotCurrentDoNothing()), ac, "dir_current_sync_do_nothing");
+   d->m_pDirCurrentSyncCopyAToB = KDiff3::createAction< QAction >(i18n("Copy A to B"), p, SLOT(slotCurrentCopyAToB()), ac, "dir_current_sync_copy_a_to_b" );
+   d->m_pDirCurrentSyncCopyBToA = KDiff3::createAction< QAction >(i18n("Copy B to A"), p, SLOT(slotCurrentCopyBToA()), ac, "dir_current_sync_copy_b_to_a" );
+   d->m_pDirCurrentSyncDeleteA  = KDiff3::createAction< QAction >(i18n("Delete A"), p, SLOT(slotCurrentDeleteA()), ac,"dir_current_sync_delete_a");
+   d->m_pDirCurrentSyncDeleteB  = KDiff3::createAction< QAction >(i18n("Delete B"), p, SLOT(slotCurrentDeleteB()), ac,"dir_current_sync_delete_b");
+   d->m_pDirCurrentSyncDeleteAAndB  = KDiff3::createAction< QAction >(i18n("Delete A && B"), p, SLOT(slotCurrentDeleteAAndB()), ac,"dir_current_sync_delete_a_and_b");
+   d->m_pDirCurrentSyncMergeToA   = KDiff3::createAction< QAction >(i18n("Merge to A"), p, SLOT(slotCurrentMergeToA()), ac,"dir_current_sync_merge_to_a");
+   d->m_pDirCurrentSyncMergeToB   = KDiff3::createAction< QAction >(i18n("Merge to B"), p, SLOT(slotCurrentMergeToB()), ac,"dir_current_sync_merge_to_b");
+   d->m_pDirCurrentSyncMergeToAAndB   = KDiff3::createAction< QAction >(i18n("Merge to A && B"), p, SLOT(slotCurrentMergeToAAndB()), ac,"dir_current_sync_merge_to_a_and_b");
 }
 
 

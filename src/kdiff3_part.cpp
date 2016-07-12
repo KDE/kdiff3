@@ -20,7 +20,7 @@
 #include "kdiff3_part.h"
 
 #include <kcomponentdata.h>
-#include <kaction.h>
+#include <QAction>
 #include <kstandardaction.h>
 #include <kfiledialog.h>
 
@@ -83,7 +83,7 @@ void KDiff3Part::setModified(bool /*modified*/)
 {
 /*
     // get a handle on our Save action and make sure it is valid
-    KAction *save = actionCollection()->action(KStandardAction::stdName(KStandardAction::Save));
+    QAction *save = actionCollection()->action(KStandardAction::stdName(KStandardAction::Save));
     if (!save)
         return;
 

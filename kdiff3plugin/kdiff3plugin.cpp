@@ -22,7 +22,7 @@
 
 #include <kapplication.h>
 #include <kstandarddirs.h>
-#include <kaction.h>
+#include <QAction>
 #include <kactionmenu.h>
 #include <klocale.h>
 #include <kgenericfactory.h>
@@ -105,32 +105,32 @@ void KDiff3Plugin::setup( KActionCollection* actionCollection, const KonqPopupMe
    */
 
    KActionMenu* pActionMenu = new KActionMenu (i18n ("KDiff3"), actionCollection );
-   KAction* pAction = 0;
+   QAction * pAction = 0;
    QString s;
 
    if(m_list.count() == 1)
    {
       int historyCount = s_pHistory ? s_pHistory->count() : 0;
       s = i18n("Compare with %1", (historyCount>0 ? s_pHistory->front() : QString()) );
-      pAction = new KAction ( s, actionCollection );
-      connect(pAction, &KAction::triggered, this, &KDiff3Plugin::slotCompareWith);
+      pAction = new QAction ( s, actionCollection );
+      connect(pAction, &QAction::triggered, this, &KDiff3Plugin::slotCompareWith);
       pAction->setEnabled( m_list.count()>0 && historyCount>0 );
       pActionMenu->addAction(pAction);
 
       s = i18n("Merge with %1", historyCount>0 ? s_pHistory->front() : QString() );
-      pAction = new KAction( s, actionCollection);
-      connect(pAction, &KAction::triggered, this, &KDiff3Plugin::slotMergeWith);
+      pAction = new QAction( s, actionCollection);
+      connect(pAction, &QAction::triggered, this, &KDiff3Plugin::slotMergeWith);
       pAction->setEnabled( m_list.count()>0 && historyCount>0 );
       pActionMenu->addAction (pAction);
 
       s = i18n("Save '%1' for later", ( m_list.front() ) );
-      pAction = new KAction ( s, actionCollection);
-      connect(pAction, &KAction::triggered, this, &KDiff3Plugin::slotSaveForLater);
+      pAction = new QAction ( s, actionCollection);
+      connect(pAction, &QAction::triggered, this, &KDiff3Plugin::slotSaveForLater);
       pAction->setEnabled( m_list.count()>0 );
       pActionMenu->addAction(pAction);
 
-      pAction = new KAction (i18n("3-way merge with base"), actionCollection);
-      connect(pAction, &KAction::triggered, this, &KDiff3Plugin::slotMergeThreeWay);
+      pAction = new QAction (i18n("3-way merge with base"), actionCollection);
+      connect(pAction, &QAction::triggered, this, &KDiff3Plugin::slotMergeThreeWay);
       pAction->setEnabled( m_list.count()>0 && historyCount>=2 );
       pActionMenu->addAction (pAction);
 
@@ -141,31 +141,31 @@ void KDiff3Plugin::setup( KActionCollection* actionCollection, const KonqPopupMe
          pActionMenu->addAction(pHistoryMenu);
          for (QStringList::iterator i = s_pHistory->begin(); i!=s_pHistory->end(); ++i)
          {
-            pAction = new KAction( *i, actionCollection);
-            connect(pAction, &KAction::triggered, this, &KDiff3Plugin::slotCompareWithHistoryItem);
+            pAction = new QAction( *i, actionCollection);
+            connect(pAction, &QAction::triggered, this, &KDiff3Plugin::slotCompareWithHistoryItem);
             pHistoryMenu->addAction (pAction);
          }
 
-         pAction = new KAction (i18n("Clear list"), actionCollection);
-         connect(pAction, &KAction::triggered, this, &KDiff3Plugin::slotClearList);
+         pAction = new QAction (i18n("Clear list"), actionCollection);
+         connect(pAction, &QAction::triggered, this, &KDiff3Plugin::slotClearList);
          pActionMenu->addAction (pAction);
          pAction->setEnabled( historyCount>0 );
       }
    }
    else if(m_list.count() == 2)
    {
-      pAction = new KAction (i18n("Compare"), actionCollection);
-      connect(pAction, &KAction::triggered, this, &KDiff3Plugin::slotCompareTwoFiles);
+      pAction = new QAction (i18n("Compare"), actionCollection);
+      connect(pAction, &QAction::triggered, this, &KDiff3Plugin::slotCompareTwoFiles);
       pActionMenu->addAction (pAction);
    }
    else if ( m_list.count() == 3 )
    {
-      pAction = new KAction (i18n("3 way comparison"), actionCollection);
-      connect(pAction, &KAction::triggered, this, &KDiff3Plugin::slotCompareThreeFiles);
+      pAction = new QAction (i18n("3 way comparison"), actionCollection);
+      connect(pAction, &QAction::triggered, this, &KDiff3Plugin::slotCompareThreeFiles);
       pActionMenu->addAction (pAction);
    }
-   pAction = new KAction (i18n("About KDiff3 menu plugin ..."), actionCollection);
-   connect(pAction, &KAction::triggered, this, &KDiff3Plugin::slotAbout);
+   pAction = new QAction (i18n("About KDiff3 menu plugin ..."), actionCollection);
+   connect(pAction, &QAction::triggered, this, &KDiff3Plugin::slotAbout);
    pActionMenu->addAction (pAction);
 
    pMenu->addSeparator();
@@ -190,7 +190,7 @@ void KDiff3Plugin::slotCompareWith()
 
 void KDiff3Plugin::slotCompareWithHistoryItem()
 {
-   const KAction* pAction = dynamic_cast<const KAction*>( sender() );
+   const QAction * pAction = dynamic_cast<const QAction*>( sender() );
    if ( m_list.count() > 0 && pAction )
    {
       QStringList args;

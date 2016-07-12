@@ -28,7 +28,7 @@
 
 #include <kedittoolbar.h>
 
-#include <kaction.h>
+#include <QAction>
 #include <kstandardaction.h>
 
 #include <klibloader.h>

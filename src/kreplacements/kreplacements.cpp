@@ -512,18 +512,18 @@ static void initAction( QAction* pAction, QObject* receiver, const char* slot, K
    }
 }
 
-KAction::KAction(const QString& name, KActionCollection* actionCollection )
+QAction::QAction(const QString& name, KActionCollection* actionCollection )
 : QAction ( actionCollection->m_pMainWindow )
 {
    initAction( this, 0,0, actionCollection, name, false, true );
 }
 
-KAction::KAction(  KActionCollection* actionCollection )
+QAction::QAction(  KActionCollection* actionCollection )
 : QAction ( actionCollection->m_pMainWindow )
 {
 }
 
-KAction::KAction(const QString& text, const QIcon& icon, int accel,
+QAction::QAction(const QString& text, const QIcon& icon, int accel,
  QObject* receiver, const char* slot, KActionCollection* actionCollection,
  const char* name, bool bToggle, bool bMenu
  )
@@ -538,7 +538,7 @@ KAction::KAction(const QString& text, const QIcon& icon, int accel,
    initAction(this, receiver,slot,actionCollection,name,bToggle,bMenu);
 }
 
-KAction::KAction(const QString& text, int accel,
+QAction::QAction(const QString& text, int accel,
  QObject* receiver, const char* slot, KActionCollection* actionCollection,
  const char* name, bool bToggle, bool bMenu
  )
@@ -550,16 +550,16 @@ KAction::KAction(const QString& text, int accel,
    initAction(this,receiver,slot,actionCollection,name,bToggle,bMenu);
 }
 
-void KAction::setStatusText(const QString&)
+void QAction::setStatusText(const QString&)
 {
 }
 
-void KAction::plug(QMenu* menu)
+void QAction::plug(QMenu* menu)
 {
    menu->addAction( this );
 }
 
-void KAction::setIcon( const QIcon& icon )
+void QAction::setIcon( const QIcon& icon )
 {
    QAction::setIcon(icon);
    if ( !icon.isNull() )
@@ -571,18 +571,18 @@ void KAction::setIcon( const QIcon& icon )
 
 
 KToggleAction::KToggleAction( KActionCollection* actionCollection )
-: KAction( actionCollection )
+: QAction( actionCollection )
 {
    setCheckable(true);
 }
 
 KToggleAction::KToggleAction(const QString& text, int accel, QObject* receiver, const char* slot, KActionCollection* actionCollection, const char* name, bool bMenu)
-: KAction( text, accel, receiver, slot, actionCollection, name, true, bMenu)
+: QAction( text, accel, receiver, slot, actionCollection, name, true, bMenu)
 {
 }
 
 KToggleAction::KToggleAction(const QString& text, const QIcon& icon, int accel, KActionCollection* actionCollection, const char* name, bool bMenu)
-: KAction( text, icon, accel, 0, 0, actionCollection, name, true, bMenu)
+: QAction( text, icon, accel, 0, 0, actionCollection, name, true, bMenu)
 {
 }
 
@@ -595,77 +595,77 @@ void KToggleAction::setChecked(bool bChecked)
 
 
 //static
-KAction* KStandardAction::open( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::open( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    #include "../xpm/fileopen.xpm"
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Open"), QIcon(QPixmap(fileopen)), Qt::CTRL+Qt::Key_O, parent, slot, actionCollection, "open", false, false);
+   QAction * a = new QAction( i18n("Open"), QIcon(QPixmap(fileopen)), Qt::CTRL+Qt::Key_O, parent, slot, actionCollection, "open", false, false);
    if(p){ p->fileMenu->addAction( a ); }
    return a;
 }
 
-KAction* KStandardAction::save( QWidget* parent, const char* slot, KActionCollection* actionCollection )
+QAction * KStandardAction::save( QWidget* parent, const char* slot, KActionCollection* actionCollection )
 {
    #include "../xpm/filesave.xpm"
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Save"), QIcon(QPixmap(filesave)), Qt::CTRL+Qt::Key_S, parent, slot, actionCollection, "save", false, false);
+   QAction * a = new QAction( i18n("Save"), QIcon(QPixmap(filesave)), Qt::CTRL+Qt::Key_S, parent, slot, actionCollection, "save", false, false);
    if(p){ p->fileMenu->addAction( a ); }
    return a;
 }
 
-KAction* KStandardAction::saveAs( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::saveAs( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Save As..."), 0, parent, slot, actionCollection, "saveas", false, false);
+   QAction * a = new QAction( i18n("Save As..."), 0, parent, slot, actionCollection, "saveas", false, false);
    if(p) p->fileMenu->addAction( a );
    return a;
 }
 
-KAction* KStandardAction::print( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::print( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    #include "../xpm/fileprint.xpm"
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Print..."), QIcon(QPixmap(fileprint)),Qt::CTRL+Qt::Key_P, parent, slot, actionCollection, "print", false, false);
+   QAction * a = new QAction( i18n("Print..."), QIcon(QPixmap(fileprint)),Qt::CTRL+Qt::Key_P, parent, slot, actionCollection, "print", false, false);
    if(p) p->fileMenu->addAction( a );
    return a;
 }
 
-KAction* KStandardAction::quit( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::quit( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Quit"), Qt::CTRL+Qt::Key_Q, parent, slot, actionCollection, "quit", false, false);
+   QAction * a = new QAction( i18n("Quit"), Qt::CTRL+Qt::Key_Q, parent, slot, actionCollection, "quit", false, false);
    if(p) p->fileMenu->addAction( a );
    return a;
 }
 
-KAction* KStandardAction::cut( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::cut( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Cut"), Qt::CTRL+Qt::Key_X, parent, slot, actionCollection, "cut", false, false );
+   QAction * a = new QAction( i18n("Cut"), Qt::CTRL+Qt::Key_X, parent, slot, actionCollection, "cut", false, false );
    if(p) p->editMenu->addAction( a );
    return a;
 }
 
-KAction* KStandardAction::copy( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::copy( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Copy"), Qt::CTRL+Qt::Key_C, parent, slot, actionCollection, "copy", false, false );
+   QAction * a = new QAction( i18n("Copy"), Qt::CTRL+Qt::Key_C, parent, slot, actionCollection, "copy", false, false );
    if(p) p->editMenu->addAction( a );
    return a;
 }
 
-KAction* KStandardAction::paste( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::paste( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Paste"), Qt::CTRL+Qt::Key_V, parent, slot, actionCollection, "paste", false, false );
+   QAction * a = new QAction( i18n("Paste"), Qt::CTRL+Qt::Key_V, parent, slot, actionCollection, "paste", false, false );
    if(p) p->editMenu->addAction( a );
    return a;
 }
 
-KAction* KStandardAction::selectAll( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::selectAll( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Select All"), Qt::CTRL+Qt::Key_A, parent, slot, actionCollection, "selectall", false, false );
+   QAction * a = new QAction( i18n("Select All"), Qt::CTRL+Qt::Key_A, parent, slot, actionCollection, "selectall", false, false );
    if(p) p->editMenu->addAction( a );
    return a;
 }
@@ -686,60 +686,60 @@ KToggleAction* KStandardAction::showStatusbar( QWidget* parent, const char* slot
    return a;
 }
 
-KAction* KStandardAction::preferences( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::preferences( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("&Configure %1...",QString("KDiff3")), 0, parent, slot, actionCollection, "settings", false, false );
+   QAction * a = new QAction( i18n("&Configure %1...",QString("KDiff3")), 0, parent, slot, actionCollection, "settings", false, false );
    if(p) p->settingsMenu->addAction( a );
    return a;
 }
-KAction* KStandardAction::keyBindings( QWidget*, const char*, KActionCollection*)
+QAction * KStandardAction::keyBindings( QWidget*, const char*, KActionCollection*)
 {
    return 0;
 }
 
-KAction* KStandardAction::about( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::about( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("About")+" KDiff3", 0, parent, slot, actionCollection, "about_kdiff3", false, false );
+   QAction * a = new QAction( i18n("About")+" KDiff3", 0, parent, slot, actionCollection, "about_kdiff3", false, false );
    if(p) p->helpMenu->addAction( a );
    return a;
 }
 
-KAction* KStandardAction::aboutQt( KActionCollection* actionCollection )
+QAction * KStandardAction::aboutQt( KActionCollection* actionCollection )
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("About")+" Qt", 0, qApp, SLOT(aboutQt()), actionCollection, "about_qt", false, false );
+   QAction * a = new QAction( i18n("About")+" Qt", 0, qApp, SLOT(aboutQt()), actionCollection, "about_qt", false, false );
    if(p) p->helpMenu->addAction( a );
    return a;
 }
 
-KAction* KStandardAction::help( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::help( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Help"), Qt::Key_F1, parent, slot, actionCollection, "help-contents", false, false );
+   QAction * a = new QAction( i18n("Help"), Qt::Key_F1, parent, slot, actionCollection, "help-contents", false, false );
    if(p) p->helpMenu->addAction( a );
    return a;
 }
-KAction* KStandardAction::find( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::find( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Find"), Qt::CTRL+Qt::Key_F, parent, slot, actionCollection, "edit-find", false, false );
+   QAction * a = new QAction( i18n("Find"), Qt::CTRL+Qt::Key_F, parent, slot, actionCollection, "edit-find", false, false );
    if(p) p->editMenu->addAction( a );
    return a;
 }
 
-KAction* KStandardAction::findNext( QWidget* parent, const char* slot, KActionCollection* actionCollection)
+QAction * KStandardAction::findNext( QWidget* parent, const char* slot, KActionCollection* actionCollection)
 {
    KMainWindow* p = actionCollection->m_pMainWindow;
-   KAction* a = new KAction( i18n("Find Next"), Qt::Key_F3, parent, slot, actionCollection, "findNext", false, false );
+   QAction * a = new QAction( i18n("Find Next"), Qt::Key_F3, parent, slot, actionCollection, "findNext", false, false );
    if(p) p->editMenu->addAction( a );
    return a;
 }
 
-KAction* KActionCollection::addAction(const QString& name )
+QAction * KActionCollection::addAction(const QString& name )
 {
-   return new KAction( name, this );
+   return new QAction( name, this );
 }
 
 void KActionCollection::addAction( const QString& name, QAction* pAction )
