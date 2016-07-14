@@ -56,7 +56,7 @@ public:
 
     void addOptionItem(OptionItem*);
     KKeyDialog* m_pKeyDialog;
-protected slots:
+protected Q_SLOTS:
     virtual void slotDefault( void );
     virtual void slotOk( void );
     virtual void slotApply( void );
@@ -65,7 +65,7 @@ protected slots:
     void slotHistoryMergeRegExpTester();
     void slotIntegrateWithClearCase();
     void slotRemoveClearCaseIntegration();
-signals:
+Q_SIGNALS:
     void applyDone();
 private:
     void resetToDefaults();

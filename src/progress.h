@@ -86,7 +86,7 @@ private:
    bool m_bStayHidden;
 protected:
    virtual void reject();
-private slots:
+private Q_SLOTS:
    void delayedHide();
    void slotAbort();
 };

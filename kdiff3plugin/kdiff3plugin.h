@@ -36,7 +36,7 @@ public:
   // implement pure virtual method from KonqPopupMenuPlugin
   virtual void setup( KActionCollection* actionCollection, const KonqPopupMenuInformation& popupMenuInfo, QMenu* menu );
 
-private slots:
+private Q_SLOTS:
    void slotCompareWith();
    void slotCompareTwoFiles();
    void slotCompareThreeFiles();

@@ -68,7 +68,7 @@ public:
       connect( this, SIGNAL(valueChanged(int)), this, SLOT(slotValueChanged(int)));
    }
    void setAgain(){ setValue(m_realVal); }
-public slots:
+public Q_SLOTS:
    void slotValueChanged(int i)
    {
       m_realVal = i;
@@ -87,7 +87,7 @@ public slots:
    {
       return m_realVal;
    }
-signals:
+Q_SIGNALS:
    void valueChanged2(int);
 };
 
@@ -126,7 +126,7 @@ class KDiff3App : public QSplitter
     virtual bool isFileSaved();
     virtual bool isDirComparison();
 
-  signals:
+  Q_SIGNALS:
      void createNewInstance( const QString& fn1, const QString& fn2, const QString& fn3 );
   protected:
     void initDirectoryMergeActions();
@@ -136,7 +136,7 @@ class KDiff3App : public QSplitter
     /** creates the centerwidget of the KMainWindow instance and sets it as the view */
     void initView();
 
-  public slots:
+  public Q_SLOTS:
 
     /** open a file and load it into the document*/
     void slotFileOpen();
@@ -331,7 +331,7 @@ class KDiff3App : public QSplitter
 
    int m_iCumulativeWheelDelta;
 
-public slots:
+public Q_SLOTS:
    void resizeDiffTextWindow(int newWidth, int newHeight);
    void resizeMergeResultWindow();
    void slotRecalcWordWrap();

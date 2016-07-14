@@ -31,7 +31,7 @@ class ProgressProxyExtender: public ProgressProxy
 {
   Q_OBJECT
 
-public slots:
+public Q_SLOTS:
   void slotListDirInfoMessage( KJob*, const QString& msg );
   void slotPercent( KJob*, unsigned long percent );
 };
@@ -168,7 +168,7 @@ private:
 
    bool scanLocalDirectory( const QString& dirName, t_DirectoryList* dirList );
 
-private slots:
+private Q_SLOTS:
    void slotStatResult( KJob* );
    void slotSimpleJobResult( KJob* pJob );
    void slotPutJobResult( KJob* pJob );

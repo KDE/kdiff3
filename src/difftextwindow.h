@@ -78,7 +78,7 @@ public:
    void setPaintingAllowed( bool bAllowPainting );
    void recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int nofVisibleColumns );
    void print( MyPainter& painter, const QRect& r, int firstLine, int nofLinesPerPage );
-signals:
+Q_SIGNALS:
    void resizeSignal( int nofVisibleColumns, int nofVisibleLines );
    void scroll( int deltaX, int deltaY );
    void newSelection();
@@ -87,7 +87,7 @@ signals:
    void gotFocus();
    void lineClicked( int winIdx, int line );
 
-public slots:
+public Q_SLOTS:
    void setFirstLine( int line );
    void setHorizScrollOffset( int horizScrollOffset );
    void resetSelection();
@@ -125,13 +125,13 @@ public:
    void init();
    void setFirstLine(int firstLine);
    void sendEncodingChangedSignal(QTextCodec* c);
-signals:
+Q_SIGNALS:
    void fileNameChanged(const QString&, int);
    void encodingChanged(QTextCodec*);
 protected:
    bool eventFilter( QObject*, QEvent* );
    //void paintEvent(QPaintEvent*);
-private slots:
+private Q_SLOTS:
    void slotReturnPressed();
    void slotBrowseButtonClicked();
 private:
@@ -146,7 +146,7 @@ public:
 protected:
    void mouseMoveEvent(QMouseEvent *ev);
    void mousePressEvent(QMouseEvent *ev);
-private slots:
+private Q_SLOTS:
    void slotEncodingChanged();
 private:
    DiffTextWindowFrame* m_pDiffTextWindowFrame; //To send "EncodingChanged" signal

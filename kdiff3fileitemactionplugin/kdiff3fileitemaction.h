@@ -36,7 +36,7 @@ public:
   // implement pure virtual method from KonqPopupMenuPlugin
   virtual QList<QAction*> actions( const KFileItemListProperties& fileItemInfos, QWidget* pParentWidget );
 
-private slots:
+private Q_SLOTS:
    void slotCompareWith();
    void slotCompareTwoFiles();
    void slotCompareThreeFiles();

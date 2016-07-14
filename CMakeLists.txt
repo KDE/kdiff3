@@ -33,7 +33,6 @@ add_subdirectory(src)
 #add_subdirectory(po)
 add_subdirectory(doc)
 
-
 find_file(KFILEITEMACTIONPLUGIN_FOUND kabstractfileitemactionplugin.h PATHS)
 if(KFILEITEMACTIONPLUGIN_FOUND)
   message(STATUS "")

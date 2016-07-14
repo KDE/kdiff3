@@ -52,7 +52,7 @@ public:
     bool queryExit();
     virtual void closeEvent(QCloseEvent*e);
 
-private slots:
+private Q_SLOTS:
     void optionsShowToolbar();
     void optionsShowStatusbar();
     void optionsConfigureKeys();

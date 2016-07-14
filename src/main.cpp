@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 
-#include <K4AboutData>
+#include <KAboutData>
 #include <klocale.h>
 #include "kdiff3_shell.h"
 #include <kstandarddirs.h>

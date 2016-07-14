@@ -48,7 +48,7 @@ private:
    Options* m_pOptions;
    void selectURL( QComboBox* pLine, bool bDir, int i, bool bSave );
    bool m_bInputFileNameChanged;
-private slots:
+private Q_SLOTS:
    void selectFileA();
    void selectFileB();
    void selectFileC();
@@ -60,7 +60,7 @@ private slots:
    void internalSlot(int);
    void inputFilenameChanged();
    void slotSwapCopyNames(QAction*);
-signals:
+Q_SIGNALS:
    void internalSignal(bool);
 };
 
@@ -71,7 +71,7 @@ public:
    FindDialog(QWidget* pParent);
    void setVisible(bool); //override QDialog::setVisible()
 
-signals:
+Q_SIGNALS:
    void findNext();
 
 public:
@@ -111,7 +111,7 @@ public:
    QString historyStartRegExp();
    QString historyEntryStartRegExp();
    QString historySortKeyOrder();
-public slots:
+public Q_SLOTS:
    void slotRecalc();
 };
 

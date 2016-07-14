@@ -43,10 +43,10 @@ public:
    void setOverviewMode( e_OverviewMode eOverviewMode );
    e_OverviewMode getOverviewMode();
 
-public slots:
+public Q_SLOTS:
    void setFirstLine(int firstLine);
    void slotRedraw();
-signals:
+Q_SIGNALS:
    void setLine(int);
 private:
    const Diff3LineList* m_pDiff3LineList;
@@ -138,7 +138,7 @@ public:
    void setSelection( int firstLine, int startPos, int lastLine, int endPos );
    void setOverviewMode( Overview::e_OverviewMode eOverviewMode );
    Overview::e_OverviewMode getOverviewMode();
-public slots:
+public Q_SLOTS:
    void setFirstLine(int firstLine);
    void setHorizScrollOffset(int horizScrollOffset);
 
@@ -161,7 +161,7 @@ public slots:
    void setPaintingAllowed(bool);
    void updateSourceMask();
 
-signals:
+Q_SIGNALS:
    void scroll( int deltaX, int deltaY );
    void modifiedChanged(bool bModified);
    void setFastSelectorRange( int line1, int nofLines );
@@ -416,10 +416,10 @@ private:
    bool deleteSelection2( QString& str, int& x, int& y,
                     MergeLineList::iterator& mlIt, MergeEditLineList::iterator& melIt );
    bool doRelevantChangesExist();
-public slots:
+public Q_SLOTS:
    void deleteSelection();
    void pasteClipboard(bool bFromSelection);
-private slots:
+private Q_SLOTS:
    void slotCursorUpdate();
 };
 
@@ -451,9 +451,9 @@ public:
    e_LineEndStyle getLineEndStyle();
 
    bool eventFilter( QObject* o, QEvent* e );
-public slots:
+public Q_SLOTS:
    void slotSetModified( bool bModified );
-//private slots:
+//private Q_SLOTS:
 //   void slotBrowseButtonClicked();
 
 };

@@ -168,9 +168,9 @@ public:
    void setButtons(int){}
    void setDefaultButton(int){}
    void showButtonSeparator(bool){}
-private slots:
+private Q_SLOTS:
    void slotHelpClicked();
-signals:
+Q_SIGNALS:
    void applyClicked();
    void okClicked();
    void helpClicked();
@@ -270,7 +270,7 @@ public:
    void createGUI(KParts::ReadWritePart*){createGUI();}
 
    QList<KMainWindow*>* memberList;
-public slots:
+public Q_SLOTS:
    void appHelpActivated();
    void slotAbout();
 };
@@ -371,7 +371,7 @@ public:
    KFontChooser( QWidget* pParent );
    QFont font();
    void setFont( const QFont&, bool );
-private slots:
+private Q_SLOTS:
    void slotSelectFont();
 };
 
@@ -384,7 +384,7 @@ public:
    QColor color();
    void setColor(const QColor&);
    virtual void paintEvent(QPaintEvent* e);
-public slots:
+public Q_SLOTS:
    void slotClicked();
 };
 

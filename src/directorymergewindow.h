@@ -91,7 +91,7 @@ public:
    QString getDirNameC();
    QString getDirNameDest();
 
-public slots:
+public Q_SLOTS:
    void reload();
    void mergeCurrentFile();
    void compareCurrentFile();
@@ -137,12 +137,12 @@ public slots:
    void slotSaveMergeState();
    void slotLoadMergeState();
 
-signals:
+Q_SIGNALS:
    void startDiffMerge(QString fn1,QString fn2, QString fn3, QString ofn, QString,QString,QString,TotalDiffStatus*);
    void checkIfCanContinue( bool* pbContinue );
    void updateAvailabilities();
    void statusBarMessage( const QString& msg );
-protected slots:
+protected Q_SLOTS:
    void onDoubleClick( const QModelIndex& );
    void onExpanded();
    void	currentChanged( const QModelIndex & current, const QModelIndex & previous ); // override
@@ -167,7 +167,7 @@ public:
       MergeFileInfos& mfi );
    QTreeWidget* getInfoList() {return m_pInfoList;}
    virtual bool eventFilter( QObject* o, QEvent* e );
-signals:
+Q_SIGNALS:
    void gotFocus();
 private:
    QLabel* m_pInfoA;
