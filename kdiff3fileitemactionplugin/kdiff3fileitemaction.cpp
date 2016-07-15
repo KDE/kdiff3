@@ -30,7 +30,7 @@
 #include <kconfiggroup.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
-#include <kfileitem.h>
+#include <KIOCore/kfileitem.h>
 
 //#include <iostream>
 
