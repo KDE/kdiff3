@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_policy(SET CMP0063 NEW)#repress unneeded warning
 project(kdiff3)
 
 set(ECM_MIN_VERSION "1.0.0")
@@ -17,7 +18,7 @@ include(FeatureSummary)
 include(ECMInstallIcons)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n DocTools KDELibs4Support)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n KDELibs4Support)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 add_definitions(${QT_DEFINITIONS} ${KF5_DEFINITIONS})

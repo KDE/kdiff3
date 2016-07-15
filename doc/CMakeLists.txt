@@ -1,3 +1,5 @@
+find_package(KF5DocTools ${KF5_MIN_VERSION} REQUIRED )
+
 add_subdirectory(en)
 add_subdirectory(da)
 add_subdirectory(de)
