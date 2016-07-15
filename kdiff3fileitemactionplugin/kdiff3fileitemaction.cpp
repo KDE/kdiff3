@@ -20,12 +20,11 @@
 
 #include "kdiff3fileitemaction.h"
 
-#include <kapplication.h>
 #include <kstandarddirs.h>
 #include <QAction>
 #include <QMenu>
 #include <klocale.h>
-#include <kgenericfactory.h>
+#include <kgenericfactory.h>//FIXME:Port to non-broken header.
 #include <kurl.h>
 #include <kconfig.h>
 #include <kconfiggroup.h>
@@ -73,7 +72,6 @@ static KDiff3PluginHistory s_history;
 
 
 K_PLUGIN_FACTORY(KDiff3FileItemActionFactory, registerPlugin<KDiff3FileItemAction>();)
-K_EXPORT_PLUGIN(KDiff3FileItemActionFactory("kdiff3fileitemactionplugin"))
 
 KDiff3FileItemAction::KDiff3FileItemAction (QObject* pParent, const QVariantList & /*args*/)
 : KAbstractFileItemActionPlugin(pParent)

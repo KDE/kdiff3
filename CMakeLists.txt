@@ -16,14 +16,18 @@ include(FeatureSummary)
 
 include(ECMInstallIcons)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n DocTools)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 add_definitions(${QT_DEFINITIONS} ${KF5_DEFINITIONS})
+#dummy define remove on full port to qt5
+add_definitions(-DQ_DECL_CONSTRUCTOR_DEPRECATED=Q_DECL_DEPRECATED)
+#remove unnneeded errors
+remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
 
 include_directories( 
-    ${QT_INCLUDES} ${KF5_INCLUDES} ${Qt5Core_INCLUDE_DIRS} ${Qt5Core_INCLUDE_DIRS}
+    ${QT_INCLUDES} ${KF5_INCLUDES} ${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIRS}
     ${CMAKE_CURRENT_BINARY_DIR}
     )
 

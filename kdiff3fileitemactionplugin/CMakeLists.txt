@@ -1,4 +1,4 @@
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS KIO)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS KIO WidgetsAddons)
 
 add_library(kdiff3fileitemaction MODULE kdiff3fileitemaction.cpp)
 target_link_libraries(kdiff3fileitemaction KIO ${LibKDiff3_LIBRARIES})

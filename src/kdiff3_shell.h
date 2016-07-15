@@ -22,7 +22,7 @@
 
 #include <config-kdiff3.h>
 
-#include <kapplication.h>
+#include <QApplication>
 #include <kparts/mainwindow.h>
 
 class KToggleAction;

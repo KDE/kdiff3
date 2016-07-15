@@ -1000,7 +1000,7 @@ void KDiff3App::slotFileQuit()
    if( !queryClose() )
        return;      // Don't quit
 
-   KApplication::exit( isFileSaved() || isDirComparison() ? 0 : 1 );
+   QApplication::exit( isFileSaved() || isDirComparison() ? 0 : 1 );
 }
 
 

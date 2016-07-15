@@ -116,7 +116,7 @@ void KDiff3Shell::closeEvent(QCloseEvent*e)
       e->accept();
       bool bFileSaved = ((KDiff3App*)m_part->widget())->isFileSaved();
       bool bDirCompare = ((KDiff3App*)m_part->widget())->isDirComparison();
-      KApplication::exit( bFileSaved || bDirCompare ? 0 : 1 );
+      QApplication::exit( bFileSaved || bDirCompare ? 0 : 1 );
    }
    else
       e->ignore();

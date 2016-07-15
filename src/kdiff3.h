@@ -27,7 +27,7 @@
 #include <QScrollBar>
 
 // include files for KDE
-#include <kapplication.h>
+#include <QApplication>
 #include <kmainwindow.h>
 #include <kaction.h>
 #include <kurl.h>

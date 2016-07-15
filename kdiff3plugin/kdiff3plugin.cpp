@@ -20,7 +20,7 @@
 
 #include "kdiff3plugin.h"
 
-#include <kapplication.h>
+#include <QApplication>
 #include <kstandarddirs.h>
 #include <QAction>
 #include <kactionmenu.h>
