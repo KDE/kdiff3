@@ -22,8 +22,6 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n KDELibs4Support)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 add_definitions(${QT_DEFINITIONS} ${KF5_DEFINITIONS})
-#dummy define remove on full port to qt5
-add_definitions(-DQ_DECL_CONSTRUCTOR_DEPRECATED=Q_DECL_DEPRECATED)
 #remove unnneeded errors
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
 

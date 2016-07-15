@@ -24,7 +24,9 @@
 #include <QAction>
 #include <QMenu>
 #include <klocale.h>
-#include <kgenericfactory.h>//FIXME:Port to non-broken header.
+
+#include <KPluginFactory>
+#include <KPluginLoader>
 #include <kurl.h>
 #include <kconfig.h>
 #include <kconfiggroup.h>
