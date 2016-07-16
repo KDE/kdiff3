@@ -24,7 +24,7 @@
 #include <kstandarddirs.h>
 #include <QAction>
 #include <kactionmenu.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kgenericfactory.h>
 #include <kurl.h>
 #include <kconfig.h>
@@ -74,7 +74,7 @@ K_EXPORT_COMPONENT_FACTORY (libkdiff3plugin, KDiff3PluginFactory ("kdiff3plugin"
 KDiff3Plugin::KDiff3Plugin( KonqPopupMenu* pPopupMenu, const QStringList & /* list */ )
 :KonqPopupMenuPlugin(pPopupMenu)
 {
-   KGlobal::locale()->insertCatalog("kdiff3plugin");
+   KLocalizedString::setApplicationDomain("kdiff3plugin");
    m_pPopupMenu = pPopupMenu;
    m_pParentWidget = pPopupMenu->parentWidget();
 }

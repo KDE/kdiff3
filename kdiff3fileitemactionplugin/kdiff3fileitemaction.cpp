@@ -23,10 +23,10 @@
 #include <kstandarddirs.h>
 #include <QAction>
 #include <QMenu>
-#include <klocale.h>
 
-#include <KPluginFactory>
-#include <KPluginLoader>
+#include <klocalizedstring.h>
+#include <kpluginfactory.h>
+#include <kpluginloader.h>
 #include <kurl.h>
 #include <kconfig.h>
 #include <kconfiggroup.h>
