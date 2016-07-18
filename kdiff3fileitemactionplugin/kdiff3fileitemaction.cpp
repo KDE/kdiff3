@@ -23,11 +23,11 @@
 #include <kstandarddirs.h>
 #include <QAction>
 #include <QMenu>
+#include <QUrl>
 
 #include <klocalizedstring.h>
 #include <kpluginfactory.h>
 #include <kpluginloader.h>
-#include <kurl.h>
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include <kmessagebox.h>
@@ -97,8 +97,8 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
    
    
    // remember currently selected files (copy to a QStringList)
-   KUrl::List itemList = fileItemInfos.urlList();
-   foreach ( const KUrl& item, itemList )
+   QList<QUrl> itemList = fileItemInfos.urlList();
+   foreach ( const QUrl& item, itemList )
    {
       //m_urlList.append( item.url() );
       pThis->m_list.append( item.url() );
