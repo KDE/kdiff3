@@ -10,9 +10,8 @@ find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_SOURCE_DIR}/cmake)
 
 include(KDEInstallDirs)
-include(KDECompilerSettings)
-include(KDECMakeSettings)
-include(KDEFrameworkCompilerSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(KDECMakeSettings NO_POLICY_SCOPE)
 include(FeatureSummary)
 
 include(ECMInstallIcons)

@@ -74,6 +74,7 @@ static KDiff3PluginHistory s_history;
 
 
 K_PLUGIN_FACTORY(KDiff3FileItemActionFactory, registerPlugin<KDiff3FileItemAction>();)
+#include "kdiff3fileitemaction.moc"
 
 KDiff3FileItemAction::KDiff3FileItemAction (QObject* pParent, const QVariantList & /*args*/)
 : KAbstractFileItemActionPlugin(pParent)
