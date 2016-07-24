@@ -957,7 +957,7 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
             init();
          }
 #else
-         KUrl::List urlList = KUrl::List::fromMimeData( pDropEvent->mimeData() );
+         QList<QUrl> urlList = QList<QUrl>::fromMimeData( pDropEvent->mimeData() );
          if ( canContinue() && !urlList.isEmpty() )
          {
             raise();

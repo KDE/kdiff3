@@ -61,7 +61,7 @@ OpenDialog::OpenDialog(
    m_pLineA = new QComboBox();
    m_pLineA->setEditable(true);
    m_pLineA->insertItems( 0, m_pOptions->m_recentAFiles );
-   m_pLineA->setEditText( KUrl(n1).prettyUrl() );
+   m_pLineA->setEditText( QUrl(n1).prettyUrl() );
    m_pLineA->setMinimumWidth( 200 );
    QPushButton * button = new QPushButton( i18n("File..."), this );
    connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileA);
@@ -78,7 +78,7 @@ OpenDialog::OpenDialog(
    m_pLineB  = new QComboBox();
    m_pLineB->setEditable(true);
    m_pLineB->insertItems( 0, m_pOptions->m_recentBFiles );
-   m_pLineB->setEditText( KUrl(n2).prettyUrl() );
+   m_pLineB->setEditText( QUrl(n2).prettyUrl() );
    m_pLineB->setMinimumWidth( 200 );
    button   = new QPushButton( i18n("File..."), this );
    connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileB);
@@ -95,7 +95,7 @@ OpenDialog::OpenDialog(
    m_pLineC= new QComboBox();
    m_pLineC->setEditable(true);
    m_pLineC->insertItems( 0, m_pOptions->m_recentCFiles );
-   m_pLineC->setEditText( KUrl(n3).prettyUrl() );
+   m_pLineC->setEditText( QUrl(n3).prettyUrl() );
    m_pLineC->setMinimumWidth( 200 );
    button = new QPushButton( i18n("File..."), this );
    connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileC);
@@ -138,7 +138,7 @@ OpenDialog::OpenDialog(
    m_pLineOut = new QComboBox();
    m_pLineOut->setEditable(true);
    m_pLineOut->insertItems( 0, m_pOptions->m_recentOutputFiles );
-   m_pLineOut->setEditText( KUrl(outputName).prettyUrl() );
+   m_pLineOut->setEditText( QUrl(outputName).prettyUrl() );
    m_pLineOut->setMinimumWidth( 200 );
    button = new QPushButton( i18n("File..."), this );
    connect(button, &QPushButton::clicked, this, &OpenDialog::selectOutputName);
@@ -232,11 +232,11 @@ void OpenDialog::selectURL( QComboBox* pLine, bool bDir, int i, bool bSave )
    if (current.isEmpty()        ){  current = m_pLineB->currentText(); }
    if (current.isEmpty()        ){  current = m_pLineA->currentText(); }
    
-  /*KUrl newURL = bDir ? KFileDialog::getExistingDirectoryUrl( current, this)
+  /*QUrl newURL = bDir ? KFileDialog::getExistingDirectoryUrl( current, this)
 		    : bSave ? KFileDialog::getSaveUrl( current, "all/allfiles", this)
 			    : KFileDialog::getOpenUrl( current, "all/allfiles", this);*/
 
-   KUrl 			newURL;
+   QUrl 			newURL;
    if(!bDir){
      newURL = bSave ? KFileDialog::getSaveUrl( current, "all/allfiles", this)
 		      : KFileDialog::getOpenUrl( current, "all/allfiles", this);

@@ -32,7 +32,7 @@ class StatusInfo;
 class DirectoryMergeInfo;
 class OneDirectoryInfo;
 class QLabel;
-class KAction;
+class QAction;
 class KToggleAction;
 class KActionCollection;
 class TotalDiffStatus;

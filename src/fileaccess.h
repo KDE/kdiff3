@@ -18,7 +18,7 @@
 #include <kprogressdialog.h>
 #include <kio/job.h>
 #include <kio/jobclasses.h>
-#include <kurl.h>
+#include <QUrl>
 #include <list>
 
 
@@ -66,7 +66,7 @@ public:
    QString fileName() const; // Just the name-part of the path, without parent directories
    QString filePath() const; // The path-string that was used during construction
    QString prettyAbsPath() const;
-   KUrl url() const;
+   QUrl url() const;
    QString absoluteFilePath() const;
 
    bool isLocal() const;

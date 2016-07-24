@@ -29,14 +29,14 @@ namespace KDiff3 {
 	 const char* actionName);
    
    template <>
-   inline KAction* createAction<KAction>( 
+   inline QAction * createAction<QAction>( 
                    const QString& text, 
                    const QObject* receiver, 
                    const char* slot, 
                    KActionCollection* ac, 
                    const char* actionName)    {
       assert( ac != 0 );
-      KAction* theAction = ac->addAction( actionName );
+      QAction * theAction = ac->addAction( actionName );
       theAction->setText( text );
       QObject::connect( theAction, SIGNAL( triggered() ), receiver, slot );
       return theAction;

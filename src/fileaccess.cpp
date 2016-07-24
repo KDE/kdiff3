@@ -52,7 +52,7 @@ public:
    }
    void reset()
    {
-      m_url = KUrl();
+      m_url = QUrl();
       m_bValidData = false;
       m_name = QString();
       //m_creationTime = QDateTime();
@@ -65,7 +65,7 @@ public:
       m_pParent = 0;
    }
    
-   KUrl m_url;
+   QUrl m_url;
    bool m_bLocal;
    bool m_bValidData;
 
@@ -250,7 +250,7 @@ void FileAccess::setFile( const QFileInfo& fi, FileAccess* pParent )
       }
       d()->m_bLocal = true;
       d()->m_bValidData = true;
-      d()->m_url = KUrl( fi.filePath() );
+      d()->m_url = QUrl( fi.filePath() );
       if ( d()->m_url.isRelative() )
       {
          d()->m_url.setPath( absoluteFilePath() );
@@ -306,7 +306,7 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
    //       (This is a Win95-bug which has been corrected only in WinNT/2000/XP.)
    if ( !name.isEmpty() )
    {
-      KUrl url( name );
+      QUrl url( name );
       
       // FileAccess tries to detect if the given name is an URL or a local file.
       // This is a problem if the filename looks like an URL (i.e. contains a colon ':').
@@ -443,7 +443,7 @@ void FileAccess::setUdsEntry( const KIO::UDSEntry& e )
             break;
          }
 
-         case KIO::UDSEntry::UDS_URL :               // m_url = KUrl( e.stringValue(f) );
+         case KIO::UDSEntry::UDS_URL :               // m_url = QUrl( e.stringValue(f) );
                                            break;
          case KIO::UDSEntry::UDS_MIME_TYPE :         break;
          case KIO::UDSEntry::UDS_GUESSED_MIME_TYPE : break;
@@ -509,13 +509,13 @@ qint64 FileAccess::size() const
       return QFileInfo( absoluteFilePath() ).size();
 }
 
-KUrl FileAccess::url() const           
+QUrl FileAccess::url() const           
 {  
    if ( d()!=0 )
       return d()->m_url;
    else
    {
-      KUrl url( m_filePath );
+      QUrl url( m_filePath );
       if ( url.isRelative() )
       {
          url.setPath( absoluteFilePath() );
@@ -650,7 +650,7 @@ const FileAccess::Data* FileAccess::d() const
 
 QString FileAccess::prettyAbsPath() const 
 {
-   return isLocal() ? absoluteFilePath() : d()->m_url.prettyUrl();
+   return isLocal() ? absoluteFilePath() : d()->m_url.toDisplayString();
 }
 
 /*
@@ -938,7 +938,7 @@ void FileAccess::setStatusText( const QString& s )
 
 QString FileAccess::cleanPath( const QString& path ) // static
 {
-   KUrl url(path);
+   QUrl url(path);
    if ( url.isLocalFile() || ! url.isValid() )
    {
       return QDir().cleanPath( path );
@@ -1125,7 +1125,7 @@ void FileAccessJobHandler::slotPutJobResult(KJob* pJob)
 
 bool FileAccessJobHandler::mkDir( const QString& dirName )
 {
-   KUrl dirURL = KUrl( dirName );
+   QUrl dirURL = QUrl( dirName );
    if ( dirName.isEmpty() )
       return false;
    else if ( dirURL.isLocalFile() || dirURL.isRelative() )
@@ -1145,7 +1145,7 @@ bool FileAccessJobHandler::mkDir( const QString& dirName )
 
 bool FileAccessJobHandler::rmDir( const QString& dirName )
 {
-   KUrl dirURL = KUrl( dirName );
+   QUrl dirURL = QUrl( dirName );
    if ( dirName.isEmpty() )
       return false;
    else if ( dirURL.isLocalFile() )
@@ -1199,9 +1199,9 @@ bool FileAccessJobHandler::rename( const QString& dest )
    if ( dest.isEmpty() )
       return false;
 
-   KUrl kurl( dest );
+   QUrl kurl( dest );
    if ( kurl.isRelative() )
-      kurl = KUrl( QDir().absoluteFilePath(dest) ); // assuming that invalid means relative
+      kurl = QUrl( QDir().absoluteFilePath(dest) ); // assuming that invalid means relative
 
    if ( m_pFileAccess->isLocal() && kurl.isLocalFile() )
    {
@@ -1240,7 +1240,7 @@ void FileAccessJobHandler::slotSimpleJobResult(KJob* pJob)
 bool FileAccessJobHandler::copyFile( const QString& dest )
 {
    ProgressProxyExtender pp;
-   KUrl destUrl( dest );
+   QUrl destUrl( dest );
    m_pFileAccess->setStatusText( QString() );
    if ( ! m_pFileAccess->isLocal() || ! destUrl.isLocalFile() ) // if either url is nonlocal
    {
@@ -1780,7 +1780,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
 
 void FileAccessJobHandler::slotListDirProcessNewEntries( KIO::Job*, const KIO::UDSEntryList& l )
 {
-   KUrl parentUrl( m_pFileAccess->absoluteFilePath() );
+   QUrl parentUrl( m_pFileAccess->absoluteFilePath() );
 
    KIO::UDSEntryList::ConstIterator i;
    for ( i=l.begin(); i!=l.end(); ++i )

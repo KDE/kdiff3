@@ -24,7 +24,7 @@
 #include <kshortcutsdialog.h>
 #include <kfiledialog.h>
 #include <kconfig.h>
-#include <kurl.h>
+#include <QUrl>
 
 #include <kedittoolbar.h>
 

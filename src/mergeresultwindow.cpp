@@ -3418,7 +3418,7 @@ void WindowTitleWidget::setEncoding(QTextCodec* pEncoding)
 //{
 //   QString current = m_pFileNameLineEdit->text();
 //
-//   KUrl newURL = KFileDialog::getSaveUrl( current, 0, this, i18n("Select file (not saving yet)"));
+//   QUrl newURL = KFileDialog::getSaveUrl( current, 0, this, i18n("Select file (not saving yet)"));
 //   if ( !newURL.isEmpty() )
 //   {
 //      m_pFileNameLineEdit->setText( newURL.url() ); 

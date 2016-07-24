@@ -29,8 +29,8 @@
 // include files for KDE
 #include <QApplication>
 #include <kmainwindow.h>
-#include <kaction.h>
-#include <kurl.h>
+#include <QAction>
+#include <QUrl>
 #include <kparts/mainwindow.h>
 #include <ktoggleaction.h>
 #include <K4AboutData>
@@ -181,67 +181,67 @@ class KDiff3App : public QSplitter
     /** the configuration object of the application */
     //KConfig *config;
 
-    // KAction pointers to enable/disable actions
-    KAction* fileOpen;
-    KAction* fileSave;
-    KAction* fileSaveAs;
-    KAction* filePrint;
-    KAction* fileQuit;
-    KAction* fileReload;
-    KAction* editCut;
-    KAction* editCopy;
-    KAction* editPaste;
-    KAction* editSelectAll;
+    // QAction pointers to enable/disable actions
+    QAction * fileOpen;
+    QAction * fileSave;
+    QAction * fileSaveAs;
+    QAction * filePrint;
+    QAction * fileQuit;
+    QAction * fileReload;
+    QAction * editCut;
+    QAction * editCopy;
+    QAction * editPaste;
+    QAction * editSelectAll;
     KToggleAction* viewToolBar;
     KToggleAction* viewStatusBar;
 
 ////////////////////////////////////////////////////////////////////////
 // Special KDiff3 specific stuff starts here
-    KAction *editFind;
-    KAction *editFindNext;
+    QAction *editFind;
+    QAction *editFindNext;
 
-    KAction *goCurrent;
-    KAction *goTop;
-    KAction *goBottom;
-    KAction *goPrevUnsolvedConflict;
-    KAction *goNextUnsolvedConflict;
-    KAction *goPrevConflict;
-    KAction *goNextConflict;
-    KAction *goPrevDelta;
-    KAction *goNextDelta;
+    QAction *goCurrent;
+    QAction *goTop;
+    QAction *goBottom;
+    QAction *goPrevUnsolvedConflict;
+    QAction *goNextUnsolvedConflict;
+    QAction *goPrevConflict;
+    QAction *goNextConflict;
+    QAction *goPrevDelta;
+    QAction *goNextDelta;
     KToggleAction *chooseA;
     KToggleAction *chooseB;
     KToggleAction *chooseC;
     KToggleAction *autoAdvance;
     KToggleAction *wordWrap;
-    KAction* splitDiff;
-    KAction* joinDiffs;
-    KAction* addManualDiffHelp;
-    KAction* clearManualDiffHelpList;
+    QAction * splitDiff;
+    QAction * joinDiffs;
+    QAction * addManualDiffHelp;
+    QAction * clearManualDiffHelpList;
     KToggleAction *showWhiteSpaceCharacters;
     KToggleAction *showWhiteSpace;
     KToggleAction *showLineNumbers;
-    KAction* chooseAEverywhere;
-    KAction* chooseBEverywhere;
-    KAction* chooseCEverywhere;
-    KAction* chooseAForUnsolvedConflicts;
-    KAction* chooseBForUnsolvedConflicts;
-    KAction* chooseCForUnsolvedConflicts;
-    KAction* chooseAForUnsolvedWhiteSpaceConflicts;
-    KAction* chooseBForUnsolvedWhiteSpaceConflicts;
-    KAction* chooseCForUnsolvedWhiteSpaceConflicts;
-    KAction* autoSolve;
-    KAction* unsolve;
-    KAction* mergeHistory;
-    KAction* mergeRegExp;
+    QAction * chooseAEverywhere;
+    QAction * chooseBEverywhere;
+    QAction * chooseCEverywhere;
+    QAction * chooseAForUnsolvedConflicts;
+    QAction * chooseBForUnsolvedConflicts;
+    QAction * chooseCForUnsolvedConflicts;
+    QAction * chooseAForUnsolvedWhiteSpaceConflicts;
+    QAction * chooseBForUnsolvedWhiteSpaceConflicts;
+    QAction * chooseCForUnsolvedWhiteSpaceConflicts;
+    QAction * autoSolve;
+    QAction * unsolve;
+    QAction * mergeHistory;
+    QAction * mergeRegExp;
     KToggleAction *showWindowA;
     KToggleAction *showWindowB;
     KToggleAction *showWindowC;
-    KAction *winFocusNext;
-    KAction *winFocusPrev;
-    KAction* winToggleSplitOrientation;
+    QAction *winFocusNext;
+    QAction *winFocusPrev;
+    QAction * winToggleSplitOrientation;
     KToggleAction *dirShowBoth;
-    KAction *dirViewToggle;
+    QAction *dirViewToggle;
     KToggleAction *overviewModeNormal;
     KToggleAction *overviewModeAB;
     KToggleAction *overviewModeAC;

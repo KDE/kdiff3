@@ -26,7 +26,7 @@
 #include <kactionmenu.h>
 #include <KLocalizedString>
 #include <kgenericfactory.h>
-#include <kurl.h>
+#include <QUrl>
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include <konq_popupmenuinformation.h>
