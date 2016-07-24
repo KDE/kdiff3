@@ -39,7 +39,7 @@
 #include <QPrintDialog>
 
 // include files for KDE
-#include <KDELibs4Support/kcomponentdata.h>
+#include <kcomponentdata.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kfiledialog.h>
@@ -653,7 +653,7 @@ void KDiff3App::saveOptions( KSharedConfigPtr config )
 
 bool KDiff3App::queryClose()
 {
-   saveOptions( isPart() ? ((K4AboutData(*m_pKDiff3Part->componentData().aboutData).config() : KGlobal::config() );
+   saveOptions( isPart() ? ((m_pKDiff3Part->componentData().config()) : KGlobal::config() );
 
    if(m_bOutputModified)
    {

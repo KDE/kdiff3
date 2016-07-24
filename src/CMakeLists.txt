@@ -27,7 +27,7 @@ set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
 
 target_link_libraries(kdiff3part ${KDiff3_LIBRARIES} KF5::Parts KF5::CoreAddons ${QT_QT3SUPPORT_LIBRARY})
 
-install(TARGETS kdiff3part DESTINATION ${PLUGIN_INSTALL_DIR} )
+install(TARGETS kdiff3part DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/parts )
 
 ########### kdiff3 executable ###############
 

@@ -19,8 +19,9 @@
 
 #include "kdiff3_part.h"
 
+#include <KAboutData>
 #include <K4AboutData>
-#include <KDELibs4Support/kcomponentdata.h>
+#include <kcomponentdata.h>
 #include <QAction>
 #include <kstandardaction.h>
 #include <kfiledialog.h>
@@ -37,12 +38,28 @@
 
 #include "version.h"
 
+
+static KAboutData createAboutData()
+{
+        K4AboutData aboutData( "kdiff3part", 0, ki18n("KDiff3 Part"),
+                QByteArray(VERSION), ki18n("A KPart to display SVG images"),
+                K4AboutData::License_GPL,
+                ki18n("Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"));
+        aboutData.addAuthor(ki18n("Joachim Eibl"), KLocalizedString(), QByteArray("joachim.eibl at gmx.de"));
+        return aboutData;
+}
+
+K_PLUGIN_FACTORY(KDiff3PartFactory,
+                  registerPlugin<KDiff3Part>();
+                 )
+//K_EXPORT_PLUGIN(KDiff3PartFactory("kdiff3part")) 
+
 KDiff3Part::KDiff3Part( QWidget *parentWidget, const char *widgetName,
                                   QObject *parent )
     : KParts::ReadWritePart(parent)
 {
     // we need an instance
-    setComponentData( *KDiff3PartFactory::instance() );
+    //setComponentData( KPluginFactory::componentData() );
 
     // this should be your custom internal widget
     m_widget = new KDiff3App( parentWidget, widgetName, this );
@@ -71,7 +88,7 @@ KDiff3Part::~KDiff3Part()
 {
    if ( m_widget!=0  && ! m_bIsShell )
    {
-      m_widget->saveOptions( m_widget->isPart() ? componentData()).config() : KGlobal::config() );
+      m_widget->saveOptions( m_widget->isPart() ? KPluginFactory::componentData().config() : KGlobal::config() );
    }
 }
 
@@ -258,43 +275,10 @@ bool KDiff3Part::saveFile()
     return false;  // Not implemented
 }
 
-
+//TODO: Replace with KF4 Macros. This is KDE2 stuff here.
 // It's usually safe to leave the factory code alone.. with the
 // notable exception of the K4AboutData data
-#include <K4AboutData>
-#include <klocale.h>
-#include <kglobal.h>
-
-KComponentData*  KDiff3PartFactory::s_instance = 0L;
-K4AboutData* KDiff3PartFactory::s_about = 0L;
-
-KDiff3PartFactory::KDiff3PartFactory()
-    : KParts::Factory()
-{
-}
-
-KDiff3PartFactory::~KDiff3PartFactory()
-{
-    delete s_instance;
-    delete s_about;
-
-    s_instance = 0L;
-}
-
-KParts::Part* KDiff3PartFactory::createPartObject( QWidget *parentWidget,
-                                                        QObject *parent,
-                                                        const char *classname, const QStringList&/*args*/ )
-{
-    // Create an instance of our Part
-    KDiff3Part* obj = new KDiff3Part( parentWidget, 0, parent );
-
-    // See if we are to be read-write or not
-    if (QString(classname) == "KParts::ReadOnlyPart")
-        obj->setReadWrite(false);
-
-    return obj;
-}
-
+#if 0
 KComponentData* KDiff3PartFactory::instance()
 {
     if( !s_instance )
@@ -305,16 +289,8 @@ KComponentData* KDiff3PartFactory::instance()
     }
     return s_instance;
 }
-
-extern "C"
-{
-    void* init_libkdiff3part()
-    {
-        return new KDiff3PartFactory;
-    }
-}
-
+#endif
 // Suppress warning with --enable-final
 #undef VERSION
 
-//#include "kdiff3_part.moc"
+#include "kdiff3_part.moc"

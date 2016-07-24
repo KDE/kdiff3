@@ -77,24 +77,6 @@ private:
     bool m_bIsShell;
 };
 
-class KComponentData;
 class K4AboutData;
-
-class KDiff3PartFactory : public KParts::Factory
-{
-    Q_OBJECT
-public:
-    KDiff3PartFactory();
-    virtual ~KDiff3PartFactory();
-    virtual KParts::Part* createPartObject( QWidget *parentWidget,
-                                            QObject *parent,
-                                            const char *classname, 
-                                            const QStringList &args );
-    static KComponentData* instance();
-
-private:
-    static KComponentData* s_instance;
-    static K4AboutData* s_about;
-};
 
 #endif // _KDIFF3PART_H_
