@@ -71,7 +71,7 @@ KDiff3Part::~KDiff3Part()
 {
    if ( m_widget!=0  && ! m_bIsShell )
    {
-      m_widget->saveOptions( m_widget->isPart() ? ((K4AboutData)componentData()).config() : KGlobal::config() );
+      m_widget->saveOptions( m_widget->isPart() ? KComponentData(componentData()).config() : KGlobal::config() );
    }
 }
 
