@@ -17,6 +17,7 @@
 
 #include <QApplication>
 #include <K4AboutData>
+#include <KLocalizedString>
 //#include <kaboutdata.h>
 #include <klocale.h>
 #include "kdiff3_shell.h"
@@ -29,14 +30,20 @@
 #include <QLocale>
 #include <QFont>
 #include <QClipboard>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
 #include <vector>
+
+#ifdef _WIN32
+#include <process.h>
+#endif
 
 #ifdef KREPLACEMENTS_H
 #include "optiondialog.h"
 #endif
 #include "common.h"
 
-void initialiseCmdLineArgs( KCmdLineOptions& options )
+void initialiseCmdLineArgs( QCommandLineParser& parser )
 {
    QString configFileName = KStandardDirs().findResource("config","kdiff3rc");
    QFile configFile( configFileName );
@@ -72,22 +79,18 @@ void initialiseCmdLineArgs( KCmdLineOptions& options )
          (*i).remove('-');
          if (!(*i).isEmpty())
          {
-            if ( i->length()==1 )
-               options.add( i->toLatin1() ).add("ignore", ki18n("Ignored. (User defined.)") );
-            else
-               options.add( i->toLatin1(), ki18n("Ignored. (User defined.)") );
+            if ( i->length()==1 ){
+	       parser.addOption(QCommandLineOption(QStringList() << i->toLatin1() << QLatin1String("ignore"), i18n("Ignored. (User defined.)")));
+	    }
+            else {
+	       parser.addOption(QCommandLineOption(QStringList() << i->toLatin1(), i18n("Ignored. (User defined.)")));
+	    }
          }
       }
    }
 }
 
 #ifdef _WIN32
-#include <process.h>
-#include <QApplication>
-#include <K4AboutData>
-#include <KLocalizedString>
-#include <QCommandLineParser>
-#include <QCommandLineOption>
 // This command checks the comm
 static bool isOptionUsed(const QString& s, int argc, char* argv[])
 {
@@ -117,6 +120,7 @@ public:
 
 int main(int argc, char *argv[])
 {
+   QApplication app(argc, argv); // PORTING SCRIPT: move this to before the K4AboutData initialization
 #ifdef _WIN32
    /* KDiff3 can be used as replacement for the text-diff and merge tool provided by
       Clearcase. This is experimental and so far has only been tested under Windows.
@@ -202,18 +206,16 @@ int main(int argc, char *argv[])
 
    aboutData.addCredit(ki18n("+ Many thanks to those who reported bugs and contributed ideas!"));
 
-    QApplication app(argc, argv); // PORTING SCRIPT: move this to before the K4AboutData initialization
-    QCommandLineParser parser;
-    K4AboutData::setApplicationData(aboutData);
-    parser.addVersionOption();
-    parser.addHelpOption();
-    //PORTING SCRIPT: adapt aboutdata variable if necessary
-    aboutData.setupCommandLine(&parser);
+   QCommandLineParser parser;
+   K4AboutData::setApplicationData(aboutData);
+   parser.addVersionOption();
+   parser.addHelpOption();
+   //PORTING SCRIPT: adapt aboutdata variable if necessary
+   aboutData.setupCommandLine(&parser);
     
-    aboutData.processCommandLine(&parser);
-
-   initialiseCmdLineArgs( options );
-
+   aboutData.processCommandLine(&parser);
+  
+   initialiseCmdLineArgs( parser );
    // ignorable command options
    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("m") << QLatin1String("merge"), i18n("Merge the input.")));
    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("b") << QLatin1String("base file"), i18n("Explicit base file. For compatibility with certain tools.")));
