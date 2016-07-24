@@ -24,6 +24,7 @@
 
 #include <QApplication>
 #include <kparts/mainwindow.h>
+#include <kparts/readwritepart.h>
 
 class KToggleAction;
 

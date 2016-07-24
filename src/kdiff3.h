@@ -33,7 +33,7 @@
 #include <kurl.h>
 #include <kparts/mainwindow.h>
 #include <ktoggleaction.h>
-
+#include <K4AboutData>
 
 // forward declaration of the KDiff3 classes
 class OptionDialog;

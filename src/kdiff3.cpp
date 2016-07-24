@@ -159,7 +159,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
    // This is just a convenience variable to make code that accesses options more readable
    m_pOptions = &m_pOptionDialog->m_options;
 
-   m_pOptionDialog->readOptions( isPart() ? m_pKDiff3Part->componentData().config() : KGlobal::config() );
+   m_pOptionDialog->readOptions( isPart() ? ((K4AboutData)m_pKDiff3Part->componentData()).config() : KGlobal::config() );
 
    // Option handling: Only when pParent==0 (no parent)
    KCmdLineArgs *args = isPart() ? 0 : KCmdLineArgs::parsedArgs();
@@ -652,7 +652,7 @@ void KDiff3App::saveOptions( KSharedConfigPtr config )
 
 bool KDiff3App::queryClose()
 {
-   saveOptions( isPart() ? m_pKDiff3Part->componentData().config() : KGlobal::config() );
+   saveOptions( isPart() ? ((K4AboutData)m_pKDiff3Part->componentData()).config() : KGlobal::config() );
 
    if(m_bOutputModified)
    {

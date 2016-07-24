@@ -22,6 +22,7 @@
 
 #include <kparts/part.h>
 #include <kparts/factory.h>
+#include <kparts/readwritepart.h>
 
 class QWidget;
 class KDiff3App;
@@ -77,7 +78,7 @@ private:
 };
 
 class KComponentData;
-class KAboutData;
+class K4AboutData;
 
 class KDiff3PartFactory : public KParts::Factory
 {
@@ -93,7 +94,7 @@ public:
 
 private:
     static KComponentData* s_instance;
-    static KAboutData* s_about;
+    static K4AboutData* s_about;
 };
 
 #endif // _KDIFF3PART_H_

@@ -414,20 +414,20 @@ public:
 
 #define KCmdLineLastOption {0,0,0}
 
-class KAboutData
+class K4AboutData
 {
 public:
    enum LicenseKey { License_GPL, License_GPL_V2, License_Unknown };
 
-   //KAboutData( const QString& name, const QString& appName, const QString& version,
+   //K4AboutData( const QString& name, const QString& appName, const QString& version,
    //   const QString& description, int licence,
    //   const QString& copyright, int w, const QString& homepage, const QString& email);
 
-   KAboutData (const QByteArray &appName, const QByteArray &catalogName, const KLocalizedString &programName, 
+   K4AboutData (const QByteArray &appName, const QByteArray &catalogName, const KLocalizedString &programName, 
       const QByteArray &version, const KLocalizedString &shortDescription, LicenseKey licenseType, 
       const KLocalizedString &copyrightStatement, const KLocalizedString &text, 
       const QByteArray &homePageAddress, const QByteArray &bugsEmailAddress);
-   KAboutData( const QString& name, const QString& appName, const QString& appName2, const QString& version );
+   K4AboutData( const QString& name, const QString& appName, const QString& appName2, const QString& version );
    void addAuthor(const QString& name, const QString& task=0, const QString& email=0, const QString& weblink=0);
    void addCredit(const QString& name, const QString& task=0, const QString& email=0, const QString& weblink=0);
    
@@ -452,7 +452,7 @@ class KCmdLineArgs
 {
 public:
    static KCmdLineArgs* parsedArgs();
-   static void init( int argc, char**argv, KAboutData* );
+   static void init( int argc, char**argv, K4AboutData* );
    static void addCmdLineOptions( const KCmdLineOptions& options ); // Add our own options.
 
    int count();
@@ -563,13 +563,13 @@ typedef QProgressBar KProgress;
 class KInstance : public QObject
 {
 public:
-   KInstance(KAboutData*){}
+   KInstance(K4AboutData*){}
 };
 
 class KComponentData : public QObject
 {
 public:
-   KComponentData(KAboutData*){}
+   KComponentData(K4AboutData*){}
    KConfigGroup* config() {return 0;}
 };
 

@@ -16,7 +16,8 @@
  ***************************************************************************/
 
 #include <QApplication>
-#include <KAboutData>
+#include <K4AboutData>
+//#include <kaboutdata.h>
 #include <klocale.h>
 #include "kdiff3_shell.h"
 #include <kstandarddirs.h>
@@ -175,40 +176,40 @@ int main(int argc, char *argv[])
    const KLocalizedString copyright = ki18n("(c) 2002-2012 Joachim Eibl");
    const QByteArray& homePage = "http://kdiff3.sourceforge.net/";
    const QByteArray& bugsAddress = "joachim.eibl" "@" "gmx.de";
-   KAboutData aboutData( appName, appCatalog, i18nName, 
-         appVersion, description, KAboutLicense::GPL_V2, copyright, description, 
+   K4AboutData aboutData( appName, appCatalog, i18nName, 
+         appVersion, description, K4AboutData::License_GPL_V2, copyright, description, 
          homePage, bugsAddress );
 
-   aboutData.addAuthor(i18n("Joachim Eibl"), KLocalizedString(), QByteArray("joachim.eibl" "@" "gmx.de"));
-   aboutData.addCredit(i18n("Eike Sauer"), ki18n("Bugfixes, Debian package maintainer") );
-   aboutData.addCredit(i18n("Sebastien Fricker"), ki18n("Windows installer") );
-   aboutData.addCredit(i18n("Stephan Binner"), ki18n("i18n-help"), QByteArray("binner" "@" "kde.org") );
-   aboutData.addCredit(i18n("Stefan Partheymueller"), ki18n("Clipboard-patch" ));
-   aboutData.addCredit(i18n("David Faure"), ki18n("KIO-Help"), QByteArray("faure" "@" "kde.org" ));
-   aboutData.addCredit(i18n("Bernd Gehrmann"), ki18n("Class CvsIgnoreList from Cervisia" ));
-   aboutData.addCredit(i18n("Andre Woebbeking"), ki18n("Class StringMatcher" ));
-   aboutData.addCredit(i18n("Michael Denio"), ki18n("Directory Equality-Coloring patch"));
-   aboutData.addCredit(i18n("Manfred Koehler"), ki18n("Fix for slow startup on Windows"));
-   aboutData.addCredit(i18n("Sergey Zorin"), ki18n("Diff Ext for Windows"));
-   aboutData.addCredit(i18n("Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"), ki18n("GNU-Diffutils"));
-   aboutData.addCredit(i18n("Tino Boellsterling, Timothy Mee"), ki18n("Intensive test, use and feedback"));
-   aboutData.addCredit(i18n("Michael Schmidt"), ki18n("Mac support"));
-   aboutData.addCredit(i18n("Valentin Rusu"), ki18n("KDE4 porting"), QByteArray("kde" "@" "rusu.info"));
-   aboutData.addCredit(i18n("Albert Astals Cid"), ki18n("KDE4 porting"), QByteArray("aacid" "@" "kde.org"));
-   aboutData.addCredit(i18n("Silvan Scherrer"), ki18n("OS2 port") );
-   aboutData.addCredit(i18n("Nigel Stewart"), ki18n("Cygwin support") );
-   aboutData.addCredit(i18n("Maurice van der Pot"), ki18n("Framework for automated tests") );
+   aboutData.addAuthor(ki18n("Joachim Eibl"), KLocalizedString(), QByteArray("joachim.eibl" "@" "gmx.de"));
+   aboutData.addCredit(ki18n("Eike Sauer"), ki18n("Bugfixes, Debian package maintainer") );
+   aboutData.addCredit(ki18n("Sebastien Fricker"), ki18n("Windows installer") );
+   aboutData.addCredit(ki18n("Stephan Binner"), ki18n("i18n-help"), QByteArray("binner" "@" "kde.org") );
+   aboutData.addCredit(ki18n("Stefan Partheymueller"), ki18n("Clipboard-patch" ));
+   aboutData.addCredit(ki18n("David Faure"), ki18n("KIO-Help"), QByteArray("faure" "@" "kde.org" ));
+   aboutData.addCredit(ki18n("Bernd Gehrmann"), ki18n("Class CvsIgnoreList from Cervisia" ));
+   aboutData.addCredit(ki18n("Andre Woebbeking"), ki18n("Class StringMatcher" ));
+   aboutData.addCredit(ki18n("Michael Denio"), ki18n("Directory Equality-Coloring patch"));
+   aboutData.addCredit(ki18n("Manfred Koehler"), ki18n("Fix for slow startup on Windows"));
+   aboutData.addCredit(ki18n("Sergey Zorin"), ki18n("Diff Ext for Windows"));
+   aboutData.addCredit(ki18n("Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"), ki18n("GNU-Diffutils"));
+   aboutData.addCredit(ki18n("Tino Boellsterling, Timothy Mee"), ki18n("Intensive test, use and feedback"));
+   aboutData.addCredit(ki18n("Michael Schmidt"), ki18n("Mac support"));
+   aboutData.addCredit(ki18n("Valentin Rusu"), ki18n("KDE4 porting"), QByteArray("kde" "@" "rusu.info"));
+   aboutData.addCredit(ki18n("Albert Astals Cid"), ki18n("KDE4 porting"), QByteArray("aacid" "@" "kde.org"));
+   aboutData.addCredit(ki18n("Silvan Scherrer"), ki18n("OS2 port") );
+   aboutData.addCredit(ki18n("Nigel Stewart"), ki18n("Cygwin support") );
+   aboutData.addCredit(ki18n("Maurice van der Pot"), ki18n("Framework for automated tests") );
 
-   aboutData.addCredit(i18n("+ Many thanks to those who reported bugs and contributed ideas!"));
+   aboutData.addCredit(ki18n("+ Many thanks to those who reported bugs and contributed ideas!"));
 
     QApplication app(argc, argv); // PORTING SCRIPT: move this to before the K4AboutData initialization
     QCommandLineParser parser;
-    KAboutData::setApplicationData(aboutData);
+    K4AboutData::setApplicationData(aboutData);
     parser.addVersionOption();
     parser.addHelpOption();
     //PORTING SCRIPT: adapt aboutdata variable if necessary
     aboutData.setupCommandLine(&parser);
-    parser.process(app); // PORTING SCRIPT: move this to after any parser.addOption
+    
     aboutData.processCommandLine(&parser);
 
    initialiseCmdLineArgs( options );
@@ -232,9 +233,8 @@ int main(int argc, char *argv[])
    parser.addPositionalArgument(QLatin1String("[File1]"), i18n("file1 to open (base, if not specified via --base)"));
    parser.addPositionalArgument(QLatin1String("[File2]"), i18n("file2 to open"));
    parser.addPositionalArgument(QLatin1String("[File3]"), i18n("file3 to open"));
-
-
-
+   
+   parser.process(app); // PORTING SCRIPT: move this to after any parser.addOption
 
 #ifdef KREPLACEMENTS_H
    QString locale;
