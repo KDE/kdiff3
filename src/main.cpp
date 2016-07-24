@@ -109,10 +109,10 @@ class ContextFreeTranslator : public QTranslator
 {
 public:
    ContextFreeTranslator( QObject* pParent ) : QTranslator(pParent) {}
-   QString translate(const char* context, const char* sourceText, const char* comment ) const
+   virtual QString translate(const char* context, const char* sourceText, const char* comment ) const
    {
       if ( context != 0 )
-         return QTranslator::translate(0,sourceText,comment);
+         return QTranslator::translate(0,sourceText,comment, -1);
       else
          return QString();
    }

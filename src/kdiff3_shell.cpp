@@ -33,7 +33,7 @@
 
 #include <klibloader.h>
 #include <kmessagebox.h>
-#include <kstatusbar.h>
+#include <QStatusBar>
 #include <klocale.h>
 
 #include <QStatusBar>

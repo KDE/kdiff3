@@ -20,7 +20,7 @@
 #include "kdiff3_part.h"
 
 #include <K4AboutData>
-#include <kcomponentdata.h>
+#include <KDELibs4Support/kcomponentdata.h>
 #include <QAction>
 #include <kstandardaction.h>
 #include <kfiledialog.h>
@@ -71,7 +71,7 @@ KDiff3Part::~KDiff3Part()
 {
    if ( m_widget!=0  && ! m_bIsShell )
    {
-      m_widget->saveOptions( m_widget->isPart() ? KComponentData(componentData()).config() : KGlobal::config() );
+      m_widget->saveOptions( m_widget->isPart() ? componentData()).config() : KGlobal::config() );
    }
 }
 

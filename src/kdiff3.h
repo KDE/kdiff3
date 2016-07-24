@@ -319,7 +319,7 @@ class KDiff3App : public QSplitter
    void choose(int choice);
 
    KActionCollection* actionCollection();
-   KStatusBar*        statusBar();
+   QStatusBar*        statusBar();
    KToolBar*          toolBar(const char*);
    KDiff3Part*        m_pKDiff3Part;
    KParts::MainWindow*       m_pKDiff3Shell;
