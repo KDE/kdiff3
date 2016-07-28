@@ -39,7 +39,6 @@
 #include <QPrintDialog>
 
 // include files for KDE
-#include <kcomponentdata.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kfiledialog.h>
@@ -50,7 +49,6 @@
 #include <kstandardaction.h>
 #include <kcmdlineargs.h>
 //#include <kkeydialog.h>
-#include <kglobal.h>
 #include <ktoggleaction.h>
 #include <ktoolbar.h>
 #include <kiconloader.h>
@@ -160,7 +158,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
    // This is just a convenience variable to make code that accesses options more readable
    m_pOptions = &m_pOptionDialog->m_options;
 
-   m_pOptionDialog->readOptions( isPart() ? m_pKDiff3Part->componentData()).config() : KGlobal::config() );
+   m_pOptionDialog->readOptions( KSharedConfig::openConfig() );
 
    // Option handling: Only when pParent==0 (no parent)
    KCmdLineArgs *args = isPart() ? 0 : KCmdLineArgs::parsedArgs();
@@ -653,7 +651,7 @@ void KDiff3App::saveOptions( KSharedConfigPtr config )
 
 bool KDiff3App::queryClose()
 {
-   saveOptions( isPart() ? ((m_pKDiff3Part->componentData().config()) : KGlobal::config() );
+   saveOptions( KSharedConfig::openConfig() );
 
    if(m_bOutputModified)
    {

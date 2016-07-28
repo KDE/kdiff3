@@ -19,9 +19,8 @@
 
 #include "kdiff3_part.h"
 
-#include <KAboutData>
+//#include <KAboutData>
 #include <K4AboutData>
-#include <kcomponentdata.h>
 #include <QAction>
 #include <kstandardaction.h>
 #include <kfiledialog.h>
@@ -51,12 +50,12 @@ static KAboutData createAboutData()
 
 K_PLUGIN_FACTORY( KDiff3PartFactory, registerPlugin<KDiff3Part>(); )
 
-KDiff3Part::KDiff3Part( QWidget *parentWidget, const char *widgetName,
-                        QObject *parent )
+KDiff3Part::KDiff3Part( QWidget *parentWidget, QObject *parent, const QVariantList &args)
     : KParts::ReadWritePart( parent )
 {
     // we need an instance
     //setComponentData( KPluginFactory::componentData() );
+    const char *widgetName = args[0].toString().toUtf8().data();
 
     // this should be your custom internal widget
     m_widget = new KDiff3App( parentWidget, widgetName, this );
@@ -84,7 +83,7 @@ KDiff3Part::KDiff3Part( QWidget *parentWidget, const char *widgetName,
 KDiff3Part::~KDiff3Part()
 {
     if( m_widget != 0  && ! m_bIsShell ) {
-        m_widget->saveOptions( m_widget->isPart() ? KPluginFactory::componentData().config() : KGlobal::config() );
+        m_widget->saveOptions( KSharedConfig::openConfig() );
     }
 }
 

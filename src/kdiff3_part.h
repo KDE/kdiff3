@@ -41,8 +41,7 @@ public:
     /**
      * Default constructor
      */
-    KDiff3Part(QWidget *parentWidget, const char *widgetName,
-                    QObject *parent );
+    KDiff3Part(QWidget *parentWidget, QObject *parent, const QVariantList &args );
 
     /**
      * Destructor

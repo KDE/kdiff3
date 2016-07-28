@@ -149,7 +149,7 @@ void KDiff3Shell::optionsConfigureKeys()
 
 void KDiff3Shell::optionsConfigureToolbars()
 {
-   KConfigGroup mainWindowGroup(  KGlobal::config(), "MainWindow" );
+   KConfigGroup mainWindowGroup(  KSharedConfig::openConfig(), "MainWindow" );
    saveMainWindowSettings( mainWindowGroup );
 
     // use the standard toolbar editor
@@ -160,7 +160,7 @@ void KDiff3Shell::optionsConfigureToolbars()
 
 void KDiff3Shell::applyNewToolbarConfig()
 {
-   KConfigGroup mainWindowGroup(  KGlobal::config(), "MainWindow" );
+   KConfigGroup mainWindowGroup(  KSharedConfig::openConfig(), "MainWindow" );
    applyMainWindowSettings( mainWindowGroup );
 }
 
