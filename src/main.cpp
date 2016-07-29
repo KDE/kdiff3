@@ -177,20 +177,20 @@ int main(int argc, char *argv[])
        appVersion += " (32 bit)";
    const QString description = i18n("Tool for Comparison and Merge of Files and Directories");
    const QString copyright = i18n("(c) 2002-2012 Joachim Eibl");
-   const QByteArray& homePage = "http://kdiff3.sourceforge.net/";
-   const QByteArray& bugsAddress = "joachim.eibl@gmx.de";
+   const QString& homePage = QStringLiteral("http://kdiff3.sourceforge.net/");
+   const QString& bugsAddress = QStringLiteral("joachim.eibl@gmx.de");
    
    KLocalizedString::setApplicationDomain(appCatalog);
    KAboutData aboutData( appName, i18nName, 
          appVersion, description, KAboutLicense::GPL_V2, copyright, description, 
          homePage, bugsAddress );
 
-   aboutData.addAuthor(i18n("Joachim Eibl"), QString(), QByteArray("joachim.eibl@gmx.de"));
+   aboutData.addAuthor(i18n("Joachim Eibl"), QString(), QStringLiteral("joachim.eibl@gmx.de"));
    aboutData.addCredit(i18n("Eike Sauer"), i18n("Bugfixes, Debian package maintainer") );
    aboutData.addCredit(i18n("Sebastien Fricker"), i18n("Windows installer") );
-   aboutData.addCredit(i18n("Stephan Binner"), i18n("i18n-help"), QByteArray("binner@kde.org") );
+   aboutData.addCredit(i18n("Stephan Binner"), i18n("i18n-help"), QStringLiteral("binner@kde.org") );
    aboutData.addCredit(i18n("Stefan Partheymueller"), i18n("Clipboard-patch" ));
-   aboutData.addCredit(i18n("David Faure"), i18n("KIO-Help"), QByteArray("faure@kde.org" ));
+   aboutData.addCredit(i18n("David Faure"), i18n("KIO-Help"), QStringLiteral("faure@kde.org" ));
    aboutData.addCredit(i18n("Bernd Gehrmann"), i18n("Class CvsIgnoreList from Cervisia" ));
    aboutData.addCredit(i18n("Andre Woebbeking"), i18n("Class StringMatcher" ));
    aboutData.addCredit(i18n("Michael Denio"), i18n("Directory Equality-Coloring patch"));
@@ -199,8 +199,8 @@ int main(int argc, char *argv[])
    aboutData.addCredit(i18n("Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"), i18n("GNU-Diffutils"));
    aboutData.addCredit(i18n("Tino Boellsterling, Timothy Mee"), i18n("Intensive test, use and feedback"));
    aboutData.addCredit(i18n("Michael Schmidt"), i18n("Mac support"));
-   aboutData.addCredit(i18n("Valentin Rusu"), i18n("KDE4 porting"), QByteArray("kde@rusu.info"));
-   aboutData.addCredit(i18n("Albert Astals Cid"), i18n("KDE4 porting"), QByteArray("aacid@kde.org"));
+   aboutData.addCredit(i18n("Valentin Rusu"), i18n("KDE4 porting"), QStringLiteral("kde@rusu.info"));
+   aboutData.addCredit(i18n("Albert Astals Cid"), i18n("KDE4 porting"), QStringLiteral("aacid@kde.org"));
    aboutData.addCredit(i18n("Silvan Scherrer"), i18n("OS2 port") );
    aboutData.addCredit(i18n("Nigel Stewart"), i18n("Cygwin support") );
    aboutData.addCredit(i18n("Maurice van der Pot"), i18n("Framework for automated tests") );

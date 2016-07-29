@@ -59,7 +59,7 @@ namespace KDiff3 {
    template <class T>
    T* createAction( 
 	 const QString& text, 
-	 const KShortcut& shortcut, 
+	 const QKeySequence& shortcut, 
 	 const QObject* receiver, 
 	 const char* slot, 
 	 KActionCollection* ac, 
@@ -101,7 +101,7 @@ namespace KDiff3 {
    T* createAction(
 	 const QString& text,
 	 const QIcon& icon,
-	 const KShortcut& shortcut,
+	 const QKeySequence& shortcut,
 	 const QObject* receiver,
 	 const char* slot,
 	 KActionCollection* ac,
@@ -116,7 +116,7 @@ namespace KDiff3 {
          const QString& text,
          const QIcon& icon,
          const QString& iconText,
-         const KShortcut& shortcut,
+         const QKeySequence& shortcut,
          const QObject* receiver,
          const char* slot,
          KActionCollection* ac,
