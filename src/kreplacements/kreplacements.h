@@ -168,9 +168,9 @@ public:
    void setButtons(int){}
    void setDefaultButton(int){}
    void showButtonSeparator(bool){}
-private Q_SLOTS:
+private slots:
    void slotHelpClicked();
-Q_SIGNALS:
+signals:
    void applyClicked();
    void okClicked();
    void helpClicked();
@@ -270,7 +270,7 @@ public:
    void createGUI(KParts::ReadWritePart*){createGUI();}
 
    QList<KMainWindow*>* memberList;
-public Q_SLOTS:
+public slots:
    void appHelpActivated();
    void slotAbout();
 };
@@ -371,7 +371,7 @@ public:
    KFontChooser( QWidget* pParent );
    QFont font();
    void setFont( const QFont&, bool );
-private Q_SLOTS:
+private slots:
    void slotSelectFont();
 };
 
@@ -384,7 +384,7 @@ public:
    QColor color();
    void setColor(const QColor&);
    virtual void paintEvent(QPaintEvent* e);
-public Q_SLOTS:
+public slots:
    void slotClicked();
 };
 
@@ -414,20 +414,20 @@ public:
 
 #define KCmdLineLastOption {0,0,0}
 
-class K4AboutData
+class KAboutData
 {
 public:
    enum LicenseKey { License_GPL, License_GPL_V2, License_Unknown };
 
-   //K4AboutData( const QString& name, const QString& appName, const QString& version,
+   //KAboutData( const QString& name, const QString& appName, const QString& version,
    //   const QString& description, int licence,
    //   const QString& copyright, int w, const QString& homepage, const QString& email);
 
-   K4AboutData (const QByteArray &appName, const QByteArray &catalogName, const KLocalizedString &programName, 
+   KAboutData (const QByteArray &appName, const QByteArray &catalogName, const KLocalizedString &programName, 
       const QByteArray &version, const KLocalizedString &shortDescription, LicenseKey licenseType, 
       const KLocalizedString &copyrightStatement, const KLocalizedString &text, 
       const QByteArray &homePageAddress, const QByteArray &bugsEmailAddress);
-   K4AboutData( const QString& name, const QString& appName, const QString& appName2, const QString& version );
+   KAboutData( const QString& name, const QString& appName, const QString& appName2, const QString& version );
    void addAuthor(const QString& name, const QString& task=0, const QString& email=0, const QString& weblink=0);
    void addCredit(const QString& name, const QString& task=0, const QString& email=0, const QString& weblink=0);
    
@@ -452,7 +452,7 @@ class KCmdLineArgs
 {
 public:
    static KCmdLineArgs* parsedArgs();
-   static void init( int argc, char**argv, K4AboutData* );
+   static void init( int argc, char**argv, KAboutData* );
    static void addCmdLineOptions( const KCmdLineOptions& options ); // Add our own options.
 
    int count();
@@ -563,13 +563,13 @@ typedef QProgressBar KProgress;
 class KInstance : public QObject
 {
 public:
-   KInstance(K4AboutData*){}
+   KInstance(KAboutData*){}
 };
 
 class KComponentData : public QObject
 {
 public:
-   KComponentData(K4AboutData*){}
+   KComponentData(KAboutData*){}
    KConfigGroup* config() {return 0;}
 };
 

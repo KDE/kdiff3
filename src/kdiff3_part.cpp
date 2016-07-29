@@ -19,8 +19,7 @@
 
 #include "kdiff3_part.h"
 
-//#include <KAboutData>
-#include <K4AboutData>
+#include <KAboutData>
 #include <QAction>
 #include <kstandardaction.h>
 #include <kfiledialog.h>
@@ -40,11 +39,17 @@
 
 static KAboutData createAboutData()
 {
-    K4AboutData aboutData( "kdiff3part", 0, ki18n( "KDiff3 Part" ),
-                           QByteArray( VERSION ), ki18n( "A KPart to display SVG images" ),
-                           K4AboutData::License_GPL,
-                           ki18n( "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>" ) );
-    aboutData.addAuthor( ki18n( "Joachim Eibl" ), KLocalizedString(), QByteArray( "joachim.eibl at gmx.de" ) );
+    QByteArray appVersion = QByteArray( VERSION );
+    if ( sizeof(void*)==8 )
+      appVersion += " (64 bit)";
+    else if ( sizeof(void*)==4 )
+      appVersion += " (32 bit)";
+    
+    KAboutData aboutData( "kdiff3part", i18n( "KDiff3 Part" ),
+                           appVersion, i18n( "A KPart to display SVG images" ),
+                           KAboutLicense::GPL_V2,
+                           i18n( "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>" ) );
+    aboutData.addAuthor( i18n( "Joachim Eibl" ), QString(), QByteArray( "joachim.eibl at gmx.de" ) );
     return aboutData;
 }
 

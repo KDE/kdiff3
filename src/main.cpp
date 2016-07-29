@@ -16,9 +16,8 @@
  ***************************************************************************/
 
 #include <QApplication>
-#include <K4AboutData>
+#include <KAboutData>
 #include <KLocalizedString>
-//#include <kaboutdata.h>
 #include <klocale.h>
 #include "kdiff3_shell.h"
 #include <kstandarddirs.h>
@@ -105,7 +104,7 @@ static bool isOptionUsed(const QString& s, int argc, char* argv[])
 }
 #endif
 
-class ContextFreeTranslator : public QTranslator
+/*class ContextFreeTranslator : public QTranslator
 {
 public:
    ContextFreeTranslator( QObject* pParent ) : QTranslator(pParent) {}
@@ -116,11 +115,11 @@ public:
       else
          return QString();
    }
-};
+};*/
 
 int main(int argc, char *argv[])
 {
-   QApplication app(argc, argv); // PORTING SCRIPT: move this to before the K4AboutData initialization
+   QApplication app(argc, argv); // PORTING SCRIPT: move this to before the KAboutData initialization
 #ifdef _WIN32
    /* KDiff3 can be used as replacement for the text-diff and merge tool provided by
       Clearcase. This is experimental and so far has only been tested under Windows.
@@ -168,46 +167,48 @@ int main(int argc, char *argv[])
 
    //QApplication::setColorSpec( QApplication::ManyColor ); // Grab all 216 colors
 
-   const QByteArray& appName = QByteArray("kdiff3");
+   const QByteArray& appName = "kdiff3";
    const QByteArray& appCatalog = appName;
-   const KLocalizedString i18nName = ki18n("kdiff3");
+   const QString i18nName = i18n("kdiff3");
    QByteArray appVersion = QByteArray( VERSION );
    if ( sizeof(void*)==8 )
       appVersion += " (64 bit)";
    else if ( sizeof(void*)==4 )
        appVersion += " (32 bit)";
-   const KLocalizedString description = ki18n("Tool for Comparison and Merge of Files and Directories");
-   const KLocalizedString copyright = ki18n("(c) 2002-2012 Joachim Eibl");
+   const QString description = i18n("Tool for Comparison and Merge of Files and Directories");
+   const QString copyright = i18n("(c) 2002-2012 Joachim Eibl");
    const QByteArray& homePage = "http://kdiff3.sourceforge.net/";
    const QByteArray& bugsAddress = "joachim.eibl" "@" "gmx.de";
-   K4AboutData aboutData( appName, appCatalog, i18nName, 
-         appVersion, description, K4AboutData::License_GPL_V2, copyright, description, 
+   
+   KLocalizedString::setApplicationDomain(appCatalog);
+   KAboutData aboutData( appName, i18nName, 
+         appVersion, description, KAboutLicense::GPL_V2, copyright, description, 
          homePage, bugsAddress );
 
-   aboutData.addAuthor(ki18n("Joachim Eibl"), KLocalizedString(), QByteArray("joachim.eibl" "@" "gmx.de"));
-   aboutData.addCredit(ki18n("Eike Sauer"), ki18n("Bugfixes, Debian package maintainer") );
-   aboutData.addCredit(ki18n("Sebastien Fricker"), ki18n("Windows installer") );
-   aboutData.addCredit(ki18n("Stephan Binner"), ki18n("i18n-help"), QByteArray("binner" "@" "kde.org") );
-   aboutData.addCredit(ki18n("Stefan Partheymueller"), ki18n("Clipboard-patch" ));
-   aboutData.addCredit(ki18n("David Faure"), ki18n("KIO-Help"), QByteArray("faure" "@" "kde.org" ));
-   aboutData.addCredit(ki18n("Bernd Gehrmann"), ki18n("Class CvsIgnoreList from Cervisia" ));
-   aboutData.addCredit(ki18n("Andre Woebbeking"), ki18n("Class StringMatcher" ));
-   aboutData.addCredit(ki18n("Michael Denio"), ki18n("Directory Equality-Coloring patch"));
-   aboutData.addCredit(ki18n("Manfred Koehler"), ki18n("Fix for slow startup on Windows"));
-   aboutData.addCredit(ki18n("Sergey Zorin"), ki18n("Diff Ext for Windows"));
-   aboutData.addCredit(ki18n("Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"), ki18n("GNU-Diffutils"));
-   aboutData.addCredit(ki18n("Tino Boellsterling, Timothy Mee"), ki18n("Intensive test, use and feedback"));
-   aboutData.addCredit(ki18n("Michael Schmidt"), ki18n("Mac support"));
-   aboutData.addCredit(ki18n("Valentin Rusu"), ki18n("KDE4 porting"), QByteArray("kde" "@" "rusu.info"));
-   aboutData.addCredit(ki18n("Albert Astals Cid"), ki18n("KDE4 porting"), QByteArray("aacid" "@" "kde.org"));
-   aboutData.addCredit(ki18n("Silvan Scherrer"), ki18n("OS2 port") );
-   aboutData.addCredit(ki18n("Nigel Stewart"), ki18n("Cygwin support") );
-   aboutData.addCredit(ki18n("Maurice van der Pot"), ki18n("Framework for automated tests") );
+   aboutData.addAuthor(i18n("Joachim Eibl"), QString(), QByteArray("joachim.eibl" "@" "gmx.de"));
+   aboutData.addCredit(i18n("Eike Sauer"), i18n("Bugfixes, Debian package maintainer") );
+   aboutData.addCredit(i18n("Sebastien Fricker"), i18n("Windows installer") );
+   aboutData.addCredit(i18n("Stephan Binner"), i18n("i18n-help"), QByteArray("binner" "@" "kde.org") );
+   aboutData.addCredit(i18n("Stefan Partheymueller"), i18n("Clipboard-patch" ));
+   aboutData.addCredit(i18n("David Faure"), i18n("KIO-Help"), QByteArray("faure" "@" "kde.org" ));
+   aboutData.addCredit(i18n("Bernd Gehrmann"), i18n("Class CvsIgnoreList from Cervisia" ));
+   aboutData.addCredit(i18n("Andre Woebbeking"), i18n("Class StringMatcher" ));
+   aboutData.addCredit(i18n("Michael Denio"), i18n("Directory Equality-Coloring patch"));
+   aboutData.addCredit(i18n("Manfred Koehler"), i18n("Fix for slow startup on Windows"));
+   aboutData.addCredit(i18n("Sergey Zorin"), i18n("Diff Ext for Windows"));
+   aboutData.addCredit(i18n("Paul Eggert, Mike Haertel, David Hayes, Richard Stallman, Len Tower"), i18n("GNU-Diffutils"));
+   aboutData.addCredit(i18n("Tino Boellsterling, Timothy Mee"), i18n("Intensive test, use and feedback"));
+   aboutData.addCredit(i18n("Michael Schmidt"), i18n("Mac support"));
+   aboutData.addCredit(i18n("Valentin Rusu"), i18n("KDE4 porting"), QByteArray("kde" "@" "rusu.info"));
+   aboutData.addCredit(i18n("Albert Astals Cid"), i18n("KDE4 porting"), QByteArray("aacid" "@" "kde.org"));
+   aboutData.addCredit(i18n("Silvan Scherrer"), i18n("OS2 port") );
+   aboutData.addCredit(i18n("Nigel Stewart"), i18n("Cygwin support") );
+   aboutData.addCredit(i18n("Maurice van der Pot"), i18n("Framework for automated tests") );
 
-   aboutData.addCredit(ki18n("+ Many thanks to those who reported bugs and contributed ideas!"));
+   aboutData.addCredit(i18n("+ Many thanks to those who reported bugs and contributed ideas!"));
 
    QCommandLineParser parser;
-   K4AboutData::setApplicationData(aboutData);
+   KAboutData::setApplicationData(aboutData);
    parser.addVersionOption();
    parser.addHelpOption();
    //PORTING SCRIPT: adapt aboutdata variable if necessary

@@ -76,6 +76,4 @@ private:
     bool m_bIsShell;
 };
 
-class K4AboutData;
-
 #endif // _KDIFF3PART_H_
