@@ -945,7 +945,6 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
 
       if ( pDropEvent->mimeData()->hasUrls() )
       {
-#ifdef KREPLACEMENTS_H
          QList<QUrl> urlList = pDropEvent->mimeData()->urls();
          if ( canContinue() && !urlList.isEmpty() )
          {
@@ -956,18 +955,6 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
             else if ( o == m_pDiffTextWindow3 ) m_sd3.setFilename( filename );
             init();
          }
-#else
-         QList<QUrl> urlList = QList<QUrl>::fromMimeData( pDropEvent->mimeData() );
-         if ( canContinue() && !urlList.isEmpty() )
-         {
-            raise();
-            FileAccess fa( urlList.first().url() );
-            if      ( o == m_pDiffTextWindow1 ) m_sd1.setFileAccess( fa );
-            else if ( o == m_pDiffTextWindow2 ) m_sd2.setFileAccess( fa );
-            else if ( o == m_pDiffTextWindow3 ) m_sd3.setFileAccess( fa );
-            init();
-         }
-#endif
       }
       else if ( pDropEvent->mimeData()->hasText() )
       {
