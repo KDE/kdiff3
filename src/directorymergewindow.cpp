@@ -69,7 +69,7 @@ public:
       m_pTextEdit->setWordWrapMode(QTextOption::NoWrap);
       m_pTextEdit->setReadOnly(true);
       QPushButton* pClose = new QPushButton(tr("Close"));
-      connect(pClose, &QPushButton::clicked, this, &DirectoryMergeInfo::accept);
+      connect(pClose, &QPushButton::clicked, this, &QDialog::accept);
       pVLayout->addWidget(pClose);
    }
 

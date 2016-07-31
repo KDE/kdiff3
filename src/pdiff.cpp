@@ -41,7 +41,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kfontdialog.h>
-#include <QStatusBar.h>
+#include <qstatusbar.h>
 
 
 #include <assert.h>

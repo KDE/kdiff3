@@ -52,7 +52,7 @@ KDiff3Shell::KDiff3Shell( bool bCompleteInit )
     statusBar()->show();
 
 //       m_part = static_cast<KParts::ReadWritePart*>(factory->create(this, "KDiff3Part", QStringList("KParts::ReadWritePart")));
-   m_part = new KDiff3Part( this, "KDiff3Part", this );
+   m_part = new KDiff3Part( this, this, QStringList("KDiff3Part") );
 
    if (m_part)
    {

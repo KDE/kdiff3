@@ -44,7 +44,7 @@
 #include <kfiledialog.h>
 #include <QMenuBar>
 #include <QStatusBar>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kconfig.h>
 #include <kstandardaction.h>
 #include <kcmdlineargs.h>
@@ -53,7 +53,6 @@
 #include <ktoolbar.h>
 #include <kiconloader.h>
 #include <kactioncollection.h>
-#include <KConfigGroup>
 
 // application specific includes
 #include "kdiff3.h"
@@ -324,10 +323,10 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
    m_pDirectoryMergeSplitter->addWidget(m_pDirectoryMergeInfo);
 
    connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::startDiffMerge, this, &KDiff3App::slotFileOpen2);
-   connect( m_pDirectoryMergeWindow->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)), this, SLOT(slotUpdateAvailabilities()));
-   connect( m_pDirectoryMergeWindow->selectionModel(), SIGNAL(currentChanged(const QModelIndex&,const QModelIndex&)), this, SLOT(slotUpdateAvailabilities()));
+   connect(m_pDirectoryMergeWindow->selectionModel(), &QItemSelectionModel::selectionChanged, this, &KDiff3App::slotUpdateAvailabilities);
+   connect(m_pDirectoryMergeWindow->selectionModel(), &QItemSelectionModel::currentChanged, this, &KDiff3App::slotUpdateAvailabilities);
    connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
-   connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::updateAvailabilities, this, &KDiff3App::slotUpdateAvailabilities);
+   connect(m_pDirectoryMergeWindow, SIGNAL(updateAvailabilities()), this, SLOT(slotUpdateAvailabilities()));
    connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::statusBarMessage, this, &KDiff3App::slotStatusMsg);
 
    m_pDirectoryMergeWindow->initDirectoryMergeActions( this, actionCollection() );
