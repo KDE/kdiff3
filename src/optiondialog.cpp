@@ -1909,4 +1909,4 @@ void OptionDialog::slotHistoryMergeRegExpTester()
 }
 
 
-//#include "optiondialog.moc"
+#include "optiondialog.moc"

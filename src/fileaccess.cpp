@@ -1812,4 +1812,4 @@ void ProgressProxyExtender::slotPercent( KJob*, unsigned long percent )
 }
 
 
-//#include "fileaccess.moc"
+#include "fileaccess.moc"

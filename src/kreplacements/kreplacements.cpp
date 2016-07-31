@@ -1235,4 +1235,4 @@ QObject* KLibFactory::create(QObject* pParent, const QString& name, const QStrin
 
 
 
-//#include "kreplacements.moc"
+#include "kreplacements.moc"

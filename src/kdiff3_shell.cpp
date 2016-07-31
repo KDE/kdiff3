@@ -52,7 +52,7 @@ KDiff3Shell::KDiff3Shell( bool bCompleteInit )
     statusBar()->show();
 
 //       m_part = static_cast<KParts::ReadWritePart*>(factory->create(this, "KDiff3Part", QStringList("KParts::ReadWritePart")));
-   m_part = new KDiff3Part( this, this, QStringList("KDiff3Part") );
+   m_part = new KDiff3Part( this, this, QVariantList() << QVariant(QLatin1String("KDiff3Part")) );
 
    if (m_part)
    {
@@ -170,4 +170,4 @@ void KDiff3Shell::slotNewInstance( const QString& fn1, const QString& fn2, const
    ((KDiff3App*)pKDiff3Shell->m_part->widget())->completeInit(fn1,fn2,fn3);
 }
 
-//#include "kdiff3_shell.moc"
+#include "kdiff3_shell.moc"
