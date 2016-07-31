@@ -378,6 +378,7 @@ private:
 
 class OptionEncodingComboBox : public QComboBox, public OptionItem
 {
+   Q_OBJECT
    QVector<QTextCodec*> m_codecVec;
    QTextCodec** m_ppVarCodec;
 public:
