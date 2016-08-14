@@ -33,6 +33,7 @@
 #include <QDropEvent>
 #include <QMenu>
 #include <QPushButton>
+#include <QMimeData>
 
 #include <kfiledialog.h>
 #include <klocale.h>

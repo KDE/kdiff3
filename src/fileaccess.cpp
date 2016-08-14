@@ -1414,7 +1414,7 @@ void CvsIgnoreList::init( FileAccess& dir, bool bUseLocalCvsIgnore )
                   ++pos1;
                }
             }
-            delete buf;
+            delete[] buf;
          }
       }
    }

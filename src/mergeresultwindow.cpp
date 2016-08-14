@@ -47,6 +47,7 @@
 #include <QDropEvent>
 #include <QPaintEvent>
 #include <QTextStream>
+#include <QMimeData>
 
 #include <klocale.h>
 #include <kmessagebox.h>

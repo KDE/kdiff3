@@ -1415,7 +1415,7 @@ void KDiff3App::slotJoinDiffs()
 void KDiff3App::slotConfigure()
 {
    m_pOptionDialog->setState();
-   m_pOptionDialog->incrementInitialSize ( QSize(0,40) );
+   m_pOptionDialog->setMinimumHeight(m_pOptionDialog->minimumHeight() + 40);
    m_pOptionDialog->exec();
    slotRefresh();
 }

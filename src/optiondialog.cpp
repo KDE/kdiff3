@@ -44,7 +44,7 @@
 #include <kmessagebox.h>
 #include <kmainwindow.h> //For ktoolbar.h
 #include <ktoolbar.h>
-
+#include <KHelpClient>
 //#include <kkeydialog.h>
 #include <map>
 
@@ -490,22 +490,20 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
 {
    setFaceType( List );
    setWindowTitle( i18n("Configure") );
-   QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::RestoreDefaults|QDialogButtonBox::Apply);
+   mButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::RestoreDefaults|QDialogButtonBox::Apply);
    QWidget *mainWidget = new QWidget(this);
    QVBoxLayout *mainLayout = new QVBoxLayout;
    setLayout(mainLayout);
    mainLayout->addWidget(mainWidget);
-   QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+   QPushButton *okButton = mButtonBox->button(QDialogButtonBox::Ok);
    okButton->setDefault(true);
    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-   connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-   connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-   //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-   mainLayout->addWidget(buttonBox);
+   //WARNING mainLayout->addWidget(buttonBox) must be last item in layout.
+   mainLayout->addWidget(mButtonBox);
    okButton->setDefault(true);
    setObjectName( name );
    setModal( true  );
-   setHelp( "kdiff3/index.html", QString::null );
+  
 
    setupFontPage();
    setupColorPage();
@@ -524,10 +522,32 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
    // Initialize all values in the dialog
    resetToDefaults();
    slotApply();
-   connect(this, &OptionDialog::applyClicked, this, &OptionDialog::slotApply);
-   connect(this, &OptionDialog::okClicked, this, &OptionDialog::slotOk);
-   //helpClicked() is connected in KDiff3App::KDiff3App
-   connect(this, &OptionDialog::defaultClicked, this, &OptionDialog::slotDefault);
+   //connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+   connect(mButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+   connect(mButtonBox, &QDialogButtonBox::clicked, this, &OptionDialog::buttonClicked);
+   connect(mButtonBox, &QDialogButtonBox::helpRequested, this, &OptionDialog::helpRequested); 
+   //connect(this, &OptionDialog::applyClicked, this, &OptionDialog::slotApply);
+   connect(mButtonBox, &QDialogButtonBox::accepted, this, &OptionDialog::slotOk);
+   //helpClicked() is connected in KDiff3App::KDiff3App -- Really where?
+   //connect(this, &OptionDialog::defaultClicked, this, &OptionDialog::slotDefault);
+}
+
+void OptionDialog::buttonClicked(QAbstractButton *button){
+    //for reasons beyond my comprehension QDialogButtonBox::standardButton() is non-static
+    switch(mButtonBox->standardButton(button)){
+      case QDialogButtonBox::Apply:
+	slotApply();
+	break;
+      case QDialogButtonBox::RestoreDefaults:
+	slotDefault();
+	break;
+      default:
+	break;
+    }
+}
+
+void OptionDialog::helpRequested() {
+   KHelpClient::invokeHelp( QStringLiteral("kdiff3/index.html"), QString::null );
 }
 
 OptionDialog::~OptionDialog( void )

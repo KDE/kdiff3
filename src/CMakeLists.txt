@@ -1,7 +1,7 @@
 
 
 ########### kdiff3 KPart ###############
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts CoreAddons)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts CoreAddons WidgetsAddons)
 
 set(kdiff3part_PART_SRCS 
    kdiff3_part.cpp 
