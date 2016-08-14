@@ -33,8 +33,7 @@
 #include <QUrl>
 #include <QMenu>
 #include <QTextLayout>
-
-
+#include <QMimeData>
 
 #include <klocale.h>
 #include <kfiledialog.h>

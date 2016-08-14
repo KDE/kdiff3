@@ -574,7 +574,7 @@ void OptionDialog::setupFontPage( void )
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
-   topLayout->setSpacing( spacingHint() );
+   topLayout->setSpacing( KDialog::spacingHint() );
 
    QFont defaultFont =
 #ifdef _WIN32
@@ -611,7 +611,7 @@ void OptionDialog::setupColorPage( void )
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
-   topLayout->setSpacing( spacingHint() );
+   topLayout->setSpacing( KDialog::spacingHint() );
 
 
   QGridLayout *gbox = new QGridLayout();
@@ -760,7 +760,7 @@ void OptionDialog::setupEditPage( void )
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
-   topLayout->setSpacing( spacingHint() );
+   topLayout->setSpacing( KDialog::spacingHint() );
 
    QGridLayout *gbox = new QGridLayout();
    gbox->setColumnStretch(1,5);
@@ -828,7 +828,7 @@ void OptionDialog::setupDiffPage( void )
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
-   topLayout->setSpacing( spacingHint() );
+   topLayout->setSpacing( KDialog::spacingHint() );
 
    QGridLayout *gbox = new QGridLayout();
    gbox->setColumnStretch(1,5);
@@ -912,7 +912,7 @@ void OptionDialog::setupMergePage( void )
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
-   topLayout->setSpacing( spacingHint() );
+   topLayout->setSpacing( KDialog::spacingHint() );
 
    QGridLayout *gbox = new QGridLayout();
    gbox->setColumnStretch(1,5);
@@ -968,7 +968,7 @@ void OptionDialog::setupMergePage( void )
    ++line;
    {
       QGridLayout* gbox = new QGridLayout( pGroupBox );
-      gbox->setMargin(spacingHint());
+      gbox->setMargin(KDialog::spacingHint());
       gbox->setColumnStretch(1,10);
       int line = 0;
 
@@ -994,7 +994,7 @@ void OptionDialog::setupMergePage( void )
    ++line;
    {
       QGridLayout* gbox = new QGridLayout( pGroupBox );
-      gbox->setMargin( spacingHint() );
+      gbox->setMargin( KDialog::spacingHint() );
       gbox->setColumnStretch(1,10);
       int line = 0;
 
@@ -1104,7 +1104,7 @@ void OptionDialog::setupDirectoryMergePage( void )
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
-   topLayout->setSpacing( spacingHint() );
+   topLayout->setSpacing( KDialog::spacingHint() );
 
    QGridLayout *gbox = new QGridLayout();
    gbox->setColumnStretch(1,5);
@@ -1219,7 +1219,7 @@ void OptionDialog::setupDirectoryMergePage( void )
    gbox->addWidget( pBG, line, 0, 1, 2 );
 
    QVBoxLayout* pBGLayout = new QVBoxLayout( pBG );
-   pBGLayout->setMargin(spacingHint());
+   pBGLayout->setMargin(KDialog::spacingHint());
    
    OptionRadioButton* pBinaryComparison = new OptionRadioButton( i18n("Binary comparison"), true, "BinaryComparison", &m_options.m_bDmBinaryComparison, pBG, this );
    pBinaryComparison->setToolTip( i18n("Binary comparison of each file. (Default)") );
@@ -1360,7 +1360,7 @@ void OptionDialog::setupRegionalPage( void )
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
-   topLayout->setSpacing( spacingHint() );
+   topLayout->setSpacing( KDialog::spacingHint() );
 
    QGridLayout *gbox = new QGridLayout();
    gbox->setColumnStretch(1,5);
@@ -1610,7 +1610,7 @@ void OptionDialog::setupIntegrationPage( void )
 
    QVBoxLayout *topLayout = new QVBoxLayout( page );
    topLayout->setMargin( 5 );
-   topLayout->setSpacing( spacingHint() );
+   topLayout->setSpacing( KDialog::spacingHint() );
 
    QGridLayout *gbox = new QGridLayout();
    gbox->setColumnStretch(2,5);
@@ -1715,7 +1715,7 @@ void OptionDialog::setupKeysPage( void )
    //QVBox *page = addVBoxPage( i18n("Keys"), i18n("KeyDialog" ),
    //                          BarIcon("fonts", KIconLoader::SizeMedium ) );
 
-   //QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+   //QVBoxLayout *topLayout = new QVBoxLayout( page, 0, KDialog::spacingHint() );
     //           new KFontChooser( page,"font",false/*onlyFixed*/,QStringList(),false,6 );
    //m_pKeyDialog=new KKeyDialog( false, 0 );
    //topLayout->addWidget( m_pKeyDialog );
