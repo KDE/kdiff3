@@ -253,7 +253,8 @@ void FileAccess::setFile( const QFileInfo& fi, FileAccess* pParent )
       d()->m_url = QUrl( fi.filePath() );
       if ( d()->m_url.isRelative() )
       {
-         d()->m_url.setPath( absoluteFilePath() );
+	
+         d()->m_url = QUrl::fromUserInput(absoluteFilePath());
       }
 
       if ( !m_bExists  && absoluteFilePath().contains("@@") )
@@ -365,7 +366,8 @@ void FileAccess::addPath( const QString& txt )
 {
    if ( d()!=0 && d()->m_url.isValid() )
    {
-      d()->m_url.addPath( txt );
+      QUrl url = d()->m_url.adjusted(QUrl::StripTrailingSlash);
+      d()->m_url.setPath(url.path()+'/'+txt );
       setFile( d()->m_url.url() );  // reinitialise
    }
    else
@@ -410,8 +412,8 @@ void FileAccess::setUdsEntry( const KIO::UDSEntry& e )
 {
    long acc = 0;
    long fileType = 0;
-   QList< uint > fields = e.listFields();
-   for( QList< uint >::ConstIterator ei=fields.constBegin(); ei!=fields.constEnd(); ++ei )
+   QVector< uint > fields = e.fields();
+   for( QVector< uint >::ConstIterator ei=fields.constBegin(); ei!=fields.constEnd(); ++ei )
    {
       uint f = *ei;
       switch( f )
@@ -518,7 +520,7 @@ QUrl FileAccess::url() const
       QUrl url( m_filePath );
       if ( url.isRelative() )
       {
-         url.setPath( absoluteFilePath() );
+         url = QUrl::fromLocalFile( absoluteFilePath() );
       }
       return url;
    }   
@@ -1035,7 +1037,7 @@ bool FileAccessJobHandler::get(void* pDestBuffer, long maxLength )
 
       connect(pJob, &KIO::TransferJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
       connect(pJob, &KIO::TransferJob::data, this, &FileAccessJobHandler::slotGetData);
-      connect(pJob, &KIO::TransferJob::percent, &pp, &ProgressProxyExtender::slotPercent);
+      connect(pJob, SIGNAL(percent(KJob*,unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
 
       ProgressProxy::enterEventLoop( pJob, i18n("Reading file: %1",m_pFileAccess->prettyAbsPath()) );
       return m_bSuccess;
@@ -1073,7 +1075,7 @@ bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOve
 
       connect(pJob, &KIO::TransferJob::result, this, &FileAccessJobHandler::slotPutJobResult);
       connect(pJob, &KIO::TransferJob::dataReq, this, &FileAccessJobHandler::slotPutData);
-      connect(pJob, &KIO::TransferJob::percent, &pp, &ProgressProxyExtender::slotPercent);
+      connect( pJob, SIGNAL(percent(KJob*,unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
 
       ProgressProxy::enterEventLoop( pJob, i18n("Writing file: %1",m_pFileAccess->prettyAbsPath()) );
       return m_bSuccess;
@@ -1214,7 +1216,7 @@ bool FileAccessJobHandler::rename( const QString& dest )
       m_bSuccess = false;
       KIO::FileCopyJob* pJob = KIO::file_move( m_pFileAccess->url(), kurl, permissions, KIO::HideProgressInfo );
       connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-      connect(pJob, &KIO::FileCopyJob::percent, &pp, &ProgressProxyExtender::slotPercent);
+      connect(pJob, SIGNAL(percent(KJob*,unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
 
       ProgressProxy::enterEventLoop( pJob,
          i18n("Renaming file: %1 -> %2",m_pFileAccess->prettyAbsPath(),dest) );
@@ -1248,7 +1250,7 @@ bool FileAccessJobHandler::copyFile( const QString& dest )
       m_bSuccess = false;
       KIO::FileCopyJob* pJob = KIO::file_copy ( m_pFileAccess->url(), destUrl, permissions, KIO::HideProgressInfo );
       connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-      connect(pJob, &KIO::FileCopyJob::percent, &pp, &ProgressProxyExtender::slotPercent);
+      connect(pJob, SIGNAL(percent(KJob*,unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
       ProgressProxy::enterEventLoop( pJob,
          i18n("Copying file: %1 -> %2",m_pFileAccess->prettyAbsPath(),dest) );
 
@@ -1780,8 +1782,8 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
 
 void FileAccessJobHandler::slotListDirProcessNewEntries( KIO::Job*, const KIO::UDSEntryList& l )
 {
-   QUrl parentUrl( m_pFileAccess->absoluteFilePath() );
-
+   QUrl parentUrl( QUrl::fromUserInput(m_pFileAccess->absoluteFilePath()) );
+   
    KIO::UDSEntryList::ConstIterator i;
    for ( i=l.begin(); i!=l.end(); ++i )
    {
@@ -1794,7 +1796,7 @@ void FileAccessJobHandler::slotListDirProcessNewEntries( KIO::Job*, const KIO::U
       if ( fa.fileName() != "." && fa.fileName() != ".." )
       {
          fa.d()->m_url = parentUrl;
-         fa.d()->m_url.addPath( fa.fileName() );
+         fa.d()->m_url.setPath(fa.d()->m_url.path() + "/" + fa.fileName() );
          //fa.d()->m_absoluteFilePath = fa.url().url();
          m_pDirList->push_back( fa );
       }
@@ -1812,4 +1814,4 @@ void ProgressProxyExtender::slotPercent( KJob*, unsigned long percent )
 }
 
 
-#include "fileaccess.moc"
+//#include "fileaccess.moc"
