@@ -44,7 +44,7 @@
       appVersion += " (64 bit)";
     else if ( sizeof(void*)==4 )
       appVersion += " (32 bit)";
-    
+
     KAboutData aboutData( "kdiff3part", i18n( "KDiff3 Part" ),
                            appVersion, i18n( "A KPart to display SVG images" ),
                            KAboutLicense::GPL_V2,
@@ -56,9 +56,8 @@
 K_PLUGIN_FACTORY( KDiff3PartFactory, registerPlugin<KDiff3Part>(); )
 //K_EXPORT_PLUGIN( KDiff3PartFactory(createAboutData()))
 
-KDiff3Part::KDiff3Part( QWidget *parentWidget, QObject *parent, const QVariantList &args)
-    : KParts::ReadWritePart( parent )
-{
+KDiff3Part::KDiff3Part( QWidget *parentWidget, QObject *parent, const QVariantList &args )
+    : KParts::ReadWritePart( parent ) {
     // we need an instance
     //setComponentData( KPluginFactory::componentData() );
     const char *widgetName = args[0].toString().toUtf8().data();
@@ -86,20 +85,17 @@ KDiff3Part::KDiff3Part( QWidget *parentWidget, QObject *parent, const QVariantLi
     setModified( false );
 }
 
-KDiff3Part::~KDiff3Part()
-{
+KDiff3Part::~KDiff3Part() {
     if( m_widget != 0  && ! m_bIsShell ) {
         m_widget->saveOptions( KSharedConfig::openConfig() );
     }
 }
 
-void KDiff3Part::setReadWrite( bool /*rw*/ )
-{
+void KDiff3Part::setReadWrite( bool /*rw*/ ) {
 //    ReadWritePart::setReadWrite(rw);
 }
 
-void KDiff3Part::setModified( bool /*modified*/ )
-{
+void KDiff3Part::setModified( bool /*modified*/ ) {
     /*
         // get a handle on our Save action and make sure it is valid
         QAction *save = actionCollection()->action(KStandardAction::stdName(KStandardAction::Save));
@@ -118,8 +114,7 @@ void KDiff3Part::setModified( bool /*modified*/ )
     */
 }
 
-static void getNameAndVersion( const QString& str, const QString& lineStart, QString& fileName, QString& version )
-{
+static void getNameAndVersion( const QString& str, const QString& lineStart, QString& fileName, QString& version ) {
     if( str.left( lineStart.length() ) == lineStart && fileName.isEmpty() ) {
         int pos = lineStart.length();
         while( pos < str.length() && ( str[pos] == ' ' || str[pos] == '\t' ) ) ++pos;
@@ -142,8 +137,7 @@ static void getNameAndVersion( const QString& str, const QString& lineStart, QSt
 }
 
 
-bool KDiff3Part::openFile()
-{
+bool KDiff3Part::openFile() {
     // m_file is always local so we can use QFile on it
     fprintf( stderr, "KDiff3: %s\n", localFilePath().toLatin1().constData() );
     QFile file( localFilePath() );
@@ -245,8 +239,7 @@ bool KDiff3Part::openFile()
     return true;
 }
 
-bool KDiff3Part::saveFile()
-{
+bool KDiff3Part::saveFile() {
     /*    // if we aren't read-write, return immediately
         if (isReadWrite() == false)
             return false;
