@@ -638,4 +638,4 @@ void RegExpTester::slotRecalc() {
     }
 }
 
-#include "smalldialogs.moc"
+//#include "smalldialogs.moc"

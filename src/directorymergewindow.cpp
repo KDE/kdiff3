@@ -3448,4 +3448,4 @@ void DirectoryMergeWindow::updateAvailabilities( bool bDirCompare, bool bDiffWin
 }
 
 
-#include "directorymergewindow.moc"
+//#include "directorymergewindow.moc"

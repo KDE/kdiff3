@@ -1004,4 +1004,4 @@ void KDiff3App::slotStatusMsg( const QString &text ) {
 
 
 
-#include "kdiff3.moc"
+//#include "kdiff3.moc"

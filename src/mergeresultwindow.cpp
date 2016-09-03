@@ -3147,4 +3147,4 @@ bool WindowTitleWidget::eventFilter( QObject* o, QEvent* e ) {
     return false;
 }
 
-#include "mergeresultwindow.moc"
+//#include "mergeresultwindow.moc"
