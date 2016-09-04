@@ -21,7 +21,7 @@
 #include <cstdlib>
 
 #include <klocale.h>
-#include <ktemporaryfile.h>
+#include <QTemporaryFile>
 #include <kio/global.h>
 #include <kio/job.h>
 #include <kio/jobclasses.h>
@@ -743,41 +743,12 @@ bool FileAccess::listDir( t_DirectoryList* pDirList, bool bRecursive, bool bFind
 }
 
 QString FileAccess::tempFileName() {
-#ifdef KREPLACEMENTS_H
-
-    QString fileName;
-#if defined(_WIN32) || defined(Q_OS_OS2)
-    QString tmpDir = getenv( "TEMP" );
-#else
-    QString tmpDir = "/tmp";
-#endif
-    for( int i = 0; ; ++i ) {
-        // short filenames for WIN98 because for system() the command must not exceed 120 characters.
-#ifdef _WIN32
-        if( QSysInfo::WindowsVersion & QSysInfo::WV_DOS_based )  // Win95, 98, ME
-            fileName = tmpDir + "\\" + QString::number( i );
-        else
-            fileName = tmpDir + "/kdiff3_" + QString::number( _getpid() ) + "_" + QString::number( i ) + ".tmp";
-#else
-        fileName = tmpDir + "/kdiff3_" + QString::number( getpid() ) + "_" + QString::number( i ) + ".tmp";
-#endif
-        if( ! FileAccess::exists( fileName ) &&
-                QFile( fileName ).open( QIODevice::WriteOnly ) ) { // open, truncate and close the file, true if successful
-            break;
-        }
-    }
-    return QDir::toNativeSeparators( fileName + ".2" );
-
-#else  // using KDE
-
-    KTemporaryFile tmpFile;
+    QTemporaryFile tmpFile;
     tmpFile.open();
     //tmpFile.setAutoDelete( true );  // We only want the name. Delete the precreated file immediately.
     QString name = tmpFile.fileName() + ".2";
     tmpFile.close();
     return name;
-
-#endif
 }
 
 bool FileAccess::removeTempFile( const QString& name ) { // static
