@@ -93,7 +93,8 @@ static bool isOptionUsed( const QString& s, int argc, char* argv[] ) {
 }
 #endif
 
-/*class ContextFreeTranslator : public QTranslator
+#ifdef KREPLACEMENTS_H
+class ContextFreeTranslator : public QTranslator
 {
 public:
    ContextFreeTranslator( QObject* pParent ) : QTranslator(pParent) {}
@@ -104,10 +105,11 @@ public:
       else
          return QString();
    }
-};*/
+};
+#endif
 
 int main( int argc, char *argv[] ) {
-    QApplication app( argc, argv ); // PORTING SCRIPT: move this to before the KAboutData initialization
+    QApplication app( argc, argv ); // KAboutData and QCommandLineParser depend on this being setup.
 #ifdef _WIN32
     /* KDiff3 can be used as replacement for the text-diff and merge tool provided by
        Clearcase. This is experimental and so far has only been tested under Windows.
@@ -196,6 +198,8 @@ int main( int argc, char *argv[] ) {
 
     QCommandLineParser parser;
     KAboutData::setApplicationData( aboutData );
+    
+    parser.setApplicationDescription(aboutData.shortDescription());
     parser.addVersionOption();
     parser.addHelpOption();
     initialiseCmdLineArgs( parser );
@@ -222,7 +226,14 @@ int main( int argc, char *argv[] ) {
     parser.process( app ); // PORTING SCRIPT: move this to after any parser.addOption
     //must be after process or parse call
     aboutData.setupCommandLine( &parser );
-
+    /**
+     * take component name and org. name from KAboutData
+     */
+    app.setApplicationName(aboutData.componentName());
+    app.setApplicationDisplayName(aboutData.displayName());
+    app.setOrganizationDomain(aboutData.organizationDomain());
+    app.setApplicationVersion(aboutData.version());
+    
 #ifdef KREPLACEMENTS_H
     QString locale;
 

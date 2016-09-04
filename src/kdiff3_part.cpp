@@ -37,7 +37,7 @@
 #include "version.h"
 
 
-/*static KAboutData createAboutData()
+static KAboutData createAboutData()
 {
     QByteArray appVersion = QByteArray( VERSION );
     if ( sizeof(void*)==8 )
@@ -51,15 +51,15 @@
                            i18n( "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>" ) );
     aboutData.addAuthor( i18n( "Joachim Eibl" ), QString(), QByteArray( "joachim.eibl at gmx.de" ) );
     return aboutData;
-}*/
+}
 
 K_PLUGIN_FACTORY( KDiff3PartFactory, registerPlugin<KDiff3Part>(); )
 //K_EXPORT_PLUGIN( KDiff3PartFactory(createAboutData()))
 
 KDiff3Part::KDiff3Part( QWidget *parentWidget, QObject *parent, const QVariantList &args )
     : KParts::ReadWritePart( parent ) {
-    // we need an instance
-    //setComponentData( KPluginFactory::componentData() );
+    //set AboutData
+    setComponentData(createAboutData());
     const char *widgetName = args[0].toString().toUtf8().data();
 
     // this should be your custom internal widget
