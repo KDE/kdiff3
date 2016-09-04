@@ -198,11 +198,6 @@ int main( int argc, char *argv[] ) {
     KAboutData::setApplicationData( aboutData );
     parser.addVersionOption();
     parser.addHelpOption();
-    //PORTING SCRIPT: adapt aboutdata variable if necessary
-    aboutData.setupCommandLine( &parser );
-
-    aboutData.processCommandLine( &parser );
-
     initialiseCmdLineArgs( parser );
     // ignorable command options
     parser.addOption( QCommandLineOption( QStringList() << QLatin1String( "m" ) << QLatin1String( "merge" ), i18n( "Merge the input." ) ) );
@@ -225,6 +220,8 @@ int main( int argc, char *argv[] ) {
     parser.addPositionalArgument( QLatin1String( "[File3]" ), i18n( "file3 to open" ) );
 
     parser.process( app ); // PORTING SCRIPT: move this to after any parser.addOption
+    //must be after process or parse call
+    aboutData.setupCommandLine( &parser );
 
 #ifdef KREPLACEMENTS_H
     QString locale;

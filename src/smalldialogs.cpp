@@ -34,8 +34,8 @@
 #include <QMenu>
 #include <QPushButton>
 #include <QMimeData>
+#include <QFileDialog>
 
-#include <kfiledialog.h>
 #include <klocale.h>
 #include <kdebug.h>
 
@@ -233,14 +233,14 @@ void OpenDialog::selectURL( QComboBox* pLine, bool bDir, int i, bool bSave ) {
         current = m_pLineA->currentText();
     }
 
-    /*QUrl newURL = bDir ? KFileDialog::getExistingDirectoryUrl( current, this)
-    	    : bSave ? KFileDialog::getSaveUrl( current, "all/allfiles", this)
-    		    : KFileDialog::getOpenUrl( current, "all/allfiles", this);*/
+    QUrl newURL = bDir ? QFileDialog::getExistingDirectoryUrl( this, QString(), current)
+    	    : bSave ? QFileDialog::getSaveFileUrl( this, QString(), current, "all/allfiles")
+    		    : QFileDialog::getOpenFileUrl( this, QString(), current, "all/allfiles");
 
-    QUrl 			newURL;
+    /*QUrl 			newURL;
     if( !bDir ) {
-        newURL = bSave ? KFileDialog::getSaveUrl( current, "all/allfiles", this )
-                 : KFileDialog::getOpenUrl( current, "all/allfiles", this );
+        newURL = bSave ? QFileDialog::getSaveFileUrl( this, QString(), current, "all/allfiles" )
+                 : QFileDialog::getOpenFileUrl( this, QString(), current, "all/allfiles" );
     }
     else {
         KFileDialog 			dlg( current, "all/allfiles", this );
@@ -251,15 +251,15 @@ void OpenDialog::selectURL( QComboBox* pLine, bool bDir, int i, bool bSave ) {
         dlg.setWindowTitle( i18n( "Select Directory" ) );
         dlg.exec();
         newURL = dlg.selectedUrl();
-    }
-    if( !newURL.isEmpty() ) {
+    }*/
+    /*if( !newURL.isEmpty() ) {
         /*
         Since we are selecting a directory open in the parent directory
         not the one selected.
-             */
-        KFileDialog::setStartDir( KIO::upUrl( newURL ) );
+             *
+        QFileDialog::setStartDir( KIO::upUrl( newURL ) );
         pLine->setEditText( newURL.url() );
-    }
+    }*/
     // newURL won't be modified if nothing was selected.
 }
 

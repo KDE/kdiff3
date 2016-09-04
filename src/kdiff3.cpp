@@ -37,13 +37,13 @@
 #include <QDesktopWidget>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QFileDialog>
+#include <QMenuBar>
+#include <QStatusBar>
 
 // include files for KDE
 #include <kiconloader.h>
 #include <kmessagebox.h>
-#include <kfiledialog.h>
-#include <QMenuBar>
-#include <QStatusBar>
 #include <klocalizedstring.h>
 #include <kconfig.h>
 #include <kstandardaction.h>
@@ -696,7 +696,7 @@ void KDiff3App::slotFileSave() {
 void KDiff3App::slotFileSaveAs() {
     slotStatusMsg( i18n( "Saving file with a new filename..." ) );
 
-    QString s = KFileDialog::getSaveUrl( QDir::currentPath(), 0, this, i18n( "Save As..." ) ).url();
+    QString s = QFileDialog::getSaveFileUrl(this, i18n( "Save As..." ), QDir::currentPath(), 0 ).url();
     if( !s.isEmpty() ) {
         m_outputFilename = s;
         m_pMergeResultWindowTitle->setFileName( m_outputFilename );
