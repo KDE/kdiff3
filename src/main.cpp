@@ -15,10 +15,10 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <QStandardPaths>
 #include <QApplication>
 #include <KAboutData>
 #include <KLocalizedString>
-#include <klocale.h>
 #include "kdiff3_shell.h"
 #include <kstandarddirs.h>
 #include "version.h"
@@ -43,7 +43,7 @@
 #include "common.h"
 
 void initialiseCmdLineArgs( QCommandLineParser& parser ) {
-    QString configFileName = KStandardDirs().findResource( "config", "kdiff3rc" );
+    QString configFileName = QStandardPaths::locate(QStandardPaths::GenericConfigLocation , "kdiff3rc" );
     QFile configFile( configFileName );
     QString ignorableOptionsLine = "-u;-query;-html;-abort";
     if( configFile.open( QIODevice::ReadOnly ) ) {

@@ -150,7 +150,8 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
     m_pOptions = &m_pOptionDialog->m_options;
 
     m_pOptionDialog->readOptions( KSharedConfig::openConfig() );
-
+    
+    //TODO: Port to KF5/qt5
     // Option handling: Only when pParent==0 (no parent)
     KCmdLineArgs *args = isPart() ? 0 : KCmdLineArgs::parsedArgs();
 

@@ -34,6 +34,7 @@
 #include <QPixmap>
 #include <QFrame>
 #include <QVBoxLayout>
+#include <QFontDatabase>
 
 #include <kapplication.h>
 #include <kcolorbutton.h>
@@ -45,7 +46,6 @@
 #include <kmainwindow.h> //For ktoolbar.h
 #include <ktoolbar.h>
 #include <KHelpClient>
-//#include <kkeydialog.h>
 #include <map>
 
 #include "optiondialog.h"
@@ -641,25 +641,22 @@ void OptionDialog::setupOtherOptions() {
 }
 
 void OptionDialog::setupFontPage( void ) {
-    QFrame* page = new QFrame();
-    KPageWidgetItem *pageItem = new KPageWidgetItem( page, i18n( "Font" ) );
+    QFrame* 		page = new QFrame();
+    KPageWidgetItem 	*pageItem = new KPageWidgetItem( page, i18n( "Font" ) );
+    QFont		defaultFont;
+    
     pageItem->setHeader( i18n( "Editor & Diff Output Font" ) );
     pageItem->setIcon( QIcon::fromTheme( QStringLiteral( "preferences-desktop-font" ) ) );
     addPage( pageItem );
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
-    topLayout->setSpacing( KDialog::spacingHint() );
+    //TODO use qt5 equivalent layoutSpacing
+    //topLayout->setSpacing( KDialog::spacingHint() );
 
-    QFont defaultFont =
-#ifdef _WIN32
-        QFont( "Courier New", 10 );
-#elif defined( KREPLACEMENTS_H )
-        QFont( "Courier", 10 );
-#else
-        KGlobalSettings::fixedFont();
-#endif
-
+    //requires QT 5.2 or later.
+    defaultFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+    
     OptionFontChooser* pFontChooser = new OptionFontChooser( defaultFont, "Font", &m_options.m_font, page, this );
     topLayout->addWidget( pFontChooser );
 
@@ -685,7 +682,7 @@ void OptionDialog::setupColorPage( void ) {
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
-    topLayout->setSpacing( KDialog::spacingHint() );
+    //QT5 topLayout->setSpacing( KDialog::spacingHint() );
 
 
     QGridLayout *gbox = new QGridLayout();
