@@ -66,7 +66,7 @@ namespace KDiff3 {
 	 const char* actionName) 
    {
       T* theAction = createAction<T>( text, receiver, slot, ac, actionName );
-      theAction->setShortcut( shortcut );
+      ac->setDefaultShortcut(theAction, shortcut);
       return theAction;
    }
    template <class T>
