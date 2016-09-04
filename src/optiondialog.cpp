@@ -40,7 +40,6 @@
 #include <kcolorbutton.h>
 #include <kfontdialog.h> // For KFontChooser
 #include <kiconloader.h>
-#include <klocale.h>
 #include <kconfig.h>
 #include <kmessagebox.h>
 #include <kmainwindow.h> //For ktoolbar.h
@@ -651,9 +650,7 @@ void OptionDialog::setupFontPage( void ) {
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
-    //TODO use qt5 equivalent layoutSpacing
-    //topLayout->setSpacing( KDialog::spacingHint() );
-
+    
     //requires QT 5.2 or later.
     defaultFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
     
@@ -682,8 +679,6 @@ void OptionDialog::setupColorPage( void ) {
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
-    //QT5 topLayout->setSpacing( KDialog::spacingHint() );
-
 
     QGridLayout *gbox = new QGridLayout();
     gbox->setColumnStretch( 1, 5 );
@@ -830,7 +825,6 @@ void OptionDialog::setupEditPage( void ) {
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
-    topLayout->setSpacing( KDialog::spacingHint() );
 
     QGridLayout *gbox = new QGridLayout();
     gbox->setColumnStretch( 1, 5 );
@@ -897,7 +891,6 @@ void OptionDialog::setupDiffPage( void ) {
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
-    topLayout->setSpacing( KDialog::spacingHint() );
 
     QGridLayout *gbox = new QGridLayout();
     gbox->setColumnStretch( 1, 5 );
@@ -980,8 +973,7 @@ void OptionDialog::setupMergePage( void ) {
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
-    topLayout->setSpacing( KDialog::spacingHint() );
-
+    
     QGridLayout *gbox = new QGridLayout();
     gbox->setColumnStretch( 1, 5 );
     topLayout->addLayout( gbox );
@@ -1036,7 +1028,6 @@ void OptionDialog::setupMergePage( void ) {
     ++line;
     {
         QGridLayout* gbox = new QGridLayout( pGroupBox );
-        gbox->setMargin( KDialog::spacingHint() );
         gbox->setColumnStretch( 1, 10 );
         int line = 0;
 
@@ -1062,7 +1053,6 @@ void OptionDialog::setupMergePage( void ) {
     ++line;
     {
         QGridLayout* gbox = new QGridLayout( pGroupBox );
-        gbox->setMargin( KDialog::spacingHint() );
         gbox->setColumnStretch( 1, 10 );
         int line = 0;
 
@@ -1171,8 +1161,7 @@ void OptionDialog::setupDirectoryMergePage( void ) {
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
-    topLayout->setSpacing( KDialog::spacingHint() );
-
+    
     QGridLayout *gbox = new QGridLayout();
     gbox->setColumnStretch( 1, 5 );
     topLayout->addLayout( gbox );
@@ -1286,8 +1275,7 @@ void OptionDialog::setupDirectoryMergePage( void ) {
     gbox->addWidget( pBG, line, 0, 1, 2 );
 
     QVBoxLayout* pBGLayout = new QVBoxLayout( pBG );
-    pBGLayout->setMargin( KDialog::spacingHint() );
-
+    
     OptionRadioButton* pBinaryComparison = new OptionRadioButton( i18n( "Binary comparison" ), true, "BinaryComparison", &m_options.m_bDmBinaryComparison, pBG, this );
     pBinaryComparison->setToolTip( i18n( "Binary comparison of each file. (Default)" ) );
     pBGLayout->addWidget( pBinaryComparison );
@@ -1422,8 +1410,7 @@ void OptionDialog::setupRegionalPage( void ) {
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
-    topLayout->setSpacing( KDialog::spacingHint() );
-
+    
     QGridLayout *gbox = new QGridLayout();
     gbox->setColumnStretch( 1, 5 );
     topLayout->addLayout( gbox );
@@ -1667,8 +1654,7 @@ void OptionDialog::setupIntegrationPage( void ) {
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
-    topLayout->setSpacing( KDialog::spacingHint() );
-
+    
     QGridLayout *gbox = new QGridLayout();
     gbox->setColumnStretch( 2, 5 );
     topLayout->addLayout( gbox );
