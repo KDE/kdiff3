@@ -236,31 +236,6 @@ void OpenDialog::selectURL( QComboBox* pLine, bool bDir, int i, bool bSave ) {
     QUrl newURL = bDir ? QFileDialog::getExistingDirectoryUrl( this, QString(), current)
     	    : bSave ? QFileDialog::getSaveFileUrl( this, QString(), current, "all/allfiles")
     		    : QFileDialog::getOpenFileUrl( this, QString(), current, "all/allfiles");
-
-    /*QUrl 			newURL;
-    if( !bDir ) {
-        newURL = bSave ? QFileDialog::getSaveFileUrl( this, QString(), current, "all/allfiles" )
-                 : QFileDialog::getOpenFileUrl( this, QString(), current, "all/allfiles" );
-    }
-    else {
-        KFileDialog 			dlg( current, "all/allfiles", this );
-
-        //Sadlly KFileDialog::getExistingDirectoryUrl doesn't do this. Instead it presents a very akword windows 95 like interface.
-        dlg.setOperationMode( KFileDialog::Opening );
-        dlg.setMode( KFile::Directory | KFile::ExistingOnly );
-        dlg.setWindowTitle( i18n( "Select Directory" ) );
-        dlg.exec();
-        newURL = dlg.selectedUrl();
-    }*/
-    /*if( !newURL.isEmpty() ) {
-        /*
-        Since we are selecting a directory open in the parent directory
-        not the one selected.
-             *
-        QFileDialog::setStartDir( KIO::upUrl( newURL ) );
-        pLine->setEditText( newURL.url() );
-    }*/
-    // newURL won't be modified if nothing was selected.
 }
 
 void OpenDialog::selectFileA()     {
