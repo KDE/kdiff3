@@ -1,7 +1,7 @@
 
 
 ########### kdiff3 KPart ###############
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts CoreAddons WidgetsAddons)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts WidgetsAddons)
 
 set(kdiff3part_PART_SRCS 
    kdiff3_part.cpp 
@@ -25,12 +25,12 @@ add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
 set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
 
-target_link_libraries(kdiff3part ${KDiff3_LIBRARIES} KF5::Parts KF5::CoreAddons ${QT_QT3SUPPORT_LIBRARY})
+target_link_libraries(kdiff3part ${KDiff3_LIBRARIES} KF5::Parts ${QT_QT3SUPPORT_LIBRARY})
 
 install(TARGETS kdiff3part DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/parts )
 
 ########### kdiff3 executable ###############
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts CoreAddons WidgetsAddons Config)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts WidgetsAddons Config)
 
 set(kdiff3_SRCS 
    main.cpp 

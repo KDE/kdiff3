@@ -41,7 +41,6 @@
 #include <QMenu>
 #include <QAction>
 #include <kmessagebox.h>
-#include <kfiledialog.h>
 #include <kiconloader.h>
 #include <klocalizedstring.h>
 #include <ktoggleaction.h>

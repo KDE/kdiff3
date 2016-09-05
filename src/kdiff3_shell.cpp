@@ -33,7 +33,6 @@
 #include <QAction>
 #include <kstandardaction.h>
 
-#include <klibloader.h>
 #include <kmessagebox.h>
 #include <QStatusBar>
 #include <klocalizedstring.h>
