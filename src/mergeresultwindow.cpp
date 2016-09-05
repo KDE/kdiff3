@@ -49,7 +49,7 @@
 #include <QTextStream>
 #include <QMimeData>
 
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kmessagebox.h>
 
 int g_bAutoSolve = true;

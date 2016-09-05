@@ -25,7 +25,7 @@
 #include "progress.h"
 
 #include <kmessagebox.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 
 #include <QFileInfo>
 #include <QDir>

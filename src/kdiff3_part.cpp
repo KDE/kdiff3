@@ -31,7 +31,7 @@
 #include "fileaccess.h"
 
 #include <kmessagebox.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 
 #include "version.h"
 

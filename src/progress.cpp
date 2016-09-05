@@ -17,7 +17,7 @@
 #include <QApplication>
 #include <kio/job.h>
 
-#include <klocale.h>
+#include <klocalizedstring.h>
 
 ProgressDialog* g_pProgressDialog = 0;
 

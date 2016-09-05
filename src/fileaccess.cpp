@@ -20,7 +20,7 @@
 #include <vector>
 #include <cstdlib>
 
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <QTemporaryFile>
 #include <kio/global.h>
 #include <kio/job.h>

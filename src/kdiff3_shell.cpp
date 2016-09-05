@@ -36,7 +36,7 @@
 #include <klibloader.h>
 #include <kmessagebox.h>
 #include <QStatusBar>
-#include <klocale.h>
+#include <klocalizedstring.h>
 
 #include <QStatusBar>
 #include <QCloseEvent>

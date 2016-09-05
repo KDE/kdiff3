@@ -38,7 +38,7 @@
 #include <QUrl>
 #include <QProcess>
 
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kmessagebox.h>
 #include <kfontdialog.h>
 #include <qstatusbar.h>

@@ -36,7 +36,7 @@
 #include <QMimeData>
 #include <QFileDialog>
 
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kdebug.h>
 
 // OpenDialog **************************************************************

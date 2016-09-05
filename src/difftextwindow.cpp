@@ -35,7 +35,7 @@
 #include <QTextLayout>
 #include <QMimeData>
 
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kfiledialog.h>
 
 #include <cmath>
