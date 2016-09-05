@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
-cmake_policy(SET CMP0063 NEW)#repress unneeded warning
+cmake_policy(SET CMP0063 NEW)#repress unneeded CMake warning
 project(kdiff3)
 
 set(ECM_MIN_VERSION "1.0.0")
@@ -20,8 +20,13 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n KDELibs4Support)
 find_package(KF5DocTools ${KF5_MIN_VERSION} REQUIRED )
 
+# I don't need warnings about wired things in comments.
+SET(CLANG_WARNING_FLAGS -Wno-comment)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 SET(KDiff3_LIBRARIES KF5::I18n KF5::KDELibs4Support)
+SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
+SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CLANG_WARNING_FLAGS}")
+
 add_definitions(${QT_DEFINITIONS} ${KF5_DEFINITIONS})
 #remove unnneeded errors
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_KEYWORDS)
