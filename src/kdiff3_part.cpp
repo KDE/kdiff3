@@ -22,7 +22,6 @@
 #include <KAboutData>
 #include <QAction>
 #include <kstandardaction.h>
-#include <kfiledialog.h>
 
 #include <QFile>
 #include <QTextStream>

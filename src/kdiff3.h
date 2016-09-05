@@ -34,7 +34,8 @@
 #include <kparts/mainwindow.h>
 #include <ktoggleaction.h>
 #include <KAboutData>
-#include <kglobal.h>
+#include <KSharedConfig>
+#include <KConfigGroup>
 // forward declaration of the KDiff3 classes
 class OptionDialog;
 class FindDialog;

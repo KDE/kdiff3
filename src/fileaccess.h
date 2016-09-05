@@ -15,7 +15,6 @@
 
 #include <QDateTime>
 
-#include <kprogressdialog.h>
 #include <kio/job.h>
 #include <kio/jobclasses.h>
 #include <QUrl>

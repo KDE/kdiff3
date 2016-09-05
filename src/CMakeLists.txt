@@ -30,6 +30,7 @@ target_link_libraries(kdiff3part ${KDiff3_LIBRARIES} KF5::Parts KF5::CoreAddons 
 install(TARGETS kdiff3part DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/parts )
 
 ########### kdiff3 executable ###############
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts CoreAddons WidgetsAddons Config)
 
 set(kdiff3_SRCS 
    main.cpp 
@@ -39,7 +40,7 @@ set(kdiff3_SRCS
 
 add_executable(kdiff3 ${kdiff3_SRCS})
 
-target_link_libraries(kdiff3  KF5::Parts ${QT_QT3SUPPORT_LIBRARY} ${KDiff3_LIBRARIES} )
+target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::Parts ${QT_QT3SUPPORT_LIBRARY} ${KDiff3_LIBRARIES} )
 
 install(TARGETS kdiff3 ${INSTALL_TARGETS_DEFAULT_ARGS})
 

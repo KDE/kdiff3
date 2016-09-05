@@ -25,7 +25,6 @@
 #include <KPluginLoader>
 
 #include <kshortcutsdialog.h>
-#include <kfiledialog.h>
 #include <kconfig.h>
 #include <QUrl>
 
