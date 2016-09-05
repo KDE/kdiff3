@@ -28,11 +28,11 @@
 
 // include files for KDE
 #include <QApplication>
-#include <kmainwindow.h>
+#include <KMainWindow>
 #include <QAction>
 #include <QUrl>
-#include <kparts/mainwindow.h>
-#include <ktoggleaction.h>
+#include <KParts/MainWindow>
+#include <KToggleAction>
 #include <KAboutData>
 #include <KSharedConfig>
 #include <KConfigGroup>

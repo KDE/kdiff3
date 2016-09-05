@@ -21,7 +21,7 @@
 #define _KDIFF3PART_H_
 
 #include <kparts/part.h>
-#include <kparts/factory.h>
+#include <KPluginFactory>
 #include <kparts/readwritepart.h>
 
 class QWidget;

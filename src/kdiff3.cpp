@@ -42,16 +42,15 @@
 #include <QStatusBar>
 #include <QCommandLineParser>
 // include files for KDE
-#include <kiconloader.h>
-#include <kmessagebox.h>
-#include <klocalizedstring.h>
+#include <KMessageBox>
+#include <KLocalizedString>
 #include <kconfig.h>
-#include <kstandardaction.h>
+#include <KStandardAction>
 //#include <kkeydialog.h>
-#include <ktoggleaction.h>
-#include <ktoolbar.h>
-#include <kiconloader.h>
-#include <kactioncollection.h>
+#include <KToggleAction>
+#include <KToolBar>
+#include <KIconLoader>
+#include <KActionCollection>
 
 // application specific includes
 #include "kdiff3_shell.h"

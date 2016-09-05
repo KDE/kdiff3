@@ -40,7 +40,6 @@
 
 #include <klocalizedstring.h>
 #include <kmessagebox.h>
-#include <kfontdialog.h>
 #include <qstatusbar.h>
 
 

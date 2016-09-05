@@ -25,7 +25,6 @@
 #include <kpagedialog.h>
 #include <QStringList>
 #include <list>
-#include <kcmdlineargs.h>
 
 #include "options.h"
 

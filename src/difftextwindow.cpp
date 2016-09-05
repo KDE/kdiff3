@@ -36,7 +36,6 @@
 #include <QMimeData>
 
 #include <klocalizedstring.h>
-#include <kfiledialog.h>
 
 #include <cmath>
 #include <cstdlib>
