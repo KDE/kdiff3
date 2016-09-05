@@ -23,7 +23,7 @@ find_package(KF5DocTools ${KF5_MIN_VERSION} REQUIRED )
 # I don't need warnings about wired things in comments.
 SET(CLANG_WARNING_FLAGS -Wno-comment)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
-SET(KDiff3_LIBRARIES KF5::I18n KF5::CoreAddons KF5::IconThemes)
+SET(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::IconThemes)
 SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
 SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CLANG_WARNING_FLAGS}")
 

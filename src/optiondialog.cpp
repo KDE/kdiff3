@@ -17,7 +17,7 @@
  *   Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  */
-
+#include <QApplication>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QLabel>
@@ -36,15 +36,15 @@
 #include <QVBoxLayout>
 #include <QFontDatabase>
 
-#include <kapplication.h>
-#include <kcolorbutton.h>
-#include <kfontdialog.h> // For KFontChooser
-#include <kiconloader.h>
-#include <kconfig.h>
-#include <kmessagebox.h>
-#include <kmainwindow.h> //For ktoolbar.h
-#include <ktoolbar.h>
+#include <KColorButton>
+#include <KFontChooser>
+#include <KIconLoader>
+#include <KSharedConfig>
+#include <KMessageBox>
+#include <KMainWindow> //For ktoolbar.h
+#include <KToolBar>
 #include <KHelpClient>
+#include <KLocalizedString>
 #include <map>
 
 #include "optiondialog.h"
