@@ -40,14 +40,13 @@
 #include <QFileDialog>
 #include <QMenuBar>
 #include <QStatusBar>
-
+#include <QCommandLineParser>
 // include files for KDE
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <klocalizedstring.h>
 #include <kconfig.h>
 #include <kstandardaction.h>
-#include <kcmdlineargs.h>
 //#include <kkeydialog.h>
 #include <ktoggleaction.h>
 #include <ktoolbar.h>
@@ -55,6 +54,7 @@
 #include <kactioncollection.h>
 
 // application specific includes
+#include "kdiff3_shell.h"
 #include "kdiff3.h"
 #include "optiondialog.h"
 #include "fileaccess.h"
@@ -150,20 +150,19 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
     m_pOptions = &m_pOptionDialog->m_options;
 
     m_pOptionDialog->readOptions( KSharedConfig::openConfig() );
-    
+
     //TODO: Port to KF5/qt5
     // Option handling: Only when pParent==0 (no parent)
-    KCmdLineArgs *args = isPart() ? 0 : KCmdLineArgs::parsedArgs();
-
-    if( args ) {
+    bool hasArgs = !isPart() && KDiff3Shell::getParser()->optionNames().count() > 0;
+    if( hasArgs ) {
         QString s;
         QString title;
-        if( args->isSet( "confighelp" ) ) {
+        if( KDiff3Shell::getParser()->isSet( "confighelp" ) ) {
             s = m_pOptionDialog->calcOptionHelp();
             title = i18n( "Current Configuration:" );
         }
         else {
-            s = m_pOptionDialog->parseOptions( args->getOptionList( "cs" ) );
+            s = m_pOptionDialog->parseOptions( KDiff3Shell::getParser()->values( "cs" ) );
             title = i18n( "Config Option Error:" );
         }
         if( !s.isEmpty() ) {
@@ -194,51 +193,50 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
     m_sd2.setOptions( m_pOptions );
     m_sd3.setOptions( m_pOptions );
 
-    if( args != 0 ) {
-        m_outputFilename = args->getOption( "output" );
-        if( m_outputFilename.isEmpty() )
-            m_outputFilename = args->getOption( "out" );
-        if( ! m_outputFilename.isEmpty() )
-            m_outputFilename = FileAccess( m_outputFilename, true ).absoluteFilePath();
-    }
-
     m_bAutoFlag = false;//disable --auto option git hard codes this unwanted flag.
     m_bAutoMode = m_bAutoFlag || m_pOptions->m_bAutoSaveAndQuitOnMergeWithoutConflicts;
-    if( m_bAutoMode && m_outputFilename.isEmpty() ) {
-        if( m_bAutoFlag ) {
-            //KMessageBox::information(this, i18n("Option --auto used, but no output file specified."));
-            fprintf( stderr, "%s\n", ( const char* )i18n( "Option --auto used, but no output file specified." ).toLatin1() );
+    if( hasArgs ) {
+        m_outputFilename = KDiff3Shell::getParser()->value( "output" );
+        
+	if( m_outputFilename.isEmpty() )
+            m_outputFilename = KDiff3Shell::getParser()->value( "out" );
+	
+        if( ! m_outputFilename.isEmpty() )
+            m_outputFilename = FileAccess( m_outputFilename, true ).absoluteFilePath();
+
+        if( m_bAutoMode && m_outputFilename.isEmpty() ) {
+            if( m_bAutoFlag ) {
+                //KMessageBox::information(this, i18n("Option --auto used, but no output file specified."));
+                fprintf( stderr, "%s\n", ( const char* )i18n( "Option --auto used, but no output file specified." ).toLatin1() );
+            }
+            m_bAutoMode = false;
         }
-        m_bAutoMode = false;
-    }
-    g_pProgressDialog->setStayHidden( m_bAutoMode );
-
-    if( m_outputFilename.isEmpty() && args != 0 && args->isSet( "merge" ) ) {
-        m_outputFilename = "unnamed.txt";
-        m_bDefaultFilename = true;
-    }
-    else
-        m_bDefaultFilename = false;
-
-    g_bAutoSolve = args != 0 && !args->isSet( "qall" ); // Note that this is effective only once.
-
-    if( args != 0 ) {
-        m_sd1.setFilename( args->getOption( "base" ) );
-        if( m_sd1.isEmpty() ) {
-            if( args->count() > 0 ) m_sd1.setFilename( args->url( 0 ).url() ); // args->arg(0)
-            if( args->count() > 1 ) m_sd2.setFilename( args->url( 1 ).url() );
-            if( args->count() > 2 ) m_sd3.setFilename( args->url( 2 ).url() );
+        
+        if( m_outputFilename.isEmpty() && KDiff3Shell::getParser()->isSet( "merge" ) ) {
+            m_outputFilename = "unnamed.txt";
+            m_bDefaultFilename = true;
         }
         else {
-            if( args->count() > 0 ) m_sd2.setFilename( args->url( 0 ).url() );
-            if( args->count() > 1 ) m_sd3.setFilename( args->url( 1 ).url() );
+            m_bDefaultFilename = false;
+	}
+        g_bAutoSolve = !KDiff3Shell::getParser()->isSet( "qall" ); // Note that this is effective only once.
+	//TODO validate these options.
+	QStringList args = KDiff3Shell::getParser()->positionalArguments();
+        m_sd1.setFilename( KDiff3Shell::getParser()->value( "base" ) );
+        if( m_sd1.isEmpty() ) {
+            if( args.count() > 0 ) m_sd1.setFilename( args[0] ); // args->arg(0)
+            if( args.count() > 1 ) m_sd2.setFilename( args[1] );
+            if( args.count() > 2 ) m_sd3.setFilename( args[2] );
         }
-
-
-        QStringList aliasList = args->getOptionList( "fname" );
+        else {
+            if( args.count() > 0 ) m_sd2.setFilename( args[0] );
+            if( args.count() > 1 ) m_sd3.setFilename( args[1] );
+        }
+        
+        QStringList aliasList = KDiff3Shell::getParser()->values( "fname" );
         QStringList::Iterator ali = aliasList.begin();
 
-        QString an1 = args->getOption( "L1" );
+        QString an1 = KDiff3Shell::getParser()->value( "L1" );
         if( !an1.isEmpty() )              {
             m_sd1.setAliasName( an1 );
         }
@@ -247,7 +245,7 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
             ++ali;
         }
 
-        QString an2 = args->getOption( "L2" );
+        QString an2 = KDiff3Shell::getParser()->value( "L2" );
         if( !an2.isEmpty() )              {
             m_sd2.setAliasName( an2 );
         }
@@ -256,7 +254,7 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
             ++ali;
         }
 
-        QString an3 = args->getOption( "L3" );
+        QString an3 = KDiff3Shell::getParser()->value( "L3" );
         if( !an3.isEmpty() )              {
             m_sd3.setAliasName( an3 );
         }
@@ -265,6 +263,11 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
             ++ali;
         }
     }
+    else {
+	m_bDefaultFilename = false;
+        g_bAutoSolve = false;
+    }
+    g_pProgressDialog->setStayHidden( m_bAutoMode );
 
     ///////////////////////////////////////////////////////////////////
     // call inits to invoke all other construction parts
@@ -326,8 +329,9 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
     connect( m_pDirectoryMergeWindow, &DirectoryMergeWindow::statusBarMessage, this, &KDiff3App::slotStatusMsg );
 
     m_pDirectoryMergeWindow->initDirectoryMergeActions( this, actionCollection() );
-
-    if( args != 0 )  args->clear(); // Free up some memory.
+    
+    delete KDiff3Shell::getParser();
+    //if( args != 0 )  args->clear(); // Free up some memory.
 
     if( m_pKDiff3Shell == 0 ) {
         completeInit();
@@ -696,7 +700,7 @@ void KDiff3App::slotFileSave() {
 void KDiff3App::slotFileSaveAs() {
     slotStatusMsg( i18n( "Saving file with a new filename..." ) );
 
-    QString s = QFileDialog::getSaveFileUrl(this, i18n( "Save As..." ), QDir::currentPath(), 0 ).url();
+    QString s = QFileDialog::getSaveFileUrl( this, i18n( "Save As..." ), QDir::currentPath(), 0 ).url();
     if( !s.isEmpty() ) {
         m_outputFilename = s;
         m_pMergeResultWindowTitle->setFileName( m_outputFilename );

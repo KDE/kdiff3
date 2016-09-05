@@ -43,7 +43,6 @@
 #include <QCloseEvent>
 #include <ktoolbar.h>
 
-
 KDiff3Shell::KDiff3Shell( bool bCompleteInit )
     : KParts::MainWindow( ) {
     m_bUnderConstruction = true;
