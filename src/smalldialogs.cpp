@@ -185,7 +185,7 @@ OpenDialog::OpenDialog(
     setFixedHeight( sh.height() );
     m_bInputFileNameChanged = false;
 
-#ifdef KREPLACEMENTS_H
+#ifdef _WIN32
     m_pLineA->lineEdit()->installEventFilter( this );
     m_pLineB->lineEdit()->installEventFilter( this );
     m_pLineC->lineEdit()->installEventFilter( this );
