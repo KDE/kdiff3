@@ -233,9 +233,17 @@ void OpenDialog::selectURL( QComboBox* pLine, bool bDir, int i, bool bSave ) {
         current = m_pLineA->currentText();
     }
 
-    QUrl newURL = bDir ? QFileDialog::getExistingDirectoryUrl( this, QString(), current)
-    	    : bSave ? QFileDialog::getSaveFileUrl( this, QString(), current, "all/allfiles")
-    		    : QFileDialog::getOpenFileUrl( this, QString(), current, "all/allfiles");
+    QUrl newURL = bDir ? QFileDialog::getExistingDirectoryUrl( this, QString("t"), QUrl::fromUserInput(current))
+    	    : bSave ? QFileDialog::getSaveFileUrl( this, QString(""), QUrl::fromUserInput(current), QLatin1Literal("all/allfiles") )
+    		    : QFileDialog::getOpenFileUrl( this, QString(""), QUrl::fromUserInput(current), QLatin1Literal("all/allfiles") );
+    if( !newURL.isEmpty() ) {
+        /*
+        Since we are selecting a directory open in the parent directory
+        not the one selected.
+             */
+        //QFileDialog::setStartDir( KIO::upUrl( newURL ) );
+        pLine->setEditText( newURL.url() );
+    }
 }
 
 void OpenDialog::selectFileA()     {

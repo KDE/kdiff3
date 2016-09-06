@@ -22,7 +22,7 @@
 #define OPTION_DIALOG_H
 
 
-#include <kpagedialog.h>
+#include <KPageDialog>
 #include <QStringList>
 #include <list>
 
