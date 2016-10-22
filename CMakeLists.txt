@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 cmake_policy(SET CMP0063 NEW)#repress unneeded CMake warning
 project(kdiff3)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(ECM_MIN_VERSION "1.0.0")
 set(QT_MIN_VERSION "5.3.0")
 set(KF5_MIN_VERSION "5.5.0")
