@@ -54,7 +54,10 @@ public:
     bool queryExit();
     virtual void closeEvent(QCloseEvent*e);
     
-    static inline QCommandLineParser* getParser(){ static QCommandLineParser *parser = new QCommandLineParser(); return parser;};
+    static inline QCommandLineParser* getParser(){
+      static QCommandLineParser *parser = new QCommandLineParser();
+      return parser;
+    };
 private Q_SLOTS:
     void optionsShowToolbar();
     void optionsShowStatusbar();
