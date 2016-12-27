@@ -165,9 +165,7 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
             s = m_pOptionDialog->parseOptions( KDiff3Shell::getParser()->values( "cs" ) );
             title = i18n( "Config Option Error:" );
         }
-        if( !s.isEmpty() ) {//TODO: Why use the dialog only on windows?
-#if defined(_WIN32) || defined(Q_OS_OS2)
-            // A windows program has no console
+        if( !s.isEmpty() ) {
             //KMessageBox::information(0, s,i18n("KDiff3-Usage"));
             QDialog* pDialog = new QDialog( this );
             pDialog->setAttribute( Qt::WA_DeleteOnClose );
@@ -181,7 +179,8 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
             pVBoxLayout->addWidget( pTextEdit );
             pDialog->resize( 600, 400 );
             pDialog->exec();
-#else
+#if !defined(_WIN32) && !defined(Q_OS_OS2)
+            // A windows program has no console
             fprintf( stderr, "%s\n", title.toLatin1().constData() );
             fprintf( stderr, "%s\n", s.toLatin1().constData() );
 #endif
