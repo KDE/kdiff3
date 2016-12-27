@@ -152,7 +152,8 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
 
     //TODO: Port to KF5/qt5
     // Option handling: Only when pParent==0 (no parent)
-    bool hasArgs = !isPart() && KDiff3Shell::getParser()->optionNames().count() > 0;
+    int argCount = KDiff3Shell::getParser()->optionNames().count() + KDiff3Shell::getParser()->positionalArguments().count();
+    bool hasArgs = !isPart() && argCount > 0;
     if( hasArgs ) {
         QString s;
         QString title;
@@ -164,7 +165,7 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
             s = m_pOptionDialog->parseOptions( KDiff3Shell::getParser()->values( "cs" ) );
             title = i18n( "Config Option Error:" );
         }
-        if( !s.isEmpty() ) {
+        if( !s.isEmpty() ) {//TODO: Why use the dialog only on windows?
 #if defined(_WIN32) || defined(Q_OS_OS2)
             // A windows program has no console
             //KMessageBox::information(0, s,i18n("KDiff3-Usage"));
@@ -231,8 +232,8 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
             if( args.count() > 0 ) m_sd2.setFilename( args[0] );
             if( args.count() > 1 ) m_sd3.setFilename( args[1] );
         }
-        
-        QStringList aliasList = KDiff3Shell::getParser()->values( "fname" );
+        //never properly defined and redundant
+        QStringList aliasList;//KDiff3Shell::getParser()->values( "fname" );
         QStringList::Iterator ali = aliasList.begin();
 
         QString an1 = KDiff3Shell::getParser()->value( "L1" );

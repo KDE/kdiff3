@@ -204,18 +204,18 @@ int main( int argc, char *argv[] ) {
     initialiseCmdLineArgs( );
     // ignorable command options
     KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "m" ) << QLatin1String( "merge" ), i18n( "Merge the input." ) ) );
-    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "b" ) << QLatin1String( "base file" ), i18n( "Explicit base file. For compatibility with certain tools." ) ) );
-    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "o" ) << QLatin1String( "output file" ), i18n( "Output file. Implies -m. E.g.: -o newfile.txt" ) ) );
-    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "out file" ), i18n( "Output file, again. (For compatibility with certain tools.)" ) ) );
+    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "b" ) << QLatin1String( "base" ), i18n( "Explicit base file. For compatibility with certain tools." ), QLatin1String("file") ) );
+    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "o" ) << QLatin1String( "output" ), i18n( "Output file. Implies -m. E.g.: -o newfile.txt" ), QLatin1String("file") ) );
+    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "out" ), i18n( "Output file, again. (For compatibility with certain tools.)" ) , QLatin1String("file") ) );
     KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "auto" ), i18n( "No GUI if all conflicts are auto-solvable. (Needs -o file)" ) ) );
     KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "qall" ), i18n( "Don't solve conflicts automatically." ) ) );
-    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "L1 alias1" ), i18n( "Visible name replacement for input file 1 (base)." ) ) );
-    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "L2 alias2" ), i18n( "Visible name replacement for input file 2." ) ) );
-    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "L3 alias3" ), i18n( "Visible name replacement for input file 3." ) ) );
+    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "L1" ), i18n( "Visible name replacement for input file 1 (base)." ), QLatin1String("alias1") ) );
+    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "L2" ), i18n( "Visible name replacement for input file 2." ), QLatin1String("alias2") ) );
+    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "L3" ), i18n( "Visible name replacement for input file 3." ), QLatin1String("alias3") ) );
     KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "L" ) << QLatin1String( "fname alias" ), i18n( "Alternative visible name replacement. Supply this once for every input." ) ) );
-    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "cs string" ), i18n( "Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\"" ) ) );
+    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "cs" ), i18n( "Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\"" ), QLatin1String("string") ) );
     KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "confighelp" ), i18n( "Show list of config settings and current values." ) ) );
-    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "config file" ), i18n( "Use a different config file." ) ) );
+    KDiff3Shell::getParser()->addOption( QCommandLineOption( QStringList() << QLatin1String( "config" ), i18n( "Use a different config file." ), QLatin1String("file") ) );
 
     // other command options
     KDiff3Shell::getParser()->addPositionalArgument( QLatin1String( "[File1]" ), i18n( "file1 to open (base, if not specified via --base)" ) );
