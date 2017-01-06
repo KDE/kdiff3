@@ -197,7 +197,7 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
     if( hasArgs ) {
         m_outputFilename = KDiff3Shell::getParser()->value( "output" );
         
-	if( m_outputFilename.isEmpty() )
+	    if( m_outputFilename.isEmpty() )
             m_outputFilename = KDiff3Shell::getParser()->value( "out" );
 	
         if( ! m_outputFilename.isEmpty() )
@@ -218,43 +218,44 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
         else {
             m_bDefaultFilename = false;
 	}
-        g_bAutoSolve = !KDiff3Shell::getParser()->isSet( "qall" ); // Note that this is effective only once.
-	//TODO validate these options.
+    
+    g_bAutoSolve = !KDiff3Shell::getParser()->isSet( "qall" ); // Note that this is effective only once.
 	QStringList args = KDiff3Shell::getParser()->positionalArguments();
-        m_sd1.setFilename( KDiff3Shell::getParser()->value( "base" ) );
-        if( m_sd1.isEmpty() ) {
-            if( args.count() > 0 ) m_sd1.setFilename( args[0] ); // args->arg(0)
-            if( args.count() > 1 ) m_sd2.setFilename( args[1] );
-            if( args.count() > 2 ) m_sd3.setFilename( args[2] );
-        }
-        else {
-            if( args.count() > 0 ) m_sd2.setFilename( args[0] );
-            if( args.count() > 1 ) m_sd3.setFilename( args[1] );
-        }
-        //never properly defined and redundant
-        QStringList aliasList;//KDiff3Shell::getParser()->values( "fname" );
-        QStringList::Iterator ali = aliasList.begin();
+    
+    m_sd1.setFilename( KDiff3Shell::getParser()->value( "base" ) );
+    if( m_sd1.isEmpty() ) {
+        if( args.count() > 0 ) m_sd1.setFilename( args[0] ); // args->arg(0)
+        if( args.count() > 1 ) m_sd2.setFilename( args[1] );
+        if( args.count() > 2 ) m_sd3.setFilename( args[2] );
+    }
+    else {
+        if( args.count() > 0 ) m_sd2.setFilename( args[0] );
+        if( args.count() > 1 ) m_sd3.setFilename( args[1] );
+    }
+    //never properly defined and redundant
+    QStringList aliasList;//KDiff3Shell::getParser()->values( "fname" );
+    QStringList::Iterator ali = aliasList.begin();
 
-        QString an1 = KDiff3Shell::getParser()->value( "L1" );
-        if( !an1.isEmpty() )              {
-            m_sd1.setAliasName( an1 );
-        }
-        else if( ali != aliasList.end() ) {
-            m_sd1.setAliasName( *ali );
-            ++ali;
-        }
+    QString an1 = KDiff3Shell::getParser()->value( "L1" );
+    if( !an1.isEmpty() ) {
+        m_sd1.setAliasName( an1 );
+    }
+    else if( ali != aliasList.end() ) {
+        m_sd1.setAliasName( *ali );
+        ++ali;
+    }
 
-        QString an2 = KDiff3Shell::getParser()->value( "L2" );
-        if( !an2.isEmpty() )              {
-            m_sd2.setAliasName( an2 );
-        }
-        else if( ali != aliasList.end() ) {
-            m_sd2.setAliasName( *ali );
-            ++ali;
+    QString an2 = KDiff3Shell::getParser()->value( "L2" );
+    if( !an2.isEmpty() ) {
+          m_sd2.setAliasName( an2 );
+    }
+    else if( ali != aliasList.end() ) {
+       m_sd2.setAliasName( *ali );
+           ++ali;
         }
 
         QString an3 = KDiff3Shell::getParser()->value( "L3" );
-        if( !an3.isEmpty() )              {
+        if( !an3.isEmpty() ) {
             m_sd3.setAliasName( an3 );
         }
         else if( ali != aliasList.end() ) {
@@ -263,7 +264,7 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
         }
     }
     else {
-	m_bDefaultFilename = false;
+	    m_bDefaultFilename = false;
         g_bAutoSolve = false;
     }
     g_pProgressDialog->setStayHidden( m_bAutoMode );
