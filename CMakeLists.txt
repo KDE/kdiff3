@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
-cmake_policy(SET CMP0063 NEW)#repress unneeded CMake warning
+cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+
 project(kdiff3)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
