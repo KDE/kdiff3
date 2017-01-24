@@ -4,10 +4,12 @@ KDiff3-Readme
 Port to kf5/Qt5 by Michael Reeves (C) 2016
 KDiff3-Version: 0.10.0
 
-Now requires Qt 5.3 or later and KF5 5.5+. Legacy 0.9.94 and earlier builds are not supported.
+Now requires Qt 5.3 or later and KF5 5.5+. Legacy 0.9.98 and earlier builds are not supported.
 Windows/MacOSX build is untested since port. Builds and runs under kubuntu 16.04 will likely
-still work under other Linux/Un*x. konqueror specific plugin is not ported and no longer mantained.
-This plugin would only apply to KDE before 4.6 . Support as been removed from main CMakeLists.txt.
+still work under other Linux/Un*x. The Konqueror specific plugin is not ported and no longer mantained.
+This plugin would only apply to KDE before 4.6. Support as been removed from main CMakeLists.txt.
+As of 1/13/17 cmake 3.1+ is the targeted cmake version. cmake 2.8.12 and 3.0.x should work but will be
+given best effort support. 
 
 These are the original pre kf5/qt5 Readme fallows:
 
