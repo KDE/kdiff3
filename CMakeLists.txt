@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)#prior versions have no sane way of checking C++11 features and needed flags
 
 project(kdiff3)
 
+set(CMAKE_CXX_EXTENSIONS OFF ) #don't use non-standard extentions
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(ECM_MIN_VERSION "1.0.0")
 set(QT_MIN_VERSION "5.3.0")
@@ -27,6 +28,10 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
 SET(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::IconThemes)
 SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
 SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CLANG_WARNING_FLAGS}")
+set(needed_features
+    cxx_generalized_initializers
+    cxx_constexpr
+    cxx_auto_type)
 
 add_definitions(${QT_DEFINITIONS} ${KF5_DEFINITIONS})
 #remove unnneeded errors
