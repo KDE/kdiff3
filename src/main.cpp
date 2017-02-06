@@ -20,7 +20,6 @@
 #include <KAboutData>
 #include <KLocalizedString>
 #include "kdiff3_shell.h"
-#include <kstandarddirs.h>
 #include "version.h"
 #include <QTextCodec>
 #include <QFile>
