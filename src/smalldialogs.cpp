@@ -37,7 +37,6 @@
 #include <QFileDialog>
 
 #include <klocalizedstring.h>
-#include <kdebug.h>
 
 // OpenDialog **************************************************************
 

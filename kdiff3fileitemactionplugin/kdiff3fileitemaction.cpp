@@ -20,7 +20,6 @@
 
 #include "kdiff3fileitemaction.h"
 
-#include <kstandarddirs.h>
 #include <QAction>
 #include <QMenu>
 #include <QUrl>

@@ -52,7 +52,6 @@
 #include "smalldialogs.h"
 
 #ifndef KREPLACEMENTS_H
-#include <kglobalsettings.h>
 #include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
