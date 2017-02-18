@@ -63,9 +63,9 @@ OpenDialog::OpenDialog(
    m_pLineA->insertItems( 0, m_pOptions->m_recentAFiles );
    m_pLineA->setEditText( QUrl(n1).toDisplayString() );
    m_pLineA->setMinimumWidth( 200 );
-   QPushButton * button = new QPushButton( i18n("File..."), this );
+   QPushButton * button = new QPushButton(QIcon::fromTheme("document-new"), i18n("File..."), this);
    connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileA);
-   QPushButton * button2 = new QPushButton( i18n("Dir..."), this );
+   QPushButton * button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Dir..."), this);
    connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirA);
    connect(m_pLineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
@@ -74,15 +74,15 @@ OpenDialog::OpenDialog(
    h->addWidget( button,   0, 2 );
    h->addWidget( button2,  0, 3 );
 
-   label    = new QLabel( "B:", this );
+   label = new QLabel( "B:", this );
    m_pLineB  = new QComboBox();
    m_pLineB->setEditable(true);
    m_pLineB->insertItems( 0, m_pOptions->m_recentBFiles );
    m_pLineB->setEditText( QUrl(n2).toDisplayString() );
    m_pLineB->setMinimumWidth( 200 );
-   button   = new QPushButton( i18n("File..."), this );
+   button = new QPushButton(QIcon::fromTheme("document-new"), i18n("File..."), this );
    connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileB);
-   button2   = new QPushButton( i18n("Dir..."), this );
+   button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Dir..."), this);
    connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirB);
    connect(m_pLineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
@@ -97,9 +97,9 @@ OpenDialog::OpenDialog(
    m_pLineC->insertItems( 0, m_pOptions->m_recentCFiles );
    m_pLineC->setEditText( QUrl(n3).toDisplayString() );
    m_pLineC->setMinimumWidth( 200 );
-   button = new QPushButton( i18n("File..."), this );
+   button = new QPushButton(QIcon::fromTheme("document-new"), i18n("File..."), this);
    connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileC);
-   button2   = new QPushButton( i18n("Dir..."), this );
+   button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Dir..."), this);
    connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirC);
    connect(m_pLineC, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
@@ -140,9 +140,9 @@ OpenDialog::OpenDialog(
    m_pLineOut->insertItems( 0, m_pOptions->m_recentOutputFiles );
    m_pLineOut->setEditText( QUrl(outputName).toDisplayString() );
    m_pLineOut->setMinimumWidth( 200 );
-   button = new QPushButton( i18n("File..."), this );
+   button = new QPushButton(QIcon::fromTheme("document-new"), i18n("File..."), this);
    connect(button, &QPushButton::clicked, this, &OpenDialog::selectOutputName);
-   button2   = new QPushButton( i18n("Dir..."), this );
+   button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Dir..."), this);
    connect(button2, &QPushButton::clicked, this, &OpenDialog::selectOutputDir);
    connect(m_pMerge, &QCheckBox::stateChanged, this, &OpenDialog::internalSlot);
    connect(this, &OpenDialog::internalSignal, m_pLineOut, &QComboBox::setEnabled);
@@ -166,7 +166,7 @@ OpenDialog::OpenDialog(
    v->addLayout( l );
    l->setSpacing(5);
 
-   button = new QPushButton( i18n("Configure..."), this );
+   button = new QPushButton(QIcon::fromTheme("configure"), i18n("Configure..."), this);
    connect( button, SIGNAL(clicked()), pParent, slotConfigure );
    l->addWidget( button, 1 );
 
