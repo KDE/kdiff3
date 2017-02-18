@@ -891,7 +891,7 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
       {
          ++lines;
       }
-      if ( p[i]=='\0' )
+      if ( p[i].isNull() )
       {
          m_bIsText = false;
       }
