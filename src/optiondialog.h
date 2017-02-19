@@ -29,6 +29,9 @@
 
 #include "options.h"
 
+class QLabel;
+class QPlainTextEdit;
+
 class OptionItem;
 class OptionCheckBox;
 class OptionEncodingComboBox;
@@ -111,6 +114,7 @@ class FontChooser : public QGroupBox
    Q_OBJECT
    QFont m_font;
    QPushButton* m_pSelectFont;
+   QPlainTextEdit* m_pExampleTextEdit;
    QLabel* m_pLabel;
 public:
    FontChooser( QWidget* pParent );
