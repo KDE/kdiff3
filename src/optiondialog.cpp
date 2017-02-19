@@ -25,6 +25,7 @@
 #include <QLayout>
 #include <QLineEdit> 
 #include <QToolTip>
+#include <QPlainTextEdit>
 #include <QRadioButton>
 #include <QGroupBox>
 #include <QTextCodec>
@@ -192,20 +193,24 @@ typedef OptionT<QStringList> OptionStringList;
 FontChooser::FontChooser( QWidget* pParent )
 : QGroupBox(pParent)
 {
-   QVBoxLayout* pLayout = new QVBoxLayout( this );
-   m_pSelectFont = new QPushButton(i18n("Select Font"), this );
-   connect(m_pSelectFont, SIGNAL(clicked()), this, SLOT(slotSelectFont()));
-   pLayout->addWidget(m_pSelectFont);
+   QVBoxLayout* pLayout = new QVBoxLayout(this);
+   m_pLabel = new QLabel(QString(), this);
+   pLayout->addWidget(m_pLabel);
 
-   m_pLabel = new QLabel( "", this );
-   m_pLabel->setFont( m_font );
-   m_pLabel->setMinimumWidth(200);
    QChar visualTab(0x2192);
    QChar visualSpace((ushort)0xb7);
-   m_pLabel->setText( QString("The quick brown fox jumps over the river\n"
-                      "but the little red hen escapes with a shiver.\n"
-                      ":-)")+visualTab+visualSpace);
-   pLayout->addWidget(m_pLabel);
+   m_pExampleTextEdit = new QPlainTextEdit(QString("The quick brown fox jumps over the river\n"
+                                                   "but the little red hen escapes with a shiver.\n"
+                                                   ":-)")+visualTab+visualSpace, this);
+   m_pExampleTextEdit->setFont(m_font);
+   m_pExampleTextEdit->setReadOnly(true);
+   pLayout->addWidget(m_pExampleTextEdit);
+
+   m_pSelectFont = new QPushButton(i18n("Change Font"), this);
+   m_pSelectFont->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+   connect(m_pSelectFont, SIGNAL(clicked()), this, SLOT(slotSelectFont()));
+   pLayout->addWidget(m_pSelectFont);
+   pLayout->setAlignment(m_pSelectFont, Qt::AlignRight);
 }
 
 QFont FontChooser::font()
@@ -216,7 +221,9 @@ QFont FontChooser::font()
 void FontChooser::setFont( const QFont& font, bool )
 {
    m_font = font;
-   m_pLabel->setFont( m_font );
+   m_pExampleTextEdit->setFont( m_font );
+   m_pLabel->setText(i18n("Font: %1, %2, %3\n\nExample:", m_font.family(), m_font.styleName(), m_font.pointSize()));
+
    //update();
 }
 
@@ -224,7 +231,8 @@ void FontChooser::slotSelectFont()
 {
    bool bOk;
    m_font = QFontDialog::getFont(&bOk, m_font );
-   m_pLabel->setFont( m_font );
+   m_pExampleTextEdit->setFont( m_font );
+   m_pLabel->setText(i18n("Font: %1, %2, %3\n\nExample:", m_font.family(), m_font.styleName(), m_font.pointSize()));
 }
 
 
