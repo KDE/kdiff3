@@ -19,6 +19,7 @@
 #include <QApplication>
 #include <KAboutData>
 #include <KLocalizedString>
+#include <KCrash/KCrash>
 #include "kdiff3_shell.h"
 #include "version.h"
 #include <QTextCodec>
@@ -122,6 +123,8 @@ public:
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv); // KAboutData and QCommandLineParser depend on this being setup.
+
+    KCrash::initialize();
 #ifdef _WIN32
    /* KDiff3 can be used as replacement for the text-diff and merge tool provided by
       Clearcase. This is experimental and so far has only been tested under Windows.

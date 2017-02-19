@@ -43,6 +43,7 @@ find_package(
     COMPONENTS
     I18n
     CoreAddons
+    Crash
     IconThemes
 )
 find_package(KF5DocTools ${KF5_MIN_VERSION} REQUIRED )
@@ -50,7 +51,7 @@ find_package(KF5DocTools ${KF5_MIN_VERSION} REQUIRED )
 # I don't need warnings about wired things in comments.
 set(CLANG_WARNING_FLAGS -Wno-comment)
 
-set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::IconThemes)
+set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::Crash KF5::IconThemes )
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
 set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CLANG_WARNING_FLAGS}")
 
