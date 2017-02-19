@@ -98,10 +98,10 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
    
    // remember currently selected files (copy to a QStringList)
    QList<QUrl> itemList = fileItemInfos.urlList();
-   foreach ( const QUrl& item, itemList )
+   foreach(const QUrl& item, itemList)
    {
       //m_urlList.append( item.url() );
-      pThis->m_list.append( item.url() );
+      pThis->m_list.append( item );
    }
 
 
@@ -122,19 +122,20 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
    if(m_list.count() == 1)
    {
       int historyCount = s_pHistory ? s_pHistory->count() : 0;
-      s = i18n("Compare with %1", (historyCount>0 ? s_pHistory->front() : QString()) );
+
+      s = i18n("Compare with %1", (historyCount>0 ? s_pHistory->first() : QString()) );
       pAction = new QAction ( s,pThis );
       connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareWith);
       pAction->setEnabled( m_list.count()>0 && historyCount>0 );
       pActionMenu->addAction(pAction);
 
-      s = i18n("Merge with %1", historyCount>0 ? s_pHistory->front() : QString() );
+      s = i18n("Merge with %1", historyCount>0 ? s_pHistory->first() : QString() );
       pAction = new QAction( s, pThis);
       connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotMergeWith);
       pAction->setEnabled( m_list.count()>0 && historyCount>0 );
       pActionMenu->addAction (pAction);
 
-      s = i18n("Save '%1' for later", ( m_list.front() ) );
+      s = i18n("Save '%1' for later", ( m_list.first().toDisplayString(QUrl::PreferLocalFile) ) );
       pAction = new QAction ( s, pThis);
       connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotSaveForLater);
       pAction->setEnabled( m_list.count()>0 );
@@ -145,23 +146,23 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
       pAction->setEnabled( m_list.count()>0 && historyCount>=2 );
       pActionMenu->addAction (pAction);
 
-      if ( s_pHistory && !s_pHistory->empty() )
+      if (s_pHistory && !s_pHistory->empty())
       {
          QAction* pHistoryMenuAction = new QAction( i18n("Compare with ..."), pThis );
          QMenu* pHistoryMenu = new QMenu();
          pHistoryMenuAction->setMenu( pHistoryMenu );
          pHistoryMenu->setEnabled( m_list.count()>0 && historyCount>0 );
          pActionMenu->addAction(pHistoryMenuAction);
-         for (QStringList::iterator i = s_pHistory->begin(); i!=s_pHistory->end(); ++i)
-         {
-            pAction = new QAction( *i, pThis);
+         foreach (const QString &file, *s_pHistory) {
+            pAction = new QAction(file, pThis);
+            pAction->setData(file);
             connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareWithHistoryItem);
-            pHistoryMenu->addAction (pAction);
+            pHistoryMenu->addAction(pAction);
          }
 
-         pAction = new QAction (i18n("Clear list"), pThis);
+         pAction = new QAction(i18n("Clear list"), pThis);
          connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotClearList);
-         pActionMenu->addAction (pAction);
+         pActionMenu->addAction(pAction);
          pAction->setEnabled( historyCount>0 );
       }
    }
@@ -197,8 +198,8 @@ void KDiff3FileItemAction::slotCompareWith()
    if ( m_list.count() > 0 && s_pHistory && ! s_pHistory->empty() )
    {
       QStringList args;
-      args << s_pHistory->front();
-      args << m_list.front();
+      args << s_pHistory->first();
+      args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
       KProcess::startDetached("kdiff3", args);
    }
 }
@@ -206,22 +207,22 @@ void KDiff3FileItemAction::slotCompareWith()
 void KDiff3FileItemAction::slotCompareWithHistoryItem()
 {
    const QAction* pAction = dynamic_cast<const QAction*>( sender() );
-   if ( m_list.count() > 0 && pAction )
+   if (!m_list.isEmpty() && pAction)
    {
       QStringList args;
-      args << pAction->text();
-      args << m_list.front();
+      args << pAction->data().toString();
+      args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
       KProcess::startDetached ("kdiff3", args);
    }
 }
 
 void KDiff3FileItemAction::slotCompareTwoFiles()
 {
-   if ( m_list.count() == 2 )
+   if (m_list.count() == 2)
    {
       QStringList args;
-      args << m_list.front();
-      args << m_list.back();
+      args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
+      args << m_list.last().toDisplayString(QUrl::PreferLocalFile);
       KProcess::startDetached ("kdiff3", args);
    }
 }
@@ -231,9 +232,9 @@ void KDiff3FileItemAction::slotCompareThreeFiles()
    if ( m_list.count() == 3 )
    {
       QStringList args;
-      args << m_list[0];
-      args << m_list[1];
-      args << m_list[2];
+      args << m_list.at(0).toDisplayString(QUrl::PreferLocalFile);
+      args << m_list.at(1).toDisplayString(QUrl::PreferLocalFile);
+      args << m_list.at(2).toDisplayString(QUrl::PreferLocalFile);
       KProcess::startDetached ("kdiff3", args);
    }
 }
@@ -243,9 +244,9 @@ void KDiff3FileItemAction::slotMergeWith()
    if ( m_list.count() > 0 && s_pHistory && ! s_pHistory->empty() )
    {
       QStringList args;
-      args << s_pHistory->front();
-      args << m_list.front();
-      args << ( "-o" + m_list.front() );
+      args << s_pHistory->first();
+      args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
+      args << ( "-o" + m_list.first().toDisplayString(QUrl::PreferLocalFile) );
       KProcess::startDetached ("kdiff3", args);
    }
 }
@@ -255,28 +256,32 @@ void KDiff3FileItemAction::slotMergeThreeWay()
    if ( m_list.count() > 0 && s_pHistory &&  s_pHistory->count()>=2 )
    {
       QStringList args;
-      args << (*s_pHistory)[1];
-      args << (*s_pHistory)[0];
-      args << m_list.front();
-      args << ("-o" + m_list.front());
+      args << (*s_pHistory).at(1);
+      args << (*s_pHistory).at(0);
+      args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
+      args << ("-o" + m_list.first().toDisplayString(QUrl::PreferLocalFile));
       KProcess::startDetached ("kdiff3", args);
    }
 }
 
 void KDiff3FileItemAction::slotSaveForLater()
 {
-   if ( !m_list.isEmpty() && s_pHistory )
+   if (!m_list.isEmpty() && s_pHistory)
    {
-      while ( s_pHistory->count()>=10 )
-         s_pHistory->pop_back();
-      s_pHistory->push_front( m_list.front() );
+      while (s_pHistory->count()>=10) {
+         s_pHistory->removeLast();
+      }
+      const QString file = m_list.first().toDisplayString(QUrl::PreferLocalFile);
+      s_pHistory->removeAll(file);
+      s_pHistory->prepend(file);
    }
 }
 
 void KDiff3FileItemAction::slotClearList()
 {
-   if ( s_pHistory )
+   if (s_pHistory) {
       s_pHistory->clear();
+   }
 }
 
 void KDiff3FileItemAction::slotAbout()
@@ -287,7 +292,7 @@ void KDiff3FileItemAction::slotAbout()
              "For simple comparison of two selected files choose \"Compare\".\n"
              "If the other file is somewhere else \"Save\" the first file for later. "
              "It will appear in the \"Compare With ...\" submenu. "
-             "Then use \"Compare With\" on second file.\n"
+             "Then use \"Compare With\" on the second file.\n"
              "For a 3-way merge first \"Save\" the base file, then the branch to merge and "
              "choose \"3-way merge with base\" on the other branch which will be used as destination.\n"
              "Same also applies to directory comparison and merge.");
