@@ -48,7 +48,7 @@ private Q_SLOTS:
    void slotAbout();
 
 private:
-   QStringList m_list;
+   QList<QUrl> m_list;
    QWidget* m_pParentWidget;
    //KFileItemListProperties m_fileItemInfos;
 };
