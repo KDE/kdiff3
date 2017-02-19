@@ -2075,8 +2075,10 @@ void EncodingLabel::mousePressEvent(QMouseEvent *)
       QList<int> codecEnumList;
 
       // Adding "main" encodings
-      insertCodec( i18n("Unicode, 8 bit"),  QTextCodec::codecForName("UTF-8"), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
-      insertCodec( "", QTextCodec::codecForName("System"), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
+      insertCodec(i18n("Unicode, 8 bit"),  QTextCodec::codecForName("UTF-8"), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
+      if (QTextCodec::codecForName("System")) {
+         insertCodec(QString(), QTextCodec::codecForName("System"), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
+      }
 
       // Adding recent encodings
       if (m_pOptions!=0)
