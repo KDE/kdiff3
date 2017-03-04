@@ -58,12 +58,9 @@ void initialiseCmdLineArgs( ) {
             }
         }
     }
-
-#ifdef KREPLACEMENTS_H
-    QStringList sl = ignorableOptionsLine.split( '|' );
-#else
+    
     QStringList sl = ignorableOptionsLine.split( ',' );
-#endif
+
     if( !sl.isEmpty() ) {
         QStringList ignorableOptions = sl.front().split( ';' );
         for( QStringList::iterator i = ignorableOptions.begin(); i != ignorableOptions.end(); ++i ) {

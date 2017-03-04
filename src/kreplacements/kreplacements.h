@@ -301,7 +301,7 @@ public:
 
    template <class T>  T readEntry (const QString& s, const T& defaultVal ){ return d->readEntry(s,defaultVal); }
    QString     readEntry (const QString& s, const char* defaultVal ){ return d->readEntry(s,defaultVal); }
-   QStringList readEntry (const QString& s, const QStringList& defaultVal, char separator='|' ){ return d->readEntry(s,defaultVal,separator); }
+   QStringList readEntry (const QString& s, const QStringList& defaultVal, char separator=',' ){ return d->readEntry(s,defaultVal,separator); }
 };
 
 typedef KConfigGroup* KSharedConfigPtr;
