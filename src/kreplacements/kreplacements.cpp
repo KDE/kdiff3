@@ -1062,7 +1062,7 @@ KApplication::KApplication()
    }
    m_config.readConfigFile(configFileName);
 
-   QStringList ignorableCmdLineOptionsList = m_config.readEntry("IgnorableCmdLineOptions", QStringList("-u;-query;-html;-abort"), '|');
+   QStringList ignorableCmdLineOptionsList = m_config.readEntry("IgnorableCmdLineOptions", QStringList("-u;-query;-html;-abort"), ',');
    QString ignorableCmdLineOptions;
    if ( !ignorableCmdLineOptionsList.isEmpty() ) 
       ignorableCmdLineOptions = ignorableCmdLineOptionsList.front() + ";";
