@@ -772,13 +772,12 @@ void KDiff3App::slotFilePrint() {
     if( firstSelectionD3LIdx < 0 && m_pDiffTextWindow3 ) {
         m_pDiffTextWindow3->getSelectionRange( &firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords );
     }
-#ifdef KREPLACEMENTS_H  // Currently PrintSelection is not supported in KDEs print dialog.
+
     if( firstSelectionD3LIdx >= 0 ) {
         printDialog.addEnabledOption( QPrintDialog::PrintSelection );
         //printer.setOptionEnabled(QPrinter::PrintSelection,true);
         printDialog.setPrintRange( QAbstractPrintDialog::Selection );
     }
-#endif
 
     if( firstSelectionD3LIdx == -1 )
         printDialog.setPrintRange( QAbstractPrintDialog::AllPages );
@@ -842,7 +841,6 @@ void KDiff3App::slotFilePrint() {
         int line = -1;
         int selectionEndLine = -1;
 
-#ifdef KREPLACEMENTS_H
         if( printer.printRange() == QPrinter::AllPages ) {
             pageList.clear();
             for( int i = 0; i < totalNofPages; ++i ) {
@@ -857,9 +855,6 @@ void KDiff3App::slotFilePrint() {
         }
 
         if( printer.printRange() == QPrinter::Selection )
-#else
-        if( !pageList.empty() && pageList.front() == 9999 )
-#endif
         {
             bPrintSelection = true;
             if( firstSelectionD3LIdx >= 0 ) {
