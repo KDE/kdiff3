@@ -94,7 +94,7 @@ public:
    virtual void writeEntry(const QString&, const QPoint& );
    virtual void writeEntry(const QString&, int );
    virtual void writeEntry(const QString&, bool );
-   virtual void writeEntry(const QString&, const QStringList&, char separator='|' );
+   virtual void writeEntry(const QString&, const QStringList& );
    virtual void writeEntry(const QString&, const QString& );
    virtual void writeEntry(const QString&, const char* );
 
@@ -104,7 +104,7 @@ public:
    virtual QPoint      readPointEntry(const QString&, const QPoint* defaultVal );
    virtual bool        readBoolEntry (const QString&, bool bDefault );
    virtual int         readNumEntry  (const QString&, int iDefault );
-   virtual QStringList readListEntry (const QString&, const QStringList& defaultVal, char separator='|' );
+   virtual QStringList readListEntry (const QString&, const QStringList& defaultVal );
    virtual QString     readStringEntry(const QString&, const QString& );
 
    QString     readEntry (const QString& s, const QString& defaultVal );
@@ -115,10 +115,10 @@ public:
    QPoint      readEntry(const QString& s, const QPoint defaultVal );
    bool        readEntry (const QString& s, bool bDefault );
    int         readEntry  (const QString& s, int iDefault );
-   QStringList readEntry (const QString& s, const QStringList& defaultVal, char separator='|' );
+   QStringList readEntry (const QString& s, const QStringList& defaultVal);
 };
 
-QStringList safeStringSplit(const QString& s, char sepChar=',', char metaChar='\\' );
-QString safeStringJoin(const QStringList& sl, char sepChar=',', char metaChar='\\' );
+QStringList safeStringSplit(const QString& s, char sepChar=';', char metaChar='\\' );
+QString safeStringJoin(const QStringList& sl, char sepChar=';', char metaChar='\\' );
 
 #endif

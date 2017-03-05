@@ -209,8 +209,8 @@ void ValueMap::writeEntry( const QString& k, const char* v ) {
     m_map[k] = v;
 }
 
-void ValueMap::writeEntry( const QString& k, const QStringList& v, char separator ) {
-    m_map[k] = safeStringJoin( v, separator );
+void ValueMap::writeEntry( const QString& k, const QStringList& v ) {
+    m_map[k] = safeStringJoin( v );
 }
 
 
@@ -293,12 +293,12 @@ QString ValueMap::readStringEntry( const QString& k, const QString& sDefault ) {
     return sval;
 }
 
-QStringList ValueMap::readListEntry( const QString& k, const QStringList& defaultVal, char separator ) {
+QStringList ValueMap::readListEntry( const QString& k, const QStringList& defaultVal ) {
     QStringList strList;
 
     std::map<QString, QString>::iterator i = m_map.find( k );
     if( i != m_map.end() ) {
-        strList = safeStringSplit( i->second, separator );
+        strList = safeStringSplit( i->seconds );
         return strList;
     }
     else
@@ -329,6 +329,6 @@ bool        ValueMap::readEntry( const QString& s, bool bDefault ) {
 int         ValueMap::readEntry( const QString& s, int iDefault ) {
     return readNumEntry( s, iDefault );
 }
-QStringList ValueMap::readEntry( const QString& s, const QStringList& defaultVal, char separator ) {
-    return readListEntry( s, defaultVal, separator );
+QStringList ValueMap::readEntry( const QString& s, const QStringList& defaultVal ) {
+    return readListEntry( s, defaultVal );
 }
