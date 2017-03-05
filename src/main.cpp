@@ -58,7 +58,7 @@ void initialiseCmdLineArgs( ) {
             }
         }
     }
-    
+    //support our own old preferances this is obsolete
     QStringList sl = ignorableOptionsLine.split( ',' );
 
     if( !sl.isEmpty() ) {

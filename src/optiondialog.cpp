@@ -50,7 +50,7 @@
 #include "optiondialog.h"
 #include "diff.h"
 #include "smalldialogs.h"
-
+//FIXME: Verifiy which includes are needed only for kde and why.
 #ifndef KREPLACEMENTS_H
 #include <KConfigGroup>
 #include <QDialogButtonBox>
@@ -206,7 +206,7 @@ template <class T> void writeEntry( ValueMap* vm, const QString& saveName, const
     vm->writeEntry( saveName, v );
 }
 static void writeEntry( ValueMap* vm, const QString& saveName, const QStringList& v )   {
-    vm->writeEntry( saveName, v, '|' );
+    vm->writeEntry( saveName, v);
 }
 
 //static void readEntry(ValueMap* vm, const QString& saveName, bool& v )       {   v = vm->readBoolEntry( saveName, v ); }
@@ -298,10 +298,10 @@ class OptionLineEdit : public QComboBox, public OptionItemT<QString> {
             insertText();
         }
         void write( ValueMap* config ) {
-            config->writeEntry( m_saveName, m_list, '|' );
+            config->writeEntry( m_saveName, m_list );
         }
         void read( ValueMap* config ) {
-            m_list = config->readListEntry( m_saveName, QStringList( m_defaultVal ), '|' );
+            m_list = config->readListEntry( m_saveName, QStringList( m_defaultVal ) );
             if( !m_list.empty() ) *m_pVar = m_list.front();
             clear();
             insertItems( 0, m_list );
@@ -1863,21 +1863,13 @@ class ConfigValueMap : public ValueMap {
         QString     readStringEntry( const QString& s, const QString& defaultVal ) {
             return m_config.readEntry( s, defaultVal );
         }
-#ifdef KREPLACEMENTS_H
-        void writeEntry( const QString& s, const QStringList& v, char separator ) {
-            m_config.writeEntry( s, v, separator );
-        }
-        QStringList readListEntry( const QString& s, const QStringList& def, char separator )    {
-            return m_config.readEntry( s, def , separator );
-        }
-#else
-        void writeEntry( const QString& s, const QStringList& v, char /*separator*/ ) {
+        
+        void writeEntry( const QString& s, const QStringList& v ) {
             m_config.writeEntry( s, v );
         }
-        QStringList readListEntry( const QString& s, const QStringList& def, char /*separator*/ )    {
+        QStringList readListEntry( const QString& s, const QStringList& def)    {
             return m_config.readEntry( s, def );
         }
-#endif
 };
 
 
