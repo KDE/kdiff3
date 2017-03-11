@@ -298,7 +298,7 @@ QStringList ValueMap::readListEntry( const QString& k, const QStringList& defaul
 
     std::map<QString, QString>::iterator i = m_map.find( k );
     if( i != m_map.end() ) {
-        strList = safeStringSplit( i->seconds );
+        strList = safeStringSplit( i->second );
         return strList;
     }
     else

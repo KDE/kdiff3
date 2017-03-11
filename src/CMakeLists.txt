@@ -25,7 +25,7 @@ add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
 set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
 
-target_link_libraries(kdiff3part ${KDiff3_LIBRARIES} KF5::Parts ${QT_QT3SUPPORT_LIBRARY})
+target_link_libraries(kdiff3part ${KDiff3_LIBRARIES} KF5::Parts)
 
 install(TARGETS kdiff3part DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/parts )
 
@@ -40,7 +40,7 @@ set(kdiff3_SRCS
 
 add_executable(kdiff3 ${kdiff3_SRCS})
 
-target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::Parts ${QT_QT3SUPPORT_LIBRARY} ${KDiff3_LIBRARIES} )
+target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::Parts ${KDiff3_LIBRARIES} )
 
 install(TARGETS kdiff3 ${INSTALL_TARGETS_DEFAULT_ARGS})
 
