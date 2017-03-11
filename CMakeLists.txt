@@ -33,12 +33,11 @@ set(needed_features
     cxx_constexpr
     cxx_auto_type)
 
-add_definitions(${QT_DEFINITIONS} ${KF5_DEFINITIONS})
 #remove unnneeded errors
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_KEYWORDS)
 
 include_directories( 
-    ${QT_INCLUDES} ${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIRS}
+    ${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIRS}
     ${Qt5PrintSupport_INCLUDE_DIRS}
     ${CMAKE_CURRENT_BINARY_DIR}
     )
