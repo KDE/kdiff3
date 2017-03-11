@@ -9,8 +9,8 @@ add_library(kdiff3plugin MODULE ${kdiff3plugin_SRCS})
 
 target_link_libraries(kdiff3plugin KF5::KDELibs4Support KF5::Parts konq )
 
-install(TARGETS kdiff3plugin DESTINATION ${PLUGIN_INSTALL_DIR} )
+install(TARGETS kdiff3plugin DESTINATION ${KDE_INSTALL_PLUGINDIR} )
 
 ########## install files ###############
 
-install( FILES kdiff3_plugin.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES kdiff3_plugin.desktop DESTINATION ${KDE_INSTALL_PLUGINDIR} )

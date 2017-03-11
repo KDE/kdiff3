@@ -27,7 +27,7 @@ set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
 
 target_link_libraries(kdiff3part ${KDiff3_LIBRARIES} KF5::Parts)
 
-install(TARGETS kdiff3part DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/parts )
+install(TARGETS kdiff3part DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts )
 
 ########### kdiff3 executable ###############
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts WidgetsAddons Config)
@@ -47,7 +47,7 @@ install(TARGETS kdiff3 ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
-install( FILES  kdiff3part.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES  kdiff3part.desktop DESTINATION ${KDE_INSTALL_PLUGINDIR} )
 install( FILES  kdiff3_part.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/kdiff3part )
 install( FILES  kdiff3_shell.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/kdiff3 )
 install( PROGRAMS  kdiff3.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
