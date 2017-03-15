@@ -89,7 +89,7 @@ static bool isOptionUsed( const QString& s, int argc, char* argv[] ) {
 }
 #endif
 
-#ifdef KREPLACEMENTS_H
+ifdef KREPLACEMENTS_H && !defined(QT_NO_TRANSLATION)
 class ContextFreeTranslator : public QTranslator
 {
 public:
@@ -229,7 +229,7 @@ int main( int argc, char *argv[] ) {
     app.setOrganizationDomain(aboutData.organizationDomain());
     app.setApplicationVersion(aboutData.version());
     
-#ifdef KREPLACEMENTS_H
+#ifdef KREPLACEMENTS_H && !defined(QT_NO_TRANSLATION)
     QString locale;
 
     locale = app.config()->readEntry( "Language", "Auto" );
