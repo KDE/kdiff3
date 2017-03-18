@@ -89,7 +89,7 @@ static bool isOptionUsed( const QString& s, int argc, char* argv[] ) {
 }
 #endif
 
-ifdef KREPLACEMENTS_H && !defined(QT_NO_TRANSLATION)
+#if defined(KREPLACEMENTS_H) && !defined(QT_NO_TRANSLATION)
 class ContextFreeTranslator : public QTranslator
 {
 public:
@@ -229,7 +229,7 @@ int main( int argc, char *argv[] ) {
     app.setOrganizationDomain(aboutData.organizationDomain());
     app.setApplicationVersion(aboutData.version());
     
-#ifdef KREPLACEMENTS_H && !defined(QT_NO_TRANSLATION)
+#if defined(KREPLACEMENTS_H) && !defined(QT_NO_TRANSLATION)
     QString locale;
 
     locale = app.config()->readEntry( "Language", "Auto" );
@@ -238,14 +238,11 @@ int main( int argc, char *argv[] ) {
     ContextFreeTranslator kdiff3Translator( 0 );
     QTranslator qtTranslator( 0 );
     if( locale != "en_orig" ) {
-        if( locale == "Auto" || locale.isEmpty() )
-            locale = locale = QLocale::system().name().left( 2 );
-
         QString translationDir = getTranslationDir( locale );
-        kdiff3Translator.load( QString( "kdiff3_" ) + locale, translationDir );
+        kdiff3Translator.load(QLocale::system(), QString( "kdiff3_" ), translationDir );
         app.installTranslator( &kdiff3Translator );
-
-        qtTranslator.load( QString( "qt_" ) + locale, translationDir );
+	
+        qtTranslator.load(QLocale::system(), QString( "qt_" ), translationDir );
         app.installTranslator( &qtTranslator );
     }
 #endif
