@@ -2234,9 +2234,9 @@ class MfiLessThan {
                 return bDir1;
         }
 };
-
+//FIXME:Don't sort twice to get reverse order. Really?!
 static void sortHelper( MergeFileInfos* pMFI, int sortColumn, Qt::SortOrder order ) {
-    qSort( pMFI->m_children.begin(), pMFI->m_children.end(), MfiLessThan( sortColumn ) );
+    std::sort( pMFI->m_children.begin(), pMFI->m_children.end(), MfiLessThan( sortColumn ) );
 
     if( order == Qt::DescendingOrder )
         std::reverse( pMFI->m_children.begin(), pMFI->m_children.end() );

@@ -1494,13 +1494,13 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine( int l
 
     if( m_pOptions->m_bShowWhiteSpaceCharacters ) {
         // This additional format is only necessary for the tab arrow
-        QList<QTextLayout::FormatRange> formats;
+        QVector<QTextLayout::FormatRange> formats;
         QTextLayout::FormatRange formatRange;
         formatRange.start = 0;
         formatRange.length = str.length();
         formatRange.format.setFont( font() );
         formats.append( formatRange );
-        textLayout.setAdditionalFormats( formats );
+        textLayout.setFormats( formats );
     }
     QVector<QTextLayout::FormatRange> selectionFormat;
     textLayout.beginLayout();

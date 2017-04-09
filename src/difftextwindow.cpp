@@ -748,13 +748,13 @@ void DiffTextWindowData::prepareTextLayout( QTextLayout& textLayout, bool bFirst
 
     if( m_pOptions->m_bShowWhiteSpaceCharacters ) {
         // This additional format is only necessary for the tab arrow
-        QList<QTextLayout::FormatRange> formats;
+        QVector<QTextLayout::FormatRange> formats;
         QTextLayout::FormatRange formatRange;
         formatRange.start = 0;
         formatRange.length = textLayout.text().length();
         formatRange.format.setFont( m_pDiffTextWindow->font() );
         formats.append( formatRange );
-        textLayout.setAdditionalFormats( formats );
+        textLayout.setFormats( formats );
     }
     textLayout.beginLayout();
 

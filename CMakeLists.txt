@@ -5,7 +5,7 @@ project(kdiff3)
 set(CMAKE_CXX_EXTENSIONS OFF ) #don't use non-standard extentions
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(ECM_MIN_VERSION "1.0.0")
-set(QT_MIN_VERSION "5.3.0")
+set(QT_MIN_VERSION "5.6.0")
 set(KF5_MIN_VERSION "5.5.0")
 
 find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED)
@@ -32,7 +32,8 @@ set(needed_features
     cxx_generalized_initializers
     cxx_constexpr
     cxx_auto_type)
-
+#make sure we get warnings about using deprecated functions in qt.
+add_definitions(-DQT_DEPRECATED_WARNINGS)
 #remove unnneeded errors
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_KEYWORDS)
 
