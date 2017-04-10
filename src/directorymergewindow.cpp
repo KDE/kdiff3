@@ -2213,41 +2213,40 @@ void DirectoryMergeWindow::Data::selectItemAndColumn( const QModelIndex& mi, boo
 //   setSizeHint( s_CCol, QSize(17,17) ); // Iconsize
 //}
 
-class MfiLessThan {
-        int m_sortColumn;
+class MfiCompare {
+	Qt::SortOrder	mOrder;
+	
     public:
-        MfiLessThan( int sortColumn )
-            : m_sortColumn( sortColumn ) {
+        MfiCompare(Qt::SortOrder order ) {
+		mOrder = order;
         }
         bool operator()( MergeFileInfos* pMFI1, MergeFileInfos* pMFI2 ) {
             bool bDir1 =  pMFI1->dirA() || pMFI1->dirB() || pMFI1->dirC();
             bool bDir2 =  pMFI2->dirA() || pMFI2->dirB() || pMFI2->dirC();
             if( bDir1 == bDir2 ) {
-                //if(col==s_UnsolvedCol || col==s_SolvedCol || col==s_NonWhiteCol || col==s_WhiteCol)
-                //   return text(col).toInt() > i.text(col).toInt();
-                //if ( s_sortColumn == s_NameCol )
-                return pMFI1->fileName().compare( pMFI2->fileName(), Qt::CaseInsensitive ) < 0;
-                //else
-                //   return QTreeWidgetItem::operator<(i);
+		if( mOrder == Qt::AscendingOrder){
+		    return pMFI1->fileName().compare( pMFI2->fileName(), Qt::CaseInsensitive ) < 0;
+		}
+		else{
+		    return pMFI1->fileName().compare( pMFI2->fileName(), Qt::CaseInsensitive ) > 0;
+		}
             }
             else
                 return bDir1;
         }
 };
-//FIXME:Don't sort twice to get reverse order. Really?!
-static void sortHelper( MergeFileInfos* pMFI, int sortColumn, Qt::SortOrder order ) {
-    std::sort( pMFI->m_children.begin(), pMFI->m_children.end(), MfiLessThan( sortColumn ) );
 
-    if( order == Qt::DescendingOrder )
-        std::reverse( pMFI->m_children.begin(), pMFI->m_children.end() );
+static void sortHelper( MergeFileInfos* pMFI, Qt::SortOrder order ) {
+    std::sort( pMFI->m_children.begin(), pMFI->m_children.end(), MfiCompare( order ) );
 
     for( int i = 0; i < pMFI->m_children.count(); ++i )
-        sortHelper( pMFI->m_children[i], sortColumn, order );
+        sortHelper( pMFI->m_children[i], order );
 }
 
 void DirectoryMergeWindow::Data::sort( int column, Qt::SortOrder order ) {
+#pragma unused (column)
     beginResetModel();
-    sortHelper( m_pRoot, column, order );
+    sortHelper( m_pRoot, order );
     endResetModel();
 }
 
