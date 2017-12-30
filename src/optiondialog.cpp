@@ -603,7 +603,7 @@ void OptionDialog::buttonClicked( QAbstractButton *button ) {
 }
 
 void OptionDialog::helpRequested() {
-    KHelpClient::invokeHelp( QStringLiteral( "kdiff3/index.html" ), QString::null );
+    KHelpClient::invokeHelp( QStringLiteral( "kdiff3/index.html" ), QString());
 }
 
 OptionDialog::~OptionDialog( void ) {
