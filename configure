@@ -62,7 +62,7 @@ elif [ "$1" = "qt4" ]; then
    echo Creating and entering subdir "$outputDir"
    mkdir "$outputDir"                                  # create sub directory
    cd "$outputDir"
-   qmakecmd="qmake CONFIG+=$config \"$currentDir/src-QT4/kdiff3.pro\""
+   qmakecmd="qmake CONFIG+=$config \"$currentDir/src/kdiff3.pro\""
    echo "Running $qmakecmd"
    $qmakecmd
    echo "Running make"
