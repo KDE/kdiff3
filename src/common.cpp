@@ -27,43 +27,51 @@
 #include <QStringList>
 #include <QTextStream>
 
-ValueMap::ValueMap() {
+ValueMap::ValueMap()
+{
 }
 
-ValueMap::~ValueMap() {
+ValueMap::~ValueMap()
+{
 }
 
-void ValueMap::save( QTextStream& ts ) {
-    std::map<QString, QString>::iterator i;
-    for( i = m_map.begin(); i != m_map.end(); ++i ) {
-        QString key = i->first;
-        QString val = i->second;
-        ts << key << "=" << val << "\n";
-    }
+void ValueMap::save( QTextStream& ts )
+{
+   std::map<QString,QString>::iterator i;
+   for( i=m_map.begin(); i!=m_map.end(); ++i)
+   {
+      QString key = i->first;
+      QString val = i->second;
+      ts << key << "=" << val << "\n";
+   }
 }
 
-QString ValueMap::getAsString() {
-    QString result;
-    std::map<QString, QString>::iterator i;
-    for( i = m_map.begin(); i != m_map.end(); ++i ) {
-        QString key = i->first;
-        QString val = i->second;
-        result += key + "=" + val + "\n";
-    }
-    return result;
+QString ValueMap::getAsString()
+{
+   QString result;
+   std::map<QString,QString>::iterator i;
+   for( i=m_map.begin(); i!=m_map.end(); ++i)
+   {
+      QString key = i->first;
+      QString val = i->second;
+      result += key + "=" + val + "\n";
+   }
+   return result;
 }
 
-void ValueMap::load( QTextStream& ts ) {
-    while( !ts.atEnd() ) {
-        // until end of file...
-        QString s = ts.readLine();         // line of text excluding '\n'
-        int pos = s.indexOf( '=' );
-        if( pos > 0 ) {                   // seems not to have a tag
-            QString key = s.left( pos );
-            QString val = s.mid( pos + 1 );
-            m_map[key] = val;
-        }
-    }
+void ValueMap::load( QTextStream& ts )
+{
+   while ( !ts.atEnd() )
+   {                                 // until end of file...
+      QString s = ts.readLine();         // line of text excluding '\n'
+      int pos = s.indexOf('=');
+      if( pos > 0 )                     // seems not to have a tag
+      {
+         QString key = s.left(pos);
+         QString val = s.mid(pos+1);
+         m_map[key] = val;
+      }
+   }
 }
 /*
 void ValueMap::load( const QString& s )
@@ -88,212 +96,238 @@ void ValueMap::load( const QString& s )
 
 // safeStringJoin and safeStringSplit allow to convert a stringlist into a string and back
 // safely, even if the individual strings in the list contain the separator character.
-QString safeStringJoin( const QStringList& sl, char sepChar, char metaChar ) {
-    // Join the strings in the list, using the separator ','
-    // If a string contains the separator character, it will be replaced with "\,".
-    // Any occurances of "\" (one backslash) will be replaced with "\\" (2 backslashes)
-
-    assert( sepChar != metaChar );
-
-    QString sep;
-    sep += sepChar;
-    QString meta;
-    meta += metaChar;
-
-    QString safeString;
-
-    QStringList::const_iterator i;
-    for( i = sl.begin(); i != sl.end(); ++i ) {
-        QString s = *i;
-        s.replace( meta, meta + meta ); //  "\" -> "\\"
-        s.replace( sep, meta + sep ); //  "," -> "\,"
-        if( i == sl.begin() )
-            safeString = s;
-        else
-            safeString += sep + s;
-    }
-    return safeString;
+QString safeStringJoin(const QStringList& sl, char sepChar, char metaChar )
+{
+   // Join the strings in the list, using the separator ','
+   // If a string contains the separator character, it will be replaced with "\,".
+   // Any occurances of "\" (one backslash) will be replaced with "\\" (2 backslashes)
+   
+   assert(sepChar!=metaChar);
+   
+   QString sep;
+   sep += sepChar;
+   QString meta;
+   meta += metaChar;   
+   
+   QString safeString;
+   
+   QStringList::const_iterator i;
+   for (i=sl.begin(); i!=sl.end(); ++i)
+   {
+      QString s = *i;
+      s.replace(meta, meta+meta);   //  "\" -> "\\"
+      s.replace(sep, meta+sep);     //  "," -> "\,"
+      if ( i==sl.begin() )
+         safeString = s;
+      else
+         safeString += sep + s;
+   }
+   return safeString;
 }
 
 // Split a string that was joined with safeStringJoin
-QStringList safeStringSplit( const QString& s, char sepChar, char metaChar ) {
-    assert( sepChar != metaChar );
-    QStringList sl;
-    // Miniparser
-    int i = 0;
-    int len = s.length();
-    QString b;
-    for( i = 0; i < len; ++i ) {
-        if( i + 1 < len && s[i] == metaChar && s[i + 1] == metaChar ) {
-            b += metaChar;
-            ++i;
-        }
-        else if( i + 1 < len && s[i] == metaChar && s[i + 1] == sepChar ) {
-            b += sepChar;
-            ++i;
-        }
-        else if( s[i] == sepChar ) { // real separator
-            sl.push_back( b );
-            b = "";
-        }
-        else {
-            b += s[i];
-        }
-    }
-    if( !b.isEmpty() )
-        sl.push_back( b );
+QStringList safeStringSplit(const QString& s, char sepChar, char metaChar )
+{
+   assert(sepChar!=metaChar);
+   QStringList sl;
+   // Miniparser
+   int i=0;
+   int len=s.length();
+   QString b;
+   for(i=0;i<len;++i)
+   {
+      if      ( i+1<len && s[i]==metaChar && s[i+1]==metaChar ){ b+=metaChar; ++i; }
+      else if ( i+1<len && s[i]==metaChar && s[i+1]==sepChar ){ b+=sepChar; ++i; }
+      else if ( s[i]==sepChar )  // real separator
+      {
+         sl.push_back(b);
+         b="";
+      }
+      else { b+=s[i]; }
+   }
+   if ( !b.isEmpty() )
+      sl.push_back(b);
 
-    return sl;
+   return sl;
 }
 
 
 
-static QString numStr( int n ) {
-    QString s;
-    s.setNum( n );
-    return s;
+static QString numStr(int n)
+{
+   QString s;
+   s.setNum( n );
+   return s;
 }
 
-static QString subSection( const QString& s, int idx, char sep ) {
-    int pos = 0;
-    while( idx > 0 ) {
-        pos = s.indexOf( sep, pos );
-        --idx;
-        if( pos < 0 ) break;
-        ++pos;
-    }
-    if( pos >= 0 ) {
-        int pos2 = s.indexOf( sep, pos );
-        if( pos2 > 0 )
-            return s.mid( pos, pos2 - pos );
-        else
-            return s.mid( pos );
-    }
+static QString subSection( const QString& s, int idx, char sep )
+{
+   int pos=0;
+   while( idx>0 )
+   {
+      pos = s.indexOf( sep, pos );
+      --idx;
+      if (pos<0) break;
+      ++pos;
+   }
+   if ( pos>=0 )
+   {
+      int pos2 = s.indexOf( sep, pos );
+      if ( pos2>0 )
+         return s.mid(pos, pos2-pos);
+      else
+         return s.mid(pos);
+   }
 
-    return "";
+   return "";
 }
 
-static int num( QString& s, int idx ) {
-    return subSection( s, idx, ',' ).toInt();
+static int num( QString& s, int idx )
+{
+   return subSection( s, idx, ',').toInt();
 }
 
-void ValueMap::writeEntry( const QString& k, const QFont& v ) {
-    m_map[k] = v.family() + "," + QString::number( v.pointSize() ) + "," + ( v.bold() ? "bold" : "normal" );
+void ValueMap::writeEntry(const QString& k, const QFont& v )
+{
+   m_map[k] = v.family() + "," + QString::number(v.pointSize()) + "," + (v.bold() ? "bold" : "normal");
 }
 
-void ValueMap::writeEntry( const QString& k, const QColor& v ) {
-    m_map[k] = numStr( v.red() ) + "," + numStr( v.green() ) + "," + numStr( v.blue() );
+void ValueMap::writeEntry(const QString& k, const QColor& v )
+{
+   m_map[k] = numStr(v.red()) + "," + numStr(v.green()) + "," + numStr(v.blue());
 }
 
-void ValueMap::writeEntry( const QString& k, const QSize& v ) {
-    m_map[k] = numStr( v.width() ) + "," + numStr( v.height() );
+void ValueMap::writeEntry(const QString& k, const QSize& v )
+{
+   m_map[k] = numStr(v.width()) + "," + numStr(v.height());
 }
 
-void ValueMap::writeEntry( const QString& k, const QPoint& v ) {
-    m_map[k] = numStr( v.x() ) + "," + numStr( v.y() );
+void ValueMap::writeEntry(const QString& k, const QPoint& v )
+{
+   m_map[k] = numStr(v.x()) + "," + numStr(v.y());
 }
 
-void ValueMap::writeEntry( const QString& k, int v ) {
-    m_map[k] = numStr( v );
+void ValueMap::writeEntry(const QString& k, int v )
+{
+   m_map[k] = numStr(v);
 }
 
-void ValueMap::writeEntry( const QString& k, bool v ) {
-    m_map[k] = numStr( v );
+void ValueMap::writeEntry(const QString& k, bool v )
+{
+   m_map[k] = numStr(v);
 }
 
-void ValueMap::writeEntry( const QString& k, const QString& v ) {
-    m_map[k] = v;
+void ValueMap::writeEntry(const QString& k, const QString& v )
+{
+   m_map[k] = v;
 }
 
-void ValueMap::writeEntry( const QString& k, const char* v ) {
-    m_map[k] = v;
+void ValueMap::writeEntry(const QString& k, const char* v )
+{
+   m_map[k] = v;
 }
 
-void ValueMap::writeEntry( const QString& k, const QStringList& v ) {
-    m_map[k] = safeStringJoin( v );
+void ValueMap::writeEntry(const QString& k, const QStringList& v )
+{
+    m_map[k] = safeStringJoin(v);
 }
 
 
-QFont ValueMap::readFontEntry( const QString& k, const QFont* defaultVal ) {
-    QFont f = *defaultVal;
-    std::map<QString, QString>::iterator i = m_map.find( k );
-    if( i != m_map.end() ) {
-        f.setFamily( subSection( i->second, 0, ',' ) );
-        f.setPointSize( subSection( i->second, 1, ',' ).toInt() );
-        f.setBold( subSection( i->second, 2, ',' ) == "bold" );
-        //f.fromString(i->second);
-    }
+QFont ValueMap::readFontEntry(const QString& k, const QFont* defaultVal )
+{
+   QFont f = *defaultVal;
+   std::map<QString,QString>::iterator i = m_map.find( k );
+   if ( i!=m_map.end() )
+   {
+      f.setFamily( subSection( i->second, 0, ',' ) );
+      f.setPointSize( subSection( i->second, 1, ',' ).toInt() );
+      f.setBold( subSection( i->second, 2, ',' )=="bold" );
+      //f.fromString(i->second);
+   }
 
-    return f;
+   return f;
 }
 
-QColor ValueMap::readColorEntry( const QString& k, const QColor* defaultVal ) {
-    QColor c = *defaultVal;
-    std::map<QString, QString>::iterator i = m_map.find( k );
-    if( i != m_map.end() ) {
-        QString s = i->second;
-        c = QColor( num( s, 0 ), num( s, 1 ), num( s, 2 ) );
-    }
+QColor ValueMap::readColorEntry(const QString& k, const QColor* defaultVal )
+{
+   QColor c= *defaultVal;
+   std::map<QString,QString>::iterator i = m_map.find( k );
+   if ( i!=m_map.end() )
+   {
+      QString s = i->second;
+      c = QColor( num(s,0),num(s,1),num(s,2) );
+   }
 
-    return c;
+   return c;
 }
 
-QSize ValueMap::readSizeEntry( const QString& k, const QSize* defaultVal ) {
-    QSize size = defaultVal ? *defaultVal : QSize( 600, 400 );
-    std::map<QString, QString>::iterator i = m_map.find( k );
-    if( i != m_map.end() ) {
+QSize ValueMap::readSizeEntry(const QString& k, const QSize* defaultVal )
+{
+   QSize size = defaultVal ? *defaultVal : QSize(600,400);
+   std::map<QString,QString>::iterator i = m_map.find( k );
+   if ( i!=m_map.end() )
+   {
 
-        QString s = i->second;
-        size = QSize( num( s, 0 ), num( s, 1 ) );
-    }
+      QString s = i->second;
+      size = QSize( num(s,0),num(s,1) );
+   }
 
-    return size;
+   return size;
 }
 
-QPoint ValueMap::readPointEntry( const QString& k, const QPoint* defaultVal ) {
-    QPoint point = defaultVal ? *defaultVal : QPoint( 0, 0 );
-    std::map<QString, QString>::iterator i = m_map.find( k );
-    if( i != m_map.end() ) {
-        QString s = i->second;
-        point = QPoint( num( s, 0 ), num( s, 1 ) );
-    }
+QPoint ValueMap::readPointEntry(const QString& k, const QPoint* defaultVal)
+{
+   QPoint point = defaultVal ? *defaultVal : QPoint(0,0);
+   std::map<QString,QString>::iterator i = m_map.find( k );
+   if ( i!=m_map.end() )
+   {
+      QString s = i->second;
+      point = QPoint( num(s,0),num(s,1) );
+   }
 
-    return point;
+   return point;
 }
 
-bool ValueMap::readBoolEntry( const QString& k, bool bDefault ) {
-    bool b = bDefault;
-    std::map<QString, QString>::iterator i = m_map.find( k );
-    if( i != m_map.end() ) {
-        QString s = i->second;
-        b = ( bool )num( s, 0 );
-    }
+bool ValueMap::readBoolEntry(const QString& k, bool bDefault )
+{
+   bool b = bDefault;
+   std::map<QString,QString>::iterator i = m_map.find( k );
+   if ( i!=m_map.end() )
+   {
+      QString s = i->second;
+      b = (bool)num(s,0);
+   }
 
-    return b;
+   return b;
 }
 
-int ValueMap::readNumEntry( const QString& k, int iDefault ) {
-    int ival = iDefault;
-    std::map<QString, QString>::iterator i = m_map.find( k );
-    if( i != m_map.end() ) {
-        QString s = i->second;
-        ival = num( s, 0 );
-    }
+int ValueMap::readNumEntry(const QString& k, int iDefault )
+{
+   int ival = iDefault;
+   std::map<QString,QString>::iterator i = m_map.find( k );
+   if ( i!=m_map.end() )
+   {
+      QString s = i->second;
+      ival = num(s,0);
+   }
 
-    return ival;
+   return ival;
 }
 
-QString ValueMap::readStringEntry( const QString& k, const QString& sDefault ) {
-    QString sval = sDefault;
-    std::map<QString, QString>::iterator i = m_map.find( k );
-    if( i != m_map.end() ) {
-        sval = i->second;
-    }
+QString ValueMap::readStringEntry(const QString& k, const QString& sDefault )
+{
+   QString sval = sDefault;
+   std::map<QString,QString>::iterator i = m_map.find( k );
+   if ( i!=m_map.end() )
+   {
+      sval = i->second;
+   }
 
-    return sval;
+   return sval;
 }
 
-QStringList ValueMap::readListEntry( const QString& k, const QStringList& defaultVal ) {
+QStringList ValueMap::readListEntry(const QString& k, const QStringList& defaultVal)
+{
     QStringList strList;
 
     std::map<QString, QString>::iterator i = m_map.find( k );
