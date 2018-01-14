@@ -43,7 +43,7 @@ echo "Get files: $getFiles"
 
 export LANG=en_US.UTF-8
 # extract extra strings
-xgettext --keyword=i18n --keyword=I18N_NOOP -C ../src-QT4/kreplacements/kreplacements.cpp -o kreplacements.pot
+xgettext --keyword=i18n --keyword=I18N_NOOP -C ../src/kreplacements/kreplacements.cpp -o kreplacements.pot
 sed -i /add_subdirectory/d CMakeLists.txt
 if [ $getFiles -eq 1 ]; then
    wget http://websvn.kde.org/*checkout*/trunk/l10n-kde4/subdirs -O subdirs

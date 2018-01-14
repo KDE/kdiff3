@@ -22,7 +22,7 @@
 #include <QComboBox>
 #include <QLabel>
 #include <QLayout>
-#include <QLineEdit>
+#include <QLineEdit> 
 #include <QToolTip>
 #include <QRadioButton>
 #include <QGroupBox>
@@ -64,142 +64,114 @@ static QString s_historyEntryStartSortKeyOrderToolTip;
 static QString s_autoMergeRegExpToolTip;
 static QString s_historyStartRegExpToolTip;
 
-void OptionDialog::addOptionItem( OptionItem* p ) {
-    m_optionItemList.push_back( p );
+void OptionDialog::addOptionItem(OptionItem* p)
+{
+   m_optionItemList.push_back(p);
 }
 
-class OptionItem {
-    public:
-        OptionItem( OptionDialog* pOptionDialog, const QString& saveName ) {
-            assert( pOptionDialog != 0 );
-            pOptionDialog->addOptionItem( this );
-            m_saveName = saveName;
-            m_bPreserved = false;
-        }
-        virtual ~OptionItem() {}
-        virtual void setToDefault() = 0;
-        virtual void setToCurrent() = 0;
-        virtual void apply() = 0;
-        virtual void write( ValueMap* ) = 0;
-        virtual void read( ValueMap* ) = 0;
-        void doPreserve() {
-            if( !m_bPreserved ) {
-                m_bPreserved = true;
-                preserve();
-            }
-        }
-        void doUnpreserve() {
-            if( m_bPreserved ) {
-                unpreserve();
-            }
-        }
-        QString getSaveName() {
-            return m_saveName;
-        }
-    protected:
-        virtual void preserve() = 0;
-        virtual void unpreserve() = 0;
-        bool m_bPreserved;
-        QString m_saveName;
+class OptionItem
+{
+public:
+   OptionItem( OptionDialog* pOptionDialog, const QString& saveName )
+   {
+      assert(pOptionDialog!=0);
+      pOptionDialog->addOptionItem( this );
+      m_saveName = saveName;
+      m_bPreserved = false;
+   }
+   virtual ~OptionItem(){}
+   virtual void setToDefault()=0;
+   virtual void setToCurrent()=0;
+   virtual void apply()=0;
+   virtual void write(ValueMap*)=0;
+   virtual void read(ValueMap*)=0;
+   void doPreserve(){ if (!m_bPreserved){ m_bPreserved=true; preserve(); } }
+   void doUnpreserve(){ if( m_bPreserved ){ unpreserve(); } }
+   QString getSaveName(){return m_saveName;}
+protected:
+   virtual void preserve()=0;
+   virtual void unpreserve()=0;
+   bool m_bPreserved;
+   QString m_saveName;
 };
 
 template <class T>
-class OptionItemT : public OptionItem {
-    public:
-        OptionItemT( OptionDialog* pOptionDialog, const QString& saveName )
-            : OptionItem( pOptionDialog, saveName )
-        {}
-
-    protected:
-        virtual void preserve() {
-            m_preservedVal = *m_pVar;
-        }
-        virtual void unpreserve() {
-            *m_pVar = m_preservedVal;
-        }
-        T* m_pVar;
-        T m_preservedVal;
-        T m_defaultVal;
+class OptionItemT : public OptionItem
+{
+public:
+  OptionItemT( OptionDialog* pOptionDialog, const QString& saveName ) 
+  : OptionItem(pOptionDialog,saveName ) 
+  {}
+  
+protected:
+   virtual void preserve(){ m_preservedVal = *m_pVar; }
+   virtual void unpreserve(){ *m_pVar = m_preservedVal; }
+   T* m_pVar;
+   T m_preservedVal;
+   T m_defaultVal;
 };
 
-class OptionCheckBox : public QCheckBox, public OptionItemT<bool> {
-    public:
-        OptionCheckBox( QString text, bool bDefaultVal, const QString& saveName, bool* pbVar,
-                        QWidget* pParent, OptionDialog* pOD )
-            : QCheckBox( text, pParent ), OptionItemT<bool>( pOD, saveName ) {
-            m_pVar = pbVar;
-            m_defaultVal = bDefaultVal;
-        }
-        void setToDefault() {
-            setChecked( m_defaultVal );
-        }
-        void setToCurrent() {
-            setChecked( *m_pVar );
-        }
-        void apply()       {
-            *m_pVar = isChecked();
-        }
-        void write( ValueMap* config ) {
-            config->writeEntry( m_saveName, *m_pVar );
-        }
-        void read( ValueMap* config ) {
-            *m_pVar = config->readBoolEntry( m_saveName, *m_pVar );
-        }
-    private:
-        OptionCheckBox( const OptionCheckBox& ); // private copy constructor without implementation
+class OptionCheckBox : public QCheckBox, public OptionItemT<bool>
+{
+public:
+   OptionCheckBox( QString text, bool bDefaultVal, const QString& saveName, bool* pbVar,
+                   QWidget* pParent, OptionDialog* pOD )
+   : QCheckBox( text, pParent ), OptionItemT<bool>( pOD, saveName )
+   {
+      m_pVar = pbVar;
+      m_defaultVal = bDefaultVal;
+   }
+   void setToDefault(){ setChecked( m_defaultVal );      }
+   void setToCurrent(){ setChecked( *m_pVar );           }
+   void apply()       { *m_pVar = isChecked();                              }
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pVar );   }
+   void read (ValueMap* config){ *m_pVar = config->readBoolEntry( m_saveName, *m_pVar ); }
+private:
+   OptionCheckBox( const OptionCheckBox& ); // private copy constructor without implementation
 };
 
-class OptionRadioButton : public QRadioButton, public OptionItemT<bool> {
-    public:
-        OptionRadioButton( QString text, bool bDefaultVal, const QString& saveName, bool* pbVar,
-                           QWidget* pParent, OptionDialog* pOD )
-            : QRadioButton( text, pParent ), OptionItemT<bool>( pOD, saveName ) {
-            m_pVar = pbVar;
-            m_defaultVal = bDefaultVal;
-        }
-        void setToDefault() {
-            setChecked( m_defaultVal );
-        }
-        void setToCurrent() {
-            setChecked( *m_pVar );
-        }
-        void apply()       {
-            *m_pVar = isChecked();
-        }
-        void write( ValueMap* config ) {
-            config->writeEntry( m_saveName, *m_pVar );
-        }
-        void read( ValueMap* config ) {
-            *m_pVar = config->readBoolEntry( m_saveName, *m_pVar );
-        }
-    private:
-        OptionRadioButton( const OptionRadioButton& ); // private copy constructor without implementation
+class OptionRadioButton : public QRadioButton, public OptionItemT<bool>
+{
+public:
+   OptionRadioButton( QString text, bool bDefaultVal, const QString& saveName, bool* pbVar,
+                   QWidget* pParent, OptionDialog* pOD )
+   : QRadioButton( text, pParent ), OptionItemT<bool>( pOD, saveName )
+   {
+      m_pVar = pbVar;
+      m_defaultVal = bDefaultVal;
+   }
+   void setToDefault(){ setChecked( m_defaultVal );      }
+   void setToCurrent(){ setChecked( *m_pVar );           }
+   void apply()       { *m_pVar = isChecked();                              }
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pVar );   }
+   void read (ValueMap* config){ *m_pVar = config->readBoolEntry( m_saveName, *m_pVar ); }
+private:
+   OptionRadioButton( const OptionRadioButton& ); // private copy constructor without implementation
 };
 
 
 template<class T>
-class OptionT : public OptionItemT<T> {
-    public:
-        OptionT( const T& defaultVal, const QString& saveName, T* pVar, OptionDialog* pOD )
-            : OptionItemT<T>( pOD, saveName ) {
-            this->m_pVar = pVar;
-            *this->m_pVar = defaultVal;
-        }
-        OptionT( const QString& saveName, T* pVar, OptionDialog* pOD )
-            : OptionItemT<T>( pOD, saveName ) {
-            this->m_pVar = pVar;
-        }
-        void setToDefault() {}
-        void setToCurrent() {}
-        void apply()       {}
-        void write( ValueMap* vm ) {
-            writeEntry( vm, this->m_saveName, *this->m_pVar );
-        }
-        void read( ValueMap* vm ) {
-            *this->m_pVar = vm->readEntry( this->m_saveName, *this->m_pVar );
-        }
-    private:
-        OptionT( const OptionT& ); // private copy constructor without implementation
+class OptionT : public OptionItemT<T>
+{
+public:
+   OptionT( const T& defaultVal, const QString& saveName, T* pVar, OptionDialog* pOD )
+   : OptionItemT<T>( pOD, saveName )
+   {
+      this->m_pVar = pVar;
+      *this->m_pVar = defaultVal;
+   }
+   OptionT( const QString& saveName, T* pVar, OptionDialog* pOD )
+   : OptionItemT<T>( pOD, saveName )
+   {
+      this->m_pVar = pVar;
+   }
+   void setToDefault(){}
+   void setToCurrent(){}
+   void apply()       {}
+   void write(ValueMap* vm){ writeEntry( vm, this->m_saveName, *this->m_pVar ); }
+   void read (ValueMap* vm){ *this->m_pVar = vm->readEntry ( this->m_saveName, *this->m_pVar ); }
+private:
+   OptionT( const OptionT& ); // private copy constructor without implementation
 };
 
 template <class T> void writeEntry( ValueMap* vm, const QString& saveName, const T& v ) {
@@ -221,101 +193,92 @@ typedef OptionT<QPoint> OptionPoint;
 typedef OptionT<QSize> OptionSize;
 typedef OptionT<QStringList> OptionStringList;
 
-class OptionFontChooser : public KFontChooser, public OptionItemT<QFont> {
-    public:
-        OptionFontChooser( const QFont& defaultVal, const QString& saveName, QFont* pVar, QWidget* pParent, OptionDialog* pOD ) :
-            KFontChooser( pParent ),
-            OptionItemT<QFont>( pOD, saveName ) {
-            m_pVar = pVar;
-            *m_pVar = defaultVal;
-            m_defaultVal = defaultVal;
-        }
-        void setToDefault() {
-            setFont( m_defaultVal, false );
-        }
-        void setToCurrent() {
-            setFont( *m_pVar, false );
-        }
-        void apply()       {
-            *m_pVar = font();
-        }
-        void write( ValueMap* config ) {
-            config->writeEntry( m_saveName, *m_pVar );
-        }
-        void read( ValueMap* config ) {
-            *m_pVar = config->readFontEntry( m_saveName, m_pVar );
-        }
-    private:
-        OptionFontChooser( const OptionToggleAction& ); // private copy constructor without implementation
+class OptionFontChooser : public KFontChooser, public OptionItemT<QFont>
+{
+public:
+   OptionFontChooser( const QFont& defaultVal, const QString& saveName, QFont* pVar, QWidget* pParent, OptionDialog* pOD ) :
+       KFontChooser( pParent ),
+       OptionItemT<QFont>( pOD, saveName )
+   {
+      m_pVar = pVar;
+      *m_pVar = defaultVal;
+      m_defaultVal = defaultVal;
+   }
+   void setToDefault(){ setFont( m_defaultVal, false ); }
+   void setToCurrent(){ setFont( *m_pVar, false ); }
+   void apply()       { *m_pVar = font();}
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pVar );   }
+   void read (ValueMap* config){ *m_pVar = config->readFontEntry( m_saveName, m_pVar ); }
+private:
+   OptionFontChooser( const OptionToggleAction& ); // private copy constructor without implementation
 };
 
-class OptionColorButton : public KColorButton, public OptionItemT<QColor> {
-    public:
-        OptionColorButton( QColor defaultVal, const QString& saveName, QColor* pVar, QWidget* pParent, OptionDialog* pOD )
-            : KColorButton( pParent ), OptionItemT<QColor>( pOD, saveName ) {
-            m_pVar = pVar;
-            m_defaultVal = defaultVal;
-        }
-        void setToDefault() {
-            setColor( m_defaultVal );
-        }
-        void setToCurrent() {
-            setColor( *m_pVar );
-        }
-        void apply()       {
-            *m_pVar = color();
-        }
-        void write( ValueMap* config ) {
-            config->writeEntry( m_saveName, *m_pVar );
-        }
-        void read( ValueMap* config ) {
-            *m_pVar = config->readColorEntry( m_saveName, m_pVar );
-        }
-    private:
-        OptionColorButton( const OptionColorButton& ); // private copy constructor without implementation
+class OptionColorButton : public KColorButton, public OptionItemT<QColor>
+{
+public:
+   OptionColorButton( QColor defaultVal, const QString& saveName, QColor* pVar, QWidget* pParent, OptionDialog* pOD )
+   : KColorButton( pParent ), OptionItemT<QColor>( pOD, saveName )
+   {
+      m_pVar = pVar;
+      m_defaultVal = defaultVal;
+   }
+   void setToDefault(){ setColor( m_defaultVal );      }
+   void setToCurrent(){ setColor( *m_pVar );           }
+   void apply()       { *m_pVar = color();                              }
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pVar );   }
+   void read (ValueMap* config){ *m_pVar = config->readColorEntry( m_saveName, m_pVar ); }
+private:
+   OptionColorButton( const OptionColorButton& ); // private copy constructor without implementation
 };
 
 class OptionLineEdit : public QComboBox, public OptionItemT<QString> {
     public:
         OptionLineEdit( const QString& defaultVal, const QString& saveName, QString* pVar,
                         QWidget* pParent, OptionDialog* pOD )
-            : QComboBox( pParent ), OptionItemT<QString>( pOD, saveName ) {
-            setMinimumWidth( 50 );
-            setEditable( true );
+            : QComboBox( pParent ), OptionItemT<QString>( pOD, saveName )
+        {
+            setMinimumWidth(50);
+            setEditable(true);
             m_pVar = pVar;
             m_defaultVal = defaultVal;
-            m_list.push_back( defaultVal );
+            m_list.push_back(defaultVal);
             insertText();
         }
-        void setToDefault() {
+        void setToDefault()
+        {
             setEditText( m_defaultVal );
         }
-        void setToCurrent() {
+        void setToCurrent()
+        {
             setEditText( *m_pVar );
         }
-        void apply()       {
+        void apply()
+        {
             *m_pVar = currentText();
             insertText();
         }
-        void write( ValueMap* config ) {
+        void write(ValueMap* config)
+        {
             config->writeEntry( m_saveName, m_list );
         }
-        void read( ValueMap* config ) {
+        void read(ValueMap* config)
+        {
             m_list = config->readListEntry( m_saveName, QStringList( m_defaultVal ) );
             if( !m_list.empty() ) *m_pVar = m_list.front();
             clear();
-            insertItems( 0, m_list );
+            insertItems(0,m_list);
         }
     private:
-        void insertText() {
+        void insertText()
+        {
             // Check if the text exists. If yes remove it and push it in as first element
             QString current = currentText();
             m_list.removeAll( current );
             m_list.push_front( current );
             clear();
-            if( m_list.size() > 10 )
-                m_list.erase( m_list.begin() + 10, m_list.end() );
-            insertItems( 0, m_list );
+            if( m_list.size()>10 )
+                m_list.erase( m_list.begin()+10, m_list.end() );
+            insertItems(0,m_list);
         }
         OptionLineEdit( const OptionLineEdit& ); // private copy constructor without implementation
         QStringList m_list;
@@ -324,281 +287,278 @@ class OptionLineEdit : public QComboBox, public OptionItemT<QString> {
 #if defined QT_NO_VALIDATOR
 #error No validator
 #endif
-class OptionIntEdit : public QLineEdit, public OptionItemT<int> {
-    public:
-        OptionIntEdit( int defaultVal, const QString& saveName, int* pVar, int rangeMin, int rangeMax,
-                       QWidget* pParent, OptionDialog* pOD )
-            : QLineEdit( pParent ), OptionItemT<int>( pOD, saveName ) {
-            m_pVar = pVar;
-            m_defaultVal = defaultVal;
-            QIntValidator* v = new QIntValidator( this );
-            v->setRange( rangeMin, rangeMax );
-            setValidator( v );
-        }
-        void setToDefault() {
-            QString s;
-            s.setNum( m_defaultVal );
-            setText( s );
-        }
-        void setToCurrent() {
-            QString s;
-            s.setNum( *m_pVar );
-            setText( s );
-        }
-        void apply()       {
-            const QIntValidator* v = static_cast<const QIntValidator*>( validator() );
-            *m_pVar = minMaxLimiter( text().toInt(), v->bottom(), v->top() );
-            setText( QString::number( *m_pVar ) );
-        }
-        void write( ValueMap* config ) {
-            config->writeEntry( m_saveName, *m_pVar );
-        }
-        void read( ValueMap* config ) {
-            *m_pVar = config->readNumEntry( m_saveName, *m_pVar );
-        }
-    private:
-        OptionIntEdit( const OptionIntEdit& ); // private copy constructor without implementation
+class OptionIntEdit : public QLineEdit, public OptionItemT<int>
+{
+public:
+   OptionIntEdit( int defaultVal, const QString& saveName, int* pVar, int rangeMin, int rangeMax,
+                   QWidget* pParent, OptionDialog* pOD )
+   : QLineEdit( pParent ), OptionItemT<int>( pOD, saveName )
+   {
+      m_pVar = pVar;
+      m_defaultVal = defaultVal;
+      QIntValidator* v = new QIntValidator(this);
+      v->setRange( rangeMin, rangeMax );
+      setValidator( v );
+   }
+   void setToDefault(){ QString s;  s.setNum(m_defaultVal); setText( s );  }
+   void setToCurrent(){ QString s;  s.setNum(*m_pVar);      setText( s );  }
+   void apply()       { const QIntValidator* v=static_cast<const QIntValidator*>(validator());
+                        *m_pVar = minMaxLimiter( text().toInt(), v->bottom(), v->top());
+                        setText( QString::number(*m_pVar) );  }
+   void write(ValueMap* config){ config->writeEntry(m_saveName, *m_pVar );   }
+   void read (ValueMap* config){ *m_pVar = config->readNumEntry( m_saveName, *m_pVar ); }
+private:
+   OptionIntEdit( const OptionIntEdit& ); // private copy constructor without implementation
 };
 
-class OptionComboBox : public QComboBox, public OptionItem {
-    public:
-        OptionComboBox( int defaultVal, const QString& saveName, int* pVarNum,
-                        QWidget* pParent, OptionDialog* pOD )
-            : QComboBox( pParent ), OptionItem( pOD, saveName ) {
-            setMinimumWidth( 50 );
-            m_pVarNum = pVarNum;
-            m_pVarStr = 0;
-            m_defaultVal = defaultVal;
-            setEditable( false );
-        }
-        OptionComboBox( int defaultVal, const QString& saveName, QString* pVarStr,
-                        QWidget* pParent, OptionDialog* pOD )
-            : QComboBox( pParent ), OptionItem( pOD, saveName ) {
-            m_pVarNum = 0;
-            m_pVarStr = pVarStr;
-            m_defaultVal = defaultVal;
-            setEditable( false );
-        }
-        void setToDefault() {
-            setCurrentIndex( m_defaultVal );
-            if( m_pVarStr != 0 ) {
-                *m_pVarStr = currentText();
-            }
-        }
-        void setToCurrent() {
-            if( m_pVarNum != 0 ) setCurrentIndex( *m_pVarNum );
-            else              setText( *m_pVarStr );
-        }
-        void apply() {
-            if( m_pVarNum != 0 ) {
-                *m_pVarNum = currentIndex();
-            }
-            else             {
-                *m_pVarStr = currentText();
-            }
-        }
-        void write( ValueMap* config ) {
-            if( m_pVarStr != 0 ) config->writeEntry( m_saveName, *m_pVarStr );
-            else              config->writeEntry( m_saveName, *m_pVarNum );
-        }
-        void read( ValueMap* config ) {
-            if( m_pVarStr != 0 )  setText( config->readEntry( m_saveName, currentText() ) );
-            else               *m_pVarNum = config->readNumEntry( m_saveName, *m_pVarNum );
-        }
-        void preserve() {
-            if( m_pVarStr != 0 )  {
-                m_preservedStrVal = *m_pVarStr;
-            }
-            else               {
-                m_preservedNumVal = *m_pVarNum;
-            }
-        }
-        void unpreserve() {
-            if( m_pVarStr != 0 )  {
-                *m_pVarStr = m_preservedStrVal;
-            }
-            else               {
-                *m_pVarNum = m_preservedNumVal;
-            }
-        }
-    private:
-        OptionComboBox( const OptionIntEdit& ); // private copy constructor without implementation
-        int* m_pVarNum;
-        int m_preservedNumVal;
-        QString* m_pVarStr;
-        QString m_preservedStrVal;
-        int m_defaultVal;
-
-        void setText( const QString& s ) {
-            // Find the string in the combobox-list, don't change the value if nothing fits.
-            for( int i = 0; i < count(); ++i ) {
-                if( itemText( i ) == s ) {
-                    if( m_pVarNum != 0 ) *m_pVarNum = i;
-                    if( m_pVarStr != 0 ) *m_pVarStr = s;
-                    setCurrentIndex( i );
-                    return;
-                }
-            }
-        }
+class OptionComboBox : public QComboBox, public OptionItem
+{
+public:
+   OptionComboBox( int defaultVal, const QString& saveName, int* pVarNum,
+                   QWidget* pParent, OptionDialog* pOD )
+   : QComboBox( pParent ), OptionItem( pOD, saveName )
+   {
+      setMinimumWidth(50);
+      m_pVarNum = pVarNum;
+      m_pVarStr = 0;
+      m_defaultVal = defaultVal;
+      setEditable(false);
+   }
+   OptionComboBox( int defaultVal, const QString& saveName, QString* pVarStr,
+                   QWidget* pParent, OptionDialog* pOD )
+   : QComboBox( pParent ), OptionItem( pOD, saveName )
+   {
+      m_pVarNum = 0;
+      m_pVarStr = pVarStr;
+      m_defaultVal = defaultVal;
+      setEditable(false);
+   }
+   void setToDefault()
+   { 
+      setCurrentIndex( m_defaultVal ); 
+      if (m_pVarStr!=0){ *m_pVarStr=currentText(); } 
+   }
+   void setToCurrent()
+   { 
+      if (m_pVarNum!=0) setCurrentIndex( *m_pVarNum );
+      else              setText( *m_pVarStr );
+   }
+   void apply()
+   { 
+      if (m_pVarNum!=0){ *m_pVarNum = currentIndex(); }
+      else             { *m_pVarStr = currentText(); }
+   }
+   void write(ValueMap* config)
+   { 
+      if (m_pVarStr!=0) config->writeEntry(m_saveName, *m_pVarStr );
+      else              config->writeEntry(m_saveName, *m_pVarNum );   
+   }
+   void read (ValueMap* config)
+   {
+      if (m_pVarStr!=0)  setText( config->readEntry( m_saveName, currentText() ) );
+      else               *m_pVarNum = config->readNumEntry( m_saveName, *m_pVarNum ); 
+   }
+   void preserve()
+   {
+      if (m_pVarStr!=0)  { m_preservedStrVal = *m_pVarStr; }
+      else               { m_preservedNumVal = *m_pVarNum; }
+   }
+   void unpreserve()
+   {
+      if (m_pVarStr!=0)  { *m_pVarStr = m_preservedStrVal; }
+      else               { *m_pVarNum = m_preservedNumVal; }
+   }
+private:
+   OptionComboBox( const OptionIntEdit& ); // private copy constructor without implementation
+   int* m_pVarNum;
+   int m_preservedNumVal;
+   QString* m_pVarStr;
+   QString m_preservedStrVal;
+   int m_defaultVal;
+   
+   void setText(const QString& s)
+   {
+      // Find the string in the combobox-list, don't change the value if nothing fits.
+      for( int i=0; i<count(); ++i )
+      {
+         if ( itemText(i)==s )
+         {
+            if (m_pVarNum!=0) *m_pVarNum = i;
+            if (m_pVarStr!=0) *m_pVarStr = s;
+            setCurrentIndex(i);
+            return;
+         }
+      }
+   }
 };
 
-class OptionEncodingComboBox : public QComboBox, public OptionItem {
-        Q_OBJECT
-        QVector<QTextCodec*> m_codecVec;
-        QTextCodec** m_ppVarCodec;
-    public:
-        OptionEncodingComboBox( const QString& saveName, QTextCodec** ppVarCodec,
-                                QWidget* pParent, OptionDialog* pOD )
-            : QComboBox( pParent ), OptionItem( pOD, saveName ) {
-            m_ppVarCodec = ppVarCodec;
-            insertCodec( i18n( "Unicode, 8 bit" ),  QTextCodec::codecForName( "UTF-8" ) );
-            insertCodec( i18n( "Unicode" ), QTextCodec::codecForName( "iso-10646-UCS-2" ) );
-            insertCodec( i18n( "Latin1" ), QTextCodec::codecForName( "iso 8859-1" ) );
+class OptionEncodingComboBox : public QComboBox, public OptionItem
+{
+   Q_OBJECT
+   QVector<QTextCodec*> m_codecVec;
+   QTextCodec** m_ppVarCodec;
+public:
+   OptionEncodingComboBox( const QString& saveName, QTextCodec** ppVarCodec,
+                   QWidget* pParent, OptionDialog* pOD )
+   : QComboBox( pParent ), OptionItem( pOD, saveName )
+   {
+      m_ppVarCodec = ppVarCodec;
+      insertCodec( i18n("Unicode, 8 bit"),  QTextCodec::codecForName("UTF-8") );
+      insertCodec( i18n("Unicode"), QTextCodec::codecForName("iso-10646-UCS-2") );
+      insertCodec( i18n("Latin1"), QTextCodec::codecForName("iso 8859-1") );
 
-            // First sort codec names:
-            std::map<QString, QTextCodec*> names;
-            QList<int> mibs = QTextCodec::availableMibs();
-            foreach( int i, mibs ) {
-                QTextCodec* c = QTextCodec::codecForMib( i );
-                if( c != 0 )
-                    names[QString( c->name() ).toUpper()] = c;
-            }
+      // First sort codec names:
+      std::map<QString, QTextCodec*> names;
+      QList<int> mibs = QTextCodec::availableMibs();
+      foreach(int i, mibs)
+      {
+         QTextCodec* c = QTextCodec::codecForMib(i);
+         if ( c!=0 )
+            names[QString(c->name()).toUpper()]=c;
+      }
 
-            std::map<QString, QTextCodec*>::iterator it;
-            for( it = names.begin(); it != names.end(); ++it ) {
-                insertCodec( "", it->second );
-            }
+      std::map<QString, QTextCodec*>::iterator it;
+      for(it=names.begin();it!=names.end();++it)
+      {
+         insertCodec( "", it->second );
+      }
 
-            this->setToolTip( i18n(
-                                  "Change this if non-ASCII characters are not displayed correctly."
-                              ) );
-        }
-        void insertCodec( const QString& visibleCodecName, QTextCodec* c ) {
-            if( c != 0 ) {
-                for( int i = 0; i < m_codecVec.size(); ++i ) {
-                    if( c == m_codecVec[i] )
-                        return;  // don't insert any codec twice
-                }
-                addItem( visibleCodecName.isEmpty() ? QString( c->name() ) : visibleCodecName + " (" + c->name() + ")", ( int )m_codecVec.size() );
-                m_codecVec.push_back( c );
-            }
-        }
-        void setToDefault() {
-            QString defaultName = QTextCodec::codecForLocale()->name();
-            for( int i = 0; i < count(); ++i ) {
-                if( defaultName == itemText( i ) &&
-                        m_codecVec[i] == QTextCodec::codecForLocale() ) {
-                    setCurrentIndex( i );
-                    if( m_ppVarCodec != 0 ) {
-                        *m_ppVarCodec = m_codecVec[i];
-                    }
-                    return;
-                }
-            }
+      this->setToolTip( i18n(
+         "Change this if non-ASCII characters are not displayed correctly."
+         ));
+   }
+   void insertCodec( const QString& visibleCodecName, QTextCodec* c )
+   {
+      if (c!=0)
+      {
+         for( int i=0; i<m_codecVec.size(); ++i )
+         {
+            if ( c==m_codecVec[i] )
+               return;  // don't insert any codec twice
+         }
+         addItem( visibleCodecName.isEmpty() ? QString(c->name()) : visibleCodecName+" ("+c->name()+")", (int)m_codecVec.size() );
+         m_codecVec.push_back( c );
+      }
+   }
+   void setToDefault()
+   {
+      QString defaultName = QTextCodec::codecForLocale()->name();
+      for(int i=0;i<count();++i)
+      {
+         if (defaultName==itemText(i) &&
+             m_codecVec[i]==QTextCodec::codecForLocale())
+         {
+            setCurrentIndex(i);
+            if (m_ppVarCodec!=0){ *m_ppVarCodec=m_codecVec[i]; }
+            return;
+         }
+      }
 
-            setCurrentIndex( 0 );
-            if( m_ppVarCodec != 0 ) {
-                *m_ppVarCodec = m_codecVec[0];
+      setCurrentIndex( 0 );
+      if (m_ppVarCodec!=0){ *m_ppVarCodec=m_codecVec[0]; }
+   }
+   void setToCurrent()
+   {
+      if (m_ppVarCodec!=0)
+      {
+         for( int i=0; i<m_codecVec.size(); ++i)
+         {
+            if ( *m_ppVarCodec==m_codecVec[i] )
+            {
+               setCurrentIndex( i );
+               break;
             }
-        }
-        void setToCurrent() {
-            if( m_ppVarCodec != 0 ) {
-                for( int i = 0; i < m_codecVec.size(); ++i ) {
-                    if( *m_ppVarCodec == m_codecVec[i] ) {
-                        setCurrentIndex( i );
-                        break;
-                    }
-                }
-            }
-        }
-        void apply() {
-            if( m_ppVarCodec != 0 ) {
-                *m_ppVarCodec = m_codecVec[ currentIndex() ];
-            }
-        }
-        void write( ValueMap* config ) {
-            if( m_ppVarCodec != 0 ) config->writeEntry( m_saveName, QString( ( *m_ppVarCodec )->name() ) );
-        }
-        void read( ValueMap* config ) {
-            QString codecName = config->readEntry( m_saveName, QString( m_codecVec[ currentIndex() ]->name() ) );
-            for( int i = 0; i < m_codecVec.size(); ++i ) {
-                if( codecName == m_codecVec[i]->name() ) {
-                    setCurrentIndex( i );
-                    if( m_ppVarCodec != 0 ) *m_ppVarCodec = m_codecVec[i];
-                    break;
-                }
-            }
-        }
-    protected:
-        void preserve()   {
-            m_preservedVal = currentIndex();
-        }
-        void unpreserve() {
-            setCurrentIndex( m_preservedVal );
-        }
-        int m_preservedVal;
+         }
+      }
+   }
+   void apply()
+   {
+      if (m_ppVarCodec!=0){ *m_ppVarCodec = m_codecVec[ currentIndex() ]; }
+   }
+   void write(ValueMap* config)
+   {
+      if (m_ppVarCodec!=0) config->writeEntry(m_saveName, QString((*m_ppVarCodec)->name()) );
+   }
+   void read (ValueMap* config)
+   {
+      QString codecName = config->readEntry( m_saveName, QString(m_codecVec[ currentIndex() ]->name()) );
+      for( int i=0; i<m_codecVec.size(); ++i)
+      {
+         if ( codecName == m_codecVec[i]->name() )
+         {
+            setCurrentIndex( i );
+            if (m_ppVarCodec!=0) *m_ppVarCodec = m_codecVec[i];
+            break;
+         }
+      }
+   }
+protected:
+   void preserve()   { m_preservedVal = currentIndex(); }
+   void unpreserve() { setCurrentIndex( m_preservedVal ); }
+   int m_preservedVal;
 };
 
 
-OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *name ) :
+OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *name ) : 
 //    KPageDialog( IconList, i18n("Configure"), Help|Default|Apply|Ok|Cancel,
 //                 Ok, parent, name, true /*modal*/, true )
-    KPageDialog( parent ) {
-    setFaceType( List );
-    setWindowTitle( i18n( "Configure" ) );
-    mButtonBox = new QDialogButtonBox( QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Apply );
-    QWidget *mainWidget = new QWidget( this );
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    setLayout( mainLayout );
-    mainLayout->addWidget( mainWidget );
-    QPushButton *okButton = mButtonBox->button( QDialogButtonBox::Ok );
-    okButton->setDefault( true );
-    okButton->setShortcut( Qt::CTRL | Qt::Key_Return );
-    //WARNING mainLayout->addWidget(buttonBox) must be last item in layout.
-    mainLayout->addWidget( mButtonBox );
-    okButton->setDefault( true );
-    setObjectName( name );
-    setModal( true );
+    KPageDialog( parent )
+{
+   setFaceType( List );
+   setWindowTitle( i18n("Configure") );
+   mButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::RestoreDefaults|QDialogButtonBox::Apply);
+   QWidget *mainWidget = new QWidget(this);
+   QVBoxLayout *mainLayout = new QVBoxLayout;
+   setLayout(mainLayout);
+   mainLayout->addWidget(mainWidget);
+   QPushButton *okButton = mButtonBox->button(QDialogButtonBox::Ok);
+   okButton->setDefault(true);
+   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+   //WARNING mainLayout->addWidget(buttonBox) must be last item in layout.
+   mainLayout->addWidget(mButtonBox);
+   okButton->setDefault(true);
+   setObjectName( name );
+   setModal( true  );
+  
 
+   setupFontPage();
+   setupColorPage();
+   setupEditPage();
+   setupDiffPage();
+   setupMergePage();
+   setupOtherOptions();
+   if (bShowDirMergeSettings)
+      setupDirectoryMergePage();
 
-    setupFontPage();
-    setupColorPage();
-    setupEditPage();
-    setupDiffPage();
-    setupMergePage();
-    setupOtherOptions();
-    if( bShowDirMergeSettings )
-        setupDirectoryMergePage();
+   setupRegionalPage();
+   setupIntegrationPage();
 
-    setupRegionalPage();
-    setupIntegrationPage();
+   //setupKeysPage();
 
-    //setupKeysPage();
-
-    // Initialize all values in the dialog
-    resetToDefaults();
-    slotApply();
-    //connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect( mButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject );
-    connect( mButtonBox, &QDialogButtonBox::clicked, this, &OptionDialog::buttonClicked );
-    connect( mButtonBox, &QDialogButtonBox::helpRequested, this, &OptionDialog::helpRequested );
-    //connect(this, &OptionDialog::applyClicked, this, &OptionDialog::slotApply);
-    connect( mButtonBox, &QDialogButtonBox::accepted, this, &OptionDialog::slotOk );
-    //helpClicked() is connected in KDiff3App::KDiff3App -- Really where?
-    //connect(this, &OptionDialog::defaultClicked, this, &OptionDialog::slotDefault);
+   // Initialize all values in the dialog
+   resetToDefaults();
+   slotApply();
+   //connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+   connect(mButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+   connect(mButtonBox, &QDialogButtonBox::clicked, this, &OptionDialog::buttonClicked);
+   connect(mButtonBox, &QDialogButtonBox::helpRequested, this, &OptionDialog::helpRequested); 
+   //connect(this, &OptionDialog::applyClicked, this, &OptionDialog::slotApply);
+   connect(mButtonBox, &QDialogButtonBox::accepted, this, &OptionDialog::slotOk);
+   //helpClicked() is connected in KDiff3App::KDiff3App -- Really where?
+   //connect(this, &OptionDialog::defaultClicked, this, &OptionDialog::slotDefault);
 }
 
-void OptionDialog::buttonClicked( QAbstractButton *button ) {
+void OptionDialog::buttonClicked(QAbstractButton *button){
     //for reasons beyond my comprehension QDialogButtonBox::standardButton() is non-static
-    switch( mButtonBox->standardButton( button ) ) {
-        case QDialogButtonBox::Apply:
-            slotApply();
-            break;
-        case QDialogButtonBox::RestoreDefaults:
-            slotDefault();
-            break;
-        default:
-            break;
+    switch(mButtonBox->standardButton(button)){
+      case QDialogButtonBox::Apply:
+	slotApply();
+	break;
+      case QDialogButtonBox::RestoreDefaults:
+	slotDefault();
+	break;
+      default:
+	break;
     }
 }
 
@@ -606,45 +566,48 @@ void OptionDialog::helpRequested() {
     KHelpClient::invokeHelp( QStringLiteral( "kdiff3/index.html" ), QString());
 }
 
-OptionDialog::~OptionDialog( void ) {
+OptionDialog::~OptionDialog( void )
+{
 }
 
-void OptionDialog::setupOtherOptions() {
-    new OptionToggleAction( false, "AutoAdvance", &m_options.m_bAutoAdvance, this );
-    new OptionToggleAction( true,  "ShowWhiteSpaceCharacters", &m_options.m_bShowWhiteSpaceCharacters, this );
-    new OptionToggleAction( true,  "ShowWhiteSpace", &m_options.m_bShowWhiteSpace, this );
-    new OptionToggleAction( false, "ShowLineNumbers", &m_options.m_bShowLineNumbers, this );
-    new OptionToggleAction( true,  "HorizDiffWindowSplitting", &m_options.m_bHorizDiffWindowSplitting, this );
-    new OptionToggleAction( false, "WordWrap", &m_options.m_bWordWrap, this );
+void OptionDialog::setupOtherOptions()
+{
+   new OptionToggleAction( false, "AutoAdvance", &m_options.m_bAutoAdvance, this );
+   new OptionToggleAction( true,  "ShowWhiteSpaceCharacters", &m_options.m_bShowWhiteSpaceCharacters, this );
+   new OptionToggleAction( true,  "ShowWhiteSpace", &m_options.m_bShowWhiteSpace, this );
+   new OptionToggleAction( false, "ShowLineNumbers", &m_options.m_bShowLineNumbers, this );
+   new OptionToggleAction( true,  "HorizDiffWindowSplitting", &m_options.m_bHorizDiffWindowSplitting, this );
+   new OptionToggleAction( false, "WordWrap", &m_options.m_bWordWrap, this );
 
-    new OptionToggleAction( true,  "ShowIdenticalFiles", &m_options.m_bDmShowIdenticalFiles, this );
+   new OptionToggleAction( true,  "ShowIdenticalFiles", &m_options.m_bDmShowIdenticalFiles, this );
 
-    new OptionToggleAction( true,  "Show Toolbar", &m_options.m_bShowToolBar, this );
-    new OptionToggleAction( true,  "Show Statusbar", &m_options.m_bShowStatusBar, this );
+   new OptionToggleAction( true,  "Show Toolbar", &m_options.m_bShowToolBar, this );
+   new OptionToggleAction( true,  "Show Statusbar", &m_options.m_bShowStatusBar, this );
 
-    /*
-       TODO manage toolbar positioning
-       new OptionNum( (int)KToolBar::Top, "ToolBarPos", &m_toolBarPos, this );
-    */
-    new OptionSize( QSize( 600, 400 ), "Geometry", &m_options.m_geometry, this );
-    new OptionPoint( QPoint( 0, 22 ), "Position", &m_options.m_position, this );
-    new OptionToggleAction( false, "WindowStateMaximised", &m_options.m_bMaximised, this );
+/*
+   TODO manage toolbar positioning
+   new OptionNum( (int)KToolBar::Top, "ToolBarPos", &m_toolBarPos, this );
+*/
+   new OptionSize( QSize(600,400),"Geometry", &m_options.m_geometry, this );
+   new OptionPoint( QPoint(0,22), "Position", &m_options.m_position, this );
+   new OptionToggleAction( false, "WindowStateMaximised", &m_options.m_bMaximised, this );
 
-    new OptionStringList( "RecentAFiles", &m_options.m_recentAFiles, this );
-    new OptionStringList( "RecentBFiles", &m_options.m_recentBFiles, this );
-    new OptionStringList( "RecentCFiles", &m_options.m_recentCFiles, this );
-    new OptionStringList( "RecentOutputFiles", &m_options.m_recentOutputFiles, this );
-    new OptionStringList( "RecentEncodings", &m_options.m_recentEncodings, this );
+   new OptionStringList( "RecentAFiles", &m_options.m_recentAFiles, this );
+   new OptionStringList( "RecentBFiles", &m_options.m_recentBFiles, this );
+   new OptionStringList( "RecentCFiles", &m_options.m_recentCFiles, this );
+   new OptionStringList( "RecentOutputFiles", &m_options.m_recentOutputFiles, this );
+   new OptionStringList( "RecentEncodings", &m_options.m_recentEncodings, this );
 
 }
 
-void OptionDialog::setupFontPage( void ) {
-    QFrame* 		page = new QFrame();
-    KPageWidgetItem 	*pageItem = new KPageWidgetItem( page, i18n( "Font" ) );
-    QFont		defaultFont;
+void OptionDialog::setupFontPage( void )
+{
+    QFrame* page = new QFrame();
+    KPageWidgetItem *pageItem = new KPageWidgetItem( page, i18n("Font") );
+    QFont defaultFont;
     
-    pageItem->setHeader( i18n( "Editor & Diff Output Font" ) );
-    pageItem->setIcon( QIcon::fromTheme( QStringLiteral( "preferences-desktop-font" ) ) );
+    pageItem->setHeader( i18n("Editor & Diff Output Font") );
+    pageItem->setIcon( QIcon::fromTheme(QStringLiteral("preferences-desktop-font")) );
     addPage( pageItem );
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
@@ -656,32 +619,33 @@ void OptionDialog::setupFontPage( void ) {
     OptionFontChooser* pFontChooser = new OptionFontChooser( defaultFont, "Font", &m_options.m_font, page, this );
     topLayout->addWidget( pFontChooser );
 
-    QGridLayout *gbox = new QGridLayout();
-    topLayout->addLayout( gbox );
-    int line = 0;
+   QGridLayout *gbox = new QGridLayout();
+   topLayout->addLayout( gbox );
+   int line=0;
 
-    OptionCheckBox* pItalicDeltas = new OptionCheckBox( i18n( "Italic font for deltas" ), false, "ItalicForDeltas", &m_options.m_bItalicForDeltas, page, this );
-    gbox->addWidget( pItalicDeltas, line, 0, 1, 2 );
-    pItalicDeltas->setToolTip( i18n(
-                                   "Selects the italic version of the font for differences.\n"
-                                   "If the font doesn't support italic characters, then this does nothing." )
-                             );
+   OptionCheckBox* pItalicDeltas = new OptionCheckBox( i18n("Italic font for deltas"), false, "ItalicForDeltas", &m_options.m_bItalicForDeltas, page, this );
+   gbox->addWidget( pItalicDeltas, line, 0, 1, 2 );
+   pItalicDeltas->setToolTip( i18n(
+      "Selects the italic version of the font for differences.\n"
+      "If the font doesn't support italic characters, then this does nothing.")
+      );
 }
 
 
-void OptionDialog::setupColorPage( void ) {
+void OptionDialog::setupColorPage( void )
+{
     QFrame* page = new QFrame();
-    KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n( "Color" ) );
-    pageItem->setHeader( i18n( "Colors Settings" ) );
-    pageItem->setIcon( QIcon::fromTheme( QStringLiteral( "preferences-desktop-color" ) ) );
+    KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Color") );
+    pageItem->setHeader( i18n("Colors Settings") );
+    pageItem->setIcon( QIcon::fromTheme(QStringLiteral("preferences-desktop-color")) );
     addPage( pageItem );
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
 
     QGridLayout *gbox = new QGridLayout();
-    gbox->setColumnStretch( 1, 5 );
-    topLayout->addLayout( gbox );
+    gbox->setColumnStretch(1,5);
+    topLayout->addLayout(gbox);
 
     QLabel* label;
     int line = 0;
@@ -899,13 +863,13 @@ void OptionDialog::setupDiffPage( void ) {
     QLabel* label = 0;
 
     m_options.m_bPreserveCarriageReturn = false;
-    //OptionCheckBox* pPreserveCarriageReturn = new OptionCheckBox( i18n("Preserve carriage return"), false, "PreserveCarriageReturn", &m_bPreserveCarriageReturn, page, this );
-    //gbox->addWidget( pPreserveCarriageReturn, line, 0, 1, 2 );
-    //pPreserveCarriageReturn->setToolTip( i18n(
-    //   "Show carriage return characters '\\r' if they exist.\n"
-    //   "Helps to compare files that were modified under different operating systems.")
-    //   );
-    //++line;
+    OptionCheckBox* pPreserveCarriageReturn = new OptionCheckBox( i18n("Preserve carriage return"), false, "PreserveCarriageReturn", &m_options.m_bPreserveCarriageReturn, page, this );
+    gbox->addWidget( pPreserveCarriageReturn, line, 0, 1, 2 );
+    pPreserveCarriageReturn->setToolTip( i18n(
+       "Show carriage return characters '\\r' if they exist.\n"
+       "Helps to compare files that were modified under different operating systems.")
+       );
+    ++line;
     QString treatAsWhiteSpace = " (" + i18n( "Treat as white space." ) + ")";
 
     OptionCheckBox* pIgnoreNumbers = new OptionCheckBox( i18n( "Ignore numbers" ) + treatAsWhiteSpace, false, "IgnoreNumbers", &m_options.m_bIgnoreNumbers, page, this );
@@ -1074,81 +1038,81 @@ void OptionDialog::setupMergePage( void ) {
             "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) " //month
             "([0-9][0-9][0-9][0-9]) " // year
             "([0-9][0-9]:[0-9][0-9]:[0-9][0-9])\\s+(.*)";  // time, name
+   
+      m_pHistoryEntryStartRegExpLineEdit = new OptionLineEdit( historyEntryStartDefault, "HistoryEntryStartRegExp", &m_options.m_historyEntryStartRegExp, page, this );
+      gbox->addWidget( m_pHistoryEntryStartRegExpLineEdit, line, 1 );
+      s_historyEntryStartRegExpToolTip = i18n("A version control history entry consists of several lines.\n"
+            "Specify the regular expression to detect the first line (without the leading comment).\n"
+            "Use parentheses to group the keys you want to use for sorting.\n"
+            "If left empty, then KDiff3 assumes that empty lines separate history entries.\n"
+            "See the documentation for details.");
+      label->setToolTip( s_historyEntryStartRegExpToolTip );
+      ++line;
+   
+      m_pHistoryMergeSorting = new OptionCheckBox( i18n("History merge sorting"), false, "HistoryMergeSorting", &m_options.m_bHistoryMergeSorting, page, this );
+      gbox->addWidget( m_pHistoryMergeSorting, line, 0, 1, 2 );
+      m_pHistoryMergeSorting->setToolTip( i18n("Sort version control history by a key.") );
+      ++line;
+            //QString branch = newHistoryEntry.cap(1);
+            //int day    = newHistoryEntry.cap(2).toInt();
+            //int month  = QString("Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec").find(newHistoryEntry.cap(3))/4 + 1;
+            //int year   = newHistoryEntry.cap(4).toInt();
+            //QString time = newHistoryEntry.cap(5);
+            //QString name = newHistoryEntry.cap(6);
+      QString defaultSortKeyOrder = "4,3,2,5,1,6"; //QDate(year,month,day).toString(Qt::ISODate) +" "+ time + " " + branch + " " + name;
 
-        m_pHistoryEntryStartRegExpLineEdit = new OptionLineEdit( historyEntryStartDefault, "HistoryEntryStartRegExp", &m_options.m_historyEntryStartRegExp, page, this );
-        gbox->addWidget( m_pHistoryEntryStartRegExpLineEdit, line, 1 );
-        s_historyEntryStartRegExpToolTip = i18n( "A version control history entry consists of several lines.\n"
-                                           "Specify the regular expression to detect the first line (without the leading comment).\n"
-                                           "Use parentheses to group the keys you want to use for sorting.\n"
-                                           "If left empty, then KDiff3 assumes that empty lines separate history entries.\n"
-                                           "See the documentation for details." );
-        label->setToolTip( s_historyEntryStartRegExpToolTip );
-        ++line;
+      label = new QLabel( i18n("History entry start sort key order:"), page );
+      gbox->addWidget( label, line, 0 );
+      m_pHistorySortKeyOrderLineEdit = new OptionLineEdit( defaultSortKeyOrder, "HistoryEntryStartSortKeyOrder", &m_options.m_historyEntryStartSortKeyOrder, page, this );
+      gbox->addWidget( m_pHistorySortKeyOrderLineEdit, line, 1 );
+      s_historyEntryStartSortKeyOrderToolTip = i18n("Each pair of parentheses used in the regular expression for the history start entry\n"
+            "groups a key that can be used for sorting.\n"
+            "Specify the list of keys (that are numbered in order of occurrence\n"
+            "starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
+            "If left empty, then no sorting will be done.\n"
+            "See the documentation for details.");
+      label->setToolTip( s_historyEntryStartSortKeyOrderToolTip );
+      m_pHistorySortKeyOrderLineEdit->setEnabled(false);
+      connect(m_pHistoryMergeSorting, &OptionCheckBox::toggled, m_pHistorySortKeyOrderLineEdit, &OptionLineEdit::setEnabled);
+      ++line;
 
-        m_pHistoryMergeSorting = new OptionCheckBox( i18n( "History merge sorting" ), false, "HistoryMergeSorting", &m_options.m_bHistoryMergeSorting, page, this );
-        gbox->addWidget( m_pHistoryMergeSorting, line, 0, 1, 2 );
-        m_pHistoryMergeSorting->setToolTip( i18n( "Sort version control history by a key." ) );
-        ++line;
-        //QString branch = newHistoryEntry.cap(1);
-        //int day    = newHistoryEntry.cap(2).toInt();
-        //int month  = QString("Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec").find(newHistoryEntry.cap(3))/4 + 1;
-        //int year   = newHistoryEntry.cap(4).toInt();
-        //QString time = newHistoryEntry.cap(5);
-        //QString name = newHistoryEntry.cap(6);
-        QString defaultSortKeyOrder = "4,3,2,5,1,6"; //QDate(year,month,day).toString(Qt::ISODate) +" "+ time + " " + branch + " " + name;
+      m_pHistoryAutoMerge = new OptionCheckBox( i18n("Merge version control history on merge start"), false, "RunHistoryAutoMergeOnMergeStart", &m_options.m_bRunHistoryAutoMergeOnMergeStart, page, this );
+      gbox->addWidget( m_pHistoryAutoMerge, line, 0, 1, 2 );
+      m_pHistoryAutoMerge->setToolTip( i18n("Run version control history automerge on merge start.") );
+      ++line;
 
-        label = new QLabel( i18n( "History entry start sort key order:" ), page );
-        gbox->addWidget( label, line, 0 );
-        m_pHistorySortKeyOrderLineEdit = new OptionLineEdit( defaultSortKeyOrder, "HistoryEntryStartSortKeyOrder", &m_options.m_historyEntryStartSortKeyOrder, page, this );
-        gbox->addWidget( m_pHistorySortKeyOrderLineEdit, line, 1 );
-        s_historyEntryStartSortKeyOrderToolTip = i18n( "Each pair of parentheses used in the regular expression for the history start entry\n"
-                "groups a key that can be used for sorting.\n"
-                "Specify the list of keys (that are numbered in order of occurrence\n"
-                "starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
-                "If left empty, then no sorting will be done.\n"
-                "See the documentation for details." );
-        label->setToolTip( s_historyEntryStartSortKeyOrderToolTip );
-        m_pHistorySortKeyOrderLineEdit->setEnabled( false );
-        connect( m_pHistoryMergeSorting, &OptionCheckBox::toggled, m_pHistorySortKeyOrderLineEdit, &OptionLineEdit::setEnabled );
-        ++line;
+      OptionIntEdit* pMaxNofHistoryEntries = new OptionIntEdit( -1, "MaxNofHistoryEntries", &m_options.m_maxNofHistoryEntries, -1, 1000, page, this );
+      label = new QLabel( i18n("Max number of history entries:"), page );
+      gbox->addWidget( label, line, 0 );
+      gbox->addWidget( pMaxNofHistoryEntries, line, 1 );
+      pMaxNofHistoryEntries->setToolTip( i18n("Cut off after specified number. Use -1 for infinite number of entries.") );
+      ++line;
+   }
 
-        m_pHistoryAutoMerge = new OptionCheckBox( i18n( "Merge version control history on merge start" ), false, "RunHistoryAutoMergeOnMergeStart", &m_options.m_bRunHistoryAutoMergeOnMergeStart, page, this );
-        gbox->addWidget( m_pHistoryAutoMerge, line, 0, 1, 2 );
-        m_pHistoryAutoMerge->setToolTip( i18n( "Run version control history automerge on merge start." ) );
-        ++line;
+   QPushButton* pButton = new QPushButton( i18n("Test your regular expressions"), page );
+   gbox->addWidget( pButton, line, 0 );
+   connect(pButton, &QPushButton::clicked, this, &OptionDialog::slotHistoryMergeRegExpTester);
+   ++line;
 
-        OptionIntEdit* pMaxNofHistoryEntries = new OptionIntEdit( -1, "MaxNofHistoryEntries", &m_options.m_maxNofHistoryEntries, -1, 1000, page, this );
-        label = new QLabel( i18n( "Max number of history entries:" ), page );
-        gbox->addWidget( label, line, 0 );
-        gbox->addWidget( pMaxNofHistoryEntries, line, 1 );
-        pMaxNofHistoryEntries->setToolTip( i18n( "Cut off after specified number. Use -1 for infinite number of entries." ) );
-        ++line;
-    }
-
-    QPushButton* pButton = new QPushButton( i18n( "Test your regular expressions" ), page );
-    gbox->addWidget( pButton, line, 0 );
-    connect( pButton, &QPushButton::clicked, this, &OptionDialog::slotHistoryMergeRegExpTester );
-    ++line;
-
-    label = new QLabel( i18n( "Irrelevant merge command:" ), page );
-    gbox->addWidget( label, line, 0 );
-    OptionLineEdit* pLE = new OptionLineEdit( "", "IrrelevantMergeCmd", &m_options.m_IrrelevantMergeCmd, page, this );
-    gbox->addWidget( pLE, line, 1 );
-    label->setToolTip( i18n( "If specified this script is run after automerge\n"
-                             "when no other relevant changes were detected.\n"
-                             "Called with the parameters: filename1 filename2 filename3" ) );
-    ++line;
+   label = new QLabel( i18n("Irrelevant merge command:"), page );
+   gbox->addWidget( label, line, 0 );
+   OptionLineEdit* pLE = new OptionLineEdit( "", "IrrelevantMergeCmd", &m_options.m_IrrelevantMergeCmd, page, this );
+   gbox->addWidget( pLE, line, 1 );
+   label->setToolTip( i18n("If specified this script is run after automerge\n"
+         "when no other relevant changes were detected.\n"
+         "Called with the parameters: filename1 filename2 filename3") );
+   ++line;
 
 
-    OptionCheckBox* pAutoSaveAndQuit = new OptionCheckBox( i18n( "Auto save and quit on merge without conflicts" ), false,
-            "AutoSaveAndQuitOnMergeWithoutConflicts", &m_options.m_bAutoSaveAndQuitOnMergeWithoutConflicts, page, this );
-    gbox->addWidget( pAutoSaveAndQuit, line, 0, 1, 2 );
-    pAutoSaveAndQuit->setToolTip( i18n( "If KDiff3 was started for a file-merge from the command line and all\n"
-                                        "conflicts are solvable without user interaction then automatically save and quit.\n"
-                                        "(Similar to command line option \"--auto\".)" ) );
-    ++line;
+   OptionCheckBox* pAutoSaveAndQuit = new OptionCheckBox( i18n("Auto save and quit on merge without conflicts"), false,
+      "AutoSaveAndQuitOnMergeWithoutConflicts", &m_options.m_bAutoSaveAndQuitOnMergeWithoutConflicts, page, this );
+   gbox->addWidget( pAutoSaveAndQuit, line, 0, 1, 2 );
+   pAutoSaveAndQuit->setToolTip( i18n("If KDiff3 was started for a file-merge from the command line and all\n"
+                                         "conflicts are solvable without user interaction then automatically save and quit.\n"
+                                         "(Similar to command line option \"--auto\".)") );
+   ++line;
 
-    topLayout->addStretch( 10 );
+   topLayout->addStretch(10);
 }
 
 void OptionDialog::setupDirectoryMergePage( void ) {
@@ -1214,38 +1178,38 @@ void OptionDialog::setupDirectoryMergePage( void ) {
     OptionCheckBox* pFindHidden = new OptionCheckBox( i18n( "Find hidden files and directories" ), true, "FindHidden", &m_options.m_bDmFindHidden, page, this );
     gbox->addWidget( pFindHidden, line, 0, 1, 2 );
 #if defined(_WIN32) || defined(Q_OS_OS2)
-    pFindHidden->setToolTip( i18n( "Finds files and directories with the hidden attribute." ) );
+   pFindHidden->setToolTip( i18n("Finds files and directories with the hidden attribute.") );
 #else
-    pFindHidden->setToolTip( i18n( "Finds files and directories starting with '.'." ) );
+   pFindHidden->setToolTip( i18n("Finds files and directories starting with '.'.") );
 #endif
-    ++line;
+   ++line;
 
-    OptionCheckBox* pFollowFileLinks = new OptionCheckBox( i18n( "Follow file links" ), false, "FollowFileLinks", &m_options.m_bDmFollowFileLinks, page, this );
-    gbox->addWidget( pFollowFileLinks, line, 0, 1, 2 );
-    pFollowFileLinks->setToolTip( i18n(
-                                      "On: Compare the file the link points to.\n"
-                                      "Off: Compare the links."
-                                  ) );
-    ++line;
+   OptionCheckBox* pFollowFileLinks = new OptionCheckBox( i18n("Follow file links"), false, "FollowFileLinks", &m_options.m_bDmFollowFileLinks, page, this );
+   gbox->addWidget( pFollowFileLinks, line, 0, 1, 2 );
+   pFollowFileLinks->setToolTip( i18n(
+      "On: Compare the file the link points to.\n"
+      "Off: Compare the links."
+      ));
+   ++line;
 
-    OptionCheckBox* pFollowDirLinks = new OptionCheckBox( i18n( "Follow directory links" ), false, "FollowDirLinks", &m_options.m_bDmFollowDirLinks, page, this );
-    gbox->addWidget( pFollowDirLinks, line, 0, 1, 2 );
-    pFollowDirLinks->setToolTip( i18n(
-                                     "On: Compare the directory the link points to.\n"
-                                     "Off: Compare the links."
-                                 ) );
-    ++line;
+   OptionCheckBox* pFollowDirLinks = new OptionCheckBox( i18n("Follow directory links"), false, "FollowDirLinks", &m_options.m_bDmFollowDirLinks, page, this );
+   gbox->addWidget( pFollowDirLinks, line, 0, 1, 2 );
+   pFollowDirLinks->setToolTip(    i18n(
+      "On: Compare the directory the link points to.\n"
+      "Off: Compare the links."
+      ));
+   ++line;
 
-    //OptionCheckBox* pShowOnlyDeltas = new OptionCheckBox( i18n("List only deltas"),false,"ListOnlyDeltas", &m_options.m_bDmShowOnlyDeltas, page, this );
-    //gbox->addWidget( pShowOnlyDeltas, line, 0, 1, 2 );
-    //pShowOnlyDeltas->setToolTip( i18n(
-    //              "Files and directories without change will not appear in the list."));
-    //++line;
+   //OptionCheckBox* pShowOnlyDeltas = new OptionCheckBox( i18n("List only deltas"),false,"ListOnlyDeltas", &m_options.m_bDmShowOnlyDeltas, page, this );
+   //gbox->addWidget( pShowOnlyDeltas, line, 0, 1, 2 );
+   //pShowOnlyDeltas->setToolTip( i18n(
+   //              "Files and directories without change will not appear in the list."));
+   //++line;
 
 #if defined(_WIN32) || defined(Q_OS_OS2)
-    bool bCaseSensitiveFilenameComparison = false;
+   bool bCaseSensitiveFilenameComparison = false;
 #else
-    bool bCaseSensitiveFilenameComparison = true;
+   bool bCaseSensitiveFilenameComparison = true;
 #endif
     OptionCheckBox* pCaseSensitiveFileNames = new OptionCheckBox( i18n( "Case sensitive filename comparison" ), bCaseSensitiveFilenameComparison, "CaseSensitiveFilenameComparison", &m_options.m_bDmCaseSensitiveFilenameComparison, page, this );
     gbox->addWidget( pCaseSensitiveFileNames, line, 0, 1, 2 );
@@ -1351,7 +1315,7 @@ static void insertCodecs(OptionComboBox* p)
       if ( pCodec != 0 )  m.insert( std::make_pair( QString(pCodec->mimeName()).toUpper(), pCodec->mimeName()) );
       else                break;
    }
-
+   
    p->insertItem( i18n("Auto"), 0 );
    std::multimap<QString,QString>::iterator mi;
    for(mi=m.begin(), i=0; mi!=m.end(); ++mi, ++i)
@@ -1361,51 +1325,56 @@ static void insertCodecs(OptionComboBox* p)
 
 // UTF8-Codec that saves a BOM
 // UTF8-Codec that saves a BOM
-class Utf8BOMCodec : public QTextCodec {
-        QTextCodec* m_pUtf8Codec;
-        class PublicTextCodec : public QTextCodec {
-            public:
-                QString publicConvertToUnicode( const char * p, int len, ConverterState* pState ) const {
-                    return convertToUnicode( p, len, pState );
-                }
-                QByteArray publicConvertFromUnicode( const QChar * input, int number, ConverterState * pState ) const {
-                    return convertFromUnicode( input, number, pState );
-                }
-        };
-    public:
-        Utf8BOMCodec() {
-            m_pUtf8Codec = QTextCodec::codecForName( "UTF-8" );
-        }
-        QByteArray name() const {
-            return "UTF-8-BOM";
-        }
-        int mibEnum() const {
-            return 2123;
-        }
-        QByteArray convertFromUnicode( const QChar * input, int number, ConverterState * pState ) const {
-            QByteArray r;
-            if( pState && pState->state_data[2] == 0 ) { // state_data[2] not used by QUtf8::convertFromUnicode (see qutfcodec.cpp)
-                r += "\xEF\xBB\xBF";
-                pState->state_data[2] = 1;
-                pState->flags |= QTextCodec::IgnoreHeader;
-            }
+class Utf8BOMCodec : public QTextCodec
+{
+   QTextCodec* m_pUtf8Codec;
+   class PublicTextCodec : public QTextCodec
+   {
+   public:
+      QString publicConvertToUnicode ( const char * p, int len, ConverterState* pState ) const
+      {
+         return convertToUnicode( p, len, pState );
+      }
+      QByteArray publicConvertFromUnicode ( const QChar * input, int number, ConverterState * pState ) const
+      {
+         return convertFromUnicode( input, number, pState );
+      }
+   };
+public:
+   Utf8BOMCodec()
+   {
+      m_pUtf8Codec = QTextCodec::codecForName("UTF-8");
+   }
+   QByteArray name () const { return "UTF-8-BOM"; }
+   int mibEnum () const { return 2123; }
+   QByteArray convertFromUnicode ( const QChar * input, int number, ConverterState * pState ) const
+   {
+      QByteArray r;
+      if ( pState && pState->state_data[2]==0)  // state_data[2] not used by QUtf8::convertFromUnicode (see qutfcodec.cpp)
+      {
+        r += "\xEF\xBB\xBF";
+        pState->state_data[2]=1;
+        pState->flags |= QTextCodec::IgnoreHeader;
+      }
 
-            r += ( ( PublicTextCodec* )m_pUtf8Codec )->publicConvertFromUnicode( input, number, pState );
-            return r;
-        }
-        QString convertToUnicode( const char * p, int len, ConverterState* pState ) const {
-            return ( ( PublicTextCodec* )m_pUtf8Codec )->publicConvertToUnicode( p, len, pState );
-        }
+      r += ((PublicTextCodec*)m_pUtf8Codec)->publicConvertFromUnicode( input, number, pState );
+      return r;
+   }
+   QString convertToUnicode ( const char * p, int len, ConverterState* pState ) const
+   {
+      return ((PublicTextCodec*)m_pUtf8Codec)->publicConvertToUnicode( p, len, pState );
+   }
 };
 
-void OptionDialog::setupRegionalPage( void ) {
-    new Utf8BOMCodec();
+void OptionDialog::setupRegionalPage( void )
+{
+   new Utf8BOMCodec();
 
-    QFrame* page = new QFrame();
-    KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n( "Regional Settings" ) );
-    pageItem->setHeader( i18n( "Regional Settings" ) );
-    pageItem->setIcon( QIcon::fromTheme( QStringLiteral( "locale" ) ) );
-    addPage( pageItem );
+   QFrame* page = new QFrame();
+   KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Regional Settings") );
+   pageItem->setHeader( i18n("Regional Settings") );
+   pageItem->setIcon( QIcon::fromTheme(QStringLiteral("locale")) );
+   addPage( pageItem );
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
@@ -1415,229 +1384,233 @@ void OptionDialog::setupRegionalPage( void ) {
     topLayout->addLayout( gbox );
     int line = 0;
 
-    QLabel* label;
+   QLabel* label;
 
 #ifdef KREPLACEMENTS_H
+ 
+static const char* countryMap[]={
+"af Afrikaans",
+"ar Arabic",
+"az Azerbaijani",
+"be Belarusian",
+"bg Bulgarian",
+"bn Bengali",
+"bo Tibetan",
+"br Breton",
+"bs Bosnian",
+"ca Catalan",
+"ca@valencia Catalan (Valencian)",
+"cs Czech",
+"cy Welsh",
+"da Danish",
+"de German",
+"el Greek",
+"en_GB British English",
+"eo Esperanto",
+"es Spanish",
+"et Estonian",
+"eu Basque",
+"fa Farsi (Persian)",
+"fi Finnish",
+"fo Faroese",
+"fr French",
+"ga Irish Gaelic",
+"gl Galician",
+"gu Gujarati",
+"he Hebrew",
+"hi Hindi",
+"hne Chhattisgarhi",
+"hr Croatian",
+"hsb Upper Sorbian",
+"hu Hungarian",
+"id Indonesian",
+"is Icelandic",
+"it Italian",
+"ja Japanese",
+"ka Georgian",
+"ko Korean",
+"ku Kurdish",
+"lo Lao",
+"lt Lithuanian",
+"lv Latvian",
+"mi Maori",
+"mk Macedonian",
+"ml Malayalam"
+"mn Mongolian",
+"ms Malay",
+"mt Maltese",
+"nb Norwegian Bookmal",
+"nds Low Saxon",
+"nl Dutch",
+"nn Norwegian Nynorsk",
+"nso Northern Sotho",
+"oc Occitan",
+"pl Polish",
+"pt Portuguese",
+"pt_BR Brazilian Portuguese",
+"ro Romanian",
+"ru Russian",
+"rw Kinyarwanda",
+"se Northern Sami",
+"sk Slovak",
+"sl Slovenian",
+"sq Albanian",
+"sr Serbian",
+"sr@Latn Serbian",
+"ss Swati",
+"sv Swedish",
+"ta Tamil",
+"tg Tajik",
+"th Thai",
+"tr Turkish",
+"uk Ukrainian",
+"uz Uzbek",
+"ven Venda",
+"vi Vietnamese",
+"wa Walloon",
+"xh Xhosa",
+"zh_CN Chinese Simplified",
+"zh_TW Chinese Traditional",
+"zu Zulu"
+};
 
-    static const char* countryMap[] = {
-        "af Afrikaans",
-        "ar Arabic",
-        "az Azerbaijani",
-        "be Belarusian",
-        "bg Bulgarian",
-        "bn Bengali",
-        "bo Tibetan",
-        "br Breton",
-        "bs Bosnian",
-        "ca Catalan",
-        "ca@valencia Catalan (Valencian)",
-        "cs Czech",
-        "cy Welsh",
-        "da Danish",
-        "de German",
-        "el Greek",
-        "en_GB British English",
-        "eo Esperanto",
-        "es Spanish",
-        "et Estonian",
-        "eu Basque",
-        "fa Farsi (Persian)",
-        "fi Finnish",
-        "fo Faroese",
-        "fr French",
-        "ga Irish Gaelic",
-        "gl Galician",
-        "gu Gujarati",
-        "he Hebrew",
-        "hi Hindi",
-        "hne Chhattisgarhi",
-        "hr Croatian",
-        "hsb Upper Sorbian",
-        "hu Hungarian",
-        "id Indonesian",
-        "is Icelandic",
-        "it Italian",
-        "ja Japanese",
-        "ka Georgian",
-        "ko Korean",
-        "ku Kurdish",
-        "lo Lao",
-        "lt Lithuanian",
-        "lv Latvian",
-        "mi Maori",
-        "mk Macedonian",
-        "ml Malayalam"
-        "mn Mongolian",
-        "ms Malay",
-        "mt Maltese",
-        "nb Norwegian Bookmal",
-        "nds Low Saxon",
-        "nl Dutch",
-        "nn Norwegian Nynorsk",
-        "nso Northern Sotho",
-        "oc Occitan",
-        "pl Polish",
-        "pt Portuguese",
-        "pt_BR Brazilian Portuguese",
-        "ro Romanian",
-        "ru Russian",
-        "rw Kinyarwanda",
-        "se Northern Sami",
-        "sk Slovak",
-        "sl Slovenian",
-        "sq Albanian",
-        "sr Serbian",
-        "sr@Latn Serbian",
-        "ss Swati",
-        "sv Swedish",
-        "ta Tamil",
-        "tg Tajik",
-        "th Thai",
-        "tr Turkish",
-        "uk Ukrainian",
-        "uz Uzbek",
-        "ven Venda",
-        "vi Vietnamese",
-        "wa Walloon",
-        "xh Xhosa",
-        "zh_CN Chinese Simplified",
-        "zh_TW Chinese Traditional",
-        "zu Zulu"
-    };
+   label = new QLabel( i18n("Language (restart required)"), page );
+   gbox->addWidget( label, line, 0 );
+   OptionComboBox* pLanguage = new OptionComboBox( 0, "Language", &m_options.m_language, page, this );
+   gbox->addWidget( pLanguage, line, 1 );
+   pLanguage->addItem( "Auto" );  // Must not translate, won't work otherwise!
+   pLanguage->addItem( "en_orig" );
+      
+#if !defined(_WIN32) && !defined(Q_OS_OS2) 
+   // Read directory: Find all kdiff3_*.qm-files and insert the found files here
+   QDir localeDir( "/usr/share/locale" ); // See also kreplacements.cpp: getTranslationDir()
+   QStringList dirList = localeDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
 
-    label = new QLabel( i18n( "Language (restart required)" ), page );
-    gbox->addWidget( label, line, 0 );
-    OptionComboBox* pLanguage = new OptionComboBox( 0, "Language", &m_options.m_language, page, this );
-    gbox->addWidget( pLanguage, line, 1 );
-    pLanguage->addItem( "Auto" );  // Must not translate, won't work otherwise!
-    pLanguage->addItem( "en_orig" );
-
-#if !defined(_WIN32) && !defined(Q_OS_OS2)
-    // Read directory: Find all kdiff3_*.qm-files and insert the found files here
-    QDir localeDir( "/usr/share/locale" ); // See also kreplacements.cpp: getTranslationDir()
-    QStringList dirList = localeDir.entryList( QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name );
-
-    for( int i = 0; i < dirList.size(); ++i ) {
-        QString languageId = dirList[i];
-        if( ! QFile::exists( "/usr/share/locale/" + languageId + "/LC_MESSAGES/kdiff3.qm" ) )
-            continue;
+   for( int i = 0; i<dirList.size(); ++i )
+   {
+       QString languageId = dirList[i];
+       if ( ! QFile::exists( "/usr/share/locale/" + languageId + "/LC_MESSAGES/kdiff3.qm" ) )
+           continue;
 #else
-    // Read directory: Find all kdiff3_*.qm-files and insert the found files here
-
-    QDir localeDir( getTranslationDir( QString() ) );
-    QStringList fileList = localeDir.entryList( QStringList( "kdiff3_*.qm" ) , QDir::Files, QDir::Name );
-    for( int i = 0; i < fileList.size(); ++i ) {
-        QString fileName = fileList[i];
-        // Skip the "kdiff3_" and omit the .qm
-        QString languageId = fileName.mid( 7, fileName.length() - 10 );
+   // Read directory: Find all kdiff3_*.qm-files and insert the found files here
+   
+   QDir localeDir( getTranslationDir(QString()) );
+   QStringList fileList = localeDir.entryList( QStringList("kdiff3_*.qm") , QDir::Files, QDir::Name );
+   for( int i=0; i<fileList.size(); ++i )
+   {      
+      QString fileName = fileList[i];
+      // Skip the "kdiff3_" and omit the .qm
+      QString languageId = fileName.mid(7, fileName.length()-10 );
 #endif
 
-        unsigned int countryIdx = 0;
-        for( countryIdx = 0; countryIdx < sizeof( countryMap ) / sizeof( countryMap[0] ); ++countryIdx ) {
-            QString fullName = countryMap[countryIdx];
-            if( QString( languageId + " " ) == fullName.left( languageId.length() + 1 ) ) {
-                languageId += " (" + fullName.mid( languageId.length() + 1 ) + ")";
-            }
-        }
-
-        pLanguage->addItem( languageId );
-    }
-
-    label->setToolTip( i18n(
-                           "Choose the language of the GUI strings or \"Auto\".\n"
-                           "For a change of language to take place, quit and restart KDiff3." )
-                     );
-    ++line;
-    /*
-       label = new QLabel( i18n("Codec for file contents"), page );
-       gbox->addWidget( label, line, 0 );
-       OptionComboBox* pFileCodec = new OptionComboBox( 0, "FileCodec", &m_options.m_fileCodec, page, this );
-       gbox->addWidget( pFileCodec, line, 1 );
-       insertCodecs( pFileCodec );
-       label->setToolTip( i18n(
-          "Choose the codec that should be used for your input files\n"
-          "or \"Auto\" if unsure." )
-          );
-       ++line;
-    */
+      unsigned int countryIdx=0;
+      for(countryIdx=0; countryIdx< sizeof(countryMap)/sizeof(countryMap[0]); ++countryIdx )
+      {
+         QString fullName = countryMap[countryIdx];
+         if ( QString(languageId+" ") == fullName.left(languageId.length()+1) )
+         {
+            languageId += " (" + fullName.mid(languageId.length()+1) + ")";
+         }
+      }
+      
+      pLanguage->addItem( languageId );
+   }
+   
+   label->setToolTip( i18n(
+      "Choose the language of the GUI strings or \"Auto\".\n"
+      "For a change of language to take place, quit and restart KDiff3.") 
+      );
+   ++line;
+/*
+   label = new QLabel( i18n("Codec for file contents"), page );
+   gbox->addWidget( label, line, 0 );
+   OptionComboBox* pFileCodec = new OptionComboBox( 0, "FileCodec", &m_options.m_fileCodec, page, this );
+   gbox->addWidget( pFileCodec, line, 1 );
+   insertCodecs( pFileCodec );
+   label->setToolTip( i18n(
+      "Choose the codec that should be used for your input files\n"
+      "or \"Auto\" if unsure." ) 
+      );
+   ++line;
+*/      
 #endif
 
-    m_pSameEncoding = new OptionCheckBox( i18n( "Use the same encoding for everything:" ), true, "SameEncoding", &m_options.m_bSameEncoding, page, this );
-    gbox->addWidget( m_pSameEncoding, line, 0, 1, 2 );
-    m_pSameEncoding->setToolTip( i18n(
-                                     "Enable this allows to change all encodings by changing the first only.\n"
-                                     "Disable this if different individual settings are needed."
-                                 ) );
-    ++line;
+   m_pSameEncoding = new OptionCheckBox( i18n("Use the same encoding for everything:"), true, "SameEncoding", &m_options.m_bSameEncoding, page, this );
+   gbox->addWidget( m_pSameEncoding, line, 0, 1, 2 );
+   m_pSameEncoding->setToolTip( i18n(
+                  "Enable this allows to change all encodings by changing the first only.\n"
+                  "Disable this if different individual settings are needed."
+                  ) );
+   ++line;
 
-    label = new QLabel( i18n( "Note: Local Encoding is " ) + "\"" + QTextCodec::codecForLocale()->name() + "\"", page );
-    gbox->addWidget( label, line, 0 );
-    ++line;
+   label = new QLabel( i18n("Note: Local Encoding is ") + "\"" + QTextCodec::codecForLocale()->name() + "\"", page );
+   gbox->addWidget( label, line, 0 );
+   ++line;
 
-    label = new QLabel( i18n( "File Encoding for A:" ), page );
-    gbox->addWidget( label, line, 0 );
-    m_pEncodingAComboBox = new OptionEncodingComboBox( "EncodingForA", &m_options.m_pEncodingA, page, this );
-    gbox->addWidget( m_pEncodingAComboBox, line, 1 );
+   label = new QLabel( i18n("File Encoding for A:"), page );
+   gbox->addWidget( label, line, 0 );
+   m_pEncodingAComboBox = new OptionEncodingComboBox( "EncodingForA", &m_options.m_pEncodingA, page, this );
+   gbox->addWidget( m_pEncodingAComboBox, line, 1 );
 
-    QString autoDetectToolTip = i18n(
-                                    "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
-                                    "If the file is not Unicode then the selected encoding will be used as fallback.\n"
-                                    "(Unicode detection depends on the first bytes of a file.)"
-                                );
-    m_pAutoDetectUnicodeA = new OptionCheckBox( i18n( "Auto Detect Unicode" ), true, "AutoDetectUnicodeA", &m_options.m_bAutoDetectUnicodeA, page, this );
-    gbox->addWidget( m_pAutoDetectUnicodeA, line, 2 );
-    m_pAutoDetectUnicodeA->setToolTip( autoDetectToolTip );
-    ++line;
+   QString autoDetectToolTip = i18n(
+      "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
+      "If the file is not Unicode then the selected encoding will be used as fallback.\n"
+      "(Unicode detection depends on the first bytes of a file.)"
+      );
+   m_pAutoDetectUnicodeA = new OptionCheckBox( i18n("Auto Detect Unicode"), true, "AutoDetectUnicodeA", &m_options.m_bAutoDetectUnicodeA, page, this );
+   gbox->addWidget( m_pAutoDetectUnicodeA, line, 2 );
+   m_pAutoDetectUnicodeA->setToolTip( autoDetectToolTip );
+   ++line;
 
-    label = new QLabel( i18n( "File Encoding for B:" ), page );
-    gbox->addWidget( label, line, 0 );
-    m_pEncodingBComboBox = new OptionEncodingComboBox( "EncodingForB", &m_options.m_pEncodingB, page, this );
-    gbox->addWidget( m_pEncodingBComboBox, line, 1 );
-    m_pAutoDetectUnicodeB = new OptionCheckBox( i18n( "Auto Detect Unicode" ), true, "AutoDetectUnicodeB", &m_options.m_bAutoDetectUnicodeB, page, this );
-    gbox->addWidget( m_pAutoDetectUnicodeB, line, 2 );
-    m_pAutoDetectUnicodeB->setToolTip( autoDetectToolTip );
-    ++line;
+   label = new QLabel( i18n("File Encoding for B:"), page );
+   gbox->addWidget( label, line, 0 );
+   m_pEncodingBComboBox = new OptionEncodingComboBox( "EncodingForB", &m_options.m_pEncodingB, page, this );
+   gbox->addWidget( m_pEncodingBComboBox, line, 1 );
+   m_pAutoDetectUnicodeB = new OptionCheckBox( i18n("Auto Detect Unicode"), true, "AutoDetectUnicodeB", &m_options.m_bAutoDetectUnicodeB, page, this );
+   gbox->addWidget( m_pAutoDetectUnicodeB, line, 2 );
+   m_pAutoDetectUnicodeB->setToolTip( autoDetectToolTip );
+   ++line;
 
-    label = new QLabel( i18n( "File Encoding for C:" ), page );
-    gbox->addWidget( label, line, 0 );
-    m_pEncodingCComboBox = new OptionEncodingComboBox( "EncodingForC", &m_options.m_pEncodingC, page, this );
-    gbox->addWidget( m_pEncodingCComboBox, line, 1 );
-    m_pAutoDetectUnicodeC = new OptionCheckBox( i18n( "Auto Detect Unicode" ), true, "AutoDetectUnicodeC", &m_options.m_bAutoDetectUnicodeC, page, this );
-    gbox->addWidget( m_pAutoDetectUnicodeC, line, 2 );
-    m_pAutoDetectUnicodeC->setToolTip( autoDetectToolTip );
-    ++line;
+   label = new QLabel( i18n("File Encoding for C:"), page );
+   gbox->addWidget( label, line, 0 );
+   m_pEncodingCComboBox = new OptionEncodingComboBox( "EncodingForC", &m_options.m_pEncodingC, page, this );
+   gbox->addWidget( m_pEncodingCComboBox, line, 1 );
+   m_pAutoDetectUnicodeC = new OptionCheckBox( i18n("Auto Detect Unicode"), true, "AutoDetectUnicodeC", &m_options.m_bAutoDetectUnicodeC, page, this );
+   gbox->addWidget( m_pAutoDetectUnicodeC, line, 2 );
+   m_pAutoDetectUnicodeC->setToolTip( autoDetectToolTip );
+   ++line;
 
-    label = new QLabel( i18n( "File Encoding for Merge Output and Saving:" ), page );
-    gbox->addWidget( label, line, 0 );
-    m_pEncodingOutComboBox = new OptionEncodingComboBox( "EncodingForOutput", &m_options.m_pEncodingOut, page, this );
-    gbox->addWidget( m_pEncodingOutComboBox, line, 1 );
-    m_pAutoSelectOutEncoding = new OptionCheckBox( i18n( "Auto Select" ), true, "AutoSelectOutEncoding", &m_options.m_bAutoSelectOutEncoding, page, this );
-    gbox->addWidget( m_pAutoSelectOutEncoding, line, 2 );
-    m_pAutoSelectOutEncoding->setToolTip( i18n(
-            "If enabled then the encoding from the input files is used.\n"
-            "In ambiguous cases a dialog will ask the user to choose the encoding for saving."
-                                          ) );
-    ++line;
-    label = new QLabel( i18n( "File Encoding for Preprocessor Files:" ), page );
-    gbox->addWidget( label, line, 0 );
-    m_pEncodingPPComboBox = new OptionEncodingComboBox( "EncodingForPP", &m_options.m_pEncodingPP, page, this );
-    gbox->addWidget( m_pEncodingPPComboBox, line, 1 );
-    ++line;
+   label = new QLabel( i18n("File Encoding for Merge Output and Saving:"), page );
+   gbox->addWidget( label, line, 0 );
+   m_pEncodingOutComboBox = new OptionEncodingComboBox( "EncodingForOutput", &m_options.m_pEncodingOut, page, this );
+   gbox->addWidget( m_pEncodingOutComboBox, line, 1 );
+   m_pAutoSelectOutEncoding = new OptionCheckBox( i18n("Auto Select"), true, "AutoSelectOutEncoding", &m_options.m_bAutoSelectOutEncoding, page, this );
+   gbox->addWidget( m_pAutoSelectOutEncoding, line, 2 );
+   m_pAutoSelectOutEncoding->setToolTip( i18n(
+      "If enabled then the encoding from the input files is used.\n"
+      "In ambiguous cases a dialog will ask the user to choose the encoding for saving."
+      ) );
+   ++line;
+   label = new QLabel( i18n("File Encoding for Preprocessor Files:"), page );
+   gbox->addWidget( label, line, 0 );
+   m_pEncodingPPComboBox = new OptionEncodingComboBox( "EncodingForPP", &m_options.m_pEncodingPP, page, this );
+   gbox->addWidget( m_pEncodingPPComboBox, line, 1 );   
+   ++line;
 
-    connect( m_pSameEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged );
-    connect( m_pEncodingAComboBox, static_cast<void ( OptionEncodingComboBox::* )( int )>( &OptionEncodingComboBox::activated ), this, &OptionDialog::slotEncodingChanged );
-    connect( m_pAutoDetectUnicodeA, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged );
-    connect( m_pAutoSelectOutEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged );
+   connect(m_pSameEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
+   connect(m_pEncodingAComboBox, static_cast<void (OptionEncodingComboBox::*)(int)>(&OptionEncodingComboBox::activated), this, &OptionDialog::slotEncodingChanged);
+   connect(m_pAutoDetectUnicodeA, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
+   connect(m_pAutoSelectOutEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
 
-    OptionCheckBox* pRightToLeftLanguage = new OptionCheckBox( i18n( "Right To Left Language" ), false, "RightToLeftLanguage", &m_options.m_bRightToLeftLanguage, page, this );
-    gbox->addWidget( pRightToLeftLanguage, line, 0, 1, 2 );
-    pRightToLeftLanguage->setToolTip( i18n(
-                                          "Some languages are read from right to left.\n"
-                                          "This setting will change the viewer and editor accordingly." ) );
-    ++line;
+   OptionCheckBox* pRightToLeftLanguage = new OptionCheckBox( i18n("Right To Left Language"), false, "RightToLeftLanguage", &m_options.m_bRightToLeftLanguage, page, this );
+   gbox->addWidget( pRightToLeftLanguage, line, 0, 1, 2 );
+   pRightToLeftLanguage->setToolTip( i18n(
+                 "Some languages are read from right to left.\n"
+                 "This setting will change the viewer and editor accordingly."));
+   ++line;   
 
 
-    topLayout->addStretch( 10 );
+   topLayout->addStretch(10);
 }
 
 #ifdef _WIN32
@@ -1680,135 +1653,149 @@ void OptionDialog::setupIntegrationPage( void ) {
     ++line;
 
 #ifdef _WIN32
-    QPushButton* pIntegrateWithClearCase = new QPushButton( i18n( "Integrate with ClearCase" ), page );
-    gbox->addWidget( pIntegrateWithClearCase, line, 0 );
-    pIntegrateWithClearCase->setToolTip( i18n(
-            "Integrate with Rational ClearCase from IBM.\n"
-            "Modifies the \"map\" file in ClearCase subdir \"lib/mgrs\"\n"
-            "(Only enabled when ClearCase \"bin\" directory is in the path.)" ) );
-    connect( pIntegrateWithClearCase, &QPushButton::clicked, this, &OptionDialog::slotIntegrateWithClearCase );
-    pIntegrateWithClearCase->setEnabled( integrateWithClearCase( "existsClearCase", "" ) != 0 );
+   QPushButton* pIntegrateWithClearCase = new QPushButton( i18n("Integrate with ClearCase"), page);
+   gbox->addWidget( pIntegrateWithClearCase, line, 0 );
+   pIntegrateWithClearCase->setToolTip( i18n(
+                 "Integrate with Rational ClearCase from IBM.\n"
+                 "Modifies the \"map\" file in ClearCase subdir \"lib/mgrs\"\n"
+                 "(Only enabled when ClearCase \"bin\" directory is in the path.)"));
+   connect(pIntegrateWithClearCase, &QPushButton::clicked, this, &OptionDialog::slotIntegrateWithClearCase);
+   pIntegrateWithClearCase->setEnabled( integrateWithClearCase( "existsClearCase", "" )!=0 );
 
-    QPushButton* pRemoveClearCaseIntegration = new QPushButton( i18n( "Remove ClearCase Integration" ), page );
-    gbox->addWidget( pRemoveClearCaseIntegration, line, 1 );
-    pRemoveClearCaseIntegration->setToolTip( i18n(
-                "Restore the old \"map\" file from before doing the ClearCase integration." ) );
-    connect( pRemoveClearCaseIntegration, &QPushButton::clicked, this, &OptionDialog::slotRemoveClearCaseIntegration );
-    pRemoveClearCaseIntegration->setEnabled( integrateWithClearCase( "existsClearCase", "" ) != 0 );
+   QPushButton* pRemoveClearCaseIntegration = new QPushButton( i18n("Remove ClearCase Integration"), page);
+   gbox->addWidget( pRemoveClearCaseIntegration, line, 1 );
+   pRemoveClearCaseIntegration->setToolTip( i18n(
+                 "Restore the old \"map\" file from before doing the ClearCase integration."));
+   connect(pRemoveClearCaseIntegration, &QPushButton::clicked, this, &OptionDialog::slotRemoveClearCaseIntegration);
+   pRemoveClearCaseIntegration->setEnabled( integrateWithClearCase( "existsClearCase", "" )!=0 );
 
-    ++line;
+   ++line;
 #endif
 
-    topLayout->addStretch( 10 );
+   topLayout->addStretch(10);
 }
 
-void OptionDialog::slotIntegrateWithClearCase() {
+void OptionDialog::slotIntegrateWithClearCase()
+{
 #ifdef _WIN32
-    char kdiff3CommandPath[1000];
-    GetModuleFileNameA( 0, kdiff3CommandPath, sizeof( kdiff3CommandPath ) - 1 );
-    integrateWithClearCase( "install", kdiff3CommandPath );
+   char kdiff3CommandPath[1000];
+   GetModuleFileNameA( 0, kdiff3CommandPath, sizeof(kdiff3CommandPath)-1 );
+   integrateWithClearCase( "install", kdiff3CommandPath );
 #endif
 }
 
-void OptionDialog::slotRemoveClearCaseIntegration() {
+void OptionDialog::slotRemoveClearCaseIntegration()
+{
 #ifdef _WIN32
-    char kdiff3CommandPath[1000];
-    GetModuleFileNameA( 0, kdiff3CommandPath, sizeof( kdiff3CommandPath ) - 1 );
-    integrateWithClearCase( "uninstall", kdiff3CommandPath );
+   char kdiff3CommandPath[1000];
+   GetModuleFileNameA( 0, kdiff3CommandPath, sizeof(kdiff3CommandPath)-1 );
+   integrateWithClearCase( "uninstall", kdiff3CommandPath );
 #endif
 }
 
-void OptionDialog::slotEncodingChanged() {
-    if( m_pSameEncoding->isChecked() ) {
-        m_pEncodingBComboBox->setEnabled( false );
-        m_pEncodingBComboBox->setCurrentIndex( m_pEncodingAComboBox->currentIndex() );
-        m_pEncodingCComboBox->setEnabled( false );
-        m_pEncodingCComboBox->setCurrentIndex( m_pEncodingAComboBox->currentIndex() );
-        m_pEncodingOutComboBox->setEnabled( false );
-        m_pEncodingOutComboBox->setCurrentIndex( m_pEncodingAComboBox->currentIndex() );
-        m_pEncodingPPComboBox->setEnabled( false );
-        m_pEncodingPPComboBox->setCurrentIndex( m_pEncodingAComboBox->currentIndex() );
-        m_pAutoDetectUnicodeB->setEnabled( false );
-        m_pAutoDetectUnicodeB->setCheckState( m_pAutoDetectUnicodeA->checkState() );
-        m_pAutoDetectUnicodeC->setEnabled( false );
-        m_pAutoDetectUnicodeC->setCheckState( m_pAutoDetectUnicodeA->checkState() );
-        m_pAutoSelectOutEncoding->setEnabled( false );
-        m_pAutoSelectOutEncoding->setCheckState( m_pAutoDetectUnicodeA->checkState() );
-    }
-    else {
-        m_pEncodingBComboBox->setEnabled( true );
-        m_pEncodingCComboBox->setEnabled( true );
-        m_pEncodingOutComboBox->setEnabled( true );
-        m_pEncodingPPComboBox->setEnabled( true );
-        m_pAutoDetectUnicodeB->setEnabled( true );
-        m_pAutoDetectUnicodeC->setEnabled( true );
-        m_pAutoSelectOutEncoding->setEnabled( true );
-        m_pEncodingOutComboBox->setEnabled( m_pAutoSelectOutEncoding->checkState() == Qt::Unchecked );
-    }
+void OptionDialog::slotEncodingChanged()
+{
+   if ( m_pSameEncoding->isChecked() )
+   {
+      m_pEncodingBComboBox->setEnabled( false );
+      m_pEncodingBComboBox->setCurrentIndex( m_pEncodingAComboBox->currentIndex() );
+      m_pEncodingCComboBox->setEnabled( false );
+      m_pEncodingCComboBox->setCurrentIndex( m_pEncodingAComboBox->currentIndex() );
+      m_pEncodingOutComboBox->setEnabled( false );
+      m_pEncodingOutComboBox->setCurrentIndex( m_pEncodingAComboBox->currentIndex() );
+      m_pEncodingPPComboBox->setEnabled( false );
+      m_pEncodingPPComboBox->setCurrentIndex( m_pEncodingAComboBox->currentIndex() );
+      m_pAutoDetectUnicodeB->setEnabled( false );
+      m_pAutoDetectUnicodeB->setCheckState( m_pAutoDetectUnicodeA->checkState() );
+      m_pAutoDetectUnicodeC->setEnabled( false );
+      m_pAutoDetectUnicodeC->setCheckState( m_pAutoDetectUnicodeA->checkState() );
+      m_pAutoSelectOutEncoding->setEnabled( false );
+      m_pAutoSelectOutEncoding->setCheckState( m_pAutoDetectUnicodeA->checkState() );
+   }
+   else
+   {
+      m_pEncodingBComboBox->setEnabled( true );
+      m_pEncodingCComboBox->setEnabled( true );
+      m_pEncodingOutComboBox->setEnabled( true );
+      m_pEncodingPPComboBox->setEnabled( true );
+      m_pAutoDetectUnicodeB->setEnabled( true );
+      m_pAutoDetectUnicodeC->setEnabled( true );
+      m_pAutoSelectOutEncoding->setEnabled( true );
+      m_pEncodingOutComboBox->setEnabled( m_pAutoSelectOutEncoding->checkState()==Qt::Unchecked );
+   }
 }
 
-void OptionDialog::setupKeysPage( void ) {
-    //QVBox *page = addVBoxPage( i18n("Keys"), i18n("KeyDialog" ),
-    //                          BarIcon("fonts", KIconLoader::SizeMedium ) );
+void OptionDialog::setupKeysPage( void )
+{
+   //QVBox *page = addVBoxPage( i18n("Keys"), i18n("KeyDialog" ),
+   //                          BarIcon("fonts", KIconLoader::SizeMedium ) );
 
-    //QVBoxLayout *topLayout = new QVBoxLayout( page, 0, KDialog::spacingHint() );
+   //QVBoxLayout *topLayout = new QVBoxLayout( page, 0, KDialog::spacingHint() );
     //           new KFontChooser( page,"font",false/*onlyFixed*/,QStringList(),false,6 );
-    //m_pKeyDialog=new KKeyDialog( false, 0 );
-    //topLayout->addWidget( m_pKeyDialog );
+   //m_pKeyDialog=new KKeyDialog( false, 0 );
+   //topLayout->addWidget( m_pKeyDialog );
 }
 
-void OptionDialog::slotOk( void ) {
-    slotApply();
+void OptionDialog::slotOk( void )
+{
+   slotApply();
 
-    accept();
+   accept();
 }
 
 
 /** Copy the values from the widgets to the public variables.*/
-void OptionDialog::slotApply( void ) {
-    std::list<OptionItem*>::iterator i;
-    for( i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i ) {
-        ( *i )->apply();
-    }
+void OptionDialog::slotApply( void )
+{
+   std::list<OptionItem*>::iterator i;
+   for(i=m_optionItemList.begin(); i!=m_optionItemList.end(); ++i)
+   {
+      (*i)->apply();
+   }
 
-    emit applyDone();
+   emit applyDone();
 
 #ifdef _WIN32
-    QString locale = m_options.m_language;
-    if( locale == "Auto" || locale.isEmpty() )
-        locale = QLocale::system().name().left( 2 );
-    int spacePos = locale.indexOf( ' ' );
-    if( spacePos > 0 ) locale = locale.left( spacePos );
-    QSettings settings( "HKEY_CURRENT_USER\\Software\\KDiff3\\diff-ext", QSettings::NativeFormat );
-    settings.setValue( "Language", locale );
+   QString locale = m_options.m_language;
+   if ( locale == "Auto" || locale.isEmpty() )
+      locale = QLocale::system().name().left(2);
+   int spacePos = locale.indexOf(' ');
+   if (spacePos>0) locale = locale.left(spacePos);
+   QSettings settings("HKEY_CURRENT_USER\\Software\\KDiff3\\diff-ext", QSettings::NativeFormat);
+   settings.setValue( "Language", locale );
 #endif
 }
 
 /** Set the default values in the widgets only, while the
     public variables remain unchanged. */
-void OptionDialog::slotDefault() {
-    int result = KMessageBox::warningContinueCancel( this, i18n( "This resets all options. Not only those of the current topic." ) );
-    if( result == KMessageBox::Cancel ) return;
-    else resetToDefaults();
+void OptionDialog::slotDefault()
+{
+   int result = KMessageBox::warningContinueCancel(this, i18n("This resets all options. Not only those of the current topic.") );
+   if ( result==KMessageBox::Cancel ) return;
+   else resetToDefaults();
 }
 
-void OptionDialog::resetToDefaults() {
-    std::list<OptionItem*>::iterator i;
-    for( i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i ) {
-        ( *i )->setToDefault();
-    }
+void OptionDialog::resetToDefaults()
+{
+   std::list<OptionItem*>::iterator i;
+   for(i=m_optionItemList.begin(); i!=m_optionItemList.end(); ++i)
+   {
+      (*i)->setToDefault();
+   }
 
-    slotEncodingChanged();
+   slotEncodingChanged();
 }
 
 /** Initialise the widgets using the values in the public varibles. */
-void OptionDialog::setState() {
-    std::list<OptionItem*>::iterator i;
-    for( i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i ) {
-        ( *i )->setToCurrent();
-    }
+void OptionDialog::setState()
+{
+   std::list<OptionItem*>::iterator i;
+   for(i=m_optionItemList.begin(); i!=m_optionItemList.end(); ++i)
+   {
+      (*i)->setToCurrent();
+   }
 
-    slotEncodingChanged();
+   slotEncodingChanged();
 }
 
 class ConfigValueMap : public ValueMap {
@@ -1873,82 +1860,97 @@ class ConfigValueMap : public ValueMap {
 };
 
 
-void OptionDialog::saveOptions( KSharedConfigPtr config ) {
-    // No i18n()-Translations here!
+void OptionDialog::saveOptions( KSharedConfigPtr config )
+{
+   // No i18n()-Translations here!
 
-    ConfigValueMap cvm( config->group( KDIFF3_CONFIG_GROUP ) );
-    std::list<OptionItem*>::iterator i;
-    for( i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i ) {
-        ( *i )->doUnpreserve();
-        ( *i )->write( &cvm );
-    }
+   ConfigValueMap cvm(config->group(KDIFF3_CONFIG_GROUP));
+   std::list<OptionItem*>::iterator i;
+   for(i=m_optionItemList.begin(); i!=m_optionItemList.end(); ++i)
+   {
+      (*i)->doUnpreserve();
+      (*i)->write(&cvm);
+   }
 }
 
-void OptionDialog::readOptions( KSharedConfigPtr config ) {
-    // No i18n()-Translations here!
+void OptionDialog::readOptions( KSharedConfigPtr config )
+{
+   // No i18n()-Translations here!
 
-    ConfigValueMap cvm( config->group( KDIFF3_CONFIG_GROUP ) );
-    std::list<OptionItem*>::iterator i;
-    for( i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i ) {
-        ( *i )->read( &cvm );
-    }
+   ConfigValueMap cvm(config->group(KDIFF3_CONFIG_GROUP));
+   std::list<OptionItem*>::iterator i;
+   for(i=m_optionItemList.begin(); i!=m_optionItemList.end(); ++i)
+   {
+      (*i)->read(&cvm);
+   }
 
-    setState();
+   setState();
 }
 
-QString OptionDialog::parseOptions( const QStringList& optionList ) {
-    QString result;
-    QStringList::const_iterator i;
-    for( i = optionList.begin(); i != optionList.end(); ++i ) {
-        QString s = *i;
+QString OptionDialog::parseOptions( const QStringList& optionList )
+{
+   QString result;
+   QStringList::const_iterator i;
+   for ( i=optionList.begin(); i!=optionList.end(); ++i )
+   {
+      QString s = *i;
 
-        int pos = s.indexOf( '=' );
-        if( pos > 0 ) {                   // seems not to have a tag
-            QString key = s.left( pos );
-            QString val = s.mid( pos + 1 );
-            std::list<OptionItem*>::iterator j;
-            bool bFound = false;
-            for( j = m_optionItemList.begin(); j != m_optionItemList.end(); ++j ) {
-                if( ( *j )->getSaveName() == key ) {
-                    ( *j )->doPreserve();
-                    ValueMap config;
-                    config.writeEntry( key, val );  // Write the value as a string and
-                    ( *j )->read( &config );   // use the internal conversion from string to the needed value.
-                    bFound = true;
-                    break;
-                }
+      int pos = s.indexOf('=');
+      if( pos > 0 )                     // seems not to have a tag
+      {
+         QString key = s.left(pos);
+         QString val = s.mid(pos+1);
+         std::list<OptionItem*>::iterator j;
+         bool bFound = false;
+         for(j=m_optionItemList.begin(); j!=m_optionItemList.end(); ++j)
+         {
+            if ( (*j)->getSaveName()==key )
+            {
+	       (*j)->doPreserve();
+               ValueMap config;
+               config.writeEntry( key, val );  // Write the value as a string and	       
+               (*j)->read(&config);       // use the internal conversion from string to the needed value.
+               bFound = true;
+               break;
             }
-            if( ! bFound ) {
-                result += "No config item named \"" + key + "\"\n";
-            }
-        }
-        else {
-            result += "No '=' found in \"" + s + "\"\n";
-        }
-    }
-    return result;
+         }
+         if ( ! bFound )
+         {
+            result += "No config item named \"" + key + "\"\n";
+         }
+      }
+      else
+      {
+         result += "No '=' found in \"" + s + "\"\n";
+      }
+   }
+   return result;
 }
 
-QString OptionDialog::calcOptionHelp() {
-    ValueMap config;
-    std::list<OptionItem*>::iterator j;
-    for( j = m_optionItemList.begin(); j != m_optionItemList.end(); ++j ) {
-        ( *j )->write( &config );
-    }
-    return config.getAsString();
+QString OptionDialog::calcOptionHelp()
+{
+   ValueMap config;
+   std::list<OptionItem*>::iterator j;
+   for(j=m_optionItemList.begin(); j!=m_optionItemList.end(); ++j)
+   {
+      (*j)->write( &config );
+   }
+   return config.getAsString();
 }
 
-void OptionDialog::slotHistoryMergeRegExpTester() {
-    RegExpTester dlg( this, s_autoMergeRegExpToolTip, s_historyStartRegExpToolTip,
-                      s_historyEntryStartRegExpToolTip, s_historyEntryStartSortKeyOrderToolTip );
-    dlg.init( m_pAutoMergeRegExpLineEdit->currentText(), m_pHistoryStartRegExpLineEdit->currentText(),
-              m_pHistoryEntryStartRegExpLineEdit->currentText(), m_pHistorySortKeyOrderLineEdit->currentText() );
-    if( dlg.exec() ) {
-        m_pAutoMergeRegExpLineEdit->setEditText( dlg.autoMergeRegExp() );
-        m_pHistoryStartRegExpLineEdit->setEditText( dlg.historyStartRegExp() );
-        m_pHistoryEntryStartRegExpLineEdit->setEditText( dlg.historyEntryStartRegExp() );
-        m_pHistorySortKeyOrderLineEdit->setEditText( dlg.historySortKeyOrder() );
-    }
+void OptionDialog::slotHistoryMergeRegExpTester()
+{
+   RegExpTester dlg(this, s_autoMergeRegExpToolTip, s_historyStartRegExpToolTip, 
+                          s_historyEntryStartRegExpToolTip, s_historyEntryStartSortKeyOrderToolTip );
+   dlg.init(m_pAutoMergeRegExpLineEdit->currentText(), m_pHistoryStartRegExpLineEdit->currentText(), 
+            m_pHistoryEntryStartRegExpLineEdit->currentText(), m_pHistorySortKeyOrderLineEdit->currentText());
+   if ( dlg.exec() )
+   {
+      m_pAutoMergeRegExpLineEdit->setEditText( dlg.autoMergeRegExp() );
+      m_pHistoryStartRegExpLineEdit->setEditText( dlg.historyStartRegExp() );
+      m_pHistoryEntryStartRegExpLineEdit->setEditText( dlg.historyEntryStartRegExp() );
+      m_pHistorySortKeyOrderLineEdit->setEditText( dlg.historySortKeyOrder() );
+   }
 }
 
 

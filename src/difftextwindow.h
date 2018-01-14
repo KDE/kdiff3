@@ -76,7 +76,8 @@ public:
    void getSelectionRange( int* firstLine, int* lastLine, e_CoordType coordType );
 
    void setPaintingAllowed( bool bAllowPainting );
-   void recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int nofVisibleColumns );
+   void recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int nofVisibleColumns, ProgressProxy* );
+   void recalcWordWrapHelper( bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth, int cacheListIdx, ProgressProxy* );
    void print( MyPainter& painter, const QRect& r, int firstLine, int nofLinesPerPage );
 Q_SIGNALS:
    void resizeSignal( int nofVisibleColumns, int nofVisibleLines );
