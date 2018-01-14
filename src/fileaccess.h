@@ -17,7 +17,7 @@
 
 #include <kio/job.h>
 #include <kio/jobclasses.h>
-#include <QUrl>
+#include "QUrlFix.h"
 #include <list>
 
 
@@ -66,7 +66,7 @@ public:
    QString fileName() const; // Just the name-part of the path, without parent directories
    QString filePath() const; // The path-string that was used during construction
    QString prettyAbsPath() const;
-   QUrl url() const;
+   QUrlFix url() const;
    QString absoluteFilePath() const;
 
    bool isLocal() const;

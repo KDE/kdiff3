@@ -52,7 +52,7 @@ public:
    }
    void reset()
    {
-      m_url = QUrl();
+      m_url = QUrlFix();
       m_bValidData = false;
       m_name = QString();
       //m_creationTime = QDateTime();
@@ -65,7 +65,7 @@ public:
       m_pParent = 0;
    }
    
-   QUrl m_url;
+   QUrlFix m_url;
    bool m_bLocal;
    bool m_bValidData;
 
@@ -250,11 +250,11 @@ void FileAccess::setFile( const QFileInfo& fi, FileAccess* pParent )
       }
       d()->m_bLocal = true;
       d()->m_bValidData = true;
-      d()->m_url = QUrl( fi.filePath() );
+      d()->m_url = QUrlFix( fi.filePath() );
       if ( d()->m_url.isRelative() )
       {
 	
-         d()->m_url = QUrl::fromUserInput(absoluteFilePath());
+         d()->m_url = QUrlFix::fromUserInput(absoluteFilePath());
       }
 
       if ( !m_bExists  && absoluteFilePath().contains("@@") )
@@ -307,8 +307,9 @@ void FileAccess::setFile( const QString& name, bool bWantToWrite )
    //       (This is a Win95-bug which has been corrected only in WinNT/2000/XP.)
    if ( !name.isEmpty() )
    {
-      QUrl url( name );
-      
+      QUrlFix url( name );
+      if(url.scheme().isEmpty()) url.setScheme("file");//so QUrlFix:isLocalFile: works as expected on QT5.
+
       // FileAccess tries to detect if the given name is an URL or a local file.
       // This is a problem if the filename looks like an URL (i.e. contains a colon ':').
       // e.g. "file:f.txt" is a valid filename.
@@ -366,7 +367,7 @@ void FileAccess::addPath( const QString& txt )
 {
    if ( d()!=0 && d()->m_url.isValid() )
    {
-      QUrl url = d()->m_url.adjusted(QUrl::StripTrailingSlash);
+      QUrlFix url = d()->m_url.adjusted(QUrlFix::StripTrailingSlash);
       d()->m_url.setPath(url.path()+'/'+txt );
       setFile( d()->m_url.url() );  // reinitialise
    }
@@ -445,7 +446,7 @@ void FileAccess::setUdsEntry( const KIO::UDSEntry& e )
             break;
          }
 
-         case KIO::UDSEntry::UDS_URL :               // m_url = QUrl( e.stringValue(f) );
+         case KIO::UDSEntry::UDS_URL :               // m_url = QUrlFix( e.stringValue(f) );
                                            break;
          case KIO::UDSEntry::UDS_MIME_TYPE :         break;
          case KIO::UDSEntry::UDS_GUESSED_MIME_TYPE : break;
@@ -511,16 +512,16 @@ qint64 FileAccess::size() const
       return QFileInfo( absoluteFilePath() ).size();
 }
 
-QUrl FileAccess::url() const           
+QUrlFix FileAccess::url() const           
 {  
    if ( d()!=0 )
       return d()->m_url;
    else
    {
-      QUrl url( m_filePath );
+      QUrlFix url( m_filePath );
       if ( url.isRelative() )
       {
-         url = QUrl::fromLocalFile( absoluteFilePath() );
+         url = QUrlFix::fromLocalFile( absoluteFilePath() );
       }
       return url;
    }   
@@ -913,7 +914,7 @@ void FileAccess::setStatusText( const QString& s )
 
 QString FileAccess::cleanPath( const QString& path ) // static
 {
-   QUrl url(path);
+   QUrlFix url(path);
    if ( url.isLocalFile() || ! url.isValid() )
    {
       return QDir().cleanPath( path );
@@ -1100,7 +1101,8 @@ void FileAccessJobHandler::slotPutJobResult(KJob* pJob)
 
 bool FileAccessJobHandler::mkDir( const QString& dirName )
 {
-   QUrl dirURL = QUrl( dirName );
+   QUrlFix dirURL = QUrlFix( dirName );
+
    if ( dirName.isEmpty() )
       return false;
    else if ( dirURL.isLocalFile() || dirURL.isRelative() )
@@ -1120,7 +1122,8 @@ bool FileAccessJobHandler::mkDir( const QString& dirName )
 
 bool FileAccessJobHandler::rmDir( const QString& dirName )
 {
-   QUrl dirURL = QUrl( dirName );
+   QUrlFix dirURL = QUrlFix( dirName );
+
    if ( dirName.isEmpty() )
       return false;
    else if ( dirURL.isLocalFile() )
@@ -1174,9 +1177,11 @@ bool FileAccessJobHandler::rename( const QString& dest )
    if ( dest.isEmpty() )
       return false;
 
-   QUrl kurl( dest );
+   QUrlFix kurl( dest );
+   if(kurl.scheme().isEmpty()) kurl.setScheme("file");//so QUrlFix:isLocalFile: works as expected on QT5.
+
    if ( kurl.isRelative() )
-      kurl = QUrl( QDir().absoluteFilePath(dest) ); // assuming that invalid means relative
+      kurl = QUrlFix( QDir().absoluteFilePath(dest) ); // assuming that invalid means relative
 
    if ( m_pFileAccess->isLocal() && kurl.isLocalFile() )
    {
@@ -1215,9 +1220,11 @@ void FileAccessJobHandler::slotSimpleJobResult(KJob* pJob)
 bool FileAccessJobHandler::copyFile( const QString& dest )
 {
    ProgressProxyExtender pp;
-   QUrl destUrl( dest );
+   QUrlFix destUrl( dest );
+   if(destUrl.scheme().isEmpty()) destUrl.setScheme("file");//so QUrlFix:isLocalFile: works as expected on QT5.
+
    m_pFileAccess->setStatusText( QString() );
-   if ( ! m_pFileAccess->isLocal() || ! destUrl.isLocalFile() ) // if either url is nonlocal
+   if ( ! m_pFileAccess->isLocal() || !destUrl.isLocalFile() ) // if either url is nonlocal
    {
       int permissions = (m_pFileAccess->isExecutable()?0111:0)+(m_pFileAccess->isWritable()?0222:0)+(m_pFileAccess->isReadable()?0444:0);
       m_bSuccess = false;
@@ -1755,7 +1762,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
 
 void FileAccessJobHandler::slotListDirProcessNewEntries( KIO::Job*, const KIO::UDSEntryList& l )
 {
-   QUrl parentUrl( QUrl::fromUserInput(m_pFileAccess->absoluteFilePath()) );
+   QUrlFix parentUrl( QUrlFix::fromUserInput(m_pFileAccess->absoluteFilePath()) );
    
    KIO::UDSEntryList::ConstIterator i;
    for ( i=l.begin(); i!=l.end(); ++i )
