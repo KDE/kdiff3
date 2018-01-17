@@ -243,7 +243,6 @@ QFont ValueMap::readFontEntry(const QString& k, const QFont* defaultVal )
       f.setPointSize( subSection( i->second, 1, ',' ).toInt() );
       f.setBold( subSection( i->second, 2, ',' )=="bold" );
    }
-   f.setKerning(false);
    return f;
 }
 

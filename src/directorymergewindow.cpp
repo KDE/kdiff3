@@ -34,7 +34,7 @@
 #include <QLabel>
 #include <QSplitter>
 #include <QTextEdit>
-#include <QItemDelegate>
+#include <QStyledItemDelegate>
 #include <QPushButton>
 #include <algorithm>
 
@@ -602,13 +602,13 @@ QVariant DirectoryMergeWindow::Data::headerData ( int section, Qt::Orientation o
 }
 
 // Previously  Q3ListViewItem::paintCell(p,cg,column,width,align);
-class DirectoryMergeWindow::DirMergeItemDelegate : public QItemDelegate
+class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
 {
    DirectoryMergeWindow* m_pDMW;
    DirectoryMergeWindow::Data* d;
 public:
    DirMergeItemDelegate(DirectoryMergeWindow* pParent) 
-      : QItemDelegate(pParent), m_pDMW(pParent), d(pParent->d)
+      : QStyledItemDelegate(pParent), m_pDMW(pParent), d(pParent->d)
    {
    }
    void paint( QPainter * p, const QStyleOptionViewItem & option, const QModelIndex & index ) const 
@@ -672,11 +672,11 @@ public:
       {
          option2.displayAlignment = Qt::AlignRight;
       }
-      QItemDelegate::paint( p, option2, index );
+      QStyledItemDelegate::paint( p, option2, index );
    }
    QSize sizeHint( const QStyleOptionViewItem & option, const QModelIndex & index ) const 
    {
-      QSize sz = QItemDelegate::sizeHint( option, index );
+      QSize sz = QStyledItemDelegate::sizeHint( option, index );
       return sz.expandedTo( QSize(0,18) );
    }
 };
@@ -1740,6 +1740,7 @@ void DirectoryMergeWindow::Data::prepareListView( ProgressProxy& pp )
    int currentIdx = 1;
    QTime t;
    t.start();
+   pp.setMaxNofSteps(nrOfFiles);
    for( j=m_fileMergeMap.begin(); j!=m_fileMergeMap.end(); ++j )
    {
       MergeFileInfos& mfi = j.value();
@@ -1749,7 +1750,7 @@ void DirectoryMergeWindow::Data::prepareListView( ProgressProxy& pp )
 
       pp.setInformation(
          i18n("Processing ") + QString::number(currentIdx) +" / "+ QString::number(nrOfFiles)
-         +"\n" + fileName, double(currentIdx) / nrOfFiles, false );
+         +"\n" + fileName, currentIdx, false );
       if ( pp.wasCancelled() ) break;
       ++currentIdx;
 
@@ -2358,7 +2359,7 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
    MergeFileInfos* pMFI = d->getMFI(mi);
    if ( pMFI==0 )
    {
-      KMessageBox::error( this, i18n("This should never happen: \n\nmergeResultSaved: m_pMFI=0\n\nIf you know how to reproduce this, please contact the program author."),i18n("Program Error") );
+      // This can happen if the same file is saved and modified and saved again. Nothing to do then.
       return;
    }
    if ( fileName == d->fullNameDest(*pMFI) )

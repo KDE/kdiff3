@@ -35,6 +35,7 @@
 #include <QFrame>
 #include <QVBoxLayout>
 #include <QFontDatabase>
+#include <QFontDialog>
 
 #include <KColorButton>
 #include <KFontChooser>
@@ -193,11 +194,51 @@ typedef OptionT<QPoint> OptionPoint;
 typedef OptionT<QSize> OptionSize;
 typedef OptionT<QStringList> OptionStringList;
 
-class OptionFontChooser : public KFontChooser, public OptionItemT<QFont>
+
+FontChooser::FontChooser( QWidget* pParent )
+: QGroupBox(pParent)
+{
+   QVBoxLayout* pLayout = new QVBoxLayout( this );
+   m_pSelectFont = new QPushButton(i18n("Select Font"), this );
+   connect(m_pSelectFont, SIGNAL(clicked()), this, SLOT(slotSelectFont()));
+   pLayout->addWidget(m_pSelectFont);
+
+   m_pLabel = new QLabel( "", this );
+   m_pLabel->setFont( m_font );
+   m_pLabel->setMinimumWidth(200);
+   QChar visualTab(0x2192);
+   QChar visualSpace((ushort)0xb7);
+   m_pLabel->setText( QString("The quick brown fox jumps over the river\n"
+                      "but the little red hen escapes with a shiver.\n"
+                      ":-)")+visualTab+visualSpace);
+   pLayout->addWidget(m_pLabel);
+}
+
+QFont FontChooser::font()
+{
+   return m_font;//QFont("courier",10);
+}
+
+void FontChooser::setFont( const QFont& font, bool )
+{
+   m_font = font;
+   m_pLabel->setFont( m_font );
+   //update();
+}
+
+void FontChooser::slotSelectFont()
+{
+   bool bOk;
+   m_font = QFontDialog::getFont(&bOk, m_font );
+   m_pLabel->setFont( m_font );
+}
+
+
+class OptionFontChooser : public FontChooser, public OptionItemT<QFont>
 {
 public:
    OptionFontChooser( const QFont& defaultVal, const QString& saveName, QFont* pVar, QWidget* pParent, OptionDialog* pOD ) :
-       KFontChooser( pParent ),
+       FontChooser( pParent ),
        OptionItemT<QFont>( pOD, saveName )
    {
       m_pVar = pVar;
@@ -231,7 +272,8 @@ private:
    OptionColorButton( const OptionColorButton& ); // private copy constructor without implementation
 };
 
-class OptionLineEdit : public QComboBox, public OptionItemT<QString> {
+class OptionLineEdit : public QComboBox, public OptionItemT<QString>
+{
     public:
         OptionLineEdit( const QString& defaultVal, const QString& saveName, QString* pVar,
                         QWidget* pParent, OptionDialog* pOD )
@@ -270,8 +312,7 @@ class OptionLineEdit : public QComboBox, public OptionItemT<QString> {
         }
     private:
         void insertText()
-        {
-            // Check if the text exists. If yes remove it and push it in as first element
+        {  // Check if the text exists. If yes remove it and push it in as first element
             QString current = currentText();
             m_list.removeAll( current );
             m_list.push_front( current );
@@ -519,7 +560,9 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
    okButton->setDefault(true);
    setObjectName( name );
    setModal( true  );
-  
+
+   //showButtonSeparator( true );
+   //setHelp( "kdiff3/index.html", QString::null );
 
    setupFontPage();
    setupColorPage();
@@ -618,17 +661,19 @@ void OptionDialog::setupFontPage( void )
     
     OptionFontChooser* pFontChooser = new OptionFontChooser( defaultFont, "Font", &m_options.m_font, page, this );
     topLayout->addWidget( pFontChooser );
+    pFontChooser->setTitle(i18n("File view font"));
 
    QGridLayout *gbox = new QGridLayout();
    topLayout->addLayout( gbox );
-   int line=0;
+   //int line=0;
 
-   OptionCheckBox* pItalicDeltas = new OptionCheckBox( i18n("Italic font for deltas"), false, "ItalicForDeltas", &m_options.m_bItalicForDeltas, page, this );
-   gbox->addWidget( pItalicDeltas, line, 0, 1, 2 );
-   pItalicDeltas->setToolTip( i18n(
-      "Selects the italic version of the font for differences.\n"
-      "If the font doesn't support italic characters, then this does nothing.")
-      );
+   // This currently does not work (see rendering in class DiffTextWindow)
+   //OptionCheckBox* pItalicDeltas = new OptionCheckBox( i18n("Italic font for deltas"), false, "ItalicForDeltas", &m_options.m_bItalicForDeltas, page, this );
+   //gbox->addWidget( pItalicDeltas, line, 0, 1, 2 );
+   //pItalicDeltas->setToolTip( i18n(
+   //   "Selects the italic version of the font for differences.\n"
+   //   "If the font doesn't support italic characters, then this does nothing.")
+   //   );
 }
 
 
@@ -779,7 +824,8 @@ void OptionDialog::setupColorPage( void )
 }
 
 
-void OptionDialog::setupEditPage( void ) {
+void OptionDialog::setupEditPage( void )
+{
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n( "Editor" ) );
     pageItem->setHeader( i18n( "Editor Behavior" ) );
@@ -844,7 +890,8 @@ void OptionDialog::setupEditPage( void ) {
 }
 
 
-void OptionDialog::setupDiffPage( void ) {
+void OptionDialog::setupDiffPage( void )
+{
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n( "Diff" ) );
     pageItem->setHeader( i18n( "Diff Settings" ) );
@@ -863,6 +910,7 @@ void OptionDialog::setupDiffPage( void ) {
     QLabel* label = 0;
 
     m_options.m_bPreserveCarriageReturn = false;
+/*
     OptionCheckBox* pPreserveCarriageReturn = new OptionCheckBox( i18n("Preserve carriage return"), false, "PreserveCarriageReturn", &m_options.m_bPreserveCarriageReturn, page, this );
     gbox->addWidget( pPreserveCarriageReturn, line, 0, 1, 2 );
     pPreserveCarriageReturn->setToolTip( i18n(
@@ -870,6 +918,7 @@ void OptionDialog::setupDiffPage( void ) {
        "Helps to compare files that were modified under different operating systems.")
        );
     ++line;
+*/
     QString treatAsWhiteSpace = " (" + i18n( "Treat as white space." ) + ")";
 
     OptionCheckBox* pIgnoreNumbers = new OptionCheckBox( i18n( "Ignore numbers" ) + treatAsWhiteSpace, false, "IgnoreNumbers", &m_options.m_bIgnoreNumbers, page, this );
@@ -927,7 +976,8 @@ void OptionDialog::setupDiffPage( void ) {
     topLayout->addStretch( 10 );
 }
 
-void OptionDialog::setupMergePage( void ) {
+void OptionDialog::setupMergePage( void )
+{
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n( "Merge" ) );
     pageItem->setHeader( i18n( "Merge Settings" ) );
@@ -1115,7 +1165,8 @@ void OptionDialog::setupMergePage( void ) {
    topLayout->addStretch(10);
 }
 
-void OptionDialog::setupDirectoryMergePage( void ) {
+void OptionDialog::setupDirectoryMergePage( void )
+{
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n( "Directory" ) );
     pageItem->setHeader( i18n( "Directory" ) );
@@ -1481,7 +1532,7 @@ static const char* countryMap[]={
    pLanguage->addItem( "Auto" );  // Must not translate, won't work otherwise!
    pLanguage->addItem( "en_orig" );
       
-#if !defined(_WIN32) && !defined(Q_OS_OS2) 
+#if !defined(_WIN32) && !defined(Q_OS_OS2) && !defined(__APPLE__)
    // Read directory: Find all kdiff3_*.qm-files and insert the found files here
    QDir localeDir( "/usr/share/locale" ); // See also kreplacements.cpp: getTranslationDir()
    QStringList dirList = localeDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
@@ -1617,7 +1668,8 @@ static const char* countryMap[]={
 #include "ccInstHelper.cpp"
 #endif
 
-void OptionDialog::setupIntegrationPage( void ) {
+void OptionDialog::setupIntegrationPage( void )
+{
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n( "Integration" ) );
     pageItem->setHeader( i18n( "Integration Settings" ) );
@@ -1798,7 +1850,8 @@ void OptionDialog::setState()
    slotEncodingChanged();
 }
 
-class ConfigValueMap : public ValueMap {
+class ConfigValueMap : public ValueMap
+{
     private:
         KConfigGroup m_config;
     public:

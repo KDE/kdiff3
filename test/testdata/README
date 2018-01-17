@@ -1,0 +1,43 @@
+Adding test cases
+-----------------
+
+Each test case consists of 4 files: three files with input data and one
+file that contains the expected vertical alignment chosen by kdiff3.
+
+Test data files should follow this naming convention:
+ *_base.*
+ *_contrib1.*
+ *_contrib2.*
+ *_expected_result.*
+
+The test automatically detects files that follow this convention and executes the
+test on these sets of files in alphabetical order.
+
+
+Specifying expected alignment
+-----------------------------
+
+Each line in the alignment file corresponds to a line in the diff view of
+kdiff3 and consists of the three line numbers from files A, B and C that are
+put on that line in the diff view.
+
+So for instance if file A contains two lines, file B is empty and file C
+contains one line that is the same as the second line in A, kdiff3 may align
+them like this in the diff view:
+
+A:                   B:                 C:
+something                               
+something else                          something else
+
+An alignment file for this alignment would look like this:
+1 -1 -1
+2 -1  1
+
+As you can see -1 is used to indicate that a line in the diff view does not
+contain a line from the input file.
+
+
+--
+Maurice van der Pot
+griffon26@kfk4ever.com
+

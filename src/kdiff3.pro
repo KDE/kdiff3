@@ -1,9 +1,13 @@
 TEMPLATE = app
 # When unresolved items remain during linking: Try adding "shared" in the CONFIG.
 CONFIG  += qt warn_on thread precompile_header
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
-!os2:PRECOMPILED_HEADER = stable.h
+greaterThan(QT_MAJOR_VERSION, 4) {
+    QT += widgets printsupport
+    CONFIG += c++11
+}
+#!os2:PRECOMPILED_HEADER = stable.h
 HEADERS  = version.h                     \
+           common.h                      \
            diff.h                        \
            difftextwindow.h              \
            mergeresultwindow.h           \
