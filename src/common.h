@@ -19,6 +19,7 @@
 #define _COMMON_H
 
 #include <assert.h>
+#include <QAtomicInt>
 
 
 template< class T >
@@ -64,6 +65,15 @@ T minMaxLimiter( T d, T minimum, T maximum )
    if ( d < minimum ) return minimum;
    if ( d > maximum ) return maximum;
    return d;
+}
+
+inline int getAtomic(QAtomicInt& ai)
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+   return ai.load();
+#else
+   return ai;
+#endif
 }
 
 #include <map>

@@ -30,7 +30,7 @@ class DIFF_EXT : public IContextMenu, IShellExtInit {
     //IShell members
     STDMETHODIMP QueryContextMenu(HMENU menu, UINT index, UINT cmd_first, UINT cmd_last, UINT flags);
     STDMETHODIMP InvokeCommand(LPCMINVOKECOMMANDINFO info);
-    STDMETHODIMP GetCommandString(UINT cmd, UINT flags, UINT* reserved, LPSTR name, UINT name_length);
+    STDMETHODIMP GetCommandString(UINT_PTR cmd, UINT flags, UINT* reserved, LPSTR name, UINT name_length);
 
     //IShellExtInit methods
     STDMETHODIMP Initialize(LPCITEMIDLIST folder, IDataObject* subj, HKEY key);

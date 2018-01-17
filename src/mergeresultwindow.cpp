@@ -87,6 +87,8 @@ MergeResultWindow::MergeResultWindow(
    m_pDiff3LineList = 0;
    m_pTotalDiffStatus = 0;
    m_pStatusBar = pStatusBar;
+   if (m_pStatusBar)
+      connect( m_pStatusBar, SIGNAL(messageChanged(const QString&)), this, SLOT(slotStatusMessageChanged(const QString&)) );
 
    m_pOptions = pOptions;
    m_bPaintingAllowed = false;
@@ -146,11 +148,28 @@ void MergeResultWindow::init(
    update();
    updateSourceMask();
 
-   int wsc;
-   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
+   showUnsolvedConflictsStatusMessage();
+}
+
+void MergeResultWindow::showUnsolvedConflictsStatusMessage()
+{
    if (m_pStatusBar)
-      m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
-         ,nofUnsolved,wsc) );
+   {
+      int wsc;
+      int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
+
+      m_persistentStatusMessage = i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
+         ,nofUnsolved,wsc);
+      m_pStatusBar->showMessage( m_persistentStatusMessage );
+   }
+}
+
+void MergeResultWindow::slotStatusMessageChanged(const QString& s)
+{
+   if ( s.isEmpty() && !m_persistentStatusMessage.isEmpty() )
+   {
+      m_pStatusBar->showMessage( m_persistentStatusMessage, 0 );
+   }
 }
 
 void MergeResultWindow::reset()
@@ -160,6 +179,10 @@ void MergeResultWindow::reset()
    m_pldA = 0;
    m_pldB = 0;
    m_pldC = 0;
+   if (!m_persistentStatusMessage.isEmpty())
+   {
+      m_persistentStatusMessage = QString();
+   }
 }
 
 // Calculate the merge information for the given Diff3Line.
@@ -1006,10 +1029,7 @@ void MergeResultWindow::choose( int selector )
    update();
    updateSourceMask();
    emit updateAvailabilities();
-   int wsc;
-   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
-   m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
-         ,nofUnsolved,wsc) );
+   showUnsolvedConflictsStatusMessage();
 }
 
 // bConflictsOnly: automatically choose for conflicts only (true) or for everywhere (false)
@@ -1020,10 +1040,7 @@ void MergeResultWindow::chooseGlobal(int selector, bool bConflictsOnly, bool bWh
    merge( false, selector, bConflictsOnly, bWhiteSpaceOnly );
    setModified( true );
    update();
-   int wsc;
-   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
-   m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
-         ,nofUnsolved,wsc) );
+   showUnsolvedConflictsStatusMessage();
 }
 
 void MergeResultWindow::slotAutoSolve()
@@ -1032,10 +1049,7 @@ void MergeResultWindow::slotAutoSolve()
    merge( true, -1 );
    setModified( true );
    update();
-   int wsc;
-   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
-   m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
-         ,nofUnsolved,wsc) );
+   showUnsolvedConflictsStatusMessage();
 }
 
 void MergeResultWindow::slotUnsolve()
@@ -1044,10 +1058,7 @@ void MergeResultWindow::slotUnsolve()
    merge( false, -1 );
    setModified( true );
    update();
-   int wsc;
-   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
-   m_pStatusBar->showMessage( i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
-         ,nofUnsolved,wsc) );
+   showUnsolvedConflictsStatusMessage();
 }
 
 static QString calcHistoryLead(const QString& s )
@@ -2380,7 +2391,7 @@ void MergeResultWindow::keyPressEvent( QKeyEvent* e )
 
       case  Qt::Key_Left:
       case  Qt::Key_Right:
-         if ( e->key()==Qt::Key_Left )
+         if ( (e->key()==Qt::Key_Left) != m_pOptions->m_bRightToLeftLanguage )
          {
             if ( !bCtrl )
             {

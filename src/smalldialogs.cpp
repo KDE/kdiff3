@@ -225,7 +225,8 @@ bool OpenDialog::eventFilter(QObject* o, QEvent* e)
 }
 
 
-void OpenDialog::selectURL( QComboBox* pLine, bool bDir, int i, bool bSave ) {
+void OpenDialog::selectURL( QComboBox* pLine, bool bDir, int i, bool bSave )
+{
     QString current = pLine->currentText();
     if( current.isEmpty() && i > 3 ) {
         current = m_pLineC->currentText();

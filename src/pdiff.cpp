@@ -104,7 +104,7 @@ static void debugLineCheck( Diff3LineList& d3ll, int size, int idx )
 
 
 
-void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, bool bUseCurrentEncoding)
+void KDiff3App::mainInit( TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, bool bUseCurrentEncoding)
 {
    ProgressProxy pp;
 
@@ -364,8 +364,6 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
    else
       m_pMergeWindowFrame->show();
 
-   setHScrollBarRange();
-
    // Try to create a meaningful but not too long caption
    if ( !isPart() )
    {
@@ -414,72 +412,12 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
       m_pKDiff3Shell->setWindowTitle( caption.isEmpty() ? QString("KDiff3") : caption+QString(" - KDiff3"));
    }
 
-   if ( bLoadFiles )
-   {
-      if ( bVisibleMergeResultWindow && !bAuto )
-         m_pMergeResultWindow->showNrOfConflicts();
-      else if ( !bAuto && 
-         // Avoid showing this message during startup without parameters.
-         !( m_sd1.getAliasName().isEmpty() && m_sd2.getAliasName().isEmpty() && m_sd3.getAliasName().isEmpty() ) &&
-         ( m_sd1.isValid() && m_sd2.isValid() && m_sd3.isValid() )
-         )
-      {
-         QString totalInfo;
-         if ( pTotalDiffStatus->bBinaryAEqB && pTotalDiffStatus->bBinaryAEqC )
-            totalInfo += i18n("All input files are binary equal.");
-         else  if ( pTotalDiffStatus->bTextAEqB && pTotalDiffStatus->bTextAEqC )
-            totalInfo += i18n("All input files contain the same text, but are not binary equal.");
-         else {
-            if    ( pTotalDiffStatus->bBinaryAEqB ) totalInfo += i18n("Files %1 and %2 are binary equal.\n",QString("A"),QString("B"));
-            else if ( pTotalDiffStatus->bTextAEqB ) totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n",QString("A"),QString("B"));
-            if    ( pTotalDiffStatus->bBinaryAEqC ) totalInfo += i18n("Files %1 and %2 are binary equal.\n",QString("A"),QString("C"));
-            else if ( pTotalDiffStatus->bTextAEqC ) totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n",QString("A"),QString("C"));
-            if    ( pTotalDiffStatus->bBinaryBEqC ) totalInfo += i18n("Files %1 and %2 are binary equal.\n",QString("B"),QString("C"));
-            else if ( pTotalDiffStatus->bTextBEqC ) totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n",QString("B"),QString("C"));
-         }
-
-         if ( !totalInfo.isEmpty() )
-            KMessageBox::information( this, totalInfo );
-      }
-
-      if ( bVisibleMergeResultWindow && (!m_sd1.isText() || !m_sd2.isText() || !m_sd3.isText()) )
-      {
-         KMessageBox::information( this, i18n(
-            "Some inputfiles don't seem to be pure textfiles.\n"
-            "Note that the KDiff3-merge was not meant for binary data.\n"
-            "Continue at your own risk.") );
-      }
-      if ( m_sd1.isIncompleteConversion() || m_sd2.isIncompleteConversion() || m_sd3.isIncompleteConversion() )
-      {
-         QString files;
-         if ( m_sd1.isIncompleteConversion() )
-            files += "A";
-         if ( m_sd2.isIncompleteConversion() )
-            files += files.isEmpty() ? "B" : ", B";
-         if ( m_sd3.isIncompleteConversion() )
-            files += files.isEmpty() ? "C" : ", C";
-            
-         KMessageBox::information( this, i18n(
-            "Some input characters could not be converted to valid unicode.\n"
-            "You might be using the wrong codec. (e.g. UTF-8 for non UTF-8 files).\n"
-            "Don't save the result if unsure. Continue at your own risk.\n"
-            "Affected input files are in %1.").arg(files) );
-      }
-   }
-
-   QTimer::singleShot( 10, this, SLOT(slotAfterFirstPaint()) );
-
-   if ( bVisibleMergeResultWindow && m_pMergeResultWindow )
-   {
-      m_pMergeResultWindow->setFocus();
-   }
-   else if(m_pDiffTextWindow1)
-   {
-      m_pDiffTextWindow1->setFocus();
-   }
-
    //initialize wheel tracking to zero
    m_iCumulativeWheelDelta = 0;
+
+   m_bFinishMainInit = true; // call slotFinishMainInit after finishing the word wrap
+   m_bLoadFiles = bLoadFiles;
+   postRecalcWordWrap();
 }
 
 
@@ -521,11 +459,9 @@ void KDiff3App::setHScrollBarRange()
    m_pHScrollBar->setPageStep( pageStep );
 }
 
-void KDiff3App::resizeDiffTextWindow(int /*newWidth*/, int newHeight)
+void KDiff3App::resizeDiffTextWindowHeight(int newHeight)
 {
    m_DTWHeight = newHeight;
-
-   postRecalcWordWrap();
 
    m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines+1 - newHeight) );
    m_pDiffVScrollBar->setPageStep( newHeight );
@@ -615,14 +551,12 @@ void KDiff3App::initView()
    pVSplitter->setOpaqueResize(false);
    pVSplitter->setOrientation( Qt::Vertical );
    pVLayout->addWidget( pVSplitter );
-   pVSplitter->show();
 
    QWidget* pDiffWindowFrame = new QWidget(); // Contains diff windows, overview and vert scrollbar
    pDiffWindowFrame->setObjectName("DiffWindowFrame");
    QHBoxLayout* pDiffHLayout = new QHBoxLayout( pDiffWindowFrame );
    pDiffHLayout->setMargin(0);
    pDiffHLayout->setSpacing(0);
-   //pDiffWindowFrame->show();
    pVSplitter->addWidget(pDiffWindowFrame);
 
    m_pDiffWindowSplitter = new QSplitter();
@@ -631,23 +565,19 @@ void KDiff3App::initView()
 
    m_pDiffWindowSplitter->setOrientation( m_pOptions->m_bHorizDiffWindowSplitting ?  Qt::Horizontal : Qt::Vertical );
    pDiffHLayout->addWidget( m_pDiffWindowSplitter );
-   //m_pDiffWindowSplitter->show();
 
    m_pOverview = new Overview( &m_pOptionDialog->m_options );
    m_pOverview->setObjectName("Overview");
    pDiffHLayout->addWidget(m_pOverview);
    connect( m_pOverview, SIGNAL(setLine(int)), this, SLOT(setDiff3Line(int)) );
-   //connect( m_pOverview, SIGNAL(afterFirstPaint()), this, SLOT(slotAfterFirstPaint()));
 
    m_pDiffVScrollBar = new QScrollBar( Qt::Vertical, pDiffWindowFrame );
    pDiffHLayout->addWidget( m_pDiffVScrollBar );
 
    m_pDiffTextWindowFrame1 = new DiffTextWindowFrame( m_pDiffWindowSplitter, statusBar(), &m_pOptionDialog->m_options, 1, &m_sd1);
    m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame1);
-   //m_pDiffTextWindowFrame1->show();
    m_pDiffTextWindowFrame2 = new DiffTextWindowFrame( m_pDiffWindowSplitter, statusBar(), &m_pOptionDialog->m_options, 2, &m_sd2);
    m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame2);
-   //m_pDiffTextWindowFrame2->show();
    m_pDiffTextWindowFrame3 = new DiffTextWindowFrame( m_pDiffWindowSplitter, statusBar(), &m_pOptionDialog->m_options, 3, &m_sd3);
    m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame3);
    m_pDiffTextWindow1 = m_pDiffTextWindowFrame1->getDiffTextWindow();
@@ -757,10 +687,11 @@ void KDiff3App::initView()
    connect(m_pDiffTextWindow3, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
    connect(m_pDirectoryMergeInfo, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
 
-   connect( m_pDiffTextWindow1, SIGNAL( resizeSignal(int,int) ),this, SLOT(resizeDiffTextWindow(int,int)));
+   connect( m_pDiffTextWindow1, SIGNAL( resizeHeightChangedSignal(int) ),this, SLOT(resizeDiffTextWindowHeight(int)));
    // The following two connects cause the wordwrap to be recalced thrice, just to make sure. Better than forgetting one.
-   connect( m_pDiffTextWindow2, SIGNAL( resizeSignal(int,int) ),this, SLOT(postRecalcWordWrap()));
-   connect( m_pDiffTextWindow3, SIGNAL( resizeSignal(int,int) ),this, SLOT(postRecalcWordWrap()));
+   connect(m_pDiffTextWindow1, SIGNAL(resizeWidthChangedSignal(int)), this, SLOT(postRecalcWordWrap()));
+   connect(m_pDiffTextWindow2, SIGNAL(resizeWidthChangedSignal(int)), this, SLOT(postRecalcWordWrap()));
+   connect(m_pDiffTextWindow3, SIGNAL(resizeWidthChangedSignal(int)), this, SLOT(postRecalcWordWrap()));
 
    m_pDiffTextWindow1->setFocus();
    m_pMainWidget->setMinimumSize(50,50);
@@ -784,13 +715,14 @@ static int calcManualDiffFirstDiff3LineIdx( const Diff3LineVector& d3lv, const M
    return -1;
 }
 
-void KDiff3App::slotAfterFirstPaint()
+// called after word wrap is complete
+void KDiff3App::slotFinishMainInit()
 {
+   setHScrollBarRange();
+
    int newHeight = m_pDiffTextWindow1->getNofVisibleLines();
    /*int newWidth  = m_pDiffTextWindow1->getNofVisibleColumns();*/
    m_DTWHeight = newHeight;
-
-   postRecalcWordWrap();
 
    m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines+1 - newHeight) );
    m_pDiffVScrollBar->setPageStep( newHeight );
@@ -822,6 +754,72 @@ void KDiff3App::slotAfterFirstPaint()
    {
       pTreeView->setUpdatesEnabled(true);
    }
+
+   bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
+   TotalDiffStatus* pTotalDiffStatus = &m_totalDiffStatus;
+
+   if (m_bLoadFiles)
+   {
+
+      if (bVisibleMergeResultWindow)
+         m_pMergeResultWindow->showNrOfConflicts();
+      else if (
+         // Avoid showing this message during startup without parameters.
+         !(m_sd1.getAliasName().isEmpty() && m_sd2.getAliasName().isEmpty() && m_sd3.getAliasName().isEmpty()) &&
+         (m_sd1.isValid() && m_sd2.isValid() && m_sd3.isValid())
+         )
+      {
+         QString totalInfo;
+         if (pTotalDiffStatus->bBinaryAEqB && pTotalDiffStatus->bBinaryAEqC)
+            totalInfo += i18n("All input files are binary equal.");
+         else  if (pTotalDiffStatus->bTextAEqB && pTotalDiffStatus->bTextAEqC)
+            totalInfo += i18n("All input files contain the same text, but are not binary equal.");
+         else {
+            if (pTotalDiffStatus->bBinaryAEqB) totalInfo += i18n("Files %1 and %2 are binary equal.\n", QString("A"), QString("B"));
+            else if (pTotalDiffStatus->bTextAEqB) totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", QString("A"), QString("B"));
+            if (pTotalDiffStatus->bBinaryAEqC) totalInfo += i18n("Files %1 and %2 are binary equal.\n", QString("A"), QString("C"));
+            else if (pTotalDiffStatus->bTextAEqC) totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", QString("A"), QString("C"));
+            if (pTotalDiffStatus->bBinaryBEqC) totalInfo += i18n("Files %1 and %2 are binary equal.\n", QString("B"), QString("C"));
+            else if (pTotalDiffStatus->bTextBEqC) totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", QString("B"), QString("C"));
+         }
+
+         if (!totalInfo.isEmpty())
+            KMessageBox::information(this, totalInfo);
+      }
+
+      if (bVisibleMergeResultWindow && (!m_sd1.isText() || !m_sd2.isText() || !m_sd3.isText()))
+      {
+         KMessageBox::information(this, i18n(
+            "Some inputfiles don't seem to be pure textfiles.\n"
+            "Note that the KDiff3-merge was not meant for binary data.\n"
+            "Continue at your own risk."));
+      }
+      if (m_sd1.isIncompleteConversion() || m_sd2.isIncompleteConversion() || m_sd3.isIncompleteConversion())
+      {
+         QString files;
+         if (m_sd1.isIncompleteConversion())
+            files += "A";
+         if (m_sd2.isIncompleteConversion())
+            files += files.isEmpty() ? "B" : ", B";
+         if (m_sd3.isIncompleteConversion())
+            files += files.isEmpty() ? "C" : ", C";
+
+         KMessageBox::information(this, i18n(
+            "Some input characters could not be converted to valid unicode.\n"
+            "You might be using the wrong codec. (e.g. UTF-8 for non UTF-8 files).\n"
+            "Don't save the result if unsure. Continue at your own risk.\n"
+            "Affected input files are in %1.").arg(files));
+      }
+   }
+
+   if (bVisibleMergeResultWindow && m_pMergeResultWindow)
+   {
+      m_pMergeResultWindow->setFocus();
+   }
+   else if (m_pDiffTextWindow1)
+   {
+      m_pDiffTextWindow1->setFocus();
+   }
 }
 
 void KDiff3App::resizeEvent(QResizeEvent* e)
@@ -831,6 +829,18 @@ void KDiff3App::resizeEvent(QResizeEvent* e)
       m_pCornerWidget->setFixedSize( m_pDiffVScrollBar->width(), m_pHScrollBar->height() );
 }
 
+void KDiff3App::childEvent(QChildEvent *c)
+{
+   // Workaround for a bug in several Qt versions. When a child is added to QSplitter, don't
+   // add it to the splitter if it is a window.
+   if ( c->child()->isWidgetType()) 
+   {
+      QWidget *w = static_cast<QWidget*>(c->child());
+      if ( w->isWindow() )
+         return;
+   }
+   QSplitter::childEvent(c);
+}
 
 bool KDiff3App::eventFilter( QObject* o, QEvent* e )
 {
@@ -952,7 +962,7 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
             if      ( o == m_pDiffTextWindow1 ) m_sd1.setFilename( filename );
             else if ( o == m_pDiffTextWindow2 ) m_sd2.setFilename( filename );
             else if ( o == m_pDiffTextWindow3 ) m_sd3.setFilename( filename );
-            init();
+            mainInit();
          }
       }
       else if ( pDropEvent->mimeData()->hasText() )
@@ -970,7 +980,7 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
             {
                KMessageBox::error( m_pOptionDialog, error );
             }
-            init();
+            mainInit();
          }
       }
 
@@ -1048,7 +1058,7 @@ void KDiff3App::slotFileOpen()
          else
          {
             m_pDirectoryMergeSplitter->hide();
-            init();
+            mainInit();
 
             if ( (! m_sd1.isEmpty() && !m_sd1.hasData())  ||
                  (! m_sd2.isEmpty() && !m_sd2.hasData())  ||
@@ -1116,7 +1126,7 @@ void KDiff3App::slotFileOpen2(QString fn1, QString fn2, QString fn3, QString ofn
    else
    {
       m_bDirCompare = bDirCompare;  // Don't allow this to change here.
-      init( false, pTotalDiffStatus );
+      mainInit( pTotalDiffStatus );
 
       if ( pTotalDiffStatus!=0 )
          return;
@@ -1237,7 +1247,7 @@ void KDiff3App::slotEditPaste()
 
       if(do_init)
       {
-        init();
+        mainInit();
       }
    }
 
@@ -1426,6 +1436,7 @@ void KDiff3App::slotConfigureKeys()
 
 void KDiff3App::slotRefresh()
 {
+   QApplication::setFont( m_pOptions->m_appFont );
    if (m_pDiffTextWindow1!=0)
    {
       m_pDiffTextWindow1->setFont(m_pOptions->m_font);
@@ -1523,11 +1534,27 @@ void KDiff3App::slotAutoAdvanceToggled()
 void KDiff3App::slotWordWrapToggled()
 {
    m_pOptions->m_bWordWrap = wordWrap->isChecked();
-   bool bSuccess = recalcWordWrap();
-   if ( ! bSuccess )
+   postRecalcWordWrap();
+}
+
+// Enable or disable all widgets except the status bar widget.
+static void mainWindowEnable(QWidget* pWidget, bool bEnable)
+{
+   if (QMainWindow* pWindow = dynamic_cast<QMainWindow*>(pWidget->window()))
    {
-      wordWrap->setChecked(false);
-      slotWordWrapToggled();
+      QWidget* pStatusBarWidget = pWindow->statusBar();
+      QList<QObject*> children = pWindow->children();
+      for (int i = 0; i < children.count(); ++i)
+      {
+         if (children[i]->isWidgetType())
+         {
+            QWidget* pChildWidget = (QWidget*)children[i];
+            if (pChildWidget != pStatusBarWidget)
+            {
+               pChildWidget->setEnabled(bEnable);
+            }
+         }
+      }
    }
 }
 
@@ -1535,32 +1562,35 @@ void KDiff3App::postRecalcWordWrap()
 {
    if ( ! m_bRecalcWordWrapPosted )
    {
-      QTimer::singleShot( 1, this, SLOT(slotRecalcWordWrap()) );
       m_bRecalcWordWrapPosted = true;
+      mainWindowEnable(window(), false);
+      m_firstD3LIdx = -1;
+      QTimer::singleShot( 1 /* ms */, this, SLOT(slotRecalcWordWrap()) );
+   }
+   else
+   {
+      g_pProgressDialog->cancel(ProgressDialog::eResize);
    }
 }
 
 void KDiff3App::slotRecalcWordWrap()
 {
-   bool bSuccess = recalcWordWrap();
-   m_bRecalcWordWrapPosted = false;
-
-   if ( ! bSuccess )
-   {
-      wordWrap->setChecked(false);
-      slotWordWrapToggled();
-   }
+   recalcWordWrap();
 }
 
-bool KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=0 only for printing, otherwise the really visible width is used
+// visibleTextWidthForPrinting is >=0 only for printing, otherwise the really visible width is used
+void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
 {
-   QElapsedTimer et;
-   et.start();
-   int tel1 = 0;
-   bool bPrinting = nofVisibleColumns>=0;
-   int firstD3LIdx = 0;
-   if( m_pDiffTextWindow1 ) 
-      firstD3LIdx = m_pDiffTextWindow1->convertLineToDiff3LineIdx( m_pDiffTextWindow1->getFirstLine() );
+   m_bRecalcWordWrapPosted = true;
+   mainWindowEnable(window(), false);
+
+   m_visibleTextWidthForPrinting = visibleTextWidthForPrinting;
+   if (m_firstD3LIdx < 0)
+   {
+      m_firstD3LIdx = 0;
+      if (m_pDiffTextWindow1)
+         m_firstD3LIdx = m_pDiffTextWindow1->convertLineToDiff3LineIdx(m_pDiffTextWindow1->getFirstLine());
+   }
 
    // Convert selection to D3L-coords (converting back happens in DiffTextWindow::recalcWordWrap()
    if ( m_pDiffTextWindow1 )
@@ -1570,130 +1600,142 @@ bool KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
    if ( m_pDiffTextWindow3 )
       m_pDiffTextWindow3->convertSelectionToD3LCoords();
 
+   g_pProgressDialog->clearCancelState(); // clear cancelled state if previously set
 
-   if ( !m_diff3LineList.empty() && m_pOptions->m_bWordWrap )
+   if (!m_diff3LineList.empty())
    {
-      Diff3LineList::iterator i;
-      int sumOfLines=0;
-      for ( i=m_diff3LineList.begin(); i!=m_diff3LineList.end(); ++i )
+      if (m_pOptions->m_bWordWrap)
       {
-         Diff3Line& d3l = *i;
-         d3l.linesNeededForDisplay = 1;
-         d3l.sumLinesNeededForDisplay = sumOfLines;
-         sumOfLines += d3l.linesNeededForDisplay;
-      }
+         Diff3LineList::iterator i;
+         int sumOfLines = 0;
+         for (i = m_diff3LineList.begin(); i != m_diff3LineList.end(); ++i)
+         {
+            Diff3Line& d3l = *i;
+            d3l.linesNeededForDisplay = 1;
+            d3l.sumLinesNeededForDisplay = sumOfLines;
+            sumOfLines += d3l.linesNeededForDisplay;
+         }
 
-      ProgressProxy pp;
-      //pp.setMaxNofSteps(  (m_bTripleDiff ? 4 : 3 ) );
-      pp.setInformation(i18n("Word wrap (Cancel disables word wrap)"),false);
-      // Let every window calc how many lines will be needed.
-      if ( m_pDiffTextWindow1 )
-      {
-         m_pDiffTextWindow1->recalcWordWrap(true,0,nofVisibleColumns,&pp);
-         if ( pp.wasCancelled() )
-            return false;
-         //pp.step();
+         // Let every window calc how many lines will be needed.
+         if (m_pDiffTextWindow1)
+         {
+            m_pDiffTextWindow1->recalcWordWrap(true, 0, m_visibleTextWidthForPrinting);
+         }
+         if (m_pDiffTextWindow2)
+         {
+            m_pDiffTextWindow2->recalcWordWrap(true, 0, m_visibleTextWidthForPrinting);
+         }
+         if (m_pDiffTextWindow3)
+         {
+            m_pDiffTextWindow3->recalcWordWrap(true, 0, m_visibleTextWidthForPrinting);
+         }
       }
-      if ( m_pDiffTextWindow2 )
+      else
       {
-         m_pDiffTextWindow2->recalcWordWrap(true,0,nofVisibleColumns,&pp);
-         if ( pp.wasCancelled() )
-            return false;
-         //pp.step();
+         m_neededLines = m_diff3LineVector.size();
+         if (m_pDiffTextWindow1)
+            m_pDiffTextWindow1->recalcWordWrap(false, 0, 0);
+         if (m_pDiffTextWindow2)
+            m_pDiffTextWindow2->recalcWordWrap(false, 0, 0);
+         if (m_pDiffTextWindow3)
+            m_pDiffTextWindow3->recalcWordWrap(false, 0, 0);
       }
-      if ( m_pDiffTextWindow3 )
+      bool bRunnablesStarted = startRunnables();
+      if (!bRunnablesStarted)
+         slotFinishRecalcWordWrap();
+      else
       {
-         m_pDiffTextWindow3->recalcWordWrap(true,0,nofVisibleColumns,&pp);
-         if ( pp.wasCancelled() )
-            return false;
-         //pp.step();
+         g_pProgressDialog->setInformation(m_pOptions->m_bWordWrap
+            ? i18n("Word wrap (Cancel disables word wrap)") : i18n("Calculating max width for horizontal scrollbar"), false);
       }
+   }
+}
 
-      while( ! QThreadPool::globalInstance()->waitForDone(100) )
-      {
-         pp.recalc(); // implicit process events and redraw
-      }
+void KDiff3App::slotFinishRecalcWordWrap()
+{
+   g_pProgressDialog->pop();
 
-      if ( pp.wasCancelled() )
-         return false;
-
-      tel1 = et.elapsed();
-      et.restart();
-      sumOfLines=0;
-      for ( i=m_diff3LineList.begin(); i!=m_diff3LineList.end(); ++i )
+   if ( m_pOptions->m_bWordWrap && g_pProgressDialog->wasCancelled())
+   {
+      if (g_pProgressDialog->cancelReason() == ProgressDialog::eUserAbort)
       {
-         Diff3Line& d3l = *i;
-         d3l.sumLinesNeededForDisplay = sumOfLines;
-         sumOfLines += d3l.linesNeededForDisplay;
+         wordWrap->setChecked(false);
+         m_pOptions->m_bWordWrap = wordWrap->isChecked();
+         QTimer::singleShot(1 /* ms */, this, SLOT(slotRecalcWordWrap())); // do it again
       }
-
-      // Finish the initialisation:
-      if ( m_pDiffTextWindow1 )
+      else // eResize
       {
-         m_pDiffTextWindow1->recalcWordWrap(true,sumOfLines,nofVisibleColumns, &pp);
-         if ( pp.wasCancelled() )
-            return false;
+         QTimer::singleShot(1 /* ms */, this, SLOT(slotRecalcWordWrap())); // do it again
       }
-      if ( m_pDiffTextWindow2 )
-      {
-         m_pDiffTextWindow2->recalcWordWrap(true,sumOfLines,nofVisibleColumns, &pp);
-         if ( pp.wasCancelled() )
-            return false;
-      }
-      if ( m_pDiffTextWindow3 )
-      {
-         m_pDiffTextWindow3->recalcWordWrap(true,sumOfLines,nofVisibleColumns, &pp);
-         if ( pp.wasCancelled() )
-            return false;
-      }
-      pp.step();
-
-      int tel = et.elapsed();
-
-      m_neededLines = sumOfLines;
+      return;
    }
    else
    {
-      m_neededLines = m_diff3LineVector.size();
-      if ( m_pDiffTextWindow1 )
-         m_pDiffTextWindow1->recalcWordWrap(false,0,0,0);
-      if ( m_pDiffTextWindow2 )
-         m_pDiffTextWindow2->recalcWordWrap(false,0,0,0);
-      if ( m_pDiffTextWindow3 )
-         m_pDiffTextWindow3->recalcWordWrap(false,0,0,0);
-   }
-   if (bPrinting)
-      return true;
-
-   if (m_pOverview)
-      m_pOverview->slotRedraw();
-   if ( m_pDiffTextWindow1 )
-   {
-      m_pDiffTextWindow1->setFirstLine( m_pDiffTextWindow1->convertDiff3LineIdxToLine( firstD3LIdx ) );
-      m_pDiffTextWindow1->update();
-   }
-   if ( m_pDiffTextWindow2 )
-   {
-      m_pDiffTextWindow2->setFirstLine( m_pDiffTextWindow2->convertDiff3LineIdxToLine( firstD3LIdx ) );
-      m_pDiffTextWindow2->update();
-   }
-   if ( m_pDiffTextWindow3 )
-   {
-      m_pDiffTextWindow3->setFirstLine( m_pDiffTextWindow3->convertDiff3LineIdxToLine( firstD3LIdx ) );
-      m_pDiffTextWindow3->update();
+      m_bRecalcWordWrapPosted = false;
    }
 
-   if ( m_pDiffVScrollBar )
-      m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines+1 - m_DTWHeight) );
-   if ( m_pDiffTextWindow1 )
-   {
-      m_pDiffVScrollBar->setValue( m_pDiffTextWindow1->convertDiff3LineIdxToLine( firstD3LIdx ) );
+   g_pProgressDialog->setStayHidden(false);
 
-      setHScrollBarRange();
-      m_pHScrollBar->setValue(0);
+   bool bPrinting = m_visibleTextWidthForPrinting >= 0;
+
+   if (!m_diff3LineList.empty())
+   {
+      if (m_pOptions->m_bWordWrap)
+      {
+         Diff3LineList::iterator i;
+         int sumOfLines = 0;
+         for (i = m_diff3LineList.begin(); i != m_diff3LineList.end(); ++i)
+         {
+            Diff3Line& d3l = *i;
+            d3l.sumLinesNeededForDisplay = sumOfLines;
+            sumOfLines += d3l.linesNeededForDisplay;
+         }
+
+         // Finish the word wrap
+         if (m_pDiffTextWindow1)
+            m_pDiffTextWindow1->recalcWordWrap(true, sumOfLines, m_visibleTextWidthForPrinting);
+         if (m_pDiffTextWindow2)
+            m_pDiffTextWindow2->recalcWordWrap(true, sumOfLines, m_visibleTextWidthForPrinting);
+         if (m_pDiffTextWindow3)
+            m_pDiffTextWindow3->recalcWordWrap(true, sumOfLines, m_visibleTextWidthForPrinting);
+
+         m_neededLines = sumOfLines;
+      }
+      else
+      {
+         if (m_pDiffTextWindow1)
+            m_pDiffTextWindow1->recalcWordWrap(false, 1, 0);
+         if (m_pDiffTextWindow2)
+            m_pDiffTextWindow2->recalcWordWrap(false, 1, 0);
+         if (m_pDiffTextWindow3)
+            m_pDiffTextWindow3->recalcWordWrap(false, 1, 0);
+      }
+      slotStatusMsg(QString());
    }
 
-   return true;
+   if (!bPrinting)
+   {
+      if (m_pOverview)
+         m_pOverview->slotRedraw();
+      if (m_pDiffVScrollBar)
+         m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines + 1 - m_DTWHeight));
+      if (m_pDiffTextWindow1)
+      {
+         m_pDiffVScrollBar->setValue(m_pDiffTextWindow1->convertDiff3LineIdxToLine(m_firstD3LIdx));
+
+         setHScrollBarRange();
+         m_pHScrollBar->setValue(0);
+      }
+   }
+   mainWindowEnable(window(), true);
+
+   if (m_bFinishMainInit)
+   {
+      m_bFinishMainInit = false;
+      slotFinishMainInit();
+   }
+   if (m_pEventLoopForPrinting)
+      m_pEventLoopForPrinting->quit();
 }
 
 void KDiff3App::slotShowWhiteSpaceToggled()
@@ -1803,7 +1845,7 @@ void KDiff3App::slotReload()
 {
    if ( !canContinue() ) return;
 
-   init();
+   mainInit();
 }
 
 bool KDiff3App::canContinue()
@@ -2064,7 +2106,7 @@ void KDiff3App::slotMergeCurrentFile()
             m_bDefaultFilename = true;
          }
       }
-      init();
+      mainInit();
    }
 }
 
@@ -2278,7 +2320,7 @@ void KDiff3App::slotAddManualDiffHelp()
 
       insertManualDiffHelp( &m_manualDiffHelpList, winIdx, firstLine, lastLine );
 
-      init( false, 0, false ); // Init without reload
+      mainInit( 0, false ); // Init without reload
       slotRefresh();
    }
 }
@@ -2286,28 +2328,28 @@ void KDiff3App::slotAddManualDiffHelp()
 void KDiff3App::slotClearManualDiffHelpList()
 {
    m_manualDiffHelpList.clear();
-   init( false, 0, false ); // Init without reload
+   mainInit( 0, false ); // Init without reload
    slotRefresh();
 }
 
 void KDiff3App::slotEncodingChangedA(QTextCodec* c)
 {
     m_sd1.setEncoding(c);
-    init( false, 0, true, true); // Init with reload
+    mainInit( 0, true, true); // Init with reload
     slotRefresh();
 }
 
 void KDiff3App::slotEncodingChangedB(QTextCodec* c)
 {
     m_sd2.setEncoding(c);
-    init( false, 0, true, true); // Init with reload
+    mainInit( 0, true, true); // Init with reload
     slotRefresh();
 }
 
 void KDiff3App::slotEncodingChangedC(QTextCodec* c)
 {
     m_sd3.setEncoding(c);
-    init( false, 0, true, true ); // Init with reload
+    mainInit( 0, true, true ); // Init with reload
     slotRefresh();
 }
 

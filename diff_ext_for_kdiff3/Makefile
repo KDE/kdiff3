@@ -10,9 +10,9 @@ ifdef DEBUG
   CXXFLAGS ?= -g
 else
   CXXFLAGS ?= -Os
-  LDFLAGS += -s
+  LDFLAGS += -L. -s -static-libgcc
 endif
-CXXFLAGS += -ansi -pedantic -Wall -W -D_UNICODE -DUNICODE
+CXXFLAGS += -pedantic -Wall -W -D_UNICODE -DUNICODE
 
 LIBS :=  -luuid -lole32
 DEFFILE = $(PROJ).def
@@ -44,12 +44,11 @@ release:
 	
 include .depend
 
-clean: clean-custom
-	${RM}  $(OBJ) $(DLL) ${EXPLIB} $(STATICLIB)
+clean:
+	del  .depend $(OBJ) $(DLL) ${EXPLIB} $(STATICLIB)
 
 $(DLL): $(OBJ)
 	dllwrap.exe \
-		--mno-cygwin \
 		--def $(DEFFILE) \
 		--output-exp ${EXPLIB} \
 		--driver-name c++ -L/usr/local/lib -L/usr/lib/mingw \

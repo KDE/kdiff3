@@ -160,6 +160,7 @@ public Q_SLOTS:
    void slotSetFastSelectorLine(int);
    void setPaintingAllowed(bool);
    void updateSourceMask();
+   void slotStatusMessageChanged( const QString& );
 
 Q_SIGNALS:
    void scroll( int deltaX, int deltaY );
@@ -192,6 +193,8 @@ private:
    bool m_bPaintingAllowed;
    int m_delayedDrawTimer;
    Overview::e_OverviewMode m_eOverviewMode;
+   QString m_persistentStatusMessage;
+   void showUnsolvedConflictsStatusMessage();
 
 private:
    class MergeEditLine

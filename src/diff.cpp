@@ -920,12 +920,13 @@ void SourceData::FileData::preprocess( bool bPreserveCR, QTextCodec* pEncoding )
          if ( lineIdx < vOrigDataLineEndStyle.count() && bPreserveCR && i<ucSize)
          {
             ++m_v[lineIdx].size;
-            switch ( vOrigDataLineEndStyle[lineIdx] )
-            {
-            case eLineEndStyleUnix: const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\n'; break;
-            case eLineEndStyleDos:  const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\r'; break;
-            case eLineEndStyleUndefined: const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\x0b'; break;
-            }
+            const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\r';
+            //switch ( vOrigDataLineEndStyle[lineIdx] )
+            //{
+            //case eLineEndStyleUnix: const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\n'; break;
+            //case eLineEndStyleDos:  const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\r'; break;
+            //case eLineEndStyleUndefined: const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\x0b'; break;
+            //}
          }
          lineLength = 0;
          bNonWhiteFound = false;
@@ -1307,19 +1308,54 @@ void calcDiff3LineListUsingBC(
 
                if ( nofDisturbingLines>0 )//&& nofDisturbingLines < d.nofEquals*d.nofEquals+4 )
                {
+                  Diff3LineList::iterator i3_last_equal_A = d3ll.end();
+
+                  i3 = i3c;
+                  while( i3 != i3b )
+                  {
+                    if(i3->bAEqB)
+                    {
+                      i3_last_equal_A = i3;
+                    }
+                    i3++;
+                  }
+
+                  /* If i3_last_equal_A isn't still set to d3ll.end(), then
+                   * we've found a line in A that is equal to one in B
+                   * somewhere between i3c and i3b
+                   */
+                  bool before_or_on_equal_line_in_A = (i3_last_equal_A != d3ll.end());
+
                   // Move the disturbing lines up, out of sight.
                   i3 = i3c;
                   while( i3 != i3b )
                   {
-                     if ( (*i3).lineB != -1 )
+                     if ( (*i3).lineB != -1 ||
+                          (before_or_on_equal_line_in_A && i3->lineA != -1) )
                      {
                         Diff3Line d3l;
                         d3l.lineB = (*i3).lineB;
                         (*i3).lineB = -1;
+
+                        // Move A along if it matched B
+                        if(before_or_on_equal_line_in_A)
+                        {
+                          d3l.lineA = i3->lineA;
+                          d3l.bAEqB = i3->bAEqB;
+                          i3->lineA = -1;
+                          i3->bAEqC = false;
+                        }
+
                         (*i3).bAEqB = false;
                         (*i3).bBEqC = false;
                         d3ll.insert( i3c, d3l );
                      }
+
+                     if (i3 == i3_last_equal_A)
+                     {
+                        before_or_on_equal_line_in_A = false;
+                     }
+
                      ++i3;
                   }
                   nofDisturbingLines=0;
@@ -1330,10 +1366,10 @@ void calcDiff3LineListUsingBC(
                   // Yes, the line from B can be moved.
                   (*i3b).lineB = -1;   // This might leave an empty line: removed later.
                   (*i3b).bAEqB = false;
-                  (*i3b).bAEqC = false;
                   (*i3b).bBEqC = false;
                   (*i3c).lineB = lineB;
                   (*i3c).bBEqC = true;
+                  (*i3c).bAEqB = (*i3c).bAEqC;
                }
             }
             else if( i3b1==i3c  &&  !(*i3c).bAEqC)
@@ -1349,19 +1385,54 @@ void calcDiff3LineListUsingBC(
 
                if ( nofDisturbingLines>0 )//&& nofDisturbingLines < d.nofEquals*d.nofEquals+4 )
                {
+                  Diff3LineList::iterator i3_last_equal_A = d3ll.end();
+
+                  i3 = i3b;
+                  while( i3 != i3c )
+                  {
+                    if(i3->bAEqC)
+                    {
+                      i3_last_equal_A = i3;
+                    }
+                    i3++;
+                  }
+
+                  /* If i3_last_equal_A isn't still set to d3ll.end(), then
+                   * we've found a line in A that is equal to one in C
+                   * somewhere between i3b and i3c
+                   */
+                  bool before_or_on_equal_line_in_A = (i3_last_equal_A != d3ll.end());
+
                   // Move the disturbing lines up.
                   i3 = i3b;
                   while( i3 != i3c )
                   {
-                     if ( (*i3).lineC != -1 )
+                     if ( (*i3).lineC != -1 ||
+                          (before_or_on_equal_line_in_A && i3->lineA != -1) )
                      {
                         Diff3Line d3l;
                         d3l.lineC = (*i3).lineC;
                         (*i3).lineC = -1;
+
+                        // Move A along if it matched C
+                        if(before_or_on_equal_line_in_A)
+                        {
+                          d3l.lineA = i3->lineA;
+                          d3l.bAEqC = i3->bAEqC;
+                          i3->lineA = -1;
+                          i3->bAEqB = false;
+                        }
+
                         (*i3).bAEqC = false;
                         (*i3).bBEqC = false;
                         d3ll.insert( i3b, d3l );
                      }
+
+                     if (i3 == i3_last_equal_A)
+                     {
+                        before_or_on_equal_line_in_A = false;
+                     }
+
                      ++i3;
                   }
                   nofDisturbingLines=0;
@@ -1375,6 +1446,7 @@ void calcDiff3LineListUsingBC(
                   (*i3c).bBEqC = false;
                   (*i3b).lineC = lineC;
                   (*i3b).bBEqC = true;
+                  (*i3b).bAEqC = (*i3b).bAEqB;
                }
             }
          }
@@ -1899,6 +1971,17 @@ void calcDiff3LineListTrim(
          // Empty space for A. A doesn't match B or C. Move it up.
          (*i3A).lineA = (*i3).lineA;
          (*i3).lineA = -1;
+
+         if(i3A->lineB != -1 && ::equal( pldA[i3A->lineA], pldB[i3A->lineB], false ))
+         {
+            i3A->bAEqB = true;
+         }
+         if((i3A->bAEqB && i3A->bBEqC) ||
+            (i3A->lineC != -1 && ::equal( pldA[i3A->lineA], pldC[i3A->lineC], false )))
+         {
+            i3A->bAEqC = true;
+         }
+
          ++i3A;
          ++lineA;
       }
@@ -1910,6 +1993,17 @@ void calcDiff3LineListTrim(
          // Empty space for B. B matches neither A nor C. Move B up.
          (*i3B).lineB = (*i3).lineB;
          (*i3).lineB = -1;
+
+         if(i3B->lineA != -1 && ::equal( pldA[i3B->lineA], pldB[i3B->lineB], false ))
+         {
+            i3B->bAEqB = true;
+         }
+         if((i3B->bAEqB && i3B->bAEqC) ||
+            (i3B->lineC != -1 && ::equal( pldB[i3B->lineB], pldC[i3B->lineC], false )))
+         {
+            i3B->bBEqC = true;
+         }
+
          ++i3B;
          ++lineB;
       }
@@ -1921,6 +2015,17 @@ void calcDiff3LineListTrim(
          // Empty space for C. C matches neither A nor B. Move C up.
          (*i3C).lineC = (*i3).lineC;
          (*i3).lineC = -1;
+
+         if(i3C->lineA != -1 && ::equal( pldA[i3C->lineA], pldC[i3C->lineC], false ))
+         {
+            i3C->bAEqC = true;
+         }
+         if((i3C->bAEqC && i3C->bAEqB) ||
+            (i3C->lineB != -1 && ::equal( pldB[i3C->lineB], pldC[i3C->lineC], false )))
+         {
+            i3C->bBEqC = true;
+         }
+
          ++i3C;
          ++lineC;
       }
@@ -1937,6 +2042,12 @@ void calcDiff3LineListTrim(
             (*i).lineA = (*i3).lineA;
             (*i).lineB = (*i3).lineB;
             (*i).bAEqB = true;
+
+            if(i->lineC != -1 && ::equal( pldA[i->lineA], pldC[i->lineC], false ))
+            {
+               (*i).bAEqC = true;
+               (*i).bBEqC = true;
+            }
 
             (*i3).lineA = -1;
             (*i3).lineB = -1;
@@ -1962,6 +2073,12 @@ void calcDiff3LineListTrim(
             (*i).lineC = (*i3).lineC;
             (*i).bAEqC = true;
 
+            if(i->lineB != -1 && ::equal( pldA[i->lineA], pldB[i->lineB], false ))
+            {
+               (*i).bAEqB = true;
+               (*i).bBEqC = true;
+            }
+
             (*i3).lineA = -1;
             (*i3).lineC = -1;
             (*i3).bAEqC = false;
@@ -1985,6 +2102,12 @@ void calcDiff3LineListTrim(
             (*i).lineB = (*i3).lineB;
             (*i).lineC = (*i3).lineC;
             (*i).bBEqC = true;
+
+            if(i->lineA != -1 && ::equal( pldA[i->lineA], pldB[i->lineB], false ))
+            {
+               (*i).bAEqB = true;
+               (*i).bAEqC = true;
+            }
 
             (*i3).lineB = -1;
             (*i3).lineC = -1;

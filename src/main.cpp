@@ -14,7 +14,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-
+#include "stable.h"
 #include <QStandardPaths>
 #include <QApplication>
 #include <KAboutData>
@@ -105,10 +105,14 @@ class ContextFreeTranslator : public QTranslator
 {
 public:
    ContextFreeTranslator( QObject* pParent ) : QTranslator(pParent) {}
-   virtual QString translate(const char* context, const char* sourceText, const char* comment ) const
+#if QT_VERSION>=0x050000
+   QString translate(const char * context, const char * sourceText, const char * disambiguation, int /*n*/ ) const /*override*/
+#else
+   QString translate(const char* context, const char* sourceText, const char* disambiguation ) const /*override*/
+#endif
    {
       if ( context != 0 )
-         return QTranslator::translate(0,sourceText,comment, -1);
+         return QTranslator::translate(0,sourceText,disambiguation);
       else
          return QString();
    }
@@ -165,7 +169,7 @@ int main(int argc, char *argv[])
 
    //QApplication::setColorSpec( QApplication::ManyColor ); // Grab all 216 colors
 
-   const QByteArray& appName = "kdiff3";
+   const QByteArray& appName = QByteArray("kdiff3");
    const QByteArray& appCatalog = appName;
    const QString i18nName = i18n("kdiff3");
    QByteArray appVersion = QByteArray( VERSION );
@@ -174,7 +178,7 @@ int main(int argc, char *argv[])
    else if ( sizeof(void*)==4 )
        appVersion += " (32 bit)";
    const QString description = i18n("Tool for Comparison and Merge of Files and Directories");
-   const QString copyright = i18n("(c) 2002-2012 Joachim Eibl");
+   const QString copyright = i18n("(c) 2002-2014 Joachim Eibl");
    const QString& homePage = QStringLiteral("http://kdiff3.sourceforge.net/");
    const QString& bugsAddress = QStringLiteral("joachim.eibl@gmx.de");
    
@@ -228,12 +232,13 @@ int main(int argc, char *argv[])
     if( spacePos > 0 ) locale = locale.left( spacePos );
     ContextFreeTranslator kdiff3Translator( 0 );
     QTranslator qtTranslator( 0 );
-    if( locale != "en_orig" ) {
+    if( locale != "en_orig" )
+    {
         QString translationDir = getTranslationDir( locale );
         kdiff3Translator.load(QLocale::system(), QString( "kdiff3_" ), translationDir );
         app.installTranslator( &kdiff3Translator );
 	
-        qtTranslator.load(QLocale::system(), QString( "qt_" ), translationDir );
+        qtTranslator.load(QLocale::system(), QString("qt_"), translationDir );
         app.installTranslator( &qtTranslator );
     }
 #endif

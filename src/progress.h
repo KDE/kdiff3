@@ -19,13 +19,13 @@ class KJob;
 class QEventLoop;
 class QLabel;
 class QProgressBar;
-class QThread;
+class QStatusBar;
 
 class ProgressDialog : public QDialog
 {
    Q_OBJECT
 public:
-   ProgressDialog( QWidget* pParent );
+   ProgressDialog( QWidget* pParent,QStatusBar* );
 
    void setStayHidden( bool bStayHidden );
    void setInformation( const QString& info, bool bRedrawUpdate=true );
@@ -48,10 +48,17 @@ public:
    void enterEventLoop( KJob* pJob, const QString& jobInfo );
 
    bool wasCancelled();
+   enum e_CancelReason{eUserAbort,eResize};
+   void cancel(e_CancelReason);
+   e_CancelReason cancelReason();
+   void clearCancelState();
    void show();
    void hide();
+   void hideStatusBarWidget();
+   void delayedHideStatusBarWidget();
    
    virtual void timerEvent(QTimerEvent*);
+public slots:
    void recalc(bool bRedrawUpdate);
 private:
 
@@ -73,6 +80,7 @@ private:
    
    int m_progressDelayTimer;
    int m_delayedHideTimer;
+   int m_delayedHideStatusBarWidgetTimer;
    QList<QEventLoop*> m_eventLoopStack;
 
    QProgressBar* m_pProgressBar;
@@ -84,13 +92,18 @@ private:
    QTime m_t1;
    QTime m_t2;
    bool m_bWasCancelled;
+   e_CancelReason m_eCancelReason;
    KJob* m_pJob;
    QString m_currentJobInfo;  // Needed if the job doesn't stop after a reasonable time.
    bool m_bStayHidden;
    QThread* m_pGuiThread;
+   QStatusBar* m_pStatusBar;  // status bar of main window (if exists)
+   QWidget* m_pStatusBarWidget;
+   QProgressBar* m_pStatusProgressBar;
+   QPushButton* m_pStatusAbortButton;
 protected:
    virtual void reject();
-private Q_SLOTS:
+private slots:
    void delayedHide();
    void slotAbort();
 };

@@ -24,6 +24,7 @@
 
 #include <KPageDialog>
 #include <QStringList>
+#include <QGroupBox>
 #include <list>
 
 #include "options.h"
@@ -72,7 +73,7 @@ private:
     void resetToDefaults();
 
     std::list<OptionItem*> m_optionItemList;
-    
+
     QDialogButtonBox *mButtonBox;
     OptionCheckBox* m_pSameEncoding;
     OptionEncodingComboBox* m_pEncodingAComboBox;
@@ -105,7 +106,19 @@ private:
 };
 
 
-
+class FontChooser : public QGroupBox
+{
+   Q_OBJECT
+   QFont m_font;
+   QPushButton* m_pSelectFont;
+   QLabel* m_pLabel;
+public:
+   FontChooser( QWidget* pParent );
+   QFont font();
+   void setFont( const QFont&, bool );
+private slots:
+   void slotSelectFont();
+};
 
 #endif
 

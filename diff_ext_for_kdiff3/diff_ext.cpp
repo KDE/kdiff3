@@ -330,6 +330,9 @@ STDMETHODIMP
 DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*last_cmd not used*/, UINT flags) 
 {
    LOG();
+   
+   SERVER::instance()->recent_files(); // updates recent files list (reads from registry)
+   
    m_id_Diff = UINT(-1);
    m_id_DiffWith = UINT(-1);
    m_id_DiffLater = UINT(-1);
@@ -473,12 +476,14 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
       {
          LOG();
          m_recentFiles.clear();
+         SERVER::instance()->save_history();
       } 
       else if(id == m_id_DiffLater) 
       {
          MESSAGELOG(TEXT("Diff Later: ")+_file_name1);
          m_recentFiles.remove( _file_name1 );
          m_recentFiles.push_front( _file_name1 );
+         SERVER::instance()->save_history();
       } 
       else if(id >= m_id_DiffWith_Base && id < m_id_DiffWith_Base+m_recentFiles.size()) 
       {
@@ -488,12 +493,15 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
       else if(id == m_id_About) 
       {
          LOG();
+         std::wstring sBits = i18n("(32 Bit)");
+         if (sizeof(void*)==8)
+             sBits = i18n("(64 Bit)");
          MessageBox( _hwnd, (i18n("Diff-Ext Copyright (c) 2003-2006, Sergey Zorin. All rights reserved.\n")
             + i18n("This software is distributable under the BSD license.\n")
-            + i18n("Some extensions for KDiff3 by Joachim Eibl.\n")
+            + i18n("Some extensions for KDiff3 (c) 2006-2013 by Joachim Eibl.\n")
             + i18n("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n")
             + i18n("Homepage for KDiff3: http://kdiff3.sourceforge.net")).c_str()
-            , i18n("About Diff-Ext for KDiff3").c_str(), MB_OK );
+            , (i18n("About Diff-Ext for KDiff3 ")+sBits).c_str(), MB_OK );
       } 
       else 
       {
@@ -513,7 +521,7 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
 }
 
 STDMETHODIMP
-DIFF_EXT::GetCommandString(UINT idCmd, UINT uFlags, UINT*, LPSTR pszName, UINT cchMax) 
+DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UINT cchMax)
 {
    // LOG(); // Gets called very often
    HRESULT ret = NOERROR;
@@ -554,6 +562,10 @@ DIFF_EXT::GetCommandString(UINT idCmd, UINT uFlags, UINT*, LPSTR pszName, UINT c
          }
       }
       lstrcpyn( (LPTSTR)pszName, helpString.c_str(), cchMax );
+   }
+   else
+   {
+      ret = E_INVALIDARG;
    }
 
    return ret;
