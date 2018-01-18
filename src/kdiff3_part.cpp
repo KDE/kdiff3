@@ -64,7 +64,7 @@ KDiff3Part::KDiff3Part( QWidget *parentWidget, QObject *parent, const QVariantLi
     // this should be your custom internal widget
     m_widget = new KDiff3App( parentWidget, widgetName, this );
     
-    // This hack is necessary to avoid a crash when the program terminates.
+    //FIXME: This hack is necessary to avoid a crash when the program terminates.
     m_bIsShell = qobject_cast<KParts::MainWindow*>(parentWidget)!=0;
 
     // notify the part that this is our internal widget
