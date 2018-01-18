@@ -412,8 +412,8 @@ void FileAccess::setUdsEntry( const KIO::UDSEntry& e )
 {
    long acc = 0;
    long fileType = 0;
-   QList< uint > fields = e.listFields();
-   for( QList< uint >::ConstIterator ei=fields.constBegin(); ei!=fields.constEnd(); ++ei )
+   QVector< uint > fields = e.fields();
+   for( QVector< uint >::ConstIterator ei=fields.constBegin(); ei!=fields.constEnd(); ++ei )
    {
       uint f = *ei;
       switch( f )
