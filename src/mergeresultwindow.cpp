@@ -1103,9 +1103,9 @@ static void findHistoryRange( const QRegExp& historyStart, bool bThreeFiles, con
       QString sA = iEnd->getString(A);
       QString sB = iEnd->getString(B);
       QString sC = iEnd->getString(C);
-      if ( ! ((sA.isNull() || historyLead == calcHistoryLead(sA) ) &&
-              (sB.isNull() || historyLead == calcHistoryLead(sB) ) &&
-           (!bThreeFiles || sC.isNull() || historyLead == calcHistoryLead(sC) )
+      if ( ! ((sA.isEmpty() || historyLead == calcHistoryLead(sA) ) &&
+              (sB.isEmpty() || historyLead == calcHistoryLead(sB) ) &&
+           (!bThreeFiles || sC.isEmpty() || historyLead == calcHistoryLead(sC) )
          ))
       {
          break; // End of the history
@@ -1222,7 +1222,7 @@ void MergeResultWindow::collectHistoryInformation(
       const LineData* pld = id3l->getLineData(src);
       if ( !pld ) continue;
       QString s( pld->pLine, pld->size );
-      if (historyLead.isNull()) historyLead = calcHistoryLead(s);
+      if (historyLead.isEmpty()) historyLead = calcHistoryLead(s);
       QString sLine = s.mid(historyLead.length());
       if ( ( !bUseRegExp && !sLine.trimmed().isEmpty() && bPrevLineIsEmpty )
            || (bUseRegExp && newHistoryEntry.exactMatch( sLine ) )

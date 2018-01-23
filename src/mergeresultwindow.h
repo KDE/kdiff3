@@ -202,13 +202,13 @@ private:
    public:
       MergeEditLine(Diff3LineList::const_iterator i, int src=0){m_id3l=i; m_src=src; m_bLineRemoved=false; }
       void setConflict() { m_src=0; m_bLineRemoved=false; m_str=QString(); }
-      bool isConflict()  { return  m_src==0 && !m_bLineRemoved && m_str.isNull(); }
+      bool isConflict()  { return  m_src==0 && !m_bLineRemoved && m_str.isEmpty(); }
       void setRemoved(int src=0)  { m_src=src; m_bLineRemoved=true; m_str=QString(); }
       bool isRemoved()   { return m_bLineRemoved; }
       bool isEditableText() { return !isConflict() && !isRemoved(); }
       void setString( const QString& s ){ m_str=s; m_bLineRemoved=false; m_src=0; }
       QString getString( const MergeResultWindow* );
-      bool isModified() { return ! m_str.isNull() ||  (m_bLineRemoved && m_src==0); }
+      bool isModified() { return ! m_str.isEmpty() ||  (m_bLineRemoved && m_src==0); }
 
       void setSource( int src, bool bLineRemoved ) { m_src=src; m_bLineRemoved =bLineRemoved; }
       int src() { return m_src; }
