@@ -81,7 +81,7 @@ KDiff3Plugin::KDiff3Plugin( KonqPopupMenu* pPopupMenu, const QStringList & /* li
 
 void KDiff3Plugin::setup( KActionCollection* actionCollection, const KonqPopupMenuInformation& popupMenuInfo, QMenu* pMenu )
 {
-   if (KStandardDirs::findExe("kdiff3").isNull ())
+   if (KStandardDirs::findExe("kdiff3").isEmpty ())
       return;
 
    // remember currently selected files (copy to a QStringList)

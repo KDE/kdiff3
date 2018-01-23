@@ -1187,7 +1187,7 @@ void KDiff3App::slotEditCut()
       m_pMergeResultWindow->update();
    }
 
-   if ( !s.isNull() )
+   if ( !s.isEmpty() )
    {
       QApplication::clipboard()->setText( s, QClipboard::Clipboard );
    }
@@ -1200,10 +1200,10 @@ void KDiff3App::slotEditCopy()
    slotStatusMsg(i18n("Copying selection to clipboard..."));
    QString s;
    if (               m_pDiffTextWindow1!=0 )   s = m_pDiffTextWindow1->getSelection();
-   if ( s.isNull() && m_pDiffTextWindow2!=0 )   s = m_pDiffTextWindow2->getSelection();
-   if ( s.isNull() && m_pDiffTextWindow3!=0 )   s = m_pDiffTextWindow3->getSelection();
-   if ( s.isNull() && m_pMergeResultWindow!=0 ) s = m_pMergeResultWindow->getSelection();
-   if ( !s.isNull() )
+   if ( s.isEmpty() && m_pDiffTextWindow2!=0 )   s = m_pDiffTextWindow2->getSelection();
+   if ( s.isEmpty() && m_pDiffTextWindow3!=0 )   s = m_pDiffTextWindow3->getSelection();
+   if ( s.isEmpty() && m_pMergeResultWindow!=0 ) s = m_pMergeResultWindow->getSelection();
+   if ( !s.isEmpty() )
    {
       QApplication::clipboard()->setText( s, QClipboard::Clipboard );
    }
@@ -1500,10 +1500,10 @@ void KDiff3App::slotSelectionEnd()
        {
            QString s;
            if (               m_pDiffTextWindow1!=0 )   s = m_pDiffTextWindow1->getSelection();
-           if ( s.isNull() && m_pDiffTextWindow2!=0 )   s = m_pDiffTextWindow2->getSelection();
-           if ( s.isNull() && m_pDiffTextWindow3!=0 )   s = m_pDiffTextWindow3->getSelection();
-           if ( s.isNull() && m_pMergeResultWindow!=0 ) s = m_pMergeResultWindow->getSelection();
-           if ( !s.isNull() )
+           if ( s.isEmpty() && m_pDiffTextWindow2!=0 )   s = m_pDiffTextWindow2->getSelection();
+           if ( s.isEmpty() && m_pDiffTextWindow3!=0 )   s = m_pDiffTextWindow3->getSelection();
+           if ( s.isEmpty() && m_pMergeResultWindow!=0 ) s = m_pMergeResultWindow->getSelection();
+           if ( !s.isEmpty() )
            {
                clipBoard->setText( s, QClipboard::Selection );
            }
@@ -1967,10 +1967,10 @@ void KDiff3App::slotEditFind()
    // Use currently selected text:
    QString s;
    if (               m_pDiffTextWindow1!=0 )   s = m_pDiffTextWindow1->getSelection();
-   if ( s.isNull() && m_pDiffTextWindow2!=0 )   s = m_pDiffTextWindow2->getSelection();
-   if ( s.isNull() && m_pDiffTextWindow3!=0 )   s = m_pDiffTextWindow3->getSelection();
-   if ( s.isNull() && m_pMergeResultWindow!=0 ) s = m_pMergeResultWindow->getSelection();
-   if ( !s.isNull() && !s.contains('\n') )
+   if ( s.isEmpty() && m_pDiffTextWindow2!=0 )   s = m_pDiffTextWindow2->getSelection();
+   if ( s.isEmpty() && m_pDiffTextWindow3!=0 )   s = m_pDiffTextWindow3->getSelection();
+   if ( s.isEmpty() && m_pMergeResultWindow!=0 ) s = m_pMergeResultWindow->getSelection();
+   if ( !s.isEmpty() && !s.contains('\n') )
    {
       m_pFindDialog->m_pSearchString->setText( s );
    }   

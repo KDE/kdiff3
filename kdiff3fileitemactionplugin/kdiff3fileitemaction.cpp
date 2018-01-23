@@ -84,7 +84,7 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
 {
    QList< QAction* > actions;
    
-   if (QStandardPaths::findExecutable("kdiff3").isNull ())
+   if (QStandardPaths::findExecutable("kdiff3").isEmpty ())
       return actions;
 
    KDiff3FileItemAction *pThis = const_cast<KDiff3FileItemAction*>(this);
