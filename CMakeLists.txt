@@ -76,7 +76,6 @@ if(KFILEITEMACTIONPLUGIN_FOUND)
   message(STATUS "   => kdiff3fileitemactionplugin (KDiff3 contextmenu plugin for Konqueror/Dolphin, KDE>4.6) will be built.")
   message(STATUS "")
 
-  #add_subdirectory(icons)
   add_subdirectory(kdiff3fileitemactionplugin)
 else(KFILEITEMACTIONPLUGIN_FOUND)
   message(STATUS "")
