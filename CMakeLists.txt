@@ -5,12 +5,19 @@ project(kdiff3)
 
 set(CMAKE_CXX_EXTENSIONS OFF ) #don't use non-standard extentions
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(ECM_MIN_VERSION "1.0.0")
+set(ECM_MIN_VERSION "1.7.0")
 set(QT_MIN_VERSION "5.6.0")
-set(KF5_MIN_VERSION "5.8.0")
+set(KF5_MIN_VERSION "5.16.0")
 
 find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_SOURCE_DIR}/cmake)
+set(
+    CMAKE_MODULE_PATH
+    ${CMAKE_MODULE_PATH}
+    /usr/share/apps/cmake/modules/
+    ${ECM_MODULE_PATH}
+    ${ECM_KDE_MODULE_DIR}
+    ${CMAKE_SOURCE_DIR}/cmake
+)
 
 include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
@@ -18,21 +25,43 @@ include(KDECMakeSettings NO_POLICY_SCOPE)
 include(FeatureSummary)
 
 include(ECMInstallIcons)
+include(ECMAddAppIcon)
+# include(GenerateExportHeader)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets PrintSupport)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n CoreAddons IconThemes)
+find_package(
+    Qt5 ${QT_MIN_VERSION}
+    CONFIG
+    REQUIRED
+    COMPONENTS
+    Core
+    Gui
+    Widgets
+    PrintSupport
+)
+
+find_package(
+    KF5 ${KF5_MIN_VERSION}
+    REQUIRED
+    COMPONENTS
+    I18n
+    CoreAddons
+    IconThemes
+)
 find_package(KF5DocTools ${KF5_MIN_VERSION} REQUIRED )
 
 # I don't need warnings about wired things in comments.
-SET(CLANG_WARNING_FLAGS -Wno-comment)
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
-SET(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::IconThemes)
-SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
-SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CLANG_WARNING_FLAGS}")
-set(needed_features
+set(CLANG_WARNING_FLAGS -Wno-comment)
+
+set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::IconThemes)
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
+set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CLANG_WARNING_FLAGS}")
+set(
+    needed_features
     cxx_generalized_initializers
     cxx_constexpr
-    cxx_auto_type)
+    cxx_auto_type
+)
+
 #make sure we get warnings about using deprecated functions in qt.
 add_definitions(-DQT_DEPRECATED_WARNINGS)
 #remove unnneeded errors
@@ -56,6 +85,8 @@ if(KFILEITEMACTIONPLUGIN_FOUND)
   message(STATUS "kabstractfileitemactionplugin.h found........... YES")
   message(STATUS "   => kdiff3fileitemactionplugin (KDiff3 contextmenu plugin for Konqueror/Dolphin, KDE>4.6) will be built.")
   message(STATUS "")
+
+  #add_subdirectory(icons)
   add_subdirectory(kdiff3fileitemactionplugin)
 else(KFILEITEMACTIONPLUGIN_FOUND)
   message(STATUS "")
