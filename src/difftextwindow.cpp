@@ -2027,7 +2027,7 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
 {
     QString current = d->m_pFileSelection->text();
 
-    QUrl newURL = QFileDialog::getOpenFileUrl(this, QString(), current, 0);
+    QUrl newURL = QFileDialog::getOpenFileUrl(this, QString(), QUrl::fromUserInput(current, QString(), QUrl::AssumeLocalFile), 0);
     if ( !newURL.isEmpty() )
     {
         DiffTextWindow* pDTW = d->m_pDiffTextWindow;

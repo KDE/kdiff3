@@ -119,9 +119,15 @@ static void showHelp()
 QString getTranslationDir(const QString& locale)
 {
    #if defined(_WIN32) || defined(Q_OS_OS2)
+      QUNUSED(locale); 
       QString exePath;
       exePath = QCoreApplication::applicationDirPath();
       return exePath+"/translations";
+   #elif defined(__APPLE__)
+      QUNUSED(locale);
+      
+      QString exePath = QCoreApplication::applicationDirPath();
+      return exePath+"/../Resources/translations";
    #else
       return  (QString)"/usr/share/locale/" + locale + "/LC_MESSAGES";
    #endif
@@ -754,46 +760,6 @@ void KActionCollection::addAction( const QString& name, QAction* pAction )
    initAction( pAction, 0,0,this,name,false,true);
 }
 
-KFontChooser::KFontChooser( QWidget* pParent )
-: QWidget(pParent)
-{
-   m_pParent = pParent;
-   QVBoxLayout* pLayout = new QVBoxLayout( this );
-   m_pSelectFont = new QPushButton(i18n("Select Font"), this );
-   connect(m_pSelectFont, SIGNAL(clicked()), this, SLOT(slotSelectFont()));
-   pLayout->addWidget(m_pSelectFont);
-
-   m_pLabel = new QLabel( "", this );
-   m_pLabel->setFont( m_font );
-   m_pLabel->setMinimumWidth(200);
-   QChar visualTab(0x2192);
-   QChar visualSpace((ushort)0xb7);
-   m_pLabel->setText( QString("The quick brown fox jumps over the river\n"
-                      "but the little red hen escapes with a shiver.\n"
-                      ":-)")+visualTab+visualSpace);
-   pLayout->addWidget(m_pLabel);
-}
-
-QFont KFontChooser::font()
-{
-   return m_font;//QFont("courier",10);
-}
-
-void KFontChooser::setFont( const QFont& font, bool )
-{
-   m_font = font;
-   m_pLabel->setFont( m_font );
-   //update();
-}
-
-void KFontChooser::slotSelectFont()
-{
-   bool bOk;
-   m_font = QFontDialog::getFont(&bOk, m_font );
-   m_pLabel->setFont( m_font );
-}
-
-
 KColorButton::KColorButton(QWidget* parent)
 : QPushButton(parent)
 {
@@ -1015,7 +981,13 @@ KApplication::KApplication()
 : QApplication( s_argc,s_argv )
 {
    kapp = this;
+   #if ! ( defined(_WIN32) || defined(Q_OS_OS2) )
+   parseOptions();
+   #endif
+}
 
+void KApplication::parseOptions()
+{
    //setStyle( new QWindowsStyle ); // doesn't show checkmarks on checkable icons in menu
 
    int nofOptions=0;
@@ -1044,7 +1016,7 @@ KApplication::KApplication()
    }
    m_config.readConfigFile(configFileName);
 
-   QStringList ignorableCmdLineOptionsList = m_config.readEntry("IgnorableCmdLineOptions", QStringList("-u;-query;-html;-abort"), ',');
+   QStringList ignorableCmdLineOptionsList = m_config.readEntry("IgnorableCmdLineOptions", QStringList("-u;-query;-html;-abort"), '|');
    QString ignorableCmdLineOptions;
    if ( !ignorableCmdLineOptionsList.isEmpty() ) 
       ignorableCmdLineOptions = ignorableCmdLineOptionsList.front() + ";";

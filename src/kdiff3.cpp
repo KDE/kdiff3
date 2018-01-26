@@ -165,7 +165,7 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
     // This is just a convenience variable to make code that accesses options more readable
     m_pOptions = &m_pOptionDialog->m_options;
 
-    m_pOptionDialog->readOptions( KSharedConfig::openConfig() );
+    m_pOptionDialog->readOptions( isPart() ? KSharedConfig::openConfig(QStringLiteral("kdiff3_part.rc")) : KSharedConfig::openConfig(QStringLiteral("kdiff3_shell.rc"))  );
 
     // Option handling: Only when pParent==0 (no parent)
     int argCount = KDiff3Shell::getParser()->optionNames().count() + KDiff3Shell::getParser()->positionalArguments().count();
@@ -514,7 +514,7 @@ void KDiff3App::initActions( KActionCollection* ac )
     fileOpen = KStandardAction::open( this, SLOT( slotFileOpen() ), ac );
     fileOpen->setStatusTip( i18n( "Opens documents for comparison..." ) );
 
-    fileReload = KDiff3::createAction< QAction >( i18n( "Reload" ), QKeySequence( Qt::Key_F5 ), this, SLOT( slotReload() ), ac, "file_reload" );
+    fileReload = KDiff3::createAction< QAction >( i18n( "Reload" ), QKeySequence( QKeySequence::Refresh ), this, SLOT( slotReload() ), ac, "file_reload" );
 
     fileSave = KStandardAction::save( this, SLOT( slotFileSave() ), ac );
     fileSave->setStatusTip( i18n( "Saves the merge result. All conflicts must be solved!" ) );
@@ -684,7 +684,7 @@ void KDiff3App::saveOptions( KSharedConfigPtr config )
 
 bool KDiff3App::queryClose()
 {
-    saveOptions( KSharedConfig::openConfig() );
+   saveOptions( isPart() ? KSharedConfig::openConfig(QStringLiteral("kdiff3_part.rc")) : KSharedConfig::openConfig(QStringLiteral("kdiff3_shell.rc")) );
 
    if(m_bOutputModified)
    {
@@ -755,7 +755,7 @@ void KDiff3App::slotFileSaveAs()
 {
     slotStatusMsg( i18n( "Saving file with a new filename..." ) );
 
-    QString s = QFileDialog::getSaveFileUrl( this, i18n( "Save As..." ), QDir::currentPath(), 0 ).url();
+    QString s = QFileDialog::getSaveFileUrl( this, i18n( "Save As..." ), QDir::currentPath(), 0 ).url(QUrl::PreferLocalFile);
     if( !s.isEmpty() ) {
         m_outputFilename = s;
         m_pMergeResultWindowTitle->setFileName( m_outputFilename );
@@ -939,6 +939,13 @@ void KDiff3App::slotFilePrint()
         pp.setMaxNofSteps(totalNofPages);
         QList<int>::iterator pageListIt = pageList.begin();
         for( ;; ) {
+            pp.setInformation(i18n("Printing page %1 of %2").arg(page).arg(totalNofPages),false);
+            pp.setCurrent(page - 1);
+            if (pp.wasCancelled())
+            {
+               printer.abort();
+               break;
+            }
             if( !bPrintSelection ) {
                 if( pageListIt == pageList.end() )
                     break;

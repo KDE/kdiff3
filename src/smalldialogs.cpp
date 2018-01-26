@@ -228,6 +228,8 @@ bool OpenDialog::eventFilter(QObject* o, QEvent* e)
 void OpenDialog::selectURL( QComboBox* pLine, bool bDir, int i, bool bSave )
 {
     QString current = pLine->currentText();
+    QUrl currentUrl;
+
     if( current.isEmpty() && i > 3 ) {
         current = m_pLineC->currentText();
     }
@@ -238,9 +240,10 @@ void OpenDialog::selectURL( QComboBox* pLine, bool bDir, int i, bool bSave )
         current = m_pLineA->currentText();
     }
 
-    QUrl newURL = bDir ? QFileDialog::getExistingDirectoryUrl( this, QString(""), QUrl::fromUserInput(current))
-    	    : bSave ? QFileDialog::getSaveFileUrl( this, QString(""), QUrl::fromUserInput(current), QLatin1Literal("all/allfiles") )
-    		    : QFileDialog::getOpenFileUrl( this, QString(""), QUrl::fromUserInput(current), QLatin1Literal("all/allfiles") );
+    currentUrl = QUrl::fromUserInput(current, QString(), QUrl::AssumeLocalFile);
+    QUrl newURL = bDir ? QFileDialog::getExistingDirectoryUrl( this, i18n("Open Directory"), currentUrl)
+    	    : bSave ? QFileDialog::getSaveFileUrl( this, i18n("Select Output File"), currentUrl, QLatin1Literal("all/allfiles") )
+    		    : QFileDialog::getOpenFileUrl( this, i18n("Open File"), currentUrl, QLatin1Literal("all/allfiles") );
     if( !newURL.isEmpty() ) {
         /*
         Since we are selecting a directory open in the parent directory
@@ -297,7 +300,7 @@ void OpenDialog::accept()
    fixCurrentText( m_pLineA );
 
    QString s = m_pLineA->currentText();
-   s = QUrl::fromLocalFile(s).toLocalFile();
+   s = QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile).toLocalFile();
    QStringList* sl = &m_pOptions->m_recentAFiles;
    // If an item exist, remove it from the list and reinsert it at the beginning.
    sl->removeAll(s);
@@ -306,7 +309,7 @@ void OpenDialog::accept()
 
    fixCurrentText( m_pLineB );
    s = m_pLineB->currentText();
-   s = QUrl::fromLocalFile(s).toLocalFile();
+   s = QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile).toLocalFile();
    sl = &m_pOptions->m_recentBFiles;
    sl->removeAll(s);
    if ( !s.isEmpty() ) sl->prepend( s );
@@ -314,7 +317,7 @@ void OpenDialog::accept()
 
    fixCurrentText( m_pLineC );
    s = m_pLineC->currentText();
-   s = QUrl::fromLocalFile(s).toLocalFile();
+   s = QUrl::fromUserInput(s,  QString(), QUrl::AssumeLocalFile).toLocalFile();
    sl = &m_pOptions->m_recentCFiles;
    sl->removeAll(s);
    if ( !s.isEmpty() ) sl->prepend( s );
@@ -322,7 +325,7 @@ void OpenDialog::accept()
 
    fixCurrentText( m_pLineOut );
    s = m_pLineOut->currentText();
-   s = QUrl::fromLocalFile(s).toLocalFile();
+   s = QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile).toLocalFile();
    sl = &m_pOptions->m_recentOutputFiles;
    sl->removeAll(s);
    if ( !s.isEmpty() ) sl->prepend( s );
