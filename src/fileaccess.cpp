@@ -804,7 +804,7 @@ bool FileAccess::removeFile()
    else
    {
       FileAccessJobHandler jh( this );
-      return jh.removeFile( QUrl(absoluteFilePath()) );
+      return jh.removeFile( url() );
    }
 }
 
