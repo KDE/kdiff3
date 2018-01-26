@@ -804,7 +804,7 @@ bool FileAccess::removeFile()
    else
    {
       FileAccessJobHandler jh( this );
-      return jh.removeFile( absoluteFilePath() );
+      return jh.removeFile( QUrl(absoluteFilePath()) );
    }
 }
 
@@ -1137,7 +1137,7 @@ bool FileAccessJobHandler::rmDir( const QString& dirName )
    }
 }
 
-bool FileAccessJobHandler::removeFile( const QString& fileName )
+bool FileAccessJobHandler::removeFile( const QUrl& fileName )
 {
    if ( fileName.isEmpty() )
       return false;
@@ -1147,12 +1147,12 @@ bool FileAccessJobHandler::removeFile( const QString& fileName )
       KIO::SimpleJob* pJob = KIO::file_delete( fileName, KIO::HideProgressInfo );
       connect(pJob, &KIO::SimpleJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
 
-      ProgressProxy::enterEventLoop( pJob, i18n("Removing file: %1",fileName) );
+      ProgressProxy::enterEventLoop( pJob, i18n("Removing file: %1",fileName.toDisplayString()) );
       return m_bSuccess;
    }
 }
 
-bool FileAccessJobHandler::symLink( const QString& linkTarget, const QString& linkLocation )
+bool FileAccessJobHandler::symLink( const QUrl& linkTarget, const QUrl& linkLocation )
 {
    if ( linkTarget.isEmpty() || linkLocation.isEmpty() )
       return false;
@@ -1163,7 +1163,7 @@ bool FileAccessJobHandler::symLink( const QString& linkTarget, const QString& li
       connect(pJob, &KIO::CopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
 
       ProgressProxy::enterEventLoop( pJob,
-         i18n("Creating symbolic link: %1 -> %2",linkLocation,linkTarget) );
+         i18n("Creating symbolic link: %1 -> %2",linkLocation.toDisplayString(),linkTarget.toDisplayString()) );
       return m_bSuccess;
    }
 }

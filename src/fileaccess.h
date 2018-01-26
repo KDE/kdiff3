@@ -146,8 +146,8 @@ public:
                  const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore );
    bool mkDir( const QString& dirName );
    bool rmDir( const QString& dirName );
-   bool removeFile( const QString& dirName );
-   bool symLink( const QString& linkTarget, const QString& linkLocation );
+   bool removeFile( const QUrl& dirName );
+   bool symLink( const QUrl& linkTarget, const QUrl& linkLocation );
 
 private:
    FileAccess* m_pFileAccess;

@@ -64,7 +64,7 @@ set(
 )
 
 #make sure we get warnings about using deprecated functions in qt.
-add_definitions(-DQT_DEPRECATED_WARNINGS)
+add_definitions(-DQT_DEPRECATED_WARNINGS -DQT_NO_URL_CAST_FROM_STRING)
 #remove unnneeded errors
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_KEYWORDS)
 
