@@ -15,11 +15,11 @@
 
 #include <QDateTime>
 
-#include <kio/job.h>
-#include <kio/jobclasses.h>
-#include "QUrlFix.h"
-#include <list>
+#include <KIO/UDSEntry>
 
+namespace KIO {
+	class Job;
+}
 
 bool wildcardMultiMatch( const QString& wildcard, const QString& testString, bool bCaseSensitive );
 
@@ -66,7 +66,7 @@ public:
    QString fileName() const; // Just the name-part of the path, without parent directories
    QString filePath() const; // The path-string that was used during construction
    QString prettyAbsPath() const;
-   QUrlFix url() const;
+   QUrl url() const;
    QString absoluteFilePath() const;
 
    bool isLocal() const;

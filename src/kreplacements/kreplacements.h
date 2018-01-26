@@ -360,21 +360,6 @@ public:
    KIcon( const QString& ) {}
 };
 
-class KFontChooser : public QWidget
-{
-   Q_OBJECT
-   QFont m_font;
-   QPushButton* m_pSelectFont;
-   QLabel* m_pLabel;
-   QWidget* m_pParent;
-public:
-   KFontChooser( QWidget* pParent );
-   QFont font();
-   void setFont( const QFont&, bool );
-private slots:
-   void slotSelectFont();
-};
-
 class KColorButton : public QPushButton
 {
    Q_OBJECT
@@ -482,6 +467,7 @@ public:
    KIconLoader* iconLoader();
    KConfigGroup* config();
    bool isRestored();
+   void parseOptions();
 };
 
 extern KApplication* kapp;
