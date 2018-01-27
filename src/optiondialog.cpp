@@ -621,7 +621,7 @@ void OptionDialog::setupFontPage( void )
     KPageWidgetItem *pageItem = new KPageWidgetItem( page, i18n("Font") );
     
     pageItem->setHeader( i18n("Editor & Diff Output Font") );
-    pageItem->setIcon( QIcon::fromTheme(QStringLiteral("font-select-symbolic")) );
+    pageItem->setIcon( QIcon::fromTheme(QStringLiteral("preferences-desktop-font")) );
     addPage( pageItem );
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
