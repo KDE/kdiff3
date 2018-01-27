@@ -63,7 +63,7 @@ protected Q_SLOTS:
     virtual void slotDefault( void );
     virtual void slotOk( void );
     virtual void slotApply( void );
-    virtual void buttonClicked( QAbstractButton* );
+    //virtual void buttonClicked( QAbstractButton* );
     virtual void helpRequested();
     
     void slotEncodingChanged();
@@ -77,7 +77,7 @@ private:
 
     std::list<OptionItem*> m_optionItemList;
 
-    QDialogButtonBox *mButtonBox;
+    //QDialogButtonBox *mButtonBox;
     OptionCheckBox* m_pSameEncoding;
     OptionEncodingComboBox* m_pEncodingAComboBox;
     OptionCheckBox* m_pAutoDetectUnicodeA;

@@ -24,8 +24,8 @@
 #include "options.h"
 #include "progress.h"
 
-#include <kmessagebox.h>
-#include <klocalizedstring.h>
+#include <KMessageBox>
+#include <KLocalizedString>
 
 #include <QFileInfo>
 #include <QDir>
@@ -1926,6 +1926,7 @@ void calcDiff3LineListTrim(
          (*i3A).lineA = (*i3).lineA;
          (*i3A).bAEqB = true;
          (*i3A).bAEqC = true;
+
          (*i3).lineA = -1;
          (*i3).bAEqB = false;
          (*i3).bAEqC = false;
