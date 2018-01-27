@@ -37,13 +37,13 @@
 #include <QRunnable>
 #include <QThreadPool>
 #include <QMimeData>
+#include <QFileDialog>
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 #include <cmath>
 #include <cstdlib>
 #include <assert.h>
-#include <QFileDialog>
 
 static QAtomicInt s_runnableCount = 0;
 
@@ -2027,7 +2027,7 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
 {
     QString current = d->m_pFileSelection->text();
 
-    QUrl newURL = QFileDialog::getOpenFileUrl(this, QString(), QUrl::fromUserInput(current, QString(), QUrl::AssumeLocalFile), 0);
+    QUrl newURL = QFileDialog::getOpenFileUrl(this, i18n("Open File"), QUrl::fromUserInput(current, QString(), QUrl::AssumeLocalFile));
     if ( !newURL.isEmpty() )
     {
         DiffTextWindow* pDTW = d->m_pDiffTextWindow;
@@ -2116,7 +2116,7 @@ void EncodingLabel::insertCodec( const QString& visibleCodecName, QTextCodec* pC
       if (currentTextCodecEnum==CodecMIBEnum) 
          pAction->setChecked(true);
       pMenu->addAction(pAction);
-      connect(pAction, &QAction::triggered, this, &EncodingLabel::slotEncodingChanged);
+      connect(pAction, SIGNAL(triggered()), this, SLOT(slotEncodingChanged()));
       codecEnumList.append(CodecMIBEnum);
    }
 }

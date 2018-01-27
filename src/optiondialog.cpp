@@ -17,9 +17,10 @@
  *   Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  */
-#include <QApplication>
+
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDialogButtonBox>
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit> 
@@ -33,16 +34,15 @@
 #include <QGridLayout>
 #include <QPixmap>
 #include <QFrame>
-#include <QVBoxLayout>
-#include <QFontDatabase>
 #include <QFontDialog>
+#include <QPushButton>
+#include <QApplication>
+#include <QFontDatabase>
 
+#include <KConfigGroup>
 #include <KColorButton>
-#include <KFontChooser>
-#include <KIconLoader>
 #include <KSharedConfig>
 #include <KMessageBox>
-#include <KMainWindow> //For ktoolbar.h
 #include <KToolBar>
 #include <KHelpClient>
 #include <KLocalizedString>
@@ -51,12 +51,6 @@
 #include "optiondialog.h"
 #include "diff.h"
 #include "smalldialogs.h"
-//FIXME: Verifiy which includes are needed only for kde and why.
-#ifndef KREPLACEMENTS_H
-#include <KConfigGroup>
-#include <QDialogButtonBox>
-#include <QPushButton>
-#endif
 
 #define KDIFF3_CONFIG_GROUP "KDiff3 Options"
 
@@ -547,21 +541,12 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
 {
    setFaceType( List );
    setWindowTitle( i18n("Configure") );
-   mButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::RestoreDefaults|QDialogButtonBox::Apply);
-   QWidget *mainWidget = new QWidget(this);
-   QVBoxLayout *mainLayout = new QVBoxLayout;
-   setLayout(mainLayout);
-   mainLayout->addWidget(mainWidget);
-   QPushButton *okButton = mButtonBox->button(QDialogButtonBox::Ok);
-   okButton->setDefault(true);
-   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-   //WARNING mainLayout->addWidget(buttonBox) must be last item in layout.
-   mainLayout->addWidget(mButtonBox);
-   okButton->setDefault(true);
+   setStandardButtons( QDialogButtonBox::Help | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Apply | QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
+   // TODO KF5 necessary?  setDefaultButton( Ok );
    setObjectName( name );
    setModal( true  );
 
-   //showButtonSeparator( true );
+   //showButtonSeparator( true );01bc7c9af262353e7623bc02e5277fd59180183b
    //setHelp( "kdiff3/index.html", QString::null );
 
    setupFontPage();
@@ -581,29 +566,16 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
    // Initialize all values in the dialog
    resetToDefaults();
    slotApply();
-   //connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-   connect(mButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
-   connect(mButtonBox, &QDialogButtonBox::clicked, this, &OptionDialog::buttonClicked);
-   connect(mButtonBox, &QDialogButtonBox::helpRequested, this, &OptionDialog::helpRequested); 
+   connect(button(QDialogButtonBox::Apply), &QPushButton::clicked, this, &OptionDialog::slotApply);
+   connect(button(QDialogButtonBox::Ok), &QPushButton::clicked, this, &OptionDialog::slotOk);
+   connect(button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked, this, &OptionDialog::slotDefault);
+   connect(button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &QDialog::reject);
+   connect(button(QDialogButtonBox::Help), &QPushButton::clicked, this, &OptionDialog::helpRequested); 
    //connect(this, &OptionDialog::applyClicked, this, &OptionDialog::slotApply);
-   connect(mButtonBox, &QDialogButtonBox::accepted, this, &OptionDialog::slotOk);
    //helpClicked() is connected in KDiff3App::KDiff3App -- Really where?
    //connect(this, &OptionDialog::defaultClicked, this, &OptionDialog::slotDefault);
 }
 
-void OptionDialog::buttonClicked(QAbstractButton *button){
-    //for reasons beyond my comprehension QDialogButtonBox::standardButton() is non-static
-    switch(mButtonBox->standardButton(button)){
-      case QDialogButtonBox::Apply:
-	slotApply();
-	break;
-      case QDialogButtonBox::RestoreDefaults:
-	slotDefault();
-	break;
-      default:
-	break;
-    }
-}
 
 void OptionDialog::helpRequested() {
     KHelpClient::invokeHelp( QStringLiteral( "kdiff3/index.html" ), QString());
@@ -647,24 +619,28 @@ void OptionDialog::setupFontPage( void )
 {
     QFrame* page = new QFrame();
     KPageWidgetItem *pageItem = new KPageWidgetItem( page, i18n("Font") );
-    QFont defaultFont;
     
     pageItem->setHeader( i18n("Editor & Diff Output Font") );
-    pageItem->setIcon( QIcon::fromTheme(QStringLiteral("preferences-desktop-font")) );
+    pageItem->setIcon( QIcon::fromTheme(QStringLiteral("font-select-symbolic")) );
     addPage( pageItem );
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
     topLayout->setMargin( 5 );
     
+    
     //requires QT 5.2 or later.
-    defaultFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+    static const QFont  defaultFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);;
+    static QFont defaultAppFont = QApplication::font();
+
+    OptionFontChooser* pAppFontChooser = new OptionFontChooser( defaultAppFont, "ApplicationFont", &m_options.m_appFont, page, this );
+    topLayout->addWidget( pAppFontChooser );
     
     OptionFontChooser* pFontChooser = new OptionFontChooser( defaultFont, "Font", &m_options.m_font, page, this );
     topLayout->addWidget( pFontChooser );
     pFontChooser->setTitle(i18n("File view font"));
 
-   QGridLayout *gbox = new QGridLayout();
-   topLayout->addLayout( gbox );
+    QGridLayout *gbox = new QGridLayout();
+    topLayout->addLayout( gbox );
    //int line=0;
 
    // This currently does not work (see rendering in class DiffTextWindow)
@@ -682,7 +658,7 @@ void OptionDialog::setupColorPage( void )
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Color") );
     pageItem->setHeader( i18n("Colors Settings") );
-    pageItem->setIcon( QIcon::fromTheme(QStringLiteral("preferences-desktop-color")) );
+    pageItem->setIcon( QIcon::fromTheme(QStringLiteral("colormanagement")) );
     addPage( pageItem );
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
@@ -895,7 +871,7 @@ void OptionDialog::setupDiffPage( void )
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n( "Diff" ) );
     pageItem->setHeader( i18n( "Diff Settings" ) );
-    pageItem->setIcon( QIcon::fromTheme( QStringLiteral( "preferences-other" ) ) );
+    pageItem->setIcon( QIcon::fromTheme( QStringLiteral( "text-x-patch" ) ) );
     addPage( pageItem );
 
 
@@ -981,7 +957,7 @@ void OptionDialog::setupMergePage( void )
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n( "Merge" ) );
     pageItem->setHeader( i18n( "Merge Settings" ) );
-    pageItem->setIcon( QIcon::fromTheme( QStringLiteral( "plasmagik" ) ) );
+    pageItem->setIcon( QIcon::fromTheme( QStringLiteral( "merge" ) ) );
     addPage( pageItem );
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
@@ -1170,7 +1146,7 @@ void OptionDialog::setupDirectoryMergePage( void )
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n( "Directory" ) );
     pageItem->setHeader( i18n( "Directory" ) );
-    pageItem->setIcon( QIcon::fromTheme( QStringLiteral( "folder" ) ) );
+    pageItem->setIcon( QIcon::fromTheme( QStringLiteral( "inode-directory" ) ) );
     addPage( pageItem );
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
@@ -1424,7 +1400,7 @@ void OptionDialog::setupRegionalPage( void )
    QFrame* page = new QFrame();
    KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Regional Settings") );
    pageItem->setHeader( i18n("Regional Settings") );
-   pageItem->setIcon( QIcon::fromTheme(QStringLiteral("locale")) );
+   pageItem->setIcon( QIcon::fromTheme(QStringLiteral("preferences-desktop-locale")) );
    addPage( pageItem );
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
@@ -1673,7 +1649,7 @@ void OptionDialog::setupIntegrationPage( void )
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n( "Integration" ) );
     pageItem->setHeader( i18n( "Integration Settings" ) );
-    pageItem->setIcon( QIcon::fromTheme( QStringLiteral( "preferences-desktop-launch-feedback" ) ) );
+    pageItem->setIcon( QIcon::fromTheme( QStringLiteral( "utilities-terminal" ) ) );
     addPage( pageItem );
 
     QVBoxLayout *topLayout = new QVBoxLayout( page );
@@ -1782,7 +1758,7 @@ void OptionDialog::setupKeysPage( void )
    //QVBox *page = addVBoxPage( i18n("Keys"), i18n("KeyDialog" ),
    //                          BarIcon("fonts", KIconLoader::SizeMedium ) );
 
-   //QVBoxLayout *topLayout = new QVBoxLayout( page, 0, KDialog::spacingHint() );
+   //QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
     //           new KFontChooser( page,"font",false/*onlyFixed*/,QStringList(),false,6 );
    //m_pKeyDialog=new KKeyDialog( false, 0 );
    //topLayout->addWidget( m_pKeyDialog );
