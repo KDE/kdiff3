@@ -755,7 +755,7 @@ void KDiff3App::slotFileSaveAs()
 {
     slotStatusMsg( i18n( "Saving file with a new filename..." ) );
 
-    QString s = QFileDialog::getSaveFileUrl( this, i18n( "Save As..." ), QDir::currentPath(), 0 ).url(QUrl::PreferLocalFile);
+    QString s = QFileDialog::getSaveFileUrl( this, i18n( "Save As..." ), QUrl::fromLocalFile(QDir::currentPath()), 0 ).url(QUrl::PreferLocalFile);
     if( !s.isEmpty() ) {
         m_outputFilename = s;
         m_pMergeResultWindowTitle->setFileName( m_outputFilename );
