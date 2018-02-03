@@ -2224,7 +2224,7 @@ static void sortHelper( MergeFileInfos* pMFI, Qt::SortOrder order )
 
 void DirectoryMergeWindow::Data::sort( int column, Qt::SortOrder order )
 {
-#pragma unused (column)
+    Q_UNUSED(column);
     beginResetModel();
     sortHelper( m_pRoot, order );
     endResetModel();
