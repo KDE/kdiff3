@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
 project(kdiff3)
 
+set(CMAKE_CXX_EXTENSIONS OFF ) #don't use non-standard extentions
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(ECM_MIN_VERSION "1.7.0")
 set(QT_MIN_VERSION "5.4.2")

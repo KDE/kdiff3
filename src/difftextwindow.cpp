@@ -806,72 +806,70 @@ public:
    }
 };
 
-void DiffTextWindowData::prepareTextLayout( QTextLayout& textLayout, bool /*bFirstLine*/, int visibleTextWidth )
+void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, bool /*bFirstLine*/, int visibleTextWidth)
 {
-   QTextOption textOption;
-   textOption.setTabStop( QFontMetricsF(m_pDiffTextWindow->font()).width(' ') * m_pOptions->m_tabSize );
-   if ( m_pOptions->m_bShowWhiteSpaceCharacters )
-      textOption.setFlags( QTextOption::ShowTabsAndSpaces );
-   if ( m_pOptions->m_bRightToLeftLanguage )
-      textOption.setAlignment(Qt::AlignRight); // only relevant for multi line text layout
-   if ( visibleTextWidth>=0 )
-      textOption.setWrapMode( QTextOption::WrapAtWordBoundaryOrAnywhere );
+    QTextOption textOption;
+    textOption.setTabStop(QFontMetricsF(m_pDiffTextWindow->font()).width(' ') * m_pOptions->m_tabSize);
+    if(m_pOptions->m_bShowWhiteSpaceCharacters)
+        textOption.setFlags(QTextOption::ShowTabsAndSpaces);
+    if(m_pOptions->m_bRightToLeftLanguage)
+        textOption.setAlignment(Qt::AlignRight); // only relevant for multi line text layout
+    if(visibleTextWidth >= 0)
+        textOption.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
 
-   textLayout.setTextOption( textOption );
+    textLayout.setTextOption(textOption);
 
-   if ( m_pOptions->m_bShowWhiteSpaceCharacters )
-   {
-      // This additional format is only necessary for the tab arrow
-      QList<QTextLayout::FormatRange> formats;
-      QTextLayout::FormatRange formatRange;
-      formatRange.start = 0;
-      formatRange.length = textLayout.text().length();
-      formatRange.format.setFont( m_pDiffTextWindow->font() );
-      formats.append( formatRange );
-      textLayout.setAdditionalFormats(formats);
-   }
-   textLayout.beginLayout();
+    if(m_pOptions->m_bShowWhiteSpaceCharacters)
+    {
+        // This additional format is only necessary for the tab arrow
+        QList<QTextLayout::FormatRange> formats;
+        QTextLayout::FormatRange formatRange;
+        formatRange.start = 0;
+        formatRange.length = textLayout.text().length();
+        formatRange.format.setFont(m_pDiffTextWindow->font());
+        formats.append(formatRange);
+        textLayout.setAdditionalFormats(formats);
+    }
+    textLayout.beginLayout();
 
-   int leading = m_pDiffTextWindow->fontMetrics().leading();
-   int height = 0;
+    int leading = m_pDiffTextWindow->fontMetrics().leading();
+    int height = 0;
 
+    int fontWidth = m_pDiffTextWindow->fontMetrics().width('0');
+    int xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
+    int textWidth = visibleTextWidth;
+    if(textWidth < 0)
+        textWidth = m_pDiffTextWindow->width() - xOffset;
 
-   int fontWidth = m_pDiffTextWindow->fontMetrics().width('0');
-   int xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
-   int textWidth = visibleTextWidth;
-   if ( textWidth<0 )
-      textWidth = m_pDiffTextWindow->width() - xOffset;
+    int indentation = 0;
+    while(1)
+    {
+        QTextLine line = textLayout.createLine();
+        if(!line.isValid())
+            break;
 
-   int indentation = 0;
-   while (1)
-   {
-      QTextLine line = textLayout.createLine();
-      if (!line.isValid())
-         break;
+        height += leading;
+        //if ( !bFirstLine )
+        //   indentation = m_pDiffTextWindow->fontMetrics().width(' ') * m_pOptions->m_tabSize;
+        if(visibleTextWidth >= 0)
+        {
+            line.setLineWidth(visibleTextWidth - indentation);
+            line.setPosition(QPointF(indentation, height));
+            height += line.height();
+            //bFirstLine = false;
+        }
+        else // only one line
+        {
+            line.setPosition(QPointF(indentation, height));
+            break;
+        }
+    }
 
-      height += leading;
-      //if ( !bFirstLine )
-      //   indentation = m_pDiffTextWindow->fontMetrics().width(' ') * m_pOptions->m_tabSize;
-      if ( visibleTextWidth>=0 )
-      {
-         line.setLineWidth( visibleTextWidth -indentation );
-         line.setPosition(QPointF(indentation, height));
-         height += line.height();
-         //bFirstLine = false;
-      }
-      else // only one line
-      {
-         line.setPosition( QPointF(indentation, height));
-         break;
-      }
-   }
-
-   textLayout.endLayout();
-   if ( m_pOptions->m_bRightToLeftLanguage )
-      textLayout.setPosition( QPointF( textWidth - textLayout.maximumWidth(),0) );
-   else
-      textLayout.setPosition( QPointF( xOffset,0) );
-
+    textLayout.endLayout();
+    if(m_pOptions->m_bRightToLeftLanguage)
+        textLayout.setPosition(QPointF(textWidth - textLayout.maximumWidth(), 0));
+    else
+        textLayout.setPosition(QPointF(xOffset, 0));
 }
 
 void DiffTextWindowData::writeLine(

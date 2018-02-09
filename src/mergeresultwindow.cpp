@@ -1681,54 +1681,54 @@ int convertToPosOnScreen( const QString& /*p*/, int posInText, int /*tabSize*/ )
 //   return posOnScreen;
 //}
 
-QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(int line, const QString& str, QTextLayout& textLayout )
+QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine( int line, const QString& str, QTextLayout& textLayout )
 {
-   // tabs
-   QTextOption textOption;
-   textOption.setTabStop( QFontMetricsF(font()).width(' ') * m_pOptions->m_tabSize );
-   if ( m_pOptions->m_bShowWhiteSpaceCharacters )
-   {
-      textOption.setFlags( QTextOption::ShowTabsAndSpaces );
-   }
-   textLayout.setTextOption( textOption );
+    // tabs
+    QTextOption textOption;
+    textOption.setTabStop( QFontMetricsF(font()).width(' ') * m_pOptions->m_tabSize );
+    if( m_pOptions->m_bShowWhiteSpaceCharacters )
+    {
+        textOption.setFlags( QTextOption::ShowTabsAndSpaces );
+    }
+    textLayout.setTextOption( textOption );
 
-   if ( m_pOptions->m_bShowWhiteSpaceCharacters )
-   {
-      // This additional format is only necessary for the tab arrow
-      QList<QTextLayout::FormatRange> formats;
-      QTextLayout::FormatRange formatRange;
-      formatRange.start = 0;
-      formatRange.length = str.length();
-      formatRange.format.setFont( font() );
-      formats.append( formatRange );
-      textLayout.setAdditionalFormats(formats);
-   }
-   QVector<QTextLayout::FormatRange> selectionFormat;
-   textLayout.beginLayout();
-   if ( m_selection.lineWithin( line ) )
-   {
-      int firstPosInText = convertToPosInText( str, m_selection.firstPosInLine(line), m_pOptions->m_tabSize );
-      int lastPosInText  = convertToPosInText( str, m_selection.lastPosInLine(line), m_pOptions->m_tabSize );
-      int lengthInText = max2(0,lastPosInText - firstPosInText);
-      if (lengthInText>0)
-         m_selection.bSelectionContainsData = true;
+    if( m_pOptions->m_bShowWhiteSpaceCharacters )
+    {
+        // This additional format is only necessary for the tab arrow
+        QList<QTextLayout::FormatRange> formats;
+        QTextLayout::FormatRange formatRange;
+        formatRange.start = 0;
+        formatRange.length = str.length();
+        formatRange.format.setFont( font() );
+        formats.append( formatRange );
+        textLayout.setAdditionalFormats( formats );
+    }
+    QVector<QTextLayout::FormatRange> selectionFormat;
+    textLayout.beginLayout();
+    if( m_selection.lineWithin( line ) )
+    {
+        int firstPosInText = convertToPosInText( str, m_selection.firstPosInLine(line), m_pOptions->m_tabSize );
+        int lastPosInText  = convertToPosInText( str, m_selection.lastPosInLine(line), m_pOptions->m_tabSize );
+        int lengthInText = max2( 0, lastPosInText - firstPosInText );
+        if( lengthInText>0 )
+            m_selection.bSelectionContainsData = true;
 
-      QTextLayout::FormatRange selection;
-      selection.start = firstPosInText;
-      selection.length = lengthInText;
-      selection.format.setBackground( palette().highlight() );
-      selection.format.setForeground( palette().highlightedText().color() );
-      selectionFormat.push_back( selection );
-   }
-   QTextLine textLine = textLayout.createLine();
-   textLine.setPosition(QPointF(0, fontMetrics().leading()));
-   textLayout.endLayout();
-   int cursorWidth = 5;
-   if ( m_pOptions->m_bRightToLeftLanguage )
-      textLayout.setPosition( QPointF(width()-textLayout.maximumWidth()-getTextXOffset()+m_horizScrollOffset-cursorWidth, 0) );
-   else
-      textLayout.setPosition( QPointF(getTextXOffset() - m_horizScrollOffset, 0) );
-   return selectionFormat;
+        QTextLayout::FormatRange selection;
+        selection.start = firstPosInText;
+        selection.length = lengthInText;
+        selection.format.setBackground( palette().highlight() );
+        selection.format.setForeground( palette().highlightedText().color() );
+        selectionFormat.push_back( selection );
+    }
+    QTextLine textLine = textLayout.createLine();
+    textLine.setPosition( QPointF(0, fontMetrics().leading()) );
+    textLayout.endLayout();
+    int cursorWidth = 5;
+    if( m_pOptions->m_bRightToLeftLanguage )
+        textLayout.setPosition( QPointF(width()-textLayout.maximumWidth()-getTextXOffset()+m_horizScrollOffset-cursorWidth, 0) );
+    else
+        textLayout.setPosition( QPointF(getTextXOffset() - m_horizScrollOffset, 0) );
+    return selectionFormat;
 }
 
 void MergeResultWindow::writeLine(
