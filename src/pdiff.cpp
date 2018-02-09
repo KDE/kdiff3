@@ -14,7 +14,13 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include "stable.h"
+#include <QtCore>
+#include <QtGui>
+#include <QtWidgets/QtWidgets>
+
+#ifdef _WIN32
+#include <qt_windows.h>
+#endif
 
 #include "difftextwindow.h"
 #include "mergeresultwindow.h"

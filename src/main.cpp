@@ -14,33 +14,32 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include "stable.h"
-#include <QStandardPaths>
-#include <QApplication>
+#include "kdiff3_shell.h"
+#include "common.h"
+#include "version.h"
+
 #include <KAboutData>
 #include <KLocalizedString>
 #include <KCrash/KCrash>
-#include "kdiff3_shell.h"
-#include "version.h"
-#include <QTextCodec>
+
+#include <QApplication>
+#include <QCommandLineOption>
+#include <QCommandLineParser>
 #include <QFile>
+#include <QFont>
+#include <QLocale>
+#include <QMessageBox>
+#include <QStandardPaths>
+#include <QTextCodec>
 #include <QTextStream>
 #include <QTranslator>
-#include <QLocale>
-#include <QFont>
 #include <QClipboard>
-#include <QCommandLineParser>
-#include <QCommandLineOption>
 #include <vector>
 
 #ifdef _WIN32
 #include <process.h>
+#include <qt_windows.h>
 #endif
-
-#ifdef KREPLACEMENTS_H
-#include "optiondialog.h"
-#endif
-#include "common.h"
 
 void initialiseCmdLineArgs(QCommandLineParser *cmdLineParser)
 {
@@ -106,11 +105,7 @@ class ContextFreeTranslator : public QTranslator
 {
 public:
    ContextFreeTranslator( QObject* pParent ) : QTranslator(pParent) {}
-#if QT_VERSION>=0x050000
    QString translate(const char * context, const char * sourceText, const char * disambiguation, int /*n*/ ) const /*override*/
-#else
-   QString translate(const char* context, const char* sourceText, const char* disambiguation ) const /*override*/
-#endif
    {
       if ( context != 0 )
          return QTranslator::translate(0,sourceText,disambiguation);
@@ -126,7 +121,7 @@ int main(int argc, char *argv[])
 
     KCrash::initialize();
 #ifdef _WIN32
-   /* KDiff3 can be used as replacement for the text-diff and merge tool provided by
+    /* KDiff3 can be used as replacement for the text-diff and merge tool provided by
       Clearcase. This is experimental and so far has only been tested under Windows.
 
       There are two ways to use KDiff3 with clearcase
@@ -143,8 +138,8 @@ int main(int argc, char *argv[])
          run "cleardiffmrg_orig.exe" instead.
    */
 
-   // Write all args into a temporary file. Uncomment this for debugging purposes.
-   /*
+    // Write all args into a temporary file. Uncomment this for debugging purposes.
+    /*
    FILE* f = fopen(QDir::toNativeSeparators(QDir::homePath()+"//kdiff3_call_args.txt").toLatin1().data(),"w");
    for(int i=0; i< argc; ++i)
       fprintf(f,"Arg %d: %s\n", i, argv[i]);
@@ -158,94 +153,95 @@ int main(int argc, char *argv[])
    return result;
    */
 
-   // KDiff3 can replace cleardiffmrg from clearcase. But not all functions.
-   if ( isOptionUsed( "directory", argc,argv ) )
-   {
-      return ::_spawnvp(_P_WAIT , "cleardiffmrg_orig", argv );      
-   }
+    // KDiff3 can replace cleardiffmrg from clearcase. But not all functions.
+    if(isOptionUsed("directory", argc, argv))
+    {
+        return ::_spawnvp(_P_WAIT, "cleardiffmrg_orig", argv);
+    }
 
 #endif
 #ifdef Q_OS_OS2
-   // expand wildcards on the command line
-   _wildcard(&argc, &argv);
+    // expand wildcards on the command line
+    _wildcard(&argc, &argv);
 #endif
 
-   //QApplication::setColorSpec( QApplication::ManyColor ); // Grab all 216 colors
+    //QApplication::setColorSpec( QApplication::ManyColor ); // Grab all 216 colors
 
-   const QByteArray& appName = QByteArray::fromRawData("kdiff3", 6);
-   const QByteArray& appCatalog = appName;
-   const QString i18nName = i18n("kdiff3");
-   QByteArray appVersion = QByteArray::fromRawData( VERSION, sizeof(VERSION));
-   if ( sizeof(void*)==8 )
-      appVersion += " (64 bit)";
-   else if ( sizeof(void*)==4 )
-       appVersion += " (32 bit)";
-   const QString description = i18n("Tool for Comparison and Merge of Files and Directories");
-   const QString copyright = i18n("(c) 2002-2014 Joachim Eibl");
-   const QString& homePage = QStringLiteral("http://kdiff3.sourceforge.net/");
-   const QString& bugsAddress = QStringLiteral("joachim.eibl""@""gmx.de");
-   
-   KLocalizedString::setApplicationDomain(appCatalog);
-   KAboutData aboutData( appName, i18nName, 
-         appVersion, description, KAboutLicense::GPL_V2, copyright, description, 
-         homePage, bugsAddress );
+    const QByteArray& appName = QByteArray::fromRawData("kdiff3", 6);
+    const QByteArray& appCatalog = appName;
+    const QString i18nName = i18n("kdiff3");
+    QByteArray appVersion = QByteArray::fromRawData(VERSION, sizeof(VERSION));
+    if(sizeof(void*) == 8)
+        appVersion += " (64 bit)";
+    else if(sizeof(void*) == 4)
+        appVersion += " (32 bit)";
+    const QString description = i18n("Tool for Comparison and Merge of Files and Directories");
+    const QString copyright = i18n("(c) 2002-2014 Joachim Eibl");
+    const QString& homePage = QStringLiteral("http://kdiff3.sourceforge.net/");
+    const QString& bugsAddress = QStringLiteral("joachim.eibl"
+                                                "@"
+                                                "gmx.de");
 
-    KAboutData::setApplicationData( aboutData );
-    
-    QCommandLineParser  *cmdLineParser=KDiff3Shell::getParser();
+    KLocalizedString::setApplicationDomain(appCatalog);
+    KAboutData aboutData(appName, i18nName,
+                         appVersion, description, KAboutLicense::GPL_V2, copyright, description,
+                         homePage, bugsAddress);
+
+    KAboutData::setApplicationData(aboutData);
+
+    QCommandLineParser* cmdLineParser = KDiff3Shell::getParser();
     cmdLineParser->setApplicationDescription(aboutData.shortDescription());
     cmdLineParser->addVersionOption();
     cmdLineParser->addHelpOption();
-    initialiseCmdLineArgs( cmdLineParser );
+    initialiseCmdLineArgs(cmdLineParser);
     // ignorable command options
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "m" ) << QLatin1String( "merge" ), i18n( "Merge the input." ) ) );
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "b" ) << QLatin1String( "base" ), i18n( "Explicit base file. For compatibility with certain tools." ), QLatin1String("file") ) );
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "o" ) << QLatin1String( "output" ), i18n( "Output file. Implies -m. E.g.: -o newfile.txt" ), QLatin1String("file") ) );
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "out" ), i18n( "Output file, again. (For compatibility with certain tools.)" ) , QLatin1String("file") ) );
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "auto" ), i18n( "No GUI if all conflicts are auto-solvable. (Needs -o file)" ) ) );
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "qall" ), i18n( "Don't solve conflicts automatically." ) ) );
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "L1" ), i18n( "Visible name replacement for input file 1 (base)." ), QLatin1String("alias1") ) );
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "L2" ), i18n( "Visible name replacement for input file 2." ), QLatin1String("alias2") ) );
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "L3" ), i18n( "Visible name replacement for input file 3." ), QLatin1String("alias3") ) );
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "L" ) << QLatin1String( "fname alias" ), i18n( "Alternative visible name replacement. Supply this once for every input." ) ) );
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "cs" ), i18n( "Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\"" ), QLatin1String("string") ) );
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "confighelp" ), i18n( "Show list of config settings and current values." ) ) );
-    cmdLineParser->addOption( QCommandLineOption( QStringList() << QLatin1String( "config" ), i18n( "Use a different config file." ), QLatin1String("file") ) );
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("m") << QLatin1String("merge"), i18n("Merge the input.")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("b") << QLatin1String("base"), i18n("Explicit base file. For compatibility with certain tools."), QLatin1String("file")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("o") << QLatin1String("output"), i18n("Output file. Implies -m. E.g.: -o newfile.txt"), QLatin1String("file")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("out"), i18n("Output file, again. (For compatibility with certain tools.)"), QLatin1String("file")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("auto"), i18n("No GUI if all conflicts are auto-solvable. (Needs -o file)")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("qall"), i18n("Don't solve conflicts automatically.")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("L1"), i18n("Visible name replacement for input file 1 (base)."), QLatin1String("alias1")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("L2"), i18n("Visible name replacement for input file 2."), QLatin1String("alias2")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("L3"), i18n("Visible name replacement for input file 3."), QLatin1String("alias3")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("L") << QLatin1String("fname alias"), i18n("Alternative visible name replacement. Supply this once for every input.")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("cs"), i18n("Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\""), QLatin1String("string")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("confighelp"), i18n("Show list of config settings and current values.")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("config"), i18n("Use a different config file."), QLatin1String("file")));
 
     // other command options
-    cmdLineParser->addPositionalArgument( QLatin1String( "[File1]" ), i18n( "file1 to open (base, if not specified via --base)" ) );
-    cmdLineParser->addPositionalArgument( QLatin1String( "[File2]" ), i18n( "file2 to open" ) );
-    cmdLineParser->addPositionalArgument( QLatin1String( "[File3]" ), i18n( "file3 to open" ) );
-    
+    cmdLineParser->addPositionalArgument(QLatin1String("[File1]"), i18n("file1 to open (base, if not specified via --base)"));
+    cmdLineParser->addPositionalArgument(QLatin1String("[File2]"), i18n("file2 to open"));
+    cmdLineParser->addPositionalArgument(QLatin1String("[File3]"), i18n("file3 to open"));
+
     /*
         Don't use QCommandLineParser::process as it auto terminates the program if an option is not reconized.
         Further more errors are directed to the console alone if not running on windows. This makes for a bad
         user experiance when run from a graphical interface such as kde. Don't assume that this only happens
         when running from a commandline.
     */
-    if(!cmdLineParser->parse(QCoreApplication::arguments())){
+    if(!cmdLineParser->parse(QCoreApplication::arguments())) {
         QString errorMessage = cmdLineParser->errorText();
         QString helpText = cmdLineParser->helpText();
-        QMessageBox::warning(0, aboutData.displayName(), "<html><head/><body><h2>" + errorMessage +
-                        "</h2><pre>" + helpText + "</pre></body></html>");
+        QMessageBox::warning(0, aboutData.displayName(), "<html><head/><body><h2>" + errorMessage + "</h2><pre>" + helpText + "</pre></body></html>");
 #if !defined(_WIN32) && !defined(Q_OS_OS2)
         fputs(qPrintable(errorMessage), stderr);
         fputs("\n\n", stderr);
-        fputs(qPrintable(helpText+"\n"), stderr);
+        fputs(qPrintable(helpText + "\n"), stderr);
         fputs("\n", stderr);
 #endif
         exit(1);
     }
-    
-    if (cmdLineParser->isSet(QStringLiteral("version"))){
+
+    if(cmdLineParser->isSet(QStringLiteral("version"))) {
         QMessageBox::information(0, aboutData.displayName(),
-                             aboutData.displayName()+' '+ aboutData.version());
+                                 aboutData.displayName() + ' ' + aboutData.version());
 #if !defined(_WIN32) && !defined(Q_OS_OS2)
         printf("%s %s\n", appName.constData(), appVersion.constData());
 #endif
         exit(0);
     }
-    if (cmdLineParser->isSet(QStringLiteral("help"))){
+    if(cmdLineParser->isSet(QStringLiteral("help"))) {
         QMessageBox::warning(0, aboutData.displayName(), "<html><head/><body><pre>" + cmdLineParser->helpText() + "</pre></body></html>");
 #if !defined(_WIN32) && !defined(Q_OS_OS2)
         fputs(qPrintable(cmdLineParser->helpText()), stdout);
@@ -254,7 +250,7 @@ int main(int argc, char *argv[])
     }
     //cmdLineParser->process( app );
     //must be after process or parse call
-    aboutData.setupCommandLine( cmdLineParser );
+    aboutData.setupCommandLine(cmdLineParser);
     /**
      * take component name and org. name from KAboutData
      */
@@ -262,38 +258,29 @@ int main(int argc, char *argv[])
     app.setApplicationDisplayName(aboutData.displayName());
     app.setOrganizationDomain(aboutData.organizationDomain());
     app.setApplicationVersion(aboutData.version());
-    
+
 #if defined(KREPLACEMENTS_H) && !defined(QT_NO_TRANSLATION)
     QString locale;
 
-    locale = app.config()->readEntry( "Language", "Auto" );
-    int spacePos = locale.indexOf( ' ' );
-    if( spacePos > 0 ) locale = locale.left( spacePos );
-    ContextFreeTranslator kdiff3Translator( 0 );
-    QTranslator qtTranslator( 0 );
-    if( locale != "en_orig" )
+    locale = app.config()->readEntry("Language", "Auto");
+    int spacePos = locale.indexOf(' ');
+    if(spacePos > 0) locale = locale.left(spacePos);
+    ContextFreeTranslator kdiff3Translator(0);
+    QTranslator qtTranslator(0);
+    if(locale != "en_orig")
     {
-        QString translationDir = getTranslationDir( locale );
-        kdiff3Translator.load(QLocale::system(), QString( "kdiff3_" ), translationDir );
-        app.installTranslator( &kdiff3Translator );
-	
-        qtTranslator.load(QLocale::system(), QString("qt_"), translationDir );
-        app.installTranslator( &qtTranslator );
+        QString translationDir = getTranslationDir(locale);
+        kdiff3Translator.load(QLocale::system(), QString("kdiff3_"), translationDir);
+        app.installTranslator(&kdiff3Translator);
+
+        qtTranslator.load(QLocale::system(), QString("qt_"), translationDir);
+        app.installTranslator(&qtTranslator);
     }
 #endif
 
-#ifndef QT_NO_SESSIONMANAGER
-  if (app.isSessionRestored())
-  {
-     RESTORE(KDiff3Shell);
-  }
-  else
-#endif
-  {
-     KDiff3Shell* p = new KDiff3Shell();
-     p->show();
-     p->setWindowState( p->windowState() | Qt::WindowActive ); // Patch for ubuntu: window not active on startup
-  }
+    KDiff3Shell* p = new KDiff3Shell();
+    p->show();
+    p->setWindowState( p->windowState() | Qt::WindowActive ); // Patch for ubuntu: window not active on startup
 //app.installEventFilter( new CFilter );
   int retVal = app.exec();
   if (QApplication::clipboard()->text().size() == 0)

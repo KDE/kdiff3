@@ -19,7 +19,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 #ifdef _WIN32
-#include "stable.h"
+#include <qt_windows.h>
 
 #include <windows.h>
 
@@ -31,11 +31,12 @@
 #include <shlobj.h>
 #include <shlguid.h>
 #include <malloc.h>
-//#include <QString>
-//#include <QStringList>
-//#include <qwidget.h>
-//#include <QDir>
-//#include <QMenu>
+#include <QString>
+#include <QStringList>
+#include <qwidget.h>
+#include <QDir>
+#include <QMenu>
+
 #include "ShellContextMenu.h"
 
 #ifdef _DEBUG

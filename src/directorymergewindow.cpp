@@ -14,7 +14,10 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include "stable.h"
+#ifdef _WIN32
+#include <qt_windows.h>
+#endif
+
 #include "directorymergewindow.h"
 #include "options.h"
 #include "progress.h"
