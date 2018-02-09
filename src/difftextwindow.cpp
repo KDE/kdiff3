@@ -842,8 +842,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, bool /*bFirs
         textWidth = m_pDiffTextWindow->width() - xOffset;
 
     int indentation = 0;
-    while(1)
-    {
+    while(1) {
         QTextLine line = textLayout.createLine();
         if(!line.isValid())
             break;
