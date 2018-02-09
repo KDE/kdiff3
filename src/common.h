@@ -18,9 +18,10 @@
 #ifndef _COMMON_H
 #define _COMMON_H
 
-#include <assert.h>
 #include <QAtomicInt>
-
+#include <QString>
+#include <assert.h>
+#include <map>
 
 template< class T >
 T min2( T x, T y )
@@ -36,7 +37,6 @@ T max2( T x, T y )
 typedef unsigned char UINT8;
 typedef unsigned short UINT16;
 typedef unsigned int UINT32;
-
 
 template <class T>
 T min3( T d1, T d2, T d3 )
@@ -76,8 +76,6 @@ inline int getAtomic(QAtomicInt& ai)
 #endif
 }
 
-#include <map>
-#include <QString>
 class QFont;
 class QColor;
 class QSize;
