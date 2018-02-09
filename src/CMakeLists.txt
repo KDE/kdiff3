@@ -19,8 +19,7 @@ set(kdiff3part_PART_SRCS
    gnudiff_xmalloc.cpp 
    common.cpp 
    smalldialogs.cpp 
-   progress.cpp
-   QUrlFix.cpp )
+   progress.cpp )
 
 add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
