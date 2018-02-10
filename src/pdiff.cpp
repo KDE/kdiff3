@@ -441,7 +441,7 @@ void KDiff3App::setHScrollBarRange()
    int vm = m_pMergeResultWindow!=0 && m_pMergeResultWindow->isVisible() ? m_pMergeResultWindow->getVisibleTextAreaWidth() : 0;
 
    // Find the minimum, but don't consider 0.
-   int pageStep = 0;
+   static int pageStep = 0;
    if ( (pageStep==0 || pageStep>v1) && v1>0 )
       pageStep = v1;
    if ( (pageStep==0 || pageStep>v2) && v2>0  )
@@ -451,7 +451,7 @@ void KDiff3App::setHScrollBarRange()
    if ( (pageStep==0 || pageStep>vm) && vm>0  )
       pageStep = vm;
 
-   int rangeMax = 0;
+   static int rangeMax = 0;
    if ( w1>v1 && w1-v1>rangeMax && v1>0 )
       rangeMax = w1-v1;
    if ( w2>v2 && w2-v2>rangeMax && v2>0 )
