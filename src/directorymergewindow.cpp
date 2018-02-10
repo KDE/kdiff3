@@ -2193,24 +2193,24 @@ void DirectoryMergeWindow::Data::selectItemAndColumn(const QModelIndex& mi, bool
 
 class MfiCompare
 {
-	Qt::SortOrder	mOrder;
-	
+    Qt::SortOrder	mOrder;
+    
     public:
         MfiCompare( Qt::SortOrder order ) {
-		mOrder = order;
+        mOrder = order;
         }
         bool operator()( MergeFileInfos* pMFI1, MergeFileInfos* pMFI2 )
         {
             bool bDir1 =  pMFI1->dirA() || pMFI1->dirB() || pMFI1->dirC();
             bool bDir2 =  pMFI2->dirA() || pMFI2->dirB() || pMFI2->dirC();
             if( bDir1 == bDir2 ) {
-		      if( mOrder == Qt::AscendingOrder)
+              if( mOrder == Qt::AscendingOrder)
                   {
-		            return pMFI1->fileName().compare( pMFI2->fileName(), Qt::CaseInsensitive ) < 0;
-		      }
-		      else{
-		            return pMFI1->fileName().compare( pMFI2->fileName(), Qt::CaseInsensitive ) > 0;
-		      }
+                    return pMFI1->fileName().compare( pMFI2->fileName(), Qt::CaseInsensitive ) < 0;
+              }
+              else{
+                    return pMFI1->fileName().compare( pMFI2->fileName(), Qt::CaseInsensitive ) > 0;
+              }
             }
             else
                 return bDir1;
@@ -2960,7 +2960,7 @@ bool DirectoryMergeWindow::Data::copyFLD( const QString& srcName, const QString&
    if ( fi.isDir() )
    {
       if ( faDest.exists() )
-	 return true;
+     return true;
       else
       {
          bool bSuccess = makeDir( destName );

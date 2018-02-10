@@ -1943,7 +1943,7 @@ QString OptionDialog::parseOptions( const QStringList& optionList )
          {
             if ( (*j)->getSaveName()==key )
             {
-	       (*j)->doPreserve();
+           (*j)->doPreserve();
                ValueMap config;
                config.writeEntry( key, val );  // Write the value as a string and	       
                (*j)->read(&config);       // use the internal conversion from string to the needed value.

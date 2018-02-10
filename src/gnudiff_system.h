@@ -46,8 +46,8 @@
 #endif
 #ifndef TYPE_MINIMUM
 # define TYPE_MINIMUM(t) ((t) (TYPE_SIGNED (t) \
-			       ? ~ (t) 0 << (sizeof (t) * CHAR_BIT - 1) \
-			       : (t) 0))
+                   ? ~ (t) 0 << (sizeof (t) * CHAR_BIT - 1) \
+                   : (t) 0))
 #endif
 #ifndef TYPE_MAXIMUM
 # define TYPE_MAXIMUM(t) ((t) (~ (t) 0 - TYPE_MINIMUM (t)))

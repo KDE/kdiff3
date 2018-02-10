@@ -216,9 +216,9 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
     if( hasArgs ) {
         m_outputFilename = KDiff3Shell::getParser()->value( "output" );
         
-	    if( m_outputFilename.isEmpty() )
+        if( m_outputFilename.isEmpty() )
             m_outputFilename = KDiff3Shell::getParser()->value( "out" );
-	
+    
         if( ! m_outputFilename.isEmpty() )
             m_outputFilename = FileAccess( m_outputFilename, true ).absoluteFilePath();
 
@@ -239,10 +239,10 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
         }
         else {
             m_bDefaultFilename = false;
-	}
+    }
     
     g_bAutoSolve = !KDiff3Shell::getParser()->isSet( "qall" ); // Note that this is effective only once.
-	QStringList args = KDiff3Shell::getParser()->positionalArguments();
+    QStringList args = KDiff3Shell::getParser()->positionalArguments();
     
     m_sd1.setFilename( KDiff3Shell::getParser()->value( "base" ) );
     if( m_sd1.isEmpty() ) {
@@ -286,7 +286,7 @@ KDiff3App::KDiff3App( QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff
         }
     }
     else {
-	    m_bDefaultFilename = false;
+        m_bDefaultFilename = false;
         g_bAutoSolve = false;
     }
     g_pProgressDialog->setStayHidden( m_bAutoMode );

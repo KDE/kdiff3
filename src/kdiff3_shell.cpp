@@ -71,7 +71,7 @@ KDiff3Shell::KDiff3Shell( bool bCompleteInit )
       setCentralWidget(m_part->widget());
 
       if (bCompleteInit)
-	 ((KDiff3App*)m_part->widget())->completeInit();
+     ((KDiff3App*)m_part->widget())->completeInit();
       connect(((KDiff3App*)m_part->widget()), SIGNAL(createNewInstance(const QString&, const QString&, const QString&)), this, SLOT(slotNewInstance(const QString&, const QString&, const QString&)));
    }
     else
