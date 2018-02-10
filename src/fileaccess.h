@@ -18,7 +18,7 @@
 #include <KIO/UDSEntry>
 
 namespace KIO {
-	class Job;
+    class Job;
 }
 
 bool wildcardMultiMatch( const QString& wildcard, const QString& testString, bool bCaseSensitive );

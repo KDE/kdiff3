@@ -162,107 +162,107 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
 
       /* Hash this line until we find a newline or bufend is reached.  */
       if (ignore_case)
-	switch (ignore_white_space)
-	  {
-	  case IGNORE_ALL_SPACE:
-	    while ( p<bufend && !isEndOfLine(c = *p) )
+    switch (ignore_white_space)
+      {
+      case IGNORE_ALL_SPACE:
+        while ( p<bufend && !isEndOfLine(c = *p) )
             {
           if (! (isWhite(c) || (bIgnoreNumbers && (c.isDigit() || c=='-' || c=='.' )) ))
                   h = HASH (h, c.toLower().unicode());
               ++p;
             }            
-	    break;
+        break;
 
-	  default:
-	    while ( p<bufend && !isEndOfLine(c = *p) )
+      default:
+        while ( p<bufend && !isEndOfLine(c = *p) )
             {
                h = HASH (h, c.toLower().unicode());
                ++p;
             }
-	    break;
-	  }
+        break;
+      }
       else
-	switch (ignore_white_space)
-	  {
-	  case IGNORE_ALL_SPACE:
-	    while ( p<bufend && !isEndOfLine(c = *p) )
+    switch (ignore_white_space)
+      {
+      case IGNORE_ALL_SPACE:
+        while ( p<bufend && !isEndOfLine(c = *p) )
             {
           if (! (isWhite(c)|| (bIgnoreNumbers && (c.isDigit() || c=='-' || c=='.' )) ))
                  h = HASH (h, c.unicode());
               ++p;
             }
-	    break;
+        break;
 
-	  default:
-	    while ( p<bufend && !isEndOfLine(c = *p) )
+      default:
+        while ( p<bufend && !isEndOfLine(c = *p) )
             {
                h = HASH (h, c.unicode());
                ++p;
             }
-	    break;
-	  }
+        break;
+      }
 
       bucket = &buckets[h % nbuckets];
       length = p - ip;
       ++p;
 
       for (i = *bucket;  ;  i = eqs[i].next)
-	if (!i)
-	  {
-	    /* Create a new equivalence class in this bucket.  */
-	    i = eqs_index++;
-	    if (i == eqs_alloc)
-	      {
-		if ((lin)(PTRDIFF_MAX / (2 * sizeof *eqs)) <= eqs_alloc)
-		  xalloc_die ();
-		eqs_alloc *= 2;
-		eqs = (equivclass*)xrealloc (eqs, eqs_alloc * sizeof *eqs);
-	      }
-	    eqs[i].next = *bucket;
-	    eqs[i].hash = h;
-	    eqs[i].line = ip;
-	    eqs[i].length = length;
-	    *bucket = i;
-	    break;
-	  }
-	else if (eqs[i].hash == h)
-	  {
-	    const QChar *eqline = eqs[i].line;
+    if (!i)
+      {
+        /* Create a new equivalence class in this bucket.  */
+        i = eqs_index++;
+        if (i == eqs_alloc)
+          {
+        if ((lin)(PTRDIFF_MAX / (2 * sizeof *eqs)) <= eqs_alloc)
+          xalloc_die ();
+        eqs_alloc *= 2;
+        eqs = (equivclass*)xrealloc (eqs, eqs_alloc * sizeof *eqs);
+          }
+        eqs[i].next = *bucket;
+        eqs[i].hash = h;
+        eqs[i].line = ip;
+        eqs[i].length = length;
+        *bucket = i;
+        break;
+      }
+    else if (eqs[i].hash == h)
+      {
+        const QChar *eqline = eqs[i].line;
 
-	    /* Reuse existing class if lines_differ reports the lines
+        /* Reuse existing class if lines_differ reports the lines
                equal.  */
-	    if (eqs[i].length == length)
-	      {
-		/* Reuse existing equivalence class if the lines are identical.
-		   This detects the common case of exact identity
-		   faster than lines_differ would.  */
-		if (memcmp (eqline, ip, length*sizeof(QChar)) == 0)
-		  break;
-		if (!same_length_diff_contents_compare_anyway)
-		  continue;
-	      }
-	    else if (!diff_length_compare_anyway)
-	      continue;
+        if (eqs[i].length == length)
+          {
+        /* Reuse existing equivalence class if the lines are identical.
+           This detects the common case of exact identity
+           faster than lines_differ would.  */
+        if (memcmp (eqline, ip, length*sizeof(QChar)) == 0)
+          break;
+        if (!same_length_diff_contents_compare_anyway)
+          continue;
+          }
+        else if (!diff_length_compare_anyway)
+          continue;
 
-	    if (! lines_differ (eqline, eqs[i].length, ip, length))
-	      break;
-	  }
+        if (! lines_differ (eqline, eqs[i].length, ip, length))
+          break;
+      }
 
       /* Maybe increase the size of the line table.  */
       if (line == alloc_lines)
-	{
-	  /* Double (alloc_lines - linbuf_base) by adding to alloc_lines.  */
-	  if ((lin)(PTRDIFF_MAX / 3) <= alloc_lines
-	      || (lin)(PTRDIFF_MAX / sizeof *cureqs) <= 2 * alloc_lines - linbuf_base
-	      || (lin)(PTRDIFF_MAX / sizeof *linbuf) <= alloc_lines - linbuf_base)
-	    xalloc_die ();
-	  alloc_lines = 2 * alloc_lines - linbuf_base;
-	  cureqs =(lin*) xrealloc (cureqs, alloc_lines * sizeof *cureqs);
-	  linbuf += linbuf_base;
-	  linbuf = (const QChar**) xrealloc (linbuf,
-			     (alloc_lines - linbuf_base) * sizeof *linbuf);
-	  linbuf -= linbuf_base;
-	}
+    {
+      /* Double (alloc_lines - linbuf_base) by adding to alloc_lines.  */
+      if ((lin)(PTRDIFF_MAX / 3) <= alloc_lines
+          || (lin)(PTRDIFF_MAX / sizeof *cureqs) <= 2 * alloc_lines - linbuf_base
+          || (lin)(PTRDIFF_MAX / sizeof *linbuf) <= alloc_lines - linbuf_base)
+        xalloc_die ();
+      alloc_lines = 2 * alloc_lines - linbuf_base;
+      cureqs =(lin*) xrealloc (cureqs, alloc_lines * sizeof *cureqs);
+      linbuf += linbuf_base;
+      linbuf = (const QChar**) xrealloc (linbuf,
+                 (alloc_lines - linbuf_base) * sizeof *linbuf);
+      linbuf -= linbuf_base;
+    }
       linbuf[line] = ip;
       cureqs[line] = i;
       ++line;
@@ -273,28 +273,28 @@ void GnuDiff::find_and_hash_each_line (struct file_data *current)
   for (i = 0;  ;  i++)
     {
       /* Record the line start for lines in the suffix that we care about.
-	 Record one more line start than lines,
-	 so that we can compute the length of any buffered line.  */
+     Record one more line start than lines,
+     so that we can compute the length of any buffered line.  */
       if (line == alloc_lines)
-	{
-	  /* Double (alloc_lines - linbuf_base) by adding to alloc_lines.  */
-	  if ((lin)(PTRDIFF_MAX / 3) <= alloc_lines
-	      || (lin)(PTRDIFF_MAX / sizeof *cureqs) <= 2 * alloc_lines - linbuf_base
-	      || (lin)(PTRDIFF_MAX / sizeof *linbuf) <= alloc_lines - linbuf_base)
-	    xalloc_die ();
-	  alloc_lines = 2 * alloc_lines - linbuf_base;
-	  linbuf += linbuf_base;
-	  linbuf = (const QChar**)xrealloc (linbuf,
-			     (alloc_lines - linbuf_base) * sizeof *linbuf);
-	  linbuf -= linbuf_base;
-	}
+    {
+      /* Double (alloc_lines - linbuf_base) by adding to alloc_lines.  */
+      if ((lin)(PTRDIFF_MAX / 3) <= alloc_lines
+          || (lin)(PTRDIFF_MAX / sizeof *cureqs) <= 2 * alloc_lines - linbuf_base
+          || (lin)(PTRDIFF_MAX / sizeof *linbuf) <= alloc_lines - linbuf_base)
+        xalloc_die ();
+      alloc_lines = 2 * alloc_lines - linbuf_base;
+      linbuf += linbuf_base;
+      linbuf = (const QChar**)xrealloc (linbuf,
+                 (alloc_lines - linbuf_base) * sizeof *linbuf);
+      linbuf -= linbuf_base;
+    }
       linbuf[line] = p;
 
       if ( p >= bufend)
-	break;
+    break;
 
       if (context <= i && no_diff_means_no_output)
-	break;
+    break;
 
       line++;
 
@@ -426,9 +426,9 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
       middle_guess = guess_lines (0, 0, p0 - filevec[0].prefix_end);
       suffix_guess = guess_lines (0, 0, buffer0 + n0 - p0);
       for (prefix_count = 1;  prefix_count <= context;  prefix_count *= 2)
-	continue;
+    continue;
       alloc_lines0 = (prefix_count + middle_guess
-		      + MIN (context, suffix_guess));
+              + MIN (context, suffix_guess));
     }
   else
     {
@@ -443,24 +443,24 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
 
   /* If the prefix is needed, find the prefix lines.  */
   if (! (no_diff_means_no_output
-	 && filevec[0].prefix_end == p0
-	 && filevec[1].prefix_end == p1))
+     && filevec[0].prefix_end == p0
+     && filevec[1].prefix_end == p1))
     {
       end0 = filevec[0].prefix_end;
       while (p0 != end0)
-	{
-	  lin l = lines++ & prefix_mask;
-	  if (l == alloc_lines0)
-	    {
-	      if ((lin)(PTRDIFF_MAX / (2 * sizeof *linbuf0)) <= alloc_lines0)
-		xalloc_die ();
-	      alloc_lines0 *= 2;
+    {
+      lin l = lines++ & prefix_mask;
+      if (l == alloc_lines0)
+        {
+          if ((lin)(PTRDIFF_MAX / (2 * sizeof *linbuf0)) <= alloc_lines0)
+        xalloc_die ();
+          alloc_lines0 *= 2;
               linbuf0 = (const QChar**) xrealloc (linbuf0, alloc_lines0 * sizeof(*linbuf0));
-	    }
-	  linbuf0[l] = p0;
-	  while ( p0<pEnd0 && !isEndOfLine(*p0++) )
-	    continue;
-	}
+        }
+      linbuf0[l] = p0;
+      while ( p0<pEnd0 && !isEndOfLine(*p0++) )
+        continue;
+    }
     }
   buffered_prefix = prefix_count && context < lines ? context : lines;
 
@@ -479,9 +479,9 @@ void GnuDiff::find_identical_ends (struct file_data filevec[])
   {
       /* Rotate prefix lines to proper location.  */
       for (i = 0;  i < buffered_prefix;  i++)
-	linbuf1[i] = linbuf0[(lines - context + i) & prefix_mask];
+    linbuf1[i] = linbuf0[(lines - context + i) & prefix_mask];
       for (i = 0;  i < buffered_prefix;  i++)
-	linbuf0[i] = linbuf1[i];
+    linbuf0[i] = linbuf1[i];
   }
 
   /* Initialize line buffer 1 from line buffer 0.  */
@@ -513,7 +513,7 @@ static unsigned char const prime_offset[] =
 /* Verify that this host's size_t is not too wide for the above table.  */
 
 verify (enough_prime_offsets,
-	sizeof (size_t) * CHAR_BIT <= sizeof prime_offset);
+    sizeof (size_t) * CHAR_BIT <= sizeof prime_offset);
 
 /* Given a vector of two file_data objects, read the file associated
    with each one, and build the table of equivalence classes.

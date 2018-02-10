@@ -587,16 +587,16 @@ QString FileAccess::absoluteFilePath() const
    else
    {
       if ( m_filePath.isEmpty() )
-	 return QString();
+     return QString();
       
       if ( ! isLocal() )
          return m_filePath; // return complete url
 
       QFileInfo fi( m_filePath );
       if ( fi.isAbsolute() )
-	 return m_filePath;
+     return m_filePath;
       else
-	 return fi.absoluteFilePath(); // Probably never reached
+     return fi.absoluteFilePath(); // Probably never reached
    }
 }  // Full abs path
 

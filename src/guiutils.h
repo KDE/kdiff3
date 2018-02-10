@@ -22,11 +22,11 @@ namespace KDiff3 {
 
    template <class T>
    T* createAction( 
-	 const QString& text, 
-	 const QObject* receiver, 
-	 const char* slot, 
-	 KActionCollection* ac, 
-	 const char* actionName);
+     const QString& text, 
+     const QObject* receiver, 
+     const char* slot, 
+     KActionCollection* ac, 
+     const char* actionName);
    
    template <>
    inline QAction * createAction<QAction>( 
@@ -58,12 +58,12 @@ namespace KDiff3 {
    
    template <class T>
    T* createAction( 
-	 const QString& text, 
-	 const QKeySequence& shortcut, 
-	 const QObject* receiver, 
-	 const char* slot, 
-	 KActionCollection* ac, 
-	 const char* actionName) 
+     const QString& text, 
+     const QKeySequence& shortcut, 
+     const QObject* receiver, 
+     const char* slot, 
+     KActionCollection* ac, 
+     const char* actionName) 
    {
       T* theAction = createAction<T>( text, receiver, slot, ac, actionName );
       ac->setDefaultShortcut(theAction, shortcut);
@@ -99,13 +99,13 @@ namespace KDiff3 {
    }
    template <class T>
    T* createAction(
-	 const QString& text,
-	 const QIcon& icon,
-	 const QKeySequence& shortcut,
-	 const QObject* receiver,
-	 const char* slot,
-	 KActionCollection* ac,
-	 const char* actionName)
+     const QString& text,
+     const QIcon& icon,
+     const QKeySequence& shortcut,
+     const QObject* receiver,
+     const char* slot,
+     KActionCollection* ac,
+     const char* actionName)
    {
       T* theAction = createAction<T>( text, shortcut, receiver, slot, ac, actionName );
       theAction->setIcon( icon );
