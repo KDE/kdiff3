@@ -592,7 +592,7 @@ namespace KParts
    ReadOnlyPart(QObject*,const QString&){}
    QString localFilePath() {return QString(); }
    void setComponentData(const KComponentData&){} // actually member of PartBase
-   KComponentData& componentData() { return *(KComponentData*)0;}
+   KComponentData& componentData() { return NULL;}
    QString m_file;
    };
 
