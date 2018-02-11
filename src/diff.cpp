@@ -411,7 +411,7 @@ static QTextCodec* getEncodingFromTag( const QByteArray& s, const QByteArray& en
       int apostrophPos = s.indexOf( '"', encodingPos + encodingTag.length() );
       int apostroph2Pos = s.indexOf( '\'', encodingPos + encodingTag.length() );
       char apostroph = '"';
-      if ( apostroph2Pos>=0 && ( apostrophPos<0 || (apostrophPos>=0 && apostroph2Pos < apostrophPos) ) )
+      if ( apostroph2Pos>=0 && ( apostrophPos<0 || apostroph2Pos < apostrophPos) )
       {
          apostroph = '\'';
          apostrophPos = apostroph2Pos;
