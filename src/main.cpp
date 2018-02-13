@@ -14,15 +14,16 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include "kdiff3_shell.h"
 #include "common.h"
+#include "kdiff3_shell.h"
 #include "version.h"
 
 #include <KAboutData>
-#include <KLocalizedString>
 #include <KCrash/KCrash>
+#include <KLocalizedString>
 
 #include <QApplication>
+#include <QClipboard>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QFile>
@@ -33,7 +34,6 @@
 #include <QTextCodec>
 #include <QTextStream>
 #include <QTranslator>
-#include <QClipboard>
 #include <vector>
 
 #ifdef _WIN32
@@ -41,44 +41,45 @@
 #include <qt_windows.h>
 #endif
 
-void initialiseCmdLineArgs(QCommandLineParser *cmdLineParser)
+void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 {
-    QString configFileName = QStandardPaths::locate(QStandardPaths::GenericConfigLocation , "kdiff3rc" );
-    QFile configFile( configFileName );
+    QString configFileName = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "kdiff3rc");
+    QFile configFile(configFileName);
     QString ignorableOptionsLine = "-u;-query;-html;-abort";
-    if( configFile.open( QIODevice::ReadOnly ) )
+    if(configFile.open(QIODevice::ReadOnly))
     {
-        QTextStream ts( &configFile );
+        QTextStream ts(&configFile);
         while(!ts.atEnd())
         {
             QString line = ts.readLine();
-            if( line.startsWith("IgnorableCmdLineOptions=") )
+            if(line.startsWith("IgnorableCmdLineOptions="))
             {
                 int pos = line.indexOf('=');
-                if(pos>=0)
+                if(pos >= 0)
                 {
-                    ignorableOptionsLine = line.mid(pos+1);
+                    ignorableOptionsLine = line.mid(pos + 1);
                 }
                 break;
             }
         }
     }
     //support our own old preferances this is obsolete
-    QStringList sl = ignorableOptionsLine.split( ',' );
+    QStringList sl = ignorableOptionsLine.split(',');
 
     if(!sl.isEmpty())
     {
-        QStringList ignorableOptions = sl.front().split( ';' );
-        for(QStringList::iterator i=ignorableOptions.begin(); i!=ignorableOptions.end(); ++i)
+        QStringList ignorableOptions = sl.front().split(';');
+        for(QStringList::iterator i = ignorableOptions.begin(); i != ignorableOptions.end(); ++i)
         {
             (*i).remove('-');
             if(!(*i).isEmpty())
             {
-                if( i->length()==1 ) {
-                    cmdLineParser->addOption( QCommandLineOption( QStringList() << i->toLatin1() << QLatin1String( "ignore" ), i18n( "Ignored. (User defined.)" ) ) );
+                if(i->length() == 1) {
+                    cmdLineParser->addOption(QCommandLineOption(QStringList() << i->toLatin1() << QLatin1String("ignore"), i18n("Ignored. (User defined.)")));
                 }
-                else {
-                    cmdLineParser->addOption( QCommandLineOption( QStringList() << i->toLatin1(), i18n( "Ignored. (User defined.)" ) ) );
+                else
+                {
+                    cmdLineParser->addOption(QCommandLineOption(QStringList() << i->toLatin1(), i18n("Ignored. (User defined.)")));
                 }
             }
         }
@@ -89,33 +90,33 @@ void initialiseCmdLineArgs(QCommandLineParser *cmdLineParser)
 // This command checks the comm
 static bool isOptionUsed(const QString& s, int argc, char* argv[])
 {
-   for(int j=0; j<argc; ++j )
-   {
-      if( QString("-"+s) == argv[j] || QString("--"+s)==argv[j] )
-      {
-         return true;
-      }
-   }
-   return false;
+    for(int j = 0; j < argc; ++j)
+    {
+        if(QString("-" + s) == argv[j] || QString("--" + s) == argv[j])
+        {
+            return true;
+        }
+    }
+    return false;
 }
 #endif
 
 #if defined(KREPLACEMENTS_H) && !defined(QT_NO_TRANSLATION)
 class ContextFreeTranslator : public QTranslator
 {
-public:
-   ContextFreeTranslator( QObject* pParent ) : QTranslator(pParent) {}
-   QString translate(const char * context, const char * sourceText, const char * disambiguation, int /*n*/ ) const /*override*/
-   {
-      if ( context != 0 )
-         return QTranslator::translate(0,sourceText,disambiguation);
-      else
-         return QString();
-   }
+  public:
+    ContextFreeTranslator(QObject* pParent) : QTranslator(pParent) {}
+    QString translate(const char* context, const char* sourceText, const char* disambiguation, int /*n*/) const /*override*/
+    {
+        if(context != 0)
+            return QTranslator::translate(0, sourceText, disambiguation);
+        else
+            return QString();
+    }
 };
 #endif
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     QApplication app(argc, argv); // KAboutData and QCommandLineParser depend on this being setup.
 
@@ -280,12 +281,12 @@ int main(int argc, char *argv[])
 
     KDiff3Shell* p = new KDiff3Shell();
     p->show();
-    p->setWindowState( p->windowState() | Qt::WindowActive ); // Patch for ubuntu: window not active on startup
-//app.installEventFilter( new CFilter );
-  int retVal = app.exec();
-  if (QApplication::clipboard()->text().size() == 0)
-     QApplication::clipboard()->clear(); // Patch for Ubuntu: Fix issue with Qt clipboard
-  return retVal;
+    p->setWindowState(p->windowState() | Qt::WindowActive); // Patch for ubuntu: window not active on startup
+                                                            //app.installEventFilter( new CFilter );
+    int retVal = app.exec();
+    if(QApplication::clipboard()->text().size() == 0)
+        QApplication::clipboard()->clear(); // Patch for Ubuntu: Fix issue with Qt clipboard
+    return retVal;
 }
 
 // Suppress warning with --enable-final

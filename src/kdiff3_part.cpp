@@ -20,52 +20,52 @@
 #include "kdiff3_part.h"
 
 #include <KAboutData>
-#include <QAction>
 #include <KStandardAction>
+#include <QAction>
 
 #include <QFile>
-#include <QTextStream>
 #include <QProcess>
+#include <QTextStream>
 
-#include "kdiff3.h"
 #include "fileaccess.h"
+#include "kdiff3.h"
 
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 #include "version.h"
 
-
 static KAboutData createAboutData()
 {
-    QByteArray appVersion = QByteArray( VERSION );
-    if ( sizeof(void*)==8 )
-      appVersion += " (64 bit)";
-    else if ( sizeof(void*)==4 )
-      appVersion += " (32 bit)";
-    
-    KAboutData aboutData( "kdiff3part", i18n( "KDiff3 Part" ),
-                           appVersion, i18n( "A KPart to display SVG images" ),
-                           KAboutLicense::GPL_V2,
-                           i18n( "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>" ) );
-    aboutData.addAuthor( i18n( "Joachim Eibl" ), QString(), QByteArray( "joachim.eibl at gmx.de" ) );
+    QByteArray appVersion = QByteArray(VERSION);
+    if(sizeof(void*) == 8)
+        appVersion += " (64 bit)";
+    else if(sizeof(void*) == 4)
+        appVersion += " (32 bit)";
+
+    KAboutData aboutData("kdiff3part", i18n("KDiff3 Part"),
+                         appVersion, i18n("A KPart to display SVG images"),
+                         KAboutLicense::GPL_V2,
+                         i18n("Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"));
+    aboutData.addAuthor(i18n("Joachim Eibl"), QString(), QByteArray("joachim.eibl at gmx.de"));
     return aboutData;
 }
 
-K_PLUGIN_FACTORY( KDiff3PartFactory, registerPlugin<KDiff3Part>(); )
+K_PLUGIN_FACTORY(KDiff3PartFactory, registerPlugin<KDiff3Part>();)
 //K_EXPORT_PLUGIN( KDiff3PartFactory(createAboutData()))
 
-KDiff3Part::KDiff3Part( QWidget *parentWidget, QObject *parent, const QVariantList &args )
-    : KParts::ReadWritePart( parent ) {
+KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantList& args)
+    : KParts::ReadWritePart(parent)
+{
     //set AboutData
     setComponentData(createAboutData());
-    const char *widgetName = args[0].toString().toUtf8().data();
+    const char* widgetName = args[0].toString().toUtf8().data();
 
     // this should be your custom internal widget
-    m_widget = new KDiff3App( parentWidget, widgetName, this );
-    
+    m_widget = new KDiff3App(parentWidget, widgetName, this);
+
     //FIXME: This hack is necessary to avoid a crash when the program terminates.
-    m_bIsShell = qobject_cast<KParts::MainWindow*>(parentWidget)!=0;
+    m_bIsShell = qobject_cast<KParts::MainWindow*>(parentWidget) != 0;
 
     // notify the part that this is our internal widget
     setWidget(m_widget);
@@ -86,20 +86,20 @@ KDiff3Part::KDiff3Part( QWidget *parentWidget, QObject *parent, const QVariantLi
 
 KDiff3Part::~KDiff3Part()
 {
-    if( m_widget!=0  && !m_bIsShell )
+    if(m_widget != 0 && !m_bIsShell)
     {
-        m_widget->saveOptions( KSharedConfig::openConfig() );
+        m_widget->saveOptions(KSharedConfig::openConfig());
     }
 }
 
 void KDiff3Part::setReadWrite(bool /*rw*/)
 {
-//    ReadWritePart::setReadWrite(rw);
+    //    ReadWritePart::setReadWrite(rw);
 }
 
 void KDiff3Part::setModified(bool /*modified*/)
 {
-/*
+    /*
     // get a handle on our Save action and make sure it is valid
     QAction *save = actionCollection()->action(KStandardAction::stdName(KStandardAction::Save));
     if (!save)
@@ -117,146 +117,144 @@ void KDiff3Part::setModified(bool /*modified*/)
 */
 }
 
-static void getNameAndVersion( const QString& str, const QString& lineStart, QString& fileName, QString& version )
+static void getNameAndVersion(const QString& str, const QString& lineStart, QString& fileName, QString& version)
 {
-    if( str.left( lineStart.length() ) == lineStart && fileName.isEmpty() )
+    if(str.left(lineStart.length()) == lineStart && fileName.isEmpty())
     {
         int pos = lineStart.length();
-        while( pos < str.length() && ( str[pos] == ' ' || str[pos] == '\t' ) ) ++pos;
+        while(pos < str.length() && (str[pos] == ' ' || str[pos] == '\t')) ++pos;
         int pos2 = str.length() - 1;
-        while( pos2 > pos )
+        while(pos2 > pos)
         {
-            while( pos2 > pos && str[pos2] != ' ' && str[pos2] != '\t' ) --pos2;
-            fileName = str.mid( pos, pos2 - pos );
-            fprintf( stderr, "KDiff3: %s\n", fileName.toLatin1().constData() );
-            if( FileAccess(fileName).exists() ) break;
+            while(pos2 > pos && str[pos2] != ' ' && str[pos2] != '\t') --pos2;
+            fileName = str.mid(pos, pos2 - pos);
+            fprintf(stderr, "KDiff3: %s\n", fileName.toLatin1().constData());
+            if(FileAccess(fileName).exists()) break;
             --pos2;
         }
 
         int vpos = str.lastIndexOf("\t", -1);
-        if( vpos > 0 && vpos > ( int )pos2 )
+        if(vpos > 0 && vpos > (int)pos2)
         {
-            version = str.mid( vpos + 1 );
-            while( !version.right( 1 )[0].isLetterOrNumber() )
-                version.truncate( version.length() - 1 );
+            version = str.mid(vpos + 1);
+            while(!version.right(1)[0].isLetterOrNumber())
+                version.truncate(version.length() - 1);
         }
     }
 }
 
-
 bool KDiff3Part::openFile()
 {
-   // m_file is always local so we can use QFile on it
-   fprintf(stderr, "KDiff3: %s\n", localFilePath().toLatin1().constData());
-   QFile file(localFilePath());
-   if (file.open(QIODevice::ReadOnly) == false)
-      return false;
+    // m_file is always local so we can use QFile on it
+    fprintf(stderr, "KDiff3: %s\n", localFilePath().toLatin1().constData());
+    QFile file(localFilePath());
+    if(file.open(QIODevice::ReadOnly) == false)
+        return false;
 
-   // our example widget is text-based, so we use QTextStream instead
-   // of a raw QDataStream
-   QTextStream stream(&file);
-   QString str;
-   QString fileName1;
-   QString fileName2;
-   QString version1;
-   QString version2;
-   while(!stream.atEnd() && (fileName1.isEmpty() || fileName2.isEmpty()) )
-   {
-      str = stream.readLine() + "\n";
-      getNameAndVersion( str, "---", fileName1, version1 );
-      getNameAndVersion( str, "+++", fileName2, version2 );
-   }
+    // our example widget is text-based, so we use QTextStream instead
+    // of a raw QDataStream
+    QTextStream stream(&file);
+    QString str;
+    QString fileName1;
+    QString fileName2;
+    QString version1;
+    QString version2;
+    while(!stream.atEnd() && (fileName1.isEmpty() || fileName2.isEmpty()))
+    {
+        str = stream.readLine() + "\n";
+        getNameAndVersion(str, "---", fileName1, version1);
+        getNameAndVersion(str, "+++", fileName2, version2);
+    }
 
-   file.close();
+    file.close();
 
-   if( fileName1.isEmpty() && fileName2.isEmpty() )
-   {
-      KMessageBox::sorry(m_widget, i18n("Couldn't find files for comparison."));
-      return false;
-   }
+    if(fileName1.isEmpty() && fileName2.isEmpty())
+    {
+        KMessageBox::sorry(m_widget, i18n("Couldn't find files for comparison."));
+        return false;
+    }
 
-   FileAccess f1(fileName1);
-   FileAccess f2(fileName2);
+    FileAccess f1(fileName1);
+    FileAccess f2(fileName2);
 
-   if( f1.exists() && f2.exists() && fileName1!=fileName2 )
-   {
-      m_widget->slotFileOpen2( fileName1, fileName2, "", "", "", "", "", 0 );
-      return true;
-   }
-   else if( version1.isEmpty() && f1.exists() )
-   {
-      // Normal patch
-      // patch -f -u --ignore-whitespace -i [inputfile] -o [outfile] [patchfile]
-      QString tempFileName = FileAccess::tempFileName();
-      QString cmd = "patch -f -u --ignore-whitespace -i \"" + localFilePath() +
-                  "\" -o \""+tempFileName + "\" \"" + fileName1+ "\"";
+    if(f1.exists() && f2.exists() && fileName1 != fileName2)
+    {
+        m_widget->slotFileOpen2(fileName1, fileName2, "", "", "", "", "", 0);
+        return true;
+    }
+    else if(version1.isEmpty() && f1.exists())
+    {
+        // Normal patch
+        // patch -f -u --ignore-whitespace -i [inputfile] -o [outfile] [patchfile]
+        QString tempFileName = FileAccess::tempFileName();
+        QString cmd = "patch -f -u --ignore-whitespace -i \"" + localFilePath() +
+                      "\" -o \"" + tempFileName + "\" \"" + fileName1 + "\"";
 
-      QProcess process;
-      process.start( cmd );
-      process.waitForFinished(-1);
+        QProcess process;
+        process.start(cmd);
+        process.waitForFinished(-1);
 
-      m_widget->slotFileOpen2( fileName1, tempFileName, "", "",
-                               "", version2.isEmpty() ? fileName2 : "REV:"+version2+":"+fileName2, "", 0 ); // alias names
-//    std::cerr << "KDiff3: f1:" << fileName1.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
-      FileAccess::removeTempFile( tempFileName );
-   }
-   else if( version2.isEmpty() && f2.exists() )
-   {
-      // Reverse patch
-      // patch -f -u -R --ignore-whitespace -i [inputfile] -o [outfile] [patchfile]
-      QString tempFileName = FileAccess::tempFileName();
-      QString cmd = "patch -f -u -R --ignore-whitespace -i \"" + localFilePath() +
-                  "\" -o \""+tempFileName + "\" \"" + fileName2+"\"";
+        m_widget->slotFileOpen2(fileName1, tempFileName, "", "",
+                                "", version2.isEmpty() ? fileName2 : "REV:" + version2 + ":" + fileName2, "", 0); // alias names
+                                                                                                                  //    std::cerr << "KDiff3: f1:" << fileName1.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
+        FileAccess::removeTempFile(tempFileName);
+    }
+    else if(version2.isEmpty() && f2.exists())
+    {
+        // Reverse patch
+        // patch -f -u -R --ignore-whitespace -i [inputfile] -o [outfile] [patchfile]
+        QString tempFileName = FileAccess::tempFileName();
+        QString cmd = "patch -f -u -R --ignore-whitespace -i \"" + localFilePath() +
+                      "\" -o \"" + tempFileName + "\" \"" + fileName2 + "\"";
 
-      QProcess process;
-      process.start( cmd );
-      process.waitForFinished(-1);
+        QProcess process;
+        process.start(cmd);
+        process.waitForFinished(-1);
 
-      m_widget->slotFileOpen2( tempFileName, fileName2, "", "",
-                               version1.isEmpty() ? fileName1 : "REV:"+version1+":"+fileName1, "", "", 0 ); // alias name
-//    std::cerr << "KDiff3: f2:" << fileName2.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
-      FileAccess::removeTempFile( tempFileName );
-   }
-   else if( !version1.isEmpty() && !version2.isEmpty() )
-   {
-      fprintf(stderr, "KDiff3: f1/2:%s<->%s\n", fileName1.toLatin1().constData(), fileName2.toLatin1().constData());
-      // Assuming that files are on CVS: Try to get them
-      // cvs update -p -r [REV] [FILE] > [OUTPUTFILE]
+        m_widget->slotFileOpen2(tempFileName, fileName2, "", "",
+                                version1.isEmpty() ? fileName1 : "REV:" + version1 + ":" + fileName1, "", "", 0); // alias name
+                                                                                                                  //    std::cerr << "KDiff3: f2:" << fileName2.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
+        FileAccess::removeTempFile(tempFileName);
+    }
+    else if(!version1.isEmpty() && !version2.isEmpty())
+    {
+        fprintf(stderr, "KDiff3: f1/2:%s<->%s\n", fileName1.toLatin1().constData(), fileName2.toLatin1().constData());
+        // Assuming that files are on CVS: Try to get them
+        // cvs update -p -r [REV] [FILE] > [OUTPUTFILE]
 
-      QString tempFileName1 = FileAccess::tempFileName();
-      QString cmd1 = "cvs update -p -r " + version1 + " \"" + fileName1 + "\" >\""+tempFileName1+"\"";
-      QProcess process1;
-      process1.start( cmd1 );
-      process1.waitForFinished(-1);
+        QString tempFileName1 = FileAccess::tempFileName();
+        QString cmd1 = "cvs update -p -r " + version1 + " \"" + fileName1 + "\" >\"" + tempFileName1 + "\"";
+        QProcess process1;
+        process1.start(cmd1);
+        process1.waitForFinished(-1);
 
-      QString tempFileName2 = FileAccess::tempFileName();
-      QString cmd2 = "cvs update -p -r " + version2 + " \"" + fileName2 + "\" >\""+tempFileName2+"\"";
-      QProcess process2;
-      process2.start( cmd2 );
-      process2.waitForFinished(-1);
+        QString tempFileName2 = FileAccess::tempFileName();
+        QString cmd2 = "cvs update -p -r " + version2 + " \"" + fileName2 + "\" >\"" + tempFileName2 + "\"";
+        QProcess process2;
+        process2.start(cmd2);
+        process2.waitForFinished(-1);
 
-      m_widget->slotFileOpen2( tempFileName1, tempFileName2, "", "",
-         "REV:"+version1+":"+fileName1,
-         "REV:"+version2+":"+fileName2,
-         "", 0
-      );
+        m_widget->slotFileOpen2(tempFileName1, tempFileName2, "", "",
+                                "REV:" + version1 + ":" + fileName1,
+                                "REV:" + version2 + ":" + fileName2,
+                                "", 0);
 
-//    std::cerr << "KDiff3: f1/2:" << tempFileName1.toLatin1() <<"<->"<<tempFileName2.toLatin1()<< std::endl;
-      FileAccess::removeTempFile( tempFileName1 );
-      FileAccess::removeTempFile( tempFileName2 );
-      return true;
-   }
-   else
-   {
-      KMessageBox::sorry(m_widget, i18n("Couldn't find files for comparison."));
-   }
+        //    std::cerr << "KDiff3: f1/2:" << tempFileName1.toLatin1() <<"<->"<<tempFileName2.toLatin1()<< std::endl;
+        FileAccess::removeTempFile(tempFileName1);
+        FileAccess::removeTempFile(tempFileName2);
+        return true;
+    }
+    else
+    {
+        KMessageBox::sorry(m_widget, i18n("Couldn't find files for comparison."));
+    }
 
-   return true;
+    return true;
 }
 
 bool KDiff3Part::saveFile()
 {
-/*    // if we aren't read-write, return immediately
+    /*    // if we aren't read-write, return immediately
     if (isReadWrite() == false)
         return false;
 
@@ -272,7 +270,7 @@ bool KDiff3Part::saveFile()
     file.close();
     return true;
 */
-    return false;  // Not implemented
+    return false; // Not implemented
 }
 // Suppress warning with --enable-final
 #undef VERSION
