@@ -15,18 +15,18 @@
 #include <QRegExp>
 #include <QTextStream>
 #include <QProcess>
+#include <QTemporaryFile>
 
 #include <vector>
 #include <cstdlib>
 
 #include <KLocalizedString>
-#include <QTemporaryFile>
 #include <kio/global.h>
-#include <kio/job.h>
+#include <KIO/Job>
 #include <kio/jobclasses.h>
-#include <kmessagebox.h>
+#include <KMessageBox>
 #include <kio/jobuidelegate.h>
-#include <kio/copyjob.h>
+#include <KIO/CopyJob>
 
 #include <sys/types.h>
 #include <sys/stat.h>

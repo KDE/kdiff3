@@ -74,8 +74,6 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     )
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config-kdiff3.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kdiff3.h )
-
 add_subdirectory(src)
 #add_subdirectory(po)
 add_subdirectory(doc)

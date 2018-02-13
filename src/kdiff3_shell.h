@@ -20,14 +20,16 @@
 #ifndef _KDIFF3SHELL_H_
 #define _KDIFF3SHELL_H_
 
-#include <config-kdiff3.h>
-
+#include <KParts/MainWindow>
 #include <QCommandLineParser>
-#include <QApplication>
-#include <kparts/mainwindow.h>
-#include <kparts/readwritepart.h>
 
 class KToggleAction;
+
+namespace KParts {
+    class ReadWritePart;
+}
+
+class KDiff3App;
 
 /**
  * This is the application "Shell".  It has a menubar, toolbar, and
@@ -69,6 +71,7 @@ private Q_SLOTS:
 
 private:
     KParts::ReadWritePart *m_part;
+    KDiff3App *m_widget;
 
     KToggleAction *m_toolbarAction;
     KToggleAction *m_statusbarAction;

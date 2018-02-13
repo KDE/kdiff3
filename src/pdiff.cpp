@@ -43,10 +43,10 @@
 #include <QDropEvent>
 #include <QUrl>
 #include <QProcess>
+#include <QStatusBar>
 
-#include <klocalizedstring.h>
-#include <kmessagebox.h>
-#include <qstatusbar.h>
+#include <KLocalizedString>
+#include <KMessageBox>
 
 
 #include <assert.h>

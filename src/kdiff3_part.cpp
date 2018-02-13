@@ -21,7 +21,7 @@
 
 #include <KAboutData>
 #include <QAction>
-#include <kstandardaction.h>
+#include <KStandardAction>
 
 #include <QFile>
 #include <QTextStream>
@@ -30,8 +30,8 @@
 #include "kdiff3.h"
 #include "fileaccess.h"
 
-#include <kmessagebox.h>
-#include <klocalizedstring.h>
+#include <KMessageBox>
+#include <KLocalizedString>
 
 #include "version.h"
 

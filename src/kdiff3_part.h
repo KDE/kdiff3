@@ -22,7 +22,7 @@
 
 #include <kparts/part.h>
 #include <KPluginFactory>
-#include <kparts/readwritepart.h>
+#include <KParts/ReadWritePart>
 
 class QWidget;
 class KDiff3App;

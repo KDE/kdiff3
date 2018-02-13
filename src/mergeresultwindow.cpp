@@ -49,8 +49,8 @@
 #include <QTextStream>
 #include <QMimeData>
 
-#include <klocalizedstring.h>
-#include <kmessagebox.h>
+#include <KLocalizedString>
+#include <KMessageBox>
 
 int g_bAutoSolve = true;
 
@@ -100,7 +100,7 @@ MergeResultWindow::MergeResultWindow(
    m_bCursorOn = true;
    m_bCursorUpdate = false;
    m_maxTextWidth = -1;
-   connect(&m_cursorTimer, &QTimer::timeout, this, &MergeResultWindow::slotCursorUpdate);
+   connect( &m_cursorTimer, SIGNAL(timeout()), this, SLOT( slotCursorUpdate() ) );
    m_cursorTimer.setSingleShot(true);
    m_cursorTimer.start( 500 /*ms*/ );
    m_selection.reset();
