@@ -24,14 +24,14 @@
 #include <QMenu>
 #include <QUrl>
 
-#include <klocalizedstring.h>
-#include <kpluginfactory.h>
-#include <kpluginloader.h>
-#include <kconfig.h>
-#include <kconfiggroup.h>
-#include <kmessagebox.h>
-#include <kprocess.h>
-#include <KIOCore/kfileitem.h>
+#include <KLocalizedString>
+#include <KPluginFactory>
+#include <KPluginLoader>
+#include <KConfig>
+#include <KConfigGroup>
+#include <KMessageBox>
+#include <KProcess>
+#include <KIOCore/KFileItem>
 
 //#include <iostream>
 

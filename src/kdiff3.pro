@@ -69,11 +69,11 @@ os2 {
 }
 
 unix {
-  documentation.path = /usr/share/doc/kdiff3
-#  documentation.files = ../doc/*
+  documentation.path = /usr/local/share/doc/kdiff3
+  documentation.files = ../doc/*
 
   INSTALLS += documentation
 
-  target.path = /usr/bin
+  target.path = /usr/local/bin
   INSTALLS += target
 }

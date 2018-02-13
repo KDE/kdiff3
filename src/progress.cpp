@@ -18,9 +18,9 @@
 #include <QApplication>
 #include <QThread>
 #include <QStatusBar>
-#include <kio/job.h>
 
-#include <klocalizedstring.h>
+#include <KIO/Job>
+#include <KLocalizedString>
 
 ProgressDialog* g_pProgressDialog=0;
 

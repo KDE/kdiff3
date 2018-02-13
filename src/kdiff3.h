@@ -20,12 +20,11 @@
 
 #include "diff.h"
 
-#include <config-kdiff3.h>
-
 // include files for Qt
 #include <QSplitter>
 #include <QScrollBar>
 #include <QPointer>
+#include <QEventLoop>
 
 // include files for KDE
 #include <QApplication>
@@ -49,7 +48,16 @@ class Overview;
 
 class QScrollBar;
 class QSplitter;
+class QStatusBar;
+class QMenu;
 
+class KToggleAction;
+class KToolBar;
+class KActionCollection;
+
+namespace KParts {
+	class MainWindow;
+}
 
 class KDiff3Part;
 class DirectoryMergeWindow;
@@ -184,16 +192,16 @@ class KDiff3App : public QSplitter
     //KConfig *config;
 
     // QAction pointers to enable/disable actions
-    QAction * fileOpen;
-    QAction * fileSave;
-    QAction * fileSaveAs;
-    QAction * filePrint;
-    QAction * fileQuit;
-    QAction * fileReload;
-    QAction * editCut;
-    QAction * editCopy;
-    QAction * editPaste;
-    QAction * editSelectAll;
+    QAction *fileOpen;
+    QAction *fileSave;
+    QAction *fileSaveAs;
+    QAction *filePrint;
+    QAction *fileQuit;
+    QAction *fileReload;
+    QAction *editCut;
+    QAction *editCopy;
+    QAction *editPaste;
+    QAction *editSelectAll;
     KToggleAction* viewToolBar;
     KToggleAction* viewStatusBar;
 
@@ -241,7 +249,7 @@ class KDiff3App : public QSplitter
     KToggleAction *showWindowC;
     QAction *winFocusNext;
     QAction *winFocusPrev;
-    QAction * winToggleSplitOrientation;
+    QAction *winToggleSplitOrientation;
     KToggleAction *dirShowBoth;
     QAction *dirViewToggle;
     KToggleAction *overviewModeNormal;

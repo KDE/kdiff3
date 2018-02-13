@@ -19,40 +19,37 @@
 #endif
 
 #include "directorymergewindow.h"
+#include "guiutils.h"
 #include "options.h"
 #include "progress.h"
-#include <vector>
-#include <map>
 
-#include <QDir>
-#include <QApplication>
-#include <QPixmap>
-#include <QImage>
-#include <QTextStream>
-#include <QKeyEvent>
-#include <QMenu>
-#include <QRegExp>
-#include <QMessageBox>
-#include <QLayout>
-#include <QLabel>
-#include <QSplitter>
-#include <QTextEdit>
-#include <QStyledItemDelegate>
-#include <QPushButton>
 #include <algorithm>
-
-#include <QMenu>
-#include <QAction>
-#include <kmessagebox.h>
-#include <kiconloader.h>
-#include <klocalizedstring.h>
-#include <ktoggleaction.h>
-
 #include <assert.h>
-//#include <konq_popupmenu.h>
-#include <QFileDialog>
+#include <map>
+#include <vector>
 
-#include "guiutils.h"
+#include <QAction>
+#include <QApplication>
+#include <QDir>
+#include <QImage>
+#include <QFileDialog>
+#include <QKeyEvent>
+#include <QLabel>
+#include <QLayout>
+#include <QMenu>
+#include <QMessageBox>
+#include <QPixmap>
+#include <QPushButton>
+#include <QRegExp>
+#include <QSplitter>
+#include <QStyledItemDelegate>
+#include <QTextEdit>
+#include <QTextStream>
+
+#include <KMessageBox>
+#include <KIconLoader>
+#include <KLocalizedString>
+#include <KToggleAction>
 
 static bool conflictingFileTypes(MergeFileInfos& mfi);
 static QPixmap getOnePixmap( e_Age eAge, bool bLink, bool bDir );

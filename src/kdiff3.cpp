@@ -44,7 +44,7 @@
 // include files for KDE
 #include <KMessageBox>
 #include <KLocalizedString>
-#include <kconfig.h>
+#include <KConfig>
 #include <KStandardAction>
 //#include <kkeydialog.h>
 #include <KToggleAction>

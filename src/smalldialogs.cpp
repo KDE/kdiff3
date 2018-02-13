@@ -36,7 +36,7 @@
 #include <QMimeData>
 #include <QFileDialog>
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 // OpenDialog **************************************************************
 
@@ -252,6 +252,7 @@ void OpenDialog::selectURL( QComboBox* pLine, bool bDir, int i, bool bSave )
         //QFileDialog::setStartDir( KIO::upUrl( newURL ) );
         pLine->setEditText( newURL.url() );
     }
+   // newURL won't be modified if nothing was selected.
 }
 
 void OpenDialog::selectFileA()     {  selectURL( m_pLineA,    false, 1, false );  }

@@ -21,25 +21,21 @@
 #include "kdiff3.h"
 #include "kdiff3_part.h"
 
+#include <QUrl>
+#include <QAction>
+#include <QStatusBar>
+#include <QCloseEvent>
+
 #include <KPluginMetaData>
 #include <KPluginLoader>
 
-#include <kshortcutsdialog.h>
-#include <kconfig.h>
-#include <QUrl>
-
-#include <kedittoolbar.h>
-
-#include <QAction>
-#include <kstandardaction.h>
-
-#include <kmessagebox.h>
-#include <QStatusBar>
-#include <klocalizedstring.h>
-
-#include <QStatusBar>
-#include <QCloseEvent>
-#include <ktoolbar.h>
+#include <KShortcutsDialog>
+#include <KConfig>
+#include <KStandardAction>
+#include <KEditToolBar>
+#include <KMessageBox>
+#include <KLocalizedString>
+#include <KToolBar>
 
 KDiff3Shell::KDiff3Shell( bool bCompleteInit )
     : KParts::MainWindow( )
@@ -60,6 +56,7 @@ KDiff3Shell::KDiff3Shell( bool bCompleteInit )
     }*/
 
     m_part = new KDiff3Part( this, this, QVariantList() << QVariant(QLatin1String("KDiff3Part")) );
+    m_widget = qobject_cast<KDiff3App *>(m_part->widget());
 
    if (m_part)
    {
@@ -68,11 +65,11 @@ KDiff3Shell::KDiff3Shell( bool bCompleteInit )
       //toolBar()->setToolButtonStyle( Qt::ToolButtonIconOnly );
 
       // tell the KParts::MainWindow that this is indeed the main widget
-      setCentralWidget(m_part->widget());
+      setCentralWidget(m_widget);
 
       if (bCompleteInit)
-     ((KDiff3App*)m_part->widget())->completeInit();
-      connect(((KDiff3App*)m_part->widget()), SIGNAL(createNewInstance(const QString&, const QString&, const QString&)), this, SLOT(slotNewInstance(const QString&, const QString&, const QString&)));
+         m_widget ->completeInit();
+      connect(m_widget, SIGNAL(createNewInstance(const QString&, const QString&, const QString&)), this, SLOT(slotNewInstance(const QString&, const QString&, const QString&)));
    }
     else
     {
