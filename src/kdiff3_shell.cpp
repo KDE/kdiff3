@@ -21,24 +21,24 @@
 #include "kdiff3.h"
 #include "kdiff3_part.h"
 
-#include <QUrl>
 #include <QAction>
-#include <QStatusBar>
 #include <QCloseEvent>
+#include <QStatusBar>
+#include <QUrl>
 
-#include <KPluginMetaData>
 #include <KPluginLoader>
+#include <KPluginMetaData>
 
-#include <KShortcutsDialog>
 #include <KConfig>
-#include <KStandardAction>
 #include <KEditToolBar>
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
+#include <KShortcutsDialog>
+#include <KStandardAction>
 #include <KToolBar>
 
-KDiff3Shell::KDiff3Shell( bool bCompleteInit )
-    : KParts::MainWindow( )
+KDiff3Shell::KDiff3Shell(bool bCompleteInit)
+    : KParts::MainWindow()
 {
     m_bUnderConstruction = true;
     // set the shell's ui resource file
@@ -55,30 +55,29 @@ KDiff3Shell::KDiff3Shell( bool bCompleteInit )
             break;
     }*/
 
-    m_part = new KDiff3Part( this, this, QVariantList() << QVariant(QLatin1String("KDiff3Part")) );
-    m_widget = qobject_cast<KDiff3App *>(m_part->widget());
+    m_part = new KDiff3Part(this, this, QVariantList() << QVariant(QLatin1String("KDiff3Part")));
+    m_widget = qobject_cast<KDiff3App*>(m_part->widget());
 
-   if (m_part)
-   {
-      // and integrate the part's GUI with the shell's
-      createGUI(m_part);
-      //toolBar()->setToolButtonStyle( Qt::ToolButtonIconOnly );
+    if(m_part)
+    {
+        // and integrate the part's GUI with the shell's
+        createGUI(m_part);
+        //toolBar()->setToolButtonStyle( Qt::ToolButtonIconOnly );
 
-      // tell the KParts::MainWindow that this is indeed the main widget
-      setCentralWidget(m_widget);
+        // tell the KParts::MainWindow that this is indeed the main widget
+        setCentralWidget(m_widget);
 
-      if (bCompleteInit)
-         m_widget ->completeInit();
-      connect(m_widget, SIGNAL(createNewInstance(const QString&, const QString&, const QString&)), this, SLOT(slotNewInstance(const QString&, const QString&, const QString&)));
-   }
+        if(bCompleteInit)
+            m_widget->completeInit();
+        connect(m_widget, SIGNAL(createNewInstance(const QString&, const QString&, const QString&)), this, SLOT(slotNewInstance(const QString&, const QString&, const QString&)));
+    }
     else
     {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
         KMessageBox::error(this, i18n("Could not initialize the KDiff3 part.\n"
-           "This usually happens due to an installation problem. "
-           "Please read the README-file in the source package for details.")
-           );
+                                      "This usually happens due to an installation problem. "
+                                      "Please read the README-file in the source package for details."));
         //kapp->quit();
 
         ::exit(-1); //kapp->quit() doesn't work here yet.
@@ -102,35 +101,35 @@ KDiff3Shell::~KDiff3Shell()
 
 bool KDiff3Shell::queryClose()
 {
-   if (m_part)
-      return ((KDiff3App*)m_part->widget())->queryClose();
-   else
-      return true;
+    if(m_part)
+        return ((KDiff3App*)m_part->widget())->queryClose();
+    else
+        return true;
 }
 
 bool KDiff3Shell::queryExit()
 {
-   return true;
+    return true;
 }
 
-void KDiff3Shell::closeEvent(QCloseEvent*e)
+void KDiff3Shell::closeEvent(QCloseEvent* e)
 {
-   if ( queryClose() )
-   {
-      e->accept();
-      bool bFileSaved = ((KDiff3App*)m_part->widget())->isFileSaved();
-      bool bDirCompare = ((KDiff3App*)m_part->widget())->isDirComparison();
-      QApplication::exit( bFileSaved || bDirCompare ? 0 : 1 );
-   }
-   else
-      e->ignore();
+    if(queryClose())
+    {
+        e->accept();
+        bool bFileSaved = ((KDiff3App*)m_part->widget())->isFileSaved();
+        bool bDirCompare = ((KDiff3App*)m_part->widget())->isDirComparison();
+        QApplication::exit(bFileSaved || bDirCompare ? 0 : 1);
+    }
+    else
+        e->ignore();
 }
 
 void KDiff3Shell::optionsShowToolbar()
 {
     // this is all very cut and paste code for showing/hiding the
     // toolbar
-    if (m_toolbarAction->isChecked())
+    if(m_toolbarAction->isChecked())
         toolBar()->show();
     else
         toolBar()->hide();
@@ -140,7 +139,7 @@ void KDiff3Shell::optionsShowStatusbar()
 {
     // this is all very cut and paste code for showing/hiding the
     // statusbar
-    if (m_statusbarAction->isChecked())
+    if(m_statusbarAction->isChecked())
         statusBar()->show();
     else
         statusBar()->hide();
@@ -148,13 +147,13 @@ void KDiff3Shell::optionsShowStatusbar()
 
 void KDiff3Shell::optionsConfigureKeys()
 {
-    KShortcutsDialog::configure(actionCollection() /*, "kdiff3_shell.rc" */ );
+    KShortcutsDialog::configure(actionCollection() /*, "kdiff3_shell.rc" */);
 }
 
 void KDiff3Shell::optionsConfigureToolbars()
 {
-   KConfigGroup mainWindowGroup(  KSharedConfig::openConfig(), "MainWindow" );
-   saveMainWindowSettings( mainWindowGroup );
+    KConfigGroup mainWindowGroup(KSharedConfig::openConfig(), "MainWindow");
+    saveMainWindowSettings(mainWindowGroup);
 
     // use the standard toolbar editor
     KEditToolBar dlg(factory());
@@ -164,14 +163,14 @@ void KDiff3Shell::optionsConfigureToolbars()
 
 void KDiff3Shell::applyNewToolbarConfig()
 {
-   KConfigGroup mainWindowGroup(  KSharedConfig::openConfig(), "MainWindow" );
-   applyMainWindowSettings( mainWindowGroup );
+    KConfigGroup mainWindowGroup(KSharedConfig::openConfig(), "MainWindow");
+    applyMainWindowSettings(mainWindowGroup);
 }
 
-void KDiff3Shell::slotNewInstance( const QString& fn1, const QString& fn2, const QString& fn3 )
+void KDiff3Shell::slotNewInstance(const QString& fn1, const QString& fn2, const QString& fn3)
 {
-   KDiff3Shell* pKDiff3Shell = new KDiff3Shell(false);
-   ((KDiff3App*)pKDiff3Shell->m_part->widget())->completeInit(fn1,fn2,fn3);
+    KDiff3Shell* pKDiff3Shell = new KDiff3Shell(false);
+    ((KDiff3App*)pKDiff3Shell->m_part->widget())->completeInit(fn1, fn2, fn3);
 }
 
 //#include "kdiff3_shell.moc"
