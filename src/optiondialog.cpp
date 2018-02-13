@@ -554,7 +554,7 @@ OptionDialog::OptionDialog( bool bShowDirMergeSettings, QWidget *parent, char *n
    setObjectName( name );
    setModal( true  );
 
-   //showButtonSeparator( true );01bc7c9af262353e7623bc02e5277fd59180183b
+   //showButtonSeparator( true );
    //setHelp( "kdiff3/index.html", QString::null );
 
    setupFontPage();
@@ -642,6 +642,7 @@ void OptionDialog::setupFontPage( void )
 
     OptionFontChooser* pAppFontChooser = new OptionFontChooser( defaultAppFont, "ApplicationFont", &m_options.m_appFont, page, this );
     topLayout->addWidget( pAppFontChooser );
+    pAppFontChooser->setTitle(i18n("Application font"));
     
     OptionFontChooser* pFontChooser = new OptionFontChooser( defaultFont, "Font", &m_options.m_font, page, this );
     topLayout->addWidget( pFontChooser );
@@ -1357,7 +1358,7 @@ static void insertCodecs(OptionComboBox* p)
       p->insertItem(mi->second, i+1);
 }
 */
-
+/*
 // UTF8-Codec that saves a BOM
 // UTF8-Codec that saves a BOM
 class Utf8BOMCodec : public QTextCodec
@@ -1400,10 +1401,13 @@ public:
       return ((PublicTextCodec*)m_pUtf8Codec)->publicConvertToUnicode( p, len, pState );
    }
 };
-
+*/
 void OptionDialog::setupRegionalPage( void )
 {
-   new Utf8BOMCodec();
+   /*
+     TODO: What is this line supposed to do besides leak memmory? Intruduced as is in .91 no explaination
+        new Utf8BOMCodec(); 
+   */
 
    QFrame* page = new QFrame();
    KPageWidgetItem* pageItem = new KPageWidgetItem( page, i18n("Regional Settings") );
