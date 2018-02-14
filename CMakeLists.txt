@@ -45,9 +45,9 @@ find_package(
     I18n
     CoreAddons
     Crash
+    DocTools
     IconThemes
 )
-find_package(KF5DocTools ${KF5_MIN_VERSION} REQUIRED )
 
 # I don't need warnings about wired things in comments.
 set(CLANG_WARNING_FLAGS -Wno-comment)
@@ -67,7 +67,6 @@ include_directories(
     )
 
 add_subdirectory(src)
-#add_subdirectory(po)
 add_subdirectory(doc)
 
 find_file(KFILEITEMACTIONPLUGIN_FOUND kabstractfileitemactionplugin.h PATHS)
@@ -84,5 +83,8 @@ else(KFILEITEMACTIONPLUGIN_FOUND)
   message(STATUS "   => kdiff3fileitemactionplugin (KDiff3 contextmenu plugin for Konqueror/Dolphin, KDE>4.6) will not be built.)")
   message(STATUS "No automatic fallback provided current configuration is not supported for plugin...")
 endif(KFILEITEMACTIONPLUGIN_FOUND)
+
+ki18n_install(po)
+kdoctools_install(po)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
