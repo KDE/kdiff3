@@ -869,13 +869,6 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
 </para>
 
 <variablelist>
-   <varlistentry><term><emphasis>Preserve Carriage Return:</emphasis></term><listitem><para> Some editors (on some systems) save
-      carriage return '\r' and linefeed '\n'-characters at the end of line, while
-      others will only save the linefeed '\n'. Usually &kdiff3; ignores the carriage
-      return, but then files that don't have equal sizes, look equal in side by
-      side comparison. When this option is on, then the carriage return characters
-      are made visible but are treated as white space. This option must be off
-      during a merge. Default is off.</para></listitem></varlistentry>
    <varlistentry><term><emphasis>Ignore numbers:</emphasis></term><listitem><para> Default is off. Number characters ('0'-'9', '.', '-')
       will be ignored  in the first  part of the analysis in which the line matching is
       done. In the result the differences will be shown nevertheless, but they are treated
@@ -1926,7 +1919,7 @@ and menu. Merging or directory-comparison are not supported then.
    Some buttons and functions are missing. What's wrong?
 </para></question><answer><para>
    You compiled from source but you probably didn't specify the correct prefix
-   for the installation. By default cmake wants to install in /usr/local but then the
+   for the installation. By default cmake wants to install in /usr/local but then
    the user-interface resource file (i.e. kdiff3ui.rc) can't be found. The README-file contains
    more information about the correct prefix.
 </para></answer></qandaentry>
