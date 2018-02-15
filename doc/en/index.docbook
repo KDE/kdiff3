@@ -1,8 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
   <!ENTITY kdiff3 "<application>KDiff3</application>">
-  <!ENTITY kappname "&kdiff3;">
-  <!ENTITY package "extragear-utils">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">
 ]>
@@ -73,7 +71,6 @@ Please at least include KDE, the KDE package it is in, the name
 
 <keywordset>
 <keyword>KDE</keyword>
-<keyword>kdeextragear</keyword>
 <keyword>kdiff3</keyword>
 <keyword>diff</keyword>
 <keyword>merge</keyword>
@@ -988,7 +985,7 @@ Yet there is one option here that is also relevant for saving single files:
 
 <sect2><title>Regional and Language Options</title>
   <variablelist>
-    <varlistentry><term><emphasis>Language:</emphasis></term><listitem><para>Adjust the language of the user interface. Changing this option doesn't affect the running program. You have to exit and restart &kdiff3; so that the language is changed. (This option is not available in the KDE version of &kdiff3; because the language is adjustable in the global KDE settings.) 
+    <varlistentry><term><emphasis>Language:</emphasis></term><listitem><para>Adjust the language of the user interface. Changing this option doesn't affect the running program. You have to exit and restart &kdiff3; so that the language is changed. (This option is not available in the Frameworks version of &kdiff3;.)
 	</para></listitem></varlistentry>
     <varlistentry><term><emphasis>Use the same encoding for everything:</emphasis></term><listitem><para> The following encoding options can be adjusted separately for each item or if this option is true, all values will take the first value.
 	</para></listitem></varlistentry>
@@ -1046,7 +1043,7 @@ Yet there is one option here that is also relevant for saving single files:
 
 <sect2 id="shortcuts"><title>Configuring Keyboard-Shortcuts</title>
 <para>
-   Currently only the KDE-version supports user-configurable keyboard-shortcuts.
+   Currently only the Frameworks-version supports user-configurable keyboard-shortcuts.
    (Menu Settings->Configure Shortcuts...)
 </para>
 </sect2>
@@ -1798,8 +1795,8 @@ So this is what this program can do for you: &kdiff3; ...
 <title>Networktransparency via KIO</title>
 <sect2><title>KIO-Slaves</title>
 <para>
-KDE supports networktransparency via KIO-slaves. &kdiff3; uses this
-for reading input files and for scanning directories.
+The KIO library from Frameworks supports networktransparency via KIO-slaves.
+&kdiff3; uses this for reading input files and for scanning directories.
 This means that you can specify files and directories on local and
 remote resources via URLs.
 </para><para>
@@ -1928,9 +1925,9 @@ and menu. Merging or directory-comparison are not supported then.
 <qandaentry><question><para>
    Some buttons and functions are missing. What's wrong?
 </para></question><answer><para>
-   You compiled from source but you probably didn't specify the correct KDE-prefix
-   with cmake. By default cmake wants to install in /usr/local but then KDE can't
-   find the user-interface resource file (i.e. kdiff3ui.rc). The README-file contains
+   You compiled from source but you probably didn't specify the correct prefix
+   for the installation. By default cmake wants to install in /usr/local but then the
+   the user-interface resource file (i.e. kdiff3ui.rc) can't be found. The README-file contains
    more information about the correct prefix.
 </para></answer></qandaentry>
 
@@ -2065,57 +2062,6 @@ Documentation Copyright &copy; 2002-2007 Joachim Eibl <email>joachim.eibl at gmx
 &underGPL;        	 <!-- GPL License -->
 
 </chapter>
-
-<appendix id="installation">
-<title>Installation</title>
-
-<sect1 id="getting-kdiff3">
-<title>How to obtain &kdiff3;</title>
-
-<para>
-You can download the latest version of &kdiff3; from its homepage <ulink url="http://kdiff3.sourceforge.net">http://kdiff3.sourceforge.net</ulink>.
-</para><para>
-&kdiff3; is also available for other platforms. See the homepage for details.
-</para>
-
-
-</sect1>
-
-<sect1 id="requirements">
-<title>Requirements</title>
-
-<para>
-   In order to successfully use all features of &kdiff3;, you need &kde; >4.4.
-</para><para>
-   For information about how to run &kdiff3; on other platforms without KDE please see the
-   <ulink url="http://kdiff3.sourceforge.net">homepage</ulink>.
-</para><para>
-You can find a list of changes at <ulink
-url="http://kdiff3.sourceforge.net/ChangeLog">http://kdiff3.sourceforge.net/ChangeLog</ulink>
-or in the "ChangeLog"-file of the source package.
-</para>
-</sect1>
-
-<sect1 id="compilation">
-<title>Compilation and Installation</title>
-
-<para>In order to compile and install &kdiff3; on a system with KDE, type the
-    following in the <filename class="directory">build</filename> subdirectory of the &kdiff3; distribution:</para>
-
-<screen><prompt>%</prompt> <userinput><command>cmake -DCMAKE_INSTALL_PREFIX=<replaceable>kde-dir</replaceable> ..</command></userinput>
-<prompt>%</prompt> <userinput><command>make</command></userinput>
-<prompt>#</prompt> <userinput><command>make</command> install</userinput>
-</screen>
-<para>
-<replaceable>kde-dir</replaceable> specifies the directory
-containing KDE on your system (usually, <filename class="directory">/usr</filename>). If you are not sure, read the README-file for details.
-</para>
-<para>If you don't use KDE follow the instructions for Qt-only systems in the README file.</para>
-<para>Since &kdiff3; uses <command>cmake</command> you should have no trouble compiling it. Should you run into problems please report them to the &kde; mailing lists.</para>
-
-</sect1>
-
-</appendix>
 
 &documentation.index;
 </book>
