@@ -162,7 +162,7 @@ This screenshot shows &kdiff3; during a directory merge:
 
 <sect1 id="features"><title>More Features</title>
 <sect2><title> Line-By-Line And Char-By-Char Diff-Viewer</title>
-<para>By using the possiblities of a graphical color display &kdiff3; shows
+<para>By using the possibilities of a graphical color display &kdiff3; shows
    exactly what the difference is. When you have to do many code-reviews, you will like this.
 </para>
 <screenshot><mediaobject>
@@ -436,9 +436,9 @@ They will appear in the usage help like in this example:</para>
    For these situations you can manually instruct &kdiff3; to align certain lines. 
    Mark the text for which you want to improve the alignment with the mouse as you would 
    for copy and paste in the first diff view and then choose "Add Manual Diff Alignment" 
-   in the "Diffview"-menu (keyboard shortcut "Ctrl-Y") . An orange bar will appear in 
+   in the "Diffview"-menu (keyboard shortcut <keycombo>&Ctrl;<keycap>Y</keycap></keycombo>). An orange bar will appear in 
    the summary column next to the chosen text. Repeat this for the second and 
-   (if available) third diff view. &kdiff3; will immediately recalculate the differences everytime you do this.
+   (if available) third diff view. &kdiff3; will immediately recalculate the differences everytime you do this,
    and will align the chosen lines. Of course some of the previously matching lines in between 
    might not match anymore.
 </para><para>
@@ -585,7 +585,7 @@ history entry. If there are no other empty lines, this is a sufficient criterion
 Just set an empty "History entry start regular expression". If the empty line criterion 
 isn't sufficient, you can specify a regular expression to detect the history entry start.
 </para><para>
-Note that &kdiff3; will remove duplicate history entrys. If a history entry appeared several times
+Note that &kdiff3; will remove duplicate history entries. If a history entry appeared several times
 in the history of a input file, only one entry will remain in the output.
 </para><para>
 If you want to sort the history, then you have to specify how the sort key should be built.
@@ -780,7 +780,7 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
 <variablelist>
    <varlistentry><term>All:</term><listitem><para>Print everything.</para></listitem></varlistentry>
    <varlistentry><term>Current:</term><listitem><para>Print a page starting at the first visible line in the window. 
-       (On systems without this option this can be achived by specifying page number 10000 for printing.)</para></listitem></varlistentry>
+       (On systems without this option this can be achieved by specifying page number 10000 for printing.)</para></listitem></varlistentry>
    <varlistentry><term>Selection:</term><listitem><para>
        Before choosing to print select text with the mouse (like for copy and paste) 
        in one of the diff input windows to define the start and end line. If no text 
@@ -1307,7 +1307,7 @@ But it won't warn you if a Line-Matching-Preprocessor-command is active. The mer
 all conflicts are solved. If you disabled "Show White Space" then the differences that
 were removed with the Line-Matching-Preprocessor-command will also be invisible. If the 
 Save-button remains disabled during a merge (because of remaining conflicts), make sure to enable 
-"Show White Space". If you don't wan't to merge these less important differences manually
+"Show White Space". If you don't want to merge these less important differences manually
 you can select "Choose [A|B|C] For All Unsolved White space Conflicts" in the Merge-menu.
 </para>
 </sect2>
@@ -1569,7 +1569,7 @@ So this is what this program can do for you: &kdiff3; ...
      <listitem><para>"Show Identical Files": Files that have been detected equal in all input directories.</para></listitem>
      <listitem><para>"Show Different Files": Files that exist in two or more directories but are not equal.</para></listitem>
      <listitem><para>"Show Files only in A": Files that exist only in A, but not in B or C.</para></listitem>
-     <listitem><para>"Show Files only in B": Files that exist only in B, but not in A or B.</para></listitem>
+     <listitem><para>"Show Files only in B": Files that exist only in B, but not in A or C.</para></listitem>
      <listitem><para>"Show Files only in C": Files that exist only in C, but not in A or B.</para></listitem>
 </itemizedlist></para>
 <para>
@@ -1753,7 +1753,7 @@ So this is what this program can do for you: &kdiff3; ...
 <sect2><title>Split/Full Screen Mode</title>
 <para>
    Usually the directory merge list view remains visible while a single file
-   is compared or merged. With the mouse you can move the the splitter bar that
+   is compared or merged. With the mouse you can move the splitter bar that
    separates the file list from the text-diff windows. If you don't want this,
    you can disable "Split Screen View" in the "Directory"-menu. Then you can
    use "Toggle View" in the "Directory"-menu to switch between the file list
@@ -1782,7 +1782,7 @@ So this is what this program can do for you: &kdiff3; ...
    file selected thus will be marked with an "A", the second and third with "B" and "C" 
    regardless on what column they are in. Only up to three files can be chosen like this.
 </para><para>
-   Proceed by choosing "Compare Explicitely Selected Files" or "Merge Explicitely 
+   Proceed by choosing "Compare Explicitly Selected Files" or "Merge Explicitly 
    Selected Files" from the "Directory"-menu. For your convenience these menu entries 
    also appear as context menu when you right-click the last selected file.
 </para><para>
@@ -1819,7 +1819,7 @@ Other KIO-slaves that are interesting are:
 <listitem><para>Files from the WWW (http:),</para></listitem>
 <listitem><para>Files from the FTP (ftp:),</para></listitem>
 <listitem><para>Encrypted file transfer (fish:, sftp:),</para></listitem>
-<listitem><para>Windows-ressources (smb:),</para></listitem>
+<listitem><para>Windows-resources (smb:),</para></listitem>
 <listitem><para>Local files (file:),</para></listitem>
 </itemizedlist>
 <para>
@@ -1852,7 +1852,7 @@ Other things that are possible, but probably less useful are:
 
 <sect2><title>Capabilities of KIO-Slaves</title>
 <para>
-   Networktransparency has one drawback: Not all ressources have the same cababilities.
+   Networktransparency has one drawback: Not all resources have the same capabilities.
 </para><para>
    Sometimes this is due to the file system of the server, sometimes due to the protocol.
    Here is a short list of restrictions:
@@ -1883,16 +1883,16 @@ Other things that are possible, but probably less useful are:
 </para><para>
 It's main use is as difference-viewer in KDevelop. KDevelop always starts the
 internal difference viewer first. To invoke &kdiff3; press the right mouse button
-on the difference viewer window and select "Show in KDiff3Part" from the contextmenu.
+on the difference viewer window and select "Show in KDiff3Part" from the context menu.
 </para><para>
 &kdiff3; normally requires two complete files as input. When used as part &kdiff3;
-will assume that the inputfile is a patch-file in the unified format. &kdiff3;
+will assume that the input file is a patch-file in the unified format. &kdiff3;
 then retrieves the original filenames from the patch-file. At least one of
 the two files must be available. &kdiff3; will then invoke <command>patch</command> to
 recreate the second file.
 </para><para>
-In Konqueror you can select a patch-file and select "Preview in"-"KDiff3Part" from
-the contextmenu. Be aware that this won't work if none of the original files are
+In &dolphin; you can select a patch-file and select "Preview in"-"KDiff3Part" from
+the context menu. Be aware that this won't work if none of the original files are
 available, and it is not reliable if the original file(s) have changed since the
 patch-file was generated.
 </para><para>
@@ -1929,8 +1929,8 @@ and menu. Merging or directory-comparison are not supported then.
    Some buttons and functions are missing. What's wrong?
 </para></question><answer><para>
    You compiled from source but you probably didn't specify the correct KDE-prefix
-   with configure. By default configure wants to install in /usr/local but then KDE can't
-   find the user-interface ressource file (i.e. kdiff3ui.rc). The README-file contains
+   with cmake. By default cmake wants to install in /usr/local but then KDE can't
+   find the user-interface resource file (i.e. kdiff3ui.rc). The README-file contains
    more information about the correct prefix.
 </para></answer></qandaentry>
 
@@ -2009,13 +2009,13 @@ and menu. Merging or directory-comparison are not supported then.
 </para><para>
    The best solution if you only want to compare the text (without embedded 
    objects like pictures) is to use "Select All" and "Copy" in your program 
-   to copy the interesting text to the clipoard and then in &kdiff3; paste the 
+   to copy the interesting text to the clipboard and then in &kdiff3; paste the 
    text into either diff input window. 
    (See also <link linkend="selections">Select, Copy And Paste</link>.)
 </para></answer></qandaentry>
 
 <qandaentry><question><para>
-   Where has the the directory option "List only deltas" gone?
+   Where has the directory option "List only deltas" gone?
 </para></question><answer><para>
    There are now several <link linkend="selectingvisiblefiles">"Show"-options</link> in the directory menu.
    Disabling "Show identical files" will achieve what enabling "List only deltas" used to do.
@@ -2100,20 +2100,18 @@ or in the "ChangeLog"-file of the source package.
 <title>Compilation and Installation</title>
 
 <para>In order to compile and install &kdiff3; on a system with KDE, type the
-following in the base directory of the &kdiff3; distribution:</para>
+    following in the <filename class="directory">build</filename> subdirectory of the &kdiff3; distribution:</para>
 
-<screen><prompt>%</prompt> <userinput><command>./configure --prefix=<replaceable>kde-dir</replaceable></command></userinput>
+<screen><prompt>%</prompt> <userinput><command>cmake -DCMAKE_INSTALL_PREFIX=<replaceable>kde-dir</replaceable> ..</command></userinput>
 <prompt>%</prompt> <userinput><command>make</command></userinput>
-<prompt>%</prompt> <userinput><command>make</command> install</userinput>
+<prompt>#</prompt> <userinput><command>make</command> install</userinput>
 </screen>
 <para>
 <replaceable>kde-dir</replaceable> specifies the directory
-containing KDE on your system. If you are not sure, read the README-file for details.
+containing KDE on your system (usually, <filename class="directory">/usr</filename>). If you are not sure, read the README-file for details.
 </para>
-<para>If you don't use KDE don't use <command>configure</command> but follow the instructions for Qt-only systems in the README file.</para>
-<para>Since &kdiff3; uses <command>autoconf</command> and
-<command>automake</command> you should have no trouble compiling it. Should you
-run into problems please report them to the &kde; mailing lists.</para>
+<para>If you don't use KDE follow the instructions for Qt-only systems in the README file.</para>
+<para>Since &kdiff3; uses <command>cmake</command> you should have no trouble compiling it. Should you run into problems please report them to the &kde; mailing lists.</para>
 
 </sect1>
 
