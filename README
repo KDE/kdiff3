@@ -2,16 +2,21 @@ KDiff3-Readme
 =============
 
 Author: Joachim Eibl  (joachim.eibl at gmx.de)
-Port to kf5/Qt5 by Michael Reeves
-KDiff3-Version: 
+Port to KF5/Qt5 by Michael Reeves (reeves.87@gmail.com)
+KDiff3-Version: 1.7
 
-Now requires Qt 5.3 or later and KF5 5.5+. Legacy 0.9.98 and earlier builds are not supported.
+Now requires Qt 5.6 or later and KF5 5.14+. Legacy 0.9.98 and earlier builds are not supported.
 Windows/MacOSX build is untested since port. Builds and runs under kubuntu 16.04 will likely
 still work under other Linux/Un*x. The Konqueror specific plugin is not ported and no longer mantained.
 This plugin would only apply to KDE before 4.6. Support as been removed from main CMakeLists.txt.
 As of 1/13/17 cmake 3.1+ is the targeted cmake version.
 
-These are the original pre kf5/qt5 Readme fallows:
+
+cmake is now the only build system supported. KF5/QT5 was big jump. A lot changed besides just the API.
+I am not against a Qt5-only build variant but see no reason to mantain two sperate build systems.
+At present KF5 is my focus.
+
+The original pre KF5/Qt5 Readme fallows old build intrustions have been removed to avoid confusion:
 
 
 Copyright: (C) 2002-2014 by Joachim Eibl
@@ -80,91 +85,6 @@ License
     For details see file "COPYING".
 
 
-Build & Install (for Un*x systems)
-----------------------------------
-
-0) Unpack KDiff3*.tar.gz
-1) Run "./configure kde4" or "./configure qt4" from the KDiff3 source directory.
-2) Follow instructions
-If it doesn't work continue reading.
-
-
-Requirements & Installation
----------------------------
-
-- for KDE4:
-   From version 0.9.94 on KDiff3 supports KDE4.
-   For installation on most distributions you usually also require these packages (names as on opensuse):
-   - g++ (version 4.2 or newer)
-   - libqt4-devel (Qt4-libs, version 4.8.0 or newer)
-   - libkde4-devel (KDE4 Header files and development libraries)
-   - libkonq-devel (optional, needed for the kdiff3-plugin, if not installed 
-                    then the contextmenu plugin for konqueror won't be built.)
-   - cmake (>2.6, checks dependencies and creates the Makefiles appopriate for your system)
-
-   Typically in a terminal (e.g. konsole) you cd into the kdiff3-directory and run these commands.
-   run "./configure kde4". This script is essentially the same as these commands:
-
-      mkdir release                                  # create sub directory
-      cd release                                     # cd into that directory
-      kde4-config --prefix                           # Find out your KDE4-directory and note the result
-      cmake .. -DCMAKE_INSTALL_PREFIX=<KDE4-prefix>  # create Makefile, replace <KDE4-prefix> with the prior result
-      make                                           # run make (compile and link)
-      sudo make install                              # install as root user
-
-   Now KDiff3 should be ready to use. Type "kdiff3" to start it.
-   There should also be a entry in your KDE-start menu in "(Applications->)Development".
-
-   For creating a debug version:
-      mkdir debug
-      cd debug
-      kde4-config --prefix                           # Find out your KDE4-directory and note the result
-      cmake .. -DCMAKE_INSTALL_PREFIX=<KDE4-prefix> -DCMAKE_BUILD_TYPE=debugfull
-      make
-      sudo make install
-
-   The <KDE4-prefix> depends on your distribution:
-   The command "kde4-config --prefix" should tell you.
-   - For opensuse 12 use "/usr".
-
-- Building KDiff3 with Qt4-libs, but without KDE
-    - for Linux/Un*x
-    - for Windows
-    - for Mac
-
-   The version 0.9.98 requires Qt 4.8.0 or newer (from http://qt-project.org/) for compilation.
-
-   Recommended: Get Qt with QtCreator and use the kdiff3.pro file in src-QT4.(should also work with Qt5)
-
-   From command line: Install a working set of Qt-libs.
-   Build-instructions (Un*x, Linux, Mac):
-    Assuming Qt is correctly installed run "./configure qt4" which essentially
-    does the same as:
-    - mkdir releaseQt
-    - cd releaseQt
-    - qmake ../src-QT4/kdiff3.pro
-    - make (or "gmake", or "mingw32-make" etc.)
-
-  Debugging with MinGW under Windows:
-    - Use Qt Creator as debugger frontend!
-
-  Building KDiff3 (Qt4) for Mac OSX:
-    1) Install XCode
-    2) Install Qt with QtCreator for Mac
-    3) Proceed again by opening the kdiff3.pro file
-
-  Creating and installing the translation messages
-    The po directory contains translations from the KDE-translation teams.
-    If you use the Qt-only-version of KDiff3, then the installation described above 
-    won't install translations automatically.
-    To create and install the translations:
-    1) cd .../kdiff3-0.9.98/po
-    2) sh create_qm_files install    (asks for a super user password)
-    Just to create the files in the po directory (as needed for the windows version): 
-    2) sh create_qm_files local
-
-
-(End of KDiff3 with Qt4-instructions)
 ------------------------------------------------------------------------
 
 Additional hints
