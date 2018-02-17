@@ -472,7 +472,7 @@ class OptionComboBox : public QComboBox, public OptionItem
   private:
     OptionComboBox(const OptionIntEdit&); // private copy constructor without implementation
     int* m_pVarNum;
-    int m_preservedNumVal;
+    int m_preservedNumVal = 0;
     QString* m_pVarStr;
     QString m_preservedStrVal;
     int m_defaultVal;
@@ -1873,7 +1873,7 @@ class ConfigValueMap : public ValueMap
     KConfigGroup m_config;
 
   public:
-    ConfigValueMap(const KConfigGroup& config) : m_config(config) {}
+    explicit ConfigValueMap(const KConfigGroup& config) : m_config(config) {}
 
     void writeEntry(const QString& s, const QFont& v)
     {

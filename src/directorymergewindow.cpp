@@ -59,7 +59,7 @@ class StatusInfo : public QDialog
     QTextEdit* m_pTextEdit;
 
   public:
-    StatusInfo(QWidget* pParent) : QDialog(pParent)
+    explicit StatusInfo(QWidget* pParent) : QDialog(pParent)
     {
         QVBoxLayout* pVLayout = new QVBoxLayout(this);
         m_pTextEdit = new QTextEdit(this);
@@ -236,7 +236,7 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
 {
   public:
     DirectoryMergeWindow* q;
-    Data(DirectoryMergeWindow* pDMW)
+    explicit Data(DirectoryMergeWindow* pDMW)
     {
         q = pDMW;
         m_pOptions = 0;
@@ -377,7 +377,7 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
     {
       public:
         const FileAccess* m_pFA;
-        FileKey(const FileAccess& fa) : m_pFA(&fa) {}
+        explicit FileKey(const FileAccess& fa) : m_pFA(&fa) {}
 
         int getParents(const FileAccess* pFA, const FileAccess* v[]) const
         {
@@ -683,7 +683,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
     DirectoryMergeWindow::Data* d;
 
   public:
-    DirMergeItemDelegate(DirectoryMergeWindow* pParent)
+    explicit DirMergeItemDelegate(DirectoryMergeWindow* pParent)
         : QStyledItemDelegate(pParent), m_pDMW(pParent), d(pParent->d)
     {
     }
@@ -2380,7 +2380,7 @@ class MfiCompare
     Qt::SortOrder mOrder;
 
   public:
-    MfiCompare(Qt::SortOrder order)
+    explicit MfiCompare(Qt::SortOrder order)
     {
         mOrder = order;
     }
@@ -3296,16 +3296,19 @@ DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent)
     m_pInfoA = new QLabel(this);
     grid->addWidget(m_pInfoA, line, 1);
     ++line;
+    
     m_pB = new QLabel("B", this);
     grid->addWidget(m_pB, line, 0);
     m_pInfoB = new QLabel(this);
     grid->addWidget(m_pInfoB, line, 1);
     ++line;
+    
     m_pC = new QLabel("C", this);
     grid->addWidget(m_pC, line, 0);
     m_pInfoC = new QLabel(this);
     grid->addWidget(m_pInfoC, line, 1);
     ++line;
+    
     m_pDest = new QLabel(i18n("Dest"), this);
     grid->addWidget(m_pDest, line, 0);
     m_pInfoDest = new QLabel(this);

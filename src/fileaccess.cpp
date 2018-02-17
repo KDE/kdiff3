@@ -120,7 +120,7 @@ void FileAccess::createData()
     }
 }
 
-const FileAccess& FileAccess::operator=(const FileAccess& other)
+FileAccess& FileAccess::operator=(const FileAccess& other)
 {
     m_size = other.m_size;
     m_filePath = other.m_filePath;
@@ -1691,7 +1691,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
     bool bCaseSensitive = true;
 #endif
 
-    // Now remove all entries that don't match:
+    // Now remove all entries that should be ignored:
     t_DirectoryList::iterator i;
     for(i = pDirList->begin(); i != pDirList->end();)
     {

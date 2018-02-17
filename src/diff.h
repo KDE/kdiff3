@@ -321,20 +321,21 @@ void calcDiff3LineVector( Diff3LineList& d3ll, Diff3LineVector& d3lv );
 class Selection
 {
 public:
-   Selection(){ reset(); oldLastLine=-1; lastLine=-1; oldFirstLine=-1; }
-   int firstLine;
-   int firstPos;
-   int lastLine;
-   int lastPos;
-   int oldLastLine;
-   int oldFirstLine;
-   bool bSelectionContainsData;
-   bool isEmpty() { return firstLine==-1 || (firstLine==lastLine && firstPos==lastPos) || bSelectionContainsData==false;}
-   void reset(){
-      oldFirstLine=firstLine;
-      oldLastLine =lastLine;
-      firstLine=-1;
-      lastLine=-1;
+  Selection(){}
+  int firstLine = -1;
+  int firstPos = -1;
+  int lastLine = -1;
+  int lastPos = -1;
+  int oldLastLine = -1;
+  int oldFirstLine = -1;
+  bool bSelectionContainsData = false;
+  bool isEmpty() { return firstLine == -1 || (firstLine == lastLine && firstPos == lastPos) || bSelectionContainsData == false; }
+  void reset()
+  {
+      oldFirstLine = firstLine;
+      oldLastLine = lastLine;
+      firstLine = -1;
+      lastLine = -1;
       bSelectionContainsData = false;
    }
    void start( int l, int p ) { firstLine = l; firstPos = p; }

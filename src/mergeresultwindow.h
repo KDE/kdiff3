@@ -32,7 +32,7 @@ class Overview : public QWidget
 {
    Q_OBJECT
 public:
-   Overview( Options* pOptions );
+   explicit Overview( Options* pOptions );
 
    void init( Diff3LineList* pDiff3LineList, bool bTripleDiff );
    void reset();
@@ -444,7 +444,7 @@ private:
    QComboBox*   m_pEncodingSelector;
    Options*     m_pOptions;
 public:
-   WindowTitleWidget(Options* pOptions);
+   explicit WindowTitleWidget(Options* pOptions);
    QTextCodec* getEncoding();
    void        setFileName(const QString& fileName );
    QString     getFileName();

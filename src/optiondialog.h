@@ -117,7 +117,7 @@ class FontChooser : public QGroupBox
    QPlainTextEdit* m_pExampleTextEdit;
    QLabel* m_pLabel;
 public:
-   FontChooser( QWidget* pParent );
+   explicit FontChooser( QWidget* pParent );
    QFont font();
    void setFont( const QFont&, bool );
 private slots:

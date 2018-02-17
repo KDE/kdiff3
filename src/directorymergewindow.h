@@ -158,7 +158,7 @@ class DirectoryMergeInfo : public QFrame
 {
    Q_OBJECT
 public:
-   DirectoryMergeInfo( QWidget* pParent );
+   explicit DirectoryMergeInfo( QWidget* pParent );
    void setInfo(
       const FileAccess& APath,
       const FileAccess& BPath,

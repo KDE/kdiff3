@@ -68,7 +68,7 @@ class FindDialog : public QDialog
 {
    Q_OBJECT
 public:
-   FindDialog(QWidget* pParent);
+   explicit FindDialog(QWidget* pParent);
    void setVisible(bool); //override QDialog::setVisible()
 
 Q_SIGNALS:

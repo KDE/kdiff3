@@ -43,7 +43,7 @@ public:
    ~FileAccess();
    FileAccess( const QString& name, bool bWantToWrite=false ); // name: local file or dirname or url (when supported)
    FileAccess(const FileAccess& other);
-   const FileAccess& operator=(const FileAccess& other);
+   FileAccess& operator=(const FileAccess& other);
    void setFile( const QString& name, bool bWantToWrite=false );
 
    bool isValid() const;
@@ -134,7 +134,7 @@ class FileAccessJobHandler : public QObject
 {
    Q_OBJECT
 public:
-   FileAccessJobHandler( FileAccess* pFileAccess );
+   explicit FileAccessJobHandler( FileAccess* pFileAccess );
 
    bool get( void* pDestBuffer, long maxLength );
    bool put( const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume=false, int permissions=-1 );
@@ -155,16 +155,16 @@ private:
 
    // Data needed during Job
    qint64 m_transferredBytes;
-   char* m_pTransferBuffer;  // Needed during get or put
+   char* m_pTransferBuffer = NULL;  // Needed during get or put
    qint64 m_maxLength;
 
    QString m_filePattern;
    QString m_fileAntiPattern;
    QString m_dirAntiPattern;
-   t_DirectoryList* m_pDirList;
-   bool m_bFindHidden;
-   bool m_bRecursive;
-   bool m_bFollowDirLinks;
+   t_DirectoryList* m_pDirList = NULL;
+   bool m_bFindHidden = false;
+   bool m_bRecursive = false;
+   bool m_bFollowDirLinks = false;
 
    bool scanLocalDirectory( const QString& dirName, t_DirectoryList* dirList );
 

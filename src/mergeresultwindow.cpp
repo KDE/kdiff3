@@ -3047,6 +3047,9 @@ Overview::Overview(Options* pOptions)
     m_eOverviewMode = eOMNormal;
     m_nofLines = 1;
     m_bPaintingAllowed = false;
+    m_firstLine = 0;
+    m_pageHeight = 0;
+    
     setFixedWidth(20);
 }
 

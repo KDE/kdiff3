@@ -1312,7 +1312,7 @@ void calcDiff3LineListUsingBC(
                             {
                                 i3_last_equal_A = i3;
                             }
-                            i3++;
+                            ++i3;
                         }
 
                         /* If i3_last_equal_A isn't still set to d3ll.end(), then
@@ -1389,7 +1389,7 @@ void calcDiff3LineListUsingBC(
                             {
                                 i3_last_equal_A = i3;
                             }
-                            i3++;
+                            ++i3;
                         }
 
                         /* If i3_last_equal_A isn't still set to d3ll.end(), then

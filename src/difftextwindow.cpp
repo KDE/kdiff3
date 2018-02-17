@@ -50,7 +50,7 @@ static QAtomicInt s_runnableCount = 0;
 class DiffTextWindowData
 {
   public:
-    DiffTextWindowData(DiffTextWindow* p)
+    explicit DiffTextWindowData(DiffTextWindow* p)
     {
         m_pDiffTextWindow = p;
         m_bPaintingAllowed = false;
@@ -83,7 +83,7 @@ class DiffTextWindowData
 #endif
     }
     DiffTextWindow* m_pDiffTextWindow;
-    DiffTextWindowFrame* m_pDiffTextWindowFrame;
+    DiffTextWindowFrame* m_pDiffTextWindowFrame = NULL;
     QTextCodec* m_pTextCodec;
     e_LineEndStyle m_eLineEndStyle;
 
