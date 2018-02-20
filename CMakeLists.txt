@@ -63,16 +63,21 @@ set(
     cxx_auto_type
 )
 
-#make sure we get warnings about using deprecated functions in qt.
-add_definitions(-DQT_DEPRECATED_WARNINGS -DQT_NO_URL_CAST_FROM_STRING)
+
+add_definitions(
+    -DQT_DEPRECATED_WARNINGS #Get warnings from QT about deprated functions.
+    -DQT_NO_URL_CAST_FROM_STRING #implict casting from string to url does not always behave as you might think
+)
 #remove unnneeded errors
-remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_KEYWORDS)
+remove_definitions(
+    -DQT_NO_CAST_FROM_ASCII #While a good idea in gerneral this triggers for many simple no translable strings
+    )
 
 include_directories( 
     ${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIRS}
     ${Qt5PrintSupport_INCLUDE_DIRS}
     ${CMAKE_CURRENT_BINARY_DIR}
-    )
+)
 
 add_subdirectory(src)
 add_subdirectory(doc)
