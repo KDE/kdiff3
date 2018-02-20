@@ -21,8 +21,8 @@
 #ifndef _KDIFF3FILEITEMACTIONPLUGIN_H_
 #define _KDIFF3FILEITEMACTIONPLUGIN_H_
 
-#include <kabstractfileitemactionplugin.h>
-#include <kfileitemlistproperties.h>
+#include <KAbstractFileItemActionPlugin>
+#include <KFileItemListProperties>
 #include <QStringList>
 
 class QStringList;
