@@ -82,20 +82,7 @@ include_directories(
 add_subdirectory(src)
 add_subdirectory(doc)
 
-find_file(KFILEITEMACTIONPLUGIN_FOUND kabstractfileitemactionplugin.h PATHS)
-if(KFILEITEMACTIONPLUGIN_FOUND)
-  message(STATUS "")
-  message(STATUS "kabstractfileitemactionplugin.h found........... YES")
-  message(STATUS "   => kdiff3fileitemactionplugin (KDiff3 contextmenu plugin for Konqueror/Dolphin) will be built.")
-  message(STATUS "")
-
-  add_subdirectory(kdiff3fileitemactionplugin)
-else(KFILEITEMACTIONPLUGIN_FOUND)
-  message(STATUS "")
-  message(STATUS "kabstractfileitemactionplugin.h found........... NO")
-  message(STATUS "   => kdiff3fileitemactionplugin (KDiff3 contextmenu plugin for Konqueror/Dolphin) will not be built.)")
-  message(STATUS "No automatic fallback provided current configuration is not supported for plugin...")
-endif(KFILEITEMACTIONPLUGIN_FOUND)
+add_subdirectory(kdiff3fileitemactionplugin)
 
 ki18n_install(po)
 kdoctools_install(po)
