@@ -346,7 +346,7 @@ bool SourceData::FileData::readFile(const QString& filename)
     bool bSuccess = fa.readFile(pBuf, m_size);
     if(!bSuccess)
     {
-        delete pBuf;
+        delete[] pBuf;
         m_pBuf = 0;
         m_size = 0;
     }

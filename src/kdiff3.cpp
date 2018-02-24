@@ -157,7 +157,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
     }
 
     // All default values must be set before calling readOptions().
-    m_pOptionDialog = new OptionDialog(m_pKDiff3Shell != 0, this);
+    m_pOptionDialog = new OptionDialog(m_pKDiff3Shell != NULL, this);
     connect(m_pOptionDialog, &OptionDialog::applyDone, this, &KDiff3App::slotRefresh);
 
     // This is just a convenience variable to make code that accesses options more readable
@@ -515,9 +515,10 @@ KDiff3App::~KDiff3App()
 
 void KDiff3App::initActions(KActionCollection* ac)
 {
-    if(ac == 0)
+    if(ac == 0){
         KMessageBox::error(0, "actionCollection==0");
-
+        exit(-1);//we cann't recover from this.
+    }
     fileOpen = KStandardAction::open(this, SLOT(slotFileOpen()), ac);
     fileOpen->setStatusTip(i18n("Opens documents for comparison..."));
 
@@ -811,7 +812,7 @@ void printDiffTextWindow(MyPainter& painter, const QRect& view, const QString& h
 
 void KDiff3App::slotFilePrint()
 {
-    if(!m_pDiffTextWindow1)
+    if(m_pDiffTextWindow1 == NULL)
         return;
 #ifdef QT_NO_PRINTER
     slotStatusMsg(i18n("Printing not implemented."));
@@ -822,9 +823,9 @@ void KDiff3App::slotFilePrint()
 
     int firstSelectionD3LIdx = -1;
     int lastSelectionD3LIdx = -1;
-    if(m_pDiffTextWindow1) {
-        m_pDiffTextWindow1->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
-    }
+    
+    m_pDiffTextWindow1->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
+    
     if(firstSelectionD3LIdx < 0 && m_pDiffTextWindow2) {
         m_pDiffTextWindow2->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
     }

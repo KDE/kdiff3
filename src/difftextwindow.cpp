@@ -1488,7 +1488,7 @@ void DiffTextWindow::setSelection(int firstLine, int startPos, int lastLine, int
             endPos = d->m_pLineData[line].width(d->m_pOptions->m_tabSize);
     }
 
-    if(d->m_bWordWrap && d->m_pDiff3LineVector != 0)
+    if(d->m_bWordWrap && d->m_pDiff3LineVector != NULL)
     {
         QString s1 = d->getString(firstLine);
         int firstWrapLine = convertDiff3LineIdxToLine(firstLine);
@@ -1517,10 +1517,12 @@ void DiffTextWindow::setSelection(int firstLine, int startPos, int lastLine, int
     }
     else
     {
-        d->m_selection.start(firstLine, convertToPosOnScreen(d->getString(firstLine), startPos, d->m_pOptions->m_tabSize));
-        d->m_selection.end(lastLine, convertToPosOnScreen(d->getString(lastLine), endPos, d->m_pOptions->m_tabSize));
-        l = firstLine;
-        p = startPos;
+        if(d->m_pDiff3LineVector != NULL){
+            d->m_selection.start(firstLine, convertToPosOnScreen(d->getString(firstLine), startPos, d->m_pOptions->m_tabSize));
+            d->m_selection.end(lastLine, convertToPosOnScreen(d->getString(lastLine), endPos, d->m_pOptions->m_tabSize));
+            l = firstLine;
+            p = startPos;
+        }
     }
     update();
 }
