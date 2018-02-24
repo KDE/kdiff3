@@ -47,7 +47,7 @@ public:
 
     // These are the results of the option dialog.
     QFont m_font;
-    bool m_bItalicForDeltas;
+    //bool m_bItalicForDeltas;
     QFont m_appFont;
 
     QColor m_fgColor;

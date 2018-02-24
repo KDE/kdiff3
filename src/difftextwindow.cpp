@@ -895,7 +895,8 @@ void DiffTextWindowData::writeLine(
 {
     QFont normalFont = p.font();
     QFont diffFont = normalFont;
-    diffFont.setItalic(m_pOptions->m_bItalicForDeltas);
+    //never set
+    //diffFont.setItalic(m_pOptions->m_bItalicForDeltas);
     const QFontMetrics& fm = p.fontMetrics();
     int fontHeight = fm.lineSpacing();
     int fontAscent = fm.ascent();
