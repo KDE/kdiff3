@@ -66,7 +66,7 @@
 
 KActionCollection* KDiff3App::actionCollection()
 {
-    if(m_pKDiff3Shell == 0)
+    if(m_pKDiff3Shell == nullptr)
         return m_pKDiff3Part->actionCollection();
     else
         return m_pKDiff3Shell->actionCollection();
@@ -74,16 +74,16 @@ KActionCollection* KDiff3App::actionCollection()
 
 QStatusBar* KDiff3App::statusBar()
 {
-    if(m_pKDiff3Shell == 0)
-        return 0;
+    if(m_pKDiff3Shell == nullptr)
+        return nullptr;
     else
         return m_pKDiff3Shell->statusBar();
 }
 
 KToolBar* KDiff3App::toolBar(const char* toolBarId)
 {
-    if(m_pKDiff3Shell == 0)
-        return 0;
+    if(m_pKDiff3Shell == nullptr)
+        return nullptr;
     else
         return m_pKDiff3Shell->toolBar(toolBarId);
     //return m_pKDiff3Shell->toolBar();
@@ -91,7 +91,7 @@ KToolBar* KDiff3App::toolBar(const char* toolBarId)
 
 bool KDiff3App::isPart()
 {
-    return m_pKDiff3Shell == 0;
+    return m_pKDiff3Shell == nullptr;
 }
 
 bool KDiff3App::isFileSaved()
@@ -121,32 +121,32 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
     pal.setColor(QPalette::Text, pal.color(QPalette::Active, QPalette::Text));
     setPalette(pal);
 
-    m_pMainSplitter = 0;
-    m_pDirectoryMergeSplitter = 0;
-    m_pDirectoryMergeWindow = 0;
-    m_pCornerWidget = 0;
-    m_pMainWidget = 0;
-    m_pDiffTextWindow1 = 0;
-    m_pDiffTextWindow2 = 0;
-    m_pDiffTextWindow3 = 0;
-    m_pDiffTextWindowFrame1 = 0;
-    m_pDiffTextWindowFrame2 = 0;
-    m_pDiffTextWindowFrame3 = 0;
-    m_pDiffWindowSplitter = 0;
-    m_pOverview = 0;
+    m_pMainSplitter = nullptr;
+    m_pDirectoryMergeSplitter = nullptr;
+    m_pDirectoryMergeWindow = nullptr;
+    m_pCornerWidget = nullptr;
+    m_pMainWidget = nullptr;
+    m_pDiffTextWindow1 = nullptr;
+    m_pDiffTextWindow2 = nullptr;
+    m_pDiffTextWindow3 = nullptr;
+    m_pDiffTextWindowFrame1 = nullptr;
+    m_pDiffTextWindowFrame2 = nullptr;
+    m_pDiffTextWindowFrame3 = nullptr;
+    m_pDiffWindowSplitter = nullptr;
+    m_pOverview = nullptr;
     m_bTripleDiff = false;
-    m_pMergeResultWindow = 0;
-    m_pMergeWindowFrame = 0;
+    m_pMergeResultWindow = nullptr;
+    m_pMergeWindowFrame = nullptr;
     m_bOutputModified = false;
     m_bFileSaved = false;
     m_bTimerBlock = false;
-    m_pHScrollBar = 0;
-    m_pDiffVScrollBar = 0;
-    m_pMergeVScrollBar = 0;
-    viewToolBar = 0;
+    m_pHScrollBar = nullptr;
+    m_pDiffVScrollBar = nullptr;
+    m_pMergeVScrollBar = nullptr;
+    viewToolBar = nullptr;
     m_bRecalcWordWrapPosted = false;
     m_bFinishMainInit = false;
-    m_pEventLoopForPrinting = 0;
+    m_pEventLoopForPrinting = nullptr;
     m_bLoadFiles = false;
 
     // Needed before any file operations via FileAccess happen.
@@ -157,7 +157,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
     }
 
     // All default values must be set before calling readOptions().
-    m_pOptionDialog = new OptionDialog(m_pKDiff3Shell != NULL, this);
+    m_pOptionDialog = new OptionDialog(m_pKDiff3Shell != nullptr, this);
     connect(m_pOptionDialog, &OptionDialog::applyDone, this, &KDiff3App::slotRefresh);
 
     // This is just a convenience variable to make code that accesses options more readable
@@ -360,14 +360,14 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
     delete KDiff3Shell::getParser();
     //if( args != 0 )  args->clear(); // Free up some memory.
 
-    if(m_pKDiff3Shell == 0) {
+    if(m_pKDiff3Shell == nullptr) {
         completeInit();
     }
 }
 
 void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)
 {
-    if(m_pKDiff3Shell != 0)
+    if(m_pKDiff3Shell != nullptr)
     {
         QSize size = m_pOptions->m_geometry;
         QPoint pos = m_pOptions->m_position;
@@ -411,7 +411,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         mainInit();
         if(m_bAutoMode)
         {
-            SourceData* pSD = 0;
+            SourceData* pSD = nullptr;
             if(m_sd3.isEmpty()) {
                 if(m_totalDiffStatus.bBinaryAEqB) {
                     pSD = &m_sd1;
@@ -432,7 +432,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
                 }
             }
 
-            if(pSD != 0)
+            if(pSD != nullptr)
             {
                 // Save this file directly, not via the merge result window.
                 bool bSuccess = false;
@@ -469,14 +469,14 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
     g_pProgressDialog->setStayHidden(false);
 
-    if(statusBar() != 0)
+    if(statusBar() != nullptr)
         statusBar()->setSizeGripEnabled(true);
 
     slotClipboardChanged(); // For initialisation.
 
     slotUpdateAvailabilities();
 
-    if(!m_bDirCompare && m_pKDiff3Shell != 0)
+    if(!m_bDirCompare && m_pKDiff3Shell != nullptr)
     {
         bool bFileOpenError = false;
         if((!m_sd1.isEmpty() && !m_sd1.hasData()) ||
@@ -515,8 +515,8 @@ KDiff3App::~KDiff3App()
 
 void KDiff3App::initActions(KActionCollection* ac)
 {
-    if(ac == 0){
-        KMessageBox::error(0, "actionCollection==0");
+    if(ac == nullptr){
+        KMessageBox::error(nullptr, "actionCollection==0");
         exit(-1);//we cann't recover from this.
     }
     fileOpen = KStandardAction::open(this, SLOT(slotFileOpen()), ac);
@@ -660,7 +660,7 @@ void KDiff3App::initStatusBar()
 {
     ///////////////////////////////////////////////////////////////////
     // STATUSBAR
-    if(statusBar() != 0)
+    if(statusBar() != nullptr)
         statusBar()->showMessage(i18n("Ready."));
 }
 
@@ -756,7 +756,7 @@ void KDiff3App::slotFileSaveAs()
 {
     slotStatusMsg(i18n("Saving file with a new filename..."));
 
-    QString s = QFileDialog::getSaveFileUrl(this, i18n("Save As..."), QUrl::fromLocalFile(QDir::currentPath()), 0).url(QUrl::PreferLocalFile);
+    QString s = QFileDialog::getSaveFileUrl(this, i18n("Save As..."), QUrl::fromLocalFile(QDir::currentPath()), nullptr).url(QUrl::PreferLocalFile);
     if(!s.isEmpty()) {
         m_outputFilename = s;
         m_pMergeResultWindowTitle->setFileName(m_outputFilename);
@@ -812,7 +812,7 @@ void printDiffTextWindow(MyPainter& painter, const QRect& view, const QString& h
 
 void KDiff3App::slotFilePrint()
 {
-    if(m_pDiffTextWindow1 == NULL)
+    if(m_pDiffTextWindow1 == nullptr)
         return;
 #ifdef QT_NO_PRINTER
     slotStatusMsg(i18n("Printing not implemented."));
@@ -1044,12 +1044,12 @@ void KDiff3App::slotFileQuit()
 
 void KDiff3App::slotViewToolBar()
 {
-    assert(viewToolBar != 0);
+    assert(viewToolBar != nullptr);
     slotStatusMsg(i18n("Toggling toolbar..."));
     m_pOptions->m_bShowToolBar = viewToolBar->isChecked();
     ///////////////////////////////////////////////////////////////////
     // turn Toolbar on or off
-    if(toolBar(MAIN_TOOLBAR_NAME) != 0)
+    if(toolBar(MAIN_TOOLBAR_NAME) != nullptr)
     {
         if(!m_pOptions->m_bShowToolBar)
         {
@@ -1070,7 +1070,7 @@ void KDiff3App::slotViewStatusBar()
     m_pOptions->m_bShowStatusBar = viewStatusBar->isChecked();
     ///////////////////////////////////////////////////////////////////
     //turn Statusbar on or off
-    if(statusBar() != 0)
+    if(statusBar() != nullptr)
     {
         if(!viewStatusBar->isChecked())
         {
@@ -1089,7 +1089,7 @@ void KDiff3App::slotStatusMsg(const QString& text)
 {
     ///////////////////////////////////////////////////////////////////
     // change status message permanently
-    if(statusBar() != 0)
+    if(statusBar() != nullptr)
     {
         statusBar()->clearMessage();
         statusBar()->showMessage(text);

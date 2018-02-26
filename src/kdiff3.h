@@ -317,7 +317,7 @@ class KDiff3App : public QSplitter
    Options*      m_pOptions;
    FindDialog*   m_pFindDialog;
 
-   void mainInit( TotalDiffStatus* pTotalDiffStatus=0, bool bLoadFiles=true, bool bUseCurrentEncoding = false);
+   void mainInit( TotalDiffStatus* pTotalDiffStatus=nullptr, bool bLoadFiles=true, bool bUseCurrentEncoding = false);
    bool m_bFinishMainInit;
    bool m_bLoadFiles;
 

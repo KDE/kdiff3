@@ -116,7 +116,7 @@ public:
    void reset();
 
    bool saveDocument( const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle );
-   int getNrOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts=0);
+   int getNrOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts=nullptr);
    void choose(int selector);
    void chooseGlobal(int selector, bool bConflictsOnly, bool bWhiteSpaceOnly );
 
@@ -231,7 +231,7 @@ private:
       typedef std::list<MergeEditLine>::iterator iterator;
       typedef std::list<MergeEditLine>::reverse_iterator reverse_iterator;
       typedef std::list<MergeEditLine>::const_iterator const_iterator;
-      MergeEditLineList(){m_size=0; m_pTotalSize=0; }
+      MergeEditLineList(){m_size=0; m_pTotalSize=nullptr; }
       void clear()                             { ds(-m_size); BASE::clear();          }
       void push_back( const MergeEditLine& m)  { ds(+1); BASE::push_back(m);     }
       void push_front( const MergeEditLine& m) { ds(+1); BASE::push_front(m);    }
@@ -249,8 +249,8 @@ private:
       void splice(iterator destPos, MergeEditLineList& srcList, iterator srcFirst, iterator srcLast)
       {
          int* pTotalSize = getTotalSizePtr() ? getTotalSizePtr() : srcList.getTotalSizePtr();
-         srcList.setTotalSizePtr(0); // Force size-recalc after splice, because splice doesn't handle size-tracking
-         setTotalSizePtr(0);
+         srcList.setTotalSizePtr(nullptr); // Force size-recalc after splice, because splice doesn't handle size-tracking
+         setTotalSizePtr(nullptr);
          BASE::splice( destPos, srcList, srcFirst, srcLast );
          srcList.setTotalSizePtr( pTotalSize );
          setTotalSizePtr( pTotalSize );
@@ -258,8 +258,8 @@ private:
 
       void setTotalSizePtr(int* pTotalSize)
       {
-         if ( pTotalSize==0 && m_pTotalSize!=0 ) { *m_pTotalSize -= size(); }
-         else if ( pTotalSize!=0 && m_pTotalSize==0 ) { *pTotalSize += size(); }
+         if ( pTotalSize==nullptr && m_pTotalSize!=nullptr ) { *m_pTotalSize -= size(); }
+         else if ( pTotalSize!=nullptr && m_pTotalSize==nullptr ) { *pTotalSize += size(); }
          m_pTotalSize = pTotalSize;
       }
       int* getTotalSizePtr()
@@ -271,7 +271,7 @@ private:
       void ds(int deltaSize) 
       {
          m_size+=deltaSize; 
-         if (m_pTotalSize!=0)  *m_pTotalSize+=deltaSize;
+         if (m_pTotalSize!=nullptr)  *m_pTotalSize+=deltaSize;
       }
    };
 

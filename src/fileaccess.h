@@ -155,13 +155,13 @@ private:
 
    // Data needed during Job
    qint64 m_transferredBytes;
-   char* m_pTransferBuffer = NULL;  // Needed during get or put
+   char* m_pTransferBuffer = nullptr;  // Needed during get or put
    qint64 m_maxLength;
 
    QString m_filePattern;
    QString m_fileAntiPattern;
    QString m_dirAntiPattern;
-   t_DirectoryList* m_pDirList = NULL;
+   t_DirectoryList* m_pDirList = nullptr;
    bool m_bFindHidden = false;
    bool m_bRecursive = false;
    bool m_bFollowDirLinks = false;

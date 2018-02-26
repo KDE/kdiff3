@@ -31,7 +31,7 @@
 #include "gnudiff_diff.h"
 /* If non NULL, call this function when memory is exhausted. */
 //void (*xalloc_fail_func) PARAMS ((void)) = 0;
-void (*xalloc_fail_func)(void) = 0;
+void (*xalloc_fail_func)(void) = nullptr;
 
 void GnuDiff::xalloc_die(void)
 {
@@ -52,7 +52,7 @@ GnuDiff::xmalloc(size_t n)
     void *p;
 
     p = malloc(n == 0 ? 1 : n); // There are systems where malloc returns 0 for n==0.
-    if(p == 0)
+    if(p == nullptr)
         xalloc_die();
     return p;
 }
@@ -64,7 +64,7 @@ void *
 GnuDiff::xrealloc(void *p, size_t n)
 {
     p = realloc(p, n == 0 ? 1 : n);
-    if(p == 0)
+    if(p == nullptr)
         xalloc_die();
     return p;
 }

@@ -35,7 +35,7 @@ namespace KDiff3 {
                    const char* slot, 
                    KActionCollection* ac, 
                    const char* actionName)    {
-      assert( ac != 0 );
+      assert( ac != nullptr );
       QAction * theAction = ac->addAction( actionName );
       theAction->setText( text );
       QObject::connect( theAction, SIGNAL( triggered() ), receiver, slot );
@@ -48,7 +48,7 @@ namespace KDiff3 {
                    const char* slot, 
                    KActionCollection* ac, 
                    const char* actionName)    {
-      assert( ac != 0 );
+      assert( ac != nullptr );
       KToggleAction* theAction = new KToggleAction(ac);
       ac->addAction( actionName, theAction );
       theAction->setText( text );

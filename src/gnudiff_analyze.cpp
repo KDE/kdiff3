@@ -718,7 +718,7 @@ GnuDiff::change *GnuDiff::add_change(lin line0, lin line1, lin deleted, lin inse
 
 GnuDiff::change *GnuDiff::build_reverse_script(struct file_data const filevec[])
 {
-    struct change *script = 0;
+    struct change *script = nullptr;
     bool *changed0 = filevec[0].changed;
     bool *changed1 = filevec[1].changed;
     lin len0 = filevec[0].buffered_lines;
@@ -754,7 +754,7 @@ GnuDiff::change *GnuDiff::build_reverse_script(struct file_data const filevec[])
 
 GnuDiff::change *GnuDiff::build_script(struct file_data const filevec[])
 {
-    struct change *script = 0;
+    struct change *script = nullptr;
     bool *changed0 = filevec[0].changed;
     bool *changed1 = filevec[1].changed;
     lin i0 = filevec[0].buffered_lines, i1 = filevec[1].buffered_lines;

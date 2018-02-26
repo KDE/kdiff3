@@ -76,15 +76,15 @@ MergeResultWindow::MergeResultWindow(
     m_bModified = false;
     m_eOverviewMode = Overview::eOMNormal;
 
-    m_pldA = 0;
-    m_pldB = 0;
-    m_pldC = 0;
+    m_pldA = nullptr;
+    m_pldB = nullptr;
+    m_pldC = nullptr;
     m_sizeA = 0;
     m_sizeB = 0;
     m_sizeC = 0;
 
-    m_pDiff3LineList = 0;
-    m_pTotalDiffStatus = 0;
+    m_pDiff3LineList = nullptr;
+    m_pTotalDiffStatus = nullptr;
     m_pStatusBar = pStatusBar;
     if(m_pStatusBar)
         connect(m_pStatusBar, SIGNAL(messageChanged(const QString&)), this, SLOT(slotStatusMessageChanged(const QString&)));
@@ -171,11 +171,11 @@ void MergeResultWindow::slotStatusMessageChanged(const QString& s)
 
 void MergeResultWindow::reset()
 {
-    m_pDiff3LineList = 0;
-    m_pTotalDiffStatus = 0;
-    m_pldA = 0;
-    m_pldB = 0;
-    m_pldC = 0;
+    m_pDiff3LineList = nullptr;
+    m_pTotalDiffStatus = nullptr;
+    m_pldA = nullptr;
+    m_pldB = nullptr;
+    m_pldC = nullptr;
     if(!m_persistentStatusMessage.isEmpty())
     {
         m_persistentStatusMessage = QString();
@@ -197,7 +197,7 @@ void mergeOneLine(
     {
         if(d.lineA != -1 && d.lineB != -1)
         {
-            if(d.pFineAB == 0)
+            if(d.pFineAB == nullptr)
             {
                 mergeDetails = eNoChange;
                 src = A;
@@ -227,27 +227,27 @@ void mergeOneLine(
     // A is base.
     if(d.lineA != -1 && d.lineB != -1 && d.lineC != -1)
     {
-        if(d.pFineAB == 0 && d.pFineBC == 0 && d.pFineCA == 0)
+        if(d.pFineAB == nullptr && d.pFineBC == nullptr && d.pFineCA == nullptr)
         {
             mergeDetails = eNoChange;
             src = A;
         }
-        else if(d.pFineAB == 0 && d.pFineBC != 0 && d.pFineCA != 0)
+        else if(d.pFineAB == nullptr && d.pFineBC != nullptr && d.pFineCA != nullptr)
         {
             mergeDetails = eCChanged;
             src = C;
         }
-        else if(d.pFineAB != 0 && d.pFineBC != 0 && d.pFineCA == 0)
+        else if(d.pFineAB != nullptr && d.pFineBC != nullptr && d.pFineCA == nullptr)
         {
             mergeDetails = eBChanged;
             src = B;
         }
-        else if(d.pFineAB != 0 && d.pFineBC == 0 && d.pFineCA != 0)
+        else if(d.pFineAB != nullptr && d.pFineBC == nullptr && d.pFineCA != nullptr)
         {
             mergeDetails = eBCChangedAndEqual;
             src = C;
         }
-        else if(d.pFineAB != 0 && d.pFineBC != 0 && d.pFineCA != 0)
+        else if(d.pFineAB != nullptr && d.pFineBC != nullptr && d.pFineCA != nullptr)
         {
             mergeDetails = eBCChanged;
             bConflict = true;
@@ -257,7 +257,7 @@ void mergeOneLine(
     }
     else if(d.lineA != -1 && d.lineB != -1 && d.lineC == -1)
     {
-        if(d.pFineAB != 0)
+        if(d.pFineAB != nullptr)
         {
             mergeDetails = eBChanged_CDeleted;
             bConflict = true;
@@ -271,7 +271,7 @@ void mergeOneLine(
     }
     else if(d.lineA != -1 && d.lineB == -1 && d.lineC != -1)
     {
-        if(d.pFineCA != 0)
+        if(d.pFineCA != nullptr)
         {
             mergeDetails = eCChanged_BDeleted;
             bConflict = true;
@@ -285,7 +285,7 @@ void mergeOneLine(
     }
     else if(d.lineA == -1 && d.lineB != -1 && d.lineC != -1)
     {
-        if(d.pFineBC != 0)
+        if(d.pFineBC != nullptr)
         {
             mergeDetails = eBCAdded;
             bConflict = true;
@@ -356,12 +356,12 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
 
             MergeLine ml;
             bool bLineRemoved;
-            mergeOneLine(d, ml.mergeDetails, ml.bConflict, bLineRemoved, ml.srcSelect, m_pldC == 0);
+            mergeOneLine(d, ml.mergeDetails, ml.bConflict, bLineRemoved, ml.srcSelect, m_pldC == nullptr);
 
             // Automatic solving for only whitespace changes.
             if(ml.bConflict &&
-               ((m_pldC == 0 && (d.bAEqB || (d.bWhiteLineA && d.bWhiteLineB))) ||
-                (m_pldC != 0 && ((d.bAEqB && d.bAEqC) || (d.bWhiteLineA && d.bWhiteLineB && d.bWhiteLineC)))))
+               ((m_pldC == nullptr && (d.bAEqB || (d.bWhiteLineA && d.bWhiteLineB))) ||
+                (m_pldC != nullptr && ((d.bAEqB && d.bAEqC) || (d.bWhiteLineA && d.bWhiteLineB && d.bWhiteLineC)))))
             {
                 ml.bWhiteSpaceConflict = true;
             }
@@ -371,9 +371,9 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
             ml.id3l = it;
             ml.srcRangeLength = 1;
 
-            MergeLine* back = m_mergeLineList.empty() ? 0 : &m_mergeLineList.back();
+            MergeLine* back = m_mergeLineList.empty() ? nullptr : &m_mergeLineList.back();
 
-            bool bSame = back != 0 && sameKindCheck(ml, *back);
+            bool bSame = back != nullptr && sameKindCheck(ml, *back);
             if(bSame)
             {
                 ++back->srcRangeLength;
@@ -393,7 +393,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
                 mel.setSource(ml.srcSelect, bLineRemoved);
                 tmpBack.mergeEditLineList.push_back(mel);
             }
-            else if(back == 0 || !back->bConflict || !bSame)
+            else if(back == nullptr || !back->bConflict || !bSame)
             {
                 MergeLine& tmpBack = m_mergeLineList.back();
                 MergeEditLine mel(ml.id3l);
@@ -406,13 +406,13 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
     bool bSolveWhiteSpaceConflicts = false;
     if(bAutoSolve) // when true, then the other params are not used and we can change them here. (see all invocations of merge())
     {
-        if(m_pldC == 0 && m_pOptions->m_whiteSpace2FileMergeDefault != 0) // Only two inputs
+        if(m_pldC == nullptr && m_pOptions->m_whiteSpace2FileMergeDefault != 0) // Only two inputs
         {
             defaultSelector = m_pOptions->m_whiteSpace2FileMergeDefault;
             bWhiteSpaceOnly = true;
             bSolveWhiteSpaceConflicts = true;
         }
-        else if(m_pldC != 0 && m_pOptions->m_whiteSpace3FileMergeDefault != 0)
+        else if(m_pldC != nullptr && m_pOptions->m_whiteSpace3FileMergeDefault != 0)
         {
             defaultSelector = m_pOptions->m_whiteSpace3FileMergeDefault;
             bWhiteSpaceOnly = true;
@@ -504,7 +504,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
             slotMergeHistory();
         if(m_pOptions->m_bRunRegExpAutoMergeOnMergeStart)
             slotRegExpAutoMerge();
-        if(m_pldC != 0 && !doRelevantChangesExist())
+        if(m_pldC != nullptr && !doRelevantChangesExist())
             emit noRelevantChangesDetected();
     }
 
@@ -869,7 +869,7 @@ void MergeResultWindow::slotSetFastSelectorLine(int line)
 int MergeResultWindow::getNrOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts)
 {
     int nrOfUnsolvedConflicts = 0;
-    if(pNrOfWhiteSpaceConflicts != 0)
+    if(pNrOfWhiteSpaceConflicts != nullptr)
         *pNrOfWhiteSpaceConflicts = 0;
 
     MergeLineList::iterator mlIt = m_mergeLineList.begin();
@@ -880,7 +880,7 @@ int MergeResultWindow::getNrOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts)
         if(melIt->isConflict())
         {
             ++nrOfUnsolvedConflicts;
-            if(ml.bWhiteSpaceConflict && pNrOfWhiteSpaceConflicts != 0)
+            if(ml.bWhiteSpaceConflict && pNrOfWhiteSpaceConflicts != nullptr)
                 ++*pNrOfWhiteSpaceConflicts;
         }
     }
@@ -1346,14 +1346,14 @@ void MergeResultWindow::slotMergeHistory()
     int d3lHistoryEndLineIdx = -1;
 
     // Search for history start, history end in the diff3LineList
-    findHistoryRange(QRegExp(m_pOptions->m_historyStartRegExp), m_pldC != 0, m_pDiff3LineList, iD3LHistoryBegin, iD3LHistoryEnd, d3lHistoryBeginLineIdx, d3lHistoryEndLineIdx);
+    findHistoryRange(QRegExp(m_pOptions->m_historyStartRegExp), m_pldC != nullptr, m_pDiff3LineList, iD3LHistoryBegin, iD3LHistoryEnd, d3lHistoryBeginLineIdx, d3lHistoryEndLineIdx);
 
     if(iD3LHistoryBegin != m_pDiff3LineList->end())
     {
         // Now collect the historyMap information
         HistoryMap historyMap;
         std::list<HistoryMap::iterator> hitList;
-        if(m_pldC == 0)
+        if(m_pldC == nullptr)
         {
             collectHistoryInformation(A, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
             collectHistoryInformation(B, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
@@ -1378,7 +1378,7 @@ void MergeResultWindow::slotMergeHistory()
                 while(!historyMap.empty())
                 {
                     HistoryMap::iterator hMapIt = historyMap.begin();
-                    if(hMapIt->second.staysInPlace(m_pldC != 0, iD3LHistoryEnd))
+                    if(hMapIt->second.staysInPlace(m_pldC != nullptr, iD3LHistoryEnd))
                         historyMap.erase(hMapIt);
                     else
                         break;
@@ -1389,7 +1389,7 @@ void MergeResultWindow::slotMergeHistory()
                 while(!hitList.empty())
                 {
                     HistoryMap::iterator hMapIt = hitList.back();
-                    if(hMapIt->second.staysInPlace(m_pldC != 0, iD3LHistoryEnd))
+                    if(hMapIt->second.staysInPlace(m_pldC != nullptr, iD3LHistoryEnd))
                         hitList.pop_back();
                     else
                         break;
@@ -1417,7 +1417,7 @@ void MergeResultWindow::slotMergeHistory()
         }
         iMLLStart->mergeEditLineList.clear();
         // Now insert the complete history into the first MergeLine of the history
-        iMLLStart->mergeEditLineList.push_back(MergeEditLine(iD3LHistoryBegin, m_pldC == 0 ? B : C));
+        iMLLStart->mergeEditLineList.push_back(MergeEditLine(iD3LHistoryBegin, m_pldC == nullptr ? B : C));
         QString lead = calcHistoryLead(iD3LHistoryBegin->getString(A));
         MergeEditLine mel(m_pDiff3LineList->end());
         mel.setString(lead);
@@ -1434,7 +1434,7 @@ void MergeResultWindow::slotMergeHistory()
                     break;
                 ++historyCount;
                 HistoryMapEntry& hme = hmit->second;
-                MergeEditLineList& mell = hme.choice(m_pldC != 0);
+                MergeEditLineList& mell = hme.choice(m_pldC != nullptr);
                 if(!mell.empty())
                     iMLLStart->mergeEditLineList.splice(iMLLStart->mergeEditLineList.end(), mell, mell.begin(), mell.end());
             }
@@ -1449,7 +1449,7 @@ void MergeResultWindow::slotMergeHistory()
                     break;
                 ++historyCount;
                 HistoryMapEntry& hme = (*hlit)->second;
-                MergeEditLineList& mell = hme.choice(m_pldC != 0);
+                MergeEditLineList& mell = hme.choice(m_pldC != nullptr);
                 if(!mell.empty())
                     iMLLStart->mergeEditLineList.splice(iMLLStart->mergeEditLineList.end(), mell, mell.begin(), mell.end());
             }
@@ -1481,10 +1481,10 @@ void MergeResultWindow::slotRegExpAutoMerge()
             Diff3LineList::const_iterator id3l = i->id3l;
             if(vcsKeywords.exactMatch(id3l->getString(A)) &&
                vcsKeywords.exactMatch(id3l->getString(B)) &&
-               (m_pldC == 0 || vcsKeywords.exactMatch(id3l->getString(C))))
+               (m_pldC == nullptr || vcsKeywords.exactMatch(id3l->getString(C))))
             {
                 MergeEditLine& mel = *i->mergeEditLineList.begin();
-                mel.setSource(m_pldC == 0 ? B : C, false);
+                mel.setSource(m_pldC == nullptr ? B : C, false);
                 splitAtDiff3LineIdx(i->d3lLineIdx + 1);
             }
         }
@@ -1499,7 +1499,7 @@ void MergeResultWindow::slotRegExpAutoMerge()
 // Precondition: The VCS-keyword would also be C.
 bool MergeResultWindow::doRelevantChangesExist()
 {
-    if(m_pldC == 0 || m_mergeLineList.size() <= 1)
+    if(m_pldC == nullptr || m_mergeLineList.size() <= 1)
         return true;
 
     MergeLineList::iterator i;
@@ -1636,7 +1636,7 @@ QString MergeResultWindow::MergeEditLine::getString(const MergeResultWindow* mrw
             return QString();
         }
         const Diff3Line& d3l = *m_id3l;
-        const LineData* pld = 0;
+        const LineData* pld = nullptr;
         assert(src == A || src == B || src == C);
         if(src == A && d3l.lineA != -1)
             pld = &mrw->m_pldA[d3l.lineA];
@@ -1645,7 +1645,7 @@ QString MergeResultWindow::MergeEditLine::getString(const MergeResultWindow* mrw
         else if(src == C && d3l.lineC != -1)
             pld = &mrw->m_pldC[d3l.lineC];
 
-        if(pld == 0)
+        if(pld == nullptr)
         {
             // assert(false);      This is no error.
             return QString();
@@ -1657,7 +1657,7 @@ QString MergeResultWindow::MergeEditLine::getString(const MergeResultWindow* mrw
     {
         return m_str;
     }
-    return 0;
+    return nullptr;
 }
 
 /// Converts the cursor-posOnScreen into a text index, considering tabulators.
@@ -1891,7 +1891,7 @@ void MergeResultWindow::setPaintingAllowed(bool bPaintingAllowed)
 
 void MergeResultWindow::paintEvent(QPaintEvent*)
 {
-    if(m_pDiff3LineList == 0 || !m_bPaintingAllowed)
+    if(m_pDiff3LineList == nullptr || !m_bPaintingAllowed)
         return;
 
     bool bOldSelectionContainsData = m_selection.bSelectionContainsData;
@@ -1990,14 +1990,14 @@ void MergeResultWindow::updateSourceMask()
 {
     int srcMask = 0;
     int enabledMask = 0;
-    if(!hasFocus() || m_pDiff3LineList == 0 || !m_bPaintingAllowed || m_currentMergeLineIt == m_mergeLineList.end())
+    if(!hasFocus() || m_pDiff3LineList == nullptr || !m_bPaintingAllowed || m_currentMergeLineIt == m_mergeLineList.end())
     {
         srcMask = 0;
         enabledMask = 0;
     }
     else
     {
-        enabledMask = m_pldC == 0 ? 3 : 7;
+        enabledMask = m_pldC == nullptr ? 3 : 7;
         MergeLine& ml = *m_currentMergeLineIt;
 
         srcMask = 0;
@@ -3041,7 +3041,7 @@ void MergeResultWindow::setSelection(int firstLine, int startPos, int lastLine, 
 Overview::Overview(Options* pOptions)
 //: QWidget( pParent, 0, Qt::WNoAutoErase )
 {
-    m_pDiff3LineList = 0;
+    m_pDiff3LineList = nullptr;
     m_pOptions = pOptions;
     m_bTripleDiff = false;
     m_eOverviewMode = eOMNormal;
@@ -3063,7 +3063,7 @@ void Overview::init(Diff3LineList* pDiff3LineList, bool bTripleDiff)
 
 void Overview::reset()
 {
-    m_pDiff3LineList = 0;
+    m_pDiff3LineList = nullptr;
 }
 
 void Overview::slotRedraw()
@@ -3285,7 +3285,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
 
 void Overview::paintEvent(QPaintEvent*)
 {
-    if(m_pDiff3LineList == 0 || !m_bPaintingAllowed) return;
+    if(m_pDiff3LineList == nullptr || !m_bPaintingAllowed) return;
     int h = height() - 1;
     int w = width();
 
@@ -3364,7 +3364,7 @@ WindowTitleWidget::WindowTitleWidget(Options* pOptions)
     m_pEncodingSelector = new QComboBox();
     m_pEncodingSelector->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     pHLayout->addWidget(m_pEncodingSelector, 2);
-    setEncodings(0, 0, 0);
+    setEncodings(nullptr, nullptr, nullptr);
 
     m_pLineEndStyleLabel = new QLabel(i18n("Line end style:"));
     pHLayout->addWidget(m_pLineEndStyleLabel);
@@ -3484,7 +3484,7 @@ void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecF
     foreach(int i, mibs)
     {
         QTextCodec* c = QTextCodec::codecForMib(i);
-        if(c != 0)
+        if(c != nullptr)
             names[QString(c->name())] = c;
     }
 

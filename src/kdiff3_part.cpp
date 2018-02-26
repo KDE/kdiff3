@@ -65,7 +65,7 @@ KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantLis
     m_widget = new KDiff3App(parentWidget, widgetName, this);
 
     //FIXME: This hack is necessary to avoid a crash when the program terminates.
-    m_bIsShell = qobject_cast<KParts::MainWindow*>(parentWidget) != 0;
+    m_bIsShell = qobject_cast<KParts::MainWindow*>(parentWidget) != nullptr;
 
     // notify the part that this is our internal widget
     setWidget(m_widget);
@@ -86,7 +86,7 @@ KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantLis
 
 KDiff3Part::~KDiff3Part()
 {
-    if(m_widget != 0 && !m_bIsShell)
+    if(m_widget != nullptr && !m_bIsShell)
     {
         m_widget->saveOptions(KSharedConfig::openConfig());
     }
@@ -179,7 +179,7 @@ bool KDiff3Part::openFile()
 
     if(f1.exists() && f2.exists() && fileName1 != fileName2)
     {
-        m_widget->slotFileOpen2(fileName1, fileName2, "", "", "", "", "", 0);
+        m_widget->slotFileOpen2(fileName1, fileName2, "", "", "", "", "", nullptr);
         return true;
     }
     else if(version1.isEmpty() && f1.exists())
@@ -195,7 +195,7 @@ bool KDiff3Part::openFile()
         process.waitForFinished(-1);
 
         m_widget->slotFileOpen2(fileName1, tempFileName, "", "",
-                                "", version2.isEmpty() ? fileName2 : "REV:" + version2 + ":" + fileName2, "", 0); // alias names
+                                "", version2.isEmpty() ? fileName2 : "REV:" + version2 + ":" + fileName2, "", nullptr); // alias names
                                                                                                                   //    std::cerr << "KDiff3: f1:" << fileName1.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
         FileAccess::removeTempFile(tempFileName);
     }
@@ -212,7 +212,7 @@ bool KDiff3Part::openFile()
         process.waitForFinished(-1);
 
         m_widget->slotFileOpen2(tempFileName, fileName2, "", "",
-                                version1.isEmpty() ? fileName1 : "REV:" + version1 + ":" + fileName1, "", "", 0); // alias name
+                                version1.isEmpty() ? fileName1 : "REV:" + version1 + ":" + fileName1, "", "", nullptr); // alias name
                                                                                                                   //    std::cerr << "KDiff3: f2:" << fileName2.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
         FileAccess::removeTempFile(tempFileName);
     }
@@ -237,7 +237,7 @@ bool KDiff3Part::openFile()
         m_widget->slotFileOpen2(tempFileName1, tempFileName2, "", "",
                                 "REV:" + version1 + ":" + fileName1,
                                 "REV:" + version2 + ":" + fileName2,
-                                "", 0);
+                                "", nullptr);
 
         //    std::cerr << "KDiff3: f1/2:" << tempFileName1.toLatin1() <<"<->"<<tempFileName2.toLatin1()<< std::endl;
         FileAccess::removeTempFile(tempFileName1);

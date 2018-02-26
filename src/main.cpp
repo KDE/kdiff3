@@ -224,7 +224,7 @@ int main(int argc, char* argv[])
     if(!cmdLineParser->parse(QCoreApplication::arguments())) {
         QString errorMessage = cmdLineParser->errorText();
         QString helpText = cmdLineParser->helpText();
-        QMessageBox::warning(0, aboutData.displayName(), "<html><head/><body><h2>" + errorMessage + "</h2><pre>" + helpText + "</pre></body></html>");
+        QMessageBox::warning(nullptr, aboutData.displayName(), "<html><head/><body><h2>" + errorMessage + "</h2><pre>" + helpText + "</pre></body></html>");
 #if !defined(_WIN32) && !defined(Q_OS_OS2)
         fputs(qPrintable(errorMessage), stderr);
         fputs("\n\n", stderr);
@@ -235,7 +235,7 @@ int main(int argc, char* argv[])
     }
 
     if(cmdLineParser->isSet(QStringLiteral("version"))) {
-        QMessageBox::information(0, aboutData.displayName(),
+        QMessageBox::information(nullptr, aboutData.displayName(),
                                  aboutData.displayName() + ' ' + aboutData.version());
 #if !defined(_WIN32) && !defined(Q_OS_OS2)
         printf("%s %s\n", appName.constData(), appVersion.constData());
@@ -243,7 +243,7 @@ int main(int argc, char* argv[])
         exit(0);
     }
     if(cmdLineParser->isSet(QStringLiteral("help"))) {
-        QMessageBox::warning(0, aboutData.displayName(), "<html><head/><body><pre>" + cmdLineParser->helpText() + "</pre></body></html>");
+        QMessageBox::warning(nullptr, aboutData.displayName(), "<html><head/><body><pre>" + cmdLineParser->helpText() + "</pre></body></html>");
 #if !defined(_WIN32) && !defined(Q_OS_OS2)
         fputs(qPrintable(cmdLineParser->helpText()), stdout);
 #endif

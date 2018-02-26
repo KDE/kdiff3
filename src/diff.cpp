@@ -67,7 +67,7 @@ int LineData::width(int tabSize) const
 // This choice is good for C/C++.
 bool equal(const LineData& l1, const LineData& l2, bool bStrict)
 {
-    if(l1.pLine == 0 || l2.pLine == 0) return false;
+    if(l1.pLine == nullptr || l2.pLine == nullptr) return false;
 
     if(bStrict && g_bIgnoreTrivialMatches) //&& (l1.occurances>=5 || l2.occurances>=5) )
         return false;
@@ -152,7 +152,7 @@ Optimizations: Skip unneeded steps.
 
 SourceData::SourceData()
 {
-    m_pOptions = 0;
+    m_pOptions = nullptr;
     reset();
 }
 
@@ -163,7 +163,7 @@ SourceData::~SourceData()
 
 void SourceData::reset()
 {
-    m_pEncoding = 0;
+    m_pEncoding = nullptr;
     m_fileAccess = FileAccess();
     m_normalData.reset();
     m_lmppData.reset();
@@ -194,7 +194,7 @@ bool SourceData::isEmpty()
 
 bool SourceData::hasData()
 {
-    return m_normalData.m_pBuf != 0;
+    return m_normalData.m_pBuf != nullptr;
 }
 
 bool SourceData::isValid()
@@ -265,15 +265,15 @@ QStringList SourceData::setData(const QString& data)
 
 const LineData* SourceData::getLineDataForDiff() const
 {
-    if(m_lmppData.m_pBuf == 0)
-        return m_normalData.m_v.size() > 0 ? &m_normalData.m_v[0] : 0;
+    if(m_lmppData.m_pBuf == nullptr)
+        return m_normalData.m_v.size() > 0 ? &m_normalData.m_v[0] : nullptr;
     else
-        return m_lmppData.m_v.size() > 0 ? &m_lmppData.m_v[0] : 0;
+        return m_lmppData.m_v.size() > 0 ? &m_lmppData.m_v[0] : nullptr;
 }
 
 const LineData* SourceData::getLineDataForDisplay() const
 {
-    return m_normalData.m_v.size() > 0 ? &m_normalData.m_v[0] : 0;
+    return m_normalData.m_v.size() > 0 ? &m_normalData.m_v[0] : nullptr;
 }
 
 int SourceData::getSizeLines() const
@@ -321,7 +321,7 @@ bool SourceData::isBinaryEqualWith(const SourceData& other) const
 void SourceData::FileData::reset()
 {
     delete[](char*) m_pBuf;
-    m_pBuf = 0;
+    m_pBuf = nullptr;
     m_v.clear();
     m_size = 0;
     m_vSize = 0;
@@ -347,7 +347,7 @@ bool SourceData::FileData::readFile(const QString& filename)
     if(!bSuccess)
     {
         delete[] pBuf;
-        m_pBuf = 0;
+        m_pBuf = nullptr;
         m_size = 0;
     }
     return bSuccess;
@@ -427,7 +427,7 @@ static QTextCodec* getEncodingFromTag(const QByteArray& s, const QByteArray& enc
             return QTextCodec::codecForName(encoding);
         }
     }
-    return 0;
+    return nullptr;
 }
 
 static QTextCodec* detectEncoding(const char* buf, qint64 size, qint64& skipBytes)
@@ -485,7 +485,7 @@ static QTextCodec* detectEncoding(const char* buf, qint64 size, qint64& skipByte
                 break;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 QTextCodec* SourceData::detectEncoding(const QString& fileName, QTextCodec* pFallbackCodec)
@@ -1539,10 +1539,10 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
     pp.setCurrent(0);
 
     diffList.clear();
-    if(p1[0].pLine == 0 || p2[0].pLine == 0 || size1 == 0 || size2 == 0)
+    if(p1[0].pLine == nullptr || p2[0].pLine == nullptr || size1 == 0 || size2 == 0)
     {
         Diff d(0, 0, 0);
-        if(p1[0].pLine == 0 && p2[0].pLine == 0 && size1 == size2)
+        if(p1[0].pLine == nullptr && p2[0].pLine == nullptr && size1 == size2)
             d.nofEquals = size1;
         else
         {
@@ -1556,7 +1556,7 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
     {
         GnuDiff::comparison comparisonInput;
         memset(&comparisonInput, 0, sizeof(comparisonInput));
-        comparisonInput.parent = 0;
+        comparisonInput.parent = nullptr;
         comparisonInput.file[0].buffer = p1[0].pLine;                                                //ptr to buffer
         comparisonInput.file[0].buffered = (p1[size1 - 1].pLine - p1[0].pLine + p1[size1 - 1].size); // size of buffer
         comparisonInput.file[1].buffer = p2[0].pLine;                                                //ptr to buffer
@@ -1572,7 +1572,7 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
         int equalLinesAtStart = comparisonInput.file[0].prefix_lines;
         int currentLine1 = 0;
         int currentLine2 = 0;
-        GnuDiff::change* p = 0;
+        GnuDiff::change* p = nullptr;
         for(GnuDiff::change* e = script; e; e = p)
         {
             Diff d(0, 0, 0);
@@ -2177,9 +2177,9 @@ void calcWhiteDiff3Lines(
 
     for(; i3 != d3ll.end(); ++i3)
     {
-        i3->bWhiteLineA = ((*i3).lineA == -1 || pldA == 0 || pldA[(*i3).lineA].whiteLine() || pldA[(*i3).lineA].bContainsPureComment);
-        i3->bWhiteLineB = ((*i3).lineB == -1 || pldB == 0 || pldB[(*i3).lineB].whiteLine() || pldB[(*i3).lineB].bContainsPureComment);
-        i3->bWhiteLineC = ((*i3).lineC == -1 || pldC == 0 || pldC[(*i3).lineC].whiteLine() || pldC[(*i3).lineC].bContainsPureComment);
+        i3->bWhiteLineA = ((*i3).lineA == -1 || pldA == nullptr || pldA[(*i3).lineA].whiteLine() || pldA[(*i3).lineA].bContainsPureComment);
+        i3->bWhiteLineB = ((*i3).lineB == -1 || pldB == nullptr || pldB[(*i3).lineB].whiteLine() || pldB[(*i3).lineB].bContainsPureComment);
+        i3->bWhiteLineC = ((*i3).lineC == -1 || pldC == nullptr || pldC[(*i3).lineC].whiteLine() || pldC[(*i3).lineC].bContainsPureComment);
     }
 }
 

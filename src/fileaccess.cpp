@@ -60,7 +60,7 @@ class FileAccess::Data
         m_linkTarget = "";
         //m_fileType = -1;
         m_bLocal = true;
-        m_pParent = 0;
+        m_pParent = nullptr;
     }
 
     QUrl m_url;
@@ -84,7 +84,7 @@ class FileAccess::Data
 
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
-    m_pData = 0;
+    m_pData = nullptr;
     m_bUseData = false;
     setFile(name, bWantToWrite);
 }
@@ -98,20 +98,20 @@ FileAccess::FileAccess()
     m_bSymLink = false;
     m_bWritable = false;
     m_bHidden = false;
-    m_pParent = 0;
+    m_pParent = nullptr;
     m_size = 0;
 }
 
 FileAccess::FileAccess(const FileAccess& other)
 {
-    m_pData = 0;
+    m_pData = nullptr;
     m_bUseData = false;
     *this = other;
 }
 
 void FileAccess::createData()
 {
-    if(d() == 0)
+    if(d() == nullptr)
     {
         FileAccess* pParent = m_pParent; // backup because in union with m_pData
         m_pData = new Data();
@@ -180,7 +180,7 @@ static QString nicePath(const QFileInfo& fi)
 
 void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
 {
-    m_filePath = pParent == 0 ? fi.absoluteFilePath() : nicePath(fi.filePath()); // remove "./" at start
+    m_filePath = pParent == nullptr ? fi.absoluteFilePath() : nicePath(fi.filePath()); // remove "./" at start
 
     m_bSymLink = fi.isSymLink();
     if(m_bSymLink || (!m_bExists && m_filePath.contains("@@")))
@@ -209,7 +209,7 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
 #endif
     }
 
-    if(d() != 0)
+    if(d() != nullptr)
     {
 #if defined(Q_WS_WIN)
         // On some windows machines in a network this takes very long.
@@ -290,13 +290,13 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
     m_size = 0;
     m_modificationTime = QDateTime();
 
-    if(d() != 0)
+    if(d() != nullptr)
     {
         d()->reset();
-        d()->m_pParent = 0;
+        d()->m_pParent = nullptr;
     }
     else
-        m_pParent = 0;
+        m_pParent = nullptr;
 
     // Note: Checking if the filename-string is empty is necessary for Win95/98/ME.
     //       The isFile() / isDir() queries would cause the program to crash.
@@ -338,7 +338,7 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
             }
 
             QFileInfo fi(localName);
-            setFile(fi, 0);
+            setFile(fi, nullptr);
         }
         else
         {
@@ -360,7 +360,7 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
 
 void FileAccess::addPath(const QString& txt)
 {
-    if(d() != 0 && d()->m_url.isValid())
+    if(d() != nullptr && d()->m_url.isValid())
     {
         QUrl url = d()->m_url.adjusted(QUrl::StripTrailingSlash);
         d()->m_url.setPath(url.path() + '/' + txt);
@@ -480,7 +480,7 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
 
 bool FileAccess::isValid() const
 {
-    return d() == 0 ? !m_filePath.isEmpty() : d()->m_bValidData;
+    return d() == nullptr ? !m_filePath.isEmpty() : d()->m_bValidData;
 }
 
 bool FileAccess::isFile() const
@@ -522,7 +522,7 @@ qint64 FileAccess::size() const
 
 QUrl FileAccess::url() const
 {
-    if(d() != 0)
+    if(d() != nullptr)
         return d()->m_url;
     else
     {
@@ -537,7 +537,7 @@ QUrl FileAccess::url() const
 
 bool FileAccess::isLocal() const
 {
-    return d() == 0 || d()->m_bLocal;
+    return d() == nullptr || d()->m_bLocal;
 }
 
 bool FileAccess::isReadable() const
@@ -546,7 +546,7 @@ bool FileAccess::isReadable() const
     // On some windows machines in a network this takes very long to find out and it's not so important anyway.
     return true;
 #else
-    if(d() != 0)
+    if(d() != nullptr)
         return d()->m_bReadable;
     else
         return QFileInfo(absoluteFilePath()).isReadable();
@@ -567,7 +567,7 @@ bool FileAccess::isExecutable() const
     // On some windows machines in a network this takes very long to find out and it's not so important anyway.
     return true;
 #else
-    if(d() != 0)
+    if(d() != nullptr)
         return d()->m_bExecutable;
     else
         return QFileInfo(absoluteFilePath()).isExecutable();
@@ -584,7 +584,7 @@ bool FileAccess::isHidden() const
 
 QString FileAccess::readLink() const
 {
-    if(d() != 0)
+    if(d() != nullptr)
         return d()->m_linkTarget;
     else
         return QString();
@@ -592,7 +592,7 @@ QString FileAccess::readLink() const
 
 QString FileAccess::absoluteFilePath() const
 {
-    if(parent() != 0)
+    if(parent() != nullptr)
         return parent()->absoluteFilePath() + "/" + m_filePath;
     else
     {
@@ -613,7 +613,7 @@ QString FileAccess::absoluteFilePath() const
 // Just the name-part of the path, without parent directories
 QString FileAccess::fileName() const
 {
-    if(d() != 0)
+    if(d() != nullptr)
         return d()->m_name;
     else if(parent())
         return m_filePath;
@@ -648,7 +648,7 @@ FileAccess::Data* FileAccess::d()
     if(m_bUseData)
         return m_pData;
     else
-        return 0;
+        return nullptr;
 }
 
 const FileAccess::Data* FileAccess::d() const
@@ -656,7 +656,7 @@ const FileAccess::Data* FileAccess::d() const
     if(m_bUseData)
         return m_pData;
     else
-        return 0;
+        return nullptr;
 }
 
 QString FileAccess::prettyAbsPath() const
@@ -721,7 +721,7 @@ static bool interruptableReadFile(QFile& f, void* pDestBuffer, unsigned long max
 
 bool FileAccess::readFile(void* pDestBuffer, unsigned long maxLength)
 {
-    if(d() != 0 && !d()->m_localCopy.isEmpty())
+    if(d() != nullptr && !d()->m_localCopy.isEmpty())
     {
         QFile f(d()->m_localCopy);
         if(f.open(QIODevice::ReadOnly))
@@ -851,13 +851,13 @@ bool FileAccess::removeTempFile(const QString& name) // static
 
 bool FileAccess::makeDir(const QString& dirName)
 {
-    FileAccessJobHandler fh(0);
+    FileAccessJobHandler fh(nullptr);
     return fh.mkDir(dirName);
 }
 
 bool FileAccess::removeDir(const QString& dirName)
 {
-    FileAccessJobHandler fh(0);
+    FileAccessJobHandler fh(nullptr);
     return fh.rmDir(dirName);
 }
 
@@ -907,12 +907,12 @@ qint64 FileAccess::sizeForReading()
 
 QString FileAccess::getStatusText()
 {
-    return d() == 0 ? QString() : d()->m_statusText;
+    return d() == nullptr ? QString() : d()->m_statusText;
 }
 
 void FileAccess::setStatusText(const QString& s)
 {
-    if(!s.isEmpty() || d() != 0)
+    if(!s.isEmpty() || d() != nullptr)
     {
         createData();
         d()->m_statusText = s;
@@ -1375,7 +1375,7 @@ void CvsIgnoreList::init(FileAccess& dir, bool bUseLocalCvsIgnore)
         if(size > 0)
         {
             char* buf = new char[size];
-            if(buf != 0)
+            if(buf != nullptr)
             {
                 file.readFile(buf, size);
                 int pos1 = 0;
@@ -1661,11 +1661,11 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
     }
     else
     {
-        KIO::ListJob* pListJob = 0;
+        KIO::ListJob* pListJob = nullptr;
         pListJob = KIO::listDir(m_pFileAccess->url(), KIO::HideProgressInfo, true /*bFindHidden*/);
 
         m_bSuccess = false;
-        if(pListJob != 0)
+        if(pListJob != nullptr)
         {
             connect(pListJob, &KIO::ListJob::entries, this, &FileAccessJobHandler::slotListDirProcessNewEntries);
             connect(pListJob, &KIO::ListJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
@@ -1731,7 +1731,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
                 t_DirectoryList::iterator j;
                 for(j = dirList.begin(); j != dirList.end(); ++j)
                 {
-                    if(j->parent() == 0)
+                    if(j->parent() == nullptr)
                         j->m_filePath = i->fileName() + "/" + j->m_filePath;
                 }
 

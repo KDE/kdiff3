@@ -47,7 +47,7 @@ struct LineData
    const QChar* pFirstNonWhiteChar;
    int size;
 
-   LineData(){ pLine=0; pFirstNonWhiteChar=0; size=0; /*occurances=0;*/ 
+   LineData(){ pLine=nullptr; pFirstNonWhiteChar=nullptr; size=0; /*occurances=0;*/ 
                bContainsPureComment=false; }
    int width(int tabSize) const;  // Calcs width considering tabs.
    //int occurances;
@@ -99,19 +99,19 @@ struct Diff3Line
    {
       lineA=-1; lineB=-1; lineC=-1;
       bAEqC=false; bAEqB=false; bBEqC=false;
-      pFineAB=0; pFineBC=0; pFineCA=0;
+      pFineAB=nullptr; pFineBC=nullptr; pFineCA=nullptr;
       linesNeededForDisplay=1;
       sumLinesNeededForDisplay=0;
       bWhiteLineA=false; bWhiteLineB=false; bWhiteLineC=false;
-      m_pDiffBufferInfo=0;
+      m_pDiffBufferInfo=nullptr;
    }
 
    ~Diff3Line()
    {
-      if (pFineAB!=0) delete pFineAB;
-      if (pFineBC!=0) delete pFineBC;
-      if (pFineCA!=0) delete pFineCA;
-      pFineAB=0; pFineBC=0; pFineCA=0;
+      if (pFineAB!=nullptr) delete pFineAB;
+      if (pFineBC!=nullptr) delete pFineBC;
+      if (pFineCA!=nullptr) delete pFineCA;
+      pFineAB=nullptr; pFineBC=nullptr; pFineCA=nullptr;
    }
 
    bool operator==( const Diff3Line& d3l ) const
@@ -122,11 +122,11 @@ struct Diff3Line
 
    const LineData* getLineData( int src ) const
    {
-      assert( m_pDiffBufferInfo!=0 );
+      assert( m_pDiffBufferInfo!=nullptr );
       if ( src == 1 && lineA >= 0 ) return &m_pDiffBufferInfo->m_pLineDataA[lineA];
       if ( src == 2 && lineB >= 0 ) return &m_pDiffBufferInfo->m_pLineDataB[lineB];
       if ( src == 3 && lineC >= 0 ) return &m_pDiffBufferInfo->m_pLineDataC[lineC];
-      return 0;
+      return nullptr;
    }
    QString getString( int src ) const
    {
@@ -289,7 +289,7 @@ private:
 
    struct FileData
    {
-      FileData(){ m_pBuf=0; m_size=0; m_vSize=0; m_bIsText=false; m_eLineEndStyle=eLineEndStyleUndefined; m_bIncompleteConversion=false;}
+      FileData(){ m_pBuf=nullptr; m_size=0; m_vSize=0; m_bIsText=false; m_eLineEndStyle=eLineEndStyleUndefined; m_bIncompleteConversion=false;}
       ~FileData(){ reset(); }
       const char* m_pBuf;
       int m_size;

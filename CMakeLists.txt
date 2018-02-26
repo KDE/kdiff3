@@ -58,9 +58,7 @@ set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
 set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CLANG_WARNING_FLAGS}")
 set(
     needed_features
-    cxx_generalized_initializers
-    cxx_constexpr
-    cxx_auto_type
+    cxx_nullptr
 )
 
 

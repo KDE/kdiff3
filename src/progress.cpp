@@ -22,7 +22,7 @@
 #include <KIO/Job>
 #include <KLocalizedString>
 
-ProgressDialog* g_pProgressDialog = 0;
+ProgressDialog* g_pProgressDialog = nullptr;
 
 ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     : QDialog(pParent), m_pStatusBar(pStatusBar)
@@ -76,8 +76,8 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     }
     else
     {
-        m_pStatusProgressBar = 0;
-        m_pStatusAbortButton = 0;
+        m_pStatusProgressBar = nullptr;
+        m_pStatusAbortButton = nullptr;
     }
 
     m_progressDelayTimer = 0;
@@ -88,7 +88,7 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     m_t2.start();
     m_bWasCancelled = false;
     m_eCancelReason = eUserAbort;
-    m_pJob = 0;
+    m_pJob = nullptr;
 }
 
 void ProgressDialog::setStayHidden(bool bStayHidden)
@@ -280,7 +280,7 @@ void ProgressDialog::exitEventLoop()
     if(m_progressDelayTimer)
         killTimer(m_progressDelayTimer);
     m_progressDelayTimer = 0;
-    m_pJob = 0;
+    m_pJob = nullptr;
     if(!m_eventLoopStack.empty())
         m_eventLoopStack.back()->exit();
 }
@@ -342,7 +342,7 @@ void ProgressDialog::show()
         killTimer(m_delayedHideTimer);
     m_progressDelayTimer = 0;
     m_delayedHideTimer = 0;
-    if(!isVisible() && (parentWidget() == 0 || parentWidget()->isVisible()))
+    if(!isVisible() && (parentWidget() == nullptr || parentWidget()->isVisible()))
     {
         QDialog::show();
     }
@@ -361,10 +361,10 @@ void ProgressDialog::hide()
 
 void ProgressDialog::delayedHide()
 {
-    if(m_pJob != 0)
+    if(m_pJob != nullptr)
     {
         m_pJob->kill(KJob::Quietly);
-        m_pJob = 0;
+        m_pJob = nullptr;
     }
     QDialog::hide();
     m_pInformation->setText("");

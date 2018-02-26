@@ -70,7 +70,7 @@ class OptionItem
   public:
     OptionItem(OptionDialog* pOptionDialog, const QString& saveName)
     {
-        assert(pOptionDialog != 0);
+        assert(pOptionDialog != nullptr);
         pOptionDialog->addOptionItem(this);
         m_saveName = saveName;
         m_bPreserved = false;
@@ -397,7 +397,7 @@ class OptionComboBox : public QComboBox, public OptionItem
     {
         setMinimumWidth(50);
         m_pVarNum = pVarNum;
-        m_pVarStr = 0;
+        m_pVarStr = nullptr;
         m_defaultVal = defaultVal;
         setEditable(false);
     }
@@ -405,7 +405,7 @@ class OptionComboBox : public QComboBox, public OptionItem
                    QWidget* pParent, OptionDialog* pOD)
         : QComboBox(pParent), OptionItem(pOD, saveName)
     {
-        m_pVarNum = 0;
+        m_pVarNum = nullptr;
         m_pVarStr = pVarStr;
         m_defaultVal = defaultVal;
         setEditable(false);
@@ -413,20 +413,20 @@ class OptionComboBox : public QComboBox, public OptionItem
     void setToDefault()
     {
         setCurrentIndex(m_defaultVal);
-        if(m_pVarStr != 0) {
+        if(m_pVarStr != nullptr) {
             *m_pVarStr = currentText();
         }
     }
     void setToCurrent()
     {
-        if(m_pVarNum != 0)
+        if(m_pVarNum != nullptr)
             setCurrentIndex(*m_pVarNum);
         else
             setText(*m_pVarStr);
     }
     void apply()
     {
-        if(m_pVarNum != 0) {
+        if(m_pVarNum != nullptr) {
             *m_pVarNum = currentIndex();
         }
         else
@@ -436,21 +436,21 @@ class OptionComboBox : public QComboBox, public OptionItem
     }
     void write(ValueMap* config)
     {
-        if(m_pVarStr != 0)
+        if(m_pVarStr != nullptr)
             config->writeEntry(m_saveName, *m_pVarStr);
         else
             config->writeEntry(m_saveName, *m_pVarNum);
     }
     void read(ValueMap* config)
     {
-        if(m_pVarStr != 0)
+        if(m_pVarStr != nullptr)
             setText(config->readEntry(m_saveName, currentText()));
         else
             *m_pVarNum = config->readNumEntry(m_saveName, *m_pVarNum);
     }
     void preserve()
     {
-        if(m_pVarStr != 0) {
+        if(m_pVarStr != nullptr) {
             m_preservedStrVal = *m_pVarStr;
         }
         else
@@ -460,7 +460,7 @@ class OptionComboBox : public QComboBox, public OptionItem
     }
     void unpreserve()
     {
-        if(m_pVarStr != 0) {
+        if(m_pVarStr != nullptr) {
             *m_pVarStr = m_preservedStrVal;
         }
         else
@@ -484,8 +484,8 @@ class OptionComboBox : public QComboBox, public OptionItem
         {
             if(itemText(i) == s)
             {
-                if(m_pVarNum != 0) *m_pVarNum = i;
-                if(m_pVarStr != 0) *m_pVarStr = s;
+                if(m_pVarNum != nullptr) *m_pVarNum = i;
+                if(m_pVarStr != nullptr) *m_pVarStr = s;
                 setCurrentIndex(i);
                 return;
             }
@@ -515,7 +515,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
         foreach(int i, mibs)
         {
             QTextCodec* c = QTextCodec::codecForMib(i);
-            if(c != 0)
+            if(c != nullptr)
                 names[QString(c->name()).toUpper()] = c;
         }
 
@@ -530,7 +530,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
     }
     void insertCodec(const QString& visibleCodecName, QTextCodec* c)
     {
-        if(c != 0)
+        if(c != nullptr)
         {
             for(int i = 0; i < m_codecVec.size(); ++i)
             {
@@ -550,7 +550,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
                m_codecVec[i] == QTextCodec::codecForLocale())
             {
                 setCurrentIndex(i);
-                if(m_ppVarCodec != 0) {
+                if(m_ppVarCodec != nullptr) {
                     *m_ppVarCodec = m_codecVec[i];
                 }
                 return;
@@ -558,13 +558,13 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
         }
 
         setCurrentIndex(0);
-        if(m_ppVarCodec != 0) {
+        if(m_ppVarCodec != nullptr) {
             *m_ppVarCodec = m_codecVec[0];
         }
     }
     void setToCurrent()
     {
-        if(m_ppVarCodec != 0)
+        if(m_ppVarCodec != nullptr)
         {
             for(int i = 0; i < m_codecVec.size(); ++i)
             {
@@ -578,13 +578,13 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
     }
     void apply()
     {
-        if(m_ppVarCodec != 0) {
+        if(m_ppVarCodec != nullptr) {
             *m_ppVarCodec = m_codecVec[currentIndex()];
         }
     }
     void write(ValueMap* config)
     {
-        if(m_ppVarCodec != 0) config->writeEntry(m_saveName, QString((*m_ppVarCodec)->name()));
+        if(m_ppVarCodec != nullptr) config->writeEntry(m_saveName, QString((*m_ppVarCodec)->name()));
     }
     void read(ValueMap* config)
     {
@@ -594,7 +594,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
             if(codecName == m_codecVec[i]->name())
             {
                 setCurrentIndex(i);
-                if(m_ppVarCodec != 0) *m_ppVarCodec = m_codecVec[i];
+                if(m_ppVarCodec != nullptr) *m_ppVarCodec = m_codecVec[i];
                 break;
             }
         }
@@ -950,7 +950,7 @@ void OptionDialog::setupDiffPage(void)
     topLayout->addLayout(gbox);
     int line = 0;
 
-    QLabel* label = 0;
+    QLabel* label = nullptr;
 
     m_options.m_bPreserveCarriageReturn = false;
     /*
@@ -1030,7 +1030,7 @@ void OptionDialog::setupMergePage(void)
     topLayout->addLayout(gbox);
     int line = 0;
 
-    QLabel* label = 0;
+    QLabel* label = nullptr;
 
     label = new QLabel(i18n("Auto advance delay (ms):"), page);
     gbox->addWidget(label, line, 0);
