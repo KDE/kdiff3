@@ -2809,14 +2809,11 @@ void MergeResultWindow::deleteSelection()
                     melItFirst->setString(firstLineString);
                 }
 
-                if(line != firstLine)
-                {
-                    // Remove the line
-                    if(mlIt->mergeEditLineList.size() > 1)
-                        mlIt->mergeEditLineList.erase(melIt);
-                    else
-                        melIt->setRemoved();
-                }
+                // Remove the line
+                if(mlIt->mergeEditLineList.size() > 1)
+                    mlIt->mergeEditLineList.erase(melIt);
+                else
+                    melIt->setRemoved();
             }
 
             ++line;
