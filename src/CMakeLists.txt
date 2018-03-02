@@ -62,11 +62,4 @@ ecm_install_icons(ICONS
     THEME hicolor
 )
 
-ecm_install_icons(ICONS
-    lowcolor/16-apps-kdiff3.png
-    lowcolor/32-apps-kdiff3.png
-    DESTINATION ${ICON_INSTALL_DIR}
-    THEME locolor
-)
-
 
