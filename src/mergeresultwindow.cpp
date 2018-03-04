@@ -2808,12 +2808,15 @@ void MergeResultWindow::deleteSelection()
                     firstLineString += lineString.midRef(pos); // rest of line
                     melItFirst->setString(firstLineString);
                 }
-
-                // Remove the line
-                if(mlIt->mergeEditLineList.size() > 1)
-                    mlIt->mergeEditLineList.erase(melIt);
-                else
-                    melIt->setRemoved();
+                
+                if(line != firstLine || m_selection.lastPos - m_selection.firstPos == lineString.length();)
+                {
+                    // Remove the line
+                    if(mlIt->mergeEditLineList.size() > 1)
+                        mlIt->mergeEditLineList.erase(melIt);
+                    else
+                        melIt->setRemoved();
+                }
             }
 
             ++line;
