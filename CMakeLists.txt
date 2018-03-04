@@ -69,12 +69,6 @@ remove_definitions(
     -DQT_NO_CAST_FROM_ASCII #While a good idea in gerneral this triggers for many simple no translable strings
     )
 
-include_directories( 
-    ${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIRS}
-    ${Qt5PrintSupport_INCLUDE_DIRS}
-    ${CMAKE_CURRENT_BINARY_DIR}
-)
-
 add_subdirectory(src)
 add_subdirectory(doc)
 
