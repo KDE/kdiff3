@@ -13,10 +13,8 @@ find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED)
 set(
     CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
-    /usr/share/apps/cmake/modules/
     ${ECM_MODULE_PATH}
     ${ECM_KDE_MODULE_DIR}
-    ${CMAKE_SOURCE_DIR}/cmake
 )
 
 include(KDEInstallDirs)
