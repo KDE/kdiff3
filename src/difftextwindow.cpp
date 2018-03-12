@@ -224,10 +224,6 @@ void DiffTextWindow::init(
     d->m_fastSelectorNofLines = 0;
     d->m_lineNumberWidth = 0;
     d->m_maxTextWidth = -1;
-    d->m_selection.reset();
-    d->m_selection.oldFirstLine = -1; // reset is not enough here.
-    d->m_selection.oldLastLine = -1;
-    d->m_selection.lastLine = -1;
 
     d->m_pTextCodec = pTextCodec;
     d->m_eLineEndStyle = eLineEndStyle;
@@ -273,7 +269,7 @@ void DiffTextWindow::setFirstLine(int firstLine)
 
     d->m_firstLine = newFirstLine;
 
-    if(d->m_bSelectionInProgress && d->m_selection.firstLine != -1)
+    if(d->m_bSelectionInProgress && d->m_selection.isValidFirstLine())
     {
         int line, pos;
         convertToLinePos(d->m_lastKnownMousePos.x(), d->m_lastKnownMousePos.y(), line, pos);
@@ -309,7 +305,7 @@ void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
         r = QRect(width() - xOffset - 2, 0, -(width() - xOffset), height()).normalized();
     }
 
-    if(d->m_bSelectionInProgress && d->m_selection.firstLine != -1)
+    if(d->m_bSelectionInProgress && d->m_selection.isValidFirstLine())
     {
         int line, pos;
         convertToLinePos(d->m_lastKnownMousePos.x(), d->m_lastKnownMousePos.y(), line, pos);
@@ -445,7 +441,7 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
         if((!d->m_pOptions->m_bRightToLeftLanguage && e->x() < xOffset) || (d->m_pOptions->m_bRightToLeftLanguage && e->x() > width() - xOffset))
         {
             emit setFastSelectorLine(convertLineToDiff3LineIdx(line));
-            d->m_selection.firstLine = -1; // Disable current d->m_selection
+            d->m_selection.invalidate(); // Disable current d->m_selection
         }
         else
         { // Selection
@@ -543,7 +539,7 @@ void DiffTextWindow::mouseReleaseEvent(QMouseEvent* e)
         if(d->m_delayedDrawTimer)
             killTimer(d->m_delayedDrawTimer);
         d->m_delayedDrawTimer = 0;
-        if(d->m_selection.firstLine != -1)
+        if(d->m_selection.isValidFirstLine())
         {
             emit selectionEnd();
         }
@@ -561,7 +557,7 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
     convertToLinePos(e->x(), e->y(), line, pos);
     d->m_lastKnownMousePos = e->pos();
 
-    if(d->m_selection.firstLine != -1)
+    if(d->m_selection.isValidFirstLine())
     {
         d->m_selection.end(line, pos);
 
@@ -619,19 +615,19 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
     {
         int fontHeight = fontMetrics().lineSpacing();
 
-        if(d->m_selection.oldLastLine != -1)
+        if(d->m_selection.getOldLastLine() != -1)
         {
             int lastLine;
             int firstLine;
-            if(d->m_selection.oldFirstLine != -1)
+            if(d->m_selection.getOldFirstLine() != -1)
             {
-                firstLine = min3(d->m_selection.oldFirstLine, d->m_selection.lastLine, d->m_selection.oldLastLine);
-                lastLine = max3(d->m_selection.oldFirstLine, d->m_selection.lastLine, d->m_selection.oldLastLine);
+                firstLine = min3(d->m_selection.getOldFirstLine(), d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
+                lastLine = max3(d->m_selection.getOldFirstLine(), d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
             }
             else
             {
-                firstLine = min2(d->m_selection.lastLine, d->m_selection.oldLastLine);
-                lastLine = max2(d->m_selection.lastLine, d->m_selection.oldLastLine);
+                firstLine = min2(d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
+                lastLine = max2(d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
             }
             int y1 = (firstLine - d->m_firstLine) * fontHeight;
             int y2 = min2(height(), (lastLine - d->m_firstLine + 1) * fontHeight);
@@ -648,7 +644,7 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
 
     if(d->m_scrollDeltaX != 0 || d->m_scrollDeltaY != 0)
     {
-        d->m_selection.end(d->m_selection.lastLine + d->m_scrollDeltaY, d->m_selection.lastPos + d->m_scrollDeltaX);
+        d->m_selection.end(d->m_selection.getLastLine() + d->m_scrollDeltaY, d->m_selection.getLastPos() + d->m_scrollDeltaX);
         emit scroll(d->m_scrollDeltaX, d->m_scrollDeltaY);
         killTimer(d->m_delayedDrawTimer);
         d->m_delayedDrawTimer = startTimer(50);
@@ -1140,11 +1136,9 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     p.end();
 
     d->m_oldFirstLine = d->m_firstLine;
-    d->m_selection.oldLastLine = -1;
-    if(d->m_selection.oldFirstLine != -1)
-        d->m_selection.oldFirstLine = -1;
+    d->m_selection.clearOldSelection();
 
-    if(!bOldSelectionContainsData && d->m_selection.bSelectionContainsData)
+    if(!bOldSelectionContainsData && d->m_selection.selectionContainsData())
         emit newSelection();
 }
 

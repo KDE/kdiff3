@@ -322,18 +322,37 @@ class Selection
 {
 public:
   Selection(){}
+private:
   int firstLine = -1;
-  int firstPos = -1;
   int lastLine = -1;
+
+  int firstPos = -1;
   int lastPos = -1;
-  int oldLastLine = -1;
+  
   int oldFirstLine = -1;
+  int oldLastLine = -1;
+public:
+//private:
   bool bSelectionContainsData = false;
+public:
+  inline int getFirstLine() { return firstLine; };
+  inline int getLastLine() { return lastLine; };
+
+  inline int getFirstPos() { return firstPos; };
+  inline int getLastPos() { return lastPos; };
+
+  inline void invalidate() { firstLine = -1; };
+  inline bool isValidFirstLine() { return firstLine != -1; }
+  inline void clearOldSelection() { oldLastLine = -1, oldFirstLine = -1; };
+  
+  inline int getOldLastLine() { return oldLastLine; };
+  inline int getOldFirstLine() { return oldFirstLine; };
+  inline bool selectionContainsData(void) { return bSelectionContainsData; };
   bool isEmpty() { return firstLine == -1 || (firstLine == lastLine && firstPos == lastPos) || bSelectionContainsData == false; }
   void reset()
   {
-      oldFirstLine = firstLine;
       oldLastLine = lastLine;
+      oldFirstLine = firstLine;
       firstLine = -1;
       lastLine = -1;
       bSelectionContainsData = false;
@@ -344,6 +363,7 @@ public:
          oldLastLine = lastLine;
       lastLine  = l;
       lastPos  = p;
+      //bSelectionContainsData = (firstLine == lastLine && firstPos == lastPos);
    }
    bool within( int l, int p );
 

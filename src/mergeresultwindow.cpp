@@ -1616,7 +1616,7 @@ void MergeResultWindow::timerEvent(QTimerEvent*)
 
     if(m_scrollDeltaX != 0 || m_scrollDeltaY != 0)
     {
-        m_selection.end(m_selection.lastLine + m_scrollDeltaY, m_selection.lastPos + m_scrollDeltaX);
+        m_selection.end(m_selection.getLastLine() + m_scrollDeltaY, m_selection.getLastPos() + m_scrollDeltaX);
         emit scroll(m_scrollDeltaX, m_scrollDeltaY);
         killTimer(m_delayedDrawTimer);
         m_delayedDrawTimer = startTimer(50);
@@ -1894,7 +1894,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
     if(m_pDiff3LineList == nullptr || !m_bPaintingAllowed)
         return;
 
-    bool bOldSelectionContainsData = m_selection.bSelectionContainsData;
+    bool bOldSelectionContainsData = m_selection.selectionContainsData();
     const QFontMetrics& fm = fontMetrics();
     int fontWidth = fm.width('0');
 
@@ -1982,7 +1982,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         textLayout.drawCursor(&painter, QPointF(0, (m_cursorYPos - m_firstLine) * fontMetrics().lineSpacing()), m_cursorXPos);
     }
 
-    if(!bOldSelectionContainsData && m_selection.bSelectionContainsData)
+    if(!bOldSelectionContainsData && m_selection.selectionContainsData())
         emit newSelection();
 }
 
@@ -2088,7 +2088,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
         line = max2(line, 0);
         if(e->QInputEvent::modifiers() & Qt::ShiftModifier)
         {
-            if(m_selection.firstLine == -1)
+            if(!m_selection.isValidFirstLine())
                 m_selection.start(line, pos);
             m_selection.end(line, pos);
         }
@@ -2162,7 +2162,7 @@ void MergeResultWindow::mouseReleaseEvent(QMouseEvent* e)
             m_delayedDrawTimer = 0;
         }
 
-        if(m_selection.firstLine != -1)
+        if(m_selection.isValidFirstLine())
         {
             emit selectionEnd();
         }
@@ -2179,7 +2179,7 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
     m_cursorXPos = pos;
     m_cursorOldXPixelPos = m_cursorXPixelPos;
     m_cursorYPos = line;
-    if(m_selection.firstLine != -1)
+    if(m_selection.isValidFirstLine())
     {
         m_selection.end(line, pos);
         myUpdate(0);
@@ -2604,7 +2604,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     int newCursorX = x;
     if(bShift)
     {
-        if(m_selection.firstLine == -1)
+        if(!m_selection.isValidFirstLine())
             m_selection.start(m_cursorYPos, m_cursorXPos);
 
         m_selection.end(y, newCursorX);
@@ -2722,8 +2722,9 @@ QString MergeResultWindow::getSelection()
 bool MergeResultWindow::deleteSelection2(QString& s, int& x, int& y,
                                          MergeLineList::iterator& mlIt, MergeEditLineList::iterator& melIt)
 {
-    if(m_selection.firstLine != -1 && m_selection.bSelectionContainsData)
+    if(m_selection.selectionContainsData())
     {
+        Q_ASSERT(m_selection.isValidFirstLine());
         deleteSelection();
         y = m_cursorYPos;
         calcIteratorFromLineNr(y, mlIt, melIt);
@@ -2731,15 +2732,18 @@ bool MergeResultWindow::deleteSelection2(QString& s, int& x, int& y,
         x = convertToPosInText(s, m_cursorXPos, m_pOptions->m_tabSize);
         return true;
     }
+
     return false;
 }
 
 void MergeResultWindow::deleteSelection()
 {
-    if(m_selection.firstLine == -1 || !m_selection.bSelectionContainsData)
+    if(!m_selection.selectionContainsData())
     {
         return;
     }
+    Q_ASSERT(m_selection.isValidFirstLine());
+    
     setModified();
 
     int line = 0;
@@ -2808,8 +2812,8 @@ void MergeResultWindow::deleteSelection()
                     firstLineString += lineString.midRef(pos); // rest of line
                     melItFirst->setString(firstLineString);
                 }
-                
-                if(line != firstLine || m_selection.lastPos - m_selection.firstPos == lineString.length())
+
+                if(line != firstLine || (m_selection.endPos() - m_selection.beginPos()) == lineString.length())
                 {
                     // Remove the line
                     if(mlIt->mergeEditLineList.size() > 1)
@@ -2833,8 +2837,8 @@ void MergeResultWindow::deleteSelection()
 
 void MergeResultWindow::pasteClipboard(bool bFromSelection)
 {
-    if(m_selection.firstLine != -1)
-        deleteSelection();
+    //checking of m_selection if needed is done by deleteSelection no need for check here.
+    deleteSelection();
 
     setModified();
 
