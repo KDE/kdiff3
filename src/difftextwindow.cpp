@@ -441,7 +441,7 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
         if((!d->m_pOptions->m_bRightToLeftLanguage && e->x() < xOffset) || (d->m_pOptions->m_bRightToLeftLanguage && e->x() > width() - xOffset))
         {
             emit setFastSelectorLine(convertLineToDiff3LineIdx(line));
-            d->m_selection.invalidate(); // Disable current d->m_selection
+            d->m_selection.reset(); // Disable current d->m_selection
         }
         else
         { // Selection

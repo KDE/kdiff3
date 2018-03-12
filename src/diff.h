@@ -341,7 +341,6 @@ public:
   inline int getFirstPos() { return firstPos; };
   inline int getLastPos() { return lastPos; };
 
-  inline void invalidate() { firstLine = -1; };
   inline bool isValidFirstLine() { return firstLine != -1; }
   inline void clearOldSelection() { oldLastLine = -1, oldFirstLine = -1; };
   
