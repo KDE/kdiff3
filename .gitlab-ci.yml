@@ -1,0 +1,25 @@
+image: reporter123/cmake:artful
+
+build:
+  stage: build
+  
+  before_script: 
+     - apt-get update && apt-get install -y extra-cmake-modules gettext qtbase5-dev extra-cmake-modules libkf5i18n-dev libkf5coreaddons-dev libkf5iconthemes-dev libkf5parts-dev libkf5doctools-dev libkf5crash-dev 
+  script: 
+    - cmake .
+    - make
+    - make install
+    
+  #artifacts:
+  #  paths:
+  #    - mybinary
+  # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
+  # cache:
+  #   paths:
+  #     - "*.o"
+
+# run tests using the binary built before
+#test:
+#  stage: test
+#  script:
+#    - ./runmytests.sh
