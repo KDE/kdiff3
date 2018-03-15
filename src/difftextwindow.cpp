@@ -76,7 +76,7 @@ class DiffTextWindowData
         m_bMyUpdate = false;
         m_bSelectionInProgress = false;
         m_pTextCodec = nullptr;
-#if defined(_WIN32) || defined(Q_OS_OS2)
+#if defined(_WIN32)
         m_eLineEndStyle = eLineEndStyleDos;
 #else
         m_eLineEndStyle = eLineEndStyleUnix;
@@ -1387,7 +1387,7 @@ QString DiffTextWindow::getSelection()
             if(d->m_selection.within(line, size) &&
                !(d->m_bWordWrap && it + 1 < vectorSize && d3l == d->m_diff3WrapLineVector[it + 1].pD3L))
             {
-#if defined(_WIN32) || defined(Q_OS_OS2)
+#if defined(_WIN32)
                 selectionString += '\r';
 #endif
                 selectionString += '\n';

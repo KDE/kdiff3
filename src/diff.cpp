@@ -657,7 +657,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     if(faIn.exists()) // fileInSize > 0 )
     {
 
-#if defined(_WIN32) || defined(Q_OS_OS2)
+#if defined(_WIN32)
         QString catCmd = "type";
         fileNameIn1.replace('/', "\\");
 #else

@@ -196,7 +196,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
             pVBoxLayout->addWidget(pTextEdit);
             pDialog->resize(600, 400);
             pDialog->exec();
-#if !defined(_WIN32) && !defined(Q_OS_OS2)
+#if !defined(_WIN32) 
             // A windows program has no console
             printf("%s\n", title.toLatin1().constData());
             printf("%s\n", s.toLatin1().constData());
@@ -632,7 +632,7 @@ void KDiff3App::initActions(KActionCollection* ac)
     addManualDiffHelp = KDiff3::createAction<QAction>(i18n("Add Manual Diff Alignment"), QKeySequence(Qt::CTRL + Qt::Key_Y), this, SLOT(slotAddManualDiffHelp()), ac, "diff_add_manual_diff_help");
     clearManualDiffHelpList = KDiff3::createAction<QAction>(i18n("Clear All Manual Diff Alignments"), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Y), this, SLOT(slotClearManualDiffHelpList()), ac, "diff_clear_manual_diff_help_list");
 
-#if defined(_WIN32) || defined(Q_OS_OS2)
+#if defined(_WIN32)//TODO:Huh?!
     KDiff3::createAction<QAction>(i18n("Focus Next Window"), QKeySequence(Qt::CTRL + Qt::Key_Tab), this, SLOT(slotWinFocusNext()), ac, "win_focus_next");
 #endif
     winFocusPrev = KDiff3::createAction<QAction>(i18n("Focus Prev Window"), QKeySequence(Qt::ALT + Qt::Key_Left), this, SLOT(slotWinFocusPrev()), ac, "win_focus_prev");

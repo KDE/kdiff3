@@ -1258,7 +1258,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 
     OptionCheckBox* pFindHidden = new OptionCheckBox(i18n("Find hidden files and directories"), true, "FindHidden", &m_options.m_bDmFindHidden, page, this);
     gbox->addWidget(pFindHidden, line, 0, 1, 2);
-#if defined(_WIN32) || defined(Q_OS_OS2)
+#if defined(_WIN32)
     pFindHidden->setToolTip(i18n("Finds files and directories with the hidden attribute."));
 #else
     pFindHidden->setToolTip(i18n("Finds files and directories starting with '.'."));
@@ -1285,7 +1285,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 //              "Files and directories without change will not appear in the list."));
 //++line;
 
-#if defined(_WIN32) || defined(Q_OS_OS2)
+#if defined(_WIN32)
     bool bCaseSensitiveFilenameComparison = false;
 #else
     bool bCaseSensitiveFilenameComparison = true;
@@ -1559,7 +1559,7 @@ void OptionDialog::setupRegionalPage(void)
     pLanguage->addItem("Auto"); // Must not translate, won't work otherwise!
     pLanguage->addItem("en_orig");
 
-#if !defined(_WIN32) && !defined(Q_OS_OS2) && !defined(__APPLE__)
+#if !defined(_WIN32)  && !defined(__APPLE__)
     // Read directory: Find all kdiff3_*.qm-files and insert the found files here
     QDir localeDir("/usr/share/locale"); // See also kreplacements.cpp: getTranslationDir()
     QStringList dirList = localeDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);

@@ -121,50 +121,6 @@ int main(int argc, char* argv[])
     QApplication app(argc, argv); // KAboutData and QCommandLineParser depend on this being setup.
 
     KCrash::initialize();
-#ifdef _WIN32
-    /* KDiff3 can be used as replacement for the text-diff and merge tool provided by
-      Clearcase. This is experimental and so far has only been tested under Windows.
-
-      There are two ways to use KDiff3 with clearcase
-      -  The file lib/mgrs/map contains the list of compare/merge tasks on one side and 
-         the tool on the other. Originally this contains only clearcase tools, but you can
-         edit this file and put kdiff3 there instead. (Recommended method)
-      -  Exchange the original program with KDiff3: (Hackish, no fine control)
-         1. In the Clearcase "bin"-directory rename "cleardiffmrg.exe" to "cleardiffmrg_orig.exe".
-         2. Copy kdiff3.exe into that "bin"-directory and rename it to "cleardiffmrg.exe".
-            (Also copy the other files that are needed by KDiff3 there.)
-         Now when a file comparison or merge is done by Clearcase then of course KDiff3 will be
-         run instead.
-         If the commandline contains the option "-directory" then KDiff3 can't do it but will
-         run "cleardiffmrg_orig.exe" instead.
-   */
-
-    // Write all args into a temporary file. Uncomment this for debugging purposes.
-    /*
-   FILE* f = fopen(QDir::toNativeSeparators(QDir::homePath()+"//kdiff3_call_args.txt").toLatin1().data(),"w");
-   for(int i=0; i< argc; ++i)
-      fprintf(f,"Arg %d: %s\n", i, argv[i]);
-   fclose(f);
-   
-   // Call orig cleardiffmrg.exe to see what result it returns.
-   int result=0;
-   result = ::_spawnvp(_P_WAIT , "C:\\Programme\\Rational\\ClearCase\\bin\\cleardiffmrg.exe", argv );
-   fprintf(f,"Result: %d\n", result );
-   fclose(f);
-   return result;
-   */
-
-    // KDiff3 can replace cleardiffmrg from clearcase. But not all functions.
-    if(isOptionUsed("directory", argc, argv))
-    {
-        return ::_spawnvp(_P_WAIT, "cleardiffmrg_orig", argv);
-    }
-
-#endif
-#ifdef Q_OS_OS2
-    // expand wildcards on the command line
-    _wildcard(&argc, &argv);
-#endif
 
     //QApplication::setColorSpec( QApplication::ManyColor ); // Grab all 216 colors
 
@@ -225,7 +181,7 @@ int main(int argc, char* argv[])
         QString errorMessage = cmdLineParser->errorText();
         QString helpText = cmdLineParser->helpText();
         QMessageBox::warning(nullptr, aboutData.displayName(), "<html><head/><body><h2>" + errorMessage + "</h2><pre>" + helpText + "</pre></body></html>");
-#if !defined(_WIN32) && !defined(Q_OS_OS2)
+#if !defined(_WIN32) 
         fputs(qPrintable(errorMessage), stderr);
         fputs("\n\n", stderr);
         fputs(qPrintable(helpText + "\n"), stderr);
@@ -237,14 +193,14 @@ int main(int argc, char* argv[])
     if(cmdLineParser->isSet(QStringLiteral("version"))) {
         QMessageBox::information(nullptr, aboutData.displayName(),
                                  aboutData.displayName() + ' ' + aboutData.version());
-#if !defined(_WIN32) && !defined(Q_OS_OS2)
+#if !defined(_WIN32) 
         printf("%s %s\n", appName.constData(), appVersion.constData());
 #endif
         exit(0);
     }
     if(cmdLineParser->isSet(QStringLiteral("help"))) {
         QMessageBox::warning(nullptr, aboutData.displayName(), "<html><head/><body><pre>" + cmdLineParser->helpText() + "</pre></body></html>");
-#if !defined(_WIN32) && !defined(Q_OS_OS2)
+#if !defined(_WIN32) 
         fputs(qPrintable(cmdLineParser->helpText()), stdout);
 #endif
         exit(0);

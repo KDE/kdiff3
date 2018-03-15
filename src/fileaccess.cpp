@@ -861,7 +861,7 @@ bool FileAccess::removeDir(const QString& dirName)
     return fh.rmDir(dirName);
 }
 
-#if defined(_WIN32) || defined(Q_OS_OS2)
+#if defined(_WIN32)
 bool FileAccess::symLink(const QString& /*linkTarget*/, const QString& /*linkLocation*/)
 {
     return false;
@@ -1685,7 +1685,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
     {
         cvsIgnoreList.init(*m_pFileAccess, cvsIgnoreExists(pDirList));
     }
-#if defined(_WIN32) || defined(Q_OS_OS2)
+#if defined(_WIN32)
     bool bCaseSensitive = false;
 #else
     bool bCaseSensitive = true;
