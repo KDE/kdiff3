@@ -622,7 +622,6 @@ void KDiff3App::initActions(KActionCollection* ac)
     showWindowA = KDiff3::createAction<KToggleAction>(i18n("Show Window A"), this, SLOT(slotShowWindowAToggled()), ac, "win_show_a");
     showWindowB = KDiff3::createAction<KToggleAction>(i18n("Show Window B"), this, SLOT(slotShowWindowBToggled()), ac, "win_show_b");
     showWindowC = KDiff3::createAction<KToggleAction>(i18n("Show Window C"), this, SLOT(slotShowWindowCToggled()), ac, "win_show_c");
-    winFocusNext = KDiff3::createAction<QAction>(i18n("Focus Next Window"), QKeySequence(Qt::ALT + Qt::Key_Right), this, SLOT(slotWinFocusNext()), ac, "win_focus_next");
 
     overviewModeNormal = KDiff3::createAction<KToggleAction>(i18n("Normal Overview"), this, SLOT(slotOverviewNormal()), ac, "diff_overview_normal");
     overviewModeAB = KDiff3::createAction<KToggleAction>(i18n("A vs. B Overview"), this, SLOT(slotOverviewAB()), ac, "diff_overview_ab");
@@ -632,9 +631,7 @@ void KDiff3App::initActions(KActionCollection* ac)
     addManualDiffHelp = KDiff3::createAction<QAction>(i18n("Add Manual Diff Alignment"), QKeySequence(Qt::CTRL + Qt::Key_Y), this, SLOT(slotAddManualDiffHelp()), ac, "diff_add_manual_diff_help");
     clearManualDiffHelpList = KDiff3::createAction<QAction>(i18n("Clear All Manual Diff Alignments"), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Y), this, SLOT(slotClearManualDiffHelpList()), ac, "diff_clear_manual_diff_help_list");
 
-#if defined(_WIN32)//TODO:Huh?!
-    KDiff3::createAction<QAction>(i18n("Focus Next Window"), QKeySequence(Qt::CTRL + Qt::Key_Tab), this, SLOT(slotWinFocusNext()), ac, "win_focus_next");
-#endif
+    winFocusNext = KDiff3::createAction<QAction>(i18n("Focus Next Window"), QKeySequence(Qt::ALT + Qt::Key_Right), this, SLOT(slotWinFocusNext()), ac, "win_focus_next");
     winFocusPrev = KDiff3::createAction<QAction>(i18n("Focus Prev Window"), QKeySequence(Qt::ALT + Qt::Key_Left), this, SLOT(slotWinFocusPrev()), ac, "win_focus_prev");
     winToggleSplitOrientation = KDiff3::createAction<QAction>(i18n("Toggle Split Orientation"), this, SLOT(slotWinToggleSplitterOrientation()), ac, "win_toggle_split_orientation");
 
