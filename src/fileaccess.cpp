@@ -31,7 +31,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#ifdef _WIN32
+#ifdef Q_OS_WIN
 #include <io.h>
 #include <process.h>
 #include <sys/utime.h>
@@ -227,7 +227,7 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
         d()->m_name = fi.fileName();
         if(m_bSymLink)
         {
-#ifdef _WIN32
+#ifdef Q_OS_WIN
             d()->m_linkTarget = fi.readLink();
 #else
             // TODO: Update for Qt5.
@@ -768,7 +768,7 @@ bool FileAccess::writeFile(const void* pSrcBuffer, unsigned long length)
                     return false;
             }
             f.close();
-#ifndef _WIN32
+#ifndef Q_OS_WIN
             if(isExecutable()) // value is true if the old file was executable
             {
                 // Preserve attributes
@@ -861,7 +861,7 @@ bool FileAccess::removeDir(const QString& dirName)
     return fh.rmDir(dirName);
 }
 
-#if defined(_WIN32)
+#if defined(Q_OS_WIN)
 bool FileAccess::symLink(const QString& /*linkTarget*/, const QString& /*linkLocation*/)
 {
     return false;
@@ -1284,7 +1284,7 @@ bool FileAccessJobHandler::copyFile(const QString& dest)
     destFile.close();
 
 // Update the times of the destFile
-#ifdef _WIN32
+#ifdef Q_OS_WIN
     struct _stat srcFileStatus;
     int statResult = ::_stat(srcName.toLocal8Bit().constData(), &srcFileStatus);
     if(statResult == 0)
@@ -1563,7 +1563,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
         m_bSuccess = QDir::setCurrent(m_pFileAccess->absoluteFilePath());
         if(m_bSuccess)
         {
-#ifndef _WIN32
+#ifndef Q_OS_WIN
             m_bSuccess = true;
             QDir dir(".");
 
@@ -1685,7 +1685,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
     {
         cvsIgnoreList.init(*m_pFileAccess, cvsIgnoreExists(pDirList));
     }
-#if defined(_WIN32)
+#if defined(Q_OS_WIN)
     bool bCaseSensitive = false;
 #else
     bool bCaseSensitive = true;

@@ -14,7 +14,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#ifdef _WIN32
+#ifdef Q_OS_WIN
 #include <qt_windows.h>
 #endif
 
@@ -586,7 +586,7 @@ static QString getArguments(QString cmd, QString& program, QStringList& args)
     {
         program = args[0];
         args.pop_front();
-#ifdef WIN32
+#ifdef Q_OS_WIN
         if(program == "sed")
         {
             QString prg = QCoreApplication::applicationDirPath() + "/bin/sed.exe"; // in subdir bin
@@ -657,7 +657,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     if(faIn.exists()) // fileInSize > 0 )
     {
 
-#if defined(_WIN32)
+#if defined(Q_OS_WIN)
         QString catCmd = "type";
         fileNameIn1.replace('/', "\\");
 #else
@@ -1496,7 +1496,7 @@ void calcDiff3LineListUsingBC(
    printf("\n");*/
 }
 
-#ifdef _WIN32
+#ifdef Q_OS_WIN
 using ::equal;
 #endif
 

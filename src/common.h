@@ -69,11 +69,7 @@ T minMaxLimiter( T d, T minimum, T maximum )
 
 inline int getAtomic(QAtomicInt& ai)
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
    return ai.load();
-#else
-   return ai;
-#endif
 }
 
 class QFont;

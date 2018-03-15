@@ -184,7 +184,7 @@ OpenDialog::OpenDialog(
     setFixedHeight(sh.height());
     m_bInputFileNameChanged = false;
 
-#ifdef _WIN32
+#ifdef Q_OS_WIN
     m_pLineA->lineEdit()->installEventFilter(this);
     m_pLineB->lineEdit()->installEventFilter(this);
     m_pLineC->lineEdit()->installEventFilter(this);

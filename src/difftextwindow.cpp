@@ -76,7 +76,7 @@ class DiffTextWindowData
         m_bMyUpdate = false;
         m_bSelectionInProgress = false;
         m_pTextCodec = nullptr;
-#if defined(_WIN32)
+#if defined(Q_OS_WIN)
         m_eLineEndStyle = eLineEndStyleDos;
 #else
         m_eLineEndStyle = eLineEndStyleUnix;
@@ -1054,11 +1054,8 @@ void DiffTextWindowData::writeLine(
         }
         if(!bWrapLine || wrapLineLength > 0)
         {
-#if defined(__APPLE__) && (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
-            Qt::PenStyle wrapLinePenStyle = Qt::DashLine; // Qt::DotLine doesn't work on Mac (Qt4.8.6).
-#else
             Qt::PenStyle wrapLinePenStyle = Qt::DotLine;
-#endif
+            
             p.setPen(QPen(m_pOptions->m_fgColor, 0, bWrapLine ? wrapLinePenStyle : Qt::SolidLine));
             p.drawLine(xOffset + 1, yOffset, xOffset + 1, yOffset + fontHeight - 1);
             p.setPen(QPen(m_pOptions->m_fgColor, 0, Qt::SolidLine));
@@ -1387,7 +1384,7 @@ QString DiffTextWindow::getSelection()
             if(d->m_selection.within(line, size) &&
                !(d->m_bWordWrap && it + 1 < vectorSize && d3l == d->m_diff3WrapLineVector[it + 1].pD3L))
             {
-#if defined(_WIN32)
+#if defined(Q_OS_WIN)
                 selectionString += '\r';
 #endif
                 selectionString += '\n';

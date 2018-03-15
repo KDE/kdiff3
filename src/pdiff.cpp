@@ -18,7 +18,7 @@
 #include <QtGui>
 #include <QtWidgets/QtWidgets>
 
-#ifdef _WIN32
+#ifdef Q_OS_WIN
 #include <qt_windows.h>
 #endif
 
@@ -54,7 +54,7 @@
 #include "kdiff3.h"
 #include "optiondialog.h"
 #include "progress.h"
-#ifdef _WIN32
+#ifdef Q_OS_WIN
 #include <windows.h>
 #else
 #include <kshortcutsdialog.h>

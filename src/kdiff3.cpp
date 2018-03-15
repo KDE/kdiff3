@@ -196,7 +196,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3
             pVBoxLayout->addWidget(pTextEdit);
             pDialog->resize(600, 400);
             pDialog->exec();
-#if !defined(_WIN32) 
+#if !defined(Q_OS_WIN) 
             // A windows program has no console
             printf("%s\n", title.toLatin1().constData());
             printf("%s\n", s.toLatin1().constData());

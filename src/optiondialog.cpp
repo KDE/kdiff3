@@ -1258,7 +1258,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 
     OptionCheckBox* pFindHidden = new OptionCheckBox(i18n("Find hidden files and directories"), true, "FindHidden", &m_options.m_bDmFindHidden, page, this);
     gbox->addWidget(pFindHidden, line, 0, 1, 2);
-#if defined(_WIN32)
+#if defined(Q_OS_WIN)
     pFindHidden->setToolTip(i18n("Finds files and directories with the hidden attribute."));
 #else
     pFindHidden->setToolTip(i18n("Finds files and directories starting with '.'."));
@@ -1285,7 +1285,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 //              "Files and directories without change will not appear in the list."));
 //++line;
 
-#if defined(_WIN32)
+#if defined(Q_OS_WIN)
     bool bCaseSensitiveFilenameComparison = false;
 #else
     bool bCaseSensitiveFilenameComparison = true;
@@ -1559,7 +1559,7 @@ void OptionDialog::setupRegionalPage(void)
     pLanguage->addItem("Auto"); // Must not translate, won't work otherwise!
     pLanguage->addItem("en_orig");
 
-#if !defined(_WIN32)  && !defined(__APPLE__)
+#if !defined(Q_OS_WIN)  && !defined(Q_OS_MAC)
     // Read directory: Find all kdiff3_*.qm-files and insert the found files here
     QDir localeDir("/usr/share/locale"); // See also kreplacements.cpp: getTranslationDir()
     QStringList dirList = localeDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
@@ -1686,7 +1686,7 @@ void OptionDialog::setupRegionalPage(void)
     topLayout->addStretch(10);
 }
 
-#ifdef _WIN32
+#ifdef Q_OS_WIN
 #include "ccInstHelper.cpp"
 #endif
 
@@ -1724,7 +1724,7 @@ void OptionDialog::setupIntegrationPage(void)
         "For those who are used to using the Escape key."));
     ++line;
 
-#ifdef _WIN32
+#ifdef Q_OS_WIN
     QPushButton* pIntegrateWithClearCase = new QPushButton(i18n("Integrate with ClearCase"), page);
     gbox->addWidget(pIntegrateWithClearCase, line, 0);
     pIntegrateWithClearCase->setToolTip(i18n(
@@ -1749,7 +1749,7 @@ void OptionDialog::setupIntegrationPage(void)
 
 void OptionDialog::slotIntegrateWithClearCase()
 {
-#ifdef _WIN32
+#ifdef Q_OS_WIN
     char kdiff3CommandPath[1000];
     GetModuleFileNameA(0, kdiff3CommandPath, sizeof(kdiff3CommandPath) - 1);
     integrateWithClearCase("install", kdiff3CommandPath);
@@ -1758,7 +1758,7 @@ void OptionDialog::slotIntegrateWithClearCase()
 
 void OptionDialog::slotRemoveClearCaseIntegration()
 {
-#ifdef _WIN32
+#ifdef Q_OS_WIN
     char kdiff3CommandPath[1000];
     GetModuleFileNameA(0, kdiff3CommandPath, sizeof(kdiff3CommandPath) - 1);
     integrateWithClearCase("uninstall", kdiff3CommandPath);
@@ -1826,7 +1826,7 @@ void OptionDialog::slotApply(void)
 
     emit applyDone();
 
-#ifdef _WIN32
+#ifdef Q_OS_WIN
     QString locale = m_options.m_language;
     if(locale == "Auto" || locale.isEmpty())
         locale = QLocale::system().name().left(2);

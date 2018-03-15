@@ -18,7 +18,7 @@
 // http://www.codeproject.com/Articles/4025/Use-Shell-ContextMenu-in-your-applications
 //
 //////////////////////////////////////////////////////////////////////
-#ifdef _WIN32
+#ifdef Q_OS_WIN
 #include <qt_windows.h>
 
 #include <windows.h>

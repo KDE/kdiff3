@@ -14,7 +14,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#ifdef _WIN32
+#ifdef Q_OS_WIN
 #include <qt_windows.h>
 #endif
 
@@ -2276,7 +2276,7 @@ void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
             m.addAction(d->m_pDirCompareExplicit);
             m.addAction(d->m_pDirMergeExplicit);
 
-#ifndef _WIN32
+#ifndef Q_OS_WIN
             m.exec(p);
 #else
             void showShellContextMenu(const QString&, QPoint, QWidget*, QMenu*);
@@ -3145,7 +3145,7 @@ bool DirectoryMergeWindow::Data::copyFLD(const QString& srcName, const QString& 
     if(fi.isSymLink() && ((fi.isDir() && !m_bFollowDirLinks) || (!fi.isDir() && !m_bFollowFileLinks)))
     {
         m_pStatusInfo->addText(i18n("copyLink( %1 -> %2 )", srcName, destName));
-#if defined(_WIN32)
+#if defined(Q_OS_WIN)
 // What are links?
 #else
         if(m_bSimulatedMergeStarted)
@@ -3348,7 +3348,7 @@ static void addListViewItem(QTreeWidget* pListView, const QString& dir,
             new QTreeWidgetItem(
                 pListView,
                 QStringList() << dir << QString(fi->isDir() ? i18n("Dir") : i18n("File")) + (fi->isSymLink() ? "-Link" : "") << QString::number(fi->size()) << QString(fi->isReadable() ? "r" : " ") + (fi->isWritable() ? "w" : " ")
-#ifdef _WIN32
+#ifdef Q_OS_WIN
                               /*Future: Use GetFileAttributes()*/
                               <<
 #else

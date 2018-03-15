@@ -2270,7 +2270,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
 
     bool bCtrl = (e->QInputEvent::modifiers() & Qt::ControlModifier) != 0;
     bool bShift = (e->QInputEvent::modifiers() & Qt::ShiftModifier) != 0;
-#ifdef _WIN32
+#ifdef Q_OS_WIN
     bool bAlt = (e->QInputEvent::modifiers() & Qt::AltModifier) != 0;
     if(bCtrl && bAlt) {
         bCtrl = false;
@@ -2705,7 +2705,7 @@ QString MergeResultWindow::getSelection()
 
                 if(m_selection.within(line, outPos))
                 {
-#ifdef _WIN32
+#ifdef Q_OS_WIN
                     selectionString += '\r';
 #endif
                     selectionString += '\n';

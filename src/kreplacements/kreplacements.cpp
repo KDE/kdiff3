@@ -58,7 +58,7 @@ static QString s_homepage;
 static KAboutData* s_pAboutData;
 
 
-#ifdef _WIN32
+#ifdef Q_OS_WIN
 #include <process.h>
 #include <windows.h>
 #include <shellapi.h>
@@ -66,7 +66,7 @@ static KAboutData* s_pAboutData;
 
 static void showHelp()
 {
-   #if defined(_WIN32)
+   #if defined(Q_OS_WIN)
       QString exePath = QCoreApplication::applicationDirPath();
 
       QFileInfo helpFile( exePath + "\\doc\\en\\index.html" );
@@ -118,12 +118,12 @@ static void showHelp()
 
 QString getTranslationDir(const QString& locale)
 {
-   #if defined(_WIN32)
+   #if defined(Q_OS_WIN)
       QUNUSED(locale); 
       QString exePath;
       exePath = QCoreApplication::applicationDirPath();
       return exePath+"/translations";
-   #elif defined(__APPLE__)
+   #elif defined(Q_OS_MAC)
       QUNUSED(locale);
       
       QString exePath = QCoreApplication::applicationDirPath();
@@ -419,7 +419,7 @@ QString KStandardDirs::findResource(const QString& resource, const QString& /*ap
 {
    if (resource=="config")
    {
-#if defined(_WIN32)
+#if defined(Q_OS_WIN)
       QString exePath = QCoreApplication::applicationDirPath();
       QString configPath = exePath + "/.kdiff3rc"; // This is useful for portable installations (e.g. on USB-Stick)
       if ( QFile::exists( configPath ) )
@@ -981,7 +981,7 @@ KApplication::KApplication()
 : QApplication( s_argc,s_argv )
 {
    kapp = this;
-   #if ! ( defined(_WIN32) )
+   #if ! ( defined(Q_OS_WIN) )
    parseOptions();
    #endif
 }
@@ -1100,7 +1100,7 @@ void KApplication::parseOptions()
             }
 
             s += "\n"+i18n("For more documentation, see the help-menu or the subdirectory doc.")+"\n";
-#if defined(_WIN32)
+#if defined(Q_OS_WIN)
             // A windows program has no console
             if ( 0==QMessageBox::information(0, i18n("KDiff3-Usage"), s, i18n("Ignore"),i18n("Exit") ) )
                continue;
