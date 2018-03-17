@@ -48,15 +48,13 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
-#include <assert.h>
-
 #include "fileaccess.h"
 #include "kdiff3.h"
 #include "optiondialog.h"
 #include "progress.h"
 #ifdef Q_OS_WIN
 #include <windows.h>
-#else
+#else //TODO:Why?
 #include <kshortcutsdialog.h>
 #include <unistd.h>
 #endif
@@ -73,14 +71,14 @@ static void debugLineCheck(Diff3LineList& d3ll, int size, int idx)
     for(it = d3ll.begin(); it != d3ll.end(); ++it)
     {
         int l = 0;
+
+        Q_ASSERT(idx >= 1 && idx <= 3);
         if(idx == 1)
             l = (*it).lineA;
         else if(idx == 2)
             l = (*it).lineB;
         else if(idx == 3)
-            l = (*it).lineC;
-        else
-            assert(false);
+            l = (*it).lineC;            
 
         if(l != -1)
         {
@@ -90,7 +88,7 @@ static void debugLineCheck(Diff3LineList& d3ll, int size, int idx)
                                           "Data loss error:\n"
                                           "If it is reproducible please contact the author.\n"),
                                    i18n("Severe Internal Error"));
-                assert(false);
+                
                 fprintf(stderr, "Severe Internal Error.\n");
                 ::exit(-1);
             }
@@ -104,7 +102,7 @@ static void debugLineCheck(Diff3LineList& d3ll, int size, int idx)
                                   "Data loss error:\n"
                                   "If it is reproducible please contact the author.\n"),
                            i18n("Severe Internal Error"));
-        assert(false);
+        
         fprintf(stderr, "Severe Internal Error.\n");
         ::exit(-1);
     }

@@ -35,7 +35,6 @@
 #include <QTextCodec>
 #include <QTextStream>
 
-#include <assert.h>
 #include <ctype.h>
 #include <map>
 //using namespace std;
@@ -946,7 +945,7 @@ void SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
                 bNonWhiteFound = true;
         }
     }
-    assert(lineIdx == lines);
+    Q_ASSERT(lineIdx == lines);
 
     m_vSize = lines;
 }
@@ -1082,7 +1081,7 @@ void SourceData::FileData::removeComments()
         }
 
         // end of line
-        assert(isLineOrBufEnd(p, i, size));
+        Q_ASSERT(isLineOrBufEnd(p, i, size));
         m_v[line].bContainsPureComment = bCommentInLine && bWhite;
         /*      std::cout << line << " : " <<
        ( bCommentInLine ?  "c" : " " ) <<
@@ -1149,10 +1148,8 @@ void calcDiff3LineListUsingAB(
             --d.diff2;
             ++lineB;
         }
-        else if(d.nofEquals < 0)
-        {
-            assert(false);
-        }
+        
+        Q_ASSERT(d.nofEquals >= 0);
 
         d3ll.push_back(d3l);
     }
@@ -1267,12 +1264,12 @@ void calcDiff3LineListUsingBC(
             while(i3c != d3ll.end() && (*i3c).lineC != lineC)
                 ++i3c;
 
-            assert(i3b != d3ll.end());
-            assert(i3c != d3ll.end());
+            Q_ASSERT(i3b != d3ll.end());
+            Q_ASSERT(i3c != d3ll.end());
 
             if(i3b == i3c)
             {
-                assert((*i3b).lineC == lineC);
+                Q_ASSERT((*i3b).lineC == lineC);
                 (*i3b).bBEqC = true;
             }
             else
@@ -1285,7 +1282,7 @@ void calcDiff3LineListUsingBC(
                 Diff3LineList::iterator i3b1 = i3b;
                 while(i3c1 != i3b && i3b1 != i3c)
                 {
-                    assert(i3b1 != d3ll.end() || i3c1 != d3ll.end());
+                    Q_ASSERT(i3b1 != d3ll.end() || i3c1 != d3ll.end());
                     if(i3c1 != d3ll.end()) ++i3c1;
                     if(i3b1 != d3ll.end()) ++i3b1;
                 }
@@ -1577,7 +1574,7 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
         {
             Diff d(0, 0, 0);
             d.nofEquals = e->line0 - currentLine1;
-            assert(d.nofEquals == e->line1 - currentLine2);
+            Q_ASSERT(d.nofEquals == e->line1 - currentLine2);
             d.diff1 = e->deleted;
             d.diff2 = e->inserted;
             currentLine1 += d.nofEquals + d.diff1;
@@ -1642,7 +1639,6 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
         }
     }
 
-#ifndef NDEBUG
     // Verify difflist
     {
         int l1 = 0;
@@ -1655,10 +1651,8 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
         }
 
         //if( l1!=p1-p1start || l2!=p2-p2start )
-        if(l1 != size1 || l2 != size2)
-            assert(false);
+        Q_ASSERT(l1 == size1 && l2 == size2);
     }
-#endif
 
     pp.setCurrent(1.0);
 
@@ -2335,7 +2329,6 @@ void calcDiff(const T* p1, int size1, const T* p2, int size2, DiffList& diffList
             break;
     }
 
-#ifndef NDEBUG
     // Verify difflist
     {
         int l1 = 0;
@@ -2347,11 +2340,8 @@ void calcDiff(const T* p1, int size1, const T* p2, int size2, DiffList& diffList
             l2 += i->nofEquals + i->diff2;
         }
 
-        //if( l1!=p1-p1start || l2!=p2-p2start )
-        if(l1 != size1 || l2 != size2)
-            assert(false);
+        Q_ASSERT(l1 == size1 && l2 == size2);
     }
-#endif
 }
 
 bool fineDiff(
@@ -2372,6 +2362,8 @@ bool fineDiff(
     int listIdx = 0;
     for(i = diff3LineList.begin(); i != diff3LineList.end(); ++i)
     {
+        Q_ASSERT(selector = 1 || selector == 2 || selector == 3);
+
         if(selector == 1) {
             k1 = i->lineA;
             k2 = i->lineB;
@@ -2386,8 +2378,7 @@ bool fineDiff(
             k1 = i->lineC;
             k2 = i->lineA;
         }
-        else
-            assert(false);
+        
         if((k1 == -1 && k2 != -1) || (k1 != -1 && k2 == -1)) bTextsTotalEqual = false;
         if(k1 != -1 && k2 != -1)
         {
@@ -2419,6 +2410,7 @@ bool fineDiff(
                     }
                 }
 
+                Q_ASSERT(selector = 1 || selector == 2 || selector == 3);
                 if(selector == 1) {
                     delete(*i).pFineAB;
                     (*i).pFineAB = pDiffList;
@@ -2433,12 +2425,12 @@ bool fineDiff(
                     delete(*i).pFineCA;
                     (*i).pFineCA = pDiffList;
                 }
-                else
-                    assert(false);
             }
 
             if((v1[k1].bContainsPureComment || v1[k1].whiteLine()) && (v2[k2].bContainsPureComment || v2[k2].whiteLine()))
             {
+                Q_ASSERT(selector = 1 || selector == 2 || selector == 3);
+
                 if(selector == 1) {
                     i->bAEqB = true;
                 }
@@ -2450,8 +2442,6 @@ bool fineDiff(
                 {
                     i->bAEqC = true;
                 }
-                else
-                    assert(false);
             }
         }
         ++listIdx;
@@ -2470,5 +2460,5 @@ void calcDiff3LineVector(Diff3LineList& d3ll, Diff3LineVector& d3lv)
     {
         d3lv[j] = &(*i);
     }
-    assert(j == (int)d3lv.size());
+    Q_ASSERT(j == (int)d3lv.size());
 }

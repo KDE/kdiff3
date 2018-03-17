@@ -24,7 +24,6 @@
 #include "progress.h"
 
 #include <algorithm>
-#include <assert.h>
 #include <map>
 #include <vector>
 
@@ -588,7 +587,7 @@ QVariant DirectoryMergeWindow::Data::data(const QModelIndex& index, int role) co
                     return i18n("Error: Dates are equal but files are not.");
                     break;
                 default:
-                    assert(false);
+                    Q_ASSERT(true);
                     break;
                 }
             }
@@ -1588,7 +1587,7 @@ void DirectoryMergeWindow::Data::compareFilesAndCalcAges(MergeFileInfos& mfi)
     if(mfi.dirA() != mfi.dirC()) mfi.m_bEqualAC = false;
     if(mfi.dirB() != mfi.dirC()) mfi.m_bEqualBC = false;
 
-    assert(eNew == 0 && eMiddle == 1 && eOld == 2);
+    Q_ASSERT(eNew == 0 && eMiddle == 1 && eOld == 2);
 
     // The map automatically sorts the keys.
     int age = eNew;
@@ -1966,7 +1965,7 @@ void DirectoryMergeWindow::Data::calcSuggestedOperation(const QModelIndex& mi, e
         eDefaultMergeOp = eMergeABToDest;
     }
     if(eDefaultMergeOp == eMergeToAB && bCheckC) {
-        assert(false);
+        Q_ASSERT(true);
     }
 
     if(eDefaultMergeOp == eMergeToA || eDefaultMergeOp == eMergeToB ||
@@ -2015,7 +2014,6 @@ void DirectoryMergeWindow::Data::calcSuggestedOperation(const QModelIndex& mi, e
             else //if ( !mfi.existsInA() && !mfi.existsInB() )
             {
                 setMergeOperation(mi, eNoOperation);
-                assert(false);
             }
         }
         else
@@ -2071,7 +2069,6 @@ void DirectoryMergeWindow::Data::calcSuggestedOperation(const QModelIndex& mi, e
             else //if ( !mfi.existsInA() && !mfi.existsInB() && !mfi.existsInC() )
             {
                 setMergeOperation(mi, eNoOperation);
-                assert(false);
             }
         }
 
@@ -2126,8 +2123,10 @@ void DirectoryMergeWindow::Data::calcSuggestedOperation(const QModelIndex& mi, e
         case eMergeToAB:
         case eMergeABCToDest:
         case eMergeABToDest:
+            break;
         default:
-            assert(false);
+            Q_ASSERT(true);
+            break;
         }
         setMergeOperation(mi, eMO);
     }
@@ -2631,7 +2630,6 @@ bool DirectoryMergeWindow::Data::executeMergeOperation(MergeFileInfos& mfi, bool
         break;
     default:
         KMessageBox::error(q, i18n("Unknown merge operation. (This must never happen!)"), i18n("Error"));
-        assert(false);
     }
 
     bool bSuccess = false;
@@ -2677,7 +2675,6 @@ bool DirectoryMergeWindow::Data::executeMergeOperation(MergeFileInfos& mfi, bool
         break;
     default:
         KMessageBox::error(q, i18n("Unknown merge operation."), i18n("Error"));
-        assert(false);
     }
 
     return bSuccess;

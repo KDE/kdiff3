@@ -70,7 +70,7 @@ class OptionItem
   public:
     OptionItem(OptionDialog* pOptionDialog, const QString& saveName)
     {
-        assert(pOptionDialog != nullptr);
+        Q_ASSERT(pOptionDialog != nullptr);
         pOptionDialog->addOptionItem(this);
         m_saveName = saveName;
         m_bPreserved = false;

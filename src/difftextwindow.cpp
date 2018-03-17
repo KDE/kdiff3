@@ -41,7 +41,6 @@
 
 #include <KLocalizedString>
 
-#include <assert.h>
 #include <cmath>
 #include <cstdlib>
 
@@ -678,7 +677,7 @@ void DiffTextWindow::convertToLinePos(int x, int y, int& line, int& pos)
 
 int Selection::firstPosInLine(int l)
 {
-    assert(firstLine != -1);
+    Q_ASSERT(firstLine != -1);
 
     int l1 = firstLine;
     int l2 = lastLine;
@@ -699,7 +698,7 @@ int Selection::firstPosInLine(int l)
 
 int Selection::lastPosInLine(int l)
 {
-    assert(firstLine != -1);
+    Q_ASSERT(firstLine != -1);
 
     int l1 = firstLine;
     int l2 = lastLine;
@@ -1275,6 +1274,8 @@ void DiffTextWindowData::getLineInfo(
     bool bAEqB = d3l.bAEqB || (d3l.bWhiteLineA && d3l.bWhiteLineB);
     bool bAEqC = d3l.bAEqC || (d3l.bWhiteLineA && d3l.bWhiteLineC);
     bool bBEqC = d3l.bBEqC || (d3l.bWhiteLineB && d3l.bWhiteLineC);
+
+    Q_ASSERT(m_winIdx >= 1 && m_winIdx <= 3);
     if(m_winIdx == 1) {
         lineIdx = d3l.lineA;
         pFineDiff1 = d3l.pFineAB;
@@ -1301,8 +1302,7 @@ void DiffTextWindowData::getLineInfo(
                    ((d3l.lineB == -1) != (lineIdx == -1) ? 2 : 0);
         changed2 |= (bAEqC ? 0 : 1) + (bBEqC ? 0 : 2);
     }
-    else
-        assert(false);
+    
 }
 
 void DiffTextWindow::resizeEvent(QResizeEvent* e)
@@ -1347,6 +1347,9 @@ QString DiffTextWindow::getSelection()
     for(it = 0; it < vectorSize; ++it)
     {
         const Diff3Line* d3l = d->m_bWordWrap ? d->m_diff3WrapLineVector[it].pD3L : (*d->m_pDiff3LineVector)[it];
+        
+        Q_ASSERT(d->m_winIdx >= 1 && d->m_winIdx <= 3);
+
         if(d->m_winIdx == 1) {
             lineIdx = d3l->lineA;
         }
@@ -1358,8 +1361,6 @@ QString DiffTextWindow::getSelection()
         {
             lineIdx = d3l->lineC;
         }
-        else
-            assert(false);
 
         if(lineIdx != -1)
         {
@@ -1774,7 +1775,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
             Diff3Line& d3l = *(*d->m_pDiff3LineVector)[i];
             if(d3l.linesNeededForDisplay < linesNeeded)
             {
-                assert(wrapLineVectorSize == 0);
+                Q_ASSERT(wrapLineVectorSize == 0);
                 d3l.linesNeededForDisplay = linesNeeded;
             }
 

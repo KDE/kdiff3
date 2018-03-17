@@ -1041,7 +1041,7 @@ void KDiff3App::slotFileQuit()
 
 void KDiff3App::slotViewToolBar()
 {
-    assert(viewToolBar != nullptr);
+    Q_ASSERT(viewToolBar != nullptr);
     slotStatusMsg(i18n("Toggling toolbar..."));
     m_pOptions->m_bShowToolBar = viewToolBar->isChecked();
     ///////////////////////////////////////////////////////////////////

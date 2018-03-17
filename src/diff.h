@@ -21,7 +21,6 @@
 #include <QPainter>
 #include <QLinkedList>
 #include <QVector>
-#include <assert.h>
 #include "common.h"
 #include "fileaccess.h"
 #include "options.h"
@@ -122,7 +121,7 @@ struct Diff3Line
 
    const LineData* getLineData( int src ) const
    {
-      assert( m_pDiffBufferInfo!=nullptr );
+      Q_ASSERT( m_pDiffBufferInfo!=nullptr );
       if ( src == 1 && lineA >= 0 ) return &m_pDiffBufferInfo->m_pLineDataA[lineA];
       if ( src == 2 && lineB >= 0 ) return &m_pDiffBufferInfo->m_pLineDataB[lineB];
       if ( src == 3 && lineC >= 0 ) return &m_pDiffBufferInfo->m_pLineDataC[lineC];

@@ -19,8 +19,6 @@
 #include "kreplacements.h"
 #include "common.h"
 
-#include <assert.h>
-
 #include <Qt> //namespace
 #include <QMessageBox>
 #include <QMenu>
@@ -933,7 +931,7 @@ QString KCmdLineArgs::getOption( const QString& s )
          return s_vOption[j].isEmpty() ? QString() : s_vOption[j].last();
       }
    }
-   assert(false);
+   
    return QString();
 }
 
@@ -953,7 +951,6 @@ QStringList KCmdLineArgs::getOptionList( const QString& s )
       }
    }
 
-   assert(false);
    return QStringList();
 }
 
@@ -969,7 +966,7 @@ bool KCmdLineArgs::isSet(const QString& s)
          return ! s_vOption[j].isEmpty();
       }
    }
-   assert(false);
+   
    return false;
 }
 

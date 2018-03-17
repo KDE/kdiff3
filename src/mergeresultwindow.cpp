@@ -36,7 +36,7 @@
 #include <QTextLayout>
 #include <QTextStream>
 #include <QUrl>
-//Added by qt3to4:
+
 #include <QDropEvent>
 #include <QEvent>
 #include <QFocusEvent>
@@ -253,7 +253,7 @@ void mergeOneLine(
             bConflict = true;
         }
         else
-            assert(false);
+            Q_ASSERT(true);
     }
     else if(d.lineA != -1 && d.lineB != -1 && d.lineC == -1)
     {
@@ -313,7 +313,7 @@ void mergeOneLine(
         src = C;
     }
     else
-        assert(false);
+        Q_ASSERT(true);
 }
 
 bool MergeResultWindow::sameKindCheck(const MergeLine& ml1, const MergeLine& ml2)
@@ -643,7 +643,7 @@ bool MergeResultWindow::checkOverviewIgnore(MergeLineList::iterator& i)
 // Go to prev/next delta/conflict or first/last delta.
 void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
 {
-    assert(eDir == eUp || eDir == eDown);
+    Q_ASSERT(eDir == eUp || eDir == eDown);
     MergeLineList::iterator i = m_currentMergeLineIt;
     bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
     if(eEndPoint == eEnd)
@@ -1637,7 +1637,7 @@ QString MergeResultWindow::MergeEditLine::getString(const MergeResultWindow* mrw
         }
         const Diff3Line& d3l = *m_id3l;
         const LineData* pld = nullptr;
-        assert(src == A || src == B || src == C);
+        Q_ASSERT(src == A || src == B || src == C);
         if(src == A && d3l.lineA != -1)
             pld = &mrw->m_pldA[d3l.lineA];
         else if(src == B && d3l.lineB != -1)
@@ -1645,9 +1645,9 @@ QString MergeResultWindow::MergeEditLine::getString(const MergeResultWindow* mrw
         else if(src == C && d3l.lineC != -1)
             pld = &mrw->m_pldC[d3l.lineC];
 
+        //Not an error.
         if(pld == nullptr)
         {
-            // assert(false);      This is no error.
             return QString();
         }
 
@@ -1845,7 +1845,7 @@ void MergeResultWindow::writeLine(
         if(m_cursorYPos == line) m_cursorXPos = 0;
     }
     else
-        assert(false);
+        Q_ASSERT(true);
 
     xOffset -= fm.width('0');
     p.setPen(m_pOptions->m_fgColor);
@@ -1951,7 +1951,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         if(line != m_nofLines)
         {
             m_nofLines = line;
-            assert(m_nofLines == m_totalSize);
+            Q_ASSERT(m_nofLines == m_totalSize);
 
             emit resizeSignal();
         }
@@ -2656,7 +2656,6 @@ void MergeResultWindow::calcIteratorFromLineNr(
             }
         }
     }
-    assert(false);
 }
 
 QString MergeResultWindow::getSelection()
@@ -3183,7 +3182,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 c = m_pOptions->m_colorForConflict;
                 break;
             default:
-                assert(false);
+                Q_ASSERT(true);
                 break;
             }
         }

@@ -20,7 +20,6 @@
 
 #include <QAtomicInt>
 #include <QString>
-#include <assert.h>
 #include <map>
 
 template< class T >
@@ -61,7 +60,7 @@ T max3( T d1, T d2, T d3 )
 template <class T>
 T minMaxLimiter( T d, T minimum, T maximum )
 {
-   assert(minimum<=maximum);
+   Q_ASSERT(minimum<=maximum);
    if ( d < minimum ) return minimum;
    if ( d > maximum ) return maximum;
    return d;

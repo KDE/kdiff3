@@ -29,16 +29,16 @@ bool FileAccess::isValid() const
 //   bool isSymLink() const;
 bool FileAccess::exists() const
 {
-  assert(FALSE);
+  
 }
 qint64 FileAccess::size() const
 {
-  assert(FALSE);
+  
 }
 
 qint64 FileAccess::sizeForReading()
 {
-  assert(FALSE);
+  
 }
 
 //   bool isReadable() const;
@@ -55,7 +55,7 @@ qint64 FileAccess::sizeForReading()
 //   QString filePath() const; // The path-string that was used during construction
 QString FileAccess::prettyAbsPath() const
 {
-  assert(FALSE);
+  
 }
 //   KUrl url() const;
 QString FileAccess::absoluteFilePath() const
@@ -70,11 +70,11 @@ bool FileAccess::isLocal() const
 
 bool FileAccess::readFile(void* pDestBuffer, unsigned long maxLength )
 {
-  assert(FALSE);
+  
 }
 bool FileAccess::writeFile(const void* pSrcBuffer, unsigned long length )
 {
-  assert(FALSE);
+
 }
 
 //   bool listDir( t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
@@ -82,26 +82,26 @@ bool FileAccess::writeFile(const void* pSrcBuffer, unsigned long length )
 //                 const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore );
 bool FileAccess::copyFile( const QString& destUrl )
 {
-  assert(FALSE);
+  
 }
 //   bool createBackup( const QString& bakExtension );
 //
 QString FileAccess::tempFileName()
 {
-  assert(FALSE);
+  
 }
 
 bool FileAccess::removeTempFile( const QString& )
 {
-  assert(FALSE);
+  
 }
 
 /*bool FileAccess::removeFile()
 {
-  assert(FALSE);
+  
 }*/
 bool FileAccess::removeFile( const QString& )
 {
-  assert(FALSE);
+  
 }
 
