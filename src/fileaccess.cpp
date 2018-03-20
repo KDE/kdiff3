@@ -202,7 +202,7 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
         m_modificationTime = fi.lastModified();
         m_bHidden = fi.isHidden();
 
-#if defined(Q_WS_WIN)
+#if defined(Q_OS_WIN)
         m_bWritable = pParent == 0 || fi.isWritable(); // in certain situations this might become a problem though
 #else
         m_bWritable = fi.isWritable();
@@ -211,7 +211,7 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
 
     if(d() != nullptr)
     {
-#if defined(Q_WS_WIN)
+#if defined(Q_OS_WIN)
         // On some windows machines in a network this takes very long.
         // and it's not so important anyway.
         d()->m_bReadable = true;
@@ -265,7 +265,7 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
             QFile::setPermissions(d()->m_localCopy, QFile::ReadUser | QFile::WriteUser); // Clearcase creates a write protected file, allow delete.
 
             QFileInfo fi(d()->m_localCopy);
-#if defined(Q_WS_WIN)
+#if defined(Q_OS_WIN)
             d()->m_bReadable = true;    //fi.isReadable();
             m_bWritable = true;         //fi.isWritable();
             d()->m_bExecutable = false; //fi.isExecutable();
@@ -318,7 +318,7 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
         {
             QString localName = name;
 
-#if defined(Q_WS_WIN)
+#if defined(Q_OS_WIN)
             if(localName.startsWith("/tmp/"))
             {
                 // git on Cygwin will put files in /tmp
@@ -542,7 +542,7 @@ bool FileAccess::isLocal() const
 
 bool FileAccess::isReadable() const
 {
-#if defined(Q_WS_WIN)
+#if defined(Q_OS_WIN)
     // On some windows machines in a network this takes very long to find out and it's not so important anyway.
     return true;
 #else
@@ -563,7 +563,7 @@ bool FileAccess::isWritable() const
 
 bool FileAccess::isExecutable() const
 {
-#if defined(Q_WS_WIN)
+#if defined(Q_OS_WIN)
     // On some windows machines in a network this takes very long to find out and it's not so important anyway.
     return true;
 #else
