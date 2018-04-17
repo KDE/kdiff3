@@ -1689,11 +1689,11 @@ void OptionDialog::setupRegionalPage(void)
 // TODO: Integrate this properly in the build system.
 // Currently breaks compilation on Windows b/c of:
 //   src\ccInstHelper.cpp(15): fatal error C1083: Cannot open include file: 'C:/Programme/NSIS/Contrib/ExDll/exdll.h': No such file or directory
-/*
-#ifdef Q_OS_WIN
+#define ENABLE_CC_INTEGRATION 0
+
+#if ENABLE_CC_INTEGRATION
 #include "ccInstHelper.cpp"
 #endif
-*/
 
 void OptionDialog::setupIntegrationPage(void)
 {
@@ -1729,7 +1729,7 @@ void OptionDialog::setupIntegrationPage(void)
         "For those who are used to using the Escape key."));
     ++line;
 
-#ifdef Q_OS_WIN
+#if ENABLE_CC_INTEGRATION
     QPushButton* pIntegrateWithClearCase = new QPushButton(i18n("Integrate with ClearCase"), page);
     gbox->addWidget(pIntegrateWithClearCase, line, 0);
     pIntegrateWithClearCase->setToolTip(i18n(
@@ -1754,7 +1754,7 @@ void OptionDialog::setupIntegrationPage(void)
 
 void OptionDialog::slotIntegrateWithClearCase()
 {
-#ifdef Q_OS_WIN
+#if ENABLE_CC_INTEGRATION
     char kdiff3CommandPath[1000];
     GetModuleFileNameA(0, kdiff3CommandPath, sizeof(kdiff3CommandPath) - 1);
     integrateWithClearCase("install", kdiff3CommandPath);
@@ -1763,7 +1763,7 @@ void OptionDialog::slotIntegrateWithClearCase()
 
 void OptionDialog::slotRemoveClearCaseIntegration()
 {
-#ifdef Q_OS_WIN
+#if ENABLE_CC_INTEGRATION
     char kdiff3CommandPath[1000];
     GetModuleFileNameA(0, kdiff3CommandPath, sizeof(kdiff3CommandPath) - 1);
     integrateWithClearCase("uninstall", kdiff3CommandPath);
