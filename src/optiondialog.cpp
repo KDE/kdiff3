@@ -1686,9 +1686,14 @@ void OptionDialog::setupRegionalPage(void)
     topLayout->addStretch(10);
 }
 
+// TODO: Integrate this properly in the build system.
+// Currently breaks compilation on Windows b/c of:
+//   src\ccInstHelper.cpp(15): fatal error C1083: Cannot open include file: 'C:/Programme/NSIS/Contrib/ExDll/exdll.h': No such file or directory
+/*
 #ifdef Q_OS_WIN
 #include "ccInstHelper.cpp"
 #endif
+*/
 
 void OptionDialog::setupIntegrationPage(void)
 {
