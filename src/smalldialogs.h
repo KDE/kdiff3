@@ -42,8 +42,8 @@ public:
    QComboBox* m_pLineOut;
 
    QCheckBox* m_pMerge;
-   virtual void accept();
-   virtual bool eventFilter(QObject* o, QEvent* e);
+   void accept() override;
+   bool eventFilter(QObject* o, QEvent* e) override;
 private:
    Options* m_pOptions;
    void selectURL( QComboBox* pLine, bool bDir, int i, bool bSave );
@@ -69,7 +69,7 @@ class FindDialog : public QDialog
    Q_OBJECT
 public:
    explicit FindDialog(QWidget* pParent);
-   void setVisible(bool); //override QDialog::setVisible()
+   void setVisible(bool) override;
 
 Q_SIGNALS:
    void findNext();

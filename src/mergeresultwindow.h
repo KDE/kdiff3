@@ -59,9 +59,9 @@ private:
    e_OverviewMode m_eOverviewMode;
    int m_nofLines;
 
-   virtual void paintEvent( QPaintEvent* e );
-   virtual void mousePressEvent( QMouseEvent* e );
-   virtual void mouseMoveEvent( QMouseEvent* e );
+   void paintEvent( QPaintEvent* e ) override;
+   void mousePressEvent( QMouseEvent* e ) override;
+   void mouseMoveEvent( QMouseEvent* e ) override;
    void drawColumn( QPainter& p, e_OverviewMode eOverviewMode, int x, int w, int h, int nofLines );
 };
 
@@ -370,27 +370,27 @@ private:
       );
    MergeLineList::iterator splitAtDiff3LineIdx( int d3lLineIdx );
 
-   virtual void paintEvent( QPaintEvent* e );
+   void paintEvent( QPaintEvent* e ) override;
 
    int getTextXOffset();
    QVector<QTextLayout::FormatRange> getTextLayoutForLine(int line, const QString& s, QTextLayout& textLayout );
    void myUpdate(int afterMilliSecs);
-   virtual void timerEvent(QTimerEvent*);
+   void timerEvent(QTimerEvent*) override;
    void writeLine(
       MyPainter& p, int line, const QString& str,
       int srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
       );
    void setFastSelector(MergeLineList::iterator i);
    int convertToLine( int y );
-   bool event(QEvent*);
-   virtual void mousePressEvent ( QMouseEvent* e );
-   virtual void mouseDoubleClickEvent ( QMouseEvent* e );
-   virtual void mouseReleaseEvent ( QMouseEvent * );
-   virtual void mouseMoveEvent ( QMouseEvent * );
-   virtual void resizeEvent( QResizeEvent* e );
-   virtual void keyPressEvent( QKeyEvent* e );
-   virtual void wheelEvent( QWheelEvent* e );
-   virtual void focusInEvent( QFocusEvent* e );
+   bool event(QEvent*) override;
+   void mousePressEvent ( QMouseEvent* e ) override;
+   void mouseDoubleClickEvent ( QMouseEvent* e ) override;
+   void mouseReleaseEvent ( QMouseEvent * ) override;
+   void mouseMoveEvent ( QMouseEvent * ) override;
+   void resizeEvent( QResizeEvent* e ) override;
+   void keyPressEvent( QKeyEvent* e ) override;
+   void wheelEvent( QWheelEvent* e ) override;
+   void focusInEvent( QFocusEvent* e ) override;
 
    QPixmap m_pixmap;
    int m_firstLine;
@@ -453,7 +453,7 @@ public:
    void setLineEndStyles( e_LineEndStyle eLineEndStyleA, e_LineEndStyle eLineEndStyleB, e_LineEndStyle eLineEndStyleC);
    e_LineEndStyle getLineEndStyle();
 
-   bool eventFilter( QObject* o, QEvent* e );
+   bool eventFilter( QObject* o, QEvent* e ) override;
 public Q_SLOTS:
    void slotSetModified( bool bModified );
 //private Q_SLOTS:

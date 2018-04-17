@@ -57,7 +57,7 @@ public:
    void hideStatusBarWidget();
    void delayedHideStatusBarWidget();
    
-   virtual void timerEvent(QTimerEvent*);
+   void timerEvent(QTimerEvent*) override;
 public slots:
    void recalc(bool bRedrawUpdate);
 private:
@@ -102,7 +102,7 @@ private:
    QProgressBar* m_pStatusProgressBar;
    QPushButton* m_pStatusAbortButton;
 protected:
-   virtual void reject();
+   void reject() override;
 private slots:
    void delayedHide();
    void slotAbort();
@@ -114,7 +114,7 @@ class ProgressProxy: public QObject
    Q_OBJECT
 public:
    ProgressProxy();
-   ~ProgressProxy();
+   ~ProgressProxy() override;
    
    void setInformation( const QString& info, bool bRedrawUpdate=true );
    void setInformation( const QString& info, int current, bool bRedrawUpdate=true );

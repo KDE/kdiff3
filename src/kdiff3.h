@@ -109,7 +109,7 @@ class KDiff3App : public QSplitter
     /** constructor of KDiff3App, calls all init functions to create the application.
      */
     KDiff3App( QWidget* parent, const char* name, KDiff3Part* pKDiff3Part );
-    ~KDiff3App();
+    ~KDiff3App() override;
 
     bool isPart();
 
@@ -321,9 +321,9 @@ class KDiff3App : public QSplitter
    bool m_bFinishMainInit;
    bool m_bLoadFiles;
 
-   virtual bool eventFilter( QObject* o, QEvent* e );
-   virtual void resizeEvent(QResizeEvent*);
-   virtual void childEvent(QChildEvent *c);
+   bool eventFilter( QObject* o, QEvent* e ) override;
+   void resizeEvent(QResizeEvent*) override;
+   void childEvent(QChildEvent *c) override;
 
    bool improveFilenames(bool bCreateNewInstance);
 

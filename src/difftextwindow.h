@@ -40,7 +40,7 @@ public:
 
       int winIdx
       );
-   ~DiffTextWindow();
+   ~DiffTextWindow() override;
    void init(
       const QString& fileName,
       QTextCodec* pCodec,
@@ -96,17 +96,17 @@ public Q_SLOTS:
    void setFastSelectorRange( int line1, int nofLines );
 
 protected:
-   virtual void mousePressEvent ( QMouseEvent * );
-   virtual void mouseReleaseEvent ( QMouseEvent * );
-   virtual void mouseMoveEvent ( QMouseEvent * );
-   virtual void mouseDoubleClickEvent ( QMouseEvent * e );
+   void mousePressEvent ( QMouseEvent * ) override;
+   void mouseReleaseEvent ( QMouseEvent * ) override;
+   void mouseMoveEvent ( QMouseEvent * ) override;
+   void mouseDoubleClickEvent ( QMouseEvent * e ) override;
 
-   virtual void paintEvent( QPaintEvent*  );
-   virtual void dragEnterEvent( QDragEnterEvent* e );
-   virtual void focusInEvent( QFocusEvent* e );
+   void paintEvent( QPaintEvent*  ) override;
+   void dragEnterEvent( QDragEnterEvent* e ) override;
+   void focusInEvent( QFocusEvent* e ) override;
 
-   virtual void resizeEvent( QResizeEvent* );
-   virtual void timerEvent(QTimerEvent*);
+   void resizeEvent( QResizeEvent* ) override;
+   void timerEvent(QTimerEvent*) override;
 
 private:
    DiffTextWindowData* d;
@@ -122,7 +122,7 @@ class DiffTextWindowFrame : public QWidget
    Q_OBJECT
 public:
    DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusBar, Options* pOptions, int winIdx, SourceData* psd);
-   ~DiffTextWindowFrame();
+   ~DiffTextWindowFrame() override;
    DiffTextWindow* getDiffTextWindow();
    void init();
    void setFirstLine(int firstLine);
@@ -131,7 +131,7 @@ Q_SIGNALS:
    void fileNameChanged(const QString&, int);
    void encodingChanged(QTextCodec*);
 protected:
-   bool eventFilter( QObject*, QEvent* );
+   bool eventFilter( QObject*, QEvent* ) override;
    //void paintEvent(QPaintEvent*);
 private Q_SLOTS:
    void slotReturnPressed();
@@ -146,8 +146,8 @@ class EncodingLabel : public QLabel
 public:
    EncodingLabel( const QString & text, DiffTextWindowFrame* pDiffTextWindowFrame, SourceData* psd, Options* pOptions);
 protected:
-   void mouseMoveEvent(QMouseEvent *ev);
-   void mousePressEvent(QMouseEvent *ev);
+   void mouseMoveEvent(QMouseEvent *ev) override;
+   void mousePressEvent(QMouseEvent *ev) override;
 private Q_SLOTS:
    void slotEncodingChanged();
 private:

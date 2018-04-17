@@ -50,11 +50,11 @@ public:
     /**
      * Default Destructor
      */
-    virtual ~KDiff3Shell();
+    ~KDiff3Shell() override;
 
-    bool queryClose();
+    bool queryClose() override;
     bool queryExit();
-    virtual void closeEvent(QCloseEvent*e);
+    void closeEvent(QCloseEvent*e) override;
     
     static inline QCommandLineParser* getParser(){
       static QCommandLineParser *parser = new QCommandLineParser();

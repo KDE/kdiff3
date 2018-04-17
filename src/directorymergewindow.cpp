@@ -87,7 +87,7 @@ class StatusInfo : public QDialog
         m_pTextEdit->clear();
     }
 
-    void setVisible(bool bVisible)
+    void setVisible(bool bVisible) override
     {
         if(bVisible)
         {
@@ -253,14 +253,14 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
         m_bSkipDirStatus = false;
         m_pRoot = new MergeFileInfos;
     }
-    ~Data()
+    ~Data() override
     {
         delete m_pRoot;
     }
     // Implement QAbstractItemModel
-    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
     //Qt::ItemFlags flags ( const QModelIndex & index ) const
-    QModelIndex parent(const QModelIndex& index) const
+    QModelIndex parent(const QModelIndex& index) const override
     {
         MergeFileInfos* pMFI = getMFI(index);
         if(pMFI == nullptr || pMFI == m_pRoot || pMFI->m_pParent == m_pRoot)
@@ -271,7 +271,7 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
             return createIndex(pParentsParent->m_children.indexOf(pMFI->m_pParent), 0, pMFI->m_pParent);
         }
     }
-    int rowCount(const QModelIndex& parent = QModelIndex()) const
+    int rowCount(const QModelIndex& parent = QModelIndex()) const override
     {
         MergeFileInfos* pParentMFI = getMFI(parent);
         if(pParentMFI != nullptr)
@@ -279,11 +279,11 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
         else
             return m_pRoot->m_children.count();
     }
-    int columnCount(const QModelIndex& /*parent*/) const
+    int columnCount(const QModelIndex& /*parent*/) const override
     {
         return 10;
     }
-    QModelIndex index(int row, int column, const QModelIndex& parent) const
+    QModelIndex index(int row, int column, const QModelIndex& parent) const override
     {
         MergeFileInfos* pParentMFI = getMFI(parent);
         if(pParentMFI == nullptr && row < m_pRoot->m_children.count())
@@ -293,8 +293,8 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
         else
             return QModelIndex();
     }
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-    void sort(int column, Qt::SortOrder order);
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    void sort(int column, Qt::SortOrder order) override;
     // private data and helper methods
     MergeFileInfos* getMFI(const QModelIndex& mi) const
     {
@@ -686,7 +686,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
         : QStyledItemDelegate(pParent), m_pDMW(pParent), d(pParent->d)
     {
     }
-    void paint(QPainter* p, const QStyleOptionViewItem& option, const QModelIndex& index) const
+    void paint(QPainter* p, const QStyleOptionViewItem& option, const QModelIndex& index) const override
     {
         int column = index.column();
         if(column == s_ACol || column == s_BCol || column == s_CCol)
@@ -746,7 +746,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
         }
         QStyledItemDelegate::paint(p, option2, index);
     }
-    QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
+    QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override
     {
         QSize sz = QStyledItemDelegate::sizeHint(option, index);
         return sz.expandedTo(QSize(0, 18));

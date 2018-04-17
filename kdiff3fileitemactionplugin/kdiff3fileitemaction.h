@@ -32,9 +32,9 @@ class KDiff3FileItemAction : public KAbstractFileItemActionPlugin
    Q_OBJECT
 public:
   KDiff3FileItemAction (QObject* pParent, const QVariantList & args);
-  virtual ~KDiff3FileItemAction();
+  ~KDiff3FileItemAction() override;
   // implement pure virtual method from KonqPopupMenuPlugin
-  virtual QList<QAction*> actions( const KFileItemListProperties& fileItemInfos, QWidget* pParentWidget );
+  QList<QAction*> actions( const KFileItemListProperties& fileItemInfos, QWidget* pParentWidget ) override;
 
 private Q_SLOTS:
    void slotCompareWith();

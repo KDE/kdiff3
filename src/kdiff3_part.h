@@ -46,30 +46,30 @@ public:
     /**
      * Destructor
      */
-    virtual ~KDiff3Part();
+    ~KDiff3Part() override;
 
     /**
      * This is a virtual function inherited from KParts::ReadWritePart.
      * A shell will use this to inform this Part if it should act
      * read-only
      */
-    virtual void setReadWrite(bool rw);
+    void setReadWrite(bool rw) override;
 
     /**
      * Reimplemented to disable and enable Save action
      */
-    virtual void setModified(bool modified);
+    void setModified(bool modified) override;
 
 protected:
     /**
      * This must be implemented by each part
      */
-    virtual bool openFile();
+    bool openFile() override;
 
     /**
      * This must be implemented by each read-write part
      */
-    virtual bool saveFile();
+    bool saveFile() override;
 
 private:
     KDiff3App* m_widget;

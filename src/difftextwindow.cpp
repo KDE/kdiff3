@@ -1594,7 +1594,7 @@ class RecalcWordWrapRunnable : public QRunnable
         //++s_runnableCount; // in Qt>=5.3 only
         s_runnableCount.fetchAndAddOrdered(1);
     }
-    void run()
+    void run() override
     {
         m_pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
         // int newValue = --s_runnableCount; // in Qt>=5.3 only

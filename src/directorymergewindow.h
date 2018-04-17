@@ -61,7 +61,7 @@ class DirectoryMergeWindow : public QTreeView
    Q_OBJECT
 public:
    DirectoryMergeWindow( QWidget* pParent, Options* pOptions, KIconLoader* pIconLoader );
-   ~DirectoryMergeWindow();
+   ~DirectoryMergeWindow() override;
    void setDirectoryMergeInfo(DirectoryMergeInfo* p);
    bool init(
       FileAccess& dirA,
@@ -81,11 +81,11 @@ public:
       KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC );
    void updateFileVisibilities();
 
-   virtual void mousePressEvent( QMouseEvent* e );
-   virtual void keyPressEvent( QKeyEvent* e );
-   virtual void focusInEvent( QFocusEvent* e );
-   virtual void focusOutEvent( QFocusEvent* e );
-   virtual void contextMenuEvent( QContextMenuEvent* e );
+   void mousePressEvent( QMouseEvent* e ) override;
+   void keyPressEvent( QKeyEvent* e ) override;
+   void focusInEvent( QFocusEvent* e ) override;
+   void focusOutEvent( QFocusEvent* e ) override;
+   void contextMenuEvent( QContextMenuEvent* e ) override;
    QString getDirNameA();
    QString getDirNameB();
    QString getDirNameC();
@@ -145,7 +145,7 @@ Q_SIGNALS:
 protected Q_SLOTS:
    void onDoubleClick( const QModelIndex& );
    void onExpanded();
-   void	currentChanged( const QModelIndex & current, const QModelIndex & previous ); // override
+   void	currentChanged( const QModelIndex & current, const QModelIndex & previous ) override; // override
 private:
    class Data;
    friend class Data;
@@ -166,7 +166,7 @@ public:
       const FileAccess& DestPath,
       MergeFileInfos& mfi );
    QTreeWidget* getInfoList() {return m_pInfoList;}
-   virtual bool eventFilter( QObject* o, QEvent* e );
+   bool eventFilter( QObject* o, QEvent* e ) override;
 Q_SIGNALS:
    void gotFocus();
 private:

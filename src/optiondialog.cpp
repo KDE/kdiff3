@@ -113,8 +113,8 @@ class OptionItemT : public OptionItem
     }
 
   protected:
-    virtual void preserve() { m_preservedVal = *m_pVar; }
-    virtual void unpreserve() { *m_pVar = m_preservedVal; }
+    void preserve() override { m_preservedVal = *m_pVar; }
+    void unpreserve() override { *m_pVar = m_preservedVal; }
     T* m_pVar;
     T m_preservedVal;
     T m_defaultVal;
@@ -130,11 +130,11 @@ class OptionCheckBox : public QCheckBox, public OptionItemT<bool>
         m_pVar = pbVar;
         m_defaultVal = bDefaultVal;
     }
-    void setToDefault() { setChecked(m_defaultVal); }
-    void setToCurrent() { setChecked(*m_pVar); }
-    void apply() { *m_pVar = isChecked(); }
-    void write(ValueMap* config) { config->writeEntry(m_saveName, *m_pVar); }
-    void read(ValueMap* config) { *m_pVar = config->readBoolEntry(m_saveName, *m_pVar); }
+    void setToDefault() override { setChecked(m_defaultVal); }
+    void setToCurrent() override { setChecked(*m_pVar); }
+    void apply() override { *m_pVar = isChecked(); }
+    void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
+    void read(ValueMap* config) override { *m_pVar = config->readBoolEntry(m_saveName, *m_pVar); }
 
   private:
     OptionCheckBox(const OptionCheckBox&); // private copy constructor without implementation
@@ -150,11 +150,11 @@ class OptionRadioButton : public QRadioButton, public OptionItemT<bool>
         m_pVar = pbVar;
         m_defaultVal = bDefaultVal;
     }
-    void setToDefault() { setChecked(m_defaultVal); }
-    void setToCurrent() { setChecked(*m_pVar); }
-    void apply() { *m_pVar = isChecked(); }
-    void write(ValueMap* config) { config->writeEntry(m_saveName, *m_pVar); }
-    void read(ValueMap* config) { *m_pVar = config->readBoolEntry(m_saveName, *m_pVar); }
+    void setToDefault() override { setChecked(m_defaultVal); }
+    void setToCurrent() override { setChecked(*m_pVar); }
+    void apply() override { *m_pVar = isChecked(); }
+    void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
+    void read(ValueMap* config) override { *m_pVar = config->readBoolEntry(m_saveName, *m_pVar); }
 
   private:
     OptionRadioButton(const OptionRadioButton&); // private copy constructor without implementation
@@ -175,11 +175,11 @@ class OptionT : public OptionItemT<T>
     {
         this->m_pVar = pVar;
     }
-    void setToDefault() {}
-    void setToCurrent() {}
-    void apply() {}
-    void write(ValueMap* vm) { writeEntry(vm, this->m_saveName, *this->m_pVar); }
-    void read(ValueMap* vm) { *this->m_pVar = vm->readEntry(this->m_saveName, *this->m_pVar); }
+    void setToDefault() override {}
+    void setToCurrent() override {}
+    void apply() override {}
+    void write(ValueMap* vm) override { writeEntry(vm, this->m_saveName, *this->m_pVar); }
+    void read(ValueMap* vm) override { *this->m_pVar = vm->readEntry(this->m_saveName, *this->m_pVar); }
 
   private:
     OptionT(const OptionT&); // private copy constructor without implementation
@@ -264,11 +264,11 @@ class OptionFontChooser : public FontChooser, public OptionItemT<QFont>
         *m_pVar = defaultVal;
         m_defaultVal = defaultVal;
     }
-    void setToDefault() { setFont(m_defaultVal, false); }
-    void setToCurrent() { setFont(*m_pVar, false); }
-    void apply() { *m_pVar = font(); }
-    void write(ValueMap* config) { config->writeEntry(m_saveName, *m_pVar); }
-    void read(ValueMap* config) { *m_pVar = config->readFontEntry(m_saveName, m_pVar); }
+    void setToDefault() override { setFont(m_defaultVal, false); }
+    void setToCurrent() override { setFont(*m_pVar, false); }
+    void apply() override { *m_pVar = font(); }
+    void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
+    void read(ValueMap* config) override { *m_pVar = config->readFontEntry(m_saveName, m_pVar); }
 
   private:
     OptionFontChooser(const OptionToggleAction&); // private copy constructor without implementation
@@ -283,11 +283,11 @@ class OptionColorButton : public KColorButton, public OptionItemT<QColor>
         m_pVar = pVar;
         m_defaultVal = defaultVal;
     }
-    void setToDefault() { setColor(m_defaultVal); }
-    void setToCurrent() { setColor(*m_pVar); }
-    void apply() { *m_pVar = color(); }
-    void write(ValueMap* config) { config->writeEntry(m_saveName, *m_pVar); }
-    void read(ValueMap* config) { *m_pVar = config->readColorEntry(m_saveName, m_pVar); }
+    void setToDefault() override { setColor(m_defaultVal); }
+    void setToCurrent() override { setColor(*m_pVar); }
+    void apply() override { *m_pVar = color(); }
+    void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
+    void read(ValueMap* config) override { *m_pVar = config->readColorEntry(m_saveName, m_pVar); }
 
   private:
     OptionColorButton(const OptionColorButton&); // private copy constructor without implementation
@@ -307,24 +307,24 @@ class OptionLineEdit : public QComboBox, public OptionItemT<QString>
         m_list.push_back(defaultVal);
         insertText();
     }
-    void setToDefault()
+    void setToDefault() override
     {
         setEditText(m_defaultVal);
     }
-    void setToCurrent()
+    void setToCurrent() override
     {
         setEditText(*m_pVar);
     }
-    void apply()
+    void apply() override
     {
         *m_pVar = currentText();
         insertText();
     }
-    void write(ValueMap* config)
+    void write(ValueMap* config) override
     {
         config->writeEntry(m_saveName, m_list);
     }
-    void read(ValueMap* config)
+    void read(ValueMap* config) override
     {
         m_list = config->readListEntry(m_saveName, QStringList(m_defaultVal));
         if(!m_list.empty()) *m_pVar = m_list.front();
@@ -363,26 +363,26 @@ class OptionIntEdit : public QLineEdit, public OptionItemT<int>
         v->setRange(rangeMin, rangeMax);
         setValidator(v);
     }
-    void setToDefault()
+    void setToDefault() override
     {
         QString s;
         s.setNum(m_defaultVal);
         setText(s);
     }
-    void setToCurrent()
+    void setToCurrent() override
     {
         QString s;
         s.setNum(*m_pVar);
         setText(s);
     }
-    void apply()
+    void apply() override
     {
         const QIntValidator* v = static_cast<const QIntValidator*>(validator());
         *m_pVar = minMaxLimiter(text().toInt(), v->bottom(), v->top());
         setText(QString::number(*m_pVar));
     }
-    void write(ValueMap* config) { config->writeEntry(m_saveName, *m_pVar); }
-    void read(ValueMap* config) { *m_pVar = config->readNumEntry(m_saveName, *m_pVar); }
+    void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
+    void read(ValueMap* config) override { *m_pVar = config->readNumEntry(m_saveName, *m_pVar); }
 
   private:
     OptionIntEdit(const OptionIntEdit&); // private copy constructor without implementation
@@ -410,21 +410,21 @@ class OptionComboBox : public QComboBox, public OptionItem
         m_defaultVal = defaultVal;
         setEditable(false);
     }
-    void setToDefault()
+    void setToDefault() override
     {
         setCurrentIndex(m_defaultVal);
         if(m_pVarStr != nullptr) {
             *m_pVarStr = currentText();
         }
     }
-    void setToCurrent()
+    void setToCurrent() override
     {
         if(m_pVarNum != nullptr)
             setCurrentIndex(*m_pVarNum);
         else
             setText(*m_pVarStr);
     }
-    void apply()
+    void apply() override
     {
         if(m_pVarNum != nullptr) {
             *m_pVarNum = currentIndex();
@@ -434,21 +434,21 @@ class OptionComboBox : public QComboBox, public OptionItem
             *m_pVarStr = currentText();
         }
     }
-    void write(ValueMap* config)
+    void write(ValueMap* config) override
     {
         if(m_pVarStr != nullptr)
             config->writeEntry(m_saveName, *m_pVarStr);
         else
             config->writeEntry(m_saveName, *m_pVarNum);
     }
-    void read(ValueMap* config)
+    void read(ValueMap* config) override
     {
         if(m_pVarStr != nullptr)
             setText(config->readEntry(m_saveName, currentText()));
         else
             *m_pVarNum = config->readNumEntry(m_saveName, *m_pVarNum);
     }
-    void preserve()
+    void preserve() override
     {
         if(m_pVarStr != nullptr) {
             m_preservedStrVal = *m_pVarStr;
@@ -458,7 +458,7 @@ class OptionComboBox : public QComboBox, public OptionItem
             m_preservedNumVal = *m_pVarNum;
         }
     }
-    void unpreserve()
+    void unpreserve() override
     {
         if(m_pVarStr != nullptr) {
             *m_pVarStr = m_preservedStrVal;
@@ -541,7 +541,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
             m_codecVec.push_back(c);
         }
     }
-    void setToDefault()
+    void setToDefault() override
     {
         QString defaultName = QTextCodec::codecForLocale()->name();
         for(int i = 0; i < count(); ++i)
@@ -562,7 +562,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
             *m_ppVarCodec = m_codecVec[0];
         }
     }
-    void setToCurrent()
+    void setToCurrent() override
     {
         if(m_ppVarCodec != nullptr)
         {
@@ -576,17 +576,17 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
             }
         }
     }
-    void apply()
+    void apply() override
     {
         if(m_ppVarCodec != nullptr) {
             *m_ppVarCodec = m_codecVec[currentIndex()];
         }
     }
-    void write(ValueMap* config)
+    void write(ValueMap* config) override
     {
         if(m_ppVarCodec != nullptr) config->writeEntry(m_saveName, QString((*m_ppVarCodec)->name()));
     }
-    void read(ValueMap* config)
+    void read(ValueMap* config) override
     {
         QString codecName = config->readEntry(m_saveName, QString(m_codecVec[currentIndex()]->name()));
         for(int i = 0; i < m_codecVec.size(); ++i)
@@ -601,8 +601,8 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
     }
 
   protected:
-    void preserve() { m_preservedVal = currentIndex(); }
-    void unpreserve() { setCurrentIndex(m_preservedVal); }
+    void preserve() override { m_preservedVal = currentIndex(); }
+    void unpreserve() override { setCurrentIndex(m_preservedVal); }
     int m_preservedVal;
 };
 
@@ -1879,73 +1879,73 @@ class ConfigValueMap : public ValueMap
   public:
     explicit ConfigValueMap(const KConfigGroup& config) : m_config(config) {}
 
-    void writeEntry(const QString& s, const QFont& v)
+    void writeEntry(const QString& s, const QFont& v) override
     {
         m_config.writeEntry(s, v);
     }
-    void writeEntry(const QString& s, const QColor& v)
+    void writeEntry(const QString& s, const QColor& v) override
     {
         m_config.writeEntry(s, v);
     }
-    void writeEntry(const QString& s, const QSize& v)
+    void writeEntry(const QString& s, const QSize& v) override
     {
         m_config.writeEntry(s, v);
     }
-    void writeEntry(const QString& s, const QPoint& v)
+    void writeEntry(const QString& s, const QPoint& v) override
     {
         m_config.writeEntry(s, v);
     }
-    void writeEntry(const QString& s, int v)
+    void writeEntry(const QString& s, int v) override
     {
         m_config.writeEntry(s, v);
     }
-    void writeEntry(const QString& s, bool v)
+    void writeEntry(const QString& s, bool v) override
     {
         m_config.writeEntry(s, v);
     }
-    void writeEntry(const QString& s, const QString& v)
+    void writeEntry(const QString& s, const QString& v) override
     {
         m_config.writeEntry(s, v);
     }
-    void writeEntry(const QString& s, const char* v)
+    void writeEntry(const QString& s, const char* v) override
     {
         m_config.writeEntry(s, v);
     }
 
-    QFont readFontEntry(const QString& s, const QFont* defaultVal)
+    QFont readFontEntry(const QString& s, const QFont* defaultVal) override
     {
         return m_config.readEntry(s, *defaultVal);
     }
-    QColor readColorEntry(const QString& s, const QColor* defaultVal)
+    QColor readColorEntry(const QString& s, const QColor* defaultVal) override
     {
         return m_config.readEntry(s, *defaultVal);
     }
-    QSize readSizeEntry(const QString& s, const QSize* defaultVal)
+    QSize readSizeEntry(const QString& s, const QSize* defaultVal) override
     {
         return m_config.readEntry(s, *defaultVal);
     }
-    QPoint readPointEntry(const QString& s, const QPoint* defaultVal)
+    QPoint readPointEntry(const QString& s, const QPoint* defaultVal) override
     {
         return m_config.readEntry(s, *defaultVal);
     }
-    bool readBoolEntry(const QString& s, bool defaultVal)
+    bool readBoolEntry(const QString& s, bool defaultVal) override
     {
         return m_config.readEntry(s, defaultVal);
     }
-    int readNumEntry(const QString& s, int defaultVal)
+    int readNumEntry(const QString& s, int defaultVal) override
     {
         return m_config.readEntry(s, defaultVal);
     }
-    QString readStringEntry(const QString& s, const QString& defaultVal)
+    QString readStringEntry(const QString& s, const QString& defaultVal) override
     {
         return m_config.readEntry(s, defaultVal);
     }
 
-    void writeEntry(const QString& s, const QStringList& v)
+    void writeEntry(const QString& s, const QStringList& v) override
     {
         m_config.writeEntry(s, v);
     }
-    QStringList readListEntry(const QString& s, const QStringList& def)
+    QStringList readListEntry(const QString& s, const QStringList& def) override
     {
         return m_config.readEntry(s, def);
     }
