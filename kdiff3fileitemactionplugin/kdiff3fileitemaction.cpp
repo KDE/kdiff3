@@ -36,7 +36,7 @@
 //#include <iostream>
 
 
-static QStringList* s_pHistory=0;
+static QStringList* s_pHistory=nullptr;
 
 class KDiff3PluginHistory
 {
@@ -45,8 +45,8 @@ class KDiff3PluginHistory
 public:
    KDiff3PluginHistory()
    {
-      m_pConfig = 0;
-      if (s_pHistory==0)
+      m_pConfig = nullptr;
+      if (s_pHistory==nullptr)
       {
          //std::cout << "New History: " << instanceName << std::endl;
          s_pHistory = new QStringList;
@@ -64,8 +64,8 @@ public:
       delete s_pHistory;
       delete m_pConfigGroup;
       delete m_pConfig;
-      s_pHistory = 0;
-      m_pConfig = 0;
+      s_pHistory = nullptr;
+      m_pConfig = nullptr;
    }
 };
 
@@ -115,7 +115,7 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
                 (3 Files selected): Compare 's1', 's2' and 's3'
    */
 
-   QAction* pAction = 0;
+   QAction* pAction = nullptr;
    QString s;
 
    if(m_list.count() == 1)
