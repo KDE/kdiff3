@@ -14,8 +14,13 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+
+#include <qglobal.h>
+
 #ifdef Q_OS_WIN
 #include <qt_windows.h>
+
+#include <QCoreApplication>
 #endif
 
 #include <cstdlib>

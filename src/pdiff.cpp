@@ -46,16 +46,17 @@
 #include <QUrl>
 
 #include <KLocalizedString>
+#include <KShortcutsDialog>
 #include <KMessageBox>
 
 #include "fileaccess.h"
 #include "kdiff3.h"
 #include "optiondialog.h"
 #include "progress.h"
+
 #ifdef Q_OS_WIN
 #include <windows.h>
-#else //TODO:Why?
-#include <kshortcutsdialog.h>
+#else //TODO:Why
 #include <unistd.h>
 #endif
 

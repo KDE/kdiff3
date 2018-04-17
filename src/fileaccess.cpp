@@ -401,7 +401,7 @@ void FileAccess::addPath(const QString& txt)
        S_IXOTH    00001     others have execute permission
 */
 //TODO: Change this to kf5/kde auto test
-#ifdef KREPLACEMENTS_H
+#ifdef Q_OS_WIN
 void FileAccess::setUdsEntry(const KIO::UDSEntry&)
 {
 } // not needed if KDE is not available

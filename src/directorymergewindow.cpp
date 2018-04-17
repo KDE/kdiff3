@@ -2275,12 +2275,13 @@ void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
             m.addAction(d->m_pDirCompareExplicit);
             m.addAction(d->m_pDirMergeExplicit);
 
-#ifndef Q_OS_WIN
+            // TODO: Do we need the special Windows implementation?! -- Disabled for now.
+//#ifndef Q_OS_WIN
             m.exec(p);
-#else
-            void showShellContextMenu(const QString&, QPoint, QWidget*, QMenu*);
-            showShellContextMenu(itemPath, p, this, &m);
-#endif
+// #else
+//             void showShellContextMenu(const QString&, QPoint, QWidget*, QMenu*);
+//             showShellContextMenu(itemPath, p, this, &m);
+// #endif
         }
     }
 }
