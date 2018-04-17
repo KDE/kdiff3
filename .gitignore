@@ -1,0 +1,31 @@
+# general
+apidocs
+.directory
+.kdev4
+build
+*~
+*.patch
+*.diff
+*.bak
+*.orig
+*.pyc
+*.rej
+*.swp
+doxygen.log
+Doxyfile
+*.kdevelop
+*.kdevelop.filelist
+*.kdevelop.pcs
+*.kdevses
+.*kate-swp
+build/
+mem.log.*
+massif.*
+callgrind.*
+perf.data*
+
+# from kdiff3
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
