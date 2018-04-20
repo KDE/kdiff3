@@ -30,6 +30,7 @@
 #include <QAction>
 #include <QApplication>
 #include <QDir>
+#include <QDialogButtonBox>
 #include <QFileDialog>
 #include <QImage>
 #include <QKeyEvent>
@@ -67,9 +68,9 @@ class StatusInfo : public QDialog
         setWindowFlags(Qt::Dialog);
         m_pTextEdit->setWordWrapMode(QTextOption::NoWrap);
         m_pTextEdit->setReadOnly(true);
-        QPushButton* pClose = new QPushButton(tr("Close"));
-        connect(pClose, &QPushButton::clicked, this, &QDialog::accept);
-        pVLayout->addWidget(pClose);
+        QDialogButtonBox *box = new QDialogButtonBox(QDialogButtonBox::Close, this);
+        connect(box, &QDialogButtonBox::rejected, this, &QDialog::accept);
+        pVLayout->addWidget(box);
     }
 
     bool isEmpty()

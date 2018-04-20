@@ -24,6 +24,7 @@
 
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDialogButtonBox>
 #include <QDir>
 #include <QDropEvent>
 #include <QFileDialog>
@@ -161,24 +162,13 @@ OpenDialog::OpenDialog(
 
     h->addItem(new QSpacerItem(200, 0), 0, 1);
 
-    QHBoxLayout* l = new QHBoxLayout();
-    v->addLayout(l);
-    l->setSpacing(5);
-
-    button = new QPushButton(QIcon::fromTheme("configure"), i18n("Configure..."), this);
+    QDialogButtonBox *box = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    v->addWidget(box);
+    button = box->addButton(i18n("Configure..."), QDialogButtonBox::ActionRole);
+    button->setIcon(QIcon::fromTheme("configure"));
     connect(button, SIGNAL(clicked()), pParent, slotConfigure);
-    l->addWidget(button, 1);
-
-    l->addStretch(1);
-
-    button = new QPushButton(i18n("&OK"), this);
-    button->setDefault(true);
-    connect(button, &QPushButton::clicked, this, &OpenDialog::accept);
-    l->addWidget(button, 1);
-
-    button = new QPushButton(i18n("&Cancel"), this);
-    connect(button, &QPushButton::clicked, this, &OpenDialog::reject);
-    l->addWidget(button, 1);
+    connect(box, &QDialogButtonBox::accepted, this, &OpenDialog::accept);
+    connect(box, &QDialogButtonBox::rejected, this, &OpenDialog::reject);
 
     QSize sh = sizeHint();
     setFixedHeight(sh.height());
@@ -429,13 +419,11 @@ FindDialog::FindDialog(QWidget* pParent)
     m_pSearchInOutput->setChecked(true);
     ++line;
 
-    QPushButton* pButton = new QPushButton(i18n("&Search"), this);
-    layout->addWidget(pButton, line, 0);
-    connect(pButton, &QPushButton::clicked, this, &FindDialog::accept);
-
-    pButton = new QPushButton(i18n("&Cancel"), this);
-    layout->addWidget(pButton, line, 1);
-    connect(pButton, &QPushButton::clicked, this, &FindDialog::reject);
+    QDialogButtonBox *box = new QDialogButtonBox(QDialogButtonBox::Cancel, this);
+    layout->addWidget(box, line, 0, 1, 2);
+    box->addButton(i18n("&Search"), QDialogButtonBox::AcceptRole);
+    connect(box, &QDialogButtonBox::accepted, this, &FindDialog::accept);
+    connect(box, &QDialogButtonBox::rejected, this, &FindDialog::reject);
 
     hide();
 }
@@ -551,13 +539,10 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
     pGrid->addWidget(m_pHistorySortKeyResult, line, 1);
     ++line;
 
-    QPushButton* pButton = new QPushButton(i18n("OK"), this);
-    pGrid->addWidget(pButton, line, 0);
-    connect(pButton, &QPushButton::clicked, this, &RegExpTester::accept);
-
-    pButton = new QPushButton(i18n("Cancel"), this);
-    pGrid->addWidget(pButton, line, 1);
-    connect(pButton, &QPushButton::clicked, this, &RegExpTester::reject);
+    QDialogButtonBox *box = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    pGrid->addWidget(box, line, 0, 1, 2);
+    connect(box, &QDialogButtonBox::accepted, this, &RegExpTester::accept);
+    connect(box, &QDialogButtonBox::rejected, this, &RegExpTester::reject);
 
     resize(800, sizeHint().height());
 }
