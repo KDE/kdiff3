@@ -1,7 +1,7 @@
 #cmake < 3.1 has no sane way of checking C++11 features and needed flags
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
-
 project(kdiff3)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 set(CMAKE_CXX_EXTENSIONS OFF ) #don't use non-standard extentions
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -48,6 +48,7 @@ find_package(
     IconThemes
 )
 
+find_package(Docbook2X)
 
 set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::Crash KF5::IconThemes )
 
