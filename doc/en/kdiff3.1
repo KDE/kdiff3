@@ -1,0 +1,87 @@
+.TH "KDIFF3" "1" 
+.SH "NAME" 
+KDiff3 \(em compares two or three input files or directories 
+.SH "SYNOPSIS" 
+.PP 
+\fBKDiff3\fR [\fBQT options\fP]  [\fBKDE options\fP]  [\fBKDiff3 options\fP]  [\fB\fIFile1/base\fR\fP]  [\fB\fIFile2\fR\fP]  [\fB\fIFile3\fR\fP]  
+.SH "DESCRIPTION" 
+.PP 
+This manual page briefly documents the 
+\fBKDiff3\fR tool. 
+.PP 
+For comprehensive help, please see \fBkhelpcenter help:/kdiff3\fR. 
+ 
+.PP 
+\fBKDiff3\fR is a program that 
+ 
+.IP "   \(bu" 6 
+compares or merges two or three text input files or directories 
+.IP "   \(bu" 6 
+shows the differences line by line and character by character 
+.IP "   \(bu" 6 
+provides an automatic merge-facility and 
+.IP "   \(bu" 6 
+an integrated editor for comfortable solving of merge-conflicts 
+.IP "   \(bu" 6 
+supports Unicode, UTF-8 and other codecs 
+.IP "   \(bu" 6 
+supports KIO on KDE (allows accessing ftp, sftp, fish, smb etc.) 
+.IP "   \(bu" 6 
+Printing of differences 
+.IP "   \(bu" 6 
+Manual alignment of lines 
+.IP "   \(bu" 6 
+Automatic merging of version control history ($Log$) 	 
+.SH "OPTIONS" 
+.PP 
+This program follows the usual GNU command line syntax, 
+with long options starting with two dashes (`\-').  A summary of 
+options is included below. For a full summary of options, run 
+\fBKDiff3 \-\-help\fR. 
+ 
+.IP "\fB-m, \-\-merge\fP         " 10 
+Merge the input. 
+.IP "\fB-b, \-\-base file\fP         " 10 
+Explicit base file. For compatibility with certain tools. 
+.IP "\fB-o, \-\-output file\fP         " 10 
+Output file. Implies \-m. E.g.: \-o newfile.txt 
+.IP "\fB\-\-out file\fP         " 10 
+Output file, again. (For compatibility with certain tools.) 
+.IP "\fB\-\-auto\fP         " 10 
+No GUI if all conflicts are auto-solvable. (Needs \-o file) 
+.IP "\fB\-\-qall\fP         " 10 
+Don't solve conflicts automatically. (For compatibility...) 
+.IP "\fB-L1 alias\fP 		  " 10 
+Visible name replacement for first file/base file. 
+.IP "\fB-L2 alias\fP 		  " 10 
+Visible name replacement for second file. 
+.IP "\fB-L3 alias\fP 		  " 10 
+Visible name replacement for third file. 
+.IP "\fB-L, \-\-fname alias\fP 		  " 10 
+Visible name replacement. May by supplied for each input. 
+.IP "\fB\-\-cs string\fP 		  " 10 
+Change a setting, e. g. \-\-cs "AutoAdvance=1". 
+.IP "\fB\-\-confighelp\fP 		  " 10 
+Show a list of all settings and their values. 
+.IP "\fB\-\-config file \fP 		  " 10 
+Use a different settings file. 
+.IP "\fB\-\-author\fP 		  " 10 
+Show author of program. 
+.IP "\fB-v, \-\-version\fP 		  " 10 
+Show version of program. 
+.IP "\fB\-\-license\fP 		  " 10 
+Show license of program. 
+.SH "AUTHOR" 
+.PP 
+This manual page was written by Eike Sauer <eike@debian.org> for 
+the \fBDebian\fP system (but may be used by others).  Permission is 
+granted to copy, distribute and/or modify this document under 
+the terms of the GNU General Public License, Version 2 
+(or, at your option, any later version published by the Free 
+Software Foundation). 
+ 
+.PP 
+On Debian systems, the complete text of the GNU General Public 
+License can be found in /usr/share/common-licenses/GPL. 
+ 
+.\" created by instant / docbook-to-man 
