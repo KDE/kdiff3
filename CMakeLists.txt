@@ -61,16 +61,17 @@ endif()
 set(
     needed_features
     cxx_nullptr
+    cxx_override
 )
 
 
 add_definitions(
-    -DQT_DEPRECATED_WARNINGS #Get warnings from QT about deprated functions.
+    -DQT_DEPRECATED_WARNINGS #Get warnings from QT about deprecated functions.
     -DQT_NO_URL_CAST_FROM_STRING #implict casting from string to url does not always behave as you might think
 )
 #remove unnneeded errors
 remove_definitions(
-    -DQT_NO_CAST_FROM_ASCII #While a good idea in gerneral this triggers for many simple no translable strings
+    -DQT_NO_CAST_FROM_ASCII #While a good idea in gerneral this triggers for many simple non-translatable strings
     )
 
 add_subdirectory(src)
