@@ -104,7 +104,7 @@ bool KDiff3App::isDirComparison()
     return m_bDirCompare;
 }
 
-KDiff3App::KDiff3App(QWidget* pParent, const char* /*name*/, KDiff3Part* pKDiff3Part)
+KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDiff3Part)
     : QSplitter(pParent) //previously KMainWindow
 {
     setObjectName("KDiff3App");

@@ -108,7 +108,7 @@ class KDiff3App : public QSplitter
   public:
     /** constructor of KDiff3App, calls all init functions to create the application.
      */
-    KDiff3App( QWidget* parent, const char* name, KDiff3Part* pKDiff3Part );
+    KDiff3App( QWidget* parent, const QString name, KDiff3Part* pKDiff3Part );
     ~KDiff3App() override;
 
     bool isPart();

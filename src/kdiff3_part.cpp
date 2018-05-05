@@ -59,7 +59,7 @@ KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantLis
 {
     //set AboutData
     setComponentData(createAboutData());
-    const char* widgetName = args[0].toString().toUtf8().data();
+    const QString widgetName = args[0].toString().toUtf8();
 
     // this should be your custom internal widget
     m_widget = new KDiff3App(parentWidget, widgetName, this);
