@@ -44,7 +44,7 @@
 #include <cmath>
 #include <cstdlib>
 
-static QAtomicInt s_runnableCount = 0;
+QAtomicInt s_runnableCount = 0;
 
 class DiffTextWindowData
 {
@@ -277,7 +277,7 @@ void DiffTextWindow::setFirstLine(int firstLine)
     }
     else
     {
-        QWidget::scroll(0, deltaY);
+        scroll(0, deltaY);
     }
     d->m_pDiffTextWindowFrame->setFirstLine(d->m_firstLine);
 }
@@ -313,7 +313,7 @@ void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
     }
     else
     {
-        QWidget::scroll(deltaX, 0, r);
+        scroll(deltaX, 0, r);
     }
 }
 
@@ -583,7 +583,7 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
         {
             d->m_scrollDeltaX = deltaX;
             d->m_scrollDeltaY = deltaY;
-            emit scroll(deltaX, deltaY);
+            scroll(deltaX, deltaY);
             if(d->m_delayedDrawTimer)
                 killTimer(d->m_delayedDrawTimer);
             d->m_delayedDrawTimer = startTimer(50);
@@ -644,7 +644,7 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
     if(d->m_scrollDeltaX != 0 || d->m_scrollDeltaY != 0)
     {
         d->m_selection.end(d->m_selection.getLastLine() + d->m_scrollDeltaY, d->m_selection.getLastPos() + d->m_scrollDeltaX);
-        emit scroll(d->m_scrollDeltaX, d->m_scrollDeltaY);
+        scroll(d->m_scrollDeltaX, d->m_scrollDeltaY);
         killTimer(d->m_delayedDrawTimer);
         d->m_delayedDrawTimer = startTimer(50);
     }
@@ -1616,7 +1616,7 @@ class RecalcWordWrapRunnable : public QRunnable
     }
 };
 
-static QList<QRunnable*> s_runnables;
+QList<QRunnable*> s_runnables;
 
 bool startRunnables()
 {
@@ -1641,8 +1641,8 @@ bool startRunnables()
         return true;
     }
 }
-
-static const int s_linesPerRunnable = 2000;
+// Use conexpr when supported. QT
+const int s_linesPerRunnable = 2000;
 
 void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth)
 {

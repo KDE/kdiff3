@@ -163,7 +163,6 @@ public Q_SLOTS:
    void slotStatusMessageChanged( const QString& );
 
 Q_SIGNALS:
-   void scroll( int deltaX, int deltaY );
    void modifiedChanged(bool bModified);
    void setFastSelectorRange( int line1, int nofLines );
    void sourceMask( int srcMask, int enabledMask );

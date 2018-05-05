@@ -55,10 +55,10 @@
 
 #define KDIFF3_CONFIG_GROUP "KDiff3 Options"
 
-static QString s_historyEntryStartRegExpToolTip;
-static QString s_historyEntryStartSortKeyOrderToolTip;
-static QString s_autoMergeRegExpToolTip;
-static QString s_historyStartRegExpToolTip;
+QString s_historyEntryStartRegExpToolTip;
+QString s_historyEntryStartSortKeyOrderToolTip;
+QString s_autoMergeRegExpToolTip;
+QString s_historyStartRegExpToolTip;
 
 void OptionDialog::addOptionItem(OptionItem* p)
 {

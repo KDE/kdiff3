@@ -541,7 +541,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
     m_currentMergeLineIt = m_mergeLineList.begin();
     slotGoTop();
 
-    updateAvailabilities();
+    emit updateAvailabilities();
     update();
 }
 
@@ -1617,7 +1617,7 @@ void MergeResultWindow::timerEvent(QTimerEvent*)
     if(m_scrollDeltaX != 0 || m_scrollDeltaY != 0)
     {
         m_selection.end(m_selection.getLastLine() + m_scrollDeltaY, m_selection.getLastPos() + m_scrollDeltaX);
-        emit scroll(m_scrollDeltaX, m_scrollDeltaY);
+        scroll(m_scrollDeltaX, m_scrollDeltaY);
         killTimer(m_delayedDrawTimer);
         m_delayedDrawTimer = startTimer(50);
     }
@@ -2079,7 +2079,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
 
         if(bRMB)
         {
-            showPopupMenu(QCursor::pos());
+            emit showPopupMenu(QCursor::pos());
         }
     }
     else if(bLMB) // Normal cursor placement
@@ -2208,7 +2208,7 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
         m_scrollDeltaY = deltaY;
         if(deltaX != 0 || deltaY != 0)
         {
-            emit scroll(deltaX, deltaY);
+            scroll(deltaX, deltaY);
         }
     }
 }

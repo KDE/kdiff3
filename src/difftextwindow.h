@@ -82,7 +82,6 @@ public:
 Q_SIGNALS:
    void resizeHeightChangedSignal(int nofVisibleLines);
    void resizeWidthChangedSignal(int nofVisibleColumns);
-   void scroll(int deltaX, int deltaY);
    void newSelection();
    void selectionEnd();
    void setFastSelectorLine( int line );

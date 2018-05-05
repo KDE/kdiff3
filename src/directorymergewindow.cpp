@@ -14,6 +14,8 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+#include <qglobal.h>
+
 #ifdef Q_OS_WIN
 #include <qt_windows.h>
 #endif
@@ -1475,11 +1477,11 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
 
 void DirectoryMergeWindow::focusInEvent(QFocusEvent*)
 {
-    updateAvailabilities();
+    emit updateAvailabilities();
 }
 void DirectoryMergeWindow::focusOutEvent(QFocusEvent*)
 {
-    updateAvailabilities();
+    emit updateAvailabilities();
 }
 
 void DirectoryMergeWindow::Data::setAllMergeOperations(e_MergeOperation eDefaultOperation)
@@ -2346,12 +2348,12 @@ void DirectoryMergeWindow::Data::selectItemAndColumn(const QModelIndex& mi, bool
     {
         m_selection3Index = mi;
     }
-    if(old1.isValid()) dataChanged(old1, old1);
-    if(old2.isValid()) dataChanged(old2, old2);
-    if(old3.isValid()) dataChanged(old3, old3);
-    if(m_selection1Index.isValid()) dataChanged(m_selection1Index, m_selection1Index);
-    if(m_selection2Index.isValid()) dataChanged(m_selection2Index, m_selection2Index);
-    if(m_selection3Index.isValid()) dataChanged(m_selection3Index, m_selection3Index);
+    if(old1.isValid()) emit dataChanged(old1, old1);
+    if(old2.isValid()) emit dataChanged(old2, old2);
+    if(old3.isValid()) emit dataChanged(old3, old3);
+    if(m_selection1Index.isValid()) emit dataChanged(m_selection1Index, m_selection1Index);
+    if(m_selection2Index.isValid()) emit dataChanged(m_selection2Index, m_selection2Index);
+    if(m_selection3Index.isValid()) emit dataChanged(m_selection3Index, m_selection3Index);
     emit q->updateAvailabilities();
 }
 
@@ -2581,7 +2583,9 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
 bool DirectoryMergeWindow::Data::canContinue()
 {
     bool bCanContinue = false;
-    q->checkIfCanContinue(&bCanContinue);
+    
+    emit q->checkIfCanContinue(&bCanContinue);
+    
     if(bCanContinue && !m_bError)
     {
         QModelIndex mi = (m_mergeItemList.empty() || m_currentIndexForOperation == m_mergeItemList.end()) ? QModelIndex() : *m_currentIndexForOperation;
