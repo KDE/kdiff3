@@ -69,7 +69,7 @@ public:
    }
 };
 
-static KDiff3PluginHistory s_history;
+KDiff3PluginHistory s_history;
 
 K_PLUGIN_FACTORY_WITH_JSON(KDiff3FileItemActionFactory, "kdiff3fileitemaction.json", registerPlugin<KDiff3FileItemAction>();)
 #include "kdiff3fileitemaction.moc"
