@@ -1,10 +1,29 @@
 /*
  * Copyright (c) 2003-2006, Sergey Zorin. All rights reserved.
  *
- * This software is distributable under the BSD license. See the terms
- * of the BSD license in the LICENSE file provided with this software.
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+
 #define _CRT_SECURE_NO_DEPRECATE
 
 #include <assert.h>
@@ -497,7 +516,7 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
          if (sizeof(void*)==8)
              sBits = i18n("(64 Bit)");
          MessageBox( _hwnd, (i18n("Diff-Ext Copyright (c) 2003-2006, Sergey Zorin. All rights reserved.\n")
-            + i18n("This software is distributable under the BSD license.\n")
+            + i18n("This software is distributable under the BSD-2-Clause license.\n")
             + i18n("Some extensions for KDiff3 (c) 2006-2013 by Joachim Eibl.\n")
             + i18n("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n")
             + i18n("Homepage for KDiff3: http://kdiff3.sourceforge.net")).c_str()
