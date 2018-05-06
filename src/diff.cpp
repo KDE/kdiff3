@@ -2367,7 +2367,7 @@ bool fineDiff(
     int listIdx = 0;
     for(i = diff3LineList.begin(); i != diff3LineList.end(); ++i)
     {
-        Q_ASSERT(selector = 1 || selector == 2 || selector == 3);
+        Q_ASSERT(selector == 1 || selector == 2 || selector == 3);
 
         if(selector == 1) {
             k1 = i->lineA;
@@ -2415,7 +2415,7 @@ bool fineDiff(
                     }
                 }
 
-                Q_ASSERT(selector = 1 || selector == 2 || selector == 3);
+                Q_ASSERT(selector == 1 || selector == 2 || selector == 3);
                 if(selector == 1) {
                     delete(*i).pFineAB;
                     (*i).pFineAB = pDiffList;
@@ -2434,7 +2434,7 @@ bool fineDiff(
 
             if((v1[k1].bContainsPureComment || v1[k1].whiteLine()) && (v2[k2].bContainsPureComment || v2[k2].whiteLine()))
             {
-                Q_ASSERT(selector = 1 || selector == 2 || selector == 3);
+                Q_ASSERT(selector == 1 || selector == 2 || selector == 3);
 
                 if(selector == 1) {
                     i->bAEqB = true;
