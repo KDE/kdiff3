@@ -62,7 +62,7 @@ class DiffTextWindowData
         m_pOptions = nullptr;
         m_fastSelectorLine1 = 0;
         m_fastSelectorNofLines = 0;
-        m_bTriple = 0;
+        m_bTriple = false;
         m_winIdx = 0;
         m_firstLine = 0;
         m_oldFirstLine = 0;
@@ -843,7 +843,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, bool /*bFirs
         textWidth = m_pDiffTextWindow->width() - xOffset;
 
     int indentation = 0;
-    while(1)
+    while(true)
     {
         QTextLine line = textLayout.createLine();
         if(!line.isValid())

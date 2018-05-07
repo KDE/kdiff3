@@ -541,5 +541,5 @@ bool GnuDiff::read_files(struct file_data filevec[], bool /*pretend_binary*/)
     free(equivs);
     free(buckets - 1);
 
-    return 0;
+    return false;
 }

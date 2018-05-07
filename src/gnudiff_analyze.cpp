@@ -114,7 +114,7 @@ lin GnuDiff::diag(lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal,
     for(c = 1;; ++c)
     {
         lin d; /* Active diagonal. */
-        bool big_snake = 0;
+        bool big_snake = false;
 
         /* Extend the top-down search by an edit step in each diagonal. */
         fmin > dmin ? fd[--fmin - 1] = -1 : ++fmin;
@@ -132,13 +132,13 @@ lin GnuDiff::diag(lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal,
             while(x < xlim && y < ylim && xv[x] == yv[y])
                 ++x, ++y;
             if(x - oldx > SNAKE_LIMIT)
-                big_snake = 1;
+                big_snake = true;
             fd[d] = x;
             if(odd && bmin <= d && d <= bmax && bd[d] <= x)
             {
                 part->xmid = x;
                 part->ymid = y;
-                part->lo_minimal = part->hi_minimal = 1;
+                part->lo_minimal = part->hi_minimal = true;
                 return 2 * c - 1;
             }
         }
@@ -159,13 +159,13 @@ lin GnuDiff::diag(lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal,
             while(x > xoff && y > yoff && xv[x - 1] == yv[y - 1])
                 --x, --y;
             if(oldx - x > SNAKE_LIMIT)
-                big_snake = 1;
+                big_snake = true;
             bd[d] = x;
             if(!odd && fmin <= d && d <= fmax && x <= fd[d])
             {
                 part->xmid = x;
                 part->ymid = y;
-                part->lo_minimal = part->hi_minimal = 1;
+                part->lo_minimal = part->hi_minimal = true;
                 return 2 * c;
             }
         }
@@ -213,8 +213,8 @@ lin GnuDiff::diag(lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal,
             }
             if(best > 0)
             {
-                part->lo_minimal = 1;
-                part->hi_minimal = 0;
+                part->lo_minimal = true;
+                part->hi_minimal = false;
                 return 2 * c - 1;
             }
 
@@ -246,8 +246,8 @@ lin GnuDiff::diag(lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal,
             }
             if(best > 0)
             {
-                part->lo_minimal = 0;
-                part->hi_minimal = 1;
+                part->lo_minimal = false;
+                part->hi_minimal = true;
                 return 2 * c - 1;
             }
         }
@@ -296,15 +296,15 @@ lin GnuDiff::diag(lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal,
             {
                 part->xmid = fxbest;
                 part->ymid = fxybest - fxbest;
-                part->lo_minimal = 1;
-                part->hi_minimal = 0;
+                part->lo_minimal = true;
+                part->hi_minimal = false;
             }
             else
             {
                 part->xmid = bxbest;
                 part->ymid = bxybest - bxbest;
-                part->lo_minimal = 0;
-                part->hi_minimal = 1;
+                part->lo_minimal = false;
+                part->hi_minimal = true;
             }
             return 2 * c - 1;
         }
@@ -340,10 +340,10 @@ void GnuDiff::compareseq(lin xoff, lin xlim, lin yoff, lin ylim, bool find_minim
     /* Handle simple cases. */
     if(xoff == xlim)
         while(yoff < ylim)
-            files[1].changed[files[1].realindexes[yoff++]] = 1;
+            files[1].changed[files[1].realindexes[yoff++]] = true;
     else if(yoff == ylim)
         while(xoff < xlim)
-            files[0].changed[files[0].realindexes[xoff++]] = 1;
+            files[0].changed[files[0].realindexes[xoff++]] = true;
     else
     {
         lin c;
@@ -580,7 +580,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
                 filevec[f].realindexes[j++] = i;
             }
             else
-                filevec[f].changed[i] = 1;
+                filevec[f].changed[i] = true;
         filevec[f].nondiscarded_lines = j;
     }
 
@@ -611,7 +611,7 @@ void GnuDiff::shift_boundaries(struct file_data filevec[])
         lin j = 0;
         lin i_end = filevec[f].buffered_lines;
 
-        while(1)
+        while(true)
         {
             lin runlength, start, corresponding;
 
@@ -649,8 +649,8 @@ void GnuDiff::shift_boundaries(struct file_data filevec[])
 
                 while(start && equivs[start - 1] == equivs[i - 1])
                 {
-                    changed[--start] = 1;
-                    changed[--i] = 0;
+                    changed[--start] = true;
+                    changed[--i] = false;
                     while(changed[start - 1])
                         start--;
                     while(other_changed[--j])
@@ -670,8 +670,8 @@ void GnuDiff::shift_boundaries(struct file_data filevec[])
 
                 while(i != i_end && equivs[start] == equivs[i])
                 {
-                    changed[start++] = 0;
-                    changed[i++] = 1;
+                    changed[start++] = false;
+                    changed[i++] = true;
                     while(changed[i])
                         i++;
                     while(other_changed[++j])
@@ -684,8 +684,8 @@ void GnuDiff::shift_boundaries(struct file_data filevec[])
 
             while(corresponding < i)
             {
-                changed[--start] = 1;
-                changed[--i] = 0;
+                changed[--start] = true;
+                changed[--i] = false;
                 while(other_changed[--j])
                     continue;
             }
