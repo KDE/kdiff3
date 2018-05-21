@@ -126,7 +126,7 @@ int main(int argc, char* argv[])
     //QApplication::setColorSpec( QApplication::ManyColor ); // Grab all 216 colors
 
     const QByteArray& appName = QByteArray::fromRawData("kdiff3", 6);
-    const QString i18nName = i18n("kdiff3");
+    const QString i18nName = i18n("KDiff3");
     QByteArray appVersion = QByteArray::fromRawData(VERSION, sizeof(VERSION));
     if(sizeof(void*) == 8)
         appVersion += " (64 bit)";
