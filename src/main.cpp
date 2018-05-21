@@ -119,13 +119,13 @@ class ContextFreeTranslator : public QTranslator
 int main(int argc, char* argv[])
 {
     QApplication app(argc, argv); // KAboutData and QCommandLineParser depend on this being setup.
+    KLocalizedString::setApplicationDomain("kdiff3");
 
     KCrash::initialize();
 
     //QApplication::setColorSpec( QApplication::ManyColor ); // Grab all 216 colors
 
     const QByteArray& appName = QByteArray::fromRawData("kdiff3", 6);
-    const QByteArray& appCatalog = appName;
     const QString i18nName = i18n("kdiff3");
     QByteArray appVersion = QByteArray::fromRawData(VERSION, sizeof(VERSION));
     if(sizeof(void*) == 8)
@@ -137,7 +137,6 @@ int main(int argc, char* argv[])
     const QString& homePage = QStringLiteral("");
     const QString& bugsAddress = QStringLiteral("reeves.87""@""gmail.com");
 
-    KLocalizedString::setApplicationDomain(appCatalog);
     KAboutData aboutData(appName, i18nName,
                          appVersion, description, KAboutLicense::GPL_V2, copyright, description,
                          homePage, bugsAddress);
