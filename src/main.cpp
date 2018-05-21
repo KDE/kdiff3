@@ -148,6 +148,9 @@ int main(int argc, char* argv[])
     cmdLineParser->setApplicationDescription(aboutData.shortDescription());
     cmdLineParser->addVersionOption();
     cmdLineParser->addHelpOption();
+
+    aboutData.setupCommandLine(cmdLineParser);
+    
     initialiseCmdLineArgs(cmdLineParser);
     // ignorable command options
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("m") << QLatin1String("merge"), i18n("Merge the input.")));
@@ -203,9 +206,8 @@ int main(int argc, char* argv[])
 #endif
         exit(0);
     }
-    //cmdLineParser->process( app );
-    //must be after process or parse call
-    aboutData.setupCommandLine(cmdLineParser);
+
+    aboutData.processCommandLine(cmdLineParser);
     /**
      * take component name and org. name from KAboutData
      */
