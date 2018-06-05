@@ -9,11 +9,9 @@
 
 //#define __stdcall
 
-#ifndef KREPLACEMENTS_H
 // For compilation download the NSIS source package and modify the following
 // line to point to the exdll.h-file
 #include "C:/Programme/NSIS/Contrib/ExDll/exdll.h"
-#endif
 
 struct ReplacementItem {
     const char* fileType;
@@ -285,8 +283,6 @@ int integrateWithClearCase(const char* subCommand, const char* kdiff3CommandPath
     return 0;
 }
 
-#ifndef KREPLACEMENTS_H
-
 extern "C" void __declspec(dllexport) nsisPlugin(HWND hwndParent, int string_size,
                                                  char* variables, stack_t** stacktop,
                                                  extra_parameters* extra)
@@ -309,7 +305,6 @@ extern "C" void __declspec(dllexport) nsisPlugin(HWND hwndParent, int string_siz
     }
 }
 
-#endif
 /*
 int _tmain(int argc, _TCHAR* argv[])
 {

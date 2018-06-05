@@ -101,21 +101,6 @@ static bool isOptionUsed(const QString& s, int argc, char* argv[])
 }
 #endif
 
-#if defined(KREPLACEMENTS_H) && !defined(QT_NO_TRANSLATION)
-class ContextFreeTranslator : public QTranslator
-{
-  public:
-    ContextFreeTranslator(QObject* pParent) : QTranslator(pParent) {}
-    QString translate(const char* context, const char* sourceText, const char* disambiguation, int /*n*/) const /*override*/
-    {
-        if(context != 0)
-            return QTranslator::translate(0, sourceText, disambiguation);
-        else
-            return QString();
-    }
-};
-#endif
-
 int main(int argc, char* argv[])
 {
     QApplication app(argc, argv); // KAboutData and QCommandLineParser depend on this being setup.
@@ -214,25 +199,6 @@ int main(int argc, char* argv[])
     app.setApplicationDisplayName(aboutData.displayName());
     app.setOrganizationDomain(aboutData.organizationDomain());
     app.setApplicationVersion(aboutData.version());
-
-#if defined(KREPLACEMENTS_H) && !defined(QT_NO_TRANSLATION)
-    QString locale;
-
-    locale = app.config()->readEntry("Language", "Auto");
-    int spacePos = locale.indexOf(' ');
-    if(spacePos > 0) locale = locale.left(spacePos);
-    ContextFreeTranslator kdiff3Translator(0);
-    QTranslator qtTranslator(0);
-    if(locale != "en_orig")
-    {
-        QString translationDir = getTranslationDir(locale);
-        kdiff3Translator.load(QLocale::system(), QString("kdiff3_"), translationDir);
-        app.installTranslator(&kdiff3Translator);
-
-        qtTranslator.load(QLocale::system(), QString("qt_"), translationDir);
-        app.installTranslator(&qtTranslator);
-    }
-#endif
 
     KDiff3Shell* p = new KDiff3Shell();
     p->show();
