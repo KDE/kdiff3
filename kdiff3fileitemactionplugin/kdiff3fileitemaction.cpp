@@ -86,11 +86,10 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
    if (QStandardPaths::findExecutable("kdiff3").isEmpty ())
       return actions;
 
-   KDiff3FileItemAction *pThis = const_cast<KDiff3FileItemAction*>(this);
-   //pThis->m_fileItemInfos = fileItemInfos;
-   pThis->m_pParentWidget = pParentWidget;
+   //m_fileItemInfos = fileItemInfos;
+   m_pParentWidget = pParentWidget;
 
-   QAction *pMenuAction = new QAction(QIcon::fromTheme(QStringLiteral("kdiff3")), i18n("KDiff3..."), pThis);
+   QAction *pMenuAction = new QAction(QIcon::fromTheme(QStringLiteral("kdiff3")), i18n("KDiff3..."), this);
    QMenu *pActionMenu = new QMenu();
    pMenuAction->setMenu( pActionMenu );
    
@@ -100,7 +99,7 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
    foreach(const QUrl& item, itemList)
    {
       //m_urlList.append( item.url() );
-      pThis->m_list.append( item );
+      m_list.append( item );
    }
 
 
@@ -123,43 +122,43 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
       int historyCount = s_pHistory ? s_pHistory->count() : 0;
 
       s = i18n("Compare with %1", (historyCount>0 ? s_pHistory->first() : QString()) );
-      pAction = new QAction ( s,pThis );
+      pAction = new QAction ( s,this );
       connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareWith);
       pAction->setEnabled( m_list.count()>0 && historyCount>0 );
       pActionMenu->addAction(pAction);
 
       s = i18n("Merge with %1", historyCount>0 ? s_pHistory->first() : QString() );
-      pAction = new QAction( s, pThis);
+      pAction = new QAction( s, this);
       connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotMergeWith);
       pAction->setEnabled( m_list.count()>0 && historyCount>0 );
       pActionMenu->addAction (pAction);
 
       s = i18n("Save '%1' for later", ( m_list.first().toDisplayString(QUrl::PreferLocalFile) ) );
-      pAction = new QAction ( s, pThis);
+      pAction = new QAction ( s, this);
       connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotSaveForLater);
       pAction->setEnabled( m_list.count()>0 );
       pActionMenu->addAction(pAction);
 
-      pAction = new QAction (i18n("3-way merge with base"), pThis);
+      pAction = new QAction (i18n("3-way merge with base"), this);
       connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotMergeThreeWay);
       pAction->setEnabled( m_list.count()>0 && historyCount>=2 );
       pActionMenu->addAction (pAction);
 
       if (s_pHistory && !s_pHistory->empty())
       {
-         QAction* pHistoryMenuAction = new QAction( i18n("Compare with..."), pThis );
+         QAction* pHistoryMenuAction = new QAction( i18n("Compare with..."), this );
          QMenu* pHistoryMenu = new QMenu();
          pHistoryMenuAction->setMenu( pHistoryMenu );
          pHistoryMenu->setEnabled( m_list.count()>0 && historyCount>0 );
          pActionMenu->addAction(pHistoryMenuAction);
          foreach (const QString &file, *s_pHistory) {
-            pAction = new QAction(file, pThis);
+            pAction = new QAction(file, this);
             pAction->setData(file);
             connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareWithHistoryItem);
             pHistoryMenu->addAction(pAction);
          }
 
-         pAction = new QAction(i18n("Clear list"), pThis);
+         pAction = new QAction(i18n("Clear list"), this);
          connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotClearList);
          pActionMenu->addAction(pAction);
          pAction->setEnabled( historyCount>0 );
@@ -167,17 +166,17 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
    }
    else if(m_list.count() == 2)
    {
-      pAction = new QAction (i18n("Compare"), pThis);
+      pAction = new QAction (i18n("Compare"), this);
       connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareTwoFiles);
       pActionMenu->addAction (pAction);
    }
    else if ( m_list.count() == 3 )
    {
-      pAction = new QAction (i18n("3 way comparison"), pThis);
+      pAction = new QAction (i18n("3 way comparison"), this);
       connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareThreeFiles);
       pActionMenu->addAction (pAction);
    }
-   pAction = new QAction (i18n("About KDiff3 menu plugin..."), pThis);
+   pAction = new QAction (i18n("About KDiff3 menu plugin..."), this);
    connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotAbout);
    pActionMenu->addAction (pAction);
 
