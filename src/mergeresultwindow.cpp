@@ -923,10 +923,12 @@ void MergeResultWindow::showNrOfConflicts()
     int nrOfUnsolvedConflicts = getNrOfUnsolvedConflicts();
 
     KMessageBox::information(this,
-                             i18n("Total number of conflicts: ") + QString::number(nrOfConflicts) +
-                                 i18n("\nNr of automatically solved conflicts: ") + QString::number(nrOfConflicts - nrOfUnsolvedConflicts) +
-                                 i18n("\nNr of unsolved conflicts: ") + QString::number(nrOfUnsolvedConflicts) +
-                                 "\n" + totalInfo,
+                             i18n("Total number of conflicts: %1\n"
+                                  "Nr of automatically solved conflicts: %2\n"
+                                  "Nr of unsolved conflicts: %3\n"
+                                  "%4",
+                                  nrOfConflicts, nrOfConflicts - nrOfUnsolvedConflicts,
+                                  nrOfUnsolvedConflicts, totalInfo),
                              i18n("Conflicts"));
 }
 
@@ -2912,7 +2914,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
     {
         KMessageBox::error(this,
                            i18n("Not all conflicts are solved yet.\n"
-                                "File not saved.\n"),
+                                "File not saved."),
                            i18n("Conflicts Left"));
         return false;
     }
@@ -2921,7 +2923,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
     {
         KMessageBox::error(this,
                            i18n("There is a line end style conflict. Please choose the line end style manually.\n"
-                                "File not saved.\n"),
+                                "File not saved."),
                            i18n("Conflicts Left"));
         return false;
     }
@@ -3342,7 +3344,7 @@ WindowTitleWidget::WindowTitleWidget(Options* pOptions)
     pHLayout->setMargin(2);
     pHLayout->setSpacing(2);
 
-    m_pLabel = new QLabel(i18n("Output") + ":");
+    m_pLabel = new QLabel(i18n("Output:"));
     pHLayout->addWidget(m_pLabel);
 
     m_pFileNameLineEdit = new QLineEdit();
@@ -3361,7 +3363,7 @@ WindowTitleWidget::WindowTitleWidget(Options* pOptions)
 
     pHLayout->addStretch(1);
 
-    m_pEncodingLabel = new QLabel(i18n("Encoding for saving") + ":");
+    m_pEncodingLabel = new QLabel(i18n("Encoding for saving:"));
     pHLayout->addWidget(m_pEncodingLabel);
 
     m_pEncodingSelector = new QComboBox();
@@ -3492,11 +3494,11 @@ void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecF
     }
 
     if(pCodecForA)
-        m_pEncodingSelector->addItem(i18n("Codec from") + " A: " + pCodecForA->name(), QVariant::fromValue((void*)pCodecForA));
+        m_pEncodingSelector->addItem(i18n("Codec from A: %1", QLatin1String(pCodecForA->name())), QVariant::fromValue((void*)pCodecForA));
     if(pCodecForB)
-        m_pEncodingSelector->addItem(i18n("Codec from") + " B: " + pCodecForB->name(), QVariant::fromValue((void*)pCodecForB));
+        m_pEncodingSelector->addItem(i18n("Codec from B: %1", QLatin1String(pCodecForB->name())), QVariant::fromValue((void*)pCodecForB));
     if(pCodecForC)
-        m_pEncodingSelector->addItem(i18n("Codec from") + " C: " + pCodecForC->name(), QVariant::fromValue((void*)pCodecForC));
+        m_pEncodingSelector->addItem(i18n("Codec from C: %1", QLatin1String(pCodecForC->name())), QVariant::fromValue((void*)pCodecForC));
 
     std::map<QString, QTextCodec*>::iterator it;
     for(it = names.begin(); it != names.end(); ++it)

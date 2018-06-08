@@ -710,8 +710,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
 
                 errors.append(
                     i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
-                         "\n\nThe preprocessing command will be disabled now.")
-                        .arg(ppCmd) +
+                         "\n\nThe preprocessing command will be disabled now.", ppCmd) +
                     errorReason);
                 m_pOptions->m_PreProcessorCmd = "";
                 m_normalData.readFile(fileNameIn1);
@@ -759,8 +758,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             {
                 errors.append(
                     i18n("The line-matching-preprocessing possibly failed. Check this command:\n\n  %1"
-                         "\n\nThe line-matching-preprocessing command will be disabled now.")
-                        .arg(ppCmd) +
+                         "\n\nThe line-matching-preprocessing command will be disabled now.", ppCmd) +
                     errorReason);
                 m_pOptions->m_LineMatchingPreProcessorCmd = "";
                 m_lmppData.readFile(fileNameIn2);

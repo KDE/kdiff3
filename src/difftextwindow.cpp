@@ -408,11 +408,11 @@ void DiffTextWindow::showStatusLine(int line)
         {
             int l = pD3l->getLineInFile(d->m_winIdx);
 
-            QString s = i18n("File") + " " + d->m_filename;
+            QString s;
             if(l != -1)
-                s += ": " + i18n("Line") + " " + QString::number(l + 1);
+                s = i18n("File %1: Line %2", d->m_filename, l + 1);
             else
-                s += ": " + i18n("Line not available");
+                s = i18n("File %1: Line not available", d->m_filename);
             if(d->m_pStatusBar != nullptr) d->m_pStatusBar->showMessage(s);
 
             emit lineClicked(d->m_winIdx, l);
@@ -1940,8 +1940,8 @@ void DiffTextWindowFrame::init()
         d->m_pFileSelection->setText(s);
         QString winId = pDTW->d->m_winIdx == 1 ? (pDTW->d->m_bTriple ? "A (Base)" : "A") : (pDTW->d->m_winIdx == 2 ? "B" : "C");
         d->m_pLabel->setText(winId + ":");
-        d->m_pEncoding->setText(i18n("Encoding:") + " " + (pDTW->d->m_pTextCodec != nullptr ? pDTW->d->m_pTextCodec->name() : QString()));
-        d->m_pLineEndStyle->setText(i18n("Line end style:") + " " + (pDTW->d->m_eLineEndStyle == eLineEndStyleDos ? i18n("DOS") : i18n("Unix")));
+        d->m_pEncoding->setText(i18n("Encoding: %1", pDTW->d->m_pTextCodec != nullptr ? pDTW->d->m_pTextCodec->name() : QString()));
+        d->m_pLineEndStyle->setText(i18n("Line end style: %1", pDTW->d->m_eLineEndStyle == eLineEndStyleDos ? i18n("DOS") : i18n("Unix")));
     }
 }
 

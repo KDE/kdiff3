@@ -90,7 +90,7 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
    //pThis->m_fileItemInfos = fileItemInfos;
    pThis->m_pParentWidget = pParentWidget;
 
-   QAction *pMenuAction = new QAction(QIcon::fromTheme(QStringLiteral("kdiff3")), i18n("KDiff3 ..."), pThis);
+   QAction *pMenuAction = new QAction(QIcon::fromTheme(QStringLiteral("kdiff3")), i18n("KDiff3..."), pThis);
    QMenu *pActionMenu = new QMenu();
    pMenuAction->setMenu( pActionMenu );
    
@@ -147,7 +147,7 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
 
       if (s_pHistory && !s_pHistory->empty())
       {
-         QAction* pHistoryMenuAction = new QAction( i18n("Compare with ..."), pThis );
+         QAction* pHistoryMenuAction = new QAction( i18n("Compare with..."), pThis );
          QMenu* pHistoryMenu = new QMenu();
          pHistoryMenuAction->setMenu( pHistoryMenu );
          pHistoryMenu->setEnabled( m_list.count()>0 && historyCount>0 );
@@ -177,7 +177,7 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
       connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareThreeFiles);
       pActionMenu->addAction (pAction);
    }
-   pAction = new QAction (i18n("About KDiff3 menu plugin ..."), pThis);
+   pAction = new QAction (i18n("About KDiff3 menu plugin..."), pThis);
    connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotAbout);
    pActionMenu->addAction (pAction);
 
@@ -287,10 +287,10 @@ void KDiff3FileItemAction::slotAbout()
 {
    QString s = i18n("KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
                     "KDiff3 homepage: http://kdiff3.sourceforge.net\n\n");
-   s += i18n("Using the contextmenu extension:\n"
+   s += i18n("Using the context menu extension:\n"
              "For simple comparison of two selected files choose \"Compare\".\n"
              "If the other file is somewhere else \"Save\" the first file for later. "
-             "It will appear in the \"Compare With ...\" submenu. "
+             "It will appear in the \"Compare with...\" submenu. "
              "Then use \"Compare With\" on the second file.\n"
              "For a 3-way merge first \"Save\" the base file, then the branch to merge and "
              "choose \"3-way merge with base\" on the other branch which will be used as destination.\n"

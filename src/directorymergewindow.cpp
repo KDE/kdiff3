@@ -1289,13 +1289,14 @@ bool DirectoryMergeWindow::Data::init(
                           nofFiles, nofDirs, nofEqualFiles, nofManualMerges);
 
         QString s;
-        s = i18n("Directory Comparison Status") + "\n\n" +
-            i18n("Number of subdirectories:") + " " + QString::number(nofDirs) + "\n" +
-            i18n("Number of equal files:") + " " + QString::number(nofEqualFiles) + "\n" +
-            i18n("Number of different files:") + " " + QString::number(nofFiles - nofEqualFiles);
+        s = i18n("Directory Comparison Status\n\n"
+                 "Number of subdirectories: %1\n"
+                 "Number of equal files: %2\n"
+                 "Number of different files: %3",
+                 nofDirs, nofEqualFiles, nofFiles - nofEqualFiles);
 
         if(m_dirC.isValid())
-            s += "\n" + i18n("Number of manual merges:") + " " + QString::number(nofManualMerges);
+            s += "\n" + i18n("Number of manual merges: %1", nofManualMerges);
         KMessageBox::information(q, s);
         //
         //TODO
@@ -1884,7 +1885,7 @@ void DirectoryMergeWindow::Data::prepareListView(ProgressProxy& pp)
         const QString& fileName = mfi.subPath();
 
         pp.setInformation(
-            i18n("Processing ") + QString::number(currentIdx) + " / " + QString::number(nrOfFiles) + "\n" + fileName, currentIdx, false);
+            i18n("Processing %1 / %2\n%3", currentIdx, nrOfFiles, fileName), currentIdx, false);
         if(pp.wasCancelled()) break;
         ++currentIdx;
 
@@ -2557,7 +2558,7 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
             bool bSuccess = d->copyFLD(d->fullNameB(mfi), d->fullNameA(mfi));
             if(!bSuccess)
             {
-                KMessageBox::error(this, i18n("An error occurred while copying.\n"), i18n("Error"));
+                KMessageBox::error(this, i18n("An error occurred while copying."));
                 d->m_pStatusInfo->setWindowTitle(i18n("Merge Error"));
                 d->m_pStatusInfo->exec();
                 //if ( m_pStatusInfo->firstChild()!=0 )
@@ -2635,7 +2636,7 @@ bool DirectoryMergeWindow::Data::executeMergeOperation(MergeFileInfos& mfi, bool
         destName = fullNameDest(mfi);
         break;
     default:
-        KMessageBox::error(q, i18n("Unknown merge operation. (This must never happen!)"), i18n("Error"));
+        KMessageBox::error(q, i18n("Unknown merge operation. (This must never happen!)"));
     }
 
     bool bSuccess = false;
@@ -2680,7 +2681,7 @@ bool DirectoryMergeWindow::Data::executeMergeOperation(MergeFileInfos& mfi, bool
             destName, bSingleFileMerge);
         break;
     default:
-        KMessageBox::error(q, i18n("Unknown merge operation."), i18n("Error"));
+        KMessageBox::error(q, i18n("Unknown merge operation."));
     }
 
     return bSuccess;
@@ -2740,7 +2741,7 @@ void DirectoryMergeWindow::Data::prepareMergeStart(const QModelIndex& miBegin, c
             {
                 q->scrollTo(mi, QAbstractItemView::EnsureVisible);
                 q->setCurrentIndex(mi);
-                KMessageBox::error(q, errorText, i18n("Error"));
+                KMessageBox::error(q, errorText);
                 m_mergeItemList.clear();
                 m_bRealMergeStarted = false;
                 return;
@@ -2998,7 +2999,7 @@ void DirectoryMergeWindow::Data::mergeContinue(bool bStart, bool bVerbose)
     q->scrollTo(miCurrent, EnsureVisible);
     if(!bSuccess && !bSingleFileMerge)
     {
-        KMessageBox::error(q, i18n("An error occurred. Press OK to see detailed information.\n"), i18n("Error"));
+        KMessageBox::error(q, i18n("An error occurred. Press OK to see detailed information."));
         m_pStatusInfo->setWindowTitle(i18n("Merge Error"));
         m_pStatusInfo->exec();
         //if ( m_pStatusInfo->firstChild()!=0 )

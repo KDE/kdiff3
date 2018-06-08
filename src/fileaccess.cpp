@@ -945,15 +945,15 @@ bool FileAccess::createBackup(const QString& bakExtension)
             bool bSuccess = bakFile.removeFile();
             if(!bSuccess)
             {
-                setStatusText(i18n("While trying to make a backup, deleting an older backup failed. \nFilename: ") + bakName);
+                setStatusText(i18n("While trying to make a backup, deleting an older backup failed.\nFilename: %1", bakName));
                 return false;
             }
         }
         bool bSuccess = rename(bakName);
         if(!bSuccess)
         {
-            setStatusText(i18n("While trying to make a backup, renaming failed. \nFilenames: ") +
-                          absoluteFilePath() + " -> " + bakName);
+            setStatusText(i18n("While trying to make a backup, renaming failed.\nFilenames: %1 -> %2",
+                               absoluteFilePath(), bakName));
             return false;
         }
     }
@@ -1554,7 +1554,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
     if(pp.wasCancelled())
         return true; // Cancelled is not an error.
 
-    pp.setInformation(i18n("Reading directory: ") + m_pFileAccess->absoluteFilePath(), 0, false);
+    pp.setInformation(i18n("Reading directory: %1", m_pFileAccess->absoluteFilePath()), 0, false);
 
     if(m_pFileAccess->isLocal())
     {

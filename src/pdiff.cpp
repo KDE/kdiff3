@@ -799,8 +799,8 @@ void KDiff3App::slotFinishMainInit()
         if(bVisibleMergeResultWindow && (!m_sd1.isText() || !m_sd2.isText() || !m_sd3.isText()))
         {
             KMessageBox::information(this, i18n(
-                                               "Some inputfiles don't seem to be pure textfiles.\n"
-                                               "Note that the KDiff3-merge was not meant for binary data.\n"
+                                               "Some input files do not seem to be pure text files.\n"
+                                               "Note that the KDiff3 merge was not meant for binary data.\n"
                                                "Continue at your own risk."));
         }
         if(m_sd1.isIncompleteConversion() || m_sd2.isIncompleteConversion() || m_sd3.isIncompleteConversion())
@@ -815,9 +815,8 @@ void KDiff3App::slotFinishMainInit()
 
             KMessageBox::information(this, i18n("Some input characters could not be converted to valid unicode.\n"
                                                 "You might be using the wrong codec. (e.g. UTF-8 for non UTF-8 files).\n"
-                                                "Don't save the result if unsure. Continue at your own risk.\n"
-                                                "Affected input files are in %1.")
-                                               .arg(files));
+                                                "Do not save the result if unsure. Continue at your own risk.\n"
+                                                "Affected input files are in %1.", files));
         }
     }
 
@@ -1921,7 +1920,7 @@ bool KDiff3App::canContinue()
     if(m_bOutputModified)
     {
         int result = KMessageBox::warningYesNoCancel(this,
-                                                     i18n("The merge result hasn't been saved."),
+                                                     i18n("The merge result has not been saved."),
                                                      i18n("Warning"),
                                                      KGuiItem(i18n("Save && Continue")),
                                                      KGuiItem(i18n("Continue Without Saving")));

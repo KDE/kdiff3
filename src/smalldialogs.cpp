@@ -115,7 +115,7 @@ OpenDialog::OpenDialog(
     QHBoxLayout* hl = new QHBoxLayout();
     h->addLayout(hl, 3, 1);
     hl->addStretch(2);
-    button = new QPushButton(i18n("Swap/Copy Names ..."), this);
+    button = new QPushButton(i18n("Swap/Copy Names..."), this);
     //button->setToggleButton(false);
     hl->addWidget(button);
 

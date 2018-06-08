@@ -689,7 +689,7 @@ bool KDiff3App::queryClose()
     if(m_bOutputModified)
     {
         int result = KMessageBox::warningYesNoCancel(this,
-                                                     i18n("The merge result hasn't been saved."),
+                                                     i18n("The merge result has not been saved."),
                                                      i18n("Warning"),
                                                      KGuiItem(i18n("Save && Quit")),
                                                      KGuiItem(i18n("Quit Without Saving")));
@@ -993,7 +993,7 @@ void KDiff3App::slotFilePrint()
                 painter.drawLine(0, view.bottom() + 3, view.width(), view.bottom() + 3);
                 QString s = bPrintCurrentPage ? QString("")
                                               : QString::number(page) + "/" + QString::number(totalNofPages);
-                if(bPrintSelection) s += " (" + i18n("Selection") + ")";
+                if(bPrintSelection) s += i18n(" (Selection)");
                 painter.drawText((view.right() - painter.fontMetrics().width(s)) / 2,
                                  view.bottom() + painter.fontMetrics().ascent() + 5, s);
 

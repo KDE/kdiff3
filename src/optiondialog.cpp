@@ -962,21 +962,19 @@ void OptionDialog::setupDiffPage(void)
        );
     ++line;
 */
-    QString treatAsWhiteSpace = " (" + i18n("Treat as white space.") + ")";
-
-    OptionCheckBox* pIgnoreNumbers = new OptionCheckBox(i18n("Ignore numbers") + treatAsWhiteSpace, false, "IgnoreNumbers", &m_options.m_bIgnoreNumbers, page, this);
+    OptionCheckBox* pIgnoreNumbers = new OptionCheckBox(i18n("Ignore numbers (treat as white space)"), false, "IgnoreNumbers", &m_options.m_bIgnoreNumbers, page, this);
     gbox->addWidget(pIgnoreNumbers, line, 0, 1, 2);
     pIgnoreNumbers->setToolTip(i18n(
         "Ignore number characters during line matching phase. (Similar to Ignore white space.)\n"
         "Might help to compare files with numeric data."));
     ++line;
 
-    OptionCheckBox* pIgnoreComments = new OptionCheckBox(i18n("Ignore C/C++ comments") + treatAsWhiteSpace, false, "IgnoreComments", &m_options.m_bIgnoreComments, page, this);
+    OptionCheckBox* pIgnoreComments = new OptionCheckBox(i18n("Ignore C/C++ comments (treat as white space)"), false, "IgnoreComments", &m_options.m_bIgnoreComments, page, this);
     gbox->addWidget(pIgnoreComments, line, 0, 1, 2);
     pIgnoreComments->setToolTip(i18n("Treat C/C++ comments like white space."));
     ++line;
 
-    OptionCheckBox* pIgnoreCase = new OptionCheckBox(i18n("Ignore case") + treatAsWhiteSpace, false, "IgnoreCase", &m_options.m_bIgnoreCase, page, this);
+    OptionCheckBox* pIgnoreCase = new OptionCheckBox(i18n("Ignore case (treat as white space)"), false, "IgnoreCase", &m_options.m_bIgnoreCase, page, this);
     gbox->addWidget(pIgnoreCase, line, 0, 1, 2);
     pIgnoreCase->setToolTip(i18n(
         "Treat case differences like white space changes. ('a'<=>'A')"));
@@ -1366,7 +1364,7 @@ void OptionDialog::setupDirectoryMergePage(void)
     OptionCheckBox* pCopyNewer = new OptionCheckBox(i18n("Copy newer instead of merging (unsafe)"), false, "CopyNewer", &m_options.m_bDmCopyNewer, page, this);
     gbox->addWidget(pCopyNewer, line, 0, 1, 2);
     pCopyNewer->setToolTip(i18n(
-        "Don't look inside, just take the newer file.\n"
+        "Do not look inside, just take the newer file.\n"
         "(Use this only if you know what you are doing!)\n"
         "Only effective when comparing two directories."));
     ++line;
@@ -1472,7 +1470,7 @@ void OptionDialog::setupRegionalPage(void)
         "Disable this if different individual settings are needed."));
     ++line;
 
-    label = new QLabel(i18n("Note: Local Encoding is ") + "\"" + QTextCodec::codecForLocale()->name() + "\"", page);
+    label = new QLabel(i18n("Note: Local Encoding is \"%1\"", QLatin1String(QTextCodec::codecForLocale()->name())), page);
     gbox->addWidget(label, line, 0);
     ++line;
 
