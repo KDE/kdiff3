@@ -936,7 +936,7 @@ void KDiff3App::slotFilePrint()
         pp.setMaxNofSteps(totalNofPages);
         QList<int>::iterator pageListIt = pageList.begin();
         for(;;) {
-            pp.setInformation(i18n("Printing page %1 of %2").arg(page).arg(totalNofPages), false);
+            pp.setInformation(i18n("Printing page %1 of %2", page, totalNofPages), false);
             pp.setCurrent(page - 1);
             if(pp.wasCancelled())
             {
