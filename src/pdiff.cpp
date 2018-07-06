@@ -2287,11 +2287,32 @@ void KDiff3App::slotNoRelevantChangesDetected()
         //KMessageBox::information( this, "No relevant changes detected", "KDiff3" );
         if(!m_pOptions->m_IrrelevantMergeCmd.isEmpty())
         {
-            QString cmd = m_pOptions->m_IrrelevantMergeCmd + " \"" + m_sd1.getAliasName() + "\" \"" + m_sd2.getAliasName() + "\" \"" + m_sd3.getAliasName();
+            QString cmd = m_pOptions->m_IrrelevantMergeCmd;
+            /*
+                QProcess doesn't check for single quotes and uses non-standard escaping syntax for double quotes.
+                    The distinction between single and double quotes is purly a command shell issue. So
+                    Silently convert quotes to what QProcess understands. Also convert '\"' to '"""'
+            */
+            //arg and arg1 can never both match but qt's pcre2 engine insists on unique naming anyway
+            const QRegularExpression argRe("(?<!\\\\)\"(?<arg>(?:[^\"]|(?<=\\\\)\")*)(?<!\\\\)\"|'(?<arg1>[^']*)'");
+            QRegularExpressionMatchIterator i = argRe.globalMatch(cmd);
+            QRegularExpressionMatch match;
+            QStringList args;
+
+            while(i.hasNext())
+            {
+                match = i.next();
+                args += match.captured("arg").replace("\\\"", "\"\"\"").replace("\\\\", "\\")
+                    + match.captured("arg1");
+            }
+            args += m_sd1.getAliasName();
+            args += m_sd2.getAliasName();
+            args += m_sd3.getAliasName();
+            cmd = cmd.left(cmd.indexOf('"')).trimmed();
+
             QProcess process;
             process.start(cmd);
             process.waitForFinished(-1);
-            //::system( cmd.local8Bit() );
         }
     }
 }
