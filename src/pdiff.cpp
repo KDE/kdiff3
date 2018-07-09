@@ -56,8 +56,6 @@
 
 #ifdef Q_OS_WIN
 #include <windows.h>
-#else //TODO:Why
-#include <unistd.h>
 #endif
 
 bool g_bIgnoreWhiteSpace = true;
