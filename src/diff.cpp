@@ -958,8 +958,8 @@ void SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
 // A line that contains only comments is still "white".
 // Comments in white lines must remain, while comments in
 // non-white lines are overwritten with spaces.
-static void checkLineForComments(
-    QChar* p,                // pointer to start of buffer
+void SourceData::FileData::checkLineForComments(
+    const QChar* p,          // pointer to start of buffer
     int& i,                  // index of current position (in, out)
     int size,                // size of buffer
     bool& bWhite,            // false if this line contains nonwhite characters (in, out)
@@ -1001,7 +1001,8 @@ static void checkLineForComments(
                 ;
             if(!bWhite)
             {
-                memset(&p[commentStart], ' ', i - commentStart);
+                int size = i - commentStart;
+                m_unicodeBuf.replace(commentStart, size, QString(" ").repeated(size));
             }
             return;
         }
@@ -1022,8 +1023,8 @@ static void checkLineForComments(
                     checkLineForComments(p, i, size, bWhite, bCommentInLine, bStartsOpenComment);
                     if(!bWhite)
                     {
-                        memset(&p[commentStart], ' ', i - commentStart);
-                    }
+                        int size = i - commentStart;
+                        m_unicodeBuf.replace(commentStart, size, QString(" ").repeated(size));                    }
                     return;
                 }
             }
@@ -1048,7 +1049,7 @@ static void checkLineForComments(
 void SourceData::FileData::removeComments()
 {
     int line = 0;
-    QChar* p = const_cast<QChar*>(m_unicodeBuf.unicode());
+    const QChar* p = m_unicodeBuf.unicode();
     bool bWithinComment = false;
     int size = m_unicodeBuf.length();
     for(int i = 0; i < size; ++i)
@@ -1072,7 +1073,8 @@ void SourceData::FileData::removeComments()
                     checkLineForComments(p, i, size, bWhite, bCommentInLine, bWithinComment);
                     if(!bWhite)
                     {
-                        memset(&p[commentStart], ' ', i - commentStart);
+                        int size = i - commentStart;
+                        m_unicodeBuf.replace(commentStart, size, QString(" ").repeated(size));
                     }
                     break;
                 }
