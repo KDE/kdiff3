@@ -2306,7 +2306,10 @@ void KDiff3App::slotNoRelevantChangesDetected()
             args += m_sd1.getAliasName();
             args += m_sd2.getAliasName();
             args += m_sd3.getAliasName();
-            cmd = cmd.left(cmd.indexOf('"')).trimmed();
+            //The command ends at the first non-escaped space.
+            cmd = cmd.left(
+                cmd.indexOf( QRegularExpression("(?<!\\\\)[\\s]*") )
+            ).trimmed();
 
             QProcess process;
             process.start(cmd);
