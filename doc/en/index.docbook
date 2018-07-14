@@ -1172,11 +1172,9 @@ an effect. An appropriate Line-Matching-Preprocessor-Command would be:
 </screen>
 Since for <command>sed</command> the "/"-character has a special meaning, it is necessary to place the 
 "\"-character before each "/" in the replacement-string. Sometimes the "\" is required
-to add or remove a special meaning of certain characters. The single quotation marks (') before 
-and after the substitution-command are important now, because otherwise the shell will
-try to interpret some special characters like '#', '$' or '\' before passing them to 
-<command>sed</command>. <emphasis>Note that on Windows you will need the double quotation marks (") here. Windows
-substitutes other characters like '%', so you might have to experiment a little bit.</emphasis>
+to add or remove a special meaning of certain characters. The single quotation marks (') are only important
+when testing on the command shell as it will otherwise attempt to process some characters.
+KDiff3 does not do this except for the escape sequences '\"' and '\\'.
 </para>
 </sect3>
 <sect3><title>Caseinsensitive Diff</title>

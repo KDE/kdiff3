@@ -2292,7 +2292,7 @@ void KDiff3App::slotNoRelevantChangesDetected()
                     Silently convert quotes to what QProcess understands. Also convert '\"' to '"""'
             */
             //arg and arg1 can never both match but qt's pcre2 engine insists on unique naming anyway
-            const QRegularExpression argRe("(?<!\\\\)\"(?<arg>(?:[^\"]|(?<=\\\\)\")*)(?<!\\\\)\"|'(?<arg1>[^']*)'");
+            const QRegularExpression argRe("(?<!\\\\)\"(?<arg>(?:[^\"]|(?<=\\\\)\")*)(?<!\\\\)\"|'(?<arg1>[^']*)'|(?<!\\\\)\\s*(?<arg2>[\\S]+)");
             QRegularExpressionMatchIterator i = argRe.globalMatch(cmd);
             QRegularExpressionMatch match;
             QStringList args;
@@ -2301,7 +2301,7 @@ void KDiff3App::slotNoRelevantChangesDetected()
             {
                 match = i.next();
                 args += match.captured("arg").replace("\\\"", "\"\"\"").replace("\\\\", "\\")
-                    + match.captured("arg1");
+                    + match.captured("arg1") + match.captured("arg2");
             }
             args += m_sd1.getAliasName();
             args += m_sd2.getAliasName();
@@ -2310,7 +2310,8 @@ void KDiff3App::slotNoRelevantChangesDetected()
             cmd = cmd.left(
                 cmd.indexOf( QRegularExpression("(?<!\\\\)[\\s]*") )
             ).trimmed();
-
+            cmd.replace(QRegularExpression("(?<!\\\\)([\\s])"), "\1");
+            
             QProcess process;
             process.start(cmd);
             process.waitForFinished(-1);
