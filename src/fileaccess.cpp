@@ -227,9 +227,8 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
         d()->m_name = fi.fileName();
         if(m_bSymLink)
         {
-#ifdef Q_OS_WIN
             d()->m_linkTarget = fi.readLink();
-
+#ifndef Q_OS_WIN 
             // Unfortunately Qt5 symLinkTarget/readLink always returns an absolute path, even if the link is relative
             char s[PATH_MAX + 1];
             int len = readlink(QFile::encodeName(fi.absoluteFilePath()).constData(), s, PATH_MAX);
@@ -237,10 +236,6 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
             {
                 s[len] = '\0';
                 d()->m_linkTarget = QFile::decodeName(s);
-            }
-            else
-            {
-                d()->m_linkTarget = fi.readLink();
             }
 #endif
         }
