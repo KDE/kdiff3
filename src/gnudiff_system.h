@@ -23,9 +23,8 @@
 
 #ifndef GNUDIFF_SYSTEM_H
 #define GNUDIFF_SYSTEM_H
-
-
-
+//contains some of the defines found here prevent duplicate define warnings
+#include <stdint.h>
 /* Don't bother to support K&R C compilers any more; it's not worth
    the trouble.  These macros prevent some library modules from being
    compiled in K&R C mode.  */
