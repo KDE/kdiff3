@@ -32,8 +32,8 @@ public:
    void setInformation( const QString& info, int current, bool bRedrawUpdate=true );
    void setCurrent( int current, bool bRedrawUpdate=true  );
    void step( bool bRedrawUpdate=true );
-   void setMaxNofSteps( int dMaxNofSteps );
-   void addNofSteps( int nofSteps );
+   void setMaxNofSteps(const qint64 dMaxNofSteps );
+   void addNofSteps(const qint64 nofSteps );
    void push();
    void pop(bool bRedrawUpdate=true);
 
@@ -69,8 +69,8 @@ private:
          m_current=0; m_maxNofSteps=1; m_dRangeMin=0; m_dRangeMax=1; 
          m_dSubRangeMin = 0; m_dSubRangeMax = 1;
       }
-      QAtomicInt m_current;
-      QAtomicInt m_maxNofSteps;     // when step() is used.
+      QAtomicInteger<qint64> m_current;
+      QAtomicInteger<qint64> m_maxNofSteps;     // when step() is used.
       double m_dRangeMax;
       double m_dRangeMin;
       double m_dSubRangeMax;
@@ -120,8 +120,8 @@ public:
    void setInformation( const QString& info, int current, bool bRedrawUpdate=true );
    void setCurrent( int current, bool bRedrawUpdate=true  );
    void step( bool bRedrawUpdate=true );
-   void setMaxNofSteps( int maxNofSteps );
-   void addNofSteps( int nofSteps );
+   void setMaxNofSteps( const qint64 maxNofSteps );
+   void addNofSteps( const qint64 nofSteps );
    bool wasCancelled();
    void setRangeTransformation( double dMin, double dMax );
    void setSubRangeTransformation( double dMin, double dMax );

@@ -53,7 +53,7 @@ void ProgressProxy::step( bool bRedrawUpdate )
   (void)bRedrawUpdate;
 }
 
-void ProgressProxy::setMaxNofSteps( int dMaxNofSteps )
+void ProgressProxy::setMaxNofSteps( qint64 dMaxNofSteps )
 {
   /* Suppress warning about unused parameters */
   (void)dMaxNofSteps;

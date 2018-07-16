@@ -71,6 +71,11 @@ inline int getAtomic(QAtomicInt& ai)
    return ai.load();
 }
 
+inline qint64 getAtomic(QAtomicInteger<qint64>& ai)
+{
+   return ai.load();
+}
+
 class QFont;
 class QColor;
 class QSize;

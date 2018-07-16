@@ -190,7 +190,7 @@ void ProgressDialog::setInformation(const QString& info, bool bRedrawUpdate)
     recalc(bRedrawUpdate);
 }
 
-void ProgressDialog::setMaxNofSteps(int maxNofSteps)
+void ProgressDialog::setMaxNofSteps(const qint64 maxNofSteps)
 {
     if(m_progressStack.empty())
         return;
@@ -199,7 +199,7 @@ void ProgressDialog::setMaxNofSteps(int maxNofSteps)
     pld.m_current = 0;
 }
 
-void ProgressDialog::addNofSteps(int nofSteps)
+void ProgressDialog::addNofSteps(const qint64 nofSteps)
 {
     if(m_progressStack.empty())
         return;
@@ -509,12 +509,12 @@ void ProgressProxy::step(bool bRedrawUpdate)
     g_pProgressDialog->step(bRedrawUpdate);
 }
 
-void ProgressProxy::setMaxNofSteps(int maxNofSteps)
+void ProgressProxy::setMaxNofSteps(const qint64 maxNofSteps)
 {
     g_pProgressDialog->setMaxNofSteps(maxNofSteps);
 }
 
-void ProgressProxy::addNofSteps(int nofSteps)
+void ProgressProxy::addNofSteps(const qint64 nofSteps)
 {
     g_pProgressDialog->addNofSteps(nofSteps);
 }
