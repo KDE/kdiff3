@@ -285,7 +285,7 @@ int SourceData::getSizeLines() const
     return m_normalData.m_vSize;
 }
 
-int SourceData::getSizeBytes() const
+qint64 SourceData::getSizeBytes() const
 {
     return m_normalData.m_size;
 }
@@ -459,7 +459,15 @@ static QTextCodec* detectEncoding(const char* buf, qint64 size, qint64& skipByte
         }
     }
     skipBytes = 0;
-    QByteArray s(buf, size);
+    QByteArray s;
+    /*
+        We don't need the whole file here just the header.
+]    */
+    if(size <= 5000)
+        s=QByteArray(buf, (int)size);
+    else
+        s=QByteArray(buf, 5000);
+    
     int xmlHeaderPos = s.indexOf("<?xml");
     if(xmlHeaderPos >= 0)
     {
@@ -656,7 +664,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     m_lmppData.reset();
 
     FileAccess faIn(fileNameIn1);
-    int fileInSize = faIn.size();
+    qint64 fileInSize = faIn.size();
 
     if(faIn.exists()) // fileInSize > 0 )
     {
@@ -876,7 +884,7 @@ void SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
     QTextCodec* pCodec = ::detectEncoding(m_pBuf, m_size, skipBytes);
     if(pCodec != pEncoding)
         skipBytes = 0;
-
+    
     QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, m_size - skipBytes);
     QTextStream ts(ba, QIODevice::ReadOnly | QIODevice::Text);
     ts.setCodec(pEncoding);
@@ -1571,9 +1579,9 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
         gnuDiff.ignore_case = false;
         GnuDiff::change* script = gnuDiff.diff_2_files(&comparisonInput);
 
-        int equalLinesAtStart = comparisonInput.file[0].prefix_lines;
-        int currentLine1 = 0;
-        int currentLine2 = 0;
+        lin equalLinesAtStart = comparisonInput.file[0].prefix_lines;
+        lin currentLine1 = 0;
+        lin currentLine2 = 0;
         GnuDiff::change* p = nullptr;
         for(GnuDiff::change* e = script; e; e = p)
         {
@@ -1618,7 +1626,7 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
             currentLine1 += equalLinesAtStart;
             currentLine2 += equalLinesAtStart;
 
-            int nofEquals = min2(size1 - currentLine1, size2 - currentLine2);
+            lin nofEquals = min2(size1 - currentLine1, size2 - currentLine2);
             if(nofEquals == 0)
             {
                 diffList.back().diff1 += size1 - currentLine1;
@@ -1646,8 +1654,8 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
 
     // Verify difflist
     {
-        int l1 = 0;
-        int l2 = 0;
+        lin l1 = 0;
+        lin l2 = 0;
         DiffList::iterator i;
         for(i = diffList.begin(); i != diffList.end(); ++i)
         {

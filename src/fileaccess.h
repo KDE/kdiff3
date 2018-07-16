@@ -33,7 +33,7 @@ public:
    ProgressProxyExtender() { setMaxNofSteps(100); }
 public Q_SLOTS:
   void slotListDirInfoMessage( KJob*, const QString& msg );
-  void slotPercent( KJob*, unsigned long percent );
+  void slotPercent( KJob*, qint64 percent );
 };
 
 class FileAccess
@@ -71,8 +71,8 @@ public:
 
    bool isLocal() const;
 
-   bool readFile(void* pDestBuffer, unsigned long maxLength );
-   bool writeFile(const void* pSrcBuffer, unsigned long length );
+   bool readFile(void* pDestBuffer, qint64 maxLength );
+   bool writeFile(const void* pSrcBuffer, qint64 length );
    bool listDir( t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                  const QString& filePattern, const QString& fileAntiPattern,
                  const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore );

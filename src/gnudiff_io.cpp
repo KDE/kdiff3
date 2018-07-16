@@ -510,7 +510,7 @@ verify(enough_prime_offsets,
 
 bool GnuDiff::read_files(struct file_data filevec[], bool /*pretend_binary*/)
 {
-    int i;
+    qint64 i;
 
     find_identical_ends(filevec);
 

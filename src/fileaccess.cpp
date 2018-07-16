@@ -419,7 +419,7 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
             m_filePath = e.stringValue(f);
             break; // During listDir the relative path is given here.
         case KIO::UDSEntry::UDS_MODIFICATION_TIME:
-            m_modificationTime.setTime_t(e.numberValue(f));
+            m_modificationTime = QDateTime::fromMSecsSinceEpoch(e.numberValue(f));
             break;
         //case KIO::UDSEntry::UDS_ACCESS_TIME :       d()->m_accessTime.setTime_t( e.numberValue(f) ); break;
         //case KIO::UDSEntry::UDS_CREATION_TIME :     d()->m_creationTime.setTime_t( e.numberValue(f) ); break;
@@ -690,16 +690,16 @@ QDateTime FileAccess::lastRead() const
 }
 */
 
-static bool interruptableReadFile(QFile& f, void* pDestBuffer, unsigned long maxLength)
+static bool interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLength)
 {
     ProgressProxy pp;
-    const unsigned long maxChunkSize = 100000;
-    unsigned long i = 0;
+    const qint64 maxChunkSize = 100000;
+    qint64 i = 0;
     pp.setMaxNofSteps(maxLength / maxChunkSize + 1);
     while(i < maxLength)
     {
-        unsigned long nextLength = min2(maxLength - i, maxChunkSize);
-        unsigned long reallyRead = f.read((char*)pDestBuffer + i, nextLength);
+        qint64 nextLength = min2(maxLength - i, maxChunkSize);
+        qint64 reallyRead = f.read((char*)pDestBuffer + i, nextLength);
         if(reallyRead != nextLength)
         {
             return false;
@@ -713,7 +713,7 @@ static bool interruptableReadFile(QFile& f, void* pDestBuffer, unsigned long max
     return true;
 }
 
-bool FileAccess::readFile(void* pDestBuffer, unsigned long maxLength)
+bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
 {
     if(d() != nullptr && !d()->m_localCopy.isEmpty())
     {
@@ -736,7 +736,7 @@ bool FileAccess::readFile(void* pDestBuffer, unsigned long maxLength)
     return false;
 }
 
-bool FileAccess::writeFile(const void* pSrcBuffer, unsigned long length)
+bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
 {
     ProgressProxy pp;
     if(isLocal())
@@ -744,13 +744,13 @@ bool FileAccess::writeFile(const void* pSrcBuffer, unsigned long length)
         QFile f(absoluteFilePath());
         if(f.open(QIODevice::WriteOnly))
         {
-            const unsigned long maxChunkSize = 100000;
+            const qint64 maxChunkSize = 100000;
             pp.setMaxNofSteps(length / maxChunkSize + 1);
-            unsigned long i = 0;
+            qint64 i = 0;
             while(i < length)
             {
-                unsigned long nextLength = min2(length - i, maxChunkSize);
-                unsigned long reallyWritten = f.write((char*)pSrcBuffer + i, nextLength);
+                qint64 nextLength = min2(length - i, maxChunkSize);
+                qint64 reallyWritten = f.write((char*)pSrcBuffer + i, nextLength);
                 if(reallyWritten != nextLength)
                 {
                     return false;
@@ -1011,7 +1011,7 @@ bool FileAccessJobHandler::get(void* pDestBuffer, long maxLength)
 
         connect(pJob, &KIO::TransferJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
         connect(pJob, &KIO::TransferJob::data, this, &FileAccessJobHandler::slotGetData);
-        connect(pJob, SIGNAL(percent(KJob*, unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+        connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
 
         ProgressProxy::enterEventLoop(pJob, i18n("Reading file: %1", m_pFileAccess->prettyAbsPath()));
         return m_bSuccess;
@@ -1049,7 +1049,7 @@ bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOve
 
         connect(pJob, &KIO::TransferJob::result, this, &FileAccessJobHandler::slotPutJobResult);
         connect(pJob, &KIO::TransferJob::dataReq, this, &FileAccessJobHandler::slotPutData);
-        connect(pJob, SIGNAL(percent(KJob*, unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+        connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
 
         ProgressProxy::enterEventLoop(pJob, i18n("Writing file: %1", m_pFileAccess->prettyAbsPath()));
         return m_bSuccess;
@@ -1066,10 +1066,15 @@ void FileAccessJobHandler::slotPutData(KIO::Job* pJob, QByteArray& data)
     }
     else
     {
+        /*
+            Think twice before doing this in new code.        
+            The maxChunkSize must be able to fit a 32-bit int. Given that the fallowing is safe.
+            
+        */
         qint64 maxChunkSize = 100000;
         qint64 length = min2(maxChunkSize, m_maxLength - m_transferredBytes);
-        data.resize(length);
-        if(data.size() == length)
+        data.resize((int)length);
+        if(data.size() == (int)length)
         {
             if(length > 0)
             {
@@ -1190,7 +1195,7 @@ bool FileAccessJobHandler::rename(const QString& dest)
         m_bSuccess = false;
         KIO::FileCopyJob* pJob = KIO::file_move(m_pFileAccess->url(), kurl, permissions, KIO::HideProgressInfo);
         connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-        connect(pJob, SIGNAL(percent(KJob*, unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+        connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
 
         ProgressProxy::enterEventLoop(pJob,
                                       i18n("Renaming file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest));
@@ -1223,7 +1228,7 @@ bool FileAccessJobHandler::copyFile(const QString& dest)
         m_bSuccess = false;
         KIO::FileCopyJob* pJob = KIO::file_copy(m_pFileAccess->url(), destUrl, permissions, KIO::HideProgressInfo);
         connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-        connect(pJob, SIGNAL(percent(KJob*, unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+        connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
         ProgressProxy::enterEventLoop(pJob,
                                       i18n("Copying file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest));
 
@@ -1365,7 +1370,7 @@ void CvsIgnoreList::init(FileAccess& dir, bool bUseLocalCvsIgnore)
     {
         FileAccess file(dir);
         file.addPath(".cvsignore");
-        int size = file.exists() ? file.sizeForReading() : 0;
+        qint64 size = file.exists() ? file.sizeForReading() : 0;
         if(size > 0)
         {
             char* buf = new char[size];
@@ -1667,7 +1672,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
             connect(pListJob, &KIO::ListJob::infoMessage, &pp, &ProgressProxyExtender::slotListDirInfoMessage);
 
             // This line makes the transfer via fish unreliable.:-(
-            //connect( pListJob, SIGNAL(percent(KJob*,unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+            //connect( pListJob, SIGNAL(percent(KJob*,qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
 
             ProgressProxy::enterEventLoop(pListJob,
                                           i18n("Listing directory: %1", m_pFileAccess->prettyAbsPath()));
@@ -1770,7 +1775,7 @@ void ProgressProxyExtender::slotListDirInfoMessage(KJob*, const QString& msg)
     setInformation(msg, 0);
 }
 
-void ProgressProxyExtender::slotPercent(KJob*, unsigned long percent)
+void ProgressProxyExtender::slotPercent(KJob*, qint64 percent)
 {
     setCurrent(percent);
 }

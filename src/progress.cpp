@@ -216,7 +216,7 @@ void ProgressDialog::step(bool bRedrawUpdate)
     recalc(bRedrawUpdate);
 }
 
-void ProgressDialog::setCurrent(int subCurrent, bool bRedrawUpdate)
+void ProgressDialog::setCurrent(qint64 subCurrent, bool bRedrawUpdate)
 {
     if(m_progressStack.empty())
         return;
@@ -499,7 +499,7 @@ void ProgressProxy::setInformation(const QString& info, int current, bool bRedra
     g_pProgressDialog->setInformation(info, current, bRedrawUpdate);
 }
 
-void ProgressProxy::setCurrent(int current, bool bRedrawUpdate)
+void ProgressProxy::setCurrent(qint64 current, bool bRedrawUpdate)
 {
     g_pProgressDialog->setCurrent(current, bRedrawUpdate);
 }

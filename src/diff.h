@@ -24,18 +24,19 @@
 #include "common.h"
 #include "fileaccess.h"
 #include "options.h"
+#include "gnudiff_diff.h"
 
 
 // Each range with matching elements is followed by a range with differences on either side.
 // Then again range of matching elements should follow.
 struct Diff
 {
-   int nofEquals;
+   lin nofEquals;
 
-   int diff1;
-   int diff2;
+   qint64 diff1;
+   qint64 diff2;
 
-   Diff(int eq, int d1, int d2){nofEquals=eq; diff1=d1; diff2=d2; }
+   Diff(lin eq, qint64 d1, qint64 d2){nofEquals=eq; diff1=d1; diff2=d2; }
 };
 
 typedef std::list<Diff> DiffList;
@@ -247,7 +248,7 @@ public:
    void setOptions( Options* pOptions );
 
    int getSizeLines() const;
-   int getSizeBytes() const;
+   qint64 getSizeBytes() const;
    const char* getBuf() const;
    const QString& getText() const;
    const LineData* getLineDataForDisplay() const;
@@ -291,7 +292,7 @@ private:
       FileData(){ m_pBuf=nullptr; m_size=0; m_vSize=0; m_bIsText=false; m_eLineEndStyle=eLineEndStyleUndefined; m_bIncompleteConversion=false;}
       ~FileData(){ reset(); }
       const char* m_pBuf;
-      int m_size;
+      qint64 m_size;
       int m_vSize; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
       QString m_unicodeBuf;
       QVector<LineData> m_v;

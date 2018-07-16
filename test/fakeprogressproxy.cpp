@@ -40,7 +40,7 @@ void ProgressProxy::setInformation( const QString& info, int current, bool bRedr
   (void)bRedrawUpdate;
 }
 
-void ProgressProxy::setCurrent( int current, bool bRedrawUpdate )
+void ProgressProxy::setCurrent( qint64 current, bool bRedrawUpdate )
 {
   /* Suppress warning about unused parameters */
   (void)current;

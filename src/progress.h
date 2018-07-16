@@ -30,7 +30,7 @@ public:
    void setStayHidden( bool bStayHidden );
    void setInformation( const QString& info, bool bRedrawUpdate=true );
    void setInformation( const QString& info, int current, bool bRedrawUpdate=true );
-   void setCurrent( int current, bool bRedrawUpdate=true  );
+   void setCurrent( qint64 current, bool bRedrawUpdate=true  );
    void step( bool bRedrawUpdate=true );
    void setMaxNofSteps(const qint64 dMaxNofSteps );
    void addNofSteps(const qint64 nofSteps );
@@ -118,7 +118,7 @@ public:
    
    void setInformation( const QString& info, bool bRedrawUpdate=true );
    void setInformation( const QString& info, int current, bool bRedrawUpdate=true );
-   void setCurrent( int current, bool bRedrawUpdate=true  );
+   void setCurrent( qint64 current, bool bRedrawUpdate=true  );
    void step( bool bRedrawUpdate=true );
    void setMaxNofSteps( const qint64 maxNofSteps );
    void addNofSteps( const qint64 nofSteps );
