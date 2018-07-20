@@ -1706,7 +1706,11 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(int li
 {
     // tabs
     QTextOption textOption;
+#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
     textOption.setTabStop(QFontMetricsF(font()).width(' ') * m_pOptions->m_tabSize);
+#else
+    textOption.setTabStopDistance(QFontMetricsF(font()).width(' ') * m_pOptions->m_tabSize);
+#endif
     if(m_pOptions->m_bShowWhiteSpaceCharacters)
     {
         textOption.setFlags(QTextOption::ShowTabsAndSpaces);

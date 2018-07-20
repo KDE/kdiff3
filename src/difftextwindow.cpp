@@ -810,7 +810,11 @@ class FormatRangeHelper
 void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, bool /*bFirstLine*/, int visibleTextWidth)
 {
     QTextOption textOption;
+#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
     textOption.setTabStop(QFontMetricsF(m_pDiffTextWindow->font()).width(' ') * m_pOptions->m_tabSize);
+#else
+    textOption.setTabStopDistance(QFontMetricsF(m_pDiffTextWindow->font()).width(' ') * m_pOptions->m_tabSize);
+#endif
     if(m_pOptions->m_bShowWhiteSpaceCharacters)
         textOption.setFlags(QTextOption::ShowTabsAndSpaces);
     if(m_pOptions->m_bRightToLeftLanguage)
