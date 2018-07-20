@@ -2473,10 +2473,11 @@ void KDiff3App::slotUpdateAvailabilities()
     dirShowBoth->setEnabled(m_bDirCompare);
     dirViewToggle->setEnabled(
         m_bDirCompare &&
-        ((!m_pDirectoryMergeSplitter->isVisible() && m_pMainWidget != nullptr && m_pMainWidget->isVisible()) ||
-         (m_pDirectoryMergeSplitter->isVisible() && m_pMainWidget != nullptr && !m_pMainWidget->isVisible() && bTextDataAvailable)));
+        ((m_pDirectoryMergeSplitter != nullptr && m_pMainWidget != nullptr) &&
+         ((!m_pDirectoryMergeSplitter->isVisible() && m_pMainWidget->isVisible()) ||
+          (m_pDirectoryMergeSplitter->isVisible() && !m_pMainWidget->isVisible() && bTextDataAvailable))));
 
-    bool bDirWindowHasFocus = m_pDirectoryMergeSplitter->isVisible() && m_pDirectoryMergeWindow->hasFocus();
+    bool bDirWindowHasFocus = m_pDirectoryMergeSplitter != nullptr && m_pDirectoryMergeSplitter->isVisible() && m_pDirectoryMergeWindow->hasFocus();
 
     showWhiteSpaceCharacters->setEnabled(bDiffWindowVisible);
     autoAdvance->setEnabled(bMergeEditorVisible);

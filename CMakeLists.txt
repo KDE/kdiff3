@@ -53,7 +53,7 @@ set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5:
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     # I don't need warnings about wired things in comments.
-    set(CLANG_WARNING_FLAGS "-Wno-comment -Wshorten-64-to-32")
+    set(CLANG_WARNING_FLAGS "-Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
     set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CLANG_WARNING_FLAGS}")
 endif()

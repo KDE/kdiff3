@@ -1232,7 +1232,8 @@ QString DiffTextWindowData::getString(int d3lIdx)
     DiffList* pFineDiff2;
     int changed = 0;
     int changed2 = 0;
-    int lineIdx;
+    int lineIdx = -1;
+    
     getLineInfo(*d3l, lineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 
     if(lineIdx == -1)
