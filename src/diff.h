@@ -301,7 +301,7 @@ private:
       e_LineEndStyle m_eLineEndStyle;
       bool readFile( const QString& filename );
       bool writeFile( const QString& filename );
-      void preprocess(bool bPreserveCR, QTextCodec* pEncoding );
+      bool preprocess(bool bPreserveCR, QTextCodec* pEncoding );
       void reset();
       void removeComments();
       void copyBufFrom( const FileData& src );

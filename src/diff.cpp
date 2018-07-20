@@ -666,7 +666,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     FileAccess faIn(fileNameIn1);
     qint64 fileInSize = faIn.size();
 
-    if(faIn.exists()) // fileInSize > 0 )
+    if(faIn.exists())
     {
 
 #if defined(Q_OS_WIN)
@@ -788,44 +788,48 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         }
     }
 
-    m_normalData.preprocess(m_pOptions->m_bPreserveCarriageReturn, pEncoding1);
-    m_lmppData.preprocess(false, pEncoding2);
-
-    if(m_lmppData.m_vSize < m_normalData.m_vSize)
+    if(!m_normalData.preprocess(m_pOptions->m_bPreserveCarriageReturn, pEncoding1) ||
+       !m_lmppData.preprocess(false, pEncoding2))
     {
-        // This probably is the fault of the LMPP-Command, but not worth reporting.
-        m_lmppData.m_v.resize(m_normalData.m_vSize);
-        for(int i = m_lmppData.m_vSize; i < m_normalData.m_vSize; ++i)
-        { // Set all empty lines to point to the end of the buffer.
-            m_lmppData.m_v[i].pLine = m_lmppData.m_unicodeBuf.unicode() + m_lmppData.m_unicodeBuf.length();
-        }
-
-        m_lmppData.m_vSize = m_normalData.m_vSize;
+        errors.append("File too large to processs. Skipping.");
     }
-
-    // Internal Preprocessing: Uppercase-conversion
-    if(m_pOptions->m_bIgnoreCase)
+    else
     {
-        int i;
-        QChar* pBuf = const_cast<QChar*>(m_lmppData.m_unicodeBuf.unicode());
-        int ucSize = m_lmppData.m_unicodeBuf.length();
-        for(i = 0; i < ucSize; ++i)
+        if(m_lmppData.m_vSize < m_normalData.m_vSize)
         {
-            pBuf[i] = pBuf[i].toUpper();
-        }
-    }
+            // This probably is the fault of the LMPP-Command, but not worth reporting.
+            m_lmppData.m_v.resize(m_normalData.m_vSize);
+            for(int i = m_lmppData.m_vSize; i < m_normalData.m_vSize; ++i)
+            { // Set all empty lines to point to the end of the buffer.
+                m_lmppData.m_v[i].pLine = m_lmppData.m_unicodeBuf.unicode() + m_lmppData.m_unicodeBuf.length();
+            }
 
-    // Ignore comments
-    if(m_pOptions->m_bIgnoreComments)
-    {
-        m_lmppData.removeComments();
-        int vSize = min2(m_normalData.m_vSize, m_lmppData.m_vSize);
-        for(int i = 0; i < vSize; ++i)
+            m_lmppData.m_vSize = m_normalData.m_vSize;
+        }
+
+        // Internal Preprocessing: Uppercase-conversion
+        if(m_pOptions->m_bIgnoreCase)
         {
-            m_normalData.m_v[i].bContainsPureComment = m_lmppData.m_v[i].bContainsPureComment;
+            int i;
+            QChar* pBuf = const_cast<QChar*>(m_lmppData.m_unicodeBuf.unicode());
+            int ucSize = m_lmppData.m_unicodeBuf.length();
+            for(i = 0; i < ucSize; ++i)
+            {
+                pBuf[i] = pBuf[i].toUpper();
+            }
+        }
+
+        // Ignore comments
+        if(m_pOptions->m_bIgnoreComments)
+        {
+            m_lmppData.removeComments();
+            int vSize = min2(m_normalData.m_vSize, m_lmppData.m_vSize);
+            for(int i = 0; i < vSize; ++i)
+            {
+                m_normalData.m_v[i].bContainsPureComment = m_lmppData.m_v[i].bContainsPureComment;
+            }
         }
     }
-
     // Remove unneeded temporary files. (A temp file from clipboard must not be deleted.)
     if(!bTempFileFromClipboard && !m_tempInputFileName.isEmpty())
     {
@@ -843,10 +847,8 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
 }
 
 /** Prepare the linedata vector for every input line.*/
-void SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
+bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
 {
-    //m_unicodeBuf = decodeString( m_pBuf, m_size, eEncoding );
-
     qint64 i;
     // detect line end style
     QVector<e_LineEndStyle> vOrigDataLineEndStyle;
@@ -885,7 +887,10 @@ void SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
     if(pCodec != pEncoding)
         skipBytes = 0;
     
-    QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, m_size - skipBytes);
+    if(m_size - skipBytes < INT_MAX)
+        return false;
+    
+    QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, (int)(m_size - skipBytes));
     QTextStream ts(ba, QIODevice::ReadOnly | QIODevice::Text);
     ts.setCodec(pEncoding);
     ts.setAutoDetectUnicode(false);
@@ -959,6 +964,7 @@ void SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
     Q_ASSERT(lineIdx == lines);
 
     m_vSize = lines;
+    return true;
 }
 
 // Must not be entered, when within a comment.
