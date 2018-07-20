@@ -510,7 +510,7 @@ verify(enough_prime_offsets,
 
 bool GnuDiff::read_files(struct file_data filevec[], bool /*pretend_binary*/)
 {
-    qint64 i;
+    size_t i;
 
     find_identical_ends(filevec);
 
@@ -525,7 +525,7 @@ bool GnuDiff::read_files(struct file_data filevec[], bool /*pretend_binary*/)
     /* Allocate (one plus) a prime number of hash buckets.  Use a prime
      number between 1/3 and 2/3 of the value of equiv_allocs,
      approximately.  */
-    for(i = 9; 1 << i < equivs_alloc / 3; i++)
+    for(i = 9; ((size_t)1 << i) < equivs_alloc / 3; i++)
         continue;
     nbuckets = ((size_t)1 << i) - prime_offset[i];
     if(PTRDIFF_MAX / sizeof *buckets <= nbuckets)

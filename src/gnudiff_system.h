@@ -53,12 +53,10 @@
 #endif
 
 
-/* The integer type of a line number.  Since files are read into main
-   memory, ptrdiff_t should be wide enough.  */
+/* The integer type of a line number. */
 
-typedef ptrdiff_t lin;
+typedef size_t lin;
 #define LIN_MAX PTRDIFF_MAX
-verify (lin_is_signed, TYPE_SIGNED (lin));
-verify (lin_is_wide_enough, sizeof (ptrdiff_t) <= sizeof (lin));
+verify (lin_is_wide_enough, sizeof (size_t) <= sizeof (lin));
 
 #endif
