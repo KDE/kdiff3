@@ -58,9 +58,9 @@
 /* The integer type of a line number. */
 
 typedef int LineRef;
-#define LIN_MAX PTRDIFF_MAX
+#define LINEREF_MAX INT_MAX
 
 verify(lin_is_signed, TYPE_SIGNED(LineRef));
-verify(lin_is_wide_enough, sizeof(int) <= sizeof(LineRef));
+//verify(lin_is_wide_enough, sizeof(int) <= sizeof(LineRef));
 
 #endif

@@ -145,8 +145,8 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
         }
 
         /* Similarly extend the bottom-up search.  */
-        bmin > dmin ? bd[--bmin - 1] = LIN_MAX : ++bmin;
-        bmax < dmax ? bd[++bmax + 1] = LIN_MAX : --bmax;
+        bmin > dmin ? bd[--bmin - 1] = LINEREF_MAX : ++bmin;
+        bmax < dmax ? bd[++bmax + 1] = LINEREF_MAX : --bmax;
         for(d = bmax; d >= bmin; d -= 2)
         {
             LineRef x, y, oldx, tlo = bd[d - 1], thi = bd[d + 1];
@@ -278,7 +278,7 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
             }
 
             /* Find backward diagonal that minimizes X + Y.  */
-            bxybest = LIN_MAX;
+            bxybest = LINEREF_MAX;
             for(d = bmax; d >= bmin; d -= 2)
             {
                 LineRef x = MAX(xoff, bd[d]);

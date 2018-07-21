@@ -211,7 +211,7 @@ void GnuDiff::find_and_hash_each_line(struct file_data *current)
                 i = eqs_index++;
                 if(i == eqs_alloc)
                 {
-                    if((LineRef)(PTRDIFF_MAX / (2 * sizeof *eqs)) <= eqs_alloc)
+                    if((LineRef)(LINEREF_MAX / (2 * sizeof *eqs)) <= eqs_alloc)
                         xalloc_die();
                     eqs_alloc *= 2;
                     eqs = (equivclass *)xrealloc(eqs, eqs_alloc * sizeof *eqs);
@@ -250,7 +250,7 @@ void GnuDiff::find_and_hash_each_line(struct file_data *current)
         if(line == alloc_lines)
         {
             /* Double (alloc_lines - linbuf_base) by adding to alloc_lines.  */
-            if((LineRef)(PTRDIFF_MAX / 3) <= alloc_lines || (LineRef)(PTRDIFF_MAX / sizeof *cureqs) <= 2 * alloc_lines - linbuf_base || (LineRef)(PTRDIFF_MAX / sizeof *linbuf) <= alloc_lines - linbuf_base)
+            if((LineRef)(LINEREF_MAX / 3) <= alloc_lines || (LineRef)(LINEREF_MAX / sizeof *cureqs) <= 2 * alloc_lines - linbuf_base || (LineRef)(LINEREF_MAX / sizeof *linbuf) <= alloc_lines - linbuf_base)
                 xalloc_die();
             alloc_lines = 2 * alloc_lines - linbuf_base;
             cureqs = (LineRef *)xrealloc(cureqs, alloc_lines * sizeof *cureqs);
@@ -274,7 +274,7 @@ void GnuDiff::find_and_hash_each_line(struct file_data *current)
         if(line == alloc_lines)
         {
             /* Double (alloc_lines - linbuf_base) by adding to alloc_lines.  */
-            if((LineRef)(PTRDIFF_MAX / 3) <= alloc_lines || (LineRef)(PTRDIFF_MAX / sizeof *cureqs) <= 2 * alloc_lines - linbuf_base || (LineRef)(PTRDIFF_MAX / sizeof *linbuf) <= alloc_lines - linbuf_base)
+            if((LineRef)(LINEREF_MAX / 3) <= alloc_lines || (LineRef)(LINEREF_MAX / sizeof *cureqs) <= 2 * alloc_lines - linbuf_base || (LineRef)(LINEREF_MAX / sizeof *linbuf) <= alloc_lines - linbuf_base)
                 xalloc_die();
             alloc_lines = 2 * alloc_lines - linbuf_base;
             linbuf += linbuf_base;
@@ -314,8 +314,8 @@ static LineRef
 guess_lines(LineRef n, size_t s, size_t t)
 {
     size_t guessed_bytes_per_line = n < 10 ? 32 : s / (n - 1);
-    LineRef guessed_lines = MAX((LineRef)1, t / guessed_bytes_per_line);
-    return MIN(guessed_lines, (LineRef)(LIN_MAX / (2 * sizeof(QChar *) + 1) - 5)) + 5;
+    size_t guessed_lines = MAX((LineRef)1, t / guessed_bytes_per_line);
+    return (LineRef)MIN(guessed_lines, (LineRef)(LINEREF_MAX / (2 * sizeof(QChar *) + 1) - 5)) + 5;
 }
 
 /* Given a vector of two file_data objects, find the identical
@@ -414,7 +414,7 @@ void GnuDiff::find_identical_ends(struct file_data filevec[])
     LineRef alloc_lines0, alloc_lines1;
     LineRef buffered_prefix, prefix_count, prefix_mask;
     LineRef middle_guess, suffix_guess;
-    if(no_diff_means_no_output && context < (LineRef)(LIN_MAX / 4) && context < (LineRef)(n0))
+    if(no_diff_means_no_output && context < (LineRef)(LINEREF_MAX / 4) && context < (LineRef)(n0))
     {
         middle_guess = guess_lines(0, 0, p0 - filevec[0].prefix_end);
         suffix_guess = guess_lines(0, 0, buffer0 + n0 - p0);
@@ -442,7 +442,7 @@ void GnuDiff::find_identical_ends(struct file_data filevec[])
             LineRef l = lines++ & prefix_mask;
             if(l == alloc_lines0)
             {
-                if((LineRef)(PTRDIFF_MAX / (2 * sizeof *linbuf0)) <= alloc_lines0)
+                if((LineRef)(LINEREF_MAX / (2 * sizeof *linbuf0)) <= alloc_lines0)
                     xalloc_die();
                 alloc_lines0 *= 2;
                 linbuf0 = (const QChar **)xrealloc(linbuf0, alloc_lines0 * sizeof(*linbuf0));
@@ -459,7 +459,7 @@ void GnuDiff::find_identical_ends(struct file_data filevec[])
     middle_guess = guess_lines(lines, p0 - buffer0, p1 - filevec[1].prefix_end);
     suffix_guess = guess_lines(lines, p0 - buffer0, buffer1 + n1 - p1);
     alloc_lines1 = buffered_prefix + middle_guess + MIN(context, suffix_guess);
-    if(alloc_lines1 < buffered_prefix || (LineRef)(PTRDIFF_MAX / sizeof *linbuf1) <= alloc_lines1)
+    if(alloc_lines1 < buffered_prefix || (LineRef)(LINEREF_MAX / sizeof *linbuf1) <= alloc_lines1)
         xalloc_die();
     linbuf1 = (const QChar **)xmalloc(alloc_lines1 * sizeof(*linbuf1));
 
@@ -515,7 +515,7 @@ bool GnuDiff::read_files(struct file_data filevec[], bool /*pretend_binary*/)
     find_identical_ends(filevec);
 
     equivs_alloc = filevec[0].alloc_lines + filevec[1].alloc_lines + 1;
-    if((LineRef)(PTRDIFF_MAX / sizeof *equivs) <= equivs_alloc)
+    if((LineRef)(LINEREF_MAX / sizeof *equivs) <= equivs_alloc)
         xalloc_die();
     equivs = (equivclass *)xmalloc(equivs_alloc * sizeof *equivs);
     /* Equivalence class 0 is permanently safe for lines that were not
@@ -528,7 +528,7 @@ bool GnuDiff::read_files(struct file_data filevec[], bool /*pretend_binary*/)
     for(i = 9; ((LineRef)1 << i) < equivs_alloc / 3; i++)
         continue;
     nbuckets = ((LineRef)1 << i) - prime_offset[i];
-    if(PTRDIFF_MAX / sizeof *buckets <= nbuckets)
+    if(LINEREF_MAX / sizeof *buckets <= nbuckets)
         xalloc_die();
     buckets = (LineRef *)zalloc((nbuckets + 1) * sizeof *buckets);
     buckets++;

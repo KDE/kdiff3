@@ -282,7 +282,7 @@ const LineData* SourceData::getLineDataForDisplay() const
 
 LineRef SourceData::getSizeLines() const
 {
-    return m_normalData.m_vSize;
+    return (LineRef)m_normalData.m_vSize;
 }
 
 qint64 SourceData::getSizeBytes() const
@@ -826,10 +826,10 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         if(m_pOptions->m_bIgnoreComments)
         {
             m_lmppData.removeComments();
-            LineRef vSize = min2(m_normalData.m_vSize, m_lmppData.m_vSize);
-            for(LineRef i = 0; i < vSize; ++i)
+            LineRef vSize = (LineRef)min2(m_normalData.m_vSize, m_lmppData.m_vSize);
+            for(int i = 0; i < (int)vSize; ++i)
             {
-                m_normalData.m_v[(int)i].bContainsPureComment = m_lmppData.m_v[(int)i].bContainsPureComment;
+                m_normalData.m_v[i].bContainsPureComment = m_lmppData.m_v[i].bContainsPureComment;
             }
         }
     }
