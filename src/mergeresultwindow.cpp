@@ -109,9 +109,9 @@ MergeResultWindow::MergeResultWindow(
 }
 
 void MergeResultWindow::init(
-    const LineData* pLineDataA, int sizeA,
-    const LineData* pLineDataB, int sizeB,
-    const LineData* pLineDataC, int sizeC,
+    const LineData* pLineDataA, LineRef sizeA,
+    const LineData* pLineDataB, LineRef sizeB,
+    const LineData* pLineDataC, LineRef sizeC,
     const Diff3LineList* pDiff3LineList,
     TotalDiffStatus* pTotalDiffStatus)
 {
@@ -449,7 +449,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
                         MergeEditLine mel(d3llit);
                         mel.setSource(defaultSelector, false);
 
-                        int srcLine = defaultSelector == 1 ? d3llit->lineA : defaultSelector == 2 ? d3llit->lineB : defaultSelector == 3 ? d3llit->lineC : -1;
+                        LineRef srcLine = defaultSelector == 1 ? d3llit->lineA : defaultSelector == 2 ? d3llit->lineB : defaultSelector == 3 ? d3llit->lineC : -1;
 
                         if(srcLine != -1)
                         {
@@ -476,7 +476,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
         MergeLine& ml = *mlIt;
         // Remove all lines that are empty, because no src lines are there.
 
-        int oldSrcLine = -1;
+        LineRef oldSrcLine = -1;
         int oldSrc = -1;
         MergeEditLineList::iterator melIt;
         for(melIt = ml.mergeEditLineList.begin(); melIt != ml.mergeEditLineList.end();)
@@ -484,7 +484,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
             MergeEditLine& mel = *melIt;
             int melsrc = mel.src();
 
-            int srcLine = mel.isRemoved() ? -1 : melsrc == 1 ? mel.id3l()->lineA : melsrc == 2 ? mel.id3l()->lineB : melsrc == 3 ? mel.id3l()->lineC : -1;
+            LineRef srcLine = mel.isRemoved() ? -1 : melsrc == 1 ? mel.id3l()->lineA : melsrc == 2 ? mel.id3l()->lineB : melsrc == 3 ? mel.id3l()->lineC : -1;
 
             // At least one line remains because oldSrc != melsrc for first line in list
             // Other empty lines will be removed
@@ -1018,7 +1018,7 @@ void MergeResultWindow::choose(int selector)
         {
             MergeEditLine& mel = *melIt;
 
-            int srcLine = mel.src() == 1 ? mel.id3l()->lineA : mel.src() == 2 ? mel.id3l()->lineB : mel.src() == 3 ? mel.id3l()->lineC : -1;
+            LineRef srcLine = mel.src() == 1 ? mel.id3l()->lineA : mel.src() == 2 ? mel.id3l()->lineB : mel.src() == 3 ? mel.id3l()->lineC : -1;
 
             if(srcLine == -1)
                 melIt = ml.mergeEditLineList.erase(melIt);

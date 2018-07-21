@@ -62,14 +62,14 @@ bool g_bIgnoreWhiteSpace = true;
 bool g_bIgnoreTrivialMatches = true;
 
 // Just make sure that all input lines are in the output too, exactly once.
-static void debugLineCheck(Diff3LineList& d3ll, int size, int idx)
+static void debugLineCheck(Diff3LineList& d3ll, LineRef size, LineRef idx)
 {
     Diff3LineList::iterator it = d3ll.begin();
-    int i = 0;
+    LineRef i = 0;
 
     for(it = d3ll.begin(); it != d3ll.end(); ++it)
     {
-        int l = 0;
+        LineRef l = 0;
 
         Q_ASSERT(idx >= 1 && idx <= 3);
         if(idx == 1)
@@ -1290,7 +1290,8 @@ void KDiff3App::slotEditPaste()
 
 void KDiff3App::slotEditSelectAll()
 {
-    int l = 0, p = 0; // needed as dummy return values
+    LineRef l = 0;
+    int p = 0; // needed as dummy return values
     if(m_pMergeResultWindow && m_pMergeResultWindow->hasFocus()) {
         m_pMergeResultWindow->setSelection(0, 0, m_pMergeResultWindow->getNofLines(), 0);
     }
@@ -1435,8 +1436,8 @@ void KDiff3App::slotRegExpAutoMerge()
 
 void KDiff3App::slotSplitDiff()
 {
-    int firstLine = -1;
-    int lastLine = -1;
+    LineRef firstLine = -1;
+    LineRef lastLine = -1;
     DiffTextWindow* pDTW = nullptr;
     if(m_pDiffTextWindow1) {
         pDTW = m_pDiffTextWindow1;
@@ -1460,8 +1461,8 @@ void KDiff3App::slotSplitDiff()
 
 void KDiff3App::slotJoinDiffs()
 {
-    int firstLine = -1;
-    int lastLine = -1;
+    LineRef firstLine = -1;
+    LineRef lastLine = -1;
     DiffTextWindow* pDTW = nullptr;
     if(m_pDiffTextWindow1) {
         pDTW = m_pDiffTextWindow1;
@@ -2055,9 +2056,9 @@ void KDiff3App::slotEditFindNext()
     bool bDirDown = true;
     bool bCaseSensitive = m_pFindDialog->m_pCaseSensitive->isChecked();
 
-    int d3vLine = m_pFindDialog->currentLine;
+    LineRef d3vLine = m_pFindDialog->currentLine;
     int posInLine = m_pFindDialog->currentPos;
-    int l = 0;
+    LineRef l = 0;
     int p = 0;
     if(m_pFindDialog->currentWindow == 1)
     {
@@ -2319,7 +2320,7 @@ void KDiff3App::slotNoRelevantChangesDetected()
     }
 }
 
-static void insertManualDiffHelp(ManualDiffHelpList* pManualDiffHelpList, int winIdx, int firstLine, int lastLine)
+static void insertManualDiffHelp(ManualDiffHelpList* pManualDiffHelpList, int winIdx, LineRef firstLine, LineRef lastLine)
 {
     // The manual diff help list must be sorted and compact.
     // "Compact" means that upper items can't be empty if lower items contain data.
@@ -2383,8 +2384,8 @@ static void insertManualDiffHelp(ManualDiffHelpList* pManualDiffHelpList, int wi
 
 void KDiff3App::slotAddManualDiffHelp()
 {
-    int firstLine = -1;
-    int lastLine = -1;
+    LineRef firstLine = -1;
+    LineRef lastLine = -1;
     int winIdx = -1;
     if(m_pDiffTextWindow1) {
         m_pDiffTextWindow1->getSelectionRange(&firstLine, &lastLine, eFileCoords);

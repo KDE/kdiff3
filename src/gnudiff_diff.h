@@ -62,7 +62,7 @@ bool no_diff_means_no_output;
 
 /* Number of lines of context to show in each set of diffs.
    This is zero when context is not to be shown.  */
-lin context;
+LineRef context;
 
 /* Consider all files as text files (-a).
    Don't interpret codes over 0177 as implying a "binary file".  */
@@ -172,10 +172,10 @@ bool minimal;
 struct change
 {
   struct change *link;		/* Previous or next edit command  */
-  lin inserted;			/* # lines of file 1 changed here.  */
-  lin deleted;			/* # lines of file 0 changed here.  */
-  lin line0;			/* Line number of 1st deleted line.  */
-  lin line1;			/* Line number of 1st inserted line.  */
+  LineRef inserted;			/* # lines of file 1 changed here.  */
+  LineRef deleted;			/* # lines of file 0 changed here.  */
+  LineRef line0;			/* Line number of 1st deleted line.  */
+  LineRef line1;			/* Line number of 1st inserted line.  */
   bool ignore;			/* Flag used in context.c.  */
 };
 
@@ -201,14 +201,14 @@ struct file_data {
        linebuf[linbuf_base ... buffered_lines - 1] are possibly differing.
        linebuf[linbuf_base ... valid_lines - 1] contain valid data.
        linebuf[linbuf_base ... alloc_lines - 1] are allocated.  */
-    lin linbuf_base, buffered_lines, valid_lines, alloc_lines;
+    LineRef linbuf_base, buffered_lines, valid_lines, alloc_lines;
 
     /* Pointer to end of prefix of this file to ignore when hashing.  */
     const QChar *prefix_end;
 
     /* Count of lines in the prefix.
        There are this many lines in the file before linbuf[0].  */
-    lin prefix_lines;
+    LineRef prefix_lines;
 
     /* Pointer to start of suffix of this file to ignore when hashing.  */
     const QChar *suffix_begin;
@@ -216,18 +216,18 @@ struct file_data {
     /* Vector, indexed by line number, containing an equivalence code for
        each line.  It is this vector that is actually compared with that
        of another file to generate differences.  */
-    lin *equivs;
+    LineRef *equivs;
 
     /* Vector, like the previous one except that
        the elements for discarded lines have been squeezed out.  */
-    lin *undiscarded;
+    LineRef *undiscarded;
 
     /* Vector mapping virtual line numbers (not counting discarded lines)
        to real ones (counting those lines).  Both are origin-0.  */
-    lin *realindexes;
+    LineRef *realindexes;
 
     /* Total number of nondiscarded lines.  */
-    lin nondiscarded_lines;
+    LineRef nondiscarded_lines;
 
     /* Vector, indexed by real origin-0 line number,
        containing TRUE for a line that is an insertion or a deletion.
@@ -239,7 +239,7 @@ struct file_data {
 
     /* 1 more than the maximum equivalence value used for this or its
        sibling file.  */
-    lin equiv_max;
+    LineRef equiv_max;
 };
 
 /* Data on two input files being compared.  */
@@ -293,11 +293,11 @@ void print_sdiff_script (struct change *);
 /* util.c */
 QChar *concat (const QChar *, const QChar *, const QChar *);
 bool lines_differ ( const QChar *, size_t, const QChar *, size_t );
-lin translate_line_number (struct file_data const *, lin);
+LineRef translate_line_number (struct file_data const *, LineRef);
 struct change *find_change (struct change *);
 struct change *find_reverse_change (struct change *);
 void *zalloc (size_t);
-enum changes analyze_hunk (struct change *, lin *, lin *, lin *, lin *);
+enum changes analyze_hunk (struct change *, LineRef *, LineRef *, LineRef *, LineRef *);
 void begin_output (void);
 void debug_script (struct change *);
 void finish_output (void);
@@ -306,18 +306,18 @@ void message5 (const QChar *, const QChar *, const QChar *, const QChar *, const
 void output_1_line (const QChar *, const QChar *, const QChar *, const QChar *);
 void perror_with_name (const QChar *);
 void setup_output (const QChar *, const QChar *, bool);
-void translate_range (struct file_data const *, lin, lin, long *, long *);
+void translate_range (struct file_data const *, LineRef, LineRef, long *, long *);
 
 /* version.c */
 //extern const QChar version_string[];
 
 private:
    // gnudiff_analyze.cpp
-   lin diag (lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal, struct partition *part);
-   void compareseq (lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal);
+   LineRef diag (LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bool find_minimal, struct partition *part);
+   void compareseq (LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bool find_minimal);
    void discard_confusing_lines (struct file_data filevec[]);
    void shift_boundaries (struct file_data filevec[]);
-   struct change * add_change (lin line0, lin line1, lin deleted, lin inserted, struct change *old);
+   struct change * add_change (LineRef line0, LineRef line1, LineRef deleted, LineRef inserted, struct change *old);
    struct change * build_reverse_script (struct file_data const filevec[]);
    struct change* build_script (struct file_data const filevec[]);
 

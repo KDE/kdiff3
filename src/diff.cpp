@@ -280,7 +280,7 @@ const LineData* SourceData::getLineDataForDisplay() const
     return m_normalData.m_v.size() > 0 ? &m_normalData.m_v[0] : nullptr;
 }
 
-int SourceData::getSizeLines() const
+LineRef SourceData::getSizeLines() const
 {
     return m_normalData.m_vSize;
 }
@@ -795,13 +795,16 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     }
     else
     {
+        //FIXME: Remove this hack after determining root cause.
         if(m_lmppData.m_vSize < m_normalData.m_vSize)
         {
+            //This a bug that needs fixed elsewhere not hacked around
+            Q_ASSERT(m_lmppData.m_vSize == m_normalData.m_vSize);
             // This probably is the fault of the LMPP-Command, but not worth reporting.
-            m_lmppData.m_v.resize(m_normalData.m_vSize);
-            for(int i = m_lmppData.m_vSize; i < m_normalData.m_vSize; ++i)
+            m_lmppData.m_v.resize((int)m_normalData.m_vSize);
+            for(qint64 i = m_lmppData.m_vSize; i < m_normalData.m_vSize; ++i)
             { // Set all empty lines to point to the end of the buffer.
-                m_lmppData.m_v[i].pLine = m_lmppData.m_unicodeBuf.unicode() + m_lmppData.m_unicodeBuf.length();
+                m_lmppData.m_v[(int)i].pLine = m_lmppData.m_unicodeBuf.unicode() + m_lmppData.m_unicodeBuf.length();
             }
 
             m_lmppData.m_vSize = m_normalData.m_vSize;
@@ -823,10 +826,10 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         if(m_pOptions->m_bIgnoreComments)
         {
             m_lmppData.removeComments();
-            int vSize = min2(m_normalData.m_vSize, m_lmppData.m_vSize);
-            for(int i = 0; i < vSize; ++i)
+            LineRef vSize = min2(m_normalData.m_vSize, m_lmppData.m_vSize);
+            for(LineRef i = 0; i < vSize; ++i)
             {
-                m_normalData.m_v[i].bContainsPureComment = m_lmppData.m_v[i].bContainsPureComment;
+                m_normalData.m_v[(int)i].bContainsPureComment = m_lmppData.m_v[(int)i].bContainsPureComment;
             }
         }
     }
@@ -1546,7 +1549,7 @@ static bool isValidMove(ManualDiffHelpList* pManualDiffHelpList, int line1, int 
     return true; // no barrier passed.
 }
 
-static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList,
+static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList,
                     Options* pOptions)
 {
     ProgressProxy pp;
@@ -1585,9 +1588,9 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
         gnuDiff.ignore_case = false;
         GnuDiff::change* script = gnuDiff.diff_2_files(&comparisonInput);
 
-        lin equalLinesAtStart = comparisonInput.file[0].prefix_lines;
-        lin currentLine1 = 0;
-        lin currentLine2 = 0;
+        LineRef equalLinesAtStart = comparisonInput.file[0].prefix_lines;
+        LineRef currentLine1 = 0;
+        LineRef currentLine2 = 0;
         GnuDiff::change* p = nullptr;
         for(GnuDiff::change* e = script; e; e = p)
         {
@@ -1632,7 +1635,7 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
             currentLine1 += equalLinesAtStart;
             currentLine2 += equalLinesAtStart;
 
-            lin nofEquals = min2(size1 - currentLine1, size2 - currentLine2);
+            LineRef nofEquals = min2(size1 - currentLine1, size2 - currentLine2);
             if(nofEquals == 0)
             {
                 diffList.back().diff1 += size1 - currentLine1;
@@ -1660,8 +1663,8 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
 
     // Verify difflist
     {
-        lin l1 = 0;
-        lin l2 = 0;
+        LineRef l1 = 0;
+        LineRef l2 = 0;
         DiffList::iterator i;
         for(i = diffList.begin(); i != diffList.end(); ++i)
         {
@@ -1678,7 +1681,7 @@ static bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2
     return true;
 }
 
-bool runDiff(const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList,
+bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList,
              int winIdx1, int winIdx2,
              ManualDiffHelpList* pManualDiffHelpList,
              Options* pOptions)
@@ -2166,7 +2169,7 @@ void calcDiff3LineListTrim(
 }
 
 void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
-                          const LineData* pldA, int sizeA, const LineData* pldB, int sizeB, const LineData* pldC, int sizeC)
+                          const LineData* pldA, LineRef sizeA, const LineData* pldB, LineRef sizeB, const LineData* pldC, LineRef sizeC)
 {
     m_pDiff3LineList = pD3ll;
     m_pDiff3LineVector = pD3lv;
@@ -2208,7 +2211,7 @@ inline bool equal(QChar c1, QChar c2, bool /*bStrict*/)
 
 // My own diff-invention:
 template <class T>
-void calcDiff(const T* p1, int size1, const T* p2, int size2, DiffList& diffList, int match, int maxSearchRange)
+void calcDiff(const T* p1, LineRef size1, const T* p2, LineRef size2, DiffList& diffList, int match, int maxSearchRange)
 {
     diffList.clear();
 
@@ -2350,8 +2353,8 @@ void calcDiff(const T* p1, int size1, const T* p2, int size2, DiffList& diffList
 
     // Verify difflist
     {
-        int l1 = 0;
-        int l2 = 0;
+        LineRef l1 = 0;
+        LineRef l2 = 0;
         DiffList::iterator i;
         for(i = diffList.begin(); i != diffList.end(); ++i)
         {
@@ -2373,8 +2376,8 @@ bool fineDiff(
     ProgressProxy pp;
     int maxSearchLength = 500;
     Diff3LineList::iterator i;
-    int k1 = 0;
-    int k2 = 0;
+    LineRef k1 = 0;
+    LineRef k2 = 0;
     bool bTextsTotalEqual = true;
     int listSize = diff3LineList.size();
     pp.setMaxNofSteps(listSize);

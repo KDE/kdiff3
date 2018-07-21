@@ -106,9 +106,9 @@ public:
       );
 
    void init(
-      const LineData* pLineDataA, int sizeA,
-      const LineData* pLineDataB, int sizeB,
-      const LineData* pLineDataC, int sizeC,
+      const LineData* pLineDataA, LineRef sizeA,
+      const LineData* pLineDataB, LineRef sizeB,
+      const LineData* pLineDataC, LineRef sizeC,
       const Diff3LineList* pDiff3LineList,
       TotalDiffStatus* pTotalDiffStatus
       );
@@ -182,9 +182,9 @@ private:
    const LineData* m_pldA;
    const LineData* m_pldB;
    const LineData* m_pldC;
-   int m_sizeA;
-   int m_sizeB;
-   int m_sizeC;
+   LineRef m_sizeA;
+   LineRef m_sizeB;
+   LineRef m_sizeC;
 
    const Diff3LineList* m_pDiff3LineList;
    TotalDiffStatus* m_pTotalDiffStatus;

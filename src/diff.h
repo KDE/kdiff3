@@ -31,12 +31,12 @@
 // Then again range of matching elements should follow.
 struct Diff
 {
-   lin nofEquals;
+   LineRef nofEquals;
 
    qint64 diff1;
    qint64 diff2;
 
-   Diff(lin eq, qint64 d1, qint64 d2){nofEquals=eq; diff1=d1; diff2=d2; }
+   Diff(LineRef eq, qint64 d1, qint64 d2){nofEquals=eq; diff1=d1; diff2=d2; }
 };
 
 typedef std::list<Diff> DiffList;
@@ -63,20 +63,20 @@ struct DiffBufferInfo
    const LineData* m_pLineDataA;
    const LineData* m_pLineDataB;
    const LineData* m_pLineDataC;
-   int m_sizeA;
-   int m_sizeB;
-   int m_sizeC;
+   LineRef m_sizeA;
+   LineRef m_sizeB;
+   LineRef m_sizeC;
    const Diff3LineList* m_pDiff3LineList;
    const Diff3LineVector* m_pDiff3LineVector;
    void init( Diff3LineList* d3ll, const Diff3LineVector* d3lv,
-      const LineData* pldA, int sizeA, const LineData* pldB, int sizeB, const LineData* pldC, int sizeC );
+      const LineData* pldA, LineRef sizeA, const LineData* pldB, LineRef sizeB, const LineData* pldC, LineRef sizeC );
 };
 
 struct Diff3Line
 {
-   int lineA;
-   int lineB;
-   int lineC;
+   LineRef lineA;
+   LineRef lineB;
+   LineRef lineC;
 
    bool bAEqC : 1;             // These are true if equal or only white-space changes exist.
    bool bBEqC : 1;
@@ -136,7 +136,7 @@ struct Diff3Line
       else
          return QString();
    }
-   int getLineInFile( int src ) const
+   LineRef getLineInFile( int src ) const
    {
       if ( src == 1 ) return lineA;
       if ( src == 2 ) return lineB;
@@ -194,21 +194,21 @@ public:
    ManualDiffHelpEntry() { lineA1=-1; lineA2=-1; 
                            lineB1=-1; lineB2=-1; 
                            lineC1=-1; lineC2=-1; }
-   int lineA1;
-   int lineA2;
-   int lineB1;
-   int lineB2;
-   int lineC1;
-   int lineC2;
-   int& firstLine( int winIdx )
+   LineRef lineA1;
+   LineRef lineA2;
+   LineRef lineB1;
+   LineRef lineB2;
+   LineRef lineC1;
+   LineRef lineC2;
+   LineRef& firstLine( int winIdx )
    {
       return winIdx==1 ? lineA1 : (winIdx==2 ? lineB1 : lineC1 );
    }
-   int& lastLine( int winIdx )
+   LineRef& lastLine( int winIdx )
    {
       return winIdx==1 ? lineA2 : (winIdx==2 ? lineB2 : lineC2 );
    }
-   bool isLineInRange( int line, int winIdx )
+   bool isLineInRange( LineRef line, int winIdx )
    {
       return line>=0 && line>=firstLine(winIdx) && line<=lastLine(winIdx);
    }
@@ -247,7 +247,7 @@ public:
 
    void setOptions( Options* pOptions );
 
-   int getSizeLines() const;
+   LineRef getSizeLines() const;
    qint64 getSizeBytes() const;
    const char* getBuf() const;
    const QString& getText() const;
@@ -293,7 +293,7 @@ private:
       ~FileData(){ reset(); }
       const char* m_pBuf;
       qint64 m_size;
-      int m_vSize; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
+      qint64 m_vSize; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
       QString m_unicodeBuf;
       QVector<LineData> m_v;
       bool m_bIsText;
@@ -332,20 +332,20 @@ class Selection
 public:
   Selection(){}
 private:
-  int firstLine = -1;
-  int lastLine = -1;
+  LineRef firstLine = -1;
+  LineRef lastLine = -1;
 
   int firstPos = -1;
   int lastPos = -1;
   
-  int oldFirstLine = -1;
-  int oldLastLine = -1;
+  LineRef oldFirstLine = -1;
+  LineRef oldLastLine = -1;
 public:
 //private:
   bool bSelectionContainsData = false;
 public:
-  inline int getFirstLine() { return firstLine; };
-  inline int getLastLine() { return lastLine; };
+  inline LineRef getFirstLine() { return firstLine; };
+  inline LineRef getLastLine() { return lastLine; };
 
   inline int getFirstPos() { return firstPos; };
   inline int getLastPos() { return lastPos; };
@@ -353,8 +353,8 @@ public:
   inline bool isValidFirstLine() { return firstLine != -1; }
   inline void clearOldSelection() { oldLastLine = -1, oldFirstLine = -1; };
   
-  inline int getOldLastLine() { return oldLastLine; };
-  inline int getOldFirstLine() { return oldFirstLine; };
+  inline LineRef getOldLastLine() { return oldLastLine; };
+  inline LineRef getOldFirstLine() { return oldFirstLine; };
   inline bool selectionContainsData(void) { return bSelectionContainsData; };
   bool isEmpty() { return firstLine == -1 || (firstLine == lastLine && firstPos == lastPos) || bSelectionContainsData == false; }
   void reset()
@@ -365,24 +365,24 @@ public:
       lastLine = -1;
       bSelectionContainsData = false;
    }
-   void start( int l, int p ) { firstLine = l; firstPos = p; }
-   void end( int l, int p )  {
+   void start( LineRef l, int p ) { firstLine = l; firstPos = p; }
+   void end( LineRef l, int p )  {
       if ( oldLastLine == -1 )
          oldLastLine = lastLine;
       lastLine  = l;
       lastPos  = p;
       //bSelectionContainsData = (firstLine == lastLine && firstPos == lastPos);
    }
-   bool within( int l, int p );
+   bool within( LineRef l, LineRef p );
 
-   bool lineWithin( int l );
-   int firstPosInLine(int l);
-   int lastPosInLine(int l);
-   int beginLine(){ 
+   bool lineWithin( LineRef l );
+   int firstPosInLine(LineRef l);
+   int lastPosInLine(LineRef l);
+   LineRef beginLine(){ 
       if (firstLine<0 && lastLine<0) return -1;
-      return max2(0,min2(firstLine,lastLine)); 
+      return max2((LineRef)0,min2(firstLine,lastLine)); 
    }
-   int endLine(){ 
+   LineRef endLine(){ 
       if (firstLine<0 && lastLine<0) return -1;
       return max2(firstLine,lastLine); 
    }
@@ -448,7 +448,7 @@ public:
    }
 };
 
-bool runDiff( const LineData* p1, int size1, const LineData* p2, int size2, DiffList& diffList, int winIdx1, int winIdx2,
+bool runDiff( const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList, int winIdx1, int winIdx2,
               ManualDiffHelpList *pManualDiffHelpList, Options *pOptions);
 
 bool fineDiff(

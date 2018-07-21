@@ -818,8 +818,8 @@ void KDiff3App::slotFilePrint()
     QPrinter printer;
     QPrintDialog printDialog(&printer, this);
 
-    int firstSelectionD3LIdx = -1;
-    int lastSelectionD3LIdx = -1;
+    LineRef firstSelectionD3LIdx = -1;
+    LineRef lastSelectionD3LIdx = -1;
     
     m_pDiffTextWindow1->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
     
@@ -889,7 +889,7 @@ void KDiff3App::slotFilePrint()
             m_pEventLoopForPrinting->exec();
         }
 
-        int totalNofLines = max2(m_pDiffTextWindow1->getNofLines(), m_pDiffTextWindow2->getNofLines());
+        LineRef totalNofLines = max2(m_pDiffTextWindow1->getNofLines(), m_pDiffTextWindow2->getNofLines());
         if(m_bTripleDiff && m_pDiffTextWindow3)
             totalNofLines = max2(totalNofLines, m_pDiffTextWindow3->getNofLines());
 
@@ -900,8 +900,8 @@ void KDiff3App::slotFilePrint()
 
         bool bPrintSelection = false;
         int totalNofPages = (totalNofLines + linesPerPage - 1) / linesPerPage;
-        int line = -1;
-        int selectionEndLine = -1;
+        LineRef line = -1;
+        LineRef selectionEndLine = -1;
 
         if(printer.printRange() == QPrinter::AllPages) {
             pageList.clear();

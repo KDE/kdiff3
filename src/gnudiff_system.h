@@ -24,6 +24,8 @@
 #ifndef GNUDIFF_SYSTEM_H
 #define GNUDIFF_SYSTEM_H
 
+#include <QtGlobal>
+
 #include <stdint.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -55,8 +57,10 @@
 
 /* The integer type of a line number. */
 
-typedef size_t lin;
+typedef int LineRef;
 #define LIN_MAX PTRDIFF_MAX
-verify (lin_is_wide_enough, sizeof (size_t) <= sizeof (lin));
+
+verify(lin_is_signed, TYPE_SIGNED(LineRef));
+verify(lin_is_wide_enough, sizeof(int) <= sizeof(LineRef));
 
 #endif
