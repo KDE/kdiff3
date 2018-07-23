@@ -791,6 +791,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     if(!m_normalData.preprocess(m_pOptions->m_bPreserveCarriageReturn, pEncoding1) ||
        !m_lmppData.preprocess(false, pEncoding2))
     {
+
         errors.append("File too large to processs. Skipping.");
     }
     else
@@ -890,7 +891,7 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
     if(pCodec != pEncoding)
         skipBytes = 0;
     
-    if(m_size - skipBytes < INT_MAX)
+    if(m_size - skipBytes > INT_MAX)
         return false;
     
     QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, (int)(m_size - skipBytes));
