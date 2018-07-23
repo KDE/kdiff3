@@ -814,13 +814,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         // Internal Preprocessing: Uppercase-conversion
         if(m_pOptions->m_bIgnoreCase)
         {
-            int i;
-            QChar* pBuf = const_cast<QChar*>(m_lmppData.m_unicodeBuf.unicode());
-            int ucSize = m_lmppData.m_unicodeBuf.length();
-            for(i = 0; i < ucSize; ++i)
-            {
-                pBuf[i] = pBuf[i].toUpper();
-            }
+            m_lmppData.m_unicodeBuf = QLocale::system().toUpper(m_lmppData.m_unicodeBuf);
         }
 
         // Ignore comments
