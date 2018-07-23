@@ -46,34 +46,34 @@ public:
       QTextCodec* pCodec,
       e_LineEndStyle eLineEndStyle,
       const LineData* pLineData,
-      LineRef size,
+      int size,
       const Diff3LineVector* pDiff3LineVector,
       const ManualDiffHelpList* pManualDiffHelpList,
       bool bTriple
       );
    void reset();
-   void convertToLinePos( int x, int y, LineRef& line, int& pos );
+   void convertToLinePos( int x, int y, int& line, int& pos );
 
    QString getSelection();
    int getFirstLine();
-   LineRef calcTopLineInFile( int firstLine );
+   int calcTopLineInFile( int firstLine );
 
    int getMaxTextWidth();
    int getNofLines();
    int getNofVisibleLines();
    int getVisibleTextAreaWidth();
 
-   LineRef convertLineToDiff3LineIdx( LineRef line );
-   LineRef convertDiff3LineIdxToLine( LineRef d3lIdx );
+   int convertLineToDiff3LineIdx( int line );
+   int convertDiff3LineIdxToLine( int d3lIdx );
 
-   void convertD3LCoordsToLineCoords( LineRef d3LIdx, int d3LPos, LineRef& line, int& pos );
-   void convertLineCoordsToD3LCoords( LineRef line, int pos, LineRef& d3LIdx, int& d3LPos );
+   void convertD3LCoordsToLineCoords( int d3LIdx, int d3LPos, int& line, int& pos );
+   void convertLineCoordsToD3LCoords( int line, int pos, int& d3LIdx, int& d3LPos );
 
    void convertSelectionToD3LCoords();
 
    bool findString( const QString& s, int& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive );
-   void setSelection( LineRef firstLine, int startPos, LineRef lastLine, int endPos, LineRef& l, int& p );
-   void getSelectionRange( LineRef* firstLine, LineRef* lastLine, e_CoordType coordType );
+   void setSelection( int firstLine, int startPos, int lastLine, int endPos, int& l, int& p );
+   void getSelectionRange( int* firstLine, int* lastLine, e_CoordType coordType );
 
    void setPaintingAllowed( bool bAllowPainting );
    void recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int nofVisibleColumns);
@@ -86,13 +86,13 @@ Q_SIGNALS:
    void selectionEnd();
    void setFastSelectorLine( int line );
    void gotFocus();
-   void lineClicked( int winIdx, LineRef line );
+   void lineClicked( int winIdx, int line );
 
 public Q_SLOTS:
-   void setFirstLine( LineRef line );
+   void setFirstLine( int line );
    void setHorizScrollOffset( int horizScrollOffset );
    void resetSelection();
-   void setFastSelectorRange( LineRef line1, LineRef nofLines );
+   void setFastSelectorRange( int line1, int nofLines );
 
 protected:
    void mousePressEvent ( QMouseEvent * ) override;
