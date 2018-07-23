@@ -19,6 +19,7 @@
 #define MERGERESULTWINDOW_H
 
 #include "diff.h"
+#include "selection.h"
 
 #include <QWidget>
 #include <QPixmap>
