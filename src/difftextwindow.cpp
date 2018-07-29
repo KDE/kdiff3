@@ -811,9 +811,7 @@ void DiffTextWindowData::writeLine(
     int deviceWidth)
 {
     QFont normalFont = p.font();
-    QFont diffFont = normalFont;
-    //never set
-    //diffFont.setItalic(m_pOptions->m_bItalicForDeltas);
+
     const QFontMetrics& fm = p.fontMetrics();
     int fontHeight = fm.lineSpacing();
     int fontAscent = fm.ascent();
@@ -921,10 +919,6 @@ void DiffTextWindowData::writeLine(
                 c = m_pOptions->m_fgColor;
             }
 
-            //QRect outRect( xOffset + outPixelPos, yOffset, charWidth*spaces, fontHeight );
-            //if ( m_pOptions->m_bRightToLeftLanguage )
-            //   outRect = QRect( deviceWidth-1-(xOffset + outPixelPos), yOffset, -charWidth*spaces, fontHeight ).normalized();
-            //if ( invalidRect.intersects( outRect ) )
             {
                 frh.setBackground(bgColor);
                 if(!m_selection.within(line, outPos))

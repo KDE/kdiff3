@@ -2404,16 +2404,6 @@ void KDiff3App::slotAddManualDiffHelp()
         KMessageBox::information(this, i18n("Nothing is selected in either diff input window."), i18n("Error while adding manual diff range"));
     else
     {
-        /*
-      ManualDiffHelpEntry mdhe;
-      if (!m_manualDiffHelpList.empty()) mdhe = m_manualDiffHelpList.front();
-      if ( winIdx==1 ) { mdhe.lineA1 = firstLine; mdhe.lineA2 = lastLine; }
-      if ( winIdx==2 ) { mdhe.lineB1 = firstLine; mdhe.lineB2 = lastLine; }
-      if ( winIdx==3 ) { mdhe.lineC1 = firstLine; mdhe.lineC2 = lastLine; }
-      m_manualDiffHelpList.clear();
-      m_manualDiffHelpList.push_back( mdhe );
-      */
-
         insertManualDiffHelp(&m_manualDiffHelpList, winIdx, firstLine, lastLine);
 
         mainInit(nullptr, false); // Init without reload

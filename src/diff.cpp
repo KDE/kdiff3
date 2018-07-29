@@ -668,14 +668,6 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
 
     if(faIn.exists())
     {
-
-#if defined(Q_OS_WIN)
-        QString catCmd = "type";
-        fileNameIn1.replace('/', "\\");
-#else
-        QString catCmd = "cat";
-#endif
-
         // Run the first preprocessor
         if(m_pOptions->m_PreProcessorCmd.isEmpty())
         {
@@ -710,8 +702,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             }
             else
                 errorReason = "\n(" + errorReason + ")";
-            //QString cmd = catCmd + " \"" + fileNameInPP + "\" | " + ppCmd  + " >\"" + fileNameOut1+"\"";
-            //::system( encodeString(cmd) );
+            
             bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
             if(fileInSize > 0 && (!bSuccess || m_normalData.m_size == 0))
             {
@@ -759,8 +750,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             }
             else
                 errorReason = "\n(" + errorReason + ")";
-            //QString cmd = catCmd + " \"" + fileNameInPP + "\" | " + ppCmd  + " >\"" + fileNameOut2 + "\"";
-            //::system( encodeString(cmd) );
+            
             bool bSuccess = errorReason.isEmpty() && m_lmppData.readFile(fileNameOut2);
             if(FileAccess(fileNameIn2).size() > 0 && (!bSuccess || m_lmppData.m_size == 0))
             {
