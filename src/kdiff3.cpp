@@ -318,11 +318,12 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDif
 
         viewStatusBar->setChecked(m_pOptions->m_bShowStatusBar);
         slotViewStatusBar();
-        /*
-           vrusu - commented out as new KToolBar does not hase setParPos
-           TODO figure out how to restore bar position
-              if( toolBar(MAIN_TOOLBAR_NAME)!=0 )
-                 toolBar(MAIN_TOOLBAR_NAME)->setBarPos( (KToolBar::BarPosition) m_pOptions->m_toolBarPos );*/
+        
+        KToolBar *mainToolBar = toolBar(MAIN_TOOLBAR_NAME);
+        if(mainToolBar != nullptr){
+            mainToolBar->mainWindow()->addToolBar(m_pOptions->m_toolBarPos, mainToolBar);
+        }
+        //   TODO restore window size/pos?
         /*      QSize size = m_pOptions->m_geometry;
               QPoint pos = m_pOptions->m_position;
               if(!size.isEmpty())

@@ -21,7 +21,7 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-
+//#include <QToolBar>
 #include <QStringList>
 #include <list>
 
@@ -43,7 +43,7 @@ public:
     bool   m_bMaximised;
     bool   m_bShowToolBar;
     bool   m_bShowStatusBar;
-    int    m_toolBarPos;
+    Qt::ToolBarArea    m_toolBarPos;
 
     // These are the results of the option dialog.
     QFont m_font;

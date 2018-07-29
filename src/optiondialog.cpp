@@ -658,6 +658,7 @@ OptionDialog::~OptionDialog(void)
 
 void OptionDialog::setupOtherOptions()
 {
+    //TODO move to Options class
     new OptionToggleAction(false, "AutoAdvance", &m_options.m_bAutoAdvance, this);
     new OptionToggleAction(true, "ShowWhiteSpaceCharacters", &m_options.m_bShowWhiteSpaceCharacters, this);
     new OptionToggleAction(true, "ShowWhiteSpace", &m_options.m_bShowWhiteSpace, this);
@@ -672,8 +673,8 @@ void OptionDialog::setupOtherOptions()
 
     /*
    TODO manage toolbar positioning
-   new OptionNum( (int)KToolBar::Top, "ToolBarPos", &m_toolBarPos, this );
-*/
+   */
+    new OptionNum( Qt::TopToolBarArea, "ToolBarPos", (int*)&m_options.m_toolBarPos, this );
     new OptionSize(QSize(600, 400), "Geometry", &m_options.m_geometry, this);
     new OptionPoint(QPoint(0, 22), "Position", &m_options.m_position, this);
     new OptionToggleAction(false, "WindowStateMaximised", &m_options.m_bMaximised, this);
