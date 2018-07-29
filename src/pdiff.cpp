@@ -1577,7 +1577,7 @@ void KDiff3App::slotSelectionEnd()
 void KDiff3App::slotClipboardChanged()
 {
     QString s = QApplication::clipboard()->text();
-    //editPaste->setEnabled(!s.isEmpty());
+    editPaste->setEnabled(!s.isEmpty());
 }
 
 void KDiff3App::slotOutputModified(bool bModified)

@@ -21,6 +21,7 @@
 #include <cassert>
 
 // include files for QT
+#include <QClipboard>
 #include <QCheckBox>
 #include <QCommandLineParser>
 #include <QDesktopWidget>
@@ -354,7 +355,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDif
     connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
     connect(m_pDirectoryMergeWindow, SIGNAL(updateAvailabilities()), this, SLOT(slotUpdateAvailabilities()));
     connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::statusBarMessage, this, &KDiff3App::slotStatusMsg);
-
+    connect(QApplication::clipboard(), &QClipboard::dataChanged, this, &KDiff3App::slotClipboardChanged);
     m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());
 
     delete KDiff3Shell::getParser();
