@@ -782,7 +782,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
        !m_lmppData.preprocess(false, pEncoding2))
     {
 
-        errors.append("File too large to processs. Skipping.");
+        errors.append(i18n("File %1 too large to processs. Skipping.", fileNameIn1));
     }
     else
     {
