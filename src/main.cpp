@@ -163,7 +163,7 @@ int main(int argc, char* argv[])
     if(!cmdLineParser->parse(QCoreApplication::arguments())) {
         QString errorMessage = cmdLineParser->errorText();
         QString helpText = cmdLineParser->helpText();
-        QMessageBox::warning(nullptr, aboutData.displayName(), "<html><head/><body><h2>" + errorMessage + "</h2><pre>" + helpText + "</pre></body></html>");
+        QMessageBox::warning(nullptr, aboutData.displayName(), "<html><head/><body><h2>" + errorMessage + "</h2><pre>" + i18n("See kdiff3 --help for supported options.") + "</pre></body></html>");
 #if !defined(Q_OS_WIN) 
         fputs(qPrintable(errorMessage), stderr);
         fputs("\n\n", stderr);
