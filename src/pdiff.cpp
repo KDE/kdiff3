@@ -110,7 +110,7 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, LineRef idx)
 void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, bool bUseCurrentEncoding)
 {
     ProgressProxy pp;
-
+    QStringList errors;
     // When doing a full analysis in the directory-comparison, then the statistics-results
     // will be stored in the given TotalDiffStatus. Otherwise it will be 0.
     bool bGUI = pTotalDiffStatus == nullptr;
@@ -159,7 +159,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
 
     if(bLoadFiles)
     {
-        QStringList errors;
         m_manualDiffHelpList.clear();
 
         if(m_sd3.isEmpty())
@@ -173,10 +172,10 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             errors = m_sd1.readAndPreprocess(m_sd1.getEncoding(), false);
         else
             errors = m_sd1.readAndPreprocess(m_pOptions->m_pEncodingA, m_pOptions->m_bAutoDetectUnicodeA);
-        foreach(const QString& error, errors)
-        {
-            KMessageBox::error(m_pOptionDialog, error);
-        }
+        
+        if(!errors.isEmpty())
+            KMessageBox::errorList(m_pOptionDialog, i18n("Errors occured during pre-processing of file A."), errors);
+
         pp.step();
 
         pp.setInformation(i18n("Loading B"));
@@ -184,10 +183,10 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             errors = m_sd2.readAndPreprocess(m_sd2.getEncoding(), false);
         else
             errors = m_sd2.readAndPreprocess(m_pOptions->m_pEncodingB, m_pOptions->m_bAutoDetectUnicodeB);
-        foreach(const QString& error, errors)
-        {
-            KMessageBox::error(m_pOptionDialog, error);
-        }
+        
+        if(!errors.isEmpty())
+            KMessageBox::errorList(m_pOptionDialog, i18n("Errors occured during pre-processing of file B."), errors);
+        
         pp.step();
     }
     else
@@ -223,9 +222,13 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         {
             pp.setInformation(i18n("Loading C"));
             if(bUseCurrentEncoding == true)
-                m_sd3.readAndPreprocess(m_sd3.getEncoding(), false);
+                errors=m_sd3.readAndPreprocess(m_sd3.getEncoding(), false);
             else
-                m_sd3.readAndPreprocess(m_pOptions->m_pEncodingC, m_pOptions->m_bAutoDetectUnicodeC);
+                errors=m_sd3.readAndPreprocess(m_pOptions->m_pEncodingC, m_pOptions->m_bAutoDetectUnicodeC);
+
+            if(!errors.isEmpty())
+                KMessageBox::errorList(m_pOptionDialog, i18n("Errors occured during pre-processing of file C."), errors);
+            
             pp.step();
         }
 
