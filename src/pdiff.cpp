@@ -174,7 +174,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             errors = m_sd1.readAndPreprocess(m_pOptions->m_pEncodingA, m_pOptions->m_bAutoDetectUnicodeA);
         
         if(!errors.isEmpty())
-            KMessageBox::errorList(m_pOptionDialog, i18n("Errors occured during pre-processing of file A."), errors);
+            KMessageBox::errorList(m_pOptionDialog, i18n("Errors occurred during pre-processing of file A."), errors);
 
         pp.step();
 
@@ -185,7 +185,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             errors = m_sd2.readAndPreprocess(m_pOptions->m_pEncodingB, m_pOptions->m_bAutoDetectUnicodeB);
         
         if(!errors.isEmpty())
-            KMessageBox::errorList(m_pOptionDialog, i18n("Errors occured during pre-processing of file B."), errors);
+            KMessageBox::errorList(m_pOptionDialog, i18n("Errors occurred during pre-processing of file B."), errors);
         
         pp.step();
     }
@@ -227,7 +227,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                 errors=m_sd3.readAndPreprocess(m_pOptions->m_pEncodingC, m_pOptions->m_bAutoDetectUnicodeC);
 
             if(!errors.isEmpty())
-                KMessageBox::errorList(m_pOptionDialog, i18n("Errors occured during pre-processing of file C."), errors);
+                KMessageBox::errorList(m_pOptionDialog, i18n("Errors occurred during pre-processing of file C."), errors);
             
             pp.step();
         }
