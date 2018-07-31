@@ -68,8 +68,6 @@ protected Q_SLOTS:
     
     void slotEncodingChanged();
     void slotHistoryMergeRegExpTester();
-    void slotIntegrateWithClearCase();
-    void slotRemoveClearCaseIntegration();
 Q_SIGNALS:
     void applyDone();
 private:

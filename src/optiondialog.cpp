@@ -1538,15 +1538,6 @@ void OptionDialog::setupRegionalPage(void)
     topLayout->addStretch(10);
 }
 
-// TODO: Integrate this properly in the build system.
-// Currently breaks compilation on Windows b/c of:
-//   src\ccInstHelper.cpp(15): fatal error C1083: Cannot open include file: 'C:/Program Files/NSIS/Contrib/ExDll/exdll.h': No such file or directory
-#define ENABLE_CC_INTEGRATION 0
-
-#if ENABLE_CC_INTEGRATION
-#include "ccInstHelper.cpp"
-#endif
-
 void OptionDialog::setupIntegrationPage(void)
 {
     QFrame* page = new QFrame();
@@ -1581,46 +1572,9 @@ void OptionDialog::setupIntegrationPage(void)
         "For those who are used to using the Escape key."));
     ++line;
 
-#if ENABLE_CC_INTEGRATION
-    QPushButton* pIntegrateWithClearCase = new QPushButton(i18n("Integrate with ClearCase"), page);
-    gbox->addWidget(pIntegrateWithClearCase, line, 0);
-    pIntegrateWithClearCase->setToolTip(i18n(
-        "Integrate with Rational ClearCase from IBM.\n"
-        "Modifies the \"map\" file in ClearCase subdir \"lib/mgrs\"\n"
-        "(Only enabled when ClearCase \"bin\" directory is in the path.)"));
-    connect(pIntegrateWithClearCase, &QPushButton::clicked, this, &OptionDialog::slotIntegrateWithClearCase);
-    pIntegrateWithClearCase->setEnabled(integrateWithClearCase("existsClearCase", "") != 0);
-
-    QPushButton* pRemoveClearCaseIntegration = new QPushButton(i18n("Remove ClearCase Integration"), page);
-    gbox->addWidget(pRemoveClearCaseIntegration, line, 1);
-    pRemoveClearCaseIntegration->setToolTip(i18n(
-        "Restore the old \"map\" file from before doing the ClearCase integration."));
-    connect(pRemoveClearCaseIntegration, &QPushButton::clicked, this, &OptionDialog::slotRemoveClearCaseIntegration);
-    pRemoveClearCaseIntegration->setEnabled(integrateWithClearCase("existsClearCase", "") != 0);
-
-    ++line;
-#endif
-
     topLayout->addStretch(10);
 }
 
-void OptionDialog::slotIntegrateWithClearCase()
-{
-#if ENABLE_CC_INTEGRATION
-    char kdiff3CommandPath[1000];
-    GetModuleFileNameA(0, kdiff3CommandPath, sizeof(kdiff3CommandPath) - 1);
-    integrateWithClearCase("install", kdiff3CommandPath);
-#endif
-}
-
-void OptionDialog::slotRemoveClearCaseIntegration()
-{
-#if ENABLE_CC_INTEGRATION
-    char kdiff3CommandPath[1000];
-    GetModuleFileNameA(0, kdiff3CommandPath, sizeof(kdiff3CommandPath) - 1);
-    integrateWithClearCase("uninstall", kdiff3CommandPath);
-#endif
-}
 
 void OptionDialog::slotEncodingChanged()
 {

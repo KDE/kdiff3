@@ -246,32 +246,6 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
         {
             d()->m_url.setPath(absoluteFilePath());
         }
-
-        if(!m_bExists && absoluteFilePath().contains("@@"))
-        {
-            // Try reading a clearcase file
-            d()->m_localCopy = FileAccess::tempFileName();
-            QString cmd = "cleartool get -to \"" + d()->m_localCopy + "\"  \"" + absoluteFilePath() + "\"";
-            QProcess process;
-            process.start(cmd);
-            process.waitForFinished(-1);
-            //::system( cmd.local8Bit() );
-            QFile::setPermissions(d()->m_localCopy, QFile::ReadUser | QFile::WriteUser); // Clearcase creates a write protected file, allow delete.
-
-            QFileInfo fi(d()->m_localCopy);
-#if defined(Q_OS_WIN)
-            d()->m_bReadable = true;    //fi.isReadable();
-            m_bWritable = true;         //fi.isWritable();
-            d()->m_bExecutable = false; //fi.isExecutable();
-#else
-            d()->m_bReadable = fi.isReadable();
-            d()->m_bExecutable = fi.isExecutable();
-#endif
-            //d()->m_creationTime = fi.created();
-            //d()->m_accessTime = fi.lastRead();
-            m_bExists = fi.exists();
-            m_size = fi.size();
-        }
     }
 }
 

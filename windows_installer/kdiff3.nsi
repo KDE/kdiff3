@@ -383,15 +383,6 @@ Section /o "SVN Merge tool" SecIntegrationSubversionDiff3Cmd
   CopyFiles '$INSTDIR\diff3_cmd.bat' '$APPDATA\Subversion'
 SectionEnd
 
-
-Section /o "ClearCase" SecIntegrationClearCase
-  DetailPrint "Integrate with Rational ClearCase from IBM"
-  ccInstallHelper::nsisPlugin "install" "$INSTDIR\kdiff3.exe"
-
-  ;File "ccInstHelper.exe"
-  ;ExecWait '"$INSTDIR\ccInstHelper.exe" install "$INSTDIR\kdiff3.exe"'
-SectionEnd
-
 SubSectionEnd
 
 ;--------------------------------
@@ -429,7 +420,6 @@ FunctionEnd
     !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationWinCVS}  "Integrate KDiff3 with WinCVS. (Please close WinCVS before proceeding.)"
     !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationTortoiseSVN}  "Integrate KDiff3 with TortoiseSVN."
     !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationSubversionDiff3Cmd}  "Install diff3_cmd.bat for Subversion merge"
-    !insertmacro MUI_DESCRIPTION_TEXT ${SecIntegrationClearCase}  "Integrate KDiff3 with Rational Clearcase from IBM"
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
  
@@ -512,11 +502,6 @@ ${EndIf}
   DeleteRegKey SHCTX "Software\Classes\Folder\shellex\ContextMenuHandlers\$DIFF_EXT_ID"
   DeleteRegKey SHCTX "Software\Classes\Directory\shellex\ContextMenuHandlers\$DIFF_EXT_ID"
   DeleteRegValue SHCTX "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "$DIFF_EXT_CLSID"
-
-  ; clearcase
-  ccInstallHelper::nsisPlugin "uninstall" "$INSTDIR\kdiff3.exe"
-  ;ExecWait '"$INSTDIR\ccInstHelper.exe" uninstall "$INSTDIR\kdiff3.exe"'
-  ;Delete "$INSTDIR\ccInstHelper.exe"
 
 SectionEnd
 

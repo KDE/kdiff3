@@ -62,15 +62,6 @@ Installation:
   (C:\Documents and Settings\Username\Application Data\Subversion\diff3_cmd.bat)
   (Installation is disabled by default) 
 
-- Integration with Rational ClearCase from IBM: Allows to use KDiff3 as comparison 
-  and merge tool for text files under Clearcase. KDiff3 tries to locate the "map"-file 
-  (e.g.: C:\Program Files\Rational\Clearcase\lib\mgrs\map) which tells clearcase 
-  which tool to use for which filetype and operation. KDiff3 stores a backup in 
-  map.preKDiff3Install (if is doesn't exist yet) and modifies the map file so that 
-  KDiff3 is used for text files. On KDiff3-uninstallation the entries containing 
-  "KDiff3" are restored. The map-file is normal text, so you can also adjust it 
-  yourself. (Installation for ClearCase is disabled by default) 
-
 Since this program was actually developed for GNU/Linux, there might be Windows
 specific problems I don't know of yet. Please write me about problems you encounter.
 
