@@ -313,7 +313,7 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
             QString localName = name;
 
 #if defined(Q_OS_WIN)
-            if(localName.startsWith("/tmp/"))
+            if(localName.startsWith(QLatin1String{"/tmp/")))
             {
                 // git on Cygwin will put files in /tmp
                 // A workaround for the a native kdiff3 binary to find them...
@@ -838,7 +838,7 @@ QString FileAccess::tempFileName()
 
 bool FileAccess::removeTempFile(const QString& name) // static
 {
-    if(name.endsWith(".2"))
+    if(name.endsWith(QLatin1String(".2")))
         FileAccess(name.left(name.length() - 2)).removeFile();
     return FileAccess(name).removeFile();
 }

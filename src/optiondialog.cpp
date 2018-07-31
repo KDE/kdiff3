@@ -915,7 +915,7 @@ void OptionDialog::setupEditPage(void)
     gbox->addWidget(pAutoCopySelection, line, 0, 1, 2);
     pAutoCopySelection->setToolTip(i18n(
         "On: Any selection is immediately written to the clipboard.\n"
-        "Off: You must explicitely copy e.g. via Ctrl-C."));
+        "Off: You must explicitly copy e.g. via Ctrl-C."));
     ++line;
 
     label = new QLabel(i18n("Line end style:"), page);
@@ -1540,7 +1540,7 @@ void OptionDialog::setupRegionalPage(void)
 
 // TODO: Integrate this properly in the build system.
 // Currently breaks compilation on Windows b/c of:
-//   src\ccInstHelper.cpp(15): fatal error C1083: Cannot open include file: 'C:/Programme/NSIS/Contrib/ExDll/exdll.h': No such file or directory
+//   src\ccInstHelper.cpp(15): fatal error C1083: Cannot open include file: 'C:/Program Files/NSIS/Contrib/ExDll/exdll.h': No such file or directory
 #define ENABLE_CC_INTEGRATION 0
 
 #if ENABLE_CC_INTEGRATION

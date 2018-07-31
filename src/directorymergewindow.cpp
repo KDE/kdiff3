@@ -1025,7 +1025,7 @@ bool DirectoryMergeWindow::Data::init(
 {
     if(m_pOptions->m_bDmFullAnalysis)
     {
-        // A full analysis uses the same ressources that a normal text-diff/merge uses.
+        // A full analysis uses the same resources that a normal text-diff/merge uses.
         // So make sure that the user saves his data first.
         bool bCanContinue = false;
         emit q->checkIfCanContinue(&bCanContinue);

@@ -45,7 +45,6 @@
 #include <QPaintEvent>
 #include <QPixmap>
 #include <QResizeEvent>
-#include <QTextStream>
 #include <QTimerEvent>
 #include <QWheelEvent>
 

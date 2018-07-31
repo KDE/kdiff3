@@ -52,7 +52,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
         while(!ts.atEnd())
         {
             QString line = ts.readLine();
-            if(line.startsWith("IgnorableCmdLineOptions="))
+            if(line.startsWith(QLatin1String("IgnorableCmdLineOptions=")))
             {
                 int pos = line.indexOf('=');
                 if(pos >= 0)

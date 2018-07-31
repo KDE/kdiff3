@@ -260,7 +260,7 @@ void ProgressDialog::enterEventLoop(KJob* pJob, const QString& jobInfo)
         killTimer(m_progressDelayTimer);
     m_progressDelayTimer = startTimer(3000); /* 3 s delay */
 
-    // immediately show the progess dialog for KIO jobs, because some KIO jobs require password authentication,
+    // immediately show the progress dialog for KIO jobs, because some KIO jobs require password authentication,
     // but if the progress dialog pops up at a later moment, this might cover the login dialog and hide it from the user.
     if(m_pJob && !m_bStayHidden)
         show();

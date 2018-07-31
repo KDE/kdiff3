@@ -73,7 +73,7 @@ bool equal(const LineData& l1, const LineData& l2, bool bStrict)
 {
     if(l1.pLine == nullptr || l2.pLine == nullptr) return false;
 
-    if(bStrict && g_bIgnoreTrivialMatches) //&& (l1.occurances>=5 || l2.occurances>=5) )
+    if(bStrict && g_bIgnoreTrivialMatches) //&& (l1.occurences>=5 || l2.occurences>=5) )
         return false;
 
     // Ignore white space diff
@@ -344,7 +344,7 @@ bool SourceData::FileData::readFile(const QString& filename)
     FileAccess fa(filename);
     m_size = fa.sizeForReading();
     char* pBuf;
-    m_pBuf = pBuf = new char[m_size + 100]; // Alloc 100 byte extra: Savety hack, not nice but does no harm.
+    m_pBuf = pBuf = new char[m_size + 100]; // Alloc 100 byte extra: Safety hack, not nice but does no harm.
                                             // Some extra bytes at the end of the buffer are needed by
                                             // the diff algorithm. See also GnuDiff::diff_2_files().
     bool bSuccess = fa.readFile(pBuf, m_size);

@@ -104,7 +104,7 @@ void readTranslationFile()
          std::wstring s( sLength, L' ' );         
          MultiByteToWideChar(CP_UTF8,0,&buffer[offset], (int)bufferSize, &s[0], (int)s.size() );
 
-         // Now analyse the file and extract translation strings
+         // Now analyze the file and extract translation strings
          std::wstring msgid;
          std::wstring msgstr;
          msgid.reserve( 1000 );

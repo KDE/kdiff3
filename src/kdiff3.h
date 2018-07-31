@@ -311,7 +311,7 @@ class KDiff3App : public QSplitter
    int m_DTWHeight;
    bool m_bOutputModified;
    bool m_bFileSaved;
-   bool m_bTimerBlock;      // Synchronisation
+   bool m_bTimerBlock;      // Synchronization
 
    OptionDialog* m_pOptionDialog;
    Options*      m_pOptions;
