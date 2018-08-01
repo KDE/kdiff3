@@ -3,7 +3,7 @@
 ;Apdapted for KDiff3 by Sebastien Fricker and Joachim Eibl
 ;Requires nsis_v2.19
 
-!define KDIFF3_VERSION "0.9.98"
+!define KDIFF3_VERSION "1.70.90"
 !define DIFF_EXT32_CLSID "{9F8528E4-AB20-456E-84E5-3CE69D8720F3}"
 !define DIFF_EXT64_CLSID "{34471FFB-4002-438b-8952-E4588D0C0FE9}"
 

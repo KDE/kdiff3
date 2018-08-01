@@ -3,11 +3,10 @@ KDiff3-Readme
 
 Author: Joachim Eibl  (joachim.eibl at gmx.de)
 Port to KF5/Qt5 by Michael Reeves (reeves.87@gmail.com)
-KDiff3-Version: 1.7
+KDiff3-Version: 1.7.90
 
 Now requires Qt 5.6 or later and KF5 5.14+. Legacy 0.9.98 and earlier builds are not supported.
-Windows/MacOSX build is untested since port. Builds and runs under kubuntu 16.04 will likely
-still work under other Linux/Un*x. The Konqueror specific plugin is not ported and no longer mantained.
+MacOSX build is untested since port. The Konqueror specific plugin is not ported and no longer mantained.
 This plugin would only apply to KDE before 4.6. Support as been removed from main CMakeLists.txt.
 As of 1/13/17 cmake 3.1+ is the targeted cmake version.
 
@@ -20,7 +19,6 @@ The original pre KF5/Qt5 Readme fallows old build intrustions have been removed 
 
 
 Copyright: (C) 2002-2014 by Joachim Eibl
-KDiff3-Version: 0.9.98
 
 KDiff3 runs best on KDE but can be built without it, depending only on Qt-libs.
 These are available for Un*x, Windows, Mac.
@@ -35,14 +33,6 @@ Contents
 
 - Introduction
 - License
-- Requirements & Installation
-  - For KDE4
-  - With Qt4-libs, without KDE
-    - for Linux/Un*x
-    - for Windows
-    - Debugging with MinGW under Windows:
-    - for Mac: Building KDiff3 for Mac OSX (with Intel processor) as a universal binary
-    - Creating and installing translation messages
 - Additional hints
 
 

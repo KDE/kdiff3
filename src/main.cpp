@@ -110,7 +110,7 @@ int main(int argc, char* argv[])
 
     const QByteArray& appName = QByteArray::fromRawData("kdiff3", 6);
     const QString i18nName = i18n("KDiff3");
-    QByteArray appVersion = QByteArray::fromRawData(VERSION, sizeof(VERSION));
+    QByteArray appVersion = QByteArray::fromRawData(KDIFF3_VERSION, sizeof(KDIFF3_VERSION));
     if(sizeof(void*) == 8)
         appVersion += " (64 bit)";
     else if(sizeof(void*) == 4)
@@ -208,5 +208,3 @@ int main(int argc, char* argv[])
     return retVal;
 }
 
-// Suppress warning with --enable-final
-#undef VERSION

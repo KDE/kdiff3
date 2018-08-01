@@ -1,2 +1,2 @@
-#undef VERSION
-#define VERSION "1.7.0"
+#undef KDIFF3_VERSION
+#define KDIFF3_VERSION "1.7.90"
