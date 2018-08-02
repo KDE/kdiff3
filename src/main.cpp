@@ -16,7 +16,7 @@
  ***************************************************************************/
 #include "common.h"
 #include "kdiff3_shell.h"
-#include "version.h"
+#include <version.h>
 
 #include <KAboutData>
 #include <KCrash/KCrash>
@@ -110,7 +110,7 @@ int main(int argc, char* argv[])
 
     const QByteArray& appName = QByteArray::fromRawData("kdiff3", 6);
     const QString i18nName = i18n("KDiff3");
-    QByteArray appVersion = QByteArray::fromRawData(KDIFF3_VERSION, sizeof(KDIFF3_VERSION));
+    QByteArray appVersion = QByteArray::fromRawData(KDIFF3_VERSION_STRING, sizeof(KDIFF3_VERSION_STRING));
     if(sizeof(void*) == 8)
         appVersion += " (64 bit)";
     else if(sizeof(void*) == 4)

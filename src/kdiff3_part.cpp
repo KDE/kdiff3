@@ -33,11 +33,11 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
-#include "version.h"
+#include <version.h>
 
 static KAboutData createAboutData()
 {
-    QByteArray appVersion = QByteArray(VERSION);
+    QByteArray appVersion = QByteArray(KDIFF3_VERSION_STRING);
     if(sizeof(void*) == 8)
         appVersion += " (64 bit)";
     else if(sizeof(void*) == 4)
@@ -272,7 +272,5 @@ bool KDiff3Part::saveFile()
 */
     return false; // Not implemented
 }
-// Suppress warning with --enable-final
-#undef VERSION
 
 #include "kdiff3_part.moc"
