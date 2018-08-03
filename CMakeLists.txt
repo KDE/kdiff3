@@ -58,6 +58,8 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CLANG_WARNING_FLAGS "-Wno-invalid-pp-token -Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
     set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CLANG_WARNING_FLAGS}")
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    add_definitions(-DNOMINMAX) #Suppress MSVCs min/max macros
 endif()
 
 set(
