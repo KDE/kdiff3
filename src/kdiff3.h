@@ -21,21 +21,21 @@
 #include "diff.h"
 
 // include files for Qt
-#include <QSplitter>
-#include <QScrollBar>
-#include <QPointer>
+#include <QAction>
+#include <QApplication>
 #include <QEventLoop>
+#include <QPointer>
+#include <QScrollBar>
+#include <QSplitter>
+#include <QUrl>
 
 // include files for KDE
-#include <QApplication>
-#include <KMainWindow>
-#include <QAction>
-#include <QUrl>
-#include <KParts/MainWindow>
-#include <KToggleAction>
 #include <KAboutData>
-#include <KSharedConfig>
 #include <KConfigGroup>
+#include <KMainWindow>
+#include <KParts/MainWindow>
+#include <KSharedConfig>
+#include <KToggleAction>
 // forward declaration of the KDiff3 classes
 class OptionDialog;
 class FindDialog;
@@ -86,7 +86,7 @@ class ReversibleScrollBar : public QScrollBar
         else
             QScrollBar::setValue(i);
     }
-    
+
     int value() const
     {
         return m_realVal;
