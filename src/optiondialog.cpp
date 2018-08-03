@@ -516,7 +516,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
         {
             QTextCodec* c = QTextCodec::codecForMib(i);
             if(c != nullptr)
-                names[QString(c->name()).toUpper()] = c;
+                names[QString(QLatin1String(c->name())).toUpper()] = c;
         }
 
         std::map<QString, QTextCodec*>::iterator it;
@@ -532,18 +532,19 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
     {
         if(c != nullptr)
         {
+            QLatin1String codecName=QLatin1String(c->name());
             for(int i = 0; i < m_codecVec.size(); ++i)
             {
                 if(c == m_codecVec[i])
                     return; // don't insert any codec twice
             }
-            addItem(visibleCodecName.isEmpty() ? QString(c->name()) : visibleCodecName + " (" + c->name() + ")", (int)m_codecVec.size());
+            addItem(visibleCodecName.isEmpty() ? codecName : visibleCodecName + " (" + codecName + ")", (int)m_codecVec.size());
             m_codecVec.push_back(c);
         }
     }
     void setToDefault() override
     {
-        QString defaultName = QTextCodec::codecForLocale()->name();
+        QString defaultName = QLatin1String(QTextCodec::codecForLocale()->name());
         for(int i = 0; i < count(); ++i)
         {
             if(defaultName == itemText(i) &&
@@ -584,14 +585,14 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
     }
     void write(ValueMap* config) override
     {
-        if(m_ppVarCodec != nullptr) config->writeEntry(m_saveName, QString((*m_ppVarCodec)->name()));
+        if(m_ppVarCodec != nullptr) config->writeEntry(m_saveName, (const char*)(*m_ppVarCodec)->name());
     }
     void read(ValueMap* config) override
     {
-        QString codecName = config->readEntry(m_saveName, QString(m_codecVec[currentIndex()]->name()));
+        QString codecName = config->readEntry(m_saveName, (const char*)m_codecVec[currentIndex()]->name());
         for(int i = 0; i < m_codecVec.size(); ++i)
         {
-            if(codecName == m_codecVec[i]->name())
+            if(codecName == QLatin1String(m_codecVec[i]->name()))
             {
                 setCurrentIndex(i);
                 if(m_ppVarCodec != nullptr) *m_ppVarCodec = m_codecVec[i];
@@ -606,15 +607,15 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
     int m_preservedVal;
 };
 
-OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent, char* name) : //    KPageDialog( IconList, i18n("Configure"), Help|Default|Apply|Ok|Cancel,
+OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent, QString *name) : //    KPageDialog( IconList, i18n("Configure"), Help|Default|Apply|Ok|Cancel,
                                                                                       //                 Ok, parent, name, true /*modal*/, true )
                                                                                       KPageDialog(parent)
 {
     setFaceType(List);
     setWindowTitle(i18n("Configure"));
     setStandardButtons(QDialogButtonBox::Help | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Apply | QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    // TODO KF5 necessary?  setDefaultButton( Ok );
-    setObjectName(name);
+    
+    setObjectName(*name);
     setModal(true);
 
     //showButtonSeparator( true );
@@ -1050,8 +1051,8 @@ void OptionDialog::setupMergePage(void)
     OptionComboBox* pWhiteSpace2FileMergeDefault = new OptionComboBox(0, "WhiteSpace2FileMergeDefault", &m_options.m_whiteSpace2FileMergeDefault, page, this);
     gbox->addWidget(pWhiteSpace2FileMergeDefault, line, 1);
     pWhiteSpace2FileMergeDefault->insertItem(0, i18n("Manual Choice"));
-    pWhiteSpace2FileMergeDefault->insertItem(1, "A");
-    pWhiteSpace2FileMergeDefault->insertItem(2, "B");
+    pWhiteSpace2FileMergeDefault->insertItem(1, i18n("A"));
+    pWhiteSpace2FileMergeDefault->insertItem(2, i18n("B"));
     label->setToolTip(i18n(
         "Allow the merge algorithm to automatically select an input for "
         "white-space-only changes."));
@@ -1062,8 +1063,8 @@ void OptionDialog::setupMergePage(void)
     OptionComboBox* pWhiteSpace3FileMergeDefault = new OptionComboBox(0, "WhiteSpace3FileMergeDefault", &m_options.m_whiteSpace3FileMergeDefault, page, this);
     gbox->addWidget(pWhiteSpace3FileMergeDefault, line, 1);
     pWhiteSpace3FileMergeDefault->insertItem(0, i18n("Manual Choice"));
-    pWhiteSpace3FileMergeDefault->insertItem(1, "A");
-    pWhiteSpace3FileMergeDefault->insertItem(2, "B");
+    pWhiteSpace3FileMergeDefault->insertItem(1, i18n("A"));
+    pWhiteSpace3FileMergeDefault->insertItem(2, i18n("B"));
     pWhiteSpace3FileMergeDefault->insertItem(3, "C");
     label->setToolTip(i18n(
         "Allow the merge algorithm to automatically select an input for "

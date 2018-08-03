@@ -179,7 +179,7 @@ DiffTextWindow::DiffTextWindow(
     setAcceptDrops(true);
 
     d->m_pOptions = pOptions;
-    init(nullptr, nullptr, d->m_eLineEndStyle, nullptr, 0, nullptr, nullptr, false);
+    init(QString(""), nullptr, d->m_eLineEndStyle, nullptr, 0, nullptr, nullptr, false);
 
     setMinimumSize(QSize(20, 20));
 
@@ -1855,9 +1855,9 @@ void DiffTextWindowFrame::init()
     {
         QString s = QDir::toNativeSeparators(pDTW->d->m_filename);
         d->m_pFileSelection->setText(s);
-        QString winId = pDTW->d->m_winIdx == 1 ? (pDTW->d->m_bTriple ? "A (Base)" : "A") : (pDTW->d->m_winIdx == 2 ? "B" : "C");
+        QString winId = pDTW->d->m_winIdx == 1 ? (pDTW->d->m_bTriple ? i18n("A (Base)") : i18n("A")) : (pDTW->d->m_winIdx == 2 ? i18n("B") : i18n("C"));
         d->m_pLabel->setText(winId + ":");
-        d->m_pEncoding->setText(i18n("Encoding: %1", pDTW->d->m_pTextCodec != nullptr ? pDTW->d->m_pTextCodec->name() : QString()));
+        d->m_pEncoding->setText(i18n("Encoding: %1", pDTW->d->m_pTextCodec != nullptr ? QLatin1String(pDTW->d->m_pTextCodec->name()) : QString()));
         d->m_pLineEndStyle->setText(i18n("Line end style: %1", pDTW->d->m_eLineEndStyle == eLineEndStyleDos ? i18n("DOS") : i18n("Unix")));
     }
 }
@@ -2048,7 +2048,8 @@ void EncodingLabel::insertCodec(const QString& visibleCodecName, QTextCodec* pCo
     if(pCodec != nullptr && !codecEnumList.contains(CodecMIBEnum))
     {
         QAction* pAction = new QAction(pMenu); // menu takes ownership, so deleting the menu deletes the action too.
-        pAction->setText(visibleCodecName.isEmpty() ? QString(pCodec->name()) : visibleCodecName + " (" + pCodec->name() + ")");
+        QLatin1String codecName(pCodec->name());
+        pAction->setText(visibleCodecName.isEmpty() ? codecName : visibleCodecName + QLatin1String(" (") + codecName + QLatin1String(")"));
         pAction->setData(CodecMIBEnum);
         pAction->setCheckable(true);
         if(currentTextCodecEnum == CodecMIBEnum)
@@ -2067,7 +2068,7 @@ void EncodingLabel::slotEncodingChanged()
         QTextCodec* pCodec = QTextCodec::codecForMib(pAction->data().toInt());
         if(pCodec != nullptr)
         {
-            QString s(pCodec->name());
+            QString s(QLatin1String(pCodec->name()));
             QStringList& recentEncodings = m_pOptions->m_recentEncodings;
             if(!recentEncodings.contains(s) && s != "UTF-8" && s != "System")
             {

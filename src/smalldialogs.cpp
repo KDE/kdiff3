@@ -120,15 +120,15 @@ OpenDialog::OpenDialog(
     hl->addWidget(button);
 
     QMenu* m = new QMenu(this);
-    m->addAction(i18n("Swap %1<->%2", QString("A"), QString("B")));
-    m->addAction(i18n("Swap %1<->%2", QString("B"), QString("C")));
-    m->addAction(i18n("Swap %1<->%2", QString("C"), QString("A")));
-    m->addAction(i18n("Copy %1->Output", QString("A")));
-    m->addAction(i18n("Copy %1->Output", QString("B")));
-    m->addAction(i18n("Copy %1->Output", QString("C")));
-    m->addAction(i18n("Swap %1<->Output", QString("A")));
-    m->addAction(i18n("Swap %1<->Output", QString("B")));
-    m->addAction(i18n("Swap %1<->Output", QString("C")));
+    m->addAction(i18n("Swap %1<->%2", i18n("A"), i18n("B")));
+    m->addAction(i18n("Swap %1<->%2", i18n("B"), i18n("C")));
+    m->addAction(i18n("Swap %1<->%2", i18n("C"), i18n("A")));
+    m->addAction(i18n("Copy %1->Output", i18n("A")));
+    m->addAction(i18n("Copy %1->Output", i18n("B")));
+    m->addAction(i18n("Copy %1->Output", i18n("C")));
+    m->addAction(i18n("Swap %1<->Output", i18n("A")));
+    m->addAction(i18n("Swap %1<->Output", i18n("B")));
+    m->addAction(i18n("Swap %1<->Output", i18n("C")));
     connect(m, &QMenu::triggered, this, &OpenDialog::slotSwapCopyNames);
     button->setMenu(m);
 

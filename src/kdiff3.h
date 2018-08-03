@@ -333,7 +333,7 @@ class KDiff3App : public QSplitter
 
    KActionCollection* actionCollection();
    QStatusBar*        statusBar();
-   KToolBar*          toolBar(const char*);
+   KToolBar*          toolBar(QLatin1String);
    KDiff3Part*        m_pKDiff3Part;
    KParts::MainWindow*       m_pKDiff3Shell;
    bool m_bAutoFlag;

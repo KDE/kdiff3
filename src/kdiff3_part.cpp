@@ -37,17 +37,17 @@
 
 static KAboutData createAboutData()
 {
-    QByteArray appVersion = QByteArray(KDIFF3_VERSION_STRING);
+    QString appVersion = QString(KDIFF3_VERSION_STRING);
     if(sizeof(void*) == 8)
         appVersion += " (64 bit)";
     else if(sizeof(void*) == 4)
         appVersion += " (32 bit)";
 
-    KAboutData aboutData("kdiff3part", i18n("KDiff3 Part"),
+    KAboutData aboutData(QLatin1String("kdiff3part"), i18n("KDiff3 Part"),
                          appVersion, i18n("A KPart to display SVG images"),
                          KAboutLicense::GPL_V2,
                          i18n("Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"));
-    aboutData.addAuthor(i18n("Joachim Eibl"), QString(), QByteArray("joachim.eibl at gmx.de"));
+    aboutData.addAuthor(i18n("Joachim Eibl"), QString(), QString("joachim.eibl at gmx.de"));
     return aboutData;
 }
 
@@ -59,7 +59,7 @@ KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantLis
 {
     //set AboutData
     setComponentData(createAboutData());
-    const QString widgetName = args[0].toString().toUtf8();
+    const QString widgetName = args[0].toString();
 
     // this should be your custom internal widget
     m_widget = new KDiff3App(parentWidget, widgetName, this);

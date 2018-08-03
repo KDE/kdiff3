@@ -26,7 +26,7 @@ namespace KDiff3 {
      const QObject* receiver, 
      const char* slot, 
      KActionCollection* ac, 
-     const char* actionName);
+     const QString &actionName);
    
    template <>
    inline QAction * createAction<QAction>( 
@@ -34,7 +34,7 @@ namespace KDiff3 {
                    const QObject* receiver, 
                    const char* slot, 
                    KActionCollection* ac, 
-                   const char* actionName)    {
+                   const QString &actionName)    {
       Q_ASSERT( ac != nullptr );
       QAction * theAction = ac->addAction( actionName );
       theAction->setText( text );
@@ -47,7 +47,7 @@ namespace KDiff3 {
                    const QObject* receiver, 
                    const char* slot, 
                    KActionCollection* ac, 
-                   const char* actionName)    {
+                   const QString &actionName)    {
       Q_ASSERT( ac != nullptr );
       KToggleAction* theAction = new KToggleAction(ac);
       ac->addAction( actionName, theAction );
@@ -63,7 +63,7 @@ namespace KDiff3 {
      const QObject* receiver, 
      const char* slot, 
      KActionCollection* ac, 
-     const char* actionName) 
+     const QString &actionName) 
    {
       T* theAction = createAction<T>( text, receiver, slot, ac, actionName );
       ac->setDefaultShortcut(theAction, shortcut);
@@ -76,7 +76,7 @@ namespace KDiff3 {
       const QObject* receiver,
       const char* slot,
       KActionCollection* ac,
-      const char* actionName)
+      const QString &actionName)
    {
       T* theAction = createAction<T>( text, receiver, slot, ac, actionName );
       theAction->setIcon( icon );
@@ -90,7 +90,7 @@ namespace KDiff3 {
       const QObject* receiver,
       const char* slot,
       KActionCollection* ac,
-      const char* actionName)
+      const QString &actionName)
    {
       T* theAction = createAction<T>( text, receiver, slot, ac, actionName );
       theAction->setIcon( icon );
@@ -105,7 +105,7 @@ namespace KDiff3 {
      const QObject* receiver,
      const char* slot,
      KActionCollection* ac,
-     const char* actionName)
+     const QString &actionName)
    {
       T* theAction = createAction<T>( text, shortcut, receiver, slot, ac, actionName );
       theAction->setIcon( icon );
@@ -120,7 +120,7 @@ namespace KDiff3 {
          const QObject* receiver,
          const char* slot,
          KActionCollection* ac,
-         const char* actionName)
+         const QString &actionName)
    {
       T* theAction = createAction<T>( text, shortcut, receiver, slot, ac, actionName );
       theAction->setIcon( icon );

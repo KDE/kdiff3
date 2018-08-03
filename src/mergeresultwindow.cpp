@@ -906,17 +906,17 @@ void MergeResultWindow::showNrOfConflicts()
     else
     {
         if(m_pTotalDiffStatus->bBinaryAEqB)
-            totalInfo += i18n("Files %1 and %2 are binary equal.\n", QString("A"), QString("B"));
+            totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("B"));
         else if(m_pTotalDiffStatus->bTextAEqB)
-            totalInfo += i18n("Files %1 and %2 have equal text.\n", QString("A"), QString("B"));
+            totalInfo += i18n("Files %1 and %2 have equal text.\n", i18n("A"), i18n("B"));
         if(m_pTotalDiffStatus->bBinaryAEqC)
-            totalInfo += i18n("Files %1 and %2 are binary equal.\n", QString("A"), QString("C"));
+            totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("C"));
         else if(m_pTotalDiffStatus->bTextAEqC)
-            totalInfo += i18n("Files %1 and %2 have equal text.\n", QString("A"), QString("C"));
+            totalInfo += i18n("Files %1 and %2 have equal text.\n", i18n("A"), i18n("C"));
         if(m_pTotalDiffStatus->bBinaryBEqC)
-            totalInfo += i18n("Files %1 and %2 are binary equal.\n", QString("B"), QString("C"));
+            totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("B"), i18n("C"));
         else if(m_pTotalDiffStatus->bTextBEqC)
-            totalInfo += i18n("Files %1 and %2 have equal text.\n", QString("B"), QString("C"));
+            totalInfo += i18n("Files %1 and %2 have equal text.\n", i18n("B"), i18n("C"));
     }
 
     int nrOfUnsolvedConflicts = getNrOfUnsolvedConflicts();
@@ -1215,7 +1215,7 @@ void MergeResultWindow::collectHistoryInformation(
     int src, Diff3LineList::const_iterator iHistoryBegin, Diff3LineList::const_iterator iHistoryEnd,
     HistoryMap& historyMap,
     std::list<HistoryMap::iterator>& hitList // list of iterators
-    )
+)
 {
     std::list<HistoryMap::iterator>::iterator itHitListFront = hitList.begin();
     Diff3LineList::const_iterator id3l = iHistoryBegin;
@@ -1626,14 +1626,16 @@ void MergeResultWindow::timerEvent(QTimerEvent*)
 
 QString MergeResultWindow::MergeEditLine::getString(const MergeResultWindow* mrw)
 {
-    if(isRemoved()) {
+    if(isRemoved())
+    {
         return QString();
     }
 
     if(!isModified())
     {
         int src = m_src;
-        if(src == 0) {
+        if(src == 0)
+        {
             return QString();
         }
         const Diff3Line& d3l = *m_id3l;
@@ -1658,7 +1660,7 @@ QString MergeResultWindow::MergeEditLine::getString(const MergeResultWindow* mrw
     {
         return m_str;
     }
-    return nullptr;
+    return QString();
 }
 
 /// Converts the cursor-posOnScreen into a text index, considering tabulators.
@@ -1705,7 +1707,7 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(int li
 {
     // tabs
     QTextOption textOption;
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
     textOption.setTabStop(QFontMetricsF(font()).width(' ') * m_pOptions->m_tabSize);
 #else
     textOption.setTabStopDistance(QFontMetricsF(font()).width(' ') * m_pOptions->m_tabSize);
@@ -1776,11 +1778,11 @@ void MergeResultWindow::writeLine(
     if(bUserModified)
         srcName = "m";
     else if(srcSelect == A && mergeDetails != eNoChange)
-        srcName = "A";
+        srcName = i18n("A");
     else if(srcSelect == B)
-        srcName = "B";
+        srcName = i18n("B");
     else if(srcSelect == C)
-        srcName = "C";
+        srcName = i18n("C");
 
     if(rangeMark & 4)
     {
@@ -2277,7 +2279,8 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     bool bShift = (e->QInputEvent::modifiers() & Qt::ShiftModifier) != 0;
 #ifdef Q_OS_WIN
     bool bAlt = (e->QInputEvent::modifiers() & Qt::AltModifier) != 0;
-    if(bCtrl && bAlt) {
+    if(bCtrl && bAlt)
+    {
         bCtrl = false;
         bAlt = false;
     } // AltGr-Key pressed.
@@ -2375,14 +2378,18 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
         { // calc last indentation
             MergeLineList::iterator mlIt1 = mlIt;
             MergeEditLineList::iterator melIt1 = melIt;
-            for(;;) {
+            for(;;)
+            {
                 const QString s = melIt1->getString(this);
-                if(!s.isEmpty()) {
+                if(!s.isEmpty())
+                {
                     int i;
-                    for(i = 0; i < s.length(); ++i) {
+                    for(i = 0; i < s.length(); ++i)
+                    {
                         if(s[i] != ' ' && s[i] != '\t') break;
                     }
-                    if(i < s.length()) {
+                    if(i < s.length())
+                    {
                         indentation = s.left(i);
                         break;
                     }
@@ -2426,13 +2433,15 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
         break;
     case Qt::Key_Home:
         x = 0;
-        if(bCtrl) {
+        if(bCtrl)
+        {
             y = 0;
         }
         break; // cursor movement
     case Qt::Key_End:
         x = INT_MAX;
-        if(bCtrl) {
+        if(bCtrl)
+        {
             y = INT_MAX;
         }
         break;
@@ -2444,7 +2453,8 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             if(!bCtrl)
             {
                 int newX = textLayoutOrig.previousCursorPosition(x);
-                if(newX == x && y > 0) {
+                if(newX == x && y > 0)
+                {
                     --y;
                     x = INT_MAX;
                 }
@@ -2474,7 +2484,8 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             if(!bCtrl)
             {
                 int newX = textLayoutOrig.nextCursorPosition(x);
-                if(newX == x && y < m_totalSize - 1) {
+                if(newX == x && y < m_totalSize - 1)
+                {
                     ++y;
                     x = 0;
                 }
@@ -2502,25 +2513,29 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
         break;
 
     case Qt::Key_Up:
-        if(!bCtrl) {
+        if(!bCtrl)
+        {
             --y;
             bYMoveKey = true;
         }
         break;
     case Qt::Key_Down:
-        if(!bCtrl) {
+        if(!bCtrl)
+        {
             ++y;
             bYMoveKey = true;
         }
         break;
     case Qt::Key_PageUp:
-        if(!bCtrl) {
+        if(!bCtrl)
+        {
             y -= getNofVisibleLines();
             bYMoveKey = true;
         }
         break;
     case Qt::Key_PageDown:
-        if(!bCtrl) {
+        if(!bCtrl)
+        {
             y += getNofVisibleLines();
             bYMoveKey = true;
         }
@@ -2747,7 +2762,7 @@ void MergeResultWindow::deleteSelection()
         return;
     }
     Q_ASSERT(m_selection.isValidFirstLine());
-    
+
     setModified();
 
     int line = 0;
@@ -3057,7 +3072,7 @@ Overview::Overview(Options* pOptions)
     m_bPaintingAllowed = false;
     m_firstLine = 0;
     m_pageHeight = 0;
-    
+
     setFixedWidth(20);
 }
 
@@ -3406,21 +3421,21 @@ void WindowTitleWidget::setLineEndStyles(e_LineEndStyle eLineEndStyleA, e_LineEn
     m_pLineEndStyleSelector->clear();
     QString dosUsers;
     if(eLineEndStyleA == eLineEndStyleDos)
-        dosUsers += "A";
+        dosUsers += i18n("A");
     if(eLineEndStyleB == eLineEndStyleDos)
-        dosUsers += (dosUsers.isEmpty() ? "" : ", ") + QString("B");
+        dosUsers += QLatin1String(dosUsers.isEmpty() ? "" : ", ") + i18n("B");
     if(eLineEndStyleC == eLineEndStyleDos)
-        dosUsers += (dosUsers.isEmpty() ? "" : ", ") + QString("C");
+        dosUsers += QLatin1String(dosUsers.isEmpty() ? "" : ", ") + i18n("C");
     QString unxUsers;
     if(eLineEndStyleA == eLineEndStyleUnix)
-        unxUsers += "A";
+        unxUsers += i18n("A");
     if(eLineEndStyleB == eLineEndStyleUnix)
-        unxUsers += (unxUsers.isEmpty() ? "" : ", ") + QString("B");
+        unxUsers += QLatin1String(unxUsers.isEmpty() ? "" : ", ") + i18n("B");
     if(eLineEndStyleC == eLineEndStyleUnix)
-        unxUsers += (unxUsers.isEmpty() ? "" : ", ") + QString("C");
+        unxUsers += QLatin1String(unxUsers.isEmpty() ? "" : ", ") + i18n("C");
 
-    m_pLineEndStyleSelector->addItem(i18n("Unix") + (unxUsers.isEmpty() ? QString("") : " (" + unxUsers + ")"));
-    m_pLineEndStyleSelector->addItem(i18n("DOS") + (dosUsers.isEmpty() ? QString("") : " (" + dosUsers + ")"));
+    m_pLineEndStyleSelector->addItem(i18n("Unix") + (unxUsers.isEmpty() ? QString("") : QLatin1String(" (") + unxUsers + QLatin1String(")")));
+    m_pLineEndStyleSelector->addItem(i18n("DOS") + (dosUsers.isEmpty() ? QString("") : QLatin1String(" (") + dosUsers + QLatin1String(")")));
 
     e_LineEndStyle autoChoice = (e_LineEndStyle)m_pOptions->m_lineEndStyle;
 
@@ -3438,7 +3453,8 @@ void WindowTitleWidget::setLineEndStyles(e_LineEndStyle eLineEndStyleA, e_LineEn
         else
         {
             e_LineEndStyle c1, c2;
-            if(eLineEndStyleA == eLineEndStyleUndefined) {
+            if(eLineEndStyleA == eLineEndStyleUndefined)
+            {
                 c1 = eLineEndStyleB;
                 c2 = eLineEndStyleC;
             }
@@ -3493,7 +3509,7 @@ void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecF
     {
         QTextCodec* c = QTextCodec::codecForMib(i);
         if(c != nullptr)
-            names[QString(c->name())] = c;
+            names[QLatin1String(c->name())] = c;
     }
 
     if(pCodecForA)
@@ -3532,7 +3548,7 @@ QTextCodec* WindowTitleWidget::getEncoding()
 
 void WindowTitleWidget::setEncoding(QTextCodec* pEncoding)
 {
-    int idx = m_pEncodingSelector->findText(pEncoding->name());
+    int idx = m_pEncodingSelector->findText(QLatin1String(pEncoding->name()));
     if(idx >= 0)
         m_pEncodingSelector->setCurrentIndex(idx);
 }

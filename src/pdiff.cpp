@@ -414,8 +414,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         if(caption.isEmpty() && (!f1.isEmpty() || !f2.isEmpty() || !f3.isEmpty()))
         {
             caption = (f1.isEmpty() ? QString("") : f1);
-            caption += QString(caption.isEmpty() || f2.isEmpty() ? "" : " <-> ") + (f2.isEmpty() ? QString("") : f2);
-            caption += QString(caption.isEmpty() || f3.isEmpty() ? "" : " <-> ") + (f3.isEmpty() ? QString("") : f3);
+            caption += QLatin1String(caption.isEmpty() || f2.isEmpty() ? "" : " <-> ") + (f2.isEmpty() ? QString("") : f2);
+            caption += QLatin1String(caption.isEmpty() || f3.isEmpty() ? "" : " <-> ") + (f3.isEmpty() ? QString("") : f3);
         }
 
         m_pKDiff3Shell->setWindowTitle(caption.isEmpty() ? QString("KDiff3") : caption + QString(" - KDiff3"));
@@ -780,17 +780,17 @@ void KDiff3App::slotFinishMainInit()
             else
             {
                 if(pTotalDiffStatus->bBinaryAEqB)
-                    totalInfo += i18n("Files %1 and %2 are binary equal.\n", QString("A"), QString("B"));
+                    totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("B"));
                 else if(pTotalDiffStatus->bTextAEqB)
-                    totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", QString("A"), QString("B"));
+                    totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", i18n("A"), i18n("B"));
                 if(pTotalDiffStatus->bBinaryAEqC)
-                    totalInfo += i18n("Files %1 and %2 are binary equal.\n", QString("A"), QString("C"));
+                    totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("C"));
                 else if(pTotalDiffStatus->bTextAEqC)
-                    totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", QString("A"), QString("C"));
+                    totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", i18n("A"), i18n("C"));
                 if(pTotalDiffStatus->bBinaryBEqC)
-                    totalInfo += i18n("Files %1 and %2 are binary equal.\n", QString("B"), QString("C"));
+                    totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("B"), i18n("C"));
                 else if(pTotalDiffStatus->bTextBEqC)
-                    totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", QString("B"), QString("C"));
+                    totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", i18n("B"), i18n("C"));
             }
 
             if(!totalInfo.isEmpty())
@@ -808,11 +808,11 @@ void KDiff3App::slotFinishMainInit()
         {
             QString files;
             if(m_sd1.isIncompleteConversion())
-                files += "A";
+                files += i18n("A");
             if(m_sd2.isIncompleteConversion())
-                files += files.isEmpty() ? "B" : ", B";
+                files += files.isEmpty() ? i18n("B") : i18n(", B");
             if(m_sd3.isIncompleteConversion())
-                files += files.isEmpty() ? "C" : ", C";
+                files += files.isEmpty() ? i18n("C") : i18n(", C");
 
             KMessageBox::information(this, i18n("Some input characters could not be converted to valid unicode.\n"
                                                 "You might be using the wrong codec. (e.g. UTF-8 for non UTF-8 files).\n"
@@ -1896,11 +1896,11 @@ bool KDiff3App::improveFilenames(bool bCreateNewInstance)
             if(bSuccess)
             {
                 m_sd1.reset();
-                if(m_pDiffTextWindow1 != nullptr) m_pDiffTextWindow1->init(nullptr, nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr, false);
+                if(m_pDiffTextWindow1 != nullptr) m_pDiffTextWindow1->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr, false);
                 m_sd2.reset();
-                if(m_pDiffTextWindow2 != nullptr) m_pDiffTextWindow2->init(nullptr, nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr, false);
+                if(m_pDiffTextWindow2 != nullptr) m_pDiffTextWindow2->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr, false);
                 m_sd3.reset();
-                if(m_pDiffTextWindow3 != nullptr) m_pDiffTextWindow3->init(nullptr, nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr, false);
+                if(m_pDiffTextWindow3 != nullptr) m_pDiffTextWindow3->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr, false);
             }
             slotUpdateAvailabilities();
             return bSuccess;

@@ -197,22 +197,22 @@ static int num(QString& s, int idx)
 
 void ValueMap::writeEntry(const QString& k, const QFont& v)
 {
-    m_map[k] = v.family() + "," + QString::number(v.pointSize()) + "," + (v.bold() ? "bold" : "normal");
+    m_map[k] = v.family() + QLatin1String(",") + QString::number(v.pointSize()) + QLatin1String(",") + (v.bold() ? QLatin1String("bold") : QLatin1String("normal"));
 }
 
 void ValueMap::writeEntry(const QString& k, const QColor& v)
 {
-    m_map[k] = numStr(v.red()) + "," + numStr(v.green()) + "," + numStr(v.blue());
+    m_map[k] = numStr(v.red()) + QLatin1String(",") + numStr(v.green()) + QLatin1String(",") + numStr(v.blue());
 }
 
 void ValueMap::writeEntry(const QString& k, const QSize& v)
 {
-    m_map[k] = numStr(v.width()) + "," + numStr(v.height());
+    m_map[k] = numStr(v.width()) + QLatin1String(",") + numStr(v.height());
 }
 
 void ValueMap::writeEntry(const QString& k, const QPoint& v)
 {
-    m_map[k] = numStr(v.x()) + "," + numStr(v.y());
+    m_map[k] = numStr(v.x()) + QLatin1String(",") + numStr(v.y());
 }
 
 void ValueMap::writeEntry(const QString& k, int v)
@@ -232,7 +232,7 @@ void ValueMap::writeEntry(const QString& k, const QString& v)
 
 void ValueMap::writeEntry(const QString& k, const char* v)
 {
-    m_map[k] = v;
+    m_map[k] = QLatin1String(v);
 }
 
 void ValueMap::writeEntry(const QString& k, const QStringList& v)

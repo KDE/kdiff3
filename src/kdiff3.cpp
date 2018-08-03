@@ -63,7 +63,7 @@
 #include "smalldialogs.h"
 
 #define ID_STATUS_MSG 1
-#define MAIN_TOOLBAR_NAME "mainToolBar"
+#define MAIN_TOOLBAR_NAME QLatin1String("mainToolBar")
 
 KActionCollection* KDiff3App::actionCollection()
 {
@@ -81,13 +81,12 @@ QStatusBar* KDiff3App::statusBar()
         return m_pKDiff3Shell->statusBar();
 }
 
-KToolBar* KDiff3App::toolBar(const char* toolBarId)
+KToolBar* KDiff3App::toolBar(const QLatin1String toolBarId)
 {
     if(m_pKDiff3Shell == nullptr)
         return nullptr;
     else
         return m_pKDiff3Shell->toolBar(toolBarId);
-    //return m_pKDiff3Shell->toolBar();
 }
 
 bool KDiff3App::isPart()
@@ -360,8 +359,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDif
     m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());
 
     delete KDiff3Shell::getParser();
-    //if( args != 0 )  args->clear(); // Free up some memory.
-
+    
     if(m_pKDiff3Shell == nullptr) {
         completeInit();
     }
@@ -524,7 +522,7 @@ void KDiff3App::initActions(KActionCollection* ac)
     fileOpen = KStandardAction::open(this, SLOT(slotFileOpen()), ac);
     fileOpen->setStatusTip(i18n("Opens documents for comparison..."));
 
-    fileReload = KDiff3::createAction<QAction>(i18n("Reload"), QKeySequence(QKeySequence::Refresh), this, SLOT(slotReload()), ac, "file_reload");
+    fileReload = KDiff3::createAction<QAction>(i18n("Reload"), QKeySequence(QKeySequence::Refresh), this, SLOT(slotReload()), ac, QLatin1String("file_reload"));
 
     fileSave = KStandardAction::save(this, SLOT(slotFileSave()), ac);
     fileSave->setStatusTip(i18n("Saves the merge result. All conflicts must be solved!"));
@@ -755,7 +753,7 @@ void KDiff3App::slotFileSaveAs()
 {
     slotStatusMsg(i18n("Saving file with a new filename..."));
 
-    QString s = QFileDialog::getSaveFileUrl(this, i18n("Save As..."), QUrl::fromLocalFile(QDir::currentPath()), nullptr).url(QUrl::PreferLocalFile);
+    QString s = QFileDialog::getSaveFileUrl(this, i18n("Save As..."), QUrl::fromLocalFile(QDir::currentPath())).url(QUrl::PreferLocalFile);
     if(!s.isEmpty()) {
         m_outputFilename = s;
         m_pMergeResultWindowTitle->setFileName(m_outputFilename);

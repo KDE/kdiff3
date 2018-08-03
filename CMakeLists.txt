@@ -25,7 +25,6 @@ include(FeatureSummary)
 include(ECMInstallIcons)
 include(ECMAddAppIcon)
 include(ECMSetupVersion)
-# include(GenerateExportHeader)
 
 ecm_setup_version(1.7.90 VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DIR}/src/version.h)
 
@@ -55,8 +54,8 @@ find_package(
 set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::Crash KF5::IconThemes )
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    # I don't need warnings about wired things in comments.
-    set(CLANG_WARNING_FLAGS "-Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing")
+    #Adjust clang specfic warnings
+    set(CLANG_WARNING_FLAGS "-Wno-invalid-pp-token -Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
     set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CLANG_WARNING_FLAGS}")
 endif()
@@ -71,11 +70,8 @@ set(
 add_definitions(
     -DQT_DEPRECATED_WARNINGS #Get warnings from QT about deprecated functions.
     -DQT_NO_URL_CAST_FROM_STRING #implict casting from string to url does not always behave as you might think
+    -DQT_RESTRICTED_CAST_FROM_ASCII #casting from char*/QByteArray to QString can produce unexpected results for non-latin characters.
 )
-#remove unnneeded errors
-remove_definitions(
-    -DQT_NO_CAST_FROM_ASCII #While a good idea in gerneral this triggers for many simple non-translatable strings
-    )
 
 add_subdirectory(src)
 add_subdirectory(doc)

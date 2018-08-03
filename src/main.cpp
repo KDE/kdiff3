@@ -75,11 +75,11 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
             if(!(*i).isEmpty())
             {
                 if(i->length() == 1) {
-                    cmdLineParser->addOption(QCommandLineOption(QStringList() << i->toLatin1() << QLatin1String("ignore"), i18n("Ignored. (User defined.)")));
+                    cmdLineParser->addOption(QCommandLineOption(QStringList() << *i << QLatin1String("ignore"), i18n("Ignored. (User defined.)")));
                 }
                 else
                 {
-                    cmdLineParser->addOption(QCommandLineOption(QStringList() << i->toLatin1(), i18n("Ignored. (User defined.)")));
+                    cmdLineParser->addOption(QCommandLineOption(QStringList() << *i, i18n("Ignored. (User defined.)")));
                 }
             }
         }
@@ -103,22 +103,24 @@ static bool isOptionUsed(const QString& s, int argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
+    const QLatin1String appName("kdiff3");
+
     QApplication app(argc, argv); // KAboutData and QCommandLineParser depend on this being setup.
-    KLocalizedString::setApplicationDomain("kdiff3");
+    KLocalizedString::setApplicationDomain(appName.data());
 
     KCrash::initialize();
 
-    const QByteArray& appName = QByteArray::fromRawData("kdiff3", 6);
     const QString i18nName = i18n("KDiff3");
-    QByteArray appVersion = QByteArray::fromRawData(KDIFF3_VERSION_STRING, sizeof(KDIFF3_VERSION_STRING));
+    QString appVersion(KDIFF3_VERSION_STRING);
+
     if(sizeof(void*) == 8)
-        appVersion += " (64 bit)";
+        appVersion += i18n(" (64 bit)");
     else if(sizeof(void*) == 4)
-        appVersion += " (32 bit)";
+        appVersion += i18n(" (32 bit)");
     const QString description = i18n("Tool for Comparison and Merge of Files and Directories");
     const QString copyright = i18n("(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port");
-    const QString& homePage = QStringLiteral("");
-    const QString& bugsAddress = QStringLiteral("reeves.87""@""gmail.com");
+    const QString homePage = QStringLiteral("");
+    const QString bugsAddress = QStringLiteral("reeves.87""@""gmail.com");
 
     KAboutData aboutData(appName, i18nName,
                          appVersion, description, KAboutLicense::GPL_V2, copyright, description,
@@ -177,7 +179,7 @@ int main(int argc, char* argv[])
         QMessageBox::information(nullptr, aboutData.displayName(),
                                  aboutData.displayName() + ' ' + aboutData.version());
 #if !defined(Q_OS_WIN) 
-        printf("%s %s\n", appName.constData(), appVersion.constData());
+        printf("%s %s\n", appName.data(), appVersion.toLocal8Bit().constData());
 #endif
         exit(0);
     }

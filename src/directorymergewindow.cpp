@@ -512,11 +512,11 @@ QVariant DirectoryMergeWindow::Data::data(const QModelIndex& index, int role) co
             case s_NameCol:
                 return QFileInfo(pMFI->subPath()).fileName();
             case s_ACol:
-                return "A";
+                return i18n("A");
             case s_BCol:
-                return "B";
+                return i18n("B");
             case s_CCol:
-                return "C";
+                return i18n("C");
             //case s_OpCol:       return i18n("Operation");
             //case s_OpStatusCol: return i18n("Status");
             case s_UnsolvedCol:
@@ -563,13 +563,13 @@ QVariant DirectoryMergeWindow::Data::data(const QModelIndex& index, int role) co
                     return i18n("Merge to A & B");
                     break;
                 case eCopyAToDest:
-                    return "A";
+                    return i18n("A");
                     break;
                 case eCopyBToDest:
-                    return "B";
+                    return i18n("B");
                     break;
                 case eCopyCToDest:
-                    return "C";
+                    return i18n("C");
                     break;
                 case eDeleteFromDest:
                     return i18n("Delete (if exists)");
@@ -654,11 +654,11 @@ QVariant DirectoryMergeWindow::Data::headerData(int section, Qt::Orientation ori
         case s_NameCol:
             return i18n("Name");
         case s_ACol:
-            return "A";
+            return i18n("A");
         case s_BCol:
-            return "B";
+            return i18n("B");
         case s_CCol:
-            return "C";
+            return i18n("C");
         case s_OpCol:
             return i18n("Operation");
         case s_OpStatusCol:
@@ -3295,19 +3295,19 @@ DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent)
 
     int line = 0;
 
-    m_pA = new QLabel("A", this);
+    m_pA = new QLabel(i18n("A"), this);
     grid->addWidget(m_pA, line, 0);
     m_pInfoA = new QLabel(this);
     grid->addWidget(m_pInfoA, line, 1);
     ++line;
     
-    m_pB = new QLabel("B", this);
+    m_pB = new QLabel(i18n("B"), this);
     grid->addWidget(m_pB, line, 0);
     m_pInfoB = new QLabel(this);
     grid->addWidget(m_pInfoB, line, 1);
     ++line;
     
-    m_pC = new QLabel("C", this);
+    m_pC = new QLabel(i18n("C"), this);
     grid->addWidget(m_pC, line, 0);
     m_pInfoC = new QLabel(this);
     grid->addWidget(m_pInfoC, line, 1);
@@ -3348,15 +3348,15 @@ static void addListViewItem(QTreeWidget* pListView, const QString& dir,
         if(fi != nullptr && fi->exists())
         {
             QString dateString = fi->lastModified().toString("yyyy-MM-dd hh:mm:ss");
-
+            //TODO: Move logic to FileAccess
             new QTreeWidgetItem(
                 pListView,
-                QStringList() << dir << QString(fi->isDir() ? i18n("Dir") : i18n("File")) + (fi->isSymLink() ? "-Link" : "") << QString::number(fi->size()) << QString(fi->isReadable() ? "r" : " ") + (fi->isWritable() ? "w" : " ")
+                QStringList() << dir << QString(fi->isDir() ? i18n("Dir") : i18n("File")) + (fi->isSymLink() ? i18n("-Link") : "") << QString::number(fi->size()) << QLatin1String(fi->isReadable() ? "r" : " ") + QLatin1String(fi->isWritable() ? "w" : " ")
 #ifdef Q_OS_WIN
                               /*Future: Use GetFileAttributes()*/
                               <<
 #else
-                                                                                                                                                                   + (fi->isExecutable() ? "x" : " ")
+                                                                                                                                                                   + QLatin1String((fi->isExecutable() ? "x" : " "))
                               <<
 #endif
                     dateString << QString(fi->isSymLink() ? (" -> " + fi->readLink()) : QString("")));
@@ -3433,9 +3433,9 @@ void DirectoryMergeInfo::setInfo(
     }
 
     m_pInfoList->clear();
-    addListViewItem(m_pInfoList, "A", dirA.prettyAbsPath(), mfi.m_pFileInfoA);
-    addListViewItem(m_pInfoList, "B", dirB.prettyAbsPath(), mfi.m_pFileInfoB);
-    addListViewItem(m_pInfoList, "C", dirC.prettyAbsPath(), mfi.m_pFileInfoC);
+    addListViewItem(m_pInfoList, i18n("A"), dirA.prettyAbsPath(), mfi.m_pFileInfoA);
+    addListViewItem(m_pInfoList, i18n("B"), dirB.prettyAbsPath(), mfi.m_pFileInfoB);
+    addListViewItem(m_pInfoList, i18n("C"), dirC.prettyAbsPath(), mfi.m_pFileInfoC);
     if(!bHideDest)
     {
         FileAccess fiDest(dirDest.prettyAbsPath() + "/" + mfi.subPath(), true);
@@ -3491,7 +3491,7 @@ void DirectoryMergeWindow::slotSaveMergeState()
     //slotStatusMsg(i18n("Saving Directory Merge State ..."));
 
     //QString s = KFileDialog::getSaveUrl( QDir::currentPath(), 0, this, i18n("Save As...") ).url();
-    QString s = QFileDialog::getSaveFileName(this, i18n("Save Directory Merge State As..."), QDir::currentPath(), nullptr);
+    QString s = QFileDialog::getSaveFileName(this, i18n("Save Directory Merge State As..."), QDir::currentPath());
     if(!s.isEmpty())
     {
         d->m_dirMergeStateFilename = s;

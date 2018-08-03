@@ -336,8 +336,8 @@ void FileAccess::addPath(const QString& txt)
     }
     else
     {
-        QString slash = (txt.isEmpty() || txt[0] == '/') ? "" : "/";
-        setFile(absoluteFilePath() + slash + txt);
+        QString slash = (txt.isEmpty() || txt[0] == '/') ? QLatin1String("") : QLatin1String("/");
+            setFile(absoluteFilePath() + slash + txt);
     }
 }
 
@@ -1437,12 +1437,12 @@ void CvsIgnoreList::addEntry(const QString& pattern)
             }
             else
             {
-                m_generalPatterns.append(pattern.toLocal8Bit());
+                m_generalPatterns.append(pattern);
             }
         }
         else
         {
-            m_generalPatterns.append(pattern.toLocal8Bit());
+            m_generalPatterns.append(pattern);
         }
     }
     else
