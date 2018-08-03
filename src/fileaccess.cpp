@@ -396,20 +396,24 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
             break;
         case KIO::UDSEntry::UDS_ACCESS:
         {
+            #ifndef Q_OS_WIN
             acc = e.numberValue(f);
             d()->m_bReadable = (acc & S_IRUSR) != 0;
             m_bWritable = (acc & S_IWUSR) != 0;
             d()->m_bExecutable = (acc & S_IXUSR) != 0;
+            #endif
             break;
         }
         case KIO::UDSEntry::UDS_FILE_TYPE:
         {
+            #ifndef Q_OS_WIN
             fileType = e.numberValue(f);
             m_bDir = (fileType & S_IFMT) == S_IFDIR;
             m_bFile = (fileType & S_IFMT) == S_IFREG;
             m_bSymLink = (fileType & S_IFMT) == S_IFLNK;
             m_bExists = fileType != 0;
             //d()->m_fileType = fileType;
+            #endif
             break;
         }
 
@@ -438,6 +442,7 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
     }
     m_bHidden = d()->m_name[0] == '.';
 }
+
 
 bool FileAccess::isValid() const
 {
