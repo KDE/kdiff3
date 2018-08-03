@@ -599,16 +599,16 @@ static QString getArguments(QString cmd, QString& program, QStringList& args)
         program = args[0];
         args.pop_front();
 #ifdef Q_OS_WIN
-        if(program == "sed")
+        if(program == QLatin1String("sed"))
         {
-            QString prg = QCoreApplication::applicationDirPath() + "/bin/sed.exe"; // in subdir bin
+            QString prg = QCoreApplication::applicationDirPath() + QLatin1String("/bin/sed.exe"); // in subdir bin
             if(QFile::exists(prg))
             {
                 program = prg;
             }
             else
             {
-                prg = QCoreApplication::applicationDirPath() + "/sed.exe"; // in same dir
+                prg = QCoreApplication::applicationDirPath() + QLatin1String("/sed.exe"); // in same dir
                 if(QFile::exists(prg))
                 {
                     program = prg;

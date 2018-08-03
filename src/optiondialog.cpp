@@ -1644,8 +1644,8 @@ void OptionDialog::slotApply(void)
         locale = QLocale::system().name().left(2);
     int spacePos = locale.indexOf(' ');
     if(spacePos > 0) locale = locale.left(spacePos);
-    QSettings settings("HKEY_CURRENT_USER\\Software\\KDiff3\\diff-ext", QSettings::NativeFormat);
-    settings.setValue("Language", locale);
+    QSettings settings(QLatin1String("HKEY_CURRENT_USER\\Software\\KDiff3\\diff-ext"), QSettings::NativeFormat);
+    settings.setValue(QLatin1String("Language"), locale);
 #endif
 }
 

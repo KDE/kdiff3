@@ -92,7 +92,7 @@ static bool isOptionUsed(const QString& s, int argc, char* argv[])
 {
     for(int j = 0; j < argc; ++j)
     {
-        if(QString("-" + s) == argv[j] || QString("--" + s) == argv[j])
+        if(QString("-" + s) == QLatin1String(argv[j]) || QString("--" + s) == QLatin1String(argv[j]))
         {
             return true;
         }
