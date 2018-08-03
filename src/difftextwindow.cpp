@@ -820,7 +820,7 @@ void DiffTextWindowData::writeLine(
     int xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
     int yOffset = (line - m_firstLine) * fontHeight;
 
-    QRect lineRect(0, yOffset, deviceWidth, fontHeight);
+    QRect lineRect(xOffset, yOffset, deviceWidth, fontHeight);
     if(!invalidRect.intersects(lineRect))
     {
         return;
