@@ -78,6 +78,19 @@ public:
       connect( this, SIGNAL(valueChanged(int)), this, SLOT(slotValueChanged(int)));
    }
    void setAgain(){ setValue(m_realVal); }
+
+      void setValue(int i)
+   {
+      if(m_pbRightToLeftLanguage && *m_pbRightToLeftLanguage)
+         QScrollBar::setValue( maximum()-(i-minimum())  );
+      else
+         QScrollBar::setValue( i );
+   }
+   
+   int value() const
+   {
+      return m_realVal;
+   }
 public Q_SLOTS:
    void slotValueChanged(int i)
    {
@@ -86,17 +99,7 @@ public Q_SLOTS:
          m_realVal = maximum()-(i-minimum());
       emit valueChanged2(m_realVal);
    }
-   void setValue(int i)
-   {
-      if(m_pbRightToLeftLanguage && *m_pbRightToLeftLanguage)
-         QScrollBar::setValue( maximum()-(i-minimum())  );
-      else
-         QScrollBar::setValue( i );
-   }
-   int value() const
-   {
-      return m_realVal;
-   }
+
 Q_SIGNALS:
    void valueChanged2(int);
 };
