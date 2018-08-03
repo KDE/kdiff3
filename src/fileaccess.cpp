@@ -368,7 +368,6 @@ void FileAccess::addPath(const QString& txt)
        S_IWOTH    00002     others have write permisson
        S_IXOTH    00001     others have execute permission
 */
-
 void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
 {
     long acc = 0;
@@ -439,7 +438,6 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
     }
     m_bHidden = d()->m_name[0] == '.';
 }
-#endif
 
 bool FileAccess::isValid() const
 {
