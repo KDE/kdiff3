@@ -672,7 +672,7 @@ static bool interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLength)
     pp.setMaxNofSteps(maxLength / maxChunkSize + 1);
     while(i < maxLength)
     {
-        qint64 nextLength = min2(maxLength - i, maxChunkSize);
+        qint64 nextLength = std::min(maxLength - i, maxChunkSize);
         qint64 reallyRead = f.read((char*)pDestBuffer + i, nextLength);
         if(reallyRead != nextLength)
         {
@@ -723,7 +723,7 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
             qint64 i = 0;
             while(i < length)
             {
-                qint64 nextLength = min2(length - i, maxChunkSize);
+                qint64 nextLength = std::min(length - i, maxChunkSize);
                 qint64 reallyWritten = f.write((char*)pSrcBuffer + i, nextLength);
                 if(reallyWritten != nextLength)
                 {
@@ -1002,7 +1002,7 @@ void FileAccessJobHandler::slotGetData(KJob* pJob, const QByteArray& newData)
     }
     else
     {
-        qint64 length = min2(qint64(newData.size()), m_maxLength - m_transferredBytes);
+        qint64 length = std::min(qint64(newData.size()), m_maxLength - m_transferredBytes);
         ::memcpy(m_pTransferBuffer + m_transferredBytes, newData.data(), newData.size());
         m_transferredBytes += length;
     }
@@ -1046,7 +1046,7 @@ void FileAccessJobHandler::slotPutData(KIO::Job* pJob, QByteArray& data)
             
         */
         qint64 maxChunkSize = 100000;
-        qint64 length = min2(maxChunkSize, m_maxLength - m_transferredBytes);
+        qint64 length = std::min(maxChunkSize, m_maxLength - m_transferredBytes);
         data.resize((int)length);
         if(data.size() == (int)length)
         {
@@ -1233,7 +1233,7 @@ bool FileAccessJobHandler::copyFile(const QString& dest)
     qint64 srcSize = srcFile.size();
     while(srcSize > 0 && !pp.wasCancelled())
     {
-        qint64 readSize = srcFile.read(&buffer[0], min2(srcSize, bufSize));
+        qint64 readSize = srcFile.read(&buffer[0], std::min(srcSize, bufSize));
         if(readSize == -1 || readSize == 0)
         {
             m_pFileAccess->setStatusText(i18n("Error during file copy operation: Reading failed. Filename: %1", srcName));

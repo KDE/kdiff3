@@ -811,7 +811,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         if(m_pOptions->m_bIgnoreComments)
         {
             m_lmppData.removeComments();
-            LineRef vSize = (LineRef)min2(m_normalData.m_vSize, m_lmppData.m_vSize);
+            LineRef vSize = (LineRef)std::min(m_normalData.m_vSize, m_lmppData.m_vSize);
             for(int i = 0; i < (int)vSize; ++i)
             {
                 m_normalData.m_v[i].bContainsPureComment = m_lmppData.m_v[i].bContainsPureComment;
@@ -921,7 +921,7 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
             {
                 --lineLength;
             }
-            m_v[lineIdx].pFirstNonWhiteChar = m_v[lineIdx].pLine + min2(whiteLength, lineLength);
+            m_v[lineIdx].pFirstNonWhiteChar = m_v[lineIdx].pLine + std::min(whiteLength, lineLength);
             m_v[lineIdx].size = lineLength;
             if(lineIdx < vOrigDataLineEndStyle.count() && bPreserveCR && i < ucSize)
             {
@@ -1595,7 +1595,7 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
         if(diffList.empty())
         {
             Diff d(0, 0, 0);
-            d.nofEquals = min2(size1, size2);
+            d.nofEquals = std::min(size1, size2);
             d.diff1 = size1 - d.nofEquals;
             d.diff2 = size2 - d.nofEquals;
             diffList.push_back(d);
@@ -1620,7 +1620,7 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
             currentLine1 += equalLinesAtStart;
             currentLine2 += equalLinesAtStart;
 
-            LineRef nofEquals = min2(size1 - currentLine1, size2 - currentLine2);
+            LineRef nofEquals = std::min(size1 - currentLine1, size2 - currentLine2);
             if(nofEquals == 0)
             {
                 diffList.back().diff1 += size1 - currentLine1;

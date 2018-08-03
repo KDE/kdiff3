@@ -65,14 +65,14 @@ public:
    int lastPosInLine(LineRef l);
    LineRef beginLine(){ 
       if (firstLine<0 && lastLine<0) return invalidRef;
-      return max2((LineRef)0,min2(firstLine,lastLine)); 
+      return std::max((LineRef)0,std::min(firstLine,lastLine)); 
    }
    LineRef endLine(){ 
       if (firstLine<0 && lastLine<0) return invalidRef;
-      return max2(firstLine,lastLine); 
+      return std::max(firstLine,lastLine); 
    }
-   int beginPos() { return firstLine==lastLine ? min2(firstPos,lastPos) :
+   int beginPos() { return firstLine==lastLine ? std::min(firstPos,lastPos) :
                            firstLine<lastLine ? (firstLine<0?0:firstPos) : (lastLine<0?0:lastPos);  }
-   int endPos()   { return firstLine==lastLine ? max2(firstPos,lastPos) :
+   int endPos()   { return firstLine==lastLine ? std::max(firstPos,lastPos) :
                            firstLine<lastLine ? lastPos : firstPos;      }
 };

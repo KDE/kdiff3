@@ -884,7 +884,7 @@ bool DirectoryMergeWindow::Data::fastFileComparison(
 
     while(sizeLeft > 0 && !pp.wasCancelled())
     {
-        qint64 len = min2(sizeLeft, (t_FileSize)buf1.size());
+        qint64 len = std::min(sizeLeft, (t_FileSize)buf1.size());
         if(len != file1.read(&buf1[0], len))
         {
             status = i18n("Error reading from %1", fileName1);

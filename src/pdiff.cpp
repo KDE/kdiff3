@@ -471,7 +471,7 @@ void KDiff3App::resizeDiffTextWindowHeight(int newHeight)
 {
     m_DTWHeight = newHeight;
 
-    m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines + 1 - newHeight));
+    m_pDiffVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - newHeight));
     m_pDiffVScrollBar->setPageStep(newHeight);
     m_pOverview->setRange(m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep());
 
@@ -481,7 +481,7 @@ void KDiff3App::resizeDiffTextWindowHeight(int newHeight)
 void KDiff3App::resizeMergeResultWindow()
 {
     MergeResultWindow* p = m_pMergeResultWindow;
-    m_pMergeVScrollBar->setRange(0, max2(0, p->getNofLines() - p->getNofVisibleLines()));
+    m_pMergeVScrollBar->setRange(0, std::max(0, p->getNofLines() - p->getNofVisibleLines()));
     m_pMergeVScrollBar->setPageStep(p->getNofVisibleLines());
 
     setHScrollBarRange();
@@ -533,7 +533,7 @@ template <class W, class L>
 void addWidget(L* layout, W* widget)
 {
     QSize s = widget->sizeHint();
-    widget->setMinimumSize(QSize(max2(s.width(), 0), max2(s.height(), 0)));
+    widget->setMinimumSize(QSize(std::max(s.width(), 0), std::max(s.height(), 0)));
     layout->addWidget(widget);
 }
 
@@ -728,7 +728,7 @@ void KDiff3App::slotFinishMainInit()
     /*int newWidth  = m_pDiffTextWindow1->getNofVisibleColumns();*/
     m_DTWHeight = newHeight;
 
-    m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines + 1 - newHeight));
+    m_pDiffVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - newHeight));
     m_pDiffVScrollBar->setPageStep(newHeight);
     m_pOverview->setRange(m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep());
 
@@ -738,7 +738,7 @@ void KDiff3App::slotFinishMainInit()
     if(d3l >= 0 && m_pDiffTextWindow1)
     {
         int line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(d3l);
-        m_pDiffVScrollBar->setValue(max2(0, line - 1));
+        m_pDiffVScrollBar->setValue(std::max(0, line - 1));
     }
     else
     {
@@ -1786,7 +1786,7 @@ void KDiff3App::slotFinishRecalcWordWrap()
         if(m_pOverview)
             m_pOverview->slotRedraw();
         if(m_pDiffVScrollBar)
-            m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines + 1 - m_DTWHeight));
+            m_pDiffVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - m_DTWHeight));
         if(m_pDiffTextWindow1)
         {
             if(m_pDiffVScrollBar)
@@ -2070,7 +2070,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pDiffTextWindow1->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
             m_pDiffVScrollBar->setValue(l - m_pDiffVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(max2(0, p + (int)s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max(0, p + (int)s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -2089,7 +2089,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pDiffTextWindow2->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
             m_pDiffVScrollBar->setValue(l - m_pDiffVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(max2(0, p + (int)s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max(0, p + (int)s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -2108,7 +2108,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pDiffTextWindow3->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
             m_pDiffVScrollBar->setValue(l - m_pDiffVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(max2(0, p + (int)s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max(0, p + (int)s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -2127,7 +2127,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pMergeResultWindow->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length());
             m_pMergeVScrollBar->setValue(d3vLine - m_pMergeVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(max2(0, posInLine + (int)s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max(0, posInLine + (int)s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;

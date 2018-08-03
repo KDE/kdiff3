@@ -263,7 +263,7 @@ void DiffTextWindow::setFirstLine(int firstLine)
 {
     int fontHeight = fontMetrics().lineSpacing();
 
-    int newFirstLine = max2(0, firstLine);
+    int newFirstLine = std::max(0, firstLine);
 
     int deltaY = fontHeight * (d->m_firstLine - newFirstLine);
 
@@ -348,7 +348,7 @@ int DiffTextWindow::getNofLines()
 int DiffTextWindow::convertLineToDiff3LineIdx(int line)
 {
     if(line >= 0 && d->m_bWordWrap && d->m_diff3WrapLineVector.size() > 0)
-        return d->m_diff3WrapLineVector[min2(line, (int)d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
+        return d->m_diff3WrapLineVector[std::min(line, (int)d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
     else
         return line;
 }
@@ -356,7 +356,7 @@ int DiffTextWindow::convertLineToDiff3LineIdx(int line)
 int DiffTextWindow::convertDiff3LineIdxToLine(int d3lIdx)
 {
     if(d->m_bWordWrap && d->m_pDiff3LineVector != nullptr && d->m_pDiff3LineVector->size() > 0)
-        return (*d->m_pDiff3LineVector)[min2(d3lIdx, (int)d->m_pDiff3LineVector->size() - 1)]->sumLinesNeededForDisplay;
+        return (*d->m_pDiff3LineVector)[std::min(d3lIdx, (int)d->m_pDiff3LineVector->size() - 1)]->sumLinesNeededForDisplay;
     else
         return d3lIdx;
 }
@@ -467,7 +467,7 @@ bool isCTokenChar(QChar c)
 void calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2, int tabSize)
 {
     // Cursor conversions that consider g_tabSize
-    int pos = convertToPosInText(s, max2(0, posOnScreen), tabSize);
+    int pos = convertToPosInText(s, std::max(0, posOnScreen), tabSize);
     if(pos >= (int)s.length())
     {
         pos1 = s.length();
@@ -626,11 +626,11 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
             }
             else
             {
-                firstLine = min2(d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
-                lastLine = max2(d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
+                firstLine = std::min(d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
+                lastLine = std::max(d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
             }
             int y1 = (firstLine - d->m_firstLine) * fontHeight;
-            int y2 = min2(height(), (lastLine - d->m_firstLine + 1) * fontHeight);
+            int y2 = std::min(height(), (lastLine - d->m_firstLine + 1) * fontHeight);
 
             if(y1 < height() && y2 > 0)
             {
@@ -878,7 +878,7 @@ void DiffTextWindowData::writeLine(
                 //case '\0b' : lineString[lineString.length()-1] = 0x2756; break; // some other nice looking character
             }
         }
-        QVector<UINT8> charChanged(pld->size);
+        QVector<quint8> charChanged(pld->size);
         Merger merger(pLineDiff1, pLineDiff2);
         while(!merger.isEndReached() && i < pld->size)
         {
@@ -1037,7 +1037,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     bool bOldSelectionContainsData = d->m_selection.bSelectionContainsData;
     d->m_selection.bSelectionContainsData = false;
 
-    int endLine = min2(d->m_firstLine + getNofVisibleLines() + 2, getNofLines());
+    int endLine = std::min(d->m_firstLine + getNofVisibleLines() + 2, getNofLines());
 
     MyPainter p(this, d->m_pOptions->m_bRightToLeftLanguage, width(), fontMetrics().width('0'));
 
@@ -1065,7 +1065,7 @@ void DiffTextWindow::print(MyPainter& p, const QRect&, int firstLine, int nofLin
     QRect invalidRect = QRect(0, 0, 1000000000, 1000000000);
     QColor bgColor = d->m_pOptions->m_bgColor;
     d->m_pOptions->m_bgColor = Qt::white;
-    d->draw(p, invalidRect, p.window().width(), firstLine, min2(firstLine + nofLinesPerPage, getNofLines()));
+    d->draw(p, invalidRect, p.window().width(), firstLine, std::min(firstLine + nofLinesPerPage, getNofLines()));
     d->m_pOptions->m_bgColor = bgColor;
     d->m_firstLine = oldFirstLine;
 }
@@ -1715,7 +1715,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
 
         if(wrapLineVectorSize > 0)
         {
-            d->m_firstLine = min2(d->m_firstLine, wrapLineVectorSize - 1);
+            d->m_firstLine = std::min(d->m_firstLine, wrapLineVectorSize - 1);
             d->m_horizScrollOffset = 0;
             d->m_pDiffTextWindowFrame->setFirstLine(d->m_firstLine);
         }

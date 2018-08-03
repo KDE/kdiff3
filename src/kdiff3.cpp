@@ -889,9 +889,9 @@ void KDiff3App::slotFilePrint()
             m_pEventLoopForPrinting->exec();
         }
 
-        LineRef totalNofLines = max2(m_pDiffTextWindow1->getNofLines(), m_pDiffTextWindow2->getNofLines());
+        LineRef totalNofLines = std::max(m_pDiffTextWindow1->getNofLines(), m_pDiffTextWindow2->getNofLines());
         if(m_bTripleDiff && m_pDiffTextWindow3)
-            totalNofLines = max2(totalNofLines, m_pDiffTextWindow3->getNofLines());
+            totalNofLines = std::max(totalNofLines, m_pDiffTextWindow3->getNofLines());
 
         QList<int> pageList; // = printer.pageList();
 

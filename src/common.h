@@ -22,21 +22,6 @@
 #include <QString>
 #include <map>
 
-template< class T >
-T min2( T x, T y )
-{
-   return x<y ? x : y;
-}
-template< class T >
-T max2( T x, T y )
-{
-   return x>y ? x : y;
-}
-
-typedef unsigned char UINT8;
-typedef unsigned short UINT16;
-typedef unsigned int UINT32;
-
 template <class T>
 T min3( T d1, T d2, T d3 )
 {
@@ -54,7 +39,6 @@ T max3( T d1, T d2, T d3 )
 
    if ( d2 > d3 ) return d2;
    return d3;
-
 }
 
 template <class T>

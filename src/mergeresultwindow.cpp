@@ -546,13 +546,13 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
 
 void MergeResultWindow::setFirstLine(int firstLine)
 {
-    m_firstLine = max2(0, firstLine);
+    m_firstLine = std::max(0, firstLine);
     update();
 }
 
 void MergeResultWindow::setHorizScrollOffset(int horizScrollOffset)
 {
-    m_horizScrollOffset = max2(0, horizScrollOffset);
+    m_horizScrollOffset = std::max(0, horizScrollOffset);
     update();
 }
 
@@ -1735,7 +1735,7 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(int li
     {
         int firstPosInText = convertToPosInText(str, m_selection.firstPosInLine(line), m_pOptions->m_tabSize);
         int lastPosInText = convertToPosInText(str, m_selection.lastPosInLine(line), m_pOptions->m_tabSize);
-        int lengthInText = max2(0, lastPosInText - firstPosInText);
+        int lengthInText = std::max(0, lastPosInText - firstPosInText);
         if(lengthInText > 0)
             m_selection.bSelectionContainsData = true;
 
@@ -2043,7 +2043,7 @@ int MergeResultWindow::convertToLine(int y)
 
     int yOffset = topLineYOffset - m_firstLine * fontHeight;
 
-    int line = min2((y - yOffset) / fontHeight, m_totalSize - 1);
+    int line = std::min((y - yOffset) / fontHeight, m_totalSize - 1);
     return line;
 }
 
@@ -2067,7 +2067,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
     {
         m_cursorXPos = 0;
         m_cursorOldXPixelPos = 0;
-        m_cursorYPos = max2(line, 0);
+        m_cursorYPos = std::max(line, 0);
         int l = 0;
         MergeLineList::iterator i = m_mergeLineList.begin();
         for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
@@ -2091,8 +2091,8 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
     }
     else if(bLMB) // Normal cursor placement
     {
-        pos = max2(pos, 0);
-        line = max2(line, 0);
+        pos = std::max(pos, 0);
+        line = std::max(line, 0);
         if(e->QInputEvent::modifiers() & Qt::ShiftModifier)
         {
             if(!m_selection.isValidFirstLine())
@@ -2118,8 +2118,8 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
     }
     else if(bMMB) // Paste clipboard
     {
-        pos = max2(pos, 0);
-        line = max2(line, 0);
+        pos = std::max(pos, 0);
+        line = std::max(line, 0);
 
         m_selection.reset();
         m_cursorXPos = pos;
@@ -2245,7 +2245,7 @@ void MergeResultWindow::wheelEvent(QWheelEvent* e)
 {
     int d = -e->delta() * QApplication::wheelScrollLines() / 120;
     e->accept();
-    scroll(0, min2(d, getNofVisibleLines()));
+    scroll(0, std::min(d, getNofVisibleLines()));
 }
 
 bool MergeResultWindow::event(QEvent* e)
@@ -3121,7 +3121,7 @@ Overview::e_OverviewMode Overview::getOverviewMode()
 void Overview::mousePressEvent(QMouseEvent* e)
 {
     int h = height() - 1;
-    int h1 = h * m_pageHeight / max2(1, m_nofLines) + 3;
+    int h1 = h * m_pageHeight / std::max(1, m_nofLines) + 3;
     if(h > 0)
         emit setLine((e->y() - h1 / 2) * m_nofLines / h);
 }
@@ -3278,12 +3278,12 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
             // Make sure that lines with conflict are not overwritten.
             if(c == m_pOptions->m_colorForConflict)
             {
-                p.fillRect(x2 + 1, oldY, w2, max2(1, y - oldY), bWhiteSpaceChange ? QBrush(c, Qt::Dense4Pattern) : QBrush(c));
+                p.fillRect(x2 + 1, oldY, w2, std::max(1, y - oldY), bWhiteSpaceChange ? QBrush(c, Qt::Dense4Pattern) : QBrush(c));
                 oldConflictY = oldY;
             }
             else if(c != m_pOptions->m_bgColor && oldY > oldConflictY)
             {
-                p.fillRect(x2 + 1, oldY, w2, max2(1, y - oldY), bWhiteSpaceChange ? QBrush(c, Qt::Dense4Pattern) : QBrush(c));
+                p.fillRect(x2 + 1, oldY, w2, std::max(1, y - oldY), bWhiteSpaceChange ? QBrush(c, Qt::Dense4Pattern) : QBrush(c));
             }
         }
 
