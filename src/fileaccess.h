@@ -107,11 +107,8 @@ private:
    const Data* d() const;
    void createData();
 
-   union
-   {
-      Data* m_pData;
-      FileAccess* m_pParent;
-   };
+   Data* m_pData = nullptr;
+   
    QString m_filePath; // might be absolute or relative if m_pParent!=0
    qint64 m_size;
    QDateTime m_modificationTime;
@@ -121,7 +118,7 @@ private:
    bool m_bExists   : 1;
    bool m_bWritable : 1;
    bool m_bHidden   : 1;
-   bool m_bUseData  : 1;
+   bool m_bReserved : 1;
 
    friend class FileAccessJobHandler;
 };
