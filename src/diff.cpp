@@ -42,7 +42,6 @@
 
 #include <ctype.h>
 #include <map>
-//using namespace std;
 
 int LineData::width(int tabSize) const
 {
@@ -73,7 +72,7 @@ bool equal(const LineData& l1, const LineData& l2, bool bStrict)
 {
     if(l1.pLine == nullptr || l2.pLine == nullptr) return false;
 
-    if(bStrict && g_bIgnoreTrivialMatches) //&& (l1.occurences>=5 || l2.occurences>=5) )
+    if(bStrict && g_bIgnoreTrivialMatches)
         return false;
 
     // Ignore white space diff

@@ -382,13 +382,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         QString f2 = m_sd2.getAliasName();
         QString f3 = m_sd3.getAliasName();
         int p;
-        if((p = f1.indexOf("@@")) >= 0)
-            f1 = f1.left(p);
-        if((p = f2.indexOf("@@")) >= 0)
-            f2 = f2.left(p);
-        if((p = f3.indexOf("@@")) >= 0)
-            f3 = f3.left(p);
-
+        
         if((p = f1.lastIndexOf('/')) >= 0 || (p = f1.lastIndexOf('\\')) >= 0)
             f1 = f1.mid(p + 1);
         if((p = f2.lastIndexOf('/')) >= 0 || (p = f2.lastIndexOf('\\')) >= 0)

@@ -183,7 +183,7 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
     m_filePath = pParent == nullptr ? fi.absoluteFilePath() : nicePath(fi.filePath()); // remove "./" at start
 
     m_bSymLink = fi.isSymLink();
-    if(m_bSymLink || (!m_bExists && m_filePath.contains("@@")))
+    if(m_bSymLink)
     {
         createData();
     }
