@@ -607,15 +607,12 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
     int m_preservedVal;
 };
 
-OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent, QString *name) : //    KPageDialog( IconList, i18n("Configure"), Help|Default|Apply|Ok|Cancel,
-                                                                                      //                 Ok, parent, name, true /*modal*/, true )
-                                                                                      KPageDialog(parent)
+OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageDialog(parent)
 {
     setFaceType(List);
     setWindowTitle(i18n("Configure"));
     setStandardButtons(QDialogButtonBox::Help | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Apply | QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     
-    setObjectName(*name);
     setModal(true);
 
     //showButtonSeparator( true );

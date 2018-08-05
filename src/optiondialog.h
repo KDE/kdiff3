@@ -45,7 +45,7 @@ class OptionDialog : public KPageDialog
 
 public:
 
-    OptionDialog( bool bShowDirMergeSettings, QWidget *parent = nullptr, QString *name = nullptr );
+    OptionDialog( bool bShowDirMergeSettings, QWidget *parent = nullptr );
     ~OptionDialog( void ) override;
     QString parseOptions( const QStringList& optionList );
     QString calcOptionHelp();
