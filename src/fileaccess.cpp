@@ -1582,10 +1582,8 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
                         //fa.m_filePath = fa.m_name;
                         //fa.m_absoluteFilePath = absPath + "/" + fa.m_name;
                         //fa.m_url.setPath( fa.m_absoluteFilePath );
-                        if(fa.d())
-                            fa.m_pData->m_pParent = m_pFileAccess;
-                        else
-                            fa.m_pParent = m_pFileAccess;
+                        fa.m_pData->m_pParent = m_pFileAccess;
+                        
                         pDirList->push_back(fa);
                     }
                 }
