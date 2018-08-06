@@ -62,6 +62,21 @@ class FileAccess::Data
         //m_fileType = -1;
         m_bLocal = true;
         m_pParent = nullptr;
+        //Insure that old tempFile is removed we will recreate it as needed.
+        if(!m_localCopy.isEmpty())
+        {
+            removeTempFile(m_localCopy);
+            m_localCopy = "";
+        }
+    }
+    
+    ~Data()
+    {
+        //Cleanup tempfile when Data object referancing it is destroyed.
+        if(!m_localCopy.isEmpty())
+        {
+            removeTempFile(m_localCopy);
+        }
     }
 
     QUrl m_url;
@@ -78,8 +93,8 @@ class FileAccess::Data
     QString m_linkTarget;
     //QString m_user;
     //QString m_group;
-    QString m_name;
-    QString m_localCopy;
+    QString m_name = QString("");
+    QString m_localCopy = QString("");
     QString m_statusText; // Might contain an error string, when the last operation didn't succeed.
 };
 
@@ -137,11 +152,6 @@ FileAccess& FileAccess::operator=(const FileAccess& other)
 
 FileAccess::~FileAccess()
 {
-    if(!d()->m_localCopy.isEmpty())
-    {
-        removeTempFile(d()->m_localCopy);
-    }
-
     if(m_pData != nullptr)
         delete m_pData;
 }
@@ -650,7 +660,7 @@ static bool interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLength)
 
 bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
 {
-    if(!(d()->m_url.isEmpty() || d()->m_url.isLocalFile()) && !(d()->m_url.isEmpty() || d()->m_url.isLocalFile()) && !d()->m_localCopy.isEmpty())
+    if(!d()->m_localCopy.isEmpty())
     {
         QFile f(d()->m_localCopy);
         if(f.open(QIODevice::ReadOnly))
