@@ -221,12 +221,14 @@ class MergeFileInfos
 };
 
 static Qt::CaseSensitivity s_eCaseSensitivity = Qt::CaseSensitive;
-
-class DirectoryMergeWindow::Data : public QAbstractItemModel
+//TODO: clean up this mess.
+class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemModel
 {
+    friend class DirMergeItem;
+    friend class MergeFileInfos;
   public:
     DirectoryMergeWindow* q;
-    explicit Data(DirectoryMergeWindow* pDMW)
+    explicit DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW)
     {
         q = pDMW;
         m_pOptions = nullptr;
@@ -244,7 +246,7 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
         m_bSkipDirStatus = false;
         m_pRoot = new MergeFileInfos;
     }
-    ~Data() override
+    ~DirectoryMergeWindowPrivate() override
     {
         delete m_pRoot;
     }
@@ -335,7 +337,6 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
     void prepareListView(ProgressProxy& pp);
     void calcSuggestedOperation(const QModelIndex& mi, e_MergeOperation eDefaultOperation);
     void setAllMergeOperations(e_MergeOperation eDefaultOperation);
-    friend class MergeFileInfos;
 
     bool canContinue();
     QModelIndex treeIterator(QModelIndex mi, bool bVisitChildren = true, bool bFindInvisible = false);
@@ -367,6 +368,7 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
 
     void buildMergeMap(void);
 
+private:
     class FileKey
     {
       public:
@@ -407,7 +409,9 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
             return false;
         }
     };
+
     typedef QMap<FileKey, MergeFileInfos> t_fileMergeMap;
+public:
     t_fileMergeMap m_fileMergeMap;
 
     bool m_bFollowDirLinks;
@@ -434,7 +438,6 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
     QModelIndex m_selection2Index;
     QModelIndex m_selection3Index;
     void selectItemAndColumn(const QModelIndex& mi, bool bContextMenu);
-    friend class DirMergeItem;
 
     QAction* m_pDirStartOperation;
     QAction* m_pDirRunOperationForCurrentItem;
@@ -492,7 +495,7 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
     }
 };
 
-QVariant DirectoryMergeWindow::Data::data(const QModelIndex& index, int role) const
+QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelIndex& index, int role) const
 {
     MergeFileInfos* pMFI = getMFI(index);
     if(pMFI)
@@ -637,7 +640,7 @@ QVariant DirectoryMergeWindow::Data::data(const QModelIndex& index, int role) co
     return QVariant();
 }
 
-QVariant DirectoryMergeWindow::Data::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if(orientation == Qt::Horizontal && section >= 0 && section < columnCount(QModelIndex()) && role == Qt::DisplayRole)
     {
@@ -674,7 +677,7 @@ QVariant DirectoryMergeWindow::Data::headerData(int section, Qt::Orientation ori
 class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
 {
     DirectoryMergeWindow* m_pDMW;
-    DirectoryMergeWindow::Data* d;
+    DirectoryMergeWindow::DirectoryMergeWindowPrivate* d;
 
   public:
     explicit DirMergeItemDelegate(DirectoryMergeWindow* pParent)
@@ -751,7 +754,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
 DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, Options* pOptions, KIconLoader* pIconLoader)
     : QTreeView(pParent)
 {
-    d = new Data(this);
+    d = new DirectoryMergeWindowPrivate(this);
     setModel(d);
     setItemDelegate(new DirMergeItemDelegate(this));
     connect(this, &DirectoryMergeWindow::doubleClicked, this, &DirectoryMergeWindow::onDoubleClick);
@@ -777,7 +780,7 @@ bool DirectoryMergeWindow::isDirectoryMergeInProgress() { return d->m_bRealMerge
 bool DirectoryMergeWindow::isSyncMode() { return d->m_bSyncMode; }
 bool DirectoryMergeWindow::isScanning() { return d->m_bScanning; }
 
-bool DirectoryMergeWindow::Data::fastFileComparison(
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
     FileAccess& fi1, FileAccess& fi2,
     bool& bError, QString& status)
 {
@@ -964,7 +967,7 @@ static QPixmap pixCombiner2(const QPixmap* pm1, const QPixmap* pm2)
     return pix;
 }
 
-void DirectoryMergeWindow::Data::calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
                                                int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges)
 {
     MergeFileInfos* pMFI = getMFI(mi);
@@ -1007,7 +1010,7 @@ bool DirectoryMergeWindow::init(
     return d->init(dirA, dirB, dirC, dirDest, bDirectoryMerge, bReload);
 }
 
-void DirectoryMergeWindow::Data::buildMergeMap(void)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(void)
 {
     t_DirectoryList::iterator dirIterator;
 
@@ -1020,7 +1023,7 @@ void DirectoryMergeWindow::Data::buildMergeMap(void)
             mfi.m_pFileInfoA = &(*dirIterator);
         }
     }
-    
+
     if(m_dirB.isValid())
     {
         for(dirIterator = m_dirListB.begin(); dirIterator != m_dirListB.end(); ++dirIterator)
@@ -1042,7 +1045,7 @@ void DirectoryMergeWindow::Data::buildMergeMap(void)
     }
 }
 
-bool DirectoryMergeWindow::Data::init(
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     FileAccess& dirA,
     FileAccess& dirB,
     FileAccess& dirC,
@@ -1487,7 +1490,7 @@ void DirectoryMergeWindow::focusOutEvent(QFocusEvent*)
     emit updateAvailabilities();
 }
 
-void DirectoryMergeWindow::Data::setAllMergeOperations(e_MergeOperation eDefaultOperation)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setAllMergeOperations(e_MergeOperation eDefaultOperation)
 {
     if(KMessageBox::Yes == KMessageBox::warningYesNo(q,
                                                      i18n("This affects all merge operations."),
@@ -1502,7 +1505,7 @@ void DirectoryMergeWindow::Data::setAllMergeOperations(e_MergeOperation eDefault
     }
 }
 
-void DirectoryMergeWindow::Data::compareFilesAndCalcAges(MergeFileInfos& mfi)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(MergeFileInfos& mfi)
 {
     std::map<QDateTime, int> dateMap;
 
@@ -1767,7 +1770,7 @@ static QPixmap getOnePixmap(e_Age eAge, bool bLink, bool bDir)
     return *ppPm[eAge];
 }
 
-void DirectoryMergeWindow::Data::setPixmaps(MergeFileInfos& mfi, bool)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setPixmaps(MergeFileInfos& mfi, bool)
 {
     if(mfi.dirA() || mfi.dirB() || mfi.dirC())
     {
@@ -1811,7 +1814,7 @@ static QModelIndex nextSibling(const QModelIndex& mi)
 }
 
 // Iterate through the complete tree. Start by specifying QListView::firstChild().
-QModelIndex DirectoryMergeWindow::Data::treeIterator(QModelIndex mi, bool bVisitChildren, bool bFindInvisible)
+QModelIndex DirectoryMergeWindow::DirectoryMergeWindowPrivate::treeIterator(QModelIndex mi, bool bVisitChildren, bool bFindInvisible)
 {
     if(mi.isValid())
     {
@@ -1847,7 +1850,7 @@ QModelIndex DirectoryMergeWindow::Data::treeIterator(QModelIndex mi, bool bVisit
     return mi;
 }
 
-void DirectoryMergeWindow::Data::prepareListView(ProgressProxy& pp)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(ProgressProxy& pp)
 {
     static bool bFirstTime = true;
     if(bFirstTime)
@@ -1930,7 +1933,7 @@ void DirectoryMergeWindow::Data::prepareListView(ProgressProxy& pp)
     endResetModel();
 }
 
-void DirectoryMergeWindow::Data::calcSuggestedOperation(const QModelIndex& mi, e_MergeOperation eDefaultMergeOp)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(const QModelIndex& mi, e_MergeOperation eDefaultMergeOp)
 {
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI == nullptr)
@@ -2262,7 +2265,7 @@ void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
 }
 #endif
 
-QString DirectoryMergeWindow::Data::getFileName(const QModelIndex& mi)
+QString DirectoryMergeWindow::DirectoryMergeWindowPrivate::getFileName(const QModelIndex& mi)
 {
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI != nullptr)
@@ -2272,7 +2275,7 @@ QString DirectoryMergeWindow::Data::getFileName(const QModelIndex& mi)
     return "";
 }
 
-bool DirectoryMergeWindow::Data::isDir(const QModelIndex& mi)
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::isDir(const QModelIndex& mi)
 {
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI != nullptr)
@@ -2282,7 +2285,7 @@ bool DirectoryMergeWindow::Data::isDir(const QModelIndex& mi)
     return false;
 }
 
-void DirectoryMergeWindow::Data::selectItemAndColumn(const QModelIndex& mi, bool bContextMenu)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::selectItemAndColumn(const QModelIndex& mi, bool bContextMenu)
 {
     if(bContextMenu && (mi == m_selection1Index || mi == m_selection2Index || mi == m_selection3Index))
         return;
@@ -2387,7 +2390,7 @@ void MergeFileInfos::sort(Qt::SortOrder order)
        m_children[i]->sort(order);
 }
 
-void DirectoryMergeWindow::Data::sort(int column, Qt::SortOrder order)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::sort(int column, Qt::SortOrder order)
 {
     Q_UNUSED(column);
     beginResetModel();
@@ -2395,7 +2398,7 @@ void DirectoryMergeWindow::Data::sort(int column, Qt::SortOrder order)
     endResetModel();
 }
 
-void DirectoryMergeWindow::Data::setMergeOperation(const QModelIndex& mi, e_MergeOperation eMOp, bool bRecursive)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setMergeOperation(const QModelIndex& mi, e_MergeOperation eMOp, bool bRecursive)
 {
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI == nullptr)
@@ -2547,7 +2550,7 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
     emit updateAvailabilities();
 }
 
-bool DirectoryMergeWindow::Data::canContinue()
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::canContinue()
 {
     bool bCanContinue = false;
     
@@ -2571,7 +2574,7 @@ bool DirectoryMergeWindow::Data::canContinue()
     return bCanContinue;
 }
 
-bool DirectoryMergeWindow::Data::executeMergeOperation(MergeFileInfos& mfi, bool& bSingleFileMerge)
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(MergeFileInfos& mfi, bool& bSingleFileMerge)
 {
     bool bCreateBackups = m_pOptions->m_bDmCreateBakFiles;
     // First decide destname
@@ -2655,7 +2658,7 @@ bool DirectoryMergeWindow::Data::executeMergeOperation(MergeFileInfos& mfi, bool
 
 // Check if the merge can start, and prepare the m_mergeItemList which then contains all
 // items that must be merged.
-void DirectoryMergeWindow::Data::prepareMergeStart(const QModelIndex& miBegin, const QModelIndex& miEnd, bool bVerbose)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareMergeStart(const QModelIndex& miBegin, const QModelIndex& miEnd, bool bVerbose)
 {
     if(bVerbose)
     {
@@ -2785,7 +2788,7 @@ void DirectoryMergeWindow::mergeCurrentFile()
 
 // When bStart is true then m_currentIndexForOperation must still be processed.
 // When bVerbose is true then a messagebox will tell when the merge is complete.
-void DirectoryMergeWindow::Data::mergeContinue(bool bStart, bool bVerbose)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStart, bool bVerbose)
 {
     ProgressProxy pp;
     if(m_mergeItemList.empty())
@@ -2987,7 +2990,7 @@ void DirectoryMergeWindow::Data::mergeContinue(bool bStart, bool bVerbose)
     }
 }
 
-bool DirectoryMergeWindow::Data::deleteFLD(const QString& name, bool bCreateBackup)
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::deleteFLD(const QString& name, bool bCreateBackup)
 {
     FileAccess fi(name, true);
     if(!fi.exists())
@@ -3059,7 +3062,7 @@ bool DirectoryMergeWindow::Data::deleteFLD(const QString& name, bool bCreateBack
     return true;
 }
 
-bool DirectoryMergeWindow::Data::mergeFLD(const QString& nameA, const QString& nameB, const QString& nameC, const QString& nameDest, bool& bSingleFileMerge)
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeFLD(const QString& nameA, const QString& nameB, const QString& nameC, const QString& nameDest, bool& bSingleFileMerge)
 {
     FileAccess fi(nameA);
     if(fi.isDir())
@@ -3093,7 +3096,7 @@ bool DirectoryMergeWindow::Data::mergeFLD(const QString& nameA, const QString& n
     return false;
 }
 
-bool DirectoryMergeWindow::Data::copyFLD(const QString& srcName, const QString& destName)
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::copyFLD(const QString& srcName, const QString& destName)
 {
     bool bSuccess = false;
     
@@ -3176,7 +3179,7 @@ bool DirectoryMergeWindow::Data::copyFLD(const QString& srcName, const QString& 
 // Rename is not an operation that can be selected by the user.
 // It will only be used to create backups.
 // Hence it will delete an existing destination without making a backup (of the old backup.)
-bool DirectoryMergeWindow::Data::renameFLD(const QString& srcName, const QString& destName)
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::renameFLD(const QString& srcName, const QString& destName)
 {
     if(srcName == destName)
         return true;
@@ -3209,7 +3212,7 @@ bool DirectoryMergeWindow::Data::renameFLD(const QString& srcName, const QString
     return true;
 }
 
-bool DirectoryMergeWindow::Data::makeDir(const QString& name, bool bQuiet)
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::makeDir(const QString& name, bool bQuiet)
 {
     FileAccess fi(name, true);
     if(fi.exists() && fi.isDir())
@@ -3517,7 +3520,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
                 }
 
                 if(bChange)
-                    DirectoryMergeWindow::Data::setPixmaps(*pMFI, bThreeDirs);
+                    DirectoryMergeWindow::DirectoryMergeWindowPrivate::setPixmaps(*pMFI, bThreeDirs);
             }
             bool bExistsEverywhere = pMFI->existsInA() && pMFI->existsInB() && (pMFI->existsInC() || !bThreeDirs);
             int existCount = int(pMFI->existsInA()) + int(pMFI->existsInB()) + int(pMFI->existsInC());
@@ -3550,7 +3553,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
                     }
 
                     if(bChange)
-                        DirectoryMergeWindow::Data::setPixmaps(*p2, bThreeDirs);
+                        DirectoryMergeWindow::DirectoryMergeWindowPrivate::setPixmaps(*p2, bThreeDirs);
                     else
                         break;
 

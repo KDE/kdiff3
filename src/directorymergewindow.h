@@ -141,9 +141,9 @@ protected Q_SLOTS:
    void onExpanded();
    void	currentChanged( const QModelIndex & current, const QModelIndex & previous ) override; // override
 private:
-  class Data;
-  friend class Data;
-  Data* d;
+  class DirectoryMergeWindowPrivate;
+  friend class DirectoryMergeWindowPrivate;
+  DirectoryMergeWindowPrivate* d;
   class DirMergeItemDelegate;
   friend class DirMergeItemDelegate;
 };
