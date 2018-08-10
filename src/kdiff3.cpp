@@ -435,7 +435,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
             if(pSD != nullptr)
             {
                 // Save this file directly, not via the merge result window.
-                bool bSuccess = false;
+                bSuccess = false;
                 FileAccess fa(m_outputFilename);
                 if(m_pOptions->m_bDmCreateBakFiles && fa.exists())
                 {
@@ -452,7 +452,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
             }
             else if(m_pMergeResultWindow->getNrOfUnsolvedConflicts() == 0)
             {
-                bool bSuccess = m_pMergeResultWindow->saveDocument(m_pMergeResultWindowTitle->getFileName(), m_pMergeResultWindowTitle->getEncoding(), m_pMergeResultWindowTitle->getLineEndStyle());
+                bSuccess = m_pMergeResultWindow->saveDocument(m_pMergeResultWindowTitle->getFileName(), m_pMergeResultWindowTitle->getEncoding(), m_pMergeResultWindowTitle->getLineEndStyle());
                 if(bSuccess) ::exit(0);
             }
         }

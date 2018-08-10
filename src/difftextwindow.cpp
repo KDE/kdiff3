@@ -898,7 +898,7 @@ void DiffTextWindowData::writeLine(
 
         for(i = wrapLineOffset; i < lineLength; ++i)
         {
-            QColor c = m_pOptions->m_fgColor;
+            c = m_pOptions->m_fgColor;
             int cchanged = charChanged[i] | whatChanged;
 
             if(cchanged == 2) {
@@ -1933,11 +1933,11 @@ bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
     }
     if(o == d->m_pFileSelection && e->type() == QEvent::Drop)
     {
-        QDropEvent* d = static_cast<QDropEvent*>(e);
+        QDropEvent* dropEvent = static_cast<QDropEvent*>(e);
 
-        if(d->mimeData()->hasUrls())
+        if(dropEvent->mimeData()->hasUrls())
         {
-            QList<QUrl> lst = d->mimeData()->urls();
+            QList<QUrl> lst = dropEvent->mimeData()->urls();
 
             if(lst.count() > 0)
             {

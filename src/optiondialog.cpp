@@ -1072,9 +1072,9 @@ void OptionDialog::setupMergePage(void)
     gbox->addWidget(pGroupBox, line, 0, 1, 2);
     ++line;
     {
-        QGridLayout* gbox = new QGridLayout(pGroupBox);
+        gbox = new QGridLayout(pGroupBox);
         gbox->setColumnStretch(1, 10);
-        int line = 0;
+        line = 0;
 
         label = new QLabel(i18n("Auto merge regular expression:"), page);
         gbox->addWidget(label, line, 0);
@@ -1097,9 +1097,9 @@ void OptionDialog::setupMergePage(void)
     gbox->addWidget(pGroupBox, line, 0, 1, 2);
     ++line;
     {
-        QGridLayout* gbox = new QGridLayout(pGroupBox);
+        gbox = new QGridLayout(pGroupBox);
         gbox->setColumnStretch(1, 10);
-        int line = 0;
+        line = 0;
 
         label = new QLabel(i18n("History start regular expression:"), page);
         gbox->addWidget(label, line, 0);

@@ -1183,7 +1183,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
         QString groupRegExp = parenthesesGroupList[groupIdx - 1];
         if(groupRegExp.indexOf('|') < 0 || groupRegExp.indexOf('(') >= 0)
         {
-            bool bOk = false;
+            bOk = false;
             int i = s.toInt(&bOk);
             if(bOk && i >= 0 && i < 10000)
                 s.sprintf("%04d", i); // This should help for correct sorting of numbers.
@@ -1979,8 +1979,6 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
     if(m_bCursorOn && hasFocus() && m_cursorYPos >= m_firstLine)
     {
-        QPainter painter(this);
-
         painter.setPen(m_pOptions->m_fgColor);
 
         QString str = getString(m_cursorYPos);

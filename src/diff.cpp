@@ -1002,7 +1002,7 @@ void SourceData::FileData::checkLineForComments(
                 ;
             if(!bWhite)
             {
-                int size = i - commentStart;
+                size = i - commentStart;
                 m_unicodeBuf.replace(commentStart, size, QString(" ").repeated(size));
             }
             return;
@@ -1024,7 +1024,7 @@ void SourceData::FileData::checkLineForComments(
                     checkLineForComments(p, i, size, bWhite, bCommentInLine, bStartsOpenComment);
                     if(!bWhite)
                     {
-                        int size = i - commentStart;
+                        size = i - commentStart;
                         m_unicodeBuf.replace(commentStart, size, QString(" ").repeated(size));                    }
                     return;
                 }
@@ -1074,7 +1074,7 @@ void SourceData::FileData::removeComments()
                     checkLineForComments(p, i, size, bWhite, bCommentInLine, bWithinComment);
                     if(!bWhite)
                     {
-                        int size = i - commentStart;
+                        size = i - commentStart;
                         m_unicodeBuf.replace(commentStart, size, QString(" ").repeated(size));
                     }
                     break;
@@ -1331,7 +1331,6 @@ void calcDiff3LineListUsingBC(
                             if((*i3).lineB != -1 ||
                                (before_or_on_equal_line_in_A && i3->lineA != -1))
                             {
-                                Diff3Line d3l;
                                 d3l.lineB = (*i3).lineB;
                                 (*i3).lineB = -1;
 
@@ -1408,7 +1407,6 @@ void calcDiff3LineListUsingBC(
                             if((*i3).lineC != -1 ||
                                (before_or_on_equal_line_in_A && i3->lineA != -1))
                             {
-                                Diff3Line d3l;
                                 d3l.lineC = (*i3).lineC;
                                 (*i3).lineC = -1;
 

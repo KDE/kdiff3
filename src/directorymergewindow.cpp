@@ -1140,7 +1140,7 @@ bool DirectoryMergeWindow::Data::init(
 
     m_fileMergeMap.clear();
     s_eCaseSensitivity = m_bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
-    t_DirectoryList::iterator i;
+    t_DirectoryList::iterator dirIterator;
 
     // calc how many directories will be read:
     double nofScans = (m_dirA.isValid() ? 1 : 0) + (m_dirB.isValid() ? 1 : 0) + (m_dirC.isValid() ? 1 : 0);
@@ -1174,11 +1174,11 @@ bool DirectoryMergeWindow::Data::init(
                                           m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
                                           m_pOptions->m_bDmUseCvsIgnore);
 
-        for(i = m_dirListA.begin(); i != m_dirListA.end(); ++i)
+        for(dirIterator = m_dirListA.begin(); dirIterator != m_dirListA.end(); ++dirIterator)
         {
-            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*i)];
-            //std::cout <<i->filePath()<<std::endl;
-            mfi.m_pFileInfoA = &(*i);
+            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
+            
+            mfi.m_pFileInfoA = &(*dirIterator);
         }
     }
 
@@ -1194,10 +1194,10 @@ bool DirectoryMergeWindow::Data::init(
                                           m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
                                           m_pOptions->m_bDmUseCvsIgnore);
 
-        for(i = m_dirListB.begin(); i != m_dirListB.end(); ++i)
+        for(dirIterator = m_dirListB.begin(); dirIterator != m_dirListB.end(); ++dirIterator)
         {
-            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*i)];
-            mfi.m_pFileInfoB = &(*i);
+            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
+            mfi.m_pFileInfoB = &(*dirIterator);
             if(mfi.m_pFileInfoA && mfi.m_pFileInfoA->fileName() == mfi.m_pFileInfoB->fileName())
                 mfi.m_pFileInfoB->setSharedName(mfi.m_pFileInfoA->fileName()); // Reduce memory by sharing the name.
         }
@@ -1216,10 +1216,10 @@ bool DirectoryMergeWindow::Data::init(
                                           m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
                                           m_pOptions->m_bDmUseCvsIgnore);
 
-        for(i = m_dirListC.begin(); i != m_dirListC.end(); ++i)
+        for(dirIterator = m_dirListC.begin(); dirIterator != m_dirListC.end(); ++dirIterator)
         {
-            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*i)];
-            mfi.m_pFileInfoC = &(*i);
+            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
+            mfi.m_pFileInfoC = &(*dirIterator);
         }
 
         eDefaultMergeOp = eMergeABCToDest;
@@ -1254,8 +1254,8 @@ bool DirectoryMergeWindow::Data::init(
 
     q->sortByColumn(0, Qt::AscendingOrder);
 
-    for(int i = 0; i < columnCount(QModelIndex()); ++i)
-        q->resizeColumnToContents(i);
+    for(int column = 0; column < columnCount(QModelIndex()); ++column)
+        q->resizeColumnToContents(column);
 
     // Try to improve the view a little bit.
     QWidget* pParent = q->parentWidget();
@@ -1827,7 +1827,7 @@ QModelIndex DirectoryMergeWindow::Data::treeIterator(QModelIndex mi, bool bVisit
                     mi = mi.parent();
                     while(mi.isValid())
                     {
-                        QModelIndex miNextSibling = nextSibling(mi);
+                        miNextSibling = nextSibling(mi);
                         if(miNextSibling.isValid())
                         {
                             mi = miNextSibling;
@@ -2921,7 +2921,7 @@ void DirectoryMergeWindow::Data::mergeContinue(bool bStart, bool bVerbose)
                 {
                     for(int childIdx = 0; childIdx < rowCount(miParent); ++childIdx)
                     {
-                        MergeFileInfos* pMFI = getMFI(index(childIdx, 0, miParent));
+                        pMFI = getMFI(index(childIdx, 0, miParent));
                         if((!bSim && !pMFI->m_bOperationComplete) || (bSim && pMFI->m_bSimOpComplete))
                         {
                             bDone = false;
@@ -2930,7 +2930,7 @@ void DirectoryMergeWindow::Data::mergeContinue(bool bStart, bool bVerbose)
                     }
                     if(bDone)
                     {
-                        MergeFileInfos* pMFI = getMFI(miParent);
+                        pMFI = getMFI(miParent);
                         if(bSim)
                             pMFI->m_bSimOpComplete = bDone;
                         else

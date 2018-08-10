@@ -1658,7 +1658,6 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
     {
         t_DirectoryList subDirsList;
 
-        t_DirectoryList::iterator i;
         for(i = m_pDirList->begin(); i != m_pDirList->end(); ++i)
         {
             if(i->isDir() && (!i->isSymLink() || m_bFollowDirLinks))
