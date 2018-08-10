@@ -569,12 +569,6 @@ QString FileAccess::fileName() const
         return QFileInfo(m_filePath).fileName();
 }
 
-void FileAccess::setSharedName(const QString& name)
-{
-    if(name == m_filePath)
-        m_filePath = name; // reduce memory because string is only used once.
-}
-
 QString FileAccess::filePath() const
 {
     if(parent() && parent()->parent())

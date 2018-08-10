@@ -96,7 +96,6 @@ public:
    QString getStatusText();
 
    FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
-   void setSharedName( const QString& name ); // might reduce memory consumption
 private:
    void setUdsEntry( const KIO::UDSEntry& e );
    void setFile( const QFileInfo& fi, FileAccess* pParent );

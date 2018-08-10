@@ -375,6 +375,8 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
 
     QString m_dirMergeStateFilename;
 
+    void buildMergeMap(void);
+
     class FileKey
     {
       public:
@@ -1015,6 +1017,41 @@ bool DirectoryMergeWindow::init(
     return d->init(dirA, dirB, dirC, dirDest, bDirectoryMerge, bReload);
 }
 
+void DirectoryMergeWindow::Data::buildMergeMap(void)
+{
+    t_DirectoryList::iterator dirIterator;
+
+    if(m_dirA.isValid())
+    {
+        for(dirIterator = m_dirListA.begin(); dirIterator != m_dirListA.end(); ++dirIterator)
+        {
+            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
+
+            mfi.m_pFileInfoA = &(*dirIterator);
+        }
+    }
+    
+    if(m_dirB.isValid())
+    {
+        for(dirIterator = m_dirListB.begin(); dirIterator != m_dirListB.end(); ++dirIterator)
+        {
+            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
+
+            mfi.m_pFileInfoB = &(*dirIterator);
+        }
+    }
+
+    if(m_dirC.isValid())
+    {
+        for(dirIterator = m_dirListC.begin(); dirIterator != m_dirListC.end(); ++dirIterator)
+        {
+            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
+
+            mfi.m_pFileInfoC = &(*dirIterator);
+        }
+    }
+}
+
 bool DirectoryMergeWindow::Data::init(
     FileAccess& dirA,
     FileAccess& dirB,
@@ -1140,8 +1177,6 @@ bool DirectoryMergeWindow::Data::init(
 
     m_fileMergeMap.clear();
     s_eCaseSensitivity = m_bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
-    t_DirectoryList::iterator dirIterator;
-
     // calc how many directories will be read:
     double nofScans = (m_dirA.isValid() ? 1 : 0) + (m_dirB.isValid() ? 1 : 0) + (m_dirC.isValid() ? 1 : 0);
     int currentScan = 0;
@@ -1173,13 +1208,6 @@ bool DirectoryMergeWindow::Data::init(
                                           m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
                                           m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
                                           m_pOptions->m_bDmUseCvsIgnore);
-
-        for(dirIterator = m_dirListA.begin(); dirIterator != m_dirListA.end(); ++dirIterator)
-        {
-            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
-            
-            mfi.m_pFileInfoA = &(*dirIterator);
-        }
     }
 
     if(m_dirB.isValid())
@@ -1193,14 +1221,6 @@ bool DirectoryMergeWindow::Data::init(
                                           m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
                                           m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
                                           m_pOptions->m_bDmUseCvsIgnore);
-
-        for(dirIterator = m_dirListB.begin(); dirIterator != m_dirListB.end(); ++dirIterator)
-        {
-            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
-            mfi.m_pFileInfoB = &(*dirIterator);
-            if(mfi.m_pFileInfoA && mfi.m_pFileInfoA->fileName() == mfi.m_pFileInfoB->fileName())
-                mfi.m_pFileInfoB->setSharedName(mfi.m_pFileInfoA->fileName()); // Reduce memory by sharing the name.
-        }
     }
 
     e_MergeOperation eDefaultMergeOp;
@@ -1216,16 +1236,12 @@ bool DirectoryMergeWindow::Data::init(
                                           m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
                                           m_pOptions->m_bDmUseCvsIgnore);
 
-        for(dirIterator = m_dirListC.begin(); dirIterator != m_dirListC.end(); ++dirIterator)
-        {
-            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
-            mfi.m_pFileInfoC = &(*dirIterator);
-        }
-
         eDefaultMergeOp = eMergeABCToDest;
     }
     else
         eDefaultMergeOp = m_bSyncMode ? eMergeToAB : eMergeABToDest;
+
+    buildMergeMap();
 
     bool bContinue = true;
     if(!bListDirSuccessA || !bListDirSuccessB || !bListDirSuccessC)
