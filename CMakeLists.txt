@@ -55,19 +55,22 @@ set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5:
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     #Adjust clang specfic warnings
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow")
     set(CLANG_WARNING_FLAGS "-Wno-invalid-pp-token -Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
-    set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CLANG_WARNING_FLAGS}")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     add_definitions(-DNOMINMAX) #Suppress MSVCs min/max macros
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wduplicated-cond -Wduplicated-branches -Wshadow")
 endif()
+
+set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 set(
     needed_features
     cxx_nullptr
     cxx_override
 )
-
 
 add_definitions(
     -DQT_DEPRECATED_WARNINGS #Get warnings from QT about deprecated functions.
