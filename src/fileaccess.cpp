@@ -41,10 +41,10 @@
 #include <utime.h>
 #endif
 
-class FileAccess::Data
+class FileAccess::FileAccessPrivateData
 {
   public:
-    Data()
+    FileAccessPrivateData()
     {
         reset();
     }
@@ -70,9 +70,9 @@ class FileAccess::Data
         }
     }
     
-    ~Data()
+    ~FileAccessPrivateData()
     {
-        //Cleanup tempfile when Data object referancing it is destroyed.
+        //Cleanup tempfile when FileAccessPrivateData object referancing it is destroyed.
         if(!m_localCopy.isEmpty())
         {
             removeTempFile(m_localCopy);
@@ -130,7 +130,7 @@ FileAccess::FileAccess(const FileAccess& other)
 void FileAccess::createData()
 {
     if(d() == nullptr)
-        m_pData = new Data();
+        m_pData = new FileAccessPrivateData();
 }
 
 FileAccess& FileAccess::operator=(const FileAccess& other)
@@ -168,7 +168,7 @@ static QString nicePath(const QFileInfo& fi)
 
 // Two kinds of optimization are applied here:
 // 1. Speed: don't ask for data as long as it is not needed or cheap to get.
-//    When opening a file it is early enough to ask for details.
+//    When opening a file it is easy enough to ask for details.
 // 2. Memory usage: Don't store data that is not needed, and avoid redundancy.
 //    For recursive directory trees don't store the full path if a parent is available.
 //    Store urls only if files are not local.
@@ -582,12 +582,12 @@ FileAccess* FileAccess::parent() const
     return d()->m_pParent;
 }
 
-FileAccess::Data* FileAccess::d()
+FileAccess::FileAccessPrivateData* FileAccess::d()
 {
     return m_pData;
 }
 
-const FileAccess::Data* FileAccess::d() const
+const FileAccess::FileAccessPrivateData* FileAccess::d() const
 {
     return m_pData;
 }

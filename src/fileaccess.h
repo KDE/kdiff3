@@ -101,12 +101,12 @@ private:
    void setFile( const QFileInfo& fi, FileAccess* pParent );
    void setStatusText( const QString& s );
 
-   class Data;
-   Data* d();
-   const Data* d() const;
+   class FileAccessPrivateData;
+   FileAccessPrivateData* d();
+   const FileAccessPrivateData* d() const;
    void createData();
 
-   Data* m_pData = nullptr;
+   FileAccessPrivateData* m_pData = nullptr;
    
    QString m_filePath; // might be absolute or relative if m_pParent!=0
    qint64 m_size;
