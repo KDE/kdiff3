@@ -101,6 +101,7 @@ class FileAccess::FileAccessPrivateData
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
     m_pData = nullptr;
+    m_modificationTime = QDateTime();
     createData();
     setFile(name, bWantToWrite);
 }
@@ -115,6 +116,7 @@ FileAccess::FileAccess()
     m_bHidden = false;
     m_pData = nullptr;
     m_size = 0;
+    m_modificationTime = QDateTime();
 
     createData();
 }
@@ -188,17 +190,10 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
 #endif
     }
 
-    if(d()->m_url.isEmpty())
+    if(d()->m_url.isLocalFile())
     {
-#if defined(Q_OS_WIN)
-        // On some windows machines in a network this takes very long.
-        // and it's not so important anyway.
-        d()->m_bReadable = true;
-        d()->m_bExecutable = false;
-#else
         d()->m_bReadable = fi.isReadable();
         d()->m_bExecutable = fi.isExecutable();
-#endif
 
         //d()->m_creationTime = fi.created();
         //d()->m_modificationTime = fi.lastModified();
@@ -255,10 +250,11 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
         //   2. When the local file doesn't exist and should be written to.
 
         bool bExistsLocal = QDir().exists(name);
-        if(url.isLocalFile() || url.isRelative() || !url.isValid() || bExistsLocal) // assuming that invalid means relative
+        if(url.isLocalFile() || url.isRelative() || !url.isValid() || bExistsLocal) // Treate invalid urls as relative.
         {
             QString localName = name;
 
+            d()->m_url = url;
 #if defined(Q_OS_WIN)
             if(localName.startsWith(QLatin1String("/tmp/")))
             {
@@ -300,7 +296,7 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
 
 void FileAccess::addPath(const QString& txt)
 {
-    if(d() != nullptr && d()->m_url.isEmpty() && d()->m_url.isValid())
+    if(!isLocal() && d()->m_url.isValid())
     {
         QUrl url = d()->m_url.adjusted(QUrl::StripTrailingSlash);
         d()->m_url.setPath(url.path() + '/' + txt);
@@ -418,12 +414,12 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
 
 bool FileAccess::isValid() const
 {
-    return d() == nullptr ? !m_filePath.isEmpty() : d()->m_bValidData;
+    return !m_filePath.isEmpty() || d()->m_bValidData;
 }
 
 bool FileAccess::isFile() const
 {
-    if(parent() || d())
+    if(parent() || !isLocal())
         return m_bFile;
     else
         return QFileInfo(absoluteFilePath()).isFile();
@@ -475,25 +471,23 @@ QUrl FileAccess::url() const
 
 bool FileAccess::isLocal() const
 {
-    return d() == nullptr || d()->m_bLocal;
+    Q_ASSERT(d()->m_bLocal == d()->m_url.isLocalFile());
+    return d()->m_bLocal;
 }
 
 bool FileAccess::isReadable() const
 {
-#if defined(Q_OS_WIN)
-    // On some windows machines in a network this takes very long to find out and it's not so important anyway.
-    return true;
-#else
-    if(!d()->m_url.isEmpty() && !d()->m_url.isLocalFile())
+    //This can be very slow in some network setups so use cached value
+    if(!d()->m_url.isLocalFile())
         return d()->m_bReadable;
     else
         return QFileInfo(absoluteFilePath()).isReadable();
-#endif
 }
 
 bool FileAccess::isWritable() const
 {
-    if(parent() || !(d()->m_url.isEmpty() || d()->m_url.isLocalFile()))
+    //This can be very slow in some network setups so use cached value
+    if(parent() || !d()->m_url.isLocalFile())
         return m_bWritable;
     else
         return QFileInfo(absoluteFilePath()).isWritable();
@@ -501,20 +495,16 @@ bool FileAccess::isWritable() const
 
 bool FileAccess::isExecutable() const
 {
-#if defined(Q_OS_WIN)
-    // On some windows machines in a network this takes very long to find out and it's not so important anyway.
-    return true;
-#else
-    if(!(d()->m_url.isEmpty() || d()->m_url.isLocalFile()))
+    //This can be very slow in some network setups so use cached value
+    if(!d()->m_url.isLocalFile())
         return d()->m_bExecutable;
     else
         return QFileInfo(absoluteFilePath()).isExecutable();
-#endif
 }
 
 bool FileAccess::isHidden() const
 {
-    if(parent() || !(d()->m_url.isEmpty() || d()->m_url.isLocalFile()))
+    if(parent() || !(d()->m_url.isLocalFile()))
         return m_bHidden;
     else
         return QFileInfo(absoluteFilePath()).isHidden();
@@ -522,7 +512,7 @@ bool FileAccess::isHidden() const
 
 QString FileAccess::readLink() const
 {
-    if(!(d()->m_url.isEmpty() || d()->m_url.isLocalFile()))
+    if(!(d()->m_linkTarget.isEmpty()))
         return d()->m_linkTarget;
     else
         return QString();
@@ -551,7 +541,7 @@ QString FileAccess::absoluteFilePath() const
 // Just the name-part of the path, without parent directories
 QString FileAccess::fileName() const
 {
-    if(!(d()->m_url.isEmpty() || d()->m_url.isLocalFile()))
+    if(!d()->m_url.isLocalFile())
         return d()->m_name;
     else if(parent())
         return m_filePath;
@@ -830,7 +820,7 @@ qint64 FileAccess::sizeForReading()
 
 QString FileAccess::getStatusText()
 {
-    return d() == nullptr ? QString() : d()->m_statusText;
+    return d()->m_statusText;
 }
 
 void FileAccess::setStatusText(const QString& s)
