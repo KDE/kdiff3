@@ -156,16 +156,6 @@ FileAccess::~FileAccess()
         delete m_pData;
 }
 
-static QString nicePath(const QFileInfo& fi)
-{
-    QString fp = fi.filePath();
-    if(fp.length() > 2 && fp[0] == '.' && fp[1] == '/')
-    {
-        return fp.mid(2);
-    }
-    return fp;
-}
-
 // Two kinds of optimization are applied here:
 // 1. Speed: don't ask for data as long as it is not needed or cheap to get.
 //    When opening a file it is easy enough to ask for details.
@@ -175,7 +165,7 @@ static QString nicePath(const QFileInfo& fi)
 
 void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
 {
-    m_filePath = pParent == nullptr ? fi.absoluteFilePath() : nicePath(fi.filePath()); // remove "./" at start
+    m_filePath = pParent == nullptr ? fi.absoluteFilePath() : fi.fileName();
 
     m_bSymLink = fi.isSymLink();
     createData();
