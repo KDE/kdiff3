@@ -186,11 +186,7 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
         m_modificationTime = fi.lastModified();
         m_bHidden = fi.isHidden();
 
-#if defined(Q_OS_WIN)
-        m_bWritable = pParent == 0 || fi.isWritable(); // in certain situations this might become a problem though
-#else
         m_bWritable = fi.isWritable();
-#endif
     }
 
     if(d()->isLocal())
@@ -237,62 +233,54 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
 
     createData();
     d()->reset();
-    // Note: Checking if the filename-string is empty is necessary for Win95/98/ME.
-    //       The isFile() / isDir() queries would cause the program to crash.
-    //       (This is a Win95-bug which has been corrected only in WinNT/2000/XP.)
-    if(!name.isEmpty())
+    //Nothing to do here.
+    if(name.isEmpty())
+        return;
+    
+    QUrl url = QUrl::fromUserInput(name, QString(), QUrl::AssumeLocalFile);
+
+    // FileAccess tries to detect if the given name is an URL or a local file.
+    // This is a problem if the filename looks like an URL (i.e. contains a colon ':').
+    // e.g. "file:f.txt" is a valid filename.
+    // Most of the time it is sufficient to check if the file exists locally.
+    // 2 Problems remain:
+    //   1. When the local file exists and the remote location is wanted nevertheless. (unlikely)
+    //   2. When the local file doesn't exist and should be written to.
+
+    bool bExistsLocal = QDir().exists(name);
+    if(url.isLocalFile() || url.isRelative() || !url.isValid() || bExistsLocal) // Treate invalid urls as relative.
     {
-        QUrl url = QUrl::fromUserInput(name, QString(), QUrl::AssumeLocalFile);
+        QString localName = url.path();
 
-        // FileAccess tries to detect if the given name is an URL or a local file.
-        // This is a problem if the filename looks like an URL (i.e. contains a colon ':').
-        // e.g. "file:f.txt" is a valid filename.
-        // Most of the time it is sufficient to check if the file exists locally.
-        // 2 Problems remain:
-        //   1. When the local file exists and the remote location is wanted nevertheless. (unlikely)
-        //   2. When the local file doesn't exist and should be written to.
-
-        bool bExistsLocal = QDir().exists(name);
-        if(url.isLocalFile() || url.isRelative() || !url.isValid() || bExistsLocal) // Treate invalid urls as relative.
-        {
-            QString localName = name;
-
-            d()->m_url = url;
+        d()->m_url = url;
 #if defined(Q_OS_WIN)
-            if(localName.startsWith(QLatin1String("/tmp/")))
-            {
-                // git on Cygwin will put files in /tmp
-                // A workaround for the a native kdiff3 binary to find them...
-
-                QString cygwinBin = QLatin1String(qgetenv("CYGWIN_BIN"));
-                if(!cygwinBin.isEmpty())
-                {
-                    localName = QString("%1\\..%2").arg(cygwinBin).arg(name);
-                }
-            }
-#endif
-
-            if(!bExistsLocal && url.isLocalFile() && name.left(5).toLower() == "file:")
-            {
-                localName = url.path(); // I want the path without preceding "file:"
-            }
-
-            QFileInfo fi(localName);
-            setFile(fi, nullptr);
-        }
-        else
+        if(localName.startsWith(QLatin1String("/tmp/")))
         {
-            d()->m_url = url;
-            d()->m_name = d()->m_url.fileName();
+            // git on Cygwin will put files in /tmp
+            // A workaround for the a native kdiff3 binary to find them...
 
-            FileAccessJobHandler jh(this);            // A friend, which writes to the parameters of this class!
-            jh.stat(2 /*all details*/, bWantToWrite); // returns bSuccess, ignored
-
-            m_filePath = name;
-            d()->m_bValidData = true; // After running stat() the variables are initialised
-                                      // and valid even if the file doesn't exist and the stat
-                                      // query failed.
+            QString cygwinBin = QLatin1String(qgetenv("CYGWIN_BIN"));
+            if(!cygwinBin.isEmpty())
+            {
+                localName = QString("%1\\..%2").arg(cygwinBin).arg(name);
+            }
         }
+#endif
+        QFileInfo fi(localName);
+        setFile(fi, nullptr);
+    }
+    else
+    {
+        d()->m_url = url;
+        d()->m_name = d()->m_url.fileName();
+
+        FileAccessJobHandler jh(this);            // A friend, which writes to the parameters of this class!
+        jh.stat(2 /*all details*/, bWantToWrite); // returns bSuccess, ignored
+
+        m_filePath = name;
+        d()->m_bValidData = true; // After running stat() the variables are initialised
+                                  // and valid even if the file doesn't exist and the stat
+                                  // query failed.
     }
 }
 
@@ -409,7 +397,9 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
         int pos = m_filePath.lastIndexOf('/') + 1;
         d()->m_name = m_filePath.mid(pos);
     }
+#ifndef Q_OS_WIN
     m_bHidden = d()->m_name[0] == '.';
+#endif
 }
 
 
