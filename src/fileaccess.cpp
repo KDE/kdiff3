@@ -69,7 +69,13 @@ class FileAccess::FileAccessPrivateData
             m_localCopy = "";
         }
     }
-    
+
+    inline bool isLocal() const
+    {
+        Q_ASSERT(m_bLocal == m_url.isLocalFile());
+        return m_bLocal || m_url.isLocalFile() || !m_url.isValid();
+    }
+
     ~FileAccessPrivateData()
     {
         //Cleanup tempfile when FileAccessPrivateData object referancing it is destroyed.
@@ -190,7 +196,7 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
 #endif
     }
 
-    if(d()->m_url.isLocalFile())
+    if(d()->isLocal())
     {
         d()->m_bReadable = fi.isReadable();
         d()->m_bExecutable = fi.isExecutable();
@@ -471,14 +477,13 @@ QUrl FileAccess::url() const
 
 bool FileAccess::isLocal() const
 {
-    Q_ASSERT(d()->m_bLocal == d()->m_url.isLocalFile());
-    return d()->m_bLocal;
+    return d()->isLocal();
 }
 
 bool FileAccess::isReadable() const
 {
     //This can be very slow in some network setups so use cached value
-    if(!d()->m_url.isLocalFile())
+    if(!d()->isLocal())
         return d()->m_bReadable;
     else
         return QFileInfo(absoluteFilePath()).isReadable();
@@ -487,7 +492,7 @@ bool FileAccess::isReadable() const
 bool FileAccess::isWritable() const
 {
     //This can be very slow in some network setups so use cached value
-    if(parent() || !d()->m_url.isLocalFile())
+    if(parent() || !d()->isLocal())
         return m_bWritable;
     else
         return QFileInfo(absoluteFilePath()).isWritable();
@@ -496,7 +501,7 @@ bool FileAccess::isWritable() const
 bool FileAccess::isExecutable() const
 {
     //This can be very slow in some network setups so use cached value
-    if(!d()->m_url.isLocalFile())
+    if(!d()->isLocal())
         return d()->m_bExecutable;
     else
         return QFileInfo(absoluteFilePath()).isExecutable();
@@ -504,7 +509,7 @@ bool FileAccess::isExecutable() const
 
 bool FileAccess::isHidden() const
 {
-    if(parent() || !(d()->m_url.isLocalFile()))
+    if(parent() || !(d()->isLocal()))
         return m_bHidden;
     else
         return QFileInfo(absoluteFilePath()).isHidden();
@@ -541,7 +546,7 @@ QString FileAccess::absoluteFilePath() const
 // Just the name-part of the path, without parent directories
 QString FileAccess::fileName() const
 {
-    if(!d()->m_url.isLocalFile())
+    if(!d()->isLocal())
         return d()->m_name;
     else if(parent())
         return m_filePath;
