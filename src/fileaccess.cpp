@@ -60,7 +60,6 @@ class FileAccess::FileAccessPrivateData
         m_bExecutable = false;
         m_linkTarget = "";
         //m_fileType = -1;
-        m_bLocal = true;
         m_pParent = nullptr;
         //Insure that old tempFile is removed we will recreate it as needed.
         if(!m_localCopy.isEmpty())
@@ -72,8 +71,7 @@ class FileAccess::FileAccessPrivateData
 
     inline bool isLocal() const
     {
-        Q_ASSERT(m_bLocal == m_url.isLocalFile());
-        return m_bLocal || m_url.isLocalFile() || !m_url.isValid();
+        return m_url.isLocalFile() || !m_url.isValid();
     }
 
     ~FileAccessPrivateData()
@@ -86,7 +84,6 @@ class FileAccess::FileAccessPrivateData
     }
 
     QUrl m_url;
-    bool m_bLocal;
     bool m_bValidData;
 
     //QDateTime m_accessTime;
@@ -219,7 +216,7 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
             }
 #endif
         }
-        d()->m_bLocal = true;
+
         d()->m_bValidData = true;
         d()->m_url = QUrl::fromLocalFile(fi.filePath());
         if(d()->m_url.isRelative())
@@ -287,7 +284,6 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
         {
             d()->m_url = url;
             d()->m_name = d()->m_url.fileName();
-            d()->m_bLocal = false;
 
             FileAccessJobHandler jh(this);            // A friend, which writes to the parameters of this class!
             jh.stat(2 /*all details*/, bWantToWrite); // returns bSuccess, ignored
@@ -406,7 +402,6 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
 
     m_bExists = acc != 0 || fileType != 0;
 
-    d()->m_bLocal = false;
     d()->m_bValidData = true;
     m_bSymLink = !d()->m_linkTarget.isEmpty();
     if(d()->m_name.isEmpty())
@@ -1524,7 +1519,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
 
                     fa.m_filePath = QString::fromUtf16((const ushort*)findData.cFileName);
                     if(fa.m_filePath != "." && fa.m_filePath != "..")
-                    {
+                    {//TODO:Use setFile here instead of duplicating code
                         fa.m_size = (qint64(findData.nFileSizeHigh) << 32) + findData.nFileSizeLow;
 
                         FILETIME ft;
@@ -1546,7 +1541,6 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
                         //fa.m_bExecutable = false; // Useless on windows
                         fa.m_bExists = true;
                         //fa.m_bReadable   = true;
-                        //fa.m_bLocal      = true;
                         //fa.m_bValidData  = true;
                         fa.m_bSymLink = false;
                         //fa.m_fileType    = 0;
@@ -1596,6 +1590,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
     {
         cvsIgnoreList.init(*m_pFileAccess, cvsIgnoreExists(pDirList));
     }
+    //TODO: Ask os for this information don't hard code it.
 #if defined(Q_OS_WIN)
     bool bCaseSensitive = false;
 #else
