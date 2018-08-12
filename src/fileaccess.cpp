@@ -681,19 +681,12 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
                     return false;
             }
             f.close();
-#ifndef Q_OS_WIN
+
             if(isExecutable()) // value is true if the old file was executable
             {
                 // Preserve attributes
                 f.setPermissions(f.permissions() | QFile::ExeUser);
-                //struct stat srcFileStatus;
-                //int statResult = ::stat( filePath().toLocal8Bit().constData(), &srcFileStatus );
-                //if (statResult==0)
-                //{
-                //   ::chmod ( filePath().toLocal8Bit().constData(), srcFileStatus.st_mode | S_IXUSR );
-                //}
             }
-#endif
 
             return true;
         }
