@@ -150,7 +150,7 @@ FileAccess& FileAccess::operator=(const FileAccess& other)
     m_bExists = other.m_bExists;
     m_bWritable = other.m_bWritable;
     m_bHidden = other.m_bHidden;
-
+    m_bReserved = false;
     *m_pData = *other.m_pData;
 
     return *this;
