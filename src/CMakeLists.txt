@@ -20,7 +20,8 @@ set(kdiff3part_PART_SRCS
    common.cpp 
    smalldialogs.cpp 
    progress.cpp
-   selection.cpp )
+   selection.cpp
+   cvsignorelist.cpp )
 
 add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
