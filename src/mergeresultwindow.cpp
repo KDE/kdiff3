@@ -2834,7 +2834,7 @@ void MergeResultWindow::deleteSelection()
                 {
                     // Remove the line
                     if(mlIt->mergeEditLineList.size() > 1)
-                        mlIt->mergeEditLineList.erase(*melIt);
+                        mlIt->mergeEditLineList.erase(melIt);
                     else
                         melIt->setRemoved();
                 }
