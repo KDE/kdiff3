@@ -28,19 +28,12 @@
 #include <list>   // std::list
 //#include <log/file_sink.h>
 #include <windows.h>
-
-#if 1
 #include <string> // std::wstring
+
 #ifdef UNICODE
 typedef std::wstring tstring;
 #else
 typedef std::string tstring;
-#endif
-#define i18n(x) getTranslation( TEXT(x) )
-#else
-#include "diffextstring.h"
-typedef STRING tstring;
-#define i18n(x) TEXT(x) 
 #endif
 
 #define MESSAGELOG( msg ) SERVER::logMessage( __FUNCTION__, __FILE__, __LINE__, msg )

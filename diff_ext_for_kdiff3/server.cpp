@@ -40,6 +40,7 @@
 #include <objbase.h>
 #include <initguid.h>
 
+#include <KLocalizedString>
 //#include <log/log.h>
 //#include <log/log_message.h>
 //#include <log/file_sink.h>
