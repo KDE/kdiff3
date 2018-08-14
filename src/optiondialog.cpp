@@ -532,13 +532,14 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
     {
         if(c != nullptr)
         {
-            QLatin1String codecName=QLatin1String(c->name());
+            QString codecName = QLatin1String(c->name());
             for(int i = 0; i < m_codecVec.size(); ++i)
             {
                 if(c == m_codecVec[i])
                     return; // don't insert any codec twice
             }
-            addItem(visibleCodecName.isEmpty() ? codecName : visibleCodecName + " (" + codecName + ")", (int)m_codecVec.size());
+            QString itemText = visibleCodecName.isEmpty() ? codecName : visibleCodecName + QStringLiteral(" (") + codecName + QStringLiteral(")");
+            addItem(itemText, (int)m_codecVec.size());
             m_codecVec.push_back(c);
         }
     }
