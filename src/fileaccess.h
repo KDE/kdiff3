@@ -13,6 +13,7 @@
 
 #include "progress.h"
 
+#include <QFileInfo>
 #include <QDateTime>
 
 #include <KIO/UDSEntry>
@@ -24,7 +25,6 @@ namespace KIO {
 bool wildcardMultiMatch( const QString& wildcard, const QString& testString, bool bCaseSensitive );
 
 class t_DirectoryList;
-class QFileInfo;
 
 class ProgressProxyExtender: public ProgressProxy
 {
@@ -107,7 +107,8 @@ private:
    void createData();
 
    FileAccessPrivateData* m_pData = nullptr;
-   
+
+   QFileInfo m_fileInfo;
    QString m_filePath; // might be absolute or relative if m_pParent!=0
    qint64 m_size;
    QDateTime m_modificationTime;
@@ -116,8 +117,9 @@ private:
    bool m_bDir      : 1;
    bool m_bExists   : 1;
    bool m_bWritable : 1;
+   bool m_bReadable : 1;
+   bool m_bExecutable:1;
    bool m_bHidden   : 1;
-   bool m_bReserved : 1;
 
    friend class FileAccessJobHandler;
 };

@@ -55,10 +55,7 @@ class FileAccess::FileAccessPrivateData
         m_url = QUrl();
         m_bValidData = false;
         m_name = QString();
-        //m_creationTime = QDateTime();
-        //m_accessTime = QDateTime();
-        m_bReadable = false;
-        m_bExecutable = false;
+       
         m_linkTarget = "";
         //m_fileType = -1;
         m_pParent = nullptr;
@@ -87,16 +84,10 @@ class FileAccess::FileAccessPrivateData
     QUrl m_url;
     bool m_bValidData;
 
-    //QDateTime m_accessTime;
-    //QDateTime m_creationTime;
-    bool m_bReadable;
-    bool m_bExecutable;
     //long m_fileType; // for testing only
     FileAccess* m_pParent;
-
+    
     QString m_linkTarget;
-    //QString m_user;
-    //QString m_group;
     QString m_name = QString("");
     QString m_localCopy = QString("");
     QString m_statusText; // Might contain an error string, when the last operation didn't succeed.
@@ -147,10 +138,11 @@ FileAccess& FileAccess::operator=(const FileAccess& other)
     m_bSymLink = other.m_bSymLink;
     m_bFile = other.m_bFile;
     m_bDir = other.m_bDir;
+    m_bReadable = other.m_bReadable;
+    m_bExecutable = other.m_bExecutable;
     m_bExists = other.m_bExists;
     m_bWritable = other.m_bWritable;
     m_bHidden = other.m_bHidden;
-    m_bReserved = false;
     *m_pData = *other.m_pData;
 
     return *this;
@@ -171,6 +163,7 @@ FileAccess::~FileAccess()
 
 void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
 {
+    m_fileInfo = fi;
     m_filePath = pParent == nullptr ? fi.absoluteFilePath() : fi.fileName();
 
     m_bSymLink = fi.isSymLink();
@@ -184,17 +177,13 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
     m_size = fi.size();
     m_modificationTime = fi.lastModified();
     m_bHidden = fi.isHidden();
-
+    
     m_bWritable = fi.isWritable();
+    m_bReadable = fi.isReadable();
+    m_bExecutable = fi.isExecutable();
 
     if(d()->isLocal())
     {
-        d()->m_bReadable = fi.isReadable();
-        d()->m_bExecutable = fi.isExecutable();
-
-        //d()->m_creationTime = fi.created();
-        //d()->m_modificationTime = fi.lastModified();
-        //d()->m_accessTime = fi.lastRead();
         d()->m_name = fi.fileName();
         if(m_bSymLink)
         {
@@ -337,16 +326,12 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
         case KIO::UDSEntry::UDS_SIZE:
             m_size = e.numberValue(f);
             break;
-        //case KIO::UDSEntry::UDS_USER :               d()->m_user   = e.stringValue(f);    break;
-        //case KIO::UDSEntry::UDS_GROUP :              d()->m_group  = e.stringValue(f);    break;
         case KIO::UDSEntry::UDS_NAME:
             m_filePath = e.stringValue(f);
             break; // During listDir the relative path is given here.
         case KIO::UDSEntry::UDS_MODIFICATION_TIME:
             m_modificationTime = QDateTime::fromMSecsSinceEpoch(e.numberValue(f));
             break;
-        //case KIO::UDSEntry::UDS_ACCESS_TIME :       d()->m_accessTime.setTime_t( e.numberValue(f) ); break;
-        //case KIO::UDSEntry::UDS_CREATION_TIME :     d()->m_creationTime.setTime_t( e.numberValue(f) ); break;
         case KIO::UDSEntry::UDS_LINK_DEST:
             d()->m_linkTarget = e.stringValue(f);
             break;
@@ -354,9 +339,9 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
         {
             #ifndef Q_OS_WIN
             acc = e.numberValue(f);
-            d()->m_bReadable = (acc & S_IRUSR) != 0;
+            m_bReadable = (acc & S_IRUSR) != 0;
             m_bWritable = (acc & S_IWUSR) != 0;
-            d()->m_bExecutable = (acc & S_IXUSR) != 0;
+            m_bExecutable = (acc & S_IXUSR) != 0;
             #endif
             break;
         }
@@ -399,7 +384,6 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
     m_bHidden = d()->m_name[0] == '.';
 #endif
 }
-
 
 bool FileAccess::isValid() const
 {
@@ -467,9 +451,9 @@ bool FileAccess::isReadable() const
 {
     //This can be very slow in some network setups so use cached value
     if(!d()->isLocal())
-        return d()->m_bReadable;
+        return m_bReadable;
     else
-        return QFileInfo(absoluteFilePath()).isReadable();
+        return m_fileInfo.isReadable();
 }
 
 bool FileAccess::isWritable() const
@@ -478,32 +462,29 @@ bool FileAccess::isWritable() const
     if(parent() || !d()->isLocal())
         return m_bWritable;
     else
-        return QFileInfo(absoluteFilePath()).isWritable();
+        return m_fileInfo.isWritable();
 }
 
 bool FileAccess::isExecutable() const
 {
     //This can be very slow in some network setups so use cached value
     if(!d()->isLocal())
-        return d()->m_bExecutable;
+        return m_bExecutable;
     else
-        return QFileInfo(absoluteFilePath()).isExecutable();
+        return m_fileInfo.isExecutable();
 }
 
 bool FileAccess::isHidden() const
 {
-    if(parent() || !(d()->isLocal()))
+    if(!(d()->isLocal()))
         return m_bHidden;
     else
-        return QFileInfo(absoluteFilePath()).isHidden();
+        return m_fileInfo.isHidden();
 }
 
 QString FileAccess::readLink() const
 {
-    if(!(d()->m_linkTarget.isEmpty()))
-        return d()->m_linkTarget;
-    else
-        return QString();
+    return d()->m_linkTarget;
 }
 
 QString FileAccess::absoluteFilePath() const
@@ -534,7 +515,7 @@ QString FileAccess::fileName() const
     else if(parent())
         return m_filePath;
     else
-        return QFileInfo(m_filePath).fileName();
+        return m_fileInfo.fileName();
 }
 
 QString FileAccess::filePath() const
