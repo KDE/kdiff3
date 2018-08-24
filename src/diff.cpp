@@ -785,12 +785,10 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     }
     else
     {
-        //FIXME: Remove this hack after determining root cause.
+        //TODO: Needed?
         if(m_lmppData.m_vSize < m_normalData.m_vSize)
         {
-            //This a bug that needs fixed elsewhere not hacked around
-            Q_ASSERT(m_lmppData.m_vSize == m_normalData.m_vSize);
-            // This probably is the fault of the LMPP-Command, but not worth reporting.
+            // Preprocessing command may result in smaller data buffer so adjust size
             m_lmppData.m_v.resize((int)m_normalData.m_vSize);
             for(qint64 i = m_lmppData.m_vSize; i < m_normalData.m_vSize; ++i)
             { // Set all empty lines to point to the end of the buffer.
