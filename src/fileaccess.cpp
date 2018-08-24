@@ -178,17 +178,14 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
 
     d()->m_pParent = pParent;
 
-    if(parent() || d()) // if a parent is specified then we arrive here because of listing a directory
-    {
-        m_bFile = fi.isFile();
-        m_bDir = fi.isDir();
-        m_bExists = fi.exists();
-        m_size = fi.size();
-        m_modificationTime = fi.lastModified();
-        m_bHidden = fi.isHidden();
+    m_bFile = fi.isFile();
+    m_bDir = fi.isDir();
+    m_bExists = fi.exists();
+    m_size = fi.size();
+    m_modificationTime = fi.lastModified();
+    m_bHidden = fi.isHidden();
 
-        m_bWritable = fi.isWritable();
-    }
+    m_bWritable = fi.isWritable();
 
     if(d()->isLocal())
     {
@@ -419,7 +416,7 @@ bool FileAccess::isFile() const
 
 bool FileAccess::isDir() const
 {
-    if(parent() || d())
+    if(isLocal())
         return m_bDir;
     else
         return QFileInfo(absoluteFilePath()).isDir();
@@ -432,7 +429,7 @@ bool FileAccess::isSymLink() const
 
 bool FileAccess::exists() const
 {
-    if(parent() || d())
+    if(isLocal())
         return m_bExists;
     else
         return QFileInfo::exists(absoluteFilePath());
@@ -440,7 +437,7 @@ bool FileAccess::exists() const
 
 qint64 FileAccess::size() const
 {
-    if(parent() || d())
+    if(isLocal())
         return m_size;
     else
         return QFileInfo(absoluteFilePath()).size();
