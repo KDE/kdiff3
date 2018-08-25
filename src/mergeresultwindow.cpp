@@ -1975,7 +1975,6 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         painter.drawPixmap(0, 0, m_pixmap); // Draw everything. (Internally cursor rect is clipped anyway.)
         m_bCursorUpdate = false;
     }
-    painter.end();
 
     if(m_bCursorOn && hasFocus() && m_cursorYPos >= m_firstLine)
     {
@@ -1986,6 +1985,8 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         getTextLayoutForLine(m_cursorYPos, str, textLayout);
         textLayout.drawCursor(&painter, QPointF(0, (m_cursorYPos - m_firstLine) * fontMetrics().lineSpacing()), m_cursorXPos);
     }
+
+    painter.end();
 
     if(!bOldSelectionContainsData && m_selection.selectionContainsData())
         emit newSelection();
