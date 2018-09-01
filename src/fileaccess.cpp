@@ -164,6 +164,7 @@ FileAccess::~FileAccess()
 void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
 {
     m_fileInfo = fi;
+    m_fileInfo.setCaching(true);
     m_filePath = pParent == nullptr ? fi.absoluteFilePath() : fi.fileName();
 
     m_bSymLink = fi.isSymLink();
@@ -178,16 +179,16 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
     m_modificationTime = fi.lastModified();
     m_bHidden = fi.isHidden();
     
-    m_bWritable = fi.isWritable();
-    m_bReadable = fi.isReadable();
-    m_bExecutable = fi.isExecutable();
+    m_bWritable = m_fileInfo.isWritable();
+    m_bReadable = m_fileInfo.isReadable();
+    m_bExecutable = m_fileInfo.isExecutable();
 
     if(d()->isLocal())
     {
-        d()->m_name = fi.fileName();
+        d()->m_name = m_fileInfo.fileName();
         if(m_bSymLink)
         {
-            d()->m_linkTarget = fi.readLink();
+            d()->m_linkTarget = m_fileInfo.readLink();
 #ifndef Q_OS_WIN 
             // Unfortunately Qt5 symLinkTarget/readLink always returns an absolute path, even if the link is relative
             char s[PATH_MAX + 1];
@@ -201,7 +202,7 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
         }
 
         d()->m_bValidData = true;
-        d()->m_url = QUrl::fromLocalFile(fi.filePath());
+        d()->m_url = QUrl::fromLocalFile(m_fileInfo.filePath());
         if(d()->m_url.isRelative())
         {
             d()->m_url.setPath(absoluteFilePath());
@@ -372,7 +373,7 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
     }
 
     m_bExists = acc != 0 || fileType != 0;
-
+    
     d()->m_bValidData = true;
     m_bSymLink = !d()->m_linkTarget.isEmpty();
     if(d()->m_name.isEmpty())
@@ -380,6 +381,9 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
         int pos = m_filePath.lastIndexOf('/') + 1;
         d()->m_name = m_filePath.mid(pos);
     }
+
+    m_fileInfo = QFileInfo(d()->m_name);
+    m_fileInfo.setCaching(true);
 #ifndef Q_OS_WIN
     m_bHidden = d()->m_name[0] == '.';
 #endif
