@@ -1235,7 +1235,6 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
         m_bSuccess = QDir::setCurrent(m_pFileAccess->absoluteFilePath());
         if(m_bSuccess)
         {
-#ifndef Q_OS_WIN
             m_bSuccess = true;
             QDir dir(".");
 
@@ -1252,6 +1251,9 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
             {
                 foreach(const QFileInfo& fi, fiList) // for each file...
                 {
+                    if(pp.wasCancelled())
+                        break;
+                    
                     if(fi.fileName() == "." || fi.fileName() == "..")
                         continue;
 
@@ -1260,71 +1262,6 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
                     pDirList->push_back(fa);
                 }
             }
-#else
-            QString pattern = "*.*";
-            WIN32_FIND_DATA findData;
-
-            Qt::HANDLE searchHandle = FindFirstFileW((const wchar_t*)pattern.utf16(), &findData);
-
-            if(searchHandle != INVALID_HANDLE_VALUE)
-            {
-                QString absPath = m_pFileAccess->absoluteFilePath();
-                QString relPath = m_pFileAccess->filePath();
-                bool bFirst = true;
-                while(!pp.wasCancelled())
-                {
-                    if(!bFirst)
-                    {
-                        if(!FindNextFileW(searchHandle, &findData))
-                            break;
-                    }
-                    bFirst = false;
-                    FileAccess fa;
-
-                    fa.m_filePath = QString::fromUtf16((const ushort*)findData.cFileName);
-                    if(fa.m_filePath != "." && fa.m_filePath != "..")
-                    {//TODO:Use setFile here instead of duplicating code
-                        fa.m_size = (qint64(findData.nFileSizeHigh) << 32) + findData.nFileSizeLow;
-
-                        FILETIME ft;
-                        SYSTEMTIME t;
-                        FileTimeToLocalFileTime(&findData.ftLastWriteTime, &ft);
-                        FileTimeToSystemTime(&ft, &t);
-                        fa.m_modificationTime = QDateTime(QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond));
-                        //FileTimeToLocalFileTime( &findData.ftLastAccessTime, &ft ); FileTimeToSystemTime(&ft,&t);
-                        //fa.m_accessTime       = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
-                        //FileTimeToLocalFileTime( &findData.ftCreationTime, &ft ); FileTimeToSystemTime(&ft,&t);
-                        //fa.m_creationTime     = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
-
-                        int a = findData.dwFileAttributes;
-                        fa.m_bWritable = (a & FILE_ATTRIBUTE_READONLY) == 0;
-                        fa.m_bDir = (a & FILE_ATTRIBUTE_DIRECTORY) != 0;
-                        fa.m_bFile = !fa.m_bDir;
-                        fa.m_bHidden = (a & FILE_ATTRIBUTE_HIDDEN) != 0;
-
-                        //fa.m_bExecutable = false; // Useless on windows
-                        fa.m_bExists = true;
-                        //fa.m_bReadable   = true;
-                        //fa.m_bValidData  = true;
-                        fa.m_bSymLink = false;
-                        //fa.m_fileType    = 0;
-
-                        //fa.m_filePath = fa.m_name;
-                        //fa.m_absoluteFilePath = absPath + "/" + fa.m_name;
-                        //fa.m_url.setPath( fa.m_absoluteFilePath );
-                        fa.m_pData->m_pParent = m_pFileAccess;
-                        
-                        pDirList->push_back(fa);
-                    }
-                }
-                FindClose(searchHandle);
-            }
-            else
-            {
-                QDir::setCurrent(currentPath); // restore current path
-                return false;
-            }
-#endif
         }
         QDir::setCurrent(currentPath); // restore current path
     }
