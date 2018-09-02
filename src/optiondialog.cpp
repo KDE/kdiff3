@@ -71,7 +71,6 @@ class OptionItem
     OptionItem(OptionDialog* pOptionDialog, const QString& saveName)
     {
         Q_ASSERT(pOptionDialog != nullptr);
-        pOptionDialog->addOptionItem(this);
         m_saveName = saveName;
         m_bPreserved = false;
     }
@@ -658,31 +657,31 @@ OptionDialog::~OptionDialog(void)
 void OptionDialog::setupOtherOptions()
 {
     //TODO move to Options class
-    new OptionToggleAction(false, "AutoAdvance", &m_options.m_bAutoAdvance, this);
-    new OptionToggleAction(true, "ShowWhiteSpaceCharacters", &m_options.m_bShowWhiteSpaceCharacters, this);
-    new OptionToggleAction(true, "ShowWhiteSpace", &m_options.m_bShowWhiteSpace, this);
-    new OptionToggleAction(false, "ShowLineNumbers", &m_options.m_bShowLineNumbers, this);
-    new OptionToggleAction(true, "HorizDiffWindowSplitting", &m_options.m_bHorizDiffWindowSplitting, this);
-    new OptionToggleAction(false, "WordWrap", &m_options.m_bWordWrap, this);
+    addOptionItem(new OptionToggleAction(false, "AutoAdvance", &m_options.m_bAutoAdvance, this));
+    addOptionItem(new OptionToggleAction(true, "ShowWhiteSpaceCharacters", &m_options.m_bShowWhiteSpaceCharacters, this));
+    addOptionItem(new OptionToggleAction(true, "ShowWhiteSpace", &m_options.m_bShowWhiteSpace, this));
+    addOptionItem(new OptionToggleAction(false, "ShowLineNumbers", &m_options.m_bShowLineNumbers, this));
+    addOptionItem(new OptionToggleAction(true, "HorizDiffWindowSplitting", &m_options.m_bHorizDiffWindowSplitting, this));
+    addOptionItem(new OptionToggleAction(false, "WordWrap", &m_options.m_bWordWrap, this));
 
-    new OptionToggleAction(true, "ShowIdenticalFiles", &m_options.m_bDmShowIdenticalFiles, this);
+    addOptionItem(new OptionToggleAction(true, "ShowIdenticalFiles", &m_options.m_bDmShowIdenticalFiles, this));
 
-    new OptionToggleAction(true, "Show Toolbar", &m_options.m_bShowToolBar, this);
-    new OptionToggleAction(true, "Show Statusbar", &m_options.m_bShowStatusBar, this);
+    addOptionItem(new OptionToggleAction(true, "Show Toolbar", &m_options.m_bShowToolBar, this));
+    addOptionItem(new OptionToggleAction(true, "Show Statusbar", &m_options.m_bShowStatusBar, this));
 
     /*
    TODO manage toolbar positioning
    */
-    new OptionNum( Qt::TopToolBarArea, "ToolBarPos", (int*)&m_options.m_toolBarPos, this );
-    new OptionSize(QSize(600, 400), "Geometry", &m_options.m_geometry, this);
-    new OptionPoint(QPoint(0, 22), "Position", &m_options.m_position, this);
-    new OptionToggleAction(false, "WindowStateMaximised", &m_options.m_bMaximised, this);
+    addOptionItem(new OptionNum( Qt::TopToolBarArea, "ToolBarPos", (int*)&m_options.m_toolBarPos, this ));
+    addOptionItem(new OptionSize(QSize(600, 400), "Geometry", &m_options.m_geometry, this));
+    addOptionItem(new OptionPoint(QPoint(0, 22), "Position", &m_options.m_position, this));
+    addOptionItem(new OptionToggleAction(false, "WindowStateMaximised", &m_options.m_bMaximised, this));
 
-    new OptionStringList("RecentAFiles", &m_options.m_recentAFiles, this);
-    new OptionStringList("RecentBFiles", &m_options.m_recentBFiles, this);
-    new OptionStringList("RecentCFiles", &m_options.m_recentCFiles, this);
-    new OptionStringList("RecentOutputFiles", &m_options.m_recentOutputFiles, this);
-    new OptionStringList("RecentEncodings", &m_options.m_recentEncodings, this);
+    addOptionItem(new OptionStringList("RecentAFiles", &m_options.m_recentAFiles, this));
+    addOptionItem(new OptionStringList("RecentBFiles", &m_options.m_recentBFiles, this));
+    addOptionItem(new OptionStringList("RecentCFiles", &m_options.m_recentCFiles, this));
+    addOptionItem(new OptionStringList("RecentOutputFiles", &m_options.m_recentOutputFiles, this));
+    addOptionItem(new OptionStringList("RecentEncodings", &m_options.m_recentEncodings, this));
 }
 
 void OptionDialog::setupFontPage(void)
@@ -707,10 +706,12 @@ void OptionDialog::setupFontPage(void)
     static QFont defaultAppFont = QApplication::font();
 
     OptionFontChooser* pAppFontChooser = new OptionFontChooser(defaultAppFont, "ApplicationFont", &m_options.m_appFont, page, this);
+    addOptionItem(pAppFontChooser);
     topLayout->addWidget(pAppFontChooser);
     pAppFontChooser->setTitle(i18n("Application font"));
 
     OptionFontChooser* pFontChooser = new OptionFontChooser(defaultFont, "Font", &m_options.m_font, page, this);
+    addOptionItem(pFontChooser);
     topLayout->addWidget(pFontChooser);
     pFontChooser->setTitle(i18n("File view font"));
 
@@ -720,6 +721,7 @@ void OptionDialog::setupFontPage(void)
 
     // This currently does not work (see rendering in class DiffTextWindow)
     //OptionCheckBox* pItalicDeltas = new OptionCheckBox( i18n("Italic font for deltas"), false, "ItalicForDeltas", &m_options.m_bItalicForDeltas, page, this );
+    //addOptionItem(pItalicDeltas);
     //gbox->addWidget( pItalicDeltas, line, 0, 1, 2 );
     //pItalicDeltas->setToolTip( i18n(
     //   "Selects the italic version of the font for differences.\n"
@@ -758,6 +760,7 @@ void OptionDialog::setupColorPage(void)
     OptionColorButton* pFgColor = new OptionColorButton(Qt::black, "FgColor", &m_options.m_fgColor, page, this);
     label = new QLabel(i18n("Foreground color:"), page);
     label->setBuddy(pFgColor);
+    addOptionItem(pFgColor);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pFgColor, line, 1);
     ++line;
@@ -765,6 +768,7 @@ void OptionDialog::setupColorPage(void)
     OptionColorButton* pBgColor = new OptionColorButton(Qt::white, "BgColor", &m_options.m_bgColor, page, this);
     label = new QLabel(i18n("Background color:"), page);
     label->setBuddy(pBgColor);
+    addOptionItem(pBgColor);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pBgColor, line, 1);
 
@@ -774,6 +778,7 @@ void OptionDialog::setupColorPage(void)
         bLowColor ? QColor(Qt::lightGray) : qRgb(224, 224, 224), "DiffBgColor", &m_options.m_diffBgColor, page, this);
     label = new QLabel(i18n("Diff background color:"), page);
     label->setBuddy(pDiffBgColor);
+    addOptionItem(pDiffBgColor);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pDiffBgColor, line, 1);
     ++line;
@@ -782,6 +787,7 @@ void OptionDialog::setupColorPage(void)
         bLowColor ? qRgb(0, 0, 255) : qRgb(0, 0, 200) /*blue*/, "ColorA", &m_options.m_colorA, page, this);
     label = new QLabel(i18n("Color A:"), page);
     label->setBuddy(pColorA);
+    addOptionItem(pColorA);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pColorA, line, 1);
     ++line;
@@ -790,6 +796,7 @@ void OptionDialog::setupColorPage(void)
         bLowColor ? qRgb(0, 128, 0) : qRgb(0, 150, 0) /*green*/, "ColorB", &m_options.m_colorB, page, this);
     label = new QLabel(i18n("Color B:"), page);
     label->setBuddy(pColorB);
+    addOptionItem(pColorB);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pColorB, line, 1);
     ++line;
@@ -798,6 +805,7 @@ void OptionDialog::setupColorPage(void)
         bLowColor ? qRgb(128, 0, 128) : qRgb(150, 0, 150) /*magenta*/, "ColorC", &m_options.m_colorC, page, this);
     label = new QLabel(i18n("Color C:"), page);
     label->setBuddy(pColorC);
+    addOptionItem(pColorC);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pColorC, line, 1);
     ++line;
@@ -805,6 +813,7 @@ void OptionDialog::setupColorPage(void)
     OptionColorButton* pColorForConflict = new OptionColorButton(Qt::red, "ColorForConflict", &m_options.m_colorForConflict, page, this);
     label = new QLabel(i18n("Conflict color:"), page);
     label->setBuddy(pColorForConflict);
+    addOptionItem(pColorForConflict);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pColorForConflict, line, 1);
     ++line;
@@ -813,6 +822,7 @@ void OptionDialog::setupColorPage(void)
         bLowColor ? qRgb(192, 192, 192) : qRgb(220, 220, 100), "CurrentRangeBgColor", &m_options.m_currentRangeBgColor, page, this);
     label = new QLabel(i18n("Current range background color:"), page);
     label->setBuddy(pColor);
+    addOptionItem(pColor);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pColor, line, 1);
     ++line;
@@ -821,6 +831,7 @@ void OptionDialog::setupColorPage(void)
         bLowColor ? qRgb(255, 255, 0) : qRgb(255, 255, 150), "CurrentRangeDiffBgColor", &m_options.m_currentRangeDiffBgColor, page, this);
     label = new QLabel(i18n("Current range diff background color:"), page);
     label->setBuddy(pColor);
+    addOptionItem(pColor);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pColor, line, 1);
     ++line;
@@ -828,6 +839,7 @@ void OptionDialog::setupColorPage(void)
     pColor = new OptionColorButton(qRgb(0xff, 0xd0, 0x80), "ManualAlignmentRangeColor", &m_options.m_manualHelpRangeColor, page, this);
     label = new QLabel(i18n("Color for manually aligned difference ranges:"), page);
     label->setBuddy(pColor);
+    addOptionItem(pColor);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pColor, line, 1);
     ++line;
@@ -840,6 +852,7 @@ void OptionDialog::setupColorPage(void)
     pColor = new OptionColorButton(qRgb(0, 0xd0, 0), "NewestFileColor", &m_options.m_newestFileColor, page, this);
     label = new QLabel(i18n("Newest file color:"), page);
     label->setBuddy(pColor);
+    addOptionItem(pColor);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pColor, line, 1);
     QString dirColorTip = i18n("Changing this color will only be effective when starting the next directory comparison.");
@@ -849,6 +862,7 @@ void OptionDialog::setupColorPage(void)
     pColor = new OptionColorButton(qRgb(0xf0, 0, 0), "OldestFileColor", &m_options.m_oldestFileColor, page, this);
     label = new QLabel(i18n("Oldest file color:"), page);
     label->setBuddy(pColor);
+    addOptionItem(pColor);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pColor, line, 1);
     label->setToolTip(dirColorTip);
@@ -857,6 +871,7 @@ void OptionDialog::setupColorPage(void)
     pColor = new OptionColorButton(qRgb(0xc0, 0xc0, 0), "MidAgeFileColor", &m_options.m_midAgeFileColor, page, this);
     label = new QLabel(i18n("Middle age file color:"), page);
     label->setBuddy(pColor);
+    addOptionItem(pColor);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pColor, line, 1);
     label->setToolTip(dirColorTip);
@@ -865,6 +880,7 @@ void OptionDialog::setupColorPage(void)
     pColor = new OptionColorButton(qRgb(0, 0, 0), "MissingFileColor", &m_options.m_missingFileColor, page, this);
     label = new QLabel(i18n("Color for missing files:"), page);
     label->setBuddy(pColor);
+    addOptionItem(pColor);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pColor, line, 1);
     label->setToolTip(dirColorTip);
@@ -891,6 +907,7 @@ void OptionDialog::setupEditPage(void)
     int line = 0;
 
     OptionCheckBox* pReplaceTabs = new OptionCheckBox(i18n("Tab inserts spaces"), false, "ReplaceTabs", &m_options.m_bReplaceTabs, page, this);
+    addOptionItem(pReplaceTabs);
     gbox->addWidget(pReplaceTabs, line, 0, 1, 2);
     pReplaceTabs->setToolTip(i18n(
         "On: Pressing tab generates the appropriate number of spaces.\n"
@@ -900,18 +917,21 @@ void OptionDialog::setupEditPage(void)
     OptionIntEdit* pTabSize = new OptionIntEdit(8, "TabSize", &m_options.m_tabSize, 1, 100, page, this);
     label = new QLabel(i18n("Tab size:"), page);
     label->setBuddy(pTabSize);
+    addOptionItem(pTabSize);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pTabSize, line, 1);
     ++line;
 
     OptionCheckBox* pAutoIndentation = new OptionCheckBox(i18n("Auto indentation"), true, "AutoIndentation", &m_options.m_bAutoIndentation, page, this);
     gbox->addWidget(pAutoIndentation, line, 0, 1, 2);
+    addOptionItem(pAutoIndentation);
     pAutoIndentation->setToolTip(i18n(
         "On: The indentation of the previous line is used for a new line.\n"));
     ++line;
 
     OptionCheckBox* pAutoCopySelection = new OptionCheckBox(i18n("Auto copy selection"), false, "AutoCopySelection", &m_options.m_bAutoCopySelection, page, this);
     gbox->addWidget(pAutoCopySelection, line, 0, 1, 2);
+    addOptionItem(pAutoCopySelection);
     pAutoCopySelection->setToolTip(i18n(
         "On: Any selection is immediately written to the clipboard.\n"
         "Off: You must explicitly copy e.g. via Ctrl-C."));
@@ -922,6 +942,7 @@ void OptionDialog::setupEditPage(void)
 
     OptionComboBox* pLineEndStyle = new OptionComboBox(eLineEndStyleAutoDetect, "LineEndStyle", &m_options.m_lineEndStyle, page, this);
     gbox->addWidget(pLineEndStyle, line, 1);
+    addOptionItem(pLineEndStyle);
     pLineEndStyle->insertItem(eLineEndStyleUnix, "Unix");
     pLineEndStyle->insertItem(eLineEndStyleDos, "Dos/Windows");
     pLineEndStyle->insertItem(eLineEndStyleAutoDetect, "Autodetect");
@@ -955,6 +976,7 @@ void OptionDialog::setupDiffPage(void)
     m_options.m_bPreserveCarriageReturn = false;
     /*
     OptionCheckBox* pPreserveCarriageReturn = new OptionCheckBox( i18n("Preserve carriage return"), false, "PreserveCarriageReturn", &m_options.m_bPreserveCarriageReturn, page, this );
+    addOptionItem(pPreserveCarriageReturn);
     gbox->addWidget( pPreserveCarriageReturn, line, 0, 1, 2 );
     pPreserveCarriageReturn->setToolTip( i18n(
        "Show carriage return characters '\\r' if they exist.\n"
@@ -964,6 +986,7 @@ void OptionDialog::setupDiffPage(void)
 */
     OptionCheckBox* pIgnoreNumbers = new OptionCheckBox(i18n("Ignore numbers (treat as white space)"), false, "IgnoreNumbers", &m_options.m_bIgnoreNumbers, page, this);
     gbox->addWidget(pIgnoreNumbers, line, 0, 1, 2);
+    addOptionItem(pIgnoreNumbers);
     pIgnoreNumbers->setToolTip(i18n(
         "Ignore number characters during line matching phase. (Similar to Ignore white space.)\n"
         "Might help to compare files with numeric data."));
@@ -971,11 +994,13 @@ void OptionDialog::setupDiffPage(void)
 
     OptionCheckBox* pIgnoreComments = new OptionCheckBox(i18n("Ignore C/C++ comments (treat as white space)"), false, "IgnoreComments", &m_options.m_bIgnoreComments, page, this);
     gbox->addWidget(pIgnoreComments, line, 0, 1, 2);
+    addOptionItem(pIgnoreComments);
     pIgnoreComments->setToolTip(i18n("Treat C/C++ comments like white space."));
     ++line;
 
     OptionCheckBox* pIgnoreCase = new OptionCheckBox(i18n("Ignore case (treat as white space)"), false, "IgnoreCase", &m_options.m_bIgnoreCase, page, this);
     gbox->addWidget(pIgnoreCase, line, 0, 1, 2);
+    addOptionItem(pIgnoreCase);
     pIgnoreCase->setToolTip(i18n(
         "Treat case differences like white space changes. ('a'<=>'A')"));
     ++line;
@@ -984,6 +1009,7 @@ void OptionDialog::setupDiffPage(void)
     gbox->addWidget(label, line, 0);
     OptionLineEdit* pLE = new OptionLineEdit("", "PreProcessorCmd", &m_options.m_PreProcessorCmd, page, this);
     gbox->addWidget(pLE, line, 1);
+    addOptionItem(pLE);
     label->setToolTip(i18n("User defined pre-processing. (See the docs for details.)"));
     ++line;
 
@@ -991,11 +1017,13 @@ void OptionDialog::setupDiffPage(void)
     gbox->addWidget(label, line, 0);
     pLE = new OptionLineEdit("", "LineMatchingPreProcessorCmd", &m_options.m_LineMatchingPreProcessorCmd, page, this);
     gbox->addWidget(pLE, line, 1);
+    addOptionItem(pLE);
     label->setToolTip(i18n("This pre-processor is only used during line matching.\n(See the docs for details.)"));
     ++line;
 
     OptionCheckBox* pTryHard = new OptionCheckBox(i18n("Try hard (slower)"), true, "TryHard", &m_options.m_bTryHard, page, this);
     gbox->addWidget(pTryHard, line, 0, 1, 2);
+    addOptionItem(pTryHard);
     pTryHard->setToolTip(i18n(
         "Enables the --minimal option for the external diff.\n"
         "The analysis of big files will be much slower."));
@@ -1003,6 +1031,7 @@ void OptionDialog::setupDiffPage(void)
 
     OptionCheckBox* pDiff3AlignBC = new OptionCheckBox(i18n("Align B and C for 3 input files"), false, "Diff3AlignBC", &m_options.m_bDiff3AlignBC, page, this);
     gbox->addWidget(pDiff3AlignBC, line, 0, 1, 2);
+    addOptionItem(pDiff3AlignBC);
     pDiff3AlignBC->setToolTip(i18n(
         "Try to align B and C when comparing or merging three input files.\n"
         "Not recommended for merging because merge might get more complicated.\n"
@@ -1034,6 +1063,7 @@ void OptionDialog::setupMergePage(void)
     gbox->addWidget(label, line, 0);
     OptionIntEdit* pAutoAdvanceDelay = new OptionIntEdit(500, "AutoAdvanceDelay", &m_options.m_autoAdvanceDelay, 0, 2000, page, this);
     gbox->addWidget(pAutoAdvanceDelay, line, 1);
+    addOptionItem(pAutoAdvanceDelay);
     label->setToolTip(i18n(
         "When in Auto-Advance mode the result of the current selection is shown \n"
         "for the specified time, before jumping to the next conflict. Range: 0-2000 ms"));
@@ -1041,6 +1071,7 @@ void OptionDialog::setupMergePage(void)
 
     OptionCheckBox* pShowInfoDialogs = new OptionCheckBox(i18n("Show info dialogs"), true, "ShowInfoDialogs", &m_options.m_bShowInfoDialogs, page, this);
     gbox->addWidget(pShowInfoDialogs, line, 0, 1, 2);
+    addOptionItem(pShowInfoDialogs);
     pShowInfoDialogs->setToolTip(i18n("Show a dialog with information about the number of conflicts."));
     ++line;
 
@@ -1048,6 +1079,7 @@ void OptionDialog::setupMergePage(void)
     gbox->addWidget(label, line, 0);
     OptionComboBox* pWhiteSpace2FileMergeDefault = new OptionComboBox(0, "WhiteSpace2FileMergeDefault", &m_options.m_whiteSpace2FileMergeDefault, page, this);
     gbox->addWidget(pWhiteSpace2FileMergeDefault, line, 1);
+    addOptionItem(pWhiteSpace2FileMergeDefault);
     pWhiteSpace2FileMergeDefault->insertItem(0, i18n("Manual Choice"));
     pWhiteSpace2FileMergeDefault->insertItem(1, i18n("A"));
     pWhiteSpace2FileMergeDefault->insertItem(2, i18n("B"));
@@ -1060,6 +1092,7 @@ void OptionDialog::setupMergePage(void)
     gbox->addWidget(label, line, 0);
     OptionComboBox* pWhiteSpace3FileMergeDefault = new OptionComboBox(0, "WhiteSpace3FileMergeDefault", &m_options.m_whiteSpace3FileMergeDefault, page, this);
     gbox->addWidget(pWhiteSpace3FileMergeDefault, line, 1);
+    addOptionItem(pWhiteSpace3FileMergeDefault);
     pWhiteSpace3FileMergeDefault->insertItem(0, i18n("Manual Choice"));
     pWhiteSpace3FileMergeDefault->insertItem(1, i18n("A"));
     pWhiteSpace3FileMergeDefault->insertItem(2, i18n("B"));
@@ -1081,6 +1114,7 @@ void OptionDialog::setupMergePage(void)
         gbox->addWidget(label, line, 0);
         m_pAutoMergeRegExpLineEdit = new OptionLineEdit(".*\\$(Version|Header|Date|Author).*\\$.*", "AutoMergeRegExp", &m_options.m_autoMergeRegExp, page, this);
         gbox->addWidget(m_pAutoMergeRegExpLineEdit, line, 1);
+        addOptionItem(m_pAutoMergeRegExpLineEdit);
         s_autoMergeRegExpToolTip = i18n("Regular expression for lines where KDiff3 should automatically choose one source.\n"
                                         "When a line with a conflict matches the regular expression then\n"
                                         "- if available - C, otherwise B will be chosen.");
@@ -1088,6 +1122,7 @@ void OptionDialog::setupMergePage(void)
         ++line;
 
         OptionCheckBox* pAutoMergeRegExp = new OptionCheckBox(i18n("Run regular expression auto merge on merge start"), false, "RunRegExpAutoMergeOnMergeStart", &m_options.m_bRunRegExpAutoMergeOnMergeStart, page, this);
+        addOptionItem(pAutoMergeRegExp);
         gbox->addWidget(pAutoMergeRegExp, line, 0, 1, 2);
         pAutoMergeRegExp->setToolTip(i18n("Run the merge for auto merge regular expressions\n"
                                           "immediately when a merge starts.\n"));
@@ -1106,6 +1141,7 @@ void OptionDialog::setupMergePage(void)
         gbox->addWidget(label, line, 0);
         m_pHistoryStartRegExpLineEdit = new OptionLineEdit(".*\\$Log.*\\$.*", "HistoryStartRegExp", &m_options.m_historyStartRegExp, page, this);
         gbox->addWidget(m_pHistoryStartRegExpLineEdit, line, 1);
+        addOptionItem(m_pHistoryStartRegExpLineEdit);
         s_historyStartRegExpToolTip = i18n("Regular expression for the start of the version control history entry.\n"
                                            "Usually this line contains the \"$Log$\" keyword.\n"
                                            "Default value: \".*\\$Log.*\\$.*\"");
@@ -1124,6 +1160,7 @@ void OptionDialog::setupMergePage(void)
 
         m_pHistoryEntryStartRegExpLineEdit = new OptionLineEdit(historyEntryStartDefault, "HistoryEntryStartRegExp", &m_options.m_historyEntryStartRegExp, page, this);
         gbox->addWidget(m_pHistoryEntryStartRegExpLineEdit, line, 1);
+        addOptionItem(m_pHistoryEntryStartRegExpLineEdit);
         s_historyEntryStartRegExpToolTip = i18n("A version control history entry consists of several lines.\n"
                                                 "Specify the regular expression to detect the first line (without the leading comment).\n"
                                                 "Use parentheses to group the keys you want to use for sorting.\n"
@@ -1134,6 +1171,7 @@ void OptionDialog::setupMergePage(void)
 
         m_pHistoryMergeSorting = new OptionCheckBox(i18n("History merge sorting"), false, "HistoryMergeSorting", &m_options.m_bHistoryMergeSorting, page, this);
         gbox->addWidget(m_pHistoryMergeSorting, line, 0, 1, 2);
+        addOptionItem(m_pHistoryMergeSorting);
         m_pHistoryMergeSorting->setToolTip(i18n("Sort version control history by a key."));
         ++line;
         //QString branch = newHistoryEntry.cap(1);
@@ -1148,6 +1186,7 @@ void OptionDialog::setupMergePage(void)
         gbox->addWidget(label, line, 0);
         m_pHistorySortKeyOrderLineEdit = new OptionLineEdit(defaultSortKeyOrder, "HistoryEntryStartSortKeyOrder", &m_options.m_historyEntryStartSortKeyOrder, page, this);
         gbox->addWidget(m_pHistorySortKeyOrderLineEdit, line, 1);
+        addOptionItem(m_pHistorySortKeyOrderLineEdit);
         s_historyEntryStartSortKeyOrderToolTip = i18n("Each pair of parentheses used in the regular expression for the history start entry\n"
                                                       "groups a key that can be used for sorting.\n"
                                                       "Specify the list of keys (that are numbered in order of occurrence\n"
@@ -1160,6 +1199,7 @@ void OptionDialog::setupMergePage(void)
         ++line;
 
         m_pHistoryAutoMerge = new OptionCheckBox(i18n("Merge version control history on merge start"), false, "RunHistoryAutoMergeOnMergeStart", &m_options.m_bRunHistoryAutoMergeOnMergeStart, page, this);
+        addOptionItem(m_pHistoryAutoMerge);
         gbox->addWidget(m_pHistoryAutoMerge, line, 0, 1, 2);
         m_pHistoryAutoMerge->setToolTip(i18n("Run version control history automerge on merge start."));
         ++line;
@@ -1168,6 +1208,7 @@ void OptionDialog::setupMergePage(void)
         label = new QLabel(i18n("Max number of history entries:"), page);
         gbox->addWidget(label, line, 0);
         gbox->addWidget(pMaxNofHistoryEntries, line, 1);
+        addOptionItem(pMaxNofHistoryEntries);
         pMaxNofHistoryEntries->setToolTip(i18n("Cut off after specified number. Use -1 for infinite number of entries."));
         ++line;
     }
@@ -1181,6 +1222,7 @@ void OptionDialog::setupMergePage(void)
     gbox->addWidget(label, line, 0);
     OptionLineEdit* pLE = new OptionLineEdit("", "IrrelevantMergeCmd", &m_options.m_IrrelevantMergeCmd, page, this);
     gbox->addWidget(pLE, line, 1);
+    addOptionItem(pLE);
     label->setToolTip(i18n("If specified this script is run after automerge\n"
                            "when no other relevant changes were detected.\n"
                            "Called with the parameters: filename1 filename2 filename3"));
@@ -1189,6 +1231,7 @@ void OptionDialog::setupMergePage(void)
     OptionCheckBox* pAutoSaveAndQuit = new OptionCheckBox(i18n("Auto save and quit on merge without conflicts"), false,
                                                           "AutoSaveAndQuitOnMergeWithoutConflicts", &m_options.m_bAutoSaveAndQuitOnMergeWithoutConflicts, page, this);
     gbox->addWidget(pAutoSaveAndQuit, line, 0, 1, 2);
+    addOptionItem(pAutoSaveAndQuit);
     pAutoSaveAndQuit->setToolTip(i18n("If KDiff3 was started for a file-merge from the command line and all\n"
                                       "conflicts are solvable without user interaction then automatically save and quit.\n"
                                       "(Similar to command line option \"--auto\".)"));
@@ -1215,12 +1258,14 @@ void OptionDialog::setupDirectoryMergePage(void)
 
     OptionCheckBox* pRecursiveDirs = new OptionCheckBox(i18n("Recursive directories"), true, "RecursiveDirs", &m_options.m_bDmRecursiveDirs, page, this);
     gbox->addWidget(pRecursiveDirs, line, 0, 1, 2);
+    addOptionItem(pRecursiveDirs);
     pRecursiveDirs->setToolTip(i18n("Whether to analyze subdirectories or not."));
     ++line;
     QLabel* label = new QLabel(i18n("File pattern(s):"), page);
     gbox->addWidget(label, line, 0);
     OptionLineEdit* pFilePattern = new OptionLineEdit("*", "FilePattern", &m_options.m_DmFilePattern, page, this);
     gbox->addWidget(pFilePattern, line, 1);
+    addOptionItem(pFilePattern);
     label->setToolTip(i18n(
         "Pattern(s) of files to be analyzed. \n"
         "Wildcards: '*' and '?'\n"
@@ -1231,6 +1276,7 @@ void OptionDialog::setupDirectoryMergePage(void)
     gbox->addWidget(label, line, 0);
     OptionLineEdit* pFileAntiPattern = new OptionLineEdit("*.orig;*.o;*.obj;*.rej;*.bak", "FileAntiPattern", &m_options.m_DmFileAntiPattern, page, this);
     gbox->addWidget(pFileAntiPattern, line, 1);
+    addOptionItem(pFileAntiPattern);
     label->setToolTip(i18n(
         "Pattern(s) of files to be excluded from analysis. \n"
         "Wildcards: '*' and '?'\n"
@@ -1241,6 +1287,7 @@ void OptionDialog::setupDirectoryMergePage(void)
     gbox->addWidget(label, line, 0);
     OptionLineEdit* pDirAntiPattern = new OptionLineEdit("CVS;.deps;.svn;.hg;.git", "DirAntiPattern", &m_options.m_DmDirAntiPattern, page, this);
     gbox->addWidget(pDirAntiPattern, line, 1);
+    addOptionItem(pDirAntiPattern);
     label->setToolTip(i18n(
         "Pattern(s) of directories to be excluded from analysis. \n"
         "Wildcards: '*' and '?'\n"
@@ -1249,6 +1296,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 
     OptionCheckBox* pUseCvsIgnore = new OptionCheckBox(i18n("Use .cvsignore"), false, "UseCvsIgnore", &m_options.m_bDmUseCvsIgnore, page, this);
     gbox->addWidget(pUseCvsIgnore, line, 0, 1, 2);
+    addOptionItem(pUseCvsIgnore);
     pUseCvsIgnore->setToolTip(i18n(
         "Extends the antipattern to anything that would be ignored by CVS.\n"
         "Via local \".cvsignore\" files this can be directory specific."));
@@ -1256,6 +1304,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 
     OptionCheckBox* pFindHidden = new OptionCheckBox(i18n("Find hidden files and directories"), true, "FindHidden", &m_options.m_bDmFindHidden, page, this);
     gbox->addWidget(pFindHidden, line, 0, 1, 2);
+    addOptionItem(pFindHidden);
 #if defined(Q_OS_WIN)
     pFindHidden->setToolTip(i18n("Finds files and directories with the hidden attribute."));
 #else
@@ -1265,6 +1314,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 
     OptionCheckBox* pFollowFileLinks = new OptionCheckBox(i18n("Follow file links"), false, "FollowFileLinks", &m_options.m_bDmFollowFileLinks, page, this);
     gbox->addWidget(pFollowFileLinks, line, 0, 1, 2);
+    addOptionItem(pFollowFileLinks);
     pFollowFileLinks->setToolTip(i18n(
         "On: Compare the file the link points to.\n"
         "Off: Compare the links."));
@@ -1272,16 +1322,11 @@ void OptionDialog::setupDirectoryMergePage(void)
 
     OptionCheckBox* pFollowDirLinks = new OptionCheckBox(i18n("Follow directory links"), false, "FollowDirLinks", &m_options.m_bDmFollowDirLinks, page, this);
     gbox->addWidget(pFollowDirLinks, line, 0, 1, 2);
+    addOptionItem(pFollowDirLinks);
     pFollowDirLinks->setToolTip(i18n(
         "On: Compare the directory the link points to.\n"
         "Off: Compare the links."));
     ++line;
-
-//OptionCheckBox* pShowOnlyDeltas = new OptionCheckBox( i18n("List only deltas"),false,"ListOnlyDeltas", &m_options.m_bDmShowOnlyDeltas, page, this );
-//gbox->addWidget( pShowOnlyDeltas, line, 0, 1, 2 );
-//pShowOnlyDeltas->setToolTip( i18n(
-//              "Files and directories without change will not appear in the list."));
-//++line;
 
 #if defined(Q_OS_WIN)
     bool bCaseSensitiveFilenameComparison = false;
@@ -1290,6 +1335,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 #endif
     OptionCheckBox* pCaseSensitiveFileNames = new OptionCheckBox(i18n("Case sensitive filename comparison"), bCaseSensitiveFilenameComparison, "CaseSensitiveFilenameComparison", &m_options.m_bDmCaseSensitiveFilenameComparison, page, this);
     gbox->addWidget(pCaseSensitiveFileNames, line, 0, 1, 2);
+    addOptionItem(pCaseSensitiveFileNames);
     pCaseSensitiveFileNames->setToolTip(i18n(
         "The directory comparison will compare files or directories when their names match.\n"
         "Set this option if the case of the names must match. (Default for Windows is off, otherwise on.)"));
@@ -1297,6 +1343,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 
     OptionCheckBox* pUnfoldSubdirs = new OptionCheckBox(i18n("Unfold all subdirectories on load"), false, "UnfoldSubdirs", &m_options.m_bDmUnfoldSubdirs, page, this);
     gbox->addWidget(pUnfoldSubdirs, line, 0, 1, 2);
+    addOptionItem(pUnfoldSubdirs);
     pUnfoldSubdirs->setToolTip(i18n(
         "On: Unfold all subdirectories when starting a directory diff.\n"
         "Off: Leave subdirectories folded."));
@@ -1304,6 +1351,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 
     OptionCheckBox* pSkipDirStatus = new OptionCheckBox(i18n("Skip directory status report"), false, "SkipDirStatus", &m_options.m_bDmSkipDirStatus, page, this);
     gbox->addWidget(pSkipDirStatus, line, 0, 1, 2);
+    addOptionItem(pSkipDirStatus);
     pSkipDirStatus->setToolTip(i18n(
         "On: Do not show the Directory Comparison Status.\n"
         "Off: Show the status dialog on start."));
@@ -1315,27 +1363,32 @@ void OptionDialog::setupDirectoryMergePage(void)
     QVBoxLayout* pBGLayout = new QVBoxLayout(pBG);
 
     OptionRadioButton* pBinaryComparison = new OptionRadioButton(i18n("Binary comparison"), true, "BinaryComparison", &m_options.m_bDmBinaryComparison, pBG, this);
+    addOptionItem(pBinaryComparison);
     pBinaryComparison->setToolTip(i18n("Binary comparison of each file. (Default)"));
     pBGLayout->addWidget(pBinaryComparison);
 
     OptionRadioButton* pFullAnalysis = new OptionRadioButton(i18n("Full analysis"), false, "FullAnalysis", &m_options.m_bDmFullAnalysis, pBG, this);
+    addOptionItem(pFullAnalysis);
     pFullAnalysis->setToolTip(i18n("Do a full analysis and show statistics information in extra columns.\n"
                                    "(Slower than a binary comparison, much slower for binary files.)"));
     pBGLayout->addWidget(pFullAnalysis);
 
     OptionRadioButton* pTrustDate = new OptionRadioButton(i18n("Trust the size and modification date (unsafe)"), false, "TrustDate", &m_options.m_bDmTrustDate, pBG, this);
+    addOptionItem(pTrustDate);
     pTrustDate->setToolTip(i18n("Assume that files are equal if the modification date and file length are equal.\n"
                                 "Files with equal contents but different modification dates will appear as different.\n"
                                 "Useful for big directories or slow networks."));
     pBGLayout->addWidget(pTrustDate);
 
     OptionRadioButton* pTrustDateFallbackToBinary = new OptionRadioButton(i18n("Trust the size and date, but use binary comparison if date does not match (unsafe)"), false, "TrustDateFallbackToBinary", &m_options.m_bDmTrustDateFallbackToBinary, pBG, this);
+    addOptionItem(pTrustDateFallbackToBinary);
     pTrustDateFallbackToBinary->setToolTip(i18n("Assume that files are equal if the modification date and file length are equal.\n"
                                                 "If the dates are not equal but the sizes are, use binary comparison.\n"
                                                 "Useful for big directories or slow networks."));
     pBGLayout->addWidget(pTrustDateFallbackToBinary);
 
     OptionRadioButton* pTrustSize = new OptionRadioButton(i18n("Trust the size (unsafe)"), false, "TrustSize", &m_options.m_bDmTrustSize, pBG, this);
+    addOptionItem(pTrustSize);
     pTrustSize->setToolTip(i18n("Assume that files are equal if their file lengths are equal.\n"
                                 "Useful for big directories or slow networks when the date is modified during download."));
     pBGLayout->addWidget(pTrustSize);
@@ -1344,6 +1397,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 
     // Some two Dir-options: Affects only the default actions.
     OptionCheckBox* pSyncMode = new OptionCheckBox(i18n("Synchronize directories"), false, "SyncMode", &m_options.m_bDmSyncMode, page, this);
+    addOptionItem(pSyncMode);
     gbox->addWidget(pSyncMode, line, 0, 1, 2);
     pSyncMode->setToolTip(i18n(
         "Offers to store files in both directories so that\n"
@@ -1353,6 +1407,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 
     // Allow white-space only differences to be considered equal
     OptionCheckBox* pWhiteSpaceDiffsEqual = new OptionCheckBox(i18n("White space differences considered equal"), true, "WhiteSpaceEqual", &m_options.m_bDmWhiteSpaceEqual, page, this);
+    addOptionItem(pWhiteSpaceDiffsEqual);
     gbox->addWidget(pWhiteSpaceDiffsEqual, line, 0, 1, 2);
     pWhiteSpaceDiffsEqual->setToolTip(i18n(
         "If files differ only by white space consider them equal.\n"
@@ -1362,6 +1417,7 @@ void OptionDialog::setupDirectoryMergePage(void)
     ++line;
 
     OptionCheckBox* pCopyNewer = new OptionCheckBox(i18n("Copy newer instead of merging (unsafe)"), false, "CopyNewer", &m_options.m_bDmCopyNewer, page, this);
+    addOptionItem(pCopyNewer);
     gbox->addWidget(pCopyNewer, line, 0, 1, 2);
     pCopyNewer->setToolTip(i18n(
         "Do not look inside, just take the newer file.\n"
@@ -1371,6 +1427,7 @@ void OptionDialog::setupDirectoryMergePage(void)
 
     OptionCheckBox* pCreateBakFiles = new OptionCheckBox(i18n("Backup files (.orig)"), true, "CreateBakFiles", &m_options.m_bDmCreateBakFiles, page, this);
     gbox->addWidget(pCreateBakFiles, line, 0, 1, 2);
+    addOptionItem(pCreateBakFiles);
     pCreateBakFiles->setToolTip(i18n(
         "If a file would be saved over an old file, then the old file\n"
         "will be renamed with a '.orig' extension instead of being deleted."));
@@ -1464,6 +1521,7 @@ void OptionDialog::setupRegionalPage(void)
     QLabel* label;
 
     m_pSameEncoding = new OptionCheckBox(i18n("Use the same encoding for everything:"), true, "SameEncoding", &m_options.m_bSameEncoding, page, this);
+    addOptionItem(m_pSameEncoding);
     gbox->addWidget(m_pSameEncoding, line, 0, 1, 2);
     m_pSameEncoding->setToolTip(i18n(
         "Enable this allows to change all encodings by changing the first only.\n"
@@ -1477,6 +1535,7 @@ void OptionDialog::setupRegionalPage(void)
     label = new QLabel(i18n("File Encoding for A:"), page);
     gbox->addWidget(label, line, 0);
     m_pEncodingAComboBox = new OptionEncodingComboBox("EncodingForA", &m_options.m_pEncodingA, page, this);
+    addOptionItem(m_pEncodingAComboBox);
     gbox->addWidget(m_pEncodingAComboBox, line, 1);
 
     QString autoDetectToolTip = i18n(
@@ -1485,14 +1544,17 @@ void OptionDialog::setupRegionalPage(void)
         "(Unicode detection depends on the first bytes of a file.)");
     m_pAutoDetectUnicodeA = new OptionCheckBox(i18n("Auto Detect Unicode"), true, "AutoDetectUnicodeA", &m_options.m_bAutoDetectUnicodeA, page, this);
     gbox->addWidget(m_pAutoDetectUnicodeA, line, 2);
+    addOptionItem(m_pAutoDetectUnicodeA);
     m_pAutoDetectUnicodeA->setToolTip(autoDetectToolTip);
     ++line;
 
     label = new QLabel(i18n("File Encoding for B:"), page);
     gbox->addWidget(label, line, 0);
     m_pEncodingBComboBox = new OptionEncodingComboBox("EncodingForB", &m_options.m_pEncodingB, page, this);
+    addOptionItem(m_pEncodingBComboBox);
     gbox->addWidget(m_pEncodingBComboBox, line, 1);
     m_pAutoDetectUnicodeB = new OptionCheckBox(i18n("Auto Detect Unicode"), true, "AutoDetectUnicodeB", &m_options.m_bAutoDetectUnicodeB, page, this);
+    addOptionItem(m_pAutoDetectUnicodeB);
     gbox->addWidget(m_pAutoDetectUnicodeB, line, 2);
     m_pAutoDetectUnicodeB->setToolTip(autoDetectToolTip);
     ++line;
@@ -1500,8 +1562,10 @@ void OptionDialog::setupRegionalPage(void)
     label = new QLabel(i18n("File Encoding for C:"), page);
     gbox->addWidget(label, line, 0);
     m_pEncodingCComboBox = new OptionEncodingComboBox("EncodingForC", &m_options.m_pEncodingC, page, this);
+    addOptionItem(m_pEncodingCComboBox);
     gbox->addWidget(m_pEncodingCComboBox, line, 1);
     m_pAutoDetectUnicodeC = new OptionCheckBox(i18n("Auto Detect Unicode"), true, "AutoDetectUnicodeC", &m_options.m_bAutoDetectUnicodeC, page, this);
+    addOptionItem(m_pAutoDetectUnicodeC);
     gbox->addWidget(m_pAutoDetectUnicodeC, line, 2);
     m_pAutoDetectUnicodeC->setToolTip(autoDetectToolTip);
     ++line;
@@ -1509,8 +1573,10 @@ void OptionDialog::setupRegionalPage(void)
     label = new QLabel(i18n("File Encoding for Merge Output and Saving:"), page);
     gbox->addWidget(label, line, 0);
     m_pEncodingOutComboBox = new OptionEncodingComboBox("EncodingForOutput", &m_options.m_pEncodingOut, page, this);
+    addOptionItem(m_pEncodingOutComboBox);
     gbox->addWidget(m_pEncodingOutComboBox, line, 1);
     m_pAutoSelectOutEncoding = new OptionCheckBox(i18n("Auto Select"), true, "AutoSelectOutEncoding", &m_options.m_bAutoSelectOutEncoding, page, this);
+    addOptionItem(m_pAutoSelectOutEncoding);
     gbox->addWidget(m_pAutoSelectOutEncoding, line, 2);
     m_pAutoSelectOutEncoding->setToolTip(i18n(
         "If enabled then the encoding from the input files is used.\n"
@@ -1519,6 +1585,7 @@ void OptionDialog::setupRegionalPage(void)
     label = new QLabel(i18n("File Encoding for Preprocessor Files:"), page);
     gbox->addWidget(label, line, 0);
     m_pEncodingPPComboBox = new OptionEncodingComboBox("EncodingForPP", &m_options.m_pEncodingPP, page, this);
+    addOptionItem(m_pEncodingPPComboBox);
     gbox->addWidget(m_pEncodingPPComboBox, line, 1);
     ++line;
 
@@ -1528,6 +1595,7 @@ void OptionDialog::setupRegionalPage(void)
     connect(m_pAutoSelectOutEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
 
     OptionCheckBox* pRightToLeftLanguage = new OptionCheckBox(i18n("Right To Left Language"), false, "RightToLeftLanguage", &m_options.m_bRightToLeftLanguage, page, this);
+    addOptionItem(pRightToLeftLanguage);
     gbox->addWidget(pRightToLeftLanguage, line, 0, 1, 2);
     pRightToLeftLanguage->setToolTip(i18n(
         "Some languages are read from right to left.\n"
@@ -1558,6 +1626,7 @@ void OptionDialog::setupIntegrationPage(void)
     gbox->addWidget(label, line, 0);
     OptionLineEdit* pIgnorableCmdLineOptions = new OptionLineEdit("-u;-query;-html;-abort", "IgnorableCmdLineOptions", &m_options.m_ignorableCmdLineOptions, page, this);
     gbox->addWidget(pIgnorableCmdLineOptions, line, 1, 1, 2);
+    addOptionItem(pIgnorableCmdLineOptions);
     label->setToolTip(i18n(
         "List of command line options that should be ignored when KDiff3 is used by other tools.\n"
         "Several values can be specified if separated via ';'\n"
@@ -1566,6 +1635,7 @@ void OptionDialog::setupIntegrationPage(void)
 
     OptionCheckBox* pEscapeKeyQuits = new OptionCheckBox(i18n("Quit also via Escape key"), false, "EscapeKeyQuits", &m_options.m_bEscapeKeyQuits, page, this);
     gbox->addWidget(pEscapeKeyQuits, line, 0, 1, 2);
+    addOptionItem(pEscapeKeyQuits);
     pEscapeKeyQuits->setToolTip(i18n(
         "Fast method to exit.\n"
         "For those who are used to using the Escape key."));
