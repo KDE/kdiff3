@@ -3352,8 +3352,7 @@ bool DirectoryMergeInfo::eventFilter(QObject* o, QEvent* e)
     return false;
 }
 
-static void addListViewItem(QTreeWidget* pListView, const QString& dir,
-                            const QString& basePath, FileAccess* fi)
+void DirectoryMergeInfo::addListViewItem(const QString& dir, const QString& basePath, FileAccess* fi)
 {
     if(basePath.isEmpty())
     {
@@ -3365,26 +3364,23 @@ static void addListViewItem(QTreeWidget* pListView, const QString& dir,
         {
             QString dateString = fi->lastModified().toString("yyyy-MM-dd hh:mm:ss");
             //TODO: Move logic to FileAccess
-            new QTreeWidgetItem(
-                pListView,
-                QStringList() << dir << QString(fi->isDir() ? i18n("Dir") : i18n("File")) + (fi->isSymLink() ? i18n("-Link") : "") << QString::number(fi->size()) << QLatin1String(fi->isReadable() ? "r" : " ") + QLatin1String(fi->isWritable() ? "w" : " ")
-#ifdef Q_OS_WIN
-                              /*Future: Use GetFileAttributes()*/
-                              <<
-#else
-                                                                                                                                                                   + QLatin1String((fi->isExecutable() ? "x" : " "))
-                              <<
-#endif
-                    dateString << QString(fi->isSymLink() ? (" -> " + fi->readLink()) : QString("")));
+            m_pInfoList->addTopLevelItem( new QTreeWidgetItem(
+                m_pInfoList,
+                QStringList() << dir << 
+                    QString(fi->isDir() ? i18n("Dir") : i18n("File")) + (fi->isSymLink() ? i18n("-Link") : "") << QString::number(fi->size()) << QLatin1String(fi->isReadable() ? "r" : " ")
+                    + QLatin1String(fi->isWritable() ? "w" : " ")
+                    + QLatin1String((fi->isExecutable() ? "x" : " ")) <<
+                    dateString << QString(fi->isSymLink() ? (" -> " + fi->readLink()) : QString("")))
+            );
         }
         else
         {
-            new QTreeWidgetItem(
-                pListView,
+            m_pInfoList->addTopLevelItem(new QTreeWidgetItem(
+                m_pInfoList,
                 QStringList() << dir << i18n("not available") << ""
                               << ""
                               << ""
-                              << "");
+                              << ""));
         }
     }
 }
@@ -3449,13 +3445,13 @@ void DirectoryMergeInfo::setInfo(
     }
 
     m_pInfoList->clear();
-    addListViewItem(m_pInfoList, i18n("A"), dirA.prettyAbsPath(), mfi.m_pFileInfoA);
-    addListViewItem(m_pInfoList, i18n("B"), dirB.prettyAbsPath(), mfi.m_pFileInfoB);
-    addListViewItem(m_pInfoList, i18n("C"), dirC.prettyAbsPath(), mfi.m_pFileInfoC);
+    addListViewItem(i18n("A"), dirA.prettyAbsPath(), mfi.m_pFileInfoA);
+    addListViewItem(i18n("B"), dirB.prettyAbsPath(), mfi.m_pFileInfoB);
+    addListViewItem(i18n("C"), dirC.prettyAbsPath(), mfi.m_pFileInfoC);
     if(!bHideDest)
     {
         FileAccess fiDest(dirDest.prettyAbsPath() + "/" + mfi.subPath(), true);
-        addListViewItem(m_pInfoList, i18n("Dest"), dirDest.prettyAbsPath(), &fiDest);
+        addListViewItem(i18n("Dest"), dirDest.prettyAbsPath(), &fiDest);
     }
     for(int i = 0; i < m_pInfoList->columnCount(); ++i)
         m_pInfoList->resizeColumnToContents(i);

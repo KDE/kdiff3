@@ -147,11 +147,11 @@ protected Q_SLOTS:
    void onExpanded();
    void	currentChanged( const QModelIndex & current, const QModelIndex & previous ) override; // override
 private:
-   class Data;
-   friend class Data;
-   Data* d;
-   class DirMergeItemDelegate;
-   friend class DirMergeItemDelegate;
+  class Data;
+  friend class Data;
+  Data* d;
+  class DirMergeItemDelegate;
+  friend class DirMergeItemDelegate;
 };
 
 class DirectoryMergeInfo : public QFrame
@@ -170,6 +170,8 @@ public:
 Q_SIGNALS:
    void gotFocus();
 private:
+   void addListViewItem(const QString& dir, const QString& basePath, FileAccess* fi);
+
    QLabel* m_pInfoA;
    QLabel* m_pInfoB;
    QLabel* m_pInfoC;
