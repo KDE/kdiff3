@@ -940,7 +940,7 @@ void OptionDialog::setupEditPage(void)
     label = new QLabel(i18n("Line end style:"), page);
     gbox->addWidget(label, line, 0);
 
-    OptionComboBox* pLineEndStyle = new OptionComboBox(eLineEndStyleAutoDetect, "LineEndStyle", &m_options.m_lineEndStyle, page, this);
+    OptionComboBox* pLineEndStyle = new OptionComboBox(eLineEndStyleAutoDetect, "LineEndStyle", (int*)&m_options.m_lineEndStyle, page, this);
     gbox->addWidget(pLineEndStyle, line, 1);
     addOptionItem(pLineEndStyle);
     pLineEndStyle->insertItem(eLineEndStyleUnix, "Unix");

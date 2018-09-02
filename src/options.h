@@ -81,7 +81,7 @@ public:
     QTextCodec*  m_pEncodingOut;
     bool m_bAutoSelectOutEncoding;
     QTextCodec*  m_pEncodingPP;
-    int  m_lineEndStyle;
+    e_LineEndStyle  m_lineEndStyle;
 
     bool m_bPreserveCarriageReturn;
     bool m_bTryHard;
