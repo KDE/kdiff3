@@ -59,9 +59,7 @@ public:
    bool isHidden() const;
    QString readLink() const;
 
-   //QDateTime   created()       const;
-   QDateTime   lastModified()  const;
-   //QDateTime   lastRead()      const;
+   QDateTime lastModified() const;
 
    QString fileName() const; // Just the name-part of the path, without parent directories
    QString filePath() const; // The path-string that was used during construction

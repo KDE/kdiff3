@@ -373,7 +373,10 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
     }
 
     m_bExists = acc != 0 || fileType != 0;
-    
+    //insure modifcation time is initialized if it wasn't already.
+    if(m_modificationTime.isNull())
+        m_modificationTime = m_fileInfo.lastModified();
+
     d()->m_bValidData = true;
     m_bSymLink = !d()->m_linkTarget.isEmpty();
     if(d()->m_name.isEmpty())
@@ -569,8 +572,7 @@ QDateTime FileAccess::created() const
 
 QDateTime FileAccess::lastModified() const
 {
-    if(isLocal() && m_modificationTime.isNull())
-        const_cast<FileAccess*>(this)->m_modificationTime = QFileInfo(absoluteFilePath()).lastModified();
+    Q_ASSERT(!m_modificationTime.isNull());
     return m_modificationTime;
 }
 
