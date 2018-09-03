@@ -192,7 +192,7 @@ void ProgressDialog::setInformation(const QString& info, bool bRedrawUpdate)
 
 void ProgressDialog::setMaxNofSteps(const qint64 maxNofSteps)
 {
-    if(m_progressStack.empty())
+    if(m_progressStack.empty() || maxNofSteps == 0)
         return;
     ProgressLevelData& pld = m_progressStack.back();
     pld.m_maxNofSteps = maxNofSteps;
