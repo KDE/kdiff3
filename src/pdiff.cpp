@@ -828,19 +828,6 @@ void KDiff3App::resizeEvent(QResizeEvent* e)
         m_pCornerWidget->setFixedSize(m_pDiffVScrollBar->width(), m_pHScrollBar->height());
 }
 
-void KDiff3App::childEvent(QChildEvent* c)
-{
-    // Workaround for a bug in several Qt versions. When a child is added to QSplitter, don't
-    // add it to the splitter if it is a window.
-    if(c->child()->isWidgetType())
-    {
-        QWidget* w = static_cast<QWidget*>(c->child());
-        if(w->isWindow())
-            return;
-    }
-    QSplitter::childEvent(c);
-}
-
 bool KDiff3App::eventFilter(QObject* o, QEvent* e)
 {
     if(o == m_pMergeResultWindow)

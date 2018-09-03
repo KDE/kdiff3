@@ -326,8 +326,7 @@ class KDiff3App : public QSplitter
 
     bool eventFilter(QObject* o, QEvent* e) override;
     void resizeEvent(QResizeEvent*) override;
-    void childEvent(QChildEvent* c) override;
-
+    
     bool improveFilenames(bool bCreateNewInstance);
 
     bool canContinue();
