@@ -952,7 +952,7 @@ void MergeResultWindow::setFastSelector(MergeLineList::iterator i)
     int newFirstLine = getBestFirstLine(line1, nofLines, m_firstLine, getNofVisibleLines());
     if(newFirstLine != m_firstLine)
     {
-        scroll(0, newFirstLine - m_firstLine);
+        emit scrollMergeResultWindow(0, newFirstLine - m_firstLine);
     }
 
     if(m_selection.isEmpty())
@@ -1618,7 +1618,7 @@ void MergeResultWindow::timerEvent(QTimerEvent*)
     if(m_scrollDeltaX != 0 || m_scrollDeltaY != 0)
     {
         m_selection.end(m_selection.getLastLine() + m_scrollDeltaY, m_selection.getLastPos() + m_scrollDeltaX);
-        scroll(m_scrollDeltaX, m_scrollDeltaY);
+        emit scrollMergeResultWindow(m_scrollDeltaX, m_scrollDeltaY);
         killTimer(m_delayedDrawTimer);
         m_delayedDrawTimer = startTimer(50);
     }
@@ -2214,7 +2214,7 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
         m_scrollDeltaY = deltaY;
         if(deltaX != 0 || deltaY != 0)
         {
-            scroll(deltaX, deltaY);
+            emit scrollMergeResultWindow(deltaX, deltaY);
         }
     }
 }
@@ -2244,7 +2244,7 @@ void MergeResultWindow::wheelEvent(QWheelEvent* e)
 {
     int d = -e->delta() * QApplication::wheelScrollLines() / 120;
     e->accept();
-    scroll(0, std::min(d, getNofVisibleLines()));
+    emit scrollMergeResultWindow(0, std::min(d, getNofVisibleLines()));
 }
 
 bool MergeResultWindow::event(QEvent* e)
@@ -2649,7 +2649,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     update();
     if(newFirstLine != m_firstLine || newHorizScrollOffset != m_horizScrollOffset)
     {
-        scroll(newHorizScrollOffset - m_horizScrollOffset, newFirstLine - m_firstLine);
+        emit scrollMergeResultWindow(newHorizScrollOffset - m_horizScrollOffset, newFirstLine - m_firstLine);
         return;
     }
 }

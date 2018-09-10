@@ -641,24 +641,28 @@ void KDiff3App::initView()
     connect(m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow1, SLOT(setHorizScrollOffset(int)));
     connect(m_pDiffTextWindow1, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
     connect(m_pDiffTextWindow1, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
+    connect(m_pDiffTextWindow1, SIGNAL(scrollDiffTextWindow(int, int)), this, SLOT(scrollDiffTextWindow(int, int)));
     m_pDiffTextWindow1->installEventFilter(this);
 
     connect(m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow2, SLOT(setFirstLine(int)));
     connect(m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow2, SLOT(setHorizScrollOffset(int)));
     connect(m_pDiffTextWindow2, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
     connect(m_pDiffTextWindow2, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
+    connect(m_pDiffTextWindow2, SIGNAL(scrollDiffTextWindow(int, int)), this, SLOT(scrollDiffTextWindow(int, int)));
     m_pDiffTextWindow2->installEventFilter(this);
 
     connect(m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow3, SLOT(setFirstLine(int)));
     connect(m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow3, SLOT(setHorizScrollOffset(int)));
     connect(m_pDiffTextWindow3, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
     connect(m_pDiffTextWindow3, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
+    connect(m_pDiffTextWindow3, SIGNAL(scrollDiffTextWindow(int, int)), this, SLOT(scrollDiffTextWindow(int, int)));
     m_pDiffTextWindow3->installEventFilter(this);
 
     MergeResultWindow* p = m_pMergeResultWindow;
     connect(m_pMergeVScrollBar, &QScrollBar::valueChanged, p, &MergeResultWindow::setFirstLine);
 
     connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, p, &MergeResultWindow::setHorizScrollOffset);
+    connect(p, SIGNAL(scrollMergeResultWindow(int, int)), this, SLOT(scrollMergeResultWindow(int, int)));
     connect(p, SIGNAL(sourceMask(int, int)), this, SLOT(sourceMask(int, int)));
     connect(p, SIGNAL(resizeSignal()), this, SLOT(resizeMergeResultWindow()));
     connect(p, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));

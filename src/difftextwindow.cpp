@@ -392,7 +392,7 @@ void DiffTextWindow::setFastSelectorRange(int line1, int nofLines)
             getNofVisibleLines());
         if(newFirstLine != d->m_firstLine)
         {
-            scroll(0, newFirstLine - d->m_firstLine);
+            emit scrollDiffTextWindow(0, newFirstLine - d->m_firstLine);
         }
 
         update();
@@ -584,7 +584,7 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
         {
             d->m_scrollDeltaX = deltaX;
             d->m_scrollDeltaY = deltaY;
-            scroll(deltaX, deltaY);
+            emit scrollDiffTextWindow(deltaX, deltaY);
             if(d->m_delayedDrawTimer)
                 killTimer(d->m_delayedDrawTimer);
             d->m_delayedDrawTimer = startTimer(50);
@@ -645,7 +645,7 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
     if(d->m_scrollDeltaX != 0 || d->m_scrollDeltaY != 0)
     {
         d->m_selection.end(d->m_selection.getLastLine() + d->m_scrollDeltaY, d->m_selection.getLastPos() + d->m_scrollDeltaX);
-        scroll(d->m_scrollDeltaX, d->m_scrollDeltaY);
+        emit scrollDiffTextWindow(d->m_scrollDeltaX, d->m_scrollDeltaY);
         killTimer(d->m_delayedDrawTimer);
         d->m_delayedDrawTimer = startTimer(50);
     }
