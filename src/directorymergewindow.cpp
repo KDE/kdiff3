@@ -3145,29 +3145,29 @@ bool DirectoryMergeWindow::Data::mergeFLD(const QString& nameA, const QString& n
 
 bool DirectoryMergeWindow::Data::copyFLD(const QString& srcName, const QString& destName)
 {
+    bool bSuccess = false;
+    
     if(srcName == destName)
         return true;
-
+    
     FileAccess fi(srcName);
     FileAccess faDest(destName, true);
     if(faDest.exists() && !(fi.isDir() && faDest.isDir() && (fi.isSymLink() == faDest.isSymLink())))
     {
-        bool bSuccess = deleteFLD(destName, m_pOptions->m_bDmCreateBakFiles);
+        bSuccess = deleteFLD(destName, m_pOptions->m_bDmCreateBakFiles);
         if(!bSuccess)
         {
             m_pStatusInfo->addText(i18n("Error: copy( %1 -> %2 ) failed."
                                         "Deleting existing destination failed.",
                                         srcName, destName));
-            return false;
+            return bSuccess;
         }
     }
 
     if(fi.isSymLink() && ((fi.isDir() && !m_bFollowDirLinks) || (!fi.isDir() && !m_bFollowFileLinks)))
     {
         m_pStatusInfo->addText(i18n("copyLink( %1 -> %2 )", srcName, destName));
-#if defined(Q_OS_WIN)
-// What are links?
-#else
+
         if(m_bSimulatedMergeStarted)
         {
             return true;
@@ -3178,12 +3178,16 @@ bool DirectoryMergeWindow::Data::copyFLD(const QString& srcName, const QString& 
             m_pStatusInfo->addText(i18n("Error: copyLink failed: Remote links are not yet supported."));
             return false;
         }
+
+        bSuccess = false;
         QString linkTarget = fi.readLink();
-        bool bSuccess = FileAccess::symLink(linkTarget, destName);
-        if(!bSuccess)
-            m_pStatusInfo->addText(i18n("Error: copyLink failed."));
+        if(!linkTarget.isEmpty())
+        {
+            bSuccess = FileAccess::symLink(linkTarget, destName);
+            if(!bSuccess)
+                m_pStatusInfo->addText(i18n("Error: copyLink failed."));
+        }
         return bSuccess;
-#endif
     }
 
     if(fi.isDir())
@@ -3192,7 +3196,7 @@ bool DirectoryMergeWindow::Data::copyFLD(const QString& srcName, const QString& 
             return true;
         else
         {
-            bool bSuccess = makeDir(destName);
+            bSuccess = makeDir(destName);
             return bSuccess;
         }
     }
@@ -3201,7 +3205,7 @@ bool DirectoryMergeWindow::Data::copyFLD(const QString& srcName, const QString& 
     if(pos > 0)
     {
         QString parentName = destName.left(pos);
-        bool bSuccess = makeDir(parentName, true /*quiet*/);
+        bSuccess = makeDir(parentName, true /*quiet*/);
         if(!bSuccess)
             return false;
     }
@@ -3214,7 +3218,7 @@ bool DirectoryMergeWindow::Data::copyFLD(const QString& srcName, const QString& 
     }
 
     FileAccess faSrc(srcName);
-    bool bSuccess = faSrc.copyFile(destName);
+    bSuccess = faSrc.copyFile(destName);
     if(!bSuccess) m_pStatusInfo->addText(faSrc.getStatusText());
     return bSuccess;
 }
