@@ -13,6 +13,7 @@
 
 #include "progress.h"
 
+#include <QUrl>
 #include <QFileInfo>
 #include <QDateTime>
 
@@ -42,8 +43,6 @@ public:
    FileAccess();
    ~FileAccess();
    FileAccess( const QString& name, bool bWantToWrite=false ); // name: local file or dirname or url (when supported)
-   FileAccess(const FileAccess& other);
-   FileAccess& operator=(const FileAccess& other);
    void setFile( const QString& name, bool bWantToWrite=false );
 
    bool isValid() const;
@@ -99,14 +98,19 @@ private:
    void setFile( const QFileInfo& fi, FileAccess* pParent );
    void setStatusText( const QString& s );
 
-   class FileAccessPrivateData;
-   FileAccessPrivateData* d();
-   const FileAccessPrivateData* d() const;
-   void createData();
+   void reset();
 
-   FileAccessPrivateData* m_pData = nullptr;
+   QUrl m_url;
+   bool m_bValidData;
+   
+   //long m_fileType; // for testing only
+   FileAccess* m_pParent;
 
-   QFileInfo m_fileInfo;
+   QFileInfo m_fileInfo; 
+   QString m_linkTarget;
+   QString m_name;
+   QString m_localCopy;
+
    QString m_filePath; // might be absolute or relative if m_pParent!=0
    qint64 m_size;
    QDateTime m_modificationTime;
@@ -118,6 +122,8 @@ private:
    bool m_bReadable : 1;
    bool m_bExecutable:1;
    bool m_bHidden   : 1;
+   
+   QString m_statusText; // Might contain an error string, when the last operation didn't succeed.
 
    friend class FileAccessJobHandler;
 };

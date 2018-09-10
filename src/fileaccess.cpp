@@ -42,116 +42,56 @@
 #include <utime.h>
 #endif
 
-class FileAccess::FileAccessPrivateData
-{
-  public:
-    FileAccessPrivateData()
-    {
-        reset();
-    }
-    
-    void reset()
-    {
-        m_url = QUrl();
-        m_bValidData = false;
-        m_name = QString();
-       
-        m_linkTarget = "";
-        //m_fileType = -1;
-        m_pParent = nullptr;
-        //Insure that old tempFile is removed we will recreate it as needed.
-        if(!m_localCopy.isEmpty())
-        {
-            removeTempFile(m_localCopy);
-            m_localCopy = "";
-        }
-    }
-
-    inline bool isLocal() const
-    {
-        return m_url.isLocalFile() || !m_url.isValid();
-    }
-
-    ~FileAccessPrivateData()
-    {
-        //Cleanup tempfile when FileAccessPrivateData object referancing it is destroyed.
-        if(!m_localCopy.isEmpty())
-        {
-            removeTempFile(m_localCopy);
-        }
-    }
-
-    QUrl m_url;
-    bool m_bValidData;
-
-    //long m_fileType; // for testing only
-    FileAccess* m_pParent;
-    
-    QString m_linkTarget;
-    QString m_name = QString("");
-    QString m_localCopy = QString("");
-    QString m_statusText; // Might contain an error string, when the last operation didn't succeed.
-};
-
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
-    m_pData = nullptr;
-    m_modificationTime = QDateTime();
-    createData();
+    reset();
+    
     setFile(name, bWantToWrite);
 }
 
 FileAccess::FileAccess()
 {
+    reset();
+}
+
+
+
+void FileAccess::reset(void)
+{
+    m_fileInfo = QFileInfo();
+    m_filePath = "";
     m_bExists = false;
     m_bFile = false;
     m_bDir = false;
     m_bSymLink = false;
     m_bWritable = false;
     m_bHidden = false;
-    m_pData = nullptr;
     m_size = 0;
     m_modificationTime = QDateTime();
 
-    createData();
-}
+    m_url = QUrl();
+    m_bValidData = false;
+    m_name = QString();
 
-FileAccess::FileAccess(const FileAccess& other)
-{
-    createData();
-
-    *m_pData = *other.m_pData;
-    *this = other;
-}
-
-void FileAccess::createData()
-{
-    if(d() == nullptr)
-        m_pData = new FileAccessPrivateData();
-}
-
-FileAccess& FileAccess::operator=(const FileAccess& other)
-{
-    m_size = other.m_size;
-    m_filePath = other.m_filePath;
-    m_modificationTime = other.m_modificationTime;
-    m_bSymLink = other.m_bSymLink;
-    m_bFile = other.m_bFile;
-    m_bDir = other.m_bDir;
-    m_bReadable = other.m_bReadable;
-    m_bExecutable = other.m_bExecutable;
-    m_bExists = other.m_bExists;
-    m_bWritable = other.m_bWritable;
-    m_bHidden = other.m_bHidden;
-    *m_pData = *other.m_pData;
-
-    return *this;
+    m_linkTarget = "";
+    //m_fileType = -1;
+    m_pParent = nullptr;
+    //Insure that old tempFile is removed we will recreate it as needed.
+    if(!m_localCopy.isEmpty())
+    {
+        removeTempFile(m_localCopy);
+        m_localCopy = "";
+    }
 }
 
 FileAccess::~FileAccess()
 {
-    if(m_pData != nullptr)
-        delete m_pData;
+    //remove tempfile if any
+    if(!m_localCopy.isEmpty())
+    {
+        removeTempFile(m_localCopy);
+        m_localCopy = "";
+    }
 }
 
 // Two kinds of optimization are applied here:
@@ -163,14 +103,15 @@ FileAccess::~FileAccess()
 
 void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
 {
+    reset();
     m_fileInfo = fi;
     m_fileInfo.setCaching(true);
     m_filePath = pParent == nullptr ? fi.absoluteFilePath() : fi.fileName();
 
     m_bSymLink = fi.isSymLink();
-    createData();
+    
 
-    d()->m_pParent = pParent;
+    m_pParent = pParent;
 
     m_bFile = fi.isFile();
     m_bDir = fi.isDir();
@@ -183,12 +124,12 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
     m_bReadable = m_fileInfo.isReadable();
     m_bExecutable = m_fileInfo.isExecutable();
 
-    if(d()->isLocal())
+    if(isLocal())
     {
-        d()->m_name = m_fileInfo.fileName();
+        m_name = m_fileInfo.fileName();
         if(m_bSymLink)
         {
-            d()->m_linkTarget = m_fileInfo.readLink();
+            m_linkTarget = m_fileInfo.readLink();
 #ifndef Q_OS_WIN 
             // Unfortunately Qt5 symLinkTarget/readLink always returns an absolute path, even if the link is relative
             char s[PATH_MAX + 1];
@@ -196,36 +137,31 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
             if(len > 0)
             {
                 s[len] = '\0';
-                d()->m_linkTarget = QFile::decodeName(s);
+                m_linkTarget = QFile::decodeName(s);
             }
 #endif
         }
 
-        d()->m_bValidData = true;
-        d()->m_url = QUrl::fromLocalFile(m_fileInfo.filePath());
-        if(d()->m_url.isRelative())
+        m_bValidData = true;
+        m_url = QUrl::fromLocalFile(m_fileInfo.filePath());
+        if(m_url.isRelative())
         {
-            d()->m_url.setPath(absoluteFilePath());
+            m_url.setPath(absoluteFilePath());
         }
     }
 }
 
 void FileAccess::setFile(const QString& name, bool bWantToWrite)
 {
-    m_bExists = false;
-    m_bFile = false;
-    m_bDir = false;
-    m_bSymLink = false;
-    m_size = 0;
-    m_modificationTime = QDateTime();
+    reset();
 
-    createData();
-    d()->reset();
     //Nothing to do here.
     if(name.isEmpty())
         return;
     
     QUrl url = QUrl::fromUserInput(name, QString(), QUrl::AssumeLocalFile);
+    m_url = url;
+    m_name = m_url.fileName();
 
     // FileAccess tries to detect if the given name is an URL or a local file.
     // This is a problem if the filename looks like an URL (i.e. contains a colon ':').
@@ -240,7 +176,6 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
     {
         QString localName = url.path();
 
-        d()->m_url = url;
 #if defined(Q_OS_WIN)
         if(localName.startsWith(QLatin1String("/tmp/")))
         {
@@ -259,14 +194,12 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
     }
     else
     {
-        d()->m_url = url;
-        d()->m_name = d()->m_url.fileName();
 
         FileAccessJobHandler jh(this);            // A friend, which writes to the parameters of this class!
         jh.stat(2 /*all details*/, bWantToWrite); // returns bSuccess, ignored
 
         m_filePath = name;
-        d()->m_bValidData = true; // After running stat() the variables are initialised
+        m_bValidData = true; // After running stat() the variables are initialised
                                   // and valid even if the file doesn't exist and the stat
                                   // query failed.
     }
@@ -274,11 +207,11 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
 
 void FileAccess::addPath(const QString& txt)
 {
-    if(!isLocal() && d()->m_url.isValid())
+    if(!isLocal() && m_url.isValid())
     {
-        QUrl url = d()->m_url.adjusted(QUrl::StripTrailingSlash);
-        d()->m_url.setPath(url.path() + '/' + txt);
-        setFile(d()->m_url.url()); // reinitialise
+        QUrl url = m_url.adjusted(QUrl::StripTrailingSlash);
+        m_url.setPath(url.path() + '/' + txt);
+        setFile(m_url.url()); // reinitialise
     }
     else
     {
@@ -334,7 +267,7 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
             m_modificationTime = QDateTime::fromMSecsSinceEpoch(e.numberValue(f));
             break;
         case KIO::UDSEntry::UDS_LINK_DEST:
-            d()->m_linkTarget = e.stringValue(f);
+            m_linkTarget = e.stringValue(f);
             break;
         case KIO::UDSEntry::UDS_ACCESS:
         {
@@ -348,18 +281,16 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
         }
         case KIO::UDSEntry::UDS_FILE_TYPE:
         {
-            #ifndef Q_OS_WIN
             fileType = e.numberValue(f);
-            m_bDir = (fileType & S_IFMT) == S_IFDIR;
-            m_bFile = (fileType & S_IFMT) == S_IFREG;
-            m_bSymLink = (fileType & S_IFMT) == S_IFLNK;
+            m_bDir = (fileType & QT_STAT_MASK) == QT_STAT_DIR;
+            m_bFile = (fileType & QT_STAT_MASK) == QT_STAT_REG;
+            m_bSymLink = (fileType & QT_STAT_MASK) == QT_STAT_LNK;
             m_bExists = fileType != 0;
-            //d()->m_fileType = fileType;
-            #endif
+            //m_fileType = fileType;
             break;
         }
 
-        case KIO::UDSEntry::UDS_URL: // m_url = QUrlFix( e.stringValue(f) );
+        case KIO::UDSEntry::UDS_URL: // m_url = QUrl( e.stringValue(f) );
             break;
         case KIO::UDSEntry::UDS_MIME_TYPE:
             break;
@@ -371,30 +302,35 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
             break;
         }
     }
-
-    m_bExists = acc != 0 || fileType != 0;
+    
+    m_fileInfo = QFileInfo(m_filePath);
+    m_fileInfo.setCaching(true);
+    if(m_url.isEmpty())
+        m_url = QUrl::fromUserInput(m_fileInfo.absoluteFilePath());
+    
+    m_name = m_url.fileName();
+    m_bExists = m_fileInfo.exists();
     //insure modifcation time is initialized if it wasn't already.
     if(m_modificationTime.isNull())
         m_modificationTime = m_fileInfo.lastModified();
 
-    d()->m_bValidData = true;
-    m_bSymLink = !d()->m_linkTarget.isEmpty();
-    if(d()->m_name.isEmpty())
+    m_bValidData = true;
+    m_bSymLink = !m_linkTarget.isEmpty();
+    if(m_name.isEmpty())
     {
         int pos = m_filePath.lastIndexOf('/') + 1;
-        d()->m_name = m_filePath.mid(pos);
+        m_name = m_filePath.mid(pos);
     }
 
-    m_fileInfo = QFileInfo(d()->m_name);
-    m_fileInfo.setCaching(true);
+
 #ifndef Q_OS_WIN
-    m_bHidden = d()->m_name[0] == '.';
+    m_bHidden = m_name[0] == '.';
 #endif
 }
 
 bool FileAccess::isValid() const
 {
-    return !m_filePath.isEmpty() || d()->m_bValidData;
+    return !m_filePath.isEmpty() || m_bValidData;
 }
 
 bool FileAccess::isFile() const
@@ -437,7 +373,7 @@ qint64 FileAccess::size() const
 QUrl FileAccess::url() const
 {
     if(!m_filePath.isEmpty())
-        return d()->m_url;
+        return m_url;
     else
     {
         QUrl url = QUrl::fromLocalFile(m_filePath);
@@ -451,13 +387,13 @@ QUrl FileAccess::url() const
 
 bool FileAccess::isLocal() const
 {
-    return d()->isLocal();
+    return m_url.isLocalFile() || !m_url.isValid();
 }
 
 bool FileAccess::isReadable() const
 {
     //This can be very slow in some network setups so use cached value
-    if(!d()->isLocal())
+    if(!isLocal())
         return m_bReadable;
     else
         return m_fileInfo.isReadable();
@@ -466,7 +402,7 @@ bool FileAccess::isReadable() const
 bool FileAccess::isWritable() const
 {
     //This can be very slow in some network setups so use cached value
-    if(parent() || !d()->isLocal())
+    if(parent() || !isLocal())
         return m_bWritable;
     else
         return m_fileInfo.isWritable();
@@ -475,7 +411,7 @@ bool FileAccess::isWritable() const
 bool FileAccess::isExecutable() const
 {
     //This can be very slow in some network setups so use cached value
-    if(!d()->isLocal())
+    if(!isLocal())
         return m_bExecutable;
     else
         return m_fileInfo.isExecutable();
@@ -483,7 +419,7 @@ bool FileAccess::isExecutable() const
 
 bool FileAccess::isHidden() const
 {
-    if(!(d()->isLocal()))
+    if(!(isLocal()))
         return m_bHidden;
     else
         return m_fileInfo.isHidden();
@@ -491,7 +427,7 @@ bool FileAccess::isHidden() const
 
 QString FileAccess::readLink() const
 {
-    return d()->m_linkTarget;
+    return m_linkTarget;
 }
 
 QString FileAccess::absoluteFilePath() const
@@ -517,8 +453,8 @@ QString FileAccess::absoluteFilePath() const
 // Just the name-part of the path, without parent directories
 QString FileAccess::fileName() const
 {
-    if(!d()->isLocal())
-        return d()->m_name;
+    if(!isLocal())
+        return m_name;
     else if(parent())
         return m_filePath;
     else
@@ -535,54 +471,19 @@ QString FileAccess::filePath() const
 
 FileAccess* FileAccess::parent() const
 {
-    return d()->m_pParent;
-}
-
-FileAccess::FileAccessPrivateData* FileAccess::d()
-{
-    return m_pData;
-}
-
-const FileAccess::FileAccessPrivateData* FileAccess::d() const
-{
-    return m_pData;
+    return m_pParent;
 }
 
 QString FileAccess::prettyAbsPath() const
 {
-    return isLocal() ? absoluteFilePath() : d()->m_url.toDisplayString();
+    return isLocal() ? absoluteFilePath() : m_url.toDisplayString();
 }
-
-/*
-QDateTime FileAccess::created() const
-{
-   if ( d()!=0 )
-   {
-      if ( isLocal() && d()->m_creationTime.isNull() )
-         const_cast<FileAccess*>(this)->d()->m_creationTime = QFileInfo( absoluteFilePath() ).created();
-      return ( d()->m_creationTime.isValid() ?  d()->m_creationTime : lastModified() );
-   }
-   else
-   {
-      QDateTime created = QFileInfo( absoluteFilePath() ).created();
-      return created.isValid() ? created : lastModified();
-   }
-}
-*/
 
 QDateTime FileAccess::lastModified() const
 {
     Q_ASSERT(!m_modificationTime.isNull());
     return m_modificationTime;
 }
-
-/*
-QDateTime FileAccess::lastRead() const
-{
-   QDateTime accessTime = d()!=0 ? d()->m_accessTime : QFileInfo( absoluteFilePath() ).lastRead();
-   return ( accessTime.isValid() ?  accessTime : lastModified() );
-}
-*/
 
 static bool interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLength)
 {
@@ -609,9 +510,9 @@ static bool interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLength)
 
 bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
 {
-    if(!d()->m_localCopy.isEmpty())
+    if(!m_localCopy.isEmpty())
     {
-        QFile f(d()->m_localCopy);
+        QFile f(m_localCopy);
         if(f.open(QIODevice::ReadOnly))
             return interruptableReadFile(f, pDestBuffer, maxLength); // maxLength == f.read( (char*)pDestBuffer, maxLength );
     }
@@ -727,6 +628,7 @@ bool FileAccess::removeTempFile(const QString& name) // static
 {
     if(name.endsWith(QLatin1String(".2")))
         FileAccess(name.left(name.length() - 2)).removeFile();
+    
     return FileAccess(name).removeFile();
 }
 
@@ -742,19 +644,14 @@ bool FileAccess::removeDir(const QString& dirName)
     return fh.rmDir(dirName);
 }
 
-#if defined(Q_OS_WIN)
-bool FileAccess::symLink(const QString& /*linkTarget*/, const QString& /*linkLocation*/)
-{
-    return false;
-}
-#else
 bool FileAccess::symLink(const QString& linkTarget, const QString& linkLocation)
 {
-    return 0 == ::symlink(linkTarget.toLocal8Bit().constData(), linkLocation.toLocal8Bit().constData());
+    if(linkTarget.isEmpty() || linkLocation.isEmpty())
+        return false;
+    return QFile::link(linkTarget, linkLocation);
     //FileAccessJobHandler fh(0);
     //return fh.symLink( linkTarget, linkLocation );
 }
-#endif
 
 bool FileAccess::exists(const QString& name)
 {
@@ -774,7 +671,7 @@ qint64 FileAccess::sizeForReading()
         {
             QFileInfo fi(localCopy);
             m_size = fi.size();
-            d()->m_localCopy = localCopy;
+            m_localCopy = localCopy;
             return m_size;
         }
         else
@@ -788,13 +685,12 @@ qint64 FileAccess::sizeForReading()
 
 QString FileAccess::getStatusText()
 {
-    return d()->m_statusText;
+    return m_statusText;
 }
 
 void FileAccess::setStatusText(const QString& s)
 {
-    createData();
-    d()->m_statusText = s;
+    m_statusText = s;
 }
 
 QString FileAccess::cleanPath(const QString& path) // static
@@ -814,7 +710,6 @@ bool FileAccess::createBackup(const QString& bakExtension)
 {
     if(exists())
     {
-        createData();
         setFile(absoluteFilePath()); // make sure Data is initialized
         // First rename the existing file to the bak-file. If a bak-file file exists, delete that.
         QString bakName = absoluteFilePath() + bakExtension;
@@ -872,7 +767,7 @@ void FileAccessJobHandler::slotStatResult(KJob* pJob)
     {
         m_bSuccess = true;
 
-        m_pFileAccess->d()->m_bValidData = true;
+        m_pFileAccess->m_bValidData = true;
         const KIO::UDSEntry e = static_cast<KIO::StatJob*>(pJob)->statResult();
 
         m_pFileAccess->setUdsEntry(e);
@@ -1368,16 +1263,16 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
     {
         const KIO::UDSEntry& e = *i;
         FileAccess fa;
-        fa.createData();
-        fa.m_pData->m_pParent = m_pFileAccess;
+        
+        fa.m_pParent = m_pFileAccess;
         fa.setUdsEntry(e);
 
         if(fa.fileName() != "." && fa.fileName() != "..")
         {
-            fa.d()->m_url = parentUrl;
-            QUrl url = fa.d()->m_url.adjusted(QUrl::StripTrailingSlash);
-            fa.d()->m_url.setPath(url.path() + "/" + fa.fileName());
-            //fa.d()->m_absoluteFilePath = fa.url().url();
+            fa.m_url = parentUrl;
+            QUrl url = fa.m_url.adjusted(QUrl::StripTrailingSlash);
+            fa.m_url.setPath(url.path() + "/" + fa.fileName());
+            //fa.m_absoluteFilePath = fa.url().url();
             m_pDirList->push_back(fa);
         }
     }
