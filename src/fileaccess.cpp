@@ -318,8 +318,7 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
     m_bSymLink = !m_linkTarget.isEmpty();
     if(m_name.isEmpty())
     {
-        int pos = m_filePath.lastIndexOf('/') + 1;
-        m_name = m_filePath.mid(pos);
+        m_name = m_fileInfo.fileName();
     }
 
 
@@ -372,17 +371,13 @@ qint64 FileAccess::size() const
 
 QUrl FileAccess::url() const
 {
-    if(!m_filePath.isEmpty())
-        return m_url;
-    else
+    QUrl url = m_url;
+    
+    if(url.isLocalFile() && url.isRelative())
     {
-        QUrl url = QUrl::fromLocalFile(m_filePath);
-        if(url.isRelative())
-        {
-            url.setPath(absoluteFilePath());
-        }
-        return url;
+        url.setPath(absoluteFilePath());
     }
+    return url;
 }
 
 bool FileAccess::isLocal() const
@@ -436,17 +431,10 @@ QString FileAccess::absoluteFilePath() const
         return parent()->absoluteFilePath() + "/" + m_filePath;
     else
     {
-        if(m_filePath.isEmpty())
-            return QString();
-
         if(!isLocal())
-            return m_filePath; // return complete url
-
-        QFileInfo fi(m_filePath);
-        if(fi.isAbsolute())
-            return m_filePath;
-        else
-            return fi.absoluteFilePath(); // Probably never reached
+            return m_url.url(); // return complete url
+        
+        return m_fileInfo.absoluteFilePath();
     }
 } // Full abs path
 
@@ -710,7 +698,6 @@ bool FileAccess::createBackup(const QString& bakExtension)
 {
     if(exists())
     {
-        setFile(absoluteFilePath()); // make sure Data is initialized
         // First rename the existing file to the bak-file. If a bak-file file exists, delete that.
         QString bakName = absoluteFilePath() + bakExtension;
         FileAccess bakFile(bakName, true /*bWantToWrite*/);
