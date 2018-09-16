@@ -5,7 +5,7 @@ project(kdiff3)
 
 set(CMAKE_CXX_EXTENSIONS OFF ) #don't use non-standard extensions
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(ECM_MIN_VERSION "1.7.0")
+set(ECM_MIN_VERSION "5.10.0")
 set(QT_MIN_VERSION "5.6.0")
 set(KF5_MIN_VERSION "5.16.0")
 
