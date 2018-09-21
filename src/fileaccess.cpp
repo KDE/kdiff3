@@ -109,8 +109,6 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
     m_filePath = pParent == nullptr ? fi.absoluteFilePath() : fi.fileName();
 
     m_bSymLink = fi.isSymLink();
-    
-
     m_pParent = pParent;
 
     m_bFile = fi.isFile();

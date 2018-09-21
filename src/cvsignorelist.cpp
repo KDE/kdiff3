@@ -16,17 +16,19 @@
 #include <QDir>
 #include <QTextStream>
 
-#include <cstdlib>
-
 void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
 {
     static const char* ignorestr = ". .. core RCSLOG tags TAGS RCS SCCS .make.state "
                                    ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
                                    "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$";
+    static const char* varname = "CVSIGNORE";
 
     addEntriesFromString(QString::fromLatin1(ignorestr));
     addEntriesFromFile(QDir::homePath() + "/.cvsignore");
-    addEntriesFromString(QString::fromLocal8Bit(::getenv("CVSIGNORE")));
+    if(qEnvironmentVariableIsSet(varname) && !qEnvironmentVariableIsEmpty(varname))
+    {
+        addEntriesFromString(QString::fromLocal8Bit(qgetenv(varname)));
+    }
 
     const bool bUseLocalCvsIgnore = cvsIgnoreExists(pDirList);
     if(bUseLocalCvsIgnore)
