@@ -18,18 +18,15 @@
  ***************************************************************************/
 
 #include "kdiff3_part.h"
-
-#include <KAboutData>
-#include <KStandardAction>
-#include <QAction>
+#include "fileaccess.h"
+#include "kdiff3.h"
 
 #include <QFile>
 #include <QProcess>
 #include <QTextStream>
 
-#include "fileaccess.h"
-#include "kdiff3.h"
-
+#include <KAboutData>
+#include <KStandardAction>
 #include <KLocalizedString>
 #include <KMessageBox>
 

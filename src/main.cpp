@@ -14,7 +14,6 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include "common.h"
 #include "kdiff3_shell.h"
 #include <version.h>
 
@@ -30,11 +29,7 @@
 #include <QLocale>
 #include <QMessageBox>
 #include <QStandardPaths>
-#include <QTextCodec>
 #include <QTextStream>
-#include <QTranslator>
-//#include <QClipboard>
-#include <vector>
 
 #ifdef Q_OS_WIN
 #include <process.h>
