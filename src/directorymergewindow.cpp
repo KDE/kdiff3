@@ -14,11 +14,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include <qglobal.h>
-
-#ifdef Q_OS_WIN
-#include <qt_windows.h>
-#endif
+#include <QGlobal>
 
 #include "directorymergewindow.h"
 #include "guiutils.h"
@@ -2264,6 +2260,7 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
     }
 }
 
+#ifndef QT_NO_CONTEXTMENU
 void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
 {
     QModelIndex mi = indexAt(e->pos());
@@ -2294,17 +2291,12 @@ void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
             QMenu m(this);
             m.addAction(d->m_pDirCompareExplicit);
             m.addAction(d->m_pDirMergeExplicit);
-
-            // TODO: Do we need the special Windows implementation?! -- Disabled for now.
-//#ifndef Q_OS_WIN
+	    
             m.exec(p);
-// #else
-//             void showShellContextMenu(const QString&, QPoint, QWidget*, QMenu*);
-//             showShellContextMenu(itemPath, p, this, &m);
-// #endif
         }
     }
 }
+#endif
 
 QString DirectoryMergeWindow::Data::getFileName(const QModelIndex& mi)
 {
