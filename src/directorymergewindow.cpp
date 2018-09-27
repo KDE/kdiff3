@@ -14,7 +14,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include <QGlobal>
+#include <qglobal.h>
 
 #include "directorymergewindow.h"
 #include "guiutils.h"
@@ -2265,7 +2265,6 @@ void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
 {
     QModelIndex mi = indexAt(e->pos());
     int c = mi.column();
-    QPoint p = e->globalPos();
 
     MergeFileInfos* pMFI = d->getMFI(mi);
     if(pMFI == nullptr)
@@ -2291,8 +2290,8 @@ void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
             QMenu m(this);
             m.addAction(d->m_pDirCompareExplicit);
             m.addAction(d->m_pDirMergeExplicit);
-	    
-            m.exec(p);
+	        
+            m.popup(e->globalPos());
         }
     }
 }
