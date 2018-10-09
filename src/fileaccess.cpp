@@ -331,6 +331,11 @@ bool FileAccess::isValid() const
     return !m_filePath.isEmpty() || m_bValidData;
 }
 
+bool FileAccess::isNormal() const
+{
+    return isFile() || isDir() || isSymLink();
+}
+
 bool FileAccess::isFile() const
 {
     if(parent() || !isLocal())
@@ -497,6 +502,10 @@ static bool interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLength)
 
 bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
 {
+    //Avoid hang on linux for special files.
+    if(!isNormal())
+        return true;
+    
     if(!m_localCopy.isEmpty())
     {
         QFile f(m_localCopy);

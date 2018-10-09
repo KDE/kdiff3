@@ -341,6 +341,10 @@ bool SourceData::FileData::readFile(const QString& filename)
     }
 
     FileAccess fa(filename);
+
+    if(!fa.isNormal())
+        return true;
+
     m_size = fa.sizeForReading();
     char* pBuf;
     m_pBuf = pBuf = new char[m_size + 100]; // Alloc 100 byte extra: Safety hack, not nice but does no harm.

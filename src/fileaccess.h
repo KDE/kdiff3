@@ -45,6 +45,7 @@ public:
    FileAccess( const QString& name, bool bWantToWrite=false ); // name: local file or dirname or url (when supported)
    void setFile( const QString& name, bool bWantToWrite=false );
 
+   bool isNormal() const;
    bool isValid() const;
    bool isFile() const;
    bool isDir() const;
