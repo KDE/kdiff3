@@ -101,40 +101,6 @@ class StatusInfo : public QDialog
     }
 };
 
-class TempRemover
-{
-  public:
-    TempRemover(const QString& origName, FileAccess& fa);
-    ~TempRemover();
-    QString name() { return m_name; }
-    bool success() { return m_bSuccess; }
-
-  private:
-    QString m_name;
-    bool m_bTemp;
-    bool m_bSuccess;
-};
-TempRemover::TempRemover(const QString& origName, FileAccess& fa)
-{
-    if(fa.isLocal())
-    {
-        m_name = origName;
-        m_bTemp = false;
-        m_bSuccess = true;
-    }
-    else
-    {
-        m_name = FileAccess::tempFileName();
-        m_bSuccess = fa.copyFile(m_name);
-        m_bTemp = m_bSuccess;
-    }
-}
-TempRemover::~TempRemover()
-{
-    if(m_bTemp && !m_name.isEmpty())
-        FileAccess::removeTempFile(m_name);
-}
-
 enum Columns
 {
     s_NameCol = 0,
@@ -841,14 +807,14 @@ bool DirectoryMergeWindow::Data::fastFileComparison(
 
     QString fileName1 = fi1.absoluteFilePath();
     QString fileName2 = fi2.absoluteFilePath();
-    TempRemover tr1(fileName1, fi1);
-    if(!tr1.success())
+
+    if(!fi2.createLocalCopy())
     {
         status = i18n("Creating temp copy of %1 failed.", fileName1);
         return bEqual;
     }
-    TempRemover tr2(fileName2, fi2);
-    if(!tr2.success())
+    
+    if(!fi2.createLocalCopy())
     {
         status = i18n("Creating temp copy of %1 failed.", fileName2);
         return bEqual;
@@ -857,7 +823,7 @@ bool DirectoryMergeWindow::Data::fastFileComparison(
     std::vector<char> buf1(100000);
     std::vector<char> buf2(buf1.size());
 
-    QFile file1(tr1.name());
+    QFile file1(fi1.fileName());
 
     if(!file1.open(QIODevice::ReadOnly))
     {
@@ -865,7 +831,7 @@ bool DirectoryMergeWindow::Data::fastFileComparison(
         return bEqual;
     }
 
-    QFile file2(tr2.name());
+    QFile file2(fi2.fileName());
 
     if(!file2.open(QIODevice::ReadOnly))
     {

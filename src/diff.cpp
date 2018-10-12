@@ -37,6 +37,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QProcess>
+#include <QTemporaryFile>
 #include <QTextCodec>
 #include <QTextStream>
 
@@ -247,7 +248,8 @@ QStringList SourceData::setData(const QString& data)
     // Create a temp file for preprocessing:
     if(m_tempInputFileName.isEmpty())
     {
-        m_tempInputFileName = FileAccess::tempFileName();
+        FileAccess::createTempFile(m_tempFile);
+        m_tempInputFileName = m_tempFile.fileName();
     }
 
     FileAccess f(m_tempInputFileName);
@@ -626,6 +628,7 @@ static QString getArguments(QString cmd, QString& program, QStringList& args)
 QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode)
 {
     m_pEncoding = pEncoding;
+    QTemporaryFile fileIn1, fileOut1;
     QString fileNameIn1;
     QString fileNameOut1;
     QString fileNameIn2;
@@ -643,11 +646,12 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         }
         else // File is not local: create a temporary local copy:
         {
-            if(m_tempInputFileName.isEmpty()) {
-                m_tempInputFileName = FileAccess::tempFileName();
+            if(m_tempInputFileName.isEmpty())
+            {
+                m_fileAccess.createLocalCopy();
+                m_tempInputFileName = m_fileAccess.getTempName();
             }
 
-            m_fileAccess.copyFile(m_tempInputFileName);
             fileNameIn1 = m_tempInputFileName;
         }
         if(bAutoDetectUnicode)
@@ -679,18 +683,21 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         }
         else
         {
+            QTemporaryFile tmpInPPFile;
             QString fileNameInPP = fileNameIn1;
 
             if(pEncoding1 != m_pOptions->m_pEncodingPP)
             {
                 // Before running the preprocessor convert to the format that the preprocessor expects.
-                fileNameInPP = FileAccess::tempFileName();
+                FileAccess::createTempFile(tmpInPPFile);
+                fileNameInPP = tmpInPPFile.fileName();
                 pEncoding1 = m_pOptions->m_pEncodingPP;
                 convertFileEncoding(fileNameIn1, pEncoding, fileNameInPP, pEncoding1);
             }
 
             QString ppCmd = m_pOptions->m_PreProcessorCmd;
-            fileNameOut1 = FileAccess::tempFileName();
+            FileAccess::createTempFile(fileOut1);
+            fileNameOut1 = fileOut1.fileName();
 
             QProcess ppProcess;
             ppProcess.setStandardInputFile(fileNameInPP);
@@ -718,28 +725,27 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
                 m_normalData.readFile(fileNameIn1);
                 pEncoding1 = m_pEncoding;
             }
-            if(fileNameInPP != fileNameIn1)
-            {
-                FileAccess::removeTempFile(fileNameInPP);
-            }
         }
 
         // LineMatching Preprocessor
         if(!m_pOptions->m_LineMatchingPreProcessorCmd.isEmpty())
         {
+            QTemporaryFile tempOut2, fileInPP;
             fileNameIn2 = fileNameOut1.isEmpty() ? fileNameIn1 : fileNameOut1;
             QString fileNameInPP = fileNameIn2;
             pEncoding2 = pEncoding1;
             if(pEncoding2 != m_pOptions->m_pEncodingPP)
             {
                 // Before running the preprocessor convert to the format that the preprocessor expects.
-                fileNameInPP = FileAccess::tempFileName();
+                FileAccess::createTempFile(fileInPP);
+                fileNameInPP = fileInPP.fileName();
                 pEncoding2 = m_pOptions->m_pEncodingPP;
                 convertFileEncoding(fileNameIn2, pEncoding1, fileNameInPP, pEncoding2);
             }
 
             QString ppCmd = m_pOptions->m_LineMatchingPreProcessorCmd;
-            fileNameOut2 = FileAccess::tempFileName();
+            FileAccess::createTempFile(tempOut2);
+            fileNameOut2 = tempOut2.fileName();
             QProcess ppProcess;
             ppProcess.setStandardInputFile(fileNameInPP);
             ppProcess.setStandardOutputFile(fileNameOut2);
@@ -763,11 +769,6 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
                     errorReason);
                 m_pOptions->m_LineMatchingPreProcessorCmd = "";
                 m_lmppData.readFile(fileNameIn2);
-            }
-            FileAccess::removeTempFile(fileNameOut2);
-            if(fileNameInPP != fileNameIn2)
-            {
-                FileAccess::removeTempFile(fileNameInPP);
             }
         }
         else if(m_pOptions->m_bIgnoreComments || m_pOptions->m_bIgnoreCase)
@@ -818,18 +819,6 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
                 m_normalData.m_v[i].bContainsPureComment = m_lmppData.m_v[i].bContainsPureComment;
             }
         }
-    }
-    // Remove unneeded temporary files. (A temp file from clipboard must not be deleted.)
-    if(!bTempFileFromClipboard && !m_tempInputFileName.isEmpty())
-    {
-        FileAccess::removeTempFile(m_tempInputFileName);
-        m_tempInputFileName = "";
-    }
-
-    if(!fileNameOut1.isEmpty())
-    {
-        FileAccess::removeTempFile(fileNameOut1);
-        fileNameOut1 = "";
     }
 
     return errors;

@@ -21,6 +21,8 @@
 #include <QPainter>
 #include <QLinkedList>
 #include <QVector>
+#include <QTemporaryFile>
+
 #include "common.h"
 #include "fileaccess.h"
 #include "options.h"
@@ -285,6 +287,7 @@ private:
    FileAccess m_fileAccess;
    Options* m_pOptions;
    QString m_tempInputFileName;
+   QTemporaryFile m_tempFile;//Created from clipboard content.
 
    struct FileData
    {

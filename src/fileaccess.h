@@ -13,9 +13,11 @@
 
 #include "progress.h"
 
-#include <QUrl>
 #include <QFileInfo>
 #include <QDateTime>
+#include <QSharedPointer>
+#include <QTemporaryFile>
+#include <QUrl>
 
 #include <KIO/UDSEntry>
 
@@ -61,7 +63,7 @@ public:
 
    QDateTime lastModified() const;
 
-   QString fileName() const; // Just the name-part of the path, without parent directories
+   QString fileName(bool needTmp = false) const; // Just the name-part of the path, without parent directories
    QString filePath() const; // The path-string that was used during construction
    QString prettyAbsPath() const;
    QUrl url() const;
@@ -77,7 +79,9 @@ public:
    bool copyFile( const QString& destUrl );
    bool createBackup( const QString& bakExtension );
 
-   static QString tempFileName();
+   QString getTempName() const;
+   bool createLocalCopy();
+   static void createTempFile(QTemporaryFile& );
    static bool removeTempFile( const QString& );
    bool removeFile();
    static bool removeFile( const QString& );
@@ -111,6 +115,7 @@ private:
    QString m_linkTarget;
    QString m_name;
    QString m_localCopy;
+   QSharedPointer<QTemporaryFile> tmpFile;
 
    QString m_filePath; // might be absolute or relative if m_pParent!=0
    qint64 m_size;

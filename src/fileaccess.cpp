@@ -54,8 +54,6 @@ FileAccess::FileAccess()
     reset();
 }
 
-
-
 void FileAccess::reset(void)
 {
     m_fileInfo = QFileInfo();
@@ -76,22 +74,13 @@ void FileAccess::reset(void)
     m_linkTarget = "";
     //m_fileType = -1;
     m_pParent = nullptr;
-    //Insure that old tempFile is removed we will recreate it as needed.
-    if(!m_localCopy.isEmpty())
-    {
-        removeTempFile(m_localCopy);
-        m_localCopy = "";
-    }
+    tmpFile.clear();
+    tmpFile = QSharedPointer<QTemporaryFile>(new QTemporaryFile());
 }
 
 FileAccess::~FileAccess()
 {
-    //remove tempfile if any
-    if(!m_localCopy.isEmpty())
-    {
-        removeTempFile(m_localCopy);
-        m_localCopy = "";
-    }
+    tmpFile.clear();
 }
 
 // Two kinds of optimization are applied here:
@@ -443,10 +432,10 @@ QString FileAccess::absoluteFilePath() const
 } // Full abs path
 
 // Just the name-part of the path, without parent directories
-QString FileAccess::fileName() const
+QString FileAccess::fileName(bool needTmp) const
 {
     if(!isLocal())
-        return m_name;
+        return (needTmp) ? m_localCopy : m_name;
     else if(parent())
         return m_filePath;
     else
@@ -610,21 +599,45 @@ bool FileAccess::listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindH
                       dirAntiPattern, bFollowDirLinks, bUseCvsIgnore);
 }
 
-QString FileAccess::tempFileName()
+QString FileAccess::getTempName() const
+{
+    return m_localCopy;
+}
+
+bool FileAccess::createLocalCopy()
+{
+    if(isLocal() || !m_localCopy.isEmpty())
+       return true;
+    
+    tmpFile->setAutoRemove(true);
+    tmpFile->setFileTemplate(QStringLiteral("XXXXXX-kdiff3tmp"));
+    tmpFile->open();
+    tmpFile->close();
+    m_localCopy = tmpFile->fileName();
+
+    return copyFile(tmpFile->fileName());
+}
+//static tempfile Generator
+void FileAccess::createTempFile(QTemporaryFile& tmpFile)
+{
+    tmpFile.setAutoRemove(true);
+    tmpFile.setFileTemplate(QStringLiteral("XXXXXX-kdiff3tmp"));
+    tmpFile.open();
+    tmpFile.close();
+}
+//TODO:Depricated to be removed
+/*QString FileAccess::tempFileName()
 {
     QTemporaryFile tmpFile;
     tmpFile.open();
-    //tmpFile.setAutoDelete( true );  // We only want the name. Delete the precreated file immediately.
-    QString name = tmpFile.fileName() + ".2";
+    //tmpFile.setAutoDelete( true );
+    QString name = tmpFile.fileName();
     tmpFile.close();
     return name;
-}
+}*/
 
 bool FileAccess::removeTempFile(const QString& name) // static
-{
-    if(name.endsWith(QLatin1String(".2")))
-        FileAccess(name.left(name.length() - 2)).removeFile();
-    
+{   
     return FileAccess(name).removeFile();
 }
 
@@ -661,7 +674,8 @@ qint64 FileAccess::sizeForReading()
     if(!isLocal() && m_size == 0)
     {
         // Size couldn't be determined. Copy the file to a local temp place.
-        QString localCopy = tempFileName();
+        createLocalCopy();
+        QString localCopy = tmpFile->fileName();
         bool bSuccess = copyFile(localCopy);
         if(bSuccess)
         {
