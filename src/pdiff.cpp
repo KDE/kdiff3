@@ -1101,7 +1101,7 @@ void KDiff3App::slotFileOpen2(QString fn1, QString fn2, QString fn3, QString ofn
 {
     if(!canContinue()) return;
 
-    if(fn1 == "" && fn2 == "" && fn3 == "" && ofn == "" && m_pMainWidget != nullptr)
+    if(fn1.isEmpty() && fn2.isEmpty() && fn3.isEmpty() && ofn.isEmpty() && m_pMainWidget != nullptr)
     {
         m_pMainWidget->hide();
         return;
