@@ -162,21 +162,6 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
     bool bExistsLocal = QDir().exists(name);
     if(url.isLocalFile() || url.isRelative() || !url.isValid() || bExistsLocal) // Treate invalid urls as relative.
     {
-        QString localName = url.path();
-
-#if defined(Q_OS_WIN)
-        if(localName.startsWith(QLatin1String("/tmp/")))
-        {
-            // git on Cygwin will put files in /tmp
-            // A workaround for the a native kdiff3 binary to find them...
-
-            QString cygwinBin = QLatin1String(qgetenv("CYGWIN_BIN"));
-            if(!cygwinBin.isEmpty())
-            {
-                localName = QString("%1\\..%2").arg(cygwinBin).arg(name);
-            }
-        }
-#endif
         QFileInfo fi(localName);
         setFile(fi, nullptr);
     }
