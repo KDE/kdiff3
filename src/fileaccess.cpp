@@ -95,6 +95,8 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
     reset();
     m_fileInfo = fi;
     m_fileInfo.setCaching(true);
+    //convert to absolute path that doesn't depend on the current directory.
+    m_fileInfo.makeAbsolute();
     m_filePath = pParent == nullptr ? m_fileInfo.absoluteFilePath() : m_fileInfo.fileName();
 
     m_bSymLink = m_fileInfo.isSymLink();
