@@ -95,17 +95,17 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
     reset();
     m_fileInfo = fi;
     m_fileInfo.setCaching(true);
-    m_filePath = pParent == nullptr ? fi.absoluteFilePath() : fi.fileName();
+    m_filePath = pParent == nullptr ? m_fileInfo.absoluteFilePath() : m_fileInfo.fileName();
 
-    m_bSymLink = fi.isSymLink();
+    m_bSymLink = m_fileInfo.isSymLink();
     m_pParent = pParent;
 
-    m_bFile = fi.isFile();
-    m_bDir = fi.isDir();
-    m_bExists = fi.exists();
-    m_size = fi.size();
-    m_modificationTime = fi.lastModified();
-    m_bHidden = fi.isHidden();
+    m_bFile = m_fileInfo.isFile();
+    m_bDir = m_fileInfo.isDir();
+    m_bExists = m_fileInfo.exists();
+    m_size = m_fileInfo.size();
+    m_modificationTime = m_fileInfo.lastModified();
+    m_bHidden = m_fileInfo.isHidden();
     
     m_bWritable = m_fileInfo.isWritable();
     m_bReadable = m_fileInfo.isReadable();
@@ -327,39 +327,42 @@ bool FileAccess::isNormal() const
 
 bool FileAccess::isFile() const
 {
-    if(parent() || !isLocal())
+    if(!isLocal())
         return m_bFile;
     else
-        return QFileInfo(absoluteFilePath()).isFile();
+        return m_fileInfo.isFile();
 }
 
 bool FileAccess::isDir() const
 {
-    if(isLocal())
+    if(!isLocal())
         return m_bDir;
     else
-        return QFileInfo(absoluteFilePath()).isDir();
+        return m_fileInfo.isDir();
 }
 
 bool FileAccess::isSymLink() const
 {
-    return m_bSymLink;
+    if(!isLocal())
+        return m_bSymLink;
+    else
+        return m_fileInfo.isSymLink();
 }
 
 bool FileAccess::exists() const
 {
-    if(isLocal())
+    if(!isLocal())
         return m_bExists;
     else
-        return QFileInfo::exists(absoluteFilePath());
+        return m_fileInfo.exists();
 }
 
 qint64 FileAccess::size() const
 {
-    if(isLocal())
+    if(!isLocal())
         return m_size;
     else
-        return QFileInfo(absoluteFilePath()).size();
+        return m_fileInfo.size();
 }
 
 QUrl FileAccess::url() const
@@ -390,7 +393,7 @@ bool FileAccess::isReadable() const
 bool FileAccess::isWritable() const
 {
     //This can be very slow in some network setups so use cached value
-    if(parent() || !isLocal())
+    if(!isLocal())
         return m_bWritable;
     else
         return m_fileInfo.isWritable();
