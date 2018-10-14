@@ -90,10 +90,9 @@ FileAccess::~FileAccess()
 //    For recursive directory trees don't store the full path if a parent is available.
 //    Store urls only if files are not local.
 
-void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
+void FileAccess::setFilePrivate(FileAccess* pParent)
 {
-    reset();
-    m_fileInfo = fi;
+    //This is an internal function which requires a seprate reset call prior to use.
     m_fileInfo.setCaching(true);
     //convert to absolute path that doesn't depend on the current directory.
     m_fileInfo.makeAbsolute();
@@ -112,33 +111,34 @@ void FileAccess::setFile(const QFileInfo& fi, FileAccess* pParent)
     m_bWritable = m_fileInfo.isWritable();
     m_bReadable = m_fileInfo.isReadable();
     m_bExecutable = m_fileInfo.isExecutable();
-
-    if(isLocal())
+    
+    Q_ASSERT(isLocal());
+    //if(isLocal())
+    //{
+    m_name = m_fileInfo.fileName();
+    if(m_bSymLink)
     {
-        m_name = m_fileInfo.fileName();
-        if(m_bSymLink)
+        m_linkTarget = m_fileInfo.readLink();
+#ifndef Q_OS_WIN
+        // Unfortunately Qt5 symLinkTarget/readLink always returns an absolute path, even if the link is relative
+        char *s = (char*)malloc(PATH_MAX + 1);
+        ssize_t len = readlink(QFile::encodeName(absoluteFilePath()).constData(), s, PATH_MAX);
+        if(len > 0)
         {
-            m_linkTarget = m_fileInfo.readLink();
-#ifndef Q_OS_WIN 
-            // Unfortunately Qt5 symLinkTarget/readLink always returns an absolute path, even if the link is relative
-            char *s=(char*)malloc(PATH_MAX+1);
-            ssize_t len = readlink(QFile::encodeName(fi.absoluteFilePath()).constData(), s, PATH_MAX);
-            if(len > 0)
-            {
-                s[len] = '\0';
-                m_linkTarget = QFile::decodeName(s);
-            }
-            free(s);
+            s[len] = '\0';
+            m_linkTarget = QFile::decodeName(s);
+        }
+        free(s);
 #endif
-        }
-
-        m_bValidData = true;
-        m_url = QUrl::fromLocalFile(m_fileInfo.filePath());
-        if(m_url.isRelative())
-        {
-            m_url.setPath(absoluteFilePath());
-        }
     }
+
+    m_bValidData = true;
+    m_url = QUrl::fromLocalFile(m_fileInfo.filePath());
+    if(m_url.isRelative())
+    {
+        m_url.setPath(absoluteFilePath());
+    }
+    //}
 }
 
 void FileAccess::setFile(const QString& name, bool bWantToWrite)
@@ -164,8 +164,8 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
     bool bExistsLocal = QDir().exists(name);
     if(url.isLocalFile() || url.isRelative() || !url.isValid() || bExistsLocal) // Treate invalid urls as relative.
     {
-        QFileInfo fi(localName);
-        setFile(fi, nullptr);
+        m_fileInfo = QFileInfo(url.path());
+        setFilePrivate(nullptr);
     }
     else
     {
@@ -410,15 +410,10 @@ QString FileAccess::readLink() const
 
 QString FileAccess::absoluteFilePath() const
 {
-    if(parent() != nullptr)
-        return parent()->absoluteFilePath() + "/" + m_filePath;
-    else
-    {
-        if(!isLocal())
-            return m_url.url(); // return complete url
-        
-        return m_fileInfo.absoluteFilePath();
-    }
+    if(!isLocal())
+        return m_url.url(); // return complete url
+
+    return m_fileInfo.absoluteFilePath();
 } // Full abs path
 
 // Just the name-part of the path, without parent directories
@@ -426,8 +421,6 @@ QString FileAccess::fileName(bool needTmp) const
 {
     if(!isLocal())
         return (needTmp) ? m_localCopy : m_name;
-    else if(parent())
-        return m_filePath;
     else
         return m_fileInfo.fileName();
 }
@@ -1158,7 +1151,8 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
                         continue;
 
                     FileAccess fa;
-                    fa.setFile(fi, m_pFileAccess);
+                    fa.m_fileInfo = fi;
+                    fa.setFilePrivate(m_pFileAccess);
                     pDirList->push_back(fa);
                 }
             }

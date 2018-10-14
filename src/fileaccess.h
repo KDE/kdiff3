@@ -100,7 +100,7 @@ public:
    FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
 private:
    void setUdsEntry( const KIO::UDSEntry& e );
-   void setFile( const QFileInfo& fi, FileAccess* pParent );
+   void setFilePrivate( FileAccess* pParent );
    void setStatusText( const QString& s );
 
    void reset();
