@@ -60,7 +60,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     add_definitions(-DNOMINMAX) #Suppress MSVCs min/max macros
-elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 7.0)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wduplicated-cond -Wduplicated-branches -Wshadow")
 endif()
 
