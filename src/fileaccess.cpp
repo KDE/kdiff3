@@ -86,18 +86,18 @@ FileAccess::~FileAccess()
 // Two kinds of optimization are applied here:
 // 1. Speed: don't ask for data as long as it is not needed or cheap to get.
 //    When opening a file it is easy enough to ask for details.
-// 2. Memory usage: Don't store data that is not needed, and avoid redundancy.
-//    For recursive directory trees don't store the full path if a parent is available.
-//    Store urls only if files are not local.
 
 void FileAccess::setFilePrivate(FileAccess* pParent)
 {
     //This is an internal function which requires a seprate reset call prior to use.
     m_fileInfo.setCaching(true);
     //convert to absolute path that doesn't depend on the current directory.
+    if(pParent == nullptr)
+        m_baseDir = m_fileInfo.absoluteFilePath();
+    else
+        m_baseDir = pParent->m_baseDir;
+    
     m_fileInfo.makeAbsolute();
-    m_filePath = pParent == nullptr ? m_fileInfo.absoluteFilePath() : m_fileInfo.fileName();
-
     m_bSymLink = m_fileInfo.isSymLink();
     m_pParent = pParent;
 

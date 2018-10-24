@@ -13,6 +13,7 @@
 
 #include "progress.h"
 
+#include <QDir>
 #include <QFileInfo>
 #include <QDateTime>
 #include <QSharedPointer>
@@ -111,7 +112,8 @@ private:
    //long m_fileType; // for testing only
    FileAccess* m_pParent;
 
-   QFileInfo m_fileInfo; 
+   QDir m_baseDir;
+   QFileInfo m_fileInfo;
    QString m_linkTarget;
    QString m_name;
    QString m_localCopy;
