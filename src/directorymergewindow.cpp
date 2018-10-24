@@ -3429,8 +3429,7 @@ QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi)
     vm.writeEntry("EqualAB", mfi.m_bEqualAB);
     vm.writeEntry("EqualAC", mfi.m_bEqualAC);
     vm.writeEntry("EqualBC", mfi.m_bEqualBC);
-    //DirMergeItem* m_pDMI;
-    //MergeFileInfos* m_pParent;
+
     vm.writeEntry("MergeOperation", (int)mfi.m_eMergeOperation);
     vm.writeEntry("DirA", mfi.dirA());
     vm.writeEntry("DirB", mfi.dirB());
@@ -3439,18 +3438,11 @@ QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi)
     vm.writeEntry("LinkB", mfi.isLinkB());
     vm.writeEntry("LinkC", mfi.isLinkC());
     vm.writeEntry("OperationComplete", mfi.m_bOperationComplete);
-    //bool m_bSimOpComplete );
 
     vm.writeEntry("AgeA", (int)mfi.m_ageA);
     vm.writeEntry("AgeB", (int)mfi.m_ageB);
     vm.writeEntry("AgeC", (int)mfi.m_ageC);
     vm.writeEntry("ConflictingAges", mfi.m_bConflictingAges); // Equal age but files are not!
-
-    //FileAccess m_fileInfoA;
-    //FileAccess m_fileInfoB;
-    //FileAccess m_fileInfoC;
-
-    //TotalDiffStatus m_totalDiffStatus;
 
     vm.save(ts);
 
@@ -3463,7 +3455,6 @@ void DirectoryMergeWindow::slotSaveMergeState()
 {
     //slotStatusMsg(i18n("Saving Directory Merge State ..."));
 
-    //QString s = KFileDialog::getSaveUrl( QDir::currentPath(), 0, this, i18n("Save As...") ).url();
     QString s = QFileDialog::getSaveFileName(this, i18n("Save Directory Merge State As..."), QDir::currentPath());
     if(!s.isEmpty())
     {

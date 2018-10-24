@@ -311,10 +311,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDif
     wordWrap->setChecked(m_pOptions->m_bWordWrap);
     if(!isPart())
     {
-        //  TODO
-        //       viewToolBar->setChecked( m_pOptions->m_bShowToolBar );
-        //       slotViewToolBar();
-
         viewStatusBar->setChecked(m_pOptions->m_bShowStatusBar);
         slotViewStatusBar();
         
@@ -335,7 +331,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDif
     }
     slotRefresh();
 
-    m_pMainSplitter = this; //new QSplitter(this);
+    m_pMainSplitter = this;
     m_pMainSplitter->setOrientation(Qt::Vertical);
     //   setCentralWidget( m_pMainSplitter );
     m_pDirectoryMergeSplitter = new QSplitter(m_pMainSplitter);
