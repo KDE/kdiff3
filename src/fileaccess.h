@@ -65,7 +65,7 @@ public:
    QDateTime lastModified() const;
 
    QString fileName(bool needTmp = false) const; // Just the name-part of the path, without parent directories
-   QString filePath() const; // The path-string that was used during construction
+   QString fileRelPath() const; // The path relitive to base comparison directory
    QString prettyAbsPath() const;
    QUrl url() const;
    QString absoluteFilePath() const;
@@ -119,7 +119,6 @@ private:
    QString m_localCopy;
    QSharedPointer<QTemporaryFile> tmpFile;
 
-   QString m_filePath; // might be absolute or relative if m_pParent!=0
    qint64 m_size;
    QDateTime m_modificationTime;
    bool m_bSymLink  : 1;

@@ -57,7 +57,6 @@ FileAccess::FileAccess()
 void FileAccess::reset(void)
 {
     m_fileInfo = QFileInfo();
-    m_filePath = "";
     m_bExists = false;
     m_bFile = false;
     m_bDir = false;
@@ -173,7 +172,6 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
         FileAccessJobHandler jh(this);            // A friend, which writes to the parameters of this class!
         jh.stat(2 /*all details*/, bWantToWrite); // returns bSuccess, ignored
 
-        m_filePath = name;
         m_bValidData = true; // After running stat() the variables are initialised
                                   // and valid even if the file doesn't exist and the stat
                                   // query failed.
@@ -227,6 +225,8 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
     long acc = 0;
     long fileType = 0;
     QVector<uint> fields = e.fields();
+    QString filePath;
+
     for(QVector<uint>::ConstIterator ei = fields.constBegin(); ei != fields.constEnd(); ++ei)
     {
         uint f = *ei;
@@ -236,7 +236,7 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
             m_size = e.numberValue(f);
             break;
         case KIO::UDSEntry::UDS_NAME:
-            m_filePath = e.stringValue(f);
+            filePath = e.stringValue(f);
             break; // During listDir the relative path is given here.
         case KIO::UDSEntry::UDS_MODIFICATION_TIME:
             m_modificationTime = QDateTime::fromMSecsSinceEpoch(e.numberValue(f));
@@ -278,7 +278,7 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
         }
     }
     
-    m_fileInfo = QFileInfo(m_filePath);
+    m_fileInfo = QFileInfo(filePath);
     m_fileInfo.setCaching(true);
     if(m_url.isEmpty())
         m_url = QUrl::fromUserInput(m_fileInfo.absoluteFilePath());
@@ -304,7 +304,7 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
 
 bool FileAccess::isValid() const
 {
-    return !m_filePath.isEmpty() || m_bValidData;
+    return m_bValidData;
 }
 
 bool FileAccess::isNormal() const
@@ -425,12 +425,13 @@ QString FileAccess::fileName(bool needTmp) const
         return m_fileInfo.fileName();
 }
 
-QString FileAccess::filePath() const
+QString FileAccess::fileRelPath() const
 {
-    if(parent() && parent()->parent())
-        return parent()->filePath() + "/" + m_filePath;
-    else
-        return m_filePath; // The path-string that was used during construction
+    QString basePath = m_baseDir.canonicalPath();
+    QString filePath = m_fileInfo.canonicalFilePath();
+    QString path = filePath.replace(basePath + "/", QLatin1String(""));
+
+    return path;
 }
 
 FileAccess* FileAccess::parent() const
@@ -1227,14 +1228,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
                 t_DirectoryList dirList;
                 i->listDir(&dirList, bRecursive, bFindHidden,
                            filePattern, fileAntiPattern, dirAntiPattern, bFollowDirLinks, bUseCvsIgnore);
-
-                t_DirectoryList::iterator j;
-                for(j = dirList.begin(); j != dirList.end(); ++j)
-                {
-                    if(j->parent() == nullptr)
-                        j->m_filePath = i->fileName() + "/" + j->m_filePath;
-                }
-
+                
                 // append data onto the main list
                 subDirsList.splice(subDirsList.end(), dirList);
             }

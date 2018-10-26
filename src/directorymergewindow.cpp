@@ -156,7 +156,7 @@ class MergeFileInfos
     //bool operator>( const MergeFileInfos& );
     QString subPath() const
     {
-        return m_pFileInfoA && m_pFileInfoA->exists() ? m_pFileInfoA->filePath() : m_pFileInfoB && m_pFileInfoB->exists() ? m_pFileInfoB->filePath() : m_pFileInfoC && m_pFileInfoC->exists() ? m_pFileInfoC->filePath() : QString("");
+        return m_pFileInfoA && m_pFileInfoA->exists() ? m_pFileInfoA->fileRelPath() : m_pFileInfoB && m_pFileInfoB->exists() ? m_pFileInfoB->fileRelPath() : m_pFileInfoC && m_pFileInfoC->exists() ? m_pFileInfoC->fileRelPath() : QString("");
     }
     QString fileName() const
     {
