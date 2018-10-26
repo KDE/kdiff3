@@ -32,12 +32,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#ifdef Q_OS_WIN
-#include <io.h>
-#include <process.h>
-#include <sys/utime.h>
-#include <windows.h>
-#else
+#ifndef Q_OS_WIN
 #include <unistd.h> // Needed for creating symbolic links via symlink().
 #include <utime.h>
 #endif
@@ -994,93 +989,17 @@ bool FileAccessJobHandler::copyFile(const QString& dest)
     ProgressProxyExtender pp;
     QUrl destUrl = QUrl::fromUserInput(dest, QString(""), QUrl::AssumeLocalFile);
     m_pFileAccess->setStatusText(QString());
-    if(!m_pFileAccess->isLocal() || !destUrl.isLocalFile()) // if either url is nonlocal
-    {
-        int permissions = (m_pFileAccess->isExecutable() ? 0111 : 0) + (m_pFileAccess->isWritable() ? 0222 : 0) + (m_pFileAccess->isReadable() ? 0444 : 0);
-        m_bSuccess = false;
-        KIO::FileCopyJob* pJob = KIO::file_copy(m_pFileAccess->url(), destUrl, permissions, KIO::HideProgressInfo);
-        connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-        connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
-        ProgressProxy::enterEventLoop(pJob,
-                                      i18n("Copying file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest));
 
-        return m_bSuccess;
-        // Note that the KIO-slave preserves the original date, if this is supported.
-    }
+    int permissions = (m_pFileAccess->isExecutable() ? 0111 : 0) + (m_pFileAccess->isWritable() ? 0222 : 0) + (m_pFileAccess->isReadable() ? 0444 : 0);
+    m_bSuccess = false;
+    KIO::FileCopyJob* pJob = KIO::file_copy(m_pFileAccess->url(), destUrl, permissions, KIO::HideProgressInfo);
+    connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
+    connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
+    ProgressProxy::enterEventLoop(pJob,
+                                  i18n("Copying file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest));
 
-    // Both files are local:
-    QString srcName = m_pFileAccess->absoluteFilePath();
-    QString destName = dest;
-    QFile srcFile(srcName);
-    QFile destFile(destName);
-    bool bReadSuccess = srcFile.open(QIODevice::ReadOnly);
-    if(bReadSuccess == false)
-    {
-        m_pFileAccess->setStatusText(i18n("Error during file copy operation: Opening file for reading failed. Filename: %1", srcName));
-        return false;
-    }
-    bool bWriteSuccess = destFile.open(QIODevice::WriteOnly);
-    if(bWriteSuccess == false)
-    {
-        m_pFileAccess->setStatusText(i18n("Error during file copy operation: Opening file for writing failed. Filename: %1", destName));
-        return false;
-    }
-
-    std::vector<char> buffer(100000);
-    qint64 bufSize = buffer.size();
-    qint64 srcSize = srcFile.size();
-    while(srcSize > 0 && !pp.wasCancelled())
-    {
-        qint64 readSize = srcFile.read(&buffer[0], std::min(srcSize, bufSize));
-        if(readSize == -1 || readSize == 0)
-        {
-            m_pFileAccess->setStatusText(i18n("Error during file copy operation: Reading failed. Filename: %1", srcName));
-            return false;
-        }
-        srcSize -= readSize;
-        while(readSize > 0)
-        {
-            qint64 writeSize = destFile.write(&buffer[0], readSize);
-            if(writeSize == -1 || writeSize == 0)
-            {
-                m_pFileAccess->setStatusText(i18n("Error during file copy operation: Writing failed. Filename: %1", destName));
-                return false;
-            }
-            readSize -= writeSize;
-        }
-        destFile.flush();
-        pp.setCurrent((double)(srcFile.size() - srcSize) / srcFile.size(), false);
-    }
-    srcFile.close();
-    destFile.close();
-
-// Update the times of the destFile
-#ifdef Q_OS_WIN
-    struct _stat srcFileStatus;
-    int statResult = ::_stat(srcName.toLocal8Bit().constData(), &srcFileStatus);
-    if(statResult == 0)
-    {
-        _utimbuf destTimes;
-        destTimes.actime = srcFileStatus.st_atime;  /* time of last access */
-        destTimes.modtime = srcFileStatus.st_mtime; /* time of last modification */
-
-        _utime(destName.toLocal8Bit().constData(), &destTimes);
-        _chmod(destName.toLocal8Bit().constData(), srcFileStatus.st_mode);
-    }
-#else
-    struct stat srcFileStatus;
-    int statResult = ::stat(srcName.toLocal8Bit().constData(), &srcFileStatus);
-    if(statResult == 0)
-    {
-        utimbuf destTimes;
-        destTimes.actime = srcFileStatus.st_atime;  /* time of last access */
-        destTimes.modtime = srcFileStatus.st_mtime; /* time of last modification */
-
-        utime(destName.toLocal8Bit().constData(), &destTimes);
-        chmod(destName.toLocal8Bit().constData(), srcFileStatus.st_mode);
-    }
-#endif
-    return true;
+    return m_bSuccess;
+    // Note that the KIO-slave preserves the original date, if this is supported.
 }
 
 bool wildcardMultiMatch(const QString& wildcard, const QString& testString, bool bCaseSensitive)
@@ -1133,7 +1052,10 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
             QDir dir(".");
 
             dir.setSorting(QDir::Name | QDir::DirsFirst);
-            dir.setFilter(QDir::Files | QDir::Dirs | /* from KDE3 QDir::TypeMaskDirs | */ QDir::Hidden | QDir::System);
+            if(bFindHidden)
+                dir.setFilter(QDir::Files | QDir::Dirs | QDir::Hidden | QDir::System | QDir::NoDotAndDotDot);
+            else
+                dir.setFilter(QDir::Files | QDir::Dirs | QDir::System | QDir::NoDotAndDotDot);
 
             QFileInfoList fiList = dir.entryInfoList();
             if(fiList.isEmpty())
@@ -1147,9 +1069,8 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
                 {
                     if(pp.wasCancelled())
                         break;
-                    
-                    if(fi.fileName() == "." || fi.fileName() == "..")
-                        continue;
+
+                    Q_ASSERT(fi.fileName() != "." && fi.fileName() != "..");
 
                     FileAccess fa;
                     fa.m_fileInfo = fi;
@@ -1174,7 +1095,9 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
             connect(pListJob, &KIO::ListJob::infoMessage, &pp, &ProgressProxyExtender::slotListDirInfoMessage);
 
             // This line makes the transfer via fish unreliable.:-(
-            //connect( pListJob, SIGNAL(percent(KJob*,qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
+            if(m_pFileAccess->url().scheme() != QLatin1Literal("fish")){
+                connect( pListJob, SIGNAL(percent(KJob*,qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
+            }
 
             ProgressProxy::enterEventLoop(pListJob,
                                           i18n("Listing directory: %1", m_pFileAccess->prettyAbsPath()));
@@ -1200,12 +1123,13 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
         t_DirectoryList::iterator i2 = i;
         ++i2;
         QString fn = i->fileName();
+        Q_ASSERT(bFindHidden || !i->isHidden());
         if((!bFindHidden && i->isHidden()) ||
            (i->isFile() &&
             (!wildcardMultiMatch(filePattern, fn, bCaseSensitive) ||
              wildcardMultiMatch(fileAntiPattern, fn, bCaseSensitive))) ||
            (i->isDir() && wildcardMultiMatch(dirAntiPattern, fn, bCaseSensitive)) ||
-           cvsIgnoreList.matches(fn, bCaseSensitive))
+           (bUseCvsIgnore && cvsIgnoreList.matches(fn, bCaseSensitive)))
         {
             // Remove it
             pDirList->erase(i);
