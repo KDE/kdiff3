@@ -12,6 +12,7 @@
 #define FILEACCESS_H
 
 #include "progress.h"
+#include "ProgressProxyExtender.h"
 
 #include <QDir>
 #include <QFileInfo>
@@ -29,16 +30,6 @@ namespace KIO {
 bool wildcardMultiMatch( const QString& wildcard, const QString& testString, bool bCaseSensitive );
 
 class t_DirectoryList;
-
-class ProgressProxyExtender: public ProgressProxy
-{
-  Q_OBJECT
-public:
-   ProgressProxyExtender() { setMaxNofSteps(100); }
-public Q_SLOTS:
-  void slotListDirInfoMessage( KJob*, const QString& msg );
-  void slotPercent( KJob*, qint64 percent );
-};
 
 class FileAccess
 {

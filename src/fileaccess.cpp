@@ -1189,14 +1189,4 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
     }
 }
 
-void ProgressProxyExtender::slotListDirInfoMessage(KJob*, const QString& msg)
-{
-    setInformation(msg, 0);
-}
-
-void ProgressProxyExtender::slotPercent(KJob*, qint64 percent)
-{
-    setCurrent(percent);
-}
-
 //#include "fileaccess.moc"

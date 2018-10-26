@@ -20,6 +20,7 @@ set(kdiff3part_PART_SRCS
    common.cpp 
    smalldialogs.cpp 
    progress.cpp
+   ProgressProxyExtender.cpp
    selection.cpp
    cvsignorelist.cpp )
 
