@@ -45,7 +45,6 @@
 #include <KMessageBox>
 #include <KToggleAction>
 
-static bool conflictingFileTypes(MergeFileInfos& mfi);
 static QPixmap getOnePixmap(e_Age eAge, bool bLink, bool bDir);
 
 class StatusInfo : public QDialog
@@ -165,6 +164,33 @@ class MergeFileInfos
     bool existsInA() const { return m_pFileInfoA != nullptr; }
     bool existsInB() const { return m_pFileInfoB != nullptr; }
     bool existsInC() const { return m_pFileInfoC != nullptr; }
+
+    bool conflictingFileTypes()
+    {
+        // Now check if file/dir-types fit.
+        if(isLinkA() || isLinkB() || isLinkC())
+        {
+            if((existsInA() && !isLinkA()) ||
+               (existsInB() && !isLinkB()) ||
+               (existsInC() && !isLinkC()))
+            {
+                return true;
+            }
+        }
+
+        if(dirA() || dirB() || dirC())
+        {
+            if((existsInA() && !dirA()) ||
+               (existsInB() && !dirB()) ||
+               (existsInC() && !dirC()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+  public:
     MergeFileInfos* m_pParent;
     FileAccess* m_pFileInfoA;
     FileAccess* m_pFileInfoB;
@@ -1366,7 +1392,7 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
         if(pMFI == nullptr)
             return;
         bool bMergeMode = bThreeDirs || !d->m_bSyncMode;
-        bool bFTConflict = pMFI == nullptr ? false : conflictingFileTypes(*pMFI);
+        bool bFTConflict = pMFI == nullptr ? false : pMFI->conflictingFileTypes();
 
         if(bMergeMode)
         {
@@ -1898,31 +1924,6 @@ void DirectoryMergeWindow::Data::prepareListView(ProgressProxy& pp)
     endResetModel();
 }
 
-static bool conflictingFileTypes(MergeFileInfos& mfi)
-{
-    // Now check if file/dir-types fit.
-    if(mfi.isLinkA() || mfi.isLinkB() || mfi.isLinkC())
-    {
-        if((mfi.existsInA() && !mfi.isLinkA()) ||
-           (mfi.existsInB() && !mfi.isLinkB()) ||
-           (mfi.existsInC() && !mfi.isLinkC()))
-        {
-            return true;
-        }
-    }
-
-    if(mfi.dirA() || mfi.dirB() || mfi.dirC())
-    {
-        if((mfi.existsInA() && !mfi.dirA()) ||
-           (mfi.existsInB() && !mfi.dirB()) ||
-           (mfi.existsInC() && !mfi.dirC()))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
 void DirectoryMergeWindow::Data::calcSuggestedOperation(const QModelIndex& mi, e_MergeOperation eDefaultMergeOp)
 {
     MergeFileInfos* pMFI = getMFI(mi);
@@ -2047,7 +2048,7 @@ void DirectoryMergeWindow::Data::calcSuggestedOperation(const QModelIndex& mi, e
         }
 
         // Now check if file/dir-types fit.
-        if(conflictingFileTypes(mfi))
+        if(mfi.conflictingFileTypes())
         {
             setMergeOperation(mi, eConflictingFileTypes);
         }
@@ -2160,7 +2161,7 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
                 m.addAction(d->m_pDirCurrentChooseC);
                 ++count;
             }
-            if(!conflictingFileTypes(mfi) && count > 1) m.addAction(d->m_pDirCurrentMerge);
+            if(!mfi.conflictingFileTypes() && count > 1) m.addAction(d->m_pDirCurrentMerge);
             m.addAction(d->m_pDirCurrentDelete);
         }
         else if(d->m_bSyncMode)
@@ -2173,7 +2174,7 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
             if(mfi.existsInA() && mfi.existsInB())
             {
                 m.addAction(d->m_pDirCurrentSyncDeleteAAndB);
-                if(!conflictingFileTypes(mfi))
+                if(!mfi.conflictingFileTypes())
                 {
                     m.addAction(d->m_pDirCurrentSyncMergeToA);
                     m.addAction(d->m_pDirCurrentSyncMergeToB);
@@ -2190,7 +2191,7 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
             if(mfi.existsInB()) {
                 m.addAction(d->m_pDirCurrentChooseB);
             }
-            if(!conflictingFileTypes(mfi) && mfi.existsInA() && mfi.existsInB()) m.addAction(d->m_pDirCurrentMerge);
+            if(!mfi.conflictingFileTypes() && mfi.existsInA() && mfi.existsInB()) m.addAction(d->m_pDirCurrentMerge);
             m.addAction(d->m_pDirCurrentDelete);
         }
 
@@ -2492,7 +2493,7 @@ bool DirectoryMergeWindow::isFileSelected()
 {
     if(MergeFileInfos* pMFI = d->getMFI(currentIndex()))
     {
-        return !(pMFI->dirA() || pMFI->dirB() || pMFI->dirC() || conflictingFileTypes(*pMFI));
+        return !(pMFI->dirA() || pMFI->dirB() || pMFI->dirC() || pMFI->conflictingFileTypes());
     }
     return false;
 }
@@ -3650,7 +3651,7 @@ void DirectoryMergeWindow::updateAvailabilities(bool bDirCompare, bool bDiffWind
 
     bool bItemActive = bDirCompare && isVisible() && pMFI != nullptr; //  &&  hasFocus();
     bool bMergeMode = bThreeDirs || !d->m_bSyncMode;
-    bool bFTConflict = pMFI == nullptr ? false : conflictingFileTypes(*pMFI);
+    bool bFTConflict = pMFI == nullptr ? false : pMFI->conflictingFileTypes();
 
     bool bDirWindowHasFocus = isVisible() && hasFocus();
 
