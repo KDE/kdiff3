@@ -62,13 +62,15 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
                 if(bSkip)
                 {
                     bSkip = false;
-                    if(cmd[i] == '\\' || cmd[i] == quoteChar)
+                    //Don't emulate bash here we are not talking to it.
+                    //For us all quotes are the same.
+                    if(cmd[i] == '\\' || cmd[i] == '\'' || cmd[i] == '"')
                     {
                         cmd.remove(i - 1, 1); // remove the backslash '\'
                         continue;
                     }
                 }
-                else if(cmd[i] == '\\' && quoteChar == '\'')
+                else if(cmd[i] == '\\')
                     bSkip = true;
                 ++i;
             }
@@ -76,32 +78,19 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
             {
                 args << cmd.mid(argStart, i - argStart);
                 if(i + 1 < cmd.length() && !cmd[i + 1].isSpace())
-                    return i18n("Expecting space after closing apostroph.");
+                    return i18n("Expecting space after closing quote.");
             }
             else
-                return i18n("Not matching apostrophs.");
+                return i18n("Unmatched quote.");
             continue;
         }
         else
         {
             int argStart = i;
-            //bool bSkip = false;
             while(i < cmd.length() && (!cmd[i].isSpace() /*|| bSkip*/))
             {
-                /*if ( bSkip )
-            {
-               bSkip = false;
-               if ( cmd[i]=='\\' || cmd[i]=='"' || cmd[i]=='\'' || cmd[i].isSpace() )
-               {
-                  cmd.remove( i-1, 1 );  // remove the backslash '\'
-                  continue;
-               }
-            }
-            else if ( cmd[i]=='\\' )
-               bSkip = true;
-            else */
                 if(cmd[i] == '"' || cmd[i] == '\'')
-                    return i18n("Unexpected apostroph within argument.");
+                    return i18n("Unexpected quote character within argument.");
                 ++i;
             }
             args << cmd.mid(argStart, i - argStart);
