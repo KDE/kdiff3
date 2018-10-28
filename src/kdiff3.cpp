@@ -803,8 +803,7 @@ void KDiff3App::slotFilePrint()
         return;
 #ifdef QT_NO_PRINTER
     slotStatusMsg(i18n("Printing not implemented."));
-#endif
-#ifndef QT_NO_PRINTER
+#else
     QPrinter printer;
     QPrintDialog printDialog(&printer, this);
 
