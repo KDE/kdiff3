@@ -144,8 +144,6 @@ class MergeFileInfos
     }
     ~MergeFileInfos()
     {
-        //for( int i=0; i<m_children.count(); ++i )
-        //   delete m_children[i];
         m_children.clear();
     }
     //bool operator>( const MergeFileInfos& );
@@ -2329,7 +2327,7 @@ void DirectoryMergeWindow::Data::selectItemAndColumn(const QModelIndex& mi, bool
 //TODO
 //void DirMergeItem::init(MergeFileInfos* pMFI)
 //{
-//   pMFI->m_pDMI = this;
+//   pMFI->m_pDMI = this; //no not here
 //   m_pMFI = pMFI;
 //   TotalDiffStatus& tds = pMFI->m_totalDiffStatus;
 //   if ( m_pMFI->dirA() || m_pMFI->dirB() || m_pMFI->dirC() )
@@ -2390,12 +2388,6 @@ void DirectoryMergeWindow::Data::sort(int column, Qt::SortOrder order)
     sortHelper(m_pRoot, order);
     endResetModel();
 }
-
-//
-//DirMergeItem::~DirMergeItem()
-//{
-//   m_pMFI->m_pDMI = 0;
-//}
 
 void DirectoryMergeWindow::Data::setMergeOperation(const QModelIndex& mi, e_MergeOperation eMOp, bool bRecursive)
 {
