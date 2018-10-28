@@ -1,12 +1,6 @@
 /***************************************************************************
-                         pdiff.cpp  -  Implementation for class KDiff3App
-                         ---------------
-    begin                : Mon March 18 20:04:50 CET 2002
-    copyright            : (C) 2002-2007 by Joachim Eibl
-    email                : joachim.eibl at gmx.de
- ***************************************************************************/
-
-/***************************************************************************
+ *   Copyright (C) 2003-2007 by Joachim Eibl <joachim.eibl at gmx.de>      *
+ *   Copyright (C) 2018 Michael Reeves reeves.87@gmail.com                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -14,29 +8,22 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include <QtCore>
-#include <QtGui>
-#include <QtWidgets/QtWidgets>
-
 #ifdef Q_OS_WIN
 #include <qt_windows.h>
 #endif
-
-#include "difftextwindow.h"
-#include "directorymergewindow.h"
-#include "mergeresultwindow.h"
-#include "smalldialogs.h"
 
 #include <algorithm>
 #include <cstdio>
 #include <ctype.h>
 
+#include <QtCore>
 #include <QCheckBox>
 #include <QClipboard>
 #include <QComboBox>
 #include <QDir>
 #include <QDropEvent>
 #include <QFile>
+#include <QtGui>
 #include <QLayout>
 #include <QLineEdit>
 #include <QProcess>
@@ -44,19 +31,22 @@
 #include <QSplitter>
 #include <QStatusBar>
 #include <QUrl>
+#include <QtWidgets/QtWidgets>
 
 #include <KLocalizedString>
 #include <KShortcutsDialog>
 #include <KMessageBox>
 
+#include "difftextwindow.h"
+#include "directorymergewindow.h"
 #include "fileaccess.h"
 #include "kdiff3.h"
 #include "optiondialog.h"
 #include "progress.h"
+#include "Utils.h"
 
-#ifdef Q_OS_WIN
-#include <windows.h>
-#endif
+#include "mergeresultwindow.h"
+#include "smalldialogs.h"
 
 bool g_bIgnoreWhiteSpace = true;
 bool g_bIgnoreTrivialMatches = true;
@@ -2293,31 +2283,13 @@ void KDiff3App::slotNoRelevantChangesDetected()
             /*
                 QProcess doesn't check for single quotes and uses non-standard escaping syntax for double quotes.
                     The distinction between single and double quotes is purly a command shell issue. So
-                    Silently convert quotes to what QProcess understands. Also convert '\"' to '"""'
+                    we split the command string ourselves.
             */
-            //arg and arg1 can never both match but qt's pcre2 engine insists on unique naming anyway
-            const QRegularExpression argRe("(?<!\\\\)\"(?<arg>(?:[^\"]|(?<=\\\\)\")*)(?<!\\\\)\"|'(?<arg1>[^']*)'|(?<!\\\\)\\s*(?<arg2>[\\S]+)");
-            QRegularExpressionMatchIterator i = argRe.globalMatch(cmd);
-            QRegularExpressionMatch match;
             QStringList args;
-
-            while(i.hasNext())
-            {
-                match = i.next();
-                args += match.captured("arg").replace("\\\"", "\"\"\"").replace("\\\\", "\\")
-                    + match.captured("arg1") + match.captured("arg2");
-            }
-            args += m_sd1.getAliasName();
-            args += m_sd2.getAliasName();
-            args += m_sd3.getAliasName();
-            //The command ends at the first non-escaped space.
-            cmd = cmd.left(
-                cmd.indexOf( QRegularExpression("(?<!\\\\)[\\s]*") )
-            ).trimmed();
-            cmd.replace(QRegularExpression("(?<!\\\\)([\\s])"), "\1");
-            
+            QString program;
+            Utils::getArguments(m_pOptions->m_IrrelevantMergeCmd, program, args);
             QProcess process;
-            process.start(cmd);
+            process.start(program, args);
             process.waitForFinished(-1);
         }
     }
