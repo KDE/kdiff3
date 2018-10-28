@@ -143,6 +143,7 @@ class KDiff3App : public QSplitter
     void createNewInstance(const QString& fn1, const QString& fn2, const QString& fn3);
 
   protected:
+    void setLockPainting(bool bLock);
     void createCaption(void);
     void initDirectoryMergeActions();
     /** sets up the statusbar for the main window by initialzing a statuslabel. */

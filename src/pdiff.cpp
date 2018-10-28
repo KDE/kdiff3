@@ -138,12 +138,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
     }
 
     // Because of the progressdialog paintevents can occur, but data is invalid,
-    // so painting must be suppressed.
-    if(m_pDiffTextWindow1) m_pDiffTextWindow1->setPaintingAllowed(false);
-    if(m_pDiffTextWindow2) m_pDiffTextWindow2->setPaintingAllowed(false);
-    if(m_pDiffTextWindow3) m_pDiffTextWindow3->setPaintingAllowed(false);
-    if(m_pOverview) m_pOverview->setPaintingAllowed(false);
-    if(m_pMergeResultWindow) m_pMergeResultWindow->setPaintingAllowed(false);
+    // so painting must be suppressed
+    if(bGUI) setLockPainting(true);
 
     m_diff3LineList.clear();
 
@@ -345,7 +341,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         m_sd1.reset();
         m_sd2.reset();
         m_sd3.reset();
-        return;
     }
     else
     {
@@ -353,12 +348,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         m_pDiffVScrollBar->setValue(0);
         m_pHScrollBar->setValue(0);
         m_pMergeVScrollBar->setValue(0);
-
-        m_pDiffTextWindow1->setPaintingAllowed(true);
-        m_pDiffTextWindow2->setPaintingAllowed(true);
-        m_pDiffTextWindow3->setPaintingAllowed(true);
-        m_pOverview->setPaintingAllowed(true);
-        m_pMergeResultWindow->setPaintingAllowed(true);
+        setLockPainting(false);
 
         if(!bVisibleMergeResultWindow)
             m_pMergeWindowFrame->hide();
@@ -378,6 +368,15 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         m_bLoadFiles = bLoadFiles;
         postRecalcWordWrap();
     }
+}
+
+void KDiff3App::setLockPainting(bool bLock)
+{
+    if(m_pDiffTextWindow1) m_pDiffTextWindow1->setPaintingAllowed(!bLock);
+    if(m_pDiffTextWindow2) m_pDiffTextWindow2->setPaintingAllowed(!bLock);
+    if(m_pDiffTextWindow3) m_pDiffTextWindow3->setPaintingAllowed(!bLock);
+    if(m_pOverview) m_pOverview->setPaintingAllowed(!bLock);
+    if(m_pMergeResultWindow) m_pMergeResultWindow->setPaintingAllowed(!bLock);
 }
 
 void KDiff3App::createCaption(void)
