@@ -168,6 +168,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
 
         // First get all input data.
         pp.setInformation(i18n("Loading A"));
+        
         if(bUseCurrentEncoding == true)
             errors = m_sd1.readAndPreprocess(m_sd1.getEncoding(), false);
         else
@@ -356,71 +357,79 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         m_sd3.reset();
         return;
     }
-
-    m_pOverview->init(&m_diff3LineList, m_bTripleDiff);
-    m_pDiffVScrollBar->setValue(0);
-    m_pHScrollBar->setValue(0);
-    m_pMergeVScrollBar->setValue(0);
-
-    m_pDiffTextWindow1->setPaintingAllowed(true);
-    m_pDiffTextWindow2->setPaintingAllowed(true);
-    m_pDiffTextWindow3->setPaintingAllowed(true);
-    m_pOverview->setPaintingAllowed(true);
-    m_pMergeResultWindow->setPaintingAllowed(true);
-
-    if(!bVisibleMergeResultWindow)
-        m_pMergeWindowFrame->hide();
     else
-        m_pMergeWindowFrame->show();
-
-    // Try to create a meaningful but not too long caption
-    if(!isPart())
     {
-        // 1. If the filenames are equal then show only one filename
-        QString caption;
-        QString f1 = m_sd1.getAliasName();
-        QString f2 = m_sd2.getAliasName();
-        QString f3 = m_sd3.getAliasName();
-        int p;
-        
-        if((p = f1.lastIndexOf('/')) >= 0 || (p = f1.lastIndexOf('\\')) >= 0)
-            f1 = f1.mid(p + 1);
-        if((p = f2.lastIndexOf('/')) >= 0 || (p = f2.lastIndexOf('\\')) >= 0)
-            f2 = f2.mid(p + 1);
-        if((p = f3.lastIndexOf('/')) >= 0 || (p = f3.lastIndexOf('\\')) >= 0)
-            f3 = f3.mid(p + 1);
+        m_pOverview->init(&m_diff3LineList, m_bTripleDiff);
+        m_pDiffVScrollBar->setValue(0);
+        m_pHScrollBar->setValue(0);
+        m_pMergeVScrollBar->setValue(0);
 
-        if(!f1.isEmpty())
-        {
-            if((f2.isEmpty() && f3.isEmpty()) ||
-               (f2.isEmpty() && f1 == f3) || (f3.isEmpty() && f1 == f2) || (f1 == f2 && f1 == f3))
-                caption = f1;
-        }
-        else if(!f2.isEmpty())
-        {
-            if(f3.isEmpty() || f2 == f3)
-                caption = f2;
-        }
-        else if(!f3.isEmpty())
-            caption = f3;
+        m_pDiffTextWindow1->setPaintingAllowed(true);
+        m_pDiffTextWindow2->setPaintingAllowed(true);
+        m_pDiffTextWindow3->setPaintingAllowed(true);
+        m_pOverview->setPaintingAllowed(true);
+        m_pMergeResultWindow->setPaintingAllowed(true);
 
-        // 2. If the files don't have the same name then show all names
-        if(caption.isEmpty() && (!f1.isEmpty() || !f2.isEmpty() || !f3.isEmpty()))
+        if(!bVisibleMergeResultWindow)
+            m_pMergeWindowFrame->hide();
+        else
+            m_pMergeWindowFrame->show();
+
+        // Try to create a meaningful but not too long caption
+        if(!isPart())
         {
-            caption = (f1.isEmpty() ? QString("") : f1);
-            caption += QLatin1String(caption.isEmpty() || f2.isEmpty() ? "" : " <-> ") + (f2.isEmpty() ? QString("") : f2);
-            caption += QLatin1String(caption.isEmpty() || f3.isEmpty() ? "" : " <-> ") + (f3.isEmpty() ? QString("") : f3);
+            createCaption();
         }
 
-        m_pKDiff3Shell->setWindowTitle(caption.isEmpty() ? QString("KDiff3") : caption + QString(" - KDiff3"));
+        //initialize wheel tracking to zero
+        m_iCumulativeWheelDelta = 0;
+
+        m_bFinishMainInit = true; // call slotFinishMainInit after finishing the word wrap
+        m_bLoadFiles = bLoadFiles;
+        postRecalcWordWrap();
+    }
+}
+
+void KDiff3App::createCaption(void)
+{
+    // Try to create a meaningful but not too long caption
+    // 1. If the filenames are equal then show only one filename
+    QString caption;
+    QString f1 = m_sd1.getAliasName();
+    QString f2 = m_sd2.getAliasName();
+    QString f3 = m_sd3.getAliasName();
+    int p;
+
+    if((p = f1.lastIndexOf('/')) >= 0 || (p = f1.lastIndexOf('\\')) >= 0)
+        f1 = f1.mid(p + 1);
+    if((p = f2.lastIndexOf('/')) >= 0 || (p = f2.lastIndexOf('\\')) >= 0)
+        f2 = f2.mid(p + 1);
+    if((p = f3.lastIndexOf('/')) >= 0 || (p = f3.lastIndexOf('\\')) >= 0)
+        f3 = f3.mid(p + 1);
+
+    if(!f1.isEmpty())
+    {
+        if((f2.isEmpty() && f3.isEmpty()) ||
+           (f2.isEmpty() && f1 == f3) || (f3.isEmpty() && f1 == f2) || (f1 == f2 && f1 == f3))
+            caption = f1;
+    }
+    else if(!f2.isEmpty())
+    {
+        if(f3.isEmpty() || f2 == f3)
+            caption = f2;
+    }
+    else if(!f3.isEmpty())
+        caption = f3;
+
+    // 2. If the files don't have the same name then show all names
+    if(caption.isEmpty() && (!f1.isEmpty() || !f2.isEmpty() || !f3.isEmpty()))
+    {
+        caption = (f1.isEmpty() ? QString("") : f1);
+        caption += QLatin1String(caption.isEmpty() || f2.isEmpty() ? "" : " <-> ") + (f2.isEmpty() ? QString("") : f2);
+        caption += QLatin1String(caption.isEmpty() || f3.isEmpty() ? "" : " <-> ") + (f3.isEmpty() ? QString("") : f3);
     }
 
-    //initialize wheel tracking to zero
-    m_iCumulativeWheelDelta = 0;
-
-    m_bFinishMainInit = true; // call slotFinishMainInit after finishing the word wrap
-    m_bLoadFiles = bLoadFiles;
-    postRecalcWordWrap();
+    m_pKDiff3Shell->setWindowTitle(caption.isEmpty() ? QString("KDiff3") : caption + QString(" - KDiff3"));
 }
 
 void KDiff3App::setHScrollBarRange()
