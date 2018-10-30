@@ -19,11 +19,6 @@
  * 
  */
 #include "Utils.h"
-#ifdef Q_OS_WIN
-#include <qt_windows.h>
-
-#include <QCoreApplication>
-#endif
 
 #include <QString>
 #include <QStringList>
@@ -102,24 +97,6 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
     {
         program = args[0];
         args.pop_front();
-#ifdef Q_OS_WIN
-        if(program == QLatin1String("sed"))
-        {
-            QString prg = QCoreApplication::applicationDirPath() + QLatin1String("/bin/sed.exe"); // in subdir bin
-            if(QFile::exists(prg))
-            {
-                program = prg;
-            }
-            else
-            {
-                prg = QCoreApplication::applicationDirPath() + QLatin1String("/sed.exe"); // in same dir
-                if(QFile::exists(prg))
-                {
-                    program = prg;
-                }
-            }
-        }
-#endif
     }
     return QString();
 }
