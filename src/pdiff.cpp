@@ -8,9 +8,6 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#ifdef Q_OS_WIN
-#include <qt_windows.h>
-#endif
 
 #include <algorithm>
 #include <cstdio>
