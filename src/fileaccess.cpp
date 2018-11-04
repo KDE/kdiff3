@@ -77,23 +77,70 @@ FileAccess::~FileAccess()
     tmpFile.clear();
 }
 
-// Two kinds of optimization are applied here:
-// 1. Speed: don't ask for data as long as it is not needed or cheap to get.
-//    When opening a file it is easy enough to ask for details.
-
-void FileAccess::setFilePrivate(FileAccess* pParent)
+/*
+    Needed only during directory listing right now.
+*/
+void FileAccess::setFile(FileAccess* pParent, QFileInfo fi)
 {
-    //This is an internal function which requires a seprate reset call prior to use.
+    reset();
+    
+    m_fileInfo = fi;
+    m_url = QUrl::fromLocalFile(m_fileInfo.filePath());
+    if(!m_url.scheme().isEmpty())
+        m_url.setScheme(QLatin1Literal("file"));
+    
+    m_pParent = pParent;
+    loadData();
+}
+
+void FileAccess::setFile(const QString& name, bool bWantToWrite)
+{
+    Q_ASSERT(!name.isEmpty());
+    
+    QUrl url = QUrl::fromUserInput(name, QString(), QUrl::AssumeLocalFile);
+    setFile(url, bWantToWrite);
+}
+
+void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
+{
+    reset();
+    
+    m_url = url;
+    m_name = m_url.fileName();
+    //Insure QUrl::isLocalFile assumes the scheme is set.
+    if(!m_url.scheme().isEmpty())
+        m_url.setScheme(QLatin1Literal("file"));
+
+    if(m_url.isLocalFile() || !m_url.isValid() ) // Treate invalid urls as local files.
+    {
+        m_fileInfo = QFileInfo(m_url.path());
+        m_pParent = nullptr;
+
+        loadData();
+    }
+    else
+    {
+        FileAccessJobHandler jh(this);            // A friend, which writes to the parameters of this class!
+        jh.stat(2 /*all details*/, bWantToWrite); // returns bSuccess, ignored
+
+        m_bValidData = true; // After running stat() the variables are initialised
+                                  // and valid even if the file doesn't exist and the stat
+                                  // query failed.
+    }
+}
+
+void FileAccess::loadData(void)
+{
     m_fileInfo.setCaching(true);
-    //convert to absolute path that doesn't depend on the current directory.
-    if(pParent == nullptr)
+    
+    if(parent() == nullptr)
         m_baseDir = m_fileInfo.absoluteFilePath();
     else
-        m_baseDir = pParent->m_baseDir;
+        m_baseDir = m_pParent->m_baseDir;
     
+    //convert to absolute path that doesn't depend on the current directory.
     m_fileInfo.makeAbsolute();
     m_bSymLink = m_fileInfo.isSymLink();
-    m_pParent = pParent;
 
     m_bFile = m_fileInfo.isFile();
     m_bDir = m_fileInfo.isDir();
@@ -106,11 +153,8 @@ void FileAccess::setFilePrivate(FileAccess* pParent)
     m_bReadable = m_fileInfo.isReadable();
     m_bExecutable = m_fileInfo.isExecutable();
     
-    Q_ASSERT(isLocal());
-    //if(isLocal())
-    //{
     m_name = m_fileInfo.fileName();
-    if(m_bSymLink)
+    if(isLocal() && m_bSymLink)
     {
         m_linkTarget = m_fileInfo.readLink();
 #ifndef Q_OS_WIN
@@ -127,50 +171,6 @@ void FileAccess::setFilePrivate(FileAccess* pParent)
     }
 
     m_bValidData = true;
-    m_url = QUrl::fromLocalFile(m_fileInfo.filePath());
-    if(m_url.isRelative())
-    {
-        m_url.setPath(absoluteFilePath());
-    }
-    //}
-}
-
-void FileAccess::setFile(const QString& name, bool bWantToWrite)
-{
-    reset();
-
-    //Nothing to do here.
-    if(name.isEmpty())
-        return;
-    
-    QUrl url = QUrl::fromUserInput(name, QString(), QUrl::AssumeLocalFile);
-    m_url = url;
-    m_name = m_url.fileName();
-
-    // FileAccess tries to detect if the given name is an URL or a local file.
-    // This is a problem if the filename looks like an URL (i.e. contains a colon ':').
-    // e.g. "file:f.txt" is a valid filename.
-    // Most of the time it is sufficient to check if the file exists locally.
-    // 2 Problems remain:
-    //   1. When the local file exists and the remote location is wanted nevertheless. (unlikely)
-    //   2. When the local file doesn't exist and should be written to.
-
-    bool bExistsLocal = QDir().exists(name);
-    if(url.isLocalFile() || url.isRelative() || !url.isValid() || bExistsLocal) // Treate invalid urls as relative.
-    {
-        m_fileInfo = QFileInfo(url.path());
-        setFilePrivate(nullptr);
-    }
-    else
-    {
-
-        FileAccessJobHandler jh(this);            // A friend, which writes to the parameters of this class!
-        jh.stat(2 /*all details*/, bWantToWrite); // returns bSuccess, ignored
-
-        m_bValidData = true; // After running stat() the variables are initialised
-                                  // and valid even if the file doesn't exist and the stat
-                                  // query failed.
-    }
 }
 
 void FileAccess::addPath(const QString& txt)
@@ -178,8 +178,8 @@ void FileAccess::addPath(const QString& txt)
     if(!isLocal() && m_url.isValid())
     {
         QUrl url = m_url.adjusted(QUrl::StripTrailingSlash);
-        m_url.setPath(url.path() + '/' + txt);
-        setFile(m_url.url()); // reinitialise
+        url.setPath(url.path() + '/' + txt);
+        setFile(url); // reinitialise
     }
     else
     {
@@ -604,16 +604,7 @@ void FileAccess::createTempFile(QTemporaryFile& tmpFile)
     tmpFile.open();
     tmpFile.close();
 }
-//TODO:Depricated to be removed
-/*QString FileAccess::tempFileName()
-{
-    QTemporaryFile tmpFile;
-    tmpFile.open();
-    //tmpFile.setAutoDelete( true );
-    QString name = tmpFile.fileName();
-    tmpFile.close();
-    return name;
-}*/
+
 
 bool FileAccess::removeTempFile(const QString& name) // static
 {   
@@ -1092,8 +1083,8 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
                 Q_ASSERT(fi.fileName() != "." && fi.fileName() != "..");
 
                 FileAccess fa;
-                fa.m_fileInfo = fi;
-                fa.setFilePrivate(m_pFileAccess);
+                
+                fa.setFile(m_pFileAccess, fi);
                 pDirList->push_back(fa);
             }
         }

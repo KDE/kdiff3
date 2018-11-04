@@ -36,6 +36,10 @@ public:
    ~FileAccess();
    FileAccess( const QString& name, bool bWantToWrite=false ); // name: local file or dirname or url (when supported)
    void setFile( const QString& name, bool bWantToWrite=false );
+   void setFile( const QUrl& name, bool bWantToWrite = false);
+   void setFile( FileAccess* pParent, QFileInfo fi );
+
+   void loadData(void);
 
    bool isNormal() const;
    bool isValid() const;
@@ -97,7 +101,6 @@ public:
  private:
    friend class FileAccessJobHandler;
    void setUdsEntry(const KIO::UDSEntry& e);
-   void setFilePrivate( FileAccess* pParent );
    void setStatusText( const QString& s );
 
    void reset();
@@ -131,7 +134,6 @@ public:
 
 class t_DirectoryList : public std::list<FileAccess>
 {};
-
 
 class FileAccessJobHandler : public QObject
 {
