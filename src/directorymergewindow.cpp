@@ -1242,9 +1242,7 @@ bool DirectoryMergeWindow::Data::init(
         sizes[1] = total - sizes[0];
         pSplitter->setSizes(sizes);
     }
-
-    QDir::setCurrent(origCurrentDirectory);
-
+    
     m_bScanning = false;
     emit q->statusBarMessage(i18n("Ready."));
 

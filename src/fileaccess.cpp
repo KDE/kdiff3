@@ -1067,42 +1067,36 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
 
     if(m_pFileAccess->isLocal())
     {
-        QString currentPath = QDir::currentPath();
-        m_bSuccess = QDir::setCurrent(m_pFileAccess->absoluteFilePath());
-        if(m_bSuccess)
+        m_bSuccess = true;
+        QDir dir(m_pFileAccess->absoluteFilePath());
+
+        dir.setSorting(QDir::Name | QDir::DirsFirst);
+        if(bFindHidden)
+            dir.setFilter(QDir::Files | QDir::Dirs | QDir::Hidden | QDir::System | QDir::NoDotAndDotDot);
+        else
+            dir.setFilter(QDir::Files | QDir::Dirs | QDir::System | QDir::NoDotAndDotDot);
+
+        QFileInfoList fiList = dir.entryInfoList();
+        if(fiList.isEmpty())
         {
-            m_bSuccess = true;
-            QDir dir(".");
-
-            dir.setSorting(QDir::Name | QDir::DirsFirst);
-            if(bFindHidden)
-                dir.setFilter(QDir::Files | QDir::Dirs | QDir::Hidden | QDir::System | QDir::NoDotAndDotDot);
-            else
-                dir.setFilter(QDir::Files | QDir::Dirs | QDir::System | QDir::NoDotAndDotDot);
-
-            QFileInfoList fiList = dir.entryInfoList();
-            if(fiList.isEmpty())
+            // No Permission to read directory or other error.
+            m_bSuccess = false;
+        }
+        else
+        {
+            foreach(const QFileInfo& fi, fiList) // for each file...
             {
-                // No Permission to read directory or other error.
-                m_bSuccess = false;
-            }
-            else
-            {
-                foreach(const QFileInfo& fi, fiList) // for each file...
-                {
-                    if(pp.wasCancelled())
-                        break;
+                if(pp.wasCancelled())
+                    break;
 
-                    Q_ASSERT(fi.fileName() != "." && fi.fileName() != "..");
+                Q_ASSERT(fi.fileName() != "." && fi.fileName() != "..");
 
-                    FileAccess fa;
-                    fa.m_fileInfo = fi;
-                    fa.setFilePrivate(m_pFileAccess);
-                    pDirList->push_back(fa);
-                }
+                FileAccess fa;
+                fa.m_fileInfo = fi;
+                fa.setFilePrivate(m_pFileAccess);
+                pDirList->push_back(fa);
             }
         }
-        QDir::setCurrent(currentPath); // restore current path
     }
     else
     {
