@@ -83,7 +83,7 @@ FileAccess::~FileAccess()
 void FileAccess::setFile(FileAccess* pParent, QFileInfo fi)
 {
     reset();
-    
+
     m_fileInfo = fi;
     m_url = QUrl::fromLocalFile(m_fileInfo.filePath());
     if(!m_url.scheme().isEmpty())
@@ -95,8 +95,9 @@ void FileAccess::setFile(FileAccess* pParent, QFileInfo fi)
 
 void FileAccess::setFile(const QString& name, bool bWantToWrite)
 {
-    Q_ASSERT(!name.isEmpty());
-    
+    if(name.isEmpty())
+        return;
+
     QUrl url = QUrl::fromUserInput(name, QString(), QUrl::AssumeLocalFile);
     setFile(url, bWantToWrite);
 }
