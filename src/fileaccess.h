@@ -27,8 +27,6 @@ namespace KIO {
     class Job;
 }
 
-bool wildcardMultiMatch( const QString& wildcard, const QString& testString, bool bCaseSensitive );
-
 class t_DirectoryList;
 
 class FileAccess
@@ -59,6 +57,7 @@ public:
    QString fileRelPath() const; // The path relitive to base comparison directory
    QString prettyAbsPath() const;
    QUrl url() const;
+   void setUrl(const QUrl inUrl) { m_url = inUrl; }
    QString absoluteFilePath() const;
 
    bool isLocal() const;
@@ -90,8 +89,14 @@ public:
    QString getStatusText();
 
    FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
-private:
-   void setUdsEntry( const KIO::UDSEntry& e );
+   
+   void doError(void);
+   void filterList(t_DirectoryList* pDirList, const QString& filePattern,
+                               const QString& fileAntiPattern, const QString& dirAntiPattern,
+                               const bool bUseCvsIgnore);
+ private:
+   friend class FileAccessJobHandler;
+   void setUdsEntry(const KIO::UDSEntry& e);
    void setFilePrivate( FileAccess* pParent );
    void setStatusText( const QString& s );
 
@@ -112,18 +117,16 @@ private:
 
    qint64 m_size;
    QDateTime m_modificationTime;
-   bool m_bSymLink  : 1;
-   bool m_bFile     : 1;
-   bool m_bDir      : 1;
-   bool m_bExists   : 1;
-   bool m_bWritable : 1;
-   bool m_bReadable : 1;
-   bool m_bExecutable:1;
-   bool m_bHidden   : 1;
+   bool m_bSymLink;
+   bool m_bFile;
+   bool m_bDir;
+   bool m_bExists;
+   bool m_bWritable;
+   bool m_bReadable;
+   bool m_bExecutable;
+   bool m_bHidden;
    
    QString m_statusText; // Might contain an error string, when the last operation didn't succeed.
-
-   friend class FileAccessJobHandler;
 };
 
 class t_DirectoryList : public std::list<FileAccess>

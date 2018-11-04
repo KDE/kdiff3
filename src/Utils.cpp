@@ -22,7 +22,8 @@
 
 #include <QString>
 #include <QStringList>
-
+#include <QHash>
+#include <QRegExp>
 #include <KLocalizedString>
 
 /* Split the command line into arguments.
@@ -99,4 +100,26 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
         args.pop_front();
     }
     return QString();
+}
+
+bool Utils::wildcardMultiMatch(const QString& wildcard, const QString& testString, bool bCaseSensitive)
+{
+    static QHash<QString, QRegExp> s_patternMap;
+
+    QStringList sl = wildcard.split(";");
+
+    for(QStringList::Iterator it = sl.begin(); it != sl.end(); ++it)
+    {
+        QHash<QString, QRegExp>::iterator patIt = s_patternMap.find(*it);
+        if(patIt == s_patternMap.end())
+        {
+            QRegExp pattern(*it, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::Wildcard);
+            patIt = s_patternMap.insert(*it, pattern);
+        }
+
+        if(patIt.value().exactMatch(testString))
+            return true;
+    }
+
+    return false;
 }

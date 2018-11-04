@@ -26,7 +26,8 @@
 
 class Utils{
     public:
-       static QString getArguments(QString cmd, QString& program, QStringList& args);
+      static bool wildcardMultiMatch(const QString& wildcard, const QString& testString, bool bCaseSensitive);
+      static QString getArguments(QString cmd, QString& program, QStringList& args);
 };
 
 #endif

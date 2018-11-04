@@ -11,6 +11,7 @@
 #include "cvsignorelist.h"
 #include "common.h"
 #include "progress.h"
+#include "Utils.h"
 
 #include <QDir>
 #include <QProcess>
@@ -721,6 +722,52 @@ bool FileAccess::createBackup(const QString& bakExtension)
     return true;
 }
 
+void FileAccess::doError(void)
+{
+    m_bExists = false;
+}
+
+void FileAccess::filterList(t_DirectoryList *pDirList, const QString& filePattern,
+                                   const QString& fileAntiPattern, const QString& dirAntiPattern,
+                                   const bool bUseCvsIgnore)
+{
+    CvsIgnoreList cvsIgnoreList;
+    if(bUseCvsIgnore)
+    {
+        cvsIgnoreList.init(*this, pDirList);
+    }
+    //TODO: Ask os for this information don't hard code it.
+#if defined(Q_OS_WIN)
+    bool bCaseSensitive = false;
+#else
+    bool bCaseSensitive = true;
+#endif
+
+    // Now remove all entries that should be ignored:
+    t_DirectoryList::iterator i;
+    for(i = pDirList->begin(); i != pDirList->end();)
+    {
+        t_DirectoryList::iterator i2 = i;
+        ++i2;
+        QString fn = i->fileName();
+        
+        if( (i->isFile() &&
+            (!Utils::wildcardMultiMatch(filePattern, fn, bCaseSensitive) ||
+             Utils::wildcardMultiMatch(fileAntiPattern, fn, bCaseSensitive))) ||
+           (i->isDir() && Utils::wildcardMultiMatch(dirAntiPattern, fn, bCaseSensitive)) ||
+           (bUseCvsIgnore && cvsIgnoreList.matches(fn, bCaseSensitive)))
+        {
+            // Remove it
+            pDirList->erase(i);
+            i = i2;
+        }
+        else
+        {
+            ++i;
+        }
+    }
+}
+
 FileAccessJobHandler::FileAccessJobHandler(FileAccess* pFileAccess)
 {
     m_pFileAccess = pFileAccess;
@@ -747,14 +794,13 @@ void FileAccessJobHandler::slotStatResult(KJob* pJob)
     if(pJob->error())
     {
         //pJob->uiDelegate()->showErrorMessage();
-        m_pFileAccess->m_bExists = false;
+        m_pFileAccess->doError();
         m_bSuccess = true;
     }
     else
     {
         m_bSuccess = true;
 
-        m_pFileAccess->m_bValidData = true;
         const KIO::UDSEntry e = static_cast<KIO::StatJob*>(pJob)->statResult();
 
         m_pFileAccess->setUdsEntry(e);
@@ -1001,30 +1047,8 @@ bool FileAccessJobHandler::copyFile(const QString& dest)
     // Note that the KIO-slave preserves the original date, if this is supported.
 }
 
-bool wildcardMultiMatch(const QString& wildcard, const QString& testString, bool bCaseSensitive)
-{
-    static QHash<QString, QRegExp> s_patternMap;
-
-    QStringList sl = wildcard.split(";");
-
-    for(QStringList::Iterator it = sl.begin(); it != sl.end(); ++it)
-    {
-        QHash<QString, QRegExp>::iterator patIt = s_patternMap.find(*it);
-        if(patIt == s_patternMap.end())
-        {
-            QRegExp pattern(*it, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::Wildcard);
-            patIt = s_patternMap.insert(*it, pattern);
-        }
-
-        if(patIt.value().exactMatch(testString))
-            return true;
-    }
-
-    return false;
-}
-
 bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden, const QString& filePattern,
-                                   const QString& fileAntiPattern, const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore)
+                                   const QString& fileAntiPattern, const QString& dirAntiPattern, bool bFollowDirLinks, const bool bUseCvsIgnore)
 {
     ProgressProxyExtender pp;
     m_pDirList = pDirList;
@@ -1103,45 +1127,11 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
         }
     }
 
-    CvsIgnoreList cvsIgnoreList;
-    if(bUseCvsIgnore)
-    {
-        cvsIgnoreList.init(*m_pFileAccess, pDirList);
-    }
-    //TODO: Ask os for this information don't hard code it.
-#if defined(Q_OS_WIN)
-    bool bCaseSensitive = false;
-#else
-    bool bCaseSensitive = true;
-#endif
-
-    // Now remove all entries that should be ignored:
-    t_DirectoryList::iterator i;
-    for(i = pDirList->begin(); i != pDirList->end();)
-    {
-        t_DirectoryList::iterator i2 = i;
-        ++i2;
-        QString fn = i->fileName();
-        Q_ASSERT(bFindHidden || !i->isHidden());
-        if((!bFindHidden && i->isHidden()) ||
-           (i->isFile() &&
-            (!wildcardMultiMatch(filePattern, fn, bCaseSensitive) ||
-             wildcardMultiMatch(fileAntiPattern, fn, bCaseSensitive))) ||
-           (i->isDir() && wildcardMultiMatch(dirAntiPattern, fn, bCaseSensitive)) ||
-           (bUseCvsIgnore && cvsIgnoreList.matches(fn, bCaseSensitive)))
-        {
-            // Remove it
-            pDirList->erase(i);
-            i = i2;
-        }
-        else
-        {
-            ++i;
-        }
-    }
+    m_pFileAccess->filterList(pDirList, filePattern, fileAntiPattern, dirAntiPattern, bUseCvsIgnore);
 
     if(bRecursive)
     {
+        t_DirectoryList::iterator i;
         t_DirectoryList subDirsList;
 
         for(i = m_pDirList->begin(); i != m_pDirList->end(); ++i)
@@ -1180,8 +1170,9 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
         if(fa.fileName() != "." && fa.fileName() != "..")
         {
             fa.m_url = parentUrl;
-            QUrl url = fa.m_url.adjusted(QUrl::StripTrailingSlash);
-            fa.m_url.setPath(url.path() + "/" + fa.fileName());
+            QUrl url = parentUrl.adjusted(QUrl::StripTrailingSlash);
+            url.setPath(url.path() + "/" + fa.fileName());
+            fa.setUrl(url);
             //fa.m_absoluteFilePath = fa.url().url();
             m_pDirList->push_back(fa);
         }

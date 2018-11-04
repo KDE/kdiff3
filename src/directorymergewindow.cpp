@@ -15,6 +15,7 @@
 #include "guiutils.h"
 #include "options.h"
 #include "progress.h"
+#include "Utils.h"
 
 #include <algorithm>
 #include <map>
@@ -3519,7 +3520,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
                 (bShowIdentical && bExistsEverywhere && pMFI->m_bEqualAB && (pMFI->m_bEqualAC || !bThreeDirs)) || ((bShowDifferent || bDir) && existCount >= 2 && (!pMFI->m_bEqualAB || !(pMFI->m_bEqualAC || !bThreeDirs))) || (bShowOnlyInA && pMFI->existsInA() && !pMFI->existsInB() && !pMFI->existsInC()) || (bShowOnlyInB && !pMFI->existsInA() && pMFI->existsInB() && !pMFI->existsInC()) || (bShowOnlyInC && !pMFI->existsInA() && !pMFI->existsInB() && pMFI->existsInC());
 
             QString fileName = pMFI->fileName();
-            bVisible = bVisible && ((bDir && !wildcardMultiMatch(d->m_pOptions->m_DmDirAntiPattern, fileName, d->m_bCaseSensitive)) || (wildcardMultiMatch(d->m_pOptions->m_DmFilePattern, fileName, d->m_bCaseSensitive) && !wildcardMultiMatch(d->m_pOptions->m_DmFileAntiPattern, fileName, d->m_bCaseSensitive)));
+            bVisible = bVisible && ((bDir && !Utils::wildcardMultiMatch(d->m_pOptions->m_DmDirAntiPattern, fileName, d->m_bCaseSensitive)) || (Utils::wildcardMultiMatch(d->m_pOptions->m_DmFilePattern, fileName, d->m_bCaseSensitive) && !Utils::wildcardMultiMatch(d->m_pOptions->m_DmFileAntiPattern, fileName, d->m_bCaseSensitive)));
 
             setRowHidden(mi.row(), mi.parent(), !bVisible);
 
