@@ -149,11 +149,24 @@ class MergeFileInfos
     //bool operator>( const MergeFileInfos& );
     QString subPath() const
     {
-        return m_pFileInfoA && m_pFileInfoA->exists() ? m_pFileInfoA->fileRelPath() : m_pFileInfoB && m_pFileInfoB->exists() ? m_pFileInfoB->fileRelPath() : m_pFileInfoC && m_pFileInfoC->exists() ? m_pFileInfoC->fileRelPath() : QString("");
+        if(m_pFileInfoA && m_pFileInfoA->exists())
+            return m_pFileInfoA->fileRelPath();
+        else if(m_pFileInfoB && m_pFileInfoB->exists())
+            return m_pFileInfoB->fileRelPath();
+        else if(m_pFileInfoC && m_pFileInfoC->exists())
+            return m_pFileInfoC->fileRelPath();
+        return QString("");
     }
+
     QString fileName() const
     {
-        return m_pFileInfoA && m_pFileInfoA->exists() ? m_pFileInfoA->fileName() : m_pFileInfoB && m_pFileInfoB->exists() ? m_pFileInfoB->fileName() : m_pFileInfoC && m_pFileInfoC->exists() ? m_pFileInfoC->fileName() : QString("");
+        if(m_pFileInfoA && m_pFileInfoA->exists())
+            return m_pFileInfoA->fileName();
+        else if(m_pFileInfoB && m_pFileInfoB->exists())
+            return m_pFileInfoB->fileName();
+        else if(m_pFileInfoC && m_pFileInfoC->exists())
+            return m_pFileInfoC->fileName();
+        return QString("");
     }
     bool dirA() const { return m_pFileInfoA ? m_pFileInfoA->isDir() : false; }
     bool dirB() const { return m_pFileInfoB ? m_pFileInfoB->isDir() : false; }
