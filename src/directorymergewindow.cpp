@@ -190,6 +190,12 @@ class MergeFileInfos
         return false;
     }
 
+    void sort(Qt::SortOrder order);
+    inline MergeFileInfos* parent(void) const { return m_pParent; }
+    inline void setParent(MergeFileInfos* inParent) { m_pParent = inParent; }
+    inline const QList<MergeFileInfos*>& children(void) const { return m_children; }
+    inline void addChild(MergeFileInfos* child) { m_children.push_back(child); }
+    inline void clear(void) { m_children.clear(); }
   public:
     MergeFileInfos* m_pParent;
     FileAccess* m_pFileInfoA;
@@ -248,21 +254,21 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
     QModelIndex parent(const QModelIndex& index) const override
     {
         MergeFileInfos* pMFI = getMFI(index);
-        if(pMFI == nullptr || pMFI == m_pRoot || pMFI->m_pParent == m_pRoot)
+        if(pMFI == nullptr || pMFI == m_pRoot || pMFI->parent() == m_pRoot)
             return QModelIndex();
         else
         {
-            MergeFileInfos* pParentsParent = pMFI->m_pParent->m_pParent;
-            return createIndex(pParentsParent->m_children.indexOf(pMFI->m_pParent), 0, pMFI->m_pParent);
+            MergeFileInfos* pParentsParent = pMFI->parent()->parent();
+            return createIndex(pParentsParent->children().indexOf(pMFI->parent()), 0, pMFI->parent());
         }
     }
     int rowCount(const QModelIndex& parent = QModelIndex()) const override
     {
         MergeFileInfos* pParentMFI = getMFI(parent);
         if(pParentMFI != nullptr)
-            return pParentMFI->m_children.count();
+            return pParentMFI->children().count();
         else
-            return m_pRoot->m_children.count();
+            return m_pRoot->children().count();
     }
     int columnCount(const QModelIndex& /*parent*/) const override
     {
@@ -271,10 +277,10 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
     QModelIndex index(int row, int column, const QModelIndex& parent) const override
     {
         MergeFileInfos* pParentMFI = getMFI(parent);
-        if(pParentMFI == nullptr && row < m_pRoot->m_children.count())
-            return createIndex(row, column, m_pRoot->m_children[row]);
-        else if(pParentMFI != nullptr && row < pParentMFI->m_children.count())
-            return createIndex(row, column, pParentMFI->m_children[row]);
+        if(pParentMFI == nullptr && row < m_pRoot->children().count())
+            return createIndex(row, column, m_pRoot->children()[row]);
+        else if(pParentMFI != nullptr && row < pParentMFI->children().count())
+            return createIndex(row, column, pParentMFI->children()[row]);
         else
             return QModelIndex();
     }
@@ -311,6 +317,8 @@ class DirectoryMergeWindow::Data : public QAbstractItemModel
         else
             return m_dirDestInternal.absoluteFilePath() + "/" + mfi.subPath();
     }
+
+    static void setPixmaps(MergeFileInfos& mfi, bool);
 
     FileAccess m_dirA;
     FileAccess m_dirB;
@@ -1089,7 +1097,7 @@ bool DirectoryMergeWindow::Data::init(
     m_bSkipDirStatus = m_pOptions->m_bDmSkipDirStatus;
 
     beginResetModel();
-    m_pRoot->m_children.clear();
+    m_pRoot->clear();
     m_mergeItemList.clear();
     endResetModel();
 
@@ -1761,7 +1769,7 @@ static QPixmap getOnePixmap(e_Age eAge, bool bLink, bool bDir)
     return *ppPm[eAge];
 }
 
-static void setPixmaps(MergeFileInfos& mfi, bool)
+void DirectoryMergeWindow::Data::setPixmaps(MergeFileInfos& mfi, bool)
 {
     if(mfi.dirA() || mfi.dirB() || mfi.dirC())
     {
@@ -1904,16 +1912,16 @@ void DirectoryMergeWindow::Data::prepareListView(ProgressProxy& pp)
         }
         if(dirPart.isEmpty()) // Top level
         {
-            m_pRoot->m_children.push_back(&mfi); //new DirMergeItem( this, filePart, &mfi );
-            mfi.m_pParent = m_pRoot;
+            m_pRoot->addChild(&mfi); //new DirMergeItem( this, filePart, &mfi );
+            mfi.setParent(m_pRoot);
         }
         else
         {
             FileAccess* pFA = mfi.m_pFileInfoA ? mfi.m_pFileInfoA : mfi.m_pFileInfoB ? mfi.m_pFileInfoB : mfi.m_pFileInfoC;
             MergeFileInfos& dirMfi = pFA->parent() ? m_fileMergeMap[FileKey(*pFA->parent())] : *m_pRoot; // parent
 
-            dirMfi.m_children.push_back(&mfi); //new DirMergeItem( dirMfi.m_pDMI, filePart, &mfi );
-            mfi.m_pParent = &dirMfi;
+            dirMfi.addChild(&mfi); //new DirMergeItem( dirMfi.m_pDMI, filePart, &mfi );
+            mfi.setParent(&dirMfi);
 
             //   // Equality for parent dirs is set in updateFileVisibilities()
         }
@@ -2373,19 +2381,19 @@ class MfiCompare
     }
 };
 
-static void sortHelper(MergeFileInfos* pMFI, Qt::SortOrder order)
+void MergeFileInfos::sort(Qt::SortOrder order)
 {
-    std::sort(pMFI->m_children.begin(), pMFI->m_children.end(), MfiCompare(order));
+    std::sort(m_children.begin(), m_children.end(), MfiCompare(order));
 
-    for(int i = 0; i < pMFI->m_children.count(); ++i)
-        sortHelper(pMFI->m_children[i], order);
+    for(int i = 0; i < m_children.count(); ++i)
+       m_children[i]->sort(order);
 }
 
 void DirectoryMergeWindow::Data::sort(int column, Qt::SortOrder order)
 {
     Q_UNUSED(column);
     beginResetModel();
-    sortHelper(m_pRoot, order);
+    m_pRoot->sort(order);
     endResetModel();
 }
 
@@ -2408,7 +2416,7 @@ void DirectoryMergeWindow::Data::setMergeOperation(const QModelIndex& mi, e_Merg
     {
         e_MergeOperation eChildrenMergeOp = mfi.m_eMergeOperation;
         if(eChildrenMergeOp == eConflictingFileTypes) eChildrenMergeOp = eMergeABCToDest;
-        for(int childIdx = 0; childIdx < mfi.m_children.count(); ++childIdx)
+        for(int childIdx = 0; childIdx < mfi.children().count(); ++childIdx)
         {
             calcSuggestedOperation(index(childIdx, 0, mi), eChildrenMergeOp);
         }
@@ -3511,7 +3519,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
                 }
 
                 if(bChange)
-                    setPixmaps(*pMFI, bThreeDirs);
+                    DirectoryMergeWindow::Data::setPixmaps(*pMFI, bThreeDirs);
             }
             bool bExistsEverywhere = pMFI->existsInA() && pMFI->existsInB() && (pMFI->existsInC() || !bThreeDirs);
             int existCount = int(pMFI->existsInA()) + int(pMFI->existsInB()) + int(pMFI->existsInC());
@@ -3526,7 +3534,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
             bool bEqual = bThreeDirs ? pMFI->m_bEqualAB && pMFI->m_bEqualAC : pMFI->m_bEqualAB;
             if(!bEqual && bVisible && loop == 0) // Set all parents to "not equal"
             {
-                MergeFileInfos* p2 = pMFI->m_pParent;
+                MergeFileInfos* p2 = pMFI->parent();
                 while(p2 != nullptr)
                 {
                     bool bChange = false;
@@ -3544,11 +3552,11 @@ void DirectoryMergeWindow::updateFileVisibilities()
                     }
 
                     if(bChange)
-                        setPixmaps(*p2, bThreeDirs);
+                        DirectoryMergeWindow::Data::setPixmaps(*p2, bThreeDirs);
                     else
                         break;
 
-                    p2 = p2->m_pParent;
+                    p2 = p2->parent();
                 }
             }
             mi = d->treeIterator(mi, true, true);
