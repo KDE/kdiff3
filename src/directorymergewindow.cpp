@@ -1163,8 +1163,6 @@ bool DirectoryMergeWindow::Data::init(
     else
         m_dirDestInternal = m_dirC.isValid() ? m_dirC : m_dirB;
 
-    QString origCurrentDirectory = QDir::currentPath();
-
     m_fileMergeMap.clear();
     s_eCaseSensitivity = m_bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
     // calc how many directories will be read:

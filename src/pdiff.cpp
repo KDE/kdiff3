@@ -2275,7 +2275,6 @@ void KDiff3App::slotNoRelevantChangesDetected()
         //KMessageBox::information( this, "No relevant changes detected", "KDiff3" );
         if(!m_pOptions->m_IrrelevantMergeCmd.isEmpty())
         {
-            QString cmd = m_pOptions->m_IrrelevantMergeCmd;
             /*
                 QProcess doesn't check for single quotes and uses non-standard escaping syntax for double quotes.
                     The distinction between single and double quotes is purly a command shell issue. So
