@@ -64,6 +64,17 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSIO
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wduplicated-cond -Wduplicated-branches -Wshadow")
 endif()
 
+#new in cmake 3.6+ integrate clang-tidy
+if(NOT ${CMAKE_VERSION} VERSION_LESS "3.6.0")
+    find_program(CLANG_TIDY_EXE NAMES "clang-tidy" DOC "Path to clang-tidy executable")
+    if(NOT CLANG_TIDY_EXE)
+        message(STATUS "clang-tidy not found disabling integration.")
+    else()
+        message(STATUS "Found clang-tidy: ${CLANG_TIDY_EXE}")
+        set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}" "-header-filter=.*")
+    endif()
+endif()
+
 set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 set(
