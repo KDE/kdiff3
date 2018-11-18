@@ -711,8 +711,10 @@ static int calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv, const Ma
 // called after word wrap is complete
 void KDiff3App::slotFinishMainInit()
 {
-    setHScrollBarRange();
+    Q_ASSERT(m_pDiffTextWindow1 != nullptr && m_pDiffVScrollBar != nullptr);
 
+    setHScrollBarRange();
+    
     int newHeight = m_pDiffTextWindow1->getNofVisibleLines();
     /*int newWidth  = m_pDiffTextWindow1->getNofVisibleColumns();*/
     m_DTWHeight = newHeight;

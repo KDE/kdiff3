@@ -425,7 +425,6 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
             if(pSD != nullptr)
             {
                 // Save this file directly, not via the merge result window.
-                bSuccess = false;
                 FileAccess fa(m_outputFilename);
                 if(m_pOptions->m_bDmCreateBakFiles && fa.exists())
                 {
