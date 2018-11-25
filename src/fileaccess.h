@@ -98,6 +98,9 @@ public:
    void filterList(t_DirectoryList* pDirList, const QString& filePattern,
                                const QString& fileAntiPattern, const QString& dirAntiPattern,
                                const bool bUseCvsIgnore);
+
+   QDir getBaseDirectory(void) const { return m_baseDir; }
+
  private:
    friend class FileAccessJobHandler;
    void setUdsEntry(const KIO::UDSEntry& e);

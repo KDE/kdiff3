@@ -11,6 +11,7 @@
  ***************************************************************************/
 #include <qglobal.h>
 
+#include "DirectoryInfo.h"
 #include "directorymergewindow.h"
 #include "guiutils.h"
 #include "options.h"
@@ -141,11 +142,13 @@ class MergeFileInfos
         m_pFileInfoA = nullptr;
         m_pFileInfoB = nullptr;
         m_pFileInfoC = nullptr;
+        m_dirInfo.clear();
     }
     ~MergeFileInfos()
     {
         m_children.clear();
     }
+    
     //bool operator>( const MergeFileInfos& );
     QString subPath() const
     {
@@ -209,11 +212,50 @@ class MergeFileInfos
     inline const QList<MergeFileInfos*>& children(void) const { return m_children; }
     inline void addChild(MergeFileInfos* child) { m_children.push_back(child); }
     inline void clear(void) { m_children.clear(); }
-  public:
+
+    FileAccess* getFileInfoA(void) const { return m_pFileInfoA; }
+    FileAccess* getFileInfoB(void) const { return m_pFileInfoB; }
+    FileAccess* getFileInfoC(void) const { return m_pFileInfoC; }
+    
+    void setFileInfoA(FileAccess* newInfo) { m_pFileInfoA = newInfo; }
+    void setFileInfoB(FileAccess* newInfo) { m_pFileInfoB = newInfo; }
+    void setFileInfoC(FileAccess* newInfo) { m_pFileInfoC = newInfo; }
+
+    QString fullNameA(void) const
+    {
+        if(existsInA())
+            return getFileInfoA()->absoluteFilePath();
+
+        return m_dirInfo->dirA().absoluteFilePath()+"/"+subPath();
+    }
+    QString fullNameB(void) const
+    {
+        if(existsInB())
+            return getFileInfoB()->absoluteFilePath();
+
+        return m_dirInfo->dirB().absoluteFilePath()+"/"+subPath();
+    }
+    
+    QString fullNameC(void) const
+    {
+        if(existsInC())
+            return getFileInfoC()->absoluteFilePath();
+
+        return m_dirInfo->dirC().absoluteFilePath()+"/"+subPath();
+    }
+    
+    void setDirectorInfo(QSharedPointer<DirectoryInfo> dirInfo)
+    {
+        m_dirInfo = dirInfo;
+    }
+  private:
     MergeFileInfos* m_pParent;
     FileAccess* m_pFileInfoA;
     FileAccess* m_pFileInfoB;
     FileAccess* m_pFileInfoC;
+
+    QSharedPointer<DirectoryInfo> m_dirInfo;
+  public:
     TotalDiffStatus m_totalDiffStatus;
     QList<MergeFileInfos*> m_children;
 
@@ -311,24 +353,12 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     }
     MergeFileInfos* m_pRoot;
 
-    QString fullNameA(const MergeFileInfos& mfi)
-    {
-        return mfi.existsInA() ? mfi.m_pFileInfoA->absoluteFilePath() : m_dirA.absoluteFilePath() + "/" + mfi.subPath();
-    }
-    QString fullNameB(const MergeFileInfos& mfi)
-    {
-        return mfi.existsInB() ? mfi.m_pFileInfoB->absoluteFilePath() : m_dirB.absoluteFilePath() + "/" + mfi.subPath();
-    }
-    QString fullNameC(const MergeFileInfos& mfi)
-    {
-        return mfi.existsInC() ? mfi.m_pFileInfoC->absoluteFilePath() : m_dirC.absoluteFilePath() + "/" + mfi.subPath();
-    }
     QString fullNameDest(const MergeFileInfos& mfi)
     {
         if(m_dirDestInternal.prettyAbsPath() == m_dirC.prettyAbsPath())
-            return fullNameC(mfi);
+            return mfi.fullNameC();
         else if(m_dirDestInternal.prettyAbsPath() == m_dirB.prettyAbsPath())
-            return fullNameB(mfi);
+            return mfi.fullNameB();
         else
             return m_dirDestInternal.absoluteFilePath() + "/" + mfi.subPath();
     }
@@ -379,7 +409,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
 
     QString m_dirMergeStateFilename;
 
-    void buildMergeMap(void);
+    void buildMergeMap(QSharedPointer<DirectoryInfo> dirInfo);
 
 private:
     class FileKey
@@ -1023,7 +1053,7 @@ bool DirectoryMergeWindow::init(
     return d->init(dirA, dirB, dirC, dirDest, bDirectoryMerge, bReload);
 }
 
-void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(void)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(QSharedPointer<DirectoryInfo> dirInfo)
 {
     t_DirectoryList::iterator dirIterator;
 
@@ -1033,7 +1063,8 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(void)
         {
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
 
-            mfi.m_pFileInfoA = &(*dirIterator);
+            mfi.setFileInfoA(&(*dirIterator));
+            mfi.setDirectorInfo(dirInfo);
         }
     }
 
@@ -1043,7 +1074,8 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(void)
         {
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
 
-            mfi.m_pFileInfoB = &(*dirIterator);
+            mfi.setFileInfoB(&(*dirIterator));
+            mfi.setDirectorInfo(dirInfo);
         }
     }
 
@@ -1053,7 +1085,8 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(void)
         {
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
 
-            mfi.m_pFileInfoC = &(*dirIterator);
+            mfi.setFileInfoC(&(*dirIterator));
+            mfi.setDirectorInfo(dirInfo);
         }
     }
 }
@@ -1245,7 +1278,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     else
         eDefaultMergeOp = m_bSyncMode ? eMergeToAB : eMergeABToDest;
 
-    buildMergeMap();
+    buildMergeMap(QSharedPointer<DirectoryInfo>(new DirectoryInfo(dirA, dirB, dirC, dirDest)));
 
     bool bContinue = true;
     if(!bListDirSuccessA || !bListDirSuccessB || !bListDirSuccessC)
@@ -1524,15 +1557,15 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
 
     if(mfi.existsInA())
     {
-        dateMap[mfi.m_pFileInfoA->lastModified()] = 0;
+        dateMap[mfi.getFileInfoA()->lastModified()] = 0;
     }
     if(mfi.existsInB())
     {
-        dateMap[mfi.m_pFileInfoB->lastModified()] = 1;
+        dateMap[mfi.getFileInfoB()->lastModified()] = 1;
     }
     if(mfi.existsInC())
     {
-        dateMap[mfi.m_pFileInfoC->lastModified()] = 2;
+        dateMap[mfi.getFileInfoC()->lastModified()] = 2;
     }
 
     if(m_pOptions->m_bDmFullAnalysis)
@@ -1547,9 +1580,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
         else
         {
             emit q->startDiffMerge(
-                mfi.existsInA() ? mfi.m_pFileInfoA->absoluteFilePath() : QString(""),
-                mfi.existsInB() ? mfi.m_pFileInfoB->absoluteFilePath() : QString(""),
-                mfi.existsInC() ? mfi.m_pFileInfoC->absoluteFilePath() : QString(""),
+                mfi.existsInA() ? mfi.getFileInfoA()->absoluteFilePath() : QString(""),
+                mfi.existsInB() ? mfi.getFileInfoB()->absoluteFilePath() : QString(""),
+                mfi.existsInC() ? mfi.getFileInfoC()->absoluteFilePath() : QString(""),
                 "",
                 "", "", "", &mfi.m_totalDiffStatus);
             int nofNonwhiteConflicts = mfi.m_totalDiffStatus.nofUnsolvedConflicts +
@@ -1578,14 +1611,14 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
             if(mfi.dirA())
                 mfi.m_bEqualAB = true;
             else
-                mfi.m_bEqualAB = fastFileComparison(*mfi.m_pFileInfoA, *mfi.m_pFileInfoB, bError, eqStatus);
+                mfi.m_bEqualAB = fastFileComparison(*mfi.getFileInfoA(), *mfi.getFileInfoB(), bError, eqStatus);
         }
         if(mfi.existsInA() && mfi.existsInC())
         {
             if(mfi.dirA())
                 mfi.m_bEqualAC = true;
             else
-                mfi.m_bEqualAC = fastFileComparison(*mfi.m_pFileInfoA, *mfi.m_pFileInfoC, bError, eqStatus);
+                mfi.m_bEqualAC = fastFileComparison(*mfi.getFileInfoA(), *mfi.getFileInfoC(), bError, eqStatus);
         }
         if(mfi.existsInB() && mfi.existsInC())
         {
@@ -1596,7 +1629,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
                 if(mfi.dirB())
                     mfi.m_bEqualBC = true;
                 else
-                    mfi.m_bEqualBC = fastFileComparison(*mfi.m_pFileInfoB, *mfi.m_pFileInfoC, bError, eqStatus);
+                    mfi.m_bEqualBC = fastFileComparison(*mfi.getFileInfoB(), *mfi.getFileInfoC(), bError, eqStatus);
             }
         }
     }
@@ -1931,7 +1964,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
         }
         else
         {
-            FileAccess* pFA = mfi.m_pFileInfoA ? mfi.m_pFileInfoA : mfi.m_pFileInfoB ? mfi.m_pFileInfoB : mfi.m_pFileInfoC;
+            FileAccess* pFA = mfi.getFileInfoA() ? mfi.getFileInfoA() : mfi.getFileInfoB() ? mfi.getFileInfoB() : mfi.getFileInfoC();
             MergeFileInfos& dirMfi = pFA->parent() ? m_fileMergeMap[FileKey(*pFA->parent())] : *m_pRoot; // parent
 
             dirMfi.addChild(&mfi); //new DirMergeItem( dirMfi.m_pDMI, filePart, &mfi );
@@ -2223,15 +2256,15 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
     {
         QString itemPath;
         if(c == s_ACol && mfi.existsInA()) {
-            itemPath = d->fullNameA(mfi);
+            itemPath = mfi.fullNameA();
         }
         else if(c == s_BCol && mfi.existsInB())
         {
-            itemPath = d->fullNameB(mfi);
+            itemPath = mfi.fullNameB();
         }
         else if(c == s_CCol && mfi.existsInC())
         {
-            itemPath = d->fullNameC(mfi);
+            itemPath = mfi.fullNameC();
         }
 
         if(!itemPath.isEmpty())
@@ -2254,15 +2287,15 @@ void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
     {
         QString itemPath;
         if(c == s_ACol && pMFI->existsInA()) {
-            itemPath = d->fullNameA(*pMFI);
+            itemPath = pMFI->fullNameA();
         }
         else if(c == s_BCol && pMFI->existsInB())
         {
-            itemPath = d->fullNameB(*pMFI);
+            itemPath = pMFI->fullNameB();
         }
         else if(c == s_CCol && pMFI->existsInC())
         {
-            itemPath = d->fullNameC(*pMFI);
+            itemPath = pMFI->fullNameC();
         }
 
         if(!itemPath.isEmpty())
@@ -2283,7 +2316,7 @@ QString DirectoryMergeWindow::DirectoryMergeWindowPrivate::getFileName(const QMo
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI != nullptr)
     {
-        return mi.column() == s_ACol ? pMFI->m_pFileInfoA->absoluteFilePath() : mi.column() == s_BCol ? pMFI->m_pFileInfoB->absoluteFilePath() : mi.column() == s_CCol ? pMFI->m_pFileInfoC->absoluteFilePath() : QString("");
+        return mi.column() == s_ACol ? pMFI->getFileInfoA()->absoluteFilePath() : mi.column() == s_BCol ? pMFI->getFileInfoB()->absoluteFilePath() : mi.column() == s_CCol ? pMFI->getFileInfoC()->absoluteFilePath() : QString("");
     }
     return "";
 }
@@ -2452,9 +2485,9 @@ void DirectoryMergeWindow::compareCurrentFile()
         if(!(pMFI->dirA() || pMFI->dirB() || pMFI->dirC()))
         {
             emit startDiffMerge(
-                pMFI->existsInA() ? pMFI->m_pFileInfoA->absoluteFilePath() : QString(""),
-                pMFI->existsInB() ? pMFI->m_pFileInfoB->absoluteFilePath() : QString(""),
-                pMFI->existsInC() ? pMFI->m_pFileInfoC->absoluteFilePath() : QString(""),
+                pMFI->existsInA() ? pMFI->getFileInfoA()->absoluteFilePath() : QString(""),
+                pMFI->existsInB() ? pMFI->getFileInfoB()->absoluteFilePath() : QString(""),
+                pMFI->existsInC() ? pMFI->getFileInfoC()->absoluteFilePath() : QString(""),
                 "",
                 "", "", "", nullptr);
         }
@@ -2534,10 +2567,9 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
     }
     if(fileName == d->fullNameDest(*pMFI))
     {
-        MergeFileInfos& mfi = *pMFI;
-        if(mfi.m_eMergeOperation == eMergeToAB)
+        if(pMFI->m_eMergeOperation == eMergeToAB)
         {
-            bool bSuccess = d->copyFLD(d->fullNameB(mfi), d->fullNameA(mfi));
+            bool bSuccess = d->copyFLD(pMFI->fullNameB(), pMFI->fullNameA());
             if(!bSuccess)
             {
                 KMessageBox::error(this, i18n("An error occurred while copying."));
@@ -2547,7 +2579,7 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
                 //   m_pStatusInfo->ensureItemVisible( m_pStatusInfo->last() );
                 d->m_bError = true;
                 d->setOpStatus(mi, eOpStatusError);
-                mfi.m_eMergeOperation = eCopyBToA;
+                pMFI->m_eMergeOperation = eCopyBToA;
                 return;
             }
         }
@@ -2602,12 +2634,12 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(Me
     case eMergeToB:
     case eDeleteB:
     case eCopyAToB:
-        destName = fullNameB(mfi);
+        destName = mfi.fullNameB();
         break;
     case eMergeToA:
     case eDeleteA:
     case eCopyBToA:
-        destName = fullNameA(mfi);
+        destName = mfi.fullNameA();
         break;
     case eMergeABToDest:
     case eMergeABCToDest:
@@ -2630,14 +2662,14 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(Me
         break;
     case eCopyAToDest:
     case eCopyAToB:
-        bSuccess = copyFLD(fullNameA(mfi), destName);
+        bSuccess = copyFLD(mfi.fullNameA(), destName);
         break;
     case eCopyBToDest:
     case eCopyBToA:
-        bSuccess = copyFLD(fullNameB(mfi), destName);
+        bSuccess = copyFLD(mfi.fullNameB(), destName);
         break;
     case eCopyCToDest:
-        bSuccess = copyFLD(fullNameC(mfi), destName);
+        bSuccess = copyFLD(mfi.fullNameC(), destName);
         break;
     case eDeleteFromDest:
     case eDeleteA:
@@ -2645,21 +2677,21 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(Me
         bSuccess = deleteFLD(destName, bCreateBackups);
         break;
     case eDeleteAB:
-        bSuccess = deleteFLD(fullNameA(mfi), bCreateBackups) &&
-                   deleteFLD(fullNameB(mfi), bCreateBackups);
+        bSuccess = deleteFLD(mfi.fullNameA(), bCreateBackups) &&
+                   deleteFLD(mfi.fullNameB(), bCreateBackups);
         break;
     case eMergeABToDest:
     case eMergeToA:
     case eMergeToAB:
     case eMergeToB:
-        bSuccess = mergeFLD(fullNameA(mfi), fullNameB(mfi), "",
+        bSuccess = mergeFLD(mfi.fullNameA(), mfi.fullNameB(), "",
                             destName, bSingleFileMerge);
         break;
     case eMergeABCToDest:
         bSuccess = mergeFLD(
-            mfi.existsInA() ? fullNameA(mfi) : QString(""),
-            mfi.existsInB() ? fullNameB(mfi) : QString(""),
-            mfi.existsInC() ? fullNameC(mfi) : QString(""),
+            mfi.existsInA() ? mfi.fullNameA() : QString(""),
+            mfi.existsInB() ? mfi.fullNameB() : QString(""),
+            mfi.existsInC() ? mfi.fullNameC() : QString(""),
             destName, bSingleFileMerge);
         break;
     default:
@@ -2789,9 +2821,9 @@ void DirectoryMergeWindow::mergeCurrentFile()
             d->m_currentIndexForOperation = d->m_mergeItemList.begin();
             bool bDummy = false;
             d->mergeFLD(
-                mfi.existsInA() ? mfi.m_pFileInfoA->absoluteFilePath() : QString(""),
-                mfi.existsInB() ? mfi.m_pFileInfoB->absoluteFilePath() : QString(""),
-                mfi.existsInC() ? mfi.m_pFileInfoC->absoluteFilePath() : QString(""),
+                mfi.existsInA() ? mfi.getFileInfoA()->absoluteFilePath() : QString(""),
+                mfi.existsInB() ? mfi.getFileInfoB()->absoluteFilePath() : QString(""),
+                mfi.existsInC() ? mfi.getFileInfoC()->absoluteFilePath() : QString(""),
                 d->fullNameDest(mfi),
                 bDummy);
         }
@@ -3415,9 +3447,9 @@ void DirectoryMergeInfo::setInfo(
     }
 
     m_pInfoList->clear();
-    addListViewItem(i18n("A"), dirA.prettyAbsPath(), mfi.m_pFileInfoA);
-    addListViewItem(i18n("B"), dirB.prettyAbsPath(), mfi.m_pFileInfoB);
-    addListViewItem(i18n("C"), dirC.prettyAbsPath(), mfi.m_pFileInfoC);
+    addListViewItem(i18n("A"), dirA.prettyAbsPath(), mfi.getFileInfoA());
+    addListViewItem(i18n("B"), dirB.prettyAbsPath(), mfi.getFileInfoB());
+    addListViewItem(i18n("C"), dirC.prettyAbsPath(), mfi.getFileInfoC());
     if(!bHideDest)
     {
         FileAccess fiDest(dirDest.prettyAbsPath() + "/" + mfi.subPath(), true);
