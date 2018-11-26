@@ -385,6 +385,7 @@ void SourceData::FileData::copyBufFrom(const FileData& src)
     char* pBuf;
     m_size = src.m_size;
     m_pBuf = pBuf = new char[m_size + 100];
+    Q_ASSERT(src.m_pBuf != nullptr);
     memcpy(pBuf, src.m_pBuf, m_size);
 }
 
@@ -575,7 +576,11 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         if(m_pOptions->m_PreProcessorCmd.isEmpty())
         {
             // No preprocessing: Read the file directly:
-            m_normalData.readFile(fileNameIn1);
+            if(!m_normalData.readFile(fileNameIn1))
+            {
+                errors.append(i18n("Failed to read file: %1", fileNameIn1));
+                return errors;
+            }
         }
         else
         {
@@ -618,7 +623,12 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
                          "\n\nThe preprocessing command will be disabled now.", ppCmd) +
                     errorReason);
                 m_pOptions->m_PreProcessorCmd = "";
-                m_normalData.readFile(fileNameIn1);
+                if(!m_normalData.readFile(fileNameIn1))
+                {
+                    errors.append(i18n("Failed to read file: %1", fileNameIn1));
+                    return errors;
+                }
+
                 pEncoding1 = m_pEncoding;
             }
         }
@@ -664,7 +674,11 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
                          "\n\nThe line-matching-preprocessing command will be disabled now.", ppCmd) +
                     errorReason);
                 m_pOptions->m_LineMatchingPreProcessorCmd = "";
-                m_lmppData.readFile(fileNameIn2);
+                if(!m_lmppData.readFile(fileNameIn2))
+                {
+                    errors.append(i18n("Failed to read file: %1", fileNameIn2));
+                    return errors;
+                }
             }
         }
         else if(m_pOptions->m_bIgnoreComments || m_pOptions->m_bIgnoreCase)
