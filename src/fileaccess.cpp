@@ -1031,7 +1031,7 @@ bool FileAccessJobHandler::copyFile(const QString& dest)
     m_bSuccess = false;
     KIO::FileCopyJob* pJob = KIO::file_copy(m_pFileAccess->url(), destUrl, permissions, KIO::HideProgressInfo);
     connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-    connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
+    //connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
     ProgressProxy::enterEventLoop(pJob,
                                   i18n("Copying file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest));
 
