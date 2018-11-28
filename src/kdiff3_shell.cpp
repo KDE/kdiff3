@@ -170,7 +170,7 @@ void KDiff3Shell::applyNewToolbarConfig()
 
 void KDiff3Shell::slotNewInstance(const QString& fn1, const QString& fn2, const QString& fn3)
 {
-    KDiff3Shell* pKDiff3Shell = new KDiff3Shell(false);
+    static KDiff3Shell* pKDiff3Shell = new KDiff3Shell(false);
     ((KDiff3App*)pKDiff3Shell->m_part->widget())->completeInit(fn1, fn2, fn3);
 }
 
