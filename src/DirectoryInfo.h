@@ -16,6 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with KDiff3.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef DIRECTORYINFO_H
+#define DIRECTORYINFO_H
 
 #include "fileaccess.h"
 
@@ -43,3 +45,5 @@ class DirectoryInfo
       FileAccess m_dirA, m_dirB, m_dirC;
       FileAccess m_dirDest;
 };
+
+#endif

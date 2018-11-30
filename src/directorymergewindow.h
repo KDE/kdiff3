@@ -31,23 +31,6 @@ class KToggleAction;
 class KActionCollection;
 class TotalDiffStatus;
 
-enum e_MergeOperation
-{
-   eTitleId,
-   eNoOperation,
-   // Operations in sync mode (with only two directories):
-   eCopyAToB, eCopyBToA, eDeleteA, eDeleteB, eDeleteAB, eMergeToA, eMergeToB, eMergeToAB,
-
-   // Operations in merge mode (with two or three directories)
-   eCopyAToDest, eCopyBToDest, eCopyCToDest, eDeleteFromDest, eMergeABCToDest,
-   eMergeABToDest,
-   eConflictingFileTypes, // Error
-   eChangedAndDeleted,    // Error
-   eConflictingAges       // Equal age but files are not!
-};
-
-enum e_Age { eNew, eMiddle, eOld, eNotThere, eAgeEnd };
-
 class MergeFileInfos;
 
 class DirectoryMergeWindow : public QTreeView

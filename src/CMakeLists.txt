@@ -21,6 +21,7 @@ set(kdiff3part_PART_SRCS
    smalldialogs.cpp 
    progress.cpp
    ProgressProxyExtender.cpp
+   MergeFileInfos.cpp
    Utils.cpp
    selection.cpp
    cvsignorelist.cpp )
