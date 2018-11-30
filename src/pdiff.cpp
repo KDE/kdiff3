@@ -2279,7 +2279,7 @@ void KDiff3App::slotNoRelevantChangesDetected()
         {
             /*
                 QProcess doesn't check for single quotes and uses non-standard escaping syntax for double quotes.
-                    The distinction between single and double quotes is purly a command shell issue. So
+                    The distinction between single and double quotes is purely a command shell issue. So
                     we split the command string ourselves.
             */
             QStringList args;

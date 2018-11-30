@@ -258,7 +258,7 @@ void OpenDialog::internalSlot(int i)
 }
 
 // Clear the output-filename when any input-filename changed,
-// because users forgot to change the output and accidently overwrote it with
+// because users forgot to change the output and accidentally overwrote it with
 // wrong data during a merge.
 void OpenDialog::inputFilenameChanged()
 {

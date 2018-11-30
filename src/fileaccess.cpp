@@ -112,7 +112,7 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     if(!m_url.scheme().isEmpty())
         m_url.setScheme(QLatin1Literal("file"));
 
-    if(m_url.isLocalFile() || !m_url.isValid() ) // Treate invalid urls as local files.
+    if(m_url.isLocalFile() || !m_url.isValid() ) // Treat invalid urls as local files.
     {
         m_fileInfo = QFileInfo(m_url.path());
         m_pParent = nullptr;
@@ -213,7 +213,7 @@ void FileAccess::addPath(const QString& txt)
        S_IXGRP    00010     group has execute permission
        S_IRWXO    00007     mask for permissions for others (not in group)
        S_IROTH    00004     others have read permission
-       S_IWOTH    00002     others have write permisson
+       S_IWOTH    00002     others have write permission
        S_IXOTH    00001     others have execute permission
 */
 void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
@@ -281,7 +281,7 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
     
     m_name = m_url.fileName();
     m_bExists = m_fileInfo.exists();
-    //insure modifcation time is initialized if it wasn't already.
+    //insure modification time is initialized if it wasn't already.
     if(m_modificationTime.isNull())
         m_modificationTime = m_fileInfo.lastModified();
 

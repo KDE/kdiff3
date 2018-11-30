@@ -58,7 +58,7 @@ public:
    QDateTime lastModified() const;
 
    QString fileName(bool needTmp = false) const; // Just the name-part of the path, without parent directories
-   QString fileRelPath() const; // The path relitive to base comparison directory
+   QString fileRelPath() const; // The path relative to base comparison directory
    QString prettyAbsPath() const;
    QUrl url() const;
    void setUrl(const QUrl inUrl) { m_url = inUrl; }

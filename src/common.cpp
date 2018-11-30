@@ -100,7 +100,7 @@ QString safeStringJoin(const QStringList& sl, char sepChar, char metaChar)
 {
     // Join the strings in the list, using the separator ','
     // If a string contains the separator character, it will be replaced with "\,".
-    // Any occurences of "\" (one backslash) will be replaced with "\\" (2 backslashes)
+    // Any occurrences of "\" (one backslash) will be replaced with "\\" (2 backslashes)
 
     Q_ASSERT(sepChar != metaChar);
 

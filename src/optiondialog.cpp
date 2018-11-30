@@ -1499,7 +1499,7 @@ public:
 void OptionDialog::setupRegionalPage(void)
 {
     /*
-     TODO: What is this line supposed to do besides leak memmory? Intruduced as is in .91 no explaination
+     TODO: What is this line supposed to do besides leak memory? Introduced as is in .91 no explanation
         new Utf8BOMCodec(); 
    */
 

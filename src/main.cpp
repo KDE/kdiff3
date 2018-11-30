@@ -52,7 +52,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
             }
         }
     }
-    //support our own old preferances this is obsolete
+    //support our own old preferences this is obsolete
     QStringList sl = ignorableOptionsLine.split(',');
 
     if(!sl.isEmpty())
@@ -146,9 +146,9 @@ int main(int argc, char* argv[])
     cmdLineParser->addPositionalArgument(QLatin1String("[File3]"), i18n("file3 to open"));
 
     /*
-        Don't use QCommandLineParser::process as it auto terminates the program if an option is not reconized.
+        Don't use QCommandLineParser::process as it auto terminates the program if an option is not recognized.
         Further more errors are directed to the console alone if not running on windows. This makes for a bad
-        user experiance when run from a graphical interface such as kde. Don't assume that this only happens
+        user experience when run from a graphical interface such as kde. Don't assume that this only happens
         when running from a commandline.
     */
     if(!cmdLineParser->parse(QCoreApplication::arguments())) {

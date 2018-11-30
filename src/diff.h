@@ -48,10 +48,10 @@ struct LineData
    const QChar* pFirstNonWhiteChar;
    int size;
 
-   LineData(){ pLine=nullptr; pFirstNonWhiteChar=nullptr; size=0; /*occurences=0;*/ 
+   LineData(){ pLine=nullptr; pFirstNonWhiteChar=nullptr; size=0; /*occurrences=0;*/ 
                bContainsPureComment=false; }
    int width(int tabSize) const;  // Calcs width considering tabs.
-   //int occurences;
+   //int occurrences;
    bool whiteLine() const { return pFirstNonWhiteChar-pLine == size; }
    bool bContainsPureComment;
 };

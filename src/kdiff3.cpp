@@ -506,7 +506,7 @@ void KDiff3App::initActions(KActionCollection* ac)
 {
     if(ac == nullptr){
         KMessageBox::error(nullptr, "actionCollection==0");
-        exit(-1);//we cann't recover from this.
+        exit(-1);//we cannot recover from this.
     }
     fileOpen = KStandardAction::open(this, SLOT(slotFileOpen()), ac);
     fileOpen->setStatusTip(i18n("Opens documents for comparison..."));
