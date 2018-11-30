@@ -1022,11 +1022,11 @@ void KDiff3App::slotFileOpen()
     for(;;)
     {
         OpenDialog d(this,
-                     QDir::toNativeSeparators(m_bDirCompare ? m_pDirectoryMergeWindow->getDirNameA() : m_sd1.isFromBuffer() ? QString("") : m_sd1.getAliasName()),
-                     QDir::toNativeSeparators(m_bDirCompare ? m_pDirectoryMergeWindow->getDirNameB() : m_sd2.isFromBuffer() ? QString("") : m_sd2.getAliasName()),
-                     QDir::toNativeSeparators(m_bDirCompare ? m_pDirectoryMergeWindow->getDirNameC() : m_sd3.isFromBuffer() ? QString("") : m_sd3.getAliasName()),
-                     m_bDirCompare ? !m_pDirectoryMergeWindow->getDirNameDest().isEmpty() : !m_outputFilename.isEmpty(),
-                     QDir::toNativeSeparators(m_bDirCompare ? m_pDirectoryMergeWindow->getDirNameDest() : m_bDefaultFilename ? QString("") : m_outputFilename),
+                     QDir::toNativeSeparators(m_bDirCompare ? m_sd1.getFilename() : m_sd1.isFromBuffer() ? QString("") : m_sd1.getAliasName()),
+                     QDir::toNativeSeparators(m_bDirCompare ? m_sd2.getFilename() : m_sd2.isFromBuffer() ? QString("") : m_sd2.getAliasName()),
+                     QDir::toNativeSeparators(m_bDirCompare ? m_sd3.getFilename() : m_sd3.isFromBuffer() ? QString("") : m_sd3.getAliasName()),
+                     m_bDirCompare ? m_bDefaultFilename : !m_outputFilename.isEmpty(),
+                     QDir::toNativeSeparators(m_bDefaultFilename ? QString("") : m_outputFilename),
                      SLOT(slotConfigure()), &m_pOptionDialog->m_options);
         int status = d.exec();
         if(status == QDialog::Accepted)
@@ -1869,6 +1869,7 @@ bool KDiff3App::improveFilenames(bool bCreateNewInstance)
         else
         {
             FileAccess destDir;
+            
             if(!m_bDefaultFilename) destDir = f4;
             m_pDirectoryMergeSplitter->show();
             if(m_pMainWidget != nullptr) m_pMainWidget->hide();
@@ -1879,7 +1880,7 @@ bool KDiff3App::improveFilenames(bool bCreateNewInstance)
                 destDir, // Destdirname
                 !m_outputFilename.isEmpty());
 
-            m_bDirCompare = true; // This seems redundant but it might have been reset during full analysis.
+            m_bDirCompare = true; //FIXME This seems redundant but it might have been reset during full analysis.
 
             if(bSuccess)
             {

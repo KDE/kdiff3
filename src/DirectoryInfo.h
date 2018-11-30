@@ -36,11 +36,17 @@ class DirectoryInfo
           m_dirDest = dirDest;
       }
 
-      FileAccess dirA(void) const { return m_dirA; }
-      FileAccess dirB(void) const { return m_dirB; }
-      FileAccess dirC(void) const { return m_dirC; }
-      FileAccess destDir(void) const { return m_dirDest; }
-    
+      inline FileAccess dirA(void) const { return m_dirA; }
+      inline FileAccess dirB(void) const { return m_dirB; }
+      inline FileAccess dirC(void) const { return m_dirC; }
+      inline FileAccess destDir(void) const
+      {
+          if(m_dirDest.isValid())
+              return m_dirDest;
+          else
+              return m_dirC.isValid() ? m_dirC : m_dirB;
+      }
+
     private:
       FileAccess m_dirA, m_dirB, m_dirC;
       FileAccess m_dirDest;

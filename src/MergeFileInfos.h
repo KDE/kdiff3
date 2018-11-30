@@ -14,10 +14,11 @@
 
 #include "fileaccess.h"
 #include "diff.h"
+#include "DirectoryInfo.h"
 
 #include <QString>
 
-class DirectoryInfo;
+//class DirectoryInfo;
 
 enum e_MergeOperation
 {
@@ -86,14 +87,17 @@ class MergeFileInfos
 
     QString fullNameA(void) const;
     QString fullNameB(void) const;
-
     QString fullNameC(void) const;
+    QString fullNameDest(void) const;
 
-    void setDirectorInfo(QSharedPointer<DirectoryInfo> dirInfo)
-    {
-        m_dirInfo = dirInfo;
-    }
-
+    inline QSharedPointer<DirectoryInfo> getDirectoryInfo(void) const { return m_dirInfo; }
+    void setDirectorInfo(QSharedPointer<DirectoryInfo> dirInfo) { m_dirInfo = dirInfo; }
+    
+    inline QString getDirNameA() const { return getDirectoryInfo()->dirA().prettyAbsPath(); }
+    inline QString getDirNameB() const { return getDirectoryInfo()->dirB().prettyAbsPath(); }
+    inline QString getDirNameC() const { return getDirectoryInfo()->dirC().prettyAbsPath(); }
+    inline QString getDirNameDest() const { return getDirectoryInfo()->destDir().prettyAbsPath(); }
+  
   private:
     MergeFileInfos* m_pParent;
     FileAccess* m_pFileInfoA;

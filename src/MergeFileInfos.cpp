@@ -119,3 +119,13 @@ void MergeFileInfos::sort(Qt::SortOrder order)
     for(int i = 0; i < m_children.count(); ++i)
         m_children[i]->sort(order);
 }
+
+QString MergeFileInfos::fullNameDest(void) const
+{
+    if(m_dirInfo->destDir().prettyAbsPath() == m_dirInfo->dirC().prettyAbsPath())
+        return fullNameC();
+    else if(m_dirInfo->destDir().prettyAbsPath() == m_dirInfo->dirB().prettyAbsPath())
+        return fullNameB();
+    else
+        return m_dirInfo->destDir().absoluteFilePath() + "/" + subPath();
+}

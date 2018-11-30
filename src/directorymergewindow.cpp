@@ -190,23 +190,12 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     }
     MergeFileInfos* m_pRoot;
 
-    QString fullNameDest(const MergeFileInfos& mfi)
-    {
-        if(m_dirDestInternal.prettyAbsPath() == m_dirC.prettyAbsPath())
-            return mfi.fullNameC();
-        else if(m_dirDestInternal.prettyAbsPath() == m_dirB.prettyAbsPath())
-            return mfi.fullNameB();
-        else
-            return m_dirDestInternal.absoluteFilePath() + "/" + mfi.subPath();
-    }
-
     static void setPixmaps(MergeFileInfos& mfi, bool);
 
     FileAccess m_dirA;
     FileAccess m_dirB;
     FileAccess m_dirC;
     FileAccess m_dirDest;
-    FileAccess m_dirDestInternal;
     Options* m_pOptions;
 
     void calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
@@ -651,10 +640,6 @@ DirectoryMergeWindow::~DirectoryMergeWindow()
     delete d;
 }
 
-QString DirectoryMergeWindow::getDirNameA() { return d->m_dirA.prettyAbsPath(); }
-QString DirectoryMergeWindow::getDirNameB() { return d->m_dirB.prettyAbsPath(); }
-QString DirectoryMergeWindow::getDirNameC() { return d->m_dirC.prettyAbsPath(); }
-QString DirectoryMergeWindow::getDirNameDest() { return d->m_dirDest.prettyAbsPath(); }
 void DirectoryMergeWindow::setDirectoryMergeInfo(DirectoryMergeInfo* p) { d->m_pDirectoryMergeInfo = p; }
 bool DirectoryMergeWindow::isDirectoryMergeInProgress() { return d->m_bRealMergeStarted; }
 bool DirectoryMergeWindow::isSyncMode() { return d->m_bSyncMode; }
@@ -894,7 +879,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(QSharedPoi
 {
     t_DirectoryList::iterator dirIterator;
 
-    if(m_dirA.isValid())
+    if(dirInfo->dirA().isValid())
     {
         for(dirIterator = m_dirListA.begin(); dirIterator != m_dirListA.end(); ++dirIterator)
         {
@@ -905,7 +890,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(QSharedPoi
         }
     }
 
-    if(m_dirB.isValid())
+    if(dirInfo->dirB().isValid())
     {
         for(dirIterator = m_dirListB.begin(); dirIterator != m_dirListB.end(); ++dirIterator)
         {
@@ -916,7 +901,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(QSharedPoi
         }
     }
 
-    if(m_dirC.isValid())
+    if(dirInfo->dirC().isValid())
     {
         for(dirIterator = m_dirListC.begin(); dirIterator != m_dirListC.end(); ++dirIterator)
         {
@@ -1005,32 +990,32 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
     // Check if all input directories exist and are valid. The dest dir is not tested now.
     // The test will happen only when we are going to write to it.
-    if(!m_dirA.isDir() || !m_dirB.isDir() ||
-       (m_dirC.isValid() && !m_dirC.isDir()))
+    if(!dirA.isDir() || !dirB.isDir() ||
+       (dirC.isValid() && !dirC.isDir()))
     {
         QString text(i18n("Opening of directories failed:"));
         text += "\n\n";
         if(!dirA.isDir())
         {
-            text += i18n("Dir A \"%1\" does not exist or is not a directory.\n", m_dirA.prettyAbsPath());
+            text += i18n("Dir A \"%1\" does not exist or is not a directory.\n", dirA.prettyAbsPath());
         }
 
         if(!dirB.isDir())
         {
-            text += i18n("Dir B \"%1\" does not exist or is not a directory.\n", m_dirB.prettyAbsPath());
+            text += i18n("Dir B \"%1\" does not exist or is not a directory.\n", dirB.prettyAbsPath());
         }
 
-        if(m_dirC.isValid() && !m_dirC.isDir())
+        if(dirC.isValid() && !dirC.isDir())
         {
-            text += i18n("Dir C \"%1\" does not exist or is not a directory.\n", m_dirC.prettyAbsPath());
+            text += i18n("Dir C \"%1\" does not exist or is not a directory.\n", dirC.prettyAbsPath());
         }
 
         KMessageBox::sorry(q, text, i18n("Directory Open Error"));
         return false;
     }
 
-    if(m_dirC.isValid() &&
-       (m_dirDest.prettyAbsPath() == m_dirA.prettyAbsPath() || m_dirDest.prettyAbsPath() == m_dirB.prettyAbsPath()))
+    if(dirC.isValid() &&
+       (dirDest.prettyAbsPath() == dirA.prettyAbsPath() || dirDest.prettyAbsPath() == dirB.prettyAbsPath()))
     {
         KMessageBox::error(q,
                            i18n("The destination directory must not be the same as A or B when "
@@ -1042,17 +1027,15 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     m_bScanning = true;
     emit q->statusBarMessage(i18n("Scanning directories..."));
 
-    m_bSyncMode = m_pOptions->m_bDmSyncMode && !m_dirC.isValid() && !m_dirDest.isValid();
+    m_bSyncMode = m_pOptions->m_bDmSyncMode && !dirC.isValid() && !dirDest.isValid();
 
-    if(m_dirDest.isValid())
-        m_dirDestInternal = m_dirDest;
-    else
-        m_dirDestInternal = m_dirC.isValid() ? m_dirC : m_dirB;
+    if(!m_dirDest.isValid())
+        m_dirDest = dirDest = dirC.isValid() ? dirC : dirB;
 
     m_fileMergeMap.clear();
     s_eCaseSensitivity = m_bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
     // calc how many directories will be read:
-    double nofScans = (m_dirA.isValid() ? 1 : 0) + (m_dirB.isValid() ? 1 : 0) + (m_dirC.isValid() ? 1 : 0);
+    double nofScans = (dirA.isValid() ? 1 : 0) + (dirB.isValid() ? 1 : 0) + (dirC.isValid() ? 1 : 0);
     int currentScan = 0;
 
     //TODO   setColumnWidthMode(s_UnsolvedCol, Q3ListView::Manual);
@@ -1071,26 +1054,26 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     m_dirListA.clear();
     m_dirListB.clear();
     m_dirListC.clear();
-    if(m_dirA.isValid())
+    if(dirA.isValid())
     {
         pp.setInformation(i18n("Reading Directory A"));
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessA = m_dirA.listDir(&m_dirListA,
+        bListDirSuccessA = dirA.listDir(&m_dirListA,
                                           m_pOptions->m_bDmRecursiveDirs, m_pOptions->m_bDmFindHidden,
                                           m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
                                           m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
                                           m_pOptions->m_bDmUseCvsIgnore);
     }
 
-    if(m_dirB.isValid())
+    if(dirB.isValid())
     {
         pp.setInformation(i18n("Reading Directory B"));
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessB = m_dirB.listDir(&m_dirListB,
+        bListDirSuccessB = dirB.listDir(&m_dirListB,
                                           m_pOptions->m_bDmRecursiveDirs, m_pOptions->m_bDmFindHidden,
                                           m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
                                           m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
@@ -1098,13 +1081,13 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     }
 
     e_MergeOperation eDefaultMergeOp;
-    if(m_dirC.isValid())
+    if(dirC.isValid())
     {
         pp.setInformation(i18n("Reading Directory C"));
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessC = m_dirC.listDir(&m_dirListC,
+        bListDirSuccessC = dirC.listDir(&m_dirListC,
                                           m_pOptions->m_bDmRecursiveDirs, m_pOptions->m_bDmFindHidden,
                                           m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
                                           m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
@@ -1121,9 +1104,9 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     if(!bListDirSuccessA || !bListDirSuccessB || !bListDirSuccessC)
     {
         QString s = i18n("Some subdirectories were not readable in");
-        if(!bListDirSuccessA) s += "\nA: " + m_dirA.prettyAbsPath();
-        if(!bListDirSuccessB) s += "\nB: " + m_dirB.prettyAbsPath();
-        if(!bListDirSuccessC) s += "\nC: " + m_dirC.prettyAbsPath();
+        if(!bListDirSuccessA) s += "\nA: " + dirA.prettyAbsPath();
+        if(!bListDirSuccessB) s += "\nB: " + dirB.prettyAbsPath();
+        if(!bListDirSuccessC) s += "\nC: " + dirC.prettyAbsPath();
         s += "\n";
         s += i18n("Check the permissions of the subdirectories.");
         bContinue = KMessageBox::Continue == KMessageBox::warningContinueCancel(q, s);
@@ -1223,6 +1206,11 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     return true;
 }
 
+inline QString DirectoryMergeWindow::getDirNameA() const { return d->m_pRoot->getDirectoryInfo()->dirA().prettyAbsPath(); }
+inline QString DirectoryMergeWindow::getDirNameB() const { return d->m_pRoot->getDirectoryInfo()->dirB().prettyAbsPath(); }
+inline QString DirectoryMergeWindow::getDirNameC() const { return d->m_pRoot->getDirectoryInfo()->dirC().prettyAbsPath(); }
+inline QString DirectoryMergeWindow::getDirNameDest() const { return d->m_pRoot->getDirectoryInfo()->destDir().prettyAbsPath(); }
+
 void DirectoryMergeWindow::onExpanded()
 {
     resizeColumnToContents(s_NameCol);
@@ -1277,12 +1265,11 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
 {
     if((e->QInputEvent::modifiers() & Qt::ControlModifier) != 0)
     {
-        bool bThreeDirs = d->m_dirC.isValid();
-
         MergeFileInfos* pMFI = d->getMFI(currentIndex());
-
         if(pMFI == nullptr)
             return;
+        
+        bool bThreeDirs = pMFI->getDirectoryInfo()->dirC().isValid();
         bool bMergeMode = bThreeDirs || !d->m_bSyncMode;
         bool bFTConflict = pMFI == nullptr ? false : pMFI->conflictingFileTypes();
 
@@ -1821,12 +1808,12 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI == nullptr)
         return;
-    MergeFileInfos& mfi = *pMFI;
-    bool bCheckC = m_dirC.isValid();
+    
+    bool bCheckC = pMFI->getDirectoryInfo()->dirC().isValid();
     bool bCopyNewer = m_pOptions->m_bDmCopyNewer;
-    bool bOtherDest = !((m_dirDestInternal.absoluteFilePath() == m_dirA.absoluteFilePath()) ||
-                        (m_dirDestInternal.absoluteFilePath() == m_dirB.absoluteFilePath()) ||
-                        (bCheckC && m_dirDestInternal.absoluteFilePath() == m_dirC.absoluteFilePath()));
+    bool bOtherDest = !((pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirA().absoluteFilePath()) ||
+                        (pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirB().absoluteFilePath()) ||
+                        (bCheckC && pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirC().absoluteFilePath()));
 
     if(eDefaultMergeOp == eMergeABCToDest && !bCheckC) {
         eDefaultMergeOp = eMergeABToDest;
@@ -1840,27 +1827,27 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
     {
         if(!bCheckC)
         {
-            if(mfi.m_bEqualAB)
+            if(pMFI->m_bEqualAB)
             {
                 setMergeOperation(mi, bOtherDest ? eCopyBToDest : eNoOperation);
             }
-            else if(mfi.existsInA() && mfi.existsInB())
+            else if(pMFI->existsInA() && pMFI->existsInB())
             {
-                if(!bCopyNewer || mfi.dirA())
+                if(!bCopyNewer || pMFI->dirA())
                     setMergeOperation(mi, eDefaultMergeOp);
-                else if(bCopyNewer && mfi.m_bConflictingAges)
+                else if(bCopyNewer && pMFI->m_bConflictingAges)
                 {
                     setMergeOperation(mi, eConflictingAges);
                 }
                 else
                 {
-                    if(mfi.m_ageA == eNew)
+                    if(pMFI->m_ageA == eNew)
                         setMergeOperation(mi, eDefaultMergeOp == eMergeToAB ? eCopyAToB : eCopyAToDest);
                     else
                         setMergeOperation(mi, eDefaultMergeOp == eMergeToAB ? eCopyBToA : eCopyBToDest);
                 }
             }
-            else if(!mfi.existsInA() && mfi.existsInB())
+            else if(!pMFI->existsInA() && pMFI->existsInB())
             {
                 if(eDefaultMergeOp == eMergeABToDest)
                     setMergeOperation(mi, eCopyBToDest);
@@ -1869,7 +1856,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
                 else
                     setMergeOperation(mi, eCopyBToA);
             }
-            else if(mfi.existsInA() && !mfi.existsInB())
+            else if(pMFI->existsInA() && !pMFI->existsInB())
             {
                 if(eDefaultMergeOp == eMergeABToDest)
                     setMergeOperation(mi, eCopyAToDest);
@@ -1878,69 +1865,69 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
                 else
                     setMergeOperation(mi, eCopyAToB);
             }
-            else //if ( !mfi.existsInA() && !mfi.existsInB() )
+            else //if ( !pMFI->existsInA() && !pMFI->existsInB() )
             {
                 setMergeOperation(mi, eNoOperation);
             }
         }
         else
         {
-            if(mfi.m_bEqualAB && mfi.m_bEqualAC)
+            if(pMFI->m_bEqualAB && pMFI->m_bEqualAC)
             {
                 setMergeOperation(mi, bOtherDest ? eCopyCToDest : eNoOperation);
             }
-            else if(mfi.existsInA() && mfi.existsInB() && mfi.existsInC())
+            else if(pMFI->existsInA() && pMFI->existsInB() && pMFI->existsInC())
             {
-                if(mfi.m_bEqualAB)
+                if(pMFI->m_bEqualAB)
                     setMergeOperation(mi, eCopyCToDest);
-                else if(mfi.m_bEqualAC)
+                else if(pMFI->m_bEqualAC)
                     setMergeOperation(mi, eCopyBToDest);
-                else if(mfi.m_bEqualBC)
+                else if(pMFI->m_bEqualBC)
                     setMergeOperation(mi, eCopyCToDest);
                 else
                     setMergeOperation(mi, eMergeABCToDest);
             }
-            else if(mfi.existsInA() && mfi.existsInB() && !mfi.existsInC())
+            else if(pMFI->existsInA() && pMFI->existsInB() && !pMFI->existsInC())
             {
-                if(mfi.m_bEqualAB)
+                if(pMFI->m_bEqualAB)
                     setMergeOperation(mi, eDeleteFromDest);
                 else
                     setMergeOperation(mi, eChangedAndDeleted);
             }
-            else if(mfi.existsInA() && !mfi.existsInB() && mfi.existsInC())
+            else if(pMFI->existsInA() && !pMFI->existsInB() && pMFI->existsInC())
             {
-                if(mfi.m_bEqualAC)
+                if(pMFI->m_bEqualAC)
                     setMergeOperation(mi, eDeleteFromDest);
                 else
                     setMergeOperation(mi, eChangedAndDeleted);
             }
-            else if(!mfi.existsInA() && mfi.existsInB() && mfi.existsInC())
+            else if(!pMFI->existsInA() && pMFI->existsInB() && pMFI->existsInC())
             {
-                if(mfi.m_bEqualBC)
+                if(pMFI->m_bEqualBC)
                     setMergeOperation(mi, eCopyCToDest);
                 else
                     setMergeOperation(mi, eMergeABCToDest);
             }
-            else if(!mfi.existsInA() && !mfi.existsInB() && mfi.existsInC())
+            else if(!pMFI->existsInA() && !pMFI->existsInB() && pMFI->existsInC())
             {
                 setMergeOperation(mi, eCopyCToDest);
             }
-            else if(!mfi.existsInA() && mfi.existsInB() && !mfi.existsInC())
+            else if(!pMFI->existsInA() && pMFI->existsInB() && !pMFI->existsInC())
             {
                 setMergeOperation(mi, eCopyBToDest);
             }
-            else if(mfi.existsInA() && !mfi.existsInB() && !mfi.existsInC())
+            else if(pMFI->existsInA() && !pMFI->existsInB() && !pMFI->existsInC())
             {
                 setMergeOperation(mi, eDeleteFromDest);
             }
-            else //if ( !mfi.existsInA() && !mfi.existsInB() && !mfi.existsInC() )
+            else //if ( !pMFI->existsInA() && !pMFI->existsInB() && !pMFI->existsInC() )
             {
                 setMergeOperation(mi, eNoOperation);
             }
         }
 
         // Now check if file/dir-types fit.
-        if(mfi.conflictingFileTypes())
+        if(pMFI->conflictingFileTypes())
         {
             setMergeOperation(mi, eConflictingFileTypes);
         }
@@ -1960,27 +1947,27 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
         case eNoOperation:
             break;
         case eCopyAToB:
-            if(!mfi.existsInA()) {
+            if(!pMFI->existsInA()) {
                 eMO = eDeleteB;
             }
             break;
         case eCopyBToA:
-            if(!mfi.existsInB()) {
+            if(!pMFI->existsInB()) {
                 eMO = eDeleteA;
             }
             break;
         case eCopyAToDest:
-            if(!mfi.existsInA()) {
+            if(!pMFI->existsInA()) {
                 eMO = eDeleteFromDest;
             }
             break;
         case eCopyBToDest:
-            if(!mfi.existsInB()) {
+            if(!pMFI->existsInB()) {
                 eMO = eDeleteFromDest;
             }
             break;
         case eCopyCToDest:
-            if(!mfi.existsInC()) {
+            if(!pMFI->existsInC()) {
                 eMO = eDeleteFromDest;
             }
             break;
@@ -2018,7 +2005,7 @@ void DirectoryMergeWindow::currentChanged(const QModelIndex& current, const QMod
     if(pMFI == nullptr)
         return;
 
-    d->m_pDirectoryMergeInfo->setInfo(d->m_dirA, d->m_dirB, d->m_dirC, d->m_dirDestInternal, *pMFI);
+    d->m_pDirectoryMergeInfo->setInfo(pMFI->getDirectoryInfo()->dirA(), pMFI->getDirectoryInfo()->dirB(), pMFI->getDirectoryInfo()->dirC(), pMFI->getDirectoryInfo()->destDir(), *pMFI);
 }
 
 void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
@@ -2030,8 +2017,7 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
     MergeFileInfos* pMFI = d->getMFI(mi);
     if(pMFI == nullptr)
         return;
-    MergeFileInfos& mfi = *pMFI;
-
+        
     if(c == s_OpCol)
     {
         bool bThreeDirs = d->m_dirC.isValid();
@@ -2041,32 +2027,32 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
         {
             m.addAction(d->m_pDirCurrentDoNothing);
             int count = 0;
-            if(mfi.existsInA()) {
+            if(pMFI->existsInA()) {
                 m.addAction(d->m_pDirCurrentChooseA);
                 ++count;
             }
-            if(mfi.existsInB()) {
+            if(pMFI->existsInB()) {
                 m.addAction(d->m_pDirCurrentChooseB);
                 ++count;
             }
-            if(mfi.existsInC()) {
+            if(pMFI->existsInC()) {
                 m.addAction(d->m_pDirCurrentChooseC);
                 ++count;
             }
-            if(!mfi.conflictingFileTypes() && count > 1) m.addAction(d->m_pDirCurrentMerge);
+            if(!pMFI->conflictingFileTypes() && count > 1) m.addAction(d->m_pDirCurrentMerge);
             m.addAction(d->m_pDirCurrentDelete);
         }
         else if(d->m_bSyncMode)
         {
             m.addAction(d->m_pDirCurrentSyncDoNothing);
-            if(mfi.existsInA()) m.addAction(d->m_pDirCurrentSyncCopyAToB);
-            if(mfi.existsInB()) m.addAction(d->m_pDirCurrentSyncCopyBToA);
-            if(mfi.existsInA()) m.addAction(d->m_pDirCurrentSyncDeleteA);
-            if(mfi.existsInB()) m.addAction(d->m_pDirCurrentSyncDeleteB);
-            if(mfi.existsInA() && mfi.existsInB())
+            if(pMFI->existsInA()) m.addAction(d->m_pDirCurrentSyncCopyAToB);
+            if(pMFI->existsInB()) m.addAction(d->m_pDirCurrentSyncCopyBToA);
+            if(pMFI->existsInA()) m.addAction(d->m_pDirCurrentSyncDeleteA);
+            if(pMFI->existsInB()) m.addAction(d->m_pDirCurrentSyncDeleteB);
+            if(pMFI->existsInA() && pMFI->existsInB())
             {
                 m.addAction(d->m_pDirCurrentSyncDeleteAAndB);
-                if(!mfi.conflictingFileTypes())
+                if(!pMFI->conflictingFileTypes())
                 {
                     m.addAction(d->m_pDirCurrentSyncMergeToA);
                     m.addAction(d->m_pDirCurrentSyncMergeToB);
@@ -2077,13 +2063,13 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
         else
         {
             m.addAction(d->m_pDirCurrentDoNothing);
-            if(mfi.existsInA()) {
+            if(pMFI->existsInA()) {
                 m.addAction(d->m_pDirCurrentChooseA);
             }
-            if(mfi.existsInB()) {
+            if(pMFI->existsInB()) {
                 m.addAction(d->m_pDirCurrentChooseB);
             }
-            if(!mfi.conflictingFileTypes() && mfi.existsInA() && mfi.existsInB()) m.addAction(d->m_pDirCurrentMerge);
+            if(!pMFI->conflictingFileTypes() && pMFI->existsInA() && pMFI->existsInB()) m.addAction(d->m_pDirCurrentMerge);
             m.addAction(d->m_pDirCurrentDelete);
         }
 
@@ -2092,16 +2078,16 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
     else if(c == s_ACol || c == s_BCol || c == s_CCol)
     {
         QString itemPath;
-        if(c == s_ACol && mfi.existsInA()) {
-            itemPath = mfi.fullNameA();
+        if(c == s_ACol && pMFI->existsInA()) {
+            itemPath = pMFI->fullNameA();
         }
-        else if(c == s_BCol && mfi.existsInB())
+        else if(c == s_BCol && pMFI->existsInB())
         {
-            itemPath = mfi.fullNameB();
+            itemPath = pMFI->fullNameB();
         }
-        else if(c == s_CCol && mfi.existsInC())
+        else if(c == s_CCol && pMFI->existsInC())
         {
-            itemPath = mfi.fullNameC();
+            itemPath = pMFI->fullNameC();
         }
 
         if(!itemPath.isEmpty())
@@ -2250,21 +2236,19 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setMergeOperation(const 
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI == nullptr)
         return;
-
-    MergeFileInfos& mfi = *pMFI;
-
-    if(eMOp != mfi.m_eMergeOperation)
+    
+    if(eMOp != pMFI->m_eMergeOperation)
     {
-        mfi.m_bOperationComplete = false;
+        pMFI->m_bOperationComplete = false;
         setOpStatus(mi, eOpStatusNone);
     }
 
-    mfi.m_eMergeOperation = eMOp;
+    pMFI->m_eMergeOperation = eMOp;
     if(bRecursive)
     {
-        e_MergeOperation eChildrenMergeOp = mfi.m_eMergeOperation;
+        e_MergeOperation eChildrenMergeOp = pMFI->m_eMergeOperation;
         if(eChildrenMergeOp == eConflictingFileTypes) eChildrenMergeOp = eMergeABCToDest;
-        for(int childIdx = 0; childIdx < mfi.children().count(); ++childIdx)
+        for(int childIdx = 0; childIdx < pMFI->children().count(); ++childIdx)
         {
             calcSuggestedOperation(index(childIdx, 0, mi), eChildrenMergeOp);
         }
@@ -2366,7 +2350,7 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
         // This can happen if the same file is saved and modified and saved again. Nothing to do then.
         return;
     }
-    if(fileName == d->fullNameDest(*pMFI))
+    if(fileName == pMFI->fullNameDest())
     {
         if(pMFI->m_eMergeOperation == eMergeToAB)
         {
@@ -2448,7 +2432,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(Me
     case eCopyBToDest:
     case eCopyCToDest:
     case eDeleteFromDest:
-        destName = fullNameDest(mfi);
+        destName = mfi.fullNameDest();
         break;
     default:
         KMessageBox::error(q, i18n("Unknown merge operation. (This must never happen!)"));
@@ -2616,16 +2600,15 @@ void DirectoryMergeWindow::mergeCurrentFile()
         MergeFileInfos* pMFI = d->getMFI(currentIndex());
         if(pMFI != nullptr)
         {
-            MergeFileInfos& mfi = *pMFI;
             d->m_mergeItemList.clear();
             d->m_mergeItemList.push_back(currentIndex());
             d->m_currentIndexForOperation = d->m_mergeItemList.begin();
             bool bDummy = false;
             d->mergeFLD(
-                mfi.existsInA() ? mfi.getFileInfoA()->absoluteFilePath() : QString(""),
-                mfi.existsInB() ? mfi.getFileInfoB()->absoluteFilePath() : QString(""),
-                mfi.existsInC() ? mfi.getFileInfoC()->absoluteFilePath() : QString(""),
-                d->fullNameDest(mfi),
+                pMFI->existsInA() ? pMFI->getFileInfoA()->absoluteFilePath() : QString(""),
+                pMFI->existsInB() ? pMFI->getFileInfoB()->absoluteFilePath() : QString(""),
+                pMFI->existsInC() ? pMFI->getFileInfoC()->absoluteFilePath() : QString(""),
+                pMFI->fullNameDest(),
                 bDummy);
         }
     }
@@ -2786,14 +2769,14 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
             return;
         }
 
-        MergeFileInfos& mfi = *getMFI(miCurrent);
+        pMFI = getMFI(miCurrent);
 
-        pp.setInformation(mfi.subPath(),
+        pp.setInformation(pMFI->subPath(),
                           bSim ? nrOfCompletedSimItems : nrOfCompletedItems,
                           false // bRedrawUpdate
                           );
 
-        bSuccess = executeMergeOperation(mfi, bSingleFileMerge); // Here the real operation happens.
+        bSuccess = executeMergeOperation(*pMFI, bSingleFileMerge); // Here the real operation happens.
 
         if(bSuccess)
         {

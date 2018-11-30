@@ -63,12 +63,13 @@ public:
    void focusInEvent( QFocusEvent* e ) override;
    void focusOutEvent( QFocusEvent* e ) override;
    void contextMenuEvent( QContextMenuEvent* e ) override;
-   QString getDirNameA();
-   QString getDirNameB();
-   QString getDirNameC();
-   QString getDirNameDest();
 
-public Q_SLOTS:
+   QString getDirNameA() const;
+   QString getDirNameB() const;
+   QString getDirNameC() const;
+   QString getDirNameDest() const;
+
+ public Q_SLOTS:
    void reload();
    void mergeCurrentFile();
    void compareCurrentFile();
