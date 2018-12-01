@@ -188,6 +188,10 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         else
             return nullptr;
     }
+
+    bool isThreeWay(void) const { return rootMFI()->getDirectoryInfo()->dirC().isValid(); }
+    MergeFileInfos* rootMFI(void) const { return m_pRoot; }
+
     MergeFileInfos* m_pRoot;
 
     static void setPixmaps(MergeFileInfos& mfi, bool);
@@ -1042,11 +1046,11 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     //   setColumnWidthMode(s_SolvedCol,   Q3ListView::Manual);
     //   setColumnWidthMode(s_WhiteCol,    Q3ListView::Manual);
     //   setColumnWidthMode(s_NonWhiteCol, Q3ListView::Manual);
-    q->setColumnHidden(s_CCol, !m_dirC.isValid());
+    q->setColumnHidden(s_CCol, !dirC.isValid());
     q->setColumnHidden(s_WhiteCol, !m_pOptions->m_bDmFullAnalysis);
     q->setColumnHidden(s_NonWhiteCol, !m_pOptions->m_bDmFullAnalysis);
     q->setColumnHidden(s_UnsolvedCol, !m_pOptions->m_bDmFullAnalysis);
-    q->setColumnHidden(s_SolvedCol, !(m_pOptions->m_bDmFullAnalysis && m_dirC.isValid()));
+    q->setColumnHidden(s_SolvedCol, !(m_pOptions->m_bDmFullAnalysis && dirC.isValid()));
 
     bool bListDirSuccessA = true;
     bool bListDirSuccessB = true;
@@ -1156,7 +1160,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         int nofManualMerges = 0;
         //TODO
         for(int childIdx = 0; childIdx < rowCount(); ++childIdx)
-            calcDirStatus(m_dirC.isValid(), index(childIdx, 0, QModelIndex()),
+            calcDirStatus(dirC.isValid(), index(childIdx, 0, QModelIndex()),
                           nofFiles, nofDirs, nofEqualFiles, nofManualMerges);
 
         QString s;
@@ -1166,7 +1170,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
                  "Number of different files: %3",
                  nofDirs, nofEqualFiles, nofFiles - nofEqualFiles);
 
-        if(m_dirC.isValid())
+        if(dirC.isValid())
             s += "\n" + i18n("Number of manual merges: %1", nofManualMerges);
         KMessageBox::information(q, s);
         //
@@ -1206,10 +1210,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     return true;
 }
 
-inline QString DirectoryMergeWindow::getDirNameA() const { return d->m_pRoot->getDirectoryInfo()->dirA().prettyAbsPath(); }
-inline QString DirectoryMergeWindow::getDirNameB() const { return d->m_pRoot->getDirectoryInfo()->dirB().prettyAbsPath(); }
-inline QString DirectoryMergeWindow::getDirNameC() const { return d->m_pRoot->getDirectoryInfo()->dirC().prettyAbsPath(); }
-inline QString DirectoryMergeWindow::getDirNameDest() const { return d->m_pRoot->getDirectoryInfo()->destDir().prettyAbsPath(); }
+inline QString DirectoryMergeWindow::getDirNameA() const { return d->rootMFI()->getDirectoryInfo()->dirA().prettyAbsPath(); }
+inline QString DirectoryMergeWindow::getDirNameB() const { return d->rootMFI()->getDirectoryInfo()->dirB().prettyAbsPath(); }
+inline QString DirectoryMergeWindow::getDirNameC() const { return d->rootMFI()->getDirectoryInfo()->dirC().prettyAbsPath(); }
+inline QString DirectoryMergeWindow::getDirNameDest() const { return d->rootMFI()->getDirectoryInfo()->destDir().prettyAbsPath(); }
 
 void DirectoryMergeWindow::onExpanded()
 {
@@ -1224,7 +1228,7 @@ void DirectoryMergeWindow::slotChooseCEverywhere() { d->setAllMergeOperations(eC
 
 void DirectoryMergeWindow::slotAutoChooseEverywhere()
 {
-    e_MergeOperation eDefaultMergeOp = d->m_dirC.isValid() ? eMergeABCToDest : d->m_bSyncMode ? eMergeToAB : eMergeABToDest;
+    e_MergeOperation eDefaultMergeOp = d->isThreeWay() ? eMergeABCToDest : d->m_bSyncMode ? eMergeToAB : eMergeABToDest;
     d->setAllMergeOperations(eDefaultMergeOp);
 }
 
@@ -1247,7 +1251,7 @@ void DirectoryMergeWindow::slotCurrentChooseB() { d->setMergeOperation(currentIn
 void DirectoryMergeWindow::slotCurrentChooseC() { d->setMergeOperation(currentIndex(), eCopyCToDest); }
 void DirectoryMergeWindow::slotCurrentMerge()
 {
-    bool bThreeDirs = d->m_dirC.isValid();
+    bool bThreeDirs = d->isThreeWay();
     d->setMergeOperation(currentIndex(), bThreeDirs ? eMergeABCToDest : eMergeABToDest);
 }
 void DirectoryMergeWindow::slotCurrentDelete() { d->setMergeOperation(currentIndex(), eDeleteFromDest); }
@@ -1543,7 +1547,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
         if(mfi.m_ageC == eMiddle) mfi.m_ageC = eOld;
     }
 }
-
+//TODO move this
 static QPixmap* s_pm_dir;
 static QPixmap* s_pm_file;
 
@@ -1744,7 +1748,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
 
     q->setRootIsDecorated(true);
 
-    bool bCheckC = m_dirC.isValid();
+    bool bCheckC = isThreeWay();
 
     t_fileMergeMap::iterator j;
     int nrOfFiles = m_fileMergeMap.size();
@@ -2020,7 +2024,7 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
         
     if(c == s_OpCol)
     {
-        bool bThreeDirs = d->m_dirC.isValid();
+        bool bThreeDirs = d->isThreeWay();
 
         QMenu m(this);
         if(bThreeDirs)
@@ -3314,7 +3318,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
     bool bShowOnlyInA = d->m_pDirShowFilesOnlyInA->isChecked();
     bool bShowOnlyInB = d->m_pDirShowFilesOnlyInB->isChecked();
     bool bShowOnlyInC = d->m_pDirShowFilesOnlyInC->isChecked();
-    bool bThreeDirs = d->m_dirC.isValid();
+    bool bThreeDirs = d->isThreeWay();
     d->m_selection1Index = QModelIndex();
     d->m_selection2Index = QModelIndex();
     d->m_selection3Index = QModelIndex();
@@ -3483,7 +3487,7 @@ void DirectoryMergeWindow::updateAvailabilities(bool bDirCompare, bool bDiffWind
     d->m_pDirChooseBEverywhere->setEnabled(bDirCompare && isVisible());
     d->m_pDirChooseCEverywhere->setEnabled(bDirCompare && isVisible());
 
-    bool bThreeDirs = d->m_dirC.isValid();
+    bool bThreeDirs = d->isThreeWay();
 
     MergeFileInfos* pMFI = d->getMFI(currentIndex());
 
