@@ -1890,6 +1890,43 @@ When run as a part &kdiff3; only provides the a two-file-diff, a very small tool
 and menu. Merging or directory-comparison are not supported then.
 </para>
 </sect1>
+
+<sect1 id="git">
+<title>Using &kdiff3; as a Git Diff and Merging Tool</title>
+<para>
+    &kdiff3; can be used as a <ulink url="https://git-scm.com/">Git</ulink> diff and merge tool.
+</para>
+<para>
+    Just add the following lines into your <filename>gitconfig</filename> file.
+</para>
+<programlisting>
+[diff]
+        tool = kdiff3
+[difftool "kdiff3"]
+        path = &lt;path to kdiff3 binary in your system>
+[difftool]
+        prompt = false
+        keepBackup = false
+        trustExitCode = false
+[merge]
+        tool = kdiff3
+[mergetool]
+        prompt = false
+        keepBackup = false
+        keepTemporaries = false
+[mergetool "kdiff3"]
+        path = &lt;path to kdiff3 binary in your system>
+</programlisting>
+<para>
+    Then to see the difference between two commits use <userinput>git difftool <replaceable>first_hash</replaceable> <replaceable>second_hash</replaceable> --tool=kdiff3 --cc <replaceable>some_file_in_the_git_tree</replaceable></userinput>
+</para>
+<para>
+    To merge a branch with &kdiff3; use <userinput>git merge <replaceable>branch_name</replaceable> &amp;&amp; git mergetool --tool=kdiff3</userinput>
+</para>
+<para>
+    After resolving merging conflicts in the <link linkend="synchronise_views">usual way</link> it is enough to commit the changes to do the job.
+</para>
+</sect1>
 </chapter>
 
 <chapter id="faq">
