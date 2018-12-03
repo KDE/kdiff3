@@ -191,8 +191,6 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     bool isThreeWay(void) const { return rootMFI()->getDirectoryInfo()->dirC().isValid(); }
     MergeFileInfos* rootMFI(void) const { return m_pRoot; }
 
-    MergeFileInfos* m_pRoot;
-
     static void setPixmaps(MergeFileInfos& mfi, bool);
 
     Options* m_pOptions;
@@ -279,6 +277,8 @@ private:
     };
 
     typedef QMap<FileKey, MergeFileInfos> t_fileMergeMap;
+
+    MergeFileInfos* m_pRoot;
 public:
     t_fileMergeMap m_fileMergeMap;
 
