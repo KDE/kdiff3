@@ -41,6 +41,7 @@
 #include "optiondialog.h"
 #include "progress.h"
 #include "Utils.h"
+#include "DirectoryInfo.h"
 
 #include "mergeresultwindow.h"
 #include "smalldialogs.h"
@@ -1876,8 +1877,7 @@ bool KDiff3App::improveFilenames(bool bCreateNewInstance)
             setUpdatesEnabled(true);
 
             bool bSuccess = m_pDirectoryMergeWindow->init(
-                f1, f2, f3,
-                destDir, // Destdirname
+                QSharedPointer<DirectoryInfo>(new DirectoryInfo(f1, f2, f3, destDir)),
                 !m_outputFilename.isEmpty());
 
             m_bDirCompare = true; //FIXME This seems redundant but it might have been reset during full analysis.

@@ -1155,7 +1155,6 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
 
         if(fa.fileName() != "." && fa.fileName() != "..")
         {
-            fa.m_url = parentUrl;
             QUrl url = parentUrl.adjusted(QUrl::StripTrailingSlash);
             url.setPath(url.path() + "/" + fa.fileName());
             fa.setUrl(url);

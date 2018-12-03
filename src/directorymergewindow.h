@@ -30,6 +30,7 @@ class QAction;
 class KToggleAction;
 class KActionCollection;
 class TotalDiffStatus;
+class DirectoryInfo;
 
 class MergeFileInfos;
 
@@ -41,10 +42,7 @@ public:
    ~DirectoryMergeWindow() override;
    void setDirectoryMergeInfo(DirectoryMergeInfo* p);
    bool init(
-      FileAccess& dirA,
-      FileAccess& dirB,
-      FileAccess& dirC,
-      FileAccess& dirDest,
+      QSharedPointer<DirectoryInfo> dirInfo,
       bool bDirectoryMerge,
       bool bReload = false
    );

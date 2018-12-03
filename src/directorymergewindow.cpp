@@ -117,7 +117,6 @@ static Qt::CaseSensitivity s_eCaseSensitivity = Qt::CaseSensitive;
 class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemModel
 {
     friend class DirMergeItem;
-    friend class MergeFileInfos;
   public:
     DirectoryMergeWindow* q;
     explicit DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW)
@@ -196,10 +195,6 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
 
     static void setPixmaps(MergeFileInfos& mfi, bool);
 
-    FileAccess m_dirA;
-    FileAccess m_dirB;
-    FileAccess m_dirC;
-    FileAccess m_dirDest;
     Options* m_pOptions;
 
     void calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
@@ -239,7 +234,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
 
     QString m_dirMergeStateFilename;
 
-    void buildMergeMap(QSharedPointer<DirectoryInfo> dirInfo);
+    void buildMergeMap(const QSharedPointer<DirectoryInfo> &dirInfo);
 
 private:
     class FileKey
@@ -357,7 +352,7 @@ public:
     QAction* m_pDirSaveMergeState;
     QAction* m_pDirLoadMergeState;
 
-    bool init(FileAccess& dirA, FileAccess& dirB, FileAccess& dirC, FileAccess& dirDest, bool bDirectoryMerge, bool bReload);
+    bool init(QSharedPointer<DirectoryInfo> dirInfo, bool bDirectoryMerge, bool bReload);
     void setOpStatus(const QModelIndex& mi, e_OperationStatus eOpStatus)
     {
         if(MergeFileInfos* pMFI = getMFI(mi))
@@ -800,7 +795,7 @@ void DirectoryMergeWindow::reload()
             return;
     }
 
-    init(d->m_dirA, d->m_dirB, d->m_dirC, d->m_dirDest, d->m_bDirectoryMerge, true);
+    init(d->rootMFI()->getDirectoryInfo(), true);
     //fix file visibilities after reload or menu will be out of sync with display if changed from defaults.
     updateFileVisibilities();
 }
@@ -869,17 +864,14 @@ struct t_ItemInfo {
 };
 
 bool DirectoryMergeWindow::init(
-    FileAccess& dirA,
-    FileAccess& dirB,
-    FileAccess& dirC,
-    FileAccess& dirDest,
+    QSharedPointer<DirectoryInfo> dirInfo,
     bool bDirectoryMerge,
     bool bReload)
 {
-    return d->init(dirA, dirB, dirC, dirDest, bDirectoryMerge, bReload);
+    return d->init(dirInfo, bDirectoryMerge, bReload);
 }
 
-void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(QSharedPointer<DirectoryInfo> dirInfo)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSharedPointer<DirectoryInfo> &dirInfo)
 {
     t_DirectoryList::iterator dirIterator;
 
@@ -890,7 +882,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(QSharedPoi
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
 
             mfi.setFileInfoA(&(*dirIterator));
-            mfi.setDirectorInfo(dirInfo);
+            mfi.setDirectoryInfo(dirInfo);
         }
     }
 
@@ -901,7 +893,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(QSharedPoi
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
 
             mfi.setFileInfoB(&(*dirIterator));
-            mfi.setDirectorInfo(dirInfo);
+            mfi.setDirectoryInfo(dirInfo);
         }
     }
 
@@ -912,16 +904,13 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(QSharedPoi
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
 
             mfi.setFileInfoC(&(*dirIterator));
-            mfi.setDirectorInfo(dirInfo);
+            mfi.setDirectoryInfo(dirInfo);
         }
     }
 }
 
 bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
-    FileAccess& dirA,
-    FileAccess& dirB,
-    FileAccess& dirC,
-    FileAccess& dirDest,
+    QSharedPointer<DirectoryInfo> dirInfo,
     bool bDirectoryMerge,
     bool bReload)
 {
@@ -978,11 +967,6 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
     m_currentIndexForOperation = m_mergeItemList.end();
 
-    m_dirA = dirA;
-    m_dirB = dirB;
-    m_dirC = dirC;
-    m_dirDest = dirDest;
-
     if(!bReload)
     {
         m_pDirShowIdenticalFiles->setChecked(true);
@@ -992,6 +976,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         m_pDirShowFilesOnlyInC->setChecked(true);
     }
 
+    FileAccess dirA = dirInfo->dirA();
+    FileAccess dirB = dirInfo->dirB();
+    FileAccess dirC = dirInfo->dirC();
+    const FileAccess dirDest = dirInfo->destDir();
     // Check if all input directories exist and are valid. The dest dir is not tested now.
     // The test will happen only when we are going to write to it.
     if(!dirA.isDir() || !dirB.isDir() ||
@@ -1032,9 +1020,6 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     emit q->statusBarMessage(i18n("Scanning directories..."));
 
     m_bSyncMode = m_pOptions->m_bDmSyncMode && !dirC.isValid() && !dirDest.isValid();
-
-    if(!m_dirDest.isValid())
-        m_dirDest = dirDest = dirC.isValid() ? dirC : dirB;
 
     m_fileMergeMap.clear();
     s_eCaseSensitivity = m_bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
@@ -1102,7 +1087,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     else
         eDefaultMergeOp = m_bSyncMode ? eMergeToAB : eMergeABToDest;
 
-    buildMergeMap(QSharedPointer<DirectoryInfo>(new DirectoryInfo(dirA, dirB, dirC, dirDest)));
+    buildMergeMap(dirInfo);
 
     bool bContinue = true;
     if(!bListDirSuccessA || !bListDirSuccessB || !bListDirSuccessC)
