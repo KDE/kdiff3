@@ -39,7 +39,7 @@ public:
    void setFile( const QUrl& name, bool bWantToWrite = false);
    void setFile( FileAccess* pParent, QFileInfo fi );
 
-   void loadData(void);
+   void loadData();
 
    bool isNormal() const;
    bool isValid() const;
@@ -94,12 +94,12 @@ public:
 
    FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
    
-   void doError(void);
+   void doError();
    void filterList(t_DirectoryList* pDirList, const QString& filePattern,
                                const QString& fileAntiPattern, const QString& dirAntiPattern,
                                const bool bUseCvsIgnore);
 
-   QDir getBaseDirectory(void) const { return m_baseDir; }
+   QDir getBaseDirectory() const { return m_baseDir; }
 
  private:
    friend class FileAccessJobHandler;

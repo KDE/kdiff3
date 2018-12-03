@@ -649,7 +649,7 @@ void OptionDialog::helpRequested()
     KHelpClient::invokeHelp(QStringLiteral("kdiff3/index.html"), QString());
 }
 
-OptionDialog::~OptionDialog(void)
+OptionDialog::~OptionDialog()
 {
 }
 
@@ -683,7 +683,7 @@ void OptionDialog::setupOtherOptions()
     addOptionItem(new OptionStringList("RecentEncodings", &m_options.m_recentEncodings));
 }
 
-void OptionDialog::setupFontPage(void)
+void OptionDialog::setupFontPage()
 {
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Font"));
@@ -728,7 +728,7 @@ void OptionDialog::setupFontPage(void)
     //   );
 }
 
-void OptionDialog::setupColorPage(void)
+void OptionDialog::setupColorPage()
 {
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Color"));
@@ -888,7 +888,7 @@ void OptionDialog::setupColorPage(void)
     topLayout->addStretch(10);
 }
 
-void OptionDialog::setupEditPage(void)
+void OptionDialog::setupEditPage()
 {
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Editor"));
@@ -954,7 +954,7 @@ void OptionDialog::setupEditPage(void)
     topLayout->addStretch(10);
 }
 
-void OptionDialog::setupDiffPage(void)
+void OptionDialog::setupDiffPage()
 {
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Diff"));
@@ -1040,7 +1040,7 @@ void OptionDialog::setupDiffPage(void)
     topLayout->addStretch(10);
 }
 
-void OptionDialog::setupMergePage(void)
+void OptionDialog::setupMergePage()
 {
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Merge"));
@@ -1239,7 +1239,7 @@ void OptionDialog::setupMergePage(void)
     topLayout->addStretch(10);
 }
 
-void OptionDialog::setupDirectoryMergePage(void)
+void OptionDialog::setupDirectoryMergePage()
 {
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Directory"));
@@ -1496,7 +1496,7 @@ public:
    }
 };
 */
-void OptionDialog::setupRegionalPage(void)
+void OptionDialog::setupRegionalPage()
 {
     /*
      TODO: What is this line supposed to do besides leak memory? Introduced as is in .91 no explanation
@@ -1604,7 +1604,7 @@ void OptionDialog::setupRegionalPage(void)
     topLayout->addStretch(10);
 }
 
-void OptionDialog::setupIntegrationPage(void)
+void OptionDialog::setupIntegrationPage()
 {
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Integration"));
@@ -1676,7 +1676,7 @@ void OptionDialog::slotEncodingChanged()
     }
 }
 
-void OptionDialog::setupKeysPage(void)
+void OptionDialog::setupKeysPage()
 {
     //QVBox *page = addVBoxPage( i18n("Keys"), i18n("KeyDialog" ),
     //                          BarIcon("fonts", KIconLoader::SizeMedium ) );
@@ -1687,7 +1687,7 @@ void OptionDialog::setupKeysPage(void)
     //topLayout->addWidget( m_pKeyDialog );
 }
 
-void OptionDialog::slotOk(void)
+void OptionDialog::slotOk()
 {
     slotApply();
 
@@ -1695,7 +1695,7 @@ void OptionDialog::slotOk(void)
 }
 
 /** Copy the values from the widgets to the public variables.*/
-void OptionDialog::slotApply(void)
+void OptionDialog::slotApply()
 {
     std::list<OptionItem*>::iterator i;
     for(i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i)

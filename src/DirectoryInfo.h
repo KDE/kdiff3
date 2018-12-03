@@ -36,10 +36,10 @@ class DirectoryInfo
           m_dirDest = dirDest;
       }
 
-      inline FileAccess dirA(void) const { return m_dirA; }
-      inline FileAccess dirB(void) const { return m_dirB; }
-      inline FileAccess dirC(void) const { return m_dirC; }
-      inline FileAccess destDir(void) const
+      inline FileAccess dirA() const { return m_dirA; }
+      inline FileAccess dirB() const { return m_dirB; }
+      inline FileAccess dirC() const { return m_dirC; }
+      inline FileAccess destDir() const
       {
           if(m_dirDest.isValid())
               return m_dirDest;

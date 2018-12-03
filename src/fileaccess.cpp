@@ -49,7 +49,7 @@ FileAccess::FileAccess()
     reset();
 }
 
-void FileAccess::reset(void)
+void FileAccess::reset()
 {
     m_fileInfo = QFileInfo();
     m_bExists = false;
@@ -130,7 +130,7 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     }
 }
 
-void FileAccess::loadData(void)
+void FileAccess::loadData()
 {
     m_fileInfo.setCaching(true);
     
@@ -714,7 +714,7 @@ bool FileAccess::createBackup(const QString& bakExtension)
     return true;
 }
 
-void FileAccess::doError(void)
+void FileAccess::doError()
 {
     m_bExists = false;
 }

@@ -144,7 +144,7 @@ class KDiff3App : public QSplitter
 
   protected:
     void setLockPainting(bool bLock);
-    void createCaption(void);
+    void createCaption();
     void initDirectoryMergeActions();
     /** sets up the statusbar for the main window by initialzing a statuslabel. */
     void initStatusBar();

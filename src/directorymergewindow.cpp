@@ -188,8 +188,8 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
             return nullptr;
     }
 
-    bool isThreeWay(void) const { return rootMFI()->getDirectoryInfo()->dirC().isValid(); }
-    MergeFileInfos* rootMFI(void) const { return m_pRoot; }
+    bool isThreeWay() const { return rootMFI()->getDirectoryInfo()->dirC().isValid(); }
+    MergeFileInfos* rootMFI() const { return m_pRoot; }
 
     static void setPixmaps(MergeFileInfos& mfi, bool);
 

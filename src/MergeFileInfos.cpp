@@ -41,7 +41,7 @@ MergeFileInfos::~MergeFileInfos()
 }
 
 //bool operator>( const MergeFileInfos& );
-QString MergeFileInfos::subPath(void) const
+QString MergeFileInfos::subPath() const
 {
     if(m_pFileInfoA && m_pFileInfoA->exists())
         return m_pFileInfoA->fileRelPath();
@@ -52,7 +52,7 @@ QString MergeFileInfos::subPath(void) const
     return QString("");
 }
 
-QString MergeFileInfos::fileName(void) const
+QString MergeFileInfos::fileName() const
 {
     if(m_pFileInfoA && m_pFileInfoA->exists())
         return m_pFileInfoA->fileName();
@@ -63,7 +63,7 @@ QString MergeFileInfos::fileName(void) const
     return QString("");
 }
 
-bool MergeFileInfos::conflictingFileTypes(void)
+bool MergeFileInfos::conflictingFileTypes()
 {
     // Now check if file/dir-types fit.
     if(isLinkA() || isLinkB() || isLinkC())
@@ -88,7 +88,7 @@ bool MergeFileInfos::conflictingFileTypes(void)
     return false;
 }
 
-QString MergeFileInfos::fullNameA(void) const
+QString MergeFileInfos::fullNameA() const
 {
     if(existsInA())
         return getFileInfoA()->absoluteFilePath();
@@ -96,7 +96,7 @@ QString MergeFileInfos::fullNameA(void) const
     return m_dirInfo->dirA().absoluteFilePath() + "/" + subPath();
 }
 
-QString MergeFileInfos::fullNameB(void) const
+QString MergeFileInfos::fullNameB() const
 {
     if(existsInB())
         return getFileInfoB()->absoluteFilePath();
@@ -104,7 +104,7 @@ QString MergeFileInfos::fullNameB(void) const
     return m_dirInfo->dirB().absoluteFilePath() + "/" + subPath();
 }
 
-QString MergeFileInfos::fullNameC(void) const
+QString MergeFileInfos::fullNameC() const
 {
     if(existsInC())
         return getFileInfoC()->absoluteFilePath();
@@ -120,7 +120,7 @@ void MergeFileInfos::sort(Qt::SortOrder order)
         m_children[i]->sort(order);
 }
 
-QString MergeFileInfos::fullNameDest(void) const
+QString MergeFileInfos::fullNameDest() const
 {
     if(m_dirInfo->destDir().prettyAbsPath() == m_dirInfo->dirC().prettyAbsPath())
         return fullNameC();

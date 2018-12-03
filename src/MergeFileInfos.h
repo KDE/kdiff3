@@ -55,8 +55,8 @@ class MergeFileInfos
     ~MergeFileInfos();
     
     //bool operator>( const MergeFileInfos& );
-    QString subPath(void) const;
-    QString fileName(void) const;
+    QString subPath() const;
+    QString fileName() const;
 
     bool dirA() const { return m_pFileInfoA ? m_pFileInfoA->isDir() : false; }
     bool dirB() const { return m_pFileInfoB ? m_pFileInfoB->isDir() : false; }
@@ -68,29 +68,29 @@ class MergeFileInfos
     bool existsInB() const { return m_pFileInfoB != nullptr; }
     bool existsInC() const { return m_pFileInfoC != nullptr; }
 
-    bool conflictingFileTypes(void);
+    bool conflictingFileTypes();
 
     void sort(Qt::SortOrder order);
-    inline MergeFileInfos* parent(void) const { return m_pParent; }
+    inline MergeFileInfos* parent() const { return m_pParent; }
     inline void setParent(MergeFileInfos* inParent) { m_pParent = inParent; }
-    inline const QList<MergeFileInfos*>& children(void) const { return m_children; }
+    inline const QList<MergeFileInfos*>& children() const { return m_children; }
     inline void addChild(MergeFileInfos* child) { m_children.push_back(child); }
-    inline void clear(void) { m_children.clear(); }
+    inline void clear() { m_children.clear(); }
 
-    FileAccess* getFileInfoA(void) const { return m_pFileInfoA; }
-    FileAccess* getFileInfoB(void) const { return m_pFileInfoB; }
-    FileAccess* getFileInfoC(void) const { return m_pFileInfoC; }
+    FileAccess* getFileInfoA() const { return m_pFileInfoA; }
+    FileAccess* getFileInfoB() const { return m_pFileInfoB; }
+    FileAccess* getFileInfoC() const { return m_pFileInfoC; }
     
     void setFileInfoA(FileAccess* newInfo) { m_pFileInfoA = newInfo; }
     void setFileInfoB(FileAccess* newInfo) { m_pFileInfoB = newInfo; }
     void setFileInfoC(FileAccess* newInfo) { m_pFileInfoC = newInfo; }
 
-    QString fullNameA(void) const;
-    QString fullNameB(void) const;
-    QString fullNameC(void) const;
-    QString fullNameDest(void) const;
+    QString fullNameA() const;
+    QString fullNameB() const;
+    QString fullNameC() const;
+    QString fullNameDest() const;
 
-    inline QSharedPointer<DirectoryInfo> getDirectoryInfo(void) const { return m_dirInfo; }
+    inline QSharedPointer<DirectoryInfo> getDirectoryInfo() const { return m_dirInfo; }
     void setDirectoryInfo(const QSharedPointer<DirectoryInfo> &dirInfo) { m_dirInfo = dirInfo; }
     
     inline QString getDirNameA() const { return getDirectoryInfo()->dirA().prettyAbsPath(); }

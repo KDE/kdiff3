@@ -377,7 +377,7 @@ void KDiff3App::setLockPainting(bool bLock)
     if(m_pMergeResultWindow) m_pMergeResultWindow->setPaintingAllowed(!bLock);
 }
 
-void KDiff3App::createCaption(void)
+void KDiff3App::createCaption()
 {
     // Try to create a meaningful but not too long caption
     // 1. If the filenames are equal then show only one filename
