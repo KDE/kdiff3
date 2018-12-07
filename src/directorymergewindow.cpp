@@ -1403,9 +1403,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
                 mfi.existsInB() ? mfi.getFileInfoB()->absoluteFilePath() : QString(""),
                 mfi.existsInC() ? mfi.getFileInfoC()->absoluteFilePath() : QString(""),
                 "",
-                "", "", "", &mfi.diffStatus());
-            int nofNonwhiteConflicts = mfi.diffStatus().getUnsolvedConflicts() +
-                                       mfi.diffStatus().getSolvedConflicts() - mfi.diffStatus().getWhitespaceConflicts();
+                "", "", "", mfi.diffStatus());
+            int nofNonwhiteConflicts = mfi.diffStatus()->getUnsolvedConflicts() +
+                                       mfi.diffStatus()->getSolvedConflicts() - mfi.diffStatus()->getWhitespaceConflicts();
 
             if(m_pOptions->m_bDmWhiteSpaceEqual && nofNonwhiteConflicts == 0)
             {
@@ -1415,9 +1415,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
             }
             else
             {
-                mfi.m_bEqualAB = mfi.diffStatus().isBinaryEqualAB();
-                mfi.m_bEqualBC = mfi.diffStatus().isBinaryEqualBC();
-                mfi.m_bEqualAC = mfi.diffStatus().isBinaryEqualAC();
+                mfi.m_bEqualAB = mfi.diffStatus()->isBinaryEqualAB();
+                mfi.m_bEqualBC = mfi.diffStatus()->isBinaryEqualBC();
+                mfi.m_bEqualAC = mfi.diffStatus()->isBinaryEqualAC();
             }
         }
     }

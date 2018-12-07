@@ -112,7 +112,7 @@ void MergeResultWindow::init(
     const LineData* pLineDataB, LineRef sizeB,
     const LineData* pLineDataC, LineRef sizeC,
     const Diff3LineList* pDiff3LineList,
-    TotalDiffStatus* pTotalDiffStatus)
+    const QSharedPointer<TotalDiffStatus>& pTotalDiffStatus)
 {
     m_firstLine = 0;
     m_horizScrollOffset = 0;

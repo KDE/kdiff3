@@ -403,20 +403,20 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         {
             SourceData* pSD = nullptr;
             if(m_sd3.isEmpty()) {
-                if(m_totalDiffStatus.isBinaryEqualAB()) {
+                if(m_totalDiffStatus->isBinaryEqualAB()) {
                     pSD = &m_sd1;
                 }
             }
             else
             {
-                if(m_totalDiffStatus.isBinaryEqualBC()) {
+                if(m_totalDiffStatus->isBinaryEqualBC()) {
                     pSD = &m_sd3; // B==C (assume A is old)
                 }
-                else if(m_totalDiffStatus.isBinaryEqualAB())
+                else if(m_totalDiffStatus->isBinaryEqualAB())
                 {
                     pSD = &m_sd3; // assuming C has changed
                 }
-                else if(m_totalDiffStatus.isBinaryEqualAC())
+                else if(m_totalDiffStatus->isBinaryEqualAC())
                 {
                     pSD = &m_sd2; // assuming B has changed
                 }

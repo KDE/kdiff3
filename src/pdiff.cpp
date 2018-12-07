@@ -95,7 +95,7 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, LineRef idx)
     }
 }
 
-void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, bool bUseCurrentEncoding)
+void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool bLoadFiles, bool bUseCurrentEncoding)
 {
     ProgressProxy pp;
     QStringList errors;
@@ -103,7 +103,11 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
     // will be stored in the given TotalDiffStatus. Otherwise it will be 0.
     bool bGUI = pTotalDiffStatus == nullptr;
     if(pTotalDiffStatus == nullptr)
-        pTotalDiffStatus = &m_totalDiffStatus;
+    {
+        if(m_totalDiffStatus == nullptr)
+            m_totalDiffStatus = QSharedPointer<TotalDiffStatus>::create();
+        pTotalDiffStatus = m_totalDiffStatus;
+    }
 
     //bool bPreserveCarriageReturn = m_pOptions->m_bPreserveCarriageReturn;
 
@@ -181,8 +185,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         else
             pp.setMaxNofSteps(6); // 3 comparisons, 3 finediffs
     }
-
-    pTotalDiffStatus->reset();
+    if(pTotalDiffStatus)
+        pTotalDiffStatus->reset();
     // Run the diff.
     if(m_sd3.isEmpty())
     {
@@ -753,7 +757,7 @@ void KDiff3App::slotFinishMainInit()
     }*/
 
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
-    TotalDiffStatus* pTotalDiffStatus = &m_totalDiffStatus;
+    QSharedPointer<TotalDiffStatus> pTotalDiffStatus = m_totalDiffStatus;
 
     if(m_bLoadFiles)
     {
@@ -1096,7 +1100,7 @@ void KDiff3App::slotFileOpen()
 }
 
 void KDiff3App::slotFileOpen2(QString fn1, QString fn2, QString fn3, QString ofn,
-                              QString an1, QString an2, QString an3, TotalDiffStatus* pTotalDiffStatus)
+                              QString an1, QString an2, QString an3, const QSharedPointer<TotalDiffStatus> &pTotalDiffStatus)
 {
     if(!canContinue()) return;
 

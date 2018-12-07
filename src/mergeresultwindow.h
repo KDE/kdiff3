@@ -1,18 +1,11 @@
 /***************************************************************************
-                          mergeresultwindow.h  -  description
-                             -------------------
-    begin                : Mon Mar 18 2002
-    copyright            : (C) 2002-2007 by Joachim Eibl
-    email                : joachim.eibl at gmx.de
- ***************************************************************************/
-
-/***************************************************************************
+ *   Copyright (C) 2003-2007 by Joachim Eibl <joachim.eibl at gmx.de>      *
+ *   Copyright (C) 2018 Michael Reeves reeves.87@gmail.com                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
- *                                                                         *
  ***************************************************************************/
 
 #ifndef MERGERESULTWINDOW_H
@@ -111,7 +104,7 @@ public:
       const LineData* pLineDataB, LineRef sizeB,
       const LineData* pLineDataC, LineRef sizeC,
       const Diff3LineList* pDiff3LineList,
-      TotalDiffStatus* pTotalDiffStatus
+      const QSharedPointer<TotalDiffStatus>& pTotalDiffStatus
       );
 
    void reset();
@@ -189,7 +182,7 @@ private:
    LineRef m_sizeC;
 
    const Diff3LineList* m_pDiff3LineList;
-   TotalDiffStatus* m_pTotalDiffStatus;
+   QSharedPointer<TotalDiffStatus> m_pTotalDiffStatus;
 
    bool m_bPaintingAllowed;
    int m_delayedDrawTimer;

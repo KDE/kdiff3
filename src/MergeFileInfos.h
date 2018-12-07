@@ -17,7 +17,7 @@
 #include "DirectoryInfo.h"
 
 #include <QString>
-
+#include <QSharedPointer>
 //class DirectoryInfo;
 
 enum e_MergeOperation
@@ -98,7 +98,7 @@ class MergeFileInfos
     inline QString getDirNameC() const { return getDirectoryInfo()->dirC().prettyAbsPath(); }
     inline QString getDirNameDest() const { return getDirectoryInfo()->destDir().prettyAbsPath(); }
 
-    inline TotalDiffStatus& diffStatus() { return m_totalDiffStatus; }
+    inline const QSharedPointer<TotalDiffStatus>& diffStatus() const { return m_totalDiffStatus; }
 
   private:
     MergeFileInfos* m_pParent;
@@ -110,7 +110,7 @@ class MergeFileInfos
 
     QSharedPointer<DirectoryInfo> m_dirInfo;
     
-    TotalDiffStatus m_totalDiffStatus;
+    QSharedPointer<TotalDiffStatus> m_totalDiffStatus;
   public:
 
     e_MergeOperation m_eMergeOperation;
