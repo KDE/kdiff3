@@ -1403,9 +1403,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
                 mfi.existsInB() ? mfi.getFileInfoB()->absoluteFilePath() : QString(""),
                 mfi.existsInC() ? mfi.getFileInfoC()->absoluteFilePath() : QString(""),
                 "",
-                "", "", "", &mfi.m_totalDiffStatus);
-            int nofNonwhiteConflicts = mfi.m_totalDiffStatus.nofUnsolvedConflicts +
-                                       mfi.m_totalDiffStatus.nofSolvedConflicts - mfi.m_totalDiffStatus.nofWhitespaceConflicts;
+                "", "", "", &mfi.diffStatus());
+            int nofNonwhiteConflicts = mfi.diffStatus().getUnsolvedConflicts() +
+                                       mfi.diffStatus().getSolvedConflicts() - mfi.diffStatus().getWhitespaceConflicts();
 
             if(m_pOptions->m_bDmWhiteSpaceEqual && nofNonwhiteConflicts == 0)
             {
@@ -1415,9 +1415,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
             }
             else
             {
-                mfi.m_bEqualAB = mfi.m_totalDiffStatus.bBinaryAEqB;
-                mfi.m_bEqualBC = mfi.m_totalDiffStatus.bBinaryBEqC;
-                mfi.m_bEqualAC = mfi.m_totalDiffStatus.bBinaryAEqC;
+                mfi.m_bEqualAB = mfi.diffStatus().isBinaryEqualAB();
+                mfi.m_bEqualBC = mfi.diffStatus().isBinaryEqualBC();
+                mfi.m_bEqualAC = mfi.diffStatus().isBinaryEqualAC();
             }
         }
     }
@@ -2208,10 +2208,10 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::selectItemAndColumn(cons
 //   }
 //   else
 //   {
-//      setText( s_UnsolvedCol, QString::number( tds.nofUnsolvedConflicts ) );
-//      setText( s_SolvedCol,   QString::number( tds.nofSolvedConflicts ) );
-//      setText( s_NonWhiteCol, QString::number( tds.nofUnsolvedConflicts + tds.nofSolvedConflicts - tds.nofWhitespaceConflicts ) );
-//      setText( s_WhiteCol,    QString::number( tds.nofWhitespaceConflicts ) );
+//      setText( s_UnsolvedCol, QString::number( tds.getUnsolvedConflicts() ) );
+//      setText( s_SolvedCol,   QString::number( tds.getSolvedConflicts() ) );
+//      setText( s_NonWhiteCol, QString::number( tds.getUnsolvedConflicts() + tds.getSolvedConflicts() - tds.getWhitespaceConflicts() ) );
+//      setText( s_WhiteCol,    QString::number( tds.getWhitespaceConflicts() ) );
 //   }
 //   setSizeHint( s_ACol, QSize(17,17) ); // Iconsize
 //   setSizeHint( s_BCol, QSize(17,17) ); // Iconsize

@@ -523,9 +523,9 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
             ++nrOfWhiteSpaceConflicts;
     }
 
-    m_pTotalDiffStatus->nofUnsolvedConflicts = nrOfUnsolvedConflicts;
-    m_pTotalDiffStatus->nofSolvedConflicts = nrOfSolvedConflicts;
-    m_pTotalDiffStatus->nofWhitespaceConflicts = nrOfWhiteSpaceConflicts;
+    m_pTotalDiffStatus->setUnsolvedConflicts(nrOfUnsolvedConflicts);
+    m_pTotalDiffStatus->setSolvedConflicts(nrOfSolvedConflicts);
+    m_pTotalDiffStatus->setWhitespaceConflicts(nrOfWhiteSpaceConflicts);
 
     m_cursorXPos = 0;
     m_cursorOldXPixelPos = 0;

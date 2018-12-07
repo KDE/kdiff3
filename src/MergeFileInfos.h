@@ -97,7 +97,9 @@ class MergeFileInfos
     inline QString getDirNameB() const { return getDirectoryInfo()->dirB().prettyAbsPath(); }
     inline QString getDirNameC() const { return getDirectoryInfo()->dirC().prettyAbsPath(); }
     inline QString getDirNameDest() const { return getDirectoryInfo()->destDir().prettyAbsPath(); }
-  
+
+    inline TotalDiffStatus& diffStatus() { return m_totalDiffStatus; }
+
   private:
     MergeFileInfos* m_pParent;
     QList<MergeFileInfos*> m_children;
@@ -108,8 +110,8 @@ class MergeFileInfos
 
     QSharedPointer<DirectoryInfo> m_dirInfo;
     
-  public:
     TotalDiffStatus m_totalDiffStatus;
+  public:
 
     e_MergeOperation m_eMergeOperation;
     e_OperationStatus m_eOpStatus;

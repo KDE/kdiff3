@@ -170,11 +170,25 @@ class TotalDiffStatus
 {
 public:
    TotalDiffStatus(){ reset(); }
-   void reset() {bBinaryAEqC=false; bBinaryBEqC=false; bBinaryAEqB=false;
+   inline void reset() {bBinaryAEqC=false; bBinaryBEqC=false; bBinaryAEqB=false;
                  bTextAEqC=false;   bTextBEqC=false;   bTextAEqB=false;
                  nofUnsolvedConflicts=0; nofSolvedConflicts=0;
                  nofWhitespaceConflicts=0;
                 }
+   
+   inline int getUnsolvedConflicts() const { return nofUnsolvedConflicts; }
+   inline void setUnsolvedConflicts(const int unsolved) { nofUnsolvedConflicts = unsolved; }
+
+   inline int getSolvedConflicts() const { return nofSolvedConflicts; }
+   inline void setSolvedConflicts(const int solved) { nofSolvedConflicts = solved; }
+
+   inline int getWhitespaceConflicts() const { return nofWhitespaceConflicts; }
+   inline void setWhitespaceConflicts(const int wintespace) { nofWhitespaceConflicts = wintespace; }
+
+   bool isBinaryEqualAC() const { return bBinaryAEqC; }
+   bool isBinaryEqualBC() const { return bBinaryBEqC; }
+   bool isBinaryEqualAB() const { return bBinaryAEqB; }
+
    bool bBinaryAEqC : 1;
    bool bBinaryBEqC : 1;
    bool bBinaryAEqB : 1;
@@ -183,6 +197,7 @@ public:
    bool bTextBEqC : 1;
    bool bTextAEqB : 1;
 
+private:
    int nofUnsolvedConflicts;
    int nofSolvedConflicts;
    int nofWhitespaceConflicts;
