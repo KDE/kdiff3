@@ -100,14 +100,16 @@ class MergeFileInfos
   
   private:
     MergeFileInfos* m_pParent;
+    QList<MergeFileInfos*> m_children;
+
     FileAccess* m_pFileInfoA;
     FileAccess* m_pFileInfoB;
     FileAccess* m_pFileInfoC;
 
     QSharedPointer<DirectoryInfo> m_dirInfo;
+    
   public:
     TotalDiffStatus m_totalDiffStatus;
-    QList<MergeFileInfos*> m_children;
 
     e_MergeOperation m_eMergeOperation;
     e_OperationStatus m_eOpStatus;
