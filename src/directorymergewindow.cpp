@@ -361,6 +361,8 @@ public:
             emit dataChanged(mi, mi);
         }
     }
+
+    QModelIndex nextSibling(const QModelIndex& mi);
 };
 
 QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelIndex& index, int role) const
@@ -1663,7 +1665,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setPixmaps(MergeFileInfo
     }
 }
 
-static QModelIndex nextSibling(const QModelIndex& mi)
+QModelIndex DirectoryMergeWindow::DirectoryMergeWindowPrivate::nextSibling(const QModelIndex& mi)
 {
     QModelIndex miParent = mi.parent();
     int currentIdx = mi.row();
