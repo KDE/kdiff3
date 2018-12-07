@@ -60,11 +60,4 @@ install( FILES  kdiff3_shell.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/kdiff3 )
 install( PROGRAMS org.kde.kdiff3.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES org.kde.kdiff3.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata )
 
-ecm_install_icons(ICONS
-    hicolor/16-apps-kdiff3.png
-    hicolor/32-apps-kdiff3.png
-    DESTINATION ${ICON_INSTALL_DIR}
-    THEME hicolor
-)
-
-
+add_subdirectory(icons)
