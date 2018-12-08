@@ -709,7 +709,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
     QString fileName1 = fi1.absoluteFilePath();
     QString fileName2 = fi2.absoluteFilePath();
 
-    if(!fi2.createLocalCopy())
+    if(!fi1.createLocalCopy())
     {
         status = i18n("Creating temp copy of %1 failed.", fileName1);
         return bEqual;
