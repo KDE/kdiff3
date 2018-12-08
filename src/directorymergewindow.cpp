@@ -217,7 +217,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     void scanLocalDirectory(const QString& dirName, t_DirectoryList& dirList);
     bool fastFileComparison(FileAccess& fi1, FileAccess& fi2,
                             bool& bError, QString& status);
-    void compareFilesAndCalcAges(MergeFileInfos& mfi);
+    bool compareFilesAndCalcAges(MergeFileInfos& mfi);
 
     void setMergeOperation(const QModelIndex& mi, e_MergeOperation eMergeOp, bool bRecursive = true);
     bool isDir(const QModelIndex& mi);
@@ -728,7 +728,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
 
     if(!file1.open(QIODevice::ReadOnly))
     {
-        status = i18n("Opening %1 failed.", fileName1);
+        status = i18n("Opening %1 failed. %2", fileName1, file1.errorString());
         return bEqual;
     }
 
@@ -736,7 +736,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
 
     if(!file2.open(QIODevice::ReadOnly))
     {
-        status = i18n("Opening %1 failed.", fileName2);
+        status = i18n("Opening %1 failed. %2", fileName2, file2.errorString());
         return bEqual;
     }
 
@@ -1370,7 +1370,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setAllMergeOperations(e_
     }
 }
 
-void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(MergeFileInfos& mfi)
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(MergeFileInfos& mfi)
 {
     std::map<QDateTime, int> dateMap;
 
@@ -1450,6 +1450,11 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
                 else
                     mfi.m_bEqualBC = fastFileComparison(*mfi.getFileInfoB(), *mfi.getFileInfoC(), bError, eqStatus);
             }
+        }
+        if(!eqStatus.isEmpty())
+        {
+            KMessageBox::error(q, eqStatus, i18n("Compare failed"));
+            return false;
         }
     }
 
@@ -1537,6 +1542,8 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
         if(mfi.m_ageB == eMiddle) mfi.m_ageB = eOld;
         if(mfi.m_ageC == eMiddle) mfi.m_ageC = eOld;
     }
+
+    return true;
 }
 //TODO move this
 static QPixmap* s_pm_dir;
