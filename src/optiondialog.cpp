@@ -17,6 +17,7 @@
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  */
+#include "optiondialog.h"
 
 #include <QApplication>
 #include <QCheckBox>
@@ -50,7 +51,6 @@
 #include <map>
 
 #include "diff.h"
-#include "optiondialog.h"
 #include "smalldialogs.h"
 
 #define KDIFF3_CONFIG_GROUP "KDiff3 Options"
@@ -731,7 +731,7 @@ void OptionDialog::setupFontPage()
 void OptionDialog::setupColorPage()
 {
     QFrame* page = new QFrame();
-    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Color"));
+    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18nc("Title for color settings page","Color"));
     pageItem->setHeader(i18n("Colors Settings"));
     pageItem->setIcon(QIcon::fromTheme(QStringLiteral("colormanagement")));
     addPage(pageItem);

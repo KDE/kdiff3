@@ -8,8 +8,8 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 
-#include "gnudiff_diff.h"
 #include "selection.h"
+#include "gnudiff_diff.h"
 
 #include <QtGlobal>
 

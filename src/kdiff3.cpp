@@ -452,7 +452,8 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     if(m_pKDiff3Shell)
     {
         if(m_pOptions->m_bMaximised)
-            m_pKDiff3Shell->showMaximized();
+            //We want showMaximized here as the window has never been shown.
+            m_pKDiff3Shell->showMaximized();// krazy:exclude=qmethods
         else
             m_pKDiff3Shell->show();
     }

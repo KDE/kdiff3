@@ -1,6 +1,6 @@
 /* System dependent declarations.
 
-   Modified for KDiff3 by Joachim Eibl 2003.
+   Modified for KDiff3 by Joachim Eibl <joachim.eibl at gmx.de> 2003.
    The original file was part of GNU DIFF.
 
    Copyright (C) 1988, 1989, 1992, 1993, 1994, 1995, 1998, 2001, 2002

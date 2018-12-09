@@ -10,8 +10,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "selection.h"
 #include "difftextwindow.h"
+
+#include "selection.h"
 #include "kdiff3.h"
 #include "merger.h"
 #include "options.h"

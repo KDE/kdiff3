@@ -15,8 +15,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "diff.h"
+
 #include <qglobal.h>
-#include "Utils.h"
 
 #ifdef Q_OS_WIN
 #include <qt_windows.h>
@@ -26,7 +27,7 @@
 
 #include <cstdlib>
 
-#include "diff.h"
+#include "Utils.h"
 #include "fileaccess.h"
 #include "gnudiff_diff.h"
 #include "options.h"

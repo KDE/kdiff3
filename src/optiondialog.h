@@ -21,10 +21,12 @@
 #ifndef OPTION_DIALOG_H
 #define OPTION_DIALOG_H
 
-
-#include <KPageDialog>
 #include <QStringList>
 #include <QGroupBox>
+
+#include <KPageDialog>
+#include <KSharedConfig>
+
 #include <list>
 
 #include "options.h"
@@ -37,7 +39,6 @@ class OptionCheckBox;
 class OptionEncodingComboBox;
 class OptionLineEdit;
 class KKeyDialog;
-
 
 class OptionDialog : public KPageDialog
 {

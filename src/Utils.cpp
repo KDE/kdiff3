@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2003-2007 by Joachim Eibl <joachim.eibl at gmx.de>
- * Copyright (C) 2018 Michael Reeves
+ * Copyright (C) 2018 Michael Reeves reeves.87@gmail.com
  * 
  * This file is part of KDiff3.
  * 

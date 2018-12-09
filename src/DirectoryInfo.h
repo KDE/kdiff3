@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2018 Michael Reeves
+ * Copyright (C) 2018 Michael Reeves reeves.87@gmail.com
  * 
  * This file is part of KDiff3.
  * 

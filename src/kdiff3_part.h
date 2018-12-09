@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
  ***************************************************************************/
 
-#ifndef _KDIFF3PART_H_
-#define _KDIFF3PART_H_
+#ifndef KDIFF3PART_H
+#define KDIFF3PART_H
 
 #include <kparts/part.h>
 #include <KPluginFactory>

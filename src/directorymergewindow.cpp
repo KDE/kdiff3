@@ -9,11 +9,10 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include <qglobal.h>
+#include "directorymergewindow.h"
 
 #include "MergeFileInfos.h"
 #include "DirectoryInfo.h"
-#include "directorymergewindow.h"
 #include "guiutils.h"
 #include "options.h"
 #include "progress.h"
@@ -23,6 +22,7 @@
 #include <map>
 #include <vector>
 
+#include <qglobal.h>
 #include <QAction>
 #include <QApplication>
 #include <QDir>
@@ -2874,7 +2874,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::deleteFLD(const QString&
                 bSuccess = FileAccess::removeDir(name);
                 if(!bSuccess)
                 {
-                    m_pStatusInfo->addText(i18n("Error: rmdir( %1 ) operation failed.", name));
+                    m_pStatusInfo->addText(i18n("Error: rmdir( %1 ) operation failed.", name));// krazy:exclude=syscalls
                     return false;
                 }
             }
@@ -3237,7 +3237,7 @@ void DirectoryMergeInfo::setInfo(
     addListViewItem(i18n("C"), dirC.prettyAbsPath(), mfi.getFileInfoC());
     if(!bHideDest)
     {
-        FileAccess fiDest(dirDest.prettyAbsPath() + "/" + mfi.subPath(), true);
+        FileAccess fiDest(dirDest.prettyAbsPath() + '/' + mfi.subPath(), true);
         addListViewItem(i18n("Dest"), dirDest.prettyAbsPath(), &fiDest);
     }
     for(int i = 0; i < m_pInfoList->columnCount(); ++i)
