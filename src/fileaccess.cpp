@@ -703,7 +703,7 @@ bool FileAccess::createBackup(const QString& bakExtension)
                 return false;
             }
         }
-        bool bSuccess = rename(bakName);
+        bool bSuccess = rename(bakName);// krazy:exclude=syscalls
         if(!bSuccess)
         {
             setStatusText(i18n("While trying to make a backup, renaming failed.\nFilenames: %1 -> %2",
