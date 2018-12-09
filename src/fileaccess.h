@@ -34,7 +34,7 @@ class FileAccess
 public:
    FileAccess();
    ~FileAccess();
-   FileAccess( const QString& name, bool bWantToWrite=false ); // name: local file or dirname or url (when supported)
+   explicit FileAccess( const QString& name, bool bWantToWrite=false ); // name: local file or dirname or url (when supported)
    void setFile( const QString& name, bool bWantToWrite=false );
    void setFile( const QUrl& name, bool bWantToWrite = false);
    void setFile( FileAccess* pParent, QFileInfo fi );

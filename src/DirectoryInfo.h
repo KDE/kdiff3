@@ -24,11 +24,7 @@
 class DirectoryInfo
 {
     public:
-      DirectoryInfo(
-              FileAccess& dirA,
-              FileAccess& dirB,
-              FileAccess& dirC,
-              FileAccess& dirDest)
+      DirectoryInfo(FileAccess& dirA, FileAccess& dirB, FileAccess& dirC, FileAccess& dirDest)
       {
           m_dirA = dirA;
           m_dirB = dirB;

@@ -46,7 +46,7 @@ public:
     /**
      * Default Constructor
      */
-    KDiff3Shell(bool bCompleteInit=true);
+    explicit KDiff3Shell(bool bCompleteInit=true);
 
     /**
      * Default Destructor

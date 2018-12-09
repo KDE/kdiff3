@@ -28,13 +28,7 @@ class DiffTextWindow : public QWidget
 {
    Q_OBJECT
 public:
-   DiffTextWindow(
-      DiffTextWindowFrame* pParent,
-      QStatusBar* pStatusBar,
-      Options* pOptions,
-
-      int winIdx
-      );
+   DiffTextWindow(DiffTextWindowFrame* pParent, QStatusBar* pStatusBar, Options* pOptions, int winIdx);
    ~DiffTextWindow() override;
    void init(
       const QString& fileName,

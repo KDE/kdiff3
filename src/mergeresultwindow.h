@@ -93,11 +93,7 @@ class MergeResultWindow : public QWidget
 {
    Q_OBJECT
 public:
-   MergeResultWindow(
-      QWidget* pParent,
-      Options* pOptions,
-      QStatusBar* pStatusBar
-      );
+   MergeResultWindow(QWidget* pParent, Options* pOptions, QStatusBar* pStatusBar);
 
    void init(
       const LineData* pLineDataA, LineRef sizeA,
@@ -194,7 +190,7 @@ private:
    class MergeEditLine
    {
    public:
-      MergeEditLine(Diff3LineList::const_iterator i, int src=0){m_id3l=i; m_src=src; m_bLineRemoved=false; }
+      explicit MergeEditLine(Diff3LineList::const_iterator i, int src=0){m_id3l=i; m_src=src; m_bLineRemoved=false; }
       void setConflict() { m_src=0; m_bLineRemoved=false; m_str=QString(); }
       bool isConflict()  { return  m_src==0 && !m_bLineRemoved && m_str.isEmpty(); }
       void setRemoved(int src=0)  { m_src=src; m_bLineRemoved=true; m_str=QString(); }

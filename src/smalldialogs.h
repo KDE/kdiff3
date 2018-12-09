@@ -32,7 +32,7 @@ class OpenDialog : public QDialog
 {
    Q_OBJECT
 public:
-   OpenDialog(
+   OpenDialog(// krazy:exclude=explicit
       QWidget* pParent, const QString& n1, const QString& n2, const QString& n3,
       bool bMerge, const QString& outputName, const char* slotConfigure, Options* pOptions  );
 
