@@ -14,6 +14,7 @@
 #include <KAboutData>
 #include <KCrash/KCrash>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 #include <QApplication>
 #include <QCommandLineOption>
@@ -21,7 +22,6 @@
 #include <QFile>
 #include <QFont>
 #include <QLocale>
-#include <QMessageBox>
 #include <QStandardPaths>
 #include <QTextStream>
 
@@ -154,7 +154,7 @@ int main(int argc, char* argv[])
     if(!cmdLineParser->parse(QCoreApplication::arguments())) {
         QString errorMessage = cmdLineParser->errorText();
         QString helpText = cmdLineParser->helpText();
-        QMessageBox::warning(nullptr, aboutData.displayName(), "<html><head/><body><h2>" + errorMessage + "</h2><pre>" + i18n("See kdiff3 --help for supported options.") + "</pre></body></html>");
+        KMessageBox::error(nullptr, "<html><head/><body><h2>" + errorMessage + "</h2><pre>" + i18n("See kdiff3 --help for supported options.") + "</pre></body></html>", aboutData.displayName());
 #if !defined(Q_OS_WIN) 
         fputs(qPrintable(errorMessage), stderr);
         fputs("\n\n", stderr);
@@ -165,15 +165,15 @@ int main(int argc, char* argv[])
     }
 
     if(cmdLineParser->isSet(QStringLiteral("version"))) {
-        QMessageBox::information(nullptr, aboutData.displayName(),
-                                 aboutData.displayName() + ' ' + aboutData.version());
+        KMessageBox::information(nullptr,
+                                 aboutData.displayName() + ' ' + aboutData.version(), aboutData.displayName());
 #if !defined(Q_OS_WIN) 
         printf("%s %s\n", appName.data(), appVersion.toLocal8Bit().constData());
 #endif
         exit(0);
     }
     if(cmdLineParser->isSet(QStringLiteral("help"))) {
-        QMessageBox::warning(nullptr, aboutData.displayName(), "<html><head/><body><pre>" + cmdLineParser->helpText() + "</pre></body></html>");
+        KMessageBox::information(nullptr, "<html><head/><body><pre>" + cmdLineParser->helpText() + "</pre></body></html>", aboutData.displayName());
 #if !defined(Q_OS_WIN) 
         fputs(qPrintable(cmdLineParser->helpText()), stdout);
 #endif

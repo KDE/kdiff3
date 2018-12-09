@@ -33,7 +33,6 @@
 #include <QLabel>
 #include <QLayout>
 #include <QMenu>
-#include <QMessageBox>
 #include <QPixmap>
 #include <QPushButton>
 #include <QRegExp>
