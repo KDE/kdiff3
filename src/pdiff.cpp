@@ -13,22 +13,20 @@
 #include <cstdio>
 #include <ctype.h>
 
-#include <QtCore>
 #include <QCheckBox>
 #include <QClipboard>
 #include <QComboBox>
 #include <QDir>
 #include <QDropEvent>
 #include <QFile>
-#include <QtGui>
 #include <QLayout>
 #include <QLineEdit>
+#include <QMimeData>
 #include <QProcess>
 #include <QScrollBar>
 #include <QSplitter>
 #include <QStatusBar>
 #include <QUrl>
-#include <QtWidgets/QtWidgets>
 
 #include <KLocalizedString>
 #include <KShortcutsDialog>

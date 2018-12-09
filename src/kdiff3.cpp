@@ -351,7 +351,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDif
     delete KDiff3Shell::getParser();
     
     if(m_pKDiff3Shell == nullptr) {
-        completeInit();
+        completeInit(QString());
     }
 }
 

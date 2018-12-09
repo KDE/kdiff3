@@ -1099,7 +1099,7 @@ static QString calcHistoryLead(const QString& s)
             return s; // Very unlikely
         }
     }
-    return ""; // Must be an empty string, not a null string.
+    return QString(); // Must be an empty string, not a null string.
 }
 
 static void findHistoryRange(const QRegExp& historyStart, bool bThreeFiles, const Diff3LineList* pD3LList,

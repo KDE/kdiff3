@@ -11,6 +11,8 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  ***************************************************************************/
+#ifndef CVSIGNORELIST_H
+#define CVSIGNORELIST_H
 
 #include "fileaccess.h"
 
@@ -33,3 +35,5 @@ class CvsIgnoreList
     QStringList m_endPatterns;
     QStringList m_generalPatterns;
 };
+
+#endif

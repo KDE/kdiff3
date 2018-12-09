@@ -7,6 +7,8 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  ***************************************************************************/
+#ifndef SELECTION_H
+#define SELECTION_H
 
 #include "gnudiff_diff.h"
 #include "common.h"
@@ -76,3 +78,5 @@ public:
    int endPos()   { return firstLine==lastLine ? std::max(firstPos,lastPos) :
                            firstLine<lastLine ? lastPos : firstPos;      }
 };
+
+#endif

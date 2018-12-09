@@ -120,7 +120,7 @@ class KDiff3App : public QSplitter
     void readOptions(KSharedConfigPtr);
 
     // Finish initialisation (virtual, so that it can be called from the shell too.)
-    virtual void completeInit(const QString& fn1 = "", const QString& fn2 = "", const QString& fn3 = "");
+    virtual void completeInit(const QString& fn1 = QString(), const QString& fn2 = QString(), const QString& fn3 = QString());
 
     /** queryClose is called by KMainWindow on each closeEvent of a window. Against the
      * default implementation (only returns true), this calles saveModified() on the document object to ask if the document shall

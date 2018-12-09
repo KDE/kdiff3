@@ -20,8 +20,8 @@
  * 
  */
 
-#ifndef PROGREESPROXYEXENDER_H
-#define PROGREESPROXYEXENDER_H
+#ifndef PROGREESPROXYEXTENDER_H
+#define PROGREESPROXYEXTENDER_H
 
 #include "progress.h"
 #include <QString>

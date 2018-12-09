@@ -2142,7 +2142,7 @@ QString DirectoryMergeWindow::DirectoryMergeWindowPrivate::getFileName(const QMo
     {
         return mi.column() == s_ACol ? pMFI->getFileInfoA()->absoluteFilePath() : mi.column() == s_BCol ? pMFI->getFileInfoB()->absoluteFilePath() : mi.column() == s_CCol ? pMFI->getFileInfoC()->absoluteFilePath() : QString("");
     }
-    return "";
+    return QString();
 }
 
 bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::isDir(const QModelIndex& mi)

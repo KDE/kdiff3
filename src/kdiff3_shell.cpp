@@ -15,7 +15,7 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA.           *
+ *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
  ***************************************************************************/
 
 #include "kdiff3_shell.h"
@@ -69,7 +69,7 @@ KDiff3Shell::KDiff3Shell(bool bCompleteInit)
         setCentralWidget(m_widget);
 
         if(bCompleteInit)
-            m_widget->completeInit();
+            m_widget->completeInit(QString());
         connect(m_widget, SIGNAL(createNewInstance(const QString&, const QString&, const QString&)), this, SLOT(slotNewInstance(const QString&, const QString&, const QString&)));
     }
     else

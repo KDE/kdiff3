@@ -6,16 +6,16 @@ Port to KF5/Qt5 by Michael Reeves (reeves.87@gmail.com)
 KDiff3-Version: 1.7.90
 
 Now requires Qt 5.6 or later and KF5 5.14+. Legacy 0.9.98 and earlier builds are not supported.
-MacOSX build is untested since port. The Konqueror specific plugin is not ported and no longer mantained.
+MacOSX build is untested since port. The Konqueror specific plugin is not ported and no longer maintained.
 This plugin would only apply to KDE before 4.6. Support as been removed from main CMakeLists.txt.
 As of 1/13/17 cmake 3.1+ is the targeted cmake version.
 
 
-cmake is now the only build system supported. KF5/QT5 was big jump. A lot changed besides just the API.
-I am not against a Qt5-only build variant but see no reason to mantain two sperate build systems.
+cmake is now the only build system supported. KF5/Qt5 was big jump. A lot changed besides just the API.
+I am not against a Qt5-only build variant but see no reason to maintain two separate build systems.
 At present KF5 is my focus.
 
-The original pre KF5/Qt5 Readme fallows old build intrustions have been removed to avoid confusion:
+The original pre KF5/Qt5 Readme follows old build instructions have been removed to avoid confusion:
 
 
 Copyright: (C) 2002-2014 by Joachim Eibl
@@ -25,7 +25,7 @@ These are available for Un*x, Windows, Mac.
 Thus there are many setup possibilities to consider.
 
 Supported Qt-versions: 4.8, 5.2 or higher.
-Supported KDE-version: 4
+Supported KDE-version: 4, 5
 (For KDE3/Qt3 use KDiff3-0.9.92 or older.)
 
 Contents
@@ -46,11 +46,11 @@ KDiff3 is a program that
 - an integrated editor for comfortable solving of merge-conflicts
 - has support for KDE-KIO (ftp, sftp, http, fish, smb),
 - has an intuitive graphical user interface,
-- provides a context menu for KDE-Konqueror and Windows-Explorer,
+- provides a context menu for KDE-Dolphin and Windows-Explorer,
 - supports 64 bit systems. (Some build issues are discussed in here.)
 - Support for many encodings and Unicode.
 
-Do you want help translating? Read the README in the po-subdirectory!
+Do you want help translating? Read the instructions on https://l10n.kde.org/ !
 
 
 License
@@ -69,7 +69,7 @@ License
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA 02111-1307
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307
     USA
 
     For details see file "COPYING".

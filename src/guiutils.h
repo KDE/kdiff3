@@ -14,6 +14,8 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+#ifndef GUIUTILS_H
+#define GUIUTILS_H
 
 #include <QObject>
 #include <kactioncollection.h>
@@ -128,3 +130,5 @@ namespace KDiff3 {
       return theAction;
    }
 }
+
+#endif
