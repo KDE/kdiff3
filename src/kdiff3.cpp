@@ -475,11 +475,11 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
             QString text(i18n("Opening of these files failed:"));
             text += "\n\n";
             if(!m_sd1.isEmpty() && !m_sd1.hasData())
-                text += " - " + m_sd1.getAliasName() + "\n";
+                text += " - " + m_sd1.getAliasName() + '\n';
             if(!m_sd2.isEmpty() && !m_sd2.hasData())
-                text += " - " + m_sd2.getAliasName() + "\n";
+                text += " - " + m_sd2.getAliasName() + '\n';
             if(!m_sd3.isEmpty() && !m_sd3.hasData())
-                text += " - " + m_sd3.getAliasName() + "\n";
+                text += " - " + m_sd3.getAliasName() + '\n';
 
             KMessageBox::sorry(this, text, i18n("File Open Error"));
             bFileOpenError = true;
@@ -980,7 +980,7 @@ void KDiff3App::slotFilePrint()
                 painter.setPen(m_pOptions->m_fgColor);
                 painter.drawLine(0, view.bottom() + 3, view.width(), view.bottom() + 3);
                 QString s = bPrintCurrentPage ? QString("")
-                                              : QString::number(page) + "/" + QString::number(totalNofPages);
+                                              : QString::number(page) + '/' + QString::number(totalNofPages);
                 if(bPrintSelection) s += i18n(" (Selection)");
                 painter.drawText((view.right() - painter.fontMetrics().width(s)) / 2,
                                  view.bottom() + painter.fontMetrics().ascent() + 5, s);

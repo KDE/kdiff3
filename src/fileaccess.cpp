@@ -425,7 +425,7 @@ QString FileAccess::fileRelPath() const
 {
     QString basePath = m_baseDir.canonicalPath();
     QString filePath = m_fileInfo.canonicalFilePath();
-    QString path = filePath.replace(basePath + "/", QLatin1String(""));
+    QString path = filePath.replace(basePath + '/', QLatin1String(""));
 
     return path;
 }
@@ -1156,7 +1156,7 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
         if(fa.fileName() != "." && fa.fileName() != "..")
         {
             QUrl url = parentUrl.adjusted(QUrl::StripTrailingSlash);
-            url.setPath(url.path() + "/" + fa.fileName());
+            url.setPath(url.path() + '/' + fa.fileName());
             fa.setUrl(url);
             //fa.m_absoluteFilePath = fa.url().url();
             m_pDirList->push_back(fa);

@@ -120,7 +120,7 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
 
         if(!m_pOptions->m_PreProcessorCmd.isEmpty())
         {
-            msg += "- " + i18n("PreprocessorCmd: ") + m_pOptions->m_PreProcessorCmd + "\n";
+            msg += "- " + i18n("PreprocessorCmd: ") + m_pOptions->m_PreProcessorCmd + '\n';
         }
         if(!msg.isEmpty())
         {
@@ -1081,11 +1081,11 @@ void KDiff3App::slotFileOpen()
                     QString text(i18n("Opening of these files failed:"));
                     text += "\n\n";
                     if(!m_sd1.isEmpty() && !m_sd1.hasData())
-                        text += " - " + m_sd1.getAliasName() + "\n";
+                        text += " - " + m_sd1.getAliasName() + '\n';
                     if(!m_sd2.isEmpty() && !m_sd2.hasData())
-                        text += " - " + m_sd2.getAliasName() + "\n";
+                        text += " - " + m_sd2.getAliasName() + '\n';
                     if(!m_sd3.isEmpty() && !m_sd3.hasData())
-                        text += " - " + m_sd3.getAliasName() + "\n";
+                        text += " - " + m_sd3.getAliasName() + '\n';
 
                     KMessageBox::sorry(this, text, i18n("File open error"));
                     continue;
@@ -1152,11 +1152,11 @@ void KDiff3App::slotFileOpen2(QString fn1, QString fn2, QString fn3, QString ofn
             QString text(i18n("Opening of these files failed:"));
             text += "\n\n";
             if(!m_sd1.isEmpty() && !m_sd1.hasData())
-                text += " - " + m_sd1.getAliasName() + "\n";
+                text += " - " + m_sd1.getAliasName() + '\n';
             if(!m_sd2.isEmpty() && !m_sd2.hasData())
-                text += " - " + m_sd2.getAliasName() + "\n";
+                text += " - " + m_sd2.getAliasName() + '\n';
             if(!m_sd3.isEmpty() && !m_sd3.hasData())
-                text += " - " + m_sd3.getAliasName() + "\n";
+                text += " - " + m_sd3.getAliasName() + '\n';
 
             KMessageBox::sorry(this, text, i18n("File open error"));
         }

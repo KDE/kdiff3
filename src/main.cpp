@@ -158,7 +158,7 @@ int main(int argc, char* argv[])
 #if !defined(Q_OS_WIN) 
         fputs(qPrintable(errorMessage), stderr);
         fputs("\n\n", stderr);
-        fputs(qPrintable(helpText + "\n"), stderr);
+        fputs(qPrintable(helpText + '\n'), stderr);
         fputs("\n", stderr);
 #endif
         exit(1);

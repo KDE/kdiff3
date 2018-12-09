@@ -93,7 +93,7 @@ QString MergeFileInfos::fullNameA() const
     if(existsInA())
         return getFileInfoA()->absoluteFilePath();
 
-    return m_dirInfo->dirA().absoluteFilePath() + "/" + subPath();
+    return m_dirInfo->dirA().absoluteFilePath() + '/' + subPath();
 }
 
 QString MergeFileInfos::fullNameB() const
@@ -101,7 +101,7 @@ QString MergeFileInfos::fullNameB() const
     if(existsInB())
         return getFileInfoB()->absoluteFilePath();
 
-    return m_dirInfo->dirB().absoluteFilePath() + "/" + subPath();
+    return m_dirInfo->dirB().absoluteFilePath() + '/' + subPath();
 }
 
 QString MergeFileInfos::fullNameC() const
@@ -109,7 +109,7 @@ QString MergeFileInfos::fullNameC() const
     if(existsInC())
         return getFileInfoC()->absoluteFilePath();
 
-    return m_dirInfo->dirC().absoluteFilePath() + "/" + subPath();
+    return m_dirInfo->dirC().absoluteFilePath() + '/' + subPath();
 }
 
 void MergeFileInfos::sort(Qt::SortOrder order)
@@ -127,5 +127,5 @@ QString MergeFileInfos::fullNameDest() const
     else if(m_dirInfo->destDir().prettyAbsPath() == m_dirInfo->dirB().prettyAbsPath())
         return fullNameB();
     else
-        return m_dirInfo->destDir().absoluteFilePath() + "/" + subPath();
+        return m_dirInfo->destDir().absoluteFilePath() + '/' + subPath();
 }

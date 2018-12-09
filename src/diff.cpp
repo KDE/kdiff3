@@ -612,7 +612,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
                 ppProcess.waitForFinished(-1);
             }
             else
-                errorReason = "\n(" + errorReason + ")";
+                errorReason = "\n(" + errorReason + ')';
             
             bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
             if(fileInSize > 0 && (!bSuccess || m_normalData.m_size == 0))
@@ -664,7 +664,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
                 ppProcess.waitForFinished(-1);
             }
             else
-                errorReason = "\n(" + errorReason + ")";
+                errorReason = "\n(" + errorReason + ')';
             
             bool bSuccess = errorReason.isEmpty() && m_lmppData.readFile(fileNameOut2);
             if(FileAccess(fileNameIn2).size() > 0 && (!bSuccess || m_lmppData.m_size == 0))

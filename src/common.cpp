@@ -54,7 +54,7 @@ QString ValueMap::getAsString()
     {
         QString key = i->first;
         QString val = i->second;
-        result += key + "=" + val + "\n";
+        result += key + '=' + val + '\n';
     }
     return result;
 }

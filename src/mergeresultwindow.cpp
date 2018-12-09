@@ -1176,7 +1176,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
         QString s = matchedRegExpr.cap(groupIdx);
         if(groupIdx == 0)
         {
-            key += s + " ";
+            key += s + ' ';
             continue;
         }
 
@@ -1187,7 +1187,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
             int i = s.toInt(&bOk);
             if(bOk && i >= 0 && i < 10000)
                 s.sprintf("%04d", i); // This should help for correct sorting of numbers.
-            key += s + " ";
+            key += s + ' ';
         }
         else
         {
@@ -1204,7 +1204,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
             {
                 QString sIdx;
                 sIdx.sprintf("%02d", idx + 1); // Up to 99 words in the groupRegExp (more than 12 aren't expected)
-                key += sIdx + " ";
+                key += sIdx + ' ';
             }
         }
     }
@@ -1774,9 +1774,9 @@ void MergeResultWindow::writeLine(
 
     yOffset += topLineYOffset;
 
-    QString srcName = " ";
+    QString srcName = QChar(' ');
     if(bUserModified)
-        srcName = "m";
+        srcName = QChar('m');
     else if(srcSelect == A && mergeDetails != eNoChange)
         srcName = i18n("A");
     else if(srcSelect == B)

@@ -159,7 +159,7 @@ bool KDiff3Part::openFile()
     QString version2;
     while(!stream.atEnd() && (fileName1.isEmpty() || fileName2.isEmpty()))
     {
-        str = stream.readLine() + "\n";
+        str = stream.readLine() + '\n';
         getNameAndVersion(str, "---", fileName1, version1);
         getNameAndVersion(str, "+++", fileName2, version2);
     }
@@ -195,7 +195,7 @@ bool KDiff3Part::openFile()
         process.waitForFinished(-1);
 
         m_widget->slotFileOpen2(fileName1, tempFileName, "", "",
-                                "", version2.isEmpty() ? fileName2 : "REV:" + version2 + ":" + fileName2, "", nullptr); // alias names                                                                                              //    std::cerr << "KDiff3: f1:" << fileName1.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
+                                "", version2.isEmpty() ? fileName2 : "REV:" + version2 + ':' + fileName2, "", nullptr); // alias names                                                                                              //    std::cerr << "KDiff3: f1:" << fileName1.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
     }
     else if(version2.isEmpty() && f2.exists())
     {
@@ -212,7 +212,7 @@ bool KDiff3Part::openFile()
         process.waitForFinished(-1);
 
         m_widget->slotFileOpen2(tempFileName, fileName2, "", "",
-                                version1.isEmpty() ? fileName1 : "REV:" + version1 + ":" + fileName1, "", "", nullptr); // alias name
+                                version1.isEmpty() ? fileName1 : "REV:" + version1 + ':' + fileName1, "", "", nullptr); // alias name
                                                                                                                   //    std::cerr << "KDiff3: f2:" << fileName2.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
     }
     else if(!version1.isEmpty() && !version2.isEmpty())
@@ -238,8 +238,8 @@ bool KDiff3Part::openFile()
         process2.waitForFinished(-1);
 
         m_widget->slotFileOpen2(tempFileName1, tempFileName2, "", "",
-                                "REV:" + version1 + ":" + fileName1,
-                                "REV:" + version2 + ":" + fileName2,
+                                "REV:" + version1 + ':' + fileName1,
+                                "REV:" + version2 + ':' + fileName2,
                                 "", nullptr);
 
         //    std::cerr << "KDiff3: f1/2:" << tempFileName1.toLatin1() <<"<->"<<tempFileName2.toLatin1()<< std::endl;

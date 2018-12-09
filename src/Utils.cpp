@@ -106,7 +106,7 @@ bool Utils::wildcardMultiMatch(const QString& wildcard, const QString& testStrin
 {
     static QHash<QString, QRegExp> s_patternMap;
 
-    QStringList sl = wildcard.split(";");
+    QStringList sl = wildcard.split(QChar(';'));
 
     for(QStringList::Iterator it = sl.begin(); it != sl.end(); ++it)
     {

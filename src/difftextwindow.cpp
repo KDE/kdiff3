@@ -1851,7 +1851,7 @@ void DiffTextWindowFrame::init()
         QString s = QDir::toNativeSeparators(pDTW->d->m_filename);
         d->m_pFileSelection->setText(s);
         QString winId = pDTW->d->m_winIdx == 1 ? (pDTW->d->m_bTriple ? i18n("A (Base)") : i18n("A")) : (pDTW->d->m_winIdx == 2 ? i18n("B") : i18n("C"));
-        d->m_pLabel->setText(winId + ":");
+        d->m_pLabel->setText(winId + ':');
         d->m_pEncoding->setText(i18n("Encoding: %1", pDTW->d->m_pTextCodec != nullptr ? QLatin1String(pDTW->d->m_pTextCodec->name()) : QString()));
         d->m_pLineEndStyle->setText(i18n("Line end style: %1", pDTW->d->m_eLineEndStyle == eLineEndStyleDos ? i18n("DOS") : i18n("Unix")));
     }
@@ -1881,13 +1881,13 @@ void DiffTextWindowFrame::setFirstLine(int firstLine)
         int l = pDTW->calcTopLineInFile(firstLine);
 
         int w = d->m_pTopLine->fontMetrics().width(
-            s + " " + QString().fill('0', lineNumberWidth));
+            s + ' ' + QString().fill('0', lineNumberWidth));
         d->m_pTopLine->setMinimumWidth(w);
 
         if(l == -1)
             s = i18n("End");
         else
-            s += " " + QString::number(l + 1);
+            s += ' ' + QString::number(l + 1);
 
         d->m_pTopLine->setText(s);
         d->m_pTopLine->repaint();

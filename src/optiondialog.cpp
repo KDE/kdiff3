@@ -1095,7 +1095,7 @@ void OptionDialog::setupMergePage()
     pWhiteSpace3FileMergeDefault->insertItem(0, i18n("Manual Choice"));
     pWhiteSpace3FileMergeDefault->insertItem(1, i18n("A"));
     pWhiteSpace3FileMergeDefault->insertItem(2, i18n("B"));
-    pWhiteSpace3FileMergeDefault->insertItem(3, "C");
+    pWhiteSpace3FileMergeDefault->insertItem(3, i18n("C"));
     label->setToolTip(i18n(
         "Allow the merge algorithm to automatically select an input for "
         "white-space-only changes."));

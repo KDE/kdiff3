@@ -1102,7 +1102,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         if(!bListDirSuccessA) s += "\nA: " + dirA.prettyAbsPath();
         if(!bListDirSuccessB) s += "\nB: " + dirB.prettyAbsPath();
         if(!bListDirSuccessC) s += "\nC: " + dirC.prettyAbsPath();
-        s += "\n";
+        s += '\n';
         s += i18n("Check the permissions of the subdirectories.");
         bContinue = KMessageBox::Continue == KMessageBox::warningContinueCancel(q, s);
     }
@@ -1162,7 +1162,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
                  nofDirs, nofEqualFiles, nofFiles - nofEqualFiles);
 
         if(dirC.isValid())
-            s += "\n" + i18n("Number of manual merges: %1", nofManualMerges);
+            s += '\n' + i18n("Number of manual merges: %1", nofManualMerges);
         KMessageBox::information(q, s);
         //
         //TODO
