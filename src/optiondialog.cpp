@@ -225,7 +225,7 @@ FontChooser::FontChooser(QWidget* pParent)
 
     m_pSelectFont = new QPushButton(i18n("Change Font"));
     m_pSelectFont->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    connect(m_pSelectFont, SIGNAL(clicked()), this, SLOT(slotSelectFont()));
+    connect(m_pSelectFont, &QPushButton::clicked, this, &FontChooser::slotSelectFont);
     pLayout->addWidget(m_pSelectFont);
     pLayout->setAlignment(m_pSelectFont, Qt::AlignRight);
 }
@@ -611,7 +611,7 @@ OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageD
     setFaceType(List);
     setWindowTitle(i18n("Configure"));
     setStandardButtons(QDialogButtonBox::Help | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Apply | QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    
+
     setModal(true);
 
     //showButtonSeparator( true );
@@ -1445,7 +1445,7 @@ static void insertCodecs(OptionComboBox* p)
       if ( pCodec != 0 )  m.insert( std::make_pair( QString(pCodec->mimeName()).toUpper(), pCodec->mimeName()) );
       else                break;
    }
-   
+
    p->insertItem( i18n("Auto"), 0 );
    std::multimap<QString,QString>::iterator mi;
    for(mi=m.begin(), i=0; mi!=m.end(); ++mi, ++i)
@@ -1500,7 +1500,7 @@ void OptionDialog::setupRegionalPage()
 {
     /*
      TODO: What is this line supposed to do besides leak memory? Introduced as is in .91 no explanation
-        new Utf8BOMCodec(); 
+        new Utf8BOMCodec();
    */
 
     QFrame* page = new QFrame();

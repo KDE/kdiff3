@@ -966,7 +966,7 @@ void DiffTextWindowData::writeLine(
         if(!bWrapLine || wrapLineLength > 0)
         {
             Qt::PenStyle wrapLinePenStyle = Qt::DotLine;
-            
+
             p.setPen(QPen(m_pOptions->m_fgColor, 0, bWrapLine ? wrapLinePenStyle : Qt::SolidLine));
             p.drawLine(xOffset + 1, yOffset, xOffset + 1, yOffset + fontHeight - 1);
             p.setPen(QPen(m_pOptions->m_fgColor, 0, Qt::SolidLine));
@@ -1145,7 +1145,7 @@ QString DiffTextWindowData::getString(int d3lIdx)
     int changed = 0;
     int changed2 = 0;
     int lineIdx = -1;
-    
+
     getLineInfo(*d3l, lineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 
     if(lineIdx == -1)
@@ -1215,7 +1215,7 @@ void DiffTextWindowData::getLineInfo(
                    ((d3l.lineB == -1) != (lineIdx == -1) ? 2 : 0);
         changed2 |= (bAEqC ? 0 : 1) + (bBEqC ? 0 : 2);
     }
-    
+
 }
 
 void DiffTextWindow::resizeEvent(QResizeEvent* e)
@@ -1260,7 +1260,7 @@ QString DiffTextWindow::getSelection()
     for(it = 0; it < vectorSize; ++it)
     {
         const Diff3Line* d3l = d->m_bWordWrap ? d->m_diff3WrapLineVector[it].pD3L : (*d->m_pDiff3LineVector)[it];
-        
+
         Q_ASSERT(d->m_winIdx >= 1 && d->m_winIdx <= 3);
 
         if(d->m_winIdx == 1) {
@@ -2051,7 +2051,7 @@ void EncodingLabel::insertCodec(const QString& visibleCodecName, QTextCodec* pCo
         if(currentTextCodecEnum == CodecMIBEnum)
             pAction->setChecked(true);
         pMenu->addAction(pAction);
-        connect(pAction, SIGNAL(triggered()), this, SLOT(slotEncodingChanged()));
+        connect(pAction, &QAction::triggered, this, &EncodingLabel::slotEncodingChanged);
         codecEnumList.append(CodecMIBEnum);
     }
 }

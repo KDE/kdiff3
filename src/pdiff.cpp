@@ -26,6 +26,7 @@
 #include <QScrollBar>
 #include <QSplitter>
 #include <QStatusBar>
+#include <QTextCodec>
 #include <QUrl>
 
 #include <KLocalizedString>
@@ -63,7 +64,7 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, LineRef idx)
         else if(idx == 2)
             l = (*it).lineB;
         else if(idx == 3)
-            l = (*it).lineC;            
+            l = (*it).lineC;
 
         if(l != -1)
         {
@@ -73,7 +74,7 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, LineRef idx)
                                           "Data loss error:\n"
                                           "If it is reproducible please contact the author.\n"),
                                    i18n("Severe Internal Error"));
-                
+
                 fprintf(stderr, "Severe Internal Error.\n");
                 ::exit(-1);
             }
@@ -87,7 +88,7 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, LineRef idx)
                                   "Data loss error:\n"
                                   "If it is reproducible please contact the author.\n"),
                            i18n("Severe Internal Error"));
-        
+
         fprintf(stderr, "Severe Internal Error.\n");
         ::exit(-1);
     }
@@ -154,12 +155,12 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
 
         // First get all input data.
         pp.setInformation(i18n("Loading A"));
-        
+
         if(bUseCurrentEncoding == true)
             errors = m_sd1.readAndPreprocess(m_sd1.getEncoding(), false);
         else
             errors = m_sd1.readAndPreprocess(m_pOptions->m_pEncodingA, m_pOptions->m_bAutoDetectUnicodeA);
-        
+
         if(!errors.isEmpty())
             KMessageBox::errorList(m_pOptionDialog, i18n("Errors occurred during pre-processing of file A."), errors);
 
@@ -170,10 +171,10 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
             errors = m_sd2.readAndPreprocess(m_sd2.getEncoding(), false);
         else
             errors = m_sd2.readAndPreprocess(m_pOptions->m_pEncodingB, m_pOptions->m_bAutoDetectUnicodeB);
-        
+
         if(!errors.isEmpty())
             KMessageBox::errorList(m_pOptionDialog, i18n("Errors occurred during pre-processing of file B."), errors);
-        
+
         pp.step();
     }
     else
@@ -215,7 +216,7 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
 
             if(!errors.isEmpty())
                 KMessageBox::errorList(m_pOptionDialog, i18n("Errors occurred during pre-processing of file C."), errors);
-            
+
             pp.step();
         }
 
@@ -567,7 +568,7 @@ void KDiff3App::initView()
     m_pOverview = new Overview(&m_pOptionDialog->m_options);
     m_pOverview->setObjectName("Overview");
     pDiffHLayout->addWidget(m_pOverview);
-    connect(m_pOverview, SIGNAL(setLine(int)), this, SLOT(setDiff3Line(int)));
+    connect(m_pOverview, &Overview::setLine, this, &KDiff3App::setDiff3Line);
 
     m_pDiffVScrollBar = new QScrollBar(Qt::Vertical, pDiffWindowFrame);
     pDiffHLayout->addWidget(m_pDiffVScrollBar);
@@ -581,13 +582,13 @@ void KDiff3App::initView()
     m_pDiffTextWindow1 = m_pDiffTextWindowFrame1->getDiffTextWindow();
     m_pDiffTextWindow2 = m_pDiffTextWindowFrame2->getDiffTextWindow();
     m_pDiffTextWindow3 = m_pDiffTextWindowFrame3->getDiffTextWindow();
-    connect(m_pDiffTextWindowFrame1, SIGNAL(fileNameChanged(const QString&, int)), this, SLOT(slotFileNameChanged(const QString&, int)));
-    connect(m_pDiffTextWindowFrame2, SIGNAL(fileNameChanged(const QString&, int)), this, SLOT(slotFileNameChanged(const QString&, int)));
-    connect(m_pDiffTextWindowFrame3, SIGNAL(fileNameChanged(const QString&, int)), this, SLOT(slotFileNameChanged(const QString&, int)));
+    connect(m_pDiffTextWindowFrame1, &DiffTextWindowFrame::fileNameChanged, this, &KDiff3App::slotFileNameChanged);
+    connect(m_pDiffTextWindowFrame2, &DiffTextWindowFrame::fileNameChanged, this, &KDiff3App::slotFileNameChanged);
+    connect(m_pDiffTextWindowFrame3, &DiffTextWindowFrame::fileNameChanged, this, &KDiff3App::slotFileNameChanged);
 
-    connect(m_pDiffTextWindowFrame1, SIGNAL(encodingChanged(QTextCodec*)), this, SLOT(slotEncodingChangedA(QTextCodec*)));
-    connect(m_pDiffTextWindowFrame2, SIGNAL(encodingChanged(QTextCodec*)), this, SLOT(slotEncodingChangedB(QTextCodec*)));
-    connect(m_pDiffTextWindowFrame3, SIGNAL(encodingChanged(QTextCodec*)), this, SLOT(slotEncodingChangedC(QTextCodec*)));
+    connect(m_pDiffTextWindowFrame1, &DiffTextWindowFrame::encodingChanged, this, &KDiff3App::slotEncodingChangedA);
+    connect(m_pDiffTextWindowFrame2, &DiffTextWindowFrame::encodingChanged, this, &KDiff3App::slotEncodingChangedB);
+    connect(m_pDiffTextWindowFrame3, &DiffTextWindowFrame::encodingChanged, this, &KDiff3App::slotEncodingChangedC);
 
     // Merge window
     m_pMergeWindowFrame = new QWidget(pVSplitter);
@@ -635,59 +636,59 @@ void KDiff3App::initView()
     pHScrollBarLayout->addWidget(m_pCornerWidget);
 
     connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pOverview, &Overview::setFirstLine);
-    connect(m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow1, SLOT(setFirstLine(int)));
-    connect(m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow1, SLOT(setHorizScrollOffset(int)));
-    connect(m_pDiffTextWindow1, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
-    connect(m_pDiffTextWindow1, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
-    connect(m_pDiffTextWindow1, SIGNAL(scrollDiffTextWindow(int, int)), this, SLOT(scrollDiffTextWindow(int, int)));
+    connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow1, &DiffTextWindow::setFirstLine);
+    connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow1, &DiffTextWindow::setHorizScrollOffset);
+    connect(m_pDiffTextWindow1, &DiffTextWindow::newSelection, this, &KDiff3App::slotSelectionStart);
+    connect(m_pDiffTextWindow1, &DiffTextWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
+    connect(m_pDiffTextWindow1, &DiffTextWindow::scrollDiffTextWindow, this, &KDiff3App::scrollDiffTextWindow);
     m_pDiffTextWindow1->installEventFilter(this);
 
-    connect(m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow2, SLOT(setFirstLine(int)));
-    connect(m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow2, SLOT(setHorizScrollOffset(int)));
-    connect(m_pDiffTextWindow2, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
-    connect(m_pDiffTextWindow2, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
-    connect(m_pDiffTextWindow2, SIGNAL(scrollDiffTextWindow(int, int)), this, SLOT(scrollDiffTextWindow(int, int)));
+    connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow2, &DiffTextWindow::setFirstLine);
+    connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow2, &DiffTextWindow::setHorizScrollOffset);
+    connect(m_pDiffTextWindow2, &DiffTextWindow::newSelection, this, &KDiff3App::slotSelectionStart);
+    connect(m_pDiffTextWindow2, &DiffTextWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
+    connect(m_pDiffTextWindow2, &DiffTextWindow::scrollDiffTextWindow, this, &KDiff3App::scrollDiffTextWindow);
     m_pDiffTextWindow2->installEventFilter(this);
 
-    connect(m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow3, SLOT(setFirstLine(int)));
-    connect(m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow3, SLOT(setHorizScrollOffset(int)));
-    connect(m_pDiffTextWindow3, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
-    connect(m_pDiffTextWindow3, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
-    connect(m_pDiffTextWindow3, SIGNAL(scrollDiffTextWindow(int, int)), this, SLOT(scrollDiffTextWindow(int, int)));
+    connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow3, &DiffTextWindow::setFirstLine);
+    connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow3, &DiffTextWindow::setHorizScrollOffset);
+    connect(m_pDiffTextWindow3, &DiffTextWindow::newSelection, this, &KDiff3App::slotSelectionStart);
+    connect(m_pDiffTextWindow3, &DiffTextWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
+    connect(m_pDiffTextWindow3, &DiffTextWindow::scrollDiffTextWindow, this, &KDiff3App::scrollDiffTextWindow);
     m_pDiffTextWindow3->installEventFilter(this);
 
     MergeResultWindow* p = m_pMergeResultWindow;
     connect(m_pMergeVScrollBar, &QScrollBar::valueChanged, p, &MergeResultWindow::setFirstLine);
 
     connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, p, &MergeResultWindow::setHorizScrollOffset);
-    connect(p, SIGNAL(scrollMergeResultWindow(int, int)), this, SLOT(scrollMergeResultWindow(int, int)));
-    connect(p, SIGNAL(sourceMask(int, int)), this, SLOT(sourceMask(int, int)));
-    connect(p, SIGNAL(resizeSignal()), this, SLOT(resizeMergeResultWindow()));
-    connect(p, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
-    connect(p, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
-    connect(p, SIGNAL(modifiedChanged(bool)), this, SLOT(slotOutputModified(bool)));
+    connect(p, &MergeResultWindow::scrollMergeResultWindow, this, &KDiff3App::scrollMergeResultWindow);
+    connect(p, &MergeResultWindow::sourceMask, this, &KDiff3App::sourceMask);
+    connect(p, &MergeResultWindow::resizeSignal, this, &KDiff3App::resizeMergeResultWindow);
+    connect(p, &MergeResultWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
+    connect(p, &MergeResultWindow::newSelection, this, &KDiff3App::slotSelectionStart);
+    connect(p, &MergeResultWindow::modifiedChanged, this, &KDiff3App::slotOutputModified);
     connect(p, &MergeResultWindow::modifiedChanged, m_pMergeResultWindowTitle, &WindowTitleWidget::slotSetModified);
-    connect(p, SIGNAL(updateAvailabilities()), this, SLOT(slotUpdateAvailabilities()));
-    connect(p, SIGNAL(showPopupMenu(const QPoint&)), this, SLOT(showPopupMenu(const QPoint&)));
-    connect(p, SIGNAL(noRelevantChangesDetected()), this, SLOT(slotNoRelevantChangesDetected()));
+    connect(p, &MergeResultWindow::updateAvailabilities, this, &KDiff3App::slotUpdateAvailabilities);
+    connect(p, &MergeResultWindow::showPopupMenu, this, &KDiff3App::showPopupMenu);
+    connect(p, &MergeResultWindow::noRelevantChangesDetected, this, &KDiff3App::slotNoRelevantChangesDetected);
     sourceMask(0, 0);
 
-    connect(p, SIGNAL(setFastSelectorRange(int, int)), m_pDiffTextWindow1, SLOT(setFastSelectorRange(int, int)));
-    connect(p, SIGNAL(setFastSelectorRange(int, int)), m_pDiffTextWindow2, SLOT(setFastSelectorRange(int, int)));
-    connect(p, SIGNAL(setFastSelectorRange(int, int)), m_pDiffTextWindow3, SLOT(setFastSelectorRange(int, int)));
-    connect(m_pDiffTextWindow1, SIGNAL(setFastSelectorLine(int)), p, SLOT(slotSetFastSelectorLine(int)));
-    connect(m_pDiffTextWindow2, SIGNAL(setFastSelectorLine(int)), p, SLOT(slotSetFastSelectorLine(int)));
-    connect(m_pDiffTextWindow3, SIGNAL(setFastSelectorLine(int)), p, SLOT(slotSetFastSelectorLine(int)));
-    connect(m_pDiffTextWindow1, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
-    connect(m_pDiffTextWindow2, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
-    connect(m_pDiffTextWindow3, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
-    connect(m_pDirectoryMergeInfo, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
+    connect(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow1, &DiffTextWindow::setFastSelectorRange);
+    connect(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow2, &DiffTextWindow::setFastSelectorRange);
+    connect(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow3, &DiffTextWindow::setFastSelectorRange);
+    connect(m_pDiffTextWindow1, &DiffTextWindow::setFastSelectorLine, p, &MergeResultWindow::slotSetFastSelectorLine);
+    connect(m_pDiffTextWindow2, &DiffTextWindow::setFastSelectorLine, p, &MergeResultWindow::slotSetFastSelectorLine);
+    connect(m_pDiffTextWindow3, &DiffTextWindow::setFastSelectorLine, p, &MergeResultWindow::slotSetFastSelectorLine);
+    connect(m_pDiffTextWindow1, &DiffTextWindow::gotFocus, p, &MergeResultWindow::updateSourceMask);
+    connect(m_pDiffTextWindow2, &DiffTextWindow::gotFocus, p, &MergeResultWindow::updateSourceMask);
+    connect(m_pDiffTextWindow3, &DiffTextWindow::gotFocus, p, &MergeResultWindow::updateSourceMask);
+    connect(m_pDirectoryMergeInfo, &DirectoryMergeInfo::gotFocus, p, &MergeResultWindow::updateSourceMask);
 
-    connect(m_pDiffTextWindow1, SIGNAL(resizeHeightChangedSignal(int)), this, SLOT(resizeDiffTextWindowHeight(int)));
+    connect(m_pDiffTextWindow1, &DiffTextWindow::resizeHeightChangedSignal, this, &KDiff3App::resizeDiffTextWindowHeight);
     // The following two connects cause the wordwrap to be recalced thrice, just to make sure. Better than forgetting one.
-    connect(m_pDiffTextWindow1, SIGNAL(resizeWidthChangedSignal(int)), this, SLOT(postRecalcWordWrap()));
-    connect(m_pDiffTextWindow2, SIGNAL(resizeWidthChangedSignal(int)), this, SLOT(postRecalcWordWrap()));
-    connect(m_pDiffTextWindow3, SIGNAL(resizeWidthChangedSignal(int)), this, SLOT(postRecalcWordWrap()));
+    connect(m_pDiffTextWindow1, &DiffTextWindow::resizeWidthChangedSignal, this, &KDiff3App::postRecalcWordWrap);
+    connect(m_pDiffTextWindow2, &DiffTextWindow::resizeWidthChangedSignal, this, &KDiff3App::postRecalcWordWrap);
+    connect(m_pDiffTextWindow3, &DiffTextWindow::resizeWidthChangedSignal, this, &KDiff3App::postRecalcWordWrap);
 
     m_pDiffTextWindow1->setFocus();
     m_pMainWidget->setMinimumSize(50, 50);
@@ -717,7 +718,7 @@ void KDiff3App::slotFinishMainInit()
     Q_ASSERT(m_pDiffTextWindow1 != nullptr && m_pDiffVScrollBar != nullptr);
 
     setHScrollBarRange();
-    
+
     int newHeight = m_pDiffTextWindow1->getNofVisibleLines();
     /*int newWidth  = m_pDiffTextWindow1->getNofVisibleColumns();*/
     m_DTWHeight = newHeight;
@@ -746,7 +747,7 @@ void KDiff3App::slotFinishMainInit()
 
     slotUpdateAvailabilities();
     setUpdatesEnabled(true);
-    // TODO What bug? Seems fixed. 
+    // TODO What bug? Seems fixed.
     // Workaround for a Qt-bug
     /*QList<QTreeView*> treeViews = findChildren<QTreeView*>();
     foreach(QTreeView* pTreeView, treeViews)
@@ -1029,8 +1030,8 @@ void KDiff3App::slotFileOpen()
                      QDir::toNativeSeparators(m_bDirCompare ? m_sd2.getFilename() : m_sd2.isFromBuffer() ? QString("") : m_sd2.getAliasName()),
                      QDir::toNativeSeparators(m_bDirCompare ? m_sd3.getFilename() : m_sd3.isFromBuffer() ? QString("") : m_sd3.getAliasName()),
                      m_bDirCompare ? m_bDefaultFilename : !m_outputFilename.isEmpty(),
-                     QDir::toNativeSeparators(m_bDefaultFilename ? QString("") : m_outputFilename),
-                     SLOT(slotConfigure()), &m_pOptionDialog->m_options);
+                     QDir::toNativeSeparators(m_bDefaultFilename ? QString("") : m_outputFilename), &m_pOptionDialog->m_options);
+
         int status = d.exec();
         if(status == QDialog::Accepted)
         {
@@ -1355,7 +1356,7 @@ void KDiff3App::choose(int choice)
             if(autoAdvance->isChecked())
             {
                 m_bTimerBlock = true;
-                QTimer::singleShot(m_pOptions->m_autoAdvanceDelay, this, SLOT(slotGoNextUnsolvedConflict()));
+                QTimer::singleShot(m_pOptions->m_autoAdvanceDelay, this, &KDiff3App::slotGoNextUnsolvedConflict);
             }
         }
     }
@@ -1622,7 +1623,7 @@ void KDiff3App::postRecalcWordWrap()
         m_bRecalcWordWrapPosted = true;
         mainWindowEnable(window(), false);
         m_firstD3LIdx = -1;
-        QTimer::singleShot(1 /* ms */, this, SLOT(slotRecalcWordWrap()));
+        QTimer::singleShot(1 /* ms */, this, &KDiff3App::slotRecalcWordWrap);
     }
     else
     {
@@ -1720,11 +1721,11 @@ void KDiff3App::slotFinishRecalcWordWrap()
         {
             wordWrap->setChecked(false);
             m_pOptions->m_bWordWrap = wordWrap->isChecked();
-            QTimer::singleShot(1 /* ms */, this, SLOT(slotRecalcWordWrap())); // do it again
+            QTimer::singleShot(1 /* ms */, this, &KDiff3App::slotRecalcWordWrap); // do it again
         }
         else // eResize
         {
-            QTimer::singleShot(1 /* ms */, this, SLOT(slotRecalcWordWrap())); // do it again
+            QTimer::singleShot(1 /* ms */, this, &KDiff3App::slotRecalcWordWrap); // do it again
         }
         return;
     }
@@ -1782,7 +1783,7 @@ void KDiff3App::slotFinishRecalcWordWrap()
         {
             if(m_pDiffVScrollBar)
                 m_pDiffVScrollBar->setValue(m_pDiffTextWindow1->convertDiff3LineIdxToLine(m_firstD3LIdx));
-            
+
             setHScrollBarRange();
             m_pHScrollBar->setValue(0);
         }
@@ -1872,7 +1873,7 @@ bool KDiff3App::improveFilenames(bool bCreateNewInstance)
         else
         {
             FileAccess destDir;
-            
+
             if(!m_bDefaultFilename) destDir = f4;
             m_pDirectoryMergeSplitter->show();
             if(m_pMainWidget != nullptr) m_pMainWidget->hide();

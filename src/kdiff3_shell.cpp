@@ -70,7 +70,7 @@ KDiff3Shell::KDiff3Shell(bool bCompleteInit)
 
         if(bCompleteInit)
             m_widget->completeInit(QString());
-        connect(m_widget, SIGNAL(createNewInstance(const QString&, const QString&, const QString&)), this, SLOT(slotNewInstance(const QString&, const QString&, const QString&)));
+        connect(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
     }
     else
     {

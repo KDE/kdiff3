@@ -54,7 +54,7 @@ find_package(
 set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::Crash KF5::IconThemes )
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    #Adjust clang specfic warnings
+    #Adjust clang specific  warnings
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow")
     set(CLANG_WARNING_FLAGS "-Wno-invalid-pp-token -Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
@@ -66,7 +66,7 @@ endif()
 
 #new in cmake 3.6+ integrate clang-tidy
 if(NOT ${CMAKE_VERSION} VERSION_LESS "3.6.0")
-    find_program(CLANG_TIDY_EXE NAMES "clang-tidy" DOC "Path to clang-tidy executable")
+    find_program(CLANG_TIDY_EXE NAMES "clang-tidy clang-tidy-7 clang-tidy-6.0 clang-tidy-6" DOC "Path to clang-tidy executable")
     if(NOT CLANG_TIDY_EXE)
         message(STATUS "clang-tidy not found disabling integration.")
     else()

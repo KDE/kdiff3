@@ -14,8 +14,8 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; see the file COPYING.  If not, write to
-   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-   Boston, MA 02111-1307, USA.
+   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+   Boston, MA 02110-1301, USA.
 */
 
 #include "kdiff3fileitemaction.h"
@@ -82,7 +82,7 @@ KDiff3FileItemAction::KDiff3FileItemAction (QObject* pParent, const QVariantList
 QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fileItemInfos, QWidget* pParentWidget )
 {
    QList< QAction* > actions;
-   
+
    if (QStandardPaths::findExecutable("kdiff3").isEmpty ())
       return actions;
 
@@ -92,8 +92,8 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
    QAction *pMenuAction = new QAction(QIcon::fromTheme(QStringLiteral("kdiff3")), i18n("KDiff3..."), this);
    QMenu *pActionMenu = new QMenu();
    pMenuAction->setMenu( pActionMenu );
-   
-   
+
+
    // remember currently selected files (copy to a QStringList)
    QList<QUrl> itemList = fileItemInfos.urlList();
    foreach(const QUrl& item, itemList)

@@ -9,9 +9,20 @@
  *                                                                         *
  ***************************************************************************/
 
+// application specific includes
+#include "kdiff3.h"
+
+#include "directorymergewindow.h"
+#include "fileaccess.h"
+#include "guiutils.h" // namespace KDiff3
+#include "kdiff3_part.h"
+#include "kdiff3_shell.h"
+#include "optiondialog.h"
+#include "progress.h"
+#include "smalldialogs.h"
 #include "difftextwindow.h"
 #include "mergeresultwindow.h"
-
+// sytem headers
 #include <cassert>
 
 // include files for QT
@@ -45,16 +56,7 @@
 #include <KToggleAction>
 #include <KToolBar>
 
-// application specific includes
-#include "directorymergewindow.h"
-#include "fileaccess.h"
-#include "guiutils.h" // namespace KDiff3
-#include "kdiff3.h"
-#include "kdiff3_part.h"
-#include "kdiff3_shell.h"
-#include "optiondialog.h"
-#include "progress.h"
-#include "smalldialogs.h"
+
 
 #define ID_STATUS_MSG 1
 #define MAIN_TOOLBAR_NAME QLatin1String("mainToolBar")
@@ -190,7 +192,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDif
             pVBoxLayout->addWidget(pTextEdit);
             pDialog->resize(600, 400);
             pDialog->exec();
-#if !defined(Q_OS_WIN) 
+#if !defined(Q_OS_WIN)
             // A windows program has no console
             printf("%s\n", title.toLatin1().constData());
             printf("%s\n", s.toLatin1().constData());
@@ -307,7 +309,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDif
     {
         viewStatusBar->setChecked(m_pOptions->m_bShowStatusBar);
         slotViewStatusBar();
-        
+
         KToolBar *mainToolBar = toolBar(MAIN_TOOLBAR_NAME);
         if(mainToolBar != nullptr){
             mainToolBar->mainWindow()->addToolBar(m_pOptions->m_toolBarPos, mainToolBar);
@@ -343,13 +345,13 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDif
     connect(m_pDirectoryMergeWindow->selectionModel(), &QItemSelectionModel::selectionChanged, this, &KDiff3App::slotUpdateAvailabilities);
     connect(m_pDirectoryMergeWindow->selectionModel(), &QItemSelectionModel::currentChanged, this, &KDiff3App::slotUpdateAvailabilities);
     connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
-    connect(m_pDirectoryMergeWindow, SIGNAL(updateAvailabilities()), this, SLOT(slotUpdateAvailabilities()));
+    connect(m_pDirectoryMergeWindow, static_cast<void (DirectoryMergeWindow::*) (void)>(&DirectoryMergeWindow::updateAvailabilities), this, &KDiff3App::slotUpdateAvailabilities);
     connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::statusBarMessage, this, &KDiff3App::slotStatusMsg);
     connect(QApplication::clipboard(), &QClipboard::dataChanged, this, &KDiff3App::slotClipboardChanged);
     m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());
 
     delete KDiff3Shell::getParser();
-    
+
     if(m_pKDiff3Shell == nullptr) {
         completeInit(QString());
     }
@@ -810,9 +812,9 @@ void KDiff3App::slotFilePrint()
 
     LineRef firstSelectionD3LIdx = -1;
     LineRef lastSelectionD3LIdx = -1;
-    
+
     m_pDiffTextWindow1->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
-    
+
     if(firstSelectionD3LIdx < 0 && m_pDiffTextWindow2) {
         m_pDiffTextWindow2->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
     }

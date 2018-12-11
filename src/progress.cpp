@@ -67,7 +67,7 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
         m_pStatusProgressBar->setRange(0, 1000);
         m_pStatusProgressBar->setTextVisible(false);
         m_pStatusAbortButton = new QPushButton(i18n("&Cancel"));
-        connect(m_pStatusAbortButton, SIGNAL(clicked()), this, SLOT(slotAbort()));
+        connect(m_pStatusAbortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
         pStatusBarLayout->addWidget(m_pStatusProgressBar);
         pStatusBarLayout->addWidget(m_pStatusAbortButton);
         m_pStatusBar->addPermanentWidget(m_pStatusBarWidget, 0);

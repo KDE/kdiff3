@@ -40,7 +40,7 @@
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
     reset();
-    
+
     setFile(name, bWantToWrite);
 }
 
@@ -88,7 +88,7 @@ void FileAccess::setFile(FileAccess* pParent, QFileInfo fi)
     m_url = QUrl::fromLocalFile(m_fileInfo.filePath());
     if(!m_url.scheme().isEmpty())
         m_url.setScheme(QLatin1Literal("file"));
-    
+
     m_pParent = pParent;
     loadData();
 }
@@ -105,7 +105,7 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
 void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
 {
     reset();
-    
+
     m_url = url;
     m_name = m_url.fileName();
     //Insure QUrl::isLocalFile assumes the scheme is set.
@@ -133,12 +133,12 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
 void FileAccess::loadData()
 {
     m_fileInfo.setCaching(true);
-    
+
     if(parent() == nullptr)
         m_baseDir = m_fileInfo.absoluteFilePath();
     else
         m_baseDir = m_pParent->m_baseDir;
-    
+
     //convert to absolute path that doesn't depend on the current directory.
     m_fileInfo.makeAbsolute();
     m_bSymLink = m_fileInfo.isSymLink();
@@ -149,11 +149,11 @@ void FileAccess::loadData()
     m_size = m_fileInfo.size();
     m_modificationTime = m_fileInfo.lastModified();
     m_bHidden = m_fileInfo.isHidden();
-    
+
     m_bWritable = m_fileInfo.isWritable();
     m_bReadable = m_fileInfo.isReadable();
     m_bExecutable = m_fileInfo.isExecutable();
-    
+
     m_name = m_fileInfo.fileName();
     if(isLocal() && m_bSymLink)
     {
@@ -273,12 +273,12 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
             break;
         }
     }
-    
+
     m_fileInfo = QFileInfo(filePath);
     m_fileInfo.setCaching(true);
     if(m_url.isEmpty())
         m_url = QUrl::fromUserInput(m_fileInfo.absoluteFilePath());
-    
+
     m_name = m_url.fileName();
     m_bExists = m_fileInfo.exists();
     //insure modification time is initialized if it wasn't already.
@@ -351,7 +351,7 @@ qint64 FileAccess::size() const
 QUrl FileAccess::url() const
 {
     QUrl url = m_url;
-    
+
     if(url.isLocalFile() && url.isRelative())
     {
         url.setPath(absoluteFilePath());
@@ -474,7 +474,7 @@ bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
     //Avoid hang on linux for special files.
     if(!isNormal())
         return true;
-    
+
     if(!m_localCopy.isEmpty())
     {
         QFile f(m_localCopy);
@@ -588,7 +588,7 @@ bool FileAccess::createLocalCopy()
 {
     if(isLocal() || !m_localCopy.isEmpty())
        return true;
-    
+
     tmpFile->setAutoRemove(true);
     tmpFile->setFileTemplate(QStringLiteral("XXXXXX-kdiff3tmp"));
     tmpFile->open();
@@ -608,7 +608,7 @@ void FileAccess::createTempFile(QTemporaryFile& tmpFile)
 
 
 bool FileAccess::removeTempFile(const QString& name) // static
-{   
+{
     return FileAccess(name).removeFile();
 }
 
@@ -742,7 +742,7 @@ void FileAccess::filterList(t_DirectoryList *pDirList, const QString& filePatter
         t_DirectoryList::iterator i2 = i;
         ++i2;
         QString fn = i->fileName();
-        
+
         if( (i->isFile() &&
             (!Utils::wildcardMultiMatch(filePattern, fn, bCaseSensitive) ||
              Utils::wildcardMultiMatch(fileAntiPattern, fn, bCaseSensitive))) ||
@@ -815,7 +815,7 @@ bool FileAccessJobHandler::get(void* pDestBuffer, long maxLength)
 
         connect(pJob, &KIO::TransferJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
         connect(pJob, &KIO::TransferJob::data, this, &FileAccessJobHandler::slotGetData);
-        connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
+        connect(pJob, static_cast<void (KIO::TransferJob::*)(KJob*,unsigned long)>(&KIO::TransferJob::percent), &pp, &ProgressProxyExtender::slotPercent);
 
         ProgressProxy::enterEventLoop(pJob, i18n("Reading file: %1", m_pFileAccess->prettyAbsPath()));
         return m_bSuccess;
@@ -853,7 +853,7 @@ bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOve
 
         connect(pJob, &KIO::TransferJob::result, this, &FileAccessJobHandler::slotPutJobResult);
         connect(pJob, &KIO::TransferJob::dataReq, this, &FileAccessJobHandler::slotPutData);
-        connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
+        connect(pJob, static_cast<void (KIO::TransferJob::*)(KJob*,unsigned long)>(&KIO::TransferJob::percent), &pp, &ProgressProxyExtender::slotPercent);
 
         ProgressProxy::enterEventLoop(pJob, i18n("Writing file: %1", m_pFileAccess->prettyAbsPath()));
         return m_bSuccess;
@@ -871,9 +871,9 @@ void FileAccessJobHandler::slotPutData(KIO::Job* pJob, QByteArray& data)
     else
     {
         /*
-            Think twice before doing this in new code.        
+            Think twice before doing this in new code.
             The maxChunkSize must be able to fit a 32-bit int. Given that the fallowing is safe.
-            
+
         */
         qint64 maxChunkSize = 100000;
         qint64 length = std::min(maxChunkSize, m_maxLength - m_transferredBytes);
@@ -999,7 +999,7 @@ bool FileAccessJobHandler::rename(const QString& dest)
         m_bSuccess = false;
         KIO::FileCopyJob* pJob = KIO::file_move(m_pFileAccess->url(), kurl, permissions, KIO::HideProgressInfo);
         connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-        connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
+        connect(pJob, static_cast<void (KIO::FileCopyJob::*)(KJob*,unsigned long)>(&KIO::FileCopyJob::percent), &pp, &ProgressProxyExtender::slotPercent);
 
         ProgressProxy::enterEventLoop(pJob,
                                       i18n("Renaming file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest));
@@ -1031,7 +1031,7 @@ bool FileAccessJobHandler::copyFile(const QString& dest)
     m_bSuccess = false;
     KIO::FileCopyJob* pJob = KIO::file_copy(m_pFileAccess->url(), destUrl, permissions, KIO::HideProgressInfo);
     connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-    //connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
+    connect(pJob, static_cast<void (KIO::FileCopyJob::*)(KJob*,unsigned long)>(&KIO::FileCopyJob::percent), &pp, &ProgressProxyExtender::slotPercent);
     ProgressProxy::enterEventLoop(pJob,
                                   i18n("Copying file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest));
 
@@ -1084,7 +1084,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
                 Q_ASSERT(fi.fileName() != "." && fi.fileName() != "..");
 
                 FileAccess fa;
-                
+
                 fa.setFile(m_pFileAccess, fi);
                 pDirList->push_back(fa);
             }
@@ -1105,7 +1105,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
 
             // This line makes the transfer via fish unreliable.:-(
             if(m_pFileAccess->url().scheme() != QLatin1Literal("fish")){
-                connect( pListJob, SIGNAL(percent(KJob*,qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
+                connect( pListJob, static_cast<void (KIO::ListJob::*)(KJob*,unsigned long)>(&KIO::ListJob::percent), &pp, &ProgressProxyExtender::slotPercent);
             }
 
             ProgressProxy::enterEventLoop(pListJob,
@@ -1127,7 +1127,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
                 t_DirectoryList dirList;
                 i->listDir(&dirList, bRecursive, bFindHidden,
                            filePattern, fileAntiPattern, dirAntiPattern, bFollowDirLinks, bUseCvsIgnore);
-                
+
                 // append data onto the main list
                 subDirsList.splice(subDirsList.end(), dirList);
             }
@@ -1149,7 +1149,7 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
     {
         const KIO::UDSEntry& e = *i;
         FileAccess fa;
-        
+
         fa.m_pParent = m_pFileAccess;
         fa.setUdsEntry(e);
 

@@ -21,6 +21,7 @@
 #include "smalldialogs.h"
 #include "diff.h"
 #include "options.h"
+#include "kdiff3.h"
 
 #include <QCheckBox>
 #include <QComboBox>
@@ -42,8 +43,8 @@
 // OpenDialog **************************************************************
 
 OpenDialog::OpenDialog(
-    QWidget* pParent, const QString& n1, const QString& n2, const QString& n3,
-    bool bMerge, const QString& outputName, const char* slotConfigure, Options* pOptions)
+    KDiff3App* pParent, const QString& n1, const QString& n2, const QString& n3,
+    bool bMerge, const QString& outputName,  Options* pOptions)
     : QDialog(pParent)
 {
     setObjectName("OpenDialog");
@@ -166,7 +167,7 @@ OpenDialog::OpenDialog(
     v->addWidget(box);
     button = box->addButton(i18n("Configure..."), QDialogButtonBox::ActionRole);
     button->setIcon(QIcon::fromTheme("configure"));
-    connect(button, SIGNAL(clicked()), pParent, slotConfigure);
+    connect(button, &QPushButton::clicked, pParent, &KDiff3App::slotConfigure);
     connect(box, &QDialogButtonBox::accepted, this, &OpenDialog::accept);
     connect(box, &QDialogButtonBox::rejected, this, &OpenDialog::reject);
 

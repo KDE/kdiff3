@@ -86,7 +86,7 @@ MergeResultWindow::MergeResultWindow(
     m_pTotalDiffStatus = nullptr;
     m_pStatusBar = pStatusBar;
     if(m_pStatusBar)
-        connect(m_pStatusBar, SIGNAL(messageChanged(const QString&)), this, SLOT(slotStatusMessageChanged(const QString&)));
+        connect(m_pStatusBar, &QStatusBar::messageChanged, this, &MergeResultWindow::slotStatusMessageChanged);
 
     m_pOptions = pOptions;
     m_bPaintingAllowed = false;
@@ -98,7 +98,7 @@ MergeResultWindow::MergeResultWindow(
     m_bCursorOn = true;
     m_bCursorUpdate = false;
     m_maxTextWidth = -1;
-    connect(&m_cursorTimer, SIGNAL(timeout()), this, SLOT(slotCursorUpdate()));
+    connect(&m_cursorTimer, &QTimer::timeout, this, &MergeResultWindow::slotCursorUpdate);
     m_cursorTimer.setSingleShot(true);
     m_cursorTimer.start(500 /*ms*/);
     m_selection.reset();
@@ -3371,7 +3371,7 @@ WindowTitleWidget::WindowTitleWidget(Options* pOptions)
 
     //m_pBrowseButton = new QPushButton("...");
     //pHLayout->addWidget( m_pBrowseButton, 0 );
-    //connect( m_pBrowseButton, SIGNAL(clicked()), this, SLOT(slotBrowseButtonClicked()));
+    //connect( m_pBrowseButton, &QPushButton::clicked), this, &MergeResultWindow::slotBrowseButtonClicked);
 
     m_pModifiedLabel = new QLabel(i18n("[Modified]"));
     pHLayout->addWidget(m_pModifiedLabel);

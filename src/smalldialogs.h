@@ -27,14 +27,15 @@ class Options;
 class QComboBox;
 class QCheckBox;
 class QLineEdit;
+class KDiff3App;
 
 class OpenDialog : public QDialog
 {
    Q_OBJECT
 public:
    OpenDialog(// krazy:exclude=explicit
-      QWidget* pParent, const QString& n1, const QString& n2, const QString& n3,
-      bool bMerge, const QString& outputName, const char* slotConfigure, Options* pOptions  );
+      KDiff3App* pParent, const QString& n1, const QString& n2, const QString& n3,
+      bool bMerge, const QString& outputName, Options* pOptions  );
 
    QComboBox* m_pLineA;
    QComboBox* m_pLineB;
@@ -104,7 +105,7 @@ private:
    QLineEdit* m_pHistoryEntryStartMatchResult;
    QLineEdit* m_pHistorySortKeyResult;
 public:
-   RegExpTester( QWidget* pParent, const QString& autoMergeRegExpToolTip, const QString& historyStartRegExpToolTip, 
+   RegExpTester( QWidget* pParent, const QString& autoMergeRegExpToolTip, const QString& historyStartRegExpToolTip,
                                    const QString& historyEntryStartRegExpToolTip, const QString& historySortKeyOrderToolTip  );
    void init( const QString& autoMergeRegExp, const QString& historyStartRegExp, const QString& historyEntryStartRegExp, const QString sortKeyOrder );
    QString autoMergeRegExp();
