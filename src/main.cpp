@@ -25,10 +25,6 @@
 #include <QStandardPaths>
 #include <QTextStream>
 
-#ifdef Q_OS_WIN
-#include <process.h>
-#include <qt_windows.h>
-#endif
 
 void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 {

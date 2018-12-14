@@ -17,24 +17,17 @@
 
 #include "diff.h"
 
-#include <qglobal.h>
-
-#ifdef Q_OS_WIN
-#include <qt_windows.h>
-
-#include <QCoreApplication>
-#endif
-
-#include <cstdlib>
-
 #include "Utils.h"
 #include "fileaccess.h"
 #include "gnudiff_diff.h"
 #include "options.h"
 #include "progress.h"
 
-#include <KLocalizedString>
-#include <KMessageBox>
+#include <cstdlib>
+#include <ctype.h>
+#include <map>
+
+#include <qglobal.h>
 
 #include <QDir>
 #include <QFileInfo>
@@ -43,8 +36,8 @@
 #include <QTextCodec>
 #include <QTextStream>
 
-#include <ctype.h>
-#include <map>
+#include <KLocalizedString>
+#include <KMessageBox>
 
 int LineData::width(int tabSize) const
 {
@@ -475,7 +468,7 @@ static QTextCodec* detectEncoding(const char* buf, qint64 size, qint64& skipByte
         s=QByteArray(buf, (int)size);
     else
         s=QByteArray(buf, 5000);
-    
+
     int xmlHeaderPos = s.indexOf("<?xml");
     if(xmlHeaderPos >= 0)
     {
@@ -614,7 +607,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             }
             else
                 errorReason = "\n(" + errorReason + ')';
-            
+
             bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
             if(fileInSize > 0 && (!bSuccess || m_normalData.m_size == 0))
             {
@@ -666,7 +659,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             }
             else
                 errorReason = "\n(" + errorReason + ')';
-            
+
             bool bSuccess = errorReason.isEmpty() && m_lmppData.readFile(fileNameOut2);
             if(FileAccess(fileNameIn2).size() > 0 && (!bSuccess || m_lmppData.m_size == 0))
             {
@@ -775,10 +768,10 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
     QTextCodec* pCodec = ::detectEncoding(m_pBuf, m_size, skipBytes);
     if(pCodec != pEncoding)
         skipBytes = 0;
-    
+
     if(m_size - skipBytes > INT_MAX)
         return false;
-    
+
     QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, (int)(m_size - skipBytes));
     QTextStream ts(ba, QIODevice::ReadOnly | QIODevice::Text);
     ts.setCodec(pEncoding);
@@ -1056,7 +1049,7 @@ void calcDiff3LineListUsingAB(
             --d.diff2;
             ++lineB;
         }
-        
+
         Q_ASSERT(d.nofEquals >= 0);
 
         d3ll.push_back(d3l);
@@ -1398,10 +1391,6 @@ void calcDiff3LineListUsingBC(
    }
    printf("\n");*/
 }
-
-#ifdef Q_OS_WIN
-using ::equal;
-#endif
 
 // Test if the move would pass a barrier. Return true if not.
 static bool isValidMove(ManualDiffHelpList* pManualDiffHelpList, int line1, int line2, int winIdx1, int winIdx2)
@@ -2284,7 +2273,7 @@ bool fineDiff(
             k1 = i->lineC;
             k2 = i->lineA;
         }
-        
+
         if((k1 == -1 && k2 != -1) || (k1 != -1 && k2 == -1)) bTextsTotalEqual = false;
         if(k1 != -1 && k2 != -1)
         {
