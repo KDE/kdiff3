@@ -20,10 +20,8 @@
 #include <QPointer>
 #include <QScrollBar>
 #include <QSplitter>
-#include <QUrl>
 
 // include files for KDE
-#include <KAboutData>
 #include <KConfigGroup>
 #include <KMainWindow>
 #include <KParts/MainWindow>
@@ -32,15 +30,13 @@
 // forward declaration of the KDiff3 classes
 class OptionDialog;
 class FindDialog;
-class ManualDiffHelpDialog;
+//class ManualDiffHelpDialog;
 class DiffTextWindow;
 class DiffTextWindowFrame;
 class MergeResultWindow;
 class WindowTitleWidget;
 class Overview;
 
-class QScrollBar;
-class QSplitter;
 class QStatusBar;
 class QMenu;
 

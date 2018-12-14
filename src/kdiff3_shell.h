@@ -23,6 +23,7 @@
 
 #include <KParts/MainWindow>
 #include <QCommandLineParser>
+#include <QString>
 
 class KToggleAction;
 
@@ -56,7 +57,7 @@ public:
     bool queryClose() override;
     bool queryExit();
     void closeEvent(QCloseEvent*e) override;
-    
+
     static inline QCommandLineParser* getParser(){
       static QCommandLineParser *parser = new QCommandLineParser();
       return parser;

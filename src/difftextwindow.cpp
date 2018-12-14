@@ -17,7 +17,9 @@
 #include "merger.h"
 #include "options.h"
 
-#include <QApplication>
+#include <cmath>
+#include <cstdlib>
+
 #include <QDir>
 #include <QDragEnterEvent>
 #include <QFileDialog>
@@ -34,12 +36,8 @@
 #include <QThreadPool>
 #include <QToolTip>
 #include <QUrl>
-#include <qnamespace.h>
 
 #include <KLocalizedString>
-
-#include <cmath>
-#include <cstdlib>
 
 QAtomicInt s_runnableCount = 0;
 

@@ -27,9 +27,9 @@
 #include <QTextStream>
 
 #include <KAboutData>
-#include <KStandardAction>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KParts/MainWindow>
 
 #include <version.h>
 

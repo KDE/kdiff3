@@ -9,30 +9,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <algorithm>
-#include <cstdio>
-#include <ctype.h>
-
-#include <QCheckBox>
-#include <QClipboard>
-#include <QComboBox>
-#include <QDir>
-#include <QDropEvent>
-#include <QFile>
-#include <QLayout>
-#include <QLineEdit>
-#include <QMimeData>
-#include <QProcess>
-#include <QScrollBar>
-#include <QSplitter>
-#include <QStatusBar>
-#include <QTextCodec>
-#include <QUrl>
-
-#include <KLocalizedString>
-#include <KShortcutsDialog>
-#include <KMessageBox>
-
 #include "difftextwindow.h"
 #include "directorymergewindow.h"
 #include "fileaccess.h"
@@ -44,6 +20,33 @@
 
 #include "mergeresultwindow.h"
 #include "smalldialogs.h"
+
+#include <algorithm>
+#include <cstdio>
+#include <list>
+
+#include <QCheckBox>
+#include <QClipboard>
+#include <QComboBox>
+#include <QDir>
+#include <QDialog>
+#include <QEvent> // QKeyEvent, QDropEvent, QInputEvent
+#include <QFile>
+#include <QLayout>
+#include <QLineEdit>
+#include <QMimeData>
+#include <QPointer>
+#include <QProcess>
+#include <QScrollBar>
+#include <QSplitter>
+#include <QStatusBar>
+#include <QStringList>
+#include <QTextCodec>
+#include <QUrl>
+
+#include <KLocalizedString>
+#include <KShortcutsDialog>
+#include <KMessageBox>
 
 bool g_bIgnoreWhiteSpace = true;
 bool g_bIgnoreTrivialMatches = true;

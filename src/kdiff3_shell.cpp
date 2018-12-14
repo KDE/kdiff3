@@ -22,13 +22,9 @@
 #include "kdiff3.h"
 #include "kdiff3_part.h"
 
-#include <QAction>
+#include <QApplication>
 #include <QCloseEvent>
 #include <QStatusBar>
-#include <QUrl>
-
-#include <KPluginLoader>
-#include <KPluginMetaData>
 
 #include <KConfig>
 #include <KEditToolBar>

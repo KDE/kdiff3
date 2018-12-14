@@ -17,11 +17,11 @@
 #include <KMessageBox>
 
 #include <QApplication>
+#include <QByteArray>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QFile>
-#include <QFont>
-#include <QLocale>
+#include <QStringList>
 #include <QStandardPaths>
 #include <QTextStream>
 

@@ -22,9 +22,6 @@
 #include "smalldialogs.h"
 #include "difftextwindow.h"
 #include "mergeresultwindow.h"
-// system headers
-#include <cassert>
-
 // include files for QT
 #include <QClipboard>
 #include <QCheckBox>
@@ -45,6 +42,7 @@
 #include <QPushButton>
 #include <QSplitter>
 #include <QStatusBar>
+#include <QUrl>
 // include files for KDE
 #include <KConfig>
 #include <KLocalizedString>
@@ -55,7 +53,6 @@
 #include <KTextEdit>
 #include <KToggleAction>
 #include <KToolBar>
-
 
 
 #define ID_STATUS_MSG 1
