@@ -22,7 +22,7 @@
 #include "smalldialogs.h"
 #include "difftextwindow.h"
 #include "mergeresultwindow.h"
-// sytem headers
+// system headers
 #include <cassert>
 
 // include files for QT
@@ -39,20 +39,20 @@
 #include <QMenuBar>
 #include <QPaintDevice>
 #include <QPainter>
+#include <QPointer>
 #include <QPrintDialog>
 #include <QPrinter>
 #include <QPushButton>
 #include <QSplitter>
 #include <QStatusBar>
-#include <QTextEdit>
 // include files for KDE
 #include <KConfig>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KStandardAction>
-//#include <kkeydialog.h>
 #include <KActionCollection>
 #include <KIconLoader>
+#include <KTextEdit>
 #include <KToggleAction>
 #include <KToolBar>
 
@@ -180,12 +180,12 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDif
         if(!s.isEmpty())
         {
             //KMessageBox::information(0, s,i18n("KDiff3-Usage"));
-            QDialog* pDialog = new QDialog(this);
+            QPointer<QDialog> pDialog = QPointer<QDialog>(new QDialog(this));
             pDialog->setAttribute(Qt::WA_DeleteOnClose);
             pDialog->setModal(true);
             pDialog->setWindowTitle(title);
             QVBoxLayout* pVBoxLayout = new QVBoxLayout(pDialog);
-            QTextEdit* pTextEdit = new QTextEdit(pDialog);
+            QPointer<KTextEdit> pTextEdit = QPointer<KTextEdit>(new KTextEdit(pDialog));
             pTextEdit->setText(s);
             pTextEdit->setReadOnly(true);
             pTextEdit->setWordWrapMode(QTextOption::NoWrap);
@@ -808,7 +808,7 @@ void KDiff3App::slotFilePrint()
     slotStatusMsg(i18n("Printing not implemented."));
 #else
     QPrinter printer;
-    QPrintDialog printDialog(&printer, this);
+    QPointer<QPrintDialog> printDialog=QPointer<QPrintDialog>(new QPrintDialog(&printer, this));
 
     LineRef firstSelectionD3LIdx = -1;
     LineRef lastSelectionD3LIdx = -1;
@@ -823,15 +823,15 @@ void KDiff3App::slotFilePrint()
     }
 
     if(firstSelectionD3LIdx >= 0) {
-        printDialog.addEnabledOption(QPrintDialog::PrintSelection);
+        printDialog->addEnabledOption(QPrintDialog::PrintSelection);
         //printer.setOptionEnabled(QPrinter::PrintSelection,true);
-        printDialog.setPrintRange(QAbstractPrintDialog::Selection);
+        printDialog->setPrintRange(QAbstractPrintDialog::Selection);
     }
 
     if(firstSelectionD3LIdx == -1)
-        printDialog.setPrintRange(QAbstractPrintDialog::AllPages);
+        printDialog->setPrintRange(QAbstractPrintDialog::AllPages);
     //printDialog.setMinMax(0,0);
-    printDialog.setFromTo(0, 0);
+    printDialog->setFromTo(0, 0);
 
     int currentFirstLine = m_pDiffTextWindow1->getFirstLine();
     int currentFirstD3LIdx = m_pDiffTextWindow1->convertLineToDiff3LineIdx(currentFirstLine);
@@ -840,7 +840,7 @@ void KDiff3App::slotFilePrint()
     printer.setFullPage(false);
 
     // initialize the printer using the print dialog
-    if(printDialog.exec() == QDialog::Accepted)
+    if(printDialog->exec() == QDialog::Accepted)
     {
         slotStatusMsg(i18n("Printing..."));
         // create a painter to paint on the printer object

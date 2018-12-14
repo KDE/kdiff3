@@ -38,25 +38,25 @@
 #include <QRegExp>
 #include <QSplitter>
 #include <QStyledItemDelegate>
-#include <QTextEdit>
 #include <QTextStream>
 
 #include <KIconLoader>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KToggleAction>
+#include <KTextEdit>
 
 static QPixmap getOnePixmap(e_Age eAge, bool bLink, bool bDir);
 
 class StatusInfo : public QDialog
 {
-    QTextEdit* m_pTextEdit;
+    KTextEdit* m_pTextEdit;
 
   public:
     explicit StatusInfo(QWidget* pParent) : QDialog(pParent)
     {
         QVBoxLayout* pVLayout = new QVBoxLayout(this);
-        m_pTextEdit = new QTextEdit(this);
+        m_pTextEdit = new KTextEdit(this);
         pVLayout->addWidget(m_pTextEdit);
         setObjectName("StatusInfo");
         setWindowFlags(Qt::Dialog);
@@ -713,7 +713,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
         status = i18n("Creating temp copy of %1 failed.", fileName1);
         return bEqual;
     }
-    
+
     if(!fi2.createLocalCopy())
     {
         status = i18n("Creating temp copy of %1 failed.", fileName2);
@@ -1137,7 +1137,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         sizes[1] = total - sizes[0];
         pSplitter->setSizes(sizes);
     }
-    
+
     m_bScanning = false;
     emit q->statusBarMessage(i18n("Ready."));
 
@@ -1262,7 +1262,7 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
         MergeFileInfos* pMFI = d->getMFI(currentIndex());
         if(pMFI == nullptr)
             return;
-        
+
         bool bThreeDirs = pMFI->getDirectoryInfo()->dirC().isValid();
         bool bMergeMode = bThreeDirs || !d->m_bSyncMode;
         bool bFTConflict = pMFI == nullptr ? false : pMFI->conflictingFileTypes();
@@ -1809,7 +1809,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI == nullptr)
         return;
-    
+
     bool bCheckC = pMFI->getDirectoryInfo()->dirC().isValid();
     bool bCopyNewer = m_pOptions->m_bDmCopyNewer;
     bool bOtherDest = !((pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirA().absoluteFilePath()) ||
@@ -2018,7 +2018,7 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
     MergeFileInfos* pMFI = d->getMFI(mi);
     if(pMFI == nullptr)
         return;
-        
+
     if(c == s_OpCol)
     {
         bool bThreeDirs = d->isThreeWay();
@@ -2128,7 +2128,7 @@ void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
             QMenu m(this);
             m.addAction(d->m_pDirCompareExplicit);
             m.addAction(d->m_pDirMergeExplicit);
-	        
+
             m.popup(e->globalPos());
         }
     }
@@ -2237,7 +2237,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setMergeOperation(const 
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI == nullptr)
         return;
-    
+
     if(eMOp != pMFI->m_eMergeOperation)
     {
         pMFI->m_bOperationComplete = false;
@@ -2384,9 +2384,9 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
 bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::canContinue()
 {
     bool bCanContinue = false;
-    
+
     emit q->checkIfCanContinue(&bCanContinue);
-    
+
     if(bCanContinue && !m_bError)
     {
         QModelIndex mi = (m_mergeItemList.empty() || m_currentIndexForOperation == m_mergeItemList.end()) ? QModelIndex() : *m_currentIndexForOperation;
@@ -2929,10 +2929,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeFLD(const QString& 
 bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::copyFLD(const QString& srcName, const QString& destName)
 {
     bool bSuccess = false;
-    
+
     if(srcName == destName)
         return true;
-    
+
     FileAccess fi(srcName);
     FileAccess faDest(destName, true);
     if(faDest.exists() && !(fi.isDir() && faDest.isDir() && (fi.isSymLink() == faDest.isSymLink())))
@@ -3103,19 +3103,19 @@ DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent)
     m_pInfoA = new QLabel(this);
     grid->addWidget(m_pInfoA, line, 1);
     ++line;
-    
+
     m_pB = new QLabel(i18n("B"), this);
     grid->addWidget(m_pB, line, 0);
     m_pInfoB = new QLabel(this);
     grid->addWidget(m_pInfoB, line, 1);
     ++line;
-    
+
     m_pC = new QLabel(i18n("C"), this);
     grid->addWidget(m_pC, line, 0);
     m_pInfoC = new QLabel(this);
     grid->addWidget(m_pInfoC, line, 1);
     ++line;
-    
+
     m_pDest = new QLabel(i18n("Dest"), this);
     grid->addWidget(m_pDest, line, 0);
     m_pInfoDest = new QLabel(this);
@@ -3153,7 +3153,7 @@ void DirectoryMergeInfo::addListViewItem(const QString& dir, const QString& base
             //TODO: Move logic to FileAccess
             m_pInfoList->addTopLevelItem( new QTreeWidgetItem(
                 m_pInfoList,
-                QStringList() << dir << 
+                QStringList() << dir <<
                     QString(fi->isDir() ? i18n("Dir") : i18n("File")) + (fi->isSymLink() ? i18n("-Link") : "") << QString::number(fi->size()) << QLatin1String(fi->isReadable() ? "r" : " ")
                     + QLatin1String(fi->isWritable() ? "w" : " ")
                     + QLatin1String((fi->isExecutable() ? "x" : " ")) <<

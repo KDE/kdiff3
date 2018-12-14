@@ -13,6 +13,7 @@
 
 #include <QApplication>
 #include <QLabel>
+#include <QPointer>
 #include <QProgressBar>
 #include <QPushButton>
 #include <QStatusBar>
@@ -267,10 +268,10 @@ void ProgressDialog::enterEventLoop(KJob* pJob, const QString& jobInfo)
 
     // instead of using exec() the eventloop is entered and exited often without hiding/showing the window.
     //qt_enter_modal(this);
-    QEventLoop* pEventLoop = new QEventLoop(this);
+    QPointer<QEventLoop> pEventLoop =  QPointer<QEventLoop>(new QEventLoop(this));
     m_eventLoopStack.push_back(pEventLoop);
     pEventLoop->exec(); // this function only returns after ProgressDialog::exitEventLoop() is called.
-    delete pEventLoop;
+    pEventLoop.clear();
     m_eventLoopStack.pop_back();
     //qt_leave_modal(this);
 }

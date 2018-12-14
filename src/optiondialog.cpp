@@ -19,6 +19,9 @@
  */
 #include "optiondialog.h"
 
+#include "diff.h"
+#include "smalldialogs.h"
+
 #include <QApplication>
 #include <QCheckBox>
 #include <QComboBox>
@@ -33,6 +36,7 @@
 #include <QLayout>
 #include <QLineEdit>
 #include <QLocale>
+#include <QPointer>
 #include <QPixmap>
 #include <QPlainTextEdit>
 #include <QPushButton>
@@ -49,9 +53,6 @@
 #include <KSharedConfig>
 #include <KToolBar>
 #include <map>
-
-#include "diff.h"
-#include "smalldialogs.h"
 
 #define KDIFF3_CONFIG_GROUP "KDiff3 Options"
 
@@ -1910,16 +1911,16 @@ QString OptionDialog::calcOptionHelp()
 
 void OptionDialog::slotHistoryMergeRegExpTester()
 {
-    RegExpTester dlg(this, s_autoMergeRegExpToolTip, s_historyStartRegExpToolTip,
-                     s_historyEntryStartRegExpToolTip, s_historyEntryStartSortKeyOrderToolTip);
-    dlg.init(m_pAutoMergeRegExpLineEdit->currentText(), m_pHistoryStartRegExpLineEdit->currentText(),
+    QPointer<RegExpTester> dlg=QPointer<RegExpTester>(new RegExpTester(this, s_autoMergeRegExpToolTip, s_historyStartRegExpToolTip,
+                     s_historyEntryStartRegExpToolTip, s_historyEntryStartSortKeyOrderToolTip));
+    dlg->init(m_pAutoMergeRegExpLineEdit->currentText(), m_pHistoryStartRegExpLineEdit->currentText(),
              m_pHistoryEntryStartRegExpLineEdit->currentText(), m_pHistorySortKeyOrderLineEdit->currentText());
-    if(dlg.exec())
+    if(dlg->exec())
     {
-        m_pAutoMergeRegExpLineEdit->setEditText(dlg.autoMergeRegExp());
-        m_pHistoryStartRegExpLineEdit->setEditText(dlg.historyStartRegExp());
-        m_pHistoryEntryStartRegExpLineEdit->setEditText(dlg.historyEntryStartRegExp());
-        m_pHistorySortKeyOrderLineEdit->setEditText(dlg.historySortKeyOrder());
+        m_pAutoMergeRegExpLineEdit->setEditText(dlg->autoMergeRegExp());
+        m_pHistoryStartRegExpLineEdit->setEditText(dlg->historyStartRegExp());
+        m_pHistoryEntryStartRegExpLineEdit->setEditText(dlg->historyEntryStartRegExp());
+        m_pHistorySortKeyOrderLineEdit->setEditText(dlg->historySortKeyOrder());
     }
 }
 

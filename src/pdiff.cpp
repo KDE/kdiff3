@@ -1025,30 +1025,30 @@ void KDiff3App::slotFileOpen()
 
     for(;;)
     {
-        OpenDialog d(this,
+         QPointer<OpenDialog> d = QPointer<OpenDialog>(new OpenDialog(this,
                      QDir::toNativeSeparators(m_bDirCompare ? m_sd1.getFilename() : m_sd1.isFromBuffer() ? QString("") : m_sd1.getAliasName()),
                      QDir::toNativeSeparators(m_bDirCompare ? m_sd2.getFilename() : m_sd2.isFromBuffer() ? QString("") : m_sd2.getAliasName()),
                      QDir::toNativeSeparators(m_bDirCompare ? m_sd3.getFilename() : m_sd3.isFromBuffer() ? QString("") : m_sd3.getAliasName()),
                      m_bDirCompare ? m_bDefaultFilename : !m_outputFilename.isEmpty(),
-                     QDir::toNativeSeparators(m_bDefaultFilename ? QString("") : m_outputFilename), &m_pOptionDialog->m_options);
+                     QDir::toNativeSeparators(m_bDefaultFilename ? QString("") : m_outputFilename), &m_pOptionDialog->m_options));
 
-        int status = d.exec();
+        int status = d->exec();
         if(status == QDialog::Accepted)
         {
-            m_sd1.setFilename(d.m_pLineA->currentText());
-            m_sd2.setFilename(d.m_pLineB->currentText());
-            m_sd3.setFilename(d.m_pLineC->currentText());
+            m_sd1.setFilename(d->m_pLineA->currentText());
+            m_sd2.setFilename(d->m_pLineB->currentText());
+            m_sd3.setFilename(d->m_pLineC->currentText());
 
-            if(d.m_pMerge->isChecked())
+            if(d->m_pMerge->isChecked())
             {
-                if(d.m_pLineOut->currentText().isEmpty())
+                if(d->m_pLineOut->currentText().isEmpty())
                 {
                     m_outputFilename = "unnamed.txt";
                     m_bDefaultFilename = true;
                 }
                 else
                 {
-                    m_outputFilename = d.m_pLineOut->currentText();
+                    m_outputFilename = d->m_pLineOut->currentText();
                     m_bDefaultFilename = false;
                 }
             }
