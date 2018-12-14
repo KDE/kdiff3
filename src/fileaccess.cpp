@@ -853,7 +853,7 @@ bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOve
 
         connect(pJob, &KIO::TransferJob::result, this, &FileAccessJobHandler::slotPutJobResult);
         connect(pJob, &KIO::TransferJob::dataReq, this, &FileAccessJobHandler::slotPutData);
-        connect(pJob, static_cast<void (KIO::TransferJob::*)(KJob*,unsigned long)>(&KIO::TransferJob::percent), &pp, &ProgressProxyExtender::slotPercent);
+        //connect(pJob, static_cast<void (KIO::TransferJob::*)(KJob*,unsigned long)>(&KIO::TransferJob::percent), &pp, &ProgressProxyExtender::slotPercent);
 
         ProgressProxy::enterEventLoop(pJob, i18n("Writing file: %1", m_pFileAccess->prettyAbsPath()));
         return m_bSuccess;
@@ -1031,7 +1031,7 @@ bool FileAccessJobHandler::copyFile(const QString& dest)
     m_bSuccess = false;
     KIO::FileCopyJob* pJob = KIO::file_copy(m_pFileAccess->url(), destUrl, permissions, KIO::HideProgressInfo);
     connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-    connect(pJob, static_cast<void (KIO::FileCopyJob::*)(KJob*,unsigned long)>(&KIO::FileCopyJob::percent), &pp, &ProgressProxyExtender::slotPercent);
+    //connect(pJob, static_cast<void (KIO::FileCopyJob::*)(KJob*,unsigned long)>(&KIO::FileCopyJob::percent), &pp, &ProgressProxyExtender::slotPercent);
     ProgressProxy::enterEventLoop(pJob,
                                   i18n("Copying file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest));
 
