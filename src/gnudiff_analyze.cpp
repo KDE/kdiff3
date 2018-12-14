@@ -479,7 +479,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
 
                 /* Find end of this run of discardable lines.
          Count how many are provisionally discardable.  */
-                for(j = i; j < end; j++)
+                for(j = i; j < end; ++j)
                 {
                     if(discards[j] == 0)
                         break;
@@ -519,7 +519,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
 
                     /* Cancel any subrun of MINIMUM or more provisionals
              within the larger run.  */
-                    for(j = 0, consec = 0; j < length; j++)
+                    for(j = 0, consec = 0; j < length; ++j)
                         if(discards[i + j] != 2)
                             consec = 0;
                         else if(minimum == ++consec)
@@ -532,7 +532,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
              until we find 3 or more nonprovisionals in a row
              or until the first nonprovisional at least 8 lines in.
              Until that point, cancel any provisionals.  */
-                    for(j = 0, consec = 0; j < length; j++)
+                    for(j = 0, consec = 0; j < length; ++j)
                     {
                         if(j >= 8 && discards[i + j] == 1)
                             break;
@@ -550,7 +550,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
                     i += length - 1;
 
                     /* Same thing, from end.  */
-                    for(j = 0, consec = 0; j < length; j++)
+                    for(j = 0, consec = 0; j < length; ++j)
                     {
                         if(j >= 8 && discards[i - j] == 1)
                             break;
