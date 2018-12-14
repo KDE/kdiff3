@@ -815,7 +815,7 @@ bool FileAccessJobHandler::get(void* pDestBuffer, long maxLength)
 
         connect(pJob, &KIO::TransferJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
         connect(pJob, &KIO::TransferJob::data, this, &FileAccessJobHandler::slotGetData);
-        connect(pJob, static_cast<void (KIO::TransferJob::*)(KJob*,unsigned long)>(&KIO::TransferJob::percent), &pp, &ProgressProxyExtender::slotPercent);
+        //connect(pJob, static_cast<void (KIO::TransferJob::*)(KJob*,unsigned long)>(&KIO::TransferJob::percent), &pp, &ProgressProxyExtender::slotPercent);
 
         ProgressProxy::enterEventLoop(pJob, i18n("Reading file: %1", m_pFileAccess->prettyAbsPath()));
         return m_bSuccess;
@@ -999,7 +999,7 @@ bool FileAccessJobHandler::rename(const QString& dest)
         m_bSuccess = false;
         KIO::FileCopyJob* pJob = KIO::file_move(m_pFileAccess->url(), kurl, permissions, KIO::HideProgressInfo);
         connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-        connect(pJob, static_cast<void (KIO::FileCopyJob::*)(KJob*,unsigned long)>(&KIO::FileCopyJob::percent), &pp, &ProgressProxyExtender::slotPercent);
+        //connect(pJob, static_cast<void (KIO::FileCopyJob::*)(KJob*,unsigned long)>(&KIO::FileCopyJob::percent), &pp, &ProgressProxyExtender::slotPercent);
 
         ProgressProxy::enterEventLoop(pJob,
                                       i18n("Renaming file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest));
@@ -1104,9 +1104,9 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
             connect(pListJob, &KIO::ListJob::infoMessage, &pp, &ProgressProxyExtender::slotListDirInfoMessage);
 
             // This line makes the transfer via fish unreliable.:-(
-            if(m_pFileAccess->url().scheme() != QLatin1Literal("fish")){
-                connect( pListJob, static_cast<void (KIO::ListJob::*)(KJob*,unsigned long)>(&KIO::ListJob::percent), &pp, &ProgressProxyExtender::slotPercent);
-            }
+            /*if(m_pFileAccess->url().scheme() != QLatin1Literal("fish")){
+                connect( pListJob, static_cast<void (KIO::ListJob::*)(KJob*,qint64)>(&KIO::ListJob::percent), &pp, &ProgressProxyExtender::slotPercent);
+            }*/
 
             ProgressProxy::enterEventLoop(pListJob,
                                           i18n("Listing directory: %1", m_pFileAccess->prettyAbsPath()));
