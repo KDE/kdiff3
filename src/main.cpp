@@ -75,21 +75,6 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
     }
 }
 
-#ifdef Q_OS_WIN
-// This command checks the comm
-static bool isOptionUsed(const QString& s, int argc, char* argv[])
-{
-    for(int j = 0; j < argc; ++j)
-    {
-        if(QString('-' + s) == QLatin1String(argv[j]) || QString("--" + s) == QLatin1String(argv[j]))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-#endif
-
 int main(int argc, char* argv[])
 {
     const QLatin1String appName("kdiff3");
@@ -123,7 +108,7 @@ int main(int argc, char* argv[])
     cmdLineParser->addHelpOption();
 
     aboutData.setupCommandLine(cmdLineParser);
-    
+
     initialiseCmdLineArgs(cmdLineParser);
     // ignorable command options
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("m") << QLatin1String("merge"), i18n("Merge the input.")));
@@ -155,7 +140,7 @@ int main(int argc, char* argv[])
         QString errorMessage = cmdLineParser->errorText();
         QString helpText = cmdLineParser->helpText();
         KMessageBox::error(nullptr, "<html><head/><body><h2>" + errorMessage + "</h2><pre>" + i18n("See kdiff3 --help for supported options.") + "</pre></body></html>", aboutData.displayName());
-#if !defined(Q_OS_WIN) 
+#if !defined(Q_OS_WIN)
         fputs(qPrintable(errorMessage), stderr);
         fputs("\n\n", stderr);
         fputs(qPrintable(helpText + '\n'), stderr);
@@ -167,14 +152,14 @@ int main(int argc, char* argv[])
     if(cmdLineParser->isSet(QStringLiteral("version"))) {
         KMessageBox::information(nullptr,
                                  aboutData.displayName() + ' ' + aboutData.version(), aboutData.displayName());
-#if !defined(Q_OS_WIN) 
+#if !defined(Q_OS_WIN)
         printf("%s %s\n", appName.data(), appVersion.toLocal8Bit().constData());
 #endif
         exit(0);
     }
     if(cmdLineParser->isSet(QStringLiteral("help"))) {
         KMessageBox::information(nullptr, "<html><head/><body><pre>" + cmdLineParser->helpText() + "</pre></body></html>", aboutData.displayName());
-#if !defined(Q_OS_WIN) 
+#if !defined(Q_OS_WIN)
         fputs(qPrintable(cmdLineParser->helpText()), stdout);
 #endif
         exit(0);
