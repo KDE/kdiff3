@@ -266,7 +266,7 @@ void GnuDiff::find_and_hash_each_line(struct file_data *current)
 
     current->buffered_lines = line;
 
-    for(i = 0;; i++)
+    for(i = 0;; ++i)
     {
         /* Record the line start for lines in the suffix that we care about.
      Record one more line start than lines,
@@ -467,14 +467,14 @@ void GnuDiff::find_identical_ends(struct file_data filevec[])
     if(buffered_prefix != lines)
     {
         /* Rotate prefix lines to proper location.  */
-        for(i = 0; i < buffered_prefix; i++)
+        for(i = 0; i < buffered_prefix; ++i)
             linbuf1[i] = linbuf0[(lines - context + i) & prefix_mask];
-        for(i = 0; i < buffered_prefix; i++)
+        for(i = 0; i < buffered_prefix; ++i)
             linbuf0[i] = linbuf1[i];
     }
 
     /* Initialize line buffer 1 from line buffer 0.  */
-    for(i = 0; i < buffered_prefix; i++)
+    for(i = 0; i < buffered_prefix; ++i)
         linbuf1[i] = linbuf0[i] - buffer0 + buffer1;
 
     /* Record the line buffer, adjusted so that
@@ -525,7 +525,7 @@ bool GnuDiff::read_files(struct file_data filevec[], bool /*pretend_binary*/)
     /* Allocate (one plus) a prime number of hash buckets.  Use a prime
      number between 1/3 and 2/3 of the value of equiv_allocs,
      approximately.  */
-    for(i = 9; ((LineRef)1 << i) < equivs_alloc / 3; i++)
+    for(i = 9; ((LineRef)1 << i) < equivs_alloc / 3; ++i)
         continue;
     nbuckets = ((LineRef)1 << i) - prime_offset[i];
     if(LINEREF_MAX / sizeof *buckets <= nbuckets)
@@ -533,7 +533,7 @@ bool GnuDiff::read_files(struct file_data filevec[], bool /*pretend_binary*/)
     buckets = (LineRef *)zalloc((nbuckets + 1) * sizeof *buckets);
     buckets++;
 
-    for(i = 0; i < 2; i++)
+    for(i = 0; i < 2; ++i)
         find_and_hash_each_line(&filevec[i]);
 
     filevec[0].equiv_max = filevec[1].equiv_max = equivs_index;

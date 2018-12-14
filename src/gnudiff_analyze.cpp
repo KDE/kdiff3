@@ -401,7 +401,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
 
     /* Allocate our results.  */
     p = (LineRef *)xmalloc((filevec[0].buffered_lines + filevec[1].buffered_lines) * (2 * sizeof *p));
-    for(f = 0; f < 2; f++)
+    for(f = 0; f < 2; ++f)
     {
         filevec[f].undiscarded = p;
         p += filevec[f].buffered_lines;
@@ -429,7 +429,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
     /* Mark to be discarded each line that matches no line of the other file.
      If a line matches many lines, mark it as provisionally discardable.  */
 
-    for(f = 0; f < 2; f++)
+    for(f = 0; f < 2; ++f)
     {
         size_t end = filevec[f].buffered_lines;
         char *discards = discarded[f];
@@ -443,7 +443,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
         while((tem = tem >> 2) > 0)
             many *= 2;
 
-        for(i = 0; i < (LineRef)end; i++)
+        for(i = 0; i < (LineRef)end; ++i)
         {
             LineRef nmatch;
             if(equivs[i] == 0)
@@ -460,12 +460,12 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
      in a run of discardables, with nonprovisionals at the beginning
      and end.  */
 
-    for(f = 0; f < 2; f++)
+    for(f = 0; f < 2; ++f)
     {
         LineRef end = filevec[f].buffered_lines;
         char *discards = discarded[f];
 
-        for(i = 0; i < end; i++)
+        for(i = 0; i < end; ++i)
         {
             /* Cancel provisional discards not in middle of run of discards.  */
             if(discards[i] == 2)
@@ -569,7 +569,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
     }
 
     /* Actually discard the lines. */
-    for(f = 0; f < 2; f++)
+    for(f = 0; f < 2; ++f)
     {
         char *discards = discarded[f];
         LineRef end = filevec[f].buffered_lines;
@@ -603,7 +603,7 @@ void GnuDiff::shift_boundaries(struct file_data filevec[])
 {
     int f;
 
-    for(f = 0; f < 2; f++)
+    for(f = 0; f < 2; ++f)
     {
         bool *changed = filevec[f].changed;
         bool const *other_changed = filevec[1 - f].changed;
@@ -849,7 +849,7 @@ GnuDiff::change *GnuDiff::diff_2_files(struct comparison *cmp)
 
         free(flag_space);
 
-        for(f = 0; f < 2; f++)
+        for(f = 0; f < 2; ++f)
         {
             free(cmp->file[f].equivs);
             free(cmp->file[f].linbuf + cmp->file[f].linbuf_base);
