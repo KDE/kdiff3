@@ -182,6 +182,84 @@ class KDiff3App : public QSplitter
      */
     void slotStatusMsg(const QString& text);
 
+    void resizeDiffTextWindowHeight(int newHeight);
+    void resizeMergeResultWindow();
+    void slotRecalcWordWrap();
+    void postRecalcWordWrap();
+    void slotFinishRecalcWordWrap();
+
+    void showPopupMenu(const QPoint& point);
+
+    void scrollDiffTextWindow(int deltaX, int deltaY);
+    void scrollMergeResultWindow(int deltaX, int deltaY);
+    void setDiff3Line(int line);
+    void sourceMask(int srcMask, int enabledMask);
+
+    void slotDirShowBoth();
+    void slotDirViewToggle();
+
+    void slotUpdateAvailabilities();
+    void slotEditSelectAll();
+    void slotEditFind();
+    void slotEditFindNext();
+    void slotGoCurrent();
+    void slotGoTop();
+    void slotGoBottom();
+    void slotGoPrevUnsolvedConflict();
+    void slotGoNextUnsolvedConflict();
+    void slotGoPrevConflict();
+    void slotGoNextConflict();
+    void slotGoPrevDelta();
+    void slotGoNextDelta();
+    void slotChooseA();
+    void slotChooseB();
+    void slotChooseC();
+    void slotAutoSolve();
+    void slotUnsolve();
+    void slotMergeHistory();
+    void slotRegExpAutoMerge();
+    void slotChooseAEverywhere();
+    void slotChooseBEverywhere();
+    void slotChooseCEverywhere();
+    void slotChooseAForUnsolvedConflicts();
+    void slotChooseBForUnsolvedConflicts();
+    void slotChooseCForUnsolvedConflicts();
+    void slotChooseAForUnsolvedWhiteSpaceConflicts();
+    void slotChooseBForUnsolvedWhiteSpaceConflicts();
+    void slotChooseCForUnsolvedWhiteSpaceConflicts();
+    void slotConfigure();
+    void slotConfigureKeys();
+    void slotRefresh();
+    void slotSelectionEnd();
+    void slotSelectionStart();
+    void slotClipboardChanged();
+    void slotOutputModified(bool);
+    void slotFinishMainInit();
+    void slotMergeCurrentFile();
+    void slotReload();
+    void slotCheckIfCanContinue(bool* pbContinue);
+    void slotShowWhiteSpaceToggled();
+    void slotShowLineNumbersToggled();
+    void slotAutoAdvanceToggled();
+    void slotWordWrapToggled();
+    void slotShowWindowAToggled();
+    void slotShowWindowBToggled();
+    void slotShowWindowCToggled();
+    void slotWinFocusNext();
+    void slotWinFocusPrev();
+    void slotWinToggleSplitterOrientation();
+    void slotOverviewNormal();
+    void slotOverviewAB();
+    void slotOverviewAC();
+    void slotOverviewBC();
+    void slotSplitDiff();
+    void slotJoinDiffs();
+    void slotAddManualDiffHelp();
+    void slotClearManualDiffHelpList();
+    void slotNoRelevantChangesDetected();
+    void slotEncodingChangedA(QTextCodec*);
+    void slotEncodingChangedB(QTextCodec*);
+    void slotEncodingChangedC(QTextCodec*);
   private:
     /** the configuration object of the application */
     //KConfig *config;
@@ -342,86 +420,6 @@ class KDiff3App : public QSplitter
     int m_visibleTextWidthForPrinting; // only needed during recalcWordWrap
     int m_firstD3LIdx;                 // only needed during recalcWordWrap
     QPointer<QEventLoop> m_pEventLoopForPrinting;
-
-  public Q_SLOTS:
-    void resizeDiffTextWindowHeight(int newHeight);
-    void resizeMergeResultWindow();
-    void slotRecalcWordWrap();
-    void postRecalcWordWrap();
-    void slotFinishRecalcWordWrap();
-
-    void showPopupMenu(const QPoint& point);
-
-    void scrollDiffTextWindow(int deltaX, int deltaY);
-    void scrollMergeResultWindow(int deltaX, int deltaY);
-    void setDiff3Line(int line);
-    void sourceMask(int srcMask, int enabledMask);
-
-    void slotDirShowBoth();
-    void slotDirViewToggle();
-
-    void slotUpdateAvailabilities();
-    void slotEditSelectAll();
-    void slotEditFind();
-    void slotEditFindNext();
-    void slotGoCurrent();
-    void slotGoTop();
-    void slotGoBottom();
-    void slotGoPrevUnsolvedConflict();
-    void slotGoNextUnsolvedConflict();
-    void slotGoPrevConflict();
-    void slotGoNextConflict();
-    void slotGoPrevDelta();
-    void slotGoNextDelta();
-    void slotChooseA();
-    void slotChooseB();
-    void slotChooseC();
-    void slotAutoSolve();
-    void slotUnsolve();
-    void slotMergeHistory();
-    void slotRegExpAutoMerge();
-    void slotChooseAEverywhere();
-    void slotChooseBEverywhere();
-    void slotChooseCEverywhere();
-    void slotChooseAForUnsolvedConflicts();
-    void slotChooseBForUnsolvedConflicts();
-    void slotChooseCForUnsolvedConflicts();
-    void slotChooseAForUnsolvedWhiteSpaceConflicts();
-    void slotChooseBForUnsolvedWhiteSpaceConflicts();
-    void slotChooseCForUnsolvedWhiteSpaceConflicts();
-    void slotConfigure();
-    void slotConfigureKeys();
-    void slotRefresh();
-    void slotSelectionEnd();
-    void slotSelectionStart();
-    void slotClipboardChanged();
-    void slotOutputModified(bool);
-    void slotFinishMainInit();
-    void slotMergeCurrentFile();
-    void slotReload();
-    void slotCheckIfCanContinue(bool* pbContinue);
-    void slotShowWhiteSpaceToggled();
-    void slotShowLineNumbersToggled();
-    void slotAutoAdvanceToggled();
-    void slotWordWrapToggled();
-    void slotShowWindowAToggled();
-    void slotShowWindowBToggled();
-    void slotShowWindowCToggled();
-    void slotWinFocusNext();
-    void slotWinFocusPrev();
-    void slotWinToggleSplitterOrientation();
-    void slotOverviewNormal();
-    void slotOverviewAB();
-    void slotOverviewAC();
-    void slotOverviewBC();
-    void slotSplitDiff();
-    void slotJoinDiffs();
-    void slotAddManualDiffHelp();
-    void slotClearManualDiffHelpList();
-    void slotNoRelevantChangesDetected();
-    void slotEncodingChangedA(QTextCodec*);
-    void slotEncodingChangedB(QTextCodec*);
-    void slotEncodingChangedC(QTextCodec*);
 };
 
 #endif // KDIFF3_H
