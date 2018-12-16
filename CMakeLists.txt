@@ -7,7 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF ) #don't use non-standard extensions
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(ECM_MIN_VERSION "5.10.0")
 set(QT_MIN_VERSION "5.6.0")
-set(KF5_MIN_VERSION "5.16.0")
+set(KF5_MIN_VERSION "5.23.0")
 
 find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED)
 set(

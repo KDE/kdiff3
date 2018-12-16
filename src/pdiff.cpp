@@ -837,62 +837,51 @@ void KDiff3App::resizeEvent(QResizeEvent* e)
         m_pCornerWidget->setFixedSize(m_pDiffVScrollBar->width(), m_pHScrollBar->height());
 }
 
-bool KDiff3App::eventFilter(QObject* o, QEvent* e)
+void KDiff3App::wheelEvent(QWheelEvent* pWheelEvent)
 {
-    if(o == m_pMergeResultWindow)
+    pWheelEvent->accept();
+
+    int deltaX = 0;
+
+    int d = pWheelEvent->delta();
+
+    //As per QT documentation, some mice/OS combos send delta values
+    //less than 120 units(15 degrees)
+    d = d + m_iCumulativeWheelDelta;
+    if(d > -120 && d < 120)
     {
-        if(e->type() == QEvent::KeyPress)
-        { // key press
-            QKeyEvent* k = (QKeyEvent*)e;
-            if(k->key() == Qt::Key_Insert && (k->QInputEvent::modifiers() & Qt::ControlModifier) != 0)
-            {
-                slotEditCopy();
-                return true;
-            }
-            if(k->key() == Qt::Key_Insert && (k->QInputEvent::modifiers() & Qt::ShiftModifier) != 0)
-            {
-                slotEditPaste();
-                return true;
-            }
-            if(k->key() == Qt::Key_Delete && (k->QInputEvent::modifiers() & Qt::ShiftModifier) != 0)
-            {
-                slotEditCut();
-                return true;
-            }
-            if(k->key() == Qt::Key_Escape && m_pKDiff3Shell && m_pOptions->m_bEscapeKeyQuits)
-            {
-                m_pKDiff3Shell->close();
-                return true;
-            }
-        }
-        return QSplitter::eventFilter(o, e); // standard event processing
+        //not enough for a full step in either direction, add it up
+        //to use on a successive call
+        m_iCumulativeWheelDelta = d;
+    }
+    else
+    {
+        //reset cumulative tracking of the wheel since we have enough
+        //for a 15 degree movement
+        m_iCumulativeWheelDelta = 0;
     }
 
-    if(e->type() == QEvent::KeyPress) // key press
-    {
-        QKeyEvent* k = (QKeyEvent*)e;
-        if(k->key() == Qt::Key_Escape && m_pKDiff3Shell && m_pOptions->m_bEscapeKeyQuits)
-        {
-            m_pKDiff3Shell->close();
-            return true;
-        }
+    int deltaY = -d / 120 * QApplication::wheelScrollLines();
 
-        bool bCtrl = (k->QInputEvent::modifiers() & Qt::ControlModifier) != 0;
-        if(k->key() == Qt::Key_Insert && bCtrl)
-        {
-            slotEditCopy();
-            return true;
-        }
-        if(k->key() == Qt::Key_Insert && (k->QInputEvent::modifiers() & Qt::ShiftModifier) != 0)
-        {
-            slotEditPaste();
-            return true;
-        }
-        int deltaX = 0;
-        int deltaY = 0;
-        int pageSize = m_DTWHeight;
-        switch(k->key())
-        {
+    scrollDiffTextWindow(deltaX, deltaY);
+}
+
+void KDiff3App::keyPressEvent(QKeyEvent *keyEvent)
+{
+    if(keyEvent->key() == Qt::Key_Escape && m_pKDiff3Shell && m_pOptions->m_bEscapeKeyQuits)
+    {
+        m_pKDiff3Shell->close();
+        return;
+    }
+
+    //FIXME: Move use QAction
+    int deltaX = 0;
+    int deltaY = 0;
+    int pageSize = m_DTWHeight;
+    bool bCtrl = (keyEvent->QInputEvent::modifiers() & Qt::ControlModifier) != 0;
+
+    switch(keyEvent->key())
+    {
         case Qt::Key_Down:
             if(!bCtrl) ++deltaY;
             break;
@@ -925,43 +914,14 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
             break;
         default:
             break;
-        }
-
-        scrollDiffTextWindow(deltaX, deltaY);
-
-        return true; // eat event
     }
-    else if(e->type() == QEvent::Wheel) // wheel event
-    {
-        QWheelEvent* w = (QWheelEvent*)e;
-        w->accept();
 
-        int deltaX = 0;
+    scrollDiffTextWindow(deltaX, deltaY);
+}
 
-        int d = w->delta();
-
-        //As per QT documentation, some mice/OS combos send delta values
-        //less than 120 units(15 degrees)
-        d = d + m_iCumulativeWheelDelta;
-        if(d > -120 && d < 120)
-        {
-            //not enough for a full step in either direction, add it up
-            //to use on a successive call
-            m_iCumulativeWheelDelta = d;
-        }
-        else
-        {
-            //reset cumulative tracking of the wheel since we have enough
-            //for a 15 degree movement
-            m_iCumulativeWheelDelta = 0;
-        }
-
-        int deltaY = -d / 120 * QApplication::wheelScrollLines();
-
-        scrollDiffTextWindow(deltaX, deltaY);
-        return true;
-    }
-    else if(e->type() == QEvent::Drop)
+bool KDiff3App::eventFilter(QObject* o, QEvent* e)
+{//TODO: Move this into DiffTextWindow::DropEvent
+    if(e->type() == QEvent::Drop)
     {
         QDropEvent* pDropEvent = static_cast<QDropEvent*>(e);
         pDropEvent->accept();
@@ -982,30 +942,8 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
                 mainInit();
             }
         }
-        else if(pDropEvent->mimeData()->hasText())
-        {
-            QString text = pDropEvent->mimeData()->text();
-            if(canContinue())
-            {
-                QStringList errors;
-
-                raise();
-                if(o == m_pDiffTextWindow1)
-                    errors = m_sd1.setData(text);
-                else if(o == m_pDiffTextWindow2)
-                    errors = m_sd2.setData(text);
-                else if(o == m_pDiffTextWindow3)
-                    errors = m_sd3.setData(text);
-                foreach(const QString& error, errors)
-                {
-                    KMessageBox::error(m_pOptionDialog, error);
-                }
-                mainInit();
-            }
-        }
-
-        return true;
     }
+
     return QSplitter::eventFilter(o, e); // standard event processing
 }
 

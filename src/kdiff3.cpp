@@ -509,40 +509,44 @@ void KDiff3App::initActions(KActionCollection* ac)
         KMessageBox::error(nullptr, "actionCollection==0");
         exit(-1);//we cannot recover from this.
     }
-    fileOpen = KStandardAction::open(this, SLOT(slotFileOpen()), ac);
+    fileOpen = KStandardAction::open(this, &KDiff3App::slotFileOpen, ac);
     fileOpen->setStatusTip(i18n("Opens documents for comparison..."));
 
     fileReload = KDiff3::createAction<QAction>(i18n("Reload"), QKeySequence(QKeySequence::Refresh), this, SLOT(slotReload()), ac, QLatin1String("file_reload"));
 
-    fileSave = KStandardAction::save(this, SLOT(slotFileSave()), ac);
+    fileSave = KStandardAction::save(this, &KDiff3App::slotFileSave, ac);
     fileSave->setStatusTip(i18n("Saves the merge result. All conflicts must be solved!"));
-    fileSaveAs = KStandardAction::saveAs(this, SLOT(slotFileSaveAs()), ac);
+    fileSaveAs = KStandardAction::saveAs(this, &KDiff3App::slotFileSaveAs, ac);
     fileSaveAs->setStatusTip(i18n("Saves the current document as..."));
 #ifndef QT_NO_PRINTER
-    filePrint = KStandardAction::print(this, SLOT(slotFilePrint()), ac);
+    filePrint = KStandardAction::print(this, &KDiff3App::slotFilePrint, ac);
     filePrint->setStatusTip(i18n("Print the differences"));
 #endif
-    fileQuit = KStandardAction::quit(this, SLOT(slotFileQuit()), ac);
+    fileQuit = KStandardAction::quit(this, &KDiff3App::slotFileQuit, ac);
     fileQuit->setStatusTip(i18n("Quits the application"));
-    editCut = KStandardAction::cut(this, SLOT(slotEditCut()), ac);
+    editCut = KStandardAction::cut(this, &KDiff3App::slotEditCut, ac);
+    editCut->setShortcuts(QKeySequence::Cut);
     editCut->setStatusTip(i18n("Cuts the selected section and puts it to the clipboard"));
-    editCopy = KStandardAction::copy(this, SLOT(slotEditCopy()), ac);
+    editCopy = KStandardAction::copy(this, &KDiff3App::slotEditCopy, ac);
+    editCopy->setShortcut(QKeySequence::Copy);
     editCopy->setStatusTip(i18n("Copies the selected section to the clipboard"));
-    editPaste = KStandardAction::paste(this, SLOT(slotEditPaste()), ac);
+    editPaste = KStandardAction::paste(this, &KDiff3App::slotEditPaste, ac);
     editPaste->setStatusTip(i18n("Pastes the clipboard contents to current position"));
-    editSelectAll = KStandardAction::selectAll(this, SLOT(slotEditSelectAll()), ac);
+    editCut->setShortcut(QKeySequence::Paste);
+    editSelectAll = KStandardAction::selectAll(this, &KDiff3App::slotEditSelectAll, ac);
     editSelectAll->setStatusTip(i18n("Select everything in current window"));
-    editFind = KStandardAction::find(this, SLOT(slotEditFind()), ac);
+    editFind = KStandardAction::find(this, &KDiff3App::slotEditFind, ac);
+    editFind->setShortcut(QKeySequence::Find);
     editFind->setStatusTip(i18n("Search for a string"));
-    editFindNext = KStandardAction::findNext(this, SLOT(slotEditFindNext()), ac);
+    editFindNext = KStandardAction::findNext(this, &KDiff3App::slotEditFindNext, ac);
     editFindNext->setStatusTip(i18n("Search again for the string"));
     /*   FIXME figure out how to implement this action
-       viewToolBar = KStandardAction::showToolbar(this, SLOT(slotViewToolBar()), ac);
+       viewToolBar = KStandardAction::showToolbar(this, &KDiff3App::slotViewToolBar, ac);
        viewToolBar->setStatusTip(i18n("Enables/disables the toolbar")); */
-    viewStatusBar = KStandardAction::showStatusbar(this, SLOT(slotViewStatusBar()), ac);
+    viewStatusBar = KStandardAction::showStatusbar(this, &KDiff3App::slotViewStatusBar, ac);
     viewStatusBar->setStatusTip(i18n("Enables/disables the statusbar"));
-    KStandardAction::keyBindings(this, SLOT(slotConfigureKeys()), ac);
-    QAction* pAction = KStandardAction::preferences(this, SLOT(slotConfigure()), ac);
+    KStandardAction::keyBindings(this, &KDiff3App::slotConfigureKeys, ac);
+    QAction* pAction = KStandardAction::preferences(this, &KDiff3App::slotConfigure, ac);
     if(isPart())
         pAction->setText(i18n("Configure KDiff3..."));
 

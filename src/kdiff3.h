@@ -315,6 +315,8 @@ class KDiff3App : public QSplitter
     bool m_bFinishMainInit;
     bool m_bLoadFiles;
 
+    virtual void wheelEvent(QWheelEvent* pWheelEvent) override;
+    virtual void keyPressEvent(QKeyEvent* event) override;
     bool eventFilter(QObject* o, QEvent* e) override;
     void resizeEvent(QResizeEvent*) override;
 
