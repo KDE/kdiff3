@@ -148,6 +148,36 @@ static QPixmap colorToPixmap(QColor c)
     p.drawRect(0, 0, pm.width(), pm.height());
     return pm;
 }
+// Copy pm2 onto pm1, but preserve the alpha value from pm1 where pm2 is transparent.
+static QPixmap pixCombiner(const QPixmap* pm1, const QPixmap* pm2)
+{
+    QImage img1 = pm1->toImage().convertToFormat(QImage::Format_ARGB32);
+    QImage img2 = pm2->toImage().convertToFormat(QImage::Format_ARGB32);
+
+    for(int y = 0; y < img1.height(); y++)
+    {
+        quint32* line1 = reinterpret_cast<quint32*>(img1.scanLine(y));
+        quint32* line2 = reinterpret_cast<quint32*>(img2.scanLine(y));
+        for(int x = 0; x < img1.width(); x++)
+        {
+            if(qAlpha(line2[x]) > 0)
+                line1[x] = (line2[x] | 0xff000000);
+        }
+    }
+    return QPixmap::fromImage(img1);
+}
+
+// like pixCombiner but let the pm1 color shine through
+static QPixmap pixCombiner2(const QPixmap* pm1, const QPixmap* pm2)
+{
+    QPixmap pix = *pm1;
+    QPainter p(&pix);
+    p.setOpacity(0.5);
+    p.drawPixmap(0, 0, *pm2);
+    p.end();
+
+    return pix;
+}
 
 static void initPixmaps(QColor newest, QColor oldest, QColor middle, QColor notThere)
 {
@@ -903,37 +933,6 @@ void DirectoryMergeWindow::reload()
     init(d->rootMFI()->getDirectoryInfo(), true);
     //fix file visibilities after reload or menu will be out of sync with display if changed from defaults.
     updateFileVisibilities();
-}
-
-// Copy pm2 onto pm1, but preserve the alpha value from pm1 where pm2 is transparent.
-static QPixmap pixCombiner(const QPixmap* pm1, const QPixmap* pm2)
-{
-    QImage img1 = pm1->toImage().convertToFormat(QImage::Format_ARGB32);
-    QImage img2 = pm2->toImage().convertToFormat(QImage::Format_ARGB32);
-
-    for(int y = 0; y < img1.height(); y++)
-    {
-        quint32* line1 = reinterpret_cast<quint32*>(img1.scanLine(y));
-        quint32* line2 = reinterpret_cast<quint32*>(img2.scanLine(y));
-        for(int x = 0; x < img1.width(); x++)
-        {
-            if(qAlpha(line2[x]) > 0)
-                line1[x] = (line2[x] | 0xff000000);
-        }
-    }
-    return QPixmap::fromImage(img1);
-}
-
-// like pixCombiner but let the pm1 color shine through
-static QPixmap pixCombiner2(const QPixmap* pm1, const QPixmap* pm2)
-{
-    QPixmap pix = *pm1;
-    QPainter p(&pix);
-    p.setOpacity(0.5);
-    p.drawPixmap(0, 0, *pm2);
-    p.end();
-
-    return pix;
 }
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
