@@ -216,7 +216,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     void scanLocalDirectory(const QString& dirName, t_DirectoryList& dirList);
     bool fastFileComparison(FileAccess& fi1, FileAccess& fi2,
                             bool& bError, QString& status);
-    bool compareFilesAndCalcAges(MergeFileInfos& mfi);
+    bool compareFilesAndCalcAges(MergeFileInfos& mfi, QStringList& errors);
 
     void setMergeOperation(const QModelIndex& mi, e_MergeOperation eMergeOp, bool bRecursive = true);
     bool isDir(const QModelIndex& mi);
@@ -654,8 +654,9 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
     bool& bError, QString& status)
 {
     ProgressProxy pp;
-    status = "";
     bool bEqual = false;
+
+    status = "";
     bError = true;
 
     if(!m_bFollowFileLinks)
@@ -676,6 +677,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
 
     if(fi1.size() != fi2.size())
     {
+        bError = false;
         bEqual = false;
         status = i18n("Size. ");
         return bEqual;
@@ -683,6 +685,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
     else if(m_pOptions->m_bDmTrustSize)
     {
         bEqual = true;
+        bError = false;
         return bEqual;
     }
 
@@ -1369,7 +1372,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setAllMergeOperations(e_
     }
 }
 
-bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(MergeFileInfos& mfi)
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(MergeFileInfos& mfi, QStringList& errors)
 {
     std::map<QDateTime, int> dateMap;
 
@@ -1422,7 +1425,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
     }
     else
     {
-        bool bError;
+        bool bError = false;
         QString eqStatus;
         if(mfi.existsInA() && mfi.existsInB())
         {
@@ -1450,9 +1453,11 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
                     mfi.m_bEqualBC = fastFileComparison(*mfi.getFileInfoB(), *mfi.getFileInfoC(), bError, eqStatus);
             }
         }
-        if(!eqStatus.isEmpty())
+        if(bError)
         {
-            KMessageBox::error(q, eqStatus, i18n("Compare failed"));
+            //Limit size of error list in memmory.
+            if(errors.size() < 30)
+                errors.append(eqStatus);
             return false;
         }
     }
@@ -1723,6 +1728,7 @@ QModelIndex DirectoryMergeWindow::DirectoryMergeWindowPrivate::treeIterator(QMod
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(ProgressProxy& pp)
 {
+    QStringList errors;
     static bool bFirstTime = true;
     if(bFirstTime)
     {
@@ -1753,6 +1759,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
     QTime t;
     t.start();
     pp.setMaxNofSteps(nrOfFiles);
+
     for(j = m_fileMergeMap.begin(); j != m_fileMergeMap.end(); ++j)
     {
         MergeFileInfos& mfi = j.value();
@@ -1766,8 +1773,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
         ++currentIdx;
 
         // The comparisons and calculations for each file take place here.
-        compareFilesAndCalcAges(mfi);
-
+        compareFilesAndCalcAges(mfi, errors);
         // Get dirname from fileName: Search for "/" from end:
         int pos = fileName.lastIndexOf('/');
         QString dirPart;
@@ -1800,6 +1806,19 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
 
         setPixmaps(mfi, bCheckC);
     }
+
+    if(errors.size() > 0)
+    {
+        if(errors.size() < 15)
+        {
+            KMessageBox::errorList(q, i18n("Some files could not be processed."), errors);
+        }
+        else
+        {
+            KMessageBox::error(q, i18n("Some files could not be processed."));
+        }
+    }
+
     beginResetModel();
     endResetModel();
 }
