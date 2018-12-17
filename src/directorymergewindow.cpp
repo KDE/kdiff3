@@ -112,6 +112,103 @@ enum Columns
 };
 
 static Qt::CaseSensitivity s_eCaseSensitivity = Qt::CaseSensitive;
+
+//TODO Seperate file
+static QPixmap* s_pm_dir;
+static QPixmap* s_pm_file;
+
+static QPixmap* pmNotThere;
+static QPixmap* pmNew;
+static QPixmap* pmOld;
+static QPixmap* pmMiddle;
+
+static QPixmap* pmLink;
+
+static QPixmap* pmDirLink;
+static QPixmap* pmFileLink;
+
+static QPixmap* pmNewLink;
+static QPixmap* pmOldLink;
+static QPixmap* pmMiddleLink;
+
+static QPixmap* pmNewDir;
+static QPixmap* pmMiddleDir;
+static QPixmap* pmOldDir;
+
+static QPixmap* pmNewDirLink;
+static QPixmap* pmMiddleDirLink;
+static QPixmap* pmOldDirLink;
+
+static QPixmap colorToPixmap(QColor c)
+{
+    QPixmap pm(16, 16);
+    QPainter p(&pm);
+    p.setPen(Qt::black);
+    p.setBrush(c);
+    p.drawRect(0, 0, pm.width(), pm.height());
+    return pm;
+}
+
+static void initPixmaps(QColor newest, QColor oldest, QColor middle, QColor notThere)
+{
+    if(pmNew == nullptr)
+    {
+        pmNotThere = new QPixmap;
+        pmNew = new QPixmap;
+        pmOld = new QPixmap;
+        pmMiddle = new QPixmap;
+
+#include "xpm/link_arrow.xpm"
+        pmLink = new QPixmap(link_arrow);
+
+        pmDirLink = new QPixmap;
+        pmFileLink = new QPixmap;
+
+        pmNewLink = new QPixmap;
+        pmOldLink = new QPixmap;
+        pmMiddleLink = new QPixmap;
+
+        pmNewDir = new QPixmap;
+        pmMiddleDir = new QPixmap;
+        pmOldDir = new QPixmap;
+
+        pmNewDirLink = new QPixmap;
+        pmMiddleDirLink = new QPixmap;
+        pmOldDirLink = new QPixmap;
+    }
+
+    *pmNotThere = colorToPixmap(notThere);
+    *pmNew = colorToPixmap(newest);
+    *pmOld = colorToPixmap(oldest);
+    *pmMiddle = colorToPixmap(middle);
+
+    *pmDirLink = pixCombiner(s_pm_dir, pmLink);
+    *pmFileLink = pixCombiner(s_pm_file, pmLink);
+
+    *pmNewLink = pixCombiner(pmNew, pmLink);
+    *pmOldLink = pixCombiner(pmOld, pmLink);
+    *pmMiddleLink = pixCombiner(pmMiddle, pmLink);
+
+    *pmNewDir = pixCombiner2(pmNew, s_pm_dir);
+    *pmMiddleDir = pixCombiner2(pmMiddle, s_pm_dir);
+    *pmOldDir = pixCombiner2(pmOld, s_pm_dir);
+
+    *pmNewDirLink = pixCombiner(pmNewDir, pmLink);
+    *pmMiddleDirLink = pixCombiner(pmMiddleDir, pmLink);
+    *pmOldDirLink = pixCombiner(pmOldDir, pmLink);
+}
+
+static QPixmap getOnePixmap(e_Age eAge, bool bLink, bool bDir)
+{
+    static QPixmap* ageToPm[] = {pmNew, pmMiddle, pmOld, pmNotThere, s_pm_file};
+    static QPixmap* ageToPmLink[] = {pmNewLink, pmMiddleLink, pmOldLink, pmNotThere, pmFileLink};
+    static QPixmap* ageToPmDir[] = {pmNewDir, pmMiddleDir, pmOldDir, pmNotThere, s_pm_dir};
+    static QPixmap* ageToPmDirLink[] = {pmNewDirLink, pmMiddleDirLink, pmOldDirLink, pmNotThere, pmDirLink};
+
+    QPixmap** ppPm = bDir ? (bLink ? ageToPmDirLink : ageToPmDir) : (bLink ? ageToPmLink : ageToPm);
+
+    return *ppPm[eAge];
+}
 //TODO: clean up this mess.
 class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemModel
 {
@@ -1548,102 +1645,6 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
     }
 
     return true;
-}
-//TODO move this
-static QPixmap* s_pm_dir;
-static QPixmap* s_pm_file;
-
-static QPixmap* pmNotThere;
-static QPixmap* pmNew;
-static QPixmap* pmOld;
-static QPixmap* pmMiddle;
-
-static QPixmap* pmLink;
-
-static QPixmap* pmDirLink;
-static QPixmap* pmFileLink;
-
-static QPixmap* pmNewLink;
-static QPixmap* pmOldLink;
-static QPixmap* pmMiddleLink;
-
-static QPixmap* pmNewDir;
-static QPixmap* pmMiddleDir;
-static QPixmap* pmOldDir;
-
-static QPixmap* pmNewDirLink;
-static QPixmap* pmMiddleDirLink;
-static QPixmap* pmOldDirLink;
-
-static QPixmap colorToPixmap(QColor c)
-{
-    QPixmap pm(16, 16);
-    QPainter p(&pm);
-    p.setPen(Qt::black);
-    p.setBrush(c);
-    p.drawRect(0, 0, pm.width(), pm.height());
-    return pm;
-}
-
-static void initPixmaps(QColor newest, QColor oldest, QColor middle, QColor notThere)
-{
-    if(pmNew == nullptr)
-    {
-        pmNotThere = new QPixmap;
-        pmNew = new QPixmap;
-        pmOld = new QPixmap;
-        pmMiddle = new QPixmap;
-
-#include "xpm/link_arrow.xpm"
-        pmLink = new QPixmap(link_arrow);
-
-        pmDirLink = new QPixmap;
-        pmFileLink = new QPixmap;
-
-        pmNewLink = new QPixmap;
-        pmOldLink = new QPixmap;
-        pmMiddleLink = new QPixmap;
-
-        pmNewDir = new QPixmap;
-        pmMiddleDir = new QPixmap;
-        pmOldDir = new QPixmap;
-
-        pmNewDirLink = new QPixmap;
-        pmMiddleDirLink = new QPixmap;
-        pmOldDirLink = new QPixmap;
-    }
-
-    *pmNotThere = colorToPixmap(notThere);
-    *pmNew = colorToPixmap(newest);
-    *pmOld = colorToPixmap(oldest);
-    *pmMiddle = colorToPixmap(middle);
-
-    *pmDirLink = pixCombiner(s_pm_dir, pmLink);
-    *pmFileLink = pixCombiner(s_pm_file, pmLink);
-
-    *pmNewLink = pixCombiner(pmNew, pmLink);
-    *pmOldLink = pixCombiner(pmOld, pmLink);
-    *pmMiddleLink = pixCombiner(pmMiddle, pmLink);
-
-    *pmNewDir = pixCombiner2(pmNew, s_pm_dir);
-    *pmMiddleDir = pixCombiner2(pmMiddle, s_pm_dir);
-    *pmOldDir = pixCombiner2(pmOld, s_pm_dir);
-
-    *pmNewDirLink = pixCombiner(pmNewDir, pmLink);
-    *pmMiddleDirLink = pixCombiner(pmMiddleDir, pmLink);
-    *pmOldDirLink = pixCombiner(pmOldDir, pmLink);
-}
-
-static QPixmap getOnePixmap(e_Age eAge, bool bLink, bool bDir)
-{
-    static QPixmap* ageToPm[] = {pmNew, pmMiddle, pmOld, pmNotThere, s_pm_file};
-    static QPixmap* ageToPmLink[] = {pmNewLink, pmMiddleLink, pmOldLink, pmNotThere, pmFileLink};
-    static QPixmap* ageToPmDir[] = {pmNewDir, pmMiddleDir, pmOldDir, pmNotThere, s_pm_dir};
-    static QPixmap* ageToPmDirLink[] = {pmNewDirLink, pmMiddleDirLink, pmOldDirLink, pmNotThere, pmDirLink};
-
-    QPixmap** ppPm = bDir ? (bLink ? ageToPmDirLink : ageToPmDir) : (bLink ? ageToPmLink : ageToPm);
-
-    return *ppPm[eAge];
 }
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setPixmaps(MergeFileInfos& mfi, bool)
