@@ -331,8 +331,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDif
     m_pDirectoryMergeSplitter->setObjectName("DirectoryMergeSplitter");
     m_pMainSplitter->addWidget(m_pDirectoryMergeSplitter);
     m_pDirectoryMergeSplitter->setOrientation(Qt::Horizontal);
-    m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeSplitter, m_pOptions,
-                                                       KIconLoader::global());
+    m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeSplitter, m_pOptions);
     m_pDirectoryMergeSplitter->addWidget(m_pDirectoryMergeWindow);
     m_pDirectoryMergeInfo = new DirectoryMergeInfo(m_pDirectoryMergeSplitter);
     m_pDirectoryMergeWindow->setDirectoryMergeInfo(m_pDirectoryMergeInfo);

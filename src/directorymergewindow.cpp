@@ -15,6 +15,7 @@
 #include "DirectoryInfo.h"
 #include "guiutils.h"
 #include "options.h"
+#include "PixMapUtils.h"
 #include "progress.h"
 #include "Utils.h"
 
@@ -22,7 +23,6 @@
 #include <map>
 #include <vector>
 
-#include <qglobal.h>
 #include <QAction>
 #include <QApplication>
 #include <QDir>
@@ -33,20 +33,16 @@
 #include <QLabel>
 #include <QLayout>
 #include <QMenu>
-#include <QPixmap>
 #include <QPushButton>
 #include <QRegExp>
 #include <QSplitter>
 #include <QStyledItemDelegate>
 #include <QTextStream>
 
-#include <KIconLoader>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KToggleAction>
 #include <KTextEdit>
-
-static QPixmap getOnePixmap(e_Age eAge, bool bLink, bool bDir);
 
 class StatusInfo : public QDialog
 {
@@ -113,132 +109,6 @@ enum Columns
 
 static Qt::CaseSensitivity s_eCaseSensitivity = Qt::CaseSensitive;
 
-//TODO Seperate file
-static QPixmap* s_pm_dir;
-static QPixmap* s_pm_file;
-
-static QPixmap* pmNotThere;
-static QPixmap* pmNew;
-static QPixmap* pmOld;
-static QPixmap* pmMiddle;
-
-static QPixmap* pmLink;
-
-static QPixmap* pmDirLink;
-static QPixmap* pmFileLink;
-
-static QPixmap* pmNewLink;
-static QPixmap* pmOldLink;
-static QPixmap* pmMiddleLink;
-
-static QPixmap* pmNewDir;
-static QPixmap* pmMiddleDir;
-static QPixmap* pmOldDir;
-
-static QPixmap* pmNewDirLink;
-static QPixmap* pmMiddleDirLink;
-static QPixmap* pmOldDirLink;
-
-static QPixmap colorToPixmap(QColor c)
-{
-    QPixmap pm(16, 16);
-    QPainter p(&pm);
-    p.setPen(Qt::black);
-    p.setBrush(c);
-    p.drawRect(0, 0, pm.width(), pm.height());
-    return pm;
-}
-// Copy pm2 onto pm1, but preserve the alpha value from pm1 where pm2 is transparent.
-static QPixmap pixCombiner(const QPixmap* pm1, const QPixmap* pm2)
-{
-    QImage img1 = pm1->toImage().convertToFormat(QImage::Format_ARGB32);
-    QImage img2 = pm2->toImage().convertToFormat(QImage::Format_ARGB32);
-
-    for(int y = 0; y < img1.height(); y++)
-    {
-        quint32* line1 = reinterpret_cast<quint32*>(img1.scanLine(y));
-        quint32* line2 = reinterpret_cast<quint32*>(img2.scanLine(y));
-        for(int x = 0; x < img1.width(); x++)
-        {
-            if(qAlpha(line2[x]) > 0)
-                line1[x] = (line2[x] | 0xff000000);
-        }
-    }
-    return QPixmap::fromImage(img1);
-}
-
-// like pixCombiner but let the pm1 color shine through
-static QPixmap pixCombiner2(const QPixmap* pm1, const QPixmap* pm2)
-{
-    QPixmap pix = *pm1;
-    QPainter p(&pix);
-    p.setOpacity(0.5);
-    p.drawPixmap(0, 0, *pm2);
-    p.end();
-
-    return pix;
-}
-
-static void initPixmaps(QColor newest, QColor oldest, QColor middle, QColor notThere)
-{
-    if(pmNew == nullptr)
-    {
-        pmNotThere = new QPixmap;
-        pmNew = new QPixmap;
-        pmOld = new QPixmap;
-        pmMiddle = new QPixmap;
-
-#include "xpm/link_arrow.xpm"
-        pmLink = new QPixmap(link_arrow);
-
-        pmDirLink = new QPixmap;
-        pmFileLink = new QPixmap;
-
-        pmNewLink = new QPixmap;
-        pmOldLink = new QPixmap;
-        pmMiddleLink = new QPixmap;
-
-        pmNewDir = new QPixmap;
-        pmMiddleDir = new QPixmap;
-        pmOldDir = new QPixmap;
-
-        pmNewDirLink = new QPixmap;
-        pmMiddleDirLink = new QPixmap;
-        pmOldDirLink = new QPixmap;
-    }
-
-    *pmNotThere = colorToPixmap(notThere);
-    *pmNew = colorToPixmap(newest);
-    *pmOld = colorToPixmap(oldest);
-    *pmMiddle = colorToPixmap(middle);
-
-    *pmDirLink = pixCombiner(s_pm_dir, pmLink);
-    *pmFileLink = pixCombiner(s_pm_file, pmLink);
-
-    *pmNewLink = pixCombiner(pmNew, pmLink);
-    *pmOldLink = pixCombiner(pmOld, pmLink);
-    *pmMiddleLink = pixCombiner(pmMiddle, pmLink);
-
-    *pmNewDir = pixCombiner2(pmNew, s_pm_dir);
-    *pmMiddleDir = pixCombiner2(pmMiddle, s_pm_dir);
-    *pmOldDir = pixCombiner2(pmOld, s_pm_dir);
-
-    *pmNewDirLink = pixCombiner(pmNewDir, pmLink);
-    *pmMiddleDirLink = pixCombiner(pmMiddleDir, pmLink);
-    *pmOldDirLink = pixCombiner(pmOldDir, pmLink);
-}
-
-static QPixmap getOnePixmap(e_Age eAge, bool bLink, bool bDir)
-{
-    static QPixmap* ageToPm[] = {pmNew, pmMiddle, pmOld, pmNotThere, s_pm_file};
-    static QPixmap* ageToPmLink[] = {pmNewLink, pmMiddleLink, pmOldLink, pmNotThere, pmFileLink};
-    static QPixmap* ageToPmDir[] = {pmNewDir, pmMiddleDir, pmOldDir, pmNotThere, s_pm_dir};
-    static QPixmap* ageToPmDirLink[] = {pmNewDirLink, pmMiddleDirLink, pmOldDirLink, pmNotThere, pmDirLink};
-
-    QPixmap** ppPm = bDir ? (bLink ? ageToPmDirLink : ageToPmDir) : (bLink ? ageToPmLink : ageToPm);
-
-    return *ppPm[eAge];
-}
 //TODO: clean up this mess.
 class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemModel
 {
@@ -249,7 +119,6 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     {
         q = pDMW;
         m_pOptions = nullptr;
-        m_pIconLoader = nullptr;
         m_pDirectoryMergeInfo = nullptr;
         m_bSimulatedMergeStarted = false;
         m_bRealMergeStarted = false;
@@ -424,7 +293,6 @@ public:
     bool m_bSkipDirStatus;
     bool m_bScanning; // true while in init()
 
-    KIconLoader* m_pIconLoader;
     DirectoryMergeInfo* m_pDirectoryMergeInfo;
     StatusInfo* m_pStatusInfo;
 
@@ -614,21 +482,21 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
         {
             if(s_NameCol == index.column())
             {
-                return getOnePixmap(eAgeEnd, pMFI->isLinkA() || pMFI->isLinkB() || pMFI->isLinkC(),
+                return PixMapUtils::getOnePixmap(eAgeEnd, pMFI->isLinkA() || pMFI->isLinkB() || pMFI->isLinkC(),
                                     pMFI->dirA() || pMFI->dirB() || pMFI->dirC());
             }
 
             if(s_ACol == index.column())
             {
-                return getOnePixmap(pMFI->m_ageA, pMFI->isLinkA(), pMFI->dirA());
+                return PixMapUtils::getOnePixmap(pMFI->m_ageA, pMFI->isLinkA(), pMFI->dirA());
             }
             if(s_BCol == index.column())
             {
-                return getOnePixmap(pMFI->m_ageB, pMFI->isLinkB(), pMFI->dirB());
+                return PixMapUtils::getOnePixmap(pMFI->m_ageB, pMFI->isLinkB(), pMFI->dirB());
             }
             if(s_CCol == index.column())
             {
-                return getOnePixmap(pMFI->m_ageC, pMFI->isLinkC(), pMFI->dirC());
+                return PixMapUtils::getOnePixmap(pMFI->m_ageC, pMFI->isLinkC(), pMFI->dirC());
             }
         }
         else if(role == Qt::TextAlignmentRole)
@@ -751,7 +619,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
     }
 };
 
-DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, Options* pOptions, KIconLoader* pIconLoader)
+DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, Options* pOptions)
     : QTreeView(pParent)
 {
     d = new DirectoryMergeWindowPrivate(this);
@@ -761,7 +629,6 @@ DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, Options* pOptions, 
     connect(this, &DirectoryMergeWindow::expanded, this, &DirectoryMergeWindow::onExpanded);
 
     d->m_pOptions = pOptions;
-    d->m_pIconLoader = pIconLoader;
 
     setSortingEnabled(true);
 }
@@ -1729,24 +1596,8 @@ QModelIndex DirectoryMergeWindow::DirectoryMergeWindowPrivate::treeIterator(QMod
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(ProgressProxy& pp)
 {
     QStringList errors;
-    static bool bFirstTime = true;
-    if(bFirstTime)
-    {
-#include "xpm/file.xpm"
-#include "xpm/folder.xpm"
-        // FIXME specify correct icon loader group
-        s_pm_dir = new QPixmap(m_pIconLoader->loadIcon("folder", KIconLoader::NoGroup, KIconLoader::Small));
-        if(s_pm_dir->size() != QSize(16, 16))
-        {
-            delete s_pm_dir;
-            s_pm_dir = new QPixmap(folder_pm);
-        }
-        s_pm_file = new QPixmap(file_pm);
-        bFirstTime = false;
-    }
-
     //TODO   clear();
-    initPixmaps(m_pOptions->m_newestFileColor, m_pOptions->m_oldestFileColor,
+    PixMapUtils::initPixmaps(m_pOptions->m_newestFileColor, m_pOptions->m_oldestFileColor,
                 m_pOptions->m_midAgeFileColor, m_pOptions->m_missingFileColor);
 
     q->setRootIsDecorated(true);

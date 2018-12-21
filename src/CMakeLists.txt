@@ -3,24 +3,25 @@
 ########### kdiff3 KPart ###############
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts WidgetsAddons)
 
-set(kdiff3part_PART_SRCS 
-   kdiff3_part.cpp 
-   kdiff3.cpp 
-   directorymergewindow.cpp 
-   merger.cpp 
-   pdiff.cpp 
-   difftextwindow.cpp 
-   diff.cpp 
-   optiondialog.cpp 
-   mergeresultwindow.cpp 
-   fileaccess.cpp 
-   gnudiff_analyze.cpp 
-   gnudiff_io.cpp 
-   gnudiff_xmalloc.cpp 
-   common.cpp 
-   smalldialogs.cpp 
+set(kdiff3part_PART_SRCS
+   kdiff3_part.cpp
+   kdiff3.cpp
+   directorymergewindow.cpp
+   merger.cpp
+   pdiff.cpp
+   difftextwindow.cpp
+   diff.cpp
+   optiondialog.cpp
+   mergeresultwindow.cpp
+   fileaccess.cpp
+   gnudiff_analyze.cpp
+   gnudiff_io.cpp
+   gnudiff_xmalloc.cpp
+   common.cpp
+   smalldialogs.cpp
    progress.cpp
    ProgressProxyExtender.cpp
+   PixMapUtils.cpp
    MergeFileInfos.cpp
    Utils.cpp
    selection.cpp
@@ -37,8 +38,8 @@ install(TARGETS kdiff3part DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts )
 ########### kdiff3 executable ###############
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts WidgetsAddons Config)
 
-set(kdiff3_SRCS 
-   main.cpp 
+set(kdiff3_SRCS
+   main.cpp
    kdiff3_shell.cpp
    ${kdiff3part_PART_SRCS}
     )
