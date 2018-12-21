@@ -11,13 +11,14 @@
  ***************************************************************************/
 #include "directorymergewindow.h"
 
-#include "MergeFileInfos.h"
 #include "DirectoryInfo.h"
-#include "guiutils.h"
-#include "options.h"
+#include "MergeFileInfos.h"
 #include "PixMapUtils.h"
-#include "progress.h"
 #include "Utils.h"
+#include "guiutils.h"
+#include "kdiff3.h"
+#include "options.h"
+#include "progress.h"
 
 #include <algorithm>
 #include <map>
@@ -25,8 +26,8 @@
 
 #include <QAction>
 #include <QApplication>
-#include <QDir>
 #include <QDialogButtonBox>
+#include <QDir>
 #include <QFileDialog>
 #include <QImage>
 #include <QKeyEvent>
@@ -41,15 +42,16 @@
 
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KToggleAction>
 #include <KTextEdit>
+#include <KToggleAction>
 
 class StatusInfo : public QDialog
 {
     KTextEdit* m_pTextEdit;
 
   public:
-    explicit StatusInfo(QWidget* pParent) : QDialog(pParent)
+    explicit StatusInfo(QWidget* pParent)
+        : QDialog(pParent)
     {
         QVBoxLayout* pVLayout = new QVBoxLayout(this);
         m_pTextEdit = new KTextEdit(this);
@@ -58,7 +60,7 @@ class StatusInfo : public QDialog
         setWindowFlags(Qt::Dialog);
         m_pTextEdit->setWordWrapMode(QTextOption::NoWrap);
         m_pTextEdit->setReadOnly(true);
-        QDialogButtonBox *box = new QDialogButtonBox(QDialogButtonBox::Close, this);
+        QDialogButtonBox* box = new QDialogButtonBox(QDialogButtonBox::Close, this);
         connect(box, &QDialogButtonBox::rejected, this, &QDialog::accept);
         pVLayout->addWidget(box);
     }
@@ -113,6 +115,7 @@ static Qt::CaseSensitivity s_eCaseSensitivity = Qt::CaseSensitive;
 class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemModel
 {
     friend class DirMergeItem;
+
   public:
     DirectoryMergeWindow* q;
     explicit DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW)
@@ -231,14 +234,15 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
 
     QString m_dirMergeStateFilename;
 
-    void buildMergeMap(const QSharedPointer<DirectoryInfo> &dirInfo);
+    void buildMergeMap(const QSharedPointer<DirectoryInfo>& dirInfo);
 
-private:
+  private:
     class FileKey
     {
       public:
         const FileAccess* m_pFA;
-        explicit FileKey(const FileAccess& fa) : m_pFA(&fa) {}
+        explicit FileKey(const FileAccess& fa)
+            : m_pFA(&fa) {}
 
         int getParents(const FileAccess* pFA, const FileAccess* v[]) const
         {
@@ -278,7 +282,8 @@ private:
     typedef QMap<FileKey, MergeFileInfos> t_fileMergeMap;
 
     MergeFileInfos* m_pRoot;
-public:
+
+  public:
     t_fileMergeMap m_fileMergeMap;
 
     bool m_bFollowDirLinks;
@@ -372,25 +377,25 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
         {
             switch(index.column())
             {
-            case s_NameCol:
-                return QFileInfo(pMFI->subPath()).fileName();
-            case s_ACol:
-                return i18n("A");
-            case s_BCol:
-                return i18n("B");
-            case s_CCol:
-                return i18n("C");
-            //case s_OpCol:       return i18n("Operation");
-            //case s_OpStatusCol: return i18n("Status");
-            case s_UnsolvedCol:
-                return i18n("Unsolved");
-            case s_SolvedCol:
-                return i18n("Solved");
-            case s_NonWhiteCol:
-                return i18n("Nonwhite");
-            case s_WhiteCol:
-                return i18n("White");
-                //default :           return QVariant();
+                case s_NameCol:
+                    return QFileInfo(pMFI->subPath()).fileName();
+                case s_ACol:
+                    return i18n("A");
+                case s_BCol:
+                    return i18n("B");
+                case s_CCol:
+                    return i18n("C");
+                //case s_OpCol:       return i18n("Operation");
+                //case s_OpStatusCol: return i18n("Status");
+                case s_UnsolvedCol:
+                    return i18n("Unsolved");
+                case s_SolvedCol:
+                    return i18n("Solved");
+                case s_NonWhiteCol:
+                    return i18n("Nonwhite");
+                case s_WhiteCol:
+                    return i18n("White");
+                    //default :           return QVariant();
             }
 
             if(s_OpCol == index.column())
@@ -398,83 +403,83 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
                 bool bDir = pMFI->dirA() || pMFI->dirB() || pMFI->dirC();
                 switch(pMFI->m_eMergeOperation)
                 {
-                case eNoOperation:
-                    return "";
-                    break;
-                case eCopyAToB:
-                    return i18n("Copy A to B");
-                    break;
-                case eCopyBToA:
-                    return i18n("Copy B to A");
-                    break;
-                case eDeleteA:
-                    return i18n("Delete A");
-                    break;
-                case eDeleteB:
-                    return i18n("Delete B");
-                    break;
-                case eDeleteAB:
-                    return i18n("Delete A & B");
-                    break;
-                case eMergeToA:
-                    return i18n("Merge to A");
-                    break;
-                case eMergeToB:
-                    return i18n("Merge to B");
-                    break;
-                case eMergeToAB:
-                    return i18n("Merge to A & B");
-                    break;
-                case eCopyAToDest:
-                    return i18n("A");
-                    break;
-                case eCopyBToDest:
-                    return i18n("B");
-                    break;
-                case eCopyCToDest:
-                    return i18n("C");
-                    break;
-                case eDeleteFromDest:
-                    return i18n("Delete (if exists)");
-                    break;
-                case eMergeABCToDest:
-                    return bDir ? i18n("Merge") : i18n("Merge (manual)");
-                    break;
-                case eMergeABToDest:
-                    return bDir ? i18n("Merge") : i18n("Merge (manual)");
-                    break;
-                case eConflictingFileTypes:
-                    return i18n("Error: Conflicting File Types");
-                    break;
-                case eChangedAndDeleted:
-                    return i18n("Error: Changed and Deleted");
-                    break;
-                case eConflictingAges:
-                    return i18n("Error: Dates are equal but files are not.");
-                    break;
-                default:
-                    Q_ASSERT(true);
-                    break;
+                    case eNoOperation:
+                        return "";
+                        break;
+                    case eCopyAToB:
+                        return i18n("Copy A to B");
+                        break;
+                    case eCopyBToA:
+                        return i18n("Copy B to A");
+                        break;
+                    case eDeleteA:
+                        return i18n("Delete A");
+                        break;
+                    case eDeleteB:
+                        return i18n("Delete B");
+                        break;
+                    case eDeleteAB:
+                        return i18n("Delete A & B");
+                        break;
+                    case eMergeToA:
+                        return i18n("Merge to A");
+                        break;
+                    case eMergeToB:
+                        return i18n("Merge to B");
+                        break;
+                    case eMergeToAB:
+                        return i18n("Merge to A & B");
+                        break;
+                    case eCopyAToDest:
+                        return i18n("A");
+                        break;
+                    case eCopyBToDest:
+                        return i18n("B");
+                        break;
+                    case eCopyCToDest:
+                        return i18n("C");
+                        break;
+                    case eDeleteFromDest:
+                        return i18n("Delete (if exists)");
+                        break;
+                    case eMergeABCToDest:
+                        return bDir ? i18n("Merge") : i18n("Merge (manual)");
+                        break;
+                    case eMergeABToDest:
+                        return bDir ? i18n("Merge") : i18n("Merge (manual)");
+                        break;
+                    case eConflictingFileTypes:
+                        return i18n("Error: Conflicting File Types");
+                        break;
+                    case eChangedAndDeleted:
+                        return i18n("Error: Changed and Deleted");
+                        break;
+                    case eConflictingAges:
+                        return i18n("Error: Dates are equal but files are not.");
+                        break;
+                    default:
+                        Q_ASSERT(true);
+                        break;
                 }
             }
             if(s_OpStatusCol == index.column())
             {
                 switch(pMFI->m_eOpStatus)
                 {
-                case eOpStatusNone:
-                    return "";
-                case eOpStatusDone:
-                    return i18n("Done");
-                case eOpStatusError:
-                    return i18n("Error");
-                case eOpStatusSkipped:
-                    return i18n("Skipped.");
-                case eOpStatusNotSaved:
-                    return i18n("Not saved.");
-                case eOpStatusInProgress:
-                    return i18n("In progress...");
-                case eOpStatusToDo:
-                    return i18n("To do.");
+                    case eOpStatusNone:
+                        return "";
+                    case eOpStatusDone:
+                        return i18n("Done");
+                    case eOpStatusError:
+                        return i18n("Error");
+                    case eOpStatusSkipped:
+                        return i18n("Skipped.");
+                    case eOpStatusNotSaved:
+                        return i18n("Not saved.");
+                    case eOpStatusInProgress:
+                        return i18n("In progress...");
+                    case eOpStatusToDo:
+                        return i18n("To do.");
                 }
             }
         }
@@ -483,7 +488,7 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
             if(s_NameCol == index.column())
             {
                 return PixMapUtils::getOnePixmap(eAgeEnd, pMFI->isLinkA() || pMFI->isLinkB() || pMFI->isLinkC(),
-                                    pMFI->dirA() || pMFI->dirB() || pMFI->dirC());
+                                                 pMFI->dirA() || pMFI->dirB() || pMFI->dirC());
             }
 
             if(s_ACol == index.column())
@@ -514,28 +519,28 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::headerData(int secti
     {
         switch(section)
         {
-        case s_NameCol:
-            return i18n("Name");
-        case s_ACol:
-            return i18n("A");
-        case s_BCol:
-            return i18n("B");
-        case s_CCol:
-            return i18n("C");
-        case s_OpCol:
-            return i18n("Operation");
-        case s_OpStatusCol:
-            return i18n("Status");
-        case s_UnsolvedCol:
-            return i18n("Unsolved");
-        case s_SolvedCol:
-            return i18n("Solved");
-        case s_NonWhiteCol:
-            return i18n("Nonwhite");
-        case s_WhiteCol:
-            return i18n("White");
-        default:
-            return QVariant();
+            case s_NameCol:
+                return i18n("Name");
+            case s_ACol:
+                return i18n("A");
+            case s_BCol:
+                return i18n("B");
+            case s_CCol:
+                return i18n("C");
+            case s_OpCol:
+                return i18n("Operation");
+            case s_OpStatusCol:
+                return i18n("Status");
+            case s_UnsolvedCol:
+                return i18n("Unsolved");
+            case s_SolvedCol:
+                return i18n("Solved");
+            case s_NonWhiteCol:
+                return i18n("Nonwhite");
+            case s_WhiteCol:
+                return i18n("White");
+            default:
+                return QVariant();
         }
     }
     return QVariant();
@@ -638,10 +643,22 @@ DirectoryMergeWindow::~DirectoryMergeWindow()
     delete d;
 }
 
-void DirectoryMergeWindow::setDirectoryMergeInfo(DirectoryMergeInfo* p) { d->m_pDirectoryMergeInfo = p; }
-bool DirectoryMergeWindow::isDirectoryMergeInProgress() { return d->m_bRealMergeStarted; }
-bool DirectoryMergeWindow::isSyncMode() { return d->m_bSyncMode; }
-bool DirectoryMergeWindow::isScanning() { return d->m_bScanning; }
+void DirectoryMergeWindow::setDirectoryMergeInfo(DirectoryMergeInfo* p)
+{
+    d->m_pDirectoryMergeInfo = p;
+}
+bool DirectoryMergeWindow::isDirectoryMergeInProgress()
+{
+    return d->m_bRealMergeStarted;
+}
+bool DirectoryMergeWindow::isSyncMode()
+{
+    return d->m_bSyncMode;
+}
+bool DirectoryMergeWindow::isScanning()
+{
+    return d->m_bScanning;
+}
 
 bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
     FileAccess& fi1, FileAccess& fi2,
@@ -803,7 +820,7 @@ void DirectoryMergeWindow::reload()
 }
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
-                                               int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges)
+                                                                      int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges)
 {
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI->dirA() || pMFI->dirB() || pMFI->dirC())
@@ -842,7 +859,7 @@ bool DirectoryMergeWindow::init(
     return d->init(dirInfo, bDirectoryMerge, bReload);
 }
 
-void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSharedPointer<DirectoryInfo> &dirInfo)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSharedPointer<DirectoryInfo>& dirInfo)
 {
     t_DirectoryList::iterator dirIterator;
 
@@ -1021,10 +1038,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         ++currentScan;
 
         bListDirSuccessA = dirA.listDir(&m_dirListA,
-                                          m_pOptions->m_bDmRecursiveDirs, m_pOptions->m_bDmFindHidden,
-                                          m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
-                                          m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
-                                          m_pOptions->m_bDmUseCvsIgnore);
+                                        m_pOptions->m_bDmRecursiveDirs, m_pOptions->m_bDmFindHidden,
+                                        m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
+                                        m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
+                                        m_pOptions->m_bDmUseCvsIgnore);
     }
 
     if(dirB.isValid())
@@ -1034,10 +1051,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         ++currentScan;
 
         bListDirSuccessB = dirB.listDir(&m_dirListB,
-                                          m_pOptions->m_bDmRecursiveDirs, m_pOptions->m_bDmFindHidden,
-                                          m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
-                                          m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
-                                          m_pOptions->m_bDmUseCvsIgnore);
+                                        m_pOptions->m_bDmRecursiveDirs, m_pOptions->m_bDmFindHidden,
+                                        m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
+                                        m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
+                                        m_pOptions->m_bDmUseCvsIgnore);
     }
 
     e_MergeOperation eDefaultMergeOp;
@@ -1048,10 +1065,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         ++currentScan;
 
         bListDirSuccessC = dirC.listDir(&m_dirListC,
-                                          m_pOptions->m_bDmRecursiveDirs, m_pOptions->m_bDmFindHidden,
-                                          m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
-                                          m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
-                                          m_pOptions->m_bDmUseCvsIgnore);
+                                        m_pOptions->m_bDmRecursiveDirs, m_pOptions->m_bDmFindHidden,
+                                        m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
+                                        m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
+                                        m_pOptions->m_bDmUseCvsIgnore);
 
         eDefaultMergeOp = eMergeABCToDest;
     }
@@ -1166,21 +1183,42 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     return true;
 }
 
-inline QString DirectoryMergeWindow::getDirNameA() const { return d->rootMFI()->getDirectoryInfo()->dirA().prettyAbsPath(); }
-inline QString DirectoryMergeWindow::getDirNameB() const { return d->rootMFI()->getDirectoryInfo()->dirB().prettyAbsPath(); }
-inline QString DirectoryMergeWindow::getDirNameC() const { return d->rootMFI()->getDirectoryInfo()->dirC().prettyAbsPath(); }
-inline QString DirectoryMergeWindow::getDirNameDest() const { return d->rootMFI()->getDirectoryInfo()->destDir().prettyAbsPath(); }
+inline QString DirectoryMergeWindow::getDirNameA() const
+{
+    return d->rootMFI()->getDirectoryInfo()->dirA().prettyAbsPath();
+}
+inline QString DirectoryMergeWindow::getDirNameB() const
+{
+    return d->rootMFI()->getDirectoryInfo()->dirB().prettyAbsPath();
+}
+inline QString DirectoryMergeWindow::getDirNameC() const
+{
+    return d->rootMFI()->getDirectoryInfo()->dirC().prettyAbsPath();
+}
+inline QString DirectoryMergeWindow::getDirNameDest() const
+{
+    return d->rootMFI()->getDirectoryInfo()->destDir().prettyAbsPath();
+}
 
 void DirectoryMergeWindow::onExpanded()
 {
     resizeColumnToContents(s_NameCol);
 }
 
-void DirectoryMergeWindow::slotChooseAEverywhere() { d->setAllMergeOperations(eCopyAToDest); }
+void DirectoryMergeWindow::slotChooseAEverywhere()
+{
+    d->setAllMergeOperations(eCopyAToDest);
+}
 
-void DirectoryMergeWindow::slotChooseBEverywhere() { d->setAllMergeOperations(eCopyBToDest); }
+void DirectoryMergeWindow::slotChooseBEverywhere()
+{
+    d->setAllMergeOperations(eCopyBToDest);
+}
 
-void DirectoryMergeWindow::slotChooseCEverywhere() { d->setAllMergeOperations(eCopyCToDest); }
+void DirectoryMergeWindow::slotChooseCEverywhere()
+{
+    d->setAllMergeOperations(eCopyCToDest);
+}
 
 void DirectoryMergeWindow::slotAutoChooseEverywhere()
 {
@@ -1188,7 +1226,10 @@ void DirectoryMergeWindow::slotAutoChooseEverywhere()
     d->setAllMergeOperations(eDefaultMergeOp);
 }
 
-void DirectoryMergeWindow::slotNoOpEverywhere() { d->setAllMergeOperations(eNoOperation); }
+void DirectoryMergeWindow::slotNoOpEverywhere()
+{
+    d->setAllMergeOperations(eNoOperation);
+}
 
 void DirectoryMergeWindow::slotFoldAllSubdirs()
 {
@@ -1201,25 +1242,64 @@ void DirectoryMergeWindow::slotUnfoldAllSubdirs()
 }
 
 // Merge current item (merge mode)
-void DirectoryMergeWindow::slotCurrentDoNothing() { d->setMergeOperation(currentIndex(), eNoOperation); }
-void DirectoryMergeWindow::slotCurrentChooseA() { d->setMergeOperation(currentIndex(), d->m_bSyncMode ? eCopyAToB : eCopyAToDest); }
-void DirectoryMergeWindow::slotCurrentChooseB() { d->setMergeOperation(currentIndex(), d->m_bSyncMode ? eCopyBToA : eCopyBToDest); }
-void DirectoryMergeWindow::slotCurrentChooseC() { d->setMergeOperation(currentIndex(), eCopyCToDest); }
+void DirectoryMergeWindow::slotCurrentDoNothing()
+{
+    d->setMergeOperation(currentIndex(), eNoOperation);
+}
+void DirectoryMergeWindow::slotCurrentChooseA()
+{
+    d->setMergeOperation(currentIndex(), d->m_bSyncMode ? eCopyAToB : eCopyAToDest);
+}
+void DirectoryMergeWindow::slotCurrentChooseB()
+{
+    d->setMergeOperation(currentIndex(), d->m_bSyncMode ? eCopyBToA : eCopyBToDest);
+}
+void DirectoryMergeWindow::slotCurrentChooseC()
+{
+    d->setMergeOperation(currentIndex(), eCopyCToDest);
+}
 void DirectoryMergeWindow::slotCurrentMerge()
 {
     bool bThreeDirs = d->isThreeWay();
     d->setMergeOperation(currentIndex(), bThreeDirs ? eMergeABCToDest : eMergeABToDest);
 }
-void DirectoryMergeWindow::slotCurrentDelete() { d->setMergeOperation(currentIndex(), eDeleteFromDest); }
+void DirectoryMergeWindow::slotCurrentDelete()
+{
+    d->setMergeOperation(currentIndex(), eDeleteFromDest);
+}
 // Sync current item
-void DirectoryMergeWindow::slotCurrentCopyAToB() { d->setMergeOperation(currentIndex(), eCopyAToB); }
-void DirectoryMergeWindow::slotCurrentCopyBToA() { d->setMergeOperation(currentIndex(), eCopyBToA); }
-void DirectoryMergeWindow::slotCurrentDeleteA() { d->setMergeOperation(currentIndex(), eDeleteA); }
-void DirectoryMergeWindow::slotCurrentDeleteB() { d->setMergeOperation(currentIndex(), eDeleteB); }
-void DirectoryMergeWindow::slotCurrentDeleteAAndB() { d->setMergeOperation(currentIndex(), eDeleteAB); }
-void DirectoryMergeWindow::slotCurrentMergeToA() { d->setMergeOperation(currentIndex(), eMergeToA); }
-void DirectoryMergeWindow::slotCurrentMergeToB() { d->setMergeOperation(currentIndex(), eMergeToB); }
-void DirectoryMergeWindow::slotCurrentMergeToAAndB() { d->setMergeOperation(currentIndex(), eMergeToAB); }
+void DirectoryMergeWindow::slotCurrentCopyAToB()
+{
+    d->setMergeOperation(currentIndex(), eCopyAToB);
+}
+void DirectoryMergeWindow::slotCurrentCopyBToA()
+{
+    d->setMergeOperation(currentIndex(), eCopyBToA);
+}
+void DirectoryMergeWindow::slotCurrentDeleteA()
+{
+    d->setMergeOperation(currentIndex(), eDeleteA);
+}
+void DirectoryMergeWindow::slotCurrentDeleteB()
+{
+    d->setMergeOperation(currentIndex(), eDeleteB);
+}
+void DirectoryMergeWindow::slotCurrentDeleteAAndB()
+{
+    d->setMergeOperation(currentIndex(), eDeleteAB);
+}
+void DirectoryMergeWindow::slotCurrentMergeToA()
+{
+    d->setMergeOperation(currentIndex(), eMergeToA);
+}
+void DirectoryMergeWindow::slotCurrentMergeToB()
+{
+    d->setMergeOperation(currentIndex(), eMergeToB);
+}
+void DirectoryMergeWindow::slotCurrentMergeToAAndB()
+{
+    d->setMergeOperation(currentIndex(), eMergeToAB);
+}
 
 void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
 {
@@ -1237,68 +1317,75 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
         {
             switch(e->key())
             {
-            case Qt::Key_1:
-                if(pMFI->existsInA()) {
-                    slotCurrentChooseA();
-                }
-                return;
-            case Qt::Key_2:
-                if(pMFI->existsInB()) {
-                    slotCurrentChooseB();
-                }
-                return;
-            case Qt::Key_3:
-                if(pMFI->existsInC()) {
-                    slotCurrentChooseC();
-                }
-                return;
-            case Qt::Key_Space:
-                slotCurrentDoNothing();
-                return;
-            case Qt::Key_4:
-                if(!bFTConflict) {
-                    slotCurrentMerge();
-                }
-                return;
-            case Qt::Key_Delete:
-                slotCurrentDelete();
-                return;
-            default:
-                break;
+                case Qt::Key_1:
+                    if(pMFI->existsInA())
+                    {
+                        slotCurrentChooseA();
+                    }
+                    return;
+                case Qt::Key_2:
+                    if(pMFI->existsInB())
+                    {
+                        slotCurrentChooseB();
+                    }
+                    return;
+                case Qt::Key_3:
+                    if(pMFI->existsInC())
+                    {
+                        slotCurrentChooseC();
+                    }
+                    return;
+                case Qt::Key_Space:
+                    slotCurrentDoNothing();
+                    return;
+                case Qt::Key_4:
+                    if(!bFTConflict)
+                    {
+                        slotCurrentMerge();
+                    }
+                    return;
+                case Qt::Key_Delete:
+                    slotCurrentDelete();
+                    return;
+                default:
+                    break;
             }
         }
         else
         {
             switch(e->key())
             {
-            case Qt::Key_1:
-                if(pMFI->existsInA()) {
-                    slotCurrentCopyAToB();
-                }
-                return;
-            case Qt::Key_2:
-                if(pMFI->existsInB()) {
-                    slotCurrentCopyBToA();
-                }
-                return;
-            case Qt::Key_Space:
-                slotCurrentDoNothing();
-                return;
-            case Qt::Key_4:
-                if(!bFTConflict) {
-                    slotCurrentMergeToAAndB();
-                }
-                return;
-            case Qt::Key_Delete:
-                if(pMFI->existsInA() && pMFI->existsInB())
-                    slotCurrentDeleteAAndB();
-                else if(pMFI->existsInA())
-                    slotCurrentDeleteA();
-                else if(pMFI->existsInB())
-                    slotCurrentDeleteB();
-                return;
-            default:
-                break;
+                case Qt::Key_1:
+                    if(pMFI->existsInA())
+                    {
+                        slotCurrentCopyAToB();
+                    }
+                    return;
+                case Qt::Key_2:
+                    if(pMFI->existsInB())
+                    {
+                        slotCurrentCopyBToA();
+                    }
+                    return;
+                case Qt::Key_Space:
+                    slotCurrentDoNothing();
+                    return;
+                case Qt::Key_4:
+                    if(!bFTConflict)
+                    {
+                        slotCurrentMergeToAAndB();
+                    }
+                    return;
+                case Qt::Key_Delete:
+                    if(pMFI->existsInA() && pMFI->existsInB())
+                        slotCurrentDeleteAAndB();
+                    else if(pMFI->existsInA())
+                        slotCurrentDeleteA();
+                    else if(pMFI->existsInB())
+                        slotCurrentDeleteB();
+                    return;
+                default:
+                    break;
             }
         }
     }
@@ -1445,11 +1532,13 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
         {
             mfi.m_ageA = (e_Age)age;
             ++age;
-            if(mfi.m_bEqualAB) {
+            if(mfi.m_bEqualAB)
+            {
                 mfi.m_ageB = mfi.m_ageA;
                 ++age;
             }
-            if(mfi.m_bEqualAC) {
+            if(mfi.m_bEqualAC)
+            {
                 mfi.m_ageC = mfi.m_ageA;
                 ++age;
             }
@@ -1458,11 +1547,13 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
         {
             mfi.m_ageB = (e_Age)age;
             ++age;
-            if(mfi.m_bEqualAB) {
+            if(mfi.m_bEqualAB)
+            {
                 mfi.m_ageA = mfi.m_ageB;
                 ++age;
             }
-            if(mfi.m_bEqualBC) {
+            if(mfi.m_bEqualBC)
+            {
                 mfi.m_ageC = mfi.m_ageB;
                 ++age;
             }
@@ -1471,11 +1562,13 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
         {
             mfi.m_ageC = (e_Age)age;
             ++age;
-            if(mfi.m_bEqualAC) {
+            if(mfi.m_bEqualAC)
+            {
                 mfi.m_ageA = mfi.m_ageC;
                 ++age;
             }
-            if(mfi.m_bEqualBC) {
+            if(mfi.m_bEqualBC)
+            {
                 mfi.m_ageB = mfi.m_ageC;
                 ++age;
             }
@@ -1598,7 +1691,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
     QStringList errors;
     //TODO   clear();
     PixMapUtils::initPixmaps(m_pOptions->m_newestFileColor, m_pOptions->m_oldestFileColor,
-                m_pOptions->m_midAgeFileColor, m_pOptions->m_missingFileColor);
+                             m_pOptions->m_midAgeFileColor, m_pOptions->m_missingFileColor);
 
     q->setRootIsDecorated(true);
 
@@ -1686,10 +1779,12 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
                         (pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirB().absoluteFilePath()) ||
                         (bCheckC && pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirC().absoluteFilePath()));
 
-    if(eDefaultMergeOp == eMergeABCToDest && !bCheckC) {
+    if(eDefaultMergeOp == eMergeABCToDest && !bCheckC)
+    {
         eDefaultMergeOp = eMergeABToDest;
     }
-    if(eDefaultMergeOp == eMergeToAB && bCheckC) {
+    if(eDefaultMergeOp == eMergeToAB && bCheckC)
+    {
         Q_ASSERT(true);
     }
 
@@ -1808,50 +1903,55 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
         e_MergeOperation eMO = eDefaultMergeOp;
         switch(eDefaultMergeOp)
         {
-        case eConflictingFileTypes:
-        case eChangedAndDeleted:
-        case eConflictingAges:
-        case eDeleteA:
-        case eDeleteB:
-        case eDeleteAB:
-        case eDeleteFromDest:
-        case eNoOperation:
-            break;
-        case eCopyAToB:
-            if(!pMFI->existsInA()) {
-                eMO = eDeleteB;
-            }
-            break;
-        case eCopyBToA:
-            if(!pMFI->existsInB()) {
-                eMO = eDeleteA;
-            }
-            break;
-        case eCopyAToDest:
-            if(!pMFI->existsInA()) {
-                eMO = eDeleteFromDest;
-            }
-            break;
-        case eCopyBToDest:
-            if(!pMFI->existsInB()) {
-                eMO = eDeleteFromDest;
-            }
-            break;
-        case eCopyCToDest:
-            if(!pMFI->existsInC()) {
-                eMO = eDeleteFromDest;
-            }
-            break;
+            case eConflictingFileTypes:
+            case eChangedAndDeleted:
+            case eConflictingAges:
+            case eDeleteA:
+            case eDeleteB:
+            case eDeleteAB:
+            case eDeleteFromDest:
+            case eNoOperation:
+                break;
+            case eCopyAToB:
+                if(!pMFI->existsInA())
+                {
+                    eMO = eDeleteB;
+                }
+                break;
+            case eCopyBToA:
+                if(!pMFI->existsInB())
+                {
+                    eMO = eDeleteA;
+                }
+                break;
+            case eCopyAToDest:
+                if(!pMFI->existsInA())
+                {
+                    eMO = eDeleteFromDest;
+                }
+                break;
+            case eCopyBToDest:
+                if(!pMFI->existsInB())
+                {
+                    eMO = eDeleteFromDest;
+                }
+                break;
+            case eCopyCToDest:
+                if(!pMFI->existsInC())
+                {
+                    eMO = eDeleteFromDest;
+                }
+                break;
 
-        case eMergeToA:
-        case eMergeToB:
-        case eMergeToAB:
-        case eMergeABCToDest:
-        case eMergeABToDest:
-            break;
-        default:
-            Q_ASSERT(true);
-            break;
+            case eMergeToA:
+            case eMergeToB:
+            case eMergeToAB:
+            case eMergeABCToDest:
+            case eMergeABToDest:
+                break;
+            default:
+                Q_ASSERT(true);
+                break;
         }
         setMergeOperation(mi, eMO);
     }
@@ -1898,15 +1998,18 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
         {
             m.addAction(d->m_pDirCurrentDoNothing);
             int count = 0;
-            if(pMFI->existsInA()) {
+            if(pMFI->existsInA())
+            {
                 m.addAction(d->m_pDirCurrentChooseA);
                 ++count;
             }
-            if(pMFI->existsInB()) {
+            if(pMFI->existsInB())
+            {
                 m.addAction(d->m_pDirCurrentChooseB);
                 ++count;
             }
-            if(pMFI->existsInC()) {
+            if(pMFI->existsInC())
+            {
                 m.addAction(d->m_pDirCurrentChooseC);
                 ++count;
             }
@@ -1934,10 +2037,12 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
         else
         {
             m.addAction(d->m_pDirCurrentDoNothing);
-            if(pMFI->existsInA()) {
+            if(pMFI->existsInA())
+            {
                 m.addAction(d->m_pDirCurrentChooseA);
             }
-            if(pMFI->existsInB()) {
+            if(pMFI->existsInB())
+            {
                 m.addAction(d->m_pDirCurrentChooseB);
             }
             if(!pMFI->conflictingFileTypes() && pMFI->existsInA() && pMFI->existsInB()) m.addAction(d->m_pDirCurrentMerge);
@@ -1949,7 +2054,8 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
     else if(c == s_ACol || c == s_BCol || c == s_CCol)
     {
         QString itemPath;
-        if(c == s_ACol && pMFI->existsInA()) {
+        if(c == s_ACol && pMFI->existsInA())
+        {
             itemPath = pMFI->fullNameA();
         }
         else if(c == s_BCol && pMFI->existsInB())
@@ -1980,7 +2086,8 @@ void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
     if(c == s_ACol || c == s_BCol || c == s_CCol)
     {
         QString itemPath;
-        if(c == s_ACol && pMFI->existsInA()) {
+        if(c == s_ACol && pMFI->existsInA())
+        {
             itemPath = pMFI->fullNameA();
         }
         else if(c == s_BCol && pMFI->existsInB())
@@ -2282,76 +2389,76 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(Me
     QString destName;
     switch(mfi.m_eMergeOperation)
     {
-    case eNoOperation:
-        break;
-    case eDeleteAB:
-        break;
-    case eMergeToAB: // let the user save in B. In mergeResultSaved() the file will be copied to A.
-    case eMergeToB:
-    case eDeleteB:
-    case eCopyAToB:
-        destName = mfi.fullNameB();
-        break;
-    case eMergeToA:
-    case eDeleteA:
-    case eCopyBToA:
-        destName = mfi.fullNameA();
-        break;
-    case eMergeABToDest:
-    case eMergeABCToDest:
-    case eCopyAToDest:
-    case eCopyBToDest:
-    case eCopyCToDest:
-    case eDeleteFromDest:
-        destName = mfi.fullNameDest();
-        break;
-    default:
-        KMessageBox::error(q, i18n("Unknown merge operation. (This must never happen!)"));
+        case eNoOperation:
+            break;
+        case eDeleteAB:
+            break;
+        case eMergeToAB: // let the user save in B. In mergeResultSaved() the file will be copied to A.
+        case eMergeToB:
+        case eDeleteB:
+        case eCopyAToB:
+            destName = mfi.fullNameB();
+            break;
+        case eMergeToA:
+        case eDeleteA:
+        case eCopyBToA:
+            destName = mfi.fullNameA();
+            break;
+        case eMergeABToDest:
+        case eMergeABCToDest:
+        case eCopyAToDest:
+        case eCopyBToDest:
+        case eCopyCToDest:
+        case eDeleteFromDest:
+            destName = mfi.fullNameDest();
+            break;
+        default:
+            KMessageBox::error(q, i18n("Unknown merge operation. (This must never happen!)"));
     }
 
     bool bSuccess = false;
     bSingleFileMerge = false;
     switch(mfi.m_eMergeOperation)
     {
-    case eNoOperation:
-        bSuccess = true;
-        break;
-    case eCopyAToDest:
-    case eCopyAToB:
-        bSuccess = copyFLD(mfi.fullNameA(), destName);
-        break;
-    case eCopyBToDest:
-    case eCopyBToA:
-        bSuccess = copyFLD(mfi.fullNameB(), destName);
-        break;
-    case eCopyCToDest:
-        bSuccess = copyFLD(mfi.fullNameC(), destName);
-        break;
-    case eDeleteFromDest:
-    case eDeleteA:
-    case eDeleteB:
-        bSuccess = deleteFLD(destName, bCreateBackups);
-        break;
-    case eDeleteAB:
-        bSuccess = deleteFLD(mfi.fullNameA(), bCreateBackups) &&
-                   deleteFLD(mfi.fullNameB(), bCreateBackups);
-        break;
-    case eMergeABToDest:
-    case eMergeToA:
-    case eMergeToAB:
-    case eMergeToB:
-        bSuccess = mergeFLD(mfi.fullNameA(), mfi.fullNameB(), "",
-                            destName, bSingleFileMerge);
-        break;
-    case eMergeABCToDest:
-        bSuccess = mergeFLD(
-            mfi.existsInA() ? mfi.fullNameA() : QString(""),
-            mfi.existsInB() ? mfi.fullNameB() : QString(""),
-            mfi.existsInC() ? mfi.fullNameC() : QString(""),
-            destName, bSingleFileMerge);
-        break;
-    default:
-        KMessageBox::error(q, i18n("Unknown merge operation."));
+        case eNoOperation:
+            bSuccess = true;
+            break;
+        case eCopyAToDest:
+        case eCopyAToB:
+            bSuccess = copyFLD(mfi.fullNameA(), destName);
+            break;
+        case eCopyBToDest:
+        case eCopyBToA:
+            bSuccess = copyFLD(mfi.fullNameB(), destName);
+            break;
+        case eCopyCToDest:
+            bSuccess = copyFLD(mfi.fullNameC(), destName);
+            break;
+        case eDeleteFromDest:
+        case eDeleteA:
+        case eDeleteB:
+            bSuccess = deleteFLD(destName, bCreateBackups);
+            break;
+        case eDeleteAB:
+            bSuccess = deleteFLD(mfi.fullNameA(), bCreateBackups) &&
+                       deleteFLD(mfi.fullNameB(), bCreateBackups);
+            break;
+        case eMergeABToDest:
+        case eMergeToA:
+        case eMergeToAB:
+        case eMergeToB:
+            bSuccess = mergeFLD(mfi.fullNameA(), mfi.fullNameB(), "",
+                                destName, bSingleFileMerge);
+            break;
+        case eMergeABCToDest:
+            bSuccess = mergeFLD(
+                mfi.existsInA() ? mfi.fullNameA() : QString(""),
+                mfi.existsInB() ? mfi.fullNameB() : QString(""),
+                mfi.existsInC() ? mfi.fullNameC() : QString(""),
+                destName, bSingleFileMerge);
+            break;
+        default:
+            KMessageBox::error(q, i18n("Unknown merge operation."));
     }
 
     return bSuccess;
@@ -2645,7 +2752,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
         pp.setInformation(pMFI->subPath(),
                           bSim ? nrOfCompletedSimItems : nrOfCompletedItems,
                           false // bRedrawUpdate
-                          );
+        );
 
         bSuccess = executeMergeOperation(*pMFI, bSingleFileMerge); // Here the real operation happens.
 
@@ -2744,7 +2851,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::deleteFLD(const QString&
                 bSuccess = FileAccess::removeDir(name);
                 if(!bSuccess)
                 {
-                    m_pStatusInfo->addText(i18n("Error: rmdir( %1 ) operation failed.", name));// krazy:exclude=syscalls
+                    m_pStatusInfo->addText(i18n("Error: rmdir( %1 ) operation failed.", name)); // krazy:exclude=syscalls
                     return false;
                 }
             }
@@ -3021,14 +3128,9 @@ void DirectoryMergeInfo::addListViewItem(const QString& dir, const QString& base
         {
             QString dateString = fi->lastModified().toString("yyyy-MM-dd hh:mm:ss");
             //TODO: Move logic to FileAccess
-            m_pInfoList->addTopLevelItem( new QTreeWidgetItem(
+            m_pInfoList->addTopLevelItem(new QTreeWidgetItem(
                 m_pInfoList,
-                QStringList() << dir <<
-                    QString(fi->isDir() ? i18n("Dir") : i18n("File")) + (fi->isSymLink() ? i18n("-Link") : "") << QString::number(fi->size()) << QLatin1String(fi->isReadable() ? "r" : " ")
-                    + QLatin1String(fi->isWritable() ? "w" : " ")
-                    + QLatin1String((fi->isExecutable() ? "x" : " ")) <<
-                    dateString << QString(fi->isSymLink() ? (" -> " + fi->readLink()) : QString("")))
-            );
+                QStringList() << dir << QString(fi->isDir() ? i18n("Dir") : i18n("File")) + (fi->isSymLink() ? i18n("-Link") : "") << QString::number(fi->size()) << QLatin1String(fi->isReadable() ? "r" : " ") + QLatin1String(fi->isWritable() ? "w" : " ") + QLatin1String((fi->isExecutable() ? "x" : " ")) << dateString << QString(fi->isSymLink() ? (" -> " + fi->readLink()) : QString(""))));
         }
         else
         {
@@ -3081,7 +3183,8 @@ void DirectoryMergeInfo::setInfo(
     m_pDest->setText(i18n("Dest: "));
     m_pInfoDest->setText(dirDest.prettyAbsPath());
 
-    if(!dirC.isValid()) {
+    if(!dirC.isValid())
+    {
         m_pC->hide();
         m_pInfoC->hide();
     }
@@ -3091,7 +3194,8 @@ void DirectoryMergeInfo::setInfo(
         m_pInfoC->show();
     }
 
-    if(!dirDest.isValid() || bHideDest) {
+    if(!dirDest.isValid() || bHideDest)
+    {
         m_pDest->hide();
         m_pInfoDest->hide();
     }
@@ -3163,7 +3267,8 @@ void DirectoryMergeWindow::slotSaveMergeState()
             QTextStream ts(&file);
 
             QModelIndex mi(d->index(0, 0, QModelIndex()));
-            while(mi.isValid()) {
+            while(mi.isValid())
+            {
                 MergeFileInfos* pMFI = d->getMFI(mi);
                 ts << *pMFI;
                 mi = d->treeIterator(mi, true, true);
@@ -3239,15 +3344,18 @@ void DirectoryMergeWindow::updateFileVisibilities()
                 while(p2 != nullptr)
                 {
                     bool bChange = false;
-                    if(!pMFI->m_bEqualAB && p2->m_bEqualAB) {
+                    if(!pMFI->m_bEqualAB && p2->m_bEqualAB)
+                    {
                         p2->m_bEqualAB = false;
                         bChange = true;
                     }
-                    if(!pMFI->m_bEqualAC && p2->m_bEqualAC) {
+                    if(!pMFI->m_bEqualAC && p2->m_bEqualAC)
+                    {
                         p2->m_bEqualAC = false;
                         bChange = true;
                     }
-                    if(!pMFI->m_bEqualBC && p2->m_bEqualBC) {
+                    if(!pMFI->m_bEqualBC && p2->m_bEqualBC)
+                    {
                         p2->m_bEqualBC = false;
                         bChange = true;
                     }
@@ -3270,68 +3378,79 @@ void DirectoryMergeWindow::slotShowIdenticalFiles()
     d->m_pOptions->m_bDmShowIdenticalFiles = d->m_pDirShowIdenticalFiles->isChecked();
     updateFileVisibilities();
 }
-void DirectoryMergeWindow::slotShowDifferentFiles() { updateFileVisibilities(); }
-void DirectoryMergeWindow::slotShowFilesOnlyInA() { updateFileVisibilities(); }
-void DirectoryMergeWindow::slotShowFilesOnlyInB() { updateFileVisibilities(); }
-void DirectoryMergeWindow::slotShowFilesOnlyInC() { updateFileVisibilities(); }
+void DirectoryMergeWindow::slotShowDifferentFiles()
+{
+    updateFileVisibilities();
+}
+void DirectoryMergeWindow::slotShowFilesOnlyInA()
+{
+    updateFileVisibilities();
+}
+void DirectoryMergeWindow::slotShowFilesOnlyInB()
+{
+    updateFileVisibilities();
+}
+void DirectoryMergeWindow::slotShowFilesOnlyInC()
+{
+    updateFileVisibilities();
+}
 
 void DirectoryMergeWindow::slotSynchronizeDirectories() {}
 void DirectoryMergeWindow::slotChooseNewerFiles() {}
 
-void DirectoryMergeWindow::initDirectoryMergeActions(QObject* pKDiff3App, KActionCollection* ac)
+void DirectoryMergeWindow::initDirectoryMergeActions(KDiff3App* pKDiff3App, KActionCollection* ac)
 {
 #include "xpm/showequalfiles.xpm"
 #include "xpm/showfilesonlyina.xpm"
 #include "xpm/showfilesonlyinb.xpm"
 #include "xpm/showfilesonlyinc.xpm"
 #include "xpm/startmerge.xpm"
-    DirectoryMergeWindow* p = this;
 
-    d->m_pDirStartOperation = KDiff3::createAction<QAction>(i18n("Start/Continue Directory Merge"), QKeySequence(Qt::Key_F7), p, SLOT(slotRunOperationForAllItems()), ac, "dir_start_operation");
-    d->m_pDirRunOperationForCurrentItem = KDiff3::createAction<QAction>(i18n("Run Operation for Current Item"), QKeySequence(Qt::Key_F6), p, SLOT(slotRunOperationForCurrentItem()), ac, "dir_run_operation_for_current_item");
-    d->m_pDirCompareCurrent = KDiff3::createAction<QAction>(i18n("Compare Selected File"), p, SLOT(compareCurrentFile()), ac, "dir_compare_current");
-    d->m_pDirMergeCurrent = KDiff3::createAction<QAction>(i18n("Merge Current File"), QIcon(QPixmap(startmerge)), i18n("Merge\nFile"), pKDiff3App, SLOT(slotMergeCurrentFile()), ac, "merge_current");
-    d->m_pDirFoldAll = KDiff3::createAction<QAction>(i18n("Fold All Subdirs"), p, SLOT(collapseAll()), ac, "dir_fold_all");
-    d->m_pDirUnfoldAll = KDiff3::createAction<QAction>(i18n("Unfold All Subdirs"), p, SLOT(expandAll()), ac, "dir_unfold_all");
-    d->m_pDirRescan = KDiff3::createAction<QAction>(i18n("Rescan"), QKeySequence(Qt::SHIFT + Qt::Key_F5), p, SLOT(reload()), ac, "dir_rescan");
-    d->m_pDirSaveMergeState = nullptr; //KDiff3::createAction< QAction >(i18n("Save Directory Merge State ..."), 0, p, SLOT(slotSaveMergeState()), ac, "dir_save_merge_state");
-    d->m_pDirLoadMergeState = nullptr; //KDiff3::createAction< QAction >(i18n("Load Directory Merge State ..."), 0, p, SLOT(slotLoadMergeState()), ac, "dir_load_merge_state");
-    d->m_pDirChooseAEverywhere = KDiff3::createAction<QAction>(i18n("Choose A for All Items"), p, SLOT(slotChooseAEverywhere()), ac, "dir_choose_a_everywhere");
-    d->m_pDirChooseBEverywhere = KDiff3::createAction<QAction>(i18n("Choose B for All Items"), p, SLOT(slotChooseBEverywhere()), ac, "dir_choose_b_everywhere");
-    d->m_pDirChooseCEverywhere = KDiff3::createAction<QAction>(i18n("Choose C for All Items"), p, SLOT(slotChooseCEverywhere()), ac, "dir_choose_c_everywhere");
-    d->m_pDirAutoChoiceEverywhere = KDiff3::createAction<QAction>(i18n("Auto-Choose Operation for All Items"), p, SLOT(slotAutoChooseEverywhere()), ac, "dir_autochoose_everywhere");
-    d->m_pDirDoNothingEverywhere = KDiff3::createAction<QAction>(i18n("No Operation for All Items"), p, SLOT(slotNoOpEverywhere()), ac, "dir_nothing_everywhere");
+    d->m_pDirStartOperation = GuiUtils::createAction<QAction>(i18n("Start/Continue Directory Merge"), QKeySequence(Qt::Key_F7), this, &DirectoryMergeWindow::slotRunOperationForAllItems, ac, "dir_start_operation");
+    d->m_pDirRunOperationForCurrentItem = GuiUtils::createAction<QAction>(i18n("Run Operation for Current Item"), QKeySequence(Qt::Key_F6), this, &DirectoryMergeWindow::slotRunOperationForCurrentItem, ac, "dir_run_operation_for_current_item");
+    d->m_pDirCompareCurrent = GuiUtils::createAction<QAction>(i18n("Compare Selected File"), this, &DirectoryMergeWindow::compareCurrentFile, ac, "dir_compare_current");
+    d->m_pDirMergeCurrent = GuiUtils::createAction<QAction>(i18n("Merge Current File"), QIcon(QPixmap(startmerge)), i18n("Merge\nFile"), pKDiff3App, &KDiff3App::slotMergeCurrentFile, ac, "merge_current");
+    d->m_pDirFoldAll = GuiUtils::createAction<QAction>(i18n("Fold All Subdirs"), this, &DirectoryMergeWindow::collapseAll, ac, "dir_fold_all");
+    d->m_pDirUnfoldAll = GuiUtils::createAction<QAction>(i18n("Unfold All Subdirs"), this, &DirectoryMergeWindow::expandAll, ac, "dir_unfold_all");
+    d->m_pDirRescan = GuiUtils::createAction<QAction>(i18n("Rescan"), QKeySequence(Qt::SHIFT + Qt::Key_F5), this, &DirectoryMergeWindow::reload, ac, "dir_rescan");
+    d->m_pDirSaveMergeState = nullptr; //GuiUtils::createAction< QAction >(i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
+    d->m_pDirLoadMergeState = nullptr; //GuiUtils::createAction< QAction >(i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");
+    d->m_pDirChooseAEverywhere = GuiUtils::createAction<QAction>(i18n("Choose A for All Items"), this, &DirectoryMergeWindow::slotChooseAEverywhere, ac, "dir_choose_a_everywhere");
+    d->m_pDirChooseBEverywhere = GuiUtils::createAction<QAction>(i18n("Choose B for All Items"), this, &DirectoryMergeWindow::slotChooseBEverywhere, ac, "dir_choose_b_everywhere");
+    d->m_pDirChooseCEverywhere = GuiUtils::createAction<QAction>(i18n("Choose C for All Items"), this, &DirectoryMergeWindow::slotChooseCEverywhere, ac, "dir_choose_c_everywhere");
+    d->m_pDirAutoChoiceEverywhere = GuiUtils::createAction<QAction>(i18n("Auto-Choose Operation for All Items"), this, &DirectoryMergeWindow::slotAutoChooseEverywhere, ac, "dir_autochoose_everywhere");
+    d->m_pDirDoNothingEverywhere = GuiUtils::createAction<QAction>(i18n("No Operation for All Items"), this, &DirectoryMergeWindow::slotNoOpEverywhere, ac, "dir_nothing_everywhere");
 
-    //   d->m_pDirSynchronizeDirectories = KDiff3::createAction< KToggleAction >(i18n("Synchronize Directories"), 0, this, SLOT(slotSynchronizeDirectories()), ac, "dir_synchronize_directories");
-    //   d->m_pDirChooseNewerFiles = KDiff3::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, SLOT(slotChooseNewerFiles()), ac, "dir_choose_newer_files");
+    //   d->m_pDirSynchronizeDirectories = GuiUtils::createAction< KToggleAction >(i18n("Synchronize Directories"), 0, this, &DirectoryMergeWindow::slotSynchronizeDirectories, ac, "dir_synchronize_directories");
+    //   d->m_pDirChooseNewerFiles = GuiUtils::createAction< KToggleAction >(i18n("Copy Newer Files Instead of Merging"), 0, this, &DirectoryMergeWindow::slotChooseNewerFiles, ac, "dir_choose_newer_files");
 
-    d->m_pDirShowIdenticalFiles = KDiff3::createAction<KToggleAction>(i18n("Show Identical Files"), QIcon(QPixmap(showequalfiles)), i18n("Identical\nFiles"), this, SLOT(slotShowIdenticalFiles()), ac, "dir_show_identical_files");
-    d->m_pDirShowDifferentFiles = KDiff3::createAction<KToggleAction>(i18n("Show Different Files"), this, SLOT(slotShowDifferentFiles()), ac, "dir_show_different_files");
-    d->m_pDirShowFilesOnlyInA = KDiff3::createAction<KToggleAction>(i18n("Show Files only in A"), QIcon(QPixmap(showfilesonlyina)), i18n("Files\nonly in A"), this, SLOT(slotShowFilesOnlyInA()), ac, "dir_show_files_only_in_a");
-    d->m_pDirShowFilesOnlyInB = KDiff3::createAction<KToggleAction>(i18n("Show Files only in B"), QIcon(QPixmap(showfilesonlyinb)), i18n("Files\nonly in B"), this, SLOT(slotShowFilesOnlyInB()), ac, "dir_show_files_only_in_b");
-    d->m_pDirShowFilesOnlyInC = KDiff3::createAction<KToggleAction>(i18n("Show Files only in C"), QIcon(QPixmap(showfilesonlyinc)), i18n("Files\nonly in C"), this, SLOT(slotShowFilesOnlyInC()), ac, "dir_show_files_only_in_c");
+    d->m_pDirShowIdenticalFiles = GuiUtils::createAction<KToggleAction>(i18n("Show Identical Files"), QIcon(QPixmap(showequalfiles)), i18n("Identical\nFiles"), this, &DirectoryMergeWindow::slotShowIdenticalFiles, ac, "dir_show_identical_files");
+    d->m_pDirShowDifferentFiles = GuiUtils::createAction<KToggleAction>(i18n("Show Different Files"), this, &DirectoryMergeWindow::slotShowDifferentFiles, ac, "dir_show_different_files");
+    d->m_pDirShowFilesOnlyInA = GuiUtils::createAction<KToggleAction>(i18n("Show Files only in A"), QIcon(QPixmap(showfilesonlyina)), i18n("Files\nonly in A"), this, &DirectoryMergeWindow::slotShowFilesOnlyInA, ac, "dir_show_files_only_in_a");
+    d->m_pDirShowFilesOnlyInB = GuiUtils::createAction<KToggleAction>(i18n("Show Files only in B"), QIcon(QPixmap(showfilesonlyinb)), i18n("Files\nonly in B"), this, &DirectoryMergeWindow::slotShowFilesOnlyInB, ac, "dir_show_files_only_in_b");
+    d->m_pDirShowFilesOnlyInC = GuiUtils::createAction<KToggleAction>(i18n("Show Files only in C"), QIcon(QPixmap(showfilesonlyinc)), i18n("Files\nonly in C"), this, &DirectoryMergeWindow::slotShowFilesOnlyInC, ac, "dir_show_files_only_in_c");
 
     d->m_pDirShowIdenticalFiles->setChecked(d->m_pOptions->m_bDmShowIdenticalFiles);
 
-    d->m_pDirCompareExplicit = KDiff3::createAction<QAction>(i18n("Compare Explicitly Selected Files"), p, SLOT(slotCompareExplicitlySelectedFiles()), ac, "dir_compare_explicitly_selected_files");
-    d->m_pDirMergeExplicit = KDiff3::createAction<QAction>(i18n("Merge Explicitly Selected Files"), p, SLOT(slotMergeExplicitlySelectedFiles()), ac, "dir_merge_explicitly_selected_files");
+    d->m_pDirCompareExplicit = GuiUtils::createAction<QAction>(i18n("Compare Explicitly Selected Files"), this, &DirectoryMergeWindow::slotCompareExplicitlySelectedFiles, ac, "dir_compare_explicitly_selected_files");
+    d->m_pDirMergeExplicit = GuiUtils::createAction<QAction>(i18n("Merge Explicitly Selected Files"), this, &DirectoryMergeWindow::slotMergeExplicitlySelectedFiles, ac, "dir_merge_explicitly_selected_files");
 
-    d->m_pDirCurrentDoNothing = KDiff3::createAction<QAction>(i18n("Do Nothing"), p, SLOT(slotCurrentDoNothing()), ac, "dir_current_do_nothing");
-    d->m_pDirCurrentChooseA = KDiff3::createAction<QAction>(i18n("A"), p, SLOT(slotCurrentChooseA()), ac, "dir_current_choose_a");
-    d->m_pDirCurrentChooseB = KDiff3::createAction<QAction>(i18n("B"), p, SLOT(slotCurrentChooseB()), ac, "dir_current_choose_b");
-    d->m_pDirCurrentChooseC = KDiff3::createAction<QAction>(i18n("C"), p, SLOT(slotCurrentChooseC()), ac, "dir_current_choose_c");
-    d->m_pDirCurrentMerge = KDiff3::createAction<QAction>(i18n("Merge"), p, SLOT(slotCurrentMerge()), ac, "dir_current_merge");
-    d->m_pDirCurrentDelete = KDiff3::createAction<QAction>(i18n("Delete (if exists)"), p, SLOT(slotCurrentDelete()), ac, "dir_current_delete");
+    d->m_pDirCurrentDoNothing = GuiUtils::createAction<QAction>(i18n("Do Nothing"), this, &DirectoryMergeWindow::slotCurrentDoNothing, ac, "dir_current_do_nothing");
+    d->m_pDirCurrentChooseA = GuiUtils::createAction<QAction>(i18n("A"), this, &DirectoryMergeWindow::slotCurrentChooseA, ac, "dir_current_choose_a");
+    d->m_pDirCurrentChooseB = GuiUtils::createAction<QAction>(i18n("B"), this, &DirectoryMergeWindow::slotCurrentChooseB, ac, "dir_current_choose_b");
+    d->m_pDirCurrentChooseC = GuiUtils::createAction<QAction>(i18n("C"), this, &DirectoryMergeWindow::slotCurrentChooseC, ac, "dir_current_choose_c");
+    d->m_pDirCurrentMerge = GuiUtils::createAction<QAction>(i18n("Merge"), this, &DirectoryMergeWindow::slotCurrentMerge, ac, "dir_current_merge");
+    d->m_pDirCurrentDelete = GuiUtils::createAction<QAction>(i18n("Delete (if exists)"), this, &DirectoryMergeWindow::slotCurrentDelete, ac, "dir_current_delete");
 
-    d->m_pDirCurrentSyncDoNothing = KDiff3::createAction<QAction>(i18n("Do Nothing"), p, SLOT(slotCurrentDoNothing()), ac, "dir_current_sync_do_nothing");
-    d->m_pDirCurrentSyncCopyAToB = KDiff3::createAction<QAction>(i18n("Copy A to B"), p, SLOT(slotCurrentCopyAToB()), ac, "dir_current_sync_copy_a_to_b");
-    d->m_pDirCurrentSyncCopyBToA = KDiff3::createAction<QAction>(i18n("Copy B to A"), p, SLOT(slotCurrentCopyBToA()), ac, "dir_current_sync_copy_b_to_a");
-    d->m_pDirCurrentSyncDeleteA = KDiff3::createAction<QAction>(i18n("Delete A"), p, SLOT(slotCurrentDeleteA()), ac, "dir_current_sync_delete_a");
-    d->m_pDirCurrentSyncDeleteB = KDiff3::createAction<QAction>(i18n("Delete B"), p, SLOT(slotCurrentDeleteB()), ac, "dir_current_sync_delete_b");
-    d->m_pDirCurrentSyncDeleteAAndB = KDiff3::createAction<QAction>(i18n("Delete A && B"), p, SLOT(slotCurrentDeleteAAndB()), ac, "dir_current_sync_delete_a_and_b");
-    d->m_pDirCurrentSyncMergeToA = KDiff3::createAction<QAction>(i18n("Merge to A"), p, SLOT(slotCurrentMergeToA()), ac, "dir_current_sync_merge_to_a");
-    d->m_pDirCurrentSyncMergeToB = KDiff3::createAction<QAction>(i18n("Merge to B"), p, SLOT(slotCurrentMergeToB()), ac, "dir_current_sync_merge_to_b");
-    d->m_pDirCurrentSyncMergeToAAndB = KDiff3::createAction<QAction>(i18n("Merge to A && B"), p, SLOT(slotCurrentMergeToAAndB()), ac, "dir_current_sync_merge_to_a_and_b");
+    d->m_pDirCurrentSyncDoNothing = GuiUtils::createAction<QAction>(i18n("Do Nothing"), this, &DirectoryMergeWindow::slotCurrentDoNothing, ac, "dir_current_sync_do_nothing");
+    d->m_pDirCurrentSyncCopyAToB = GuiUtils::createAction<QAction>(i18n("Copy A to B"), this, &DirectoryMergeWindow::slotCurrentCopyAToB, ac, "dir_current_sync_copy_a_to_b");
+    d->m_pDirCurrentSyncCopyBToA = GuiUtils::createAction<QAction>(i18n("Copy B to A"), this, &DirectoryMergeWindow::slotCurrentCopyBToA, ac, "dir_current_sync_copy_b_to_a");
+    d->m_pDirCurrentSyncDeleteA = GuiUtils::createAction<QAction>(i18n("Delete A"), this, &DirectoryMergeWindow::slotCurrentDeleteA, ac, "dir_current_sync_delete_a");
+    d->m_pDirCurrentSyncDeleteB = GuiUtils::createAction<QAction>(i18n("Delete B"), this, &DirectoryMergeWindow::slotCurrentDeleteB, ac, "dir_current_sync_delete_b");
+    d->m_pDirCurrentSyncDeleteAAndB = GuiUtils::createAction<QAction>(i18n("Delete A && B"), this, &DirectoryMergeWindow::slotCurrentDeleteAAndB, ac, "dir_current_sync_delete_a_and_b");
+    d->m_pDirCurrentSyncMergeToA = GuiUtils::createAction<QAction>(i18n("Merge to A"), this, &DirectoryMergeWindow::slotCurrentMergeToA, ac, "dir_current_sync_merge_to_a");
+    d->m_pDirCurrentSyncMergeToB = GuiUtils::createAction<QAction>(i18n("Merge to B"), this, &DirectoryMergeWindow::slotCurrentMergeToB, ac, "dir_current_sync_merge_to_b");
+    d->m_pDirCurrentSyncMergeToAAndB = GuiUtils::createAction<QAction>(i18n("Merge to A && B"), this, &DirectoryMergeWindow::slotCurrentMergeToAAndB, ac, "dir_current_sync_merge_to_a_and_b");
 }
 
 void DirectoryMergeWindow::updateAvailabilities(bool bDirCompare, bool bDiffWindowVisible,

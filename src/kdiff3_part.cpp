@@ -69,9 +69,9 @@ KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantLis
     setWidget(m_widget);
 
     // create our actions
-    //KStandardAction::open(this, SLOT(fileOpen()), actionCollection());
-    //KStandardAction::saveAs(this, SLOT(fileSaveAs()), actionCollection());
-    //KStandardAction::save(this, SLOT(save()), actionCollection());
+    //KStandardAction::open(this, &KDiff3Part:fileOpen, actionCollection());
+    //KStandardAction::saveAs(this, &KDiff3Part:fileSaveAs, actionCollection());
+    //KStandardAction::save(this, &KDiff3Part:save, actionCollection());
 
     setXMLFile("kdiff3_part.rc");
 

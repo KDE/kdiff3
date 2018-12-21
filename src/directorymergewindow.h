@@ -34,6 +34,7 @@ class DirectoryInfo;
 
 class MergeFileInfos;
 
+class KDiff3App;
 class DirectoryMergeWindow : public QTreeView
 {
    Q_OBJECT
@@ -51,7 +52,7 @@ public:
    int totalColumnWidth();
    bool isSyncMode();
    bool isScanning();
-   void initDirectoryMergeActions( QObject* pKDiff3App, KActionCollection* ac );
+   void initDirectoryMergeActions( KDiff3App* pKDiff3App, KActionCollection* ac );
    void updateAvailabilities( bool bDirCompare, bool bDiffWindowVisible,
       KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC );
    void updateFileVisibilities();
