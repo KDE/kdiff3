@@ -189,10 +189,6 @@ void writeEntry(ValueMap* vm, const QString& saveName, const T& v)
 {
     vm->writeEntry(saveName, v);
 }
-static void writeEntry(ValueMap* vm, const QString& saveName, const QStringList& v)
-{
-    vm->writeEntry(saveName, v);
-}
 
 //static void readEntry(ValueMap* vm, const QString& saveName, bool& v )       {   v = vm->readBoolEntry( saveName, v ); }
 //static void readEntry(ValueMap* vm, const QString& saveName, int&  v )       {   v = vm->readNumEntry( saveName, v ); }
