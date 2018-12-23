@@ -36,18 +36,8 @@ namespace GuiUtils {
    {
        Q_ASSERT(ac != nullptr);
        QAction* theAction;
-       /*if()
-       {*/
-           theAction = ac->addAction(actionName);
-           theAction->setText(text);
-           //return theAction;
-       /*}
-       else
-       {
-           theAction = new KToggleAction(ac);
-           ac->addAction(actionName, theAction);
-           //QObject::connect(theAction, SIGNAL(triggered(bool)), receiver, slot);
-       }*/
+
+       theAction = ac->addAction(actionName);
        theAction->setText(text);
        QObject::connect(theAction, &QAction::triggered, receiver, slot);
        return theAction;
