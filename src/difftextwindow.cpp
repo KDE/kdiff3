@@ -95,12 +95,12 @@ class DiffTextWindowData
     class WrapLineCacheData
     {
       public:
-        WrapLineCacheData() : m_d3LineIdx(0), m_textStart(0), m_textLength(0) {}
+        WrapLineCacheData()  {}
         WrapLineCacheData(int d3LineIdx, int textStart, int textLength)
             : m_d3LineIdx(d3LineIdx), m_textStart(textStart), m_textLength(textLength) {}
-        int m_d3LineIdx;
-        int m_textStart;
-        int m_textLength;
+        int m_d3LineIdx = 0;
+        int m_textStart = 0;
+        int m_textLength = 0;
     };
     QList<QVector<WrapLineCacheData>> m_wrapLineCacheList;
 
