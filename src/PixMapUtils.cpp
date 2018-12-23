@@ -92,7 +92,7 @@ QPixmap pixCombiner2(const QPixmap* pm1, const QPixmap* pm2)
     return pix;
 }
 
-void initPixmaps(QColor newest, QColor oldest, QColor middle, QColor notThere)
+void initPixmaps(const QColor& newest, const QColor& oldest, const QColor& middle, const QColor& notThere)
 {
     if(s_pm_dir == nullptr || s_pm_file == nullptr)
     {

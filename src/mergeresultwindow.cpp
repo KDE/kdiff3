@@ -1212,7 +1212,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
 }
 
 void MergeResultWindow::collectHistoryInformation(
-    int src, Diff3LineList::const_iterator iHistoryBegin, Diff3LineList::const_iterator iHistoryEnd,
+    int src, Diff3LineList::const_iterator &iHistoryBegin, Diff3LineList::const_iterator &iHistoryEnd,
     HistoryMap& historyMap,
     std::list<HistoryMap::iterator>& hitList // list of iterators
 )

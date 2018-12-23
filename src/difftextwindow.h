@@ -32,7 +32,7 @@ public:
    ~DiffTextWindow() override;
    void init(
       const QString& fileName,
-      QTextCodec* pCodec,
+      QTextCodec* pTextCodec,
       e_LineEndStyle eLineEndStyle,
       const LineData* pLineData,
       int size,
@@ -65,7 +65,7 @@ public:
    void getSelectionRange( int* firstLine, int* lastLine, e_CoordType coordType );
 
    void setPaintingAllowed( bool bAllowPainting );
-   void recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int nofVisibleColumns);
+   void recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth);
    void recalcWordWrapHelper( int wrapLineVectorSize, int visibleTextWidth, int cacheListIdx);
    void print( MyPainter& painter, const QRect& r, int firstLine, int nofLinesPerPage );
 Q_SIGNALS:

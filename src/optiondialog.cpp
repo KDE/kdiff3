@@ -122,7 +122,7 @@ class OptionItemT : public OptionItem
 class OptionCheckBox : public QCheckBox, public OptionItemT<bool>
 {
   public:
-    OptionCheckBox(QString text, bool bDefaultVal, const QString& saveName, bool* pbVar,
+    OptionCheckBox(const QString &text, bool bDefaultVal, const QString& saveName, bool* pbVar,
                    QWidget* pParent)
         : QCheckBox(text, pParent), OptionItemT<bool>(saveName)
     {
@@ -142,7 +142,7 @@ class OptionCheckBox : public QCheckBox, public OptionItemT<bool>
 class OptionRadioButton : public QRadioButton, public OptionItemT<bool>
 {
   public:
-    OptionRadioButton(QString text, bool bDefaultVal, const QString& saveName, bool* pbVar,
+    OptionRadioButton(const QString& text, bool bDefaultVal, const QString& saveName, bool* pbVar,
                       QWidget* pParent)
         : QRadioButton(text, pParent), OptionItemT<bool>(saveName)
     {
@@ -272,7 +272,7 @@ class OptionFontChooser : public FontChooser, public OptionItemT<QFont>
 class OptionColorButton : public KColorButton, public OptionItemT<QColor>
 {
   public:
-    OptionColorButton(QColor defaultVal, const QString& saveName, QColor* pVar, QWidget* pParent)
+    OptionColorButton(const QColor &defaultVal, const QString& saveName, QColor* pVar, QWidget* pParent)
         : KColorButton(pParent), OptionItemT<QColor>(saveName)
     {
         m_pVar = pVar;

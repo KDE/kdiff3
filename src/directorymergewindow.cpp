@@ -203,7 +203,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     void mergeContinue(bool bStart, bool bVerbose);
 
     void prepareListView(ProgressProxy& pp);
-    void calcSuggestedOperation(const QModelIndex& mi, e_MergeOperation eDefaultOperation);
+    void calcSuggestedOperation(const QModelIndex& mi, e_MergeOperation eDefaultMergeOp);
     void setAllMergeOperations(e_MergeOperation eDefaultOperation);
 
     bool canContinue();
@@ -355,7 +355,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     QAction* m_pDirSaveMergeState;
     QAction* m_pDirLoadMergeState;
 
-    bool init(QSharedPointer<DirectoryInfo> dirInfo, bool bDirectoryMerge, bool bReload);
+    bool init(const QSharedPointer<DirectoryInfo> &dirInfo, bool bDirectoryMerge, bool bReload);
     void setOpStatus(const QModelIndex& mi, e_OperationStatus eOpStatus)
     {
         if(MergeFileInfos* pMFI = getMFI(mi))
@@ -852,7 +852,7 @@ struct t_ItemInfo {
 };
 
 bool DirectoryMergeWindow::init(
-    QSharedPointer<DirectoryInfo> dirInfo,
+    const QSharedPointer<DirectoryInfo> &dirInfo,
     bool bDirectoryMerge,
     bool bReload)
 {
@@ -898,7 +898,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 }
 
 bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
-    QSharedPointer<DirectoryInfo> dirInfo,
+    const QSharedPointer<DirectoryInfo> &dirInfo,
     bool bDirectoryMerge,
     bool bReload)
 {
@@ -2209,19 +2209,19 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::sort(int column, Qt::Sor
     endResetModel();
 }
 
-void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setMergeOperation(const QModelIndex& mi, e_MergeOperation eMOp, bool bRecursive)
+void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setMergeOperation(const QModelIndex& mi, e_MergeOperation eMergeOp, bool bRecursive)
 {
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI == nullptr)
         return;
 
-    if(eMOp != pMFI->m_eMergeOperation)
+    if(eMergeOp != pMFI->m_eMergeOperation)
     {
         pMFI->m_bOperationComplete = false;
         setOpStatus(mi, eOpStatusNone);
     }
 
-    pMFI->m_eMergeOperation = eMOp;
+    pMFI->m_eMergeOperation = eMergeOp;
     if(bRecursive)
     {
         e_MergeOperation eChildrenMergeOp = pMFI->m_eMergeOperation;

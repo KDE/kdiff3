@@ -100,7 +100,7 @@ class KDiff3App : public QSplitter
   public:
     /** constructor of KDiff3App, calls all init functions to create the application.
      */
-    KDiff3App(QWidget* parent, const QString name, KDiff3Part* pKDiff3Part);
+    KDiff3App(QWidget* parent, const QString& name, KDiff3Part* pKDiff3Part);
     ~KDiff3App() override;
 
     bool isPart();
@@ -145,8 +145,8 @@ class KDiff3App : public QSplitter
 
     /** open a file and load it into the document*/
     void slotFileOpen();
-    void slotFileOpen2(QString fn1, QString fn2, QString fn3, QString ofn,
-                       QString an1, QString an2, QString an3, const QSharedPointer<TotalDiffStatus> &pTotalDiffStatus);
+    void slotFileOpen2(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
+                       const QString& an1, const QString &an2, const QString& an3, const QSharedPointer<TotalDiffStatus> &pTotalDiffStatus);
 
     void slotFileNameChanged(const QString& fileName, int winIdx);
 
@@ -411,7 +411,7 @@ class KDiff3App : public QSplitter
     KParts::MainWindow* m_pKDiff3Shell;
     bool m_bAutoFlag;
     bool m_bAutoMode;
-    void recalcWordWrap(int nofVisibleColumns = -1);
+    void recalcWordWrap(int visibleTextWidthForPrinting = -1);
     bool m_bRecalcWordWrapPosted;
     void setHScrollBarRange();
 

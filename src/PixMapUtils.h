@@ -33,7 +33,7 @@ QPixmap pixCombiner(const QPixmap* pm1, const QPixmap* pm2);
 
 // like pixCombiner but let the pm1 color shine through
 QPixmap pixCombiner2(const QPixmap* pm1, const QPixmap* pm2);
-void initPixmaps(QColor newest, QColor oldest, QColor middle, QColor notThere);
+void initPixmaps(const QColor& newest, const QColor& oldest, const QColor& middle, const QColor& notThere);
 
 QPixmap getOnePixmap(e_Age eAge, bool bLink, bool bDir);
 

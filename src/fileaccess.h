@@ -36,8 +36,8 @@ public:
    ~FileAccess();
    explicit FileAccess( const QString& name, bool bWantToWrite=false ); // name: local file or dirname or url (when supported)
    void setFile( const QString& name, bool bWantToWrite=false );
-   void setFile( const QUrl& name, bool bWantToWrite = false);
-   void setFile( FileAccess* pParent, QFileInfo fi );
+   void setFile( const QUrl& url, bool bWantToWrite = false);
+   void setFile( FileAccess* pParent, const QFileInfo& fi );
 
    void loadData();
 
@@ -61,7 +61,7 @@ public:
    QString fileRelPath() const; // The path relative to base comparison directory
    QString prettyAbsPath() const;
    QUrl url() const;
-   void setUrl(const QUrl inUrl) { m_url = inUrl; }
+   void setUrl(const QUrl &inUrl) { m_url = inUrl; }
    QString absoluteFilePath() const;
 
    bool isLocal() const;
@@ -93,7 +93,7 @@ public:
    QString getStatusText();
 
    FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
-   
+
    void doError();
    void filterList(t_DirectoryList* pDirList, const QString& filePattern,
                                const QString& fileAntiPattern, const QString& dirAntiPattern,
@@ -110,7 +110,7 @@ public:
 
    QUrl m_url;
    bool m_bValidData;
-   
+
    //long m_fileType; // for testing only
    FileAccess* m_pParent;
 
@@ -131,7 +131,7 @@ public:
    bool m_bReadable;
    bool m_bExecutable;
    bool m_bHidden;
-   
+
    QString m_statusText; // Might contain an error string, when the last operation didn't succeed.
 };
 
@@ -154,7 +154,7 @@ public:
                  const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore );
    bool mkDir( const QString& dirName );
    bool rmDir( const QString& dirName );
-   bool removeFile( const QUrl& dirName );
+   bool removeFile( const QUrl& fileName );
    bool symLink( const QUrl& linkTarget, const QUrl& linkLocation );
 
 private:

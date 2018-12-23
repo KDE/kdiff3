@@ -35,7 +35,6 @@
 #include <KToolBar>
 
 KDiff3Shell::KDiff3Shell(bool bCompleteInit)
-    : KParts::MainWindow()
 {
     m_bUnderConstruction = true;
     // set the shell's ui resource file

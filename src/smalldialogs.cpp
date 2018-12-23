@@ -548,7 +548,7 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
     resize(800, sizeHint().height());
 }
 
-void RegExpTester::init(const QString& autoMergeRegExp, const QString& historyStartRegExp, const QString& historyEntryStartRegExp, const QString historySortKeyOrder)
+void RegExpTester::init(const QString& autoMergeRegExp, const QString& historyStartRegExp, const QString& historyEntryStartRegExp, const QString& historySortKeyOrder)
 {
     m_pAutoMergeRegExpEdit->setText(autoMergeRegExp);
     m_pHistoryStartRegExpEdit->setText(historyStartRegExp);

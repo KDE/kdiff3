@@ -107,7 +107,7 @@ private:
 public:
    RegExpTester( QWidget* pParent, const QString& autoMergeRegExpToolTip, const QString& historyStartRegExpToolTip,
                                    const QString& historyEntryStartRegExpToolTip, const QString& historySortKeyOrderToolTip  );
-   void init( const QString& autoMergeRegExp, const QString& historyStartRegExp, const QString& historyEntryStartRegExp, const QString sortKeyOrder );
+   void init( const QString& autoMergeRegExp, const QString& historyStartRegExp, const QString& historyEntryStartRegExp, const QString& sortKeyOrder );
    QString autoMergeRegExp();
    QString historyStartRegExp();
    QString historyEntryStartRegExp();

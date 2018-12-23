@@ -190,7 +190,7 @@ private:
    class MergeEditLine
    {
    public:
-      explicit MergeEditLine(Diff3LineList::const_iterator i, int src=0){m_id3l=i; m_src=src; m_bLineRemoved=false; }
+      explicit MergeEditLine(const Diff3LineList::const_iterator &i, int src=0){m_id3l=i; m_src=src; m_bLineRemoved=false; }
       void setConflict() { m_src=0; m_bLineRemoved=false; m_str=QString(); }
       bool isConflict()  { return  m_src==0 && !m_bLineRemoved && m_str.isEmpty(); }
       void setRemoved(int src=0)  { m_src=src; m_bLineRemoved=true; m_str=QString(); }
@@ -258,9 +258,9 @@ private:
       }
 
    private:
-      void ds(int deltaSize) 
+      void ds(int deltaSize)
       {
-         m_size+=deltaSize; 
+         m_size+=deltaSize;
          if (m_pTotalSize!=nullptr)  *m_pTotalSize+=deltaSize;
       }
    };
@@ -285,7 +285,7 @@ private:
       MergeEditLineList mergeEditLineList;
       void split( MergeLine& ml2, int d3lLineIdx2 ) // The caller must insert the ml2 after this ml in the m_mergeLineList
       {
-         if ( d3lLineIdx2<d3lLineIdx || d3lLineIdx2 >= d3lLineIdx + srcRangeLength ) 
+         if ( d3lLineIdx2<d3lLineIdx || d3lLineIdx2 >= d3lLineIdx + srcRangeLength )
             return; //Error
          ml2.mergeDetails = mergeDetails;
          ml2.bConflict = bConflict;
@@ -336,7 +336,7 @@ private:
       bool staysInPlace( bool bThreeInputs, Diff3LineList::const_iterator& iHistoryEnd );
    };
    typedef std::map<QString,HistoryMapEntry> HistoryMap;
-   void collectHistoryInformation( int src, Diff3LineList::const_iterator iHistoryBegin, Diff3LineList::const_iterator iHistoryEnd, HistoryMap& historyMap, std::list< HistoryMap::iterator >& hitList );
+   void collectHistoryInformation( int src, Diff3LineList::const_iterator &iHistoryBegin, Diff3LineList::const_iterator &iHistoryEnd, HistoryMap& historyMap, std::list< HistoryMap::iterator >& hitList );
 
    typedef std::list<MergeLine> MergeLineList;
    MergeLineList m_mergeLineList;
@@ -439,7 +439,7 @@ public:
    void        setFileName(const QString& fileName );
    QString     getFileName();
    void setEncodings( QTextCodec* pCodecForA, QTextCodec* pCodecForB, QTextCodec* pCodecForC );
-   void setEncoding( QTextCodec* pCodec );
+   void setEncoding( QTextCodec* pEncoding );
    void setLineEndStyles( e_LineEndStyle eLineEndStyleA, e_LineEndStyle eLineEndStyleB, e_LineEndStyle eLineEndStyleC);
    e_LineEndStyle getLineEndStyle();
 

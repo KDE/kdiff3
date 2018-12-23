@@ -56,17 +56,17 @@ public:
    void hide();
    void hideStatusBarWidget();
    void delayedHideStatusBarWidget();
-   
+
    void timerEvent(QTimerEvent*) override;
 public slots:
-   void recalc(bool bRedrawUpdate);
+   void recalc(bool bUpdate);
 private:
 
    struct ProgressLevelData
    {
       ProgressLevelData()
       {
-         m_current=0; m_maxNofSteps=1; m_dRangeMin=0; m_dRangeMax=1; 
+         m_current=0; m_maxNofSteps=1; m_dRangeMin=0; m_dRangeMax=1;
          m_dSubRangeMin = 0; m_dSubRangeMax = 1;
       }
       QAtomicInteger<qint64> m_current;
@@ -77,7 +77,7 @@ private:
       double m_dSubRangeMin;
    };
    QList<ProgressLevelData> m_progressStack;
-   
+
    int m_progressDelayTimer;
    int m_delayedHideTimer;
    int m_delayedHideStatusBarWidgetTimer;
@@ -115,7 +115,7 @@ class ProgressProxy: public QObject
 public:
    ProgressProxy();
    ~ProgressProxy() override;
-   
+
    void setInformation( const QString& info, bool bRedrawUpdate=true );
    void setInformation( const QString& info, int current, bool bRedrawUpdate=true );
    void setCurrent( qint64 current, bool bRedrawUpdate=true  );

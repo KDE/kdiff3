@@ -1039,8 +1039,8 @@ void KDiff3App::slotFileOpen()
     slotStatusMsg(i18n("Ready."));
 }
 
-void KDiff3App::slotFileOpen2(QString fn1, QString fn2, QString fn3, QString ofn,
-                              QString an1, QString an2, QString an3, const QSharedPointer<TotalDiffStatus> &pTotalDiffStatus)
+void KDiff3App::slotFileOpen2(const QString&  fn1, const QString& fn2, const QString& fn3, const QString& ofn,
+                              const QString& an1, const QString& an2, const QString& an3, const QSharedPointer<TotalDiffStatus> &pTotalDiffStatus)
 {
     if(!canContinue()) return;
 

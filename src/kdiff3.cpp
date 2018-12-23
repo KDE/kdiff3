@@ -58,6 +58,7 @@
 #define ID_STATUS_MSG 1
 #define MAIN_TOOLBAR_NAME QLatin1String("mainToolBar")
 
+void printDiffTextWindow(MyPainter& painter, const QRect& view, const QString& headerText, DiffTextWindow* pDiffTextWindow, int line, int linesPerPage, const QColor& fgColor);
 KActionCollection* KDiff3App::actionCollection()
 {
     if(m_pKDiff3Shell == nullptr)
@@ -97,10 +98,10 @@ bool KDiff3App::isDirComparison()
     return m_bDirCompare;
 }
 
-KDiff3App::KDiff3App(QWidget* pParent, const QString /*name*/, KDiff3Part* pKDiff3Part)
+KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3Part)
     : QSplitter(pParent) //previously KMainWindow
 {
-    setObjectName("KDiff3App");
+    setObjectName(name);
     m_pKDiff3Part = pKDiff3Part;
     m_pKDiff3Shell = qobject_cast<KParts::MainWindow*>(pParent);
 
@@ -765,7 +766,7 @@ void KDiff3App::slotFileSaveAs()
     slotStatusMsg(i18n("Ready."));
 }
 
-void printDiffTextWindow(MyPainter& painter, const QRect& view, const QString& headerText, DiffTextWindow* pDiffTextWindow, int line, int linesPerPage, QColor fgColor)
+void printDiffTextWindow(MyPainter& painter, const QRect& view, const QString& headerText, DiffTextWindow* pDiffTextWindow, int line, int linesPerPage, const QColor &fgColor)
 {
     QRect clipRect = view;
     clipRect.setTop(0);

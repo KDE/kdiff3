@@ -80,7 +80,7 @@ FileAccess::~FileAccess()
 /*
     Needed only during directory listing right now.
 */
-void FileAccess::setFile(FileAccess* pParent, QFileInfo fi)
+void FileAccess::setFile(FileAccess* pParent, const QFileInfo &fi)
 {
     reset();
 
@@ -741,13 +741,13 @@ void FileAccess::filterList(t_DirectoryList *pDirList, const QString& filePatter
     {
         t_DirectoryList::iterator i2 = i;
         ++i2;
-        QString fn = i->fileName();
+        QString fileName = i->fileName();
 
         if( (i->isFile() &&
-            (!Utils::wildcardMultiMatch(filePattern, fn, bCaseSensitive) ||
-             Utils::wildcardMultiMatch(fileAntiPattern, fn, bCaseSensitive))) ||
-           (i->isDir() && Utils::wildcardMultiMatch(dirAntiPattern, fn, bCaseSensitive)) ||
-           (bUseCvsIgnore && cvsIgnoreList.matches(fn, bCaseSensitive)))
+            (!Utils::wildcardMultiMatch(filePattern, fileName, bCaseSensitive) ||
+             Utils::wildcardMultiMatch(fileAntiPattern, fileName, bCaseSensitive))) ||
+           (i->isDir() && Utils::wildcardMultiMatch(dirAntiPattern, fileName, bCaseSensitive)) ||
+           (bUseCvsIgnore && cvsIgnoreList.matches(fileName, bCaseSensitive)))
         {
             // Remove it
             pDirList->erase(i);

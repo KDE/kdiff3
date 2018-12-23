@@ -105,13 +105,9 @@ bool equal(const LineData& l1, const LineData& l2, bool bStrict)
             ++nonWhite;
         }
     }
-
     else
     {
-        if(l1.size == l2.size && memcmp(p1, p2, l1.size) == 0)
-            return true;
-        else
-            return false;
+        return (l1.size == l2.size && memcmp(p1, p2, l1.size) == 0);
     }
 }
 

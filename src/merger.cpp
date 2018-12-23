@@ -13,8 +13,8 @@
 
 #include <list>
 
-Merger::Merger(const DiffList* pDiffListAB, const DiffList* pDiffListCA)
-    : md1(pDiffListAB, 0), md2(pDiffListCA, 1)
+Merger::Merger(const DiffList* pDiffList1, const DiffList* pDiffList2)
+    : md1(pDiffList1, 0), md2(pDiffList2, 1)
 {
 }
 

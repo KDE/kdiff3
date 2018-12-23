@@ -48,7 +48,7 @@ struct LineData
    const QChar* pFirstNonWhiteChar;
    int size;
 
-   LineData(){ pLine=nullptr; pFirstNonWhiteChar=nullptr; size=0; /*occurrences=0;*/ 
+   LineData(){ pLine=nullptr; pFirstNonWhiteChar=nullptr; size=0; /*occurrences=0;*/
                bContainsPureComment=false; }
    int width(int tabSize) const;  // Calcs width considering tabs.
    //int occurrences;
@@ -117,7 +117,7 @@ struct Diff3Line
 
    bool operator==( const Diff3Line& d3l ) const
    {
-      return lineA == d3l.lineA  &&  lineB == d3l.lineB  &&  lineC == d3l.lineC  
+      return lineA == d3l.lineA  &&  lineB == d3l.lineB  &&  lineC == d3l.lineC
          && bAEqB == d3l.bAEqB  && bAEqC == d3l.bAEqC  && bBEqC == d3l.bBEqC;
    }
 
@@ -175,7 +175,7 @@ public:
                  nofUnsolvedConflicts=0; nofSolvedConflicts=0;
                  nofWhitespaceConflicts=0;
                 }
-   
+
    inline int getUnsolvedConflicts() const { return nofUnsolvedConflicts; }
    inline void setUnsolvedConflicts(const int unsolved) { nofUnsolvedConflicts = unsolved; }
 
@@ -207,8 +207,8 @@ private:
 class ManualDiffHelpEntry
 {
 public:
-   ManualDiffHelpEntry() { lineA1=-1; lineA2=-1; 
-                           lineB1=-1; lineB2=-1; 
+   ManualDiffHelpEntry() { lineA1=-1; lineA2=-1;
+                           lineB1=-1; lineB2=-1;
                            lineC1=-1; lineC2=-1; }
    LineRef lineA1;
    LineRef lineA2;
@@ -244,7 +244,7 @@ void calcDiff3LineListUsingAB(
    );
 
 void calcDiff3LineListUsingAC(
-   const DiffList* pDiffListBC,
+   const DiffList* pDiffListAC,
    Diff3LineList& d3ll
    );
 
@@ -271,11 +271,11 @@ public:
    const LineData* getLineDataForDiff() const;
 
    void setFilename(const QString& filename);
-   void setFileAccess( const FileAccess& fa );
+   void setFileAccess( const FileAccess& fileAccess );
    void setEncoding(QTextCodec* pEncoding);
    //FileAccess& getFileAccess();
    QString getFilename();
-   void setAliasName(const QString& a);
+   void setAliasName(const QString& name);
    QString getAliasName();
    bool isEmpty();  // File was set
    bool hasData();  // Data was readable
@@ -333,8 +333,8 @@ private:
       );
    };
    FileData m_normalData;
-   FileData m_lmppData;  
-   QTextCodec* m_pEncoding; 
+   FileData m_lmppData;
+   QTextCodec* m_pEncoding;
 };
 
 void calcDiff3LineListTrim( Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC, ManualDiffHelpList* pManualDiffHelpList );
@@ -349,10 +349,10 @@ class MyPainter : public QPainter
    int m_xOffset;
    int m_fontWidth;
 public:
-   MyPainter(QPaintDevice* pd, bool bRTL, int width, int fontWidth) 
+   MyPainter(QPaintDevice* pd, bool bRTL, int width, int fontWidth)
    : QPainter(pd)
    {
-      if (bRTL) 
+      if (bRTL)
       {
          m_fontWidth = fontWidth;
          m_factor = -1;

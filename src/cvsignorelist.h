@@ -21,14 +21,14 @@ class CvsIgnoreList
   public:
     CvsIgnoreList() {}
     void init(FileAccess& dir, const t_DirectoryList* pDirList);
-    bool matches(const QString& fileName, bool bCaseSensitive) const;
+    bool matches(const QString& text, bool bCaseSensitive) const;
 
   private:
     bool cvsIgnoreExists(const t_DirectoryList* pDirList);
 
     void addEntriesFromString(const QString& str);
     void addEntriesFromFile(const QString& name);
-    void addEntry(const QString& entry);
+    void addEntry(const QString& pattern);
 
     QStringList m_exactPatterns;
     QStringList m_startPatterns;

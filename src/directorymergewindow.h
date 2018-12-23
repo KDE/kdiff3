@@ -43,7 +43,7 @@ public:
    ~DirectoryMergeWindow() override;
    void setDirectoryMergeInfo(DirectoryMergeInfo* p);
    bool init(
-      QSharedPointer<DirectoryInfo> dirInfo,
+      const QSharedPointer<DirectoryInfo> &dirInfo,
       bool bDirectoryMerge,
       bool bReload = false
    );
@@ -137,10 +137,10 @@ class DirectoryMergeInfo : public QFrame
 public:
    explicit DirectoryMergeInfo( QWidget* pParent );
    void setInfo(
-      const FileAccess& APath,
-      const FileAccess& BPath,
-      const FileAccess& CPath,
-      const FileAccess& DestPath,
+      const FileAccess& dirA,
+      const FileAccess& dirB,
+      const FileAccess& dirC,
+      const FileAccess& dirDest,
       MergeFileInfos& mfi );
    QTreeWidget* getInfoList() {return m_pInfoList;}
    bool eventFilter( QObject* o, QEvent* e ) override;
