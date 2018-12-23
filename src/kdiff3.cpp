@@ -672,7 +672,7 @@ void KDiff3App::saveOptions(KSharedConfigPtr config)
                         m_pOptionDialog->m_toolBarPos = (int) toolBar(MAIN_TOOLBAR_NAME)->allowedAreas();*/
         }
 
-        m_pOptionDialog->saveOptions(config);
+        m_pOptionDialog->saveOptions(std::move(config));
     }
 }
 
