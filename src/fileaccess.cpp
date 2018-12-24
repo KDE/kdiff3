@@ -14,6 +14,7 @@
 #include "Utils.h"
 
 #include <QDir>
+#include <QtMath>
 #include <QProcess>
 #include <QRegExp>
 #include <QTemporaryFile>
@@ -462,7 +463,7 @@ static bool interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLength)
         }
         i += reallyRead;
 
-        pp.setCurrent(double(i) / maxLength);
+        pp.setCurrent( qFloor(double(i) / maxLength * 100));
         if(pp.wasCancelled())
             return false;
     }

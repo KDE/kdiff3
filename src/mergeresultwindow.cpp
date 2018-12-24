@@ -28,6 +28,7 @@
 #include <QKeyEvent>
 #include <QLabel>
 #include <QLineEdit>
+#include <QtMath>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QRegExp>
@@ -578,7 +579,7 @@ int MergeResultWindow::getMaxTextWidth()
                 textLayout.endLayout();
                 if(m_maxTextWidth < textLayout.maximumWidth())
                 {
-                    m_maxTextWidth = textLayout.maximumWidth();
+                    m_maxTextWidth =  qCeil(textLayout.maximumWidth());
                 }
             }
         }
@@ -1823,9 +1824,9 @@ void MergeResultWindow::writeLine(
 
         if(line == m_cursorYPos)
         {
-            m_cursorXPixelPos = textLayout.lineAt(0).cursorToX(m_cursorXPos);
+            m_cursorXPixelPos =  qCeil(textLayout.lineAt(0).cursorToX(m_cursorXPos));
             if(m_pOptions->m_bRightToLeftLanguage)
-                m_cursorXPixelPos += textLayout.position().x() - m_horizScrollOffset;
+                m_cursorXPixelPos +=  qCeil(textLayout.position().x() - m_horizScrollOffset);
         }
 
         p.setClipping(false);
@@ -2106,9 +2107,9 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
             m_selection.end(line, pos);
         }
         m_cursorXPos = pos;
-        m_cursorXPixelPos = textLayout.lineAt(0).cursorToX(pos);
+        m_cursorXPixelPos =  qCeil(textLayout.lineAt(0).cursorToX(pos));
         if(m_pOptions->m_bRightToLeftLanguage)
-            m_cursorXPixelPos += textLayout.position().x() - m_horizScrollOffset;
+            m_cursorXPixelPos +=  qCeil(textLayout.position().x() - m_horizScrollOffset);
         m_cursorOldXPixelPos = m_cursorXPixelPos;
         m_cursorYPos = line;
 
@@ -2607,11 +2608,11 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             x = textLayout.lineAt(0).xToCursor(m_cursorOldXPixelPos);
     }
 
-    m_cursorXPixelPos = textLayout.lineAt(0).cursorToX(x);
+    m_cursorXPixelPos =  qCeil(textLayout.lineAt(0).cursorToX(x));
     int hF = 1; // horizontal factor
     if(m_pOptions->m_bRightToLeftLanguage)
     {
-        m_cursorXPixelPos += textLayout.position().x() - m_horizScrollOffset;
+        m_cursorXPixelPos +=  qCeil(textLayout.position().x() - m_horizScrollOffset);
         hF = -1;
     }
     int cursorWidth = 5;
@@ -2637,7 +2638,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     // TODO if width of current line exceeds the current maximum width then force recalculating the scrollbars
     if(textLayout.maximumWidth() > getMaxTextWidth())
     {
-        m_maxTextWidth = textLayout.maximumWidth();
+        m_maxTextWidth =  qCeil(textLayout.maximumWidth());
         emit resizeSignal();
     }
     if(!bYMoveKey)

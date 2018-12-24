@@ -1545,7 +1545,7 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
         Q_ASSERT(l1 == size1 && l2 == size2);
     }
 
-    pp.setCurrent(1.0);
+    pp.setCurrent(1);
 
     return true;
 }

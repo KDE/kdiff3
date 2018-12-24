@@ -20,6 +20,7 @@
 #include <cmath>
 #include <cstdlib>
 
+#include <QtMath>
 #include <QDir>
 #include <QDragEnterEvent>
 #include <QFileDialog>
@@ -328,7 +329,7 @@ int DiffTextWindow::getMaxTextWidth()
             textLayout.setText(d->getString(i));
             d->prepareTextLayout(textLayout, true);
             if(textLayout.maximumWidth() > getAtomic(d->m_maxTextWidth))
-                d->m_maxTextWidth = textLayout.maximumWidth();
+                d->m_maxTextWidth =  qCeil(textLayout.maximumWidth());
         }
     }
     return getAtomic(d->m_maxTextWidth);
@@ -772,7 +773,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, bool /*bFirs
         {
             line.setLineWidth(visibleTextWidth - indentation);
             line.setPosition(QPointF(indentation, height));
-            height += line.height();
+            height +=  qCeil(line.height());
             //bFirstLine = false;
         }
         else // only one line
@@ -1732,7 +1733,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
             textLayout.setText(d->getString(i));
             d->prepareTextLayout(textLayout, true);
             if(textLayout.maximumWidth() > maxTextWidth)
-                maxTextWidth = textLayout.maximumWidth();
+                maxTextWidth =  qCeil(textLayout.maximumWidth());
         }
 
         for(;;)
