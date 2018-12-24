@@ -159,7 +159,7 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
         // First get all input data.
         pp.setInformation(i18n("Loading A"));
 
-        if(bUseCurrentEncoding == true)
+        if(bUseCurrentEncoding)
             errors = m_sd1.readAndPreprocess(m_sd1.getEncoding(), false);
         else
             errors = m_sd1.readAndPreprocess(m_pOptions->m_pEncodingA, m_pOptions->m_bAutoDetectUnicodeA);
@@ -170,7 +170,7 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
         pp.step();
 
         pp.setInformation(i18n("Loading B"));
-        if(bUseCurrentEncoding == true)
+        if(bUseCurrentEncoding)
             errors = m_sd2.readAndPreprocess(m_sd2.getEncoding(), false);
         else
             errors = m_sd2.readAndPreprocess(m_pOptions->m_pEncodingB, m_pOptions->m_bAutoDetectUnicodeB);
@@ -212,7 +212,7 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
         if(bLoadFiles)
         {
             pp.setInformation(i18n("Loading C"));
-            if(bUseCurrentEncoding == true)
+            if(bUseCurrentEncoding)
                 errors=m_sd3.readAndPreprocess(m_sd3.getEncoding(), false);
             else
                 errors=m_sd3.readAndPreprocess(m_pOptions->m_pEncodingC, m_pOptions->m_bAutoDetectUnicodeC);

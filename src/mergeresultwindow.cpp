@@ -668,7 +668,7 @@ void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
                 --i;
             else
                 ++i;
-        } while(isItAtEnd(eDir != eUp, i) && (i->bDelta == false || checkOverviewIgnore(i) || (bSkipWhiteConflicts && i->bWhiteSpaceConflict)));
+        } while(isItAtEnd(eDir != eUp, i) && (!i->bDelta || checkOverviewIgnore(i) || (bSkipWhiteConflicts && i->bWhiteSpaceConflict)));
     }
     else if(eEndPoint == eConflict && isItAtEnd(eDir != eUp, i))
     {
@@ -678,7 +678,7 @@ void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
                 --i;
             else
                 ++i;
-        } while(isItAtEnd(eDir != eUp, i) && (i->bConflict == false || (bSkipWhiteConflicts && i->bWhiteSpaceConflict)));
+        } while(isItAtEnd(eDir != eUp, i) && (!i->bConflict || (bSkipWhiteConflicts && i->bWhiteSpaceConflict)));
     }
     else if(isItAtEnd(eDir != eUp, i) && eEndPoint == eUnsolvedConflict)
     {

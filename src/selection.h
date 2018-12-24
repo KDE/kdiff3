@@ -43,7 +43,7 @@ public:
   inline LineRef getOldLastLine() { return oldLastLine; };
   inline LineRef getOldFirstLine() { return oldFirstLine; };
   inline bool selectionContainsData() { return bSelectionContainsData; };
-  bool isEmpty() { return firstLine == invalidRef || (firstLine == lastLine && firstPos == lastPos) || bSelectionContainsData == false; }
+  bool isEmpty() { return firstLine == invalidRef || (firstLine == lastLine && firstPos == lastPos) || !bSelectionContainsData; }
   void reset()
   {
       oldLastLine = lastLine;

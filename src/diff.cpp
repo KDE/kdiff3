@@ -1349,7 +1349,7 @@ void calcDiff3LineListUsingBC(
             Diff3LineList::iterator i3 = i3b;
             while((*i3).lineB != lineB)
                 ++i3;
-            if(i3 != i3b && (*i3).bAEqB == false)
+            if(i3 != i3b && !(*i3).bAEqB)
             {
                 // Take B from this line and move it up as far as possible
                 d3l.lineB = lineB;
@@ -2119,7 +2119,7 @@ void calcDiff(const T* p1, LineRef size1, const T* p2, LineRef size2, DiffList& 
                         (match == 1 || abs(i1 - i2) < 3 || (&p2[i2 + 1] == p2end && &p1[i1 + 1] == p1end) ||
                          (&p2[i2 + 1] != p2end && &p1[i1 + 1] != p1end && equal(p2[i2 + 1], p1[i1 + 1], false))))
                 {
-                    if(i1 + i2 < bestI1 + bestI2 || bBestValid == false)
+                    if(i1 + i2 < bestI1 + bestI2 || !bBestValid)
                     {
                         bestI1 = i1;
                         bestI2 = i2;

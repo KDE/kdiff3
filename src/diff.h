@@ -376,7 +376,7 @@ public:
 
    void drawText( int x, int y, const QString& s, bool bAdapt=false )
    {
-      Qt::LayoutDirection ld = (m_factor==1 || bAdapt == false) ? Qt::LeftToRight : Qt::RightToLeft;
+      Qt::LayoutDirection ld = (m_factor==1 || !bAdapt) ? Qt::LeftToRight : Qt::RightToLeft;
       //QPainter::setLayoutDirection( ld );
       if ( ld==Qt::RightToLeft ) // Reverse the text
       {

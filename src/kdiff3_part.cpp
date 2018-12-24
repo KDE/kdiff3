@@ -146,7 +146,7 @@ bool KDiff3Part::openFile()
     // m_file is always local so we can use QFile on it
     fprintf(stderr, "KDiff3: %s\n", localFilePath().toLatin1().constData());
     QFile file(localFilePath());
-    if(file.open(QIODevice::ReadOnly) == false)
+    if(!file.open(QIODevice::ReadOnly))
         return false;
 
     // our example widget is text-based, so we use QTextStream instead

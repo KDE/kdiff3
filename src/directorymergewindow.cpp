@@ -273,9 +273,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
                     return false;
             }
 
-            if(v1Size < v2Size)
-                return true;
-            return false;
+            return v1Size < v2Size;
         }
     };
 
@@ -3055,7 +3053,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::makeDir(const QString& n
     }
 
     bool bSuccess = FileAccess::makeDir(name);
-    if(bSuccess == false)
+    if(!bSuccess)
     {
         m_pStatusInfo->addText(i18n("Error while creating directory."));
         return false;
