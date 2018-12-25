@@ -34,7 +34,7 @@
 class QLabel;
 class QPlainTextEdit;
 
-class OptionItem;
+class OptionItemBase;
 class OptionCheckBox;
 class OptionEncodingComboBox;
 class OptionLineEdit;
@@ -58,7 +58,7 @@ public:
 
     void setState(); // Must be called before calling exec();
 
-    void addOptionItem(OptionItem*);
+    void addOptionItem(OptionItemBase*);
     KKeyDialog* m_pKeyDialog;
 protected Q_SLOTS:
     virtual void slotDefault( void );
@@ -66,7 +66,7 @@ protected Q_SLOTS:
     virtual void slotApply( void );
     //virtual void buttonClicked( QAbstractButton* );
     virtual void helpRequested();
-    
+
     void slotEncodingChanged();
     void slotHistoryMergeRegExpTester();
 Q_SIGNALS:
@@ -74,7 +74,7 @@ Q_SIGNALS:
 private:
     void resetToDefaults();
 
-    std::list<OptionItem*> m_optionItemList;
+    std::list<OptionItemBase*> m_optionItemList;
 
     //QDialogButtonBox *mButtonBox;
     OptionCheckBox* m_pSameEncoding;

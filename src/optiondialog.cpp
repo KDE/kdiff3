@@ -61,20 +61,20 @@ QString s_historyEntryStartSortKeyOrderToolTip;
 QString s_autoMergeRegExpToolTip;
 QString s_historyStartRegExpToolTip;
 
-void OptionDialog::addOptionItem(OptionItem* p)
+void OptionDialog::addOptionItem(OptionItemBase* p)
 {
     m_optionItemList.push_back(p);
 }
 
-class OptionItem
+class OptionItemBase
 {
   public:
-    OptionItem(const QString& saveName)
+    OptionItemBase(const QString& saveName)
     {
         m_saveName = saveName;
         m_bPreserved = false;
     }
-    virtual ~OptionItem() {}
+    virtual ~OptionItemBase() {}
     virtual void setToDefault() = 0;
     virtual void setToCurrent() = 0;
     virtual void apply() = 0;
@@ -103,11 +103,11 @@ class OptionItem
 };
 
 template <class T>
-class OptionItemT : public OptionItem
+class OptionItem : public OptionItemBase
 {
   public:
-    OptionItemT(const QString& saveName)
-        : OptionItem(saveName)
+    OptionItem(const QString& saveName)
+        : OptionItemBase(saveName)
     {
     }
 
@@ -119,12 +119,12 @@ class OptionItemT : public OptionItem
     T m_defaultVal;
 };
 
-class OptionCheckBox : public QCheckBox, public OptionItemT<bool>
+class OptionCheckBox : public QCheckBox, public OptionItem<bool>
 {
   public:
     OptionCheckBox(const QString &text, bool bDefaultVal, const QString& saveName, bool* pbVar,
                    QWidget* pParent)
-        : QCheckBox(text, pParent), OptionItemT<bool>(saveName)
+        : QCheckBox(text, pParent), OptionItem<bool>(saveName)
     {
         m_pVar = pbVar;
         m_defaultVal = bDefaultVal;
@@ -139,12 +139,12 @@ class OptionCheckBox : public QCheckBox, public OptionItemT<bool>
     OptionCheckBox(const OptionCheckBox&); // private copy constructor without implementation
 };
 
-class OptionRadioButton : public QRadioButton, public OptionItemT<bool>
+class OptionRadioButton : public QRadioButton, public OptionItem<bool>
 {
   public:
     OptionRadioButton(const QString& text, bool bDefaultVal, const QString& saveName, bool* pbVar,
                       QWidget* pParent)
-        : QRadioButton(text, pParent), OptionItemT<bool>(saveName)
+        : QRadioButton(text, pParent), OptionItem<bool>(saveName)
     {
         m_pVar = pbVar;
         m_defaultVal = bDefaultVal;
@@ -160,17 +160,17 @@ class OptionRadioButton : public QRadioButton, public OptionItemT<bool>
 };
 
 template <class T>
-class OptionT : public OptionItemT<T>
+class OptionT : public OptionItem<T>
 {
   public:
     OptionT(const T& defaultVal, const QString& saveName, T* pVar)
-        : OptionItemT<T>(saveName)
+        : OptionItem<T>(saveName)
     {
         this->m_pVar = pVar;
         *this->m_pVar = defaultVal;
     }
     OptionT(const QString& saveName, T* pVar)
-        : OptionItemT<T>(saveName)
+        : OptionItem<T>(saveName)
     {
         this->m_pVar = pVar;
     }
@@ -249,11 +249,11 @@ void FontChooser::slotSelectFont()
     m_pLabel->setText(i18n("Font: %1, %2, %3\n\nExample:", m_font.family(), m_font.styleName(), m_font.pointSize()));
 }
 
-class OptionFontChooser : public FontChooser, public OptionItemT<QFont>
+class OptionFontChooser : public FontChooser, public OptionItem<QFont>
 {
   public:
     OptionFontChooser(const QFont& defaultVal, const QString& saveName, QFont* pVar, QWidget* pParent) : FontChooser(pParent),
-                                                                                                                            OptionItemT<QFont>(saveName)
+                                                                                                                            OptionItem<QFont>(saveName)
     {
         m_pVar = pVar;
         *m_pVar = defaultVal;
@@ -269,11 +269,11 @@ class OptionFontChooser : public FontChooser, public OptionItemT<QFont>
     OptionFontChooser(const OptionToggleAction&); // private copy constructor without implementation
 };
 
-class OptionColorButton : public KColorButton, public OptionItemT<QColor>
+class OptionColorButton : public KColorButton, public OptionItem<QColor>
 {
   public:
     OptionColorButton(const QColor &defaultVal, const QString& saveName, QColor* pVar, QWidget* pParent)
-        : KColorButton(pParent), OptionItemT<QColor>(saveName)
+        : KColorButton(pParent), OptionItem<QColor>(saveName)
     {
         m_pVar = pVar;
         m_defaultVal = defaultVal;
@@ -288,12 +288,12 @@ class OptionColorButton : public KColorButton, public OptionItemT<QColor>
     OptionColorButton(const OptionColorButton&); // private copy constructor without implementation
 };
 
-class OptionLineEdit : public QComboBox, public OptionItemT<QString>
+class OptionLineEdit : public QComboBox, public OptionItem<QString>
 {
   public:
     OptionLineEdit(const QString& defaultVal, const QString& saveName, QString* pVar,
                    QWidget* pParent)
-        : QComboBox(pParent), OptionItemT<QString>(saveName)
+        : QComboBox(pParent), OptionItem<QString>(saveName)
     {
         setMinimumWidth(50);
         setEditable(true);
@@ -345,12 +345,12 @@ class OptionLineEdit : public QComboBox, public OptionItemT<QString>
 #if defined QT_NO_VALIDATOR
 #error No validator
 #endif
-class OptionIntEdit : public QLineEdit, public OptionItemT<int>
+class OptionIntEdit : public QLineEdit, public OptionItem<int>
 {
   public:
     OptionIntEdit(int defaultVal, const QString& saveName, int* pVar, int rangeMin, int rangeMax,
                   QWidget* pParent)
-        : QLineEdit(pParent), OptionItemT<int>(saveName)
+        : QLineEdit(pParent), OptionItem<int>(saveName)
     {
         m_pVar = pVar;
         m_defaultVal = defaultVal;
@@ -383,12 +383,12 @@ class OptionIntEdit : public QLineEdit, public OptionItemT<int>
     OptionIntEdit(const OptionIntEdit&); // private copy constructor without implementation
 };
 
-class OptionComboBox : public QComboBox, public OptionItem
+class OptionComboBox : public QComboBox, public OptionItemBase
 {
   public:
     OptionComboBox(int defaultVal, const QString& saveName, int* pVarNum,
                    QWidget* pParent)
-        : QComboBox(pParent), OptionItem(saveName)
+        : QComboBox(pParent), OptionItemBase(saveName)
     {
         setMinimumWidth(50);
         m_pVarNum = pVarNum;
@@ -398,7 +398,7 @@ class OptionComboBox : public QComboBox, public OptionItem
     }
     OptionComboBox(int defaultVal, const QString& saveName, QString* pVarStr,
                    QWidget* pParent)
-        : QComboBox(pParent), OptionItem(saveName)
+        : QComboBox(pParent), OptionItemBase(saveName)
     {
         m_pVarNum = nullptr;
         m_pVarStr = pVarStr;
@@ -488,7 +488,7 @@ class OptionComboBox : public QComboBox, public OptionItem
     }
 };
 
-class OptionEncodingComboBox : public QComboBox, public OptionItem
+class OptionEncodingComboBox : public QComboBox, public OptionItemBase
 {
     Q_OBJECT
     QVector<QTextCodec*> m_codecVec;
@@ -497,7 +497,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionItem
   public:
     OptionEncodingComboBox(const QString& saveName, QTextCodec** ppVarCodec,
                            QWidget* pParent)
-        : QComboBox(pParent), OptionItem(saveName)
+        : QComboBox(pParent), OptionItemBase(saveName)
     {
         m_ppVarCodec = ppVarCodec;
         insertCodec(i18n("Unicode, 8 bit"), QTextCodec::codecForName("UTF-8"));
@@ -1694,7 +1694,7 @@ void OptionDialog::slotOk()
 /** Copy the values from the widgets to the public variables.*/
 void OptionDialog::slotApply()
 {
-    std::list<OptionItem*>::iterator i;
+    std::list<OptionItemBase*>::iterator i;
     for(i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i)
     {
         (*i)->apply();
@@ -1726,7 +1726,7 @@ void OptionDialog::slotDefault()
 
 void OptionDialog::resetToDefaults()
 {
-    std::list<OptionItem*>::iterator i;
+    std::list<OptionItemBase*>::iterator i;
     for(i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i)
     {
         (*i)->setToDefault();
@@ -1738,7 +1738,7 @@ void OptionDialog::resetToDefaults()
 /** Initialise the widgets using the values in the public varibles. */
 void OptionDialog::setState()
 {
-    std::list<OptionItem*>::iterator i;
+    std::list<OptionItemBase*>::iterator i;
     for(i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i)
     {
         (*i)->setToCurrent();
@@ -1832,7 +1832,7 @@ void OptionDialog::saveOptions(KSharedConfigPtr config)
     // No i18n()-Translations here!
 
     ConfigValueMap cvm(config->group(KDIFF3_CONFIG_GROUP));
-    std::list<OptionItem*>::iterator i;
+    std::list<OptionItemBase*>::iterator i;
     for(i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i)
     {
         (*i)->doUnpreserve();
@@ -1845,7 +1845,7 @@ void OptionDialog::readOptions(KSharedConfigPtr config)
     // No i18n()-Translations here!
 
     ConfigValueMap cvm(config->group(KDIFF3_CONFIG_GROUP));
-    std::list<OptionItem*>::iterator i;
+    std::list<OptionItemBase*>::iterator i;
     for(i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i)
     {
         (*i)->read(&cvm);
@@ -1867,7 +1867,7 @@ QString OptionDialog::parseOptions(const QStringList& optionList)
         {
             QString key = s.left(pos);
             QString val = s.mid(pos + 1);
-            std::list<OptionItem*>::iterator j;
+            std::list<OptionItemBase*>::iterator j;
             bool bFound = false;
             for(j = m_optionItemList.begin(); j != m_optionItemList.end(); ++j)
             {
@@ -1897,7 +1897,7 @@ QString OptionDialog::parseOptions(const QStringList& optionList)
 QString OptionDialog::calcOptionHelp()
 {
     ValueMap config;
-    std::list<OptionItem*>::iterator j;
+    std::list<OptionItemBase*>::iterator j;
     for(j = m_optionItemList.begin(); j != m_optionItemList.end(); ++j)
     {
         (*j)->write(&config);
