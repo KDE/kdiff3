@@ -82,6 +82,7 @@ set(
     cxx_nullptr
     cxx_override
     cxx_nonstatic_member_init
+    cxx_inheriting_constructors
 )
 
 add_definitions(

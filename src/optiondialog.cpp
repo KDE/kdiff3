@@ -18,6 +18,7 @@
  *
  */
 #include "optiondialog.h"
+#include "OptionItems.h"
 
 #include "diff.h"
 #include "smalldialogs.h"
@@ -61,146 +62,37 @@ QString s_historyEntryStartSortKeyOrderToolTip;
 QString s_autoMergeRegExpToolTip;
 QString s_historyStartRegExpToolTip;
 
-void OptionDialog::addOptionItem(OptionItemBase* p)
-{
-    m_optionItemList.push_back(p);
-}
-
-class OptionItemBase
+class OptionCheckBox : public QCheckBox, public OptionBool
 {
   public:
-    OptionItemBase(const QString& saveName)
-    {
-        m_saveName = saveName;
-        m_bPreserved = false;
-    }
-    virtual ~OptionItemBase() {}
-    virtual void setToDefault() = 0;
-    virtual void setToCurrent() = 0;
-    virtual void apply() = 0;
-    virtual void write(ValueMap*) = 0;
-    virtual void read(ValueMap*) = 0;
-    void doPreserve()
-    {
-        if(!m_bPreserved) {
-            m_bPreserved = true;
-            preserve();
-        }
-    }
-    void doUnpreserve()
-    {
-        if(m_bPreserved) {
-            unpreserve();
-        }
-    }
-    QString getSaveName() { return m_saveName; }
-
-  protected:
-    virtual void preserve() = 0;
-    virtual void unpreserve() = 0;
-    bool m_bPreserved;
-    QString m_saveName;
-};
-
-template <class T>
-class OptionItem : public OptionItemBase
-{
-  public:
-    OptionItem(const QString& saveName)
-        : OptionItemBase(saveName)
-    {
-    }
-
-  protected:
-    void preserve() override { m_preservedVal = *m_pVar; }
-    void unpreserve() override { *m_pVar = m_preservedVal; }
-    T* m_pVar;
-    T m_preservedVal;
-    T m_defaultVal;
-};
-
-class OptionCheckBox : public QCheckBox, public OptionItem<bool>
-{
-  public:
-    OptionCheckBox(const QString &text, bool bDefaultVal, const QString& saveName, bool* pbVar,
+    OptionCheckBox(const QString& text, bool bDefaultVal, const QString& saveName, bool* pbVar,
                    QWidget* pParent)
-        : QCheckBox(text, pParent), OptionItem<bool>(saveName)
-    {
-        m_pVar = pbVar;
-        m_defaultVal = bDefaultVal;
-    }
-    void setToDefault() override { setChecked(m_defaultVal); }
-    void setToCurrent() override { setChecked(*m_pVar); }
-    void apply() override { *m_pVar = isChecked(); }
-    void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
-    void read(ValueMap* config) override { *m_pVar = config->readBoolEntry(m_saveName, *m_pVar); }
+        : QCheckBox(text, pParent), OptionBool(pbVar, bDefaultVal, saveName)
+    {}
+    void setToDefault() override { setChecked(getDefault()); }
+    void setToCurrent() override { setChecked(getCurrent()); }
+
+    void apply() override { OptionBool::apply(isChecked()); }
 
   private:
     OptionCheckBox(const OptionCheckBox&); // private copy constructor without implementation
 };
 
-class OptionRadioButton : public QRadioButton, public OptionItem<bool>
+class OptionRadioButton : public QRadioButton, public OptionBool
 {
   public:
     OptionRadioButton(const QString& text, bool bDefaultVal, const QString& saveName, bool* pbVar,
                       QWidget* pParent)
-        : QRadioButton(text, pParent), OptionItem<bool>(saveName)
-    {
-        m_pVar = pbVar;
-        m_defaultVal = bDefaultVal;
-    }
-    void setToDefault() override { setChecked(m_defaultVal); }
-    void setToCurrent() override { setChecked(*m_pVar); }
-    void apply() override { *m_pVar = isChecked(); }
-    void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
-    void read(ValueMap* config) override { *m_pVar = config->readBoolEntry(m_saveName, *m_pVar); }
+        : QRadioButton(text, pParent), OptionBool(pbVar, bDefaultVal, saveName)
+    {}
+    void setToDefault() override { setChecked(getDefault()); }
+    void setToCurrent() override { setChecked(getCurrent()); }
+
+    void apply() override { OptionBool::apply(isChecked()); }
 
   private:
     OptionRadioButton(const OptionRadioButton&); // private copy constructor without implementation
 };
-
-template <class T>
-class OptionT : public OptionItem<T>
-{
-  public:
-    OptionT(const T& defaultVal, const QString& saveName, T* pVar)
-        : OptionItem<T>(saveName)
-    {
-        this->m_pVar = pVar;
-        *this->m_pVar = defaultVal;
-    }
-    OptionT(const QString& saveName, T* pVar)
-        : OptionItem<T>(saveName)
-    {
-        this->m_pVar = pVar;
-    }
-    void setToDefault() override {}
-    void setToCurrent() override {}
-    void apply() override {}
-    void write(ValueMap* vm) override { writeEntry(vm, this->m_saveName, *this->m_pVar); }
-    void read(ValueMap* vm) override { *this->m_pVar = vm->readEntry(this->m_saveName, *this->m_pVar); }
-
-  private:
-    OptionT(const OptionT&); // private copy constructor without implementation
-};
-
-template <class T>
-void writeEntry(ValueMap* vm, const QString& saveName, const T& v)
-{
-    vm->writeEntry(saveName, v);
-}
-
-//static void readEntry(ValueMap* vm, const QString& saveName, bool& v )       {   v = vm->readBoolEntry( saveName, v ); }
-//static void readEntry(ValueMap* vm, const QString& saveName, int&  v )       {   v = vm->readNumEntry( saveName, v ); }
-//static void readEntry(ValueMap* vm, const QString& saveName, QSize& v )      {   v = vm->readSizeEntry( saveName, &v ); }
-//static void readEntry(ValueMap* vm, const QString& saveName, QPoint& v )     {   v = vm->readPointEntry( saveName, &v ); }
-//static void readEntry(ValueMap* vm, const QString& saveName, QStringList& v ){   v = vm->readListEntry( saveName, QStringList(), '|' ); }
-
-typedef OptionT<bool> OptionToggleAction;
-typedef OptionT<int> OptionNum;
-typedef OptionT<QPoint> OptionPoint;
-typedef OptionT<QSize> OptionSize;
-typedef OptionT<QStringList> OptionStringList;
 
 FontChooser::FontChooser(QWidget* pParent)
     : QGroupBox(pParent)
@@ -249,70 +141,58 @@ void FontChooser::slotSelectFont()
     m_pLabel->setText(i18n("Font: %1, %2, %3\n\nExample:", m_font.family(), m_font.styleName(), m_font.pointSize()));
 }
 
-class OptionFontChooser : public FontChooser, public OptionItem<QFont>
+class OptionFontChooser : public FontChooser, public OptionFont
 {
   public:
     OptionFontChooser(const QFont& defaultVal, const QString& saveName, QFont* pVar, QWidget* pParent) : FontChooser(pParent),
-                                                                                                                            OptionItem<QFont>(saveName)
-    {
-        m_pVar = pVar;
-        *m_pVar = defaultVal;
-        m_defaultVal = defaultVal;
-    }
-    void setToDefault() override { setFont(m_defaultVal, false); }
-    void setToCurrent() override { setFont(*m_pVar, false); }
-    void apply() override { *m_pVar = font(); }
-    void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
-    void read(ValueMap* config) override { *m_pVar = config->readFontEntry(m_saveName, m_pVar); }
+                                                                                                                            OptionFont(pVar, defaultVal, saveName)
+    {}
 
+    void setToDefault() override { setFont(getDefault(), false); }
+    void setToCurrent() override { setFont(getCurrent(), false); }
+    void apply() override { OptionFont::apply(font()); }
   private:
     OptionFontChooser(const OptionToggleAction&); // private copy constructor without implementation
 };
 
-class OptionColorButton : public KColorButton, public OptionItem<QColor>
+class OptionColorButton : public KColorButton, public OptionColor
 {
   public:
     OptionColorButton(const QColor &defaultVal, const QString& saveName, QColor* pVar, QWidget* pParent)
-        : KColorButton(pParent), OptionItem<QColor>(saveName)
-    {
-        m_pVar = pVar;
-        m_defaultVal = defaultVal;
-    }
-    void setToDefault() override { setColor(m_defaultVal); }
-    void setToCurrent() override { setColor(*m_pVar); }
-    void apply() override { *m_pVar = color(); }
-    void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
-    void read(ValueMap* config) override { *m_pVar = config->readColorEntry(m_saveName, m_pVar); }
+        : KColorButton(pParent), OptionColor(pVar, defaultVal, saveName)
+    {}
+
+    void setToDefault() override { setColor(getDefault()); }
+    void setToCurrent() override { setColor(getCurrent()); }
+    void apply() override { OptionColor::apply(color()); }
 
   private:
     OptionColorButton(const OptionColorButton&); // private copy constructor without implementation
 };
 
-class OptionLineEdit : public QComboBox, public OptionItem<QString>
+class OptionLineEdit : public QComboBox, public OptionString
 {
   public:
     OptionLineEdit(const QString& defaultVal, const QString& saveName, QString* pVar,
                    QWidget* pParent)
-        : QComboBox(pParent), OptionItem<QString>(saveName)
+        : QComboBox(pParent), OptionString(pVar, defaultVal, saveName)
     {
         setMinimumWidth(50);
         setEditable(true);
-        m_pVar = pVar;
-        m_defaultVal = defaultVal;
         m_list.push_back(defaultVal);
         insertText();
     }
     void setToDefault() override
     {
-        setEditText(m_defaultVal);
+        setEditText(getDefault());
     }
     void setToCurrent() override
     {
-        setEditText(*m_pVar);
+        setEditText(getCurrent());
     }
     void apply() override
     {
-        *m_pVar = currentText();
+        OptionString::apply(currentText());
         insertText();
     }
     void write(ValueMap* config) override
@@ -322,7 +202,7 @@ class OptionLineEdit : public QComboBox, public OptionItem<QString>
     void read(ValueMap* config) override
     {
         m_list = config->readListEntry(m_saveName, QStringList(m_defaultVal));
-        if(!m_list.empty()) *m_pVar = m_list.front();
+        if(!m_list.empty()) setCurrent(m_list.front());
         clear();
         insertItems(0, m_list);
     }
@@ -345,39 +225,34 @@ class OptionLineEdit : public QComboBox, public OptionItem<QString>
 #if defined QT_NO_VALIDATOR
 #error No validator
 #endif
-class OptionIntEdit : public QLineEdit, public OptionItem<int>
+class OptionIntEdit : public QLineEdit, public OptionNum<int>
 {
   public:
     OptionIntEdit(int defaultVal, const QString& saveName, int* pVar, int rangeMin, int rangeMax,
                   QWidget* pParent)
-        : QLineEdit(pParent), OptionItem<int>(saveName)
+        : QLineEdit(pParent), OptionNum<int>(pVar, defaultVal, saveName)
     {
-        m_pVar = pVar;
-        m_defaultVal = defaultVal;
         QIntValidator* v = new QIntValidator(this);
         v->setRange(rangeMin, rangeMax);
         setValidator(v);
     }
     void setToDefault() override
     {
-        QString s;
-        s.setNum(m_defaultVal);
-        setText(s);
+        //QString::setNum does not account for locale settings
+        setText(OptionNum::toString(getDefault()));
     }
+
     void setToCurrent() override
     {
-        QString s;
-        s.setNum(*m_pVar);
-        setText(s);
+        setText(getString());
     }
     void apply() override
     {
         const QIntValidator* v = static_cast<const QIntValidator*>(validator());
-        *m_pVar = minMaxLimiter(text().toInt(), v->bottom(), v->top());
-        setText(QString::number(*m_pVar));
+        setCurrent( minMaxLimiter(text().toInt(), v->bottom(), v->top()) );
+
+        setText(getString());
     }
-    void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
-    void read(ValueMap* config) override { *m_pVar = config->readNumEntry(m_saveName, *m_pVar); }
 
   private:
     OptionIntEdit(const OptionIntEdit&); // private copy constructor without implementation
@@ -603,6 +478,11 @@ class OptionEncodingComboBox : public QComboBox, public OptionItemBase
     int m_preservedVal;
 };
 
+void OptionDialog::addOptionItem(OptionItemBase* p)
+{
+    m_optionItemList.push_back(p);
+}
+
 OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageDialog(parent)
 {
     setFaceType(List);
@@ -668,16 +548,16 @@ void OptionDialog::setupOtherOptions()
     /*
    TODO manage toolbar positioning
    */
-    addOptionItem(new OptionNum( Qt::TopToolBarArea, "ToolBarPos", (int*)&m_options.m_toolBarPos));
+    addOptionItem(new OptionNum<int>( Qt::TopToolBarArea, "ToolBarPos", (int*)&m_options.m_toolBarPos));
     addOptionItem(new OptionSize(QSize(600, 400), "Geometry", &m_options.m_geometry));
     addOptionItem(new OptionPoint(QPoint(0, 22), "Position", &m_options.m_position));
     addOptionItem(new OptionToggleAction(false, "WindowStateMaximised", &m_options.m_bMaximised));
 
-    addOptionItem(new OptionStringList("RecentAFiles", &m_options.m_recentAFiles));
-    addOptionItem(new OptionStringList("RecentBFiles", &m_options.m_recentBFiles));
-    addOptionItem(new OptionStringList("RecentCFiles", &m_options.m_recentCFiles));
-    addOptionItem(new OptionStringList("RecentOutputFiles", &m_options.m_recentOutputFiles));
-    addOptionItem(new OptionStringList("RecentEncodings", &m_options.m_recentEncodings));
+    addOptionItem(new OptionStringList(&m_options.m_recentAFiles, "RecentAFiles"));
+    addOptionItem(new OptionStringList(&m_options.m_recentBFiles, "RecentBFiles"));
+    addOptionItem(new OptionStringList(&m_options.m_recentCFiles, "RecentCFiles"));
+    addOptionItem(new OptionStringList(&m_options.m_recentOutputFiles, "RecentOutputFiles"));
+    addOptionItem(new OptionStringList(&m_options.m_recentEncodings, "RecentEncodings"));
 }
 
 void OptionDialog::setupFontPage()
