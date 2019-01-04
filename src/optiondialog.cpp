@@ -222,9 +222,6 @@ class OptionLineEdit : public QComboBox, public OptionString
     QStringList m_list;
 };
 
-#if defined QT_NO_VALIDATOR
-#error No validator
-#endif
 class OptionIntEdit : public QLineEdit, public OptionNum<int>
 {
   public:
