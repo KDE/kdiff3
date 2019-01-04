@@ -361,7 +361,7 @@ class OptionComboBox : public QComboBox, public OptionItemBase
     }
 };
 
-class OptionEncodingComboBox : public QComboBox, public OptionItemBase
+class OptionEncodingComboBox : public QComboBox, public OptionCodec
 {
     Q_OBJECT
     QVector<QTextCodec*> m_codecVec;
@@ -370,7 +370,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionItemBase
   public:
     OptionEncodingComboBox(const QString& saveName, QTextCodec** ppVarCodec,
                            QWidget* pParent)
-        : QComboBox(pParent), OptionItemBase(saveName)
+        : QComboBox(pParent), OptionCodec(saveName)
     {
         m_ppVarCodec = ppVarCodec;
         insertCodec(i18n("Unicode, 8 bit"), QTextCodec::codecForName("UTF-8"));
@@ -406,6 +406,10 @@ class OptionEncodingComboBox : public QComboBox, public OptionItemBase
                 if(c == m_codecVec[i])
                     return; // don't insert any codec twice
             }
+
+            // The m_codecVec.size will at this point return the value we need for the index.
+            if(codecName == defaultName())
+                saveDefaultIndex(m_codecVec.size());
             QString itemText = visibleCodecName.isEmpty() ? codecName : visibleCodecName + QStringLiteral(" (") + codecName + QStringLiteral(")");
             addItem(itemText, (int)m_codecVec.size());
             m_codecVec.push_back(c);
@@ -413,23 +417,11 @@ class OptionEncodingComboBox : public QComboBox, public OptionItemBase
     }
     void setToDefault() override
     {
-        QString defaultName = QLatin1String(QTextCodec::codecForLocale()->name());
-        for(int i = 0; i < count(); ++i)
-        {
-            if(defaultName == itemText(i) &&
-               m_codecVec[i] == QTextCodec::codecForLocale())
-            {
-                setCurrentIndex(i);
-                if(m_ppVarCodec != nullptr) {
-                    *m_ppVarCodec = m_codecVec[i];
-                }
-                return;
-            }
-        }
+        int index = getDefaultIndex();
 
-        setCurrentIndex(0);
+        setCurrentIndex(index);
         if(m_ppVarCodec != nullptr) {
-            *m_ppVarCodec = m_codecVec[0];
+            *m_ppVarCodec = m_codecVec[index];
         }
     }
     void setToCurrent() override
