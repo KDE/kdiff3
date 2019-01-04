@@ -75,7 +75,7 @@ class OptionCheckBox : public QCheckBox, public OptionBool
     void apply() override { OptionBool::apply(isChecked()); }
 
   private:
-    OptionCheckBox(const OptionCheckBox&); // private copy constructor without implementation
+    Q_DISABLE_COPY(OptionCheckBox)
 };
 
 class OptionRadioButton : public QRadioButton, public OptionBool
@@ -91,7 +91,7 @@ class OptionRadioButton : public QRadioButton, public OptionBool
     void apply() override { OptionBool::apply(isChecked()); }
 
   private:
-    OptionRadioButton(const OptionRadioButton&); // private copy constructor without implementation
+    Q_DISABLE_COPY(OptionRadioButton)
 };
 
 FontChooser::FontChooser(QWidget* pParent)
@@ -152,7 +152,7 @@ class OptionFontChooser : public FontChooser, public OptionFont
     void setToCurrent() override { setFont(getCurrent(), false); }
     void apply() override { OptionFont::apply(font()); }
   private:
-    OptionFontChooser(const OptionToggleAction&); // private copy constructor without implementation
+    Q_DISABLE_COPY(OptionFontChooser)
 };
 
 class OptionColorButton : public KColorButton, public OptionColor
@@ -167,7 +167,7 @@ class OptionColorButton : public KColorButton, public OptionColor
     void apply() override { OptionColor::apply(color()); }
 
   private:
-    OptionColorButton(const OptionColorButton&); // private copy constructor without implementation
+    Q_DISABLE_COPY(OptionColorButton)
 };
 
 class OptionLineEdit : public QComboBox, public OptionString
@@ -218,7 +218,8 @@ class OptionLineEdit : public QComboBox, public OptionString
             m_list.erase(m_list.begin() + 10, m_list.end());
         insertItems(0, m_list);
     }
-    OptionLineEdit(const OptionLineEdit&); // private copy constructor without implementation
+
+    Q_DISABLE_COPY(OptionLineEdit)
     QStringList m_list;
 };
 
@@ -252,7 +253,7 @@ class OptionIntEdit : public QLineEdit, public OptionNum<int>
     }
 
   private:
-    OptionIntEdit(const OptionIntEdit&); // private copy constructor without implementation
+    Q_DISABLE_COPY(OptionIntEdit)
 };
 
 class OptionComboBox : public QComboBox, public OptionItemBase
@@ -337,7 +338,7 @@ class OptionComboBox : public QComboBox, public OptionItemBase
     }
 
   private:
-    OptionComboBox(const OptionIntEdit&); // private copy constructor without implementation
+    Q_DISABLE_COPY(OptionComboBox)
     int* m_pVarNum;
     int m_preservedNumVal = 0;
     QString* m_pVarStr;
