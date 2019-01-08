@@ -170,27 +170,27 @@ void ValueMap::writeEntry(const QString& k, const QFont& v)
 
 void ValueMap::writeEntry(const QString& k, const QColor& v)
 {
-    m_map[k] = QString().setNum(v.red()) + QLatin1String(",") + QString().setNum(v.green()) + QLatin1String(",") + QString().setNum(v.blue());
+    m_map[k].setNum(v.red()) + QLatin1String(",") + QString().setNum(v.green()) + QLatin1String(",") + QString().setNum(v.blue());
 }
 
 void ValueMap::writeEntry(const QString& k, const QSize& v)
 {
-    m_map[k] = QString().setNum(v.width()) + QLatin1String(",") + QString().setNum(v.height());
+    m_map[k].setNum(v.width()) + QLatin1String(",") + QString().setNum(v.height());
 }
 
 void ValueMap::writeEntry(const QString& k, const QPoint& v)
 {
-    m_map[k] = QString().setNum(v.x()) + QLatin1String(",") + QString().setNum(v.y());
+    m_map[k].setNum(v.x()) + QLatin1String(",") + QString().setNum(v.y());
 }
 
 void ValueMap::writeEntry(const QString& k, int v)
 {
-    m_map[k] = QString().setNum(v);
+    m_map[k].setNum(v);
 }
 
 void ValueMap::writeEntry(const QString& k, bool v)
 {
-    m_map[k] = QString().setNum(v);
+    m_map[k].setNum(v);
 }
 
 void ValueMap::writeEntry(const QString& k, const QString& v)
