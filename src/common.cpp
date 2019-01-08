@@ -161,16 +161,7 @@ QStringList safeStringSplit(const QString& s, char sepChar, char metaChar)
     return sl;
 }
 
-static QString numStr(int n)
-{
-    QString s;
-    s.setNum(n);
-    return s;
-}
-static int num(QString& s, int idx)
-{
-    return s.split(',')[idx].toInt();
-}
+
 
 void ValueMap::writeEntry(const QString& k, const QFont& v)
 {
@@ -179,27 +170,27 @@ void ValueMap::writeEntry(const QString& k, const QFont& v)
 
 void ValueMap::writeEntry(const QString& k, const QColor& v)
 {
-    m_map[k] = numStr(v.red()) + QLatin1String(",") + numStr(v.green()) + QLatin1String(",") + numStr(v.blue());
+    m_map[k] = QString().setNum(v.red()) + QLatin1String(",") + QString().setNum(v.green()) + QLatin1String(",") + QString().setNum(v.blue());
 }
 
 void ValueMap::writeEntry(const QString& k, const QSize& v)
 {
-    m_map[k] = numStr(v.width()) + QLatin1String(",") + numStr(v.height());
+    m_map[k] = QString().setNum(v.width()) + QLatin1String(",") + QString().setNum(v.height());
 }
 
 void ValueMap::writeEntry(const QString& k, const QPoint& v)
 {
-    m_map[k] = numStr(v.x()) + QLatin1String(",") + numStr(v.y());
+    m_map[k] = QString().setNum(v.x()) + QLatin1String(",") + QString().setNum(v.y());
 }
 
 void ValueMap::writeEntry(const QString& k, int v)
 {
-    m_map[k] = numStr(v);
+    m_map[k] = QString().setNum(v);
 }
 
 void ValueMap::writeEntry(const QString& k, bool v)
 {
-    m_map[k] = numStr(v);
+    m_map[k] = QString().setNum(v);
 }
 
 void ValueMap::writeEntry(const QString& k, const QString& v)
@@ -237,7 +228,7 @@ QColor ValueMap::readColorEntry(const QString& k, const QColor* defaultVal)
     if(i != m_map.end())
     {
         QString s = i->second;
-        c = QColor(num(s, 0), num(s, 1), num(s, 2));
+        c = QColor(s.split(',')[0].toInt(), s.split(',')[1].toInt(), s.split(',')[2].toInt());
     }
 
     return c;
@@ -251,7 +242,7 @@ QSize ValueMap::readSizeEntry(const QString& k, const QSize* defaultVal)
     {
 
         QString s = i->second;
-        size = QSize(num(s, 0), num(s, 1));
+        size = QSize(s.split(',')[0].toInt(), s.split(',')[1].toInt());
     }
 
     return size;
@@ -264,7 +255,7 @@ QPoint ValueMap::readPointEntry(const QString& k, const QPoint* defaultVal)
     if(i != m_map.end())
     {
         QString s = i->second;
-        point = QPoint(num(s, 0), num(s, 1));
+        point = QPoint(s.split(',')[0].toInt(), s.split(',')[1].toInt());
     }
 
     return point;
@@ -277,7 +268,7 @@ bool ValueMap::readBoolEntry(const QString& k, bool bDefault)
     if(i != m_map.end())
     {
         QString s = i->second;
-        b = (bool)num(s, 0);
+        b = (s.split(',')[0].toInt() == 1);
     }
 
     return b;
@@ -290,7 +281,7 @@ int ValueMap::readNumEntry(const QString& k, int iDefault)
     if(i != m_map.end())
     {
         QString s = i->second;
-        ival = num(s, 0);
+        ival = s.split(',')[0].toInt();
     }
 
     return ival;
