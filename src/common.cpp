@@ -73,26 +73,6 @@ void ValueMap::load(QTextStream& ts)
         }
     }
 }
-/*
-void ValueMap::load( const QString& s )
-{
-   int pos=0;
-   while ( pos<(int)s.length() )
-   {                                 // until end of file...
-      int pos2 = s.find('=', pos);
-      int pos3 = s.find('\n', pos2 );
-      if (pos3<0)
-         pos3=s.length();
-      if( pos2 > 0 )                     // seems not to have a tag
-      {
-         QString key = s.mid(pos, pos2-pos);
-         QString val = s.mid(pos2+1, pos3-pos2-1);
-         m_map[key] = val;
-      }
-      pos = pos3;
-   }
-}
-*/
 
 // safeStringJoin and safeStringSplit allow to convert a stringlist into a string and back
 // safely, even if the individual strings in the list contain the separator character.
@@ -160,8 +140,6 @@ QStringList safeStringSplit(const QString& s, char sepChar, char metaChar)
 
     return sl;
 }
-
-
 
 void ValueMap::writeEntry(const QString& k, const QFont& v)
 {
