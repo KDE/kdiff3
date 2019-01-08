@@ -167,32 +167,9 @@ static QString numStr(int n)
     s.setNum(n);
     return s;
 }
-
-static QString subSection(const QString& s, int idx, char sep)
-{
-    int pos = 0;
-    while(idx > 0)
-    {
-        pos = s.indexOf(sep, pos);
-        --idx;
-        if(pos < 0) break;
-        ++pos;
-    }
-    if(pos >= 0)
-    {
-        int pos2 = s.indexOf(sep, pos);
-        if(pos2 > 0)
-            return s.mid(pos, pos2 - pos);
-        else
-            return s.mid(pos);
-    }
-
-    return QString();
-}
-
 static int num(QString& s, int idx)
 {
-    return subSection(s, idx, ',').toInt();
+    return s.split(',')[idx].toInt();
 }
 
 void ValueMap::writeEntry(const QString& k, const QFont& v)
@@ -246,9 +223,9 @@ QFont ValueMap::readFontEntry(const QString& k, const QFont* defaultVal)
     std::map<QString, QString>::iterator i = m_map.find(k);
     if(i != m_map.end())
     {
-        f.setFamily(subSection(i->second, 0, ','));
-        f.setPointSize(subSection(i->second, 1, ',').toInt());
-        f.setBold(subSection(i->second, 2, ',') == "bold");
+        f.setFamily(i->second.split(',')[0]);
+        f.setPointSize(i->second.split(',')[1].toInt());
+        f.setBold(i->second.split(',')[2] == "bold");
     }
     return f;
 }
