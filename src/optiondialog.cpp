@@ -201,7 +201,7 @@ class OptionLineEdit : public QComboBox, public OptionString
     }
     void read(ValueMap* config) override
     {
-        m_list = config->readListEntry(m_saveName, QStringList(m_defaultVal));
+        m_list = config->readEntry(m_saveName, QStringList(m_defaultVal));
         if(!m_list.empty()) setCurrent(m_list.front());
         clear();
         insertItems(0, m_list);
@@ -314,7 +314,7 @@ class OptionComboBox : public QComboBox, public OptionItemBase
         if(m_pVarStr != nullptr)
             setText(config->readEntry(m_saveName, currentText()));
         else
-            *m_pVarNum = config->readNumEntry(m_saveName, *m_pVarNum);
+            *m_pVarNum = config->readEntry(m_saveName, *m_pVarNum);
     }
     void preserve() override
     {
@@ -1657,7 +1657,7 @@ class ConfigValueMap : public ValueMap
     {
         m_config.writeEntry(s, v);
     }
-
+private:
     QFont readFontEntry(const QString& s, const QFont* defaultVal) override
     {
         return m_config.readEntry(s, *defaultVal);

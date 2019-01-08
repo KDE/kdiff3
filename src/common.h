@@ -69,45 +69,47 @@ class QTextStream;
 
 class ValueMap
 {
-private:
-   std::map<QString,QString> m_map;
-public:
-   ValueMap();
-   virtual ~ValueMap();
+  private:
+    std::map<QString, QString> m_map;
 
-   void save( QTextStream& ts );
-   void load( QTextStream& ts );
-   QString getAsString();
-   // void load( const QString& s );
+  public:
+    ValueMap();
+    virtual ~ValueMap();
 
-   virtual void writeEntry(const QString&, const QFont& );
-   virtual void writeEntry(const QString&, const QColor& );
-   virtual void writeEntry(const QString&, const QSize& );
-   virtual void writeEntry(const QString&, const QPoint& );
-   virtual void writeEntry(const QString&, int );
-   virtual void writeEntry(const QString&, bool );
-   virtual void writeEntry(const QString&, const QStringList& );
-   virtual void writeEntry(const QString&, const QString& );
-   virtual void writeEntry(const QString&, const char* );
+    void save(QTextStream& ts);
+    void load(QTextStream& ts);
+    QString getAsString();
+    // void load( const QString& s );
 
-   virtual QFont       readFontEntry (const QString&, const QFont* defaultVal );
-   virtual QColor      readColorEntry(const QString&, const QColor* defaultVal );
-   virtual QSize       readSizeEntry (const QString&, const QSize* defaultVal );
-   virtual QPoint      readPointEntry(const QString&, const QPoint* defaultVal );
-   virtual bool        readBoolEntry (const QString&, bool bDefault );
-   virtual int         readNumEntry  (const QString&, int iDefault );
-   virtual QStringList readListEntry (const QString&, const QStringList& defaultVal );
-   virtual QString     readStringEntry(const QString&, const QString& );
+    virtual void writeEntry(const QString&, const QFont&);
+    virtual void writeEntry(const QString&, const QColor&);
+    virtual void writeEntry(const QString&, const QSize&);
+    virtual void writeEntry(const QString&, const QPoint&);
+    virtual void writeEntry(const QString&, int);
+    virtual void writeEntry(const QString&, bool);
+    virtual void writeEntry(const QString&, const QStringList&);
+    virtual void writeEntry(const QString&, const QString&);
+    virtual void writeEntry(const QString&, const char*);
 
-   QString     readEntry (const QString& s, const QString& defaultVal );
-   QString     readEntry (const QString& s, const char* defaultVal );
-   QFont       readEntry (const QString& s, const QFont& defaultVal );
-   QColor      readEntry(const QString& s, const QColor defaultVal );
-   QSize       readEntry (const QString& s, const QSize defaultVal );
-   QPoint      readEntry(const QString& s, const QPoint defaultVal );
-   bool        readEntry (const QString& s, bool bDefault );
-   int         readEntry  (const QString& s, int iDefault );
-   QStringList readEntry (const QString& s, const QStringList& defaultVal);
+    QString     readEntry(const QString& s, const QString& defaultVal);
+    QString     readEntry(const QString& s, const char* defaultVal);
+    QFont       readEntry(const QString& s, const QFont& defaultVal);
+    QColor      readEntry(const QString& s, const QColor defaultVal);
+    QSize       readEntry(const QString& s, const QSize defaultVal);
+    QPoint      readEntry(const QString& s, const QPoint defaultVal);
+    bool        readEntry(const QString& s, bool bDefault);
+    int         readEntry(const QString& s, int iDefault);
+    QStringList readEntry(const QString& s, const QStringList& defaultVal);
+
+  private:
+    virtual QFont       readFontEntry(const QString&, const QFont* defaultVal);
+    virtual QColor      readColorEntry(const QString&, const QColor* defaultVal);
+    virtual QSize       readSizeEntry(const QString&, const QSize* defaultVal);
+    virtual QPoint      readPointEntry(const QString&, const QPoint* defaultVal);
+    virtual bool        readBoolEntry(const QString&, bool bDefault);
+    virtual int         readNumEntry(const QString&, int iDefault);
+    virtual QStringList readListEntry(const QString&, const QStringList& defaultVal);
+    virtual QString     readStringEntry(const QString&, const QString&);
 };
 
 QStringList safeStringSplit(const QString& s, char sepChar=';', char metaChar='\\' );
