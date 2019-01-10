@@ -23,6 +23,10 @@
 
 //#include <QToolBar>
 #include <QStringList>
+#include <QSize>
+#include <QPoint>
+#include <QFont>
+#include <QColor>
 #include <list>
 
 enum e_LineEndStyle

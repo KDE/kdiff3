@@ -116,7 +116,8 @@ QStringList safeStringSplit(const QString& s, char sepChar, char metaChar)
     QString b;
     for(i = 0; i < len; ++i)
     {
-        if(i + 1 < len && s[i] == metaChar && s[i + 1] == metaChar) {
+        if(i + 1 < len && s[i] == metaChar && s[i + 1] == metaChar)
+        {
             b += metaChar;
             ++i;
         }
