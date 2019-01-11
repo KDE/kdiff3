@@ -53,7 +53,7 @@ class MergeFileInfos
   public:
     MergeFileInfos();
     ~MergeFileInfos();
-    
+
     //bool operator>( const MergeFileInfos& );
     QString subPath() const;
     QString fileName() const;
@@ -80,7 +80,7 @@ class MergeFileInfos
     FileAccess* getFileInfoA() const { return m_pFileInfoA; }
     FileAccess* getFileInfoB() const { return m_pFileInfoB; }
     FileAccess* getFileInfoC() const { return m_pFileInfoC; }
-    
+
     void setFileInfoA(FileAccess* newInfo) { m_pFileInfoA = newInfo; }
     void setFileInfoB(FileAccess* newInfo) { m_pFileInfoB = newInfo; }
     void setFileInfoC(FileAccess* newInfo) { m_pFileInfoC = newInfo; }
@@ -92,7 +92,7 @@ class MergeFileInfos
 
     inline QSharedPointer<DirectoryInfo> getDirectoryInfo() const { return m_dirInfo; }
     void setDirectoryInfo(const QSharedPointer<DirectoryInfo> &dirInfo) { m_dirInfo = dirInfo; }
-    
+
     inline QString getDirNameA() const { return getDirectoryInfo()->dirA().prettyAbsPath(); }
     inline QString getDirNameB() const { return getDirectoryInfo()->dirB().prettyAbsPath(); }
     inline QString getDirNameC() const { return getDirectoryInfo()->dirC().prettyAbsPath(); }
@@ -100,6 +100,11 @@ class MergeFileInfos
 
     inline const QSharedPointer<TotalDiffStatus>& diffStatus() const { return m_totalDiffStatus; }
 
+    inline e_MergeOperation getOperation() const { return m_eMergeOperation; }
+    inline void setOperation(const e_MergeOperation op) { m_eMergeOperation = op; }
+
+    inline e_OperationStatus getOpStatus() const { return  m_eOpStatus; }
+    inline void setOpStatus(const e_OperationStatus eOpStatus){ m_eOpStatus = eOpStatus; }
   private:
     MergeFileInfos* m_pParent;
     QList<MergeFileInfos*> m_children;
@@ -109,13 +114,12 @@ class MergeFileInfos
     FileAccess* m_pFileInfoC;
 
     QSharedPointer<DirectoryInfo> m_dirInfo;
-    
+
     QSharedPointer<TotalDiffStatus> m_totalDiffStatus;
-  public:
 
     e_MergeOperation m_eMergeOperation;
     e_OperationStatus m_eOpStatus;
-
+  public:
     e_Age m_ageA;
     e_Age m_ageB;
     e_Age m_ageC;

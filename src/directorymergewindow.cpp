@@ -358,7 +358,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     {
         if(MergeFileInfos* pMFI = getMFI(mi))
         {
-            pMFI->m_eOpStatus = eOpStatus;
+            pMFI->setOpStatus(eOpStatus);
             emit dataChanged(mi, mi);
         }
     }
@@ -399,7 +399,7 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
             if(s_OpCol == index.column())
             {
                 bool bDir = pMFI->dirA() || pMFI->dirB() || pMFI->dirC();
-                switch(pMFI->m_eMergeOperation)
+                switch(pMFI->getOperation())
                 {
                     case eNoOperation:
                         return "";
@@ -462,7 +462,7 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
             }
             if(s_OpStatusCol == index.column())
             {
-                switch(pMFI->m_eOpStatus)
+                switch(pMFI->getOpStatus())
                 {
                     case eOpStatusNone:
                         return "";
@@ -834,7 +834,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThre
         }
         else
         {
-            if(pMFI->m_eMergeOperation == eMergeABCToDest || pMFI->m_eMergeOperation == eMergeABToDest)
+            if(pMFI->getOperation() == eMergeABCToDest || pMFI->getOperation() == eMergeABToDest)
                 ++nofManualMerges;
         }
     }
@@ -927,7 +927,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         //   ii.bExpanded = pDMI->isExpanded();
         //   ii.bOperationComplete = pDMI->m_pMFI->m_bOperationComplete;
         //   ii.status = pDMI->text( s_OpStatusCol );
-        //   ii.eMergeOperation = pDMI->m_pMFI->m_eMergeOperation;
+        //   ii.eMergeOperation = pDMI->m_pMFI->getOperation();
         //   ++it;
         //}
     }
@@ -2213,16 +2213,16 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setMergeOperation(const 
     if(pMFI == nullptr)
         return;
 
-    if(eMergeOp != pMFI->m_eMergeOperation)
+    if(eMergeOp != pMFI->getOperation())
     {
         pMFI->m_bOperationComplete = false;
         setOpStatus(mi, eOpStatusNone);
     }
 
-    pMFI->m_eMergeOperation = eMergeOp;
+    pMFI->setOperation(eMergeOp);
     if(bRecursive)
     {
-        e_MergeOperation eChildrenMergeOp = pMFI->m_eMergeOperation;
+        e_MergeOperation eChildrenMergeOp = pMFI->getOperation();
         if(eChildrenMergeOp == eConflictingFileTypes) eChildrenMergeOp = eMergeABCToDest;
         for(int childIdx = 0; childIdx < pMFI->children().count(); ++childIdx)
         {
@@ -2328,7 +2328,7 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
     }
     if(fileName == pMFI->fullNameDest())
     {
-        if(pMFI->m_eMergeOperation == eMergeToAB)
+        if(pMFI->getOperation() == eMergeToAB)
         {
             bool bSuccess = d->copyFLD(pMFI->fullNameB(), pMFI->fullNameA());
             if(!bSuccess)
@@ -2340,7 +2340,7 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
                 //   m_pStatusInfo->ensureItemVisible( m_pStatusInfo->last() );
                 d->m_bError = true;
                 d->setOpStatus(mi, eOpStatusError);
-                pMFI->m_eMergeOperation = eCopyBToA;
+                pMFI->setOperation(eCopyBToA);
                 return;
             }
         }
@@ -2385,7 +2385,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(Me
     bool bCreateBackups = m_pOptions->m_bDmCreateBakFiles;
     // First decide destname
     QString destName;
-    switch(mfi.m_eMergeOperation)
+    switch(mfi.getOperation())
     {
         case eNoOperation:
             break;
@@ -2416,7 +2416,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(Me
 
     bool bSuccess = false;
     bSingleFileMerge = false;
-    switch(mfi.m_eMergeOperation)
+    switch(mfi.getOperation())
     {
         case eNoOperation:
             bSuccess = true;
@@ -2500,15 +2500,15 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareMergeStart(const 
         {
             m_mergeItemList.push_back(mi);
             QString errorText;
-            if(pMFI->m_eMergeOperation == eConflictingFileTypes)
+            if(pMFI->getOperation() == eConflictingFileTypes)
             {
                 errorText = i18n("The highlighted item has a different type in the different directories. Select what to do.");
             }
-            if(pMFI->m_eMergeOperation == eConflictingAges)
+            if(pMFI->getOperation() == eConflictingAges)
             {
                 errorText = i18n("The modification dates of the file are equal but the files are not. Select what to do.");
             }
-            if(pMFI->m_eMergeOperation == eChangedAndDeleted)
+            if(pMFI->getOperation() == eChangedAndDeleted)
             {
                 errorText = i18n("The highlighted item was changed in one directory and deleted in the other. Select what to do.");
             }
@@ -3228,7 +3228,7 @@ QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi)
     vm.writeEntry("EqualAC", mfi.m_bEqualAC);
     vm.writeEntry("EqualBC", mfi.m_bEqualBC);
 
-    vm.writeEntry("MergeOperation", (int)mfi.m_eMergeOperation);
+    vm.writeEntry("MergeOperation", (int)mfi.getOperation());
     vm.writeEntry("DirA", mfi.dirA());
     vm.writeEntry("DirB", mfi.dirB());
     vm.writeEntry("DirC", mfi.dirC());
