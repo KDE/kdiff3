@@ -106,7 +106,7 @@ class Option : public OptionItemBase
     virtual void apply(const T& inValue) { *m_pVar = inValue; }
 
     void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
-    void read(ValueMap* config) override { *m_pVar = config->readEntry(m_saveName, *m_pVar); }
+    void read(ValueMap* config) override { *m_pVar = config->readEntry(m_saveName, m_defaultVal); }
   protected:
     void preserve() override { m_preservedVal = *m_pVar; }
     void unpreserve() override { *m_pVar = m_preservedVal; }
