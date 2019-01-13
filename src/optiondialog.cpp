@@ -1172,11 +1172,7 @@ void OptionDialog::setupDirectoryMergePage()
     OptionCheckBox* pFindHidden = new OptionCheckBox(i18n("Find hidden files and directories"), true, "FindHidden", &m_options.m_bDmFindHidden, page);
     gbox->addWidget(pFindHidden, line, 0, 1, 2);
     addOptionItem(pFindHidden);
-#if defined(Q_OS_WIN)
-    pFindHidden->setToolTip(i18n("Finds files and directories with the hidden attribute."));
-#else
-    pFindHidden->setToolTip(i18n("Finds files and directories starting with '.'."));
-#endif
+    pFindHidden->setToolTip(i18n("Finds hidden files and directories."));
     ++line;
 
     OptionCheckBox* pFollowFileLinks = new OptionCheckBox(i18n("Follow file links"), false, "FollowFileLinks", &m_options.m_bDmFollowFileLinks, page);
