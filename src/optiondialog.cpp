@@ -1,6 +1,7 @@
 /*
  *   kdiff3 - Text Diff And Merge Tool
  *   Copyright (C) 2002-2009  Joachim Eibl, joachim.eibl at gmx.de
+ *   Copyright (C) 2018 Michael Reeves reeves.87@gmail.com
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -514,7 +515,7 @@ OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageD
 
 void OptionDialog::helpRequested()
 {
-    KHelpClient::invokeHelp(QStringLiteral("kdiff3/index.html"), QString());
+    KHelpClient::invokeHelp(QStringLiteral("kdiff3/index.html"));
 }
 
 OptionDialog::~OptionDialog()
@@ -537,7 +538,7 @@ void OptionDialog::setupOtherOptions()
     addOptionItem(new OptionToggleAction(true, "Show Statusbar", &m_options.m_bShowStatusBar));
 
     /*
-   TODO manage toolbar positioning
+    TODO manage toolbar positioning
    */
     addOptionItem(new OptionNum<int>( Qt::TopToolBarArea, "ToolBarPos", (int*)&m_options.m_toolBarPos));
     addOptionItem(new OptionSize(QSize(600, 400), "Geometry", &m_options.m_geometry));

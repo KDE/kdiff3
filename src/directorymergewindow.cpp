@@ -732,10 +732,16 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
         return bEqual;
     }
 
+    //This is what the old TempRemover class would do. Should probally get path to temp file not just the name.
+    if(!fi1.isLocal())
+        fileName1 = fi1.getTempName();
+    if(!fi2.isLocal())
+        fileName2 = fi2.getTempName();
+
     std::vector<char> buf1(100000);
     std::vector<char> buf2(buf1.size());
 
-    QFile file1(fi1.fileName());
+    QFile file1(fileName1);
 
     if(!file1.open(QIODevice::ReadOnly))
     {
@@ -743,7 +749,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
         return bEqual;
     }
 
-    QFile file2(fi2.fileName());
+    QFile file2(fileName2);
 
     if(!file2.open(QIODevice::ReadOnly))
     {
