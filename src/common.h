@@ -20,25 +20,19 @@
 
 #include <QAtomicInt>
 #include <QString>
+#include <algorithm>
 #include <map>
 
 template <class T>
 T min3( T d1, T d2, T d3 )
 {
-   if ( d1 < d2  &&  d1 < d3 ) return d1;
-   if ( d2 < d3 ) return d2;
-   return d3;
+   return std::min( std::min( d1, d2 ), d3 );
 }
 
 template <class T>
 T max3( T d1, T d2, T d3 )
 {
-
-   if ( d1 > d2  &&  d1 > d3 ) return d1;
-
-
-   if ( d2 > d3 ) return d2;
-   return d3;
+   return std::max( std::max( d1, d2 ), d3 );
 }
 
 inline int getAtomic(QAtomicInt& ai)
