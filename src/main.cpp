@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
     const QString bugsAddress = QStringLiteral("reeves.87""@""gmail.com");
 
     KAboutData aboutData(appName, i18nName,
-                         appVersion, description, KAboutLicense::GPL_V2, copyright, description,
+                         appVersion, description, KAboutLicense::GPL_V2, copyright, QString(),
                          homePage, bugsAddress);
 
     KAboutData::setApplicationData(aboutData);
