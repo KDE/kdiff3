@@ -41,15 +41,6 @@ T max3( T d1, T d2, T d3 )
    return d3;
 }
 
-template <class T>
-T minMaxLimiter( T d, T minimum, T maximum )
-{
-   Q_ASSERT(minimum<=maximum);
-   if ( d < minimum ) return minimum;
-   if ( d > maximum ) return maximum;
-   return d;
-}
-
 inline int getAtomic(QAtomicInt& ai)
 {
    return ai.load();

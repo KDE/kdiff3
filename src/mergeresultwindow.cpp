@@ -2581,12 +2581,12 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     }
     }
 
-    y = minMaxLimiter(y, 0, m_totalSize - 1);
+    y = qBound(0, y, m_totalSize - 1);
 
     calcIteratorFromLineNr(y, mlIt, melIt);
     str = melIt->getString(this);
 
-    x = minMaxLimiter(x, 0, (int)str.length());
+    x = qBound(0, x, (int)str.length());
 
     int newFirstLine = m_firstLine;
     int newHorizScrollOffset = m_horizScrollOffset;

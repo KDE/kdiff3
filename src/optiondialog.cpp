@@ -249,7 +249,7 @@ class OptionIntEdit : public QLineEdit, public OptionNum<int>
     void apply() override
     {
         const QIntValidator* v = static_cast<const QIntValidator*>(validator());
-        setCurrent( minMaxLimiter(text().toInt(), v->bottom(), v->top()) );
+        setCurrent( qBound(v->bottom(), text().toInt(), v->top()) );
 
         setText(getString());
     }
