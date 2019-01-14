@@ -17,6 +17,7 @@
 #include "merger.h"
 #include "options.h"
 
+#include <algorithm>
 #include <cmath>
 #include <cstdlib>
 
@@ -288,9 +289,9 @@ void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
     int fontWidth = fontMetrics().width('0');
     int xOffset = d->leftInfoWidth() * fontWidth;
 
-    int deltaX = d->m_horizScrollOffset - qMax(0, horizScrollOffset);
+    int deltaX = d->m_horizScrollOffset - std::max(0, horizScrollOffset);
 
-    d->m_horizScrollOffset = qMax(0, horizScrollOffset);
+    d->m_horizScrollOffset = std::max(0, horizScrollOffset);
 
     QRect r(xOffset, 0, width() - xOffset, height());
 
@@ -1067,7 +1068,7 @@ void DiffTextWindow::print(MyPainter& p, const QRect&, int firstLine, int nofLin
 
 void DiffTextWindowData::draw(MyPainter& p, const QRect& invalidRect, int deviceWidth, int beginLine, int endLine)
 {
-    m_lineNumberWidth = m_pOptions->m_bShowLineNumbers ? (int)log10((double)qMax(m_size, 1)) + 1 : 0;
+    m_lineNumberWidth = m_pOptions->m_bShowLineNumbers ? (int)log10((double)std::max(m_size, 1)) + 1 : 0;
 
     if(m_winIdx == 1)
     {
@@ -1569,7 +1570,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
 
     if(bWordWrap)
     {
-        d->m_lineNumberWidth = d->m_pOptions->m_bShowLineNumbers ? (int)log10((double)qMax(d->m_size, 1)) + 1 : 0;
+        d->m_lineNumberWidth = d->m_pOptions->m_bShowLineNumbers ? (int)log10((double)std::max(d->m_size, 1)) + 1 : 0;
 
         d->m_diff3WrapLineVector.resize(wrapLineVectorSize);
 
@@ -1626,7 +1627,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
         int wrapLineIdx = 0;
         int size = d->m_pDiff3LineVector->size();
         int firstD3LineIdx = wrapLineVectorSize > 0 ? 0 : cacheListIdx * s_linesPerRunnable;
-        int endIdx = wrapLineVectorSize > 0 ? size : qMin(firstD3LineIdx + s_linesPerRunnable, size);
+        int endIdx = wrapLineVectorSize > 0 ? size : std::min(firstD3LineIdx + s_linesPerRunnable, size);
         QVector<DiffTextWindowData::WrapLineCacheData>& wrapLineCache = d->m_wrapLineCacheList[cacheListIdx];
         int cacheListIdx2 = 0;
         QTextLayout textLayout(QString(), font(), this);
@@ -1721,7 +1722,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
             return;
         int size = d->m_pDiff3LineVector->size();
         int firstD3LineIdx = cacheListIdx * s_linesPerRunnable;
-        int endIdx = qMin(firstD3LineIdx + s_linesPerRunnable, size);
+        int endIdx = std::min(firstD3LineIdx + s_linesPerRunnable, size);
 
         int maxTextWidth = getAtomic(d->m_maxTextWidth); // current value
         QTextLayout textLayout(QString(), font(), this);
@@ -1876,7 +1877,7 @@ void DiffTextWindowFrame::setFirstLine(int firstLine)
     if(pDTW && pDTW->d->m_pDiff3LineVector)
     {
         QString s = i18n("Top line");
-        int lineNumberWidth = (int)log10((double)qMax(pDTW->d->m_size, 1)) + 1;
+        int lineNumberWidth = (int)log10((double)std::max(pDTW->d->m_size, 1)) + 1;
 
         int l = pDTW->calcTopLineInFile(firstLine);
 
