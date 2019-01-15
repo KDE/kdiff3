@@ -447,7 +447,7 @@ QDateTime FileAccess::lastModified() const
     return m_modificationTime;
 }
 
-static bool interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLength)
+bool FileAccess::interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLength)
 {
     ProgressProxy pp;
     const qint64 maxChunkSize = 100000;

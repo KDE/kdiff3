@@ -108,6 +108,8 @@ public:
 
    void reset();
 
+   bool interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLength);
+
    QUrl m_url;
    bool m_bValidData;
 
