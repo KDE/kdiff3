@@ -232,8 +232,6 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     t_DirectoryList m_dirListB;
     t_DirectoryList m_dirListC;
 
-    QString m_dirMergeStateFilename;
-
     void buildMergeMap(const QSharedPointer<DirectoryInfo>& dirInfo);
 
   private:
@@ -3234,12 +3232,10 @@ void DirectoryMergeWindow::slotSaveMergeState()
 {
     //slotStatusMsg(i18n("Saving Directory Merge State ..."));
 
-    QString s = QFileDialog::getSaveFileName(this, i18n("Save Directory Merge State As..."), QDir::currentPath());
-    if(!s.isEmpty())
+    QString dirMergeStateFilename = QFileDialog::getSaveFileName(this, i18n("Save Directory Merge State As..."), QDir::currentPath());
+    if(!dirMergeStateFilename.isEmpty())
     {
-        d->m_dirMergeStateFilename = s;
-
-        QFile file(d->m_dirMergeStateFilename);
+        QFile file(dirMergeStateFilename);
         bool bSuccess = file.open(QIODevice::WriteOnly);
         if(bSuccess)
         {
