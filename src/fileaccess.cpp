@@ -35,7 +35,6 @@
 #include <sys/types.h>
 
 #ifndef Q_OS_WIN
-#include <unistd.h> // Needed for creating symbolic links via symlink().
 #include <utime.h>
 #endif
 
@@ -71,7 +70,7 @@ void FileAccess::reset()
     //m_fileType = -1;
     m_pParent = nullptr;
     tmpFile.clear();
-    tmpFile = QSharedPointer<QTemporaryFile>(new QTemporaryFile());
+    tmpFile = QSharedPointer<QTemporaryFile>::create();
     realFile = nullptr;
 }
 
