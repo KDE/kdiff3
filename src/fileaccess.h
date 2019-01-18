@@ -15,6 +15,7 @@
 #include "ProgressProxyExtender.h"
 
 #include <QDir>
+#include <QFile>
 #include <QFileInfo>
 #include <QDateTime>
 #include <QSharedPointer>
@@ -90,7 +91,7 @@ public:
    static bool symLink( const QString& linkTarget, const QString& linkLocation );
 
    void addPath( const QString& txt );
-   QString getStatusText();
+   QString getStatusText() const;
 
    FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
 
@@ -101,6 +102,13 @@ public:
 
    QDir getBaseDirectory() const { return m_baseDir; }
 
+   bool open(const QFile::OpenMode flags);
+
+   qint64 read(char *data, const qint64 maxlen);
+   void close();
+
+   const QString errorString() const;
+
  private:
    friend class FileAccessJobHandler;
    void setUdsEntry(const KIO::UDSEntry& e);
@@ -108,7 +116,7 @@ public:
 
    void reset();
 
-   bool interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLength);
+   bool interruptableReadFile(void* pDestBuffer, qint64 maxLength);
 
    QUrl m_url;
    bool m_bValidData;
@@ -121,7 +129,8 @@ public:
    QString m_linkTarget;
    QString m_name;
    QString m_localCopy;
-   QSharedPointer<QTemporaryFile> tmpFile;
+   QSharedPointer<QTemporaryFile> tmpFile = nullptr;
+   QSharedPointer<QFile> realFile = nullptr;
 
    qint64 m_size;
    QDateTime m_modificationTime;

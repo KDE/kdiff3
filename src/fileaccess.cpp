@@ -14,6 +14,7 @@
 #include "Utils.h"
 
 #include <QDir>
+#include <QFile>
 #include <QtMath>
 #include <QProcess>
 #include <QRegExp>
@@ -71,6 +72,7 @@ void FileAccess::reset()
     m_pParent = nullptr;
     tmpFile.clear();
     tmpFile = QSharedPointer<QTemporaryFile>(new QTemporaryFile());
+    realFile = nullptr;
 }
 
 FileAccess::~FileAccess()
@@ -172,6 +174,7 @@ void FileAccess::loadData()
 #endif
     }
 
+    realFile = QSharedPointer<QFile>::create(absoluteFilePath());
     m_bValidData = true;
 }
 
@@ -447,7 +450,7 @@ QDateTime FileAccess::lastModified() const
     return m_modificationTime;
 }
 
-bool FileAccess::interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLength)
+bool FileAccess::interruptableReadFile(void* pDestBuffer, qint64 maxLength)
 {
     ProgressProxy pp;
     const qint64 maxChunkSize = 100000;
@@ -456,7 +459,7 @@ bool FileAccess::interruptableReadFile(QFile& f, void* pDestBuffer, qint64 maxLe
     while(i < maxLength)
     {
         qint64 nextLength = std::min(maxLength - i, maxChunkSize);
-        qint64 reallyRead = f.read((char*)pDestBuffer + i, nextLength);
+        qint64 reallyRead = read((char*)pDestBuffer + i, nextLength);
         if(reallyRead != nextLength)
         {
             return false;
@@ -476,18 +479,10 @@ bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
     if(!isNormal())
         return true;
 
-    if(!m_localCopy.isEmpty())
+    if(isLocal() || !m_localCopy.isEmpty())
     {
-        QFile f(m_localCopy);
-        if(f.open(QIODevice::ReadOnly))
-            return interruptableReadFile(f, pDestBuffer, maxLength); // maxLength == f.read( (char*)pDestBuffer, maxLength );
-    }
-    else if(isLocal())
-    {
-        QFile f(absoluteFilePath());
-
-        if(f.open(QIODevice::ReadOnly))
-            return interruptableReadFile(f, pDestBuffer, maxLength); //maxLength == f.read( (char*)pDestBuffer, maxLength );
+        if(open(QIODevice::ReadOnly))
+            return interruptableReadFile( pDestBuffer, maxLength); // maxLength == f.read( (char*)pDestBuffer, maxLength );
     }
     else
     {
@@ -585,6 +580,62 @@ QString FileAccess::getTempName() const
     return m_localCopy;
 }
 
+const QString FileAccess::errorString() const
+{
+    return getStatusText();
+}
+
+bool FileAccess::open(const QFile::OpenMode flags)
+{
+    bool result;
+    result = createLocalCopy();
+    if(!result){
+        setStatusText(i18n("Creating temp copy of %1 failed.", absoluteFilePath()));
+        return result;
+    }
+
+    if(m_localCopy.isEmpty() && realFile != nullptr)
+    {
+        bool r = realFile->open(flags);
+
+        setStatusText(i18n("Opening %1 failed. %2", absoluteFilePath(), realFile->errorString()));
+        return r;
+    }
+
+    bool r = tmpFile->open();
+    setStatusText(i18n("Opening %1 failed. %2", tmpFile->fileName(), tmpFile->errorString()));
+    return r;
+}
+
+
+qint64 FileAccess::read(char *data, const qint64 maxlen)
+{
+    qint64 len = 0;
+    if(m_localCopy.isEmpty() && realFile != nullptr)
+    {
+        len = realFile->read(data, maxlen);
+    }
+    else
+       len = tmpFile->read(data, maxlen);
+
+    if(len != maxlen)
+    {
+        setStatusText(i18n("Error reading from %1", absoluteFilePath()));
+    }
+    return len;
+}
+
+void FileAccess::close()
+{
+    if(m_localCopy.isEmpty() && realFile != nullptr)
+    {
+        realFile->close();
+    }
+
+    tmpFile->close();
+}
+
+
 bool FileAccess::createLocalCopy()
 {
     if(isLocal() || !m_localCopy.isEmpty())
@@ -665,7 +716,7 @@ qint64 FileAccess::sizeForReading()
         return size();
 }
 
-QString FileAccess::getStatusText()
+QString FileAccess::getStatusText() const
 {
     return m_statusText;
 }

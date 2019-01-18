@@ -717,49 +717,24 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
         }
     }
 
-    QString fileName1 = fi1.absoluteFilePath();
-    QString fileName2 = fi2.absoluteFilePath();
-
-    if(!fi1.createLocalCopy())
-    {
-        status = i18n("Creating temp copy of %1 failed.", fileName1);
-        return bEqual;
-    }
-
-    if(!fi2.createLocalCopy())
-    {
-        status = i18n("Creating temp copy of %1 failed.", fileName2);
-        return bEqual;
-    }
-
-    //This is what the old TempRemover class would do. Should probally get path to temp file not just the name.
-    if(!fi1.isLocal())
-        fileName1 = fi1.getTempName();
-    if(!fi2.isLocal())
-        fileName2 = fi2.getTempName();
-
     std::vector<char> buf1(100000);
     std::vector<char> buf2(buf1.size());
 
-    QFile file1(fileName1);
-
-    if(!file1.open(QIODevice::ReadOnly))
+    if(!fi1.open(QIODevice::ReadOnly))
     {
-        status = i18n("Opening %1 failed. %2", fileName1, file1.errorString());
+        status = fi1.errorString();
         return bEqual;
     }
 
-    QFile file2(fileName2);
-
-    if(!file2.open(QIODevice::ReadOnly))
+    if(!fi2.open(QIODevice::ReadOnly))
     {
-        status = i18n("Opening %1 failed. %2", fileName2, file2.errorString());
+        status = fi2.errorString();
         return bEqual;
     }
 
     pp.setInformation(i18n("Comparing file..."), 0, false);
     typedef qint64 t_FileSize;
-    t_FileSize fullSize = file1.size();
+    t_FileSize fullSize = fi1.size();
     t_FileSize sizeLeft = fullSize;
 
     pp.setMaxNofSteps(fullSize / buf1.size());
@@ -767,15 +742,15 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
     while(sizeLeft > 0 && !pp.wasCancelled())
     {
         qint64 len = std::min(sizeLeft, (t_FileSize)buf1.size());
-        if(len != file1.read(&buf1[0], len))
+        if(len != fi1.read(&buf1[0], len))
         {
-            status = i18n("Error reading from %1", fileName1);
+            status = fi1.errorString();
             return bEqual;
         }
 
-        if(len != file2.read(&buf2[0], len))
+        if(len != fi2.read(&buf2[0], len))
         {
-            status = i18n("Error reading from %1", fileName2);
+            status = fi2.errorString();;
             return bEqual;
         }
 
