@@ -942,7 +942,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         m_pDirShowFilesOnlyInB->setChecked(true);
         m_pDirShowFilesOnlyInC->setChecked(true);
     }
-
+    Q_ASSERT(dirInfo != nullptr);
     FileAccess dirA = dirInfo->dirA();
     FileAccess dirB = dirInfo->dirB();
     FileAccess dirC = dirInfo->dirC();
