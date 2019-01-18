@@ -2818,8 +2818,8 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::deleteFLD(const QString&
             for(it = dirList.begin(); it != dirList.end(); ++it) // for each file...
             {
                 FileAccess& fi2 = *it;
-                if(fi2.fileName() == "." || fi2.fileName() == "..")
-                    continue;
+                Q_ASSERT(fi2.fileName() != "." && fi2.fileName() != "..");
+
                 bSuccess = deleteFLD(fi2.absoluteFilePath(), false);
                 if(!bSuccess) break;
             }

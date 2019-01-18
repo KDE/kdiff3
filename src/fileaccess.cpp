@@ -1204,6 +1204,7 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
         fa.m_pParent = m_pFileAccess;
         fa.setUdsEntry(e);
 
+        //must be manually filtered KDE does not supply API for ignoring these.
         if(fa.fileName() != "." && fa.fileName() != "..")
         {
             QUrl url = parentUrl.adjusted(QUrl::StripTrailingSlash);
