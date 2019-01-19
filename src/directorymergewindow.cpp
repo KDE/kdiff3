@@ -228,9 +228,6 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     bool mergeFLD(const QString& nameA, const QString& nameB, const QString& nameC,
                   const QString& nameDest, bool& bSingleFileMerge);
 
-    t_DirectoryList m_dirListA;
-    t_DirectoryList m_dirListB;
-    t_DirectoryList m_dirListC;
 
     void buildMergeMap(const QSharedPointer<DirectoryInfo>& dirInfo);
 
@@ -842,7 +839,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 
     if(dirInfo->dirA().isValid())
     {
-        for(dirIterator = m_dirListA.begin(); dirIterator != m_dirListA.end(); ++dirIterator)
+        for(dirIterator = dirInfo->getDirListA().begin(); dirIterator != dirInfo->getDirListA().end(); ++dirIterator)
         {
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
 
@@ -853,7 +850,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 
     if(dirInfo->dirB().isValid())
     {
-        for(dirIterator = m_dirListB.begin(); dirIterator != m_dirListB.end(); ++dirIterator)
+        for(dirIterator = dirInfo->getDirListB().begin(); dirIterator != dirInfo->getDirListB().end(); ++dirIterator)
         {
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
 
@@ -864,7 +861,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 
     if(dirInfo->dirC().isValid())
     {
-        for(dirIterator = m_dirListC.begin(); dirIterator != m_dirListC.end(); ++dirIterator)
+        for(dirIterator = dirInfo->getDirListC().begin(); dirIterator != dirInfo->getDirListC().end(); ++dirIterator)
         {
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
 
@@ -1005,20 +1002,14 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     bool bListDirSuccessA = true;
     bool bListDirSuccessB = true;
     bool bListDirSuccessC = true;
-    m_dirListA.clear();
-    m_dirListB.clear();
-    m_dirListC.clear();
+
     if(dirA.isValid())
     {
         pp.setInformation(i18n("Reading Directory A"));
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessA = dirA.listDir(&m_dirListA,
-                                        m_pOptions->m_bDmRecursiveDirs, m_pOptions->m_bDmFindHidden,
-                                        m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
-                                        m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
-                                        m_pOptions->m_bDmUseCvsIgnore);
+        bListDirSuccessA = dirInfo->listDirA(*m_pOptions);
     }
 
     if(dirB.isValid())
@@ -1027,11 +1018,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessB = dirB.listDir(&m_dirListB,
-                                        m_pOptions->m_bDmRecursiveDirs, m_pOptions->m_bDmFindHidden,
-                                        m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
-                                        m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
-                                        m_pOptions->m_bDmUseCvsIgnore);
+        bListDirSuccessB = dirInfo->listDirB(*m_pOptions);
     }
 
     e_MergeOperation eDefaultMergeOp;
@@ -1041,11 +1028,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessC = dirC.listDir(&m_dirListC,
-                                        m_pOptions->m_bDmRecursiveDirs, m_pOptions->m_bDmFindHidden,
-                                        m_pOptions->m_DmFilePattern, m_pOptions->m_DmFileAntiPattern,
-                                        m_pOptions->m_DmDirAntiPattern, m_pOptions->m_bDmFollowDirLinks,
-                                        m_pOptions->m_bDmUseCvsIgnore);
+        bListDirSuccessC = dirInfo->listDirC(*m_pOptions);
 
         eDefaultMergeOp = eMergeABCToDest;
     }
