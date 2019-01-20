@@ -3118,7 +3118,7 @@ void DirectoryMergeInfo::setInfo(
         bHideDest = true;
     }
     else
-        m_pA->setText(!dirC.isValid() ? i18n("A") + ":    " : i18n("A (Base): "));
+        m_pA->setText(!dirC.isValid() ? i18n("A:    ") : i18n("A (Base): "));
 
     m_pInfoA->setText(dirA.prettyAbsPath());
 
@@ -3128,7 +3128,7 @@ void DirectoryMergeInfo::setInfo(
         bHideDest = true;
     }
     else
-        m_pB->setText(i18n("B") + ":    ");
+        m_pB->setText(i18n("B:    "));
     m_pInfoB->setText(dirB.prettyAbsPath());
 
     if(dirC.absoluteFilePath() == dirDest.absoluteFilePath())
@@ -3137,7 +3137,7 @@ void DirectoryMergeInfo::setInfo(
         bHideDest = true;
     }
     else
-        m_pC->setText(i18n("C") + ":    ");
+        m_pC->setText(i18n("C:    "));
     m_pInfoC->setText(dirC.prettyAbsPath());
 
     m_pDest->setText(i18n("Dest: "));
