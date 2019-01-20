@@ -566,7 +566,6 @@ void KDiff3App::initActions(KActionCollection* ac)
 #include "xpm/up1arrow.xpm"
 #include "xpm/up2arrow.xpm"
 #include "xpm/upend.xpm"
-    //#include "reload.xpm"
 
     goCurrent = GuiUtils::createAction<QAction>(i18n("Go to Current Delta"), QIcon(QPixmap(currentpos)), i18n("Current\nDelta"), QKeySequence(Qt::CTRL + Qt::Key_Space), this, &KDiff3App::slotGoCurrent, ac, "go_current");
 
