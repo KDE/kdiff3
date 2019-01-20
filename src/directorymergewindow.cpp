@@ -234,8 +234,9 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
   private:
     class FileKey
     {
-      public:
+      private:
         const FileAccess* m_pFA;
+      public:
         explicit FileKey(const FileAccess& fa)
             : m_pFA(&fa) {}
 
