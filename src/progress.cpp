@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2003-2011 by Joachim Eibl                               *
  *   joachim.eibl at gmx.de                                                *
+ *   Copyright (C) 2019 Michael Reeves <reeves.87@gmail.com>               *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -224,6 +225,11 @@ void ProgressDialog::setCurrent(qint64 subCurrent, bool bRedrawUpdate)
     ProgressLevelData& pld = m_progressStack.back();
     pld.m_current = subCurrent;
     recalc(bRedrawUpdate);
+}
+
+void ProgressDialog::clear()
+{
+    m_progressStack.clear();
 }
 
 // The progressbar goes from 0 to 1 usually.
@@ -508,6 +514,11 @@ void ProgressProxy::setCurrent(qint64 current, bool bRedrawUpdate)
 void ProgressProxy::step(bool bRedrawUpdate)
 {
     g_pProgressDialog->step(bRedrawUpdate);
+}
+
+void ProgressProxy::clear()
+{
+    g_pProgressDialog->clear();
 }
 
 void ProgressProxy::setMaxNofSteps(const qint64 maxNofSteps)

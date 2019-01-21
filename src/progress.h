@@ -1,12 +1,14 @@
 /***************************************************************************
  *   Copyright (C) 2003-2007 by Joachim Eibl                               *
  *   joachim.eibl at gmx.de                                                *
+ *   Copyright (C) 2019 Michael Reeves <reeves.87@gmail.com>               *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  ***************************************************************************/
+
 
 #ifndef PROGRESS_H
 #define PROGRESS_H
@@ -32,7 +34,8 @@ public:
    void setInformation( const QString& info, int current, bool bRedrawUpdate=true );
    void setCurrent( qint64 current, bool bRedrawUpdate=true  );
    void step( bool bRedrawUpdate=true );
-   void setMaxNofSteps(const qint64 dMaxNofSteps );
+   void clear();
+   void setMaxNofSteps(const qint64 dMaxNofSteps);
    void addNofSteps(const qint64 nofSteps );
    void push();
    void pop(bool bRedrawUpdate=true);
@@ -120,6 +123,7 @@ public:
    void setInformation( const QString& info, int current, bool bRedrawUpdate=true );
    void setCurrent( qint64 current, bool bRedrawUpdate=true  );
    void step( bool bRedrawUpdate=true );
+   void clear();
    void setMaxNofSteps( const qint64 maxNofSteps );
    void addNofSteps( const qint64 nofSteps );
    bool wasCancelled();

@@ -189,13 +189,13 @@ public:
    bool isBinaryEqualBC() const { return bBinaryBEqC; }
    bool isBinaryEqualAB() const { return bBinaryAEqB; }
 
-   bool bBinaryAEqC : 1;
-   bool bBinaryBEqC : 1;
-   bool bBinaryAEqB : 1;
+   bool bBinaryAEqC = false;
+   bool bBinaryBEqC = false;
+   bool bBinaryAEqB = false;
 
-   bool bTextAEqC : 1;
-   bool bTextBEqC : 1;
-   bool bTextAEqB : 1;
+   bool bTextAEqC = false;
+   bool bTextBEqC = false;
+   bool bTextAEqB = false;
 
 private:
    int nofUnsolvedConflicts;

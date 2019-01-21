@@ -164,8 +164,9 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
         else
             errors = m_sd1.readAndPreprocess(m_pOptions->m_pEncodingA, m_pOptions->m_bAutoDetectUnicodeA);
 
-        if(!errors.isEmpty())
+        if(!errors.isEmpty()){
             KMessageBox::errorList(m_pOptionDialog, i18n("Errors occurred during pre-processing of file A."), errors);
+        }
 
         pp.step();
 
@@ -187,91 +188,101 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
         else
             pp.setMaxNofSteps(6); // 3 comparisons, 3 finediffs
     }
+
     if(pTotalDiffStatus)
         pTotalDiffStatus->reset();
-    // Run the diff.
-    if(m_sd3.isEmpty())
+    if(errors.isEmpty())
     {
-        pTotalDiffStatus->bBinaryAEqB = m_sd1.isBinaryEqualWith(m_sd2);
-        pp.setInformation(i18n("Diff: A <-> B"));
-
-        runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, 1, 2,
-                &m_manualDiffHelpList, &m_pOptionDialog->m_options);
-
-        pp.step();
-
-        pp.setInformation(i18n("Linediff: A <-> B"));
-        calcDiff3LineListUsingAB(&m_diffList12, m_diff3LineList);
-        pTotalDiffStatus->bTextAEqB = fineDiff(m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
-        if(m_sd1.getSizeBytes() == 0) pTotalDiffStatus->bTextAEqB = false;
-
-        pp.step();
-    }
-    else
-    {
-        if(bLoadFiles)
+        // Run the diff.
+        if(m_sd3.isEmpty())
         {
-            pp.setInformation(i18n("Loading C"));
-            if(bUseCurrentEncoding)
-                errors=m_sd3.readAndPreprocess(m_sd3.getEncoding(), false);
-            else
-                errors=m_sd3.readAndPreprocess(m_pOptions->m_pEncodingC, m_pOptions->m_bAutoDetectUnicodeC);
+            pTotalDiffStatus->bBinaryAEqB = m_sd1.isBinaryEqualWith(m_sd2);
+            pp.setInformation(i18n("Diff: A <-> B"));
 
-            if(!errors.isEmpty())
-                KMessageBox::errorList(m_pOptionDialog, i18n("Errors occurred during pre-processing of file C."), errors);
+            runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, 1, 2,
+                    &m_manualDiffHelpList, &m_pOptionDialog->m_options);
+
+            pp.step();
+
+            pp.setInformation(i18n("Linediff: A <-> B"));
+            calcDiff3LineListUsingAB(&m_diffList12, m_diff3LineList);
+            pTotalDiffStatus->bTextAEqB = fineDiff(m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
+            if(m_sd1.getSizeBytes() == 0) pTotalDiffStatus->bTextAEqB = false;
 
             pp.step();
         }
-
-        pTotalDiffStatus->bBinaryAEqB = m_sd1.isBinaryEqualWith(m_sd2);
-        pTotalDiffStatus->bBinaryAEqC = m_sd1.isBinaryEqualWith(m_sd3);
-        pTotalDiffStatus->bBinaryBEqC = m_sd3.isBinaryEqualWith(m_sd2);
-
-        pp.setInformation(i18n("Diff: A <-> B"));
-        runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, 1, 2,
-                &m_manualDiffHelpList, &m_pOptionDialog->m_options);
-        pp.step();
-        pp.setInformation(i18n("Diff: B <-> C"));
-        runDiff(m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23, 2, 3,
-                &m_manualDiffHelpList, &m_pOptionDialog->m_options);
-        pp.step();
-        pp.setInformation(i18n("Diff: A <-> C"));
-        runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13, 1, 3,
-                &m_manualDiffHelpList, &m_pOptionDialog->m_options);
-        pp.step();
-
-        calcDiff3LineListUsingAB(&m_diffList12, m_diff3LineList);
-        calcDiff3LineListUsingAC(&m_diffList13, m_diff3LineList);
-        correctManualDiffAlignment(m_diff3LineList, &m_manualDiffHelpList);
-        calcDiff3LineListTrim(m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList);
-
-        if(m_pOptions->m_bDiff3AlignBC)
+        else
         {
-            calcDiff3LineListUsingBC(&m_diffList23, m_diff3LineList);
+            if(bLoadFiles)
+            {
+                pp.setInformation(i18n("Loading C"));
+                if(bUseCurrentEncoding)
+                    errors=m_sd3.readAndPreprocess(m_sd3.getEncoding(), false);
+                else
+                    errors=m_sd3.readAndPreprocess(m_pOptions->m_pEncodingC, m_pOptions->m_bAutoDetectUnicodeC);
+
+                if(!errors.isEmpty())
+                    KMessageBox::errorList(m_pOptionDialog, i18n("Errors occurred during pre-processing of file C."), errors);
+
+                pp.step();
+            }
+
+            pTotalDiffStatus->bBinaryAEqB = m_sd1.isBinaryEqualWith(m_sd2);
+            pTotalDiffStatus->bBinaryAEqC = m_sd1.isBinaryEqualWith(m_sd3);
+            pTotalDiffStatus->bBinaryBEqC = m_sd3.isBinaryEqualWith(m_sd2);
+
+            pp.setInformation(i18n("Diff: A <-> B"));
+            runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, 1, 2,
+                    &m_manualDiffHelpList, &m_pOptionDialog->m_options);
+            pp.step();
+            pp.setInformation(i18n("Diff: B <-> C"));
+            runDiff(m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23, 2, 3,
+                    &m_manualDiffHelpList, &m_pOptionDialog->m_options);
+            pp.step();
+            pp.setInformation(i18n("Diff: A <-> C"));
+            runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13, 1, 3,
+                    &m_manualDiffHelpList, &m_pOptionDialog->m_options);
+            pp.step();
+
+            calcDiff3LineListUsingAB(&m_diffList12, m_diff3LineList);
+            calcDiff3LineListUsingAC(&m_diffList13, m_diff3LineList);
             correctManualDiffAlignment(m_diff3LineList, &m_manualDiffHelpList);
             calcDiff3LineListTrim(m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList);
-        }
-        debugLineCheck(m_diff3LineList, m_sd1.getSizeLines(), 1);
-        debugLineCheck(m_diff3LineList, m_sd2.getSizeLines(), 2);
-        debugLineCheck(m_diff3LineList, m_sd3.getSizeLines(), 3);
 
-        pp.setInformation(i18n("Linediff: A <-> B"));
-        pTotalDiffStatus->bTextAEqB = fineDiff(m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
-        pp.step();
-        pp.setInformation(i18n("Linediff: B <-> C"));
-        pTotalDiffStatus->bTextBEqC = fineDiff(m_diff3LineList, 2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
-        pp.step();
-        pp.setInformation(i18n("Linediff: A <-> C"));
-        pTotalDiffStatus->bTextAEqC = fineDiff(m_diff3LineList, 3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
-        pp.step();
-        if(m_sd1.getSizeBytes() == 0) {
-            pTotalDiffStatus->bTextAEqB = false;
-            pTotalDiffStatus->bTextAEqC = false;
+            if(m_pOptions->m_bDiff3AlignBC)
+            {
+                calcDiff3LineListUsingBC(&m_diffList23, m_diff3LineList);
+                correctManualDiffAlignment(m_diff3LineList, &m_manualDiffHelpList);
+                calcDiff3LineListTrim(m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList);
+            }
+            debugLineCheck(m_diff3LineList, m_sd1.getSizeLines(), 1);
+            debugLineCheck(m_diff3LineList, m_sd2.getSizeLines(), 2);
+            debugLineCheck(m_diff3LineList, m_sd3.getSizeLines(), 3);
+
+            pp.setInformation(i18n("Linediff: A <-> B"));
+            pTotalDiffStatus->bTextAEqB = fineDiff(m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
+            pp.step();
+            pp.setInformation(i18n("Linediff: B <-> C"));
+            pTotalDiffStatus->bTextBEqC = fineDiff(m_diff3LineList, 2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
+            pp.step();
+            pp.setInformation(i18n("Linediff: A <-> C"));
+            pTotalDiffStatus->bTextAEqC = fineDiff(m_diff3LineList, 3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
+            pp.step();
+            if(m_sd1.getSizeBytes() == 0) {
+                pTotalDiffStatus->bTextAEqB = false;
+                pTotalDiffStatus->bTextAEqC = false;
+            }
+            if(m_sd2.getSizeBytes() == 0) {
+                pTotalDiffStatus->bTextAEqB = false;
+                pTotalDiffStatus->bTextBEqC = false;
+            }
         }
-        if(m_sd2.getSizeBytes() == 0) {
-            pTotalDiffStatus->bTextAEqB = false;
-            pTotalDiffStatus->bTextBEqC = false;
-        }
+    }
+    else
+    {
+        //We skip comparison operations on error.
+        pp.clear();
+        pp.recalc();
     }
     m_diffBufferInfo.init(&m_diff3LineList, &m_diff3LineVector,
                           m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(),

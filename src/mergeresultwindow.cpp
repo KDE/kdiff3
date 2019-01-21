@@ -3346,9 +3346,12 @@ void Overview::paintEvent(QPaintEvent*)
 
     QPainter painter(this);
     painter.drawPixmap(0, 0, m_pixmap);
-
-    int y1 = h * m_firstLine / m_nofLines - 1;
-    int h1 = h * m_pageHeight / m_nofLines + 3;
+    int y1=0, h1=0;
+    if(m_nofLines > 0)
+    {
+        y1 = h * m_firstLine / m_nofLines - 1;
+        h1 = h * m_pageHeight / m_nofLines + 3;
+    }
     painter.setPen(Qt::black);
     painter.drawRect(1, y1, w - 1, h1);
 }
