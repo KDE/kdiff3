@@ -522,6 +522,12 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     QString fileNameOut2;
     QStringList errors;
 
+    if(m_fileAccess.isValid() && !m_fileAccess.isNormal())
+    {
+        errors.append(i18n("%1 is not a normal file.", m_fileAccess.prettyAbsPath()));
+        return errors;
+    }
+
     bool bTempFileFromClipboard = !m_fileAccess.isValid();
 
     // Detect the input for the preprocessing operations
@@ -559,6 +565,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
 
     FileAccess faIn(fileNameIn1);
     qint64 fileInSize = faIn.size();
+
 
     if(faIn.exists())
     {
