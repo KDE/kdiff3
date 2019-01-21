@@ -1078,11 +1078,15 @@ void FileAccessJobHandler::slotSimpleJobResult(KJob* pJob)
 }
 
 // Copy local or remote files.
-bool FileAccessJobHandler::copyFile(const QString& dest)
+bool FileAccessJobHandler::copyFile(const QString& inDest)
 {
     ProgressProxyExtender pp;
-    QUrl destUrl = QUrl::fromUserInput(dest, QString(""), QUrl::AssumeLocalFile);
+    QUrl destUrl = QUrl::fromUserInput(inDest, QString(""), QUrl::AssumeLocalFile);
+    FileAccess dest;
+    dest.setFile(destUrl);
+
     m_pFileAccess->setStatusText(QString());
+    if(!m_pFileAccess->isNormal() || !dest.isNormal()) return false;
 
     int permissions = (m_pFileAccess->isExecutable() ? 0111 : 0) + (m_pFileAccess->isWritable() ? 0222 : 0) + (m_pFileAccess->isReadable() ? 0444 : 0);
     m_bSuccess = false;
@@ -1090,7 +1094,7 @@ bool FileAccessJobHandler::copyFile(const QString& dest)
     connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
     //connect(pJob, static_cast<void (KIO::FileCopyJob::*)(KJob*,unsigned long)>(&KIO::FileCopyJob::percent), &pp, &ProgressProxyExtender::slotPercent);
     ProgressProxy::enterEventLoop(pJob,
-                                  i18n("Copying file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest));
+                                  i18n("Copying file: %1 -> %2", m_pFileAccess->prettyAbsPath(), inDest));
 
     return m_bSuccess;
     // Note that the KIO-slave preserves the original date, if this is supported.
