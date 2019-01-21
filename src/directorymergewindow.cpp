@@ -398,7 +398,7 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
 
             if(s_OpCol == index.column())
             {
-                bool bDir = pMFI->dirA() || pMFI->dirB() || pMFI->dirC();
+                bool bDir = pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC();
                 switch(pMFI->getOperation())
                 {
                     case eNoOperation:
@@ -486,20 +486,20 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
             if(s_NameCol == index.column())
             {
                 return PixMapUtils::getOnePixmap(eAgeEnd, pMFI->isLinkA() || pMFI->isLinkB() || pMFI->isLinkC(),
-                                                 pMFI->dirA() || pMFI->dirB() || pMFI->dirC());
+                                                 pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC());
             }
 
             if(s_ACol == index.column())
             {
-                return PixMapUtils::getOnePixmap(pMFI->m_ageA, pMFI->isLinkA(), pMFI->dirA());
+                return PixMapUtils::getOnePixmap(pMFI->m_ageA, pMFI->isLinkA(), pMFI->isDirA());
             }
             if(s_BCol == index.column())
             {
-                return PixMapUtils::getOnePixmap(pMFI->m_ageB, pMFI->isLinkB(), pMFI->dirB());
+                return PixMapUtils::getOnePixmap(pMFI->m_ageB, pMFI->isLinkB(), pMFI->isDirB());
             }
             if(s_CCol == index.column())
             {
-                return PixMapUtils::getOnePixmap(pMFI->m_ageC, pMFI->isLinkC(), pMFI->dirC());
+                return PixMapUtils::getOnePixmap(pMFI->m_ageC, pMFI->isLinkC(), pMFI->isDirC());
             }
         }
         else if(role == Qt::TextAlignmentRole)
@@ -814,7 +814,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThre
                                                                       int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges)
 {
     MergeFileInfos* pMFI = getMFI(mi);
-    if(pMFI->dirA() || pMFI->dirB() || pMFI->dirC())
+    if(pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC())
     {
         ++nofDirs;
     }
@@ -1418,7 +1418,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
 
     if(m_pOptions->m_bDmFullAnalysis)
     {
-        if((mfi.existsInA() && mfi.dirA()) || (mfi.existsInB() && mfi.dirB()) || (mfi.existsInC() && mfi.dirC()))
+        if((mfi.existsInA() && mfi.isDirA()) || (mfi.existsInB() && mfi.isDirB()) || (mfi.existsInC() && mfi.isDirC()))
         {
             // If any input is a directory, don't start any comparison.
             mfi.m_bEqualAB = mfi.existsInA() && mfi.existsInB();
@@ -1456,14 +1456,14 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
         QString eqStatus;
         if(mfi.existsInA() && mfi.existsInB())
         {
-            if(mfi.dirA())
+            if(mfi.isDirA())
                 mfi.m_bEqualAB = true;
             else
                 mfi.m_bEqualAB = fastFileComparison(*mfi.getFileInfoA(), *mfi.getFileInfoB(), bError, eqStatus);
         }
         if(mfi.existsInA() && mfi.existsInC())
         {
-            if(mfi.dirA())
+            if(mfi.isDirA())
                 mfi.m_bEqualAC = true;
             else
                 mfi.m_bEqualAC = fastFileComparison(*mfi.getFileInfoA(), *mfi.getFileInfoC(), bError, eqStatus);
@@ -1474,7 +1474,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
                 mfi.m_bEqualBC = true;
             else
             {
-                if(mfi.dirB())
+                if(mfi.isDirB())
                     mfi.m_bEqualBC = true;
                 else
                     mfi.m_bEqualBC = fastFileComparison(*mfi.getFileInfoB(), *mfi.getFileInfoC(), bError, eqStatus);
@@ -1493,9 +1493,9 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
     if(mfi.isLinkA() != mfi.isLinkC()) mfi.m_bEqualAC = false;
     if(mfi.isLinkB() != mfi.isLinkC()) mfi.m_bEqualBC = false;
 
-    if(mfi.dirA() != mfi.dirB()) mfi.m_bEqualAB = false;
-    if(mfi.dirA() != mfi.dirC()) mfi.m_bEqualAC = false;
-    if(mfi.dirB() != mfi.dirC()) mfi.m_bEqualBC = false;
+    if(mfi.isDirA() != mfi.isDirB()) mfi.m_bEqualAB = false;
+    if(mfi.isDirA() != mfi.isDirC()) mfi.m_bEqualAC = false;
+    if(mfi.isDirB() != mfi.isDirC()) mfi.m_bEqualBC = false;
 
     Q_ASSERT(eNew == 0 && eMiddle == 1 && eOld == 2);
 
@@ -1585,7 +1585,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setPixmaps(MergeFileInfos& mfi, bool)
 {
-    if(mfi.dirA() || mfi.dirB() || mfi.dirC())
+    if(mfi.isDirA() || mfi.isDirB() || mfi.isDirC())
     {
         mfi.m_ageA = eNotThere;
         mfi.m_ageB = eNotThere;
@@ -1776,7 +1776,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
             }
             else if(pMFI->existsInA() && pMFI->existsInB())
             {
-                if(!bCopyNewer || pMFI->dirA())
+                if(!bCopyNewer || pMFI->isDirA())
                     setMergeOperation(mi, eDefaultMergeOp);
                 else if(bCopyNewer && pMFI->m_bConflictingAges)
                 {
@@ -2104,7 +2104,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::isDir(const QModelIndex&
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI != nullptr)
     {
-        return mi.column() == s_ACol ? pMFI->dirA() : mi.column() == s_BCol ? pMFI->dirB() : pMFI->dirC();
+        return mi.column() == s_ACol ? pMFI->isDirA() : mi.column() == s_BCol ? pMFI->isDirB() : pMFI->isDirC();
     }
     return false;
 }
@@ -2163,7 +2163,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::selectItemAndColumn(cons
 //   pMFI->m_pDMI = this; //no not here
 //   m_pMFI = pMFI;
 //   TotalDiffStatus& tds = pMFI->m_totalDiffStatus;
-//   if ( m_pMFI->dirA() || m_pMFI->dirB() || m_pMFI->dirC() )
+//   if ( m_pMFI->dirA() || m_pMFI->dirB() || m_pMFI->isDirC() )
 //   {
 //   }
 //   else
@@ -2222,7 +2222,7 @@ void DirectoryMergeWindow::compareCurrentFile()
 
     if(MergeFileInfos* pMFI = d->getMFI(currentIndex()))
     {
-        if(!(pMFI->dirA() || pMFI->dirB() || pMFI->dirC()))
+        if(!(pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC()))
         {
             emit startDiffMerge(
                 pMFI->existsInA() ? pMFI->getFileInfoA()->absoluteFilePath() : QString(""),
@@ -2288,7 +2288,7 @@ bool DirectoryMergeWindow::isFileSelected()
 {
     if(MergeFileInfos* pMFI = d->getMFI(currentIndex()))
     {
-        return !(pMFI->dirA() || pMFI->dirB() || pMFI->dirC() || pMFI->conflictingFileTypes());
+        return !(pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC() || pMFI->conflictingFileTypes());
     }
     return false;
 }
@@ -3208,9 +3208,9 @@ QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi)
     vm.writeEntry("EqualBC", mfi.m_bEqualBC);
 
     vm.writeEntry("MergeOperation", (int)mfi.getOperation());
-    vm.writeEntry("DirA", mfi.dirA());
-    vm.writeEntry("DirB", mfi.dirB());
-    vm.writeEntry("DirC", mfi.dirC());
+    vm.writeEntry("DirA", mfi.isDirA());
+    vm.writeEntry("DirB", mfi.isDirB());
+    vm.writeEntry("DirC", mfi.isDirC());
     vm.writeEntry("LinkA", mfi.isLinkA());
     vm.writeEntry("LinkB", mfi.isLinkB());
     vm.writeEntry("LinkC", mfi.isLinkC());
@@ -3279,21 +3279,21 @@ void DirectoryMergeWindow::updateFileVisibilities()
         while(mi.isValid())
         {
             MergeFileInfos* pMFI = d->getMFI(mi);
-            bool bDir = pMFI->dirA() || pMFI->dirB() || pMFI->dirC();
+            bool bDir = pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC();
             if(loop == 0 && bDir)
             {
                 bool bChange = false;
-                if(!pMFI->m_bEqualAB && pMFI->dirA() == pMFI->dirB() && pMFI->isLinkA() == pMFI->isLinkB())
+                if(!pMFI->m_bEqualAB && pMFI->isDirA() == pMFI->isDirB() && pMFI->isLinkA() == pMFI->isLinkB())
                 {
                     pMFI->m_bEqualAB = true;
                     bChange = true;
                 }
-                if(!pMFI->m_bEqualBC && pMFI->dirC() == pMFI->dirB() && pMFI->isLinkC() == pMFI->isLinkB())
+                if(!pMFI->m_bEqualBC && pMFI->isDirC() == pMFI->isDirB() && pMFI->isLinkC() == pMFI->isLinkB())
                 {
                     pMFI->m_bEqualBC = true;
                     bChange = true;
                 }
-                if(!pMFI->m_bEqualAC && pMFI->dirA() == pMFI->dirC() && pMFI->isLinkA() == pMFI->isLinkC())
+                if(!pMFI->m_bEqualAC && pMFI->isDirA() == pMFI->isDirC() && pMFI->isLinkA() == pMFI->isLinkC())
                 {
                     pMFI->m_bEqualAC = true;
                     bChange = true;

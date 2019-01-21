@@ -76,11 +76,11 @@ bool MergeFileInfos::conflictingFileTypes()
         }
     }
 
-    if(dirA() || dirB() || dirC())
+    if(isDirA() || isDirB() || isDirC())
     {
-        if((existsInA() && !dirA()) ||
-           (existsInB() && !dirB()) ||
-           (existsInC() && !dirC()))
+        if((existsInA() && !isDirA()) ||
+           (existsInB() && !isDirB()) ||
+           (existsInC() && !isDirC()))
         {
             return true;
         }

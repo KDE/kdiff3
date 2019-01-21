@@ -58,9 +58,9 @@ class MergeFileInfos
     QString subPath() const;
     QString fileName() const;
 
-    bool dirA() const { return m_pFileInfoA ? m_pFileInfoA->isDir() : false; }
-    bool dirB() const { return m_pFileInfoB ? m_pFileInfoB->isDir() : false; }
-    bool dirC() const { return m_pFileInfoC ? m_pFileInfoC->isDir() : false; }
+    bool isDirA() const { return m_pFileInfoA ? m_pFileInfoA->isDir() : false; }
+    bool isDirB() const { return m_pFileInfoB ? m_pFileInfoB->isDir() : false; }
+    bool isDirC() const { return m_pFileInfoC ? m_pFileInfoC->isDir() : false; }
     bool isLinkA() const { return m_pFileInfoA ? m_pFileInfoA->isSymLink() : false; }
     bool isLinkB() const { return m_pFileInfoB ? m_pFileInfoB->isSymLink() : false; }
     bool isLinkC() const { return m_pFileInfoC ? m_pFileInfoC->isSymLink() : false; }
@@ -144,8 +144,8 @@ class MfiCompare
     }
     bool operator()(MergeFileInfos* pMFI1, MergeFileInfos* pMFI2)
     {
-        bool bDir1 = pMFI1->dirA() || pMFI1->dirB() || pMFI1->dirC();
-        bool bDir2 = pMFI2->dirA() || pMFI2->dirB() || pMFI2->dirC();
+        bool bDir1 = pMFI1->isDirA() || pMFI1->isDirB() || pMFI1->isDirC();
+        bool bDir2 = pMFI2->isDirA() || pMFI2->isDirB() || pMFI2->isDirC();
         if(bDir1 == bDir2) {
             if(mOrder == Qt::AscendingOrder)
             {
