@@ -609,6 +609,12 @@ bool FileAccess::open(const QFile::OpenMode flags)
 
 qint64 FileAccess::read(char *data, const qint64 maxlen)
 {
+    if(!isNormal()){
+        //This is not an error special files should be skipped
+        setStatusText(QString());
+        return 0;
+    }
+
     qint64 len = 0;
     if(m_localCopy.isEmpty() && realFile != nullptr)
     {

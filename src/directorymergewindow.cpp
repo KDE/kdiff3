@@ -668,6 +668,18 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
     status = "";
     bError = true;
 
+    if(fi1.isNormal() != fi2.isNormal())
+    {
+        status = i18n("Unable to compare non-normal file with normal file.");
+        return false;
+    }
+
+    if(!fi1.isNormal())
+    {
+        bError = false;
+        return false;
+    }
+
     if(!m_bFollowFileLinks)
     {
         if(fi1.isSymLink() != fi2.isSymLink())
