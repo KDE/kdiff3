@@ -240,11 +240,15 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         explicit FileKey(const FileAccess& fa)
             : m_pFA(&fa) {}
 
-        int getParents(const FileAccess* pFA, const FileAccess* v[]) const
+        quint32 getParents(const FileAccess* pFA, const FileAccess* v[], quint32 maxSize) const
         {
-            int s = 0;
+            quint32 s = 0;
             for(s = 0; pFA->parent() != nullptr; pFA = pFA->parent(), ++s)
+            {
+                if(s == maxSize)
+                    break;
                 v[s] = pFA;
+            }
             return s;
         }
 
@@ -257,10 +261,10 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         {
             const FileAccess* v1[100];
             const FileAccess* v2[100];
-            int v1Size = getParents(m_pFA, v1);
-            int v2Size = getParents(fk.m_pFA, v2);
+            quint32 v1Size = getParents(m_pFA, v1, 100);
+            quint32 v2Size = getParents(fk.m_pFA, v2, 100);
 
-            for(int i = 0; i < v1Size && i < v2Size; ++i)
+            for(quint32 i = 0; i < v1Size && i < v2Size; ++i)
             {
                 int r = v1[v1Size - i - 1]->fileName().compare(v2[v2Size - i - 1]->fileName(), s_eCaseSensitivity);
                 if(r < 0)
