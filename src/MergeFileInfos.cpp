@@ -65,6 +65,8 @@ QString MergeFileInfos::fileName() const
 
 bool MergeFileInfos::conflictingFileTypes()
 {
+    if((m_pFileInfoA && !m_pFileInfoA->isNormal()) || (m_pFileInfoB && !m_pFileInfoB->isNormal()) || (m_pFileInfoC && !m_pFileInfoC->isNormal()))
+        return true;
     // Now check if file/dir-types fit.
     if(isLinkA() || isLinkB() || isLinkC())
     {
