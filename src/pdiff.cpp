@@ -371,7 +371,7 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
             m_pMergeWindowFrame->show();
 
         // Try to create a meaningful but not too long caption
-        if(!isPart())
+        if(!isPart() && errors.isEmpty())
         {
             createCaption();
         }
