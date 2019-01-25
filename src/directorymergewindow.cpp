@@ -281,8 +281,8 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
 
     MergeFileInfos* m_pRoot;
 
-  public:
     t_fileMergeMap m_fileMergeMap;
+  public:
 
     bool m_bFollowDirLinks;
     bool m_bFollowFileLinks;
@@ -491,15 +491,15 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
 
             if(s_ACol == index.column())
             {
-                return PixMapUtils::getOnePixmap(pMFI->m_ageA, pMFI->isLinkA(), pMFI->isDirA());
+                return PixMapUtils::getOnePixmap(pMFI->getAgeA(), pMFI->isLinkA(), pMFI->isDirA());
             }
             if(s_BCol == index.column())
             {
-                return PixMapUtils::getOnePixmap(pMFI->m_ageB, pMFI->isLinkB(), pMFI->isDirB());
+                return PixMapUtils::getOnePixmap(pMFI->getAgeB(), pMFI->isLinkB(), pMFI->isDirB());
             }
             if(s_CCol == index.column())
             {
-                return PixMapUtils::getOnePixmap(pMFI->m_ageC, pMFI->isLinkC(), pMFI->isDirC());
+                return PixMapUtils::getOnePixmap(pMFI->getAgeC(), pMFI->isLinkC(), pMFI->isDirC());
             }
         }
         else if(role == Qt::TextAlignmentRole)
@@ -1508,48 +1508,48 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
     for(i = dateMap.rbegin(); i != dateMap.rend(); ++i)
     {
         int n = i->second;
-        if(n == 0 && mfi.m_ageA == eNotThere)
+        if(n == 0 && mfi.getAgeA() == eNotThere)
         {
-            mfi.m_ageA = (e_Age)age;
+            mfi.setAgeA((e_Age)age);
             ++age;
             if(mfi.m_bEqualAB)
             {
-                mfi.m_ageB = mfi.m_ageA;
+                mfi.setAgeB(mfi.getAgeA());
                 ++age;
             }
             if(mfi.m_bEqualAC)
             {
-                mfi.m_ageC = mfi.m_ageA;
+                mfi.setAgeC(mfi.getAgeA());
                 ++age;
             }
         }
-        else if(n == 1 && mfi.m_ageB == eNotThere)
+        else if(n == 1 && mfi.getAgeB() == eNotThere)
         {
-            mfi.m_ageB = (e_Age)age;
+            mfi.setAgeB((e_Age)age);
             ++age;
             if(mfi.m_bEqualAB)
             {
-                mfi.m_ageA = mfi.m_ageB;
+                mfi.setAgeA(mfi.getAgeB());
                 ++age;
             }
             if(mfi.m_bEqualBC)
             {
-                mfi.m_ageC = mfi.m_ageB;
+                mfi.setAgeC(mfi.getAgeB());
                 ++age;
             }
         }
-        else if(n == 2 && mfi.m_ageC == eNotThere)
+        else if(n == 2 && mfi.getAgeC() == eNotThere)
         {
-            mfi.m_ageC = (e_Age)age;
+            mfi.setAgeC((e_Age)age);
             ++age;
             if(mfi.m_bEqualAC)
             {
-                mfi.m_ageA = mfi.m_ageC;
+                mfi.setAgeA(mfi.getAgeC());
                 ++age;
             }
             if(mfi.m_bEqualBC)
             {
-                mfi.m_ageB = mfi.m_ageC;
+                mfi.setAgeB(mfi.getAgeC());
                 ++age;
             }
         }
@@ -1557,30 +1557,30 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
 
     // The checks below are necessary when the dates of the file are equal but the
     // files are not. One wouldn't expect this to happen, yet it happens sometimes.
-    if(mfi.existsInC() && mfi.m_ageC == eNotThere)
+    if(mfi.existsInC() && mfi.getAgeC() == eNotThere)
     {
-        mfi.m_ageC = (e_Age)age;
+        mfi.setAgeC((e_Age)age);
         ++age;
         mfi.m_bConflictingAges = true;
     }
-    if(mfi.existsInB() && mfi.m_ageB == eNotThere)
+    if(mfi.existsInB() && mfi.getAgeB() == eNotThere)
     {
-        mfi.m_ageB = (e_Age)age;
+        mfi.setAgeB((e_Age)age);
         ++age;
         mfi.m_bConflictingAges = true;
     }
-    if(mfi.existsInA() && mfi.m_ageA == eNotThere)
+    if(mfi.existsInA() && mfi.getAgeA() == eNotThere)
     {
-        mfi.m_ageA = (e_Age)age;
+        mfi.setAgeA((e_Age)age);
         ++age;
         mfi.m_bConflictingAges = true;
     }
 
-    if(mfi.m_ageA != eOld && mfi.m_ageB != eOld && mfi.m_ageC != eOld)
+    if(mfi.getAgeA() != eOld && mfi.getAgeB() != eOld && mfi.getAgeC() != eOld)
     {
-        if(mfi.m_ageA == eMiddle) mfi.m_ageA = eOld;
-        if(mfi.m_ageB == eMiddle) mfi.m_ageB = eOld;
-        if(mfi.m_ageC == eMiddle) mfi.m_ageC = eOld;
+        if(mfi.getAgeA() == eMiddle) mfi.setAgeA(eOld);
+        if(mfi.getAgeB() == eMiddle) mfi.setAgeB(eOld);
+        if(mfi.getAgeC() == eMiddle) mfi.setAgeC(eOld);
     }
 
     return true;
@@ -1590,32 +1590,32 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setPixmaps(MergeFileInfo
 {
     if(mfi.isDirA() || mfi.isDirB() || mfi.isDirC())
     {
-        mfi.m_ageA = eNotThere;
-        mfi.m_ageB = eNotThere;
-        mfi.m_ageC = eNotThere;
+        mfi.setAgeA(eNotThere);
+        mfi.setAgeB(eNotThere);
+        mfi.setAgeC(eNotThere);
         int age = eNew;
         if(mfi.existsInC())
         {
-            mfi.m_ageC = (e_Age)age;
-            if(mfi.m_bEqualAC) mfi.m_ageA = (e_Age)age;
-            if(mfi.m_bEqualBC) mfi.m_ageB = (e_Age)age;
+            mfi.setAgeC((e_Age)age);
+            if(mfi.m_bEqualAC) mfi.setAgeA((e_Age)age);
+            if(mfi.m_bEqualBC) mfi.setAgeB((e_Age)age);
             ++age;
         }
-        if(mfi.existsInB() && mfi.m_ageB == eNotThere)
+        if(mfi.existsInB() && mfi.getAgeB() == eNotThere)
         {
-            mfi.m_ageB = (e_Age)age;
-            if(mfi.m_bEqualAB) mfi.m_ageA = (e_Age)age;
+            mfi.setAgeB((e_Age)age);
+            if(mfi.m_bEqualAB) mfi.setAgeA((e_Age)age);
             ++age;
         }
-        if(mfi.existsInA() && mfi.m_ageA == eNotThere)
+        if(mfi.existsInA() && mfi.getAgeA() == eNotThere)
         {
-            mfi.m_ageA = (e_Age)age;
+            mfi.setAgeA((e_Age)age);
         }
-        if(mfi.m_ageA != eOld && mfi.m_ageB != eOld && mfi.m_ageC != eOld)
+        if(mfi.getAgeA() != eOld && mfi.getAgeB() != eOld && mfi.getAgeC() != eOld)
         {
-            if(mfi.m_ageA == eMiddle) mfi.m_ageA = eOld;
-            if(mfi.m_ageB == eMiddle) mfi.m_ageB = eOld;
-            if(mfi.m_ageC == eMiddle) mfi.m_ageC = eOld;
+            if(mfi.getAgeA() == eMiddle) mfi.setAgeA(eOld);
+            if(mfi.getAgeB() == eMiddle) mfi.setAgeB(eOld);
+            if(mfi.getAgeC() == eMiddle) mfi.setAgeC(eOld);
         }
     }
 }
@@ -1787,7 +1787,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
                 }
                 else
                 {
-                    if(pMFI->m_ageA == eNew)
+                    if(pMFI->getAgeA() == eNew)
                         setMergeOperation(mi, eDefaultMergeOp == eMergeToAB ? eCopyAToB : eCopyAToDest);
                     else
                         setMergeOperation(mi, eDefaultMergeOp == eMergeToAB ? eCopyBToA : eCopyBToDest);
@@ -3219,9 +3219,9 @@ QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi)
     vm.writeEntry("LinkC", mfi.isLinkC());
     vm.writeEntry("OperationComplete", mfi.m_bOperationComplete);
 
-    vm.writeEntry("AgeA", (int)mfi.m_ageA);
-    vm.writeEntry("AgeB", (int)mfi.m_ageB);
-    vm.writeEntry("AgeC", (int)mfi.m_ageC);
+    vm.writeEntry("AgeA", (int)mfi.getAgeA());
+    vm.writeEntry("AgeB", (int)mfi.getAgeB());
+    vm.writeEntry("AgeC", (int)mfi.getAgeC());
     vm.writeEntry("ConflictingAges", mfi.m_bConflictingAges); // Equal age but files are not!
 
     vm.save(ts);

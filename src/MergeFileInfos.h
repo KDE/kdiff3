@@ -105,6 +105,15 @@ class MergeFileInfos
 
     inline e_OperationStatus getOpStatus() const { return  m_eOpStatus; }
     inline void setOpStatus(const e_OperationStatus eOpStatus){ m_eOpStatus = eOpStatus; }
+
+    inline e_Age getAgeA() const { return m_ageA; }
+    inline void setAgeA(const e_Age inAge) { m_ageA = inAge; }
+
+    inline e_Age getAgeB() const { return m_ageB; }
+    inline void setAgeB(const e_Age inAge) { m_ageB = inAge; }
+
+    inline e_Age getAgeC() const { return m_ageC; }
+    inline void setAgeC(const e_Age inAge) { m_ageC = inAge; }
   private:
     MergeFileInfos* m_pParent;
     QList<MergeFileInfos*> m_children;
@@ -119,10 +128,10 @@ class MergeFileInfos
 
     e_MergeOperation m_eMergeOperation;
     e_OperationStatus m_eOpStatus;
-  public:
     e_Age m_ageA;
     e_Age m_ageB;
     e_Age m_ageC;
+  public:
 
     bool m_bOperationComplete;
     bool m_bSimOpComplete;
