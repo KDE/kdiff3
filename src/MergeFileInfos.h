@@ -12,12 +12,12 @@
 #ifndef MERGEFILEINFO_H
 #define MERGEFILEINFO_H
 
-#include "fileaccess.h"
-#include "diff.h"
 #include "DirectoryInfo.h"
+#include "diff.h"
+#include "fileaccess.h"
 
-#include <QString>
 #include <QSharedPointer>
+#include <QString>
 //class DirectoryInfo;
 
 enum e_MergeOperation
@@ -91,7 +91,7 @@ class MergeFileInfos
     QString fullNameDest() const;
 
     inline QSharedPointer<DirectoryInfo> getDirectoryInfo() const { return m_dirInfo; }
-    void setDirectoryInfo(const QSharedPointer<DirectoryInfo> &dirInfo) { m_dirInfo = dirInfo; }
+    void setDirectoryInfo(const QSharedPointer<DirectoryInfo>& dirInfo) { m_dirInfo = dirInfo; }
 
     inline QString getDirNameA() const { return getDirectoryInfo()->dirA().prettyAbsPath(); }
     inline QString getDirNameB() const { return getDirectoryInfo()->dirB().prettyAbsPath(); }
@@ -103,8 +103,8 @@ class MergeFileInfos
     inline e_MergeOperation getOperation() const { return m_eMergeOperation; }
     inline void setOperation(const e_MergeOperation op) { m_eMergeOperation = op; }
 
-    inline e_OperationStatus getOpStatus() const { return  m_eOpStatus; }
-    inline void setOpStatus(const e_OperationStatus eOpStatus){ m_eOpStatus = eOpStatus; }
+    inline e_OperationStatus getOpStatus() const { return m_eOpStatus; }
+    inline void setOpStatus(const e_OperationStatus eOpStatus) { m_eOpStatus = eOpStatus; }
 
     inline e_Age getAgeA() const { return m_ageA; }
     inline void setAgeA(const e_Age inAge) { m_ageA = inAge; }
@@ -114,6 +114,7 @@ class MergeFileInfos
 
     inline e_Age getAgeC() const { return m_ageC; }
     inline void setAgeC(const e_Age inAge) { m_ageC = inAge; }
+
   private:
     MergeFileInfos* m_pParent;
     QList<MergeFileInfos*> m_children;
@@ -131,8 +132,8 @@ class MergeFileInfos
     e_Age m_ageA;
     e_Age m_ageB;
     e_Age m_ageC;
-  public:
 
+  public:
     bool m_bOperationComplete;
     bool m_bSimOpComplete;
 
@@ -155,7 +156,8 @@ class MfiCompare
     {
         bool bDir1 = pMFI1->isDirA() || pMFI1->isDirB() || pMFI1->isDirC();
         bool bDir2 = pMFI2->isDirA() || pMFI2->isDirB() || pMFI2->isDirC();
-        if(bDir1 == bDir2) {
+        if(bDir1 == bDir2)
+        {
             if(mOrder == Qt::AscendingOrder)
             {
                 return pMFI1->fileName().compare(pMFI2->fileName(), Qt::CaseInsensitive) < 0;
