@@ -893,6 +893,9 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     bool bDirectoryMerge,
     bool bReload)
 {
+    //set root data now that we have the directory info.
+    rootMFI()->setDirectoryInfo(dirInfo);
+
     if(m_pOptions->m_bDmFullAnalysis)
     {
         // A full analysis uses the same resources that a normal text-diff/merge uses.
