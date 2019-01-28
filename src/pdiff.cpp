@@ -1548,9 +1548,9 @@ void KDiff3App::slotWordWrapToggled()
 }
 
 // Enable or disable all widgets except the status bar widget.
-void KDiff3App::mainWindowEnable(QWidget* pWidget, bool bEnable)
+void KDiff3App::mainWindowEnable(bool bEnable)
 {
-    if(QMainWindow* pWindow = dynamic_cast<QMainWindow*>(pWidget->window()))
+    if(QMainWindow* pWindow = dynamic_cast<QMainWindow*>(window()))
     {
         QWidget* pStatusBarWidget = pWindow->statusBar();
         pWindow->setEnabled(bEnable);
@@ -1563,7 +1563,7 @@ void KDiff3App::postRecalcWordWrap()
     if(!m_bRecalcWordWrapPosted)
     {
         m_bRecalcWordWrapPosted = true;
-        mainWindowEnable(window(), false);
+        mainWindowEnable(false);
         m_firstD3LIdx = -1;
         QTimer::singleShot(1 /* ms */, this, &KDiff3App::slotRecalcWordWrap);
     }
@@ -1582,7 +1582,7 @@ void KDiff3App::slotRecalcWordWrap()
 void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
 {
     m_bRecalcWordWrapPosted = true;
-    mainWindowEnable(window(), false);
+    mainWindowEnable(false);
 
     m_visibleTextWidthForPrinting = visibleTextWidthForPrinting;
     if(m_firstD3LIdx < 0)
@@ -1730,7 +1730,7 @@ void KDiff3App::slotFinishRecalcWordWrap()
             m_pHScrollBar->setValue(0);
         }
     }
-    mainWindowEnable(window(), true);
+    mainWindowEnable(true);
 
     if(m_bFinishMainInit)
     {
