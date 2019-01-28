@@ -1548,7 +1548,7 @@ void KDiff3App::slotWordWrapToggled()
 }
 
 // Enable or disable all widgets except the status bar widget.
-static void mainWindowEnable(QWidget* pWidget, bool bEnable)
+void KDiff3App::mainWindowEnable(QWidget* pWidget, bool bEnable)
 {
     if(QMainWindow* pWindow = dynamic_cast<QMainWindow*>(pWidget->window()))
     {
