@@ -1553,18 +1553,8 @@ void KDiff3App::mainWindowEnable(QWidget* pWidget, bool bEnable)
     if(QMainWindow* pWindow = dynamic_cast<QMainWindow*>(pWidget->window()))
     {
         QWidget* pStatusBarWidget = pWindow->statusBar();
-        QList<QObject*> children = pWindow->children();
-        for(int i = 0; i < children.count(); ++i)
-        {
-            if(children[i]->isWidgetType())
-            {
-                QWidget* pChildWidget = (QWidget*)children[i];
-                if(pChildWidget != pStatusBarWidget)
-                {
-                    pChildWidget->setEnabled(bEnable);
-                }
-            }
-        }
+        pWindow->setEnabled(bEnable);
+        pStatusBarWidget->setEnabled(true);
     }
 }
 
