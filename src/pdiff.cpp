@@ -1563,7 +1563,6 @@ void KDiff3App::postRecalcWordWrap()
     if(!m_bRecalcWordWrapPosted)
     {
         m_bRecalcWordWrapPosted = true;
-        mainWindowEnable(false);
         m_firstD3LIdx = -1;
         QTimer::singleShot(1 /* ms */, this, &KDiff3App::slotRecalcWordWrap);
     }
@@ -1650,6 +1649,11 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
                                                   : i18n("Calculating max width for horizontal scrollbar"),
                                               false);
         }
+    }
+    else
+    {
+        //don't leave proccessing incomplete if m_diff3LineList isEmpty as when an error occures during reading.
+        slotFinishRecalcWordWrap();
     }
 }
 
