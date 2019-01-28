@@ -229,7 +229,8 @@ void ProgressDialog::setCurrent(qint64 subCurrent, bool bRedrawUpdate)
 
 void ProgressDialog::clear()
 {
-    m_progressStack.clear();
+    ProgressLevelData& pld = m_progressStack.back();
+    setCurrent(pld.m_maxNofSteps);
 }
 
 // The progressbar goes from 0 to 1 usually.
