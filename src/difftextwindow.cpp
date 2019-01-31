@@ -1573,10 +1573,8 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
         d->m_diff3WrapLineVector.resize(wrapLineVectorSize);
 
         if(wrapLineVectorSize == 0)
-            d->m_wrapLineCacheList.clear();
-
-        if(wrapLineVectorSize == 0)
         {
+            d->m_wrapLineCacheList.clear();
             d->m_bPaintingAllowed = false;
             for(int i = 0, j = 0; i < d->m_pDiff3LineVector->size(); i += s_linesPerRunnable, ++j)
             //int i=0;
