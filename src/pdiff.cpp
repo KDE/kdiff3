@@ -1583,7 +1583,6 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
     m_bRecalcWordWrapPosted = true;
     mainWindowEnable(false);
 
-    m_visibleTextWidthForPrinting = visibleTextWidthForPrinting;
     if(m_firstD3LIdx < 0)
     {
         m_firstD3LIdx = 0;
@@ -1618,15 +1617,15 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
             // Let every window calc how many lines will be needed.
             if(m_pDiffTextWindow1)
             {
-                m_pDiffTextWindow1->recalcWordWrap(true, 0, m_visibleTextWidthForPrinting);
+                m_pDiffTextWindow1->recalcWordWrap(true, 0, visibleTextWidthForPrinting);
             }
             if(m_pDiffTextWindow2)
             {
-                m_pDiffTextWindow2->recalcWordWrap(true, 0, m_visibleTextWidthForPrinting);
+                m_pDiffTextWindow2->recalcWordWrap(true, 0, visibleTextWidthForPrinting);
             }
             if(m_pDiffTextWindow3)
             {
-                m_pDiffTextWindow3->recalcWordWrap(true, 0, m_visibleTextWidthForPrinting);
+                m_pDiffTextWindow3->recalcWordWrap(true, 0, visibleTextWidthForPrinting);
             }
         }
         else
@@ -1641,7 +1640,7 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
         }
         bool bRunnablesStarted = startRunnables();
         if(!bRunnablesStarted)
-            slotFinishRecalcWordWrap();
+            slotFinishRecalcWordWrap(visibleTextWidthForPrinting);
         else
         {
             g_pProgressDialog->setInformation(m_pOptions->m_bWordWrap
@@ -1653,11 +1652,11 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
     else
     {
         //don't leave proccessing incomplete if m_diff3LineList isEmpty as when an error occures during reading.
-        slotFinishRecalcWordWrap();
+        slotFinishRecalcWordWrap(visibleTextWidthForPrinting);
     }
 }
 
-void KDiff3App::slotFinishRecalcWordWrap()
+void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
 {
     g_pProgressDialog->pop();
 
@@ -1682,7 +1681,7 @@ void KDiff3App::slotFinishRecalcWordWrap()
 
     g_pProgressDialog->setStayHidden(false);
 
-    bool bPrinting = m_visibleTextWidthForPrinting >= 0;
+    bool bPrinting = visibleTextWidthForPrinting >= 0;
 
     if(!m_diff3LineList.empty())
     {
@@ -1699,11 +1698,11 @@ void KDiff3App::slotFinishRecalcWordWrap()
 
             // Finish the word wrap
             if(m_pDiffTextWindow1)
-                m_pDiffTextWindow1->recalcWordWrap(true, sumOfLines, m_visibleTextWidthForPrinting);
+                m_pDiffTextWindow1->recalcWordWrap(true, sumOfLines, visibleTextWidthForPrinting);
             if(m_pDiffTextWindow2)
-                m_pDiffTextWindow2->recalcWordWrap(true, sumOfLines, m_visibleTextWidthForPrinting);
+                m_pDiffTextWindow2->recalcWordWrap(true, sumOfLines, visibleTextWidthForPrinting);
             if(m_pDiffTextWindow3)
-                m_pDiffTextWindow3->recalcWordWrap(true, sumOfLines, m_visibleTextWidthForPrinting);
+                m_pDiffTextWindow3->recalcWordWrap(true, sumOfLines, visibleTextWidthForPrinting);
 
             m_neededLines = sumOfLines;
         }

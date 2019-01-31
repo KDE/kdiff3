@@ -1504,13 +1504,11 @@ class RecalcWordWrapRunnable : public QRunnable
     {
         Q_UNUSED(pData) // TODO really unused?
         setAutoDelete(true);
-        //++s_runnableCount; // in Qt>=5.3 only
         s_runnableCount.fetchAndAddOrdered(1);
     }
     void run() override
     {
         m_pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
-        // int newValue = --s_runnableCount; // in Qt>=5.3 only
         int newValue = s_runnableCount.fetchAndAddOrdered(-1) - 1;
         g_pProgressDialog->setCurrent(s_maxNofRunnables - getAtomic(s_runnableCount));
         if(newValue == 0)
@@ -1521,7 +1519,7 @@ class RecalcWordWrapRunnable : public QRunnable
                 p = p->parentWidget();
                 if(KDiff3App* pKDiff3App = dynamic_cast<KDiff3App*>(p))
                 {
-                    QMetaObject::invokeMethod(pKDiff3App, "slotFinishRecalcWordWrap", Qt::QueuedConnection);
+                    QMetaObject::invokeMethod(pKDiff3App, "slotFinishRecalcWordWrap", Qt::QueuedConnection, Q_ARG(int, m_visibleTextWidth));
                     break;
                 }
             }
@@ -1586,7 +1584,6 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
                 d->m_wrapLineCacheList.append(QVector<DiffTextWindowData::WrapLineCacheData>());
                 s_runnables.push_back(new RecalcWordWrapRunnable(this, d, visibleTextWidth, j));
             }
-            //recalcWordWrap( bWordWrap, wrapLineVectorSize, visibleTextWidth, 0 );
         }
         else
         {

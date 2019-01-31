@@ -186,7 +186,7 @@ class KDiff3App : public QSplitter
     void resizeMergeResultWindow();
     void slotRecalcWordWrap();
     void postRecalcWordWrap();
-    void slotFinishRecalcWordWrap();
+    void slotFinishRecalcWordWrap(int visibleTextWidth);
 
     void showPopupMenu(const QPoint& point);
 
@@ -417,8 +417,6 @@ class KDiff3App : public QSplitter
     void setHScrollBarRange();
 
     int m_iCumulativeWheelDelta;
-
-    int m_visibleTextWidthForPrinting; // only needed during recalcWordWrap
     int m_firstD3LIdx;                 // only needed during recalcWordWrap
     QPointer<QEventLoop> m_pEventLoopForPrinting;
 };
