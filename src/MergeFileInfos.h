@@ -92,6 +92,7 @@ class MergeFileInfos
 
     inline QSharedPointer<DirectoryInfo> getDirectoryInfo() const { return m_dirInfo; }
     void setDirectoryInfo(const QSharedPointer<DirectoryInfo>& dirInfo) { m_dirInfo = dirInfo; }
+    void setDiffStatus(const QSharedPointer<TotalDiffStatus> &totalDiffStatus) { m_totalDiffStatus=totalDiffStatus; }
 
     inline QString getDirNameA() const { return getDirectoryInfo()->dirA().prettyAbsPath(); }
     inline QString getDirNameB() const { return getDirectoryInfo()->dirB().prettyAbsPath(); }

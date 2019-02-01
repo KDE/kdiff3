@@ -118,7 +118,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
 
   public:
     DirectoryMergeWindow* q;
-    explicit DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW)
+    explicit DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW, const QSharedPointer<TotalDiffStatus> &pTotalDiffStatus)
     {
         q = pDMW;
         m_pOptions = nullptr;
@@ -133,7 +133,8 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         m_bCaseSensitive = true;
         m_bUnfoldSubdirs = false;
         m_bSkipDirStatus = false;
-        m_pRoot = new MergeFileInfos;
+        m_pRoot = new MergeFileInfos();
+        m_pRoot->setDiffStatus(pTotalDiffStatus);
     }
     ~DirectoryMergeWindowPrivate() override
     {
@@ -622,10 +623,10 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
     }
 };
 
-DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, Options* pOptions)
+DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, Options* pOptions, const QSharedPointer<TotalDiffStatus> &pTotalDiffStatus)
     : QTreeView(pParent)
 {
-    d = new DirectoryMergeWindowPrivate(this);
+    d = new DirectoryMergeWindowPrivate(this, pTotalDiffStatus);
     setModel(d);
     setItemDelegate(new DirMergeItemDelegate(this));
     connect(this, &DirectoryMergeWindow::doubleClicked, this, &DirectoryMergeWindow::onDoubleClick);
@@ -854,6 +855,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 {
     t_DirectoryList::iterator dirIterator;
 
+    Q_ASSERT(rootMFI() != nullptr && rootMFI()->diffStatus() != nullptr && dirInfo != nullptr);
     if(dirInfo->dirA().isValid())
     {
         for(dirIterator = dirInfo->getDirListA().begin(); dirIterator != dirInfo->getDirListA().end(); ++dirIterator)
@@ -862,6 +864,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 
             mfi.setFileInfoA(&(*dirIterator));
             mfi.setDirectoryInfo(dirInfo);
+            mfi.setDiffStatus(rootMFI()->diffStatus());
         }
     }
 
@@ -873,6 +876,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 
             mfi.setFileInfoB(&(*dirIterator));
             mfi.setDirectoryInfo(dirInfo);
+            mfi.setDiffStatus(rootMFI()->diffStatus());
         }
     }
 
@@ -884,6 +888,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 
             mfi.setFileInfoC(&(*dirIterator));
             mfi.setDirectoryInfo(dirInfo);
+            mfi.setDiffStatus(rootMFI()->diffStatus());
         }
     }
 }
@@ -1406,6 +1411,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
 {
     std::map<QDateTime, int> dateMap;
 
+    Q_ASSERT(mfi.diffStatus() != nullptr);
     if(mfi.existsInA())
     {
         dateMap[mfi.getFileInfoA()->lastModified()] = 0;

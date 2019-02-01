@@ -177,7 +177,7 @@ bool KDiff3Part::openFile()
 
     if(f1.exists() && f2.exists() && fileName1 != fileName2)
     {
-        m_widget->slotFileOpen2(fileName1, fileName2, "", "", "", "", "", nullptr);
+        m_widget->slotFileOpen2(fileName1, fileName2, "", "", "", "", "");
         return true;
     }
     else if(version1.isEmpty() && f1.exists())
@@ -195,7 +195,7 @@ bool KDiff3Part::openFile()
         process.waitForFinished(-1);
 
         m_widget->slotFileOpen2(fileName1, tempFileName, "", "",
-                                "", version2.isEmpty() ? fileName2 : "REV:" + version2 + ':' + fileName2, "", nullptr); // alias names                                                                                              //    std::cerr << "KDiff3: f1:" << fileName1.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
+                                "", version2.isEmpty() ? fileName2 : "REV:" + version2 + ':' + fileName2, ""); // alias names                                                                                              //    std::cerr << "KDiff3: f1:" << fileName1.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
     }
     else if(version2.isEmpty() && f2.exists())
     {
@@ -212,7 +212,7 @@ bool KDiff3Part::openFile()
         process.waitForFinished(-1);
 
         m_widget->slotFileOpen2(tempFileName, fileName2, "", "",
-                                version1.isEmpty() ? fileName1 : "REV:" + version1 + ':' + fileName1, "", "", nullptr); // alias name
+                                version1.isEmpty() ? fileName1 : "REV:" + version1 + ':' + fileName1, "", ""); // alias name
                                                                                                                   //    std::cerr << "KDiff3: f2:" << fileName2.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
     }
     else if(!version1.isEmpty() && !version2.isEmpty())
@@ -240,7 +240,7 @@ bool KDiff3Part::openFile()
         m_widget->slotFileOpen2(tempFileName1, tempFileName2, "", "",
                                 "REV:" + version1 + ':' + fileName1,
                                 "REV:" + version2 + ':' + fileName2,
-                                "", nullptr);
+                                "");
 
         //    std::cerr << "KDiff3: f1/2:" << tempFileName1.toLatin1() <<"<->"<<tempFileName2.toLatin1()<< std::endl;
         return true;

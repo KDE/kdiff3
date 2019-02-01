@@ -146,7 +146,7 @@ class KDiff3App : public QSplitter
     /** open a file and load it into the document*/
     void slotFileOpen();
     void slotFileOpen2(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
-                       const QString& an1, const QString &an2, const QString& an3, const QSharedPointer<TotalDiffStatus> &pTotalDiffStatus);
+                       const QString& an1, const QString &an2, const QString& an3);
 
     void slotFileNameChanged(const QString& fileName, int winIdx);
 
@@ -389,7 +389,7 @@ class KDiff3App : public QSplitter
     Options* m_pOptions;
     FindDialog* m_pFindDialog;
 
-    void mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus=nullptr, bool bLoadFiles = true, bool bUseCurrentEncoding = false);
+    void mainInit(const bool bLoadFiles = true, const bool bUseCurrentEncoding = false, const bool bGui=true);
     bool m_bFinishMainInit;
     bool m_bLoadFiles;
 

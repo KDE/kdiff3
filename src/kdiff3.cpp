@@ -325,6 +325,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     }
     slotRefresh();
 
+    m_totalDiffStatus = QSharedPointer<TotalDiffStatus>::create();
     m_pMainSplitter = this;
     m_pMainSplitter->setOrientation(Qt::Vertical);
     //   setCentralWidget( m_pMainSplitter );
@@ -332,7 +333,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     m_pDirectoryMergeSplitter->setObjectName("DirectoryMergeSplitter");
     m_pMainSplitter->addWidget(m_pDirectoryMergeSplitter);
     m_pDirectoryMergeSplitter->setOrientation(Qt::Horizontal);
-    m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeSplitter, m_pOptions);
+    m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeSplitter, m_pOptions, m_totalDiffStatus);
     m_pDirectoryMergeSplitter->addWidget(m_pDirectoryMergeWindow);
     m_pDirectoryMergeInfo = new DirectoryMergeInfo(m_pDirectoryMergeSplitter);
     m_pDirectoryMergeWindow->setDirectoryMergeInfo(m_pDirectoryMergeInfo);

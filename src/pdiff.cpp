@@ -97,20 +97,14 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, LineRef idx)
     }
 }
 
-void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool bLoadFiles, bool bUseCurrentEncoding)
+void KDiff3App::mainInit(const bool bLoadFiles, const bool bUseCurrentEncoding, const bool bGUI)
 {
     ProgressProxy pp;
     QStringList errors;
     // When doing a full analysis in the directory-comparison, then the statistics-results
     // will be stored in the given TotalDiffStatus. Otherwise it will be 0.
-    bool bGUI = pTotalDiffStatus == nullptr;
-    if(pTotalDiffStatus == nullptr)
-    {
-        if(m_totalDiffStatus == nullptr)
-            m_totalDiffStatus = QSharedPointer<TotalDiffStatus>::create();
-        pTotalDiffStatus = m_totalDiffStatus;
-    }
 
+    Q_ASSERT(m_totalDiffStatus != nullptr);
     //bool bPreserveCarriageReturn = m_pOptions->m_bPreserveCarriageReturn;
 
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
@@ -189,14 +183,13 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
             pp.setMaxNofSteps(6); // 3 comparisons, 3 finediffs
     }
 
-    if(pTotalDiffStatus)
-        pTotalDiffStatus->reset();
+    m_totalDiffStatus->reset();
     if(errors.isEmpty())
     {
         // Run the diff.
         if(m_sd3.isEmpty())
         {
-            pTotalDiffStatus->bBinaryAEqB = m_sd1.isBinaryEqualWith(m_sd2);
+            m_totalDiffStatus->bBinaryAEqB = m_sd1.isBinaryEqualWith(m_sd2);
             pp.setInformation(i18n("Diff: A <-> B"));
 
             runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, 1, 2,
@@ -206,8 +199,8 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
 
             pp.setInformation(i18n("Linediff: A <-> B"));
             calcDiff3LineListUsingAB(&m_diffList12, m_diff3LineList);
-            pTotalDiffStatus->bTextAEqB = fineDiff(m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
-            if(m_sd1.getSizeBytes() == 0) pTotalDiffStatus->bTextAEqB = false;
+            m_totalDiffStatus->bTextAEqB = fineDiff(m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
+            if(m_sd1.getSizeBytes() == 0) m_totalDiffStatus->bTextAEqB = false;
 
             pp.step();
         }
@@ -227,9 +220,9 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
                 pp.step();
             }
 
-            pTotalDiffStatus->bBinaryAEqB = m_sd1.isBinaryEqualWith(m_sd2);
-            pTotalDiffStatus->bBinaryAEqC = m_sd1.isBinaryEqualWith(m_sd3);
-            pTotalDiffStatus->bBinaryBEqC = m_sd3.isBinaryEqualWith(m_sd2);
+            m_totalDiffStatus->bBinaryAEqB = m_sd1.isBinaryEqualWith(m_sd2);
+            m_totalDiffStatus->bBinaryAEqC = m_sd1.isBinaryEqualWith(m_sd3);
+            m_totalDiffStatus->bBinaryBEqC = m_sd3.isBinaryEqualWith(m_sd2);
 
             pp.setInformation(i18n("Diff: A <-> B"));
             runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, 1, 2,
@@ -260,21 +253,21 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
             debugLineCheck(m_diff3LineList, m_sd3.getSizeLines(), 3);
 
             pp.setInformation(i18n("Linediff: A <-> B"));
-            pTotalDiffStatus->bTextAEqB = fineDiff(m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
+            m_totalDiffStatus->bTextAEqB = fineDiff(m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
             pp.step();
             pp.setInformation(i18n("Linediff: B <-> C"));
-            pTotalDiffStatus->bTextBEqC = fineDiff(m_diff3LineList, 2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
+            m_totalDiffStatus->bTextBEqC = fineDiff(m_diff3LineList, 2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
             pp.step();
             pp.setInformation(i18n("Linediff: A <-> C"));
-            pTotalDiffStatus->bTextAEqC = fineDiff(m_diff3LineList, 3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
+            m_totalDiffStatus->bTextAEqC = fineDiff(m_diff3LineList, 3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
             pp.step();
             if(m_sd1.getSizeBytes() == 0) {
-                pTotalDiffStatus->bTextAEqB = false;
-                pTotalDiffStatus->bTextAEqC = false;
+                m_totalDiffStatus->bTextAEqB = false;
+                m_totalDiffStatus->bTextAEqC = false;
             }
             if(m_sd2.getSizeBytes() == 0) {
-                pTotalDiffStatus->bTextAEqB = false;
-                pTotalDiffStatus->bTextBEqC = false;
+                m_totalDiffStatus->bTextAEqB = false;
+                m_totalDiffStatus->bTextBEqC = false;
             }
         }
     }
@@ -347,7 +340,7 @@ void KDiff3App::mainInit(QSharedPointer<TotalDiffStatus> pTotalDiffStatus, bool 
         m_sd2.getLineDataForDisplay(), m_sd2.getSizeLines(),
         m_bTripleDiff ? m_sd3.getLineDataForDisplay() : nullptr, m_sd3.getSizeLines(),
         &m_diff3LineList,
-        pTotalDiffStatus);
+        m_totalDiffStatus);
     m_pMergeResultWindowTitle->setFileName(m_outputFilename.isEmpty() ? QString("unnamed.txt") : m_outputFilename);
 
     if(!bGUI)
@@ -1051,7 +1044,7 @@ void KDiff3App::slotFileOpen()
 }
 
 void KDiff3App::slotFileOpen2(const QString&  fn1, const QString& fn2, const QString& fn3, const QString& ofn,
-                              const QString& an1, const QString& an2, const QString& an3, const QSharedPointer<TotalDiffStatus> &pTotalDiffStatus)
+                              const QString& an1, const QString& an2, const QString& an3)
 {
     if(!canContinue()) return;
 
@@ -1091,10 +1084,7 @@ void KDiff3App::slotFileOpen2(const QString&  fn1, const QString& fn2, const QSt
     else
     {
         m_bDirCompare = bDirCompare; // Don't allow this to change here.
-        mainInit(pTotalDiffStatus);
-
-        if(pTotalDiffStatus != nullptr)
-            return;
+        mainInit();
 
         if((!m_sd1.isEmpty() && !m_sd1.hasData()) ||
            (!m_sd2.isEmpty() && !m_sd2.hasData()) ||
@@ -1143,7 +1133,7 @@ void KDiff3App::slotFileNameChanged(const QString& fileName, int winIdx)
         an3 = "";
     }
 
-    slotFileOpen2(fn1, fn2, fn3, m_outputFilename, an1, an2, an3, nullptr);
+    slotFileOpen2(fn1, fn2, fn3, m_outputFilename, an1, an2, an3);
 }
 
 void KDiff3App::slotEditCut()
@@ -2327,7 +2317,7 @@ void KDiff3App::slotAddManualDiffHelp()
     {
         insertManualDiffHelp(&m_manualDiffHelpList, winIdx, firstLine, lastLine);
 
-        mainInit(nullptr, false); // Init without reload
+        mainInit( false); // Init without reload
         slotRefresh();
     }
 }
@@ -2335,28 +2325,28 @@ void KDiff3App::slotAddManualDiffHelp()
 void KDiff3App::slotClearManualDiffHelpList()
 {
     m_manualDiffHelpList.clear();
-    mainInit(nullptr, false); // Init without reload
+    mainInit(false); // Init without reload
     slotRefresh();
 }
 
 void KDiff3App::slotEncodingChangedA(QTextCodec* c)
 {
     m_sd1.setEncoding(c);
-    mainInit(nullptr, true, true); // Init with reload
+    mainInit(true, true); // Init with reload
     slotRefresh();
 }
 
 void KDiff3App::slotEncodingChangedB(QTextCodec* c)
 {
     m_sd2.setEncoding(c);
-    mainInit(nullptr, true, true); // Init with reload
+    mainInit(true, true); // Init with reload
     slotRefresh();
 }
 
 void KDiff3App::slotEncodingChangedC(QTextCodec* c)
 {
     m_sd3.setEncoding(c);
-    mainInit(nullptr, true, true); // Init with reload
+    mainInit(true, true); // Init with reload
     slotRefresh();
 }
 
