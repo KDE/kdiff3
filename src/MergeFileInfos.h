@@ -16,8 +16,8 @@
 #include "diff.h"
 #include "fileaccess.h"
 
-#include <QSharedPointer>
 #include <QString>
+
 //class DirectoryInfo;
 
 enum e_MergeOperation
@@ -92,14 +92,13 @@ class MergeFileInfos
 
     inline QSharedPointer<DirectoryInfo> getDirectoryInfo() const { return m_dirInfo; }
     void setDirectoryInfo(const QSharedPointer<DirectoryInfo>& dirInfo) { m_dirInfo = dirInfo; }
-    void setDiffStatus(const QSharedPointer<TotalDiffStatus> &totalDiffStatus) { m_totalDiffStatus=totalDiffStatus; }
 
     inline QString getDirNameA() const { return getDirectoryInfo()->dirA().prettyAbsPath(); }
     inline QString getDirNameB() const { return getDirectoryInfo()->dirB().prettyAbsPath(); }
     inline QString getDirNameC() const { return getDirectoryInfo()->dirC().prettyAbsPath(); }
     inline QString getDirNameDest() const { return getDirectoryInfo()->destDir().prettyAbsPath(); }
 
-    inline const QSharedPointer<TotalDiffStatus>& diffStatus() const { return m_totalDiffStatus; }
+    inline TotalDiffStatus& diffStatus() { return m_totalDiffStatus; }
 
     inline e_MergeOperation getOperation() const { return m_eMergeOperation; }
     inline void setOperation(const e_MergeOperation op) { m_eMergeOperation = op; }
@@ -125,8 +124,9 @@ class MergeFileInfos
     FileAccess* m_pFileInfoC;
 
     QSharedPointer<DirectoryInfo> m_dirInfo;
-
-    QSharedPointer<TotalDiffStatus> m_totalDiffStatus;
+    
+    TotalDiffStatus m_totalDiffStatus;
+  public:
 
     e_MergeOperation m_eMergeOperation;
     e_OperationStatus m_eOpStatus;

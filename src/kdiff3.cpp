@@ -325,7 +325,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     }
     slotRefresh();
 
-    m_totalDiffStatus = QSharedPointer<TotalDiffStatus>::create();
     m_pMainSplitter = this;
     m_pMainSplitter->setOrientation(Qt::Vertical);
     //   setCentralWidget( m_pMainSplitter );
@@ -333,7 +332,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     m_pDirectoryMergeSplitter->setObjectName("DirectoryMergeSplitter");
     m_pMainSplitter->addWidget(m_pDirectoryMergeSplitter);
     m_pDirectoryMergeSplitter->setOrientation(Qt::Horizontal);
-    m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeSplitter, m_pOptions, m_totalDiffStatus);
+    m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeSplitter, m_pOptions);
     m_pDirectoryMergeSplitter->addWidget(m_pDirectoryMergeWindow);
     m_pDirectoryMergeInfo = new DirectoryMergeInfo(m_pDirectoryMergeSplitter);
     m_pDirectoryMergeWindow->setDirectoryMergeInfo(m_pDirectoryMergeInfo);
@@ -404,20 +403,20 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         {
             SourceData* pSD = nullptr;
             if(m_sd3.isEmpty()) {
-                if(m_totalDiffStatus->isBinaryEqualAB()) {
+                if(m_totalDiffStatus.isBinaryEqualAB()) {
                     pSD = &m_sd1;
                 }
             }
             else
             {
-                if(m_totalDiffStatus->isBinaryEqualBC()) {
+                if(m_totalDiffStatus.isBinaryEqualBC()) {
                     pSD = &m_sd3; // B==C (assume A is old)
                 }
-                else if(m_totalDiffStatus->isBinaryEqualAB())
+                else if(m_totalDiffStatus.isBinaryEqualAB())
                 {
                     pSD = &m_sd3; // assuming C has changed
                 }
-                else if(m_totalDiffStatus->isBinaryEqualAC())
+                else if(m_totalDiffStatus.isBinaryEqualAC())
                 {
                     pSD = &m_sd2; // assuming B has changed
                 }

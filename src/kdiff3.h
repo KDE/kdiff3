@@ -1,11 +1,18 @@
 /***************************************************************************
- *   Copyright (C) 2003-2007 by Joachim Eibl <joachim.eibl at gmx.de>      *
- *   Copyright (C) 2018 Michael Reeves reeves.87@gmail.com                 *
+                          kdiff3.h  -  description
+                             -------------------
+    begin                : Don Jul 11 12:31:29 CEST 2002
+    copyright            : (C) 2002-2007 by Joachim Eibl
+    email                : joachim.eibl at gmx.de
+ ***************************************************************************/
+
+/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
+ *                                                                         *
  ***************************************************************************/
 
 #ifndef KDIFF3_H
@@ -146,7 +153,7 @@ class KDiff3App : public QSplitter
     /** open a file and load it into the document*/
     void slotFileOpen();
     void slotFileOpen2(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
-                       const QString& an1, const QString &an2, const QString& an3);
+                       const QString& an1, const QString &an2, const QString& an3, TotalDiffStatus* pTotalDiffStatus);
 
     void slotFileNameChanged(const QString& fileName, int winIdx);
 
@@ -360,7 +367,7 @@ class KDiff3App : public QSplitter
 
     QWidget* m_pCornerWidget;
 
-    QSharedPointer<TotalDiffStatus> m_totalDiffStatus;
+    TotalDiffStatus m_totalDiffStatus;
 
     SourceData m_sd1;
     SourceData m_sd2;
@@ -389,7 +396,7 @@ class KDiff3App : public QSplitter
     Options* m_pOptions;
     FindDialog* m_pFindDialog;
 
-    void mainInit(const bool bLoadFiles = true, const bool bUseCurrentEncoding = false, const bool bGui=true);
+    void mainInit(TotalDiffStatus* pTotalDiffStatus = nullptr, bool bLoadFiles = true, bool bUseCurrentEncoding = false);
     bool m_bFinishMainInit;
     bool m_bLoadFiles;
 

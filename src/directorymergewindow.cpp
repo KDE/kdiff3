@@ -118,7 +118,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
 
   public:
     DirectoryMergeWindow* q;
-    explicit DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW, const QSharedPointer<TotalDiffStatus> &pTotalDiffStatus)
+    explicit DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW)
     {
         q = pDMW;
         m_pOptions = nullptr;
@@ -133,8 +133,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         m_bCaseSensitive = true;
         m_bUnfoldSubdirs = false;
         m_bSkipDirStatus = false;
-        m_pRoot = new MergeFileInfos();
-        m_pRoot->setDiffStatus(pTotalDiffStatus);
+        m_pRoot = new MergeFileInfos;
     }
     ~DirectoryMergeWindowPrivate() override
     {
@@ -623,10 +622,10 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
     }
 };
 
-DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, Options* pOptions, const QSharedPointer<TotalDiffStatus> &pTotalDiffStatus)
+DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, Options* pOptions)
     : QTreeView(pParent)
 {
-    d = new DirectoryMergeWindowPrivate(this, pTotalDiffStatus);
+    d = new DirectoryMergeWindowPrivate(this);
     setModel(d);
     setItemDelegate(new DirMergeItemDelegate(this));
     connect(this, &DirectoryMergeWindow::doubleClicked, this, &DirectoryMergeWindow::onDoubleClick);
@@ -855,7 +854,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 {
     t_DirectoryList::iterator dirIterator;
 
-    Q_ASSERT(rootMFI() != nullptr && rootMFI()->diffStatus() != nullptr && dirInfo != nullptr);
     if(dirInfo->dirA().isValid())
     {
         for(dirIterator = dirInfo->getDirListA().begin(); dirIterator != dirInfo->getDirListA().end(); ++dirIterator)
@@ -864,7 +862,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 
             mfi.setFileInfoA(&(*dirIterator));
             mfi.setDirectoryInfo(dirInfo);
-            mfi.setDiffStatus(rootMFI()->diffStatus());
         }
     }
 
@@ -876,7 +873,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 
             mfi.setFileInfoB(&(*dirIterator));
             mfi.setDirectoryInfo(dirInfo);
-            mfi.setDiffStatus(rootMFI()->diffStatus());
         }
     }
 
@@ -888,7 +884,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 
             mfi.setFileInfoC(&(*dirIterator));
             mfi.setDirectoryInfo(dirInfo);
-            mfi.setDiffStatus(rootMFI()->diffStatus());
         }
     }
 }
@@ -1411,7 +1406,6 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
 {
     std::map<QDateTime, int> dateMap;
 
-    Q_ASSERT(mfi.diffStatus() != nullptr);
     if(mfi.existsInA())
     {
         dateMap[mfi.getFileInfoA()->lastModified()] = 0;
@@ -1441,9 +1435,9 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
                 mfi.existsInB() ? mfi.getFileInfoB()->absoluteFilePath() : QString(""),
                 mfi.existsInC() ? mfi.getFileInfoC()->absoluteFilePath() : QString(""),
                 "",
-                "", "", "", mfi.diffStatus());
-            int nofNonwhiteConflicts = mfi.diffStatus()->getUnsolvedConflicts() +
-                                       mfi.diffStatus()->getSolvedConflicts() - mfi.diffStatus()->getWhitespaceConflicts();
+                "", "", "", &mfi.diffStatus());
+            int nofNonwhiteConflicts = mfi.diffStatus().getUnsolvedConflicts() +
+                                       mfi.diffStatus().getSolvedConflicts() - mfi.diffStatus().getWhitespaceConflicts();
 
             if(m_pOptions->m_bDmWhiteSpaceEqual && nofNonwhiteConflicts == 0)
             {
@@ -1453,9 +1447,9 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
             }
             else
             {
-                mfi.m_bEqualAB = mfi.diffStatus()->isBinaryEqualAB();
-                mfi.m_bEqualBC = mfi.diffStatus()->isBinaryEqualBC();
-                mfi.m_bEqualAC = mfi.diffStatus()->isBinaryEqualAC();
+                mfi.m_bEqualAB = mfi.diffStatus().isBinaryEqualAB();
+                mfi.m_bEqualBC = mfi.diffStatus().isBinaryEqualBC();
+                mfi.m_bEqualAC = mfi.diffStatus().isBinaryEqualAC();
             }
         }
     }
