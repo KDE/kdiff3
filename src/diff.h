@@ -75,9 +75,9 @@ struct DiffBufferInfo
 
 struct Diff3Line
 {
-   LineRef lineA;
-   LineRef lineB;
-   LineRef lineC;
+   LineRef lineA = -1;
+   LineRef lineB = -1;
+   LineRef lineC = -1;
 
    bool bAEqC : 1;             // These are true if equal or only white-space changes exist.
    bool bBEqC : 1;
