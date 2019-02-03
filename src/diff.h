@@ -368,6 +368,10 @@ class SourceData
             bool& bCommentInLine,    // true if any comment is within this line (in, out)
             bool& bStartsOpenComment // true if the line ends within an comment (out)
         );
+
+        bool isEmpty() { return m_size == 0; }
+
+        bool isText() { return m_bIsText; }
     };
     FileData m_normalData;
     FileData m_lmppData;

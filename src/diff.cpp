@@ -294,7 +294,7 @@ const QString& SourceData::getText() const
 
 bool SourceData::isText()
 {
-    return m_normalData.m_bIsText;
+    return m_normalData.isText();
 }
 
 bool SourceData::isIncompleteConversion()
@@ -630,6 +630,15 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             }
         }
 
+        if(!m_normalData.preprocess(m_pOptions->m_bPreserveCarriageReturn, pEncoding1))
+        {
+            errors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
+            return errors;
+        }
+        //exit early for non text data further processing assumes a text file as input
+        if(!m_normalData.isText())
+            return errors;
+
         // LineMatching Preprocessor
         if(!m_pOptions->m_LineMatchingPreProcessorCmd.isEmpty())
         {
@@ -683,48 +692,36 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             // We need a copy of the normal data.
             m_lmppData.copyBufFrom(m_normalData);
         }
-        else
-        { // We don't need any lmpp data at all.
-            m_lmppData.reset();
-        }
     }
 
-    if(!m_normalData.preprocess(m_pOptions->m_bPreserveCarriageReturn, pEncoding1) ||
-       !m_lmppData.preprocess(false, pEncoding2))
+    if(!m_lmppData.preprocess(false, pEncoding2))
     {
-
         errors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
+        return errors;
     }
-    else
+
+    Q_ASSERT(m_lmppData.isText());
+    //TODO: Needed?
+    if(m_lmppData.m_vSize < m_normalData.m_vSize)
     {
-        //TODO: Needed?
-        if(m_lmppData.m_vSize < m_normalData.m_vSize)
-        {
-            // Preprocessing command may result in smaller data buffer so adjust size
-            m_lmppData.m_v.resize((int)m_normalData.m_vSize);
-            for(qint64 i = m_lmppData.m_vSize; i < m_normalData.m_vSize; ++i)
-            { // Set all empty lines to point to the end of the buffer.
-                m_lmppData.m_v[(int)i].setLine(m_lmppData.m_unicodeBuf.unicode() + m_lmppData.m_unicodeBuf.length());
-            }
-
-            m_lmppData.m_vSize = m_normalData.m_vSize;
+        // Preprocessing command may result in smaller data buffer so adjust size
+        m_lmppData.m_v.resize((int)m_normalData.m_vSize);
+        for(qint64 i = m_lmppData.m_vSize; i < m_normalData.m_vSize; ++i)
+        { // Set all empty lines to point to the end of the buffer.
+            m_lmppData.m_v[(int)i].setLine(m_lmppData.m_unicodeBuf.unicode() + m_lmppData.m_unicodeBuf.length());
         }
 
-        // Internal Preprocessing: Uppercase-conversion
-        if(m_pOptions->m_bIgnoreCase)
-        {
-            m_lmppData.m_unicodeBuf = QLocale::system().toUpper(m_lmppData.m_unicodeBuf);
-        }
+        m_lmppData.m_vSize = m_normalData.m_vSize;
+    }
 
-        // Ignore comments
-        if(m_pOptions->m_bIgnoreComments)
+    // Ignore comments
+    if(m_pOptions->m_bIgnoreComments)
+    {
+        m_lmppData.removeComments();
+        LineRef vSize = (LineRef)std::min(m_normalData.m_vSize, m_lmppData.m_vSize);
+        for(int i = 0; i < (int)vSize; ++i)
         {
-            m_lmppData.removeComments();
-            LineRef vSize = (LineRef)std::min(m_normalData.m_vSize, m_lmppData.m_vSize);
-            for(int i = 0; i < (int)vSize; ++i)
-            {
-                m_normalData.m_v[i].bContainsPureComment = m_lmppData.m_v[i].bContainsPureComment;
-            }
+            m_normalData.m_v[i].bContainsPureComment = m_lmppData.m_v[i].bContainsPureComment;
         }
     }
 
