@@ -308,31 +308,31 @@ private:
 
    struct FileData
    {
-      FileData(){ m_pBuf=nullptr; m_size=0; m_vSize=0; m_bIsText=false; m_eLineEndStyle=eLineEndStyleUndefined; m_bIncompleteConversion=false;}
-      ~FileData(){ reset(); }
-      const char* m_pBuf;
-      qint64 m_size;
-      qint64 m_vSize; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
-      QString m_unicodeBuf;
-      QVector<LineData> m_v;
-      bool m_bIsText;
-      bool m_bIncompleteConversion;
-      e_LineEndStyle m_eLineEndStyle;
-      bool readFile( const QString& filename );
-      bool writeFile( const QString& filename );
-      bool preprocess(bool bPreserveCR, QTextCodec* pEncoding );
-      void reset();
-      void removeComments();
-      void copyBufFrom( const FileData& src );
+       ~FileData() { reset(); }
 
-      void checkLineForComments(
-          const QChar* p,          // pointer to start of buffer
-          int& i,                  // index of current position (in, out)
-          int size,                // size of buffer
-          bool& bWhite,            // false if this line contains nonwhite characters (in, out)
-          bool& bCommentInLine,    // true if any comment is within this line (in, out)
-          bool& bStartsOpenComment // true if the line ends within an comment (out)
-      );
+       const char* m_pBuf = nullptr;
+       qint64 m_size = 0;
+       qint64 m_vSize = 0; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
+       QString m_unicodeBuf;
+       QVector<LineData> m_v;
+       bool m_bIsText = false;
+       bool m_bIncompleteConversion = false;
+       e_LineEndStyle m_eLineEndStyle = eLineEndStyleUndefined;
+       bool readFile(const QString& filename);
+       bool writeFile(const QString& filename);
+       bool preprocess(bool bPreserveCR, QTextCodec* pEncoding);
+       void reset();
+       void removeComments();
+       void copyBufFrom(const FileData& src);
+
+       void checkLineForComments(
+           const QChar* p,          // pointer to start of buffer
+           int& i,                  // index of current position (in, out)
+           int size,                // size of buffer
+           bool& bWhite,            // false if this line contains nonwhite characters (in, out)
+           bool& bCommentInLine,    // true if any comment is within this line (in, out)
+           bool& bStartsOpenComment // true if the line ends within an comment (out)
+       );
    };
    FileData m_normalData;
    FileData m_lmppData;
