@@ -386,13 +386,13 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
                 //case s_OpCol:       return i18n("Operation");
                 //case s_OpStatusCol: return i18n("Status");
                 case s_UnsolvedCol:
-                    return i18n("Unsolved");
+                    return pMFI->diffStatus().getUnsolvedConflicts();
                 case s_SolvedCol:
-                    return i18n("Solved");
+                    return pMFI->diffStatus().getSolvedConflicts();
                 case s_NonWhiteCol:
-                    return i18n("Nonwhite");
+                    return pMFI->diffStatus().getNonWhitespaceConflicts();
                 case s_WhiteCol:
-                    return i18n("White");
+                    return pMFI->diffStatus().getWhitespaceConflicts();
                     //default :           return QVariant();
             }
 
@@ -1436,8 +1436,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
                 mfi.existsInC() ? mfi.getFileInfoC()->absoluteFilePath() : QString(""),
                 "",
                 "", "", "", &mfi.diffStatus());
-            int nofNonwhiteConflicts = mfi.diffStatus().getUnsolvedConflicts() +
-                                       mfi.diffStatus().getSolvedConflicts() - mfi.diffStatus().getWhitespaceConflicts();
+            int nofNonwhiteConflicts = mfi.diffStatus().getNonWhitespaceConflicts();
 
             if(m_pOptions->m_bDmWhiteSpaceEqual && nofNonwhiteConflicts == 0)
             {
