@@ -1223,7 +1223,7 @@ void MergeResultWindow::collectHistoryInformation(
     QString historyLead;
     {
         const LineData* pld = id3l->getLineData(src);
-        QString s(pld->pLine, pld->size);
+        QString s(pld->getLine(), pld->size());
         historyLead = calcHistoryLead(s);
     }
     QRegExp historyStart(m_pOptions->m_historyStartRegExp);
@@ -1241,7 +1241,7 @@ void MergeResultWindow::collectHistoryInformation(
     {
         const LineData* pld = id3l->getLineData(src);
         if(!pld) continue;
-        QString s(pld->pLine, pld->size);
+        QString s(pld->getLine(), pld->size());
         if(historyLead.isEmpty()) historyLead = calcHistoryLead(s);
         QString sLine = s.mid(historyLead.length());
         if((!bUseRegExp && !sLine.trimmed().isEmpty() && bPrevLineIsEmpty) || (bUseRegExp && newHistoryEntry.exactMatch(sLine)))
@@ -1655,7 +1655,7 @@ QString MergeResultWindow::MergeEditLine::getString(const MergeResultWindow* mrw
             return QString();
         }
 
-        return QString(pld->pLine, pld->size);
+        return QString(pld->getLine(), pld->size());
     }
     else
     {

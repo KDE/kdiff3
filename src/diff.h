@@ -50,22 +50,23 @@ typedef std::list<Diff> DiffList;
 
 class LineData
 {
-  public:
-    const QChar* pLine;
-    const QChar* pFirstNonWhiteChar;
-    int size;
+   private:
+    const QChar* pLine = nullptr;
+    const QChar* pFirstNonWhiteChar = nullptr;
+    int mSize = 0;
+   public:
+    bool bContainsPureComment = false;
+    inline int size() const { return mSize; }
+    inline void setSize(const int newSize) { mSize = newSize; }
 
-    LineData()
-    {
-        pLine = nullptr;
-        pFirstNonWhiteChar = nullptr;
-        size = 0; /*occurrences=0;*/
-        bContainsPureComment = false;
-    }
+    inline void setFirstNonWhiteChar(const QChar* firstNonWhiteChar) { pFirstNonWhiteChar = firstNonWhiteChar;}
+    inline const QChar* getFirstNonWhiteChar() const { return pFirstNonWhiteChar; }
+
+    inline const QChar* getLine() const { return pLine; }
+    inline void setLine(const QChar* line) { pLine = line;}
     int width(int tabSize) const; // Calcs width considering tabs.
     //int occurrences;
-    bool whiteLine() const { return pFirstNonWhiteChar - pLine == size; }
-    bool bContainsPureComment;
+    bool whiteLine() const { return pFirstNonWhiteChar - pLine == mSize; }
 };
 
 class Diff3LineList;
@@ -156,7 +157,7 @@ class Diff3Line
     {
         const LineData* pld = getLineData(src);
         if(pld)
-            return QString(pld->pLine, pld->size);
+            return QString(pld->getLine(), pld->size());
         else
             return QString();
     }

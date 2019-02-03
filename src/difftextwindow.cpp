@@ -860,7 +860,7 @@ void DiffTextWindowData::writeLine(
     {
         // First calculate the "changed" information for each character.
         int i = 0;
-        QString lineString(pld->pLine, pld->size);
+        QString lineString(pld->getLine(), pld->size());
         if(!lineString.isEmpty())
         {
             switch(lineString[lineString.length() - 1].unicode())
@@ -874,11 +874,11 @@ void DiffTextWindowData::writeLine(
                 //case '\0b' : lineString[lineString.length()-1] = 0x2756; break; // some other nice looking character
             }
         }
-        QVector<quint8> charChanged(pld->size);
+        QVector<quint8> charChanged(pld->size());
         Merger merger(pLineDiff1, pLineDiff2);
-        while(!merger.isEndReached() && i < pld->size)
+        while(!merger.isEndReached() && i < pld->size())
         {
-            if(i < pld->size)
+            if(i < pld->size())
             {
                 charChanged[i] = merger.whatChanged();
                 ++i;
@@ -1153,7 +1153,7 @@ QString DiffTextWindowData::getString(int d3lIdx)
     else
     {
         const LineData* ld = &m_pLineData[lineIdx];
-        return QString(ld->pLine, ld->size);
+        return QString(ld->getLine(), ld->size());
     }
     return QString();
 }
@@ -1277,8 +1277,8 @@ QString DiffTextWindow::getSelection()
 
         if(lineIdx != -1)
         {
-            const QChar* pLine = d->m_pLineData[lineIdx].pLine;
-            int size = d->m_pLineData[lineIdx].size;
+            const QChar* pLine = d->m_pLineData[lineIdx].getLine();
+            int size = d->m_pLineData[lineIdx].size();
             QString lineString = QString(pLine, size);
 
             if(d->m_bWordWrap)

@@ -43,7 +43,7 @@ int LineData::width(int tabSize) const
 {
     int w = 0;
     int j = 0;
-    for(int i = 0; i < size; ++i)
+    for(int i = 0; i < size(); ++i)
     {
         if(pLine[i] == '\t')
         {
@@ -66,17 +66,17 @@ int LineData::width(int tabSize) const
 // This choice is good for C/C++.
 bool equal(const LineData& l1, const LineData& l2, bool bStrict)
 {
-    if(l1.pLine == nullptr || l2.pLine == nullptr) return false;
+    if(l1.getLine() == nullptr || l2.getLine() == nullptr) return false;
 
     if(bStrict && g_bIgnoreTrivialMatches)
         return false;
 
     // Ignore white space diff
-    const QChar* p1 = l1.pLine;
-    const QChar* p1End = p1 + l1.size;
+    const QChar* p1 = l1.getLine();
+    const QChar* p1End = p1 + l1.size();
 
-    const QChar* p2 = l2.pLine;
-    const QChar* p2End = p2 + l2.size;
+    const QChar* p2 = l2.getLine();
+    const QChar* p2End = p2 + l2.size();
 
     if(g_bIgnoreWhiteSpace)
     {
@@ -107,7 +107,7 @@ bool equal(const LineData& l1, const LineData& l2, bool bStrict)
     }
     else
     {
-        return (l1.size == l2.size && memcmp(p1, p2, l1.size) == 0);
+        return (l1.size() == l2.size() && memcmp(p1, p2, l1.size()) == 0);
     }
 }
 
@@ -704,7 +704,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             m_lmppData.m_v.resize((int)m_normalData.m_vSize);
             for(qint64 i = m_lmppData.m_vSize; i < m_normalData.m_vSize; ++i)
             { // Set all empty lines to point to the end of the buffer.
-                m_lmppData.m_v[(int)i].pLine = m_lmppData.m_unicodeBuf.unicode() + m_lmppData.m_unicodeBuf.length();
+                m_lmppData.m_v[(int)i].setLine(m_lmppData.m_unicodeBuf.unicode() + m_lmppData.m_unicodeBuf.length());
             }
 
             m_lmppData.m_vSize = m_normalData.m_vSize;
@@ -813,24 +813,26 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
     {
         if(i >= ucSize || p[i] == '\n')
         {
-            m_v[lineIdx].pLine = &p[i - lineLength];
-            while(/*!bPreserveCR  &&*/ lineLength > 0 && m_v[lineIdx].pLine[lineLength - 1] == '\r')
+            const QChar* pLine = &p[i - lineLength];
+            m_v[lineIdx].setLine(&p[i - lineLength]);
+            while(/*!bPreserveCR  &&*/ lineLength > 0 && m_v[lineIdx].getLine()[lineLength - 1] == '\r')
             {
                 --lineLength;
             }
-            m_v[lineIdx].pFirstNonWhiteChar = m_v[lineIdx].pLine + std::min(whiteLength, lineLength);
-            m_v[lineIdx].size = lineLength;
+            m_v[lineIdx].setFirstNonWhiteChar(m_v[lineIdx].getLine() + std::min(whiteLength, lineLength));
             if(lineIdx < vOrigDataLineEndStyle.count() && bPreserveCR && i < ucSize)
             {
-                ++m_v[lineIdx].size;
-                const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\r';
+                ++lineLength;
+                const_cast<QChar*>(pLine)[lineLength] = '\r';
                 //switch ( vOrigDataLineEndStyle[lineIdx] )
                 //{
-                //case eLineEndStyleUnix: const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\n'; break;
-                //case eLineEndStyleDos:  const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\r'; break;
-                //case eLineEndStyleUndefined: const_cast<QChar*>(m_v[lineIdx].pLine)[lineLength] = '\x0b'; break;
+                //case eLineEndStyleUnix: const_cast<QChar*>(pLine)[lineLength] = '\n'; break;
+                //case eLineEndStyleDos:  const_cast<QChar*>(pLine)[lineLength] = '\r'; break;
+                //case eLineEndStyleUndefined: const_cast<QChar*>(pLine)[lineLength] = '\x0b'; break;
                 //}
             }
+            m_v[lineIdx].setSize(lineLength);
+
             lineLength = 0;
             bNonWhiteFound = false;
             whiteLength = 0;
@@ -1434,10 +1436,10 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
     pp.setCurrent(0);
 
     diffList.clear();
-    if(p1[0].pLine == nullptr || p2[0].pLine == nullptr || size1 == 0 || size2 == 0)
+    if(p1[0].getLine() == nullptr || p2[0].getLine() == nullptr || size1 == 0 || size2 == 0)
     {
         Diff d(0, 0, 0);
-        if(p1[0].pLine == nullptr && p2[0].pLine == nullptr && size1 == size2)
+        if(p1[0].getLine() == nullptr && p2[0].getLine() == nullptr && size1 == size2)
             d.nofEquals = size1;
         else
         {
@@ -1452,10 +1454,10 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
         GnuDiff::comparison comparisonInput;
         memset(&comparisonInput, 0, sizeof(comparisonInput));
         comparisonInput.parent = nullptr;
-        comparisonInput.file[0].buffer = p1[0].pLine;                                                //ptr to buffer
-        comparisonInput.file[0].buffered = (p1[size1 - 1].pLine - p1[0].pLine + p1[size1 - 1].size); // size of buffer
-        comparisonInput.file[1].buffer = p2[0].pLine;                                                //ptr to buffer
-        comparisonInput.file[1].buffered = (p2[size2 - 1].pLine - p2[0].pLine + p2[size2 - 1].size); // size of buffer
+        comparisonInput.file[0].buffer = p1[0].getLine();                                                //ptr to buffer
+        comparisonInput.file[0].buffered = (p1[size1 - 1].getLine() - p1[0].getLine() + p1[size1 - 1].size()); // size of buffer
+        comparisonInput.file[1].buffer = p2[0].getLine();                                                //ptr to buffer
+        comparisonInput.file[1].buffered = (p2[size2 - 1].getLine() - p2[0].getLine() + p2[size2 - 1].size()); // size of buffer
 
         gnuDiff.ignore_white_space = GnuDiff::IGNORE_ALL_SPACE; // I think nobody needs anything else ...
         gnuDiff.bIgnoreWhiteSpace = true;
@@ -2280,11 +2282,11 @@ bool fineDiff(
         if((k1 == -1 && k2 != -1) || (k1 != -1 && k2 == -1)) bTextsTotalEqual = false;
         if(k1 != -1 && k2 != -1)
         {
-            if(v1[k1].size != v2[k2].size || memcmp(v1[k1].pLine, v2[k2].pLine, v1[k1].size << 1) != 0)
+            if(v1[k1].size() != v2[k2].size() || memcmp(v1[k1].getLine(), v2[k2].getLine(), v1[k1].size() << 1) != 0)
             {
                 bTextsTotalEqual = false;
                 DiffList* pDiffList = new DiffList;
-                calcDiff(v1[k1].pLine, v1[k1].size, v2[k2].pLine, v2[k2].size, *pDiffList, 2, maxSearchLength);
+                calcDiff(v1[k1].getLine(), v1[k1].size(), v2[k2].getLine(), v2[k2].size(), *pDiffList, 2, maxSearchLength);
 
                 // Optimize the diff list.
                 DiffList::iterator dli;
