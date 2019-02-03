@@ -30,8 +30,9 @@
 
 // Each range with matching elements is followed by a range with differences on either side.
 // Then again range of matching elements should follow.
-struct Diff
+class Diff
 {
+   public:
    LineRef nofEquals;
 
    qint64 diff1;
@@ -42,8 +43,9 @@ struct Diff
 
 typedef std::list<Diff> DiffList;
 
-struct LineData
+class LineData
 {
+   public:
    const QChar* pLine;
    const QChar* pFirstNonWhiteChar;
    int size;
@@ -59,8 +61,9 @@ struct LineData
 class Diff3LineList;
 class Diff3LineVector;
 
-struct DiffBufferInfo
+class DiffBufferInfo
 {
+   public:
    const LineData* m_pLineDataA;
    const LineData* m_pLineDataB;
    const LineData* m_pLineDataC;
@@ -73,8 +76,9 @@ struct DiffBufferInfo
       const LineData* pldA, LineRef sizeA, const LineData* pldB, LineRef sizeB, const LineData* pldC, LineRef sizeC );
 };
 
-struct Diff3Line
+class Diff3Line
 {
+   public:
    LineRef lineA = -1;
    LineRef lineB = -1;
    LineRef lineC = -1;
@@ -306,10 +310,10 @@ private:
    QString m_tempInputFileName;
    QTemporaryFile m_tempFile;//Created from clipboard content.
 
-   struct FileData
+   class FileData
    {
-       ~FileData() { reset(); }
-
+     private:
+       friend SourceData;
        const char* m_pBuf = nullptr;
        qint64 m_size = 0;
        qint64 m_vSize = 0; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
@@ -318,6 +322,9 @@ private:
        bool m_bIsText = false;
        bool m_bIncompleteConversion = false;
        e_LineEndStyle m_eLineEndStyle = eLineEndStyleUndefined;
+    
+    public:
+        ~FileData() { reset(); }
        bool readFile(const QString& filename);
        bool writeFile(const QString& filename);
        bool preprocess(bool bPreserveCR, QTextCodec* pEncoding);
