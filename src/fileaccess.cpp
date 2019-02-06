@@ -116,7 +116,21 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
 
     if(m_url.isLocalFile() || !m_url.isValid() ) // Treat invalid urls as local files.
     {
+#if defined(Q_OS_WIN)
+        // Workaround: The filePath in the QUrl can become of the from "/C:/some/path/file.ext"
+        // when it goes through QUrl::fromUserInput("C:/some/path/file.ext");
+        QString ufp = m_url.path();
+        QString ufpAbs = ufp;
+        if (ufp.length() >= 4 && ufp.at(0) == QLatin1Char('/') &&
+            ufp.at(1).isLetter() && ufp.at(2) == QLatin1Char(':') && ufp.at(3) == QLatin1Char('/'))
+        {
+            ufpAbs = ufp.mid(1); // Drop the first '/'
+        }
+
+        m_fileInfo = QFileInfo(ufpAbs);
+#else
         m_fileInfo = QFileInfo(m_url.path());
+#endif
         m_pParent = nullptr;
 
         loadData();
