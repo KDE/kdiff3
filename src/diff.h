@@ -231,6 +231,7 @@ class ManualDiffHelpList; // A list of corresponding ranges
 // Three corresponding ranges. (Minimum size of a valid range is one line.)
 class ManualDiffHelpEntry
 {
+  private:
     LineRef lineA1 = -1;
     LineRef lineA2 = -1;
     LineRef lineB1 = -1;
@@ -238,12 +239,6 @@ class ManualDiffHelpEntry
     LineRef lineC1 = -1;
     LineRef lineC2 = -1;
   public:
-    LineRef lineA1;
-    LineRef lineA2;
-    LineRef lineB1;
-    LineRef lineB2;
-    LineRef lineC1;
-    LineRef lineC2;
     LineRef& firstLine(int winIdx)
     {
         return winIdx == 1 ? lineA1 : (winIdx == 2 ? lineB1 : lineC1);
@@ -279,6 +274,8 @@ class ManualDiffHelpEntry
         }
     }
 
+    inline int getLine1(const int winIdx) const { return winIdx == 1 ? lineA1 : winIdx == 2 ? lineB1 : lineC1;}
+    inline int getLine2(const int winIdx) const { return winIdx == 1 ? lineA2 : winIdx == 2 ? lineB2 : lineC2;}
     bool isValidMove(int line1, int line2, int winIdx1, int winIdx2) const;
 };
 
@@ -289,6 +286,7 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
         bool isValidMove(int line1, int line2, int winIdx1, int winIdx2) const;
 
 };
+
 void calcDiff3LineListUsingAB(
     const DiffList* pDiffListAB,
     Diff3LineList& d3ll);

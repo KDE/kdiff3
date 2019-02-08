@@ -681,8 +681,8 @@ bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size
     {
         const ManualDiffHelpEntry& mdhe = *i;
 
-        int l1end = winIdx1 == 1 ? mdhe.lineA1 : winIdx1 == 2 ? mdhe.lineB1 : mdhe.lineC1;
-        int l2end = winIdx2 == 1 ? mdhe.lineA1 : winIdx2 == 2 ? mdhe.lineB1 : mdhe.lineC1;
+        int l1end = mdhe.getLine1(winIdx1);
+        int l2end = mdhe.getLine1(winIdx2);
 
         if(l1end >= 0 && l2end >= 0)
         {
@@ -691,8 +691,8 @@ bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size
             l1begin = l1end;
             l2begin = l2end;
 
-            l1end = winIdx1 == 1 ? mdhe.lineA2 : winIdx1 == 2 ? mdhe.lineB2 : mdhe.lineC2;
-            l2end = winIdx2 == 1 ? mdhe.lineA2 : winIdx2 == 2 ? mdhe.lineB2 : mdhe.lineC2;
+            l1end = mdhe.getLine2(winIdx1);
+            l2end = mdhe.getLine2(winIdx2);
 
             if(l1end >= 0 && l2end >= 0)
             {
@@ -722,13 +722,13 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
     {
         Diff3LineList::iterator i3 = d3ll.begin();
         int missingWinIdx = 0;
-        int alignedSum = (iMDHL->lineA1 < 0 ? 0 : 1) + (iMDHL->lineB1 < 0 ? 0 : 1) + (iMDHL->lineC1 < 0 ? 0 : 1);
+        int alignedSum = (iMDHL->getLine1(1) < 0 ? 0 : 1) + (iMDHL->getLine1(2) < 0 ? 0 : 1) + (iMDHL->getLine1(3) < 0 ? 0 : 1);
         if(alignedSum == 2)
         {
             // If only A & B are aligned then let C rather be aligned with A
             // If only A & C are aligned then let B rather be aligned with A
             // If only B & C are aligned then let A rather be aligned with B
-            missingWinIdx = iMDHL->lineA1 < 0 ? 1 : (iMDHL->lineB1 < 0 ? 2 : 3);
+            missingWinIdx = iMDHL->getLine1(1) < 0 ? 1 : (iMDHL->getLine1(2) < 0 ? 2 : 3);
         }
         else if(alignedSum <= 1)
         {
@@ -898,9 +898,9 @@ void calcDiff3LineListTrim(
     {
         if(iMDHL != pManualDiffHelpList->end())
         {
-            if((i3->lineA >= 0 && i3->lineA == iMDHL->lineA1) ||
-               (i3->lineB >= 0 && i3->lineB == iMDHL->lineB1) ||
-               (i3->lineC >= 0 && i3->lineC == iMDHL->lineC1))
+            if((i3->lineA >= 0 && i3->lineA == iMDHL->getLine1(1)) ||
+               (i3->lineB >= 0 && i3->lineB == iMDHL->getLine1(2)) ||
+               (i3->lineC >= 0 && i3->lineC == iMDHL->getLine1(3)))
             {
                 i3A = i3;
                 i3B = i3;
