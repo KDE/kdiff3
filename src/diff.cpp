@@ -497,33 +497,40 @@ void calcDiff3LineListUsingBC(
 }
 
 // Test if the move would pass a barrier. Return true if not.
-static bool isValidMove(ManualDiffHelpList* pManualDiffHelpList, int line1, int line2, int winIdx1, int winIdx2)
+bool ManualDiffHelpList::isValidMove(int line1, int line2, int winIdx1, int winIdx2) const
 {
     if(line1 >= 0 && line2 >= 0)
     {
         ManualDiffHelpList::const_iterator i;
-        for(i = pManualDiffHelpList->begin(); i != pManualDiffHelpList->end(); ++i)
+        for(i = begin(); i != end(); ++i)
         {
             const ManualDiffHelpEntry& mdhe = *i;
 
-            // Barrier
-            int l1 = winIdx1 == 1 ? mdhe.lineA1 : winIdx1 == 2 ? mdhe.lineB1 : mdhe.lineC1;
-            int l2 = winIdx2 == 1 ? mdhe.lineA1 : winIdx2 == 2 ? mdhe.lineB1 : mdhe.lineC1;
-
-            if(l1 >= 0 && l2 >= 0)
-            {
-                if((line1 >= l1 && line2 < l2) || (line1 < l1 && line2 >= l2))
-                    return false;
-                l1 = winIdx1 == 1 ? mdhe.lineA2 : winIdx1 == 2 ? mdhe.lineB2 : mdhe.lineC2;
-                l2 = winIdx2 == 1 ? mdhe.lineA2 : winIdx2 == 2 ? mdhe.lineB2 : mdhe.lineC2;
-                ++l1;
-                ++l2;
-                if((line1 >= l1 && line2 < l2) || (line1 < l1 && line2 >= l2))
-                    return false;
-            }
+            if(!mdhe.isValidMove(line1, line2, winIdx1, winIdx2)) return false;
         }
     }
     return true; // no barrier passed.
+}
+
+bool ManualDiffHelpEntry::isValidMove(int line1, int line2, int winIdx1, int winIdx2) const
+{
+    // Barrier
+    int l1 = winIdx1 == 1 ? lineA1 : winIdx1 == 2 ? lineB1 : lineC1;
+    int l2 = winIdx2 == 1 ? lineA1 : winIdx2 == 2 ? lineB1 : lineC1;
+
+    if(l1 >= 0 && l2 >= 0)
+    {
+        if((line1 >= l1 && line2 < l2) || (line1 < l1 && line2 >= l2))
+            return false;
+        l1 = winIdx1 == 1 ? lineA2 : winIdx1 == 2 ? lineB2 : lineC2;
+        l2 = winIdx2 == 1 ? lineA2 : winIdx2 == 2 ? lineB2 : lineC2;
+        ++l1;
+        ++l2;
+        if((line1 >= l1 && line2 < l2) || (line1 < l1 && line2 >= l2))
+            return false;
+    }
+
+    return true;
 }
 
 static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList,
@@ -907,8 +914,8 @@ void calcDiff3LineListTrim(
 
         if(line > lineA && (*i3).lineA != -1 && (*i3A).lineB != -1 && (*i3A).bBEqC &&
            ::equal(pldA[(*i3).lineA], pldB[(*i3A).lineB], false) &&
-           isValidMove(pManualDiffHelpList, (*i3).lineA, (*i3A).lineB, 1, 2) &&
-           isValidMove(pManualDiffHelpList, (*i3).lineA, (*i3A).lineC, 1, 3))
+           pManualDiffHelpList->isValidMove((*i3).lineA, (*i3A).lineB, 1, 2) &&
+           pManualDiffHelpList->isValidMove((*i3).lineA, (*i3A).lineC, 1, 3))
         {
             // Empty space for A. A matches B and C in the empty line. Move it up.
             (*i3A).lineA = (*i3).lineA;
@@ -924,8 +931,8 @@ void calcDiff3LineListTrim(
 
         if(line > lineB && (*i3).lineB != -1 && (*i3B).lineA != -1 && (*i3B).bAEqC &&
            ::equal(pldB[(*i3).lineB], pldA[(*i3B).lineA], false) &&
-           isValidMove(pManualDiffHelpList, (*i3).lineB, (*i3B).lineA, 2, 1) &&
-           isValidMove(pManualDiffHelpList, (*i3).lineB, (*i3B).lineC, 2, 3))
+           pManualDiffHelpList->isValidMove((*i3).lineB, (*i3B).lineA, 2, 1) &&
+           pManualDiffHelpList->isValidMove((*i3).lineB, (*i3B).lineC, 2, 3))
         {
             // Empty space for B. B matches A and C in the empty line. Move it up.
             (*i3B).lineB = (*i3).lineB;
@@ -940,8 +947,8 @@ void calcDiff3LineListTrim(
 
         if(line > lineC && (*i3).lineC != -1 && (*i3C).lineA != -1 && (*i3C).bAEqB &&
            ::equal(pldC[(*i3).lineC], pldA[(*i3C).lineA], false) &&
-           isValidMove(pManualDiffHelpList, (*i3).lineC, (*i3C).lineA, 3, 1) &&
-           isValidMove(pManualDiffHelpList, (*i3).lineC, (*i3C).lineB, 3, 2))
+           pManualDiffHelpList->isValidMove((*i3).lineC, (*i3C).lineA, 3, 1) &&
+           pManualDiffHelpList->isValidMove((*i3).lineC, (*i3C).lineB, 3, 2))
         {
             // Empty space for C. C matches A and B in the empty line. Move it up.
             (*i3C).lineC = (*i3).lineC;
@@ -955,8 +962,8 @@ void calcDiff3LineListTrim(
         }
 
         if(line > lineA && (*i3).lineA != -1 && !(*i3).bAEqB && !(*i3).bAEqC &&
-           isValidMove(pManualDiffHelpList, (*i3).lineA, (*i3A).lineB, 1, 2) &&
-           isValidMove(pManualDiffHelpList, (*i3).lineA, (*i3A).lineC, 1, 3)) {
+           pManualDiffHelpList->isValidMove((*i3).lineA, (*i3A).lineB, 1, 2) &&
+           pManualDiffHelpList->isValidMove((*i3).lineA, (*i3A).lineC, 1, 3)) {
             // Empty space for A. A doesn't match B or C. Move it up.
             (*i3A).lineA = (*i3).lineA;
             (*i3).lineA = -1;
@@ -976,8 +983,8 @@ void calcDiff3LineListTrim(
         }
 
         if(line > lineB && (*i3).lineB != -1 && !(*i3).bAEqB && !(*i3).bBEqC &&
-           isValidMove(pManualDiffHelpList, (*i3).lineB, (*i3B).lineA, 2, 1) &&
-           isValidMove(pManualDiffHelpList, (*i3).lineB, (*i3B).lineC, 2, 3))
+           pManualDiffHelpList->isValidMove((*i3).lineB, (*i3B).lineA, 2, 1) &&
+           pManualDiffHelpList->isValidMove((*i3).lineB, (*i3B).lineC, 2, 3))
         {
             // Empty space for B. B matches neither A nor C. Move B up.
             (*i3B).lineB = (*i3).lineB;
@@ -998,8 +1005,8 @@ void calcDiff3LineListTrim(
         }
 
         if(line > lineC && (*i3).lineC != -1 && !(*i3).bAEqC && !(*i3).bBEqC &&
-           isValidMove(pManualDiffHelpList, (*i3).lineC, (*i3C).lineA, 3, 1) &&
-           isValidMove(pManualDiffHelpList, (*i3).lineC, (*i3C).lineB, 3, 2))
+           pManualDiffHelpList->isValidMove( (*i3).lineC, (*i3C).lineA, 3, 1) &&
+           pManualDiffHelpList->isValidMove( (*i3).lineC, (*i3C).lineB, 3, 2))
         {
             // Empty space for C. C matches neither A nor B. Move C up.
             (*i3C).lineC = (*i3).lineC;
@@ -1025,8 +1032,8 @@ void calcDiff3LineListTrim(
             Diff3LineList::iterator i = lineA > lineB ? i3A : i3B;
             int l = lineA > lineB ? lineA : lineB;
 
-            if(isValidMove(pManualDiffHelpList, i->lineC, (*i3).lineA, 3, 1) &&
-               isValidMove(pManualDiffHelpList, i->lineC, (*i3).lineB, 3, 2))
+            if(pManualDiffHelpList->isValidMove( i->lineC, (*i3).lineA, 3, 1) &&
+               pManualDiffHelpList->isValidMove( i->lineC, (*i3).lineB, 3, 2))
             {
                 (*i).lineA = (*i3).lineA;
                 (*i).lineB = (*i3).lineB;
@@ -1055,8 +1062,8 @@ void calcDiff3LineListTrim(
             Diff3LineList::iterator i = lineA > lineC ? i3A : i3C;
             int l = lineA > lineC ? lineA : lineC;
 
-            if(isValidMove(pManualDiffHelpList, i->lineB, (*i3).lineA, 2, 1) &&
-               isValidMove(pManualDiffHelpList, i->lineB, (*i3).lineC, 2, 3))
+            if(pManualDiffHelpList->isValidMove(i->lineB, (*i3).lineA, 2, 1) &&
+               pManualDiffHelpList->isValidMove(i->lineB, (*i3).lineC, 2, 3))
             {
                 (*i).lineA = (*i3).lineA;
                 (*i).lineC = (*i3).lineC;
@@ -1085,8 +1092,8 @@ void calcDiff3LineListTrim(
             Diff3LineList::iterator i = lineB > lineC ? i3B : i3C;
             int l = lineB > lineC ? lineB : lineC;
 
-            if(isValidMove(pManualDiffHelpList, i->lineA, (*i3).lineB, 1, 2) &&
-               isValidMove(pManualDiffHelpList, i->lineA, (*i3).lineC, 1, 3))
+            if(pManualDiffHelpList->isValidMove( i->lineA, (*i3).lineB, 1, 2) &&
+               pManualDiffHelpList->isValidMove( i->lineA, (*i3).lineC, 1, 3))
             {
                 (*i).lineB = (*i3).lineB;
                 (*i).lineC = (*i3).lineC;

@@ -227,6 +227,7 @@ class TotalDiffStatus
     int nofWhitespaceConflicts = 0;
 };
 
+class ManualDiffHelpList; // A list of corresponding ranges
 // Three corresponding ranges. (Minimum size of a valid range is one line.)
 class ManualDiffHelpEntry
 {
@@ -260,11 +261,16 @@ class ManualDiffHelpEntry
         return lineA1 == r.lineA1 && lineB1 == r.lineB1 && lineC1 == r.lineC1 &&
                lineA2 == r.lineA2 && lineB2 == r.lineB2 && lineC2 == r.lineC2;
     }
+    bool isValidMove(int line1, int line2, int winIdx1, int winIdx2) const;
 };
 
 // A list of corresponding ranges
-typedef std::list<ManualDiffHelpEntry> ManualDiffHelpList;
+class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
+{
+    public:
+        bool isValidMove(int line1, int line2, int winIdx1, int winIdx2) const;
 
+};
 void calcDiff3LineListUsingAB(
     const DiffList* pDiffListAB,
     Diff3LineList& d3ll);
