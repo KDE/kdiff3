@@ -61,6 +61,13 @@ class SourceData
     e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
 
   private:
+    bool convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
+                                const QString& fileNameOut, QTextCodec* pCodecOut);
+    static bool isLineOrBufEnd(const QChar* p, int i, int size);
+
+    static QTextCodec* detectEncoding(const char* buf, qint64 size, qint64& skipBytes);
+    static QTextCodec* getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag);
+
     QTextCodec* detectEncoding(const QString& fileName, QTextCodec* pFallbackCodec);
     QString m_aliasName;
     FileAccess m_fileAccess;

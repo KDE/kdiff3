@@ -289,12 +289,6 @@ void calcWhiteDiff3Lines(Diff3LineList& d3ll, const LineData* pldA, const LineDa
 
 void calcDiff3LineVector(Diff3LineList& d3ll, Diff3LineVector& d3lv);
 
-bool isLineOrBufEnd(const QChar* p, int i, int size);
-bool convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
-                         const QString& fileNameOut, QTextCodec* pCodecOut);
-
-QTextCodec* detectEncoding(const char* buf, qint64 size, qint64& skipBytes);
-
 // Helper class that swaps left and right for some commands.
 class MyPainter : public QPainter
 {

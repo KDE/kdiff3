@@ -274,7 +274,7 @@ QTextCodec* SourceData::detectEncoding(const QString& fileName, QTextCodec* pFal
         char buf[200];
         qint64 size = f.read(buf, sizeof(buf));
         qint64 skipBytes = 0;
-        QTextCodec* pCodec = ::detectEncoding(buf, size, skipBytes);
+        QTextCodec* pCodec = detectEncoding(buf, size, skipBytes);
         if(pCodec)
             return pCodec;
     }
@@ -534,7 +534,7 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
         m_eLineEndStyle = vOrigDataLineEndStyle[0];
 
     qint64 skipBytes = 0;
-    QTextCodec* pCodec = ::detectEncoding(m_pBuf, m_size, skipBytes);
+    QTextCodec* pCodec = detectEncoding(m_pBuf, m_size, skipBytes);
     if(pCodec != pEncoding)
         skipBytes = 0;
 
@@ -762,4 +762,133 @@ void SourceData::FileData::removeComments()
 
         ++line;
     }
+}
+
+bool SourceData::isLineOrBufEnd(const QChar* p, int i, int size)
+{
+    return i >= size            // End of file
+           || isEndOfLine(p[i]) // Normal end of line
+
+        // No support for Mac-end of line yet, because incompatible with GNU-diff-routines.
+        // || ( p[i]=='\r' && (i>=size-1 || p[i+1]!='\n')
+        //                 && (i==0        || p[i-1]!='\n') )  // Special case: '\r' without '\n'
+        ;
+}
+
+// Convert the input file from input encoding to output encoding and write it to the output file.
+bool SourceData::convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
+                                const QString& fileNameOut, QTextCodec* pCodecOut)
+{
+    QFile in(fileNameIn);
+    if(!in.open(QIODevice::ReadOnly))
+        return false;
+    QTextStream inStream(&in);
+    inStream.setCodec(pCodecIn);
+    inStream.setAutoDetectUnicode(false);
+
+    QFile out(fileNameOut);
+    if(!out.open(QIODevice::WriteOnly))
+        return false;
+    QTextStream outStream(&out);
+    outStream.setCodec(pCodecOut);
+
+    QString data = inStream.readAll();
+    outStream << data;
+
+    return true;
+}
+
+QTextCodec* SourceData::getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag)
+{
+    int encodingPos = s.indexOf(encodingTag);
+    if(encodingPos >= 0)
+    {
+        int apostrophPos = s.indexOf('"', encodingPos + encodingTag.length());
+        int apostroph2Pos = s.indexOf('\'', encodingPos + encodingTag.length());
+        char apostroph = '"';
+        if(apostroph2Pos >= 0 && (apostrophPos < 0 || apostroph2Pos < apostrophPos))
+        {
+            apostroph = '\'';
+            apostrophPos = apostroph2Pos;
+        }
+
+        int encodingEnd = s.indexOf(apostroph, apostrophPos + 1);
+        if(encodingEnd >= 0) // e.g.: <meta charset="utf-8"> or <?xml version="1.0" encoding="ISO-8859-1"?>
+        {
+            QByteArray encoding = s.mid(apostrophPos + 1, encodingEnd - (apostrophPos + 1));
+            return QTextCodec::codecForName(encoding);
+        }
+        else // e.g.: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        {
+            QByteArray encoding = s.mid(encodingPos + encodingTag.length(), apostrophPos - (encodingPos + encodingTag.length()));
+            return QTextCodec::codecForName(encoding);
+        }
+    }
+    return nullptr;
+}
+
+QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, qint64& skipBytes)
+{
+    if(size >= 2)
+    {
+        if(buf[0] == '\xFF' && buf[1] == '\xFE')
+        {
+            skipBytes = 2;
+            return QTextCodec::codecForName("UTF-16LE");
+        }
+
+        if(buf[0] == '\xFE' && buf[1] == '\xFF')
+        {
+            skipBytes = 2;
+            return QTextCodec::codecForName("UTF-16BE");
+        }
+    }
+    if(size >= 3)
+    {
+        if(buf[0] == '\xEF' && buf[1] == '\xBB' && buf[2] == '\xBF')
+        {
+            skipBytes = 3;
+            return QTextCodec::codecForName("UTF-8-BOM");
+        }
+    }
+    skipBytes = 0;
+    QByteArray s;
+    /*
+        We don't need the whole file here just the header.
+]    */
+    if(size <= 5000)
+        s=QByteArray(buf, (int)size);
+    else
+        s=QByteArray(buf, 5000);
+
+    int xmlHeaderPos = s.indexOf("<?xml");
+    if(xmlHeaderPos >= 0)
+    {
+        int xmlHeaderEnd = s.indexOf("?>", xmlHeaderPos);
+        if(xmlHeaderEnd >= 0)
+        {
+            QTextCodec* pCodec = getEncodingFromTag(s.mid(xmlHeaderPos, xmlHeaderEnd - xmlHeaderPos), "encoding=");
+            if(pCodec)
+                return pCodec;
+        }
+    }
+    else // HTML
+    {
+        int metaHeaderPos = s.indexOf("<meta");
+        while(metaHeaderPos >= 0)
+        {
+            int metaHeaderEnd = s.indexOf(">", metaHeaderPos);
+            if(metaHeaderEnd >= 0)
+            {
+                QTextCodec* pCodec = getEncodingFromTag(s.mid(metaHeaderPos, metaHeaderEnd - metaHeaderPos), "charset=");
+                if(pCodec)
+                    return pCodec;
+
+                metaHeaderPos = s.indexOf("<meta", metaHeaderEnd);
+            }
+            else
+                break;
+        }
+    }
+    return nullptr;
 }
