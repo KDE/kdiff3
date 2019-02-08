@@ -997,18 +997,8 @@ void DiffTextWindowData::writeLine(
         const ManualDiffHelpEntry& mdhe = *ci;
         int rangeLine1 = -1;
         int rangeLine2 = -1;
-        if(m_winIdx == 1) {
-            rangeLine1 = mdhe.lineA1;
-            rangeLine2 = mdhe.lineA2;
-        }
-        if(m_winIdx == 2) {
-            rangeLine1 = mdhe.lineB1;
-            rangeLine2 = mdhe.lineB2;
-        }
-        if(m_winIdx == 3) {
-            rangeLine1 = mdhe.lineC1;
-            rangeLine2 = mdhe.lineC2;
-        }
+
+        mdhe.getRangeForUI(m_winIdx, &rangeLine1, &rangeLine2);
         if(rangeLine1 >= 0 && rangeLine2 >= 0 && srcLineIdx >= rangeLine1 && srcLineIdx <= rangeLine2)
         {
             p.fillRect(xOffset - fontWidth, yOffset, fontWidth - 1, fontHeight, m_pOptions->m_manualHelpRangeColor);

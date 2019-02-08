@@ -263,6 +263,22 @@ class ManualDiffHelpEntry
     }
 
     int calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv);
+
+    void getRangeForUI(const int winIdx, int *rangeLine1, int *rangeLine2) const {
+        if(winIdx == 1) {
+            *rangeLine1 = lineA1;
+            *rangeLine2 = lineA2;
+        }
+        if(winIdx == 2) {
+            *rangeLine1 = lineB1;
+            *rangeLine2 = lineB2;
+        }
+        if(winIdx == 3) {
+            *rangeLine1 = lineC1;
+            *rangeLine2 = lineC2;
+        }
+    }
+
     bool isValidMove(int line1, int line2, int winIdx1, int winIdx2) const;
 };
 
