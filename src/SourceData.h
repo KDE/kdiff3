@@ -11,12 +11,14 @@
 
 #ifndef SOURCEDATA_H
 #define SOURCEDATA_H
-#include <QTextCodec>
-#include <QString>
 
 #include "options.h"
 #include "fileaccess.h"
 #include "gnudiff_diff.h"
+
+#include <QTextCodec>
+#include <QTemporaryFile>
+#include <QString>
 
 class LineData;
 class SourceData

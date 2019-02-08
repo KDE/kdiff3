@@ -1,12 +1,6 @@
 /***************************************************************************
-                          diff.cpp  -  description
-                             -------------------
-    begin                : Mon Mar 18 2002
-    copyright            : (C) 2002-2007 by Joachim Eibl
-    email                : joachim.eibl at gmx.de
- ***************************************************************************/
-
-/***************************************************************************
+ *   Copyright (C) 2003-2007 by Joachim Eibl <joachim.eibl at gmx.de>      *
+ *   Copyright (C) 2018 Michael Reeves reeves.87@gmail.com                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -28,14 +22,6 @@
 #include <map>
 
 #include <qglobal.h>
-
-#include <QDir>
-#include <QFileInfo>
-#include <QProcess>
-#include <QTemporaryFile>
-#include <QTextCodec>
-#include <QTextStream>
-
 #include <KLocalizedString>
 #include <KMessageBox>
 

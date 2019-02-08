@@ -25,12 +25,14 @@ Optimizations: Skip unneeded steps.
 #include "Utils.h"
 #include "diff.h"
 
-#include <QString>
 #include <QProcess>
+#include <QString>
+#include <QTemporaryFile>
+#include <QTextCodec>
 #include <QTextStream>
+#include <QVector>
 
 #include <KLocalizedString>
-
 
 SourceData::SourceData()
 {

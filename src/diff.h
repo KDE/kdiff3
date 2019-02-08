@@ -14,8 +14,6 @@
 
 #include <QPainter>
 #include <QLinkedList>
-#include <QVector>
-#include <QTemporaryFile>
 
 #include "common.h"
 #include "fileaccess.h"

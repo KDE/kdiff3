@@ -16,7 +16,6 @@
 #include <QDir>
 #include <QFile>
 #include <QtMath>
-#include <QProcess>
 #include <QRegExp>
 #include <QTemporaryFile>
 
@@ -33,10 +32,6 @@
 
 #include <sys/stat.h>
 #include <sys/types.h>
-
-#ifndef Q_OS_WIN
-#include <utime.h>
-#endif
 
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
