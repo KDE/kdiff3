@@ -39,7 +39,6 @@ class SourceData
     void setFilename(const QString& filename);
     void setFileAccess(const FileAccess& fileAccess);
     void setEncoding(QTextCodec* pEncoding);
-    //FileAccess& getFileAccess();
     QString getFilename();
     void setAliasName(const QString& name);
     QString getAliasName();

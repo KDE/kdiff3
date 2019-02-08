@@ -222,24 +222,21 @@ class TotalDiffStatus
     bool bTextAEqB = false;
 
   private:
-    int nofUnsolvedConflicts;
-    int nofSolvedConflicts;
-    int nofWhitespaceConflicts;
+    int nofUnsolvedConflicts = 0;
+    int nofSolvedConflicts = 0;
+    int nofWhitespaceConflicts = 0;
 };
 
 // Three corresponding ranges. (Minimum size of a valid range is one line.)
 class ManualDiffHelpEntry
 {
+    LineRef lineA1 = -1;
+    LineRef lineA2 = -1;
+    LineRef lineB1 = -1;
+    LineRef lineB2 = -1;
+    LineRef lineC1 = -1;
+    LineRef lineC2 = -1;
   public:
-    ManualDiffHelpEntry()
-    {
-        lineA1 = -1;
-        lineA2 = -1;
-        lineB1 = -1;
-        lineB2 = -1;
-        lineC1 = -1;
-        lineC2 = -1;
-    }
     LineRef lineA1;
     LineRef lineA2;
     LineRef lineB1;
