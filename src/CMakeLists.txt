@@ -25,7 +25,8 @@ set(kdiff3part_PART_SRCS
    MergeFileInfos.cpp
    Utils.cpp
    selection.cpp
-   cvsignorelist.cpp )
+   cvsignorelist.cpp
+   SourceData.cpp )
 
 add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
