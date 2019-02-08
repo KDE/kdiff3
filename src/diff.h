@@ -261,6 +261,8 @@ class ManualDiffHelpEntry
         return lineA1 == r.lineA1 && lineB1 == r.lineB1 && lineC1 == r.lineC1 &&
                lineA2 == r.lineA2 && lineB2 == r.lineB2 && lineC2 == r.lineC2;
     }
+
+    int calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv);
     bool isValidMove(int line1, int line2, int winIdx1, int winIdx2) const;
 };
 

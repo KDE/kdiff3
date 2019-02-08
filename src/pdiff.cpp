@@ -748,15 +748,15 @@ void KDiff3App::initView()
     showWindowC->setChecked(true);
 }
 
-static int calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv, const ManualDiffHelpEntry& mdhe)
+int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv)
 {
     int i;
     for(i = 0; i < d3lv.size(); ++i)
     {
         const Diff3Line& d3l = *d3lv[i];
-        if((mdhe.lineA1 >= 0 && mdhe.lineA1 == d3l.lineA) ||
-           (mdhe.lineB1 >= 0 && mdhe.lineB1 == d3l.lineB) ||
-           (mdhe.lineC1 >= 0 && mdhe.lineC1 == d3l.lineC))
+        if((lineA1 >= 0 && lineA1 == d3l.lineA) ||
+           (lineB1 >= 0 && lineB1 == d3l.lineB) ||
+           (lineC1 >= 0 && lineC1 == d3l.lineC))
             return i;
     }
     return -1;
@@ -779,7 +779,7 @@ void KDiff3App::slotFinishMainInit()
 
     int d3l = -1;
     if(!m_manualDiffHelpList.empty())
-        d3l = calcManualDiffFirstDiff3LineIdx(m_diff3LineVector, m_manualDiffHelpList.front());
+        d3l = m_manualDiffHelpList.front().calcManualDiffFirstDiff3LineIdx(m_diff3LineVector);
     if(d3l >= 0 && m_pDiffTextWindow1)
     {
         int line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(d3l);
