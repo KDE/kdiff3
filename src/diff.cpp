@@ -677,6 +677,7 @@ bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size
              ManualDiffHelpList* pManualDiffHelpList,
              Options* pOptions)
 {
+    Q_ASSERT(p1 != nullptr && p2 != nullptr);
     diffList.clear();
     DiffList diffList2;
 
