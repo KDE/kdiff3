@@ -303,7 +303,7 @@ bool FileAccess::isValid() const
 
 bool FileAccess::isNormal() const
 {
-    return isFile() || isDir() || isSymLink();
+    return !exists() || isFile() || isDir() || isSymLink();
 }
 
 bool FileAccess::isFile() const
