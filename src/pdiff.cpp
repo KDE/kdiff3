@@ -989,6 +989,27 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
                 mainInit();
             }
         }
+        else if(pDropEvent->mimeData()->hasText())
+        {
+            QString text = pDropEvent->mimeData()->text();
+            if(canContinue())
+            {
+                QStringList errors;
+
+                raise();
+                if(o == m_pDiffTextWindow1)
+                    errors = m_sd1.setData(text);
+                else if(o == m_pDiffTextWindow2)
+                    errors = m_sd2.setData(text);
+                else if(o == m_pDiffTextWindow3)
+                    errors = m_sd3.setData(text);
+                foreach(const QString& error, errors)
+                {
+                    KMessageBox::error(m_pOptionDialog, error);
+                }
+                mainInit();
+            }
+        }
     }
 
     return QSplitter::eventFilter(o, e); // standard event processing
