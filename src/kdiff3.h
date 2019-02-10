@@ -373,6 +373,8 @@ class KDiff3App : public QSplitter
     SourceData m_sd2;
     SourceData m_sd3;
 
+    QSharedPointer<class DirectoryInfo> m_dirinfo;
+
     QString m_outputFilename;
     bool m_bDefaultFilename;
 

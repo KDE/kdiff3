@@ -25,6 +25,7 @@
 class DirectoryInfo
 {
     public:
+      explicit DirectoryInfo(){};
       DirectoryInfo(FileAccess& dirA, FileAccess& dirB, FileAccess& dirC, FileAccess& dirDest)
       {
           m_dirA = dirA;
