@@ -361,7 +361,7 @@ class KDiff3App : public QSplitter
     QSplitter* m_pDirectoryMergeSplitter;
     DirectoryMergeWindow* m_pDirectoryMergeWindow;
     DirectoryMergeInfo* m_pDirectoryMergeInfo;
-    bool m_bDirCompare;
+    bool m_bDirCompare = false;
 
     Overview* m_pOverview;
 

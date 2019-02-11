@@ -1067,7 +1067,9 @@ void KDiff3App::slotFileOpen()
             else
                 m_outputFilename = "";
 
+            m_bDirCompare = FileAccess(m_sd1.getFilename()).isDir();
             bool bSuccess = improveFilenames(false);
+
             if(!bSuccess)
                 continue;
 
@@ -1142,15 +1144,10 @@ void KDiff3App::slotFileOpen2(const QString&  fn1, const QString& fn2, const QSt
         m_bDefaultFilename = true;
     }
 
-    bool bDirCompare = m_bDirCompare;
     improveFilenames(true); // Create new window for KDiff3 for directory comparison.
 
-    if(m_bDirCompare)
+    if(!FileAccess(m_sd1.getFilename()).isDir())
     {
-    }
-    else
-    {
-        m_bDirCompare = bDirCompare; // Don't allow this to change here.
         mainInit(pTotalDiffStatus);
 
         if(pTotalDiffStatus != nullptr)
@@ -1840,8 +1837,6 @@ void KDiff3App::slotShowLineNumbersToggled()
 /// Return true for success, else false
 bool KDiff3App::improveFilenames(bool bCreateNewInstance)
 {
-    m_bDirCompare = false;
-
     FileAccess f1(m_sd1.getFilename());
     FileAccess f2(m_sd2.getFilename());
     FileAccess f3(m_sd3.getFilename());
@@ -1870,13 +1865,13 @@ bool KDiff3App::improveFilenames(bool bCreateNewInstance)
     }
     else if(f1.isDir())
     {
-        m_bDirCompare = true;
         if(bCreateNewInstance)
         {
             emit createNewInstance(f1.absoluteFilePath(), f2.absoluteFilePath(), f3.absoluteFilePath());
         }
         else
         {
+            bool bDirCompare = m_bDirCompare;
             FileAccess destDir;
 
             if(!m_bDefaultFilename) destDir = f4;
@@ -1888,8 +1883,8 @@ bool KDiff3App::improveFilenames(bool bCreateNewInstance)
             bool bSuccess = m_pDirectoryMergeWindow->init(
                 m_dirinfo,
                 !m_outputFilename.isEmpty());
-
-            m_bDirCompare = true; //FIXME This seems redundant but it might have been reset during full analysis.
+            //This is a bug if it still happens.
+            Q_ASSERT(m_bDirCompare == bDirCompare);
 
             if(bSuccess)
             {

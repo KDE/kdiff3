@@ -387,6 +387,8 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         m_sd3.setFilename(fn3);
     }
 
+    //should not happen now.
+    Q_ASSERT(m_bDirCompare == FileAccess(m_sd1.getFilename()).isDir());
     bool bSuccess = improveFilenames(false);
 
     if(m_bAutoFlag && m_bAutoMode && m_bDirCompare)
