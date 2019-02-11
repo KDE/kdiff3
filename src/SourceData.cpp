@@ -1,3 +1,13 @@
+/***************************************************************************
+ *   Copyright (C) 2003-2007 by Joachim Eibl <joachim.eibl at gmx.de>      *
+ *   Copyright (C) 2018 Michael Reeves reeves.87@gmail.com                 *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ ***************************************************************************/
+
 /* Features of class SourceData:
 - Read a file (from the given URL) or accept data via a string.
 - Allocate and free buffers as necessary.

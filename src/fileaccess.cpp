@@ -475,7 +475,7 @@ bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
 
     if(isLocal() || !m_localCopy.isEmpty())
     {
-        if(open(QIODevice::ReadOnly))
+        if(open(QIODevice::ReadOnly))//krazy:exclude=syscalls
             return interruptableReadFile( pDestBuffer, maxLength); // maxLength == f.read( (char*)pDestBuffer, maxLength );
     }
     else

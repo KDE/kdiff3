@@ -36,7 +36,7 @@
 class OptionItemBase
 {
   public:
-    OptionItemBase(const QString& saveName)
+    explicit OptionItemBase(const QString& saveName)
     {
         m_saveName = saveName;
         m_bPreserved = false;
