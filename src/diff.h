@@ -13,7 +13,7 @@
 #define DIFF_H
 
 #include <QPainter>
-#include <QLinkedList>
+#include <QList>
 
 #include "common.h"
 #include "fileaccess.h"
@@ -163,9 +163,10 @@ class Diff3Line
     }
 };
 
-class Diff3LineList : public QLinkedList<Diff3Line>
+class Diff3LineList : public QList<Diff3Line>
 {
 };
+
 class Diff3LineVector : public QVector<Diff3Line*>
 {
 };
