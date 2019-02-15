@@ -1449,12 +1449,12 @@ bool Diff3LineList::fineDiff(const int selector, const LineData* v1, const LineD
 }
 
 // Convert the list to a vector of pointers
-void calcDiff3LineVector(Diff3LineList& d3ll, Diff3LineVector& d3lv)
+void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
 {
-    d3lv.resize(d3ll.size());
+    d3lv.resize(size());
     Diff3LineList::iterator i;
     int j = 0;
-    for(i = d3ll.begin(); i != d3ll.end(); ++i, ++j)
+    for(i = begin(); i != end(); ++i, ++j)
     {
         d3lv[j] = &(*i);
     }

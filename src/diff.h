@@ -201,6 +201,7 @@ class Diff3LineList : public QList<Diff3Line>
 {
     public:
       bool fineDiff(const int selector, const LineData* v1, const LineData* v2);
+      void calcDiff3LineVector(Diff3LineVector& d3lv);
 };
 
 class Diff3LineVector : public QVector<Diff3Line*>
