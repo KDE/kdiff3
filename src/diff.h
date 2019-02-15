@@ -342,8 +342,6 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
 void calcDiff3LineListTrim(Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC, ManualDiffHelpList* pManualDiffHelpList);
 void calcWhiteDiff3Lines(Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC);
 
-void calcDiff3LineVector(Diff3LineList& d3ll, Diff3LineVector& d3lv);
-
 // Helper class that swaps left and right for some commands.
 class MyPainter : public QPainter
 {
