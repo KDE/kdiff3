@@ -598,20 +598,6 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
             d.diff1 = size1 - d.nofEquals;
             d.diff2 = size2 - d.nofEquals;
             diffList.push_back(d);
-            /*         Diff d(0,0,0);
-         d.nofEquals = equalLinesAtStart;
-         if ( gnuDiff.files[0].missing_newline != gnuDiff.files[1].missing_newline )
-         {
-            d.diff1 = gnuDiff.files[0].missing_newline ? 0 : 1;
-            d.diff2 = gnuDiff.files[1].missing_newline ? 0 : 1;
-            ++d.nofEquals;
-         }
-         else if ( !gnuDiff.files[0].missing_newline )
-         {
-            ++d.nofEquals;
-         }
-         diffList.push_back(d);
-*/
         }
         else
         {
@@ -630,18 +616,6 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
                 Diff d(nofEquals, size1 - currentLine1 - nofEquals, size2 - currentLine2 - nofEquals);
                 diffList.push_back(d);
             }
-
-            /*
-         if ( gnuDiff.files[0].missing_newline != gnuDiff.files[1].missing_newline )
-         {
-            diffList.back().diff1 += gnuDiff.files[0].missing_newline ? 0 : 1;
-            diffList.back().diff2 += gnuDiff.files[1].missing_newline ? 0 : 1;
-         }
-         else if ( !gnuDiff.files[0].missing_newline )
-         {
-            ++ diffList.back().nofEquals;
-         }
-         */
         }
     }
 
@@ -656,7 +630,6 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
             l2 += i->nofEquals + i->diff2;
         }
 
-        //if( l1!=p1-p1start || l2!=p2-p2start )
         Q_ASSERT(l1 == size1 && l2 == size2);
     }
 
