@@ -323,7 +323,7 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
 {
     public:
         bool isValidMove(int line1, int line2, int winIdx1, int winIdx2) const;
-
+        void insertEntry(int winIdx, LineRef firstLine, LineRef lastLine);
 };
 
 void calcDiff3LineListUsingAB(

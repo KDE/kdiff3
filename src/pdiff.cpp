@@ -2297,7 +2297,7 @@ void KDiff3App::slotNoRelevantChangesDetected()
     }
 }
 
-static void insertManualDiffHelp(ManualDiffHelpList* pManualDiffHelpList, int winIdx, LineRef firstLine, LineRef lastLine)
+void ManualDiffHelpList::insertEntry(int winIdx, LineRef firstLine, LineRef lastLine)
 {
     // The manual diff help list must be sorted and compact.
     // "Compact" means that upper items can't be empty if lower items contain data.
@@ -2310,7 +2310,7 @@ static void insertManualDiffHelp(ManualDiffHelpList* pManualDiffHelpList, int wi
     mdhe.lastLine(winIdx) = lastLine;
 
     ManualDiffHelpList::iterator i;
-    for(i = pManualDiffHelpList->begin(); i != pManualDiffHelpList->end(); ++i)
+    for(i = begin(); i != end(); ++i)
     {
         int& l1 = i->firstLine(winIdx);
         int& l2 = i->lastLine(winIdx);
@@ -2325,21 +2325,21 @@ static void insertManualDiffHelp(ManualDiffHelpList* pManualDiffHelpList, int wi
             if(firstLine < l1 && lastLine < l1)
             {
                 // insert before this position
-                pManualDiffHelpList->insert(i, mdhe);
+                insert(i, mdhe);
                 break;
             }
         }
     }
-    if(i == pManualDiffHelpList->end())
+    if(i == end())
     {
-        pManualDiffHelpList->insert(i, mdhe);
+        insert(i, mdhe);
     }
 
     // Now make the list compact
     for(int wIdx = 1; wIdx <= 3; ++wIdx)
     {
-        ManualDiffHelpList::iterator iEmpty = pManualDiffHelpList->begin();
-        for(i = pManualDiffHelpList->begin(); i != pManualDiffHelpList->end(); ++i)
+        ManualDiffHelpList::iterator iEmpty = begin();
+        for(i = begin(); i != end(); ++i)
         {
             if(iEmpty->firstLine(wIdx) >= 0)
             {
@@ -2356,7 +2356,7 @@ static void insertManualDiffHelp(ManualDiffHelpList* pManualDiffHelpList, int wi
             }
         }
     }
-    pManualDiffHelpList->remove(ManualDiffHelpEntry()); // Remove all completely empty items.
+    remove(ManualDiffHelpEntry()); // Remove all completely empty items.
 }
 
 void KDiff3App::slotAddManualDiffHelp()
@@ -2381,7 +2381,7 @@ void KDiff3App::slotAddManualDiffHelp()
         KMessageBox::information(this, i18n("Nothing is selected in either diff input window."), i18n("Error while adding manual diff range"));
     else
     {
-        insertManualDiffHelp(&m_manualDiffHelpList, winIdx, firstLine, lastLine);
+        m_manualDiffHelpList.insertEntry(winIdx, firstLine, lastLine);
 
         mainInit(nullptr, false); // Init without reload
         slotRefresh();
