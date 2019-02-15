@@ -1171,12 +1171,12 @@ void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
     }
 }
 
-void calcWhiteDiff3Lines(
-    Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC)
+void Diff3LineList::calcWhiteDiff3Lines(
+    const LineData* pldA, const LineData* pldB, const LineData* pldC)
 {
-    Diff3LineList::iterator i3 = d3ll.begin();
+    Diff3LineList::iterator i3;
 
-    for(; i3 != d3ll.end(); ++i3)
+    for(i3=begin(); i3 != end(); ++i3)
     {
         i3->bWhiteLineA = ((*i3).getLineA() == -1 || pldA == nullptr || pldA[(*i3).getLineA()].whiteLine() || pldA[(*i3).getLineA()].bContainsPureComment);
         i3->bWhiteLineB = ((*i3).getLineB() == -1 || pldB == nullptr || pldB[(*i3).getLineB()].whiteLine() || pldB[(*i3).getLineB()].bContainsPureComment);

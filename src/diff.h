@@ -199,9 +199,10 @@ class Diff3Line
 
 class Diff3LineList : public QList<Diff3Line>
 {
-    public:
-      bool fineDiff(const int selector, const LineData* v1, const LineData* v2);
-      void calcDiff3LineVector(Diff3LineVector& d3lv);
+  public:
+    bool fineDiff(const int selector, const LineData* v1, const LineData* v2);
+    void calcDiff3LineVector(Diff3LineVector& d3lv);
+    void calcWhiteDiff3Lines(const LineData* pldA, const LineData* pldB, const LineData* pldC);
 };
 
 class Diff3LineVector : public QVector<Diff3Line*>
@@ -340,7 +341,7 @@ void calcDiff3LineListUsingBC(
 void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManualDiffHelpList);
 
 void calcDiff3LineListTrim(Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC, ManualDiffHelpList* pManualDiffHelpList);
-void calcWhiteDiff3Lines(Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC);
+
 
 // Helper class that swaps left and right for some commands.
 class MyPainter : public QPainter

@@ -323,7 +323,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                           m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(),
                           m_sd3.getLineDataForDiff(), m_sd3.getSizeLines());
 
-        calcWhiteDiff3Lines(m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff());
+        m_diff3LineList.calcWhiteDiff3Lines(m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff());
         m_diff3LineList.calcDiff3LineVector(m_diff3LineVector);
     }
 
