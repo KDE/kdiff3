@@ -1180,29 +1180,29 @@ void DiffTextWindowData::getLineInfo(
 
     Q_ASSERT(m_winIdx >= 1 && m_winIdx <= 3);
     if(m_winIdx == 1) {
-        lineIdx = d3l.lineA;
+        lineIdx = d3l.getLineA();
         pFineDiff1 = d3l.pFineAB;
         pFineDiff2 = d3l.pFineCA;
-        changed |= ((d3l.lineB == -1) != (lineIdx == -1) ? 1 : 0) +
-                   ((d3l.lineC == -1) != (lineIdx == -1) && m_bTriple ? 2 : 0);
+        changed |= ((d3l.getLineB() == -1) != (lineIdx == -1) ? 1 : 0) +
+                   ((d3l.getLineC() == -1) != (lineIdx == -1) && m_bTriple ? 2 : 0);
         changed2 |= (bAEqB ? 0 : 1) + (bAEqC || !m_bTriple ? 0 : 2);
     }
     else if(m_winIdx == 2)
     {
-        lineIdx = d3l.lineB;
+        lineIdx = d3l.getLineB();
         pFineDiff1 = d3l.pFineBC;
         pFineDiff2 = d3l.pFineAB;
-        changed |= ((d3l.lineC == -1) != (lineIdx == -1) && m_bTriple ? 1 : 0) +
-                   ((d3l.lineA == -1) != (lineIdx == -1) ? 2 : 0);
+        changed |= ((d3l.getLineC() == -1) != (lineIdx == -1) && m_bTriple ? 1 : 0) +
+                   ((d3l.getLineA() == -1) != (lineIdx == -1) ? 2 : 0);
         changed2 |= (bBEqC || !m_bTriple ? 0 : 1) + (bAEqB ? 0 : 2);
     }
     else if(m_winIdx == 3)
     {
-        lineIdx = d3l.lineC;
+        lineIdx = d3l.getLineC();
         pFineDiff1 = d3l.pFineCA;
         pFineDiff2 = d3l.pFineBC;
-        changed |= ((d3l.lineA == -1) != (lineIdx == -1) ? 1 : 0) +
-                   ((d3l.lineB == -1) != (lineIdx == -1) ? 2 : 0);
+        changed |= ((d3l.getLineA() == -1) != (lineIdx == -1) ? 1 : 0) +
+                   ((d3l.getLineB() == -1) != (lineIdx == -1) ? 2 : 0);
         changed2 |= (bAEqC ? 0 : 1) + (bBEqC ? 0 : 2);
     }
 
@@ -1254,15 +1254,15 @@ QString DiffTextWindow::getSelection()
         Q_ASSERT(d->m_winIdx >= 1 && d->m_winIdx <= 3);
 
         if(d->m_winIdx == 1) {
-            lineIdx = d3l->lineA;
+            lineIdx = d3l->getLineA();
         }
         else if(d->m_winIdx == 2)
         {
-            lineIdx = d3l->lineB;
+            lineIdx = d3l->getLineB();
         }
         else if(d->m_winIdx == 3)
         {
-            lineIdx = d3l->lineC;
+            lineIdx = d3l->getLineC();
         }
 
         if(lineIdx != -1)
@@ -1377,9 +1377,9 @@ void DiffTextWindow::setSelection(int firstLine, int startPos, int lastLine, int
 
         const Diff3Line* d3l = (*d->m_pDiff3LineVector)[convertLineToDiff3LineIdx(lastLine)];
         int line = -1;
-        if(d->m_winIdx == 1) line = d3l->lineA;
-        if(d->m_winIdx == 2) line = d3l->lineB;
-        if(d->m_winIdx == 3) line = d3l->lineC;
+        if(d->m_winIdx == 1) line = d3l->getLineA();
+        if(d->m_winIdx == 2) line = d3l->getLineB();
+        if(d->m_winIdx == 3) line = d3l->getLineC();
         if(line >= 0)
             endPos = d->m_pLineData[line].width(d->m_pOptions->m_tabSize);
     }
@@ -1436,9 +1436,9 @@ int DiffTextWindowData::convertLineOnScreenToLineInSource(int lineOnScreen, e_Co
         while(line < 0 && d3lIdx < (int)m_pDiff3LineVector->size() && d3lIdx >= 0)
         {
             const Diff3Line* d3l = (*m_pDiff3LineVector)[d3lIdx];
-            if(m_winIdx == 1) line = d3l->lineA;
-            if(m_winIdx == 2) line = d3l->lineB;
-            if(m_winIdx == 3) line = d3l->lineC;
+            if(m_winIdx == 1) line = d3l->getLineA();
+            if(m_winIdx == 2) line = d3l->getLineB();
+            if(m_winIdx == 3) line = d3l->getLineC();
             if(bFirstLine)
                 ++d3lIdx;
             else

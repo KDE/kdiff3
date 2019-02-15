@@ -195,7 +195,7 @@ void mergeOneLine(
 
     if(bTwoInputs) // Only two input files
     {
-        if(d.lineA != -1 && d.lineB != -1)
+        if(d.getLineA() != -1 && d.getLineB() != -1)
         {
             if(d.pFineAB == nullptr)
             {
@@ -210,12 +210,12 @@ void mergeOneLine(
         }
         else
         {
-            if(d.lineA != -1 && d.lineB == -1)
+            if(d.getLineA() != -1 && d.getLineB() == -1)
             {
                 mergeDetails = eBDeleted;
                 bConflict = true;
             }
-            else if(d.lineA == -1 && d.lineB != -1)
+            else if(d.getLineA() == -1 && d.getLineB() != -1)
             {
                 mergeDetails = eBDeleted;
                 bConflict = true;
@@ -225,7 +225,7 @@ void mergeOneLine(
     }
 
     // A is base.
-    if(d.lineA != -1 && d.lineB != -1 && d.lineC != -1)
+    if(d.getLineA() != -1 && d.getLineB() != -1 && d.getLineC() != -1)
     {
         if(d.pFineAB == nullptr && d.pFineBC == nullptr && d.pFineCA == nullptr)
         {
@@ -255,7 +255,7 @@ void mergeOneLine(
         else
             Q_ASSERT(true);
     }
-    else if(d.lineA != -1 && d.lineB != -1 && d.lineC == -1)
+    else if(d.getLineA() != -1 && d.getLineB() != -1 && d.getLineC() == -1)
     {
         if(d.pFineAB != nullptr)
         {
@@ -269,7 +269,7 @@ void mergeOneLine(
             src = C;
         }
     }
-    else if(d.lineA != -1 && d.lineB == -1 && d.lineC != -1)
+    else if(d.getLineA() != -1 && d.getLineB() == -1 && d.getLineC() != -1)
     {
         if(d.pFineCA != nullptr)
         {
@@ -283,7 +283,7 @@ void mergeOneLine(
             src = B;
         }
     }
-    else if(d.lineA == -1 && d.lineB != -1 && d.lineC != -1)
+    else if(d.getLineA() == -1 && d.getLineB() != -1 && d.getLineC() != -1)
     {
         if(d.pFineBC != nullptr)
         {
@@ -296,17 +296,17 @@ void mergeOneLine(
             src = C;
         }
     }
-    else if(d.lineA == -1 && d.lineB == -1 && d.lineC != -1)
+    else if(d.getLineA() == -1 && d.getLineB() == -1 && d.getLineC() != -1)
     {
         mergeDetails = eCAdded;
         src = C;
     }
-    else if(d.lineA == -1 && d.lineB != -1 && d.lineC == -1)
+    else if(d.getLineA() == -1 && d.getLineB() != -1 && d.getLineC() == -1)
     {
         mergeDetails = eBAdded;
         src = B;
     }
-    else if(d.lineA != -1 && d.lineB == -1 && d.lineC == -1)
+    else if(d.getLineA() != -1 && d.getLineB() == -1 && d.getLineC() == -1)
     {
         mergeDetails = eBCDeleted;
         bLineRemoved = true;
@@ -449,7 +449,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
                         MergeEditLine mel(d3llit);
                         mel.setSource(defaultSelector, false);
 
-                        LineRef srcLine = defaultSelector == 1 ? d3llit->lineA : defaultSelector == 2 ? d3llit->lineB : defaultSelector == 3 ? d3llit->lineC : -1;
+                        LineRef srcLine = defaultSelector == 1 ? d3llit->getLineA() : defaultSelector == 2 ? d3llit->getLineB() : defaultSelector == 3 ? d3llit->getLineC() : -1;
 
                         if(srcLine != -1)
                         {
@@ -484,7 +484,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
             MergeEditLine& mel = *melIt;
             int melsrc = mel.src();
 
-            LineRef srcLine = mel.isRemoved() ? -1 : melsrc == 1 ? mel.id3l()->lineA : melsrc == 2 ? mel.id3l()->lineB : melsrc == 3 ? mel.id3l()->lineC : -1;
+            LineRef srcLine = mel.isRemoved() ? -1 : melsrc == 1 ? mel.id3l()->getLineA() : melsrc == 2 ? mel.id3l()->getLineB() : melsrc == 3 ? mel.id3l()->getLineC() : -1;
 
             // At least one line remains because oldSrc != melsrc for first line in list
             // Other empty lines will be removed
@@ -1018,7 +1018,7 @@ void MergeResultWindow::choose(int selector)
         {
             MergeEditLine& mel = *melIt;
 
-            LineRef srcLine = mel.src() == 1 ? mel.id3l()->lineA : mel.src() == 2 ? mel.id3l()->lineB : mel.src() == 3 ? mel.id3l()->lineC : -1;
+            LineRef srcLine = mel.src() == 1 ? mel.id3l()->getLineA() : mel.src() == 2 ? mel.id3l()->getLineB() : mel.src() == 3 ? mel.id3l()->getLineC() : -1;
 
             if(srcLine == -1)
                 melIt = ml.mergeEditLineList.erase(melIt);
@@ -1642,12 +1642,12 @@ QString MergeResultWindow::MergeEditLine::getString(const MergeResultWindow* mrw
         const Diff3Line& d3l = *m_id3l;
         const LineData* pld = nullptr;
         Q_ASSERT(src == A || src == B || src == C);
-        if(src == A && d3l.lineA != -1)
-            pld = &mrw->m_pldA[d3l.lineA];
-        else if(src == B && d3l.lineB != -1)
-            pld = &mrw->m_pldB[d3l.lineB];
-        else if(src == C && d3l.lineC != -1)
-            pld = &mrw->m_pldC[d3l.lineC];
+        if(src == A && d3l.getLineA() != -1)
+            pld = &mrw->m_pldA[d3l.getLineA()];
+        else if(src == B && d3l.getLineB() != -1)
+            pld = &mrw->m_pldB[d3l.getLineB()];
+        else if(src == C && d3l.getLineC() != -1)
+            pld = &mrw->m_pldC[d3l.getLineC()];
 
         //Not an error.
         if(pld == nullptr)
@@ -3260,13 +3260,13 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
 
         if(!m_bTripleDiff)
         {
-            if(d3l.lineA == -1 && d3l.lineB >= 0)
+            if(d3l.getLineA() == -1 && d3l.getLineB() >= 0)
             {
                 c = m_pOptions->m_colorA;
                 x2 = w / 2;
                 w2 = x2;
             }
-            if(d3l.lineA >= 0 && d3l.lineB == -1)
+            if(d3l.getLineA() >= 0 && d3l.getLineB() == -1)
             {
                 c = m_pOptions->m_colorB;
                 w2 = w / 2;

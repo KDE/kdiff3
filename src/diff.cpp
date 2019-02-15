@@ -126,16 +126,16 @@ void calcDiff3LineListUsingAB(
         if(d.nofEquals > 0)
         {
             d3l.bAEqB = true;
-            d3l.lineA = lineA;
-            d3l.lineB = lineB;
+            d3l.setLineA(lineA);
+            d3l.setLineB(lineB);
             --d.nofEquals;
             ++lineA;
             ++lineB;
         }
         else if(d.diff1 > 0 && d.diff2 > 0)
         {
-            d3l.lineA = lineA;
-            d3l.lineB = lineB;
+            d3l.setLineA(lineA);
+            d3l.setLineB(lineB);
             --d.diff1;
             --d.diff2;
             ++lineA;
@@ -143,13 +143,13 @@ void calcDiff3LineListUsingAB(
         }
         else if(d.diff1 > 0)
         {
-            d3l.lineA = lineA;
+            d3l.setLineA(lineA);
             --d.diff1;
             ++lineA;
         }
         else if(d.diff2 > 0)
         {
-            d3l.lineB = lineB;
+            d3l.setLineB(lineB);
             --d.diff2;
             ++lineB;
         }
@@ -191,10 +191,10 @@ void calcDiff3LineListUsingAC(
         if(d.nofEquals > 0)
         {
             // Find the corresponding lineA
-            while((*i3).lineA != lineA)
+            while((*i3).getLineA() != lineA)
                 ++i3;
 
-            (*i3).lineC = lineC;
+            (*i3).setLineC(lineC);
             (*i3).bAEqC = true;
             (*i3).bBEqC = (*i3).bAEqB;
 
@@ -205,7 +205,7 @@ void calcDiff3LineListUsingAC(
         }
         else if(d.diff1 > 0 && d.diff2 > 0)
         {
-            d3l.lineC = lineC;
+            d3l.setLineC(lineC);
             d3ll.insert(i3, d3l);
             --d.diff1;
             --d.diff2;
@@ -219,7 +219,7 @@ void calcDiff3LineListUsingAC(
         }
         else if(d.diff2 > 0)
         {
-            d3l.lineC = lineC;
+            d3l.setLineC(lineC);
             d3ll.insert(i3, d3l);
             --d.diff2;
             ++lineC;
@@ -263,10 +263,10 @@ void calcDiff3LineListUsingBC(
         if(d.nofEquals > 0)
         {
             // Find the corresponding lineB and lineC
-            while(i3b != d3ll.end() && (*i3b).lineB != lineB)
+            while(i3b != d3ll.end() && (*i3b).getLineB() != lineB)
                 ++i3b;
 
-            while(i3c != d3ll.end() && (*i3c).lineC != lineC)
+            while(i3c != d3ll.end() && (*i3c).getLineC() != lineC)
                 ++i3c;
 
             Q_ASSERT(i3b != d3ll.end());
@@ -274,7 +274,7 @@ void calcDiff3LineListUsingBC(
 
             if(i3b == i3c)
             {
-                Q_ASSERT((*i3b).lineC == lineC);
+                Q_ASSERT((*i3b).getLineC() == lineC);
                 (*i3b).bBEqC = true;
             }
             else
@@ -298,7 +298,7 @@ void calcDiff3LineListUsingBC(
                     int nofDisturbingLines = 0;
                     while(i3 != i3b && i3 != d3ll.end())
                     {
-                        if((*i3).lineB != -1)
+                        if((*i3).getLineB() != -1)
                             ++nofDisturbingLines;
                         ++i3;
                     }
@@ -327,18 +327,18 @@ void calcDiff3LineListUsingBC(
                         i3 = i3c;
                         while(i3 != i3b)
                         {
-                            if((*i3).lineB != -1 ||
-                               (before_or_on_equal_line_in_A && i3->lineA != -1))
+                            if((*i3).getLineB() != -1 ||
+                               (before_or_on_equal_line_in_A && i3->getLineA() != -1))
                             {
-                                d3l.lineB = (*i3).lineB;
-                                (*i3).lineB = -1;
+                                d3l.setLineB((*i3).getLineB());
+                                (*i3).setLineB(-1);
 
                                 // Move A along if it matched B
                                 if(before_or_on_equal_line_in_A)
                                 {
-                                    d3l.lineA = i3->lineA;
+                                    d3l.setLineA(i3->getLineA());
                                     d3l.bAEqB = i3->bAEqB;
-                                    i3->lineA = -1;
+                                    i3->setLineA(-1);
                                     i3->bAEqC = false;
                                 }
 
@@ -360,10 +360,10 @@ void calcDiff3LineListUsingBC(
                     if(nofDisturbingLines == 0)
                     {
                         // Yes, the line from B can be moved.
-                        (*i3b).lineB = -1; // This might leave an empty line: removed later.
+                        (*i3b).setLineB(-1); // This might leave an empty line: removed later.
                         (*i3b).bAEqB = false;
                         (*i3b).bBEqC = false;
-                        (*i3c).lineB = lineB;
+                        (*i3c).setLineB(lineB);
                         (*i3c).bBEqC = true;
                         (*i3c).bAEqB = (*i3c).bAEqC;
                     }
@@ -374,7 +374,7 @@ void calcDiff3LineListUsingBC(
                     int nofDisturbingLines = 0;
                     while(i3 != i3c && i3 != d3ll.end())
                     {
-                        if((*i3).lineC != -1)
+                        if((*i3).getLineC() != -1)
                             ++nofDisturbingLines;
                         ++i3;
                     }
@@ -403,18 +403,18 @@ void calcDiff3LineListUsingBC(
                         i3 = i3b;
                         while(i3 != i3c)
                         {
-                            if((*i3).lineC != -1 ||
-                               (before_or_on_equal_line_in_A && i3->lineA != -1))
+                            if((*i3).getLineC() != -1 ||
+                               (before_or_on_equal_line_in_A && i3->getLineA() != -1))
                             {
-                                d3l.lineC = (*i3).lineC;
-                                (*i3).lineC = -1;
+                                d3l.setLineC((*i3).getLineC());
+                                (*i3).setLineC(-1);
 
                                 // Move A along if it matched C
                                 if(before_or_on_equal_line_in_A)
                                 {
-                                    d3l.lineA = i3->lineA;
+                                    d3l.setLineA(i3->getLineA());
                                     d3l.bAEqC = i3->bAEqC;
-                                    i3->lineA = -1;
+                                    i3->setLineA(-1);
                                     i3->bAEqB = false;
                                 }
 
@@ -436,10 +436,10 @@ void calcDiff3LineListUsingBC(
                     if(nofDisturbingLines == 0)
                     {
                         // Yes, the line from C can be moved.
-                        (*i3c).lineC = -1; // This might leave an empty line: removed later.
+                        (*i3c).setLineC(-1); // This might leave an empty line: removed later.
                         (*i3c).bAEqC = false;
                         (*i3c).bBEqC = false;
-                        (*i3b).lineC = lineC;
+                        (*i3b).setLineC(lineC);
                         (*i3b).bBEqC = true;
                         (*i3b).bAEqC = (*i3b).bAEqB;
                     }
@@ -455,14 +455,14 @@ void calcDiff3LineListUsingBC(
         else if(d.diff1 > 0)
         {
             Diff3LineList::iterator i3 = i3b;
-            while((*i3).lineB != lineB)
+            while((*i3).getLineB() != lineB)
                 ++i3;
             if(i3 != i3b && !(*i3).bAEqB)
             {
                 // Take B from this line and move it up as far as possible
-                d3l.lineB = lineB;
+                d3l.setLineB(lineB);
                 d3ll.insert(i3b, d3l);
-                (*i3).lineB = -1;
+                (*i3).setLineB(-1);
             }
             else
             {
@@ -490,7 +490,7 @@ void calcDiff3LineListUsingBC(
    for( ; it!=d3ll.end(); ++it, ++li )
    {
       printf( "%4d %4d %4d %4d  A%c=B A%c=C B%c=C\n",
-         li, (*it).lineA, (*it).lineB, (*it).lineC,
+         li, (*it).getLineA(), (*it).getLineB(), (*it).getLineC(),
          (*it).bAEqB ? '=' : '!', (*it).bAEqC ? '=' : '!', (*it).bBEqC ? '=' : '!' );
    }
    printf("\n");*/
@@ -771,26 +771,26 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
                     if(wi == 1) // Move B and C up
                     {
                         d3l.bBEqC = i3->bBEqC;
-                        d3l.lineB = i3->lineB;
-                        d3l.lineC = i3->lineC;
-                        i3->lineB = -1;
-                        i3->lineC = -1;
+                        d3l.setLineB(i3->getLineB());
+                        d3l.setLineC(i3->getLineC());
+                        i3->setLineB(-1);
+                        i3->setLineC(-1);
                     }
                     if(wi == 2) // Move A and C up
                     {
                         d3l.bAEqC = i3->bAEqC;
-                        d3l.lineA = i3->lineA;
-                        d3l.lineC = i3->lineC;
-                        i3->lineA = -1;
-                        i3->lineC = -1;
+                        d3l.setLineA(i3->getLineA());
+                        d3l.setLineC(i3->getLineC());
+                        i3->setLineA(-1);
+                        i3->setLineC(-1);
                     }
                     if(wi == 3) // Move A and B up
                     {
                         d3l.bAEqB = i3->bAEqB;
-                        d3l.lineA = i3->lineA;
-                        d3l.lineB = i3->lineB;
-                        i3->lineA = -1;
-                        i3->lineB = -1;
+                        d3l.setLineA(i3->getLineA());
+                        d3l.setLineB(i3->getLineB());
+                        i3->setLineA(-1);
+                        i3->setLineB(-1);
                     }
                     i3->bAEqB = false;
                     i3->bAEqC = false;
@@ -804,22 +804,22 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
                     {
                         if(wi2 == 1)
                         {
-                            iDest->lineA = i3->lineA;
-                            i3->lineA = -1;
+                            iDest->setLineA(i3->getLineA());
+                            i3->setLineA(-1);
                             i3->bAEqB = false;
                             i3->bAEqC = false;
                         }
                         else if(wi2 == 2)
                         {
-                            iDest->lineB = i3->lineB;
-                            i3->lineB = -1;
+                            iDest->setLineB(i3->getLineB());
+                            i3->setLineB(-1);
                             i3->bAEqB = false;
                             i3->bBEqC = false;
                         }
                         else if(wi2 == 3)
                         {
-                            iDest->lineC = i3->lineC;
-                            i3->lineC = -1;
+                            iDest->setLineC(i3->getLineC());
+                            i3->setLineC(-1);
                             i3->bBEqC = false;
                             i3->bAEqC = false;
                         }
@@ -838,8 +838,8 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
                                 {
                                     if(i3->bAEqB) // Stop moving lines up if one equal is found.
                                         break;
-                                    d3l.lineA = i3->lineA;
-                                    i3->lineA = -1;
+                                    d3l.setLineA(i3->getLineA());
+                                    i3->setLineA(-1);
                                     i3->bAEqB = false;
                                     i3->bAEqC = false;
                                 }
@@ -847,8 +847,8 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
                                 {
                                     if(i3->bAEqB)
                                         break;
-                                    d3l.lineB = i3->lineB;
-                                    i3->lineB = -1;
+                                    d3l.setLineB(i3->getLineB());
+                                    i3->setLineB(-1);
                                     i3->bAEqB = false;
                                     i3->bBEqC = false;
                                 }
@@ -856,8 +856,8 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
                                 {
                                     if(i3->bAEqC)
                                         break;
-                                    d3l.lineC = i3->lineC;
-                                    i3->lineC = -1;
+                                    d3l.setLineC(i3->getLineC());
+                                    i3->setLineC(-1);
                                     i3->bAEqC = false;
                                     i3->bBEqC = false;
                                 }
@@ -898,9 +898,9 @@ void calcDiff3LineListTrim(
     {
         if(iMDHL != pManualDiffHelpList->end())
         {
-            if((i3->lineA >= 0 && i3->lineA == iMDHL->getLine1(1)) ||
-               (i3->lineB >= 0 && i3->lineB == iMDHL->getLine1(2)) ||
-               (i3->lineC >= 0 && i3->lineC == iMDHL->getLine1(3)))
+            if((i3->getLineA() >= 0 && i3->getLineA() == iMDHL->getLine1(1)) ||
+               (i3->getLineB() >= 0 && i3->getLineB() == iMDHL->getLine1(2)) ||
+               (i3->getLineC() >= 0 && i3->getLineC() == iMDHL->getLine1(3)))
             {
                 i3A = i3;
                 i3B = i3;
@@ -912,68 +912,68 @@ void calcDiff3LineListTrim(
             }
         }
 
-        if(line > lineA && (*i3).lineA != -1 && (*i3A).lineB != -1 && (*i3A).bBEqC &&
-           ::equal(pldA[(*i3).lineA], pldB[(*i3A).lineB], false) &&
-           pManualDiffHelpList->isValidMove((*i3).lineA, (*i3A).lineB, 1, 2) &&
-           pManualDiffHelpList->isValidMove((*i3).lineA, (*i3A).lineC, 1, 3))
+        if(line > lineA && (*i3).getLineA() != -1 && (*i3A).getLineB() != -1 && (*i3A).bBEqC &&
+           ::equal(pldA[(*i3).getLineA()], pldB[(*i3A).getLineB()], false) &&
+           pManualDiffHelpList->isValidMove((*i3).getLineA(), (*i3A).getLineB(), 1, 2) &&
+           pManualDiffHelpList->isValidMove((*i3).getLineA(), (*i3A).getLineC(), 1, 3))
         {
             // Empty space for A. A matches B and C in the empty line. Move it up.
-            (*i3A).lineA = (*i3).lineA;
+            (*i3A).setLineA((*i3).getLineA());
             (*i3A).bAEqB = true;
             (*i3A).bAEqC = true;
 
-            (*i3).lineA = -1;
+            (*i3).setLineA(-1);
             (*i3).bAEqB = false;
             (*i3).bAEqC = false;
             ++i3A;
             ++lineA;
         }
 
-        if(line > lineB && (*i3).lineB != -1 && (*i3B).lineA != -1 && (*i3B).bAEqC &&
-           ::equal(pldB[(*i3).lineB], pldA[(*i3B).lineA], false) &&
-           pManualDiffHelpList->isValidMove((*i3).lineB, (*i3B).lineA, 2, 1) &&
-           pManualDiffHelpList->isValidMove((*i3).lineB, (*i3B).lineC, 2, 3))
+        if(line > lineB && (*i3).getLineB() != -1 && (*i3B).getLineA() != -1 && (*i3B).bAEqC &&
+           ::equal(pldB[(*i3).getLineB()], pldA[(*i3B).getLineA()], false) &&
+           pManualDiffHelpList->isValidMove((*i3).getLineB(), (*i3B).getLineA(), 2, 1) &&
+           pManualDiffHelpList->isValidMove((*i3).getLineB(), (*i3B).getLineC(), 2, 3))
         {
             // Empty space for B. B matches A and C in the empty line. Move it up.
-            (*i3B).lineB = (*i3).lineB;
+            (*i3B).setLineB((*i3).getLineB());
             (*i3B).bAEqB = true;
             (*i3B).bBEqC = true;
-            (*i3).lineB = -1;
+            (*i3).setLineB(-1);
             (*i3).bAEqB = false;
             (*i3).bBEqC = false;
             ++i3B;
             ++lineB;
         }
 
-        if(line > lineC && (*i3).lineC != -1 && (*i3C).lineA != -1 && (*i3C).bAEqB &&
-           ::equal(pldC[(*i3).lineC], pldA[(*i3C).lineA], false) &&
-           pManualDiffHelpList->isValidMove((*i3).lineC, (*i3C).lineA, 3, 1) &&
-           pManualDiffHelpList->isValidMove((*i3).lineC, (*i3C).lineB, 3, 2))
+        if(line > lineC && (*i3).getLineC() != -1 && (*i3C).getLineA() != -1 && (*i3C).bAEqB &&
+           ::equal(pldC[(*i3).getLineC()], pldA[(*i3C).getLineA()], false) &&
+           pManualDiffHelpList->isValidMove((*i3).getLineC(), (*i3C).getLineA(), 3, 1) &&
+           pManualDiffHelpList->isValidMove((*i3).getLineC(), (*i3C).getLineB(), 3, 2))
         {
             // Empty space for C. C matches A and B in the empty line. Move it up.
-            (*i3C).lineC = (*i3).lineC;
+            (*i3C).setLineC((*i3).getLineC());
             (*i3C).bAEqC = true;
             (*i3C).bBEqC = true;
-            (*i3).lineC = -1;
+            (*i3).setLineC(-1);
             (*i3).bAEqC = false;
             (*i3).bBEqC = false;
             ++i3C;
             ++lineC;
         }
 
-        if(line > lineA && (*i3).lineA != -1 && !(*i3).bAEqB && !(*i3).bAEqC &&
-           pManualDiffHelpList->isValidMove((*i3).lineA, (*i3A).lineB, 1, 2) &&
-           pManualDiffHelpList->isValidMove((*i3).lineA, (*i3A).lineC, 1, 3)) {
+        if(line > lineA && (*i3).getLineA() != -1 && !(*i3).bAEqB && !(*i3).bAEqC &&
+           pManualDiffHelpList->isValidMove((*i3).getLineA(), (*i3A).getLineB(), 1, 2) &&
+           pManualDiffHelpList->isValidMove((*i3).getLineA(), (*i3A).getLineC(), 1, 3)) {
             // Empty space for A. A doesn't match B or C. Move it up.
-            (*i3A).lineA = (*i3).lineA;
-            (*i3).lineA = -1;
+            (*i3A).setLineA((*i3).getLineA());
+            (*i3).setLineA(-1);
 
-            if(i3A->lineB != -1 && ::equal(pldA[i3A->lineA], pldB[i3A->lineB], false))
+            if(i3A->getLineB() != -1 && ::equal(pldA[i3A->getLineA()], pldB[i3A->getLineB()], false))
             {
                 i3A->bAEqB = true;
             }
             if((i3A->bAEqB && i3A->bBEqC) ||
-               (i3A->lineC != -1 && ::equal(pldA[i3A->lineA], pldC[i3A->lineC], false)))
+               (i3A->getLineC() != -1 && ::equal(pldA[i3A->getLineA()], pldC[i3A->getLineC()], false)))
             {
                 i3A->bAEqC = true;
             }
@@ -982,20 +982,20 @@ void calcDiff3LineListTrim(
             ++lineA;
         }
 
-        if(line > lineB && (*i3).lineB != -1 && !(*i3).bAEqB && !(*i3).bBEqC &&
-           pManualDiffHelpList->isValidMove((*i3).lineB, (*i3B).lineA, 2, 1) &&
-           pManualDiffHelpList->isValidMove((*i3).lineB, (*i3B).lineC, 2, 3))
+        if(line > lineB && (*i3).getLineB() != -1 && !(*i3).bAEqB && !(*i3).bBEqC &&
+           pManualDiffHelpList->isValidMove((*i3).getLineB(), (*i3B).getLineA(), 2, 1) &&
+           pManualDiffHelpList->isValidMove((*i3).getLineB(), (*i3B).getLineC(), 2, 3))
         {
             // Empty space for B. B matches neither A nor C. Move B up.
-            (*i3B).lineB = (*i3).lineB;
-            (*i3).lineB = -1;
+            (*i3B).setLineB((*i3).getLineB());
+            (*i3).setLineB(-1);
 
-            if(i3B->lineA != -1 && ::equal(pldA[i3B->lineA], pldB[i3B->lineB], false))
+            if(i3B->getLineA() != -1 && ::equal(pldA[i3B->getLineA()], pldB[i3B->getLineB()], false))
             {
                 i3B->bAEqB = true;
             }
             if((i3B->bAEqB && i3B->bAEqC) ||
-               (i3B->lineC != -1 && ::equal(pldB[i3B->lineB], pldC[i3B->lineC], false)))
+               (i3B->getLineC() != -1 && ::equal(pldB[i3B->getLineB()], pldC[i3B->getLineC()], false)))
             {
                 i3B->bBEqC = true;
             }
@@ -1004,20 +1004,20 @@ void calcDiff3LineListTrim(
             ++lineB;
         }
 
-        if(line > lineC && (*i3).lineC != -1 && !(*i3).bAEqC && !(*i3).bBEqC &&
-           pManualDiffHelpList->isValidMove( (*i3).lineC, (*i3C).lineA, 3, 1) &&
-           pManualDiffHelpList->isValidMove( (*i3).lineC, (*i3C).lineB, 3, 2))
+        if(line > lineC && (*i3).getLineC() != -1 && !(*i3).bAEqC && !(*i3).bBEqC &&
+           pManualDiffHelpList->isValidMove( (*i3).getLineC(), (*i3C).getLineA(), 3, 1) &&
+           pManualDiffHelpList->isValidMove( (*i3).getLineC(), (*i3C).getLineB(), 3, 2))
         {
             // Empty space for C. C matches neither A nor B. Move C up.
-            (*i3C).lineC = (*i3).lineC;
-            (*i3).lineC = -1;
+            (*i3C).setLineC((*i3).getLineC());
+            (*i3).setLineC(-1);
 
-            if(i3C->lineA != -1 && ::equal(pldA[i3C->lineA], pldC[i3C->lineC], false))
+            if(i3C->getLineA() != -1 && ::equal(pldA[i3C->getLineA()], pldC[i3C->getLineC()], false))
             {
                 i3C->bAEqC = true;
             }
             if((i3C->bAEqC && i3C->bAEqB) ||
-               (i3C->lineB != -1 && ::equal(pldB[i3C->lineB], pldC[i3C->lineC], false)))
+               (i3C->getLineB() != -1 && ::equal(pldB[i3C->getLineB()], pldC[i3C->getLineC()], false)))
             {
                 i3C->bBEqC = true;
             }
@@ -1026,27 +1026,27 @@ void calcDiff3LineListTrim(
             ++lineC;
         }
 
-        if(line > lineA && line > lineB && (*i3).lineA != -1 && (*i3).bAEqB && !(*i3).bAEqC)
+        if(line > lineA && line > lineB && (*i3).getLineA() != -1 && (*i3).bAEqB && !(*i3).bAEqC)
         {
             // Empty space for A and B. A matches B, but not C. Move A & B up.
             Diff3LineList::iterator i = lineA > lineB ? i3A : i3B;
             int l = lineA > lineB ? lineA : lineB;
 
-            if(pManualDiffHelpList->isValidMove( i->lineC, (*i3).lineA, 3, 1) &&
-               pManualDiffHelpList->isValidMove( i->lineC, (*i3).lineB, 3, 2))
+            if(pManualDiffHelpList->isValidMove( i->getLineC(), (*i3).getLineA(), 3, 1) &&
+               pManualDiffHelpList->isValidMove( i->getLineC(), (*i3).getLineB(), 3, 2))
             {
-                (*i).lineA = (*i3).lineA;
-                (*i).lineB = (*i3).lineB;
+                (*i).setLineA((*i3).getLineA());
+                (*i).setLineB((*i3).getLineB());
                 (*i).bAEqB = true;
 
-                if(i->lineC != -1 && ::equal(pldA[i->lineA], pldC[i->lineC], false))
+                if(i->getLineC() != -1 && ::equal(pldA[i->getLineA()], pldC[i->getLineC()], false))
                 {
                     (*i).bAEqC = true;
                     (*i).bBEqC = true;
                 }
 
-                (*i3).lineA = -1;
-                (*i3).lineB = -1;
+                (*i3).setLineA(-1);
+                (*i3).setLineB(-1);
                 (*i3).bAEqB = false;
                 i3A = i;
                 i3B = i;
@@ -1056,27 +1056,27 @@ void calcDiff3LineListTrim(
                 lineB = l + 1;
             }
         }
-        else if(line > lineA && line > lineC && (*i3).lineA != -1 && (*i3).bAEqC && !(*i3).bAEqB)
+        else if(line > lineA && line > lineC && (*i3).getLineA() != -1 && (*i3).bAEqC && !(*i3).bAEqB)
         {
             // Empty space for A and C. A matches C, but not B. Move A & C up.
             Diff3LineList::iterator i = lineA > lineC ? i3A : i3C;
             int l = lineA > lineC ? lineA : lineC;
 
-            if(pManualDiffHelpList->isValidMove(i->lineB, (*i3).lineA, 2, 1) &&
-               pManualDiffHelpList->isValidMove(i->lineB, (*i3).lineC, 2, 3))
+            if(pManualDiffHelpList->isValidMove(i->getLineB(), (*i3).getLineA(), 2, 1) &&
+               pManualDiffHelpList->isValidMove(i->getLineB(), (*i3).getLineC(), 2, 3))
             {
-                (*i).lineA = (*i3).lineA;
-                (*i).lineC = (*i3).lineC;
+                (*i).setLineA((*i3).getLineA());
+                (*i).setLineC((*i3).getLineC());
                 (*i).bAEqC = true;
 
-                if(i->lineB != -1 && ::equal(pldA[i->lineA], pldB[i->lineB], false))
+                if(i->getLineB() != -1 && ::equal(pldA[i->getLineA()], pldB[i->getLineB()], false))
                 {
                     (*i).bAEqB = true;
                     (*i).bBEqC = true;
                 }
 
-                (*i3).lineA = -1;
-                (*i3).lineC = -1;
+                (*i3).setLineA(-1);
+                (*i3).setLineC(-1);
                 (*i3).bAEqC = false;
                 i3A = i;
                 i3C = i;
@@ -1086,27 +1086,27 @@ void calcDiff3LineListTrim(
                 lineC = l + 1;
             }
         }
-        else if(line > lineB && line > lineC && (*i3).lineB != -1 && (*i3).bBEqC && !(*i3).bAEqC)
+        else if(line > lineB && line > lineC && (*i3).getLineB() != -1 && (*i3).bBEqC && !(*i3).bAEqC)
         {
             // Empty space for B and C. B matches C, but not A. Move B & C up.
             Diff3LineList::iterator i = lineB > lineC ? i3B : i3C;
             int l = lineB > lineC ? lineB : lineC;
 
-            if(pManualDiffHelpList->isValidMove( i->lineA, (*i3).lineB, 1, 2) &&
-               pManualDiffHelpList->isValidMove( i->lineA, (*i3).lineC, 1, 3))
+            if(pManualDiffHelpList->isValidMove( i->getLineA(), (*i3).getLineB(), 1, 2) &&
+               pManualDiffHelpList->isValidMove( i->getLineA(), (*i3).getLineC(), 1, 3))
             {
-                (*i).lineB = (*i3).lineB;
-                (*i).lineC = (*i3).lineC;
+                (*i).setLineB((*i3).getLineB());
+                (*i).setLineC((*i3).getLineC());
                 (*i).bBEqC = true;
 
-                if(i->lineA != -1 && ::equal(pldA[i->lineA], pldB[i->lineB], false))
+                if(i->getLineA() != -1 && ::equal(pldA[i->getLineA()], pldB[i->getLineB()], false))
                 {
                     (*i).bAEqB = true;
                     (*i).bAEqC = true;
                 }
 
-                (*i3).lineB = -1;
-                (*i3).lineC = -1;
+                (*i3).setLineB(-1);
+                (*i3).setLineC(-1);
                 (*i3).bBEqC = false;
                 i3B = i;
                 i3C = i;
@@ -1117,19 +1117,19 @@ void calcDiff3LineListTrim(
             }
         }
 
-        if((*i3).lineA != -1)
+        if((*i3).getLineA() != -1)
         {
             lineA = line + 1;
             i3A = i3;
             ++i3A;
         }
-        if((*i3).lineB != -1)
+        if((*i3).getLineB() != -1)
         {
             lineB = line + 1;
             i3B = i3;
             ++i3B;
         }
-        if((*i3).lineC != -1)
+        if((*i3).getLineC() != -1)
         {
             lineC = line + 1;
             i3C = i3;
@@ -1146,7 +1146,7 @@ void calcDiff3LineListTrim(
    for( ; it!=d3ll.end(); ++it, ++li )
    {
       printf( "%4d %4d %4d %4d  A%c=B A%c=C B%c=C\n",
-         li, (*it).lineA, (*it).lineB, (*it).lineC,
+         li, (*it).getLineA(), (*it).getLineB(), (*it).getLineC(),
          (*it).bAEqB ? '=' : '!', (*it).bAEqC ? '=' : '!', (*it).bBEqC ? '=' : '!' );
 
    }
@@ -1178,9 +1178,9 @@ void calcWhiteDiff3Lines(
 
     for(; i3 != d3ll.end(); ++i3)
     {
-        i3->bWhiteLineA = ((*i3).lineA == -1 || pldA == nullptr || pldA[(*i3).lineA].whiteLine() || pldA[(*i3).lineA].bContainsPureComment);
-        i3->bWhiteLineB = ((*i3).lineB == -1 || pldB == nullptr || pldB[(*i3).lineB].whiteLine() || pldB[(*i3).lineB].bContainsPureComment);
-        i3->bWhiteLineC = ((*i3).lineC == -1 || pldC == nullptr || pldC[(*i3).lineC].whiteLine() || pldC[(*i3).lineC].bContainsPureComment);
+        i3->bWhiteLineA = ((*i3).getLineA() == -1 || pldA == nullptr || pldA[(*i3).getLineA()].whiteLine() || pldA[(*i3).getLineA()].bContainsPureComment);
+        i3->bWhiteLineB = ((*i3).getLineB() == -1 || pldB == nullptr || pldB[(*i3).getLineB()].whiteLine() || pldB[(*i3).getLineB()].bContainsPureComment);
+        i3->bWhiteLineC = ((*i3).getLineC() == -1 || pldC == nullptr || pldC[(*i3).getLineC()].whiteLine() || pldC[(*i3).getLineC()].bContainsPureComment);
     }
 }
 
@@ -1351,106 +1351,97 @@ void calcDiff(const T* p1, LineRef size1, const T* p2, LineRef size2, DiffList& 
     }
 }
 
-bool fineDiff(
-    Diff3LineList& diff3LineList,
-    int selector,
-    const LineData* v1,
-    const LineData* v2)
+bool Diff3Line::fineDiff(const int selector, const LineData* v1, const LineData* v2)
+{
+    bool bTextsTotalEqual = true;
+    LineRef k1 = 0;
+    LineRef k2 = 0;
+    int maxSearchLength = 500;
+
+    Q_ASSERT(selector == 1 || selector == 2 || selector == 3);
+
+    if(selector == 1)
+    {
+        k1 = getLineA();
+        k2 = getLineB();
+    }
+    else if(selector == 2)
+    {
+        k1 = getLineB();
+        k2 = getLineC();
+    }
+    else if(selector == 3)
+    {
+        k1 = getLineC();
+        k2 = getLineA();
+    }
+
+    if((k1 == -1 && k2 != -1) || (k1 != -1 && k2 == -1)) bTextsTotalEqual = false;
+    if(k1 != -1 && k2 != -1)
+    {
+        if(v1[k1].size() != v2[k2].size() || memcmp(v1[k1].getLine(), v2[k2].getLine(), v1[k1].size() << 1) != 0)
+        {
+            bTextsTotalEqual = false;
+            DiffList* pDiffList = new DiffList;
+            calcDiff(v1[k1].getLine(), v1[k1].size(), v2[k2].getLine(), v2[k2].size(), *pDiffList, 2, maxSearchLength);
+
+            // Optimize the diff list.
+            DiffList::iterator dli;
+            bool bUsefulFineDiff = false;
+            for(dli = pDiffList->begin(); dli != pDiffList->end(); ++dli)
+            {
+                if(dli->nofEquals >= 4)
+                {
+                    bUsefulFineDiff = true;
+                    break;
+                }
+            }
+
+            for(dli = pDiffList->begin(); dli != pDiffList->end(); ++dli)
+            {
+                if(dli->nofEquals < 4 && (dli->diff1 > 0 || dli->diff2 > 0) && !(bUsefulFineDiff && dli == pDiffList->begin()))
+                {
+                    dli->diff1 += dli->nofEquals;
+                    dli->diff2 += dli->nofEquals;
+                    dli->nofEquals = 0;
+                }
+            }
+
+            setFineDiff(selector, pDiffList);
+        }
+
+        if((v1[k1].bContainsPureComment || v1[k1].whiteLine()) && (v2[k2].bContainsPureComment || v2[k2].whiteLine()))
+        {
+            if(selector == 1)
+            {
+                bAEqB = true;
+            }
+            else if(selector == 2)
+            {
+                bBEqC = true;
+            }
+            else if(selector == 3)
+            {
+                bAEqC = true;
+            }
+        }
+    }
+
+    return bTextsTotalEqual;
+}
+
+bool Diff3LineList::fineDiff(const int selector, const LineData* v1, const LineData* v2)
 {
     // Finetuning: Diff each line with deltas
     ProgressProxy pp;
-    int maxSearchLength = 500;
     Diff3LineList::iterator i;
-    LineRef k1 = 0;
-    LineRef k2 = 0;
     bool bTextsTotalEqual = true;
-    int listSize = diff3LineList.size();
+    int listSize = size();
     pp.setMaxNofSteps(listSize);
     int listIdx = 0;
-    for(i = diff3LineList.begin(); i != diff3LineList.end(); ++i)
+    for(i = begin(); i != end(); ++i)
     {
-        Q_ASSERT(selector == 1 || selector == 2 || selector == 3);
-
-        if(selector == 1) {
-            k1 = i->lineA;
-            k2 = i->lineB;
-        }
-        else if(selector == 2)
-        {
-            k1 = i->lineB;
-            k2 = i->lineC;
-        }
-        else if(selector == 3)
-        {
-            k1 = i->lineC;
-            k2 = i->lineA;
-        }
-
-        if((k1 == -1 && k2 != -1) || (k1 != -1 && k2 == -1)) bTextsTotalEqual = false;
-        if(k1 != -1 && k2 != -1)
-        {
-            if(v1[k1].size() != v2[k2].size() || memcmp(v1[k1].getLine(), v2[k2].getLine(), v1[k1].size() << 1) != 0)
-            {
-                bTextsTotalEqual = false;
-                DiffList* pDiffList = new DiffList;
-                calcDiff(v1[k1].getLine(), v1[k1].size(), v2[k2].getLine(), v2[k2].size(), *pDiffList, 2, maxSearchLength);
-
-                // Optimize the diff list.
-                DiffList::iterator dli;
-                bool bUsefulFineDiff = false;
-                for(dli = pDiffList->begin(); dli != pDiffList->end(); ++dli)
-                {
-                    if(dli->nofEquals >= 4)
-                    {
-                        bUsefulFineDiff = true;
-                        break;
-                    }
-                }
-
-                for(dli = pDiffList->begin(); dli != pDiffList->end(); ++dli)
-                {
-                    if(dli->nofEquals < 4 && (dli->diff1 > 0 || dli->diff2 > 0) && !(bUsefulFineDiff && dli == pDiffList->begin()))
-                    {
-                        dli->diff1 += dli->nofEquals;
-                        dli->diff2 += dli->nofEquals;
-                        dli->nofEquals = 0;
-                    }
-                }
-
-                Q_ASSERT(selector == 1 || selector == 2 || selector == 3);
-                if(selector == 1) {
-                    delete(*i).pFineAB;
-                    (*i).pFineAB = pDiffList;
-                }
-                else if(selector == 2)
-                {
-                    delete(*i).pFineBC;
-                    (*i).pFineBC = pDiffList;
-                }
-                else if(selector == 3)
-                {
-                    delete(*i).pFineCA;
-                    (*i).pFineCA = pDiffList;
-                }
-            }
-
-            if((v1[k1].bContainsPureComment || v1[k1].whiteLine()) && (v2[k2].bContainsPureComment || v2[k2].whiteLine()))
-            {
-                Q_ASSERT(selector == 1 || selector == 2 || selector == 3);
-
-                if(selector == 1) {
-                    i->bAEqB = true;
-                }
-                else if(selector == 2)
-                {
-                    i->bBEqC = true;
-                }
-                else if(selector == 3)
-                {
-                    i->bAEqC = true;
-                }
-            }
-        }
+        bTextsTotalEqual = i->fineDiff(selector, v1, v2);
         ++listIdx;
         pp.step();
     }

@@ -63,11 +63,11 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, LineRef idx)
 
         Q_ASSERT(idx >= 1 && idx <= 3);
         if(idx == 1)
-            l = (*it).lineA;
+            l = (*it).getLineA();
         else if(idx == 2)
-            l = (*it).lineB;
+            l = (*it).getLineB();
         else if(idx == 3)
-            l = (*it).lineC;
+            l = (*it).getLineC();
 
         if(l != -1)
         {
@@ -204,7 +204,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
 
                 pp.setInformation(i18n("Linediff: A <-> B"));
                 calcDiff3LineListUsingAB(&m_diffList12, m_diff3LineList);
-                pTotalDiffStatus->bTextAEqB = fineDiff(m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
+                pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
                 if(m_sd1.getSizeBytes() == 0) pTotalDiffStatus->bTextAEqB = false;
 
                 pp.step();
@@ -276,29 +276,29 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
 
             pp.setInformation(i18n("Linediff: A <-> B"));
             if(m_sd1.hasData() && m_sd2.hasData() && m_sd1.isText() && m_sd2.isText())
-              pTotalDiffStatus->bTextAEqB = fineDiff(m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
+              pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
             pp.step();
             pp.setInformation(i18n("Linediff: B <-> C"));
             if(m_sd2.hasData() && m_sd3.hasData() && m_sd2.isText() && m_sd3.isText())
-            pTotalDiffStatus->bTextBEqC = fineDiff(m_diff3LineList, 2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
+            pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
             pp.step();
             pp.setInformation(i18n("Linediff: A <-> C"));
             if(m_sd1.hasData() && m_sd3.hasData() && m_sd1.isText() && m_sd3.isText())
-              pTotalDiffStatus->bTextAEqC = fineDiff(m_diff3LineList, 3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
+              pTotalDiffStatus->bTextAEqC = m_diff3LineList.fineDiff(3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
             debugLineCheck(m_diff3LineList, m_sd2.getSizeLines(), 2);
             debugLineCheck(m_diff3LineList, m_sd3.getSizeLines(), 3);
 
             pp.setInformation(i18n("Linediff: A <-> B"));
             if(m_sd1.hasData() && m_sd2.hasData() && m_sd1.isText() && m_sd2.isText())
-                pTotalDiffStatus->bTextAEqB = fineDiff(m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
+                pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
             pp.step();
             pp.setInformation(i18n("Linediff: B <-> C"));
             if(m_sd3.hasData() && m_sd2.hasData() && m_sd3.isText() && m_sd2.isText())
-                pTotalDiffStatus->bTextBEqC = fineDiff(m_diff3LineList, 2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
+                pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
             pp.step();
             pp.setInformation(i18n("Linediff: A <-> C"));
             if(m_sd1.hasData() && m_sd3.hasData() && m_sd1.isText() && m_sd3.isText())
-              pTotalDiffStatus->bTextAEqC = fineDiff(m_diff3LineList, 3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
+              pTotalDiffStatus->bTextAEqC = m_diff3LineList.fineDiff(3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
             pp.step();
             if(m_sd1.getSizeBytes() == 0) {
                 pTotalDiffStatus->bTextAEqB = false;
@@ -754,9 +754,9 @@ int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& 
     for(i = 0; i < d3lv.size(); ++i)
     {
         const Diff3Line& d3l = *d3lv[i];
-        if((lineA1 >= 0 && lineA1 == d3l.lineA) ||
-           (lineB1 >= 0 && lineB1 == d3l.lineB) ||
-           (lineC1 >= 0 && lineC1 == d3l.lineC))
+        if((lineA1 >= 0 && lineA1 == d3l.getLineA()) ||
+           (lineB1 >= 0 && lineB1 == d3l.getLineB()) ||
+           (lineC1 >= 0 && lineC1 == d3l.getLineC()))
             return i;
     }
     return -1;

@@ -82,10 +82,11 @@ class DiffBufferInfo
 
 class Diff3Line
 {
-  public:
+  private:
     LineRef lineA = -1;
     LineRef lineB = -1;
     LineRef lineC = -1;
+  public:
 
     bool bAEqC : 1; // These are true if equal or only white-space changes exist.
     bool bBEqC : 1;
@@ -133,6 +134,14 @@ class Diff3Line
         pFineCA = nullptr;
     }
 
+    LineRef getLineA() const { return lineA; }
+    LineRef getLineB() const { return lineB; }
+    LineRef getLineC() const { return lineC; }
+
+    void setLineA(const LineRef& line) { lineA = line; }
+    void setLineB(const LineRef& line) { lineB = line; }
+    void setLineC(const LineRef& line) { lineC = line; }
+
     bool operator==(const Diff3Line& d3l) const
     {
         return lineA == d3l.lineA && lineB == d3l.lineB && lineC == d3l.lineC && bAEqB == d3l.bAEqB && bAEqC == d3l.bAEqC && bBEqC == d3l.bBEqC;
@@ -161,10 +170,37 @@ class Diff3Line
         if(src == 3) return lineC;
         return -1;
     }
+
+    bool fineDiff(const int selector, const LineData* v1, const LineData* v2);
+  private:
+    void setFineDiff(const int selector, DiffList* pDiffList)
+    {
+        Q_ASSERT(selector == 1 || selector == 2 || selector == 3);
+        if(selector == 1)
+        {
+            if(pFineAB != nullptr)
+                delete pFineAB;
+            pFineAB = pDiffList;
+        }
+        else if(selector == 2)
+        {
+            if(pFineBC != nullptr)
+                delete pFineBC;
+            pFineBC = pDiffList;
+        }
+        else if(selector == 3)
+        {
+            if(pFineCA)
+                delete pFineCA;
+            pFineCA = pDiffList;
+        }
+    }
 };
 
 class Diff3LineList : public QList<Diff3Line>
 {
+    public:
+      bool fineDiff(const int selector, const LineData* v1, const LineData* v2);
 };
 
 class Diff3LineVector : public QVector<Diff3Line*>
