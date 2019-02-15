@@ -90,7 +90,7 @@ MergeResultWindow::MergeResultWindow(
         connect(m_pStatusBar, &QStatusBar::messageChanged, this, &MergeResultWindow::slotStatusMessageChanged);
 
     m_pOptions = pOptions;
-    m_bPaintingAllowed = false;
+    setUpdatesEnabled(false);
     m_delayedDrawTimer = 0;
 
     m_cursorXPos = 0;
@@ -1888,18 +1888,19 @@ void MergeResultWindow::writeLine(
 
 void MergeResultWindow::setPaintingAllowed(bool bPaintingAllowed)
 {
-    m_bPaintingAllowed = bPaintingAllowed;
-    if(!m_bPaintingAllowed)
+    setUpdatesEnabled(bPaintingAllowed);
+    if(!bPaintingAllowed)
     {
         m_currentMergeLineIt = m_mergeLineList.end();
         reset();
     }
-    update();
+    else
+        update();
 }
 
 void MergeResultWindow::paintEvent(QPaintEvent*)
 {
-    if(m_pDiff3LineList == nullptr || !m_bPaintingAllowed)
+    if(m_pDiff3LineList == nullptr)
         return;
 
     bool bOldSelectionContainsData = m_selection.selectionContainsData();
@@ -1997,7 +1998,7 @@ void MergeResultWindow::updateSourceMask()
 {
     int srcMask = 0;
     int enabledMask = 0;
-    if(!hasFocus() || m_pDiff3LineList == nullptr || !m_bPaintingAllowed || m_currentMergeLineIt == m_mergeLineList.end())
+    if(!hasFocus() || m_pDiff3LineList == nullptr || !updatesEnabled() || m_currentMergeLineIt == m_mergeLineList.end())
     {
         srcMask = 0;
         enabledMask = 0;
@@ -3069,7 +3070,7 @@ Overview::Overview(Options* pOptions)
     m_bTripleDiff = false;
     m_eOverviewMode = eOMNormal;
     m_nofLines = 1;
-    m_bPaintingAllowed = false;
+    setUpdatesEnabled(false);
     m_firstLine = 0;
     m_pageHeight = 0;
 
@@ -3133,10 +3134,11 @@ void Overview::mouseMoveEvent(QMouseEvent* e)
 
 void Overview::setPaintingAllowed(bool bAllowPainting)
 {
-    if(m_bPaintingAllowed != bAllowPainting)
+    if(updatesEnabled() != bAllowPainting)
     {
-        m_bPaintingAllowed = bAllowPainting;
-        if(m_bPaintingAllowed)
+
+        setUpdatesEnabled(bAllowPainting);
+        if(bAllowPainting)
             update();
         else
             reset();
@@ -3308,7 +3310,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
 
 void Overview::paintEvent(QPaintEvent*)
 {
-    if(m_pDiff3LineList == nullptr || !m_bPaintingAllowed) return;
+    if(m_pDiff3LineList == nullptr) return;
     int h = height() - 1;
     int w = width();
 

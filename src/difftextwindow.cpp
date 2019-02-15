@@ -49,7 +49,6 @@ class DiffTextWindowData
     explicit DiffTextWindowData(DiffTextWindow* p)
     {
         m_pDiffTextWindow = p;
-        m_bPaintingAllowed = false;
         m_pLineData = nullptr;
         m_size = 0;
         m_bWordWrap = false;
@@ -83,7 +82,6 @@ class DiffTextWindowData
     QTextCodec* m_pTextCodec;
     e_LineEndStyle m_eLineEndStyle;
 
-    bool m_bPaintingAllowed;
     const LineData* m_pLineData;
     int m_size;
     QString m_filename;
@@ -168,6 +166,7 @@ DiffTextWindow::DiffTextWindow(
     setObjectName(QString("DiffTextWindow%1").arg(winIdx));
     setAttribute(Qt::WA_OpaquePaintEvent);
     //setAttribute( Qt::WA_PaintOnScreen );
+    setUpdatesEnabled(false);
 
     d = new DiffTextWindowData(this);
     d->m_pDiffTextWindowFrame = pParent;
@@ -180,7 +179,7 @@ DiffTextWindow::DiffTextWindow(
     setMinimumSize(QSize(20, 20));
 
     d->m_pStatusBar = pStatusBar;
-    d->m_bPaintingAllowed = true;
+    setUpdatesEnabled(true);
     d->m_bWordWrap = false;
     d->m_winIdx = winIdx;
 
@@ -239,10 +238,10 @@ void DiffTextWindow::reset()
 
 void DiffTextWindow::setPaintingAllowed(bool bAllowPainting)
 {
-    if(d->m_bPaintingAllowed != bAllowPainting)
+    if(updatesEnabled() != bAllowPainting)
     {
-        d->m_bPaintingAllowed = bAllowPainting;
-        if(d->m_bPaintingAllowed)
+        setUpdatesEnabled(bAllowPainting);
+        if(bAllowPainting)
             update();
         else
             reset();
@@ -1010,7 +1009,7 @@ void DiffTextWindowData::writeLine(
 void DiffTextWindow::paintEvent(QPaintEvent* e)
 {
     QRect invalidRect = e->rect();
-    if(invalidRect.isEmpty() || !d->m_bPaintingAllowed)
+    if(invalidRect.isEmpty())
         return;
 
     if(d->m_pDiff3LineVector == nullptr || (d->m_diff3WrapLineVector.empty() && d->m_bWordWrap))
@@ -1042,7 +1041,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
 
 void DiffTextWindow::print(MyPainter& p, const QRect&, int firstLine, int nofLinesPerPage)
 {
-    if(d->m_pDiff3LineVector == nullptr || !d->m_bPaintingAllowed ||
+    if(d->m_pDiff3LineVector == nullptr || !updatesEnabled() ||
        (d->m_diff3WrapLineVector.empty() && d->m_bWordWrap))
         return;
     resetSelection();
@@ -1459,7 +1458,7 @@ void DiffTextWindow::getSelectionRange(int* pFirstLine, int* pLastLine, e_CoordT
 
 void DiffTextWindow::convertSelectionToD3LCoords()
 {
-    if(d->m_pDiff3LineVector == nullptr || !d->m_bPaintingAllowed || !isVisible() || d->m_selection.isEmpty())
+    if(d->m_pDiff3LineVector == nullptr || !updatesEnabled() || !isVisible() || d->m_selection.isEmpty())
     {
         return;
     }
@@ -1565,7 +1564,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
         if(wrapLineVectorSize == 0)
         {
             d->m_wrapLineCacheList.clear();
-            d->m_bPaintingAllowed = false;
+            setUpdatesEnabled(false);
             for(int i = 0, j = 0; i < d->m_pDiff3LineVector->size(); i += s_linesPerRunnable, ++j)
             //int i=0;
             {
@@ -1576,7 +1575,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
         else
         {
             recalcWordWrapHelper(wrapLineVectorSize, visibleTextWidth, 0);
-            d->m_bPaintingAllowed = true;
+            setUpdatesEnabled(true);
         }
     }
     else
@@ -1585,7 +1584,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
         {
             d->m_diff3WrapLineVector.resize(0);
             d->m_wrapLineCacheList.clear();
-            d->m_bPaintingAllowed = false;
+            setUpdatesEnabled(false);
             for(int i = 0, j = 0; i < d->m_pDiff3LineVector->size(); i += s_linesPerRunnable, ++j)
             {
                 s_runnables.push_back(new RecalcWordWrapRunnable(this, d, visibleTextWidth, j));
@@ -1593,7 +1592,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
         }
         else
         {
-            d->m_bPaintingAllowed = true;
+           setUpdatesEnabled(true);
         }
     }
 }

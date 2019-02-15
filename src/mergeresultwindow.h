@@ -56,7 +56,6 @@ private:
    int m_firstLine;
    int m_pageHeight;
    QPixmap m_pixmap;
-   bool m_bPaintingAllowed;
    e_OverviewMode m_eOverviewMode;
    int m_nofLines;
 
@@ -187,7 +186,6 @@ private:
    const Diff3LineList* m_pDiff3LineList;
    TotalDiffStatus* m_pTotalDiffStatus;
 
-   bool m_bPaintingAllowed;
    int m_delayedDrawTimer;
    Overview::e_OverviewMode m_eOverviewMode;
    QString m_persistentStatusMessage;
