@@ -88,41 +88,22 @@ class Diff3Line
     LineRef lineC = -1;
   public:
 
-    bool bAEqC : 1; // These are true if equal or only white-space changes exist.
-    bool bBEqC : 1;
-    bool bAEqB : 1;
+    bool bAEqC = false; // These are true if equal or only white-space changes exist.
+    bool bBEqC = false;
+    bool bAEqB = false;
 
-    bool bWhiteLineA : 1;
-    bool bWhiteLineB : 1;
-    bool bWhiteLineC : 1;
+    bool bWhiteLineA  = false;
+    bool bWhiteLineB  = false;
+    bool bWhiteLineC  = false;
 
-    DiffList* pFineAB; // These are 0 only if completely equal or if either source doesn't exist.
-    DiffList* pFineBC;
-    DiffList* pFineCA;
+    DiffList* pFineAB = nullptr; // These are 0 only if completely equal or if either source doesn't exist.
+    DiffList* pFineBC = nullptr;
+    DiffList* pFineCA = nullptr;
 
-    int linesNeededForDisplay;    // Due to wordwrap
-    int sumLinesNeededForDisplay; // For fast conversion to m_diff3WrapLineVector
+    int linesNeededForDisplay = 1;    // Due to wordwrap
+    int sumLinesNeededForDisplay = 0; // For fast conversion to m_diff3WrapLineVector
 
-    DiffBufferInfo* m_pDiffBufferInfo; // For convenience
-
-    Diff3Line()
-    {
-        lineA = -1;
-        lineB = -1;
-        lineC = -1;
-        bAEqC = false;
-        bAEqB = false;
-        bBEqC = false;
-        pFineAB = nullptr;
-        pFineBC = nullptr;
-        pFineCA = nullptr;
-        linesNeededForDisplay = 1;
-        sumLinesNeededForDisplay = 0;
-        bWhiteLineA = false;
-        bWhiteLineB = false;
-        bWhiteLineC = false;
-        m_pDiffBufferInfo = nullptr;
-    }
+    DiffBufferInfo* m_pDiffBufferInfo = nullptr; // For convenience
 
     ~Diff3Line()
     {
@@ -223,7 +204,6 @@ typedef QVector<Diff3WrapLine> Diff3WrapLineVector;
 class TotalDiffStatus
 {
   public:
-    TotalDiffStatus() { reset(); }
     inline void reset()
     {
         bBinaryAEqC = false;
