@@ -194,7 +194,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         {
             pTotalDiffStatus->bBinaryAEqB = m_sd1.isBinaryEqualWith(m_sd2);
 
-            if(m_sd1.hasData() && m_sd1.isText() && m_sd2.hasData() && m_sd2.isText())
+            if(m_sd1.isText() && m_sd2.isText())
             {
                pp.setInformation(i18n("Diff: A <-> B"));
                m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, 1, 2,
@@ -237,7 +237,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             pTotalDiffStatus->bBinaryBEqC = m_sd3.isBinaryEqualWith(m_sd2);
 
             pp.setInformation(i18n("Diff: A <-> B"));
-            if(m_sd1.hasData() && m_sd2.hasData() && m_sd1.isText() && m_sd2.isText())
+            if(m_sd1.isText() && m_sd2.isText())
             {
                 m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, 1, 2,
                         &m_pOptionDialog->m_options);
@@ -246,7 +246,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             }
             pp.step();
             pp.setInformation(i18n("Diff: A <-> C"));
-            if(m_sd1.hasData() && m_sd1.isText() && m_sd3.hasData() && m_sd3.isText())
+            if(m_sd1.isText() && m_sd3.isText())
             {
                 m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13, 1, 3,
                         &m_pOptionDialog->m_options);
@@ -257,7 +257,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             }
             pp.step();
             pp.setInformation(i18n("Diff: B <-> C"));
-            if(m_sd2.hasData() && m_sd2.isText() && m_sd3.hasData() && m_sd3.isText())
+            if(m_sd2.isText() && m_sd3.isText())
             {
                 m_manualDiffHelpList.runDiff(m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23, 2, 3,
                         &m_pOptionDialog->m_options);

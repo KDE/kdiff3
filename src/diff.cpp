@@ -542,10 +542,10 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
     pp.setCurrent(0);
 
     diffList.clear();
-    if(p1[0].getLine() == nullptr || p2[0].getLine() == nullptr || size1 == 0 || size2 == 0)
+    if(p1 == nullptr || p1[0].getLine() == nullptr || p2 == nullptr || p2[0].getLine() == nullptr || size1 == 0 || size2 == 0)
     {
         Diff d(0, 0, 0);
-        if(p1[0].getLine() == nullptr && p2[0].getLine() == nullptr && size1 == size2)
+        if(p1 != nullptr && p2 != nullptr && p1[0].getLine() == nullptr && p2[0].getLine() == nullptr && size1 == size2)
             d.nofEquals = size1;
         else
         {
@@ -642,7 +642,6 @@ bool ManualDiffHelpList::runDiff(const LineData* p1, LineRef size1, const LineDa
              int winIdx1, int winIdx2,
              Options* pOptions)
 {
-    Q_ASSERT(p1 != nullptr && p2 != nullptr);
     diffList.clear();
     DiffList diffList2;
 
