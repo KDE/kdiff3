@@ -638,9 +638,8 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
     return true;
 }
 
-bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList,
+bool ManualDiffHelpList::runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList,
              int winIdx1, int winIdx2,
-             ManualDiffHelpList* pManualDiffHelpList,
              Options* pOptions)
 {
     Q_ASSERT(p1 != nullptr && p2 != nullptr);
@@ -650,7 +649,7 @@ bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size
     int l1begin = 0;
     int l2begin = 0;
     ManualDiffHelpList::const_iterator i;
-    for(i = pManualDiffHelpList->begin(); i != pManualDiffHelpList->end(); ++i)
+    for(i = begin(); i != end(); ++i)
     {
         const ManualDiffHelpEntry& mdhe = *i;
 
@@ -659,7 +658,7 @@ bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size
 
         if(l1end >= 0 && l2end >= 0)
         {
-            runDiff(p1 + l1begin, l1end - l1begin, p2 + l2begin, l2end - l2begin, diffList2, pOptions);
+            ::runDiff(p1 + l1begin, l1end - l1begin, p2 + l2begin, l2end - l2begin, diffList2, pOptions);
             diffList.splice(diffList.end(), diffList2);
             l1begin = l1end;
             l2begin = l2end;
@@ -671,14 +670,14 @@ bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size
             {
                 ++l1end; // point to line after last selected line
                 ++l2end;
-                runDiff(p1 + l1begin, l1end - l1begin, p2 + l2begin, l2end - l2begin, diffList2, pOptions);
+                ::runDiff(p1 + l1begin, l1end - l1begin, p2 + l2begin, l2end - l2begin, diffList2, pOptions);
                 diffList.splice(diffList.end(), diffList2);
                 l1begin = l1end;
                 l2begin = l2end;
             }
         }
     }
-    runDiff(p1 + l1begin, size1 - l1begin, p2 + l2begin, size2 - l2begin, diffList2, pOptions);
+    ::runDiff(p1 + l1begin, size1 - l1begin, p2 + l2begin, size2 - l2begin, diffList2, pOptions);
     diffList.splice(diffList.end(), diffList2);
     return true;
 }

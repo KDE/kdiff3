@@ -326,6 +326,10 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
     public:
         bool isValidMove(int line1, int line2, int winIdx1, int winIdx2) const;
         void insertEntry(int winIdx, LineRef firstLine, LineRef lastLine);
+
+        bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList,
+                     int winIdx1, int winIdx2,
+                     Options* pOptions);
 };
 
 void calcDiff3LineListUsingAB(
@@ -400,9 +404,6 @@ class MyPainter : public QPainter
         QPainter::drawLine(m_xOffset + m_factor * x1, y1, m_xOffset + m_factor * x2, y2);
     }
 };
-
-bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList, int winIdx1, int winIdx2,
-             ManualDiffHelpList* pManualDiffHelpList, Options* pOptions);
 
 bool fineDiff(
     Diff3LineList& diff3LineList,
