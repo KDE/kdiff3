@@ -23,28 +23,6 @@
 
 class QPainter;
 
-enum e_MergeDetails
-{
-   eDefault,
-   eNoChange,
-   eBChanged,
-   eCChanged,
-   eBCChanged,         // conflict
-   eBCChangedAndEqual, // possible conflict
-   eBDeleted,
-   eCDeleted,
-   eBCDeleted,         // possible conflict
-
-   eBChanged_CDeleted, // conflict
-   eCChanged_BDeleted, // conflict
-   eBAdded,
-   eCAdded,
-   eBCAdded,           // conflict
-   eBCAddedAndEqual    // possible conflict
-};
-
-void mergeOneLine( const Diff3Line& d, e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, int& src, bool bTwoInputs );
-
 enum e_MergeSrcSelector
 {
    A=1,

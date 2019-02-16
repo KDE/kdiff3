@@ -21,6 +21,26 @@
 #include "gnudiff_diff.h"
 #include "SourceData.h"
 
+enum e_MergeDetails
+{
+   eDefault,
+   eNoChange,
+   eBChanged,
+   eCChanged,
+   eBCChanged,         // conflict
+   eBCChangedAndEqual, // possible conflict
+   eBDeleted,
+   eCDeleted,
+   eBCDeleted,         // possible conflict
+
+   eBChanged_CDeleted, // conflict
+   eCChanged_BDeleted, // conflict
+   eBAdded,
+   eCAdded,
+   eBCAdded,           // conflict
+   eBCAddedAndEqual    // possible conflict
+};
+
 // Each range with matching elements is followed by a range with differences on either side.
 // Then again range of matching elements should follow.
 class Diff
@@ -153,6 +173,8 @@ class Diff3Line
     }
 
     bool fineDiff(const int selector, const LineData* v1, const LineData* v2);
+    void mergeOneLine(e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, int& src, bool bTwoInputs) const;
+
   private:
     void setFineDiff(const int selector, DiffList* pDiffList)
     {

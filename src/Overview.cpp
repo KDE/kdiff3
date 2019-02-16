@@ -120,7 +120,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         bool bConflict;
         bool bLineRemoved;
         int src;
-        mergeOneLine(d3l, md, bConflict, bLineRemoved, src, !m_bTripleDiff);
+        d3l.mergeOneLine(md, bConflict, bLineRemoved, src, !m_bTripleDiff);
 
         QColor c = m_pOptions->m_bgColor;
         bool bWhiteSpaceChange = false;

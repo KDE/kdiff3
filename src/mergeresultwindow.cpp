@@ -178,9 +178,9 @@ void MergeResultWindow::reset()
 
 // Calculate the merge information for the given Diff3Line.
 // Results will be stored in mergeDetails, bConflict, bLineRemoved and src.
-void mergeOneLine(
-    const Diff3Line& d, e_MergeDetails& mergeDetails, bool& bConflict,
-    bool& bLineRemoved, int& src, bool bTwoInputs)
+void Diff3Line::mergeOneLine(
+    e_MergeDetails& mergeDetails, bool& bConflict,
+    bool& bLineRemoved, int& src, bool bTwoInputs) const
 {
     mergeDetails = eDefault;
     bConflict = false;
@@ -189,9 +189,9 @@ void mergeOneLine(
 
     if(bTwoInputs) // Only two input files
     {
-        if(d.getLineA() != -1 && d.getLineB() != -1)
+        if(getLineA() != -1 && getLineB() != -1)
         {
-            if(d.pFineAB == nullptr)
+            if(pFineAB == nullptr)
             {
                 mergeDetails = eNoChange;
                 src = A;
@@ -204,12 +204,12 @@ void mergeOneLine(
         }
         else
         {
-            if(d.getLineA() != -1 && d.getLineB() == -1)
+            if(getLineA() != -1 && getLineB() == -1)
             {
                 mergeDetails = eBDeleted;
                 bConflict = true;
             }
-            else if(d.getLineA() == -1 && d.getLineB() != -1)
+            else if(getLineA() == -1 && getLineB() != -1)
             {
                 mergeDetails = eBDeleted;
                 bConflict = true;
@@ -219,29 +219,29 @@ void mergeOneLine(
     }
 
     // A is base.
-    if(d.getLineA() != -1 && d.getLineB() != -1 && d.getLineC() != -1)
+    if(getLineA() != -1 && getLineB() != -1 && getLineC() != -1)
     {
-        if(d.pFineAB == nullptr && d.pFineBC == nullptr && d.pFineCA == nullptr)
+        if(pFineAB == nullptr && pFineBC == nullptr && pFineCA == nullptr)
         {
             mergeDetails = eNoChange;
             src = A;
         }
-        else if(d.pFineAB == nullptr && d.pFineBC != nullptr && d.pFineCA != nullptr)
+        else if(pFineAB == nullptr && pFineBC != nullptr && pFineCA != nullptr)
         {
             mergeDetails = eCChanged;
             src = C;
         }
-        else if(d.pFineAB != nullptr && d.pFineBC != nullptr && d.pFineCA == nullptr)
+        else if(pFineAB != nullptr && pFineBC != nullptr && pFineCA == nullptr)
         {
             mergeDetails = eBChanged;
             src = B;
         }
-        else if(d.pFineAB != nullptr && d.pFineBC == nullptr && d.pFineCA != nullptr)
+        else if(pFineAB != nullptr && pFineBC == nullptr && pFineCA != nullptr)
         {
             mergeDetails = eBCChangedAndEqual;
             src = C;
         }
-        else if(d.pFineAB != nullptr && d.pFineBC != nullptr && d.pFineCA != nullptr)
+        else if(pFineAB != nullptr && pFineBC != nullptr && pFineCA != nullptr)
         {
             mergeDetails = eBCChanged;
             bConflict = true;
@@ -249,9 +249,9 @@ void mergeOneLine(
         else
             Q_ASSERT(true);
     }
-    else if(d.getLineA() != -1 && d.getLineB() != -1 && d.getLineC() == -1)
+    else if(getLineA() != -1 && getLineB() != -1 && getLineC() == -1)
     {
-        if(d.pFineAB != nullptr)
+        if(pFineAB != nullptr)
         {
             mergeDetails = eBChanged_CDeleted;
             bConflict = true;
@@ -263,9 +263,9 @@ void mergeOneLine(
             src = C;
         }
     }
-    else if(d.getLineA() != -1 && d.getLineB() == -1 && d.getLineC() != -1)
+    else if(getLineA() != -1 && getLineB() == -1 && getLineC() != -1)
     {
-        if(d.pFineCA != nullptr)
+        if(pFineCA != nullptr)
         {
             mergeDetails = eCChanged_BDeleted;
             bConflict = true;
@@ -277,9 +277,9 @@ void mergeOneLine(
             src = B;
         }
     }
-    else if(d.getLineA() == -1 && d.getLineB() != -1 && d.getLineC() != -1)
+    else if(getLineA() == -1 && getLineB() != -1 && getLineC() != -1)
     {
-        if(d.pFineBC != nullptr)
+        if(pFineBC != nullptr)
         {
             mergeDetails = eBCAdded;
             bConflict = true;
@@ -290,17 +290,17 @@ void mergeOneLine(
             src = C;
         }
     }
-    else if(d.getLineA() == -1 && d.getLineB() == -1 && d.getLineC() != -1)
+    else if(getLineA() == -1 && getLineB() == -1 && getLineC() != -1)
     {
         mergeDetails = eCAdded;
         src = C;
     }
-    else if(d.getLineA() == -1 && d.getLineB() != -1 && d.getLineC() == -1)
+    else if(getLineA() == -1 && getLineB() != -1 && getLineC() == -1)
     {
         mergeDetails = eBAdded;
         src = B;
     }
-    else if(d.getLineA() != -1 && d.getLineB() == -1 && d.getLineC() == -1)
+    else if(getLineA() != -1 && getLineB() == -1 && getLineC() == -1)
     {
         mergeDetails = eBCDeleted;
         bLineRemoved = true;
@@ -350,7 +350,7 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
 
             MergeLine ml;
             bool bLineRemoved;
-            mergeOneLine(d, ml.mergeDetails, ml.bConflict, bLineRemoved, ml.srcSelect, m_pldC == nullptr);
+            d.mergeOneLine( ml.mergeDetails, ml.bConflict, bLineRemoved, ml.srcSelect, m_pldC == nullptr);
 
             // Automatic solving for only whitespace changes.
             if(ml.bConflict &&
