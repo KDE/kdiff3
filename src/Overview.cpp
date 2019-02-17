@@ -13,6 +13,7 @@
 #include "options.h"
 #include "diff.h"
 
+#include <QColor>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPixmap>
@@ -120,7 +121,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         e_MergeDetails md;
         bool bConflict;
         bool bLineRemoved;
-        int src;
+        e_SrcSelector src;
         d3l.mergeOneLine(md, bConflict, bLineRemoved, src, !m_bTripleDiff);
 
         QColor c = m_pOptions->m_bgColor;

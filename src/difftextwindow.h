@@ -29,7 +29,7 @@ class DiffTextWindow : public QWidget
 {
    Q_OBJECT
 public:
-   DiffTextWindow(DiffTextWindowFrame* pParent, QStatusBar* pStatusBar, Options* pOptions, int winIdx);
+   DiffTextWindow(DiffTextWindowFrame* pParent, QStatusBar* pStatusBar, Options* pOptions, e_SrcSelector winIdx);
    ~DiffTextWindow() override;
    void init(
       const QString& fileName,
@@ -77,7 +77,7 @@ Q_SIGNALS:
    void selectionEnd();
    void setFastSelectorLine( int line );
    void gotFocus();
-   void lineClicked( int winIdx, int line );
+   void lineClicked( e_SrcSelector winIdx, int line );
 
 public Q_SLOTS:
    void setFirstLine( int line );
@@ -111,14 +111,14 @@ class DiffTextWindowFrame : public QWidget
 {
    Q_OBJECT
 public:
-   DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusBar, Options* pOptions, int winIdx, SourceData* psd);
+   DiffTextWindowFrame( QWidget* pParent, QStatusBar* pStatusBar, Options* pOptions, e_SrcSelector winIdx, SourceData* psd);
    ~DiffTextWindowFrame() override;
    DiffTextWindow* getDiffTextWindow();
    void init();
    void setFirstLine(int firstLine);
    void sendEncodingChangedSignal(QTextCodec* c);
 Q_SIGNALS:
-   void fileNameChanged(const QString&, int);
+   void fileNameChanged(const QString&, e_SrcSelector);
    void encodingChanged(QTextCodec*);
 protected:
    bool eventFilter( QObject*, QEvent* ) override;

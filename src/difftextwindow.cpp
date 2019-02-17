@@ -60,7 +60,7 @@ class DiffTextWindowData
         m_fastSelectorLine1 = 0;
         m_fastSelectorNofLines = 0;
         m_bTriple = false;
-        m_winIdx = 0;
+        m_winIdx = None;
         m_firstLine = 0;
         m_oldFirstLine = 0;
         m_horizScrollOffset = 0;
@@ -115,7 +115,7 @@ class DiffTextWindowData
     int m_fastSelectorNofLines;
 
     bool m_bTriple;
-    int m_winIdx;
+    e_SrcSelector m_winIdx;
     int m_firstLine;
     int m_oldFirstLine;
     int m_horizScrollOffset;
@@ -161,7 +161,7 @@ DiffTextWindow::DiffTextWindow(
     DiffTextWindowFrame* pParent,
     QStatusBar* pStatusBar,
     Options* pOptions,
-    int winIdx)
+    e_SrcSelector winIdx)
     : QWidget(pParent)
 {
     setObjectName(QString("DiffTextWindow%1").arg(winIdx));
@@ -1060,19 +1060,19 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int device
 {
     m_lineNumberWidth = m_pOptions->m_bShowLineNumbers ? (int)log10((double)std::max(m_size, 1)) + 1 : 0;
 
-    if(m_winIdx == 1)
+    if(m_winIdx == A)
     {
         m_cThis = m_pOptions->m_colorA;
         m_cDiff1 = m_pOptions->m_colorB;
         m_cDiff2 = m_pOptions->m_colorC;
     }
-    if(m_winIdx == 2)
+    if(m_winIdx == B)
     {
         m_cThis = m_pOptions->m_colorB;
         m_cDiff1 = m_pOptions->m_colorC;
         m_cDiff2 = m_pOptions->m_colorA;
     }
-    if(m_winIdx == 3)
+    if(m_winIdx == C)
     {
         m_cThis = m_pOptions->m_colorC;
         m_cDiff1 = m_pOptions->m_colorA;
@@ -1392,20 +1392,20 @@ void DiffTextWindow::setSelection(int firstLine, int startPos, int lastLine, int
 
 int DiffTextWindowData::convertLineOnScreenToLineInSource(int lineOnScreen, e_CoordType coordType, bool bFirstLine)
 {
-    int line = -1;
+    LineRef line = -1;
     if(lineOnScreen >= 0)
     {
         if(coordType == eWrapCoords) return lineOnScreen;
         int d3lIdx = m_pDiffTextWindow->convertLineToDiff3LineIdx(lineOnScreen);
-        if(!bFirstLine && d3lIdx >= (int)m_pDiff3LineVector->size())
+        if(!bFirstLine && d3lIdx >= m_pDiff3LineVector->size())
             d3lIdx = m_pDiff3LineVector->size() - 1;
         if(coordType == eD3LLineCoords) return d3lIdx;
-        while(line < 0 && d3lIdx < (int)m_pDiff3LineVector->size() && d3lIdx >= 0)
+        while(line < 0 && d3lIdx < m_pDiff3LineVector->size() && d3lIdx >= 0)
         {
             const Diff3Line* d3l = (*m_pDiff3LineVector)[d3lIdx];
-            if(m_winIdx == 1) line = d3l->getLineA();
-            if(m_winIdx == 2) line = d3l->getLineB();
-            if(m_winIdx == 3) line = d3l->getLineC();
+            if(m_winIdx == A) line = d3l->getLineA();
+            if(m_winIdx == B) line = d3l->getLineB();
+            if(m_winIdx == C) line = d3l->getLineC();
             if(bFirstLine)
                 ++d3lIdx;
             else
@@ -1730,10 +1730,10 @@ class DiffTextWindowFrameData
     QLabel* m_pEncoding;
     QLabel* m_pLineEndStyle;
     QWidget* m_pTopLineWidget;
-    int m_winIdx;
+    e_SrcSelector m_winIdx;
 };
 
-DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, Options* pOptions, int winIdx, SourceData* psd)
+DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, Options* pOptions, e_SrcSelector winIdx, SourceData* psd)
     : QWidget(pParent)
 {
     d = new DiffTextWindowFrameData;
@@ -1859,11 +1859,11 @@ bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
     {
         QColor c1 = d->m_pOptions->m_bgColor;
         QColor c2;
-        if(d->m_winIdx == 1)
+        if(d->m_winIdx == A)
             c2 = d->m_pOptions->m_colorA;
-        else if(d->m_winIdx == 2)
+        else if(d->m_winIdx == B)
             c2 = d->m_pOptions->m_colorB;
-        else if(d->m_winIdx == 3)
+        else if(d->m_winIdx == C)
             c2 = d->m_pOptions->m_colorC;
 
         QPalette p = d->m_pTopLineWidget->palette();

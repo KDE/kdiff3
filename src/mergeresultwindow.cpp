@@ -136,7 +136,7 @@ void MergeResultWindow::init(
 
     m_maxTextWidth = -1;
 
-    merge(g_bAutoSolve, -1);
+    merge(g_bAutoSolve, Invalid);
     g_bAutoSolve = true;
     update();
     updateSourceMask();
@@ -181,12 +181,12 @@ void MergeResultWindow::reset()
 // Results will be stored in mergeDetails, bConflict, bLineRemoved and src.
 void Diff3Line::mergeOneLine(
     e_MergeDetails& mergeDetails, bool& bConflict,
-    bool& bLineRemoved, int& src, bool bTwoInputs) const
+    bool& bLineRemoved, e_SrcSelector& src, bool bTwoInputs) const
 {
     mergeDetails = eDefault;
     bConflict = false;
     bLineRemoved = false;
-    src = 0;
+    src = None;
 
     if(bTwoInputs) // Only two input files
     {
@@ -325,7 +325,7 @@ bool MergeResultWindow::sameKindCheck(const MergeLine& ml1, const MergeLine& ml2
             (!ml1.bDelta && !ml2.bDelta));
 }
 
-void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConflictsOnly, bool bWhiteSpaceOnly)
+void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly, bool bWhiteSpaceOnly)
 {
     if(!bConflictsOnly)
     {
@@ -401,15 +401,17 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
     bool bSolveWhiteSpaceConflicts = false;
     if(bAutoSolve) // when true, then the other params are not used and we can change them here. (see all invocations of merge())
     {
-        if(m_pldC == nullptr && m_pOptions->m_whiteSpace2FileMergeDefault != 0) // Only two inputs
+        if(m_pldC == nullptr && m_pOptions->m_whiteSpace2FileMergeDefault != None) // Only two inputs
         {
-            defaultSelector = m_pOptions->m_whiteSpace2FileMergeDefault;
+            Q_ASSERT(m_pOptions->m_whiteSpace2FileMergeDefault <= Max && m_pOptions->m_whiteSpace2FileMergeDefault >= Min);
+            defaultSelector = (e_SrcSelector)m_pOptions->m_whiteSpace2FileMergeDefault;
             bWhiteSpaceOnly = true;
             bSolveWhiteSpaceConflicts = true;
         }
-        else if(m_pldC != nullptr && m_pOptions->m_whiteSpace3FileMergeDefault != 0)
+        else if(m_pldC != nullptr && m_pOptions->m_whiteSpace3FileMergeDefault != None)
         {
-            defaultSelector = m_pOptions->m_whiteSpace3FileMergeDefault;
+            Q_ASSERT(m_pOptions->m_whiteSpace3FileMergeDefault <= Max && m_pOptions->m_whiteSpace2FileMergeDefault >= Min);
+            defaultSelector = (e_SrcSelector)m_pOptions->m_whiteSpace3FileMergeDefault;
             bWhiteSpaceOnly = true;
             bSolveWhiteSpaceConflicts = true;
         }
@@ -963,7 +965,7 @@ void MergeResultWindow::setFastSelector(MergeLineList::iterator i)
     emit updateAvailabilities();
 }
 
-void MergeResultWindow::choose(int selector)
+void MergeResultWindow::choose(e_SrcSelector selector)
 {
     if(m_currentMergeLineIt == m_mergeLineList.end())
         return;
@@ -1049,7 +1051,7 @@ void MergeResultWindow::choose(int selector)
 }
 
 // bConflictsOnly: automatically choose for conflicts only (true) or for everywhere (false)
-void MergeResultWindow::chooseGlobal(int selector, bool bConflictsOnly, bool bWhiteSpaceOnly)
+void MergeResultWindow::chooseGlobal(e_SrcSelector selector, bool bConflictsOnly, bool bWhiteSpaceOnly)
 {
     resetSelection();
 
@@ -1062,7 +1064,7 @@ void MergeResultWindow::chooseGlobal(int selector, bool bConflictsOnly, bool bWh
 void MergeResultWindow::slotAutoSolve()
 {
     resetSelection();
-    merge(true, -1);
+    merge(true, Invalid);
     setModified(true);
     update();
     showUnsolvedConflictsStatusMessage();
@@ -1071,7 +1073,7 @@ void MergeResultWindow::slotAutoSolve()
 void MergeResultWindow::slotUnsolve()
 {
     resetSelection();
-    merge(false, -1);
+    merge(false, Invalid);
     setModified(true);
     update();
     showUnsolvedConflictsStatusMessage();
@@ -1208,7 +1210,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
 }
 
 void MergeResultWindow::collectHistoryInformation(
-    int src, Diff3LineList::const_iterator &iHistoryBegin, Diff3LineList::const_iterator &iHistoryEnd,
+    e_SrcSelector src, Diff3LineList::const_iterator &iHistoryBegin, Diff3LineList::const_iterator &iHistoryEnd,
     HistoryMap& historyMap,
     std::list<HistoryMap::iterator>& hitList // list of iterators
 )

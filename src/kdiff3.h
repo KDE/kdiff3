@@ -1,12 +1,6 @@
 /***************************************************************************
-                          kdiff3.h  -  description
-                             -------------------
-    begin                : Don Jul 11 12:31:29 CEST 2002
-    copyright            : (C) 2002-2007 by Joachim Eibl
-    email                : joachim.eibl at gmx.de
- ***************************************************************************/
-
-/***************************************************************************
+ *   Copyright (C) 2002-2007 by Joachim Eibl <joachim.eibl at gmx.de>      *
+ *   Copyright (C) 2018 Michael Reeves reeves.87@gmail.com                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -155,7 +149,7 @@ class KDiff3App : public QSplitter
     void slotFileOpen2(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
                        const QString& an1, const QString &an2, const QString& an3, TotalDiffStatus* pTotalDiffStatus);
 
-    void slotFileNameChanged(const QString& fileName, int winIdx);
+    void slotFileNameChanged(const QString& fileName, e_SrcSelector winIdx);
 
     /** save a document */
     void slotFileSave();
@@ -412,7 +406,7 @@ class KDiff3App : public QSplitter
 
     bool canContinue();
 
-    void choose(int choice);
+    void choose(e_SrcSelector choice);
 
     KActionCollection* actionCollection();
     QStatusBar* statusBar();

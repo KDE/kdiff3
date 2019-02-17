@@ -23,14 +23,6 @@
 
 class QPainter;
 class RLPainter;
-
-enum e_MergeSrcSelector
-{
-   A=1,
-   B=2,
-   C=3
-};
-
 class MergeResultWindow : public QWidget
 {
    Q_OBJECT
@@ -49,8 +41,8 @@ public:
 
    bool saveDocument( const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle );
    int getNrOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts=nullptr);
-   void choose(int selector);
-   void chooseGlobal(int selector, bool bConflictsOnly, bool bWhiteSpaceOnly );
+   void choose(e_SrcSelector selector);
+   void chooseGlobal(e_SrcSelector selector, bool bConflictsOnly, bool bWhiteSpaceOnly );
 
    int getMaxTextWidth();     // width of longest text line
    int getNofLines();
@@ -107,7 +99,7 @@ Q_SIGNALS:
    void noRelevantChangesDetected();
 
 private:
-   void merge(bool bAutoSolve, int defaultSelector, bool bConflictsOnly=false, bool bWhiteSpaceOnly=false );
+   void merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly=false, bool bWhiteSpaceOnly=false );
    QString getString( int lineIdx );
 
    Options* m_pOptions;
@@ -131,23 +123,23 @@ private:
    class MergeEditLine
    {
    public:
-      explicit MergeEditLine(const Diff3LineList::const_iterator &i, int src=0){m_id3l=i; m_src=src; m_bLineRemoved=false; }
-      void setConflict() { m_src=0; m_bLineRemoved=false; m_str=QString(); }
-      bool isConflict()  { return  m_src==0 && !m_bLineRemoved && m_str.isEmpty(); }
-      void setRemoved(int src=0)  { m_src=src; m_bLineRemoved=true; m_str=QString(); }
+      explicit MergeEditLine(const Diff3LineList::const_iterator &i, e_SrcSelector src=None){m_id3l=i; m_src=src; m_bLineRemoved=false; }
+      void setConflict() { m_src=None; m_bLineRemoved=false; m_str=QString(); }
+      bool isConflict()  { return  m_src==None && !m_bLineRemoved && m_str.isEmpty(); }
+      void setRemoved(e_SrcSelector src=None)  { m_src=src; m_bLineRemoved=true; m_str=QString(); }
       bool isRemoved()   { return m_bLineRemoved; }
       bool isEditableText() { return !isConflict() && !isRemoved(); }
-      void setString( const QString& s ){ m_str=s; m_bLineRemoved=false; m_src=0; }
+      void setString( const QString& s ){ m_str=s; m_bLineRemoved=false; m_src=None; }
       QString getString( const MergeResultWindow* );
-      bool isModified() { return ! m_str.isEmpty() ||  (m_bLineRemoved && m_src==0); }
+      bool isModified() { return ! m_str.isEmpty() ||  (m_bLineRemoved && m_src==None); }
 
-      void setSource( int src, bool bLineRemoved ) { m_src=src; m_bLineRemoved =bLineRemoved; }
-      int src() { return m_src; }
+      void setSource( e_SrcSelector src, bool bLineRemoved ) { m_src=src; m_bLineRemoved =bLineRemoved; }
+      e_SrcSelector src() { return m_src; }
       Diff3LineList::const_iterator id3l(){return m_id3l;}
       // getString() is implemented as MergeResultWindow::getString()
    private:
       Diff3LineList::const_iterator m_id3l;
-      int m_src;         // 1, 2 or 3 for A, B or C respectively, or 0 when line is from neither source.
+      e_SrcSelector m_src;         // 1, 2 or 3 for A, B or C respectively, or 0 when line is from neither source.
       QString m_str;    // String when modified by user or null-string when orig data is used.
       bool m_bLineRemoved;
    };
@@ -212,7 +204,7 @@ private:
    {
       MergeLine()
       {
-         srcSelect=0; mergeDetails=eDefault; d3lLineIdx = -1; srcRangeLength=0;
+         srcSelect=None; mergeDetails=eDefault; d3lLineIdx = -1; srcRangeLength=0;
          bConflict=false; bDelta=false; bWhiteSpaceConflict=false;
       }
       Diff3LineList::const_iterator id3l;
@@ -222,7 +214,7 @@ private:
       bool bConflict;
       bool bWhiteSpaceConflict;
       bool bDelta;
-      int srcSelect;
+      e_SrcSelector srcSelect;
       MergeEditLineList mergeEditLineList;
       void split( MergeLine& ml2, int d3lLineIdx2 ) // The caller must insert the ml2 after this ml in the m_mergeLineList
       {
@@ -277,7 +269,7 @@ private:
       bool staysInPlace( bool bThreeInputs, Diff3LineList::const_iterator& iHistoryEnd );
    };
    typedef std::map<QString,HistoryMapEntry> HistoryMap;
-   void collectHistoryInformation( int src, Diff3LineList::const_iterator &iHistoryBegin, Diff3LineList::const_iterator &iHistoryEnd, HistoryMap& historyMap, std::list< HistoryMap::iterator >& hitList );
+   void collectHistoryInformation( e_SrcSelector src, Diff3LineList::const_iterator &iHistoryBegin, Diff3LineList::const_iterator &iHistoryEnd, HistoryMap& historyMap, std::list< HistoryMap::iterator >& hitList );
 
    typedef std::list<MergeLine> MergeLineList;
    MergeLineList m_mergeLineList;

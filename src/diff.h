@@ -20,6 +20,18 @@
 #include "gnudiff_diff.h"
 #include "SourceData.h"
 
+//enum must be sequential with no gaps to allow loop interiation of values
+enum e_SrcSelector
+{
+   Min = -1,
+   Invalid=-1,
+   None=0,
+   A = 1,
+   B = 2,
+   C = 3,
+   Max=C
+};
+
 enum e_MergeDetails
 {
    eDefault,
@@ -157,15 +169,15 @@ class Diff3Line
         return lineA == d3l.lineA && lineB == d3l.lineB && lineC == d3l.lineC && bAEqB == d3l.bAEqB && bAEqC == d3l.bAEqC && bBEqC == d3l.bBEqC;
     }
 
-    const LineData* getLineData(int src) const
+    const LineData* getLineData(e_SrcSelector src) const
     {
         Q_ASSERT(m_pDiffBufferInfo != nullptr);
-        if(src == 1 && lineA >= 0) return &m_pDiffBufferInfo->m_pLineDataA[lineA];
-        if(src == 2 && lineB >= 0) return &m_pDiffBufferInfo->m_pLineDataB[lineB];
-        if(src == 3 && lineC >= 0) return &m_pDiffBufferInfo->m_pLineDataC[lineC];
+        if(src == A && lineA >= 0) return &m_pDiffBufferInfo->m_pLineDataA[lineA];
+        if(src == B && lineB >= 0) return &m_pDiffBufferInfo->m_pLineDataB[lineB];
+        if(src == C && lineC >= 0) return &m_pDiffBufferInfo->m_pLineDataC[lineC];
         return nullptr;
     }
-    QString getString(int src) const
+    QString getString(const e_SrcSelector src) const
     {
         const LineData* pld = getLineData(src);
         if(pld)
@@ -173,38 +185,38 @@ class Diff3Line
         else
             return QString();
     }
-    LineRef getLineInFile(int src) const
+    LineRef getLineInFile(e_SrcSelector src) const
     {
-        if(src == 1) return lineA;
-        if(src == 2) return lineB;
-        if(src == 3) return lineC;
+        if(src == A) return lineA;
+        if(src == B) return lineB;
+        if(src == C) return lineC;
         return -1;
     }
 
-    bool fineDiff(const int selector, const LineData* v1, const LineData* v2);
-    void mergeOneLine(e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, int& src, bool bTwoInputs) const;
+    bool fineDiff(const e_SrcSelector selector, const LineData* v1, const LineData* v2);
+    void mergeOneLine(e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, e_SrcSelector& src, bool bTwoInputs) const;
 
-    void getLineInfo(const int winIdx, const bool isTriple, int& lineIdx,
+    void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, int& lineIdx,
         DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
         int& changed, int& changed2) const;
 
   private:
-    void setFineDiff(const int selector, DiffList* pDiffList)
+    void setFineDiff(const e_SrcSelector selector, DiffList* pDiffList)
     {
-        Q_ASSERT(selector == 1 || selector == 2 || selector == 3);
-        if(selector == 1)
+        Q_ASSERT(selector == A || selector == B || selector == C);
+        if(selector == A)
         {
             if(pFineAB != nullptr)
                 delete pFineAB;
             pFineAB = pDiffList;
         }
-        else if(selector == 2)
+        else if(selector == B)
         {
             if(pFineBC != nullptr)
                 delete pFineBC;
             pFineBC = pDiffList;
         }
-        else if(selector == 3)
+        else if(selector == C)
         {
             if(pFineCA)
                 delete pFineCA;
@@ -216,7 +228,7 @@ class Diff3Line
 class Diff3LineList : public QList<Diff3Line>
 {
   public:
-    bool fineDiff(const int selector, const LineData* v1, const LineData* v2);
+    bool fineDiff(const e_SrcSelector selector, const LineData* v1, const LineData* v2);
     void calcDiff3LineVector(Diff3LineVector& d3lv);
     void calcWhiteDiff3Lines(const LineData* pldA, const LineData* pldB, const LineData* pldC);
 };
@@ -293,15 +305,15 @@ class ManualDiffHelpEntry
     LineRef lineC1 = -1;
     LineRef lineC2 = -1;
   public:
-    LineRef& firstLine(int winIdx)
+    LineRef& firstLine(e_SrcSelector winIdx)
     {
-        return winIdx == 1 ? lineA1 : (winIdx == 2 ? lineB1 : lineC1);
+        return winIdx == A ? lineA1 : (winIdx == B ? lineB1 : lineC1);
     }
-    LineRef& lastLine(int winIdx)
+    LineRef& lastLine(e_SrcSelector winIdx)
     {
-        return winIdx == 1 ? lineA2 : (winIdx == 2 ? lineB2 : lineC2);
+        return winIdx == A ? lineA2 : (winIdx == B ? lineB2 : lineC2);
     }
-    bool isLineInRange(LineRef line, int winIdx)
+    bool isLineInRange(LineRef line, e_SrcSelector winIdx)
     {
         return line >= 0 && line >= firstLine(winIdx) && line <= lastLine(winIdx);
     }
@@ -313,35 +325,35 @@ class ManualDiffHelpEntry
 
     int calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv);
 
-    void getRangeForUI(const int winIdx, int *rangeLine1, int *rangeLine2) const {
-        if(winIdx == 1) {
+    void getRangeForUI(const e_SrcSelector winIdx, int *rangeLine1, int *rangeLine2) const {
+        if(winIdx == A) {
             *rangeLine1 = lineA1;
             *rangeLine2 = lineA2;
         }
-        if(winIdx == 2) {
+        if(winIdx == B) {
             *rangeLine1 = lineB1;
             *rangeLine2 = lineB2;
         }
-        if(winIdx == 3) {
+        if(winIdx == C) {
             *rangeLine1 = lineC1;
             *rangeLine2 = lineC2;
         }
     }
 
-    inline int getLine1(const int winIdx) const { return winIdx == 1 ? lineA1 : winIdx == 2 ? lineB1 : lineC1;}
-    inline int getLine2(const int winIdx) const { return winIdx == 1 ? lineA2 : winIdx == 2 ? lineB2 : lineC2;}
-    bool isValidMove(int line1, int line2, int winIdx1, int winIdx2) const;
+    inline int getLine1(const e_SrcSelector winIdx) const { return winIdx == A ? lineA1 : winIdx == B ? lineB1 : lineC1;}
+    inline int getLine2(const e_SrcSelector winIdx) const { return winIdx == A ? lineA2 : winIdx == B ? lineB2 : lineC2;}
+    bool isValidMove(int line1, int line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
 };
 
 // A list of corresponding ranges
 class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
 {
     public:
-        bool isValidMove(int line1, int line2, int winIdx1, int winIdx2) const;
-        void insertEntry(int winIdx, LineRef firstLine, LineRef lastLine);
+        bool isValidMove(int line1, int line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
+        void insertEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine);
 
         bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList,
-                     int winIdx1, int winIdx2,
+                     e_SrcSelector winIdx1, e_SrcSelector winIdx2,
                      Options* pOptions);
 };
 

@@ -52,7 +52,7 @@ bool g_bIgnoreWhiteSpace = true;
 bool g_bIgnoreTrivialMatches = true;
 
 // Just make sure that all input lines are in the output too, exactly once.
-static void debugLineCheck(Diff3LineList& d3ll, LineRef size, LineRef idx)
+static void debugLineCheck(Diff3LineList& d3ll, LineRef size, e_SrcSelector idx)
 {
     Diff3LineList::iterator it = d3ll.begin();
     LineRef i = 0;
@@ -61,12 +61,12 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, LineRef idx)
     {
         LineRef l = 0;
 
-        Q_ASSERT(idx >= 1 && idx <= 3);
-        if(idx == 1)
+        Q_ASSERT(idx >= A && idx <= C);
+        if(idx == A)
             l = (*it).getLineA();
-        else if(idx == 2)
+        else if(idx == B)
             l = (*it).getLineB();
-        else if(idx == 3)
+        else if(idx == C)
             l = (*it).getLineC();
 
         if(l != -1)
@@ -197,14 +197,14 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             if(m_sd1.isText() && m_sd2.isText())
             {
                pp.setInformation(i18n("Diff: A <-> B"));
-               m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, 1, 2,
+               m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, A, B,
                         &m_pOptionDialog->m_options);
 
                 pp.step();
 
                 pp.setInformation(i18n("Linediff: A <-> B"));
                 calcDiff3LineListUsingAB(&m_diffList12, m_diff3LineList);
-                pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
+                pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
                 if(m_sd1.getSizeBytes() == 0) pTotalDiffStatus->bTextAEqB = false;
 
                 pp.step();
@@ -239,7 +239,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             pp.setInformation(i18n("Diff: A <-> B"));
             if(m_sd1.isText() && m_sd2.isText())
             {
-                m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, 1, 2,
+                m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, A, B,
                         &m_pOptionDialog->m_options);
 
                 calcDiff3LineListUsingAB(&m_diffList12, m_diff3LineList);
@@ -248,7 +248,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             pp.setInformation(i18n("Diff: A <-> C"));
             if(m_sd1.isText() && m_sd3.isText())
             {
-                m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13, 1, 3,
+                m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13, A, C,
                         &m_pOptionDialog->m_options);
 
                 calcDiff3LineListUsingAC(&m_diffList13, m_diff3LineList);
@@ -259,7 +259,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             pp.setInformation(i18n("Diff: B <-> C"));
             if(m_sd2.isText() && m_sd3.isText())
             {
-                m_manualDiffHelpList.runDiff(m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23, 2, 3,
+                m_manualDiffHelpList.runDiff(m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23, B, C,
                         &m_pOptionDialog->m_options);
                 if(m_pOptions->m_bDiff3AlignBC)
                 {
@@ -270,35 +270,35 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             }
             pp.step();
 
-            debugLineCheck(m_diff3LineList, m_sd1.getSizeLines(), 1);
-            debugLineCheck(m_diff3LineList, m_sd2.getSizeLines(), 2);
-            debugLineCheck(m_diff3LineList, m_sd3.getSizeLines(), 3);
+            debugLineCheck(m_diff3LineList, m_sd1.getSizeLines(), A);
+            debugLineCheck(m_diff3LineList, m_sd2.getSizeLines(), B);
+            debugLineCheck(m_diff3LineList, m_sd3.getSizeLines(), C);
 
             pp.setInformation(i18n("Linediff: A <-> B"));
             if(m_sd1.hasData() && m_sd2.hasData() && m_sd1.isText() && m_sd2.isText())
-              pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
+              pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
             pp.step();
             pp.setInformation(i18n("Linediff: B <-> C"));
             if(m_sd2.hasData() && m_sd3.hasData() && m_sd2.isText() && m_sd3.isText())
-            pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
+            pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(B, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
             pp.step();
             pp.setInformation(i18n("Linediff: A <-> C"));
             if(m_sd1.hasData() && m_sd3.hasData() && m_sd1.isText() && m_sd3.isText())
-              pTotalDiffStatus->bTextAEqC = m_diff3LineList.fineDiff(3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
-            debugLineCheck(m_diff3LineList, m_sd2.getSizeLines(), 2);
-            debugLineCheck(m_diff3LineList, m_sd3.getSizeLines(), 3);
+              pTotalDiffStatus->bTextAEqC = m_diff3LineList.fineDiff(C, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
+            debugLineCheck(m_diff3LineList, m_sd2.getSizeLines(), B);
+            debugLineCheck(m_diff3LineList, m_sd3.getSizeLines(), C);
 
             pp.setInformation(i18n("Linediff: A <-> B"));
             if(m_sd1.hasData() && m_sd2.hasData() && m_sd1.isText() && m_sd2.isText())
-                pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
+                pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
             pp.step();
             pp.setInformation(i18n("Linediff: B <-> C"));
             if(m_sd3.hasData() && m_sd2.hasData() && m_sd3.isText() && m_sd2.isText())
-                pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
+                pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(B, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
             pp.step();
             pp.setInformation(i18n("Linediff: A <-> C"));
             if(m_sd1.hasData() && m_sd3.hasData() && m_sd1.isText() && m_sd3.isText())
-              pTotalDiffStatus->bTextAEqC = m_diff3LineList.fineDiff(3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
+              pTotalDiffStatus->bTextAEqC = m_diff3LineList.fineDiff(C, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
             pp.step();
             if(m_sd1.getSizeBytes() == 0) {
                 pTotalDiffStatus->bTextAEqB = false;
@@ -623,11 +623,11 @@ void KDiff3App::initView()
     m_pDiffVScrollBar = new QScrollBar(Qt::Vertical, pDiffWindowFrame);
     pDiffHLayout->addWidget(m_pDiffVScrollBar);
 
-    m_pDiffTextWindowFrame1 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), &m_pOptionDialog->m_options, 1, &m_sd1);
+    m_pDiffTextWindowFrame1 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), &m_pOptionDialog->m_options, A, &m_sd1);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame1);
-    m_pDiffTextWindowFrame2 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), &m_pOptionDialog->m_options, 2, &m_sd2);
+    m_pDiffTextWindowFrame2 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), &m_pOptionDialog->m_options, B, &m_sd2);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame2);
-    m_pDiffTextWindowFrame3 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), &m_pOptionDialog->m_options, 3, &m_sd3);
+    m_pDiffTextWindowFrame3 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), &m_pOptionDialog->m_options, C, &m_sd3);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame3);
     m_pDiffTextWindow1 = m_pDiffTextWindowFrame1->getDiffTextWindow();
     m_pDiffTextWindow2 = m_pDiffTextWindowFrame2->getDiffTextWindow();
@@ -1179,7 +1179,7 @@ void KDiff3App::slotFileOpen2(const QString&  fn1, const QString& fn2, const QSt
     slotStatusMsg(i18n("Ready."));
 }
 
-void KDiff3App::slotFileNameChanged(const QString& fileName, int winIdx)
+void KDiff3App::slotFileNameChanged(const QString& fileName, e_SrcSelector winIdx)
 {
     QString fn1 = m_sd1.getFilename();
     QString an1 = m_sd1.getAliasName();
@@ -1187,15 +1187,15 @@ void KDiff3App::slotFileNameChanged(const QString& fileName, int winIdx)
     QString an2 = m_sd2.getAliasName();
     QString fn3 = m_sd3.getFilename();
     QString an3 = m_sd3.getAliasName();
-    if(winIdx == 1) {
+    if(winIdx == A) {
         fn1 = fileName;
         an1 = "";
     }
-    if(winIdx == 2) {
+    if(winIdx == B) {
         fn2 = fileName;
         an2 = "";
     }
-    if(winIdx == 3) {
+    if(winIdx == C) {
         fn3 = fileName;
         an3 = "";
     }
@@ -1345,7 +1345,7 @@ void KDiff3App::slotGoNextDelta()
     if(m_pMergeResultWindow) m_pMergeResultWindow->slotGoNextDelta();
 }
 
-void KDiff3App::choose(int choice)
+void KDiff3App::choose(e_SrcSelector choice)
 {
     if(!m_bTimerBlock)
     {
@@ -2297,7 +2297,7 @@ void KDiff3App::slotNoRelevantChangesDetected()
     }
 }
 
-void ManualDiffHelpList::insertEntry(int winIdx, LineRef firstLine, LineRef lastLine)
+void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine)
 {
     // The manual diff help list must be sorted and compact.
     // "Compact" means that upper items can't be empty if lower items contain data.
@@ -2336,22 +2336,22 @@ void ManualDiffHelpList::insertEntry(int winIdx, LineRef firstLine, LineRef last
     }
 
     // Now make the list compact
-    for(int wIdx = 1; wIdx <= 3; ++wIdx)
+    for(int wIdx = A; wIdx <= Max; ++wIdx)
     {
         ManualDiffHelpList::iterator iEmpty = begin();
         for(i = begin(); i != end(); ++i)
         {
-            if(iEmpty->firstLine(wIdx) >= 0)
+            if(iEmpty->firstLine((e_SrcSelector)wIdx) >= 0)
             {
                 ++iEmpty;
                 continue;
             }
-            if(i->firstLine(wIdx) >= 0) // Current item is not empty -> move it to the empty place
+            if(i->firstLine((e_SrcSelector)wIdx) >= 0) // Current item is not empty -> move it to the empty place
             {
-                iEmpty->firstLine(wIdx) = i->firstLine(wIdx);
-                iEmpty->lastLine(wIdx) = i->lastLine(wIdx);
-                i->firstLine(wIdx) = -1;
-                i->lastLine(wIdx) = -1;
+                iEmpty->firstLine((e_SrcSelector)wIdx) = i->firstLine((e_SrcSelector)wIdx);
+                iEmpty->lastLine((e_SrcSelector)wIdx) = i->lastLine((e_SrcSelector)wIdx);
+                i->firstLine((e_SrcSelector)wIdx) = -1;
+                i->lastLine((e_SrcSelector)wIdx) = -1;
                 ++iEmpty;
             }
         }
@@ -2363,18 +2363,18 @@ void KDiff3App::slotAddManualDiffHelp()
 {
     LineRef firstLine = -1;
     LineRef lastLine = -1;
-    int winIdx = -1;
+    e_SrcSelector winIdx = Invalid;
     if(m_pDiffTextWindow1) {
         m_pDiffTextWindow1->getSelectionRange(&firstLine, &lastLine, eFileCoords);
-        winIdx = 1;
+        winIdx = A;
     }
     if(firstLine < 0 && m_pDiffTextWindow2) {
         m_pDiffTextWindow2->getSelectionRange(&firstLine, &lastLine, eFileCoords);
-        winIdx = 2;
+        winIdx = B;
     }
     if(firstLine < 0 && m_pDiffTextWindow3) {
         m_pDiffTextWindow3->getSelectionRange(&firstLine, &lastLine, eFileCoords);
-        winIdx = 3;
+        winIdx = C;
     }
 
     if(firstLine < 0 || lastLine < 0 || lastLine < firstLine)
