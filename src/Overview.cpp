@@ -14,6 +14,7 @@
 #include "diff.h"
 
 #include <QMouseEvent>
+#include <QPainter>
 #include <QPixmap>
 #include <QSize>
 

@@ -11,6 +11,7 @@
 
 #include "mergeresultwindow.h"
 #include "options.h"
+#include "RLPainter.h"
 
 #include <QApplication>
 #include <QClipboard>
@@ -1753,7 +1754,7 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(int li
 }
 
 void MergeResultWindow::writeLine(
-    MyPainter& p, int line, const QString& str,
+    RLPainter& p, int line, const QString& str,
     int srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict)
 {
     const QFontMetrics& fm = fontMetrics();
@@ -1907,7 +1908,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         if(size() != m_pixmap.size())
             m_pixmap = QPixmap(size());
 
-        MyPainter p(&m_pixmap, m_pOptions->m_bRightToLeftLanguage, width(), fontWidth);
+        RLPainter p(&m_pixmap, m_pOptions->m_bRightToLeftLanguage, width(), fontWidth);
         p.setFont(font());
         p.QPainter::fillRect(rect(), m_pOptions->m_bgColor);
 

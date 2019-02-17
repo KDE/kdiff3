@@ -39,6 +39,7 @@
 #include <QSplitter>
 #include <QStyledItemDelegate>
 #include <QTextStream>
+#include <QPainter>
 
 #include <KLocalizedString>
 #include <KMessageBox>

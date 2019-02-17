@@ -22,6 +22,7 @@
 #include "smalldialogs.h"
 #include "difftextwindow.h"
 #include "mergeresultwindow.h"
+#include "RLPainter.h"
 // include files for QT
 #include <QClipboard>
 #include <QCheckBox>
@@ -58,7 +59,7 @@
 #define ID_STATUS_MSG 1
 #define MAIN_TOOLBAR_NAME QLatin1String("mainToolBar")
 
-void printDiffTextWindow(MyPainter& painter, const QRect& view, const QString& headerText, DiffTextWindow* pDiffTextWindow, int line, int linesPerPage, const QColor& fgColor);
+void printDiffTextWindow(RLPainter& painter, const QRect& view, const QString& headerText, DiffTextWindow* pDiffTextWindow, int line, int linesPerPage, const QColor& fgColor);
 KActionCollection* KDiff3App::actionCollection()
 {
     if(m_pKDiff3Shell == nullptr)
@@ -767,7 +768,7 @@ void KDiff3App::slotFileSaveAs()
     slotStatusMsg(i18n("Ready."));
 }
 
-void printDiffTextWindow(MyPainter& painter, const QRect& view, const QString& headerText, DiffTextWindow* pDiffTextWindow, int line, int linesPerPage, const QColor &fgColor)
+void printDiffTextWindow(RLPainter& painter, const QRect& view, const QString& headerText, DiffTextWindow* pDiffTextWindow, int line, int linesPerPage, const QColor &fgColor)
 {
     QRect clipRect = view;
     clipRect.setTop(0);
@@ -846,7 +847,7 @@ void KDiff3App::slotFilePrint()
     {
         slotStatusMsg(i18n("Printing..."));
         // create a painter to paint on the printer object
-        MyPainter painter(&printer, m_pOptions->m_bRightToLeftLanguage, width(), fontMetrics().width('W'));
+        RLPainter painter(&printer, m_pOptions->m_bRightToLeftLanguage, width(), fontMetrics().width('W'));
 
         QPaintDevice* pPaintDevice = painter.device();
         int dpiy = pPaintDevice->logicalDpiY();

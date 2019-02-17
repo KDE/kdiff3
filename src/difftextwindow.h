@@ -23,6 +23,7 @@ class Options;
 class DiffTextWindowData;
 class DiffTextWindowFrame;
 class EncodingLabel;
+class RLPainter;
 
 class DiffTextWindow : public QWidget
 {
@@ -67,7 +68,7 @@ public:
    void setPaintingAllowed( bool bAllowPainting );
    void recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth);
    void recalcWordWrapHelper( int wrapLineVectorSize, int visibleTextWidth, int cacheListIdx);
-   void print( MyPainter& painter, const QRect& r, int firstLine, int nofLinesPerPage );
+   void print( RLPainter& painter, const QRect& r, int firstLine, int nofLinesPerPage );
 Q_SIGNALS:
    void resizeHeightChangedSignal(int nofVisibleLines);
    void resizeWidthChangedSignal(int nofVisibleColumns);

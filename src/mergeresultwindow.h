@@ -22,6 +22,7 @@
 #include <QTextLayout>
 
 class QPainter;
+class RLPainter;
 
 enum e_MergeSrcSelector
 {
@@ -307,7 +308,7 @@ private:
    void myUpdate(int afterMilliSecs);
    void timerEvent(QTimerEvent*) override;
    void writeLine(
-      MyPainter& p, int line, const QString& str,
+      RLPainter& p, int line, const QString& str,
       int srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
       );
    void setFastSelector(MergeLineList::iterator i);

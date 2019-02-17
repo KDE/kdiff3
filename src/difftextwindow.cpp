@@ -16,6 +16,7 @@
 #include "kdiff3.h"
 #include "merger.h"
 #include "options.h"
+#include "RLPainter.h"
 
 #include <algorithm>
 #include <cmath>
@@ -131,12 +132,12 @@ class DiffTextWindowData
     QString getLineString(int line);
 
     void writeLine(
-        MyPainter& p, const LineData* pld,
+        RLPainter& p, const LineData* pld,
         const DiffList* pLineDiff1, const DiffList* pLineDiff2, int line,
         int whatChanged, int whatChanged2, int srcLineIdx,
         int wrapLineOffset, int wrapLineLength, bool bWrapLine, const QRect& invalidRect, int deviceWidth);
 
-    void draw(MyPainter& p, const QRect& invalidRect, int deviceWidth, int beginLine, int endLine);
+    void draw(RLPainter& p, const QRect& invalidRect, int deviceWidth, int beginLine, int endLine);
 
     QStatusBar* m_pStatusBar;
 
@@ -791,7 +792,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, bool /*bFirs
 }
 
 void DiffTextWindowData::writeLine(
-    MyPainter& p,
+    RLPainter& p,
     const LineData* pld,
     const DiffList* pLineDiff1,
     const DiffList* pLineDiff2,
@@ -1024,7 +1025,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
 
     int endLine = std::min(d->m_firstLine + getNofVisibleLines() + 2, getNofLines());
 
-    MyPainter p(this, d->m_pOptions->m_bRightToLeftLanguage, width(), fontMetrics().width('0'));
+    RLPainter p(this, d->m_pOptions->m_bRightToLeftLanguage, width(), fontMetrics().width('0'));
 
     p.setFont(font());
     p.QPainter::fillRect(invalidRect, d->m_pOptions->m_bgColor);
@@ -1039,7 +1040,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
         emit newSelection();
 }
 
-void DiffTextWindow::print(MyPainter& p, const QRect&, int firstLine, int nofLinesPerPage)
+void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, int nofLinesPerPage)
 {
     if(d->m_pDiff3LineVector == nullptr || !updatesEnabled() ||
        (d->m_diff3WrapLineVector.empty() && d->m_bWordWrap))
@@ -1055,7 +1056,7 @@ void DiffTextWindow::print(MyPainter& p, const QRect&, int firstLine, int nofLin
     d->m_firstLine = oldFirstLine;
 }
 
-void DiffTextWindowData::draw(MyPainter& p, const QRect& invalidRect, int deviceWidth, int beginLine, int endLine)
+void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int deviceWidth, int beginLine, int endLine)
 {
     m_lineNumberWidth = m_pOptions->m_bShowLineNumbers ? (int)log10((double)std::max(m_size, 1)) + 1 : 0;
 
