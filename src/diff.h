@@ -84,6 +84,8 @@ class LineData
 
     bool isPureComment() const { return bContainsPureComment; }
     void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
+
+    static bool equal(const LineData& l1, const LineData& l2, bool bStrict);
 };
 
 class Diff3LineList;
@@ -422,8 +424,6 @@ bool fineDiff(
     int selector,
     const LineData* v1,
     const LineData* v2);
-
-bool equal(const LineData& l1, const LineData& l2, bool bStrict);
 
 inline bool isWhite(QChar c)
 {

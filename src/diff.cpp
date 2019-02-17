@@ -50,7 +50,7 @@ int LineData::width(int tabSize) const
 // Then the equal()-function requires that the match has more than 2 nonwhite characters.
 // This is to avoid matches on trivial lines (e.g. with white space only).
 // This choice is good for C/C++.
-bool equal(const LineData& l1, const LineData& l2, bool bStrict)
+bool LineData::equal(const LineData& l1, const LineData& l2, bool bStrict)
 {
     if(l1.getLine() == nullptr || l2.getLine() == nullptr) return false;
 
@@ -884,7 +884,7 @@ void calcDiff3LineListTrim(
         }
 
         if(line > lineA && (*i3).getLineA() != -1 && (*i3A).getLineB() != -1 && (*i3A).isEqualBC() &&
-           ::equal(pldA[(*i3).getLineA()], pldB[(*i3A).getLineB()], false) &&
+           LineData::equal(pldA[(*i3).getLineA()], pldB[(*i3A).getLineB()], false) &&
            pManualDiffHelpList->isValidMove((*i3).getLineA(), (*i3A).getLineB(), 1, 2) &&
            pManualDiffHelpList->isValidMove((*i3).getLineA(), (*i3A).getLineC(), 1, 3))
         {
@@ -901,7 +901,7 @@ void calcDiff3LineListTrim(
         }
 
         if(line > lineB && (*i3).getLineB() != -1 && (*i3B).getLineA() != -1 && (*i3B).isEqualAC() &&
-           ::equal(pldB[(*i3).getLineB()], pldA[(*i3B).getLineA()], false) &&
+           LineData::equal(pldB[(*i3).getLineB()], pldA[(*i3B).getLineA()], false) &&
            pManualDiffHelpList->isValidMove((*i3).getLineB(), (*i3B).getLineA(), 2, 1) &&
            pManualDiffHelpList->isValidMove((*i3).getLineB(), (*i3B).getLineC(), 2, 3))
         {
@@ -917,7 +917,7 @@ void calcDiff3LineListTrim(
         }
 
         if(line > lineC && (*i3).getLineC() != -1 && (*i3C).getLineA() != -1 && (*i3C).isEqualAB() &&
-           ::equal(pldC[(*i3).getLineC()], pldA[(*i3C).getLineA()], false) &&
+           LineData::equal(pldC[(*i3).getLineC()], pldA[(*i3C).getLineA()], false) &&
            pManualDiffHelpList->isValidMove((*i3).getLineC(), (*i3C).getLineA(), 3, 1) &&
            pManualDiffHelpList->isValidMove((*i3).getLineC(), (*i3C).getLineB(), 3, 2))
         {
@@ -939,12 +939,12 @@ void calcDiff3LineListTrim(
             (*i3A).setLineA((*i3).getLineA());
             (*i3).setLineA(-1);
 
-            if(i3A->getLineB() != -1 && ::equal(pldA[i3A->getLineA()], pldB[i3A->getLineB()], false))
+            if(i3A->getLineB() != -1 && LineData::equal(pldA[i3A->getLineA()], pldB[i3A->getLineB()], false))
             {
                 i3A->bAEqB = true;
             }
             if((i3A->isEqualAB() && i3A->isEqualBC()) ||
-               (i3A->getLineC() != -1 && ::equal(pldA[i3A->getLineA()], pldC[i3A->getLineC()], false)))
+               (i3A->getLineC() != -1 && LineData::equal(pldA[i3A->getLineA()], pldC[i3A->getLineC()], false)))
             {
                 i3A->bAEqC = true;
             }
@@ -961,12 +961,12 @@ void calcDiff3LineListTrim(
             (*i3B).setLineB((*i3).getLineB());
             (*i3).setLineB(-1);
 
-            if(i3B->getLineA() != -1 && ::equal(pldA[i3B->getLineA()], pldB[i3B->getLineB()], false))
+            if(i3B->getLineA() != -1 && LineData::equal(pldA[i3B->getLineA()], pldB[i3B->getLineB()], false))
             {
                 i3B->bAEqB = true;
             }
             if((i3B->isEqualAB() && i3B->isEqualAC()) ||
-               (i3B->getLineC() != -1 && ::equal(pldB[i3B->getLineB()], pldC[i3B->getLineC()], false)))
+               (i3B->getLineC() != -1 && LineData::equal(pldB[i3B->getLineB()], pldC[i3B->getLineC()], false)))
             {
                 i3B->bBEqC = true;
             }
@@ -983,12 +983,12 @@ void calcDiff3LineListTrim(
             (*i3C).setLineC((*i3).getLineC());
             (*i3).setLineC(-1);
 
-            if(i3C->getLineA() != -1 && ::equal(pldA[i3C->getLineA()], pldC[i3C->getLineC()], false))
+            if(i3C->getLineA() != -1 && LineData::equal(pldA[i3C->getLineA()], pldC[i3C->getLineC()], false))
             {
                 i3C->bAEqC = true;
             }
             if((i3C->isEqualAC() && i3C->isEqualAB()) ||
-               (i3C->getLineB() != -1 && ::equal(pldB[i3C->getLineB()], pldC[i3C->getLineC()], false)))
+               (i3C->getLineB() != -1 && LineData::equal(pldB[i3C->getLineB()], pldC[i3C->getLineC()], false)))
             {
                 i3C->bBEqC = true;
             }
@@ -1010,7 +1010,7 @@ void calcDiff3LineListTrim(
                 (*i).setLineB((*i3).getLineB());
                 (*i).bAEqB = true;
 
-                if(i->getLineC() != -1 && ::equal(pldA[i->getLineA()], pldC[i->getLineC()], false))
+                if(i->getLineC() != -1 && LineData::equal(pldA[i->getLineA()], pldC[i->getLineC()], false))
                 {
                     (*i).bAEqC = true;
                     (*i).bBEqC = true;
@@ -1040,7 +1040,7 @@ void calcDiff3LineListTrim(
                 (*i).setLineC((*i3).getLineC());
                 (*i).bAEqC = true;
 
-                if(i->getLineB() != -1 && ::equal(pldA[i->getLineA()], pldB[i->getLineB()], false))
+                if(i->getLineB() != -1 && LineData::equal(pldA[i->getLineA()], pldB[i->getLineB()], false))
                 {
                     (*i).bAEqB = true;
                     (*i).bBEqC = true;
@@ -1070,7 +1070,7 @@ void calcDiff3LineListTrim(
                 (*i).setLineC((*i3).getLineC());
                 (*i).bBEqC = true;
 
-                if(i->getLineA() != -1 && ::equal(pldA[i->getLineA()], pldB[i->getLineB()], false))
+                if(i->getLineA() != -1 && LineData::equal(pldA[i->getLineA()], pldB[i->getLineB()], false))
                 {
                     (*i).bAEqB = true;
                     (*i).bAEqC = true;
@@ -1155,30 +1155,19 @@ void Diff3LineList::calcWhiteDiff3Lines(
     }
 }
 
-inline bool equal(QChar c1, QChar c2, bool /*bStrict*/)
-{
-    // If bStrict then white space doesn't match
-
-    //if ( bStrict &&  ( c1==' ' || c1=='\t' ) )
-    //   return false;
-
-    return c1 == c2;
-}
-
 // My own diff-invention:
-template <class T>
-void calcDiff(const T* p1, LineRef size1, const T* p2, LineRef size2, DiffList& diffList, int match, int maxSearchRange)
+void calcDiff(const QChar* p1, LineRef size1, const QChar* p2, LineRef size2, DiffList& diffList, int match, int maxSearchRange)
 {
     diffList.clear();
 
-    const T* p1start = p1;
-    const T* p2start = p2;
-    const T* p1end = p1 + size1;
-    const T* p2end = p2 + size2;
+    const QChar* p1start = p1;
+    const QChar* p2start = p2;
+    const QChar* p1end = p1 + size1;
+    const QChar* p2end = p2 + size2;
     for(;;)
     {
         int nofEquals = 0;
-        while(p1 != p1end && p2 != p2end && equal(*p1, *p2, false))
+        while(p1 != p1end && p2 != p2end && *p1 == *p2)
         {
             ++p1;
             ++p2;
@@ -1202,9 +1191,9 @@ void calcDiff(const T* p1, LineRef size1, const T* p2, LineRef size2, DiffList& 
                 {
                     break;
                 }
-                else if(equal(p2[i2], p1[i1], true) &&
+                else if(p2[i2] == p1[i1] &&
                         (match == 1 || abs(i1 - i2) < 3 || (&p2[i2 + 1] == p2end && &p1[i1 + 1] == p1end) ||
-                         (&p2[i2 + 1] != p2end && &p1[i1 + 1] != p1end && equal(p2[i2 + 1], p1[i1 + 1], false))))
+                         (&p2[i2 + 1] != p2end && &p1[i1 + 1] != p1end && p2[i2 + 1] == p1[i1 + 1])))
                 {
                     if(i1 + i2 < bestI1 + bestI2 || !bBestValid)
                     {
@@ -1219,7 +1208,7 @@ void calcDiff(const T* p1, LineRef size1, const T* p2, LineRef size2, DiffList& 
 
         // The match was found using the strict search. Go back if there are non-strict
         // matches.
-        while(bestI1 >= 1 && bestI2 >= 1 && equal(p1[bestI1 - 1], p2[bestI2 - 1], false))
+        while(bestI1 >= 1 && bestI2 >= 1 && p1[bestI1 - 1] == p2[bestI2 - 1])
         {
             --bestI1;
             --bestI2;
@@ -1249,9 +1238,9 @@ void calcDiff(const T* p1, LineRef size1, const T* p2, LineRef size2, DiffList& 
         // A different match could be achieved, if we start at the end.
         // Do it, if it would be a better match.
         int nofUnmatched = 0;
-        const T* pu1 = p1 - 1;
-        const T* pu2 = p2 - 1;
-        while(pu1 >= p1start && pu2 >= p2start && equal(*pu1, *pu2, false))
+        const QChar* pu1 = p1 - 1;
+        const QChar* pu2 = p2 - 1;
+        while(pu1 >= p1start && pu2 >= p2start && *pu1 == *pu2)
         {
             ++nofUnmatched;
             --pu1;
