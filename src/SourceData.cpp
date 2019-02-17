@@ -502,7 +502,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         LineRef vSize = (LineRef)std::min(m_normalData.m_vSize, m_lmppData.m_vSize);
         for(int i = 0; i < (int)vSize; ++i)
         {
-            m_normalData.m_v[i].bContainsPureComment = m_lmppData.m_v[i].bContainsPureComment;
+            m_normalData.m_v[i].setPureComment(m_lmppData.m_v[i].isPureComment());
         }
     }
 
@@ -766,7 +766,7 @@ void SourceData::FileData::removeComments()
 
         // end of line
         Q_ASSERT(isLineOrBufEnd(p, i, size));
-        m_v[line].bContainsPureComment = bCommentInLine && bWhite;
+        m_v[line].setPureComment(bCommentInLine && bWhite);
         /*      std::cout << line << " : " <<
        ( bCommentInLine ?  "c" : " " ) <<
        ( bWhite ? "w " : "  ") <<

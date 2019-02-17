@@ -1149,9 +1149,9 @@ void Diff3LineList::calcWhiteDiff3Lines(
 
     for(i3=begin(); i3 != end(); ++i3)
     {
-        i3->bWhiteLineA = ((*i3).getLineA() == -1 || pldA == nullptr || pldA[(*i3).getLineA()].whiteLine() || pldA[(*i3).getLineA()].bContainsPureComment);
-        i3->bWhiteLineB = ((*i3).getLineB() == -1 || pldB == nullptr || pldB[(*i3).getLineB()].whiteLine() || pldB[(*i3).getLineB()].bContainsPureComment);
-        i3->bWhiteLineC = ((*i3).getLineC() == -1 || pldC == nullptr || pldC[(*i3).getLineC()].whiteLine() || pldC[(*i3).getLineC()].bContainsPureComment);
+        i3->bWhiteLineA = ((*i3).getLineA() == -1 || pldA == nullptr || pldA[(*i3).getLineA()].whiteLine() || pldA[(*i3).getLineA()].isPureComment());
+        i3->bWhiteLineB = ((*i3).getLineB() == -1 || pldB == nullptr || pldB[(*i3).getLineB()].whiteLine() || pldB[(*i3).getLineB()].isPureComment());
+        i3->bWhiteLineC = ((*i3).getLineC() == -1 || pldC == nullptr || pldC[(*i3).getLineC()].whiteLine() || pldC[(*i3).getLineC()].isPureComment());
     }
 }
 
@@ -1381,7 +1381,7 @@ bool Diff3Line::fineDiff(const int selector, const LineData* v1, const LineData*
             setFineDiff(selector, pDiffList);
         }
 
-        if((v1[k1].bContainsPureComment || v1[k1].whiteLine()) && (v2[k2].bContainsPureComment || v2[k2].whiteLine()))
+        if((v1[k1].isPureComment() || v1[k1].whiteLine()) && (v2[k2].isPureComment() || v2[k2].whiteLine()))
         {
             if(selector == 1)
             {

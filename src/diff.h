@@ -63,12 +63,13 @@ typedef std::list<Diff> DiffList;
 
 class LineData
 {
-   private:
+  private:
     const QChar* pLine = nullptr;
     const QChar* pFirstNonWhiteChar = nullptr;
     int mSize = 0;
-   public:
     bool bContainsPureComment = false;
+
+  public:
     inline int size() const { return mSize; }
     inline void setSize(const int newSize) { mSize = newSize; }
 
@@ -80,6 +81,9 @@ class LineData
     int width(int tabSize) const; // Calcs width considering tabs.
     //int occurrences;
     bool whiteLine() const { return pFirstNonWhiteChar - pLine == mSize; }
+
+    bool isPureComment() const { return bContainsPureComment; }
+    void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
 };
 
 class Diff3LineList;
