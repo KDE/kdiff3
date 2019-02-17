@@ -200,63 +200,59 @@ private:
 
    friend class MergeEditLine;
 
-   struct MergeLine
+   class MergeLine
    {
-      MergeLine()
-      {
-         srcSelect=None; mergeDetails=eDefault; d3lLineIdx = -1; srcRangeLength=0;
-         bConflict=false; bDelta=false; bWhiteSpaceConflict=false;
-      }
-      Diff3LineList::const_iterator id3l;
-      int d3lLineIdx;  // Needed to show the correct window pos.
-      int srcRangeLength; // how many src-lines have this properties
-      e_MergeDetails mergeDetails;
-      bool bConflict;
-      bool bWhiteSpaceConflict;
-      bool bDelta;
-      e_SrcSelector srcSelect;
-      MergeEditLineList mergeEditLineList;
-      void split( MergeLine& ml2, int d3lLineIdx2 ) // The caller must insert the ml2 after this ml in the m_mergeLineList
-      {
-         if ( d3lLineIdx2<d3lLineIdx || d3lLineIdx2 >= d3lLineIdx + srcRangeLength )
-            return; //Error
-         ml2.mergeDetails = mergeDetails;
-         ml2.bConflict = bConflict;
-         ml2.bWhiteSpaceConflict = bWhiteSpaceConflict;
-         ml2.bDelta = bDelta;
-         ml2.srcSelect = srcSelect;
-
-         ml2.d3lLineIdx = d3lLineIdx2;
-         ml2.srcRangeLength = srcRangeLength - (d3lLineIdx2-d3lLineIdx);
-         srcRangeLength = d3lLineIdx2-d3lLineIdx; // current MergeLine controls fewer lines
-         ml2.id3l = id3l;
-         for(int i=0; i<srcRangeLength; ++i)
-            ++ml2.id3l;
-
-         ml2.mergeEditLineList.clear();
-         // Search for best place to splice
-         for(MergeEditLineList::iterator i=mergeEditLineList.begin(); i!=mergeEditLineList.end();++i)
+      public:
+         Diff3LineList::const_iterator id3l;
+         int d3lLineIdx = -1;  // Needed to show the correct window pos.
+         int srcRangeLength = 0; // how many src-lines have this properties
+         e_MergeDetails mergeDetails = eDefault;
+         bool bConflict = false;
+         bool bWhiteSpaceConflict = false;
+         bool bDelta = false;
+         e_SrcSelector srcSelect = None;
+         MergeEditLineList mergeEditLineList;
+         void split( MergeLine& ml2, int d3lLineIdx2 ) // The caller must insert the ml2 after this ml in the m_mergeLineList
          {
-            if (i->id3l()==ml2.id3l)
+            if ( d3lLineIdx2<d3lLineIdx || d3lLineIdx2 >= d3lLineIdx + srcRangeLength )
+               return; //Error
+            ml2.mergeDetails = mergeDetails;
+            ml2.bConflict = bConflict;
+            ml2.bWhiteSpaceConflict = bWhiteSpaceConflict;
+            ml2.bDelta = bDelta;
+            ml2.srcSelect = srcSelect;
+
+            ml2.d3lLineIdx = d3lLineIdx2;
+            ml2.srcRangeLength = srcRangeLength - (d3lLineIdx2-d3lLineIdx);
+            srcRangeLength = d3lLineIdx2-d3lLineIdx; // current MergeLine controls fewer lines
+            ml2.id3l = id3l;
+            for(int i=0; i<srcRangeLength; ++i)
+               ++ml2.id3l;
+
+            ml2.mergeEditLineList.clear();
+            // Search for best place to splice
+            for(MergeEditLineList::iterator i=mergeEditLineList.begin(); i!=mergeEditLineList.end();++i)
             {
-               ml2.mergeEditLineList.splice( ml2.mergeEditLineList.begin(), mergeEditLineList, i, mergeEditLineList.end() );
-               return;
+               if (i->id3l()==ml2.id3l)
+               {
+                  ml2.mergeEditLineList.splice( ml2.mergeEditLineList.begin(), mergeEditLineList, i, mergeEditLineList.end() );
+                  return;
+               }
             }
+            ml2.mergeEditLineList.setTotalSizePtr( mergeEditLineList.getTotalSizePtr() );
+            ml2.mergeEditLineList.push_back(MergeEditLine(ml2.id3l));
          }
-         ml2.mergeEditLineList.setTotalSizePtr( mergeEditLineList.getTotalSizePtr() );
-         ml2.mergeEditLineList.push_back(MergeEditLine(ml2.id3l));
-      }
-      void join( MergeLine& ml2 ) // The caller must remove the ml2 from the m_mergeLineList after this call
-      {
-         srcRangeLength += ml2.srcRangeLength;
-         ml2.mergeEditLineList.clear();
-         mergeEditLineList.clear();
-         mergeEditLineList.push_back(MergeEditLine(id3l)); // Create a simple conflict
-         if ( ml2.bConflict ) bConflict = true;
-         if ( !ml2.bWhiteSpaceConflict ) bWhiteSpaceConflict = false;
-         if ( ml2.bDelta ) bDelta = true;
-      }
-   };
+         void join( MergeLine& ml2 ) // The caller must remove the ml2 from the m_mergeLineList after this call
+         {
+            srcRangeLength += ml2.srcRangeLength;
+            ml2.mergeEditLineList.clear();
+            mergeEditLineList.clear();
+            mergeEditLineList.push_back(MergeEditLine(id3l)); // Create a simple conflict
+            if ( ml2.bConflict ) bConflict = true;
+            if ( !ml2.bWhiteSpaceConflict ) bWhiteSpaceConflict = false;
+            if ( ml2.bDelta ) bDelta = true;
+         }
+      };
 
 private:
    static bool sameKindCheck( const MergeLine& ml1, const MergeLine& ml2 );
