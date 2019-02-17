@@ -316,7 +316,7 @@ bool MergeResultWindow::sameKindCheck(const MergeLine& ml1, const MergeLine& ml2
     {
         // Both lines have conflicts: If one is only a white space conflict and
         // the other one is a real conflict, then this line returns false.
-        return ml1.id3l->bAEqC == ml2.id3l->bAEqC && ml1.id3l->bAEqB == ml2.id3l->bAEqB;
+        return ml1.id3l->isEqualAC() == ml2.id3l->isEqualAC() && ml1.id3l->isEqualAB() == ml2.id3l->isEqualAB();
     }
     else
         return (
@@ -354,8 +354,8 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
 
             // Automatic solving for only whitespace changes.
             if(ml.bConflict &&
-               ((m_pldC == nullptr && (d.bAEqB || (d.bWhiteLineA && d.bWhiteLineB))) ||
-                (m_pldC != nullptr && ((d.bAEqB && d.bAEqC) || (d.bWhiteLineA && d.bWhiteLineB && d.bWhiteLineC)))))
+               ((m_pldC == nullptr && (d.isEqualAB() || (d.bWhiteLineA && d.bWhiteLineB))) ||
+                (m_pldC != nullptr && ((d.isEqualAB() && d.isEqualAC()) || (d.bWhiteLineA && d.bWhiteLineB && d.bWhiteLineC)))))
             {
                 ml.bWhiteSpaceConflict = true;
             }

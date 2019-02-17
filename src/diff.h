@@ -143,9 +143,13 @@ class Diff3Line
     LineRef getLineB() const { return lineB; }
     LineRef getLineC() const { return lineC; }
 
-    void setLineA(const LineRef& line) { lineA = line; }
-    void setLineB(const LineRef& line) { lineB = line; }
-    void setLineC(const LineRef& line) { lineC = line; }
+    inline void setLineA(const LineRef& line) { lineA = line; }
+    inline void setLineB(const LineRef& line) { lineB = line; }
+    inline void setLineC(const LineRef& line) { lineC = line; }
+
+    inline bool isEqualAB() const { return bAEqB; }
+    inline bool isEqualAC() const { return bAEqC; }
+    inline bool isEqualBC() const { return bBEqC; }
 
     bool operator==(const Diff3Line& d3l) const
     {

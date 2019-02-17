@@ -139,13 +139,13 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
             case eBDeleted:
             case eBChanged:
                 c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorB;
-                bWhiteSpaceChange = d3l.bAEqB || (d3l.bWhiteLineA && d3l.bWhiteLineB);
+                bWhiteSpaceChange = d3l.isEqualAB() || (d3l.bWhiteLineA && d3l.bWhiteLineB);
                 break;
 
             case eCAdded:
             case eCDeleted:
             case eCChanged:
-                bWhiteSpaceChange = d3l.bAEqC || (d3l.bWhiteLineA && d3l.bWhiteLineC);
+                bWhiteSpaceChange = d3l.isEqualAC() || (d3l.bWhiteLineA && d3l.bWhiteLineC);
                 c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorC;
                 break;
 
@@ -175,7 +175,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
             default:
                 c = m_pOptions->m_colorForConflict;
-                bWhiteSpaceChange = d3l.bAEqB || (d3l.bWhiteLineA && d3l.bWhiteLineB);
+                bWhiteSpaceChange = d3l.isEqualAB() || (d3l.bWhiteLineA && d3l.bWhiteLineB);
                 break;
             }
         }
@@ -191,7 +191,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
             default:
                 c = m_pOptions->m_colorForConflict;
-                bWhiteSpaceChange = d3l.bAEqC || (d3l.bWhiteLineA && d3l.bWhiteLineC);
+                bWhiteSpaceChange = d3l.isEqualAC() || (d3l.bWhiteLineA && d3l.bWhiteLineC);
                 break;
             }
         }
@@ -207,7 +207,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
             default:
                 c = m_pOptions->m_colorForConflict;
-                bWhiteSpaceChange = d3l.bBEqC || (d3l.bWhiteLineB && d3l.bWhiteLineC);
+                bWhiteSpaceChange = d3l.isEqualBC() || (d3l.bWhiteLineB && d3l.bWhiteLineC);
                 break;
             }
         }

@@ -86,7 +86,7 @@ void printDiff3List(const Diff3LineList &diff3LineList,
                                 .arg(lineCText, -columnsize);
       if(verbose || forceVerbosity)
       {
-         out << " " << d3l.bAEqB << " " << d3l.bBEqC << " " << d3l.bAEqC;
+         out << " " << d3l.isEqualAB() << " " << d3l.isEqualBC() << " " << d3l.isEqualAC();
       }
 
       out << endl;
@@ -346,17 +346,17 @@ bool runTest(QString file1, QString file2, QString file3, QString expectedResult
       QString lineBText = (p_actual->lineB == -1) ? "" : getLineFromSourceData(m_sd2, p_actual->lineB).simplified().replace(" ", "");
       QString lineCText = (p_actual->lineC == -1) ? "" : getLineFromSourceData(m_sd3, p_actual->lineC).simplified().replace(" ", "");
 
-      if(!dataIsConsistent(p_actual->lineA, lineAText, p_actual->lineB, lineBText, p_actual->bAEqB))
+      if(!dataIsConsistent(p_actual->lineA, lineAText, p_actual->lineB, lineBText, p_actual->isEqualAB()))
       {
          if(verbose) out << "inconsistency: line " << p_actual->lineA << " of A vs line " << p_actual->lineB << " of B" << endl;
          consistencyError = true;
       }
-      if(!dataIsConsistent(p_actual->lineB, lineBText, p_actual->lineC, lineCText, p_actual->bBEqC))
+      if(!dataIsConsistent(p_actual->lineB, lineBText, p_actual->lineC, lineCText, p_actual->isEqualBC()))
       {
          if(verbose) out << "inconsistency: line " << p_actual->lineB << " of B vs line " << p_actual->lineC << " of C" << endl;
          consistencyError = true;
       }
-      if(!dataIsConsistent(p_actual->lineA, lineAText, p_actual->lineC, lineCText, p_actual->bAEqC))
+      if(!dataIsConsistent(p_actual->lineA, lineAText, p_actual->lineC, lineCText, p_actual->isEqualAC()))
       {
          if(verbose) out << "inconsistency: line " << p_actual->lineA << " of A vs line " << p_actual->lineC << " of C" << endl;
          consistencyError = true;
