@@ -1171,40 +1171,7 @@ void DiffTextWindowData::getLineInfo(
     DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
     int& changed, int& changed2)
 {
-    changed = 0;
-    changed2 = 0;
-    bool bAEqB = d3l.bAEqB || (d3l.bWhiteLineA && d3l.bWhiteLineB);
-    bool bAEqC = d3l.bAEqC || (d3l.bWhiteLineA && d3l.bWhiteLineC);
-    bool bBEqC = d3l.bBEqC || (d3l.bWhiteLineB && d3l.bWhiteLineC);
-
-    Q_ASSERT(m_winIdx >= 1 && m_winIdx <= 3);
-    if(m_winIdx == 1) {
-        lineIdx = d3l.getLineA();
-        pFineDiff1 = d3l.pFineAB;
-        pFineDiff2 = d3l.pFineCA;
-        changed |= ((d3l.getLineB() == -1) != (lineIdx == -1) ? 1 : 0) +
-                   ((d3l.getLineC() == -1) != (lineIdx == -1) && m_bTriple ? 2 : 0);
-        changed2 |= (bAEqB ? 0 : 1) + (bAEqC || !m_bTriple ? 0 : 2);
-    }
-    else if(m_winIdx == 2)
-    {
-        lineIdx = d3l.getLineB();
-        pFineDiff1 = d3l.pFineBC;
-        pFineDiff2 = d3l.pFineAB;
-        changed |= ((d3l.getLineC() == -1) != (lineIdx == -1) && m_bTriple ? 1 : 0) +
-                   ((d3l.getLineA() == -1) != (lineIdx == -1) ? 2 : 0);
-        changed2 |= (bBEqC || !m_bTriple ? 0 : 1) + (bAEqB ? 0 : 2);
-    }
-    else if(m_winIdx == 3)
-    {
-        lineIdx = d3l.getLineC();
-        pFineDiff1 = d3l.pFineCA;
-        pFineDiff2 = d3l.pFineBC;
-        changed |= ((d3l.getLineA() == -1) != (lineIdx == -1) ? 1 : 0) +
-                   ((d3l.getLineB() == -1) != (lineIdx == -1) ? 2 : 0);
-        changed2 |= (bAEqC ? 0 : 1) + (bBEqC ? 0 : 2);
-    }
-
+    d3l.getLineInfo(m_winIdx, m_bTriple, lineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 }
 
 void DiffTextWindow::resizeEvent(QResizeEvent* e)

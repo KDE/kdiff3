@@ -1401,6 +1401,45 @@ bool Diff3Line::fineDiff(const int selector, const LineData* v1, const LineData*
     return bTextsTotalEqual;
 }
 
+void Diff3Line::getLineInfo(const int winIdx, const bool isTriple, int& lineIdx,
+    DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
+    int& changed, int& changed2) const
+{
+    changed = 0;
+    changed2 = 0;
+    bool bAEqualB = this->bAEqB || (bWhiteLineA && bWhiteLineB);
+    bool bAEqualC = this->bAEqC || (bWhiteLineA && bWhiteLineC);
+    bool bBEqualC = this->bBEqC || (bWhiteLineB && bWhiteLineC);
+
+    Q_ASSERT(winIdx >= 1 && winIdx <= 3);
+    if(winIdx == 1) {
+        lineIdx = getLineA();
+        pFineDiff1 = pFineAB;
+        pFineDiff2 = pFineCA;
+        changed |= ((getLineB() == -1) != (lineIdx == -1) ? 1 : 0) +
+                   ((getLineC() == -1) != (lineIdx == -1) && isTriple ? 2 : 0);
+        changed2 |= (bAEqualB ? 0 : 1) + (bAEqualC || !isTriple ? 0 : 2);
+    }
+    else if(winIdx == 2)
+    {
+        lineIdx = getLineB();
+        pFineDiff1 = pFineBC;
+        pFineDiff2 = pFineAB;
+        changed |= ((getLineC() == -1) != (lineIdx == -1) && isTriple ? 1 : 0) +
+                   ((getLineA() == -1) != (lineIdx == -1) ? 2 : 0);
+        changed2 |= (bBEqualC || !isTriple ? 0 : 1) + (bAEqualB ? 0 : 2);
+    }
+    else if(winIdx == 3)
+    {
+        lineIdx = getLineC();
+        pFineDiff1 = pFineCA;
+        pFineDiff2 = pFineBC;
+        changed |= ((getLineA() == -1) != (lineIdx == -1) ? 1 : 0) +
+                   ((getLineB() == -1) != (lineIdx == -1) ? 2 : 0);
+        changed2 |= (bAEqualC ? 0 : 1) + (bBEqualC ? 0 : 2);
+    }
+}
+
 bool Diff3LineList::fineDiff(const int selector, const LineData* v1, const LineData* v2)
 {
     // Finetuning: Diff each line with deltas

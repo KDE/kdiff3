@@ -179,6 +179,10 @@ class Diff3Line
     bool fineDiff(const int selector, const LineData* v1, const LineData* v2);
     void mergeOneLine(e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, int& src, bool bTwoInputs) const;
 
+    void getLineInfo(const int winIdx, const bool isTriple, int& lineIdx,
+        DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
+        int& changed, int& changed2) const;
+
   private:
     void setFineDiff(const int selector, DiffList* pDiffList)
     {
