@@ -193,7 +193,7 @@ class Diff3Line
         return -1;
     }
 
-    bool fineDiff(const e_SrcSelector selector, const LineData* v1, const LineData* v2);
+    bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const LineData* v1, const LineData* v2);
     void mergeOneLine(e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, e_SrcSelector& src, bool bTwoInputs) const;
 
     void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, int& lineIdx,

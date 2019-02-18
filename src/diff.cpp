@@ -1311,12 +1311,12 @@ void calcDiff(const QChar* p1, LineRef size1, const QChar* p2, LineRef size2, Di
     }
 }
 
-bool Diff3Line::fineDiff(const e_SrcSelector selector, const LineData* v1, const LineData* v2)
+bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, const LineData* v1, const LineData* v2)
 {
-    bool bTextsTotalEqual = true;
     LineRef k1 = 0;
     LineRef k2 = 0;
     int maxSearchLength = 500;
+    bool bTextsTotalEqual = inBTextsTotalEqual;
 
     Q_ASSERT(selector == A || selector == B || selector == C);
 
@@ -1440,7 +1440,7 @@ bool Diff3LineList::fineDiff(const e_SrcSelector selector, const LineData* v1, c
     int listIdx = 0;
     for(i = begin(); i != end(); ++i)
     {
-        bTextsTotalEqual = i->fineDiff(selector, v1, v2);
+        bTextsTotalEqual = i->fineDiff(bTextsTotalEqual, selector, v1, v2);
         ++listIdx;
         pp.step();
     }
