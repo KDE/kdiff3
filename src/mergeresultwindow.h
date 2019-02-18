@@ -23,6 +23,8 @@
 
 class QPainter;
 class RLPainter;
+class KActionCollection;
+class KToggleAction;
 class MergeResultWindow : public QWidget
 {
    Q_OBJECT
@@ -36,7 +38,7 @@ public:
       const Diff3LineList* pDiff3LineList,
       TotalDiffStatus* pTotalDiffStatus
       );
-
+   void initActions(KActionCollection* ac);
    void reset();
 
    bool saveDocument( const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle );
@@ -62,6 +64,9 @@ public:
    void setSelection( int firstLine, int startPos, int lastLine, int endPos );
    void setOverviewMode( Overview::e_OverviewMode eOverviewMode );
    Overview::e_OverviewMode getOverviewMode();
+
+   void slotUpdateAvailabilities(const bool bMergeEditorVisible, const bool m_bTripleDiff);
+
 public Q_SLOTS:
    void setFirstLine(int firstLine);
    void setHorizScrollOffset(int horizScrollOffset);
@@ -86,7 +91,17 @@ public Q_SLOTS:
    void updateSourceMask();
    void slotStatusMessageChanged( const QString& );
 
-Q_SIGNALS:
+   void slotChooseAEverywhere() { chooseGlobal(A, false, false); }
+   void slotChooseBEverywhere() { chooseGlobal(B, false, false); }
+   void slotChooseCEverywhere() { chooseGlobal(C, false, false); }
+   void slotChooseAForUnsolvedConflicts() { chooseGlobal(A, true, false); }
+   void slotChooseBForUnsolvedConflicts() { chooseGlobal(B, true, false); }
+   void slotChooseCForUnsolvedConflicts() { chooseGlobal(C, true, false); }
+   void slotChooseAForUnsolvedWhiteSpaceConflicts() { chooseGlobal(A, true, true); }
+   void slotChooseBForUnsolvedWhiteSpaceConflicts() { chooseGlobal(B, true, true); }
+   void slotChooseCForUnsolvedWhiteSpaceConflicts() { chooseGlobal(C, true, true); }
+
+ Q_SIGNALS:
    void scrollMergeResultWindow( int deltaX, int deltaY );
    void modifiedChanged(bool bModified);
    void setFastSelectorRange( int line1, int nofLines );
@@ -102,7 +117,17 @@ private:
    void merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly=false, bool bWhiteSpaceOnly=false );
    QString getString( int lineIdx );
 
-   Options* m_pOptions;
+   QAction* chooseAEverywhere = nullptr;
+   QAction* chooseBEverywhere = nullptr;
+   QAction* chooseCEverywhere = nullptr;
+   QAction* chooseAForUnsolvedConflicts = nullptr;
+   QAction* chooseBForUnsolvedConflicts = nullptr;
+   QAction* chooseCForUnsolvedConflicts = nullptr;
+   QAction* chooseAForUnsolvedWhiteSpaceConflicts = nullptr;
+   QAction* chooseBForUnsolvedWhiteSpaceConflicts = nullptr;
+   QAction* chooseCForUnsolvedWhiteSpaceConflicts = nullptr;
+
+   Options* m_pOptions = nullptr;
 
    const LineData* m_pldA;
    const LineData* m_pldB;
@@ -138,10 +163,10 @@ private:
       Diff3LineList::const_iterator id3l(){return m_id3l;}
       // getString() is implemented as MergeResultWindow::getString()
    private:
-      Diff3LineList::const_iterator m_id3l;
-      e_SrcSelector m_src;         // 1, 2 or 3 for A, B or C respectively, or 0 when line is from neither source.
-      QString m_str;    // String when modified by user or null-string when orig data is used.
-      bool m_bLineRemoved;
+     Diff3LineList::const_iterator m_id3l;
+     e_SrcSelector m_src; // 1, 2 or 3 for A, B or C respectively, or 0 when line is from neither source.
+     QString m_str;       // String when modified by user or null-string when orig data is used.
+     bool m_bLineRemoved;
    };
 
    class MergeEditLineList : private std::list<MergeEditLine>

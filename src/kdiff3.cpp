@@ -599,15 +599,7 @@ void KDiff3App::initActions(KActionCollection* ac)
     showWhiteSpace = GuiUtils::createAction<KToggleAction>(i18n("Show White Space"), QIcon(QPixmap(showwhitespace)), i18n("White\nDeltas"), this, &KDiff3App::slotShowWhiteSpaceToggled, ac, "diff_show_whitespace");
 
     showLineNumbers = GuiUtils::createAction<KToggleAction>(i18n("Show Line Numbers"), QIcon(QPixmap(showlinenumbers)), i18n("Line\nNumbers"), this, &KDiff3App::slotShowLineNumbersToggled, ac, "diff_showlinenumbers");
-    chooseAEverywhere = GuiUtils::createAction<QAction>(i18n("Choose A Everywhere"), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_1), this, &KDiff3App::slotChooseAEverywhere, ac, "merge_choose_a_everywhere");
-    chooseBEverywhere = GuiUtils::createAction<QAction>(i18n("Choose B Everywhere"), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_2), this, &KDiff3App::slotChooseBEverywhere, ac, "merge_choose_b_everywhere");
-    chooseCEverywhere = GuiUtils::createAction<QAction>(i18n("Choose C Everywhere"), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_3), this, &KDiff3App::slotChooseCEverywhere, ac, "merge_choose_c_everywhere");
-    chooseAForUnsolvedConflicts = GuiUtils::createAction<QAction>(i18n("Choose A for All Unsolved Conflicts"), this, &KDiff3App::slotChooseAForUnsolvedConflicts, ac, "merge_choose_a_for_unsolved_conflicts");
-    chooseBForUnsolvedConflicts = GuiUtils::createAction<QAction>(i18n("Choose B for All Unsolved Conflicts"), this, &KDiff3App::slotChooseBForUnsolvedConflicts, ac, "merge_choose_b_for_unsolved_conflicts");
-    chooseCForUnsolvedConflicts = GuiUtils::createAction<QAction>(i18n("Choose C for All Unsolved Conflicts"), this, &KDiff3App::slotChooseCForUnsolvedConflicts, ac, "merge_choose_c_for_unsolved_conflicts");
-    chooseAForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose A for All Unsolved Whitespace Conflicts"), this, &KDiff3App::slotChooseAForUnsolvedWhiteSpaceConflicts, ac, "merge_choose_a_for_unsolved_whitespace_conflicts");
-    chooseBForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose B for All Unsolved Whitespace Conflicts"), this, &KDiff3App::slotChooseBForUnsolvedWhiteSpaceConflicts, ac, "merge_choose_b_for_unsolved_whitespace_conflicts");
-    chooseCForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose C for All Unsolved Whitespace Conflicts"), this, &KDiff3App::slotChooseCForUnsolvedWhiteSpaceConflicts, ac, "merge_choose_c_for_unsolved_whitespace_conflicts");
+
     autoSolve = GuiUtils::createAction<QAction>(i18n("Automatically Solve Simple Conflicts"), this, &KDiff3App::slotAutoSolve, ac, "merge_autosolve");
     unsolve = GuiUtils::createAction<QAction>(i18n("Set Deltas to Conflicts"), this, &KDiff3App::slotUnsolve, ac, "merge_autounsolve");
     mergeRegExp = GuiUtils::createAction<QAction>(i18n("Run Regular Expression Auto Merge"), this, &KDiff3App::slotRegExpAutoMerge, ac, "merge_regexp_automerge");

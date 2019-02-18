@@ -335,6 +335,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         oldHeights = m_pMainSplitter->sizes();
 
     initView();
+    m_pMergeResultWindow->initActions(actionCollection());
 
     if(m_pDirectoryMergeSplitter->isVisible())
     {
@@ -1374,25 +1375,6 @@ void KDiff3App::choose(e_SrcSelector choice)
 void KDiff3App::slotChooseA() { choose(A); }
 void KDiff3App::slotChooseB() { choose(B); }
 void KDiff3App::slotChooseC() { choose(C); }
-
-// bConflictsOnly automatically choose for conflicts only (true) or for everywhere
-static void mergeChooseGlobal(MergeResultWindow* pMRW, int selector, bool bConflictsOnly, bool bWhiteSpaceOnly)
-{
-    if(pMRW)
-    {
-        pMRW->chooseGlobal(selector, bConflictsOnly, bWhiteSpaceOnly);
-    }
-}
-
-void KDiff3App::slotChooseAEverywhere() { mergeChooseGlobal(m_pMergeResultWindow, A, false, false); }
-void KDiff3App::slotChooseBEverywhere() { mergeChooseGlobal(m_pMergeResultWindow, B, false, false); }
-void KDiff3App::slotChooseCEverywhere() { mergeChooseGlobal(m_pMergeResultWindow, C, false, false); }
-void KDiff3App::slotChooseAForUnsolvedConflicts() { mergeChooseGlobal(m_pMergeResultWindow, A, true, false); }
-void KDiff3App::slotChooseBForUnsolvedConflicts() { mergeChooseGlobal(m_pMergeResultWindow, B, true, false); }
-void KDiff3App::slotChooseCForUnsolvedConflicts() { mergeChooseGlobal(m_pMergeResultWindow, C, true, false); }
-void KDiff3App::slotChooseAForUnsolvedWhiteSpaceConflicts() { mergeChooseGlobal(m_pMergeResultWindow, A, true, true); }
-void KDiff3App::slotChooseBForUnsolvedWhiteSpaceConflicts() { mergeChooseGlobal(m_pMergeResultWindow, B, true, true); }
-void KDiff3App::slotChooseCForUnsolvedWhiteSpaceConflicts() { mergeChooseGlobal(m_pMergeResultWindow, C, true, true); }
 
 void KDiff3App::slotAutoSolve()
 {
@@ -2434,7 +2416,7 @@ void KDiff3App::slotUpdateAvailabilities()
     }
 
     bool bDiffWindowVisible = m_pMainWidget != nullptr && m_pMainWidget->isVisible();
-    bool bMergeEditorVisible = m_pMergeWindowFrame != nullptr && m_pMergeWindowFrame->isVisible();
+    bool bMergeEditorVisible = m_pMergeWindowFrame != nullptr && m_pMergeWindowFrame->isVisible() && m_pMergeResultWindow != nullptr;
 
     m_pDirectoryMergeWindow->updateAvailabilities(m_bDirCompare, bDiffWindowVisible, chooseA, chooseB, chooseC);
 
@@ -2457,15 +2439,11 @@ void KDiff3App::slotUpdateAvailabilities()
         chooseB->setEnabled(bMergeEditorVisible);
         chooseC->setEnabled(bMergeEditorVisible && m_bTripleDiff);
     }
-    chooseAEverywhere->setEnabled(bMergeEditorVisible);
-    chooseBEverywhere->setEnabled(bMergeEditorVisible);
-    chooseCEverywhere->setEnabled(bMergeEditorVisible && m_bTripleDiff);
-    chooseAForUnsolvedConflicts->setEnabled(bMergeEditorVisible);
-    chooseBForUnsolvedConflicts->setEnabled(bMergeEditorVisible);
-    chooseCForUnsolvedConflicts->setEnabled(bMergeEditorVisible && m_bTripleDiff);
-    chooseAForUnsolvedWhiteSpaceConflicts->setEnabled(bMergeEditorVisible);
-    chooseBForUnsolvedWhiteSpaceConflicts->setEnabled(bMergeEditorVisible);
-    chooseCForUnsolvedWhiteSpaceConflicts->setEnabled(bMergeEditorVisible && m_bTripleDiff);
+    if(m_pMergeResultWindow != nullptr)
+    {
+        m_pMergeResultWindow->slotUpdateAvailabilities(bMergeEditorVisible, m_bTripleDiff);
+    }
+
     mergeHistory->setEnabled(bMergeEditorVisible);
     mergeRegExp->setEnabled(bMergeEditorVisible);
     showWindowA->setEnabled(bDiffWindowVisible && (m_pDiffTextWindow2->isVisible() || m_pDiffTextWindow3->isVisible()));
@@ -2480,15 +2458,15 @@ void KDiff3App::slotUpdateAvailabilities()
     fileSave->setEnabled(m_bOutputModified && bSavable);
     fileSaveAs->setEnabled(bSavable);
 
-    goTop->setEnabled(bDiffWindowVisible && m_pMergeResultWindow->isDeltaAboveCurrent());
-    goBottom->setEnabled(bDiffWindowVisible && m_pMergeResultWindow->isDeltaBelowCurrent());
+    goTop->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isDeltaAboveCurrent());
+    goBottom->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isDeltaBelowCurrent());
     goCurrent->setEnabled(bDiffWindowVisible);
     goPrevUnsolvedConflict->setEnabled(bMergeEditorVisible && m_pMergeResultWindow->isUnsolvedConflictAboveCurrent());
     goNextUnsolvedConflict->setEnabled(bMergeEditorVisible && m_pMergeResultWindow->isUnsolvedConflictBelowCurrent());
-    goPrevConflict->setEnabled(bDiffWindowVisible && m_pMergeResultWindow->isConflictAboveCurrent());
-    goNextConflict->setEnabled(bDiffWindowVisible && m_pMergeResultWindow->isConflictBelowCurrent());
-    goPrevDelta->setEnabled(bDiffWindowVisible && m_pMergeResultWindow->isDeltaAboveCurrent());
-    goNextDelta->setEnabled(bDiffWindowVisible && m_pMergeResultWindow->isDeltaBelowCurrent());
+    goPrevConflict->setEnabled(bDiffWindowVisible && bMergeEditorVisible &&m_pMergeResultWindow->isConflictAboveCurrent());
+    goNextConflict->setEnabled(bDiffWindowVisible && bMergeEditorVisible &&m_pMergeResultWindow->isConflictBelowCurrent());
+    goPrevDelta->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isDeltaAboveCurrent());
+    goNextDelta->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isDeltaBelowCurrent());
 
     overviewModeNormal->setEnabled(m_bTripleDiff && bDiffWindowVisible);
     overviewModeAB->setEnabled(m_bTripleDiff && bDiffWindowVisible);

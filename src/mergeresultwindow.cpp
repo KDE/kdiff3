@@ -12,6 +12,7 @@
 #include "mergeresultwindow.h"
 #include "options.h"
 #include "RLPainter.h"
+#include "guiutils.h"
 
 #include <QApplication>
 #include <QClipboard>
@@ -33,6 +34,7 @@
 #include <QTextStream>
 #include <QUrl>
 
+#include <QAction>
 #include <QDropEvent>
 #include <QEvent>
 #include <QFocusEvent>
@@ -44,8 +46,10 @@
 #include <QTimerEvent>
 #include <QWheelEvent>
 
+#include <KActionCollection>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KToggleAction>
 
 int g_bAutoSolve = true;
 
@@ -144,6 +148,24 @@ void MergeResultWindow::init(
     showUnsolvedConflictsStatusMessage();
 }
 
+void MergeResultWindow::initActions(KActionCollection* ac)
+{
+    if(ac == nullptr){
+        KMessageBox::error(nullptr, "actionCollection==0");
+        exit(-1);//we cannot recover from this.
+    }
+
+    chooseAEverywhere = GuiUtils::createAction<QAction>(i18n("Choose A Everywhere"), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_1), this, &MergeResultWindow::slotChooseAEverywhere, ac, "merge_choose_a_everywhere");
+    chooseBEverywhere = GuiUtils::createAction<QAction>(i18n("Choose B Everywhere"), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_2), this, &MergeResultWindow::slotChooseBEverywhere, ac, "merge_choose_b_everywhere");
+    chooseCEverywhere = GuiUtils::createAction<QAction>(i18n("Choose C Everywhere"), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_3), this, &MergeResultWindow::slotChooseCEverywhere, ac, "merge_choose_c_everywhere");
+    chooseAForUnsolvedConflicts = GuiUtils::createAction<QAction>(i18n("Choose A for All Unsolved Conflicts"), this, &MergeResultWindow::slotChooseAForUnsolvedConflicts, ac, "merge_choose_a_for_unsolved_conflicts");
+    chooseBForUnsolvedConflicts = GuiUtils::createAction<QAction>(i18n("Choose B for All Unsolved Conflicts"), this, &MergeResultWindow::slotChooseBForUnsolvedConflicts, ac, "merge_choose_b_for_unsolved_conflicts");
+    chooseCForUnsolvedConflicts = GuiUtils::createAction<QAction>(i18n("Choose C for All Unsolved Conflicts"), this, &MergeResultWindow::slotChooseCForUnsolvedConflicts, ac, "merge_choose_c_for_unsolved_conflicts");
+    chooseAForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose A for All Unsolved Whitespace Conflicts"), this, &MergeResultWindow::slotChooseAForUnsolvedWhiteSpaceConflicts, ac, "merge_choose_a_for_unsolved_whitespace_conflicts");
+    chooseBForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose B for All Unsolved Whitespace Conflicts"), this, &MergeResultWindow::slotChooseBForUnsolvedWhiteSpaceConflicts, ac, "merge_choose_b_for_unsolved_whitespace_conflicts");
+    chooseCForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose C for All Unsolved Whitespace Conflicts"), this, &MergeResultWindow::slotChooseCForUnsolvedWhiteSpaceConflicts, ac, "merge_choose_c_for_unsolved_whitespace_conflicts");
+}
+
 void MergeResultWindow::showUnsolvedConflictsStatusMessage()
 {
     if(m_pStatusBar)
@@ -154,6 +176,19 @@ void MergeResultWindow::showUnsolvedConflictsStatusMessage()
         m_persistentStatusMessage = i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)", nofUnsolved, wsc);
         m_pStatusBar->showMessage(m_persistentStatusMessage);
     }
+}
+
+void MergeResultWindow::slotUpdateAvailabilities(bool bMergeEditorVisible,const bool bTripleDiff)
+{
+    chooseAEverywhere->setEnabled(bMergeEditorVisible);
+    chooseBEverywhere->setEnabled(bMergeEditorVisible);
+    chooseCEverywhere->setEnabled(bMergeEditorVisible && bTripleDiff);
+    chooseAForUnsolvedConflicts->setEnabled(bMergeEditorVisible);
+    chooseBForUnsolvedConflicts->setEnabled(bMergeEditorVisible);
+    chooseCForUnsolvedConflicts->setEnabled(bMergeEditorVisible && bTripleDiff);
+    chooseAForUnsolvedWhiteSpaceConflicts->setEnabled(bMergeEditorVisible);
+    chooseBForUnsolvedWhiteSpaceConflicts->setEnabled(bMergeEditorVisible);
+    chooseCForUnsolvedWhiteSpaceConflicts->setEnabled(bMergeEditorVisible && bTripleDiff);
 }
 
 void MergeResultWindow::slotStatusMessageChanged(const QString& s)
