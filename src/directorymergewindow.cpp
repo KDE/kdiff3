@@ -3445,13 +3445,13 @@ void DirectoryMergeWindow::updateAvailabilities(bool bDirCompare, bool bDiffWind
 
     d->m_pDirRescan->setEnabled(bDirCompare);
 
+    bool bThreeDirs = d->isThreeWay();
     d->m_pDirAutoChoiceEverywhere->setEnabled(bDirCompare && isVisible());
     d->m_pDirDoNothingEverywhere->setEnabled(bDirCompare && isVisible());
     d->m_pDirChooseAEverywhere->setEnabled(bDirCompare && isVisible());
     d->m_pDirChooseBEverywhere->setEnabled(bDirCompare && isVisible());
-    d->m_pDirChooseCEverywhere->setEnabled(bDirCompare && isVisible());
+    d->m_pDirChooseCEverywhere->setEnabled(bDirCompare && isVisible() && bThreeDirs);
 
-    bool bThreeDirs = d->isThreeWay();
 
     MergeFileInfos* pMFI = d->getMFI(currentIndex());
 
