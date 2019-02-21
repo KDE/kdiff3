@@ -105,13 +105,13 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
 
     m_url = url;
     m_name = m_url.fileName();
-    //Insure QUrl::isLocalFile assumes the scheme is set.
+    //QUrl::isLocalFile assumes the scheme is set.
     if(!m_url.scheme().isEmpty())
         m_url.setScheme(QLatin1Literal("file"));
 
     if(m_url.isLocalFile() || !m_url.isValid() ) // Treat invalid urls as local files.
     {
-        m_fileInfo = QFileInfo(m_url.path());
+        m_fileInfo = QFileInfo(m_url.toLocalFile());
         m_pParent = nullptr;
 
         loadData();
@@ -967,7 +967,7 @@ bool FileAccessJobHandler::mkDir(const QString& dirName)
         return false;
     else if(dirURL.isLocalFile() || dirURL.isRelative())
     {
-        return QDir().mkdir(dirURL.path());
+        return QDir().mkdir(dirURL.toLocalFile());
     }
     else
     {
@@ -987,7 +987,7 @@ bool FileAccessJobHandler::rmDir(const QString& dirName)
         return false;
     else if(dirURL.isLocalFile())
     {
-        return QDir().rmdir(dirURL.path());
+        return QDir().rmdir(dirURL.toLocalFile());
     }
     else
     {
@@ -1042,7 +1042,7 @@ bool FileAccessJobHandler::rename(const QString& dest)
 
     if(m_pFileAccess->isLocal() && kurl.isLocalFile())
     {
-        return QDir().rename(m_pFileAccess->absoluteFilePath(), kurl.path());
+        return QDir().rename(m_pFileAccess->absoluteFilePath(), kurl.toLocalFile());
     }
     else
     {
