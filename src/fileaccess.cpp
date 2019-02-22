@@ -113,6 +113,10 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     {
         m_fileInfo = QFileInfo(m_url.toLocalFile());
         m_pParent = nullptr;
+        if(m_name.isEmpty())
+        {
+            m_name = m_fileInfo.absoluteDir().dirName();
+        }
 
         loadData();
     }
@@ -259,7 +263,8 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
             break;
         }
 
-        case KIO::UDSEntry::UDS_URL: // m_url = QUrl( e.stringValue(f) );
+        case KIO::UDSEntry::UDS_URL:
+            m_url = QUrl( e.stringValue(f) );
             break;
         case KIO::UDSEntry::UDS_MIME_TYPE:
             break;
@@ -275,9 +280,13 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
     m_fileInfo = QFileInfo(filePath);
     m_fileInfo.setCaching(true);
     if(m_url.isEmpty())
-        m_url = QUrl::fromUserInput(m_fileInfo.absoluteFilePath());
+        m_url = QUrl::fromUserInput(filePath);
 
-    m_name = m_url.fileName();
+    m_name = m_fileInfo.fileName();
+    if(isLocal() && m_name.isEmpty())
+    {
+        m_name = m_fileInfo.absoluteDir().dirName();
+    }
     m_bExists = m_fileInfo.exists();
     //insure modification time is initialized if it wasn't already.
     if(m_modificationTime.isNull())
@@ -285,10 +294,7 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
 
     m_bValidData = true;
     m_bSymLink = !m_linkTarget.isEmpty();
-    if(m_name.isEmpty())
-    {
-        m_name = m_fileInfo.fileName();
-    }
+
 
 
 #ifndef Q_OS_WIN
@@ -350,9 +356,9 @@ QUrl FileAccess::url() const
 {
     QUrl url = m_url;
 
-    if(url.isLocalFile() && url.isRelative())
+    if(url.isLocalFile())
     {
-        url.setPath(absoluteFilePath());
+        url = QUrl::fromLocalFile(absoluteFilePath());
     }
     return url;
 }
@@ -536,7 +542,7 @@ bool FileAccess::copyFile(const QString& dest)
     return jh.copyFile(dest); // Handles local and remote copying.
 }
 
-bool FileAccess::rename(const QString& dest)
+bool FileAccess::rename(const FileAccess& dest)
 {
     FileAccessJobHandler jh(this);
     return jh.rename(dest);
@@ -728,8 +734,8 @@ void FileAccess::setStatusText(const QString& s)
 
 QString FileAccess::cleanPath(const QString& path) // static
 {
-    QUrl url = QUrl::fromUserInput(path, QString(""), QUrl::AssumeLocalFile);
-    if(url.isLocalFile() || !url.isValid())
+    FileAccess fa(path);
+    if(fa.isLocal())
     {
         return QDir().cleanPath(path);
     }
@@ -755,7 +761,7 @@ bool FileAccess::createBackup(const QString& bakExtension)
                 return false;
             }
         }
-        bool bSuccess = rename(bakName);// krazy:exclude=syscalls
+        bool bSuccess = rename(bakFile);// krazy:exclude=syscalls
         if(!bSuccess)
         {
             setStatusText(i18n("While trying to make a backup, renaming failed.\nFilenames: %1 -> %2",
@@ -962,17 +968,18 @@ void FileAccessJobHandler::slotPutJobResult(KJob* pJob)
 
 bool FileAccessJobHandler::mkDir(const QString& dirName)
 {
-    QUrl dirURL = QUrl::fromUserInput(dirName, QString(""), QUrl::AssumeLocalFile);
     if(dirName.isEmpty())
         return false;
-    else if(dirURL.isLocalFile() || dirURL.isRelative())
+
+    FileAccess dir(dirName);
+    if(dir.isLocal())
     {
-        return QDir().mkdir(dirURL.toLocalFile());
+        return QDir().mkdir(dir.absoluteFilePath());
     }
     else
     {
         m_bSuccess = false;
-        KIO::SimpleJob* pJob = KIO::mkdir(dirURL);
+        KIO::SimpleJob* pJob = KIO::mkdir(dir.url());
         connect(pJob, &KIO::SimpleJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
 
         ProgressProxy::enterEventLoop(pJob, i18n("Making directory: %1", dirName));
@@ -982,17 +989,18 @@ bool FileAccessJobHandler::mkDir(const QString& dirName)
 
 bool FileAccessJobHandler::rmDir(const QString& dirName)
 {
-    QUrl dirURL = QUrl::fromUserInput(dirName, QString(""), QUrl::AssumeLocalFile);
     if(dirName.isEmpty())
         return false;
-    else if(dirURL.isLocalFile())
+
+    FileAccess fa(dirName);
+    if(fa.isLocal())
     {
-        return QDir().rmdir(dirURL.toLocalFile());
+        return QDir().rmdir(fa.absoluteFilePath());
     }
     else
     {
         m_bSuccess = false;
-        KIO::SimpleJob* pJob = KIO::rmdir(dirURL);
+        KIO::SimpleJob* pJob = KIO::rmdir(fa.url());
         connect(pJob, &KIO::SimpleJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
 
         ProgressProxy::enterEventLoop(pJob, i18n("Removing directory: %1", dirName));
@@ -1031,30 +1039,26 @@ bool FileAccessJobHandler::symLink(const QUrl& linkTarget, const QUrl& linkLocat
     }
 }
 
-bool FileAccessJobHandler::rename(const QString& dest)
+bool FileAccessJobHandler::rename(const FileAccess& destFile)
 {
-    if(dest.isEmpty())
+    if(destFile.fileName().isEmpty())
         return false;
 
-    QUrl kurl = QUrl::fromUserInput(dest, QString(""), QUrl::AssumeLocalFile);
-    if(kurl.isRelative())
-        kurl = QUrl::fromUserInput(QDir().absoluteFilePath(dest), QString(""), QUrl::AssumeLocalFile); // assuming that invalid means relative
-
-    if(m_pFileAccess->isLocal() && kurl.isLocalFile())
+    if(m_pFileAccess->isLocal() && destFile.isLocal())
     {
-        return QDir().rename(m_pFileAccess->absoluteFilePath(), kurl.toLocalFile());
+        return QDir().rename(m_pFileAccess->absoluteFilePath(), destFile.absoluteFilePath());
     }
     else
     {
         ProgressProxyExtender pp;
         int permissions = -1;
         m_bSuccess = false;
-        KIO::FileCopyJob* pJob = KIO::file_move(m_pFileAccess->url(), kurl, permissions, KIO::HideProgressInfo);
+        KIO::FileCopyJob* pJob = KIO::file_move(m_pFileAccess->url(), destFile.url(), permissions, KIO::HideProgressInfo);
         connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
         connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
 
         ProgressProxy::enterEventLoop(pJob,
-                                      i18n("Renaming file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest));
+                                      i18n("Renaming file: %1 -> %2", m_pFileAccess->prettyAbsPath(), destFile.prettyAbsPath()));
         return m_bSuccess;
     }
 }
@@ -1076,20 +1080,19 @@ void FileAccessJobHandler::slotSimpleJobResult(KJob* pJob)
 bool FileAccessJobHandler::copyFile(const QString& inDest)
 {
     ProgressProxyExtender pp;
-    QUrl destUrl = QUrl::fromUserInput(inDest, QString(""), QUrl::AssumeLocalFile);
     FileAccess dest;
-    dest.setFile(destUrl);
+    dest.setFile(inDest);
 
     m_pFileAccess->setStatusText(QString());
     if(!m_pFileAccess->isNormal() || !dest.isNormal()) return false;
 
     int permissions = (m_pFileAccess->isExecutable() ? 0111 : 0) + (m_pFileAccess->isWritable() ? 0222 : 0) + (m_pFileAccess->isReadable() ? 0444 : 0);
     m_bSuccess = false;
-    KIO::FileCopyJob* pJob = KIO::file_copy(m_pFileAccess->url(), destUrl, permissions, KIO::HideProgressInfo);
+    KIO::FileCopyJob* pJob = KIO::file_copy(m_pFileAccess->url(), dest.url(), permissions, KIO::HideProgressInfo);
     connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
     connect(pJob, SIGNAL(percent(KJob*, qint64)), &pp, SLOT(slotPercent(KJob*, qint64)));
     ProgressProxy::enterEventLoop(pJob,
-                                  i18n("Copying file: %1 -> %2", m_pFileAccess->prettyAbsPath(), inDest));
+                                  i18n("Copying file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest.prettyAbsPath()));
 
     return m_bSuccess;
     // Note that the KIO-slave preserves the original date, if this is supported.
@@ -1198,7 +1201,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
 void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UDSEntryList& l)
 {
     //This function is called for non-local urls. Don't use QUrl::fromLocalFile here as it does not handle these.
-    QUrl parentUrl = QUrl::fromUserInput(m_pFileAccess->absoluteFilePath(), QString(""), QUrl::AssumeLocalFile);
+    QUrl parentUrl = m_pFileAccess->url();
 
     KIO::UDSEntryList::ConstIterator i;
     for(i = l.begin(); i != l.end(); ++i)

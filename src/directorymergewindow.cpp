@@ -2970,8 +2970,8 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::renameFLD(const QString&
 {
     if(srcName == destName)
         return true;
-
-    if(FileAccess(destName, true).exists())
+    FileAccess destFile = FileAccess(destName, true);
+    if(destFile.exists())
     {
         bool bSuccess = deleteFLD(destName, false /*no backup*/);
         if(!bSuccess)
@@ -2989,7 +2989,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::renameFLD(const QString&
         return true;
     }
 
-    bool bSuccess = FileAccess(srcName).rename(destName);
+    bool bSuccess = FileAccess(srcName).rename(destFile);
     if(!bSuccess)
     {
         m_pStatusInfo->addText(i18n("Error: Rename failed."));

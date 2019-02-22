@@ -431,9 +431,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
                 FileAccess fa(m_outputFilename);
                 if(m_pOptions->m_bDmCreateBakFiles && fa.exists())
                 {
-                    QString newName = m_outputFilename + ".orig";
-                    if(FileAccess::exists(newName)) FileAccess::removeFile(newName);
-                    if(!FileAccess::exists(newName)) fa.rename(newName);
+                    fa.createBackup(".orig");
                 }
 
                 bSuccess = pSD->saveNormalDataAs(m_outputFilename);

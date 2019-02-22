@@ -87,7 +87,7 @@ public:
    static QString cleanPath( const QString& );
 
    //bool chmod( const QString& );
-   bool rename( const QString& );
+   bool rename( const FileAccess& );
    static bool symLink( const QString& linkTarget, const QString& linkLocation );
 
    void addPath( const QString& txt );
@@ -159,7 +159,7 @@ public:
    bool put( const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume=false, int permissions=-1 );
    bool stat(int detailLevel=2, bool bWantToWrite=false );
    bool copyFile( const QString& dest );
-   bool rename( const QString& dest );
+   bool rename( const FileAccess& dest );
    bool listDir( t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                  const QString& filePattern, const QString& fileAntiPattern,
                  const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore );
