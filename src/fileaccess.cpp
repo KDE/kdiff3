@@ -1190,8 +1190,6 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
 void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UDSEntryList& l)
 {
     //This function is called for non-local urls. Don't use QUrl::fromLocalFile here as it does not handle these.
-    QUrl parentUrl = m_pFileAccess->url();
-
     KIO::UDSEntryList::ConstIterator i;
     for(i = l.begin(); i != l.end(); ++i)
     {
@@ -1204,10 +1202,8 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
         //must be manually filtered KDE does not supply API for ignoring these.
         if(fa.fileName() != "." && fa.fileName() != "..")
         {
-            QUrl url = parentUrl.adjusted(QUrl::StripTrailingSlash);
-            url.setPath(url.path() + '/' + fa.fileName());
-            fa.setUrl(url);
-            //fa.m_absoluteFilePath = fa.url().url();
+            fa.addPath(fa.fileName());
+
             m_pDirList->push_back(fa);
         }
     }
