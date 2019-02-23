@@ -2838,7 +2838,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::deleteFLD(const QString&
         }
         else
         {
-            bool bSuccess = FileAccess::removeFile(name);
+            bool bSuccess = fi.removeFile();
             if(!bSuccess)
             {
                 m_pStatusInfo->addText(i18n("Error: delete operation failed."));

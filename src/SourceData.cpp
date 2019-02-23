@@ -63,7 +63,7 @@ void SourceData::reset()
     m_lmppData.reset();
     if(!m_tempInputFileName.isEmpty())
     {
-        FileAccess::removeFile(m_tempInputFileName);
+        m_tempFile.remove();
         m_tempInputFileName = "";
     }
 }
@@ -122,7 +122,7 @@ void SourceData::setFileAccess(const FileAccess& fileAccess)
     m_aliasName = QString();
     if(!m_tempInputFileName.isEmpty())
     {
-        FileAccess::removeFile(m_tempInputFileName);
+        m_tempFile.remove();
         m_tempInputFileName = "";
     }
 }

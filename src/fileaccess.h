@@ -78,9 +78,7 @@ public:
    QString getTempName() const;
    bool createLocalCopy();
    static void createTempFile(QTemporaryFile& );
-   static bool removeTempFile( const QString& );
    bool removeFile();
-   static bool removeFile( const QString& );
    static bool makeDir( const QString& );
    static bool removeDir( const QString& );
    static bool exists( const QString& );

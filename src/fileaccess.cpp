@@ -561,11 +561,6 @@ bool FileAccess::removeFile()
     }
 }
 
-bool FileAccess::removeFile(const QString& name) // static
-{
-    return FileAccess(name).removeFile();
-}
-
 bool FileAccess::listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                          const QString& filePattern, const QString& fileAntiPattern, const QString& dirAntiPattern,
                          bool bFollowDirLinks, bool bUseCvsIgnore)
@@ -662,12 +657,6 @@ void FileAccess::createTempFile(QTemporaryFile& tmpFile)
     tmpFile.setFileTemplate(QStringLiteral("XXXXXX-kdiff3tmp"));
     tmpFile.open();
     tmpFile.close();
-}
-
-
-bool FileAccess::removeTempFile(const QString& name) // static
-{
-    return FileAccess(name).removeFile();
 }
 
 bool FileAccess::makeDir(const QString& dirName)
