@@ -77,7 +77,7 @@ FileAccess::~FileAccess()
 /*
     Needed only during directory listing right now.
 */
-void FileAccess::setFile(FileAccess* pParent, const QFileInfo &fi)
+void FileAccess::setFile(FileAccess* pParent, const QFileInfo& fi)
 {
     reset();
 
@@ -109,7 +109,7 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     if(!m_url.scheme().isEmpty())
         m_url.setScheme(QLatin1Literal("file"));
 
-    if(m_url.isLocalFile() || !m_url.isValid() ) // Treat invalid urls as local files.
+    if(m_url.isLocalFile() || !m_url.isValid()) // Treat invalid urls as local files.
     {
         m_fileInfo = QFileInfo(m_url.toLocalFile());
         m_pParent = nullptr;
@@ -126,8 +126,8 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
         jh.stat(2 /*all details*/, bWantToWrite); // returns bSuccess, ignored
 
         m_bValidData = true; // After running stat() the variables are initialised
-                                  // and valid even if the file doesn't exist and the stat
-                                  // query failed.
+                             // and valid even if the file doesn't exist and the stat
+                             // query failed.
     }
 }
 
@@ -161,7 +161,7 @@ void FileAccess::loadData()
         m_linkTarget = m_fileInfo.readLink();
 #ifndef Q_OS_WIN
         // Unfortunately Qt5 symLinkTarget/readLink always returns an absolute path, even if the link is relative
-        char *s = (char*)malloc(PATH_MAX + 1);
+        char* s = (char*)malloc(PATH_MAX + 1);
         ssize_t len = readlink(QFile::encodeName(absoluteFilePath()).constData(), s, PATH_MAX);
         if(len > 0)
         {
@@ -187,7 +187,7 @@ void FileAccess::addPath(const QString& txt)
     else
     {
         QString slash = (txt.isEmpty() || txt[0] == '/') ? QLatin1String("") : QLatin1String("/");
-            setFile(absoluteFilePath() + slash + txt);
+        setFile(absoluteFilePath() + slash + txt);
     }
 }
 
@@ -230,50 +230,50 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
         uint f = *ei;
         switch(f)
         {
-        case KIO::UDSEntry::UDS_SIZE:
-            m_size = e.numberValue(f);
-            break;
-        case KIO::UDSEntry::UDS_NAME:
-            filePath = e.stringValue(f);
-            break; // During listDir the relative path is given here.
-        case KIO::UDSEntry::UDS_MODIFICATION_TIME:
-            m_modificationTime = QDateTime::fromMSecsSinceEpoch(e.numberValue(f));
-            break;
-        case KIO::UDSEntry::UDS_LINK_DEST:
-            m_linkTarget = e.stringValue(f);
-            break;
-        case KIO::UDSEntry::UDS_ACCESS:
-        {
-            #ifndef Q_OS_WIN
-            acc = e.numberValue(f);
-            m_bReadable = (acc & S_IRUSR) != 0;
-            m_bWritable = (acc & S_IWUSR) != 0;
-            m_bExecutable = (acc & S_IXUSR) != 0;
-            #endif
-            break;
-        }
-        case KIO::UDSEntry::UDS_FILE_TYPE:
-        {
-            fileType = e.numberValue(f);
-            m_bDir = (fileType & QT_STAT_MASK) == QT_STAT_DIR;
-            m_bFile = (fileType & QT_STAT_MASK) == QT_STAT_REG;
-            m_bSymLink = (fileType & QT_STAT_MASK) == QT_STAT_LNK;
-            m_bExists = fileType != 0;
-            //m_fileType = fileType;
-            break;
-        }
+            case KIO::UDSEntry::UDS_SIZE:
+                m_size = e.numberValue(f);
+                break;
+            case KIO::UDSEntry::UDS_NAME:
+                filePath = e.stringValue(f);
+                break; // During listDir the relative path is given here.
+            case KIO::UDSEntry::UDS_MODIFICATION_TIME:
+                m_modificationTime = QDateTime::fromMSecsSinceEpoch(e.numberValue(f));
+                break;
+            case KIO::UDSEntry::UDS_LINK_DEST:
+                m_linkTarget = e.stringValue(f);
+                break;
+            case KIO::UDSEntry::UDS_ACCESS:
+            {
+#ifndef Q_OS_WIN
+                acc = e.numberValue(f);
+                m_bReadable = (acc & S_IRUSR) != 0;
+                m_bWritable = (acc & S_IWUSR) != 0;
+                m_bExecutable = (acc & S_IXUSR) != 0;
+#endif
+                break;
+            }
+            case KIO::UDSEntry::UDS_FILE_TYPE:
+            {
+                fileType = e.numberValue(f);
+                m_bDir = (fileType & QT_STAT_MASK) == QT_STAT_DIR;
+                m_bFile = (fileType & QT_STAT_MASK) == QT_STAT_REG;
+                m_bSymLink = (fileType & QT_STAT_MASK) == QT_STAT_LNK;
+                m_bExists = fileType != 0;
+                //m_fileType = fileType;
+                break;
+            }
 
-        case KIO::UDSEntry::UDS_URL:
-            m_url = QUrl( e.stringValue(f) );
-            break;
-        case KIO::UDSEntry::UDS_MIME_TYPE:
-            break;
-        case KIO::UDSEntry::UDS_GUESSED_MIME_TYPE:
-            break;
-        case KIO::UDSEntry::UDS_XML_PROPERTIES:
-            break;
-        default:
-            break;
+            case KIO::UDSEntry::UDS_URL:
+                m_url = QUrl(e.stringValue(f));
+                break;
+            case KIO::UDSEntry::UDS_MIME_TYPE:
+                break;
+            case KIO::UDSEntry::UDS_GUESSED_MIME_TYPE:
+                break;
+            case KIO::UDSEntry::UDS_XML_PROPERTIES:
+                break;
+            default:
+                break;
         }
     }
 
@@ -294,8 +294,6 @@ void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
 
     m_bValidData = true;
     m_bSymLink = !m_linkTarget.isEmpty();
-
-
 
 #ifndef Q_OS_WIN
     m_bHidden = m_name[0] == '.';
@@ -466,7 +464,7 @@ bool FileAccess::interruptableReadFile(void* pDestBuffer, qint64 maxLength)
         }
         i += reallyRead;
 
-        pp.setCurrent( qFloor(double(i) / maxLength * 100));
+        pp.setCurrent(qFloor(double(i) / maxLength * 100));
         if(pp.wasCancelled())
             return false;
     }
@@ -482,7 +480,7 @@ bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
     if(isLocal() || !m_localCopy.isEmpty())
     {
         if(open(QIODevice::ReadOnly))//krazy:exclude=syscalls
-            return interruptableReadFile( pDestBuffer, maxLength); // maxLength == f.read( (char*)pDestBuffer, maxLength );
+            return interruptableReadFile(pDestBuffer, maxLength); // maxLength == f.read( (char*)pDestBuffer, maxLength );
     }
     else
     {
@@ -584,7 +582,8 @@ bool FileAccess::open(const QFile::OpenMode flags)
 {
     bool result;
     result = createLocalCopy();
-    if(!result){
+    if(!result)
+    {
         setStatusText(i18n("Creating temp copy of %1 failed.", absoluteFilePath()));
         return result;
     }
@@ -602,10 +601,10 @@ bool FileAccess::open(const QFile::OpenMode flags)
     return r;
 }
 
-
-qint64 FileAccess::read(char *data, const qint64 maxlen)
+qint64 FileAccess::read(char* data, const qint64 maxlen)
 {
-    if(!isNormal()){
+    if(!isNormal())
+    {
         //This is not an error special files should be skipped
         setStatusText(QString());
         return 0;
@@ -617,7 +616,7 @@ qint64 FileAccess::read(char *data, const qint64 maxlen)
         len = realFile->read(data, maxlen);
     }
     else
-       len = tmpFile->read(data, maxlen);
+        len = tmpFile->read(data, maxlen);
 
     if(len != maxlen)
     {
@@ -636,11 +635,10 @@ void FileAccess::close()
     tmpFile->close();
 }
 
-
 bool FileAccess::createLocalCopy()
 {
     if(isLocal() || !m_localCopy.isEmpty())
-       return true;
+        return true;
 
     tmpFile->setAutoRemove(true);
     tmpFile->setFileTemplate(QStringLiteral("XXXXXX-kdiff3tmp"));
@@ -750,7 +748,7 @@ bool FileAccess::createBackup(const QString& bakExtension)
                 return false;
             }
         }
-        bool bSuccess = rename(bakFile);// krazy:exclude=syscalls
+        bool bSuccess = rename(bakFile); // krazy:exclude=syscalls
         if(!bSuccess)
         {
             setStatusText(i18n("While trying to make a backup, renaming failed.\nFilenames: %1 -> %2",
@@ -766,9 +764,9 @@ void FileAccess::doError()
     m_bExists = false;
 }
 
-void FileAccess::filterList(t_DirectoryList *pDirList, const QString& filePattern,
-                                   const QString& fileAntiPattern, const QString& dirAntiPattern,
-                                   const bool bUseCvsIgnore)
+void FileAccess::filterList(t_DirectoryList* pDirList, const QString& filePattern,
+                            const QString& fileAntiPattern, const QString& dirAntiPattern,
+                            const bool bUseCvsIgnore)
 {
     CvsIgnoreList cvsIgnoreList;
     if(bUseCvsIgnore)
@@ -790,7 +788,7 @@ void FileAccess::filterList(t_DirectoryList *pDirList, const QString& filePatter
         ++i2;
         QString fileName = i->fileName();
 
-        if( (i->isFile() &&
+        if((i->isFile() &&
             (!Utils::wildcardMultiMatch(filePattern, fileName, bCaseSensitive) ||
              Utils::wildcardMultiMatch(fileAntiPattern, fileName, bCaseSensitive))) ||
            (i->isDir() && Utils::wildcardMultiMatch(dirAntiPattern, fileName, bCaseSensitive)) ||
