@@ -218,13 +218,14 @@ void FileAccess::addPath(const QString& txt)
        S_IWOTH    00002     others have write permission
        S_IXOTH    00001     others have execute permission
 */
-void FileAccess::setUdsEntry(const KIO::UDSEntry& e)
+void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
 {
     long acc = 0;
     long fileType = 0;
     QVector<uint> fields = e.fields();
     QString filePath;
 
+    m_pParent = parent;
     for(QVector<uint>::ConstIterator ei = fields.constBegin(); ei != fields.constEnd(); ++ei)
     {
         uint f = *ei;
@@ -840,7 +841,7 @@ void FileAccessJobHandler::slotStatResult(KJob* pJob)
 
         const KIO::UDSEntry e = static_cast<KIO::StatJob*>(pJob)->statResult();
 
-        m_pFileAccess->setUdsEntry(e);
+        m_pFileAccess->setFromUdsEntry(e);
     }
 
     ProgressProxy::exitEventLoop();
@@ -1194,8 +1195,7 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
         const KIO::UDSEntry& e = *i;
         FileAccess fa;
 
-        fa.m_pParent = m_pFileAccess;
-        fa.setUdsEntry(e);
+        fa.setFromUdsEntry(e, m_pFileAccess);
 
         //must be manually filtered KDE does not supply API for ignoring these.
         if(fa.fileName() != "." && fa.fileName() != "..")
