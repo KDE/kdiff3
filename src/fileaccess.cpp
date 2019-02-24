@@ -104,24 +104,20 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     reset();
 
     m_url = url;
-    m_name = m_url.fileName();
     //QUrl::isLocalFile assumes the scheme is set.
     if(!m_url.scheme().isEmpty())
         m_url.setScheme(QLatin1Literal("file"));
 
     if(m_url.isLocalFile() || !m_url.isValid()) // Treat invalid urls as local files.
     {
-        m_fileInfo = QFileInfo(m_url.toLocalFile());
+        m_fileInfo.setFile(m_url.toLocalFile());
         m_pParent = nullptr;
-        if(m_name.isEmpty())
-        {
-            m_name = m_fileInfo.absoluteDir().dirName();
-        }
 
         loadData();
     }
     else
     {
+        m_name = m_url.fileName();
         FileAccessJobHandler jh(this);            // A friend, which writes to the parameters of this class!
         jh.stat(2 /*all details*/, bWantToWrite); // returns bSuccess, ignored
 
@@ -156,6 +152,11 @@ void FileAccess::loadData()
     m_bExecutable = m_fileInfo.isExecutable();
 
     m_name = m_fileInfo.fileName();
+    if(isLocal() && m_name.isEmpty())
+    {
+        m_name = m_fileInfo.absoluteDir().dirName();
+    }
+
     if(isLocal() && m_bSymLink)
     {
         m_linkTarget = m_fileInfo.readLink();
@@ -421,7 +422,7 @@ QString FileAccess::fileName(bool needTmp) const
     if(!isLocal())
         return (needTmp) ? m_localCopy : m_name;
     else
-        return m_fileInfo.fileName();
+        return m_name;
 }
 
 QString FileAccess::fileRelPath() const
