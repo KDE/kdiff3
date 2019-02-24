@@ -426,9 +426,7 @@ QString FileAccess::fileName(bool needTmp) const
 
 QString FileAccess::fileRelPath() const
 {
-    QString basePath = m_baseDir.canonicalPath();
-    QString filePath = m_fileInfo.canonicalFilePath();
-    QString path = filePath.replace(basePath + '/', QLatin1String(""));
+    QString path = m_baseDir.relativeFilePath(m_fileInfo.absoluteFilePath());
 
     return path;
 }
