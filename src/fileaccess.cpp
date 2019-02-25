@@ -641,7 +641,6 @@ bool FileAccess::createLocalCopy()
         return true;
 
     tmpFile->setAutoRemove(true);
-    tmpFile->setFileTemplate(QStringLiteral("XXXXXX-kdiff3tmp"));
     tmpFile->open();
     tmpFile->close();
     m_localCopy = tmpFile->fileName();
@@ -652,7 +651,6 @@ bool FileAccess::createLocalCopy()
 void FileAccess::createTempFile(QTemporaryFile& tmpFile)
 {
     tmpFile.setAutoRemove(true);
-    tmpFile.setFileTemplate(QStringLiteral("XXXXXX-kdiff3tmp"));
     tmpFile.open();
     tmpFile.close();
 }
