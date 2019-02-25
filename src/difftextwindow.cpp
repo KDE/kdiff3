@@ -89,7 +89,7 @@ class DiffTextWindowData
     bool m_bWordWrap;
     int m_delayedDrawTimer;
 
-    const Diff3LineVector* m_pDiff3LineVector;
+    const Diff3LineVector* m_pDiff3LineVector = nullptr;
     Diff3WrapLineVector m_diff3WrapLineVector;
     const ManualDiffHelpList* m_pManualDiffHelpList;
 

@@ -142,6 +142,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
     if(bGUI) setLockPainting(true);
 
     m_diff3LineList.clear();
+    m_diff3LineVector.clear();
 
     if(bLoadFiles)
     {
