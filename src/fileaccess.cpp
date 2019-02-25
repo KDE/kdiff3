@@ -105,7 +105,7 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
 
     m_url = url;
     //QUrl::isLocalFile assumes the scheme is set.
-    if(!m_url.scheme().isEmpty())
+    if(m_url.scheme().isEmpty())
         m_url.setScheme(QLatin1Literal("file"));
 
     if(m_url.isLocalFile() || !m_url.isValid()) // Treat invalid urls as local files.
