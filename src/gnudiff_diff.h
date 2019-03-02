@@ -24,10 +24,30 @@
 #ifndef GNUDIFF_DIFF_H
 #define GNUDIFF_DIFF_H
 
-#include "gnudiff_system.h"
+
+#include <stdint.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+#include <stdlib.h>
+#include <limits.h>
+#include <string.h>
+#include <ctype.h>
+#include <type_traits>
 
 #include <stdio.h>
+
+#include <QtGlobal>
 #include <QString>
+
+/* The integer type of a line number. */
+typedef int LineRef;
+#define LINEREF_MAX INT_MAX
+
+static_assert(std::is_signed<LineRef>::value, "LineRef must be signed.");
+//verify(lin_is_wide_enough, sizeof(int) <= sizeof(LineRef));
+
+
 
 inline bool isEndOfLine( QChar c )
 {
