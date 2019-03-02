@@ -87,6 +87,7 @@ set(
     cxx_override
     cxx_nonstatic_member_init
     cxx_inheriting_constructors
+    cxx_static_assert
 )
 
 add_definitions(

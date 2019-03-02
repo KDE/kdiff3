@@ -36,23 +36,12 @@
 #include <string.h>
 #include <ctype.h>
 
-/* Determine whether an integer type is signed, and its bounds.
-   This code assumes two's (or one's!) complement with no holes.  */
-
-/* The extra casts work around common compiler bugs,
-   e.g. Cray C 5.0.3.0 when t == time_t.  */
-#ifndef TYPE_SIGNED
-# define TYPE_SIGNED(t) (! ((t) 0 < (t) -1))
-#endif
-/* Verify a requirement at compile-time (unlike assert, which is runtime).  */
-#define verify(name, assertion) struct name { char a[(assertion) ? 1 : -1]; }
-
 /* The integer type of a line number. */
 
 typedef int LineRef;
 #define LINEREF_MAX INT_MAX
 
-verify(lin_is_signed, TYPE_SIGNED(LineRef));
+static_assert(std::is_signed<LineRef>::value, "LineRef must be signed.");
 //verify(lin_is_wide_enough, sizeof(int) <= sizeof(LineRef));
 
 #endif

@@ -23,6 +23,7 @@
 
 #include "gnudiff_diff.h"
 #include <stdlib.h>
+#include <type_traits>
 
 /* Rotate an unsigned value to the left.  */
 #define ROL(v, n) ((v) << (n) | (v) >> (sizeof(v) * CHAR_BIT - (n)))
@@ -32,7 +33,7 @@
 
 /* The type of a hash value.  */
 typedef size_t hash_value;
-verify(hash_value_is_unsigned, !TYPE_SIGNED(hash_value));
+static_assert(std::is_unsigned<hash_value>::value, "hash_value must be signed.");
 
 /* Lines are put into equivalence classes of lines that match in lines_differ.
    Each equivalence class is represented by one of these structures,
@@ -500,8 +501,7 @@ static unsigned char const prime_offset[] =
 
 /* Verify that this host's size_t is not too wide for the above table.  */
 
-verify(enough_prime_offsets,
-       sizeof(size_t) * CHAR_BIT <= sizeof prime_offset);
+static_assert(sizeof(size_t) * CHAR_BIT <= sizeof prime_offset, "Not enough primes in table");
 
 /* Given a vector of two file_data objects, read the file associated
    with each one, and build the table of equivalence classes.
