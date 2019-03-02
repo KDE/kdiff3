@@ -47,14 +47,6 @@
 /* Verify a requirement at compile-time (unlike assert, which is runtime).  */
 #define verify(name, assertion) struct name { char a[(assertion) ? 1 : -1]; }
 
-#ifndef MIN
-#define MIN(a, b) ((a) <= (b) ? (a) : (b))
-#endif
-#ifndef MAX
-#define MAX(a, b) ((a) >= (b) ? (a) : (b))
-#endif
-
-
 /* The integer type of a line number. */
 
 typedef int LineRef;

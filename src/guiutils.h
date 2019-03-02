@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2003-2007 by Joachim Eibl <joachim.eibl at gmx.de>
+ * Copyright (c) 2008 by Valentin Rusu kde at rusu.info
  * Copyright (C) 2018 Michael Reeves <reeves.87@gmail.com>
  *
  * This file is part of KDiff3.

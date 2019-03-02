@@ -266,7 +266,7 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
             fxybest = -1;
             for(d = fmax; d >= fmin; d -= 2)
             {
-                LineRef x = MIN(fd[d], xlim);
+                LineRef x = std::min(fd[d], xlim);
                 LineRef y = x - d;
                 if(ylim < y)
                     x = ylim + d, y = ylim;
@@ -281,7 +281,7 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
             bxybest = LINEREF_MAX;
             for(d = bmax; d >= bmin; d -= 2)
             {
-                LineRef x = MAX(xoff, bd[d]);
+                LineRef x = std::max(xoff, bd[d]);
                 LineRef y = x - d;
                 if(y < yoff)
                     x = yoff + d, y = yoff;
@@ -825,7 +825,7 @@ GnuDiff::change *GnuDiff::diff_2_files(struct comparison *cmp)
         too_expensive = 1;
         for(; diags != 0; diags >>= 2)
             too_expensive <<= 1;
-        too_expensive = MAX(256, too_expensive);
+        too_expensive = std::max((LineRef)256, too_expensive);
 
         files[0] = cmp->file[0];
         files[1] = cmp->file[1];

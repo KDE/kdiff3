@@ -314,8 +314,8 @@ static LineRef
 guess_lines(LineRef n, size_t s, size_t t)
 {
     size_t guessed_bytes_per_line = n < 10 ? 32 : s / (n - 1);
-    size_t guessed_lines = MAX((LineRef)1, t / guessed_bytes_per_line);
-    return (LineRef)MIN(guessed_lines, (LineRef)(LINEREF_MAX / (2 * sizeof(QChar *) + 1) - 5)) + 5;
+    size_t guessed_lines = std::max((size_t)1, t / guessed_bytes_per_line);
+    return (LineRef)std::min((LineRef)guessed_lines, (LineRef)(LINEREF_MAX / (2 * sizeof(QChar *) + 1) - 5)) + 5;
 }
 
 /* Given a vector of two file_data objects, find the identical
@@ -420,7 +420,7 @@ void GnuDiff::find_identical_ends(struct file_data filevec[])
         suffix_guess = guess_lines(0, 0, buffer0 + n0 - p0);
         for(prefix_count = 1; prefix_count <= context; prefix_count *= 2)
             continue;
-        alloc_lines0 = (prefix_count + middle_guess + MIN(context, suffix_guess));
+        alloc_lines0 = (prefix_count + middle_guess + std::min(context, suffix_guess));
     }
     else
     {
@@ -458,7 +458,7 @@ void GnuDiff::find_identical_ends(struct file_data filevec[])
 
     middle_guess = guess_lines(lines, p0 - buffer0, p1 - filevec[1].prefix_end);
     suffix_guess = guess_lines(lines, p0 - buffer0, buffer1 + n1 - p1);
-    alloc_lines1 = buffered_prefix + middle_guess + MIN(context, suffix_guess);
+    alloc_lines1 = buffered_prefix + middle_guess + std::min(context, suffix_guess);
     if(alloc_lines1 < buffered_prefix || (LineRef)(LINEREF_MAX / sizeof *linbuf1) <= alloc_lines1)
         xalloc_die();
     linbuf1 = (const QChar **)xmalloc(alloc_lines1 * sizeof(*linbuf1));
