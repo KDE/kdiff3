@@ -3049,6 +3049,10 @@ QString MergeResultWindow::getString(int lineIdx)
 {
     MergeResultWindow::MergeLineList::iterator mlIt;
     MergeResultWindow::MergeEditLineList::iterator melIt;
+    if(m_mergeLineList.empty())
+    {
+        return QString();
+    }
     calcIteratorFromLineNr(lineIdx, mlIt, melIt);
     QString s = melIt->getString(this);
     return s;
