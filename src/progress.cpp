@@ -229,6 +229,9 @@ void ProgressDialog::setCurrent(qint64 subCurrent, bool bRedrawUpdate)
 
 void ProgressDialog::clear()
 {
+    if(!m_progressStack.isEmpty())
+        return;
+
     ProgressLevelData& pld = m_progressStack.back();
     setCurrent(pld.m_maxNofSteps);
 }

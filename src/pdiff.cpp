@@ -316,7 +316,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
     else
     {
         pp.clear();
-        pp.recalc();
     }
 
     if(errors.isEmpty() && m_sd1.isText() && m_sd2.isText())
