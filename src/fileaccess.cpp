@@ -858,7 +858,7 @@ bool FileAccessJobHandler::get(void* pDestBuffer, long maxLength)
 
         connect(pJob, &KIO::TransferJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
         connect(pJob, &KIO::TransferJob::data, this, &FileAccessJobHandler::slotGetData);
-        connect(pJob, SIGNAL(percent(KJob*, unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+        connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
 
         ProgressProxy::enterEventLoop(pJob, i18n("Reading file: %1", m_pFileAccess->prettyAbsPath()));
         return m_bSuccess;
@@ -896,7 +896,7 @@ bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOve
 
         connect(pJob, &KIO::TransferJob::result, this, &FileAccessJobHandler::slotPutJobResult);
         connect(pJob, &KIO::TransferJob::dataReq, this, &FileAccessJobHandler::slotPutData);
-        connect(pJob, SIGNAL(percent(KJob*, unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+        connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
 
         ProgressProxy::enterEventLoop(pJob, i18n("Writing file: %1", m_pFileAccess->prettyAbsPath()));
         return m_bSuccess;
@@ -1040,7 +1040,7 @@ bool FileAccessJobHandler::rename(const FileAccess& destFile)
         m_bSuccess = false;
         KIO::FileCopyJob* pJob = KIO::file_move(m_pFileAccess->url(), destFile.url(), permissions, KIO::HideProgressInfo);
         connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-        connect(pJob, SIGNAL(percent(KJob*, unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+        connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
 
         ProgressProxy::enterEventLoop(pJob,
                                       i18n("Renaming file: %1 -> %2", m_pFileAccess->prettyAbsPath(), destFile.prettyAbsPath()));
@@ -1075,7 +1075,7 @@ bool FileAccessJobHandler::copyFile(const QString& inDest)
     m_bSuccess = false;
     KIO::FileCopyJob* pJob = KIO::file_copy(m_pFileAccess->url(), dest.url(), permissions, KIO::HideProgressInfo|KIO::Overwrite);
     connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-    connect(pJob, SIGNAL(percent(KJob*, unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+    connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
     ProgressProxy::enterEventLoop(pJob,
                                   i18n("Copying file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest.prettyAbsPath()));
 
