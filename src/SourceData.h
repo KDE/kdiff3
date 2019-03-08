@@ -91,6 +91,8 @@ class SourceData
 
       public:
         ~FileData() { reset(); }
+
+        bool readFile(FileAccess& file);
         bool readFile(const QString& filename);
         bool writeFile(const QString& filename);
         bool preprocess(bool bPreserveCR, QTextCodec* pEncoding);

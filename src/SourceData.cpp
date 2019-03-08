@@ -225,6 +225,33 @@ void SourceData::FileData::reset()
     m_eLineEndStyle = eLineEndStyleUndefined;
 }
 
+bool SourceData::FileData::readFile(FileAccess& file)
+{
+    reset();
+    if(file.fileName().isEmpty()) {
+        return true;
+    }
+
+    //FileAccess fa(filename);
+
+    if(!file.isNormal())
+        return true;
+
+    m_size = file.sizeForReading();
+    char* pBuf;
+    m_pBuf = pBuf = new char[m_size + 100]; // Alloc 100 byte extra: Safety hack, not nice but does no harm.
+                                            // Some extra bytes at the end of the buffer are needed by
+                                            // the diff algorithm. See also GnuDiff::diff_2_files().
+    bool bSuccess = file.readFile(pBuf, m_size);
+    if(!bSuccess)
+    {
+        delete[] pBuf;
+        m_pBuf = nullptr;
+        m_size = 0;
+    }
+    return bSuccess;
+}
+
 bool SourceData::FileData::readFile(const QString& filename)
 {
     reset();
@@ -347,16 +374,15 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     FileAccess faIn(fileNameIn1);
     qint64 fileInSize = faIn.size();
 
-
     if(faIn.exists())
     {
         // Run the first preprocessor
         if(m_pOptions->m_PreProcessorCmd.isEmpty())
         {
             // No preprocessing: Read the file directly:
-            if(!m_normalData.readFile(fileNameIn1))
+            if(!m_normalData.readFile(faIn))
             {
-                errors.append(i18n("Failed to read file: %1", fileNameIn1));
+                errors.append(faIn.getStatusText());
                 return errors;
             }
         }
@@ -395,17 +421,18 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
             if(fileInSize > 0 && (!bSuccess || m_normalData.m_size == 0))
             {
-
+                if(!m_normalData.readFile(faIn))
+                {
+                    errors.append(faIn.getStatusText());
+                    errors.append(i18n("    Temp file is: %1", fileNameIn1));
+                    return errors;
+                }
+                //Don't fail the preprocessor command if the file cann't be read.
                 errors.append(
                     i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
                          "\n\nThe preprocessing command will be disabled now.", ppCmd) +
                     errorReason);
                 m_pOptions->m_PreProcessorCmd = "";
-                if(!m_normalData.readFile(fileNameIn1))
-                {
-                    errors.append(i18n("Failed to read file: %1", fileNameIn1));
-                    return errors;
-                }
 
                 pEncoding1 = m_pEncoding;
             }

@@ -460,6 +460,7 @@ bool FileAccess::interruptableReadFile(void* pDestBuffer, qint64 maxLength)
         qint64 reallyRead = read((char*)pDestBuffer + i, nextLength);
         if(reallyRead != nextLength)
         {
+            setStatusText(i18n("Failed to read file: %1", absoluteFilePath()));
             return false;
         }
         i += reallyRead;
@@ -614,14 +615,20 @@ qint64 FileAccess::read(char* data, const qint64 maxlen)
     if(m_localCopy.isEmpty() && realFile != nullptr)
     {
         len = realFile->read(data, maxlen);
+        if(len != maxlen)
+        {
+            setStatusText(i18n("Error reading from %1. %2", absoluteFilePath(), realFile->errorString()));
+        }
     }
     else
-        len = tmpFile->read(data, maxlen);
-
-    if(len != maxlen)
     {
-        setStatusText(i18n("Error reading from %1", absoluteFilePath()));
+        len = tmpFile->read(data, maxlen);
+        if(len != maxlen)
+        {
+            setStatusText(i18n("Error reading from %1. %2", absoluteFilePath(), tmpFile->errorString()));
+        }
     }
+
     return len;
 }
 
