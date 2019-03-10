@@ -14,7 +14,6 @@ set(
     CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
     ${ECM_MODULE_PATH}
-    ${ECM_KDE_MODULE_DIR}
 )
 
 include(KDEInstallDirs)
