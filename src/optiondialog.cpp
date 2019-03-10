@@ -74,6 +74,7 @@ class OptionCheckBox : public QCheckBox, public OptionBool
     void setToDefault() override { setChecked(getDefault()); }
     void setToCurrent() override { setChecked(getCurrent()); }
 
+    using OptionBool::apply;
     void apply() override { OptionBool::apply(isChecked()); }
 
   private:
@@ -90,6 +91,7 @@ class OptionRadioButton : public QRadioButton, public OptionBool
     void setToDefault() override { setChecked(getDefault()); }
     void setToCurrent() override { setChecked(getCurrent()); }
 
+    using OptionBool::apply;
     void apply() override { OptionBool::apply(isChecked()); }
 
   private:
@@ -152,6 +154,7 @@ class OptionFontChooser : public FontChooser, public OptionFont
 
     void setToDefault() override { setFont(getDefault(), false); }
     void setToCurrent() override { setFont(getCurrent(), false); }
+    using OptionFont::apply;
     void apply() override { OptionFont::apply(font()); }
   private:
     Q_DISABLE_COPY(OptionFontChooser)
@@ -166,6 +169,7 @@ class OptionColorButton : public KColorButton, public OptionColor
 
     void setToDefault() override { setColor(getDefault()); }
     void setToCurrent() override { setColor(getCurrent()); }
+    using OptionColor::apply;
     void apply() override { OptionColor::apply(color()); }
 
   private:
@@ -192,6 +196,8 @@ class OptionLineEdit : public QComboBox, public OptionString
     {
         setEditText(getCurrent());
     }
+
+    using OptionString::apply;
     void apply() override
     {
         OptionString::apply(currentText());
@@ -246,6 +252,8 @@ class OptionIntEdit : public QLineEdit, public OptionNum<int>
     {
         setText(getString());
     }
+
+    using OptionNum<int>::apply;
     void apply() override
     {
         const QIntValidator* v = static_cast<const QIntValidator*>(validator());
@@ -294,6 +302,7 @@ class OptionComboBox : public QComboBox, public OptionItemBase
         else
             setText(*m_pVarStr);
     }
+    using OptionItemBase::apply;
     void apply() override
     {
         if(m_pVarNum != nullptr) {
@@ -440,6 +449,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
             }
         }
     }
+    using OptionCodec::apply;
     void apply() override
     {
         if(m_ppVarCodec != nullptr) {
