@@ -160,13 +160,6 @@ int main(int argc, char* argv[])
     }
 
     aboutData.processCommandLine(cmdLineParser);
-    /**
-     * take component name and org. name from KAboutData
-     */
-    app.setApplicationName(aboutData.componentName());
-    app.setApplicationDisplayName(aboutData.displayName());
-    app.setOrganizationDomain(aboutData.organizationDomain());
-    app.setApplicationVersion(aboutData.version());
 
     KDiff3Shell* p = new KDiff3Shell();
     p->show();
