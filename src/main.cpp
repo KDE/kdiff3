@@ -100,8 +100,6 @@ int main(int argc, char* argv[])
 
     QCommandLineParser* cmdLineParser = KDiff3Shell::getParser();
     cmdLineParser->setApplicationDescription(aboutData.shortDescription());
-    cmdLineParser->addVersionOption();
-    cmdLineParser->addHelpOption();
 
     aboutData.setupCommandLine(cmdLineParser);
 
