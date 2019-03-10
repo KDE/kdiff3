@@ -75,7 +75,7 @@ class OptionCheckBox : public QCheckBox, public OptionBool
     void setToCurrent() override { setChecked(getCurrent()); }
 
     using OptionBool::apply;
-    void apply() override { OptionBool::apply(isChecked()); }
+    void apply() override { apply(isChecked()); }
 
   private:
     Q_DISABLE_COPY(OptionCheckBox)
@@ -92,7 +92,7 @@ class OptionRadioButton : public QRadioButton, public OptionBool
     void setToCurrent() override { setChecked(getCurrent()); }
 
     using OptionBool::apply;
-    void apply() override { OptionBool::apply(isChecked()); }
+    void apply() override { apply(isChecked()); }
 
   private:
     Q_DISABLE_COPY(OptionRadioButton)
@@ -155,7 +155,7 @@ class OptionFontChooser : public FontChooser, public OptionFont
     void setToDefault() override { setFont(getDefault(), false); }
     void setToCurrent() override { setFont(getCurrent(), false); }
     using OptionFont::apply;
-    void apply() override { OptionFont::apply(font()); }
+    void apply() override { apply(font()); }
   private:
     Q_DISABLE_COPY(OptionFontChooser)
 };
@@ -170,7 +170,7 @@ class OptionColorButton : public KColorButton, public OptionColor
     void setToDefault() override { setColor(getDefault()); }
     void setToCurrent() override { setColor(getCurrent()); }
     using OptionColor::apply;
-    void apply() override { OptionColor::apply(color()); }
+    void apply() override { apply(color()); }
 
   private:
     Q_DISABLE_COPY(OptionColorButton)
@@ -200,7 +200,7 @@ class OptionLineEdit : public QComboBox, public OptionString
     using OptionString::apply;
     void apply() override
     {
-        OptionString::apply(currentText());
+        apply(currentText());
         insertText();
     }
     void write(ValueMap* config) override
