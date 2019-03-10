@@ -89,12 +89,11 @@ int main(int argc, char* argv[])
         appVersion += i18n(" (32 bit)");
     const QString description = i18n("Tool for Comparison and Merge of Files and Directories");
     const QString copyright = i18n("(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port");
-    const QString homePage = QString("");
-    const QString bugsAddress = QStringLiteral("reeves.87""@""gmail.com");
+    const QString homePage = QStringLiteral("https://kde.org/applications/development/kdiff3");
 
     KAboutData aboutData(appName, i18nName,
                          appVersion, description, KAboutLicense::GPL_V2, copyright, QString(),
-                         homePage, bugsAddress);
+                         homePage);
 
     KAboutData::setApplicationData(aboutData);
 
