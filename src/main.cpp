@@ -25,6 +25,9 @@
 #include <QStandardPaths>
 #include <QTextStream>
 
+#ifndef Q_WIN_OS
+#include <unistd.h>
+#endif // !Q_WIN_OS
 
 void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 {
@@ -123,39 +126,42 @@ int main(int argc, char* argv[])
     cmdLineParser->addPositionalArgument(QLatin1String("[File2]"), i18n("file2 to open"));
     cmdLineParser->addPositionalArgument(QLatin1String("[File3]"), i18n("file3 to open"));
 
-    /*
-        Don't use QCommandLineParser::process as it auto terminates the program if an option is not recognized.
-        Further more errors are directed to the console alone if not running on windows. This makes for a bad
-        user experience when run from a graphical interface such as kde. Don't assume that this only happens
-        when running from a commandline.
-    */
-    if(!cmdLineParser->parse(QCoreApplication::arguments())) {
-        QString errorMessage = cmdLineParser->errorText();
-        QString helpText = cmdLineParser->helpText();
-        KMessageBox::error(nullptr, "<html><head/><body><h2>" + errorMessage + "</h2><pre>" + i18n("See kdiff3 --help for supported options.") + "</pre></body></html>", aboutData.displayName());
-#if !defined(Q_OS_WIN)
-        fputs(qPrintable(errorMessage), stderr);
-        fputs("\n\n", stderr);
-        fputs(qPrintable(helpText + '\n'), stderr);
-        fputs("\n", stderr);
-#endif
-        exit(1);
-    }
+    bool isAtty = true;
 
-    if(cmdLineParser->isSet(QStringLiteral("version"))) {
-        KMessageBox::information(nullptr,
-                                 aboutData.displayName() + ' ' + aboutData.version(), aboutData.displayName());
-#if !defined(Q_OS_WIN)
-        printf("%s %s\n", appName.data(), appVersion.toLocal8Bit().constData());
+#ifndef Q_OS_WIN
+    isAtty = isatty(fileno(stderr)) == 1;//will be true for redirected output as well
 #endif
-        exit(0);
+    /*
+        QCommandLineParser::process does what is expected on windows or when running from a commandline.
+        However, it only accounts for a lackof terminal output on windows.
+    */
+    if(isAtty)
+    {
+        cmdLineParser->process(QCoreApplication::arguments());
     }
-    if(cmdLineParser->isSet(QStringLiteral("help"))) {
-        KMessageBox::information(nullptr, "<html><head/><body><pre>" + cmdLineParser->helpText() + "</pre></body></html>", aboutData.displayName());
-#if !defined(Q_OS_WIN)
-        fputs(qPrintable(cmdLineParser->helpText()), stdout);
-#endif
-        exit(0);
+    else
+    {
+        /*
+            There is no terminal connected so don't just exit mysteriously exit on error.
+        */
+        if(!cmdLineParser->parse(QCoreApplication::arguments()))
+        {
+            QString errorMessage = cmdLineParser->errorText();
+
+            KMessageBox::error(nullptr, "<html><head/><body><h2>" + errorMessage + "</h2><pre>" + i18n("See kdiff3 --help for supported options.") + "</pre></body></html>", aboutData.displayName());
+            exit(1);
+        }
+
+        if(cmdLineParser->isSet(QStringLiteral("version"))) {
+            KMessageBox::information(nullptr,
+                                    aboutData.displayName() + ' ' + aboutData.version(), aboutData.displayName());
+            exit(0);
+        }
+        if(cmdLineParser->isSet(QStringLiteral("help"))) {
+            KMessageBox::information(nullptr, "<html><head/><body><pre>" + cmdLineParser->helpText() + "</pre></body></html>", aboutData.displayName());
+
+            exit(0);
+        }
     }
 
     aboutData.processCommandLine(cmdLineParser);

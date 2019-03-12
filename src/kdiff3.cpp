@@ -55,6 +55,9 @@
 #include <KToggleAction>
 #include <KToolBar>
 
+#ifndef Q_WIN_OS
+#include <unistd.h>
+#endif
 
 #define ID_STATUS_MSG 1
 #define MAIN_TOOLBAR_NAME QLatin1String("mainToolBar")
@@ -179,22 +182,30 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
         if(!s.isEmpty())
         {
             //KMessageBox::information(0, s,i18n("KDiff3-Usage"));
-            QPointer<QDialog> pDialog = QPointer<QDialog>(new QDialog(this));
-            pDialog->setAttribute(Qt::WA_DeleteOnClose);
-            pDialog->setModal(true);
-            pDialog->setWindowTitle(title);
-            QVBoxLayout* pVBoxLayout = new QVBoxLayout(pDialog);
-            QPointer<KTextEdit> pTextEdit = QPointer<KTextEdit>(new KTextEdit(pDialog));
-            pTextEdit->setText(s);
-            pTextEdit->setReadOnly(true);
-            pTextEdit->setWordWrapMode(QTextOption::NoWrap);
-            pVBoxLayout->addWidget(pTextEdit);
-            pDialog->resize(600, 400);
-            pDialog->exec();
+#ifndef Q_OS_WIN
+            if(isatty(fileno(stderr)) != 1)
+#endif
+            {
+                QPointer<QDialog> pDialog = QPointer<QDialog>(new QDialog(this));
+                pDialog->setAttribute(Qt::WA_DeleteOnClose);
+                pDialog->setModal(true);
+                pDialog->setWindowTitle(title);
+                QVBoxLayout* pVBoxLayout = new QVBoxLayout(pDialog);
+                QPointer<KTextEdit> pTextEdit = QPointer<KTextEdit>(new KTextEdit(pDialog));
+                pTextEdit->setText(s);
+                pTextEdit->setReadOnly(true);
+                pTextEdit->setWordWrapMode(QTextOption::NoWrap);
+                pVBoxLayout->addWidget(pTextEdit);
+                pDialog->resize(600, 400);
+                pDialog->exec();
+            }
 #if !defined(Q_OS_WIN)
-            // A windows program has no console
-            printf("%s\n", title.toLatin1().constData());
-            printf("%s\n", s.toLatin1().constData());
+            else
+            {
+                // Launched from a console
+                printf("%s\n", title.toLatin1().constData());
+                printf("%s\n", s.toLatin1().constData());
+            }
 #endif
             exit(1);
         }
