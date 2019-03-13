@@ -252,6 +252,7 @@ void DiffTextWindow::setPaintingAllowed(bool bAllowPainting)
 void DiffTextWindow::dragEnterEvent(QDragEnterEvent* e)
 {
     e->setAccepted(e->mimeData()->hasUrls() || e->mimeData()->hasText());
+    // TODO: Move this to DiffTextWindow::dropEvent
     // Note that the corresponding drop is handled in KDiff3App::eventFilter().
 }
 

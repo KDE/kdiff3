@@ -48,6 +48,7 @@
 #include <QPushButton>
 #include <QSplitter>
 #include <QStatusBar>
+#include <QTextStream>
 #include <QUrl>
 // include files for KDE
 #include <KConfig>
@@ -206,8 +207,9 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
             else
             {
                 // Launched from a console
-                printf("%s\n", title.toLatin1().constData());
-                printf("%s\n", s.toLatin1().constData());
+                QTextStream outStream(stdout);
+                outStream << title << "\n";
+                outStream << s;//newline already appended by parseOptions
             }
 #endif
             exit(1);
@@ -233,8 +235,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
         {
             if(m_bAutoFlag)
             {
-                //KMessageBox::information(this, i18n("Option --auto used, but no output file specified."));
-                fprintf(stderr, "%s\n", (const char*)i18n("Option --auto used, but no output file specified.").toLatin1());
+                QTextStream(stderr) << i18n("Option --auto used, but no output file specified.") << "\n";
             }
             m_bAutoMode = false;
         }
@@ -408,7 +409,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
     if(m_bAutoFlag && m_bAutoMode && m_bDirCompare)
     {
-        fprintf(stderr, "%s\n", (const char*)i18n("Option --auto ignored for directory comparison.").toLatin1());
+        QTextStream(stderr) << i18n("Option --auto ignored for directory comparison.") << "\n";
         m_bAutoMode = false;
     }
     if(!m_bDirCompare)

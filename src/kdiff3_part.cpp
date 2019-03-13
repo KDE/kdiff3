@@ -20,6 +20,7 @@
 #include "kdiff3_part.h"
 #include "fileaccess.h"
 #include "kdiff3.h"
+#include "Logging.h"
 
 #include <QFile>
 #include <QProcess>
@@ -126,7 +127,8 @@ void KDiff3Part::getNameAndVersion(const QString& str, const QString& lineStart,
         {
             while(pos2 > pos && str[pos2] != ' ' && str[pos2] != '\t') --pos2;
             fileName = str.mid(pos, pos2 - pos);
-            fprintf(stderr, "KDiff3: %s\n", fileName.toLatin1().constData());
+            //fprintf(stderr, "KDiff3: %s\n", fileName.toLatin1().constData());
+            qCDebug(kdeMain) << "KDiff3Part::getNameAndVersion: fileName = " << fileName << "\n";
             if(FileAccess(fileName).exists()) break;
             --pos2;
         }
@@ -144,13 +146,13 @@ void KDiff3Part::getNameAndVersion(const QString& str, const QString& lineStart,
 bool KDiff3Part::openFile()
 {
     // m_file is always local so we can use QFile on it
-    fprintf(stderr, "KDiff3: %s\n", localFilePath().toLatin1().constData());
+    //fprintf(stderr, "KDiff3: %s\n", localFilePath().toLatin1().constData());
+    qCDebug(kdeMain) << "KDiff3Part::openFile(): localFilePath() == " << localFilePath() << "\n";
     QFile file(localFilePath());
     if(!file.open(QIODevice::ReadOnly))
         return false;
 
-    // our example widget is text-based, so we use QTextStream instead
-    // of a raw QDataStream
+    //get version and name
     QTextStream stream(&file);
     QString str;
     QString fileName1;
@@ -217,7 +219,9 @@ bool KDiff3Part::openFile()
     }
     else if(!version1.isEmpty() && !version2.isEmpty())
     {
-        fprintf(stderr, "KDiff3: f1/2:%s<->%s\n", fileName1.toLatin1().constData(), fileName2.toLatin1().constData());
+        qCDebug(kdeMain) << "KDiff3Part::openFile():" << fileName1 << "<->" << fileName2 << "\n";
+        //fprintf(stderr, "KDiff3: f1/2:%s<->%s\n", fileName1.toLatin1().constData(), fileName2.toLatin1().constData());
+        // FIXME: Why must this be cvs?
         // Assuming that files are on CVS: Try to get them
         // cvs update -p -r [REV] [FILE] > [OUTPUTFILE]
 

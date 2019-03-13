@@ -12,6 +12,7 @@
 #include "difftextwindow.h"
 #include "directorymergewindow.h"
 #include "fileaccess.h"
+#include "Logging.h"
 #include "kdiff3.h"
 #include "optiondialog.h"
 #include "progress.h"
@@ -78,7 +79,7 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, e_SrcSelector idx)
                                           "If it is reproducible please contact the author.\n"),
                                    i18n("Severe Internal Error"));
 
-                fprintf(stderr, "Severe Internal Error.\n");
+                qCritical(kdeMain) << "Severe Internal Error. Line not set for idx=" << idx << "\n";
                 ::exit(-1);
             }
             ++i;
@@ -92,7 +93,7 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, e_SrcSelector idx)
                                   "If it is reproducible please contact the author.\n"),
                            i18n("Severe Internal Error"));
 
-        fprintf(stderr, "Severe Internal Error.\n");
+        qCritical(kdeMain) << "Severe Internal Error.: " << size << " != " << i << "\n";
         ::exit(-1);
     }
 }

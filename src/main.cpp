@@ -11,6 +11,8 @@
 #include "kdiff3_shell.h"
 #include "version.h"
 
+#include "Logging.h"
+
 #ifndef Q_WIN_OS
 #include <unistd.h>
 #endif // !Q_WIN_OS
@@ -28,7 +30,9 @@
 #include <QStringList>
 #include <QStandardPaths>
 #include <QTextStream>
+#include <QLoggingCategory>
 
+Q_LOGGING_CATEGORY(kdeMain, "org.kde.kdiff3")
 
 void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 {
