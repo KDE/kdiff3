@@ -9,7 +9,11 @@
  *                                                                         *
  ***************************************************************************/
 #include "kdiff3_shell.h"
-#include <version.h>
+#include "version.h"
+
+#ifndef Q_WIN_OS
+#include <unistd.h>
+#endif // !Q_WIN_OS
 
 #include <KAboutData>
 #include <KCrash/KCrash>
@@ -25,9 +29,6 @@
 #include <QStandardPaths>
 #include <QTextStream>
 
-#ifndef Q_WIN_OS
-#include <unistd.h>
-#endif // !Q_WIN_OS
 
 void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 {

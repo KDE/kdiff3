@@ -13,14 +13,16 @@
 #include "progress.h"
 #include "Utils.h"
 
+#include <cstdlib>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <vector>
+
 #include <QDir>
 #include <QFile>
 #include <QtMath>
 #include <QRegExp>
 #include <QTemporaryFile>
-
-#include <cstdlib>
-#include <vector>
 
 #include <KIO/CopyJob>
 #include <KIO/Job>
@@ -29,9 +31,6 @@
 #include <kio/global.h>
 #include <kio/jobclasses.h>
 #include <kio/jobuidelegate.h>
-
-#include <sys/stat.h>
-#include <sys/types.h>
 
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {

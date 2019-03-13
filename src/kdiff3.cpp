@@ -14,7 +14,7 @@
 
 #include "directorymergewindow.h"
 #include "fileaccess.h"
-#include "guiutils.h" // namespace KDiff3
+#include "guiutils.h"
 #include "kdiff3_part.h"
 #include "kdiff3_shell.h"
 #include "optiondialog.h"
@@ -23,6 +23,11 @@
 #include "difftextwindow.h"
 #include "mergeresultwindow.h"
 #include "RLPainter.h"
+
+#ifndef Q_WIN_OS
+#include <unistd.h>
+#endif
+
 // include files for QT
 #include <QClipboard>
 #include <QCheckBox>
@@ -55,9 +60,7 @@
 #include <KToggleAction>
 #include <KToolBar>
 
-#ifndef Q_WIN_OS
-#include <unistd.h>
-#endif
+
 
 #define ID_STATUS_MSG 1
 #define MAIN_TOOLBAR_NAME QLatin1String("mainToolBar")
