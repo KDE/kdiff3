@@ -33,7 +33,7 @@
 
 #include <version.h>
 
-static KAboutData createAboutData()
+KAboutData KDiff3Part::createAboutData()
 {
     QString appVersion = QString(KDIFF3_VERSION_STRING);
     if(sizeof(void*) == 8)
@@ -115,7 +115,7 @@ void KDiff3Part::setModified(bool /*modified*/)
 */
 }
 
-static void getNameAndVersion(const QString& str, const QString& lineStart, QString& fileName, QString& version)
+void KDiff3Part::getNameAndVersion(const QString& str, const QString& lineStart, QString& fileName, QString& version)
 {
     if(str.left(lineStart.length()) == lineStart && fileName.isEmpty())
     {

@@ -73,6 +73,9 @@ protected:
     bool saveFile() override;
 
 private:
+    void getNameAndVersion(const QString& str, const QString& lineStart, QString& fileName, QString& version);
+    KAboutData createAboutData();
+
     KDiff3App* m_widget;
     bool m_bIsShell;
 };
