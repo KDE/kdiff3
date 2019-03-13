@@ -30,9 +30,6 @@
 #include <QStringList>
 #include <QStandardPaths>
 #include <QTextStream>
-#include <QLoggingCategory>
-
-Q_LOGGING_CATEGORY(kdeMain, "org.kde.kdiff3")
 
 void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 {
