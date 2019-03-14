@@ -24,7 +24,7 @@
 #include "mergeresultwindow.h"
 #include "RLPainter.h"
 
-#ifndef Q_WIN_OS
+#ifndef Q_OS_WIN
 #include <unistd.h>
 #endif
 

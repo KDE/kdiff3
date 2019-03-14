@@ -13,9 +13,9 @@
 
 #include "Logging.h"
 
-#ifndef Q_WIN_OS
+#ifndef Q_OS_WIN
 #include <unistd.h>
-#endif // !Q_WIN_OS
+#endif
 
 #include <KAboutData>
 #include <KCrash/KCrash>
