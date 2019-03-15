@@ -15,11 +15,13 @@
 #include "diff.h"
 #include "selection.h"
 #include "Overview.h"
+#include "FileNameLineEdit.h"
 
 #include <QWidget>
 #include <QTimer>
 #include <QStatusBar>
 #include <QTextLayout>
+#include <QLineEdit>
 
 class QPainter;
 class RLPainter;
@@ -374,12 +376,13 @@ class QLineEdit;
 class QTextCodec;
 class QComboBox;
 class QLabel;
+
 class WindowTitleWidget : public QWidget
 {
    Q_OBJECT
 private:
    QLabel*      m_pLabel;
-   QLineEdit*   m_pFileNameLineEdit;
+   FileNameLineEdit*   m_pFileNameLineEdit;
    //QPushButton* m_pBrowseButton;
    QLabel*      m_pModifiedLabel;
    QLabel*      m_pLineEndStyleLabel;
@@ -402,7 +405,6 @@ public Q_SLOTS:
    void slotSetModified( bool bModified );
 //private Q_SLOTS:
 //   void slotBrowseButtonClicked();
-
 };
 
 #endif

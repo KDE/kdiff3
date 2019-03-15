@@ -3110,9 +3110,10 @@ WindowTitleWidget::WindowTitleWidget(Options* pOptions)
     m_pLabel = new QLabel(i18n("Output:"));
     pHLayout->addWidget(m_pLabel);
 
-    m_pFileNameLineEdit = new QLineEdit();
+    m_pFileNameLineEdit = new FileNameLineEdit();
     pHLayout->addWidget(m_pFileNameLineEdit, 6);
-    m_pFileNameLineEdit->installEventFilter(this);
+    m_pFileNameLineEdit->installEventFilter(this);//for focus tracking
+    m_pFileNameLineEdit->setAcceptDrops(true);
     m_pFileNameLineEdit->setReadOnly(true);
 
     //m_pBrowseButton = new QPushButton("...");
@@ -3316,6 +3317,7 @@ void WindowTitleWidget::slotSetModified(bool bModified)
 
 bool WindowTitleWidget::eventFilter(QObject* o, QEvent* e)
 {
+    Q_UNUSED(o);
     if(e->type() == QEvent::FocusIn || e->type() == QEvent::FocusOut)
     {
         QPalette p = m_pLabel->palette();
@@ -3332,22 +3334,6 @@ bool WindowTitleWidget::eventFilter(QObject* o, QEvent* e)
         m_pLabel->setPalette(p);
         m_pEncodingLabel->setPalette(p);
         m_pEncodingSelector->setPalette(p);
-    }
-    if(o == m_pFileNameLineEdit && e->type() == QEvent::Drop)
-    {
-        QDropEvent* d = static_cast<QDropEvent*>(e);
-
-        if(d->mimeData()->hasUrls())
-        {
-            QList<QUrl> lst = d->mimeData()->urls();
-
-            if(lst.count() > 0)
-            {
-                static_cast<QLineEdit*>(o)->setText(lst[0].toString());
-                static_cast<QLineEdit*>(o)->setFocus();
-                return true;
-            }
-        }
     }
     return false;
 }

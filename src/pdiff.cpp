@@ -679,7 +679,7 @@ void KDiff3App::initView()
     hSizes << 1 << 1 << 1;
     m_pDiffWindowSplitter->setSizes(hSizes);
 
-    m_pMergeResultWindow->installEventFilter(this);                      // for Cut/Copy/Paste-shortcuts
+    m_pMergeResultWindow->installEventFilter(this);                      // for drop and focus events
     m_pMergeResultWindow->installEventFilter(m_pMergeResultWindowTitle); // for focus tracking
 
     QHBoxLayout* pHScrollBarLayout = new QHBoxLayout();

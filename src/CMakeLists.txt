@@ -28,7 +28,8 @@ set(kdiff3part_PART_SRCS
    cvsignorelist.cpp
    SourceData.cpp
    Overview.cpp
-   Logging.cpp )
+   Logging.cpp
+   FileNameLineEdit.cpp )
 
 add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
