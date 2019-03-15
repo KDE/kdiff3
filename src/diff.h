@@ -225,12 +225,14 @@ class Diff3Line
     }
 };
 
-class Diff3LineList : public QList<Diff3Line>
+class Diff3LineList : public std::list<Diff3Line>
 {
   public:
     bool fineDiff(const e_SrcSelector selector, const LineData* v1, const LineData* v2);
     void calcDiff3LineVector(Diff3LineVector& d3lv);
     void calcWhiteDiff3Lines(const LineData* pldA, const LineData* pldB, const LineData* pldC);
+    //TODO: Add safety guards to prevent list from getting too large. Same problem as with QLinkedList.
+    int size() const { return (int)std::list<Diff3Line>::size(); }//safe for small files same limit as exited with QLinkedList. This should ultimatly be removed.
 };
 
 class Diff3LineVector : public QVector<Diff3Line*>

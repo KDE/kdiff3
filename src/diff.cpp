@@ -848,7 +848,7 @@ void calcDiff3LineListTrim(
     Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC, ManualDiffHelpList* pManualDiffHelpList)
 {
     const Diff3Line d3l_empty;
-    d3ll.removeAll(d3l_empty);
+    d3ll.remove(d3l_empty);
 
     Diff3LineList::iterator i3 = d3ll.begin();
     Diff3LineList::iterator i3A = d3ll.begin();
@@ -1108,7 +1108,7 @@ void calcDiff3LineListTrim(
         }
     }
 
-    d3ll.removeAll(d3l_empty);
+    d3ll.remove(d3l_empty);
 
     /*
 
