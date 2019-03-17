@@ -50,7 +50,7 @@ set(kdiff3_SRCS
 
 add_executable(kdiff3 ${kdiff3_SRCS})
 
-target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::Parts ${KDiff3_LIBRARIES} )
+target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::Parts KF5::Crash ${KDiff3_LIBRARIES} )
 target_compile_features(kdiff3 PRIVATE ${needed_features})
 
 install(TARGETS kdiff3 ${INSTALL_TARGETS_DEFAULT_ARGS})
