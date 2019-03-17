@@ -51,6 +51,7 @@
 #include <QTextStream>
 #include <QUrl>
 // include files for KDE
+#include <KCrash>
 #include <KConfig>
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -116,6 +117,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     setWindowTitle("KDiff3");
     setOpaqueResize(false); // faster resizing
     setUpdatesEnabled(false);
+    KCrash::initialize();
 
     // set Disabled to same color as enabled to prevent flicker in DirectoryMergeWindow
     QPalette pal;
