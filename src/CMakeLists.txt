@@ -34,7 +34,7 @@ add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
 set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
 target_compile_features(kdiff3part PRIVATE ${needed_features})
-target_link_libraries(kdiff3part ${KDiff3_LIBRARIES} KF5::Parts)
+target_link_libraries(kdiff3part ${KDiff3_LIBRARIES} KF5::Parts KF5::Crash)
 target_compile_definitions(kdiff3part PRIVATE -DTRANSLATION_DOMAIN=\"kdiff3\")
 
 install(TARGETS kdiff3part DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts )
