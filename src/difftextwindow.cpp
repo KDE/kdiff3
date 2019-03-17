@@ -16,6 +16,7 @@
 #include "kdiff3.h"
 #include "merger.h"
 #include "options.h"
+#include "FileNameLineEdit.h"
 #include "RLPainter.h"
 
 #include <algorithm>
@@ -1723,7 +1724,7 @@ class DiffTextWindowFrameData
 {
   public:
     DiffTextWindow* m_pDiffTextWindow;
-    QLineEdit* m_pFileSelection;
+    FileNameLineEdit* m_pFileSelection;
     QPushButton* m_pBrowseButton;
     Options* m_pOptions;
     QLabel* m_pLabel;
@@ -1742,11 +1743,13 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBa
     setAutoFillBackground(true);
     d->m_pOptions = pOptions;
     d->m_pTopLineWidget = new QWidget(this);
-    d->m_pFileSelection = new QLineEdit(d->m_pTopLineWidget);
+    d->m_pFileSelection = new FileNameLineEdit(d->m_pTopLineWidget);
     d->m_pBrowseButton = new QPushButton("...", d->m_pTopLineWidget);
     d->m_pBrowseButton->setFixedWidth(30);
     connect(d->m_pBrowseButton, &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
     connect(d->m_pFileSelection, &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
+
+    d->m_pFileSelection->setAcceptDrops(true);
 
     d->m_pLabel = new QLabel("A:", d->m_pTopLineWidget);
     d->m_pTopLine = new QLabel(d->m_pTopLineWidget);
@@ -1855,7 +1858,7 @@ DiffTextWindow* DiffTextWindowFrame::getDiffTextWindow()
 
 bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
 {
-    DiffTextWindow* pDTW = d->m_pDiffTextWindow;
+    Q_UNUSED(o);
     if(e->type() == QEvent::FocusIn || e->type() == QEvent::FocusOut)
     {
         QColor c1 = d->m_pOptions->m_bgColor;
@@ -1879,23 +1882,6 @@ bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
         d->m_pTopLine->setPalette(p);
         d->m_pEncoding->setPalette(p);
         d->m_pLineEndStyle->setPalette(p);
-    }
-    if(o == d->m_pFileSelection && e->type() == QEvent::Drop)
-    {
-        QDropEvent* dropEvent = static_cast<QDropEvent*>(e);
-
-        if(dropEvent->mimeData()->hasUrls())
-        {
-            QList<QUrl> lst = dropEvent->mimeData()->urls();
-
-            if(lst.count() > 0)
-            {
-                static_cast<QLineEdit*>(o)->setText(lst[0].toString());
-                static_cast<QLineEdit*>(o)->setFocus();
-                emit fileNameChanged(lst[0].toString(), pDTW->d->m_winIdx);
-                return true;
-            }
-        }
     }
 
     return false;

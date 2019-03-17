@@ -126,7 +126,8 @@ protected:
 private Q_SLOTS:
    void slotReturnPressed();
    void slotBrowseButtonClicked();
-private:
+
+ private:
    DiffTextWindowFrameData* d;
 };
 
