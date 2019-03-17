@@ -12,13 +12,14 @@
 #ifndef DIFF_H
 #define DIFF_H
 
-#include <QList>
-
 #include "common.h"
 #include "fileaccess.h"
 #include "options.h"
 #include "gnudiff_diff.h"
 #include "SourceData.h"
+#include "Logging.h"
+
+#include <QList>
 
 //enum must be sequential with no gaps to allow loop interiation of values
 enum e_SrcSelector
@@ -232,7 +233,15 @@ class Diff3LineList : public std::list<Diff3Line>
     void calcDiff3LineVector(Diff3LineVector& d3lv);
     void calcWhiteDiff3Lines(const LineData* pldA, const LineData* pldB, const LineData* pldC);
     //TODO: Add safety guards to prevent list from getting too large. Same problem as with QLinkedList.
-    int size() const { return (int)std::list<Diff3Line>::size(); }//safe for small files same limit as exited with QLinkedList. This should ultimatly be removed.
+    int size() const {
+        if(std::list<Diff3Line>::size() > std::numeric_limits<int>::max())
+        {
+            qCDebug(kdeMain) << "Diff3Line: List too large. size=" << std::list<Diff3Line>::size();
+            Q_ASSERT(false);//Unsupported size
+            return 0;
+        }
+        return (int)std::list<Diff3Line>::size();
+    }//safe for small files same limit as exited with QLinkedList. This should ultimatly be removed.
 };
 
 class Diff3LineVector : public QVector<Diff3Line*>
