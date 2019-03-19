@@ -91,8 +91,9 @@ set(
 
 add_definitions(
     -DQT_DEPRECATED_WARNINGS #Get warnings from QT about deprecated functions.
-    -DQT_NO_URL_CAST_FROM_STRING #implict casting from string to url does not always behave as you might think
+    -DQT_NO_URL_CAST_FROM_STRING # casting from string to url does not always behave as you might think
     -DQT_RESTRICTED_CAST_FROM_ASCII #casting from char*/QByteArray to QString can produce unexpected results for non-latin characters.
+    -DQT_NO_CAST_TO_ASCII
 )
 
 add_subdirectory(src)
