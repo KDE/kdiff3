@@ -84,8 +84,8 @@ void readTranslationFile()
             fseek(pFile, 0, SEEK_SET );
             fread(&buffer[0], 1, length, pFile );
          }
-      } 
-      catch(...) 
+      }
+      catch(...)
       {
       }
       fclose(pFile);
@@ -101,7 +101,7 @@ void readTranslationFile()
          }
 
          size_t sLength = MultiByteToWideChar(CP_UTF8,0,&buffer[offset], (int)bufferSize, 0, 0 );
-         std::wstring s( sLength, L' ' );         
+         std::wstring s( sLength, L' ' );
          MultiByteToWideChar(CP_UTF8,0,&buffer[offset], (int)bufferSize, &s[0], (int)s.size() );
 
          // Now analyze the file and extract translation strings
@@ -197,28 +197,28 @@ static void replaceArgs( tstring& s, const tstring& r1, const tstring& r2=TEXT("
    }
 }
 
-DIFF_EXT::DIFF_EXT() 
+DIFF_EXT::DIFF_EXT()
 : m_nrOfSelectedFiles(0), _ref_count(0L),
   m_recentFiles( SERVER::instance()->recent_files() )
 {
    LOG();
   _resource = SERVER::instance()->handle();
-  
+
   SERVER::instance()->lock();
 }
 
-DIFF_EXT::~DIFF_EXT() 
+DIFF_EXT::~DIFF_EXT()
 {
    LOG();
    if(_resource != SERVER::instance()->handle()) {
       FreeLibrary(_resource);
    }
-  
+
    SERVER::instance()->release();
 }
 
 STDMETHODIMP
-DIFF_EXT::QueryInterface(REFIID refiid, void** ppv) 
+DIFF_EXT::QueryInterface(REFIID refiid, void** ppv)
 {
   HRESULT ret = E_NOINTERFACE;
   *ppv = 0;
@@ -239,16 +239,16 @@ DIFF_EXT::QueryInterface(REFIID refiid, void** ppv)
 }
 
 STDMETHODIMP_(ULONG)
-DIFF_EXT::AddRef() 
+DIFF_EXT::AddRef()
 {
   return InterlockedIncrement((LPLONG)&_ref_count);
 }
 
 STDMETHODIMP_(ULONG)
-DIFF_EXT::Release() 
+DIFF_EXT::Release()
 {
   ULONG ret = 0L;
-  
+
   if(InterlockedDecrement((LPLONG)&_ref_count) != 0) {
     ret = _ref_count;
   } else {
@@ -261,7 +261,7 @@ DIFF_EXT::Release()
 
 
 STDMETHODIMP
-DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY /*key not used*/) 
+DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY /*key not used*/)
 {
    LOG();
 
@@ -281,27 +281,27 @@ DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY 
   medium.tymed = TYMED_HGLOBAL;
   HRESULT ret = E_INVALIDARG;
 
-  if(data->GetData(&format, &medium) == S_OK) 
+  if(data->GetData(&format, &medium) == S_OK)
   {
     HDROP drop = (HDROP)medium.hGlobal;
     m_nrOfSelectedFiles = DragQueryFile(drop, 0xFFFFFFFF, 0, 0);
 
     TCHAR tmp[MAX_PATH];
-    
+
     //initialize_language();
-    
+
     if (m_nrOfSelectedFiles >= 1 && m_nrOfSelectedFiles <= 3)
     {
        DragQueryFile(drop, 0, tmp, MAX_PATH);
        _file_name1 = tmp;
 
-       if(m_nrOfSelectedFiles >= 2) 
+       if(m_nrOfSelectedFiles >= 2)
        {
          DragQueryFile(drop, 1, tmp, MAX_PATH);
          _file_name2 = tmp;
        }
-       
-       if( m_nrOfSelectedFiles == 3) 
+
+       if( m_nrOfSelectedFiles == 3)
        {
          DragQueryFile(drop, 2, tmp, MAX_PATH);
          _file_name3 = tmp;
@@ -318,7 +318,7 @@ DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY 
   return ret;
 }
 
-static int insertMenuItemHelper( HMENU menu, UINT id, UINT position, const tstring& text, 
+static int insertMenuItemHelper( HMENU menu, UINT id, UINT position, const tstring& text,
                                  UINT fState = MFS_ENABLED, HMENU hSubMenu=0 )
 {
    MENUITEMINFO item_info;
@@ -346,12 +346,12 @@ static int insertMenuItemHelper( HMENU menu, UINT id, UINT position, const tstri
 
 
 STDMETHODIMP
-DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*last_cmd not used*/, UINT flags) 
+DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*last_cmd not used*/, UINT flags)
 {
    LOG();
-   
+
    SERVER::instance()->recent_files(); // updates recent files list (reads from registry)
-   
+
    m_id_Diff = UINT(-1);
    m_id_DiffWith = UINT(-1);
    m_id_DiffLater = UINT(-1);
@@ -364,7 +364,7 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
 
    HRESULT ret = MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_NULL, 0);
 
-   if(!(flags & CMF_DEFAULTONLY)) 
+   if(!(flags & CMF_DEFAULTONLY))
    {
    /* Menu structure:
       KDiff3 -> (1 File selected):  Save 'selection' for later comparison (push onto history stack)
@@ -373,7 +373,7 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
                                     Merge 'selection' with first file on history stack.
                                     Merge 'selection' with last two files on history stack.
                 (2 Files selected): Compare 's1' with 's2'
-                                    Merge 's1' with 's2' 
+                                    Merge 's1' with 's2'
                 (3 Files selected): Compare 's1', 's2' and 's3'
    */
       HMENU subMenu = CreateMenu();
@@ -385,8 +385,8 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
 
       tstring menuString;
       UINT pos2=0;
-      if(m_nrOfSelectedFiles == 1) 
-      {  
+      if(m_nrOfSelectedFiles == 1)
+      {
          size_t nrOfRecentFiles = m_recentFiles.size();
          tstring menuStringCompare = i18n("Compare with %1");
          tstring menuStringMerge   = i18n("Merge with %1");
@@ -394,7 +394,7 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
          if( nrOfRecentFiles>=1 )
          {
             firstFileName = TEXT("'") + cut_to_length( m_recentFiles.front() ) + TEXT("'");
-         } 
+         }
          replaceArgs( menuStringCompare, firstFileName );
          replaceArgs( menuStringMerge,   firstFileName );
          m_id_DiffWith  = insertMenuItemHelper( subMenu, id++, pos2++, menuStringCompare, nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
@@ -402,10 +402,10 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
 
          //if( nrOfRecentFiles>=2 )
          //{
-         //   tstring firstFileName = cut_to_length( m_recentFiles.front() );        
-         //   tstring secondFileName = cut_to_length( *(++m_recentFiles.begin()) );        
-         //} 
-         m_id_Merge3 = insertMenuItemHelper( subMenu, id++, pos2++, i18n("3-way merge with base"), 
+         //   tstring firstFileName = cut_to_length( m_recentFiles.front() );
+         //   tstring secondFileName = cut_to_length( *(++m_recentFiles.begin()) );
+         //}
+         m_id_Merge3 = insertMenuItemHelper( subMenu, id++, pos2++, i18n("3-way merge with base"),
             nrOfRecentFiles >=2 ? MFS_ENABLED : MFS_DISABLED );
 
          menuString = i18n("Save '%1' for later");
@@ -423,21 +423,21 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
             ++n;
          }
 
-         insertMenuItemHelper( subMenu, id++, pos2++, i18n("Compare with ..."), 
+         insertMenuItemHelper( subMenu, id++, pos2++, i18n("Compare with ..."),
             nrOfRecentFiles > 0 ? MFS_ENABLED : MFS_DISABLED, file_list );
 
          m_id_ClearList = insertMenuItemHelper( subMenu, id++, pos2++, i18n("Clear list"), nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
       }
-      else if(m_nrOfSelectedFiles == 2) 
-      {      
+      else if(m_nrOfSelectedFiles == 2)
+      {
          //= "Diff " + cut_to_length(_file_name1, 20)+" and "+cut_to_length(_file_name2, 20);
          m_id_Diff = insertMenuItemHelper( subMenu, id++, pos2++, i18n("Compare") );
-      } 
-      else if ( m_nrOfSelectedFiles == 3 ) 
-      {      
+      }
+      else if ( m_nrOfSelectedFiles == 3 )
+      {
          m_id_Diff3 = insertMenuItemHelper( subMenu, id++, pos2++, i18n("3 way comparison") );
-      } 
-      else 
+      }
+      else
       {
          // More than 3 files selected?
       }
@@ -445,7 +445,7 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
 
       insertMenuItemHelper( menu, id++, position++, TEXT("KDiff3"), MFS_ENABLED, subMenu );
 
-      insertMenuItemHelper( menu, id++, position++, TEXT("") );  // final separator      
+      insertMenuItemHelper( menu, id++, position++, TEXT("") );  // final separator
 
       ret = MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_NULL, id-first_cmd);
    }
@@ -454,62 +454,62 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
 }
 
 STDMETHODIMP
-DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici) 
+DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
 {
    HRESULT ret = NOERROR;
 
    _hwnd = ici->hwnd;
 
-   if(HIWORD(ici->lpVerb) == 0) 
+   if(HIWORD(ici->lpVerb) == 0)
    {
       UINT id = m_id_FirstCmd + LOWORD(ici->lpVerb);
-      if(id == m_id_Diff) 
+      if(id == m_id_Diff)
       {
          LOG();
          diff( TEXT("\"") + _file_name1 + TEXT("\" \"") + _file_name2 + TEXT("\"") );
-      } 
-      else if(id == m_id_Diff3) 
+      }
+      else if(id == m_id_Diff3)
       {
          LOG();
          diff( TEXT("\"") + _file_name1 + TEXT("\" \"") + _file_name2 + TEXT("\" \"") + _file_name3 + TEXT("\"") );
-      } 
-      else if(id == m_id_Merge3) 
+      }
+      else if(id == m_id_Merge3)
       {
          LOG();
          std::list< tstring >::iterator iFrom = m_recentFiles.begin();
          std::list< tstring >::iterator iBase = iFrom;
          ++iBase;
          diff( TEXT("-m \"") + *iBase + TEXT("\" \"") + *iFrom + TEXT("\" \"") + _file_name1 + TEXT("\"") );
-      } 
-      else if(id == m_id_DiffWith) 
+      }
+      else if(id == m_id_DiffWith)
       {
          LOG();
          diff_with(0, false);
-      } 
-      else if(id == m_id_MergeWith) 
+      }
+      else if(id == m_id_MergeWith)
       {
          LOG();
          diff_with(0, true);
-      } 
-      else if(id == m_id_ClearList) 
+      }
+      else if(id == m_id_ClearList)
       {
          LOG();
          m_recentFiles.clear();
          SERVER::instance()->save_history();
-      } 
-      else if(id == m_id_DiffLater) 
+      }
+      else if(id == m_id_DiffLater)
       {
          MESSAGELOG(TEXT("Diff Later: ")+_file_name1);
          m_recentFiles.remove( _file_name1 );
          m_recentFiles.push_front( _file_name1 );
          SERVER::instance()->save_history();
-      } 
-      else if(id >= m_id_DiffWith_Base && id < m_id_DiffWith_Base+m_recentFiles.size()) 
+      }
+      else if(id >= m_id_DiffWith_Base && id < m_id_DiffWith_Base+m_recentFiles.size())
       {
          LOG();
          diff_with(id-m_id_DiffWith_Base, false);
-      } 
-      else if(id == m_id_About) 
+      }
+      else if(id == m_id_About)
       {
          LOG();
          std::wstring sBits = i18n("(32 Bit)");
@@ -518,11 +518,10 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
          MessageBox( _hwnd, (i18n("Diff-Ext Copyright (c) 2003-2006, Sergey Zorin. All rights reserved.\n")
             + i18n("This software is distributable under the BSD-2-Clause license.\n")
             + i18n("Some extensions for KDiff3 (c) 2006-2013 by Joachim Eibl.\n")
-            + i18n("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n")
-            + i18n("Homepage for KDiff3: http://kdiff3.sourceforge.net")).c_str()
+            + i18n("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n")).c_str()
             , (i18n("About Diff-Ext for KDiff3 ")+sBits).c_str(), MB_OK );
-      } 
-      else 
+      }
+      else
       {
          ret = E_INVALIDARG;
          TCHAR verb[80];
@@ -547,26 +546,26 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
 
    if(uFlags == GCS_HELPTEXT) {
       tstring helpString;
-      if( idCmd == m_id_Diff ) 
+      if( idCmd == m_id_Diff )
       {
          helpString = i18n("Compare selected files");
-      } 
-      else if( idCmd == m_id_DiffWith ) 
+      }
+      else if( idCmd == m_id_DiffWith )
       {
-         if(!m_recentFiles.empty()) 
+         if(!m_recentFiles.empty())
          {
             helpString = i18n("Compare '%1' with '%2'");
             replaceArgs( helpString, _file_name1, m_recentFiles.front() );
          }
-      } 
-      else if(idCmd == m_id_DiffLater) 
+      }
+      else if(idCmd == m_id_DiffLater)
       {
          helpString = i18n("Save '%1' for later operation");
          replaceArgs( helpString, _file_name1 );
-      } 
-      else if((idCmd >= m_id_DiffWith_Base) && (idCmd < m_id_DiffWith_Base+m_recentFiles.size())) 
+      }
+      else if((idCmd >= m_id_DiffWith_Base) && (idCmd < m_id_DiffWith_Base+m_recentFiles.size()))
       {
-         if( !m_recentFiles.empty() ) 
+         if( !m_recentFiles.empty() )
          {
             unsigned int num = idCmd - m_id_DiffWith_Base;
             std::list<tstring>::iterator i = m_recentFiles.begin();
@@ -591,7 +590,7 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
 }
 
 void
-DIFF_EXT::diff( const tstring& arguments ) 
+DIFF_EXT::diff( const tstring& arguments )
 {
    LOG();
    STARTUPINFO si;
@@ -603,11 +602,11 @@ DIFF_EXT::diff( const tstring& arguments )
    {
       ZeroMemory(&si, sizeof(si));
       si.cb = sizeof(si);
-      if (CreateProcess(command.c_str(), (LPTSTR)commandLine.c_str(), 0, 0, FALSE, 0, 0, 0, &si, &pi) == 0) 
+      if (CreateProcess(command.c_str(), (LPTSTR)commandLine.c_str(), 0, 0, FALSE, 0, 0, 0, &si, &pi) == 0)
       {
          SYSERRORLOG(TEXT("CreateProcess") + command);
-      } 
-      else 
+      }
+      else
       {
          bError = false;
          CloseHandle( pi.hProcess );
@@ -625,7 +624,7 @@ DIFF_EXT::diff( const tstring& arguments )
 }
 
 void
-DIFF_EXT::diff_with(unsigned int num, bool bMerge) 
+DIFF_EXT::diff_with(unsigned int num, bool bMerge)
 {
    LOG();
    std::list<tstring>::iterator i = m_recentFiles.begin();
@@ -641,19 +640,19 @@ DIFF_EXT::diff_with(unsigned int num, bool bMerge)
 
 
 tstring
-DIFF_EXT::cut_to_length(const tstring& in, size_t max_len) 
+DIFF_EXT::cut_to_length(const tstring& in, size_t max_len)
 {
-  tstring ret;  
-  if( in.length() > max_len) 
+  tstring ret;
+  if( in.length() > max_len)
   {
      ret = in.substr(0, (max_len-3)/2);
      ret += TEXT("...");
      ret += in.substr( in.length()-(max_len-3)/2 );
   }
-  else 
+  else
   {
      ret = in;
   }
-  
+
   return ret;
 }
