@@ -1,4 +1,51 @@
-Please read the README-file.
+Building KDiff3 requires the fallowing minimium versions:
+ 1)Qt 5.6 or later
+ 2)KF5 5.14+
+ 3)CMake 3.1
+ 4)ECM 1.8
+ Support compilers:
+ 5)MSVC 2015+, gcc 5.0+, clang 3.3+
 
-Joachim
+Un*x:
+
+On debian based systems you needed to install the fallowing.
+gettext, qtbase5-dev, extra-cmake-modules libkf5i18n-dev, libkf5coreaddons-dev, libkf5iconthemes-dev libkf5parts-dev, libkf5doctools-dev, libkf5crash-dev, cmake, (gcc or clang)
+These should aviable as part of the standard repos.
+To build KDiff3 run:
+  cmake && make
+  sudo make install
+cmake will automacticly verify that the requirements are met before attempting to build.
+
+Windows:
+
+For windows the build should be done via. craft. Although other methods may work they are not
+tested.
+
+Craft requires python 3.6 or later to be installed it can be downloaded here:
+https://www.python.org/downloads/windows/
+This should be automacticly installed by craft.
+
+You will also need to start a power shell envirionment as administrator instruction for that are at:
+https://docs.microsoft.com/en-us/powershell/scripting/getting-started/starting-windows-powershell?view=powershell-6
+
+On windows 10 this will be the default shell.
+Run the fallowing.
+1)Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+2)iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/KDE/craft/master/setup/install_craft.ps1'))
+
+You may also have exempt your craft directory from virus scans as these can interefer with the build process.
+
+1)cd to your craft root
+Run:
+2)C:\CraftRoot\craft\craftenv.ps1
+3)craft --package kdiff3
+
+This will be a time consuming process on first run as craft will have download all dependencies.
+KDiff3 does not require special configuration for craft.
+
+There should be an installer package genernated a message on screen will give the location.
+It currently does not create a shortcut for the application itself.
+The diffault install location is:
+
+C:\Program Files\kdiff3
 
