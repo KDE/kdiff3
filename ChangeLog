@@ -1,7 +1,12 @@
+Version 1.8 - 2019-03-22
+===========================
+-Don't enable "Choose C for Everthing" on two way merge.
+-cleanup code.
+
 Version 1.7.90 - 2017-01-23
 ============================
 -ported to QT5/KDEFramework5
--depreciated cmake 2.8.12 support in master
+-require cmake 3.1
 -abandonded Konqueror specific plugin no longer applicable.
 -kde4 support dropped due to extensive changes needed for QT5/KDEFramework5
   -QT5 now required because of above changes.
@@ -11,6 +16,7 @@ Version 1.7.90 - 2017-01-23
 -fix memmory leak introduced in 0.9.91.
 -change version numbering.
 -scrap ClearCase support
+-implement Cut/Paste.
 
 Version 0.9.98 - 2014-07-04
 ===========================
