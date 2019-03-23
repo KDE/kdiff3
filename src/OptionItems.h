@@ -137,7 +137,7 @@ class OptionNum : public Option<T>
 
     void setCurrent(const T inValue) override
     {
-        //setNum does not use locale formatting instead it always use QLocale::C.
+        //QString::setNum does not use locale formatting instead it always use QLocale::C.
         stringValue = QLocale().toString(inValue);
         Option<T>::setCurrent(inValue);
     }
