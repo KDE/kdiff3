@@ -41,22 +41,22 @@
 //#include <error.h>
 #include <stdlib.h>
 
-static LineRef *xvec, *yvec;  /* Vectors being compared. */
-static LineRef *fdiag;        /* Vector, indexed by diagonal, containing
+static GNULineRef *xvec, *yvec;  /* Vectors being compared. */
+static GNULineRef *fdiag;        /* Vector, indexed by diagonal, containing
                    1 + the X coordinate of the point furthest
                    along the given diagonal in the forward
                    search of the edit matrix. */
-static LineRef *bdiag;        /* Vector, indexed by diagonal, containing
+static GNULineRef *bdiag;        /* Vector, indexed by diagonal, containing
                    the X coordinate of the point furthest
                    along the given diagonal in the backward
                    search of the edit matrix. */
-static LineRef too_expensive; /* Edit scripts longer than this are too
+static GNULineRef too_expensive; /* Edit scripts longer than this are too
                    expensive to compute.  */
 
 #define SNAKE_LIMIT 20 /* Snakes bigger than this are considered `big'.  */
 
 struct partition {
-    LineRef xmid, ymid;  /* Midpoints of this partition.  */
+    GNULineRef xmid, ymid;  /* Midpoints of this partition.  */
     bool lo_minimal; /* Nonzero if low half will be analyzed minimally.  */
     bool hi_minimal; /* Likewise for high half.  */
 };
@@ -92,20 +92,20 @@ struct partition {
    the worst this can do is cause suboptimal diff output.
    It cannot cause incorrect diff output.  */
 
-LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bool find_minimal,
+GNULineRef GnuDiff::diag(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNULineRef ylim, bool find_minimal,
                   struct partition *part)
 {
-    LineRef *const fd = fdiag;        /* Give the compiler a chance. */
-    LineRef *const bd = bdiag;        /* Additional help for the compiler. */
-    LineRef const *const xv = xvec;   /* Still more help for the compiler. */
-    LineRef const *const yv = yvec;   /* And more and more . . . */
-    LineRef const dmin = xoff - ylim; /* Minimum valid diagonal. */
-    LineRef const dmax = xlim - yoff; /* Maximum valid diagonal. */
-    LineRef const fmid = xoff - yoff; /* Center diagonal of top-down search. */
-    LineRef const bmid = xlim - ylim; /* Center diagonal of bottom-up search. */
-    LineRef fmin = fmid, fmax = fmid; /* Limits of top-down search. */
-    LineRef bmin = bmid, bmax = bmid; /* Limits of bottom-up search. */
-    LineRef c;                        /* Cost. */
+    GNULineRef *const fd = fdiag;        /* Give the compiler a chance. */
+    GNULineRef *const bd = bdiag;        /* Additional help for the compiler. */
+    GNULineRef const *const xv = xvec;   /* Still more help for the compiler. */
+    GNULineRef const *const yv = yvec;   /* And more and more . . . */
+    GNULineRef const dmin = xoff - ylim; /* Minimum valid diagonal. */
+    GNULineRef const dmax = xlim - yoff; /* Maximum valid diagonal. */
+    GNULineRef const fmid = xoff - yoff; /* Center diagonal of top-down search. */
+    GNULineRef const bmid = xlim - ylim; /* Center diagonal of bottom-up search. */
+    GNULineRef fmin = fmid, fmax = fmid; /* Limits of top-down search. */
+    GNULineRef bmin = bmid, bmax = bmid; /* Limits of bottom-up search. */
+    GNULineRef c;                        /* Cost. */
     bool odd = (fmid - bmid) & 1; /* True if southeast corner is on an odd
                    diagonal with respect to the northwest. */
 
@@ -114,7 +114,7 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
 
     for(c = 1;; ++c)
     {
-        LineRef d; /* Active diagonal. */
+        GNULineRef d; /* Active diagonal. */
         bool big_snake = false;
 
         /* Extend the top-down search by an edit step in each diagonal. */
@@ -122,7 +122,7 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
         fmax < dmax ? fd[++fmax + 1] = -1 : --fmax;
         for(d = fmax; d >= fmin; d -= 2)
         {
-            LineRef x, y, oldx, tlo = fd[d - 1], thi = fd[d + 1];
+            GNULineRef x, y, oldx, tlo = fd[d - 1], thi = fd[d + 1];
 
             if(tlo >= thi)
                 x = tlo + 1;
@@ -145,11 +145,11 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
         }
 
         /* Similarly extend the bottom-up search.  */
-        bmin > dmin ? bd[--bmin - 1] = LINEREF_MAX : ++bmin;
-        bmax < dmax ? bd[++bmax + 1] = LINEREF_MAX : --bmax;
+        bmin > dmin ? bd[--bmin - 1] = GNULINEREF_MAX : ++bmin;
+        bmax < dmax ? bd[++bmax + 1] = GNULINEREF_MAX : --bmax;
         for(d = bmax; d >= bmin; d -= 2)
         {
-            LineRef x, y, oldx, tlo = bd[d - 1], thi = bd[d + 1];
+            GNULineRef x, y, oldx, tlo = bd[d - 1], thi = bd[d + 1];
 
             if(tlo < thi)
                 x = tlo;
@@ -184,15 +184,15 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
 
         if(200 < c && big_snake && speed_large_files)
         {
-            LineRef best;
+            GNULineRef best;
 
             best = 0;
             for(d = fmax; d >= fmin; d -= 2)
             {
-                LineRef dd = d - fmid;
-                LineRef x = fd[d];
-                LineRef y = x - d;
-                LineRef v = (x - xoff) * 2 - dd;
+                GNULineRef dd = d - fmid;
+                GNULineRef x = fd[d];
+                GNULineRef y = x - d;
+                GNULineRef v = (x - xoff) * 2 - dd;
                 if(v > 12 * (c + (dd < 0 ? -dd : dd)))
                 {
                     if(v > best && xoff + SNAKE_LIMIT <= x && x < xlim && yoff + SNAKE_LIMIT <= y && y < ylim)
@@ -222,10 +222,10 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
             best = 0;
             for(d = bmax; d >= bmin; d -= 2)
             {
-                LineRef dd = d - bmid;
-                LineRef x = bd[d];
-                LineRef y = x - d;
-                LineRef v = (xlim - x) * 2 + dd;
+                GNULineRef dd = d - bmid;
+                GNULineRef x = bd[d];
+                GNULineRef y = x - d;
+                GNULineRef v = (xlim - x) * 2 + dd;
                 if(v > 12 * (c + (dd < 0 ? -dd : dd)))
                 {
                     if(v > best && xoff < x && x <= xlim - SNAKE_LIMIT && yoff < y && y <= ylim - SNAKE_LIMIT)
@@ -257,8 +257,8 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
      give up and report halfway between our best results so far.  */
         if(c >= too_expensive)
         {
-            LineRef fxybest, fxbest;
-            LineRef bxybest, bxbest;
+            GNULineRef fxybest, fxbest;
+            GNULineRef bxybest, bxbest;
 
             fxbest = bxbest = 0; /* Pacify `gcc -Wall'.  */
 
@@ -266,8 +266,8 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
             fxybest = -1;
             for(d = fmax; d >= fmin; d -= 2)
             {
-                LineRef x = std::min(fd[d], xlim);
-                LineRef y = x - d;
+                GNULineRef x = std::min(fd[d], xlim);
+                GNULineRef y = x - d;
                 if(ylim < y)
                     x = ylim + d, y = ylim;
                 if(fxybest < x + y)
@@ -278,11 +278,11 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
             }
 
             /* Find backward diagonal that minimizes X + Y.  */
-            bxybest = LINEREF_MAX;
+            bxybest = GNULINEREF_MAX;
             for(d = bmax; d >= bmin; d -= 2)
             {
-                LineRef x = std::max(xoff, bd[d]);
-                LineRef y = x - d;
+                GNULineRef x = std::max(xoff, bd[d]);
+                GNULineRef y = x - d;
                 if(y < yoff)
                     x = yoff + d, y = yoff;
                 if(x + y < bxybest)
@@ -326,10 +326,10 @@ LineRef GnuDiff::diag(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bo
    If FIND_MINIMAL, find a minimal difference no matter how
    expensive it is.  */
 
-void GnuDiff::compareseq(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim, bool find_minimal)
+void GnuDiff::compareseq(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNULineRef ylim, bool find_minimal)
 {
-    LineRef *const xv = xvec; /* Help the compiler.  */
-    LineRef *const yv = yvec;
+    GNULineRef *const xv = xvec; /* Help the compiler.  */
+    GNULineRef *const yv = yvec;
 
     /* Slide down the bottom initial diagonal. */
     while(xoff < xlim && yoff < ylim && xv[xoff] == yv[yoff])
@@ -347,7 +347,7 @@ void GnuDiff::compareseq(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim,
             files[0].changed[files[0].realindexes[xoff++]] = true;
     else
     {
-        LineRef c;
+        GNULineRef c;
         struct partition part;
 
         /* Find a point of correspondence in the middle of the files.  */
@@ -394,13 +394,13 @@ void GnuDiff::compareseq(LineRef xoff, LineRef xlim, LineRef yoff, LineRef ylim,
 void GnuDiff::discard_confusing_lines(struct file_data filevec[])
 {
     int f;
-    LineRef i;
+    GNULineRef i;
     char *discarded[2];
-    LineRef *equiv_count[2];
-    LineRef *p;
+    GNULineRef *equiv_count[2];
+    GNULineRef *p;
 
     /* Allocate our results.  */
-    p = (LineRef *)xmalloc((filevec[0].buffered_lines + filevec[1].buffered_lines) * (2 * sizeof *p));
+    p = (GNULineRef *)xmalloc((filevec[0].buffered_lines + filevec[1].buffered_lines) * (2 * sizeof *p));
     for(f = 0; f < 2; ++f)
     {
         filevec[f].undiscarded = p;
@@ -412,7 +412,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
     /* Set up equiv_count[F][I] as the number of lines in file F
      that fall in equivalence class I.  */
 
-    p = (LineRef *)zalloc(filevec[0].equiv_max * (2 * sizeof *p));
+    p = (GNULineRef *)zalloc(filevec[0].equiv_max * (2 * sizeof *p));
     equiv_count[0] = p;
     equiv_count[1] = p + filevec[0].equiv_max;
 
@@ -433,8 +433,8 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
     {
         size_t end = filevec[f].buffered_lines;
         char *discards = discarded[f];
-        LineRef *counts = equiv_count[1 - f];
-        LineRef *equivs = filevec[f].equivs;
+        GNULineRef *counts = equiv_count[1 - f];
+        GNULineRef *equivs = filevec[f].equivs;
         size_t many = 5;
         size_t tem = end / 64;
 
@@ -443,15 +443,15 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
         while((tem = tem >> 2) > 0)
             many *= 2;
 
-        for(i = 0; i < (LineRef)end; ++i)
+        for(i = 0; i < (GNULineRef)end; ++i)
         {
-            LineRef nmatch;
+            GNULineRef nmatch;
             if(equivs[i] == 0)
                 continue;
             nmatch = counts[equivs[i]];
             if(nmatch == 0)
                 discards[i] = 1;
-            else if(nmatch > (LineRef)many)
+            else if(nmatch > (GNULineRef)many)
                 discards[i] = 2;
         }
     }
@@ -462,7 +462,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
 
     for(f = 0; f < 2; ++f)
     {
-        LineRef end = filevec[f].buffered_lines;
+        GNULineRef end = filevec[f].buffered_lines;
         char *discards = discarded[f];
 
         for(i = 0; i < end; ++i)
@@ -473,9 +473,9 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
             else if(discards[i] != 0)
             {
                 /* We have found a nonprovisional discard.  */
-                LineRef j;
-                LineRef length;
-                LineRef provisional = 0;
+                GNULineRef j;
+                GNULineRef length;
+                GNULineRef provisional = 0;
 
                 /* Find end of this run of discardable lines.
          Count how many are provisionally discardable.  */
@@ -505,9 +505,9 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
                 }
                 else
                 {
-                    LineRef consec;
-                    LineRef minimum = 1;
-                    LineRef tem = length >> 2;
+                    GNULineRef consec;
+                    GNULineRef minimum = 1;
+                    GNULineRef tem = length >> 2;
 
                     /* MINIMUM is approximate square root of LENGTH/4.
              A subrun of two or more provisionals can stand
@@ -572,8 +572,8 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
     for(f = 0; f < 2; ++f)
     {
         char *discards = discarded[f];
-        LineRef end = filevec[f].buffered_lines;
-        LineRef j = 0;
+        GNULineRef end = filevec[f].buffered_lines;
+        GNULineRef j = 0;
         for(i = 0; i < end; ++i)
             if(minimal || discards[i] == 0)
             {
@@ -607,14 +607,14 @@ void GnuDiff::shift_boundaries(struct file_data filevec[])
     {
         bool *changed = filevec[f].changed;
         bool const *other_changed = filevec[1 - f].changed;
-        LineRef const *equivs = filevec[f].equivs;
-        LineRef i = 0;
-        LineRef j = 0;
-        LineRef i_end = filevec[f].buffered_lines;
+        GNULineRef const *equivs = filevec[f].equivs;
+        GNULineRef i = 0;
+        GNULineRef j = 0;
+        GNULineRef i_end = filevec[f].buffered_lines;
 
         while(true)
         {
-            LineRef runlength, start, corresponding;
+            GNULineRef runlength, start, corresponding;
 
             /* Scan forwards to find beginning of another run of changes.
          Also keep track of the corresponding point in the other file.  */
@@ -702,7 +702,7 @@ void GnuDiff::shift_boundaries(struct file_data filevec[])
    If DELETED is 0 then LINE0 is the number of the line before
    which the insertion was done; vice versa for INSERTED and LINE1.  */
 
-GnuDiff::change *GnuDiff::add_change(LineRef line0, LineRef line1, LineRef deleted, LineRef inserted, struct change *old)
+GnuDiff::change *GnuDiff::add_change(GNULineRef line0, GNULineRef line1, GNULineRef deleted, GNULineRef inserted, struct change *old)
 {
     struct change *newChange = (change *)xmalloc(sizeof *newChange);
 
@@ -722,18 +722,18 @@ GnuDiff::change *GnuDiff::build_reverse_script(struct file_data const filevec[])
     struct change *script = nullptr;
     bool *changed0 = filevec[0].changed;
     bool *changed1 = filevec[1].changed;
-    LineRef len0 = filevec[0].buffered_lines;
-    LineRef len1 = filevec[1].buffered_lines;
+    GNULineRef len0 = filevec[0].buffered_lines;
+    GNULineRef len1 = filevec[1].buffered_lines;
 
     /* Note that changedN[len0] does exist, and is 0.  */
 
-    LineRef i0 = 0, i1 = 0;
+    GNULineRef i0 = 0, i1 = 0;
 
     while(i0 < len0 || i1 < len1)
     {
         if(changed0[i0] | changed1[i1])
         {
-            LineRef line0 = i0, line1 = i1;
+            GNULineRef line0 = i0, line1 = i1;
 
             /* Find # lines changed here in each file.  */
             while(changed0[i0]) ++i0;
@@ -758,7 +758,7 @@ GnuDiff::change *GnuDiff::build_script(struct file_data const filevec[])
     struct change *script = nullptr;
     bool *changed0 = filevec[0].changed;
     bool *changed1 = filevec[1].changed;
-    LineRef i0 = filevec[0].buffered_lines, i1 = filevec[1].buffered_lines;
+    GNULineRef i0 = filevec[0].buffered_lines, i1 = filevec[1].buffered_lines;
 
     /* Note that changedN[-1] does exist, and is 0.  */
 
@@ -766,7 +766,7 @@ GnuDiff::change *GnuDiff::build_script(struct file_data const filevec[])
     {
         if(changed0[i0 - 1] | changed1[i1 - 1])
         {
-            LineRef line0 = i0, line1 = i1;
+            GNULineRef line0 = i0, line1 = i1;
 
             /* Find # lines changed here in each file.  */
             while(changed0[i0 - 1]) --i0;
@@ -786,7 +786,7 @@ GnuDiff::change *GnuDiff::build_script(struct file_data const filevec[])
 /* Report the differences of two files.  */
 GnuDiff::change *GnuDiff::diff_2_files(struct comparison *cmp)
 {
-    LineRef diags;
+    GNULineRef diags;
     int f;
     struct change *script;
 
@@ -815,7 +815,7 @@ GnuDiff::change *GnuDiff::diff_2_files(struct comparison *cmp)
         xvec = cmp->file[0].undiscarded;
         yvec = cmp->file[1].undiscarded;
         diags = (cmp->file[0].nondiscarded_lines + cmp->file[1].nondiscarded_lines + 3);
-        fdiag = (LineRef *)xmalloc(diags * (2 * sizeof *fdiag));
+        fdiag = (GNULineRef *)xmalloc(diags * (2 * sizeof *fdiag));
         bdiag = fdiag + diags;
         fdiag += cmp->file[1].nondiscarded_lines + 1;
         bdiag += cmp->file[1].nondiscarded_lines + 1;
@@ -825,7 +825,7 @@ GnuDiff::change *GnuDiff::diff_2_files(struct comparison *cmp)
         too_expensive = 1;
         for(; diags != 0; diags >>= 2)
             too_expensive <<= 1;
-        too_expensive = std::max((LineRef)256, too_expensive);
+        too_expensive = std::max((GNULineRef)256, too_expensive);
 
         files[0] = cmp->file[0];
         files[1] = cmp->file[1];

@@ -572,14 +572,14 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
         gnuDiff.ignore_case = false;
         GnuDiff::change* script = gnuDiff.diff_2_files(&comparisonInput);
 
-        LineRef equalLinesAtStart = comparisonInput.file[0].prefix_lines;
+        LineRef equalLinesAtStart = (LineRef)comparisonInput.file[0].prefix_lines;
         LineRef currentLine1 = 0;
         LineRef currentLine2 = 0;
         GnuDiff::change* p = nullptr;
         for(GnuDiff::change* e = script; e; e = p)
         {
             Diff d(0, 0, 0);
-            d.nofEquals = e->line0 - currentLine1;
+            d.nofEquals = (LineRef)(e->line0 - currentLine1);
             Q_ASSERT(d.nofEquals == e->line1 - currentLine2);
             d.diff1 = e->deleted;
             d.diff2 = e->inserted;
