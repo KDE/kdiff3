@@ -891,7 +891,7 @@ void KDiff3App::slotFilePrint()
             m_pEventLoopForPrinting->exec();
         }
 
-        LineRef totalNofLines = std::max(m_pDiffTextWindow1->getNofLines(), m_pDiffTextWindow2->getNofLines());
+        LineCount totalNofLines = std::max(m_pDiffTextWindow1->getNofLines(), m_pDiffTextWindow2->getNofLines());
         if(m_bTripleDiff && m_pDiffTextWindow3)
             totalNofLines = std::max(totalNofLines, m_pDiffTextWindow3->getNofLines());
 

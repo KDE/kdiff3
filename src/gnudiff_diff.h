@@ -42,7 +42,10 @@
 
 /* The integer type of a line number. */
 typedef qint32 LineRef;
+typedef qint32 LineCount;
 typedef qint64 GNULineRef;
+typedef qint32 LineIndex;
+
 #define LINEREF_MAX std::numeric_limits<LineRef>::max()
 #define GNULINEREF_MAX std::numeric_limits<GNULineRef>::max()
 static_assert(sizeof(int) >= sizeof(qint32), "Legacy LP32 systems/compilers not supported");// e.g. Windows 16-bit

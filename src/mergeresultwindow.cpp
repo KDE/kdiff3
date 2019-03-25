@@ -882,7 +882,7 @@ void MergeResultWindow::slotGoNextUnsolvedConflict()
 
 /** The line is given as a index in the Diff3LineList.
     The function calculates the corresponding iterator. */
-void MergeResultWindow::slotSetFastSelectorLine(int line)
+void MergeResultWindow::slotSetFastSelectorLine(LineIndex line)
 {
     MergeLineList::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
@@ -3058,7 +3058,7 @@ QString MergeResultWindow::getString(int lineIdx)
     return s;
 }
 
-bool MergeResultWindow::findString(const QString& s, int& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive)
+bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive)
 {
     int it = d3vLine;
     int endIt = bDirDown ? getNofLines() : -1;

@@ -1125,7 +1125,7 @@ void calcDiff3LineListTrim(
 }
 
 void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
-                          const LineData* pldA, LineRef sizeA, const LineData* pldB, LineRef sizeB, const LineData* pldC, LineRef sizeC)
+                          const LineData* pldA, LineCount sizeA, const LineData* pldB, LineCount sizeB, const LineData* pldC, LineCount sizeC)
 {
     m_pDiff3LineList = pD3ll;
     m_pDiff3LineVector = pD3lv;

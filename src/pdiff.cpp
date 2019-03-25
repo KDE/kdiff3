@@ -56,7 +56,7 @@ bool g_bIgnoreTrivialMatches = true;
 static void debugLineCheck(Diff3LineList& d3ll, LineRef size, e_SrcSelector idx)
 {
     Diff3LineList::iterator it = d3ll.begin();
-    LineRef i = 0;
+    int i = 0;
 
     for(it = d3ll.begin(); it != d3ll.end(); ++it)
     {
@@ -2303,8 +2303,8 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
     ManualDiffHelpList::iterator i;
     for(i = begin(); i != end(); ++i)
     {
-        int& l1 = i->firstLine(winIdx);
-        int& l2 = i->lastLine(winIdx);
+        LineRef& l1 = i->firstLine(winIdx);
+        LineRef& l2 = i->lastLine(winIdx);
         if(l1 >= 0 && l2 >= 0)
         {
             if((firstLine <= l1 && lastLine >= l1) || (firstLine <= l2 && lastLine >= l2))

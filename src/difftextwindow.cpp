@@ -261,7 +261,7 @@ void DiffTextWindow::setFirstLine(int firstLine)
 {
     int fontHeight = fontMetrics().lineSpacing();
 
-    int newFirstLine = std::max(0, firstLine);
+    LineRef newFirstLine = std::max(0, firstLine);
 
     int deltaY = fontHeight * (d->m_firstLine - newFirstLine);
 
@@ -269,7 +269,8 @@ void DiffTextWindow::setFirstLine(int firstLine)
 
     if(d->m_bSelectionInProgress && d->m_selection.isValidFirstLine())
     {
-        int line, pos;
+        LineRef line;
+        int pos;
         convertToLinePos(d->m_lastKnownMousePos.x(), d->m_lastKnownMousePos.y(), line, pos);
         d->m_selection.end(line, pos);
         update();
@@ -305,7 +306,8 @@ void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
 
     if(d->m_bSelectionInProgress && d->m_selection.isValidFirstLine())
     {
-        int line, pos;
+        LineRef line;
+        int pos;
         convertToLinePos(d->m_lastKnownMousePos.x(), d->m_lastKnownMousePos.y(), line, pos);
         d->m_selection.end(line, pos);
         update();
@@ -338,20 +340,20 @@ int DiffTextWindow::getMaxTextWidth()
     return getAtomic(d->m_maxTextWidth);
 }
 
-int DiffTextWindow::getNofLines()
+LineCount DiffTextWindow::getNofLines()
 {
     return d->m_bWordWrap ? d->m_diff3WrapLineVector.size() : d->m_pDiff3LineVector->size();
 }
 
-int DiffTextWindow::convertLineToDiff3LineIdx(int line)
+int DiffTextWindow::convertLineToDiff3LineIdx(LineRef line)
 {
     if(line >= 0 && d->m_bWordWrap && d->m_diff3WrapLineVector.size() > 0)
-        return d->m_diff3WrapLineVector[std::min(line, (int)d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
+        return d->m_diff3WrapLineVector[std::min(line, d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
     else
         return line;
 }
 
-int DiffTextWindow::convertDiff3LineIdxToLine(int d3lIdx)
+LineRef DiffTextWindow::convertDiff3LineIdxToLine(int d3lIdx)
 {
     if(d->m_bWordWrap && d->m_pDiff3LineVector != nullptr && d->m_pDiff3LineVector->size() > 0)
         return (*d->m_pDiff3LineVector)[std::min(d3lIdx, (int)d->m_pDiff3LineVector->size() - 1)]->sumLinesNeededForDisplay;
@@ -429,7 +431,7 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
 {
     if(e->button() == Qt::LeftButton)
     {
-        int line;
+        LineRef line;
         int pos;
         convertToLinePos(e->x(), e->y(), line, pos);
 
@@ -493,7 +495,7 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
     d->m_lastKnownMousePos = e->pos();
     if(e->button() == Qt::LeftButton)
     {
-        int line;
+        LineRef line;
         int pos;
         convertToLinePos(e->x(), e->y(), line, pos);
 
@@ -550,7 +552,7 @@ inline int sqr(int x) { return x * x; }
 
 void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
 {
-    int line;
+    LineRef line;
     int pos;
     convertToLinePos(e->x(), e->y(), line, pos);
     d->m_lastKnownMousePos = e->pos();
@@ -655,7 +657,7 @@ void DiffTextWindow::resetSelection()
     update();
 }
 
-void DiffTextWindow::convertToLinePos(int x, int y, int& line, int& pos)
+void DiffTextWindow::convertToLinePos(int x, int y, LineRef& line, int& pos)
 {
     const QFontMetrics& fm = fontMetrics();
     int fontHeight = fm.lineSpacing();
@@ -1270,10 +1272,10 @@ QString DiffTextWindow::getSelection()
     return selectionString;
 }
 
-bool DiffTextWindow::findString(const QString& s, int& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive)
+bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive)
 {
     int it = d3vLine;
-    int endIt = bDirDown ? (int)d->m_pDiff3LineVector->size() : -1;
+    int endIt = bDirDown ? d->m_pDiff3LineVector->size() : -1;
     int step = bDirDown ? 1 : -1;
     int startPos = posInLine;
 
@@ -1337,7 +1339,7 @@ void DiffTextWindow::convertLineCoordsToD3LCoords(int line, int pos, int& d3LIdx
     }
 }
 
-void DiffTextWindow::setSelection(int firstLine, int startPos, int lastLine, int endPos, int& l, int& p)
+void DiffTextWindow::setSelection(LineRef firstLine, int startPos, LineRef lastLine, int endPos, LineRef& l, int& p)
 {
     d->m_selection.reset();
     if(lastLine >= getNofLines())
@@ -1418,7 +1420,7 @@ int DiffTextWindowData::convertLineOnScreenToLineInSource(int lineOnScreen, e_Co
     return line;
 }
 
-void DiffTextWindow::getSelectionRange(int* pFirstLine, int* pLastLine, e_CoordType coordType)
+void DiffTextWindow::getSelectionRange(LineRef* pFirstLine, LineRef* pLastLine, e_CoordType coordType)
 {
     if(pFirstLine)
         *pFirstLine = d->convertLineOnScreenToLineInSource(d->m_selection.beginLine(), coordType, true);

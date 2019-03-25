@@ -526,10 +526,14 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     if(m_pOptions->m_bIgnoreComments)
     {
         m_lmppData.removeComments();
-        LineRef vSize = (LineRef)std::min(m_normalData.m_vSize, m_lmppData.m_vSize);
-        for(int i = 0; i < (int)vSize; ++i)
+        qint64 vSize = std::min(m_normalData.m_vSize, m_lmppData.m_vSize);
+        Q_ASSERT(vSize < std::numeric_limits<int>::max());
+        for(int i = 0; i < vSize; ++i)
         {
             m_normalData.m_v[i].setPureComment(m_lmppData.m_v[i].isPureComment());
+            //Don't crash if vSize is too large.
+            if(i == std::numeric_limits<int>::max())
+                break;
         }
     }
 

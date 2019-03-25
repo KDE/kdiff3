@@ -62,7 +62,7 @@ public:
    bool isUnsolvedConflictAtCurrent();
    bool isUnsolvedConflictAboveCurrent();
    bool isUnsolvedConflictBelowCurrent();
-   bool findString( const QString& s, int& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive );
+   bool findString( const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive );
    void setSelection( int firstLine, int startPos, int lastLine, int endPos );
    void setOverviewMode( Overview::e_OverviewMode eOverviewMode );
    Overview::e_OverviewMode getOverviewMode();
@@ -86,9 +86,9 @@ public Q_SLOTS:
    void slotUnsolve();
    void slotMergeHistory();
    void slotRegExpAutoMerge();
-   void slotSplitDiff( int firstD3lLineIdx, int lastD3lLineIdx );
-   void slotJoinDiffs( int firstD3lLineIdx, int lastD3lLineIdx );
-   void slotSetFastSelectorLine(int);
+   void slotSplitDiff( LineIndex firstD3lLineIdx, LineIndex lastD3lLineIdx );
+   void slotJoinDiffs( LineIndex firstD3lLineIdx, LineIndex lastD3lLineIdx );
+   void slotSetFastSelectorLine(LineIndex);
    void setPaintingAllowed(bool);
    void updateSourceMask();
    void slotStatusMessageChanged( const QString& );

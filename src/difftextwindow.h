@@ -42,28 +42,28 @@ public:
       bool bTriple
       );
    void reset();
-   void convertToLinePos( int x, int y, int& line, int& pos );
+   void convertToLinePos( int x, int y, LineRef& line, int& pos );
 
    QString getSelection();
    int getFirstLine();
    int calcTopLineInFile( int firstLine );
 
    int getMaxTextWidth();
-   int getNofLines();
+   LineCount getNofLines();
    int getNofVisibleLines();
    int getVisibleTextAreaWidth();
 
-   int convertLineToDiff3LineIdx( int line );
-   int convertDiff3LineIdxToLine( int d3lIdx );
+   int convertLineToDiff3LineIdx( LineRef line );
+   LineRef convertDiff3LineIdxToLine( int d3lIdx );
 
    void convertD3LCoordsToLineCoords( int d3LIdx, int d3LPos, int& line, int& pos );
    void convertLineCoordsToD3LCoords( int line, int pos, int& d3LIdx, int& d3LPos );
 
    void convertSelectionToD3LCoords();
 
-   bool findString( const QString& s, int& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive );
-   void setSelection( int firstLine, int startPos, int lastLine, int endPos, int& l, int& p );
-   void getSelectionRange( int* firstLine, int* lastLine, e_CoordType coordType );
+   bool findString( const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive );
+   void setSelection( LineRef firstLine, int startPos, LineRef lastLine, int endPos, LineRef& l, int& p );
+   void getSelectionRange( LineRef* firstLine, LineRef* lastLine, e_CoordType coordType );
 
    void setPaintingAllowed( bool bAllowPainting );
    void recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth);
@@ -75,7 +75,7 @@ Q_SIGNALS:
    void scrollDiffTextWindow( int deltaX, int deltaY );
    void newSelection();
    void selectionEnd();
-   void setFastSelectorLine( int line );
+   void setFastSelectorLine( LineIndex line );
    void gotFocus();
    void lineClicked( e_SrcSelector winIdx, int line );
 

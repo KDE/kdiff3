@@ -58,12 +58,12 @@ enum e_MergeDetails
 class Diff
 {
   public:
-    LineRef nofEquals;
+    LineCount nofEquals;
 
     qint64 diff1;
     qint64 diff2;
 
-    Diff(LineRef eq, qint64 d1, qint64 d2)
+    Diff(LineCount eq, qint64 d1, qint64 d2)
     {
         nofEquals = eq;
         diff1 = d1;
@@ -109,13 +109,13 @@ class DiffBufferInfo
     const LineData* m_pLineDataA;
     const LineData* m_pLineDataB;
     const LineData* m_pLineDataC;
-    LineRef m_sizeA;
-    LineRef m_sizeB;
-    LineRef m_sizeC;
+    LineCount m_sizeA;
+    LineCount m_sizeB;
+    LineCount m_sizeC;
     const Diff3LineList* m_pDiff3LineList;
     const Diff3LineVector* m_pDiff3LineVector;
     void init(Diff3LineList* d3ll, const Diff3LineVector* d3lv,
-              const LineData* pldA, LineRef sizeA, const LineData* pldB, LineRef sizeB, const LineData* pldC, LineRef sizeC);
+              const LineData* pldA, LineCount sizeA, const LineData* pldB, LineCount sizeB, const LineData* pldC, LineCount sizeC);
 };
 
 class Diff3Line
