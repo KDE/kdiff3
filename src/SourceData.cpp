@@ -173,7 +173,7 @@ const LineData* SourceData::getLineDataForDisplay() const
 
 LineRef SourceData::getSizeLines() const
 {
-    return (LineRef)m_normalData.m_vSize;
+    return (LineRef::LineType)(m_normalData.m_vSize);
 }
 
 qint64 SourceData::getSizeBytes() const

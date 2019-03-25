@@ -348,7 +348,7 @@ LineCount DiffTextWindow::getNofLines()
 int DiffTextWindow::convertLineToDiff3LineIdx(LineRef line)
 {
     if(line >= 0 && d->m_bWordWrap && d->m_diff3WrapLineVector.size() > 0)
-        return d->m_diff3WrapLineVector[std::min(line, d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
+        return d->m_diff3WrapLineVector[std::min((LineRef::LineType)line, d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
     else
         return line;
 }
