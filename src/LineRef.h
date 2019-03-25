@@ -23,14 +23,12 @@
 
 #include <stdlib.h>
 #include <type_traits>
+#include <QtGlobal>
 
 class LineRef
 {
     public:
-      typedef int LineType;
-
-      static_assert(sizeof(LineType) <= sizeof(size_t), "Unsupport configuration.");
-
+      typedef qint32 LineType;
       LineRef() = default;
       LineRef(const LineType i) { mLineNumber = i; }
       operator LineType() const { return mLineNumber; }
@@ -40,6 +38,9 @@ class LineRef
           mLineNumber += inLine;
           return *this;
       };
+
+      void invalidate() { mLineNumber = -1; }
+      bool isValid() const { return mLineNumber != -1; }
 
     private:
         LineType mLineNumber = -1;

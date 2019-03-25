@@ -42,10 +42,7 @@
 
 #include "LineRef.h"
 /* The integer type of a line number. */
-//typedef qint32 LineRef;
-//typedef qint32 LineCount;
 typedef qint64 GNULineRef;
-typedef qint32 LineIndex;
 
 #define LINEREF_MAX std::numeric_limits<LineRef>::max()
 #define GNULINEREF_MAX std::numeric_limits<GNULineRef>::max()

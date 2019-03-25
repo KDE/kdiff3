@@ -902,8 +902,8 @@ void KDiff3App::slotFilePrint()
 
         bool bPrintSelection = false;
         int totalNofPages = (totalNofLines + linesPerPage - 1) / linesPerPage;
-        LineRef line = -1;
-        LineRef selectionEndLine = -1;
+        LineRef line;
+        LineRef selectionEndLine;
 
         if(printer.printRange() == QPrinter::AllPages) {
             pageList.clear();

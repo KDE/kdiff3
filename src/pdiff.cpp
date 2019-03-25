@@ -64,11 +64,11 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, e_SrcSelector idx)
 
         Q_ASSERT(idx >= A && idx <= C);
         if(idx == A)
-            l = (*it).getLineA();
+            l = it->getLineA();
         else if(idx == B)
-            l = (*it).getLineB();
+            l = it->getLineB();
         else if(idx == C)
-            l = (*it).getLineC();
+            l = it->getLineC();
 
         if(l != -1)
         {
@@ -1416,8 +1416,8 @@ void KDiff3App::slotRegExpAutoMerge()
 
 void KDiff3App::slotSplitDiff()
 {
-    LineRef firstLine = -1;
-    LineRef lastLine = -1;
+    LineRef firstLine;
+    LineRef lastLine;
     DiffTextWindow* pDTW = nullptr;
     if(m_pDiffTextWindow1)
     {
@@ -1444,8 +1444,8 @@ void KDiff3App::slotSplitDiff()
 
 void KDiff3App::slotJoinDiffs()
 {
-    LineRef firstLine = -1;
-    LineRef lastLine = -1;
+    LineRef firstLine;
+    LineRef lastLine;
     DiffTextWindow* pDTW = nullptr;
     if(m_pDiffTextWindow1)
     {
@@ -2310,8 +2310,8 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
             if((firstLine <= l1 && lastLine >= l1) || (firstLine <= l2 && lastLine >= l2))
             {
                 // overlap
-                l1 = -1;
-                l2 = -1;
+                l1.invalidate();
+                l2.invalidate();
             }
             if(firstLine < l1 && lastLine < l1)
             {
@@ -2341,8 +2341,8 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
             {
                 iEmpty->firstLine((e_SrcSelector)wIdx) = i->firstLine((e_SrcSelector)wIdx);
                 iEmpty->lastLine((e_SrcSelector)wIdx) = i->lastLine((e_SrcSelector)wIdx);
-                i->firstLine((e_SrcSelector)wIdx) = -1;
-                i->lastLine((e_SrcSelector)wIdx) = -1;
+                i->firstLine((e_SrcSelector)wIdx).invalidate();
+                i->lastLine((e_SrcSelector)wIdx).invalidate();
                 ++iEmpty;
             }
         }
@@ -2352,8 +2352,8 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
 
 void KDiff3App::slotAddManualDiffHelp()
 {
-    LineRef firstLine = -1;
-    LineRef lastLine = -1;
+    LineRef firstLine;
+    LineRef lastLine;
     e_SrcSelector winIdx = Invalid;
     if(m_pDiffTextWindow1)
     {

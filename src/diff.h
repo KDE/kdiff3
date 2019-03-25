@@ -121,9 +121,9 @@ class DiffBufferInfo
 class Diff3Line
 {
   private:
-    LineRef lineA = -1;
-    LineRef lineB = -1;
-    LineRef lineC = -1;
+    LineRef lineA;
+    LineRef lineB;
+    LineRef lineC;
   public:
 
     bool bAEqC = false; // These are true if equal or only white-space changes exist.
@@ -309,12 +309,13 @@ class ManualDiffHelpList; // A list of corresponding ranges
 class ManualDiffHelpEntry
 {
   private:
-    LineRef lineA1 = -1;
-    LineRef lineA2 = -1;
-    LineRef lineB1 = -1;
-    LineRef lineB2 = -1;
-    LineRef lineC1 = -1;
-    LineRef lineC2 = -1;
+    LineRef lineA1;
+    LineRef lineA2;
+    LineRef lineB1;
+    LineRef lineB2;
+    LineRef lineC1;
+    LineRef lineC2;
+
   public:
     LineRef& firstLine(e_SrcSelector winIdx)
     {

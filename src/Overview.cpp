@@ -219,13 +219,13 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
 
         if(!m_bTripleDiff)
         {
-            if(d3l.getLineA() == -1 && d3l.getLineB() >= 0)
+            if(!d3l.getLineA().isValid() && d3l.getLineB().isValid())
             {
                 c = m_pOptions->m_colorA;
                 x2 = w / 2;
                 w2 = x2;
             }
-            if(d3l.getLineA() >= 0 && d3l.getLineB() == -1)
+            if(d3l.getLineA().isValid() && !d3l.getLineB().isValid())
             {
                 c = m_pOptions->m_colorB;
                 w2 = w / 2;

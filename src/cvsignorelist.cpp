@@ -164,7 +164,7 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
 
     for(it = m_endPatterns.begin(), itEnd = m_endPatterns.end(); it != itEnd; ++it)
     {
-        if(text.mid(text.length() - (*it).length()) == *it) //(text.endsWith(*it))
+        if(text.mid(text.length() - it->length()) == *it) //(text.endsWith(*it))
         {
             return true;
         }
