@@ -105,8 +105,8 @@ void calcDiff3LineListUsingAB(
     // First make d3ll for AB (from pDiffListAB)
 
     DiffList::const_iterator i = pDiffListAB->begin();
-    int lineA = 0;
-    int lineB = 0;
+    LineRef::LineType lineA = 0;
+    LineRef::LineType lineB = 0;
     Diff d(0, 0, 0);
 
     for(;;)
@@ -170,8 +170,8 @@ void calcDiff3LineListUsingAC(
 
     DiffList::const_iterator i = pDiffListAC->begin();
     Diff3LineList::iterator i3 = d3ll.begin();
-    int lineA = 0;
-    int lineC = 0;
+    LineRef::LineType lineA = 0;
+    LineRef::LineType lineC = 0;
     Diff d(0, 0, 0);
 
     for(;;)
@@ -242,8 +242,8 @@ void calcDiff3LineListUsingBC(
     DiffList::const_iterator i = pDiffListBC->begin();
     Diff3LineList::iterator i3b = d3ll.begin();
     Diff3LineList::iterator i3c = d3ll.begin();
-    int lineB = 0;
-    int lineC = 0;
+    LineRef::LineType lineB = 0;
+    LineRef::LineType lineC = 0;
     Diff d(0, 0, 0);
 
     for(;;)
@@ -572,19 +572,19 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
         gnuDiff.ignore_case = false;
         GnuDiff::change* script = gnuDiff.diff_2_files(&comparisonInput);
 
-        LineRef equalLinesAtStart = (LineRef::LineType)comparisonInput.file[0].prefix_lines;
+        LineRef equalLinesAtStart = (LineRef)comparisonInput.file[0].prefix_lines;
         LineRef currentLine1 = 0;
         LineRef currentLine2 = 0;
         GnuDiff::change* p = nullptr;
         for(GnuDiff::change* e = script; e; e = p)
         {
             Diff d(0, 0, 0);
-            d.nofEquals = (LineRef::LineType)(e->line0 - currentLine1);
+            d.nofEquals = (LineRef)(e->line0 - currentLine1);
             Q_ASSERT(d.nofEquals == e->line1 - currentLine2);
             d.diff1 = e->deleted;
             d.diff2 = e->inserted;
-            currentLine1 += (LineRef::LineType)(d.nofEquals + d.diff1);
-            currentLine2 += (LineRef::LineType)(d.nofEquals + d.diff2);
+            currentLine1 += (LineRef)(d.nofEquals + d.diff1);
+            currentLine2 += (LineRef)(d.nofEquals + d.diff2);
             diffList.push_back(d);
 
             p = e->link;
@@ -1303,8 +1303,8 @@ void calcDiff(const QChar* p1, LineRef size1, const QChar* p2, LineRef size2, Di
         DiffList::iterator i;
         for(i = diffList.begin(); i != diffList.end(); ++i)
         {
-            l1 += (LineRef::LineType)(i->nofEquals + i->diff1);
-            l2 += (LineRef::LineType)(i->nofEquals + i->diff2);
+            l1 += (LineRef)(i->nofEquals + i->diff1);
+            l2 += (LineRef)(i->nofEquals + i->diff2);
         }
 
         Q_ASSERT(l1 == size1 && l2 == size2);

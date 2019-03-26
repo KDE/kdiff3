@@ -820,8 +820,8 @@ void KDiff3App::slotFilePrint()
     QPrinter printer;
     QPointer<QPrintDialog> printDialog=QPointer<QPrintDialog>(new QPrintDialog(&printer, this));
 
-    LineRef firstSelectionD3LIdx = -1;
-    LineRef lastSelectionD3LIdx = -1;
+    LineRef firstSelectionD3LIdx;
+    LineRef lastSelectionD3LIdx;
 
     m_pDiffTextWindow1->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
 
