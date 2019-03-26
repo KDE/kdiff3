@@ -54,31 +54,31 @@ void printDiff3List(const Diff3LineList &diff3LineList,
 
       const Diff3Line& d3l = *i;
 
-      if(d3l.lineA != -1)
+      if(d3l.getLineA().isValid())
       {
-         const LineData *pLineData = &sd1.getLineDataForDiff()[d3l.lineA];
-         lineAText = QString(pLineData->pLine, pLineData->size);
+         const LineData *pLineData = &sd1.getLineDataForDiff()[d3l.getLineA()];
+         lineAText = QString(pLineData->getLine(), pLineData->size());
          lineAText.replace(QString("\r"), QString("\\r"));
          lineAText.replace(QString("\n"), QString("\\n"));
-         lineAText = QString("%1 %2").arg(d3l.lineA, linenumsize).arg(lineAText.left(columnsize - linenumsize - 1));
+         lineAText = QString("%1 %2").arg(d3l.getLineA(), linenumsize).arg(lineAText.left(columnsize - linenumsize - 1));
       }
 
-      if(d3l.lineB != -1)
+      if(d3l.getLineB().isValid())
       {
-         const LineData *pLineData = &sd2.getLineDataForDiff()[d3l.lineB];
-         lineBText = QString(pLineData->pLine, pLineData->size);
+         const LineData *pLineData = &sd2.getLineDataForDiff()[d3l.getLineB()];
+         lineBText = QString(pLineData->getLine(), pLineData->size());
          lineBText.replace(QString("\r"), QString("\\r"));
          lineBText.replace(QString("\n"), QString("\\n"));
-         lineBText = QString("%1 %2").arg(d3l.lineB, linenumsize).arg(lineBText.left(columnsize - linenumsize - 1));
+         lineBText = QString("%1 %2").arg(d3l.getLineB(), linenumsize).arg(lineBText.left(columnsize - linenumsize - 1));
       }
 
-      if(d3l.lineC != -1)
+      if(d3l.getLineC().isValid())
       {
-         const LineData *pLineData = &sd3.getLineDataForDiff()[d3l.lineC];
-         lineCText = QString(pLineData->pLine, pLineData->size);
+         const LineData *pLineData = &sd3.getLineDataForDiff()[d3l.getLineC()];
+         lineCText = QString(pLineData->getLine(), pLineData->size());
          lineCText.replace(QString("\r"), QString("\\r"));
          lineCText.replace(QString("\n"), QString("\\n"));
-         lineCText = QString("%1 %2").arg(d3l.lineC, linenumsize).arg(lineCText.left(columnsize - linenumsize - 1));
+         lineCText = QString("%1 %2").arg(d3l.getLineC(), linenumsize).arg(lineCText.left(columnsize - linenumsize - 1));
       }
 
       out << QString("%1 %2 %3").arg(lineAText, -columnsize)
@@ -116,19 +116,16 @@ void determineFileAlignment(SourceData &m_sd1, SourceData &m_sd2, SourceData &m_
    // Run the diff.
    if ( m_sd3.isEmpty() )
    {
-      runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12,1,2,
-               &m_manualDiffHelpList, m_pOptions);
+      m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12,A,B,
+               m_pOptions);
       calcDiff3LineListUsingAB( &m_diffList12, m_diff3LineList );
       fineDiff( m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
    }
    else
    {
-      runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12,1,2,
-               &m_manualDiffHelpList, m_pOptions);
-      runDiff( m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23,2,3,
-               &m_manualDiffHelpList, m_pOptions);
-      runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13,1,3,
-               &m_manualDiffHelpList, m_pOptions);
+      m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12,A,B, m_pOptions);
+      m_manualDiffHelpList.runDiff( m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23,B,C, m_pOptions);
+      m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13,A,C, m_pOptions);
 
       if (verbose)
       {
@@ -160,13 +157,13 @@ void determineFileAlignment(SourceData &m_sd1, SourceData &m_sd2, SourceData &m_
       fineDiff( m_diff3LineList, 2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay() );
       fineDiff( m_diff3LineList, 3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay() );
    }
-   calcWhiteDiff3Lines( m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff() );
+   m_diff3LineList.calcWhiteDiff3Lines( m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff() );
 }
 
 QString getLineFromSourceData(const SourceData &sd, int line)
 {
    const LineData *pLineData = &sd.getLineDataForDiff()[line];
-   QString lineText = QString(pLineData->pLine, pLineData->size);
+   QString lineText = QString(pLineData->getLine(), pLineData->size());
    lineText.replace(QString("\r"), QString("\\r"));
    lineText.replace(QString("\n"), QString("\\n"));
    return lineText;
@@ -187,9 +184,9 @@ void loadExpectedAlignmentFile(QString expectedResultFileName, Diff3LineList &ex
       while ( !t.atEnd() )
       {
          QStringList lst = t.readLine().split(QRegExp("\\s+"));
-         d3l.lineA = lst.at(0).toInt();
-         d3l.lineB = lst.at(1).toInt();
-         d3l.lineC = lst.at(2).toInt();
+         d3l.setLineA(lst.at(0).toInt());
+         d3l.setLineB(lst.at(1).toInt());
+         d3l.setLineC(lst.at(2).toInt());
 
          expectedDiff3LineList.push_back( d3l );
       }
@@ -209,7 +206,7 @@ void writeActualAlignmentFile(QString actualResultFileName, const Diff3LineList 
 
          for(p_d3l = actualDiff3LineList.begin(); p_d3l != actualDiff3LineList.end(); p_d3l++)
          {
-            t << p_d3l->lineA << " " << p_d3l->lineB << " " << p_d3l->lineC << endl;
+            t << p_d3l->getLineA() << " " << p_d3l->getLineB() << " " << p_d3l->getLineC() << endl;
          }
       }
       file.close();
@@ -307,65 +304,65 @@ bool runTest(QString file1, QString file2, QString file3, QString expectedResult
    while(equal && (p_actual != actualDiff3LineList.end()))
    {
       /* Check if all line numbers are in sequence */
-      if(p_actual->lineA != -1)
+      if(p_actual->getLineA().isValid())
       {
-         if(p_actual->lineA <= latestLineA)
+         if(p_actual->getLineA() <= latestLineA)
          {
             sequenceError = true;
          }
          else
          {
-            latestLineA = p_actual->lineA;
+            latestLineA = p_actual->getLineA();
          }
       }
-      if(p_actual->lineB != -1)
+      if(p_actual->getLineB().isValid())
       {
-         if(p_actual->lineB <= latestLineB)
+         if(p_actual->getLineB() <= latestLineB)
          {
             sequenceError = true;
          }
          else
          {
-            latestLineB = p_actual->lineB;
+            latestLineB = p_actual->getLineB();
          }
       }
-      if(p_actual->lineC != -1)
+      if(p_actual->getLineC().isValid())
       {
-         if(p_actual->lineC <= latestLineC)
+         if(p_actual->getLineC() <= latestLineC)
          {
             sequenceError = true;
          }
          else
          {
-            latestLineC = p_actual->lineC;
+            latestLineC = p_actual->getLineC();
          }
       }
 
       /* Check if the booleans that indicate if lines are equal are consistent with the content of the lines */
-      QString lineAText = (p_actual->lineA == -1) ? "" : getLineFromSourceData(m_sd1, p_actual->lineA).simplified().replace(" ", "");
-      QString lineBText = (p_actual->lineB == -1) ? "" : getLineFromSourceData(m_sd2, p_actual->lineB).simplified().replace(" ", "");
-      QString lineCText = (p_actual->lineC == -1) ? "" : getLineFromSourceData(m_sd3, p_actual->lineC).simplified().replace(" ", "");
+      QString lineAText = (!p_actual->getLineA().isValid()) ? "" : getLineFromSourceData(m_sd1, p_actual->getLineA()).simplified().replace(" ", "");
+      QString lineBText = (!p_actual->getLineB().isValid()) ? "" : getLineFromSourceData(m_sd2, p_actual->getLineB()).simplified().replace(" ", "");
+      QString lineCText = (!p_actual->getLineC().isValid()) ? "" : getLineFromSourceData(m_sd3, p_actual->getLineC()).simplified().replace(" ", "");
 
-      if(!dataIsConsistent(p_actual->lineA, lineAText, p_actual->lineB, lineBText, p_actual->isEqualAB()))
+      if(!dataIsConsistent(p_actual->getLineA(), lineAText, p_actual->getLineB(), lineBText, p_actual->isEqualAB()))
       {
-         if(verbose) out << "inconsistency: line " << p_actual->lineA << " of A vs line " << p_actual->lineB << " of B" << endl;
+         if(verbose) out << "inconsistency: line " << p_actual->getLineA() << " of A vs line " << p_actual->getLineB() << " of B" << endl;
          consistencyError = true;
       }
-      if(!dataIsConsistent(p_actual->lineB, lineBText, p_actual->lineC, lineCText, p_actual->isEqualBC()))
+      if(!dataIsConsistent(p_actual->getLineB(), lineBText, p_actual->getLineC(), lineCText, p_actual->isEqualBC()))
       {
-         if(verbose) out << "inconsistency: line " << p_actual->lineB << " of B vs line " << p_actual->lineC << " of C" << endl;
+         if(verbose) out << "inconsistency: line " << p_actual->getLineB() << " of B vs line " << p_actual->getLineC() << " of C" << endl;
          consistencyError = true;
       }
-      if(!dataIsConsistent(p_actual->lineA, lineAText, p_actual->lineC, lineCText, p_actual->isEqualAC()))
+      if(!dataIsConsistent(p_actual->getLineA(), lineAText, p_actual->getLineC(), lineCText, p_actual->isEqualAC()))
       {
-         if(verbose) out << "inconsistency: line " << p_actual->lineA << " of A vs line " << p_actual->lineC << " of C" << endl;
+         if(verbose) out << "inconsistency: line " << p_actual->getLineA() << " of A vs line " << p_actual->getLineC() << " of C" << endl;
          consistencyError = true;
       }
 
       /* Check if the actual output of the algorithm is equal to the expected output */
-      equal = (p_actual->lineA == p_expected->lineA) &&
-              (p_actual->lineB == p_expected->lineB) &&
-              (p_actual->lineC == p_expected->lineC);
+      equal = (p_actual->getLineA() == p_expected->getLineA()) &&
+              (p_actual->getLineB() == p_expected->getLineB()) &&
+              (p_actual->getLineC() == p_expected->getLineC());
       p_actual++;
       p_expected++;
    }
