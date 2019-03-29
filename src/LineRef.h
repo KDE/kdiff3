@@ -26,6 +26,7 @@
 #include <QtGlobal>
 
 #define TYPE_MAX(x) std::numeric_limits<x>::max()
+#define TYPE_MIN(x) std::numeric_limits<x>::min()
 class LineRef
 {
     public:
@@ -57,7 +58,7 @@ class LineRef
 static_assert(std::is_copy_constructible<LineRef>::value, "LineRef must be copt constuctible.");
 static_assert(std::is_copy_assignable<LineRef>::value, "LineRef must copy assignable.");
 static_assert(std::is_move_constructible<LineRef>::value, "LineRef must be move constructible.");
-static_assert(std::is_move_assignable<LineRef>::value, "LineRef not must be move assignable.");
+static_assert(std::is_move_assignable<LineRef>::value, "LineRef must be move assignable.");
 static_assert(std::is_convertible<LineRef, int>::value, "Can not convert LineRef to int.");
 static_assert(std::is_convertible<int, LineRef>::value, "Can not convert int to LineRef.");
 
