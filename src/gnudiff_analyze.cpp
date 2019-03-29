@@ -702,9 +702,9 @@ void GnuDiff::shift_boundaries(struct file_data filevec[])
    If DELETED is 0 then LINE0 is the number of the line before
    which the insertion was done; vice versa for INSERTED and LINE1.  */
 
-GnuDiff::change *GnuDiff::add_change(GNULineRef line0, GNULineRef line1, GNULineRef deleted, GNULineRef inserted, struct change *old)
+GnuDiff::change *GnuDiff::add_change(GNULineRef line0, GNULineRef line1, GNULineRef deleted, GNULineRef inserted, change *old)
 {
-    struct change *newChange = (change *)xmalloc(sizeof *newChange);
+    change *newChange = (change *)xmalloc(sizeof *newChange);
 
     newChange->line0 = line0;
     newChange->line1 = line1;
@@ -719,7 +719,7 @@ GnuDiff::change *GnuDiff::add_change(GNULineRef line0, GNULineRef line1, GNULine
 
 GnuDiff::change *GnuDiff::build_reverse_script(struct file_data const filevec[])
 {
-    struct change *script = nullptr;
+    change *script = nullptr;
     bool *changed0 = filevec[0].changed;
     bool *changed1 = filevec[1].changed;
     GNULineRef len0 = filevec[0].buffered_lines;
@@ -755,7 +755,7 @@ GnuDiff::change *GnuDiff::build_reverse_script(struct file_data const filevec[])
 
 GnuDiff::change *GnuDiff::build_script(struct file_data const filevec[])
 {
-    struct change *script = nullptr;
+    change *script = nullptr;
     bool *changed0 = filevec[0].changed;
     bool *changed1 = filevec[1].changed;
     GNULineRef i0 = filevec[0].buffered_lines, i1 = filevec[1].buffered_lines;
@@ -788,7 +788,7 @@ GnuDiff::change *GnuDiff::diff_2_files(struct comparison *cmp)
 {
     GNULineRef diags;
     int f;
-    struct change *script;
+    change *script;
 
     read_files(cmp->file, files_can_be_treated_as_binary);
 
@@ -841,7 +841,7 @@ GnuDiff::change *GnuDiff::diff_2_files(struct comparison *cmp)
         shift_boundaries(cmp->file);
 
         /* Get the results of comparison in the form of a chain
-         of `struct change's -- an edit script.  */
+         of `change's -- an edit script.  */
 
         script = build_script(cmp->file);
 
