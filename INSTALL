@@ -38,9 +38,15 @@ You may also have exempt your craft directory from virus scans as these can inte
 1)cd to your craft root
 Run:
 2)C:\CraftRoot\craft\craftenv.ps1
-3)craft --package kdiff3
+3)craft kdiff3
+At this point you can run kdiff3 itself via the fallowing:
+cb kdiff3
+bin/kdiff3
+
+If you want to create an install package you would run:
+4)craft --package kdiff3
 
 This will be a time consuming process on first run as craft will have download all dependencies.
-KDiff3 does not require special configuration for craft.
+KDiff3 does not require special configuration for craft. 
 
 There should be an installer package generated in CraftRoot/tmp
