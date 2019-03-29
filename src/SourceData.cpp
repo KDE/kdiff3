@@ -810,7 +810,7 @@ void SourceData::FileData::removeComments()
 bool SourceData::isLineOrBufEnd(const QChar* p, int i, int size)
 {
     return i >= size            // End of file
-           || isEndOfLine(p[i]) // Normal end of line
+           || Utils::isEndOfLine(p[i]) // Normal end of line
 
         // No support for Mac-end of line yet, because incompatible with GNU-diff-routines.
         // || ( p[i]=='\r' && (i>=size-1 || p[i+1]!='\n')

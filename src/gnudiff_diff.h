@@ -24,6 +24,8 @@
 #ifndef GNUDIFF_DIFF_H
 #define GNUDIFF_DIFF_H
 
+#include "LineRef.h"
+#include "Utils.h"
 
 #include <stdint.h>
 #include <sys/types.h>
@@ -40,18 +42,12 @@
 #include <QtGlobal>
 #include <QString>
 
-#include "LineRef.h"
 /* The integer type of a line number. */
 typedef qint64 GNULineRef;
 #define GNULINEREF_MAX std::numeric_limits<GNULineRef>::max()
 static_assert(sizeof(int) >= sizeof(qint32), "Legacy LP32 systems/compilers not supported");// e.g. Windows 16-bit
 static_assert(std::is_signed<GNULineRef>::value, "GNULineRef must be signed.");
 static_assert(sizeof(GNULineRef) >= sizeof(size_t),"GNULineRef must be able to receive size_t values.");
-
-inline bool isEndOfLine( QChar c )
-{
-   return c=='\n' || c=='\r' || c=='\x0b';
-}
 
 #define TAB_WIDTH 8
 

@@ -164,7 +164,7 @@ void GnuDiff::find_and_hash_each_line(struct file_data *current)
             switch(ignore_white_space)
             {
             case IGNORE_ALL_SPACE:
-                while(p < bufend && !isEndOfLine(c = *p))
+                while(p < bufend && !Utils::isEndOfLine(c = *p))
                 {
                     if(!(isWhite(c) || (bIgnoreNumbers && (c.isDigit() || c == '-' || c == '.'))))
                         h = HASH(h, c.toLower().unicode());
@@ -173,7 +173,7 @@ void GnuDiff::find_and_hash_each_line(struct file_data *current)
                 break;
 
             default:
-                while(p < bufend && !isEndOfLine(c = *p))
+                while(p < bufend && !Utils::isEndOfLine(c = *p))
                 {
                     h = HASH(h, c.toLower().unicode());
                     ++p;
@@ -184,7 +184,7 @@ void GnuDiff::find_and_hash_each_line(struct file_data *current)
             switch(ignore_white_space)
             {
             case IGNORE_ALL_SPACE:
-                while(p < bufend && !isEndOfLine(c = *p))
+                while(p < bufend && !Utils::isEndOfLine(c = *p))
                 {
                     if(!(isWhite(c) || (bIgnoreNumbers && (c.isDigit() || c == '-' || c == '.'))))
                         h = HASH(h, c.unicode());
@@ -193,7 +193,7 @@ void GnuDiff::find_and_hash_each_line(struct file_data *current)
                 break;
 
             default:
-                while(p < bufend && !isEndOfLine(c = *p))
+                while(p < bufend && !Utils::isEndOfLine(c = *p))
                 {
                     h = HASH(h, c.unicode());
                     ++p;
@@ -293,7 +293,7 @@ void GnuDiff::find_and_hash_each_line(struct file_data *current)
 
         line++;
 
-        while(p < bufend && !isEndOfLine(*p++))
+        while(p < bufend && !Utils::isEndOfLine(*p++))
             continue;
     }
 
@@ -350,7 +350,7 @@ void GnuDiff::find_identical_ends(struct file_data filevec[])
     /* Now P0 and P1 point at the first nonmatching characters.  */
 
     /* Skip back to last line-beginning in the prefix. */
-    while(p0 != buffer0 && !isEndOfLine(p0[-1]))
+    while(p0 != buffer0 && !Utils::isEndOfLine(p0[-1]))
         p0--, p1--;
 
     /* Record the prefix.  */
@@ -387,7 +387,7 @@ void GnuDiff::find_identical_ends(struct file_data filevec[])
     {
         if(*p0 != *p1)
             ++p0;
-        while(p0 < pEnd0 && !isEndOfLine(*p0++))
+        while(p0 < pEnd0 && !Utils::isEndOfLine(*p0++))
             continue;
     }
 
@@ -449,7 +449,7 @@ void GnuDiff::find_identical_ends(struct file_data filevec[])
                 linbuf0 = (const QChar **)xrealloc(linbuf0, alloc_lines0 * sizeof(*linbuf0));
             }
             linbuf0[l] = p0;
-            while(p0 < pEnd0 && !isEndOfLine(*p0++))
+            while(p0 < pEnd0 && !Utils::isEndOfLine(*p0++))
                 continue;
         }
     }
