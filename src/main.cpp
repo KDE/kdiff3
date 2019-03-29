@@ -144,7 +144,7 @@ int main(int argc, char* argv[])
     else
     {
         /*
-            There is no terminal connected so don't just exit mysteriously exit on error.
+            There is no terminal connected so don't just exit mysteriously on error.
         */
         if(!cmdLineParser->parse(QCoreApplication::arguments()))
         {

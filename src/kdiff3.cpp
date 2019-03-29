@@ -266,7 +266,9 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
             if(args.count() > 0) m_sd2.setFilename(args[0]);
             if(args.count() > 1) m_sd3.setFilename(args[1]);
         }
-        //never properly defined and redundant
+        //Set m_bDirCompare flag
+        m_bDirCompare = FileAccess(m_sd1.getFilename()).isDir();
+
         QStringList aliasList; //KDiff3Shell::getParser()->values( "fname" );
         QStringList::Iterator ali = aliasList.begin();
 
