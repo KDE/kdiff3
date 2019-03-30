@@ -108,7 +108,7 @@ class GnuDiff
    which the insertion was done; vice versa for INSERTED and LINE1.  */
 
     struct change {
-        struct change *link; /* Previous or next edit command  */
+        change *link; /* Previous or next edit command  */
         GNULineRef inserted; /* # lines of file 1 changed here.  */
         GNULineRef deleted;  /* # lines of file 0 changed here.  */
         GNULineRef line0;    /* Line number of 1st deleted line.  */
@@ -182,20 +182,20 @@ class GnuDiff
     /* Data on two input files being compared.  */
 
     struct comparison {
-        struct file_data file[2];
-        struct comparison const *parent; /* parent, if a recursive comparison */
+        file_data file[2];
+        comparison const *parent; /* parent, if a recursive comparison */
     };
 
     /* Describe the two files currently being compared.  */
 
-    struct file_data files[2];
+    file_data files[2];
 
     /* Declare various functions.  */
 
     /* analyze.c */
-    struct change *diff_2_files(struct comparison *);
+    change *diff_2_files(comparison *);
     /* io.c */
-    bool read_files(struct file_data[], bool);
+    bool read_files(file_data[], bool);
 
     /* util.c */
     bool lines_differ(const QChar *, size_t, const QChar *, size_t);
@@ -205,15 +205,15 @@ class GnuDiff
     // gnudiff_analyze.cpp
     GNULineRef diag(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNULineRef ylim, bool find_minimal, struct partition *part);
     void compareseq(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNULineRef ylim, bool find_minimal);
-    void discard_confusing_lines(struct file_data filevec[]);
-    void shift_boundaries(struct file_data filevec[]);
-    struct change *add_change(GNULineRef line0, GNULineRef line1, GNULineRef deleted, GNULineRef inserted, struct change *old);
-    struct change *build_reverse_script(struct file_data const filevec[]);
-    struct change *build_script(struct file_data const filevec[]);
+    void discard_confusing_lines(file_data filevec[]);
+    void shift_boundaries(file_data filevec[]);
+    change *add_change(GNULineRef line0, GNULineRef line1, GNULineRef deleted, GNULineRef inserted, change *old);
+    change *build_reverse_script(file_data const filevec[]);
+    change *build_script(file_data const filevec[]);
 
     // gnudiff_io.cpp
-    void find_and_hash_each_line(struct file_data *current);
-    void find_identical_ends(struct file_data filevec[]);
+    void find_and_hash_each_line(file_data *current);
+    void find_identical_ends(file_data filevec[]);
 
     // gnudiff_xmalloc.cpp
     void *xmalloc(size_t n);

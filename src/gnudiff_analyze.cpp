@@ -93,7 +93,7 @@ struct partition {
    It cannot cause incorrect diff output.  */
 
 GNULineRef GnuDiff::diag(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNULineRef ylim, bool find_minimal,
-                  struct partition *part)
+                  partition *part)
 {
     GNULineRef *const fd = fdiag;        /* Give the compiler a chance. */
     GNULineRef *const bd = bdiag;        /* Additional help for the compiler. */
@@ -348,7 +348,7 @@ void GnuDiff::compareseq(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNUL
     else
     {
         GNULineRef c;
-        struct partition part;
+        partition part;
 
         /* Find a point of correspondence in the middle of the files.  */
 
@@ -391,7 +391,7 @@ void GnuDiff::compareseq(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNUL
    When we discard a line, we also mark it as a deletion or insertion
    so that it will be printed in the output.  */
 
-void GnuDiff::discard_confusing_lines(struct file_data filevec[])
+void GnuDiff::discard_confusing_lines(file_data filevec[])
 {
     int f;
     GNULineRef i;
@@ -599,7 +599,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
    but usually it is cleaner to consider the following identical line
    to be the "change".  */
 
-void GnuDiff::shift_boundaries(struct file_data filevec[])
+void GnuDiff::shift_boundaries(file_data filevec[])
 {
     int f;
 
@@ -717,7 +717,7 @@ GnuDiff::change *GnuDiff::add_change(GNULineRef line0, GNULineRef line1, GNULine
 /* Scan the tables of which lines are inserted and deleted,
    producing an edit script in reverse order.  */
 
-GnuDiff::change *GnuDiff::build_reverse_script(struct file_data const filevec[])
+GnuDiff::change *GnuDiff::build_reverse_script(file_data const filevec[])
 {
     change *script = nullptr;
     bool *changed0 = filevec[0].changed;
@@ -753,7 +753,7 @@ GnuDiff::change *GnuDiff::build_reverse_script(struct file_data const filevec[])
 /* Scan the tables of which lines are inserted and deleted,
    producing an edit script in forward order.  */
 
-GnuDiff::change *GnuDiff::build_script(struct file_data const filevec[])
+GnuDiff::change *GnuDiff::build_script(file_data const filevec[])
 {
     change *script = nullptr;
     bool *changed0 = filevec[0].changed;
@@ -784,7 +784,7 @@ GnuDiff::change *GnuDiff::build_script(struct file_data const filevec[])
 }
 
 /* Report the differences of two files.  */
-GnuDiff::change *GnuDiff::diff_2_files(struct comparison *cmp)
+GnuDiff::change *GnuDiff::diff_2_files(comparison *cmp)
 {
     GNULineRef diags;
     int f;

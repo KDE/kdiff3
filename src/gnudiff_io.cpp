@@ -56,7 +56,7 @@ static size_t nbuckets;
 /* Array in which the equivalence classes are allocated.
    The bucket-chains go through the elements in this array.
    The number of an equivalence class is its index in this array.  */
-static struct equivclass *equivs;
+static equivclass *equivs;
 
 /* Index of first free element in the array `equivs'.  */
 static GNULineRef equivs_index;
@@ -129,7 +129,7 @@ bool GnuDiff::lines_differ(const QChar *s1, size_t len1, const QChar *s2, size_t
 /* Split the file into lines, simultaneously computing the equivalence
    class for each line.  */
 
-void GnuDiff::find_and_hash_each_line(struct file_data *current)
+void GnuDiff::find_and_hash_each_line(file_data *current)
 {
     hash_value h;
     const QChar *p = current->prefix_end;
@@ -143,7 +143,7 @@ void GnuDiff::find_and_hash_each_line(struct file_data *current)
     GNULineRef line = 0;
     GNULineRef linbuf_base = current->linbuf_base;
     GNULineRef *cureqs = (GNULineRef *)xmalloc(alloc_lines * sizeof *cureqs);
-    struct equivclass *eqs = equivs;
+    equivclass *eqs = equivs;
     GNULineRef eqs_index = equivs_index;
     GNULineRef eqs_alloc = equivs_alloc;
     const QChar *suffix_begin = current->suffix_begin;
@@ -322,7 +322,7 @@ guess_lines(GNULineRef n, size_t s, size_t t)
 /* Given a vector of two file_data objects, find the identical
    prefixes and suffixes of each object.  */
 
-void GnuDiff::find_identical_ends(struct file_data filevec[])
+void GnuDiff::find_identical_ends(file_data filevec[])
 {
     /* Find identical prefix.  */
     const QChar *p0, *p1, *buffer0, *buffer1;
@@ -508,7 +508,7 @@ static_assert(sizeof(size_t) * CHAR_BIT <= sizeof prime_offset, "Not enough prim
    Return nonzero if either file appears to be a binary file.
    If PRETEND_BINARY is nonzero, pretend they are binary regardless.  */
 
-bool GnuDiff::read_files(struct file_data filevec[], bool /*pretend_binary*/)
+bool GnuDiff::read_files(file_data filevec[], bool /*pretend_binary*/)
 {
     GNULineRef i;
 
