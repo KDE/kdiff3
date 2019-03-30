@@ -1225,14 +1225,14 @@ QString DiffTextWindow::getSelection()
 
         Q_ASSERT(d->m_winIdx >= 1 && d->m_winIdx <= 3);
 
-        if(d->m_winIdx == 1) {
+        if(d->m_winIdx == A) {
             lineIdx = d3l->getLineA();
         }
-        else if(d->m_winIdx == 2)
+        else if(d->m_winIdx == B)
         {
             lineIdx = d3l->getLineB();
         }
-        else if(d->m_winIdx == 3)
+        else if(d->m_winIdx == C)
         {
             lineIdx = d3l->getLineC();
         }
@@ -1348,11 +1348,11 @@ void DiffTextWindow::setSelection(LineRef firstLine, int startPos, LineRef lastL
         lastLine = getNofLines() - 1;
 
         const Diff3Line* d3l = (*d->m_pDiff3LineVector)[convertLineToDiff3LineIdx(lastLine)];
-        int line = -1;
-        if(d->m_winIdx == 1) line = d3l->getLineA();
-        if(d->m_winIdx == 2) line = d3l->getLineB();
-        if(d->m_winIdx == 3) line = d3l->getLineC();
-        if(line >= 0)
+        LineRef line;
+        if(d->m_winIdx == A) line = d3l->getLineA();
+        if(d->m_winIdx == B) line = d3l->getLineB();
+        if(d->m_winIdx == C) line = d3l->getLineC();
+        if(line.isValid())
             endPos = d->m_pLineData[line].width(d->m_pOptions->m_tabSize);
     }
 
@@ -1810,7 +1810,7 @@ void DiffTextWindowFrame::init()
     {
         QString s = QDir::toNativeSeparators(pDTW->d->m_filename);
         d->m_pFileSelection->setText(s);
-        QString winId = pDTW->d->m_winIdx == 1 ? (pDTW->d->m_bTriple ? i18n("A (Base)") : i18n("A")) : (pDTW->d->m_winIdx == 2 ? i18n("B") : i18n("C"));
+        QString winId = pDTW->d->m_winIdx == A ? (pDTW->d->m_bTriple ? i18n("A (Base)") : i18n("A")) : (pDTW->d->m_winIdx == B ? i18n("B") : i18n("C"));
         d->m_pLabel->setText(winId + ':');
         d->m_pEncoding->setText(i18n("Encoding: %1", pDTW->d->m_pTextCodec != nullptr ? QLatin1String(pDTW->d->m_pTextCodec->name()) : QString()));
         d->m_pLineEndStyle->setText(i18n("Line end style: %1", pDTW->d->m_eLineEndStyle == eLineEndStyleDos ? i18n("DOS") : i18n("Unix")));
