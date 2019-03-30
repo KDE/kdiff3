@@ -1133,6 +1133,7 @@ QString DiffTextWindowData::getString(int d3lIdx)
 {
     if(d3lIdx < 0 || d3lIdx >= (int)m_pDiff3LineVector->size())
         return QString();
+
     const Diff3Line* d3l = (*m_pDiff3LineVector)[d3lIdx];
     DiffList* pFineDiff1;
     DiffList* pFineDiff2;

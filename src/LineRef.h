@@ -23,36 +23,62 @@
 
 #include <stdlib.h>
 #include <type_traits>
+
 #include <QtGlobal>
 
 #define TYPE_MAX(x) std::numeric_limits<x>::max()
 #define TYPE_MIN(x) std::numeric_limits<x>::min()
 class LineRef
 {
-    public:
-      typedef qint32 LineType;
-      inline LineRef() = default;
-      inline LineRef(const LineType i) { mLineNumber = i; }
-      inline LineRef(const qint64 i)
-      {
-          if(i <= TYPE_MAX(LineType))
-              mLineNumber = (LineType)i;
-          else
-              mLineNumber = -1;
-      }
-      inline operator LineType() const { return mLineNumber; }
-      inline void operator= (const LineType lineIn) { mLineNumber = lineIn; }
-      inline LineRef& operator+=(const LineType& inLine)
-      {
-          mLineNumber += inLine;
-          return *this;
-      };
+  public:
+    typedef qint32 LineType;
+    inline LineRef() = default;
+    inline LineRef(const LineType i) { mLineNumber = i; }
+    inline LineRef(const qint64 i)
+    {
+        if(i <= TYPE_MAX(LineType))
+            mLineNumber = (LineType)i;
+        else
+            mLineNumber = -1;
+    }
+    inline operator LineType() const { return mLineNumber; }
+    inline void operator=(const LineType lineIn) { mLineNumber = lineIn; }
+    inline LineRef& operator+=(const LineType& inLine)
+    {
+        mLineNumber += inLine;
+        return *this;
+    };
 
-      inline void invalidate() { mLineNumber = -1; }
-      inline bool isValid() const { return mLineNumber != -1; }
+    LineRef& operator++()
+    {
+        ++mLineNumber;
+        return *this;
+    };
 
-    private:
-        LineType mLineNumber = -1;
+    LineRef operator++(int)
+    {
+        LineRef line(*this);
+        ++mLineNumber;
+        return line;
+    };
+
+    LineRef& operator--()
+    {
+        --mLineNumber;
+        return *this;
+    };
+
+    LineRef operator--(int)
+    {
+        LineRef line(*this);
+        --mLineNumber;
+        return line;
+    };
+    inline void invalidate() { mLineNumber = -1; }
+    inline bool isValid() const { return mLineNumber != -1; }
+
+  private:
+    LineType mLineNumber = -1;
 };
 
 static_assert(std::is_copy_constructible<LineRef>::value, "LineRef must be copt constuctible.");
@@ -67,4 +93,3 @@ typedef size_t PtrDiffRef;
 typedef LineRef::LineType LineIndex;
 
 #endif
-

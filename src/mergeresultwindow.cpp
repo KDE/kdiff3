@@ -2798,13 +2798,13 @@ void MergeResultWindow::deleteSelection()
 
     setModified();
 
-    int line = 0;
+    LineRef line = 0;
     MergeLineList::iterator mlItFirst;
     MergeEditLineList::iterator melItFirst;
     QString firstLineString;
 
-    int firstLine = -1;
-    int lastLine = -1;
+    LineRef firstLine;
+    LineRef lastLine;
 
     MergeLineList::iterator mlIt;
     for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
@@ -2817,7 +2817,7 @@ void MergeResultWindow::deleteSelection()
 
             if(mel.isEditableText() && m_selection.lineWithin(line))
             {
-                if(firstLine == -1)
+                if(!firstLine.isValid())
                     firstLine = line;
                 lastLine = line;
             }
@@ -2826,7 +2826,7 @@ void MergeResultWindow::deleteSelection()
         }
     }
 
-    if(firstLine == -1)
+    if(!firstLine.isValid())
     {
         return; // Nothing to delete.
     }
