@@ -56,9 +56,9 @@ static GNULineRef too_expensive; /* Edit scripts longer than this are too
 #define SNAKE_LIMIT 20 /* Snakes bigger than this are considered `big'.  */
 
 struct partition {
-    GNULineRef xmid, ymid;  /* Midpoints of this partition.  */
-    bool lo_minimal; /* Nonzero if low half will be analyzed minimally.  */
-    bool hi_minimal; /* Likewise for high half.  */
+    GNULineRef xmid, ymid; /* Midpoints of this partition.  */
+    bool lo_minimal;       /* Nonzero if low half will be analyzed minimally.  */
+    bool hi_minimal;       /* Likewise for high half.  */
 };
 
 /* Find the midpoint of the shortest edit script for a specified
@@ -93,7 +93,7 @@ struct partition {
    It cannot cause incorrect diff output.  */
 
 GNULineRef GnuDiff::diag(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNULineRef ylim, bool find_minimal,
-                  partition *part)
+                         partition *part)
 {
     GNULineRef *const fd = fdiag;        /* Give the compiler a chance. */
     GNULineRef *const bd = bdiag;        /* Additional help for the compiler. */
@@ -106,7 +106,7 @@ GNULineRef GnuDiff::diag(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNUL
     GNULineRef fmin = fmid, fmax = fmid; /* Limits of top-down search. */
     GNULineRef bmin = bmid, bmax = bmid; /* Limits of bottom-up search. */
     GNULineRef c;                        /* Cost. */
-    bool odd = (fmid - bmid) & 1; /* True if southeast corner is on an odd
+    bool odd = (fmid - bmid) & 1;        /* True if southeast corner is on an odd
                    diagonal with respect to the northwest. */
 
     fd[fmid] = xoff;

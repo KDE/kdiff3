@@ -228,7 +228,8 @@ void SourceData::FileData::reset()
 bool SourceData::FileData::readFile(FileAccess& file)
 {
     reset();
-    if(file.fileName().isEmpty()) {
+    if(file.fileName().isEmpty())
+    {
         return true;
     }
 
@@ -255,7 +256,8 @@ bool SourceData::FileData::readFile(FileAccess& file)
 bool SourceData::FileData::readFile(const QString& filename)
 {
     reset();
-    if(filename.isEmpty()) {
+    if(filename.isEmpty())
+    {
         return true;
     }
 
@@ -286,7 +288,8 @@ bool SourceData::saveNormalDataAs(const QString& fileName)
 
 bool SourceData::FileData::writeFile(const QString& filename)
 {
-    if(filename.isEmpty()) {
+    if(filename.isEmpty())
+    {
         return true;
     }
 
@@ -675,7 +678,7 @@ void SourceData::FileData::checkLineForComments(
     bool& bWhite,            // false if this line contains nonwhite characters (in, out)
     bool& bCommentInLine,    // true if any comment is within this line (in, out)
     bool& bStartsOpenComment // true if the line ends within an comment (out)
-    )
+)
 {
     bStartsOpenComment = false;
     for(; i < size; ++i)
@@ -734,7 +737,8 @@ void SourceData::FileData::checkLineForComments(
                     if(!bWhite)
                     {
                         size = i - commentStart;
-                        m_unicodeBuf.replace(commentStart, size, QString(" ").repeated(size));                    }
+                        m_unicodeBuf.replace(commentStart, size, QString(" ").repeated(size));
+                    }
                     return;
                 }
             }
@@ -809,7 +813,7 @@ void SourceData::FileData::removeComments()
 
 bool SourceData::isLineOrBufEnd(const QChar* p, int i, int size)
 {
-    return i >= size            // End of file
+    return i >= size                   // End of file
            || Utils::isEndOfLine(p[i]) // Normal end of line
 
         // No support for Mac-end of line yet, because incompatible with GNU-diff-routines.
@@ -820,7 +824,7 @@ bool SourceData::isLineOrBufEnd(const QChar* p, int i, int size)
 
 // Convert the input file from input encoding to output encoding and write it to the output file.
 bool SourceData::convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
-                                const QString& fileNameOut, QTextCodec* pCodecOut)
+                                     const QString& fileNameOut, QTextCodec* pCodecOut)
 {
     QFile in(fileNameIn);
     if(!in.open(QIODevice::ReadOnly))
@@ -900,9 +904,9 @@ QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, qint64& ski
         We don't need the whole file here just the header.
 ]    */
     if(size <= 5000)
-        s=QByteArray(buf, (int)size);
+        s = QByteArray(buf, (int)size);
     else
-        s=QByteArray(buf, 5000);
+        s = QByteArray(buf, 5000);
 
     int xmlHeaderPos = s.indexOf("<?xml");
     if(xmlHeaderPos >= 0)

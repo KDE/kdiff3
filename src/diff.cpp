@@ -21,9 +21,9 @@
 #include <ctype.h>
 #include <map>
 
-#include <qglobal.h>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <qglobal.h>
 
 int LineData::width(int tabSize) const
 {
@@ -560,9 +560,9 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
         GnuDiff::comparison comparisonInput;
         memset(&comparisonInput, 0, sizeof(comparisonInput));
         comparisonInput.parent = nullptr;
-        comparisonInput.file[0].buffer = p1[0].getLine();                                                //ptr to buffer
+        comparisonInput.file[0].buffer = p1[0].getLine();                                                      //ptr to buffer
         comparisonInput.file[0].buffered = (p1[size1 - 1].getLine() - p1[0].getLine() + p1[size1 - 1].size()); // size of buffer
-        comparisonInput.file[1].buffer = p2[0].getLine();                                                //ptr to buffer
+        comparisonInput.file[1].buffer = p2[0].getLine();                                                      //ptr to buffer
         comparisonInput.file[1].buffered = (p2[size2 - 1].getLine() - p2[0].getLine() + p2[size2 - 1].size()); // size of buffer
 
         gnuDiff.ignore_white_space = GnuDiff::IGNORE_ALL_SPACE; // I think nobody needs anything else ...
@@ -639,8 +639,8 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
 }
 
 bool ManualDiffHelpList::runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList,
-             e_SrcSelector winIdx1, e_SrcSelector winIdx2,
-             Options* pOptions)
+                                 e_SrcSelector winIdx1, e_SrcSelector winIdx2,
+                                 Options* pOptions)
 {
     diffList.clear();
     DiffList diffList2;
@@ -934,7 +934,8 @@ void calcDiff3LineListTrim(
 
         if(line > lineA && i3->getLineA().isValid() && !i3->isEqualAB() && !i3->isEqualAC() &&
            pManualDiffHelpList->isValidMove(i3->getLineA(), (*i3A).getLineB(), A, B) &&
-           pManualDiffHelpList->isValidMove(i3->getLineA(), (*i3A).getLineC(), A, C)) {
+           pManualDiffHelpList->isValidMove(i3->getLineA(), (*i3A).getLineC(), A, C))
+        {
             // Empty space for A. A doesn't match B or C. Move it up.
             (*i3A).setLineA(i3->getLineA());
             i3->getLineA().invalidate();
@@ -976,8 +977,8 @@ void calcDiff3LineListTrim(
         }
 
         if(line > lineC && i3->getLineC().isValid() && !i3->isEqualAC() && !i3->isEqualBC() &&
-           pManualDiffHelpList->isValidMove( i3->getLineC(), (*i3C).getLineA(), C, A) &&
-           pManualDiffHelpList->isValidMove( i3->getLineC(), (*i3C).getLineB(), C, B))
+           pManualDiffHelpList->isValidMove(i3->getLineC(), (*i3C).getLineA(), C, A) &&
+           pManualDiffHelpList->isValidMove(i3->getLineC(), (*i3C).getLineB(), C, B))
         {
             // Empty space for C. C matches neither A nor B. Move C up.
             (*i3C).setLineC(i3->getLineC());
@@ -1003,8 +1004,8 @@ void calcDiff3LineListTrim(
             Diff3LineList::iterator i = lineA > lineB ? i3A : i3B;
             int l = lineA > lineB ? lineA : lineB;
 
-            if(pManualDiffHelpList->isValidMove( i->getLineC(), i3->getLineA(), C, A) &&
-               pManualDiffHelpList->isValidMove( i->getLineC(), i3->getLineB(), C, B))
+            if(pManualDiffHelpList->isValidMove(i->getLineC(), i3->getLineA(), C, A) &&
+               pManualDiffHelpList->isValidMove(i->getLineC(), i3->getLineB(), C, B))
             {
                 (*i).setLineA(i3->getLineA());
                 (*i).setLineB(i3->getLineB());
@@ -1063,8 +1064,8 @@ void calcDiff3LineListTrim(
             Diff3LineList::iterator i = lineB > lineC ? i3B : i3C;
             int l = lineB > lineC ? lineB : lineC;
 
-            if(pManualDiffHelpList->isValidMove( i->getLineA(), i3->getLineB(), A, B) &&
-               pManualDiffHelpList->isValidMove( i->getLineA(), i3->getLineC(), A, C))
+            if(pManualDiffHelpList->isValidMove(i->getLineA(), i3->getLineB(), A, B) &&
+               pManualDiffHelpList->isValidMove(i->getLineA(), i3->getLineC(), A, C))
             {
                 (*i).setLineB(i3->getLineB());
                 (*i).setLineC(i3->getLineC());
@@ -1147,7 +1148,7 @@ void Diff3LineList::calcWhiteDiff3Lines(
 {
     Diff3LineList::iterator i3;
 
-    for(i3=begin(); i3 != end(); ++i3)
+    for(i3 = begin(); i3 != end(); ++i3)
     {
         i3->bWhiteLineA = (!i3->getLineA().isValid() || pldA == nullptr || pldA[i3->getLineA()].whiteLine() || pldA[i3->getLineA()].isPureComment());
         i3->bWhiteLineB = (!i3->getLineA().isValid() || pldB == nullptr || pldB[i3->getLineB()].whiteLine() || pldB[i3->getLineB()].isPureComment());
@@ -1391,8 +1392,8 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
 }
 
 void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, int& lineIdx,
-    DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
-    int& changed, int& changed2) const
+                            DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
+                            int& changed, int& changed2) const
 {
     changed = 0;
     changed2 = 0;
@@ -1401,7 +1402,8 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, int
     bool bBEqualC = this->isEqualBC() || (bWhiteLineB && bWhiteLineC);
 
     Q_ASSERT(winIdx >= A && winIdx <= C);
-    if(winIdx == A) {
+    if(winIdx == A)
+    {
         lineIdx = getLineA();
         pFineDiff1 = pFineAB;
         pFineDiff2 = pFineCA;

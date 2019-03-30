@@ -38,7 +38,7 @@ bool Merger::MergeData::eq()
 bool Merger::MergeData::isEnd()
 {
     return (pDiffList == nullptr || (it == pDiffList->end() && d.nofEquals == 0 &&
-                               (idx == 0 ? d.diff1 == 0 : d.diff2 == 0)));
+                                     (idx == 0 ? d.diff1 == 0 : d.diff2 == 0)));
 }
 
 void Merger::MergeData::update()

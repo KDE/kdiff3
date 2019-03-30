@@ -40,7 +40,7 @@ static_assert(std::is_unsigned<hash_value>::value, "hash_value must be signed.")
    but only while the classes are being computed.
    Afterward, each class is represented by a number.  */
 struct equivclass {
-    GNULineRef next;          /* Next item in this bucket.  */
+    GNULineRef next;   /* Next item in this bucket.  */
     hash_value hash;   /* Hash of lines in this class.  */
     const QChar *line; /* A line that fits this class.  */
     size_t length;     /* That line's length, not counting its newline.  */
@@ -163,42 +163,42 @@ void GnuDiff::find_and_hash_each_line(file_data *current)
         if(ignore_case)
             switch(ignore_white_space)
             {
-            case IGNORE_ALL_SPACE:
-                while(p < bufend && !Utils::isEndOfLine(c = *p))
-                {
-                    if(!(isWhite(c) || (bIgnoreNumbers && (c.isDigit() || c == '-' || c == '.'))))
-                        h = HASH(h, c.toLower().unicode());
-                    ++p;
-                }
-                break;
+                case IGNORE_ALL_SPACE:
+                    while(p < bufend && !Utils::isEndOfLine(c = *p))
+                    {
+                        if(!(isWhite(c) || (bIgnoreNumbers && (c.isDigit() || c == '-' || c == '.'))))
+                            h = HASH(h, c.toLower().unicode());
+                        ++p;
+                    }
+                    break;
 
-            default:
-                while(p < bufend && !Utils::isEndOfLine(c = *p))
-                {
-                    h = HASH(h, c.toLower().unicode());
-                    ++p;
-                }
-                break;
+                default:
+                    while(p < bufend && !Utils::isEndOfLine(c = *p))
+                    {
+                        h = HASH(h, c.toLower().unicode());
+                        ++p;
+                    }
+                    break;
             }
         else
             switch(ignore_white_space)
             {
-            case IGNORE_ALL_SPACE:
-                while(p < bufend && !Utils::isEndOfLine(c = *p))
-                {
-                    if(!(isWhite(c) || (bIgnoreNumbers && (c.isDigit() || c == '-' || c == '.'))))
-                        h = HASH(h, c.unicode());
-                    ++p;
-                }
-                break;
+                case IGNORE_ALL_SPACE:
+                    while(p < bufend && !Utils::isEndOfLine(c = *p))
+                    {
+                        if(!(isWhite(c) || (bIgnoreNumbers && (c.isDigit() || c == '-' || c == '.'))))
+                            h = HASH(h, c.unicode());
+                        ++p;
+                    }
+                    break;
 
-            default:
-                while(p < bufend && !Utils::isEndOfLine(c = *p))
-                {
-                    h = HASH(h, c.unicode());
-                    ++p;
-                }
-                break;
+                default:
+                    while(p < bufend && !Utils::isEndOfLine(c = *p))
+                    {
+                        h = HASH(h, c.unicode());
+                        ++p;
+                    }
+                    break;
             }
 
         bucket = &buckets[h % nbuckets];

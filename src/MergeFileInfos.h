@@ -22,20 +22,38 @@
 
 enum e_MergeOperation
 {
-   eTitleId,
-   eNoOperation,
-   // Operations in sync mode (with only two directories):
-   eCopyAToB, eCopyBToA, eDeleteA, eDeleteB, eDeleteAB, eMergeToA, eMergeToB, eMergeToAB,
+    eTitleId,
+    eNoOperation,
+    // Operations in sync mode (with only two directories):
+    eCopyAToB,
+    eCopyBToA,
+    eDeleteA,
+    eDeleteB,
+    eDeleteAB,
+    eMergeToA,
+    eMergeToB,
+    eMergeToAB,
 
-   // Operations in merge mode (with two or three directories)
-   eCopyAToDest, eCopyBToDest, eCopyCToDest, eDeleteFromDest, eMergeABCToDest,
-   eMergeABToDest,
-   eConflictingFileTypes, // Error
-   eChangedAndDeleted,    // Error
-   eConflictingAges       // Equal age but files are not!
+    // Operations in merge mode (with two or three directories)
+    eCopyAToDest,
+    eCopyBToDest,
+    eCopyCToDest,
+    eDeleteFromDest,
+    eMergeABCToDest,
+    eMergeABToDest,
+    eConflictingFileTypes, // Error
+    eChangedAndDeleted,    // Error
+    eConflictingAges       // Equal age but files are not!
 };
 
-enum e_Age { eNew, eMiddle, eOld, eNotThere, eAgeEnd };
+enum e_Age
+{
+    eNew,
+    eMiddle,
+    eOld,
+    eNotThere,
+    eAgeEnd
+};
 
 enum e_OperationStatus
 {
@@ -124,10 +142,10 @@ class MergeFileInfos
     FileAccess* m_pFileInfoC;
 
     QSharedPointer<DirectoryInfo> m_dirInfo;
-    
-    TotalDiffStatus m_totalDiffStatus;
-  public:
 
+    TotalDiffStatus m_totalDiffStatus;
+
+  public:
     e_MergeOperation m_eMergeOperation;
     e_OperationStatus m_eOpStatus;
     e_Age m_ageA;
