@@ -475,3 +475,36 @@ void MergeFileInfos::updateAge()
         }
     }
 }
+
+QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi)
+{
+    ts << "{\n";
+    ValueMap vm;
+    vm.writeEntry("SubPath", mfi.subPath());
+    vm.writeEntry("ExistsInA", mfi.existsInA());
+    vm.writeEntry("ExistsInB", mfi.existsInB());
+    vm.writeEntry("ExistsInC", mfi.existsInC());
+    vm.writeEntry("EqualAB", mfi.isEqualAB());
+    vm.writeEntry("EqualAC", mfi.isEqualAC());
+    vm.writeEntry("EqualBC", mfi.isEqualBC());
+
+    vm.writeEntry("MergeOperation", (int)mfi.getOperation());
+    vm.writeEntry("DirA", mfi.isDirA());
+    vm.writeEntry("DirB", mfi.isDirB());
+    vm.writeEntry("DirC", mfi.isDirC());
+    vm.writeEntry("LinkA", mfi.isLinkA());
+    vm.writeEntry("LinkB", mfi.isLinkB());
+    vm.writeEntry("LinkC", mfi.isLinkC());
+    vm.writeEntry("OperationComplete", !mfi.isOperationRunning());
+
+    vm.writeEntry("AgeA", (int)mfi.getAgeA());
+    vm.writeEntry("AgeB", (int)mfi.getAgeB());
+    vm.writeEntry("AgeC", (int)mfi.getAgeC());
+    vm.writeEntry("ConflictingAges", mfi.m_bConflictingAges); // Equal age but files are not!
+
+    vm.save(ts);
+
+    ts << "}\n";
+
+    return ts;
+}

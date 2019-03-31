@@ -176,6 +176,8 @@ class MergeFileInfos
     bool m_bConflictingAges; // Equal age but files are not!
 };
 
+QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi);
+
 class MfiCompare
 {
     Qt::SortOrder mOrder;
