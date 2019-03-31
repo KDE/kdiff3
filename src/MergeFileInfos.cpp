@@ -441,3 +441,37 @@ bool MergeFileInfos::fastFileComparison(
     bEqual = true;
     return bEqual;
 }
+
+void MergeFileInfos::updateAge()
+{
+    if(isDirA() || isDirB() || isDirC())
+    {
+        setAgeA(eNotThere);
+        setAgeB(eNotThere);
+        setAgeC(eNotThere);
+        e_Age age = eNew;
+        if(existsInC())
+        {
+            setAgeC((e_Age)age);
+            if(m_bEqualAC) setAgeA((e_Age)age);
+            if(m_bEqualBC) setAgeB((e_Age)age);
+            age = eMiddle;
+        }
+        if(existsInB() && getAgeB() == eNotThere)
+        {
+            setAgeB((e_Age)age);
+            if(m_bEqualAB) setAgeA((e_Age)age);
+            age = eOld;
+        }
+        if(existsInA() && getAgeA() == eNotThere)
+        {
+            setAgeA((e_Age)age);
+        }
+        if(getAgeA() != eOld && getAgeB() != eOld && getAgeC() != eOld)
+        {
+            if(getAgeA() == eMiddle) setAgeA(eOld);
+            if(getAgeB() == eMiddle) setAgeB(eOld);
+            if(getAgeC() == eMiddle) setAgeC(eOld);
+        }
+    }
+}

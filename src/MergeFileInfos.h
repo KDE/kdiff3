@@ -126,18 +126,19 @@ class MergeFileInfos
     inline void setOpStatus(const e_OperationStatus eOpStatus) { m_eOpStatus = eOpStatus; }
 
     inline e_Age getAgeA() const { return m_ageA; }
-    inline void setAgeA(const e_Age inAge) { m_ageA = inAge; }
-
     inline e_Age getAgeB() const { return m_ageB; }
-    inline void setAgeB(const e_Age inAge) { m_ageB = inAge; }
-
     inline e_Age getAgeC() const { return m_ageC; }
-    inline void setAgeC(const e_Age inAge) { m_ageC = inAge; }
 
-    bool compareFilesAndCalcAges(QStringList& errors, Options* const pOptions, DirectoryMergeWindow*  pDMW);
+    bool compareFilesAndCalcAges(QStringList& errors, Options* const pOptions, DirectoryMergeWindow* pDMW);
+
+    void updateAge();
 
   private:
     bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status, Options* const pOptions);
+    inline void setAgeA(const e_Age inAge) { m_ageA = inAge; }
+    inline void setAgeB(const e_Age inAge) { m_ageB = inAge; }
+    inline void setAgeC(const e_Age inAge) { m_ageC = inAge; }
+
     MergeFileInfos* m_pParent;
     QList<MergeFileInfos*> m_children;
 

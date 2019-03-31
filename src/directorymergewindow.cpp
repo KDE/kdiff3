@@ -194,8 +194,6 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     }
     MergeFileInfos* rootMFI() const { return m_pRoot; }
 
-    static void setPixmaps(MergeFileInfos& mfi, bool);
-
     Options* m_pOptions;
 
     void calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
@@ -1277,40 +1275,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setAllMergeOperations(e_
     }
 }
 
-void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setPixmaps(MergeFileInfos& mfi, bool)
-{
-    if(mfi.isDirA() || mfi.isDirB() || mfi.isDirC())
-    {
-        mfi.setAgeA(eNotThere);
-        mfi.setAgeB(eNotThere);
-        mfi.setAgeC(eNotThere);
-        int age = eNew;
-        if(mfi.existsInC())
-        {
-            mfi.setAgeC((e_Age)age);
-            if(mfi.m_bEqualAC) mfi.setAgeA((e_Age)age);
-            if(mfi.m_bEqualBC) mfi.setAgeB((e_Age)age);
-            ++age;
-        }
-        if(mfi.existsInB() && mfi.getAgeB() == eNotThere)
-        {
-            mfi.setAgeB((e_Age)age);
-            if(mfi.m_bEqualAB) mfi.setAgeA((e_Age)age);
-            ++age;
-        }
-        if(mfi.existsInA() && mfi.getAgeA() == eNotThere)
-        {
-            mfi.setAgeA((e_Age)age);
-        }
-        if(mfi.getAgeA() != eOld && mfi.getAgeB() != eOld && mfi.getAgeC() != eOld)
-        {
-            if(mfi.getAgeA() == eMiddle) mfi.setAgeA(eOld);
-            if(mfi.getAgeB() == eMiddle) mfi.setAgeB(eOld);
-            if(mfi.getAgeC() == eMiddle) mfi.setAgeC(eOld);
-        }
-    }
-}
-
 QModelIndex DirectoryMergeWindow::DirectoryMergeWindowPrivate::nextSibling(const QModelIndex& mi)
 {
     QModelIndex miParent = mi.parent();
@@ -1366,8 +1330,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
 
     q->setRootIsDecorated(true);
 
-    bool bCheckC = isThreeWay();
-
     t_fileMergeMap::iterator j;
     int nrOfFiles = m_fileMergeMap.size();
     int currentIdx = 1;
@@ -1419,7 +1381,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
             //   // Equality for parent dirs is set in updateFileVisibilities()
         }
 
-        setPixmaps(mfi, bCheckC);
+        mfi.updateAge();
     }
 
     if(errors.size() > 0)
@@ -2994,7 +2956,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
                 }
 
                 if(bChange)
-                    DirectoryMergeWindow::DirectoryMergeWindowPrivate::setPixmaps(*pMFI, bThreeDirs);
+                    pMFI->updateAge();
             }
             bool bExistsEverywhere = pMFI->existsInA() && pMFI->existsInB() && (pMFI->existsInC() || !bThreeDirs);
             int existCount = int(pMFI->existsInA()) + int(pMFI->existsInB()) + int(pMFI->existsInC());
@@ -3030,7 +2992,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
                     }
 
                     if(bChange)
-                        DirectoryMergeWindow::DirectoryMergeWindowPrivate::setPixmaps(*p2, bThreeDirs);
+                        p2->updateAge();
                     else
                         break;
 
