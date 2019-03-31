@@ -136,6 +136,13 @@ class MergeFileInfos
 
     void updateAge();
 
+    inline void startSimOp() { m_bSimOpComplete = false; }
+    inline bool isSimOpRunning() const { return !m_bOperationComplete; }
+    inline void endSimOp() { m_bSimOpComplete = true; }
+
+    inline void startOperation() { m_bOperationComplete = false; };
+    inline bool isOperationRunning() const { return !m_bOperationComplete; }
+    inline void endOperation() { m_bOperationComplete = true; };
   private:
     bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status, Options* const pOptions);
     inline void setAgeA(const e_Age inAge) { m_ageA = inAge; }
@@ -159,9 +166,9 @@ class MergeFileInfos
     e_Age m_ageB;
     e_Age m_ageC;
 
-  public:
     bool m_bOperationComplete;
     bool m_bSimOpComplete;
+  public:
 
     bool m_bEqualAB;
     bool m_bEqualAC;

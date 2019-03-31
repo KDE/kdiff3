@@ -1850,7 +1850,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setMergeOperation(const 
 
     if(eMergeOp != pMFI->getOperation())
     {
-        pMFI->m_bOperationComplete = false;
+        pMFI->startOperation();
         setOpStatus(mi, eOpStatusNone);
     }
 
@@ -1980,7 +1980,7 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
             }
         }
         d->setOpStatus(mi, eOpStatusDone);
-        pMFI->m_bOperationComplete = true;
+        pMFI->endOperation();
         if(d->m_mergeItemList.size() == 1)
         {
             d->m_mergeItemList.clear();
@@ -2001,10 +2001,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::canContinue()
     {
         QModelIndex mi = (m_mergeItemList.empty() || m_currentIndexForOperation == m_mergeItemList.end()) ? QModelIndex() : *m_currentIndexForOperation;
         MergeFileInfos* pMFI = getMFI(mi);
-        if(pMFI && !pMFI->m_bOperationComplete)
+        if(pMFI && pMFI->isOperationRunning())
         {
             setOpStatus(mi, eOpStatusNotSaved);
-            pMFI->m_bOperationComplete = true;
+            pMFI->endOperation();
             if(m_mergeItemList.size() == 1)
             {
                 m_mergeItemList.clear();
@@ -2131,7 +2131,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareMergeStart(const 
     for(QModelIndex mi = miBegin; mi != miEnd; mi = treeIterator(mi))
     {
         MergeFileInfos* pMFI = getMFI(mi);
-        if(pMFI && !pMFI->m_bOperationComplete)
+        if(pMFI && pMFI->isOperationRunning())
         {
             m_mergeItemList.push_back(mi);
             QString errorText;
@@ -2243,9 +2243,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
     {
         MergeFileInfos* pMFI = getMFI(*i);
         ++nrOfItems;
-        if(pMFI->m_bOperationComplete)
+        if(!pMFI->isOperationRunning())
             ++nrOfCompletedItems;
-        if(pMFI->m_bSimOpComplete)
+        if(!pMFI->isSimOpRunning())
             ++nrOfCompletedSimItems;
     }
 
@@ -2294,17 +2294,17 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
             {
                 if(rowCount(miCurrent) == 0)
                 {
-                    pMFI->m_bSimOpComplete = true;
+                    pMFI->endSimOp();
                 }
             }
             else
             {
                 if(rowCount(miCurrent) == 0)
                 {
-                    if(!pMFI->m_bOperationComplete)
+                    if(pMFI->isOperationRunning())
                     {
                         setOpStatus(miCurrent, bSkipItem ? eOpStatusSkipped : eOpStatusDone);
-                        pMFI->m_bOperationComplete = true;
+                        pMFI->endOperation();
                         bSkipItem = false;
                     }
                 }
@@ -2331,7 +2331,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
                     for(int childIdx = 0; childIdx < rowCount(miParent); ++childIdx)
                     {
                         pMFI = getMFI(index(childIdx, 0, miParent));
-                        if((!bSim && !pMFI->m_bOperationComplete) || (bSim && pMFI->m_bSimOpComplete))
+                        if((!bSim && pMFI->isOperationRunning()) || (bSim && !pMFI->isSimOpRunning()))
                         {
                             bDone = false;
                             break;
@@ -2341,11 +2341,11 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
                     {
                         pMFI = getMFI(miParent);
                         if(bSim)
-                            pMFI->m_bSimOpComplete = bDone;
+                            pMFI->endSimOp();
                         else
                         {
                             setOpStatus(miParent, eOpStatusDone);
-                            pMFI->m_bOperationComplete = bDone;
+                            pMFI->endOperation();
                         }
                     }
                     miParent = miParent.parent();
@@ -2370,7 +2370,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
                 QModelIndex mi = rowCount() > 0 ? index(0, 0, QModelIndex()) : QModelIndex();
                 for(; mi.isValid(); mi = treeIterator(mi))
                 {
-                    getMFI(mi)->m_bSimOpComplete = false;
+                    getMFI(mi)->startSimOp();
                 }
                 m_pStatusInfo->setWindowTitle(i18n("Simulated merge complete: Check if you agree with the proposed operations."));
                 m_pStatusInfo->exec();
@@ -2870,7 +2870,7 @@ QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi)
     vm.writeEntry("LinkA", mfi.isLinkA());
     vm.writeEntry("LinkB", mfi.isLinkB());
     vm.writeEntry("LinkC", mfi.isLinkC());
-    vm.writeEntry("OperationComplete", mfi.m_bOperationComplete);
+    vm.writeEntry("OperationComplete", !mfi.isOperationRunning());
 
     vm.writeEntry("AgeA", (int)mfi.getAgeA());
     vm.writeEntry("AgeB", (int)mfi.getAgeB());
