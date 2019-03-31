@@ -1200,10 +1200,10 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
     QString key;
     for(QStringList::iterator keyIt = keyOrderList.begin(); keyIt != keyOrderList.end(); ++keyIt)
     {
-        if((*keyIt).isEmpty())
+        if(keyIt->isEmpty())
             continue;
         bool bOk = false;
-        int groupIdx = (*keyIt).toInt(&bOk);
+        int groupIdx = keyIt->toInt(&bOk);
         if(!bOk || groupIdx < 0 || groupIdx > (int)parenthesesGroupList.size())
             continue;
         QString s = matchedRegExpr.cap(groupIdx);

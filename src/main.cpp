@@ -61,8 +61,8 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
         QStringList ignorableOptions = sl.front().split(';');
         for(QStringList::iterator i = ignorableOptions.begin(); i != ignorableOptions.end(); ++i)
         {
-            (*i).remove('-');
-            if(!(*i).isEmpty())
+            i->remove('-');
+            if(!i->isEmpty())
             {
                 if(i->length() == 1) {
                     cmdLineParser->addOption(QCommandLineOption(QStringList() << *i << QLatin1String("ignore"), i18n("Ignored. (User defined.)")));

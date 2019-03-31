@@ -254,8 +254,8 @@ void KDiff3FileItemAction::slotMergeThreeWay()
    if ( m_list.count() > 0 && s_pHistory &&  s_pHistory->count()>=2 )
    {
       QStringList args;
-      args << (*s_pHistory).at(1);
-      args << (*s_pHistory).at(0);
+      args << s_pHistory->at(1);
+      args << s_pHistory->at(0);
       args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
       args << ("-o" + m_list.first().toDisplayString(QUrl::PreferLocalFile));
       KProcess::startDetached ("kdiff3", args);
