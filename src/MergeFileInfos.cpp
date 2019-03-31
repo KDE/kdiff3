@@ -12,8 +12,11 @@
 #include "MergeFileInfos.h"
 #include "DirectoryInfo.h"
 #include "fileaccess.h"
+#include "directorymergewindow.h"
 
 #include <QString>
+
+#include <KLocalizedString>
 
 MergeFileInfos::MergeFileInfos()
 {
@@ -40,7 +43,6 @@ MergeFileInfos::~MergeFileInfos()
     m_children.clear();
 }
 
-//bool operator>( const MergeFileInfos& );
 QString MergeFileInfos::subPath() const
 {
     if(m_pFileInfoA && m_pFileInfoA->exists())
@@ -130,4 +132,312 @@ QString MergeFileInfos::fullNameDest() const
         return fullNameB();
     else
         return m_dirInfo->destDir().absoluteFilePath() + '/' + subPath();
+}
+
+bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, Options* const pOptions, DirectoryMergeWindow* pDMW)
+{
+    std::map<QDateTime, int> dateMap;
+
+    if(existsInA())
+    {
+        dateMap[getFileInfoA()->lastModified()] = 0;
+    }
+    if(existsInB())
+    {
+        dateMap[getFileInfoB()->lastModified()] = 1;
+    }
+    if(existsInC())
+    {
+        dateMap[getFileInfoC()->lastModified()] = 2;
+    }
+
+    if(pOptions->m_bDmFullAnalysis)
+    {
+        if((existsInA() && isDirA()) || (existsInB() && isDirB()) || (existsInC() && isDirC()))
+        {
+            // If any input is a directory, don't start any comparison.
+            m_bEqualAB = existsInA() && existsInB();
+            m_bEqualAC = existsInA() && existsInC();
+            m_bEqualBC = existsInB() && existsInC();
+        }
+        else
+        {
+            emit pDMW->startDiffMerge(
+                existsInA() ? getFileInfoA()->absoluteFilePath() : QString(""),
+                existsInB() ? getFileInfoB()->absoluteFilePath() : QString(""),
+                existsInC() ? getFileInfoC()->absoluteFilePath() : QString(""),
+                "",
+                "", "", "", &diffStatus());
+            int nofNonwhiteConflicts = diffStatus().getNonWhitespaceConflicts();
+
+            if(pOptions->m_bDmWhiteSpaceEqual && nofNonwhiteConflicts == 0)
+            {
+                m_bEqualAB = existsInA() && existsInB();
+                m_bEqualAC = existsInA() && existsInC();
+                m_bEqualBC = existsInB() && existsInC();
+            }
+            else
+            {
+                m_bEqualAB = diffStatus().isBinaryEqualAB();
+                m_bEqualBC = diffStatus().isBinaryEqualBC();
+                m_bEqualAC = diffStatus().isBinaryEqualAC();
+            }
+        }
+    }
+    else
+    {
+        bool bError = false;
+        QString eqStatus;
+        if(existsInA() && existsInB())
+        {
+            if(isDirA())
+                m_bEqualAB = true;
+            else
+                m_bEqualAB = fastFileComparison(*getFileInfoA(), *getFileInfoB(), bError, eqStatus, pOptions);
+        }
+        if(existsInA() && existsInC())
+        {
+            if(isDirA())
+                m_bEqualAC = true;
+            else
+                m_bEqualAC = fastFileComparison(*getFileInfoA(), *getFileInfoC(), bError, eqStatus, pOptions);
+        }
+        if(existsInB() && existsInC())
+        {
+            if(m_bEqualAB && m_bEqualAC)
+                m_bEqualBC = true;
+            else
+            {
+                if(isDirB())
+                    m_bEqualBC = true;
+                else
+                    m_bEqualBC = fastFileComparison(*getFileInfoB(), *getFileInfoC(), bError, eqStatus, pOptions);
+            }
+        }
+        if(bError)
+        {
+            //Limit size of error list in memmory.
+            if(errors.size() < 30)
+                errors.append(eqStatus);
+            return false;
+        }
+    }
+
+    if(isLinkA() != isLinkB()) m_bEqualAB = false;
+    if(isLinkA() != isLinkC()) m_bEqualAC = false;
+    if(isLinkB() != isLinkC()) m_bEqualBC = false;
+
+    if(isDirA() != isDirB()) m_bEqualAB = false;
+    if(isDirA() != isDirC()) m_bEqualAC = false;
+    if(isDirB() != isDirC()) m_bEqualBC = false;
+
+    Q_ASSERT(eNew == 0 && eMiddle == 1 && eOld == 2);
+
+    // The map automatically sorts the keys.
+    int age = eNew;
+    std::map<QDateTime, int>::reverse_iterator i;
+    for(i = dateMap.rbegin(); i != dateMap.rend(); ++i)
+    {
+        int n = i->second;
+        if(n == 0 && getAgeA() == eNotThere)
+        {
+            setAgeA((e_Age)age);
+            ++age;
+            if(m_bEqualAB)
+            {
+                setAgeB(getAgeA());
+                ++age;
+            }
+            if(m_bEqualAC)
+            {
+                setAgeC(getAgeA());
+                ++age;
+            }
+        }
+        else if(n == 1 && getAgeB() == eNotThere)
+        {
+            setAgeB((e_Age)age);
+            ++age;
+            if(m_bEqualAB)
+            {
+                setAgeA(getAgeB());
+                ++age;
+            }
+            if(m_bEqualBC)
+            {
+                setAgeC(getAgeB());
+                ++age;
+            }
+        }
+        else if(n == 2 && getAgeC() == eNotThere)
+        {
+            setAgeC((e_Age)age);
+            ++age;
+            if(m_bEqualAC)
+            {
+                setAgeA(getAgeC());
+                ++age;
+            }
+            if(m_bEqualBC)
+            {
+                setAgeB(getAgeC());
+                ++age;
+            }
+        }
+    }
+
+    // The checks below are necessary when the dates of the file are equal but the
+    // files are not. One wouldn't expect this to happen, yet it happens sometimes.
+    if(existsInC() && getAgeC() == eNotThere)
+    {
+        setAgeC((e_Age)age);
+        ++age;
+        m_bConflictingAges = true;
+    }
+    if(existsInB() && getAgeB() == eNotThere)
+    {
+        setAgeB((e_Age)age);
+        ++age;
+        m_bConflictingAges = true;
+    }
+    if(existsInA() && getAgeA() == eNotThere)
+    {
+        setAgeA((e_Age)age);
+        ++age;
+        m_bConflictingAges = true;
+    }
+
+    if(getAgeA() != eOld && getAgeB() != eOld && getAgeC() != eOld)
+    {
+        if(getAgeA() == eMiddle) setAgeA(eOld);
+        if(getAgeB() == eMiddle) setAgeB(eOld);
+        if(getAgeC() == eMiddle) setAgeC(eOld);
+    }
+
+    return true;
+}
+
+bool MergeFileInfos::fastFileComparison(
+    FileAccess& fi1, FileAccess& fi2,
+    bool& bError, QString& status, Options* const pOptions)
+{
+    ProgressProxy pp;
+    bool bEqual = false;
+
+    status = "";
+    bError = true;
+
+    if(fi1.isNormal() != fi2.isNormal())
+    {
+        status = i18n("Unable to compare non-normal file with normal file.");
+        return false;
+    }
+
+    if(!fi1.isNormal())
+    {
+        bError = false;
+        return false;
+    }
+
+    if(!pOptions->m_bDmFollowFileLinks)
+    {
+        if(fi1.isSymLink() != fi2.isSymLink())
+        {
+            status = i18n("Mix of links and normal files.");
+            return bEqual;
+        }
+        else if(fi1.isSymLink() && fi2.isSymLink())
+        {
+            bError = false;
+            bEqual = fi1.readLink() == fi2.readLink();
+            status = i18n("Link: ");
+            return bEqual;
+        }
+    }
+
+    if(fi1.size() != fi2.size())
+    {
+        bError = false;
+        bEqual = false;
+        status = i18n("Size. ");
+        return bEqual;
+    }
+    else if(pOptions->m_bDmTrustSize)
+    {
+        bEqual = true;
+        bError = false;
+        return bEqual;
+    }
+
+    if(pOptions->m_bDmTrustDate)
+    {
+        bEqual = (fi1.lastModified() == fi2.lastModified() && fi1.size() == fi2.size());
+        bError = false;
+        status = i18n("Date & Size: ");
+        return bEqual;
+    }
+
+    if(pOptions->m_bDmTrustDateFallbackToBinary)
+    {
+        bEqual = (fi1.lastModified() == fi2.lastModified() && fi1.size() == fi2.size());
+        if(bEqual)
+        {
+            bError = false;
+            status = i18n("Date & Size: ");
+            return bEqual;
+        }
+    }
+
+    std::vector<char> buf1(100000);
+    std::vector<char> buf2(buf1.size());
+
+    if(!fi1.open(QIODevice::ReadOnly))
+    {
+        status = fi1.errorString();
+        return bEqual;
+    }
+
+    if(!fi2.open(QIODevice::ReadOnly))
+    {
+        status = fi2.errorString();
+        return bEqual;
+    }
+
+    pp.setInformation(i18n("Comparing file..."), 0, false);
+    typedef qint64 t_FileSize;
+    t_FileSize fullSize = fi1.size();
+    t_FileSize sizeLeft = fullSize;
+
+    pp.setMaxNofSteps(fullSize / buf1.size());
+
+    while(sizeLeft > 0 && !pp.wasCancelled())
+    {
+        qint64 len = std::min(sizeLeft, (t_FileSize)buf1.size());
+        if(len != fi1.read(&buf1[0], len))
+        {
+            status = fi1.errorString();
+            return bEqual;
+        }
+
+        if(len != fi2.read(&buf2[0], len))
+        {
+            status = fi2.errorString();
+            ;
+            return bEqual;
+        }
+
+        if(memcmp(&buf1[0], &buf2[0], len) != 0)
+        {
+            bError = false;
+            return bEqual;
+        }
+        sizeLeft -= len;
+        //pp.setCurrent(double(fullSize-sizeLeft)/fullSize, false );
+        pp.step();
+    }
+
+    // If the program really arrives here, then the files are really equal.
+    bError = false;
+    bEqual = true;
+    return bEqual;
 }

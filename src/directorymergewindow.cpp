@@ -118,7 +118,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     friend class DirMergeItem;
 
   public:
-    DirectoryMergeWindow* q;
+    DirectoryMergeWindow* q;//FIXME: use inteligable name.
     explicit DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW)
     {
         q = pDMW;
@@ -214,9 +214,6 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
 
     void scanDirectory(const QString& dirName, t_DirectoryList& dirList);
     void scanLocalDirectory(const QString& dirName, t_DirectoryList& dirList);
-    bool fastFileComparison(FileAccess& fi1, FileAccess& fi2,
-                            bool& bError, QString& status);
-    bool compareFilesAndCalcAges(MergeFileInfos& mfi, QStringList& errors);
 
     void setMergeOperation(const QModelIndex& mi, e_MergeOperation eMergeOp, bool bRecursive = true);
     bool isDir(const QModelIndex& mi);
@@ -623,7 +620,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
     }
 };
 
-DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, Options* pOptions)
+DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, Options* pOptions, KDiff3App* const app)
     : QTreeView(pParent)
 {
     d = new DirectoryMergeWindowPrivate(this);
@@ -633,6 +630,7 @@ DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, Options* pOptions)
     connect(this, &DirectoryMergeWindow::expanded, this, &DirectoryMergeWindow::onExpanded);
 
     d->m_pOptions = pOptions;
+    mApp = app;
 
     setSortingEnabled(true);
 }
@@ -657,130 +655,6 @@ bool DirectoryMergeWindow::isSyncMode()
 bool DirectoryMergeWindow::isScanning()
 {
     return d->m_bScanning;
-}
-
-bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
-    FileAccess& fi1, FileAccess& fi2,
-    bool& bError, QString& status)
-{
-    ProgressProxy pp;
-    bool bEqual = false;
-
-    status = "";
-    bError = true;
-
-    if(fi1.isNormal() != fi2.isNormal())
-    {
-        status = i18n("Unable to compare non-normal file with normal file.");
-        return false;
-    }
-
-    if(!fi1.isNormal())
-    {
-        bError = false;
-        return false;
-    }
-
-    if(!m_bFollowFileLinks)
-    {
-        if(fi1.isSymLink() != fi2.isSymLink())
-        {
-            status = i18n("Mix of links and normal files.");
-            return bEqual;
-        }
-        else if(fi1.isSymLink() && fi2.isSymLink())
-        {
-            bError = false;
-            bEqual = fi1.readLink() == fi2.readLink();
-            status = i18n("Link: ");
-            return bEqual;
-        }
-    }
-
-    if(fi1.size() != fi2.size())
-    {
-        bError = false;
-        bEqual = false;
-        status = i18n("Size. ");
-        return bEqual;
-    }
-    else if(m_pOptions->m_bDmTrustSize)
-    {
-        bEqual = true;
-        bError = false;
-        return bEqual;
-    }
-
-    if(m_pOptions->m_bDmTrustDate)
-    {
-        bEqual = (fi1.lastModified() == fi2.lastModified() && fi1.size() == fi2.size());
-        bError = false;
-        status = i18n("Date & Size: ");
-        return bEqual;
-    }
-
-    if(m_pOptions->m_bDmTrustDateFallbackToBinary)
-    {
-        bEqual = (fi1.lastModified() == fi2.lastModified() && fi1.size() == fi2.size());
-        if(bEqual)
-        {
-            bError = false;
-            status = i18n("Date & Size: ");
-            return bEqual;
-        }
-    }
-
-    std::vector<char> buf1(100000);
-    std::vector<char> buf2(buf1.size());
-
-    if(!fi1.open(QIODevice::ReadOnly))
-    {
-        status = fi1.errorString();
-        return bEqual;
-    }
-
-    if(!fi2.open(QIODevice::ReadOnly))
-    {
-        status = fi2.errorString();
-        return bEqual;
-    }
-
-    pp.setInformation(i18n("Comparing file..."), 0, false);
-    typedef qint64 t_FileSize;
-    t_FileSize fullSize = fi1.size();
-    t_FileSize sizeLeft = fullSize;
-
-    pp.setMaxNofSteps(fullSize / buf1.size());
-
-    while(sizeLeft > 0 && !pp.wasCancelled())
-    {
-        qint64 len = std::min(sizeLeft, (t_FileSize)buf1.size());
-        if(len != fi1.read(&buf1[0], len))
-        {
-            status = fi1.errorString();
-            return bEqual;
-        }
-
-        if(len != fi2.read(&buf2[0], len))
-        {
-            status = fi2.errorString();;
-            return bEqual;
-        }
-
-        if(memcmp(&buf1[0], &buf2[0], len) != 0)
-        {
-            bError = false;
-            return bEqual;
-        }
-        sizeLeft -= len;
-        //pp.setCurrent(double(fullSize-sizeLeft)/fullSize, false );
-        pp.step();
-    }
-
-    // If the program really arrives here, then the files are really equal.
-    bError = false;
-    bEqual = true;
-    return bEqual;
 }
 
 int DirectoryMergeWindow::totalColumnWidth()
@@ -1403,189 +1277,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setAllMergeOperations(e_
     }
 }
 
-bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(MergeFileInfos& mfi, QStringList& errors)
-{
-    std::map<QDateTime, int> dateMap;
-
-    if(mfi.existsInA())
-    {
-        dateMap[mfi.getFileInfoA()->lastModified()] = 0;
-    }
-    if(mfi.existsInB())
-    {
-        dateMap[mfi.getFileInfoB()->lastModified()] = 1;
-    }
-    if(mfi.existsInC())
-    {
-        dateMap[mfi.getFileInfoC()->lastModified()] = 2;
-    }
-
-    if(m_pOptions->m_bDmFullAnalysis)
-    {
-        if((mfi.existsInA() && mfi.isDirA()) || (mfi.existsInB() && mfi.isDirB()) || (mfi.existsInC() && mfi.isDirC()))
-        {
-            // If any input is a directory, don't start any comparison.
-            mfi.m_bEqualAB = mfi.existsInA() && mfi.existsInB();
-            mfi.m_bEqualAC = mfi.existsInA() && mfi.existsInC();
-            mfi.m_bEqualBC = mfi.existsInB() && mfi.existsInC();
-        }
-        else
-        {
-            emit q->startDiffMerge(
-                mfi.existsInA() ? mfi.getFileInfoA()->absoluteFilePath() : QString(""),
-                mfi.existsInB() ? mfi.getFileInfoB()->absoluteFilePath() : QString(""),
-                mfi.existsInC() ? mfi.getFileInfoC()->absoluteFilePath() : QString(""),
-                "",
-                "", "", "", &mfi.diffStatus());
-            int nofNonwhiteConflicts = mfi.diffStatus().getNonWhitespaceConflicts();
-
-            if(m_pOptions->m_bDmWhiteSpaceEqual && nofNonwhiteConflicts == 0)
-            {
-                mfi.m_bEqualAB = mfi.existsInA() && mfi.existsInB();
-                mfi.m_bEqualAC = mfi.existsInA() && mfi.existsInC();
-                mfi.m_bEqualBC = mfi.existsInB() && mfi.existsInC();
-            }
-            else
-            {
-                mfi.m_bEqualAB = mfi.diffStatus().isBinaryEqualAB();
-                mfi.m_bEqualBC = mfi.diffStatus().isBinaryEqualBC();
-                mfi.m_bEqualAC = mfi.diffStatus().isBinaryEqualAC();
-            }
-        }
-    }
-    else
-    {
-        bool bError = false;
-        QString eqStatus;
-        if(mfi.existsInA() && mfi.existsInB())
-        {
-            if(mfi.isDirA())
-                mfi.m_bEqualAB = true;
-            else
-                mfi.m_bEqualAB = fastFileComparison(*mfi.getFileInfoA(), *mfi.getFileInfoB(), bError, eqStatus);
-        }
-        if(mfi.existsInA() && mfi.existsInC())
-        {
-            if(mfi.isDirA())
-                mfi.m_bEqualAC = true;
-            else
-                mfi.m_bEqualAC = fastFileComparison(*mfi.getFileInfoA(), *mfi.getFileInfoC(), bError, eqStatus);
-        }
-        if(mfi.existsInB() && mfi.existsInC())
-        {
-            if(mfi.m_bEqualAB && mfi.m_bEqualAC)
-                mfi.m_bEqualBC = true;
-            else
-            {
-                if(mfi.isDirB())
-                    mfi.m_bEqualBC = true;
-                else
-                    mfi.m_bEqualBC = fastFileComparison(*mfi.getFileInfoB(), *mfi.getFileInfoC(), bError, eqStatus);
-            }
-        }
-        if(bError)
-        {
-            //Limit size of error list in memmory.
-            if(errors.size() < 30)
-                errors.append(eqStatus);
-            return false;
-        }
-    }
-
-    if(mfi.isLinkA() != mfi.isLinkB()) mfi.m_bEqualAB = false;
-    if(mfi.isLinkA() != mfi.isLinkC()) mfi.m_bEqualAC = false;
-    if(mfi.isLinkB() != mfi.isLinkC()) mfi.m_bEqualBC = false;
-
-    if(mfi.isDirA() != mfi.isDirB()) mfi.m_bEqualAB = false;
-    if(mfi.isDirA() != mfi.isDirC()) mfi.m_bEqualAC = false;
-    if(mfi.isDirB() != mfi.isDirC()) mfi.m_bEqualBC = false;
-
-    Q_ASSERT(eNew == 0 && eMiddle == 1 && eOld == 2);
-
-    // The map automatically sorts the keys.
-    int age = eNew;
-    std::map<QDateTime, int>::reverse_iterator i;
-    for(i = dateMap.rbegin(); i != dateMap.rend(); ++i)
-    {
-        int n = i->second;
-        if(n == 0 && mfi.getAgeA() == eNotThere)
-        {
-            mfi.setAgeA((e_Age)age);
-            ++age;
-            if(mfi.m_bEqualAB)
-            {
-                mfi.setAgeB(mfi.getAgeA());
-                ++age;
-            }
-            if(mfi.m_bEqualAC)
-            {
-                mfi.setAgeC(mfi.getAgeA());
-                ++age;
-            }
-        }
-        else if(n == 1 && mfi.getAgeB() == eNotThere)
-        {
-            mfi.setAgeB((e_Age)age);
-            ++age;
-            if(mfi.m_bEqualAB)
-            {
-                mfi.setAgeA(mfi.getAgeB());
-                ++age;
-            }
-            if(mfi.m_bEqualBC)
-            {
-                mfi.setAgeC(mfi.getAgeB());
-                ++age;
-            }
-        }
-        else if(n == 2 && mfi.getAgeC() == eNotThere)
-        {
-            mfi.setAgeC((e_Age)age);
-            ++age;
-            if(mfi.m_bEqualAC)
-            {
-                mfi.setAgeA(mfi.getAgeC());
-                ++age;
-            }
-            if(mfi.m_bEqualBC)
-            {
-                mfi.setAgeB(mfi.getAgeC());
-                ++age;
-            }
-        }
-    }
-
-    // The checks below are necessary when the dates of the file are equal but the
-    // files are not. One wouldn't expect this to happen, yet it happens sometimes.
-    if(mfi.existsInC() && mfi.getAgeC() == eNotThere)
-    {
-        mfi.setAgeC((e_Age)age);
-        ++age;
-        mfi.m_bConflictingAges = true;
-    }
-    if(mfi.existsInB() && mfi.getAgeB() == eNotThere)
-    {
-        mfi.setAgeB((e_Age)age);
-        ++age;
-        mfi.m_bConflictingAges = true;
-    }
-    if(mfi.existsInA() && mfi.getAgeA() == eNotThere)
-    {
-        mfi.setAgeA((e_Age)age);
-        ++age;
-        mfi.m_bConflictingAges = true;
-    }
-
-    if(mfi.getAgeA() != eOld && mfi.getAgeB() != eOld && mfi.getAgeC() != eOld)
-    {
-        if(mfi.getAgeA() == eMiddle) mfi.setAgeA(eOld);
-        if(mfi.getAgeB() == eMiddle) mfi.setAgeB(eOld);
-        if(mfi.getAgeC() == eMiddle) mfi.setAgeC(eOld);
-    }
-
-    return true;
-}
-
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setPixmaps(MergeFileInfos& mfi, bool)
 {
     if(mfi.isDirA() || mfi.isDirB() || mfi.isDirC())
@@ -1697,7 +1388,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
         ++currentIdx;
 
         // The comparisons and calculations for each file take place here.
-        compareFilesAndCalcAges(mfi, errors);
+        mfi.compareFilesAndCalcAges(errors, m_pOptions, q);
         // Get dirname from fileName: Search for "/" from end:
         int pos = fileName.lastIndexOf('/');
         QString dirPart;

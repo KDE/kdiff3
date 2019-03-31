@@ -39,7 +39,7 @@ class DirectoryMergeWindow : public QTreeView
 {
    Q_OBJECT
 public:
-   DirectoryMergeWindow( QWidget* pParent, Options* pOptions );
+   DirectoryMergeWindow( QWidget* pParent, Options* pOptions, KDiff3App* const app );
    ~DirectoryMergeWindow() override;
    void setDirectoryMergeInfo(DirectoryMergeInfo* p);
    bool init(
@@ -115,7 +115,7 @@ public:
    void slotLoadMergeState();
 
 Q_SIGNALS:
-   void startDiffMerge(QString fn1,QString fn2, QString fn3, QString ofn, QString,QString,QString,TotalDiffStatus*);
+   void startDiffMerge(const QString &fn1,const QString &fn2, const QString &fn3, const QString &ofn, const QString&, const QString&, const QString&,TotalDiffStatus*);
    void checkIfCanContinue( bool* pbContinue );
    void updateAvailabilities();
    void statusBarMessage( const QString& msg );
@@ -124,6 +124,7 @@ protected Q_SLOTS:
    void onExpanded();
    void	currentChanged( const QModelIndex & current, const QModelIndex & previous ) override; // override
 private:
+  KDiff3App* mApp;
   class DirectoryMergeWindowPrivate;
   friend class DirectoryMergeWindowPrivate;
   DirectoryMergeWindowPrivate* d;

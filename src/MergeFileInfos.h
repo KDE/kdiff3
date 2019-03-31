@@ -66,13 +66,14 @@ enum e_OperationStatus
     eOpStatusToDo
 };
 
+class DirectoryMergeWindow;
+
 class MergeFileInfos
 {
   public:
     MergeFileInfos();
     ~MergeFileInfos();
 
-    //bool operator>( const MergeFileInfos& );
     QString subPath() const;
     QString fileName() const;
 
@@ -133,7 +134,10 @@ class MergeFileInfos
     inline e_Age getAgeC() const { return m_ageC; }
     inline void setAgeC(const e_Age inAge) { m_ageC = inAge; }
 
+    bool compareFilesAndCalcAges(QStringList& errors, Options* const pOptions, DirectoryMergeWindow*  pDMW);
+
   private:
+    bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status, Options* const pOptions);
     MergeFileInfos* m_pParent;
     QList<MergeFileInfos*> m_children;
 
@@ -145,7 +149,6 @@ class MergeFileInfos
 
     TotalDiffStatus m_totalDiffStatus;
 
-  public:
     e_MergeOperation m_eMergeOperation;
     e_OperationStatus m_eOpStatus;
     e_Age m_ageA;
