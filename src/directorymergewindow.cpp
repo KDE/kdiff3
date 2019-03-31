@@ -694,7 +694,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThre
     else
     {
         ++nofFiles;
-        if(pMFI->m_bEqualAB && (!bThreeDirs || pMFI->m_bEqualAC))
+        if(pMFI->isEqualAB() && (!bThreeDirs || pMFI->isEqualAC()))
         {
             ++nofEqualFiles;
         }
@@ -1426,7 +1426,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
     {
         if(!bCheckC)
         {
-            if(pMFI->m_bEqualAB)
+            if(pMFI->isEqualAB())
             {
                 setMergeOperation(mi, bOtherDest ? eCopyBToDest : eNoOperation);
             }
@@ -1471,38 +1471,38 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
         }
         else
         {
-            if(pMFI->m_bEqualAB && pMFI->m_bEqualAC)
+            if(pMFI->isEqualAB() && pMFI->isEqualAC())
             {
                 setMergeOperation(mi, bOtherDest ? eCopyCToDest : eNoOperation);
             }
             else if(pMFI->existsInA() && pMFI->existsInB() && pMFI->existsInC())
             {
-                if(pMFI->m_bEqualAB)
+                if(pMFI->isEqualAB())
                     setMergeOperation(mi, eCopyCToDest);
-                else if(pMFI->m_bEqualAC)
+                else if(pMFI->isEqualAC())
                     setMergeOperation(mi, eCopyBToDest);
-                else if(pMFI->m_bEqualBC)
+                else if(pMFI->isEqualBC())
                     setMergeOperation(mi, eCopyCToDest);
                 else
                     setMergeOperation(mi, eMergeABCToDest);
             }
             else if(pMFI->existsInA() && pMFI->existsInB() && !pMFI->existsInC())
             {
-                if(pMFI->m_bEqualAB)
+                if(pMFI->isEqualAB())
                     setMergeOperation(mi, eDeleteFromDest);
                 else
                     setMergeOperation(mi, eChangedAndDeleted);
             }
             else if(pMFI->existsInA() && !pMFI->existsInB() && pMFI->existsInC())
             {
-                if(pMFI->m_bEqualAC)
+                if(pMFI->isEqualAC())
                     setMergeOperation(mi, eDeleteFromDest);
                 else
                     setMergeOperation(mi, eChangedAndDeleted);
             }
             else if(!pMFI->existsInA() && pMFI->existsInB() && pMFI->existsInC())
             {
-                if(pMFI->m_bEqualBC)
+                if(pMFI->isEqualBC())
                     setMergeOperation(mi, eCopyCToDest);
                 else
                     setMergeOperation(mi, eMergeABCToDest);
@@ -2859,9 +2859,9 @@ QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi)
     vm.writeEntry("ExistsInA", mfi.existsInA());
     vm.writeEntry("ExistsInB", mfi.existsInB());
     vm.writeEntry("ExistsInC", mfi.existsInC());
-    vm.writeEntry("EqualAB", mfi.m_bEqualAB);
-    vm.writeEntry("EqualAC", mfi.m_bEqualAC);
-    vm.writeEntry("EqualBC", mfi.m_bEqualBC);
+    vm.writeEntry("EqualAB", mfi.isEqualAB());
+    vm.writeEntry("EqualAC", mfi.isEqualAC());
+    vm.writeEntry("EqualBC", mfi.isEqualBC());
 
     vm.writeEntry("MergeOperation", (int)mfi.getOperation());
     vm.writeEntry("DirA", mfi.isDirA());
@@ -2939,17 +2939,17 @@ void DirectoryMergeWindow::updateFileVisibilities()
             if(loop == 0 && bDir)
             {
                 bool bChange = false;
-                if(!pMFI->m_bEqualAB && pMFI->isDirA() == pMFI->isDirB() && pMFI->isLinkA() == pMFI->isLinkB())
+                if(!pMFI->isEqualAB() && pMFI->isDirA() == pMFI->isDirB() && pMFI->isLinkA() == pMFI->isLinkB())
                 {
                     pMFI->m_bEqualAB = true;
                     bChange = true;
                 }
-                if(!pMFI->m_bEqualBC && pMFI->isDirC() == pMFI->isDirB() && pMFI->isLinkC() == pMFI->isLinkB())
+                if(!pMFI->isEqualBC() && pMFI->isDirC() == pMFI->isDirB() && pMFI->isLinkC() == pMFI->isLinkB())
                 {
                     pMFI->m_bEqualBC = true;
                     bChange = true;
                 }
-                if(!pMFI->m_bEqualAC && pMFI->isDirA() == pMFI->isDirC() && pMFI->isLinkA() == pMFI->isLinkC())
+                if(!pMFI->isEqualAC() && pMFI->isDirA() == pMFI->isDirC() && pMFI->isLinkA() == pMFI->isLinkC())
                 {
                     pMFI->m_bEqualAC = true;
                     bChange = true;
@@ -2961,31 +2961,31 @@ void DirectoryMergeWindow::updateFileVisibilities()
             bool bExistsEverywhere = pMFI->existsInA() && pMFI->existsInB() && (pMFI->existsInC() || !bThreeDirs);
             int existCount = int(pMFI->existsInA()) + int(pMFI->existsInB()) + int(pMFI->existsInC());
             bool bVisible =
-                (bShowIdentical && bExistsEverywhere && pMFI->m_bEqualAB && (pMFI->m_bEqualAC || !bThreeDirs)) || ((bShowDifferent || bDir) && existCount >= 2 && (!pMFI->m_bEqualAB || !(pMFI->m_bEqualAC || !bThreeDirs))) || (bShowOnlyInA && pMFI->existsInA() && !pMFI->existsInB() && !pMFI->existsInC()) || (bShowOnlyInB && !pMFI->existsInA() && pMFI->existsInB() && !pMFI->existsInC()) || (bShowOnlyInC && !pMFI->existsInA() && !pMFI->existsInB() && pMFI->existsInC());
+                (bShowIdentical && bExistsEverywhere && pMFI->isEqualAB() && (pMFI->isEqualAC() || !bThreeDirs)) || ((bShowDifferent || bDir) && existCount >= 2 && (!pMFI->isEqualAB() || !(pMFI->isEqualAC() || !bThreeDirs))) || (bShowOnlyInA && pMFI->existsInA() && !pMFI->existsInB() && !pMFI->existsInC()) || (bShowOnlyInB && !pMFI->existsInA() && pMFI->existsInB() && !pMFI->existsInC()) || (bShowOnlyInC && !pMFI->existsInA() && !pMFI->existsInB() && pMFI->existsInC());
 
             QString fileName = pMFI->fileName();
             bVisible = bVisible && ((bDir && !Utils::wildcardMultiMatch(d->m_pOptions->m_DmDirAntiPattern, fileName, d->m_bCaseSensitive)) || (Utils::wildcardMultiMatch(d->m_pOptions->m_DmFilePattern, fileName, d->m_bCaseSensitive) && !Utils::wildcardMultiMatch(d->m_pOptions->m_DmFileAntiPattern, fileName, d->m_bCaseSensitive)));
 
             setRowHidden(mi.row(), mi.parent(), !bVisible);
 
-            bool bEqual = bThreeDirs ? pMFI->m_bEqualAB && pMFI->m_bEqualAC : pMFI->m_bEqualAB;
+            bool bEqual = bThreeDirs ? pMFI->isEqualAB() && pMFI->isEqualAC() : pMFI->isEqualAB();
             if(!bEqual && bVisible && loop == 0) // Set all parents to "not equal"
             {
                 MergeFileInfos* p2 = pMFI->parent();
                 while(p2 != nullptr)
                 {
                     bool bChange = false;
-                    if(!pMFI->m_bEqualAB && p2->m_bEqualAB)
+                    if(!pMFI->isEqualAB() && p2->isEqualAB())
                     {
                         p2->m_bEqualAB = false;
                         bChange = true;
                     }
-                    if(!pMFI->m_bEqualAC && p2->m_bEqualAC)
+                    if(!pMFI->isEqualAC() && p2->isEqualAC())
                     {
                         p2->m_bEqualAC = false;
                         bChange = true;
                     }
-                    if(!pMFI->m_bEqualBC && p2->m_bEqualBC)
+                    if(!pMFI->isEqualBC() && p2->isEqualBC())
                     {
                         p2->m_bEqualBC = false;
                         bChange = true;

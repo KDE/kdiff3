@@ -129,6 +129,9 @@ class MergeFileInfos
     inline e_Age getAgeB() const { return m_ageB; }
     inline e_Age getAgeC() const { return m_ageC; }
 
+    inline bool isEqualAB() const { return m_bEqualAB; }
+    inline bool isEqualAC() const { return m_bEqualAC; }
+    inline bool isEqualBC() const { return m_bEqualBC; }
     bool compareFilesAndCalcAges(QStringList& errors, Options* const pOptions, DirectoryMergeWindow* pDMW);
 
     void updateAge();
