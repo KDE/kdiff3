@@ -67,7 +67,6 @@ MergeResultWindow::MergeResultWindow(
     m_firstLine = 0;
     m_horizScrollOffset = 0;
     m_nofLines = 0;
-    m_totalSize = 0;
     m_bMyUpdate = false;
     m_bInsertMode = true;
     m_scrollDeltaX = 0;
@@ -377,7 +376,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
         }
 
         m_mergeLineList.clear();
-        m_totalSize = 0;
+
         int lineIdx = 0;
         Diff3LineList::const_iterator it;
         for(it = m_pDiff3LineList->begin(); it != m_pDiff3LineList->end(); ++it, ++lineIdx)
@@ -412,7 +411,6 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
             }
             else
             {
-                ml.mergeEditLineList.setTotalSizePtr(&m_totalSize);
                 m_mergeLineList.push_back(ml);
             }
 
@@ -622,7 +620,7 @@ int MergeResultWindow::getMaxTextWidth()
 
 int MergeResultWindow::getNofLines()
 {
-    return m_totalSize;
+    return m_nofLines;
 }
 
 int MergeResultWindow::getVisibleTextAreaWidth()
@@ -1072,9 +1070,9 @@ void MergeResultWindow::choose(e_SrcSelector selector)
         ml.mergeEditLineList.push_back(mel);
     }
 
-    if(m_cursorYPos >= m_totalSize)
+    if(m_cursorYPos >= m_nofLines)
     {
-        m_cursorYPos = m_totalSize - 1;
+        m_cursorYPos = m_nofLines - 1;
         m_cursorXPos = 0;
     }
 
@@ -1913,7 +1911,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         //int visibleLines = height() / fontHeight;
 
         int lastVisibleLine = m_firstLine + getNofVisibleLines() + 5;
-        int line = 0;
+        LineRef line = 0;
         MergeLineList::iterator mlIt = m_mergeLineList.begin();
         for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
         {
@@ -1953,7 +1951,6 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         if(line != m_nofLines)
         {
             m_nofLines = line;
-            Q_ASSERT(m_nofLines == m_totalSize);
 
             emit resizeSignal();
         }
@@ -2037,7 +2034,7 @@ int MergeResultWindow::convertToLine(int y)
 
     int yOffset = topLineYOffset - m_firstLine * fontHeight;
 
-    int line = std::min((y - yOffset) / fontHeight, m_totalSize - 1);
+    int line = std::min((y - yOffset) / fontHeight, m_nofLines - 1);
     return line;
 }
 
@@ -2295,7 +2292,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
         if(!melIt->isEditableText()) break;
         if(x >= (int)str.length())
         {
-            if(y < m_totalSize - 1)
+            if(y < m_nofLines - 1)
             {
                 setModified();
                 MergeLineList::iterator mlIt1;
@@ -2478,7 +2475,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             if(!bCtrl)
             {
                 int newX = textLayoutOrig.nextCursorPosition(x);
-                if(newX == x && y < m_totalSize - 1)
+                if(newX == x && y < m_nofLines - 1)
                 {
                     ++y;
                     x = 0;
@@ -2575,7 +2572,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     }
     }
 
-    y = qBound(0, y, m_totalSize - 1);
+    y = qBound(0, y, m_nofLines - 1);
 
     calcIteratorFromLineNr(y, mlIt, melIt);
     str = melIt->getString(m_pldA, m_pldB, m_pldC);

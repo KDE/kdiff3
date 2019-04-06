@@ -205,8 +205,7 @@ private:
    QPixmap m_pixmap;
    int m_firstLine;
    int m_horizScrollOffset;
-   int m_nofLines;
-   int m_totalSize; //Same as m_nofLines, but calculated differently
+   LineCount m_nofLines;
    int m_maxTextWidth;
    bool m_bMyUpdate;
    bool m_bInsertMode;
