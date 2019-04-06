@@ -270,7 +270,7 @@ void OpenDialog::inputFilenameChanged()
     }
 }
 
-static void fixCurrentText(QComboBox* pCB)
+void OpenDialog::fixCurrentText(QComboBox* pCB)
 {
     QString s = pCB->currentText();
 

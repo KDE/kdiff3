@@ -46,8 +46,10 @@ public:
    void accept() override;
    bool eventFilter(QObject* o, QEvent* e) override;
 private:
-   Options* m_pOptions;
    void selectURL( QComboBox* pLine, bool bDir, int i, bool bSave );
+
+   void fixCurrentText(QComboBox* pCB);
+   Options* m_pOptions;
    bool m_bInputFileNameChanged;
 private Q_SLOTS:
    void selectFileA();
