@@ -422,7 +422,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
             if(codecName == defaultName())
                 saveDefaultIndex(m_codecVec.size());
             QString itemText = visibleCodecName.isEmpty() ? codecName : visibleCodecName + QStringLiteral(" (") + codecName + QStringLiteral(")");
-            addItem(itemText, (int)m_codecVec.size());
+            addItem(itemText, m_codecVec.size());
             m_codecVec.push_back(c);
         }
     }

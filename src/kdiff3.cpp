@@ -860,7 +860,7 @@ void KDiff3App::slotFilePrint()
 
         QPaintDevice* pPaintDevice = painter.device();
         int dpiy = pPaintDevice->logicalDpiY();
-        int columnDistance = (int)((0.5 / 2.54) * dpiy); // 0.5 cm between the columns
+        int columnDistance = qRound((0.5 / 2.54) * dpiy); // 0.5 cm between the columns
 
         int columns = m_bTripleDiff ? 3 : 2;
         int columnWidth = (pPaintDevice->width() - (columns - 1) * columnDistance) / columns;

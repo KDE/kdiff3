@@ -21,13 +21,13 @@
 #ifndef LINEREF_H
 #define LINEREF_H
 
+#include "TypeUtils.h"
+
 #include <stdlib.h>
 #include <type_traits>
 
 #include <QtGlobal>
 
-#define TYPE_MAX(x) std::numeric_limits<x>::max()
-#define TYPE_MIN(x) std::numeric_limits<x>::min()
 class LineRef
 {
   public:
@@ -89,7 +89,6 @@ static_assert(std::is_convertible<LineRef, int>::value, "Can not convert LineRef
 static_assert(std::is_convertible<int, LineRef>::value, "Can not convert int to LineRef.");
 
 typedef LineRef::LineType LineCount;
-typedef size_t PtrDiffRef;
 typedef LineRef::LineType LineIndex;
 
 #endif

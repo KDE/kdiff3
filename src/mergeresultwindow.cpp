@@ -575,7 +575,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     update();
 }
 
-void MergeResultWindow::setFirstLine(int firstLine)
+void MergeResultWindow::setFirstLine(QtNumberType firstLine)
 {
     m_firstLine = std::max(0, firstLine);
     update();
@@ -1202,7 +1202,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
             continue;
         bool bOk = false;
         int groupIdx = keyIt->toInt(&bOk);
-        if(!bOk || groupIdx < 0 || groupIdx > (int)parenthesesGroupList.size())
+        if(!bOk || groupIdx < 0 || groupIdx > parenthesesGroupList.size())
             continue;
         QString s = matchedRegExpr.cap(groupIdx);
         if(groupIdx == 0)
@@ -2026,7 +2026,7 @@ void MergeResultWindow::focusInEvent(QFocusEvent* e)
     QWidget::focusInEvent(e);
 }
 
-int MergeResultWindow::convertToLine(int y)
+LineRef MergeResultWindow::convertToLine(int y)
 {
     const QFontMetrics& fm = fontMetrics();
     int fontHeight = fm.lineSpacing();
@@ -2034,7 +2034,7 @@ int MergeResultWindow::convertToLine(int y)
 
     int yOffset = topLineYOffset - m_firstLine * fontHeight;
 
-    int line = std::min((y - yOffset) / fontHeight, m_nofLines - 1);
+    LineRef line = std::min((y - yOffset) / fontHeight, m_nofLines - 1);
     return line;
 }
 
@@ -2044,11 +2044,11 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
 
     int xOffset = getTextXOffset();
 
-    int line = convertToLine(e->y());
+    LineRef line = convertToLine(e->y());
     QString s = getString(line);
     QTextLayout textLayout(s, font(), this);
     getTextLayoutForLine(line, s, textLayout);
-    int pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
+    QtNumberType pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
 
     bool bLMB = e->button() == Qt::LeftButton;
     bool bMMB = e->button() == Qt::MidButton;
@@ -2058,7 +2058,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
     {
         m_cursorXPos = 0;
         m_cursorOldXPixelPos = 0;
-        m_cursorYPos = std::max(line, 0);
+        m_cursorYPos = std::max((LineRef::LineType)line, 0);
         int l = 0;
         MergeLineList::iterator i = m_mergeLineList.begin();
         for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
@@ -2083,7 +2083,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
     else if(bLMB) // Normal cursor placement
     {
         pos = std::max(pos, 0);
-        line = std::max(line, 0);
+        line = std::max((LineRef::LineType)line, 0);
         if(e->QInputEvent::modifiers() & Qt::ShiftModifier)
         {
             if(!m_selection.isValidFirstLine())
@@ -2110,7 +2110,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
     else if(bMMB) // Paste clipboard
     {
         pos = std::max(pos, 0);
-        line = std::max(line, 0);
+        line = std::max((LineRef::LineType)line, 0);
 
         m_selection.reset();
         m_cursorXPos = pos;
@@ -2125,7 +2125,7 @@ void MergeResultWindow::mouseDoubleClickEvent(QMouseEvent* e)
 {
     if(e->button() == Qt::LeftButton)
     {
-        int line = convertToLine(e->y());
+        LineRef line = convertToLine(e->y());
         QString s = getString(line);
         QTextLayout textLayout(s, font(), this);
         getTextLayoutForLine(line, s, textLayout);
@@ -2169,7 +2169,7 @@ void MergeResultWindow::mouseReleaseEvent(QMouseEvent* e)
 
 void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
 {
-    int line = convertToLine(e->y());
+    LineRef line = convertToLine(e->y());
     QString s = getString(line);
     QTextLayout textLayout(s, font(), this);
     getTextLayoutForLine(line, s, textLayout);
@@ -2290,7 +2290,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     {
         if(deleteSelection2(str, x, y, mlIt, melIt)) break;
         if(!melIt->isEditableText()) break;
-        if(x >= (int)str.length())
+        if(x >= str.length())
         {
             if(y < m_nofLines - 1)
             {
@@ -2400,7 +2400,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
         MergeEditLine mel(mlIt->id3l); // Associate every mel with an id3l, even if not really valid.
         mel.setString(indentation + str.mid(x));
 
-        if(x < (int)str.length()) // Cut off the old line.
+        if(x < str.length()) // Cut off the old line.
         {
             // Since ps possibly points into melIt->str, first copy it into a temporary.
             QString temp = str.left(x);
@@ -2487,13 +2487,13 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             }
             else
             {
-                while(x < (int)str.length() && (str[x] == ' ' || str[x] == '\t'))
+                while(x < str.length() && (str[x] == ' ' || str[x] == '\t'))
                 {
                     int newX = textLayoutOrig.nextCursorPosition(x);
                     if(newX == x) break;
                     x = newX;
                 }
-                while(x < (int)str.length() && (str[x] != ' ' && str[x] != '\t'))
+                while(x < str.length() && (str[x] != ' ' && str[x] != '\t'))
                 {
                     int newX = textLayoutOrig.nextCursorPosition(x);
                     if(newX == x) break;

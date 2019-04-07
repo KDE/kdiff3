@@ -598,7 +598,7 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
     const QChar* p = m_unicodeBuf.unicode();
 
     m_bIsText = true;
-    int lines = 1;
+    LineCount lines = 1;
     m_bIncompleteConversion = false;
     for(i = 0; i < ucSize; ++i)
     {

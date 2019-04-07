@@ -85,8 +85,8 @@ class MergeLine
 {
   public:
     Diff3LineList::const_iterator id3l;
-    int d3lLineIdx = -1;    // Needed to show the correct window pos.
-    int srcRangeLength = 0; // how many src-lines have this properties
+    LineIndex d3lLineIdx = -1;    // Needed to show the correct window pos.
+    LineCount srcRangeLength = 0; // how many src-lines have this properties
     e_MergeDetails mergeDetails = eDefault;
     bool bConflict = false;
     bool bWhiteSpaceConflict = false;

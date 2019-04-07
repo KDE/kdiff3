@@ -71,7 +71,7 @@ public:
    void slotUpdateAvailabilities(const bool bMergeEditorVisible, const bool m_bTripleDiff);
 
 public Q_SLOTS:
-   void setFirstLine(int firstLine);
+   void setFirstLine(QtNumberType firstLine);
    void setHorizScrollOffset(int horizScrollOffset);
 
    void slotGoCurrent();
@@ -107,7 +107,7 @@ public Q_SLOTS:
  Q_SIGNALS:
    void scrollMergeResultWindow( int deltaX, int deltaY );
    void modifiedChanged(bool bModified);
-   void setFastSelectorRange( int line1, int nofLines );
+   void setFastSelectorRange( LineRef line1, LineCount nofLines );
    void sourceMask( int srcMask, int enabledMask );
    void resizeSignal();
    void selectionEnd();
@@ -191,7 +191,7 @@ private:
       int srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
       );
    void setFastSelector(MergeLineList::iterator i);
-   int convertToLine( int y );
+   LineRef convertToLine( QtNumberType y );
    bool event(QEvent*) override;
    void mousePressEvent ( QMouseEvent* e ) override;
    void mouseDoubleClickEvent ( QMouseEvent* e ) override;
@@ -203,7 +203,7 @@ private:
    void focusInEvent( QFocusEvent* e ) override;
 
    QPixmap m_pixmap;
-   int m_firstLine;
+   LineRef m_firstLine;
    int m_horizScrollOffset;
    LineCount m_nofLines;
    int m_maxTextWidth;

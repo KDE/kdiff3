@@ -1459,5 +1459,5 @@ void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
     {
         d3lv[j] = &(*i);
     }
-    Q_ASSERT(j == (int)d3lv.size());
+    Q_ASSERT(j == d3lv.size());
 }

@@ -33,15 +33,15 @@ public:
    e_OverviewMode getOverviewMode();
 
 public Q_SLOTS:
-   void setFirstLine(int firstLine);
+   void setFirstLine(QtNumberType firstLine);
    void slotRedraw();
 Q_SIGNALS:
-   void setLine(int);
+   void setLine(LineRef);
 private:
    const Diff3LineList* m_pDiff3LineList;
    Options* m_pOptions;
    bool m_bTripleDiff;
-   int m_firstLine;
+   LineRef m_firstLine;
    int m_pageHeight;
    QPixmap m_pixmap;
    e_OverviewMode m_eOverviewMode;

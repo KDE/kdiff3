@@ -2054,7 +2054,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pDiffTextWindow1->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
             m_pDiffVScrollBar->setValue(l - m_pDiffVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max(0, p + (int)s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -2073,7 +2073,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pDiffTextWindow2->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
             m_pDiffVScrollBar->setValue(l - m_pDiffVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max(0, p + (int)s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -2092,7 +2092,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pDiffTextWindow3->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
             m_pDiffVScrollBar->setValue(l - m_pDiffVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max(0, p + (int)s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;
@@ -2111,7 +2111,7 @@ void KDiff3App::slotEditFindNext()
         {
             m_pMergeResultWindow->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length());
             m_pMergeVScrollBar->setValue(d3vLine - m_pMergeVScrollBar->pageStep() / 2);
-            m_pHScrollBar->setValue(std::max(0, posInLine + (int)s.length() - m_pHScrollBar->pageStep()));
+            m_pHScrollBar->setValue(std::max(0, posInLine + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
             return;

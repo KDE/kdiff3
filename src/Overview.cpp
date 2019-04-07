@@ -59,7 +59,7 @@ void Overview::setRange(int firstLine, int pageHeight)
     m_pageHeight = pageHeight;
     update();
 }
-void Overview::setFirstLine(int firstLine)
+void Overview::setFirstLine(QtNumberType firstLine)
 {
     m_firstLine = firstLine;
     update();

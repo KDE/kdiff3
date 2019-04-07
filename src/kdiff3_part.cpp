@@ -134,7 +134,7 @@ void KDiff3Part::getNameAndVersion(const QString& str, const QString& lineStart,
         }
 
         int vpos = str.lastIndexOf("\t", -1);
-        if(vpos > 0 && vpos > (int)pos2)
+        if(vpos > 0 && vpos > pos2)
         {
             version = str.mid(vpos + 1);
             while(!version.right(1)[0].isLetterOrNumber())
