@@ -584,7 +584,7 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
     if(pCodec != pEncoding)
         skipBytes = 0;
 
-    if(m_size - skipBytes > INT_MAX)
+    if(m_size - skipBytes > TYPE_MAX(QtNumberType))
         return false;
 
     QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, (int)(m_size - skipBytes));
@@ -604,6 +604,9 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
     {
         if(i >= ucSize || p[i] == '\n')
         {
+            if(lines >= TYPE_MAX(LineCount) - 5)
+                return false;
+
             ++lines;
         }
         if(p[i].isNull())
