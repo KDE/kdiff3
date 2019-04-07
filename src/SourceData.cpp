@@ -597,6 +597,9 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
     {
         if(i >= ucSize || p[i] == '\n')
         {
+            if(lines >= INT_MAX - 5)
+                return false;
+
             ++lines;
         }
         if(p[i].isNull())
