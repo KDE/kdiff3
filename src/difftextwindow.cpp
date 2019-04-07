@@ -684,9 +684,10 @@ class FormatRangeHelper
     QColor m_background;
     int m_currentPos;
 
-  public:
     QVector<QTextLayout::FormatRange> m_formatRanges;
 
+  public:
+    inline operator QVector<QTextLayout::FormatRange>() { return m_formatRanges; }
     FormatRangeHelper()
     {
         m_pen = QColor(Qt::black);
@@ -950,7 +951,7 @@ void DiffTextWindowData::writeLine(
 
         QTextLayout textLayout(lineString.mid(wrapLineOffset, lineLength - wrapLineOffset), m_pDiffTextWindow->font(), m_pDiffTextWindow);
         prepareTextLayout(textLayout, !m_bWordWrap || wrapLineOffset == 0);
-        textLayout.draw(&p, QPoint(0, yOffset), frh.m_formatRanges /*, const QRectF & clip = QRectF() */);
+        textLayout.draw(&p, QPoint(0, yOffset), frh /*, const QRectF & clip = QRectF() */);
     }
 
     p.fillRect(0, yOffset, leftInfoWidth() * fontWidth, fontHeight, m_pOptions->m_bgColor);
