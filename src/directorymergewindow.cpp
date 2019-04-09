@@ -118,17 +118,17 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     friend class DirMergeItem;
 
   public:
-    DirectoryMergeWindow* q;//FIXME: use inteligable name.
+    DirectoryMergeWindow* mWindow;
     explicit DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW)
     {
-        q = pDMW;
+        mWindow = pDMW;
         m_pOptions = nullptr;
         m_pDirectoryMergeInfo = nullptr;
         m_bSimulatedMergeStarted = false;
         m_bRealMergeStarted = false;
         m_bError = false;
         m_bSyncMode = false;
-        m_pStatusInfo = new StatusInfo(q);
+        m_pStatusInfo = new StatusInfo(mWindow);
         m_pStatusInfo->hide();
         m_bScanning = false;
         m_bCaseSensitive = true;
@@ -774,14 +774,14 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         // A full analysis uses the same resources that a normal text-diff/merge uses.
         // So make sure that the user saves his data first.
         bool bCanContinue = false;
-        emit q->checkIfCanContinue(&bCanContinue);
+        emit mWindow->checkIfCanContinue(&bCanContinue);
         if(!bCanContinue)
             return false;
-        emit q->startDiffMerge("", "", "", "", "", "", "", nullptr); // hide main window
+        emit mWindow->startDiffMerge("", "", "", "", "", "", "", nullptr); // hide main window
     }
 
-    q->show();
-    q->setUpdatesEnabled(true);
+    mWindow->show();
+    mWindow->setUpdatesEnabled(true);
 
     std::map<QString, t_ItemInfo> expandedDirsMap;
 
@@ -857,14 +857,14 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
             text += i18n("Dir C \"%1\" does not exist or is not a directory.\n", dirC.prettyAbsPath());
         }
 
-        KMessageBox::sorry(q, text, i18n("Directory Open Error"));
+        KMessageBox::sorry(mWindow, text, i18n("Directory Open Error"));
         return false;
     }
 
     if(dirC.isValid() &&
        (dirDest.prettyAbsPath() == dirA.prettyAbsPath() || dirDest.prettyAbsPath() == dirB.prettyAbsPath()))
     {
-        KMessageBox::error(q,
+        KMessageBox::error(mWindow,
                            i18n("The destination directory must not be the same as A or B when "
                                 "three directories are merged.\nCheck again before continuing."),
                            i18n("Parameter Warning"));
@@ -872,7 +872,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     }
 
     m_bScanning = true;
-    emit q->statusBarMessage(i18n("Scanning directories..."));
+    emit mWindow->statusBarMessage(i18n("Scanning directories..."));
 
     m_bSyncMode = m_pOptions->m_bDmSyncMode && !dirC.isValid() && !dirDest.isValid();
 
@@ -886,11 +886,11 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     //   setColumnWidthMode(s_SolvedCol,   Q3ListView::Manual);
     //   setColumnWidthMode(s_WhiteCol,    Q3ListView::Manual);
     //   setColumnWidthMode(s_NonWhiteCol, Q3ListView::Manual);
-    q->setColumnHidden(s_CCol, !dirC.isValid());
-    q->setColumnHidden(s_WhiteCol, !m_pOptions->m_bDmFullAnalysis);
-    q->setColumnHidden(s_NonWhiteCol, !m_pOptions->m_bDmFullAnalysis);
-    q->setColumnHidden(s_UnsolvedCol, !m_pOptions->m_bDmFullAnalysis);
-    q->setColumnHidden(s_SolvedCol, !(m_pOptions->m_bDmFullAnalysis && dirC.isValid()));
+    mWindow->setColumnHidden(s_CCol, !dirC.isValid());
+    mWindow->setColumnHidden(s_WhiteCol, !m_pOptions->m_bDmFullAnalysis);
+    mWindow->setColumnHidden(s_NonWhiteCol, !m_pOptions->m_bDmFullAnalysis);
+    mWindow->setColumnHidden(s_UnsolvedCol, !m_pOptions->m_bDmFullAnalysis);
+    mWindow->setColumnHidden(s_SolvedCol, !(m_pOptions->m_bDmFullAnalysis && dirC.isValid()));
 
     bool bListDirSuccessA = true;
     bool bListDirSuccessB = true;
@@ -939,14 +939,14 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         if(!bListDirSuccessC) s += "\nC: " + dirC.prettyAbsPath();
         s += '\n';
         s += i18n("Check the permissions of the subdirectories.");
-        bContinue = KMessageBox::Continue == KMessageBox::warningContinueCancel(q, s);
+        bContinue = KMessageBox::Continue == KMessageBox::warningContinueCancel(mWindow, s);
     }
 
     if(bContinue)
     {
         prepareListView(pp);
 
-        q->updateFileVisibilities();
+        mWindow->updateFileVisibilities();
 
         for(int childIdx = 0; childIdx < rowCount(); ++childIdx)
         {
@@ -955,13 +955,13 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         }
     }
 
-    q->sortByColumn(0, Qt::AscendingOrder);
+    mWindow->sortByColumn(0, Qt::AscendingOrder);
 
     for(int column = 0; column < columnCount(QModelIndex()); ++column)
-        q->resizeColumnToContents(column);
+        mWindow->resizeColumnToContents(column);
 
     // Try to improve the view a little bit.
-    QWidget* pParent = q->parentWidget();
+    QWidget* pParent = mWindow->parentWidget();
     QSplitter* pSplitter = static_cast<QSplitter*>(pParent);
     if(pSplitter != nullptr)
     {
@@ -975,7 +975,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     }
 
     m_bScanning = false;
-    emit q->statusBarMessage(i18n("Ready."));
+    emit mWindow->statusBarMessage(i18n("Ready."));
 
     if(bContinue && !m_bSkipDirStatus)
     {
@@ -998,7 +998,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
         if(dirC.isValid())
             s += '\n' + i18n("Number of manual merges: %1", nofManualMerges);
-        KMessageBox::information(q, s);
+        KMessageBox::information(mWindow, s);
         //
         //TODO
         //if ( topLevelItemCount()>0 )
@@ -1262,7 +1262,7 @@ void DirectoryMergeWindow::focusOutEvent(QFocusEvent*)
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setAllMergeOperations(e_MergeOperation eDefaultOperation)
 {
-    if(KMessageBox::Yes == KMessageBox::warningYesNo(q,
+    if(KMessageBox::Yes == KMessageBox::warningYesNo(mWindow,
                                                      i18n("This affects all merge operations."),
                                                      i18n("Changing All Merge Operations"),
                                                      KStandardGuiItem::cont(),
@@ -1316,7 +1316,7 @@ QModelIndex DirectoryMergeWindow::DirectoryMergeWindowPrivate::treeIterator(QMod
                     }
                 }
             }
-        } while(mi.isValid() && q->isRowHidden(mi.row(), mi.parent()) && !bFindInvisible);
+        } while(mi.isValid() && mWindow->isRowHidden(mi.row(), mi.parent()) && !bFindInvisible);
     }
     return mi;
 }
@@ -1328,7 +1328,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
     PixMapUtils::initPixmaps(m_pOptions->m_newestFileColor, m_pOptions->m_oldestFileColor,
                              m_pOptions->m_midAgeFileColor, m_pOptions->m_missingFileColor);
 
-    q->setRootIsDecorated(true);
+    mWindow->setRootIsDecorated(true);
 
     t_fileMergeMap::iterator j;
     int nrOfFiles = m_fileMergeMap.size();
@@ -1350,7 +1350,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
         ++currentIdx;
 
         // The comparisons and calculations for each file take place here.
-        mfi.compareFilesAndCalcAges(errors, m_pOptions, q);
+        mfi.compareFilesAndCalcAges(errors, m_pOptions, mWindow);
         // Get dirname from fileName: Search for "/" from end:
         int pos = fileName.lastIndexOf('/');
         QString dirPart;
@@ -1388,11 +1388,11 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
     {
         if(errors.size() < 15)
         {
-            KMessageBox::errorList(q, i18n("Some files could not be processed."), errors);
+            KMessageBox::errorList(mWindow, i18n("Some files could not be processed."), errors);
         }
         else
         {
-            KMessageBox::error(q, i18n("Some files could not be processed."));
+            KMessageBox::error(mWindow, i18n("Some files could not be processed."));
         }
     }
 
@@ -1810,7 +1810,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::selectItemAndColumn(cons
     if(m_selection1Index.isValid()) emit dataChanged(m_selection1Index, m_selection1Index);
     if(m_selection2Index.isValid()) emit dataChanged(m_selection2Index, m_selection2Index);
     if(m_selection3Index.isValid()) emit dataChanged(m_selection3Index, m_selection3Index);
-    emit q->updateAvailabilities();
+    emit mWindow->updateAvailabilities();
 }
 
 //TODO
@@ -1995,7 +1995,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::canContinue()
 {
     bool bCanContinue = false;
 
-    emit q->checkIfCanContinue(&bCanContinue);
+    emit mWindow->checkIfCanContinue(&bCanContinue);
 
     if(bCanContinue && !m_bError)
     {
@@ -2046,7 +2046,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(Me
             destName = mfi.fullNameDest();
             break;
         default:
-            KMessageBox::error(q, i18n("Unknown merge operation. (This must never happen!)"));
+            KMessageBox::error(mWindow, i18n("Unknown merge operation. (This must never happen!)"));
     }
 
     bool bSuccess = false;
@@ -2091,7 +2091,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(Me
                 destName, bSingleFileMerge);
             break;
         default:
-            KMessageBox::error(q, i18n("Unknown merge operation."));
+            KMessageBox::error(mWindow, i18n("Unknown merge operation."));
     }
 
     return bSuccess;
@@ -2103,7 +2103,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareMergeStart(const 
 {
     if(bVerbose)
     {
-        int status = KMessageBox::warningYesNoCancel(q,
+        int status = KMessageBox::warningYesNoCancel(mWindow,
                                                      i18n("The merge is about to begin.\n\n"
                                                           "Choose \"Do it\" if you have read the instructions and know what you are doing.\n"
                                                           "Choosing \"Simulate it\" will tell you what would happen.\n\n"
@@ -2149,9 +2149,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareMergeStart(const 
             }
             if(!errorText.isEmpty())
             {
-                q->scrollTo(mi, QAbstractItemView::EnsureVisible);
-                q->setCurrentIndex(mi);
-                KMessageBox::error(q, errorText);
+                mWindow->scrollTo(mi, QAbstractItemView::EnsureVisible);
+                mWindow->setCurrentIndex(mi);
+                KMessageBox::error(mWindow, errorText);
                 m_mergeItemList.clear();
                 m_bRealMergeStarted = false;
                 return;
@@ -2258,7 +2258,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
     bool bSkipItem = false;
     if(!bStart && m_bError && miCurrent.isValid())
     {
-        int status = KMessageBox::warningYesNoCancel(q,
+        int status = KMessageBox::warningYesNoCancel(mWindow,
                                                      i18n("There was an error in the last step.\n"
                                                           "Do you want to continue with the item that caused the error or do you want to skip this item?"),
                                                      i18n("Continue merge after an error"),
@@ -2359,7 +2359,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
             {
                 if(bVerbose)
                 {
-                    KMessageBox::information(q, i18n("Merge operation complete."), i18n("Merge Complete"));
+                    KMessageBox::information(mWindow, i18n("Merge operation complete."), i18n("Merge Complete"));
                 }
                 m_bRealMergeStarted = false;
                 m_pStatusInfo->setWindowTitle(i18n("Merge Complete"));
@@ -2404,11 +2404,11 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
 
     //g_pProgressDialog->hide();
 
-    q->setCurrentIndex(miCurrent);
-    q->scrollTo(miCurrent, EnsureVisible);
+    mWindow->setCurrentIndex(miCurrent);
+    mWindow->scrollTo(miCurrent, EnsureVisible);
     if(!bSuccess && !bSingleFileMerge)
     {
-        KMessageBox::error(q, i18n("An error occurred. Press OK to see detailed information."));
+        KMessageBox::error(mWindow, i18n("An error occurred. Press OK to see detailed information."));
         m_pStatusInfo->setWindowTitle(i18n("Merge Error"));
         m_pStatusInfo->exec();
         //if ( m_pStatusInfo->firstChild()!=0 )
@@ -2421,7 +2421,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
     {
         m_bError = false;
     }
-    emit q->updateAvailabilities();
+    emit mWindow->updateAvailabilities();
 
     if(m_currentIndexForOperation == m_mergeItemList.end())
     {
@@ -2529,9 +2529,9 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeFLD(const QString& 
 
     bSingleFileMerge = true;
     setOpStatus(*m_currentIndexForOperation, eOpStatusInProgress);
-    q->scrollTo(*m_currentIndexForOperation, EnsureVisible);
+    mWindow->scrollTo(*m_currentIndexForOperation, EnsureVisible);
 
-    emit q->startDiffMerge(nameA, nameB, nameC, nameDest, "", "", "", nullptr);
+    emit mWindow->startDiffMerge(nameA, nameB, nameC, nameDest, "", "", "", nullptr);
 
     return false;
 }
