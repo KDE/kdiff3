@@ -394,7 +394,7 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
 
             if(s_OpCol == index.column())
             {
-                bool bDir = pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC();
+                bool bDir = pMFI->hasDir();
                 switch(pMFI->getOperation())
                 {
                     case eNoOperation:
@@ -481,8 +481,7 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
         {
             if(s_NameCol == index.column())
             {
-                return PixMapUtils::getOnePixmap(eAgeEnd, pMFI->isLinkA() || pMFI->isLinkB() || pMFI->isLinkC(),
-                                                 pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC());
+                return PixMapUtils::getOnePixmap(eAgeEnd, pMFI->hasLink(), pMFI->hasDir());
             }
 
             if(s_ACol == index.column())
@@ -687,7 +686,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThre
                                                                       int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges)
 {
     MergeFileInfos* pMFI = getMFI(mi);
-    if(pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC())
+    if(pMFI->hasDir())
     {
         ++nofDirs;
     }
@@ -1878,7 +1877,7 @@ void DirectoryMergeWindow::compareCurrentFile()
 
     if(MergeFileInfos* pMFI = d->getMFI(currentIndex()))
     {
-        if(!(pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC()))
+        if(!(pMFI->hasDir()))
         {
             emit startDiffMerge(
                 pMFI->existsInA() ? pMFI->getFileInfoA()->absoluteFilePath() : QString(""),
@@ -1944,7 +1943,7 @@ bool DirectoryMergeWindow::isFileSelected()
 {
     if(MergeFileInfos* pMFI = d->getMFI(currentIndex()))
     {
-        return !(pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC() || pMFI->conflictingFileTypes());
+        return !(pMFI->hasDir() || pMFI->conflictingFileTypes());
     }
     return false;
 }
@@ -2904,7 +2903,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
         while(mi.isValid())
         {
             MergeFileInfos* pMFI = d->getMFI(mi);
-            bool bDir = pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC();
+            bool bDir = pMFI->hasDir();
             if(loop == 0 && bDir)
             {
                 bool bChange = false;
