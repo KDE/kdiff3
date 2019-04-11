@@ -536,7 +536,7 @@ bool ManualDiffHelpEntry::isValidMove(int line1, int line2, e_SrcSelector winIdx
     return true;
 }
 
-static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList,
+static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2, DiffList& diffList,
                     Options* pOptions)
 {
     ProgressProxy pp;
@@ -545,10 +545,10 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
     pp.setCurrent(0);
 
     diffList.clear();
-    if(p1 == nullptr || p1[0].getLine() == nullptr || p2 == nullptr || p2[0].getLine() == nullptr || size1 == 0 || size2 == 0)
+    if(p1 == nullptr || (*p1)[index1].getLine() == nullptr || p2 == nullptr || (*p2)[index2].getLine() == nullptr || size1 == 0 || size2 == 0)
     {
         Diff d(0, 0, 0);
-        if(p1 != nullptr && p2 != nullptr && p1[0].getLine() == nullptr && p2[0].getLine() == nullptr && size1 == size2)
+        if(p1 != nullptr && p2 != nullptr && (*p1)[index1].getLine() == nullptr && (*p2)[index2].getLine() == nullptr && size1 == size2)
             d.nofEquals = size1;
         else
         {
@@ -563,10 +563,10 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
         GnuDiff::comparison comparisonInput;
         memset(&comparisonInput, 0, sizeof(comparisonInput));
         comparisonInput.parent = nullptr;
-        comparisonInput.file[0].buffer = p1[0].getLine();                                                      //ptr to buffer
-        comparisonInput.file[0].buffered = (p1[size1 - 1].getLine() - p1[0].getLine() + p1[size1 - 1].size()); // size of buffer
-        comparisonInput.file[1].buffer = p2[0].getLine();                                                      //ptr to buffer
-        comparisonInput.file[1].buffered = (p2[size2 - 1].getLine() - p2[0].getLine() + p2[size2 - 1].size()); // size of buffer
+        comparisonInput.file[0].buffer = (*p1)[index1].getLine();                                                      //ptr to buffer
+        comparisonInput.file[0].buffered = ((*p1)[size1 - 1].getLine() - (*p1)[index1].getLine() + (*p1)[size1 - 1].size()); // size of buffer
+        comparisonInput.file[1].buffer = (*p2)[index2].getLine();                                                      //ptr to buffer
+        comparisonInput.file[1].buffered = ((*p2)[size2 - 1].getLine() - (*p2)[index2].getLine() + (*p2)[size2 - 1].size()); // size of buffer
 
         gnuDiff.ignore_white_space = GnuDiff::IGNORE_ALL_SPACE; // I think nobody needs anything else ...
         gnuDiff.bIgnoreWhiteSpace = true;
@@ -641,7 +641,7 @@ static bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineR
     return true;
 }
 
-bool ManualDiffHelpList::runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList,
+bool ManualDiffHelpList::runDiff(const QVector<LineData>* p1, LineRef size1, const QVector<LineData>* p2, LineRef size2, DiffList& diffList,
                                  e_SrcSelector winIdx1, e_SrcSelector winIdx2,
                                  Options* pOptions)
 {
@@ -660,7 +660,7 @@ bool ManualDiffHelpList::runDiff(const LineData* p1, LineRef size1, const LineDa
 
         if(l1end >= 0 && l2end >= 0)
         {
-            ::runDiff(p1 + l1begin, l1end - l1begin, p2 + l2begin, l2end - l2begin, diffList2, pOptions);
+            ::runDiff(p1, l1begin, l1end - l1begin, p2, l2begin, l2end - l2begin, diffList2, pOptions);
             diffList.splice(diffList.end(), diffList2);
             l1begin = l1end;
             l2begin = l2end;
@@ -672,14 +672,14 @@ bool ManualDiffHelpList::runDiff(const LineData* p1, LineRef size1, const LineDa
             {
                 ++l1end; // point to line after last selected line
                 ++l2end;
-                ::runDiff(p1 + l1begin, l1end - l1begin, p2 + l2begin, l2end - l2begin, diffList2, pOptions);
+                ::runDiff(p1, l1begin, l1end - l1begin, p2, l2begin, l2end - l2begin, diffList2, pOptions);
                 diffList.splice(diffList.end(), diffList2);
                 l1begin = l1end;
                 l2begin = l2end;
             }
         }
     }
-    ::runDiff(p1 + l1begin, size1 - l1begin, p2 + l2begin, size2 - l2begin, diffList2, pOptions);
+    ::runDiff(p1, l1begin, size1 - l1begin, p2, l2begin, size2 - l2begin, diffList2, pOptions);
     diffList.splice(diffList.end(), diffList2);
     return true;
 }
@@ -848,7 +848,7 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
 
 // Fourth step
 void calcDiff3LineListTrim(
-    Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC, ManualDiffHelpList* pManualDiffHelpList)
+    Diff3LineList& d3ll, const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList)
 {
     const Diff3Line d3l_empty;
     d3ll.remove(d3l_empty);
@@ -887,7 +887,7 @@ void calcDiff3LineListTrim(
         }
 
         if(line > lineA && i3->getLineA().isValid() && i3A->getLineB().isValid() && i3A->isEqualBC() &&
-           LineData::equal(pldA[i3->getLineA()], pldB[i3A->getLineB()], false) &&
+           LineData::equal((*pldA)[i3->getLineA()], (*pldB)[i3A->getLineB()], false) &&
            pManualDiffHelpList->isValidMove(i3->getLineA(), i3A->getLineB(), A, B) &&
            pManualDiffHelpList->isValidMove(i3->getLineA(), i3A->getLineC(), A, C))
         {
@@ -904,7 +904,7 @@ void calcDiff3LineListTrim(
         }
 
         if(line > lineB && i3->getLineB().isValid() && i3B->getLineA().isValid() && i3B->isEqualAC() &&
-           LineData::equal(pldB[i3->getLineB()], pldA[i3B->getLineA()], false) &&
+           LineData::equal((*pldB)[i3->getLineB()], (*pldA)[i3B->getLineA()], false) &&
            pManualDiffHelpList->isValidMove(i3->getLineB(), i3B->getLineA(), B, A) &&
            pManualDiffHelpList->isValidMove(i3->getLineB(), i3B->getLineC(), B, C))
         {
@@ -920,7 +920,7 @@ void calcDiff3LineListTrim(
         }
 
         if(line > lineC && i3->getLineC().isValid() && i3C->getLineA().isValid() && i3C->isEqualAB() &&
-           LineData::equal(pldC[i3->getLineC()], pldA[i3C->getLineA()], false) &&
+           LineData::equal((*pldC)[i3->getLineC()], (*pldA)[i3C->getLineA()], false) &&
            pManualDiffHelpList->isValidMove(i3->getLineC(), i3C->getLineA(), C, A) &&
            pManualDiffHelpList->isValidMove(i3->getLineC(), i3C->getLineB(), C, B))
         {
@@ -943,12 +943,12 @@ void calcDiff3LineListTrim(
             i3A->setLineA(i3->getLineA());
             i3->getLineA().invalidate();
 
-            if(i3A->getLineB().isValid() && LineData::equal(pldA[i3A->getLineA()], pldB[i3A->getLineB()], false))
+            if(i3A->getLineB().isValid() && LineData::equal((*pldA)[i3A->getLineA()], (*pldB)[i3A->getLineB()], false))
             {
                 i3A->bAEqB = true;
             }
             if((i3A->isEqualAB() && i3A->isEqualBC()) ||
-               (i3A->getLineC().isValid() && LineData::equal(pldA[i3A->getLineA()], pldC[i3A->getLineC()], false)))
+               (i3A->getLineC().isValid() && LineData::equal((*pldA)[i3A->getLineA()], (*pldC)[i3A->getLineC()], false)))
             {
                 i3A->bAEqC = true;
             }
@@ -965,12 +965,12 @@ void calcDiff3LineListTrim(
             i3B->setLineB(i3->getLineB());
             i3->getLineB().invalidate();
 
-            if(i3B->getLineA().isValid() && LineData::equal(pldA[i3B->getLineA()], pldB[i3B->getLineB()], false))
+            if(i3B->getLineA().isValid() && LineData::equal((*pldA)[i3B->getLineA()], (*pldB)[i3B->getLineB()], false))
             {
                 i3B->bAEqB = true;
             }
             if((i3B->isEqualAB() && i3B->isEqualAC()) ||
-               (i3B->getLineC().isValid() && LineData::equal(pldB[i3B->getLineB()], pldC[i3B->getLineC()], false)))
+               (i3B->getLineC().isValid() && LineData::equal((*pldB)[i3B->getLineB()], (*pldC)[i3B->getLineC()], false)))
             {
                 i3B->bBEqC = true;
             }
@@ -987,12 +987,12 @@ void calcDiff3LineListTrim(
             i3C->setLineC(i3->getLineC());
             i3->getLineC().invalidate();
 
-            if(i3C->getLineA().isValid() && LineData::equal(pldA[i3C->getLineA()], pldC[i3C->getLineC()], false))
+            if(i3C->getLineA().isValid() && LineData::equal((*pldA)[i3C->getLineA()], (*pldC)[i3C->getLineC()], false))
             {
                 i3C->bAEqC = true;
             }
             if((i3C->isEqualAC() && i3C->isEqualAB()) ||
-               (i3C->getLineB().isValid() && LineData::equal(pldB[i3C->getLineB()], pldC[i3C->getLineC()], false)))
+               (i3C->getLineB().isValid() && LineData::equal((*pldB)[i3C->getLineB()], (*pldC)[i3C->getLineC()], false)))
             {
                 i3C->bBEqC = true;
             }
@@ -1014,7 +1014,7 @@ void calcDiff3LineListTrim(
                 i->setLineB(i3->getLineB());
                 i->bAEqB = true;
 
-                if(i->getLineC().isValid() && LineData::equal(pldA[i->getLineA()], pldC[i->getLineC()], false))
+                if(i->getLineC().isValid() && LineData::equal((*pldA)[i->getLineA()], (*pldC)[i->getLineC()], false))
                 {
                     i->bAEqC = true;
                     i->bBEqC = true;
@@ -1044,7 +1044,7 @@ void calcDiff3LineListTrim(
                 i->setLineC(i3->getLineC());
                 i->bAEqC = true;
 
-                if(i->getLineB().isValid() && LineData::equal(pldA[i->getLineA()], pldB[i->getLineB()], false))
+                if(i->getLineB().isValid() && LineData::equal((*pldA)[i->getLineA()], (*pldB)[i->getLineB()], false))
                 {
                     i->bAEqB = true;
                     i->bBEqC = true;
@@ -1074,7 +1074,7 @@ void calcDiff3LineListTrim(
                 i->setLineC(i3->getLineC());
                 i->bBEqC = true;
 
-                if(i->getLineA().isValid() && LineData::equal(pldA[i->getLineA()], pldB[i->getLineB()], false))
+                if(i->getLineA().isValid() && LineData::equal((*pldA)[i->getLineA()], (*pldB)[i->getLineB()], false))
                 {
                     i->bAEqB = true;
                     i->bAEqC = true;
@@ -1129,7 +1129,7 @@ void calcDiff3LineListTrim(
 }
 
 void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
-                          const LineData* pldA, LineCount sizeA, const LineData* pldB, LineCount sizeB, const LineData* pldC, LineCount sizeC)
+                          const QVector<LineData>* pldA, LineCount sizeA, const QVector<LineData>* pldB, LineCount sizeB, const QVector<LineData>* pldC, LineCount sizeC)
 {
     m_pDiff3LineList = pD3ll;
     m_pDiff3LineVector = pD3lv;
@@ -1147,15 +1147,15 @@ void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
 }
 
 void Diff3LineList::calcWhiteDiff3Lines(
-    const LineData* pldA, const LineData* pldB, const LineData* pldC)
+    const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC)
 {
     Diff3LineList::iterator i3;
 
     for(i3 = begin(); i3 != end(); ++i3)
     {
-        i3->bWhiteLineA = (!i3->getLineA().isValid() || pldA == nullptr || pldA[i3->getLineA()].whiteLine() || pldA[i3->getLineA()].isPureComment());
-        i3->bWhiteLineB = (!i3->getLineA().isValid() || pldB == nullptr || pldB[i3->getLineB()].whiteLine() || pldB[i3->getLineB()].isPureComment());
-        i3->bWhiteLineC = (!i3->getLineC().isValid() || pldC == nullptr || pldC[i3->getLineC()].whiteLine() || pldC[i3->getLineC()].isPureComment());
+        i3->bWhiteLineA = (!i3->getLineA().isValid() || pldA == nullptr || (*pldA)[i3->getLineA()].whiteLine() || (*pldA)[i3->getLineA()].isPureComment());
+        i3->bWhiteLineB = (!i3->getLineA().isValid() || pldB == nullptr || (*pldB)[i3->getLineB()].whiteLine() || (*pldB)[i3->getLineB()].isPureComment());
+        i3->bWhiteLineC = (!i3->getLineC().isValid() || pldC == nullptr || (*pldC)[i3->getLineC()].whiteLine() || (*pldC)[i3->getLineC()].isPureComment());
     }
 }
 
@@ -1315,7 +1315,7 @@ void calcDiff(const QChar* p1, LineRef size1, const QChar* p2, LineRef size2, Di
     }
 }
 
-bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, const LineData* v1, const LineData* v2)
+bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2)
 {
     LineRef k1 = 0;
     LineRef k2 = 0;
@@ -1344,11 +1344,11 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
     if((!k1.isValid() && k2.isValid()) || (k1.isValid() && !k2.isValid())) bTextsTotalEqual = false;
     if(k1.isValid() && k2.isValid())
     {
-        if(v1[k1].size() != v2[k2].size() || memcmp(v1[k1].getLine(), v2[k2].getLine(), v1[k1].size() << 1) != 0)
+        if((*v1)[k1].size() != (*v2)[k2].size() || memcmp((*v1)[k1].getLine(), (*v2)[k2].getLine(), (*v1)[k1].size() << 1) != 0)
         {
             bTextsTotalEqual = false;
             DiffList* pDiffList = new DiffList;
-            calcDiff(v1[k1].getLine(), v1[k1].size(), v2[k2].getLine(), v2[k2].size(), *pDiffList, 2, maxSearchLength);
+            calcDiff((*v1)[k1].getLine(), (*v1)[k1].size(), (*v2)[k2].getLine(), (*v2)[k2].size(), *pDiffList, 2, maxSearchLength);
 
             // Optimize the diff list.
             DiffList::iterator dli;
@@ -1375,7 +1375,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
             setFineDiff(selector, pDiffList);
         }
 
-        if((v1[k1].isPureComment() || v1[k1].whiteLine()) && (v2[k2].isPureComment() || v2[k2].whiteLine()))
+        if(((*v1)[k1].isPureComment() || (*v1)[k1].whiteLine()) && ((*v2)[k2].isPureComment() || (*v2)[k2].whiteLine()))
         {
             if(selector == A)
             {
@@ -1435,7 +1435,7 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, int
     }
 }
 
-bool Diff3LineList::fineDiff(const e_SrcSelector selector, const LineData* v1, const LineData* v2)
+bool Diff3LineList::fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2)
 {
     // Finetuning: Diff each line with deltas
     ProgressProxy pp;

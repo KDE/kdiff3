@@ -35,7 +35,7 @@ public:
       const QString& fileName,
       QTextCodec* pTextCodec,
       e_LineEndStyle eLineEndStyle,
-      const LineData* pLineData,
+      const QVector<LineData>* pLineData,
       int size,
       const Diff3LineVector* pDiff3LineVector,
       const ManualDiffHelpList* pManualDiffHelpList,

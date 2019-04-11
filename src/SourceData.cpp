@@ -159,17 +159,17 @@ QStringList SourceData::setData(const QString& data)
     return errors;
 }
 
-const LineData* SourceData::getLineDataForDiff() const
+const QVector<LineData>* SourceData::getLineDataForDiff() const
 {
     if(m_lmppData.m_pBuf == nullptr)
-        return m_normalData.m_v.size() > 0 ? &m_normalData.m_v[0] : nullptr;
+        return m_normalData.m_v.size() > 0 ? &m_normalData.m_v : nullptr;
     else
-        return m_lmppData.m_v.size() > 0 ? &m_lmppData.m_v[0] : nullptr;
+        return m_lmppData.m_v.size() > 0 ? &m_lmppData.m_v : nullptr;
 }
 
-const LineData* SourceData::getLineDataForDisplay() const
+const QVector<LineData>* SourceData::getLineDataForDisplay() const
 {
-    return m_normalData.m_v.size() > 0 ? &m_normalData.m_v[0] : nullptr;
+    return m_normalData.m_v.size() > 0 ? &m_normalData.m_v : nullptr;
 }
 
 LineRef SourceData::getSizeLines() const

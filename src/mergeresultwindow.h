@@ -35,9 +35,9 @@ public:
    MergeResultWindow(QWidget* pParent, Options* pOptions, QStatusBar* pStatusBar);
 
    void init(
-      const LineData* pLineDataA, LineRef sizeA,
-      const LineData* pLineDataB, LineRef sizeB,
-      const LineData* pLineDataC, LineRef sizeC,
+      const QVector<LineData>* pLineDataA, LineRef sizeA,
+      const QVector<LineData>* pLineDataB, LineRef sizeB,
+      const QVector<LineData>* pLineDataC, LineRef sizeC,
       const Diff3LineList* pDiff3LineList,
       TotalDiffStatus* pTotalDiffStatus
       );
@@ -132,9 +132,9 @@ private:
 
    Options* m_pOptions = nullptr;
 
-   const LineData* m_pldA;
-   const LineData* m_pldB;
-   const LineData* m_pldC;
+   const QVector<LineData>* m_pldA;
+   const QVector<LineData>* m_pldB;
+   const QVector<LineData>* m_pldC;
    LineRef m_sizeA;
    LineRef m_sizeB;
    LineRef m_sizeC;

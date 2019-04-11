@@ -33,8 +33,8 @@ class SourceData
     qint64 getSizeBytes() const;
     const char* getBuf() const;
     const QString& getText() const;
-    const LineData* getLineDataForDisplay() const;
-    const LineData* getLineDataForDiff() const;
+    const QVector<LineData>* getLineDataForDisplay() const;
+    const QVector<LineData>* getLineDataForDiff() const;
 
     void setFilename(const QString& filename);
     void setFileAccess(const FileAccess& fileAccess);

@@ -11,7 +11,7 @@
 
 #include "MergeEditLine.h"
 
-QString MergeEditLine::getString(const LineData* pLineDataA, const LineData* pLineDataB, const LineData* pLineDataC)
+QString MergeEditLine::getString(const QVector<LineData>* pLineDataA, const QVector<LineData>* pLineDataB, const QVector<LineData>* pLineDataC)
 {
     if(isRemoved())
     {
@@ -29,11 +29,11 @@ QString MergeEditLine::getString(const LineData* pLineDataA, const LineData* pLi
         const LineData* pld = nullptr;
         Q_ASSERT(src == A || src == B || src == C);
         if(src == A && d3l.getLineA().isValid())
-            pld = &pLineDataA[d3l.getLineA()];
+            pld = &(*pLineDataA)[d3l.getLineA()];
         else if(src == B && d3l.getLineB().isValid())
-            pld = &pLineDataB[d3l.getLineB()];
+            pld = &(*pLineDataB)[d3l.getLineB()];
         else if(src == C && d3l.getLineC().isValid())
-            pld = &pLineDataC[d3l.getLineC()];
+            pld = &(*pLineDataC)[d3l.getLineC()];
 
         //Not an error.
         if(pld == nullptr)

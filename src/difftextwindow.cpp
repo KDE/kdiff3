@@ -84,7 +84,7 @@ class DiffTextWindowData
     QTextCodec* m_pTextCodec;
     e_LineEndStyle m_eLineEndStyle;
 
-    const LineData* m_pLineData;
+    const QVector<LineData>* m_pLineData;
     int m_size;
     QString m_filename;
     bool m_bWordWrap;
@@ -197,7 +197,7 @@ void DiffTextWindow::init(
     const QString& filename,
     QTextCodec* pTextCodec,
     e_LineEndStyle eLineEndStyle,
-    const LineData* pLineData,
+    const QVector<LineData>* pLineData,
     int size,
     const Diff3LineVector* pDiff3LineVector,
     const ManualDiffHelpList* pManualDiffHelpList,
@@ -1115,7 +1115,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int device
 
         writeLine(
             p,                                               // QPainter
-            srcLineIdx == -1 ? nullptr : &m_pLineData[srcLineIdx], // Text in this line
+            srcLineIdx == -1 ? nullptr : &(*m_pLineData)[srcLineIdx], // Text in this line
             pFineDiff1,
             pFineDiff2,
             line, // Line on the screen
@@ -1148,7 +1148,7 @@ QString DiffTextWindowData::getString(int d3lIdx)
         return QString();
     else
     {
-        const LineData* ld = &m_pLineData[lineIdx];
+        const LineData* ld = &(*m_pLineData)[lineIdx];
         return QString(ld->getLine(), ld->size());
     }
     return QString();
@@ -1240,8 +1240,8 @@ QString DiffTextWindow::getSelection()
 
         if(lineIdx != -1)
         {
-            const QChar* pLine = d->m_pLineData[lineIdx].getLine();
-            int size = d->m_pLineData[lineIdx].size();
+            const QChar* pLine = (*d->m_pLineData)[lineIdx].getLine();
+            int size = (*d->m_pLineData)[lineIdx].size();
             QString lineString = QString(pLine, size);
 
             if(d->m_bWordWrap)
@@ -1354,7 +1354,7 @@ void DiffTextWindow::setSelection(LineRef firstLine, int startPos, LineRef lastL
         if(d->m_winIdx == B) line = d3l->getLineB();
         if(d->m_winIdx == C) line = d3l->getLineC();
         if(line.isValid())
-            endPos = d->m_pLineData[line].width(d->m_pOptions->m_tabSize);
+            endPos = (*d->m_pLineData)[line].width(d->m_pOptions->m_tabSize);
     }
 
     if(d->m_bWordWrap && d->m_pDiff3LineVector != nullptr)

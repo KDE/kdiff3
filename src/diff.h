@@ -106,16 +106,16 @@ class Diff3LineVector;
 class DiffBufferInfo
 {
   public:
-    const LineData* m_pLineDataA;
-    const LineData* m_pLineDataB;
-    const LineData* m_pLineDataC;
+    const QVector<LineData>* m_pLineDataA;
+    const QVector<LineData>* m_pLineDataB;
+    const QVector<LineData>* m_pLineDataC;
     LineCount m_sizeA;
     LineCount m_sizeB;
     LineCount m_sizeC;
     const Diff3LineList* m_pDiff3LineList;
     const Diff3LineVector* m_pDiff3LineVector;
     void init(Diff3LineList* d3ll, const Diff3LineVector* d3lv,
-              const LineData* pldA, LineCount sizeA, const LineData* pldB, LineCount sizeB, const LineData* pldC, LineCount sizeC);
+              const QVector<LineData>* pldA, LineCount sizeA, const QVector<LineData>* pldB, LineCount sizeB, const QVector<LineData>* pldC, LineCount sizeC);
 };
 
 class Diff3Line
@@ -173,9 +173,9 @@ class Diff3Line
     const LineData* getLineData(e_SrcSelector src) const
     {
         Q_ASSERT(m_pDiffBufferInfo != nullptr);
-        if(src == A && lineA >= 0) return &m_pDiffBufferInfo->m_pLineDataA[lineA];
-        if(src == B && lineB >= 0) return &m_pDiffBufferInfo->m_pLineDataB[lineB];
-        if(src == C && lineC >= 0) return &m_pDiffBufferInfo->m_pLineDataC[lineC];
+        if(src == A && lineA >= 0) return &(*m_pDiffBufferInfo->m_pLineDataA)[lineA];
+        if(src == B && lineB >= 0) return &(*m_pDiffBufferInfo->m_pLineDataB)[lineB];
+        if(src == C && lineC >= 0) return &(*m_pDiffBufferInfo->m_pLineDataC)[lineC];
         return nullptr;
     }
     QString getString(const e_SrcSelector src) const
@@ -194,7 +194,7 @@ class Diff3Line
         return -1;
     }
 
-    bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const LineData* v1, const LineData* v2);
+    bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2);
     void mergeOneLine(e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, e_SrcSelector& src, bool bTwoInputs) const;
 
     void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, int& lineIdx,
@@ -229,9 +229,9 @@ class Diff3Line
 class Diff3LineList : public std::list<Diff3Line>
 {
   public:
-    bool fineDiff(const e_SrcSelector selector, const LineData* v1, const LineData* v2);
+    bool fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2);
     void calcDiff3LineVector(Diff3LineVector& d3lv);
-    void calcWhiteDiff3Lines(const LineData* pldA, const LineData* pldB, const LineData* pldC);
+    void calcWhiteDiff3Lines(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC);
     //TODO: Add safety guards to prevent list from getting too large. Same problem as with QLinkedList.
     int size() const {
         if(std::list<Diff3Line>::size() > std::numeric_limits<int>::max())
@@ -364,7 +364,7 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
         bool isValidMove(int line1, int line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
         void insertEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine);
 
-        bool runDiff(const LineData* p1, LineRef size1, const LineData* p2, LineRef size2, DiffList& diffList,
+        bool runDiff(const QVector<LineData>* p1, LineRef size1, const QVector<LineData>* p2, LineRef size2, DiffList& diffList,
                      e_SrcSelector winIdx1, e_SrcSelector winIdx2,
                      Options* pOptions);
 };
@@ -383,15 +383,15 @@ void calcDiff3LineListUsingBC(
 
 void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManualDiffHelpList);
 
-void calcDiff3LineListTrim(Diff3LineList& d3ll, const LineData* pldA, const LineData* pldB, const LineData* pldC, ManualDiffHelpList* pManualDiffHelpList);
+void calcDiff3LineListTrim(Diff3LineList& d3ll, const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList);
 
 
 
 bool fineDiff(
     Diff3LineList& diff3LineList,
     int selector,
-    const LineData* v1,
-    const LineData* v2);
+    const QVector<LineData>* v1,
+    const QVector<LineData>* v2);
 
 inline bool isWhite(QChar c)
 {

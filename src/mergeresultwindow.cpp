@@ -107,9 +107,9 @@ MergeResultWindow::MergeResultWindow(
 }
 
 void MergeResultWindow::init(
-    const LineData* pLineDataA, LineRef sizeA,
-    const LineData* pLineDataB, LineRef sizeB,
-    const LineData* pLineDataC, LineRef sizeC,
+    const QVector<LineData>* pLineDataA, LineRef sizeA,
+    const QVector<LineData>* pLineDataB, LineRef sizeB,
+    const QVector<LineData>* pLineDataC, LineRef sizeC,
     const Diff3LineList* pDiff3LineList,
     TotalDiffStatus* pTotalDiffStatus)
 {
