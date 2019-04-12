@@ -532,7 +532,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     }
 
     // Ignore comments
-    if(m_pOptions->m_bIgnoreComments)
+    if(m_pOptions->m_bIgnoreComments && hasData())
     {
         m_lmppData.removeComments();
         qint64 vSize = std::min(m_normalData.m_vSize, m_lmppData.m_vSize);
