@@ -299,7 +299,8 @@ bool SourceData::FileData::writeFile(const QString& filename)
     return bSuccess;
 }
 
-void SourceData::FileData::copyBufFrom(const FileData& src)
+//Depriated
+void SourceData::FileData::copyBufFrom(const FileData& src) //TODO: Remove me.
 {
     reset();
     char* pBuf;
@@ -552,38 +553,16 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
 /** Prepare the linedata vector for every input line.*/
 bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
 {
+    if(m_pBuf == nullptr)
+        return true;
+
+    if(pEncoding == nullptr)
+        return false;
+
     qint64 i;
     // detect line end style
     QVector<e_LineEndStyle> vOrigDataLineEndStyle;
     m_eLineEndStyle = eLineEndStyleUndefined;
-    for(i = 0; i < m_size; ++i)
-    {
-        if(m_pBuf[i] == '\r')
-        {
-            if(i + 1 < m_size && m_pBuf[i + 1] == '\n') // not 16-bit unicode
-            {
-                vOrigDataLineEndStyle.push_back(eLineEndStyleDos);
-                ++i;
-            }
-            else if(i > 0 && i + 2 < m_size && m_pBuf[i - 1] == '\0' && m_pBuf[i + 1] == '\0' && m_pBuf[i + 2] == '\n') // 16-bit unicode
-            {
-                vOrigDataLineEndStyle.push_back(eLineEndStyleDos);
-                i += 2;
-            }
-            else // old mac line end style ?
-            {
-                vOrigDataLineEndStyle.push_back(eLineEndStyleUndefined);
-                const_cast<char*>(m_pBuf)[i] = '\n'; // fix it in original data
-            }
-        }
-        else if(m_pBuf[i] == '\n')
-        {
-            vOrigDataLineEndStyle.push_back(eLineEndStyleUnix);
-        }
-    }
-
-    if(!vOrigDataLineEndStyle.isEmpty())
-        m_eLineEndStyle = vOrigDataLineEndStyle[0];
 
     qint64 skipBytes = 0;
     QTextCodec* pCodec = detectEncoding(m_pBuf, m_size, skipBytes);
@@ -594,42 +573,96 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
         return false;
 
     QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, (int)(m_size - skipBytes));
-    QTextStream ts(ba, QIODevice::ReadOnly | QIODevice::Text);
+    QTextStream ts(ba, QIODevice::ReadOnly); //Don't use text mode we need to see the actual line ending.
     ts.setCodec(pEncoding);
     ts.setAutoDetectUnicode(false);
+    QString line;
+    QChar   curChar;
+    LineCount lineCount = 0;
+    qint32 lineLength = 0;
+    bool bNonWhiteFound = false;
+    qint32 whiteLength = 0;
+    qint64 lastOffset = 0;
+
+    m_bIncompleteConversion = false;
+
+    while(!ts.atEnd())
+    {
+        line.clear();
+        if(lineCount >= TYPE_MAX(LineCount) - 5)
+            return false;
+
+        m_v.push_back(LineData());
+        m_v[lineCount].setOffset(lastOffset);
+
+        ts >> curChar;
+        //QTextStream::readLine doesn't tell us abount line endings.
+        while(curChar != '\n' && curChar != '\r')
+        {
+            if(curChar.isNull() || curChar.isNonCharacter())
+                return true;
+
+            if(curChar == QChar::ReplacementCharacter)
+                m_bIncompleteConversion = true;
+
+            line.append(curChar);
+
+            if(ts.atEnd())
+                break;
+
+            ts >> curChar;
+        }
+
+        ++lineCount;
+        lastOffset = ts.pos();
+        //There is no peek in QTextStream so work around that limitation by reading next character here.
+        switch(curChar.unicode())
+        {
+            case '\n':
+                vOrigDataLineEndStyle.push_back(eLineEndStyleUnix);
+                break;
+            case '\r':
+                if(lastOffset < m_size)
+                {
+                    qint64  j;
+                    for(j = 0; j < 4 && lastOffset + j < m_size; j++)
+                    {
+                        if(m_pBuf[lastOffset + j] != '\0')
+                            break;
+                    }
+
+                    if(m_pBuf[lastOffset + j] == '\n')
+                    {
+                        ts >> curChar;
+                        vOrigDataLineEndStyle.push_back(eLineEndStyleDos);
+                        lastOffset = ts.pos();
+                        break;
+                    }
+                }
+
+                //old mac style ending.
+                vOrigDataLineEndStyle.push_back(eLineEndStyleUndefined);
+                break;
+        }
+        //kdiff3 internally uses only unix style endings and assumes for simplicity.
+        line.append('\n');
+    }
+
+    m_bIsText = true;
+
+    if(!vOrigDataLineEndStyle.isEmpty())
+        m_eLineEndStyle = vOrigDataLineEndStyle[0];
+
+    ts.seek(0);
     m_unicodeBuf = ts.readAll();
     ba.clear();
 
     int ucSize = m_unicodeBuf.length();
     const QChar* p = m_unicodeBuf.unicode();
 
-    m_bIsText = true;
-    LineCount lines = 1;
-    m_bIncompleteConversion = false;
-    for(i = 0; i < ucSize; ++i)
-    {
-        if(i >= ucSize || p[i] == '\n')
-        {
-            if(lines >= TYPE_MAX(LineCount) - 5)
-                return false;
-
-            ++lines;
-        }
-        if(p[i].isNull())
-        {
-            m_bIsText = false;
-        }
-        if(p[i] == QChar::ReplacementCharacter)
-        {
-            m_bIncompleteConversion = true;
-        }
-    }
-
-    m_v.resize(lines + 5);
+    m_v.push_back(LineData());
     int lineIdx = 0;
-    int lineLength = 0;
-    bool bNonWhiteFound = false;
-    int whiteLength = 0;
+
     for(i = 0; i <= ucSize; ++i)
     {
         if(i >= ucSize || p[i] == '\n')
@@ -669,12 +702,13 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
                 bNonWhiteFound = true;
         }
     }
-    Q_ASSERT(lineIdx == lines);
+    Q_ASSERT(lineIdx == lineCount || lineIdx == lineCount + 1);//account for buggy old behavior of always appending an extra line. New loop only does this if the file does not end with a EOL marker.
 
-    m_vSize = lines;
+    m_vSize = lineCount;
     return true;
 }
 
+// Depriated
 // Must not be entered, when within a comment.
 // Returns either at a newline-character p[i]=='\n' or when i==size.
 // A line that contains only comments is still "white".
@@ -688,7 +722,7 @@ void SourceData::FileData::checkLineForComments(
     bool& bCommentInLine,    // true if any comment is within this line (in, out)
     bool& bStartsOpenComment // true if the line ends within an comment (out)
 )
-{
+{//TODO: Phase out used only in remove comment.
     bStartsOpenComment = false;
     for(; i < size; ++i)
     {
@@ -766,11 +800,12 @@ void SourceData::FileData::checkLineForComments(
     }
 }
 
+// Depriated
 // Modifies the input data, and replaces C/C++ comments with whitespace
 // when the line contains other data too. If the line contains only
 // a comment or white data, remember this in the flag bContainsPureComment.
 void SourceData::FileData::removeComments()
-{
+{//TODO: Phase out
     int line = 0;
     const QChar* p = m_unicodeBuf.unicode();
     bool bWithinComment = false;
@@ -813,6 +848,7 @@ void SourceData::FileData::removeComments()
 
         // end of line
         Q_ASSERT(isLineOrBufEnd(p, i, size));
+
         m_v[line].setPureComment(bCommentInLine && bWhite);
         /*      std::cout << line << " : " <<
        ( bCommentInLine ?  "c" : " " ) <<

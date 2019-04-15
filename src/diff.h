@@ -79,6 +79,8 @@ class LineData
     const QChar* pLine = nullptr;
     const QChar* pFirstNonWhiteChar = nullptr;
     int mSize = 0;
+
+    qint64 mOffset = 0;
     bool bContainsPureComment = false;
 
   public:
@@ -90,6 +92,9 @@ class LineData
 
     inline const QChar* getLine() const { return pLine; }
     inline void setLine(const QChar* line) { pLine = line;}
+
+    inline qint64 getOffset() { return mOffset; }
+    inline void setOffset(qint64 inOffset) { mOffset = inOffset; }
     int width(int tabSize) const; // Calcs width considering tabs.
     //int occurrences;
     bool whiteLine() const { return pFirstNonWhiteChar - pLine == mSize; }

@@ -83,7 +83,7 @@ class SourceData
         const char* m_pBuf = nullptr;
         qint64 m_size = 0;
         qint64 m_vSize = 0; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
-        QString m_unicodeBuf;
+        QString m_unicodeBuf; //TODO: Phase out needlessly wastes memmory and time by keeping second copy of file data.
         QVector<LineData> m_v;
         bool m_bIsText = false;
         bool m_bIncompleteConversion = false;
