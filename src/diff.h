@@ -236,7 +236,7 @@ class Diff3LineList : public std::list<Diff3Line>
     int size() const {
         if(std::list<Diff3Line>::size() > std::numeric_limits<int>::max())
         {
-            qCDebug(kdeMain) << "Diff3Line: List too large. size=" << std::list<Diff3Line>::size();
+            qCDebug(kdiffMain) << "Diff3Line: List too large. size=" << std::list<Diff3Line>::size();
             Q_ASSERT(false);//Unsupported size
             return 0;
         }

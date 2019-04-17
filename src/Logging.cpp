@@ -19,4 +19,4 @@
 
 #include "Logging.h"
 
-Q_LOGGING_CATEGORY(kdeMain, "org.kde.kdiff3")
+Q_LOGGING_CATEGORY(kdiffMain, "org.kde.kdiff3")

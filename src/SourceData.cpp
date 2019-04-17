@@ -34,6 +34,7 @@ Optimizations: Skip unneeded steps.
 
 #include "Utils.h"
 #include "diff.h"
+#include "Logging.h"
 
 #include <QProcess>
 #include <QString>
@@ -774,9 +775,12 @@ void SourceData::FileData::removeComments()
     const QChar* p = m_unicodeBuf.unicode();
     bool bWithinComment = false;
     int size = m_unicodeBuf.length();
+
+    qDebug(kdiffMain) << "m_v.size() = " << m_v.size() << ", size = " << size;
+    Q_ASSERT(m_v.size() > 0);
     for(int i = 0; i < size; ++i)
     {
-        //      std::cout << "2        " << std::string(&p[i], m_v[line].size) << std::endl;
+        qDebug(kdiffMain) << " line= " << QString(&p[i], m_v[line].size());
         bool bWhite = true;
         bool bCommentInLine = false;
 

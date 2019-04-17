@@ -21,5 +21,5 @@
 #define LOGGING_H
 #include <QLoggingCategory>
 
-Q_DECLARE_LOGGING_CATEGORY(kdeMain)
+Q_DECLARE_LOGGING_CATEGORY(kdiffMain)
 #endif // !LOGGING_H
