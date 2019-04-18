@@ -220,7 +220,7 @@ void SourceData::FileData::reset()
     m_v.clear();
     m_size = 0;
     m_vSize = 0;
-    m_bIsText = true;
+    m_bIsText = false;
     m_bIncompleteConversion = false;
     m_eLineEndStyle = eLineEndStyleUndefined;
 }
