@@ -501,6 +501,11 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             m_lmppData.copyBufFrom(m_normalData);
         }
     }
+    else
+    {
+        //exit early for non-existant files
+        return errors;
+    }
 
     if(!m_lmppData.preprocess(false, pEncoding2))
     {
