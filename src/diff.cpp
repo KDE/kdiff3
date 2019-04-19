@@ -1154,7 +1154,7 @@ void Diff3LineList::calcWhiteDiff3Lines(
     for(i3 = begin(); i3 != end(); ++i3)
     {
         i3->bWhiteLineA = (!i3->getLineA().isValid() || pldA == nullptr || (*pldA)[i3->getLineA()].whiteLine() || (*pldA)[i3->getLineA()].isPureComment());
-        i3->bWhiteLineB = (!i3->getLineA().isValid() || pldB == nullptr || (*pldB)[i3->getLineB()].whiteLine() || (*pldB)[i3->getLineB()].isPureComment());
+        i3->bWhiteLineB = (!i3->getLineB().isValid() || pldB == nullptr || (*pldB)[i3->getLineB()].whiteLine() || (*pldB)[i3->getLineB()].isPureComment());
         i3->bWhiteLineC = (!i3->getLineC().isValid() || pldC == nullptr || (*pldC)[i3->getLineC()].whiteLine() || (*pldC)[i3->getLineC()].isPureComment());
     }
 }
