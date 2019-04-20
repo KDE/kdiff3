@@ -109,7 +109,7 @@ void calcDiff3LineListUsingAB(
     LineRef::LineType lineB = 0;
     Diff d(0, 0, 0);
 
-    qDebug(kdiffMain) << "Enter: calcDiff3LineListUsingAB" ;
+    qCInfo(kdiffMain) << "Enter: calcDiff3LineListUsingAB" ;
         for(;;)
     {
         if(d.nofEquals == 0 && d.diff1 == 0 && d.diff2 == 0)
@@ -157,10 +157,10 @@ void calcDiff3LineListUsingAB(
 
         Q_ASSERT(d.nofEquals >= 0);
 
-        qDebug(kdiffMain) << "lineA = " << d3l.getLineA() << "lineB = " << d3l.getLineB() ;
+        qCDebug(kdiffCore) << "lineA = " << d3l.getLineA() << ", lineB = " << d3l.getLineB() ;
         d3ll.push_back(d3l);
     }
-    qDebug(kdiffMain) << "Leave: calcDiff3LineListUsingAB" ;
+    qCInfo(kdiffMain) << "Leave: calcDiff3LineListUsingAB" ;
 }
 
 // Second step
@@ -1340,6 +1340,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
         k2 = getLineA();
     }
 
+    qDebug(kdiffCore) << "k1 = " << k1 << ", k2 = " << k2;
     if((!k1.isValid() && k2.isValid()) || (k1.isValid() && !k2.isValid())) bTextsTotalEqual = false;
     if(k1.isValid() && k2.isValid())
     {

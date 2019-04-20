@@ -79,7 +79,7 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, e_SrcSelector idx)
                                           "If it is reproducible please contact the author.\n"),
                                    i18n("Severe Internal Error"));
 
-                qCritical(kdiffMain) << "Severe Internal Error. Line not set for idx=" << idx << "\n";
+                qCCritical(kdiffMain) << "Severe Internal Error. Line not set for idx=" << idx << "\n";
                 ::exit(-1);
             }
             ++i;
@@ -93,7 +93,7 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, e_SrcSelector idx)
                                   "If it is reproducible please contact the author.\n"),
                            i18n("Severe Internal Error"));
 
-        qCritical(kdiffMain) << "Severe Internal Error.: " << size << " != " << i << "\n";
+        qCCritical(kdiffMain) << "Severe Internal Error.: " << size << " != " << i << "\n";
         ::exit(-1);
     }
 }
@@ -156,7 +156,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
 
         // First get all input data.
         pp.setInformation(i18n("Loading A"));
-        qInfo(kdiffMain) << i18n("Loading A: ") << m_sd1.getFilename() ;
+        qCInfo(kdiffMain) << i18n("Loading A: %1 ", m_sd1.getFilename()) ;
 
         if(bUseCurrentEncoding)
             errors = m_sd1.readAndPreprocess(m_sd1.getEncoding(), false);
@@ -171,7 +171,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         pp.step();
 
         pp.setInformation(i18n("Loading B"));
-        qInfo(kdiffMain) << i18n("Loading B: ") << m_sd2.getFilename() ;
+        qCInfo(kdiffMain) << i18n("Loading B: ", m_sd2.getFilename());
 
         if(bUseCurrentEncoding)
             errors = m_sd2.readAndPreprocess(m_sd2.getEncoding(), false);
@@ -203,14 +203,14 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             if(m_sd1.isText() && m_sd2.isText())
             {
                pp.setInformation(i18n("Diff: A <-> B"));
-               qInfo(kdiffMain) << i18n("Diff: A <-> B") ;
+               qCInfo(kdiffMain) << i18n("Diff: A <-> B") ;
                m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, A, B,
                         &m_pOptionDialog->m_options);
 
                 pp.step();
 
                 pp.setInformation(i18n("Linediff: A <-> B"));
-                qInfo(kdiffMain) << i18n("Linediff: A <-> B") ;
+                qCInfo(kdiffMain) << i18n("Linediff: A <-> B") ;
                 calcDiff3LineListUsingAB(&m_diffList12, m_diff3LineList);
                 pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
                 if(m_sd1.getSizeBytes() == 0) pTotalDiffStatus->bTextAEqB = false;

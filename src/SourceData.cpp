@@ -776,11 +776,11 @@ void SourceData::FileData::removeComments()
     bool bWithinComment = false;
     int size = m_unicodeBuf.length();
 
-    qDebug(kdiffMain) << "m_v.size() = " << m_v.size() << ", size = " << size;
+    qCDebug(kdiffCore) << "m_v.size() = " << m_v.size() << ", size = " << size;
     Q_ASSERT(m_v.size() > 0);
     for(int i = 0; i < size; ++i)
     {
-        qDebug(kdiffMain) << " line= " << QString(&p[i], m_v[line].size());
+        qCDebug(kdiffCore) << "line= " << QString(&p[i], m_v[line].size());
         bool bWhite = true;
         bool bCommentInLine = false;
 
