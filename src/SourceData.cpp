@@ -780,7 +780,7 @@ void SourceData::FileData::removeComments()
     Q_ASSERT(m_v.size() > 0);
     for(int i = 0; i < size; ++i)
     {
-        qCDebug(kdiffCore) << "line= " << QString(&p[i], m_v[line].size());
+        qCDebug(kdiffCore) << "line = " << QString(&p[i], m_v[line].size());
         bool bWhite = true;
         bool bCommentInLine = false;
 
