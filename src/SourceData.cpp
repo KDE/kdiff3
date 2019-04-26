@@ -592,8 +592,7 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
         if(lineCount >= TYPE_MAX(LineCount) - 5)
             return false;
 
-        m_v.push_back(LineData());
-        m_v[lineCount].setOffset(lastOffset);
+        m_v.push_back(LineData(lastOffset));
 
         ts >> curChar;
         //QTextStream::readLine doesn't tell us abount line endings.
@@ -644,8 +643,9 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
                 vOrigDataLineEndStyle.push_back(eLineEndStyleUndefined);
                 break;
         }
-        //kdiff3 internally uses only unix style endings and assumes for simplicity.
+        //kdiff3 internally uses only unix style endings for simplicity.
         line.append('\n');
+        m_v[lineCount].setLine(line);
     }
 
     m_bIsText = true;
@@ -673,7 +673,7 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
             {
                 --lineLength;
             }
-            m_v[lineIdx].setFirstNonWhiteChar(m_v[lineIdx].getLine() + std::min(whiteLength, lineLength));
+            m_v[lineIdx].setFirstNonWhiteChar(m_v[lineIdx].getRawLine() + std::min(whiteLength, lineLength));
             if(lineIdx < vOrigDataLineEndStyle.count() && bPreserveCR && i < ucSize)
             {
                 ++lineLength;

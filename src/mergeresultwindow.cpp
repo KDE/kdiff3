@@ -1253,8 +1253,8 @@ void MergeResultWindow::collectHistoryInformation(
     QString historyLead;
     {
         const LineData* pld = id3l->getLineData(src);
-        QString s(pld->getLine(), pld->size());
-        historyLead = calcHistoryLead(s);
+
+        historyLead = calcHistoryLead(pld->getLine());
     }
     QRegExp historyStart(m_pOptions->m_historyStartRegExp);
     if(id3l == iHistoryEnd)
@@ -1271,9 +1271,10 @@ void MergeResultWindow::collectHistoryInformation(
     {
         const LineData* pld = id3l->getLineData(src);
         if(!pld) continue;
-        QString s(pld->getLine(), pld->size());
-        if(historyLead.isEmpty()) historyLead = calcHistoryLead(s);
-        QString sLine = s.mid(historyLead.length());
+
+        const QString& oriLine = pld->getLine();
+        if(historyLead.isEmpty()) historyLead = calcHistoryLead(oriLine);
+        QString sLine = oriLine.mid(historyLead.length());
         if((!bUseRegExp && !sLine.trimmed().isEmpty() && bPrevLineIsEmpty) || (bUseRegExp && newHistoryEntry.exactMatch(sLine)))
         {
             if(!key.isEmpty() && !melList.empty())
@@ -1298,7 +1299,7 @@ void MergeResultWindow::collectHistoryInformation(
             melList.clear();
             melList.push_back(MergeEditLine(id3l, src));
         }
-        else if(!historyStart.exactMatch(s))
+        else if(!historyStart.exactMatch(oriLine))
         {
             melList.push_back(MergeEditLine(id3l, src));
         }

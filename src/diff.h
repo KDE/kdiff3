@@ -76,7 +76,9 @@ typedef std::list<Diff> DiffList;
 class LineData
 {
   private:
-    const QChar* pLine = nullptr;
+    QString pLine;
+    const QChar* pLine_old = nullptr;
+
     const QChar* pFirstNonWhiteChar = nullptr;
     int mSize = 0;
 
@@ -84,20 +86,23 @@ class LineData
     bool bContainsPureComment = false;
 
   public:
+    LineData() = default;
+    inline LineData(const qint64 inOffset) { mOffset = inOffset; }
     inline int size() const { return mSize; }
     inline void setSize(const int newSize) { mSize = newSize; }
 
     inline void setFirstNonWhiteChar(const QChar* firstNonWhiteChar) { pFirstNonWhiteChar = firstNonWhiteChar;}
     inline const QChar* getFirstNonWhiteChar() const { return pFirstNonWhiteChar; }
 
-    inline const QChar* getLine() const { return pLine; }
-    inline void setLine(const QChar* line) { pLine = line;}
-
+    inline const QString getLine() const { return pLine; }
+    inline const QChar* getRawLine() const { return pLine_old; }
+    inline void setLine(const QChar* line) { pLine_old = line;}
+    inline void setLine(const QString& line) { pLine = line;}
     inline qint64 getOffset() { return mOffset; }
     inline void setOffset(qint64 inOffset) { mOffset = inOffset; }
     int width(int tabSize) const; // Calcs width considering tabs.
     //int occurrences;
-    bool whiteLine() const { return pFirstNonWhiteChar - pLine == mSize; }
+    bool whiteLine() const { return pFirstNonWhiteChar - pLine_old == mSize; }
 
     bool isPureComment() const { return bContainsPureComment; }
     void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
@@ -187,7 +192,7 @@ class Diff3Line
     {
         const LineData* pld = getLineData(src);
         if(pld)
-            return QString(pld->getLine(), pld->size());
+            return pld->getLine();
         else
             return QString();
     }

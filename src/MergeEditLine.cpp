@@ -41,7 +41,7 @@ QString MergeEditLine::getString(const QVector<LineData>* pLineDataA, const QVec
             return QString();
         }
 
-        return QString(pld->getLine(), pld->size());
+        return pld->getLine();
     }
     else
     {

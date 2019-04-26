@@ -58,10 +58,10 @@ bool LineData::equal(const LineData& l1, const LineData& l2, bool bStrict)
         return false;
 
     // Ignore white space diff
-    const QChar* p1 = l1.getLine();
+    const QChar* p1 = l1.getRawLine();
     const QChar* p1End = p1 + l1.size();
 
-    const QChar* p2 = l2.getLine();
+    const QChar* p2 = l2.getRawLine();
     const QChar* p2End = p2 + l2.size();
 
     if(g_bIgnoreWhiteSpace)
@@ -563,10 +563,10 @@ static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef si
         GnuDiff::comparison comparisonInput;
         memset(&comparisonInput, 0, sizeof(comparisonInput));
         comparisonInput.parent = nullptr;
-        comparisonInput.file[0].buffer = (*p1)[index1].getLine();                                                      //ptr to buffer
-        comparisonInput.file[0].buffered = ((*p1)[size1 - 1].getLine() - (*p1)[index1].getLine() + (*p1)[size1 - 1].size()); // size of buffer
-        comparisonInput.file[1].buffer = (*p2)[index2].getLine();                                                      //ptr to buffer
-        comparisonInput.file[1].buffered = ((*p2)[size2 - 1].getLine() - (*p2)[index2].getLine() + (*p2)[size2 - 1].size()); // size of buffer
+        comparisonInput.file[0].buffer = (*p1)[index1].getRawLine();                                                      //ptr to buffer
+        comparisonInput.file[0].buffered = ((*p1)[size1 - 1].getRawLine() - (*p1)[index1].getRawLine() + (*p1)[size1 - 1].size()); // size of buffer
+        comparisonInput.file[1].buffer = (*p2)[index2].getRawLine();                                                      //ptr to buffer
+        comparisonInput.file[1].buffered = ((*p2)[size2 - 1].getRawLine() - (*p2)[index2].getRawLine() + (*p2)[size2 - 1].size()); // size of buffer
 
         gnuDiff.ignore_white_space = GnuDiff::IGNORE_ALL_SPACE; // I think nobody needs anything else ...
         gnuDiff.bIgnoreWhiteSpace = true;
@@ -1344,11 +1344,11 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
     if((!k1.isValid() && k2.isValid()) || (k1.isValid() && !k2.isValid())) bTextsTotalEqual = false;
     if(k1.isValid() && k2.isValid())
     {
-        if((*v1)[k1].size() != (*v2)[k2].size() || memcmp((*v1)[k1].getLine(), (*v2)[k2].getLine(), (*v1)[k1].size() << 1) != 0)
+        if((*v1)[k1].size() != (*v2)[k2].size() || memcmp((*v1)[k1].getRawLine(), (*v2)[k2].getRawLine(), (*v1)[k1].size() << 1) != 0)
         {
             bTextsTotalEqual = false;
             DiffList* pDiffList = new DiffList;
-            calcDiff((*v1)[k1].getLine(), (*v1)[k1].size(), (*v2)[k2].getLine(), (*v2)[k2].size(), *pDiffList, 2, maxSearchLength);
+            calcDiff((*v1)[k1].getRawLine(), (*v1)[k1].size(), (*v2)[k2].getRawLine(), (*v2)[k2].size(), *pDiffList, 2, maxSearchLength);
 
             // Optimize the diff list.
             DiffList::iterator dli;

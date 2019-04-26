@@ -865,7 +865,7 @@ void DiffTextWindowData::writeLine(
     {
         // First calculate the "changed" information for each character.
         int i = 0;
-        QString lineString(pld->getLine(), pld->size());
+        QString lineString = pld->getLine();
         if(!lineString.isEmpty())
         {
             switch(lineString[lineString.length() - 1].unicode())
@@ -1149,7 +1149,7 @@ QString DiffTextWindowData::getString(int d3lIdx)
     else
     {
         const LineData* ld = &(*m_pLineData)[lineIdx];
-        return QString(ld->getLine(), ld->size());
+        return ld->getLine();
     }
     return QString();
 }
@@ -1240,9 +1240,8 @@ QString DiffTextWindow::getSelection()
 
         if(lineIdx != -1)
         {
-            const QChar* pLine = (*d->m_pLineData)[lineIdx].getLine();
             int size = (*d->m_pLineData)[lineIdx].size();
-            QString lineString = QString(pLine, size);
+            QString lineString = (*d->m_pLineData)[lineIdx].getLine();
 
             if(d->m_bWordWrap)
             {
