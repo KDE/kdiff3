@@ -53,33 +53,33 @@ bool g_bIgnoreWhiteSpace = true;
 bool g_bIgnoreTrivialMatches = true;
 
 // Just make sure that all input lines are in the output too, exactly once.
-static void debugLineCheck(Diff3LineList& d3ll, LineRef size, e_SrcSelector idx)
+void Diff3LineList::debugLineCheck(const LineCount size, const e_SrcSelector srcSelector) const
 {
-    Diff3LineList::iterator it = d3ll.begin();
+    Diff3LineList::const_iterator it = begin();
     int i = 0;
 
-    for(it = d3ll.begin(); it != d3ll.end(); ++it)
+    for(it = begin(); it != end(); ++it)
     {
-        LineRef l = 0;
+        LineRef line;
 
-        Q_ASSERT(idx >= A && idx <= C);
-        if(idx == A)
-            l = it->getLineA();
-        else if(idx == B)
-            l = it->getLineB();
-        else if(idx == C)
-            l = it->getLineC();
+        Q_ASSERT(srcSelector == A || srcSelector == B || srcSelector == C);
+        if(srcSelector == A)
+            line = it->getLineA();
+        else if(srcSelector == B)
+            line = it->getLineB();
+        else if(srcSelector == C)
+            line = it->getLineC();
 
-        if(l != -1)
+        if(line.isValid())
         {
-            if(l != i)
+            if(line != i)
             {
                 KMessageBox::error(nullptr, i18n(
                                           "Data loss error:\n"
                                           "If it is reproducible please contact the author.\n"),
                                    i18n("Severe Internal Error"));
 
-                qCCritical(kdiffMain) << "Severe Internal Error. Line not set for idx=" << idx << "\n";
+                qCCritical(kdiffMain) << i18n("Severe Internal Error.") << " line != i for srcSelector=" << srcSelector << "\n";
                 ::exit(-1);
             }
             ++i;
@@ -93,7 +93,7 @@ static void debugLineCheck(Diff3LineList& d3ll, LineRef size, e_SrcSelector idx)
                                   "If it is reproducible please contact the author.\n"),
                            i18n("Severe Internal Error"));
 
-        qCCritical(kdiffMain) << "Severe Internal Error.: " << size << " != " << i << "\n";
+        qCCritical(kdiffMain) << i18n("Severe Internal Error.: ") << size << " != " << i << "\n";
         ::exit(-1);
     }
 }
@@ -277,9 +277,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             }
             pp.step();
 
-            debugLineCheck(m_diff3LineList, m_sd1.getSizeLines(), A);
-            debugLineCheck(m_diff3LineList, m_sd2.getSizeLines(), B);
-            debugLineCheck(m_diff3LineList, m_sd3.getSizeLines(), C);
+            m_diff3LineList.debugLineCheck(m_sd1.getSizeLines(), A);
+            m_diff3LineList.debugLineCheck(m_sd2.getSizeLines(), B);
+            m_diff3LineList.debugLineCheck(m_sd3.getSizeLines(), C);
 
             pp.setInformation(i18n("Linediff: A <-> B"));
             if(m_sd1.hasData() && m_sd2.hasData() && m_sd1.isText() && m_sd2.isText())
@@ -292,8 +292,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             pp.setInformation(i18n("Linediff: A <-> C"));
             if(m_sd1.hasData() && m_sd3.hasData() && m_sd1.isText() && m_sd3.isText())
               pTotalDiffStatus->bTextAEqC = m_diff3LineList.fineDiff(C, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay());
-            debugLineCheck(m_diff3LineList, m_sd2.getSizeLines(), B);
-            debugLineCheck(m_diff3LineList, m_sd3.getSizeLines(), C);
+            m_diff3LineList.debugLineCheck(m_sd2.getSizeLines(), B);
+            m_diff3LineList.debugLineCheck(m_sd3.getSizeLines(), C);
 
             pp.setInformation(i18n("Linediff: A <-> B"));
             if(m_sd1.hasData() && m_sd2.hasData() && m_sd1.isText() && m_sd2.isText())

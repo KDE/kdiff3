@@ -233,15 +233,18 @@ class Diff3LineList : public std::list<Diff3Line>
     void calcDiff3LineVector(Diff3LineVector& d3lv);
     void calcWhiteDiff3Lines(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC);
     //TODO: Add safety guards to prevent list from getting too large. Same problem as with QLinkedList.
-    int size() const {
+    int size() const
+    {
         if(std::list<Diff3Line>::size() > std::numeric_limits<int>::max())
         {
             qCDebug(kdiffMain) << "Diff3Line: List too large. size=" << std::list<Diff3Line>::size();
-            Q_ASSERT(false);//Unsupported size
+            Q_ASSERT(false); //Unsupported size
             return 0;
         }
         return (int)std::list<Diff3Line>::size();
-    }//safe for small files same limit as exited with QLinkedList. This should ultimatly be removed.
+    } //safe for small files same limit as exited with QLinkedList. This should ultimatly be removed.
+
+    void debugLineCheck(const LineCount size, const e_SrcSelector srcSelector) const;
 };
 
 class Diff3LineVector : public QVector<Diff3Line*>
