@@ -93,7 +93,7 @@ bool LineData::equal(const LineData& l1, const LineData& l2, bool bStrict)
     }
     else
     {
-        return (l1.size() == l2.size() && memcmp(p1, p2, l1.size()) == 0);
+        return (l1.size() == l2.size() && QString::compare(l1.getLine(), l2.getLine()) == 0);
     }
 }
 
@@ -1160,7 +1160,7 @@ void Diff3LineList::calcWhiteDiff3Lines(
 }
 
 // My own diff-invention:
-void calcDiff(const QChar* p1, LineRef size1, const QChar* p2, LineRef size2, DiffList& diffList, int match, int maxSearchRange)
+void calcDiff(const QChar* p1, const LineRef size1, const QChar* p2, const LineRef size2, DiffList& diffList, int match, int maxSearchRange)
 {
     diffList.clear();
 
@@ -1344,7 +1344,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
     if((!k1.isValid() && k2.isValid()) || (k1.isValid() && !k2.isValid())) bTextsTotalEqual = false;
     if(k1.isValid() && k2.isValid())
     {
-        if((*v1)[k1].size() != (*v2)[k2].size() || memcmp((*v1)[k1].getRawLine(), (*v2)[k2].getRawLine(), (*v1)[k1].size() << 1) != 0)
+        if((*v1)[k1].size() != (*v2)[k2].size() || QString::compare((*v1)[k1].getLine(), (*v2)[k2].getLine()) != 0)
         {
             bTextsTotalEqual = false;
             DiffList* pDiffList = new DiffList;

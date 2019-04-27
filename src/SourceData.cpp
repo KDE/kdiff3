@@ -537,12 +537,12 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     {
         m_lmppData.removeComments();
         qint64 vSize = std::min(m_normalData.m_vSize, m_lmppData.m_vSize);
-        Q_ASSERT(vSize < std::numeric_limits<int>::max());
+        Q_ASSERT(vSize < TYPE_MAX(int));
         for(int i = 0; i < vSize; ++i)
         {
             m_normalData.m_v[i].setPureComment(m_lmppData.m_v[i].isPureComment());
             //Don't crash if vSize is too large.
-            if(i == std::numeric_limits<int>::max())
+            if(i == TYPE_MAX(int))
                 break;
         }
     }
@@ -645,7 +645,7 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
         }
         //kdiff3 internally uses only unix style endings for simplicity.
         line.append('\n');
-        m_v[lineCount].setLine(line);
+        m_v[lineCount - 1].setLine(line);
     }
 
     m_bIsText = true;
