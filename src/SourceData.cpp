@@ -644,9 +644,11 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
                 break;
         }
         //kdiff3 internally uses only unix style endings for simplicity.
-        line.append('\n');
+        //line.append('\n');
         m_v[lineCount - 1].setLine(line);
     }
+
+    m_v.push_back(LineData(lastOffset));
 
     m_bIsText = true;
 
