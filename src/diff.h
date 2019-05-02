@@ -77,26 +77,26 @@ class LineData
 {
   private:
     QString pLine;
-    const QChar* pLine_old = nullptr;
+    Q_DECL_DEPRECATED const QChar* pLine_old = nullptr;
 
-    const QChar* pFirstNonWhiteChar = nullptr;
+    Q_DECL_DEPRECATED const QChar* pFirstNonWhiteChar = nullptr;
     int mSize = 0;
 
     qint64 mOffset = 0;
-    bool bContainsPureComment = false;
+    Q_DECL_DEPRECATED bool bContainsPureComment = false;
 
   public:
     LineData() = default;
     inline LineData(const qint64 inOffset) { mOffset = inOffset; }
-    inline int size() const { return mSize; }
-    inline void setSize(const int newSize) { mSize = newSize; }
+    Q_REQUIRED_RESULT inline int size() const { Q_ASSERT(pLine.length() == mSize); return pLine.length(); }
+    Q_DECL_DEPRECATED inline void setSize(const int newSize) { mSize = newSize; }
 
-    inline void setFirstNonWhiteChar(const QChar* firstNonWhiteChar) { pFirstNonWhiteChar = firstNonWhiteChar;}
+    Q_DECL_DEPRECATED inline void setFirstNonWhiteChar(const QChar* firstNonWhiteChar) { pFirstNonWhiteChar = firstNonWhiteChar;}
     inline const QChar* getFirstNonWhiteChar() const { return pFirstNonWhiteChar; }
 
-    inline const QString getLine() const { return pLine; }
-    inline const QChar* getRawLine() const { return pLine_old; }
-    inline void setLine(const QChar* line) { pLine_old = line;}
+    Q_REQUIRED_RESULT inline const QString getLine() const { return pLine; }
+    Q_DECL_DEPRECATED Q_REQUIRED_RESULT inline const QChar* getRawLine() const { return pLine_old; }
+    Q_DECL_DEPRECATED inline void setLine(const QChar* line) { pLine_old = line;}
     inline void setLine(const QString& line) { pLine = line;}
     inline qint64 getOffset() { return mOffset; }
     inline void setOffset(qint64 inOffset) { mOffset = inOffset; }
@@ -381,6 +381,8 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
                      e_SrcSelector winIdx1, e_SrcSelector winIdx2,
                      Options* pOptions);
 };
+
+void calcDiff(const QString &line1, const QString &line2, DiffList& diffList, int match, int maxSearchRange);
 
 void calcDiff3LineListUsingAB(
     const DiffList* pDiffListAB,

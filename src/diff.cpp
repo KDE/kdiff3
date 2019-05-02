@@ -1160,18 +1160,20 @@ void Diff3LineList::calcWhiteDiff3Lines(
 }
 
 // My own diff-invention:
-void calcDiff(const QChar* p1, const LineRef size1, const QChar* p2, const LineRef size2, DiffList& diffList, int match, int maxSearchRange)
+void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, int match, int maxSearchRange)
 {
     diffList.clear();
 
-    const QChar* p1start = p1;
-    const QChar* p2start = p2;
-    const QChar* p1end = p1 + size1;
-    const QChar* p2end = p2 + size2;
+    const QChar *p1start = line1.constData(), *p1=line1.constData(), *p2=line2.constData();
+    const QChar *p2start = line2.constData();
+    const QChar *p1end = p1start + line1.size();
+    const QChar *p2end = p2start + line2.size();
+    const int size1 = line1.size(), size2 = line2.size();
+
     for(;;)
     {
         int nofEquals = 0;
-        while(p1 != p1end && p2 != p2end && *p1 == *p2)
+        while(nofEquals < size1 && nofEquals < size2 && line1[nofEquals] == line2[nofEquals])
         {
             ++p1;
             ++p2;
@@ -1183,6 +1185,7 @@ void calcDiff(const QChar* p1, const LineRef size1, const QChar* p2, const LineR
         int bestI2 = 0;
         int i1 = 0;
         int i2 = 0;
+
         for(i1 = 0;; ++i1)
         {
             if(&p1[i1] == p1end || (bBestValid && i1 >= bestI1 + bestI2))
@@ -1244,6 +1247,7 @@ void calcDiff(const QChar* p1, const LineRef size1, const QChar* p2, const LineR
         int nofUnmatched = 0;
         const QChar* pu1 = p1 - 1;
         const QChar* pu2 = p2 - 1;
+
         while(pu1 >= p1start && pu2 >= p2start && *pu1 == *pu2)
         {
             ++nofUnmatched;
@@ -1311,7 +1315,7 @@ void calcDiff(const QChar* p1, const LineRef size1, const QChar* p2, const LineR
             l2 += (it->nofEquals + it->diff2);
         }
 
-        Q_ASSERT(l1 == size1 && l2 == size2);
+        Q_ASSERT(l1 == line1.size() && l2 == line2.size());
     }
 }
 
@@ -1348,7 +1352,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
         {
             bTextsTotalEqual = false;
             DiffList* pDiffList = new DiffList;
-            calcDiff((*v1)[k1].getRawLine(), (*v1)[k1].size(), (*v2)[k2].getRawLine(), (*v2)[k2].size(), *pDiffList, 2, maxSearchLength);
+            calcDiff((*v1)[k1].getLine(), (*v2)[k2].getLine(), *pDiffList, 2, maxSearchLength);
 
             // Optimize the diff list.
             DiffList::iterator dli;

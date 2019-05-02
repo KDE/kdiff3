@@ -80,10 +80,10 @@ class SourceData
     {
       private:
         friend SourceData;
-        const char* m_pBuf = nullptr;
+        const char* m_pBuf = nullptr; //TODO: Phase out needlessly wastes memmory and time by keeping second copy of file data.
         qint64 m_size = 0;
         qint64 m_vSize = 0; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
-        QString m_unicodeBuf; //TODO: Phase out needlessly wastes memmory and time by keeping second copy of file data.
+        QString m_unicodeBuf;
         QVector<LineData> m_v;
         bool m_bIsText = false;
         bool m_bIncompleteConversion = false;
@@ -97,8 +97,8 @@ class SourceData
         bool writeFile(const QString& filename);
         bool preprocess(bool bPreserveCR, QTextCodec* pEncoding);
         void reset();
-        void removeComments();
-        void copyBufFrom(const FileData& src);
+        Q_DECL_DEPRECATED void removeComments();
+        Q_DECL_DEPRECATED void copyBufFrom(const FileData& src);
 
         void checkLineForComments(
             const QChar* p,          // pointer to start of buffer
