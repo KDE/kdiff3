@@ -1302,13 +1302,13 @@ void calcDiff(const QChar* p1, LineRef size1, const QChar* p2, LineRef size2, Di
 
     // Verify difflist
     {
-        LineRef l1 = 0;
-        LineRef l2 = 0;
-        DiffList::iterator i;
-        for(i = diffList.begin(); i != diffList.end(); ++i)
+        qint32 l1 = 0;
+        qint32 l2 = 0;
+        DiffList::const_iterator it;
+        for(it = diffList.begin(); it != diffList.end(); ++it)
         {
-            l1 += (LineRef)(i->nofEquals + i->diff1);
-            l2 += (LineRef)(i->nofEquals + i->diff2);
+            l1 += (it->nofEquals + it->diff1);
+            l2 += (it->nofEquals + it->diff2);
         }
 
         Q_ASSERT(l1 == size1 && l2 == size2);

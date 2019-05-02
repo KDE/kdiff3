@@ -58,12 +58,12 @@ enum e_MergeDetails
 class Diff
 {
   public:
-    LineCount nofEquals;
+    qint32 nofEquals;
 
     qint64 diff1;
     qint64 diff2;
 
-    Diff(LineCount eq, qint64 d1, qint64 d2)
+    Diff(qint32 eq, qint64 d1, qint64 d2)
     {
         nofEquals = eq;
         diff1 = d1;
