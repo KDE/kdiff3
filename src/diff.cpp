@@ -1165,12 +1165,11 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
     diffList.clear();
 
     QString::const_iterator p1=line1.begin(), p2=line2.begin();
-    const int size1 = line1.size(), size2 = line2.size();
 
     for(;;)
     {
         int nofEquals = 0;
-        while(nofEquals < size1 && nofEquals < size2 && line1[nofEquals] == line2[nofEquals])
+        while(nofEquals < line1.size() && nofEquals < line2.size() && line1[nofEquals] == line2[nofEquals])
         {
             ++p1;
             ++p2;
