@@ -585,6 +585,7 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
     qint64 lastOffset = 0;
 
     m_bIncompleteConversion = false;
+    m_unicodeBuf.clear();
 
     while(!ts.atEnd())
     {
@@ -613,8 +614,7 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
         }
 
         ++lineCount;
-        lastOffset = ts.pos();
-        //There is no peek in QTextStream so work around that limitation by reading next character here.
+
         switch(curChar.unicode())
         {
             case '\n':
@@ -623,6 +623,7 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
             case '\r':
                 if(lastOffset < m_size)
                 {
+                    //workaround for lack of peak API in QTextStream.
                     qint64  j;
                     for(j = 0; j < 4 && lastOffset + j < m_size; j++)
                     {
@@ -646,6 +647,8 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
         //kdiff3 internally uses only unix style endings for simplicity.
         //line.append('\n');
         m_v[lineCount - 1].setLine(line);
+        m_unicodeBuf.append(line).append('\n');
+        lastOffset = m_unicodeBuf->length();
     }
 
     m_v.push_back(LineData(lastOffset));
@@ -654,10 +657,6 @@ bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
 
     if(!vOrigDataLineEndStyle.isEmpty())
         m_eLineEndStyle = vOrigDataLineEndStyle[0];
-
-    ts.seek(0);
-    m_unicodeBuf = ts.readAll();
-    ba.clear();
 
     int ucSize = m_unicodeBuf.length();
     const QChar* p = m_unicodeBuf.unicode();

@@ -77,9 +77,10 @@ class LineData
 {
   private:
     QString pLine;
+    quint32 pFirstNonWhiteChar = 0;
     Q_DECL_DEPRECATED const QChar* pLine_old = nullptr;
 
-    Q_DECL_DEPRECATED const QChar* pFirstNonWhiteChar = nullptr;
+    Q_DECL_DEPRECATED const QChar* pFirstNonWhiteChar_old = nullptr;
     int mSize = 0;
 
     qint64 mOffset = 0;
@@ -91,8 +92,8 @@ class LineData
     Q_REQUIRED_RESULT inline int size() const { Q_ASSERT(pLine.length() == mSize); return pLine.length(); }
     Q_DECL_DEPRECATED inline void setSize(const int newSize) { mSize = newSize; }
 
-    Q_DECL_DEPRECATED inline void setFirstNonWhiteChar(const QChar* firstNonWhiteChar) { pFirstNonWhiteChar = firstNonWhiteChar;}
-    inline const QChar* getFirstNonWhiteChar() const { return pFirstNonWhiteChar; }
+    Q_DECL_DEPRECATED inline void setFirstNonWhiteChar(const QChar* firstNonWhiteChar) { pFirstNonWhiteChar_old = firstNonWhiteChar;}
+    Q_DECL_DEPRECATED inline const QChar* getFirstNonWhiteChar() const { return pFirstNonWhiteChar_old; }
 
     Q_REQUIRED_RESULT inline const QString getLine() const { return pLine; }
     Q_DECL_DEPRECATED Q_REQUIRED_RESULT inline const QChar* getRawLine() const { return pLine_old; }
@@ -102,7 +103,7 @@ class LineData
     inline void setOffset(qint64 inOffset) { mOffset = inOffset; }
     int width(int tabSize) const; // Calcs width considering tabs.
     //int occurrences;
-    bool whiteLine() const { return pFirstNonWhiteChar - pLine_old == mSize; }
+    bool whiteLine() const { return pFirstNonWhiteChar_old - pLine_old == mSize; }
 
     bool isPureComment() const { return bContainsPureComment; }
     void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
