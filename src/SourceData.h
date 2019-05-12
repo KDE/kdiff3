@@ -95,7 +95,7 @@ class SourceData
         bool readFile(FileAccess& file);
         bool readFile(const QString& filename);
         bool writeFile(const QString& filename);
-        bool preprocess(bool bPreserveCR, QTextCodec* pEncoding);
+        bool preprocess(QTextCodec* pEncoding);
         void reset();
         Q_DECL_DEPRECATED void removeComments();
         Q_DECL_DEPRECATED void copyBufFrom(const FileData& src);

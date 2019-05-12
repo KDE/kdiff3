@@ -448,7 +448,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             }
         }
 
-        if(!m_normalData.preprocess(m_pOptions->m_bPreserveCarriageReturn, pEncoding1))
+        if(!m_normalData.preprocess(pEncoding1))
         {
             errors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
             return errors;
@@ -517,7 +517,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         return errors;
     }
 
-    if(!m_lmppData.preprocess(false, pEncoding2))
+    if(!m_lmppData.preprocess(pEncoding2))
     {
         errors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
         return errors;
@@ -556,7 +556,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
 }
 
 /** Prepare the linedata vector for every input line.*/
-bool SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec* pEncoding)
+bool SourceData::FileData::preprocess(QTextCodec* pEncoding)
 {
     if(m_pBuf == nullptr)
         return true;
