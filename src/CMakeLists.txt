@@ -55,7 +55,7 @@ add_executable(kdiff3 ${kdiff3_SRCS})
 target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::Parts KF5::Crash ${KDiff3_LIBRARIES} )
 target_compile_features(kdiff3 PRIVATE ${needed_features})
 
-install(TARGETS kdiff3 ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kdiff3 ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 
 ########### install files ###############
