@@ -76,34 +76,37 @@ typedef std::list<Diff> DiffList;
 class LineData
 {
   private:
-    QString pLine;
-    quint32 pFirstNonWhiteChar = 0;
-    Q_DECL_DEPRECATED const QChar* pLine_old = nullptr;
-
-    Q_DECL_DEPRECATED const QChar* pFirstNonWhiteChar_old = nullptr;
-    int mSize = 0;
-
+    QSharedPointer<QString> mBuffer;
+    //QString pLine;
+    QtNumberType mFirstNonWhiteChar = 0;
     qint64 mOffset = 0;
+    QtNumberType mSize = 0;
     Q_DECL_DEPRECATED bool bContainsPureComment = false;
 
   public:
-    LineData() = default;
-    inline LineData(const qint64 inOffset) { mOffset = inOffset; }
-    Q_REQUIRED_RESULT inline int size() const { Q_ASSERT(pLine.length() == mSize); return pLine.length(); }
-    Q_DECL_DEPRECATED inline void setSize(const int newSize) { mSize = newSize; }
+    explicit LineData() = default; // needed for QtInternal reasons should not be used.
+    inline LineData(const QSharedPointer<QString> &buffer, const qint64 inOffset, QtNumberType inSize = 0)
+    {
+        mBuffer = buffer;
+        mOffset = inOffset;
+        mSize = inSize;
+    }
+    Q_REQUIRED_RESULT inline int size() const { return mSize; }
+    inline void setFirstNonWhiteChar(const qint32 firstNonWhiteChar) { mFirstNonWhiteChar = firstNonWhiteChar;}
+    Q_REQUIRED_RESULT inline qint32 getFirstNonWhiteChar() const { return mFirstNonWhiteChar; }
 
-    Q_DECL_DEPRECATED inline void setFirstNonWhiteChar(const QChar* firstNonWhiteChar) { pFirstNonWhiteChar_old = firstNonWhiteChar;}
-    Q_DECL_DEPRECATED inline const QChar* getFirstNonWhiteChar() const { return pFirstNonWhiteChar_old; }
+    /*
+        QString::fromRawData allows us to create a light weight QString backed by the buffer memmory.
+    */
+    Q_REQUIRED_RESULT inline const QString getLine() const { return QString::fromRawData(mBuffer->data() + mOffset, mSize); }
+    //inline void setLine(const QString& line) { pLine = line;}
 
-    Q_REQUIRED_RESULT inline const QString getLine() const { return pLine; }
-    Q_DECL_DEPRECATED Q_REQUIRED_RESULT inline const QChar* getRawLine() const { return pLine_old; }
-    Q_DECL_DEPRECATED inline void setLine(const QChar* line) { pLine_old = line;}
-    inline void setLine(const QString& line) { pLine = line;}
-    inline qint64 getOffset() { return mOffset; }
-    inline void setOffset(qint64 inOffset) { mOffset = inOffset; }
-    int width(int tabSize) const; // Calcs width considering tabs.
+    Q_REQUIRED_RESULT const QSharedPointer<QString>& getBuffer() const { return mBuffer; }
+
+    Q_REQUIRED_RESULT inline qint64 getOffset() const { return mOffset; }
+    Q_REQUIRED_RESULT int width(int tabSize) const; // Calcs width considering tabs.
     //int occurrences;
-    bool whiteLine() const { return pFirstNonWhiteChar_old - pLine_old == mSize; }
+    bool whiteLine() const { return mFirstNonWhiteChar == mSize - 1; }
 
     bool isPureComment() const { return bContainsPureComment; }
     void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
@@ -189,7 +192,7 @@ class Diff3Line
         if(src == C && lineC >= 0) return &(*m_pDiffBufferInfo->m_pLineDataC)[lineC];
         return nullptr;
     }
-    QString getString(const e_SrcSelector src) const
+    const QString getString(const e_SrcSelector src) const
     {
         const LineData* pld = getLineData(src);
         if(pld)

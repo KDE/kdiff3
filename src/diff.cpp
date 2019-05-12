@@ -27,6 +27,7 @@
 
 int LineData::width(int tabSize) const
 {
+    QString pLine = getLine();
     int w = 0;
     int j = 0;
     for(int i = 0; i < size(); ++i)
@@ -563,10 +564,10 @@ static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef si
         GnuDiff::comparison comparisonInput;
         memset(&comparisonInput, 0, sizeof(comparisonInput));
         comparisonInput.parent = nullptr;
-        comparisonInput.file[0].buffer = (*p1)[index1].getRawLine();                                                      //ptr to buffer
-        comparisonInput.file[0].buffered = ((*p1)[size1 - 1].getRawLine() - (*p1)[index1].getRawLine() + (*p1)[size1 - 1].size()); // size of buffer
-        comparisonInput.file[1].buffer = (*p2)[index2].getRawLine();                                                      //ptr to buffer
-        comparisonInput.file[1].buffered = ((*p2)[size2 - 1].getRawLine() - (*p2)[index2].getRawLine() + (*p2)[size2 - 1].size()); // size of buffer
+        comparisonInput.file[0].buffer = (*p1)[index1].getBuffer()->unicode() + (*p1)[index1].getOffset();                                                      //ptr to buffer
+        comparisonInput.file[0].buffered = ((*p1)[size1].getOffset() - 1); // size of buffer
+        comparisonInput.file[1].buffer = (*p2)[index2].getBuffer()->unicode() + (*p2)[index2].getOffset();                                                      //ptr to buffer
+        comparisonInput.file[1].buffered = ((*p2)[size2].getOffset() - 1); // size of buffer
 
         gnuDiff.ignore_white_space = GnuDiff::IGNORE_ALL_SPACE; // I think nobody needs anything else ...
         gnuDiff.bIgnoreWhiteSpace = true;
