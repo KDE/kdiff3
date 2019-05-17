@@ -2470,15 +2470,15 @@ void KDiff3App::slotUpdateAvailabilities()
     fileSave->setEnabled(m_bOutputModified && bSavable);
     fileSaveAs->setEnabled(bSavable);
 
-    goTop->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isDeltaAboveCurrent());
-    goBottom->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isDeltaBelowCurrent());
+    goTop->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaAboveCurrent());
+    goBottom->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaBelowCurrent());
     goCurrent->setEnabled(bDiffWindowVisible);
     goPrevUnsolvedConflict->setEnabled(bMergeEditorVisible && m_pMergeResultWindow->isUnsolvedConflictAboveCurrent());
     goNextUnsolvedConflict->setEnabled(bMergeEditorVisible && m_pMergeResultWindow->isUnsolvedConflictBelowCurrent());
     goPrevConflict->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isConflictAboveCurrent());
     goNextConflict->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isConflictBelowCurrent());
-    goPrevDelta->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isDeltaAboveCurrent());
-    goNextDelta->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isDeltaBelowCurrent());
+    goPrevDelta->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaAboveCurrent());
+    goNextDelta->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaBelowCurrent());
 
     overviewModeNormal->setEnabled(m_bTripleDiff && bDiffWindowVisible);
     overviewModeAB->setEnabled(m_bTripleDiff && bDiffWindowVisible);
