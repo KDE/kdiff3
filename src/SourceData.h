@@ -14,11 +14,12 @@
 
 #include "options.h"
 #include "fileaccess.h"
-#include "gnudiff_diff.h"
+#include "LineRef.h"
 
 #include <QTextCodec>
 #include <QTemporaryFile>
 #include <QString>
+#include <QVector>
 
 class LineData;
 class SourceData

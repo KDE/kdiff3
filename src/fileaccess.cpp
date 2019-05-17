@@ -11,6 +11,7 @@
 #include "cvsignorelist.h"
 #include "common.h"
 #include "progress.h"
+#include "ProgressProxyExtender.h"
 #include "Utils.h"
 
 #include <cstdlib>

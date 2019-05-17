@@ -12,12 +12,13 @@
 
 #include "difftextwindow.h"
 
-#include "selection.h"
+#include "FileNameLineEdit.h"
 #include "kdiff3.h"
 #include "merger.h"
 #include "options.h"
-#include "FileNameLineEdit.h"
+#include "progress.h"
 #include "RLPainter.h"
+#include "selection.h"
 
 #include <algorithm>
 #include <cmath>

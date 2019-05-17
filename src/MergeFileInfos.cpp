@@ -9,10 +9,11 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include "MergeFileInfos.h"
+#include "directorymergewindow.h"
 #include "DirectoryInfo.h"
 #include "fileaccess.h"
-#include "directorymergewindow.h"
+#include "MergeFileInfos.h"
+#include "progress.h"
 
 #include <QString>
 

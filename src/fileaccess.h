@@ -11,9 +11,6 @@
 #ifndef FILEACCESS_H
 #define FILEACCESS_H
 
-#include "progress.h"
-#include "ProgressProxyExtender.h"
-
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
@@ -23,6 +20,7 @@
 #include <QUrl>
 
 #include <KIO/UDSEntry>
+#include <KJob>
 
 namespace KIO {
 class Job;
