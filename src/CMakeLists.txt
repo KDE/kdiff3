@@ -50,6 +50,8 @@ set(kdiff3_SRCS
    ${kdiff3part_PART_SRCS}
     )
 
+#cann't use add_subdirectory because it changes the scope.
+include(icons/CMakeLists.txt)
 add_executable(kdiff3 ${kdiff3_SRCS})
 
 target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::Parts KF5::Crash ${KDiff3_LIBRARIES} )
@@ -67,4 +69,3 @@ install( FILES  kdiff3_shell.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/kdiff3 )
 install( PROGRAMS org.kde.kdiff3.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES org.kde.kdiff3.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR} )
 
-add_subdirectory(icons)
