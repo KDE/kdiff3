@@ -51,7 +51,7 @@ find_package(
 
 option(ENABLE_CLANG_TIDY "Run clang-tidy if available and cmake version >=3.6" OFF)
 
-set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::Crash KF5::IconThemes )
+set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::IconThemes )
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     #Adjust clang specific  warnings

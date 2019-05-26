@@ -99,17 +99,15 @@ class LineData
         QString::fromRawData allows us to create a light weight QString backed by the buffer memmory.
     */
     Q_REQUIRED_RESULT inline const QString getLine() const { return QString::fromRawData(mBuffer->data() + mOffset, mSize); }
-    //inline void setLine(const QString& line) { pLine = line;}
-
-    Q_REQUIRED_RESULT const QSharedPointer<QString>& getBuffer() const { return mBuffer; }
+    Q_REQUIRED_RESULT inline const QSharedPointer<QString>& getBuffer() const { return mBuffer; }
 
     Q_REQUIRED_RESULT inline qint64 getOffset() const { return mOffset; }
     Q_REQUIRED_RESULT int width(int tabSize) const; // Calcs width considering tabs.
     //int occurrences;
-    bool whiteLine() const { return mFirstNonWhiteChar == mSize - 1; }
+    inline bool whiteLine() const { return mFirstNonWhiteChar == mSize - 1; }
 
-    bool isPureComment() const { return bContainsPureComment; }
-    void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
+    inline bool isPureComment() const { return bContainsPureComment; }
+    inline void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
 
     static bool equal(const LineData& l1, const LineData& l2, bool bStrict);
 };
