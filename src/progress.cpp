@@ -259,9 +259,6 @@ void ProgressDialog::setSubRangeTransformation(double dMin, double dMax)
     pld.m_dSubRangeMax = dMax;
 }
 
-void qt_enter_modal(QWidget*);
-void qt_leave_modal(QWidget*);
-
 void ProgressDialog::enterEventLoop(KJob* pJob, const QString& jobInfo)
 {
     m_pJob = pJob;
@@ -277,13 +274,11 @@ void ProgressDialog::enterEventLoop(KJob* pJob, const QString& jobInfo)
         show();
 
     // instead of using exec() the eventloop is entered and exited often without hiding/showing the window.
-    //qt_enter_modal(this);
     QPointer<QEventLoop> pEventLoop =  QPointer<QEventLoop>(new QEventLoop(this));
     m_eventLoopStack.push_back(pEventLoop);
     pEventLoop->exec(); // this function only returns after ProgressDialog::exitEventLoop() is called.
     pEventLoop.clear();
     m_eventLoopStack.pop_back();
-    //qt_leave_modal(this);
 }
 
 void ProgressDialog::exitEventLoop()
