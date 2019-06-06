@@ -281,7 +281,11 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
     m_fileInfo = QFileInfo(filePath);
     m_fileInfo.setCaching(true);
     if(m_url.isEmpty())
-        m_url = QUrl::fromUserInput(filePath);
+    {
+        m_url = parent->url().resolved(QUrl(filePath));
+        //Verify that the scheme doesn't change.
+        Q_ASSERT(m_url.scheme() == parent->url().scheme());
+    }
 
     m_name = m_fileInfo.fileName();
     if(isLocal() && m_name.isEmpty())
