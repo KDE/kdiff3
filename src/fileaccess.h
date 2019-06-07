@@ -118,7 +118,7 @@ class FileAccess
     bool m_bValidData;
 
     //long m_fileType; // for testing only
-    FileAccess* m_pParent;
+    FileAccess* m_pParent = nullptr;
 
     QDir m_baseDir;
     QFileInfo m_fileInfo;

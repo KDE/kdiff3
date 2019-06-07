@@ -63,7 +63,6 @@ void FileAccess::reset()
 
     m_linkTarget = "";
     //m_fileType = -1;
-    m_pParent = nullptr;
     tmpFile.clear();
     tmpFile = QSharedPointer<QTemporaryFile>::create();
     realFile = nullptr;
@@ -102,6 +101,7 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
 void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
 {
     reset();
+    Q_ASSERT(parent() == nullptr || url != parent()->url());
 
     m_url = url;
     //QUrl::isLocalFile assumes the scheme is set.
@@ -1208,7 +1208,8 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
         //must be manually filtered KDE does not supply API for ignoring these.
         if(fa.fileName() != "." && fa.fileName() != "..")
         {
-            fa.addPath(fa.fileName());
+            //quick fix to preserve behavoir without creating invalid urls. TODO: look for altertive machanism for use with next major release.
+            fa.setFile(fa.url());
 
             m_pDirList->push_back(fa);
         }
