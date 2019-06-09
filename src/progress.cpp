@@ -13,11 +13,13 @@
 #include "common.h"
 
 #include <QApplication>
+#include <QEventLoop>
 #include <QLabel>
 #include <QPointer>
 #include <QProgressBar>
 #include <QPushButton>
 #include <QStatusBar>
+#include <QTimer>
 #include <QThread>
 #include <QVBoxLayout>
 
@@ -274,11 +276,16 @@ void ProgressDialog::enterEventLoop(KJob* pJob, const QString& jobInfo)
         show();
 
     // instead of using exec() the eventloop is entered and exited often without hiding/showing the window.
-    QPointer<QEventLoop> pEventLoop =  QPointer<QEventLoop>(new QEventLoop(this));
-    m_eventLoopStack.push_back(pEventLoop);
-    pEventLoop->exec(); // this function only returns after ProgressDialog::exitEventLoop() is called.
-    pEventLoop.clear();
-    m_eventLoopStack.pop_back();
+    if(m_eventLoop == nullptr)
+    {
+        m_eventLoop =  QPointer<QEventLoop>(new QEventLoop(this));
+        m_eventLoop->exec(); // this function only returns after ProgressDialog::exitEventLoop() is called.
+        m_eventLoop.clear();
+    }
+    else
+    {
+        m_eventLoop->processEvents(QEventLoop::WaitForMoreEvents);
+    }
 }
 
 void ProgressDialog::exitEventLoop()
@@ -287,8 +294,8 @@ void ProgressDialog::exitEventLoop()
         killTimer(m_progressDelayTimer);
     m_progressDelayTimer = 0;
     m_pJob = nullptr;
-    if(!m_eventLoopStack.empty())
-        m_eventLoopStack.back()->exit();
+    if( m_eventLoop != nullptr)
+        m_eventLoop->exit();
 }
 
 void ProgressDialog::recalc(bool bUpdate)
@@ -339,7 +346,6 @@ void ProgressDialog::recalc(bool bUpdate)
     }
 }
 
-#include <QTimer>
 void ProgressDialog::show()
 {
     if(m_progressDelayTimer)
@@ -438,6 +444,8 @@ void ProgressDialog::cancel(e_CancelReason eCancelReason)
     {
         m_bWasCancelled = true;
         m_eCancelReason = eCancelReason;
+        if(m_eventLoop != nullptr)
+            m_eventLoop->exit(1);
     }
 }
 

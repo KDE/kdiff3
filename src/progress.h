@@ -14,6 +14,7 @@
 #define PROGRESS_H
 
 #include <QDialog>
+#include <QPointer>
 #include <QTime>
 #include <QList>
 
@@ -84,7 +85,7 @@ private:
    int m_progressDelayTimer;
    int m_delayedHideTimer;
    int m_delayedHideStatusBarWidgetTimer;
-   QList<QEventLoop*> m_eventLoopStack;
+   QPointer<QEventLoop> m_eventLoop;
 
    QProgressBar* m_pProgressBar;
    QProgressBar* m_pSubProgressBar;
@@ -96,7 +97,7 @@ private:
    QTime m_t2;
    bool m_bWasCancelled;
    e_CancelReason m_eCancelReason;
-   KJob* m_pJob;
+   KJob* m_pJob = nullptr;
    QString m_currentJobInfo;  // Needed if the job doesn't stop after a reasonable time.
    bool m_bStayHidden;
    QThread* m_pGuiThread;
