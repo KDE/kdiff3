@@ -45,10 +45,12 @@ find_package(
     I18n
     CoreAddons
     Crash
-    DocTools
     IconThemes
+    OPTIONAL_COMPONENTS
+    DocTools
 )
 
+set_package_properties(KF5DocTools PROPERTIES PURPOSE "Allows generating and installing docs.")
 option(ENABLE_CLANG_TIDY "Run clang-tidy if available and cmake version >=3.6" OFF)
 
 set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::IconThemes )
@@ -97,11 +99,15 @@ add_definitions(
 )
 
 add_subdirectory(src)
-add_subdirectory(doc)
-
-add_subdirectory(kdiff3fileitemactionplugin)
+if(KF5DocTools_FOUND)
+    add_subdirectory(doc)
+    kdoctools_install(po)
+else()
+    message(WARNING "DocTools not found.")
+endif()
 
 ki18n_install(po)
-kdoctools_install(po)
+
+add_subdirectory(kdiff3fileitemactionplugin)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
