@@ -46,29 +46,29 @@ MergeFileInfos::~MergeFileInfos()
 
 QString MergeFileInfos::subPath() const
 {
-    if(m_pFileInfoA && m_pFileInfoA->exists())
+    if(m_pFileInfoA != nullptr && m_pFileInfoA->exists())
         return m_pFileInfoA->fileRelPath();
-    else if(m_pFileInfoB && m_pFileInfoB->exists())
+    else if(m_pFileInfoB != nullptr && m_pFileInfoB->exists())
         return m_pFileInfoB->fileRelPath();
-    else if(m_pFileInfoC && m_pFileInfoC->exists())
+    else if(m_pFileInfoC != nullptr && m_pFileInfoC->exists())
         return m_pFileInfoC->fileRelPath();
     return QString("");
 }
 
 QString MergeFileInfos::fileName() const
 {
-    if(m_pFileInfoA && m_pFileInfoA->exists())
+    if(m_pFileInfoA != nullptr && m_pFileInfoA->exists())
         return m_pFileInfoA->fileName();
-    else if(m_pFileInfoB && m_pFileInfoB->exists())
+    else if(m_pFileInfoB != nullptr && m_pFileInfoB->exists())
         return m_pFileInfoB->fileName();
-    else if(m_pFileInfoC && m_pFileInfoC->exists())
+    else if(m_pFileInfoC != nullptr && m_pFileInfoC->exists())
         return m_pFileInfoC->fileName();
     return QString("");
 }
 
 bool MergeFileInfos::conflictingFileTypes()
 {
-    if((m_pFileInfoA && !m_pFileInfoA->isNormal()) || (m_pFileInfoB && !m_pFileInfoB->isNormal()) || (m_pFileInfoC && !m_pFileInfoC->isNormal()))
+    if((m_pFileInfoA != nullptr && !m_pFileInfoA->isNormal()) || (m_pFileInfoB != nullptr && !m_pFileInfoB->isNormal()) || (m_pFileInfoC != nullptr && !m_pFileInfoC->isNormal()))
         return true;
     // Now check if file/dir-types fit.
     if(isLinkA() || isLinkB() || isLinkC())

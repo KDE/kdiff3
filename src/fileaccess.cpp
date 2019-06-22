@@ -837,7 +837,7 @@ bool FileAccessJobHandler::stat(int detail, bool bWantToWrite)
 
 void FileAccessJobHandler::slotStatResult(KJob* pJob)
 {
-    if(pJob->error())
+    if(pJob->error() != KJob::NoError)
     {
         //pJob->uiDelegate()->showErrorMessage();
         m_pFileAccess->doError();
@@ -880,7 +880,7 @@ bool FileAccessJobHandler::get(void* pDestBuffer, long maxLength)
 
 void FileAccessJobHandler::slotGetData(KJob* pJob, const QByteArray& newData)
 {
-    if(pJob->error())
+    if(pJob->error() != KJob::NoError)
     {
         pJob->uiDelegate()->showErrorMessage();
     }
@@ -918,7 +918,7 @@ bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOve
 
 void FileAccessJobHandler::slotPutData(KIO::Job* pJob, QByteArray& data)
 {
-    if(pJob->error())
+    if(pJob->error() != KJob::NoError)
     {
         pJob->uiDelegate()->showErrorMessage();
     }
@@ -951,7 +951,7 @@ void FileAccessJobHandler::slotPutData(KIO::Job* pJob, QByteArray& data)
 
 void FileAccessJobHandler::slotPutJobResult(KJob* pJob)
 {
-    if(pJob->error())
+    if(pJob->error() != KJob::NoError)
     {
         pJob->uiDelegate()->showErrorMessage();
     }
@@ -1061,7 +1061,7 @@ bool FileAccessJobHandler::rename(const FileAccess& destFile)
 
 void FileAccessJobHandler::slotSimpleJobResult(KJob* pJob)
 {
-    if(pJob->error())
+    if(pJob->error() != KJob::NoError)
     {
         pJob->uiDelegate()->showErrorMessage();
     }

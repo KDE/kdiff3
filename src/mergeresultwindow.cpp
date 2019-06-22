@@ -51,7 +51,7 @@
 #include <KMessageBox>
 #include <KToggleAction>
 
-int g_bAutoSolve = true;
+bool g_bAutoSolve = true;
 
 #undef leftInfoWidth
 
@@ -84,7 +84,7 @@ MergeResultWindow::MergeResultWindow(
     m_pDiff3LineList = nullptr;
     m_pTotalDiffStatus = nullptr;
     m_pStatusBar = pStatusBar;
-    if(m_pStatusBar)
+    if(m_pStatusBar != nullptr)
         connect(m_pStatusBar, &QStatusBar::messageChanged, this, &MergeResultWindow::slotStatusMessageChanged);
 
     m_pOptions = pOptions;
@@ -167,7 +167,7 @@ void MergeResultWindow::initActions(KActionCollection* ac)
 
 void MergeResultWindow::showUnsolvedConflictsStatusMessage()
 {
-    if(m_pStatusBar)
+    if(m_pStatusBar != nullptr)
     {
         int wsc;
         int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
@@ -3217,11 +3217,11 @@ void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecF
             names[QLatin1String(c->name())] = c;
     }
 
-    if(pCodecForA)
+    if(pCodecForA != nullptr)
         m_pEncodingSelector->addItem(i18n("Codec from A: %1", QLatin1String(pCodecForA->name())), QVariant::fromValue((void*)pCodecForA));
-    if(pCodecForB)
+    if(pCodecForB != nullptr)
         m_pEncodingSelector->addItem(i18n("Codec from B: %1", QLatin1String(pCodecForB->name())), QVariant::fromValue((void*)pCodecForB));
-    if(pCodecForC)
+    if(pCodecForC != nullptr)
         m_pEncodingSelector->addItem(i18n("Codec from C: %1", QLatin1String(pCodecForC->name())), QVariant::fromValue((void*)pCodecForC));
 
     std::map<QString, QTextCodec*>::iterator it;
@@ -3231,7 +3231,7 @@ void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecF
     }
     m_pEncodingSelector->setMinimumSize(m_pEncodingSelector->sizeHint());
 
-    if(pCodecForC && pCodecForB && pCodecForA)
+    if(pCodecForC != nullptr && pCodecForB != nullptr && pCodecForA != nullptr)
     {
         if(pCodecForA == pCodecForB)
             m_pEncodingSelector->setCurrentIndex(2); // C
@@ -3240,7 +3240,7 @@ void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecF
         else
             m_pEncodingSelector->setCurrentIndex(2); // C
     }
-    else if(pCodecForA && pCodecForB)
+    else if(pCodecForA != nullptr && pCodecForB != nullptr)
         m_pEncodingSelector->setCurrentIndex(1); // B
     else
         m_pEncodingSelector->setCurrentIndex(0);

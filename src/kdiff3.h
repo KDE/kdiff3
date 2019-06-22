@@ -71,7 +71,7 @@ class ReversibleScrollBar : public QScrollBar
 
     void setValue(int i)
     {
-        if(m_pbRightToLeftLanguage && *m_pbRightToLeftLanguage)
+        if(m_pbRightToLeftLanguage != nullptr && *m_pbRightToLeftLanguage)
             QScrollBar::setValue(maximum() - (i - minimum()));
         else
             QScrollBar::setValue(i);
@@ -85,7 +85,7 @@ class ReversibleScrollBar : public QScrollBar
     void slotValueChanged(int i)
     {
         m_realVal = i;
-        if(m_pbRightToLeftLanguage && *m_pbRightToLeftLanguage)
+        if(m_pbRightToLeftLanguage != nullptr && *m_pbRightToLeftLanguage)
             m_realVal = maximum() - (i - minimum());
         emit valueChanged2(m_realVal);
     }

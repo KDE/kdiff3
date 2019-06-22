@@ -77,14 +77,14 @@ class MergeFileInfos
     QString subPath() const;
     QString fileName() const;
 
-    bool isDirA() const { return m_pFileInfoA ? m_pFileInfoA->isDir() : false; }
-    bool isDirB() const { return m_pFileInfoB ? m_pFileInfoB->isDir() : false; }
-    bool isDirC() const { return m_pFileInfoC ? m_pFileInfoC->isDir() : false; }
+    bool isDirA() const { return m_pFileInfoA != nullptr ? m_pFileInfoA->isDir() : false; }
+    bool isDirB() const { return m_pFileInfoB != nullptr ? m_pFileInfoB->isDir() : false; }
+    bool isDirC() const { return m_pFileInfoC != nullptr ? m_pFileInfoC->isDir() : false; }
     bool hasDir() const { return isDirA() || isDirB() || isDirC(); }
 
-    bool isLinkA() const { return m_pFileInfoA ? m_pFileInfoA->isSymLink() : false; }
-    bool isLinkB() const { return m_pFileInfoB ? m_pFileInfoB->isSymLink() : false; }
-    bool isLinkC() const { return m_pFileInfoC ? m_pFileInfoC->isSymLink() : false; }
+    bool isLinkA() const { return m_pFileInfoA != nullptr ? m_pFileInfoA->isSymLink() : false; }
+    bool isLinkB() const { return m_pFileInfoB != nullptr ? m_pFileInfoB->isSymLink() : false; }
+    bool isLinkC() const { return m_pFileInfoC != nullptr ? m_pFileInfoC->isSymLink() : false; }
     bool hasLink() const { return isLinkA() || isLinkB() || isLinkC(); }
 
     bool existsInA() const { return m_pFileInfoA != nullptr; }

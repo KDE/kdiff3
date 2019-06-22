@@ -61,7 +61,7 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     m_pAbortButton = new QPushButton(i18n("&Cancel"), this);
     hlayout->addWidget(m_pAbortButton);
     connect(m_pAbortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
-    if(m_pStatusBar)
+    if(m_pStatusBar != nullptr)
     {
         m_pStatusBarWidget = new QWidget;
         QHBoxLayout* pStatusBarLayout = new QHBoxLayout(m_pStatusBarWidget);
@@ -100,7 +100,7 @@ void ProgressDialog::setStayHidden(bool bStayHidden)
     if(m_bStayHidden != bStayHidden)
     {
         m_bStayHidden = bStayHidden;
-        if(m_pStatusBarWidget)
+        if(m_pStatusBarWidget != nullptr)
         {
             if(m_bStayHidden)
             {
@@ -164,7 +164,7 @@ void ProgressDialog::setInformation(const QString& info, int current, bool bRedr
     {
         m_pInformation->setText(info);
         m_pSubInformation->setText("");
-        if(m_pStatusBar && m_bStayHidden)
+        if(m_pStatusBar != nullptr && m_bStayHidden)
             m_pStatusBar->showMessage(info);
     }
     else if(level == 2)
@@ -401,7 +401,7 @@ void ProgressDialog::delayedHideStatusBarWidget()
     if(m_progressDelayTimer)
         killTimer(m_progressDelayTimer);
     m_progressDelayTimer = 0;
-    if(m_pStatusBarWidget)
+    if(m_pStatusBarWidget != nullptr)
     {
         m_pStatusBarWidget->hide();
         m_pStatusProgressBar->setValue(0);

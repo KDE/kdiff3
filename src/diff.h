@@ -430,7 +430,7 @@ int getBestFirstLine(int line, int nofLines, int firstLine, int visibleLines);
 
 extern bool g_bIgnoreWhiteSpace;
 extern bool g_bIgnoreTrivialMatches;
-extern int g_bAutoSolve;
+extern bool g_bAutoSolve;
 
 // Cursor conversions that consider g_tabSize.
 int convertToPosInText(const QString& s, int posOnScreen, int tabSize);

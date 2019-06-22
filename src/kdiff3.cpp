@@ -154,7 +154,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     m_bLoadFiles = false;
 
     // Needed before any file operations via FileAccess happen.
-    if(!g_pProgressDialog)
+    if(g_pProgressDialog == nullptr)
     {
         g_pProgressDialog = new ProgressDialog(this, statusBar());
         g_pProgressDialog->setStayHidden(true);
@@ -468,7 +468,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     }
     m_bAutoMode = false;
 
-    if(m_pKDiff3Shell)
+    if(m_pKDiff3Shell != nullptr)
     {
         if(m_pOptions->m_bMaximised)
             //We want showMaximized here as the window has never been shown.
@@ -827,10 +827,10 @@ void KDiff3App::slotFilePrint()
 
     m_pDiffTextWindow1->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
 
-    if(firstSelectionD3LIdx < 0 && m_pDiffTextWindow2) {
+    if(firstSelectionD3LIdx < 0 && m_pDiffTextWindow2 != nullptr) {
         m_pDiffTextWindow2->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
     }
-    if(firstSelectionD3LIdx < 0 && m_pDiffTextWindow3) {
+    if(firstSelectionD3LIdx < 0 && m_pDiffTextWindow3 != nullptr) {
         m_pDiffTextWindow3->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
     }
 
@@ -894,7 +894,7 @@ void KDiff3App::slotFilePrint()
         }
 
         LineCount totalNofLines = std::max(m_pDiffTextWindow1->getNofLines(), m_pDiffTextWindow2->getNofLines());
-        if(m_bTripleDiff && m_pDiffTextWindow3)
+        if(m_bTripleDiff && m_pDiffTextWindow3 != nullptr)
             totalNofLines = std::max(totalNofLines, m_pDiffTextWindow3->getNofLines());
 
         QList<int> pageList; // = printer.pageList();
@@ -985,7 +985,7 @@ void KDiff3App::slotFilePrint()
                 QString headerText2 = m_sd2.getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow2->calcTopLineInFile(line) + 1);
                 printDiffTextWindow(painter, view2, headerText2, m_pDiffTextWindow2, line, linesPerPage, m_pOptions->m_fgColor);
 
-                if(m_bTripleDiff && m_pDiffTextWindow3)
+                if(m_bTripleDiff && m_pDiffTextWindow3 != nullptr)
                 {
                     painter.setPen(m_pOptions->m_colorC);
                     QString headerText3 = m_sd3.getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow3->calcTopLineInFile(line) + 1);
