@@ -849,7 +849,7 @@ void FileAccessJobHandler::slotStatResult(KJob* pJob)
 
         const KIO::UDSEntry e = static_cast<KIO::StatJob*>(pJob)->statResult();
 
-        m_pFileAccess->setFromUdsEntry(e);
+        m_pFileAccess->setFromUdsEntry(e, m_pFileAccess);
     }
 
     ProgressProxy::exitEventLoop();

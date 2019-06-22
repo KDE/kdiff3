@@ -107,7 +107,7 @@ class FileAccess
 
   private:
     friend class FileAccessJobHandler;
-    void setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent = nullptr);
+    void setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent);
     void setStatusText(const QString& s);
 
     void reset();
