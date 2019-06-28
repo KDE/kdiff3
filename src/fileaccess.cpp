@@ -10,6 +10,7 @@
 #include "fileaccess.h"
 #include "cvsignorelist.h"
 #include "common.h"
+#include "Logging.h"
 #include "progress.h"
 #include "ProgressProxyExtender.h"
 #include "Utils.h"
@@ -283,9 +284,22 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
     m_fileInfo.setCaching(true);
     if(m_url.isEmpty())
     {
-        m_url = parent->url().resolved(QUrl(filePath));
-        //Verify that the scheme doesn't change.
-        Q_ASSERT(m_url.scheme() == parent->url().scheme());
+        if(parent != nullptr)
+        {
+            m_url = parent->url().resolved(QUrl(filePath));
+            //Verify that the scheme doesn't change.
+            Q_ASSERT(m_url.scheme() == parent->url().scheme());
+        }
+        else
+        {
+            /*
+             Invalid entry we don't know the full url because KIO didn't tell us and there is no parent
+             node supplied.
+             This is a bug if it happens and should be logged . However it is a recoverable error.
+            */
+            qCWarning(kdiffFileAccess) << i18n("Unable to determine full url. No parent specified.");
+            return;
+        }
     }
 
     m_name = m_fileInfo.fileName();

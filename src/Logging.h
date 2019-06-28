@@ -22,6 +22,8 @@
 #include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(kdiffMain)
+
+Q_DECLARE_LOGGING_CATEGORY(kdiffFileAccess);
 Q_DECLARE_LOGGING_CATEGORY(kdiffCore) //very noisey shows internal state information for kdiffs core.
 
 #endif // !LOGGING_H

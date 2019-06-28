@@ -156,7 +156,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
 
         // First get all input data.
         pp.setInformation(i18n("Loading A"));
-        qCInfo(kdiffMain) << i18n("Loading A: %1 ", m_sd1.getFilename());
+        qCInfo(kdiffMain) << i18n("Loading A: %1", m_sd1.getFilename());
 
         if(bUseCurrentEncoding)
             errors = m_sd1.readAndPreprocess(m_sd1.getEncoding(), false);
