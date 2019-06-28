@@ -20,3 +20,4 @@
 #include "Logging.h"
 
 Q_LOGGING_CATEGORY(kdeMain, "org.kde.kdiff3")
+Q_LOGGING_CATEGORY(kdiffFileAccess, "org.kde.kdiff3.fileAccess")

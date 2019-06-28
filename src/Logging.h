@@ -22,4 +22,5 @@
 #include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(kdeMain)
+Q_DECLARE_LOGGING_CATEGORY(kdiffFileAccess)
 #endif // !LOGGING_H
