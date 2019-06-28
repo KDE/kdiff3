@@ -56,7 +56,7 @@ void FileAccess::reset()
     m_bWritable = false;
     m_bHidden = false;
     m_size = 0;
-    m_modificationTime = QDateTime();
+    m_modificationTime = QDateTime::fromMSecsSinceEpoch(0);
 
     m_url = QUrl();
     m_bValidData = false;
@@ -309,7 +309,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
     }
     m_bExists = m_fileInfo.exists();
     //insure modification time is initialized if it wasn't already.
-    if(m_modificationTime.isNull())
+    if(m_modificationTime == QDateTime::fromMSecsSinceEpoch(0))
         m_modificationTime = m_fileInfo.lastModified();
 
     m_bValidData = true;

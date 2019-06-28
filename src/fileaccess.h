@@ -129,7 +129,7 @@ class FileAccess
     QSharedPointer<QFile> realFile = nullptr;
 
     qint64 m_size;
-    QDateTime m_modificationTime;
+    QDateTime m_modificationTime = QDateTime::fromMSecsSinceEpoch(0);
     bool m_bSymLink;
     bool m_bFile;
     bool m_bDir;
