@@ -537,12 +537,12 @@ void KDiff3App::resizeMergeResultWindow()
 
 void KDiff3App::scrollDiffTextWindow(int deltaX, int deltaY)
 {
-    if(deltaY != 0)
+    if(deltaY != 0 && m_pDiffVScrollBar != nullptr)
     {
         m_pDiffVScrollBar->setValue(m_pDiffVScrollBar->value() + deltaY);
         m_pOverview->setRange(m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep());
     }
-    if(deltaX != 0)
+    if(deltaX != 0 && m_pHScrollBar != nullptr)
         m_pHScrollBar->QScrollBar::setValue(m_pHScrollBar->value() + deltaX);
 }
 
@@ -954,15 +954,23 @@ void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
             break;
         case Qt::Key_Home:
             if(bCtrl)
-                m_pDiffVScrollBar->setValue(0);
+            {
+                if(m_pDiffVScrollBar != nullptr) m_pDiffVScrollBar->setValue(0);
+            }
             else
-                m_pHScrollBar->setValue(0);
+            {
+                if(m_pHScrollBar != nullptr)  m_pHScrollBar->setValue(0);
+            }
             break;
         case Qt::Key_End:
             if(bCtrl)
-                m_pDiffVScrollBar->setValue(m_pDiffVScrollBar->maximum());
+            {
+                if(m_pDiffVScrollBar != nullptr) m_pDiffVScrollBar->setValue(m_pDiffVScrollBar->maximum());
+            }
             else
-                m_pHScrollBar->setValue(m_pHScrollBar->maximum());
+            {
+                if(m_pHScrollBar != nullptr) m_pHScrollBar->setValue(m_pHScrollBar->maximum());
+            }
             break;
         default:
             break;

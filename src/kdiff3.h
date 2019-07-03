@@ -318,8 +318,8 @@ class KDiff3App : public QSplitter
     QSplitter* m_pMainSplitter;
     QWidget* m_pMainWidget;
     QWidget* m_pMergeWindowFrame;
-    ReversibleScrollBar* m_pHScrollBar;
-    QScrollBar* m_pDiffVScrollBar;
+    ReversibleScrollBar* m_pHScrollBar = nullptr;
+    QScrollBar* m_pDiffVScrollBar = nullptr;
     QScrollBar* m_pMergeVScrollBar;
 
     DiffTextWindow* m_pDiffTextWindow1;
