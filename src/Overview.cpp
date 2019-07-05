@@ -9,9 +9,10 @@
  *                                                                         *
  ***************************************************************************/
 #include "Overview.h"
+
+#include "diff.h"
 #include "mergeresultwindow.h"
 #include "options.h"
-#include "diff.h"
 
 #include <QColor>
 #include <QMouseEvent>
@@ -53,7 +54,7 @@ void Overview::slotRedraw()
     update();
 }
 
-void Overview::setRange(int firstLine, int pageHeight)
+void Overview::setRange(QtNumberType firstLine, QtNumberType pageHeight)
 {
     m_firstLine = firstLine;
     m_pageHeight = pageHeight;

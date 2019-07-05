@@ -11,46 +11,54 @@
 #ifndef OVERVIEW_H
 #define OVERVIEW_H
 
-#include "options.h"
 #include "diff.h"
+#include "options.h"
 
-#include <QWidget>
 #include <QPixmap>
+#include <QWidget>
 
 class Overview : public QWidget
 {
-   Q_OBJECT
-public:
-   explicit Overview( Options* pOptions );
+    Q_OBJECT
+  public:
+    enum e_OverviewMode
+    {
+        eOMNormal,
+        eOMAvsB,
+        eOMAvsC,
+        eOMBvsC
+    };
 
-   void init( Diff3LineList* pDiff3LineList, bool bTripleDiff );
-   void reset();
-   void setRange( int firstLine, int pageHeight );
-   void setPaintingAllowed( bool bAllowPainting );
+    explicit Overview(Options* pOptions);
 
-   enum e_OverviewMode { eOMNormal, eOMAvsB, eOMAvsC, eOMBvsC };
-   void setOverviewMode( e_OverviewMode eOverviewMode );
-   e_OverviewMode getOverviewMode();
+    void init(Diff3LineList* pDiff3LineList, bool bTripleDiff);
+    void reset();
+    void setRange(QtNumberType firstLine, QtNumberType pageHeight);
+    void setPaintingAllowed(bool bAllowPainting);
 
-public Q_SLOTS:
-   void setFirstLine(QtNumberType firstLine);
-   void slotRedraw();
-Q_SIGNALS:
-   void setLine(LineRef);
-private:
-   const Diff3LineList* m_pDiff3LineList;
-   Options* m_pOptions;
-   bool m_bTripleDiff;
-   LineRef m_firstLine;
-   int m_pageHeight;
-   QPixmap m_pixmap;
-   e_OverviewMode m_eOverviewMode;
-   int m_nofLines;
+    void setOverviewMode(e_OverviewMode eOverviewMode);
+    e_OverviewMode getOverviewMode();
 
-   void paintEvent( QPaintEvent* e ) override;
-   void mousePressEvent( QMouseEvent* e ) override;
-   void mouseMoveEvent( QMouseEvent* e ) override;
-   void drawColumn( QPainter& p, e_OverviewMode eOverviewMode, int x, int w, int h, int nofLines );
+  public Q_SLOTS:
+    void setFirstLine(QtNumberType firstLine);
+    void slotRedraw();
+  Q_SIGNALS:
+    void setLine(LineRef);
+
+  private:
+    const Diff3LineList* m_pDiff3LineList;
+    Options* m_pOptions;
+    bool m_bTripleDiff;
+    LineRef m_firstLine;
+    int m_pageHeight;
+    QPixmap m_pixmap;
+    e_OverviewMode m_eOverviewMode;
+    int m_nofLines;
+
+    void paintEvent(QPaintEvent* e) override;
+    void mousePressEvent(QMouseEvent* e) override;
+    void mouseMoveEvent(QMouseEvent* e) override;
+    void drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int w, int h, int nofLines);
 };
 
 #endif // !OVERVIEW_H
