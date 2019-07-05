@@ -657,7 +657,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding)
     }
 
     m_v.push_back(LineData(m_unicodeBuf, lastOffset));
-    Q_ASSERT(m_v[m_v.size() - 1].getOffset() != m_v[m_v.size() - 2].getOffset());
+    Q_ASSERT(m_v.size() < 2 || m_v[m_v.size() - 1].getOffset() != m_v[m_v.size() - 2].getOffset());
 
     m_bIsText = true;
 
