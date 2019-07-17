@@ -400,6 +400,7 @@ bool MergeFileInfos::fastFileComparison(
 
     if(!fi2.open(QIODevice::ReadOnly))
     {
+        fi1.close();
         status = fi2.errorString();
         return bEqual;
     }
@@ -417,25 +418,32 @@ bool MergeFileInfos::fastFileComparison(
         if(len != fi1.read(&buf1[0], len))
         {
             status = fi1.errorString();
+            fi1.close();
+            fi2.close();
             return bEqual;
         }
 
         if(len != fi2.read(&buf2[0], len))
         {
             status = fi2.errorString();
-            ;
+            fi1.close();
+            fi2.close();
             return bEqual;
         }
 
         if(memcmp(&buf1[0], &buf2[0], len) != 0)
         {
             bError = false;
+            fi1.close();
+            fi2.close();
             return bEqual;
         }
         sizeLeft -= len;
         //pp.setCurrent(double(fullSize-sizeLeft)/fullSize, false );
         pp.step();
     }
+    fi1.close();
+    fi2.close();
 
     // If the program really arrives here, then the files are really equal.
     bError = false;
