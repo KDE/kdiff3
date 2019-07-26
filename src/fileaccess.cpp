@@ -1156,8 +1156,11 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
         QFileInfoList fiList = dir.entryInfoList();
         if(fiList.isEmpty())
         {
-            // No Permission to read directory or other error.
-            m_bSuccess = false;
+            /*
+                Sadly Qt provides no error information making this case ambigious.
+                A readablity check is the best we can do.
+            */
+            m_bSuccess = dir.isReadable();
         }
         else
         {
