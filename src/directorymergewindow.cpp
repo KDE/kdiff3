@@ -741,6 +741,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
 
     if(!fi2.open(QIODevice::ReadOnly))
     {
+        fi1.close();
         status = fi2.errorString();
         return bEqual;
     }
@@ -758,12 +759,16 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
         if(len != fi1.read(&buf1[0], len))
         {
             status = fi1.errorString();
+            fi1.close();
+            fi2.close();
             return bEqual;
         }
 
         if(len != fi2.read(&buf2[0], len))
         {
-            status = fi2.errorString();;
+            status = fi2.errorString();
+            fi1.close();
+            fi2.close();
             return bEqual;
         }
 
