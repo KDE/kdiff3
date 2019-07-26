@@ -774,6 +774,8 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
 
         if(memcmp(&buf1[0], &buf2[0], len) != 0)
         {
+            fi1.close();
+            fi2.close();
             bError = false;
             return bEqual;
         }
@@ -785,6 +787,9 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::fastFileComparison(
     // If the program really arrives here, then the files are really equal.
     bError = false;
     bEqual = true;
+
+    fi1.close();
+    fi2.close();
     return bEqual;
 }
 
