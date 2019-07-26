@@ -194,7 +194,7 @@ const QString& SourceData::getText() const
 
 bool SourceData::isText()
 {
-    return m_normalData.isText();
+    return m_normalData.isText() || m_normalData.isEmpty();
 }
 
 bool SourceData::isIncompleteConversion()
@@ -523,7 +523,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         return errors;
     }
 
-    Q_ASSERT(m_lmppData.isText());
+    Q_ASSERT(m_lmppData.isText() && !m_lmppData.isEmpty());
     //TODO: Needed?
     if(m_lmppData.m_vSize < m_normalData.m_vSize)
     {
