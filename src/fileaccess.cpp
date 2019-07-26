@@ -491,6 +491,7 @@ bool FileAccess::interruptableReadFile(void* pDestBuffer, qint64 maxLength)
 
 bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
 {
+    bool success = false;
     //Avoid hang on linux for special files.
     if(!isNormal())
         return true;
@@ -498,14 +499,20 @@ bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
     if(isLocal() || !m_localCopy.isEmpty())
     {
         if(open(QIODevice::ReadOnly))//krazy:exclude=syscalls
-            return interruptableReadFile(pDestBuffer, maxLength); // maxLength == f.read( (char*)pDestBuffer, maxLength );
+        {
+            success = interruptableReadFile(pDestBuffer, maxLength); // maxLength == f.read( (char*)pDestBuffer, maxLength )
+            close();
+        }
     }
     else
     {
         FileAccessJobHandler jh(this);
-        return jh.get(pDestBuffer, maxLength);
+        success = jh.get(pDestBuffer, maxLength);
     }
-    return false;
+
+    close();
+    Q_ASSERT(!realFile->isOpen() && !tmpFile->isOpen());
+    return success;
 }
 
 bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
@@ -513,8 +520,7 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
     ProgressProxy pp;
     if(isLocal())
     {
-        QFile f(absoluteFilePath());
-        if(f.open(QIODevice::WriteOnly))
+        if(realFile->open(QIODevice::WriteOnly))
         {
             const qint64 maxChunkSize = 100000;
             pp.setMaxNofSteps(length / maxChunkSize + 1);
@@ -522,33 +528,44 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
             while(i < length)
             {
                 qint64 nextLength = std::min(length - i, maxChunkSize);
-                qint64 reallyWritten = f.write((char*)pSrcBuffer + i, nextLength);
+                qint64 reallyWritten = realFile->write((char*)pSrcBuffer + i, nextLength);
                 if(reallyWritten != nextLength)
                 {
+                    realFile->close();
                     return false;
                 }
                 i += reallyWritten;
 
                 pp.step();
                 if(pp.wasCancelled())
+                {
+                    realFile->close();
                     return false;
+                }
             }
-            f.close();
 
             if(isExecutable()) // value is true if the old file was executable
             {
                 // Preserve attributes
-                f.setPermissions(f.permissions() | QFile::ExeUser);
+                realFile->setPermissions(realFile->permissions() | QFile::ExeUser);
             }
 
+            realFile->close();
             return true;
         }
     }
     else
     {
         FileAccessJobHandler jh(this);
-        return jh.put(pSrcBuffer, length, true /*overwrite*/);
+        bool success = jh.put(pSrcBuffer, length, true /*overwrite*/);
+        close();
+
+        Q_ASSERT(!realFile->isOpen() && !tmpFile->isOpen());
+
+        return success;
     }
+    close();
+    Q_ASSERT(!realFile->isOpen() && !tmpFile->isOpen());
     return false;
 }
 
