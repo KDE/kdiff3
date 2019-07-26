@@ -111,7 +111,7 @@ class SourceData
 
         bool isEmpty() { return m_size == 0; }
 
-        bool isText() { return m_bIsText; }
+        bool isText() { return m_bIsText || isEmpty(); }
     };
     FileData m_normalData;
     FileData m_lmppData;
