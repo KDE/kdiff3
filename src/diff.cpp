@@ -1167,10 +1167,15 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
 
     QString::const_iterator p1=line1.begin(), p2=line2.begin();
 
-    for(;;)
+    /*
+        This loop should never reach the exit condition specified here. However it must have a hard wired
+        stopping point to prevent runaway allocation if something unexpected happens.
+        diffList is therefor hard capped at aprox 50 MB in size.
+     */
+    for(; diffList.size() * sizeof(Diff) + sizeof(DiffList) < (50 << 20);)
     {
         int nofEquals = 0;
-        while(nofEquals < line1.size() && nofEquals < line2.size() && line1[nofEquals] == line2[nofEquals])
+        while(p1 != line1.end() && p2 != line2.end() &&  *p1 == *p2)
         {
             ++p1;
             ++p2;
@@ -1223,6 +1228,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
         {
             // continue somehow
             Diff d(nofEquals, bestI1, bestI2);
+            Q_ASSERT(nofEquals + bestI1 + bestI2 != 0);
             diffList.push_back(d);
 
             p1 += bestI1;
@@ -1300,6 +1306,8 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
         if(bEndReached)
             break;
     }
+
+    Q_ASSERT(diffList.size() * sizeof(Diff) + sizeof(DiffList) >= (50 << 20));
 
     // Verify difflist
     {
