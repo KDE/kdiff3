@@ -1190,7 +1190,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
 
         for(i1 = 0;; ++i1)
         {
-            if(p1[i1] == line1.end() || (bBestValid && i1 >= bestI1 + bestI2))
+            if(p1[i1] == *line1.end() || (bBestValid && i1 >= bestI1 + bestI2))
             {
                 break;
             }
