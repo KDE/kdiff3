@@ -431,13 +431,13 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
             if(fileInSize > 0 && (!bSuccess || m_normalData.m_size == 0))
             {
+                //Don't fail the preprocessor command if the file cann't be read.
                 if(!m_normalData.readFile(faIn))
                 {
                     errors.append(faIn.getStatusText());
                     errors.append(i18n("    Temp file is: %1", fileNameIn1));
                     return errors;
                 }
-                //Don't fail the preprocessor command if the file cann't be read.
                 errors.append(
                     i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
                          "\n\nThe preprocessing command will be disabled now.", ppCmd) +

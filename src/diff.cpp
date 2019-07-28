@@ -111,7 +111,7 @@ void calcDiff3LineListUsingAB(
     Diff d(0, 0, 0);
 
     qCInfo(kdiffMain) << "Enter: calcDiff3LineListUsingAB" ;
-        for(;;)
+    for(;;)
     {
         if(d.nofEquals == 0 && d.diff1 == 0 && d.diff2 == 0)
         {
@@ -1190,19 +1190,19 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
 
         for(i1 = 0;; ++i1)
         {
-            if(&p1[i1] == line1.end() || (bBestValid && i1 >= bestI1 + bestI2))
+            if(p1[i1] == line1.end() || (bBestValid && i1 >= bestI1 + bestI2))
             {
                 break;
             }
             for(i2 = 0; i2 < maxSearchRange; ++i2)
             {
-                if(&p2[i2] == line2.end() || (bBestValid && i1 + i2 >= bestI1 + bestI2))
+                if(p2[i2] == line2.end() || (bBestValid && i1 + i2 >= bestI1 + bestI2))
                 {
                     break;
                 }
                 else if(p2[i2] == p1[i1] &&
-                        (match == 1 || abs(i1 - i2) < 3 || (&p2[i2 + 1] == line2.end() && &p1[i1 + 1] == line1.end()) ||
-                         (&p2[i2 + 1] != line2.end() && &p1[i1 + 1] != line1.end() && p2[i2 + 1] == p1[i1 + 1])))
+                        (match == 1 || abs(i1 - i2) < 3 || (p2[i2 + 1] == line2.end() && p1[i1 + 1] == line1.end()) ||
+                         (p2[i2 + 1] != line2.end() && p1[i1 + 1] != line1.end() && p2[i2 + 1] == p1[i1 + 1])))
                 {
                     if(i1 + i2 < bestI1 + bestI2 || !bBestValid)
                     {
