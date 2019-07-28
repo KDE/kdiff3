@@ -32,25 +32,25 @@ Merger::MergeData::MergeData(const DiffList* p, int i)
 
 bool Merger::MergeData::eq()
 {
-    return pDiffList == nullptr || d.nofEquals > 0;
+    return pDiffList == nullptr || d.numberOfEquals() > 0;
 }
 
 bool Merger::MergeData::isEnd()
 {
-    return (pDiffList == nullptr || (it == pDiffList->end() && d.nofEquals == 0 &&
-                                     (idx == 0 ? d.diff1 == 0 : d.diff2 == 0)));
+    return (pDiffList == nullptr || (it == pDiffList->end() && d.numberOfEquals() == 0 &&
+                                     (idx == 0 ? d.diff1() == 0 : d.diff2() == 0)));
 }
 
 void Merger::MergeData::update()
 {
-    if(d.nofEquals > 0)
-        --d.nofEquals;
-    else if(idx == 0 && d.diff1 > 0)
-        --d.diff1;
-    else if(idx == 1 && d.diff2 > 0)
-        --d.diff2;
+    if(d.numberOfEquals() > 0)
+        d.adjustNumberOfEquals(-1);
+    else if(idx == 0 && d.diff1() > 0)
+        d.adjustDiff1(-1);
+    else if(idx == 1 && d.diff2() > 0)
+        d.adjustDiff2(-1);
 
-    while(d.nofEquals == 0 && ((idx == 0 && d.diff1 == 0) || (idx == 1 && d.diff2 == 0)) && pDiffList != nullptr && it != pDiffList->end())
+    while(d.numberOfEquals() == 0 && ((idx == 0 && d.diff1() == 0) || (idx == 1 && d.diff2() == 0)) && pDiffList != nullptr && it != pDiffList->end())
     {
         d = *it;
         ++it;

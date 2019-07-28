@@ -57,18 +57,29 @@ enum e_MergeDetails
 // Then again range of matching elements should follow.
 class Diff
 {
+  private:
+    qint32 nofEquals = 0;
+
+    qint64 mDiff1 = 0;
+    qint64 mDiff2 = 0;
   public:
-    qint32 nofEquals;
-
-    qint64 diff1;
-    qint64 diff2;
-
-    Diff(qint32 eq, qint64 d1, qint64 d2)
+    Diff(qint32 eq, const qint64 inDiff1, const qint64 inDiff2)
     {
         nofEquals = eq;
-        diff1 = d1;
-        diff2 = d2;
+        mDiff1 = inDiff1;
+        mDiff2 = inDiff2;
     }
+
+    inline qint32 numberOfEquals() const { return nofEquals; };
+
+    inline qint64 diff1() const { return mDiff1; };
+    inline qint64 diff2() const { return mDiff2; };
+
+    inline void setNumberOfEquals(const qint32 inNumOfEquals) { nofEquals = inNumOfEquals; }
+
+    inline void adjustNumberOfEquals(const qint64 delta) { mDiff2 += delta; }
+    inline void adjustDiff1(const qint64 delta) { mDiff1 += delta; }
+    inline void adjustDiff2(const qint64 delta) { mDiff2 += delta; }
 };
 
 typedef std::list<Diff> DiffList;

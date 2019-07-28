@@ -113,7 +113,7 @@ void calcDiff3LineListUsingAB(
     qCInfo(kdiffMain) << "Enter: calcDiff3LineListUsingAB" ;
     for(;;)
     {
-        if(d.nofEquals == 0 && d.diff1 == 0 && d.diff2 == 0)
+        if(d.numberOfEquals() == 0 && d.diff1() == 0 && d.diff2() == 0)
         {
             if(i != pDiffListAB->end())
             {
@@ -125,38 +125,38 @@ void calcDiff3LineListUsingAB(
         }
 
         Diff3Line d3l;
-        if(d.nofEquals > 0)
+        if(d.numberOfEquals() > 0)
         {
             d3l.bAEqB = true;
             d3l.setLineA(lineA);
             d3l.setLineB(lineB);
-            --d.nofEquals;
+            d.adjustNumberOfEquals(-1);
             ++lineA;
             ++lineB;
         }
-        else if(d.diff1 > 0 && d.diff2 > 0)
+        else if(d.diff1() > 0 && d.diff2() > 0)
         {
             d3l.setLineA(lineA);
             d3l.setLineB(lineB);
-            --d.diff1;
-            --d.diff2;
+            d.adjustDiff1(-1);
+            d.adjustDiff2(-1);
             ++lineA;
             ++lineB;
         }
-        else if(d.diff1 > 0)
+        else if(d.diff1() > 0)
         {
             d3l.setLineA(lineA);
-            --d.diff1;
+            d.adjustDiff1(-1);
             ++lineA;
         }
-        else if(d.diff2 > 0)
+        else if(d.diff2() > 0)
         {
             d3l.setLineB(lineB);
-            --d.diff2;
+            d.adjustDiff2(-1);
             ++lineB;
         }
 
-        Q_ASSERT(d.nofEquals >= 0);
+        Q_ASSERT(d.numberOfEquals() >= 0);
 
         qCDebug(kdiffCore) << "lineA = " << d3l.getLineA() << ", lineB = " << d3l.getLineB() ;
         d3ll.push_back(d3l);
@@ -180,7 +180,7 @@ void calcDiff3LineListUsingAC(
 
     for(;;)
     {
-        if(d.nofEquals == 0 && d.diff1 == 0 && d.diff2 == 0)
+        if(d.numberOfEquals() == 0 && d.diff1() == 0 && d.diff2() == 0)
         {
             if(i != pDiffListAC->end())
             {
@@ -192,7 +192,7 @@ void calcDiff3LineListUsingAC(
         }
 
         Diff3Line d3l;
-        if(d.nofEquals > 0)
+        if(d.numberOfEquals() > 0)
         {
             // Find the corresponding lineA
             while(i3->getLineA() != lineA)
@@ -202,30 +202,30 @@ void calcDiff3LineListUsingAC(
             i3->bAEqC = true;
             i3->bBEqC = i3->isEqualAB();
 
-            --d.nofEquals;
+            d.adjustNumberOfEquals(-1);
             ++lineA;
             ++lineC;
             ++i3;
         }
-        else if(d.diff1 > 0 && d.diff2 > 0)
+        else if(d.diff1() > 0 && d.diff2() > 0)
         {
             d3l.setLineC(lineC);
             d3ll.insert(i3, d3l);
-            --d.diff1;
-            --d.diff2;
+            d.adjustDiff1(-1);
+            d.adjustDiff2(-1);
             ++lineA;
             ++lineC;
         }
-        else if(d.diff1 > 0)
+        else if(d.diff1() > 0)
         {
-            --d.diff1;
+            d.adjustDiff1(-1);
             ++lineA;
         }
-        else if(d.diff2 > 0)
+        else if(d.diff2() > 0)
         {
             d3l.setLineC(lineC);
             d3ll.insert(i3, d3l);
-            --d.diff2;
+            d.adjustDiff2(-1);
             ++lineC;
         }
     }
@@ -252,7 +252,7 @@ void calcDiff3LineListUsingBC(
 
     for(;;)
     {
-        if(d.nofEquals == 0 && d.diff1 == 0 && d.diff2 == 0)
+        if(d.numberOfEquals() == 0 && d.diff1() == 0 && d.diff2() == 0)
         {
             if(i != pDiffListBC->end())
             {
@@ -264,7 +264,7 @@ void calcDiff3LineListUsingBC(
         }
 
         Diff3Line d3l;
-        if(d.nofEquals > 0)
+        if(d.numberOfEquals() > 0)
         {
             // Find the corresponding lineB and lineC
             while(i3b != d3ll.end() && i3b->getLineB() != lineB)
@@ -450,13 +450,13 @@ void calcDiff3LineListUsingBC(
                 }
             }
 
-            --d.nofEquals;
+            d.adjustNumberOfEquals(-1);
             ++lineB;
             ++lineC;
             ++i3b;
             ++i3c;
         }
-        else if(d.diff1 > 0)
+        else if(d.diff1() > 0)
         {
             Diff3LineList::iterator i3 = i3b;
             while(i3->getLineB() != lineB)
@@ -472,19 +472,19 @@ void calcDiff3LineListUsingBC(
             {
                 i3b = i3;
             }
-            --d.diff1;
+            d.adjustDiff1(-1);
             ++lineB;
             ++i3b;
 
-            if(d.diff2 > 0)
+            if(d.diff2() > 0)
             {
-                --d.diff2;
+                d.adjustDiff2(-1);
                 ++lineC;
             }
         }
-        else if(d.diff2 > 0)
+        else if(d.diff2() > 0)
         {
-            --d.diff2;
+            d.adjustDiff2(-1);
             ++lineC;
         }
     }
@@ -548,16 +548,12 @@ static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef si
     diffList.clear();
     if(p1 == nullptr || (*p1)[index1].getLine() == nullptr || p2 == nullptr || (*p2)[index2].getLine() == nullptr || size1 == 0 || size2 == 0)
     {
-        Diff d(0, 0, 0);
         if(p1 != nullptr && p2 != nullptr && (*p1)[index1].getLine() == nullptr && (*p2)[index2].getLine() == nullptr && size1 == size2)
-            d.nofEquals = size1;
+            diffList.push_back(Diff(size1, 0, 0));
         else
         {
-            d.diff1 = size1;
-            d.diff2 = size2;
+            diffList.push_back(Diff(0, size1, size2));
         }
-
-        diffList.push_back(d);
     }
     else
     {
@@ -582,13 +578,11 @@ static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef si
         GnuDiff::change* p = nullptr;
         for(GnuDiff::change* e = script; e; e = p)
         {
-            Diff d(0, 0, 0);
-            d.nofEquals = (LineRef)(e->line0 - currentLine1);
-            Q_ASSERT(d.nofEquals == e->line1 - currentLine2);
-            d.diff1 = e->deleted;
-            d.diff2 = e->inserted;
-            currentLine1 += (LineRef)(d.nofEquals + d.diff1);
-            currentLine2 += (LineRef)(d.nofEquals + d.diff2);
+            Diff d((LineRef)(e->line0 - currentLine1), e->deleted, e->inserted);
+            Q_ASSERT(d.numberOfEquals() == e->line1 - currentLine2);
+
+            currentLine1 += (LineRef)(d.numberOfEquals() + d.diff1());
+            currentLine2 += (LineRef)(d.numberOfEquals() + d.diff2());
             diffList.push_back(d);
 
             p = e->link;
@@ -597,23 +591,22 @@ static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef si
 
         if(diffList.empty())
         {
-            Diff d(0, 0, 0);
-            d.nofEquals = std::min(size1, size2);
-            d.diff1 = size1 - d.nofEquals;
-            d.diff2 = size2 - d.nofEquals;
+            qint32 numofEquals = std::min(size1, size2);
+            Diff d(numofEquals, size1 - numofEquals, size2 - numofEquals);
+
             diffList.push_back(d);
         }
         else
         {
-            diffList.front().nofEquals += equalLinesAtStart;
+            diffList.front().adjustNumberOfEquals(equalLinesAtStart);
             currentLine1 += equalLinesAtStart;
             currentLine2 += equalLinesAtStart;
 
             LineRef nofEquals = std::min(size1 - currentLine1, size2 - currentLine2);
             if(nofEquals == 0)
             {
-                diffList.back().diff1 += size1 - currentLine1;
-                diffList.back().diff2 += size2 - currentLine2;
+                diffList.back().adjustDiff1(size1 - currentLine1);
+                diffList.back().adjustDiff2(size2 - currentLine2);
             }
             else
             {
@@ -630,8 +623,8 @@ static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef si
         DiffList::iterator i;
         for(i = diffList.begin(); i != diffList.end(); ++i)
         {
-            l1 += i->nofEquals + i->diff1;
-            l2 += i->nofEquals + i->diff2;
+            l1 += i->numberOfEquals() + i->diff1();
+            l2 += i->numberOfEquals() + i->diff2();
         }
 
         Q_ASSERT(l1 == size1 && l2 == size2);
@@ -1269,25 +1262,25 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
 
             while(nofUnmatched > 0)
             {
-                if(d.diff1 > 0 && d.diff2 > 0)
+                if(d.diff1() > 0 && d.diff2() > 0)
                 {
-                    --d.diff1;
-                    --d.diff2;
+                    d.adjustDiff1(-1);
+                    d.adjustDiff2(-1);
                     --nofUnmatched;
                 }
-                else if(d.nofEquals > 0)
+                else if(d.numberOfEquals() > 0)
                 {
-                    --d.nofEquals;
+                    d.adjustNumberOfEquals(-1);
                     --nofUnmatched;
                 }
 
-                if(d.nofEquals == 0 && (d.diff1 == 0 || d.diff2 == 0) && nofUnmatched > 0)
+                if(d.numberOfEquals() == 0 && (d.diff1() == 0 || d.diff2() == 0) && nofUnmatched > 0)
                 {
                     if(diffList.empty())
                         break;
-                    d.nofEquals += diffList.back().nofEquals;
-                    d.diff1 += diffList.back().diff1;
-                    d.diff2 += diffList.back().diff2;
+                    d.adjustNumberOfEquals(diffList.back().numberOfEquals());
+                    d.adjustDiff1(diffList.back().diff1());
+                    d.adjustDiff2(diffList.back().diff2());
                     diffList.pop_back();
                     bEndReached = false;
                 }
@@ -1316,8 +1309,8 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
         DiffList::const_iterator it;
         for(it = diffList.begin(); it != diffList.end(); ++it)
         {
-            l1 += (it->nofEquals + it->diff1);
-            l2 += (it->nofEquals + it->diff2);
+            l1 += (it->numberOfEquals() + it->diff1());
+            l2 += (it->numberOfEquals() + it->diff2());
         }
 
         Q_ASSERT(l1 == line1.size() && l2 == line2.size());
@@ -1364,7 +1357,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
             bool bUsefulFineDiff = false;
             for(dli = pDiffList->begin(); dli != pDiffList->end(); ++dli)
             {
-                if(dli->nofEquals >= 4)
+                if(dli->numberOfEquals() >= 4)
                 {
                     bUsefulFineDiff = true;
                     break;
@@ -1373,11 +1366,11 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
 
             for(dli = pDiffList->begin(); dli != pDiffList->end(); ++dli)
             {
-                if(dli->nofEquals < 4 && (dli->diff1 > 0 || dli->diff2 > 0) && !(bUsefulFineDiff && dli == pDiffList->begin()))
+                if(dli->numberOfEquals() < 4 && (dli->diff1() > 0 || dli->diff2() > 0) && !(bUsefulFineDiff && dli == pDiffList->begin()))
                 {
-                    dli->diff1 += dli->nofEquals;
-                    dli->diff2 += dli->nofEquals;
-                    dli->nofEquals = 0;
+                    dli->adjustDiff1(dli->numberOfEquals());
+                    dli->adjustDiff2(dli->numberOfEquals());
+                    dli->setNumberOfEquals(0);
                 }
             }
 
