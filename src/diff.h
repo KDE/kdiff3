@@ -84,7 +84,7 @@ class LineData
     Q_DECL_DEPRECATED bool bContainsPureComment = false;
 
   public:
-    explicit LineData() = default; // needed for QtInternal reasons should not be used.
+    explicit LineData() = default; // needed for Qt internal reasons should not be used.
     inline LineData(const QSharedPointer<QString> &buffer, const qint64 inOffset, QtNumberType inSize = 0)
     {
         mBuffer = buffer;
