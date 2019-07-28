@@ -25,8 +25,8 @@
  */
 
 
-#ifndef __diff_ext_h__
-#define __diff_ext_h__
+#ifndef diff_ext_h
+#define diff_ext_h
 
 #include <windows.h>
 #include <windowsx.h>

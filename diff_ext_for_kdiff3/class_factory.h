@@ -24,9 +24,9 @@
  *
  */
 
-#ifndef __class_factory_h__
-#define __class_factory_h__
- 
+#ifndef class_factory_h
+#define class_factory_h
+
 #include <shlobj.h>
 #include <shlguid.h>
 
@@ -43,9 +43,9 @@ class CLASS_FACTORY : public IClassFactory {
     //ICLASS_FACTORY members
     STDMETHODIMP CreateInstance(IUnknown*, REFIID, void**);
     STDMETHODIMP LockServer(BOOL);
-  
+
   private:
     ULONG _ref_count;
 };
 
-#endif //__class_factory_h__
+#endif //class_factory_h

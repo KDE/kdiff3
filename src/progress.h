@@ -61,7 +61,7 @@ public:
    void hideStatusBarWidget();
    void delayedHideStatusBarWidget();
 
-   void timerEvent(QTimerEvent*) override;
+   void timerEvent(QTimerEvent* event) override;
 public slots:
    void recalc(bool bUpdate);
 private:

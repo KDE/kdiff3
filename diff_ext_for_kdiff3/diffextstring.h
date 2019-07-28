@@ -25,8 +25,8 @@
  */
 
 
-#ifndef __string_h__
-#define __string_h__
+#ifndef string_h
+#define string_h
 
 #include <windows.h>
 #include <tchar.h>
@@ -41,18 +41,18 @@ class STRING {
   public:
     static const int begin = 0;
     static const int end = -1;
-  
+
   public:
     STRING(const STRING& s) {
       _str = new TCHAR[s.length()+1];
       lstrcpy(_str, s);
     }
-    
+
     STRING(const TCHAR* str = TEXT("")) {
       _str = new TCHAR[lstrlen(str)+1];
       lstrcpy(_str, str);
     }
-    
+
     ~STRING() {
       delete[] _str;
     }
@@ -70,18 +70,18 @@ class STRING {
           p[newLength]=0;
        }
     }
-    
+
     STRING& operator=(const STRING& s) {
       delete[] _str;
       _str = new TCHAR[s.length()+1];
       lstrcpy(_str, s);
       return *this;
     }
-    
+
     operator TCHAR*() {
       return _str;
     }
-    
+
     operator const TCHAR*() const {
       return _str;
     }
@@ -89,11 +89,11 @@ class STRING {
     const TCHAR* c_str() const {
        return _str;
     }
-    
+
     size_t length() const {
       return _tcslen(_str);
     }
-    
+
     // Also returns the length. Behaviour like std::basic_string::size.
     // See also sizeInBytes() below.
     size_t size() const {
@@ -109,21 +109,21 @@ class STRING {
     {
        return length()==0;
     }
-    
+
     STRING substr(size_t from, size_t len=size_t(-1)) const {
       STRING tmp;
       size_t to = len==size_t(-1) ? length() : from + len;
-            
+
       if(from < to && (to <= length())) {
         size_t new_len = to - from + 1;
         TCHAR* new_str = new TCHAR[new_len+1];
         lstrcpyn(new_str, &_str[from], int(new_len) );
         new_str[new_len] = 0;
-        
+
         tmp = new_str;
         delete[] new_str;
       }
-      
+
       return tmp;
     }
 
@@ -132,7 +132,7 @@ class STRING {
        *this = substr( 0, pos ) + s + substr( pos+num );
        return *this;
     }
-    
+
     bool operator ==(const STRING& s) const {
       return (lstrcmp(_str, s) == 0);
     }
@@ -145,17 +145,17 @@ class STRING {
        else
           return size_t(-1);
     }
-    
+
     STRING& operator +=(const STRING& s) {
       TCHAR* str = new TCHAR[lstrlen(_str)+s.length()+1];
 
       lstrcpy(str, _str);
       lstrcat(str, s);
-      
+
       delete[] _str;
-      
+
       _str = str;
-      
+
       return *this;
     }
 
@@ -165,9 +165,9 @@ class STRING {
 
 inline STRING operator+( const STRING& s1, const STRING& s2) {
   STRING tmp(s1);
-  
+
   tmp+=s2;
-  
+
   return tmp;
 }
 

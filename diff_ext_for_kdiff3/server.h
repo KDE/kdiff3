@@ -23,8 +23,8 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-#ifndef __server_h__
-#define __server_h__
+#ifndef server_h
+#define server_h
 #include <list>   // std::list
 //#include <log/file_sink.h>
 #include <windows.h>
@@ -53,34 +53,34 @@ class SERVER {
   public:
     static SERVER* instance();
     void initLogging();
-  
+
   public:
     virtual ~SERVER();
-    
+
     tstring getRegistryKeyString( const tstring& subKey, const tstring& value );
-  
+
     HINSTANCE handle() const;
-  
+
     HRESULT do_register();
     HRESULT do_unregister();
-  
+
     void lock();
     void release();
-  
+
     ULONG reference_count() const {
       return _reference_count;
     }
-    
+
     std::list< tstring >& recent_files();
-    
+
     void save_history() const;
 
     static void logMessage( const char* function, const char* file, int line, const tstring& msg );
-  
+
   private:
     SERVER();
     SERVER(const SERVER&) {}
-      
+
   private:
     LONG _reference_count;
     std::list<tstring>* m_pRecentFiles;

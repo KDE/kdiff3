@@ -513,7 +513,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     }
     else
     {
-        //exit early for non-existant files
+        //exit early for nonexistent files
         return errors;
     }
 
@@ -530,7 +530,6 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         // Preprocessing command may result in smaller data buffer so adjust size
         for(qint64 i = m_lmppData.m_vSize; i < m_normalData.m_vSize; ++i)
         { // Set all empty lines to point to the end of the buffer.
-
             m_lmppData.m_v.push_back(LineData(m_lmppData.m_unicodeBuf, m_lmppData.m_unicodeBuf->length()));
         }
 
@@ -631,7 +630,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding)
                 {
                     //workaround for lack of peak API in QTextStream.
                     qint64  j;
-                    for(j = 0; j < 4 && lastOffset + j < m_size; j++)
+                    for(j = 0; j < 4 && lastOffset + j < m_size; ++j)
                     {
                         if(m_pBuf[lastOffset + j] != '\0')
                             break;

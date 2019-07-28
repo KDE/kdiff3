@@ -42,7 +42,10 @@ class LineRef
             mLineNumber = -1;
     }
     inline operator LineType() const { return mLineNumber; }
-    inline void operator=(const LineType lineIn) { mLineNumber = lineIn; }
+    inline LineRef& operator=(const LineType lineIn) {
+        mLineNumber = lineIn;
+        return *this;
+    }
     inline LineRef& operator+=(const LineType& inLine)
     {
         mLineNumber += inLine;
@@ -55,7 +58,7 @@ class LineRef
         return *this;
     };
 
-    LineRef operator++(int)
+    const LineRef operator++(int)
     {
         LineRef line(*this);
         ++mLineNumber;
@@ -68,7 +71,7 @@ class LineRef
         return *this;
     };
 
-    LineRef operator--(int)
+    const LineRef operator--(int)
     {
         LineRef line(*this);
         --mLineNumber;

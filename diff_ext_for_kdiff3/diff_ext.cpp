@@ -26,11 +26,12 @@
 
 #define _CRT_SECURE_NO_DEPRECATE
 
+#include "diff_ext.h"
+
 #include <assert.h>
 #include <stdio.h>
 #include <tchar.h>
 
-#include "diff_ext.h"
 #include <map>
 #include <vector>
 
