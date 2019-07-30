@@ -2517,7 +2517,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareMergeStart(const 
     }
 
     m_currentIndexForOperation = m_mergeItemList.begin();
-    return;
 }
 
 void DirectoryMergeWindow::slotRunOperationForCurrentItem()
