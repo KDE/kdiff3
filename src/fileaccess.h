@@ -154,7 +154,7 @@ class FileAccessJobHandler : public QObject
 
     bool get(void* pDestBuffer, long maxLength);
     bool put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume = false, int permissions = -1);
-    bool stat(int detailLevel = 2, bool bWantToWrite = false);
+    bool stat(short detailLevel = 2, bool bWantToWrite = false);
     bool copyFile(const QString& dest);
     bool rename(const FileAccess& dest);
     bool listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,

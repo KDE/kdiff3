@@ -851,7 +851,7 @@ FileAccessJobHandler::FileAccessJobHandler(FileAccess* pFileAccess)
     m_bSuccess = false;
 }
 
-bool FileAccessJobHandler::stat(int detail, bool bWantToWrite)
+bool FileAccessJobHandler::stat(short detail, bool bWantToWrite)
 {
     m_bSuccess = false;
     m_pFileAccess->setStatusText(QString());
