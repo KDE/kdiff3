@@ -83,9 +83,9 @@ public:
    QCheckBox* m_pSearchInOutput;
    QCheckBox* m_pCaseSensitive;
 
-   int currentLine;
-   int currentPos;
-   int currentWindow;
+   int currentLine = 0;
+   int currentPos = 0;
+   int currentWindow = 0;
 };
 
 
