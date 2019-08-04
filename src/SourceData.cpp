@@ -513,7 +513,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         return errors;
     }
 
-    Q_ASSERT(m_lmppData.isText() && !m_lmppData.isEmpty());
+    Q_ASSERT(m_lmppData.isText());
     //TODO: Needed?
     if(m_lmppData.m_vSize < m_normalData.m_vSize)
     {
