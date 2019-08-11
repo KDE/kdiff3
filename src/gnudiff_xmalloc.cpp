@@ -30,9 +30,9 @@
 
 #include "gnudiff_diff.h"
 /* If non NULL, call this function when memory is exhausted. */
-void (*xalloc_fail_func)(void) = nullptr;
+void (*xalloc_fail_func)() = nullptr;
 
-void GnuDiff::xalloc_die(void)
+void GnuDiff::xalloc_die()
 {
     if(xalloc_fail_func)
         (*xalloc_fail_func)();

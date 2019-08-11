@@ -217,7 +217,7 @@ class GnuDiff
     // gnudiff_xmalloc.cpp
     void *xmalloc(size_t n);
     void *xrealloc(void *p, size_t n);
-    void xalloc_die(void);
+    void xalloc_die();
 
     inline bool isWhite(QChar c)
     {
