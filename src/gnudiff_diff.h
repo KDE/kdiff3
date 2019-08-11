@@ -318,9 +318,9 @@ struct change *find_change (struct change *);
 struct change *find_reverse_change (struct change *);
 void *zalloc (size_t);
 enum changes analyze_hunk (struct change *, LineRef *, LineRef *, LineRef *, LineRef *);
-void begin_output (void);
+void begin_output ();
 void debug_script (struct change *);
-void finish_output (void);
+void finish_output ();
 void message (const QChar *, const QChar *, const QChar *);
 void message5 (const QChar *, const QChar *, const QChar *, const QChar *, const QChar *);
 void output_1_line (const QChar *, const QChar *, const QChar *, const QChar *);
@@ -348,7 +348,7 @@ private:
    // gnudiff_xmalloc.cpp
    void *xmalloc (size_t n);
    void *xrealloc(void *p, size_t n);
-   void xalloc_die (void);
+   void xalloc_die ();
 
    inline bool isWhite( QChar c )
    {

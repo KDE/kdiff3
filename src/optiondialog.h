@@ -47,7 +47,7 @@ class OptionDialog : public KPageDialog
 public:
 
     explicit OptionDialog( bool bShowDirMergeSettings, QWidget *parent = nullptr );
-    ~OptionDialog( void ) override;
+    ~OptionDialog() override;
     QString parseOptions( const QStringList& optionList );
     QString calcOptionHelp();
 
@@ -61,9 +61,9 @@ public:
     void addOptionItem(OptionItemBase*);
     KKeyDialog* m_pKeyDialog;
 protected Q_SLOTS:
-    virtual void slotDefault( void );
-    virtual void slotOk( void );
-    virtual void slotApply( void );
+    virtual void slotDefault();
+    virtual void slotOk();
+    virtual void slotApply();
     //virtual void buttonClicked( QAbstractButton* );
     virtual void helpRequested();
 
