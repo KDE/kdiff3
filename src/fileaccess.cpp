@@ -159,7 +159,7 @@ void FileAccess::loadData()
 
     if(isLocal() && m_bSymLink)
     {
-        m_linkTarget = m_fileInfo.readLink();
+        m_linkTarget = m_fileInfo.symLinkTarget();
 #ifndef Q_OS_WIN
         // Unfortunately Qt5 symLinkTarget/readLink always returns an absolute path, even if the link is relative
         char* s = (char*)malloc(PATH_MAX + 1);
