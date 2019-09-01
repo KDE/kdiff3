@@ -41,6 +41,12 @@ public:
       const Diff3LineList* pDiff3LineList,
       TotalDiffStatus* pTotalDiffStatus
       );
+
+   inline void clearMergeList()
+   {
+       m_mergeLineList.clear();
+   }
+
    void initActions(KActionCollection* ac);
    void reset();
 
