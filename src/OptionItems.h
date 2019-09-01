@@ -18,18 +18,17 @@
  * along with KDiff3.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef OPTIONITEMS_H
 #define OPTIONITEMS_H
 
 #include "common.h"
 
-#include <QString>
 #include <QComboBox>
 #include <QLabel>
-#include <QPushButton>
-#include <QTextCodec>
 #include <QLineEdit>
+#include <QPushButton>
+#include <QString>
+#include <QTextCodec>
 
 #include <KLocalizedString>
 
@@ -50,18 +49,21 @@ class OptionItemBase
     virtual void read(ValueMap*) = 0;
     void doPreserve()
     {
-        if(!m_bPreserved) {
+        if(!m_bPreserved)
+        {
             m_bPreserved = true;
             preserve();
         }
     }
     void doUnpreserve()
     {
-        if(m_bPreserved) {
+        if(m_bPreserved)
+        {
             unpreserve();
         }
     }
     QString getSaveName() { return m_saveName; }
+
   protected:
     virtual void preserve() = 0;
     virtual void unpreserve() = 0;
@@ -87,12 +89,14 @@ class Option : public OptionItemBase
 
     explicit Option(const T& defaultVal, const QString& saveName, T* pVar)
         : Option<T>(pVar, defaultVal, saveName)
-    {}
+    {
+    }
+
     explicit Option(T* pVar, const T& defaultValue, const QString& saveName)
         : OptionItemBase(saveName)
     {
-       m_pVar = pVar;
-       m_defaultVal = defaultValue;
+        m_pVar = pVar;
+        m_defaultVal = defaultValue;
     }
 
     void setToDefault() override {};
@@ -100,23 +104,24 @@ class Option : public OptionItemBase
     const T& getDefault() const { return m_defaultVal; };
     const T getCurrent() const { return *m_pVar; };
 
-    virtual void setCurrent(const T inValue) { *m_pVar= inValue; }
+    virtual void setCurrent(const T inValue) { *m_pVar = inValue; }
 
     void apply() override {};
     virtual void apply(const T& inValue) { *m_pVar = inValue; }
 
     void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
     void read(ValueMap* config) override { *m_pVar = config->readEntry(m_saveName, m_defaultVal); }
+
   protected:
     void preserve() override { m_preservedVal = *m_pVar; }
     void unpreserve() override { *m_pVar = m_preservedVal; }
     T* m_pVar;
     T m_preservedVal;
     T m_defaultVal;
-  private:
-   Q_DISABLE_COPY(Option)
-};
 
+  private:
+    Q_DISABLE_COPY(Option)
+};
 
 template <class T>
 class OptionNum : public Option<T>
