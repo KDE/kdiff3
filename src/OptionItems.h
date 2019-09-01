@@ -126,19 +126,15 @@ class OptionNum : public Option<T>
     explicit OptionNum(T* pVar, const QString& saveName)
         : Option<T>(pVar, saveName)
     {
-        stringValue = QLocale().toString(*pVar);
     }
 
     explicit OptionNum(T* pVar, const T& defaultValue, const QString& saveName)
         : Option<T>(pVar, defaultValue, saveName)
     {
-        stringValue = QLocale().toString(*pVar);
     }
 
     void setCurrent(const T inValue) override
     {
-        //QString::setNum does not use locale formatting instead it always use QLocale::C.
-        stringValue = QLocale().toString(inValue);
         Option<T>::setCurrent(inValue);
     }
 
@@ -149,12 +145,11 @@ class OptionNum : public Option<T>
     }
     const QString& getString() const
     {
-        return stringValue;
+        //QString::setNum does not use locale formatting instead it always use QLocale::C.
+        return QLocale().toString(Option<T>::getCurrent());
     }
 
   private:
-    QString stringValue;
-
     Q_DISABLE_COPY(OptionNum)
 };
 
