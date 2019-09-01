@@ -142,6 +142,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
     // so painting must be suppressed
     if(bGUI) setLockPainting(true);
 
+    //insure merge result window never has stale iterators.
+    if(m_pMergeResultWindow) m_pMergeResultWindow->clearMergeList();
     m_diff3LineList.clear();
     m_diff3LineVector.clear();
 
