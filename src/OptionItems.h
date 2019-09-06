@@ -148,7 +148,7 @@ class OptionNum : public Option<T>
         //QString::setNum does not use locale formatting instead it always use QLocale::C.
         return QLocale().toString(inValue);
     }
-    const QString& getString() const
+    const QString getString() const
     {
         //QString::setNum does not use locale formatting instead it always use QLocale::C.
         return QLocale().toString(Option<T>::getCurrent());
