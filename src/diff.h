@@ -77,7 +77,7 @@ class Diff
 
     inline void setNumberOfEquals(const qint32 inNumOfEquals) { nofEquals = inNumOfEquals; }
 
-    inline void adjustNumberOfEquals(const qint64 delta) { mDiff2 += delta; }
+    inline void adjustNumberOfEquals(const qint64 delta) { nofEquals += delta; }
     inline void adjustDiff1(const qint64 delta) { mDiff1 += delta; }
     inline void adjustDiff2(const qint64 delta) { mDiff2 += delta; }
 };
