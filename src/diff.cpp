@@ -1300,7 +1300,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
             break;
     }
 
-    Q_ASSERT(diffList.size() * sizeof(Diff) + sizeof(DiffList) >= (50 << 20));
+    Q_ASSERT(diffList.size() * sizeof(Diff) + sizeof(DiffList) <= (50 << 20));
 
     // Verify difflist
     {
