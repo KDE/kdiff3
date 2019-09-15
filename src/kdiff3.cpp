@@ -274,7 +274,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
         //Set m_bDirCompare flag
         m_bDirCompare = FileAccess(m_sd1.getFilename()).isDir();
 
-        QStringList aliasList; //KDiff3Shell::getParser()->values( "fname" );
+        QStringList aliasList = KDiff3Shell::getParser()->values( "fname" );
         QStringList::Iterator ali = aliasList.begin();
 
         QString an1 = KDiff3Shell::getParser()->value("L1");

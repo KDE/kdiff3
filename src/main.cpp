@@ -122,7 +122,7 @@ int main(int argc, char* argv[])
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("L1"), i18n("Visible name replacement for input file 1 (base)."), QLatin1String("alias1")));
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("L2"), i18n("Visible name replacement for input file 2."), QLatin1String("alias2")));
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("L3"), i18n("Visible name replacement for input file 3."), QLatin1String("alias3")));
-    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("L") << QLatin1String("fname alias"), i18n("Alternative visible name replacement. Supply this once for every input.")));
+    cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("L") << QLatin1String("fname"), i18n("Alternative visible name replacement. Supply this once for every input."), QLatin1String("alias")));
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("cs"), i18n("Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\""), QLatin1String("string")));
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("confighelp"), i18n("Show list of config settings and current values.")));
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("config"), i18n("Use a different config file."), QLatin1String("file")));
