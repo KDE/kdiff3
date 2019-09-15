@@ -395,8 +395,8 @@ class KDiff3App : public QSplitter
     KToolBar* toolBar(QLatin1String);
     KDiff3Part* m_pKDiff3Part;
     KParts::MainWindow* m_pKDiff3Shell;
-    bool m_bAutoFlag;
-    bool m_bAutoMode;
+    bool m_bAutoFlag = false;
+    bool m_bAutoMode = false;
     void recalcWordWrap(int visibleTextWidthForPrinting = -1);
     bool m_bRecalcWordWrapPosted;
     void setHScrollBarRange();

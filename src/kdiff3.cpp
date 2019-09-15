@@ -222,7 +222,12 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     m_sd2.setOptions(m_pOptions);
     m_sd3.setOptions(m_pOptions);
 
-    m_bAutoFlag = false; //disable --auto option git hard codes this unwanted flag.
+#ifdef ENABLE_AUTO
+    m_bAutoFlag = hasArgs && KDiff3Shell::getParser()->isSet("auto");
+#else
+    m_bAutoFlag = false;
+#endif
+
     m_bAutoMode = m_bAutoFlag || m_pOptions->m_bAutoSaveAndQuitOnMergeWithoutConflicts;
     if(hasArgs) {
         m_outputFilename = KDiff3Shell::getParser()->value("output");

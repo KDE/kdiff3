@@ -51,6 +51,8 @@ find_package(
 )
 
 set_package_properties(KF5DocTools PROPERTIES PURPOSE "Allows generating and installing docs.")
+
+option(ENABLE_AUTO "Enable kdiff3's '--auto' flag" ON)
 option(ENABLE_CLANG_TIDY "Run clang-tidy if available and cmake version >=3.6" OFF)
 
 set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::IconThemes )
@@ -90,6 +92,12 @@ set(
     cxx_inheriting_constructors
     cxx_static_assert
 )
+
+if(ENABLE_AUTO)
+    add_definitions(
+        -DENABLE_AUTO
+    )
+endif()
 
 add_definitions(
     -DQT_DEPRECATED_WARNINGS #Get warnings from QT about deprecated functions.
