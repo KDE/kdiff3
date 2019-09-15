@@ -312,6 +312,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     ///////////////////////////////////////////////////////////////////
     // call inits to invoke all other construction parts
     initActions(actionCollection());
+    MergeResultWindow::initActions(actionCollection());
+
     initStatusBar();
 
     m_pFindDialog = new FindDialog(this);
