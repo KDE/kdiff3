@@ -345,7 +345,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         oldHeights = m_pMainSplitter->sizes();
 
     initView();
-    m_pMergeResultWindow->initActions(actionCollection());
+    m_pMergeResultWindow->connectActions();
 
     if(m_pDirectoryMergeSplitter->isVisible())
     {

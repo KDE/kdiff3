@@ -47,7 +47,9 @@ public:
        m_mergeLineList.clear();
    }
 
-   void initActions(KActionCollection* ac);
+   static void initActions(KActionCollection* ac);
+
+   void connectActions();
    void reset();
 
    bool saveDocument( const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle );
@@ -126,15 +128,15 @@ private:
    void merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly=false, bool bWhiteSpaceOnly=false );
    QString getString( int lineIdx );
 
-   QAction* chooseAEverywhere = nullptr;
-   QAction* chooseBEverywhere = nullptr;
-   QAction* chooseCEverywhere = nullptr;
-   QAction* chooseAForUnsolvedConflicts = nullptr;
-   QAction* chooseBForUnsolvedConflicts = nullptr;
-   QAction* chooseCForUnsolvedConflicts = nullptr;
-   QAction* chooseAForUnsolvedWhiteSpaceConflicts = nullptr;
-   QAction* chooseBForUnsolvedWhiteSpaceConflicts = nullptr;
-   QAction* chooseCForUnsolvedWhiteSpaceConflicts = nullptr;
+   static QAction* chooseAEverywhere;
+   static QAction* chooseBEverywhere;
+   static QAction* chooseCEverywhere;
+   static QAction* chooseAForUnsolvedConflicts;
+   static QAction* chooseBForUnsolvedConflicts;
+   static QAction* chooseCForUnsolvedConflicts;
+   static QAction* chooseAForUnsolvedWhiteSpaceConflicts;
+   static QAction* chooseBForUnsolvedWhiteSpaceConflicts;
+   static QAction* chooseCForUnsolvedWhiteSpaceConflicts;
 
    Options* m_pOptions = nullptr;
 
