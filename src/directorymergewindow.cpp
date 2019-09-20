@@ -556,7 +556,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
         : QStyledItemDelegate(pParent), m_pDMW(pParent), d(pParent->d)
     {
     }
-    void paint(QPainter* p, const QStyleOptionViewItem& option, const QModelIndex& index) const override
+    void paint(QPainter* thePainter, const QStyleOptionViewItem& option, const QModelIndex& index) const override
     {
         int column = index.column();
         if(column == s_ACol || column == s_BCol || column == s_CCol)
@@ -584,27 +584,27 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
             if(!icon.isNull())
             {
                 int yOffset = (sizeHint(option, index).height() - icon.height()) / 2;
-                p->drawPixmap(x + 2, y + yOffset, icon);
+                thePainter->drawPixmap(x + 2, y + yOffset, icon);
 
                 int i = index == d->m_selection1Index ? 1 : index == d->m_selection2Index ? 2 : index == d->m_selection3Index ? 3 : 0;
                 if(i != 0)
                 {
                     Options* pOpts = d->m_pOptions;
                     QColor c(i == 1 ? pOpts->m_colorA : i == 2 ? pOpts->m_colorB : pOpts->m_colorC);
-                    p->setPen(c); // highlight() );
-                    p->drawRect(x + 2, y + yOffset, icon.width(), icon.height());
-                    p->setPen(QPen(c, 0, Qt::DotLine));
-                    p->drawRect(x + 1, y + yOffset - 1, icon.width() + 2, icon.height() + 2);
-                    p->setPen(Qt::white);
+                    thePainter->setPen(c); // highlight() );
+                    thePainter->drawRect(x + 2, y + yOffset, icon.width(), icon.height());
+                    thePainter->setPen(QPen(c, 0, Qt::DotLine));
+                    thePainter->drawRect(x + 1, y + yOffset - 1, icon.width() + 2, icon.height() + 2);
+                    thePainter->setPen(Qt::white);
                     QString s(QChar('A' + i - 1));
-                    p->drawText(x + 2 + (icon.width() - p->fontMetrics().width(s)) / 2,
-                                y + yOffset + (icon.height() + p->fontMetrics().ascent()) / 2 - 1,
+                    thePainter->drawText(x + 2 + (icon.width() - thePainter->fontMetrics().width(s)) / 2,
+                                y + yOffset + (icon.height() + thePainter->fontMetrics().ascent()) / 2 - 1,
                                 s);
                 }
                 else
                 {
-                    p->setPen(m_pDMW->palette().background().color());
-                    p->drawRect(x + 1, y + yOffset - 1, icon.width() + 2, icon.height() + 2);
+                    thePainter->setPen(m_pDMW->palette().background().color());
+                    thePainter->drawRect(x + 1, y + yOffset - 1, icon.width() + 2, icon.height() + 2);
                 }
                 return;
             }
@@ -614,7 +614,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
         {
             option2.displayAlignment = Qt::AlignRight;
         }
-        QStyledItemDelegate::paint(p, option2, index);
+        QStyledItemDelegate::paint(thePainter, option2, index);
     }
     QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override
     {
