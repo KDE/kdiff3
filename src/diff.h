@@ -92,7 +92,7 @@ class LineData
     QtNumberType mFirstNonWhiteChar = 0;
     qint64 mOffset = 0;
     QtNumberType mSize = 0;
-    Q_DECL_DEPRECATED bool bContainsPureComment = false;
+    bool bContainsPureComment = false;//TODO: Move me
 
   public:
     explicit LineData() = default; // needed for Qt internal reasons should not be used.

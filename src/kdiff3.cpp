@@ -816,7 +816,7 @@ void printDiffTextWindow(RLPainter& painter, const QRect& view, const QString& h
 
     painter.translate(0, view.top());
     pDiffTextWindow->print(painter, view, line, linesPerPage);
-    painter.resetMatrix();
+    painter.resetTransform();
 }
 
 void KDiff3App::slotFilePrint()
@@ -863,7 +863,7 @@ void KDiff3App::slotFilePrint()
     {
         slotStatusMsg(i18n("Printing..."));
         // create a painter to paint on the printer object
-        RLPainter painter(&printer, m_pOptions->m_bRightToLeftLanguage, width(), fontMetrics().width('W'));
+        RLPainter painter(&printer, m_pOptions->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(),'W'));
 
         QPaintDevice* pPaintDevice = painter.device();
         int dpiy = pPaintDevice->logicalDpiY();
@@ -880,7 +880,7 @@ void KDiff3App::slotFilePrint()
         QString topLineText = i18n("Top line");
 
         //int headerWidth = fm.width( m_sd1.getAliasName() + ", "+topLineText+": 01234567" );
-        int headerLines = fm.width(m_sd1.getAliasName() + ", " + topLineText + ": 01234567") / columnWidth + 1;
+        int headerLines = Utils::getHorizontalAdvance(fm, m_sd1.getAliasName() + ", " + topLineText + ": 01234567") / columnWidth + 1;
 
         int headerMargin = headerLines * fm.height() + 3; // Text + one horizontal line
         int footerMargin = fm.height() + 3;
@@ -1005,7 +1005,7 @@ void KDiff3App::slotFilePrint()
                 QString s = bPrintCurrentPage ? QString("")
                                               : QString::number(page) + '/' + QString::number(totalNofPages);
                 if(bPrintSelection) s += i18n(" (Selection)");
-                painter.drawText((view.right() - painter.fontMetrics().width(s)) / 2,
+                painter.drawText((view.right() - Utils::getHorizontalAdvance(painter.fontMetrics(), s)) / 2,
                                  view.bottom() + painter.fontMetrics().ascent() + 5, s);
 
                 bFirstPrintedPage = true;

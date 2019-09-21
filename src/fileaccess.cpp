@@ -133,7 +133,7 @@ void FileAccess::loadData()
     m_fileInfo.setCaching(true);
 
     if(parent() == nullptr)
-        m_baseDir = m_fileInfo.absoluteFilePath();
+        m_baseDir.setPath(m_fileInfo.absoluteFilePath());
     else
         m_baseDir = m_pParent->m_baseDir;
 
