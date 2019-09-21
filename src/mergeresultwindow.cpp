@@ -13,6 +13,7 @@
 #include "options.h"
 #include "RLPainter.h"
 #include "guiutils.h"
+#include "Utils.h"
 
 #include <QApplication>
 #include <QClipboard>
@@ -667,7 +668,7 @@ int MergeResultWindow::getNofVisibleLines()
 int MergeResultWindow::getTextXOffset()
 {
     QFontMetrics fm = fontMetrics();
-    return 3 * fm.width('0');
+    return 3 * Utils::getHorizontalAdvance(fm, '0');
 }
 
 void MergeResultWindow::resizeEvent(QResizeEvent* e)
@@ -1914,7 +1915,7 @@ void MergeResultWindow::writeLine(
     else
         Q_ASSERT(true);
 
-    xOffset -= fm.width('0');
+    xOffset -= Utils::getHorizontalAdvance(fm, '0');
     p.setPen(m_pOptions->m_fgColor);
     if(rangeMark & 1) // begin mark
     {
@@ -1964,7 +1965,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
     bool bOldSelectionContainsData = m_selection.selectionContainsData();
     const QFontMetrics& fm = fontMetrics();
-    int fontWidth = fm.width('0');
+    int fontWidth = Utils::getHorizontalAdvance(fm, '0');
 
     if(!m_bCursorUpdate) // Don't redraw everything for blinking cursor?
     {
@@ -2255,7 +2256,7 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
 
         // Scroll because mouse moved out of the window
         const QFontMetrics& fm = fontMetrics();
-        int fontWidth = fm.width('0');
+        int fontWidth = Utils::getHorizontalAdvance(fm, '0');
         int topLineYOffset = 0;
         int deltaX = 0;
         int deltaY = 0;

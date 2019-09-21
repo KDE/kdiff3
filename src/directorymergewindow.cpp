@@ -597,13 +597,14 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
                     thePainter->drawRect(x + 1, y + yOffset - 1, icon.width() + 2, icon.height() + 2);
                     thePainter->setPen(Qt::white);
                     QString s(QChar('A' + i - 1));
-                    thePainter->drawText(x + 2 + (icon.width() - thePainter->fontMetrics().width(s)) / 2,
+
+                    thePainter->drawText(x + 2 + (icon.width() - Utils::getHorizontalAdvance(thePainter->fontMetrics(), s)) / 2,
                                 y + yOffset + (icon.height() + thePainter->fontMetrics().ascent()) / 2 - 1,
                                 s);
                 }
                 else
                 {
-                    thePainter->setPen(m_pDMW->palette().background().color());
+                    thePainter->setPen(m_pDMW->palette().window().color());
                     thePainter->drawRect(x + 1, y + yOffset - 1, icon.width() + 2, icon.height() + 2);
                 }
                 return;

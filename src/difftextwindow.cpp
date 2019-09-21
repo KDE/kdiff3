@@ -18,6 +18,7 @@
 #include "options.h"
 #include "FileNameLineEdit.h"
 #include "RLPainter.h"
+#include "Utils.h"
 
 #include <algorithm>
 #include <cmath>
@@ -288,7 +289,7 @@ int DiffTextWindow::getFirstLine()
 
 void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
 {
-    int fontWidth = fontMetrics().width('0');
+    int fontWidth = Utils::getHorizontalAdvance(fontMetrics(), '0');
     int xOffset = d->leftInfoWidth() * fontWidth;
 
     int deltaX = d->m_horizScrollOffset - std::max(0, horizScrollOffset);
@@ -433,7 +434,7 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
         int pos;
         convertToLinePos(e->x(), e->y(), line, pos);
 
-        int fontWidth = fontMetrics().width('0');
+        int fontWidth = Utils::getHorizontalAdvance(fontMetrics(), '0');
         int xOffset = d->leftInfoWidth() * fontWidth;
 
         if((!d->m_pOptions->m_bRightToLeftLanguage && e->x() < xOffset) || (d->m_pOptions->m_bRightToLeftLanguage && e->x() > width() - xOffset))
@@ -563,7 +564,7 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
 
         // Scroll because mouse moved out of the window
         const QFontMetrics& fm = fontMetrics();
-        int fontWidth = fm.width('0');
+        int fontWidth = Utils::getHorizontalAdvance(fm, '0');
         int deltaX = 0;
         int deltaY = 0;
         if(!d->m_pOptions->m_bRightToLeftLanguage)
@@ -756,7 +757,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, bool /*bFirs
     int leading = m_pDiffTextWindow->fontMetrics().leading();
     int height = 0;
 
-    int fontWidth = m_pDiffTextWindow->fontMetrics().width('0');
+    int fontWidth = Utils::getHorizontalAdvance(m_pDiffTextWindow->fontMetrics(), '0');
     int xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
     int textWidth = visibleTextWidth;
     if(textWidth < 0)
@@ -813,7 +814,7 @@ void DiffTextWindowData::writeLine(
     const QFontMetrics& fm = p.fontMetrics();
     int fontHeight = fm.lineSpacing();
     int fontAscent = fm.ascent();
-    int fontWidth = fm.width('0');
+    int fontWidth = Utils::getHorizontalAdvance(fm, '0');
 
     int xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
     int yOffset = (line - m_firstLine) * fontHeight;
@@ -1027,7 +1028,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
 
     int endLine = std::min(d->m_firstLine + getNofVisibleLines() + 2, getNofLines());
 
-    RLPainter p(this, d->m_pOptions->m_bRightToLeftLanguage, width(), fontMetrics().width('0'));
+    RLPainter p(this, d->m_pOptions->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(), '0'));
 
     p.setFont(font());
     p.QPainter::fillRect(invalidRect, d->m_pOptions->m_bgColor);
@@ -1182,7 +1183,7 @@ void DiffTextWindow::resizeEvent(QResizeEvent* e)
     QSize s = e->size();
     QFontMetrics fm = fontMetrics();
     int visibleLines = s.height() / fm.lineSpacing() - 2;
-    int visibleColumns = s.width() / fm.width('0') - d->leftInfoWidth();
+    int visibleColumns = s.width() / Utils::getHorizontalAdvance(fm, '0') - d->leftInfoWidth();
     if(e->size().height() != e->oldSize().height())
         emit resizeHeightChangedSignal(visibleLines);
     if(e->size().width() != e->oldSize().width())
@@ -1201,7 +1202,7 @@ int DiffTextWindow::getNofVisibleLines()
 int DiffTextWindow::getVisibleTextAreaWidth()
 {
     QFontMetrics fm = fontMetrics();
-    return width() - d->leftInfoWidth() * fm.width('0');
+    return width() - d->leftInfoWidth() * Utils::getHorizontalAdvance(fm, '0');
 }
 
 QString DiffTextWindow::getSelection()
@@ -1576,7 +1577,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
         if(visibleTextWidth < 0)
             visibleTextWidth = getVisibleTextAreaWidth();
         else
-            visibleTextWidth -= d->leftInfoWidth() * fontMetrics().width('0');
+            visibleTextWidth -= d->leftInfoWidth() * Utils::getHorizontalAdvance(fontMetrics(), '0');
         int i;
         int wrapLineIdx = 0;
         int size = d->m_pDiff3LineVector->size();
@@ -1837,8 +1838,7 @@ void DiffTextWindowFrame::setFirstLine(int firstLine)
 
         int l = pDTW->calcTopLineInFile(firstLine);
 
-        int w = d->m_pTopLine->fontMetrics().width(
-            s + ' ' + QString().fill('0', lineNumberWidth));
+        int w = Utils::getHorizontalAdvance(d->m_pTopLine->fontMetrics(), s + ' ' + QString().fill('0', lineNumberWidth));
         d->m_pTopLine->setMinimumWidth(w);
 
         if(l == -1)
