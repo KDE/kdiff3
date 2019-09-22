@@ -13,7 +13,7 @@ set(KDIFF3_ICONS
 )
 
 # add icons to application sources, to have them bundled -- must be in same scope as src/CMakeLists.txt
-ecm_add_app_icon(kdiff3_SRCS ICONS ${KDIFF3_ICONS})
+ecm_add_app_icon(kdiff3_SRCS ICONS ${KDIFF3_PNG_ICONS})
 
 ecm_install_icons(
   ICONS
