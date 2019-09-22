@@ -36,7 +36,7 @@ void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
         FileAccess file(dir);
         file.addPath(".cvsignore");
         qint64 size = file.exists() ? file.sizeForReading() : 0;
-        if(size > 0)
+        if(size > 0 && size <= (qint64)std::numeric_limits<int>::max())
         {
             char* buf = new char[size];
             if(buf != nullptr)
