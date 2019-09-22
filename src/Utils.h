@@ -32,13 +32,13 @@ class Utils{
       inline static bool isEndOfLine( QChar c ) { return c=='\n' || c=='\r' || c=='\x0b'; }
 
       //Where posiable use QTextLayout in place of these functions especially when dealing with non-latin scripts.
-      inline static int getHorizontalAdvance(const QFontMetrics &metrics, const QString& s)
+      inline static int getHorizontalAdvance(const QFontMetrics &metrics, const QString& s, int len = -1)
       {
         //Warning: The Qt API used here is not accurate for some non-latin characters.
         #if QT_VERSION < QT_VERSION_CHECK(5,12,0)
-          return metrics.width(s);
+          return metrics.width(s, len);
         #else
-          return metrics.horizontalAdvance(s);
+          return metrics.horizontalAdvance(s, len);
         #endif
       }
 
@@ -46,7 +46,7 @@ class Utils{
       {
         //Warning: The Qt API used here is not accurate for some non-latin characters.
         #if QT_VERSION < QT_VERSION_CHECK(5,12,0)
-          return metrics.width(s);
+          return metrics.width(c);
         #else
           return metrics.horizontalAdvance(c);
         #endif
