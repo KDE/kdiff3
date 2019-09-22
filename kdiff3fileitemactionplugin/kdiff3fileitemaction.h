@@ -49,7 +49,7 @@ private Q_SLOTS:
 
 private:
    QList<QUrl> m_list;
-   QWidget* m_pParentWidget;
+   QWidget* m_pParentWidget = nullptr;
    //KFileItemListProperties m_fileItemInfos;
 };
 #endif

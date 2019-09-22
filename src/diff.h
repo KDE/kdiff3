@@ -258,7 +258,7 @@ class Diff3LineList : public std::list<Diff3Line>
     //TODO: Add safety guards to prevent list from getting too large. Same problem as with QLinkedList.
     int size() const
     {
-        if(std::list<Diff3Line>::size() > std::numeric_limits<int>::max())
+        if(std::list<Diff3Line>::size() > (size_t)std::numeric_limits<int>::max())//explicit cast to silence gcc
         {
             qCDebug(kdiffMain) << "Diff3Line: List too large. size=" << std::list<Diff3Line>::size();
             Q_ASSERT(false); //Unsupported size

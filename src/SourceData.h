@@ -116,7 +116,7 @@ class SourceData
     };
     FileData m_normalData;
     FileData m_lmppData;
-    QTextCodec* m_pEncoding;
+    QTextCodec* m_pEncoding = nullptr;
 };
 
 #endif // !SOURCEDATA_H
