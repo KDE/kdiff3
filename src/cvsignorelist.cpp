@@ -12,6 +12,7 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 #include "cvsignorelist.h"
+#include "TypeUtils.h"
 
 #include <QDir>
 #include <QTextStream>
@@ -35,21 +36,21 @@ void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
     {
         FileAccess file(dir);
         file.addPath(".cvsignore");
-        qint64 size = file.exists() ? file.sizeForReading() : 0;
-        if(size > 0 && size <= (qint64)std::numeric_limits<int>::max())
+        qint64 size = file.sizeForReading();
+        if(size > 0)
         {
             char* buf = new char[size];
             if(buf != nullptr)
             {
                 file.readFile(buf, size);
-                int pos1 = 0;
-                for(int pos = 0; pos <= size; ++pos)
+                qint64 pos1 = 0;
+                for(qint64 pos = 0; pos <= size; ++pos)
                 {
                     if(pos == size || buf[pos] == ' ' || buf[pos] == '\t' || buf[pos] == '\n' || buf[pos] == '\r')
                     {
-                        if(pos > pos1)
+                        if(pos > pos1 && pos - pos1 <= TYPE_MAX(QtNumberType))
                         {
-                            addEntry(QString::fromLatin1(&buf[pos1], pos - pos1));
+                            addEntry(QString::fromLatin1(&buf[pos1], (QtNumberType)(pos - pos1)));
                         }
                         ++pos1;
                     }
