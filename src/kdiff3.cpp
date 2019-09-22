@@ -801,7 +801,7 @@ void printDiffTextWindow(RLPainter& painter, const QRect& view, const QString& h
             QString s = headerText.mid(p);
             int i;
             for(i = 2; i < s.length(); ++i)
-                if(fm.width(s, i) > view.width())
+                if(Utils::getHorizontalAdvance(fm, s, i) > view.width())
                 {
                     --i;
                     break;
