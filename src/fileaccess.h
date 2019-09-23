@@ -115,7 +115,7 @@ class FileAccess
     bool interruptableReadFile(void* pDestBuffer, qint64 maxLength);
 
     QUrl m_url;
-    bool m_bValidData;
+    bool m_bValidData = false;
 
     //long m_fileType; // for testing only
     FileAccess* m_pParent = nullptr;
@@ -128,16 +128,16 @@ class FileAccess
     QSharedPointer<QTemporaryFile> tmpFile = nullptr;
     QSharedPointer<QFile> realFile = nullptr;
 
-    qint64 m_size;
+    qint64 m_size = 0;
     QDateTime m_modificationTime = QDateTime::fromMSecsSinceEpoch(0);
-    bool m_bSymLink;
-    bool m_bFile;
-    bool m_bDir;
-    bool m_bExists;
-    bool m_bWritable;
-    bool m_bReadable;
-    bool m_bExecutable;
-    bool m_bHidden;
+    bool m_bSymLink = false;
+    bool m_bFile = false;
+    bool m_bDir = false;
+    bool m_bExists = false;
+    bool m_bWritable = false;
+    bool m_bReadable = false;
+    bool m_bExecutable = false;
+    bool m_bHidden = false;
 
     QString m_statusText; // Might contain an error string, when the last operation didn't succeed.
 };
@@ -166,13 +166,13 @@ class FileAccessJobHandler : public QObject
     bool symLink(const QUrl& linkTarget, const QUrl& linkLocation);
 
   private:
-    FileAccess* m_pFileAccess;
-    bool m_bSuccess;
+    FileAccess* m_pFileAccess = nullptr;
+    bool m_bSuccess = false;
 
     // Data needed during Job
-    qint64 m_transferredBytes;
+    qint64 m_transferredBytes = 0;
     char* m_pTransferBuffer = nullptr; // Needed during get or put
-    qint64 m_maxLength;
+    qint64 m_maxLength = 0;
 
     QString m_filePattern;
     QString m_fileAntiPattern;

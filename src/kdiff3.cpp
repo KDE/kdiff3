@@ -125,34 +125,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     pal.setColor(QPalette::Text, pal.color(QPalette::Active, QPalette::Text));
     setPalette(pal);
 
-    m_pMainSplitter = nullptr;
-    m_pDirectoryMergeSplitter = nullptr;
-    m_pDirectoryMergeWindow = nullptr;
-    m_pCornerWidget = nullptr;
-    m_pMainWidget = nullptr;
-    m_pDiffTextWindow1 = nullptr;
-    m_pDiffTextWindow2 = nullptr;
-    m_pDiffTextWindow3 = nullptr;
-    m_pDiffTextWindowFrame1 = nullptr;
-    m_pDiffTextWindowFrame2 = nullptr;
-    m_pDiffTextWindowFrame3 = nullptr;
-    m_pDiffWindowSplitter = nullptr;
-    m_pOverview = nullptr;
-    m_bTripleDiff = false;
-    m_pMergeResultWindow = nullptr;
-    m_pMergeWindowFrame = nullptr;
-    m_bOutputModified = false;
-    m_bFileSaved = false;
-    m_bTimerBlock = false;
-    m_pHScrollBar = nullptr;
-    m_pDiffVScrollBar = nullptr;
-    m_pMergeVScrollBar = nullptr;
-    viewToolBar = nullptr;
-    m_bRecalcWordWrapPosted = false;
-    m_bFinishMainInit = false;
-    m_pEventLoopForPrinting = nullptr;
-    m_bLoadFiles = false;
-
     // Needed before any file operations via FileAccess happen.
     if(g_pProgressDialog == nullptr)
     {

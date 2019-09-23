@@ -122,19 +122,8 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     explicit DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW)
     {
         mWindow = pDMW;
-        m_pOptions = nullptr;
-        m_pDirectoryMergeInfo = nullptr;
-        m_bSimulatedMergeStarted = false;
-        m_bRealMergeStarted = false;
-        m_bError = false;
-        m_bSyncMode = false;
         m_pStatusInfo = new StatusInfo(mWindow);
         m_pStatusInfo->hide();
-        m_bScanning = false;
-        m_bCaseSensitive = true;
-        m_bUnfoldSubdirs = false;
-        m_bSkipDirStatus = false;
-        m_pRoot = new MergeFileInfos;
     }
     ~DirectoryMergeWindowPrivate() override
     {
@@ -194,7 +183,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     }
     MergeFileInfos* rootMFI() const { return m_pRoot; }
 
-    Options* m_pOptions;
+    Options* m_pOptions = nullptr;
 
     void calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
                        int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges);
@@ -275,25 +264,25 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
 
     typedef QMap<FileKey, MergeFileInfos> t_fileMergeMap;
 
-    MergeFileInfos* m_pRoot;
+    MergeFileInfos* m_pRoot = new MergeFileInfos();
 
     t_fileMergeMap m_fileMergeMap;
   public:
 
-    bool m_bFollowDirLinks;
-    bool m_bFollowFileLinks;
-    bool m_bSimulatedMergeStarted;
-    bool m_bRealMergeStarted;
-    bool m_bError;
-    bool m_bSyncMode;
-    bool m_bDirectoryMerge; // if true, then merge is the default operation, otherwise it's diff.
-    bool m_bCaseSensitive;
-    bool m_bUnfoldSubdirs;
-    bool m_bSkipDirStatus;
-    bool m_bScanning; // true while in init()
+    bool m_bFollowDirLinks = false;
+    bool m_bFollowFileLinks = false;
+    bool m_bSimulatedMergeStarted = false;
+    bool m_bRealMergeStarted = false;
+    bool m_bError = false;
+    bool m_bSyncMode = false;
+    bool m_bDirectoryMerge = false; // if true, then merge is the default operation, otherwise it's diff.
+    bool m_bCaseSensitive = true;
+    bool m_bUnfoldSubdirs = false;
+    bool m_bSkipDirStatus = false;
+    bool m_bScanning = false; // true while in init()
 
-    DirectoryMergeInfo* m_pDirectoryMergeInfo;
-    StatusInfo* m_pStatusInfo;
+    DirectoryMergeInfo* m_pDirectoryMergeInfo = nullptr;
+    StatusInfo* m_pStatusInfo = nullptr;
 
     typedef std::list<QModelIndex> MergeItemList; // linked list
     MergeItemList m_mergeItemList;

@@ -267,7 +267,7 @@ class KDiff3App : public QSplitter
     QAction* editCopy;
     QAction* editPaste;
     QAction* editSelectAll;
-    KToggleAction* viewToolBar;
+    KToggleAction* viewToolBar = nullptr;
     KToggleAction* viewStatusBar;
 
     ////////////////////////////////////////////////////////////////////////
@@ -315,33 +315,33 @@ class KDiff3App : public QSplitter
 
     QMenu* m_pMergeEditorPopupMenu;
 
-    QSplitter* m_pMainSplitter;
-    QWidget* m_pMainWidget;
-    QWidget* m_pMergeWindowFrame;
+    QSplitter* m_pMainSplitter = nullptr;
+    QWidget* m_pMainWidget = nullptr;
+    QWidget* m_pMergeWindowFrame =  nullptr;
     ReversibleScrollBar* m_pHScrollBar = nullptr;
     QScrollBar* m_pDiffVScrollBar = nullptr;
-    QScrollBar* m_pMergeVScrollBar;
+    QScrollBar* m_pMergeVScrollBar = nullptr;
 
-    DiffTextWindow* m_pDiffTextWindow1;
-    DiffTextWindow* m_pDiffTextWindow2;
-    DiffTextWindow* m_pDiffTextWindow3;
-    DiffTextWindowFrame* m_pDiffTextWindowFrame1;
-    DiffTextWindowFrame* m_pDiffTextWindowFrame2;
-    DiffTextWindowFrame* m_pDiffTextWindowFrame3;
-    QSplitter* m_pDiffWindowSplitter;
+    DiffTextWindow* m_pDiffTextWindow1 = nullptr;
+    DiffTextWindow* m_pDiffTextWindow2 = nullptr;
+    DiffTextWindow* m_pDiffTextWindow3 = nullptr;
+    DiffTextWindowFrame* m_pDiffTextWindowFrame1 = nullptr;
+    DiffTextWindowFrame* m_pDiffTextWindowFrame2 = nullptr;
+    DiffTextWindowFrame* m_pDiffTextWindowFrame3 = nullptr;
+    QSplitter* m_pDiffWindowSplitter = nullptr;
 
-    MergeResultWindow* m_pMergeResultWindow;
+    MergeResultWindow* m_pMergeResultWindow = nullptr;
     WindowTitleWidget* m_pMergeResultWindowTitle;
-    bool m_bTripleDiff;
+    bool m_bTripleDiff = false;
 
-    QSplitter* m_pDirectoryMergeSplitter;
-    DirectoryMergeWindow* m_pDirectoryMergeWindow;
+    QSplitter* m_pDirectoryMergeSplitter = nullptr;
+    DirectoryMergeWindow* m_pDirectoryMergeWindow = nullptr;
     DirectoryMergeInfo* m_pDirectoryMergeInfo;
     bool m_bDirCompare = false;
 
-    Overview* m_pOverview;
+    Overview* m_pOverview = nullptr;
 
-    QWidget* m_pCornerWidget;
+    QWidget* m_pCornerWidget = nullptr;
 
     TotalDiffStatus m_totalDiffStatus;
 
@@ -366,17 +366,17 @@ class KDiff3App : public QSplitter
 
     int m_neededLines;
     int m_DTWHeight;
-    bool m_bOutputModified;
-    bool m_bFileSaved;
-    bool m_bTimerBlock; // Synchronization
+    bool m_bOutputModified = false;
+    bool m_bFileSaved = false;
+    bool m_bTimerBlock = false; // Synchronization
 
     OptionDialog* m_pOptionDialog;
     Options* m_pOptions;
     FindDialog* m_pFindDialog;
 
     void mainInit(TotalDiffStatus* pTotalDiffStatus = nullptr, bool bLoadFiles = true, bool bUseCurrentEncoding = false);
-    bool m_bFinishMainInit;
-    bool m_bLoadFiles;
+    bool m_bFinishMainInit = false;
+    bool m_bLoadFiles = false;
 
     void mainWindowEnable(bool bEnable);
     virtual void wheelEvent(QWheelEvent* pWheelEvent) override;
@@ -398,7 +398,7 @@ class KDiff3App : public QSplitter
     bool m_bAutoFlag = false;
     bool m_bAutoMode = false;
     void recalcWordWrap(int visibleTextWidthForPrinting = -1);
-    bool m_bRecalcWordWrapPosted;
+    bool m_bRecalcWordWrapPosted = false;
     void setHScrollBarRange();
 
     int m_iCumulativeWheelDelta;

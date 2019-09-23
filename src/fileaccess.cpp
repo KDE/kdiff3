@@ -848,7 +848,6 @@ void FileAccess::filterList(t_DirectoryList* pDirList, const QString& filePatter
 FileAccessJobHandler::FileAccessJobHandler(FileAccess* pFileAccess)
 {
     m_pFileAccess = pFileAccess;
-    m_bSuccess = false;
 }
 
 bool FileAccessJobHandler::stat(short detail, bool bWantToWrite)
