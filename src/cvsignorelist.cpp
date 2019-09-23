@@ -34,6 +34,7 @@ void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
     const bool bUseLocalCvsIgnore = cvsIgnoreExists(pDirList);
     if(bUseLocalCvsIgnore)
     {
+        //TODO: Use QTextStream here.
         FileAccess file(dir);
         file.addPath(".cvsignore");
         qint64 size = file.sizeForReading();
