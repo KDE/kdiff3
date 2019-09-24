@@ -370,9 +370,9 @@ class KDiff3App : public QSplitter
     bool m_bFileSaved = false;
     bool m_bTimerBlock = false; // Synchronization
 
-    OptionDialog* m_pOptionDialog;
-    Options* m_pOptions;
-    FindDialog* m_pFindDialog;
+    OptionDialog* m_pOptionDialog = nullptr;
+    QSharedPointer<Options> m_pOptions = nullptr;
+    FindDialog* m_pFindDialog = nullptr;
 
     void mainInit(TotalDiffStatus* pTotalDiffStatus = nullptr, bool bLoadFiles = true, bool bUseCurrentEncoding = false);
     bool m_bFinishMainInit = false;
@@ -393,8 +393,8 @@ class KDiff3App : public QSplitter
     KActionCollection* actionCollection();
     QStatusBar* statusBar();
     KToolBar* toolBar(QLatin1String);
-    KDiff3Part* m_pKDiff3Part;
-    KParts::MainWindow* m_pKDiff3Shell;
+    KDiff3Part* m_pKDiff3Part = nullptr;
+    KParts::MainWindow* m_pKDiff3Shell = nullptr;
     bool m_bAutoFlag = false;
     bool m_bAutoMode = false;
     void recalcWordWrap(int visibleTextWidthForPrinting = -1);
