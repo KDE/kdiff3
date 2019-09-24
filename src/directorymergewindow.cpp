@@ -183,7 +183,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     }
     MergeFileInfos* rootMFI() const { return m_pRoot; }
 
-    Options* m_pOptions = nullptr;
+    QSharedPointer<Options> m_pOptions = nullptr;
 
     void calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
                        int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges);
@@ -572,7 +572,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
                 int i = index == d->m_selection1Index ? 1 : index == d->m_selection2Index ? 2 : index == d->m_selection3Index ? 3 : 0;
                 if(i != 0)
                 {
-                    Options* pOpts = d->m_pOptions;
+                    QSharedPointer<Options> pOpts = d->m_pOptions;
                     QColor c(i == 1 ? pOpts->m_colorA : i == 2 ? pOpts->m_colorB : pOpts->m_colorC);
                     thePainter->setPen(c); // highlight() );
                     thePainter->drawRect(x + 2, y + yOffset, icon.width(), icon.height());
@@ -607,7 +607,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
     }
 };
 
-DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, Options* pOptions, KDiff3App* const app)
+DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointer<Options> &pOptions, KDiff3App* const app)
     : QTreeView(pParent)
 {
     d = new DirectoryMergeWindowPrivate(this);

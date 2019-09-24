@@ -44,7 +44,7 @@
 
 OpenDialog::OpenDialog(
     KDiff3App* pParent, const QString& n1, const QString& n2, const QString& n3,
-    bool bMerge, const QString& outputName,  Options* pOptions)
+    bool bMerge, const QString& outputName,  const QSharedPointer<Options> &pOptions)
     : QDialog(pParent)
 {
     setObjectName("OpenDialog");

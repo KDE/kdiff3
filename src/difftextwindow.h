@@ -29,7 +29,7 @@ class DiffTextWindow : public QWidget
 {
     Q_OBJECT
   public:
-    DiffTextWindow(DiffTextWindowFrame* pParent, QStatusBar* pStatusBar, Options* pOptions, e_SrcSelector winIdx);
+    DiffTextWindow(DiffTextWindowFrame* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx);
     ~DiffTextWindow() override;
     void init(
         const QString& fileName,
@@ -110,7 +110,7 @@ class DiffTextWindowFrame : public QWidget
 {
     Q_OBJECT
   public:
-    DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, Options* pOptions, e_SrcSelector winIdx, SourceData* psd);
+    DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, SourceData* psd);
     ~DiffTextWindowFrame() override;
     DiffTextWindow* getDiffTextWindow();
     void init();
@@ -135,7 +135,7 @@ class EncodingLabel : public QLabel
 {
     Q_OBJECT
   public:
-    EncodingLabel(const QString& text, DiffTextWindowFrame* pDiffTextWindowFrame, SourceData* psd, Options* pOptions);
+    EncodingLabel(const QString& text, DiffTextWindowFrame* pDiffTextWindowFrame, SourceData* psd, const QSharedPointer<Options> &pOptions);
 
   protected:
     void mouseMoveEvent(QMouseEvent* ev) override;
@@ -148,7 +148,7 @@ class EncodingLabel : public QLabel
     QMenu* m_pContextEncodingMenu;
     SourceData* m_pSourceData; //SourceData to get access to "isEmpty()" and "isFromBuffer()" functions
     static const int m_maxRecentEncodings = 5;
-    Options* m_pOptions;
+    QSharedPointer<Options> m_pOptions;
 
     void insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<int>& CodecEnumList, QMenu* pMenu, int currentTextCodecEnum);
 };

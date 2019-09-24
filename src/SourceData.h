@@ -28,7 +28,7 @@ class SourceData
     SourceData();
     ~SourceData();
 
-    void setOptions(Options* pOptions);
+    void setOptions(const QSharedPointer<Options> &pOptions);
 
     LineRef getSizeLines() const;
     qint64 getSizeBytes() const;
@@ -73,7 +73,7 @@ class SourceData
     QTextCodec* detectEncoding(const QString& fileName, QTextCodec* pFallbackCodec);
     QString m_aliasName;
     FileAccess m_fileAccess;
-    Options* m_pOptions;
+    QSharedPointer<Options> m_pOptions;
     QString m_tempInputFileName;
     QTemporaryFile m_tempFile; //Created from clipboard content.
 

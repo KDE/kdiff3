@@ -136,7 +136,7 @@ class MergeFileInfos
     inline bool isEqualAB() const { return m_bEqualAB; }
     inline bool isEqualAC() const { return m_bEqualAC; }
     inline bool isEqualBC() const { return m_bEqualBC; }
-    bool compareFilesAndCalcAges(QStringList& errors, Options* const pOptions, DirectoryMergeWindow* pDMW);
+    bool compareFilesAndCalcAges(QStringList& errors, QSharedPointer<Options> const pOptions, DirectoryMergeWindow* pDMW);
 
     void updateAge();
 
@@ -148,7 +148,7 @@ class MergeFileInfos
     inline bool isOperationRunning() const { return !m_bOperationComplete; }
     inline void endOperation() { m_bOperationComplete = true; };
   private:
-    bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status, Options* const pOptions);
+    bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status, QSharedPointer<Options> const pOptions);
     inline void setAgeA(const e_Age inAge) { m_ageA = inAge; }
     inline void setAgeB(const e_Age inAge) { m_ageB = inAge; }
     inline void setAgeC(const e_Age inAge) { m_ageC = inAge; }

@@ -67,7 +67,7 @@ QAction* MergeResultWindow::chooseCForUnsolvedWhiteSpaceConflicts = nullptr;
 
 MergeResultWindow::MergeResultWindow(
     QWidget* pParent,
-    Options* pOptions,
+    const QSharedPointer<Options> &pOptions,
     QStatusBar* pStatusBar)
     : QWidget(pParent)
 {
@@ -3084,7 +3084,7 @@ void MergeResultWindow::setSelection(int firstLine, int startPos, int lastLine, 
     update();
 }
 
-WindowTitleWidget::WindowTitleWidget(Options* pOptions)
+WindowTitleWidget::WindowTitleWidget(const QSharedPointer<Options> &pOptions)
 {
     m_pOptions = pOptions;
     setAutoFillBackground(true);

@@ -392,7 +392,7 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
 
         bool runDiff(const QVector<LineData>* p1, LineRef size1, const QVector<LineData>* p2, LineRef size2, DiffList& diffList,
                      e_SrcSelector winIdx1, e_SrcSelector winIdx2,
-                     Options* pOptions);
+                     const QSharedPointer<Options> &pOptions);
 };
 
 void calcDiff(const QString &line1, const QString &line2, DiffList& diffList, int match, int maxSearchRange);

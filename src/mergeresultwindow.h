@@ -33,7 +33,7 @@ class MergeResultWindow : public QWidget
 {
    Q_OBJECT
 public:
-   MergeResultWindow(QWidget* pParent, Options* pOptions, QStatusBar* pStatusBar);
+   MergeResultWindow(QWidget* pParent, const QSharedPointer<Options> &pOptions, QStatusBar* pStatusBar);
 
    void init(
       const QVector<LineData>* pLineDataA, LineRef sizeA,
@@ -139,7 +139,7 @@ private:
    static QAction* chooseBForUnsolvedWhiteSpaceConflicts;
    static QAction* chooseCForUnsolvedWhiteSpaceConflicts;
 
-   Options* m_pOptions = nullptr;
+   QSharedPointer<Options> m_pOptions = nullptr;
 
    const QVector<LineData>* m_pldA;
    const QVector<LineData>* m_pldB;
@@ -263,9 +263,9 @@ private:
    QComboBox*   m_pLineEndStyleSelector;
    QLabel*      m_pEncodingLabel;
    QComboBox*   m_pEncodingSelector;
-   Options*     m_pOptions;
+   QSharedPointer<Options>     m_pOptions;
 public:
-   explicit WindowTitleWidget(Options* pOptions);
+   explicit WindowTitleWidget(const QSharedPointer<Options> &pOptions);
    QTextCodec* getEncoding();
     void       setFileName(const QString& fileName);
     QString    getFileName();

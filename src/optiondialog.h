@@ -51,14 +51,15 @@ public:
     QString parseOptions( const QStringList& optionList );
     QString calcOptionHelp();
 
-    Options m_options;
-
     void saveOptions(KSharedConfigPtr config);
     void readOptions(KSharedConfigPtr config);
 
     void setState(); // Must be called before calling exec();
 
     void addOptionItem(OptionItemBase*);
+
+    QSharedPointer<Options> getOptions() { return m_options; }
+
     KKeyDialog* m_pKeyDialog;
 protected Q_SLOTS:
     virtual void slotDefault();
@@ -72,8 +73,21 @@ protected Q_SLOTS:
 Q_SIGNALS:
     void applyDone();
 private:
+    void setupFontPage();
+    void setupColorPage();
+    void setupEditPage();
+    void setupDiffPage();
+    void setupMergePage();
+    void setupDirectoryMergePage();
+    void setupKeysPage();
+    void setupRegionalPage();
+    void setupIntegrationPage();
+    void setupOtherOptions();
+
     void resetToDefaults();
 
+
+    QSharedPointer<Options> m_options=QSharedPointer<Options>::create(Options());
     std::list<OptionItemBase*> m_optionItemList;
 
     //QDialogButtonBox *mButtonBox;
@@ -93,18 +107,6 @@ private:
     OptionLineEdit* m_pHistoryEntryStartRegExpLineEdit;
     OptionCheckBox* m_pHistoryMergeSorting;
     OptionLineEdit* m_pHistorySortKeyOrderLineEdit;
-
-private:
-    void setupFontPage();
-    void setupColorPage();
-    void setupEditPage();
-    void setupDiffPage();
-    void setupMergePage();
-    void setupDirectoryMergePage();
-    void setupKeysPage();
-    void setupRegionalPage();
-    void setupIntegrationPage();
-    void setupOtherOptions();
 };
 
 

@@ -20,7 +20,7 @@
 #include <QPixmap>
 #include <QSize>
 
-Overview::Overview(Options* pOptions)
+Overview::Overview(const QSharedPointer<Options> &pOptions)
 //: QWidget( pParent, 0, Qt::WNoAutoErase )
 {
     m_pDiff3LineList = nullptr;

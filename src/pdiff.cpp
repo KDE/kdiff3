@@ -207,7 +207,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                pp.setInformation(i18n("Diff: A <-> B"));
                qCInfo(kdiffMain) << i18n("Diff: A <-> B") ;
                m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, A, B,
-                        &m_pOptionDialog->m_options);
+                        m_pOptionDialog->getOptions());
 
                 pp.step();
 
@@ -249,7 +249,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             if(m_sd1.isText() && m_sd2.isText())
             {
                 m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, A, B,
-                        &m_pOptionDialog->m_options);
+                        m_pOptionDialog->getOptions());
 
                 calcDiff3LineListUsingAB(&m_diffList12, m_diff3LineList);
             }
@@ -258,7 +258,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             if(m_sd1.isText() && m_sd3.isText())
             {
                 m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13, A, C,
-                        &m_pOptionDialog->m_options);
+                        m_pOptionDialog->getOptions());
 
                 calcDiff3LineListUsingAC(&m_diffList13, m_diff3LineList);
                 correctManualDiffAlignment(m_diff3LineList, &m_manualDiffHelpList);
@@ -269,7 +269,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             if(m_sd2.isText() && m_sd3.isText())
             {
                 m_manualDiffHelpList.runDiff(m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23, B, C,
-                        &m_pOptionDialog->m_options);
+                        m_pOptionDialog->getOptions());
                 if(m_pOptions->m_bDiff3AlignBC)
                 {
                     calcDiff3LineListUsingBC(&m_diffList23, m_diff3LineList);
@@ -626,7 +626,7 @@ void KDiff3App::initView()
     m_pDiffWindowSplitter->setOrientation(m_pOptions->m_bHorizDiffWindowSplitting ? Qt::Horizontal : Qt::Vertical);
     pDiffHLayout->addWidget(m_pDiffWindowSplitter);
 
-    m_pOverview = new Overview(&m_pOptionDialog->m_options);
+    m_pOverview = new Overview(m_pOptionDialog->getOptions());
     m_pOverview->setObjectName("Overview");
     pDiffHLayout->addWidget(m_pOverview);
     connect(m_pOverview, &Overview::setLine, this, &KDiff3App::setDiff3Line);
@@ -634,11 +634,11 @@ void KDiff3App::initView()
     m_pDiffVScrollBar = new QScrollBar(Qt::Vertical, pDiffWindowFrame);
     pDiffHLayout->addWidget(m_pDiffVScrollBar);
 
-    m_pDiffTextWindowFrame1 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), &m_pOptionDialog->m_options, A, &m_sd1);
+    m_pDiffTextWindowFrame1 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), m_pOptionDialog->getOptions(), A, &m_sd1);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame1);
-    m_pDiffTextWindowFrame2 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), &m_pOptionDialog->m_options, B, &m_sd2);
+    m_pDiffTextWindowFrame2 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), m_pOptionDialog->getOptions(), B, &m_sd2);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame2);
-    m_pDiffTextWindowFrame3 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), &m_pOptionDialog->m_options, C, &m_sd3);
+    m_pDiffTextWindowFrame3 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), m_pOptionDialog->getOptions(), C, &m_sd3);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame3);
     m_pDiffTextWindow1 = m_pDiffTextWindowFrame1->getDiffTextWindow();
     m_pDiffTextWindow2 = m_pDiffTextWindowFrame2->getDiffTextWindow();
@@ -661,10 +661,10 @@ void KDiff3App::initView()
     QVBoxLayout* pMergeVLayout = new QVBoxLayout();
     pMergeHLayout->addLayout(pMergeVLayout, 1);
 
-    m_pMergeResultWindowTitle = new WindowTitleWidget(&m_pOptionDialog->m_options);
+    m_pMergeResultWindowTitle = new WindowTitleWidget(m_pOptionDialog->getOptions());
     pMergeVLayout->addWidget(m_pMergeResultWindowTitle);
 
-    m_pMergeResultWindow = new MergeResultWindow(m_pMergeWindowFrame, &m_pOptionDialog->m_options, statusBar());
+    m_pMergeResultWindow = new MergeResultWindow(m_pMergeWindowFrame, m_pOptionDialog->getOptions(), statusBar());
     pMergeVLayout->addWidget(m_pMergeResultWindow, 1);
 
     m_pMergeVScrollBar = new QScrollBar(Qt::Vertical, m_pMergeWindowFrame);
@@ -1061,7 +1061,7 @@ void KDiff3App::slotFileOpen()
                      QDir::toNativeSeparators(m_bDirCompare ? m_dirinfo->dirB().prettyAbsPath() : m_sd2.isFromBuffer() ? QString("") : m_sd2.getAliasName()),
                      QDir::toNativeSeparators(m_bDirCompare ? m_dirinfo->dirC().prettyAbsPath() : m_sd3.isFromBuffer() ? QString("") : m_sd3.getAliasName()),
                      m_bDirCompare ? !m_dirinfo->destDir().prettyAbsPath().isEmpty() : !m_outputFilename.isEmpty(),
-                     QDir::toNativeSeparators(m_bDefaultFilename ? QString("") : m_outputFilename), &m_pOptionDialog->m_options));
+                     QDir::toNativeSeparators(m_bDefaultFilename ? QString("") : m_outputFilename), m_pOptionDialog->getOptions()));
 
         int status = d->exec();
         if(status == QDialog::Accepted)

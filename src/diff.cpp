@@ -538,7 +538,7 @@ bool ManualDiffHelpEntry::isValidMove(int line1, int line2, e_SrcSelector winIdx
 }
 
 static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2, DiffList& diffList,
-                    Options* pOptions)
+                    const QSharedPointer<Options> &pOptions)
 {
     ProgressProxy pp;
     static GnuDiff gnuDiff; // All values are initialized with zeros.
@@ -637,7 +637,7 @@ static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef si
 
 bool ManualDiffHelpList::runDiff(const QVector<LineData>* p1, LineRef size1, const QVector<LineData>* p2, LineRef size2, DiffList& diffList,
                                  e_SrcSelector winIdx1, e_SrcSelector winIdx2,
-                                 Options* pOptions)
+                                 const QSharedPointer<Options> &pOptions)
 {
     diffList.clear();
     DiffList diffList2;

@@ -97,7 +97,7 @@ bool SourceData::isValid()
     return isEmpty() || hasData();
 }
 
-void SourceData::setOptions(Options* pOptions)
+void SourceData::setOptions(const QSharedPointer<Options> &pOptions)
 {
     m_pOptions = pOptions;
 }

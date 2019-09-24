@@ -35,7 +35,7 @@ class OpenDialog : public QDialog
 public:
    OpenDialog(// krazy:exclude=explicit
       KDiff3App* pParent, const QString& n1, const QString& n2, const QString& n3,
-      bool bMerge, const QString& outputName, Options* pOptions  );
+      bool bMerge, const QString& outputName, const QSharedPointer<Options> &pOptions  );
 
    QComboBox* m_pLineA;
    QComboBox* m_pLineB;
@@ -49,7 +49,7 @@ private:
    void selectURL( QComboBox* pLine, bool bDir, int i, bool bSave );
 
    void fixCurrentText(QComboBox* pCB);
-   Options* m_pOptions;
+   QSharedPointer<Options> m_pOptions;
    bool m_bInputFileNameChanged;
 private Q_SLOTS:
    void selectFileA();

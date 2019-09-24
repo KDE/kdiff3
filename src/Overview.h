@@ -29,7 +29,7 @@ class Overview : public QWidget
         eOMBvsC
     };
 
-    explicit Overview(Options* pOptions);
+    explicit Overview(const QSharedPointer<Options> &pOptions);
 
     void init(Diff3LineList* pDiff3LineList, bool bTripleDiff);
     void reset();
@@ -47,7 +47,7 @@ class Overview : public QWidget
 
   private:
     const Diff3LineList* m_pDiff3LineList;
-    Options* m_pOptions;
+    QSharedPointer<Options> m_pOptions;
     bool m_bTripleDiff;
     LineRef m_firstLine;
     int m_pageHeight;

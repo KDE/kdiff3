@@ -107,7 +107,7 @@ class DiffTextWindowData
     };
     QList<QVector<WrapLineCacheData>> m_wrapLineCacheList;
 
-    Options* m_pOptions;
+    QSharedPointer<Options> m_pOptions;
     QColor m_cThis;
     QColor m_cDiff1;
     QColor m_cDiff2;
@@ -162,7 +162,7 @@ class DiffTextWindowData
 DiffTextWindow::DiffTextWindow(
     DiffTextWindowFrame* pParent,
     QStatusBar* pStatusBar,
-    Options* pOptions,
+    const QSharedPointer<Options> &pOptions,
     e_SrcSelector winIdx)
     : QWidget(pParent)
 {
@@ -1730,7 +1730,7 @@ class DiffTextWindowFrameData
     DiffTextWindow* m_pDiffTextWindow;
     FileNameLineEdit* m_pFileSelection;
     QPushButton* m_pBrowseButton;
-    Options* m_pOptions;
+    QSharedPointer<Options> m_pOptions;
     QLabel* m_pLabel;
     QLabel* m_pTopLine;
     QLabel* m_pEncoding;
@@ -1739,7 +1739,7 @@ class DiffTextWindowFrameData
     e_SrcSelector m_winIdx;
 };
 
-DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, Options* pOptions, e_SrcSelector winIdx, SourceData* psd)
+DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, SourceData* psd)
     : QWidget(pParent)
 {
     d = new DiffTextWindowFrameData;
@@ -1916,7 +1916,7 @@ void DiffTextWindowFrame::sendEncodingChangedSignal(QTextCodec* c)
     emit encodingChanged(c);
 }
 
-EncodingLabel::EncodingLabel(const QString& text, DiffTextWindowFrame* pDiffTextWindowFrame, SourceData* pSD, Options* pOptions)
+EncodingLabel::EncodingLabel(const QString& text, DiffTextWindowFrame* pDiffTextWindowFrame, SourceData* pSD, const QSharedPointer<Options> &pOptions)
     : QLabel(text)
 {
     m_pDiffTextWindowFrame = pDiffTextWindowFrame;

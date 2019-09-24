@@ -137,7 +137,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     connect(m_pOptionDialog, &OptionDialog::applyDone, this, &KDiff3App::slotRefresh);
 
     // This is just a convenience variable to make code that accesses options more readable
-    m_pOptions = &m_pOptionDialog->m_options;
+    m_pOptions = m_pOptionDialog->getOptions();
 
     m_pOptionDialog->readOptions(KSharedConfig::openConfig());
 
