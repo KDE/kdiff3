@@ -496,6 +496,7 @@ OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageD
     //showButtonSeparator( true );
     //setHelp( "kdiff3/index.html", QString::null );
 
+    m_options->init(m_optionItemList);
     setupFontPage();
     setupColorPage();
     setupEditPage();
@@ -543,17 +544,6 @@ void OptionDialog::setupOtherOptions()
     addOptionItem(new OptionToggleAction(false, "WordWrap", &m_options->m_bWordWrap));
 
     addOptionItem(new OptionToggleAction(true, "ShowIdenticalFiles", &m_options->m_bDmShowIdenticalFiles));
-
-    addOptionItem(new OptionToggleAction(true, "Show Toolbar", &m_options->m_bShowToolBar));
-    addOptionItem(new OptionToggleAction(true, "Show Statusbar", &m_options->m_bShowStatusBar));
-
-    /*
-    TODO manage toolbar positioning
-   */
-    addOptionItem(new OptionNum<int>( Qt::TopToolBarArea, "ToolBarPos", (int*)&m_options->m_toolBarPos));
-    addOptionItem(new OptionSize(QSize(600, 400), "Geometry", &m_options->m_geometry));
-    addOptionItem(new OptionPoint(QPoint(0, 22), "Position", &m_options->m_position));
-    addOptionItem(new OptionToggleAction(false, "WindowStateMaximised", &m_options->m_bMaximised));
 
     addOptionItem(new OptionStringList(&m_options->m_recentAFiles, "RecentAFiles"));
     addOptionItem(new OptionStringList(&m_options->m_recentBFiles, "RecentBFiles"));
@@ -1571,23 +1561,9 @@ void OptionDialog::slotOk()
 /** Copy the values from the widgets to the public variables.*/
 void OptionDialog::slotApply()
 {
-    std::list<OptionItemBase*>::iterator i;
-    for(i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i)
-    {
-        (*i)->apply();
-    }
+    m_options->apply(m_optionItemList);
 
     emit applyDone();
-
-#ifdef Q_OS_WIN
-    QString locale = m_options->m_language;
-    if(locale == "Auto" || locale.isEmpty())
-        locale = QLocale::system().name().left(2);
-    int spacePos = locale.indexOf(' ');
-    if(spacePos > 0) locale = locale.left(spacePos);
-    QSettings settings(QLatin1String("HKEY_CURRENT_USER\\Software\\KDiff3\\diff-ext"), QSettings::NativeFormat);
-    settings.setValue(QLatin1String("Language"), locale);
-#endif
 }
 
 /** Set the default values in the widgets only, while the
@@ -1603,23 +1579,14 @@ void OptionDialog::slotDefault()
 
 void OptionDialog::resetToDefaults()
 {
-    std::list<OptionItemBase*>::iterator i;
-    for(i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i)
-    {
-        (*i)->setToDefault();
-    }
-
+    m_options->resetToDefaults(m_optionItemList);
     slotEncodingChanged();
 }
 
 /** Initialise the widgets using the values in the public varibles. */
 void OptionDialog::setState()
 {
-    std::list<OptionItemBase*>::iterator i;
-    for(i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i)
-    {
-        (*i)->setToCurrent();
-    }
+    m_options->setToCurrent(m_optionItemList);
 
     slotEncodingChanged();
 }

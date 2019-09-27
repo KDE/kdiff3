@@ -29,6 +29,8 @@
 #include <QColor>
 #include <list>
 
+class OptionItemBase;
+
 enum e_LineEndStyle
 {
    eLineEndStyleUnix=0,
@@ -41,6 +43,33 @@ enum e_LineEndStyle
 class Options
 {
 public:
+    void init(std::list<OptionItemBase*> &optionItemList);
+
+    void apply(const std::list<OptionItemBase*> &optionItemList);
+
+    void resetToDefaults(const std::list<OptionItemBase*> &optionItemList);
+
+    void setToCurrent(const std::list<OptionItemBase*>& optionItemList);
+    const QSize& getGeometry() const { return m_geometry; }
+    void setGeometry(const QSize& size) { m_geometry = size; }
+
+    const QPoint& getPosition() const { return m_position; }
+    void setPosition(const QPoint& pos) { m_position = pos; }
+
+    bool isMaximised() const { return m_bMaximised; };
+
+    void setMaximised(const bool maximised) { m_bMaximised = maximised;};
+
+    Qt::ToolBarArea getToolbarPos() const { return m_toolBarPos; }
+
+    bool isToolBarVisable() const { return m_bShowToolBar; }
+    void setToolbarState(bool inShown) { m_bShowToolBar = inShown; }
+
+    bool isStatusBarVisable() const { return m_bShowStatusBar; }
+    void setStatusBarState(bool inShown) { m_bShowStatusBar = inShown; }
+
+  private:
+
     // Some settings are not available in the option dialog:
     QSize  m_geometry = QSize(600, 400);
     QPoint m_position = QPoint(0, 22);
@@ -48,6 +77,7 @@ public:
     bool   m_bShowToolBar = true;
     bool   m_bShowStatusBar = true;
     Qt::ToolBarArea    m_toolBarPos = Qt::TopToolBarArea;
+  public:
 
     // These are the results of the option dialog.
     QFont m_font;

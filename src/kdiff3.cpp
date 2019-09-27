@@ -304,12 +304,12 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     wordWrap->setChecked(m_pOptions->m_bWordWrap);
     if(!isPart())
     {
-        viewStatusBar->setChecked(m_pOptions->m_bShowStatusBar);
+        viewStatusBar->setChecked(m_pOptions->isStatusBarVisable());
         slotViewStatusBar();
 
         KToolBar *mainToolBar = toolBar(MAIN_TOOLBAR_NAME);
         if(mainToolBar != nullptr){
-            mainToolBar->mainWindow()->addToolBar(m_pOptions->m_toolBarPos, mainToolBar);
+            mainToolBar->mainWindow()->addToolBar(m_pOptions->getToolbarPos(), mainToolBar);
         }
         //   TODO restore window size/pos?
         /*      QSize size = m_pOptions->m_geometry;
@@ -357,8 +357,8 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 {
     if(m_pKDiff3Shell != nullptr)
     {
-        QSize size = m_pOptions->m_geometry;
-        QPoint pos = m_pOptions->m_position;
+        QSize size = m_pOptions->getGeometry();
+        QPoint pos = m_pOptions->getPosition();
         if(!size.isEmpty())
         {
             m_pKDiff3Shell->resize(size);
@@ -369,7 +369,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
             if(!m_bAutoMode)
             {
                 //Here we want the extra setup showMaximized does since the window has not be shown before
-                if(m_pOptions->m_bMaximised)
+                if(m_pOptions->isMaximised())
                     m_pKDiff3Shell->showMaximized();// krazy:exclude=qmethods
                 else
                     m_pKDiff3Shell->show();
@@ -449,7 +449,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
     if(m_pKDiff3Shell != nullptr)
     {
-        if(m_pOptions->m_bMaximised)
+        if(m_pOptions->isMaximised())
             //We want showMaximized here as the window has never been shown.
             m_pKDiff3Shell->showMaximized();// krazy:exclude=qmethods
         else
@@ -651,11 +651,11 @@ void KDiff3App::saveOptions(KSharedConfigPtr config)
     {
         if(!isPart())
         {
-            m_pOptions->m_bMaximised = m_pKDiff3Shell->isMaximized();
+            m_pOptions->setMaximised(m_pKDiff3Shell->isMaximized());
             if(!m_pKDiff3Shell->isMaximized() && m_pKDiff3Shell->isVisible())
             {
-                m_pOptions->m_geometry = m_pKDiff3Shell->size();
-                m_pOptions->m_position = m_pKDiff3Shell->pos();
+                m_pOptions->setGeometry(m_pKDiff3Shell->size());
+                m_pOptions->setPosition(m_pKDiff3Shell->pos());
             }
             /*  TODO change this option as now KToolbar uses QToolbar positioning style
                      if ( toolBar(MAIN_TOOLBAR_NAME)!=0 )
@@ -1026,12 +1026,12 @@ void KDiff3App::slotViewToolBar()
 {
     Q_ASSERT(viewToolBar != nullptr);
     slotStatusMsg(i18n("Toggling toolbar..."));
-    m_pOptions->m_bShowToolBar = viewToolBar->isChecked();
+    m_pOptions->setToolbarState(viewToolBar->isChecked());
     ///////////////////////////////////////////////////////////////////
     // turn Toolbar on or off
     if(toolBar(MAIN_TOOLBAR_NAME) != nullptr)
     {
-        if(!m_pOptions->m_bShowToolBar)
+        if(!m_pOptions->isToolBarVisable())
         {
             toolBar(MAIN_TOOLBAR_NAME)->hide();
         }
@@ -1047,7 +1047,7 @@ void KDiff3App::slotViewToolBar()
 void KDiff3App::slotViewStatusBar()
 {
     slotStatusMsg(i18n("Toggle the statusbar..."));
-    m_pOptions->m_bShowStatusBar = viewStatusBar->isChecked();
+    m_pOptions->setStatusBarState(viewStatusBar->isChecked());
     ///////////////////////////////////////////////////////////////////
     //turn Statusbar on or off
     if(statusBar() != nullptr)
