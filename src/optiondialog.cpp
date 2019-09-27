@@ -580,7 +580,6 @@ void OptionDialog::setupFontPage()
 
     //requires QT 5.2 or later.
     static const QFont defaultFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
-    ;
     static QFont defaultAppFont = QApplication::font();
 
     OptionFontChooser* pAppFontChooser = new OptionFontChooser(defaultAppFont, "ApplicationFont", &m_options->m_appFont, page);

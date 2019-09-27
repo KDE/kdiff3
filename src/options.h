@@ -42,80 +42,81 @@ class Options
 {
 public:
     // Some settings are not available in the option dialog:
-    QSize  m_geometry;
-    QPoint m_position;
-    bool   m_bMaximised;
-    bool   m_bShowToolBar;
-    bool   m_bShowStatusBar;
-    Qt::ToolBarArea    m_toolBarPos;
+    QSize  m_geometry = QSize(600, 400);
+    QPoint m_position = QPoint(0, 22);
+    bool   m_bMaximised = false;
+    bool   m_bShowToolBar = true;
+    bool   m_bShowStatusBar = true;
+    Qt::ToolBarArea    m_toolBarPos = Qt::TopToolBarArea;
 
     // These are the results of the option dialog.
     QFont m_font;
     //bool m_bItalicForDeltas;
     QFont m_appFont;
 
-    QColor m_fgColor;
-    QColor m_bgColor;
+    QColor m_fgColor = Qt::black;
+    QColor m_bgColor = Qt::white;
     QColor m_diffBgColor;
     QColor m_colorA;
     QColor m_colorB;
     QColor m_colorC;
-    QColor m_colorForConflict;
+    QColor m_colorForConflict = Qt::red;
     QColor m_currentRangeBgColor;
     QColor m_currentRangeDiffBgColor;
-    QColor m_oldestFileColor;
-    QColor m_midAgeFileColor;
-    QColor m_newestFileColor;
-    QColor m_missingFileColor;
-    QColor m_manualHelpRangeColor;
+    QColor m_oldestFileColor = qRgb(0xf0, 0, 0);
+    QColor m_midAgeFileColor = qRgb(0xc0, 0xc0, 0);
+    QColor m_newestFileColor = qRgb(0, 0xd0, 0);
+    QColor m_missingFileColor = qRgb(0, 0, 0);
+    QColor m_manualHelpRangeColor = qRgb(0xff, 0xd0, 0x80);
 
-    bool m_bWordWrap;
+    bool m_bWordWrap = false;
 
-    bool m_bReplaceTabs;
-    bool m_bAutoIndentation;
-    int  m_tabSize;
-    bool m_bAutoCopySelection;
-    bool m_bSameEncoding;
-    QTextCodec*  m_pEncodingA;
-    bool m_bAutoDetectUnicodeA;
-    QTextCodec*  m_pEncodingB;
-    bool m_bAutoDetectUnicodeB;
-    QTextCodec*  m_pEncodingC;
-    bool m_bAutoDetectUnicodeC;
-    QTextCodec*  m_pEncodingOut;
-    bool m_bAutoSelectOutEncoding;
-    QTextCodec*  m_pEncodingPP;
-    e_LineEndStyle  m_lineEndStyle;
+    bool m_bReplaceTabs = false;
+    bool m_bAutoIndentation = true;
+    int  m_tabSize = 8;
+    bool m_bAutoCopySelection = false;
+    bool m_bSameEncoding = true;
+    QTextCodec*  m_pEncodingA = nullptr;
+    bool m_bAutoDetectUnicodeA = true;
+    QTextCodec*  m_pEncodingB = nullptr;
+    bool m_bAutoDetectUnicodeB = true;
+    QTextCodec*  m_pEncodingC = nullptr;
+    bool m_bAutoDetectUnicodeC = true;
+    QTextCodec*  m_pEncodingOut = nullptr;
+    bool m_bAutoSelectOutEncoding = true;
+;
+    QTextCodec*  m_pEncodingPP = nullptr;
+    e_LineEndStyle  m_lineEndStyle = eLineEndStyleAutoDetect;
 
-    bool m_bPreserveCarriageReturn;
-    bool m_bTryHard;
-    bool m_bShowWhiteSpaceCharacters;
-    bool m_bShowWhiteSpace;
-    bool m_bShowLineNumbers;
-    bool m_bHorizDiffWindowSplitting;
-    bool m_bShowInfoDialogs;
-    bool m_bDiff3AlignBC;
+    bool m_bPreserveCarriageReturn = false;
+    bool m_bTryHard = true;
+    bool m_bShowWhiteSpaceCharacters = true;
+    bool m_bShowWhiteSpace = true;
+    bool m_bShowLineNumbers = false;
+    bool m_bHorizDiffWindowSplitting = true;
+    bool m_bShowInfoDialogs = true;
+    bool m_bDiff3AlignBC = false;
 
-    int  m_whiteSpace2FileMergeDefault;
-    int  m_whiteSpace3FileMergeDefault;
-    bool m_bIgnoreCase;
-    bool m_bIgnoreNumbers;
-    bool m_bIgnoreComments;
+    int  m_whiteSpace2FileMergeDefault = 0;
+    int  m_whiteSpace3FileMergeDefault = 0;
+    bool m_bIgnoreCase = false;
+    bool m_bIgnoreNumbers = false;
+    bool m_bIgnoreComments = false;
     QString m_PreProcessorCmd;
     QString m_LineMatchingPreProcessorCmd;
-    bool m_bRunRegExpAutoMergeOnMergeStart;
-    QString m_autoMergeRegExp;
-    bool m_bRunHistoryAutoMergeOnMergeStart;
-    QString m_historyStartRegExp;
+    bool m_bRunRegExpAutoMergeOnMergeStart = false;
+    QString m_autoMergeRegExp = ".*\\$(Version|Header|Date|Author).*\\$.*";
+    bool m_bRunHistoryAutoMergeOnMergeStart = false;
+    QString m_historyStartRegExp = ".*\\$Log.*\\$.*";
     QString m_historyEntryStartRegExp;
-    bool m_bHistoryMergeSorting;
-    QString m_historyEntryStartSortKeyOrder;
-    int m_maxNofHistoryEntries;
+    bool m_bHistoryMergeSorting = false;
+    QString m_historyEntryStartSortKeyOrder = "4,3,2,5,1,6";
+    int m_maxNofHistoryEntries = -1;
     QString m_IrrelevantMergeCmd;
-    bool m_bAutoSaveAndQuitOnMergeWithoutConflicts;
+    bool m_bAutoSaveAndQuitOnMergeWithoutConflicts = false;
 
-    bool m_bAutoAdvance;
-    int  m_autoAdvanceDelay;
+    bool m_bAutoAdvance = false;
+    int  m_autoAdvanceDelay = 500;
 
     QStringList m_recentAFiles;
     QStringList m_recentBFiles;
@@ -126,35 +127,36 @@ public:
     QStringList m_recentOutputFiles;
 
     // Directory Merge options
-    bool m_bDmSyncMode;
-    bool m_bDmRecursiveDirs;
+    bool m_bDmSyncMode = false;
+    bool m_bDmRecursiveDirs = true;
     bool m_bDmFollowFileLinks = false;
     bool m_bDmFollowDirLinks = false;
     bool m_bDmFindHidden = true;
     bool m_bDmCreateBakFiles;
-    bool m_bDmBinaryComparison;
-    bool m_bDmFullAnalysis;
-    bool m_bDmTrustDate;
-    bool m_bDmTrustDateFallbackToBinary;
-    bool m_bDmTrustSize;
-    bool m_bDmCopyNewer;
+    bool m_bDmBinaryComparison = true;
+    bool m_bDmFullAnalysis = false;
+    bool m_bDmTrustDate = false;
+    bool m_bDmTrustDateFallbackToBinary = false;
+    bool m_bDmTrustSize = false;
+    bool m_bDmCopyNewer = false;
     //bool m_bDmShowOnlyDeltas;
-    bool m_bDmShowIdenticalFiles;
-    bool m_bDmUseCvsIgnore;
-    bool m_bDmWhiteSpaceEqual;
+    bool m_bDmShowIdenticalFiles = true;
+    bool m_bDmUseCvsIgnore = false;
+    bool m_bDmWhiteSpaceEqual = true;
     bool m_bDmCaseSensitiveFilenameComparison;
-    bool m_bDmUnfoldSubdirs;
-    bool m_bDmSkipDirStatus;
-    QString m_DmFilePattern;
-    QString m_DmFileAntiPattern;
-    QString m_DmDirAntiPattern;
+    bool m_bDmUnfoldSubdirs = false;
+    bool m_bDmSkipDirStatus = false;
+    QString m_DmFilePattern = "*";
+    QString m_DmFileAntiPattern = "*.orig;*.o;*.obj;*.rej;*.bak";
+    QString m_DmDirAntiPattern = "CVS;.deps;.svn;.hg;.git";
 
+#ifdef Q_OS_WIN
     QString m_language;
-    bool m_bRightToLeftLanguage;
+#endif
+    bool m_bRightToLeftLanguage = false;
 
-    QString m_ignorableCmdLineOptions;
-    bool m_bIntegrateWithClearCase;
-    bool m_bEscapeKeyQuits;
+    QString m_ignorableCmdLineOptions = QString("-u;-query;-html;-abort");
+    bool m_bEscapeKeyQuits = false;
 };
 
 
