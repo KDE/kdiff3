@@ -20,7 +20,6 @@
  */
 #include "optiondialog.h"
 #include "OptionItems.h"
-#include "ConfigValueMap.h"
 
 #include "diff.h"
 #include "smalldialogs.h"
@@ -49,15 +48,11 @@
 #include <QToolTip>
 
 #include <KColorButton>
-#include <KConfigGroup>
 #include <KHelpClient>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KSharedConfig>
 #include <KToolBar>
 #include <map>
-
-#define KDIFF3_CONFIG_GROUP "KDiff3 Options"
 
 QString s_historyEntryStartRegExpToolTip;
 QString s_historyEntryStartSortKeyOrderToolTip;
@@ -482,7 +477,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
 
 void OptionDialog::addOptionItem(OptionItemBase* p)
 {
-    m_optionItemList.push_back(p);
+    m_options->addOptionItem(p);
 }
 
 OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageDialog(parent)
@@ -496,7 +491,7 @@ OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageD
     //showButtonSeparator( true );
     //setHelp( "kdiff3/index.html", QString::null );
 
-    m_options->init(m_optionItemList);
+    m_options->init();
     setupFontPage();
     setupColorPage();
     setupEditPage();
@@ -1561,7 +1556,7 @@ void OptionDialog::slotOk()
 /** Copy the values from the widgets to the public variables.*/
 void OptionDialog::slotApply()
 {
-    m_options->apply(m_optionItemList);
+    m_options->apply();
 
     emit applyDone();
 }
@@ -1579,14 +1574,14 @@ void OptionDialog::slotDefault()
 
 void OptionDialog::resetToDefaults()
 {
-    m_options->resetToDefaults(m_optionItemList);
+    m_options->resetToDefaults();
     slotEncodingChanged();
 }
 
 /** Initialise the widgets using the values in the public varibles. */
 void OptionDialog::setState()
 {
-    m_options->setToCurrent(m_optionItemList);
+    m_options->setToCurrent();
 
     slotEncodingChanged();
 }
@@ -1594,79 +1589,26 @@ void OptionDialog::setState()
 void OptionDialog::saveOptions(KSharedConfigPtr config)
 {
     // No i18n()-Translations here!
-
-    ConfigValueMap cvm(config->group(KDIFF3_CONFIG_GROUP));
-    std::list<OptionItemBase*>::iterator i;
-    for(i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i)
-    {
-        (*i)->doUnpreserve();
-        (*i)->write(&cvm);
-    }
+    m_options->saveOptions(config);
 }
 
 void OptionDialog::readOptions(KSharedConfigPtr config)
 {
     // No i18n()-Translations here!
-
-    ConfigValueMap cvm(config->group(KDIFF3_CONFIG_GROUP));
-    std::list<OptionItemBase*>::iterator i;
-    for(i = m_optionItemList.begin(); i != m_optionItemList.end(); ++i)
-    {
-        (*i)->read(&cvm);
-    }
+    m_options->readOptions(config);
 
     setState();
 }
 
 QString OptionDialog::parseOptions(const QStringList& optionList)
 {
-    QString result;
-    QStringList::const_iterator i;
-    for(i = optionList.begin(); i != optionList.end(); ++i)
-    {
-        QString s = *i;
 
-        int pos = s.indexOf('=');
-        if(pos > 0) // seems not to have a tag
-        {
-            QString key = s.left(pos);
-            QString val = s.mid(pos + 1);
-            std::list<OptionItemBase*>::iterator j;
-            bool bFound = false;
-            for(j = m_optionItemList.begin(); j != m_optionItemList.end(); ++j)
-            {
-                if((*j)->getSaveName() == key)
-                {
-                    (*j)->doPreserve();
-                    ValueMap config;
-                    config.writeEntry(key, val); // Write the value as a string and
-                    (*j)->read(&config);         // use the internal conversion from string to the needed value.
-                    bFound = true;
-                    break;
-                }
-            }
-            if(!bFound)
-            {
-                result += "No config item named \"" + key + "\"\n";
-            }
-        }
-        else
-        {
-            result += "No '=' found in \"" + s + "\"\n";
-        }
-    }
-    return result;
+    return m_options->parseOptions(optionList);
 }
 
 QString OptionDialog::calcOptionHelp()
 {
-    ValueMap config;
-    std::list<OptionItemBase*>::iterator j;
-    for(j = m_optionItemList.begin(); j != m_optionItemList.end(); ++j)
-    {
-        (*j)->write(&config);
-    }
-    return config.getAsString();
+    return m_options->calcOptionHelp();
 }
 
 void OptionDialog::slotHistoryMergeRegExpTester()

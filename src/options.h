@@ -21,13 +21,15 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-//#include <QToolBar>
-#include <QStringList>
-#include <QSize>
-#include <QPoint>
-#include <QFont>
-#include <QColor>
+#include <KSharedConfig>
+
 #include <list>
+
+#include <QColor>
+#include <QFont>
+#include <QPoint>
+#include <QSize>
+#include <QStringList>
 
 class OptionItemBase;
 
@@ -43,13 +45,23 @@ enum e_LineEndStyle
 class Options
 {
 public:
-    void init(std::list<OptionItemBase*> &optionItemList);
+    void init();
 
-    void apply(const std::list<OptionItemBase*> &optionItemList);
+    void apply();
 
-    void resetToDefaults(const std::list<OptionItemBase*> &optionItemList);
+    void resetToDefaults();
 
-    void setToCurrent(const std::list<OptionItemBase*>& optionItemList);
+    void setToCurrent();
+
+    void saveOptions(const KSharedConfigPtr config);
+    void readOptions(const KSharedConfigPtr config);
+
+    QString parseOptions(const QStringList& optionList);
+;
+    QString calcOptionHelp();
+
+    void addOptionItem(OptionItemBase* inItem);
+
     const QSize& getGeometry() const { return m_geometry; }
     void setGeometry(const QSize& size) { m_geometry = size; }
 
@@ -67,10 +79,10 @@ public:
 
     bool isStatusBarVisable() const { return m_bShowStatusBar; }
     void setStatusBarState(bool inShown) { m_bShowStatusBar = inShown; }
-
   private:
+    std::list<OptionItemBase*> mOptionItemList;
 
-    // Some settings are not available in the option dialog:
+    // Some settings that are not available in the option dialog:
     QSize  m_geometry = QSize(600, 400);
     QPoint m_position = QPoint(0, 22);
     bool   m_bMaximised = false;

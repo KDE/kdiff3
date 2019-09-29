@@ -88,8 +88,6 @@ private:
 
 
     QSharedPointer<Options> m_options=QSharedPointer<Options>::create(Options());
-    std::list<OptionItemBase*> m_optionItemList;
-
     //QDialogButtonBox *mButtonBox;
     OptionCheckBox* m_pSameEncoding;
     OptionEncodingComboBox* m_pEncodingAComboBox;
