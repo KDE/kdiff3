@@ -24,6 +24,10 @@
 
 #include <KSharedConfig>
 
+#ifdef Q_OS_WIN
+#include <QSettings>
+#endif
+
 #define KDIFF3_CONFIG_GROUP "KDiff3 Options"
 
 void Options::init()
@@ -49,7 +53,7 @@ void Options::apply()
     }
 
 #ifdef Q_OS_WIN //TODO: Needed? If so move this to optionItemList like everything else.
-    QString locale = m_options->m_language;
+    QString locale = m_language;
     if(locale == "Auto" || locale.isEmpty())
         locale = QLocale::system().name().left(2);
     int spacePos = locale.indexOf(' ');
