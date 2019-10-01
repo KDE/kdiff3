@@ -149,9 +149,7 @@ public:
     QString m_DmFileAntiPattern;
     QString m_DmDirAntiPattern;
 
-    QString m_language;
     bool m_bRightToLeftLanguage;
-
     QString m_ignorableCmdLineOptions;
     bool m_bIntegrateWithClearCase;
     bool m_bEscapeKeyQuits;

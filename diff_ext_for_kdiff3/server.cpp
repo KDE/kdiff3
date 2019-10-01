@@ -41,10 +41,6 @@
 #include <initguid.h>
 
 #include <KLocalizedString>
-//#include <log/log.h>
-//#include <log/log_message.h>
-//#include <log/file_sink.h>
-//#include <debug/trace.h>
 
 #include "server.h"
 #include "class_factory.h"

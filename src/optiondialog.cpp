@@ -44,7 +44,6 @@
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QRadioButton>
-#include <QSettings>
 #include <QTextCodec>
 #include <QToolTip>
 
@@ -1579,16 +1578,6 @@ void OptionDialog::slotApply()
     }
 
     emit applyDone();
-
-#ifdef Q_OS_WIN
-    QString locale = m_options.m_language;
-    if(locale == "Auto" || locale.isEmpty())
-        locale = QLocale::system().name().left(2);
-    int spacePos = locale.indexOf(' ');
-    if(spacePos > 0) locale = locale.left(spacePos);
-    QSettings settings(QLatin1String("HKEY_CURRENT_USER\\Software\\KDiff3\\diff-ext"), QSettings::NativeFormat);
-    settings.setValue(QLatin1String("Language"), locale);
-#endif
 }
 
 /** Set the default values in the widgets only, while the
