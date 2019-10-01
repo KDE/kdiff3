@@ -35,141 +35,6 @@
 #include <map>
 #include <vector>
 
-
-#ifdef UNICODE
-
-static void parseString( const std::wstring& s, size_t& i /*pos*/, std::wstring& r /*result*/ )
-{
-   size_t size = s.size();
-   ++i; // Skip initial '"'
-   for( ; i<size; ++i )
-   {
-      if ( s[i]=='"' )
-      {
-         ++i;
-         break;
-      }
-      else if ( s[i]==L'\\' && i+1<size )
-      {
-         ++i;
-         switch( s[i] ) {
-            case L'n':  r+=L'\n'; break;
-            case L'r':  r+=L'\r'; break;
-            case L'\\': r+=L'\\'; break;
-            case L'"':  r+=L'"';  break;
-            case L't':  r+=L'\t'; break;
-            default:    r+=L'\\'; r+=s[i]; break;
-         }
-      }
-      else
-         r+=s[i];
-   }
-}
-
-static std::map< std::wstring, std::wstring > s_translationMap;
-static tstring s_translationFileName;
-
-void readTranslationFile()
-{
-   s_translationMap.clear();
-   FILE* pFile = _tfopen( s_translationFileName.c_str(), TEXT("rb") );
-   if ( pFile )
-   {
-      MESSAGELOG( TEXT( "Reading translations: " ) + s_translationFileName );
-      std::vector<char> buffer;
-      try {
-         if ( fseek(pFile, 0, SEEK_END)==0 )
-         {
-            size_t length = ftell(pFile); // Get the file length
-            buffer.resize(length);
-            fseek(pFile, 0, SEEK_SET );
-            fread(&buffer[0], 1, length, pFile );
-         }
-      }
-      catch(...)
-      {
-      }
-      fclose(pFile);
-
-      if (buffer.size()>0)
-      {
-         size_t bufferSize = buffer.size();
-         int offset = 0;
-         if ( buffer[0]=='\xEF' && buffer[1]=='\xBB' && buffer[2]=='\xBF' )
-         {
-            offset += 3;
-            bufferSize -= 3;
-         }
-
-         size_t sLength = MultiByteToWideChar(CP_UTF8,0,&buffer[offset], (int)bufferSize, 0, 0 );
-         std::wstring s( sLength, L' ' );
-         MultiByteToWideChar(CP_UTF8,0,&buffer[offset], (int)bufferSize, &s[0], (int)s.size() );
-
-         // Now analyze the file and extract translation strings
-         std::wstring msgid;
-         std::wstring msgstr;
-         msgid.reserve( 1000 );
-         msgstr.reserve( 1000 );
-         bool bExpectingId = true;
-         for( size_t i=0; i<sLength; ++i )
-         {
-            wchar_t c = s[i];
-            if( c == L'\n' || c == L'\r' || c==L' ' || c==L'\t' )
-               continue;
-            else if ( s[i]==L'#' ) // Comment
-               while( s[i]!='\n' && s[i]!=L'\r' && i<sLength )
-                  ++i;
-            else if ( s[i]==L'"' )
-            {
-               if ( bExpectingId ) parseString(s,i,msgid);
-               else                parseString(s,i,msgstr);
-            }
-            else if ( sLength-i>5 && wcsncmp( &s[i], L"msgid", 5 )==0 )
-            {
-               if ( !msgid.empty() && !msgstr.empty() )
-               {
-                  s_translationMap[msgid] = msgstr;
-               }
-               bExpectingId = true;
-               msgid.clear();
-               i+=4;
-            }
-            else if ( sLength-i>6 && wcsncmp( &s[i], L"msgstr", 6 )==0 )
-            {
-               bExpectingId = false;
-               msgstr.clear();
-               i+=5;
-            }
-            else
-            {
-               // Unexpected ?
-            }
-         }
-      }
-   }
-   else
-   {
-      ERRORLOG( TEXT( "Reading translations failed: " ) + s_translationFileName );
-   }
-}
-
-static tstring getTranslation( const tstring& fallback )
-{
-   std::map< std::wstring, std::wstring >::iterator i = s_translationMap.find( fallback );
-   if (i!=s_translationMap.end())
-      return i->second;
-   return fallback;
-}
-#else
-
-static tstring getTranslation( const tstring& fallback )
-{
-   return fallback;
-}
-
-#endif
-
-
 static void replaceArgs( tstring& s, const tstring& r1, const tstring& r2=TEXT(""), const tstring& r3=TEXT("") )
 {
    tstring arg1 = TEXT("%1");
@@ -266,17 +131,6 @@ DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY 
 {
    LOG();
 
-#ifdef UNICODE
-   tstring installDir = SERVER::instance()->getRegistryKeyString( TEXT(""), TEXT("InstallDir") );
-   tstring language = SERVER::instance()->getRegistryKeyString( TEXT(""), TEXT("Language") );
-   tstring translationFileName = installDir + TEXT("\\translations\\diff_ext_") + language + TEXT(".po");
-   if ( s_translationFileName != translationFileName )
-   {
-      s_translationFileName = translationFileName;
-      readTranslationFile();
-   }
-#endif
-
   FORMATETC format = {CF_HDROP, 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
   STGMEDIUM medium;
   medium.tymed = TYMED_HGLOBAL;
@@ -288,8 +142,6 @@ DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY 
     m_nrOfSelectedFiles = DragQueryFile(drop, 0xFFFFFFFF, 0, 0);
 
     TCHAR tmp[MAX_PATH];
-
-    //initialize_language();
 
     if (m_nrOfSelectedFiles >= 1 && m_nrOfSelectedFiles <= 3)
     {

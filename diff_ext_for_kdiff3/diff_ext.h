@@ -58,7 +58,6 @@ class DIFF_EXT : public IContextMenu, IShellExtInit {
     void diff( const tstring& arguments );
     void diff_with(unsigned int num, bool bMerge);
     tstring cut_to_length(const tstring&, size_t length = 64);
-    void initialize_language();
 
   private:
     UINT m_nrOfSelectedFiles;

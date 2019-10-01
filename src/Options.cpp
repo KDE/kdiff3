@@ -24,10 +24,6 @@
 
 #include <KSharedConfig>
 
-#ifdef Q_OS_WIN
-#include <QSettings>
-#endif
-
 #define KDIFF3_CONFIG_GROUP "KDiff3 Options"
 
 void Options::init()
@@ -51,16 +47,6 @@ void Options::apply()
     {
         (*i)->apply();
     }
-
-#ifdef Q_OS_WIN //TODO: Needed? If so move this to optionItemList like everything else.
-    QString locale = m_language;
-    if(locale == "Auto" || locale.isEmpty())
-        locale = QLocale::system().name().left(2);
-    int spacePos = locale.indexOf(' ');
-    if(spacePos > 0) locale = locale.left(spacePos);
-    QSettings settings(QLatin1String("HKEY_CURRENT_USER\\Software\\KDiff3\\diff-ext"), QSettings::NativeFormat);
-    settings.setValue(QLatin1String("Language"), locale);
-#endif
 }
 
 void Options::resetToDefaults()

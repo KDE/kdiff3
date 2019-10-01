@@ -192,9 +192,6 @@ public:
     QString m_DmFileAntiPattern = "*.orig;*.o;*.obj;*.rej;*.bak";
     QString m_DmDirAntiPattern = "CVS;.deps;.svn;.hg;.git";
 
-#ifdef Q_OS_WIN
-    QString m_language;
-#endif
     bool m_bRightToLeftLanguage = false;
 
     QString m_ignorableCmdLineOptions = QString("-u;-query;-html;-abort");

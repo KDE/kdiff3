@@ -43,7 +43,6 @@
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QRadioButton>
-#include <QSettings>
 #include <QTextCodec>
 #include <QToolTip>
 
