@@ -24,6 +24,14 @@
 #include "diff.h"
 #include "smalldialogs.h"
 
+#include <map>
+
+#include <KColorButton>
+#include <KHelpClient>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KToolBar>
+
 #include <QApplication>
 #include <QCheckBox>
 #include <QComboBox>
@@ -38,20 +46,13 @@
 #include <QLayout>
 #include <QLineEdit>
 #include <QLocale>
-#include <QPointer>
 #include <QPixmap>
 #include <QPlainTextEdit>
+#include <QPointer>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QTextCodec>
 #include <QToolTip>
-
-#include <KColorButton>
-#include <KHelpClient>
-#include <KLocalizedString>
-#include <KMessageBox>
-#include <KToolBar>
-#include <map>
 
 QString s_historyEntryStartRegExpToolTip;
 QString s_historyEntryStartSortKeyOrderToolTip;
