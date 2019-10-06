@@ -94,14 +94,8 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
    pMenuAction->setMenu( pActionMenu );
 
 
-   // remember currently selected files (copy to a QStringList)
-   QList<QUrl> itemList = fileItemInfos.urlList();
-   foreach(const QUrl& item, itemList)
-   {
-      //m_urlList.append( item.url() );
-      m_list.append( item );
-   }
-
+   // remember currently selected files
+   m_list = fileItemInfos.urlList();
 
    /* Menu structure:
       KDiff3 -> (1 File selected):  Save 'selection' for later comparison (push onto history stack)
