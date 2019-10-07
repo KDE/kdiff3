@@ -12,6 +12,7 @@
 
 #include "difftextwindow.h"
 
+#include "common.h"            // for getAtomic, max3, min3
 #include "FileNameLineEdit.h"
 #include "kdiff3.h"
 #include "merger.h"
@@ -19,10 +20,14 @@
 #include "progress.h"
 #include "RLPainter.h"
 #include "selection.h"
+#include "SourceData.h"        // for SourceData
+#include "Utils.h"             // for Utils
 
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+
+#include <KLocalizedString>
 
 #include <QtMath>
 #include <QDir>
@@ -41,8 +46,6 @@
 #include <QThreadPool>
 #include <QToolTip>
 #include <QUrl>
-
-#include <KLocalizedString>
 
 QAtomicInt s_runnableCount = 0;
 

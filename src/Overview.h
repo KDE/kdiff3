@@ -11,11 +11,15 @@
 #ifndef OVERVIEW_H
 #define OVERVIEW_H
 
-#include "diff.h"
-#include "options.h"
+#include "LineRef.h"       // for LineRef
+#include "TypeUtils.h"     // for QtNumberType
 
+#include <QString>         // for QString
 #include <QPixmap>
 #include <QWidget>
+
+class Diff3LineList;
+class Options;
 
 class Overview : public QWidget
 {

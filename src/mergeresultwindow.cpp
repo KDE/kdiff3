@@ -13,6 +13,8 @@
 #include "options.h"
 #include "RLPainter.h"
 #include "guiutils.h"
+#include "Utils.h"             // for Utils
+
 
 #include <QApplication>
 #include <QClipboard>

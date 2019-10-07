@@ -13,6 +13,9 @@
 
 #include "Logging.h"
 
+#include <stdio.h>// for fileno, stderr
+#include <stdlib.h>// for exit
+
 #ifndef Q_OS_WIN
 #include <unistd.h>
 #endif
@@ -23,7 +26,6 @@
 #include <KMessageBox>
 
 #include <QApplication>
-#include <QByteArray>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QFile>

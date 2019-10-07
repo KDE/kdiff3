@@ -11,19 +11,18 @@
 
 #include "diff.h"
 
-#include "Utils.h"
-#include "fileaccess.h"
 #include "gnudiff_diff.h"
 #include "options.h"
 #include "progress.h"
 
 #include <cstdlib>
 #include <ctype.h>
-#include <map>
 
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <qglobal.h>
+
+#include <QtGlobal>
+#include <QSharedPointer>
 
 int LineData::width(int tabSize) const
 {

@@ -21,9 +21,10 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <QChar>
 #include <QFontMetrics>
-#include <QStringList>
 #include <QString>
+#include <QStringList>
 
 class Utils{
     public:

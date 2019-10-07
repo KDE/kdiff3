@@ -21,7 +21,7 @@
 #include "optiondialog.h"
 #include "OptionItems.h"
 
-#include "diff.h"
+#include "common.h"
 #include "smalldialogs.h"
 
 #include <map>
@@ -36,7 +36,6 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDialogButtonBox>
-#include <QDir>
 #include <QFontDatabase>
 #include <QFontDialog>
 #include <QFrame>
@@ -45,14 +44,13 @@
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
-#include <QLocale>
 #include <QPixmap>
 #include <QPlainTextEdit>
 #include <QPointer>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QTextCodec>
-#include <QToolTip>
+//#include <QToolTip>
 
 QString s_historyEntryStartRegExpToolTip;
 QString s_historyEntryStartSortKeyOrderToolTip;

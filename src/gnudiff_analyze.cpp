@@ -36,10 +36,11 @@
 
 #define GDIFF_MAIN
 
-#include "common.h"
 #include "gnudiff_diff.h"
-//#include <error.h>
+
+#include <algorithm>       // for max, min
 #include <stdlib.h>
+
 
 static GNULineRef *xvec, *yvec;  /* Vectors being compared. */
 static GNULineRef *fdiag;        /* Vector, indexed by diagonal, containing

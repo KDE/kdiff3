@@ -9,7 +9,9 @@
  ***************************************************************************/
 
 #include "selection.h"
-#include "gnudiff_diff.h"
+
+#include <limits.h>  // for INT_MAX
+#include <utility>   // for swap
 
 #include <QtGlobal>
 
@@ -64,7 +66,7 @@ bool Selection::within(LineRef l, LineRef p)
 {
     if(firstLine == invalidRef)
         return false;
-    
+
     LineRef l1 = firstLine;
     LineRef l2 = lastLine;
     int p1 = firstPos;

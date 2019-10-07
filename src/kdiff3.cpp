@@ -23,6 +23,7 @@
 #include "difftextwindow.h"
 #include "mergeresultwindow.h"
 #include "RLPainter.h"
+#include "Utils.h"
 
 #ifndef Q_OS_WIN
 #include <unistd.h>

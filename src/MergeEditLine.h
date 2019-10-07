@@ -14,8 +14,7 @@
 #include "diff.h"
 
 #include <QString>
-
-class MergeResultWindow;
+#include <QVector>
 
 class MergeEditLine
 {

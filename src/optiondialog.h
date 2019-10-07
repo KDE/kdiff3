@@ -21,15 +21,15 @@
 #ifndef OPTION_DIALOG_H
 #define OPTION_DIALOG_H
 
+#include "options.h"
+
+#include <QSharedPointer>   // for QSharedPointer
 #include <QStringList>
 #include <QGroupBox>
 
 #include <KPageDialog>
 #include <KSharedConfig>
 
-#include <list>
-
-#include "options.h"
 
 class QLabel;
 class QPlainTextEdit;

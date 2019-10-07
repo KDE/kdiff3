@@ -23,9 +23,6 @@
 
 #include <KAbstractFileItemActionPlugin>
 #include <KFileItemListProperties>
-#include <QStringList>
-
-class QStringList;
 
 class KDiff3FileItemAction : public KAbstractFileItemActionPlugin
 {

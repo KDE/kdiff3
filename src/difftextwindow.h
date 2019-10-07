@@ -16,6 +16,8 @@
 #include "diff.h"
 
 #include <QLabel>
+#include <QSharedPointer>  // for QSharedPointer
+#include <QString>         // for QString
 
 class QMenu;
 class QStatusBar;

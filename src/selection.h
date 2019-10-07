@@ -10,8 +10,9 @@
 #ifndef SELECTION_H
 #define SELECTION_H
 
-#include "gnudiff_diff.h"
-#include "common.h"
+#include "LineRef.h"
+
+#include <algorithm>  // for max, min
 
 class Selection
 {
@@ -24,7 +25,7 @@ private:
 
   int firstPos = -1;
   int lastPos = -1;
-  
+
   LineRef oldFirstLine = invalidRef;
   LineRef oldLastLine = invalidRef;
 public:
@@ -39,7 +40,7 @@ public:
 
   inline bool isValidFirstLine() { return firstLine != invalidRef; }
   inline void clearOldSelection() { oldLastLine = invalidRef, oldFirstLine = invalidRef; };
-  
+
   inline LineRef getOldLastLine() { return oldLastLine; };
   inline LineRef getOldFirstLine() { return oldFirstLine; };
   inline bool selectionContainsData() { return bSelectionContainsData; };
@@ -65,13 +66,13 @@ public:
    bool lineWithin( LineRef l );
    int firstPosInLine(LineRef l);
    int lastPosInLine(LineRef l);
-   LineRef beginLine(){ 
+   LineRef beginLine(){
       if (firstLine<0 && lastLine<0) return invalidRef;
-      return std::max((LineRef)0,std::min(firstLine,lastLine)); 
+      return std::max((LineRef)0,std::min(firstLine,lastLine));
    }
-   LineRef endLine(){ 
+   LineRef endLine(){
       if (firstLine<0 && lastLine<0) return invalidRef;
-      return std::max(firstLine,lastLine); 
+      return std::max(firstLine,lastLine);
    }
    int beginPos() { return firstLine==lastLine ? std::min(firstPos,lastPos) :
                            firstLine<lastLine ? (firstLine<0?0:firstPos) : (lastLine<0?0:lastPos);  }

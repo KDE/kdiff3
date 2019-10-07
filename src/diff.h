@@ -14,12 +14,13 @@
 
 #include "common.h"
 #include "fileaccess.h"
-#include "options.h"
-#include "gnudiff_diff.h"
+#include "LineRef.h"
 #include "SourceData.h"
 #include "Logging.h"
 
 #include <QList>
+
+class Options;
 
 //enum must be sequential with no gaps to allow loop interiation of values
 enum e_SrcSelector

@@ -11,8 +11,9 @@
 #include "Overview.h"
 
 #include "diff.h"
-#include "mergeresultwindow.h"
 #include "options.h"
+
+#include <algorithm>    // for max
 
 #include <QColor>
 #include <QMouseEvent>
