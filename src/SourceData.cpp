@@ -251,11 +251,14 @@ bool SourceData::FileData::readFile(FileAccess& file)
         m_pBuf = nullptr;
         m_size = 0;
     }
-    //null terminate buffer
-    pBuf[m_size + 1] = 0;
-    pBuf[m_size + 2] = 0;
-    pBuf[m_size + 3] = 0;
-    pBuf[m_size + 4] = 0;
+    else
+    {
+        //null terminate buffer
+        pBuf[m_size + 1] = 0;
+        pBuf[m_size + 2] = 0;
+        pBuf[m_size + 3] = 0;
+        pBuf[m_size + 4] = 0;
+    }
     return bSuccess;
 }
 
