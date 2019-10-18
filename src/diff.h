@@ -97,11 +97,12 @@ class LineData
 
   public:
     explicit LineData() = default; // needed for Qt internal reasons should not be used.
-    inline LineData(const QSharedPointer<QString> &buffer, const qint64 inOffset, QtNumberType inSize = 0)
+    inline LineData(const QSharedPointer<QString> &buffer, const qint64 inOffset, QtNumberType inSize = 0, bool inIsPureComment=false)
     {
         mBuffer = buffer;
         mOffset = inOffset;
         mSize = inSize;
+        bContainsPureComment = inIsPureComment;
     }
     Q_REQUIRED_RESULT inline int size() const { return mSize; }
     inline void setFirstNonWhiteChar(const qint32 firstNonWhiteChar) { mFirstNonWhiteChar = firstNonWhiteChar;}

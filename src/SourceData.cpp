@@ -32,10 +32,12 @@ Optimizations: Skip unneeded steps.
 */
 #include "SourceData.h"
 
+#include "CommentParser.h"
 #include "Utils.h"
 #include "diff.h"
 #include "Logging.h"
 
+#include <QScopedPointer>
 #include <QProcess>
 #include <QString>
 #include <QTemporaryFile>
@@ -571,6 +573,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding)
     LineCount lineCount = 0;
     qint64 lastOffset = 0;
     qint64 skipBytes = 0;
+    QScopedPointer<CommentParser> parser(new DefaultCommentParser());
 
     // detect line end style
     QVector<e_LineEndStyle> vOrigDataLineEndStyle;
@@ -652,9 +655,11 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding)
                 vOrigDataLineEndStyle.push_back(eLineEndStyleUndefined);
                 break;
         }
+        parser->processLine(line);
         //kdiff3 internally uses only unix style endings for simplicity.
-        m_v.push_back(LineData(m_unicodeBuf, lastOffset, line.length()));
+        m_v.push_back(LineData(m_unicodeBuf, lastOffset, line.length(), parser->isPureComment()));
         m_unicodeBuf->append(line).append('\n');
+
         lastOffset = m_unicodeBuf->length();
     }
 

@@ -24,6 +24,7 @@ include(FeatureSummary)
 include(ECMInstallIcons)
 include(ECMAddAppIcon)
 include(ECMSetupVersion)
+include(ECMAddTests)
 
 ecm_setup_version(1.9.70 VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DIR}/src/version.h)
 
