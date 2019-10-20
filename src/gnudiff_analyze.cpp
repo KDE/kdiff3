@@ -355,28 +355,14 @@ void GnuDiff::compareseq(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNUL
 
         c = diag(xoff, xlim, yoff, ylim, find_minimal, &part);
 
-        if(c == 1)
-        {
-            /* This should be impossible, because it implies that
+        /* This should be impossible, because it implies that
          one of the two subsequences is empty,
-         and that case was handled above without calling `diag'.
-         Let's verify that this is true.  */
-            abort();
-#if 0
-      /* The two subsequences differ by a single insert or delete;
-         record it and we are done.  */
-      if (part.xmid - part.ymid < xoff - yoff)
-        files[1].changed[files[1].realindexes[part.ymid - 1]] = 1;
-      else
-        files[0].changed[files[0].realindexes[part.xmid]] = 1;
-#endif
-        }
-        else
-        {
-            /* Use the partitions to split this problem into subproblems.  */
-            compareseq(xoff, part.xmid, yoff, part.ymid, part.lo_minimal);
-            compareseq(part.xmid, xlim, part.ymid, ylim, part.hi_minimal);
-        }
+         and that case was handled above without calling `diag'. */
+        Q_ASSERT(c != 1);
+
+        /* Use the partitions to split this problem into subproblems.  */
+        compareseq(xoff, part.xmid, yoff, part.ymid, part.lo_minimal);
+        compareseq(part.xmid, xlim, part.ymid, ylim, part.hi_minimal);
     }
 }
 
