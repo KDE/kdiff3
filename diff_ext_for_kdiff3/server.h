@@ -32,8 +32,16 @@
 
 #ifdef UNICODE
 typedef std::wstring tstring;
+
+#define toQString(s) QString::fromStdWString(s)
+#define fromQString(s) (s).toStdWString()
+
 #else
 typedef std::string tstring;
+
+#define toQString(s) { QString::fromStdString(s);}
+#define fromQString(s) { (s).toStdString();}
+
 #endif
 
 #define MESSAGELOG( msg ) SERVER::logMessage( __FUNCTION__, __FILE__, __LINE__, msg )
@@ -53,34 +61,34 @@ class SERVER {
   public:
     static SERVER* instance();
     void initLogging();
-  
+
   public:
     virtual ~SERVER();
-    
+
     tstring getRegistryKeyString( const tstring& subKey, const tstring& value );
-  
+
     HINSTANCE handle() const;
-  
+
     HRESULT do_register();
     HRESULT do_unregister();
-  
+
     void lock();
     void release();
-  
+
     ULONG reference_count() const {
       return _reference_count;
     }
-    
+
     std::list< tstring >& recent_files();
-    
+
     void save_history() const;
 
     static void logMessage( const char* function, const char* file, int line, const tstring& msg );
-  
+
   private:
     SERVER();
     SERVER(const SERVER&) {}
-      
+
   private:
     LONG _reference_count;
     std::list<tstring>* m_pRecentFiles;

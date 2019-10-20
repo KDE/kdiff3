@@ -34,34 +34,6 @@
 #include <map>
 #include <vector>
 
-static void replaceArgs( tstring& s, const tstring& r1, const tstring& r2=TEXT(""), const tstring& r3=TEXT("") )
-{
-   tstring arg1 = TEXT("%1");
-   size_t pos1 = s.find( arg1 );
-   tstring arg2 = TEXT("%2");
-   size_t pos2 = s.find( arg2 );
-   tstring arg3 = TEXT("%3");
-   size_t pos3 = s.find( arg3 );
-   if ( pos1 != size_t(-1) )
-   {
-      s.replace( pos1, arg1.length(), r1 );
-      if ( pos2 != size_t(-1) && pos1<pos2 )
-         pos2 += r1.length() - arg1.length();
-      if ( pos3 != size_t(-1) && pos1<pos3 )
-         pos3 += r1.length() - arg1.length();
-   }
-   if ( pos2 != size_t(-1) )
-   {
-      s.replace( pos2, arg2.length(), r2 );
-      if ( pos3 != size_t(-1) && pos2<pos3 )
-         pos3 += r2.length() - arg2.length();
-   }
-   if ( pos3 != size_t(-1) )
-   {
-      s.replace( pos3, arg3.length(), r3 );
-   }
-}
-
 DIFF_EXT::DIFF_EXT()
 : m_nrOfSelectedFiles(0), _ref_count(0L),
   m_recentFiles( SERVER::instance()->recent_files() )
@@ -257,11 +229,10 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
          //   tstring firstFileName = cut_to_length( m_recentFiles.front() );
          //   tstring secondFileName = cut_to_length( *(++m_recentFiles.begin()) );
          //}
-         m_id_Merge3 = insertMenuItemHelper( subMenu, id++, pos2++, i18n("3-way merge with base"),
+         m_id_Merge3 = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("3-way merge with base")),
             nrOfRecentFiles >=2 ? MFS_ENABLED : MFS_DISABLED );
 
-         menuString = i18n("Save '%1' for later");
-         replaceArgs( menuString, _file_name1 );
+         menuString = fromQString(i18n("Save '%1' for later").arg(toQString(_file_name1)));
          m_id_DiffLater = insertMenuItemHelper( subMenu, id++, pos2++, menuString );
 
          HMENU file_list = CreateMenu();
@@ -275,25 +246,25 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
             ++n;
          }
 
-         insertMenuItemHelper( subMenu, id++, pos2++, i18n("Compare with ..."),
+         insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("Compare with ...")),
             nrOfRecentFiles > 0 ? MFS_ENABLED : MFS_DISABLED, file_list );
 
-         m_id_ClearList = insertMenuItemHelper( subMenu, id++, pos2++, i18n("Clear list"), nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
+         m_id_ClearList = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("Clear list")), nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
       }
       else if(m_nrOfSelectedFiles == 2)
       {
          //= "Diff " + cut_to_length(_file_name1, 20)+" and "+cut_to_length(_file_name2, 20);
-         m_id_Diff = insertMenuItemHelper( subMenu, id++, pos2++, i18n("Compare") );
+         m_id_Diff = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("Compare")) );
       }
       else if ( m_nrOfSelectedFiles == 3 )
       {
-         m_id_Diff3 = insertMenuItemHelper( subMenu, id++, pos2++, i18n("3 way comparison") );
+         m_id_Diff3 = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("3 way comparison")) );
       }
       else
       {
          // More than 3 files selected?
       }
-      m_id_About = insertMenuItemHelper( subMenu, id++, pos2++, i18n("About Diff-Ext ...") );
+      m_id_About = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("About Diff-Ext ...")) );
 
       insertMenuItemHelper( menu, id++, position++, TEXT("KDiff3"), MFS_ENABLED, subMenu );
 
@@ -364,14 +335,13 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
       else if(id == m_id_About)
       {
          LOG();
-         std::wstring sBits = i18n("(32 Bit)");
+         QString sBits = i18n("(32 Bit)");
          if (sizeof(void*)==8)
-             sBits = i18n("(64 Bit)");
-         MessageBox( _hwnd, (i18n("Diff-Ext Copyright (c) 2003-2006, Sergey Zorin. All rights reserved.\n")
+         MessageBox( _hwnd, (fromQString(i18n("Diff-Ext Copyright (c) 2003-2006, Sergey Zorin. All rights reserved.\n")
             + i18n("This software is distributable under the BSD-2-Clause license.\n")
             + i18n("Some extensions for KDiff3 (c) 2006-2013 by Joachim Eibl.\n")
-            + i18n("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n")).c_str()
-            , (i18n("About Diff-Ext for KDiff3 ")+sBits).c_str(), MB_OK );
+            + i18n("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n"))).c_str()
+            , fromQString(i18n("About Diff-Ext for KDiff3 ")+sBits).c_str(), MB_OK );
       }
       else
       {
@@ -397,7 +367,7 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
    HRESULT ret = NOERROR;
 
    if(uFlags == GCS_HELPTEXT) {
-      tstring helpString;
+      QString helpString;
       if( idCmd == m_id_Diff )
       {
          helpString = i18n("Compare selected files");
@@ -406,14 +376,12 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
       {
          if(!m_recentFiles.empty())
          {
-            helpString = i18n("Compare '%1' with '%2'");
-            replaceArgs( helpString, _file_name1, m_recentFiles.front() );
+            helpString = i18n("Compare '%1' with '%2'").arg(toQString(_file_name1), toQString(m_recentFiles.front()));
          }
       }
       else if(idCmd == m_id_DiffLater)
       {
-         helpString = i18n("Save '%1' for later operation");
-         replaceArgs( helpString, _file_name1 );
+         helpString = i18n("Save '%1' for later operation").arg(_file_name1);
       }
       else if((idCmd >= m_id_DiffWith_Base) && (idCmd < m_id_DiffWith_Base+m_recentFiles.size()))
       {
@@ -426,12 +394,11 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
 
             if ( i!=m_recentFiles.end() )
             {
-               helpString = i18n("Compare '%1' with '%2'");
-               replaceArgs( helpString, _file_name1, *i );
+               helpString = i18n("Compare '%1' with '%2'").arg(toQString(_file_name1), toQString(*i));
             }
          }
       }
-      lstrcpyn( (LPTSTR)pszName, helpString.c_str(), cchMax );
+      lstrcpyn( (LPTSTR)pszName, fromQString(helpString).c_str(), cchMax );
    }
    else
    {
@@ -468,10 +435,10 @@ DIFF_EXT::diff( const tstring& arguments )
 
    if (bError)
    {
-      tstring message = i18n("Could not start KDiff3. Please rerun KDiff3 installation.");
-      message += TEXT("\n") + i18n("Command") + TEXT(": ") + command;
-      message += TEXT("\n") + i18n("CommandLine") + TEXT(": ") + commandLine;
-      MessageBox(_hwnd, message.c_str(), i18n("Diff-Ext For KDiff3").c_str(), MB_OK);
+      tstring message = fromQString(i18n("Could not start KDiff3. Please rerun KDiff3 installation."));
+      message += TEXT("\n") + fromQString(i18n("Command")) + TEXT(": ") + command;
+      message += TEXT("\n") + fromQString(i18n("CommandLine")) + TEXT(": ") + commandLine;
+      MessageBox(_hwnd, message.c_str(), fromQString(i18n("Diff-Ext For KDiff3")).c_str(), MB_OK);
    }
 }
 
