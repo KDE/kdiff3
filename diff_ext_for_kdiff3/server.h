@@ -31,9 +31,18 @@
 #include <string> // std::wstring
 
 #ifdef UNICODE
+
 typedef std::wstring tstring;
+
+#define toQString(s) QString::fromStdWString(s)
+#define fromQString(s) (s).toStdWString()
+
 #else
+
 typedef std::string tstring;
+#define toQString(s) { QString::fromStdString(s);}
+#define fromQString(s) { (s).toStdString();}
+
 #endif
 
 #define MESSAGELOG( msg ) SERVER::logMessage( __FUNCTION__, __FILE__, __LINE__, msg )
