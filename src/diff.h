@@ -19,6 +19,7 @@
 #include "Logging.h"
 
 #include <QList>
+#include <QVector>
 
 class Options;
 
