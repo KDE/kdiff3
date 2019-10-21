@@ -657,7 +657,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding)
         }
         parser->processLine(line);
         //kdiff3 internally uses only unix style endings for simplicity.
-        m_v.push_back(LineData(m_unicodeBuf, lastOffset, line.length(), parser->isPureComment()));
+        m_v.push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isPureComment()));
         m_unicodeBuf->append(line).append('\n');
 
         lastOffset = m_unicodeBuf->length();
