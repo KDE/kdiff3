@@ -25,11 +25,10 @@
 class CommentParser
 {
   public:
-    inline virtual void processChar(const QString &line, const QChar &inChar) = 0;
-    inline virtual void processLine(const QString &line) = 0;
-    inline virtual bool inComment() const = 0;
-    inline virtual bool isPureComment() const = 0;
-    inline virtual void removeComments() = 0;
+    virtual void processChar(const QString &line, const QChar &inChar) = 0;
+    virtual void processLine(const QString &line) = 0;
+    virtual bool inComment() const = 0;
+    virtual bool isPureComment() const = 0;
     virtual ~CommentParser(){};
 };
 
@@ -44,7 +43,6 @@ class DefaultCommentParser : public CommentParser
 
     inline bool inComment() const override { return mCommentType != none; };
     inline bool isPureComment() const override { return mIsPureComment == yes; };
-    inline void removeComments() override;
   protected:
     friend class CommentParserTest;
 

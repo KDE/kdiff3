@@ -118,7 +118,3 @@ void DefaultCommentParser::processLine(const QString &line)
 
     processChar(line, '\n');
 }
-
-void DefaultCommentParser::removeComments()
-{
-}
