@@ -17,7 +17,7 @@
  * along with KDiff3.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtTest/QtTest>
+#include <QTest>
 
 #include "../CommentParser.h"
 
@@ -49,7 +49,7 @@ class CommentParserTest : public QObject
     {
         DefaultCommentParser test1;
 
-        test1.processLine("//comment with quotes embeded \"\"");
+        test1.processLine("//comment with quotes embedded \"\"");
         QVERIFY(!test1.inComment());
         QVERIFY(test1.isPureComment());
     }
@@ -67,7 +67,7 @@ class CommentParserTest : public QObject
     {
         DefaultCommentParser test1;
 
-        test1.processLine("anythis//ignore embeded multiline squence  /*");
+        test1.processLine("anythis//ignore embedded multiline sequence  /*");
         QVERIFY(!test1.inComment());
         QVERIFY(!test1.isPureComment());
     }
@@ -101,7 +101,7 @@ class CommentParserTest : public QObject
         QVERIFY(!test.inComment());
         QVERIFY(!test.isPureComment());
 
-        //mid line comment start. mutiple lines
+        //mid line comment start. multiple lines
         test = DefaultCommentParser();
         test.processLine("fskk /* kjd ");
         QVERIFY(test.inComment());
@@ -115,7 +115,7 @@ class CommentParserTest : public QObject
         QVERIFY(!test.inComment());
         QVERIFY(!test.isPureComment());
 
-        //mid line comment start. mutiple lines
+        //mid line comment start. multiple lines
         test = DefaultCommentParser();
         test.processLine("fskk /* kjd ");
         QVERIFY(test.inComment());
@@ -124,7 +124,7 @@ class CommentParserTest : public QObject
         test.processLine("  comment line ");
         QVERIFY(test.inComment());
         QVERIFY(test.isPureComment());
-        //embeded single line character squence should not end comment
+        //embedded single line character sequence should not end comment
         test.processLine("  comment line //");
         QVERIFY(test.inComment());
         QVERIFY(test.isPureComment());
@@ -159,7 +159,7 @@ class CommentParserTest : public QObject
         QVERIFY(!test.inComment());
         QVERIFY(!test.isPureComment());
 
-        //test only escape squeance we care about
+        //test only escape sequence we care about
         test = DefaultCommentParser();
         test.processChar("\"", '"');
         QVERIFY(!test.isEscaped());
