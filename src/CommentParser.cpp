@@ -56,14 +56,14 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 if(!inComment() && mLastChar == '/')
                 {
                     mCommentType = singleLine;
-                    mIsPureComment = line.startsWith("//") ? yes : no;
+                    mIsPureComment = line.startsWith(QLatin1String("//")) ? yes : no;
                 }
                 else if(mLastChar == '*' && mCommentType == multiLine)
                 {
                     //ending multi-line comment
                     mCommentType = none;
                     if(!isFirstLine)
-                        mIsPureComment = line.endsWith("*/") ? yes : mIsPureComment;
+                        mIsPureComment = line.endsWith(QLatin1String("*/")) ? yes : mIsPureComment;
                 }
                 break;
             case '*':
@@ -73,7 +73,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 if(mLastChar == '/' && !inComment())
                 {
                     mCommentType = multiLine;
-                    mIsPureComment = line.startsWith("/*") ? yes : mIsPureComment;
+                    mIsPureComment = line.startsWith(QLatin1String("/*")) ? yes : mIsPureComment;
                     isFirstLine = true;
                 }
                 break;
