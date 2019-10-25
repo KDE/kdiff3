@@ -159,11 +159,19 @@ class CommentParserTest : public QObject
         QVERIFY(!test.inComment());
         QVERIFY(!test.isPureComment());
 
-        //test only escape sequence we care about
         test = DefaultCommentParser();
         test.processChar("\"", '"');
         QVERIFY(!test.isEscaped());
         QVERIFY(test.inString());
+
+        test.processChar("\"'", '\'');
+        QVERIFY(test.inString());
+        test.processChar("\"'\"", '"');
+        QVERIFY(!test.inString());
+
+        //test only escape sequence we care about
+        test = DefaultCommentParser();
+        test.processChar("\"", '"');
 
         test.processChar("\"", '\\');
         QVERIFY(test.isEscaped());
@@ -176,6 +184,36 @@ class CommentParserTest : public QObject
         test.processChar("\"\\\"\"", '"');
         QVERIFY(!test.isEscaped());
         QVERIFY(!test.inString());
+    }
+
+    void quotedCharacter()
+    {
+        DefaultCommentParser test;
+
+        test.processLine("'\"'");
+        QVERIFY(!test.inString());
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
+
+        test.processLine("'a'");
+        QVERIFY(!test.inString());
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
+
+        test.processLine("'\\\''");
+        QVERIFY(!test.inString());
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
+
+        test.processLine("'*'");
+        QVERIFY(!test.inString());
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
+
+        test.processLine("'/'");
+        QVERIFY(!test.inString());
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
     }
 };
 
