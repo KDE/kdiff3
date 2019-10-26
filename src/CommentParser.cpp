@@ -96,12 +96,6 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     break;
                 }
 
-                if(inChar.isSpace() && isBlank())
-                    break;
-
-                if(!inChar.isSpace())
-                    bIsBlank = false;
-
                 mIsPureComment = no;
                 break;
         }
@@ -117,10 +111,13 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
 
 void DefaultCommentParser::processLine(const QString &line)
 {
-    for(const QChar &c : line)
+    //remove trailing and ending spaces.
+    const QString trimmedLine = line.trimmed();
+
+    for(const QChar &c : trimmedLine)
     {
-        processChar(line, c);
+        processChar(trimmedLine, c);
     }
 
-    processChar(line, '\n');
+    processChar(trimmedLine, '\n');
 }

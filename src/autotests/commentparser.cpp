@@ -34,43 +34,36 @@ class CommentParserTest : public QObject
         QVERIFY(!parser.isEscaped());
         QVERIFY(!parser.inString());
         QVERIFY(!parser.inComment());
-        QVERIFY(parser.isBlank());
     }
 
-    void singleLineComment1()
+    void singleLineComment()
     {
-        DefaultCommentParser test1;
+        DefaultCommentParser test;
 
-        test1.processLine("//ddj ?*8");
-        QVERIFY(!test1.inComment());
-        QVERIFY(test1.isPureComment());
-    }
+        test.processLine("//ddj ?*8");
+        QVERIFY(!test.inComment());
+        QVERIFY(test.isPureComment());
 
-    void singleLineComment2()
-    {
-        DefaultCommentParser test1;
+        //ignore trailing+leading whitespace
+        test = DefaultCommentParser();
+        test.processLine("\t  \t  // comment     ");
+        QVERIFY(!test.inComment());
+        QVERIFY(test.isPureComment());
 
-        test1.processLine("//comment with quotes embedded \"\"");
-        QVERIFY(!test1.inComment());
-        QVERIFY(test1.isPureComment());
-    }
+        test = DefaultCommentParser();
+        test.processLine("//comment with quotes embedded \"\"");
+        QVERIFY(!test.inComment());
+        QVERIFY(test.isPureComment());
 
-    void singleLineComment3()
-    {
-        DefaultCommentParser test1;
+        test = DefaultCommentParser();
+        test.processLine("anythis//endof line comment");
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
 
-        test1.processLine("anythis//endof line comment");
-        QVERIFY(!test1.inComment());
-        QVERIFY(!test1.isPureComment());
-    }
-
-    void singleLineComment4()
-    {
-        DefaultCommentParser test1;
-
-        test1.processLine("anythis//ignore embedded multiline sequence  /*");
-        QVERIFY(!test1.inComment());
-        QVERIFY(!test1.isPureComment());
+        test = DefaultCommentParser();
+        test.processLine("anythis//ignore embedded multiline sequence  /*");
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
     }
 
     void inComment()
@@ -146,6 +139,11 @@ class CommentParserTest : public QObject
 
         //leading whitespace
         test.processLine("\t  \t  /*  comment */");
+        QVERIFY(!test.inComment());
+        QVERIFY(test.isPureComment());
+
+        //trailing whitespace
+        test.processLine("\t  \t  /*  comment */    ");
         QVERIFY(!test.inComment());
         QVERIFY(test.isPureComment());
     }
@@ -245,6 +243,18 @@ class CommentParserTest : public QObject
 
         test = DefaultCommentParser();
         test.processLine("");
+        QVERIFY(!test.inString());
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
+
+        test = DefaultCommentParser();
+        test.processLine("  / ");
+        QVERIFY(!test.inString());
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
+
+        test = DefaultCommentParser();
+        test.processLine("  * ");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
         QVERIFY(!test.isPureComment());
