@@ -34,6 +34,7 @@ class CommentParserTest : public QObject
         QVERIFY(!parser.isEscaped());
         QVERIFY(!parser.inString());
         QVERIFY(!parser.inComment());
+        QVERIFY(parser.isBlank());
     }
 
     void singleLineComment1()
@@ -142,6 +143,11 @@ class CommentParserTest : public QObject
         test.processLine("/*  comment */ */");
         QVERIFY(!test.inComment());
         QVERIFY(!test.isPureComment());
+
+        //leading whitespace
+        test.processLine("\t  \t  /*  comment */");
+        QVERIFY(!test.inComment());
+        QVERIFY(test.isPureComment());
     }
 
     void stringTest()
@@ -155,6 +161,12 @@ class CommentParserTest : public QObject
 
         test = DefaultCommentParser();
         test.processLine("\"quoted string /* \"");
+        QVERIFY(!test.inString());
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
+
+        test = DefaultCommentParser();
+        test.processLine("\"\"");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
         QVERIFY(!test.isPureComment());
@@ -211,6 +223,28 @@ class CommentParserTest : public QObject
         QVERIFY(!test.isPureComment());
 
         test.processLine("'/'");
+        QVERIFY(!test.inString());
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
+    }
+
+    void nonComment()
+    {
+        DefaultCommentParser test;
+
+        test.processLine("  int i = 8 / 8 * 3;");
+        QVERIFY(!test.inString());
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
+
+        test = DefaultCommentParser();
+        test.processLine("  ");
+        QVERIFY(!test.inString());
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
+
+        test = DefaultCommentParser();
+        test.processLine("");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
         QVERIFY(!test.isPureComment());

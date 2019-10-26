@@ -43,6 +43,7 @@ class DefaultCommentParser : public CommentParser
 
     inline bool inComment() const override { return mCommentType != none; };
     inline bool isPureComment() const override { return mIsPureComment == yes; };
+
   protected:
     friend class CommentParserTest;
 
@@ -50,6 +51,7 @@ class DefaultCommentParser : public CommentParser
     //For tests only.
     inline bool isEscaped(){ return bIsEscaped; }
     inline bool inString(){ return bInString; }
+    inline bool isBlank() const { return bIsBlank; };
   private:
     QChar mLastChar, mStartChar;
 
@@ -57,9 +59,9 @@ class DefaultCommentParser : public CommentParser
     TriState mIsPureComment = unknown;
     bool bInString = false;
     bool bIsEscaped = false;
+    bool bIsBlank = true;
 
     CommentType mCommentType = none;
-    quint32 pos = 0;
 };
 
 #endif // !COMMENTPASER_H

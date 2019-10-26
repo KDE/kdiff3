@@ -96,6 +96,12 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     break;
                 }
 
+                if(inChar.isSpace() && isBlank())
+                    break;
+
+                if(!inChar.isSpace())
+                    bIsBlank = false;
+
                 mIsPureComment = no;
                 break;
         }
