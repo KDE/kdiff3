@@ -6,7 +6,7 @@ build:
   before_script: 
      - apt-get update && apt-get install -y extra-cmake-modules gettext qtbase5-dev extra-cmake-modules libkf5i18n-dev libkf5coreaddons-dev libkf5iconthemes-dev libkf5parts-dev libkf5doctools-dev libkf5crash-dev 
   script: 
-    - cmake .
+    - cmake -DBUILD_TESTING=YES .
     - make
     - make install
   
