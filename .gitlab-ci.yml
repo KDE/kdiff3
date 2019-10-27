@@ -9,7 +9,12 @@ build:
     - cmake .
     - make
     - make install
-    
+  
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
   #artifacts:
   #  paths:
   #    - mybinary
@@ -19,7 +24,7 @@ build:
   #     - "*.o"
 
 # run tests using the binary built before
-#test:
-#  stage: test
-#  script:
-#    - ./runmytests.sh
+test:
+  stage: test
+  script:
+    make ARGS="-V -E appstreamtest" test #exclude appstreamtest this does not run properly in my image
