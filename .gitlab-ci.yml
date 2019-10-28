@@ -8,6 +8,7 @@ build:
   script: 
     - cmake -DBUILD_TESTING=YES .
     - make
+    - make ARGS="-V -E appstreamtest" test #exclude appstreamtest this does not run properly in my image
     - make install
   
   retry:
@@ -23,8 +24,3 @@ build:
   #   paths:
   #     - "*.o"
 
-# run tests using the binary built before
-test:
-  stage: test
-  script:
-    make ARGS="-V -E appstreamtest" test #exclude appstreamtest this does not run properly in my image
