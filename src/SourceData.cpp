@@ -155,7 +155,7 @@ QStringList SourceData::setData(const QString& data)
     else
     {
         m_aliasName = i18n("From Clipboard");
-        m_fileAccess = FileAccess(""); // Effect: m_fileAccess.isValid() is false
+        m_fileAccess = FileAccess(); // Insure m_fileAccess is not valid
     }
 
     return errors;
