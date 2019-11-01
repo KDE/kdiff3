@@ -212,15 +212,17 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
       if(m_nrOfSelectedFiles == 1)
       {
          size_t nrOfRecentFiles = m_recentFiles.size();
-         tstring menuStringCompare = i18n("Compare with %1");
-         tstring menuStringMerge   = i18n("Merge with %1");
+         tstring menuStringCompare;
+         tstring menuStringMerge;
          tstring firstFileName;
          if( nrOfRecentFiles>=1 )
          {
             firstFileName = TEXT("'") + cut_to_length( m_recentFiles.front() ) + TEXT("'");
          }
-         replaceArgs( menuStringCompare, firstFileName );
-         replaceArgs( menuStringMerge,   firstFileName );
+
+         menuStringCompare = i18n("Compare with %1", firstFileName);
+         menuStringMerge   = i18n("Merge with %1", firstFileName);
+
          m_id_DiffWith  = insertMenuItemHelper( subMenu, id++, pos2++, menuStringCompare, nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
          m_id_MergeWith = insertMenuItemHelper( subMenu, id++, pos2++, menuStringMerge, nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
 
@@ -232,7 +234,7 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
          m_id_Merge3 = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("3-way merge with base")),
             nrOfRecentFiles >=2 ? MFS_ENABLED : MFS_DISABLED );
 
-         menuString = fromQString(i18n("Save '%1' for later").arg(toQString(_file_name1)));
+         menuString = fromQString(i18n("Save '%1' for later", toQString(_file_name1)));
          m_id_DiffLater = insertMenuItemHelper( subMenu, id++, pos2++, menuString );
 
          HMENU file_list = CreateMenu();
@@ -376,12 +378,12 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
       {
          if(!m_recentFiles.empty())
          {
-            helpString = i18n("Compare '%1' with '%2'").arg(toQString(_file_name1), toQString(m_recentFiles.front()));
+            helpString = i18n("Compare '%1' with '%2'", toQString(_file_name1), toQString(m_recentFiles.front()));
          }
       }
       else if(idCmd == m_id_DiffLater)
       {
-         helpString = i18n("Save '%1' for later operation").arg(_file_name1);
+         helpString = i18n("Save '%1' for later operation", _file_name1);
       }
       else if((idCmd >= m_id_DiffWith_Base) && (idCmd < m_id_DiffWith_Base+m_recentFiles.size()))
       {
@@ -394,7 +396,7 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
 
             if ( i!=m_recentFiles.end() )
             {
-               helpString = i18n("Compare '%1' with '%2'").arg(toQString(_file_name1), toQString(*i));
+               helpString = i18n("Compare '%1' with '%2'", toQString(_file_name1), toQString(*i));
             }
          }
       }
