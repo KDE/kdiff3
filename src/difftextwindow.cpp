@@ -261,6 +261,41 @@ void DiffTextWindow::dragEnterEvent(QDragEnterEvent* e)
     // Note that the corresponding drop is handled in KDiff3App::eventFilter().
 }
 
+void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, int linesPerPage, const QColor& fgColor)
+{
+    QRect clipRect = view;
+    clipRect.setTop(0);
+    painter.setClipRect(clipRect);
+    painter.translate(view.left(), 0);
+    QFontMetrics fm = painter.fontMetrics();
+    //if ( fm.width(headerText) > view.width() )
+    {
+        // A simple wrapline algorithm
+        int l = 0;
+        for(int p = 0; p < headerText.length();)
+        {
+            QString s = headerText.mid(p);
+            int i;
+            for(i = 2; i < s.length(); ++i)
+                if(Utils::getHorizontalAdvance(fm, s, i) > view.width())
+                {
+                    --i;
+                    break;
+                }
+            //QString s2 = s.left(i);
+            painter.drawText(0, l * fm.height() + fm.ascent(), s.left(i));
+            p += i;
+            ++l;
+        }
+        painter.setPen(fgColor);
+        painter.drawLine(0, view.top() - 2, view.width(), view.top() - 2);
+    }
+
+    painter.translate(0, view.top());
+    print(painter, view, line, linesPerPage);
+    painter.resetTransform();
+}
+
 void DiffTextWindow::setFirstLine(int firstLine)
 {
     int fontHeight = fontMetrics().lineSpacing();
@@ -1861,6 +1896,8 @@ DiffTextWindow* DiffTextWindowFrame::getDiffTextWindow()
 {
     return d->m_pDiffTextWindow;
 }
+
+
 
 bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
 {

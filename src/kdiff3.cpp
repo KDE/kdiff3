@@ -68,7 +68,6 @@
 #define ID_STATUS_MSG 1
 #define MAIN_TOOLBAR_NAME QLatin1String("mainToolBar")
 
-void printDiffTextWindow(RLPainter& painter, const QRect& view, const QString& headerText, DiffTextWindow* pDiffTextWindow, int line, int linesPerPage, const QColor& fgColor);
 KActionCollection* KDiff3App::actionCollection()
 {
     if(m_pKDiff3Shell == nullptr)
@@ -757,41 +756,6 @@ void KDiff3App::slotFileSaveAs()
     slotStatusMsg(i18n("Ready."));
 }
 
-void printDiffTextWindow(RLPainter& painter, const QRect& view, const QString& headerText, DiffTextWindow* pDiffTextWindow, int line, int linesPerPage, const QColor &fgColor)
-{
-    QRect clipRect = view;
-    clipRect.setTop(0);
-    painter.setClipRect(clipRect);
-    painter.translate(view.left(), 0);
-    QFontMetrics fm = painter.fontMetrics();
-    //if ( fm.width(headerText) > view.width() )
-    {
-        // A simple wrapline algorithm
-        int l = 0;
-        for(int p = 0; p < headerText.length();)
-        {
-            QString s = headerText.mid(p);
-            int i;
-            for(i = 2; i < s.length(); ++i)
-                if(Utils::getHorizontalAdvance(fm, s, i) > view.width())
-                {
-                    --i;
-                    break;
-                }
-            //QString s2 = s.left(i);
-            painter.drawText(0, l * fm.height() + fm.ascent(), s.left(i));
-            p += i;
-            ++l;
-        }
-        painter.setPen(fgColor);
-        painter.drawLine(0, view.top() - 2, view.width(), view.top() - 2);
-    }
-
-    painter.translate(0, view.top());
-    pDiffTextWindow->print(painter, view, line, linesPerPage);
-    painter.resetTransform();
-}
-
 void KDiff3App::slotFilePrint()
 {
     if(m_pDiffTextWindow1 == nullptr)
@@ -959,17 +923,17 @@ void KDiff3App::slotFilePrint()
 
                 painter.setPen(m_pOptions->m_colorA);
                 QString headerText1 = m_sd1.getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow1->calcTopLineInFile(line) + 1);
-                printDiffTextWindow(painter, view1, headerText1, m_pDiffTextWindow1, line, linesPerPage, m_pOptions->m_fgColor);
+                m_pDiffTextWindow1->printWindow(painter, view1, headerText1, line, linesPerPage, m_pOptions->m_fgColor);
 
                 painter.setPen(m_pOptions->m_colorB);
                 QString headerText2 = m_sd2.getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow2->calcTopLineInFile(line) + 1);
-                printDiffTextWindow(painter, view2, headerText2, m_pDiffTextWindow2, line, linesPerPage, m_pOptions->m_fgColor);
+                m_pDiffTextWindow2->printWindow(painter, view2, headerText2, line, linesPerPage, m_pOptions->m_fgColor);
 
                 if(m_bTripleDiff && m_pDiffTextWindow3 != nullptr)
                 {
                     painter.setPen(m_pOptions->m_colorC);
                     QString headerText3 = m_sd3.getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow3->calcTopLineInFile(line) + 1);
-                    printDiffTextWindow(painter, view3, headerText3, m_pDiffTextWindow3, line, linesPerPage, m_pOptions->m_fgColor);
+                    m_pDiffTextWindow3->printWindow(painter, view3, headerText3, line, linesPerPage, m_pOptions->m_fgColor);
                 }
                 painter.setClipping(false);
 

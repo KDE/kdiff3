@@ -70,6 +70,8 @@ class DiffTextWindow : public QWidget
     void setPaintingAllowed(bool bAllowPainting);
     void recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth);
     void recalcWordWrapHelper(int wrapLineVectorSize, int visibleTextWidth, int cacheListIdx);
+
+    void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, int linesPerPage, const QColor& fgColor);
     void print(RLPainter& painter, const QRect& r, int firstLine, int nofLinesPerPage);
   Q_SIGNALS:
     void resizeHeightChangedSignal(int nofVisibleLines);
