@@ -119,7 +119,7 @@ class DiffTextWindowFrame : public QWidget
     DiffTextWindow* getDiffTextWindow();
     void init();
     void setFirstLine(int firstLine);
-    void sendEncodingChangedSignal(QTextCodec* c);
+
   Q_SIGNALS:
     void fileNameChanged(const QString&, e_SrcSelector);
     void encodingChanged(QTextCodec*);
@@ -131,6 +131,8 @@ class DiffTextWindowFrame : public QWidget
     void slotReturnPressed();
     void slotBrowseButtonClicked();
 
+    void slotEncodingChanged(QTextCodec* c) { emit encodingChanged(c); };//relay signal from encoding label
+
   private:
     DiffTextWindowFrameData* d;
 };
@@ -139,16 +141,19 @@ class EncodingLabel : public QLabel
 {
     Q_OBJECT
   public:
-    EncodingLabel(const QString& text, DiffTextWindowFrame* pDiffTextWindowFrame, SourceData* psd, const QSharedPointer<Options> &pOptions);
+    EncodingLabel(const QString& text, SourceData* psd, const QSharedPointer<Options> &pOptions);
 
   protected:
     void mouseMoveEvent(QMouseEvent* ev) override;
     void mousePressEvent(QMouseEvent* ev) override;
+
+  Q_SIGNALS:
+    void encodingChanged(QTextCodec*);
+
   private Q_SLOTS:
-    void slotEncodingChanged();
+    void slotSelectEncoding();
 
   private:
-    DiffTextWindowFrame* m_pDiffTextWindowFrame; //To send "EncodingChanged" signal
     QMenu* m_pContextEncodingMenu;
     SourceData* m_pSourceData; //SourceData to get access to "isEmpty()" and "isFromBuffer()" functions
     static const int m_maxRecentEncodings = 5;

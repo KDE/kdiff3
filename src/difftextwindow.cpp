@@ -1819,7 +1819,8 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBa
     pHL2->setMargin(0);
     pHL2->setSpacing(2);
     pHL2->addWidget(d->m_pTopLine, 0);
-    d->m_pEncoding = new EncodingLabel(i18n("Encoding:"), this, psd, pOptions);
+    d->m_pEncoding = new EncodingLabel(i18n("Encoding:"), psd, pOptions);
+    connect((EncodingLabel*) d->m_pEncoding, &EncodingLabel::encodingChanged, this, &DiffTextWindowFrame::slotEncodingChanged);
 
     d->m_pLineEndStyle = new QLabel(i18n("Line end style:"));
     pHL2->addWidget(d->m_pEncoding);
@@ -1951,15 +1952,9 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
     }
 }
 
-void DiffTextWindowFrame::sendEncodingChangedSignal(QTextCodec* c)
-{
-    emit encodingChanged(c);
-}
-
-EncodingLabel::EncodingLabel(const QString& text, DiffTextWindowFrame* pDiffTextWindowFrame, SourceData* pSD, const QSharedPointer<Options> &pOptions)
+EncodingLabel::EncodingLabel(const QString& text, SourceData* pSD, const QSharedPointer<Options> &pOptions)
     : QLabel(text)
 {
-    m_pDiffTextWindowFrame = pDiffTextWindowFrame;
     m_pOptions = pOptions;
     m_pSourceData = pSD;
     m_pContextEncodingMenu = nullptr;
@@ -2033,12 +2028,12 @@ void EncodingLabel::insertCodec(const QString& visibleCodecName, QTextCodec* pCo
         if(currentTextCodecEnum == CodecMIBEnum)
             pAction->setChecked(true);
         pMenu->addAction(pAction);
-        connect(pAction, &QAction::triggered, this, &EncodingLabel::slotEncodingChanged);
+        connect(pAction, &QAction::triggered, this, &EncodingLabel::slotSelectEncoding);
         codecEnumList.append(CodecMIBEnum);
     }
 }
 
-void EncodingLabel::slotEncodingChanged()
+void EncodingLabel::slotSelectEncoding()
 {
     QAction* pAction = qobject_cast<QAction*>(sender());
     if(pAction)
@@ -2058,6 +2053,7 @@ void EncodingLabel::slotEncodingChanged()
                 recentEncodings.append(s);
             }
         }
-        m_pDiffTextWindowFrame->sendEncodingChangedSignal(pCodec);
+
+        emit encodingChanged(pCodec);
     }
 }
