@@ -2021,7 +2021,9 @@ void EncodingLabel::insertCodec(const QString& visibleCodecName, QTextCodec* pCo
     if(pCodec != nullptr && !codecEnumList.contains(CodecMIBEnum))
     {
         QAction* pAction = new QAction(pMenu); // menu takes ownership, so deleting the menu deletes the action too.
-        QLatin1String codecName(pCodec->name());
+        QByteArray nameArray = pCodec->name();
+        QLatin1String codecName = QLatin1String(nameArray);
+
         pAction->setText(visibleCodecName.isEmpty() ? codecName : visibleCodecName + QLatin1String(" (") + codecName + QLatin1String(")"));
         pAction->setData(CodecMIBEnum);
         pAction->setCheckable(true);
