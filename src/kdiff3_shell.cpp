@@ -153,7 +153,7 @@ void KDiff3Shell::optionsConfigureToolbars()
 
     // use the standard toolbar editor
     KEditToolBar dlg(factory());
-    connect(&dlg, &KEditToolBar::newToolbarConfig, this, &KDiff3Shell::applyNewToolbarConfig);
+    connect(&dlg, &KEditToolBar::newToolBarConfig, this, &KDiff3Shell::applyNewToolbarConfig);
     dlg.exec();
 }
 

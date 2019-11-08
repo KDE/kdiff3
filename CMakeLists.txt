@@ -105,6 +105,10 @@ add_definitions(
     -DQT_NO_URL_CAST_FROM_STRING # casting from string to url does not always behave as you might think
     -DQT_RESTRICTED_CAST_FROM_ASCII #casting from char*/QByteArray to QString can produce unexpected results for non-latin characters.
     -DQT_NO_CAST_TO_ASCII
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050600#disable depriated api for Qt<5.6.
+    #KF5 5.64+ flags
+    #Don't warn for API depreciated after 5.22.0
+    -DKF_DEPRECATED_WARNINGS_SINCE=ECM_GENERATEEXPORTHEADER_VERSION_VALUE(5,22,0)
 )
 
 add_subdirectory(src)
