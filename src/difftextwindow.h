@@ -48,7 +48,7 @@ class DiffTextWindow : public QWidget
 
     QString getSelection();
     int getFirstLine();
-    int calcTopLineInFile(int firstLine);
+    LineRef calcTopLineInFile(const LineRef firstLine);
 
     int getMaxTextWidth();
     LineCount getNofLines();
@@ -81,10 +81,10 @@ class DiffTextWindow : public QWidget
     void selectionEnd();
     void setFastSelectorLine(LineIndex line);
     void gotFocus();
-    void lineClicked(e_SrcSelector winIdx, int line);
+    void lineClicked(e_SrcSelector winIdx, LineRef line);
 
   public Q_SLOTS:
-    void setFirstLine(int line);
+    void setFirstLine(QtNumberType line);
     void setHorizScrollOffset(int horizScrollOffset);
     void resetSelection();
     void setFastSelectorRange(int line1, int nofLines);
@@ -104,7 +104,7 @@ class DiffTextWindow : public QWidget
 
   private:
     DiffTextWindowData* d;
-    void showStatusLine(int line);
+    void showStatusLine(const LineRef lineFromPos);
     friend class DiffTextWindowFrame;
 };
 
@@ -118,7 +118,7 @@ class DiffTextWindowFrame : public QWidget
     ~DiffTextWindowFrame() override;
     DiffTextWindow* getDiffTextWindow();
     void init();
-    void setFirstLine(int firstLine);
+    void setFirstLine(QtNumberType firstLine);
 
   Q_SIGNALS:
     void fileNameChanged(const QString&, e_SrcSelector);

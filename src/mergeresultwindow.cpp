@@ -253,7 +253,7 @@ void Diff3Line::mergeOneLine(
 
     if(bTwoInputs) // Only two input files
     {
-        if(getLineA() != -1 && getLineB().isValid())
+        if(getLineA().isValid() && getLineB().isValid())
         {
             if(pFineAB == nullptr)
             {
@@ -283,7 +283,7 @@ void Diff3Line::mergeOneLine(
     }
 
     // A is base.
-    if(getLineA().isValid() && getLineB().isValid() && getLineC() != -1)
+    if(getLineA().isValid() && getLineB().isValid() && getLineC().isValid())
     {
         if(pFineAB == nullptr && pFineBC == nullptr && pFineCA == nullptr)
         {
@@ -327,7 +327,7 @@ void Diff3Line::mergeOneLine(
             src = C;
         }
     }
-    else if(getLineA().isValid() && !getLineB().isValid() && getLineC() != -1)
+    else if(getLineA().isValid() && !getLineB().isValid() && getLineC().isValid())
     {
         if(pFineCA != nullptr)
         {
@@ -341,7 +341,7 @@ void Diff3Line::mergeOneLine(
             src = B;
         }
     }
-    else if(!getLineA().isValid() && getLineB().isValid() && getLineC() != -1)
+    else if(!getLineA().isValid() && getLineB().isValid() && getLineC().isValid())
     {
         if(pFineBC != nullptr)
         {
@@ -354,7 +354,7 @@ void Diff3Line::mergeOneLine(
             src = C;
         }
     }
-    else if(!getLineA().isValid() && !getLineB().isValid() && getLineC() != -1)
+    else if(!getLineA().isValid() && !getLineB().isValid() && getLineC().isValid())
     {
         mergeDetails = eCAdded;
         src = C;

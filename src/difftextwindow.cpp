@@ -296,7 +296,7 @@ void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QS
     painter.resetTransform();
 }
 
-void DiffTextWindow::setFirstLine(int firstLine)
+void DiffTextWindow::setFirstLine(QtNumberType firstLine)
 {
     int fontHeight = fontMetrics().lineSpacing();
 
@@ -437,25 +437,31 @@ void DiffTextWindow::setFastSelectorRange(int line1, int nofLines)
         update();
     }
 }
+/*
+    Takes the line number estimated from mouse position and converts it to the actual line in
+    the file. Then sets the status message accordingly.
 
-void DiffTextWindow::showStatusLine(int line)
+    emits lineClicked signal.
+*/
+void DiffTextWindow::showStatusLine(const LineRef aproxLine)
 {
-    int d3lIdx = convertLineToDiff3LineIdx(line);
+    int d3lIdx = convertLineToDiff3LineIdx(aproxLine);
+
     if(d->m_pDiff3LineVector != nullptr && d3lIdx >= 0 && d3lIdx < (int)d->m_pDiff3LineVector->size())
     {
         const Diff3Line* pD3l = (*d->m_pDiff3LineVector)[d3lIdx];
         if(pD3l != nullptr)
         {
-            int l = pD3l->getLineInFile(d->m_winIdx);
+            LineRef actualLine = pD3l->getLineInFile(d->m_winIdx);
 
-            QString s;
-            if(l != -1)
-                s = i18n("File %1: Line %2", d->m_filename, l + 1);
+            QString message;
+            if(actualLine.isValid())
+                message = i18n("File %1: Line %2", d->m_filename, actualLine + 1);
             else
-                s = i18n("File %1: Line not available", d->m_filename);
-            if(d->m_pStatusBar != nullptr) d->m_pStatusBar->showMessage(s);
+                message = i18n("File %1: Line not available", d->m_filename);
+            if(d->m_pStatusBar != nullptr) d->m_pStatusBar->showMessage(message);
 
-            emit lineClicked(d->m_winIdx, l);
+            emit lineClicked(d->m_winIdx, actualLine);
         }
     }
 }
@@ -654,11 +660,11 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
     {
         int fontHeight = fontMetrics().lineSpacing();
 
-        if(d->m_selection.getOldLastLine() != -1)
+        if(d->m_selection.getOldLastLine().isValid())
         {
             int lastLine;
             int firstLine;
-            if(d->m_selection.getOldFirstLine() != -1)
+            if(d->m_selection.getOldFirstLine().isValid())
             {
                 firstLine = min3(d->m_selection.getOldFirstLine(), d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
                 lastLine = max3(d->m_selection.getOldFirstLine(), d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
@@ -1857,20 +1863,20 @@ void DiffTextWindowFrame::init()
     }
 }
 
-// Search for the first visible line (search loop needed when no line exist for this file.)
-int DiffTextWindow::calcTopLineInFile(int firstLine)
+// Search for the first visible line (search loop needed when no line exists for this file.)
+LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine)
 {
-    int l = -1;
+    LineRef currentLine;
     for(int i = convertLineToDiff3LineIdx(firstLine); i < (int)d->m_pDiff3LineVector->size(); ++i)
     {
         const Diff3Line* d3l = (*d->m_pDiff3LineVector)[i];
-        l = d3l->getLineInFile(d->m_winIdx);
-        if(l != -1) break;
+        currentLine = d3l->getLineInFile(d->m_winIdx);
+        if(currentLine.isValid()) break;
     }
-    return l;
+    return currentLine;
 }
 
-void DiffTextWindowFrame::setFirstLine(int firstLine)
+void DiffTextWindowFrame::setFirstLine(QtNumberType firstLine)
 {
     DiffTextWindow* pDTW = d->m_pDiffTextWindow;
     if(pDTW && pDTW->d->m_pDiff3LineVector)
@@ -1878,15 +1884,15 @@ void DiffTextWindowFrame::setFirstLine(int firstLine)
         QString s = i18n("Top line");
         int lineNumberWidth = (int)log10((double)std::max(pDTW->d->m_size, 1)) + 1;
 
-        int l = pDTW->calcTopLineInFile(firstLine);
+        LineRef topVisiableLine = pDTW->calcTopLineInFile(firstLine);
 
         int w = Utils::getHorizontalAdvance(d->m_pTopLine->fontMetrics(), s + ' ' + QString().fill('0', lineNumberWidth));
         d->m_pTopLine->setMinimumWidth(w);
 
-        if(l == -1)
+        if(!topVisiableLine.isValid())
             s = i18n("End");
         else
-            s += ' ' + QString::number(l + 1);
+            s += ' ' + QString::number(topVisiableLine + 1);
 
         d->m_pTopLine->setText(s);
         d->m_pTopLine->repaint();
