@@ -1126,9 +1126,9 @@ void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
 {
     m_pDiff3LineList = pD3ll;
     m_pDiff3LineVector = pD3lv;
-    m_pLineDataA = pldA;
-    m_pLineDataB = pldB;
-    m_pLineDataC = pldC;
+    mLineDataA = pldA;
+    mLineDataB = pldB;
+    mLineDataC = pldC;
     m_sizeA = sizeA;
     m_sizeB = sizeB;
     m_sizeC = sizeC;

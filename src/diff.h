@@ -23,7 +23,7 @@
 
 class Options;
 
-//enum must be sequential with no gaps to allow loop interiation of values
+//These enums must be sequential with no gaps to allow loop interiation of values
 enum e_SrcSelector
 {
    Min = -1,
@@ -131,17 +131,34 @@ class Diff3LineVector;
 
 class DiffBufferInfo
 {
-  public:
-    const QVector<LineData>* m_pLineDataA;
-    const QVector<LineData>* m_pLineDataB;
-    const QVector<LineData>* m_pLineDataC;
+  private:
+    const QVector<LineData>* mLineDataA;
+    const QVector<LineData>* mLineDataB;
+    const QVector<LineData>* mLineDataC;
+
     LineCount m_sizeA;
     LineCount m_sizeB;
     LineCount m_sizeC;
     const Diff3LineList* m_pDiff3LineList;
     const Diff3LineVector* m_pDiff3LineVector;
+public:
     void init(Diff3LineList* d3ll, const Diff3LineVector* d3lv,
               const QVector<LineData>* pldA, LineCount sizeA, const QVector<LineData>* pldB, LineCount sizeB, const QVector<LineData>* pldC, LineCount sizeC);
+
+    inline const QVector<LineData>* getLineData(e_SrcSelector srcIndex) const
+    {
+        switch(srcIndex)
+        {
+            case A:
+                return mLineDataA;
+            case B:
+                return mLineDataB;
+            case C:
+                return mLineDataC;
+            default:
+                return nullptr;
+        }
+    }
 };
 
 class Diff3Line
@@ -160,7 +177,7 @@ class Diff3Line
     bool bWhiteLineB  = false;
     bool bWhiteLineC  = false;
 
-    DiffList* pFineAB = nullptr; // These are 0 only if completely equal or if either source doesn't exist.
+    DiffList* pFineAB = nullptr; // These are NULL only if completely equal or if either source doesn't exist.
     DiffList* pFineBC = nullptr;
     DiffList* pFineCA = nullptr;
 
@@ -199,9 +216,11 @@ class Diff3Line
     const LineData* getLineData(e_SrcSelector src) const
     {
         Q_ASSERT(m_pDiffBufferInfo != nullptr);
-        if(src == A && lineA >= 0) return &(*m_pDiffBufferInfo->m_pLineDataA)[lineA];
-        if(src == B && lineB >= 0) return &(*m_pDiffBufferInfo->m_pLineDataB)[lineB];
-        if(src == C && lineC >= 0) return &(*m_pDiffBufferInfo->m_pLineDataC)[lineC];
+        //Use at here not [] to avoid using really wierd syntax
+        if(src == A && lineA >= 0) return &m_pDiffBufferInfo->getLineData(src)->at(lineA);
+        if(src == B && lineB >= 0) return &m_pDiffBufferInfo->getLineData(src)->at(lineB);
+        if(src == C && lineC >= 0) return &m_pDiffBufferInfo->getLineData(src)->at(lineC);
+
         return nullptr;
     }
     const QString getString(const e_SrcSelector src) const
