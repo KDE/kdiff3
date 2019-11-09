@@ -98,9 +98,7 @@ bool LineData::equal(const LineData& l1, const LineData& l2, bool bStrict)
 }
 
 // First step
-void calcDiff3LineListUsingAB(
-    const DiffList* pDiffListAB,
-    Diff3LineList& d3ll)
+void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
 {
     // First make d3ll for AB (from pDiffListAB)
 
@@ -158,21 +156,19 @@ void calcDiff3LineListUsingAB(
         Q_ASSERT(d.numberOfEquals() >= 0);
 
         qCDebug(kdiffCore) << "lineA = " << d3l.getLineA() << ", lineB = " << d3l.getLineB() ;
-        d3ll.push_back(d3l);
+        push_back(d3l);
     }
     qCInfo(kdiffMain) << "Leave: calcDiff3LineListUsingAB" ;
 }
 
 // Second step
-void calcDiff3LineListUsingAC(
-    const DiffList* pDiffListAC,
-    Diff3LineList& d3ll)
+void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
 {
     ////////////////
     // Now insert data from C using pDiffListAC
 
     DiffList::const_iterator i = pDiffListAC->begin();
-    Diff3LineList::iterator i3 = d3ll.begin();
+    Diff3LineList::iterator i3 = begin();
     LineRef::LineType lineA = 0;
     LineRef::LineType lineC = 0;
     Diff d(0, 0, 0);
@@ -209,7 +205,7 @@ void calcDiff3LineListUsingAC(
         else if(d.diff1() > 0 && d.diff2() > 0)
         {
             d3l.setLineC(lineC);
-            d3ll.insert(i3, d3l);
+            insert(i3, d3l);
             d.adjustDiff1(-1);
             d.adjustDiff2(-1);
             ++lineA;
@@ -223,7 +219,7 @@ void calcDiff3LineListUsingAC(
         else if(d.diff2() > 0)
         {
             d3l.setLineC(lineC);
-            d3ll.insert(i3, d3l);
+            insert(i3, d3l);
             d.adjustDiff2(-1);
             ++lineC;
         }
@@ -231,9 +227,7 @@ void calcDiff3LineListUsingAC(
 }
 
 // Third step
-void calcDiff3LineListUsingBC(
-    const DiffList* pDiffListBC,
-    Diff3LineList& d3ll)
+void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
 {
     ////////////////
     // Now improve the position of data from C using pDiffListBC
@@ -243,8 +237,8 @@ void calcDiff3LineListUsingBC(
     // information will be used here.
 
     DiffList::const_iterator i = pDiffListBC->begin();
-    Diff3LineList::iterator i3b = d3ll.begin();
-    Diff3LineList::iterator i3c = d3ll.begin();
+    Diff3LineList::iterator i3b = begin();
+    Diff3LineList::iterator i3c = begin();
     LineRef::LineType lineB = 0;
     LineRef::LineType lineC = 0;
     Diff d(0, 0, 0);
@@ -266,14 +260,14 @@ void calcDiff3LineListUsingBC(
         if(d.numberOfEquals() > 0)
         {
             // Find the corresponding lineB and lineC
-            while(i3b != d3ll.end() && i3b->getLineB() != lineB)
+            while(i3b != end() && i3b->getLineB() != lineB)
                 ++i3b;
 
-            while(i3c != d3ll.end() && i3c->getLineC() != lineC)
+            while(i3c != end() && i3c->getLineC() != lineC)
                 ++i3c;
 
-            Q_ASSERT(i3b != d3ll.end());
-            Q_ASSERT(i3c != d3ll.end());
+            Q_ASSERT(i3b != end());
+            Q_ASSERT(i3c != end());
 
             if(i3b == i3c)
             {
@@ -290,16 +284,16 @@ void calcDiff3LineListUsingBC(
                 Diff3LineList::iterator i3b1 = i3b;
                 while(i3c1 != i3b && i3b1 != i3c)
                 {
-                    Q_ASSERT(i3b1 != d3ll.end() || i3c1 != d3ll.end());
-                    if(i3c1 != d3ll.end()) ++i3c1;
-                    if(i3b1 != d3ll.end()) ++i3b1;
+                    Q_ASSERT(i3b1 != end() || i3c1 != end());
+                    if(i3c1 != end()) ++i3c1;
+                    if(i3b1 != end()) ++i3b1;
                 }
 
                 if(i3c1 == i3b && !i3b->isEqualAB()) // i3c before i3b
                 {
                     Diff3LineList::iterator i3 = i3c;
                     int nofDisturbingLines = 0;
-                    while(i3 != i3b && i3 != d3ll.end())
+                    while(i3 != i3b && i3 != end())
                     {
                         if(i3->getLineB().isValid())
                             ++nofDisturbingLines;
@@ -308,7 +302,7 @@ void calcDiff3LineListUsingBC(
 
                     if(nofDisturbingLines > 0) //&& nofDisturbingLines < d.nofEquals*d.nofEquals+4 )
                     {
-                        Diff3LineList::iterator i3_last_equal_A = d3ll.end();
+                        Diff3LineList::iterator i3_last_equal_A = end();
 
                         i3 = i3c;
                         while(i3 != i3b)
@@ -324,7 +318,7 @@ void calcDiff3LineListUsingBC(
                    * we've found a line in A that is equal to one in B
                    * somewhere between i3c and i3b
                    */
-                        bool before_or_on_equal_line_in_A = (i3_last_equal_A != d3ll.end());
+                        bool before_or_on_equal_line_in_A = (i3_last_equal_A != end());
 
                         // Move the disturbing lines up, out of sight.
                         i3 = i3c;
@@ -347,7 +341,7 @@ void calcDiff3LineListUsingBC(
 
                                 i3->bAEqB = false;
                                 i3->bBEqC = false;
-                                d3ll.insert(i3c, d3l);
+                                insert(i3c, d3l);
                             }
 
                             if(i3 == i3_last_equal_A)
@@ -375,7 +369,7 @@ void calcDiff3LineListUsingBC(
                 {
                     Diff3LineList::iterator i3 = i3b;
                     int nofDisturbingLines = 0;
-                    while(i3 != i3c && i3 != d3ll.end())
+                    while(i3 != i3c && i3 != end())
                     {
                         if(i3->getLineC().isValid())
                             ++nofDisturbingLines;
@@ -384,7 +378,7 @@ void calcDiff3LineListUsingBC(
 
                     if(nofDisturbingLines > 0) //&& nofDisturbingLines < d.nofEquals*d.nofEquals+4 )
                     {
-                        Diff3LineList::iterator i3_last_equal_A = d3ll.end();
+                        Diff3LineList::iterator i3_last_equal_A = end();
 
                         i3 = i3b;
                         while(i3 != i3c)
@@ -400,7 +394,7 @@ void calcDiff3LineListUsingBC(
                    * we've found a line in A that is equal to one in C
                    * somewhere between i3b and i3c
                    */
-                        bool before_or_on_equal_line_in_A = (i3_last_equal_A != d3ll.end());
+                        bool before_or_on_equal_line_in_A = (i3_last_equal_A != end());
 
                         // Move the disturbing lines up.
                         i3 = i3b;
@@ -423,7 +417,7 @@ void calcDiff3LineListUsingBC(
 
                                 i3->bAEqC = false;
                                 i3->bBEqC = false;
-                                d3ll.insert(i3b, d3l);
+                                insert(i3b, d3l);
                             }
 
                             if(i3 == i3_last_equal_A)
@@ -464,7 +458,7 @@ void calcDiff3LineListUsingBC(
             {
                 // Take B from this line and move it up as far as possible
                 d3l.setLineB(lineB);
-                d3ll.insert(i3b, d3l);
+                insert(i3b, d3l);
                 i3->getLineB().invalidate();
             }
             else

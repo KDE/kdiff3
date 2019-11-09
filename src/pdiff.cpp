@@ -213,7 +213,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
 
                 pp.setInformation(i18n("Linediff: A <-> B"));
                 qCInfo(kdiffMain) << i18n("Linediff: A <-> B") ;
-                calcDiff3LineListUsingAB(&m_diffList12, m_diff3LineList);
+                m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
                 pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay());
                 if(m_sd1.getSizeBytes() == 0) pTotalDiffStatus->bTextAEqB = false;
 
@@ -251,7 +251,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                 m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12, A, B,
                         m_pOptionDialog->getOptions());
 
-                calcDiff3LineListUsingAB(&m_diffList12, m_diff3LineList);
+                m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
             }
             pp.step();
             pp.setInformation(i18n("Diff: A <-> C"));
@@ -260,7 +260,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                 m_manualDiffHelpList.runDiff(m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13, A, C,
                         m_pOptionDialog->getOptions());
 
-                calcDiff3LineListUsingAC(&m_diffList13, m_diff3LineList);
+                m_diff3LineList.calcDiff3LineListUsingAC(&m_diffList13);
                 correctManualDiffAlignment(m_diff3LineList, &m_manualDiffHelpList);
                 calcDiff3LineListTrim(m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList);
             }
@@ -272,7 +272,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                         m_pOptionDialog->getOptions());
                 if(m_pOptions->m_bDiff3AlignBC)
                 {
-                    calcDiff3LineListUsingBC(&m_diffList23, m_diff3LineList);
+                    m_diff3LineList.calcDiff3LineListUsingBC(&m_diffList23);
                     correctManualDiffAlignment(m_diff3LineList, &m_manualDiffHelpList);
                     calcDiff3LineListTrim(m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList);
                 }

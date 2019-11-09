@@ -277,6 +277,11 @@ class Diff3LineList : public std::list<Diff3Line>
     bool fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2);
     void calcDiff3LineVector(Diff3LineVector& d3lv);
     void calcWhiteDiff3Lines(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC);
+
+    void calcDiff3LineListUsingAB(const DiffList* pDiffListAB);
+    void calcDiff3LineListUsingAC(const DiffList* pDiffListAC);
+    void calcDiff3LineListUsingBC(const DiffList* pDiffListBC);
+    
     //TODO: Add safety guards to prevent list from getting too large. Same problem as with QLinkedList.
     int size() const
     {
@@ -418,18 +423,6 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
 };
 
 void calcDiff(const QString &line1, const QString &line2, DiffList& diffList, int match, int maxSearchRange);
-
-void calcDiff3LineListUsingAB(
-    const DiffList* pDiffListAB,
-    Diff3LineList& d3ll);
-
-void calcDiff3LineListUsingAC(
-    const DiffList* pDiffListAC,
-    Diff3LineList& d3ll);
-
-void calcDiff3LineListUsingBC(
-    const DiffList* pDiffListBC,
-    Diff3LineList& d3ll);
 
 void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManualDiffHelpList);
 
