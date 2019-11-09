@@ -261,8 +261,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                         m_pOptionDialog->getOptions());
 
                 m_diff3LineList.calcDiff3LineListUsingAC(&m_diffList13);
-                correctManualDiffAlignment(m_diff3LineList, &m_manualDiffHelpList);
-                calcDiff3LineListTrim(m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList);
+                m_diff3LineList.correctManualDiffAlignment(&m_manualDiffHelpList);
+                m_diff3LineList.calcDiff3LineListTrim(m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList);
             }
             pp.step();
             pp.setInformation(i18n("Diff: B <-> C"));
@@ -273,8 +273,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                 if(m_pOptions->m_bDiff3AlignBC)
                 {
                     m_diff3LineList.calcDiff3LineListUsingBC(&m_diffList23);
-                    correctManualDiffAlignment(m_diff3LineList, &m_manualDiffHelpList);
-                    calcDiff3LineListTrim(m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList);
+                    m_diff3LineList.correctManualDiffAlignment(&m_manualDiffHelpList);
+                    m_diff3LineList.calcDiff3LineListTrim(m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList);
                 }
             }
             pp.step();

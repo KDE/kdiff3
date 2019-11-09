@@ -671,7 +671,7 @@ bool ManualDiffHelpList::runDiff(const QVector<LineData>* p1, LineRef size1, con
     return true;
 }
 
-void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManualDiffHelpList)
+void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHelpList)
 {
     if(pManualDiffHelpList->empty())
         return;
@@ -681,7 +681,7 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
     ManualDiffHelpList::iterator iMDHL;
     for(iMDHL = pManualDiffHelpList->begin(); iMDHL != pManualDiffHelpList->end(); ++iMDHL)
     {
-        Diff3LineList::iterator i3 = d3ll.begin();
+        Diff3LineList::iterator i3 = begin();
         e_SrcSelector missingWinIdx = None;
         int alignedSum = (iMDHL->getLine1(A) < 0 ? 0 : 1) + (iMDHL->getLine1(B) < 0 ? 0 : 1) + (iMDHL->getLine1(C) < 0 ? 0 : 1);
         if(alignedSum == 2)
@@ -699,7 +699,7 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
         // At the first aligned line, move up the two other lines into new d3ls until the second input is aligned
         // Then move up the third input until all three lines are aligned.
         int wi = None;
-        for(; i3 != d3ll.end(); ++i3)
+        for(; i3 != end(); ++i3)
         {
             for(wi = A; wi <= Max; ++wi)
             {
@@ -717,7 +717,7 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
 
             // Move lines up until the next firstLine is found. Omit wi from move and search.
             int wi2 = None;
-            for(; i3 != d3ll.end(); ++i3)
+            for(; i3 != end(); ++i3)
             {
                 for(wi2 = A; wi2 <= C; ++wi2)
                 {
@@ -756,7 +756,7 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
                     i3->bAEqB = false;
                     i3->bAEqC = false;
                     i3->bBEqC = false;
-                    d3ll.insert(iDest, d3l);
+                    insert(iDest, d3l);
                 }
                 else
                 {
@@ -788,7 +788,7 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
 
                     if(missingWinIdx != 0)
                     {
-                        for(; i3 != d3ll.end(); ++i3)
+                        for(; i3 != end(); ++i3)
                         {
                             e_SrcSelector wi3 = missingWinIdx;
                             if(i3->getLineInFile((e_SrcSelector)wi3) >= 0)
@@ -822,7 +822,7 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
                                     i3->bAEqC = false;
                                     i3->bBEqC = false;
                                 }
-                                d3ll.insert(iDest, d3l);
+                                insert(iDest, d3l);
                             }
                         } // for(), searching for wi3
                     }
@@ -834,16 +834,16 @@ void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManual
 }
 
 // Fourth step
-void calcDiff3LineListTrim(
-    Diff3LineList& d3ll, const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList)
+void Diff3LineList::calcDiff3LineListTrim(
+    const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList)
 {
     const Diff3Line d3l_empty;
-    d3ll.remove(d3l_empty);
+    remove(d3l_empty);
 
-    Diff3LineList::iterator i3 = d3ll.begin();
-    Diff3LineList::iterator i3A = d3ll.begin();
-    Diff3LineList::iterator i3B = d3ll.begin();
-    Diff3LineList::iterator i3C = d3ll.begin();
+    Diff3LineList::iterator i3 = begin();
+    Diff3LineList::iterator i3A = begin();
+    Diff3LineList::iterator i3B = begin();
+    Diff3LineList::iterator i3C = begin();
 
     int line = 0;  // diff3line counters
     int lineA = 0; //
@@ -855,7 +855,7 @@ void calcDiff3LineListTrim(
     // The iterators i3A, i3B, i3C and corresponding lineA, lineB and lineC stop at empty lines, if found.
     // If possible, then the texts from the look ahead will be moved back to the empty places.
 
-    for(; i3 != d3ll.end(); ++i3, ++line)
+    for(; i3 != end(); ++i3, ++line)
     {
         if(iMDHL != pManualDiffHelpList->end())
         {
@@ -1099,7 +1099,7 @@ void calcDiff3LineListTrim(
         }
     }
 
-    d3ll.remove(d3l_empty);
+    remove(d3l_empty);
 
     /*
 

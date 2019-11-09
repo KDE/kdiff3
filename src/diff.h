@@ -126,6 +126,8 @@ class LineData
     static bool equal(const LineData& l1, const LineData& l2, bool bStrict);
 };
 
+class ManualDiffHelpList; // A list of corresponding ranges
+
 class Diff3LineList;
 class Diff3LineVector;
 
@@ -164,22 +166,24 @@ public:
 class Diff3Line
 {
   private:
+    friend class Diff3LineList;
     LineRef lineA;
     LineRef lineB;
     LineRef lineC;
-  public:
 
     bool bAEqC = false; // These are true if equal or only white-space changes exist.
     bool bBEqC = false;
     bool bAEqB = false;
 
-    bool bWhiteLineA  = false;
-    bool bWhiteLineB  = false;
+  public:
+    bool bWhiteLineA = false;
+    bool bWhiteLineB = false;
     bool bWhiteLineC  = false;
 
     DiffList* pFineAB = nullptr; // These are NULL only if completely equal or if either source doesn't exist.
     DiffList* pFineBC = nullptr;
     DiffList* pFineCA = nullptr;
+
 
     int linesNeededForDisplay = 1;    // Due to wordwrap
     int sumLinesNeededForDisplay = 0; // For fast conversion to m_diff3WrapLineVector
@@ -282,6 +286,11 @@ class Diff3LineList : public std::list<Diff3Line>
     void calcDiff3LineListUsingAC(const DiffList* pDiffListAC);
     void calcDiff3LineListUsingBC(const DiffList* pDiffListBC);
     
+    void correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHelpList);
+
+    void calcDiff3LineListTrim(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList);
+
+
     LineCount recalcWordWrap()
     {
         LineCount sumOfLines = 0;
@@ -295,6 +304,7 @@ class Diff3LineList : public std::list<Diff3Line>
         
         return sumOfLines;
     }
+    
     //TODO: Add safety guards to prevent list from getting too large. Same problem as with QLinkedList.
     int size() const
     {
@@ -370,7 +380,6 @@ class TotalDiffStatus
     int nofWhitespaceConflicts = 0;
 };
 
-class ManualDiffHelpList; // A list of corresponding ranges
 // Three corresponding ranges. (Minimum size of a valid range is one line.)
 class ManualDiffHelpEntry
 {
@@ -436,11 +445,6 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
 };
 
 void calcDiff(const QString &line1, const QString &line2, DiffList& diffList, int match, int maxSearchRange);
-
-void correctManualDiffAlignment(Diff3LineList& d3ll, ManualDiffHelpList* pManualDiffHelpList);
-
-void calcDiff3LineListTrim(Diff3LineList& d3ll, const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList);
-
 
 
 bool fineDiff(
