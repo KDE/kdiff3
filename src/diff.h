@@ -282,6 +282,19 @@ class Diff3LineList : public std::list<Diff3Line>
     void calcDiff3LineListUsingAC(const DiffList* pDiffListAC);
     void calcDiff3LineListUsingBC(const DiffList* pDiffListBC);
     
+    LineCount recalcWordWrap()
+    {
+        LineCount sumOfLines = 0;
+
+        for(Diff3Line d3l: *this)
+        {
+            d3l.linesNeededForDisplay = 1;
+            d3l.sumLinesNeededForDisplay = sumOfLines;
+            sumOfLines += d3l.linesNeededForDisplay;
+        }
+        
+        return sumOfLines;
+    }
     //TODO: Add safety guards to prevent list from getting too large. Same problem as with QLinkedList.
     int size() const
     {
