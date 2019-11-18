@@ -102,17 +102,7 @@ class SourceData
         */
         bool preprocess(QTextCodec* pEncoding, bool removeComments);
         void reset();
-        Q_DECL_DEPRECATED void removeComments();
         Q_DECL_DEPRECATED void copyBufFrom(const FileData& src);
-
-        void checkLineForComments(
-            const QChar* p,          // pointer to start of buffer
-            int& i,                  // index of current position (in, out)
-            int size,                // size of buffer
-            bool& bWhite,            // false if this line contains nonwhite characters (in, out)
-            bool& bCommentInLine,    // true if any comment is within this line (in, out)
-            bool& bStartsOpenComment // true if the line ends within an comment (out)
-        );
 
         bool isEmpty() { return m_size == 0; }
 
