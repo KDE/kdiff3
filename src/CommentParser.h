@@ -19,6 +19,7 @@
 #ifndef COMMENTPARSER_H
 #define COMMENTPARSER_H
 
+#include <vector>
 #include <QChar>
 #include <QString>
 
@@ -27,6 +28,7 @@ class CommentParser
   public:
     virtual void processChar(const QString &line, const QChar &inChar) = 0;
     virtual void processLine(const QString &line) = 0;
+    virtual void removeComment(QString &line) = 0;
     virtual bool inComment() const = 0;
     virtual bool isPureComment() const = 0;
     virtual ~CommentParser(){};
@@ -40,9 +42,10 @@ class DefaultCommentParser : public CommentParser
 
   public:
     void processLine(const QString &line) override;
-
     inline bool inComment() const override { return mCommentType != none; };
     inline bool isPureComment() const override { return mIsPureComment == yes; };
+
+    void removeComment(QString &line) override;
   protected:
     friend class CommentParserTest;
 
@@ -52,6 +55,18 @@ class DefaultCommentParser : public CommentParser
     inline bool inString(){ return bInString; }
   private:
     QChar mLastChar, mStartChar;
+
+    struct CommentRange
+    {
+          qint32 startOffset = 0;
+          qint32 endOffset = 0;
+    };
+
+    qint32 offset = -1;
+
+    CommentRange lastComment;
+
+    std::vector<CommentRange> comments;
 
     bool isFirstLine = false;
     TriState mIsPureComment = unknown;

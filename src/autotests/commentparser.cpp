@@ -128,9 +128,15 @@ class CommentParserTest : public QObject
         QVERIFY(test.isPureComment());
 
         //Escape squeances not relavate to comments
+        test = DefaultCommentParser();
         test.processLine("/*  comment \\*/");
         QVERIFY(!test.inComment());
         QVERIFY(test.isPureComment());
+
+        test = DefaultCommentParser();
+        test.processLine("  int i = 8 / 8 * 3;/* comment*/");
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
 
         //invalid in C++ should not be flagged as pure comment
         test.processLine("/*  comment */ */");
@@ -138,11 +144,13 @@ class CommentParserTest : public QObject
         QVERIFY(!test.isPureComment());
 
         //leading whitespace
+        test = DefaultCommentParser();
         test.processLine("\t  \t  /*  comment */");
         QVERIFY(!test.inComment());
         QVERIFY(test.isPureComment());
 
         //trailing whitespace
+        test = DefaultCommentParser();
         test.processLine("\t  \t  /*  comment */    ");
         QVERIFY(!test.inComment());
         QVERIFY(test.isPureComment());
@@ -258,6 +266,87 @@ class CommentParserTest : public QObject
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
         QVERIFY(!test.isPureComment());
+    }
+
+    void removeComment()
+    {
+        DefaultCommentParser test;
+        QString line=QLatin1String("  int i = 8 / 8 * 3;"), correct=QLatin1String("  int i = 8 / 8 * 3;");
+
+        test.processLine(line);
+        test.removeComment(line);
+        QVERIFY(line == correct);
+        
+        test = DefaultCommentParser();
+        correct = line = QLatin1String("  //int i = 8 / 8 * 3;");
+
+        test.processLine(line);
+        test.removeComment(line);
+        QVERIFY(line == correct);
+
+        test = DefaultCommentParser();
+        correct = line = QLatin1String("//  int i = 8 / 8 * 3;");
+
+        test.processLine(line);
+        test.removeComment(line);
+        QVERIFY(line == correct);
+
+        test = DefaultCommentParser();
+        line = QLatin1String("  int i = 8 / 8 * 3;// comment");
+        correct = QLatin1String("  int i = 8 / 8 * 3;          ");
+
+        test.processLine(line);
+        test.removeComment(line);
+        QVERIFY(line == correct);
+        QVERIFY(line.length() == correct.length());
+
+        test = DefaultCommentParser();
+        line = QLatin1String("  int i = 8 / 8 * 3;/* comment");
+        correct = QLatin1String("  int i = 8 / 8 * 3;          ");
+
+        test.processLine(line);
+        test.removeComment(line);
+        QVERIFY(line == correct);
+        
+        correct = line = QLatin1String("  int i = 8 / 8 * 3;/* mot a comment");
+        test.processLine(line);
+        test.removeComment(line);
+        QVERIFY(line == correct);
+        QVERIFY(line.length() == correct.length());
+
+        //end comment mid-line
+        line = QLatin1String("d  */ why");
+        correct = QLatin1String("      why");
+
+        test.processLine(line);
+        test.removeComment(line);
+        QVERIFY(line == correct);
+        QVERIFY(line.length() == correct.length());
+        
+        test = DefaultCommentParser();
+        line = QLatin1String("  int i = 8 / 8 * 3;/* comment*/");
+        correct = QLatin1String("  int i = 8 / 8 * 3;            ");
+
+        test.processLine(line);
+        test.removeComment(line);
+        QVERIFY(line == correct);
+        QVERIFY(line.length() == correct.length());
+        
+        test = DefaultCommentParser();
+        correct = line = QLatin1String("  /*int i = 8 / 8 * 3;/* comment*/");
+
+        test.processLine(line);
+        test.removeComment(line);
+        QVERIFY(line == correct);
+
+        //line with multiple comments wierd but legal c/c++
+        test = DefaultCommentParser();
+        line = QLatin1String("  int /*why?*/ i = 8 / 8 * 3;/* comment*/");
+        correct = QLatin1String("  int          i = 8 / 8 * 3;            ");
+        test.processLine(line);
+        test.removeComment(line);
+        QVERIFY(line == correct);
+        QVERIFY(line.length() == correct.length());
     }
 };
 

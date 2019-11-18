@@ -453,7 +453,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             }
         }
 
-        if(!m_normalData.preprocess(pEncoding1))
+        if(!m_normalData.preprocess(pEncoding1, false))
         {
             errors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
             return errors;
@@ -522,7 +522,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         return errors;
     }
 
-    if(!m_lmppData.preprocess(pEncoding2))
+    if(!m_lmppData.preprocess(pEncoding2, true))
     {
         errors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
         return errors;
@@ -549,6 +549,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         Q_ASSERT(vSize < TYPE_MAX(int));
         for(int i = 0; i < vSize; ++i)
         {
+            Q_ASSERT(m_lmppData.m_v[i].isPureComment() != m_normalData.m_v[i].isPureComment());
             m_normalData.m_v[i].setPureComment(m_lmppData.m_v[i].isPureComment());
             //Don't crash if vSize is too large.
             if(i == TYPE_MAX(int))
@@ -560,7 +561,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
 }
 
 /** Prepare the linedata vector for every input line.*/
-bool SourceData::FileData::preprocess(QTextCodec* pEncoding)
+bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments)
 {
     if(m_pBuf == nullptr)
         return true;
@@ -656,6 +657,9 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding)
                 break;
         }
         parser->processLine(line);
+        if(removeComments)
+            parser->removeComment(line);
+
         //kdiff3 internally uses only unix style endings for simplicity.
         m_v.push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isPureComment()));
         m_unicodeBuf->append(line).append('\n');

@@ -96,7 +96,11 @@ class SourceData
         bool readFile(FileAccess& file);
         bool readFile(const QString& filename);
         bool writeFile(const QString& filename);
-        bool preprocess(QTextCodec* pEncoding);
+
+        /*
+          TODO: Remove second parameter when pre-processing has been switched to use disk based data
+        */
+        bool preprocess(QTextCodec* pEncoding, bool removeComments);
         void reset();
         Q_DECL_DEPRECATED void removeComments();
         Q_DECL_DEPRECATED void copyBufFrom(const FileData& src);

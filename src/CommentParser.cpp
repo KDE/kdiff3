@@ -57,11 +57,14 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 {
                     mCommentType = singleLine;
                     mIsPureComment = line.startsWith(QLatin1String("//")) ? yes : no;
+                    lastComment.startOffset = offset - 1;
                 }
                 else if(mLastChar == '*' && mCommentType == multiLine)
                 {
                     //ending multi-line comment
                     mCommentType = none;
+                    lastComment.endOffset = offset + 1; //include last char in offset
+                    comments.push_back(lastComment);
                     if(!isFirstLine)
                         mIsPureComment = line.endsWith(QLatin1String("*/")) ? yes : mIsPureComment;
                 }
@@ -75,18 +78,28 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     mCommentType = multiLine;
                     mIsPureComment = line.startsWith(QLatin1String("/*")) ? yes : mIsPureComment;
                     isFirstLine = true;
+                    lastComment.startOffset = offset - 1;
                 }
                 break;
             case '\n':
                 if(mCommentType == singleLine)
                 {
                     mCommentType = none;
+                    lastComment.endOffset = offset;
+                    comments.push_back(lastComment);
                 }
 
                 if(mCommentType == multiLine && !isFirstLine)
                 {
                     mIsPureComment = yes;
                 }
+
+                if(lastComment.startOffset > 0 && lastComment.endOffset == 0)
+                {
+                    lastComment.endOffset = offset;
+                    comments.push_back(lastComment);
+                }
+
                 isFirstLine = false;
 
                 break;
@@ -107,10 +120,19 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
         bIsEscaped = false;
         mLastChar = QChar();
     }
+
+    ++offset;
 };
 
+/*
+    Find comments if any and set is pure comment flag it it has nothing but whitespace and comments.
+*/
 void DefaultCommentParser::processLine(const QString &line)
 {
+    offset = line.indexOf(QRegularExpression("[\\S]", QRegularExpression::UseUnicodePropertiesOption));
+    lastComment.startOffset = lastComment.endOffset = 0; //reset these for each line
+    comments.clear();
+
     //remove trailing and ending spaces.
     const QString trimmedLine = line.trimmed();
 
@@ -120,4 +142,26 @@ void DefaultCommentParser::processLine(const QString &line)
     }
 
     processChar(trimmedLine, '\n');
+}
+
+/*
+ Modifies the input data, and replaces comments with whitespace when the line contains other data too. 
+*/
+void DefaultCommentParser::removeComment(QString &line)
+{
+    if(isPureComment() || lastComment.startOffset == lastComment.endOffset) return;
+
+    for(const CommentRange &range : comments)
+    {
+        /*
+            Q_ASSERT isn't useful during auto testing as it causes the QTest not to show the actual line that
+            the test failed on.
+        */
+#ifndef AUTOTEST
+        Q_ASSERT(range.endOffset <= line.length() && range.startOffset <= line.length());
+        Q_ASSERT(range.endOffset >= range.startOffset);
+#endif
+        qint32 size = range.endOffset - range.startOffset;
+        line.replace(range.startOffset, size, QString(" ").repeated(size));
+    }
 }

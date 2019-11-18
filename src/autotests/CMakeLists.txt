@@ -3,6 +3,7 @@ find_package(
     REQUIRED
     Test
     )
+add_definitions(-DAUTOTEST)
 
 ecm_add_test(commentparser.cpp ../CommentParser.cpp
     TEST_NAME "commentparser"
