@@ -211,6 +211,7 @@ class GnuDiff
     change *build_script(file_data const filevec[]);
 
     // gnudiff_io.cpp
+    GNULineRef guess_lines(GNULineRef n, size_t s, size_t t);
     void find_and_hash_each_line(file_data *current);
     void find_identical_ends(file_data filevec[]);
 

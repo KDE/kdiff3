@@ -311,8 +311,8 @@ void GnuDiff::find_and_hash_each_line(file_data *current)
    proportionate number of lines that will be found in a buffer of
    size T.  However, do not guess a number of lines so large that the
    resulting line table might cause overflow in size calculations.  */
-static GNULineRef
-guess_lines(GNULineRef n, size_t s, size_t t)
+GNULineRef
+GnuDiff::guess_lines(GNULineRef n, size_t s, size_t t)
 {
     size_t guessed_bytes_per_line = n < 10 ? 32 : s / (n - 1);
     size_t guessed_lines = std::max((size_t)1, t / guessed_bytes_per_line);
