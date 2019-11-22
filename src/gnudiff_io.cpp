@@ -142,7 +142,7 @@ void GnuDiff::find_and_hash_each_line(file_data *current)
     GNULineRef alloc_lines = current->alloc_lines;
     GNULineRef line = 0;
     GNULineRef linbuf_base = current->linbuf_base;
-    GNULineRef *cureqs = (GNULineRef *)xmalloc(alloc_lines * sizeof *cureqs);
+    GNULineRef *cureqs = (GNULineRef *)xmalloc(alloc_lines * sizeof(*cureqs));
     equivclass *eqs = equivs;
     GNULineRef eqs_index = equivs_index;
     GNULineRef eqs_alloc = equivs_alloc;
@@ -212,10 +212,10 @@ void GnuDiff::find_and_hash_each_line(file_data *current)
                 i = eqs_index++;
                 if(i == eqs_alloc)
                 {
-                    if((GNULineRef)(GNULINEREF_MAX / (2 * sizeof *eqs)) <= eqs_alloc)
+                    if((GNULineRef)(GNULINEREF_MAX / (2 * sizeof(*eqs))) <= eqs_alloc)
                         xalloc_die();
                     eqs_alloc *= 2;
-                    eqs = (equivclass *)xrealloc(eqs, eqs_alloc * sizeof *eqs);
+                    eqs = (equivclass *)xrealloc(eqs, eqs_alloc * sizeof(*eqs));
                 }
                 eqs[i].next = *bucket;
                 eqs[i].hash = h;
@@ -251,13 +251,13 @@ void GnuDiff::find_and_hash_each_line(file_data *current)
         if(line == alloc_lines)
         {
             /* Double (alloc_lines - linbuf_base) by adding to alloc_lines.  */
-            if((GNULineRef)(GNULINEREF_MAX / 3) <= alloc_lines || (GNULineRef)(GNULINEREF_MAX / sizeof *cureqs) <= 2 * alloc_lines - linbuf_base || (GNULineRef)(GNULINEREF_MAX / sizeof *linbuf) <= alloc_lines - linbuf_base)
+            if((GNULineRef)(GNULINEREF_MAX / 3) <= alloc_lines || (GNULineRef)(GNULINEREF_MAX / sizeof(*cureqs)) <= 2 * alloc_lines - linbuf_base || (GNULineRef)(GNULINEREF_MAX / sizeof(*linbuf)) <= alloc_lines - linbuf_base)
                 xalloc_die();
             alloc_lines = 2 * alloc_lines - linbuf_base;
-            cureqs = (GNULineRef *)xrealloc(cureqs, alloc_lines * sizeof *cureqs);
+            cureqs = (GNULineRef *)xrealloc(cureqs, alloc_lines * sizeof(*cureqs));
             linbuf += linbuf_base;
             linbuf = (const QChar **)xrealloc(linbuf,
-                                              (alloc_lines - linbuf_base) * sizeof *linbuf);
+                                              (alloc_lines - linbuf_base) * sizeof(*linbuf));
             linbuf -= linbuf_base;
         }
         linbuf[line] = ip;
@@ -275,12 +275,12 @@ void GnuDiff::find_and_hash_each_line(file_data *current)
         if(line == alloc_lines)
         {
             /* Double (alloc_lines - linbuf_base) by adding to alloc_lines.  */
-            if((GNULineRef)(GNULINEREF_MAX / 3) <= alloc_lines || (GNULineRef)(GNULINEREF_MAX / sizeof *cureqs) <= 2 * alloc_lines - linbuf_base || (GNULineRef)(GNULINEREF_MAX / sizeof *linbuf) <= alloc_lines - linbuf_base)
+            if((GNULineRef)(GNULINEREF_MAX / 3) <= alloc_lines || (GNULineRef)(GNULINEREF_MAX / sizeof(*cureqs)) <= 2 * alloc_lines - linbuf_base || (GNULineRef)(GNULINEREF_MAX / sizeof(*linbuf)) <= alloc_lines - linbuf_base)
                 xalloc_die();
             alloc_lines = 2 * alloc_lines - linbuf_base;
             linbuf += linbuf_base;
             linbuf = (const QChar **)xrealloc(linbuf,
-                                              (alloc_lines - linbuf_base) * sizeof *linbuf);
+                                              (alloc_lines - linbuf_base) * sizeof(*linbuf));
             linbuf -= linbuf_base;
         }
         linbuf[line] = p;
@@ -443,7 +443,7 @@ void GnuDiff::find_identical_ends(file_data filevec[])
             GNULineRef l = lines++ & prefix_mask;
             if(l == alloc_lines0)
             {
-                if((GNULineRef)(GNULINEREF_MAX / (2 * sizeof *linbuf0)) <= alloc_lines0)
+                if((GNULineRef)(GNULINEREF_MAX / (2 * sizeof(*linbuf0))) <= alloc_lines0)
                     xalloc_die();
                 alloc_lines0 *= 2;
                 linbuf0 = (const QChar **)xrealloc(linbuf0, alloc_lines0 * sizeof(*linbuf0));
@@ -460,7 +460,7 @@ void GnuDiff::find_identical_ends(file_data filevec[])
     middle_guess = guess_lines(lines, p0 - buffer0, p1 - filevec[1].prefix_end);
     suffix_guess = guess_lines(lines, p0 - buffer0, buffer1 + n1 - p1);
     alloc_lines1 = buffered_prefix + middle_guess + std::min(context, suffix_guess);
-    if(alloc_lines1 < buffered_prefix || (GNULineRef)(GNULINEREF_MAX / sizeof *linbuf1) <= alloc_lines1)
+    if(alloc_lines1 < buffered_prefix || (GNULineRef)(GNULINEREF_MAX / sizeof(*linbuf1)) <= alloc_lines1)
         xalloc_die();
     linbuf1 = (const QChar **)xmalloc(alloc_lines1 * sizeof(*linbuf1));
 
@@ -515,9 +515,9 @@ bool GnuDiff::read_files(file_data filevec[], bool /*pretend_binary*/)
     find_identical_ends(filevec);
 
     equivs_alloc = filevec[0].alloc_lines + filevec[1].alloc_lines + 1;
-    if((GNULineRef)(GNULINEREF_MAX / sizeof *equivs) <= equivs_alloc)
+    if((GNULineRef)(GNULINEREF_MAX / sizeof(*equivs)) <= equivs_alloc)
         xalloc_die();
-    equivs = (equivclass *)xmalloc(equivs_alloc * sizeof *equivs);
+    equivs = (equivclass *)xmalloc(equivs_alloc * sizeof(*equivs));
     /* Equivalence class 0 is permanently safe for lines that were not
      hashed.  Real equivalence classes start at 1.  */
     equivs_index = 1;
@@ -528,9 +528,9 @@ bool GnuDiff::read_files(file_data filevec[], bool /*pretend_binary*/)
     for(i = 9; ((GNULineRef)1 << i) < equivs_alloc / 3; ++i)
         continue;
     nbuckets = ((GNULineRef)1 << i) - prime_offset[i];
-    if(GNULINEREF_MAX / sizeof *buckets <= nbuckets)
+    if(GNULINEREF_MAX / sizeof(*buckets) <= nbuckets)
         xalloc_die();
-    buckets = (GNULineRef *)zalloc((nbuckets + 1) * sizeof *buckets);
+    buckets = (GNULineRef *)zalloc((nbuckets + 1) * sizeof(*buckets));
     buckets++;
 
     for(i = 0; i < 2; ++i)

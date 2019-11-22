@@ -124,7 +124,7 @@ class GnuDiff
         const QChar *buffer;
 
         /* Allocated size of buffer, in QChars.  Always a multiple of
-       sizeof *buffer.  */
+       sizeof(*buffer).  */
         size_t bufsize;
 
         /* Number of valid bytes now in the buffer.  */
