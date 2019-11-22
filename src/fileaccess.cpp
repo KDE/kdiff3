@@ -270,11 +270,8 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
                 m_url = QUrl(e.stringValue(f));
                 break;
             case KIO::UDSEntry::UDS_MIME_TYPE:
-                break;
             case KIO::UDSEntry::UDS_GUESSED_MIME_TYPE:
-                break;
             case KIO::UDSEntry::UDS_XML_PROPERTIES:
-                break;
             default:
                 break;
         }

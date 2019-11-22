@@ -426,8 +426,6 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
                         return i18n("Delete (if exists)");
                         break;
                     case eMergeABCToDest:
-                        return bDir ? i18n("Merge") : i18n("Merge (manual)");
-                        break;
                     case eMergeABToDest:
                         return bDir ? i18n("Merge") : i18n("Merge (manual)");
                         break;
@@ -1466,12 +1464,10 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
             }
             else if(pMFI->existsInA() && pMFI->existsInB() && pMFI->existsInC())
             {
-                if(pMFI->isEqualAB())
+                if(pMFI->isEqualAB() || pMFI->isEqualBC())
                     setMergeOperation(mi, eCopyCToDest);
                 else if(pMFI->isEqualAC())
                     setMergeOperation(mi, eCopyBToDest);
-                else if(pMFI->isEqualBC())
-                    setMergeOperation(mi, eCopyCToDest);
                 else
                     setMergeOperation(mi, eMergeABCToDest);
             }
@@ -2012,7 +2008,6 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(Me
     switch(mfi.getOperation())
     {
         case eNoOperation:
-            break;
         case eDeleteAB:
             break;
         case eMergeToAB: // let the user save in B. In mergeResultSaved() the file will be copied to A.

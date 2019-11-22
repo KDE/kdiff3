@@ -410,12 +410,10 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
             }
             else
             {
-                if(m_totalDiffStatus.isBinaryEqualBC()) {
-                    pSD = &m_sd3; // B==C (assume A is old)
-                }
-                else if(m_totalDiffStatus.isBinaryEqualAB())
+                if(m_totalDiffStatus.isBinaryEqualBC() || m_totalDiffStatus.isBinaryEqualAB())
                 {
-                    pSD = &m_sd3; // assuming C has changed
+                    //if B==C (assume A is old), if A==B then C has changed
+                    pSD = &m_sd3;
                 }
                 else if(m_totalDiffStatus.isBinaryEqualAC())
                 {

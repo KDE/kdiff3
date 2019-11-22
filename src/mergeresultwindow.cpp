@@ -268,16 +268,8 @@ void Diff3Line::mergeOneLine(
         }
         else
         {
-            if(getLineA().isValid() && !getLineB().isValid())
-            {
-                mergeDetails = eBDeleted;
-                bConflict = true;
-            }
-            else if(!getLineA().isValid() && getLineB().isValid())
-            {
-                mergeDetails = eBDeleted;
-                bConflict = true;
-            }
+            mergeDetails = eBDeleted;
+            bConflict = true;
         }
         return;
     }
@@ -2312,14 +2304,13 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     switch(e->key())
     {
     case Qt::Key_Escape:
-        break;
     //case  Key_Tab:          break;
     case Qt::Key_Backtab:
         break;
     case Qt::Key_Delete:
     {
-        if(deleteSelection2(str, x, y, mlIt, melIt)) break;
-        if(!melIt->isEditableText()) break;
+        if(deleteSelection2(str, x, y, mlIt, melIt) || !melIt->isEditableText()) break;
+        
         if(x >= str.length())
         {
             if(y < m_nofLines - 1)
@@ -2447,9 +2438,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
         m_bInsertMode = !m_bInsertMode;
         break;
     case Qt::Key_Pause:
-        break;
     case Qt::Key_Print:
-        break;
     case Qt::Key_SysReq:
         break;
     case Qt::Key_Home:
@@ -3262,9 +3251,7 @@ void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecF
 
     if(pCodecForC != nullptr && pCodecForB != nullptr && pCodecForA != nullptr)
     {
-        if(pCodecForA == pCodecForB)
-            m_pEncodingSelector->setCurrentIndex(2); // C
-        else if(pCodecForA == pCodecForC)
+        if(pCodecForA == pCodecForC)
             m_pEncodingSelector->setCurrentIndex(1); // B
         else
             m_pEncodingSelector->setCurrentIndex(2); // C
