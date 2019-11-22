@@ -400,7 +400,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
     LineRef *p;
 
     /* Allocate our results.  */
-    p = (LineRef *)xmalloc((filevec[0].buffered_lines + filevec[1].buffered_lines) * (2 * sizeof *p));
+    p = (LineRef *)xmalloc((filevec[0].buffered_lines + filevec[1].buffered_lines) * (2 * sizeof(*p)));
     for(f = 0; f < 2; ++f)
     {
         filevec[f].undiscarded = p;
@@ -412,7 +412,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
     /* Set up equiv_count[F][I] as the number of lines in file F
      that fall in equivalence class I.  */
 
-    p = (LineRef *)zalloc(filevec[0].equiv_max * (2 * sizeof *p));
+    p = (LineRef *)zalloc(filevec[0].equiv_max * (2 * sizeof(*p)));
     equiv_count[0] = p;
     equiv_count[1] = p + filevec[0].equiv_max;
 
@@ -704,7 +704,7 @@ void GnuDiff::shift_boundaries(struct file_data filevec[])
 
 GnuDiff::change *GnuDiff::add_change(LineRef line0, LineRef line1, LineRef deleted, LineRef inserted, struct change *old)
 {
-    struct change *newChange = (change *)xmalloc(sizeof *newChange);
+    struct change *newChange = (change *)xmalloc(sizeof(*newChange));
 
     newChange->line0 = line0;
     newChange->line1 = line1;
@@ -815,7 +815,7 @@ GnuDiff::change *GnuDiff::diff_2_files(struct comparison *cmp)
         xvec = cmp->file[0].undiscarded;
         yvec = cmp->file[1].undiscarded;
         diags = (cmp->file[0].nondiscarded_lines + cmp->file[1].nondiscarded_lines + 3);
-        fdiag = (LineRef *)xmalloc(diags * (2 * sizeof *fdiag));
+        fdiag = (LineRef *)xmalloc(diags * (2 * sizeof(*fdiag)));
         bdiag = fdiag + diags;
         fdiag += cmp->file[1].nondiscarded_lines + 1;
         bdiag += cmp->file[1].nondiscarded_lines + 1;
