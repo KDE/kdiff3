@@ -84,17 +84,17 @@ void SourceData::setFilename(const QString& filename)
     }
 }
 
-bool SourceData::isEmpty()
+bool SourceData::isEmpty() const
 {
     return getFilename().isEmpty();
 }
 
-bool SourceData::hasData()
+bool SourceData::hasData() const
 {
     return m_normalData.m_pBuf != nullptr;
 }
 
-bool SourceData::isValid()
+bool SourceData::isValid() const
 {
     return isEmpty() || hasData();
 }
@@ -104,12 +104,12 @@ void SourceData::setOptions(const QSharedPointer<Options> &pOptions)
     m_pOptions = pOptions;
 }
 
-QString SourceData::getFilename()
+QString SourceData::getFilename() const
 {
     return m_fileAccess.absoluteFilePath();
 }
 
-QString SourceData::getAliasName()
+QString SourceData::getAliasName() const
 {
     return m_aliasName.isEmpty() ? m_fileAccess.prettyAbsPath() : m_aliasName;
 }
@@ -194,17 +194,17 @@ const QString& SourceData::getText() const
     return *m_normalData.m_unicodeBuf;
 }
 
-bool SourceData::isText()
+bool SourceData::isText() const
 {
     return m_normalData.isText() || m_normalData.isEmpty();
 }
 
-bool SourceData::isIncompleteConversion()
+bool SourceData::isIncompleteConversion() const
 {
     return m_normalData.m_bIncompleteConversion;
 }
 
-bool SourceData::isFromBuffer()
+bool SourceData::isFromBuffer() const
 {
     return !m_fileAccess.isValid();
 }
@@ -545,9 +545,9 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     if(m_pOptions->m_bIgnoreComments && hasData())
     {
         qint64 vSize = std::min(m_normalData.m_vSize, m_lmppData.m_vSize);
-        Q_ASSERT(vSize < TYPE_MAX(int));
+        Q_ASSERT(vSize < TYPE_MAX(qint32));
         //Perform explcit cast to insure well defined behavior comparing 32-bit to a 64-bit value
-        for(int i = 0; (qint64)i < vSize; ++i)
+        for(qint32 i = 0; (qint64)i < vSize; ++i)
         {
             m_normalData.m_v[i].setPureComment(m_lmppData.m_v[i].isPureComment());
         }
@@ -583,7 +583,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     if(m_size - skipBytes > TYPE_MAX(QtNumberType))
         return false;
 
-    QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, (int)(m_size - skipBytes));
+    const QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, (int)(m_size - skipBytes));
     QTextStream ts(ba, QIODevice::ReadOnly); //Don't use text mode we need to see the actual line ending.
     ts.setCodec(pEncoding);
     ts.setAutoDetectUnicode(false);
@@ -673,17 +673,6 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
     m_vSize = lineCount;
     return true;
-}
-
-bool SourceData::isLineOrBufEnd(const QChar* p, int i, int size)
-{
-    return i >= size                   // End of file
-           || Utils::isEndOfLine(p[i]) // Normal end of line
-
-        // No support for Mac-end of line yet, because incompatible with GNU-diff-routines.
-        // || ( p[i]=='\r' && (i>=size-1 || p[i+1]!='\n')
-        //                 && (i==0        || p[i-1]!='\n') )  // Special case: '\r' without '\n'
-        ;
 }
 
 // Convert the input file from input encoding to output encoding and write it to the output file.

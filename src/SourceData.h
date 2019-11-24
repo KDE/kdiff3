@@ -40,16 +40,16 @@ class SourceData
     void setFilename(const QString& filename);
     void setFileAccess(const FileAccess& fileAccess);
     void setEncoding(QTextCodec* pEncoding);
-    QString getFilename();
+    QString getFilename() const;
     void setAliasName(const QString& name);
-    QString getAliasName();
-    bool isEmpty();                // File was set
-    bool hasData();                // Data was readable
-    bool isText();                 // is it pure text (vs. binary data)
-    bool isIncompleteConversion(); // true if some replacement characters were found
-    bool isFromBuffer();           // was it set via setData() (vs. setFileAccess() or setFilename())
+    QString getAliasName() const;
+    bool isEmpty() const;                // File was set
+    bool hasData() const;                // Data was readable
+    bool isText() const;                 // is it pure text (vs. binary data)
+    bool isIncompleteConversion() const; // true if some replacement characters were found
+    bool isFromBuffer() const;           // was it set via setData() (vs. setFileAccess() or setFilename())
     QStringList setData(const QString& data);
-    bool isValid(); // Either no file is specified or reading was successful
+    bool isValid() const; // Either no file is specified or reading was successful
 
     // Returns a list of error messages if anything went wrong
     QStringList readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode);
@@ -65,8 +65,7 @@ class SourceData
   private:
     bool convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
                                 const QString& fileNameOut, QTextCodec* pCodecOut);
-    static bool isLineOrBufEnd(const QChar* p, int i, int size);
-
+    
     static QTextCodec* detectEncoding(const char* buf, qint64 size, qint64& skipBytes);
     static QTextCodec* getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag);
 
@@ -101,9 +100,9 @@ class SourceData
         void reset();
         void copyBufFrom(const FileData& src);
 
-        bool isEmpty() { return m_size == 0; }
+        bool isEmpty() const { return m_size == 0; }
 
-        bool isText() { return m_bIsText || isEmpty(); }
+        bool isText() const { return m_bIsText || isEmpty(); }
     };
     FileData m_normalData;
     FileData m_lmppData;
