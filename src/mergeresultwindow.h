@@ -114,20 +114,20 @@ public Q_SLOTS:
    void slotChooseCForUnsolvedWhiteSpaceConflicts() { chooseGlobal(C, true, true); }
 
  Q_SIGNALS:
-    void scrollMergeResultWindow(int deltaX, int deltaY);
+   void scrollMergeResultWindow(int deltaX, int deltaY);
    void modifiedChanged(bool bModified);
-    void setFastSelectorRange(LineRef line1, LineCount nofLines);
-    void sourceMask(int srcMask, int enabledMask);
+   void setFastSelectorRange(LineRef line1, LineCount nofLines);
+   void sourceMask(int srcMask, int enabledMask);
    void resizeSignal();
    void selectionEnd();
    void newSelection();
    void updateAvailabilities();
-    void showPopupMenu(const QPoint& point);
+   void showPopupMenu(const QPoint& point);
    void noRelevantChangesDetected();
 
-private:
-    void merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly = false, bool bWhiteSpaceOnly = false);
-    QString getString(int lineIdx);
+ private:
+   void merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly = false, bool bWhiteSpaceOnly = false);
+   QString getString(int lineIdx);
 
    static QAction* chooseAEverywhere;
    static QAction* chooseBEverywhere;
