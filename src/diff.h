@@ -121,7 +121,8 @@ class LineData
     inline bool whiteLine() const { return mFirstNonWhiteChar == mSize - 1; }
 
     inline bool isPureComment() const { return bContainsPureComment; }
-    
+    inline void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
+
     static bool equal(const LineData& l1, const LineData& l2, bool bStrict);
 };
 

@@ -541,6 +541,20 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         m_lmppData.m_vSize = m_normalData.m_vSize;
     }
 
+    // Ignore comments
+    if(m_pOptions->m_bIgnoreComments && hasData())
+    {
+        qint64 vSize = std::min(m_normalData.m_vSize, m_lmppData.m_vSize);
+        Q_ASSERT(vSize < TYPE_MAX(int));
+        for(int i = 0; i < vSize; ++i)
+        {
+            m_normalData.m_v[i].setPureComment(m_lmppData.m_v[i].isPureComment());
+            //Don't crash if vSize is too large.
+            if(i == TYPE_MAX(int))
+                break;
+        }
+    }
+
     return errors;
 }
 
