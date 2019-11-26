@@ -318,6 +318,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     ///////////////////////////////////////////////////////////////////
     // call inits to invoke all other construction parts
     initActions(actionCollection());
+    //Warning: Call this before connecting KDiff3App::slotUpdateAvailabilities or calling KXMLGUIClient::setXMLFile
     MergeResultWindow::initActions(actionCollection());
 
     initStatusBar();
@@ -365,7 +366,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     m_pDirectoryMergeInfo = new DirectoryMergeInfo(m_pDirectoryMergeSplitter);
     m_pDirectoryMergeWindow->setDirectoryMergeInfo(m_pDirectoryMergeInfo);
     m_pDirectoryMergeSplitter->addWidget(m_pDirectoryMergeInfo);
-
+    //Warning: Make sure DirectoryMergeWindow::initActions is called before this point or we can crash when selectionChanged is sent.
     connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::startDiffMerge, this, &KDiff3App::slotFileOpen2);
     connect(m_pDirectoryMergeWindow->selectionModel(), &QItemSelectionModel::selectionChanged, this, &KDiff3App::slotUpdateAvailabilities);
     connect(m_pDirectoryMergeWindow->selectionModel(), &QItemSelectionModel::currentChanged, this, &KDiff3App::slotUpdateAvailabilities);
