@@ -647,9 +647,13 @@ void KDiff3App::initView()
     connect(m_pDiffTextWindowFrame2, &DiffTextWindowFrame::fileNameChanged, this, &KDiff3App::slotFileNameChanged);
     connect(m_pDiffTextWindowFrame3, &DiffTextWindowFrame::fileNameChanged, this, &KDiff3App::slotFileNameChanged);
 
-    connect(m_pDiffTextWindowFrame1, &DiffTextWindowFrame::encodingChanged, this, &KDiff3App::slotEncodingChangedA);
-    connect(m_pDiffTextWindowFrame2, &DiffTextWindowFrame::encodingChanged, this, &KDiff3App::slotEncodingChangedB);
-    connect(m_pDiffTextWindowFrame3, &DiffTextWindowFrame::encodingChanged, this, &KDiff3App::slotEncodingChangedC);
+    connect(m_pDiffTextWindowFrame1, &DiffTextWindowFrame::encodingChanged, this, &KDiff3App::slotEncodingChanged);
+    connect(m_pDiffTextWindowFrame2, &DiffTextWindowFrame::encodingChanged, this, &KDiff3App::slotEncodingChanged);
+    connect(m_pDiffTextWindowFrame3, &DiffTextWindowFrame::encodingChanged, this, &KDiff3App::slotEncodingChanged);
+
+    connect(m_pDiffTextWindowFrame1, &DiffTextWindowFrame::encodingChanged, &m_sd1, &SourceData::setEncoding);
+    connect(m_pDiffTextWindowFrame2, &DiffTextWindowFrame::encodingChanged, &m_sd2, &SourceData::setEncoding);
+    connect(m_pDiffTextWindowFrame3, &DiffTextWindowFrame::encodingChanged, &m_sd3, &SourceData::setEncoding);
 
     // Merge window
     m_pMergeWindowFrame = new QWidget(pVSplitter);
@@ -2389,23 +2393,9 @@ void KDiff3App::slotClearManualDiffHelpList()
     slotRefresh();
 }
 
-void KDiff3App::slotEncodingChangedA(QTextCodec* c)
+void KDiff3App::slotEncodingChanged(QTextCodec* c)
 {
-    m_sd1.setEncoding(c);
-    mainInit(nullptr, true, true); // Init with reload
-    slotRefresh();
-}
-
-void KDiff3App::slotEncodingChangedB(QTextCodec* c)
-{
-    m_sd2.setEncoding(c);
-    mainInit(nullptr, true, true); // Init with reload
-    slotRefresh();
-}
-
-void KDiff3App::slotEncodingChangedC(QTextCodec* c)
-{
-    m_sd3.setEncoding(c);
+    Q_UNUSED(c);
     mainInit(nullptr, true, true); // Init with reload
     slotRefresh();
 }

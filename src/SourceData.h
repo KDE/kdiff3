@@ -22,11 +22,13 @@
 #include <QVector>
 
 class LineData;
-class SourceData
+class SourceData: public QObject
 {
+    Q_OBJECT;
+
   public:
     SourceData();
-    ~SourceData();
+    virtual ~SourceData();
 
     void setOptions(const QSharedPointer<Options> &pOptions);
 
@@ -39,7 +41,6 @@ class SourceData
 
     void setFilename(const QString& filename);
     void setFileAccess(const FileAccess& fileAccess);
-    void setEncoding(QTextCodec* pEncoding);
     QString getFilename() const;
     void setAliasName(const QString& name);
     QString getAliasName() const;
@@ -61,6 +62,9 @@ class SourceData
 
     QTextCodec* getEncoding() const { return m_pEncoding; }
     e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
+public Q_SLOTS:
+    void setEncoding(QTextCodec* pEncoding);
+
 
   private:
     bool convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,

@@ -1811,7 +1811,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBa
     pHL2->setSpacing(2);
     pHL2->addWidget(d->m_pTopLine, 0);
     d->m_pEncoding = new EncodingLabel(i18n("Encoding:"), psd, pOptions);
-    connect((EncodingLabel*) d->m_pEncoding, &EncodingLabel::encodingChanged, this, &DiffTextWindowFrame::slotEncodingChanged);
+    connect((EncodingLabel*) d->m_pEncoding, &EncodingLabel::encodingChanged, this, &DiffTextWindowFrame::slotEncodingChanged, Qt::QueuedConnection);
 
     d->m_pLineEndStyle = new QLabel(i18n("Line end style:"));
     pHL2->addWidget(d->m_pEncoding);

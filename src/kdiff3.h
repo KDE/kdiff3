@@ -249,9 +249,8 @@ class KDiff3App : public QSplitter
     void slotAddManualDiffHelp();
     void slotClearManualDiffHelpList();
     void slotNoRelevantChangesDetected();
-    void slotEncodingChangedA(QTextCodec*);
-    void slotEncodingChangedB(QTextCodec*);
-    void slotEncodingChangedC(QTextCodec*);
+    void slotEncodingChanged(QTextCodec*);
+    
   private:
     /** the configuration object of the application */
     //KConfig *config;
