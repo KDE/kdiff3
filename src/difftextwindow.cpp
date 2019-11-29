@@ -1171,7 +1171,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int device
 
 QString DiffTextWindowData::getString(int d3lIdx)
 {
-    if(d3lIdx < 0 || d3lIdx >= (int)m_pDiff3LineVector->size())
+    if(d3lIdx < 0 || d3lIdx >= m_pDiff3LineVector->size())
         return QString();
 
     const Diff3Line* d3l = (*m_pDiff3LineVector)[d3lIdx];
@@ -1185,12 +1185,8 @@ QString DiffTextWindowData::getString(int d3lIdx)
 
     if(!lineIdx.isValid())
         return QString();
-    else
-    {
-        const LineData* ld = &(*m_pLineData)[lineIdx];
-        return ld->getLine();
-    }
-    return QString();
+
+    return (*m_pLineData)[lineIdx].getLine();
 }
 
 QString DiffTextWindowData::getLineString(int line)
