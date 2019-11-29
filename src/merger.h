@@ -27,7 +27,7 @@ class Merger
        bit 1 is set if a difference from pDiffList1 was detected,
        bit 2 is set if a difference from pDiffList2 was detected.
    */
-    int whatChanged();
+    ChangeFlags whatChanged();
 
     /** End of both diff lists reached. */
     bool isEndReached();

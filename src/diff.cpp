@@ -12,6 +12,7 @@
 #include "diff.h"
 
 #include "gnudiff_diff.h"
+#include "merger.h"
 #include "options.h"
 #include "progress.h"
 
@@ -1390,12 +1391,12 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
     return bTextsTotalEqual;
 }
 
-void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, int& lineIdx,
+void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
                             DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
-                            int& changed, int& changed2) const
+                            ChangeFlags& changed, ChangeFlags& changed2) const
 {
-    changed = 0;
-    changed2 = 0;
+    changed = NoChange;
+    changed2 = NoChange;
     bool bAEqualB = this->isEqualAB() || (bWhiteLineA && bWhiteLineB);
     bool bAEqualC = this->isEqualAC() || (bWhiteLineA && bWhiteLineC);
     bool bBEqualC = this->isEqualBC() || (bWhiteLineB && bWhiteLineC);
@@ -1406,27 +1407,28 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, int
         lineIdx = getLineA();
         pFineDiff1 = pFineAB;
         pFineDiff2 = pFineCA;
-        changed |= ((!getLineB().isValid()) != (lineIdx == -1) ? 1 : 0) +
-                   ((!getLineC().isValid()) != (lineIdx == -1) && isTriple ? 2 : 0);
-        changed2 |= (bAEqualB ? 0 : 1) + (bAEqualC || !isTriple ? 0 : 2);
+
+        changed = ((!getLineB().isValid()) != (!lineIdx.isValid()) ? AChanged : NoChange) |
+                   ((!getLineC().isValid()) != (!lineIdx.isValid()) && isTriple ? BChanged : NoChange);
+        changed2 = (bAEqualB ? NoChange : AChanged) | (bAEqualC || !isTriple ? NoChange : BChanged);
     }
     else if(winIdx == B)
     {
         lineIdx = getLineB();
         pFineDiff1 = pFineBC;
         pFineDiff2 = pFineAB;
-        changed |= ((!getLineC().isValid()) != (lineIdx == -1) && isTriple ? 1 : 0) +
-                   ((!getLineA().isValid()) != (lineIdx == -1) ? 2 : 0);
-        changed2 |= (bBEqualC || !isTriple ? 0 : 1) + (bAEqualB ? 0 : 2);
+        changed = ((!getLineC().isValid()) != (!lineIdx.isValid()) && isTriple ? AChanged : NoChange) |
+                   ((!getLineA().isValid()) != (!lineIdx.isValid()) ? BChanged : NoChange);
+        changed2 = (bBEqualC || !isTriple ? NoChange : AChanged) | (bAEqualB ? NoChange : BChanged);
     }
     else if(winIdx == C)
     {
         lineIdx = getLineC();
         pFineDiff1 = pFineCA;
         pFineDiff2 = pFineBC;
-        changed |= ((!getLineA().isValid()) != (lineIdx == -1) ? 1 : 0) +
-                   ((!getLineB().isValid()) != (lineIdx == -1) ? 2 : 0);
-        changed2 |= (bAEqualC ? 0 : 1) + (bBEqualC ? 0 : 2);
+        changed = ((!getLineA().isValid()) != (!lineIdx.isValid()) ? AChanged : NoChange) |
+                   ((!getLineB().isValid()) != (!lineIdx.isValid()) ? BChanged : NoChange);
+        changed2 = (bAEqualC ? NoChange : AChanged) | (bBEqualC ? NoChange : BChanged);
     }
 }
 
@@ -1460,3 +1462,4 @@ void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
     }
     Q_ASSERT(j == d3lv.size());
 }
+

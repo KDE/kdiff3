@@ -55,6 +55,16 @@ enum e_MergeDetails
    eBCAddedAndEqual    // possible conflict
 };
 
+enum ChangeFlag{
+    NoChange = 0,
+    AChanged = 0x1,
+    BChanged = 0x2,
+    Both = AChanged | BChanged
+};
+
+Q_DECLARE_FLAGS(ChangeFlags, ChangeFlag);
+Q_DECLARE_OPERATORS_FOR_FLAGS(ChangeFlags);
+
 // Each range with matching elements is followed by a range with differences on either side.
 // Then again range of matching elements should follow.
 class Diff
@@ -221,9 +231,9 @@ class Diff3Line
     {
         Q_ASSERT(m_pDiffBufferInfo != nullptr);
         //Use at here not [] to avoid using really wierd syntax
-        if(src == A && lineA >= 0) return &m_pDiffBufferInfo->getLineData(src)->at(lineA);
-        if(src == B && lineB >= 0) return &m_pDiffBufferInfo->getLineData(src)->at(lineB);
-        if(src == C && lineC >= 0) return &m_pDiffBufferInfo->getLineData(src)->at(lineC);
+        if(src == A && lineA.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineA);
+        if(src == B && lineB.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineB);
+        if(src == C && lineC.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineC);
 
         return nullptr;
     }
@@ -246,9 +256,9 @@ class Diff3Line
     bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2);
     void mergeOneLine(e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, e_SrcSelector& src, bool bTwoInputs) const;
 
-    void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, int& lineIdx,
+    void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
         DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
-        int& changed, int& changed2) const;
+        ChangeFlags& changed, ChangeFlags& changed2) const;
 
   private:
     void setFineDiff(const e_SrcSelector selector, DiffList* pDiffList)
@@ -402,7 +412,7 @@ class ManualDiffHelpEntry
     }
     bool isLineInRange(LineRef line, e_SrcSelector winIdx)
     {
-        return line >= 0 && line >= firstLine(winIdx) && line <= lastLine(winIdx);
+        return line.isValid() && line >= firstLine(winIdx) && line <= lastLine(winIdx);
     }
     bool operator==(const ManualDiffHelpEntry& r) const
     {
@@ -412,7 +422,7 @@ class ManualDiffHelpEntry
 
     int calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv);
 
-    void getRangeForUI(const e_SrcSelector winIdx, int *rangeLine1, int *rangeLine2) const {
+    void getRangeForUI(const e_SrcSelector winIdx, LineRef *rangeLine1, LineRef *rangeLine2) const {
         if(winIdx == A) {
             *rangeLine1 = lineA1;
             *rangeLine2 = lineA2;

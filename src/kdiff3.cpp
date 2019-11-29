@@ -912,9 +912,8 @@ void KDiff3App::slotFilePrint()
                         linesPerPage = selectionEndLine - line;
                 }
             }
-            if(line >= 0 && line < totalNofLines)
+            if(line.isValid() && line < totalNofLines)
             {
-
                 if(bFirstPrintedPage)
                     printer.newPage();
 

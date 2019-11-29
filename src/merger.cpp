@@ -63,11 +63,11 @@ void Merger::next()
     md2.update();
 }
 
-int Merger::whatChanged()
+ChangeFlags Merger::whatChanged()
 {
-    int changed = 0;
-    changed |= md1.eq() ? 0 : 1;
-    changed |= md2.eq() ? 0 : 2;
+    ChangeFlags changed = ChangeFlag::NoChange;
+    changed |= md1.eq() ? ChangeFlag::NoChange : ChangeFlag::AChanged;
+    changed |= md2.eq() ? ChangeFlag::NoChange : ChangeFlag::BChanged;
     return changed;
 }
 

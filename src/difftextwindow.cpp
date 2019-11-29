@@ -127,19 +127,13 @@ class DiffTextWindowData
     int m_lineNumberWidth;
     QAtomicInt m_maxTextWidth;
 
-    void getLineInfo(
-        const Diff3Line& d,
-        int& lineIdx,
-        DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
-        int& changed, int& changed2);
-
     QString getString(int d3lIdx);
     QString getLineString(int line);
 
     void writeLine(
         RLPainter& p, const LineData* pld,
-        const DiffList* pLineDiff1, const DiffList* pLineDiff2, int line,
-        int whatChanged, int whatChanged2, int srcLineIdx,
+        const DiffList* pLineDiff1, const DiffList* pLineDiff2, const LineRef& line,
+        const ChangeFlags whatChanged, const ChangeFlags whatChanged2, const LineRef& srcLineIdx,
         int wrapLineOffset, int wrapLineLength, bool bWrapLine, const QRect& invalidRect, int deviceWidth);
 
     void draw(RLPainter& p, const QRect& invalidRect, int deviceWidth, int beginLine, int endLine);
@@ -386,7 +380,7 @@ LineCount DiffTextWindow::getNofLines()
 
 int DiffTextWindow::convertLineToDiff3LineIdx(LineRef line)
 {
-    if(line >= 0 && d->m_bWordWrap && d->m_diff3WrapLineVector.size() > 0)
+    if(line.isValid() && d->m_bWordWrap && d->m_diff3WrapLineVector.size() > 0)
         return d->m_diff3WrapLineVector[std::min((LineRef::LineType)line, d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
     else
         return line;
@@ -710,7 +704,7 @@ void DiffTextWindow::convertToLinePos(int x, int y, LineRef& line, int& pos)
     int yOffset = -d->m_firstLine * fontHeight;
 
     line = (y - yOffset) / fontHeight;
-    if(line >= 0 && (!d->m_pOptions->m_bWordWrap || line < d->m_diff3WrapLineVector.count()))
+    if(line.isValid() && (!d->m_pOptions->m_bWordWrap || line < d->m_diff3WrapLineVector.count()))
     {
         QString s = d->getLineString(line);
         QTextLayout textLayout(s, font(), this);
@@ -846,10 +840,10 @@ void DiffTextWindowData::writeLine(
     const LineData* pld,
     const DiffList* pLineDiff1,
     const DiffList* pLineDiff2,
-    int line,
-    int whatChanged,
-    int whatChanged2,
-    int srcLineIdx,
+    const LineRef& line,
+    const ChangeFlags  whatChanged,
+    const ChangeFlags  whatChanged2,
+    const LineRef& srcLineIdx,
     int wrapLineOffset,
     int wrapLineLength,
     bool bWrapLine,
@@ -888,20 +882,20 @@ void DiffTextWindowData::writeLine(
     if(yOffset + fontHeight < invalidRect.top() || invalidRect.bottom() < yOffset - fontHeight)
         return;
 
-    int changed = whatChanged;
-    if(pLineDiff1 != nullptr) changed |= 1;
-    if(pLineDiff2 != nullptr) changed |= 2;
+    ChangeFlags changed = whatChanged;
+    if(pLineDiff1 != nullptr) changed |= AChanged;
+    if(pLineDiff2 != nullptr) changed |= BChanged;
 
     QColor c = m_pOptions->m_fgColor;
     p.setPen(c);
-    if(changed == 2) {
+    if(changed == BChanged) {
         c = m_cDiff2;
     }
-    else if(changed == 1)
+    else if(changed == AChanged)
     {
         c = m_cDiff1;
     }
-    else if(changed == 3)
+    else if(changed == Both)
     {
         c = m_cDiffBoth;
     }
@@ -924,7 +918,7 @@ void DiffTextWindowData::writeLine(
                 //case '\0b' : lineString[lineString.length()-1] = 0x2756; break; // some other nice looking character
             }
         }
-        QVector<quint8> charChanged(pld->size());
+        QVector<ChangeFlags> charChanged(pld->size());
         Merger merger(pLineDiff1, pLineDiff2);
         while(!merger.isEndReached() && i < pld->size())
         {
@@ -945,16 +939,16 @@ void DiffTextWindowData::writeLine(
         for(i = wrapLineOffset; i < lineLength; ++i)
         {
             c = m_pOptions->m_fgColor;
-            int cchanged = charChanged[i] | whatChanged;
+            ChangeFlags cchanged = charChanged[i] | whatChanged;
 
-            if(cchanged == 2) {
+            if(cchanged == BChanged) {
                 c = m_cDiff2;
             }
-            else if(cchanged == 1)
+            else if(cchanged == AChanged)
             {
                 c = m_cDiff1;
             }
-            else if(cchanged == 3)
+            else if(cchanged == Both)
             {
                 c = m_cDiffBoth;
             }
@@ -1045,11 +1039,11 @@ void DiffTextWindowData::writeLine(
     for(ci = m_pManualDiffHelpList->begin(); ci != m_pManualDiffHelpList->end(); ++ci)
     {
         const ManualDiffHelpEntry& mdhe = *ci;
-        int rangeLine1 = -1;
-        int rangeLine2 = -1;
+        LineRef rangeLine1;
+        LineRef rangeLine2;
 
         mdhe.getRangeForUI(m_winIdx, &rangeLine1, &rangeLine2);
-        if(rangeLine1 >= 0 && rangeLine2 >= 0 && srcLineIdx >= rangeLine1 && srcLineIdx <= rangeLine2)
+        if(rangeLine1.isValid() && rangeLine2.isValid() && srcLineIdx >= rangeLine1 && srcLineIdx <= rangeLine2)
         {
             p.fillRect(xOffset - fontWidth, yOffset, fontWidth - 1, fontHeight, m_pOptions->m_manualHelpRangeColor);
             break;
@@ -1152,15 +1146,15 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int device
         }
         DiffList* pFineDiff1;
         DiffList* pFineDiff2;
-        int changed = 0;
-        int changed2 = 0;
+        ChangeFlags changed = NoChange;
+        ChangeFlags changed2 = NoChange;
 
-        int srcLineIdx = -1;
-        getLineInfo(*d3l, srcLineIdx, pFineDiff1, pFineDiff2, changed, changed2);
+        LineRef srcLineIdx;
+        d3l->getLineInfo(m_winIdx, m_bTriple, srcLineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 
         writeLine(
             p,                                               // QPainter
-            srcLineIdx == -1 ? nullptr : &(*m_pLineData)[srcLineIdx], // Text in this line
+            !srcLineIdx.isValid() ? nullptr : &(*m_pLineData)[srcLineIdx], // Text in this line
             pFineDiff1,
             pFineDiff2,
             line, // Line on the screen
@@ -1183,13 +1177,13 @@ QString DiffTextWindowData::getString(int d3lIdx)
     const Diff3Line* d3l = (*m_pDiff3LineVector)[d3lIdx];
     DiffList* pFineDiff1;
     DiffList* pFineDiff2;
-    int changed = 0;
-    int changed2 = 0;
-    int lineIdx = -1;
+    ChangeFlags changed = NoChange;
+    ChangeFlags changed2 = NoChange;
+    LineRef lineIdx;
 
-    getLineInfo(*d3l, lineIdx, pFineDiff1, pFineDiff2, changed, changed2);
+    d3l->getLineInfo(m_winIdx, m_bTriple, lineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 
-    if(lineIdx == -1)
+    if(!lineIdx.isValid())
         return QString();
     else
     {
@@ -1215,15 +1209,6 @@ QString DiffTextWindowData::getLineString(int line)
     {
         return getString(line);
     }
-}
-
-void DiffTextWindowData::getLineInfo(
-    const Diff3Line& d3l,
-    int& lineIdx,
-    DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
-    int& changed, int& changed2)
-{
-    d3l.getLineInfo(m_winIdx, m_bTriple, lineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 }
 
 void DiffTextWindow::resizeEvent(QResizeEvent* e)
