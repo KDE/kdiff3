@@ -2412,7 +2412,7 @@ void KDiff3App::slotEncodingChangedC(QTextCodec* c)
 
 void KDiff3App::slotUpdateAvailabilities()
 {
-    if(m_pMainSplitter == nullptr)
+    if(m_pMainSplitter == nullptr || m_pDiffTextWindow2 == nullptr || m_pDiffTextWindow1 == nullptr || m_pDiffTextWindow3 == nullptr)
         return;
 
     bool bTextDataAvailable = (m_sd1.hasData() || m_sd2.hasData() || m_sd3.hasData());

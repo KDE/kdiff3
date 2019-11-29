@@ -757,7 +757,7 @@ void KDiff3App::slotFileSaveAs()
 
 void KDiff3App::slotFilePrint()
 {
-    if(m_pDiffTextWindow1 == nullptr)
+    if(m_pDiffTextWindow1 == nullptr || m_pDiffTextWindow2 == nullptr)
         return;
 #ifdef QT_NO_PRINTER
     slotStatusMsg(i18n("Printing not implemented."));
@@ -770,7 +770,7 @@ void KDiff3App::slotFilePrint()
 
     m_pDiffTextWindow1->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
 
-    if(firstSelectionD3LIdx < 0 && m_pDiffTextWindow2 != nullptr) {
+    if(firstSelectionD3LIdx < 0) {
         m_pDiffTextWindow2->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
     }
     if(firstSelectionD3LIdx < 0 && m_pDiffTextWindow3 != nullptr) {
@@ -837,6 +837,7 @@ void KDiff3App::slotFilePrint()
         }
 
         LineCount totalNofLines = std::max(m_pDiffTextWindow1->getNofLines(), m_pDiffTextWindow2->getNofLines());
+        
         if(m_bTripleDiff && m_pDiffTextWindow3 != nullptr)
             totalNofLines = std::max(totalNofLines, m_pDiffTextWindow3->getNofLines());
 
