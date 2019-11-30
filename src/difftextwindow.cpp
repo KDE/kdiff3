@@ -1807,6 +1807,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBa
     pHL2->setSpacing(2);
     pHL2->addWidget(d->m_pTopLine, 0);
     d->m_pEncoding = new EncodingLabel(i18n("Encoding:"), psd, pOptions);
+    //EncodeLabel::EncodingChanged should be handled asyncroniously.
     connect((EncodingLabel*) d->m_pEncoding, &EncodingLabel::encodingChanged, this, &DiffTextWindowFrame::slotEncodingChanged, Qt::QueuedConnection);
 
     d->m_pLineEndStyle = new QLabel(i18n("Line end style:"));
@@ -1982,14 +1983,14 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
         if(m_pOptions != nullptr)
         {
             QStringList& recentEncodings = m_pOptions->m_recentEncodings;
-            foreach(const QString& s, recentEncodings)
+            for(const QString& s: recentEncodings)
             {
                 insertCodec("", QTextCodec::codecForName(s.toLatin1()), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
             }
         }
         // Submenu to add the rest of available encodings
         pContextEncodingSubMenu->setTitle(i18n("Other"));
-        foreach(int i, mibs)
+        for(int i: mibs)
         {
             QTextCodec* c = QTextCodec::codecForMib(i);
             if(c != nullptr)

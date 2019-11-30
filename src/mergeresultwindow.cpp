@@ -3228,7 +3228,7 @@ void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecF
     // First sort codec names:
     std::map<QString, QTextCodec*> names;
     QList<int> mibs = QTextCodec::availableMibs();
-    foreach(int i, mibs)
+    for(int i: mibs)
     {
         QTextCodec* c = QTextCodec::codecForMib(i);
         if(c != nullptr)

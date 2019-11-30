@@ -815,7 +815,7 @@ void KDiff3App::slotFinishMainInit()
     // TODO What bug? Seems fixed.
     // Workaround for a Qt-bug
     /*QList<QTreeView*> treeViews = findChildren<QTreeView*>();
-    foreach(QTreeView* pTreeView, treeViews)
+    for(QTreeView* pTreeView: treeViews)
     {
         pTreeView->setUpdatesEnabled(true);
     }*/
@@ -825,7 +825,6 @@ void KDiff3App::slotFinishMainInit()
 
     if(m_bLoadFiles)
     {
-
         if(bVisibleMergeResultWindow)
             m_pMergeResultWindow->showNrOfConflicts();
         else if(
@@ -1026,7 +1025,7 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
                     errors = m_sd2.setData(text);
                 else if(o == m_pDiffTextWindow3)
                     errors = m_sd3.setData(text);
-                foreach(const QString& error, errors)
+                for(const QString& error: qAsConst(errors))
                 {
                     KMessageBox::error(m_pOptionDialog, error);
                 }
@@ -1282,7 +1281,7 @@ void KDiff3App::slotEditPaste()
             do_init = true;
         }
 
-        foreach(const QString& error, errors)
+        for(const QString& error: qAsConst(errors))
         {
             KMessageBox::error(m_pOptionDialog, error);
         }

@@ -384,7 +384,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
         // First sort codec names:
         std::map<QString, QTextCodec*> names;
         QList<int> mibs = QTextCodec::availableMibs();
-        foreach(int i, mibs)
+        for(int i: mibs)
         {
             QTextCodec* c = QTextCodec::codecForMib(i);
             if(c != nullptr)

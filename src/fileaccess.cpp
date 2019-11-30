@@ -1161,7 +1161,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
         }
         else
         {
-            foreach(const QFileInfo& fi, fiList) // for each file...
+            for(const QFileInfo& fi: fiList) // for each file...
             {
                 if(pp.wasCancelled())
                     break;

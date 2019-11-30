@@ -44,7 +44,7 @@ KDiff3Shell::KDiff3Shell(bool bCompleteInit)
     statusBar()->show();
 
     /*const QVector<KPluginMetaData> plugin_offers = KPluginLoader::findPlugins( "kf5/kdiff3part" );
-    foreach( const KPluginMetaData & service, plugin_offers ) {
+    for( const KPluginMetaData & service: plugin_offers ) {
         KPluginFactory *factory = KPluginLoader( service.fileName() ).factory();
         m_part = factory->create<KDiff3Part>( this, QVariantList() << QVariant( QLatin1String( "KDiff3Part" ) ) );
         if( m_part )

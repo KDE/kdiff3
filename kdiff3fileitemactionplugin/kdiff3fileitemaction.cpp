@@ -145,11 +145,12 @@ QList<QAction*> KDiff3FileItemAction::actions( const KFileItemListProperties& fi
          pHistoryMenuAction->setMenu( pHistoryMenu );
          pHistoryMenu->setEnabled( m_list.count()>0 && historyCount>0 );
          pActionMenu->addAction(pHistoryMenuAction);
-         foreach (const QString &file, *s_pHistory) {
-            pAction = new QAction(file, this);
-            pAction->setData(file);
-            connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareWithHistoryItem);
-            pHistoryMenu->addAction(pAction);
+         for(const QString& file : qAsConst(*s_pHistory))
+         {
+             pAction = new QAction(file, this);
+             pAction->setData(file);
+             connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareWithHistoryItem);
+             pHistoryMenu->addAction(pAction);
          }
 
          pAction = new QAction(i18n("Clear list"), this);
