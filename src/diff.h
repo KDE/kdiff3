@@ -301,13 +301,17 @@ class Diff3LineList : public std::list<Diff3Line>
     void calcDiff3LineListTrim(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList);
 
 
-    LineCount recalcWordWrap()
+    LineCount recalcWordWrap(bool resetDisplayCount)
     {
+        //Diff3LineList::iterator i;
         LineCount sumOfLines = 0;
 
-        for(Diff3Line d3l: *this)
+        for(Diff3Line& d3l: *this)
         {
-            d3l.linesNeededForDisplay = 1;
+            //Diff3Line& d3l = *i;
+            if(resetDisplayCount)
+                d3l.linesNeededForDisplay = 1;
+            
             d3l.sumLinesNeededForDisplay = sumOfLines;
             sumOfLines += d3l.linesNeededForDisplay;
         }

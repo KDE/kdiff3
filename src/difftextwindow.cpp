@@ -1565,7 +1565,6 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
             d->m_wrapLineCacheList.clear();
             setUpdatesEnabled(false);
             for(int i = 0, j = 0; i < d->m_pDiff3LineVector->size(); i += s_linesPerRunnable, ++j)
-            //int i=0;
             {
                 d->m_wrapLineCacheList.append(QVector<DiffTextWindowData::WrapLineCacheData>());
                 s_runnables.push_back(new RecalcWordWrapRunnable(this, d, visibleTextWidth, j));

@@ -1670,7 +1670,7 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
     {
         if(m_pOptions->m_bWordWrap)
         {
-            m_diff3LineList.recalcWordWrap();
+            m_diff3LineList.recalcWordWrap(true);
 
             // Let every window calc how many lines will be needed.
             if(m_pDiffTextWindow1)
@@ -1742,7 +1742,7 @@ void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
     {
         if(m_pOptions->m_bWordWrap)
         {
-            LineCount sumOfLines = m_diff3LineList.recalcWordWrap();
+            LineCount sumOfLines = m_diff3LineList.recalcWordWrap(false);
 
             // Finish the word wrap
             if(m_pDiffTextWindow1)
