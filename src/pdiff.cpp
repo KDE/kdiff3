@@ -1630,7 +1630,7 @@ void KDiff3App::postRecalcWordWrap()
     {
         m_bRecalcWordWrapPosted = true;
         m_firstD3LIdx = -1;
-        QTimer::singleShot(1 /* ms */, this, &KDiff3App::slotRecalcWordWrap);
+        emit sigRecalcWordWrap();
     }
     else
     {
@@ -1724,12 +1724,9 @@ void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
         {
             wordWrap->setChecked(false);
             m_pOptions->m_bWordWrap = wordWrap->isChecked();
-            QTimer::singleShot(1 /* ms */, this, &KDiff3App::slotRecalcWordWrap); // do it again
         }
-        else // eResize
-        {
-            QTimer::singleShot(1 /* ms */, this, &KDiff3App::slotRecalcWordWrap); // do it again
-        }
+
+        emit sigRecalcWordWrap();
         return;
     }
     else

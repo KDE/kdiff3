@@ -345,6 +345,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     connect(m_pDirectoryMergeWindow, static_cast<void (DirectoryMergeWindow::*) (void)>(&DirectoryMergeWindow::updateAvailabilities), this, &KDiff3App::slotUpdateAvailabilities);
     connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::statusBarMessage, this, &KDiff3App::slotStatusMsg);
     connect(QApplication::clipboard(), &QClipboard::dataChanged, this, &KDiff3App::slotClipboardChanged);
+    connect(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap, Qt::QueuedConnection);
     m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());
 
     delete KDiff3Shell::getParser();
