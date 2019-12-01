@@ -47,8 +47,7 @@
 #include <QToolTip>
 #include <QUrl>
 
-QList<QRunnable*> DiffTextWindow::s_runnables;//Used in startRunables and recalWordWrap
-QAtomicInt s_runnableCount = 0;
+QList<RecalcWordWrapRunnable*> DiffTextWindow::s_runnables;//Used in startRunables and recalWordWrap
 
 class DiffTextWindowData
 {
@@ -1478,20 +1477,19 @@ void DiffTextWindow::convertSelectionToD3LCoords()
     d->m_selection.end(lastD3LIdx, lastD3LPos);
 }
 
-int s_maxNofRunnables = 0;
-
 class RecalcWordWrapRunnable : public QRunnable
 {
+  private:
+    static QAtomicInt s_runnableCount;
     DiffTextWindow* m_pDTW;
-    // DiffTextWindowData* m_pDTWData; // TODO unused?
     int m_visibleTextWidth;
     int m_cacheIdx;
 
   public:
-    RecalcWordWrapRunnable(DiffTextWindow* p, DiffTextWindowData* pData, int visibleTextWidth, int cacheIdx)
-        : m_pDTW(p), /* m_pDTWData(pData),*/ m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
+    static QAtomicInt s_maxNofRunnables;
+    RecalcWordWrapRunnable(DiffTextWindow* p, int visibleTextWidth, int cacheIdx)
+        : m_pDTW(p), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
     {
-        Q_UNUSED(pData) // TODO really unused?
         setAutoDelete(true);
         s_runnableCount.fetchAndAddOrdered(1);
     }
@@ -1516,6 +1514,8 @@ class RecalcWordWrapRunnable : public QRunnable
     }
 };
 
+QAtomicInt RecalcWordWrapRunnable::s_runnableCount = 0;
+int RecalcWordWrapRunnable::s_maxNofRunnables = 0;
 
 bool DiffTextWindow::startRunnables()
 {
@@ -1528,7 +1528,7 @@ bool DiffTextWindow::startRunnables()
         g_pProgressDialog->setStayHidden(true);
         g_pProgressDialog->push();
         g_pProgressDialog->setMaxNofSteps(s_runnables.count());
-        s_maxNofRunnables = s_runnables.count();
+        RecalcWordWrapRunnable::s_maxNofRunnables = s_runnables.count();
         g_pProgressDialog->setCurrent(0);
 
         for(int i = 0; i < s_runnables.count(); ++i)
@@ -1566,7 +1566,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
             for(int i = 0, j = 0; i < d->m_pDiff3LineVector->size(); i += s_linesPerRunnable, ++j)
             {
                 d->m_wrapLineCacheList.append(QVector<DiffTextWindowData::WrapLineCacheData>());
-                s_runnables.push_back(new RecalcWordWrapRunnable(this, d, visibleTextWidth, j));
+                s_runnables.push_back(new RecalcWordWrapRunnable(this, visibleTextWidth, j));
             }
         }
         else
@@ -1584,7 +1584,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
             setUpdatesEnabled(false);
             for(int i = 0, j = 0; i < d->m_pDiff3LineVector->size(); i += s_linesPerRunnable, ++j)
             {
-                s_runnables.push_back(new RecalcWordWrapRunnable(this, d, visibleTextWidth, j));
+                s_runnables.push_back(new RecalcWordWrapRunnable(this, visibleTextWidth, j));
             }
         }
         else

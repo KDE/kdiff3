@@ -20,7 +20,7 @@
 #include <QString>         // for QString
 
 class QMenu;
-class QRunnable;
+class RecalcWordWrapRunnable;
 class QStatusBar;
 class Options;
 class DiffTextWindowData;
@@ -106,7 +106,7 @@ class DiffTextWindow : public QWidget
     void timerEvent(QTimerEvent*) override;
 
   private:
-    static QList<QRunnable*> s_runnables;
+    static QList<RecalcWordWrapRunnable*> s_runnables;
     static constexpr int s_linesPerRunnable = 2000;
 
     DiffTextWindowData* d;
