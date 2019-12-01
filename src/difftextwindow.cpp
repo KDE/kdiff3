@@ -1515,7 +1515,7 @@ class RecalcWordWrapRunnable : public QRunnable
 };
 
 QAtomicInt RecalcWordWrapRunnable::s_runnableCount = 0;
-int RecalcWordWrapRunnable::s_maxNofRunnables = 0;
+QAtomicInt RecalcWordWrapRunnable::s_maxNofRunnables = 0;
 
 bool DiffTextWindow::startRunnables()
 {
