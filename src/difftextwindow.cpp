@@ -1540,8 +1540,8 @@ bool startRunnables()
         return true;
     }
 }
-// Use conexpr when supported. QT
-const int s_linesPerRunnable = 2000;
+
+constexpr int s_linesPerRunnable = 2000;
 
 void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth)
 {
