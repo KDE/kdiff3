@@ -1449,7 +1449,7 @@ void DiffTextWindow::convertSelectionToD3LCoords()
     d->m_selection.end(lastD3LIdx, lastD3LPos);
 }
 
-int s_maxNofRunnables = 0;
+QAtomicInt s_maxNofRunnables = 0;
 
 class RecalcWordWrapRunnable : public QRunnable
 {
