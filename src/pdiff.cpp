@@ -1696,7 +1696,7 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
             if(m_pDiffTextWindow3)
                 m_pDiffTextWindow3->recalcWordWrap(false, 0, 0);
         }
-        bool bRunnablesStarted = startRunnables();
+        bool bRunnablesStarted = DiffTextWindow::startRunnables();
         if(!bRunnablesStarted)
             slotFinishRecalcWordWrap(visibleTextWidthForPrinting);
         else

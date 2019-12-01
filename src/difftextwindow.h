@@ -20,6 +20,7 @@
 #include <QString>         // for QString
 
 class QMenu;
+class QRunnable;
 class QStatusBar;
 class Options;
 class DiffTextWindowData;
@@ -73,6 +74,8 @@ class DiffTextWindow : public QWidget
 
     void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, int linesPerPage, const QColor& fgColor);
     void print(RLPainter& painter, const QRect& r, int firstLine, int nofLinesPerPage);
+
+    static bool startRunnables();
   Q_SIGNALS:
     void resizeHeightChangedSignal(int nofVisibleLines);
     void resizeWidthChangedSignal(int nofVisibleColumns);
@@ -103,6 +106,9 @@ class DiffTextWindow : public QWidget
     void timerEvent(QTimerEvent*) override;
 
   private:
+    static QList<QRunnable*> s_runnables;
+    static constexpr int s_linesPerRunnable = 2000;
+
     DiffTextWindowData* d;
     void showStatusLine(const LineRef lineFromPos);
     friend class DiffTextWindowFrame;
@@ -161,7 +167,5 @@ class EncodingLabel : public QLabel
 
     void insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<int>& CodecEnumList, QMenu* pMenu, int currentTextCodecEnum);
 };
-
-bool startRunnables();
 
 #endif

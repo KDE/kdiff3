@@ -47,6 +47,7 @@
 #include <QToolTip>
 #include <QUrl>
 
+QList<QRunnable*> DiffTextWindow::s_runnables;//Used in startRunables and recalWordWrap
 QAtomicInt s_runnableCount = 0;
 
 class DiffTextWindowData
@@ -1515,9 +1516,8 @@ class RecalcWordWrapRunnable : public QRunnable
     }
 };
 
-QList<QRunnable*> s_runnables;
 
-bool startRunnables()
+bool DiffTextWindow::startRunnables()
 {
     if(s_runnables.count() == 0)
     {
@@ -1541,7 +1541,6 @@ bool startRunnables()
     }
 }
 
-constexpr int s_linesPerRunnable = 2000;
 
 void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth)
 {
