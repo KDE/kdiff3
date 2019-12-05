@@ -126,50 +126,54 @@ class DiffTextWindowData
  
     void prepareTextLayout(QTextLayout& textLayout, bool bFirstLine, int visibleTextWidth = -1);
 
-    DiffTextWindow* m_pDiffTextWindow;
-    DiffTextWindowFrame* m_pDiffTextWindowFrame = nullptr;
-    QTextCodec* m_pTextCodec = nullptr;
-    e_LineEndStyle m_eLineEndStyle;
+    private:
+      //TODO: Remove friend classes after creating accessors. Please don't add new classes here
+      friend DiffTextWindowFrame;
+      friend DiffTextWindow;
+      DiffTextWindow* m_pDiffTextWindow;
+      DiffTextWindowFrame* m_pDiffTextWindowFrame = nullptr;
+      QTextCodec* m_pTextCodec = nullptr;
+      e_LineEndStyle m_eLineEndStyle;
 
-    const QVector<LineData>* m_pLineData = nullptr;
-    int m_size = 0;
-    QString m_filename;
-    bool m_bWordWrap = false;
-    int m_delayedDrawTimer = 0;
+      const QVector<LineData>* m_pLineData = nullptr;
+      int m_size = 0;
+      QString m_filename;
+      bool m_bWordWrap = false;
+      int m_delayedDrawTimer = 0;
 
-    const Diff3LineVector* m_pDiff3LineVector = nullptr;
-    Diff3WrapLineVector m_diff3WrapLineVector;
-    const ManualDiffHelpList* m_pManualDiffHelpList = nullptr;
-    QList<QVector<WrapLineCacheData>> m_wrapLineCacheList;
+      const Diff3LineVector* m_pDiff3LineVector = nullptr;
+      Diff3WrapLineVector m_diff3WrapLineVector;
+      const ManualDiffHelpList* m_pManualDiffHelpList = nullptr;
+      QList<QVector<WrapLineCacheData>> m_wrapLineCacheList;
 
-    QSharedPointer<Options> m_pOptions;
-    QColor m_cThis;
-    QColor m_cDiff1;
-    QColor m_cDiff2;
-    QColor m_cDiffBoth;
+      QSharedPointer<Options> m_pOptions;
+      QColor m_cThis;
+      QColor m_cDiff1;
+      QColor m_cDiff2;
+      QColor m_cDiffBoth;
 
-    int m_fastSelectorLine1 = 0;
-    int m_fastSelectorNofLines = 0;
+      int m_fastSelectorLine1 = 0;
+      int m_fastSelectorNofLines = 0;
 
-    bool m_bTriple = false;
-    e_SrcSelector m_winIdx = None;
-    int m_firstLine = 0;
-    int m_oldFirstLine = 0;
-    int m_horizScrollOffset = 0;
-    int m_lineNumberWidth = 0;
-    QAtomicInt m_maxTextWidth = -1;
+      bool m_bTriple = false;
+      e_SrcSelector m_winIdx = None;
+      int m_firstLine = 0;
+      int m_oldFirstLine = 0;
+      int m_horizScrollOffset = 0;
+      int m_lineNumberWidth = 0;
+      QAtomicInt m_maxTextWidth = -1;
 
-    QStatusBar* m_pStatusBar = nullptr;
+      QStatusBar* m_pStatusBar = nullptr;
 
-    Selection m_selection;
+      Selection m_selection;
 
-    int m_scrollDeltaX = 0;
-    int m_scrollDeltaY = 0;
+      int m_scrollDeltaX = 0;
+      int m_scrollDeltaY = 0;
 
-    bool m_bMyUpdate = false;
+      bool m_bMyUpdate = false;
 
-    bool m_bSelectionInProgress = false;
-    QPoint m_lastKnownMousePos;
+      bool m_bSelectionInProgress = false;
+      QPoint m_lastKnownMousePos;
 };
 
 DiffTextWindow::DiffTextWindow(
@@ -1725,7 +1729,8 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
 
 class DiffTextWindowFrameData
 {
-  public:
+  private:
+    friend DiffTextWindowFrame;
     DiffTextWindow* m_pDiffTextWindow;
     FileNameLineEdit* m_pFileSelection;
     QPushButton* m_pBrowseButton;
