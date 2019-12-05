@@ -129,6 +129,25 @@ class DiffTextWindowData
         m_eLineEndStyle = eLineEndStyleUnix;
 #endif
     }
+
+    QString getString(int d3lIdx);
+    QString getLineString(int line);
+
+    void writeLine(
+        RLPainter& p, const LineData* pld,
+        const DiffList* pLineDiff1, const DiffList* pLineDiff2, const LineRef& line,
+        const ChangeFlags whatChanged, const ChangeFlags whatChanged2, const LineRef& srcLineIdx,
+        int wrapLineOffset, int wrapLineLength, bool bWrapLine, const QRect& invalidRect, int deviceWidth);
+
+    void draw(RLPainter& p, const QRect& invalidRect, int deviceWidth, int beginLine, int endLine);
+    
+    void myUpdate(int afterMilliSecs);
+
+    int leftInfoWidth() { return 4 + m_lineNumberWidth; } // Nr of information columns on left side
+    int convertLineOnScreenToLineInSource(int lineOnScreen, e_CoordType coordType, bool bFirstLine);
+ 
+    void prepareTextLayout(QTextLayout& textLayout, bool bFirstLine, int visibleTextWidth = -1);
+
     DiffTextWindow* m_pDiffTextWindow;
     DiffTextWindowFrame* m_pDiffTextWindowFrame = nullptr;
     QTextCodec* m_pTextCodec;
@@ -162,17 +181,6 @@ class DiffTextWindowData
     int m_lineNumberWidth;
     QAtomicInt m_maxTextWidth;
 
-    QString getString(int d3lIdx);
-    QString getLineString(int line);
-
-    void writeLine(
-        RLPainter& p, const LineData* pld,
-        const DiffList* pLineDiff1, const DiffList* pLineDiff2, const LineRef& line,
-        const ChangeFlags whatChanged, const ChangeFlags whatChanged2, const LineRef& srcLineIdx,
-        int wrapLineOffset, int wrapLineLength, bool bWrapLine, const QRect& invalidRect, int deviceWidth);
-
-    void draw(RLPainter& p, const QRect& invalidRect, int deviceWidth, int beginLine, int endLine);
-
     QStatusBar* m_pStatusBar;
 
     Selection m_selection;
@@ -181,14 +189,9 @@ class DiffTextWindowData
     int m_scrollDeltaY;
 
     bool m_bMyUpdate;
-    void myUpdate(int afterMilliSecs);
-
-    int leftInfoWidth() { return 4 + m_lineNumberWidth; } // Nr of information columns on left side
-    int convertLineOnScreenToLineInSource(int lineOnScreen, e_CoordType coordType, bool bFirstLine);
 
     bool m_bSelectionInProgress;
     QPoint m_lastKnownMousePos;
-    void prepareTextLayout(QTextLayout& textLayout, bool bFirstLine, int visibleTextWidth = -1);
 };
 
 DiffTextWindow::DiffTextWindow(
