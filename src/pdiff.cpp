@@ -706,6 +706,7 @@ void KDiff3App::initView()
     connect(m_pDiffTextWindow1, &DiffTextWindow::newSelection, this, &KDiff3App::slotSelectionStart);
     connect(m_pDiffTextWindow1, &DiffTextWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
     connect(m_pDiffTextWindow1, &DiffTextWindow::scrollDiffTextWindow, this, &KDiff3App::scrollDiffTextWindow);
+    connect(m_pDiffTextWindow1, &DiffTextWindow::finishRecalcWordWrap, this, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
     m_pDiffTextWindow1->installEventFilter(this);
 
     connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow2, &DiffTextWindow::setFirstLine);
@@ -713,6 +714,8 @@ void KDiff3App::initView()
     connect(m_pDiffTextWindow2, &DiffTextWindow::newSelection, this, &KDiff3App::slotSelectionStart);
     connect(m_pDiffTextWindow2, &DiffTextWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
     connect(m_pDiffTextWindow2, &DiffTextWindow::scrollDiffTextWindow, this, &KDiff3App::scrollDiffTextWindow);
+    connect(m_pDiffTextWindow2, &DiffTextWindow::finishRecalcWordWrap, this, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
+
     m_pDiffTextWindow2->installEventFilter(this);
 
     connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow3, &DiffTextWindow::setFirstLine);
@@ -720,6 +723,8 @@ void KDiff3App::initView()
     connect(m_pDiffTextWindow3, &DiffTextWindow::newSelection, this, &KDiff3App::slotSelectionStart);
     connect(m_pDiffTextWindow3, &DiffTextWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
     connect(m_pDiffTextWindow3, &DiffTextWindow::scrollDiffTextWindow, this, &KDiff3App::scrollDiffTextWindow);
+    connect(m_pDiffTextWindow3, &DiffTextWindow::finishRecalcWordWrap, this, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
+
     m_pDiffTextWindow3->installEventFilter(this);
 
     MergeResultWindow* p = m_pMergeResultWindow;

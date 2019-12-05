@@ -86,6 +86,7 @@ class DiffTextWindow : public QWidget
     void gotFocus();
     void lineClicked(e_SrcSelector winIdx, LineRef line);
 
+    void finishRecalcWordWrap(int visibleTextWidthForPrinting);
   public Q_SLOTS:
     void setFirstLine(QtNumberType line);
     void setHorizScrollOffset(int horizScrollOffset);

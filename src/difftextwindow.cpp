@@ -104,9 +104,14 @@ class DiffTextWindowData
         WrapLineCacheData()  {}
         WrapLineCacheData(int d3LineIdx, int textStart, int textLength)
             : m_d3LineIdx(d3LineIdx), m_textStart(textStart), m_textLength(textLength) {}
-        int m_d3LineIdx = 0;
-        int m_textStart = 0;
-        int m_textLength = 0;
+        qint32 d3LineIdx() { return m_d3LineIdx; }
+        qint32 textStart() { return m_textStart; }
+        qint32 textLength() { return m_textLength; }
+
+      private:
+        qint32 m_d3LineIdx = 0;
+        qint32 m_textStart = 0;
+        qint32 m_textLength = 0;
     };
     QList<QVector<WrapLineCacheData>> m_wrapLineCacheList;
 
@@ -1484,7 +1489,6 @@ class RecalcWordWrapRunnable : public QRunnable
     DiffTextWindow* m_pDTW;
     int m_visibleTextWidth;
     int m_cacheIdx;
-
   public:
     static QAtomicInt s_maxNofRunnables;
     RecalcWordWrapRunnable(DiffTextWindow* p, int visibleTextWidth, int cacheIdx)
@@ -1500,16 +1504,7 @@ class RecalcWordWrapRunnable : public QRunnable
         g_pProgressDialog->setCurrent(s_maxNofRunnables - getAtomic(s_runnableCount));
         if(newValue == 0)
         {
-            QWidget* p = m_pDTW;
-            while(p)
-            {
-                p = p->parentWidget();
-                if(KDiff3App* pKDiff3App = dynamic_cast<KDiff3App*>(p))
-                {
-                    QMetaObject::invokeMethod(pKDiff3App, "slotFinishRecalcWordWrap", Qt::QueuedConnection, Q_ARG(int, m_visibleTextWidth));
-                    break;
-                }
-            }
+            emit m_pDTW->finishRecalcWordWrap(m_visibleTextWidth);
         }
     }
 };
@@ -1639,13 +1634,13 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
                 int cllc = d->m_wrapLineCacheList.last().count();
                 int curCount = d->m_wrapLineCacheList[cacheListIdx2].count() - 1;
                 int l = 0;
-                while((cacheListIdx2 < clc || (cacheListIdx2 == clc && cacheIdx < cllc)) && pWrapLineCache->m_d3LineIdx <= i)
+                while((cacheListIdx2 < clc || (cacheListIdx2 == clc && cacheIdx < cllc)) && pWrapLineCache->d3LineIdx() <= i)
                 {
-                    if(pWrapLineCache->m_d3LineIdx == i)
+                    if(pWrapLineCache->d3LineIdx() == i)
                     {
                         Diff3WrapLine* pDiff3WrapLine = &d->m_diff3WrapLineVector[wrapLineIdx + l];
-                        pDiff3WrapLine->wrapLineOffset = pWrapLineCache->m_textStart;
-                        pDiff3WrapLine->wrapLineLength = pWrapLineCache->m_textLength;
+                        pDiff3WrapLine->wrapLineOffset = pWrapLineCache->textStart();
+                        pDiff3WrapLine->wrapLineLength = pWrapLineCache->textLength();
                         ++l;
                     }
                     if(cacheIdx < curCount)
