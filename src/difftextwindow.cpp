@@ -101,28 +101,6 @@ class DiffTextWindowData
     explicit DiffTextWindowData(DiffTextWindow* p)
     {
         m_pDiffTextWindow = p;
-        m_pLineData = nullptr;
-        m_size = 0;
-        m_bWordWrap = false;
-        m_delayedDrawTimer = 0;
-        m_pDiff3LineVector = nullptr;
-        m_pManualDiffHelpList = nullptr;
-        m_pOptions = nullptr;
-        m_fastSelectorLine1 = 0;
-        m_fastSelectorNofLines = 0;
-        m_bTriple = false;
-        m_winIdx = None;
-        m_firstLine = 0;
-        m_oldFirstLine = 0;
-        m_horizScrollOffset = 0;
-        m_lineNumberWidth = 0;
-        m_maxTextWidth = -1;
-        m_pStatusBar = nullptr;
-        m_scrollDeltaX = 0;
-        m_scrollDeltaY = 0;
-        m_bMyUpdate = false;
-        m_bSelectionInProgress = false;
-        m_pTextCodec = nullptr;
 #if defined(Q_OS_WIN)
         m_eLineEndStyle = eLineEndStyleDos;
 #else
@@ -150,18 +128,18 @@ class DiffTextWindowData
 
     DiffTextWindow* m_pDiffTextWindow;
     DiffTextWindowFrame* m_pDiffTextWindowFrame = nullptr;
-    QTextCodec* m_pTextCodec;
+    QTextCodec* m_pTextCodec = nullptr;
     e_LineEndStyle m_eLineEndStyle;
 
-    const QVector<LineData>* m_pLineData;
-    int m_size;
+    const QVector<LineData>* m_pLineData = nullptr;
+    int m_size = 0;
     QString m_filename;
-    bool m_bWordWrap;
-    int m_delayedDrawTimer;
+    bool m_bWordWrap = false;
+    int m_delayedDrawTimer = 0;
 
     const Diff3LineVector* m_pDiff3LineVector = nullptr;
     Diff3WrapLineVector m_diff3WrapLineVector;
-    const ManualDiffHelpList* m_pManualDiffHelpList;
+    const ManualDiffHelpList* m_pManualDiffHelpList = nullptr;
     QList<QVector<WrapLineCacheData>> m_wrapLineCacheList;
 
     QSharedPointer<Options> m_pOptions;
@@ -170,27 +148,27 @@ class DiffTextWindowData
     QColor m_cDiff2;
     QColor m_cDiffBoth;
 
-    int m_fastSelectorLine1;
-    int m_fastSelectorNofLines;
+    int m_fastSelectorLine1 = 0;
+    int m_fastSelectorNofLines = 0;
 
-    bool m_bTriple;
-    e_SrcSelector m_winIdx;
-    int m_firstLine;
-    int m_oldFirstLine;
-    int m_horizScrollOffset;
-    int m_lineNumberWidth;
-    QAtomicInt m_maxTextWidth;
+    bool m_bTriple = false;
+    e_SrcSelector m_winIdx = None;
+    int m_firstLine = 0;
+    int m_oldFirstLine = 0;
+    int m_horizScrollOffset = 0;
+    int m_lineNumberWidth = 0;
+    QAtomicInt m_maxTextWidth = -1;
 
-    QStatusBar* m_pStatusBar;
+    QStatusBar* m_pStatusBar = nullptr;
 
     Selection m_selection;
 
-    int m_scrollDeltaX;
-    int m_scrollDeltaY;
+    int m_scrollDeltaX = 0;
+    int m_scrollDeltaY = 0;
 
-    bool m_bMyUpdate;
+    bool m_bMyUpdate = false;
 
-    bool m_bSelectionInProgress;
+    bool m_bSelectionInProgress = false;
     QPoint m_lastKnownMousePos;
 };
 
