@@ -489,18 +489,12 @@ extern bool g_bIgnoreWhiteSpace;
 extern bool g_bIgnoreTrivialMatches;
 extern bool g_bAutoSolve;
 
-// Cursor conversions that consider g_tabSize.
-int convertToPosInText(const QString& s, int posOnScreen, int tabSize);
-int convertToPosOnScreen(const QString& s, int posInText, int tabSize);
-
 enum e_CoordType
 {
     eFileCoords,
     eD3LLineCoords,
     eWrapCoords
 };
-
-void calcTokenPos(const QString&, int posOnScreen, int& pos1, int& pos2, int tabSize);
 
 QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, const QStringList& parenthesesGroupList);
 bool findParenthesesGroups(const QString& s, QStringList& sl);

@@ -1677,46 +1677,6 @@ void MergeResultWindow::timerEvent(QTimerEvent*)
     }
 }
 
-/// Converts the cursor-posOnScreen into a text index, considering tabulators.
-int convertToPosInText(const QString& /*s*/, int posOnScreen, int /*tabSize*/)
-{
-    return posOnScreen;
-}
-
-//   int localPosOnScreen = 0;
-//   int size=s.length();
-//   for ( int i=0; i<size; ++i )
-//   {
-//      if ( localPosOnScreen>=posOnScreen )
-//         return i;
-
-//      // All letters except tabulator have width one.
-//      int letterWidth = s[i]!='\t' ? 1 : tabber( localPosOnScreen, tabSize );
-
-//      localPosOnScreen += letterWidth;
-
-//      if ( localPosOnScreen>posOnScreen )
-//         return i;
-//   }
-//   return size;
-//}
-
-/// Converts the index into the text to a cursor-posOnScreen considering tabulators.
-int convertToPosOnScreen(const QString& /*p*/, int posInText, int /*tabSize*/)
-{
-    return posInText;
-}
-//   int posOnScreen = 0;
-//   for ( int i=0; i<posInText; ++i )
-//   {
-//      // All letters except tabulator have width one.
-//      int letterWidth = p[i]!='\t' ? 1 : tabber( posOnScreen, tabSize );
-
-//      posOnScreen += letterWidth;
-//   }
-//   return posOnScreen;
-//}
-
 QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(int line, const QString& str, QTextLayout& textLayout)
 {
     // tabs
@@ -1747,8 +1707,8 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(int li
     textLayout.beginLayout();
     if(m_selection.lineWithin(line))
     {
-        int firstPosInText = convertToPosInText(str, m_selection.firstPosInLine(line), m_pOptions->m_tabSize);
-        int lastPosInText = convertToPosInText(str, m_selection.lastPosInLine(line), m_pOptions->m_tabSize);
+        int firstPosInText = m_selection.firstPosInLine(line);
+        int lastPosInText = m_selection.lastPosInLine(line);
         int lengthInText = std::max(0, lastPosInText - firstPosInText);
         if(lengthInText > 0)
             m_selection.bSelectionContainsData = true;
@@ -2163,8 +2123,8 @@ void MergeResultWindow::mouseDoubleClickEvent(QMouseEvent* e)
             Utils::calcTokenPos(s, pos, pos1, pos2);
 
             resetSelection();
-            m_selection.start(line, convertToPosOnScreen(s, pos1, m_pOptions->m_tabSize));
-            m_selection.end(line, convertToPosOnScreen(s, pos2, m_pOptions->m_tabSize));
+            m_selection.start(line, pos1);
+            m_selection.end(line, pos2);
 
             update();
             // emit selectionEnd() happens in the mouseReleaseEvent.
@@ -2283,7 +2243,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     calcIteratorFromLineNr(y, mlIt, melIt);
 
     QString str = melIt->getString(m_pldA, m_pldB, m_pldC);
-    int x = convertToPosInText(str, m_cursorXPos, m_pOptions->m_tabSize);
+    int x = m_cursorXPos;
 
     QTextLayout textLayoutOrig(str, font(), this);
     getTextLayoutForLine(y, str, textLayoutOrig);
@@ -2758,7 +2718,7 @@ bool MergeResultWindow::deleteSelection2(QString& s, int& x, int& y,
         y = m_cursorYPos;
         calcIteratorFromLineNr(y, mlIt, melIt);
         s = melIt->getString(m_pldA, m_pldB, m_pldC);
-        x = convertToPosInText(s, m_cursorXPos, m_pOptions->m_tabSize);
+        x = m_cursorXPos;
         return true;
     }
 
@@ -2830,14 +2790,14 @@ void MergeResultWindow::deleteSelection()
                 {
                     mlItFirst = mlIt;
                     melItFirst = melIt;
-                    int pos = convertToPosInText(lineString, firstPosInLine, m_pOptions->m_tabSize);
+                    int pos = firstPosInLine;
                     firstLineString = lineString.left(pos);
                 }
 
                 if(line == lastLine)
                 {
                     // This is the last line in the selection
-                    int pos = convertToPosInText(lineString, lastPosInLine, m_pOptions->m_tabSize);
+                    int pos = lastPosInLine;
                     firstLineString += lineString.midRef(pos); // rest of line
                     melItFirst->setString(firstLineString);
                 }
@@ -2878,7 +2838,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
     melItAfter = melIt;
     ++melItAfter;
     QString str = melIt->getString(m_pldA, m_pldB, m_pldC);
-    int x = convertToPosInText(str, m_cursorXPos, m_pOptions->m_tabSize);
+    int x = m_cursorXPos;
 
     if(!QApplication::clipboard()->supportsSelection())
         bFromSelection = false;
@@ -2913,7 +2873,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
     melIt->setString(currentLine);
 
     m_cursorYPos = y;
-    m_cursorXPos = convertToPosOnScreen(currentLine, x, m_pOptions->m_tabSize);
+    m_cursorXPos = x;
     m_cursorOldXPixelPos = m_cursorXPixelPos;
 
     update();
@@ -3070,8 +3030,8 @@ void MergeResultWindow::setSelection(int firstLine, int startPos, int lastLine, 
         endPos = s.length();
     }
     m_selection.reset();
-    m_selection.start(firstLine, convertToPosOnScreen(getString(firstLine), startPos, m_pOptions->m_tabSize));
-    m_selection.end(lastLine, convertToPosOnScreen(getString(lastLine), endPos, m_pOptions->m_tabSize));
+    m_selection.start(firstLine, startPos);
+    m_selection.end(lastLine, endPos);
     update();
 }
 

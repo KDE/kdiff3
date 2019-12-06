@@ -564,8 +564,8 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
             Utils::calcTokenPos(s, pos, pos1, pos2);
 
             resetSelection();
-            d->m_selection.start(line, convertToPosOnScreen(s, pos1, d->m_pOptions->m_tabSize));
-            d->m_selection.end(line, convertToPosOnScreen(s, pos2, d->m_pOptions->m_tabSize));
+            d->m_selection.start(line, pos1);
+            d->m_selection.end(line, pos2);
             update();
             // emit d->m_selectionEnd() happens in the mouseReleaseEvent.
             showStatusLine(line);
@@ -1409,8 +1409,8 @@ void DiffTextWindow::setSelection(LineRef firstLine, int startPos, LineRef lastL
             ++lastWrapLine;
         }
 
-        d->m_selection.start(firstWrapLine, convertToPosOnScreen(s1, wrapStartPos, d->m_pOptions->m_tabSize));
-        d->m_selection.end(lastWrapLine, convertToPosOnScreen(s2, wrapEndPos, d->m_pOptions->m_tabSize));
+        d->m_selection.start(firstWrapLine, wrapStartPos);
+        d->m_selection.end(lastWrapLine, wrapEndPos);
         l = firstWrapLine;
         p = wrapStartPos;
     }
@@ -1418,8 +1418,8 @@ void DiffTextWindow::setSelection(LineRef firstLine, int startPos, LineRef lastL
     {
         if(d->m_pDiff3LineVector != nullptr)
         {
-            d->m_selection.start(firstLine, convertToPosOnScreen(d->getString(firstLine), startPos, d->m_pOptions->m_tabSize));
-            d->m_selection.end(lastLine, convertToPosOnScreen(d->getString(lastLine), endPos, d->m_pOptions->m_tabSize));
+            d->m_selection.start(firstLine, startPos);
+            d->m_selection.end(lastLine, endPos);
             l = firstLine;
             p = startPos;
         }
@@ -1471,12 +1471,12 @@ void DiffTextWindow::convertSelectionToD3LCoords()
     // convert the d->m_selection to unwrapped coordinates: Later restore to new coords
     int firstD3LIdx, firstD3LPos;
     QString s = d->getLineString(d->m_selection.beginLine());
-    int firstPosInText = convertToPosInText(s, d->m_selection.beginPos(), d->m_pOptions->m_tabSize);
+    int firstPosInText = d->m_selection.beginPos();
     convertLineCoordsToD3LCoords(d->m_selection.beginLine(), firstPosInText, firstD3LIdx, firstD3LPos);
 
     int lastD3LIdx, lastD3LPos;
     s = d->getLineString(d->m_selection.endLine());
-    int lastPosInText = convertToPosInText(s, d->m_selection.endPos(), d->m_pOptions->m_tabSize);
+    int lastPosInText = d->m_selection.endPos();
     convertLineCoordsToD3LCoords(d->m_selection.endLine(), lastPosInText, lastD3LIdx, lastD3LPos);
 
     d->m_selection.start(firstD3LIdx, firstD3LPos);
@@ -1707,8 +1707,8 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
         int lastLine, lastPos;
         convertD3LCoordsToLineCoords(d->m_selection.endLine(), d->m_selection.endPos(), lastLine, lastPos);
 
-        d->m_selection.start(firstLine, convertToPosOnScreen(d->getLineString(firstLine), firstPos, d->m_pOptions->m_tabSize));
-        d->m_selection.end(lastLine, convertToPosOnScreen(d->getLineString(lastLine), lastPos, d->m_pOptions->m_tabSize));
+        d->m_selection.start(firstLine, firstPos);
+        d->m_selection.end(lastLine, lastPos);
     }
 }
 
