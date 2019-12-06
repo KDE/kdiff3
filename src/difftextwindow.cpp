@@ -1715,7 +1715,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
 class DiffTextWindowFrameData
 {
   public:
-    DiffTextWindowFrameData(DiffTextWindowFrame* frame, QStatusBar* pStatusBar, const QSharedPointer<Options>& pOptions, const e_SrcSelector winIdx)
+    DiffTextWindowFrameData(DiffTextWindowFrame* frame, const QSharedPointer<Options>& pOptions, const e_SrcSelector winIdx)
     {
         m_winIdx = winIdx;
 
@@ -1729,7 +1729,6 @@ class DiffTextWindowFrameData
 
         m_pLabel = new QLabel("A:", m_pTopLineWidget);
         m_pTopLine = new QLabel(m_pTopLineWidget);
-        m_pDiffTextWindow = new DiffTextWindow(frame, pStatusBar, pOptions, winIdx);
     }
 
     const QPushButton* getBrowseButton() const { return m_pBrowseButton; }
@@ -1754,10 +1753,15 @@ class DiffTextWindowFrameData
 DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, SourceData* psd)
     : QWidget(pParent)
 {
-    d = new DiffTextWindowFrameData(this, pStatusBar, pOptions, winIdx);
+    d = new DiffTextWindowFrameData(this, pOptions, winIdx);
     setAutoFillBackground(true);
     connect(d->getBrowseButton(), &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
     connect(d->getFileSelectionField(), &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
+    /*
+        Creating a DiffTextWindow causes DiffTextWindowFrameData::init to be called so DiffTextWindowFrameData must
+        complete construction before this point.
+    */
+    d->m_pDiffTextWindow = new DiffTextWindow(this, pStatusBar, pOptions, winIdx);
 
     QVBoxLayout* pVTopLayout = new QVBoxLayout(const_cast<QWidget*>(d->getTopLineWidget()));
     pVTopLayout->setMargin(2);
