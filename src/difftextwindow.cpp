@@ -624,8 +624,6 @@ void DiffTextWindow::mouseReleaseEvent(QMouseEvent* e)
     d->m_scrollDeltaY = 0;
 }
 
-inline int sqr(int x) { return x * x; }
-
 void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
 {
     LineRef line;
@@ -654,8 +652,8 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
             if(e->x() > width() - 1 - d->leftInfoWidth() * fontWidth) deltaX = +1 + abs(e->x() - (width() - 1 - d->leftInfoWidth() * fontWidth)) / fontWidth;
             if(e->x() < fontWidth) deltaX = -1 - abs(e->x() - fontWidth) / fontWidth;
         }
-        if(e->y() < 0) deltaY = -1 - sqr(e->y()) / sqr(fm.lineSpacing());
-        if(e->y() > height()) deltaY = +1 + sqr(e->y() - height()) / sqr(fm.lineSpacing());
+        if(e->y() < 0) deltaY = -1 - (int)std::pow<int, int>(e->y(), 2) / (int)std::pow(fm.lineSpacing(), 2);
+        if(e->y() > height()) deltaY = 1 + (int)std::pow(e->y() - height(), 2) / (int)std::pow(fm.lineSpacing(), 2);
         if((deltaX != 0 && d->m_scrollDeltaX != deltaX) || (deltaY != 0 && d->m_scrollDeltaY != deltaY))
         {
             d->m_scrollDeltaX = deltaX;
