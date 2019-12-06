@@ -817,13 +817,6 @@ void KDiff3App::slotFinishMainInit()
 
     slotUpdateAvailabilities();
     setUpdatesEnabled(true);
-    // TODO What bug? Seems fixed.
-    // Workaround for a Qt-bug
-    /*QList<QTreeView*> treeViews = findChildren<QTreeView*>();
-    for(QTreeView* pTreeView: treeViews)
-    {
-        pTreeView->setUpdatesEnabled(true);
-    }*/
 
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
     TotalDiffStatus* pTotalDiffStatus = &m_totalDiffStatus;

@@ -2743,7 +2743,7 @@ void DirectoryMergeInfo::addListViewItem(const QString& dir, const QString& base
         if(fi != nullptr && fi->exists())
         {
             QString dateString = fi->lastModified().toString("yyyy-MM-dd hh:mm:ss");
-            //TODO: Move logic to FileAccess
+            
             m_pInfoList->addTopLevelItem(new QTreeWidgetItem(
                 m_pInfoList,
                 QStringList() << dir << QString(fi->isDir() ? i18n("Dir") : i18n("File")) + (fi->isSymLink() ? i18n("-Link") : "") << QString::number(fi->size()) << QLatin1String(fi->isReadable() ? "r" : " ") + QLatin1String(fi->isWritable() ? "w" : " ") + QLatin1String((fi->isExecutable() ? "x" : " ")) << dateString << QString(fi->isSymLink() ? (" -> " + fi->readLink()) : QString(""))));

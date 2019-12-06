@@ -1293,75 +1293,8 @@ void OptionDialog::setupDirectoryMergePage()
 
     topLayout->addStretch(10);
 }
-/*
-static void insertCodecs(OptionComboBox* p)
-{
-   std::multimap<QString,QString> m;  // Using the multimap for case-insensitive sorting.
-   int i;
-   for(i=0;;++i)
-   {
-      QTextCodec* pCodec = QTextCodec::codecForIndex ( i );
-      if ( pCodec != 0 )  m.insert( std::make_pair( QString(pCodec->mimeName()).toUpper(), pCodec->mimeName()) );
-      else                break;
-   }
-
-   p->insertItem( i18n("Auto"), 0 );
-   std::multimap<QString,QString>::iterator mi;
-   for(mi=m.begin(), i=0; mi!=m.end(); ++mi, ++i)
-      p->insertItem(mi->second, i+1);
-}
-*/
-/*
-// UTF8-Codec that saves a BOM
-// UTF8-Codec that saves a BOM
-class Utf8BOMCodec : public QTextCodec
-{
-   QTextCodec* m_pUtf8Codec;
-   class PublicTextCodec : public QTextCodec
-   {
-   public:
-      QString publicConvertToUnicode ( const char * p, int len, ConverterState* pState ) const
-      {
-         return convertToUnicode( p, len, pState );
-      }
-      QByteArray publicConvertFromUnicode ( const QChar * input, int number, ConverterState * pState ) const
-      {
-         return convertFromUnicode( input, number, pState );
-      }
-   };
-public:
-   Utf8BOMCodec()
-   {
-      m_pUtf8Codec = QTextCodec::codecForName("UTF-8");
-   }
-   QByteArray name () const { return "UTF-8-BOM"; }
-   int mibEnum () const { return 2123; }
-   QByteArray convertFromUnicode ( const QChar * input, int number, ConverterState * pState ) const
-   {
-      QByteArray r;
-      if ( pState && pState->state_data[2]==0)  // state_data[2] not used by QUtf8::convertFromUnicode (see qutfcodec.cpp)
-      {
-        r += "\xEF\xBB\xBF";
-        pState->state_data[2]=1;
-        pState->flags |= QTextCodec::IgnoreHeader;
-      }
-
-      r += ((PublicTextCodec*)m_pUtf8Codec)->publicConvertFromUnicode( input, number, pState );
-      return r;
-   }
-   QString convertToUnicode ( const char * p, int len, ConverterState* pState ) const
-   {
-      return ((PublicTextCodec*)m_pUtf8Codec)->publicConvertToUnicode( p, len, pState );
-   }
-};
-*/
 void OptionDialog::setupRegionalPage()
 {
-    /*
-     TODO: What is this line supposed to do besides leak memory? Introduced as is in .91 no explanation
-        new Utf8BOMCodec();
-   */
-
     QFrame* page = new QFrame();
     KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Regional Settings"));
     pageItem->setHeader(i18n("Regional Settings"));
