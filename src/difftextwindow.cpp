@@ -546,14 +546,14 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
         QString s;
         if(d->m_bWordWrap)
         {
-            if(line < 0 || line >= (int)d->m_diff3WrapLineVector.size())
+            if(!line.isValid() || line >= (int)d->m_diff3WrapLineVector.size())
                 return;
             const Diff3WrapLine& d3wl = d->m_diff3WrapLineVector[line];
             s = d->getString(d3wl.diff3LineIndex).mid(d3wl.wrapLineOffset, d3wl.wrapLineLength);
         }
         else
         {
-            if(line < 0 || line >= (int)d->m_pDiff3LineVector->size())
+            if(!line.isValid() || line >= (int)d->m_pDiff3LineVector->size())
                 return;
             s = d->getString(line);
         }
@@ -1429,7 +1429,7 @@ void DiffTextWindow::setSelection(LineRef firstLine, int startPos, LineRef lastL
 
 int DiffTextWindowData::convertLineOnScreenToLineInSource(int lineOnScreen, e_CoordType coordType, bool bFirstLine)
 {
-    LineRef line = -1;
+    LineRef line;
     if(lineOnScreen >= 0)
     {
         if(coordType == eWrapCoords) return lineOnScreen;
@@ -1437,7 +1437,7 @@ int DiffTextWindowData::convertLineOnScreenToLineInSource(int lineOnScreen, e_Co
         if(!bFirstLine && d3lIdx >= m_pDiff3LineVector->size())
             d3lIdx = m_pDiff3LineVector->size() - 1;
         if(coordType == eD3LLineCoords) return d3lIdx;
-        while(line < 0 && d3lIdx < m_pDiff3LineVector->size() && d3lIdx >= 0)
+        while(!line.isValid() && d3lIdx < m_pDiff3LineVector->size() && d3lIdx >= 0)
         {
             const Diff3Line* d3l = (*m_pDiff3LineVector)[d3lIdx];
             if(m_winIdx == A) line = d3l->getLineA();
