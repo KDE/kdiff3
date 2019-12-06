@@ -76,6 +76,18 @@ class DiffTextWindow : public QWidget
     void print(RLPainter& painter, const QRect& r, int firstLine, int nofLinesPerPage);
 
     static bool startRunnables();
+
+    bool isThreeWay() const;
+    const QString& getFileName() const;
+
+    e_SrcSelector getWindowIndex() const;
+    
+    const QString getEncodingDisplayString() const;
+    e_LineEndStyle getLineEndStyle() const;
+    const Diff3LineVector* getDiff3LineVector() const;
+
+    qint32 getLineNumberWidth() const;
+
   Q_SIGNALS:
     void resizeHeightChangedSignal(int nofVisibleLines);
     void resizeWidthChangedSignal(int nofVisibleColumns);
@@ -112,7 +124,6 @@ class DiffTextWindow : public QWidget
 
     DiffTextWindowData* d;
     void showStatusLine(const LineRef lineFromPos);
-    friend class DiffTextWindowFrame;
 };
 
 class DiffTextWindowFrameData;
