@@ -118,6 +118,10 @@ class CommentParserTest : public QObject
         test.processLine("  comment line ");
         QVERIFY(test.inComment());
         QVERIFY(test.isPureComment());
+
+        test.processLine("  comment * line /  ");
+        QVERIFY(test.inComment());
+        QVERIFY(test.isPureComment());
         //embedded single line character sequence should not end comment
         test.processLine("  comment line //");
         QVERIFY(test.inComment());
@@ -266,6 +270,12 @@ class CommentParserTest : public QObject
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
         QVERIFY(!test.isPureComment());
+
+        //invalid in C++ should not be flagged as non-comment
+        test.processLine(" */");
+        QVERIFY(!test.inString());
+        QVERIFY(!test.inComment());
+        QVERIFY(!test.isPureComment());
     }
 
     void removeComment()
@@ -276,6 +286,7 @@ class CommentParserTest : public QObject
         test.processLine(line);
         test.removeComment(line);
         QVERIFY(line == correct);
+        QVERIFY(line.length() == correct.length());
         
         test = DefaultCommentParser();
         correct = line = QLatin1String("  //int i = 8 / 8 * 3;");
@@ -290,6 +301,7 @@ class CommentParserTest : public QObject
         test.processLine(line);
         test.removeComment(line);
         QVERIFY(line == correct);
+        QVERIFY(line.length() == correct.length());
 
         test = DefaultCommentParser();
         line = QLatin1String("  int i = 8 / 8 * 3;// comment");
@@ -307,6 +319,7 @@ class CommentParserTest : public QObject
         test.processLine(line);
         test.removeComment(line);
         QVERIFY(line == correct);
+        QVERIFY(line.length() == correct.length());
         
         correct = line = QLatin1String("  int i = 8 / 8 * 3;/* mot a comment");
         test.processLine(line);
@@ -338,6 +351,7 @@ class CommentParserTest : public QObject
         test.processLine(line);
         test.removeComment(line);
         QVERIFY(line == correct);
+        QVERIFY(line.length() == correct.length());
 
         //line with multiple comments wierd but legal c/c++
         test = DefaultCommentParser();
@@ -345,6 +359,13 @@ class CommentParserTest : public QObject
         correct = QLatin1String("  int          i = 8 / 8 * 3;            ");
         test.processLine(line);
         test.removeComment(line);
+        QVERIFY(line == correct);
+        QVERIFY(line.length() == correct.length());
+
+        //invalid in C++ should not be flagged as non-comment
+        test = DefaultCommentParser();
+        line = correct = " */";
+        test.processLine(" */");
         QVERIFY(line == correct);
         QVERIFY(line.length() == correct.length());
     }
