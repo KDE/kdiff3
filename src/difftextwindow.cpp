@@ -532,39 +532,6 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
     }
 }
 
-bool isCTokenChar(QChar c)
-{
-    return (c == '_') ||
-           (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
-           (c >= '0' && c <= '9');
-}
-
-/// Calculate where a token starts and ends, given the x-position on screen.
-void calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2, int tabSize)
-{
-    // Cursor conversions that consider g_tabSize
-    int pos = convertToPosInText(s, std::max(0, posOnScreen), tabSize);
-    if(pos >= (int)s.length())
-    {
-        pos1 = s.length();
-        pos2 = s.length();
-        return;
-    }
-
-    pos1 = pos;
-    pos2 = pos + 1;
-
-    if(isCTokenChar(s[pos1]))
-    {
-        while(pos1 >= 0 && isCTokenChar(s[pos1]))
-            --pos1;
-        ++pos1;
-
-        while(pos2 < (int)s.length() && isCTokenChar(s[pos2]))
-            ++pos2;
-    }
-}
-
 void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
 {
     d->m_bSelectionInProgress = false;
@@ -594,7 +561,7 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
         if(!s.isEmpty())
         {
             int pos1, pos2;
-            calcTokenPos(s, pos, pos1, pos2, d->m_pOptions->m_tabSize);
+            Utils::calcTokenPos(s, pos, pos1, pos2);
 
             resetSelection();
             d->m_selection.start(line, convertToPosOnScreen(s, pos1, d->m_pOptions->m_tabSize));

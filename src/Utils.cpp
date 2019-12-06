@@ -124,3 +124,36 @@ bool Utils::wildcardMultiMatch(const QString& wildcard, const QString& testStrin
 
     return false;
 }
+
+bool Utils::isCTokenChar(QChar c)
+{
+    return (c == '_') ||
+           (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
+           (c >= '0' && c <= '9');
+}
+
+/// Calculate where a token starts and ends, given the x-position on screen.
+void Utils::calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2)
+{
+    // Cursor conversions that consider g_tabSize
+    int pos = std::max(0, posOnScreen);
+    if(pos >= (int)s.length())
+    {
+        pos1 = s.length();
+        pos2 = s.length();
+        return;
+    }
+
+    pos1 = pos;
+    pos2 = pos + 1;
+
+    if(isCTokenChar(s[pos1]))
+    {
+        while(pos1 >= 0 && isCTokenChar(s[pos1]))
+            --pos1;
+        ++pos1;
+
+        while(pos2 < (int)s.length() && isCTokenChar(s[pos2]))
+            ++pos2;
+    }
+}

@@ -2160,7 +2160,7 @@ void MergeResultWindow::mouseDoubleClickEvent(QMouseEvent* e)
         {
             int pos1, pos2;
 
-            calcTokenPos(s, pos, pos1, pos2, m_pOptions->m_tabSize);
+            Utils::calcTokenPos(s, pos, pos1, pos2);
 
             resetSelection();
             m_selection.start(line, convertToPosOnScreen(s, pos1, m_pOptions->m_tabSize));

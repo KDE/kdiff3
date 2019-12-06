@@ -52,6 +52,9 @@ class Utils{
           return metrics.horizontalAdvance(c);
         #endif
       }
+
+      static void calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2);
+      static bool isCTokenChar(QChar c);
 };
 
 #endif
