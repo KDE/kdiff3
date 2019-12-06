@@ -2742,7 +2742,7 @@ void DirectoryMergeInfo::addListViewItem(const QString& dir, const QString& base
     {
         if(fi != nullptr && fi->exists())
         {
-            QString dateString = fi->lastModified().toString("yyyy-MM-dd hh:mm:ss");
+            QString dateString = fi->lastModified().toString(QLocale::system().dateTimeFormat());
             
             m_pInfoList->addTopLevelItem(new QTreeWidgetItem(
                 m_pInfoList,
