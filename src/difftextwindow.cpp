@@ -12,16 +12,16 @@
 
 #include "difftextwindow.h"
 
-#include "common.h"            // for getAtomic, max3, min3
 #include "FileNameLineEdit.h"
+#include "RLPainter.h"
+#include "SourceData.h" // for SourceData
+#include "Utils.h"      // for Utils
+#include "common.h"     // for getAtomic, max3, min3
 #include "kdiff3.h"
 #include "merger.h"
 #include "options.h"
 #include "progress.h"
-#include "RLPainter.h"
 #include "selection.h"
-#include "SourceData.h"        // for SourceData
-#include "Utils.h"             // for Utils
 
 #include <algorithm>
 #include <cmath>
@@ -29,7 +29,6 @@
 
 #include <KLocalizedString>
 
-#include <QtMath>
 #include <QDir>
 #include <QDragEnterEvent>
 #include <QFileDialog>
@@ -46,8 +45,9 @@
 #include <QThreadPool>
 #include <QToolTip>
 #include <QUrl>
+#include <QtMath>
 
-QList<RecalcWordWrapRunnable*> DiffTextWindow::s_runnables;//Used in startRunables and recalWordWrap
+QList<RecalcWordWrapRunnable*> DiffTextWindow::s_runnables; //Used in startRunables and recalWordWrap
 
 class RecalcWordWrapRunnable : public QRunnable
 {
@@ -56,6 +56,7 @@ class RecalcWordWrapRunnable : public QRunnable
     DiffTextWindow* m_pDTW;
     int m_visibleTextWidth;
     int m_cacheIdx;
+
   public:
     static QAtomicInt s_maxNofRunnables;
     RecalcWordWrapRunnable(DiffTextWindow* p, int visibleTextWidth, int cacheIdx)
@@ -81,15 +82,15 @@ QAtomicInt RecalcWordWrapRunnable::s_maxNofRunnables = 0;
 
 class WrapLineCacheData
 {
-    public:
-    WrapLineCacheData()  {}
+  public:
+    WrapLineCacheData() {}
     WrapLineCacheData(int d3LineIdx, int textStart, int textLength)
         : m_d3LineIdx(d3LineIdx), m_textStart(textStart), m_textLength(textLength) {}
     qint32 d3LineIdx() { return m_d3LineIdx; }
     qint32 textStart() { return m_textStart; }
     qint32 textLength() { return m_textLength; }
 
-    private:
+  private:
     qint32 m_d3LineIdx = 0;
     qint32 m_textStart = 0;
     qint32 m_textLength = 0;
@@ -118,12 +119,12 @@ class DiffTextWindowData
         int wrapLineOffset, int wrapLineLength, bool bWrapLine, const QRect& invalidRect, int deviceWidth);
 
     void draw(RLPainter& p, const QRect& invalidRect, int deviceWidth, int beginLine, int endLine);
-    
+
     void myUpdate(int afterMilliSecs);
 
     int leftInfoWidth() { return 4 + m_lineNumberWidth; } // Nr of information columns on left side
     int convertLineOnScreenToLineInSource(int lineOnScreen, e_CoordType coordType, bool bFirstLine);
- 
+
     void prepareTextLayout(QTextLayout& textLayout, bool bFirstLine, int visibleTextWidth = -1);
 
     bool isThreeWay() const { return m_bTriple; };
@@ -183,7 +184,7 @@ class DiffTextWindowData
 bool DiffTextWindow::isThreeWay() const { return d->isThreeWay(); };
 const QString& DiffTextWindow::getFileName() const { return d->getFileName(); }
 
-e_SrcSelector DiffTextWindow::getWindowIndex() const { return  d->m_winIdx; };
+e_SrcSelector DiffTextWindow::getWindowIndex() const { return d->m_winIdx; };
 
 const QString DiffTextWindow::getEncodingDisplayString() const { return d->m_pTextCodec != nullptr ? QLatin1String(d->m_pTextCodec->name()) : QString(); }
 e_LineEndStyle DiffTextWindow::getLineEndStyle() const { return d->m_eLineEndStyle; }
@@ -191,6 +192,7 @@ e_LineEndStyle DiffTextWindow::getLineEndStyle() const { return d->m_eLineEndSty
 const Diff3LineVector* DiffTextWindow::getDiff3LineVector() const { return d->getDiff3LineVector(); }
 
 qint32 DiffTextWindow::getLineNumberWidth() const { return (int)log10((double)std::max(d->m_size, 1)) + 1; }
+
 DiffTextWindow::DiffTextWindow(
     DiffTextWindowFrame* pParent,
     QStatusBar* pStatusBar,
@@ -402,7 +404,7 @@ int DiffTextWindow::getMaxTextWidth()
             textLayout.setText(d->getString(i));
             d->prepareTextLayout(textLayout, true);
             if(textLayout.maximumWidth() > getAtomic(d->m_maxTextWidth))
-                d->m_maxTextWidth =  qCeil(textLayout.maximumWidth());
+                d->m_maxTextWidth = qCeil(textLayout.maximumWidth());
         }
     }
     return getAtomic(d->m_maxTextWidth);
@@ -803,7 +805,7 @@ class FormatRangeHelper
 void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, bool /*bFirstLine*/, int visibleTextWidth)
 {
     QTextOption textOption;
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
     textOption.setTabStop(QFontMetricsF(m_pDiffTextWindow->font()).width(' ') * m_pOptions->m_tabSize);
 #else
     textOption.setTabStopDistance(QFontMetricsF(m_pDiffTextWindow->font()).width(' ') * m_pOptions->m_tabSize);
@@ -853,7 +855,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, bool /*bFirs
         {
             line.setLineWidth(visibleTextWidth - indentation);
             line.setPosition(QPointF(indentation, height));
-            height +=  qCeil(line.height());
+            height += qCeil(line.height());
             //bFirstLine = false;
         }
         else // only one line
@@ -876,8 +878,8 @@ void DiffTextWindowData::writeLine(
     const DiffList* pLineDiff1,
     const DiffList* pLineDiff2,
     const LineRef& line,
-    const ChangeFlags  whatChanged,
-    const ChangeFlags  whatChanged2,
+    const ChangeFlags whatChanged,
+    const ChangeFlags whatChanged2,
     const LineRef& srcLineIdx,
     int wrapLineOffset,
     int wrapLineLength,
@@ -923,7 +925,8 @@ void DiffTextWindowData::writeLine(
 
     QColor c = m_pOptions->m_fgColor;
     p.setPen(c);
-    if(changed == BChanged) {
+    if(changed == BChanged)
+    {
         c = m_cDiff2;
     }
     else if(changed == AChanged)
@@ -944,13 +947,13 @@ void DiffTextWindowData::writeLine(
         {
             switch(lineString[lineString.length() - 1].unicode())
             {
-            case '\n':
-                lineString[lineString.length() - 1] = 0x00B6;
-                break; // "Pilcrow", "paragraph mark"
-            case '\r':
-                lineString[lineString.length() - 1] = 0x00A4;
-                break; // Currency sign ;0x2761 "curved stem paragraph sign ornament"
-                //case '\0b' : lineString[lineString.length()-1] = 0x2756; break; // some other nice looking character
+                case '\n':
+                    lineString[lineString.length() - 1] = 0x00B6;
+                    break; // "Pilcrow", "paragraph mark"
+                case '\r':
+                    lineString[lineString.length() - 1] = 0x00A4;
+                    break; // Currency sign ;0x2761 "curved stem paragraph sign ornament"
+                    //case '\0b' : lineString[lineString.length()-1] = 0x2756; break; // some other nice looking character
             }
         }
         QVector<ChangeFlags> charChanged(pld->size());
@@ -976,7 +979,8 @@ void DiffTextWindowData::writeLine(
             c = m_pOptions->m_fgColor;
             ChangeFlags cchanged = charChanged[i] | whatChanged;
 
-            if(cchanged == BChanged) {
+            if(cchanged == BChanged)
+            {
                 c = m_cDiff2;
             }
             else if(cchanged == AChanged)
@@ -1188,7 +1192,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int device
         d3l->getLineInfo(m_winIdx, m_bTriple, srcLineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 
         writeLine(
-            p,                                               // QPainter
+            p,                                                             // QPainter
             !srcLineIdx.isValid() ? nullptr : &(*m_pLineData)[srcLineIdx], // Text in this line
             pFineDiff1,
             pFineDiff2,
@@ -1287,7 +1291,8 @@ QString DiffTextWindow::getSelection()
 
         Q_ASSERT(d->m_winIdx >= 1 && d->m_winIdx <= 3);
 
-        if(d->m_winIdx == A) {
+        if(d->m_winIdx == A)
+        {
             lineIdx = d3l->getLineA();
         }
         else if(d->m_winIdx == B)
@@ -1446,7 +1451,8 @@ void DiffTextWindow::setSelection(LineRef firstLine, int startPos, LineRef lastL
     }
     else
     {
-        if(d->m_pDiff3LineVector != nullptr){
+        if(d->m_pDiff3LineVector != nullptr)
+        {
             d->m_selection.start(firstLine, convertToPosOnScreen(d->getString(firstLine), startPos, d->m_pOptions->m_tabSize));
             d->m_selection.end(lastLine, convertToPosOnScreen(d->getString(lastLine), endPos, d->m_pOptions->m_tabSize));
             l = firstLine;
@@ -1536,7 +1542,6 @@ bool DiffTextWindow::startRunnables()
     }
 }
 
-
 void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth)
 {
     if(d->m_pDiff3LineVector == nullptr || !isVisible())
@@ -1584,7 +1589,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
         }
         else
         {
-           setUpdatesEnabled(true);
+            setUpdatesEnabled(true);
         }
     }
 }
@@ -1710,7 +1715,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
             textLayout.setText(d->getString(i));
             d->prepareTextLayout(textLayout, true);
             if(textLayout.maximumWidth() > maxTextWidth)
-                maxTextWidth =  qCeil(textLayout.maximumWidth());
+                maxTextWidth = qCeil(textLayout.maximumWidth());
         }
 
         for(;;)
@@ -1745,7 +1750,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
 class DiffTextWindowFrameData
 {
   public:
-    DiffTextWindowFrameData(DiffTextWindowFrame* frame, QStatusBar* pStatusBar, const QSharedPointer<Options> &pOptions, const e_SrcSelector winIdx)
+    DiffTextWindowFrameData(DiffTextWindowFrame* frame, QStatusBar* pStatusBar, const QSharedPointer<Options>& pOptions, const e_SrcSelector winIdx)
     {
         m_winIdx = winIdx;
 
@@ -1762,7 +1767,7 @@ class DiffTextWindowFrameData
         m_pDiffTextWindow = new DiffTextWindow(frame, pStatusBar, pOptions, winIdx);
     }
 
-    const QPushButton* getBrowseButton() const { return m_pBrowseButton;  }
+    const QPushButton* getBrowseButton() const { return m_pBrowseButton; }
     const FileNameLineEdit* getFileSelectionField() const { return m_pFileSelection; }
     const QWidget* getTopLineWidget() const { return m_pTopLineWidget; }
     const QLabel* getLabel() const { return m_pLabel; }
@@ -1781,7 +1786,7 @@ class DiffTextWindowFrameData
     e_SrcSelector m_winIdx;
 };
 
-DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, SourceData* psd)
+DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, SourceData* psd)
     : QWidget(pParent)
 {
     d = new DiffTextWindowFrameData(this, pStatusBar, pOptions, winIdx);
@@ -1812,7 +1817,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBa
     pHL2->addWidget(d->m_pTopLine, 0);
     d->m_pEncoding = new EncodingLabel(i18n("Encoding:"), psd, pOptions);
     //EncodeLabel::EncodingChanged should be handled asyncroniously.
-    connect((EncodingLabel*) d->m_pEncoding, &EncodingLabel::encodingChanged, this, &DiffTextWindowFrame::slotEncodingChanged, Qt::QueuedConnection);
+    connect((EncodingLabel*)d->m_pEncoding, &EncodingLabel::encodingChanged, this, &DiffTextWindowFrame::slotEncodingChanged, Qt::QueuedConnection);
 
     d->m_pLineEndStyle = new QLabel(i18n("Line end style:"));
     pHL2->addWidget(d->m_pEncoding);
@@ -1890,8 +1895,6 @@ DiffTextWindow* DiffTextWindowFrame::getDiffTextWindow()
     return d->m_pDiffTextWindow;
 }
 
-
-
 bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
 {
     Q_UNUSED(o);
@@ -1944,7 +1947,7 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
     }
 }
 
-EncodingLabel::EncodingLabel(const QString& text, SourceData* pSD, const QSharedPointer<Options> &pOptions)
+EncodingLabel::EncodingLabel(const QString& text, SourceData* pSD, const QSharedPointer<Options>& pOptions)
     : QLabel(text)
 {
     m_pOptions = pOptions;
@@ -1979,7 +1982,8 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
 
         // Adding "main" encodings
         insertCodec(i18n("Unicode, 8 bit"), QTextCodec::codecForName("UTF-8"), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
-        if(QTextCodec::codecForName("System")) {
+        if(QTextCodec::codecForName("System"))
+        {
             insertCodec(QString(), QTextCodec::codecForName("System"), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
         }
 
@@ -1987,14 +1991,14 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
         if(m_pOptions != nullptr)
         {
             QStringList& recentEncodings = m_pOptions->m_recentEncodings;
-            for(const QString& s: recentEncodings)
+            for(const QString& s : recentEncodings)
             {
                 insertCodec("", QTextCodec::codecForName(s.toLatin1()), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
             }
         }
         // Submenu to add the rest of available encodings
         pContextEncodingSubMenu->setTitle(i18n("Other"));
-        for(int i: mibs)
+        for(int i : mibs)
         {
             QTextCodec* c = QTextCodec::codecForMib(i);
             if(c != nullptr)
