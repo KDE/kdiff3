@@ -490,7 +490,7 @@ void GnuDiff::find_identical_ends(file_data filevec[])
 
 /* If 1 < k, then (2**k - prime_offset[k]) is the largest prime less
    than 2**k.  This table is derived from Chris K. Caldwell's list
-   <http://www.utm.edu/research/primes/lists/2small/>.  */
+   <https://www.utm.edu/research/primes/lists/2small/>.  */
 
 static unsigned char const prime_offset[] =
     {

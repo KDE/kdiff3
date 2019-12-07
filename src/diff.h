@@ -230,7 +230,7 @@ class Diff3Line
     const LineData* getLineData(e_SrcSelector src) const
     {
         Q_ASSERT(m_pDiffBufferInfo != nullptr);
-        //Use at here not [] to avoid using really wierd syntax
+        //Use at here not [] to avoid using really weird syntax
         if(src == A && lineA.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineA);
         if(src == B && lineB.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineB);
         if(src == C && lineC.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineC);

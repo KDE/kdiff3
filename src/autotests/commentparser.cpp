@@ -353,7 +353,7 @@ class CommentParserTest : public QObject
         QVERIFY(line == correct);
         QVERIFY(line.length() == correct.length());
 
-        //line with multiple comments wierd but legal c/c++
+        //line with multiple comments weird but legal c/c++
         test = DefaultCommentParser();
         line = QLatin1String("  int /*why?*/ i = 8 / 8 * 3;/* comment*/");
         correct = QLatin1String("  int          i = 8 / 8 * 3;            ");
