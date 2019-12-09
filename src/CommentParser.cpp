@@ -56,7 +56,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 if(!inComment() && mLastChar == '/')
                 {
                     mCommentType = singleLine;
-                    mIsPureComment = line.startsWith(QLatin1String("//")) ? yes : no;
+                    mIsPureComment = line.startsWith(QLatin1String("//"));
                     lastComment.startOffset = offset - 1;
                 }
                 else if(mLastChar == '*' && mCommentType == multiLine)
@@ -66,7 +66,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     lastComment.endOffset = offset + 1; //include last char in offset
                     comments.push_back(lastComment);
                     if(!isFirstLine)
-                        mIsPureComment = line.endsWith(QLatin1String("*/")) ? yes : mIsPureComment;
+                        mIsPureComment = line.endsWith(QLatin1String("*/")) ? true : mIsPureComment;
                 }
                 break;
             case '*':
@@ -76,7 +76,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 if(mLastChar == '/' && !inComment())
                 {
                     mCommentType = multiLine;
-                    mIsPureComment = line.startsWith(QLatin1String("/*")) ? yes : mIsPureComment;
+                    mIsPureComment = line.startsWith(QLatin1String("/*")) ? true : mIsPureComment;
                     isFirstLine = true;
                     lastComment.startOffset = offset - 1;
                 }
@@ -91,7 +91,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
 
                 if(mCommentType == multiLine && !isFirstLine)
                 {
-                    mIsPureComment = yes;
+                    mIsPureComment = true;
                 }
 
                 if(lastComment.startOffset > 0 && lastComment.endOffset == 0)
@@ -109,7 +109,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     break;
                 }
 
-                mIsPureComment = no;
+                mIsPureComment = false;
                 break;
         }
 

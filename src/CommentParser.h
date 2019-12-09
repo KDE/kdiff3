@@ -38,12 +38,10 @@ class DefaultCommentParser : public CommentParser
 {
   private:
     typedef enum {none, singleLine, multiLine}CommentType;
-    typedef enum {no, yes, unknown}TriState;
-
   public:
     void processLine(const QString &line) override;
     inline bool inComment() const override { return mCommentType != none; };
-    inline bool isPureComment() const override { return mIsPureComment == yes; };
+    inline bool isPureComment() const override { return mIsPureComment; };
 
     void removeComment(QString &line) override;
   protected:
@@ -69,7 +67,7 @@ class DefaultCommentParser : public CommentParser
     std::vector<CommentRange> comments;
 
     bool isFirstLine = false;
-    TriState mIsPureComment = unknown;
+    bool mIsPureComment = false;
     bool bInString = false;
     bool bIsEscaped = false;
 
