@@ -379,10 +379,15 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         const ManualDiffHelpList* pMDHL = &m_manualDiffHelpList;
         m_pDiffTextWindow1->init(m_sd1.getAliasName(), m_sd1.getEncoding(), m_sd1.getLineEndStyle(),
                                  m_sd1.getLineDataForDisplay(), m_sd1.getSizeLines(), &m_diff3LineVector, pMDHL, m_bTripleDiff);
+        m_pDiffTextWindowFrame1->init();
+
         m_pDiffTextWindow2->init(m_sd2.getAliasName(), m_sd2.getEncoding(), m_sd2.getLineEndStyle(),
                                  m_sd2.getLineDataForDisplay(), m_sd2.getSizeLines(), &m_diff3LineVector, pMDHL, m_bTripleDiff);
+        m_pDiffTextWindowFrame2->init();
+
         m_pDiffTextWindow3->init(m_sd3.getAliasName(), m_sd3.getEncoding(), m_sd3.getLineEndStyle(),
                                  m_sd3.getLineDataForDisplay(), m_sd3.getSizeLines(), &m_diff3LineVector, pMDHL, m_bTripleDiff);
+        m_pDiffTextWindowFrame3->init();
 
         m_pDiffTextWindowFrame3->setVisible(m_bTripleDiff);
     }
@@ -1878,11 +1883,23 @@ bool KDiff3App::improveFilenames(bool bCreateNewInstance)
             if(bSuccess)
             {
                 m_sd1.reset();
-                if(m_pDiffTextWindow1 != nullptr) m_pDiffTextWindow1->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr, false);
+                if(m_pDiffTextWindow1 != nullptr)
+                {
+                    m_pDiffTextWindow1->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr, false);
+                    m_pDiffTextWindowFrame1->init();
+                }
                 m_sd2.reset();
-                if(m_pDiffTextWindow2 != nullptr) m_pDiffTextWindow2->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr, false);
+                if(m_pDiffTextWindow2 != nullptr)
+                {
+                    m_pDiffTextWindow2->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr, false);
+                    m_pDiffTextWindowFrame2->init();
+                }
                 m_sd3.reset();
-                if(m_pDiffTextWindow3 != nullptr) m_pDiffTextWindow3->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr, false);
+                if(m_pDiffTextWindow3 != nullptr)
+                {
+                    m_pDiffTextWindow3->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr, false);
+                    m_pDiffTextWindowFrame3->init();
+                }
             }
             slotUpdateAvailabilities();
             return bSuccess;

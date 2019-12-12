@@ -261,7 +261,6 @@ void DiffTextWindow::init(
     d->m_eLineEndStyle = eLineEndStyle;
 
     update();
-    d->m_pDiffTextWindowFrame->init();
 }
 
 void DiffTextWindow::reset()
@@ -1757,10 +1756,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBa
     setAutoFillBackground(true);
     connect(d->getBrowseButton(), &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
     connect(d->getFileSelectionField(), &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
-    /*
-        Creating a DiffTextWindow causes DiffTextWindowFrameData::init to be called so DiffTextWindowFrameData must
-        complete construction before this point.
-    */
+    
     d->m_pDiffTextWindow = new DiffTextWindow(this, pStatusBar, pOptions, winIdx);
 
     QVBoxLayout* pVTopLayout = new QVBoxLayout(const_cast<QWidget*>(d->getTopLineWidget()));
