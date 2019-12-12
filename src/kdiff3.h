@@ -346,9 +346,9 @@ class KDiff3App : public QSplitter
 
     TotalDiffStatus m_totalDiffStatus;
 
-    SourceData m_sd1;
-    SourceData m_sd2;
-    SourceData m_sd3;
+    QSharedPointer<SourceData> m_sd1 = QSharedPointer<SourceData>::create();
+    QSharedPointer<SourceData> m_sd2 = QSharedPointer<SourceData>::create();
+    QSharedPointer<SourceData> m_sd3 = QSharedPointer<SourceData>::create();
 
     QSharedPointer<class DirectoryInfo> m_dirinfo;
 

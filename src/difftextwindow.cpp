@@ -1749,7 +1749,7 @@ class DiffTextWindowFrameData
     e_SrcSelector m_winIdx;
 };
 
-DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, SourceData* psd)
+DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, QSharedPointer<SourceData> psd)
     : QWidget(pParent)
 {
     d = new DiffTextWindowFrameData(this, pOptions, winIdx);
@@ -1912,7 +1912,7 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
     }
 }
 
-EncodingLabel::EncodingLabel(const QString& text, SourceData* pSD, const QSharedPointer<Options>& pOptions)
+EncodingLabel::EncodingLabel(const QString& text, QSharedPointer<SourceData> pSD, const QSharedPointer<Options>& pOptions)
     : QLabel(text)
 {
     m_pOptions = pOptions;

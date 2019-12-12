@@ -190,9 +190,9 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
         }
     }
 
-    m_sd1.setOptions(m_pOptions);
-    m_sd2.setOptions(m_pOptions);
-    m_sd3.setOptions(m_pOptions);
+    m_sd1->setOptions(m_pOptions);
+    m_sd2->setOptions(m_pOptions);
+    m_sd3->setOptions(m_pOptions);
 
 #ifdef ENABLE_AUTO
     m_bAutoFlag = hasArgs && KDiff3Shell::getParser()->isSet("auto");
@@ -232,50 +232,50 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
         g_bAutoSolve = !KDiff3Shell::getParser()->isSet("qall"); // Note that this is effective only once.
         QStringList args = KDiff3Shell::getParser()->positionalArguments();
 
-        m_sd1.setFilename(KDiff3Shell::getParser()->value("base"));
-        if(m_sd1.isEmpty()) {
-            if(args.count() > 0) m_sd1.setFilename(args[0]); // args->arg(0)
-            if(args.count() > 1) m_sd2.setFilename(args[1]);
-            if(args.count() > 2) m_sd3.setFilename(args[2]);
+        m_sd1->setFilename(KDiff3Shell::getParser()->value("base"));
+        if(m_sd1->isEmpty()) {
+            if(args.count() > 0) m_sd1->setFilename(args[0]); // args->arg(0)
+            if(args.count() > 1) m_sd2->setFilename(args[1]);
+            if(args.count() > 2) m_sd3->setFilename(args[2]);
         }
         else
         {
-            if(args.count() > 0) m_sd2.setFilename(args[0]);
-            if(args.count() > 1) m_sd3.setFilename(args[1]);
+            if(args.count() > 0) m_sd2->setFilename(args[0]);
+            if(args.count() > 1) m_sd3->setFilename(args[1]);
         }
         //Set m_bDirCompare flag
-        m_bDirCompare = FileAccess(m_sd1.getFilename()).isDir();
+        m_bDirCompare = FileAccess(m_sd1->getFilename()).isDir();
 
         QStringList aliasList = KDiff3Shell::getParser()->values( "fname" );
         QStringList::Iterator ali = aliasList.begin();
 
         QString an1 = KDiff3Shell::getParser()->value("L1");
         if(!an1.isEmpty()) {
-            m_sd1.setAliasName(an1);
+            m_sd1->setAliasName(an1);
         }
         else if(ali != aliasList.end())
         {
-            m_sd1.setAliasName(*ali);
+            m_sd1->setAliasName(*ali);
             ++ali;
         }
 
         QString an2 = KDiff3Shell::getParser()->value("L2");
         if(!an2.isEmpty()) {
-            m_sd2.setAliasName(an2);
+            m_sd2->setAliasName(an2);
         }
         else if(ali != aliasList.end())
         {
-            m_sd2.setAliasName(*ali);
+            m_sd2->setAliasName(*ali);
             ++ali;
         }
 
         QString an3 = KDiff3Shell::getParser()->value("L3");
         if(!an3.isEmpty()) {
-            m_sd3.setAliasName(an3);
+            m_sd3->setAliasName(an3);
         }
         else if(ali != aliasList.end())
         {
-            m_sd3.setAliasName(*ali);
+            m_sd3->setAliasName(*ali);
             ++ali;
         }
     }
@@ -379,17 +379,17 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         }
     }
     if(!fn1.isEmpty()) {
-        m_sd1.setFilename(fn1);
+        m_sd1->setFilename(fn1);
     }
     if(!fn2.isEmpty()) {
-        m_sd2.setFilename(fn2);
+        m_sd2->setFilename(fn2);
     }
     if(!fn3.isEmpty()) {
-        m_sd3.setFilename(fn3);
+        m_sd3->setFilename(fn3);
     }
 
     //should not happen now.
-    Q_ASSERT(m_bDirCompare == FileAccess(m_sd1.getFilename()).isDir());
+    Q_ASSERT(m_bDirCompare == FileAccess(m_sd1->getFilename()).isDir());
     bool bSuccess = improveFilenames(false);
 
     if(m_bAutoFlag && m_bAutoMode && m_bDirCompare)
@@ -404,10 +404,10 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         mainInit();
         if(m_bAutoMode)
         {
-            SourceData* pSD = nullptr;
-            if(m_sd3.isEmpty()) {
+            QSharedPointer<SourceData> pSD = nullptr;
+            if(m_sd3->isEmpty()) {
                 if(m_totalDiffStatus.isBinaryEqualAB()) {
-                    pSD = &m_sd1;
+                    pSD = m_sd1;
                 }
             }
             else
@@ -415,11 +415,11 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
                 if(m_totalDiffStatus.isBinaryEqualBC() || m_totalDiffStatus.isBinaryEqualAB())
                 {
                     //if B==C (assume A is old), if A==B then C has changed
-                    pSD = &m_sd3;
+                    pSD = m_sd3;
                 }
                 else if(m_totalDiffStatus.isBinaryEqualAC())
                 {
-                    pSD = &m_sd2; // assuming B has changed
+                    pSD = m_sd2; // assuming B has changed
                 }
             }
 
@@ -468,24 +468,24 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     if(!m_bDirCompare && m_pKDiff3Shell != nullptr)
     {
         bool bFileOpenError = false;
-        if((!m_sd1.isEmpty() && !m_sd1.hasData()) ||
-           (!m_sd2.isEmpty() && !m_sd2.hasData()) ||
-           (!m_sd3.isEmpty() && !m_sd3.hasData()))
+        if((!m_sd1->isEmpty() && !m_sd1->hasData()) ||
+           (!m_sd2->isEmpty() && !m_sd2->hasData()) ||
+           (!m_sd3->isEmpty() && !m_sd3->hasData()))
         {
             QString text(i18n("Opening of these files failed:"));
             text += "\n\n";
-            if(!m_sd1.isEmpty() && !m_sd1.hasData())
-                text += " - " + m_sd1.getAliasName() + '\n';
-            if(!m_sd2.isEmpty() && !m_sd2.hasData())
-                text += " - " + m_sd2.getAliasName() + '\n';
-            if(!m_sd3.isEmpty() && !m_sd3.hasData())
-                text += " - " + m_sd3.getAliasName() + '\n';
+            if(!m_sd1->isEmpty() && !m_sd1->hasData())
+                text += " - " + m_sd1->getAliasName() + '\n';
+            if(!m_sd2->isEmpty() && !m_sd2->hasData())
+                text += " - " + m_sd2->getAliasName() + '\n';
+            if(!m_sd3->isEmpty() && !m_sd3->hasData())
+                text += " - " + m_sd3->getAliasName() + '\n';
 
             KMessageBox::sorry(this, text, i18n("File Open Error"));
             bFileOpenError = true;
         }
 
-        if(m_sd1.isEmpty() || m_sd2.isEmpty() || bFileOpenError)
+        if(m_sd1->isEmpty() || m_sd2->isEmpty() || bFileOpenError)
             slotFileOpen();
     }
     else if(!bSuccess) // Directory open failed
@@ -816,8 +816,8 @@ void KDiff3App::slotFilePrint()
 
         QString topLineText = i18n("Top line");
 
-        //int headerWidth = fm.width( m_sd1.getAliasName() + ", "+topLineText+": 01234567" );
-        int headerLines = Utils::getHorizontalAdvance(fm, m_sd1.getAliasName() + ", " + topLineText + ": 01234567") / columnWidth + 1;
+        //int headerWidth = fm.width( m_sd1->getAliasName() + ", "+topLineText+": 01234567" );
+        int headerLines = Utils::getHorizontalAdvance(fm, m_sd1->getAliasName() + ", " + topLineText + ": 01234567") / columnWidth + 1;
 
         int headerMargin = headerLines * fm.height() + 3; // Text + one horizontal line
         int footerMargin = fm.height() + 3;
@@ -922,17 +922,17 @@ void KDiff3App::slotFilePrint()
                 painter.setClipping(true);
 
                 painter.setPen(m_pOptions->m_colorA);
-                QString headerText1 = m_sd1.getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow1->calcTopLineInFile(line) + 1);
+                QString headerText1 = m_sd1->getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow1->calcTopLineInFile(line) + 1);
                 m_pDiffTextWindow1->printWindow(painter, view1, headerText1, line, linesPerPage, m_pOptions->m_fgColor);
 
                 painter.setPen(m_pOptions->m_colorB);
-                QString headerText2 = m_sd2.getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow2->calcTopLineInFile(line) + 1);
+                QString headerText2 = m_sd2->getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow2->calcTopLineInFile(line) + 1);
                 m_pDiffTextWindow2->printWindow(painter, view2, headerText2, line, linesPerPage, m_pOptions->m_fgColor);
 
                 if(m_bTripleDiff && m_pDiffTextWindow3 != nullptr)
                 {
                     painter.setPen(m_pOptions->m_colorC);
-                    QString headerText3 = m_sd3.getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow3->calcTopLineInFile(line) + 1);
+                    QString headerText3 = m_sd3->getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow3->calcTopLineInFile(line) + 1);
                     m_pDiffTextWindow3->printWindow(painter, view3, headerText3, line, linesPerPage, m_pOptions->m_fgColor);
                 }
                 painter.setClipping(false);
