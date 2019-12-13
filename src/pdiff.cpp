@@ -1006,7 +1006,6 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
             emit checkIfCanContinue(bShouldConintue);
             if(bShouldConintue && !urlList.isEmpty())
             {
-                raise();
                 QString filename = urlList.first().toLocalFile();
                 if(o == m_pDiffTextWindow1)
                     m_sd1->setFilename(filename);
@@ -1014,7 +1013,8 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
                     m_sd2->setFilename(filename);
                 else if(o == m_pDiffTextWindow3)
                     m_sd3->setFilename(filename);
-                mainInit();
+                
+                emit finishDrop();
             }
         }
         else if(pDropEvent->mimeData()->hasText())
@@ -1027,7 +1027,6 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
             {
                 QString error;
 
-                raise();
                 if(o == m_pDiffTextWindow1)
                     error = m_sd1->setData(text);
                 else if(o == m_pDiffTextWindow2)
@@ -1039,13 +1038,19 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
                 {
                     KMessageBox::error(m_pOptionDialog, error);
                 }
-                
-                mainInit();
+
+                emit finishDrop();
             }
         }
     }
 
     return QSplitter::eventFilter(o, e); // standard event processing
+}
+
+void KDiff3App::slotFinishDrop()
+{
+    raise();
+    mainInit();
 }
 
 void KDiff3App::slotFileOpen()

@@ -135,6 +135,8 @@ class KDiff3App : public QSplitter
     void sigRecalcWordWrap();
 
     void checkIfCanContinue(bool& pbContinue);
+
+    void finishDrop();
   protected:
     void setLockPainting(bool bLock);
     void createCaption();
@@ -253,7 +255,8 @@ class KDiff3App : public QSplitter
     void slotClearManualDiffHelpList();
     void slotNoRelevantChangesDetected();
     void slotEncodingChanged(QTextCodec*);
-    
+
+    void slotFinishDrop();
   private:
     /** the configuration object of the application */
     //KConfig *config;
