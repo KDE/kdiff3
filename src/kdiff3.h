@@ -134,6 +134,7 @@ class KDiff3App : public QSplitter
 
     void sigRecalcWordWrap();
 
+    void checkIfCanContinue(bool& pbContinue);
   protected:
     void setLockPainting(bool bLock);
     void createCaption();
@@ -231,7 +232,7 @@ class KDiff3App : public QSplitter
     void slotFinishMainInit();
     void slotMergeCurrentFile();
     void slotReload();
-    void slotCheckIfCanContinue(bool* pbContinue);
+    void slotCheckIfCanContinue(bool& pbContinue);
     void slotShowWhiteSpaceToggled();
     void slotShowLineNumbersToggled();
     void slotAutoAdvanceToggled();

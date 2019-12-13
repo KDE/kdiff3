@@ -1001,7 +1001,10 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
         if(pDropEvent->mimeData()->hasUrls())
         {
             QList<QUrl> urlList = pDropEvent->mimeData()->urls();
-            if(canContinue() && !urlList.isEmpty())
+
+            bool bShouldConintue = false;
+            emit checkIfCanContinue(bShouldConintue);
+            if(bShouldConintue && !urlList.isEmpty())
             {
                 raise();
                 QString filename = urlList.first().toLocalFile();
@@ -1017,7 +1020,10 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
         else if(pDropEvent->mimeData()->hasText())
         {
             QString text = pDropEvent->mimeData()->text();
-            if(canContinue())
+            bool bShouldConintue = false;
+            emit checkIfCanContinue(bShouldConintue);
+
+            if(bShouldConintue)
             {
                 QString error;
 
@@ -1044,7 +1050,9 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
 
 void KDiff3App::slotFileOpen()
 {
-    if(!canContinue()) return;
+    bool bShouldConintue = false;
+    emit checkIfCanContinue(bShouldConintue);
+    if(!bShouldConintue) return;
     //create dummy DirectoryInfo record for first run so we don't crash.
     if(m_dirinfo == nullptr)
         m_dirinfo = QSharedPointer<DirectoryInfo>::create();
@@ -1142,7 +1150,9 @@ void KDiff3App::slotFileOpen()
 void KDiff3App::slotFileOpen2(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
                               const QString& an1, const QString& an2, const QString& an3, TotalDiffStatus* pTotalDiffStatus)
 {
-    if(!canContinue()) return;
+    bool bShouldConintue = false;
+    emit checkIfCanContinue(bShouldConintue);
+    if(!bShouldConintue) return;
 
     if(fn1.isEmpty() && fn2.isEmpty() && fn3.isEmpty() && ofn.isEmpty() && m_pMainWidget != nullptr)
     {
@@ -1265,35 +1275,40 @@ void KDiff3App::slotEditPaste()
     {
         m_pMergeResultWindow->pasteClipboard(false);
     }
-    else if(canContinue())
+    else
     {
-        QString error;
-        bool do_init = false;
+        bool bShouldConintue = false;
+        emit checkIfCanContinue(bShouldConintue);
+        if(bShouldConintue)
+        {
+            QString error;
+            bool do_init = false;
 
-        if(m_pDiffTextWindow1->hasFocus())
-        {
-            error = m_sd1->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
-            do_init = true;
-        }
-        else if(m_pDiffTextWindow2->hasFocus())
-        {
-            error = m_sd2->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
-            do_init = true;
-        }
-        else if(m_pDiffTextWindow3->hasFocus())
-        {
-            error = m_sd3->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
-            do_init = true;
-        }
+            if(m_pDiffTextWindow1->hasFocus())
+            {
+                error = m_sd1->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
+                do_init = true;
+            }
+            else if(m_pDiffTextWindow2->hasFocus())
+            {
+                error = m_sd2->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
+                do_init = true;
+            }
+            else if(m_pDiffTextWindow3->hasFocus())
+            {
+                error = m_sd3->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
+                do_init = true;
+            }
 
-        if(!error.isEmpty())
-        {
-            KMessageBox::error(m_pOptionDialog, error);
-        }
+            if(!error.isEmpty())
+            {
+                KMessageBox::error(m_pOptionDialog, error);
+            }
 
-        if(do_init)
-        {
-            mainInit();
+            if(do_init)
+            {
+                mainInit();
+            }
         }
     }
 
@@ -1912,7 +1927,9 @@ bool KDiff3App::improveFilenames(bool bCreateNewInstance)
 
 void KDiff3App::slotReload()
 {
-    if(!canContinue()) return;
+    bool bShouldConintue = false;
+    emit checkIfCanContinue(bShouldConintue);
+    if(!bShouldConintue) return;
 
     mainInit();
 }
@@ -1944,9 +1961,9 @@ bool KDiff3App::canContinue()
     return true;
 }
 
-void KDiff3App::slotCheckIfCanContinue(bool* pbContinue)
+void KDiff3App::slotCheckIfCanContinue(bool& pbContinue)
 {
-    if(pbContinue != nullptr) *pbContinue = canContinue();
+    pbContinue = canContinue();
 }
 
 void KDiff3App::slotDirShowBoth()
@@ -2152,7 +2169,10 @@ void KDiff3App::slotMergeCurrentFile()
     }
     else if(m_pMainWidget != nullptr && m_pMainWidget->isVisible())
     {
-        if(!canContinue()) return;
+        bool bShouldConintue = false;
+        emit checkIfCanContinue(bShouldConintue);
+        if(!bShouldConintue) return;
+
         if(m_outputFilename.isEmpty())
         {
             if(!m_sd3->isEmpty() && !m_sd3->isFromBuffer())

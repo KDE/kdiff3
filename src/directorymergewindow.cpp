@@ -761,7 +761,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         // A full analysis uses the same resources that a normal text-diff/merge uses.
         // So make sure that the user saves his data first.
         bool bCanContinue = false;
-        emit mWindow->checkIfCanContinue(&bCanContinue);
+        emit mWindow->checkIfCanContinue(bCanContinue);
         if(!bCanContinue)
             return false;
         emit mWindow->startDiffMerge("", "", "", "", "", "", "", nullptr); // hide main window
@@ -1980,7 +1980,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::canContinue()
 {
     bool bCanContinue = false;
 
-    emit mWindow->checkIfCanContinue(&bCanContinue);
+    emit mWindow->checkIfCanContinue(bCanContinue);
 
     if(bCanContinue && !m_bError)
     {

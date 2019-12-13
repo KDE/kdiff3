@@ -116,7 +116,7 @@ public:
 
 Q_SIGNALS:
    void startDiffMerge(const QString &fn1,const QString &fn2, const QString &fn3, const QString &ofn, const QString&, const QString&, const QString&,TotalDiffStatus*);
-   void checkIfCanContinue( bool* pbContinue );
+   void checkIfCanContinue( bool& pbContinue );
    void updateAvailabilities();
    void statusBarMessage( const QString& msg );
 protected Q_SLOTS:
