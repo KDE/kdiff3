@@ -695,7 +695,6 @@ void KDiff3App::initView()
     hSizes << 1 << 1 << 1;
     m_pDiffWindowSplitter->setSizes(hSizes);
 
-    m_pMergeResultWindow->installEventFilter(this);                      // for drop and focus events
     m_pMergeResultWindow->installEventFilter(m_pMergeResultWindowTitle); // for focus tracking
 
     QHBoxLayout* pHScrollBarLayout = new QHBoxLayout();
@@ -712,7 +711,8 @@ void KDiff3App::initView()
     connect(m_pDiffTextWindow1, &DiffTextWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
     connect(m_pDiffTextWindow1, &DiffTextWindow::scrollDiffTextWindow, this, &KDiff3App::scrollDiffTextWindow);
     connect(m_pDiffTextWindow1, &DiffTextWindow::finishRecalcWordWrap, this, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
-    m_pDiffTextWindow1->installEventFilter(this);
+    connect(m_pDiffTextWindow1, &DiffTextWindow::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
+    connect(m_pDiffTextWindow1, &DiffTextWindow::finishDrop, this, &KDiff3App::slotFinishDrop);
 
     connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow2, &DiffTextWindow::setFirstLine);
     connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow2, &DiffTextWindow::setHorizScrollOffset);
@@ -720,8 +720,9 @@ void KDiff3App::initView()
     connect(m_pDiffTextWindow2, &DiffTextWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
     connect(m_pDiffTextWindow2, &DiffTextWindow::scrollDiffTextWindow, this, &KDiff3App::scrollDiffTextWindow);
     connect(m_pDiffTextWindow2, &DiffTextWindow::finishRecalcWordWrap, this, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
+    connect(m_pDiffTextWindow2, &DiffTextWindow::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
+    connect(m_pDiffTextWindow2, &DiffTextWindow::finishDrop, this, &KDiff3App::slotFinishDrop);
 
-    m_pDiffTextWindow2->installEventFilter(this);
 
     connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow3, &DiffTextWindow::setFirstLine);
     connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow3, &DiffTextWindow::setHorizScrollOffset);
@@ -729,8 +730,9 @@ void KDiff3App::initView()
     connect(m_pDiffTextWindow3, &DiffTextWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
     connect(m_pDiffTextWindow3, &DiffTextWindow::scrollDiffTextWindow, this, &KDiff3App::scrollDiffTextWindow);
     connect(m_pDiffTextWindow3, &DiffTextWindow::finishRecalcWordWrap, this, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
+    connect(m_pDiffTextWindow3, &DiffTextWindow::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
+    connect(m_pDiffTextWindow3, &DiffTextWindow::finishDrop, this, &KDiff3App::slotFinishDrop);
 
-    m_pDiffTextWindow3->installEventFilter(this);
 
     MergeResultWindow* p = m_pMergeResultWindow;
     connect(m_pMergeVScrollBar, &QScrollBar::valueChanged, p, &MergeResultWindow::setFirstLine);
@@ -991,61 +993,6 @@ void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
     scrollDiffTextWindow(deltaX, deltaY);
 }
 
-bool KDiff3App::eventFilter(QObject* o, QEvent* e)
-{ //TODO: Move this into DiffTextWindow::DropEvent
-    if(e->type() == QEvent::Drop)
-    {
-        QDropEvent* pDropEvent = static_cast<QDropEvent*>(e);
-        pDropEvent->accept();
-
-        if(pDropEvent->mimeData()->hasUrls())
-        {
-            QList<QUrl> urlList = pDropEvent->mimeData()->urls();
-
-            bool bShouldConintue = false;
-            emit checkIfCanContinue(bShouldConintue);
-            if(bShouldConintue && !urlList.isEmpty())
-            {
-                QString filename = urlList.first().toLocalFile();
-                if(o == m_pDiffTextWindow1)
-                    m_sd1->setFilename(filename);
-                else if(o == m_pDiffTextWindow2)
-                    m_sd2->setFilename(filename);
-                else if(o == m_pDiffTextWindow3)
-                    m_sd3->setFilename(filename);
-                
-                emit finishDrop();
-            }
-        }
-        else if(pDropEvent->mimeData()->hasText())
-        {
-            QString text = pDropEvent->mimeData()->text();
-            bool bShouldConintue = false;
-            emit checkIfCanContinue(bShouldConintue);
-
-            if(bShouldConintue)
-            {
-                QString error;
-
-                if(o == m_pDiffTextWindow1)
-                    error = m_sd1->setData(text);
-                else if(o == m_pDiffTextWindow2)
-                    error = m_sd2->setData(text);
-                else if(o == m_pDiffTextWindow3)
-                    error = m_sd3->setData(text);
-                
-                if(!error.isEmpty())
-                {
-                    KMessageBox::error(m_pOptionDialog, error);
-                }
-
-                emit finishDrop();
-            }
-        }
-    }
-
-    return QSplitter::eventFilter(o, e); // standard event processing
-}
 
 void KDiff3App::slotFinishDrop()
 {

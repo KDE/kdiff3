@@ -28,6 +28,7 @@
 #include <cstdlib>
 
 #include <KLocalizedString>
+#include <KMessageBox>
 
 #include <QDir>
 #include <QDragEnterEvent>
@@ -179,8 +180,11 @@ class DiffTextWindowData
 
     bool m_bSelectionInProgress = false;
     QPoint m_lastKnownMousePos;
+
+    QSharedPointer<SourceData> sourceData;
 };
 
+void DiffTextWindow::setSourceData(const QSharedPointer<SourceData>& inData) { d->sourceData = inData; }
 bool DiffTextWindow::isThreeWay() const { return d->isThreeWay(); };
 const QString& DiffTextWindow::getFileName() const { return d->getFileName(); }
 
@@ -287,8 +291,47 @@ void DiffTextWindow::setPaintingAllowed(bool bAllowPainting)
 void DiffTextWindow::dragEnterEvent(QDragEnterEvent* e)
 {
     e->setAccepted(e->mimeData()->hasUrls() || e->mimeData()->hasText());
-    // TODO: Move this to DiffTextWindow::dropEvent
-    // Note that the corresponding drop is handled in KDiff3App::eventFilter().
+}
+
+void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
+{
+    dropEvent->accept();
+
+    if(dropEvent->mimeData()->hasUrls())
+    {
+        QList<QUrl> urlList = dropEvent->mimeData()->urls();
+
+        bool bShouldConintue = false;
+        emit checkIfCanContinue(bShouldConintue);
+        if(bShouldConintue && !urlList.isEmpty())
+        {
+            QString filename = urlList.first().toLocalFile();
+            
+            d->sourceData->setFilename(filename);
+            
+            emit finishDrop();
+        }
+    }
+    else if(dropEvent->mimeData()->hasText())
+    {
+        QString text = dropEvent->mimeData()->text();
+        bool bShouldConintue = false;
+        emit checkIfCanContinue(bShouldConintue);
+
+        if(bShouldConintue)
+        {
+            QString error;
+
+            error = d->sourceData->setData(text);
+
+            if(!error.isEmpty())
+            {
+                KMessageBox::error(this, error);
+            }
+
+            emit finishDrop();
+        }
+    }
 }
 
 void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, int linesPerPage, const QColor& fgColor)
@@ -1758,7 +1801,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBa
     connect(d->getFileSelectionField(), &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
     
     d->m_pDiffTextWindow = new DiffTextWindow(this, pStatusBar, pOptions, winIdx);
-
+    d->m_pDiffTextWindow->setSourceData(psd);
     QVBoxLayout* pVTopLayout = new QVBoxLayout(const_cast<QWidget*>(d->getTopLineWidget()));
     pVTopLayout->setMargin(2);
     pVTopLayout->setSpacing(0);

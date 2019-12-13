@@ -88,6 +88,7 @@ class DiffTextWindow : public QWidget
 
     qint32 getLineNumberWidth() const;
 
+    void setSourceData(const QSharedPointer<SourceData>& inData);
   Q_SIGNALS:
     void resizeHeightChangedSignal(int nofVisibleLines);
     void resizeWidthChangedSignal(int nofVisibleColumns);
@@ -99,6 +100,10 @@ class DiffTextWindow : public QWidget
     void lineClicked(e_SrcSelector winIdx, LineRef line);
 
     void finishRecalcWordWrap(int visibleTextWidthForPrinting);
+
+    void checkIfCanContinue(bool& pbContinue);
+
+    void finishDrop();
   public Q_SLOTS:
     void setFirstLine(QtNumberType line);
     void setHorizScrollOffset(int horizScrollOffset);
@@ -113,6 +118,8 @@ class DiffTextWindow : public QWidget
 
     void paintEvent(QPaintEvent*) override;
     void dragEnterEvent(QDragEnterEvent* e) override;
+
+    void dropEvent(QDropEvent* dropEvent) override;
     void focusInEvent(QFocusEvent* e) override;
 
     void resizeEvent(QResizeEvent*) override;
