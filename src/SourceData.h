@@ -49,7 +49,7 @@ class SourceData: public QObject
     bool isText() const;                 // is it pure text (vs. binary data)
     bool isIncompleteConversion() const; // true if some replacement characters were found
     bool isFromBuffer() const;           // was it set via setData() (vs. setFileAccess() or setFilename())
-    QStringList setData(const QString& data);
+    const QString setData(const QString& data);
     bool isValid() const; // Either no file is specified or reading was successful
 
     // Returns a list of error messages if anything went wrong

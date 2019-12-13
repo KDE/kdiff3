@@ -1019,19 +1019,21 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
             QString text = pDropEvent->mimeData()->text();
             if(canContinue())
             {
-                QStringList errors;
+                QString error;
 
                 raise();
                 if(o == m_pDiffTextWindow1)
-                    errors = m_sd1->setData(text);
+                    error = m_sd1->setData(text);
                 else if(o == m_pDiffTextWindow2)
-                    errors = m_sd2->setData(text);
+                    error = m_sd2->setData(text);
                 else if(o == m_pDiffTextWindow3)
-                    errors = m_sd3->setData(text);
-                for(const QString& error: qAsConst(errors))
+                    error = m_sd3->setData(text);
+                
+                if(!error.isEmpty())
                 {
                     KMessageBox::error(m_pOptionDialog, error);
                 }
+                
                 mainInit();
             }
         }
@@ -1265,26 +1267,26 @@ void KDiff3App::slotEditPaste()
     }
     else if(canContinue())
     {
-        QStringList errors;
+        QString error;
         bool do_init = false;
 
         if(m_pDiffTextWindow1->hasFocus())
         {
-            errors = m_sd1->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
+            error = m_sd1->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
             do_init = true;
         }
         else if(m_pDiffTextWindow2->hasFocus())
         {
-            errors = m_sd2->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
+            error = m_sd2->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
             do_init = true;
         }
         else if(m_pDiffTextWindow3->hasFocus())
         {
-            errors = m_sd3->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
+            error = m_sd3->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
             do_init = true;
         }
 
-        for(const QString& error: qAsConst(errors))
+        if(!error.isEmpty())
         {
             KMessageBox::error(m_pOptionDialog, error);
         }

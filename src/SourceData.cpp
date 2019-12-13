@@ -134,10 +134,8 @@ void SourceData::setEncoding(QTextCodec* pEncoding)
     m_pEncoding = pEncoding;
 }
 
-QStringList SourceData::setData(const QString& data)
+const QString SourceData::setData(const QString& data)
 {
-    QStringList errors;
-
     // Create a temp file for preprocessing:
     if(m_tempInputFileName.isEmpty())
     {
@@ -150,7 +148,7 @@ QStringList SourceData::setData(const QString& data)
     bool bSuccess = f.writeFile(ba.constData(), ba.length());
     if(!bSuccess)
     {
-        errors.append(i18n("Writing clipboard data to temp file failed."));
+        return i18n("Writing clipboard data to temp file failed.");
     }
     else
     {
@@ -158,7 +156,7 @@ QStringList SourceData::setData(const QString& data)
         m_fileAccess = FileAccess(); // Insure m_fileAccess is not valid
     }
 
-    return errors;
+    return QStringLiteral("");
 }
 
 const QVector<LineData>* SourceData::getLineDataForDiff() const
