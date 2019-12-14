@@ -29,6 +29,9 @@ class QPainter;
 class RLPainter;
 class KActionCollection;
 class KToggleAction;
+
+class KDiff3App;
+
 class MergeResultWindow : public QWidget
 {
    Q_OBJECT
@@ -42,6 +45,8 @@ public:
       const Diff3LineList* pDiff3LineList,
       TotalDiffStatus* pTotalDiffStatus
       );
+
+   void setupConnections(const KDiff3App* app);
 
    inline void clearMergeList()
    {

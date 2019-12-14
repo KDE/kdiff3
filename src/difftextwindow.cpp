@@ -267,6 +267,16 @@ void DiffTextWindow::init(
     update();
 }
 
+void DiffTextWindow::setupConnections(const KDiff3App *app)
+{
+    connect(this, &DiffTextWindow::newSelection, app, &KDiff3App::slotSelectionStart);
+    connect(this, &DiffTextWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
+    connect(this, &DiffTextWindow::scrollDiffTextWindow, app, &KDiff3App::scrollDiffTextWindow);
+    connect(this, &DiffTextWindow::finishRecalcWordWrap, app, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
+    connect(this, &DiffTextWindow::checkIfCanContinue, app, &KDiff3App::slotCheckIfCanContinue);
+    connect(this, &DiffTextWindow::finishDrop, app, &KDiff3App::slotFinishDrop);
+}
+
 void DiffTextWindow::reset()
 {
     d->m_pLineData = nullptr;
@@ -1790,12 +1800,15 @@ class DiffTextWindowFrameData
     QLabel* m_pLineEndStyle;
     QWidget* m_pTopLineWidget;
     e_SrcSelector m_winIdx;
+
+    QSharedPointer<SourceData> mSourceData;
 };
 
 DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, QSharedPointer<SourceData> psd)
     : QWidget(pParent)
 {
     d = new DiffTextWindowFrameData(this, pOptions, winIdx);
+    d->mSourceData = psd;
     setAutoFillBackground(true);
     connect(d->getBrowseButton(), &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
     connect(d->getFileSelectionField(), &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
@@ -1861,6 +1874,13 @@ void DiffTextWindowFrame::init()
         d->m_pLineEndStyle->setText(i18n("Line end style: %1", pDTW->getLineEndStyle() == eLineEndStyleDos ? i18n("DOS") : i18n("Unix")));
     }
 }
+
+void DiffTextWindowFrame::setupConnections(const KDiff3App *app)
+{
+    connect(this, &DiffTextWindowFrame::fileNameChanged, app, &KDiff3App::slotFileNameChanged);
+    connect(this, &DiffTextWindowFrame::encodingChanged, app, &KDiff3App::slotEncodingChanged);
+    connect(this, &DiffTextWindowFrame::encodingChanged, &(*d->mSourceData), &SourceData::setEncoding);
+ }
 
 // Search for the first visible line (search loop needed when no line exists for this file.)
 LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine)

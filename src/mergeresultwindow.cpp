@@ -10,6 +10,8 @@
  ***************************************************************************/
 
 #include "mergeresultwindow.h"
+
+#include "kdiff3.h"
 #include "options.h"
 #include "RLPainter.h"
 #include "guiutils.h"
@@ -192,6 +194,19 @@ void MergeResultWindow::connectActions()
     QObject::connect(chooseAForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseAForUnsolvedWhiteSpaceConflicts);
     QObject::connect(chooseBForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseBForUnsolvedWhiteSpaceConflicts);
     QObject::connect(chooseCForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseCForUnsolvedWhiteSpaceConflicts);
+}
+
+void MergeResultWindow::setupConnections(const KDiff3App *app)
+{
+    connect(this, &MergeResultWindow::scrollMergeResultWindow, app, &KDiff3App::scrollMergeResultWindow);
+    connect(this, &MergeResultWindow::sourceMask, app, &KDiff3App::sourceMask);
+    connect(this, &MergeResultWindow::resizeSignal, app, &KDiff3App::resizeMergeResultWindow);
+    connect(this, &MergeResultWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
+    connect(this, &MergeResultWindow::newSelection, app, &KDiff3App::slotSelectionStart);
+    connect(this, &MergeResultWindow::modifiedChanged, app, &KDiff3App::slotOutputModified);
+    connect(this, &MergeResultWindow::updateAvailabilities, app, &KDiff3App::slotUpdateAvailabilities);
+    connect(this, &MergeResultWindow::showPopupMenu, app, &KDiff3App::showPopupMenu);
+    connect(this, &MergeResultWindow::noRelevantChangesDetected, app, &KDiff3App::slotNoRelevantChangesDetected);
 }
 
 void MergeResultWindow::showUnsolvedConflictsStatusMessage()

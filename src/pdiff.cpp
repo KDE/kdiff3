@@ -648,17 +648,10 @@ void KDiff3App::initView()
     m_pDiffTextWindow1 = m_pDiffTextWindowFrame1->getDiffTextWindow();
     m_pDiffTextWindow2 = m_pDiffTextWindowFrame2->getDiffTextWindow();
     m_pDiffTextWindow3 = m_pDiffTextWindowFrame3->getDiffTextWindow();
-    connect(m_pDiffTextWindowFrame1, &DiffTextWindowFrame::fileNameChanged, this, &KDiff3App::slotFileNameChanged);
-    connect(m_pDiffTextWindowFrame2, &DiffTextWindowFrame::fileNameChanged, this, &KDiff3App::slotFileNameChanged);
-    connect(m_pDiffTextWindowFrame3, &DiffTextWindowFrame::fileNameChanged, this, &KDiff3App::slotFileNameChanged);
-
-    connect(m_pDiffTextWindowFrame1, &DiffTextWindowFrame::encodingChanged, this, &KDiff3App::slotEncodingChanged);
-    connect(m_pDiffTextWindowFrame2, &DiffTextWindowFrame::encodingChanged, this, &KDiff3App::slotEncodingChanged);
-    connect(m_pDiffTextWindowFrame3, &DiffTextWindowFrame::encodingChanged, this, &KDiff3App::slotEncodingChanged);
-
-    connect(m_pDiffTextWindowFrame1, &DiffTextWindowFrame::encodingChanged, &(*m_sd1), &SourceData::setEncoding);
-    connect(m_pDiffTextWindowFrame2, &DiffTextWindowFrame::encodingChanged, &(*m_sd2), &SourceData::setEncoding);
-    connect(m_pDiffTextWindowFrame3, &DiffTextWindowFrame::encodingChanged, &(*m_sd3), &SourceData::setEncoding);
+    
+    m_pDiffTextWindowFrame1->setupConnections(this);
+    m_pDiffTextWindowFrame2->setupConnections(this);
+    m_pDiffTextWindowFrame3->setupConnections(this);
 
     // Merge window
     m_pMergeWindowFrame = new QWidget(pVSplitter);
@@ -707,47 +700,22 @@ void KDiff3App::initView()
     connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pOverview, &Overview::setFirstLine);
     connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow1, &DiffTextWindow::setFirstLine);
     connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow1, &DiffTextWindow::setHorizScrollOffset);
-    connect(m_pDiffTextWindow1, &DiffTextWindow::newSelection, this, &KDiff3App::slotSelectionStart);
-    connect(m_pDiffTextWindow1, &DiffTextWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
-    connect(m_pDiffTextWindow1, &DiffTextWindow::scrollDiffTextWindow, this, &KDiff3App::scrollDiffTextWindow);
-    connect(m_pDiffTextWindow1, &DiffTextWindow::finishRecalcWordWrap, this, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
-    connect(m_pDiffTextWindow1, &DiffTextWindow::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
-    connect(m_pDiffTextWindow1, &DiffTextWindow::finishDrop, this, &KDiff3App::slotFinishDrop);
+    m_pDiffTextWindow1->setupConnections(this);
 
     connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow2, &DiffTextWindow::setFirstLine);
     connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow2, &DiffTextWindow::setHorizScrollOffset);
-    connect(m_pDiffTextWindow2, &DiffTextWindow::newSelection, this, &KDiff3App::slotSelectionStart);
-    connect(m_pDiffTextWindow2, &DiffTextWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
-    connect(m_pDiffTextWindow2, &DiffTextWindow::scrollDiffTextWindow, this, &KDiff3App::scrollDiffTextWindow);
-    connect(m_pDiffTextWindow2, &DiffTextWindow::finishRecalcWordWrap, this, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
-    connect(m_pDiffTextWindow2, &DiffTextWindow::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
-    connect(m_pDiffTextWindow2, &DiffTextWindow::finishDrop, this, &KDiff3App::slotFinishDrop);
-
+    m_pDiffTextWindow2->setupConnections(this);
 
     connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow3, &DiffTextWindow::setFirstLine);
     connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow3, &DiffTextWindow::setHorizScrollOffset);
-    connect(m_pDiffTextWindow3, &DiffTextWindow::newSelection, this, &KDiff3App::slotSelectionStart);
-    connect(m_pDiffTextWindow3, &DiffTextWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
-    connect(m_pDiffTextWindow3, &DiffTextWindow::scrollDiffTextWindow, this, &KDiff3App::scrollDiffTextWindow);
-    connect(m_pDiffTextWindow3, &DiffTextWindow::finishRecalcWordWrap, this, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
-    connect(m_pDiffTextWindow3, &DiffTextWindow::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
-    connect(m_pDiffTextWindow3, &DiffTextWindow::finishDrop, this, &KDiff3App::slotFinishDrop);
-
+    m_pDiffTextWindow3->setupConnections(this);
 
     MergeResultWindow* p = m_pMergeResultWindow;
     connect(m_pMergeVScrollBar, &QScrollBar::valueChanged, p, &MergeResultWindow::setFirstLine);
 
     connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, p, &MergeResultWindow::setHorizScrollOffset);
-    connect(p, &MergeResultWindow::scrollMergeResultWindow, this, &KDiff3App::scrollMergeResultWindow);
-    connect(p, &MergeResultWindow::sourceMask, this, &KDiff3App::sourceMask);
-    connect(p, &MergeResultWindow::resizeSignal, this, &KDiff3App::resizeMergeResultWindow);
-    connect(p, &MergeResultWindow::selectionEnd, this, &KDiff3App::slotSelectionEnd);
-    connect(p, &MergeResultWindow::newSelection, this, &KDiff3App::slotSelectionStart);
-    connect(p, &MergeResultWindow::modifiedChanged, this, &KDiff3App::slotOutputModified);
     connect(p, &MergeResultWindow::modifiedChanged, m_pMergeResultWindowTitle, &WindowTitleWidget::slotSetModified);
-    connect(p, &MergeResultWindow::updateAvailabilities, this, &KDiff3App::slotUpdateAvailabilities);
-    connect(p, &MergeResultWindow::showPopupMenu, this, &KDiff3App::showPopupMenu);
-    connect(p, &MergeResultWindow::noRelevantChangesDetected, this, &KDiff3App::slotNoRelevantChangesDetected);
+    p->setupConnections(this);
     sourceMask(0, 0);
 
     connect(p, &MergeResultWindow::setFastSelectorRange, m_pDiffTextWindow1, &DiffTextWindow::setFastSelectorRange);

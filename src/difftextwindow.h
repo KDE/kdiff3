@@ -28,6 +28,8 @@ class DiffTextWindowFrame;
 class EncodingLabel;
 class RLPainter;
 
+class KDiff3App;
+
 class DiffTextWindow : public QWidget
 {
     Q_OBJECT
@@ -44,6 +46,9 @@ class DiffTextWindow : public QWidget
         const ManualDiffHelpList* pManualDiffHelpList,
         bool bTriple
         );
+
+    void setupConnections(const KDiff3App *app);
+
     void reset();
     void convertToLinePos(int x, int y, LineRef& line, int& pos);
 
@@ -144,6 +149,8 @@ class DiffTextWindowFrame : public QWidget
     DiffTextWindow* getDiffTextWindow();
     void init();
     void setFirstLine(QtNumberType firstLine);
+
+    void setupConnections(const KDiff3App *app);
 
   Q_SIGNALS:
     void fileNameChanged(const QString&, e_SrcSelector);
