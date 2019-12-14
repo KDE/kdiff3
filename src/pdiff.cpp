@@ -749,9 +749,9 @@ int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& 
     for(i = 0; i < d3lv.size(); ++i)
     {
         const Diff3Line& d3l = *d3lv[i];
-        if((lineA1 >= 0 && lineA1 == d3l.getLineA()) ||
-           (lineB1 >= 0 && lineB1 == d3l.getLineB()) ||
-           (lineC1 >= 0 && lineC1 == d3l.getLineC()))
+        if((lineA1.isValid() && lineA1 == d3l.getLineA()) ||
+           (lineB1.isValid() && lineB1 == d3l.getLineB()) ||
+           (lineC1.isValid() && lineC1 == d3l.getLineC()))
             return i;
     }
     return -1;
