@@ -163,7 +163,7 @@ class DiffTextWindowFrame : public QWidget
     void slotReturnPressed();
     void slotBrowseButtonClicked();
 
-    void slotEncodingChanged(QTextCodec* c) { emit encodingChanged(c); };//relay signal from encoding label
+    void slotEncodingChanged(QTextCodec* c) { Q_EMIT encodingChanged(c); };//relay signal from encoding label
 
   private:
     DiffTextWindowFrameData* d;

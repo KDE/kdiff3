@@ -73,7 +73,7 @@ class RecalcWordWrapRunnable : public QRunnable
         g_pProgressDialog->setCurrent(s_maxNofRunnables - getAtomic(s_runnableCount));
         if(newValue == 0)
         {
-            emit m_pDTW->finishRecalcWordWrap(m_visibleTextWidth);
+            Q_EMIT m_pDTW->finishRecalcWordWrap(m_visibleTextWidth);
         }
     }
 };
@@ -312,21 +312,21 @@ void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
         QList<QUrl> urlList = dropEvent->mimeData()->urls();
 
         bool bShouldConintue = false;
-        emit checkIfCanContinue(bShouldConintue);
+        Q_EMIT checkIfCanContinue(bShouldConintue);
         if(bShouldConintue && !urlList.isEmpty())
         {
             QString filename = urlList.first().toLocalFile();
             
             d->sourceData->setFilename(filename);
             
-            emit finishDrop();
+            Q_EMIT finishDrop();
         }
     }
     else if(dropEvent->mimeData()->hasText())
     {
         QString text = dropEvent->mimeData()->text();
         bool bShouldConintue = false;
-        emit checkIfCanContinue(bShouldConintue);
+        Q_EMIT checkIfCanContinue(bShouldConintue);
 
         if(bShouldConintue)
         {
@@ -339,7 +339,7 @@ void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
                 KMessageBox::error(this, error);
             }
 
-            emit finishDrop();
+            Q_EMIT finishDrop();
         }
     }
 }
@@ -514,7 +514,7 @@ void DiffTextWindow::setFastSelectorRange(int line1, int nofLines)
             getNofVisibleLines());
         if(newFirstLine != d->m_firstLine)
         {
-            emit scrollDiffTextWindow(0, newFirstLine - d->m_firstLine);
+            Q_EMIT scrollDiffTextWindow(0, newFirstLine - d->m_firstLine);
         }
 
         update();
@@ -544,14 +544,14 @@ void DiffTextWindow::showStatusLine(const LineRef aproxLine)
                 message = i18n("File %1: Line not available", d->m_filename);
             if(d->m_pStatusBar != nullptr) d->m_pStatusBar->showMessage(message);
 
-            emit lineClicked(d->m_winIdx, actualLine);
+            Q_EMIT lineClicked(d->m_winIdx, actualLine);
         }
     }
 }
 
 void DiffTextWindow::focusInEvent(QFocusEvent* e)
 {
-    emit gotFocus();
+    Q_EMIT gotFocus();
     QWidget::focusInEvent(e);
 }
 
@@ -568,7 +568,7 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
 
         if((!d->m_pOptions->m_bRightToLeftLanguage && e->x() < xOffset) || (d->m_pOptions->m_bRightToLeftLanguage && e->x() > width() - xOffset))
         {
-            emit setFastSelectorLine(convertLineToDiff3LineIdx(line));
+            Q_EMIT setFastSelectorLine(convertLineToDiff3LineIdx(line));
             d->m_selection.reset(); // Disable current d->m_selection
         }
         else
@@ -619,7 +619,7 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
             d->m_selection.start(line, pos1);
             d->m_selection.end(line, pos2);
             update();
-            // emit d->m_selectionEnd() happens in the mouseReleaseEvent.
+            // Q_EMIT d->m_selectionEnd() happens in the mouseReleaseEvent.
             showStatusLine(line);
         }
     }
@@ -636,7 +636,7 @@ void DiffTextWindow::mouseReleaseEvent(QMouseEvent* e)
         d->m_delayedDrawTimer = 0;
         if(d->m_selection.isValidFirstLine())
         {
-            emit selectionEnd();
+            Q_EMIT selectionEnd();
         }
     }
     d->m_scrollDeltaX = 0;
@@ -677,7 +677,7 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
         {
             d->m_scrollDeltaX = deltaX;
             d->m_scrollDeltaY = deltaY;
-            emit scrollDiffTextWindow(deltaX, deltaY);
+            Q_EMIT scrollDiffTextWindow(deltaX, deltaY);
             if(d->m_delayedDrawTimer)
                 killTimer(d->m_delayedDrawTimer);
             d->m_delayedDrawTimer = startTimer(50);
@@ -738,7 +738,7 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
     if(d->m_scrollDeltaX != 0 || d->m_scrollDeltaY != 0)
     {
         d->m_selection.end(d->m_selection.getLastLine() + d->m_scrollDeltaY, d->m_selection.getLastPos() + d->m_scrollDeltaX);
-        emit scrollDiffTextWindow(d->m_scrollDeltaX, d->m_scrollDeltaY);
+        Q_EMIT scrollDiffTextWindow(d->m_scrollDeltaX, d->m_scrollDeltaY);
         killTimer(d->m_delayedDrawTimer);
         d->m_delayedDrawTimer = startTimer(50);
     }
@@ -1137,7 +1137,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     d->m_selection.clearOldSelection();
 
     if(!bOldSelectionContainsData && d->m_selection.selectionContainsData())
-        emit newSelection();
+        Q_EMIT newSelection();
 }
 
 void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, int nofLinesPerPage)
@@ -1270,9 +1270,9 @@ void DiffTextWindow::resizeEvent(QResizeEvent* e)
     int visibleLines = s.height() / fm.lineSpacing() - 2;
     int visibleColumns = s.width() / Utils::getHorizontalAdvance(fm, '0') - d->leftInfoWidth();
     if(e->size().height() != e->oldSize().height())
-        emit resizeHeightChangedSignal(visibleLines);
+        Q_EMIT resizeHeightChangedSignal(visibleLines);
     if(e->size().width() != e->oldSize().width())
-        emit resizeWidthChangedSignal(visibleColumns);
+        Q_EMIT resizeWidthChangedSignal(visibleColumns);
     QWidget::resizeEvent(e);
 }
 
@@ -1959,7 +1959,7 @@ void DiffTextWindowFrame::slotReturnPressed()
     DiffTextWindow* pDTW = d->m_pDiffTextWindow;
     if(pDTW->getFileName() != d->m_pFileSelection->text())
     {
-        emit fileNameChanged(d->m_pFileSelection->text(), pDTW->getWindowIndex());
+        Q_EMIT fileNameChanged(d->m_pFileSelection->text(), pDTW->getWindowIndex());
     }
 }
 
@@ -1971,7 +1971,7 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
     if(!newURL.isEmpty())
     {
         DiffTextWindow* pDTW = d->m_pDiffTextWindow;
-        emit fileNameChanged(newURL.url(), pDTW->getWindowIndex());
+        Q_EMIT fileNameChanged(newURL.url(), pDTW->getWindowIndex());
     }
 }
 
@@ -2080,6 +2080,6 @@ void EncodingLabel::slotSelectEncoding()
             }
         }
 
-        emit encodingChanged(pCodec);
+        Q_EMIT encodingChanged(pCodec);
     }
 }

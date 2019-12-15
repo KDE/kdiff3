@@ -344,7 +344,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         if(MergeFileInfos* pMFI = getMFI(mi))
         {
             pMFI->setOpStatus(eOpStatus);
-            emit dataChanged(mi, mi);
+            Q_EMIT dataChanged(mi, mi);
         }
     }
 
@@ -761,10 +761,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         // A full analysis uses the same resources that a normal text-diff/merge uses.
         // So make sure that the user saves his data first.
         bool bCanContinue = false;
-        emit mWindow->checkIfCanContinue(bCanContinue);
+        Q_EMIT mWindow->checkIfCanContinue(bCanContinue);
         if(!bCanContinue)
             return false;
-        emit mWindow->startDiffMerge("", "", "", "", "", "", "", nullptr); // hide main window
+        Q_EMIT mWindow->startDiffMerge("", "", "", "", "", "", "", nullptr); // hide main window
     }
 
     mWindow->show();
@@ -859,7 +859,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     }
 
     m_bScanning = true;
-    emit mWindow->statusBarMessage(i18n("Scanning directories..."));
+    Q_EMIT mWindow->statusBarMessage(i18n("Scanning directories..."));
 
     m_bSyncMode = m_pOptions->m_bDmSyncMode && !dirC.isValid() && !dirDest.isValid();
 
@@ -962,7 +962,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     }
 
     m_bScanning = false;
-    emit mWindow->statusBarMessage(i18n("Ready."));
+    Q_EMIT mWindow->statusBarMessage(i18n("Ready."));
 
     if(bContinue && !m_bSkipDirStatus)
     {
@@ -1240,11 +1240,11 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
 
 void DirectoryMergeWindow::focusInEvent(QFocusEvent*)
 {
-    emit updateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 void DirectoryMergeWindow::focusOutEvent(QFocusEvent*)
 {
-    emit updateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::setAllMergeOperations(e_MergeOperation eDefaultOperation)
@@ -1789,13 +1789,13 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::selectItemAndColumn(cons
     {
         m_selection3Index = mi;
     }
-    if(old1.isValid()) emit dataChanged(old1, old1);
-    if(old2.isValid()) emit dataChanged(old2, old2);
-    if(old3.isValid()) emit dataChanged(old3, old3);
-    if(m_selection1Index.isValid()) emit dataChanged(m_selection1Index, m_selection1Index);
-    if(m_selection2Index.isValid()) emit dataChanged(m_selection2Index, m_selection2Index);
-    if(m_selection3Index.isValid()) emit dataChanged(m_selection3Index, m_selection3Index);
-    emit mWindow->updateAvailabilities();
+    if(old1.isValid()) Q_EMIT dataChanged(old1, old1);
+    if(old2.isValid()) Q_EMIT dataChanged(old2, old2);
+    if(old3.isValid()) Q_EMIT dataChanged(old3, old3);
+    if(m_selection1Index.isValid()) Q_EMIT dataChanged(m_selection1Index, m_selection1Index);
+    if(m_selection2Index.isValid()) Q_EMIT dataChanged(m_selection2Index, m_selection2Index);
+    if(m_selection3Index.isValid()) Q_EMIT dataChanged(m_selection3Index, m_selection3Index);
+    Q_EMIT mWindow->updateAvailabilities();
 }
 
 //TODO
@@ -1865,7 +1865,7 @@ void DirectoryMergeWindow::compareCurrentFile()
     {
         if(!(pMFI->hasDir()))
         {
-            emit startDiffMerge(
+            Q_EMIT startDiffMerge(
                 pMFI->existsInA() ? pMFI->getFileInfoA()->absoluteFilePath() : QString(""),
                 pMFI->existsInB() ? pMFI->getFileInfoB()->absoluteFilePath() : QString(""),
                 pMFI->existsInC() ? pMFI->getFileInfoC()->absoluteFilePath() : QString(""),
@@ -1873,7 +1873,7 @@ void DirectoryMergeWindow::compareCurrentFile()
                 "", "", "", nullptr);
         }
     }
-    emit updateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 void DirectoryMergeWindow::slotCompareExplicitlySelectedFiles()
@@ -1886,7 +1886,7 @@ void DirectoryMergeWindow::slotCompareExplicitlySelectedFiles()
         return;
     }
 
-    emit startDiffMerge(
+    Q_EMIT startDiffMerge(
         d->getFileName(d->m_selection1Index),
         d->getFileName(d->m_selection2Index),
         d->getFileName(d->m_selection3Index),
@@ -1896,7 +1896,7 @@ void DirectoryMergeWindow::slotCompareExplicitlySelectedFiles()
     d->m_selection2Index = QModelIndex();
     d->m_selection3Index = QModelIndex();
 
-    emit updateAvailabilities();
+    Q_EMIT updateAvailabilities();
     update();
 }
 
@@ -1914,14 +1914,14 @@ void DirectoryMergeWindow::slotMergeExplicitlySelectedFiles()
     QString fn2 = d->getFileName(d->m_selection2Index);
     QString fn3 = d->getFileName(d->m_selection3Index);
 
-    emit startDiffMerge(fn1, fn2, fn3,
+    Q_EMIT startDiffMerge(fn1, fn2, fn3,
                         fn3.isEmpty() ? fn2 : fn3,
                         "", "", "", nullptr);
     d->m_selection1Index = QModelIndex();
     d->m_selection2Index = QModelIndex();
     d->m_selection3Index = QModelIndex();
 
-    emit updateAvailabilities();
+    Q_EMIT updateAvailabilities();
     update();
 }
 
@@ -1973,14 +1973,14 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
         }
     }
 
-    emit updateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::canContinue()
 {
     bool bCanContinue = false;
 
-    emit mWindow->checkIfCanContinue(bCanContinue);
+    Q_EMIT mWindow->checkIfCanContinue(bCanContinue);
 
     if(bCanContinue && !m_bError)
     {
@@ -2206,7 +2206,7 @@ void DirectoryMergeWindow::mergeCurrentFile()
                 bDummy);
         }
     }
-    emit updateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 // When bStart is true then m_currentIndexForOperation must still be processed.
@@ -2404,7 +2404,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
     {
         m_bError = false;
     }
-    emit mWindow->updateAvailabilities();
+    Q_EMIT mWindow->updateAvailabilities();
 
     if(m_currentIndexForOperation == m_mergeItemList.end())
     {
@@ -2514,7 +2514,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeFLD(const QString& 
     setOpStatus(*m_currentIndexForOperation, eOpStatusInProgress);
     mWindow->scrollTo(*m_currentIndexForOperation, EnsureVisible);
 
-    emit mWindow->startDiffMerge(nameA, nameB, nameC, nameDest, "", "", "", nullptr);
+    Q_EMIT mWindow->startDiffMerge(nameA, nameB, nameC, nameDest, "", "", "", nullptr);
 
     return false;
 }
@@ -2728,7 +2728,7 @@ DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent)
 bool DirectoryMergeInfo::eventFilter(QObject* o, QEvent* e)
 {
     if(e->type() == QEvent::FocusIn && o == m_pInfoList)
-        emit gotFocus();
+        Q_EMIT gotFocus();
     return false;
 }
 

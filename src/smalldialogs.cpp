@@ -255,7 +255,7 @@ void OpenDialog::selectOutputDir() { selectURL(m_pLineOut, true, 4, true); }
 
 void OpenDialog::internalSlot(int i)
 {
-    emit internalSignal(i != 0);
+    Q_EMIT internalSignal(i != 0);
 }
 
 // Clear the output-filename when any input-filename changed,

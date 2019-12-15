@@ -164,7 +164,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
         }
         else
         {
-            emit pDMW->startDiffMerge(
+            Q_EMIT pDMW->startDiffMerge(
                 existsInA() ? getFileInfoA()->absoluteFilePath() : QString(""),
                 existsInB() ? getFileInfoB()->absoluteFilePath() : QString(""),
                 existsInC() ? getFileInfoC()->absoluteFilePath() : QString(""),

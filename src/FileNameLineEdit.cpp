@@ -33,7 +33,7 @@ void FileNameLineEdit::dropEvent(QDropEvent* event)
     {
         setText(lst[0].toString());
         setFocus();
-        emit returnPressed();
+        Q_EMIT returnPressed();
     }
 }
 

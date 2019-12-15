@@ -571,7 +571,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
         if(m_pOptions->m_bRunRegExpAutoMergeOnMergeStart)
             slotRegExpAutoMerge();
         if(m_pldC != nullptr && !doRelevantChangesExist())
-            emit noRelevantChangesDetected();
+            Q_EMIT noRelevantChangesDetected();
     }
 
     int nrOfSolvedConflicts = 0;
@@ -607,7 +607,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     m_currentMergeLineIt = m_mergeLineList.begin();
     slotGoTop();
 
-    emit updateAvailabilities();
+    Q_EMIT updateAvailabilities();
     update();
 }
 
@@ -680,7 +680,7 @@ int MergeResultWindow::getTextXOffset()
 void MergeResultWindow::resizeEvent(QResizeEvent* e)
 {
     QWidget::resizeEvent(e);
-    emit resizeSignal();
+    Q_EMIT resizeSignal();
 }
 
 Overview::e_OverviewMode MergeResultWindow::getOverviewMode()
@@ -1003,7 +1003,7 @@ void MergeResultWindow::setFastSelector(MergeLineList::iterator i)
     if(i == m_mergeLineList.end())
         return;
     m_currentMergeLineIt = i;
-    emit setFastSelectorRange(i->d3lLineIdx, i->srcRangeLength);
+    Q_EMIT setFastSelectorRange(i->d3lLineIdx, i->srcRangeLength);
 
     int line1 = 0;
 
@@ -1019,7 +1019,7 @@ void MergeResultWindow::setFastSelector(MergeLineList::iterator i)
     int newFirstLine = getBestFirstLine(line1, nofLines, m_firstLine, getNofVisibleLines());
     if(newFirstLine != m_firstLine)
     {
-        emit scrollMergeResultWindow(0, newFirstLine - m_firstLine);
+        Q_EMIT scrollMergeResultWindow(0, newFirstLine - m_firstLine);
     }
 
     if(m_selection.isEmpty())
@@ -1031,7 +1031,7 @@ void MergeResultWindow::setFastSelector(MergeLineList::iterator i)
 
     update();
     updateSourceMask();
-    emit updateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 void MergeResultWindow::choose(e_SrcSelector selector)
@@ -1115,7 +1115,7 @@ void MergeResultWindow::choose(e_SrcSelector selector)
     m_maxTextWidth = -1;
     update();
     updateSourceMask();
-    emit updateAvailabilities();
+    Q_EMIT updateAvailabilities();
     showUnsolvedConflictsStatusMessage();
 }
 
@@ -1686,7 +1686,7 @@ void MergeResultWindow::timerEvent(QTimerEvent*)
     if(m_scrollDeltaX != 0 || m_scrollDeltaY != 0)
     {
         m_selection.end(m_selection.getLastLine() + m_scrollDeltaY, m_selection.getLastPos() + m_scrollDeltaX);
-        emit scrollMergeResultWindow(m_scrollDeltaX, m_scrollDeltaY);
+        Q_EMIT scrollMergeResultWindow(m_scrollDeltaX, m_scrollDeltaY);
         killTimer(m_delayedDrawTimer);
         m_delayedDrawTimer = startTimer(50);
     }
@@ -1949,7 +1949,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         {
             m_nofLines = line;
 
-            emit resizeSignal();
+            Q_EMIT resizeSignal();
         }
 
         p.end();
@@ -1978,7 +1978,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
     painter.end();
 
     if(!bOldSelectionContainsData && m_selection.selectionContainsData())
-        emit newSelection();
+        Q_EMIT newSelection();
 }
 
 void MergeResultWindow::updateSourceMask()
@@ -2014,7 +2014,7 @@ void MergeResultWindow::updateSourceMask()
         }
     }
 
-    emit sourceMask(srcMask, enabledMask);
+    Q_EMIT sourceMask(srcMask, enabledMask);
 }
 
 void MergeResultWindow::focusInEvent(QFocusEvent* e)
@@ -2074,7 +2074,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
 
         if(bRMB)
         {
-            emit showPopupMenu(QCursor::pos());
+            Q_EMIT showPopupMenu(QCursor::pos());
         }
     }
     else if(bLMB) // Normal cursor placement
@@ -2142,7 +2142,7 @@ void MergeResultWindow::mouseDoubleClickEvent(QMouseEvent* e)
             m_selection.end(line, pos2);
 
             update();
-            // emit selectionEnd() happens in the mouseReleaseEvent.
+            // Q_EMIT selectionEnd() happens in the mouseReleaseEvent.
         }
     }
 }
@@ -2159,7 +2159,7 @@ void MergeResultWindow::mouseReleaseEvent(QMouseEvent* e)
 
         if(m_selection.isValidFirstLine())
         {
-            emit selectionEnd();
+            Q_EMIT selectionEnd();
         }
     }
 }
@@ -2203,7 +2203,7 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
         m_scrollDeltaY = deltaY;
         if(deltaX != 0 || deltaY != 0)
         {
-            emit scrollMergeResultWindow(deltaX, deltaY);
+            Q_EMIT scrollMergeResultWindow(deltaX, deltaY);
         }
     }
 }
@@ -2233,7 +2233,7 @@ void MergeResultWindow::wheelEvent(QWheelEvent* e)
 {
     int d = -e->delta() * QApplication::wheelScrollLines() / 120;
     e->accept();
-    emit scrollMergeResultWindow(0, std::min(d, getNofVisibleLines()));
+    Q_EMIT scrollMergeResultWindow(0, std::min(d, getNofVisibleLines()));
 }
 
 bool MergeResultWindow::event(QEvent* e)
@@ -2624,7 +2624,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     if(textLayout.maximumWidth() > getMaxTextWidth())
     {
         m_maxTextWidth =  qCeil(textLayout.maximumWidth());
-        emit resizeSignal();
+        Q_EMIT resizeSignal();
     }
     if(!bYMoveKey)
         m_cursorOldXPixelPos = m_cursorXPixelPos;
@@ -2635,7 +2635,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     update();
     if(newFirstLine != m_firstLine || newHorizScrollOffset != m_horizScrollOffset)
     {
-        emit scrollMergeResultWindow(newHorizScrollOffset - m_horizScrollOffset, newFirstLine - m_firstLine);
+        Q_EMIT scrollMergeResultWindow(newHorizScrollOffset - m_horizScrollOffset, newFirstLine - m_firstLine);
         return;
     }
 }
@@ -2905,7 +2905,7 @@ void MergeResultWindow::setModified(bool bModified)
     if(bModified != m_bModified)
     {
         m_bModified = bModified;
-        emit modifiedChanged(m_bModified);
+        Q_EMIT modifiedChanged(m_bModified);
     }
 }
 

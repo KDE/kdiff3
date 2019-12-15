@@ -87,7 +87,7 @@ class ReversibleScrollBar : public QScrollBar
         m_realVal = i;
         if(m_pbRightToLeftLanguage != nullptr && *m_pbRightToLeftLanguage)
             m_realVal = maximum() - (i - minimum());
-        emit valueChanged2(m_realVal);
+        Q_EMIT valueChanged2(m_realVal);
     }
 
   Q_SIGNALS:

@@ -1491,7 +1491,7 @@ void OptionDialog::slotApply()
 {
     m_options->apply();
 
-    emit applyDone();
+    Q_EMIT applyDone();
 }
 
 /** Set the default values in the widgets only, while the

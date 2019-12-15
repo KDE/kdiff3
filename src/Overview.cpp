@@ -83,7 +83,7 @@ void Overview::mousePressEvent(QMouseEvent* e)
     int h = height() - 1;
     int h1 = h * m_pageHeight / std::max(1, m_nofLines) + 3;
     if(h > 0)
-        emit setLine((e->y() - h1 / 2) * m_nofLines / h);
+        Q_EMIT setLine((e->y() - h1 / 2) * m_nofLines / h);
 }
 
 void Overview::mouseMoveEvent(QMouseEvent* e)
