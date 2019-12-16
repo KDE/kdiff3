@@ -156,7 +156,7 @@ const QString SourceData::setData(const QString& data)
         m_fileAccess = FileAccess(); // Insure m_fileAccess is not valid
     }
 
-    return QStringLiteral("");
+    return QLatin1String("");
 }
 
 const QVector<LineData>* SourceData::getLineDataForDiff() const
