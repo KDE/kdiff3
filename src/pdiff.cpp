@@ -1881,6 +1881,9 @@ bool KDiff3App::canContinue()
     return true;
 }
 
+/*
+    Translate canContinue return value to out param because Qt does not support return values on slots.
+*/
 void KDiff3App::slotCheckIfCanContinue(bool& pbContinue)
 {
     pbContinue = canContinue();
