@@ -84,7 +84,7 @@ class LineRef
     LineType mLineNumber = -1;
 };
 
-static_assert(std::is_copy_constructible<LineRef>::value, "LineRef must be copt constuctible.");
+static_assert(std::is_copy_constructible<LineRef>::value, "LineRef must be copy constuctible.");
 static_assert(std::is_copy_assignable<LineRef>::value, "LineRef must copy assignable.");
 static_assert(std::is_move_constructible<LineRef>::value, "LineRef must be move constructible.");
 static_assert(std::is_move_assignable<LineRef>::value, "LineRef must be move assignable.");

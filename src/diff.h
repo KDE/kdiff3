@@ -303,12 +303,10 @@ class Diff3LineList : public std::list<Diff3Line>
 
     LineCount recalcWordWrap(bool resetDisplayCount)
     {
-        //Diff3LineList::iterator i;
         LineCount sumOfLines = 0;
 
         for(Diff3Line& d3l: *this)
         {
-            //Diff3Line& d3l = *i;
             if(resetDisplayCount)
                 d3l.linesNeededForDisplay = 1;
             

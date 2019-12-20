@@ -39,7 +39,7 @@ class DirectoryMergeWindow : public QTreeView
 {
    Q_OBJECT
 public:
-   DirectoryMergeWindow( QWidget* pParent, const QSharedPointer<Options> &pOptions, KDiff3App* const app );
+   DirectoryMergeWindow( QWidget* pParent, const QSharedPointer<Options> &pOptions);
    ~DirectoryMergeWindow() override;
    void setDirectoryMergeInfo(DirectoryMergeInfo* p);
    bool init(
@@ -127,9 +127,7 @@ private:
   int getIntFromIndex(const QModelIndex& index) const;
   const QSharedPointer<Options>& getOptions() const;
 
-  KDiff3App* mApp;
   class DirectoryMergeWindowPrivate;
-  friend class DirectoryMergeWindowPrivate;
   DirectoryMergeWindowPrivate* d;
   class DirMergeItemDelegate;
 };

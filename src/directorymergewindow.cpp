@@ -616,7 +616,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
     }
 };
 
-DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointer<Options> &pOptions, KDiff3App* const app)
+DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointer<Options> &pOptions)
     : QTreeView(pParent)
 {
     d = new DirectoryMergeWindowPrivate(this);
@@ -626,7 +626,6 @@ DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointe
     connect(this, &DirectoryMergeWindow::expanded, this, &DirectoryMergeWindow::onExpanded);
 
     d->m_pOptions = pOptions;
-    mApp = app;
 
     setSortingEnabled(true);
 }
