@@ -336,9 +336,8 @@ class Diff3LineVector : public QVector<Diff3Line*>
 {
 };
 
-class Diff3WrapLine
+struct Diff3WrapLine
 {
-  public:
     Diff3Line* pD3L;
     int diff3LineIndex;
     int wrapLineOffset;
