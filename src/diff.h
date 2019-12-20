@@ -185,7 +185,6 @@ class Diff3Line
     bool bBEqC = false;
     bool bAEqB = false;
 
-  public:
     bool bWhiteLineA = false;
     bool bWhiteLineB = false;
     bool bWhiteLineC  = false;
@@ -195,9 +194,10 @@ class Diff3Line
     DiffList* pFineCA = nullptr;
 
 
-    int linesNeededForDisplay = 1;    // Due to wordwrap
-    int sumLinesNeededForDisplay = 0; // For fast conversion to m_diff3WrapLineVector
+    qint32 mLinesNeededForDisplay = 1;    // Due to wordwrap
+    qint32 mSumLinesNeededForDisplay = 0; // For fast conversion to m_diff3WrapLineVector
 
+  public:
     DiffBufferInfo* m_pDiffBufferInfo = nullptr; // For convenience
 
     ~Diff3Line()
@@ -222,6 +222,25 @@ class Diff3Line
     inline bool isEqualAC() const { return bAEqC; }
     inline bool isEqualBC() const { return bBEqC; }
 
+    inline bool isWhiteLine(e_SrcSelector src) const
+    {
+        Q_ASSERT(src == A || src == B || src == C);
+
+        switch(src)
+        {
+            case A:
+                return bWhiteLineA;
+            case B:
+                return bWhiteLineB;
+            case C:
+                return bWhiteLineC;
+            default:
+                //should never get here
+                Q_ASSERT(false);
+                return false;
+        }
+    }
+
     bool operator==(const Diff3Line& d3l) const
     {
         return lineA == d3l.lineA && lineB == d3l.lineB && lineC == d3l.lineC && bAEqB == d3l.bAEqB && bAEqC == d3l.bAEqC && bBEqC == d3l.bBEqC;
@@ -230,7 +249,7 @@ class Diff3Line
     const LineData* getLineData(e_SrcSelector src) const
     {
         Q_ASSERT(m_pDiffBufferInfo != nullptr);
-        //Use at here not [] to avoid using really weird syntax
+        //Use at() here not [] to avoid using really weird syntax
         if(src == A && lineA.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineA);
         if(src == B && lineB.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineB);
         if(src == C && lineC.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineC);
@@ -253,13 +272,17 @@ class Diff3Line
         return -1;
     }
 
+    inline qint32 sumLinesNeededForDisplay() const { return mSumLinesNeededForDisplay; }
+
+    inline qint32 linesNeededForDisplay() const { return mLinesNeededForDisplay; }
+
+    void setLinesNeeded(const qint32 lines) { mLinesNeededForDisplay = lines; }
     bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2);
     void mergeOneLine(e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, e_SrcSelector& src, bool bTwoInputs) const;
 
     void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
         DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
         ChangeFlags& changed, ChangeFlags& changed2) const;
-
   private:
     void setFineDiff(const e_SrcSelector selector, DiffList* pDiffList)
     {
@@ -308,10 +331,10 @@ class Diff3LineList : public std::list<Diff3Line>
         for(Diff3Line& d3l: *this)
         {
             if(resetDisplayCount)
-                d3l.linesNeededForDisplay = 1;
+                d3l.mLinesNeededForDisplay = 1;
             
-            d3l.sumLinesNeededForDisplay = sumOfLines;
-            sumOfLines += d3l.linesNeededForDisplay;
+            d3l.mSumLinesNeededForDisplay = sumOfLines;
+            sumOfLines += d3l.linesNeededForDisplay();
         }
         
         return sumOfLines;

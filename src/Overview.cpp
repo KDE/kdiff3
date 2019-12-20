@@ -143,13 +143,13 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
             case eBDeleted:
             case eBChanged:
                 c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorB;
-                bWhiteSpaceChange = d3l.isEqualAB() || (d3l.bWhiteLineA && d3l.bWhiteLineB);
+                bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(A) && d3l.isWhiteLine(B));
                 break;
 
             case eCAdded:
             case eCDeleted:
             case eCChanged:
-                bWhiteSpaceChange = d3l.isEqualAC() || (d3l.bWhiteLineA && d3l.bWhiteLineC);
+                bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(A) && d3l.isWhiteLine(C));
                 c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorC;
                 break;
 
@@ -179,7 +179,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
             default:
                 c = m_pOptions->m_colorForConflict;
-                bWhiteSpaceChange = d3l.isEqualAB() || (d3l.bWhiteLineA && d3l.bWhiteLineB);
+                bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(A) && d3l.isWhiteLine(B));
                 break;
             }
         }
@@ -195,7 +195,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
             default:
                 c = m_pOptions->m_colorForConflict;
-                bWhiteSpaceChange = d3l.isEqualAC() || (d3l.bWhiteLineA && d3l.bWhiteLineC);
+                bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(A) && d3l.isWhiteLine(C));
                 break;
             }
         }
@@ -211,7 +211,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
             default:
                 c = m_pOptions->m_colorForConflict;
-                bWhiteSpaceChange = d3l.isEqualBC() || (d3l.bWhiteLineB && d3l.bWhiteLineC);
+                bWhiteSpaceChange = d3l.isEqualBC() || (d3l.isWhiteLine(B) && d3l.isWhiteLine(C));
                 break;
             }
         }
@@ -254,7 +254,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         if(m_pOptions->m_bWordWrap)
         {
             ++wrapLineIdx;
-            if(wrapLineIdx >= d3l.linesNeededForDisplay)
+            if(wrapLineIdx >= d3l.linesNeededForDisplay())
             {
                 wrapLineIdx = 0;
                 ++i;
@@ -281,7 +281,7 @@ void Overview::paintEvent(QPaintEvent*)
             Diff3LineList::const_iterator i;
             for(i = m_pDiff3LineList->begin(); i != m_pDiff3LineList->end(); ++i)
             {
-                m_nofLines += i->linesNeededForDisplay;
+                m_nofLines += i->linesNeededForDisplay();
             }
         }
         else

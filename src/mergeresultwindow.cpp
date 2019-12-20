@@ -425,8 +425,8 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
 
             // Automatic solving for only whitespace changes.
             if(ml.bConflict &&
-               ((m_pldC == nullptr && (d.isEqualAB() || (d.bWhiteLineA && d.bWhiteLineB))) ||
-                (m_pldC != nullptr && ((d.isEqualAB() && d.isEqualAC()) || (d.bWhiteLineA && d.bWhiteLineB && d.bWhiteLineC)))))
+               ((m_pldC == nullptr && (d.isEqualAB() || (d.isWhiteLine(A) && d.isWhiteLine(B)))) ||
+                (m_pldC != nullptr && ((d.isEqualAB() && d.isEqualAC()) || (d.isWhiteLine(A) && d.isWhiteLine(B) && d.isWhiteLine(C))))))
             {
                 ml.bWhiteSpaceConflict = true;
             }

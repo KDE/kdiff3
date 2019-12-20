@@ -478,7 +478,7 @@ int DiffTextWindow::convertLineToDiff3LineIdx(LineRef line)
 LineRef DiffTextWindow::convertDiff3LineIdxToLine(int d3lIdx)
 {
     if(d->m_bWordWrap && d->m_pDiff3LineVector != nullptr && d->m_pDiff3LineVector->size() > 0)
-        return (*d->m_pDiff3LineVector)[std::min(d3lIdx, (int)d->m_pDiff3LineVector->size() - 1)]->sumLinesNeededForDisplay;
+        return (*d->m_pDiff3LineVector)[std::min(d3lIdx, (int)d->m_pDiff3LineVector->size() - 1)]->sumLinesNeededForDisplay();
     else
         return d3lIdx;
 }
@@ -1684,16 +1684,16 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
             }
 
             Diff3Line& d3l = *(*d->m_pDiff3LineVector)[i];
-            if(d3l.linesNeededForDisplay < linesNeeded)
+            if(d3l.linesNeededForDisplay() < linesNeeded)
             {
                 Q_ASSERT(wrapLineVectorSize == 0);
-                d3l.linesNeededForDisplay = linesNeeded;
+                d3l.setLinesNeeded(linesNeeded);
             }
 
             if(wrapLineVectorSize > 0)
             {
                 int j;
-                for(j = 0; j < d3l.linesNeededForDisplay; ++j, ++wrapLineIdx)
+                for(j = 0; j < d3l.linesNeededForDisplay(); ++j, ++wrapLineIdx)
                 {
                     Diff3WrapLine& d3wl = d->m_diff3WrapLineVector[wrapLineIdx];
                     d3wl.diff3LineIndex = i;
