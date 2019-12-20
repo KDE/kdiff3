@@ -275,19 +275,7 @@ void Overview::paintEvent(QPaintEvent*)
 
     if(m_pixmap.size() != size())
     {
-        if(m_pOptions->m_bWordWrap)
-        {
-            m_nofLines = 0;
-            Diff3LineList::const_iterator i;
-            for(i = m_pDiff3LineList->begin(); i != m_pDiff3LineList->end(); ++i)
-            {
-                m_nofLines += i->linesNeededForDisplay();
-            }
-        }
-        else
-        {
-            m_nofLines = m_pDiff3LineList->size();
-        }
+        m_nofLines = m_pDiff3LineList->numberOfLines(m_pOptions->m_bWordWrap);
 
         m_pixmap = QPixmap(size());
 
