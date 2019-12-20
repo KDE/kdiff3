@@ -25,6 +25,8 @@
 #include <QtGlobal>
 #include <QSharedPointer>
 
+QSharedPointer<DiffBufferInfo> Diff3Line::m_pDiffBufferInfo = nullptr;
+
 int LineData::width(int tabSize) const
 {
     QString pLine = getLine();
@@ -1127,11 +1129,6 @@ void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
     m_sizeA = sizeA;
     m_sizeB = sizeB;
     m_sizeC = sizeC;
-    Diff3LineList::iterator i3 = pD3ll->begin();
-    for(; i3 != pD3ll->end(); ++i3)
-    {
-        i3->m_pDiffBufferInfo = this;
-    }
 }
 
 void Diff3LineList::calcWhiteDiff3Lines(

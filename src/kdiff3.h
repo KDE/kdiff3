@@ -363,7 +363,7 @@ class KDiff3App : public QSplitter
     DiffList m_diffList23;
     DiffList m_diffList13;
 
-    DiffBufferInfo m_diffBufferInfo;
+    QSharedPointer<DiffBufferInfo> m_diffBufferInfo = QSharedPointer<DiffBufferInfo>::create();
     Diff3LineList m_diff3LineList;
     Diff3LineVector m_diff3LineVector;
     //ManualDiffHelpDialog* m_pManualDiffHelpDialog;

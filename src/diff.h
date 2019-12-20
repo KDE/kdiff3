@@ -198,7 +198,7 @@ class Diff3Line
     qint32 mSumLinesNeededForDisplay = 0; // For fast conversion to m_diff3WrapLineVector
 
   public:
-    DiffBufferInfo* m_pDiffBufferInfo = nullptr; // For convenience
+    static QSharedPointer<DiffBufferInfo> m_pDiffBufferInfo; // For convenience
 
     ~Diff3Line()
     {
@@ -209,7 +209,6 @@ class Diff3Line
         pFineBC = nullptr;
         pFineCA = nullptr;
     }
-
     LineRef getLineA() const { return lineA; }
     LineRef getLineB() const { return lineB; }
     LineRef getLineC() const { return lineC; }
