@@ -526,15 +526,26 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::headerData(int secti
     return QVariant();
 }
 
+int DirectoryMergeWindow::getIntFromIndex(const QModelIndex& index) const
+{
+    return index == d->m_selection1Index ? 1 : index == d->m_selection2Index ? 2 : index == d->m_selection3Index ? 3 : 0;
+}
+
+const QSharedPointer<Options>& DirectoryMergeWindow::getOptions() const
+{
+    return d->m_pOptions;
+}
+
 // Previously  Q3ListViewItem::paintCell(p,cg,column,width,align);
 class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
 {
+  private:
     DirectoryMergeWindow* m_pDMW;
-    DirectoryMergeWindow::DirectoryMergeWindowPrivate* d;
+    const QSharedPointer<Options>& getOptions() const { return m_pDMW->getOptions(); }
 
   public:
     explicit DirMergeItemDelegate(DirectoryMergeWindow* pParent)
-        : QStyledItemDelegate(pParent), m_pDMW(pParent), d(pParent->d)
+        : QStyledItemDelegate(pParent), m_pDMW(pParent)
     {
     }
     void paint(QPainter* thePainter, const QStyleOptionViewItem& option, const QModelIndex& index) const override
@@ -567,11 +578,10 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
                 int yOffset = (sizeHint(option, index).height() - icon.height()) / 2;
                 thePainter->drawPixmap(x + 2, y + yOffset, icon);
 
-                int i = index == d->m_selection1Index ? 1 : index == d->m_selection2Index ? 2 : index == d->m_selection3Index ? 3 : 0;
+                int i = m_pDMW->getIntFromIndex(index);
                 if(i != 0)
                 {
-                    QSharedPointer<Options> pOpts = d->m_pOptions;
-                    QColor c(i == 1 ? pOpts->m_colorA : i == 2 ? pOpts->m_colorB : pOpts->m_colorC);
+                    QColor c(i == 1 ? getOptions()->m_colorA : i == 2 ? getOptions()->m_colorB : getOptions()->m_colorC);
                     thePainter->setPen(c); // highlight() );
                     thePainter->drawRect(x + 2, y + yOffset, icon.width(), icon.height());
                     thePainter->setPen(QPen(c, 0, Qt::DotLine));
@@ -591,6 +601,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
                 return;
             }
         }
+
         QStyleOptionViewItem option2 = option;
         if(column >= s_UnsolvedCol)
         {

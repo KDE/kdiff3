@@ -124,12 +124,14 @@ protected Q_SLOTS:
    void onExpanded();
    void	currentChanged( const QModelIndex & current, const QModelIndex & previous ) override; // override
 private:
+  int getIntFromIndex(const QModelIndex& index) const;
+  const QSharedPointer<Options>& getOptions() const;
+
   KDiff3App* mApp;
   class DirectoryMergeWindowPrivate;
   friend class DirectoryMergeWindowPrivate;
   DirectoryMergeWindowPrivate* d;
   class DirMergeItemDelegate;
-  friend class DirMergeItemDelegate;
 };
 
 class DirectoryMergeInfo : public QFrame
