@@ -2287,7 +2287,6 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
         insert(i, mdhe);
     }
 
-    // TODO: Is ordering important? If not than calling remove is enough.
     // Now make the list compact
     for(int wIdx = A; wIdx <= Max; ++wIdx)
     {
