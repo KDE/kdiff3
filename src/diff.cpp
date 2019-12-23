@@ -645,10 +645,10 @@ bool ManualDiffHelpList::runDiff(const QVector<LineData>* p1, LineRef size1, con
     {
         const ManualDiffHelpEntry& mdhe = *i;
 
-        int l1end = mdhe.getLine1(winIdx1);
-        int l2end = mdhe.getLine1(winIdx2);
+        LineRef l1end = mdhe.getLine1(winIdx1);
+        LineRef l2end = mdhe.getLine1(winIdx2);
 
-        if(l1end >= 0 && l2end >= 0)
+        if(l1end.isValid() && l2end.isValid())
         {
             ::runDiff(p1, l1begin, l1end - l1begin, p2, l2begin, l2end - l2begin, diffList2, pOptions);
             diffList.splice(diffList.end(), diffList2);
@@ -658,7 +658,7 @@ bool ManualDiffHelpList::runDiff(const QVector<LineData>* p1, LineRef size1, con
             l1end = mdhe.getLine2(winIdx1);
             l2end = mdhe.getLine2(winIdx2);
 
-            if(l1end >= 0 && l2end >= 0)
+            if(l1end.isValid() && l2end.isValid())
             {
                 ++l1end; // point to line after last selected line
                 ++l2end;
@@ -686,13 +686,13 @@ void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHe
     {
         Diff3LineList::iterator i3 = begin();
         e_SrcSelector missingWinIdx = None;
-        int alignedSum = (iMDHL->getLine1(A) < 0 ? 0 : 1) + (iMDHL->getLine1(B) < 0 ? 0 : 1) + (iMDHL->getLine1(C) < 0 ? 0 : 1);
+        int alignedSum = (!iMDHL->getLine1(A).isValid() ? 0 : 1) + (!iMDHL->getLine1(B).isValid() ? 0 : 1) + (!iMDHL->getLine1(C).isValid() ? 0 : 1);
         if(alignedSum == 2)
         {
             // If only A & B are aligned then let C rather be aligned with A
             // If only A & C are aligned then let B rather be aligned with A
             // If only B & C are aligned then let A rather be aligned with B
-            missingWinIdx = iMDHL->getLine1(A) < 0 ? A : (iMDHL->getLine1(B) < 0 ? B : C);
+            missingWinIdx = !iMDHL->getLine1(A).isValid() ? A : (!iMDHL->getLine1(B).isValid() ? B : C);
         }
         else if(alignedSum <= 1)
         {
@@ -706,7 +706,7 @@ void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHe
         {
             for(wi = A; wi <= Max; ++wi)
             {
-                if(i3->getLineInFile((e_SrcSelector)wi) >= 0 && iMDHL->firstLine((e_SrcSelector)wi) == i3->getLineInFile((e_SrcSelector)wi))
+                if(i3->getLineInFile((e_SrcSelector)wi).isValid() && iMDHL->firstLine((e_SrcSelector)wi) == i3->getLineInFile((e_SrcSelector)wi))
                     break;
             }
             if(wi <= Max)
@@ -724,7 +724,7 @@ void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHe
             {
                 for(wi2 = A; wi2 <= C; ++wi2)
                 {
-                    if(wi != wi2 && i3->getLineInFile((e_SrcSelector)wi2) >= 0 && iMDHL->firstLine((e_SrcSelector)wi2) == i3->getLineInFile((e_SrcSelector)wi2))
+                    if(wi != wi2 && i3->getLineInFile((e_SrcSelector)wi2).isValid() && iMDHL->firstLine((e_SrcSelector)wi2) == i3->getLineInFile((e_SrcSelector)wi2))
                         break;
                 }
                 if(wi2 > C)
@@ -794,7 +794,7 @@ void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHe
                         for(; i3 != end(); ++i3)
                         {
                             e_SrcSelector wi3 = missingWinIdx;
-                            if(i3->getLineInFile((e_SrcSelector)wi3) >= 0)
+                            if(i3->getLineInFile((e_SrcSelector)wi3).isValid())
                             {
                                 // not found, move the line before iDest
                                 Diff3Line d3l;

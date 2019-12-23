@@ -481,8 +481,8 @@ class ManualDiffHelpEntry
         }
     }
 
-    inline int getLine1(const e_SrcSelector winIdx) const { return winIdx == A ? lineA1 : winIdx == B ? lineB1 : lineC1;}
-    inline int getLine2(const e_SrcSelector winIdx) const { return winIdx == A ? lineA2 : winIdx == B ? lineB2 : lineC2;}
+    inline const LineRef& getLine1(const e_SrcSelector winIdx) const { return winIdx == A ? lineA1 : winIdx == B ? lineB1 : lineC1;}
+    inline const LineRef& getLine2(const e_SrcSelector winIdx) const { return winIdx == A ? lineA2 : winIdx == B ? lineB2 : lineC2;}
     bool isValidMove(int line1, int line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
 };
 

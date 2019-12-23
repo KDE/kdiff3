@@ -1383,17 +1383,17 @@ void KDiff3App::slotSplitDiff()
         pDTW = m_pDiffTextWindow1;
         pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
     }
-    if(firstLine < 0 && m_pDiffTextWindow2)
+    if(!firstLine.isValid() && m_pDiffTextWindow2)
     {
         pDTW = m_pDiffTextWindow2;
         pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
     }
-    if(firstLine < 0 && m_pDiffTextWindow3)
+    if(!firstLine.isValid() && m_pDiffTextWindow3)
     {
         pDTW = m_pDiffTextWindow3;
         pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
     }
-    if(pDTW && firstLine >= 0 && m_pMergeResultWindow)
+    if(pDTW && firstLine.isValid() && m_pMergeResultWindow)
     {
         pDTW->resetSelection();
 
@@ -1411,17 +1411,17 @@ void KDiff3App::slotJoinDiffs()
         pDTW = m_pDiffTextWindow1;
         pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
     }
-    if(firstLine < 0 && m_pDiffTextWindow2)
+    if(!firstLine.isValid() && m_pDiffTextWindow2)
     {
         pDTW = m_pDiffTextWindow2;
         pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
     }
-    if(firstLine < 0 && m_pDiffTextWindow3)
+    if(!firstLine.isValid() && m_pDiffTextWindow3)
     {
         pDTW = m_pDiffTextWindow3;
         pDTW->getSelectionRange(&firstLine, &lastLine, eD3LLineCoords);
     }
-    if(pDTW && firstLine >= 0 && m_pMergeResultWindow)
+    if(pDTW && firstLine.isValid() && m_pMergeResultWindow)
     {
         pDTW->resetSelection();
 
@@ -2293,12 +2293,12 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
         ManualDiffHelpList::iterator iEmpty = begin();
         for(i = begin(); i != end(); ++i)
         {
-            if(iEmpty->firstLine((e_SrcSelector)wIdx) >= 0)
+            if(iEmpty->firstLine((e_SrcSelector)wIdx).isValid())
             {
                 ++iEmpty;
                 continue;
             }
-            if(i->firstLine((e_SrcSelector)wIdx) >= 0) // Current item is not empty -> move it to the empty place
+            if(i->firstLine((e_SrcSelector)wIdx).isValid()) // Current item is not empty -> move it to the empty place
             {
                 iEmpty->firstLine((e_SrcSelector)wIdx) = i->firstLine((e_SrcSelector)wIdx);
                 iEmpty->lastLine((e_SrcSelector)wIdx) = i->lastLine((e_SrcSelector)wIdx);
