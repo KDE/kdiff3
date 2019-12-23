@@ -2287,6 +2287,7 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
         insert(i, mdhe);
     }
 
+    // TODO: Is ordering important? If not than calling remove is enough.
     // Now make the list compact
     for(int wIdx = A; wIdx <= Max; ++wIdx)
     {
@@ -2300,10 +2301,7 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
             }
             if(i->firstLine((e_SrcSelector)wIdx).isValid()) // Current item is not empty -> move it to the empty place
             {
-                iEmpty->firstLine((e_SrcSelector)wIdx) = i->firstLine((e_SrcSelector)wIdx);
-                iEmpty->lastLine((e_SrcSelector)wIdx) = i->lastLine((e_SrcSelector)wIdx);
-                i->firstLine((e_SrcSelector)wIdx).invalidate();
-                i->lastLine((e_SrcSelector)wIdx).invalidate();
+                std::swap(iEmpty, i);
                 ++iEmpty;
             }
         }
