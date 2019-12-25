@@ -512,6 +512,65 @@ bool ManualDiffHelpList::isValidMove(int line1, int line2, e_SrcSelector winIdx1
     return true; // no barrier passed.
 }
 
+void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine)
+{
+    // The manual diff help list must be sorted and compact.
+    // "Compact" means that upper items can't be empty if lower items contain data.
+
+    // First insert the new item without regarding compactness.
+    // If the new item overlaps with previous items then the previous items will be removed.
+
+    ManualDiffHelpEntry mdhe;
+    mdhe.firstLine(winIdx) = firstLine;
+    mdhe.lastLine(winIdx) = lastLine;
+
+    ManualDiffHelpList::iterator i;
+    for(i = begin(); i != end(); ++i)
+    {
+        LineRef& l1 = i->firstLine(winIdx);
+        LineRef& l2 = i->lastLine(winIdx);
+        if(l1 >= 0 && l2 >= 0)
+        {
+            if((firstLine <= l1 && lastLine >= l1) || (firstLine <= l2 && lastLine >= l2))
+            {
+                // overlap
+                l1.invalidate();
+                l2.invalidate();
+            }
+            if(firstLine < l1 && lastLine < l1)
+            {
+                // insert before this position
+                insert(i, mdhe);
+                break;
+            }
+        }
+    }
+    if(i == end())
+    {
+        insert(i, mdhe);
+    }
+
+    // Now make the list compact
+    for(int wIdx = A; wIdx <= Max; ++wIdx)
+    {
+        ManualDiffHelpList::iterator iEmpty = begin();
+        for(i = begin(); i != end(); ++i)
+        {
+            if(iEmpty->firstLine((e_SrcSelector)wIdx).isValid())
+            {
+                ++iEmpty;
+                continue;
+            }
+            if(i->firstLine((e_SrcSelector)wIdx).isValid()) // Current item is not empty -> move it to the empty place
+            {
+                std::swap(iEmpty, i);
+                ++iEmpty;
+            }
+        }
+    }
+    remove(ManualDiffHelpEntry()); // Remove all completely empty items.
+}
+
 bool ManualDiffHelpEntry::isValidMove(int line1, int line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const
 {
     // Barrier
@@ -531,6 +590,20 @@ bool ManualDiffHelpEntry::isValidMove(int line1, int line2, e_SrcSelector winIdx
     }
 
     return true;
+}
+
+int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv)
+{
+    int i;
+    for(i = 0; i < d3lv.size(); ++i)
+    {
+        const Diff3Line& d3l = *d3lv[i];
+        if((lineA1.isValid() && lineA1 == d3l.getLineA()) ||
+           (lineB1.isValid() && lineB1 == d3l.getLineB()) ||
+           (lineC1.isValid() && lineC1 == d3l.getLineC()))
+            return i;
+    }
+    return -1;
 }
 
 static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2, DiffList& diffList,
@@ -1460,3 +1533,48 @@ void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
     Q_ASSERT(j == d3lv.size());
 }
 
+// Just make sure that all input lines are in the output too, exactly once.
+void Diff3LineList::debugLineCheck(const LineCount size, const e_SrcSelector srcSelector) const
+{
+    Diff3LineList::const_iterator it = begin();
+    int i = 0;
+
+    for(it = begin(); it != end(); ++it)
+    {
+        LineRef line;
+
+        Q_ASSERT(srcSelector == A || srcSelector == B || srcSelector == C);
+        if(srcSelector == A)
+            line = it->getLineA();
+        else if(srcSelector == B)
+            line = it->getLineB();
+        else if(srcSelector == C)
+            line = it->getLineC();
+
+        if(line.isValid())
+        {
+            if(line != i)
+            {
+                KMessageBox::error(nullptr, i18n(
+                                          "Data loss error:\n"
+                                          "If it is reproducible please contact the author.\n"),
+                                   i18n("Severe Internal Error"));
+
+                qCCritical(kdiffMain) << i18n("Severe Internal Error.") << " line != i for srcSelector=" << srcSelector << "\n";
+                ::exit(-1);
+            }
+            ++i;
+        }
+    }
+
+    if(size != i)
+    {
+        KMessageBox::error(nullptr, i18n(
+                                  "Data loss error:\n"
+                                  "If it is reproducible please contact the author.\n"),
+                           i18n("Severe Internal Error"));
+
+        qCCritical(kdiffMain) << i18n("Severe Internal Error.: ") << size << " != " << i << "\n";
+        ::exit(-1);
+    }
+}
