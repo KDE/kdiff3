@@ -32,7 +32,7 @@
  * Backslash is treated as meta character within single quotes ' only.
  * Detect parsing errors like unclosed quotes.
  * The first item in the list will be the command itself.
- * Returns the error reasor as string or an empty string on success.
+ * Returns the error reason as string or an empty string on success.
  * Eg. >"1" "2"<           => >1<, >2<
  * Eg. >'\'\\'<            => >'\<   backslash is a meta character between single quotes
  * Eg. > "\\" <            => >\\<   but not between double quotes
