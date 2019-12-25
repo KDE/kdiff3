@@ -2727,8 +2727,8 @@ DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent)
 
     m_pInfoList = new QTreeWidget(this);
     topLayout->addWidget(m_pInfoList);
-    m_pInfoList->setHeaderLabels(QStringList() << i18n("Dir") << i18n("Type") << i18n("Size")
-                                               << i18n("Attr") << i18n("Last Modification") << i18n("Link-Destination"));
+    m_pInfoList->setHeaderLabels({i18n("Dir"), i18n("Type"), i18n("Size"),
+                                  i18n("Attr"), i18n("Last Modification"), i18n("Link-Destination")});
     setMinimumSize(100, 100);
 
     m_pInfoList->installEventFilter(this);
@@ -2756,16 +2756,13 @@ void DirectoryMergeInfo::addListViewItem(const QString& dir, const QString& base
             
             m_pInfoList->addTopLevelItem(new QTreeWidgetItem(
                 m_pInfoList,
-                QStringList() << dir << QString(fi->isDir() ? i18n("Dir") : i18n("File")) + (fi->isSymLink() ? i18n("-Link") : "") << QString::number(fi->size()) << QLatin1String(fi->isReadable() ? "r" : " ") + QLatin1String(fi->isWritable() ? "w" : " ") + QLatin1String((fi->isExecutable() ? "x" : " ")) << dateString << QString(fi->isSymLink() ? (" -> " + fi->readLink()) : QString(""))));
+                {dir, QString(fi->isDir() ? i18n("Dir") : i18n("File")) + (fi->isSymLink() ? i18n("-Link") : ""), QString::number(fi->size()), QLatin1String(fi->isReadable() ? "r" : " ") + QLatin1String(fi->isWritable() ? "w" : " ") + QLatin1String((fi->isExecutable() ? "x" : " ")), dateString, QString(fi->isSymLink() ? (" -> " + fi->readLink()) : QString(""))}));
         }
         else
         {
             m_pInfoList->addTopLevelItem(new QTreeWidgetItem(
                 m_pInfoList,
-                QStringList() << dir << i18n("not available") << ""
-                              << ""
-                              << ""
-                              << ""));
+                {dir, i18n("not available"), "", "", "", ""}));
         }
     }
 }

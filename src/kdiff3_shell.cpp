@@ -51,7 +51,7 @@ KDiff3Shell::KDiff3Shell(bool bCompleteInit)
             break;
     }*/
 
-    m_part = new KDiff3Part(this, this, QVariantList() << QVariant(QLatin1String("KDiff3Part")));
+    m_part = new KDiff3Part(this, this, {QVariant(QLatin1String("KDiff3Part"))});
     m_widget = qobject_cast<KDiff3App*>(m_part->widget());
 
     if(m_part)
