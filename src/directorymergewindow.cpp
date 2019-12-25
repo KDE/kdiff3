@@ -2232,9 +2232,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
     int nrOfCompletedSimItems = 0;
 
     // Count the number of completed items (for the progress bar).
-    for(MergeItemList::iterator i = m_mergeItemList.begin(); i != m_mergeItemList.end(); ++i)
+    for(const QModelIndex& i : m_mergeItemList)
     {
-        MergeFileInfos* pMFI = getMFI(*i);
+        MergeFileInfos* pMFI = getMFI(i);
         ++nrOfItems;
         if(!pMFI->isOperationRunning())
             ++nrOfCompletedItems;

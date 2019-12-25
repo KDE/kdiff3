@@ -60,18 +60,18 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 
     if(!sl.isEmpty())
     {
-        QStringList ignorableOptions = sl.front().split(';');
-        for(QStringList::iterator i = ignorableOptions.begin(); i != ignorableOptions.end(); ++i)
+        const QStringList ignorableOptions = sl.front().split(';');
+        for(QString ignorableOption : ignorableOptions)
         {
-            i->remove('-');
-            if(!i->isEmpty())
+            ignorableOption.remove('-');
+            if(!ignorableOption.isEmpty())
             {
-                if(i->length() == 1) {
-                    cmdLineParser->addOption(QCommandLineOption({*i, QLatin1String("ignore")}, i18n("Ignored. (User defined.)")));
+                if(ignorableOption.length() == 1) {
+                    cmdLineParser->addOption(QCommandLineOption({ignorableOption, QLatin1String("ignore")}, i18n("Ignored. (User defined.)")));
                 }
                 else
                 {
-                    cmdLineParser->addOption(QCommandLineOption(*i, i18n("Ignored. (User defined.)")));
+                    cmdLineParser->addOption(QCommandLineOption(ignorableOption, i18n("Ignored. (User defined.)")));
                 }
             }
         }

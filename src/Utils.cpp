@@ -107,15 +107,15 @@ bool Utils::wildcardMultiMatch(const QString& wildcard, const QString& testStrin
 {
     static QHash<QString, QRegExp> s_patternMap;
 
-    QStringList sl = wildcard.split(QChar(';'));
+    const QStringList regExpList = wildcard.split(QChar(';'));
 
-    for(QStringList::Iterator it = sl.begin(); it != sl.end(); ++it)
+    for(const QString& regExp : regExpList)
     {
-        QHash<QString, QRegExp>::iterator patIt = s_patternMap.find(*it);
+        QHash<QString, QRegExp>::iterator patIt = s_patternMap.find(regExp);
         if(patIt == s_patternMap.end())
         {
-            QRegExp pattern(*it, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::Wildcard);
-            patIt = s_patternMap.insert(*it, pattern);
+            QRegExp pattern(regExp, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::Wildcard);
+            patIt = s_patternMap.insert(regExp, pattern);
         }
 
         if(patIt.value().exactMatch(testString))

@@ -1230,14 +1230,15 @@ bool findParenthesesGroups(const QString& s, QStringList& sl)
 
 QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, const QStringList& parenthesesGroupList)
 {
-    QStringList keyOrderList = keyOrder.split(',');
+    const QStringList keyOrderList = keyOrder.split(',');
     QString key;
-    for(QStringList::iterator keyIt = keyOrderList.begin(); keyIt != keyOrderList.end(); ++keyIt)
+
+    for(const QString& keyIt : keyOrderList)
     {
-        if(keyIt->isEmpty())
+        if(keyIt.isEmpty())
             continue;
         bool bOk = false;
-        int groupIdx = keyIt->toInt(&bOk);
+        int groupIdx = keyIt.toInt(&bOk);
         if(!bOk || groupIdx < 0 || groupIdx > parenthesesGroupList.size())
             continue;
         QString s = matchedRegExpr.cap(groupIdx);
