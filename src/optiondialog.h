@@ -61,6 +61,12 @@ public:
     QSharedPointer<Options> getOptions() { return m_options; }
 
     KKeyDialog* m_pKeyDialog;
+
+    static const QString s_historyEntryStartRegExpToolTip;
+    static const QString s_historyEntryStartSortKeyOrderToolTip;
+    static const QString s_autoMergeRegExpToolTip;
+    static const QString s_historyStartRegExpToolTip;
+    
 protected Q_SLOTS:
     virtual void slotDefault();
     virtual void slotOk();
