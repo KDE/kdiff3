@@ -42,28 +42,25 @@ void Options::init()
 
 void Options::apply()
 {
-    std::list<OptionItemBase*>::const_iterator i;
-    for(i = mOptionItemList.begin(); i != mOptionItemList.end(); ++i)
+    for(OptionItemBase* item : mOptionItemList)
     {
-        (*i)->apply();
+        item->apply();
     }
 }
 
 void Options::resetToDefaults()
 {
-    std::list<OptionItemBase*>::const_iterator i;
-    for(i = mOptionItemList.begin(); i != mOptionItemList.end(); ++i)
+    for(OptionItemBase* item : mOptionItemList)
     {
-        (*i)->setToDefault();
+        item->setToDefault();
     }
 }
 
 void Options::setToCurrent()
 {
-    std::list<OptionItemBase*>::const_iterator i;
-    for(i = mOptionItemList.begin(); i != mOptionItemList.end(); ++i)
+    for(OptionItemBase* item : mOptionItemList)
     {
-        (*i)->setToCurrent();
+        item->setToCurrent();
     }
 }
 
@@ -72,11 +69,11 @@ void Options::saveOptions(const KSharedConfigPtr config)
     // No i18n()-Translations here!
 
     ConfigValueMap cvm(config->group(KDIFF3_CONFIG_GROUP));
-    std::list<OptionItemBase*>::const_iterator i;
-    for(i = mOptionItemList.begin(); i != mOptionItemList.end(); ++i)
+
+    for(OptionItemBase* item : mOptionItemList)
     {
-        (*i)->doUnpreserve();
-        (*i)->write(&cvm);
+        item->doUnpreserve();
+        item->write(&cvm);
     }
 }
 
@@ -85,10 +82,10 @@ void Options::readOptions(const KSharedConfigPtr config)
     // No i18n()-Translations here!
 
     ConfigValueMap cvm(config->group(KDIFF3_CONFIG_GROUP));
-    std::list<OptionItemBase*>::const_iterator i;
-    for(i = mOptionItemList.begin(); i != mOptionItemList.end(); ++i)
+
+    for(OptionItemBase* item : mOptionItemList)
     {
-        (*i)->read(&cvm);
+        item->read(&cvm);
     }
 }
 
@@ -96,26 +93,24 @@ void Options::readOptions(const KSharedConfigPtr config)
 QString Options::parseOptions(const QStringList& optionList)
 {
     QString result;
-    QStringList::const_iterator i;
-    for(i = optionList.begin(); i != optionList.end(); ++i)
+    
+    for(const QString &optionString : optionList)
     {
-        QString s = *i;
-
-        int pos = s.indexOf('=');
+        int pos = optionString.indexOf('=');
         if(pos > 0) // seems not to have a tag
         {
-            QString key = s.left(pos);
-            QString val = s.mid(pos + 1);
-            std::list<OptionItemBase*>::iterator j;
+            QString key = optionString.left(pos);
+            QString val = optionString.mid(pos + 1);
+
             bool bFound = false;
-            for(j = mOptionItemList.begin(); j != mOptionItemList.end(); ++j)
+            for(OptionItemBase* item : mOptionItemList)
             {
-                if((*j)->getSaveName() == key)
+                if(item->getSaveName() == key)
                 {
-                    (*j)->doPreserve();
+                    item->doPreserve();
                     ValueMap config;
                     config.writeEntry(key, val); // Write the value as a string and
-                    (*j)->read(&config);         // use the internal conversion from string to the needed value.
+                    item->read(&config);         // use the internal conversion from string to the needed value.
                     bFound = true;
                     break;
                 }
@@ -127,7 +122,7 @@ QString Options::parseOptions(const QStringList& optionList)
         }
         else
         {
-            result += "No '=' found in \"" + s + "\"\n";
+            result += "No '=' found in \"" + optionString + "\"\n";
         }
     }
     return result;
@@ -136,10 +131,10 @@ QString Options::parseOptions(const QStringList& optionList)
 QString Options::calcOptionHelp()
 {
     ValueMap config;
-    std::list<OptionItemBase*>::const_iterator it;
-    for(it = mOptionItemList.begin(); it != mOptionItemList.end(); ++it)
+    
+    for(OptionItemBase* item : mOptionItemList)
     {
-        (*it)->write(&config);
+        item->write(&config);
     }
     return config.getAsString();
 }
