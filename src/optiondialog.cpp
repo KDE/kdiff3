@@ -517,8 +517,6 @@ OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageD
     setupRegionalPage();
     setupIntegrationPage();
 
-    //setupKeysPage();
-
     // Initialize all values in the dialog
     resetToDefaults();
     slotApply();
@@ -1462,17 +1460,6 @@ void OptionDialog::slotEncodingChanged()
         m_pAutoSelectOutEncoding->setEnabled(true);
         m_pEncodingOutComboBox->setEnabled(m_pAutoSelectOutEncoding->checkState() == Qt::Unchecked);
     }
-}
-
-void OptionDialog::setupKeysPage()
-{
-    //QVBox *page = addVBoxPage( i18n("Keys"), i18n("KeyDialog" ),
-    //                          BarIcon("fonts", KIconLoader::SizeMedium ) );
-
-    //QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
-    //           new KFontChooser( page,"font",false/*onlyFixed*/,QStringList(),false,6 );
-    //m_pKeyDialog=new KKeyDialog( false, 0 );
-    //topLayout->addWidget( m_pKeyDialog );
 }
 
 void OptionDialog::slotOk()

@@ -38,7 +38,6 @@ class OptionItemBase;
 class OptionCheckBox;
 class OptionEncodingComboBox;
 class OptionLineEdit;
-class KKeyDialog;
 
 class OptionDialog : public KPageDialog
 {
@@ -59,8 +58,6 @@ public:
     void addOptionItem(OptionItemBase*);
 
     QSharedPointer<Options> getOptions() { return m_options; }
-
-    KKeyDialog* m_pKeyDialog;
 
     static const QString s_historyEntryStartRegExpToolTip;
     static const QString s_historyEntryStartSortKeyOrderToolTip;
@@ -85,7 +82,6 @@ private:
     void setupDiffPage();
     void setupMergePage();
     void setupDirectoryMergePage();
-    void setupKeysPage();
     void setupRegionalPage();
     void setupIntegrationPage();
     void setupOtherOptions();
@@ -93,7 +89,7 @@ private:
     void resetToDefaults();
 
 
-    QSharedPointer<Options> m_options=QSharedPointer<Options>::create(Options());
+    QSharedPointer<Options> m_options=QSharedPointer<Options>::create();
     //QDialogButtonBox *mButtonBox;
     OptionCheckBox* m_pSameEncoding;
     OptionEncodingComboBox* m_pEncodingAComboBox;
