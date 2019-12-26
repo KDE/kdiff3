@@ -121,7 +121,7 @@ public:
    explicit FontChooser( QWidget* pParent );
    QFont font();
    void setFont( const QFont&, bool );
-private slots:
+private Q_SLOTS:
    void slotSelectFont();
 };
 

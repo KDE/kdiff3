@@ -62,7 +62,7 @@ public:
    void delayedHideStatusBarWidget();
 
    void timerEvent(QTimerEvent* event) override;
-public slots:
+public Q_SLOTS:
    void recalc(bool bUpdate);
 private:
 
@@ -107,7 +107,7 @@ private:
    QPushButton* m_pStatusAbortButton;
 protected:
    void reject() override;
-private slots:
+private Q_SLOTS:
    void delayedHide();
    void slotAbort();
 };
