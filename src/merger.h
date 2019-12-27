@@ -33,13 +33,15 @@ class Merger
     bool isEndReached();
 
   private:
-    struct MergeData
+    class MergeData
     {
+      private:
         DiffList::const_iterator it;
         const DiffList* pDiffList;
         Diff d;
         int idx;
 
+      public:
         MergeData(const DiffList* p, int i);
         bool eq() const;
         void update();
