@@ -19,7 +19,6 @@ Merger::Merger(const DiffList* pDiffList1, const DiffList* pDiffList2)
 }
 
 Merger::MergeData::MergeData(const DiffList* p, int i)
-    : d(0, 0, 0)
 {
     idx = i;
     pDiffList = p;

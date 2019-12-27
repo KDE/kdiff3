@@ -37,7 +37,7 @@ class Merger
     {
       private:
         DiffList::const_iterator it;
-        const DiffList* pDiffList;
+        const DiffList* pDiffList = nullptr;
         Diff d;
         int idx;
 
