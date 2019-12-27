@@ -75,6 +75,7 @@ class Diff
     qint64 mDiff1 = 0;
     qint64 mDiff2 = 0;
   public:
+    Diff() = default;//We use defualt initialization force compiler to generate a default constructor
     Diff(qint32 eq, const qint64 inDiff1, const qint64 inDiff2)
     {
         nofEquals = eq;

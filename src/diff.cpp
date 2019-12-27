@@ -108,7 +108,7 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
     DiffList::const_iterator i = pDiffListAB->begin();
     LineRef::LineType lineA = 0;
     LineRef::LineType lineB = 0;
-    Diff d(0, 0, 0);
+    Diff d;
 
     qCInfo(kdiffMain) << "Enter: calcDiff3LineListUsingAB" ;
     for(;;)
@@ -174,7 +174,7 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
     Diff3LineList::iterator i3 = begin();
     LineRef::LineType lineA = 0;
     LineRef::LineType lineC = 0;
-    Diff d(0, 0, 0);
+    Diff d;
 
     for(;;)
     {
@@ -244,7 +244,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
     Diff3LineList::iterator i3c = begin();
     LineRef::LineType lineB = 0;
     LineRef::LineType lineC = 0;
-    Diff d(0, 0, 0);
+    Diff d;
 
     for(;;)
     {
