@@ -324,7 +324,7 @@ void OpenDialog::accept()
     QDialog::accept();
 }
 
-void OpenDialog::slotSwapCopyNames(QAction* pAction) // id selected in the popup menu
+void OpenDialog::slotSwapCopyNames(QAction* pAction) const // id selected in the popup menu
 {
     int id = pAction->parentWidget()->actions().indexOf(pAction);
     QComboBox* cb1 = nullptr;

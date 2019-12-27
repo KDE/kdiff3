@@ -46,7 +46,7 @@ public:
       TotalDiffStatus* pTotalDiffStatus
       );
 
-   void setupConnections(const KDiff3App* app);
+   void setupConnections(const KDiff3App* app) const;
 
    inline void clearMergeList()
    {
@@ -55,7 +55,7 @@ public:
 
    static void initActions(KActionCollection* ac);
 
-   void connectActions();
+   void connectActions() const;
    void reset();
 
     bool saveDocument(const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle);
@@ -64,7 +64,7 @@ public:
     void chooseGlobal(e_SrcSelector selector, bool bConflictsOnly, bool bWhiteSpaceOnly);
 
     int getMaxTextWidth();         // width of longest text line
-   int getNofLines();
+   int getNofLines() const;
    int getVisibleTextAreaWidth(); // text area width without the border
    int getNofVisibleLines();
    QString getSelection();

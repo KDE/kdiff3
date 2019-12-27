@@ -202,7 +202,7 @@ class GnuDiff
 
   private:
     // gnudiff_analyze.cpp
-    GNULineRef diag(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNULineRef ylim, bool find_minimal, struct partition *part);
+    GNULineRef diag(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNULineRef ylim, bool find_minimal, struct partition *part) const;
     void compareseq(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNULineRef ylim, bool find_minimal);
     void discard_confusing_lines(file_data filevec[]);
     void shift_boundaries(file_data filevec[]);

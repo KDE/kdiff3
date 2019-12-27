@@ -87,9 +87,9 @@ class WrapLineCacheData
     WrapLineCacheData() {}
     WrapLineCacheData(int d3LineIdx, int textStart, int textLength)
         : m_d3LineIdx(d3LineIdx), m_textStart(textStart), m_textLength(textLength) {}
-    qint32 d3LineIdx() { return m_d3LineIdx; }
-    qint32 textStart() { return m_textStart; }
-    qint32 textLength() { return m_textLength; }
+    qint32 d3LineIdx() const { return m_d3LineIdx; }
+    qint32 textStart() const { return m_textStart; }
+    qint32 textLength() const { return m_textLength; }
 
   private:
     qint32 m_d3LineIdx = 0;
@@ -123,7 +123,7 @@ class DiffTextWindowData
 
     void myUpdate(int afterMilliSecs);
 
-    int leftInfoWidth() { return 4 + m_lineNumberWidth; } // Nr of information columns on left side
+    int leftInfoWidth() const { return 4 + m_lineNumberWidth; } // Nr of information columns on left side
     int convertLineOnScreenToLineInSource(int lineOnScreen, e_CoordType coordType, bool bFirstLine);
 
     void prepareTextLayout(QTextLayout& textLayout, bool bFirstLine, int visibleTextWidth = -1);
@@ -267,7 +267,7 @@ void DiffTextWindow::init(
     update();
 }
 
-void DiffTextWindow::setupConnections(const KDiff3App *app)
+void DiffTextWindow::setupConnections(const KDiff3App *app) const
 {
     connect(this, &DiffTextWindow::newSelection, app, &KDiff3App::slotSelectionStart);
     connect(this, &DiffTextWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
@@ -2039,7 +2039,7 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
     }
 }
 
-void EncodingLabel::insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<int>& codecEnumList, QMenu* pMenu, int currentTextCodecEnum)
+void EncodingLabel::insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<int>& codecEnumList, QMenu* pMenu, int currentTextCodecEnum) const
 {
     int CodecMIBEnum = pCodec->mibEnum();
     if(pCodec != nullptr && !codecEnumList.contains(CodecMIBEnum))

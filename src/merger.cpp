@@ -30,12 +30,12 @@ Merger::MergeData::MergeData(const DiffList* p, int i)
     }
 }
 
-bool Merger::MergeData::eq()
+bool Merger::MergeData::eq() const
 {
     return pDiffList == nullptr || d.numberOfEquals() > 0;
 }
 
-bool Merger::MergeData::isEnd()
+bool Merger::MergeData::isEnd() const
 {
     return (pDiffList == nullptr || (it == pDiffList->end() && d.numberOfEquals() == 0 &&
                                      (idx == 0 ? d.diff1() == 0 : d.diff2() == 0)));

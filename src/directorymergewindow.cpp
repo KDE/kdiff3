@@ -203,8 +203,8 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     void scanLocalDirectory(const QString& dirName, t_DirectoryList& dirList);
 
     void setMergeOperation(const QModelIndex& mi, e_MergeOperation eMergeOp, bool bRecursive = true);
-    bool isDir(const QModelIndex& mi);
-    QString getFileName(const QModelIndex& mi);
+    bool isDir(const QModelIndex& mi) const;
+    QString getFileName(const QModelIndex& mi) const;
 
     bool copyFLD(const QString& srcName, const QString& destName);
     bool deleteFLD(const QString& name, bool bCreateBackup);
@@ -1740,7 +1740,7 @@ void DirectoryMergeWindow::contextMenuEvent(QContextMenuEvent* e)
 }
 #endif
 
-QString DirectoryMergeWindow::DirectoryMergeWindowPrivate::getFileName(const QModelIndex& mi)
+QString DirectoryMergeWindow::DirectoryMergeWindowPrivate::getFileName(const QModelIndex& mi) const
 {
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI != nullptr)
@@ -1750,7 +1750,7 @@ QString DirectoryMergeWindow::DirectoryMergeWindowPrivate::getFileName(const QMo
     return QString();
 }
 
-bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::isDir(const QModelIndex& mi)
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::isDir(const QModelIndex& mi) const
 {
     MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI != nullptr)

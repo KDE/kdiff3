@@ -41,9 +41,9 @@ class Merger
         int idx;
 
         MergeData(const DiffList* p, int i);
-        bool eq();
+        bool eq() const;
         void update();
-        bool isEnd();
+        bool isEnd() const;
     };
 
     MergeData md1;

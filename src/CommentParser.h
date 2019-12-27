@@ -49,8 +49,8 @@ class DefaultCommentParser : public CommentParser
 
     void processChar(const QString &line, const QChar &inChar) override;
     //For tests only.
-    inline bool isEscaped(){ return bIsEscaped; }
-    inline bool inString(){ return bInString; }
+    inline bool isEscaped() const{ return bIsEscaped; }
+    inline bool inString() const{ return bInString; }
   private:
     QChar mLastChar, mStartChar;
 

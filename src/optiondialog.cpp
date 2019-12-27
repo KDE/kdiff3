@@ -1516,7 +1516,7 @@ void OptionDialog::readOptions(KSharedConfigPtr config)
     setState();
 }
 
-QString OptionDialog::parseOptions(const QStringList& optionList)
+const QString OptionDialog::parseOptions(const QStringList& optionList)
 {
 
     return m_options->parseOptions(optionList);

@@ -38,7 +38,7 @@ class MergeEditLine
         m_bLineRemoved = true;
         m_str = QString();
     }
-    bool isRemoved() { return m_bLineRemoved; }
+    bool isRemoved() const { return m_bLineRemoved; }
     bool isEditableText() { return !isConflict() && !isRemoved(); }
     void setString(const QString& s)
     {

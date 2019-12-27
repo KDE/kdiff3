@@ -94,7 +94,7 @@ struct partition {
    It cannot cause incorrect diff output.  */
 
 GNULineRef GnuDiff::diag(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNULineRef ylim, bool find_minimal,
-                         partition *part)
+                         partition *part) const
 {
     GNULineRef *const fd = fdiag;        /* Give the compiler a chance. */
     GNULineRef *const bd = bdiag;        /* Additional help for the compiler. */

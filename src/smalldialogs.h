@@ -62,7 +62,7 @@ private Q_SLOTS:
    void selectOutputDir();
    void internalSlot(int);
    void inputFilenameChanged();
-   void slotSwapCopyNames(QAction*);
+   void slotSwapCopyNames(QAction*) const;
 Q_SIGNALS:
    void internalSignal(bool);
 };

@@ -56,8 +56,7 @@ public:
     void saveOptions(const KSharedConfigPtr config);
     void readOptions(const KSharedConfigPtr config);
 
-    QString parseOptions(const QStringList& optionList);
-;
+    const QString parseOptions(const QStringList& optionList);
     QString calcOptionHelp();
 
     void addOptionItem(OptionItemBase* inItem);

@@ -35,15 +35,15 @@ public:
   inline LineRef getFirstLine() { return firstLine; };
   inline LineRef getLastLine() { return lastLine; };
 
-  inline int getFirstPos() { return firstPos; };
-  inline int getLastPos() { return lastPos; };
+  inline int getFirstPos() const { return firstPos; };
+  inline int getLastPos() const { return lastPos; };
 
   inline bool isValidFirstLine() { return firstLine != invalidRef; }
   inline void clearOldSelection() { oldLastLine = invalidRef, oldFirstLine = invalidRef; };
 
   inline LineRef getOldLastLine() { return oldLastLine; };
   inline LineRef getOldFirstLine() { return oldFirstLine; };
-  inline bool selectionContainsData() { return bSelectionContainsData; };
+  inline bool selectionContainsData() const { return bSelectionContainsData; };
   bool isEmpty() { return firstLine == invalidRef || (firstLine == lastLine && firstPos == lastPos) || !bSelectionContainsData; }
   void reset()
   {

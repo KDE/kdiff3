@@ -414,7 +414,7 @@ class TotalDiffStatus
     inline int getWhitespaceConflicts() const { return nofWhitespaceConflicts; }
     inline void setWhitespaceConflicts(const int wintespace) { nofWhitespaceConflicts = wintespace; }
 
-    inline int getNonWhitespaceConflicts() { return getUnsolvedConflicts() + getSolvedConflicts() - getWhitespaceConflicts(); }
+    inline int getNonWhitespaceConflicts() const { return getUnsolvedConflicts() + getSolvedConflicts() - getWhitespaceConflicts(); }
 
     bool isBinaryEqualAC() const { return bBinaryAEqC; }
     bool isBinaryEqualBC() const { return bBinaryBEqC; }

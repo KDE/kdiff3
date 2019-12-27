@@ -181,7 +181,7 @@ void MergeResultWindow::initActions(KActionCollection* ac)
     chooseCForUnsolvedWhiteSpaceConflicts = GuiUtils::createAction<QAction>(i18n("Choose C for All Unsolved Whitespace Conflicts"), ac, "merge_choose_c_for_unsolved_whitespace_conflicts");
 }
 
-void MergeResultWindow::connectActions()
+void MergeResultWindow::connectActions() const
 {
     QObject::connect(chooseAEverywhere, &QAction::triggered, this, &MergeResultWindow::slotChooseAEverywhere);
     QObject::connect(chooseBEverywhere, &QAction::triggered, this, &MergeResultWindow::slotChooseBEverywhere);
@@ -196,7 +196,7 @@ void MergeResultWindow::connectActions()
     QObject::connect(chooseCForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseCForUnsolvedWhiteSpaceConflicts);
 }
 
-void MergeResultWindow::setupConnections(const KDiff3App *app)
+void MergeResultWindow::setupConnections(const KDiff3App *app) const
 {
     connect(this, &MergeResultWindow::scrollMergeResultWindow, app, &KDiff3App::scrollMergeResultWindow);
     connect(this, &MergeResultWindow::sourceMask, app, &KDiff3App::sourceMask);
@@ -654,7 +654,7 @@ int MergeResultWindow::getMaxTextWidth()
     return m_maxTextWidth;
 }
 
-int MergeResultWindow::getNofLines()
+int MergeResultWindow::getNofLines() const
 {
     return m_nofLines;
 }

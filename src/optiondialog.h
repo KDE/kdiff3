@@ -47,7 +47,7 @@ public:
 
     explicit OptionDialog( bool bShowDirMergeSettings, QWidget *parent = nullptr );
     ~OptionDialog() override;
-    QString parseOptions( const QStringList& optionList );
+    const QString parseOptions( const QStringList& optionList );
     QString calcOptionHelp();
 
     void saveOptions(KSharedConfigPtr config);

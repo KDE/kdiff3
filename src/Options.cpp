@@ -90,7 +90,7 @@ void Options::readOptions(const KSharedConfigPtr config)
 }
 
 
-QString Options::parseOptions(const QStringList& optionList)
+const QString Options::parseOptions(const QStringList& optionList)
 {
     QString result;
     
@@ -99,8 +99,8 @@ QString Options::parseOptions(const QStringList& optionList)
         int pos = optionString.indexOf('=');
         if(pos > 0) // seems not to have a tag
         {
-            QString key = optionString.left(pos);
-            QString val = optionString.mid(pos + 1);
+            const QString key = optionString.left(pos);
+            const QString val = optionString.mid(pos + 1);
 
             bool bFound = false;
             for(OptionItemBase* item : mOptionItemList)

@@ -47,7 +47,7 @@ class DiffTextWindow : public QWidget
         bool bTriple
         );
 
-    void setupConnections(const KDiff3App *app);
+    void setupConnections(const KDiff3App *app) const;
 
     void reset();
     void convertToLinePos(int x, int y, LineRef& line, int& pos);
@@ -191,7 +191,7 @@ class EncodingLabel : public QLabel
     static const int m_maxRecentEncodings = 5;
     QSharedPointer<Options> m_pOptions;
 
-    void insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<int>& CodecEnumList, QMenu* pMenu, int currentTextCodecEnum);
+    void insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<int>& CodecEnumList, QMenu* pMenu, int currentTextCodecEnum) const;
 };
 
 #endif
