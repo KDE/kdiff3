@@ -108,8 +108,8 @@ add_definitions(
     -DQT_NO_CAST_TO_ASCII
     -DQT_DISABLE_DEPRECATED_BEFORE=0x050600#disable depriated api for Qt<5.6.
     #KF5 5.64+ flags
-    #Don't warn for API depreciated after 5.22.0
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x052200
+    #Don't warn for API depreciated after 5.26.0
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x052600
 )
 
 add_subdirectory(src)
