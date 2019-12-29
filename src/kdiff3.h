@@ -152,7 +152,7 @@ class KDiff3App : public QSplitter
     /** open a file and load it into the document*/
     void slotFileOpen();
     void slotFileOpen2(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
-                       const QString& an1, const QString &an2, const QString& an3, TotalDiffStatus* pTotalDiffStatus);
+                       const QString& an1, const QString& an2, const QString& an3, TotalDiffStatus* pTotalDiffStatus);
 
     void slotFileNameChanged(const QString& fileName, e_SrcSelector winIdx);
 
@@ -322,7 +322,7 @@ class KDiff3App : public QSplitter
 
     QSplitter* m_pMainSplitter = nullptr;
     QWidget* m_pMainWidget = nullptr;
-    QWidget* m_pMergeWindowFrame =  nullptr;
+    QWidget* m_pMergeWindowFrame = nullptr;
     ReversibleScrollBar* m_pHScrollBar = nullptr;
     QScrollBar* m_pDiffVScrollBar = nullptr;
     QScrollBar* m_pMergeVScrollBar = nullptr;

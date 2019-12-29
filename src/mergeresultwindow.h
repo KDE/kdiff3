@@ -77,9 +77,9 @@ public:
    bool isUnsolvedConflictAtCurrent();
    bool isUnsolvedConflictAboveCurrent();
    bool isUnsolvedConflictBelowCurrent();
-    bool findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive);
-    void setSelection(int firstLine, int startPos, int lastLine, int endPos);
-    void setOverviewMode(Overview::e_OverviewMode eOverviewMode);
+   bool findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive);
+   void setSelection(int firstLine, int startPos, int lastLine, int endPos);
+   void setOverviewMode(Overview::e_OverviewMode eOverviewMode);
    Overview::e_OverviewMode getOverviewMode();
 
    void slotUpdateAvailabilities(const bool bMergeEditorVisible, const bool m_bTripleDiff);
@@ -101,12 +101,12 @@ public Q_SLOTS:
    void slotUnsolve();
    void slotMergeHistory();
    void slotRegExpAutoMerge();
-    void slotSplitDiff(LineIndex firstD3lLineIdx, LineIndex lastD3lLineIdx);
-    void slotJoinDiffs(LineIndex firstD3lLineIdx, LineIndex lastD3lLineIdx);
+   void slotSplitDiff(LineIndex firstD3lLineIdx, LineIndex lastD3lLineIdx);
+   void slotJoinDiffs(LineIndex firstD3lLineIdx, LineIndex lastD3lLineIdx);
    void slotSetFastSelectorLine(LineIndex);
    void setPaintingAllowed(bool);
    void updateSourceMask();
-    void slotStatusMessageChanged(const QString&);
+   void slotStatusMessageChanged(const QString&);
 
    void slotChooseAEverywhere() { chooseGlobal(A, false, false); }
    void slotChooseBEverywhere() { chooseGlobal(B, false, false); }
