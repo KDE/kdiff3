@@ -831,8 +831,8 @@ void KDiff3App::slotFilePrint()
         QRect view3(2 * (columnWidth + columnDistance), view.top(), columnWidth, view.height());
 
         int linesPerPage = view.height() / fm.lineSpacing();
-        QEventLoop eventLoopForPrinting;
-        m_pEventLoopForPrinting = &eventLoopForPrinting;
+        
+        m_pEventLoopForPrinting = QPointer<QEventLoop>(new QEventLoop());
         if(m_pOptions->m_bWordWrap)
         {
             // For printing the lines are wrapped differently (this invalidates the first line)
@@ -970,6 +970,7 @@ void KDiff3App::slotFilePrint()
             m_pEventLoopForPrinting->exec();
             m_pDiffVScrollBar->setValue(m_pDiffTextWindow1->convertDiff3LineIdxToLine(currentFirstD3LIdx));
         }
+        m_pEventLoopForPrinting.clear();
 
         slotStatusMsg(i18n("Printing completed."));
     }
