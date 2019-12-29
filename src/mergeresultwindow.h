@@ -117,6 +117,7 @@ public Q_SLOTS:
    void slotChooseAForUnsolvedWhiteSpaceConflicts() { chooseGlobal(A, true, true); }
    void slotChooseBForUnsolvedWhiteSpaceConflicts() { chooseGlobal(B, true, true); }
    void slotChooseCForUnsolvedWhiteSpaceConflicts() { chooseGlobal(C, true, true); }
+   void slotRefresh();
 
  Q_SIGNALS:
    void scrollMergeResultWindow(int deltaX, int deltaY);

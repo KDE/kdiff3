@@ -569,26 +569,26 @@ void KDiff3App::initActions(KActionCollection* ac)
 #include "xpm/up2arrow.xpm"
 #include "xpm/upend.xpm"
 
-    goCurrent = GuiUtils::createAction<QAction>(i18n("Go to Current Delta"), QIcon(QPixmap(currentpos)), i18n("Current\nDelta"), QKeySequence(Qt::CTRL + Qt::Key_Space), this, &KDiff3App::slotGoCurrent, ac, "go_current");
+    mGoCurrent = GuiUtils::createAction<QAction>(i18n("Go to Current Delta"), QIcon(QPixmap(currentpos)), i18n("Current\nDelta"), QKeySequence(Qt::CTRL + Qt::Key_Space), this, &KDiff3App::slotGoCurrent, ac, "go_current");
 
-    goTop = GuiUtils::createAction<QAction>(i18n("Go to First Delta"), QIcon(QPixmap(upend)), i18n("First\nDelta"), this, &KDiff3App::slotGoTop, ac, "go_top");
+    mGoTop = GuiUtils::createAction<QAction>(i18n("Go to First Delta"), QIcon(QPixmap(upend)), i18n("First\nDelta"), this, &KDiff3App::slotGoTop, ac, "go_top");
 
-    goBottom = GuiUtils::createAction<QAction>(i18n("Go to Last Delta"), QIcon(QPixmap(downend)), i18n("Last\nDelta"), this, &KDiff3App::slotGoBottom, ac, "go_bottom");
+    mGoBottom = GuiUtils::createAction<QAction>(i18n("Go to Last Delta"), QIcon(QPixmap(downend)), i18n("Last\nDelta"), this, &KDiff3App::slotGoBottom, ac, "go_bottom");
 
     QString omitsWhitespace = ".\n" + i18n("(Skips white space differences when \"Show White Space\" is disabled.)");
     QString includeWhitespace = ".\n" + i18n("(Does not skip white space differences even when \"Show White Space\" is disabled.)");
-    goPrevDelta = GuiUtils::createAction<QAction>(i18n("Go to Previous Delta"), QIcon(QPixmap(up1arrow)), i18n("Prev\nDelta"), QKeySequence(Qt::CTRL + Qt::Key_Up), this, &KDiff3App::slotGoPrevDelta, ac, "go_prev_delta");
-    goPrevDelta->setToolTip(goPrevDelta->text() + omitsWhitespace);
-    goNextDelta = GuiUtils::createAction<QAction>(i18n("Go to Next Delta"), QIcon(QPixmap(down1arrow)), i18n("Next\nDelta"), QKeySequence(Qt::CTRL + Qt::Key_Down), this, &KDiff3App::slotGoNextDelta, ac, "go_next_delta");
-    goNextDelta->setToolTip(goNextDelta->text() + omitsWhitespace);
-    goPrevConflict = GuiUtils::createAction<QAction>(i18n("Go to Previous Conflict"), QIcon(QPixmap(up2arrow)), i18n("Prev\nConflict"), QKeySequence(Qt::CTRL + Qt::Key_PageUp), this, &KDiff3App::slotGoPrevConflict, ac, "go_prev_conflict");
-    goPrevConflict->setToolTip(goPrevConflict->text() + omitsWhitespace);
-    goNextConflict = GuiUtils::createAction<QAction>(i18n("Go to Next Conflict"), QIcon(QPixmap(down2arrow)), i18n("Next\nConflict"), QKeySequence(Qt::CTRL + Qt::Key_PageDown), this, &KDiff3App::slotGoNextConflict, ac, "go_next_conflict");
-    goNextConflict->setToolTip(goNextConflict->text() + omitsWhitespace);
-    goPrevUnsolvedConflict = GuiUtils::createAction<QAction>(i18n("Go to Previous Unsolved Conflict"), QIcon(QPixmap(prevunsolved)), i18n("Prev\nUnsolved"), this, &KDiff3App::slotGoPrevUnsolvedConflict, ac, "go_prev_unsolved_conflict");
-    goPrevUnsolvedConflict->setToolTip(goPrevUnsolvedConflict->text() + includeWhitespace);
-    goNextUnsolvedConflict = GuiUtils::createAction<QAction>(i18n("Go to Next Unsolved Conflict"), QIcon(QPixmap(nextunsolved)), i18n("Next\nUnsolved"), this, &KDiff3App::slotGoNextUnsolvedConflict, ac, "go_next_unsolved_conflict");
-    goNextUnsolvedConflict->setToolTip(goNextUnsolvedConflict->text() + includeWhitespace);
+    mGoPrevDelta = GuiUtils::createAction<QAction>(i18n("Go to Previous Delta"), QIcon(QPixmap(up1arrow)), i18n("Prev\nDelta"), QKeySequence(Qt::CTRL + Qt::Key_Up), this, &KDiff3App::slotGoPrevDelta, ac, "go_prev_delta");
+    mGoPrevDelta->setToolTip(mGoPrevDelta->text() + omitsWhitespace);
+    mGoNextDelta = GuiUtils::createAction<QAction>(i18n("Go to Next Delta"), QIcon(QPixmap(down1arrow)), i18n("Next\nDelta"), QKeySequence(Qt::CTRL + Qt::Key_Down), this, &KDiff3App::slotGoNextDelta, ac, "go_next_delta");
+    mGoNextDelta->setToolTip(mGoNextDelta->text() + omitsWhitespace);
+    mGoPrevConflict = GuiUtils::createAction<QAction>(i18n("Go to Previous Conflict"), QIcon(QPixmap(up2arrow)), i18n("Prev\nConflict"), QKeySequence(Qt::CTRL + Qt::Key_PageUp), this, &KDiff3App::slotGoPrevConflict, ac, "go_prev_conflict");
+    mGoPrevConflict->setToolTip(mGoPrevConflict->text() + omitsWhitespace);
+    mGoNextConflict = GuiUtils::createAction<QAction>(i18n("Go to Next Conflict"), QIcon(QPixmap(down2arrow)), i18n("Next\nConflict"), QKeySequence(Qt::CTRL + Qt::Key_PageDown), this, &KDiff3App::slotGoNextConflict, ac, "go_next_conflict");
+    mGoNextConflict->setToolTip(mGoNextConflict->text() + omitsWhitespace);
+    mGoPrevUnsolvedConflict = GuiUtils::createAction<QAction>(i18n("Go to Previous Unsolved Conflict"), QIcon(QPixmap(prevunsolved)), i18n("Prev\nUnsolved"), this, &KDiff3App::slotGoPrevUnsolvedConflict, ac, "go_prev_unsolved_conflict");
+    mGoPrevUnsolvedConflict->setToolTip(mGoPrevUnsolvedConflict->text() + includeWhitespace);
+    mGoNextUnsolvedConflict = GuiUtils::createAction<QAction>(i18n("Go to Next Unsolved Conflict"), QIcon(QPixmap(nextunsolved)), i18n("Next\nUnsolved"), this, &KDiff3App::slotGoNextUnsolvedConflict, ac, "go_next_unsolved_conflict");
+    mGoNextUnsolvedConflict->setToolTip(mGoNextUnsolvedConflict->text() + includeWhitespace);
     chooseA = GuiUtils::createAction<KToggleAction>(i18n("Select Line(s) From A"), QIcon(QPixmap(iconA)), i18n("Choose\nA"), QKeySequence(Qt::CTRL + Qt::Key_1), this, &KDiff3App::slotChooseA, ac, "merge_choose_a");
     chooseB = GuiUtils::createAction<KToggleAction>(i18n("Select Line(s) From B"), QIcon(QPixmap(iconB)), i18n("Choose\nB"), QKeySequence(Qt::CTRL + Qt::Key_2), this, &KDiff3App::slotChooseB, ac, "merge_choose_b");
     chooseC = GuiUtils::createAction<KToggleAction>(i18n("Select Line(s) From C"), QIcon(QPixmap(iconC)), i18n("Choose\nC"), QKeySequence(Qt::CTRL + Qt::Key_3), this, &KDiff3App::slotChooseC, ac, "merge_choose_c");
@@ -599,10 +599,10 @@ void KDiff3App::initActions(KActionCollection* ac)
 
     showLineNumbers = GuiUtils::createAction<KToggleAction>(i18n("Show Line Numbers"), QIcon(QPixmap(showlinenumbers)), i18n("Line\nNumbers"), this, &KDiff3App::slotShowLineNumbersToggled, ac, "diff_showlinenumbers");
 
-    autoSolve = GuiUtils::createAction<QAction>(i18n("Automatically Solve Simple Conflicts"), this, &KDiff3App::slotAutoSolve, ac, "merge_autosolve");
-    unsolve = GuiUtils::createAction<QAction>(i18n("Set Deltas to Conflicts"), this, &KDiff3App::slotUnsolve, ac, "merge_autounsolve");
+    mAutoSolve = GuiUtils::createAction<QAction>(i18n("Automatically Solve Simple Conflicts"), this, &KDiff3App::slotAutoSolve, ac, "merge_autosolve");
+    mUnsolve = GuiUtils::createAction<QAction>(i18n("Set Deltas to Conflicts"), this, &KDiff3App::slotUnsolve, ac, "merge_autounsolve");
     mergeRegExp = GuiUtils::createAction<QAction>(i18n("Run Regular Expression Auto Merge"), this, &KDiff3App::slotRegExpAutoMerge, ac, "merge_regexp_automerge");
-    mergeHistory = GuiUtils::createAction<QAction>(i18n("Automatically Solve History Conflicts"), this, &KDiff3App::slotMergeHistory, ac, "merge_versioncontrol_history");
+    mMergeHistory = GuiUtils::createAction<QAction>(i18n("Automatically Solve History Conflicts"), this, &KDiff3App::slotMergeHistory, ac, "merge_versioncontrol_history");
     splitDiff = GuiUtils::createAction<QAction>(i18n("Split Diff At Selection"), this, &KDiff3App::slotSplitDiff, ac, "merge_splitdiff");
     joinDiffs = GuiUtils::createAction<QAction>(i18n("Join Selected Diffs"), this, &KDiff3App::slotJoinDiffs, ac, "merge_joindiffs");
 

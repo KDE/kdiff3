@@ -114,6 +114,7 @@ class DiffTextWindow : public QWidget
     void setHorizScrollOffset(int horizScrollOffset);
     void resetSelection();
     void setFastSelectorRange(int line1, int nofLines);
+    void slotRefresh();
 
   protected:
     void mousePressEvent(QMouseEvent*) override;

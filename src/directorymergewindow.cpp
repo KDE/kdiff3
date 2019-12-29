@@ -2841,8 +2841,6 @@ void DirectoryMergeInfo::setInfo(
         m_pInfoList->resizeColumnToContents(i);
 }
 
-
-
 void DirectoryMergeWindow::slotSaveMergeState()
 {
     //slotStatusMsg(i18n("Saving Directory Merge State ..."));

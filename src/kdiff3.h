@@ -137,6 +137,28 @@ class KDiff3App : public QSplitter
     void checkIfCanContinue(bool& pbContinue);
 
     void finishDrop();
+
+    void showWhiteSpaceToggled();
+    void showLineNumbersToggled();
+    void doRefresh();
+
+    void autoSolve();
+    void unsolve();
+    void mergeHistory();
+    void regExpAutoMerge();
+
+    void goCurrent();
+    void goTop();
+    void goBottom();
+    void goPrevUnsolvedConflict();
+
+    void goNextUnsolvedConflict();
+    void goPrevConflict();
+
+    void goNextConflict();
+    void goPrevDelta();
+    void goNextDelta();
+
   protected:
     void setLockPainting(bool bLock);
     void createCaption();
@@ -280,15 +302,15 @@ class KDiff3App : public QSplitter
     QAction* editFind;
     QAction* editFindNext;
 
-    QAction* goCurrent;
-    QAction* goTop;
-    QAction* goBottom;
-    QAction* goPrevUnsolvedConflict;
-    QAction* goNextUnsolvedConflict;
-    QAction* goPrevConflict;
-    QAction* goNextConflict;
-    QAction* goPrevDelta;
-    QAction* goNextDelta;
+    QAction* mGoCurrent;
+    QAction* mGoTop;
+    QAction* mGoBottom;
+    QAction* mGoPrevUnsolvedConflict;
+    QAction* mGoNextUnsolvedConflict;
+    QAction* mGoPrevConflict;
+    QAction* mGoNextConflict;
+    QAction* mGoPrevDelta;
+    QAction* mGoNextDelta;
     KToggleAction* chooseA;
     KToggleAction* chooseB;
     KToggleAction* chooseC;
@@ -301,9 +323,9 @@ class KDiff3App : public QSplitter
     KToggleAction* showWhiteSpaceCharacters;
     KToggleAction* showWhiteSpace;
     KToggleAction* showLineNumbers;
-    QAction* autoSolve;
-    QAction* unsolve;
-    QAction* mergeHistory;
+    QAction* mAutoSolve;
+    QAction* mUnsolve;
+    QAction* mMergeHistory;
     QAction* mergeRegExp;
     KToggleAction* showWindowA;
     KToggleAction* showWindowB;

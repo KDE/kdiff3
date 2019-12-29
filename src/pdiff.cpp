@@ -1202,41 +1202,41 @@ void KDiff3App::slotEditSelectAll()
 
 void KDiff3App::slotGoCurrent()
 {
-    if(m_pMergeResultWindow) m_pMergeResultWindow->slotGoCurrent();
+    Q_EMIT goCurrent();
 }
 void KDiff3App::slotGoTop()
 {
-    if(m_pMergeResultWindow) m_pMergeResultWindow->slotGoTop();
+    Q_EMIT goTop();
 }
 void KDiff3App::slotGoBottom()
 {
-    if(m_pMergeResultWindow) m_pMergeResultWindow->slotGoBottom();
+    Q_EMIT goBottom();
 }
 void KDiff3App::slotGoPrevUnsolvedConflict()
 {
-    if(m_pMergeResultWindow) m_pMergeResultWindow->slotGoPrevUnsolvedConflict();
+    Q_EMIT goPrevUnsolvedConflict();
 }
 void KDiff3App::slotGoNextUnsolvedConflict()
 {
     m_bTimerBlock = false;
-    if(m_pMergeResultWindow) m_pMergeResultWindow->slotGoNextUnsolvedConflict();
+    Q_EMIT goNextUnsolvedConflict();
 }
 void KDiff3App::slotGoPrevConflict()
 {
-    if(m_pMergeResultWindow) m_pMergeResultWindow->slotGoPrevConflict();
+    Q_EMIT goPrevConflict();
 }
 void KDiff3App::slotGoNextConflict()
 {
     m_bTimerBlock = false;
-    if(m_pMergeResultWindow) m_pMergeResultWindow->slotGoNextConflict();
+    Q_EMIT goNextConflict();
 }
 void KDiff3App::slotGoPrevDelta()
 {
-    if(m_pMergeResultWindow) m_pMergeResultWindow->slotGoPrevDelta();
+    Q_EMIT goPrevDelta();
 }
 void KDiff3App::slotGoNextDelta()
 {
-    if(m_pMergeResultWindow) m_pMergeResultWindow->slotGoNextDelta();
+    Q_EMIT goNextDelta();
 }
 
 void KDiff3App::choose(e_SrcSelector choice)
@@ -1280,37 +1280,24 @@ void KDiff3App::slotChooseC()
 
 void KDiff3App::slotAutoSolve()
 {
-    if(m_pMergeResultWindow)
-    {
-        m_pMergeResultWindow->slotAutoSolve();
-        // m_pMergeWindowFrame->show(); incompatible with bPreserveCarriageReturn
-        m_pMergeResultWindow->showNrOfConflicts();
-        slotUpdateAvailabilities();
-    }
+    Q_EMIT autoSolve();
+
+    slotUpdateAvailabilities();
 }
 
 void KDiff3App::slotUnsolve()
 {
-    if(m_pMergeResultWindow)
-    {
-        m_pMergeResultWindow->slotUnsolve();
-    }
+    Q_EMIT unsolve();
 }
 
 void KDiff3App::slotMergeHistory()
 {
-    if(m_pMergeResultWindow)
-    {
-        m_pMergeResultWindow->slotMergeHistory();
-    }
+    Q_EMIT mergeHistory();
 }
 
 void KDiff3App::slotRegExpAutoMerge()
 {
-    if(m_pMergeResultWindow)
-    {
-        m_pMergeResultWindow->slotRegExpAutoMerge();
-    }
+    Q_EMIT regExpAutoMerge();
 }
 
 void KDiff3App::slotSplitDiff()
@@ -1385,26 +1372,9 @@ void KDiff3App::slotConfigureKeys()
 void KDiff3App::slotRefresh()
 {
     QApplication::setFont(m_pOptions->m_appFont);
-    if(m_pDiffTextWindow1 != nullptr)
-    {
-        m_pDiffTextWindow1->setFont(m_pOptions->m_font);
-        m_pDiffTextWindow1->update();
-    }
-    if(m_pDiffTextWindow2 != nullptr)
-    {
-        m_pDiffTextWindow2->setFont(m_pOptions->m_font);
-        m_pDiffTextWindow2->update();
-    }
-    if(m_pDiffTextWindow3 != nullptr)
-    {
-        m_pDiffTextWindow3->setFont(m_pOptions->m_font);
-        m_pDiffTextWindow3->update();
-    }
-    if(m_pMergeResultWindow != nullptr)
-    {
-        m_pMergeResultWindow->setFont(m_pOptions->m_font);
-        m_pMergeResultWindow->update();
-    }
+
+    Q_EMIT doRefresh();
+
     if(m_pHScrollBar != nullptr)
     {
         m_pHScrollBar->setAgain();
@@ -1678,14 +1648,8 @@ void KDiff3App::slotShowWhiteSpaceToggled()
     m_pOptions->m_bShowWhiteSpaceCharacters = showWhiteSpaceCharacters->isChecked();
     m_pOptions->m_bShowWhiteSpace = showWhiteSpace->isChecked();
 
-    if(m_pDiffTextWindow1 != nullptr)
-        m_pDiffTextWindow1->update();
-    if(m_pDiffTextWindow2 != nullptr)
-        m_pDiffTextWindow2->update();
-    if(m_pDiffTextWindow3 != nullptr)
-        m_pDiffTextWindow3->update();
-    if(m_pMergeResultWindow != nullptr)
-        m_pMergeResultWindow->update();
+    Q_EMIT showWhiteSpaceToggled();
+
     if(m_pOverview != nullptr)
         m_pOverview->slotRedraw();
 }
@@ -1697,13 +1661,7 @@ void KDiff3App::slotShowLineNumbersToggled()
     if(wordWrap->isChecked())
         recalcWordWrap();
 
-    if(m_pDiffTextWindow1 != nullptr)
-        m_pDiffTextWindow1->update();
-    if(m_pDiffTextWindow2 != nullptr)
-        m_pDiffTextWindow2->update();
-
-    if(m_pDiffTextWindow3 != nullptr)
-        m_pDiffTextWindow3->update();
+    Q_EMIT showLineNumbersToggled();
 }
 
 /// Return true for success, else false
@@ -2268,8 +2226,8 @@ void KDiff3App::slotUpdateAvailabilities()
 
     showWhiteSpaceCharacters->setEnabled(bDiffWindowVisible);
     autoAdvance->setEnabled(bMergeEditorVisible);
-    autoSolve->setEnabled(bMergeEditorVisible && m_bTripleDiff);
-    unsolve->setEnabled(bMergeEditorVisible);
+    mAutoSolve->setEnabled(bMergeEditorVisible && m_bTripleDiff);
+    mUnsolve->setEnabled(bMergeEditorVisible);
     if(!bDirWindowHasFocus)
     {
         chooseA->setEnabled(bMergeEditorVisible);
@@ -2281,7 +2239,7 @@ void KDiff3App::slotUpdateAvailabilities()
         m_pMergeResultWindow->slotUpdateAvailabilities(bMergeEditorVisible, m_bTripleDiff);
     }
 
-    mergeHistory->setEnabled(bMergeEditorVisible);
+    mMergeHistory->setEnabled(bMergeEditorVisible);
     mergeRegExp->setEnabled(bMergeEditorVisible);
     showWindowA->setEnabled(bDiffWindowVisible && (m_pDiffTextWindow2->isVisible() || m_pDiffTextWindow3->isVisible()));
     showWindowB->setEnabled(bDiffWindowVisible && (m_pDiffTextWindow1->isVisible() || m_pDiffTextWindow3->isVisible()));
@@ -2295,15 +2253,15 @@ void KDiff3App::slotUpdateAvailabilities()
     fileSave->setEnabled(m_bOutputModified && bSavable);
     fileSaveAs->setEnabled(bSavable);
 
-    goTop->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaAboveCurrent());
-    goBottom->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaBelowCurrent());
-    goCurrent->setEnabled(bDiffWindowVisible);
-    goPrevUnsolvedConflict->setEnabled(bMergeEditorVisible && m_pMergeResultWindow->isUnsolvedConflictAboveCurrent());
-    goNextUnsolvedConflict->setEnabled(bMergeEditorVisible && m_pMergeResultWindow->isUnsolvedConflictBelowCurrent());
-    goPrevConflict->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isConflictAboveCurrent());
-    goNextConflict->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isConflictBelowCurrent());
-    goPrevDelta->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaAboveCurrent());
-    goNextDelta->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaBelowCurrent());
+    mGoTop->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaAboveCurrent());
+    mGoBottom->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaBelowCurrent());
+    mGoCurrent->setEnabled(bDiffWindowVisible);
+    mGoPrevUnsolvedConflict->setEnabled(bMergeEditorVisible && m_pMergeResultWindow->isUnsolvedConflictAboveCurrent());
+    mGoNextUnsolvedConflict->setEnabled(bMergeEditorVisible && m_pMergeResultWindow->isUnsolvedConflictBelowCurrent());
+    mGoPrevConflict->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isConflictAboveCurrent());
+    mGoNextConflict->setEnabled(bDiffWindowVisible && bMergeEditorVisible && m_pMergeResultWindow->isConflictBelowCurrent());
+    mGoPrevDelta->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaAboveCurrent());
+    mGoNextDelta->setEnabled(bDiffWindowVisible && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isDeltaBelowCurrent());
 
     overviewModeNormal->setEnabled(m_bTripleDiff && bDiffWindowVisible);
     overviewModeAB->setEnabled(m_bTripleDiff && bDiffWindowVisible);

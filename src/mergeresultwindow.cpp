@@ -207,6 +207,24 @@ void MergeResultWindow::setupConnections(const KDiff3App *app) const
     connect(this, &MergeResultWindow::updateAvailabilities, app, &KDiff3App::slotUpdateAvailabilities);
     connect(this, &MergeResultWindow::showPopupMenu, app, &KDiff3App::showPopupMenu);
     connect(this, &MergeResultWindow::noRelevantChangesDetected, app, &KDiff3App::slotNoRelevantChangesDetected);
+    connect(this, static_cast<void (MergeResultWindow::*)(void)>(&MergeResultWindow::update), app, &KDiff3App::showWhiteSpaceToggled);
+    connect(app, &KDiff3App::doRefresh, this, &MergeResultWindow::slotRefresh);
+
+    connect(app, &KDiff3App::autoSolve, this, &MergeResultWindow::slotAutoSolve);
+    connect(app, &KDiff3App::unsolve, this, &MergeResultWindow::slotUnsolve);
+    connect(app, &KDiff3App::mergeHistory, this, &MergeResultWindow::slotMergeHistory);
+    connect(app, &KDiff3App::regExpAutoMerge, this, &MergeResultWindow::slotRegExpAutoMerge);
+
+    connect(app, &KDiff3App::goCurrent, this, &MergeResultWindow::slotGoCurrent);
+    connect(app, &KDiff3App::goTop, this, &MergeResultWindow::slotGoTop);
+    connect(app, &KDiff3App::goBottom, this, &MergeResultWindow::slotGoBottom);
+    connect(app, &KDiff3App::goPrevUnsolvedConflict, this, &MergeResultWindow::slotGoPrevUnsolvedConflict);
+    connect(app, &KDiff3App::goNextUnsolvedConflict, this, &MergeResultWindow::slotGoNextUnsolvedConflict);
+    connect(app, &KDiff3App::goPrevConflict, this, &MergeResultWindow::slotGoPrevConflict);
+    connect(app, &KDiff3App::goNextConflict, this, &MergeResultWindow::slotGoNextConflict);
+    connect(app, &KDiff3App::goPrevDelta, this, &MergeResultWindow::slotGoPrevDelta);
+    connect(app, &KDiff3App::goNextDelta, this, &MergeResultWindow::slotGoNextDelta);
+
 }
 
 void MergeResultWindow::showUnsolvedConflictsStatusMessage()
@@ -219,6 +237,12 @@ void MergeResultWindow::showUnsolvedConflictsStatusMessage()
         m_persistentStatusMessage = i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)", nofUnsolved, wsc);
         m_pStatusBar->showMessage(m_persistentStatusMessage);
     }
+}
+
+void MergeResultWindow::slotRefresh()
+{
+    setFont(m_pOptions->m_font);
+    update();
 }
 
 void MergeResultWindow::slotUpdateAvailabilities(bool bMergeEditorVisible,const bool bTripleDiff)
@@ -1137,6 +1161,7 @@ void MergeResultWindow::slotAutoSolve()
     setModified(true);
     update();
     showUnsolvedConflictsStatusMessage();
+    showNrOfConflicts();
 }
 
 void MergeResultWindow::slotUnsolve()
