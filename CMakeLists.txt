@@ -27,7 +27,7 @@ include(ECMAddAppIcon)
 include(ECMSetupVersion)
 include(ECMAddTests)
 
-ecm_setup_version(1.9.70 VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DIR}/src/version.h)
+ecm_setup_version(1.8.70 VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DIR}/src/version.h)
 
 find_package(
     Qt5 ${QT_MIN_VERSION}
