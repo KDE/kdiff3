@@ -547,6 +547,7 @@ in the history of a input file, only one entry will remain in the output.
 </para><para>
    Because this is not so easy to get right immediately, you are able to test and improve the regular expressions and key-generation in a dedicated dialog by pressing the <guibutton>Test your regular expressions</guibutton> button.
 </para><para>Example: Assume a history that looks like this:
+</para>
 <screen>
 /**************************************************************************
 ** HISTORY:    &#36;Log: \toms_merge_main_view\MyApplication\src\complexalgorithm.cpp &#36;
@@ -559,16 +560,19 @@ in the history of a input file, only one entry will remain in the output.
 **  Fixed crash.
 **************************************************************************/
 </screen>
+<para>
    The history start line matches the regular expression "<literal>.*\&#36;Log.*\&#36;.*</literal>". Then follow the history entries.
 </para><para>
    The line with the "<literal>&#36;Log&#36;</literal>" keyword begins with two "*" after which follows a space. &kdiff3; uses the first non-white-space string as "leading comment" and assumes that the history ends in the first line without this leading comment. In this example the last line ends with a string that also starts with two "*", but instead of a space character more "*" follow. Hence this line ends the history.
 </para><para>
 If history sorting isn't required then the history entry start line regular expression
 could look like this. (This line is split in two because it wouldn't fit otherwise.)
+</para>
 <screen>
 \s*\\main\\\S+\s+[0-9]+ (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
  [0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]\s+.*
 </screen>
+<para>
    For details about regular expressions please see the <ulink url="https://doc.qt.io/archives/3.3/qregexp.html#details">regular expression documentation by Trolltech</ulink>. Note that "<literal>\s</literal>" (with lowercase "<literal>s</literal>") matches any white space and "<literal>\S</literal>" (with uppercase "<literal>S</literal>") matches any non-white-space. In our example the history entry start contains first the version info with reg. exp. "<literal>\\main\\\S+</literal>", the date consisting of day "<literal>[0-9]+</literal>", month "<literal>(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)</literal>" and year "<literal>[0-9][0-9][0-9][0-9]</literal>", the time "<literal>[0-9][0-9]:[0-9][0-9]:[0-9][0-9]</literal>" and finally the developers login name "<literal>.*</literal>".
 </para><para>
    Note that the "leading comment" characters (in the example "<literal>**</literal>") will already be removed by &kdiff3; before trying to match, hence the regular expression begins with a match for none or more white-space characters "<literal>\s*</literal>". Because comment characters can differ in each file (&eg; C/C++ uses other comment characters than a Perl script) &kdiff3; takes care of the leading comment characters and you should not specify them in the regular expression.
@@ -576,19 +580,22 @@ could look like this. (This line is split in two because it wouldn't fit otherwi
 If you require a sorted history. Then the sortkey must be calculated. For this the 
 relevant parts in the regular expression must be grouped by parentheses. 
 (The extra parentheses can also stay in if history sorting is disabled.)
+</para>
 <screen>
 \s*\\main\\(\S+)\s+([0-9]+) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
  ([0-9][0-9][0-9][0-9]) ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])\s+(.*)
 </screen>
+<para>
    The parentheses now contain <literal>1</literal>. version info, <literal>2</literal>. day, <literal>3</literal>. month, <literal>4</literal>. year, <literal>5</literal>. time, <literal>6</literal>. name. 
    But if we want to sort by date and time, we need to construct a key with the elements in a different order of appearance:
    First the year, followed by month, day, time, version info and name. Hence the sortkey order to specify is "<literal>4,3,2,5,1,6</literal>".
 </para><para>
    Because  month names aren't good for sorting ("<literal>Apr</literal>" would be first) &kdiff3; detects in which order the month names were given and uses that number instead ("<literal>Apr</literal>" -&gt; "<literal>04</literal>"). And if a pure number is found it will be transformed to a 4-digit value with leading zeros for sorting. Finally the resulting sort key for the first history entry start line will be:
+</para>
 <screen>
 2001 04 0002 10:45:41 integration_branch_12   tom 
 </screen>
-</para><para>
+<para>
 For more information also see <link linkend="mergeoptions">Merge Settings</link> section.
 </para>
 </sect2>
@@ -1004,6 +1011,7 @@ The good news is that very often <command>sed</command> or <command>perl</comman
 will do the job. 
 </para>
 <para>Example: Simple testcase: Consider file a.txt (6 lines):
+</para>
 <screen>
       aa
       ba
@@ -1012,13 +1020,17 @@ will do the job.
       ea
       fa
 </screen>
+<para>
 And file b.txt (3 lines):
+</para>
 <screen>
       cg
       dg
       eg
 </screen>
+<para>
 Without a preprocessor the following lines would be placed next to each other:
+</para>
 <screen>
       aa - cg
       ba - dg
@@ -1027,13 +1039,17 @@ Without a preprocessor the following lines would be placed next to each other:
       ea
       fa
 </screen>
+<para>
 This is probably not wanted since the first letter contains the actually interesting information.
 To help the matching algorithm to ignore the second letter we can use a line matching preprocessor 
 command, that replaces 'g' with 'a':
+</para>
 <screen>
    <command>sed</command> 's/g/a/'
 </screen>
+<para>
 With this command the result of the comparison would be:
+</para>
 <screen>
       aa
       ba
@@ -1042,6 +1058,7 @@ With this command the result of the comparison would be:
       ea - eg
       fa
 </screen>
+<para>
 Internally the matching algorithm sees the files after running the line matching preprocessor,
 but on the screen the file is unchanged. (The normal preprocessor would change the data also on 
 the screen.)
@@ -1061,21 +1078,27 @@ path for the command.
 </para>
 <para>
 In this context only the <command>sed</command> substitute command is used:
+</para>
 <screen>
    <command>sed</command> 's/<replaceable>REGEXP</replaceable>/<replaceable>REPLACEMENT</replaceable>/<replaceable>FLAGS</replaceable>'
 </screen>
+<para>
 Before you use a new command within &kdiff3;, you should first test it in a console.
 Here the <command>echo</command> command is useful. Example:
+</para>
 <screen>
    <command>echo</command> abrakadabra | <command>sed</command> 's/a/o/'
    -> obrakadabra
 </screen>
-This example shows a very simple sed-command that replaces the first occurance 
-of "a" with "o". If you want to replace all occurances then you need the "g" flag:
+<para>
+This example shows a very simple sed-command that replaces the first occurrence 
+of "a" with "o". If you want to replace all occurrences then you need the "g" flag:
+</para>
 <screen>
    <command>echo</command> abrakadabra | <command>sed</command> 's/a/o/g'
    -> obrokodobro
 </screen>
+<para>
 The "|"-symbol is the pipe-command that transfers the output of the previous 
 command to the input of the following command. If you want to test with a longer file
 then you can use <command>cat</command> on &UNIX; like systems or <command>type</command> 
@@ -1091,12 +1114,14 @@ on &Windows; like systems. <command>sed</command> will do the substitution for e
 Currently &kdiff3; understands only C/C++ comments. Using the
 <guilabel>Line-matching preprocessor command:</guilabel> option you can also ignore
 other types of comments, by converting them into C/C++-comments.
-
+</para>
+<para>
 Example: To ignore comments starting with "<literal>#</literal>", you would like to convert them to "<literal>//</literal>". Note that you also must enable the <guilabel>Ignore C/C++ comments (treat as white space)</guilabel> option to get an effect. An appropriate <guilabel>Line-matching preprocessor command:</guilabel> would be:
-
+</para>
 <screen>
    <command>sed</command> 's/#/\/\//'
 </screen>
+<para>
 Since for <command>sed</command> the "<literal>/</literal>" character has a special meaning, it is necessary to place the "<literal>\</literal>" character before each "<literal>/</literal>" in the replacement-string. Sometimes the "<literal>\</literal>" is required to add or remove a special meaning of certain characters. The single quotation marks (') are only important when testing on the command shell as it will otherwise attempt to process some characters.
 &kdiff3; does not do this except for the escape sequences '<literal>\"</literal>' and '<literal>\\</literal>'.
 </para>
@@ -1104,9 +1129,11 @@ Since for <command>sed</command> the "<literal>/</literal>" character has a spec
 <sect3><title>Caseinsensitive Diff</title>
 <para>
 Use the following <guilabel>Line-matching preprocessor command:</guilabel> to convert all input to uppercase:
+</para>
 <screen>
    <command>sed</command> 's/\(.*\)/\U\1/'
 </screen>
+<para>
 Here the "<literal>.*</literal>" is a regular expression that matches any string and in this context matches all characters in the line. 
 The "<literal>\1</literal>" in the replacement string refers to the matched text within the first pair of "<literal>\(</literal>" and "<literal>\)</literal>".
 The "<literal>\U</literal>" converts the inserted text to uppercase.
@@ -1119,9 +1146,11 @@ CVS and other version control systems use several keywords to insert automatical
 generated strings (<ulink url="info:/cvs/Keyword substitution">info:/cvs/Keyword substitution</ulink>).
 All of them follow the pattern "<replaceable>$KEYWORD generated text$</replaceable>". We now need a
 line-matching preprocessor command that removes only the generated text:
+</para>
 <screen>
    <command>sed</command> 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'
 </screen>
+<para>
 The "<literal>\|</literal>" separates the possible keywords. You might want to modify this list 
 according to your needs.
 The "<literal>\</literal>" before the "<literal>$</literal>" is necessary because otherwise the "<literal>$</literal>" matches the end of the line.
@@ -1137,9 +1166,11 @@ support similar things.
 <para>
 Ignoring numbers actually is a built-in option. But as another example, this is how
 it would look as a line-matching preprocessor command.
+</para>
 <screen>
    <command>sed</command> 's/[0123456789.-]//g'
 </screen>
+<para>
 Any character within '<literal>[</literal>' and '<literal>]</literal>' is a match and will be replaced with nothing.
 </para>
 </sect3>
@@ -1149,9 +1180,11 @@ Any character within '<literal>[</literal>' and '<literal>]</literal>' is a matc
 Sometimes a text is very strictly formatted, and contains columns that you always want to ignore, while there are
 other columns you want to preserve for analysis. In the following example the first five columns (characters) are 
 ignored, the next ten columns are preserved, then again five columns are ignored and the rest of the line is preserved.
+</para>
 <screen>
    <command>sed</command> 's/.....\(..........\).....\(.*\)/\1\2/'
 </screen>
+<para>
 Each dot '<literal>.</literal>' matches any single character. The "<literal>\1</literal>" and "<literal>\2</literal>" in the replacement string refer to the matched text within the first 
 and second pair of "<literal>\(</literal>" and "<literal>\)</literal>" denoting the text to be preserved.
 </para>
@@ -1161,28 +1194,30 @@ and second pair of "<literal>\(</literal>" and "<literal>\)</literal>" denoting 
 <para>
 Sometimes you want to apply several substitutions at once. You can then use the 
 semicolon '<literal>;</literal>' to separate these from each other. Example:
+</para>
 <screen>
    <command>echo</command> abrakadabra | <command>sed</command> 's/a/o/g;s/\(.*\)/\U\1/'
    -> OBROKODOBRO
 </screen>
-</para>
 </sect3>
 
 <sect3><title>Using <command>perl</command> instead of <command>sed</command></title>
 <para>
 Instead of <command>sed</command> you might want to use something else like 
 <command>perl</command>.
+</para>
 <screen>
    <command>perl</command> -p -e 's/<replaceable>REGEXP</replaceable>/<replaceable>REPLACEMENT</replaceable>/<replaceable>FLAGS</replaceable>'
 </screen>
+<para>
 But some details are different in <command>perl</command>. Note that where 
 <command>sed</command> needed "<literal>\(</literal>" and "<literal>\)</literal>" <command>perl</command>
 requires the simpler "<literal>(</literal>" and "<literal>)</literal>" without preceding '<literal>\</literal>'. Example:
+</para>
 <screen>
    <command>sed</command> 's/\(.*\)/\U\1/'
    <command>perl</command> -p -e 's/(.*)/\U\1/'
 </screen>
-</para>
 </sect3>
 </sect2>
 
