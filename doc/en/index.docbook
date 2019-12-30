@@ -525,7 +525,7 @@ They will appear in the usage help like in this example:</para>
 </para><para>
    Automatic merge for version control history (also called "log") is also supported. The history automerge can either run immediately when the merge starts by activating the option <guilabel>Merge version control history on merge start</guilabel> at <guilabel>Merge</guilabel> item in the settings dialog or later via the <menuchoice><guimenu>Merge</guimenu><guimenuitem>Automatically Solve History Conflicts</guimenuitem></menuchoice> menu item.
 </para><para>
-   Usually the version control history begins with a line containing the keyword "<literal>&#36;Log&#36;</literal>".This must be matched by the "History start regular expression"-option. &kdiff3; detects which subsequent lines are in the history by analysing the leading characters that came before the "<literal>&#36;Log&#36;</literal>" keyword. If the same "leading comment" characters also appears in the following lines, then they are also included in the history.
+   Usually the version control history begins with a line containing the keyword "<literal>&#36;Log&#36;</literal>". This must be matched by the <guilabel>History start regular expression:</guilabel> option. &kdiff3; detects which subsequent lines are in the history by analysing the leading characters that came before the "<literal>&#36;Log&#36;</literal>" keyword. If the same "leading comment" characters also appears in the following lines, then they are also included in the history.
 </para><para>
 During each check-in the VCS writes a unique line specifying version-, date- and time-information 
 followed by lines with user comments.
@@ -632,8 +632,8 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
    When you need both sources, or you want to edit after selecting, then you
    probably want to switch this off. Before proceeding to the next unsolved conflict
    &kdiff3; shows you the effect of your choice for a short time. This delay is
-   adjustable in the Diff- &amp; Merge-Settings: You can
-   specify the "Auto-Advance delay" in milli seconds between 0 and 2000. Hint:
+   adjustable in the <guilabel>Merge</guilabel> item in the settings dialog: You can
+   specify the <guilabel>Auto advance delay (ms):</guilabel> in milli seconds between 0 and 2000. Hint:
    Tired of many clicks? - Use a small Auto-Advance-delay and the shortcuts
    <keycombo>&Ctrl;<keycap>1</keycap></keycombo>/<keycap>2</keycap>/<keycap>3</keycap>
    to select <guilabel>A</guilabel>/<guilabel>B</guilabel>/<guilabel>C</guilabel> for many conflicts.
@@ -660,7 +660,7 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
    In order to select everything in the current window use <menuchoice><guimenu>Edit</guimenu>
    <guimenuitem>Select All</guimenuitem></menuchoice> menu item (<keycombo>&Ctrl;<keycap>A</keycap></keycombo>).
 </para><para>
-   To copy to the clipboard you must press the <guibutton>Copy</guibutton> button (<keycombo>&Alt;<keycap>C</keycap></keycombo> or <keycombo>&Alt;&Ins;</keycombo>). But there exists an option <guilabel>Auto copy selection</guilabel> at <guilabel>Editor</guilabel> item in the settings dialog. If this is enabled, then whatever you select is copied immediately and you don't need to explicitly copy. But pay attention when using this because the contents of the clipboard might then be destroyed accidentally.
+   To copy to the clipboard you must press the <guibutton>Copy</guibutton> button (<keycombo>&Ctrl;<keycap>C</keycap></keycombo> or <keycombo>&Ctrl;&Ins;</keycombo>). But there exists an option <guilabel>Auto copy selection</guilabel> at <guilabel>Editor</guilabel> item in the settings dialog. If this is enabled, then whatever you select is copied immediately and you don't need to explicitly copy. But pay attention when using this because the contents of the clipboard might then be destroyed accidentally.
 </para><para>
    <guibutton>Cut</guibutton> (<keycombo>&Ctrl;<keycap>X</keycap></keycombo> or <keycombo>&Shift;&Del;</keycombo>) copies to the clipboard and deletes the selected text.
 </para><para>
@@ -806,7 +806,7 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
       done. In the result the differences will be shown nevertheless, but they are treated
       as white space.
    </para></listitem></varlistentry>
-   <varlistentry><term><guilabel>Ignore case (treat as white space)</guilabel></term><listitem><para> Default is off.
+   <varlistentry><term><guilabel>Ignore C/C++ comments (treat as white space)</guilabel></term><listitem><para> Default is off.
       Changes in comments will be treated like changes in white space.
    </para></listitem></varlistentry>
    <varlistentry><term><guilabel>Ignore case (treat as white space)</guilabel></term><listitem><para>  Default is off. 
@@ -854,7 +854,7 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
    <varlistentry><term><guilabel>Run regular expression auto merge on merge start</guilabel></term><listitem><para>
       If activated &kdiff3; runs the automatic merge using the <guilabel>Auto merge regular expression:</guilabel> option when a merge is started.
    </para></listitem></varlistentry>
-   <varlistentry><term><guilabel>History start regular expression:</guilabel></term><listitem><para>
+   <varlistentry><term><guilabel>History entry start regular expression:</guilabel></term><listitem><para>
       Regular expression for the start of the merge history entry.
       Usually this line contains the "<literal>&#36;Log&#36;</literal>" keyword.
       Default value: "<literal>.*\&#36;Log.*\&#36;.*</literal>"
