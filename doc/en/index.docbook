@@ -573,7 +573,7 @@ could look like this. (This line is split in two because it wouldn't fit otherwi
  [0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]\s+.*
 </screen>
 <para>
-   For details about regular expressions please see the <ulink url="https://doc.qt.io/archives/3.3/qregexp.html#details">regular expression documentation by Trolltech</ulink>. Note that "<literal>\s</literal>" (with lowercase "<literal>s</literal>") matches any white space and "<literal>\S</literal>" (with uppercase "<literal>S</literal>") matches any non-white-space. In our example the history entry start contains first the version info with reg. exp. "<literal>\\main\\\S+</literal>", the date consisting of day "<literal>[0-9]+</literal>", month "<literal>(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)</literal>" and year "<literal>[0-9][0-9][0-9][0-9]</literal>", the time "<literal>[0-9][0-9]:[0-9][0-9]:[0-9][0-9]</literal>" and finally the developers login name "<literal>.*</literal>".
+   For details about regular expressions please see the <ulink url="https://doc.qt.io/qt-5/qregularexpression.html">regular expression documentation</ulink>. Note that "<literal>\s</literal>" (with lowercase "<literal>s</literal>") matches any white space and "<literal>\S</literal>" (with uppercase "<literal>S</literal>") matches any non-white-space. In our example the history entry start contains first the version info with reg. exp. "<literal>\\main\\\S+</literal>", the date consisting of day "<literal>[0-9]+</literal>", month "<literal>(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)</literal>" and year "<literal>[0-9][0-9][0-9][0-9]</literal>", the time "<literal>[0-9][0-9]:[0-9][0-9]:[0-9][0-9]</literal>" and finally the developers login name "<literal>.*</literal>".
 </para><para>
    Note that the "leading comment" characters (in the example "<literal>**</literal>") will already be removed by &kdiff3; before trying to match, hence the regular expression begins with a match for none or more white-space characters "<literal>\s*</literal>". Because comment characters can differ in each file (&eg; C/C++ uses other comment characters than a Perl script) &kdiff3; takes care of the leading comment characters and you should not specify them in the regular expression.
 </para><para>
@@ -603,7 +603,7 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
 
 <sect1 id="navigation"><title>Navigation And Editing</title>
 <para>
-   Much navigation will be done with the scroll bars and the mouse but you can also navigate with the keys. If you click into either window then you can use the shorcuts &Left;, &Right;, &Up;, &Down;, &PgUp;, &PgDn;,  &Home;, &End;, <keycombo>&Ctrl;&Home;</keycombo> and <keycombo>&Ctrl;&End;</keycombo> as you would in other programs. The overview-column next to the vertical scroll bar of the input files can also be used for navigating by clicking into it.
+   Much navigation will be done with the scroll bars and the mouse but you can also navigate with the keys. If you click into either window then you can use the shortcuts &Left;, &Right;, &Up;, &Down;, &PgUp;, &PgDn;,  &Home;, &End;, <keycombo>&Ctrl;&Home;</keycombo> and <keycombo>&Ctrl;&End;</keycombo> as you would in other programs. The overview-column next to the vertical scroll bar of the input files can also be used for navigating by clicking into it.
 </para><para>
    You can also use the <mousebutton>wheel</mousebutton> mouse to scroll up and down.
 </para><para>
