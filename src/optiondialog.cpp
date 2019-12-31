@@ -923,7 +923,7 @@ void OptionDialog::setupDiffPage()
 void OptionDialog::setupMergePage()
 {
     QFrame* page = new QFrame();
-    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Merge"));
+    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18nc("Settings page", "Merge"));
     pageItem->setHeader(i18n("Merge Settings"));
     pageItem->setIcon(QIcon::fromTheme(QStringLiteral("merge")));
     addPage(pageItem);
