@@ -160,11 +160,12 @@ class MergeFileInfos
 
     inline int existsCount() const { return (existsInA() ? 1 : 0) + (existsInB() ? 1 : 0) + (existsInC() ? 1 : 0); }
 
-    inline bool onlyInA() const {return existsInA() && !existsInB() && !existsInC();}
-    inline bool onlyInB() const {return !existsInA() && existsInB() && !existsInC();}
+    inline bool onlyInA() const { return existsInA() && !existsInB() && !existsInC(); }
+    inline bool onlyInB() const { return !existsInA() && existsInB() && !existsInC(); }
     inline bool onlyInC() const { return !existsInA() && !existsInB() && existsInC(); }
 
     bool conflictingAges() const { return m_bConflictingAges; }
+
   private:
     bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status, QSharedPointer<Options> const pOptions);
     inline void setAgeA(const e_Age inAge) { m_ageA = inAge; }

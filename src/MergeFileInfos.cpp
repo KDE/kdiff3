@@ -11,8 +11,8 @@
  ***************************************************************************/
 #include "MergeFileInfos.h"
 
-#include "directorymergewindow.h"
 #include "DirectoryInfo.h"
+#include "directorymergewindow.h"
 #include "fileaccess.h"
 #include "progress.h"
 
