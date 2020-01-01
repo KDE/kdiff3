@@ -46,6 +46,13 @@
 #include <KTextEdit>
 #include <KToggleAction>
 
+struct DirectoryMergeWindow::t_ItemInfo {
+    bool bExpanded;
+    bool bOperationComplete;
+    QString status;
+    e_MergeOperation eMergeOperation;
+};
+
 class StatusInfo : public QDialog
 {
   private:
@@ -703,13 +710,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThre
     for(int childIdx = 0; childIdx < rowCount(mi); ++childIdx)
         calcDirStatus(bThreeDirs, index(childIdx, 0, mi), nofFiles, nofDirs, nofEqualFiles, nofManualMerges);
 }
-
-struct t_ItemInfo {
-    bool bExpanded;
-    bool bOperationComplete;
-    QString status;
-    e_MergeOperation eMergeOperation;
-};
 
 bool DirectoryMergeWindow::init(
     const QSharedPointer<DirectoryInfo>& dirInfo,
