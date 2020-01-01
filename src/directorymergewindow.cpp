@@ -178,8 +178,8 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
 
     bool isThreeWay() const
     {
-        if(rootMFI() == nullptr || rootMFI()->getDirectoryInfo() == nullptr) return false;
-        return rootMFI()->getDirectoryInfo()->dirC().isValid();
+        if(rootMFI() == nullptr) return false;
+        return rootMFI()->isThreeWay();
     }
     MergeFileInfos* rootMFI() const { return m_pRoot; }
 
@@ -1431,7 +1431,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
             {
                 if(!bCopyNewer || pMFI->isDirA())
                     setMergeOperation(mi, eDefaultMergeOp);
-                else if(bCopyNewer && pMFI->m_bConflictingAges)
+                else if(bCopyNewer && pMFI->conflictingAges())
                 {
                     setMergeOperation(mi, eConflictingAges);
                 }
@@ -2894,31 +2894,14 @@ void DirectoryMergeWindow::updateFileVisibilities()
             MergeFileInfos* pMFI = d->getMFI(mi);
             bool bDir = pMFI->hasDir();
             if(loop == 0 && bDir)
-            {
-                bool bChange = false;
-                if(!pMFI->isEqualAB() && pMFI->isDirA() == pMFI->isDirB() && pMFI->isLinkA() == pMFI->isLinkB())
-                {
-                    pMFI->m_bEqualAB = true;
-                    bChange = true;
-                }
-                if(!pMFI->isEqualBC() && pMFI->isDirC() == pMFI->isDirB() && pMFI->isLinkC() == pMFI->isLinkB())
-                {
-                    pMFI->m_bEqualBC = true;
-                    bChange = true;
-                }
-                if(!pMFI->isEqualAC() && pMFI->isDirA() == pMFI->isDirC() && pMFI->isLinkA() == pMFI->isLinkC())
-                {
-                    pMFI->m_bEqualAC = true;
-                    bChange = true;
-                }
-
-                if(bChange)
-                    pMFI->updateAge();
+            { //Treat all links and directories to equal by default.
+                pMFI->updateDirectoryOrLink();
             }
-            bool bExistsEverywhere = pMFI->existsInA() && pMFI->existsInB() && (pMFI->existsInC() || !bThreeDirs);
-            int existCount = int(pMFI->existsInA()) + int(pMFI->existsInB()) + int(pMFI->existsInC());
+
             bool bVisible =
-                (bShowIdentical && bExistsEverywhere && pMFI->isEqualAB() && (pMFI->isEqualAC() || !bThreeDirs)) || ((bShowDifferent || bDir) && existCount >= 2 && (!pMFI->isEqualAB() || !(pMFI->isEqualAC() || !bThreeDirs))) || (bShowOnlyInA && pMFI->existsInA() && !pMFI->existsInB() && !pMFI->existsInC()) || (bShowOnlyInB && !pMFI->existsInA() && pMFI->existsInB() && !pMFI->existsInC()) || (bShowOnlyInC && !pMFI->existsInA() && !pMFI->existsInB() && pMFI->existsInC());
+                (bShowIdentical && pMFI->existsEveryWhere() && pMFI->isEqualAB() && (pMFI->isEqualAC() || !bThreeDirs)) ||
+                ((bShowDifferent || bDir) && pMFI->existsCount() >= 2 && (!pMFI->isEqualAB() || !(pMFI->isEqualAC() || !bThreeDirs))) ||
+                (bShowOnlyInA && pMFI->onlyInA()) || (bShowOnlyInB && pMFI->onlyInB()) || (bShowOnlyInC && pMFI->onlyInC());
 
             QString fileName = pMFI->fileName();
             bVisible = bVisible && ((bDir && !Utils::wildcardMultiMatch(d->m_pOptions->m_DmDirAntiPattern, fileName, d->m_bCaseSensitive)) || (Utils::wildcardMultiMatch(d->m_pOptions->m_DmFilePattern, fileName, d->m_bCaseSensitive) && !Utils::wildcardMultiMatch(d->m_pOptions->m_DmFileAntiPattern, fileName, d->m_bCaseSensitive)));
@@ -2928,33 +2911,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
             bool bEqual = bThreeDirs ? pMFI->isEqualAB() && pMFI->isEqualAC() : pMFI->isEqualAB();
             if(!bEqual && bVisible && loop == 0) // Set all parents to "not equal"
             {
-                MergeFileInfos* p2 = pMFI->parent();
-                while(p2 != nullptr)
-                {
-                    bool bChange = false;
-                    if(!pMFI->isEqualAB() && p2->isEqualAB())
-                    {
-                        p2->m_bEqualAB = false;
-                        bChange = true;
-                    }
-                    if(!pMFI->isEqualAC() && p2->isEqualAC())
-                    {
-                        p2->m_bEqualAC = false;
-                        bChange = true;
-                    }
-                    if(!pMFI->isEqualBC() && p2->isEqualBC())
-                    {
-                        p2->m_bEqualBC = false;
-                        bChange = true;
-                    }
-
-                    if(bChange)
-                        p2->updateAge();
-                    else
-                        break;
-
-                    p2 = p2->parent();
-                }
+                pMFI->updateParents();
             }
             mi = d->treeIterator(mi, true, true);
         }

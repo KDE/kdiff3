@@ -45,6 +45,62 @@ MergeFileInfos::~MergeFileInfos()
     m_children.clear();
 }
 
+void MergeFileInfos::updateParents()
+{
+    MergeFileInfos* current = parent();
+    while(current != nullptr)
+    {
+        bool bChange = false;
+        if(!isEqualAB() && current->isEqualAB())
+        {
+            current->m_bEqualAB = false;
+            bChange = true;
+        }
+        if(!isEqualAC() && current->isEqualAC())
+        {
+            current->m_bEqualAC = false;
+            bChange = true;
+        }
+        if(!isEqualBC() && current->isEqualBC())
+        {
+            current->m_bEqualBC = false;
+            bChange = true;
+        }
+
+        if(bChange)
+            current->updateAge();
+        else
+            break;
+
+        current = current->parent();
+    }
+}
+/*
+    Check for directories or links marked as not equal and mark them equal.
+*/
+void MergeFileInfos::updateDirectoryOrLink()
+{
+    bool bChange = false;
+    if(!isEqualAB() && isDirA() == isDirB() && isLinkA() == isLinkB())
+    {
+        m_bEqualAB = true;
+        bChange = true;
+    }
+    if(!isEqualBC() && isDirC() == isDirB() && isLinkC() == isLinkB())
+    {
+        m_bEqualBC = true;
+        bChange = true;
+    }
+    if(!isEqualAC() && isDirA() == isDirC() && isLinkA() == isLinkC())
+    {
+        m_bEqualAC = true;
+        bChange = true;
+    }
+
+    if(bChange)
+        updateAge();
+}
+
 QString MergeFileInfos::subPath() const
 {
     if(m_pFileInfoA != nullptr && m_pFileInfoA->exists())
@@ -462,20 +518,20 @@ void MergeFileInfos::updateAge()
         e_Age age = eNew;
         if(existsInC())
         {
-            setAgeC((e_Age)age);
-            if(m_bEqualAC) setAgeA((e_Age)age);
-            if(m_bEqualBC) setAgeB((e_Age)age);
+            setAgeC(age);
+            if(m_bEqualAC) setAgeA(age);
+            if(m_bEqualBC) setAgeB(age);
             age = eMiddle;
         }
         if(existsInB() && getAgeB() == eNotThere)
         {
-            setAgeB((e_Age)age);
-            if(m_bEqualAB) setAgeA((e_Age)age);
+            setAgeB(age);
+            if(m_bEqualAB) setAgeA(age);
             age = eOld;
         }
         if(existsInA() && getAgeA() == eNotThere)
         {
-            setAgeA((e_Age)age);
+            setAgeA(age);
         }
         if(getAgeA() != eOld && getAgeB() != eOld && getAgeC() != eOld)
         {
@@ -510,7 +566,7 @@ QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi)
     vm.writeEntry("AgeA", (int)mfi.getAgeA());
     vm.writeEntry("AgeB", (int)mfi.getAgeB());
     vm.writeEntry("AgeC", (int)mfi.getAgeC());
-    vm.writeEntry("ConflictingAges", mfi.m_bConflictingAges); // Equal age but files are not!
+    vm.writeEntry("ConflictingAges", mfi.conflictingAges()); // Equal age but files are not!
 
     vm.save(ts);
 

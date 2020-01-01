@@ -140,6 +140,9 @@ class MergeFileInfos
 
     void updateAge();
 
+    void updateParents();
+
+    void updateDirectoryOrLink();
     inline void startSimOp() { m_bSimOpComplete = false; }
     inline bool isSimOpRunning() const { return !m_bOperationComplete; }
     inline void endSimOp() { m_bSimOpComplete = true; }
@@ -147,6 +150,21 @@ class MergeFileInfos
     inline void startOperation() { m_bOperationComplete = false; };
     inline bool isOperationRunning() const { return !m_bOperationComplete; }
     inline void endOperation() { m_bOperationComplete = true; };
+
+    inline bool isThreeWay() const
+    {
+        if(getDirectoryInfo() == nullptr) return false;
+        return getDirectoryInfo()->dirC().isValid();
+    }
+    inline bool existsEveryWhere() const { return existsInA() && existsInB() && (existsInC() || !isThreeWay()); }
+
+    inline int existsCount() const { return (existsInA() ? 1 : 0) + (existsInB() ? 1 : 0) + (existsInC() ? 1 : 0); }
+
+    inline bool onlyInA() const {return existsInA() && !existsInB() && !existsInC();}
+    inline bool onlyInB() const {return !existsInA() && existsInB() && !existsInC();}
+    inline bool onlyInC() const { return !existsInA() && !existsInB() && existsInC(); }
+
+    bool conflictingAges() const { return m_bConflictingAges; }
   private:
     bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status, QSharedPointer<Options> const pOptions);
     inline void setAgeA(const e_Age inAge) { m_ageA = inAge; }
@@ -172,7 +190,6 @@ class MergeFileInfos
 
     bool m_bOperationComplete;
     bool m_bSimOpComplete;
-  public:
 
     bool m_bEqualAB;
     bool m_bEqualAC;
