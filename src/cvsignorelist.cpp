@@ -154,19 +154,18 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
         return true;
     }
 
-    QStringList::ConstIterator it;
-    QStringList::ConstIterator itEnd;
-    for(it = m_startPatterns.begin(), itEnd = m_startPatterns.end(); it != itEnd; ++it)
+
+    for(const QString& startPattern: m_startPatterns)
     {
-        if(text.startsWith(*it))
+        if(text.startsWith(startPattern))
         {
             return true;
         }
     }
 
-    for(it = m_endPatterns.begin(), itEnd = m_endPatterns.end(); it != itEnd; ++it)
+    for(const QString& endPattern: m_endPatterns)
     {
-        if(text.mid(text.length() - it->length()) == *it) //(text.endsWith(*it))
+        if(text.mid(text.length() - endPattern.length()) == endPattern) //(text.endsWith(*it))
         {
             return true;
         }
@@ -184,9 +183,9 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
     }
     */
 
-    for(it = m_generalPatterns.begin(); it != m_generalPatterns.end(); ++it)
+    for(const QString& globStr : m_generalPatterns)
     {
-        QRegExp pattern(*it, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::Wildcard);
+        QRegExp pattern(globStr, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::Wildcard);
         if(pattern.exactMatch(text))
             return true;
     }
@@ -197,9 +196,9 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
 bool CvsIgnoreList::cvsIgnoreExists(const t_DirectoryList* pDirList)
 {
     t_DirectoryList::const_iterator i;
-    for(i = pDirList->begin(); i != pDirList->end(); ++i)
+    for(const FileAccess& dir : *pDirList)
     {
-        if(i->fileName() == ".cvsignore")
+        if(dir.fileName() == ".cvsignore")
             return true;
     }
     return false;
