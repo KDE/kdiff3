@@ -1159,7 +1159,7 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
         if(pMFI == nullptr)
             return;
 
-        bool bThreeDirs = pMFI->getDirectoryInfo()->dirC().isValid();
+        bool bThreeDirs = pMFI->isThreeWay();
         bool bMergeMode = bThreeDirs || !d->m_bSyncMode;
         bool bFTConflict = pMFI == nullptr ? false : pMFI->conflictingFileTypes();
 
@@ -1403,7 +1403,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
     if(pMFI == nullptr)
         return;
 
-    bool bCheckC = pMFI->getDirectoryInfo()->dirC().isValid();
+    bool bCheckC = pMFI->isThreeWay();
     bool bCopyNewer = m_pOptions->m_bDmCopyNewer;
     bool bOtherDest = !((pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirA().absoluteFilePath()) ||
                         (pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirB().absoluteFilePath()) ||
