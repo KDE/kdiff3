@@ -2906,7 +2906,8 @@ void DirectoryMergeWindow::updateFileVisibilities()
             QString fileName = pMFI->fileName();
             bVisible = bVisible && ((bDir && !Utils::wildcardMultiMatch(d->m_pOptions->m_DmDirAntiPattern, fileName, d->m_bCaseSensitive)) || (Utils::wildcardMultiMatch(d->m_pOptions->m_DmFilePattern, fileName, d->m_bCaseSensitive) && !Utils::wildcardMultiMatch(d->m_pOptions->m_DmFileAntiPattern, fileName, d->m_bCaseSensitive)));
 
-            setRowHidden(mi.row(), mi.parent(), !bVisible);
+            if(loop != 0)
+                setRowHidden(mi.row(), mi.parent(), !bVisible);
 
             bool bEqual = bThreeDirs ? pMFI->isEqualAB() && pMFI->isEqualAC() : pMFI->isEqualAB();
             if(!bEqual && bVisible && loop == 0) // Set all parents to "not equal"
