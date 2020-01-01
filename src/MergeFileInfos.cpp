@@ -20,6 +20,8 @@
 
 #include <KLocalizedString>
 
+QSharedPointer<DirectoryInfo> MergeFileInfos::m_dirInfo;
+
 MergeFileInfos::MergeFileInfos()
 {
     m_bEqualAB = false;

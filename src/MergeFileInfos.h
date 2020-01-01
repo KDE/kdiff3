@@ -178,7 +178,7 @@ class MergeFileInfos
     FileAccess* m_pFileInfoB;
     FileAccess* m_pFileInfoC;
 
-    QSharedPointer<DirectoryInfo> m_dirInfo;
+    static QSharedPointer<DirectoryInfo> m_dirInfo;
 
     TotalDiffStatus m_totalDiffStatus;
 
