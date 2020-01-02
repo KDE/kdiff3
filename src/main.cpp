@@ -141,7 +141,7 @@ int main(int argc, char* argv[])
 #endif
     /*
         QCommandLineParser::process does what is expected on windows or when running from a commandline.
-        However, it only accounts for a lackof terminal output on windows.
+        However, it only accounts for a lack of terminal output on windows.
     */
     if(isAtty)
     {
