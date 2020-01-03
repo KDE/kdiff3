@@ -87,7 +87,7 @@ void CvsIgnoreList::addEntriesFromFile(const QString& name)
         QTextStream stream(&file);
         while(!stream.atEnd())
         {
-            addEntriesFromString(stream.readLine());
+            addEntry(stream.readLine());
         }
     }
 }
