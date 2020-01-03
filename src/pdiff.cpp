@@ -176,7 +176,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                 pp.step();
 
                 pp.setInformation(i18n("Linediff: A <-> B"));
-                qCInfo(kdiffMain) << i18n("Linediff: A <-> B") ;
+                qCInfo(kdiffMain) << i18n("Linediff: A <-> B");
                 m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
                 pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay());
                 if(m_sd1->getSizeBytes() == 0) pTotalDiffStatus->bTextAEqB = false;
@@ -194,6 +194,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             if(bLoadFiles)
             {
                 pp.setInformation(i18n("Loading C"));
+                qCInfo(kdiffMain) << i18n("Loading C: %1", m_sd2->getFilename());
+
                 if(bUseCurrentEncoding)
                     errors = m_sd3->readAndPreprocess(m_sd3->getEncoding(), false);
                 else
@@ -210,6 +212,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             pTotalDiffStatus->bBinaryBEqC = m_sd3->isBinaryEqualWith(*m_sd2);
 
             pp.setInformation(i18n("Diff: A <-> B"));
+            qCInfo(kdiffMain) << i18n("Diff: A <-> B");
+
             if(m_sd1->isText() && m_sd2->isText())
             {
                 m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_diffList12, A, B,
@@ -218,7 +222,10 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                 m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
             }
             pp.step();
+
             pp.setInformation(i18n("Diff: A <-> C"));
+            qCInfo(kdiffMain) << i18n("Diff: A <-> C");
+
             if(m_sd1->isText() && m_sd3->isText())
             {
                 m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd3->getLineDataForDiff(), m_sd3->getSizeLines(), m_diffList13, A, C,
@@ -229,7 +236,10 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                 m_diff3LineList.calcDiff3LineListTrim(m_sd1->getLineDataForDiff(), m_sd2->getLineDataForDiff(), m_sd3->getLineDataForDiff(), &m_manualDiffHelpList);
             }
             pp.step();
+
             pp.setInformation(i18n("Diff: B <-> C"));
+            qCInfo(kdiffMain) << i18n("Diff: B <-> C");
+
             if(m_sd2->isText() && m_sd3->isText())
             {
                 m_manualDiffHelpList.runDiff(m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_sd3->getLineDataForDiff(), m_sd3->getSizeLines(), m_diffList23, B, C,
@@ -248,16 +258,21 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), C);
 
             pp.setInformation(i18n("Linediff: A <-> B"));
+            qCInfo(kdiffMain) << i18n("Linediff: A <-> B");
             if(m_sd1->hasData() && m_sd2->hasData() && m_sd1->isText() && m_sd2->isText())
-              pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay());
+                pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay());
             pp.step();
+
             pp.setInformation(i18n("Linediff: B <-> C"));
+            qCInfo(kdiffMain) << i18n("Linediff: B <-> C");
             if(m_sd2->hasData() && m_sd3->hasData() && m_sd2->isText() && m_sd3->isText())
-            pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay());
+                pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay());
             pp.step();
+
             pp.setInformation(i18n("Linediff: A <-> C"));
+            qCInfo(kdiffMain) << i18n("Linediff: A <-> C");
             if(m_sd1->hasData() && m_sd3->hasData() && m_sd1->isText() && m_sd3->isText())
-              pTotalDiffStatus->bTextAEqC = m_diff3LineList.fineDiff(C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay());
+                pTotalDiffStatus->bTextAEqC = m_diff3LineList.fineDiff(C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay());
             m_diff3LineList.debugLineCheck(m_sd2->getSizeLines(), B);
             m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), C);
 
@@ -265,10 +280,12 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             if(m_sd1->hasData() && m_sd2->hasData() && m_sd1->isText() && m_sd2->isText())
                 pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay());
             pp.step();
+            
             pp.setInformation(i18n("Linediff: B <-> C"));
             if(m_sd3->hasData() && m_sd2->hasData() && m_sd3->isText() && m_sd2->isText())
                 pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay());
             pp.step();
+
             pp.setInformation(i18n("Linediff: A <-> C"));
             if(m_sd1->hasData() && m_sd3->hasData() && m_sd1->isText() && m_sd3->isText())
               pTotalDiffStatus->bTextAEqC = m_diff3LineList.fineDiff(C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay());
