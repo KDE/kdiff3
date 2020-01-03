@@ -64,8 +64,9 @@ void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
 
 void CvsIgnoreList::addEntriesFromString(const QString& str)
 {
-    int posLast(0);
-    int pos;
+    QtNumberType posLast = 0;
+    QtNumberType pos;
+    
     while((pos = str.indexOf(' ', posLast)) >= 0)
     {
         if(pos > posLast)
@@ -73,7 +74,7 @@ void CvsIgnoreList::addEntriesFromString(const QString& str)
         posLast = pos + 1;
     }
 
-    if(posLast < static_cast<int>(str.length()))
+    if(posLast < str.length())
         addEntry(str.mid(posLast));
 }
 
