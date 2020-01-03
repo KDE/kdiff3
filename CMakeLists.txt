@@ -88,11 +88,7 @@ set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 set(
     needed_features
-    cxx_nullptr
-    cxx_override
-    cxx_nonstatic_member_init
-    cxx_inheriting_constructors
-    cxx_static_assert
+    cxx_std_11
 )
 
 if(ENABLE_AUTO)
