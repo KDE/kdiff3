@@ -34,30 +34,14 @@ void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
     const bool bUseLocalCvsIgnore = cvsIgnoreExists(pDirList);
     if(bUseLocalCvsIgnore)
     {
-        //TODO: Use QTextStream here.
         FileAccess file(dir);
         file.addPath(".cvsignore");
-        qint64 size = file.sizeForReading();
-        if(size > 0)
+        if(file.exists() && file.isLocal())
+            addEntriesFromFile(file.absoluteFilePath());
+        else
         {
-            char* buf = new char[size];
-            if(buf != nullptr)
-            {
-                file.readFile(buf, size);
-                qint64 pos1 = 0;
-                for(qint64 pos = 0; pos <= size; ++pos)
-                {
-                    if(pos == size || buf[pos] == ' ' || buf[pos] == '\t' || buf[pos] == '\n' || buf[pos] == '\r')
-                    {
-                        if(pos > pos1 && pos - pos1 <= TYPE_MAX(QtNumberType))
-                        {
-                            addEntry(QString::fromLatin1(&buf[pos1], (QtNumberType)(pos - pos1)));
-                        }
-                        ++pos1;
-                    }
-                }
-                delete[] buf;
-            }
+            file.createLocalCopy();
+            addEntriesFromFile(file.getTempName());
         }
     }
 }
