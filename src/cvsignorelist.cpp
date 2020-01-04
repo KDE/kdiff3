@@ -180,7 +180,6 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
 
 bool CvsIgnoreList::cvsIgnoreExists(const t_DirectoryList* pDirList)
 {
-    t_DirectoryList::const_iterator i;
     for(const FileAccess& dir : *pDirList)
     {
         if(dir.fileName() == ".cvsignore")
