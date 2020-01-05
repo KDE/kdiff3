@@ -19,12 +19,12 @@
 
 void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
 {
-    static const char* ignorestr = ". .. core RCSLOG tags TAGS RCS SCCS .make.state "
+    static const QString ignorestr = QString::fromLatin1(". .. core RCSLOG tags TAGS RCS SCCS .make.state "
                                    ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
-                                   "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$";
+                                   "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$");
     static const char* varname = "CVSIGNORE";
 
-    addEntriesFromString(QString::fromLatin1(ignorestr));
+    addEntriesFromString(ignorestr);
     addEntriesFromFile(QDir::homePath() + "/.cvsignore");
     if(qEnvironmentVariableIsSet(varname) && !qEnvironmentVariableIsEmpty(varname))
     {
@@ -48,18 +48,11 @@ void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
 
 void CvsIgnoreList::addEntriesFromString(const QString& str)
 {
-    QtNumberType posLast = 0;
-    QtNumberType pos;
-    
-    while((pos = str.indexOf(' ', posLast)) >= 0)
+    QStringList patternList = str.split(' ');
+    for(const QString& pattern : patternList)
     {
-        if(pos > posLast)
-            addEntry(str.mid(posLast, pos - posLast));
-        posLast = pos + 1;
+        addEntry(pattern);
     }
-
-    if(posLast < str.length())
-        addEntry(str.mid(posLast));
 }
 
 /*
