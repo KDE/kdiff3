@@ -19,12 +19,12 @@
 
 void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
 {
-    static const QString ignorestr = QString::fromLatin1(". .. core RCSLOG tags TAGS RCS SCCS .make.state "
-                                   ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
-                                   "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$");
+    static const QStringList ignorestr = QStringList{".", ".. core", "RCSLOG", "tags", "TAGS", "RCS", "SCCS", ".make.state",
+                                   ".nse_depinfo", "#* .#* cvslog.*", ",* CVS", "CVS.adm", ".del-*", "*.a", "*.olb", "*.o", "*.obj",
+                                   "*.so", "*.Z", "*~ *.old", "*.elc *.ln", "*.bak", "*.BAK", "*.orig", "*.rej", "*.exe", "_$*", "*$"};
     static const char* varname = "CVSIGNORE";
 
-    addEntriesFromString(ignorestr);
+    addEntriesFromList(ignorestr);
     addEntriesFromFile(QDir::homePath() + "/.cvsignore");
     if(qEnvironmentVariableIsSet(varname) && !qEnvironmentVariableIsEmpty(varname))
     {
@@ -43,6 +43,14 @@ void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
             file.createLocalCopy();
             addEntriesFromFile(file.getTempName());
         }
+    }
+}
+
+void CvsIgnoreList::addEntriesFromList(const QStringList& patternList)
+{
+    for(const QString& pattern : patternList)
+    {
+        addEntry(pattern);
     }
 }
 
