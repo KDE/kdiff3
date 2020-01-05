@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * Copyright (C) 2019 Michael Reeves <reeves.87@gmail.com>
  *
