@@ -20,8 +20,8 @@
 #include "MocIgnoreFile.h"
 #endif
 
-#include <QStringList>
 #include <QString>
+#include <QStringList>
 
 class CvsIgnoreList
 {
@@ -34,7 +34,6 @@ class CvsIgnoreList
     friend class CvsIgnoreListTest;
     bool cvsIgnoreExists(const t_DirectoryList* pDirList);
 
-    void addEntriesFromList(const QStringList& patternList);
     void addEntriesFromString(const QString& str);
     void addEntriesFromFile(const QString& name);
     void addEntry(const QString& pattern);

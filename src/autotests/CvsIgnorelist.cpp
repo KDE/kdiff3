@@ -18,11 +18,15 @@
  */
 
 #include <QTest>
+#include <qglobal.h>
 
 #include "../cvsignorelist.h"
 
 class CvsIgnoreListTest : public QObject
 {
+    const QString defaultPatterns = QString::fromLatin1(". .. core RCSLOG tags TAGS RCS SCCS .make.state "
+                                                          ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
+                                                          "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$");
     Q_OBJECT
   private Q_SLOTS:
     void init()
@@ -35,16 +39,44 @@ class CvsIgnoreListTest : public QObject
         QVERIFY(test.m_startPatterns.isEmpty());
     }
 
+
     void addEntriesFromString()
     {
         CvsIgnoreList test;
-        QStringList expected;
+        CvsIgnoreList expected;
 
-        test.addEntriesFromString(". .. core RCSLOG tags TAGS RCS SCCS .make.state");
-        expected = QStringList{".", "..", "core", "RCSLOG", "tags", "TAGS", "RCS", "SCCS", ".make.state"};
+        QString testString = ". .. core RCSLOG tags TAGS RCS SCCS .make.state";
+        test.addEntriesFromString(testString);
         QVERIFY(!test.m_exactPatterns.isEmpty());
-        QVERIFY(test.m_exactPatterns == expected);
+        QVERIFY(test.m_exactPatterns == testString.split(' '));
         
+        expected = test = CvsIgnoreList();
+    }
+
+    void testDefaults()
+    {
+        CvsIgnoreList test;
+        CvsIgnoreList expected;
+        MocIgnoreFile file;
+        t_DirectoryList dirList;
+
+        /*
+            Verify default init. For this to work we must:
+                1. Unset CVSIGNORE
+                2. Insure no patterns are read from a .cvsignore file.
+            MocCvsIgnore emulates a blank cvs file by default insuring the second condition.
+        */
+        test = CvsIgnoreList();
+        //
+        qunsetenv("CVSIGNORE");
+
+        expected.addEntriesFromString(defaultPatterns);
+        
+        test.init(file, &dirList);
+        QVERIFY(test.m_endPatterns == expected.m_endPatterns);
+        QVERIFY(test.m_exactPatterns == expected.m_exactPatterns);
+        QVERIFY(test.m_startPatterns == expected.m_startPatterns);
+        QVERIFY(test.m_generalPatterns == expected.m_generalPatterns);
     }
 
 };
