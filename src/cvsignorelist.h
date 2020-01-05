@@ -14,7 +14,14 @@
 #ifndef CVSIGNORELIST_H
 #define CVSIGNORELIST_H
 
+#ifndef AUTOTEST
 #include "fileaccess.h"
+#else
+#include "MocIgnoreFile.h"
+#endif
+
+#include <QStringList>
+#include <QString>
 
 class CvsIgnoreList
 {
@@ -24,6 +31,7 @@ class CvsIgnoreList
     bool matches(const QString& text, bool bCaseSensitive) const;
 
   private:
+    friend class CvsIgnoreListTest;
     bool cvsIgnoreExists(const t_DirectoryList* pDirList);
 
     void addEntriesFromString(const QString& str);

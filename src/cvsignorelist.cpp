@@ -62,8 +62,14 @@ void CvsIgnoreList::addEntriesFromString(const QString& str)
         addEntry(str.mid(posLast));
 }
 
+/*
+    MocIgnoreFile is incapatiable with addEntriesFromFile so do nothing in AUTORUN mode
+*/
 void CvsIgnoreList::addEntriesFromFile(const QString& name)
 {
+    #ifdef AUTORUN
+    Q_UNUSED(name)
+    #else
     QFile file(name);
 
     if(file.open(QIODevice::ReadOnly))
@@ -74,6 +80,7 @@ void CvsIgnoreList::addEntriesFromFile(const QString& name)
             addEntry(stream.readLine());
         }
     }
+    #endif
 }
 
 void CvsIgnoreList::addEntry(const QString& pattern)
