@@ -22,7 +22,7 @@ void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
     static const QStringList ignorestr = QStringList{".", ".. core", "RCSLOG", "tags", "TAGS", "RCS", "SCCS", ".make.state",
                                    ".nse_depinfo", "#* .#* cvslog.*", ",* CVS", "CVS.adm", ".del-*", "*.a", "*.olb", "*.o", "*.obj",
                                    "*.so", "*.Z", "*~ *.old", "*.elc *.ln", "*.bak", "*.BAK", "*.orig", "*.rej", "*.exe", "_$*", "*$"};
-    static const char* varname = "CVSIGNORE";
+    constexpr char varname[] = "CVSIGNORE";
 
     addEntriesFromList(ignorestr);
     addEntriesFromFile(QDir::homePath() + "/.cvsignore");
