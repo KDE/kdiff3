@@ -1176,22 +1176,15 @@ void MergeResultWindow::slotUnsolve()
 static QString calcHistoryLead(const QString& s)
 {
     // Return the start of the line until the first white char after the first non white char.
-    int i;
-    for(i = 0; i < s.length(); ++i)
-    {
-        if(s[i] != ' ' && s[i] != '\t')
-        {
-            for(; i < s.length(); ++i)
-            {
-                if(s[i] == ' ' || s[i] == '\t')
-                {
-                    return s.left(i);
-                }
-            }
-            return s; // Very unlikely
-        }
-    }
-    return QString(); // Must be an empty string, not a null string.
+    int i = s.indexOf(QRegularExpression("\\S"));
+    if(i == -1)
+        return QString("");
+    
+    i = s.indexOf(QRegularExpression("\\s"), i);
+    if(Q_UNLIKELY(i == -1))
+        return s;// Very unlikely
+    
+    return s.left(i);
 }
 
 static void findHistoryRange(const QRegExp& historyStart, bool bThreeFiles, const Diff3LineList* pD3LList,
