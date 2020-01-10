@@ -26,8 +26,8 @@
 class CvsIgnoreListTest : public QObject
 {
     const QString defaultPatterns = QString::fromLatin1(". .. core RCSLOG tags TAGS RCS SCCS .make.state "
-                                                          ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
-                                                          "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$");
+                                                        ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
+                                                        "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$");
     Q_OBJECT
   private Q_SLOTS:
     void init()
@@ -40,7 +40,6 @@ class CvsIgnoreListTest : public QObject
         QVERIFY(test.m_startPatterns.isEmpty());
     }
 
-
     void addEntriesFromString()
     {
         CvsIgnoreList test;
@@ -50,7 +49,7 @@ class CvsIgnoreListTest : public QObject
         test.addEntriesFromString(testString);
         QVERIFY(!test.m_exactPatterns.isEmpty());
         QVERIFY(test.m_exactPatterns == testString.split(' '));
-        
+
         expected = test = CvsIgnoreList();
     }
 
@@ -72,14 +71,13 @@ class CvsIgnoreListTest : public QObject
         qunsetenv("CVSIGNORE");
 
         expected.addEntriesFromString(defaultPatterns);
-        
+
         test.init(file, &dirList);
         QVERIFY(test.m_endPatterns == expected.m_endPatterns);
         QVERIFY(test.m_exactPatterns == expected.m_exactPatterns);
         QVERIFY(test.m_startPatterns == expected.m_startPatterns);
         QVERIFY(test.m_generalPatterns == expected.m_generalPatterns);
     }
-
 };
 
 QTEST_MAIN(CvsIgnoreListTest);
