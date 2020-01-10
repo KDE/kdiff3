@@ -1578,3 +1578,33 @@ void Diff3LineList::debugLineCheck(const LineCount size, const e_SrcSelector src
         ::exit(-1);
     }
 }
+
+void Diff3LineList::findHistoryRange(const QRegExp& historyStart, bool bThreeFiles,
+                             Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd) const
+{
+    QString historyLead;
+    // Search for start of history
+    for(iBegin = begin(), idxBegin = 0; iBegin != end(); ++iBegin, ++idxBegin)
+    {
+        if(historyStart.exactMatch(iBegin->getString(A)) &&
+           historyStart.exactMatch(iBegin->getString(B)) &&
+           (!bThreeFiles || historyStart.exactMatch(iBegin->getString(C))))
+        {
+            historyLead = Utils::calcHistoryLead(iBegin->getString(A));
+            break;
+        }
+    }
+    // Search for end of history
+    for(iEnd = iBegin, idxEnd = idxBegin; iEnd != end(); ++iEnd, ++idxEnd)
+    {
+        QString sA = iEnd->getString(A);
+        QString sB = iEnd->getString(B);
+        QString sC = iEnd->getString(C);
+        if(!((sA.isEmpty() || historyLead == Utils::calcHistoryLead(sA)) &&
+             (sB.isEmpty() || historyLead == Utils::calcHistoryLead(sB)) &&
+             (!bThreeFiles || sC.isEmpty() || historyLead == Utils::calcHistoryLead(sC))))
+        {
+            break; // End of the history
+        }
+    }
+}

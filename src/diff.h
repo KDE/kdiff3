@@ -311,6 +311,8 @@ class Diff3Line
 class Diff3LineList : public std::list<Diff3Line>
 {
   public:
+    void findHistoryRange(const QRegExp& historyStart, bool bThreeFiles,
+                             Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd) const;
     bool fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2);
     void calcDiff3LineVector(Diff3LineVector& d3lv);
     void calcWhiteDiff3Lines(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC);

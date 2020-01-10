@@ -26,6 +26,7 @@
 #include <QStringList>
 #include <QHash>
 #include <QRegExp>
+#include <QRegularExpression>
 
 /* Split the command line into arguments.
  * Normally split at white space separators except when quoting with " or '.
@@ -156,4 +157,18 @@ void Utils::calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2
         while(pos2 < (int)s.length() && isCTokenChar(s[pos2]))
             ++pos2;
     }
+}
+
+QString Utils::calcHistoryLead(const QString& s)
+{
+    // Return the start of the line until the first white char after the first non white char.
+    int i = s.indexOf(QRegularExpression("\\S"));
+    if(i == -1)
+        return QString("");
+    
+    i = s.indexOf(QRegularExpression("\\s"), i);
+    if(Q_UNLIKELY(i == -1))
+        return s;// Very unlikely
+    
+    return s.left(i);
 }

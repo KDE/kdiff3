@@ -1173,50 +1173,6 @@ void MergeResultWindow::slotUnsolve()
     showUnsolvedConflictsStatusMessage();
 }
 
-static QString calcHistoryLead(const QString& s)
-{
-    // Return the start of the line until the first white char after the first non white char.
-    int i = s.indexOf(QRegularExpression("\\S"));
-    if(i == -1)
-        return QString("");
-    
-    i = s.indexOf(QRegularExpression("\\s"), i);
-    if(Q_UNLIKELY(i == -1))
-        return s;// Very unlikely
-    
-    return s.left(i);
-}
-
-static void findHistoryRange(const QRegExp& historyStart, bool bThreeFiles, const Diff3LineList* pD3LList,
-                             Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd)
-{
-    QString historyLead;
-    // Search for start of history
-    for(iBegin = pD3LList->begin(), idxBegin = 0; iBegin != pD3LList->end(); ++iBegin, ++idxBegin)
-    {
-        if(historyStart.exactMatch(iBegin->getString(A)) &&
-           historyStart.exactMatch(iBegin->getString(B)) &&
-           (!bThreeFiles || historyStart.exactMatch(iBegin->getString(C))))
-        {
-            historyLead = calcHistoryLead(iBegin->getString(A));
-            break;
-        }
-    }
-    // Search for end of history
-    for(iEnd = iBegin, idxEnd = idxBegin; iEnd != pD3LList->end(); ++iEnd, ++idxEnd)
-    {
-        QString sA = iEnd->getString(A);
-        QString sB = iEnd->getString(B);
-        QString sC = iEnd->getString(C);
-        if(!((sA.isEmpty() || historyLead == calcHistoryLead(sA)) &&
-             (sB.isEmpty() || historyLead == calcHistoryLead(sB)) &&
-             (!bThreeFiles || sC.isEmpty() || historyLead == calcHistoryLead(sC))))
-        {
-            break; // End of the history
-        }
-    }
-}
-
 bool findParenthesesGroups(const QString& s, QStringList& sl)
 {
     sl.clear();
@@ -1309,7 +1265,7 @@ void MergeResultWindow::collectHistoryInformation(
     {
         const LineData* pld = id3l->getLineData(src);
 
-        historyLead = calcHistoryLead(pld->getLine());
+        historyLead = Utils::calcHistoryLead(pld->getLine());
     }
     QRegExp historyStart(m_pOptions->m_historyStartRegExp);
     if(id3l == iHistoryEnd)
@@ -1328,7 +1284,7 @@ void MergeResultWindow::collectHistoryInformation(
         if(!pld) continue;
 
         const QString& oriLine = pld->getLine();
-        if(historyLead.isEmpty()) historyLead = calcHistoryLead(oriLine);
+        if(historyLead.isEmpty()) historyLead = Utils::calcHistoryLead(oriLine);
         QString sLine = oriLine.mid(historyLead.length());
         if((!bUseRegExp && !sLine.trimmed().isEmpty() && bPrevLineIsEmpty) || (bUseRegExp && newHistoryEntry.exactMatch(sLine)))
         {
@@ -1434,7 +1390,7 @@ void MergeResultWindow::slotMergeHistory()
     int d3lHistoryEndLineIdx = -1;
 
     // Search for history start, history end in the diff3LineList
-    findHistoryRange(QRegExp(m_pOptions->m_historyStartRegExp), m_pldC != nullptr, m_pDiff3LineList, iD3LHistoryBegin, iD3LHistoryEnd, d3lHistoryBeginLineIdx, d3lHistoryEndLineIdx);
+    m_pDiff3LineList->findHistoryRange(QRegExp(m_pOptions->m_historyStartRegExp), m_pldC != nullptr, iD3LHistoryBegin, iD3LHistoryEnd, d3lHistoryBeginLineIdx, d3lHistoryEndLineIdx);
 
     if(iD3LHistoryBegin != m_pDiff3LineList->end())
     {
@@ -1506,7 +1462,7 @@ void MergeResultWindow::slotMergeHistory()
         iMLLStart->mergeEditLineList.clear();
         // Now insert the complete history into the first MergeLine of the history
         iMLLStart->mergeEditLineList.push_back(MergeEditLine(iD3LHistoryBegin, m_pldC == nullptr ? B : C));
-        QString lead = calcHistoryLead(iD3LHistoryBegin->getString(A));
+        QString lead = Utils::calcHistoryLead(iD3LHistoryBegin->getString(A));
         MergeEditLine mel(m_pDiff3LineList->end());
         mel.setString(lead);
         iMLLStart->mergeEditLineList.push_back(mel);
