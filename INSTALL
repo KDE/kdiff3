@@ -1,6 +1,6 @@
 Building KDiff3 requires the fallowing minimium versions:
  1)Qt 5.6 or later
- 2)KF5 5.14+
+ 2)KF5 5.27+
  3)CMake 3.1
  4)ECM 1.8
  Support compilers:
@@ -33,7 +33,7 @@ Run the fallowing.
 1)Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 2)iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/KDE/craft/master/setup/install_craft.ps1'))
 
-You may also have exempt your craft directory from virus scans as these can interefer with the build process.
+You may also have to exempt your craft directory from virus scans as these can interefer with the build process.
 
 1)cd to your craft root
 Run:
@@ -49,9 +49,9 @@ If you want to create an install package you would run:
 
 6)craft --package kdiff3
 
-This will be a time consuming process on first run as craft will have download all dependencies.
+This will be a time consuming process on first run as craft will have to download all dependencies.
 KDiff3 does not require special configuration for craft. 
 
 There should be an installer package generated in CraftRoot/tmp
 
-Please contact kde-windows@kde.org before file a bug report regarding this process.
+Please contact kde-windows@kde.org before filing a bug report regarding this process.
