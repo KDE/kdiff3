@@ -3,17 +3,19 @@ KDiff3-Readme
 
 Author: Joachim Eibl  (joachim.eibl at gmx.de)
 Port to KF5/Qt5 by Michael Reeves (reeves.87@gmail.com)
-KDiff3-Version: 1.8
+KDiff3-Version: 1.8.2
 
-Now requires Qt 5.6 or later and KF5 5.14+. Legacy 0.9.98 and earlier builds are not supported.
+Now requires Qt 5.6 or later and KF5 5.27+. Legacy 0.9.98 and earlier builds are not supported.
 MacOSX build is untested since port. The Konqueror specific plugin is not ported and no longer maintained.
-This plugin would only apply to KDE before 4.6. Support as been removed from main CMakeLists.txt.
-As of 1/13/17 cmake 3.1+ is the targeted cmake version.
-
+This plugin would only apply to KDE before 4.6. As of 1/13/17 cmake 3.1+ is the targeted cmake version.
 
 cmake is now the only build system supported. KF5/Qt5 was big jump. A lot changed besides just the API.
 I am not against a Qt5-only build variant but see no reason to maintain two separate build systems.
 At present KF5 is my focus.
+
+The current reprository is at https://invent.kde.org/kde/kdiff3
+
+Bugs can be reported at https://bugs.kde.org
 
 The original pre KF5/Qt5 Readme follows old build instructions have been removed to avoid confusion:
 

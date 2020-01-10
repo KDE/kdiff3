@@ -40,6 +40,11 @@ Run:
 2)C:\CraftRoot\craft\craftenv.ps1
 3)craft png2ico
 4)craft kdiff3
+If you what to build 1.8x than use:
+4) craft --target 1.8 kdiff3
+
+Otherwise craft will use master which is the developement branch and therefor more likely to experiance breakage.
+
 At this point you can run kdiff3 itself via the following:
 cb kdiff3
 bin/kdiff3
@@ -47,7 +52,7 @@ bin/kdiff3
 If you want to create an install package you would run:
 5)craft nsis
 
-6)craft --package kdiff3
+6)craft --package kdiff3 or craft --target 1.8 --package kdiff3
 
 This will be a time consuming process on first run as craft will have to download all dependencies.
 KDiff3 does not require special configuration for craft. 
