@@ -17,6 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with KDiff3.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef MOCIGNOREFILE_H
+#define MOCIGNOREFILE_H
 
 #include <QString>
 
@@ -51,3 +53,5 @@ class MocIgnoreFile
     QString mPath = "/test/ui/.cvsignore";
     bool mLocal = true, mExists = true;
 };
+
+#endif
