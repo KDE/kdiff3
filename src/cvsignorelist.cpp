@@ -135,7 +135,8 @@ void CvsIgnoreList::addEntry(const QString& pattern)
 
 bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
 {
-    if(m_exactPatterns.indexOf(text) >= 0)
+    QRegExp regexp(text, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
+    if(m_exactPatterns.indexOf(regexp) >= 0)
     {
         return true;
     }
@@ -143,7 +144,7 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
 
     for(const QString& startPattern: m_startPatterns)
     {
-        if(text.startsWith(startPattern))
+        if(text.startsWith(startPattern, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive))
         {
             return true;
         }
@@ -151,24 +152,11 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
 
     for(const QString& endPattern: m_endPatterns)
     {
-        if(text.mid(text.length() - endPattern.length()) == endPattern) //(text.endsWith(*it))
-        {
-            Q_ASSERT(text.endsWith(endPattern));
-            return true;
-        }
-    }
-
-    /*
-    for (QValueList<QCString>::const_iterator it(m_generalPatterns.begin()),
-                                              itEnd(m_generalPatterns.end());
-         it != itEnd; ++it)
-    {
-        if (::fnmatch(*it, text.local8Bit(), FNM_PATHNAME) == 0)
+        if(text.endsWith(endPattern, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive))
         {
             return true;
         }
     }
-    */
 
     for(const QString& globStr : m_generalPatterns)
     {

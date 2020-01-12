@@ -43,14 +43,27 @@ class CvsIgnoreListTest : public QObject
     void addEntriesFromString()
     {
         CvsIgnoreList test;
-        CvsIgnoreList expected;
 
         QString testString = ". .. core RCSLOG tags TAGS RCS SCCS .make.state";
         test.addEntriesFromString(testString);
         QVERIFY(!test.m_exactPatterns.isEmpty());
         QVERIFY(test.m_exactPatterns == testString.split(' '));
+    }
+    
+    void matches()
+    {
+        CvsIgnoreList test;
 
-        expected = test = CvsIgnoreList();
+        QString testString = ". .. core RCSLOG tags TAGS RCS SCCS .make.state";
+        test.addEntriesFromString(testString);
+
+        QVERIFY(test.matches(".", false));
+        QVERIFY(!test.matches("cores core", true));
+        QVERIFY(test.matches("core", true));
+        QVERIFY(!test.matches("Core", true));
+        QVERIFY(test.matches("Core", false));
+        QVERIFY(!test.matches("a", false));
+        QVERIFY(test.matches("core", false));
     }
 
     void testDefaults()
