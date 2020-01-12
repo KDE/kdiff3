@@ -15,6 +15,7 @@
 
 #include <QDir>
 #include <QTextStream>
+#include <qregexp.h>
 
 void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
 {
@@ -147,7 +148,12 @@ void CvsIgnoreList::addEntry(const QString& pattern)
 
 bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
 {
-    if(m_exactPatterns.indexOf(text) >= 0)
+    /*
+        Don't let the compilier create a temporary QRegExp explictly create one to prevent a possiable crash
+        QString::indexOf and therefor QStringList::indexOf may modify the QRegExp passed to it. 
+    */
+    QRegExp regexp(text, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
+    if(m_exactPatterns.indexOf(regexp) >= 0)
     {
         return true;
     }
@@ -156,7 +162,7 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
     QStringList::ConstIterator itEnd;
     for(it = m_startPatterns.begin(), itEnd = m_startPatterns.end(); it != itEnd; ++it)
     {
-        if(text.startsWith(*it))
+        if(text.startsWith(*it, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive))
         {
             return true;
         }
@@ -164,7 +170,7 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
 
     for(it = m_endPatterns.begin(), itEnd = m_endPatterns.end(); it != itEnd; ++it)
     {
-        if(text.mid(text.length() - (*it).length()) == *it) //(text.endsWith(*it))
+        if(text.mid(text.length() - (*it).length()).compare(*it, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive) == 0) //(text.endsWith(*it))
         {
             return true;
         }
