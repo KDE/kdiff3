@@ -503,13 +503,6 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
 
 void calcDiff(const QString &line1, const QString &line2, DiffList& diffList, int match, int maxSearchRange);
 
-
-bool fineDiff(
-    Diff3LineList& diff3LineList,
-    int selector,
-    const QVector<LineData>* v1,
-    const QVector<LineData>* v2);
-
 inline bool isWhite(QChar c)
 {
     return c == ' ' || c == '\t' || c == '\r';
