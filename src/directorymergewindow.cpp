@@ -870,7 +870,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     m_bScanning = true;
     Q_EMIT mWindow->statusBarMessage(i18n("Scanning directories..."));
 
-    m_bSyncMode = m_pOptions->m_bDmSyncMode && !dirC.isValid() && !dirDest.isValid();
+    m_bSyncMode = m_pOptions->m_bDmSyncMode && dirInfo->allowSyncMode();
 
     m_fileMergeMap.clear();
     s_eCaseSensitivity = m_bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;

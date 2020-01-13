@@ -49,6 +49,8 @@ class DirectoryInfo
               return m_dirC.isValid() ? m_dirC : m_dirB;
       }
 
+      inline bool allowSyncMode() { return !m_dirC.isValid() && !m_dirDest.isValid(); }
+
       inline bool listDirA(const Options& options)
       {
           return m_dirA.listDir(&m_dirListA,
