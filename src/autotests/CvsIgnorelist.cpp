@@ -54,7 +54,7 @@ class CvsIgnoreListTest : public QObject
     {
         CvsIgnoreList test;
 
-        QString testString = ". .. core RCSLOG tags TAGS RCS SCCS .make.state";
+        QString testString = ". .. core RCSLOG tags TAGS RCS SCCS .make.state *.so _$*";
         test.addEntriesFromString(testString);
 
         QVERIFY(test.matches(".", false));
@@ -64,6 +64,32 @@ class CvsIgnoreListTest : public QObject
         QVERIFY(test.matches("Core", false));
         QVERIFY(!test.matches("a", false));
         QVERIFY(test.matches("core", false));
+        //ends with .so
+        QVERIFY(test.matches("sdf3.so", true));
+        QVERIFY(!test.matches("sdf3.to", true));
+        QVERIFY(test.matches("*.so", true));
+        QVERIFY(test.matches("sdf4.So", false));
+        QVERIFY(!test.matches("sdf4.So", true));
+        //starts with _$ddsf
+        QVERIFY(test.matches("_$ddsf", true));
+        //Should only match exact strings not partial ones
+        QVERIFY(!test.matches("sdf4.so ", true));
+        QVERIFY(!test.matches(" _$ddsf", true));
+
+        testString = "*.*";
+        test = CvsIgnoreList();
+        test.addEntriesFromString("*.*");
+
+        QVERIFY(test.matches("k.K", false));
+        QVERIFY(test.matches("*.K", false));
+        QVERIFY(test.matches("*.*", false));
+        QVERIFY(!test.matches("*+*", false));
+        QVERIFY(!test.matches("asd", false));
+        //The fallowing are matched by the above
+        QVERIFY(test.matches("a k.k", false));
+        QVERIFY(test.matches("k.k v", false));
+        QVERIFY(test.matches(" k.k", false));
+        QVERIFY(test.matches("k.k ", false));
     }
 
     void testDefaults()
