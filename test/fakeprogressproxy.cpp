@@ -28,35 +28,35 @@ ProgressProxy::~ProgressProxy()
 void ProgressProxy::setInformation( const QString& info, bool bRedrawUpdate )
 {
   /* Suppress warning about unused parameters */
-  (void)info;
-  (void)bRedrawUpdate;
+  Q_UNUSED(info);
+  Q_UNUSED(bRedrawUpdate);
 }
 
 void ProgressProxy::setInformation( const QString& info, int current, bool bRedrawUpdate )
 {
   /* Suppress warning about unused parameters */
-  (void)info;
-  (void)current;
-  (void)bRedrawUpdate;
+  Q_UNUSED(info);
+  Q_UNUSED(current);
+  Q_UNUSED(bRedrawUpdate);
 }
 
 void ProgressProxy::setCurrent( qint64 current, bool bRedrawUpdate )
 {
   /* Suppress warning about unused parameters */
-  (void)current;
-  (void)bRedrawUpdate;
+  Q_UNUSED(current);
+  Q_UNUSED(bRedrawUpdate);
 }
 
 void ProgressProxy::step( bool bRedrawUpdate )
 {
   /* Suppress warning about unused parameters */
-  (void)bRedrawUpdate;
+  Q_UNUSED(bRedrawUpdate);
 }
 
 void ProgressProxy::setMaxNofSteps( qint64 dMaxNofSteps )
 {
   /* Suppress warning about unused parameters */
-  (void)dMaxNofSteps;
+  Q_UNUSED(dMaxNofSteps);
 }
 
 
@@ -69,8 +69,8 @@ bool ProgressProxy::wasCancelled()
 void ProgressProxy::enterEventLoop( KJob* pJob, const QString& jobInfo )
 {
   /* Suppress warning about unused parameters */
-  (void)pJob;
-  (void)jobInfo;
+  Q_UNUSED(pJob);
+  Q_UNUSED(jobInfo);
 }
 
 void ProgressProxy::exitEventLoop()
@@ -80,7 +80,7 @@ void ProgressProxy::exitEventLoop()
 void ProgressDialog::recalc(bool bUpdate)
 {
   /* Suppress warning about unused parameters */
-  (void)bUpdate;
+  Q_UNUSED(bUpdate);
 }
 
 QDialog *ProgressProxy::getDialog()

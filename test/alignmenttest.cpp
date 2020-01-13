@@ -15,7 +15,7 @@
 #define i18n(s) s
 
 bool verbose = false;
-Options *m_pOptions = NULL;
+QSharedPointer<Options> m_pOptions;
 ManualDiffHelpList m_manualDiffHelpList;
 
 bool g_bIgnoreWhiteSpace = true;
@@ -32,7 +32,7 @@ void printDiffList(const QString caption, const DiffList &diffList)
 
    for(i = diffList.begin(); i != diffList.end(); i++)
    {
-      out << "  " << i->nofEquals << "," << i->diff1 << "," << i->diff2 << endl;
+      out << "  " << i->numberOfEquals() << "," << i->diff1() << "," << i->diff2() << endl;
    }
 }
 
@@ -56,8 +56,8 @@ void printDiff3List(const Diff3LineList &diff3LineList,
 
       if(d3l.getLineA().isValid())
       {
-         const LineData *pLineData = &sd1.getLineDataForDiff()[d3l.getLineA()];
-         lineAText = QString(pLineData->getLine(), pLineData->size());
+         const LineData *pLineData = &sd1.getLineDataForDiff()->at(d3l.getLineA());
+         lineAText = pLineData->getLine();
          lineAText.replace(QString("\r"), QString("\\r"));
          lineAText.replace(QString("\n"), QString("\\n"));
          lineAText = QString("%1 %2").arg(d3l.getLineA(), linenumsize).arg(lineAText.left(columnsize - linenumsize - 1));
@@ -65,8 +65,8 @@ void printDiff3List(const Diff3LineList &diff3LineList,
 
       if(d3l.getLineB().isValid())
       {
-         const LineData *pLineData = &sd2.getLineDataForDiff()[d3l.getLineB()];
-         lineBText = QString(pLineData->getLine(), pLineData->size());
+         const LineData *pLineData = &sd2.getLineDataForDiff()->at(d3l.getLineB());
+         lineBText = pLineData->getLine();
          lineBText.replace(QString("\r"), QString("\\r"));
          lineBText.replace(QString("\n"), QString("\\n"));
          lineBText = QString("%1 %2").arg(d3l.getLineB(), linenumsize).arg(lineBText.left(columnsize - linenumsize - 1));
@@ -74,8 +74,8 @@ void printDiff3List(const Diff3LineList &diff3LineList,
 
       if(d3l.getLineC().isValid())
       {
-         const LineData *pLineData = &sd3.getLineDataForDiff()[d3l.getLineC()];
-         lineCText = QString(pLineData->getLine(), pLineData->size());
+         const LineData *pLineData = &sd3.getLineDataForDiff()->at(d3l.getLineC());
+         lineCText = pLineData->getLine();
          lineCText.replace(QString("\r"), QString("\\r"));
          lineCText.replace(QString("\n"), QString("\\n"));
          lineCText = QString("%1 %2").arg(d3l.getLineC(), linenumsize).arg(lineCText.left(columnsize - linenumsize - 1));
@@ -118,8 +118,8 @@ void determineFileAlignment(SourceData &m_sd1, SourceData &m_sd2, SourceData &m_
    {
       m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12,A,B,
                m_pOptions);
-      calcDiff3LineListUsingAB( &m_diffList12, m_diff3LineList );
-      fineDiff( m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
+      m_diff3LineList.calcDiff3LineListUsingAB( &m_diffList12);
+      m_diff3LineList.fineDiff(A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
    }
    else
    {
@@ -134,36 +134,36 @@ void determineFileAlignment(SourceData &m_sd1, SourceData &m_sd2, SourceData &m_
          printDiffList("m_diffList13", m_diffList13);
       }
 
-      calcDiff3LineListUsingAB( &m_diffList12, m_diff3LineList );
+      m_diff3LineList.calcDiff3LineListUsingAB( &m_diffList12);
       if (verbose) printDiff3List("after calcDiff3LineListUsingAB", m_diff3LineList, m_sd1, m_sd2, m_sd3);
 
-      calcDiff3LineListUsingAC( &m_diffList13, m_diff3LineList );
+      m_diff3LineList.calcDiff3LineListUsingAC( &m_diffList13);
       if (verbose) printDiff3List("after calcDiff3LineListUsingAC", m_diff3LineList, m_sd1, m_sd2, m_sd3);
 
-      correctManualDiffAlignment( m_diff3LineList, &m_manualDiffHelpList );
-      calcDiff3LineListTrim( m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList );
+      m_diff3LineList.correctManualDiffAlignment(&m_manualDiffHelpList );
+      m_diff3LineList.calcDiff3LineListTrim(m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList );
       if (verbose) printDiff3List("after 1st calcDiff3LineListTrim", m_diff3LineList, m_sd1, m_sd2, m_sd3);
 
       if ( m_pOptions->m_bDiff3AlignBC )
       {
-         calcDiff3LineListUsingBC( &m_diffList23, m_diff3LineList );
+         m_diff3LineList.calcDiff3LineListUsingBC( &m_diffList23);
          if (verbose) printDiff3List("after calcDiff3LineListUsingBC", m_diff3LineList, m_sd1, m_sd2, m_sd3);
-         correctManualDiffAlignment( m_diff3LineList, &m_manualDiffHelpList );
-         calcDiff3LineListTrim( m_diff3LineList, m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList );
+         m_diff3LineList.correctManualDiffAlignment( &m_manualDiffHelpList );
+         m_diff3LineList.calcDiff3LineListTrim(m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), &m_manualDiffHelpList );
          if (verbose) printDiff3List("after 2nd calcDiff3LineListTrim", m_diff3LineList, m_sd1, m_sd2, m_sd3);
       }
 
-      fineDiff( m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
-      fineDiff( m_diff3LineList, 2, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay() );
-      fineDiff( m_diff3LineList, 3, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay() );
+      m_diff3LineList.fineDiff(A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
+      m_diff3LineList.fineDiff(B, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay() );
+      m_diff3LineList.fineDiff(C, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay() );
    }
    m_diff3LineList.calcWhiteDiff3Lines( m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff() );
 }
 
 QString getLineFromSourceData(const SourceData &sd, int line)
 {
-   const LineData *pLineData = &sd.getLineDataForDiff()[line];
-   QString lineText = QString(pLineData->getLine(), pLineData->size());
+   const LineData *pLineData = &sd.getLineDataForDiff()->at(line);
+   QString lineText = pLineData->getLine();
    lineText.replace(QString("\r"), QString("\\r"));
    lineText.replace(QString("\n"), QString("\\n"));
    return lineText;
@@ -251,16 +251,14 @@ bool dataIsConsistent(int line1, QString &line1Text, int line2, QString &line2Te
 
 bool runTest(QString file1, QString file2, QString file3, QString expectedResultFile, QString actualResultFile, int maxLength)
 {
-   Options options;
+   m_pOptions = QSharedPointer<Options>::create();
    Diff3LineList actualDiff3LineList, expectedDiff3LineList;
    QTextCodec *p_codec = QTextCodec::codecForName("UTF-8");
    QTextStream out(stdout);
 
-   options.m_bIgnoreCase = false;
-   options.m_bPreserveCarriageReturn = false;
-   options.m_bDiff3AlignBC = true;
-
-   m_pOptions = &options;
+   m_pOptions->m_bIgnoreCase = false;
+   m_pOptions->m_bPreserveCarriageReturn = false;
+   m_pOptions->m_bDiff3AlignBC = true;
 
    SourceData m_sd1, m_sd2, m_sd3;
 
@@ -274,15 +272,15 @@ bool runTest(QString file1, QString file2, QString file3, QString expectedResult
    }
    out.flush();
 
-   m_sd1.setOptions(&options);
+   m_sd1.setOptions(m_pOptions);
    m_sd1.setFilename(file1);
    m_sd1.readAndPreprocess(p_codec, false);
 
-   m_sd2.setOptions(&options);
+   m_sd2.setOptions(m_pOptions);
    m_sd2.setFilename(file2);
    m_sd2.readAndPreprocess(p_codec, false);
 
-   m_sd3.setOptions(&options);
+   m_sd3.setOptions(m_pOptions);
    m_sd3.setFilename(file3);
    m_sd3.readAndPreprocess(p_codec, false);
 

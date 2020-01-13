@@ -1,5 +1,6 @@
-#include <assert.h>
 #include "fileaccess.h"
+
+#include <QString>
 
 FileAccess::FileAccess()
 {
@@ -7,7 +8,7 @@ FileAccess::FileAccess()
 
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
-  assert(!bWantToWrite);
+  Q_ASSERT(!bWantToWrite);
 
   m_name = name;
 }
@@ -29,16 +30,16 @@ bool FileAccess::isValid() const
 //   bool isSymLink() const;
 bool FileAccess::exists() const
 {
-  
+    return true;
 }
 qint64 FileAccess::size() const
 {
-  
+    return 64;
 }
 
 qint64 FileAccess::sizeForReading()
 {
-  
+    return 64;
 }
 
 //   bool isReadable() const;
@@ -55,7 +56,7 @@ qint64 FileAccess::sizeForReading()
 //   QString filePath() const; // The path-string that was used during construction
 QString FileAccess::prettyAbsPath() const
 {
-  
+    return QString("");
 }
 //   KUrl url() const;
 QString FileAccess::absoluteFilePath() const
@@ -68,13 +69,17 @@ bool FileAccess::isLocal() const
   return true;
 }
 
-bool FileAccess::readFile(void* pDestBuffer, unsigned long maxLength )
+bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength )
 {
-  
+    Q_UNUSED(pDestBuffer)
+    Q_UNUSED(maxLength);
+    return true;
 }
-bool FileAccess::writeFile(const void* pSrcBuffer, unsigned long length )
+bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length )
 {
-
+    Q_UNUSED(pSrcBuffer);
+    Q_UNUSED(length);
+    return true;
 }
 
 //   bool listDir( t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
@@ -82,26 +87,18 @@ bool FileAccess::writeFile(const void* pSrcBuffer, unsigned long length )
 //                 const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore );
 bool FileAccess::copyFile( const QString& destUrl )
 {
-  
+    Q_UNUSED(destUrl);
+    return true;
 }
 //   bool createBackup( const QString& bakExtension );
 //
-QString FileAccess::tempFileName()
+QString FileAccess::getTempName() const
 {
-  
+    return QString("");
 }
 
-bool FileAccess::removeTempFile( const QString& )
+bool FileAccess::removeFile()
 {
-  
-}
-
-/*bool FileAccess::removeFile()
-{
-  
-}*/
-bool FileAccess::removeFile( const QString& )
-{
-  
+    return true;
 }
 
