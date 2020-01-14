@@ -207,11 +207,11 @@ bool SourceData::isFromBuffer() const
     return !m_fileAccess.isValid();
 }
 
-bool SourceData::isBinaryEqualWith(const SourceData& other) const
+bool SourceData::isBinaryEqualWith(const QSharedPointer<SourceData>& other) const
 {
-    return m_fileAccess.exists() && other.m_fileAccess.exists() &&
-           getSizeBytes() == other.getSizeBytes() &&
-           (getSizeBytes() == 0 || memcmp(getBuf(), other.getBuf(), getSizeBytes()) == 0);
+    return m_fileAccess.exists() && other->m_fileAccess.exists() &&
+           getSizeBytes() == other->getSizeBytes() &&
+           (getSizeBytes() == 0 || memcmp(getBuf(), other->getBuf(), getSizeBytes()) == 0);
 }
 
 void SourceData::FileData::reset()

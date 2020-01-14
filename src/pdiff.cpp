@@ -164,7 +164,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         // Run the diff.
         if(m_sd3->isEmpty())
         {
-            pTotalDiffStatus->bBinaryAEqB = m_sd1->isBinaryEqualWith(*m_sd2);
+            pTotalDiffStatus->bBinaryAEqB = m_sd1->isBinaryEqualWith(m_sd2);
 
             if(m_sd1->isText() && m_sd2->isText())
             {
@@ -207,9 +207,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                 pp.step();
             }
 
-            pTotalDiffStatus->bBinaryAEqB = m_sd1->isBinaryEqualWith(*m_sd2);
-            pTotalDiffStatus->bBinaryAEqC = m_sd1->isBinaryEqualWith(*m_sd3);
-            pTotalDiffStatus->bBinaryBEqC = m_sd3->isBinaryEqualWith(*m_sd2);
+            pTotalDiffStatus->bBinaryAEqB = m_sd1->isBinaryEqualWith(m_sd2);
+            pTotalDiffStatus->bBinaryAEqC = m_sd1->isBinaryEqualWith(m_sd3);
+            pTotalDiffStatus->bBinaryBEqC = m_sd3->isBinaryEqualWith(m_sd2);
 
             pp.setInformation(i18n("Diff: A <-> B"));
             qCInfo(kdiffMain) << i18n("Diff: A <-> B");

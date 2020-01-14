@@ -56,7 +56,7 @@ class SourceData: public QObject
     QStringList readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode);
     bool saveNormalDataAs(const QString& fileName);
 
-    bool isBinaryEqualWith(const SourceData& other) const;
+    bool isBinaryEqualWith(const QSharedPointer<SourceData>& other) const;
 
     void reset();
 
