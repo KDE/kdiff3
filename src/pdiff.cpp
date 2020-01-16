@@ -164,7 +164,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         // Run the diff.
         if(m_sd3->isEmpty())
         {
-            pTotalDiffStatus->bBinaryAEqB = m_sd1->isBinaryEqualWith(m_sd2);
+            pTotalDiffStatus->setBinaryEqualAB(m_sd1->isBinaryEqualWith(m_sd2));
 
             if(m_sd1->isText() && m_sd2->isText())
             {
@@ -178,8 +178,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                 pp.setInformation(i18n("Linediff: A <-> B"));
                 qCInfo(kdiffMain) << i18n("Linediff: A <-> B");
                 m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
-                pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay());
-                if(m_sd1->getSizeBytes() == 0) pTotalDiffStatus->bTextAEqB = false;
+                pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay()));
+                if(m_sd1->getSizeBytes() == 0) pTotalDiffStatus->setTextEqualAB(false);
 
                 pp.step();
             }
@@ -207,9 +207,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                 pp.step();
             }
 
-            pTotalDiffStatus->bBinaryAEqB = m_sd1->isBinaryEqualWith(m_sd2);
-            pTotalDiffStatus->bBinaryAEqC = m_sd1->isBinaryEqualWith(m_sd3);
-            pTotalDiffStatus->bBinaryBEqC = m_sd3->isBinaryEqualWith(m_sd2);
+            pTotalDiffStatus->setBinaryEqualAB(m_sd1->isBinaryEqualWith(m_sd2));
+            pTotalDiffStatus->setBinaryEqualAC(m_sd1->isBinaryEqualWith(m_sd3));
+            pTotalDiffStatus->setBinaryEqualBC(m_sd3->isBinaryEqualWith(m_sd2));
 
             pp.setInformation(i18n("Diff: A <-> B"));
             qCInfo(kdiffMain) << i18n("Diff: A <-> B");
@@ -260,45 +260,45 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             pp.setInformation(i18n("Linediff: A <-> B"));
             qCInfo(kdiffMain) << i18n("Linediff: A <-> B");
             if(m_sd1->hasData() && m_sd2->hasData() && m_sd1->isText() && m_sd2->isText())
-                pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay());
+                pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay()));
             pp.step();
 
             pp.setInformation(i18n("Linediff: B <-> C"));
             qCInfo(kdiffMain) << i18n("Linediff: B <-> C");
             if(m_sd2->hasData() && m_sd3->hasData() && m_sd2->isText() && m_sd3->isText())
-                pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay());
+                pTotalDiffStatus->setTextEqualBC(m_diff3LineList.fineDiff(B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay()));
             pp.step();
 
             pp.setInformation(i18n("Linediff: A <-> C"));
             qCInfo(kdiffMain) << i18n("Linediff: A <-> C");
             if(m_sd1->hasData() && m_sd3->hasData() && m_sd1->isText() && m_sd3->isText())
-                pTotalDiffStatus->bTextAEqC = m_diff3LineList.fineDiff(C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay());
+                pTotalDiffStatus->setTextEqualAC(m_diff3LineList.fineDiff(C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay()));
             m_diff3LineList.debugLineCheck(m_sd2->getSizeLines(), B);
             m_diff3LineList.debugLineCheck(m_sd3->getSizeLines(), C);
 
             pp.setInformation(i18n("Linediff: A <-> B"));
             if(m_sd1->hasData() && m_sd2->hasData() && m_sd1->isText() && m_sd2->isText())
-                pTotalDiffStatus->bTextAEqB = m_diff3LineList.fineDiff(A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay());
+                pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay()));
             pp.step();
             
             pp.setInformation(i18n("Linediff: B <-> C"));
             if(m_sd3->hasData() && m_sd2->hasData() && m_sd3->isText() && m_sd2->isText())
-                pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay());
+                pTotalDiffStatus->setTextEqualBC(m_diff3LineList.fineDiff(B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay()));
             pp.step();
 
             pp.setInformation(i18n("Linediff: A <-> C"));
             if(m_sd1->hasData() && m_sd3->hasData() && m_sd1->isText() && m_sd3->isText())
-              pTotalDiffStatus->bTextAEqC = m_diff3LineList.fineDiff(C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay());
+              pTotalDiffStatus->setTextEqualAC(m_diff3LineList.fineDiff(C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay()));
             pp.step();
             if(m_sd1->getSizeBytes() == 0)
             {
-                pTotalDiffStatus->bTextAEqB = false;
-                pTotalDiffStatus->bTextAEqC = false;
+                pTotalDiffStatus->setTextEqualAB(false);
+                pTotalDiffStatus->setTextEqualAC(false);
             }
             if(m_sd2->getSizeBytes() == 0)
             {
-                pTotalDiffStatus->bTextAEqB = false;
-                pTotalDiffStatus->bTextBEqC = false;
+                pTotalDiffStatus->setTextEqualAB(false);
+                pTotalDiffStatus->setTextEqualBC(false);
             }
         }
     }
@@ -764,23 +764,23 @@ void KDiff3App::slotFinishMainInit()
             (m_sd1->isValid() && m_sd2->isValid() && m_sd3->isValid()))
         {
             QString totalInfo;
-            if(pTotalDiffStatus->bBinaryAEqB && pTotalDiffStatus->bBinaryAEqC)
+            if(pTotalDiffStatus->isBinaryEqualAB() && pTotalDiffStatus->isBinaryEqualAC())
                 totalInfo += i18n("All input files are binary equal.");
-            else if(pTotalDiffStatus->bTextAEqB && pTotalDiffStatus->bTextAEqC)
+            else if(pTotalDiffStatus->isTextEqualAB() && pTotalDiffStatus->isTextEqualAC())
                 totalInfo += i18n("All input files contain the same text, but are not binary equal.");
             else
             {
-                if(pTotalDiffStatus->bBinaryAEqB)
+                if(pTotalDiffStatus->isBinaryEqualAB())
                     totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("B"));
-                else if(pTotalDiffStatus->bTextAEqB)
+                else if(pTotalDiffStatus->isTextEqualAB())
                     totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", i18n("A"), i18n("B"));
-                if(pTotalDiffStatus->bBinaryAEqC)
+                if(pTotalDiffStatus->isBinaryEqualAC())
                     totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("C"));
-                else if(pTotalDiffStatus->bTextAEqC)
+                else if(pTotalDiffStatus->isTextEqualAC())
                     totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", i18n("A"), i18n("C"));
-                if(pTotalDiffStatus->bBinaryBEqC)
+                if(pTotalDiffStatus->isBinaryEqualBC())
                     totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("B"), i18n("C"));
-                else if(pTotalDiffStatus->bTextBEqC)
+                else if(pTotalDiffStatus->isTextEqualBC())
                     totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", i18n("B"), i18n("C"));
             }
 

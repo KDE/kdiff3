@@ -423,6 +423,21 @@ class TotalDiffStatus
     bool isBinaryEqualBC() const { return bBinaryBEqC; }
     bool isBinaryEqualAB() const { return bBinaryAEqB; }
 
+    void setBinaryEqualAC(const bool equal) { bBinaryAEqC = equal; }
+    void setBinaryEqualBC(const bool equal) { bBinaryBEqC = equal; }
+    void setBinaryEqualAB(const bool equal) { bBinaryAEqB = equal; }
+
+
+    bool isTextEqualAC() const { return bTextAEqC; }
+    bool isTextEqualBC() const { return bTextBEqC; }
+    bool isTextEqualAB() const { return bTextAEqB; }
+
+
+    void setTextEqualAC(const bool equal) { bTextAEqC = equal; }
+    void setTextEqualBC(const bool equal) { bTextBEqC = equal; }
+    void setTextEqualAB(const bool equal) { bTextAEqB = equal; }
+
+  private:
     bool bBinaryAEqC = false;
     bool bBinaryBEqC = false;
     bool bBinaryAEqB = false;
@@ -430,8 +445,6 @@ class TotalDiffStatus
     bool bTextAEqC = false;
     bool bTextBEqC = false;
     bool bTextAEqB = false;
-
-  private:
     int nofUnsolvedConflicts = 0;
     int nofSolvedConflicts = 0;
     int nofWhitespaceConflicts = 0;

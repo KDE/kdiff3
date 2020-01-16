@@ -990,23 +990,23 @@ void MergeResultWindow::showNrOfConflicts()
             ++nrOfConflicts;
     }
     QString totalInfo;
-    if(m_pTotalDiffStatus->bBinaryAEqB && m_pTotalDiffStatus->bBinaryAEqC)
+    if(m_pTotalDiffStatus->isBinaryEqualAB() && m_pTotalDiffStatus->isBinaryEqualAC())
         totalInfo += i18n("All input files are binary equal.");
-    else if(m_pTotalDiffStatus->bTextAEqB && m_pTotalDiffStatus->bTextAEqC)
+    else if(m_pTotalDiffStatus->isTextEqualAB() && m_pTotalDiffStatus->isTextEqualAC())
         totalInfo += i18n("All input files contain the same text.");
     else
     {
-        if(m_pTotalDiffStatus->bBinaryAEqB)
+        if(m_pTotalDiffStatus->isBinaryEqualAB())
             totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("B"));
-        else if(m_pTotalDiffStatus->bTextAEqB)
+        else if(m_pTotalDiffStatus->isTextEqualAB())
             totalInfo += i18n("Files %1 and %2 have equal text.\n", i18n("A"), i18n("B"));
-        if(m_pTotalDiffStatus->bBinaryAEqC)
+        if(m_pTotalDiffStatus->isBinaryEqualAC())
             totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("C"));
-        else if(m_pTotalDiffStatus->bTextAEqC)
+        else if(m_pTotalDiffStatus->isTextEqualAC())
             totalInfo += i18n("Files %1 and %2 have equal text.\n", i18n("A"), i18n("C"));
-        if(m_pTotalDiffStatus->bBinaryBEqC)
+        if(m_pTotalDiffStatus->isBinaryEqualBC())
             totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("B"), i18n("C"));
-        else if(m_pTotalDiffStatus->bTextBEqC)
+        else if(m_pTotalDiffStatus->isTextEqualBC())
             totalInfo += i18n("Files %1 and %2 have equal text.\n", i18n("B"), i18n("C"));
     }
 
