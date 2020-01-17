@@ -58,34 +58,24 @@ bool LineData::equal(const LineData& l1, const LineData& l2)
 {
     if(l1.getLine() == nullptr || l2.getLine() == nullptr) return false;
 
-    // Ignore white space diff
-    QString::const_iterator p1 = l1.getLine().begin();
-    QString::const_iterator p1End = l1.getLine().end();
-
-    QString::const_iterator p2 = l2.getLine().begin();
-    QString::const_iterator p2End = l2.getLine().end();
-
     if(g_bIgnoreWhiteSpace)
     {
-        int nonWhite = 0;
-        for(;;)
+        // Ignore white space diff
+        QString::const_iterator p1 = l1.getLine().begin();
+        QString::const_iterator p1End = l1.getLine().end();
+        QString::const_iterator p2 = l2.getLine().begin();
+        QString::const_iterator p2End = l2.getLine().end();
+
+        for(; p1 != p1End && p2 != p2End; p1++, p2++)
         {
             while(isWhite(*p1) && p1 != p1End) ++p1;
             while(isWhite(*p2) && p2 != p2End) ++p2;
 
-            if(p1 == p1End && p2 == p2End)
-            {
-                return true;
-            }
-            else if(p1 == p1End || p2 == p2End)
-                return false;
-
             if(*p1 != *p2)
                 return false;
-            ++p1;
-            ++p2;
-            ++nonWhite;
         }
+        
+        return (p1 == p1End && p2 == p2End);
     }
     else
     {
