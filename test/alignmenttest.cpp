@@ -18,10 +18,6 @@ bool verbose = false;
 QSharedPointer<Options> m_pOptions;
 ManualDiffHelpList m_manualDiffHelpList;
 
-bool g_bIgnoreWhiteSpace = true;
-bool g_bIgnoreTrivialMatches = true;
-
-
 void printDiffList(const QString caption, const DiffList &diffList)
 {
    QTextStream out(stdout);

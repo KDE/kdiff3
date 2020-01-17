@@ -25,6 +25,8 @@
 #include <QtGlobal>
 #include <QSharedPointer>
 
+constexpr bool g_bIgnoreWhiteSpace = true;
+
 QSharedPointer<DiffBufferInfo> Diff3Line::m_pDiffBufferInfo = nullptr;
 
 int LineData::width(int tabSize) const
@@ -49,16 +51,12 @@ int LineData::width(int tabSize) const
     return w;
 }
 
-// The bStrict flag is true during the test where a nonmatching area ends.
-// Then the equal()-function requires that the match has more than 2 nonwhite characters.
-// This is to avoid matches on trivial lines (e.g. with white space only).
-// This choice is good for C/C++.
-bool LineData::equal(const LineData& l1, const LineData& l2, bool bStrict)
+/*
+    Implement support for g_bIgnoreWhiteSpace
+*/
+bool LineData::equal(const LineData& l1, const LineData& l2)
 {
     if(l1.getLine() == nullptr || l2.getLine() == nullptr) return false;
-
-    if(bStrict && g_bIgnoreTrivialMatches)
-        return false;
 
     // Ignore white space diff
     QString::const_iterator p1 = l1.getLine().begin();
@@ -77,12 +75,7 @@ bool LineData::equal(const LineData& l1, const LineData& l2, bool bStrict)
 
             if(p1 == p1End && p2 == p2End)
             {
-                if(bStrict && g_bIgnoreTrivialMatches)
-                { // Then equality is not enough
-                    return nonWhite > 2;
-                }
-                else // equality is enough
-                    return true;
+                return true;
             }
             else if(p1 == p1End || p2 == p2End)
                 return false;
@@ -950,7 +943,7 @@ void Diff3LineList::calcDiff3LineListTrim(
         }
 
         if(line > lineA && i3->getLineA().isValid() && i3A->getLineB().isValid() && i3A->isEqualBC() &&
-           LineData::equal((*pldA)[i3->getLineA()], (*pldB)[i3A->getLineB()], false) &&
+           LineData::equal((*pldA)[i3->getLineA()], (*pldB)[i3A->getLineB()]) &&
            pManualDiffHelpList->isValidMove(i3->getLineA(), i3A->getLineB(), A, B) &&
            pManualDiffHelpList->isValidMove(i3->getLineA(), i3A->getLineC(), A, C))
         {
@@ -967,7 +960,7 @@ void Diff3LineList::calcDiff3LineListTrim(
         }
 
         if(line > lineB && i3->getLineB().isValid() && i3B->getLineA().isValid() && i3B->isEqualAC() &&
-           LineData::equal((*pldB)[i3->getLineB()], (*pldA)[i3B->getLineA()], false) &&
+           LineData::equal((*pldB)[i3->getLineB()], (*pldA)[i3B->getLineA()]) &&
            pManualDiffHelpList->isValidMove(i3->getLineB(), i3B->getLineA(), B, A) &&
            pManualDiffHelpList->isValidMove(i3->getLineB(), i3B->getLineC(), B, C))
         {
@@ -983,7 +976,7 @@ void Diff3LineList::calcDiff3LineListTrim(
         }
 
         if(line > lineC && i3->getLineC().isValid() && i3C->getLineA().isValid() && i3C->isEqualAB() &&
-           LineData::equal((*pldC)[i3->getLineC()], (*pldA)[i3C->getLineA()], false) &&
+           LineData::equal((*pldC)[i3->getLineC()], (*pldA)[i3C->getLineA()]) &&
            pManualDiffHelpList->isValidMove(i3->getLineC(), i3C->getLineA(), C, A) &&
            pManualDiffHelpList->isValidMove(i3->getLineC(), i3C->getLineB(), C, B))
         {
@@ -1006,12 +999,12 @@ void Diff3LineList::calcDiff3LineListTrim(
             i3A->setLineA(i3->getLineA());
             i3->getLineA().invalidate();
 
-            if(i3A->getLineB().isValid() && LineData::equal((*pldA)[i3A->getLineA()], (*pldB)[i3A->getLineB()], false))
+            if(i3A->getLineB().isValid() && LineData::equal((*pldA)[i3A->getLineA()], (*pldB)[i3A->getLineB()]))
             {
                 i3A->bAEqB = true;
             }
             if((i3A->isEqualAB() && i3A->isEqualBC()) ||
-               (i3A->getLineC().isValid() && LineData::equal((*pldA)[i3A->getLineA()], (*pldC)[i3A->getLineC()], false)))
+               (i3A->getLineC().isValid() && LineData::equal((*pldA)[i3A->getLineA()], (*pldC)[i3A->getLineC()])))
             {
                 i3A->bAEqC = true;
             }
@@ -1028,12 +1021,12 @@ void Diff3LineList::calcDiff3LineListTrim(
             i3B->setLineB(i3->getLineB());
             i3->getLineB().invalidate();
 
-            if(i3B->getLineA().isValid() && LineData::equal((*pldA)[i3B->getLineA()], (*pldB)[i3B->getLineB()], false))
+            if(i3B->getLineA().isValid() && LineData::equal((*pldA)[i3B->getLineA()], (*pldB)[i3B->getLineB()]))
             {
                 i3B->bAEqB = true;
             }
             if((i3B->isEqualAB() && i3B->isEqualAC()) ||
-               (i3B->getLineC().isValid() && LineData::equal((*pldB)[i3B->getLineB()], (*pldC)[i3B->getLineC()], false)))
+               (i3B->getLineC().isValid() && LineData::equal((*pldB)[i3B->getLineB()], (*pldC)[i3B->getLineC()])))
             {
                 i3B->bBEqC = true;
             }
@@ -1050,12 +1043,12 @@ void Diff3LineList::calcDiff3LineListTrim(
             i3C->setLineC(i3->getLineC());
             i3->getLineC().invalidate();
 
-            if(i3C->getLineA().isValid() && LineData::equal((*pldA)[i3C->getLineA()], (*pldC)[i3C->getLineC()], false))
+            if(i3C->getLineA().isValid() && LineData::equal((*pldA)[i3C->getLineA()], (*pldC)[i3C->getLineC()]))
             {
                 i3C->bAEqC = true;
             }
             if((i3C->isEqualAC() && i3C->isEqualAB()) ||
-               (i3C->getLineB().isValid() && LineData::equal((*pldB)[i3C->getLineB()], (*pldC)[i3C->getLineC()], false)))
+               (i3C->getLineB().isValid() && LineData::equal((*pldB)[i3C->getLineB()], (*pldC)[i3C->getLineC()])))
             {
                 i3C->bBEqC = true;
             }
@@ -1077,7 +1070,7 @@ void Diff3LineList::calcDiff3LineListTrim(
                 i->setLineB(i3->getLineB());
                 i->bAEqB = true;
 
-                if(i->getLineC().isValid() && LineData::equal((*pldA)[i->getLineA()], (*pldC)[i->getLineC()], false))
+                if(i->getLineC().isValid() && LineData::equal((*pldA)[i->getLineA()], (*pldC)[i->getLineC()]))
                 {
                     i->bAEqC = true;
                     i->bBEqC = true;
@@ -1107,7 +1100,7 @@ void Diff3LineList::calcDiff3LineListTrim(
                 i->setLineC(i3->getLineC());
                 i->bAEqC = true;
 
-                if(i->getLineB().isValid() && LineData::equal((*pldA)[i->getLineA()], (*pldB)[i->getLineB()], false))
+                if(i->getLineB().isValid() && LineData::equal((*pldA)[i->getLineA()], (*pldB)[i->getLineB()]))
                 {
                     i->bAEqB = true;
                     i->bBEqC = true;
@@ -1137,7 +1130,7 @@ void Diff3LineList::calcDiff3LineListTrim(
                 i->setLineC(i3->getLineC());
                 i->bBEqC = true;
 
-                if(i->getLineA().isValid() && LineData::equal((*pldA)[i->getLineA()], (*pldB)[i->getLineB()], false))
+                if(i->getLineA().isValid() && LineData::equal((*pldA)[i->getLineA()], (*pldB)[i->getLineB()]))
                 {
                     i->bAEqB = true;
                     i->bAEqC = true;

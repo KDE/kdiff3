@@ -134,7 +134,7 @@ class LineData
     inline bool isPureComment() const { return bContainsPureComment; }
     inline void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
 
-    static bool equal(const LineData& l1, const LineData& l2, bool bStrict);
+    static bool equal(const LineData& l1, const LineData& l2);
 };
 
 class ManualDiffHelpList; // A list of corresponding ranges
@@ -534,8 +534,6 @@ inline int tabber(int outPos, int tabSize)
 */
 int getBestFirstLine(int line, int nofLines, int firstLine, int visibleLines);
 
-extern bool g_bIgnoreWhiteSpace;
-extern bool g_bIgnoreTrivialMatches;
 extern bool g_bAutoSolve;
 
 enum e_CoordType

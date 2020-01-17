@@ -49,9 +49,6 @@
 #include <KShortcutsDialog>
 #include <KMessageBox>
 
-bool g_bIgnoreWhiteSpace = true;
-bool g_bIgnoreTrivialMatches = true;
-
 // Function uses setMinSize( sizeHint ) before adding the widget.
 // void addWidget(QBoxLayout* layout, QWidget* widget);
 template <class W, class L>
