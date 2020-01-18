@@ -136,7 +136,6 @@ bool Utils::isCTokenChar(QChar c)
 /// Calculate where a token starts and ends, given the x-position on screen.
 void Utils::calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2)
 {
-    // Cursor conversions that consider g_tabSize
     int pos = std::max(0, posOnScreen);
     if(pos >= (int)s.length())
     {
