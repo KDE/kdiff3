@@ -15,7 +15,7 @@
 
 #include <QDialog>
 #include <QPointer>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QList>
 
 class KJob;
@@ -93,8 +93,8 @@ private:
    QLabel* m_pSubInformation;
    QLabel* m_pSlowJobInfo;
    QPushButton* m_pAbortButton;
-   QTime m_t1;
-   QTime m_t2;
+   QElapsedTimer m_t1;
+   QElapsedTimer m_t2;
    bool m_bWasCancelled;
    e_CancelReason m_eCancelReason;
    KJob* m_pJob = nullptr;
