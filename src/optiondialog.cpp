@@ -209,7 +209,7 @@ class OptionLineEdit : public QComboBox, public OptionString
         apply(currentText());
         insertText();
     }
-    void write(ValueMap* config) override
+    void write(ValueMap* config) const override
     {
         config->writeEntry(m_saveName, m_list);
     }
@@ -319,7 +319,7 @@ class OptionComboBox : public QComboBox, public OptionItemBase
             *m_pVarStr = currentText();
         }
     }
-    void write(ValueMap* config) override
+    void write(ValueMap* config) const override
     {
         if(m_pVarStr != nullptr)
             config->writeEntry(m_saveName, *m_pVarStr);
@@ -464,7 +464,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
             *m_ppVarCodec = m_codecVec[currentIndex()];
         }
     }
-    void write(ValueMap* config) override
+    void write(ValueMap* config) const override
     {
         if(m_ppVarCodec != nullptr) config->writeEntry(m_saveName, (const char*)(*m_ppVarCodec)->name());
     }

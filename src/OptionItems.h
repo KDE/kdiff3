@@ -45,7 +45,8 @@ class OptionItemBase
     virtual void setToCurrent() = 0;
 
     virtual void apply() = 0;
-    virtual void write(ValueMap*) = 0;
+    
+    virtual void write(ValueMap*) const = 0;
     virtual void read(ValueMap*) = 0;
     void doPreserve()
     {
@@ -62,8 +63,7 @@ class OptionItemBase
             unpreserve();
         }
     }
-    QString getSaveName() { return m_saveName; }
-
+    QString getSaveName() const { return m_saveName; }
   protected:
     virtual void preserve() = 0;
     virtual void unpreserve() = 0;
@@ -109,7 +109,7 @@ class Option : public OptionItemBase
     void apply() override {};
     virtual void apply(const T& inValue) { *m_pVar = inValue; }
 
-    void write(ValueMap* config) override { config->writeEntry(m_saveName, *m_pVar); }
+    void write(ValueMap* config) const override { config->writeEntry(m_saveName, *m_pVar); }
     void read(ValueMap* config) override { *m_pVar = config->readEntry(m_saveName, m_defaultVal); }
 
   protected:
