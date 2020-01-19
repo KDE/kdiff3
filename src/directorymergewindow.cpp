@@ -28,6 +28,7 @@
 #include <QApplication>
 #include <QDialogButtonBox>
 #include <QDir>
+#include <QElapsedTimer>
 #include <QFileDialog>
 #include <QImage>
 #include <QKeyEvent>
@@ -1691,7 +1692,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
     t_fileMergeMap::iterator j;
     int nrOfFiles = m_fileMergeMap.size();
     int currentIdx = 1;
-    QTime t;
+    QElapsedTimer t;
     t.start();
     pp.setMaxNofSteps(nrOfFiles);
 
