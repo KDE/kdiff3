@@ -938,7 +938,7 @@ void KDiff3App::slotFileOpen()
     if(m_pDirectoryMergeWindow->isDirectoryMergeInProgress())
     {
         int result = KMessageBox::warningYesNo(this,
-                                               i18n("You are currently doing a directory merge. Are you sure, you want to abort?"),
+                                               i18n("You are currently doing a folder merge. Are you sure, you want to abort?"),
                                                i18n("Warning"),
                                                KGuiItem(i18n("Abort")),
                                                KGuiItem(i18n("Continue Merging")));

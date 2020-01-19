@@ -673,7 +673,7 @@ void DirectoryMergeWindow::reload()
     if(isDirectoryMergeInProgress())
     {
         int result = KMessageBox::warningYesNo(this,
-                                               i18n("You are currently doing a directory merge. Are you sure, you want to abort the merge and rescan the directory?"),
+                                               i18n("You are currently doing a folder merge. Are you sure, you want to abort the merge and rescan the folder?"),
                                                i18n("Warning"),
                                                KGuiItem(i18n("Rescan")),
                                                KGuiItem(i18n("Continue Merging")));
@@ -836,24 +836,24 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     if(!dirA.isDir() || !dirB.isDir() ||
        (dirC.isValid() && !dirC.isDir()))
     {
-        QString text(i18n("Opening of directories failed:"));
+        QString text(i18n("Opening of folders failed:"));
         text += "\n\n";
         if(!dirA.isDir())
         {
-            text += i18n("Dir A \"%1\" does not exist or is not a directory.\n", dirA.prettyAbsPath());
+            text += i18n("Folder A \"%1\" does not exist or is not a folder.\n", dirA.prettyAbsPath());
         }
 
         if(!dirB.isDir())
         {
-            text += i18n("Dir B \"%1\" does not exist or is not a directory.\n", dirB.prettyAbsPath());
+            text += i18n("Folder B \"%1\" does not exist or is not a folder.\n", dirB.prettyAbsPath());
         }
 
         if(dirC.isValid() && !dirC.isDir())
         {
-            text += i18n("Dir C \"%1\" does not exist or is not a directory.\n", dirC.prettyAbsPath());
+            text += i18n("Folder C \"%1\" does not exist or is not a folder.\n", dirC.prettyAbsPath());
         }
 
-        KMessageBox::sorry(mWindow, text, i18n("Directory Open Error"));
+        KMessageBox::sorry(mWindow, text, i18n("Folder Opening Error"));
         return false;
     }
 
@@ -861,14 +861,14 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
        (dirDest.prettyAbsPath() == dirA.prettyAbsPath() || dirDest.prettyAbsPath() == dirB.prettyAbsPath()))
     {
         KMessageBox::error(mWindow,
-                           i18n("The destination directory must not be the same as A or B when "
-                                "three directories are merged.\nCheck again before continuing."),
+                           i18n("The destination folder must not be the same as A or B when "
+                                "three folders are merged.\nCheck again before continuing."),
                            i18n("Parameter Warning"));
         return false;
     }
 
     m_bScanning = true;
-    Q_EMIT mWindow->statusBarMessage(i18n("Scanning directories..."));
+    Q_EMIT mWindow->statusBarMessage(i18n("Scanning folders..."));
 
     m_bSyncMode = m_pOptions->m_bDmSyncMode && dirInfo->allowSyncMode();
 
@@ -894,7 +894,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
     if(dirA.isValid())
     {
-        pp.setInformation(i18n("Reading Directory A"));
+        pp.setInformation(i18n("Reading Folder A"));
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
@@ -903,7 +903,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
     if(dirB.isValid())
     {
-        pp.setInformation(i18n("Reading Directory B"));
+        pp.setInformation(i18n("Reading Folder B"));
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
@@ -913,7 +913,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     e_MergeOperation eDefaultMergeOp;
     if(dirC.isValid())
     {
-        pp.setInformation(i18n("Reading Directory C"));
+        pp.setInformation(i18n("Reading Folder C"));
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
@@ -929,12 +929,12 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     bool bContinue = true;
     if(!bListDirSuccessA || !bListDirSuccessB || !bListDirSuccessC)
     {
-        QString s = i18n("Some subdirectories were not readable in");
+        QString s = i18n("Some subfolders were not readable in");
         if(!bListDirSuccessA) s += "\nA: " + dirA.prettyAbsPath();
         if(!bListDirSuccessB) s += "\nB: " + dirB.prettyAbsPath();
         if(!bListDirSuccessC) s += "\nC: " + dirC.prettyAbsPath();
         s += '\n';
-        s += i18n("Check the permissions of the subdirectories.");
+        s += i18n("Check the permissions of the subfolders.");
         bContinue = KMessageBox::Continue == KMessageBox::warningContinueCancel(mWindow, s);
     }
 
@@ -986,8 +986,8 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
                           nofFiles, nofDirs, nofEqualFiles, nofManualMerges);
 
         QString s;
-        s = i18n("Directory Comparison Status\n\n"
-                 "Number of subdirectories: %1\n"
+        s = i18n("Folder Comparison Status\n\n"
+                 "Number of subfolders: %1\n"
                  "Number of equal files: %2\n"
                  "Number of different files: %3",
                  nofDirs, nofEqualFiles, nofFiles - nofEqualFiles);
@@ -2132,7 +2132,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareMergeStart(const 
             QString errorText;
             if(pMFI->getOperation() == eConflictingFileTypes)
             {
-                errorText = i18n("The highlighted item has a different type in the different directories. Select what to do.");
+                errorText = i18n("The highlighted item has a different type in the different folders. Select what to do.");
             }
             if(pMFI->getOperation() == eConflictingAges)
             {
@@ -2140,7 +2140,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareMergeStart(const 
             }
             if(pMFI->getOperation() == eChangedAndDeleted)
             {
-                errorText = i18n("The highlighted item was changed in one directory and deleted in the other. Select what to do.");
+                errorText = i18n("The highlighted item was changed in one folder and deleted in the other. Select what to do.");
             }
             if(!errorText.isEmpty())
             {
@@ -2196,7 +2196,7 @@ void DirectoryMergeWindow::mergeCurrentFile()
 
     if(d->m_bRealMergeStarted)
     {
-        KMessageBox::sorry(this, i18n("This operation is currently not possible because directory merge is currently running."), i18n("Operation Not Possible"));
+        KMessageBox::sorry(this, i18n("This operation is currently not possible because folder merge is currently running."), i18n("Operation Not Possible"));
         return;
     }
 
@@ -2442,7 +2442,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::deleteFLD(const QString&
     else
     {
         if(fi.isDir() && !fi.isSymLink())
-            m_pStatusInfo->addText(i18n("delete directory recursively( %1 )", name));
+            m_pStatusInfo->addText(i18n("delete folder recursively( %1 )", name));
         else
             m_pStatusInfo->addText(i18n("delete( %1 )", name));
 
@@ -2459,7 +2459,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::deleteFLD(const QString&
             if(!bSuccess)
             {
                 // No Permission to read directory or other error.
-                m_pStatusInfo->addText(i18n("Error: delete dir operation failed while trying to read the directory."));
+                m_pStatusInfo->addText(i18n("Error: delete folder operation failed while trying to read the folder."));
                 return false;
             }
 
@@ -2682,7 +2682,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::makeDir(const QString& n
     bool bSuccess = FileAccess::makeDir(name);
     if(!bSuccess)
     {
-        m_pStatusInfo->addText(i18n("Error while creating directory."));
+        m_pStatusInfo->addText(i18n("Error while creating folder."));
         return false;
     }
     return true;
@@ -2726,7 +2726,7 @@ DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent)
 
     m_pInfoList = new QTreeWidget(this);
     topLayout->addWidget(m_pInfoList);
-    m_pInfoList->setHeaderLabels({i18n("Dir"), i18n("Type"), i18n("Size"),
+    m_pInfoList->setHeaderLabels({i18n("Folder"), i18n("Type"), i18n("Size"),
                                   i18n("Attr"), i18n("Last Modification"), i18n("Link-Destination")});
     setMinimumSize(100, 100);
 
@@ -2754,7 +2754,7 @@ void DirectoryMergeInfo::addListViewItem(const QString& dir, const QString& base
 
         m_pInfoList->addTopLevelItem(new QTreeWidgetItem(
             m_pInfoList,
-            {dir, QString(fi->isDir() ? i18n("Dir") : i18n("File")) + (fi->isSymLink() ? i18n("-Link") : ""), QString::number(fi->size()), QLatin1String(fi->isReadable() ? "r" : " ") + QLatin1String(fi->isWritable() ? "w" : " ") + QLatin1String((fi->isExecutable() ? "x" : " ")), dateString, QString(fi->isSymLink() ? (" -> " + fi->readLink()) : QString(""))}));
+            {dir, QString(fi->isDir() ? i18n("Folder") : i18n("File")) + (fi->isSymLink() ? i18n("-Link") : ""), QString::number(fi->size()), QLatin1String(fi->isReadable() ? "r" : " ") + QLatin1String(fi->isWritable() ? "w" : " ") + QLatin1String((fi->isExecutable() ? "x" : " ")), dateString, QString(fi->isSymLink() ? (" -> " + fi->readLink()) : QString(""))}));
     }
     else
     {
@@ -2842,7 +2842,7 @@ void DirectoryMergeWindow::slotSaveMergeState()
 {
     //slotStatusMsg(i18n("Saving Directory Merge State ..."));
 
-    QString dirMergeStateFilename = QFileDialog::getSaveFileName(this, i18n("Save Directory Merge State As..."), QDir::currentPath());
+    QString dirMergeStateFilename = QFileDialog::getSaveFileName(this, i18n("Save Folder Merge State As..."), QDir::currentPath());
     if(!dirMergeStateFilename.isEmpty())
     {
         QFile file(dirMergeStateFilename);
@@ -2949,12 +2949,12 @@ void DirectoryMergeWindow::initDirectoryMergeActions(KDiff3App* pKDiff3App, KAct
 #include "xpm/showfilesonlyinc.xpm"
 #include "xpm/startmerge.xpm"
 
-    d->m_pDirStartOperation = GuiUtils::createAction<QAction>(i18n("Start/Continue Directory Merge"), QKeySequence(Qt::Key_F7), this, &DirectoryMergeWindow::slotRunOperationForAllItems, ac, "dir_start_operation");
+    d->m_pDirStartOperation = GuiUtils::createAction<QAction>(i18n("Start/Continue Folder Merge"), QKeySequence(Qt::Key_F7), this, &DirectoryMergeWindow::slotRunOperationForAllItems, ac, "dir_start_operation");
     d->m_pDirRunOperationForCurrentItem = GuiUtils::createAction<QAction>(i18n("Run Operation for Current Item"), QKeySequence(Qt::Key_F6), this, &DirectoryMergeWindow::slotRunOperationForCurrentItem, ac, "dir_run_operation_for_current_item");
     d->m_pDirCompareCurrent = GuiUtils::createAction<QAction>(i18n("Compare Selected File"), this, &DirectoryMergeWindow::compareCurrentFile, ac, "dir_compare_current");
     d->m_pDirMergeCurrent = GuiUtils::createAction<QAction>(i18n("Merge Current File"), QIcon(QPixmap(startmerge)), i18n("Merge\nFile"), pKDiff3App, &KDiff3App::slotMergeCurrentFile, ac, "merge_current");
-    d->m_pDirFoldAll = GuiUtils::createAction<QAction>(i18n("Fold All Subdirs"), this, &DirectoryMergeWindow::collapseAll, ac, "dir_fold_all");
-    d->m_pDirUnfoldAll = GuiUtils::createAction<QAction>(i18n("Unfold All Subdirs"), this, &DirectoryMergeWindow::expandAll, ac, "dir_unfold_all");
+    d->m_pDirFoldAll = GuiUtils::createAction<QAction>(i18n("Fold All Subfolders"), this, &DirectoryMergeWindow::collapseAll, ac, "dir_fold_all");
+    d->m_pDirUnfoldAll = GuiUtils::createAction<QAction>(i18n("Unfold All Subfolders"), this, &DirectoryMergeWindow::expandAll, ac, "dir_unfold_all");
     d->m_pDirRescan = GuiUtils::createAction<QAction>(i18n("Rescan"), QKeySequence(Qt::SHIFT + Qt::Key_F5), this, &DirectoryMergeWindow::reload, ac, "dir_rescan");
     d->m_pDirSaveMergeState = nullptr; //GuiUtils::createAction< QAction >(i18n("Save Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotSaveMergeState, ac, "dir_save_merge_state");
     d->m_pDirLoadMergeState = nullptr; //GuiUtils::createAction< QAction >(i18n("Load Directory Merge State ..."), 0, this, &DirectoryMergeWindow::slotLoadMergeState, ac, "dir_load_merge_state");

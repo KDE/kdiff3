@@ -94,7 +94,7 @@ int main(int argc, char* argv[])
         appVersion += i18n(" (64 bit)");
     else if(sizeof(void*) == 4)
         appVersion += i18n(" (32 bit)");
-    const QString description = i18n("Tool for Comparison and Merge of Files and Directories");
+    const QString description = i18n("Tool for Comparison and Merge of Files and Folders");
     const QString copyright = i18n("(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port");
     const QString homePage = QStringLiteral("https://kde.org/applications/development/kdiff3");
 

@@ -59,9 +59,9 @@ Do NOT change these in the translation. -->
 
 <abstract>
 <para>
-   &kdiff3; is a file and directory diff and merge tool which
+   &kdiff3; is a file and folder diff and merge tool which
 <itemizedlist>
-<listitem><para>compares and merges two or three text input files or directories,</para></listitem>
+<listitem><para>compares and merges two or three text input files or folders,</para></listitem>
 <listitem><para>shows the differences line by line and character by character(!),</para></listitem>
 <listitem><para>provides an automatic merge-facility,</para></listitem>
 <listitem><para>has an editor for comfortable solving of merge-conflicts,</para></listitem>
@@ -89,6 +89,7 @@ Please at least include KDE, the KDE package it is in, the name
 <keyword>triple diff</keyword>
 <keyword>compare</keyword>
 <keyword>files</keyword>
+<keyword>folders</keyword>
 <keyword>directories</keyword>
 <keyword>version control</keyword>
 <keyword>three-way-merge</keyword>
@@ -130,7 +131,7 @@ Later many other features were added to increase the usefulness.
 For example if you want to compare some text quickly, then you can copy it to the clipboard and
 paste it into either diff window.
 </para><para>
-A feature that required a big effort was the directory comparison and merge facility, which turned
+A feature that required a big effort was the folder comparison and merge facility, which turned
 the program almost into a full file browser.
 </para><para>
 I hope &kdiff3; works for you too. Have fun!
@@ -158,8 +159,8 @@ Joachim Eibl (2003)
 </mediaobject></screenshot>
 </para>
 
-<para id="dirmergebigscreenshot">&kdiff3; also helps you to compare and merge complete directories.
-This screenshot shows &kdiff3; during a directory merge:
+<para id="dirmergebigscreenshot">&kdiff3; also helps you to compare and merge complete folders.
+This screenshot shows &kdiff3; during a folder merge:
 </para><para>
 <screenshot><mediaobject>
    <imageobject><imagedata fileref="dirmergebig.png" format="PNG"/></imageobject>
@@ -274,23 +275,23 @@ This screenshot shows &kdiff3; during a directory merge:
 
 <sect2><title>Special case: Files with the same name </title>
 <para>
-If all files have the same name but are in different directories, you can
+If all files have the same name but are in different folders, you can
 reduce typework by specifying the filename only for the first file, &eg;:
 </para>
 <screen>
-   <command>kdiff3</command> <replaceable>dir1/filename dir2 dir3</replaceable>
+   <command>kdiff3</command> <replaceable>folder1/filename folder2 folder3</replaceable>
 </screen>
 </sect2>
 
-<sect2><title>Commandline for starting a directory comparison or merge: </title>
-<para>This is very similar, but now it's about directories.</para>
+<sect2><title>Commandline for starting a folder comparison or merge: </title>
+<para>This is very similar, but now it's about folders.</para>
 <screen>
-   <command>kdiff3</command> <replaceable>dir1 dir2</replaceable>
-   <command>kdiff3</command> <replaceable>dir1 dir2</replaceable> -o <replaceable>destdir</replaceable>
-   <command>kdiff3</command> <replaceable>dir1 dir2 dir3</replaceable>
-   <command>kdiff3</command> <replaceable>dir1 dir2 dir3</replaceable> -o <replaceable>destdir</replaceable>
+   <command>kdiff3</command> <replaceable>folder1 folder2</replaceable>
+   <command>kdiff3</command> <replaceable>folder1 folder2</replaceable> -o <replaceable>destdir</replaceable>
+   <command>kdiff3</command> <replaceable>folder1 folder2 folder3</replaceable>
+   <command>kdiff3</command> <replaceable>folder1 folder2 folder3</replaceable> -o <replaceable>destdir</replaceable>
 </screen>
-<para>For directory comparison and merge you can continue to read <link linkend="dirmerge">here</link>.</para>
+<para>For folder comparison and merge you can continue to read <link linkend="dirmerge">here</link>.</para>
 </sect2>
 
 <sect2><title>Other command line options</title>
@@ -315,23 +316,23 @@ Options:
   --confighelp              Show list of config settings and current values.
   --config file             Use a different config file.
 </screen>
-<para>The option <option>--cs</option> allows you to adjust a configuration value that is otherwise only adjustable via the configure dialogs. 
-But be aware that when &kdiff3; then terminates the changed value will be stored along with the other settings. 
+<para>The option <option>--cs</option> allows you to adjust a configuration value that is otherwise only adjustable via the configure dialogs.
+But be aware that when &kdiff3; then terminates the changed value will be stored along with the other settings.
 With <option>--confighelp</option> you can find out the names of the available items and current values.</para>
-<para>Via <option>--config</option> you can specify a different config file. When you often use &kdiff3; 
+<para>Via <option>--config</option> you can specify a different config file. When you often use &kdiff3;
 with completely different setups this allows you to easily switch between them.</para>
 </sect2>
 <sect2><title>Ignorable command line options</title>
 <para>Many people want to use &kdiff3; with some version control system. But when that version control system calls &kdiff3; using command line parameters that &kdiff3; doesn't recognise, then &kdiff3; terminates with an error.
-The <guilabel>Integration</guilabel> item in the settings dialog allow to specify command line parameters that should be ignored by &kdiff3;. 
+The <guilabel>Integration</guilabel> item in the settings dialog allow to specify command line parameters that should be ignored by &kdiff3;.
 They will appear in the usage help like in this example:</para>
 <screen>
   --<replaceable>foo</replaceable>                     Ignored. (User defined.)
 </screen>
 <variablelist>
   <varlistentry><term><guilabel>Command line options to ignore:</guilabel></term><listitem><para>
-     A list of options, separated via semicolon ';'. When one of these options appears on the commandline, 
-     then &kdiff3; will ignore it and run without reporting an error. 
+     A list of options, separated via semicolon ';'. When one of these options appears on the commandline,
+     then &kdiff3; will ignore it and run without reporting an error.
      (Default is "<literal>u;query;html;abort</literal>").</para></listitem></varlistentry>
 </variablelist>
 <para>When this isn't enough, then it is recommended to write a shell script that does the option translation.</para>
@@ -354,11 +355,11 @@ They will appear in the usage help like in this example:</para>
    required. If the entry for <guilabel>C</guilabel> remains empty, then only a
    two file diff analysis will be done.
 </para><para>
-   You can also select a directory via the <guibutton>Dir...</guibutton> button.
-   If for <guilabel>A</guilabel> a directory is specified then a directory-comparison
+   You can also select a folder via the <guibutton>Folder...</guibutton> button.
+   If for <guilabel>A</guilabel> a folder is specified then a folder-comparison
    /merge starts. If <guilabel>A</guilabel> specifies a file but <guilabel>B</guilabel>,
-   <guilabel>C</guilabel> or the output specify a directory, then &kdiff3; uses the
-   filename from <guilabel>A</guilabel> in the specified directories.
+   <guilabel>C</guilabel> or the output specify a folder, then &kdiff3; uses the
+   filename from <guilabel>A</guilabel> in the specified folders.
 </para><para>
    If <guilabel>Merge</guilabel> check box is selected, then the <guilabel>Output</guilabel>
    line becomes editable. But it is not required to specify the output filename
@@ -402,8 +403,8 @@ They will appear in the usage help like in this example:</para>
    line number of the first visible line in the window. (Note that window <guilabel>C</guilabel>
    is  optional.) Each info line appears in a different color.
 </para><para>
-   When you selected another file via browsing or finished editing the filename here 
-   by pressing &Enter;, the new file will be loaded and 
+   When you selected another file via browsing or finished editing the filename here
+   by pressing &Enter;, the new file will be loaded and
    compared with the already loaded file(s).
 </para></sect2><sect2><title>Coloring</title><para>
    The three input windows are assigned the letters <guilabel>A</guilabel>, <guilabel>B</guilabel>
@@ -427,7 +428,7 @@ They will appear in the usage help like in this example:</para>
    strings, comments, for the preprocessor, and some only very esoteric situations.)
 </para><para>
    The vertical line separating the summary column and the text is interrupted
-   if the input file had no lines there. When word-wrap is enabled then this vertical 
+   if the input file had no lines there. When word-wrap is enabled then this vertical
    line appears dotted for wrapped lines.
 </para></sect2><sect2><title>Overview Column</title><para>
    On the right side a "overview" column is visible left of the vertical scrollbar.
@@ -442,22 +443,22 @@ They will appear in the usage help like in this example:</para>
    lost here. By clicking into this overview column the corresponding text
    will be shown.
 </para></sect2><sect2 id="manualdiffhelp"><title>Manually Aligning Lines</title><para>
-   Sometimes the algorithm places the wrong lines next to each other. Or you want to compare 
+   Sometimes the algorithm places the wrong lines next to each other. Or you want to compare
    one piece of text with text at a completely different position in the other file.
-   For these situations you can manually instruct &kdiff3; to align certain lines. 
-   Mark the text for which you want to improve the alignment with the mouse as you would 
-   for copy and paste in the first diff view and then choose <menuchoice><guimenu>Diffview</guimenu><guimenuitem>Add Manual Diff Alignment</guimenuitem></menuchoice> menu item (<keycombo>&Ctrl;<keycap>Y</keycap></keycombo>). An orange bar will appear in 
-   the summary column next to the chosen text. Repeat this for the second and 
+   For these situations you can manually instruct &kdiff3; to align certain lines.
+   Mark the text for which you want to improve the alignment with the mouse as you would
+   for copy and paste in the first diff view and then choose <menuchoice><guimenu>Diffview</guimenu><guimenuitem>Add Manual Diff Alignment</guimenuitem></menuchoice> menu item (<keycombo>&Ctrl;<keycap>Y</keycap></keycombo>). An orange bar will appear in
+   the summary column next to the chosen text. Repeat this for the second and
    (if available) third diff view. &kdiff3; will immediately recalculate the differences everytime you do this,
-   and will align the chosen lines. Of course some of the previously matching lines in between 
+   and will align the chosen lines. Of course some of the previously matching lines in between
    might not match anymore.
 </para><para>
    Currently merging doesn't support the use of manual diff help.
 </para></sect2><sect2 id="joinsplitsections"><title>Manually Joining and Splitting Diff Sections</title><para>
-   In some cases &kdiff3; will see too many or too few diff sections for merging. In such a 
+   In some cases &kdiff3; will see too many or too few diff sections for merging. In such a
    case you can join or split existing sections.
 </para><para>
-   Add new sections by first selecting text in the lines that belong together in either input window (as for copying to the clipboard). 
+   Add new sections by first selecting text in the lines that belong together in either input window (as for copying to the clipboard).
    Then choose <menuchoice><guimenu>Merge</guimenu><guimenuitem>Split Diff At Selection</guimenuitem></menuchoice> menu item.
    Splits will be added above the first line and below the last line of the selected text.
    If you only want to add one section, then select text beginning at another section-split.
@@ -498,10 +499,10 @@ They will appear in the usage help like in this example:</para>
 </para><para>
    If you use the <guibutton>Automatically Go to Next Unsolved Conflict After Source Selection</guibutton> button (see <link linkend="autoadvance">Auto-Advance</link> section), you should disable this before choosing lines from several inputs or if you want to edit the lines after your choice. Otherwise &kdiff3; will jump to the next conflict after choosing the first input.
 </para><para>
-   It is often helpful directly edit the merge output. 
-   The summary column will show "m" for every line that was manually modified. 
-   When for instance the differences are aligned in a way that simply choosing 
-   the inputs won't be satisfactory, then you can mark the needed text and use 
+   It is often helpful directly edit the merge output.
+   The summary column will show "m" for every line that was manually modified.
+   When for instance the differences are aligned in a way that simply choosing
+   the inputs won't be satisfactory, then you can mark the needed text and use
    normal <link linkend="selections">copy and paste</link> to put it into the merge output.
 </para><para>
    Sometimes, when a line is removed either by automatic merge or by editing
@@ -527,14 +528,14 @@ They will appear in the usage help like in this example:</para>
 </para><para>
    Usually the version control history begins with a line containing the keyword "<literal>&#36;Log&#36;</literal>". This must be matched by the <guilabel>History start regular expression:</guilabel> option. &kdiff3; detects which subsequent lines are in the history by analysing the leading characters that came before the "<literal>&#36;Log&#36;</literal>" keyword. If the same "leading comment" characters also appears in the following lines, then they are also included in the history.
 </para><para>
-During each check-in the VCS writes a unique line specifying version-, date- and time-information 
+During each check-in the VCS writes a unique line specifying version-, date- and time-information
 followed by lines with user comments.
-These lines form one history-entry. This history section grows with every check-in and the 
-most recent entries appear at the top (after the history start line). 
+These lines form one history-entry. This history section grows with every check-in and the
+most recent entries appear at the top (after the history start line).
 </para><para>
-When for parallel development two or more developers check-in a branch of the file then 
-the merge history will contain several entries that appear as conflicts during the merge 
-of the branches. Since merging these can become very tedious, &kdiff3; offers support with two 
+When for parallel development two or more developers check-in a branch of the file then
+the merge history will contain several entries that appear as conflicts during the merge
+of the branches. Since merging these can become very tedious, &kdiff3; offers support with two
 possible strategies: Just insert the history information from both contributors at the top
 or sort the history information by a user defined key.
 </para><para>
@@ -577,8 +578,8 @@ could look like this. (This line is split in two because it wouldn't fit otherwi
 </para><para>
    Note that the "leading comment" characters (in the example "<literal>**</literal>") will already be removed by &kdiff3; before trying to match, hence the regular expression begins with a match for none or more white-space characters "<literal>\s*</literal>". Because comment characters can differ in each file (&eg; C/C++ uses other comment characters than a Perl script) &kdiff3; takes care of the leading comment characters and you should not specify them in the regular expression.
 </para><para>
-If you require a sorted history. Then the sortkey must be calculated. For this the 
-relevant parts in the regular expression must be grouped by parentheses. 
+If you require a sorted history. Then the sortkey must be calculated. For this the
+relevant parts in the regular expression must be grouped by parentheses.
 (The extra parentheses can also stay in if history sorting is disabled.)
 </para>
 <screen>
@@ -586,14 +587,14 @@ relevant parts in the regular expression must be grouped by parentheses.
  ([0-9][0-9][0-9][0-9]) ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])\s+(.*)
 </screen>
 <para>
-   The parentheses now contain <literal>1</literal>. version info, <literal>2</literal>. day, <literal>3</literal>. month, <literal>4</literal>. year, <literal>5</literal>. time, <literal>6</literal>. name. 
+   The parentheses now contain <literal>1</literal>. version info, <literal>2</literal>. day, <literal>3</literal>. month, <literal>4</literal>. year, <literal>5</literal>. time, <literal>6</literal>. name.
    But if we want to sort by date and time, we need to construct a key with the elements in a different order of appearance:
    First the year, followed by month, day, time, version info and name. Hence the sortkey order to specify is "<literal>4,3,2,5,1,6</literal>".
 </para><para>
    Because  month names aren't good for sorting ("<literal>Apr</literal>" would be first) &kdiff3; detects in which order the month names were given and uses that number instead ("<literal>Apr</literal>" -&gt; "<literal>04</literal>"). And if a pure number is found it will be transformed to a 4-digit value with leading zeros for sorting. Finally the resulting sort key for the first history entry start line will be:
 </para>
 <screen>
-2001 04 0002 10:45:41 integration_branch_12   tom 
+2001 04 0002 10:45:41 integration_branch_12   tom
 </screen>
 <para>
 For more information also see <link linkend="mergeoptions">Merge Settings</link> section.
@@ -650,11 +651,11 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
    you can also select via the keyboard by holding the &Shift; key and
    navigation with the cursor keys.
 </para><para>
-   If the selection exceeds the visible range you can move the mouse over the 
-   window borders which causes &kdiff3; to scroll in that direction. 
+   If the selection exceeds the visible range you can move the mouse over the
+   window borders which causes &kdiff3; to scroll in that direction.
 </para><para>
-   For very large selections you can also use the navigation keys while holding down 
-   the mouse. E.g. use &PgUp; and &PgDn; to quickly go to a certain position. At the 
+   For very large selections you can also use the navigation keys while holding down
+   the mouse. E.g. use &PgUp; and &PgDn; to quickly go to a certain position. At the
    end position release the mouse button.
 </para><para>
    In order to select everything in the current window use <menuchoice><guimenu>Edit</guimenu>
@@ -666,16 +667,16 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
 </para><para>
    <guibutton>Paste</guibutton> (<keycombo>&Ctrl;<keycap>V</keycap></keycombo> or <keycombo>&Shift;&Ins;</keycombo>)
    inserts the text in the clipboard at the cursorposition or over the current selection.
-   If you paste to either diff input window the contents of the clipboard will 
-   be shown in that window and the comparison will restart immediately. This is 
-   useful if you want to quickly grab a piece of text from somewhere and 
+   If you paste to either diff input window the contents of the clipboard will
+   be shown in that window and the comparison will restart immediately. This is
+   useful if you want to quickly grab a piece of text from somewhere and
    compare it with something else without first creating files.
 </para>
 </sect1>
 
 <sect1 id="saving"><title>Saving</title>
 <para>
-   Saving will only be allowed, when all conflicts were solved. If the file already exists and the <guilabel>Backup files</guilabel> option is enabled at <guilabel>Directory</guilabel> item in the settings dialog then the existing file will be renamed with an <literal role="extension">.orig</literal> extension, but if such a file exists it will be deleted. When you exit or start another diff-analysis and data wasn't saved yet, then &kdiff3; will ask if you want to save, cancel or proceed without saving. (&kdiff3; does not catch any signals. So if you "kill" a &kdiff3; instance then your data will be lost.)
+   Saving will only be allowed, when all conflicts were solved. If the file already exists and the <guilabel>Backup files</guilabel> option is enabled at <guilabel>Folder</guilabel> item in the settings dialog then the existing file will be renamed with an <literal role="extension">.orig</literal> extension, but if such a file exists it will be deleted. When you exit or start another diff-analysis and data wasn't saved yet, then &kdiff3; will ask if you want to save, cancel or proceed without saving. (&kdiff3; does not catch any signals. So if you "kill" a &kdiff3; instance then your data will be lost.)
 </para><para>
    Line endings are saved according to the normal method on the underlying operating system. For Unices each line ends with an linefeed-character "<literal>\n</literal>", while for Win32-based systems each line ends with a carriage-return + a linefeed "<literal>\r\n</literal>". &kdiff3; does not preserve the line-endings of the input files, which also means that you shouldn't use &kdiff3; with binary files.
 </para>
@@ -691,18 +692,18 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
 <para>
    &kdiff3; supports printing for textfile differences. The <menuchoice><guimenu>File</guimenu><guimenuitem>Print...</guimenuitem></menuchoice> menu item (<keycombo>&Ctrl;<keycap>P</keycap></keycombo>) opens a dialog that allows you to select the printer and to adjust other options.
 </para><para>
-   There are several possibilities to adjust the range. Due to different printing 
+   There are several possibilities to adjust the range. Due to different printing
    dialogs on different operating systems, the method to achieve certain range selections varies.
 </para>
 <variablelist>
    <varlistentry><term>All:</term><listitem><para>Print everything.</para></listitem></varlistentry>
-   <varlistentry><term>Current:</term><listitem><para>Print a page starting at the first visible line in the window. 
+   <varlistentry><term>Current:</term><listitem><para>Print a page starting at the first visible line in the window.
        (On systems without this option this can be achieved by specifying page number 10000 for printing.)</para></listitem></varlistentry>
    <varlistentry><term>Selection:</term><listitem><para>
-       Before choosing to print select text with the mouse (like for copy and paste) 
-       in one of the diff input windows to define the start and end line. If no text 
-       in one of the diff input windows was selected, then this won't be an available 
-       choice. (On systems without this option this can be achived by specifying page 
+       Before choosing to print select text with the mouse (like for copy and paste)
+       in one of the diff input windows to define the start and end line. If no text
+       in one of the diff input windows was selected, then this won't be an available
+       choice. (On systems without this option this can be achived by specifying page
        number 9999 for printing.)</para></listitem></varlistentry>
    <varlistentry><term>Range:</term><listitem><para>Specify the first and last page.
        </para></listitem></varlistentry>
@@ -724,7 +725,7 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
 <sect1 id="options"><title>Options</title>
 <para>
    Options and the recent-file-list will be saved when you exit the program,
-   and reloaded when you start it. (<menuchoice><guimenu>Settings</guimenu> 
+   and reloaded when you start it. (<menuchoice><guimenu>Settings</guimenu>
    <guimenuitem>Configure &kdiff3;...</guimenuitem></menuchoice> menu item).
 </para>
 <sect2><title>Font</title>
@@ -756,7 +757,7 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
     <varlistentry><term><guilabel>Current range diff background color:</guilabel></term><listitem><para> Usually dark yellow.</para></listitem></varlistentry>
     <varlistentry><term><guilabel>Color for manually aligned difference ranges:</guilabel></term><listitem><para> Usually orange.</para></listitem></varlistentry>
   </variablelist></listitem></varlistentry>
-  <varlistentry><term><guilabel>Directory Comparison View:</guilabel></term><listitem>
+  <varlistentry><term><guilabel>Folder Comparison View:</guilabel></term><listitem>
   <variablelist>
     <varlistentry><term><guilabel>Newest file color:</guilabel></term><listitem><para> Usually green.</para></listitem></varlistentry>
     <varlistentry><term><guilabel>Oldest file color:</guilabel></term><listitem><para> Usually red.</para></listitem></varlistentry>
@@ -765,7 +766,7 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
   </variablelist></listitem></varlistentry>
 </variablelist>
 <para>
-   Changing the colors for directory comparison will be effective only when starting the next directory comparison.
+   Changing the colors for folder comparison will be effective only when starting the next folder comparison.
 </para>
 <para>
    On systems with only 16 or 256 colors some colors are not available in pure
@@ -775,7 +776,7 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
 
 <sect2><title>Editor Settings</title>
 <variablelist>
-   <varlistentry><term><guilabel>Tab inserts spaces</guilabel></term><listitem><para> 
+   <varlistentry><term><guilabel>Tab inserts spaces</guilabel></term><listitem><para>
       If this is disabled and you press the &Tab; key, a tab-character is inserted,
       otherwise the appropriate amount of characters is inserted.</para></listitem></varlistentry>
    <varlistentry><term><guilabel>Tab size:</guilabel></term><listitem><para>
@@ -809,7 +810,7 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
    <varlistentry><term><guilabel>Ignore C/C++ comments (treat as white space)</guilabel></term><listitem><para> Default is off.
       Changes in comments will be treated like changes in white space.
    </para></listitem></varlistentry>
-   <varlistentry><term><guilabel>Ignore case (treat as white space)</guilabel></term><listitem><para>  Default is off. 
+   <varlistentry><term><guilabel>Ignore case (treat as white space)</guilabel></term><listitem><para>  Default is off.
       Case-differences of characters (like 'A' vs. 'a') will be treated like changes in white space.
    </para></listitem></varlistentry>
    <varlistentry><term><guilabel>Preprocessor command:</guilabel></term><listitem><para>
@@ -889,11 +890,11 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
       The <guilabel>Sort key result:</guilabel> will display the key used for history merge sorting.
    </para></listitem></varlistentry>
    <varlistentry><term><guilabel>Irrelevant merge command:</guilabel></term><listitem><para>
-      Specify a command of your own that should be called when &kdiff3; detects 
-      that for a three file merge the file from <guilabel>B</guilabel> doesn't contribute any 
+      Specify a command of your own that should be called when &kdiff3; detects
+      that for a three file merge the file from <guilabel>B</guilabel> doesn't contribute any
       relevant data that isn't already contained in the file from <guilabel>C</guilabel>.
       The command is called with the three filenames as parameters.
-      Data matched by the <guilabel>Auto merge regular expression</guilabel> or in the 
+      Data matched by the <guilabel>Auto merge regular expression</guilabel> or in the
       history isn't considered relevant.
    </para></listitem></varlistentry>
    <varlistentry><term><guilabel>Auto save and quit on merge without conflicts</guilabel></term><listitem><para>
@@ -905,10 +906,10 @@ For more information also see <link linkend="mergeoptions">Merge Settings</link>
 
 </sect2>
 
-<sect2><title>Directory Merge</title>
+<sect2><title>Folder Merge</title>
 <para>
-   These options are concerned with scanning the directory and handling the
-   merge: See the <link linkend="dirmergeoptions">Directory Comparison/Merge
+   These options are concerned with scanning the folder and handling the
+   merge: See the <link linkend="dirmergeoptions">Folder Comparison/Merge
    Docs</link> for details.
 </para><para>
 Yet there is one option here that is also relevant for saving single files:
@@ -944,9 +945,9 @@ Yet there is one option here that is also relevant for saving single files:
 <variablelist>
   <varlistentry><term><emphasis>Overview options:</emphasis></term><listitem><para>
     These choices are only available when you compare three files. In normal mode all
-    differences are shown in one color-coded overview-column. But sometimes you are  
+    differences are shown in one color-coded overview-column. But sometimes you are
     especially interested in the differences between only two of these three files.
-    Selecting "A vs. B", "A vs. C" or "B vs. C"-overview will show a second overview 
+    Selecting "A vs. B", "A vs. C" or "B vs. C"-overview will show a second overview
     column with the required information next to the normal overview.
   </para></listitem></varlistentry>
   <varlistentry><term><guimenuitem>Word Wrap Diff Windows</guimenuitem></term><listitem><para>
@@ -964,7 +965,7 @@ Yet there is one option here that is also relevant for saving single files:
     a merge, then the output filename will be preserved.)</para></listitem></varlistentry>
   <varlistentry><term><guibutton>Show White Space</guibutton></term><listitem><para> Turn this off to suppress
     any highlighting of white-space-only changes in the text or overview-columns.
-    (Note that this also applies to changes in numbers or comments if the options 
+    (Note that this also applies to changes in numbers or comments if the options
     <guilabel>Ignore numbers (treat as white space)</guilabel> or <guilabel>Ignore C/C++ comments
     (treat as white space)</guilabel> are active.)</para></listitem></varlistentry>
   <varlistentry><term><guibutton>Show Space &amp;&amp; Tabulator Characters</guibutton></term><listitem><para> Sometimes
@@ -1007,8 +1008,8 @@ Yet there is one option here that is also relevant for saving single files:
 <para>
 The idea is to allow the user greater flexibility while configuring the diff-result.
 But this requires an external program, and many users don't want to write one themselves.
-The good news is that very often <command>sed</command> or <command>perl</command> 
-will do the job. 
+The good news is that very often <command>sed</command> or <command>perl</command>
+will do the job.
 </para>
 <para>Example: Simple testcase: Consider file a.txt (6 lines):
 </para>
@@ -1041,7 +1042,7 @@ Without a preprocessor the following lines would be placed next to each other:
 </screen>
 <para>
 This is probably not wanted since the first letter contains the actually interesting information.
-To help the matching algorithm to ignore the second letter we can use a line matching preprocessor 
+To help the matching algorithm to ignore the second letter we can use a line matching preprocessor
 command, that replaces 'g' with 'a':
 </para>
 <screen>
@@ -1060,21 +1061,21 @@ With this command the result of the comparison would be:
 </screen>
 <para>
 Internally the matching algorithm sees the files after running the line matching preprocessor,
-but on the screen the file is unchanged. (The normal preprocessor would change the data also on 
+but on the screen the file is unchanged. (The normal preprocessor would change the data also on
 the screen.)
 </para>
 
 <sect2 id="sedbasics"><title><command>sed</command> Basics</title>
 <para>
 This section only introduces some very basic features of <command>sed</command>. For more
-information see <ulink url="info:/sed">info:/sed</ulink> or 
+information see <ulink url="info:/sed">info:/sed</ulink> or
 <ulink url="https://www.gnu.org/software/sed/manual/html_mono/sed.html">
 https://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink>.
 A precompiled version for &Windows; can be found at <ulink url="http://unxutils.sourceforge.net">
 http://unxutils.sourceforge.net</ulink>.
-Note that the following examples assume that the <command>sed</command> command is in some 
+Note that the following examples assume that the <command>sed</command> command is in some
 folder in the <envar>PATH</envar> environment variable. If this is not the case, you have to specify the full absolute
-path for the command. 
+path for the command.
 </para>
 <para>
 In this context only the <command>sed</command> substitute command is used:
@@ -1091,7 +1092,7 @@ Here the <command>echo</command> command is useful. Example:
    -> obrakadabra
 </screen>
 <para>
-This example shows a very simple sed-command that replaces the first occurrence 
+This example shows a very simple sed-command that replaces the first occurrence
 of "a" with "o". If you want to replace all occurrences then you need the "g" flag:
 </para>
 <screen>
@@ -1099,9 +1100,9 @@ of "a" with "o". If you want to replace all occurrences then you need the "g" fl
    -> obrokodobro
 </screen>
 <para>
-The "|"-symbol is the pipe-command that transfers the output of the previous 
+The "|"-symbol is the pipe-command that transfers the output of the previous
 command to the input of the following command. If you want to test with a longer file
-then you can use <command>cat</command> on &UNIX; like systems or <command>type</command> 
+then you can use <command>cat</command> on &UNIX; like systems or <command>type</command>
 on &Windows; like systems. <command>sed</command> will do the substitution for each line.
 <screen>
    <command>cat</command> <replaceable>filename</replaceable> | <command>sed</command> <replaceable>options</replaceable>
@@ -1134,7 +1135,7 @@ Use the following <guilabel>Line-matching preprocessor command:</guilabel> to co
    <command>sed</command> 's/\(.*\)/\U\1/'
 </screen>
 <para>
-Here the "<literal>.*</literal>" is a regular expression that matches any string and in this context matches all characters in the line. 
+Here the "<literal>.*</literal>" is a regular expression that matches any string and in this context matches all characters in the line.
 The "<literal>\1</literal>" in the replacement string refers to the matched text within the first pair of "<literal>\(</literal>" and "<literal>\)</literal>".
 The "<literal>\U</literal>" converts the inserted text to uppercase.
 </para>
@@ -1151,13 +1152,13 @@ line-matching preprocessor command that removes only the generated text:
    <command>sed</command> 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'
 </screen>
 <para>
-The "<literal>\|</literal>" separates the possible keywords. You might want to modify this list 
+The "<literal>\|</literal>" separates the possible keywords. You might want to modify this list
 according to your needs.
 The "<literal>\</literal>" before the "<literal>$</literal>" is necessary because otherwise the "<literal>$</literal>" matches the end of the line.
 </para>
 <para>
 While experimenting with <command>sed</command> you might come to understand and even like
-these regular expressions. They are useful because there are many other programs that also 
+these regular expressions. They are useful because there are many other programs that also
 support similar things.
 </para>
 </sect3>
@@ -1178,21 +1179,21 @@ Any character within '<literal>[</literal>' and '<literal>]</literal>' is a matc
 <sect3><title>Ignoring Certain Columns</title>
 <para>
 Sometimes a text is very strictly formatted, and contains columns that you always want to ignore, while there are
-other columns you want to preserve for analysis. In the following example the first five columns (characters) are 
+other columns you want to preserve for analysis. In the following example the first five columns (characters) are
 ignored, the next ten columns are preserved, then again five columns are ignored and the rest of the line is preserved.
 </para>
 <screen>
    <command>sed</command> 's/.....\(..........\).....\(.*\)/\1\2/'
 </screen>
 <para>
-Each dot '<literal>.</literal>' matches any single character. The "<literal>\1</literal>" and "<literal>\2</literal>" in the replacement string refer to the matched text within the first 
+Each dot '<literal>.</literal>' matches any single character. The "<literal>\1</literal>" and "<literal>\2</literal>" in the replacement string refer to the matched text within the first
 and second pair of "<literal>\(</literal>" and "<literal>\)</literal>" denoting the text to be preserved.
 </para>
 </sect3>
 
 <sect3><title>Combining Several Substitutions</title>
 <para>
-Sometimes you want to apply several substitutions at once. You can then use the 
+Sometimes you want to apply several substitutions at once. You can then use the
 semicolon '<literal>;</literal>' to separate these from each other. Example:
 </para>
 <screen>
@@ -1203,14 +1204,14 @@ semicolon '<literal>;</literal>' to separate these from each other. Example:
 
 <sect3><title>Using <command>perl</command> instead of <command>sed</command></title>
 <para>
-Instead of <command>sed</command> you might want to use something else like 
+Instead of <command>sed</command> you might want to use something else like
 <command>perl</command>.
 </para>
 <screen>
    <command>perl</command> -p -e 's/<replaceable>REGEXP</replaceable>/<replaceable>REPLACEMENT</replaceable>/<replaceable>FLAGS</replaceable>'
 </screen>
 <para>
-But some details are different in <command>perl</command>. Note that where 
+But some details are different in <command>perl</command>. Note that where
 <command>sed</command> needed "<literal>\(</literal>" and "<literal>\)</literal>" <command>perl</command>
 requires the simpler "<literal>(</literal>" and "<literal>)</literal>" without preceding '<literal>\</literal>'. Example:
 </para>
@@ -1223,7 +1224,7 @@ requires the simpler "<literal>(</literal>" and "<literal>)</literal>" without p
 
 <sect2><title>Order Of Preprocessor Execution</title>
 <para>
-The data is piped through all internal and external preprocessors in the 
+The data is piped through all internal and external preprocessors in the
 following order:
 </para>
 <itemizedlist>
@@ -1238,7 +1239,7 @@ following order:
 The data after the normal preprocessor will be preserved for display and merging. The
 other operations only modify the data that the line-matching-diff-algorithm sees.
 </para><para>
-In the rare cases where you use a normal preprocessor note that 
+In the rare cases where you use a normal preprocessor note that
 the line-matching-preprocessor sees the output of the normal preprocessor as input.
 </para>
 </sect2>
@@ -1246,7 +1247,7 @@ the line-matching-preprocessor sees the output of the normal preprocessor as inp
 <sect2><title>Warning</title>
 <para>
 The preprocessor-commands are often very useful, but as with any option that modifies
-your texts or hides away certain differences automatically, you might accidentally overlook 
+your texts or hides away certain differences automatically, you might accidentally overlook
 certain differences and in the worst case destroy important data.
 </para><para>
 For this reason during a merge if a normal preprocessor-command is being used &kdiff3; will tell you so and ask you if it should be disabled or not. But it won't warn you if a <guilabel>Line-matching preprocessor command:</guilabel> option is active. The merge will not complete until all conflicts are solved. If you disabled <menuchoice><guimenu>Diffview</guimenu><guimenuitem>Show White Space</guimenuitem></menuchoice> menu item then the differences that were removed with the <guilabel>Line-matching preprocessor command:</guilabel> option will also be invisible. If the <guibutton>Save</guibutton> button remains disabled during a merge (because of remaining conflicts), make sure to enable <menuchoice><guimenu>Diffview</guimenu><guimenuitem>Show White Space</guimenuitem></menuchoice> menu item. If you don't want to merge these less important differences manually
@@ -1257,14 +1258,14 @@ you can select <menuchoice><guimenu>Merge</guimenu><guimenuitem>Choose [A|B|C] f
 </chapter>
 
 
-<chapter id="dirmerge"><title>Directory Comparison and Merge with &kdiff3;</title>
-<sect1 id="dirmergeintro"><title>Introduction into Directory Comparison and Merge</title>
+<chapter id="dirmerge"><title>Folder Comparison and Merge with &kdiff3;</title>
+<sect1 id="dirmergeintro"><title>Introduction into Folder Comparison and Merge</title>
 <para>
-   Often programmers must modify many files in a directory to achieve their
-   purpose. For this &kdiff3; also lets you compare and merge complete directories
+   Often programmers must modify many files in a folder to achieve their
+   purpose. For this &kdiff3; also lets you compare and merge complete folders
    recursively!
 </para><para>
-   Even though comparing and merging directories seems to be quite obvious,
+   Even though comparing and merging folders seems to be quite obvious,
    there are several details that you should know about. Most important is of
    course the fact that now many files might be affected by each operation.
    If you don't have backups of your original data, then it can be very hard
@@ -1283,11 +1284,11 @@ you can select <menuchoice><guimenu>Merge</guimenu><guimenuitem>Choose [A|B|C] f
 So this is what this program can do for you: &kdiff3; ...
 </para>
 <itemizedlist>
-     <listitem><para>... reads and compares two or three directories recursively,</para></listitem>
+     <listitem><para>... reads and compares two or three folders recursively,</para></listitem>
      <listitem><para>... takes special care of symbolic links,</para></listitem>
      <listitem><para>... lets you browse files on mouse double click,</para></listitem>
      <listitem><para>... for each item proposes a merge operation, which you can change
-                         before starting the directory merge,</para></listitem>
+                         before starting the folder merge,</para></listitem>
      <listitem><para>... lets you simulate the merge and lists the actions that would
                          take  place, without actually doing them,</para></listitem>
      <listitem><para>... lets you really do the merge, and lets you interact whenever
@@ -1299,32 +1300,32 @@ So this is what this program can do for you: &kdiff3; ...
 </itemizedlist>
 </sect1>
 
-<sect1 id="startingdirmerge"><title>Starting Directory Comparison Or Merge</title>
+<sect1 id="startingdirmerge"><title>Starting Folder Comparison Or Merge</title>
 <para>
    This is very similar to the single file merge and comparison. You just
-   have  to specify directories on the command line or in the file-open
+   have  to specify folders on the command line or in the file-open
    dialog.
 </para>
-<sect2><title>Compare/Merge two directories: </title>
+<sect2><title>Compare/Merge two folders: </title>
 <screen>
-   <command>kdiff3</command> <replaceable>dir1 dir2</replaceable>
-   <command>kdiff3</command> <replaceable>dir1 dir2</replaceable> -o <replaceable>destdir</replaceable>
+   <command>kdiff3</command> <replaceable>folder1 folder2</replaceable>
+   <command>kdiff3</command> <replaceable>folder1 folder2</replaceable> -o <replaceable>destdir</replaceable>
 </screen>
 <para>
-   If no destination directory is specified, then &kdiff3; will use <replaceable>dir2</replaceable>.
+   If no destination folder is specified, then &kdiff3; will use <replaceable>folder2</replaceable>.
 </para>
 </sect2>
 
-<sect2><title>Compare/Merge three directories: </title>
+<sect2><title>Compare/Merge three folders: </title>
 <screen>
-   <command>kdiff3</command> <replaceable>dir1 dir2 dir3</replaceable>
-   <command>kdiff3</command> <replaceable>dir1 dir2 dir3</replaceable> -o <replaceable>destdir</replaceable>
+   <command>kdiff3</command> <replaceable>folder1 folder2 folder3</replaceable>
+   <command>kdiff3</command> <replaceable>folder1 folder2 folder3</replaceable> -o <replaceable>destdir</replaceable>
 </screen>
 <para>
-   When three directories are merged then <replaceable>dir1</replaceable>
+   When three folders are merged then <replaceable>folder1</replaceable>
    is used as the base for the merge.
-   If no destination directory is specified, then &kdiff3; will use <replaceable>dir3</replaceable>
-   as the  destination directory for the merge.
+   If no destination folder is specified, then &kdiff3; will use <replaceable>folder3</replaceable>
+   as the  destination folder for the merge.
 </para>
 
 <para>
@@ -1334,17 +1335,17 @@ So this is what this program can do for you: &kdiff3; ...
 </sect2>
 </sect1>
 
-<sect1 id="dirmergevisible"><title>Directory Merge Visible Information</title>
+<sect1 id="dirmergevisible"><title>Folder Merge Visible Information</title>
 <para>
-   While reading the directories a message-box appears that informs you of
-   the progress. If you abort the directory scan, then only files that have
+   While reading the folders a message-box appears that informs you of
+   the progress. If you abort the folder scan, then only files that have
    been  compared until then will be listed.
 </para><para>
-   When the directory scan is complete then &kdiff3; will show a listbox with
+   When the folder scan is complete then &kdiff3; will show a listbox with
    the results left, ...
 </para>
 <screenshot><mediaobject>
-<imageobject><imagedata fileref="dirbrowser.png" format="PNG"/></imageobject> <!--alt="Image of the directory browser."-->
+<imageobject><imagedata fileref="dirbrowser.png" format="PNG"/></imageobject> <!--alt="Image of the folder browser."-->
 </mediaobject></screenshot>
 <para>
    ... and details about the currently selected item on the right:
@@ -1356,30 +1357,30 @@ So this is what this program can do for you: &kdiff3; ...
 
 <sect2 id="name"><title>The Name Column</title>
 <para>
-   Each file and directory that was found during the scan is shown here in
+   Each file and folder that was found during the scan is shown here in
    a tree. You can select an item by clicking it with the mouse once.
 </para><para>
-   The directories are collapsed by default. You can expand and collapse
+   The folders are collapsed by default. You can expand and collapse
    them by clicking on the "+"/"-" or by double-clicking the item or
-   by using the &Left;/&Right; cursor keys. The <guimenu>Directory</guimenu> menu also contains two
-   actions <guimenuitem>Fold All Subdirs</guimenuitem> and <guimenuitem>Unfold All Subdirs</guimenuitem> with which you can
-   collapse or expand all directories at once.
+   by using the &Left;/&Right; cursor keys. The <guimenu>Folder</guimenu> menu also contains two
+   actions <guimenuitem>Fold All Subfolders</guimenuitem> and <guimenuitem>Unfold All Subfolders</guimenuitem> with which you can
+   collapse or expand all folders at once.
 </para><para>
    If you double-click a file item then the file comparison starts and the
    file-diff-window will appear.
 </para>
 <para>
    The image in the name column reflects the file type in the first
-   directory  (<guilabel>A</guilabel>). It can be one of these:
+   folder  (<guilabel>A</guilabel>). It can be one of these:
 </para>
 <itemizedlist>
      <listitem><para>Normal file</para></listitem>
-     <listitem><para>Normal directory (directory-image)</para></listitem>
-     <listitem><para>Link to a file (file-image with a link arrow)</para></listitem>
-     <listitem><para>Link to a directory (directory-image with a link arrow)</para></listitem>
+     <listitem><para>Normal folder (folder image)</para></listitem>
+     <listitem><para>Link to a file (file image with a link arrow)</para></listitem>
+     <listitem><para>Link to a folder (folder image with a link arrow)</para></listitem>
 </itemizedlist>
 <para>
-   If the file type is different in the other directories, then this is visible
+   If the file type is different in the other folders, then this is visible
    in the columns <guilabel>A</guilabel>/<guilabel>B</guilabel>/<guilabel>C</guilabel>
    and in the window that shows the details about the selected item. Note that
    for such a case no merge operation can be selected automatically. When starting
@@ -1393,7 +1394,7 @@ So this is what this program can do for you: &kdiff3; ...
    are used in the columns <guilabel>A</guilabel>/<guilabel>B</guilabel>/<guilabel>C</guilabel>.
 </para>
 <itemizedlist>
-     <listitem><para>Black: This item doesn't exist in this directory.</para></listitem>
+     <listitem><para>Black: This item doesn't exist in this folder.</para></listitem>
      <listitem><para>Green: Newest item.</para></listitem>
      <listitem><para>Yellow: Older than green, newer than red.</para></listitem>
      <listitem><para>Red: Oldest item.</para></listitem>
@@ -1402,8 +1403,8 @@ So this is what this program can do for you: &kdiff3; ...
    But for items that were identical in the comparison their color also is
    identical even if the age is not.
 </para><para>
-   Directories are considered equal if all items they contain are identical.
-   Then they also will have the same color. But the age of a directory is not
+   Folders are considered equal if all items they contain are identical.
+   Then they also will have the same color. But the age of a folder is not
    considered for its color.
 </para><para>
    The idea for this coloring scheme I came upon in
@@ -1414,7 +1415,7 @@ So this is what this program can do for you: &kdiff3; ...
 
 </sect2><sect2 id="operation"><title>The Operation Column</title>
 <para>
-   After comparing the directories &kdiff3; also evaluates a proposal for a
+   After comparing the folders &kdiff3; also evaluates a proposal for a
    merge  operation. This is shown in the <guilabel>Operation</guilabel> column. You can modify
    the operation  by clicking on the operation you want to change. A small menu
    will popup and allows you to select an operation for that item. (You can also
@@ -1425,16 +1426,16 @@ So this is what this program can do for you: &kdiff3; ...
    It depends on the item and on the merge-mode you are in, what operations are available. The merge-mode is one of
 </para>
 <itemizedlist>
-     <listitem><para>Three directory-merge (<guilabel>A</guilabel> is treated as older base of both).</para></listitem>
-     <listitem><para>Two directory-merge.</para></listitem>
-     <listitem><para>Two directory-sync-mode (activate via <guilabel>Synchronize directories</guilabel> option).</para></listitem>
+     <listitem><para>Three-folder merge (<guilabel>A</guilabel> is treated as older base of both).</para></listitem>
+     <listitem><para>Two-folder merge.</para></listitem>
+     <listitem><para>Two-folder sync-mode (activate via <guilabel>Synchronize folders</guilabel> option).</para></listitem>
 </itemizedlist>
 <para>
-   In three directory merge the operation proposal will be: If for an item ...
+   In three-folder merge the operation proposal will be: If for an item ...
 </para>
 <itemizedlist>
      <listitem><para>
-             ... all three directories are equal: Copy from <guilabel>C</guilabel>
+             ... all three folders are equal: Copy from <guilabel>C</guilabel>
      </para></listitem>
      <listitem><para>
              ... <guilabel>A</guilabel> and <guilabel>C</guilabel> are equal but <guilabel>B</guilabel> is not: Copy from <guilabel>B</guilabel> (or if <guilabel>B</guilabel> does not exist, delete the destination if exists)
@@ -1458,15 +1459,15 @@ So this is what this program can do for you: &kdiff3; ...
              ... <guilabel>A</guilabel>, <guilabel>B</guilabel> and <guilabel>C</guilabel> are not equal: Merge
      </para></listitem>
      <listitem><para>
-             ... <guilabel>A</guilabel>, <guilabel>B</guilabel> and <guilabel>C</guilabel> don't have the same file type (&eg; <guilabel>A</guilabel> is a directory, <guilabel>B</guilabel> is a file): "Error: Conflicting File Types". While such items exist the directory merge cannot start.
+             ... <guilabel>A</guilabel>, <guilabel>B</guilabel> and <guilabel>C</guilabel> don't have the same file type (&eg; <guilabel>A</guilabel> is a folder, <guilabel>B</guilabel> is a file): "Error: Conflicting File Types". While such items exist the folder merge cannot start.
      </para></listitem>
 </itemizedlist>
 <para>
-   In two directory merge the operation proposal will be: If for an item ...
+   In two-folder merge the operation proposal will be: If for an item ...
 </para>
 <itemizedlist>
      <listitem><para>
-             ... both directories are equal: Copy from <guilabel>B</guilabel>
+             ... both folders are equal: Copy from <guilabel>B</guilabel>
      </para></listitem>
      <listitem><para>
              ... <guilabel>A</guilabel> exists, but not <guilabel>B</guilabel>: Copy from <guilabel>A</guilabel>
@@ -1478,18 +1479,18 @@ So this is what this program can do for you: &kdiff3; ...
              ... <guilabel>A</guilabel> and <guilabel>B</guilabel> exist but are not equal: Merge
      </para></listitem>
      <listitem><para>
-             ... <guilabel>A</guilabel> and <guilabel>B</guilabel> don't have the same file type (&eg; <guilabel>A</guilabel> is a directory, <guilabel>B</guilabel> is a file): "Error: Conflicting File Types". While such items exist the directory merge cannot start.
+             ... <guilabel>A</guilabel> and <guilabel>B</guilabel> don't have the same file type (&eg; <guilabel>A</guilabel> is a folder, <guilabel>B</guilabel> is a file): "Error: Conflicting File Types". While such items exist the folder merge cannot start.
      </para></listitem>
 </itemizedlist>
 <para>
-   Sync-mode is active if only two directories and no explicit destination
-   were specified and if the <guilabel>Synchronize directories</guilabel> option is active. &kdiff3;
-   then selects a default operation so that both directories are the same afterwards.
+   Sync-mode is active if only two folders and no explicit destination
+   were specified and if the <guilabel>Synchronize folders</guilabel> option is active. &kdiff3;
+   then selects a default operation so that both folders are the same afterwards.
    If for an item ...
 </para>
 <itemizedlist>
      <listitem><para>
-             ... both directories are equal: Nothing will be done.
+             ... both folders are equal: Nothing will be done.
      </para></listitem>
      <listitem><para>
              ... <guilabel>A</guilabel> exists, but not <guilabel>B</guilabel>: Copy <guilabel>A</guilabel> to <guilabel>B</guilabel>
@@ -1498,14 +1499,14 @@ So this is what this program can do for you: &kdiff3; ...
              ... <guilabel>B</guilabel> exists, but not <guilabel>A</guilabel>: Copy <guilabel>B</guilabel> to <guilabel>A</guilabel>
      </para></listitem>
      <listitem><para>
-             ... <guilabel>A</guilabel> and <guilabel>B</guilabel> exist, but are not equal: Merge and store the result in  both directories. (For the user the visible save-filename is <guilabel>B</guilabel>, but then &kdiff3; copies <guilabel>B</guilabel> also to <guilabel>A</guilabel>.)
+             ... <guilabel>A</guilabel> and <guilabel>B</guilabel> exist, but are not equal: Merge and store the result in both folders. (For the user the visible save-filename is <guilabel>B</guilabel>, but then &kdiff3; copies <guilabel>B</guilabel> also to <guilabel>A</guilabel>.)
      </para></listitem>
      <listitem><para>
-             ... <guilabel>A</guilabel> and <guilabel>B</guilabel> don't have the same file type (&eg; <guilabel>A</guilabel> is a directory, <guilabel>B</guilabel> is a file): "Error: Conflicting File Types". While such items exist the directory merge cannot start.
+             ... <guilabel>A</guilabel> and <guilabel>B</guilabel> don't have the same file type (&eg; <guilabel>A</guilabel> is a folder, <guilabel>B</guilabel> is a file): "Error: Conflicting File Types". While such items exist the folder merge cannot start.
      </para></listitem>
 </itemizedlist>
 <para>
-   When two directories are merged and the <guilabel>Copy newer instead of merging (unsafe)</guilabel> option is selected, then &kdiff3; looks at the dates and proposes to choose the newer file. If the files are not equal but have equal dates, then the operation will contain "Error: Dates are equal but files are not." While such items exist the directory merge cannot start.
+   When two folders are merged and the <guilabel>Copy newer instead of merging (unsafe)</guilabel> option is selected, then &kdiff3; looks at the dates and proposes to choose the newer file. If the files are not equal but have equal dates, then the operation will contain "Error: Dates are equal but files are not." While such items exist the folder merge cannot start.
 </para>
 </sect2>
 
@@ -1523,20 +1524,20 @@ So this is what this program can do for you: &kdiff3; ...
 <para>
    When the file comparison mode <guilabel>Full Analysis</guilabel> is enabled in the options, then
    &kdiff3; will show extra columns containing the numbers of Unsolved, Solved, Nonwhite and Whitespace
-   conflicts. (The <guilabel>Solved</guilabel> column will only show when comparing or merging three directories.)
+   conflicts. (The <guilabel>Solved</guilabel> column will only show when comparing or merging three folders.)
 </para>
 </sect2>
 
 <sect2 id="selectingvisiblefiles"><title>Selecting Listed Files</title>
-<para>   
-   Several options influence which files are listed here. Some are accessible in the 
-   <link linkend="dirmergeoptions">settings dialog</link>. The <guilabel>Directory</guilabel> menu contains the entries:
+<para>
+   Several options influence which files are listed here. Some are accessible in the
+   <link linkend="dirmergeoptions">settings dialog</link>. The <guilabel>Folder</guilabel> menu contains the entries:
 </para><para><itemizedlist>
      <listitem><para>
-        <guilabel>Show Identical Files</guilabel>: Files that have been detected equal in all input directories.
+        <guilabel>Show Identical Files</guilabel>: Files that have been detected equal in all input folders.
      </para></listitem>
      <listitem><para>
-        <guilabel>Show Different Files</guilabel>: Files that exist in two or more directories but are not equal.
+        <guilabel>Show Different Files</guilabel>: Files that exist in two or more folders but are not equal.
      </para></listitem>
      <listitem><para>
         <guilabel>Show Files only in A</guilabel>: Files that exist only in <guilabel>A</guilabel>, but not in <guilabel>B</guilabel> or <guilabel>C</guilabel>.
@@ -1551,52 +1552,52 @@ So this is what this program can do for you: &kdiff3; ...
 <para>
    Activate only the <guilabel>Show</guilabel> options for the items you want listed. If for example you only want to list all items that exist either in <guilabel>A</guilabel> or in <guilabel>B</guilabel> but not in both, you'll have to activate <guilabel>Show Files only in A</guilabel> and <guilabel>Show Files only in B</guilabel> and deactivate all others (<guilabel>Show Identical Files</guilabel>, <guilabel>Show Different Files</guilabel>, <guilabel>Show Files only in C</guilabel>). The list will be updated immediately to reflect the change.
 </para><para>
-   These options also apply for directories with one exception: Disabling <guilabel>
-   Show Different Files</guilabel> will not hide any complete directories. This will
+   These options also apply for folders with one exception: Disabling <guilabel>
+   Show Different Files</guilabel> will not hide any complete folders. This will
    work only for files within.
 </para><para>
-   Note that of these only the <guilabel>Show Identical Files</guilabel> option is persistant. The others are enabled when starting &kdiff3;. 
+   Note that of these only the <guilabel>Show Identical Files</guilabel> option is persistant. The others are enabled when starting &kdiff3;.
 </para>
 </sect2>
 
 </sect1>
 
 
-<sect1 id="dothemerge"><title>Doing A Directory Merge</title>
+<sect1 id="dothemerge"><title>Doing A Folder Merge</title>
 <para>
-   You can either merge the currently selected item (file or directory), or all items.
-   When you have made all your operation choices (in all subdirectories too)
+   You can either merge the currently selected item (file or folder), or all items.
+   When you have made all your operation choices (in all subfolders too)
    then you can start the merge.
 </para><para>
-   Be aware that if you didn't specify a destination directory explicitly, then the destination will be <guilabel>C</guilabel> in three directory mode, <guilabel>B</guilabel> in two directory merge mode, and in sync-mode it will be <guilabel>A</guilabel> or/and <guilabel>B</guilabel>.
+   Be aware that if you didn't specify a destination folder explicitly, then the destination will be <guilabel>C</guilabel> in three-folder mode, <guilabel>B</guilabel> in two-folder merge mode, and in sync-mode it will be <guilabel>A</guilabel> or/and <guilabel>B</guilabel>.
 </para><para>
-   If you have specified a destination directory also check that all items
+   If you have specified a destination folder also check that all items
    that should be in the output, are in the tree. There are some options that
-   cause certain items to be omitted from the directory comparison and merge.
+   cause certain items to be omitted from the folder comparison and merge.
    Check these options to avoid unpleasant surprises:
 </para>
 <itemizedlist>
-     <listitem><para><guilabel>Recursive Directories</guilabel>: If this is off, then items in subdirectories will not be found.</para></listitem>
+     <listitem><para><guilabel>Recursive Folders</guilabel>: If this is off, then items in subfolders will not be found.</para></listitem>
      <listitem><para><guilabel>Pattern</guilabel>/<guilabel>Anti-Pattern</guilabel>: Include/exclude items that match</para></listitem>
      <listitem><para><guilabel>Exclude Hidden Files</guilabel></para></listitem>
      <listitem><para><link linkend="selectingvisiblefiles">Show options</link> (<guilabel>Show Identical/Different Files</guilabel>, <guilabel>Files only in A/B/C</guilabel>)</para></listitem>
 </itemizedlist>
 <para>
    If you change the settings in order to list more files, you must do a rescan
-   via menu <menuchoice><guimenu>Directory</guimenu><guimenuitem>Rescan</guimenuitem>
+   via menu <menuchoice><guimenu>Folder</guimenu><guimenuitem>Rescan</guimenuitem>
    </menuchoice> yourself. (The reason for this is that for faster comparison-speed
    &kdiff3; omits the comparison for files suppressed by these criteria.) If you
-   changed your file and dir patterns to exclude files, then the file-list will
+   changed your file and folder patterns to exclude files, then the file-list will
    immediately be updated on closing the options-dialog.
 </para><para>
-   Note that when you write to a completely new directory then you usually also want to copy the identical files.
-   In that case enable the <guilabel>Show Identical Files</guilabel> option. If your destination-directory is one of the inputs, 
+   Note that when you write to a completely new folder then you usually also want to copy the identical files.
+   In that case enable the <guilabel>Show Identical Files</guilabel> option. If your destination folder is one of the inputs,
    then this isn't necessary because the file is already there.
 </para><para>
    If you are satisfied so far, the rest is easy.
 </para><para>
-   To merge all items: Select <guimenuitem>Start/Continue Directory Merge</guimenuitem>
-   in the <guimenu>Directory</guimenu> menu or press <keycap>F7</keycap> (which is the
+   To merge all items: Select <guimenuitem>Start/Continue Folder Merge</guimenuitem>
+   in the <guimenu>Folder</guimenu> menu or press <keycap>F7</keycap> (which is the
    default shortcut). To merge only the current item: Select <guilabel>Run Operation
    for Current Item</guilabel> or press <keycap>F6</keycap>.
 </para><para>
@@ -1604,8 +1605,8 @@ So this is what this program can do for you: &kdiff3; ...
    exist, then a messagebox will appear and these items will be pointed out,
    so you can select a valid operation for the item.
 </para><para>
-   If you merge all items a dialog will appear giving you the options 
-   <guilabel>Do it</guilabel>, <guilabel>Simulate it</guilabel> and 
+   If you merge all items a dialog will appear giving you the options
+   <guilabel>Do it</guilabel>, <guilabel>Simulate it</guilabel> and
    <guilabel>Cancel</guilabel>.
 </para>
 <itemizedlist>
@@ -1619,7 +1620,7 @@ So this is what this program can do for you: &kdiff3; ...
    (<link linkend="dirmergebigscreenshot">see the big screenshot</link>).
 </para><para>
    When you have finished with manually merging a file, again select <guimenuitem>Start/
-   Continue Directory Merge</guimenuitem> or the <keycap>F7</keycap> key. If you haven't
+   Continue Folder Merge</guimenuitem> or the <keycap>F7</keycap> key. If you haven't
    saved it yet, a dialog will ask you to do so. Then &kdiff3; will continue with the
    next item.
 </para><para>
@@ -1633,73 +1634,73 @@ So this is what this program can do for you: &kdiff3; ...
    When the merge is complete, then &kdiff3; will inform you via a message
    box.
 </para><para>
-   If some items were merged individually before running the directorymerge then 
+   If some items were merged individually before running the directorymerge then
    &kdiff3; remembers this (while this
    merge-session goes on), and doesn't merge them again when later the merge for
    all items is run. Even when the merge was skipped or nothing was saved these
-   items count as completed. Only when you change the merge operation the 
+   items count as completed. Only when you change the merge operation the
    <guilabel>Done</guilabel> status of the item will be removed and it can be merged again.
 </para>
 </sect1>
 
-<sect1 id="dirmergeoptions"><title>Options for Comparing and Merging Directories</title>
+<sect1 id="dirmergeoptions"><title>Options for Comparing and Merging Folders</title>
 <para>
    The &kdiff3; preferences (menu <menuchoice><guimenu>Settings</guimenu>
    <guimenuitem>Configure &kdiff3;...</guimenuitem></menuchoice>) has
-   a section called "Directory Merge" with these options:
+   a section called "Folder Merge" with these options:
 </para>
 
 <variablelist>
-   <varlistentry><term><guilabel>Recursive directories</guilabel></term><listitem><para> Select whether to search directories
+   <varlistentry><term><guilabel>Recursive folders</guilabel></term><listitem><para> Select whether to search folders
          recursively.</para></listitem></varlistentry>
    <varlistentry><term><guilabel>File pattern(s):</guilabel></term><listitem><para> Only files that match any pattern here will
          be put in the tree. More than one pattern may be specified here by using
          the semicolon ";" as separator. Valid wildcards: '*' and '?'. (&eg; "<literal>*.cpp;*.h</literal>").
-         Default is "*". This pattern is not used on directories.</para></listitem></varlistentry>
+         Default is "*". This pattern is not used on folders.</para></listitem></varlistentry>
    <varlistentry><term><guilabel>File-anti-pattern(s):</guilabel></term><listitem><para> Files that match this pattern
          will be excluded from the tree. More than one pattern may be specified here
          via using the semicolon ";" as separator. Valid wildcards: '*' and '?'. Default
          is "<literal>*.orig;*.o;*.obj</literal>".</para></listitem></varlistentry>
-   <varlistentry><term><guilabel>Dir-anti-pattern(s):</guilabel></term><listitem><para> Directories that match this pattern
+   <varlistentry><term><guilabel>Folder-anti-pattern(s):</guilabel></term><listitem><para> Folders that match this pattern
          will be excluded from the tree. More than one pattern may be specified here
          via using the semicolon ";" as separator. Valid wildcards: '*' and '?'. Default
          is "<literal>CVS;deps;.svn</literal>".</para></listitem></varlistentry>
    <varlistentry><term><guilabel>Use .cvsignore</guilabel></term><listitem><para>
-         Ignore files and directories that would also be ignored by CVS.
+         Ignore files and folders that would also be ignored by CVS.
          Many automatically generated files are ignored by CVS.
-         The big advantage is that this can be directory specific via a local <filename>.cvsignore</filename> file.
+         The big advantage is that this can be folder-specific via a local <filename>.cvsignore</filename> file.
          (See <ulink url="info:/cvs/cvsignore">info:/cvs/cvsignore</ulink>.)</para></listitem></varlistentry>
-   <varlistentry><term><guilabel>Find hidden files and directories</guilabel></term><listitem><para> On some file systems files
+   <varlistentry><term><guilabel>Find hidden files and folders</guilabel></term><listitem><para> On some file systems files
          have an "Hidden"-attribute. On other systems a filename starting with a dot
          "." causes it to be hidden. This option allows you to decide whether to
          include  these files in the tree or not. Default is on.</para></listitem></varlistentry>
    <varlistentry><term><guilabel>Follow file links</guilabel></term><listitem><para> For links to files: When disabled, then
          the symbolic links are compared. When enabled, then the files behind the
          links are compared. Default is off.</para></listitem></varlistentry>
-   <varlistentry><term><guilabel>Follow directory links</guilabel></term><listitem><para> For links to directories: When disabled,
+   <varlistentry><term><guilabel>Follow folder links</guilabel></term><listitem><para> For links to folders: When disabled,
          then the symbolic links will be compared. When enabled then the link will
-         be treated like a directory and it will be scanned recursively. (Note that
-         the program doesn't check if the link is "recursive". So for example a directory
-         that contains a link to the directory would cause an infinite loop, and after
+         be treated like a folder and it will be scanned recursively. (Note that
+         the program doesn't check if the link is "recursive". So for example a folder
+         that contains a link to the folder would cause an infinite loop, and after
          some time when the stack overflows or all memory is used up, crash the program.)
          Default is off.</para></listitem></varlistentry>
-   <varlistentry><term><guilabel>Case sensitive filename comparison</guilabel></term><listitem><para> 
+   <varlistentry><term><guilabel>Case sensitive filename comparison</guilabel></term><listitem><para>
          Default is false on &Windows;, true for other operating systems.</para></listitem></varlistentry>
    <varlistentry><term><guilabel>File Comparison Mode:</guilabel></term><listitem><para>
-<variablelist>            
+<variablelist>
    <varlistentry><term><guilabel>Binary comparison</guilabel></term><listitem><para>
          This is the default file comparison mode.
-         </para></listitem></varlistentry>         
+         </para></listitem></varlistentry>
    <varlistentry><term><guilabel>Full analysis</guilabel></term><listitem><para>
          Do a full analysis of each file and show the statistics information columns.
          (Number of <guilabel>Solved</guilabel>, <guilabel>Unsolved</guilabel>,
          <guilabel>Nonwhite</guilabel> and <guilabel>White</guilabel> conflicts.)
          The full analysis is slower than a simple binary analysis, and much
-         slower when used on files that don't contain text. 
+         slower when used on files that don't contain text.
          (Specify the appropriate file-antipatterns.)
-         </para></listitem></varlistentry>         
+         </para></listitem></varlistentry>
    <varlistentry><term><guilabel>Trust the size and modification date (unsafe)</guilabel></term><listitem><para>
-         If you compare big directories over a slow network, it might be faster to
+         If you compare big folders over a slow network, it might be faster to
          compare the modification dates and file length alone. But this speed improvement
          comes with the price of a little uncertainty. Use this option with care.
          Default is off.</para></listitem></varlistentry>
@@ -1709,56 +1710,56 @@ So this is what this program can do for you: &kdiff3; ...
          when the file-copy operation didn't preserve the modification date.
          Use this option with care. Default is off.</para></listitem></varlistentry>
 </variablelist></para></listitem></varlistentry>
-         
-   <varlistentry><term><guilabel>Synchronize directories</guilabel></term><listitem><para>
-         Activates sync-mode when two directories are compared and no explicit destination
-         directory was specified. In this mode the proposed operations will be chosen so
-         that both source directories are equal afterwards. Also the merge result will be
-         written to both directories. Default is off.</para></listitem></varlistentry>
+
+   <varlistentry><term><guilabel>Synchronize folders</guilabel></term><listitem><para>
+         Activates sync-mode when two folders are compared and no explicit destination
+         folder was specified. In this mode the proposed operations will be chosen so
+         that both source folders are equal afterwards. Also the merge result will be
+         written to both folders. Default is off.</para></listitem></varlistentry>
    <varlistentry><term><guilabel>Copy newer instead of merging (unsafe)</guilabel></term><listitem><para>
          Instead of merging the proposed operation will copy the newer source if changes
          happened. (Considered unsafe, because it implies that you know, that the other
          file hasn't been edited too. Check to make sure in every case.) Default is off.</para></listitem></varlistentry>
    <varlistentry><term><guilabel>Backup files (.orig)</guilabel></term><listitem><para>
-         If a file or complete directory is replaced by another or is deleted then the
+         If a file or complete folder is replaced by another or is deleted then the
          original version will be renamed with an <literal role="extension">.orig</literal>
          extension. If an old backup file with <literal role="extension">.orig</literal>
          extension already exists then this will be deleted without backup. This also
-         affects the normal merging of single files, not only in directory-merge mode.
+         affects the normal merging of single files, not only in folder-merge mode.
          Default is on.</para></listitem></varlistentry>
 </variablelist>
 </sect1>
 
-<sect1 id="other"><title>Other Functions in Directory Merge Window</title>
+<sect1 id="other"><title>Other Functions in Folder Merge Window</title>
 <sect2><title>Split/Full Screen Mode</title>
 <para>
-   Usually the directory merge list view remains visible while a single file is compared or merged. With the mouse you can move the splitter bar that separates the file list from the text-diff windows. If you don't want this, you can disable <menuchoice><guimenu>Directory</guimenu><guimenuitem>Dir &amp;&amp; Text Split Screen View</guimenuitem></menuchoice> menu item. Then you can use <menuchoice><guimenu>Directory</guimenu><guimenuitem>Toggle View</guimenuitem></menuchoice> menu item to switch between the file list and the text-diff view that then occupy the full screen.
+   Usually the folder-merge list view remains visible while a single file is compared or merged. With the mouse you can move the splitter bar that separates the file list from the text-diff windows. If you don't want this, you can disable <menuchoice><guimenu>Folder</guimenu><guimenuitem>Folder &amp;&amp; Text Split Screen View</guimenuitem></menuchoice> menu item. Then you can use <menuchoice><guimenu>Folder</guimenu><guimenuitem>Toggle View</guimenuitem></menuchoice> menu item to switch between the file list and the text-diff view that then occupy the full screen.
 </para>
 </sect2>
 <sect2><title>Comparing or Merging a Single File</title>
 <para>
    Probably you will prefer a simple double mouse click on a file in order
-   to compare it. Nevertheless there also exists an entry in the <guimenu>Directory</guimenu>
+   to compare it. Nevertheless there also exists an entry in the <guimenu>Folder</guimenu>
    menu. You can also directly merge a single file by selecting it and choosing
    <menuchoice><guimenu>Merge</guimenu><guimenuitem>Merge Current File</guimenuitem></menuchoice>
-   menu item. On saving the result, the status will be set to done, and the file 
-   will not be merged again if a directory merge is started.
+   menu item. On saving the result, the status will be set to done, and the file
+   will not be merged again if a folder merge is started.
 </para><para>
-   But note that this status information will be lost when you rerun a directory
-   scan: <menuchoice><guimenu>Directory</guimenu><guimenuitem>Rescan</guimenuitem></menuchoice>
+   But note that this status information will be lost when you rerun a folder
+   scan: <menuchoice><guimenu>Folder</guimenu><guimenuitem>Rescan</guimenuitem></menuchoice>
 </para>
 </sect2>
 <sect2><title>Comparing or Merging Files with Different Names</title>
 <para>
-   Sometimes you need to compare or merge files with different names (&eg; the current 
+   Sometimes you need to compare or merge files with different names (&eg; the current
    file and the backup in the same folder).
 </para><para>
    Select the exact file by clicking onto the icon in the column <guilabel>A</guilabel>, <guilabel>B</guilabel> or <guilabel>C</guilabel>. The first file selected thus will be marked with an <guilabel>A</guilabel>, the second and third with <guilabel>B</guilabel> and <guilabel>C</guilabel> regardless on what column they are in. Only up to three files can be chosen like this.
 </para><para>
-   Proceed by choosing <menuchoice><guimenu>Directory</guimenu><guimenuitem>Compare Explicitly Selected Files</guimenuitem></menuchoice> or <menuchoice><guimenu>Directory</guimenu><guimenuitem>Merge Explicitly Selected Files</guimenuitem></menuchoice> menu item. For your convenience these menu entries also appear as context menu when you right-click the last selected file.
+   Proceed by choosing <menuchoice><guimenu>Folder</guimenu><guimenuitem>Compare Explicitly Selected Files</guimenuitem></menuchoice> or <menuchoice><guimenu>Folder</guimenu><guimenuitem>Merge Explicitly Selected Files</guimenuitem></menuchoice> menu item. For your convenience these menu entries also appear as context menu when you right-click the last selected file.
 </para><para>
-   The comparison or merge of a file will happen in the same window. 
-   If this method is used for directories a new window will be opened.
+   The comparison or merge of a file will happen in the same window.
+   If this method is used for folders a new window will be opened.
 </para></sect2>
 </sect1>
 </chapter>
@@ -1770,19 +1771,19 @@ So this is what this program can do for you: &kdiff3; ...
 <sect2><title>KIO-Slaves</title>
 <para>
 The KIO library from &frameworks; supports network transparency via KIO-slaves.
-&kdiff3; uses this for reading input files and for scanning directories.
-This means that you can specify files and directories on local and
+&kdiff3; uses this for reading input files and for scanning folders.
+This means that you can specify files and folders on local and
 remote resources via &URL;s.
 </para><para>
 Example:
 </para><para>
 <screen>
    <command>kdiff3</command> test.cpp  ftp://ftp.faraway.org/test.cpp
-   <command>kdiff3</command> tar:/home/hacker/archive.tar.gz/dir ./dir
+   <command>kdiff3</command> tar:/home/hacker/archive.tar.gz/folder ./folder
 </screen>
 </para>
 <para>The first line compares a local file with a file on an &FTP; server. The second line
-compares a directory within an compressed archive with a local directory.
+compares a folder within an compressed archive with a local folder.
 </para><para>
 Other KIO-slaves that are interesting are:
 </para>
@@ -1804,7 +1805,7 @@ Other things that are possible, but probably less useful are:
 
 <sect2><title>How To Write &URL;s</title>
 <para>
-   An &URL; has a different syntax compared with paths for local files and directories.
+   An &URL; has a different syntax compared with paths for local files and folders.
    Some things should be considered:
 </para>
 <itemizedlist>
@@ -1832,7 +1833,7 @@ Other things that are possible, but probably less useful are:
 <listitem><para>
    Sometimes there is no support for links.
 </para></listitem><listitem><para>
-   Or there is no way to distinguish if a link points to a file or a directory; always
+   Or there is no way to distinguish if a link points to a file or a folder; always
    assuming a file. (ftp:, sftp:).
 </para></listitem><listitem><para>
    Can't always determine the filesize.
@@ -1868,7 +1869,7 @@ menu. Be aware that this won't work if none of the original files are available,
 is not reliable if the original file(s) have changed since the patch-file was generated.
 </para><para>
 When run as a part &kdiff3; only provides the a two-file-diff, a very small toolbar
-and menu. Merging or directory-comparison are not supported then.
+and menu. Merging or folder comparison are not supported then.
 </para>
 </sect1>
 
@@ -2007,7 +2008,7 @@ and menu. Merging or directory-comparison are not supported then.
    know about. So &kdiff3; will show you the contents of the file interpreted as
    pure text, but this might be unreadable or at least it will look very odd.
 </para><para>
-   Since most programs nowadays store their contents in &XML; format, you might 
+   Since most programs nowadays store their contents in &XML; format, you might
    be able to read it as pure text. So if the change was only small,
    &kdiff3; still might help you.
 </para><para>
@@ -2015,10 +2016,10 @@ and menu. Merging or directory-comparison are not supported then.
 </para></answer></qandaentry>
 
 <qandaentry><question><para>
-   Where has the directory option <guimenuitem>List only deltas</guimenuitem> gone?
+   Where has the folder option <guimenuitem>List only deltas</guimenuitem> gone?
 </para></question><answer><para>
-   There are now several <link linkend="selectingvisiblefiles">"Show" options</link> in the 
-   <guimenu>Directory</guimenu> menu. Disabling <guimenuitem>Show Identical Files</guimenuitem>
+   There are now several <link linkend="selectingvisiblefiles">"Show" options</link> in the
+   <guimenu>Folder</guimenu> menu. Disabling <guimenuitem>Show Identical Files</guimenuitem>
    will achieve what enabling <guimenuitem>List only deltas</guimenuitem> used to do.
 </para></answer></qandaentry>
 
@@ -2043,7 +2044,7 @@ and menu. Merging or directory-comparison are not supported then.
 <title>Credits and License</title>
 
 <para>
-&kdiff3; - File and Directory Comparison and Merge Tool
+&kdiff3; - File and Folder Comparison and Merge Tool
 </para>
 <para>
 Program copyright 2002-2007 Joachim Eibl <email>joachim.eibl at gmx.de</email>

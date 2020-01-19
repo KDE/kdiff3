@@ -397,7 +397,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
     if(m_bAutoFlag && m_bAutoMode && m_bDirCompare)
     {
-        QTextStream(stderr) << i18n("Option --auto ignored for directory comparison.") << "\n";
+        QTextStream(stderr) << i18n("Option --auto ignored for folder comparison.") << "\n";
         m_bAutoMode = false;
     }
     if(!m_bDirCompare)
@@ -622,9 +622,9 @@ void KDiff3App::initActions(KActionCollection* ac)
     winFocusPrev = GuiUtils::createAction<QAction>(i18n("Focus Prev Window"), QKeySequence(Qt::ALT + Qt::Key_Left), this, &KDiff3App::slotWinFocusPrev, ac, "win_focus_prev");
     winToggleSplitOrientation = GuiUtils::createAction<QAction>(i18n("Toggle Split Orientation"), this, &KDiff3App::slotWinToggleSplitterOrientation, ac, "win_toggle_split_orientation");
 
-    dirShowBoth = GuiUtils::createAction<KToggleAction>(i18n("Dir && Text Split Screen View"), this, &KDiff3App::slotDirShowBoth, ac, "win_dir_show_both");
+    dirShowBoth = GuiUtils::createAction<KToggleAction>(i18n("Folder && Text Split Screen View"), this, &KDiff3App::slotDirShowBoth, ac, "win_dir_show_both");
     dirShowBoth->setChecked(true);
-    dirViewToggle = GuiUtils::createAction<QAction>(i18n("Toggle Between Dir && Text View"), this, &KDiff3App::slotDirViewToggle, ac, "win_dir_view_toggle");
+    dirViewToggle = GuiUtils::createAction<QAction>(i18n("Toggle Between Folder && Text View"), this, &KDiff3App::slotDirViewToggle, ac, "win_dir_view_toggle");
 
     m_pMergeEditorPopupMenu = new QMenu(this);
     /*   chooseA->plug( m_pMergeEditorPopupMenu );
@@ -698,7 +698,7 @@ bool KDiff3App::queryClose()
     if(m_pDirectoryMergeWindow->isDirectoryMergeInProgress())
     {
         int result = KMessageBox::warningYesNo(this,
-                                               i18n("You are currently doing a directory merge. Are you sure, you want to abort?"),
+                                               i18n("You are currently doing a folder merge. Are you sure, you want to abort?"),
                                                i18n("Warning"),
                                                KStandardGuiItem::quit(),
                                                KStandardGuiItem::cont() /* i18n("Continue Merging") */);
