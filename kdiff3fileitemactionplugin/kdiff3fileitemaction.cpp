@@ -287,7 +287,7 @@ void KDiff3FileItemAction::slotAbout()
              "Then use \"Compare With\" on the second file.\n"
              "For a 3-way merge first \"Save\" the base file, then the branch to merge and "
              "choose \"3-way merge with base\" on the other branch which will be used as destination.\n"
-             "Same also applies to directory comparison and merge.");
+             "Same also applies to folder comparison and merge.");
    KMessageBox::information(m_pParentWidget, s, i18n("About KDiff3 File Item Action Plugin") );
 }
 

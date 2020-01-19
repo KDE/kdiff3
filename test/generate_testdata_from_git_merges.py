@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpForm
                                              '  ~/kdiff3/test/%s -d ~/kdiff3/test/testdata/linux\n' % os.path.basename(sys.argv[0]))
 
 parser.add_argument('-d', metavar='destination_path', nargs=1, default=['testdata_from_git/'],
-                    help='specify the directory where to save the test input files. If the directory does not exist it will be created.')
+                    help='specify the folder where to save the test input files. If the folder does not exist it will be created.')
 args = parser.parse_args()
 dirname=args.d[0]
 

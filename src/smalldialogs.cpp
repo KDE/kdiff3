@@ -67,7 +67,7 @@ OpenDialog::OpenDialog(
     m_pLineA->setMinimumWidth(200);
     QPushButton* button = new QPushButton(QIcon::fromTheme("document-new"), i18n("File..."), this);
     connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileA);
-    QPushButton* button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Dir..."), this);
+    QPushButton* button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Folder..."), this);
     connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirA);
     connect(m_pLineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
@@ -84,7 +84,7 @@ OpenDialog::OpenDialog(
     m_pLineB->setMinimumWidth(200);
     button = new QPushButton(QIcon::fromTheme("document-new"), i18n("File..."), this);
     connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileB);
-    button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Dir..."), this);
+    button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Folder..."), this);
     connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirB);
     connect(m_pLineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
@@ -101,7 +101,7 @@ OpenDialog::OpenDialog(
     m_pLineC->setMinimumWidth(200);
     button = new QPushButton(QIcon::fromTheme("document-new"), i18n("File..."), this);
     connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileC);
-    button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Dir..."), this);
+    button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Folder..."), this);
     connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirC);
     connect(m_pLineC, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
@@ -143,7 +143,7 @@ OpenDialog::OpenDialog(
     m_pLineOut->setMinimumWidth(200);
     button = new QPushButton(QIcon::fromTheme("document-new"), i18n("File..."), this);
     connect(button, &QPushButton::clicked, this, &OpenDialog::selectOutputName);
-    button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Dir..."), this);
+    button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Folder..."), this);
     connect(button2, &QPushButton::clicked, this, &OpenDialog::selectOutputDir);
     connect(m_pMerge, &QCheckBox::stateChanged, this, &OpenDialog::internalSlot);
     connect(this, &OpenDialog::internalSignal, m_pLineOut, &QComboBox::setEnabled);
@@ -230,7 +230,7 @@ void OpenDialog::selectURL(QComboBox* pLine, bool bDir, int i, bool bSave)
     }
 
     currentUrl = QUrl::fromUserInput(current, QString(), QUrl::AssumeLocalFile);
-    QUrl newURL = bDir ? QFileDialog::getExistingDirectoryUrl(this, i18n("Open Directory"), currentUrl)
+    QUrl newURL = bDir ? QFileDialog::getExistingDirectoryUrl(this, i18n("Open Folder"), currentUrl)
                        : bSave ? QFileDialog::getSaveFileUrl(this, i18n("Select Output File"), currentUrl, i18n("All files (*)"))
                                : QFileDialog::getOpenFileUrl(this, i18n("Open File"), currentUrl, i18n("All files (*)"));
     if(!newURL.isEmpty()) {

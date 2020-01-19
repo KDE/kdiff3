@@ -1005,7 +1005,7 @@ bool FileAccessJobHandler::mkDir(const QString& dirName)
         KIO::SimpleJob* pJob = KIO::mkdir(dir.url());
         connect(pJob, &KIO::SimpleJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
 
-        ProgressProxy::enterEventLoop(pJob, i18n("Making directory: %1", dirName));
+        ProgressProxy::enterEventLoop(pJob, i18n("Making folder: %1", dirName));
         return m_bSuccess;
     }
 }
@@ -1026,7 +1026,7 @@ bool FileAccessJobHandler::rmDir(const QString& dirName)
         KIO::SimpleJob* pJob = KIO::rmdir(fa.url());
         connect(pJob, &KIO::SimpleJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
 
-        ProgressProxy::enterEventLoop(pJob, i18n("Removing directory: %1", dirName));
+        ProgressProxy::enterEventLoop(pJob, i18n("Removing folder: %1", dirName));
         return m_bSuccess;
     }
 }
@@ -1137,7 +1137,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
     if(pp.wasCancelled())
         return true; // Cancelled is not an error.
 
-    pp.setInformation(i18n("Reading directory: %1", m_pFileAccess->absoluteFilePath()), 0, false);
+    pp.setInformation(i18n("Reading folder: %1", m_pFileAccess->absoluteFilePath()), 0, false);
 
     if(m_pFileAccess->isLocal())
     {

@@ -717,7 +717,7 @@ void OptionDialog::setupColorPage()
     gbox->addWidget(pColor, line, 1);
     ++line;
 
-    label = new QLabel(i18n("Directory Comparison View:"), page);
+    label = new QLabel(i18n("Folder Comparison View:"), page);
     gbox->addWidget(label, line, 0);
     label->setFont(f);
     ++line;
@@ -728,7 +728,7 @@ void OptionDialog::setupColorPage()
     addOptionItem(pColor);
     gbox->addWidget(label, line, 0);
     gbox->addWidget(pColor, line, 1);
-    QString dirColorTip = i18n("Changing this color will only be effective when starting the next directory comparison.");
+    QString dirColorTip = i18n("Changing this color will only be effective when starting the next folder comparison.");
     label->setToolTip(dirColorTip);
     ++line;
 
@@ -1099,8 +1099,8 @@ void OptionDialog::setupMergePage()
 void OptionDialog::setupDirectoryMergePage()
 {
     QFrame* page = new QFrame();
-    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Directory"));
-    pageItem->setHeader(i18n("Directory"));
+    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Folder"));
+    pageItem->setHeader(i18n("Folder"));
     pageItem->setIcon(QIcon::fromTheme(QStringLiteral("inode-directory")));
     addPage(pageItem);
 
@@ -1112,10 +1112,10 @@ void OptionDialog::setupDirectoryMergePage()
     topLayout->addLayout(gbox);
     int line = 0;
 
-    OptionCheckBox* pRecursiveDirs = new OptionCheckBox(i18n("Recursive directories"), true, "RecursiveDirs", &m_options->m_bDmRecursiveDirs, page);
+    OptionCheckBox* pRecursiveDirs = new OptionCheckBox(i18n("Recursive folders"), true, "RecursiveDirs", &m_options->m_bDmRecursiveDirs, page);
     gbox->addWidget(pRecursiveDirs, line, 0, 1, 2);
     addOptionItem(pRecursiveDirs);
-    pRecursiveDirs->setToolTip(i18n("Whether to analyze subdirectories or not."));
+    pRecursiveDirs->setToolTip(i18n("Whether to analyze subfolders or not."));
     ++line;
     QLabel* label = new QLabel(i18n("File pattern(s):"), page);
     gbox->addWidget(label, line, 0);
@@ -1139,13 +1139,13 @@ void OptionDialog::setupDirectoryMergePage()
         "Several Patterns can be specified by using the separator: ';'"));
     ++line;
 
-    label = new QLabel(i18n("Dir-anti-pattern(s):"), page);
+    label = new QLabel(i18n("Folder-anti-pattern(s):"), page);
     gbox->addWidget(label, line, 0);
     OptionLineEdit* pDirAntiPattern = new OptionLineEdit("CVS;.deps;.svn;.hg;.git", "DirAntiPattern", &m_options->m_DmDirAntiPattern, page);
     gbox->addWidget(pDirAntiPattern, line, 1);
     addOptionItem(pDirAntiPattern);
     label->setToolTip(i18n(
-        "Pattern(s) of directories to be excluded from analysis. \n"
+        "Pattern(s) of folders to be excluded from analysis. \n"
         "Wildcards: '*' and '?'\n"
         "Several Patterns can be specified by using the separator: ';'"));
     ++line;
@@ -1155,13 +1155,13 @@ void OptionDialog::setupDirectoryMergePage()
     addOptionItem(pUseCvsIgnore);
     pUseCvsIgnore->setToolTip(i18n(
         "Extends the antipattern to anything that would be ignored by CVS.\n"
-        "Via local \".cvsignore\" files this can be directory specific."));
+        "Via local \".cvsignore\" files this can be folder-specific."));
     ++line;
 
-    OptionCheckBox* pFindHidden = new OptionCheckBox(i18n("Find hidden files and directories"), true, "FindHidden", &m_options->m_bDmFindHidden, page);
+    OptionCheckBox* pFindHidden = new OptionCheckBox(i18n("Find hidden files and folders"), true, "FindHidden", &m_options->m_bDmFindHidden, page);
     gbox->addWidget(pFindHidden, line, 0, 1, 2);
     addOptionItem(pFindHidden);
-    pFindHidden->setToolTip(i18n("Finds hidden files and directories."));
+    pFindHidden->setToolTip(i18n("Finds hidden files and folders."));
     ++line;
 
     OptionCheckBox* pFollowFileLinks = new OptionCheckBox(i18n("Follow file links"), false, "FollowFileLinks", &m_options->m_bDmFollowFileLinks, page);
@@ -1172,11 +1172,11 @@ void OptionDialog::setupDirectoryMergePage()
         "Off: Compare the links."));
     ++line;
 
-    OptionCheckBox* pFollowDirLinks = new OptionCheckBox(i18n("Follow directory links"), false, "FollowDirLinks", &m_options->m_bDmFollowDirLinks, page);
+    OptionCheckBox* pFollowDirLinks = new OptionCheckBox(i18n("Follow folder links"), false, "FollowDirLinks", &m_options->m_bDmFollowDirLinks, page);
     gbox->addWidget(pFollowDirLinks, line, 0, 1, 2);
     addOptionItem(pFollowDirLinks);
     pFollowDirLinks->setToolTip(i18n(
-        "On: Compare the directory the link points to.\n"
+        "On: Compare the folder the link points to.\n"
         "Off: Compare the links."));
     ++line;
 
@@ -1189,23 +1189,23 @@ void OptionDialog::setupDirectoryMergePage()
     gbox->addWidget(pCaseSensitiveFileNames, line, 0, 1, 2);
     addOptionItem(pCaseSensitiveFileNames);
     pCaseSensitiveFileNames->setToolTip(i18n(
-        "The directory comparison will compare files or directories when their names match.\n"
+        "The folder comparison will compare files or folders when their names match.\n"
         "Set this option if the case of the names must match. (Default for Windows is off, otherwise on.)"));
     ++line;
 
-    OptionCheckBox* pUnfoldSubdirs = new OptionCheckBox(i18n("Unfold all subdirectories on load"), false, "UnfoldSubdirs", &m_options->m_bDmUnfoldSubdirs, page);
+    OptionCheckBox* pUnfoldSubdirs = new OptionCheckBox(i18n("Unfold all subfolders on load"), false, "UnfoldSubdirs", &m_options->m_bDmUnfoldSubdirs, page);
     gbox->addWidget(pUnfoldSubdirs, line, 0, 1, 2);
     addOptionItem(pUnfoldSubdirs);
     pUnfoldSubdirs->setToolTip(i18n(
-        "On: Unfold all subdirectories when starting a directory diff.\n"
-        "Off: Leave subdirectories folded."));
+        "On: Unfold all subfolders when starting a folder diff.\n"
+        "Off: Leave subfolders folded."));
     ++line;
 
-    OptionCheckBox* pSkipDirStatus = new OptionCheckBox(i18n("Skip directory status report"), false, "SkipDirStatus", &m_options->m_bDmSkipDirStatus, page);
+    OptionCheckBox* pSkipDirStatus = new OptionCheckBox(i18n("Skip folder status report"), false, "SkipDirStatus", &m_options->m_bDmSkipDirStatus, page);
     gbox->addWidget(pSkipDirStatus, line, 0, 1, 2);
     addOptionItem(pSkipDirStatus);
     pSkipDirStatus->setToolTip(i18n(
-        "On: Do not show the Directory Comparison Status.\n"
+        "On: Do not show the Folder Comparison Status.\n"
         "Off: Show the status dialog on start."));
     ++line;
 
@@ -1229,32 +1229,32 @@ void OptionDialog::setupDirectoryMergePage()
     addOptionItem(pTrustDate);
     pTrustDate->setToolTip(i18n("Assume that files are equal if the modification date and file length are equal.\n"
                                 "Files with equal contents but different modification dates will appear as different.\n"
-                                "Useful for big directories or slow networks."));
+                                "Useful for big folders or slow networks."));
     pBGLayout->addWidget(pTrustDate);
 
     OptionRadioButton* pTrustDateFallbackToBinary = new OptionRadioButton(i18n("Trust the size and date, but use binary comparison if date does not match (unsafe)"), false, "TrustDateFallbackToBinary", &m_options->m_bDmTrustDateFallbackToBinary, pBG);
     addOptionItem(pTrustDateFallbackToBinary);
     pTrustDateFallbackToBinary->setToolTip(i18n("Assume that files are equal if the modification date and file length are equal.\n"
                                                 "If the dates are not equal but the sizes are, use binary comparison.\n"
-                                                "Useful for big directories or slow networks."));
+                                                "Useful for big folders or slow networks."));
     pBGLayout->addWidget(pTrustDateFallbackToBinary);
 
     OptionRadioButton* pTrustSize = new OptionRadioButton(i18n("Trust the size (unsafe)"), false, "TrustSize", &m_options->m_bDmTrustSize, pBG);
     addOptionItem(pTrustSize);
     pTrustSize->setToolTip(i18n("Assume that files are equal if their file lengths are equal.\n"
-                                "Useful for big directories or slow networks when the date is modified during download."));
+                                "Useful for big folders or slow networks when the date is modified during download."));
     pBGLayout->addWidget(pTrustSize);
 
     ++line;
 
     // Some two Dir-options: Affects only the default actions.
-    OptionCheckBox* pSyncMode = new OptionCheckBox(i18n("Synchronize directories"), false, "SyncMode", &m_options->m_bDmSyncMode, page);
+    OptionCheckBox* pSyncMode = new OptionCheckBox(i18n("Synchronize folders"), false, "SyncMode", &m_options->m_bDmSyncMode, page);
     addOptionItem(pSyncMode);
     gbox->addWidget(pSyncMode, line, 0, 1, 2);
     pSyncMode->setToolTip(i18n(
-        "Offers to store files in both directories so that\n"
-        "both directories are the same afterwards.\n"
-        "Works only when comparing two directories without specifying a destination."));
+        "Offers to store files in both folders so that\n"
+        "both folders are the same afterwards.\n"
+        "Works only when comparing two folders without specifying a destination."));
     ++line;
 
     // Allow white-space only differences to be considered equal
@@ -1274,7 +1274,7 @@ void OptionDialog::setupDirectoryMergePage()
     pCopyNewer->setToolTip(i18n(
         "Do not look inside, just take the newer file.\n"
         "(Use this only if you know what you are doing!)\n"
-        "Only effective when comparing two directories."));
+        "Only effective when comparing two folders."));
     ++line;
 
     OptionCheckBox* pCreateBakFiles = new OptionCheckBox(i18n("Backup files (.orig)"), true, "CreateBakFiles", &m_options->m_bDmCreateBakFiles, page);
