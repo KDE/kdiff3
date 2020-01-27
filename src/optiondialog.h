@@ -88,7 +88,6 @@ private:
 
     void resetToDefaults();
 
-
     QSharedPointer<Options> m_options=QSharedPointer<Options>::create();
     //QDialogButtonBox *mButtonBox;
     OptionCheckBox* m_pSameEncoding;
