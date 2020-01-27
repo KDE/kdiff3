@@ -21,6 +21,7 @@
 #include "optiondialog.h"
 #include "OptionItems.h"
 #include "ConfigValueMap.h"
+#include "ui_scroller.h"
 
 #include "diff.h"
 #include "smalldialogs.h"
@@ -44,6 +45,7 @@
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QRadioButton>
+#include <QScrollArea>
 #include <QTextCodec>
 #include <QToolTip>
 
@@ -54,6 +56,7 @@
 #include <KMessageBox>
 #include <KSharedConfig>
 #include <KToolBar>
+
 #include <map>
 
 #define KDIFF3_CONFIG_GROUP "KDiff3 Options"
@@ -493,6 +496,7 @@ OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageD
     setStandardButtons(QDialogButtonBox::Help | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Apply | QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 
     setModal(true);
+    setMinimumSize(600, 500);
 
     //showButtonSeparator( true );
     //setHelp( "kdiff3/index.html", QString::null );
@@ -610,12 +614,20 @@ void OptionDialog::setupFontPage()
 
 void OptionDialog::setupColorPage()
 {
-    QFrame* page = new QFrame();
-    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18nc("Title for color settings page","Color"));
+    QScrollArea* pageFrame = new QScrollArea();
+    KPageWidgetItem* pageItem = new KPageWidgetItem(pageFrame, i18nc("Title for color settings page","Color"));
     pageItem->setHeader(i18n("Colors Settings"));
     pageItem->setIcon(QIcon::fromTheme(QStringLiteral("colormanagement")));
     addPage(pageItem);
 
+    QVBoxLayout* scrollLayout = new QVBoxLayout();
+    scrollLayout->setMargin(2);
+    scrollLayout->addWidget(pageFrame);
+
+    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    scrollArea->setupUi(pageFrame);
+    
+    QWidget* page = pageFrame->findChild<QWidget*>("contents");
     QVBoxLayout* topLayout = new QVBoxLayout(page);
     topLayout->setMargin(5);
 
@@ -770,11 +782,20 @@ void OptionDialog::setupColorPage()
 
 void OptionDialog::setupEditPage()
 {
-    QFrame* page = new QFrame();
-    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Editor"));
+    QScrollArea* pageFrame = new QScrollArea();
+    KPageWidgetItem* pageItem = new KPageWidgetItem(pageFrame, i18n("Editor"));
     pageItem->setHeader(i18n("Editor Behavior"));
     pageItem->setIcon(QIcon::fromTheme(QStringLiteral("accessories-text-editor")));
     addPage(pageItem);
+
+    QVBoxLayout* scrollLayout = new QVBoxLayout();
+    scrollLayout->setMargin(2);
+    scrollLayout->addWidget(pageFrame);
+
+    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    scrollArea->setupUi(pageFrame);
+    
+    QWidget* page = pageFrame->findChild<QWidget*>("contents");
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
     topLayout->setMargin(5);
@@ -836,11 +857,20 @@ void OptionDialog::setupEditPage()
 
 void OptionDialog::setupDiffPage()
 {
-    QFrame* page = new QFrame();
-    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Diff"));
+    QScrollArea* pageFrame = new QScrollArea();
+    KPageWidgetItem* pageItem = new KPageWidgetItem(pageFrame, i18n("Diff"));
     pageItem->setHeader(i18n("Diff Settings"));
     pageItem->setIcon(QIcon::fromTheme(QStringLiteral("text-x-patch")));
     addPage(pageItem);
+
+    QVBoxLayout* scrollLayout = new QVBoxLayout();
+    scrollLayout->setMargin(2);
+    scrollLayout->addWidget(pageFrame);
+
+    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    scrollArea->setupUi(pageFrame);
+    
+    QWidget* page = pageFrame->findChild<QWidget*>("contents");
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
     topLayout->setMargin(5);
@@ -922,11 +952,20 @@ void OptionDialog::setupDiffPage()
 
 void OptionDialog::setupMergePage()
 {
-    QFrame* page = new QFrame();
-    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18nc("Settings page", "Merge"));
+    QScrollArea* pageFrame = new QScrollArea();
+    KPageWidgetItem* pageItem = new KPageWidgetItem(pageFrame, i18nc("Settings page", "Merge"));
     pageItem->setHeader(i18n("Merge Settings"));
     pageItem->setIcon(QIcon::fromTheme(QStringLiteral("merge")));
     addPage(pageItem);
+
+    QVBoxLayout* scrollLayout = new QVBoxLayout();
+    scrollLayout->setMargin(2);
+    scrollLayout->addWidget(pageFrame);
+
+    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    scrollArea->setupUi(pageFrame);
+    
+    QWidget* page = pageFrame->findChild<QWidget*>("contents");
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
     topLayout->setMargin(5);
@@ -1121,12 +1160,20 @@ void OptionDialog::setupMergePage()
 
 void OptionDialog::setupDirectoryMergePage()
 {
-    QFrame* page = new QFrame();
-    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Directory"));
+    QScrollArea*  pageFrame = new QScrollArea();
+    KPageWidgetItem* pageItem = new KPageWidgetItem(pageFrame, i18n("Directory"));
     pageItem->setHeader(i18n("Directory"));
     pageItem->setIcon(QIcon::fromTheme(QStringLiteral("inode-directory")));
     addPage(pageItem);
 
+    QVBoxLayout* scrollLayout = new QVBoxLayout();
+    scrollLayout->setMargin(2);
+    scrollLayout->addWidget(pageFrame);
+
+    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    scrollArea->setupUi(pageFrame);
+    
+    QWidget* page = pageFrame->findChild<QWidget*>("contents");
     QVBoxLayout* topLayout = new QVBoxLayout(page);
     topLayout->setMargin(5);
 
@@ -1379,11 +1426,20 @@ void OptionDialog::setupRegionalPage()
         new Utf8BOMCodec();
    */
 
-    QFrame* page = new QFrame();
-    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Regional Settings"));
+    QScrollArea* pageFrame = new QScrollArea();
+    KPageWidgetItem* pageItem = new KPageWidgetItem(pageFrame, i18n("Regional Settings"));
     pageItem->setHeader(i18n("Regional Settings"));
     pageItem->setIcon(QIcon::fromTheme(QStringLiteral("preferences-desktop-locale")));
     addPage(pageItem);
+
+    QVBoxLayout* scrollLayout = new QVBoxLayout();
+    scrollLayout->setMargin(2);
+    scrollLayout->addWidget(pageFrame);
+
+    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    scrollArea->setupUi(pageFrame);
+    
+    QWidget* page = pageFrame->findChild<QWidget*>("contents");
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
     topLayout->setMargin(5);
@@ -1482,12 +1538,20 @@ void OptionDialog::setupRegionalPage()
 
 void OptionDialog::setupIntegrationPage()
 {
-    QFrame* page = new QFrame();
-    KPageWidgetItem* pageItem = new KPageWidgetItem(page, i18n("Integration"));
+    QScrollArea* pageFrame = new QScrollArea();
+    KPageWidgetItem* pageItem = new KPageWidgetItem(pageFrame, i18n("Integration"));
     pageItem->setHeader(i18n("Integration Settings"));
     pageItem->setIcon(QIcon::fromTheme(QStringLiteral("utilities-terminal")));
     addPage(pageItem);
 
+    QVBoxLayout* scrollLayout = new QVBoxLayout();
+    scrollLayout->setMargin(2);
+    scrollLayout->addWidget(pageFrame);
+
+    QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
+    scrollArea->setupUi(pageFrame);
+    
+    QWidget* page = pageFrame->findChild<QWidget*>("contents");
     QVBoxLayout* topLayout = new QVBoxLayout(page);
     topLayout->setMargin(5);
 
