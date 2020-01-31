@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# SPDX-FileCopyrightText: 2002-2007 Joachim Eibl, joachim.eibl at gmx.de
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 import argparse
 import glob
 import os
@@ -86,4 +89,3 @@ print '  ./alignmenttest > /dev/null'
 print '  cd %s' % dirname
 print '  for file in *_actual_result.txt; do mv ${file} ${file/actual/expected}; done'
 print 'If you\'ve already modified the algorithm, you can run the alignment test of an older version of kdiff3 and copy those result files over'
-

@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# SPDX-FileCopyrightText: 2002-2007 Joachim Eibl, joachim.eibl at gmx.de
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 import argparse
 import os
 import random
