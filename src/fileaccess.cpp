@@ -52,7 +52,9 @@ void FileAccess::reset()
     m_bFile = false;
     m_bDir = false;
     m_bSymLink = false;
+    m_bReadable = false;
     m_bWritable = false;
+    m_bExecutable = false;
     m_bHidden = false;
     m_size = 0;
     m_modificationTime = QDateTime();
