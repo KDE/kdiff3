@@ -1,4 +1,7 @@
-// SPDX-License-Identifier: GPL-2.0-or-later
+/*
+  SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
+  SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include <assert.h>
 #include "progress.h"
