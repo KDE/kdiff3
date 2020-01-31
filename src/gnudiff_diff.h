@@ -1,25 +1,15 @@
-/* Shared definitions for GNU DIFF
+/*
+ Shared definitions for GNU DIFF
+    Modified for KDiff3 by Joachim Eibl <joachim.eibl at gmx.de> 2003, 2004, 2005.
+    The original file was part of GNU DIFF.
 
-   Modified for KDiff3 by Joachim Eibl <joachim.eibl at gmx.de> 2003, 2004, 2005.
-   The original file was part of GNU DIFF.
-
-   Copyright (C) 1988, 1989, 1991, 1992, 1993, 1994, 1995, 1998, 2001,
-   2002 Free Software Foundation, Inc.
-
-   GNU DIFF is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   GNU DIFF is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program; see the file COPYING.
-   If not, write to the Free Software Foundation,
-   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
+    Part of KDiff3 - Text Diff And Merge Tool
+   
+    SPDX-FileCopyrightText: 1988-2002 Free Software Foundation, Inc.
+    SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
+    SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef GNUDIFF_DIFF_H
 #define GNUDIFF_DIFF_H

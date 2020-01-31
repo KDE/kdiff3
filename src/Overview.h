@@ -1,13 +1,10 @@
-/***************************************************************************
- *   Copyright (C) 2003-2007 by Joachim Eibl <joachim.eibl at gmx.de>      *
- *   Copyright (C) 2018 Michael Reeves reeves.87@gmail.com                 *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ *  This file is part of KDiff3.
+ *
+ * SPDX-FileCopyrightText: 2002-2007  Joachim Eibl, joachim.eibl at gmx.de
+ * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
+ * SPDX-License-Identifier: GPL-2.0-or-later
+*/
 #ifndef OVERVIEW_H
 #define OVERVIEW_H
 

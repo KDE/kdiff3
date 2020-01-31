@@ -1,16 +1,14 @@
-/***************************************************************************
- * class CvsIgnoreList from Cervisia cvsdir.cpp                            *
- *    Copyright (C) 1999-2002 Bernd Gehrmann <bernd at mail.berlios.de>    *
- * with elements from class StringMatcher                                  *
- *    Copyright (c) 2003 Andre Woebbeking <Woebbeking at web.de>           *
- * Modifications for KDiff3 by Joachim Eibl                                *
- *                                                                         *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- ***************************************************************************/
+/*
+  class CvsIgnoreList from Cervisia cvsdir.cpp                            
+     SPDX-FileCopyrightText: 1999-2002 Bernd Gehrmann <bernd at mail.berlios.de>    
+  with elements from class StringMatcher                                  
+     SPDX-FileCopyrightText: 2003 Andre Woebbeking <Woebbeking at web.de>           
+  Modifications for KDiff3 by Joachim Eibl
+
+  SPDX-FileCopyrightText: 2002-2007  Joachim Eibl, joachim.eibl at gmx.de
+  SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
+  SPDX-License-Identifier: GPL-2.0-or-later
+ */
 #include "cvsignorelist.h"
 #include "TypeUtils.h"
 

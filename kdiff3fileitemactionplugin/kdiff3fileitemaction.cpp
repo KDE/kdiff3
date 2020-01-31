@@ -1,21 +1,9 @@
-/* This file is part of the KDiff3 project
-
-   Copyright (C) 2008 Joachim Eibl <joachim dot eibl at gmx dot de>
-
-   This program is free software; you can redistribute it and/or
-   modify it under the terms of the GNU General Public
-   License as published by the Free Software Foundation; version 2
-   of the License.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program; see the file COPYING.  If not, write to
-   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.
+/*
+ * KDiff3 - Text Diff And Merge Tool
+ * 
+ * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
+ * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
+ * SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #include "kdiff3fileitemaction.h"
