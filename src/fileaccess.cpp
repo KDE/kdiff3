@@ -574,7 +574,7 @@ QString FileAccess::getTempName() const
     return m_localCopy;
 }
 
-const QString FileAccess::errorString() const
+const QString& FileAccess::errorString() const
 {
     return getStatusText();
 }
@@ -714,7 +714,7 @@ qint64 FileAccess::sizeForReading()
         return size();
 }
 
-QString FileAccess::getStatusText() const
+const QString& FileAccess::getStatusText() const
 {
     return m_statusText;
 }

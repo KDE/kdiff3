@@ -86,7 +86,7 @@ class FileAccess
     static bool symLink(const QString& linkTarget, const QString& linkLocation);
 
     void addPath(const QString& txt);
-    QString getStatusText() const;
+    const QString& getStatusText() const;
 
     FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
 
@@ -102,7 +102,7 @@ class FileAccess
     qint64 read(char* data, const qint64 maxlen);
     void close();
 
-    const QString errorString() const;
+    const QString& errorString() const;
 
   private:
     friend class FileAccessJobHandler;
