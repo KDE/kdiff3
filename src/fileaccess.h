@@ -20,6 +20,8 @@
 #include <KIO/UDSEntry>
 #include <KJob>
 
+#include <type_traits>
+
 namespace KIO {
 class Job;
 }
@@ -29,8 +31,7 @@ class t_DirectoryList;
 class FileAccess
 {
   public:
-    FileAccess();
-    ~FileAccess();
+    FileAccess() = default;
     explicit FileAccess(const QString& name, bool bWantToWrite = false); // name: local file or dirname or url (when supported)
     void setFile(const QString& name, bool bWantToWrite = false);
     void setFile(const QUrl& url, bool bWantToWrite = false);
@@ -123,7 +124,7 @@ class FileAccess
     QString m_linkTarget;
     QString m_name;
     QString m_localCopy;
-    QSharedPointer<QTemporaryFile> tmpFile = nullptr;
+    QSharedPointer<QTemporaryFile> tmpFile = QSharedPointer<QTemporaryFile>::create();
     QSharedPointer<QFile> realFile = nullptr;
 
     qint64 m_size = 0;
@@ -139,6 +140,9 @@ class FileAccess
 
     QString m_statusText; // Might contain an error string, when the last operation didn't succeed.
 };
+
+static_assert(std::is_move_assignable<FileAccess>::value, "FileAccess must be move assignable.");
+static_assert(std::is_move_constructible<FileAccess>::value, "FileAccess must be move constructable.");
 
 class t_DirectoryList : public std::list<FileAccess>
 {

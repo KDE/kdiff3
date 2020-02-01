@@ -34,42 +34,12 @@
 
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
-    reset();
-
     setFile(name, bWantToWrite);
-}
-
-FileAccess::FileAccess()
-{
-    reset();
 }
 
 void FileAccess::reset()
 {
-    m_fileInfo = QFileInfo();
-    m_bExists = false;
-    m_bFile = false;
-    m_bDir = false;
-    m_bSymLink = false;
-    m_bWritable = false;
-    m_bHidden = false;
-    m_size = 0;
-    m_modificationTime = QDateTime::fromMSecsSinceEpoch(0);
-
-    m_url = QUrl();
-    m_bValidData = false;
-    m_name = QString();
-
-    m_linkTarget = "";
-    //m_fileType = -1;
-    tmpFile.clear();
-    tmpFile = QSharedPointer<QTemporaryFile>::create();
-    realFile = nullptr;
-}
-
-FileAccess::~FileAccess()
-{
-    tmpFile.clear();
+    *this = FileAccess();
 }
 
 /*
