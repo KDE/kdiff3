@@ -61,7 +61,7 @@ class MergeEditLine
 };
 
 class MergeEditLineList :public std::list<MergeEditLine>
-{ // I want to know the size immediately!
+{
   private:
     typedef std::list<MergeEditLine> BASE;
 

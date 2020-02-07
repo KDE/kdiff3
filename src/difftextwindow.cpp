@@ -649,7 +649,7 @@ void DiffTextWindow::mouseReleaseEvent(QMouseEvent* e)
 }
 
 void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
-{
+{//Handles selection highlighting.
     LineRef line;
     int pos;
     convertToLinePos(e->x(), e->y(), line, pos);

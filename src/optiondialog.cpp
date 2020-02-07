@@ -39,7 +39,6 @@
 #include <QRadioButton>
 #include <QTextCodec>
 #include <QScrollArea>
-//#include <QToolTip>
 
 const QString OptionDialog::s_historyEntryStartRegExpToolTip = i18n("A version control history entry consists of several lines.\n"
                                                 "Specify the regular expression to detect the first line (without the leading comment).\n"
