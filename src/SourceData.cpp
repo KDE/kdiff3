@@ -606,7 +606,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
             if(curChar == QChar::ReplacementCharacter)
                 m_bIncompleteConversion = true;
 
-            if(!curChar.isSpace())
+            if(!curChar.isSpace() && firstNonwhite == 0)
                 firstNonwhite = line.length();
 
             line.append(curChar);
