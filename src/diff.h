@@ -20,8 +20,8 @@
 
 class Options;
 
-//These enums must be sequential with no gaps to allow loop interiation of values
-enum e_SrcSelector
+//e_SrcSelector must be sequential with no gaps between Min and Max.
+enum class e_SrcSelector
 {
    Min = -1,
    Invalid=-1,
@@ -31,6 +31,23 @@ enum e_SrcSelector
    C = 3,
    Max=C
 };
+
+inline e_SrcSelector nextSelector(e_SrcSelector selector)
+{
+    switch(selector)
+    {
+        case e_SrcSelector::None:
+            return e_SrcSelector::A;
+        case e_SrcSelector::A:
+            return e_SrcSelector::B;
+        case e_SrcSelector::B:
+            return e_SrcSelector::C;
+        default:
+            return e_SrcSelector::Invalid;
+    }
+    
+    return e_SrcSelector::Invalid;
+}
 
 enum e_MergeDetails
 {
@@ -159,11 +176,11 @@ public:
     {
         switch(srcIndex)
         {
-            case A:
+            case e_SrcSelector::A:
                 return mLineDataA;
-            case B:
+            case e_SrcSelector::B:
                 return mLineDataB;
-            case C:
+            case e_SrcSelector::C:
                 return mLineDataC;
             default:
                 return nullptr;
@@ -221,15 +238,15 @@ class Diff3Line
 
     inline bool isWhiteLine(e_SrcSelector src) const
     {
-        Q_ASSERT(src == A || src == B || src == C);
+        Q_ASSERT(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
 
         switch(src)
         {
-            case A:
+            case e_SrcSelector::A:
                 return bWhiteLineA;
-            case B:
+            case e_SrcSelector::B:
                 return bWhiteLineB;
-            case C:
+            case e_SrcSelector::C:
                 return bWhiteLineC;
             default:
                 //should never get here
@@ -247,9 +264,9 @@ class Diff3Line
     {
         Q_ASSERT(m_pDiffBufferInfo != nullptr);
         //Use at() here not [] to avoid using really weird syntax
-        if(src == A && lineA.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineA);
-        if(src == B && lineB.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineB);
-        if(src == C && lineC.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineC);
+        if(src == e_SrcSelector::A && lineA.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineA);
+        if(src == e_SrcSelector::B && lineB.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineB);
+        if(src == e_SrcSelector::C && lineC.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineC);
 
         return nullptr;
     }
@@ -263,9 +280,9 @@ class Diff3Line
     }
     LineRef getLineInFile(e_SrcSelector src) const
     {
-        if(src == A) return lineA;
-        if(src == B) return lineB;
-        if(src == C) return lineC;
+        if(src == e_SrcSelector::A) return lineA;
+        if(src == e_SrcSelector::B) return lineB;
+        if(src == e_SrcSelector::C) return lineC;
         return -1;
     }
 
@@ -283,20 +300,20 @@ class Diff3Line
   private:
     void setFineDiff(const e_SrcSelector selector, DiffList* pDiffList)
     {
-        Q_ASSERT(selector == A || selector == B || selector == C);
-        if(selector == A)
+        Q_ASSERT(selector == e_SrcSelector::A || selector == e_SrcSelector::B || selector == e_SrcSelector::C);
+        if(selector == e_SrcSelector::A)
         {
             if(pFineAB != nullptr)
                 delete pFineAB;
             pFineAB = pDiffList;
         }
-        else if(selector == B)
+        else if(selector == e_SrcSelector::B)
         {
             if(pFineBC != nullptr)
                 delete pFineBC;
             pFineBC = pDiffList;
         }
-        else if(selector == C)
+        else if(selector == e_SrcSelector::C)
         {
             if(pFineCA)
                 delete pFineCA;
@@ -461,11 +478,11 @@ class ManualDiffHelpEntry
   public:
     LineRef& firstLine(e_SrcSelector winIdx)
     {
-        return winIdx == A ? lineA1 : (winIdx == B ? lineB1 : lineC1);
+        return winIdx == e_SrcSelector::A ? lineA1 : (winIdx == e_SrcSelector::B ? lineB1 : lineC1);
     }
     LineRef& lastLine(e_SrcSelector winIdx)
     {
-        return winIdx == A ? lineA2 : (winIdx == B ? lineB2 : lineC2);
+        return winIdx == e_SrcSelector::A ? lineA2 : (winIdx == e_SrcSelector::B ? lineB2 : lineC2);
     }
     bool isLineInRange(LineRef line, e_SrcSelector winIdx)
     {
@@ -480,22 +497,22 @@ class ManualDiffHelpEntry
     int calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv);
 
     void getRangeForUI(const e_SrcSelector winIdx, LineRef *rangeLine1, LineRef *rangeLine2) const {
-        if(winIdx == A) {
+        if(winIdx == e_SrcSelector::A) {
             *rangeLine1 = lineA1;
             *rangeLine2 = lineA2;
         }
-        if(winIdx == B) {
+        if(winIdx == e_SrcSelector::B) {
             *rangeLine1 = lineB1;
             *rangeLine2 = lineB2;
         }
-        if(winIdx == C) {
+        if(winIdx == e_SrcSelector::C) {
             *rangeLine1 = lineC1;
             *rangeLine2 = lineC2;
         }
     }
 
-    inline const LineRef& getLine1(const e_SrcSelector winIdx) const { return winIdx == A ? lineA1 : winIdx == B ? lineB1 : lineC1;}
-    inline const LineRef& getLine2(const e_SrcSelector winIdx) const { return winIdx == A ? lineA2 : winIdx == B ? lineB2 : lineC2;}
+    inline const LineRef& getLine1(const e_SrcSelector winIdx) const { return winIdx == e_SrcSelector::A ? lineA1 : winIdx == e_SrcSelector::B ? lineB1 : lineC1;}
+    inline const LineRef& getLine2(const e_SrcSelector winIdx) const { return winIdx == e_SrcSelector::A ? lineA2 : winIdx == e_SrcSelector::B ? lineB2 : lineC2;}
     bool isValidMove(int line1, int line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
 };
 

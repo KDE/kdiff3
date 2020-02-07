@@ -140,13 +140,13 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
             case eBDeleted:
             case eBChanged:
                 c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorB;
-                bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(A) && d3l.isWhiteLine(B));
+                bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::B));
                 break;
 
             case eCAdded:
             case eCDeleted:
             case eCChanged:
-                bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(A) && d3l.isWhiteLine(C));
+                bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::C));
                 c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorC;
                 break;
 
@@ -176,7 +176,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
             default:
                 c = m_pOptions->m_colorForConflict;
-                bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(A) && d3l.isWhiteLine(B));
+                bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::B));
                 break;
             }
         }
@@ -192,7 +192,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
             default:
                 c = m_pOptions->m_colorForConflict;
-                bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(A) && d3l.isWhiteLine(C));
+                bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::C));
                 break;
             }
         }
@@ -208,7 +208,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
             default:
                 c = m_pOptions->m_colorForConflict;
-                bWhiteSpaceChange = d3l.isEqualBC() || (d3l.isWhiteLine(B) && d3l.isWhiteLine(C));
+                bWhiteSpaceChange = d3l.isEqualBC() || (d3l.isWhiteLine(e_SrcSelector::B) && d3l.isWhiteLine(e_SrcSelector::C));
                 break;
             }
         }

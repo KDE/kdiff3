@@ -17,19 +17,19 @@ QString MergeEditLine::getString(const QVector<LineData>* pLineDataA, const QVec
 
     if(!isModified())
     {
-        int src = m_src;
-        if(src == 0)
+        e_SrcSelector src = m_src;
+        if(src == e_SrcSelector::None)
         {
             return QString();
         }
         const Diff3Line& d3l = *m_id3l;
         const LineData* pld = nullptr;
-        Q_ASSERT(src == A || src == B || src == C);
-        if(src == A && d3l.getLineA().isValid())
+        Q_ASSERT(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
+        if(src == e_SrcSelector::A && d3l.getLineA().isValid())
             pld = &(*pLineDataA)[d3l.getLineA()];
-        else if(src == B && d3l.getLineB().isValid())
+        else if(src == e_SrcSelector::B && d3l.getLineB().isValid())
             pld = &(*pLineDataB)[d3l.getLineB()];
-        else if(src == C && d3l.getLineC().isValid())
+        else if(src == e_SrcSelector::C && d3l.getLineC().isValid())
             pld = &(*pLineDataC)[d3l.getLineC()];
 
         //Not an error.

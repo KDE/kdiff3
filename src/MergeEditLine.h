@@ -16,7 +16,7 @@
 class MergeEditLine
 {
   public:
-    explicit MergeEditLine(const Diff3LineList::const_iterator& i, e_SrcSelector src = None)
+    explicit MergeEditLine(const Diff3LineList::const_iterator& i, e_SrcSelector src = e_SrcSelector::None)
     {
         m_id3l = i;
         m_src = src;
@@ -24,12 +24,12 @@ class MergeEditLine
     }
     void setConflict()
     {
-        m_src = None;
+        m_src = e_SrcSelector::None;
         m_bLineRemoved = false;
         m_str = QString();
     }
-    bool isConflict() { return m_src == None && !m_bLineRemoved && m_str.isEmpty(); }
-    void setRemoved(e_SrcSelector src = None)
+    bool isConflict() { return m_src == e_SrcSelector::None && !m_bLineRemoved && m_str.isEmpty(); }
+    void setRemoved(e_SrcSelector src = e_SrcSelector::None)
     {
         m_src = src;
         m_bLineRemoved = true;
@@ -41,10 +41,10 @@ class MergeEditLine
     {
         m_str = s;
         m_bLineRemoved = false;
-        m_src = None;
+        m_src = e_SrcSelector::None;
     }
     QString getString(const QVector<LineData>* pLineDataA, const QVector<LineData>* pLineDataB, const QVector<LineData>* pLineDataC);
-    bool isModified() { return !m_str.isEmpty() || (m_bLineRemoved && m_src == None); }
+    bool isModified() { return !m_str.isEmpty() || (m_bLineRemoved && m_src == e_SrcSelector::None); }
 
     void setSource(e_SrcSelector src, bool bLineRemoved)
     {
@@ -87,7 +87,7 @@ class MergeLine
     bool bConflict = false;
     bool bWhiteSpaceConflict = false;
     bool bDelta = false;
-    e_SrcSelector srcSelect = None;
+    e_SrcSelector srcSelect = e_SrcSelector::None;
     MergeEditLineList mergeEditLineList;
     void split(MergeLine& ml2, int d3lLineIdx2) // The caller must insert the ml2 after this ml in the m_mergeLineList
     {

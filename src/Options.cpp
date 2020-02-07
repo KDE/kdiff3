@@ -8,6 +8,7 @@
 #include "options.h"
 
 #include "ConfigValueMap.h"
+#include "diff.h"
 #include "OptionItems.h"
 
 #include <KSharedConfig>
@@ -75,6 +76,12 @@ void Options::readOptions(const KSharedConfigPtr config)
     {
         item->read(&cvm);
     }
+
+    if(m_whiteSpace2FileMergeDefault <= (int)e_SrcSelector::Min)
+        m_whiteSpace2FileMergeDefault = (int)e_SrcSelector::None;
+    
+    if(m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Max)
+        m_whiteSpace2FileMergeDefault = (int)e_SrcSelector::C;
 }
 
 

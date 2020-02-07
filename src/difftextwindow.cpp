@@ -158,7 +158,7 @@ class DiffTextWindowData
     int m_fastSelectorNofLines = 0;
 
     bool m_bTriple = false;
-    e_SrcSelector m_winIdx = None;
+    e_SrcSelector m_winIdx = e_SrcSelector::None;
     int m_firstLine = 0;
     int m_oldFirstLine = 0;
     int m_horizScrollOffset = 0;
@@ -200,7 +200,7 @@ DiffTextWindow::DiffTextWindow(
     e_SrcSelector winIdx)
     : QWidget(pParent)
 {
-    setObjectName(QString("DiffTextWindow%1").arg(winIdx));
+    setObjectName(QString("DiffTextWindow%1").arg((int)winIdx));
     setAttribute(Qt::WA_OpaquePaintEvent);
     //setAttribute( Qt::WA_PaintOnScreen );
     setUpdatesEnabled(false);
@@ -1165,19 +1165,19 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int device
 {
     m_lineNumberWidth = m_pOptions->m_bShowLineNumbers ? (int)log10((double)std::max(m_size, 1)) + 1 : 0;
 
-    if(m_winIdx == A)
+    if(m_winIdx == e_SrcSelector::A)
     {
         m_cThis = m_pOptions->m_colorA;
         m_cDiff1 = m_pOptions->m_colorB;
         m_cDiff2 = m_pOptions->m_colorC;
     }
-    if(m_winIdx == B)
+    if(m_winIdx == e_SrcSelector::B)
     {
         m_cThis = m_pOptions->m_colorB;
         m_cDiff1 = m_pOptions->m_colorC;
         m_cDiff2 = m_pOptions->m_colorA;
     }
-    if(m_winIdx == C)
+    if(m_winIdx == e_SrcSelector::C)
     {
         m_cThis = m_pOptions->m_colorC;
         m_cDiff1 = m_pOptions->m_colorA;
@@ -1311,17 +1311,17 @@ QString DiffTextWindow::getSelection()
     {
         const Diff3Line* d3l = d->m_bWordWrap ? d->m_diff3WrapLineVector[it].pD3L : (*d->m_pDiff3LineVector)[it];
 
-        Q_ASSERT(d->m_winIdx >= 1 && d->m_winIdx <= 3);
+        Q_ASSERT(d->m_winIdx >= e_SrcSelector::A && d->m_winIdx <= e_SrcSelector::C);
 
-        if(d->m_winIdx == A)
+        if(d->m_winIdx == e_SrcSelector::A)
         {
             lineIdx = d3l->getLineA();
         }
-        else if(d->m_winIdx == B)
+        else if(d->m_winIdx == e_SrcSelector::B)
         {
             lineIdx = d3l->getLineB();
         }
-        else if(d->m_winIdx == C)
+        else if(d->m_winIdx == e_SrcSelector::C)
         {
             lineIdx = d3l->getLineC();
         }
@@ -1437,9 +1437,9 @@ void DiffTextWindow::setSelection(LineRef firstLine, int startPos, LineRef lastL
 
         const Diff3Line* d3l = (*d->m_pDiff3LineVector)[convertLineToDiff3LineIdx(lastLine)];
         LineRef line;
-        if(d->m_winIdx == A) line = d3l->getLineA();
-        if(d->m_winIdx == B) line = d3l->getLineB();
-        if(d->m_winIdx == C) line = d3l->getLineC();
+        if(d->m_winIdx == e_SrcSelector::A) line = d3l->getLineA();
+        if(d->m_winIdx == e_SrcSelector::B) line = d3l->getLineB();
+        if(d->m_winIdx == e_SrcSelector::C) line = d3l->getLineC();
         if(line.isValid())
             endPos = (*d->m_pLineData)[line].width(d->m_pOptions->m_tabSize);
     }
@@ -1497,9 +1497,9 @@ int DiffTextWindowData::convertLineOnScreenToLineInSource(int lineOnScreen, e_Co
         while(!line.isValid() && d3lIdx < m_pDiff3LineVector->size() && d3lIdx >= 0)
         {
             const Diff3Line* d3l = (*m_pDiff3LineVector)[d3lIdx];
-            if(m_winIdx == A) line = d3l->getLineA();
-            if(m_winIdx == B) line = d3l->getLineB();
-            if(m_winIdx == C) line = d3l->getLineC();
+            if(m_winIdx == e_SrcSelector::A) line = d3l->getLineA();
+            if(m_winIdx == e_SrcSelector::B) line = d3l->getLineB();
+            if(m_winIdx == e_SrcSelector::C) line = d3l->getLineC();
             if(bFirstLine)
                 ++d3lIdx;
             else
@@ -1873,7 +1873,7 @@ void DiffTextWindowFrame::init()
     {
         QString s = QDir::toNativeSeparators(pDTW->getFileName());
         d->m_pFileSelection->setText(s);
-        QString winId = pDTW->getWindowIndex() == A ? (pDTW->isThreeWay() ? i18n("A (Base)") : i18n("A")) : (pDTW->getWindowIndex() == B ? i18n("B") : i18n("C"));
+        QString winId = pDTW->getWindowIndex() == e_SrcSelector::A ? (pDTW->isThreeWay() ? i18n("A (Base)") : i18n("A")) : (pDTW->getWindowIndex() == e_SrcSelector::B ? i18n("B") : i18n("C"));
         d->m_pLabel->setText(winId + ':');
         d->m_pEncoding->setText(i18n("Encoding: %1", pDTW->getEncodingDisplayString()));
         d->m_pLineEndStyle->setText(i18n("Line end style: %1", pDTW->getLineEndStyle() == eLineEndStyleDos ? i18n("DOS") : i18n("Unix")));
@@ -1935,11 +1935,11 @@ bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
     {
         QColor c1 = d->m_pOptions->m_bgColor;
         QColor c2;
-        if(d->m_winIdx == A)
+        if(d->m_winIdx == e_SrcSelector::A)
             c2 = d->m_pOptions->m_colorA;
-        else if(d->m_winIdx == B)
+        else if(d->m_winIdx == e_SrcSelector::B)
             c2 = d->m_pOptions->m_colorB;
-        else if(d->m_winIdx == C)
+        else if(d->m_winIdx == e_SrcSelector::C)
             c2 = d->m_pOptions->m_colorC;
 
         QPalette p = d->m_pTopLineWidget->palette();

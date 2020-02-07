@@ -105,15 +105,15 @@ public Q_SLOTS:
    void updateSourceMask();
    void slotStatusMessageChanged(const QString&);
 
-   void slotChooseAEverywhere() { chooseGlobal(A, false, false); }
-   void slotChooseBEverywhere() { chooseGlobal(B, false, false); }
-   void slotChooseCEverywhere() { chooseGlobal(C, false, false); }
-   void slotChooseAForUnsolvedConflicts() { chooseGlobal(A, true, false); }
-   void slotChooseBForUnsolvedConflicts() { chooseGlobal(B, true, false); }
-   void slotChooseCForUnsolvedConflicts() { chooseGlobal(C, true, false); }
-   void slotChooseAForUnsolvedWhiteSpaceConflicts() { chooseGlobal(A, true, true); }
-   void slotChooseBForUnsolvedWhiteSpaceConflicts() { chooseGlobal(B, true, true); }
-   void slotChooseCForUnsolvedWhiteSpaceConflicts() { chooseGlobal(C, true, true); }
+   void slotChooseAEverywhere() { chooseGlobal(e_SrcSelector::A, false, false); }
+   void slotChooseBEverywhere() { chooseGlobal(e_SrcSelector::B, false, false); }
+   void slotChooseCEverywhere() { chooseGlobal(e_SrcSelector::C, false, false); }
+   void slotChooseAForUnsolvedConflicts() { chooseGlobal(e_SrcSelector::A, true, false); }
+   void slotChooseBForUnsolvedConflicts() { chooseGlobal(e_SrcSelector::B, true, false); }
+   void slotChooseCForUnsolvedConflicts() { chooseGlobal(e_SrcSelector::C, true, false); }
+   void slotChooseAForUnsolvedWhiteSpaceConflicts() { chooseGlobal(e_SrcSelector::A, true, true); }
+   void slotChooseBForUnsolvedWhiteSpaceConflicts() { chooseGlobal(e_SrcSelector::B, true, true); }
+   void slotChooseCForUnsolvedWhiteSpaceConflicts() { chooseGlobal(e_SrcSelector::C, true, true); }
    void slotRefresh();
 
  Q_SIGNALS:
@@ -202,7 +202,7 @@ private:
    void timerEvent(QTimerEvent*) override;
    void writeLine(
       RLPainter& p, int line, const QString& str,
-        int srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
+        enum e_SrcSelector srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
         );
    void setFastSelector(MergeLineList::iterator i);
     LineRef convertToLine(QtNumberType y);

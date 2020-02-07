@@ -150,7 +150,7 @@ void MergeResultWindow::init(
 
     m_maxTextWidth = -1;
 
-    merge(g_bAutoSolve, Invalid);
+    merge(g_bAutoSolve, e_SrcSelector::Invalid);
     g_bAutoSolve = true;
     update();
     updateSourceMask();
@@ -285,7 +285,7 @@ void Diff3Line::mergeOneLine(
     mergeDetails = eDefault;
     bConflict = false;
     bLineRemoved = false;
-    src = None;
+    src = e_SrcSelector::None;
 
     if(bTwoInputs) // Only two input files
     {
@@ -294,7 +294,7 @@ void Diff3Line::mergeOneLine(
             if(pFineAB == nullptr)
             {
                 mergeDetails = eNoChange;
-                src = A;
+                src = e_SrcSelector::A;
             }
             else
             {
@@ -316,22 +316,22 @@ void Diff3Line::mergeOneLine(
         if(pFineAB == nullptr && pFineBC == nullptr && pFineCA == nullptr)
         {
             mergeDetails = eNoChange;
-            src = A;
+            src = e_SrcSelector::A;
         }
         else if(pFineAB == nullptr && pFineBC != nullptr && pFineCA != nullptr)
         {
             mergeDetails = eCChanged;
-            src = C;
+            src = e_SrcSelector::C;
         }
         else if(pFineAB != nullptr && pFineBC != nullptr && pFineCA == nullptr)
         {
             mergeDetails = eBChanged;
-            src = B;
+            src = e_SrcSelector::B;
         }
         else if(pFineAB != nullptr && pFineBC == nullptr && pFineCA != nullptr)
         {
             mergeDetails = eBCChangedAndEqual;
-            src = C;
+            src = e_SrcSelector::C;
         }
         else if(pFineAB != nullptr && pFineBC != nullptr && pFineCA != nullptr)
         {
@@ -352,7 +352,7 @@ void Diff3Line::mergeOneLine(
         {
             mergeDetails = eCDeleted;
             bLineRemoved = true;
-            src = C;
+            src = e_SrcSelector::C;
         }
     }
     else if(getLineA().isValid() && !getLineB().isValid() && getLineC().isValid())
@@ -366,7 +366,7 @@ void Diff3Line::mergeOneLine(
         {
             mergeDetails = eBDeleted;
             bLineRemoved = true;
-            src = B;
+            src = e_SrcSelector::B;
         }
     }
     else if(!getLineA().isValid() && getLineB().isValid() && getLineC().isValid())
@@ -379,24 +379,24 @@ void Diff3Line::mergeOneLine(
         else // B==C
         {
             mergeDetails = eBCAddedAndEqual;
-            src = C;
+            src = e_SrcSelector::C;
         }
     }
     else if(!getLineA().isValid() && !getLineB().isValid() && getLineC().isValid())
     {
         mergeDetails = eCAdded;
-        src = C;
+        src = e_SrcSelector::C;
     }
     else if(!getLineA().isValid() && getLineB().isValid() && !getLineC().isValid())
     {
         mergeDetails = eBAdded;
-        src = B;
+        src = e_SrcSelector::B;
     }
     else if(getLineA().isValid() && !getLineB().isValid() && !getLineC().isValid())
     {
         mergeDetails = eBCDeleted;
         bLineRemoved = true;
-        src = C;
+        src = e_SrcSelector::C;
     }
     else
         Q_ASSERT(true);
@@ -446,14 +446,14 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
 
             // Automatic solving for only whitespace changes.
             if(ml.bConflict &&
-               ((m_pldC == nullptr && (d.isEqualAB() || (d.isWhiteLine(A) && d.isWhiteLine(B)))) ||
-                (m_pldC != nullptr && ((d.isEqualAB() && d.isEqualAC()) || (d.isWhiteLine(A) && d.isWhiteLine(B) && d.isWhiteLine(C))))))
+               ((m_pldC == nullptr && (d.isEqualAB() || (d.isWhiteLine(e_SrcSelector::A) && d.isWhiteLine(e_SrcSelector::B)))) ||
+                (m_pldC != nullptr && ((d.isEqualAB() && d.isEqualAC()) || (d.isWhiteLine(e_SrcSelector::A) && d.isWhiteLine(e_SrcSelector::B) && d.isWhiteLine(e_SrcSelector::C))))))
             {
                 ml.bWhiteSpaceConflict = true;
             }
 
             ml.d3lLineIdx = lineIdx;
-            ml.bDelta = ml.srcSelect != A;
+            ml.bDelta = ml.srcSelect != e_SrcSelector::A;
             ml.id3l = it;
             ml.srcRangeLength = 1;
 
@@ -491,16 +491,16 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     bool bSolveWhiteSpaceConflicts = false;
     if(bAutoSolve) // when true, then the other params are not used and we can change them here. (see all invocations of merge())
     {
-        if(m_pldC == nullptr && m_pOptions->m_whiteSpace2FileMergeDefault != None) // Only two inputs
+        if(m_pldC == nullptr && m_pOptions->m_whiteSpace2FileMergeDefault != (int)e_SrcSelector::None) // Only two inputs
         {
-            Q_ASSERT(m_pOptions->m_whiteSpace2FileMergeDefault <= Max && m_pOptions->m_whiteSpace2FileMergeDefault >= Min);
+            Q_ASSERT(m_pOptions->m_whiteSpace2FileMergeDefault <= (int)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
             defaultSelector = (e_SrcSelector)m_pOptions->m_whiteSpace2FileMergeDefault;
             bWhiteSpaceOnly = true;
             bSolveWhiteSpaceConflicts = true;
         }
-        else if(m_pldC != nullptr && m_pOptions->m_whiteSpace3FileMergeDefault != None)
+        else if(m_pldC != nullptr && m_pOptions->m_whiteSpace3FileMergeDefault != (int)e_SrcSelector::None)
         {
-            Q_ASSERT(m_pOptions->m_whiteSpace3FileMergeDefault <= Max && m_pOptions->m_whiteSpace2FileMergeDefault >= Min);
+            Q_ASSERT(m_pOptions->m_whiteSpace3FileMergeDefault <= (int)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
             defaultSelector = (e_SrcSelector)m_pOptions->m_whiteSpace3FileMergeDefault;
             bWhiteSpaceOnly = true;
             bSolveWhiteSpaceConflicts = true;
@@ -518,10 +518,10 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
             if(ml.bDelta && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || ml.bWhiteSpaceConflict))
             {
                 ml.mergeEditLineList.clear();
-                if(defaultSelector == Invalid && ml.bDelta)
+                if(defaultSelector == e_SrcSelector::Invalid && ml.bDelta)
                 {
                     MergeEditLine mel(ml.id3l);
-                    ;
+                    
                     mel.setConflict();
                     ml.bConflict = true;
                     ml.mergeEditLineList.push_back(mel);
@@ -536,7 +536,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
                         MergeEditLine mel(d3llit);
                         mel.setSource(defaultSelector, false);
 
-                        LineRef srcLine = defaultSelector == A ? d3llit->getLineA() : defaultSelector == B ? d3llit->getLineB() : defaultSelector == C ? d3llit->getLineC() : LineRef();
+                        LineRef srcLine = defaultSelector == e_SrcSelector::A ? d3llit->getLineA() : defaultSelector == e_SrcSelector::B ? d3llit->getLineB() : defaultSelector == e_SrcSelector::C ? d3llit->getLineC() : LineRef();
 
                         if(srcLine.isValid())
                         {
@@ -564,14 +564,14 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
         // Remove all lines that are empty, because no src lines are there.
 
         LineRef oldSrcLine;
-        e_SrcSelector oldSrc = Invalid;
+        e_SrcSelector oldSrc = e_SrcSelector::Invalid;
         MergeEditLineList::iterator melIt;
         for(melIt = ml.mergeEditLineList.begin(); melIt != ml.mergeEditLineList.end();)
         {
             MergeEditLine& mel = *melIt;
             e_SrcSelector melsrc = mel.src();
 
-            LineRef srcLine = mel.isRemoved() ? LineRef() : melsrc == A ? mel.id3l()->getLineA() : melsrc == B ? mel.id3l()->getLineB() : melsrc == C ? mel.id3l()->getLineC() : LineRef();
+            LineRef srcLine = mel.isRemoved() ? LineRef() : melsrc == e_SrcSelector::A ? mel.id3l()->getLineA() : melsrc == e_SrcSelector::B ? mel.id3l()->getLineB() : melsrc == e_SrcSelector::C ? mel.id3l()->getLineC() : LineRef();
 
             // At least one line remains because oldSrc != melsrc for first line in list
             // Other empty lines will be removed
@@ -1105,7 +1105,7 @@ void MergeResultWindow::choose(e_SrcSelector selector)
         {
             MergeEditLine& mel = *melIt;
 
-            LineRef srcLine = mel.src() == A ? mel.id3l()->getLineA() : mel.src() == B ? mel.id3l()->getLineB() : mel.src() == C ? mel.id3l()->getLineC() : LineRef();
+            LineRef srcLine = mel.src() == e_SrcSelector::A ? mel.id3l()->getLineA() : mel.src() == e_SrcSelector::B ? mel.id3l()->getLineB() : mel.src() == e_SrcSelector::C ? mel.id3l()->getLineC() : LineRef();
 
             if(!srcLine.isValid())
                 melIt = ml.mergeEditLineList.erase(melIt);
@@ -1154,7 +1154,7 @@ void MergeResultWindow::chooseGlobal(e_SrcSelector selector, bool bConflictsOnly
 void MergeResultWindow::slotAutoSolve()
 {
     resetSelection();
-    merge(true, Invalid);
+    merge(true, e_SrcSelector::Invalid);
     setModified(true);
     update();
     showUnsolvedConflictsStatusMessage();
@@ -1164,7 +1164,7 @@ void MergeResultWindow::slotAutoSolve()
 void MergeResultWindow::slotUnsolve()
 {
     resetSelection();
-    merge(false, Invalid);
+    merge(false, e_SrcSelector::Invalid);
     setModified(true);
     update();
     showUnsolvedConflictsStatusMessage();
@@ -1290,9 +1290,9 @@ void MergeResultWindow::collectHistoryInformation(
                 // Only insert new HistoryMapEntry if key not found; in either case p.first is a valid iterator to element key.
                 std::pair<HistoryMap::iterator, bool> p = historyMap.insert(HistoryMap::value_type(key, HistoryMapEntry()));
                 HistoryMapEntry& hme = p.first->second;
-                if(src == A) hme.mellA = melList;
-                if(src == B) hme.mellB = melList;
-                if(src == C) hme.mellC = melList;
+                if(src == e_SrcSelector::A) hme.mellA = melList;
+                if(src == e_SrcSelector::B) hme.mellB = melList;
+                if(src == e_SrcSelector::C) hme.mellC = melList;
                 if(p.second) // Not in list yet?
                 {
                     hitList.insert(itHitListFront, p.first);
@@ -1319,9 +1319,9 @@ void MergeResultWindow::collectHistoryInformation(
         // Only insert new HistoryMapEntry if key not found; in either case p.first is a valid iterator to element key.
         std::pair<HistoryMap::iterator, bool> p = historyMap.insert(HistoryMap::value_type(key, HistoryMapEntry()));
         HistoryMapEntry& hme = p.first->second;
-        if(src == A) hme.mellA = melList;
-        if(src == B) hme.mellB = melList;
-        if(src == C) hme.mellC = melList;
+        if(src == e_SrcSelector::A) hme.mellA = melList;
+        if(src == e_SrcSelector::B) hme.mellB = melList;
+        if(src == e_SrcSelector::C) hme.mellC = melList;
         if(p.second) // Not in list yet?
         {
             hitList.insert(itHitListFront, p.first);
@@ -1396,14 +1396,14 @@ void MergeResultWindow::slotMergeHistory()
         std::list<HistoryMap::iterator> hitList;
         if(m_pldC == nullptr)
         {
-            collectHistoryInformation(A, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
-            collectHistoryInformation(B, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
+            collectHistoryInformation(e_SrcSelector::A, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
+            collectHistoryInformation(e_SrcSelector::B, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
         }
         else
         {
-            collectHistoryInformation(A, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
-            collectHistoryInformation(B, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
-            collectHistoryInformation(C, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
+            collectHistoryInformation(e_SrcSelector::A, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
+            collectHistoryInformation(e_SrcSelector::B, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
+            collectHistoryInformation(e_SrcSelector::C, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
         }
 
         Diff3LineList::const_iterator iD3LHistoryOrigEnd = iD3LHistoryEnd;
@@ -1458,8 +1458,8 @@ void MergeResultWindow::slotMergeHistory()
         }
         iMLLStart->mergeEditLineList.clear();
         // Now insert the complete history into the first MergeLine of the history
-        iMLLStart->mergeEditLineList.push_back(MergeEditLine(iD3LHistoryBegin, m_pldC == nullptr ? B : C));
-        QString lead = Utils::calcHistoryLead(iD3LHistoryBegin->getString(A));
+        iMLLStart->mergeEditLineList.push_back(MergeEditLine(iD3LHistoryBegin, m_pldC == nullptr ? e_SrcSelector::B : e_SrcSelector::C));
+        QString lead = Utils::calcHistoryLead(iD3LHistoryBegin->getString(e_SrcSelector::A));
         MergeEditLine mel(m_pDiff3LineList->end());
         mel.setString(lead);
         iMLLStart->mergeEditLineList.push_back(mel);
@@ -1520,12 +1520,12 @@ void MergeResultWindow::slotRegExpAutoMerge()
         if(i->bConflict)
         {
             Diff3LineList::const_iterator id3l = i->id3l;
-            if(vcsKeywords.exactMatch(id3l->getString(A)) &&
-               vcsKeywords.exactMatch(id3l->getString(B)) &&
-               (m_pldC == nullptr || vcsKeywords.exactMatch(id3l->getString(C))))
+            if(vcsKeywords.exactMatch(id3l->getString(e_SrcSelector::A)) &&
+               vcsKeywords.exactMatch(id3l->getString(e_SrcSelector::B)) &&
+               (m_pldC == nullptr || vcsKeywords.exactMatch(id3l->getString(e_SrcSelector::C))))
             {
                 MergeEditLine& mel = *i->mergeEditLineList.begin();
-                mel.setSource(m_pldC == nullptr ? B : C, false);
+                mel.setSource(m_pldC == nullptr ? e_SrcSelector::B : e_SrcSelector::C, false);
                 splitAtDiff3LineIdx(i->d3lLineIdx + 1);
             }
         }
@@ -1546,7 +1546,7 @@ bool MergeResultWindow::doRelevantChangesExist()
     MergeLineList::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
-        if((i->bConflict && i->mergeEditLineList.begin()->src() != C) || i->srcSelect == B)
+        if((i->bConflict && i->mergeEditLineList.begin()->src() != e_SrcSelector::C) || i->srcSelect == e_SrcSelector::B)
         {
             return true;
         }
@@ -1720,7 +1720,7 @@ QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(int li
 
 void MergeResultWindow::writeLine(
     RLPainter& p, int line, const QString& str,
-    int srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict)
+    e_SrcSelector srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict)
 {
     const QFontMetrics& fm = fontMetrics();
     int fontHeight = fm.lineSpacing();
@@ -1738,11 +1738,11 @@ void MergeResultWindow::writeLine(
     QString srcName = QChar(' ');
     if(bUserModified)
         srcName = QChar('m');
-    else if(srcSelect == A && mergeDetails != eNoChange)
+    else if(srcSelect == e_SrcSelector::A && mergeDetails != eNoChange)
         srcName = i18n("A");
-    else if(srcSelect == B)
+    else if(srcSelect == e_SrcSelector::B)
         srcName = i18n("B");
-    else if(srcSelect == C)
+    else if(srcSelect == e_SrcSelector::C)
         srcName = i18n("C");
 
     if(rangeMark & 4)
@@ -1750,7 +1750,7 @@ void MergeResultWindow::writeLine(
         p.fillRect(xOffset, yOffset, width(), fontHeight, m_pOptions->m_currentRangeBgColor);
     }
 
-    if((srcSelect > 0 || bUserModified) && !bLineRemoved)
+    if((srcSelect > e_SrcSelector::None || bUserModified) && !bLineRemoved)
     {
         if(!m_pOptions->m_bRightToLeftLanguage)
             p.setClipRect(QRectF(xOffset, 0, width() - xOffset, height()));
@@ -1802,7 +1802,7 @@ void MergeResultWindow::writeLine(
         p.drawText(1, yOffset + fontAscent, srcName);
         if(m_cursorYPos == line) m_cursorXPos = 0;
     }
-    else if(srcSelect == 0)
+    else if(srcSelect == e_SrcSelector::None)
     {
         p.setPen(m_pOptions->m_colorForConflict);
         if(bWhiteSpaceConflict)
@@ -1973,9 +1973,9 @@ void MergeResultWindow::updateSourceMask()
         for(melIt = ml.mergeEditLineList.begin(); melIt != ml.mergeEditLineList.end(); ++melIt)
         {
             MergeEditLine& mel = *melIt;
-            if(mel.src() == A) srcMask |= 1;
-            if(mel.src() == B) srcMask |= 2;
-            if(mel.src() == C) srcMask |= 4;
+            if(mel.src() == e_SrcSelector::A) srcMask |= 1;
+            if(mel.src() == e_SrcSelector::B) srcMask |= 2;
+            if(mel.src() == e_SrcSelector::C) srcMask |= 4;
             if(mel.isModified() || !mel.isEditableText()) bModified = true;
         }
 
