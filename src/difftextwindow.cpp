@@ -314,6 +314,7 @@ void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
     else
     {
         scroll(deltaX, 0, r);
+        update();
     }
 }
 
