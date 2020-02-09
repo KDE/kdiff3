@@ -214,8 +214,11 @@ bool SourceData::isBinaryEqualWith(const QSharedPointer<SourceData>& other) cons
 
 void SourceData::FileData::reset()
 {
-    delete[](char*) m_pBuf;
-    m_pBuf = nullptr;
+    if(m_pBuf != nullptr)
+    {
+        delete[](char*) m_pBuf;
+        m_pBuf = nullptr;
+    }
     m_v.clear();
     m_size = 0;
     m_vSize = 0;
