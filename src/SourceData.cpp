@@ -45,17 +45,6 @@ Optimizations: Skip unneeded steps.
 
 #include <KLocalizedString>
 
-SourceData::SourceData()
-{
-    m_pOptions = nullptr;
-    reset();
-}
-
-SourceData::~SourceData()
-{
-    reset();
-}
-
 void SourceData::reset()
 {
     m_pEncoding = nullptr;

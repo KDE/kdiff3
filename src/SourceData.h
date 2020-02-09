@@ -24,9 +24,6 @@ class SourceData: public QObject
     Q_OBJECT;
 
   public:
-    SourceData();
-    virtual ~SourceData();
-
     void setOptions(const QSharedPointer<Options> &pOptions);
 
     LineRef getSizeLines() const;
