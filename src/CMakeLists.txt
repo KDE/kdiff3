@@ -62,6 +62,25 @@ add_executable(kdiff3 ${kdiff3_SRCS})
 target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::Parts KF5::Crash ${KDiff3_LIBRARIES} )
 target_compile_features(kdiff3 PRIVATE ${needed_features})
 
+# See https://cmake.org/cmake/help/v3.15/prop_tgt/MACOSX_BUNDLE_INFO_PLIST.html
+if(APPLE)
+  set_property(
+    TARGET kdiff3
+    PROPERTY MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/MacOSXBundleInfo.plist.in
+  )
+
+  # These are substituted by CMake into plist.in.
+  set(MACOSX_BUNDLE_DISPLAY_NAME "KDiff3")
+  set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.kde.KDiff3")
+  set(MACOSX_BUNDLE_BUNDLE_NAME "KDiff3")
+  set(MACOSX_BUNDLE_DISPLAY_NAME "KDiff3")
+  set(MACOSX_BUNDLE_INFO_STRING "KDiff3 - Diff/Patch Frontend")
+  set(MACOSX_BUNDLE_LONG_VERSION_STRING "KDiff3 ${KDIFF3_VERSION}")
+  set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${KDIFF3_VERSION_MAJOR}.${KDIFF3_VERSION_MINOR}")
+  set(MACOSX_BUNDLE_BUNDLE_VERSION "${KDIFF3_VERSION}")
+  set(MACOSX_BUNDLE_COPYRIGHT "2003-2020 The KDiff3 Authors")
+endif()
+
 install(TARGETS kdiff3 ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 
