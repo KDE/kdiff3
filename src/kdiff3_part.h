@@ -65,7 +65,6 @@ private:
     KAboutData createAboutData();
 
     KDiff3App* m_widget;
-    bool m_bIsShell;
 };
 
 #endif // _KDIFF3PART_H_

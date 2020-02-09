@@ -52,9 +52,6 @@ KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantLis
     // this should be your custom internal widget
     m_widget = new KDiff3App(parentWidget, widgetName, this);
 
-    //FIXME: This hack is necessary to avoid a crash when the program terminates.
-    m_bIsShell = qobject_cast<KParts::MainWindow*>(parentWidget) != nullptr;
-
     // notify the part that this is our internal widget
     setWidget(m_widget);
 
@@ -74,7 +71,8 @@ KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantLis
 
 KDiff3Part::~KDiff3Part()
 {
-    if(m_widget != nullptr && !m_bIsShell)
+    //TODO: Is parent check needed?
+    if(m_widget != nullptr && qobject_cast<KParts::MainWindow*>(parent()) != nullptr )
     {
         m_widget->saveOptions(KSharedConfig::openConfig());
     }
