@@ -19,6 +19,8 @@ build_ubuntu_18_04:
   script:
     - cmake -DBUILD_TESTING=YES .
     - make
+  artifacts:
+    untracked: true
   retry:
     max: 2
     when:
@@ -28,8 +30,13 @@ build_ubuntu_18_04:
 ubuntu_18_04_test:
     stage: test
     needs: ["build_ubuntu_18_04"]
-    #overide default before script this is not part of the standard kde ci
     before_script:
-        - echo ""
+      - apt-get update
+      - apt-get install -y cmake make
     script:
         - make ARGS="-V -E appstreamtest" test #exclude appstreamtest this does not run properly in my image
+    retry:
+      max: 2
+      when:
+       - runner_system_failure
+       - stuck_or_timeout_failure
