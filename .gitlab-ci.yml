@@ -1,26 +1,35 @@
-image: reporter123/cmake:bionic
+include:
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-before.yml
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-extragear-linux.yml
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-extragear-freebsd.yml
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-extragear-windows.yml
 
-build:
+#reenable test stage for our custom build was disabled by ci-tooling config
+stages:
+  - build
+  - test
+
+build_ubuntu_18_04:
   stage: build
-  
-  before_script: 
-     - apt-get update && apt-get install -y extra-cmake-modules gettext qtbase5-dev extra-cmake-modules libkf5i18n-dev libkf5coreaddons-dev libkf5iconthemes-dev libkf5parts-dev libkf5doctools-dev libkf5crash-dev 
-  script: 
+  image: reporter123/cmake:bionic
+
+  before_script:
+     - apt-get update
+     - apt-get install -y gettext qtbase5-dev extra-cmake-modules libkf5i18n-dev libkf5coreaddons-dev libkf5iconthemes-dev libkf5parts-dev libkf5doctools-dev libkf5crash-dev
+  script:
     - cmake -DBUILD_TESTING=YES .
     - make
-    - make ARGS="-V -E appstreamtest" test #exclude appstreamtest this does not run properly in my image
-    - make install
-  
   retry:
     max: 2
     when:
       - runner_system_failure
       - stuck_or_timeout_failure
-  #artifacts:
-  #  paths:
-  #    - mybinary
-  # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
-  # cache:
-  #   paths:
-  #     - "*.o"
 
+ubuntu_18_04_test:
+    stage: test
+    needs: ["build_ubuntu_18_04"]
+    #overide default before script this is not part of the standard kde ci
+    before_script:
+        - echo ""
+    script:
+        - make ARGS="-V -E appstreamtest" test #exclude appstreamtest this does not run properly in my image
