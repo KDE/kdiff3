@@ -30,9 +30,10 @@ build_ubuntu_18_04:
 ubuntu_18_04_test:
     stage: test
     needs: ["build_ubuntu_18_04"]
-    before_script:
-      - apt-get update
-      - apt-get install -y cmake make
+    image: reporter123/cmake:bionic
+    #before_script:
+      #- apt-get update
+      #- apt-get install -y gettext qtbase5-dev extra-cmake-modules libkf5i18n-dev libkf5coreaddons-dev libkf5iconthemes-dev libkf5parts-dev libkf5doctools-dev libkf5crash-dev
     script:
         - make ARGS="-V -E appstreamtest" test #exclude appstreamtest this does not run properly in my image
     retry:
