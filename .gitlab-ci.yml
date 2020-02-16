@@ -36,7 +36,7 @@ ubuntu_18_04_test:
       - apt-get update
       - apt-get install -y libqt5test5
     script:
-        - make ARGS="-V -E appstreamtest" test #exclude appstreamtest this does not run properly in my image
+      - make ARGS="-V -E appstreamtest" test #exclude appstreamtest this does not run properly in my image
     retry:
       max: 2
       when:
