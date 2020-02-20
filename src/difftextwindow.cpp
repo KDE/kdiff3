@@ -423,12 +423,12 @@ void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
 
     d->m_horizScrollOffset = std::max(0, horizScrollOffset);
 
-    QRect r(xOffset, 0, width() - xOffset, height());
+    QRect r(xOffset, 0, width(), height());
 
     if(d->m_pOptions->m_bRightToLeftLanguage)
     {
         deltaX = -deltaX;
-        r = QRect(width() - xOffset - 2, 0, -(width() - xOffset), height()).normalized();
+        r = QRect(width() - xOffset - 2, 0, -(width()), height()).normalized();
     }
 
     if(d->m_bSelectionInProgress && d->m_selection.isValidFirstLine())
