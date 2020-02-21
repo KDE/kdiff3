@@ -134,7 +134,6 @@ class DiffTextWindowData
     //TODO: Remove friend classes after creating accessors. Please don't add new classes here
     friend DiffTextWindow;
     DiffTextWindow* m_pDiffTextWindow;
-    DiffTextWindowFrame* m_pDiffTextWindowFrame = nullptr;
     QTextCodec* m_pTextCodec = nullptr;
     e_LineEndStyle m_eLineEndStyle;
 
@@ -207,7 +206,6 @@ DiffTextWindow::DiffTextWindow(
     setUpdatesEnabled(false);
 
     d = new DiffTextWindowData(this);
-    d->m_pDiffTextWindowFrame = pParent;
     setFocusPolicy(Qt::ClickFocus);
     setAcceptDrops(true);
 
@@ -266,6 +264,9 @@ void DiffTextWindow::init(
 
 void DiffTextWindow::setupConnections(const KDiff3App *app) const
 {
+    Q_ASSERT(dynamic_cast<DiffTextWindowFrame*>(parent()) != nullptr);
+
+    connect(this, &DiffTextWindow::firstLineChanged, dynamic_cast<DiffTextWindowFrame*>(parent()), &DiffTextWindowFrame::setFirstLine);
     connect(this, &DiffTextWindow::newSelection, app, &KDiff3App::slotSelectionStart);
     connect(this, &DiffTextWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
     connect(this, &DiffTextWindow::scrollDiffTextWindow, app, &KDiff3App::scrollDiffTextWindow);
@@ -407,7 +408,8 @@ void DiffTextWindow::setFirstLine(QtNumberType firstLine)
     {
         scroll(0, deltaY);
     }
-    d->m_pDiffTextWindowFrame->setFirstLine(d->m_firstLine);
+    
+    Q_EMIT firstLineChanged(d->m_firstLine);
 }
 
 int DiffTextWindow::getFirstLine()
@@ -1718,7 +1720,8 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
         {
             d->m_firstLine = std::min(d->m_firstLine, wrapLineVectorSize - 1);
             d->m_horizScrollOffset = 0;
-            d->m_pDiffTextWindowFrame->setFirstLine(d->m_firstLine);
+
+            Q_EMIT firstLineChanged(d->m_firstLine);
         }
     }
     else // no word wrap, just calc the maximum text width

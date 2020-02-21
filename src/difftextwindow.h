@@ -105,6 +105,8 @@ class DiffTextWindow : public QWidget
     void checkIfCanContinue(bool& pbContinue);
 
     void finishDrop();
+
+    void firstLineChanged(QtNumberType firstLine);
   public Q_SLOTS:
     void setFirstLine(QtNumberType line);
     void setHorizScrollOffset(int horizScrollOffset);
@@ -145,13 +147,15 @@ class DiffTextWindowFrame : public QWidget
     ~DiffTextWindowFrame() override;
     DiffTextWindow* getDiffTextWindow();
     void init();
-    void setFirstLine(QtNumberType firstLine);
 
     void setupConnections(const KDiff3App *app);
 
   Q_SIGNALS:
     void fileNameChanged(const QString&, e_SrcSelector);
     void encodingChanged(QTextCodec*);
+
+  public Q_SLOTS:
+    void setFirstLine(QtNumberType firstLine);
 
   protected:
     bool eventFilter(QObject*, QEvent*) override;
@@ -161,6 +165,7 @@ class DiffTextWindowFrame : public QWidget
     void slotBrowseButtonClicked();
 
     void slotEncodingChanged(QTextCodec* c) { Q_EMIT encodingChanged(c); };//relay signal from encoding label
+
 
   private:
     DiffTextWindowFrameData* d;
