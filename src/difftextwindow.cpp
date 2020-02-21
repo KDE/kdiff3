@@ -129,6 +129,7 @@ class DiffTextWindowData
 
     const Diff3LineVector* getDiff3LineVector() { return m_pDiff3LineVector; }
 
+    const QSharedPointer<Options>& getOptions() { return m_pOptions; }
   private:
     //TODO: Remove friend classes after creating accessors. Please don't add new classes here
     friend DiffTextWindow;
@@ -220,7 +221,7 @@ DiffTextWindow::DiffTextWindow(
     d->m_bWordWrap = false;
     d->m_winIdx = winIdx;
 
-    setFont(d->m_pOptions->m_font);
+    setFont(d->getOptions()->m_font);
 }
 
 DiffTextWindow::~DiffTextWindow()
@@ -287,7 +288,7 @@ void DiffTextWindow::reset()
 
 void DiffTextWindow::slotRefresh()
 {
-    setFont(d->m_pOptions->m_font);
+    setFont(d->getOptions()->m_font);
     update();
 }
 
@@ -434,7 +435,7 @@ void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
     {
         QRect r(xOffset, 0, width(), height());
 
-        if(d->m_pOptions->m_bRightToLeftLanguage)
+        if(d->getOptions()->m_bRightToLeftLanguage)
         {
             deltaX = -deltaX;
             r = QRect(width() - xOffset - 2, 0, -(width()), height()).normalized();
@@ -572,7 +573,7 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
         int fontWidth = Utils::getHorizontalAdvance(fontMetrics(), '0');
         int xOffset = d->leftInfoWidth() * fontWidth;
 
-        if((!d->m_pOptions->m_bRightToLeftLanguage && e->x() < xOffset) || (d->m_pOptions->m_bRightToLeftLanguage && e->x() > width() - xOffset))
+        if((!d->getOptions()->m_bRightToLeftLanguage && e->x() < xOffset) || (d->getOptions()->m_bRightToLeftLanguage && e->x() > width() - xOffset))
         {
             Q_EMIT setFastSelectorLine(convertLineToDiff3LineIdx(line));
             d->m_selection.reset(); // Disable current d->m_selection
@@ -667,7 +668,7 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
         int fontWidth = Utils::getHorizontalAdvance(fm, '0');
         int deltaX = 0;
         int deltaY = 0;
-        if(!d->m_pOptions->m_bRightToLeftLanguage)
+        if(!d->getOptions()->m_bRightToLeftLanguage)
         {
             if(e->x() < d->leftInfoWidth() * fontWidth) deltaX = -1 - abs(e->x() - d->leftInfoWidth() * fontWidth) / fontWidth;
             if(e->x() > width()) deltaX = +1 + abs(e->x() - width()) / fontWidth;
@@ -764,11 +765,11 @@ void DiffTextWindow::convertToLinePos(int x, int y, LineRef& line, int& pos)
     int yOffset = -d->m_firstLine * fontHeight;
 
     line = (y - yOffset) / fontHeight;
-    if(line.isValid() && (!d->m_pOptions->m_bWordWrap || line < d->m_diff3WrapLineVector.count()))
+    if(line.isValid() && (!d->getOptions()->m_bWordWrap || line < d->m_diff3WrapLineVector.count()))
     {
         QString s = d->getLineString(line);
         QTextLayout textLayout(s, font(), this);
-        d->prepareTextLayout(textLayout, !d->m_pOptions->m_bWordWrap || d->m_diff3WrapLineVector[line].wrapLineOffset == 0);
+        d->prepareTextLayout(textLayout, !d->getOptions()->m_bWordWrap || d->m_diff3WrapLineVector[line].wrapLineOffset == 0);
         pos = textLayout.lineAt(0).xToCursor(x - textLayout.position().x());
     }
     else
@@ -1122,7 +1123,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     if(d->m_pDiff3LineVector == nullptr || (d->m_diff3WrapLineVector.empty() && d->m_bWordWrap))
     {
         QPainter p(this);
-        p.fillRect(invalidRect, d->m_pOptions->m_bgColor);
+        p.fillRect(invalidRect, d->getOptions()->m_bgColor);
         return;
     }
 
@@ -1131,10 +1132,10 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
 
     int endLine = std::min(d->m_firstLine + getNofVisibleLines() + 2, getNofLines());
 
-    RLPainter p(this, d->m_pOptions->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(), '0'));
+    RLPainter p(this, d->getOptions()->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(), '0'));
 
     p.setFont(font());
-    p.QPainter::fillRect(invalidRect, d->m_pOptions->m_bgColor);
+    p.QPainter::fillRect(invalidRect, d->getOptions()->m_bgColor);
 
     d->draw(p, invalidRect, width(), d->m_firstLine, endLine);
     p.end();
@@ -1155,10 +1156,10 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, int nofLin
     int oldFirstLine = d->m_firstLine;
     d->m_firstLine = firstLine;
     QRect invalidRect = QRect(0, 0, 1000000000, 1000000000);
-    QColor bgColor = d->m_pOptions->m_bgColor;
-    d->m_pOptions->m_bgColor = Qt::white;
+    QColor bgColor = d->getOptions()->m_bgColor;
+    d->getOptions()->m_bgColor = Qt::white;
     d->draw(p, invalidRect, p.window().width(), firstLine, std::min(firstLine + nofLinesPerPage, getNofLines()));
-    d->m_pOptions->m_bgColor = bgColor;
+    d->getOptions()->m_bgColor = bgColor;
     d->m_firstLine = oldFirstLine;
 }
 
@@ -1442,7 +1443,7 @@ void DiffTextWindow::setSelection(LineRef firstLine, int startPos, LineRef lastL
         if(d->m_winIdx == e_SrcSelector::B) line = d3l->getLineB();
         if(d->m_winIdx == e_SrcSelector::C) line = d3l->getLineC();
         if(line.isValid())
-            endPos = (*d->m_pLineData)[line].width(d->m_pOptions->m_tabSize);
+            endPos = (*d->m_pLineData)[line].width(d->getOptions()->m_tabSize);
     }
 
     if(d->m_bWordWrap && d->m_pDiff3LineVector != nullptr)
@@ -1578,7 +1579,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
 
     if(bWordWrap)
     {
-        d->m_lineNumberWidth = d->m_pOptions->m_bShowLineNumbers ? (int)log10((double)std::max(d->m_size, 1)) + 1 : 0;
+        d->m_lineNumberWidth = d->getOptions()->m_bShowLineNumbers ? (int)log10((double)std::max(d->m_size, 1)) + 1 : 0;
 
         d->m_diff3WrapLineVector.resize(wrapLineVectorSize);
 
@@ -1794,6 +1795,7 @@ class DiffTextWindowFrameData
     const QWidget* getTopLineWidget() const { return m_pTopLineWidget; }
     const QLabel* getLabel() const { return m_pLabel; }
 
+    const QSharedPointer<Options> getOptions() { return m_pOptions; }
   private:
     friend DiffTextWindowFrame;
     DiffTextWindow* m_pDiffTextWindow;
@@ -1934,14 +1936,14 @@ bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
     Q_UNUSED(o);
     if(e->type() == QEvent::FocusIn || e->type() == QEvent::FocusOut)
     {
-        QColor c1 = d->m_pOptions->m_bgColor;
+        QColor c1 = d->getOptions()->m_bgColor;
         QColor c2;
         if(d->m_winIdx == e_SrcSelector::A)
-            c2 = d->m_pOptions->m_colorA;
+            c2 = d->getOptions()->m_colorA;
         else if(d->m_winIdx == e_SrcSelector::B)
-            c2 = d->m_pOptions->m_colorB;
+            c2 = d->getOptions()->m_colorB;
         else if(d->m_winIdx == e_SrcSelector::C)
-            c2 = d->m_pOptions->m_colorC;
+            c2 = d->getOptions()->m_colorC;
 
         QPalette p = d->m_pTopLineWidget->palette();
         if(e->type() == QEvent::FocusOut)
