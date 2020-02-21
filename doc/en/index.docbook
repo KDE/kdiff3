@@ -306,6 +306,7 @@ Options:
   -b, --base file           Explicit base file. For compatibility with certain tools.
   -o, --output file         Output file. Implies -m. E.g.: -o newfile.txt
   --out file                Output file, again. (For compatibility with certain tools.)
+  --noauto                  Ignore --auto and always show GUI.
   --auto                    No GUI if all conflicts are auto-solvable. (Needs -o file)
   --qall                    Don't solve conflicts automatically. (For compatibility...)
   --L1 alias1               Visible name replacement for input file 1 (base).

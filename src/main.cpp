@@ -114,7 +114,9 @@ int main(int argc, char* argv[])
     cmdLineParser->addOption(QCommandLineOption(QLatin1String("out"), i18n("Output file, again. (For compatibility with certain tools.)"), QLatin1String("file")));
 #ifdef ENABLE_AUTO
     cmdLineParser->addOption(QCommandLineOption(QLatin1String("auto"), i18n("No GUI if all conflicts are auto-solvable. (Needs -o file)")));
+    cmdLineParser->addOption(QCommandLineOption(QLatin1String("noauto"), i18n("Ignore --auto and always show GUI.")));
 #else
+    cmdLineParser->addOption(QCommandLineOption(QLatin1String("noauto"), i18n("Ignored.")));
     cmdLineParser->addOption(QCommandLineOption(QLatin1String("auto"), i18n("Ignored.")));
 #endif
     cmdLineParser->addOption(QCommandLineOption(QLatin1String("qall"), i18n("Do not solve conflicts automatically.")));
