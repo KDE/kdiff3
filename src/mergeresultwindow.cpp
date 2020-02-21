@@ -204,7 +204,7 @@ void MergeResultWindow::setupConnections(const KDiff3App *app) const
     connect(this, &MergeResultWindow::updateAvailabilities, app, &KDiff3App::slotUpdateAvailabilities);
     connect(this, &MergeResultWindow::showPopupMenu, app, &KDiff3App::showPopupMenu);
     connect(this, &MergeResultWindow::noRelevantChangesDetected, app, &KDiff3App::slotNoRelevantChangesDetected);
-    connect(this, static_cast<void (MergeResultWindow::*)(void)>(&MergeResultWindow::update), app, &KDiff3App::showWhiteSpaceToggled);
+    connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (MergeResultWindow::*)(void)>(&MergeResultWindow::update));
     connect(app, &KDiff3App::doRefresh, this, &MergeResultWindow::slotRefresh);
 
     connect(app, &KDiff3App::autoSolve, this, &MergeResultWindow::slotAutoSolve);

@@ -273,8 +273,8 @@ void DiffTextWindow::setupConnections(const KDiff3App *app) const
     connect(this, &DiffTextWindow::finishRecalcWordWrap, app, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
     connect(this, &DiffTextWindow::checkIfCanContinue, app, &KDiff3App::slotCheckIfCanContinue);
     connect(this, &DiffTextWindow::finishDrop, app, &KDiff3App::slotFinishDrop);
-    connect(this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update), app, &KDiff3App::showWhiteSpaceToggled);
-    connect(this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update), app, &KDiff3App::showLineNumbersToggled);
+    connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
+    connect(app, &KDiff3App::showLineNumbersToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
     connect(app, &KDiff3App::doRefresh, this, &DiffTextWindow::slotRefresh);
 }
 
