@@ -767,11 +767,11 @@ void DiffTextWindow::convertToLinePos(int x, int y, LineRef& line, int& pos)
     int yOffset = -d->m_firstLine * fontHeight;
 
     line = (y - yOffset) / fontHeight;
-    if(line.isValid() && (!d->getOptions()->m_bWordWrap || line < d->m_diff3WrapLineVector.count()))
+    if(line.isValid() && (!d->getOptions()->wordWrapOn()|| line < d->m_diff3WrapLineVector.count()))
     {
         QString s = d->getLineString(line);
         QTextLayout textLayout(s, font(), this);
-        d->prepareTextLayout(textLayout, !d->getOptions()->m_bWordWrap || d->m_diff3WrapLineVector[line].wrapLineOffset == 0);
+        d->prepareTextLayout(textLayout, !d->getOptions()->wordWrapOn()|| d->m_diff3WrapLineVector[line].wrapLineOffset == 0);
         pos = textLayout.lineAt(0).xToCursor(x - textLayout.position().x());
     }
     else

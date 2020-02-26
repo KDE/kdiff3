@@ -66,6 +66,9 @@ public:
 
     bool isStatusBarVisable() const { return m_bShowStatusBar; }
     void setStatusBarState(bool inShown) { m_bShowStatusBar = inShown; }
+
+    bool wordWrapOn() const { return m_bWordWrap; }
+    void setWordWrap(const bool enabled) { m_bWordWrap = enabled;}
   private:
     std::list<OptionItemBase*> mOptionItemList;
 
@@ -113,7 +116,6 @@ public:
     bool m_bAutoDetectUnicodeC = true;
     QTextCodec*  m_pEncodingOut = nullptr;
     bool m_bAutoSelectOutEncoding = true;
-;
     QTextCodec*  m_pEncodingPP = nullptr;
     e_LineEndStyle  m_lineEndStyle = eLineEndStyleAutoDetect;
 

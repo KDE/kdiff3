@@ -248,7 +248,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         oldY = y;
 
         ++line;
-        if(m_pOptions->m_bWordWrap)
+        if(m_pOptions->wordWrapOn())
         {
             ++wrapLineIdx;
             if(wrapLineIdx >= d3l.linesNeededForDisplay())
@@ -272,7 +272,7 @@ void Overview::paintEvent(QPaintEvent*)
 
     if(m_pixmap.size() != size())
     {
-        m_nofLines = m_pDiff3LineList->numberOfLines(m_pOptions->m_bWordWrap);
+        m_nofLines = m_pDiff3LineList->numberOfLines(m_pOptions->wordWrapOn());
 
         m_pixmap = QPixmap(size());
 

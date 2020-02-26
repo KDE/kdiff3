@@ -299,7 +299,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     showWhiteSpace->setChecked(m_pOptions->m_bShowWhiteSpace);
     showWhiteSpaceCharacters->setEnabled(m_pOptions->m_bShowWhiteSpace);
     showLineNumbers->setChecked(m_pOptions->m_bShowLineNumbers);
-    wordWrap->setChecked(m_pOptions->m_bWordWrap);
+    wordWrap->setChecked(m_pOptions->wordWrapOn());
     if(!isPart())
     {
         viewStatusBar->setChecked(m_pOptions->isStatusBarVisable());
@@ -828,7 +828,7 @@ void KDiff3App::slotFilePrint()
         int linesPerPage = view.height() / fm.lineSpacing();
         
         m_pEventLoopForPrinting = QPointer<QEventLoop>(new QEventLoop());
-        if(m_pOptions->m_bWordWrap)
+        if(m_pOptions->wordWrapOn())
         {
             // For printing the lines are wrapped differently (this invalidates the first line)
             recalcWordWrap(columnWidth);
@@ -959,7 +959,7 @@ void KDiff3App::slotFilePrint()
 
         painter.end();
 
-        if(m_pOptions->m_bWordWrap)
+        if(m_pOptions->wordWrapOn())
         {
             recalcWordWrap();
             m_pEventLoopForPrinting->exec();

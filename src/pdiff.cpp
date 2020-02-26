@@ -1471,7 +1471,7 @@ void KDiff3App::slotAutoAdvanceToggled()
 
 void KDiff3App::slotWordWrapToggled()
 {
-    m_pOptions->m_bWordWrap = wordWrap->isChecked();
+    m_pOptions->setWordWrap(wordWrap->isChecked());
     postRecalcWordWrap();
 }
 
@@ -1530,7 +1530,7 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
 
     if(!m_diff3LineList.empty())
     {
-        if(m_pOptions->m_bWordWrap)
+        if(m_pOptions->wordWrapOn())
         {
             m_diff3LineList.recalcWordWrap(true);
 
@@ -1563,7 +1563,7 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
             slotFinishRecalcWordWrap(visibleTextWidthForPrinting);
         else
         {
-            g_pProgressDialog->setInformation(m_pOptions->m_bWordWrap
+            g_pProgressDialog->setInformation(m_pOptions->wordWrapOn()
                                                   ? i18n("Word wrap (Cancel disables word wrap)")
                                                   : i18n("Calculating max width for horizontal scrollbar"),
                                               false);
@@ -1580,12 +1580,12 @@ void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
 {
     g_pProgressDialog->pop();
 
-    if(m_pOptions->m_bWordWrap && g_pProgressDialog->wasCancelled())
+    if(m_pOptions->wordWrapOn() && g_pProgressDialog->wasCancelled())
     {
         if(g_pProgressDialog->cancelReason() == ProgressDialog::eUserAbort)
         {
             wordWrap->setChecked(false);
-            m_pOptions->m_bWordWrap = wordWrap->isChecked();
+            m_pOptions->setWordWrap(wordWrap->isChecked());
         }
 
         Q_EMIT sigRecalcWordWrap();
@@ -1602,7 +1602,7 @@ void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
 
     if(!m_diff3LineList.empty())
     {
-        if(m_pOptions->m_bWordWrap)
+        if(m_pOptions->wordWrapOn())
         {
             LineCount sumOfLines = m_diff3LineList.recalcWordWrap(false);
 
