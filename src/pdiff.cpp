@@ -600,7 +600,9 @@ void KDiff3App::initView()
     m_pOverview = new Overview(m_pOptionDialog->getOptions());
     m_pOverview->setObjectName("Overview");
     pDiffHLayout->addWidget(m_pOverview);
+
     connect(m_pOverview, &Overview::setLine, this, &KDiff3App::setDiff3Line);
+    connect(this, &KDiff3App::showWhiteSpaceToggled, m_pOverview, &Overview::slotRedraw);
 
     m_pDiffVScrollBar = new QScrollBar(Qt::Vertical, pDiffWindowFrame);
     pDiffHLayout->addWidget(m_pDiffVScrollBar);
@@ -1660,9 +1662,6 @@ void KDiff3App::slotShowWhiteSpaceToggled()
     m_pOptions->m_bShowWhiteSpace = showWhiteSpace->isChecked();
 
     Q_EMIT showWhiteSpaceToggled();
-
-    if(m_pOverview != nullptr)
-        m_pOverview->slotRedraw();
 }
 
 void KDiff3App::slotShowLineNumbersToggled()
