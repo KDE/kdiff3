@@ -10,6 +10,7 @@
 #define KDIFF3_H
 
 #include "diff.h"
+#include "Overview.h"
 
 // include files for Qt
 #include <QAction>
@@ -33,7 +34,6 @@ class DiffTextWindow;
 class DiffTextWindowFrame;
 class MergeResultWindow;
 class WindowTitleWidget;
-class Overview;
 
 class QStatusBar;
 class QMenu;
@@ -155,6 +155,8 @@ class KDiff3App : public QSplitter
     void goNextConflict();
     void goPrevDelta();
     void goNextDelta();
+
+    void changeOverViewMode(Overview::e_OverviewMode);
 
   protected:
     void setLockPainting(bool bLock);

@@ -221,7 +221,8 @@ void MergeResultWindow::setupConnections(const KDiff3App *app) const
     connect(app, &KDiff3App::goNextConflict, this, &MergeResultWindow::slotGoNextConflict);
     connect(app, &KDiff3App::goPrevDelta, this, &MergeResultWindow::slotGoPrevDelta);
     connect(app, &KDiff3App::goNextDelta, this, &MergeResultWindow::slotGoNextDelta);
-
+    
+    connect(app, &KDiff3App::changeOverViewMode, this, &MergeResultWindow::setOverviewMode);
 }
 
 void MergeResultWindow::showUnsolvedConflictsStatusMessage()

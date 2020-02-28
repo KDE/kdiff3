@@ -603,6 +603,7 @@ void KDiff3App::initView()
 
     connect(m_pOverview, &Overview::setLine, this, &KDiff3App::setDiff3Line);
     connect(this, &KDiff3App::showWhiteSpaceToggled, m_pOverview, &Overview::slotRedraw);
+    connect(this, &KDiff3App::changeOverViewMode, m_pOverview, &Overview::setOverviewMode);
 
     m_pDiffVScrollBar = new QScrollBar(Qt::Vertical, pDiffWindowFrame);
     pDiffHLayout->addWidget(m_pDiffVScrollBar);
@@ -2102,36 +2103,29 @@ void KDiff3App::slotWinToggleSplitterOrientation()
 
 void KDiff3App::slotOverviewNormal()
 {
-    if(m_pOverview != nullptr)
-        m_pOverview->setOverviewMode(Overview::eOMNormal);
-    if(m_pMergeResultWindow != nullptr)
-        m_pMergeResultWindow->setOverviewMode(Overview::eOMNormal);
+    Q_EMIT changeOverViewMode(Overview::eOMNormal);
+    
     slotUpdateAvailabilities();
 }
 
 void KDiff3App::slotOverviewAB()
 {
-    if(m_pOverview != nullptr)
-        m_pOverview->setOverviewMode(Overview::eOMAvsB);
-    m_pMergeResultWindow->setOverviewMode(Overview::eOMAvsB);
+    Q_EMIT changeOverViewMode(Overview::eOMAvsB);
+
     slotUpdateAvailabilities();
 }
 
 void KDiff3App::slotOverviewAC()
 {
-    if(m_pOverview != nullptr)
-        m_pOverview->setOverviewMode(Overview::eOMAvsC);
-    if(m_pMergeResultWindow != nullptr)
-        m_pMergeResultWindow->setOverviewMode(Overview::eOMAvsC);
+    Q_EMIT changeOverViewMode(Overview::eOMAvsC);
+
     slotUpdateAvailabilities();
 }
 
 void KDiff3App::slotOverviewBC()
 {
-    if(m_pOverview != nullptr)
-        m_pOverview->setOverviewMode(Overview::eOMBvsC);
-    if(m_pMergeResultWindow != nullptr)
-        m_pMergeResultWindow->setOverviewMode(Overview::eOMBvsC);
+    Q_EMIT changeOverViewMode(Overview::eOMBvsC);
+
     slotUpdateAvailabilities();
 }
 

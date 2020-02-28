@@ -76,12 +76,12 @@ public:
    bool isUnsolvedConflictBelowCurrent();
    bool findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive);
    void setSelection(int firstLine, int startPos, int lastLine, int endPos);
-   void setOverviewMode(Overview::e_OverviewMode eOverviewMode);
    Overview::e_OverviewMode getOverviewMode();
 
    void slotUpdateAvailabilities(const bool bMergeEditorVisible, const bool m_bTripleDiff);
 
 public Q_SLOTS:
+   void setOverviewMode(Overview::e_OverviewMode eOverviewMode);
    void setFirstLine(QtNumberType firstLine);
    void setHorizScrollOffset(int horizScrollOffset);
 

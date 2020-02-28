@@ -37,10 +37,10 @@ class Overview : public QWidget
     void setRange(QtNumberType firstLine, QtNumberType pageHeight);
     void setPaintingAllowed(bool bAllowPainting);
 
-    void setOverviewMode(e_OverviewMode eOverviewMode);
     e_OverviewMode getOverviewMode();
 
   public Q_SLOTS:
+    void setOverviewMode(e_OverviewMode eOverviewMode);
     void setFirstLine(QtNumberType firstLine);
     void slotRedraw();
   Q_SIGNALS:
