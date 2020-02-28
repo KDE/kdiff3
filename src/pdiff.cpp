@@ -2045,19 +2045,19 @@ void KDiff3App::slotWinFocusNext()
     if(m_pMergeResultWindow && m_pMergeResultWindow->isVisible()) visibleWidgetList.push_back(m_pMergeResultWindow);
     if(m_bDirCompare /*m_pDirectoryMergeWindow->isVisible()*/) visibleWidgetList.push_back(m_pDirectoryMergeWindow);
     //if ( m_pDirectoryMergeInfo->isVisible() ) visibleWidgetList.push_back(m_pDirectoryMergeInfo->getInfoList());
-
+    if(visibleWidgetList.empty())
+        return;
+    
     std::list<QWidget*>::iterator i = std::find(visibleWidgetList.begin(), visibleWidgetList.end(), focus);
     ++i;
     if(i == visibleWidgetList.end())
         i = visibleWidgetList.begin();
-    if(i != visibleWidgetList.end())
+    
+    if(*i == m_pDirectoryMergeWindow && !dirShowBoth->isChecked())
     {
-        if(*i == m_pDirectoryMergeWindow && !dirShowBoth->isChecked())
-        {
-            slotDirViewToggle();
-        }
-        (*i)->setFocus();
+        slotDirViewToggle();
     }
+    (*i)->setFocus();
 }
 
 void KDiff3App::slotWinFocusPrev()
@@ -2075,19 +2075,19 @@ void KDiff3App::slotWinFocusPrev()
     if(m_pMergeResultWindow && m_pMergeResultWindow->isVisible()) visibleWidgetList.push_back(m_pMergeResultWindow);
     if(m_bDirCompare /* m_pDirectoryMergeWindow->isVisible() */) visibleWidgetList.push_back(m_pDirectoryMergeWindow);
     //if ( m_pDirectoryMergeInfo->isVisible() ) visibleWidgetList.push_back(m_pDirectoryMergeInfo->getInfoList());
+    if(visibleWidgetList.empty())
+        return;
 
     std::list<QWidget*>::iterator i = std::find(visibleWidgetList.begin(), visibleWidgetList.end(), focus);
     if(i == visibleWidgetList.begin())
         i = visibleWidgetList.end();
     --i;
-    if(i != visibleWidgetList.end())
+    //i will never be 
+    if(*i == m_pDirectoryMergeWindow && !dirShowBoth->isChecked())
     {
-        if(*i == m_pDirectoryMergeWindow && !dirShowBoth->isChecked())
-        {
-            slotDirViewToggle();
-        }
-        (*i)->setFocus();
+        slotDirViewToggle();
     }
+    (*i)->setFocus();
 }
 
 void KDiff3App::slotWinToggleSplitterOrientation()
