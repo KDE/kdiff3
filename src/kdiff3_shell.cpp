@@ -85,8 +85,8 @@ KDiff3Shell::~KDiff3Shell()
 
 bool KDiff3Shell::queryClose()
 {
-    if(m_part)
-        return ((KDiff3App*)m_part->widget())->queryClose();
+    if(m_widget)
+        return m_widget->queryClose();
     else
         return true;
 }
@@ -101,8 +101,8 @@ void KDiff3Shell::closeEvent(QCloseEvent* e)
     if(queryClose())
     {
         e->accept();
-        bool bFileSaved = ((KDiff3App*)m_part->widget())->isFileSaved();
-        bool bDirCompare = ((KDiff3App*)m_part->widget())->isDirComparison();
+        bool bFileSaved = m_widget->isFileSaved();
+        bool bDirCompare = m_widget->isDirComparison();
         QApplication::exit(bFileSaved || bDirCompare ? 0 : 1);
     }
     else
@@ -154,7 +154,7 @@ void KDiff3Shell::applyNewToolbarConfig()
 void KDiff3Shell::slotNewInstance(const QString& fn1, const QString& fn2, const QString& fn3)
 {
     static KDiff3Shell* pKDiff3Shell = new KDiff3Shell(false);
-    ((KDiff3App*)pKDiff3Shell->m_part->widget())->completeInit(fn1, fn2, fn3);
+    pKDiff3Shell->m_widget->completeInit(fn1, fn2, fn3);
 }
 
 //#include "kdiff3_shell.moc"
