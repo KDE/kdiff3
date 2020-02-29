@@ -104,6 +104,9 @@ bool KDiff3App::isDirComparison()
     return m_bDirCompare;
 }
 
+/*
+    Don't call completeInit from here it will be called in KDiff3Shell as needed.
+*/
 KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3Part)
     : QSplitter(pParent) //previously KMainWindow
 {
@@ -350,7 +353,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 
     delete KDiff3Shell::getParser();
 
-    completeInit(QString());
 }
 
 void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)
