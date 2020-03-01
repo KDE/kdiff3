@@ -54,6 +54,8 @@ class SourceData: public QObject
 
     void reset();
 
+    bool isDir() { return m_fileAccess.isDir(); }
+
     QTextCodec* getEncoding() const { return m_pEncoding; }
     e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
 public Q_SLOTS:

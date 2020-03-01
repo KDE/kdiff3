@@ -244,7 +244,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
             if(args.count() > 1) m_sd3->setFilename(args[1]);
         }
         //Set m_bDirCompare flag
-        m_bDirCompare = FileAccess(m_sd1->getFilename()).isDir();
+        m_bDirCompare = m_sd1->isDir();
 
         QStringList aliasList = KDiff3Shell::getParser()->values( "fname" );
         QStringList::Iterator ali = aliasList.begin();
@@ -380,7 +380,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     }
     if(!fn1.isEmpty()) {
         m_sd1->setFilename(fn1);
-        m_bDirCompare = FileAccess(m_sd1->getFilename()).isDir();
+        m_bDirCompare = m_sd1->isDir();
     }
     if(!fn2.isEmpty()) {
         m_sd2->setFilename(fn2);
@@ -390,7 +390,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     }
 
     //should not happen now.
-    Q_ASSERT(m_bDirCompare == FileAccess(m_sd1->getFilename()).isDir());
+    Q_ASSERT(m_bDirCompare == m_sd1->isDir());
     bool bSuccess = improveFilenames(false);
 
     if(m_bAutoFlag && m_bAutoMode && m_bDirCompare)

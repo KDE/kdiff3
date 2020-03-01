@@ -977,7 +977,7 @@ void KDiff3App::slotFileOpen()
             else
                 m_outputFilename = "";
 
-            m_bDirCompare = FileAccess(m_sd1->getFilename()).isDir();
+            m_bDirCompare = m_sd1->isDir();
             bool bSuccess = improveFilenames(false);
 
             if(!bSuccess)
@@ -1058,7 +1058,7 @@ void KDiff3App::slotFileOpen2(const QString& fn1, const QString& fn2, const QStr
 
     improveFilenames(true); // Create new window for KDiff3 for directory comparison.
 
-    if(!FileAccess(m_sd1->getFilename()).isDir())
+    if(!m_sd1->isDir())
     {
         mainInit(pTotalDiffStatus);
 
