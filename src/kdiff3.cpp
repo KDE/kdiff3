@@ -408,6 +408,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     }
     if(!fn1.isEmpty()) {
         m_sd1.setFilename(fn1);
+        m_bDirCompare = FileAccess(m_sd1.getFilename()).isDir();
     }
     if(!fn2.isEmpty()) {
         m_sd2.setFilename(fn2);
