@@ -34,6 +34,10 @@ set(kdiff3part_PART_SRCS
    Options.cpp
    CommentParser.cpp )
 
+ki18n_wrap_ui(kdiff3part_PART_SRCS
+    scroller.ui
+)
+
 add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
 set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
