@@ -4,7 +4,6 @@ cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 project(kdiff3)
 
 #No documented defaults for these make sure they're on
-set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 
 set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- offically removed in c++17
