@@ -75,7 +75,7 @@ MergeResultWindow::MergeResultWindow(
     setObjectName("MergeResultWindow");
     setFocusPolicy(Qt::ClickFocus);
 
-    m_eOverviewMode = e_OverviewMode::eOMNormal;
+    mOverviewMode = e_OverviewMode::eOMNormal;
 
     m_pStatusBar = pStatusBar;
     if(m_pStatusBar != nullptr)
@@ -683,23 +683,23 @@ void MergeResultWindow::resizeEvent(QResizeEvent* e)
 
 e_OverviewMode MergeResultWindow::getOverviewMode()
 {
-    return m_eOverviewMode;
+    return mOverviewMode;
 }
 
 void MergeResultWindow::setOverviewMode(e_OverviewMode eOverviewMode)
 {
-    m_eOverviewMode = eOverviewMode;
+    mOverviewMode = eOverviewMode;
 }
 
 // Check whether we should ignore current delta when moving to next/previous delta
 bool MergeResultWindow::checkOverviewIgnore(MergeLineList::iterator& i)
 {
-    if(m_eOverviewMode == e_OverviewMode::eOMNormal) return false;
-    if(m_eOverviewMode == e_OverviewMode::eOMAvsB)
+    if(mOverviewMode == e_OverviewMode::eOMNormal) return false;
+    if(mOverviewMode == e_OverviewMode::eOMAvsB)
         return i->mergeDetails == eCAdded || i->mergeDetails == eCDeleted || i->mergeDetails == eCChanged;
-    if(m_eOverviewMode == e_OverviewMode::eOMAvsC)
+    if(mOverviewMode == e_OverviewMode::eOMAvsC)
         return i->mergeDetails == eBAdded || i->mergeDetails == eBDeleted || i->mergeDetails == eBChanged;
-    if(m_eOverviewMode == e_OverviewMode::eOMBvsC)
+    if(mOverviewMode == e_OverviewMode::eOMBvsC)
         return i->mergeDetails == eBCAddedAndEqual || i->mergeDetails == eBCDeleted || i->mergeDetails == eBCChangedAndEqual;
     return false;
 }

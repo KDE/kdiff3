@@ -53,7 +53,7 @@ class Overview : public QWidget
     LineRef m_firstLine;
     int m_pageHeight;
     QPixmap m_pixmap;
-    e_OverviewMode m_eOverviewMode;
+    e_OverviewMode mOverviewMode;
     int m_nofLines;
 
     void paintEvent(QPaintEvent* e) override;

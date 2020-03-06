@@ -155,7 +155,7 @@ public Q_SLOTS:
    TotalDiffStatus* m_pTotalDiffStatus = nullptr;
 
    int m_delayedDrawTimer = 0;
-   e_OverviewMode m_eOverviewMode;
+   e_OverviewMode mOverviewMode;
    QString m_persistentStatusMessage;
    void showUnsolvedConflictsStatusMessage();
 

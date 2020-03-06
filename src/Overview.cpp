@@ -24,7 +24,7 @@ Overview::Overview(const QSharedPointer<Options> &pOptions)
     m_pDiff3LineList = nullptr;
     m_pOptions = pOptions;
     m_bTripleDiff = false;
-    m_eOverviewMode = e_OverviewMode::eOMNormal;
+    mOverviewMode = e_OverviewMode::eOMNormal;
     m_nofLines = 1;
     setUpdatesEnabled(false);
     m_firstLine = 0;
@@ -66,13 +66,13 @@ void Overview::setFirstLine(QtNumberType firstLine)
 
 void Overview::setOverviewMode(e_OverviewMode eOverviewMode)
 {
-    m_eOverviewMode = eOverviewMode;
+    mOverviewMode = eOverviewMode;
     slotRedraw();
 }
 
 e_OverviewMode Overview::getOverviewMode()
 {
-    return m_eOverviewMode;
+    return mOverviewMode;
 }
 
 void Overview::mousePressEvent(QMouseEvent* e)
@@ -279,14 +279,14 @@ void Overview::paintEvent(QPaintEvent*)
         QPainter p(&m_pixmap);
         p.fillRect(rect(), m_pOptions->m_bgColor);
 
-        if(!m_bTripleDiff || m_eOverviewMode == e_OverviewMode::eOMNormal)
+        if(!m_bTripleDiff || mOverviewMode == e_OverviewMode::eOMNormal)
         {
             drawColumn(p, e_OverviewMode::eOMNormal, 0, w, h, m_nofLines);
         }
         else
         {
             drawColumn(p, e_OverviewMode::eOMNormal, 0, w / 2, h, m_nofLines);
-            drawColumn(p, m_eOverviewMode, w / 2, w / 2, h, m_nofLines);
+            drawColumn(p, mOverviewMode, w / 2, w / 2, h, m_nofLines);
         }
     }
 
