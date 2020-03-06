@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -76,12 +76,12 @@ public:
    bool isUnsolvedConflictBelowCurrent();
    bool findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive);
    void setSelection(int firstLine, int startPos, int lastLine, int endPos);
-   Overview::e_OverviewMode getOverviewMode();
+   e_OverviewMode getOverviewMode();
 
    void slotUpdateAvailabilities(const bool bMergeEditorVisible, const bool m_bTripleDiff);
 
 public Q_SLOTS:
-   void setOverviewMode(Overview::e_OverviewMode eOverviewMode);
+   void setOverviewMode(e_OverviewMode eOverviewMode);
    void setFirstLine(QtNumberType firstLine);
    void setHorizScrollOffset(int horizScrollOffset);
 
@@ -155,7 +155,7 @@ public Q_SLOTS:
    TotalDiffStatus* m_pTotalDiffStatus;
 
    int m_delayedDrawTimer;
-   Overview::e_OverviewMode m_eOverviewMode;
+   e_OverviewMode m_eOverviewMode;
    QString m_persistentStatusMessage;
    void showUnsolvedConflictsStatusMessage();
 

@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -10,7 +10,6 @@
 #define KDIFF3_H
 
 #include "diff.h"
-#include "Overview.h"
 
 // include files for Qt
 #include <QAction>
@@ -28,6 +27,9 @@
 #include <KToggleAction>
 // forward declaration of the KDiff3 classes
 class OptionDialog;
+
+class Overview;
+enum class e_OverviewMode;
 class FindDialog;
 //class ManualDiffHelpDialog;
 class DiffTextWindow;
@@ -156,7 +158,7 @@ class KDiff3App : public QSplitter
     void goPrevDelta();
     void goNextDelta();
 
-    void changeOverViewMode(Overview::e_OverviewMode);
+    void changeOverViewMode(e_OverviewMode);
 
   protected:
     void setLockPainting(bool bLock);

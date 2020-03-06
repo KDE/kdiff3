@@ -18,18 +18,18 @@
 class Diff3LineList;
 class Options;
 
+enum class e_OverviewMode
+{
+    eOMNormal,
+    eOMAvsB,
+    eOMAvsC,
+    eOMBvsC
+};
+
 class Overview : public QWidget
 {
     Q_OBJECT
   public:
-    enum e_OverviewMode
-    {
-        eOMNormal,
-        eOMAvsB,
-        eOMAvsC,
-        eOMBvsC
-    };
-
     explicit Overview(const QSharedPointer<Options> &pOptions);
 
     void init(Diff3LineList* pDiff3LineList, bool bTripleDiff);

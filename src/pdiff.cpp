@@ -274,7 +274,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             if(m_sd1->hasData() && m_sd2->hasData() && m_sd1->isText() && m_sd2->isText())
                 pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay()));
             pp.step();
-            
+
             pp.setInformation(i18n("Linediff: B <-> C"));
             if(m_sd3->hasData() && m_sd2->hasData() && m_sd3->isText() && m_sd2->isText())
                 pTotalDiffStatus->setTextEqualBC(m_diff3LineList.fineDiff(e_SrcSelector::B, m_sd2->getLineDataForDisplay(), m_sd3->getLineDataForDisplay()));
@@ -617,7 +617,7 @@ void KDiff3App::initView()
     m_pDiffTextWindow1 = m_pDiffTextWindowFrame1->getDiffTextWindow();
     m_pDiffTextWindow2 = m_pDiffTextWindowFrame2->getDiffTextWindow();
     m_pDiffTextWindow3 = m_pDiffTextWindowFrame3->getDiffTextWindow();
-    
+
     m_pDiffTextWindowFrame1->setupConnections(this);
     m_pDiffTextWindowFrame2->setupConnections(this);
     m_pDiffTextWindowFrame3->setupConnections(this);
@@ -2047,12 +2047,12 @@ void KDiff3App::slotWinFocusNext()
     //if ( m_pDirectoryMergeInfo->isVisible() ) visibleWidgetList.push_back(m_pDirectoryMergeInfo->getInfoList());
     if(visibleWidgetList.empty())
         return;
-    
+
     std::list<QWidget*>::iterator i = std::find(visibleWidgetList.begin(), visibleWidgetList.end(), focus);
     ++i;
     if(i == visibleWidgetList.end())
         i = visibleWidgetList.begin();
-    
+
     if(*i == m_pDirectoryMergeWindow && !dirShowBoth->isChecked())
     {
         slotDirViewToggle();
@@ -2082,7 +2082,7 @@ void KDiff3App::slotWinFocusPrev()
     if(i == visibleWidgetList.begin())
         i = visibleWidgetList.end();
     --i;
-    //i will never be 
+    //i will never be
     if(*i == m_pDirectoryMergeWindow && !dirShowBoth->isChecked())
     {
         slotDirViewToggle();
@@ -2103,28 +2103,28 @@ void KDiff3App::slotWinToggleSplitterOrientation()
 
 void KDiff3App::slotOverviewNormal()
 {
-    Q_EMIT changeOverViewMode(Overview::eOMNormal);
-    
+    Q_EMIT changeOverViewMode(e_OverviewMode::eOMNormal);
+
     slotUpdateAvailabilities();
 }
 
 void KDiff3App::slotOverviewAB()
 {
-    Q_EMIT changeOverViewMode(Overview::eOMAvsB);
+    Q_EMIT changeOverViewMode(e_OverviewMode::eOMAvsB);
 
     slotUpdateAvailabilities();
 }
 
 void KDiff3App::slotOverviewAC()
 {
-    Q_EMIT changeOverViewMode(Overview::eOMAvsC);
+    Q_EMIT changeOverViewMode(e_OverviewMode::eOMAvsC);
 
     slotUpdateAvailabilities();
 }
 
 void KDiff3App::slotOverviewBC()
 {
-    Q_EMIT changeOverViewMode(Overview::eOMBvsC);
+    Q_EMIT changeOverViewMode(e_OverviewMode::eOMBvsC);
 
     slotUpdateAvailabilities();
 }
@@ -2271,11 +2271,11 @@ void KDiff3App::slotUpdateAvailabilities()
     overviewModeAB->setEnabled(m_bTripleDiff && bDiffWindowVisible);
     overviewModeAC->setEnabled(m_bTripleDiff && bDiffWindowVisible);
     overviewModeBC->setEnabled(m_bTripleDiff && bDiffWindowVisible);
-    Overview::e_OverviewMode overviewMode = m_pOverview == nullptr ? Overview::eOMNormal : m_pOverview->getOverviewMode();
-    overviewModeNormal->setChecked(overviewMode == Overview::eOMNormal);
-    overviewModeAB->setChecked(overviewMode == Overview::eOMAvsB);
-    overviewModeAC->setChecked(overviewMode == Overview::eOMAvsC);
-    overviewModeBC->setChecked(overviewMode == Overview::eOMBvsC);
+    e_OverviewMode overviewMode = m_pOverview == nullptr ? e_OverviewMode::eOMNormal : m_pOverview->getOverviewMode();
+    overviewModeNormal->setChecked(overviewMode == e_OverviewMode::eOMNormal);
+    overviewModeAB->setChecked(overviewMode == e_OverviewMode::eOMAvsB);
+    overviewModeAC->setChecked(overviewMode == e_OverviewMode::eOMAvsC);
+    overviewModeBC->setChecked(overviewMode == e_OverviewMode::eOMBvsC);
 
     winToggleSplitOrientation->setEnabled(bDiffWindowVisible && m_pDiffWindowSplitter != nullptr);
 }

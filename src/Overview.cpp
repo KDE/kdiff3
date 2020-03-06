@@ -24,7 +24,7 @@ Overview::Overview(const QSharedPointer<Options> &pOptions)
     m_pDiff3LineList = nullptr;
     m_pOptions = pOptions;
     m_bTripleDiff = false;
-    m_eOverviewMode = eOMNormal;
+    m_eOverviewMode = e_OverviewMode::eOMNormal;
     m_nofLines = 1;
     setUpdatesEnabled(false);
     m_firstLine = 0;
@@ -70,7 +70,7 @@ void Overview::setOverviewMode(e_OverviewMode eOverviewMode)
     slotRedraw();
 }
 
-Overview::e_OverviewMode Overview::getOverviewMode()
+e_OverviewMode Overview::getOverviewMode()
 {
     return m_eOverviewMode;
 }
@@ -127,7 +127,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         bool bWhiteSpaceChange = false;
         //if( bConflict )  c=m_pOptions->m_colorForConflict;
         //else
-        if(eOverviewMode == eOMNormal)
+        if(eOverviewMode == e_OverviewMode::eOMNormal)
         {
             switch(md)
             {
@@ -164,7 +164,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
             }
         }
-        else if(eOverviewMode == eOMAvsB)
+        else if(eOverviewMode == e_OverviewMode::eOMAvsB)
         {
             switch(md)
             {
@@ -180,7 +180,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
             }
         }
-        else if(eOverviewMode == eOMAvsC)
+        else if(eOverviewMode == e_OverviewMode::eOMAvsC)
         {
             switch(md)
             {
@@ -196,7 +196,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 break;
             }
         }
-        else if(eOverviewMode == eOMBvsC)
+        else if(eOverviewMode == e_OverviewMode::eOMBvsC)
         {
             switch(md)
             {
@@ -279,13 +279,13 @@ void Overview::paintEvent(QPaintEvent*)
         QPainter p(&m_pixmap);
         p.fillRect(rect(), m_pOptions->m_bgColor);
 
-        if(!m_bTripleDiff || m_eOverviewMode == eOMNormal)
+        if(!m_bTripleDiff || m_eOverviewMode == e_OverviewMode::eOMNormal)
         {
-            drawColumn(p, eOMNormal, 0, w, h, m_nofLines);
+            drawColumn(p, e_OverviewMode::eOMNormal, 0, w, h, m_nofLines);
         }
         else
         {
-            drawColumn(p, eOMNormal, 0, w / 2, h, m_nofLines);
+            drawColumn(p, e_OverviewMode::eOMNormal, 0, w / 2, h, m_nofLines);
             drawColumn(p, m_eOverviewMode, w / 2, w / 2, h, m_nofLines);
         }
     }

@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -83,7 +83,7 @@ MergeResultWindow::MergeResultWindow(
     m_scrollDeltaX = 0;
     m_scrollDeltaY = 0;
     m_bModified = false;
-    m_eOverviewMode = Overview::eOMNormal;
+    m_eOverviewMode = e_OverviewMode::eOMNormal;
 
     m_pldA = nullptr;
     m_pldB = nullptr;
@@ -221,7 +221,7 @@ void MergeResultWindow::setupConnections(const KDiff3App *app) const
     connect(app, &KDiff3App::goNextConflict, this, &MergeResultWindow::slotGoNextConflict);
     connect(app, &KDiff3App::goPrevDelta, this, &MergeResultWindow::slotGoPrevDelta);
     connect(app, &KDiff3App::goNextDelta, this, &MergeResultWindow::slotGoNextDelta);
-    
+
     connect(app, &KDiff3App::changeOverViewMode, this, &MergeResultWindow::setOverviewMode);
 }
 
@@ -522,7 +522,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
                 if(defaultSelector == e_SrcSelector::Invalid && ml.bDelta)
                 {
                     MergeEditLine mel(ml.id3l);
-                    
+
                     mel.setConflict();
                     ml.bConflict = true;
                     ml.mergeEditLineList.push_back(mel);
@@ -705,12 +705,12 @@ void MergeResultWindow::resizeEvent(QResizeEvent* e)
     Q_EMIT resizeSignal();
 }
 
-Overview::e_OverviewMode MergeResultWindow::getOverviewMode()
+e_OverviewMode MergeResultWindow::getOverviewMode()
 {
     return m_eOverviewMode;
 }
 
-void MergeResultWindow::setOverviewMode(Overview::e_OverviewMode eOverviewMode)
+void MergeResultWindow::setOverviewMode(e_OverviewMode eOverviewMode)
 {
     m_eOverviewMode = eOverviewMode;
 }
@@ -718,12 +718,12 @@ void MergeResultWindow::setOverviewMode(Overview::e_OverviewMode eOverviewMode)
 // Check whether we should ignore current delta when moving to next/previous delta
 bool MergeResultWindow::checkOverviewIgnore(MergeLineList::iterator& i)
 {
-    if(m_eOverviewMode == Overview::eOMNormal) return false;
-    if(m_eOverviewMode == Overview::eOMAvsB)
+    if(m_eOverviewMode == e_OverviewMode::eOMNormal) return false;
+    if(m_eOverviewMode == e_OverviewMode::eOMAvsB)
         return i->mergeDetails == eCAdded || i->mergeDetails == eCDeleted || i->mergeDetails == eCChanged;
-    if(m_eOverviewMode == Overview::eOMAvsC)
+    if(m_eOverviewMode == e_OverviewMode::eOMAvsC)
         return i->mergeDetails == eBAdded || i->mergeDetails == eBDeleted || i->mergeDetails == eBChanged;
-    if(m_eOverviewMode == Overview::eOMBvsC)
+    if(m_eOverviewMode == e_OverviewMode::eOMBvsC)
         return i->mergeDetails == eBCAddedAndEqual || i->mergeDetails == eBCDeleted || i->mergeDetails == eBCChangedAndEqual;
     return false;
 }
@@ -2258,7 +2258,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     case Qt::Key_Delete:
     {
         if(deleteSelection2(str, x, y, mlIt, melIt) || !melIt->isEditableText()) break;
-        
+
         if(x >= str.length())
         {
             if(y < m_nofLines - 1)
