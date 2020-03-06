@@ -17,6 +17,7 @@
 #include "selection.h"
 
 #include <QLineEdit>
+#include <QPointer>
 #include <QStatusBar>
 #include <QTextLayout>
 #include <QTimer>
@@ -132,15 +133,15 @@ public Q_SLOTS:
    void merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly = false, bool bWhiteSpaceOnly = false);
    QString getString(int lineIdx);
 
-   static QAction* chooseAEverywhere;
-   static QAction* chooseBEverywhere;
-   static QAction* chooseCEverywhere;
-   static QAction* chooseAForUnsolvedConflicts;
-   static QAction* chooseBForUnsolvedConflicts;
-   static QAction* chooseCForUnsolvedConflicts;
-   static QAction* chooseAForUnsolvedWhiteSpaceConflicts;
-   static QAction* chooseBForUnsolvedWhiteSpaceConflicts;
-   static QAction* chooseCForUnsolvedWhiteSpaceConflicts;
+   static QPointer<QAction> chooseAEverywhere;
+   static QPointer<QAction> chooseBEverywhere;
+   static QPointer<QAction> chooseCEverywhere;
+   static QPointer<QAction> chooseAForUnsolvedConflicts;
+   static QPointer<QAction> chooseBForUnsolvedConflicts;
+   static QPointer<QAction> chooseCForUnsolvedConflicts;
+   static QPointer<QAction> chooseAForUnsolvedWhiteSpaceConflicts;
+   static QPointer<QAction> chooseBForUnsolvedWhiteSpaceConflicts;
+   static QPointer<QAction> chooseCForUnsolvedWhiteSpaceConflicts;
 
    QSharedPointer<Options> m_pOptions = nullptr;
 

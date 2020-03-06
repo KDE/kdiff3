@@ -43,6 +43,7 @@
 #include <QMimeData>
 #include <QPaintEvent>
 #include <QPixmap>
+#include <QPointer>
 #include <QResizeEvent>
 #include <QTimerEvent>
 #include <QWheelEvent>
@@ -56,15 +57,15 @@ bool g_bAutoSolve = true;
 
 #undef leftInfoWidth
 
-QAction* MergeResultWindow::chooseAEverywhere = nullptr;
-QAction* MergeResultWindow::chooseBEverywhere = nullptr;
-QAction* MergeResultWindow::chooseCEverywhere = nullptr;
-QAction* MergeResultWindow::chooseAForUnsolvedConflicts = nullptr;
-QAction* MergeResultWindow::chooseBForUnsolvedConflicts = nullptr;
-QAction* MergeResultWindow::chooseCForUnsolvedConflicts = nullptr;
-QAction* MergeResultWindow::chooseAForUnsolvedWhiteSpaceConflicts = nullptr;
-QAction* MergeResultWindow::chooseBForUnsolvedWhiteSpaceConflicts = nullptr;
-QAction* MergeResultWindow::chooseCForUnsolvedWhiteSpaceConflicts = nullptr;
+QPointer<QAction> MergeResultWindow::chooseAEverywhere;
+QPointer<QAction> MergeResultWindow::chooseBEverywhere;
+QPointer<QAction> MergeResultWindow::chooseCEverywhere;
+QPointer<QAction> MergeResultWindow::chooseAForUnsolvedConflicts;
+QPointer<QAction> MergeResultWindow::chooseBForUnsolvedConflicts;
+QPointer<QAction> MergeResultWindow::chooseCForUnsolvedConflicts;
+QPointer<QAction> MergeResultWindow::chooseAForUnsolvedWhiteSpaceConflicts;
+QPointer<QAction> MergeResultWindow::chooseBForUnsolvedWhiteSpaceConflicts;
+QPointer<QAction> MergeResultWindow::chooseCForUnsolvedWhiteSpaceConflicts;
 
 MergeResultWindow::MergeResultWindow(
     QWidget* pParent,

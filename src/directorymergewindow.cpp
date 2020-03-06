@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -296,18 +296,18 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     QModelIndex m_selection3Index;
     void selectItemAndColumn(const QModelIndex& mi, bool bContextMenu);
 
-    QAction* m_pDirStartOperation;
-    QAction* m_pDirRunOperationForCurrentItem;
-    QAction* m_pDirCompareCurrent;
-    QAction* m_pDirMergeCurrent;
-    QAction* m_pDirRescan;
-    QAction* m_pDirChooseAEverywhere;
-    QAction* m_pDirChooseBEverywhere;
-    QAction* m_pDirChooseCEverywhere;
-    QAction* m_pDirAutoChoiceEverywhere;
-    QAction* m_pDirDoNothingEverywhere;
-    QAction* m_pDirFoldAll;
-    QAction* m_pDirUnfoldAll;
+    QPointer<QAction> m_pDirStartOperation;
+    QPointer<QAction> m_pDirRunOperationForCurrentItem;
+    QPointer<QAction> m_pDirCompareCurrent;
+    QPointer<QAction> m_pDirMergeCurrent;
+    QPointer<QAction> m_pDirRescan;
+    QPointer<QAction> m_pDirChooseAEverywhere;
+    QPointer<QAction> m_pDirChooseBEverywhere;
+    QPointer<QAction> m_pDirChooseCEverywhere;
+    QPointer<QAction> m_pDirAutoChoiceEverywhere;
+    QPointer<QAction> m_pDirDoNothingEverywhere;
+    QPointer<QAction> m_pDirFoldAll;
+    QPointer<QAction> m_pDirUnfoldAll;
 
     KToggleAction* m_pDirShowIdenticalFiles;
     KToggleAction* m_pDirShowDifferentFiles;
@@ -318,28 +318,28 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     KToggleAction* m_pDirSynchronizeDirectories;
     KToggleAction* m_pDirChooseNewerFiles;
 
-    QAction* m_pDirCompareExplicit;
-    QAction* m_pDirMergeExplicit;
+    QPointer<QAction> m_pDirCompareExplicit;
+    QPointer<QAction> m_pDirMergeExplicit;
 
-    QAction* m_pDirCurrentDoNothing;
-    QAction* m_pDirCurrentChooseA;
-    QAction* m_pDirCurrentChooseB;
-    QAction* m_pDirCurrentChooseC;
-    QAction* m_pDirCurrentMerge;
-    QAction* m_pDirCurrentDelete;
+    QPointer<QAction> m_pDirCurrentDoNothing;
+    QPointer<QAction> m_pDirCurrentChooseA;
+    QPointer<QAction> m_pDirCurrentChooseB;
+    QPointer<QAction> m_pDirCurrentChooseC;
+    QPointer<QAction> m_pDirCurrentMerge;
+    QPointer<QAction> m_pDirCurrentDelete;
 
-    QAction* m_pDirCurrentSyncDoNothing;
-    QAction* m_pDirCurrentSyncCopyAToB;
-    QAction* m_pDirCurrentSyncCopyBToA;
-    QAction* m_pDirCurrentSyncDeleteA;
-    QAction* m_pDirCurrentSyncDeleteB;
-    QAction* m_pDirCurrentSyncDeleteAAndB;
-    QAction* m_pDirCurrentSyncMergeToA;
-    QAction* m_pDirCurrentSyncMergeToB;
-    QAction* m_pDirCurrentSyncMergeToAAndB;
+    QPointer<QAction> m_pDirCurrentSyncDoNothing;
+    QPointer<QAction> m_pDirCurrentSyncCopyAToB;
+    QPointer<QAction> m_pDirCurrentSyncCopyBToA;
+    QPointer<QAction> m_pDirCurrentSyncDeleteA;
+    QPointer<QAction> m_pDirCurrentSyncDeleteB;
+    QPointer<QAction> m_pDirCurrentSyncDeleteAAndB;
+    QPointer<QAction> m_pDirCurrentSyncMergeToA;
+    QPointer<QAction> m_pDirCurrentSyncMergeToB;
+    QPointer<QAction> m_pDirCurrentSyncMergeToAAndB;
 
-    QAction* m_pDirSaveMergeState;
-    QAction* m_pDirLoadMergeState;
+    QPointer<QAction> m_pDirSaveMergeState;
+    QPointer<QAction> m_pDirLoadMergeState;
 
     bool init(const QSharedPointer<DirectoryInfo>& dirInfo, bool bDirectoryMerge, bool bReload);
     void setOpStatus(const QModelIndex& mi, e_OperationStatus eOpStatus)
