@@ -55,8 +55,6 @@
 
 bool g_bAutoSolve = true;
 
-#undef leftInfoWidth
-
 QPointer<QAction> MergeResultWindow::chooseAEverywhere;
 QPointer<QAction> MergeResultWindow::chooseBEverywhere;
 QPointer<QAction> MergeResultWindow::chooseCEverywhere;
