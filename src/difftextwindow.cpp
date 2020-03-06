@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -323,9 +323,9 @@ void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
         if(bShouldConintue && !urlList.isEmpty())
         {
             QString filename = urlList.first().toLocalFile();
-            
+
             d->sourceData->setFilename(filename);
-            
+
             Q_EMIT finishDrop();
         }
     }
@@ -408,7 +408,7 @@ void DiffTextWindow::setFirstLine(QtNumberType firstLine)
     {
         scroll(0, deltaY);
     }
-    
+
     Q_EMIT firstLineChanged(d->m_firstLine);
 }
 
@@ -1823,7 +1823,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBa
     setAutoFillBackground(true);
     connect(d->getBrowseButton(), &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
     connect(d->getFileSelectionField(), &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
-    
+
     d->m_pDiffTextWindow = new DiffTextWindow(this, pStatusBar, pOptions, winIdx);
     d->m_pDiffTextWindow->setSourceData(psd);
     QVBoxLayout* pVTopLayout = new QVBoxLayout(const_cast<QWidget*>(d->getTopLineWidget()));
@@ -1890,7 +1890,7 @@ void DiffTextWindowFrame::setupConnections(const KDiff3App *app)
 {
     connect(this, &DiffTextWindowFrame::fileNameChanged, app, &KDiff3App::slotFileNameChanged);
     connect(this, &DiffTextWindowFrame::encodingChanged, app, &KDiff3App::slotEncodingChanged);
-    connect(this, &DiffTextWindowFrame::encodingChanged, &(*d->mSourceData), &SourceData::setEncoding);
+    connect(this, &DiffTextWindowFrame::encodingChanged, d->mSourceData.data(), &SourceData::setEncoding);
  }
 
 // Search for the first visible line (search loop needed when no line exists for this file.)
