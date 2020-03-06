@@ -75,39 +75,15 @@ MergeResultWindow::MergeResultWindow(
     setObjectName("MergeResultWindow");
     setFocusPolicy(Qt::ClickFocus);
 
-    m_firstLine = 0;
-    m_horizScrollOffset = 0;
-    m_nofLines = 0;
-    m_bMyUpdate = false;
-    m_bInsertMode = true;
-    m_scrollDeltaX = 0;
-    m_scrollDeltaY = 0;
-    m_bModified = false;
     m_eOverviewMode = e_OverviewMode::eOMNormal;
 
-    m_pldA = nullptr;
-    m_pldB = nullptr;
-    m_pldC = nullptr;
-    m_sizeA = 0;
-    m_sizeB = 0;
-    m_sizeC = 0;
-
-    m_pDiff3LineList = nullptr;
-    m_pTotalDiffStatus = nullptr;
     m_pStatusBar = pStatusBar;
     if(m_pStatusBar != nullptr)
         connect(m_pStatusBar, &QStatusBar::messageChanged, this, &MergeResultWindow::slotStatusMessageChanged);
 
     m_pOptions = pOptions;
     setUpdatesEnabled(false);
-    m_delayedDrawTimer = 0;
 
-    m_cursorXPos = 0;
-    m_cursorOldXPixelPos = 0;
-    m_cursorYPos = 0;
-    m_bCursorOn = true;
-    m_bCursorUpdate = false;
-    m_maxTextWidth = -1;
     connect(&m_cursorTimer, &QTimer::timeout, this, &MergeResultWindow::slotCursorUpdate);
     m_cursorTimer.setSingleShot(true);
     m_cursorTimer.start(500 /*ms*/);

@@ -144,17 +144,17 @@ public Q_SLOTS:
 
    QSharedPointer<Options> m_pOptions = nullptr;
 
-   const QVector<LineData>* m_pldA;
-   const QVector<LineData>* m_pldB;
-   const QVector<LineData>* m_pldC;
-   LineRef m_sizeA;
-   LineRef m_sizeB;
-   LineRef m_sizeC;
+   const QVector<LineData>* m_pldA = nullptr;
+   const QVector<LineData>* m_pldB = nullptr;
+   const QVector<LineData>* m_pldC = nullptr;
+   LineRef m_sizeA = 0;
+   LineRef m_sizeB = 0;
+   LineRef m_sizeC = 0;
 
-   const Diff3LineList* m_pDiff3LineList;
-   TotalDiffStatus* m_pTotalDiffStatus;
+   const Diff3LineList* m_pDiff3LineList = nullptr;
+   TotalDiffStatus* m_pTotalDiffStatus = nullptr;
 
-   int m_delayedDrawTimer;
+   int m_delayedDrawTimer = 0;
    e_OverviewMode m_eOverviewMode;
    QString m_persistentStatusMessage;
    void showUnsolvedConflictsStatusMessage();
@@ -217,24 +217,24 @@ private:
     void focusInEvent(QFocusEvent* e) override;
 
    QPixmap m_pixmap;
-   LineRef m_firstLine;
-   int m_horizScrollOffset;
-   LineCount m_nofLines;
-   int m_maxTextWidth;
-   bool m_bMyUpdate;
-   bool m_bInsertMode;
-   bool m_bModified;
+   LineRef m_firstLine = 0;
+   int m_horizScrollOffset = 0;
+   LineCount m_nofLines = 0;
+   int m_maxTextWidth = -1;
+   bool m_bMyUpdate = false;
+   bool m_bInsertMode = true;
+   bool m_bModified = false;
     void setModified(bool bModified = true);
 
-   int m_scrollDeltaX;
-   int m_scrollDeltaY;
-   int m_cursorXPos;
+   int m_scrollDeltaX = 0;
+   int m_scrollDeltaY = 0;
+   int m_cursorXPos = 0;
    int m_cursorXPixelPos;
-   int m_cursorYPos;
-   int m_cursorOldXPixelPos;
-   bool m_bCursorOn; // blinking on and off each second
+   int m_cursorYPos = 0;
+   int m_cursorOldXPixelPos = 0;
+   bool m_bCursorOn = true; // blinking on and off each second
    QTimer m_cursorTimer;
-   bool m_bCursorUpdate;
+   bool m_bCursorUpdate = false;
    QStatusBar* m_pStatusBar;
 
    Selection m_selection;
