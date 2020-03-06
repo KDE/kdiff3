@@ -33,7 +33,7 @@ class MergeResultWindow : public QWidget
 {
    Q_OBJECT
 public:
-   MergeResultWindow(QWidget* pParent, const QSharedPointer<Options> &pOptions, QStatusBar* pStatusBar);
+   MergeResultWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions, QStatusBar* pStatusBar);
 
    void init(
       const QVector<LineData>* pLineDataA, LineRef sizeA,
@@ -41,7 +41,7 @@ public:
       const QVector<LineData>* pLineDataC, LineRef sizeC,
       const Diff3LineList* pDiff3LineList,
       TotalDiffStatus* pTotalDiffStatus
-      );
+   );
 
    void setupConnections(const KDiff3App* app) const;
 
@@ -173,7 +173,7 @@ private:
 
    MergeLineList m_mergeLineList;
    MergeLineList::iterator m_currentMergeLineIt;
-    bool isItAtEnd(bool bIncrement, MergeLineList::iterator i)
+   bool isItAtEnd(bool bIncrement, MergeLineList::iterator i)
    {
         if(bIncrement)
             return i != m_mergeLineList.end();
@@ -191,7 +191,7 @@ private:
       int line,
       MergeLineList::iterator& mlIt,
       MergeEditLineList::iterator& melIt
-      );
+   );
    MergeLineList::iterator splitAtDiff3LineIdx(int d3lLineIdx);
 
    void paintEvent(QPaintEvent* e) override;
@@ -268,10 +268,10 @@ private:
    QComboBox*   m_pEncodingSelector;
    QSharedPointer<Options>     m_pOptions;
 public:
-   explicit WindowTitleWidget(const QSharedPointer<Options> &pOptions);
-   QTextCodec* getEncoding();
-    void       setFileName(const QString& fileName);
-    QString    getFileName();
+    explicit WindowTitleWidget(const QSharedPointer<Options>& pOptions);
+    QTextCodec* getEncoding();
+    void setFileName(const QString& fileName);
+    QString getFileName();
     void setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecForB, QTextCodec* pCodecForC);
     void setEncoding(QTextCodec* pEncoding);
     void setLineEndStyles(e_LineEndStyle eLineEndStyleA, e_LineEndStyle eLineEndStyleB, e_LineEndStyle eLineEndStyleC);
