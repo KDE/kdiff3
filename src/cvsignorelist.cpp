@@ -150,7 +150,7 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
 {
     /*
         Don't let the compilier create a temporary QRegExp explictly create one to prevent a possiable crash
-        QString::indexOf and therefor QStringList::indexOf may modify the QRegExp passed to it. 
+        QString::indexOf and therefor QStringList::indexOf may modify the QRegExp passed to it.
     */
     QRegExp regexp(text, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
     if(m_exactPatterns.indexOf(regexp) >= 0)
@@ -170,7 +170,7 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
 
     for(it = m_endPatterns.begin(), itEnd = m_endPatterns.end(); it != itEnd; ++it)
     {
-        if(text.mid(text.length() - (*it).length()).compare(*it, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive) == 0) //(text.endsWith(*it))
+        if(text.midRef(text.length() - (*it).length()).compare(*it, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive) == 0) //(text.endsWith(*it))
         {
             return true;
         }
