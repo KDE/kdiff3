@@ -844,6 +844,8 @@ void KDiff3App::slotFilePrint()
         m_pDiffTextWindow3->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
     }
 
+    printDialog->setOption(QPrintDialog::PrintCurrentPage);
+
     if(firstSelectionD3LIdx >= 0) {
         printDialog->addEnabledOption(QPrintDialog::PrintSelection);
         //printer.setOptionEnabled(QPrinter::PrintSelection,true);
@@ -932,8 +934,12 @@ void KDiff3App::slotFilePrint()
                 pageList.push_back(i);
             }
         }
-
-        if(printer.printRange() == QPrinter::Selection)
+        else if(printer.printRange() == QPrinter::CurrentPage)
+        {
+            bPrintCurrentPage = true;
+            totalNofPages = 1;
+        }
+        else if(printer.printRange() == QPrinter::Selection)
         {
             bPrintSelection = true;
             if(firstSelectionD3LIdx >= 0)
@@ -962,8 +968,9 @@ void KDiff3App::slotFilePrint()
                     break;
                 page = *pageListIt;
                 line = (page - 1) * linesPerPage;
-                if(page == 10000) { // This means "Print the current page"
-                    bPrintCurrentPage = true;
+
+                if(bPrintCurrentPage)
+                {
                     // Detect the first visible line in the window.
                     line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(currentFirstD3LIdx);
                 }
@@ -1012,6 +1019,7 @@ void KDiff3App::slotFilePrint()
                                  view.bottom() + painter.fontMetrics().ascent() + 5, s);
 
                 bFirstPrintedPage = true;
+                if(bPrintCurrentPage) break;
             }
 
             if(bPrintSelection)
