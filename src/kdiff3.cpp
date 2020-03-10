@@ -780,8 +780,7 @@ void KDiff3App::slotFilePrint()
     }
 
     if(firstSelectionD3LIdx >= 0) {
-        printDialog->addEnabledOption(QPrintDialog::PrintSelection);
-        //printer.setOptionEnabled(QPrinter::PrintSelection,true);
+        printDialog->setOption(QPrintDialog::PrintSelection);
         printDialog->setPrintRange(QAbstractPrintDialog::Selection);
     }
 
