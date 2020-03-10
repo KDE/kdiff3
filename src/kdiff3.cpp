@@ -869,7 +869,7 @@ void KDiff3App::slotFilePrint()
                 pageList.push_back(i);
             }
         }
-        else if(printer.printRange() == QPrinter::PrintCurrentPage)
+        else if(printer.printRange() == QPrinter::CurrentPage)
         {
             bPrintCurrentPage = true;
             totalNofPages = 1;
