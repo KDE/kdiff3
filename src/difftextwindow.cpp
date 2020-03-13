@@ -962,8 +962,8 @@ void DiffTextWindowData::writeLine(
     {
         if(m_pOptions->m_bShowLineNumbers && !bWrapLine)
         {
-            QString num;
-            num.asprintf("%0*d", m_lineNumberWidth, srcLineIdx + 1);
+            QString num = QString::number(srcLineIdx + 1);
+            Q_ASSERT(!num.isEmpty());
             p.drawText(0, yOffset + fontAscent, num);
             //p.drawLine( xLeft -1, yOffset, xLeft -1, yOffset+fontHeight-1 );
         }
