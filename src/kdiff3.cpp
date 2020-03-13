@@ -864,7 +864,18 @@ void KDiff3App::slotFilePrint()
         else if(printer.printRange() == QPrinter::PageRange)
         {
             pageList.clear();
-            for(int i = printer.fromPage(); i <= printer.toPage(); ++i)
+
+            int from = printer.fromPage(), to = printer.toPage();
+            /*
+                Per Qt docs QPrinter::fromPage and QPrinter::toPage return 0 to indicate they are not set.
+                Account for this and other invalid settings the user may try.
+            */
+            if(from == 0) from = 1;
+            if(from > totalNofPages) from = totalNofPages;
+            if(to == 0 || to > totalNofPages) to = totalNofPages;
+            if(from > to) to = from;
+
+            for(int i = from; i <= to; ++i)
             {
                 pageList.push_back(i);
             }
