@@ -949,19 +949,19 @@ void DiffTextWindowData::writeLine(
     if(pLineDiff1 != nullptr) changed |= AChanged;
     if(pLineDiff2 != nullptr) changed |= BChanged;
 
-    QColor c = m_pOptions->m_fgColor;
-    p.setPen(c);
+    QColor penColor = m_pOptions->m_fgColor;
+    p.setPen(penColor);
     if(changed == BChanged)
     {
-        c = m_cDiff2;
+        penColor = m_cDiff2;
     }
     else if(changed == AChanged)
     {
-        c = m_cDiff1;
+        penColor = m_cDiff1;
     }
     else if(changed == Both)
     {
-        c = m_cDiffBoth;
+        penColor = m_cDiffBoth;
     }
 
     if(pld != nullptr)
@@ -1002,52 +1002,49 @@ void DiffTextWindowData::writeLine(
 
         for(i = wrapLineOffset; i < lineLength; ++i)
         {
-            c = m_pOptions->m_fgColor;
+            penColor = m_pOptions->m_fgColor;
             ChangeFlags cchanged = charChanged[i] | whatChanged;
 
             if(cchanged == BChanged)
             {
-                c = m_cDiff2;
+                penColor = m_cDiff2;
             }
             else if(cchanged == AChanged)
             {
-                c = m_cDiff1;
+                penColor = m_cDiff1;
             }
             else if(cchanged == Both)
             {
-                c = m_cDiffBoth;
+                penColor = m_cDiffBoth;
             }
 
-            if(c != m_pOptions->m_fgColor && whatChanged2 == 0 && !m_pOptions->m_bShowWhiteSpace)
+            if(penColor != m_pOptions->m_fgColor && whatChanged2 == NoChange && !m_pOptions->m_bShowWhiteSpace)
             {
                 // The user doesn't want to see highlighted white space.
-                c = m_pOptions->m_fgColor;
+                penColor = m_pOptions->m_fgColor;
             }
 
+            frh.setBackground(bgColor);
+            if(!m_selection.within(line, outPos))
             {
-                frh.setBackground(bgColor);
-                if(!m_selection.within(line, outPos))
+                if(penColor != m_pOptions->m_fgColor)
                 {
-
-                    if(c != m_pOptions->m_fgColor)
-                    {
-                        QColor lightc = diffBgColor;
-                        frh.setBackground(lightc);
-                        // Setting italic font here doesn't work: Changing the font only when drawing is too late
-                    }
-
-                    frh.setPen(c);
-                    frh.next();
-                    frh.setFont(normalFont);
+                    QColor lightc = diffBgColor;
+                    frh.setBackground(lightc);
+                    // Setting italic font here doesn't work: Changing the font only when drawing is too late
                 }
-                else
-                {
-                    frh.setBackground(m_pDiffTextWindow->palette().highlight().color());
-                    frh.setPen(m_pDiffTextWindow->palette().highlightedText().color());
-                    frh.next();
 
-                    m_selection.bSelectionContainsData = true;
-                }
+                frh.setPen(penColor);
+                frh.next();
+                frh.setFont(normalFont);
+            }
+            else
+            {
+                frh.setBackground(m_pDiffTextWindow->palette().highlight().color());
+                frh.setPen(m_pDiffTextWindow->palette().highlightedText().color());
+                frh.next();
+
+                m_selection.bSelectionContainsData = true;
             }
 
             ++outPos;
@@ -1070,7 +1067,6 @@ void DiffTextWindowData::writeLine(
             QString num = QString::number(srcLineIdx + 1);
             Q_ASSERT(!num.isEmpty());
             p.drawText(0, yOffset + fontAscent, num);
-            //p.drawLine( xLeft -1, yOffset, xLeft -1, yOffset+fontHeight-1 );
         }
         if(!bWrapLine || wrapLineLength > 0)
         {
@@ -1081,17 +1077,17 @@ void DiffTextWindowData::writeLine(
             p.setPen(QPen(m_pOptions->m_fgColor, 0, Qt::SolidLine));
         }
     }
-    if(c != m_pOptions->m_fgColor && whatChanged2 == 0) //&& whatChanged==0 )
+    if(penColor != m_pOptions->m_fgColor && whatChanged2 == NoChange)
     {
         if(m_pOptions->m_bShowWhiteSpace)
         {
             p.setBrushOrigin(0, 0);
-            p.fillRect(xLeft, yOffset, fontWidth * 2 - 1, fontHeight, QBrush(c, Qt::Dense5Pattern));
+            p.fillRect(xLeft, yOffset, fontWidth * 2 - 1, fontHeight, QBrush(penColor, Qt::Dense5Pattern));
         }
     }
     else
     {
-        p.fillRect(xLeft, yOffset, fontWidth * 2 - 1, fontHeight, c == m_pOptions->m_fgColor ? bgColor : c);
+        p.fillRect(xLeft, yOffset, fontWidth * 2 - 1, fontHeight, penColor == m_pOptions->m_fgColor ? bgColor : penColor);
     }
 
     if(bFastSelectionRange)
