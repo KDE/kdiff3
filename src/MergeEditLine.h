@@ -1,7 +1,7 @@
 
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -83,7 +83,7 @@ class MergeLine
     Diff3LineList::const_iterator id3l;
     LineIndex d3lLineIdx = -1;    // Needed to show the correct window pos.
     LineCount srcRangeLength = 0; // how many src-lines have this properties
-    e_MergeDetails mergeDetails = eDefault;
+    e_MergeDetails mergeDetails = e_MergeDetails::eDefault;
     bool bConflict = false;
     bool bWhiteSpaceConflict = false;
     bool bDelta = false;

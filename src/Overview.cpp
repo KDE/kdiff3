@@ -131,32 +131,32 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         {
             switch(md)
             {
-            case eDefault:
-            case eNoChange:
+            case e_MergeDetails::eDefault:
+            case e_MergeDetails::eNoChange:
                 c = m_pOptions->m_bgColor;
                 break;
 
-            case eBAdded:
-            case eBDeleted:
-            case eBChanged:
+            case e_MergeDetails::eBAdded:
+            case e_MergeDetails::eBDeleted:
+            case e_MergeDetails::eBChanged:
                 c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorB;
                 bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::B));
                 break;
 
-            case eCAdded:
-            case eCDeleted:
-            case eCChanged:
+            case e_MergeDetails::eCAdded:
+            case e_MergeDetails::eCDeleted:
+            case e_MergeDetails::eCChanged:
                 bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::C));
                 c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorC;
                 break;
 
-            case eBCChanged:         // conflict
-            case eBCChangedAndEqual: // possible conflict
-            case eBCDeleted:         // possible conflict
-            case eBChanged_CDeleted: // conflict
-            case eCChanged_BDeleted: // conflict
-            case eBCAdded:           // conflict
-            case eBCAddedAndEqual:   // possible conflict
+            case e_MergeDetails::eBCChanged:         // conflict
+            case e_MergeDetails::eBCChangedAndEqual: // possible conflict
+            case e_MergeDetails::eBCDeleted:         // possible conflict
+            case e_MergeDetails::eBChanged_CDeleted: // conflict
+            case e_MergeDetails::eCChanged_BDeleted: // conflict
+            case e_MergeDetails::eBCAdded:           // conflict
+            case e_MergeDetails::eBCAddedAndEqual:   // possible conflict
                 c = m_pOptions->m_colorForConflict;
                 break;
             default:
@@ -168,11 +168,11 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         {
             switch(md)
             {
-            case eDefault:
-            case eNoChange:
-            case eCAdded:
-            case eCDeleted:
-            case eCChanged:
+            case e_MergeDetails::eDefault:
+            case e_MergeDetails::eNoChange:
+            case e_MergeDetails::eCAdded:
+            case e_MergeDetails::eCDeleted:
+            case e_MergeDetails::eCChanged:
                 break;
             default:
                 c = m_pOptions->m_colorForConflict;
@@ -184,11 +184,11 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         {
             switch(md)
             {
-            case eDefault:
-            case eNoChange:
-            case eBAdded:
-            case eBDeleted:
-            case eBChanged:
+            case e_MergeDetails::eDefault:
+            case e_MergeDetails::eNoChange:
+            case e_MergeDetails::eBAdded:
+            case e_MergeDetails::eBDeleted:
+            case e_MergeDetails::eBChanged:
                 break;
             default:
                 c = m_pOptions->m_colorForConflict;
@@ -200,11 +200,11 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         {
             switch(md)
             {
-            case eDefault:
-            case eNoChange:
-            case eBCChangedAndEqual:
-            case eBCDeleted:
-            case eBCAddedAndEqual:
+            case e_MergeDetails::eDefault:
+            case e_MergeDetails::eNoChange:
+            case e_MergeDetails::eBCChangedAndEqual:
+            case e_MergeDetails::eBCDeleted:
+            case e_MergeDetails::eBCAddedAndEqual:
                 break;
             default:
                 c = m_pOptions->m_colorForConflict;

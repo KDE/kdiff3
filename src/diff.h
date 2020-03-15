@@ -49,7 +49,7 @@ inline e_SrcSelector nextSelector(e_SrcSelector selector)
     return e_SrcSelector::Invalid;
 }
 
-enum e_MergeDetails
+enum class e_MergeDetails
 {
    eDefault,
    eNoChange,

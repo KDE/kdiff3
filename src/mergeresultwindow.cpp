@@ -258,7 +258,7 @@ void Diff3Line::mergeOneLine(
     e_MergeDetails& mergeDetails, bool& bConflict,
     bool& bLineRemoved, e_SrcSelector& src, bool bTwoInputs) const
 {
-    mergeDetails = eDefault;
+    mergeDetails = e_MergeDetails::eDefault;
     bConflict = false;
     bLineRemoved = false;
     src = e_SrcSelector::None;
@@ -269,18 +269,18 @@ void Diff3Line::mergeOneLine(
         {
             if(pFineAB == nullptr)
             {
-                mergeDetails = eNoChange;
+                mergeDetails = e_MergeDetails::eNoChange;
                 src = e_SrcSelector::A;
             }
             else
             {
-                mergeDetails = eBChanged;
+                mergeDetails = e_MergeDetails::eBChanged;
                 bConflict = true;
             }
         }
         else
         {
-            mergeDetails = eBDeleted;
+            mergeDetails = e_MergeDetails::eBDeleted;
             bConflict = true;
         }
         return;
@@ -291,27 +291,27 @@ void Diff3Line::mergeOneLine(
     {
         if(pFineAB == nullptr && pFineBC == nullptr && pFineCA == nullptr)
         {
-            mergeDetails = eNoChange;
+            mergeDetails = e_MergeDetails::eNoChange;
             src = e_SrcSelector::A;
         }
         else if(pFineAB == nullptr && pFineBC != nullptr && pFineCA != nullptr)
         {
-            mergeDetails = eCChanged;
+            mergeDetails = e_MergeDetails::eCChanged;
             src = e_SrcSelector::C;
         }
         else if(pFineAB != nullptr && pFineBC != nullptr && pFineCA == nullptr)
         {
-            mergeDetails = eBChanged;
+            mergeDetails = e_MergeDetails::eBChanged;
             src = e_SrcSelector::B;
         }
         else if(pFineAB != nullptr && pFineBC == nullptr && pFineCA != nullptr)
         {
-            mergeDetails = eBCChangedAndEqual;
+            mergeDetails = e_MergeDetails::eBCChangedAndEqual;
             src = e_SrcSelector::C;
         }
         else if(pFineAB != nullptr && pFineBC != nullptr && pFineCA != nullptr)
         {
-            mergeDetails = eBCChanged;
+            mergeDetails = e_MergeDetails::eBCChanged;
             bConflict = true;
         }
         else
@@ -321,12 +321,12 @@ void Diff3Line::mergeOneLine(
     {
         if(pFineAB != nullptr)
         {
-            mergeDetails = eBChanged_CDeleted;
+            mergeDetails = e_MergeDetails::eBChanged_CDeleted;
             bConflict = true;
         }
         else
         {
-            mergeDetails = eCDeleted;
+            mergeDetails = e_MergeDetails::eCDeleted;
             bLineRemoved = true;
             src = e_SrcSelector::C;
         }
@@ -335,12 +335,12 @@ void Diff3Line::mergeOneLine(
     {
         if(pFineCA != nullptr)
         {
-            mergeDetails = eCChanged_BDeleted;
+            mergeDetails = e_MergeDetails::eCChanged_BDeleted;
             bConflict = true;
         }
         else
         {
-            mergeDetails = eBDeleted;
+            mergeDetails = e_MergeDetails::eBDeleted;
             bLineRemoved = true;
             src = e_SrcSelector::B;
         }
@@ -349,28 +349,28 @@ void Diff3Line::mergeOneLine(
     {
         if(pFineBC != nullptr)
         {
-            mergeDetails = eBCAdded;
+            mergeDetails = e_MergeDetails::eBCAdded;
             bConflict = true;
         }
         else // B==C
         {
-            mergeDetails = eBCAddedAndEqual;
+            mergeDetails = e_MergeDetails::eBCAddedAndEqual;
             src = e_SrcSelector::C;
         }
     }
     else if(!getLineA().isValid() && !getLineB().isValid() && getLineC().isValid())
     {
-        mergeDetails = eCAdded;
+        mergeDetails = e_MergeDetails::eCAdded;
         src = e_SrcSelector::C;
     }
     else if(!getLineA().isValid() && getLineB().isValid() && !getLineC().isValid())
     {
-        mergeDetails = eBAdded;
+        mergeDetails = e_MergeDetails::eBAdded;
         src = e_SrcSelector::B;
     }
     else if(getLineA().isValid() && !getLineB().isValid() && !getLineC().isValid())
     {
-        mergeDetails = eBCDeleted;
+        mergeDetails = e_MergeDetails::eBCDeleted;
         bLineRemoved = true;
         src = e_SrcSelector::C;
     }
@@ -388,7 +388,7 @@ bool MergeResultWindow::sameKindCheck(const MergeLine& ml1, const MergeLine& ml2
     }
     else
         return (
-            (!ml1.bConflict && !ml2.bConflict && ml1.bDelta && ml2.bDelta && ml1.srcSelect == ml2.srcSelect && (ml1.mergeDetails == ml2.mergeDetails || (ml1.mergeDetails != eBCAddedAndEqual && ml2.mergeDetails != eBCAddedAndEqual))) ||
+            (!ml1.bConflict && !ml2.bConflict && ml1.bDelta && ml2.bDelta && ml1.srcSelect == ml2.srcSelect && (ml1.mergeDetails == ml2.mergeDetails || (ml1.mergeDetails != e_MergeDetails::eBCAddedAndEqual && ml2.mergeDetails != e_MergeDetails::eBCAddedAndEqual))) ||
             (!ml1.bDelta && !ml2.bDelta));
 }
 
@@ -695,11 +695,11 @@ bool MergeResultWindow::checkOverviewIgnore(MergeLineList::iterator& i)
 {
     if(mOverviewMode == e_OverviewMode::eOMNormal) return false;
     if(mOverviewMode == e_OverviewMode::eOMAvsB)
-        return i->mergeDetails == eCAdded || i->mergeDetails == eCDeleted || i->mergeDetails == eCChanged;
+        return i->mergeDetails == e_MergeDetails::eCAdded || i->mergeDetails == e_MergeDetails::eCDeleted || i->mergeDetails == e_MergeDetails::eCChanged;
     if(mOverviewMode == e_OverviewMode::eOMAvsC)
-        return i->mergeDetails == eBAdded || i->mergeDetails == eBDeleted || i->mergeDetails == eBChanged;
+        return i->mergeDetails == e_MergeDetails::eBAdded || i->mergeDetails == e_MergeDetails::eBDeleted || i->mergeDetails == e_MergeDetails::eBChanged;
     if(mOverviewMode == e_OverviewMode::eOMBvsC)
-        return i->mergeDetails == eBCAddedAndEqual || i->mergeDetails == eBCDeleted || i->mergeDetails == eBCChangedAndEqual;
+        return i->mergeDetails == e_MergeDetails::eBCAddedAndEqual || i->mergeDetails == e_MergeDetails::eBCDeleted || i->mergeDetails == e_MergeDetails::eBCChangedAndEqual;
     return false;
 }
 
@@ -1714,7 +1714,7 @@ void MergeResultWindow::writeLine(
     QString srcName = QChar(' ');
     if(bUserModified)
         srcName = QChar('m');
-    else if(srcSelect == e_SrcSelector::A && mergeDetails != eNoChange)
+    else if(srcSelect == e_SrcSelector::A && mergeDetails != e_MergeDetails::eNoChange)
         srcName = i18n("A");
     else if(srcSelect == e_SrcSelector::B)
         srcName = i18n("B");
@@ -1955,7 +1955,7 @@ void MergeResultWindow::updateSourceMask()
             if(mel.isModified() || !mel.isEditableText()) bModified = true;
         }
 
-        if(ml.mergeDetails == eNoChange)
+        if(ml.mergeDetails == e_MergeDetails::eNoChange)
         {
             srcMask = 0;
             enabledMask = bModified ? 1 : 0;
