@@ -658,7 +658,6 @@ int MergeResultWindow::getNofLines() const
 
 int MergeResultWindow::getVisibleTextAreaWidth()
 {
-    // QFontMetrics fm = fontMetrics(); // FIXME used?
     return width() - getTextXOffset();
 }
 
