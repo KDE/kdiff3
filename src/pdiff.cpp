@@ -2161,18 +2161,18 @@ void KDiff3App::slotAddManualDiffHelp()
         m_pDiffTextWindow1->getSelectionRange(&firstLine, &lastLine, eFileCoords);
         winIdx = e_SrcSelector::A;
     }
-    if(firstLine < 0 && m_pDiffTextWindow2)
+    if(!firstLine.isValid() && m_pDiffTextWindow2)
     {
         m_pDiffTextWindow2->getSelectionRange(&firstLine, &lastLine, eFileCoords);
         winIdx = e_SrcSelector::B;
     }
-    if(firstLine < 0 && m_pDiffTextWindow3)
+    if(!firstLine.isValid() && m_pDiffTextWindow3)
     {
         m_pDiffTextWindow3->getSelectionRange(&firstLine, &lastLine, eFileCoords);
         winIdx = e_SrcSelector::C;
     }
 
-    if(firstLine < 0 || lastLine < 0 || lastLine < firstLine)
+    if(!firstLine.isValid() || !lastLine.isValid() || lastLine < firstLine)
         KMessageBox::information(this, i18n("Nothing is selected in either diff input window."), i18n("Error while adding manual diff range"));
     else
     {

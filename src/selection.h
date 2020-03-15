@@ -17,9 +17,9 @@ class Selection
 public:
   Selection(){}
 private:
-  const LineRef invalidRef = -1;
-  LineRef firstLine = invalidRef;
-  LineRef lastLine = invalidRef;
+  const LineRef invalidRef;
+  LineRef firstLine;
+  LineRef lastLine;
 
   int firstPos = -1;
   int lastPos = -1;
@@ -65,15 +65,15 @@ public:
    int firstPosInLine(LineRef l);
    int lastPosInLine(LineRef l);
    LineRef beginLine(){
-      if (firstLine<0 && lastLine<0) return invalidRef;
+      if (!firstLine.isValid() && !lastLine.isValid()) return invalidRef;
       return std::max((LineRef)0,std::min(firstLine,lastLine));
    }
    LineRef endLine(){
-      if (firstLine<0 && lastLine<0) return invalidRef;
+      if (!firstLine.isValid() && !lastLine.isValid()) return invalidRef;
       return std::max(firstLine,lastLine);
    }
    int beginPos() { return firstLine==lastLine ? std::min(firstPos,lastPos) :
-                           firstLine<lastLine ? (firstLine<0?0:firstPos) : (lastLine<0?0:lastPos);  }
+                           firstLine<lastLine ? (!firstLine.isValid()?0:firstPos) : (!lastLine.isValid()?0:lastPos);  }
    int endPos()   { return firstLine==lastLine ? std::max(firstPos,lastPos) :
                            firstLine<lastLine ? lastPos : firstPos;      }
 };

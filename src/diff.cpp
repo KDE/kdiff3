@@ -509,7 +509,7 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
     {
         LineRef& l1 = i->firstLine(winIdx);
         LineRef& l2 = i->lastLine(winIdx);
-        if(l1 >= 0 && l2 >= 0)
+        if(l1.isValid() && l2.isValid())
         {
             if((firstLine <= l1 && lastLine >= l1) || (firstLine <= l2 && lastLine >= l2))
             {
@@ -627,7 +627,7 @@ static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef si
         GnuDiff::change* p = nullptr;
         for(GnuDiff::change* e = script; e; e = p)
         {
-            Diff d((LineRef)(e->line0 - currentLine1), e->deleted, e->inserted);
+            Diff d((LineCount)(e->line0 - currentLine1), e->deleted, e->inserted);
             Q_ASSERT(d.numberOfEquals() == e->line1 - currentLine2);
 
             currentLine1 += (LineRef)(d.numberOfEquals() + d.diff1());
@@ -651,7 +651,7 @@ static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef si
             currentLine1 += equalLinesAtStart;
             currentLine2 += equalLinesAtStart;
 
-            LineRef nofEquals = std::min(size1 - currentLine1, size2 - currentLine2);
+            LineCount nofEquals = std::min(size1 - currentLine1, size2 - currentLine2);
             if(nofEquals == 0)
             {
                 diffList.back().adjustDiff1(size1 - currentLine1);

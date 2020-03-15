@@ -84,13 +84,13 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(ChangeFlags);
 class Diff
 {
   private:
-    qint32 nofEquals = 0;
+    LineCount nofEquals = 0;
 
     qint64 mDiff1 = 0;
     qint64 mDiff2 = 0;
   public:
     Diff() = default;//We use defualt initialization force compiler to generate a default constructor
-    Diff(qint32 eq, const qint64 inDiff1, const qint64 inDiff2)
+    Diff(LineCount eq, const qint64 inDiff1, const qint64 inDiff2)
     {
         nofEquals = eq;
         mDiff1 = inDiff1;
@@ -283,7 +283,7 @@ class Diff3Line
         if(src == e_SrcSelector::A) return lineA;
         if(src == e_SrcSelector::B) return lineB;
         if(src == e_SrcSelector::C) return lineC;
-        return -1;
+        return LineRef();
     }
 
     inline qint32 sumLinesNeededForDisplay() const { return mSumLinesNeededForDisplay; }

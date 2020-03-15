@@ -772,21 +772,21 @@ void KDiff3App::slotFilePrint()
 
     m_pDiffTextWindow1->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
 
-    if(firstSelectionD3LIdx < 0) {
+    if(!firstSelectionD3LIdx.isValid()) {
         m_pDiffTextWindow2->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
     }
-    if(firstSelectionD3LIdx < 0 && m_pDiffTextWindow3 != nullptr) {
+    if(!firstSelectionD3LIdx.isValid() && m_pDiffTextWindow3 != nullptr) {
         m_pDiffTextWindow3->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
     }
 
     printDialog->setOption(QPrintDialog::PrintCurrentPage);
 
-    if(firstSelectionD3LIdx >= 0) {
+    if(firstSelectionD3LIdx.isValid()) {
         printDialog->setOption(QPrintDialog::PrintSelection);
         printDialog->setPrintRange(QAbstractPrintDialog::Selection);
     }
 
-    if(firstSelectionD3LIdx == -1)
+    if(!firstSelectionD3LIdx.isValid())
         printDialog->setPrintRange(QAbstractPrintDialog::AllPages);
     //printDialog.setMinMax(0,0);
     printDialog->setFromTo(0, 0);
@@ -888,7 +888,7 @@ void KDiff3App::slotFilePrint()
         else if(printer.printRange() == QPrinter::Selection)
         {
             bPrintSelection = true;
-            if(firstSelectionD3LIdx >= 0)
+            if(firstSelectionD3LIdx.isValid())
             {
                 line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(firstSelectionD3LIdx);
                 selectionEndLine = m_pDiffTextWindow1->convertDiff3LineIdxToLine(lastSelectionD3LIdx + 1);
