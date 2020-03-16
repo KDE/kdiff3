@@ -16,6 +16,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPixmap>
+#include <QScrollBar>
 #include <QSize>
 
 Overview::Overview(const QSharedPointer<Options> &pOptions)
@@ -60,8 +61,15 @@ void Overview::setRange(QtNumberType firstLine, QtNumberType pageHeight)
 }
 void Overview::setFirstLine(QtNumberType firstLine)
 {
-    m_firstLine = firstLine;
-    update();
+    QScrollBar *scrollBar = qobject_cast<QScrollBar *>(sender());
+    
+    if(Q_UNLIKELY(scrollBar == nullptr))
+    {
+        m_firstLine = firstLine;
+        update();
+    }
+    else
+        setRange(firstLine, scrollBar->pageStep());
 }
 
 void Overview::setOverviewMode(e_OverviewMode eOverviewMode)

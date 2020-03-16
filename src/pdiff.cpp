@@ -527,7 +527,6 @@ void KDiff3App::scrollDiffTextWindow(int deltaX, int deltaY)
     if(deltaY != 0 && m_pDiffVScrollBar != nullptr)
     {
         m_pDiffVScrollBar->setValue(m_pDiffVScrollBar->value() + deltaY);
-        m_pOverview->setRange(m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep());
     }
     if(deltaX != 0 && m_pHScrollBar != nullptr)
         m_pHScrollBar->QScrollBar::setValue(m_pHScrollBar->value() + deltaX);
