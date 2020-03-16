@@ -828,31 +828,18 @@ void KDiff3App::resizeEvent(QResizeEvent* e)
 
 void KDiff3App::wheelEvent(QWheelEvent* pWheelEvent)
 {
-    pWheelEvent->accept();
-
-    int deltaX = 0;
-
-    int d = pWheelEvent->delta();
-
-    //As per QT documentation, some mice/OS combos send delta values
-    //less than 120 units(15 degrees)
-    d = d + m_iCumulativeWheelDelta;
-    if(d > -120 && d < 120)
+    if(!pWheelEvent->isAccepted())
     {
-        //not enough for a full step in either direction, add it up
-        //to use on a successive call
-        m_iCumulativeWheelDelta = d;
+        pWheelEvent->accept();
+        //isInEvent = true;
+        QPoint delta = pWheelEvent->angleDelta();
+        
+        //Block diagonal scrolling easily generated unintentionally with track pads.
+        if(delta.y() != 0 && abs(delta.y()) > abs(delta.x()) && m_pDiffVScrollBar != nullptr)
+            QCoreApplication::postEvent(m_pDiffVScrollBar, new QWheelEvent(*pWheelEvent));
+        if(delta.x() != 0 && abs(delta.y()) < abs(delta.x()) && m_pHScrollBar != nullptr)
+            QCoreApplication::postEvent(m_pHScrollBar, new QWheelEvent(*pWheelEvent));
     }
-    else
-    {
-        //reset cumulative tracking of the wheel since we have enough
-        //for a 15 degree movement
-        m_iCumulativeWheelDelta = 0;
-    }
-
-    int deltaY = -d / 120 * QApplication::wheelScrollLines();
-
-    scrollDiffTextWindow(deltaX, deltaY);
 }
 
 void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
