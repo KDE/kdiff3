@@ -827,18 +827,15 @@ void KDiff3App::resizeEvent(QResizeEvent* e)
 
 void KDiff3App::wheelEvent(QWheelEvent* pWheelEvent)
 {
-    if(!pWheelEvent->isAccepted())
-    {
-        pWheelEvent->accept();
-        //isInEvent = true;
-        QPoint delta = pWheelEvent->angleDelta();
-        
-        //Block diagonal scrolling easily generated unintentionally with track pads.
-        if(delta.y() != 0 && abs(delta.y()) > abs(delta.x()) && m_pDiffVScrollBar != nullptr)
-            QCoreApplication::postEvent(m_pDiffVScrollBar, new QWheelEvent(*pWheelEvent));
-        if(delta.x() != 0 && abs(delta.y()) < abs(delta.x()) && m_pHScrollBar != nullptr)
-            QCoreApplication::postEvent(m_pHScrollBar, new QWheelEvent(*pWheelEvent));
-    }
+    pWheelEvent->accept();
+    //isInEvent = true;
+    QPoint delta = pWheelEvent->angleDelta();
+    
+    //Block diagonal scrolling easily generated unintentionally with track pads.
+    if(delta.y() != 0 && abs(delta.y()) > abs(delta.x()) && m_pDiffVScrollBar != nullptr)
+        QCoreApplication::postEvent(m_pDiffVScrollBar, new QWheelEvent(*pWheelEvent));
+    if(delta.x() != 0 && abs(delta.y()) < abs(delta.x()) && m_pHScrollBar != nullptr)
+        QCoreApplication::postEvent(m_pHScrollBar, new QWheelEvent(*pWheelEvent));
 }
 
 void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
@@ -849,59 +846,40 @@ void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
         return;
     }
 
-    //FIXME: Move use QAction
-    int deltaX = 0;
-    int deltaY = 0;
-    int pageSize = m_DTWHeight;
     bool bCtrl = (keyEvent->QInputEvent::modifiers() & Qt::ControlModifier) != 0;
 
     switch(keyEvent->key())
     {
         case Qt::Key_Down:
-            if(!bCtrl) ++deltaY;
-            break;
         case Qt::Key_Up:
-            if(!bCtrl) --deltaY;
-            break;
         case Qt::Key_PageDown:
-            if(!bCtrl) deltaY += pageSize;
-            break;
         case Qt::Key_PageUp:
-            if(!bCtrl) deltaY -= pageSize;
-            break;
+            if(m_pDiffVScrollBar != nullptr)
+                QCoreApplication::postEvent(m_pDiffVScrollBar, new QKeyEvent(*keyEvent));
+            return;
         case Qt::Key_Left:
-            if(!bCtrl) --deltaX;
-            break;
         case Qt::Key_Right:
-            if(!bCtrl) ++deltaX;
+            if(m_pHScrollBar != nullptr)
+                QCoreApplication::postEvent(m_pHScrollBar, new QKeyEvent(*keyEvent));
+
             break;
+        case Qt::Key_End:
         case Qt::Key_Home:
             if(bCtrl)
             {
-                if(m_pDiffVScrollBar != nullptr) m_pDiffVScrollBar->setValue(0);
+                if(m_pDiffVScrollBar != nullptr)
+                    QCoreApplication::postEvent(m_pDiffVScrollBar, new QKeyEvent(*keyEvent));
             }
             else
             {
-                if(m_pHScrollBar != nullptr)  m_pHScrollBar->setValue(0);
-            }
-            break;
-        case Qt::Key_End:
-            if(bCtrl)
-            {
-                if(m_pDiffVScrollBar != nullptr) m_pDiffVScrollBar->setValue(m_pDiffVScrollBar->maximum());
-            }
-            else
-            {
-                if(m_pHScrollBar != nullptr) m_pHScrollBar->setValue(m_pHScrollBar->maximum());
+                if(m_pHScrollBar != nullptr)
+                    QCoreApplication::postEvent(m_pHScrollBar, new QKeyEvent(*keyEvent));
             }
             break;
         default:
             break;
     }
-
-    scrollDiffTextWindow(deltaX, deltaY);
 }
-
 
 void KDiff3App::slotFinishDrop()
 {
