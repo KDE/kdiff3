@@ -124,6 +124,8 @@ class DiffTextWindow : public QWidget
     void mouseMoveEvent(QMouseEvent*) override;
     void mouseDoubleClickEvent(QMouseEvent* e) override;
 
+    void wheelEvent(QWheelEvent*) override;
+
     void paintEvent(QPaintEvent*) override;
     void dragEnterEvent(QDragEnterEvent* e) override;
 

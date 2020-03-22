@@ -828,12 +828,9 @@ void KDiff3App::resizeEvent(QResizeEvent* e)
 void KDiff3App::wheelEvent(QWheelEvent* pWheelEvent)
 {
     pWheelEvent->accept();
-    //isInEvent = true;
     QPoint delta = pWheelEvent->angleDelta();
     
     //Block diagonal scrolling easily generated unintentionally with track pads.
-    if(delta.y() != 0 && abs(delta.y()) > abs(delta.x()) && DiffTextWindow::mVScrollBar != nullptr)
-        QCoreApplication::postEvent(DiffTextWindow::mVScrollBar, new QWheelEvent(*pWheelEvent));
     if(delta.x() != 0 && abs(delta.y()) < abs(delta.x()) && m_pHScrollBar != nullptr)
         QCoreApplication::postEvent(m_pHScrollBar, new QWheelEvent(*pWheelEvent));
 }
