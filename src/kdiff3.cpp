@@ -984,7 +984,7 @@ void KDiff3App::slotFilePrint()
         {
             recalcWordWrap();
             m_pEventLoopForPrinting->exec();
-            m_pDiffVScrollBar->setValue(m_pDiffTextWindow1->convertDiff3LineIdxToLine(currentFirstD3LIdx));
+            DiffTextWindow::mVScrollBar->setValue(m_pDiffTextWindow1->convertDiff3LineIdxToLine(currentFirstD3LIdx));
         }
         m_pEventLoopForPrinting.clear();
 

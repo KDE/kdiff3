@@ -17,6 +17,7 @@
 
 class QMenu;
 class RecalcWordWrapRunnable;
+class QScrollBar;
 class QStatusBar;
 class Options;
 class DiffTextWindowData;
@@ -30,6 +31,9 @@ class DiffTextWindow : public QWidget
 {
     Q_OBJECT
   public:
+    //Using this as a scoped global
+    static QScrollBar* mVScrollBar;
+    
     DiffTextWindow(DiffTextWindowFrame* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx);
     ~DiffTextWindow() override;
     void init(

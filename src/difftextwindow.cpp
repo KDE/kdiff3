@@ -36,6 +36,7 @@
 #include <QMimeData>
 #include <QPushButton>
 #include <QRunnable>
+#include <QScrollBar>
 #include <QStatusBar>
 #include <QTextCodec>
 #include <QTextLayout>
@@ -44,6 +45,7 @@
 #include <QUrl>
 #include <QtMath>
 
+QScrollBar* DiffTextWindow::mVScrollBar = nullptr;
 QList<RecalcWordWrapRunnable*> DiffTextWindow::s_runnables; //Used in startRunables and recalWordWrap
 
 class RecalcWordWrapRunnable : public QRunnable

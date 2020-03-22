@@ -388,7 +388,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
     else
     {
         m_pOverview->init(&m_diff3LineList, m_bTripleDiff);
-        m_pDiffVScrollBar->setValue(0);
+        DiffTextWindow::mVScrollBar->setValue(0);
         m_pHScrollBar->setValue(0);
         m_pMergeVScrollBar->setValue(0);
         setLockPainting(false);
@@ -506,9 +506,9 @@ void KDiff3App::resizeDiffTextWindowHeight(int newHeight)
 {
     m_DTWHeight = newHeight;
 
-    m_pDiffVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - newHeight));
-    m_pDiffVScrollBar->setPageStep(newHeight);
-    m_pOverview->setRange(m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep());
+    DiffTextWindow::mVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - newHeight));
+    DiffTextWindow::mVScrollBar->setPageStep(newHeight);
+    m_pOverview->setRange(DiffTextWindow::mVScrollBar->value(), DiffTextWindow::mVScrollBar->pageStep());
 
     setHScrollBarRange();
 }
@@ -524,9 +524,9 @@ void KDiff3App::resizeMergeResultWindow()
 
 void KDiff3App::scrollDiffTextWindow(int deltaX, int deltaY)
 {
-    if(deltaY != 0 && m_pDiffVScrollBar != nullptr)
+    if(deltaY != 0 && DiffTextWindow::mVScrollBar != nullptr)
     {
-        m_pDiffVScrollBar->setValue(m_pDiffVScrollBar->value() + deltaY);
+        DiffTextWindow::mVScrollBar->setValue(DiffTextWindow::mVScrollBar->value() + deltaY);
     }
     if(deltaX != 0 && m_pHScrollBar != nullptr)
         m_pHScrollBar->QScrollBar::setValue(m_pHScrollBar->value() + deltaX);
@@ -542,7 +542,7 @@ void KDiff3App::scrollMergeResultWindow(int deltaX, int deltaY)
 
 void KDiff3App::setDiff3Line(int line)
 {
-    m_pDiffVScrollBar->setValue(line);
+    DiffTextWindow::mVScrollBar->setValue(line);
 }
 
 void KDiff3App::sourceMask(int srcMask, int enabledMask)
@@ -604,8 +604,8 @@ void KDiff3App::initView()
     connect(this, &KDiff3App::showWhiteSpaceToggled, m_pOverview, &Overview::slotRedraw);
     connect(this, &KDiff3App::changeOverViewMode, m_pOverview, &Overview::setOverviewMode);
 
-    m_pDiffVScrollBar = new QScrollBar(Qt::Vertical, pDiffWindowFrame);
-    pDiffHLayout->addWidget(m_pDiffVScrollBar);
+    DiffTextWindow::mVScrollBar = new QScrollBar(Qt::Vertical, pDiffWindowFrame);
+    pDiffHLayout->addWidget(DiffTextWindow::mVScrollBar);
 
     m_pDiffTextWindowFrame1 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), m_pOptionDialog->getOptions(), e_SrcSelector::A, m_sd1);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame1);
@@ -665,16 +665,16 @@ void KDiff3App::initView()
     m_pCornerWidget = new QWidget(m_pMainWidget);
     pHScrollBarLayout->addWidget(m_pCornerWidget);
 
-    connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pOverview, &Overview::setFirstLine);
-    connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow1, &DiffTextWindow::setFirstLine);
+    connect(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pOverview, &Overview::setFirstLine);
+    connect(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow1, &DiffTextWindow::setFirstLine);
     connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow1, &DiffTextWindow::setHorizScrollOffset);
     m_pDiffTextWindow1->setupConnections(this);
 
-    connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow2, &DiffTextWindow::setFirstLine);
+    connect(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow2, &DiffTextWindow::setFirstLine);
     connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow2, &DiffTextWindow::setHorizScrollOffset);
     m_pDiffTextWindow2->setupConnections(this);
 
-    connect(m_pDiffVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow3, &DiffTextWindow::setFirstLine);
+    connect(DiffTextWindow::mVScrollBar, &QScrollBar::valueChanged, m_pDiffTextWindow3, &DiffTextWindow::setFirstLine);
     connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, m_pDiffTextWindow3, &DiffTextWindow::setHorizScrollOffset);
     m_pDiffTextWindow3->setupConnections(this);
 
@@ -705,7 +705,7 @@ void KDiff3App::initView()
 
     m_pDiffTextWindow1->setFocus();
     m_pMainWidget->setMinimumSize(50, 50);
-    m_pCornerWidget->setFixedSize(m_pDiffVScrollBar->width(), m_pHScrollBar->height());
+    m_pCornerWidget->setFixedSize(DiffTextWindow::mVScrollBar->width(), m_pHScrollBar->height());
     showWindowA->setChecked(true);
     showWindowB->setChecked(true);
     showWindowC->setChecked(true);
@@ -714,7 +714,7 @@ void KDiff3App::initView()
 // called after word wrap is complete
 void KDiff3App::slotFinishMainInit()
 {
-    Q_ASSERT(m_pDiffTextWindow1 != nullptr && m_pDiffVScrollBar != nullptr);
+    Q_ASSERT(m_pDiffTextWindow1 != nullptr && DiffTextWindow::mVScrollBar != nullptr);
 
     setHScrollBarRange();
 
@@ -722,9 +722,9 @@ void KDiff3App::slotFinishMainInit()
     /*int newWidth  = m_pDiffTextWindow1->getNofVisibleColumns();*/
     m_DTWHeight = newHeight;
 
-    m_pDiffVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - newHeight));
-    m_pDiffVScrollBar->setPageStep(newHeight);
-    m_pOverview->setRange(m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep());
+    DiffTextWindow::mVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - newHeight));
+    DiffTextWindow::mVScrollBar->setPageStep(newHeight);
+    m_pOverview->setRange(DiffTextWindow::mVScrollBar->value(), DiffTextWindow::mVScrollBar->pageStep());
 
     int d3l = -1;
     if(!m_manualDiffHelpList.empty())
@@ -732,7 +732,7 @@ void KDiff3App::slotFinishMainInit()
     if(d3l >= 0 && m_pDiffTextWindow1)
     {
         int line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(d3l);
-        m_pDiffVScrollBar->setValue(std::max(0, line - 1));
+        DiffTextWindow::mVScrollBar->setValue(std::max(0, line - 1));
     }
     else
     {
@@ -742,7 +742,7 @@ void KDiff3App::slotFinishMainInit()
     }
 
     if(m_pCornerWidget)
-        m_pCornerWidget->setFixedSize(m_pDiffVScrollBar->width(), m_pHScrollBar->height());
+        m_pCornerWidget->setFixedSize(DiffTextWindow::mVScrollBar->width(), m_pHScrollBar->height());
 
     slotUpdateAvailabilities();
     setUpdatesEnabled(true);
@@ -822,7 +822,7 @@ void KDiff3App::resizeEvent(QResizeEvent* e)
 {
     QSplitter::resizeEvent(e);
     if(m_pCornerWidget)
-        m_pCornerWidget->setFixedSize(m_pDiffVScrollBar->width(), m_pHScrollBar->height());
+        m_pCornerWidget->setFixedSize(DiffTextWindow::mVScrollBar->width(), m_pHScrollBar->height());
 }
 
 void KDiff3App::wheelEvent(QWheelEvent* pWheelEvent)
@@ -832,8 +832,8 @@ void KDiff3App::wheelEvent(QWheelEvent* pWheelEvent)
     QPoint delta = pWheelEvent->angleDelta();
     
     //Block diagonal scrolling easily generated unintentionally with track pads.
-    if(delta.y() != 0 && abs(delta.y()) > abs(delta.x()) && m_pDiffVScrollBar != nullptr)
-        QCoreApplication::postEvent(m_pDiffVScrollBar, new QWheelEvent(*pWheelEvent));
+    if(delta.y() != 0 && abs(delta.y()) > abs(delta.x()) && DiffTextWindow::mVScrollBar != nullptr)
+        QCoreApplication::postEvent(DiffTextWindow::mVScrollBar, new QWheelEvent(*pWheelEvent));
     if(delta.x() != 0 && abs(delta.y()) < abs(delta.x()) && m_pHScrollBar != nullptr)
         QCoreApplication::postEvent(m_pHScrollBar, new QWheelEvent(*pWheelEvent));
 }
@@ -854,8 +854,8 @@ void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
         case Qt::Key_Up:
         case Qt::Key_PageDown:
         case Qt::Key_PageUp:
-            if(m_pDiffVScrollBar != nullptr)
-                QCoreApplication::postEvent(m_pDiffVScrollBar, new QKeyEvent(*keyEvent));
+            if(DiffTextWindow::mVScrollBar != nullptr)
+                QCoreApplication::postEvent(DiffTextWindow::mVScrollBar, new QKeyEvent(*keyEvent));
             return;
         case Qt::Key_Left:
         case Qt::Key_Right:
@@ -867,8 +867,8 @@ void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
         case Qt::Key_Home:
             if(bCtrl)
             {
-                if(m_pDiffVScrollBar != nullptr)
-                    QCoreApplication::postEvent(m_pDiffVScrollBar, new QKeyEvent(*keyEvent));
+                if(DiffTextWindow::mVScrollBar != nullptr)
+                    QCoreApplication::postEvent(DiffTextWindow::mVScrollBar, new QKeyEvent(*keyEvent));
             }
             else
             {
@@ -1599,12 +1599,12 @@ void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
     {
         if(m_pOverview)
             m_pOverview->slotRedraw();
-        if(m_pDiffVScrollBar)
-            m_pDiffVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - m_DTWHeight));
+        if(DiffTextWindow::mVScrollBar)
+            DiffTextWindow::mVScrollBar->setRange(0, std::max(0, m_neededLines + 1 - m_DTWHeight));
         if(m_pDiffTextWindow1)
         {
-            if(m_pDiffVScrollBar)
-                m_pDiffVScrollBar->setValue(m_pDiffTextWindow1->convertDiff3LineIdxToLine(m_firstD3LIdx));
+            if(DiffTextWindow::mVScrollBar)
+                DiffTextWindow::mVScrollBar->setValue(m_pDiffTextWindow1->convertDiff3LineIdxToLine(m_firstD3LIdx));
 
             setHScrollBarRange();
             m_pHScrollBar->setValue(0);
@@ -1884,7 +1884,7 @@ void KDiff3App::slotEditFindNext()
            m_pDiffTextWindow1->findString(s, d3vLine, posInLine, bDirDown, bCaseSensitive))
         {
             m_pDiffTextWindow1->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
-            m_pDiffVScrollBar->setValue(l - m_pDiffVScrollBar->pageStep() / 2);
+            DiffTextWindow::mVScrollBar->setValue(l - DiffTextWindow::mVScrollBar->pageStep() / 2);
             m_pHScrollBar->setValue(std::max(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
@@ -1903,7 +1903,7 @@ void KDiff3App::slotEditFindNext()
            m_pDiffTextWindow2->findString(s, d3vLine, posInLine, bDirDown, bCaseSensitive))
         {
             m_pDiffTextWindow2->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
-            m_pDiffVScrollBar->setValue(l - m_pDiffVScrollBar->pageStep() / 2);
+            DiffTextWindow::mVScrollBar->setValue(l - DiffTextWindow::mVScrollBar->pageStep() / 2);
             m_pHScrollBar->setValue(std::max(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
@@ -1922,7 +1922,7 @@ void KDiff3App::slotEditFindNext()
            m_pDiffTextWindow3->findString(s, d3vLine, posInLine, bDirDown, bCaseSensitive))
         {
             m_pDiffTextWindow3->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length(), l, p);
-            m_pDiffVScrollBar->setValue(l - m_pDiffVScrollBar->pageStep() / 2);
+            DiffTextWindow::mVScrollBar->setValue(l - DiffTextWindow::mVScrollBar->pageStep() / 2);
             m_pHScrollBar->setValue(std::max(0, p + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;
