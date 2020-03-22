@@ -390,7 +390,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         m_pOverview->init(&m_diff3LineList, m_bTripleDiff);
         DiffTextWindow::mVScrollBar->setValue(0);
         m_pHScrollBar->setValue(0);
-        m_pMergeVScrollBar->setValue(0);
+        MergeResultWindow::mVScrollBar->setValue(0);
         setLockPainting(false);
 
         if(!bVisibleMergeResultWindow)
@@ -516,8 +516,8 @@ void KDiff3App::resizeDiffTextWindowHeight(int newHeight)
 void KDiff3App::resizeMergeResultWindow()
 {
     MergeResultWindow* p = m_pMergeResultWindow;
-    m_pMergeVScrollBar->setRange(0, std::max(0, p->getNofLines() - p->getNofVisibleLines()));
-    m_pMergeVScrollBar->setPageStep(p->getNofVisibleLines());
+    MergeResultWindow::mVScrollBar->setRange(0, std::max(0, p->getNofLines() - p->getNofVisibleLines()));
+    MergeResultWindow::mVScrollBar->setPageStep(p->getNofVisibleLines());
 
     setHScrollBarRange();
 }
@@ -535,7 +535,7 @@ void KDiff3App::scrollDiffTextWindow(int deltaX, int deltaY)
 void KDiff3App::scrollMergeResultWindow(int deltaX, int deltaY)
 {
     if(deltaY != 0)
-        m_pMergeVScrollBar->setValue(m_pMergeVScrollBar->value() + deltaY);
+        MergeResultWindow::mVScrollBar->setValue(MergeResultWindow::mVScrollBar->value() + deltaY);
     if(deltaX != 0)
         m_pHScrollBar->setValue(m_pHScrollBar->value() + deltaX);
 }
@@ -637,8 +637,8 @@ void KDiff3App::initView()
     m_pMergeResultWindow = new MergeResultWindow(m_pMergeWindowFrame, m_pOptionDialog->getOptions(), statusBar());
     pMergeVLayout->addWidget(m_pMergeResultWindow, 1);
 
-    m_pMergeVScrollBar = new QScrollBar(Qt::Vertical, m_pMergeWindowFrame);
-    pMergeHLayout->addWidget(m_pMergeVScrollBar);
+    MergeResultWindow::mVScrollBar = new QScrollBar(Qt::Vertical, m_pMergeWindowFrame);
+    pMergeHLayout->addWidget(MergeResultWindow::mVScrollBar);
 
     m_pMainSplitter->addWidget(m_pMainWidget);
 
@@ -679,7 +679,7 @@ void KDiff3App::initView()
     m_pDiffTextWindow3->setupConnections(this);
 
     MergeResultWindow* p = m_pMergeResultWindow;
-    connect(m_pMergeVScrollBar, &QScrollBar::valueChanged, p, &MergeResultWindow::setFirstLine);
+    connect(MergeResultWindow::mVScrollBar, &QScrollBar::valueChanged, p, &MergeResultWindow::setFirstLine);
 
     connect(m_pHScrollBar, &ReversibleScrollBar::valueChanged2, p, &MergeResultWindow::setHorizScrollOffset);
     connect(p, &MergeResultWindow::modifiedChanged, m_pMergeResultWindowTitle, &WindowTitleWidget::slotSetModified);
@@ -1938,7 +1938,7 @@ void KDiff3App::slotEditFindNext()
            m_pMergeResultWindow->findString(s, d3vLine, posInLine, bDirDown, bCaseSensitive))
         {
             m_pMergeResultWindow->setSelection(d3vLine, posInLine, d3vLine, posInLine + s.length());
-            m_pMergeVScrollBar->setValue(d3vLine - m_pMergeVScrollBar->pageStep() / 2);
+            MergeResultWindow::mVScrollBar->setValue(d3vLine - MergeResultWindow::mVScrollBar->pageStep() / 2);
             m_pHScrollBar->setValue(std::max(0, posInLine + s.length() - m_pHScrollBar->pageStep()));
             m_pFindDialog->currentLine = d3vLine;
             m_pFindDialog->currentPos = posInLine + 1;

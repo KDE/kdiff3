@@ -55,6 +55,7 @@
 
 bool g_bAutoSolve = true;
 
+QScrollBar* MergeResultWindow::mVScrollBar = nullptr;
 QPointer<QAction> MergeResultWindow::chooseAEverywhere;
 QPointer<QAction> MergeResultWindow::chooseBEverywhere;
 QPointer<QAction> MergeResultWindow::chooseCEverywhere;
@@ -2176,11 +2177,16 @@ void MergeResultWindow::slotCursorUpdate()
     m_cursorTimer.start(500);
 }
 
-void MergeResultWindow::wheelEvent(QWheelEvent* e)
+
+void MergeResultWindow::wheelEvent(QWheelEvent* pWheelEvent)
 {
-    int d = -e->delta() * QApplication::wheelScrollLines() / 120;
-    e->accept();
-    Q_EMIT scrollMergeResultWindow(0, std::min(d, getNofVisibleLines()));
+    QPoint delta = pWheelEvent->angleDelta();
+    //Block diagonal scrolling easily generated unintentionally with track pads.
+    if(delta.y() != 0 && abs(delta.y()) > abs(delta.x()) && mVScrollBar != nullptr)
+    {
+        pWheelEvent->accept();
+        QCoreApplication::postEvent(mVScrollBar, new QWheelEvent(*pWheelEvent));
+    }
 }
 
 bool MergeResultWindow::event(QEvent* e)

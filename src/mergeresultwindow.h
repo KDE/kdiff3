@@ -25,6 +25,7 @@
 
 class QPainter;
 class RLPainter;
+class QScrollBar;
 class KActionCollection;
 class KToggleAction;
 
@@ -33,7 +34,9 @@ class KDiff3App;
 class MergeResultWindow : public QWidget
 {
    Q_OBJECT
-public:
+ public:
+   static QScrollBar* mVScrollBar;
+
    MergeResultWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions, QStatusBar* pStatusBar);
 
    void init(
