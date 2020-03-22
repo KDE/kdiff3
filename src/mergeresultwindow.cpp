@@ -171,6 +171,7 @@ void MergeResultWindow::connectActions() const
 
 void MergeResultWindow::setupConnections(const KDiff3App *app) const
 {
+    connect(this, &MergeResultWindow::scrollVertically, mVScrollBar, &QScrollBar::setValue);
     connect(this, &MergeResultWindow::scrollMergeResultWindow, app, &KDiff3App::scrollMergeResultWindow);
     connect(this, &MergeResultWindow::sourceMask, app, &KDiff3App::sourceMask);
     connect(this, &MergeResultWindow::resizeSignal, app, &KDiff3App::resizeMergeResultWindow);
@@ -180,6 +181,7 @@ void MergeResultWindow::setupConnections(const KDiff3App *app) const
     connect(this, &MergeResultWindow::updateAvailabilities, app, &KDiff3App::slotUpdateAvailabilities);
     connect(this, &MergeResultWindow::showPopupMenu, app, &KDiff3App::showPopupMenu);
     connect(this, &MergeResultWindow::noRelevantChangesDetected, app, &KDiff3App::slotNoRelevantChangesDetected);
+    //connect menu actions
     connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (MergeResultWindow::*)(void)>(&MergeResultWindow::update));
     connect(app, &KDiff3App::doRefresh, this, &MergeResultWindow::slotRefresh);
 
@@ -1016,7 +1018,7 @@ void MergeResultWindow::setFastSelector(MergeLineList::iterator i)
     int newFirstLine = getBestFirstLine(line1, nofLines, m_firstLine, getNofVisibleLines());
     if(newFirstLine != m_firstLine)
     {
-        Q_EMIT scrollMergeResultWindow(0, newFirstLine - m_firstLine);
+        Q_EMIT scrollVertically(newFirstLine - m_firstLine);
     }
 
     if(m_selection.isEmpty())

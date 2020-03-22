@@ -121,6 +121,7 @@ public Q_SLOTS:
    void slotRefresh();
 
  Q_SIGNALS:
+   void scrollVertically(QtNumberType deltaY);
    void scrollMergeResultWindow(int deltaX, int deltaY);
    void modifiedChanged(bool bModified);
    void setFastSelectorRange(LineRef line1, LineCount nofLines);

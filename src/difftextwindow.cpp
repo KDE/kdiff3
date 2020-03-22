@@ -266,7 +266,9 @@ void DiffTextWindow::init(
 
 void DiffTextWindow::setupConnections(const KDiff3App *app) const
 {
-    Q_ASSERT(dynamic_cast<DiffTextWindowFrame*>(parent()) != nullptr);
+    Q_ASSERT(qobject_cast<DiffTextWindowFrame*>(parent()) != nullptr);
+
+    connect(this, &DiffTextWindow::scrollVertically, mVScrollBar, &QScrollBar::setValue);
 
     connect(this, &DiffTextWindow::firstLineChanged, dynamic_cast<DiffTextWindowFrame*>(parent()), &DiffTextWindowFrame::setFirstLine);
     connect(this, &DiffTextWindow::newSelection, app, &KDiff3App::slotSelectionStart);
@@ -275,6 +277,7 @@ void DiffTextWindow::setupConnections(const KDiff3App *app) const
     connect(this, &DiffTextWindow::finishRecalcWordWrap, app, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
     connect(this, &DiffTextWindow::checkIfCanContinue, app, &KDiff3App::slotCheckIfCanContinue);
     connect(this, &DiffTextWindow::finishDrop, app, &KDiff3App::slotFinishDrop);
+    
     connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
     connect(app, &KDiff3App::showLineNumbersToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
     connect(app, &KDiff3App::doRefresh, this, &DiffTextWindow::slotRefresh);
@@ -525,7 +528,7 @@ void DiffTextWindow::setFastSelectorRange(int line1, int nofLines)
             getNofVisibleLines());
         if(newFirstLine != d->m_firstLine)
         {
-            Q_EMIT scrollDiffTextWindow(0, newFirstLine - d->m_firstLine);
+            Q_EMIT scrollVertically(newFirstLine - d->m_firstLine);
         }
 
         update();
