@@ -167,8 +167,6 @@ class DiffTextWindowData
     int m_lineNumberWidth = 0;
     QAtomicInt m_maxTextWidth = -1;
 
-    QStatusBar* m_pStatusBar = nullptr;
-
     Selection m_selection;
 
     int m_scrollDeltaX = 0;
@@ -197,7 +195,6 @@ qint32 DiffTextWindow::getLineNumberWidth() const { return (int)log10((double)st
 
 DiffTextWindow::DiffTextWindow(
     DiffTextWindowFrame* pParent,
-    QStatusBar* pStatusBar,
     const QSharedPointer<Options>& pOptions,
     e_SrcSelector winIdx)
     : QWidget(pParent)
@@ -216,7 +213,6 @@ DiffTextWindow::DiffTextWindow(
 
     setMinimumSize(QSize(20, 20));
 
-    d->m_pStatusBar = pStatusBar;
     setUpdatesEnabled(true);
     d->m_bWordWrap = false;
     d->m_winIdx = winIdx;
@@ -278,6 +274,8 @@ void DiffTextWindow::setupConnections(const KDiff3App *app) const
     connect(this, &DiffTextWindow::checkIfCanContinue, app, &KDiff3App::slotCheckIfCanContinue);
     connect(this, &DiffTextWindow::finishDrop, app, &KDiff3App::slotFinishDrop);
     
+    connect(this, &DiffTextWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
+
     connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
     connect(app, &KDiff3App::showLineNumbersToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
     connect(app, &KDiff3App::doRefresh, this, &DiffTextWindow::slotRefresh);
@@ -556,7 +554,7 @@ void DiffTextWindow::showStatusLine(const LineRef aproxLine)
                 message = i18n("File %1: Line %2", d->m_filename, actualLine + 1);
             else
                 message = i18n("File %1: Line not available", d->m_filename);
-            if(d->m_pStatusBar != nullptr) d->m_pStatusBar->showMessage(message);
+            Q_EMIT statusBarMessage(message);
 
             Q_EMIT lineClicked(d->m_winIdx, actualLine);
         }
@@ -1828,7 +1826,7 @@ class DiffTextWindowFrameData
     QSharedPointer<SourceData> mSourceData;
 };
 
-DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, QSharedPointer<SourceData> psd)
+DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, QSharedPointer<SourceData> psd)
     : QWidget(pParent)
 {
     d = new DiffTextWindowFrameData(this, pOptions, winIdx);
@@ -1837,7 +1835,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBa
     connect(d->getBrowseButton(), &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
     connect(d->getFileSelectionField(), &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
 
-    d->m_pDiffTextWindow = new DiffTextWindow(this, pStatusBar, pOptions, winIdx);
+    d->m_pDiffTextWindow = new DiffTextWindow(this, pOptions, winIdx);
     d->m_pDiffTextWindow->setSourceData(psd);
     QVBoxLayout* pVTopLayout = new QVBoxLayout(const_cast<QWidget*>(d->getTopLineWidget()));
     pVTopLayout->setMargin(2);
@@ -1903,8 +1901,8 @@ void DiffTextWindowFrame::setupConnections(const KDiff3App *app)
 {
     connect(this, &DiffTextWindowFrame::fileNameChanged, app, &KDiff3App::slotFileNameChanged);
     connect(this, &DiffTextWindowFrame::encodingChanged, app, &KDiff3App::slotEncodingChanged);
-    connect(this, &DiffTextWindowFrame::encodingChanged, d->mSourceData.data(), &SourceData::setEncoding);
- }
+    connect(this, &DiffTextWindowFrame::encodingChanged, d->mSourceData.data(), &SourceData::setEncoding);    
+}
 
 // Search for the first visible line (search loop needed when no line exists for this file.)
 LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine)

@@ -121,6 +121,7 @@ public Q_SLOTS:
    void slotRefresh();
 
  Q_SIGNALS:
+   void statusBarMessage(const QString& message);
    void scrollVertically(QtNumberType deltaY);
    void scrollMergeResultWindow(int deltaX, int deltaY);
    void modifiedChanged(bool bModified);
@@ -136,6 +137,7 @@ public Q_SLOTS:
  private:
    void merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly = false, bool bWhiteSpaceOnly = false);
    QString getString(int lineIdx);
+   void showUnsolvedConflictsStatusMessage();
 
    static QPointer<QAction> chooseAEverywhere;
    static QPointer<QAction> chooseBEverywhere;
@@ -162,7 +164,6 @@ public Q_SLOTS:
    int m_delayedDrawTimer = 0;
    e_OverviewMode mOverviewMode;
    QString m_persistentStatusMessage;
-   void showUnsolvedConflictsStatusMessage();
 
 private:
   static bool sameKindCheck(const MergeLine& ml1, const MergeLine& ml2);

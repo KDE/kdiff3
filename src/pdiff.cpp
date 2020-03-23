@@ -607,11 +607,11 @@ void KDiff3App::initView()
     DiffTextWindow::mVScrollBar = new QScrollBar(Qt::Vertical, pDiffWindowFrame);
     pDiffHLayout->addWidget(DiffTextWindow::mVScrollBar);
 
-    m_pDiffTextWindowFrame1 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), m_pOptionDialog->getOptions(), e_SrcSelector::A, m_sd1);
+    m_pDiffTextWindowFrame1 = new DiffTextWindowFrame(m_pDiffWindowSplitter, m_pOptionDialog->getOptions(), e_SrcSelector::A, m_sd1);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame1);
-    m_pDiffTextWindowFrame2 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), m_pOptionDialog->getOptions(), e_SrcSelector::B, m_sd2);
+    m_pDiffTextWindowFrame2 = new DiffTextWindowFrame(m_pDiffWindowSplitter, m_pOptionDialog->getOptions(), e_SrcSelector::B, m_sd2);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame2);
-    m_pDiffTextWindowFrame3 = new DiffTextWindowFrame(m_pDiffWindowSplitter, statusBar(), m_pOptionDialog->getOptions(), e_SrcSelector::C, m_sd3);
+    m_pDiffTextWindowFrame3 = new DiffTextWindowFrame(m_pDiffWindowSplitter, m_pOptionDialog->getOptions(), e_SrcSelector::C, m_sd3);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame3);
     m_pDiffTextWindow1 = m_pDiffTextWindowFrame1->getDiffTextWindow();
     m_pDiffTextWindow2 = m_pDiffTextWindowFrame2->getDiffTextWindow();

@@ -181,6 +181,7 @@ void MergeResultWindow::setupConnections(const KDiff3App *app) const
     connect(this, &MergeResultWindow::updateAvailabilities, app, &KDiff3App::slotUpdateAvailabilities);
     connect(this, &MergeResultWindow::showPopupMenu, app, &KDiff3App::showPopupMenu);
     connect(this, &MergeResultWindow::noRelevantChangesDetected, app, &KDiff3App::slotNoRelevantChangesDetected);
+    connect(this, &MergeResultWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
     //connect menu actions
     connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (MergeResultWindow::*)(void)>(&MergeResultWindow::update));
     connect(app, &KDiff3App::doRefresh, this, &MergeResultWindow::slotRefresh);
@@ -211,7 +212,8 @@ void MergeResultWindow::showUnsolvedConflictsStatusMessage()
         int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
 
         m_persistentStatusMessage = i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)", nofUnsolved, wsc);
-        m_pStatusBar->showMessage(m_persistentStatusMessage);
+        
+        Q_EMIT statusBarMessage(m_persistentStatusMessage);
     }
 }
 
@@ -238,7 +240,7 @@ void MergeResultWindow::slotStatusMessageChanged(const QString& s)
 {
     if(s.isEmpty() && !m_persistentStatusMessage.isEmpty())
     {
-        m_pStatusBar->showMessage(m_persistentStatusMessage, 0);
+        Q_EMIT statusBarMessage(m_persistentStatusMessage);
     }
 }
 

@@ -34,7 +34,7 @@ class DiffTextWindow : public QWidget
     //Using this as a scoped global
     static QScrollBar* mVScrollBar;
     
-    DiffTextWindow(DiffTextWindowFrame* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx);
+    DiffTextWindow(DiffTextWindowFrame* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx);
     ~DiffTextWindow() override;
     void init(
         const QString& fileName,
@@ -95,6 +95,7 @@ class DiffTextWindow : public QWidget
 
     void setSourceData(const QSharedPointer<SourceData>& inData);
   Q_SIGNALS:
+    void statusBarMessage(const QString& message);
     void scrollVertically(QtNumberType deltaY);
     void resizeHeightChangedSignal(int nofVisibleLines);
     void resizeWidthChangedSignal(int nofVisibleColumns);
@@ -150,7 +151,7 @@ class DiffTextWindowFrame : public QWidget
 {
     Q_OBJECT
   public:
-    DiffTextWindowFrame(QWidget* pParent, QStatusBar* pStatusBar, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, QSharedPointer<SourceData> psd);
+    DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, QSharedPointer<SourceData> psd);
     ~DiffTextWindowFrame() override;
     DiffTextWindow* getDiffTextWindow();
     void init();
