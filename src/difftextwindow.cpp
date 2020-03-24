@@ -137,9 +137,9 @@ class DiffTextWindowData
         RLPainter& p, const LineData* pld,
         const DiffList* pLineDiff1, const DiffList* pLineDiff2, int line,
         int whatChanged, int whatChanged2, int srcLineIdx,
-        int wrapLineOffset, int wrapLineLength, bool bWrapLine, const QRect& invalidRect, int deviceWidth);
+        int wrapLineOffset, int wrapLineLength, bool bWrapLine, const QRect& invalidRect);
 
-    void draw(RLPainter& p, const QRect& invalidRect, int deviceWidth, int beginLine, int endLine);
+    void draw(RLPainter& p, const QRect& invalidRect, int beginLine, int endLine);
 
     QStatusBar* m_pStatusBar;
 
@@ -795,6 +795,10 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, bool /*bFirs
         textLayout.setPosition(QPointF(xOffset, 0));
 }
 
+/*
+    Don't try to use invalid rect to block drawing of lines based on there apparent dementions.
+    This does not always work for very long lines being scrolled horzontally. (Causes blanking of diff text area)
+*/
 void DiffTextWindowData::writeLine(
     RLPainter& p,
     const LineData* pld,
@@ -807,8 +811,7 @@ void DiffTextWindowData::writeLine(
     int wrapLineOffset,
     int wrapLineLength,
     bool bWrapLine,
-    const QRect& invalidRect,
-    int deviceWidth)
+    const QRect& invalidRect)
 {
     QFont normalFont = p.font();
 
@@ -819,12 +822,6 @@ void DiffTextWindowData::writeLine(
 
     int xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
     int yOffset = (line - m_firstLine) * fontHeight;
-
-    QRect lineRect(xOffset, yOffset, deviceWidth, fontHeight);
-    if(!invalidRect.intersects(lineRect))
-    {
-        return;
-    }
 
     int fastSelectorLine1 = m_pDiffTextWindow->convertDiff3LineIdxToLine(m_fastSelectorLine1);
     int fastSelectorLine2 = m_pDiffTextWindow->convertDiff3LineIdxToLine(m_fastSelectorLine1 + m_fastSelectorNofLines) - 1;
@@ -1034,7 +1031,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     p.setFont(font());
     p.QPainter::fillRect(invalidRect, d->m_pOptions->m_bgColor);
 
-    d->draw(p, invalidRect, width(), d->m_firstLine, endLine);
+    d->draw(p, invalidRect, d->m_firstLine, endLine);
     p.end();
 
     d->m_oldFirstLine = d->m_firstLine;
@@ -1055,12 +1052,12 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, int nofLin
     QRect invalidRect = QRect(0, 0, 1000000000, 1000000000);
     QColor bgColor = d->m_pOptions->m_bgColor;
     d->m_pOptions->m_bgColor = Qt::white;
-    d->draw(p, invalidRect, p.window().width(), firstLine, std::min(firstLine + nofLinesPerPage, getNofLines()));
+    d->draw(p, invalidRect, firstLine, std::min(firstLine + nofLinesPerPage, getNofLines()));
     d->m_pOptions->m_bgColor = bgColor;
     d->m_firstLine = oldFirstLine;
 }
 
-void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int deviceWidth, int beginLine, int endLine)
+void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int beginLine, int endLine)
 {
     m_lineNumberWidth = m_pOptions->m_bShowLineNumbers ? (int)log10((double)std::max(m_size, 1)) + 1 : 0;
 
@@ -1124,8 +1121,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int device
             wrapLineOffset,
             wrapLineLength,
             bWrapLine,
-            invalidRect,
-            deviceWidth);
+            invalidRect);
     }
 }
 
