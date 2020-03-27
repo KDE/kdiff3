@@ -159,17 +159,17 @@ private:
    class MergeEditLine
    {
    public:
-      explicit MergeEditLine(const Diff3LineList::const_iterator &i, e_SrcSelector src=None){m_id3l=i; m_src=src; m_bLineRemoved=false; }
-      void setConflict() { m_src=None; m_bLineRemoved=false; m_str=QString(); }
-      bool isConflict()  { return  m_src==None && !m_bLineRemoved && m_str.isEmpty(); }
-      void setRemoved(e_SrcSelector src=None)  { m_src=src; m_bLineRemoved=true; m_str=QString(); }
+      explicit MergeEditLine(const Diff3LineList::const_iterator &i, e_SrcSelector src=None){m_id3l=i; m_src=src; m_bLineRemoved=false; mChanged = false; }
+      void setConflict() { mChanged = false; m_src=None; m_bLineRemoved=false; m_str=QString(); }
+      bool isConflict()  { return  m_src==None && !m_bLineRemoved && !mChanged; }
+      void setRemoved(e_SrcSelector src=None)  { m_src=src; m_bLineRemoved=true; mChanged=true; m_str=QString(); }
       bool isRemoved()   { return m_bLineRemoved; }
       bool isEditableText() { return !isConflict() && !isRemoved(); }
-      void setString( const QString& s ){ m_str=s; m_bLineRemoved=false; m_src=None; }
+      void setString( const QString& s ){ m_str=s; m_bLineRemoved=false; m_src=None; mChanged=true; }
       QString getString( const MergeResultWindow* );
-      bool isModified() { return ! m_str.isEmpty() ||  (m_bLineRemoved && m_src==None); }
+      bool isModified() { return mChanged; }
 
-      void setSource( e_SrcSelector src, bool bLineRemoved ) { m_src=src; m_bLineRemoved =bLineRemoved; }
+      void setSource( e_SrcSelector src, bool bLineRemoved ) { m_src=src; m_bLineRemoved = bLineRemoved; if(bLineRemoved) mChanged = true; }
       e_SrcSelector src() { return m_src; }
       Diff3LineList::const_iterator id3l(){return m_id3l;}
       // getString() is implemented as MergeResultWindow::getString()
@@ -178,6 +178,8 @@ private:
      e_SrcSelector m_src; // 1, 2 or 3 for A, B or C respectively, or 0 when line is from neither source.
      QString m_str;       // String when modified by user or null-string when orig data is used.
      bool m_bLineRemoved;
+
+     bool mChanged;
    };
 
    class MergeEditLineList : private std::list<MergeEditLine>
