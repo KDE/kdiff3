@@ -35,7 +35,7 @@ class MergeEditLine
         m_src = src;
         m_bLineRemoved = true;
         m_str = QString();
-        mChanged = true;
+        mChanged = (src == e_SrcSelector::None);
     }
     bool isRemoved() const { return m_bLineRemoved; }
     bool isEditableText() { return !isConflict() && !isRemoved(); }
@@ -55,6 +55,11 @@ class MergeEditLine
         m_bLineRemoved = bLineRemoved;
         if(bLineRemoved && m_src == e_SrcSelector::None)
             mChanged = true;
+        else if(m_src != e_SrcSelector::None)
+        {
+            mChanged = false;
+            m_str=QStringLiteral("");
+        }
     }
     e_SrcSelector src() { return m_src; }
     Diff3LineList::const_iterator id3l() { return m_id3l; }
