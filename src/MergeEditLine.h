@@ -1,4 +1,3 @@
-
 /*
  * KDiff3 - Text Diff And Merge Tool
  *
