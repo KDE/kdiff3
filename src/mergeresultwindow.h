@@ -162,14 +162,14 @@ private:
       explicit MergeEditLine(const Diff3LineList::const_iterator &i, e_SrcSelector src=None){m_id3l=i; m_src=src; m_bLineRemoved=false; mChanged = false; }
       void setConflict() { mChanged = false; m_src=None; m_bLineRemoved=false; m_str=QString(); }
       bool isConflict()  { return  m_src==None && !m_bLineRemoved && !mChanged; }
-      void setRemoved(e_SrcSelector src=None)  { m_src=src; m_bLineRemoved=true; mChanged=true; m_str=QString(); }
+      void setRemoved(e_SrcSelector src=None)  { m_src=src; m_bLineRemoved=true; mChanged=(m_src == None); m_str=QString(); }
       bool isRemoved()   { return m_bLineRemoved; }
       bool isEditableText() { return !isConflict() && !isRemoved(); }
       void setString( const QString& s ){ m_str=s; m_bLineRemoved=false; m_src=None; mChanged=true; }
       QString getString( const MergeResultWindow* );
       bool isModified() { return mChanged; }
 
-      void setSource( e_SrcSelector src, bool bLineRemoved ) { m_src=src; m_bLineRemoved = bLineRemoved; if(bLineRemoved) mChanged = true; }
+      void setSource( e_SrcSelector src, bool bLineRemoved ) { m_src=src; m_bLineRemoved = bLineRemoved; if(bLineRemoved) mChanged = true; if(m_src != None) mChanged = false; }
       e_SrcSelector src() { return m_src; }
       Diff3LineList::const_iterator id3l(){return m_id3l;}
       // getString() is implemented as MergeResultWindow::getString()
