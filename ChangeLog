@@ -1,3 +1,34 @@
+Version 1.8.2 - 2020-03-29
+===========================
+Bug 411472 Allowing editing of blank lines and don't mark newly intserted lines as a confilict
+2ba20222 - Remove broken attempt to optimize drawing on horizonal scroll.
+Bug 418813 - Fix line numbers not shown. Use QString::number directly not through a format string.
+11e93232 - Correcly support "Print Current Page"
+64804a64 - Don't attempt to free nullptr in SourceData::FileData::reset()
+f4c66ace - Make Preferance dialog panes scrollable if too large to fit on screen.
+de06e561 - Fix dialog filter on windows.
+e8d06774 - Switch to QElapsedTime for timing avoids explictly undefined behavior inside qt if time is changed.
+05e2d6fb - Fix sync mode.
+f9bd88a1 - Make matching in CvsIngnoreList always honor bCaseSensitive setting.
+418ea78c - Don't use temporary with QLatin1String constructor strange things will happen.
+b058c060 - ignore over size cvsignore files
+Bug 410962 - Fix '-L' parameter handling 
+b4b2c970 - Restore acciedently deleted --auto option
+Bug 411602 - Fixing missing menu items also resolves a potiential crash in MergeResultWindow::slotUpdateAvailabilities (Bug 407745).
+d4239b92 - Prevent intermient crash during reload/refresh
+Bug 410008 - Show diff for empty/missing files.
+3bb755c5 - Don't give false error when comparing empty folders
+Bug 408991 - 4ad69790,0737cc3e,0402f84a - Close files when not in use - Fixes "Too many open files" bug.
+Bug 407829 - Avoid crash when recieving mouse or key events during earily startup.
+cc6d76e3 - Don't try to manually build url if parent is not set.
+85052379 - Fix crash when canceling by using only one event loop in ProgressDialog.
+d151f151 - Don't append to already complete url.
+d3cb2def - Fix manual url building in FileAccess::setFromUdsEntry  - scheme should not change now.
+Bug 405918 - Fix craft install instructions for windows
+Bug 411586 - Fix crash in OptionDialog::slotApply()
+Bug 407745 - Fix crash in MergeResultWindow::slotUpdateAvailabilities
+Bug 407894,399070 - Fixed redraw for horizonal scrolling.
+
 Version 1.8 - 2019-03-22
 ===========================
 -Don't enable "Choose C for Everthing" on two way merge.
