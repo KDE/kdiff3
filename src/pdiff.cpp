@@ -714,7 +714,7 @@ void KDiff3App::initView()
 // called after word wrap is complete
 void KDiff3App::slotFinishMainInit()
 {
-    Q_ASSERT(m_pDiffTextWindow1 != nullptr && DiffTextWindow::mVScrollBar != nullptr);
+    Q_ASSERT(m_pDiffTextWindow1 != nullptr && DiffTextWindow::mVScrollBar != nullptr && m_pOverview != nullptr);
 
     setHScrollBarRange();
 
