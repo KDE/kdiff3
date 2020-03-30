@@ -124,7 +124,7 @@ class DiffTextWindowData
     int leftInfoWidth() const { return 4 + m_lineNumberWidth; } // Nr of information columns on left side
     int convertLineOnScreenToLineInSource(int lineOnScreen, e_CoordType coordType, bool bFirstLine);
 
-    void prepareTextLayout(QTextLayout& textLayout, bool bFirstLine, int visibleTextWidth = -1);
+    void prepareTextLayout(QTextLayout& textLayout, int visibleTextWidth = -1);
 
     bool isThreeWay() const { return m_bTriple; };
     const QString& getFileName() { return m_filename; }
@@ -466,7 +466,7 @@ int DiffTextWindow::getMaxTextWidth()
         {
             textLayout.clearLayout();
             textLayout.setText(d->getString(i));
-            d->prepareTextLayout(textLayout, true);
+            d->prepareTextLayout(textLayout);
             if(textLayout.maximumWidth() > getAtomic(d->m_maxTextWidth))
                 d->m_maxTextWidth = qCeil(textLayout.maximumWidth());
         }
@@ -786,7 +786,7 @@ void DiffTextWindow::convertToLinePos(int x, int y, LineRef& line, int& pos)
     {
         QString s = d->getLineString(line);
         QTextLayout textLayout(s, font(), this);
-        d->prepareTextLayout(textLayout, !d->getOptions()->wordWrapOn()|| d->m_diff3WrapLineVector[line].wrapLineOffset == 0);
+        d->prepareTextLayout(textLayout);
         pos = textLayout.lineAt(0).xToCursor(x - textLayout.position().x());
     }
     else
@@ -843,7 +843,7 @@ class FormatRangeHelper
     }
 };
 
-void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, bool /*bFirstLine*/, int visibleTextWidth)
+void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleTextWidth)
 {
     QTextOption textOption;
 #if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
@@ -1063,7 +1063,7 @@ void DiffTextWindowData::writeLine(
         } // end for
 
         QTextLayout textLayout(lineString.mid(wrapLineOffset, lineLength - wrapLineOffset), m_pDiffTextWindow->font(), m_pDiffTextWindow);
-        prepareTextLayout(textLayout, !m_bWordWrap || wrapLineOffset == 0);
+        prepareTextLayout(textLayout);
         textLayout.draw(&p, QPoint(0, yOffset), frh /*, const QRectF & clip = QRectF() */);
     }
 
@@ -1656,7 +1656,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
                 QString s = d->getString(i);
                 textLayout.clearLayout();
                 textLayout.setText(s);
-                d->prepareTextLayout(textLayout, true, visibleTextWidth);
+                d->prepareTextLayout(textLayout, visibleTextWidth);
                 linesNeeded = textLayout.lineCount();
                 for(int l = 0; l < linesNeeded; ++l)
                 {
@@ -1747,7 +1747,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
                 return;
             textLayout.clearLayout();
             textLayout.setText(d->getString(i));
-            d->prepareTextLayout(textLayout, true);
+            d->prepareTextLayout(textLayout);
             if(textLayout.maximumWidth() > maxTextWidth)
                 maxTextWidth = qCeil(textLayout.maximumWidth());
         }
