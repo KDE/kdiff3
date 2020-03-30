@@ -527,11 +527,6 @@ void KDiff3App::scrollMergeResultWindow(int deltaX, int deltaY)
         m_pHScrollBar->setValue(m_pHScrollBar->value() + deltaX);
 }
 
-void KDiff3App::setDiff3Line(int line)
-{
-    DiffTextWindow::mVScrollBar->setValue(line);
-}
-
 void KDiff3App::sourceMask(int srcMask, int enabledMask)
 {
     chooseA->blockSignals(true);
@@ -587,7 +582,7 @@ void KDiff3App::initView()
     m_pOverview->setObjectName("Overview");
     pDiffHLayout->addWidget(m_pOverview);
 
-    connect(m_pOverview, &Overview::setLine, this, &KDiff3App::setDiff3Line);
+    connect(m_pOverview, &Overview::setLine, DiffTextWindow::mVScrollBar, &QScrollBar::setValue);
     connect(this, &KDiff3App::showWhiteSpaceToggled, m_pOverview, &Overview::slotRedraw);
     connect(this, &KDiff3App::changeOverViewMode, m_pOverview, &Overview::setOverviewMode);
 

@@ -220,7 +220,6 @@ class KDiff3App : public QSplitter
 
     void scrollDiffTextWindow(int deltaX, int deltaY);
     void scrollMergeResultWindow(int deltaX, int deltaY);
-    void setDiff3Line(int line);
     void sourceMask(int srcMask, int enabledMask);
 
     void slotDirShowBoth();
