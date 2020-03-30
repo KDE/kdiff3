@@ -174,7 +174,9 @@ void MergeResultWindow::setupConnections(const KDiff3App *app) const
     connect(this, &MergeResultWindow::scrollVertically, mVScrollBar, &QScrollBar::setValue);
     connect(this, &MergeResultWindow::scrollMergeResultWindow, app, &KDiff3App::scrollMergeResultWindow);
     connect(this, &MergeResultWindow::sourceMask, app, &KDiff3App::sourceMask);
-    connect(this, &MergeResultWindow::resizeSignal, app, &KDiff3App::resizeMergeResultWindow);
+    connect(this, &MergeResultWindow::resizeSignal, app, &KDiff3App::setHScrollBarRange);
+    connect(this, &MergeResultWindow::resizeSignal, this, &MergeResultWindow::slotResize);
+
     connect(this, &MergeResultWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
     connect(this, &MergeResultWindow::newSelection, app, &KDiff3App::slotSelectionStart);
     connect(this, &MergeResultWindow::modifiedChanged, app, &KDiff3App::slotOutputModified);
@@ -202,6 +204,12 @@ void MergeResultWindow::setupConnections(const KDiff3App *app) const
     connect(app, &KDiff3App::goNextDelta, this, &MergeResultWindow::slotGoNextDelta);
 
     connect(app, &KDiff3App::changeOverViewMode, this, &MergeResultWindow::setOverviewMode);
+}
+
+void MergeResultWindow::slotResize()
+{
+    mVScrollBar->setRange(0, std::max(0, getNofLines() - getNofVisibleLines()));
+    mVScrollBar->setPageStep(getNofVisibleLines());
 }
 
 void MergeResultWindow::showUnsolvedConflictsStatusMessage()

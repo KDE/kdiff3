@@ -120,6 +120,8 @@ public Q_SLOTS:
    void slotChooseCForUnsolvedWhiteSpaceConflicts() { chooseGlobal(e_SrcSelector::C, true, true); }
    void slotRefresh();
 
+   void slotResize();
+
  Q_SIGNALS:
    void statusBarMessage(const QString& message);
    void scrollVertically(QtNumberType deltaY);

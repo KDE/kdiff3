@@ -509,15 +509,6 @@ void KDiff3App::resizeDiffTextWindowHeight(int newHeight)
     setHScrollBarRange();
 }
 
-void KDiff3App::resizeMergeResultWindow()
-{
-    MergeResultWindow* p = m_pMergeResultWindow;
-    MergeResultWindow::mVScrollBar->setRange(0, std::max(0, p->getNofLines() - p->getNofVisibleLines()));
-    MergeResultWindow::mVScrollBar->setPageStep(p->getNofVisibleLines());
-
-    setHScrollBarRange();
-}
-
 void KDiff3App::scrollDiffTextWindow(int deltaX, int deltaY)
 {
     if(deltaY != 0 && DiffTextWindow::mVScrollBar != nullptr)

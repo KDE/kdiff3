@@ -212,7 +212,6 @@ class KDiff3App : public QSplitter
     void slotStatusMsg(const QString& text);
 
     void resizeDiffTextWindowHeight(int newHeight);
-    void resizeMergeResultWindow();
     void slotRecalcWordWrap();
     void postRecalcWordWrap();
     void slotFinishRecalcWordWrap(int visibleTextWidth);
@@ -280,6 +279,8 @@ class KDiff3App : public QSplitter
     void slotEncodingChanged(QTextCodec*);
 
     void slotFinishDrop();
+
+    void setHScrollBarRange();
   private:
     /** the configuration object of the application */
     //KConfig *config;
@@ -424,7 +425,6 @@ class KDiff3App : public QSplitter
     bool m_bAutoMode = false;
     void recalcWordWrap(int visibleTextWidthForPrinting = -1);
     bool m_bRecalcWordWrapPosted = false;
-    void setHScrollBarRange();
 
     int m_firstD3LIdx;                 // only needed during recalcWordWrap
     QPointer<QEventLoop> m_pEventLoopForPrinting;
