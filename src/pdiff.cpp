@@ -403,10 +403,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         {
             createCaption();
         }
-
-        //initialize wheel tracking to zero
-        m_iCumulativeWheelDelta = 0;
-
         m_bFinishMainInit = true; // call slotFinishMainInit after finishing the word wrap
         m_bLoadFiles = bLoadFiles;
         postRecalcWordWrap();

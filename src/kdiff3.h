@@ -426,7 +426,6 @@ class KDiff3App : public QSplitter
     bool m_bRecalcWordWrapPosted = false;
     void setHScrollBarRange();
 
-    int m_iCumulativeWheelDelta;
     int m_firstD3LIdx;                 // only needed during recalcWordWrap
     QPointer<QEventLoop> m_pEventLoopForPrinting;
 };
