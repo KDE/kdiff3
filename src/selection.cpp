@@ -8,7 +8,8 @@
 
 #include "selection.h"
 
-#include <limits.h>  // for INT_MAX
+#include "TypeUtils.h"
+
 #include <utility>   // for swap
 
 #include <QtGlobal>
@@ -57,7 +58,7 @@ int Selection::lastPosInLine(LineRef l)
 
     if(l == l2)
         return p2;
-    return INT_MAX;
+    return TYPE_MAX(int);
 }
 
 bool Selection::within(LineRef l, LineRef p)

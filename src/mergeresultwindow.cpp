@@ -2410,10 +2410,10 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             }
             break; // cursor movement
         case Qt::Key_End:
-            x = INT_MAX;
+            x = TYPE_MAX(int);
             if(bCtrl)
             {
-                y = INT_MAX;
+                y = TYPE_MAX(int);
             }
             break;
 
@@ -2427,7 +2427,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
                     if(newX == x && y > 0)
                     {
                         --y;
-                        x = INT_MAX;
+                        x = TYPE_MAX(int);
                     }
                     else
                     {
