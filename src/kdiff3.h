@@ -158,6 +158,8 @@ class KDiff3App : public QSplitter
     void goPrevDelta();
     void goNextDelta();
 
+    void cut();
+
     void changeOverViewMode(e_OverviewMode);
 
   protected:

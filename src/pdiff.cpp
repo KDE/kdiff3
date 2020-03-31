@@ -1051,21 +1051,7 @@ void KDiff3App::slotFileNameChanged(const QString& fileName, e_SrcSelector winId
 void KDiff3App::slotEditCut()
 {
     slotStatusMsg(i18n("Cutting selection..."));
-
-    QString s;
-    if(m_pMergeResultWindow != nullptr)
-    {
-        s = m_pMergeResultWindow->getSelection();
-        m_pMergeResultWindow->deleteSelection();
-
-        m_pMergeResultWindow->update();
-    }
-
-    if(!s.isEmpty())
-    {
-        QApplication::clipboard()->setText(s, QClipboard::Clipboard);
-    }
-
+    Q_EMIT cut();
     slotStatusMsg(i18n("Ready."));
 }
 

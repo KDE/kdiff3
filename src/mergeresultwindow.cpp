@@ -171,6 +171,8 @@ void MergeResultWindow::connectActions() const
 
 void MergeResultWindow::setupConnections(const KDiff3App *app) const
 {
+    connect(app, &KDiff3App::cut, this, &MergeResultWindow::slotCut);
+
     connect(this, &MergeResultWindow::scrollVertically, mVScrollBar, &QScrollBar::setValue);
     connect(this, &MergeResultWindow::scrollMergeResultWindow, app, &KDiff3App::scrollMergeResultWindow);
     connect(this, &MergeResultWindow::sourceMask, app, &KDiff3App::sourceMask);
@@ -210,6 +212,19 @@ void MergeResultWindow::slotResize()
 {
     mVScrollBar->setRange(0, std::max(0, getNofLines() - getNofVisibleLines()));
     mVScrollBar->setPageStep(getNofVisibleLines());
+}
+
+void MergeResultWindow::slotCut()
+{
+    QString s;
+    s = getSelection();
+    deleteSelection();
+    update();
+
+    if(!s.isEmpty())
+    {
+        QApplication::clipboard()->setText(s, QClipboard::Clipboard);
+    }
 }
 
 void MergeResultWindow::showUnsolvedConflictsStatusMessage()
