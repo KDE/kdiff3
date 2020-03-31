@@ -9,13 +9,15 @@
 #ifndef DIRECTORY_MERGE_WINDOW_H
 #define DIRECTORY_MERGE_WINDOW_H
 
-#include <QTreeWidget>
-#include <QEvent>
-#include <list>
-#include <map>
 #include "common.h"
 #include "fileaccess.h"
 #include "diff.h" //TotalDiffStatus
+
+#include <QTreeWidget>
+#include <QEvent>
+
+#include <list>
+#include <map>
 
 class Options;
 class KIconLoader;
@@ -38,11 +40,11 @@ class DirectoryMergeWindow : public QTreeView
  public:
    struct t_ItemInfo;
 
-   DirectoryMergeWindow( QWidget* pParent, const QSharedPointer<Options> &pOptions);
+   DirectoryMergeWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions);
    ~DirectoryMergeWindow() override;
    void setDirectoryMergeInfo(DirectoryMergeInfo* p);
    bool init(
-      const QSharedPointer<DirectoryInfo> &dirInfo,
+      const QSharedPointer<DirectoryInfo>& dirInfo,
       bool bDirectoryMerge,
       bool bReload = false
    );
@@ -51,16 +53,16 @@ class DirectoryMergeWindow : public QTreeView
    int totalColumnWidth();
    bool isSyncMode();
    bool isScanning();
-   void initDirectoryMergeActions( KDiff3App* pKDiff3App, KActionCollection* ac );
-   void updateAvailabilities( bool bDirCompare, bool bDiffWindowVisible,
-      KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC );
+   void initDirectoryMergeActions(KDiff3App* pKDiff3App, KActionCollection* ac);
+   void updateAvailabilities(bool bDirCompare, bool bDiffWindowVisible,
+      KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC);
    void updateFileVisibilities();
 
-   void mousePressEvent( QMouseEvent* e ) override;
-   void keyPressEvent( QKeyEvent* e ) override;
-   void focusInEvent( QFocusEvent* e ) override;
-   void focusOutEvent( QFocusEvent* e ) override;
-   void contextMenuEvent( QContextMenuEvent* e ) override;
+   void mousePressEvent(QMouseEvent* e) override;
+   void keyPressEvent(QKeyEvent* e) override;
+   void focusInEvent(QFocusEvent* e) override;
+   void focusOutEvent(QFocusEvent* e) override;
+   void contextMenuEvent(QContextMenuEvent* e) override;
 
    QString getDirNameA() const;
    QString getDirNameB() const;
@@ -114,14 +116,14 @@ class DirectoryMergeWindow : public QTreeView
    void slotLoadMergeState();
 
 Q_SIGNALS:
-   void startDiffMerge(const QString &fn1,const QString &fn2, const QString &fn3, const QString &ofn, const QString&, const QString&, const QString&,TotalDiffStatus*);
-   void checkIfCanContinue( bool& pbContinue );
+   void startDiffMerge(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn, const QString&, const QString&, const QString&, TotalDiffStatus*);
+   void checkIfCanContinue(bool& pbContinue);
    void updateAvailabilities();
-   void statusBarMessage( const QString& msg );
+   void statusBarMessage(const QString& msg);
 protected Q_SLOTS:
-   void onDoubleClick( const QModelIndex& );
+   void onDoubleClick(const QModelIndex&);
    void onExpanded();
-   void	currentChanged( const QModelIndex & current, const QModelIndex & previous ) override; // override
+   void currentChanged(const QModelIndex& current, const QModelIndex& previous) override; // override
 private:
   int getIntFromIndex(const QModelIndex& index) const;
   const QSharedPointer<Options>& getOptions() const;
@@ -135,17 +137,18 @@ class DirectoryMergeInfo : public QFrame
 {
    Q_OBJECT
 public:
-   explicit DirectoryMergeInfo( QWidget* pParent );
+   explicit DirectoryMergeInfo(QWidget* pParent);
    void setInfo(
       const FileAccess& dirA,
       const FileAccess& dirB,
       const FileAccess& dirC,
       const FileAccess& dirDest,
-      MergeFileInfos& mfi );
-   QTreeWidget* getInfoList() {return m_pInfoList;}
-   bool eventFilter( QObject* o, QEvent* e ) override;
+      MergeFileInfos& mfi);
+   QTreeWidget* getInfoList() { return m_pInfoList; }
+   bool eventFilter(QObject* o, QEvent* e) override;
 Q_SIGNALS:
    void gotFocus();
+
 private:
    void addListViewItem(const QString& dir, const QString& basePath, FileAccess* fi);
 
@@ -161,6 +164,5 @@ private:
 
    QTreeWidget* m_pInfoList;
 };
-
 
 #endif
