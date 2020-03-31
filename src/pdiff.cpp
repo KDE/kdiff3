@@ -1121,24 +1121,8 @@ void KDiff3App::slotEditPaste()
 
 void KDiff3App::slotEditSelectAll()
 {
-    LineRef l = 0;
-    int p = 0; // needed as dummy return values
-    if(m_pMergeResultWindow && m_pMergeResultWindow->hasFocus())
-    {
-        m_pMergeResultWindow->setSelection(0, 0, m_pMergeResultWindow->getNofLines(), 0);
-    }
-    else if(m_pDiffTextWindow1 && m_pDiffTextWindow1->hasFocus())
-    {
-        m_pDiffTextWindow1->setSelection(0, 0, m_pDiffTextWindow1->getNofLines(), 0, l, p);
-    }
-    else if(m_pDiffTextWindow2 && m_pDiffTextWindow2->hasFocus())
-    {
-        m_pDiffTextWindow2->setSelection(0, 0, m_pDiffTextWindow2->getNofLines(), 0, l, p);
-    }
-    else if(m_pDiffTextWindow3 && m_pDiffTextWindow3->hasFocus())
-    {
-        m_pDiffTextWindow3->setSelection(0, 0, m_pDiffTextWindow3->getNofLines(), 0, l, p);
-    }
+
+    Q_EMIT selectAll();
 
     slotStatusMsg(i18n("Ready."));
 }

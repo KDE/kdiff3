@@ -124,6 +124,8 @@ class MergeResultWindow : public QWidget
 
     void slotCut();
 
+    void slotSelectAll();
+
   Q_SIGNALS:
     void statusBarMessage(const QString& message);
     void scrollVertically(QtNumberType deltaY);

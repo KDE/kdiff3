@@ -172,6 +172,7 @@ void MergeResultWindow::connectActions() const
 void MergeResultWindow::setupConnections(const KDiff3App *app) const
 {
     connect(app, &KDiff3App::cut, this, &MergeResultWindow::slotCut);
+    connect(app, &KDiff3App::selectAll, this, &MergeResultWindow::slotSelectAll);
 
     connect(this, &MergeResultWindow::scrollVertically, mVScrollBar, &QScrollBar::setValue);
     connect(this, &MergeResultWindow::scrollMergeResultWindow, app, &KDiff3App::scrollMergeResultWindow);
@@ -224,6 +225,14 @@ void MergeResultWindow::slotCut()
     if(!s.isEmpty())
     {
         QApplication::clipboard()->setText(s, QClipboard::Clipboard);
+    }
+}
+
+void MergeResultWindow::slotSelectAll()
+{
+    if(hasFocus())
+    {
+        setSelection(0, 0, getNofLines(), 0);
     }
 }
 

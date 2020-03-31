@@ -160,6 +160,8 @@ class KDiff3App : public QSplitter
 
     void cut();
 
+    void selectAll();
+
     void changeOverViewMode(e_OverviewMode);
 
   protected:

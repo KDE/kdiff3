@@ -279,6 +279,7 @@ void DiffTextWindow::setupConnections(const KDiff3App *app) const
     connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
     connect(app, &KDiff3App::showLineNumbersToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
     connect(app, &KDiff3App::doRefresh, this, &DiffTextWindow::slotRefresh);
+    connect(app, &KDiff3App::selectAll, this, &DiffTextWindow::slotSelectAll);
 }
 
 void DiffTextWindow::reset()
@@ -294,6 +295,17 @@ void DiffTextWindow::slotRefresh()
 {
     setFont(d->getOptions()->m_font);
     update();
+}
+
+void DiffTextWindow::slotSelectAll()
+{
+    LineRef l = 0;
+    int p = 0; // needed as dummy return values
+
+    if(hasFocus())
+    {
+        setSelection(0, 0, getNofLines(), 0, l, p);
+    }
 }
 
 void DiffTextWindow::setPaintingAllowed(bool bAllowPainting)

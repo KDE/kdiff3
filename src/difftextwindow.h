@@ -120,6 +120,8 @@ class DiffTextWindow : public QWidget
     void setFastSelectorRange(int line1, int nofLines);
     void slotRefresh();
 
+    void slotSelectAll();
+
   protected:
     void mousePressEvent(QMouseEvent*) override;
     void mouseReleaseEvent(QMouseEvent*) override;
