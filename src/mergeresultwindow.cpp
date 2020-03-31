@@ -14,38 +14,35 @@
 #include "guiutils.h"
 #include "Utils.h"             // for Utils
 
-
+#include <QAction>
 #include <QApplication>
 #include <QClipboard>
 #include <QComboBox>
 #include <QCursor>
 #include <QDir>
+#include <QDropEvent>
+#include <QEvent>
 #include <QFile>
+#include <QFocusEvent>
 #include <QHBoxLayout>
+#include <QInputEvent>
 #include <QKeyEvent>
 #include <QLabel>
 #include <QLineEdit>
 #include <QtMath>
 #include <QMouseEvent>
+#include <QPaintEvent>
 #include <QPainter>
+#include <QPixmap>
+#include <QPointer>
 #include <QRegExp>
+#include <QResizeEvent>
 #include <QStatusBar>
 #include <QTextCodec>
 #include <QTextLayout>
 #include <QTextStream>
-#include <QUrl>
-
-#include <QAction>
-#include <QDropEvent>
-#include <QEvent>
-#include <QFocusEvent>
-#include <QInputEvent>
-#include <QMimeData>
-#include <QPaintEvent>
-#include <QPixmap>
-#include <QPointer>
-#include <QResizeEvent>
 #include <QTimerEvent>
+#include <QUrl>
 #include <QWheelEvent>
 
 #include <KActionCollection>
