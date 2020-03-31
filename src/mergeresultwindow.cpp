@@ -2849,8 +2849,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
     for(i = 0; i < len; ++i)
     {
         QChar c = clipBoard[i];
-        if(c == '\r') continue;
-        if(c == '\n')
+        if(c == '\n' || (c == '\r' && clipBoard[i+1] != '\n'))
         {
             melIt->setString(currentLine);
             MergeEditLine mel(mlIt->id3l); // Associate every mel with an id3l, even if not really valid.
@@ -2861,6 +2860,8 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
         }
         else
         {
+            if(c == '\r') continue;
+            
             currentLine += c;
             ++x;
         }
