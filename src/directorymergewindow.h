@@ -54,6 +54,8 @@ class DirectoryMergeWindow : public QTreeView
    bool isSyncMode();
    bool isScanning();
    void initDirectoryMergeActions(KDiff3App* pKDiff3App, KActionCollection* ac);
+
+   void setupConnections(const KDiff3App* app);
    void updateAvailabilities(bool bDirCompare, bool bDiffWindowVisible,
       KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC);
    void updateFileVisibilities();
@@ -114,6 +116,8 @@ class DirectoryMergeWindow : public QTreeView
 
    void slotSaveMergeState();
    void slotLoadMergeState();
+
+   inline void slotRefresh() { updateFileVisibilities(); };
 
 Q_SIGNALS:
    void startDiffMerge(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn, const QString&, const QString&, const QString&, TotalDiffStatus*);

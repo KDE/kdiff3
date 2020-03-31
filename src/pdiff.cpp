@@ -1326,10 +1326,6 @@ void KDiff3App::slotRefresh()
     {
         m_pDiffWindowSplitter->setOrientation(m_pOptions->m_bHorizDiffWindowSplitting ? Qt::Horizontal : Qt::Vertical);
     }
-    if(m_pDirectoryMergeWindow)
-    {
-        m_pDirectoryMergeWindow->updateFileVisibilities();
-    }
 }
 
 void KDiff3App::slotSelectionStart()

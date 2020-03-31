@@ -2993,6 +2993,17 @@ void DirectoryMergeWindow::initDirectoryMergeActions(KDiff3App* pKDiff3App, KAct
     d->m_pDirCurrentSyncMergeToAAndB = GuiUtils::createAction<QAction>(i18n("Merge to A && B"), this, &DirectoryMergeWindow::slotCurrentMergeToAAndB, ac, "dir_current_sync_merge_to_a_and_b");
 }
 
+void DirectoryMergeWindow::setupConnections(const KDiff3App* app)
+{
+    connect(this, &DirectoryMergeWindow::startDiffMerge, app, &KDiff3App::slotFileOpen2);
+    connect(selectionModel(), &QItemSelectionModel::selectionChanged, app, &KDiff3App::slotUpdateAvailabilities);
+    connect(selectionModel(), &QItemSelectionModel::currentChanged, app, &KDiff3App::slotUpdateAvailabilities);
+    connect(this, &DirectoryMergeWindow::checkIfCanContinue, app, &KDiff3App::slotCheckIfCanContinue);
+    connect(this, static_cast<void (DirectoryMergeWindow::*) (void)>(&DirectoryMergeWindow::updateAvailabilities), app, &KDiff3App::slotUpdateAvailabilities);
+    connect(this, &DirectoryMergeWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
+    connect(app, &KDiff3App::doRefresh, this, &DirectoryMergeWindow::slotRefresh);
+}
+
 void DirectoryMergeWindow::updateAvailabilities(bool bDirCompare, bool bDiffWindowVisible,
                                                 KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC)
 {

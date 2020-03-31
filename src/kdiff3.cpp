@@ -338,12 +338,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     m_pDirectoryMergeWindow->setDirectoryMergeInfo(m_pDirectoryMergeInfo);
     m_pDirectoryMergeSplitter->addWidget(m_pDirectoryMergeInfo);
     //Warning: Make sure DirectoryMergeWindow::initActions is called before this point or we can crash when selectionChanged is sent.
-    connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::startDiffMerge, this, &KDiff3App::slotFileOpen2);
-    connect(m_pDirectoryMergeWindow->selectionModel(), &QItemSelectionModel::selectionChanged, this, &KDiff3App::slotUpdateAvailabilities);
-    connect(m_pDirectoryMergeWindow->selectionModel(), &QItemSelectionModel::currentChanged, this, &KDiff3App::slotUpdateAvailabilities);
-    connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
-    connect(m_pDirectoryMergeWindow, static_cast<void (DirectoryMergeWindow::*) (void)>(&DirectoryMergeWindow::updateAvailabilities), this, &KDiff3App::slotUpdateAvailabilities);
-    connect(m_pDirectoryMergeWindow, &DirectoryMergeWindow::statusBarMessage, this, &KDiff3App::slotStatusMsg);
+    m_pDirectoryMergeWindow->setupConnections(this);
+
     connect(QApplication::clipboard(), &QClipboard::dataChanged, this, &KDiff3App::slotClipboardChanged);
     connect(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap, Qt::QueuedConnection);
     connect(this, &KDiff3App::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
