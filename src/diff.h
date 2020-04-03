@@ -109,7 +109,11 @@ class Diff
     inline void adjustDiff2(const qint64 delta) { mDiff2 += delta; }
 };
 
-typedef std::list<Diff> DiffList;
+class DiffList : public std::list<Diff>
+{
+  public:
+    bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2, const QSharedPointer<Options>& pOptions);
+};
 
 class LineData
 {

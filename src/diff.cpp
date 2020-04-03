@@ -586,7 +586,7 @@ int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& 
     return -1;
 }
 
-static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2, DiffList& diffList,
+bool DiffList::runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2,
                     const QSharedPointer<Options> &pOptions)
 {
     ProgressProxy pp;
@@ -594,14 +594,14 @@ static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef si
 
     pp.setCurrent(0);
 
-    diffList.clear();
+    clear();
     if(p1 == nullptr || (*p1)[index1].getLine() == nullptr || p2 == nullptr || (*p2)[index2].getLine() == nullptr || size1 == 0 || size2 == 0)
     {
         if(p1 != nullptr && p2 != nullptr && (*p1)[index1].getLine() == nullptr && (*p2)[index2].getLine() == nullptr && size1 == size2)
-            diffList.push_back(Diff(size1, 0, 0));
+            push_back(Diff(size1, 0, 0));
         else
         {
-            diffList.push_back(Diff(0, size1, size2));
+            push_back(Diff(0, size1, size2));
         }
     }
     else
@@ -632,35 +632,35 @@ static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef si
 
             currentLine1 += (LineRef)(d.numberOfEquals() + d.diff1());
             currentLine2 += (LineRef)(d.numberOfEquals() + d.diff2());
-            diffList.push_back(d);
+            push_back(d);
 
             p = e->link;
             free(e);
         }
 
-        if(diffList.empty())
+        if(empty())
         {
             qint32 numofEquals = std::min(size1, size2);
             Diff d(numofEquals, size1 - numofEquals, size2 - numofEquals);
 
-            diffList.push_back(d);
+            push_back(d);
         }
         else
         {
-            diffList.front().adjustNumberOfEquals(equalLinesAtStart);
+            front().adjustNumberOfEquals(equalLinesAtStart);
             currentLine1 += equalLinesAtStart;
             currentLine2 += equalLinesAtStart;
 
             LineCount nofEquals = std::min(size1 - currentLine1, size2 - currentLine2);
             if(nofEquals == 0)
             {
-                diffList.back().adjustDiff1(size1 - currentLine1);
-                diffList.back().adjustDiff2(size2 - currentLine2);
+                back().adjustDiff1(size1 - currentLine1);
+                back().adjustDiff2(size2 - currentLine2);
             }
             else
             {
                 Diff d(nofEquals, size1 - currentLine1 - nofEquals, size2 - currentLine2 - nofEquals);
-                diffList.push_back(d);
+                push_back(d);
             }
         }
     }
@@ -670,7 +670,7 @@ static bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef si
         LineRef::LineType l1 = 0;
         LineRef::LineType l2 = 0;
         DiffList::iterator i;
-        for(i = diffList.begin(); i != diffList.end(); ++i)
+        for(i = begin(); i != end(); ++i)
         {
             l1 += i->numberOfEquals() + i->diff1();
             l2 += i->numberOfEquals() + i->diff2();
@@ -703,7 +703,7 @@ bool ManualDiffHelpList::runDiff(const QVector<LineData>* p1, LineRef size1, con
 
         if(l1end.isValid() && l2end.isValid())
         {
-            ::runDiff(p1, l1begin, l1end - l1begin, p2, l2begin, l2end - l2begin, diffList2, pOptions);
+            diffList2.runDiff(p1, l1begin, l1end - l1begin, p2, l2begin, l2end - l2begin, pOptions);
             diffList.splice(diffList.end(), diffList2);
             l1begin = l1end;
             l2begin = l2end;
@@ -715,14 +715,14 @@ bool ManualDiffHelpList::runDiff(const QVector<LineData>* p1, LineRef size1, con
             {
                 ++l1end; // point to line after last selected line
                 ++l2end;
-                ::runDiff(p1, l1begin, l1end - l1begin, p2, l2begin, l2end - l2begin, diffList2, pOptions);
+                diffList2.runDiff(p1, l1begin, l1end - l1begin, p2, l2begin, l2end - l2begin, pOptions);
                 diffList.splice(diffList.end(), diffList2);
                 l1begin = l1end;
                 l2begin = l2end;
             }
         }
     }
-    ::runDiff(p1, l1begin, size1 - l1begin, p2, l2begin, size2 - l2begin, diffList2, pOptions);
+    diffList2.runDiff(p1, l1begin, size1 - l1begin, p2, l2begin, size2 - l2begin, pOptions);
     diffList.splice(diffList.end(), diffList2);
     return true;
 }
