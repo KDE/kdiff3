@@ -43,9 +43,8 @@ class DiffTextWindow : public QWidget
         const QVector<LineData>* pLineData,
         int size,
         const Diff3LineVector* pDiff3LineVector,
-        const ManualDiffHelpList* pManualDiffHelpList,
-        bool bTriple
-        );
+        const ManualDiffHelpList* pManualDiffHelpList
+    );
 
     void setupConnections(const KDiff3App *app) const;
 

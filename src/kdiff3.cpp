@@ -60,7 +60,7 @@
 #include <KToggleAction>
 #include <KToolBar>
 
-
+bool KDiff3App::m_bTripleDiff = false;
 
 #define ID_STATUS_MSG 1
 #define MAIN_TOOLBAR_NAME QLatin1String("mainToolBar")

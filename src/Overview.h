@@ -32,7 +32,7 @@ class Overview : public QWidget
   public:
     explicit Overview(const QSharedPointer<Options> &pOptions);
 
-    void init(Diff3LineList* pDiff3LineList, bool bTripleDiff);
+    void init(Diff3LineList* pDiff3LineList);
     void reset();
     void setRange(QtNumberType firstLine, QtNumberType pageHeight);
     void setPaintingAllowed(bool bAllowPainting);
@@ -49,7 +49,6 @@ class Overview : public QWidget
   private:
     const Diff3LineList* m_pDiff3LineList;
     QSharedPointer<Options> m_pOptions;
-    bool m_bTripleDiff;
     LineRef m_firstLine;
     int m_pageHeight;
     QPixmap m_pixmap;

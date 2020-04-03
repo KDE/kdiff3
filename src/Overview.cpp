@@ -8,6 +8,7 @@
 #include "Overview.h"
 
 #include "diff.h"
+#include "kdiff3.h"
 #include "options.h"
 
 #include <algorithm>    // for max
@@ -24,7 +25,6 @@ Overview::Overview(const QSharedPointer<Options> &pOptions)
 {
     m_pDiff3LineList = nullptr;
     m_pOptions = pOptions;
-    m_bTripleDiff = false;
     mOverviewMode = e_OverviewMode::eOMNormal;
     m_nofLines = 1;
     setUpdatesEnabled(false);
@@ -34,10 +34,9 @@ Overview::Overview(const QSharedPointer<Options> &pOptions)
     setFixedWidth(20);
 }
 
-void Overview::init(Diff3LineList* pDiff3LineList, bool bTripleDiff)
+void Overview::init(Diff3LineList* pDiff3LineList)
 {
     m_pDiff3LineList = pDiff3LineList;
-    m_bTripleDiff = bTripleDiff;
     m_pixmap = QPixmap(QSize(0, 0)); // make sure that a redraw happens
     update();
 }
@@ -129,7 +128,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         bool bConflict;
         bool bLineRemoved;
         e_SrcSelector src;
-        d3l.mergeOneLine(md, bConflict, bLineRemoved, src, !m_bTripleDiff);
+        d3l.mergeOneLine(md, bConflict, bLineRemoved, src, !KDiff3App::isTripleDiff());
 
         QColor c = m_pOptions->m_bgColor;
         bool bWhiteSpaceChange = false;
@@ -224,7 +223,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         int x2 = x;
         int w2 = w;
 
-        if(!m_bTripleDiff)
+        if(!KDiff3App::isTripleDiff())
         {
             if(!d3l.getLineA().isValid() && d3l.getLineB().isValid())
             {
@@ -287,7 +286,7 @@ void Overview::paintEvent(QPaintEvent*)
         QPainter p(&m_pixmap);
         p.fillRect(rect(), m_pOptions->m_bgColor);
 
-        if(!m_bTripleDiff || mOverviewMode == e_OverviewMode::eOMNormal)
+        if(!KDiff3App::isTripleDiff() || mOverviewMode == e_OverviewMode::eOMNormal)
         {
             drawColumn(p, e_OverviewMode::eOMNormal, 0, w, h, m_nofLines);
         }

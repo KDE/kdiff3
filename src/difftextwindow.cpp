@@ -126,7 +126,7 @@ class DiffTextWindowData
 
     void prepareTextLayout(QTextLayout& textLayout, int visibleTextWidth = -1);
 
-    bool isThreeWay() const { return m_bTriple; };
+    bool isThreeWay() const { return KDiff3App::isTripleDiff(); };
     const QString& getFileName() { return m_filename; }
 
     const Diff3LineVector* getDiff3LineVector() { return m_pDiff3LineVector; }
@@ -159,7 +159,6 @@ class DiffTextWindowData
     int m_fastSelectorLine1 = 0;
     int m_fastSelectorNofLines = 0;
 
-    bool m_bTriple = false;
     e_SrcSelector m_winIdx = e_SrcSelector::None;
     int m_firstLine = 0;
     int m_oldFirstLine = 0;
@@ -209,7 +208,7 @@ DiffTextWindow::DiffTextWindow(
     setAcceptDrops(true);
 
     d->m_pOptions = pOptions;
-    init(QString(""), nullptr, d->m_eLineEndStyle, nullptr, 0, nullptr, nullptr, false);
+    init(QString(""), nullptr, d->m_eLineEndStyle, nullptr, 0, nullptr, nullptr);
 
     setMinimumSize(QSize(20, 20));
 
@@ -232,8 +231,7 @@ void DiffTextWindow::init(
     const QVector<LineData>* pLineData,
     int size,
     const Diff3LineVector* pDiff3LineVector,
-    const ManualDiffHelpList* pManualDiffHelpList,
-    bool bTriple)
+    const ManualDiffHelpList* pManualDiffHelpList)
 {
     d->m_filename = filename;
     d->m_pLineData = pLineData;
@@ -245,7 +243,6 @@ void DiffTextWindow::init(
     d->m_firstLine = 0;
     d->m_oldFirstLine = -1;
     d->m_horizScrollOffset = 0;
-    d->m_bTriple = bTriple;
     d->m_scrollDeltaX = 0;
     d->m_scrollDeltaY = 0;
     d->m_bMyUpdate = false;
@@ -1235,7 +1232,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int beginL
         ChangeFlags changed2 = NoChange;
 
         LineRef srcLineIdx;
-        d3l->getLineInfo(m_winIdx, m_bTriple, srcLineIdx, pFineDiff1, pFineDiff2, changed, changed2);
+        d3l->getLineInfo(m_winIdx, KDiff3App::isTripleDiff(), srcLineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 
         writeLine(
             p,                                                             // QPainter
@@ -1265,7 +1262,7 @@ QString DiffTextWindowData::getString(int d3lIdx)
     ChangeFlags changed2 = NoChange;
     LineRef lineIdx;
 
-    d3l->getLineInfo(m_winIdx, m_bTriple, lineIdx, pFineDiff1, pFineDiff2, changed, changed2);
+    d3l->getLineInfo(m_winIdx, KDiff3App::isTripleDiff(), lineIdx, pFineDiff1, pFineDiff2, changed, changed2);
 
     if(!lineIdx.isValid())
         return QString();

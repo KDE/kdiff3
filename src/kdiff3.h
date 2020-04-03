@@ -128,7 +128,7 @@ class KDiff3App : public QSplitter
     virtual bool isFileSaved();
     virtual bool isDirComparison();
 
-    bool isTripleDiff() const { return m_bTripleDiff; }
+    static bool isTripleDiff() { return m_bTripleDiff; }
 
     KActionCollection* actionCollection() const;
   Q_SIGNALS:
@@ -365,7 +365,7 @@ class KDiff3App : public QSplitter
 
     MergeResultWindow* m_pMergeResultWindow = nullptr;
     WindowTitleWidget* m_pMergeResultWindowTitle;
-    bool m_bTripleDiff = false;
+    static bool m_bTripleDiff;
 
     QSplitter* m_pDirectoryMergeSplitter = nullptr;
     DirectoryMergeWindow* m_pDirectoryMergeWindow = nullptr;
