@@ -214,15 +214,12 @@ void MergeResultWindow::slotResize()
 
 void MergeResultWindow::slotCut()
 {
-    QString s;
-    s = getSelection();
+    const QString curSelection = getSelection();
+    Q_ASSERT(!curSelection.isEmpty() && hasFocus());
     deleteSelection();
     update();
 
-    if(!s.isEmpty())
-    {
-        QApplication::clipboard()->setText(s, QClipboard::Clipboard);
-    }
+    QApplication::clipboard()->setText(curSelection, QClipboard::Clipboard);
 }
 
 void MergeResultWindow::slotSelectAll()
@@ -241,7 +238,7 @@ void MergeResultWindow::showUnsolvedConflictsStatusMessage()
         int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
 
         m_persistentStatusMessage = i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)", nofUnsolved, wsc);
-        
+
         Q_EMIT statusBarMessage(m_persistentStatusMessage);
     }
 }
@@ -2866,7 +2863,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
         else
         {
             if(c == '\r') continue;
-            
+
             currentLine += c;
             ++x;
         }
