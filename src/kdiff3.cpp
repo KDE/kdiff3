@@ -65,7 +65,7 @@
 #define ID_STATUS_MSG 1
 #define MAIN_TOOLBAR_NAME QLatin1String("mainToolBar")
 
-KActionCollection* KDiff3App::actionCollection()
+KActionCollection* KDiff3App::actionCollection() const
 {
     if(m_pKDiff3Shell == nullptr)
         return m_pKDiff3Part->actionCollection();

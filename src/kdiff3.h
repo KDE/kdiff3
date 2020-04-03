@@ -128,6 +128,9 @@ class KDiff3App : public QSplitter
     virtual bool isFileSaved();
     virtual bool isDirComparison();
 
+    bool isTripleDiff() const { return m_bTripleDiff; }
+
+    KActionCollection* actionCollection() const;
   Q_SIGNALS:
     void createNewInstance(const QString& fn1, const QString& fn2, const QString& fn3);
 
@@ -419,7 +422,6 @@ class KDiff3App : public QSplitter
 
     void choose(e_SrcSelector choice);
 
-    KActionCollection* actionCollection();
     QStatusBar* statusBar();
     KToolBar* toolBar(QLatin1String);
     KDiff3Part* m_pKDiff3Part = nullptr;

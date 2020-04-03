@@ -2149,7 +2149,7 @@ void KDiff3App::slotUpdateAvailabilities()
     }
     if(m_pMergeResultWindow != nullptr)
     {
-        m_pMergeResultWindow->slotUpdateAvailabilities(bMergeEditorVisible, m_bTripleDiff);
+        m_pMergeResultWindow->slotUpdateAvailabilities(this);
     }
 
     mMergeHistory->setEnabled(bMergeEditorVisible);
