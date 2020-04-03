@@ -528,7 +528,7 @@ void KDiff3App::initActions(KActionCollection* ac)
     editCopy->setStatusTip(i18n("Copies the selected section to the clipboard"));
     editPaste = KStandardAction::paste(this, &KDiff3App::slotEditPaste, ac);
     editPaste->setStatusTip(i18n("Pastes the clipboard contents to current position"));
-    editCut->setShortcut(QKeySequence::Paste);
+    editPaste->setShortcut(QKeySequence::Paste);
     editSelectAll = KStandardAction::selectAll(this, &KDiff3App::slotEditSelectAll, ac);
     editSelectAll->setStatusTip(i18n("Select everything in current window"));
     editFind = KStandardAction::find(this, &KDiff3App::slotEditFind, ac);
