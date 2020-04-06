@@ -58,7 +58,7 @@ class MergeEditLine
         else if(m_src != e_SrcSelector::None)
         {
             mChanged = false;
-            m_str=QStringLiteral("");
+            m_str=QLatin1String("");
         }
     }
     e_SrcSelector src() { return m_src; }

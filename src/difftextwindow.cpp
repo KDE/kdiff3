@@ -947,7 +947,7 @@ void DiffTextWindowData::writeLine(
     int fontAscent = fm.ascent();
     int fontWidth = Utils::getHorizontalAdvance(fm, '0');
 
-    int xOffset = leftInfoWidth() * fontWidth - m_horizScrollOffset;
+    int xOffset = 0;
     int yOffset = (line - m_firstLine) * fontHeight;
 
     int fastSelectorLine1 = m_pDiffTextWindow->convertDiff3LineIdxToLine(m_fastSelectorLine1);
