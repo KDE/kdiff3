@@ -7,7 +7,7 @@ project(kdiff3)
 set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(ECM_MIN_VERSION "5.10.0")
-set(QT_MIN_VERSION "5.6.0")
+set(QT_MIN_VERSION "5.8.0")
 #KF5 5.27 fixes a crash bug triggered on exit.
 set(KF5_MIN_VERSION "5.27.0")
 
@@ -106,7 +106,7 @@ add_definitions(
     -DQT_RESTRICTED_CAST_FROM_ASCII #casting from char*/QByteArray to QString can produce unexpected results for non-latin characters.
     -DQT_NO_KEYWORDS
     -DQT_NO_CAST_TO_ASCII
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x050600#disable depriated api for Qt<5.6.
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050800#disable depriated api for Qt<5.8.
     #KF5 5.64+ flags
     #Don't warn for API depreciated after 5.26.0 (below as hex.hex.hex number)
     -DKF_DEPRECATED_WARNINGS_SINCE=0x051A00
