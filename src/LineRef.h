@@ -70,6 +70,12 @@ class LineRef
     LineType mLineNumber = -1;
 };
 
+/*
+    This is here because its easy to unknowingly break these conditions. The resulting
+    compiler errors are a bit cryptic if you aren't famialar with the C++ language.
+    Also some IDEs with clangd or ccls integration can automaticly check static_asserts
+    without doing a full compile.
+*/
 static_assert(std::is_copy_constructible<LineRef>::value, "LineRef must be copy constuctible.");
 static_assert(std::is_copy_assignable<LineRef>::value, "LineRef must copy assignable.");
 static_assert(std::is_move_constructible<LineRef>::value, "LineRef must be move constructible.");

@@ -7,6 +7,7 @@
 */
 
 #include "difftextwindow.h"
+#include "DirectoryInfo.h"
 #include "directorymergewindow.h"
 #include "fileaccess.h"
 #include "Logging.h"
@@ -14,7 +15,6 @@
 #include "optiondialog.h"
 #include "progress.h"
 #include "Utils.h"
-#include "DirectoryInfo.h"
 
 #include "mergeresultwindow.h"
 #include "smalldialogs.h"
@@ -26,8 +26,8 @@
 #include <QCheckBox>
 #include <QClipboard>
 #include <QComboBox>
-#include <QDir>
 #include <QDialog>
+#include <QDir>
 #include <QEvent> // QKeyEvent, QDropEvent, QInputEvent
 #include <QFile>
 #include <QLayout>
@@ -43,8 +43,8 @@
 #include <QUrl>
 
 #include <KLocalizedString>
-#include <KShortcutsDialog>
 #include <KMessageBox>
+#include <KShortcutsDialog>
 
 // Function uses setMinSize( sizeHint ) before adding the widget.
 // void addWidget(QBoxLayout* layout, QWidget* widget);
@@ -162,10 +162,10 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
 
             if(m_sd1->isText() && m_sd2->isText())
             {
-               pp.setInformation(i18n("Diff: A <-> B"));
-               qCInfo(kdiffMain) << i18n("Diff: A <-> B") ;
-               m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B,
-                        m_pOptionDialog->getOptions());
+                pp.setInformation(i18n("Diff: A <-> B"));
+                qCInfo(kdiffMain) << i18n("Diff: A <-> B");
+                m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B,
+                                             m_pOptionDialog->getOptions());
 
                 pp.step();
 
@@ -211,7 +211,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             if(m_sd1->isText() && m_sd2->isText())
             {
                 m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_diffList12, e_SrcSelector::A, e_SrcSelector::B,
-                        m_pOptionDialog->getOptions());
+                                             m_pOptionDialog->getOptions());
 
                 m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
             }
@@ -223,7 +223,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             if(m_sd1->isText() && m_sd3->isText())
             {
                 m_manualDiffHelpList.runDiff(m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(), m_sd3->getLineDataForDiff(), m_sd3->getSizeLines(), m_diffList13, e_SrcSelector::A, e_SrcSelector::C,
-                        m_pOptionDialog->getOptions());
+                                             m_pOptionDialog->getOptions());
 
                 m_diff3LineList.calcDiff3LineListUsingAC(&m_diffList13);
                 m_diff3LineList.correctManualDiffAlignment(&m_manualDiffHelpList);
@@ -237,7 +237,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             if(m_sd2->isText() && m_sd3->isText())
             {
                 m_manualDiffHelpList.runDiff(m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(), m_sd3->getLineDataForDiff(), m_sd3->getSizeLines(), m_diffList23, e_SrcSelector::B, e_SrcSelector::C,
-                        m_pOptionDialog->getOptions());
+                                             m_pOptionDialog->getOptions());
                 if(m_pOptions->m_bDiff3AlignBC)
                 {
                     m_diff3LineList.calcDiff3LineListUsingBC(&m_diffList23);
@@ -282,7 +282,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
 
             pp.setInformation(i18n("Linediff: A <-> C"));
             if(m_sd1->hasData() && m_sd3->hasData() && m_sd1->isText() && m_sd3->isText())
-              pTotalDiffStatus->setTextEqualAC(m_diff3LineList.fineDiff(e_SrcSelector::C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay()));
+                pTotalDiffStatus->setTextEqualAC(m_diff3LineList.fineDiff(e_SrcSelector::C, m_sd3->getLineDataForDisplay(), m_sd1->getLineDataForDisplay()));
             pp.step();
             if(m_sd1->getSizeBytes() == 0)
             {
@@ -304,9 +304,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
     if(errors.isEmpty() && m_sd1->isText() && m_sd2->isText())
     {
         m_diffBufferInfo->init(&m_diff3LineList, &m_diff3LineVector,
-                          m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(),
-                          m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(),
-                          m_sd3->getLineDataForDiff(), m_sd3->getSizeLines());
+                               m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(),
+                               m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(),
+                               m_sd3->getLineDataForDiff(), m_sd3->getSizeLines());
         Diff3Line::m_pDiffBufferInfo = m_diffBufferInfo;
 
         m_diff3LineList.calcWhiteDiff3Lines(m_sd1->getLineDataForDiff(), m_sd2->getLineDataForDiff(), m_sd3->getLineDataForDiff());
@@ -811,7 +811,7 @@ void KDiff3App::wheelEvent(QWheelEvent* pWheelEvent)
 {
     pWheelEvent->accept();
     QPoint delta = pWheelEvent->angleDelta();
-    
+
     //Block diagonal scrolling easily generated unintentionally with track pads.
     if(delta.x() != 0 && abs(delta.y()) < abs(delta.x()) && m_pHScrollBar != nullptr)
         QCoreApplication::postEvent(m_pHScrollBar, new QWheelEvent(*pWheelEvent));

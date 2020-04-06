@@ -132,6 +132,7 @@ class DiffTextWindowData
     const Diff3LineVector* getDiff3LineVector() { return m_pDiff3LineVector; }
 
     const QSharedPointer<Options>& getOptions() { return m_pOptions; }
+
   private:
     //TODO: Remove friend classes after creating accessors. Please don't add new classes here
     friend DiffTextWindow;
@@ -161,7 +162,7 @@ class DiffTextWindowData
 
     e_SrcSelector m_winIdx = e_SrcSelector::None;
     int m_firstLine = 0;
-    int m_oldFirstLine = 0;
+    int m_oldFirstLine = -1;
     int m_horizScrollOffset = 0;
     int m_lineNumberWidth = 0;
     QAtomicInt m_maxTextWidth = -1;
@@ -200,7 +201,6 @@ DiffTextWindow::DiffTextWindow(
 {
     setObjectName(QString("DiffTextWindow%1").arg((int)winIdx));
     setAttribute(Qt::WA_OpaquePaintEvent);
-    //setAttribute( Qt::WA_PaintOnScreen );
     setUpdatesEnabled(false);
 
     d = new DiffTextWindowData(this);
@@ -257,7 +257,7 @@ void DiffTextWindow::init(
     update();
 }
 
-void DiffTextWindow::setupConnections(const KDiff3App *app) const
+void DiffTextWindow::setupConnections(const KDiff3App* app) const
 {
     Q_ASSERT(qobject_cast<DiffTextWindowFrame*>(parent()) != nullptr);
 
@@ -270,7 +270,7 @@ void DiffTextWindow::setupConnections(const KDiff3App *app) const
     connect(this, &DiffTextWindow::finishRecalcWordWrap, app, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
     connect(this, &DiffTextWindow::checkIfCanContinue, app, &KDiff3App::slotCheckIfCanContinue);
     connect(this, &DiffTextWindow::finishDrop, app, &KDiff3App::slotFinishDrop);
-    
+
     connect(this, &DiffTextWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
 
     connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
@@ -296,7 +296,7 @@ void DiffTextWindow::slotRefresh()
 
 void DiffTextWindow::slotSelectAll()
 {
-    LineRef l = 0;
+    LineRef l;
     int p = 0; // needed as dummy return values
 
     if(hasFocus())
@@ -384,7 +384,7 @@ void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QS
                     --i;
                     break;
                 }
-            //QString s2 = s.left(i);
+
             painter.drawText(0, l * fm.height() + fm.ascent(), s.left(i));
             p += i;
             ++l;
@@ -791,7 +791,7 @@ void DiffTextWindow::convertToLinePos(int x, int y, LineRef& line, int& pos)
     int yOffset = -d->m_firstLine * fontHeight;
 
     line = (y - yOffset) / fontHeight;
-    if(line.isValid() && (!d->getOptions()->wordWrapOn()|| line < d->m_diff3WrapLineVector.count()))
+    if(line.isValid() && (!d->getOptions()->wordWrapOn() || line < d->m_diff3WrapLineVector.count()))
     {
         QString s = d->getLineString(line);
         QTextLayout textLayout(s, font(), this);
@@ -1000,7 +1000,7 @@ void DiffTextWindowData::writeLine(
                 case '\r':
                     lineString[lineString.length() - 1] = 0x00A4;
                     break; // Currency sign ;0x2761 "curved stem paragraph sign ornament"
-                    //case '\0b' : lineString[lineString.length()-1] = 0x2756; break; // some other nice looking character
+                //case '\0b' : lineString[lineString.length()-1] = 0x2756; break; // some other nice looking character
             }
         }
         QVector<ChangeFlags> charChanged(pld->size());
@@ -1815,6 +1815,7 @@ class DiffTextWindowFrameData
     const QLabel* getLabel() const { return m_pLabel; }
 
     const QSharedPointer<Options> getOptions() { return m_pOptions; }
+
   private:
     friend DiffTextWindowFrame;
     DiffTextWindow* m_pDiffTextWindow;
@@ -1902,11 +1903,11 @@ void DiffTextWindowFrame::init()
     }
 }
 
-void DiffTextWindowFrame::setupConnections(const KDiff3App *app)
+void DiffTextWindowFrame::setupConnections(const KDiff3App* app)
 {
     connect(this, &DiffTextWindowFrame::fileNameChanged, app, &KDiff3App::slotFileNameChanged);
     connect(this, &DiffTextWindowFrame::encodingChanged, app, &KDiff3App::slotEncodingChanged);
-    connect(this, &DiffTextWindowFrame::encodingChanged, d->mSourceData.data(), &SourceData::setEncoding);    
+    connect(this, &DiffTextWindowFrame::encodingChanged, d->mSourceData.data(), &SourceData::setEncoding);
 }
 
 // Search for the first visible line (search loop needed when no line exists for this file.)
