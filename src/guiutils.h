@@ -13,7 +13,7 @@
 #include <kactioncollection.h>
 
 namespace GuiUtils {
-   //Use std::enable_if since complires don't disabiguate overloads based on return type alone
+   //Use std::enable_if since compilers don't disabiguate overloads based on return type alone
    template <class T, class Receiver, class Func>
       inline typename std::enable_if<std::is_same<T, QAction>::value, QAction>::type* createAction(
        const QString& text,
