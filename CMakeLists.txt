@@ -1,5 +1,6 @@
 #cmake < 3.1 has no sane way of checking C++11 features and needed flags
-cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+#need at least 3.8 for cxx_std_11.
+cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
 project(kdiff3)
 
