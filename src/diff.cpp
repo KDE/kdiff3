@@ -71,7 +71,7 @@ bool LineData::equal(const LineData& l1, const LineData& l2)
             if(*p1 != *p2)
                 return false;
         }
-        
+
         return (p1 == p1End && p2 == p2End);
     }
     else
@@ -893,7 +893,7 @@ void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHe
 void Diff3LineList::calcDiff3LineListTrim(
     const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList)
 {
-    const Diff3Line d3l_empty;
+    const Diff3Line d3l_empty = Diff3Line();//gcc 6.3 is over zealous about insisisting on explict initialization of a const.
     remove(d3l_empty);
 
     Diff3LineList::iterator i3 = begin();
