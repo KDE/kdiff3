@@ -348,7 +348,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());
 
     delete KDiff3Shell::getParser();
-
 }
 
 void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)

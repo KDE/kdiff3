@@ -166,18 +166,7 @@ class KDiff3App : public QSplitter
     void selectAll();
 
     void changeOverViewMode(e_OverviewMode);
-
-  protected:
-    void setLockPainting(bool bLock);
-    void createCaption();
-    void initDirectoryMergeActions();
-    /** sets up the statusbar for the main window by initialzing a statuslabel. */
-    void initStatusBar();
-
-    /** creates the centerwidget of the KMainWindow instance and sets it as the view */
-    void initView();
-
-  public Q_SLOTS:
+public Q_SLOTS:
 
     /** open a file and load it into the document*/
     void slotFileOpen();
@@ -287,7 +276,35 @@ class KDiff3App : public QSplitter
     void slotFinishDrop();
 
     void setHScrollBarRange();
+
+  protected:
+    void setLockPainting(bool bLock);
+    void createCaption();
+    void initDirectoryMergeActions();
+    /** sets up the statusbar for the main window by initialzing a statuslabel. */
+    void initStatusBar();
+
+    /** creates the centerwidget of the KMainWindow instance and sets it as the view */
+    void initView();
+
   private:
+    void mainInit(TotalDiffStatus* pTotalDiffStatus = nullptr, bool bLoadFiles = true, bool bUseCurrentEncoding = false);
+
+    void mainWindowEnable(bool bEnable);
+    virtual void wheelEvent(QWheelEvent* pWheelEvent) override;
+    virtual void keyPressEvent(QKeyEvent* event) override;
+    void resizeEvent(QResizeEvent*) override;
+
+    bool improveFilenames(bool bCreateNewInstance);
+
+    bool canContinue();
+
+    void choose(e_SrcSelector choice);
+
+    QStatusBar* statusBar();
+    KToolBar* toolBar(QLatin1String);
+    void recalcWordWrap(int visibleTextWidthForPrinting = -1);
+
     /** the configuration object of the application */
     //KConfig *config;
 
@@ -407,28 +424,13 @@ class KDiff3App : public QSplitter
     QSharedPointer<Options> m_pOptions = nullptr;
     FindDialog* m_pFindDialog = nullptr;
 
-    void mainInit(TotalDiffStatus* pTotalDiffStatus = nullptr, bool bLoadFiles = true, bool bUseCurrentEncoding = false);
     bool m_bFinishMainInit = false;
     bool m_bLoadFiles = false;
 
-    void mainWindowEnable(bool bEnable);
-    virtual void wheelEvent(QWheelEvent* pWheelEvent) override;
-    virtual void keyPressEvent(QKeyEvent* event) override;
-    void resizeEvent(QResizeEvent*) override;
-
-    bool improveFilenames(bool bCreateNewInstance);
-
-    bool canContinue();
-
-    void choose(e_SrcSelector choice);
-
-    QStatusBar* statusBar();
-    KToolBar* toolBar(QLatin1String);
     KDiff3Part* m_pKDiff3Part = nullptr;
     KParts::MainWindow* m_pKDiff3Shell = nullptr;
     bool m_bAutoFlag = false;
     bool m_bAutoMode = false;
-    void recalcWordWrap(int visibleTextWidthForPrinting = -1);
     bool m_bRecalcWordWrapPosted = false;
 
     int m_firstD3LIdx;                 // only needed during recalcWordWrap

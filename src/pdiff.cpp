@@ -2147,6 +2147,7 @@ void KDiff3App::slotUpdateAvailabilities()
         chooseB->setEnabled(bMergeEditorVisible);
         chooseC->setEnabled(bMergeEditorVisible && m_bTripleDiff);
     }
+
     if(m_pMergeResultWindow != nullptr)
     {
         m_pMergeResultWindow->slotUpdateAvailabilities(this);
