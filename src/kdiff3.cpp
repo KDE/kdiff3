@@ -77,7 +77,7 @@ KActionCollection* KDiff3App::actionCollection() const
         return m_pKDiff3Shell->actionCollection();
 }
 
-QStatusBar* KDiff3App::statusBar()
+QStatusBar* KDiff3App::statusBar() const
 {
     if(m_pKDiff3Shell == nullptr)
         return nullptr;
@@ -85,7 +85,7 @@ QStatusBar* KDiff3App::statusBar()
         return m_pKDiff3Shell->statusBar();
 }
 
-KToolBar* KDiff3App::toolBar(const QLatin1String toolBarId)
+KToolBar* KDiff3App::toolBar(const QLatin1String &toolBarId) const
 {
     if(m_pKDiff3Shell == nullptr)
         return nullptr;
@@ -93,17 +93,17 @@ KToolBar* KDiff3App::toolBar(const QLatin1String toolBarId)
         return m_pKDiff3Shell->toolBar(toolBarId);
 }
 
-bool KDiff3App::isPart()
+bool KDiff3App::isPart() const
 {
     return m_pKDiff3Shell == nullptr;
 }
 
-bool KDiff3App::isFileSaved()
+bool KDiff3App::isFileSaved() const
 {
     return m_bFileSaved;
 }
 
-bool KDiff3App::isDirComparison()
+bool KDiff3App::isDirComparison() const
 {
     return m_bDirCompare;
 }

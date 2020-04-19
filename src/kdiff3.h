@@ -107,7 +107,7 @@ class KDiff3App : public QSplitter
     KDiff3App(QWidget* parent, const QString& name, KDiff3Part* pKDiff3Part);
     ~KDiff3App() override;
 
-    bool isPart();
+    bool isPart() const;
 
     /** initializes the KActions of the application */
     void initActions(KActionCollection*);
@@ -129,8 +129,8 @@ class KDiff3App : public QSplitter
      * @see KMainWindow#closeEvent
      */
     virtual bool queryClose();
-    virtual bool isFileSaved();
-    virtual bool isDirComparison();
+    virtual bool isFileSaved() const;
+    virtual bool isDirComparison() const;
 
     static bool isTripleDiff() { return m_bTripleDiff; }
 
@@ -304,8 +304,8 @@ public Q_SLOTS:
 
     void choose(e_SrcSelector choice);
 
-    QStatusBar* statusBar();
-    KToolBar* toolBar(QLatin1String);
+    QStatusBar* statusBar() const;
+    KToolBar* toolBar(const QLatin1String &toolBarId) const;
     void recalcWordWrap(int visibleTextWidthForPrinting = -1);
 
     /** the configuration object of the application */

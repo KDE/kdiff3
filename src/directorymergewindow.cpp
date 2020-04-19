@@ -686,7 +686,7 @@ void DirectoryMergeWindow::reload()
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
                                                                       int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges)
 {
-    MergeFileInfos* pMFI = getMFI(mi);
+    const MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI->hasDir())
     {
         ++nofDirs;
