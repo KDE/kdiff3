@@ -63,8 +63,11 @@
 bool KDiff3App::m_bTripleDiff = false;
 boost::signals2::signal<bool (), and> KDiff3App::shouldContinue;
 
-#define ID_STATUS_MSG 1
-#define MAIN_TOOLBAR_NAME QLatin1String("mainToolBar")
+/*
+    To be a constexpr the QLatin1String constructor must be given the size of the string explicitly.
+    Otherwise it calls strlen which is not a constexpr.
+*/
+constexpr QLatin1String MAIN_TOOLBAR_NAME = QLatin1String("mainToolBar", sizeof("mainToolBar"));
 
 KActionCollection* KDiff3App::actionCollection() const
 {
