@@ -128,7 +128,7 @@ class DiffTextWindow : public QWidget
     void wheelEvent(QWheelEvent*) override;
 
     void paintEvent(QPaintEvent*) override;
-    void dragEnterEvent(QDragEnterEvent* e) override;
+    void dragEnterEvent(QDragEnterEvent* dragEnterEvent) override;
 
     void dropEvent(QDropEvent* dropEvent) override;
     void focusInEvent(QFocusEvent* e) override;

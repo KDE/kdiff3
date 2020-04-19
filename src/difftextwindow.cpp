@@ -317,9 +317,9 @@ void DiffTextWindow::setPaintingAllowed(bool bAllowPainting)
     }
 }
 
-void DiffTextWindow::dragEnterEvent(QDragEnterEvent* e)
+void DiffTextWindow::dragEnterEvent(QDragEnterEvent* dragEnterEvent)
 {
-    e->setAccepted(e->mimeData()->hasUrls() || e->mimeData()->hasText());
+    dragEnterEvent->setAccepted(dragEnterEvent->mimeData()->hasUrls() || dragEnterEvent->mimeData()->hasText());
 }
 
 void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
