@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -33,7 +33,7 @@ class DiffTextWindow : public QWidget
   public:
     //Using this as a scoped global
     static QScrollBar* mVScrollBar;
-    
+
     DiffTextWindow(DiffTextWindowFrame* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx);
     ~DiffTextWindow() override;
     void init(
@@ -85,7 +85,7 @@ class DiffTextWindow : public QWidget
     const QString& getFileName() const;
 
     e_SrcSelector getWindowIndex() const;
-    
+
     const QString getEncodingDisplayString() const;
     e_LineEndStyle getLineEndStyle() const;
     const Diff3LineVector* getDiff3LineVector() const;
@@ -106,8 +106,6 @@ class DiffTextWindow : public QWidget
     void lineClicked(e_SrcSelector winIdx, LineRef line);
 
     void finishRecalcWordWrap(int visibleTextWidthForPrinting);
-
-    void checkIfCanContinue(bool& pbContinue);
 
     void finishDrop();
 

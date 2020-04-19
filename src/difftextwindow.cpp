@@ -268,7 +268,7 @@ void DiffTextWindow::setupConnections(const KDiff3App* app) const
     connect(this, &DiffTextWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
     connect(this, &DiffTextWindow::scrollDiffTextWindow, app, &KDiff3App::scrollDiffTextWindow);
     connect(this, &DiffTextWindow::finishRecalcWordWrap, app, &KDiff3App::slotFinishRecalcWordWrap, Qt::QueuedConnection);
-    connect(this, &DiffTextWindow::checkIfCanContinue, app, &KDiff3App::slotCheckIfCanContinue);
+
     connect(this, &DiffTextWindow::finishDrop, app, &KDiff3App::slotFinishDrop);
 
     connect(this, &DiffTextWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
@@ -330,9 +330,7 @@ void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
     {
         QList<QUrl> urlList = dropEvent->mimeData()->urls();
 
-        bool bShouldConintue = false;
-        Q_EMIT checkIfCanContinue(bShouldConintue);
-        if(bShouldConintue && !urlList.isEmpty())
+        if(KDiff3App::shouldContinue() && !urlList.isEmpty())
         {
             QString filename = urlList.first().toLocalFile();
 
@@ -344,10 +342,8 @@ void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
     else if(dropEvent->mimeData()->hasText())
     {
         QString text = dropEvent->mimeData()->text();
-        bool bShouldConintue = false;
-        Q_EMIT checkIfCanContinue(bShouldConintue);
 
-        if(bShouldConintue)
+        if(KDiff3App::shouldContinue())
         {
             QString error;
 

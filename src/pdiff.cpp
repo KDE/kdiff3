@@ -868,9 +868,7 @@ void KDiff3App::slotFinishDrop()
 
 void KDiff3App::slotFileOpen()
 {
-    bool bShouldConintue = false;
-    Q_EMIT checkIfCanContinue(bShouldConintue);
-    if(!bShouldConintue) return;
+    if(!shouldContinue()) return;
     //create dummy DirectoryInfo record for first run so we don't crash.
     if(m_dirinfo == nullptr)
         m_dirinfo = QSharedPointer<DirectoryInfo>::create();
@@ -968,9 +966,7 @@ void KDiff3App::slotFileOpen()
 void KDiff3App::slotFileOpen2(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
                               const QString& an1, const QString& an2, const QString& an3, TotalDiffStatus* pTotalDiffStatus)
 {
-    bool bShouldConintue = false;
-    Q_EMIT checkIfCanContinue(bShouldConintue);
-    if(!bShouldConintue) return;
+    if(!shouldContinue()) return;
 
     if(fn1.isEmpty() && fn2.isEmpty() && fn3.isEmpty() && ofn.isEmpty() && m_pMainWidget != nullptr)
     {
@@ -1081,9 +1077,7 @@ void KDiff3App::slotEditPaste()
     }
     else
     {
-        bool bShouldConintue = false;
-        Q_EMIT checkIfCanContinue(bShouldConintue);
-        if(bShouldConintue)
+        if(shouldContinue())
         {
             QString error;
             bool do_init = false;
@@ -1666,9 +1660,7 @@ bool KDiff3App::improveFilenames(bool bCreateNewInstance)
 
 void KDiff3App::slotReload()
 {
-    bool bShouldConintue = false;
-    Q_EMIT checkIfCanContinue(bShouldConintue);
-    if(!bShouldConintue) return;
+    if(!shouldContinue()) return;
 
     mainInit();
 }
@@ -1698,14 +1690,6 @@ bool KDiff3App::canContinue()
 
     m_bOutputModified = false;
     return true;
-}
-
-/*
-    Translate canContinue return value to out param because Qt does not support return values on slots.
-*/
-void KDiff3App::slotCheckIfCanContinue(bool& pbContinue)
-{
-    pbContinue = canContinue();
 }
 
 void KDiff3App::slotDirShowBoth()
@@ -1911,9 +1895,7 @@ void KDiff3App::slotMergeCurrentFile()
     }
     else if(m_pMainWidget != nullptr && m_pMainWidget->isVisible())
     {
-        bool bShouldConintue = false;
-        Q_EMIT checkIfCanContinue(bShouldConintue);
-        if(!bShouldConintue) return;
+        if(!shouldContinue()) return;
 
         if(m_outputFilename.isEmpty())
         {

@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -121,7 +121,6 @@ class DirectoryMergeWindow : public QTreeView
 
 Q_SIGNALS:
    void startDiffMerge(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn, const QString&, const QString&, const QString&, TotalDiffStatus*);
-   void checkIfCanContinue(bool& pbContinue);
    void updateAvailabilities();
    void statusBarMessage(const QString& msg);
 protected Q_SLOTS:

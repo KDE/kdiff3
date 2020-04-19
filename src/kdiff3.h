@@ -11,6 +11,10 @@
 
 #include "diff.h"
 
+#include "combiners.h"
+
+#include <boost/signals2.hpp>
+
 // include files for Qt
 #include <QAction>
 #include <QApplication>
@@ -131,12 +135,12 @@ class KDiff3App : public QSplitter
     static bool isTripleDiff() { return m_bTripleDiff; }
 
     KActionCollection* actionCollection() const;
+
+    static boost::signals2::signal<bool (), and> shouldContinue;
   Q_SIGNALS:
     void createNewInstance(const QString& fn1, const QString& fn2, const QString& fn3);
 
     void sigRecalcWordWrap();
-
-    void checkIfCanContinue(bool& pbContinue);
 
     void finishDrop();
 
@@ -251,7 +255,6 @@ public Q_SLOTS:
     void slotFinishMainInit();
     void slotMergeCurrentFile();
     void slotReload();
-    void slotCheckIfCanContinue(bool& pbContinue);
     void slotShowWhiteSpaceToggled();
     void slotShowLineNumbersToggled();
     void slotAutoAdvanceToggled();
@@ -435,6 +438,11 @@ public Q_SLOTS:
 
     int m_firstD3LIdx;                 // only needed during recalcWordWrap
     QPointer<QEventLoop> m_pEventLoopForPrinting;
+
+    /*
+      This list exists solely to auto disconnect boost signals.
+    */
+    std::list<boost::signals2::scoped_connection> connections;
 };
 
 #endif // KDIFF3_H

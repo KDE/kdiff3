@@ -61,6 +61,7 @@
 #include <KToolBar>
 
 bool KDiff3App::m_bTripleDiff = false;
+boost::signals2::signal<bool (), and> KDiff3App::shouldContinue;
 
 #define ID_STATUS_MSG 1
 #define MAIN_TOOLBAR_NAME QLatin1String("mainToolBar")
@@ -342,7 +343,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 
     connect(QApplication::clipboard(), &QClipboard::dataChanged, this, &KDiff3App::slotClipboardChanged);
     connect(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap, Qt::QueuedConnection);
-    connect(this, &KDiff3App::checkIfCanContinue, this, &KDiff3App::slotCheckIfCanContinue);
+    connections.push_back(shouldContinue.connect(boost::bind(&KDiff3App::canContinue, this)));
     connect(this, &KDiff3App::finishDrop, this, &KDiff3App::slotFinishDrop);
 
     m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());

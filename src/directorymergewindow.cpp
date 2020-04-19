@@ -766,9 +766,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     {
         // A full analysis uses the same resources that a normal text-diff/merge uses.
         // So make sure that the user saves his data first.
-        bool bCanContinue = false;
-        Q_EMIT mWindow->checkIfCanContinue(bCanContinue);
-        if(!bCanContinue)
+        if(!KDiff3App::shouldContinue())
             return false;
         Q_EMIT mWindow->startDiffMerge("", "", "", "", "", "", "", nullptr); // hide main window
     }
@@ -1986,11 +1984,7 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
 
 bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::canContinue()
 {
-    bool bCanContinue = false;
-
-    Q_EMIT mWindow->checkIfCanContinue(bCanContinue);
-
-    if(bCanContinue && !m_bError)
+    if(KDiff3App::shouldContinue() && !m_bError)
     {
         QModelIndex mi = (m_mergeItemList.empty() || m_currentIndexForOperation == m_mergeItemList.end()) ? QModelIndex() : *m_currentIndexForOperation;
         MergeFileInfos* pMFI = getMFI(mi);
@@ -2004,8 +1998,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::canContinue()
                 m_bRealMergeStarted = false;
             }
         }
+
+        return true;
     }
-    return bCanContinue;
+    return false;
 }
 
 bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(MergeFileInfos& mfi, bool& bSingleFileMerge)
@@ -2998,7 +2994,6 @@ void DirectoryMergeWindow::setupConnections(const KDiff3App* app)
     connect(this, &DirectoryMergeWindow::startDiffMerge, app, &KDiff3App::slotFileOpen2);
     connect(selectionModel(), &QItemSelectionModel::selectionChanged, app, &KDiff3App::slotUpdateAvailabilities);
     connect(selectionModel(), &QItemSelectionModel::currentChanged, app, &KDiff3App::slotUpdateAvailabilities);
-    connect(this, &DirectoryMergeWindow::checkIfCanContinue, app, &KDiff3App::slotCheckIfCanContinue);
     connect(this, static_cast<void (DirectoryMergeWindow::*) (void)>(&DirectoryMergeWindow::updateAvailabilities), app, &KDiff3App::slotUpdateAvailabilities);
     connect(this, &DirectoryMergeWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
     connect(app, &KDiff3App::doRefresh, this, &DirectoryMergeWindow::slotRefresh);
