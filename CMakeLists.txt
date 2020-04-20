@@ -79,7 +79,7 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
 endif()
 
 #new in cmake 3.6+ integrate clang-tidy
-if(ENABLE_CLANG_TIDY AND NOT ${CMAKE_VERSION} VERSION_LESS "3.6.0")
+if(ENABLE_CLANG_TIDY)
     find_program(CLANG_TIDY_EXE NAMES "clang-tidy" "clang-tidy-7" "clang-tidy-6.0" "clang-tidy-6" DOC "Path to clang-tidy executable")
     if(NOT CLANG_TIDY_EXE)
         message(STATUS "clang-tidy not found disabling integration.")
