@@ -2,13 +2,12 @@ stages:
   - build
   - test
 
-build_ubuntu_18_04:
+build_ubuntu_18_04-boost(1.66):
   stage: build
-  image: reporter123/cmake:bionic
-
-  before_script:
-     - apt-get update
-     - apt-get install -y libqt5test5 gettext qtbase5-dev extra-cmake-modules libkf5i18n-dev libkf5coreaddons-dev libkf5iconthemes-dev libkf5parts-dev libkf5doctools-dev libkf5crash-dev libboost-signals-dev
+  image: reporter123/kdiff3env:bionic
+  #before_script:
+  #   - apt-get update
+  #   - apt-get install -y libqt5test5 gettext qtbase5-dev extra-cmake-modules libkf5i18n-dev libkf5coreaddons-dev libkf5iconthemes-dev libkf5parts-dev libkf5doctools-dev libkf5crash-dev libboost-dev
   script:
     - cmake -DBUILD_TESTING=YES .
     - make
@@ -22,8 +21,8 @@ build_ubuntu_18_04:
 
 ubuntu_18_04_test:
     stage: test
-    needs: ["build_ubuntu_18_04"]
-    image: reporter123/cmake:bionic
+    needs: ["build_ubuntu_18_04-boost(1.66)"]
+    image: reporter123/kdiff3env:bionic
     before_script:
       - apt-get update
       - apt-get install -y libqt5test5
