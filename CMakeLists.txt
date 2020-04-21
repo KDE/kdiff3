@@ -30,7 +30,9 @@ include(ECMAddTests)
 
 ecm_setup_version(1.8.70 VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DIR}/src/version.h)
 
-find_package(Boost 1.61 REQUIRED COMPONENTS signals)
+# Some older versions on boost contain a bug that prevents compiling gcc offers a built-in workaround
+# but that isn't enough to ship as clang has no such workaround. 1.65 is known to be affected.
+find_package(Boost 1.66 REQUIRED)
 
 find_package(
     Qt5 ${QT_MIN_VERSION}
@@ -60,7 +62,7 @@ set_package_properties(KF5DocTools PROPERTIES PURPOSE "Allows generating and ins
 option(ENABLE_AUTO "Enable kdiff3's '--auto' flag" ON)
 option(ENABLE_CLANG_TIDY "Run clang-tidy if available and cmake version >=3.6" OFF)
 
-set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::IconThemes Boost::signals )
+set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::IconThemes )
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     #Adjust clang specific  warnings
