@@ -34,6 +34,9 @@ ecm_setup_version(1.8.70 VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DI
 # but that isn't enough to ship as clang has no such workaround. 1.65 is known to be affected.
 find_package(Boost 1.66 REQUIRED)
 
+#needed on craft and possiablely other custom setups.
+include_directories(${Boost_INCLUDE_DIRS})
+
 find_package(
     Qt5 ${QT_MIN_VERSION}
     CONFIG
