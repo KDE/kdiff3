@@ -84,7 +84,7 @@ class MergeResultWindow : public QWidget
     void setSelection(int firstLine, int startPos, int lastLine, int endPos);
     e_OverviewMode getOverviewMode();
 
-    void slotUpdateAvailabilities(const KDiff3App* app);
+    void slotUpdateAvailabilities();
 
   public Q_SLOTS:
     void setOverviewMode(e_OverviewMode eOverviewMode);

@@ -251,12 +251,12 @@ void MergeResultWindow::slotRefresh()
     update();
 }
 
-void MergeResultWindow::slotUpdateAvailabilities(const KDiff3App* app)
+void MergeResultWindow::slotUpdateAvailabilities()
 {
     const QWidget* frame = qobject_cast<QWidget*>(parent());
     Q_ASSERT(frame != nullptr);
     const bool bMergeEditorVisible = frame->isVisible();
-    const bool bTripleDiff = app->isTripleDiff();
+    const bool bTripleDiff = KDiff3App::isTripleDiff();
 
     chooseAEverywhere->setEnabled(bMergeEditorVisible);
     chooseBEverywhere->setEnabled(bMergeEditorVisible);

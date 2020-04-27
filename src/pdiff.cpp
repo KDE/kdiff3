@@ -2134,7 +2134,7 @@ void KDiff3App::slotUpdateAvailabilities()
     editCut->setEnabled(allowCut());
     if(m_pMergeResultWindow != nullptr)
     {
-        m_pMergeResultWindow->slotUpdateAvailabilities(this);
+        m_pMergeResultWindow->slotUpdateAvailabilities();
     }
 
     mMergeHistory->setEnabled(bMergeEditorVisible);
