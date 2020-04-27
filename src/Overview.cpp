@@ -277,11 +277,13 @@ void Overview::paintEvent(QPaintEvent*)
     int h = height() - 1;
     int w = width();
 
-    if(m_pixmap.size() != size())
+    const auto dpr = devicePixelRatioF();
+    if(m_pixmap.size() != size() * dpr)
     {
         m_nofLines = m_pDiff3LineList->numberOfLines(m_pOptions->wordWrapOn());
 
-        m_pixmap = QPixmap(size());
+        m_pixmap = QPixmap(size() * dpr);
+        m_pixmap.setDevicePixelRatio(dpr);
 
         QPainter p(&m_pixmap);
         p.fillRect(rect(), m_pOptions->m_bgColor);
