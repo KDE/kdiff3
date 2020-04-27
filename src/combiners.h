@@ -12,6 +12,27 @@
 
 #include <QtGlobal>
 
+struct or
+{
+    typedef bool result_type;
+    template <typename InputIterator> bool operator()(InputIterator first, InputIterator last) const
+    {
+        // If there are no slots to call, just return false
+        if(first == last) return true;
+
+        bool ret = *first++;
+        //return true if any slot returns true
+        while(first != last)
+        {
+            if(!ret)
+                ret = *first;
+            ++first;
+        }
+
+        return ret;
+    }
+};
+
 struct and
 {
     typedef bool result_type;

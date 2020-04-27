@@ -61,6 +61,8 @@
 #include <KToolBar>
 
 bool KDiff3App::m_bTripleDiff = false;
+
+boost::signals2::signal<bool (), or> KDiff3App::allowCut;
 boost::signals2::signal<bool (), and> KDiff3App::shouldContinue;
 
 /*

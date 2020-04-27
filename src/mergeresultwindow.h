@@ -16,6 +16,8 @@
 
 #include "selection.h"
 
+#include <boost/signals2.hpp>
+
 #include <QLineEdit>
 #include <QPointer>
 #include <QStatusBar>
@@ -47,7 +49,7 @@ class MergeResultWindow : public QWidget
         TotalDiffStatus* pTotalDiffStatus
     );
 
-    void setupConnections(const KDiff3App* app) const;
+    void setupConnections(const KDiff3App* app);
 
     inline void clearMergeList()
     {
@@ -238,6 +240,8 @@ class MergeResultWindow : public QWidget
     void wheelEvent(QWheelEvent* e) override;
     void focusInEvent(QFocusEvent* e) override;
 
+    bool allowCut() { return hasFocus() && !getSelection().isEmpty(); }
+
     QPixmap m_pixmap;
     LineRef m_firstLine = 0;
     int m_horizScrollOffset = 0;
@@ -264,6 +268,11 @@ class MergeResultWindow : public QWidget
     bool deleteSelection2(QString& str, int& x, int& y,
                           MergeLineList::iterator& mlIt, MergeEditLineList::iterator& melIt);
     bool doRelevantChangesExist();
+
+    /*
+      This list exists solely to auto disconnect boost signals.
+    */
+    std::list<boost::signals2::scoped_connection> connections;
   public Q_SLOTS:
     void deleteSelection();
     void pasteClipboard(bool bFromSelection);

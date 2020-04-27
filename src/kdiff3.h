@@ -136,6 +136,7 @@ class KDiff3App : public QSplitter
 
     KActionCollection* actionCollection() const;
 
+    static boost::signals2::signal<bool (), or> allowCut;
     static boost::signals2::signal<bool (), and> shouldContinue;
   Q_SIGNALS:
     void createNewInstance(const QString& fn1, const QString& fn2, const QString& fn3);

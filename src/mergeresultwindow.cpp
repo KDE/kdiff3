@@ -166,7 +166,7 @@ void MergeResultWindow::connectActions() const
     QObject::connect(chooseCForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseCForUnsolvedWhiteSpaceConflicts);
 }
 
-void MergeResultWindow::setupConnections(const KDiff3App *app) const
+void MergeResultWindow::setupConnections(const KDiff3App *app)
 {
     connect(app, &KDiff3App::cut, this, &MergeResultWindow::slotCut);
     connect(app, &KDiff3App::selectAll, this, &MergeResultWindow::slotSelectAll);
@@ -204,6 +204,8 @@ void MergeResultWindow::setupConnections(const KDiff3App *app) const
     connect(app, &KDiff3App::goNextDelta, this, &MergeResultWindow::slotGoNextDelta);
 
     connect(app, &KDiff3App::changeOverViewMode, this, &MergeResultWindow::setOverviewMode);
+
+    connections.push_back(KDiff3App::allowCut.connect(boost::bind(&MergeResultWindow::allowCut, this)));
 }
 
 void MergeResultWindow::slotResize()
