@@ -2130,7 +2130,6 @@ void KDiff3App::slotUpdateAvailabilities()
         chooseC->setEnabled(bMergeEditorVisible && m_bTripleDiff);
     }
 
-
     editCut->setEnabled(allowCut());
     if(m_pMergeResultWindow != nullptr)
     {

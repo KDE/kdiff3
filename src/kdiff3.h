@@ -281,6 +281,8 @@ public Q_SLOTS:
 
     void setHScrollBarRange();
 
+    void slotFocusChanged(QWidget *old, QWidget *now);
+
   protected:
     void setLockPainting(bool bLock);
     void createCaption();
@@ -308,6 +310,8 @@ public Q_SLOTS:
     QStatusBar* statusBar() const;
     KToolBar* toolBar(const QLatin1String &toolBarId) const;
     void recalcWordWrap(int visibleTextWidthForPrinting = -1);
+
+    bool canCut();
 
     /** the configuration object of the application */
     //KConfig *config;

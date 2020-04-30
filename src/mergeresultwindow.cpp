@@ -205,7 +205,7 @@ void MergeResultWindow::setupConnections(const KDiff3App *app)
 
     connect(app, &KDiff3App::changeOverViewMode, this, &MergeResultWindow::setOverviewMode);
 
-    connections.push_back(KDiff3App::allowCut.connect(boost::bind(&MergeResultWindow::allowCut, this)));
+    connections.push_back(KDiff3App::allowCut.connect(boost::bind(&MergeResultWindow::canCut, this)));
 }
 
 void MergeResultWindow::slotResize()
@@ -2146,6 +2146,8 @@ void MergeResultWindow::mouseReleaseEvent(QMouseEvent* e)
         {
             Q_EMIT selectionEnd();
         }
+
+        Q_EMIT updateAvailabilities();
     }
 }
 
@@ -2618,6 +2620,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     m_bCursorOn = true;
     m_cursorTimer.start(500);
 
+    Q_EMIT updateAvailabilities();
     update();
     if(newFirstLine != m_firstLine || newHorizScrollOffset != m_horizScrollOffset)
     {

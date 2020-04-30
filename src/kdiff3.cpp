@@ -351,9 +351,34 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     connections.push_back(shouldContinue.connect(boost::bind(&KDiff3App::canContinue, this)));
     connect(this, &KDiff3App::finishDrop, this, &KDiff3App::slotFinishDrop);
 
+    connections.push_back(allowCut.connect(boost::bind(&KDiff3App::canCut, this)));
     m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());
 
+    connect(qobject_cast<QApplication*>(QApplication::instance()), &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
+
     delete KDiff3Shell::getParser();
+}
+
+/*
+    This function is only concerned with qt objects that don't support canCut.
+    allowCut() or's the results from all canCut signals
+*/
+bool KDiff3App::canCut()
+{
+    QWidget* focus = focusWidget();
+
+    return (qobject_cast<QLineEdit*>(focus) != nullptr || qobject_cast<QTextEdit*>(focus) != nullptr);
+}
+
+/*
+    Make sure Edit menu tracks focus correctly.
+*/
+void KDiff3App::slotFocusChanged(QWidget* old, QWidget* now)
+{
+    Q_UNUSED(now);
+    Q_UNUSED(old);
+
+    slotUpdateAvailabilities();
 }
 
 void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)

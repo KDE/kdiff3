@@ -240,7 +240,7 @@ class MergeResultWindow : public QWidget
     void wheelEvent(QWheelEvent* e) override;
     void focusInEvent(QFocusEvent* e) override;
 
-    bool allowCut() { return hasFocus() && !getSelection().isEmpty(); }
+    bool canCut() { return hasFocus() && !getSelection().isEmpty(); }
 
     QPixmap m_pixmap;
     LineRef m_firstLine = 0;
