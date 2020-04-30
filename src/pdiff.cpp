@@ -1577,7 +1577,7 @@ void KDiff3App::slotClipboardChanged()
 {
     const QClipboard* clipboard = QApplication::clipboard();
     const QMimeData* mimeData = clipboard->mimeData();
-    if(mimeData->hasText())
+    if(mimeData && mimeData->hasText())
     {
         QString s = clipboard->text();
         editPaste->setEnabled(!s.isEmpty());
