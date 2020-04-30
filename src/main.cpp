@@ -77,7 +77,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 
 int main(int argc, char* argv[])
 {
-    const QLatin1String appName("kdiff3");
+    constexpr QLatin1String appName("kdiff3", sizeof("kdiff3") - 1);
 
     QApplication app(argc, argv); // KAboutData and QCommandLineParser depend on this being setup.
     KLocalizedString::setApplicationDomain(appName.data());

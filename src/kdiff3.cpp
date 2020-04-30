@@ -69,7 +69,7 @@ boost::signals2::signal<bool (), and> KDiff3App::shouldContinue;
     To be a constexpr the QLatin1String constructor must be given the size of the string explicitly.
     Otherwise it calls strlen which is not a constexpr.
 */
-constexpr QLatin1String MAIN_TOOLBAR_NAME = QLatin1String("mainToolBar", sizeof("mainToolBar"));
+constexpr QLatin1String MAIN_TOOLBAR_NAME = QLatin1String("mainToolBar", sizeof("mainToolBar") - 1);
 
 KActionCollection* KDiff3App::actionCollection() const
 {
@@ -354,7 +354,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     connections.push_back(allowCut.connect(boost::bind(&KDiff3App::canCut, this)));
     m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());
 
-    connect(qobject_cast<QApplication*>(QApplication::instance()), &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
+    if(qApp != nullptr)
+        connect(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
 
     delete KDiff3Shell::getParser();
 }
