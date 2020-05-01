@@ -578,7 +578,10 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
             //QPixmap icon = value.value<QPixmap>(); //pixmap(column);
             if(!icon.isNull())
             {
-                int yOffset = (sizeHint(option, index).height() - icon.height()) / 2;
+                const auto dpr = thePainter->device()->devicePixelRatioF();
+                const int w = qRound(icon.width() / dpr);
+                const int h = qRound(icon.height() / dpr);
+                int yOffset = (sizeHint(option, index).height() - h) / 2;
                 thePainter->drawPixmap(x + 2, y + yOffset, icon);
 
                 int i = m_pDMW->getIntFromIndex(index);
@@ -586,20 +589,20 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
                 {
                     QColor c(i == 1 ? getOptions()->m_colorA : i == 2 ? getOptions()->m_colorB : getOptions()->m_colorC);
                     thePainter->setPen(c); // highlight() );
-                    thePainter->drawRect(x + 2, y + yOffset, icon.width(), icon.height());
+                    thePainter->drawRect(x + 2, y + yOffset, w, h);
                     thePainter->setPen(QPen(c, 0, Qt::DotLine));
-                    thePainter->drawRect(x + 1, y + yOffset - 1, icon.width() + 2, icon.height() + 2);
+                    thePainter->drawRect(x + 1, y + yOffset - 1, w + 2, h + 2);
                     thePainter->setPen(Qt::white);
                     QString s(QChar('A' + i - 1));
 
-                    thePainter->drawText(x + 2 + (icon.width() - Utils::getHorizontalAdvance(thePainter->fontMetrics(), s)) / 2,
-                                         y + yOffset + (icon.height() + thePainter->fontMetrics().ascent()) / 2 - 1,
+                    thePainter->drawText(x + 2 + (w - Utils::getHorizontalAdvance(thePainter->fontMetrics(), s)) / 2,
+                                         y + yOffset + (h + thePainter->fontMetrics().ascent()) / 2 - 1,
                                          s);
                 }
                 else
                 {
                     thePainter->setPen(m_pDMW->palette().window().color());
-                    thePainter->drawRect(x + 1, y + yOffset - 1, icon.width() + 2, icon.height() + 2);
+                    thePainter->drawRect(x + 1, y + yOffset - 1, w + 2, h + 2);
                 }
                 return;
             }

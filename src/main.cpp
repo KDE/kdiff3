@@ -79,6 +79,7 @@ int main(int argc, char* argv[])
 {
     constexpr QLatin1String appName("kdiff3", sizeof("kdiff3") - 1);
 
+    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QApplication app(argc, argv); // KAboutData and QCommandLineParser depend on this being setup.
     KLocalizedString::setApplicationDomain(appName.data());
 

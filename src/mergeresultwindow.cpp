@@ -1883,8 +1883,11 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
     if(!m_bCursorUpdate) // Don't redraw everything for blinking cursor?
     {
         m_selection.bSelectionContainsData = false;
-        if(size() != m_pixmap.size())
-            m_pixmap = QPixmap(size());
+        const auto dpr = devicePixelRatioF();
+        if(size() * dpr != m_pixmap.size()) {
+            m_pixmap = QPixmap(size() * dpr);
+            m_pixmap.setDevicePixelRatio(dpr);
+        }
 
         RLPainter p(&m_pixmap, m_pOptions->m_bRightToLeftLanguage, width(), fontWidth);
         p.setFont(font());
