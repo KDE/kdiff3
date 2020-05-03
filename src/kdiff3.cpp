@@ -384,27 +384,6 @@ void KDiff3App::slotFocusChanged(QWidget* old, QWidget* now)
 
 void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)
 {
-    if(m_pKDiff3Shell != nullptr)
-    {
-        QSize size = m_pOptions->getGeometry();
-        QPoint pos = m_pOptions->getPosition();
-        if(!size.isEmpty())
-        {
-            m_pKDiff3Shell->resize(size);
-
-            QRect visibleRect = QRect(pos, size) & QApplication::desktop()->rect();
-            if(visibleRect.width() > 100 && visibleRect.height() > 100)
-                m_pKDiff3Shell->move(pos);
-            if(!m_bAutoMode)
-            {
-                //Here we want the extra setup showMaximized does since the window has not be shown before
-                if(m_pOptions->isMaximised())
-                    m_pKDiff3Shell->showMaximized();// krazy:exclude=qmethods
-                else
-                    m_pKDiff3Shell->show();
-            }
-        }
-    }
     if(!fn1.isEmpty()) {
         m_sd1->setFilename(fn1);
         m_bDirCompare = m_sd1->isDir();
@@ -475,13 +454,22 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     }
     m_bAutoMode = false;
 
-    if(m_pKDiff3Shell != nullptr)
+    KToggleFullScreenAction::setFullScreen(m_pKDiff3Shell, m_pOptions->isMaximised());
+
+    if(m_pKDiff3Shell != nullptr && !m_pKDiff3Shell->isVisible())
     {
-        if(m_pOptions->isMaximised())
-            //We want showMaximized here as the window has never been shown.
-            m_pKDiff3Shell->showMaximized();// krazy:exclude=qmethods
-        else
-            m_pKDiff3Shell->show();
+        QSize size = m_pOptions->getGeometry();
+        QPoint pos = m_pOptions->getPosition();
+        if(!size.isEmpty())
+        {
+            m_pKDiff3Shell->resize(size);
+
+            QRect visibleRect = QRect(pos, size) & QApplication::desktop()->rect();
+            if(visibleRect.width() > 100 && visibleRect.height() > 100)
+                m_pKDiff3Shell->move(pos);
+        }
+
+        m_pKDiff3Shell->show();
     }
 
     g_pProgressDialog->setStayHidden(false);

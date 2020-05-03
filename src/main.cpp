@@ -26,6 +26,7 @@
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QFile>
+#include <QPointer>
 #include <QStringList>
 #include <QStandardPaths>
 #include <QTextStream>
@@ -174,8 +175,13 @@ int main(int argc, char* argv[])
 
     aboutData.processCommandLine(cmdLineParser);
 
-    KDiff3Shell* p = new KDiff3Shell();
-    p->show();
+    /*
+      Do not attempt to call show here that will be done later.
+      This variable exists solely to insure the KDiff3Shell is deleted on exit.
+    */
+    QPointer<KDiff3Shell> p(new KDiff3Shell());
+    Q_UNUSED(p);
+
     //p->setWindowState( p->windowState() | Qt::WindowActive ); // Patch for ubuntu: window not active on startup
     //app.installEventFilter( new CFilter );
     int retVal = QApplication::exec();
