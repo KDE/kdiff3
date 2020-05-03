@@ -582,12 +582,12 @@ void KDiff3App::initView()
     m_pOverview->setObjectName("Overview");
     pDiffHLayout->addWidget(m_pOverview);
 
+    DiffTextWindow::mVScrollBar = new QScrollBar(Qt::Vertical, pDiffWindowFrame);
+    pDiffHLayout->addWidget(DiffTextWindow::mVScrollBar);
+
     connect(m_pOverview, &Overview::setLine, DiffTextWindow::mVScrollBar, &QScrollBar::setValue);
     connect(this, &KDiff3App::showWhiteSpaceToggled, m_pOverview, &Overview::slotRedraw);
     connect(this, &KDiff3App::changeOverViewMode, m_pOverview, &Overview::setOverviewMode);
-
-    DiffTextWindow::mVScrollBar = new QScrollBar(Qt::Vertical, pDiffWindowFrame);
-    pDiffHLayout->addWidget(DiffTextWindow::mVScrollBar);
 
     m_pDiffTextWindowFrame1 = new DiffTextWindowFrame(m_pDiffWindowSplitter, m_pOptionDialog->getOptions(), e_SrcSelector::A, m_sd1);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame1);
