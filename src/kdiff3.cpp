@@ -311,23 +311,18 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     wordWrap->setChecked(m_pOptions->wordWrapOn());
     if(!isPart())
     {
+        /*
+            No need to restore window size and position here that is done later.
+                See KDiff3App::completeInit
+        */
         viewStatusBar->setChecked(m_pOptions->isStatusBarVisable());
         slotViewStatusBar();
 
         KToolBar *mainToolBar = toolBar(MAIN_TOOLBAR_NAME);
         if(mainToolBar != nullptr){
-            mainToolBar->mainWindow()->addToolBar(m_pOptions->getToolbarPos(), mainToolBar);
+            mainToolBar->mainWindow()->addToolBar(Qt::TopToolBarArea, mainToolBar);
         }
-        //   TODO restore window size/pos?
-        /*      QSize size = m_pOptions->m_geometry;
-              QPoint pos = m_pOptions->m_position;
-              if(!size.isEmpty())
-              {
-                 m_pKDiff3Shell->resize( size );
-                 QRect visibleRect = QRect( pos, size ) & QApplication::desktop()->rect();
-                 if ( visibleRect.width()>100 && visibleRect.height()>100 )
-                    m_pKDiff3Shell->move( pos );
-              }*/
+
     }
     slotRefresh();
 
@@ -456,8 +451,11 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
     KToggleFullScreenAction::setFullScreen(m_pKDiff3Shell, m_pOptions->isMaximised());
 
-    if(m_pKDiff3Shell != nullptr && !m_pKDiff3Shell->isVisible())
+    if(!isPart() && !m_pKDiff3Shell->isVisible())
     {
+        /*
+            This is just an intital state before qt does a proper restore.
+        */
         QSize size = m_pOptions->getGeometry();
         QPoint pos = m_pOptions->getPosition();
         if(!size.isEmpty())
@@ -673,9 +671,6 @@ void KDiff3App::saveOptions(KSharedConfigPtr config)
                 m_pOptions->setGeometry(m_pKDiff3Shell->size());
                 m_pOptions->setPosition(m_pKDiff3Shell->pos());
             }
-            /*  TODO change this option as now KToolbar uses QToolbar positioning style
-                     if ( toolBar(MAIN_TOOLBAR_NAME)!=0 )
-                        m_pOptionDialog->m_toolBarPos = (int) toolBar(MAIN_TOOLBAR_NAME)->allowedAreas();*/
         }
 
         m_pOptionDialog->saveOptions(std::move(config));

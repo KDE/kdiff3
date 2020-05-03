@@ -17,10 +17,6 @@
 
 void Options::init()
 {
-    /*
-    TODO manage toolbar positioning
-   */
-    addOptionItem(new OptionNum<int>( Qt::TopToolBarArea, "ToolBarPos", (int*)&m_toolBarPos));
     addOptionItem(new OptionSize(QSize(600, 400), "Geometry", &m_geometry));
     addOptionItem(new OptionPoint(QPoint(0, 22), "Position", &m_position));
     addOptionItem(new OptionToggleAction(false, "WindowStateMaximised", &m_bMaximised));
@@ -79,7 +75,7 @@ void Options::readOptions(const KSharedConfigPtr config)
 
     if(m_whiteSpace2FileMergeDefault <= (int)e_SrcSelector::Min)
         m_whiteSpace2FileMergeDefault = (int)e_SrcSelector::None;
-    
+
     if(m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Max)
         m_whiteSpace2FileMergeDefault = (int)e_SrcSelector::C;
 }
@@ -88,7 +84,7 @@ void Options::readOptions(const KSharedConfigPtr config)
 const QString Options::parseOptions(const QStringList& optionList)
 {
     QString result;
-    
+
     for(const QString &optionString : optionList)
     {
         int pos = optionString.indexOf('=');
@@ -126,7 +122,7 @@ const QString Options::parseOptions(const QStringList& optionList)
 QString Options::calcOptionHelp()
 {
     ValueMap config;
-    
+
     for(OptionItemBase* item : mOptionItemList)
     {
         item->write(&config);

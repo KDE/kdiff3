@@ -59,7 +59,6 @@ public:
 
     void setMaximised(const bool maximised) { m_bMaximised = maximised;};
 
-    Qt::ToolBarArea getToolbarPos() const { return m_toolBarPos; }
 
     bool isToolBarVisable() const { return m_bShowToolBar; }
     void setToolbarState(bool inShown) { m_bShowToolBar = inShown; }
@@ -78,7 +77,6 @@ public:
     bool   m_bMaximised = false;
     bool   m_bShowToolBar = true;
     bool   m_bShowStatusBar = true;
-    Qt::ToolBarArea    m_toolBarPos = Qt::TopToolBarArea;
   public:
 
     // These are the results of the option dialog.
