@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -73,7 +73,7 @@ class LineRef
 /*
     This is here because its easy to unknowingly break these conditions. The resulting
     compiler errors are a bit cryptic if you aren't famialar with the C++ language.
-    Also some IDEs with clangd or ccls integration can automaticly check static_asserts
+    Also some IDEs with clangd or ccls integration can automatically check static_asserts
     without doing a full compile.
 */
 static_assert(std::is_copy_constructible<LineRef>::value, "LineRef must be copy constuctible.");
