@@ -18,17 +18,18 @@ class LineRef
 {
   public:
     typedef qint32 LineType;
-    inline LineRef() = default;
-    inline LineRef(const LineType i) { mLineNumber = i; }
-    inline LineRef(const qint64 i)
+    inline LineRef() noexcept = default;
+    inline LineRef(const LineType i) noexcept { mLineNumber = i; }
+    inline LineRef(const qint64 i) noexcept
     {
         if(i <= TYPE_MAX(LineType))
             mLineNumber = (LineType)i;
         else
             mLineNumber = -1;
     }
-    inline operator LineType() const { return mLineNumber; }
-    inline LineRef& operator=(const LineType lineIn) {
+    inline operator LineType() const noexcept { return mLineNumber; }
+    inline LineRef& operator=(const LineType lineIn) noexcept
+    {
         mLineNumber = lineIn;
         return *this;
     }
@@ -63,8 +64,8 @@ class LineRef
         --mLineNumber;
         return line;
     };
-    inline void invalidate() { mLineNumber = -1; }
-    inline bool isValid() const { return mLineNumber != -1; }
+    inline void invalidate() noexcept { mLineNumber = -1; }
+    inline bool isValid() const noexcept { return mLineNumber != -1; }
 
   private:
     LineType mLineNumber = -1;
