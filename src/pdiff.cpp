@@ -942,16 +942,6 @@ void KDiff3App::slotFileOpen()
                    (!m_sd2->isEmpty() && !m_sd2->hasData()) ||
                    (!m_sd3->isEmpty() && !m_sd3->hasData()))
                 {
-                    QString text(i18n("Opening of these files failed:"));
-                    text += "\n\n";
-                    if(!m_sd1->isEmpty() && !m_sd1->hasData())
-                        text += " - " + m_sd1->getAliasName() + '\n';
-                    if(!m_sd2->isEmpty() && !m_sd2->hasData())
-                        text += " - " + m_sd2->getAliasName() + '\n';
-                    if(!m_sd3->isEmpty() && !m_sd3->hasData())
-                        text += " - " + m_sd3->getAliasName() + '\n';
-
-                    KMessageBox::sorry(this, text, i18n("File open error"));
                     continue;
                 }
             }
