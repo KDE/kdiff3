@@ -359,8 +359,8 @@ bool FileAccess::exists() const
 {
     if(!isLocal())
         return m_bExists;
-    else
-        return m_fileInfo.exists();
+    else//Thank you git for being different.
+        return m_fileInfo.exists() && absoluteFilePath() != "/dev/null";
 }
 
 qint64 FileAccess::size() const
