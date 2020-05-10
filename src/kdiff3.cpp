@@ -457,7 +457,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     }
     m_bAutoMode = false;
 
-    KToggleFullScreenAction::setFullScreen(m_pKDiff3Shell, m_pOptions->m_bMaximised;
+    KToggleFullScreenAction::setFullScreen(m_pKDiff3Shell, m_pOptions->m_bMaximised);
 
     if(m_pKDiff3Shell && !m_pKDiff3Shell->isVisible())
     {
