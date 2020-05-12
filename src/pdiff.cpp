@@ -78,9 +78,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         if(!m_pOptions->m_PreProcessorCmd.isEmpty())
         {
             msg += "- " + i18n("PreprocessorCmd: ") + m_pOptions->m_PreProcessorCmd + '\n';
-        }
-        if(!msg.isEmpty())
-        {
             int result = KMessageBox::warningYesNo(this,
                                                    i18n("The following option(s) you selected might change data:\n") + msg +
                                                        i18n("\nMost likely this is not wanted during a merge.\n"
