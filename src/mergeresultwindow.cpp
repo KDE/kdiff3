@@ -8,6 +8,7 @@
 
 #include "mergeresultwindow.h"
 
+#include "defmac.h"
 #include "kdiff3.h"
 #include "options.h"
 #include "RLPainter.h"
@@ -76,12 +77,12 @@ MergeResultWindow::MergeResultWindow(
 
     m_pStatusBar = pStatusBar;
     if(m_pStatusBar != nullptr)
-        connect(m_pStatusBar, &QStatusBar::messageChanged, this, &MergeResultWindow::slotStatusMessageChanged);
+        chk_connect_a(m_pStatusBar, &QStatusBar::messageChanged, this, &MergeResultWindow::slotStatusMessageChanged);
 
     m_pOptions = pOptions;
     setUpdatesEnabled(false);
 
-    connect(&m_cursorTimer, &QTimer::timeout, this, &MergeResultWindow::slotCursorUpdate);
+    chk_connect_a(&m_cursorTimer, &QTimer::timeout, this, &MergeResultWindow::slotCursorUpdate);
     m_cursorTimer.setSingleShot(true);
     m_cursorTimer.start(500 /*ms*/);
     m_selection.reset();
@@ -153,57 +154,57 @@ void MergeResultWindow::initActions(KActionCollection* ac)
 
 void MergeResultWindow::connectActions() const
 {
-    QObject::connect(chooseAEverywhere, &QAction::triggered, this, &MergeResultWindow::slotChooseAEverywhere);
-    QObject::connect(chooseBEverywhere, &QAction::triggered, this, &MergeResultWindow::slotChooseBEverywhere);
-    QObject::connect(chooseCEverywhere, &QAction::triggered, this, &MergeResultWindow::slotChooseCEverywhere);
+    chk_connect_a(chooseAEverywhere, &QAction::triggered, this, &MergeResultWindow::slotChooseAEverywhere);
+    chk_connect_a(chooseBEverywhere, &QAction::triggered, this, &MergeResultWindow::slotChooseBEverywhere);
+    chk_connect_a(chooseCEverywhere, &QAction::triggered, this, &MergeResultWindow::slotChooseCEverywhere);
 
-    QObject::connect(chooseAForUnsolvedConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseAForUnsolvedConflicts);
-    QObject::connect(chooseBForUnsolvedConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseBForUnsolvedConflicts);
-    QObject::connect(chooseCForUnsolvedConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseCForUnsolvedConflicts);
+    chk_connect_a(chooseAForUnsolvedConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseAForUnsolvedConflicts);
+    chk_connect_a(chooseBForUnsolvedConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseBForUnsolvedConflicts);
+    chk_connect_a(chooseCForUnsolvedConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseCForUnsolvedConflicts);
 
-    QObject::connect(chooseAForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseAForUnsolvedWhiteSpaceConflicts);
-    QObject::connect(chooseBForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseBForUnsolvedWhiteSpaceConflicts);
-    QObject::connect(chooseCForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseCForUnsolvedWhiteSpaceConflicts);
+    chk_connect_a(chooseAForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseAForUnsolvedWhiteSpaceConflicts);
+    chk_connect_a(chooseBForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseBForUnsolvedWhiteSpaceConflicts);
+    chk_connect_a(chooseCForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseCForUnsolvedWhiteSpaceConflicts);
 }
 
 void MergeResultWindow::setupConnections(const KDiff3App *app)
 {
-    connect(app, &KDiff3App::cut, this, &MergeResultWindow::slotCut);
-    connect(app, &KDiff3App::selectAll, this, &MergeResultWindow::slotSelectAll);
+    chk_connect_a(app, &KDiff3App::cut, this, &MergeResultWindow::slotCut);
+    chk_connect_a(app, &KDiff3App::selectAll, this, &MergeResultWindow::slotSelectAll);
 
-    connect(this, &MergeResultWindow::scrollVertically, mVScrollBar, &QScrollBar::setValue);
-    connect(this, &MergeResultWindow::scrollMergeResultWindow, app, &KDiff3App::scrollMergeResultWindow);
-    connect(this, &MergeResultWindow::sourceMask, app, &KDiff3App::sourceMask);
-    connect(this, &MergeResultWindow::resizeSignal, app, &KDiff3App::setHScrollBarRange);
-    connect(this, &MergeResultWindow::resizeSignal, this, &MergeResultWindow::slotResize);
+    chk_connect_a(this, &MergeResultWindow::scrollVertically, mVScrollBar, &QScrollBar::setValue);
+    chk_connect_a(this, &MergeResultWindow::scrollMergeResultWindow, app, &KDiff3App::scrollMergeResultWindow);
+    chk_connect_a(this, &MergeResultWindow::sourceMask, app, &KDiff3App::sourceMask);
+    chk_connect_a(this, &MergeResultWindow::resizeSignal, app, &KDiff3App::setHScrollBarRange);
+    chk_connect_a(this, &MergeResultWindow::resizeSignal, this, &MergeResultWindow::slotResize);
 
-    connect(this, &MergeResultWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
-    connect(this, &MergeResultWindow::newSelection, app, &KDiff3App::slotSelectionStart);
-    connect(this, &MergeResultWindow::modifiedChanged, app, &KDiff3App::slotOutputModified);
-    connect(this, &MergeResultWindow::updateAvailabilities, app, &KDiff3App::slotUpdateAvailabilities);
-    connect(this, &MergeResultWindow::showPopupMenu, app, &KDiff3App::showPopupMenu);
-    connect(this, &MergeResultWindow::noRelevantChangesDetected, app, &KDiff3App::slotNoRelevantChangesDetected);
-    connect(this, &MergeResultWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
+    chk_connect_a(this, &MergeResultWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
+    chk_connect_a(this, &MergeResultWindow::newSelection, app, &KDiff3App::slotSelectionStart);
+    chk_connect_a(this, &MergeResultWindow::modifiedChanged, app, &KDiff3App::slotOutputModified);
+    chk_connect_a(this, &MergeResultWindow::updateAvailabilities, app, &KDiff3App::slotUpdateAvailabilities);
+    chk_connect_a(this, &MergeResultWindow::showPopupMenu, app, &KDiff3App::showPopupMenu);
+    chk_connect_a(this, &MergeResultWindow::noRelevantChangesDetected, app, &KDiff3App::slotNoRelevantChangesDetected);
+    chk_connect_a(this, &MergeResultWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
     //connect menu actions
-    connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (MergeResultWindow::*)(void)>(&MergeResultWindow::update));
-    connect(app, &KDiff3App::doRefresh, this, &MergeResultWindow::slotRefresh);
+    chk_connect_a(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (MergeResultWindow::*)(void)>(&MergeResultWindow::update));
+    chk_connect_a(app, &KDiff3App::doRefresh, this, &MergeResultWindow::slotRefresh);
 
-    connect(app, &KDiff3App::autoSolve, this, &MergeResultWindow::slotAutoSolve);
-    connect(app, &KDiff3App::unsolve, this, &MergeResultWindow::slotUnsolve);
-    connect(app, &KDiff3App::mergeHistory, this, &MergeResultWindow::slotMergeHistory);
-    connect(app, &KDiff3App::regExpAutoMerge, this, &MergeResultWindow::slotRegExpAutoMerge);
+    chk_connect_a(app, &KDiff3App::autoSolve, this, &MergeResultWindow::slotAutoSolve);
+    chk_connect_a(app, &KDiff3App::unsolve, this, &MergeResultWindow::slotUnsolve);
+    chk_connect_a(app, &KDiff3App::mergeHistory, this, &MergeResultWindow::slotMergeHistory);
+    chk_connect_a(app, &KDiff3App::regExpAutoMerge, this, &MergeResultWindow::slotRegExpAutoMerge);
 
-    connect(app, &KDiff3App::goCurrent, this, &MergeResultWindow::slotGoCurrent);
-    connect(app, &KDiff3App::goTop, this, &MergeResultWindow::slotGoTop);
-    connect(app, &KDiff3App::goBottom, this, &MergeResultWindow::slotGoBottom);
-    connect(app, &KDiff3App::goPrevUnsolvedConflict, this, &MergeResultWindow::slotGoPrevUnsolvedConflict);
-    connect(app, &KDiff3App::goNextUnsolvedConflict, this, &MergeResultWindow::slotGoNextUnsolvedConflict);
-    connect(app, &KDiff3App::goPrevConflict, this, &MergeResultWindow::slotGoPrevConflict);
-    connect(app, &KDiff3App::goNextConflict, this, &MergeResultWindow::slotGoNextConflict);
-    connect(app, &KDiff3App::goPrevDelta, this, &MergeResultWindow::slotGoPrevDelta);
-    connect(app, &KDiff3App::goNextDelta, this, &MergeResultWindow::slotGoNextDelta);
+    chk_connect_a(app, &KDiff3App::goCurrent, this, &MergeResultWindow::slotGoCurrent);
+    chk_connect_a(app, &KDiff3App::goTop, this, &MergeResultWindow::slotGoTop);
+    chk_connect_a(app, &KDiff3App::goBottom, this, &MergeResultWindow::slotGoBottom);
+    chk_connect_a(app, &KDiff3App::goPrevUnsolvedConflict, this, &MergeResultWindow::slotGoPrevUnsolvedConflict);
+    chk_connect_a(app, &KDiff3App::goNextUnsolvedConflict, this, &MergeResultWindow::slotGoNextUnsolvedConflict);
+    chk_connect_a(app, &KDiff3App::goPrevConflict, this, &MergeResultWindow::slotGoPrevConflict);
+    chk_connect_a(app, &KDiff3App::goNextConflict, this, &MergeResultWindow::slotGoNextConflict);
+    chk_connect_a(app, &KDiff3App::goPrevDelta, this, &MergeResultWindow::slotGoPrevDelta);
+    chk_connect_a(app, &KDiff3App::goNextDelta, this, &MergeResultWindow::slotGoNextDelta);
 
-    connect(app, &KDiff3App::changeOverViewMode, this, &MergeResultWindow::setOverviewMode);
+    chk_connect_a(app, &KDiff3App::changeOverViewMode, this, &MergeResultWindow::setOverviewMode);
 
     connections.push_back(KDiff3App::allowCut.connect(boost::bind(&MergeResultWindow::canCut, this)));
 }
@@ -3063,7 +3064,7 @@ WindowTitleWidget::WindowTitleWidget(const QSharedPointer<Options> &pOptions)
 
     //m_pBrowseButton = new QPushButton("...");
     //pHLayout->addWidget( m_pBrowseButton, 0 );
-    //connect( m_pBrowseButton, &QPushButton::clicked), this, &MergeResultWindow::slotBrowseButtonClicked);
+    //chk_connect_a( m_pBrowseButton, &QPushButton::clicked), this, &MergeResultWindow::slotBrowseButtonClicked);
 
     m_pModifiedLabel = new QLabel(i18n("[Modified]"));
     pHLayout->addWidget(m_pModifiedLabel);

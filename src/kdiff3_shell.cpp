@@ -53,7 +53,7 @@ KDiff3Shell::KDiff3Shell(bool bCompleteInit)
 
         if(bCompleteInit)
             m_widget->completeInit(QString());
-        connect(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
+        chk_connect_a(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
     }
     else
     {
@@ -141,7 +141,7 @@ void KDiff3Shell::optionsConfigureToolbars()
 
     // use the standard toolbar editor
     KEditToolBar dlg(factory());
-    connect(&dlg, &KEditToolBar::newToolBarConfig, this, &KDiff3Shell::applyNewToolbarConfig);
+    chk_connect_a(&dlg, &KEditToolBar::newToolBarConfig, this, &KDiff3Shell::applyNewToolbarConfig);
     dlg.exec();
 }
 

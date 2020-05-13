@@ -9,6 +9,7 @@
 #ifndef GUIUTILS_H
 #define GUIUTILS_H
 
+#include "defmac.h"
 #include <QObject>
 #include <kactioncollection.h>
 
@@ -27,7 +28,7 @@ namespace GuiUtils {
 
        theAction = ac->addAction(actionName);
        theAction->setText(text);
-       QObject::connect(theAction, &QAction::triggered, receiver, slot);
+       chk_connect_a(theAction, &QAction::triggered, receiver, slot);
        return theAction;
    }
 
@@ -42,7 +43,7 @@ namespace GuiUtils {
       KToggleAction* theAction = new KToggleAction(ac);
       ac->addAction( actionName, theAction );
       theAction->setText( text );
-      QObject::connect( theAction, &KToggleAction::triggered, receiver, slot );
+      chk_connect_a( theAction, &KToggleAction::triggered, receiver, slot );
       return theAction;
    }
 

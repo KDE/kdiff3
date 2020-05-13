@@ -67,7 +67,7 @@ class StatusInfo : public QDialog
         m_pTextEdit->setWordWrapMode(QTextOption::NoWrap);
         m_pTextEdit->setReadOnly(true);
         QDialogButtonBox* box = new QDialogButtonBox(QDialogButtonBox::Close, this);
-        connect(box, &QDialogButtonBox::rejected, this, &QDialog::accept);
+        chk_connect_a(box, &QDialogButtonBox::rejected, this, &QDialog::accept);
         pVLayout->addWidget(box);
     }
 
@@ -628,8 +628,8 @@ DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointe
     d = new DirectoryMergeWindowPrivate(this);
     setModel(d);
     setItemDelegate(new DirMergeItemDelegate(this));
-    connect(this, &DirectoryMergeWindow::doubleClicked, this, &DirectoryMergeWindow::onDoubleClick);
-    connect(this, &DirectoryMergeWindow::expanded, this, &DirectoryMergeWindow::onExpanded);
+    chk_connect_a(this, &DirectoryMergeWindow::doubleClicked, this, &DirectoryMergeWindow::onDoubleClick);
+    chk_connect_a(this, &DirectoryMergeWindow::expanded, this, &DirectoryMergeWindow::onExpanded);
 
     d->m_pOptions = pOptions;
 
@@ -2994,12 +2994,12 @@ void DirectoryMergeWindow::initDirectoryMergeActions(KDiff3App* pKDiff3App, KAct
 
 void DirectoryMergeWindow::setupConnections(const KDiff3App* app)
 {
-    connect(this, &DirectoryMergeWindow::startDiffMerge, app, &KDiff3App::slotFileOpen2);
-    connect(selectionModel(), &QItemSelectionModel::selectionChanged, app, &KDiff3App::slotUpdateAvailabilities);
-    connect(selectionModel(), &QItemSelectionModel::currentChanged, app, &KDiff3App::slotUpdateAvailabilities);
-    connect(this, static_cast<void (DirectoryMergeWindow::*) (void)>(&DirectoryMergeWindow::updateAvailabilities), app, &KDiff3App::slotUpdateAvailabilities);
-    connect(this, &DirectoryMergeWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
-    connect(app, &KDiff3App::doRefresh, this, &DirectoryMergeWindow::slotRefresh);
+    chk_connect_a(this, &DirectoryMergeWindow::startDiffMerge, app, &KDiff3App::slotFileOpen2);
+    chk_connect_a(selectionModel(), &QItemSelectionModel::selectionChanged, app, &KDiff3App::slotUpdateAvailabilities);
+    chk_connect_a(selectionModel(), &QItemSelectionModel::currentChanged, app, &KDiff3App::slotUpdateAvailabilities);
+    chk_connect_a(this, static_cast<void (DirectoryMergeWindow::*) (void)>(&DirectoryMergeWindow::updateAvailabilities), app, &KDiff3App::slotUpdateAvailabilities);
+    chk_connect_a(this, &DirectoryMergeWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
+    chk_connect_a(app, &KDiff3App::doRefresh, this, &DirectoryMergeWindow::slotRefresh);
 }
 
 void DirectoryMergeWindow::updateAvailabilities(bool bDirCompare, bool bDiffWindowVisible,
