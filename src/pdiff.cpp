@@ -69,33 +69,29 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
     //bool bPreserveCarriageReturn = m_pOptions->m_bPreserveCarriageReturn;
 
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
-    if(bVisibleMergeResultWindow && bGUI)
+    if(bGUI)
     {
-        //bPreserveCarriageReturn = false;
-
-        QString msg;
-
-        if(!m_pOptions->m_PreProcessorCmd.isEmpty())
+        if(bVisibleMergeResultWindow && !m_pOptions->m_PreProcessorCmd.isEmpty())
         {
-            msg += "- " + i18n("PreprocessorCmd: ") + m_pOptions->m_PreProcessorCmd + '\n';
+            QString msg = "- " + i18n("PreprocessorCmd: ") + m_pOptions->m_PreProcessorCmd + '\n';
             int result = KMessageBox::warningYesNo(this,
-                                                   i18n("The following option(s) you selected might change data:\n") + msg +
-                                                       i18n("\nMost likely this is not wanted during a merge.\n"
-                                                            "Do you want to disable these settings or continue with these settings active?"),
-                                                   i18n("Option Unsafe for Merging"),
-                                                   KGuiItem(i18n("Use These Options During Merge")),
-                                                   KGuiItem(i18n("Disable Unsafe Options")));
+                i18n("The following option(s) you selected might change data:\n") + msg +
+                    i18n("\nMost likely this is not wanted during a merge.\n"
+                         "Do you want to disable these settings or continue with these settings active?"),
+                i18n("Option Unsafe for Merging"),
+                KGuiItem(i18n("Use These Options During Merge")),
+                KGuiItem(i18n("Disable Unsafe Options")));
 
             if(result == KMessageBox::No)
             {
                 m_pOptions->m_PreProcessorCmd = "";
             }
         }
-    }
 
-    // Because of the progressdialog paintevents can occur, but data is invalid,
-    // so painting must be suppressed
-    if(bGUI) setLockPainting(true);
+        // Because of the progressdialog paintevents can occur, but data is invalid,
+        // so painting must be suppressed
+        setLockPainting(true);
+    }
 
     //insure merge result window never has stale iterators.
     if(m_pMergeResultWindow) m_pMergeResultWindow->clearMergeList();
