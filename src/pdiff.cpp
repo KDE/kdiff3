@@ -116,11 +116,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         else
             errors = m_sd1->readAndPreprocess(m_pOptions->m_pEncodingA, m_pOptions->m_bAutoDetectUnicodeA);
 
-        if(!errors.isEmpty())
-        {
-            KMessageBox::errorList(m_pOptionDialog, i18n("Errors occurred during pre-processing of file A."), errors);
-        }
-
         pp.step();
 
         pp.setInformation(i18n("Loading B"));
@@ -130,9 +125,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             errors = m_sd2->readAndPreprocess(m_sd2->getEncoding(), false);
         else
             errors = m_sd2->readAndPreprocess(m_pOptions->m_pEncodingB, m_pOptions->m_bAutoDetectUnicodeB);
-
-        if(!errors.isEmpty())
-            KMessageBox::errorList(m_pOptionDialog, i18n("Errors occurred during pre-processing of file B."), errors);
 
         pp.step();
     }
@@ -187,9 +179,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                     errors = m_sd3->readAndPreprocess(m_sd3->getEncoding(), false);
                 else
                     errors = m_sd3->readAndPreprocess(m_pOptions->m_pEncodingC, m_pOptions->m_bAutoDetectUnicodeC);
-
-                if(!errors.isEmpty())
-                    KMessageBox::errorList(m_pOptionDialog, i18n("Errors occurred during pre-processing of file C."), errors);
 
                 pp.step();
             }
@@ -931,10 +920,21 @@ void KDiff3App::slotFileOpen()
                 m_pDirectoryMergeSplitter->hide();
                 mainInit();
 
-                if((!m_sd1->isEmpty() && !m_sd1->hasData()) ||
-                   (!m_sd2->isEmpty() && !m_sd2->hasData()) ||
-                   (!m_sd3->isEmpty() && !m_sd3->hasData()))
+                if((!m_sd1->getErrors().isEmpty()) ||
+                   (!m_sd2->getErrors().isEmpty()) ||
+                   (!m_sd3->getErrors().isEmpty()))
                 {
+                    QString text(i18n("Opening of these files failed:"));
+                    text += "\n\n";
+                    if(!m_sd1->getErrors().isEmpty())
+                        text += " - " + m_sd1->getAliasName() + '\n' + m_sd1->getErrors().join('\n') + '\n';
+                    if(!m_sd2->getErrors().isEmpty())
+                        text += " - " + m_sd2->getAliasName() + '\n' + m_sd2->getErrors().join('\n') + '\n';
+                    if(!m_sd3->getErrors().isEmpty())
+                        text += " - " + m_sd3->getAliasName() + '\n' + m_sd3->getErrors().join('\n') + '\n';
+
+                    KMessageBox::sorry(this, text, i18n("File open error"));
+
                     continue;
                 }
             }

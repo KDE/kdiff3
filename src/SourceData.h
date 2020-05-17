@@ -47,7 +47,7 @@ class SourceData: public QObject
     bool isValid() const; // Either no file is specified or reading was successful
 
     // Returns a list of error messages if anything went wrong
-    QStringList readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode);
+    const QStringList& readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode);
     bool saveNormalDataAs(const QString& fileName);
 
     bool isBinaryEqualWith(const QSharedPointer<SourceData>& other) const;
@@ -58,9 +58,11 @@ class SourceData: public QObject
 
     QTextCodec* getEncoding() const { return m_pEncoding; }
     e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
-public Q_SLOTS:
-    void setEncoding(QTextCodec* pEncoding);
 
+    const QStringList& getErrors() { return mErrors; }
+
+  public Q_SLOTS:
+    void setEncoding(QTextCodec* pEncoding);
 
   private:
     bool convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
@@ -75,6 +77,8 @@ public Q_SLOTS:
     QSharedPointer<Options> m_pOptions;
     QString m_tempInputFileName;
     QTemporaryFile m_tempFile; //Created from clipboard content.
+
+    QStringList mErrors;
 
     class FileData
     {
