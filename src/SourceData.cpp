@@ -66,6 +66,8 @@ void SourceData::reset()
         m_tempFile.remove();
         m_tempInputFileName = "";
     }
+
+    mErrors.clear();
 }
 
 void SourceData::setFilename(const QString& filename)
@@ -125,6 +127,8 @@ void SourceData::setFileAccess(const FileAccess& fileAccess)
         m_tempFile.remove();
         m_tempInputFileName = "";
     }
+    
+    mErrors.clear();
 }
 void SourceData::setEncoding(QTextCodec* pEncoding)
 {
@@ -133,8 +137,7 @@ void SourceData::setEncoding(QTextCodec* pEncoding)
 
 QStringList SourceData::setData(const QString& data)
 {
-    QStringList errors;
-
+    mErrors.clear();
     // Create a temp file for preprocessing:
     if(m_tempInputFileName.isEmpty())
     {
@@ -147,7 +150,7 @@ QStringList SourceData::setData(const QString& data)
     bool bSuccess = f.writeFile(ba.constData(), ba.length());
     if(!bSuccess)
     {
-        errors.append(i18n("Writing clipboard data to temp file failed."));
+        mErrors.append(i18n("Writing clipboard data to temp file failed."));
     }
     else
     {
@@ -155,7 +158,7 @@ QStringList SourceData::setData(const QString& data)
         m_fileAccess = FileAccess(""); // Effect: m_fileAccess.isValid() is false
     }
 
-    return errors;
+    return mErrors;
 }
 
 const LineData* SourceData::getLineDataForDiff() const
@@ -331,7 +334,7 @@ QTextCodec* SourceData::detectEncoding(const QString& fileName, QTextCodec* pFal
     return pFallbackCodec;
 }
 
-QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode)
+const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode)
 {
     m_pEncoding = pEncoding;
     QTemporaryFile fileIn1, fileOut1;
@@ -339,12 +342,11 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     QString fileNameOut1;
     QString fileNameIn2;
     QString fileNameOut2;
-    QStringList errors;
 
     if(m_fileAccess.isValid() && !m_fileAccess.isNormal())
     {
-        errors.append(i18n("%1 is not a normal file.", m_fileAccess.prettyAbsPath()));
-        return errors;
+        mErrors.append(i18n("%1 is not a normal file.", m_fileAccess.prettyAbsPath()));
+        return mErrors;
     }
 
     bool bTempFileFromClipboard = !m_fileAccess.isValid();
@@ -393,8 +395,8 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             // No preprocessing: Read the file directly:
             if(!m_normalData.readFile(faIn))
             {
-                errors.append(faIn.getStatusText());
-                return errors;
+                mErrors.append(faIn.getStatusText());
+                return mErrors;
             }
         }
         else
@@ -434,12 +436,12 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             {
                 if(!m_normalData.readFile(faIn))
                 {
-                    errors.append(faIn.getStatusText());
-                    errors.append(i18n("    Temp file is: %1", fileNameIn1));
-                    return errors;
+                    mErrors.append(faIn.getStatusText());
+                    mErrors.append(i18n("    Temp file is: %1", fileNameIn1));
+                    return mErrors;
                 }
                 //Don't fail the preprocessor command if the file cann't be read.
-                errors.append(
+                mErrors.append(
                     i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
                          "\n\nThe preprocessing command will be disabled now.", ppCmd) +
                     errorReason);
@@ -451,12 +453,12 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
 
         if(!m_normalData.preprocess(m_pOptions->m_bPreserveCarriageReturn, pEncoding1))
         {
-            errors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
-            return errors;
+            mErrors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
+            return mErrors;
         }
         //exit early for non text data further processing assumes a text file as input
         if(!m_normalData.isText())
-            return errors;
+            return mErrors;
 
         // LineMatching Preprocessor
         if(!m_pOptions->m_LineMatchingPreProcessorCmd.isEmpty())
@@ -494,15 +496,15 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
             bool bSuccess = errorReason.isEmpty() && m_lmppData.readFile(fileNameOut2);
             if(FileAccess(fileNameIn2).size() > 0 && (!bSuccess || m_lmppData.m_size == 0))
             {
-                errors.append(
+                mErrors.append(
                     i18n("The line-matching-preprocessing possibly failed. Check this command:\n\n  %1"
                          "\n\nThe line-matching-preprocessing command will be disabled now.", ppCmd) +
                     errorReason);
                 m_pOptions->m_LineMatchingPreProcessorCmd = "";
                 if(!m_lmppData.readFile(fileNameIn2))
                 {
-                    errors.append(i18n("Failed to read file: %1", fileNameIn2));
-                    return errors;
+                    mErrors.append(i18n("Failed to read file: %1", fileNameIn2));
+                    return mErrors;
                 }
             }
         }
@@ -515,13 +517,13 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
     else
     {
         //exit early for non-existant files
-        return errors;
+        return mErrors;
     }
 
     if(!m_lmppData.preprocess(false, pEncoding2))
     {
-        errors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
-        return errors;
+        mErrors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
+        return mErrors;
     }
 
     Q_ASSERT(m_lmppData.isText());
@@ -549,7 +551,7 @@ QStringList SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetec
         }
     }
 
-    return errors;
+    return mErrors;
 }
 
 /** Prepare the linedata vector for every input line.*/

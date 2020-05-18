@@ -487,10 +487,21 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     if(!m_bDirCompare && m_pKDiff3Shell != nullptr)
     {
         bool bFileOpenError = false;
-        if((!m_sd1.isEmpty() && !m_sd1.hasData()) ||
-           (!m_sd2.isEmpty() && !m_sd2.hasData()) ||
-           (!m_sd3.isEmpty() && !m_sd3.hasData()))
+        if((!m_sd1.getErrors().isEmpty()) ||
+            (!m_sd2.getErrors().isEmpty()) ||
+            (!m_sd3.getErrors().isEmpty()))
         {
+            QString text(i18n("Opening of these files failed:"));
+            text += "\n\n";
+            if(!m_sd1.getErrors().isEmpty())
+                text += " - " + m_sd1.getAliasName() + '\n' + m_sd1.getErrors().join('\n') + '\n';
+            if(!m_sd2.getErrors().isEmpty())
+                text += " - " + m_sd2.getAliasName() + '\n' + m_sd2.getErrors().join('\n') + '\n';
+            if(!m_sd3.getErrors().isEmpty())
+                text += " - " + m_sd3.getAliasName() + '\n' + m_sd3.getErrors().join('\n') + '\n';
+
+            KMessageBox::sorry(this, text, i18n("File open error"));
+
             bFileOpenError = true;
         }
 
