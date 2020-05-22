@@ -10,7 +10,7 @@
 #define KDIFF3_H
 
 #include "diff.h"
-
+#include "defmac.h"
 #include "combiners.h"
 
 #include <boost/signals2.hpp>
@@ -68,7 +68,7 @@ class ReversibleScrollBar : public QScrollBar
     {
         m_pbRightToLeftLanguage = pbRightToLeftLanguage;
         m_realVal = 0;
-        connect(this, &ReversibleScrollBar::valueChanged, this, &ReversibleScrollBar::slotValueChanged);
+        chk_connect_a(this, &ReversibleScrollBar::valueChanged, this, &ReversibleScrollBar::slotValueChanged);
     }
     void setAgain() { setValue(m_realVal); }
 
