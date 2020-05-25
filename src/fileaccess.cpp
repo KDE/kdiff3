@@ -293,6 +293,34 @@ bool FileAccess::isValid() const
 
 bool FileAccess::isNormal() const
 {
+    /*
+        Speed is important here isNormal is called for every file during directory
+        comparison. It can therefor have great impact on overall performance.
+
+        We alse need to in sure that we don't keep looking indefinatly when following
+        links that point to links. Therefore we hard cap at 15 such links in a chain
+        and make sure we don't cycle back to something we already saw. 
+    */
+    if(!mVisited && mDepth < 15 && isLocal() && isSymLink())
+    {
+        FileAccess target(m_linkTarget);
+
+        mVisited = true;
+        ++mDepth;
+        /*
+            Catch local links to special files. '/dev' has many of these.
+        */
+        bool result = target.isSymLink() || target.isNormal();
+        // mVistited has done its job and should be reset here.
+        mVisited = false;
+        mDepth--;
+
+        return result;
+    }
+
+    mVisited = false;
+    mDepth = 0;
+
     return !exists() || isFile() || isDir() || isSymLink();
 }
 

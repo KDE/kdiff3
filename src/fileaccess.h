@@ -139,6 +139,15 @@ class FileAccess
     bool m_bHidden = false;
 
     QString m_statusText; // Might contain an error string, when the last operation didn't succeed.
+    /*
+    These two variables are used to prevent infinate/long running loops when a symlinks true target
+    must be found. isNormal is right now the only place this is needed.
+
+    Never expose these outside FileAccess as they are internal values.
+    */
+    mutable bool mVisited = false;
+    mutable quint32 mDepth = 0;
+
 };
 
 static_assert(std::is_move_assignable<FileAccess>::value, "FileAccess must be move assignable.");
