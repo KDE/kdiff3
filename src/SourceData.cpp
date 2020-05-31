@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -16,7 +16,7 @@
 
 Order of operation:
  1. If data was given via a string then save it to a temp file. (see setData())
- 2. If the specified file is nonlocal (URL) copy it to a temp file.
+ 2. If the specified file is nonlocal (URL) copy it to a temp file. (TODO revisit this)
  3. If a preprocessor was specified, run the input file through it.
  4. Read the output of the preprocessor.
  5. If Uppercase was specified: Turn the read data to uppercase.
@@ -117,7 +117,7 @@ void SourceData::setFileAccess(const FileAccess& fileAccess)
         m_tempFile.remove();
         m_tempInputFileName = "";
     }
-    
+
     mErrors.clear();
 }
 void SourceData::setEncoding(QTextCodec* pEncoding)
