@@ -399,15 +399,15 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
             insertCodec("", it->second);
         }
 
-        this->setToolTip(i18n(
+        setToolTip(i18n(
             "Change this if non-ASCII characters are not displayed correctly."));
     }
     void insertCodec(const QString& visibleCodecName, QTextCodec* c)
     {
         if(c != nullptr)
         {
-            QByteArray nameArray = c->name();
-            QLatin1String codecName = QLatin1String(nameArray);
+            const QByteArray nameArray = c->name();
+            const QLatin1String codecName = QLatin1String(nameArray);
 
             for(int i = 0; i < m_codecVec.size(); ++i)
             {
@@ -428,7 +428,8 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
         int index = getDefaultIndex();
 
         setCurrentIndex(index);
-        if(m_ppVarCodec != nullptr) {
+        if(m_ppVarCodec != nullptr)
+        {
             *m_ppVarCodec = m_codecVec[index];
         }
     }
@@ -449,7 +450,8 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
     using OptionCodec::apply;
     void apply() override
     {
-        if(m_ppVarCodec != nullptr) {
+        if(m_ppVarCodec != nullptr)
+        {
             *m_ppVarCodec = m_codecVec[currentIndex()];
         }
     }
@@ -515,9 +517,6 @@ OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageD
     chk_connect_a(button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked, this, &OptionDialog::slotDefault);
     chk_connect_a(button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &QDialog::reject);
     chk_connect_a(button(QDialogButtonBox::Help), &QPushButton::clicked, this, &OptionDialog::helpRequested);
-    //chk_connect_a(this, &OptionDialog::applyClicked, this, &OptionDialog::slotApply);
-    //helpClicked() is connected in KDiff3App::KDiff3App -- Really where?
-    //chk_connect_a(this, &OptionDialog::defaultClicked, this, &OptionDialog::slotDefault);
 }
 
 void OptionDialog::helpRequested()

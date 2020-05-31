@@ -3211,7 +3211,7 @@ void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecF
     if(pCodecForC != nullptr)
         m_pEncodingSelector->addItem(i18n("Codec from C: %1", QLatin1String(pCodecForC->name())), QVariant::fromValue((void*)pCodecForC));
 
-    std::map<QString, QTextCodec*>::iterator it;
+    std::map<QString, QTextCodec*>::const_iterator it;
     for(it = names.begin(); it != names.end(); ++it)
     {
         m_pEncodingSelector->addItem(it->first, QVariant::fromValue((void*)it->second));
