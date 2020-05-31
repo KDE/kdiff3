@@ -385,7 +385,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
 
         // First sort codec names:
         std::map<QString, QTextCodec*> names;
-        QList<int> mibs = QTextCodec::availableMibs();
+        const QList<int> mibs = QTextCodec::availableMibs();
         for(int i: mibs)
         {
             QTextCodec* c = QTextCodec::codecForMib(i);
@@ -393,7 +393,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
                 names[QString(QLatin1String(c->name())).toUpper()] = c;
         }
 
-        std::map<QString, QTextCodec*>::iterator it;
+        std::map<QString, QTextCodec*>::const_iterator it;
         for(it = names.begin(); it != names.end(); ++it)
         {
             insertCodec("", it->second);
@@ -606,7 +606,7 @@ void OptionDialog::setupColorPage()
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
-    
+
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
     QVBoxLayout* topLayout = new QVBoxLayout(page);
     topLayout->setMargin(5);
@@ -774,7 +774,7 @@ void OptionDialog::setupEditPage()
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
-    
+
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
@@ -849,7 +849,7 @@ void OptionDialog::setupDiffPage()
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
-    
+
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
@@ -944,7 +944,7 @@ void OptionDialog::setupMergePage()
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
-    
+
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
@@ -1135,7 +1135,7 @@ void OptionDialog::setupDirectoryMergePage()
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
-    
+
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
     QVBoxLayout* topLayout = new QVBoxLayout(page);
     topLayout->setMargin(5);
@@ -1334,7 +1334,7 @@ void OptionDialog::setupRegionalPage()
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
-    
+
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
@@ -1446,7 +1446,7 @@ void OptionDialog::setupIntegrationPage()
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
     scrollArea->setupUi(pageFrame);
-    
+
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
     QVBoxLayout* topLayout = new QVBoxLayout(page);
     topLayout->setMargin(5);

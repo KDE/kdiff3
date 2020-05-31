@@ -1,8 +1,8 @@
 /*
-  class CvsIgnoreList from Cervisia cvsdir.cpp                            
-     SPDX-FileCopyrightText: 1999-2002 Bernd Gehrmann <bernd at mail.berlios.de>    
-  with elements from class StringMatcher                                  
-     SPDX-FileCopyrightText: 2003 Andre Woebbeking <Woebbeking at web.de>           
+  class CvsIgnoreList from Cervisia cvsdir.cpp
+     SPDX-FileCopyrightText: 1999-2002 Bernd Gehrmann <bernd at mail.berlios.de>
+  with elements from class StringMatcher
+     SPDX-FileCopyrightText: 2003 Andre Woebbeking <Woebbeking at web.de>
   Modifications for KDiff3 by Joachim Eibl
 
   SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
@@ -20,7 +20,7 @@ void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
     static const QString ignorestr = QString::fromLatin1(". .. core RCSLOG tags TAGS RCS SCCS .make.state "
                                    ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
                                    "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$");
-    
+
     constexpr char varname[] = "CVSIGNORE";
 
     addEntriesFromString(ignorestr);
@@ -47,7 +47,7 @@ void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
 
 void CvsIgnoreList::addEntriesFromString(const QString& str)
 {
-    QStringList patternList = str.split(' ');
+    const QStringList patternList = str.split(' ');
     for(const QString& pattern : patternList)
     {
         addEntry(pattern);

@@ -186,7 +186,7 @@ void MergeResultWindow::setupConnections(const KDiff3App *app)
     chk_connect_a(this, &MergeResultWindow::noRelevantChangesDetected, app, &KDiff3App::slotNoRelevantChangesDetected);
     chk_connect_a(this, &MergeResultWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
     //connect menu actions
-    chk_connect_a(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (MergeResultWindow::*)(void)>(&MergeResultWindow::update));
+    chk_connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (MergeResultWindow::*)(void)>(&MergeResultWindow::update), Qt::AutoConnection);
     chk_connect_a(app, &KDiff3App::doRefresh, this, &MergeResultWindow::slotRefresh);
 
     chk_connect_a(app, &KDiff3App::autoSolve, this, &MergeResultWindow::slotAutoSolve);
@@ -3196,7 +3196,7 @@ void WindowTitleWidget::setEncodings(QTextCodec* pCodecForA, QTextCodec* pCodecF
 
     // First sort codec names:
     std::map<QString, QTextCodec*> names;
-    QList<int> mibs = QTextCodec::availableMibs();
+    const QList<int> mibs = QTextCodec::availableMibs();
     for(int i: mibs)
     {
         QTextCodec* c = QTextCodec::codecForMib(i);

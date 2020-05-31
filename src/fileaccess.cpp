@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -299,7 +299,7 @@ bool FileAccess::isNormal() const
 
         We alse need to in sure that we don't keep looking indefinatly when following
         links that point to links. Therefore we hard cap at 15 such links in a chain
-        and make sure we don't cycle back to something we already saw. 
+        and make sure we don't cycle back to something we already saw.
     */
     if(!mVisited && mDepth < 15 && isLocal() && isSymLink())
     {
@@ -1147,7 +1147,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
         else
             dir.setFilter(QDir::Files | QDir::Dirs | QDir::System | QDir::NoDotAndDotDot);
 
-        QFileInfoList fiList = dir.entryInfoList();
+        const QFileInfoList fiList = dir.entryInfoList();
         if(fiList.isEmpty())
         {
             /*

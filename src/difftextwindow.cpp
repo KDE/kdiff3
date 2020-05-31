@@ -274,8 +274,8 @@ void DiffTextWindow::setupConnections(const KDiff3App* app) const
 
     chk_connect_a(this, &DiffTextWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
 
-    chk_connect_a(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
-    chk_connect_a(app, &KDiff3App::showLineNumbersToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
+    chk_connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update), Qt::AutoConnection);
+    chk_connect(app, &KDiff3App::showLineNumbersToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update), Qt::AutoConnection);
     chk_connect_a(app, &KDiff3App::doRefresh, this, &DiffTextWindow::slotRefresh);
     chk_connect_a(app, &KDiff3App::selectAll, this, &DiffTextWindow::slotSelectAll);
 }
@@ -2030,7 +2030,7 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
         QMenu* pContextEncodingSubMenu = new QMenu(m_pContextEncodingMenu);
 
         int currentTextCodecEnum = m_pSourceData->getEncoding()->mibEnum(); // the codec that will be checked in the context menu
-        QList<int> mibs = QTextCodec::availableMibs();
+        const QList<int> mibs = QTextCodec::availableMibs();
         QList<int> codecEnumList;
 
         // Adding "main" encodings
@@ -2043,7 +2043,7 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
         // Adding recent encodings
         if(m_pOptions != nullptr)
         {
-            QStringList& recentEncodings = m_pOptions->m_recentEncodings;
+            const QStringList& recentEncodings = m_pOptions->m_recentEncodings;
             for(const QString& s : recentEncodings)
             {
                 insertCodec("", QTextCodec::codecForName(s.toLatin1()), codecEnumList, m_pContextEncodingMenu, currentTextCodecEnum);
