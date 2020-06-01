@@ -262,22 +262,22 @@ void DiffTextWindow::setupConnections(const KDiff3App* app) const
 {
     Q_ASSERT(qobject_cast<DiffTextWindowFrame*>(parent()) != nullptr);
 
-    chk_connect_a(this, &DiffTextWindow::scrollVertically, mVScrollBar, &QScrollBar::setValue);
+    chk_connect(this, &DiffTextWindow::scrollVertically, mVScrollBar, &QScrollBar::setValue);
 
-    chk_connect_a(this, &DiffTextWindow::firstLineChanged, dynamic_cast<DiffTextWindowFrame*>(parent()), &DiffTextWindowFrame::setFirstLine);
-    chk_connect_a(this, &DiffTextWindow::newSelection, app, &KDiff3App::slotSelectionStart);
-    chk_connect_a(this, &DiffTextWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
-    chk_connect_a(this, &DiffTextWindow::scrollDiffTextWindow, app, &KDiff3App::scrollDiffTextWindow);
+    chk_connect(this, &DiffTextWindow::firstLineChanged, dynamic_cast<DiffTextWindowFrame*>(parent()), &DiffTextWindowFrame::setFirstLine);
+    chk_connect(this, &DiffTextWindow::newSelection, app, &KDiff3App::slotSelectionStart);
+    chk_connect(this, &DiffTextWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
+    chk_connect(this, &DiffTextWindow::scrollDiffTextWindow, app, &KDiff3App::scrollDiffTextWindow);
     chk_connect_q(this, &DiffTextWindow::finishRecalcWordWrap, app, &KDiff3App::slotFinishRecalcWordWrap);
 
-    chk_connect_a(this, &DiffTextWindow::finishDrop, app, &KDiff3App::slotFinishDrop);
+    chk_connect(this, &DiffTextWindow::finishDrop, app, &KDiff3App::slotFinishDrop);
 
-    chk_connect_a(this, &DiffTextWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
+    chk_connect(this, &DiffTextWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
 
-    chk_connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update), Qt::AutoConnection);
-    chk_connect(app, &KDiff3App::showLineNumbersToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update), Qt::AutoConnection);
-    chk_connect_a(app, &KDiff3App::doRefresh, this, &DiffTextWindow::slotRefresh);
-    chk_connect_a(app, &KDiff3App::selectAll, this, &DiffTextWindow::slotSelectAll);
+    chk_connect(app, &KDiff3App::showWhiteSpaceToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
+    chk_connect(app, &KDiff3App::showLineNumbersToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
+    chk_connect(app, &KDiff3App::doRefresh, this, &DiffTextWindow::slotRefresh);
+    chk_connect(app, &KDiff3App::selectAll, this, &DiffTextWindow::slotSelectAll);
 }
 
 void DiffTextWindow::reset()
@@ -1835,8 +1835,8 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<
     d = new DiffTextWindowFrameData(this, pOptions, winIdx);
     d->mSourceData = psd;
     setAutoFillBackground(true);
-    chk_connect_a(d->getBrowseButton(), &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
-    chk_connect_a(d->getFileSelectionField(), &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
+    chk_connect(d->getBrowseButton(), &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
+    chk_connect(d->getFileSelectionField(), &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
 
     d->m_pDiffTextWindow = new DiffTextWindow(this, pOptions, winIdx);
     d->m_pDiffTextWindow->setSourceData(psd);
@@ -1902,9 +1902,9 @@ void DiffTextWindowFrame::init()
 
 void DiffTextWindowFrame::setupConnections(const KDiff3App* app)
 {
-    chk_connect_a(this, &DiffTextWindowFrame::fileNameChanged, app, &KDiff3App::slotFileNameChanged);
-    chk_connect_a(this, &DiffTextWindowFrame::encodingChanged, app, &KDiff3App::slotEncodingChanged);
-    chk_connect_a(this, &DiffTextWindowFrame::encodingChanged, d->mSourceData.data(), &SourceData::setEncoding);
+    chk_connect(this, &DiffTextWindowFrame::fileNameChanged, app, &KDiff3App::slotFileNameChanged);
+    chk_connect(this, &DiffTextWindowFrame::encodingChanged, app, &KDiff3App::slotEncodingChanged);
+    chk_connect(this, &DiffTextWindowFrame::encodingChanged, d->mSourceData.data(), &SourceData::setEncoding);
 }
 
 // Search for the first visible line (search loop needed when no line exists for this file.)
@@ -2079,7 +2079,7 @@ void EncodingLabel::insertCodec(const QString& visibleCodecName, QTextCodec* pCo
         if(currentTextCodecEnum == CodecMIBEnum)
             pAction->setChecked(true);
         pMenu->addAction(pAction);
-        chk_connect_a(pAction, &QAction::triggered, this, &EncodingLabel::slotSelectEncoding);
+        chk_connect(pAction, &QAction::triggered, this, &EncodingLabel::slotSelectEncoding);
         codecEnumList.append(CodecMIBEnum);
     }
 }

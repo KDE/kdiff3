@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -58,7 +58,7 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     hlayout->addStretch(1);
     m_pAbortButton = new QPushButton(i18n("&Cancel"), this);
     hlayout->addWidget(m_pAbortButton);
-    chk_connect_a(m_pAbortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
+    chk_connect(m_pAbortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
     if(m_pStatusBar != nullptr)
     {
         m_pStatusBarWidget = new QWidget;
@@ -69,7 +69,7 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
         m_pStatusProgressBar->setRange(0, 1000);
         m_pStatusProgressBar->setTextVisible(false);
         m_pStatusAbortButton = new QPushButton(i18n("&Cancel"));
-        chk_connect_a(m_pStatusAbortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
+        chk_connect(m_pStatusAbortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
         pStatusBarLayout->addWidget(m_pStatusProgressBar);
         pStatusBarLayout->addWidget(m_pStatusAbortButton);
         m_pStatusBar->addPermanentWidget(m_pStatusBarWidget, 0);

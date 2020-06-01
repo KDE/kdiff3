@@ -141,7 +141,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 
     // All default values must be set before calling readOptions().
     m_pOptionDialog = new OptionDialog(m_pKDiff3Shell != nullptr, this);
-    chk_connect_a(m_pOptionDialog, &OptionDialog::applyDone, this, &KDiff3App::slotRefresh);
+    chk_connect(m_pOptionDialog, &OptionDialog::applyDone, this, &KDiff3App::slotRefresh);
 
     // This is just a convenience variable to make code that accesses options more readable
     m_pOptions = m_pOptionDialog->getOptions();
@@ -302,7 +302,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     initStatusBar();
 
     m_pFindDialog = new FindDialog(this);
-    chk_connect_a(m_pFindDialog, &FindDialog::findNext, this, &KDiff3App::slotEditFindNext);
+    chk_connect(m_pFindDialog, &FindDialog::findNext, this, &KDiff3App::slotEditFindNext);
 
     autoAdvance->setChecked(m_pOptions->m_bAutoAdvance);
     showWhiteSpaceCharacters->setChecked(m_pOptions->m_bShowWhiteSpaceCharacters);
@@ -342,16 +342,16 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     //Warning: Make sure DirectoryMergeWindow::initActions is called before this point or we can crash when selectionChanged is sent.
     m_pDirectoryMergeWindow->setupConnections(this);
 
-    chk_connect_a(QApplication::clipboard(), &QClipboard::dataChanged, this, &KDiff3App::slotClipboardChanged);
+    chk_connect(QApplication::clipboard(), &QClipboard::dataChanged, this, &KDiff3App::slotClipboardChanged);
     chk_connect_q(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap);
     connections.push_back(shouldContinue.connect(boost::bind(&KDiff3App::canContinue, this)));
-    chk_connect_a(this, &KDiff3App::finishDrop, this, &KDiff3App::slotFinishDrop);
+    chk_connect(this, &KDiff3App::finishDrop, this, &KDiff3App::slotFinishDrop);
 
     connections.push_back(allowCut.connect(boost::bind(&KDiff3App::canCut, this)));
     m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());
 
     if(qApp != nullptr)
-        chk_connect_a(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
+        chk_connect(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
 
     delete KDiff3Shell::getParser();
 }

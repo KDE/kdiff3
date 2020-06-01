@@ -113,7 +113,7 @@ FontChooser::FontChooser(QWidget* pParent)
 
     m_pSelectFont = new QPushButton(i18n("Change Font"));
     m_pSelectFont->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    chk_connect_a(m_pSelectFont, &QPushButton::clicked, this, &FontChooser::slotSelectFont);
+    chk_connect(m_pSelectFont, &QPushButton::clicked, this, &FontChooser::slotSelectFont);
     pLayout->addWidget(m_pSelectFont);
     pLayout->setAlignment(m_pSelectFont, Qt::AlignRight);
 }
@@ -512,11 +512,11 @@ OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageD
     // Initialize all values in the dialog
     resetToDefaults();
     slotApply();
-    chk_connect_a(button(QDialogButtonBox::Apply), &QPushButton::clicked, this, &OptionDialog::slotApply);
-    chk_connect_a(button(QDialogButtonBox::Ok), &QPushButton::clicked, this, &OptionDialog::slotOk);
-    chk_connect_a(button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked, this, &OptionDialog::slotDefault);
-    chk_connect_a(button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &QDialog::reject);
-    chk_connect_a(button(QDialogButtonBox::Help), &QPushButton::clicked, this, &OptionDialog::helpRequested);
+    chk_connect(button(QDialogButtonBox::Apply), &QPushButton::clicked, this, &OptionDialog::slotApply);
+    chk_connect(button(QDialogButtonBox::Ok), &QPushButton::clicked, this, &OptionDialog::slotOk);
+    chk_connect(button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked, this, &OptionDialog::slotDefault);
+    chk_connect(button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &QDialog::reject);
+    chk_connect(button(QDialogButtonBox::Help), &QPushButton::clicked, this, &OptionDialog::helpRequested);
 }
 
 void OptionDialog::helpRequested()
@@ -1075,7 +1075,7 @@ void OptionDialog::setupMergePage()
         addOptionItem(m_pHistorySortKeyOrderLineEdit);
         label->setToolTip(s_historyEntryStartSortKeyOrderToolTip);
         m_pHistorySortKeyOrderLineEdit->setEnabled(false);
-        chk_connect_a(m_pHistoryMergeSorting, &OptionCheckBox::toggled, m_pHistorySortKeyOrderLineEdit, &OptionLineEdit::setEnabled);
+        chk_connect(m_pHistoryMergeSorting, &OptionCheckBox::toggled, m_pHistorySortKeyOrderLineEdit, &OptionLineEdit::setEnabled);
         ++line;
 
         m_pHistoryAutoMerge = new OptionCheckBox(i18n("Merge version control history on merge start"), false, "RunHistoryAutoMergeOnMergeStart", &m_options->m_bRunHistoryAutoMergeOnMergeStart, page);
@@ -1095,7 +1095,7 @@ void OptionDialog::setupMergePage()
 
     QPushButton* pButton = new QPushButton(i18n("Test your regular expressions"), page);
     gbox->addWidget(pButton, line, 0);
-    chk_connect_a(pButton, &QPushButton::clicked, this, &OptionDialog::slotHistoryMergeRegExpTester);
+    chk_connect(pButton, &QPushButton::clicked, this, &OptionDialog::slotHistoryMergeRegExpTester);
     ++line;
 
     label = new QLabel(i18n("Irrelevant merge command:"), page);
@@ -1296,7 +1296,7 @@ void OptionDialog::setupDirectoryMergePage()
     pWhiteSpaceDiffsEqual->setToolTip(i18n(
         "If files differ only by white space consider them equal.\n"
         "This is only active when full analysis is chosen."));
-    chk_connect_a(pFullAnalysis, &OptionRadioButton::toggled, pWhiteSpaceDiffsEqual, &OptionCheckBox::setEnabled);
+    chk_connect(pFullAnalysis, &OptionRadioButton::toggled, pWhiteSpaceDiffsEqual, &OptionCheckBox::setEnabled);
     pWhiteSpaceDiffsEqual->setEnabled(false);
     ++line;
 
@@ -1415,10 +1415,10 @@ void OptionDialog::setupRegionalPage()
     gbox->addWidget(m_pEncodingPPComboBox, line, 1);
     ++line;
 
-    chk_connect_a(m_pSameEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
-    chk_connect_a(m_pEncodingAComboBox, static_cast<void (OptionEncodingComboBox::*)(int)>(&OptionEncodingComboBox::activated), this, &OptionDialog::slotEncodingChanged);
-    chk_connect_a(m_pAutoDetectUnicodeA, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
-    chk_connect_a(m_pAutoSelectOutEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
+    chk_connect(m_pSameEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
+    chk_connect(m_pEncodingAComboBox, static_cast<void (OptionEncodingComboBox::*)(int)>(&OptionEncodingComboBox::activated), this, &OptionDialog::slotEncodingChanged);
+    chk_connect(m_pAutoDetectUnicodeA, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
+    chk_connect(m_pAutoSelectOutEncoding, &OptionCheckBox::toggled, this, &OptionDialog::slotEncodingChanged);
 
     OptionCheckBox* pRightToLeftLanguage = new OptionCheckBox(i18n("Right To Left Language"), false, "RightToLeftLanguage", &m_options->m_bRightToLeftLanguage, page);
     addOptionItem(pRightToLeftLanguage);

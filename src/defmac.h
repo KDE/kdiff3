@@ -25,7 +25,7 @@
   ---
 
   This header is defined macros of general purpose.
-  
+
 *****************************************************************************/
 
 #pragma once
@@ -61,7 +61,15 @@
   However, in the release mode, unlike assert() function, test expression
   is not removed.
 */
-#define chk_connect(SOURCE_, SIGNAL_, DEST_, SLOT_, CONNECT_TYPE_) \
+
+#define chk_connect(SOURCE_, SIGNAL_, DEST_, SLOT_) \
+    QCONNECT_ASSERT(QObject::connect(SOURCE_, SIGNAL_, DEST_, SLOT_));
+
+#define chk_connect_unique(SOURCE_, SIGNAL_, DEST_, SLOT_, CONNECT_TYPE_) \
+    QCONNECT_ASSERT(QObject::connect(SOURCE_, SIGNAL_, DEST_, SLOT_, CONNECT_TYPE_ | Qt::UniqueConnection));
+
+
+#define chk_connect_custom(SOURCE_, SIGNAL_, DEST_, SLOT_, CONNECT_TYPE_) \
     QCONNECT_ASSERT(QObject::connect(SOURCE_, SIGNAL_, DEST_, SLOT_, CONNECT_TYPE_));
 
 #define chk_connect_a(SOURCE_, SIGNAL_, DEST_, SLOT_) \

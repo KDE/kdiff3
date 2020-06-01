@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -53,7 +53,7 @@ KDiff3Shell::KDiff3Shell(bool bCompleteInit)
 
         if(bCompleteInit)
             m_widget->completeInit(QString());
-        chk_connect_a(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
+        chk_connect(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
     }
     else
     {
@@ -141,7 +141,7 @@ void KDiff3Shell::optionsConfigureToolbars()
 
     // use the standard toolbar editor
     KEditToolBar dlg(factory());
-    chk_connect_a(&dlg, &KEditToolBar::newToolBarConfig, this, &KDiff3Shell::applyNewToolbarConfig);
+    chk_connect(&dlg, &KEditToolBar::newToolBarConfig, this, &KDiff3Shell::applyNewToolbarConfig);
     dlg.exec();
 }
 
