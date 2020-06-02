@@ -161,9 +161,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
 
         qCInfo(kdeMain) << i18n("Loading A: %1", m_sd1.getFilename());
         if(bUseCurrentEncoding)
-            errors = m_sd1.readAndPreprocess(m_sd1.getEncoding(), false);
+            m_sd1.readAndPreprocess(m_sd1.getEncoding(), false);
         else
-            errors = m_sd1.readAndPreprocess(m_pOptions->m_pEncodingA, m_pOptions->m_bAutoDetectUnicodeA);
+            m_sd1.readAndPreprocess(m_pOptions->m_pEncodingA, m_pOptions->m_bAutoDetectUnicodeA);
 
         pp.step();
 
@@ -171,11 +171,13 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         qCInfo(kdeMain) << "Loading B: " << m_sd2.getFilename();
 
         if(bUseCurrentEncoding)
-            errors = m_sd2.readAndPreprocess(m_sd2.getEncoding(), false);
+            m_sd2.readAndPreprocess(m_sd2.getEncoding(), false);
         else
-            errors = m_sd2.readAndPreprocess(m_pOptions->m_pEncodingB, m_pOptions->m_bAutoDetectUnicodeB);
+            m_sd2.readAndPreprocess(m_pOptions->m_pEncodingB, m_pOptions->m_bAutoDetectUnicodeB);
 
         pp.step();
+        errors.append(m_sd1->getErrors());
+        errors.append(m_sd2->getErrors());
     }
     else
     {
@@ -187,6 +189,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
 
     if(pTotalDiffStatus)
         pTotalDiffStatus->reset();
+
     if(errors.isEmpty())
     {
         // Run the diff.
@@ -221,9 +224,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             {
                 pp.setInformation(i18n("Loading C"));
                 if(bUseCurrentEncoding)
-                    errors = m_sd3.readAndPreprocess(m_sd3.getEncoding(), false);
+                    m_sd3.readAndPreprocess(m_sd3.getEncoding(), false);
                 else
-                    errors = m_sd3.readAndPreprocess(m_pOptions->m_pEncodingC, m_pOptions->m_bAutoDetectUnicodeC);
+                    m_sd3.readAndPreprocess(m_pOptions->m_pEncodingC, m_pOptions->m_bAutoDetectUnicodeC);
 
                 pp.step();
             }
@@ -307,6 +310,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
                 pTotalDiffStatus->bTextBEqC = false;
             }
         }
+        errors.append(m_sd3->getErrors());
     }
     else
     {
@@ -386,6 +390,20 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
 
     if(!bGUI)
     {
+        //TODO Not ideal placement but when doing directory merges we arrive here and must handle the error.
+        if(!m_sd1->getErrors().isEmpty() || !m_sd2->getErrors().isEmpty() || !m_sd3->getErrors().isEmpty() )
+        {
+            QString text(i18n("Opening of these files failed:"));
+            text += "\n\n";
+            if(!m_sd1->getErrors().isEmpty())
+                text += " - " + m_sd1->getAliasName() + '\n' + m_sd1->getErrors().join('\n') + '\n';
+            if(!m_sd2->getErrors().isEmpty())
+                text += " - " + m_sd2->getAliasName() + '\n' + m_sd2->getErrors().join('\n') + '\n';
+            if(!m_sd3->getErrors().isEmpty())
+                text += " - " + m_sd3->getAliasName() + '\n' + m_sd3->getErrors().join('\n') + '\n';
+
+            KMessageBox::sorry(this, text, i18n("File open error"));
+        }
         // We now have all needed information. The rest below is only for GUI-activation.
         m_sd1.reset();
         m_sd2.reset();
