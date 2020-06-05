@@ -1002,7 +1002,7 @@ void KDiff3App::slotFileOpen2(const QString& fn1, const QString& fn2, const QStr
         improveFilenames();
         mainInit(pTotalDiffStatus);
 
-        if(pTotalDiffStatus != nullptr)
+        if(m_bDirCompare)
             return;
 
         if(!((!m_sd1->isEmpty() && !m_sd1->hasData()) ||
