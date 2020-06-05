@@ -1498,7 +1498,7 @@ void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
 
     g_pProgressDialog->setStayHidden(false);
 
-    bool bPrinting = visibleTextWidthForPrinting >= 0;
+    const bool bPrinting = visibleTextWidthForPrinting >= 0;
 
     if(!m_diff3LineList.empty())
     {
@@ -1573,7 +1573,7 @@ void KDiff3App::slotShowLineNumbersToggled()
 }
 
 
-bool KDiff3App::doDirectoryCompare(bool bCreateNewInstance)
+bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
 {
     FileAccess f1(m_sd1->getFilename());
     FileAccess f2(m_sd2->getFilename());
@@ -1588,7 +1588,10 @@ bool KDiff3App::doDirectoryCompare(bool bCreateNewInstance)
     }
     else
     {
-        bool bDirCompare = m_bDirCompare;
+        //Only a debugging aid now. Used to insure m_bDirCompare is not changed
+        #ifndef NDEBUG
+        const bool bDirCompare = m_bDirCompare;
+        #endif
         FileAccess destDir;
 
         if(!m_bDefaultFilename) destDir = f4;

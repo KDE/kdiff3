@@ -301,7 +301,7 @@ public Q_SLOTS:
     virtual void keyPressEvent(QKeyEvent* event) override;
     void resizeEvent(QResizeEvent*) override;
 
-    bool doDirectoryCompare(bool bCreateNewInstance);
+    bool doDirectoryCompare(const bool bCreateNewInstance);
     void improveFilenames();
 
     bool canContinue();
