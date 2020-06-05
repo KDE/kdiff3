@@ -918,22 +918,24 @@ void KDiff3App::slotFileOpen()
                 m_outputFilename = "";
 
             m_bDirCompare = m_sd1->isDir();
-            bool bSuccess = improveFilenames(false);
-
-            if(!bSuccess)
-                continue;
 
             if(m_bDirCompare)
             {
-                m_pDirectoryMergeSplitter->show();
-                if(m_pMainWidget != nullptr)
+                bool bSuccess = doDirectoryCompare(false);
+                if(bSuccess)
                 {
-                    m_pMainWidget->hide();
+                    m_pDirectoryMergeSplitter->show();
+                    if(m_pMainWidget != nullptr)
+                    {
+                        m_pMainWidget->hide();
+                    }
+                    break;
                 }
-                break;
             }
             else
             {
+                improveFilenames();
+
                 m_pDirectoryMergeSplitter->hide();
                 mainInit();
 
@@ -995,10 +997,9 @@ void KDiff3App::slotFileOpen2(const QString& fn1, const QString& fn2, const QStr
         m_bDefaultFilename = true;
     }
 
-    improveFilenames(true); // Create new window for KDiff3 for directory comparison.
-
     if(!m_sd1->isDir())
     {
+        improveFilenames();
         mainInit(pTotalDiffStatus);
 
         if(pTotalDiffStatus != nullptr)
@@ -1014,6 +1015,9 @@ void KDiff3App::slotFileOpen2(const QString& fn1, const QString& fn2, const QStr
             }
         }
     }
+    else
+        doDirectoryCompare(true); // Create new window for KDiff3 for directory comparison.
+
     slotStatusMsg(i18n("Ready."));
 }
 
@@ -1578,8 +1582,66 @@ void KDiff3App::slotShowLineNumbersToggled()
     Q_EMIT showLineNumbersToggled();
 }
 
+
+bool KDiff3App::doDirectoryCompare(bool bCreateNewInstance)
+{
+    FileAccess f1(m_sd1->getFilename());
+    FileAccess f2(m_sd2->getFilename());
+    FileAccess f3(m_sd3->getFilename());
+    FileAccess f4(m_outputFilename);
+
+    Q_ASSERT(f1.isDir());
+
+    if(bCreateNewInstance)
+    {
+        Q_EMIT createNewInstance(f1.absoluteFilePath(), f2.absoluteFilePath(), f3.absoluteFilePath());
+    }
+    else
+    {
+        bool bDirCompare = m_bDirCompare;
+        FileAccess destDir;
+
+        if(!m_bDefaultFilename) destDir = f4;
+        m_pDirectoryMergeSplitter->show();
+        if(m_pMainWidget != nullptr) m_pMainWidget->hide();
+        setUpdatesEnabled(true);
+
+        m_dirinfo = QSharedPointer<DirectoryInfo>::create(f1, f2, f3, destDir);
+        bool bSuccess = m_pDirectoryMergeWindow->init(
+            m_dirinfo,
+            !m_outputFilename.isEmpty());
+        //This is a bug if it still happens.
+        Q_ASSERT(m_bDirCompare == bDirCompare);
+
+        if(bSuccess)
+        {
+            m_sd1->reset();
+            if(m_pDiffTextWindow1 != nullptr)
+            {
+                m_pDiffTextWindow1->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr);
+                m_pDiffTextWindowFrame1->init();
+            }
+            m_sd2->reset();
+            if(m_pDiffTextWindow2 != nullptr)
+            {
+                m_pDiffTextWindow2->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr);
+                m_pDiffTextWindowFrame2->init();
+            }
+            m_sd3->reset();
+            if(m_pDiffTextWindow3 != nullptr)
+            {
+                m_pDiffTextWindow3->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr);
+                m_pDiffTextWindowFrame3->init();
+            }
+        }
+        slotUpdateAvailabilities();
+        return bSuccess;
+    }
+
+    return true;
+}
 /// Return true for success, else false
-bool KDiff3App::improveFilenames(bool bCreateNewInstance)
+void KDiff3App::improveFilenames()
 {
     FileAccess f1(m_sd1->getFilename());
     FileAccess f2(m_sd2->getFilename());
@@ -1607,55 +1669,6 @@ bool KDiff3App::improveFilenames(bool bCreateNewInstance)
                 m_outputFilename = f4.absoluteFilePath();
         }
     }
-    else if(f1.isDir())
-    {
-        if(bCreateNewInstance)
-        {
-            Q_EMIT createNewInstance(f1.absoluteFilePath(), f2.absoluteFilePath(), f3.absoluteFilePath());
-        }
-        else
-        {
-            bool bDirCompare = m_bDirCompare;
-            FileAccess destDir;
-
-            if(!m_bDefaultFilename) destDir = f4;
-            m_pDirectoryMergeSplitter->show();
-            if(m_pMainWidget != nullptr) m_pMainWidget->hide();
-            setUpdatesEnabled(true);
-
-            m_dirinfo = QSharedPointer<DirectoryInfo>::create(f1, f2, f3, destDir);
-            bool bSuccess = m_pDirectoryMergeWindow->init(
-                m_dirinfo,
-                !m_outputFilename.isEmpty());
-            //This is a bug if it still happens.
-            Q_ASSERT(m_bDirCompare == bDirCompare);
-
-            if(bSuccess)
-            {
-                m_sd1->reset();
-                if(m_pDiffTextWindow1 != nullptr)
-                {
-                    m_pDiffTextWindow1->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr);
-                    m_pDiffTextWindowFrame1->init();
-                }
-                m_sd2->reset();
-                if(m_pDiffTextWindow2 != nullptr)
-                {
-                    m_pDiffTextWindow2->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr);
-                    m_pDiffTextWindowFrame2->init();
-                }
-                m_sd3->reset();
-                if(m_pDiffTextWindow3 != nullptr)
-                {
-                    m_pDiffTextWindow3->init(QString(""), nullptr, eLineEndStyleDos, nullptr, 0, nullptr, nullptr);
-                    m_pDiffTextWindowFrame3->init();
-                }
-            }
-            slotUpdateAvailabilities();
-            return bSuccess;
-        }
-    }
-    return true;
 }
 
 void KDiff3App::slotReload()

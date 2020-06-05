@@ -393,15 +393,19 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
     //should not happen now.
     Q_ASSERT(m_bDirCompare == m_sd1->isDir());
-    bool bSuccess = improveFilenames(false);
 
     if(m_bAutoFlag && m_bAutoMode && m_bDirCompare)
     {
         QTextStream(stderr) << i18n("Option --auto ignored for folder comparison.") << "\n";
         m_bAutoMode = false;
     }
-    if(!m_bDirCompare)
+
+    bool bSuccess = true;
+    if(m_bDirCompare)
+        bSuccess = doDirectoryCompare(false);
+    else
     {
+        improveFilenames();
         m_pDirectoryMergeSplitter->hide();
 
         mainInit();
