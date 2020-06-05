@@ -767,11 +767,12 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
     if(m_pOptions->m_bDmFullAnalysis)
     {
+        QStringList errors;
         // A full analysis uses the same resources that a normal text-diff/merge uses.
         // So make sure that the user saves his data first.
         if(!KDiff3App::shouldContinue())
             return false;
-        Q_EMIT mWindow->startDiffMerge("", "", "", "", "", "", "", nullptr); // hide main window
+        Q_EMIT mWindow->startDiffMerge(errors, "", "", "", "", "", "", "", nullptr); // hide main window
     }
 
     mWindow->show();
@@ -1344,7 +1345,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
         ++currentIdx;
 
         // The comparisons and calculations for each file take place here.
-        mfi.compareFilesAndCalcAges(errors, m_pOptions, mWindow);
+        if(!mfi.compareFilesAndCalcAges(errors, m_pOptions, mWindow) && errors.size() >= 30)
+            break;
+
         // Get dirname from fileName: Search for "/" from end:
         int pos = fileName.lastIndexOf('/');
         QString dirPart;
@@ -1385,10 +1388,12 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
         {
             KMessageBox::errorList(mWindow, i18n("Some files could not be processed."), errors);
         }
-        else
+        else if(errors.size() < 30)
         {
             KMessageBox::error(mWindow, i18n("Some files could not be processed."));
         }
+        else
+            KMessageBox::error(mWindow, i18n("Aborting do to too many errors."));
     }
 
     beginResetModel();
@@ -1869,12 +1874,12 @@ void DirectoryMergeWindow::compareCurrentFile()
         KMessageBox::sorry(this, i18n("This operation is currently not possible."), i18n("Operation Not Possible"));
         return;
     }
-
+    QStringList errors;
     if(MergeFileInfos* pMFI = d->getMFI(currentIndex()))
     {
         if(!(pMFI->hasDir()))
         {
-            Q_EMIT startDiffMerge(
+            Q_EMIT startDiffMerge(errors,
                 pMFI->existsInA() ? pMFI->getFileInfoA()->absoluteFilePath() : QString(""),
                 pMFI->existsInB() ? pMFI->getFileInfoB()->absoluteFilePath() : QString(""),
                 pMFI->existsInC() ? pMFI->getFileInfoC()->absoluteFilePath() : QString(""),
@@ -1895,7 +1900,8 @@ void DirectoryMergeWindow::slotCompareExplicitlySelectedFiles()
         return;
     }
 
-    Q_EMIT startDiffMerge(
+    QStringList errors;
+    Q_EMIT startDiffMerge(errors,
         d->getFileName(d->m_selection1Index),
         d->getFileName(d->m_selection2Index),
         d->getFileName(d->m_selection3Index),
@@ -1918,12 +1924,12 @@ void DirectoryMergeWindow::slotMergeExplicitlySelectedFiles()
         KMessageBox::sorry(this, i18n("This operation is currently not possible."), i18n("Operation Not Possible"));
         return;
     }
-
+    QStringList errors;
     QString fn1 = d->getFileName(d->m_selection1Index);
     QString fn2 = d->getFileName(d->m_selection2Index);
     QString fn3 = d->getFileName(d->m_selection3Index);
 
-    Q_EMIT startDiffMerge(fn1, fn2, fn3,
+    Q_EMIT startDiffMerge(errors, fn1, fn2, fn3,
                           fn3.isEmpty() ? fn2 : fn3,
                           "", "", "", nullptr);
     d->m_selection1Index = QModelIndex();
@@ -2500,6 +2506,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeFLD(const QString& 
         return makeDir(nameDest);
     }
 
+    QStringList errors;
     // Make sure that the dir exists, into which we will save the file later.
     int pos = nameDest.lastIndexOf('/');
     if(pos > 0)
@@ -2521,7 +2528,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeFLD(const QString& 
     setOpStatus(*m_currentIndexForOperation, eOpStatusInProgress);
     mWindow->scrollTo(*m_currentIndexForOperation, EnsureVisible);
 
-    Q_EMIT mWindow->startDiffMerge(nameA, nameB, nameC, nameDest, "", "", "", nullptr);
+    Q_EMIT mWindow->startDiffMerge(errors, nameA, nameB, nameC, nameDest, "", "", "", nullptr);
 
     return false;
 }

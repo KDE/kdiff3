@@ -120,7 +120,7 @@ class DirectoryMergeWindow : public QTreeView
    inline void slotRefresh() { updateFileVisibilities(); };
 
 Q_SIGNALS:
-   void startDiffMerge(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn, const QString&, const QString&, const QString&, TotalDiffStatus*);
+   void startDiffMerge(QStringList &errors, const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn, const QString&, const QString&, const QString&, TotalDiffStatus*);
    void updateAvailabilities();
    void statusBarMessage(const QString& msg);
 protected Q_SLOTS:

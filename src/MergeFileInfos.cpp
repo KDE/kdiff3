@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -218,7 +218,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
         }
         else
         {
-            Q_EMIT pDMW->startDiffMerge(
+            Q_EMIT pDMW->startDiffMerge(errors,
                 existsInA() ? getFileInfoA()->absoluteFilePath() : QString(""),
                 existsInB() ? getFileInfoB()->absoluteFilePath() : QString(""),
                 existsInC() ? getFileInfoC()->absoluteFilePath() : QString(""),
@@ -237,6 +237,13 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
                 m_bEqualAB = diffStatus().isBinaryEqualAB();
                 m_bEqualBC = diffStatus().isBinaryEqualBC();
                 m_bEqualAC = diffStatus().isBinaryEqualAC();
+            }
+
+            //Limit size of error list in memmory.
+            if(errors.size() >= 30)
+            {
+                //Bail out something is very wrong.
+                return false;
             }
         }
     }

@@ -175,7 +175,7 @@ public Q_SLOTS:
 
     /** open a file and load it into the document*/
     void slotFileOpen();
-    void slotFileOpen2(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
+    void slotFileOpen2(QStringList &errors, const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
                        const QString& an1, const QString& an2, const QString& an3, TotalDiffStatus* pTotalDiffStatus);
 
     void slotFileNameChanged(const QString& fileName, e_SrcSelector winIdx);
