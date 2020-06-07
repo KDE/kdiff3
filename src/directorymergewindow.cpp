@@ -1393,7 +1393,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
             KMessageBox::error(mWindow, i18n("Some files could not be processed."));
         }
         else
-            KMessageBox::error(mWindow, i18n("Aborting do to too many errors."));
+            KMessageBox::error(mWindow, i18n("Aborting due to too many errors."));
     }
 
     beginResetModel();
