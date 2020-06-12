@@ -6,9 +6,11 @@
 */
 
 #include "smalldialogs.h"
+
 #include "diff.h"
 #include "options.h"
 #include "kdiff3.h"
+#include "ui_opendialog.h"
 
 #include <QCheckBox>
 #include <QComboBox>
@@ -34,85 +36,57 @@ OpenDialog::OpenDialog(
     bool bMerge, const QString& outputName,  const QSharedPointer<Options> &pOptions)
     : QDialog(pParent)
 {
-    setObjectName("OpenDialog");
+    QScopedPointer<Ui::OpenDialog> dialog(new Ui::OpenDialog());
+
+    dialog->setupUi(this);
     setModal(true);
     m_pOptions = pOptions;
 
-    QVBoxLayout* v = new QVBoxLayout(this);
-    v->setMargin(5);
-    QGridLayout* h = new QGridLayout();
-    v->addLayout(h);
-    h->setSpacing(5);
-    h->setColumnStretch(1, 10);
-
-    QLabel* label = new QLabel(i18n("A (Base):"), this);
     QUrl url = QUrl(n1);
     //QUrl::isLocalFile returns false if the scheme is blank.
     if(url.scheme().isEmpty()) url.setScheme("file");
 
-    m_pLineA = new QComboBox();
-    m_pLineA->setEditable(true);
+    m_pLineA = findChild<QComboBox*>("lineA");
     m_pLineA->insertItems(0, m_pOptions->m_recentAFiles);
     m_pLineA->setEditText(url.isLocalFile() ? n1 : url.toDisplayString());
-    m_pLineA->setMinimumWidth(200);
-    QPushButton* button = new QPushButton(QIcon::fromTheme("document-new"), i18n("File..."), this);
+
+    QPushButton* button = findChild<QPushButton*>("fileSelectA");
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileA);
-    QPushButton* button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Folder..."), this);
+    QPushButton* button2 = findChild<QPushButton*>("folderSelectA");
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirA);
     chk_connect(m_pLineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
-    h->addWidget(label, 0, 0);
-    h->addWidget(m_pLineA, 0, 1);
-    h->addWidget(button, 0, 2);
-    h->addWidget(button2, 0, 3);
-
     url.setUrl(n2);
     if(url.scheme().isEmpty()) url.setScheme("file");
-    label = new QLabel("B:", this);
-    m_pLineB = new QComboBox();
+
+    m_pLineB = findChild<QComboBox*>("lineB");
     m_pLineB->setEditable(true);
     m_pLineB->insertItems(0, m_pOptions->m_recentBFiles);
     m_pLineB->setEditText(url.isLocalFile() ? n2 :url.toDisplayString());
     m_pLineB->setMinimumWidth(200);
-    button = new QPushButton(QIcon::fromTheme("document-new"), i18n("File..."), this);
+    button = findChild<QPushButton*>("fileSelectB");
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileB);
-    button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Folder..."), this);
+    button2 = findChild<QPushButton*>("folderSelectB");
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirB);
     chk_connect(m_pLineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
-    h->addWidget(label, 1, 0);
-    h->addWidget(m_pLineB, 1, 1);
-    h->addWidget(button, 1, 2);
-    h->addWidget(button2, 1, 3);
-
     url.setUrl(n3);
     if(url.scheme().isEmpty()) url.setScheme("file");
-    label = new QLabel(i18n("C (Optional):"), this);
-    m_pLineC = new QComboBox();
+
+    m_pLineC = findChild<QComboBox*>("lineC");
     m_pLineC->setEditable(true);
     m_pLineC->insertItems(0, m_pOptions->m_recentCFiles);
     m_pLineC->setEditText(url.isLocalFile() ? n3 :url.toDisplayString());
     m_pLineC->setMinimumWidth(200);
-    button = new QPushButton(QIcon::fromTheme("document-new"), i18n("File..."), this);
+    button = findChild<QPushButton*>("fileSelectC");
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileC);
-    button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Folder..."), this);
+    button2 = findChild<QPushButton*>("folderSelectC");
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirC);
     chk_connect(m_pLineC, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
-    h->addWidget(label, 2, 0);
-    h->addWidget(m_pLineC, 2, 1);
-    h->addWidget(button, 2, 2);
-    h->addWidget(button2, 2, 3);
+    m_pMerge = findChild<QCheckBox*>("mergeCheckBox");
 
-    m_pMerge = new QCheckBox(i18n("Merge"), this);
-    h->addWidget(m_pMerge, 3, 0);
-
-    QHBoxLayout* hl = new QHBoxLayout();
-    h->addLayout(hl, 3, 1);
-    hl->addStretch(2);
-    button = new QPushButton(i18n("Swap/Copy Names..."), this);
-    //button->setToggleButton(false);
-    hl->addWidget(button);
+    button = findChild<QPushButton*>("swapCopy");
 
     QMenu* m = new QMenu(this);
     m->addAction(i18n("Swap %1<->%2", i18n("A"), i18n("B")));
@@ -127,41 +101,25 @@ OpenDialog::OpenDialog(
     chk_connect(m, &QMenu::triggered, this, &OpenDialog::slotSwapCopyNames);
     button->setMenu(m);
 
-    hl->addStretch(2);
-
     url.setUrl(outputName);
     if(url.scheme().isEmpty()) url.setScheme("file");
 
-    label = new QLabel(i18n("Output (optional):"), this);
-    m_pLineOut = new QComboBox();
-    m_pLineOut->setEditable(true);
+    m_pLineOut = findChild<QComboBox*>("lineOut");
     m_pLineOut->insertItems(0, m_pOptions->m_recentOutputFiles);
     m_pLineOut->setEditText(url.isLocalFile() ? outputName : url.toDisplayString());
-    m_pLineOut->setMinimumWidth(200);
-    button = new QPushButton(QIcon::fromTheme("document-new"), i18n("File..."), this);
+
+    button = findChild<QPushButton*>("selectOuputFile");
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectOutputName);
-    button2 = new QPushButton(QIcon::fromTheme("document-open-folder"), i18n("Folder..."), this);
+    button2 = findChild<QPushButton*>("selectOuputFolder");
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectOutputDir);
     chk_connect(m_pMerge, &QCheckBox::stateChanged, this, &OpenDialog::internalSlot);
     chk_connect(this, &OpenDialog::internalSignal, m_pLineOut, &QComboBox::setEnabled);
     chk_connect(this, &OpenDialog::internalSignal, button, &QPushButton::setEnabled);
     chk_connect(this, &OpenDialog::internalSignal, button2, &QPushButton::setEnabled);
 
-    m_pMerge->setChecked(!bMerge);
     m_pMerge->setChecked(bMerge);
-    //   m_pLineOutput->setEnabled( bMerge );
 
-    //   button->setEnabled( bMerge );
-
-    h->addWidget(label, 4, 0);
-    h->addWidget(m_pLineOut, 4, 1);
-    h->addWidget(button, 4, 2);
-    h->addWidget(button2, 4, 3);
-
-    h->addItem(new QSpacerItem(200, 0), 0, 1);
-
-    QDialogButtonBox *box = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
-    v->addWidget(box);
+    QDialogButtonBox *box = this->findChild<QDialogButtonBox*>("buttonBox");
     button = box->addButton(i18n("Configure..."), QDialogButtonBox::ActionRole);
     button->setIcon(QIcon::fromTheme("configure"));
     chk_connect(button, &QPushButton::clicked, pParent, &KDiff3App::slotConfigure);

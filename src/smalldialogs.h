@@ -9,6 +9,7 @@
 #define SMALLDIALOGS_H
 
 #include <QDialog>
+#include <QPointer>
 
 class Options;
 class QComboBox;
@@ -24,12 +25,12 @@ class OpenDialog: public QDialog
         KDiff3App* pParent, const QString& n1, const QString& n2, const QString& n3,
         bool bMerge, const QString& outputName, const QSharedPointer<Options>& pOptions);
 
-    QComboBox* m_pLineA;
-    QComboBox* m_pLineB;
-    QComboBox* m_pLineC;
-    QComboBox* m_pLineOut;
+    QPointer<QComboBox> m_pLineA;
+    QPointer<QComboBox> m_pLineB;
+    QPointer<QComboBox> m_pLineC;
+    QPointer<QComboBox> m_pLineOut;
 
-    QCheckBox* m_pMerge;
+    QPointer<QCheckBox> m_pMerge;
     void accept() override;
     bool eventFilter(QObject* o, QEvent* e) override;
 
