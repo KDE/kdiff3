@@ -9,7 +9,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(ECM_MIN_VERSION "5.10.0")
 set(QT_MIN_VERSION "5.8.0")
 #KF5 5.27 fixes a crash bug triggered on exit.
-set(KF5_MIN_VERSION "5.27.0")
+set(KF5_MIN_VERSION "5.37.0")
 
 find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED)
 set(
@@ -116,8 +116,9 @@ add_definitions(
     -DQT_NO_CAST_TO_ASCII
     -DQT_DISABLE_DEPRECATED_BEFORE=0x050800#disable depriated api for Qt<5.8.
     #KF5 5.64+ flags
-    #Don't warn for API depreciated after 5.26.0 (below as hex.hex.hex number)
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x051A00
+    #Don't warn for API depreciated after 5.36.0 (below as hex.hex.hex number)
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x052400
+    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x052400
 )
 
 add_subdirectory(src)
