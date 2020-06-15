@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 find_package(
     Qt5 ${QT_MIN_VERSION}
     REQUIRED
@@ -10,7 +13,7 @@ ecm_add_test(commentparser.cpp ../CommentParser.cpp
     LINK_LIBRARIES Qt5::Test
 )
 
-ecm_add_test(CvsIgnorelist.cpp ../cvsignorelist.cpp 
+ecm_add_test(CvsIgnorelist.cpp ../cvsignorelist.cpp
     TEST_NAME "cvsignorelisttest"
     LINK_LIBRARIES Qt5::Test
 )
