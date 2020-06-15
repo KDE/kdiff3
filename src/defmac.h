@@ -9,6 +9,8 @@
 
 *****************************************************************************/
 
+#ifndef DEFMAC_H
+#define DEFMAC_H
 
 #pragma once
 
@@ -73,3 +75,5 @@
 #if defined(__MINGW32__) || defined(__MINGW64__)
 #define MINGW
 #endif
+
+#endif /* DEFMAC_H */
