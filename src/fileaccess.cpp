@@ -85,7 +85,7 @@ void FileAccess::setFile(FileAccess* pParent, const QFileInfo& fi)
     m_fileInfo = fi;
     m_url = QUrl::fromLocalFile(m_fileInfo.filePath());
     if(!m_url.scheme().isEmpty())
-        m_url.setScheme(QLatin1Literal("file"));
+        m_url.setScheme(QLatin1String("file"));
 
     m_pParent = pParent;
     loadData();
@@ -108,7 +108,7 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     m_url = url;
     //QUrl::isLocalFile assumes the scheme is set.
     if(m_url.scheme().isEmpty())
-        m_url.setScheme(QLatin1Literal("file"));
+        m_url.setScheme(QLatin1String("file"));
 
     if(m_url.isLocalFile() || !m_url.isValid()) // Treat invalid urls as local files.
     {
@@ -1194,7 +1194,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
             connect(pListJob, &KIO::ListJob::infoMessage, &pp, &ProgressProxyExtender::slotListDirInfoMessage);
 
             // This line makes the transfer via fish unreliable.:-(
-            /*if(m_pFileAccess->url().scheme() != QLatin1Literal("fish")){
+            /*if(m_pFileAccess->url().scheme() != QLatin1String("fish")){
                 connect( pListJob, static_cast<void (KIO::ListJob::*)(KJob*,qint64)>(&KIO::ListJob::percent), &pp, &ProgressProxyExtender::slotPercent);
             }*/
 
