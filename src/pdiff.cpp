@@ -187,8 +187,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             pp.setMaxNofSteps(6); // 3 comparisons, 3 finediffs
     }
 
-    if(pTotalDiffStatus)
-        pTotalDiffStatus->reset();
+    pTotalDiffStatus->reset();
 
     if(errors.isEmpty())
     {
