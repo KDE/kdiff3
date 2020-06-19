@@ -1,6 +1,6 @@
 Version 1.8.2 - 2020-03-29
 ===========================
-Bug 411472 Allowing editing of blank lines and don't mark newly intserted lines as a confilict
+Bug 411472 Allow editing of blank lines and don't mark newly intserted lines as a confilict
 2ba20222 - Remove broken attempt to optimize drawing on horizonal scroll.
 Bug 418813 - Fix line numbers not shown. Use QString::number directly not through a format string.
 11e93232 - Correcly support "Print Current Page"
@@ -12,7 +12,7 @@ e8d06774 - Switch to QElapsedTime for timing avoids explictly undefined behavior
 f9bd88a1 - Make matching in CvsIngnoreList always honor bCaseSensitive setting.
 418ea78c - Don't use temporary with QLatin1String constructor strange things will happen.
 b058c060 - ignore over size cvsignore files
-Bug 410962 - Fix '-L' parameter handling 
+Bug 410962 - Fix '-L' parameter handling
 b4b2c970 - Restore acciedently deleted --auto option
 Bug 411602 - Fixing missing menu items also resolves a potiential crash in MergeResultWindow::slotUpdateAvailabilities (Bug 407745).
 d4239b92 - Prevent intermient crash during reload/refresh
@@ -57,7 +57,7 @@ Version 0.9.98 - 2014-07-04
   - Improved handling of texts with both right to left and left to right languages (mixed Arabic and western texts).
   - Improved handling of Chinese and Japanese.
   - Whitespace characters are now shown as dots for spaces and arrows for tabs, and not only in differences.
-  - Fixed symlink comparison (Qt4 symLinkTarget returns absolute paths) 
+  - Fixed symlink comparison (Qt4 symLinkTarget returns absolute paths)
 - Text analysis for rendering with QTextLayout is interruptable and multithreaded. (See progressbar and abort-button in statusbar)
 - Fix for saving to relative path in KDE-environments. (Patch from Harald Sitter)
 - Fixed bug in 0.9.97: Directory compare was always case sensitive.
@@ -81,7 +81,7 @@ Version 0.9.97 - 2012-08-10
 - Fixed mouse wheel problem. (Patch by David Hay)
 - Change an encoding in diff text window via click on encoding label. (Patch by Alexey Kostromin)
 - Fix for tab-key moving focus instead of adding a tab character in MergeResultWindow.
-- Workaround for git on Cygwin that allows KDiff3 to find files in a Cygwin "/tmp" directory 
+- Workaround for git on Cygwin that allows KDiff3 to find files in a Cygwin "/tmp" directory
   when environment variable "CYGWIN_BIN" is set. (Patch by Nigel Stewart)
 - Removed iostream dependency (Patch by Nigel Stewart)
 - Regression test framework (by Maurice van der Pot)
@@ -107,7 +107,7 @@ Version 0.9.96 - 2011-09-02
 - String corrections (Frederik Schwarzer)
 - Fixed writing to KIO.
 - OS2-Port (Patch by Silvan Scherrer)
-- Fixed problem where destination directory would be renamed or deleted during copy operation. 
+- Fixed problem where destination directory would be renamed or deleted during copy operation.
   Now if the destination directory exists only the files inside will be copied.
 - In merge: Separate lines where the automatic choice would be the same but for different reasons.
 - Fixed some problems with huge files in directory comparison mode (>2GB) (but direct comparison is still not possible)
@@ -117,7 +117,7 @@ Version 0.9.96 - 2011-09-02
 - Exclude printing code if Qt was compiled without printing support.
 - For Windows: Fixed handling of unicode characters in command line parameters.
 - Improved "old mac" lineendstyle handling: Break lines.
-- Detect encoding specified in xml header or html "meta" tag. 
+- Detect encoding specified in xml header or html "meta" tag.
 
 Version 0.9.95 - 2009/03/03
 ===========================
@@ -211,7 +211,7 @@ New features:
 - Filename-edit above DiffInputWindows
 - Windows-Context Menu in A/B/C-columns for dir-comparison (Windows only)
 - Edit Menu: Select All (Ctrl-A)
-- New commandline options: 
+- New commandline options:
   --config filename: Select an individual config file. (Now also available for Windows and Qt-only version.)
   --cs config: Change one specific setting via the command line. (For settings that were previously adjustable via GUI only.)
   --confighelp: Show available config items and their current values.
@@ -264,7 +264,7 @@ Bugfixes:
 - Fix for MergeResultWindow-contextmenu: All items were disabled always. (new in 0.9.84)
 - Fix for problem when opening files specified relative to current directory. (new in 0.9.84, qt-only-version)
 - Fix for compilation with older gcc (2.9x)
-- Several Word-wrap problems fixed: 
+- Several Word-wrap problems fixed:
      - Find string with word wrap active didn't work if found text was not in first wrap-line.
      - overview-position was not updated when toggling word wrap
      - horizontal scrollbar was not updated when toggling word wrap
@@ -284,15 +284,15 @@ Version 0.9.84 - 2004/05/29
 ============================
 New Features:
 - Word Wrap for DiffTextWindow
-- Directory-Comparison: Option "Full Analysis" allows you to show the number of solved vs. unsolved 
+- Directory-Comparison: Option "Full Analysis" allows you to show the number of solved vs. unsolved
   conflicts or deltas vs. whitespace-changes in the directory tree.
 - Diff-Menu for Diff-view specific entries
-- Docs now contain a new chapter for uses of preprocessor and line-matching-preprocessor. 
+- Docs now contain a new chapter for uses of preprocessor and line-matching-preprocessor.
 - Added several credits which now are also visible in the Qt-only version.
 - The Qt-only version now also shows all command-line options. Under windows a dialog shows them.
 - Command line options -u and -L for Subversion-support.
 - Command line options --L1/2/3 for specifying alias names.
-- In the Qt-only-version the user-interface-language can be set via the regional-settings 
+- In the Qt-only-version the user-interface-language can be set via the regional-settings
   (only effective after a restart).
 - ProgressDialog redesign for recursive use.
 - Overview now allows you to show the delta between two other files in triplediff-mode.
@@ -336,7 +336,7 @@ Version 0.9.82 - 2004/02/02
   (To avoid accidental overwrites.)
 - Icon for "Highlight white space differences."
 - Editor-Option: Line End Style for saving: Dos/Windows "\r\n" vs. Unix "\n"
-- Merge output editor: Corrected wrong encoding for output-filename and 
+- Merge output editor: Corrected wrong encoding for output-filename and
   user-typed characters.
 - Speedup for reading directories under Windows.
 - Enhanced progress dialog responsiveness during local file copy.
@@ -348,7 +348,7 @@ Version 0.9.81 - 2004/01/08
 - Bugfix for 3 file-compare (and A or B don't exist, crashed)
 - Bugfix for crash when second directory is merged
 - Some keyboard-shortcuts for selection of merge-operation didn't work correctly.
-- Shortcuts Ctrl-1/2/3 are possible in textmergewindow and in dirmergewindow, 
+- Shortcuts Ctrl-1/2/3 are possible in textmergewindow and in dirmergewindow,
   depending on the focus.
 - First steps towards internationalisation
 - Manpage doc/en/kdiff3.1 by Eike Sauer (for Debian)
