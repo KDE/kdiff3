@@ -1,3 +1,12 @@
+Version 1.8.3 - 2020-
+===========================
+Bug 423001 fixed reload on Windows.
+15f1cc4e - Fixed error handling during directory compare
+2d56cd94,42b3b5e4 - Reduce noice when encountering multiple errors. Full fix in master.
+Bug 419722 - Fix crash when clipboard is available. Mainly affects some network setups.
+f2d89bbc - Rework intial window display and full screen toggling.
+BUG:421048 - Treat /dev/null as non-existant as git expects.
+
 Version 1.8.2 - 2020-03-29
 ===========================
 Bug 411472 Allow editing of blank lines and don't mark newly intserted lines as a confilict
