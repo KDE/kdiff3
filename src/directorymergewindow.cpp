@@ -911,13 +911,14 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
     if(m_pOptions->m_bDmFullAnalysis)
     {
+        QStringList errors;
         // A full analysis uses the same resources that a normal text-diff/merge uses.
         // So make sure that the user saves his data first.
         bool bCanContinue = false;
         emit q->checkIfCanContinue(&bCanContinue);
         if(!bCanContinue)
             return false;
-        emit q->startDiffMerge("", "", "", "", "", "", "", nullptr); // hide main window
+        emit q->startDiffMerge(errors, "", "", "", "", "", "", "", nullptr); // hide main window
     }
 
     q->show();
@@ -1443,7 +1444,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::compareFilesAndCalcAges(
         }
         else
         {
-            emit q->startDiffMerge(
+            emit q->startDiffMerge(errors,
                 mfi.existsInA() ? mfi.getFileInfoA()->absoluteFilePath() : QString(""),
                 mfi.existsInB() ? mfi.getFileInfoB()->absoluteFilePath() : QString(""),
                 mfi.existsInC() ? mfi.getFileInfoC()->absoluteFilePath() : QString(""),
@@ -2234,12 +2235,12 @@ void DirectoryMergeWindow::compareCurrentFile()
         KMessageBox::sorry(this, i18n("This operation is currently not possible."), i18n("Operation Not Possible"));
         return;
     }
-
+    QStringList errors;
     if(MergeFileInfos* pMFI = d->getMFI(currentIndex()))
     {
         if(!(pMFI->isDirA() || pMFI->isDirB() || pMFI->isDirC()))
         {
-            emit startDiffMerge(
+            emit startDiffMerge(errors,
                 pMFI->existsInA() ? pMFI->getFileInfoA()->absoluteFilePath() : QString(""),
                 pMFI->existsInB() ? pMFI->getFileInfoB()->absoluteFilePath() : QString(""),
                 pMFI->existsInC() ? pMFI->getFileInfoC()->absoluteFilePath() : QString(""),
@@ -2260,7 +2261,8 @@ void DirectoryMergeWindow::slotCompareExplicitlySelectedFiles()
         return;
     }
 
-    emit startDiffMerge(
+    QStringList errors;
+    emit startDiffMerge(errors,
         d->getFileName(d->m_selection1Index),
         d->getFileName(d->m_selection2Index),
         d->getFileName(d->m_selection3Index),
@@ -2283,12 +2285,12 @@ void DirectoryMergeWindow::slotMergeExplicitlySelectedFiles()
         KMessageBox::sorry(this, i18n("This operation is currently not possible."), i18n("Operation Not Possible"));
         return;
     }
-
+    QStringList errors;
     QString fn1 = d->getFileName(d->m_selection1Index);
     QString fn2 = d->getFileName(d->m_selection2Index);
     QString fn3 = d->getFileName(d->m_selection3Index);
 
-    emit startDiffMerge(fn1, fn2, fn3,
+    emit startDiffMerge(errors, fn1, fn2, fn3,
                         fn3.isEmpty() ? fn2 : fn3,
                         "", "", "", nullptr);
     d->m_selection1Index = QModelIndex();
@@ -2868,6 +2870,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeFLD(const QString& 
         return makeDir(nameDest);
     }
 
+    QStringList errors;
     // Make sure that the dir exists, into which we will save the file later.
     int pos = nameDest.lastIndexOf('/');
     if(pos > 0)
@@ -2889,7 +2892,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeFLD(const QString& 
     setOpStatus(*m_currentIndexForOperation, eOpStatusInProgress);
     q->scrollTo(*m_currentIndexForOperation, EnsureVisible);
 
-    emit q->startDiffMerge(nameA, nameB, nameC, nameDest, "", "", "", nullptr);
+    emit q->startDiffMerge(errors, nameA, nameB, nameC, nameDest, "", "", "", nullptr);
 
     return false;
 }

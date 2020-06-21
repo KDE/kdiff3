@@ -115,7 +115,7 @@ public:
    void slotLoadMergeState();
 
 Q_SIGNALS:
-   void startDiffMerge(QString fn1,QString fn2, QString fn3, QString ofn, QString,QString,QString,TotalDiffStatus*);
+   void startDiffMerge(QStringList &errors, QString fn1,QString fn2, QString fn3, QString ofn, QString,QString,QString,TotalDiffStatus*);
    void checkIfCanContinue( bool* pbContinue );
    void updateAvailabilities();
    void statusBarMessage( const QString& msg );

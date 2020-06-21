@@ -158,6 +158,8 @@ bool KDiff3Part::openFile()
     QString fileName2;
     QString version1;
     QString version2;
+    QStringList errors;
+
     while(!stream.atEnd() && (fileName1.isEmpty() || fileName2.isEmpty()))
     {
         str = stream.readLine() + '\n';
@@ -178,7 +180,7 @@ bool KDiff3Part::openFile()
 
     if(f1.exists() && f2.exists() && fileName1 != fileName2)
     {
-        m_widget->slotFileOpen2(fileName1, fileName2, "", "", "", "", "", nullptr);
+        m_widget->slotFileOpen2(errors, fileName1, fileName2, "", "", "", "", "", nullptr);
         return true;
     }
     else if(version1.isEmpty() && f1.exists())
@@ -195,7 +197,7 @@ bool KDiff3Part::openFile()
         process.start(cmd);
         process.waitForFinished(-1);
 
-        m_widget->slotFileOpen2(fileName1, tempFileName, "", "",
+        m_widget->slotFileOpen2(errors, fileName1, tempFileName, "", "",
                                 "", version2.isEmpty() ? fileName2 : "REV:" + version2 + ':' + fileName2, "", nullptr); // alias names                                                                                              //    std::cerr << "KDiff3: f1:" << fileName1.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
     }
     else if(version2.isEmpty() && f2.exists())
@@ -212,7 +214,7 @@ bool KDiff3Part::openFile()
         process.start(cmd);
         process.waitForFinished(-1);
 
-        m_widget->slotFileOpen2(tempFileName, fileName2, "", "",
+        m_widget->slotFileOpen2(errors, tempFileName, fileName2, "", "",
                                 version1.isEmpty() ? fileName1 : "REV:" + version1 + ':' + fileName1, "", "", nullptr); // alias name
                                                                                                                   //    std::cerr << "KDiff3: f2:" << fileName2.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
     }
@@ -240,7 +242,7 @@ bool KDiff3Part::openFile()
         process2.start(cmd2);
         process2.waitForFinished(-1);
 
-        m_widget->slotFileOpen2(tempFileName1, tempFileName2, "", "",
+        m_widget->slotFileOpen2(errors, tempFileName1, tempFileName2, "", "",
                                 "REV:" + version1 + ':' + fileName1,
                                 "REV:" + version2 + ':' + fileName2,
                                 "", nullptr);

@@ -387,28 +387,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         pTotalDiffStatus);
     m_pMergeResultWindowTitle->setFileName(m_outputFilename.isEmpty() ? QString("unnamed.txt") : m_outputFilename);
 
-    if(!bGUI)
-    {
-        //TODO Not ideal placement but when doing directory merges we arrive here and must handle the error.
-        if(!m_sd1.getErrors().isEmpty() || !m_sd2.getErrors().isEmpty() || !m_sd3.getErrors().isEmpty() )
-        {
-            QString text(i18n("Opening of these files failed:"));
-            text += "\n\n";
-            if(!m_sd1.getErrors().isEmpty())
-                text += " - " + m_sd1.getAliasName() + '\n' + m_sd1.getErrors().join('\n') + '\n';
-            if(!m_sd2.getErrors().isEmpty())
-                text += " - " + m_sd2.getAliasName() + '\n' + m_sd2.getErrors().join('\n') + '\n';
-            if(!m_sd3.getErrors().isEmpty())
-                text += " - " + m_sd3.getAliasName() + '\n' + m_sd3.getErrors().join('\n') + '\n';
-
-            KMessageBox::sorry(this, text, i18n("File open error"));
-        }
-        // We now have all needed information. The rest below is only for GUI-activation.
-        m_sd1.reset();
-        m_sd2.reset();
-        m_sd3.reset();
-    }
-    else
+    if(bGUI)
     {
         m_pOverview->init(&m_diff3LineList, m_bTripleDiff);
         m_pDiffVScrollBar->setValue(0);
@@ -1136,7 +1115,7 @@ void KDiff3App::slotFileOpen()
     slotStatusMsg(i18n("Ready."));
 }
 
-void KDiff3App::slotFileOpen2(const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
+void KDiff3App::slotFileOpen2(QStringList &errors, const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
                               const QString& an1, const QString& an2, const QString& an3, TotalDiffStatus* pTotalDiffStatus)
 {
     if(!canContinue()) return;
@@ -1175,7 +1154,16 @@ void KDiff3App::slotFileOpen2(const QString& fn1, const QString& fn2, const QStr
         mainInit(pTotalDiffStatus);
 
         if(pTotalDiffStatus != nullptr)
+        {
+            errors.append(m_sd1.getErrors());
+            errors.append(m_sd2.getErrors());
+            errors.append(m_sd3.getErrors());
+            //Only time this could ever happen so move here to allow for error retrieval.
+            m_sd1.reset();
+            m_sd2.reset();
+            m_sd3.reset();
             return;
+        }
 
         if(!((!m_sd1.isEmpty() && !m_sd1.hasData()) ||
            (!m_sd2.isEmpty() && !m_sd2.hasData()) ||
@@ -1192,12 +1180,14 @@ void KDiff3App::slotFileOpen2(const QString& fn1, const QString& fn2, const QStr
 
 void KDiff3App::slotFileNameChanged(const QString& fileName, e_SrcSelector winIdx)
 {
+    QStringList errors;
     QString fn1 = m_sd1.getFilename();
     QString an1 = m_sd1.getAliasName();
     QString fn2 = m_sd2.getFilename();
     QString an2 = m_sd2.getAliasName();
     QString fn3 = m_sd3.getFilename();
     QString an3 = m_sd3.getAliasName();
+
     if(winIdx == A)
     {
         fn1 = fileName;
@@ -1214,7 +1204,7 @@ void KDiff3App::slotFileNameChanged(const QString& fileName, e_SrcSelector winId
         an3 = "";
     }
 
-    slotFileOpen2(fn1, fn2, fn3, m_outputFilename, an1, an2, an3, nullptr);
+    slotFileOpen2(errors, fn1, fn2, fn3, m_outputFilename, an1, an2, an3, nullptr);
 }
 
 void KDiff3App::slotEditCut()
