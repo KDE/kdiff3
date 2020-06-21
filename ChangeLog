@@ -1,8 +1,8 @@
 Version 1.8.3 - 2020-
 ===========================
 Bug 423001 fixed reload on Windows.
-15f1cc4e - Fixed error handling during directory compare
-2d56cd94,42b3b5e4 - Reduce noice when encountering multiple errors. Full fix in master.
+15f1cc4e - Fixed error handling during directory compare.
+065a3997, 2d56cd94, 42b3b5e4 - Only give one error message per directory compare opperation.
 Bug 419722 - Fix crash when clipboard is available. Mainly affects some network setups.
 f2d89bbc - Rework intial window display and full screen toggling.
 BUG:421048 - Treat /dev/null as non-existant as git expects.
