@@ -109,9 +109,9 @@ FontChooser::FontChooser(QWidget* pParent)
 
     QChar visualTab(0x2192);
     QChar visualSpace((ushort)0xb7);
-    m_pExampleTextEdit = new QPlainTextEdit(QString("The quick brown fox jumps over the river\n"
-                                                    "but the little red hen escapes with a shiver.\n"
-                                                    ":-)") +
+    m_pExampleTextEdit = new QPlainTextEdit(i18n("The quick brown fox jumps over the river\n"
+                                                 "but the little red hen escapes with a shiver.\n"
+                                                 ":-)") +
                                                 visualTab + visualSpace,
                                             this);
     m_pExampleTextEdit->setFont(m_font);
@@ -843,9 +843,9 @@ void OptionDialog::setupEditPage()
     OptionComboBox* pLineEndStyle = new OptionComboBox(eLineEndStyleAutoDetect, "LineEndStyle", (int*)&m_options.m_lineEndStyle, page);
     gbox->addWidget(pLineEndStyle, line, 1);
     addOptionItem(pLineEndStyle);
-    pLineEndStyle->insertItem(eLineEndStyleUnix, "Unix");
-    pLineEndStyle->insertItem(eLineEndStyleDos, "Dos/Windows");
-    pLineEndStyle->insertItem(eLineEndStyleAutoDetect, "Autodetect");
+    pLineEndStyle->insertItem(eLineEndStyleUnix, i18nc("Unix line ending", "Unix"));
+    pLineEndStyle->insertItem(eLineEndStyleDos, i18nc("Dos/Windows line ending", "Dos/Windows"));
+    pLineEndStyle->insertItem(eLineEndStyleAutoDetect, i18nc("Automatically detected line ending", "Autodetect"));
 
     label->setToolTip(i18n(
         "Sets the line endings for when an edited file is saved.\n"
