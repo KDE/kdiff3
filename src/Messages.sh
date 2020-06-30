@@ -1,3 +1,3 @@
 #! /usr/bin/env bash
-$EXTRACTRC *.rc >> rc.cpp
-$XGETTEXT `find -name \*.cpp -o -name \*.h` -o $podir/kdiff3.pot
+$EXTRACTRC `find . \( -name \*.rc -o -name \*.ui \) \! -name kdiff3win.rc` >> rc.cpp
+$XGETTEXT `find . -name \*.cpp` -o $podir/kdiff3.pot
