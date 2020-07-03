@@ -38,6 +38,8 @@ OpenDialog::OpenDialog(
 {
     QScopedPointer<Ui::OpenDialog> dialog(new Ui::OpenDialog());
 
+    Q_ASSERT(dialog != nullptr);
+
     dialog->setupUi(this);
     setModal(true);
     m_pOptions = pOptions;
@@ -108,9 +110,9 @@ OpenDialog::OpenDialog(
     m_pLineOut->insertItems(0, m_pOptions->m_recentOutputFiles);
     m_pLineOut->setEditText(url.isLocalFile() ? outputName : url.toDisplayString());
 
-    button = findChild<QPushButton*>("selectOuputFile");
+    button = findChild<QPushButton*>("selectOutputFile");
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectOutputName);
-    button2 = findChild<QPushButton*>("selectOuputFolder");
+    button2 = findChild<QPushButton*>("selectOutputFolder");
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectOutputDir);
     chk_connect(m_pMerge, &QCheckBox::stateChanged, this, &OpenDialog::internalSlot);
     chk_connect(this, &OpenDialog::internalSignal, m_pLineOut, &QComboBox::setEnabled);
@@ -127,7 +129,9 @@ OpenDialog::OpenDialog(
     chk_connect(box, &QDialogButtonBox::rejected, this, &OpenDialog::reject);
 
     QSize sh = sizeHint();
-    setFixedHeight(sh.height());
+    if(sh.height() > 10)
+        setFixedHeight(sh.height());
+
     m_bInputFileNameChanged = false;
 
 #ifdef Q_OS_WIN
