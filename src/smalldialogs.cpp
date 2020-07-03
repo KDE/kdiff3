@@ -38,11 +38,11 @@ OpenDialog::OpenDialog(
 {
     QScopedPointer<Ui::OpenDialog> dialog(new Ui::OpenDialog());
 
-    Q_ASSERT(dialog != nullptr);
-
     dialog->setupUi(this);
     setModal(true);
     m_pOptions = pOptions;
+    //Abort if verticalLayout is not the imedient child of the dialog. This interferes with re-sizing.
+    Q_ASSERT(dialog->virticalLayout->parent() == this);
 
     QUrl url = QUrl(n1);
     //QUrl::isLocalFile returns false if the scheme is blank.
@@ -131,7 +131,12 @@ OpenDialog::OpenDialog(
     QSize sh = sizeHint();
     if(sh.height() > 10)
         setFixedHeight(sh.height());
-
+    else
+    {
+        //This is likely a bug. It is also a recoverable condition. Assert for it in debug builds.
+        Q_ASSERT(sh.isValid() && sh.height() > 10);
+        setFixedHeight(262);
+    }
     m_bInputFileNameChanged = false;
 
 #ifdef Q_OS_WIN
