@@ -48,47 +48,47 @@ OpenDialog::OpenDialog(
     //QUrl::isLocalFile returns false if the scheme is blank.
     if(url.scheme().isEmpty()) url.setScheme("file");
 
-    m_pLineA = findChild<QComboBox*>("lineA");
+    m_pLineA = dialog->lineA;
     m_pLineA->insertItems(0, m_pOptions->m_recentAFiles);
     m_pLineA->setEditText(url.isLocalFile() ? n1 : url.toDisplayString());
 
-    QPushButton* button = findChild<QPushButton*>("fileSelectA");
+    QPushButton* button = dialog->fileSelectA;
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileA);
-    QPushButton* button2 = findChild<QPushButton*>("folderSelectA");
+    QPushButton* button2 = dialog->folderSelectA;
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirA);
     chk_connect(m_pLineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
     url.setUrl(n2);
     if(url.scheme().isEmpty()) url.setScheme("file");
 
-    m_pLineB = findChild<QComboBox*>("lineB");
+    m_pLineB = dialog->lineB;
     m_pLineB->setEditable(true);
     m_pLineB->insertItems(0, m_pOptions->m_recentBFiles);
     m_pLineB->setEditText(url.isLocalFile() ? n2 :url.toDisplayString());
     m_pLineB->setMinimumWidth(200);
-    button = findChild<QPushButton*>("fileSelectB");
+    button = dialog->fileSelectB;
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileB);
-    button2 = findChild<QPushButton*>("folderSelectB");
+    button2 = dialog->folderSelectB;
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirB);
     chk_connect(m_pLineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
     url.setUrl(n3);
     if(url.scheme().isEmpty()) url.setScheme("file");
 
-    m_pLineC = findChild<QComboBox*>("lineC");
+    m_pLineC = dialog->lineC;
     m_pLineC->setEditable(true);
     m_pLineC->insertItems(0, m_pOptions->m_recentCFiles);
     m_pLineC->setEditText(url.isLocalFile() ? n3 :url.toDisplayString());
     m_pLineC->setMinimumWidth(200);
-    button = findChild<QPushButton*>("fileSelectC");
+    button = dialog->fileSelectC;
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileC);
-    button2 = findChild<QPushButton*>("folderSelectC");
+    button2 = dialog->folderSelectC;
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirC);
     chk_connect(m_pLineC, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
-    m_pMerge = findChild<QCheckBox*>("mergeCheckBox");
+    m_pMerge = dialog->mergeCheckBox;
 
-    button = findChild<QPushButton*>("swapCopy");
+    button = dialog->swapCopy;
 
     QMenu* m = new QMenu(this);
     m->addAction(i18n("Swap %1<->%2", i18n("A"), i18n("B")));
@@ -106,13 +106,13 @@ OpenDialog::OpenDialog(
     url.setUrl(outputName);
     if(url.scheme().isEmpty()) url.setScheme("file");
 
-    m_pLineOut = findChild<QComboBox*>("lineOut");
+    m_pLineOut = dialog->lineOut;
     m_pLineOut->insertItems(0, m_pOptions->m_recentOutputFiles);
     m_pLineOut->setEditText(url.isLocalFile() ? outputName : url.toDisplayString());
 
-    button = findChild<QPushButton*>("selectOutputFile");
+    button = dialog->selectOutputFile;
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectOutputName);
-    button2 = findChild<QPushButton*>("selectOutputFolder");
+    button2 = dialog->selectOutputFolder;
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectOutputDir);
     chk_connect(m_pMerge, &QCheckBox::stateChanged, this, &OpenDialog::internalSlot);
     chk_connect(this, &OpenDialog::internalSignal, m_pLineOut, &QComboBox::setEnabled);
@@ -121,7 +121,7 @@ OpenDialog::OpenDialog(
 
     m_pMerge->setChecked(bMerge);
 
-    QDialogButtonBox *box = this->findChild<QDialogButtonBox*>("buttonBox");
+    QDialogButtonBox *box = dialog->buttonBox;
     button = box->addButton(i18n("Configure..."), QDialogButtonBox::ActionRole);
     button->setIcon(QIcon::fromTheme("configure"));
     chk_connect(button, &QPushButton::clicked, pParent, &KDiff3App::slotConfigure);

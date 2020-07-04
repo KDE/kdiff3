@@ -866,7 +866,7 @@ void KDiff3App::slotFileOpen()
 
     for(;;)
     {
-         QPointer<OpenDialog> d = QPointer<OpenDialog>(new OpenDialog(this,
+        QPointer<OpenDialog> d = QPointer<OpenDialog>(new OpenDialog(this,
                      QDir::toNativeSeparators(m_bDirCompare ? m_dirinfo->dirA().prettyAbsPath() : m_sd1->isFromBuffer() ? QString("") : m_sd1->getAliasName()),
                      QDir::toNativeSeparators(m_bDirCompare ? m_dirinfo->dirB().prettyAbsPath() : m_sd2->isFromBuffer() ? QString("") : m_sd2->getAliasName()),
                      QDir::toNativeSeparators(m_bDirCompare ? m_dirinfo->dirC().prettyAbsPath() : m_sd3->isFromBuffer() ? QString("") : m_sd3->getAliasName()),
