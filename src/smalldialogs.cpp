@@ -36,59 +36,52 @@ OpenDialog::OpenDialog(
     bool bMerge, const QString& outputName,  const QSharedPointer<Options> &pOptions)
     : QDialog(pParent)
 {
-    QScopedPointer<Ui::OpenDialog> dialog(new Ui::OpenDialog());
-
-    dialog->setupUi(this);
+    dialogUi->setupUi(this);
     setModal(true);
     m_pOptions = pOptions;
     //Abort if verticalLayout is not the imedient child of the dialog. This interferes with re-sizing.
-    Q_ASSERT(dialog->virticalLayout->parent() == this);
+    Q_ASSERT(dialogUi->virticalLayout->parent() == this);
 
     QUrl url = QUrl(n1);
     //QUrl::isLocalFile returns false if the scheme is blank.
     if(url.scheme().isEmpty()) url.setScheme("file");
 
-    m_pLineA = dialog->lineA;
-    m_pLineA->insertItems(0, m_pOptions->m_recentAFiles);
-    m_pLineA->setEditText(url.isLocalFile() ? n1 : url.toDisplayString());
+    dialogUi->lineA->insertItems(0, m_pOptions->m_recentAFiles);
+    dialogUi->lineA->setEditText(url.isLocalFile() ? n1 : url.toDisplayString());
 
-    QPushButton* button = dialog->fileSelectA;
+    QPushButton* button = dialogUi->fileSelectA;
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileA);
-    QPushButton* button2 = dialog->folderSelectA;
+    QPushButton* button2 = dialogUi->folderSelectA;
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirA);
-    chk_connect(m_pLineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
+    chk_connect(dialogUi->lineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
     url.setUrl(n2);
     if(url.scheme().isEmpty()) url.setScheme("file");
 
-    m_pLineB = dialog->lineB;
-    m_pLineB->setEditable(true);
-    m_pLineB->insertItems(0, m_pOptions->m_recentBFiles);
-    m_pLineB->setEditText(url.isLocalFile() ? n2 :url.toDisplayString());
-    m_pLineB->setMinimumWidth(200);
-    button = dialog->fileSelectB;
+    dialogUi->lineB->setEditable(true);
+    dialogUi->lineB->insertItems(0, m_pOptions->m_recentBFiles);
+    dialogUi->lineB->setEditText(url.isLocalFile() ? n2 :url.toDisplayString());
+    dialogUi->lineB->setMinimumWidth(200);
+    button = dialogUi->fileSelectB;
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileB);
-    button2 = dialog->folderSelectB;
+    button2 = dialogUi->folderSelectB;
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirB);
-    chk_connect(m_pLineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
+    chk_connect(dialogUi->lineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
     url.setUrl(n3);
     if(url.scheme().isEmpty()) url.setScheme("file");
 
-    m_pLineC = dialog->lineC;
-    m_pLineC->setEditable(true);
-    m_pLineC->insertItems(0, m_pOptions->m_recentCFiles);
-    m_pLineC->setEditText(url.isLocalFile() ? n3 :url.toDisplayString());
-    m_pLineC->setMinimumWidth(200);
-    button = dialog->fileSelectC;
+    dialogUi->lineC->setEditable(true);
+    dialogUi->lineC->insertItems(0, m_pOptions->m_recentCFiles);
+    dialogUi->lineC->setEditText(url.isLocalFile() ? n3 :url.toDisplayString());
+    dialogUi->lineC->setMinimumWidth(200);
+    button = dialogUi->fileSelectC;
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileC);
-    button2 = dialog->folderSelectC;
+    button2 = dialogUi->folderSelectC;
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirC);
-    chk_connect(m_pLineC, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
+    chk_connect(dialogUi->lineC, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
-    m_pMerge = dialog->mergeCheckBox;
-
-    button = dialog->swapCopy;
+    button = dialogUi->swapCopy;
 
     QMenu* m = new QMenu(this);
     m->addAction(i18n("Swap %1<->%2", i18n("A"), i18n("B")));
@@ -106,22 +99,21 @@ OpenDialog::OpenDialog(
     url.setUrl(outputName);
     if(url.scheme().isEmpty()) url.setScheme("file");
 
-    m_pLineOut = dialog->lineOut;
-    m_pLineOut->insertItems(0, m_pOptions->m_recentOutputFiles);
-    m_pLineOut->setEditText(url.isLocalFile() ? outputName : url.toDisplayString());
+    dialogUi->lineOut->insertItems(0, m_pOptions->m_recentOutputFiles);
+    dialogUi->lineOut->setEditText(url.isLocalFile() ? outputName : url.toDisplayString());
 
-    button = dialog->selectOutputFile;
+    button = dialogUi->selectOutputFile;
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectOutputName);
-    button2 = dialog->selectOutputFolder;
+    button2 = dialogUi->selectOutputFolder;
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectOutputDir);
-    chk_connect(m_pMerge, &QCheckBox::stateChanged, this, &OpenDialog::internalSlot);
-    chk_connect(this, &OpenDialog::internalSignal, m_pLineOut, &QComboBox::setEnabled);
+    chk_connect(dialogUi->mergeCheckBox, &QCheckBox::stateChanged, this, &OpenDialog::internalSlot);
+    chk_connect(this, &OpenDialog::internalSignal, dialogUi->lineOut, &QComboBox::setEnabled);
     chk_connect(this, &OpenDialog::internalSignal, button, &QPushButton::setEnabled);
     chk_connect(this, &OpenDialog::internalSignal, button2, &QPushButton::setEnabled);
 
-    m_pMerge->setChecked(bMerge);
+    dialogUi->mergeCheckBox->setChecked(bMerge);
 
-    QDialogButtonBox *box = dialog->buttonBox;
+    QDialogButtonBox *box = dialogUi->buttonBox;
     button = box->addButton(i18n("Configure..."), QDialogButtonBox::ActionRole);
     button->setIcon(QIcon::fromTheme("configure"));
     chk_connect(button, &QPushButton::clicked, pParent, &KDiff3App::slotConfigure);
@@ -140,10 +132,10 @@ OpenDialog::OpenDialog(
     m_bInputFileNameChanged = false;
 
 #ifdef Q_OS_WIN
-    m_pLineA->lineEdit()->installEventFilter(this);
-    m_pLineB->lineEdit()->installEventFilter(this);
-    m_pLineC->lineEdit()->installEventFilter(this);
-    m_pLineOut->lineEdit()->installEventFilter(this);
+    dialogUi->lineA->lineEdit()->installEventFilter(this);
+    dialogUi->lineB->lineEdit()->installEventFilter(this);
+    dialogUi->lineC->lineEdit()->installEventFilter(this);
+    dialogUi->lineOut->lineEdit()->installEventFilter(this);
 #endif
 }
 
@@ -184,13 +176,13 @@ void OpenDialog::selectURL(QComboBox* pLine, bool bDir, int i, bool bSave)
     QUrl currentUrl;
 
     if(current.isEmpty() && i > 3) {
-        current = m_pLineC->currentText();
+        current = dialogUi->lineC->currentText();
     }
     if(current.isEmpty()) {
-        current = m_pLineB->currentText();
+        current = dialogUi->lineB->currentText();
     }
     if(current.isEmpty()) {
-        current = m_pLineA->currentText();
+        current = dialogUi->lineA->currentText();
     }
 
     currentUrl = QUrl::fromUserInput(current, QString(), QUrl::AssumeLocalFile);
@@ -208,14 +200,14 @@ void OpenDialog::selectURL(QComboBox* pLine, bool bDir, int i, bool bSave)
     // newURL won't be modified if nothing was selected.
 }
 
-void OpenDialog::selectFileA() { selectURL(m_pLineA, false, 1, false); }
-void OpenDialog::selectFileB() { selectURL(m_pLineB, false, 2, false); }
-void OpenDialog::selectFileC() { selectURL(m_pLineC, false, 3, false); }
-void OpenDialog::selectOutputName() { selectURL(m_pLineOut, false, 4, true); }
-void OpenDialog::selectDirA() { selectURL(m_pLineA, true, 1, false); }
-void OpenDialog::selectDirB() { selectURL(m_pLineB, true, 2, false); }
-void OpenDialog::selectDirC() { selectURL(m_pLineC, true, 3, false); }
-void OpenDialog::selectOutputDir() { selectURL(m_pLineOut, true, 4, true); }
+void OpenDialog::selectFileA() { selectURL(dialogUi->lineA, false, 1, false); }
+void OpenDialog::selectFileB() { selectURL(dialogUi->lineB, false, 2, false); }
+void OpenDialog::selectFileC() { selectURL(dialogUi->lineC, false, 3, false); }
+void OpenDialog::selectOutputName() { selectURL(dialogUi->lineOut, false, 4, true); }
+void OpenDialog::selectDirA() { selectURL(dialogUi->lineA, true, 1, false); }
+void OpenDialog::selectDirB() { selectURL(dialogUi->lineB, true, 2, false); }
+void OpenDialog::selectDirC() { selectURL(dialogUi->lineC, true, 3, false); }
+void OpenDialog::selectOutputDir() { selectURL(dialogUi->lineOut, true, 4, true); }
 
 void OpenDialog::internalSlot(int i)
 {
@@ -230,7 +222,7 @@ void OpenDialog::inputFilenameChanged()
     if(!m_bInputFileNameChanged)
     {
         m_bInputFileNameChanged = true;
-        m_pLineOut->clearEditText();
+        dialogUi->lineOut->clearEditText();
     }
 }
 
@@ -251,9 +243,9 @@ void OpenDialog::fixCurrentText(QComboBox* pCB)
 void OpenDialog::accept()
 {
     int maxNofRecentFiles = 10;
-    fixCurrentText(m_pLineA);
+    fixCurrentText(dialogUi->lineA);
 
-    QString s = m_pLineA->currentText();
+    QString s = dialogUi->lineA->currentText();
     s = QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile).toLocalFile();
     QStringList* sl = &m_pOptions->m_recentAFiles;
     // If an item exist, remove it from the list and reinsert it at the beginning.
@@ -261,24 +253,24 @@ void OpenDialog::accept()
     if(!s.isEmpty()) sl->prepend(s);
     if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
 
-    fixCurrentText(m_pLineB);
-    s = m_pLineB->currentText();
+    fixCurrentText(dialogUi->lineB);
+    s = dialogUi->lineB->currentText();
     s = QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile).toLocalFile();
     sl = &m_pOptions->m_recentBFiles;
     sl->removeAll(s);
     if(!s.isEmpty()) sl->prepend(s);
     if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
 
-    fixCurrentText(m_pLineC);
-    s = m_pLineC->currentText();
+    fixCurrentText(dialogUi->lineC);
+    s = dialogUi->lineC->currentText();
     s = QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile).toLocalFile();
     sl = &m_pOptions->m_recentCFiles;
     sl->removeAll(s);
     if(!s.isEmpty()) sl->prepend(s);
     if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
 
-    fixCurrentText(m_pLineOut);
-    s = m_pLineOut->currentText();
+    fixCurrentText(dialogUi->lineOut);
+    s = dialogUi->lineOut->currentText();
     s = QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile).toLocalFile();
     sl = &m_pOptions->m_recentOutputFiles;
     sl->removeAll(s);
@@ -296,40 +288,40 @@ void OpenDialog::slotSwapCopyNames(QAction* pAction) const // id selected in the
     switch(id)
     {
     case 0:
-        cb1 = m_pLineA;
-        cb2 = m_pLineB;
+        cb1 = dialogUi->lineA;
+        cb2 = dialogUi->lineB;
         break;
     case 1:
-        cb1 = m_pLineB;
-        cb2 = m_pLineC;
+        cb1 = dialogUi->lineB;
+        cb2 = dialogUi->lineC;
         break;
     case 2:
-        cb1 = m_pLineC;
-        cb2 = m_pLineA;
+        cb1 = dialogUi->lineC;
+        cb2 = dialogUi->lineA;
         break;
     case 3:
-        cb1 = m_pLineA;
-        cb2 = m_pLineOut;
+        cb1 = dialogUi->lineA;
+        cb2 = dialogUi->lineOut;
         break;
     case 4:
-        cb1 = m_pLineB;
-        cb2 = m_pLineOut;
+        cb1 = dialogUi->lineB;
+        cb2 = dialogUi->lineOut;
         break;
     case 5:
-        cb1 = m_pLineC;
-        cb2 = m_pLineOut;
+        cb1 = dialogUi->lineC;
+        cb2 = dialogUi->lineOut;
         break;
     case 6:
-        cb1 = m_pLineA;
-        cb2 = m_pLineOut;
+        cb1 = dialogUi->lineA;
+        cb2 = dialogUi->lineOut;
         break;
     case 7:
-        cb1 = m_pLineB;
-        cb2 = m_pLineOut;
+        cb1 = dialogUi->lineB;
+        cb2 = dialogUi->lineOut;
         break;
     case 8:
-        cb1 = m_pLineC;
-        cb2 = m_pLineOut;
+        cb1 = dialogUi->lineC;
+        cb2 = dialogUi->lineOut;
         break;
     }
     if(cb1 && cb2)

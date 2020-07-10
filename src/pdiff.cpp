@@ -876,20 +876,20 @@ void KDiff3App::slotFileOpen()
         int status = d->exec();
         if(status == QDialog::Accepted)
         {
-            m_sd1->setFilename(d->m_pLineA->currentText());
-            m_sd2->setFilename(d->m_pLineB->currentText());
-            m_sd3->setFilename(d->m_pLineC->currentText());
+            m_sd1->setFilename(d->getFileA());
+            m_sd2->setFilename(d->getFileB());
+            m_sd3->setFilename(d->getFileC());
 
-            if(d->m_pMerge->isChecked())
+            if(d->merge())
             {
-                if(d->m_pLineOut->currentText().isEmpty())
+                if(d->getOutputFile().isEmpty())
                 {
                     m_outputFilename = "unnamed.txt";
                     m_bDefaultFilename = true;
                 }
                 else
                 {
-                    m_outputFilename = d->m_pLineOut->currentText();
+                    m_outputFilename = d->getOutputFile();
                     m_bDefaultFilename = false;
                 }
             }

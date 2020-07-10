@@ -8,12 +8,14 @@
 #ifndef SMALLDIALOGS_H
 #define SMALLDIALOGS_H
 
+#include "ui_opendialog.h"
+
+#include <QCheckBox>
+#include <QComboBox>
 #include <QDialog>
 #include <QPointer>
 
 class Options;
-class QComboBox;
-class QCheckBox;
 class QLineEdit;
 class KDiff3App;
 
@@ -25,12 +27,14 @@ class OpenDialog: public QDialog
         KDiff3App* pParent, const QString& n1, const QString& n2, const QString& n3,
         bool bMerge, const QString& outputName, const QSharedPointer<Options>& pOptions);
 
-    QPointer<QComboBox> m_pLineA;
-    QPointer<QComboBox> m_pLineB;
-    QPointer<QComboBox> m_pLineC;
-    QPointer<QComboBox> m_pLineOut;
+    const QString getFileA() const { return dialogUi->lineA->currentText(); }
+    const QString getFileB() const { return dialogUi->lineB->currentText(); }
+    const QString getFileC() const { return dialogUi->lineC->currentText(); }
 
-    QPointer<QCheckBox> m_pMerge;
+    const QString getOutputFile() const { return dialogUi->lineOut->currentText(); }
+
+    bool merge() const { return dialogUi->mergeCheckBox->isChecked(); }
+
     void accept() override;
     bool eventFilter(QObject* o, QEvent* e) override;
 
@@ -40,6 +44,8 @@ class OpenDialog: public QDialog
     void fixCurrentText(QComboBox* pCB);
     QSharedPointer<Options> m_pOptions;
     bool m_bInputFileNameChanged;
+
+    QScopedPointer<Ui::OpenDialog> dialogUi{new Ui::OpenDialog()};
   private Q_SLOTS:
     void selectFileA();
     void selectFileB();
