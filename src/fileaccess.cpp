@@ -261,7 +261,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             /*
              Invalid entry we don't know the full url because KIO didn't tell us and there is no parent
              node supplied.
-             This is a bug if it happens and should be logged . However it is a recoverable error.
+             This is a bug if it happens and should be logged. However it is a recoverable error.
             */
             qCWarning(kdiffFileAccess) << i18n("Unable to determine full url. No parent specified.");
             return;
