@@ -187,6 +187,7 @@ class FileAccessJobHandler : public QObject
     bool scanLocalDirectory(const QString& dirName, t_DirectoryList* dirList);
 
   private Q_SLOTS:
+    void slotJobEnded(KJob*);
     void slotStatResult(KJob*);
     void slotSimpleJobResult(KJob* pJob);
     void slotPutJobResult(KJob* pJob);
