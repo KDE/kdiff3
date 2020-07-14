@@ -1102,6 +1102,7 @@ bool FileAccessJobHandler::rename(const FileAccess& destFile)
 void FileAccessJobHandler::slotJobEnded(KJob* pJob)
 {
     Q_UNUSED(pJob);
+
     ProgressProxy::exitEventLoop(); // Close the dialog, return from exec()
 }
 
@@ -1227,6 +1228,7 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
 
         for(i = m_pDirList->begin(); i != m_pDirList->end(); ++i)
         {
+            Q_ASSERT(i->isValid());
             if(i->isDir() && (!i->isSymLink() || m_bFollowDirLinks))
             {
                 t_DirectoryList dirList;
@@ -1258,10 +1260,7 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
         //must be manually filtered KDE does not supply API for ignoring these.
         if(fa.fileName() != "." && fa.fileName() != "..")
         {
-            //quick fix to preserve behavoir without creating invalid urls. TODO: look for altertive machanism for use with next major release.
-            fa.setFile(fa.url());
-
-            m_pDirList->push_back(fa);
+            m_pDirList->push_back(std::move(fa));
         }
     }
 }
