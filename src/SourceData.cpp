@@ -347,6 +347,7 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
         return mErrors;
     }
 
+    Q_ASSERT(!m_fileAccess.isDir());
     bool bTempFileFromClipboard = !m_fileAccess.isValid();
 
     // Detect the input for the preprocessing operations
