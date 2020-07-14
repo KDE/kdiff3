@@ -308,9 +308,11 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
     {
         m_name = m_fileInfo.absoluteDir().dirName();
     }
-    m_bExists = m_fileInfo.exists();
+    if(isLocal())
+        m_bExists = m_fileInfo.exists();
+
     //insure modification time is initialized if it wasn't already.
-    if(m_modificationTime.isNull())
+    if(isLocal() && m_modificationTime.isNull())
         m_modificationTime = m_fileInfo.lastModified();
 
     m_bValidData = true;
