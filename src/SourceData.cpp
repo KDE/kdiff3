@@ -343,7 +343,10 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
     QString fileNameIn2;
     QString fileNameOut2;
 
-    if(m_fileAccess.isValid() && !m_fileAccess.isNormal())
+    if(!m_fileAccess.isValid())
+        return mErrors;
+
+    if(!m_fileAccess.isNormal())
     {
         mErrors.append(i18n("%1 is not a normal file.", m_fileAccess.prettyAbsPath()));
         return mErrors;
