@@ -64,6 +64,7 @@ OpenDialog::OpenDialog(
     if(url.scheme().isEmpty()) url.setScheme("file");
 
     m_pLineA = new QComboBox();
+    m_pLineA->setAcceptDrops(true);
     m_pLineA->setEditable(true);
     m_pLineA->insertItems(0, m_pOptions->m_recentAFiles);
     m_pLineA->setEditText(url.isLocalFile() ? n1 : url.toDisplayString());
@@ -83,6 +84,7 @@ OpenDialog::OpenDialog(
     if(url.scheme().isEmpty()) url.setScheme("file");
     label = new QLabel("B:", this);
     m_pLineB = new QComboBox();
+    m_pLineB->setAcceptDrops(true);
     m_pLineB->setEditable(true);
     m_pLineB->insertItems(0, m_pOptions->m_recentBFiles);
     m_pLineB->setEditText(url.isLocalFile() ? n2 :url.toDisplayString());
@@ -102,6 +104,7 @@ OpenDialog::OpenDialog(
     if(url.scheme().isEmpty()) url.setScheme("file");
     label = new QLabel(i18n("C (Optional):"), this);
     m_pLineC = new QComboBox();
+    m_pLineC->setAcceptDrops(true);
     m_pLineC->setEditable(true);
     m_pLineC->insertItems(0, m_pOptions->m_recentCFiles);
     m_pLineC->setEditText(url.isLocalFile() ? n3 :url.toDisplayString());
@@ -147,6 +150,7 @@ OpenDialog::OpenDialog(
 
     label = new QLabel(i18n("Output (optional):"), this);
     m_pLineOut = new QComboBox();
+    m_pLineOut->setAcceptDrops(true);
     m_pLineOut->setEditable(true);
     m_pLineOut->insertItems(0, m_pOptions->m_recentOutputFiles);
     m_pLineOut->setEditText(url.isLocalFile() ? outputName : url.toDisplayString());
