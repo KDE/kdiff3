@@ -67,7 +67,7 @@ class SourceData: public QObject
   private:
     bool convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
                                 const QString& fileNameOut, QTextCodec* pCodecOut);
-    
+
     static QTextCodec* detectEncoding(const char* buf, qint64 size, qint64& skipBytes);
     static QTextCodec* getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag);
 
@@ -85,8 +85,8 @@ class SourceData: public QObject
       private:
         friend SourceData;
         const char* m_pBuf = nullptr; //TODO: Phase out needlessly wastes memmory and time by keeping second copy of file data.
-        qint64 m_size = 0;
-        qint64 m_vSize = 0; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
+        qint64 mDataSize = 0;
+        qint64 mLineCount = 0; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
         QSharedPointer<QString> m_unicodeBuf=QSharedPointer<QString>::create();
         QVector<LineData> m_v;
         bool m_bIsText = false;
@@ -104,9 +104,12 @@ class SourceData: public QObject
         void reset();
         void copyBufFrom(const FileData& src);
 
-        bool isEmpty() const { return m_size == 0; }
+        bool isEmpty() const { return mDataSize == 0; }
 
         bool isText() const { return m_bIsText || isEmpty(); }
+
+        inline qint64 lineCount() const { return mLineCount; }
+        inline qint64 byteCount() const { return mDataSize; }
     };
     FileData m_normalData;
     FileData m_lmppData;

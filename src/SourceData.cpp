@@ -167,12 +167,12 @@ const QVector<LineData>* SourceData::getLineDataForDisplay() const
 
 LineRef SourceData::getSizeLines() const
 {
-    return (LineRef)(m_normalData.m_vSize);
+    return (LineRef)(m_normalData.lineCount());
 }
 
 qint64 SourceData::getSizeBytes() const
 {
-    return m_normalData.m_size;
+    return m_normalData.byteCount();
 }
 
 const char* SourceData::getBuf() const
@@ -215,8 +215,8 @@ void SourceData::FileData::reset()
         m_pBuf = nullptr;
     }
     m_v.clear();
-    m_size = 0;
-    m_vSize = 0;
+    mDataSize = 0;
+    mLineCount = 0;
     m_bIsText = false;
     m_bIncompleteConversion = false;
     m_eLineEndStyle = eLineEndStyleUndefined;
@@ -235,25 +235,25 @@ bool SourceData::FileData::readFile(FileAccess& file)
     if(!file.isNormal())
         return true;
 
-    m_size = file.sizeForReading();
+    mDataSize = file.sizeForReading();
     char* pBuf;
-    m_pBuf = pBuf = new char[m_size + 100]; // Alloc 100 byte extra: Safety hack, not nice but does no harm.
+    m_pBuf = pBuf = new char[mDataSize + 100]; // Alloc 100 byte extra: Safety hack, not nice but does no harm.
                                             // Some extra bytes at the end of the buffer are needed by
                                             // the diff algorithm. See also GnuDiff::diff_2_files().
-    bool bSuccess = file.readFile(pBuf, m_size);
+    bool bSuccess = file.readFile(pBuf, mDataSize);
     if(!bSuccess)
     {
         delete[] pBuf;
         m_pBuf = nullptr;
-        m_size = 0;
+        mDataSize = 0;
     }
     else
     {
         //null terminate buffer
-        pBuf[m_size + 1] = 0;
-        pBuf[m_size + 2] = 0;
-        pBuf[m_size + 3] = 0;
-        pBuf[m_size + 4] = 0;
+        pBuf[mDataSize + 1] = 0;
+        pBuf[mDataSize + 2] = 0;
+        pBuf[mDataSize + 3] = 0;
+        pBuf[mDataSize + 4] = 0;
     }
     return bSuccess;
 }
@@ -271,17 +271,17 @@ bool SourceData::FileData::readFile(const QString& filename)
     if(!fa.isNormal())
         return true;
 
-    m_size = fa.sizeForReading();
+    mDataSize = fa.sizeForReading();
     char* pBuf;
-    m_pBuf = pBuf = new char[m_size + 100]; // Alloc 100 byte extra: Safety hack, not nice but does no harm.
+    m_pBuf = pBuf = new char[mDataSize + 100]; // Alloc 100 byte extra: Safety hack, not nice but does no harm.
                                             // Some extra bytes at the end of the buffer are needed by
                                             // the diff algorithm. See also GnuDiff::diff_2_files().
-    bool bSuccess = fa.readFile(pBuf, m_size);
+    bool bSuccess = fa.readFile(pBuf, mDataSize);
     if(!bSuccess)
     {
         delete[] pBuf;
         m_pBuf = nullptr;
-        m_size = 0;
+        mDataSize = 0;
     }
     return bSuccess;
 }
@@ -299,7 +299,7 @@ bool SourceData::FileData::writeFile(const QString& filename)
     }
 
     FileAccess fa(filename);
-    bool bSuccess = fa.writeFile(m_pBuf, m_size);
+    bool bSuccess = fa.writeFile(m_pBuf, mDataSize);
     return bSuccess;
 }
 
@@ -308,10 +308,10 @@ void SourceData::FileData::copyBufFrom(const FileData& src) //TODO: Remove me.
 {
     reset();
     char* pBuf;
-    m_size = src.m_size;
-    m_pBuf = pBuf = new char[m_size + 100];
+    mDataSize = src.mDataSize;
+    m_pBuf = pBuf = new char[mDataSize + 100];
     Q_ASSERT(src.m_pBuf != nullptr);
-    memcpy(pBuf, src.m_pBuf, m_size);
+    memcpy(pBuf, src.m_pBuf, mDataSize);
 }
 
 QTextCodec* SourceData::detectEncoding(const QString& fileName, QTextCodec* pFallbackCodec)
@@ -431,7 +431,7 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
                 errorReason = "\n(" + errorReason + ')';
 
             bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
-            if(fileInSize > 0 && (!bSuccess || m_normalData.m_size == 0))
+            if(fileInSize > 0 && (!bSuccess || m_normalData.byteCount() == 0))
             {
                 //Don't fail the preprocessor command if the file cann't be read.
                 if(!m_normalData.readFile(faIn))
@@ -493,7 +493,7 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
                 errorReason = "\n(" + errorReason + ')';
 
             bool bSuccess = errorReason.isEmpty() && m_lmppData.readFile(fileNameOut2);
-            if(FileAccess(fileNameIn2).size() > 0 && (!bSuccess || m_lmppData.m_size == 0))
+            if(FileAccess(fileNameIn2).size() > 0 && (!bSuccess || m_lmppData.byteCount() == 0))
             {
                 mErrors.append(
                     i18n("The line-matching-preprocessing possibly failed. Check this command:\n\n  %1"
@@ -527,21 +527,21 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
 
     Q_ASSERT(m_lmppData.isText());
     //TODO: Needed?
-    if(m_lmppData.m_vSize < m_normalData.m_vSize)
+    if(m_lmppData.lineCount() < m_normalData.lineCount())
     {
         // Preprocessing command may result in smaller data buffer so adjust size
-        for(qint64 i = m_lmppData.m_vSize; i < m_normalData.m_vSize; ++i)
+        for(qint64 i = m_lmppData.lineCount(); i < m_normalData.lineCount(); ++i)
         { // Set all empty lines to point to the end of the buffer.
             m_lmppData.m_v.push_back(LineData(m_lmppData.m_unicodeBuf, m_lmppData.m_unicodeBuf->length()));
         }
 
-        m_lmppData.m_vSize = m_normalData.m_vSize;
+        m_lmppData.mLineCount = m_normalData.lineCount();
     }
 
     // Ignore comments
     if(m_pOptions->m_bIgnoreComments && hasData())
     {
-        qint64 vSize = std::min(m_normalData.m_vSize, m_lmppData.m_vSize);
+        qint64 vSize = std::min(m_normalData.lineCount(), m_lmppData.lineCount());
         Q_ASSERT(vSize < TYPE_MAX(qint32));
         //Perform explcit cast to insure well defined behavior comparing 32-bit to a 64-bit value
         for(qint32 i = 0; (qint64)i < vSize; ++i)
@@ -573,14 +573,14 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     QVector<e_LineEndStyle> vOrigDataLineEndStyle;
     m_eLineEndStyle = eLineEndStyleUndefined;
 
-    QTextCodec* pCodec = detectEncoding(m_pBuf, m_size, skipBytes);
+    QTextCodec* pCodec = detectEncoding(m_pBuf, mDataSize, skipBytes);
     if(pCodec != pEncoding)
         skipBytes = 0;
 
-    if(m_size - skipBytes > TYPE_MAX(QtNumberType))
+    if(mDataSize - skipBytes > TYPE_MAX(QtNumberType))
         return false;
 
-    const QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, (int)(m_size - skipBytes));
+    const QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, (int)(mDataSize - skipBytes));
     QTextStream ts(ba, QIODevice::ReadOnly); //Don't use text mode we need to see the actual line ending.
     ts.setCodec(pEncoding);
     ts.setAutoDetectUnicode(false);
@@ -632,11 +632,11 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
                 vOrigDataLineEndStyle.push_back(eLineEndStyleUnix);
                 break;
             case '\r':
-                if(lastOffset < m_size)
+                if(lastOffset < mDataSize)
                 {
                     //workaround for lack of peak API in QTextStream.
                     qint64  j;
-                    for(j = 0; j < 4 && lastOffset + j < m_size; ++j)
+                    for(j = 0; j < 4 && lastOffset + j < mDataSize; ++j)
                     {
                         if(m_pBuf[lastOffset + j] != '\0')
                             break;
@@ -674,7 +674,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     if(!vOrigDataLineEndStyle.isEmpty())
         m_eLineEndStyle = vOrigDataLineEndStyle[0];
 
-    m_vSize = lineCount;
+    mLineCount = lineCount;
     return true;
 }
 
