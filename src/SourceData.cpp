@@ -593,7 +593,10 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     {
         line.clear();
         if(lineCount >= TYPE_MAX(LineCount) - 5)
+        {
+            m_v.clear();
             return false;
+        }
 
         ts >> curChar;
 
@@ -602,7 +605,10 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         while(curChar != '\n' && curChar != '\r')
         {
             if(curChar.isNull() || curChar.isNonCharacter())
+            {
+                m_v.clear();
                 return true;
+            }
 
             if(curChar == QChar::ReplacementCharacter)
                 m_bIncompleteConversion = true;
