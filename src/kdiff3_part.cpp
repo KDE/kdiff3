@@ -190,11 +190,12 @@ bool KDiff3Part::openFile()
         QTemporaryFile tmpFile;
         FileAccess::createTempFile(tmpFile);
         QString tempFileName = tmpFile.fileName();
-        QString cmd = "patch -f -u --ignore-whitespace -i \"" + localFilePath() +
-                      "\" -o \"" + tempFileName + "\" \"" + fileName1 + "\"";
+        QString cmd = "patch";
+        QStringList args = {"-f", "-u", "--ignore-whitespace", "-i", '"' + localFilePath() + '"',
+                    "-o", '"' + tempFileName + '"', '"' + fileName1 + '"'};
 
         QProcess process;
-        process.start(cmd);
+        process.start(cmd, args);
         process.waitForFinished(-1);
 
         m_widget->slotFileOpen2(errors, fileName1, tempFileName, "", "",
@@ -207,11 +208,12 @@ bool KDiff3Part::openFile()
         QTemporaryFile tmpFile;
         FileAccess::createTempFile(tmpFile);
         QString tempFileName = tmpFile.fileName();
-        QString cmd = "patch -f -u -R --ignore-whitespace -i \"" + localFilePath() +
-                      "\" -o \"" + tempFileName + "\" \"" + fileName2 + "\"";
+        QString cmd = "patch";
+        QStringList args = {"-f", "-u", "-R", "--ignore-whitespace", "-i", '"' + localFilePath() + '"',
+                      "-o", '"' + tempFileName + '"', '"' + fileName2 + '"'};
 
         QProcess process;
-        process.start(cmd);
+        process.start(cmd, args);
         process.waitForFinished(-1);
 
         m_widget->slotFileOpen2(errors, tempFileName, fileName2, "", "",
@@ -229,17 +231,22 @@ bool KDiff3Part::openFile()
         QTemporaryFile tmpFile1;
         FileAccess::createTempFile(tmpFile1);
         QString tempFileName1 = tmpFile1.fileName();
-        QString cmd1 = "cvs update -p -r " + version1 + " \"" + fileName1 + "\" >\"" + tempFileName1 + "\"";
+        QString cmd = "cvs";
+        QStringList args = {"update", "-p", "-r",  version1, '"' + fileName1 + '"'};
         QProcess process1;
-        process1.start(cmd1);
+
+        process1.setStandardOutputFile(tempFileName1);
+        process1.start(cmd, args);
         process1.waitForFinished(-1);
 
         QTemporaryFile tmpFile2;
         FileAccess::createTempFile(tmpFile2);
         QString tempFileName2 = tmpFile2.fileName();
-        QString cmd2 = "cvs update -p -r " + version2 + " \"" + fileName2 + "\" >\"" + tempFileName2 + "\"";
+        //QString cmd2 = "cvs
+        args = QStringList{"update", "-p", "-r", version2, '"' + fileName2 + '"'};
         QProcess process2;
-        process2.start(cmd2);
+        process2.setStandardOutputFile(tempFileName2);
+        process2.start(cmd, args);
         process2.waitForFinished(-1);
 
         m_widget->slotFileOpen2(errors, tempFileName1, tempFileName2, "", "",

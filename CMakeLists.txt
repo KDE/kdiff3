@@ -104,6 +104,7 @@ add_definitions(
     -DQT_NO_URL_CAST_FROM_STRING # casting from string to url does not always behave as you might think
     -DQT_RESTRICTED_CAST_FROM_ASCII #casting from char*/QByteArray to QString can produce unexpected results for non-latin characters.
     -DQT_NO_CAST_TO_ASCII
+    -DQT_NO_PROCESS_COMBINED_ARGUMENT_START
     -DQT_DISABLE_DEPRECATED_BEFORE=0x050600#disable depriated api for Qt<5.6.
     #KF5 5.64+ flags
     #Don't warn for API depreciated after 5.27.0 (below as hex.hex.hex number)
