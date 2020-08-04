@@ -175,13 +175,16 @@ void OpenDialog::selectURL(QComboBox* pLine, bool bDir, int i, bool bSave)
     QString current = pLine->currentText();
     QUrl currentUrl;
 
-    if(current.isEmpty() && i > 3) {
+    if(current.isEmpty() && i > 3)
+    {
         current = dialogUi->lineC->currentText();
     }
-    if(current.isEmpty()) {
+    if(current.isEmpty())
+    {
         current = dialogUi->lineB->currentText();
     }
-    if(current.isEmpty()) {
+    if(current.isEmpty())
+    {
         current = dialogUi->lineA->currentText();
     }
 
@@ -189,11 +192,12 @@ void OpenDialog::selectURL(QComboBox* pLine, bool bDir, int i, bool bSave)
     QUrl newURL = bDir ? QFileDialog::getExistingDirectoryUrl(this, i18n("Open Folder"), currentUrl)
                        : bSave ? QFileDialog::getSaveFileUrl(this, i18n("Select Output File"), currentUrl, i18n("all/allfiles (*)"))
                                : QFileDialog::getOpenFileUrl(this, i18n("Open File"), currentUrl, i18n("all/allfiles (*)"));
-    if(!newURL.isEmpty()) {
+    if(!newURL.isEmpty())
+    {
         /*
-        Since we are selecting a directory open in the parent directory
-        not the one selected.
-             */
+            Since we are selecting a directory open in the parent directory
+            not the one selected.
+        */
         //QFileDialog::setStartDir( KIO::upUrl( newURL ) );
         pLine->setEditText(newURL.url());
     }
