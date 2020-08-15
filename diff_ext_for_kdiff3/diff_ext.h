@@ -8,6 +8,9 @@
 #ifndef diff_ext_h
 #define diff_ext_h
 
+//This option is not compatible with our shell extention.
+#undef WIN32_LEAN_AND_MEAN
+
 #include <windows.h>
 #include <windowsx.h>
 #include <shlobj.h>

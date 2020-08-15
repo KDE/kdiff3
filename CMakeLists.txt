@@ -138,4 +138,8 @@ ki18n_install(po)
 
 add_subdirectory(kdiff3fileitemactionplugin)
 
+#if(WIN32)
+#add_subdirectory(diff_ext_for_kdiff3)
+#endif()
+
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

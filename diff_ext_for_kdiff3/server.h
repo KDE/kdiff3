@@ -5,9 +5,16 @@
 */
 #ifndef server_h
 #define server_h
+
+#define UNICODE 1
+//This option is not compatible with our shell extention.
+#undef WIN32_LEAN_AND_MEAN
+
 #include <list>   // std::list
 //#include <log/file_sink.h>
 #include <windows.h>
+//#include <shellapi.h>
+
 #include <string> // std::wstring
 
 #ifdef UNICODE

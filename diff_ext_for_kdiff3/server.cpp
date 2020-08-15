@@ -4,15 +4,12 @@
   SPDX-License-Identifier: BSD-2-Clause
 */
 
-#define _WIN32_WINNT 0x0502
 #define _CRT_NON_CONFORMING_SWPRINTFS
-#define _CRT_SECURE_NO_DEPRECATE
 
 #include "server.h"
 
 #include <stdio.h>
 
-#include <windows.h>
 #include <tchar.h>
 
 #include <shlguid.h>
