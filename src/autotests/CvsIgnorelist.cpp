@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: GPL-2.0-or-later
 /*
  * KDiff3 - Text Diff And Merge Tool
  *
@@ -37,7 +36,7 @@ class CvsIgnoreListTest : public QObject
         QVERIFY(!test.m_exactPatterns.isEmpty());
         QVERIFY(test.m_exactPatterns == testString.split(' '));
     }
-    
+
     void matches()
     {
         CvsIgnoreList test;

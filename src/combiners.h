@@ -17,7 +17,7 @@ struct or
     typedef bool result_type;
     template <typename InputIterator> bool operator()(InputIterator first, InputIterator last) const
     {
-        // If there are no slots to call, just return false
+        // If there are no slots to call, just return true
         if(first == last) return true;
 
         bool ret = *first++;
