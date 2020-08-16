@@ -389,6 +389,13 @@ FindDialog::FindDialog(QWidget* pParent)
     hide();
 }
 
+void FindDialog::restartFind()
+{
+    currentLine = 0;
+    currentPos = 0;
+    currentWindow = eWindowIndex::A;
+}
+
 void FindDialog::setVisible(bool bVisible)
 {
     QDialog::setVisible(bVisible);

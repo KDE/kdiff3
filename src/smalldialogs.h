@@ -10,6 +10,8 @@
 
 #include "ui_opendialog.h"
 
+#include "Logging.h
+
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDialog>
@@ -18,6 +20,16 @@
 class Options;
 class QLineEdit;
 class KDiff3App;
+
+enum class eWindowIndex
+{
+    None = 0,
+    A,
+    B,
+    C,
+    Output,
+    invalid
+};
 
 class OpenDialog: public QDialog
 {
@@ -69,6 +81,34 @@ class FindDialog: public QDialog
     explicit FindDialog(QWidget* pParent);
     void setVisible(bool) override;
 
+    void restartFind();
+    inline void nextWindow()
+    {
+        currentLine = 0;
+        currentPos = 0;
+
+        switch(currentWindow)
+        {
+            case eWindowIndex::invalid:
+                qCWarning(kdiffMain) << "FindDialog::nextWindow called with invalid state.";
+            case eWindowIndex::None:
+                currentWindow = eWindowIndex::A;
+                break;
+            case eWindowIndex::A:
+                currentWindow = eWindowIndex::B;
+                break;
+            case eWindowIndex::B:
+                currentWindow = eWindowIndex::C;
+                break;
+            case eWindowIndex::C:
+                currentWindow = eWindowIndex::Output;
+                break;
+            case eWindowIndex::Output:
+                currentWindow = eWindowIndex::invalid;
+                break;
+        }
+    }
+
   Q_SIGNALS:
     void findNext();
 
@@ -82,7 +122,7 @@ class FindDialog: public QDialog
 
     int currentLine = 0;
     int currentPos = 0;
-    int currentWindow = 0;
+    eWindowIndex currentWindow = eWindowIndex::None;
 };
 
 class RegExpTester: public QDialog
