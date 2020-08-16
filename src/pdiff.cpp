@@ -1810,7 +1810,7 @@ void KDiff3App::slotEditFindNext()
     int posInLine = m_pFindDialog->currentPos;
     LineRef l;
     int p = 0;
-    if(m_pFindDialog->currentWindow == eWindowIndex::A)
+    if(m_pFindDialog->getCurrentWindow() == eWindowIndex::A)
     {
         if(m_pFindDialog->m_pSearchInA->isChecked() && m_pDiffTextWindow1 != nullptr &&
            m_pDiffTextWindow1->findString(s, d3vLine, posInLine, bDirDown, bCaseSensitive))
@@ -1827,7 +1827,7 @@ void KDiff3App::slotEditFindNext()
 
     d3vLine = m_pFindDialog->currentLine;
     posInLine = m_pFindDialog->currentPos;
-    if(m_pFindDialog->currentWindow == eWindowIndex::B)
+    if(m_pFindDialog->getCurrentWindow() == eWindowIndex::B)
     {
         if(m_pFindDialog->m_pSearchInB->isChecked() && m_pDiffTextWindow2 != nullptr &&
            m_pDiffTextWindow2->findString(s, d3vLine, posInLine, bDirDown, bCaseSensitive))
@@ -1845,7 +1845,7 @@ void KDiff3App::slotEditFindNext()
 
     d3vLine = m_pFindDialog->currentLine;
     posInLine = m_pFindDialog->currentPos;
-    if(m_pFindDialog->currentWindow == eWindowIndex::C)
+    if(m_pFindDialog->getCurrentWindow() == eWindowIndex::C)
     {
         if(m_pFindDialog->m_pSearchInC->isChecked() && m_pDiffTextWindow3 != nullptr &&
            m_pDiffTextWindow3->findString(s, d3vLine, posInLine, bDirDown, bCaseSensitive))
@@ -1863,7 +1863,7 @@ void KDiff3App::slotEditFindNext()
 
     d3vLine = m_pFindDialog->currentLine;
     posInLine = m_pFindDialog->currentPos;
-    if(m_pFindDialog->currentWindow == eWindowIndex::Output)
+    if(m_pFindDialog->getCurrentWindow() == eWindowIndex::Output)
     {
         if(m_pFindDialog->m_pSearchInOutput->isChecked() && m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isVisible() &&
            m_pMergeResultWindow->findString(s, d3vLine, posInLine, bDirDown, bCaseSensitive))

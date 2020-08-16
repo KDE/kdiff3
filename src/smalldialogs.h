@@ -109,6 +109,8 @@ class FindDialog: public QDialog
         }
     }
 
+    inline eWindowIndex getCurrentWindow() { return currentWindow; }
+
   Q_SIGNALS:
     void findNext();
 
@@ -122,6 +124,8 @@ class FindDialog: public QDialog
 
     int currentLine = 0;
     int currentPos = 0;
+
+  private:
     eWindowIndex currentWindow = eWindowIndex::None;
 };
 
@@ -143,7 +147,7 @@ class RegExpTester: public QDialog
 
   public:
     RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolTip, const QString& historyStartRegExpToolTip,
-                                   const QString& historyEntryStartRegExpToolTip, const QString& historySortKeyOrderToolTip);
+        const QString& historyEntryStartRegExpToolTip, const QString& historySortKeyOrderToolTip);
     void init(const QString& autoMergeRegExp, const QString& historyStartRegExp, const QString& historyEntryStartRegExp, const QString& sortKeyOrder);
     QString autoMergeRegExp();
     QString historyStartRegExp();
