@@ -18,3 +18,7 @@ ecm_add_test(CvsIgnorelist.cpp ../cvsignorelist.cpp
     LINK_LIBRARIES Qt5::Test
 )
 
+ecm_add_test(combinertest.cpp
+    TEST_NAME "combinertest"
+    LINK_LIBRARIES Qt5::Test
+)
