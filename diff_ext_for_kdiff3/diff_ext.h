@@ -28,6 +28,9 @@
 #ifndef __diff_ext_h__
 #define __diff_ext_h__
 
+//This option is not compatible with our shell extention.
+#undef WIN32_LEAN_AND_MEAN
+
 #include <windows.h>
 #include <windowsx.h>
 #include <shlobj.h>

@@ -119,4 +119,7 @@ add_subdirectory(kdiff3fileitemactionplugin)
 ki18n_install(po)
 kdoctools_install(po)
 
+#if(WIN32)
+#add_subdirectory(diff_ext_for_kdiff3)
+#endif()
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

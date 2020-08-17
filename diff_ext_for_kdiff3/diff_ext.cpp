@@ -24,7 +24,6 @@
  *
  */
 
-#define _CRT_SECURE_NO_DEPRECATE
 
 #include <KLocalizedString>
 
@@ -224,8 +223,8 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
             firstFileName = TEXT("'") + cut_to_length( m_recentFiles.front() ) + TEXT("'");
          }
 
-         menuStringCompare = fromQString(i18n("Compare with %1", firstFileName));
-         menuStringMerge   = fromQString(i18n("Merge with %1", firstFileName));
+         menuStringCompare = fromQString(i18n("Compare with %1", toQString(firstFileName)));
+         menuStringMerge   = fromQString(i18n("Merge with %1", toQString(firstFileName)));
 
          m_id_DiffWith  = insertMenuItemHelper( subMenu, id++, pos2++, menuStringCompare, nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
          m_id_MergeWith = insertMenuItemHelper( subMenu, id++, pos2++, menuStringMerge, nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
@@ -387,7 +386,7 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
       }
       else if(idCmd == m_id_DiffLater)
       {
-         helpString = i18n("Save '%1' for later operation", _file_name1);
+         helpString = i18n("Save '%1' for later operation", toQString(_file_name1));
       }
       else if((idCmd >= m_id_DiffWith_Base) && (idCmd < m_id_DiffWith_Base+m_recentFiles.size()))
       {
