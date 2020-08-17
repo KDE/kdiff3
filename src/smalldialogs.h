@@ -10,7 +10,7 @@
 
 #include "ui_opendialog.h"
 
-#include "Logging.h
+#include "Logging.h"
 
 #include <QCheckBox>
 #include <QComboBox>
