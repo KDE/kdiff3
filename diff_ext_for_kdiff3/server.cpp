@@ -348,41 +348,30 @@ SERVER::do_register() {
 
         RegCloseKey(key);
 
-        //If running on NT, register the extension as approved.
-        OSVERSIONINFO  osvi;
-
-        osvi.dwOSVersionInfoSize = sizeof(osvi);
-        GetVersionEx(&osvi);
-
         // NT needs to have shell extensions "approved".
-        if (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT) {
-          result = RegCreateKeyEx(HKEY_CURRENT_USER,
-             TEXT("Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved"),
-             0, 0, REG_OPTION_NON_VOLATILE, KEY_WRITE, 0, &key, &dwDisp);
+         result = RegCreateKeyEx(HKEY_CURRENT_USER,
+            TEXT("Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved"),
+            0, 0, REG_OPTION_NON_VOLATILE, KEY_WRITE, 0, &key, &dwDisp);
 
-          if(result == NOERROR) {
-            TCHAR szData[MAX_PATH];
+         if(result == NOERROR) {
+         TCHAR szData[MAX_PATH];
 
-            lstrcpy(szData, TEXT("diff-ext"));
+         lstrcpy(szData, TEXT("diff-ext"));
 
-            result = RegSetValueEx(key, class_id, 0, REG_SZ, (LPBYTE)szData, DWORD(_tcslen(szData)*sizeof(TCHAR)));
+         result = RegSetValueEx(key, class_id, 0, REG_SZ, (LPBYTE)szData, DWORD(_tcslen(szData)*sizeof(TCHAR)));
 
-            RegCloseKey(key);
+         RegCloseKey(key);
 
-            ret = S_OK;
-          } else if (result == ERROR_ACCESS_DENIED) {
-	    TCHAR msg[] = TEXT("Warning! You have unsufficient rights to write to a specific registry key.\n")
-			  TEXT("The application may work anyway, but it is advised to register this module ")
-			  TEXT("again while having administrator rights.");
+         ret = S_OK;
+         } else if (result == ERROR_ACCESS_DENIED) {
+      TCHAR msg[] = TEXT("Warning! You have unsufficient rights to write to a specific registry key.\n")
+         TEXT("The application may work anyway, but it is advised to register this module ")
+         TEXT("again while having administrator rights.");
 
 	    MessageBox(0, msg, TEXT("Warning"), MB_ICONEXCLAMATION);
 
 	    ret = S_OK;
           }
-        }
-        else {
-          ret = S_OK;
-        }
       }
     }
   }
@@ -419,29 +408,18 @@ SERVER::do_unregister() {
       result = RegDeleteKey(HKEY_CURRENT_USER, TEXT("Software\\Classes\\*\\shellex\\ContextMenuHandlers\\diff-ext-for-kdiff3"));
 
       if(result == NOERROR) {
-        //If running on NT, register the extension as approved.
-        OSVERSIONINFO  osvi;
-
-        osvi.dwOSVersionInfoSize = sizeof(osvi);
-        GetVersionEx(&osvi);
-
         // NT needs to have shell extensions "approved".
-        if(osvi.dwPlatformId == VER_PLATFORM_WIN32_NT) {
-          HKEY key;
+         HKEY key;
 
-          RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved"), 0, KEY_ALL_ACCESS, &key);
+         RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved"), 0, KEY_ALL_ACCESS, &key);
 
-          result = RegDeleteValue(key, class_id);
+         result = RegDeleteValue(key, class_id);
 
-          RegCloseKey(key);
+         RegCloseKey(key);
 
-          if(result == ERROR_SUCCESS) {
-            ret = S_OK;
-          }
-        }
-        else {
-          ret = S_OK;
-        }
+         if(result == ERROR_SUCCESS) {
+         ret = S_OK;
+         }
       }
     }
   }
