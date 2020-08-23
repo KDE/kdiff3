@@ -41,7 +41,7 @@ static HINSTANCE server_instance; // Handle to this DLL itself.
 // {34471FFB-4002-438b-8952-E4588D0C0FE9}
 DEFINE_GUID( CLSID_DIFF_EXT, 0x34471FFB, 0x4002, 0x438b, 0x89, 0x52, 0xE4, 0x58, 0x8D, 0x0C, 0x0F, 0xE9 );
 #else
-DEFINE_GUID( CLSID_DIFF_EXT, 0x9f8528e4, 0xab20, 0x456e, 0x84, 0xe5, 0x3c, 0xe6, 0x9d, 0x87, 0x20, 0xf3 );
+#error unsupported configuration
 #endif
 
 tstring SERVER::getRegistryKeyString( const tstring& subKey, const tstring& value )
@@ -165,7 +165,7 @@ SERVER* SERVER::instance()
 
 SERVER::SERVER()  : _reference_count(0)
 {
-   m_registryBaseName = TEXT("Software\\KDiff3\\diff-ext");
+   m_registryBaseName = TEXT("Software\\KDE e.V.\\KDiff3\\diff-ext");
    m_pRecentFiles = 0;
    m_pLogFile = 0;
 }
@@ -318,7 +318,7 @@ SERVER::do_register() {
     GetModuleFileName(SERVER::instance()->handle(), server_path, MAX_PATH);
 
     REGSTRUCT entry[] = {
-      {TEXT("Software\\Classes\\CLSID\\%s"), 0, TEXT("diff-ext-for-kdiff3")},
+      {TEXT("Software\\Classes\\CLSID\\%s"), 0, TEXT("kdiff3ext")},
       {TEXT("Software\\Classes\\CLSID\\%s\\InProcServer32"), 0, TEXT("%s")},
       {TEXT("Software\\Classes\\CLSID\\%s\\InProcServer32"), TEXT("ThreadingModel"), TEXT("Apartment")}
     };
@@ -340,7 +340,7 @@ SERVER::do_register() {
     }
 
     if(result == NOERROR) {
-      result = RegCreateKeyEx(HKEY_CURRENT_USER, TEXT("Software\\Classes\\*\\shellex\\ContextMenuHandlers\\diff-ext-for-kdiff3"), 0, 0, REG_OPTION_NON_VOLATILE, KEY_WRITE, 0, &key, &dwDisp);
+      result = RegCreateKeyEx(HKEY_CURRENT_USER, TEXT("Software\\Classes\\*\\shellex\\ContextMenuHandlers\\kdiff3ext"), 0, 0, REG_OPTION_NON_VOLATILE, KEY_WRITE, 0, &key, &dwDisp);
 
       if(result == NOERROR) {
 
@@ -405,7 +405,7 @@ SERVER::do_unregister() {
     }
 
     if(result == NOERROR) {
-      result = RegDeleteKey(HKEY_CURRENT_USER, TEXT("Software\\Classes\\*\\shellex\\ContextMenuHandlers\\diff-ext-for-kdiff3"));
+      result = RegDeleteKey(HKEY_CURRENT_USER, TEXT("Software\\Classes\\*\\shellex\\ContextMenuHandlers\\kdiff3ext"));
 
       if(result == NOERROR) {
         // NT needs to have shell extensions "approved".
