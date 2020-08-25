@@ -26,12 +26,10 @@
 #ifndef __server_h__
 #define __server_h__
 
-#define UNICODE 1
 //This option is not compatible with our shell extention.
 #undef WIN32_LEAN_AND_MEAN
 
 #include <list>   // std::list
-//#include <log/file_sink.h>
 #include <windows.h>
 #include <string> // std::wstring
 
@@ -42,10 +40,8 @@ typedef std::wstring tstring;
 #define fromQString(s) (s).toStdWString()
 
 #else
-typedef std::string tstring;
 
-#define toQString(s) { QString::fromStdString(s);}
-#define fromQString(s) { (s).toStdString();}
+#error  "Unsupported configuration"
 
 #endif
 

@@ -240,11 +240,7 @@ void SERVER::logMessage( const char* function, const char* file, int line, const
       SYSTEMTIME st;
       GetSystemTime( &st );
       _ftprintf( pServer->m_pLogFile, TEXT("%04d/%02d/%02d %02d:%02d:%02d ")
-#ifdef UNICODE
          TEXT("%S (%S:%d) %s\n"), // integrate char-string into wchar_t string
-#else
-         TEXT("%s (%s:%d) %s\n"),
-#endif
          st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, function, file, line, msg.c_str() );
       fflush(pServer->m_pLogFile);
    }
@@ -328,11 +324,8 @@ SERVER::do_register() {
   HRESULT ret = SELFREG_E_CLASS;
 
   if (StringFromIID(CLSID_DIFF_EXT, &tmp_guid) == S_OK) {
-#ifdef UNICODE
     _tcsncpy(class_id, tmp_guid, MAX_PATH);
-#else
-    wcstombs(class_id, tmp_guid, MAX_PATH);
-#endif
+
     CoTaskMemFree((void*)tmp_guid);
 
     TCHAR    subkey[MAX_PATH];
@@ -424,11 +417,8 @@ SERVER::do_unregister() {
   HRESULT ret = SELFREG_E_CLASS;
 
   if (StringFromIID(CLSID_DIFF_EXT, &tmp_guid) == S_OK) {
-#ifdef UNICODE
     _tcsncpy(class_id, tmp_guid, MAX_PATH);
-#else
-    wcstombs(class_id, tmp_guid, MAX_PATH);
-#endif
+
     CoTaskMemFree((void*)tmp_guid);
 
     LRESULT result = NOERROR;
