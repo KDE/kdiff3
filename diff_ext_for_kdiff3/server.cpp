@@ -1,30 +1,12 @@
 /*
- * Copyright (c) 2003-2005, Sergey Zorin. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
-
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
- * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
- * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- */
+  SPDX-FileCopyrightText: 2003-2006, Sergey Zorin. All rights reserved.
+  SPDX-FileCopyrightText:  2018-2020 Michael Reeves reeves.87@gmail.com
+  SPDX-License-Identifier: BSD-2-Clause
+*/
 
 #define _CRT_NON_CONFORMING_SWPRINTFS
+
+#include "server.h"
 
 #include <stdio.h>
 
@@ -39,7 +21,6 @@
 
 #include <KLocalizedString>
 
-#include "server.h"
 #include "class_factory.h"
 
 #define DllExport   __declspec( dllexport )
@@ -56,7 +37,7 @@ static HINSTANCE server_instance; // Handle to this DLL itself.
 
 //DEFINE_GUID(CLSID_DIFF_EXT, 0xA0482097, 0xC69D, 0x4DEC, 0x8A, 0xB6, 0xD3, 0xA2, 0x59, 0xAC, 0xC1, 0x51);
 // New class id for DIFF_EXT for KDiff3
-#ifdef _WIN64
+#ifdef Q_OS_WIN64
 // {34471FFB-4002-438b-8952-E4588D0C0FE9}
 DEFINE_GUID( CLSID_DIFF_EXT, 0x34471FFB, 0x4002, 0x438b, 0x89, 0x52, 0xE4, 0x58, 0x8D, 0x0C, 0x0F, 0xE9 );
 #else
