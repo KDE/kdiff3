@@ -7,6 +7,7 @@
 
 #include "smalldialogs.h"
 
+#include "TypeUtils.h"
 #include "diff.h"
 #include "options.h"
 #include "kdiff3.h"
@@ -224,8 +225,8 @@ void OpenDialog::inputFilenameChanged()
 void OpenDialog::fixCurrentText(QComboBox* pCB)
 {
     QString s = pCB->currentText();
+    QtNumberType pos = s.indexOf('\n');
 
-    int pos = s.indexOf('\n');
     if(pos >= 0)
         s = s.left(pos);
     pos = s.indexOf('\r');
@@ -277,7 +278,7 @@ void OpenDialog::accept()
 
 void OpenDialog::slotSwapCopyNames(QAction* pAction) const // id selected in the popup menu
 {
-    int id = pAction->parentWidget()->actions().indexOf(pAction);
+    QtNumberType id = pAction->parentWidget()->actions().indexOf(pAction);
     QComboBox* cb1 = nullptr;
     QComboBox* cb2 = nullptr;
     switch(id)
