@@ -42,12 +42,9 @@ OpenDialog::OpenDialog(
     //Abort if verticalLayout is not the imedient child of the dialog. This interferes with re-sizing.
     Q_ASSERT(dialogUi.virticalLayout->parent() == this);
 
-    QUrl url = QUrl(n1);
-    //QUrl::isLocalFile returns false if the scheme is blank.
-    if(url.scheme().isEmpty()) url.setScheme("file");
 
     dialogUi.lineA->insertItems(0, m_pOptions->m_recentAFiles);
-    dialogUi.lineA->setEditText(url.isLocalFile() ? n1 : url.toDisplayString());
+    dialogUi.lineA->setEditText(n1);
 
     QPushButton* button = dialogUi.fileSelectA;
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileA);
@@ -55,12 +52,11 @@ OpenDialog::OpenDialog(
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirA);
     chk_connect(dialogUi.lineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
-    url.setUrl(n2);
-    if(url.scheme().isEmpty()) url.setScheme("file");
 
     dialogUi.lineB->setEditable(true);
     dialogUi.lineB->insertItems(0, m_pOptions->m_recentBFiles);
-    dialogUi.lineB->setEditText(url.isLocalFile() ? n2 :url.toDisplayString());
+    dialogUi.lineB->setEditText(n2);
+
     dialogUi.lineB->setMinimumWidth(200);
     button = dialogUi.fileSelectB;
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileB);
@@ -68,12 +64,10 @@ OpenDialog::OpenDialog(
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirB);
     chk_connect(dialogUi.lineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
-    url.setUrl(n3);
-    if(url.scheme().isEmpty()) url.setScheme("file");
 
     dialogUi.lineC->setEditable(true);
     dialogUi.lineC->insertItems(0, m_pOptions->m_recentCFiles);
-    dialogUi.lineC->setEditText(url.isLocalFile() ? n3 :url.toDisplayString());
+    dialogUi.lineC->setEditText(n3);
     dialogUi.lineC->setMinimumWidth(200);
     button = dialogUi.fileSelectC;
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileC);
@@ -96,11 +90,8 @@ OpenDialog::OpenDialog(
     chk_connect(m, &QMenu::triggered, this, &OpenDialog::slotSwapCopyNames);
     button->setMenu(m);
 
-    url.setUrl(outputName);
-    if(url.scheme().isEmpty()) url.setScheme("file");
-
     dialogUi.lineOut->insertItems(0, m_pOptions->m_recentOutputFiles);
-    dialogUi.lineOut->setEditText(url.isLocalFile() ? outputName : url.toDisplayString());
+    dialogUi.lineOut->setEditText(outputName);
 
     button = dialogUi.selectOutputFile;
     chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectOutputName);
