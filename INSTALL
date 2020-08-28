@@ -28,8 +28,8 @@ This should be automacticly installed by craft.
 You will also need to start a power shell envirionment as administrator instruction for that are at:
 https://docs.microsoft.com/en-us/powershell/scripting/getting-started/starting-windows-powershell?view=powershell-6
 
-On windows 10 this will be the default shell.
-Run the fallowing.
+On Windows 10 this will be the default shell.
+Run the following:
 1)Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 2)iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/KDE/craft/master/setup/install_craft.ps1'))
 
