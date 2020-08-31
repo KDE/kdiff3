@@ -38,6 +38,11 @@ FileAccess::FileAccess(const QString& name, bool bWantToWrite)
     setFile(name, bWantToWrite);
 }
 
+FileAccess::FileAccess(const QUrl& name, bool bWantToWrite)
+{
+    setFile(name, bWantToWrite);
+}
+
 void FileAccess::reset()
 {
     *this = FileAccess();
@@ -377,9 +382,10 @@ QUrl FileAccess::url() const
     return url;
 }
 
+//Workaround for QUrl::isLocalFile behavoir that does not fit KDiff3's expectations.
 bool FileAccess::isLocal() const
 {
-    return m_url.isLocalFile() || !m_url.isValid();
+    return m_url.isLocalFile() || !m_url.isValid() || m_url.scheme().isEmpty();
 }
 
 bool FileAccess::isReadable() const
@@ -451,6 +457,7 @@ FileAccess* FileAccess::parent() const
     return m_pParent;
 }
 
+//Workaround for QUrl::toDisplayString/QUrl::toString behavoir that does not fit KDiff3's expectations
 QString FileAccess::prettyAbsPath() const
 {
     return isLocal() ? absoluteFilePath() : m_url.toDisplayString();
@@ -1044,7 +1051,7 @@ bool FileAccessJobHandler::removeFile(const QUrl& fileName)
         chk_connect(pJob, &KIO::SimpleJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
         chk_connect(pJob, &KIO::SimpleJob::finished, this, &FileAccessJobHandler::slotJobEnded);
 
-        ProgressProxy::enterEventLoop(pJob, i18n("Removing file: %1", fileName.toDisplayString()));
+        ProgressProxy::enterEventLoop(pJob, i18n("Removing file: %1", FileAccess::prettyAbsPath(fileName)));
         return m_bSuccess;
     }
 }
@@ -1061,7 +1068,7 @@ bool FileAccessJobHandler::symLink(const QUrl& linkTarget, const QUrl& linkLocat
         chk_connect(pJob, &KIO::CopyJob::finished, this, &FileAccessJobHandler::slotJobEnded);
 
         ProgressProxy::enterEventLoop(pJob,
-                                      i18n("Creating symbolic link: %1 -> %2", linkLocation.toDisplayString(), linkTarget.toDisplayString()));
+                                      i18n("Creating symbolic link: %1 -> %2", FileAccess::prettyAbsPath(linkLocation), FileAccess::prettyAbsPath(linkTarget)));
         return m_bSuccess;
     }
 }
