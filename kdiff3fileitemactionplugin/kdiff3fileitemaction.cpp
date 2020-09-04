@@ -96,26 +96,26 @@ QList<QAction*> KDiff3FileItemAction::actions(const KFileItemListProperties& fil
    */
 
     QAction* pAction = nullptr;
-    QString s;
+    QString actionText;
 
     if(m_list.count() == 1)
     {
         int historyCount = s_pHistory ? s_pHistory->count() : 0;
 
-        s = i18n("Compare with %1", (historyCount > 0 ? s_pHistory->first() : QString()));
-        pAction = new QAction(s, this);
+        actionText = i18n("Compare with %1", (historyCount > 0 ? s_pHistory->first() : QString()));
+        pAction = new QAction(actionText, this);
         connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareWith);
         pAction->setEnabled(m_list.count() > 0 && historyCount > 0);
         pActionMenu->addAction(pAction);
 
-        s = i18n("Merge with %1", historyCount > 0 ? s_pHistory->first() : QString());
-        pAction = new QAction(s, this);
+        actionText = i18n("Merge with %1", historyCount > 0 ? s_pHistory->first() : QString());
+        pAction = new QAction(actionText, this);
         connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotMergeWith);
         pAction->setEnabled(m_list.count() > 0 && historyCount > 0);
         pActionMenu->addAction(pAction);
 
-        s = i18n("Save '%1' for later", (m_list.first().toDisplayString(QUrl::PreferLocalFile)));
-        pAction = new QAction(s, this);
+        actionText = i18n("Save '%1' for later", (m_list.first().toDisplayString(QUrl::PreferLocalFile)));
+        pAction = new QAction(actionText, this);
         connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotSaveForLater);
         pAction->setEnabled(m_list.count() > 0);
         pActionMenu->addAction(pAction);
