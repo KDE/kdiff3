@@ -394,9 +394,9 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
         }
 
         std::map<QString, QTextCodec*>::const_iterator it;
-        for(it = names.begin(); it != names.end(); ++it)
+        for(const auto& pair: names)
         {
-            insertCodec("", it->second);
+            insertCodec("", pair.second);
         }
 
         setToolTip(i18n(

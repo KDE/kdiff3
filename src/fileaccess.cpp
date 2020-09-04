@@ -1249,10 +1249,8 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
 void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UDSEntryList& l)
 {
     //This function is called for non-local urls. Don't use QUrl::fromLocalFile here as it does not handle these.
-    KIO::UDSEntryList::ConstIterator i;
-    for(i = l.begin(); i != l.end(); ++i)
+    for(const KIO::UDSEntry& e: l)
     {
-        const KIO::UDSEntry& e = *i;
         FileAccess fa;
 
         fa.setFromUdsEntry(e, m_pFileAccess);

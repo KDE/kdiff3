@@ -2465,11 +2465,8 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::deleteFLD(const QString&
                 return false;
             }
 
-            t_DirectoryList::iterator it; // create list iterator
-
-            for(it = dirList.begin(); it != dirList.end(); ++it) // for each file...
+            for(const FileAccess& fi2: dirList) // for each file...
             {
-                FileAccess& fi2 = *it;
                 Q_ASSERT(fi2.fileName() != "." && fi2.fileName() != "..");
 
                 bSuccess = deleteFLD(fi2.absoluteFilePath(), false);

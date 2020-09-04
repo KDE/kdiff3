@@ -25,11 +25,10 @@ ValueMap::~ValueMap()
 
 void ValueMap::save(QTextStream& ts)
 {
-    std::map<QString, QString>::iterator i;
-    for(i = m_map.begin(); i != m_map.end(); ++i)
+    for(const auto &entry: m_map)
     {
-        QString key = i->first;
-        QString val = i->second;
+        const QString key = entry.first;
+        const QString val = entry.second;
         ts << key << "=" << val << "\n";
     }
 }
@@ -37,11 +36,11 @@ void ValueMap::save(QTextStream& ts)
 QString ValueMap::getAsString()
 {
     QString result;
-    std::map<QString, QString>::iterator i;
-    for(i = m_map.begin(); i != m_map.end(); ++i)
+
+    for(const auto &entry: m_map)
     {
-        QString key = i->first;
-        QString val = i->second;
+        const QString key = entry.first;
+        const QString val = entry.second;
         result += key + '=' + val + '\n';
     }
     return result;

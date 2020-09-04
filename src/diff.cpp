@@ -54,7 +54,7 @@ int LineData::width(int tabSize) const
 bool LineData::equal(const LineData& l1, const LineData& l2)
 {
     if(l1.getLine() == nullptr || l2.getLine() == nullptr) return false;
-
+    //TODO: Can this be done with QString comparision API?
     if(g_bIgnoreWhiteSpace)
     {
         // Ignore white space diff
@@ -1349,11 +1349,11 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
     {
         qint32 l1 = 0;
         qint32 l2 = 0;
-        DiffList::const_iterator it;
-        for(it = diffList.begin(); it != diffList.end(); ++it)
+
+        for(const Diff& theDiff: diffList)
         {
-            l1 += (it->numberOfEquals() + it->diff1());
-            l2 += (it->numberOfEquals() + it->diff2());
+            l1 += (theDiff.numberOfEquals() + theDiff.diff1());
+            l2 += (theDiff.numberOfEquals() + theDiff.diff2());
         }
 
         Q_ASSERT(l1 == line1.size() && l2 == line2.size());
