@@ -153,7 +153,7 @@ DllUnregisterServer() {
 
 SERVER* SERVER::instance()
 {
-   if(_instance == 0)
+   if(_instance == nullptr)
    {
       _instance = new SERVER();
       _instance->initLogging();
