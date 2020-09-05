@@ -121,7 +121,7 @@ QString MergeFileInfos::fileName() const
     return QString("");
 }
 
-bool MergeFileInfos::conflictingFileTypes()
+bool MergeFileInfos::conflictingFileTypes() const
 {
     if((m_pFileInfoA != nullptr && !m_pFileInfoA->isNormal()) || (m_pFileInfoB != nullptr && !m_pFileInfoB->isNormal()) || (m_pFileInfoC != nullptr && !m_pFileInfoC->isNormal()))
         return true;

@@ -29,7 +29,7 @@ class MergeEditLine
         mChanged = false;
         m_str = QString();
     }
-    bool isConflict() { return m_src == e_SrcSelector::None && !m_bLineRemoved && !mChanged; }
+    bool isConflict() const { return m_src == e_SrcSelector::None && !m_bLineRemoved && !mChanged; }
     void setRemoved(e_SrcSelector src = e_SrcSelector::None)
     {
         m_src = src;
@@ -38,7 +38,7 @@ class MergeEditLine
         mChanged = (src == e_SrcSelector::None);
     }
     bool isRemoved() const { return m_bLineRemoved; }
-    bool isEditableText() { return !isConflict(); }
+    bool isEditableText() const { return !isConflict(); }
     void setString(const QString& s)
     {
         m_str = s;
@@ -47,7 +47,7 @@ class MergeEditLine
         mChanged = true;
     }
     QString getString(const QVector<LineData>* pLineDataA, const QVector<LineData>* pLineDataB, const QVector<LineData>* pLineDataC);
-    bool isModified() { return mChanged; }
+    bool isModified() const { return mChanged; }
 
     void setSource(e_SrcSelector src, bool bLineRemoved)
     {
@@ -61,8 +61,8 @@ class MergeEditLine
             m_str=QLatin1String("");
         }
     }
-    e_SrcSelector src() { return m_src; }
-    Diff3LineList::const_iterator id3l() { return m_id3l; }
+    e_SrcSelector src() const { return m_src; }
+    Diff3LineList::const_iterator id3l() const { return m_id3l; }
   private:
     Diff3LineList::const_iterator m_id3l;
     e_SrcSelector m_src; // 1, 2 or 3 for A, B or C respectively, or 0 when line is from neither source.

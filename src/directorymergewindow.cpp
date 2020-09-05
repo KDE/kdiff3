@@ -1370,7 +1370,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
         }
         else
         {
-            FileAccess* pFA = mfi.getFileInfoA() ? mfi.getFileInfoA() : mfi.getFileInfoB() ? mfi.getFileInfoB() : mfi.getFileInfoC();
+            const FileAccess* pFA = mfi.getFileInfoA() ? mfi.getFileInfoA() : mfi.getFileInfoB() ? mfi.getFileInfoB() : mfi.getFileInfoC();
             MergeFileInfos& dirMfi = pFA->parent() ? m_fileMergeMap[FileKey(*pFA->parent())] : *m_pRoot; // parent
 
             dirMfi.addChild(&mfi); //new DirMergeItem( dirMfi.m_pDMI, filePart, &mfi );
@@ -1402,7 +1402,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(const QModelIndex& mi, e_MergeOperation eDefaultMergeOp)
 {
-    MergeFileInfos* pMFI = getMFI(mi);
+    const MergeFileInfos* pMFI = getMFI(mi);
     if(pMFI == nullptr)
         return;
 
