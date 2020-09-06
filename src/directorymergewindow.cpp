@@ -1159,7 +1159,7 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
 
         bool bThreeDirs = pMFI->isThreeWay();
         bool bMergeMode = bThreeDirs || !d->m_bSyncMode;
-        bool bFTConflict = pMFI == nullptr ? false : pMFI->conflictingFileTypes();
+        bool bFTConflict = pMFI->conflictingFileTypes();
 
         if(bMergeMode)
         {
@@ -1237,6 +1237,7 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
             }
         }
     }
+    //Override Qt's default behavior for this key.
     else if(e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter)
     {
         onDoubleClick(currentIndex());
