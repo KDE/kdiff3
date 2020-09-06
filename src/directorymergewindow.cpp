@@ -1412,13 +1412,21 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
                         (pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirB().absoluteFilePath()) ||
                         (bCheckC && pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirC().absoluteFilePath()));
 
-    if(eDefaultMergeOp == eMergeABCToDest && !bCheckC)
+    //Crash and burn in debug mode these states are never valid.
+    //The checks are duplicated here so they show in the assert text.
+    Q_ASSERT(!(eDefaultMergeOp == eMergeABCToDest && !bCheckC));
+    Q_ASSERT(!(eDefaultMergeOp == eMergeToAB && bCheckC));
+
+    //Check for two bugged states that are recoverable. This should never happen!
+    if(Q_UNLIKELY(eDefaultMergeOp == eMergeABCToDest && !bCheckC))
     {
+        qCWarning(kdiffMain) << "Invalid State detected in DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation";
         eDefaultMergeOp = eMergeABToDest;
     }
-    if(eDefaultMergeOp == eMergeToAB && bCheckC)
+    if(Q_UNLIKELY(eDefaultMergeOp == eMergeToAB && bCheckC))
     {
-        Q_ASSERT(true);
+        qCWarning(kdiffMain) << "Invalid State detected in DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation";
+        eDefaultMergeOp = eMergeABCToDest;
     }
 
     if(eDefaultMergeOp == eMergeToA || eDefaultMergeOp == eMergeToB ||
