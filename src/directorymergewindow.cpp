@@ -1336,18 +1336,14 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
 
     mWindow->setRootIsDecorated(true);
 
-    t_fileMergeMap::iterator j;
     int nrOfFiles = m_fileMergeMap.size();
     int currentIdx = 1;
     QElapsedTimer t;
     t.start();
     pp.setMaxNofSteps(nrOfFiles);
 
-    for(j = m_fileMergeMap.begin(); j != m_fileMergeMap.end(); ++j)
+    for(MergeFileInfos &mfi: m_fileMergeMap)
     {
-        MergeFileInfos& mfi = j.value();
-
-        // const QString& fileName = j->first;
         const QString& fileName = mfi.subPath();
 
         pp.setInformation(
@@ -1386,7 +1382,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
 
             dirMfi.addChild(&mfi); //new DirMergeItem( dirMfi.m_pDMI, filePart, &mfi );
             mfi.setParent(&dirMfi);
-
             //   // Equality for parent dirs is set in updateFileVisibilities()
         }
 
