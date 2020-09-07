@@ -117,13 +117,11 @@ enum Columns
 
 static Qt::CaseSensitivity s_eCaseSensitivity = Qt::CaseSensitive;
 
-//TODO: clean up this mess.
 class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemModel
 {
     friend class DirMergeItem;
 
   public:
-    DirectoryMergeWindow* mWindow;
     explicit DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW)
     {
         mWindow = pDMW;
@@ -134,8 +132,12 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     {
         delete m_pRoot;
     }
+
+    bool init(const QSharedPointer<DirectoryInfo>& dirInfo, bool bDirectoryMerge, bool bReload);
+
     // Implement QAbstractItemModel
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+
     //Qt::ItemFlags flags ( const QModelIndex & index ) const
     QModelIndex parent(const QModelIndex& index) const override
     {
@@ -146,6 +148,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         MergeFileInfos* pParentsParent = pMFI->parent()->parent();
         return createIndex(pParentsParent->children().indexOf(pMFI->parent()), 0, pMFI->parent());
     }
+
     int rowCount(const QModelIndex& parent = QModelIndex()) const override
     {
         MergeFileInfos* pParentMFI = getMFI(parent);
@@ -154,10 +157,12 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         else
             return m_pRoot->children().count();
     }
+
     int columnCount(const QModelIndex& /*parent*/) const override
     {
         return 10;
     }
+
     QModelIndex index(int row, int column, const QModelIndex& parent) const override
     {
         MergeFileInfos* pParentMFI = getMFI(parent);
@@ -168,8 +173,24 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         else
             return QModelIndex();
     }
+
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+
     void sort(int column, Qt::SortOrder order) override;
+
+    void selectItemAndColumn(const QModelIndex& mi, bool bContextMenu);
+
+    void setOpStatus(const QModelIndex& mi, e_OperationStatus eOpStatus)
+    {
+        if(MergeFileInfos* pMFI = getMFI(mi))
+        {
+            pMFI->setOpStatus(eOpStatus);
+            Q_EMIT dataChanged(mi, mi);
+        }
+    }
+
+    QModelIndex nextSibling(const QModelIndex& mi);
+
     // private data and helper methods
     MergeFileInfos* getMFI(const QModelIndex& mi) const
     {
@@ -184,9 +205,8 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         if(rootMFI() == nullptr) return false;
         return rootMFI()->isThreeWay();
     }
-    MergeFileInfos* rootMFI() const { return m_pRoot; }
 
-    QSharedPointer<Options> m_pOptions = nullptr;
+    MergeFileInfos* rootMFI() const { return m_pRoot; }
 
     void calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
                        int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges);
@@ -272,6 +292,9 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     t_fileMergeMap m_fileMergeMap;
 
   public:
+    DirectoryMergeWindow* mWindow;
+    QSharedPointer<Options> m_pOptions = nullptr;
+
     bool m_bFollowDirLinks = false;
     bool m_bFollowFileLinks = false;
     bool m_bSimulatedMergeStarted = false;
@@ -294,7 +317,6 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     QModelIndex m_selection1Index;
     QModelIndex m_selection2Index;
     QModelIndex m_selection3Index;
-    void selectItemAndColumn(const QModelIndex& mi, bool bContextMenu);
 
     QPointer<QAction> m_pDirStartOperation;
     QPointer<QAction> m_pDirRunOperationForCurrentItem;
@@ -340,18 +362,6 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
 
     QPointer<QAction> m_pDirSaveMergeState;
     QPointer<QAction> m_pDirLoadMergeState;
-
-    bool init(const QSharedPointer<DirectoryInfo>& dirInfo, bool bDirectoryMerge, bool bReload);
-    void setOpStatus(const QModelIndex& mi, e_OperationStatus eOpStatus)
-    {
-        if(MergeFileInfos* pMFI = getMFI(mi))
-        {
-            pMFI->setOpStatus(eOpStatus);
-            Q_EMIT dataChanged(mi, mi);
-        }
-    }
-
-    QModelIndex nextSibling(const QModelIndex& mi);
 };
 
 QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelIndex& index, int role) const
