@@ -167,7 +167,7 @@ const QVector<LineData>* SourceData::getLineDataForDisplay() const
 
 LineRef SourceData::getSizeLines() const
 {
-    return (LineRef)(m_normalData.lineCount());
+    return m_normalData.lineCount();
 }
 
 qint64 SourceData::getSizeBytes() const
