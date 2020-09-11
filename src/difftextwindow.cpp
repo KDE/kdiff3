@@ -313,8 +313,6 @@ void DiffTextWindow::setPaintingAllowed(bool bAllowPainting)
         setUpdatesEnabled(bAllowPainting);
         if(bAllowPainting)
             update();
-        else
-            reset();
     }
 }
 
