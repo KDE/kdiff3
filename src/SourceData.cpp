@@ -162,6 +162,7 @@ const QVector<LineData>* SourceData::getLineDataForDiff() const
 
 const QVector<LineData>* SourceData::getLineDataForDisplay() const
 {
+    Q_ASSERT(!(m_normalData.m_v.size() == 0 && m_normalData.mDataSize > 0));
     return m_normalData.m_v.size() > 0 ? &m_normalData.m_v : nullptr;
 }
 
