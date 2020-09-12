@@ -960,6 +960,9 @@ void KDiff3App::slotFileOpen2(QStringList &errors, const QString& fn1, const QSt
     }
 
     slotStatusMsg(i18n("Opening files..."));
+    m_sd1->reset();
+    m_sd2->reset();
+    m_sd3->reset();
 
     m_sd1->setFilename(fn1);
     m_sd2->setFilename(fn2);
@@ -990,10 +993,6 @@ void KDiff3App::slotFileOpen2(QStringList &errors, const QString& fn1, const QSt
             errors.append(m_sd1->getErrors());
             errors.append(m_sd2->getErrors());
             errors.append(m_sd3->getErrors());
-            //Only time this could ever happen so move here to allow for error retrieval.
-            m_sd1->reset();
-            m_sd2->reset();
-            m_sd3->reset();
 
             return;
         }

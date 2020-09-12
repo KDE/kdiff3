@@ -162,7 +162,6 @@ const QVector<LineData>* SourceData::getLineDataForDiff() const
 
 const QVector<LineData>* SourceData::getLineDataForDisplay() const
 {
-    Q_ASSERT(!(m_normalData.m_v.size() == 0 && m_normalData.mDataSize > 0));
     return m_normalData.m_v.size() > 0 ? &m_normalData.m_v : nullptr;
 }
 
@@ -208,6 +207,11 @@ bool SourceData::isBinaryEqualWith(const QSharedPointer<SourceData>& other) cons
            (getSizeBytes() == 0 || memcmp(getBuf(), other->getBuf(), getSizeBytes()) == 0);
 }
 
+/*
+    Warning: Don not call this function without re-runing the comparision or
+    otherwise resetting the DiffTextWindows as theses store a pointer to the file
+    data stored here.
+*/
 void SourceData::FileData::reset()
 {
     if(m_pBuf != nullptr)

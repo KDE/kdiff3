@@ -1250,7 +1250,8 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int beginL
 QString DiffTextWindowData::getString(int d3lIdx)
 {
     Q_ASSERT(!(m_pLineData == nullptr && (m_filename != "" || m_size != 0)));
-    Q_ASSERT(!(m_pLineData->isEmpty() && m_size != 0));
+    Q_ASSERT(!(m_pLineData != nullptr && m_pLineData->isEmpty() && m_size != 0));
+
     if(m_pLineData == nullptr || m_pLineData->isEmpty() || d3lIdx < 0 || d3lIdx >= m_pDiff3LineVector->size())
         return QString();
 
