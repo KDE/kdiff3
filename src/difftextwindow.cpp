@@ -234,6 +234,8 @@ void DiffTextWindow::init(
     const Diff3LineVector* pDiff3LineVector,
     const ManualDiffHelpList* pManualDiffHelpList)
 {
+    reset();
+
     d->m_filename = filename;
     d->m_pLineData = pLineData;
     d->m_size = size;

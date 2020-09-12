@@ -370,10 +370,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         m_pHScrollBar->setValue(0);
         MergeResultWindow::mVScrollBar->setValue(0);
         setLockPainting(false);
-        //Don't do this in setLockPainting.
-        if(m_pDiffTextWindow1) m_pDiffTextWindow1->reset();
-        if(m_pDiffTextWindow2) m_pDiffTextWindow2->reset();
-        if(m_pDiffTextWindow3) m_pDiffTextWindow3->reset();
 
         if(!bVisibleMergeResultWindow)
             m_pMergeWindowFrame->hide();
