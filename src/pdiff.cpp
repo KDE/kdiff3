@@ -2102,8 +2102,9 @@ void KDiff3App::slotUpdateAvailabilities()
 
     bool bDiffWindowVisible = m_pMainWidget != nullptr && m_pMainWidget->isVisible();
     bool bMergeEditorVisible = m_pMergeWindowFrame != nullptr && m_pMergeWindowFrame->isVisible() && m_pMergeResultWindow != nullptr;
+    bool bDirWindowHasFocus = m_pDirectoryMergeSplitter != nullptr && m_pDirectoryMergeSplitter->isVisible() && m_pDirectoryMergeWindow->hasFocus();
 
-    m_pDirectoryMergeWindow->updateAvailabilities(m_bDirCompare, bDiffWindowVisible, chooseA, chooseB, chooseC);
+    m_pDirectoryMergeWindow->updateAvailabilities(bDirWindowHasFocus, m_bDirCompare, bDiffWindowVisible, chooseA, chooseB, chooseC);
 
     dirShowBoth->setEnabled(m_bDirCompare);
     dirViewToggle->setEnabled(
@@ -2112,18 +2113,10 @@ void KDiff3App::slotUpdateAvailabilities()
          ((!m_pDirectoryMergeSplitter->isVisible() && m_pMainWidget->isVisible()) ||
           (m_pDirectoryMergeSplitter->isVisible() && !m_pMainWidget->isVisible() && bTextDataAvailable))));
 
-    bool bDirWindowHasFocus = m_pDirectoryMergeSplitter != nullptr && m_pDirectoryMergeSplitter->isVisible() && m_pDirectoryMergeWindow->hasFocus();
-
     showWhiteSpaceCharacters->setEnabled(bDiffWindowVisible);
     autoAdvance->setEnabled(bMergeEditorVisible);
     mAutoSolve->setEnabled(bMergeEditorVisible && m_bTripleDiff);
     mUnsolve->setEnabled(bMergeEditorVisible);
-    if(!bDirWindowHasFocus)
-    {
-        chooseA->setEnabled(bMergeEditorVisible);
-        chooseB->setEnabled(bMergeEditorVisible);
-        chooseC->setEnabled(bMergeEditorVisible && m_bTripleDiff);
-    }
 
     editCut->setEnabled(allowCut());
     if(m_pMergeResultWindow != nullptr)

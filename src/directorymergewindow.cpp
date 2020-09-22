@@ -3020,7 +3020,7 @@ void DirectoryMergeWindow::setupConnections(const KDiff3App* app)
     chk_connect(app, &KDiff3App::doRefresh, this, &DirectoryMergeWindow::slotRefresh);
 }
 
-void DirectoryMergeWindow::updateAvailabilities(bool bDirCompare, bool bDiffWindowVisible,
+void DirectoryMergeWindow::updateAvailabilities(bool bMergeEditorVisible, bool bDirCompare, bool bDiffWindowVisible,
                                                 KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC)
 {
     d->m_pDirStartOperation->setEnabled(bDirCompare);
@@ -3072,6 +3072,12 @@ void DirectoryMergeWindow::updateAvailabilities(bool bDirCompare, bool bDiffWind
         chooseA->setChecked(false);
         chooseB->setChecked(false);
         chooseC->setChecked(false);
+    }
+    else
+    {
+        chooseA->setEnabled(bMergeEditorVisible);
+        chooseB->setEnabled(bMergeEditorVisible);
+        chooseC->setEnabled(bMergeEditorVisible && bThreeDirs);
     }
 
     d->m_pDirCurrentSyncDoNothing->setEnabled(bItemActive && !bMergeMode);

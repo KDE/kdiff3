@@ -56,7 +56,7 @@ class DirectoryMergeWindow : public QTreeView
    void initDirectoryMergeActions(KDiff3App* pKDiff3App, KActionCollection* ac);
 
    void setupConnections(const KDiff3App* app);
-   void updateAvailabilities(bool bDirCompare, bool bDiffWindowVisible,
+   void updateAvailabilities(bool bMergeEditorVisible, bool bDirCompare, bool bDiffWindowVisible,
       KToggleAction* chooseA, KToggleAction* chooseB, KToggleAction* chooseC);
    void updateFileVisibilities();
 
