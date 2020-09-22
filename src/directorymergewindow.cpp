@@ -1171,31 +1171,36 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
         bool bMergeMode = bThreeDirs || !d->m_bSyncMode;
         bool bFTConflict = pMFI->conflictingFileTypes();
 
+        switch(e->key())
+        {
+            case Qt::Key_1:
+                if(pMFI->existsInA())
+                {
+                    slotCurrentChooseA();
+                }
+                return;
+            case Qt::Key_2:
+                if(pMFI->existsInB())
+                {
+                    slotCurrentChooseB();
+                }
+                return;
+            case Qt::Key_Space:
+                slotCurrentDoNothing();
+                return;
+        }
+
         if(bMergeMode)
         {
             switch(e->key())
             {
-                case Qt::Key_1:
-                    if(pMFI->existsInA())
-                    {
-                        slotCurrentChooseA();
-                    }
-                    return;
-                case Qt::Key_2:
-                    if(pMFI->existsInB())
-                    {
-                        slotCurrentChooseB();
-                    }
-                    return;
                 case Qt::Key_3:
                     if(pMFI->existsInC())
                     {
                         slotCurrentChooseC();
                     }
                     return;
-                case Qt::Key_Space:
-                    slotCurrentDoNothing();
-                    return;
+
                 case Qt::Key_4:
                     if(!bFTConflict)
                     {
@@ -1213,21 +1218,6 @@ void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
         {
             switch(e->key())
             {
-                case Qt::Key_1:
-                    if(pMFI->existsInA())
-                    {
-                        slotCurrentCopyAToB();
-                    }
-                    return;
-                case Qt::Key_2:
-                    if(pMFI->existsInB())
-                    {
-                        slotCurrentCopyBToA();
-                    }
-                    return;
-                case Qt::Key_Space:
-                    slotCurrentDoNothing();
-                    return;
                 case Qt::Key_4:
                     if(!bFTConflict)
                     {
