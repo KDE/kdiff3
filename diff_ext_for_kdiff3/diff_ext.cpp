@@ -372,9 +372,9 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
       {
          if( !m_recentFiles.empty() )
          {
-            unsigned int num = idCmd - m_id_DiffWith_Base;
+            unsigned long long num = idCmd - m_id_DiffWith_Base;
             std::list<tstring>::iterator i = m_recentFiles.begin();
-            for(unsigned int j = 0; j < num && i != m_recentFiles.end(); j++)
+            for(unsigned long long j = 0; j < num && i != m_recentFiles.end(); j++)
                i++;
 
             if ( i!=m_recentFiles.end() )
