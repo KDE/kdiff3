@@ -19,7 +19,7 @@
 #include <objbase.h>
 #include <initguid.h>
 
-#include <KLocalizedString>
+#include <QtGlobal>
 
 #include "class_factory.h"
 

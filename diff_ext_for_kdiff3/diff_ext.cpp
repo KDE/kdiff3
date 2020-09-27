@@ -6,8 +6,6 @@
 
 #include "diff_ext.h"
 
-#include <KLocalizedString>
-
 #include <QString>
 
 #include <assert.h>
@@ -16,6 +14,169 @@
 
 #include <map>
 #include <vector>
+
+
+#ifdef UNICODE
+
+static void parseString( const std::wstring& s, size_t& i /*pos*/, std::wstring& r /*result*/ )
+{
+   size_t size = s.size();
+   ++i; // Skip initial '"'
+   for( ; i<size; ++i )
+   {
+      if ( s[i]=='"' )
+      {
+         ++i;
+         break;
+      }
+      else if ( s[i]==L'\\' && i+1<size )
+      {
+         ++i;
+         switch( s[i] ) {
+            case L'n':  r+=L'\n'; break;
+            case L'r':  r+=L'\r'; break;
+            case L'\\': r+=L'\\'; break;
+            case L'"':  r+=L'"';  break;
+            case L't':  r+=L'\t'; break;
+            default:    r+=L'\\'; r+=s[i]; break;
+         }
+      }
+      else
+         r+=s[i];
+   }
+}
+
+static std::map< std::wstring, std::wstring > s_translationMap;
+static tstring s_translationFileName;
+
+void readTranslationFile()
+{
+   s_translationMap.clear();
+   FILE* pFile = _tfopen( s_translationFileName.c_str(), TEXT("rb") );
+   if ( pFile )
+   {
+      MESSAGELOG( TEXT( "Reading translations: " ) + s_translationFileName );
+      std::vector<char> buffer;
+      try {
+         if ( fseek(pFile, 0, SEEK_END)==0 )
+         {
+            size_t length = ftell(pFile); // Get the file length
+            buffer.resize(length);
+            fseek(pFile, 0, SEEK_SET );
+            fread(&buffer[0], 1, length, pFile );
+         }
+      } 
+      catch(...) 
+      {
+      }
+      fclose(pFile);
+
+      if (buffer.size()>0)
+      {
+         size_t bufferSize = buffer.size();
+         int offset = 0;
+         if ( buffer[0]=='\xEF' && buffer[1]=='\xBB' && buffer[2]=='\xBF' )
+         {
+            offset += 3;
+            bufferSize -= 3;
+         }
+
+         size_t sLength = MultiByteToWideChar(CP_UTF8,0,&buffer[offset], (int)bufferSize, 0, 0 );
+         std::wstring s( sLength, L' ' );         
+         MultiByteToWideChar(CP_UTF8,0,&buffer[offset], (int)bufferSize, &s[0], (int)s.size() );
+
+         // Now analyse the file and extract translation strings
+         std::wstring msgid;
+         std::wstring msgstr;
+         msgid.reserve( 1000 );
+         msgstr.reserve( 1000 );
+         bool bExpectingId = true;
+         for( size_t i=0; i<sLength; ++i )
+         {
+            wchar_t c = s[i];
+            if( c == L'\n' || c == L'\r' || c==L' ' || c==L'\t' )
+               continue;
+            else if ( s[i]==L'#' ) // Comment
+               while( s[i]!='\n' && s[i]!=L'\r' && i<sLength )
+                  ++i;
+            else if ( s[i]==L'"' )
+            {
+               if ( bExpectingId ) parseString(s,i,msgid);
+               else                parseString(s,i,msgstr);
+            }
+            else if ( sLength-i>5 && wcsncmp( &s[i], L"msgid", 5 )==0 )
+            {
+               if ( !msgid.empty() && !msgstr.empty() )
+               {
+                  s_translationMap[msgid] = msgstr;
+               }
+               bExpectingId = true;
+               msgid.clear();
+               i+=4;
+            }
+            else if ( sLength-i>6 && wcsncmp( &s[i], L"msgstr", 6 )==0 )
+            {
+               bExpectingId = false;
+               msgstr.clear();
+               i+=5;
+            }
+            else
+            {
+               // Unexpected ?
+            }
+         }
+      }
+   }
+   else
+   {
+      ERRORLOG( TEXT( "Reading translations failed: " ) + s_translationFileName );
+   }
+}
+
+static tstring getTranslation( const tstring& fallback )
+{
+   std::map< std::wstring, std::wstring >::iterator i = s_translationMap.find( fallback );
+   if (i!=s_translationMap.end())
+      return i->second;
+   return fallback;
+}
+#else
+
+static tstring getTranslation( const tstring& fallback )
+{
+   return fallback;
+}
+
+#endif
+
+
+static void replaceArgs( tstring& s, const tstring& r1, const tstring& r2=TEXT(""), const tstring& r3=TEXT("") )
+{
+   tstring arg1 = TEXT("%1");
+   size_t pos1 = s.find( arg1 );
+   tstring arg2 = TEXT("%2");
+   size_t pos2 = s.find( arg2 );
+   tstring arg3 = TEXT("%3");
+   size_t pos3 = s.find( arg3 );
+   if ( pos1 != size_t(-1) )
+   {
+      s.replace( pos1, arg1.length(), r1 );
+      if ( pos2 != size_t(-1) && pos1<pos2 )
+         pos2 += r1.length() - arg1.length();
+      if ( pos3 != size_t(-1) && pos1<pos3 )
+         pos3 += r1.length() - arg1.length();
+   }
+   if ( pos2 != size_t(-1) )
+   {
+      s.replace( pos2, arg2.length(), r2 );
+      if ( pos3 != size_t(-1) && pos2<pos3 )
+         pos3 += r2.length() - arg2.length();
+   }
+   if ( pos3 != size_t(-1) )
+   {
+      s.replace( pos3, arg3.length(), r3 );
+   }
+}
 
 DIFF_EXT::DIFF_EXT()
 : m_nrOfSelectedFiles(0), _ref_count(0L),
@@ -85,6 +246,17 @@ DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY 
 {
    LOG();
 
+#ifdef UNICODE
+   tstring installDir = SERVER::instance()->getRegistryKeyString( TEXT(""), TEXT("InstallDir") );
+   tstring language = SERVER::instance()->getRegistryKeyString( TEXT(""), TEXT("Language") );
+   tstring translationFileName = installDir + TEXT("\\translations\\diff_ext_") + language + TEXT(".po");
+   if ( s_translationFileName != translationFileName )
+   {
+      s_translationFileName = translationFileName;
+      readTranslationFile();
+   }
+#endif
+
   FORMATETC format = {CF_HDROP, 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
   STGMEDIUM medium;
   medium.tymed = TYMED_HGLOBAL;
@@ -96,7 +268,9 @@ DIFF_EXT::Initialize(LPCITEMIDLIST /*folder not used*/, IDataObject* data, HKEY 
     m_nrOfSelectedFiles = DragQueryFile(drop, 0xFFFFFFFF, 0, 0);
 
     TCHAR tmp[MAX_PATH];
-
+    QString t="s";
+    //initialize_language();
+    
     if (m_nrOfSelectedFiles >= 1 && m_nrOfSelectedFiles <= 3)
     {
        DragQueryFile(drop, 0, tmp, MAX_PATH);
@@ -195,17 +369,15 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
       if(m_nrOfSelectedFiles == 1)
       {
          size_t nrOfRecentFiles = m_recentFiles.size();
-         tstring menuStringCompare;
-         tstring menuStringMerge;
+         tstring menuStringCompare = i18n("Compare with %1");
+         tstring menuStringMerge   = i18n("Merge with %1");
          tstring firstFileName;
          if( nrOfRecentFiles>=1 )
          {
             firstFileName = TEXT("'") + cut_to_length( m_recentFiles.front() ) + TEXT("'");
          }
-
-         menuStringCompare = fromQString(i18n("Compare with %1", toQString(firstFileName)));
-         menuStringMerge   = fromQString(i18n("Merge with %1", toQString(firstFileName)));
-
+         replaceArgs( menuStringCompare, firstFileName );
+         replaceArgs( menuStringMerge,   firstFileName );
          m_id_DiffWith  = insertMenuItemHelper( subMenu, id++, pos2++, menuStringCompare, nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
          m_id_MergeWith = insertMenuItemHelper( subMenu, id++, pos2++, menuStringMerge, nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
 
@@ -214,10 +386,11 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
          //   tstring firstFileName = cut_to_length( m_recentFiles.front() );
          //   tstring secondFileName = cut_to_length( *(++m_recentFiles.begin()) );
          //}
-         m_id_Merge3 = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("3-way merge with base")),
+         m_id_Merge3 = insertMenuItemHelper( subMenu, id++, pos2++, i18n("3-way merge with base"), 
             nrOfRecentFiles >=2 ? MFS_ENABLED : MFS_DISABLED );
 
-         menuString = fromQString(i18n("Save '%1' for later", toQString(_file_name1)));
+         menuString = i18n("Save '%1' for later");
+         replaceArgs( menuString, _file_name1 );
          m_id_DiffLater = insertMenuItemHelper( subMenu, id++, pos2++, menuString );
 
          HMENU file_list = CreateMenu();
@@ -231,25 +404,25 @@ DIFF_EXT::QueryContextMenu(HMENU menu, UINT position, UINT first_cmd, UINT /*las
             ++n;
          }
 
-         insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("Compare with ...")),
+         insertMenuItemHelper( subMenu, id++, pos2++, i18n("Compare with ..."), 
             nrOfRecentFiles > 0 ? MFS_ENABLED : MFS_DISABLED, file_list );
 
-         m_id_ClearList = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("Clear list")), nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
+         m_id_ClearList = insertMenuItemHelper( subMenu, id++, pos2++, i18n("Clear list"), nrOfRecentFiles >=1 ? MFS_ENABLED : MFS_DISABLED );
       }
       else if(m_nrOfSelectedFiles == 2)
       {
          //= "Diff " + cut_to_length(_file_name1, 20)+" and "+cut_to_length(_file_name2, 20);
-         m_id_Diff = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("Compare")) );
+         m_id_Diff = insertMenuItemHelper( subMenu, id++, pos2++, i18n("Compare") );
       }
       else if ( m_nrOfSelectedFiles == 3 )
       {
-         m_id_Diff3 = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("3 way comparison")) );
+         m_id_Diff3 = insertMenuItemHelper( subMenu, id++, pos2++, i18n("3 way comparison") );
       }
       else
       {
          // More than 3 files selected?
       }
-      m_id_About = insertMenuItemHelper( subMenu, id++, pos2++, fromQString(i18n("About Diff-Ext ...")) );
+      m_id_About = insertMenuItemHelper( subMenu, id++, pos2++, i18n("About Diff-Ext ...") );
 
       insertMenuItemHelper( menu, id++, position++, TEXT("KDiff3"), MFS_ENABLED, subMenu );
 
@@ -320,13 +493,15 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
       else if(id == m_id_About)
       {
          LOG();
-         QString sBits = i18n("(32 Bit)");
+         std::wstring sBits = i18n("(32 Bit)");
          if (sizeof(void*)==8)
-         MessageBox( _hwnd, (fromQString(i18n("Diff-Ext Copyright (c) 2003-2006, Sergey Zorin. All rights reserved.\n")
-            + i18n("This software is distributable under the BSD-2-Clause license.\n")
+             sBits = i18n("(64 Bit)");
+         MessageBox( _hwnd, (i18n("Diff-Ext Copyright (c) 2003-2006, Sergey Zorin. All rights reserved.\n")
+            + i18n("This software is distributable under the BSD license.\n")
             + i18n("Some extensions for KDiff3 (c) 2006-2013 by Joachim Eibl.\n")
-            + i18n("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n"))).c_str()
-            , fromQString(i18n("About Diff-Ext for KDiff3 ")+sBits).c_str(), MB_OK );
+            + i18n("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n")
+            + i18n("Homepage for KDiff3: http://kdiff3.sourceforge.net")).c_str()
+            , (i18n("About Diff-Ext for KDiff3 ")+sBits).c_str(), MB_OK );
       }
       else
       {
@@ -352,7 +527,7 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
    HRESULT ret = NOERROR;
 
    if(uFlags == GCS_HELPTEXT) {
-      QString helpString;
+      tstring helpString;
       if( idCmd == m_id_Diff )
       {
          helpString = i18n("Compare selected files");
@@ -361,12 +536,14 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
       {
          if(!m_recentFiles.empty())
          {
-            helpString = i18n("Compare '%1' with '%2'", toQString(_file_name1), toQString(m_recentFiles.front()));
+            helpString = i18n("Compare '%1' with '%2'");
+            replaceArgs( helpString, _file_name1, m_recentFiles.front() );
          }
       }
       else if(idCmd == m_id_DiffLater)
       {
-         helpString = i18n("Save '%1' for later operation", toQString(_file_name1));
+         helpString = i18n("Save '%1' for later operation");
+         replaceArgs( helpString, _file_name1 );
       }
       else if((idCmd >= m_id_DiffWith_Base) && (idCmd < m_id_DiffWith_Base+m_recentFiles.size()))
       {
@@ -379,11 +556,12 @@ DIFF_EXT::GetCommandString(UINT_PTR idCmd, UINT uFlags, UINT*, LPSTR pszName, UI
 
             if ( i!=m_recentFiles.end() )
             {
-               helpString = i18n("Compare '%1' with '%2'", toQString(_file_name1), toQString(*i));
+               helpString = i18n("Compare '%1' with '%2'");
+               replaceArgs( helpString, _file_name1, *i );
             }
          }
       }
-      lstrcpyn( (LPTSTR)pszName, fromQString(helpString).c_str(), cchMax );
+      lstrcpyn( (LPTSTR)pszName, helpString.c_str(), cchMax );
    }
    else
    {
@@ -420,10 +598,10 @@ DIFF_EXT::diff( const tstring& arguments )
 
    if (bError)
    {
-      tstring message = fromQString(i18n("Could not start KDiff3. Please rerun KDiff3 installation."));
-      message += TEXT("\n") + fromQString(i18n("Command")) + TEXT(": ") + command;
-      message += TEXT("\n") + fromQString(i18n("CommandLine")) + TEXT(": ") + commandLine;
-      MessageBox(_hwnd, message.c_str(), fromQString(i18n("Diff-Ext For KDiff3")).c_str(), MB_OK);
+      tstring message = i18n("Could not start KDiff3. Please rerun KDiff3 installation.");
+      message += TEXT("\n") + i18n("Command") + TEXT(": ") + command;
+      message += TEXT("\n") + i18n("CommandLine") + TEXT(": ") + commandLine;
+      MessageBox(_hwnd, message.c_str(), i18n("Diff-Ext For KDiff3").c_str(), MB_OK);
    }
 }
 
