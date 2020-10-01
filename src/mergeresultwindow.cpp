@@ -180,6 +180,8 @@ void MergeResultWindow::setupConnections(const KDiff3App *app)
 
     chk_connect(this, &MergeResultWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
     chk_connect(this, &MergeResultWindow::newSelection, app, &KDiff3App::slotSelectionStart);
+    chk_connect(this, &MergeResultWindow::newSelection, this, &MergeResultWindow::resetSelection);
+
     chk_connect(this, &MergeResultWindow::modifiedChanged, app, &KDiff3App::slotOutputModified);
     chk_connect(this, &MergeResultWindow::updateAvailabilities, app, &KDiff3App::slotUpdateAvailabilities);
     chk_connect(this, &MergeResultWindow::showPopupMenu, app, &KDiff3App::showPopupMenu);
