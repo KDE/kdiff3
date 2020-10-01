@@ -524,12 +524,13 @@ void KDiff3App::sourceMask(int srcMask, int enabledMask)
 void KDiff3App::initView()
 {
     // set the main widget here
-    if(m_pMainWidget != nullptr)
+    if(mInitCalled)
     {
         return;
-        //delete m_pMainWidget;
     }
-    m_pMainWidget = new QWidget(); // Contains vertical splitter and horiz scrollbar
+
+    mInitCalled = true;
+    //m_pMainWidget // Contains vertical splitter and horiz scrollbar
     m_pMainSplitter->addWidget(m_pMainWidget);
     m_pMainWidget->setObjectName("MainWidget");
     QVBoxLayout* pVLayout = new QVBoxLayout(m_pMainWidget);
@@ -904,10 +905,7 @@ void KDiff3App::slotFileOpen()
                 if(bSuccess)
                 {
                     m_pDirectoryMergeSplitter->show();
-                    if(m_pMainWidget != nullptr)
-                    {
-                        m_pMainWidget->hide();
-                    }
+                    m_pMainWidget->hide();
                     break;
                 }
             }
@@ -949,7 +947,7 @@ void KDiff3App::slotFileOpen2(QStringList &errors, const QString& fn1, const QSt
 {
     if(!shouldContinue()) return;
 
-    if(fn1.isEmpty() && fn2.isEmpty() && fn3.isEmpty() && ofn.isEmpty() && m_pMainWidget != nullptr)
+    if(fn1.isEmpty() && fn2.isEmpty() && fn3.isEmpty() && ofn.isEmpty())
     {
         m_pMainWidget->hide();
         return;
@@ -1594,7 +1592,7 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
 
         if(!m_bDefaultFilename) destDir = f4;
         m_pDirectoryMergeSplitter->show();
-        if(m_pMainWidget != nullptr) m_pMainWidget->hide();
+        m_pMainWidget->hide();
         setUpdatesEnabled(true);
 
         m_dirinfo = QSharedPointer<DirectoryInfo>::create(f1, f2, f3, destDir);
@@ -1703,13 +1701,12 @@ void KDiff3App::slotDirShowBoth()
         if(m_pDirectoryMergeSplitter)
             m_pDirectoryMergeSplitter->setVisible(m_bDirCompare);
 
-        if(m_pMainWidget != nullptr)
-            m_pMainWidget->show();
+        m_pMainWidget->show();
     }
     else
     {
         bool bTextDataAvailable = (m_sd1->hasData() || m_sd2->hasData() || m_sd3->hasData());
-        if(m_pMainWidget != nullptr && bTextDataAvailable)
+        if(bTextDataAvailable)
         {
             m_pMainWidget->show();
             m_pDirectoryMergeSplitter->hide();
@@ -1730,16 +1727,12 @@ void KDiff3App::slotDirViewToggle()
         if(!m_pDirectoryMergeSplitter->isVisible())
         {
             m_pDirectoryMergeSplitter->show();
-            if(m_pMainWidget != nullptr)
-                m_pMainWidget->hide();
+            m_pMainWidget->hide();
         }
         else
         {
-            if(m_pMainWidget != nullptr)
-            {
-                m_pDirectoryMergeSplitter->hide();
-                m_pMainWidget->show();
-            }
+            m_pDirectoryMergeSplitter->hide();
+            m_pMainWidget->show();
         }
     }
     slotUpdateAvailabilities();
@@ -1888,7 +1881,7 @@ void KDiff3App::slotMergeCurrentFile()
     {
         m_pDirectoryMergeWindow->mergeCurrentFile();
     }
-    else if(m_pMainWidget != nullptr && m_pMainWidget->isVisible())
+    else if(m_pMainWidget->isVisible())
     {
         if(!shouldContinue()) return;
 
@@ -2095,12 +2088,12 @@ void KDiff3App::slotUpdateAvailabilities()
         if(m_pDirectoryMergeSplitter != nullptr)
             m_pDirectoryMergeSplitter->setVisible(m_bDirCompare);
 
-        if(m_pMainWidget != nullptr && !m_pMainWidget->isVisible() &&
+        if( !m_pMainWidget->isVisible() &&
            bTextDataAvailable && !m_pDirectoryMergeWindow->isScanning())
             m_pMainWidget->show();
     }
 
-    bool bDiffWindowVisible = m_pMainWidget != nullptr && m_pMainWidget->isVisible();
+    bool bDiffWindowVisible =  m_pMainWidget->isVisible();
     bool bMergeEditorVisible = m_pMergeWindowFrame != nullptr && m_pMergeWindowFrame->isVisible() && m_pMergeResultWindow != nullptr;
     bool bDirWindowHasFocus = m_pDirectoryMergeSplitter != nullptr && m_pDirectoryMergeSplitter->isVisible() && m_pDirectoryMergeWindow->hasFocus();
 
@@ -2109,7 +2102,7 @@ void KDiff3App::slotUpdateAvailabilities()
     dirShowBoth->setEnabled(m_bDirCompare);
     dirViewToggle->setEnabled(
         m_bDirCompare &&
-        ((m_pDirectoryMergeSplitter != nullptr && m_pMainWidget != nullptr) &&
+        ( m_pDirectoryMergeSplitter != nullptr &&
          ((!m_pDirectoryMergeSplitter->isVisible() && m_pMainWidget->isVisible()) ||
           (m_pDirectoryMergeSplitter->isVisible() && !m_pMainWidget->isVisible() && bTextDataAvailable))));
 

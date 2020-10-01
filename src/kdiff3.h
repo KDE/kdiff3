@@ -314,6 +314,7 @@ public Q_SLOTS:
 
     bool canCut();
 
+    bool mInitCalled = false;
     /** the configuration object of the application */
     //KConfig *config;
 
@@ -377,7 +378,7 @@ public Q_SLOTS:
     QMenu* m_pMergeEditorPopupMenu;
 
     QSplitter* m_pMainSplitter = nullptr;
-    QWidget* m_pMainWidget = nullptr;
+    QWidget* m_pMainWidget = new QWidget();// Contains vertical splitter and horiz scrollbar
     QWidget* m_pMergeWindowFrame = nullptr;
     ReversibleScrollBar* m_pHScrollBar = nullptr;
 
