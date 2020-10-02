@@ -15,6 +15,8 @@
 #include <QSharedPointer>  // for QSharedPointer
 #include <QString>         // for QString
 
+#include <boost/signals2.hpp>
+
 class QMenu;
 class RecalcWordWrapRunnable;
 class QScrollBar;
@@ -46,7 +48,7 @@ class DiffTextWindow : public QWidget
         const ManualDiffHelpList* pManualDiffHelpList
     );
 
-    void setupConnections(const KDiff3App *app) const;
+    void setupConnections(const KDiff3App *app);
 
     void reset();
     void convertToLinePos(int x, int y, LineRef& line, int& pos);
@@ -142,8 +144,15 @@ class DiffTextWindow : public QWidget
     static QList<RecalcWordWrapRunnable*> s_runnables;
     static constexpr int s_linesPerRunnable = 2000;
 
+    /*
+      This list exists solely to auto disconnect boost signals.
+    */
+    std::list<boost::signals2::scoped_connection> connections;
+
     DiffTextWindowData* d;
     void showStatusLine(const LineRef lineFromPos);
+
+    bool canCopy() { return hasFocus() && !getSelection().isEmpty(); }
 };
 
 class DiffTextWindowFrameData;

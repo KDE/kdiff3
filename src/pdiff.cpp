@@ -1292,12 +1292,10 @@ void KDiff3App::slotRefresh()
 
 void KDiff3App::slotSelectionStart()
 {
-    //editCopy->setEnabled( false );
 }
 
 void KDiff3App::slotSelectionEnd()
 {
-    //editCopy->setEnabled(true);
     if(m_pOptions->m_bAutoCopySelection)
     {
         slotEditCopy();
@@ -2096,6 +2094,8 @@ void KDiff3App::slotUpdateAvailabilities()
     mUnsolve->setEnabled(bMergeEditorVisible);
 
     editCut->setEnabled(allowCut());
+    editCopy->setEnabled(allowCopy());
+
     if(m_pMergeResultWindow != nullptr)
     {
         m_pMergeResultWindow->slotUpdateAvailabilities();

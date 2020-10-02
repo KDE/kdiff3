@@ -136,6 +136,7 @@ class KDiff3App : public QSplitter
 
     KActionCollection* actionCollection() const;
 
+    static boost::signals2::signal<bool (), or> allowCopy;
     static boost::signals2::signal<bool (), or> allowCut;
     static boost::signals2::signal<bool (), and> shouldContinue;
   Q_SIGNALS:
@@ -315,6 +316,7 @@ public Q_SLOTS:
     void recalcWordWrap(int visibleTextWidthForPrinting = -1);
 
     bool canCut();
+    bool canCopy();
 
     bool mInitCalled = false;
     /** the configuration object of the application */

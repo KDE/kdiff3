@@ -261,7 +261,7 @@ void DiffTextWindow::init(
     update();
 }
 
-void DiffTextWindow::setupConnections(const KDiff3App* app) const
+void DiffTextWindow::setupConnections(const KDiff3App* app)
 {
     Q_ASSERT(qobject_cast<DiffTextWindowFrame*>(parent()) != nullptr);
 
@@ -284,6 +284,8 @@ void DiffTextWindow::setupConnections(const KDiff3App* app) const
     chk_connect(app, &KDiff3App::doRefresh, this, &DiffTextWindow::slotRefresh);
     chk_connect(app, &KDiff3App::selectAll, this, &DiffTextWindow::slotSelectAll);
     chk_connect(app, &KDiff3App::copy, this, &DiffTextWindow::slotCopy);
+
+    connections.push_back(KDiff3App::allowCopy.connect(boost::bind(&DiffTextWindow::canCopy, this)));
 }
 
 void DiffTextWindow::reset()

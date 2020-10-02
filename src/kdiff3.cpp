@@ -63,6 +63,7 @@
 
 bool KDiff3App::m_bTripleDiff = false;
 
+boost::signals2::signal<bool (), or> KDiff3App::allowCopy;
 boost::signals2::signal<bool (), or> KDiff3App::allowCut;
 boost::signals2::signal<bool (), and> KDiff3App::shouldContinue;
 
@@ -348,6 +349,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     chk_connect(this, &KDiff3App::finishDrop, this, &KDiff3App::slotFinishDrop);
 
     connections.push_back(allowCut.connect(boost::bind(&KDiff3App::canCut, this)));
+    connections.push_back(allowCopy.connect(boost::bind(&KDiff3App::canCopy, this)));
+
     m_pDirectoryMergeWindow->initDirectoryMergeActions(this, actionCollection());
 
     if(qApp != nullptr)
@@ -367,6 +370,16 @@ bool KDiff3App::canCut()
     return (qobject_cast<QLineEdit*>(focus) != nullptr || qobject_cast<QTextEdit*>(focus) != nullptr);
 }
 
+/*
+    This function is only concerned with qt objects that don't support canCopy.
+    allowCopy() or's the results from all canCopy signals
+*/
+bool KDiff3App::canCopy()
+{
+    QWidget* focus = focusWidget();
+
+    return (qobject_cast<QLineEdit*>(focus) != nullptr || qobject_cast<QTextEdit*>(focus) != nullptr);
+}
 /*
     Make sure Edit menu tracks focus correctly.
 */

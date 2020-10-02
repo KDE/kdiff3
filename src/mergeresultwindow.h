@@ -243,6 +243,7 @@ class MergeResultWindow : public QWidget
     void focusInEvent(QFocusEvent* e) override;
 
     bool canCut() { return hasFocus() && !getSelection().isEmpty(); }
+    bool canCopy() { return hasFocus() && !getSelection().isEmpty(); }
 
     QPixmap m_pixmap;
     LineRef m_firstLine = 0;
