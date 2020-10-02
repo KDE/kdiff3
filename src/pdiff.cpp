@@ -1045,15 +1045,8 @@ void KDiff3App::slotEditCut()
 void KDiff3App::slotEditCopy()
 {
     slotStatusMsg(i18n("Copying selection to clipboard..."));
-    QString s;
-    if(m_pDiffTextWindow1 != nullptr) s = m_pDiffTextWindow1->getSelection();
-    if(s.isEmpty() && m_pDiffTextWindow2 != nullptr) s = m_pDiffTextWindow2->getSelection();
-    if(s.isEmpty() && m_pDiffTextWindow3 != nullptr) s = m_pDiffTextWindow3->getSelection();
-    if(s.isEmpty() && m_pMergeResultWindow != nullptr) s = m_pMergeResultWindow->getSelection();
-    if(!s.isEmpty())
-    {
-        QApplication::clipboard()->setText(s, QClipboard::Clipboard);
-    }
+
+    Q_EMIT copy();
 
     slotStatusMsg(i18n("Ready."));
 }

@@ -126,6 +126,8 @@ class MergeResultWindow : public QWidget
 
     void slotCut();
 
+    void slotCopy();
+
     void slotSelectAll();
 
   Q_SIGNALS:

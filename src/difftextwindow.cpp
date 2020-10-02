@@ -27,6 +27,7 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
+#include <QClipboard>
 #include <QDir>
 #include <QDragEnterEvent>
 #include <QFileDialog>
@@ -282,6 +283,7 @@ void DiffTextWindow::setupConnections(const KDiff3App* app) const
     chk_connect(app, &KDiff3App::showLineNumbersToggled, this, static_cast<void (DiffTextWindow::*)(void)>(&DiffTextWindow::update));
     chk_connect(app, &KDiff3App::doRefresh, this, &DiffTextWindow::slotRefresh);
     chk_connect(app, &KDiff3App::selectAll, this, &DiffTextWindow::slotSelectAll);
+    chk_connect(app, &KDiff3App::copy, this, &DiffTextWindow::slotCopy);
 }
 
 void DiffTextWindow::reset()
@@ -307,6 +309,19 @@ void DiffTextWindow::slotSelectAll()
     if(hasFocus())
     {
         setSelection(0, 0, getNofLines(), 0, l, p);
+    }
+}
+
+void DiffTextWindow::slotCopy()
+{
+    if(!hasFocus())
+        return;
+
+    const QString curSelection = getSelection();
+
+    if(!curSelection.isEmpty())
+    {
+        QApplication::clipboard()->setText(curSelection, QClipboard::Clipboard);
     }
 }
 

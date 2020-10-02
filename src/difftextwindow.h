@@ -119,6 +119,8 @@ class DiffTextWindow : public QWidget
 
     void slotSelectAll();
 
+    void slotCopy();
+
   protected:
     void mousePressEvent(QMouseEvent*) override;
     void mouseReleaseEvent(QMouseEvent*) override;
