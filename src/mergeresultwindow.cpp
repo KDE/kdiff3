@@ -211,6 +211,7 @@ void MergeResultWindow::setupConnections(const KDiff3App *app)
 
     connections.push_back(KDiff3App::allowCut.connect(boost::bind(&MergeResultWindow::canCut, this)));
     connections.push_back(KDiff3App::allowCopy.connect(boost::bind(&MergeResultWindow::canCopy, this)));
+    connections.push_back(KDiff3App::getSelection.connect(boost::bind(&MergeResultWindow::getSelection, this)));
 }
 
 void MergeResultWindow::slotResize()

@@ -1306,14 +1306,11 @@ void KDiff3App::slotSelectionEnd()
 
         if(clipBoard->supportsSelection())
         {
-            QString s;
-            if(m_pDiffTextWindow1 != nullptr) s = m_pDiffTextWindow1->getSelection();
-            if(s.isEmpty() && m_pDiffTextWindow2 != nullptr) s = m_pDiffTextWindow2->getSelection();
-            if(s.isEmpty() && m_pDiffTextWindow3 != nullptr) s = m_pDiffTextWindow3->getSelection();
-            if(s.isEmpty() && m_pMergeResultWindow != nullptr) s = m_pMergeResultWindow->getSelection();
-            if(!s.isEmpty())
+            QString sCurSelection = getSelection();
+
+            if(!sCurSelection.isEmpty())
             {
-                clipBoard->setText(s, QClipboard::Selection);
+                clipBoard->setText(sCurSelection, QClipboard::Selection);
             }
         }
     }
@@ -1752,14 +1749,11 @@ void KDiff3App::slotEditFind()
     m_pFindDialog->restartFind();
 
     // Use currently selected text:
-    QString s;
-    if(m_pDiffTextWindow1 != nullptr) s = m_pDiffTextWindow1->getSelection();
-    if(s.isEmpty() && m_pDiffTextWindow2 != nullptr) s = m_pDiffTextWindow2->getSelection();
-    if(s.isEmpty() && m_pDiffTextWindow3 != nullptr) s = m_pDiffTextWindow3->getSelection();
-    if(s.isEmpty() && m_pMergeResultWindow != nullptr) s = m_pMergeResultWindow->getSelection();
-    if(!s.isEmpty() && !s.contains('\n'))
+    QString sCurSelection = getSelection();
+
+    if(!sCurSelection.isEmpty() && !sCurSelection.contains('\n'))
     {
-        m_pFindDialog->m_pSearchString->setText(s);
+        m_pFindDialog->m_pSearchString->setText(sCurSelection);
     }
 
     if(QDialog::Accepted == m_pFindDialog->exec())

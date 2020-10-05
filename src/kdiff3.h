@@ -136,6 +136,7 @@ class KDiff3App : public QSplitter
 
     KActionCollection* actionCollection() const;
 
+    static boost::signals2::signal<QString (), FirstNonEmpty<QString>> getSelection;
     static boost::signals2::signal<bool (), or> allowCopy;
     static boost::signals2::signal<bool (), or> allowCut;
     static boost::signals2::signal<bool (), and> shouldContinue;

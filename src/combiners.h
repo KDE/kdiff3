@@ -8,9 +8,10 @@
 #ifndef COMBINERS_H
 #define COMBINERS_H
 
-#include <boost/signals2.hpp>
-
 #include <QtGlobal>
+
+#include <boost/signals2.hpp>
+#include <type_traits>
 
 struct or
 {
@@ -44,6 +45,37 @@ struct and
         bool ret = *first++;
         //return first non-true as if && were used
         while(ret && first != last)
+        {
+            ret = *first;
+            ++first;
+        }
+
+        return ret;
+    }
+};
+
+template<typename T> struct FirstNonEmpty
+{
+    //This just provides an alernate error message if a non-class is passed.
+    static_assert(std::is_class<typename std::remove_reference<T>::type>(), "First parameter must be a class.");
+    /*
+        Force the compiler to actually check if isEmpty is a member function.
+        Otherwise merely defining FirstNonEmpty<int> does not trigger any error for this.
+        Not even at link time. Although actually trying to use such a combiner will somewhere
+        in the depths of boost. This way we get a clean error right off.
+    */
+    static_assert(std::is_same<decltype(std::declval<T>().isEmpty()), bool>(),
+        "First parameter must implement or inherit isEmpty().");
+
+    typedef T result_type;
+    template <typename InputIterator> T operator()(InputIterator first, InputIterator last) const
+    {
+        // If there are no slots to call, just return empty string
+        if(first == last) return "";
+
+        T ret = *first++;
+        //return first non-true as if && were used
+        while(ret.isEmpty() && first != last)
         {
             ret = *first;
             ++first;
