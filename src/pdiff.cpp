@@ -1548,7 +1548,7 @@ void KDiff3App::slotShowLineNumbersToggled()
     Q_EMIT showLineNumbersToggled();
 }
 
-
+/// Return true for success, else false
 bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
 {
     FileAccess f1(m_sd1->getFilename());
@@ -1608,7 +1608,7 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
 
     return true;
 }
-/// Return true for success, else false
+
 void KDiff3App::improveFilenames()
 {
     FileAccess f1(m_sd1->getFilename());

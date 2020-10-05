@@ -56,14 +56,8 @@ struct and
 
 template<typename T> struct FirstNonEmpty
 {
-    //This just provides an alernate error message if a non-class is passed.
+    //This just provides a better error message if an in apropriate parameter is passed.
     static_assert(std::is_class<typename std::remove_reference<T>::type>(), "First parameter must be a class.");
-    /*
-        Force the compiler to actually check if isEmpty is a member function.
-        Otherwise merely defining FirstNonEmpty<int> does not trigger any error for this.
-        Not even at link time. Although actually trying to use such a combiner will somewhere
-        in the depths of boost. This way we get a clean error right off.
-    */
     static_assert(std::is_same<decltype(std::declval<T>().isEmpty()), bool>(),
         "First parameter must implement or inherit isEmpty().");
 
