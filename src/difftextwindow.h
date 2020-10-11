@@ -161,7 +161,7 @@ class DiffTextWindowFrame : public QWidget
 {
     Q_OBJECT
   public:
-    DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, QSharedPointer<SourceData> psd);
+    DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData> &psd);
     ~DiffTextWindowFrame() override;
     DiffTextWindow* getDiffTextWindow();
     void init();
@@ -193,7 +193,7 @@ class EncodingLabel : public QLabel
 {
     Q_OBJECT
   public:
-    EncodingLabel(const QString& text, QSharedPointer<SourceData> psd, const QSharedPointer<Options> &pOptions);
+    EncodingLabel(const QString& text, const QSharedPointer<SourceData> &psd, const QSharedPointer<Options> &pOptions);
 
   protected:
     void mouseMoveEvent(QMouseEvent* ev) override;

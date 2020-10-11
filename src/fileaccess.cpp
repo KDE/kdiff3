@@ -1089,7 +1089,7 @@ bool FileAccessJobHandler::rename(const FileAccess& destFile)
         m_bSuccess = false;
         KIO::FileCopyJob* pJob = KIO::file_move(m_pFileAccess->url(), destFile.url(), permissions, KIO::HideProgressInfo);
         chk_connect(pJob, &KIO::FileCopyJob::result, this, &FileAccessJobHandler::slotSimpleJobResult);
-        chk_connect(pJob, SIGNAL(percent(KJob*, ulong)), &pp, SLOT(slotPercent(KJob*, ulong)));
+        chk_connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
         chk_connect(pJob, &KIO::FileCopyJob::finished, this, &FileAccessJobHandler::slotJobEnded);
 
         ProgressProxy::enterEventLoop(pJob,

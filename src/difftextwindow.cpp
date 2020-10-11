@@ -564,9 +564,9 @@ void DiffTextWindow::setFastSelectorRange(int line1, int nofLines)
 
     emits lineClicked signal.
 */
-void DiffTextWindow::showStatusLine(const LineRef aproxLine)
+void DiffTextWindow::showStatusLine(const LineRef lineFromPos)
 {
-    int d3lIdx = convertLineToDiff3LineIdx(aproxLine);
+    int d3lIdx = convertLineToDiff3LineIdx(lineFromPos);
 
     if(d->m_pDiff3LineVector != nullptr && d3lIdx >= 0 && d3lIdx < (int)d->m_pDiff3LineVector->size())
     {
@@ -1067,8 +1067,7 @@ void DiffTextWindowData::writeLine(
             {
                 if(penColor != m_pOptions->m_fgColor)
                 {
-                    QColor lightc = diffBgColor;
-                    frh.setBackground(lightc);
+                    frh.setBackground(diffBgColor);
                     // Setting italic font here doesn't work: Changing the font only when drawing is too late
                 }
 
@@ -1854,7 +1853,7 @@ class DiffTextWindowFrameData
     QSharedPointer<SourceData> mSourceData;
 };
 
-DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, QSharedPointer<SourceData> psd)
+DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd)
     : QWidget(pParent)
 {
     d = new DiffTextWindowFrameData(this, pOptions, winIdx);
@@ -2025,7 +2024,7 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
     }
 }
 
-EncodingLabel::EncodingLabel(const QString& text, QSharedPointer<SourceData> pSD, const QSharedPointer<Options>& pOptions)
+EncodingLabel::EncodingLabel(const QString& text, const QSharedPointer<SourceData>& pSD, const QSharedPointer<Options>& pOptions)
     : QLabel(text)
 {
     m_pOptions = pOptions;
