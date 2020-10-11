@@ -56,7 +56,7 @@ void addWidget(L* layout, W* widget)
     layout->addWidget(widget);
 }
 
-void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, bool bUseCurrentEncoding)
+void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, bool bUseCurrentEncoding, bool bAutoSolve)
 {
     ProgressProxy pp;
     QStringList errors;
@@ -360,7 +360,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
         m_sd2->getLineDataForDisplay(), m_sd2->getSizeLines(),
         m_bTripleDiff ? m_sd3->getLineDataForDisplay() : nullptr, m_sd3->getSizeLines(),
         &m_diff3LineList,
-        pTotalDiffStatus);
+        pTotalDiffStatus, bAutoSolve);
     m_pMergeResultWindowTitle->setFileName(m_outputFilename.isEmpty() ? QString("unnamed.txt") : m_outputFilename);
 
     if(bGUI)

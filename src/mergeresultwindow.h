@@ -46,7 +46,8 @@ class MergeResultWindow : public QWidget
         const QVector<LineData>* pLineDataB, LineRef sizeB,
         const QVector<LineData>* pLineDataC, LineRef sizeC,
         const Diff3LineList* pDiff3LineList,
-        TotalDiffStatus* pTotalDiffStatus
+        TotalDiffStatus* pTotalDiffStatus,
+        bool bAutoSolve
     );
 
     void setupConnections(const KDiff3App* app);

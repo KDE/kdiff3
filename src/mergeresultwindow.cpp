@@ -51,8 +51,6 @@
 #include <KMessageBox>
 #include <KToggleAction>
 
-bool g_bAutoSolve = true;
-
 QScrollBar* MergeResultWindow::mVScrollBar = nullptr;
 QPointer<QAction> MergeResultWindow::chooseAEverywhere;
 QPointer<QAction> MergeResultWindow::chooseBEverywhere;
@@ -96,7 +94,8 @@ void MergeResultWindow::init(
     const QVector<LineData>* pLineDataB, LineRef sizeB,
     const QVector<LineData>* pLineDataC, LineRef sizeC,
     const Diff3LineList* pDiff3LineList,
-    TotalDiffStatus* pTotalDiffStatus)
+    TotalDiffStatus* pTotalDiffStatus,
+    bool bAutoSolve)
 {
     m_firstLine = 0;
     m_horizScrollOffset = 0;
@@ -124,8 +123,7 @@ void MergeResultWindow::init(
 
     m_maxTextWidth = -1;
 
-    merge(g_bAutoSolve, e_SrcSelector::Invalid);
-    g_bAutoSolve = true;
+    merge(bAutoSolve, e_SrcSelector::Invalid);
     update();
     updateSourceMask();
 

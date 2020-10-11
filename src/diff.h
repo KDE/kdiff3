@@ -45,7 +45,7 @@ inline e_SrcSelector nextSelector(e_SrcSelector selector)
         default:
             return e_SrcSelector::Invalid;
     }
-    
+
     return e_SrcSelector::Invalid;
 }
 
@@ -338,7 +338,7 @@ class Diff3LineList : public std::list<Diff3Line>
     void calcDiff3LineListUsingAB(const DiffList* pDiffListAB);
     void calcDiff3LineListUsingAC(const DiffList* pDiffListAC);
     void calcDiff3LineListUsingBC(const DiffList* pDiffListBC);
-    
+
     void correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHelpList);
 
     void calcDiff3LineListTrim(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList);
@@ -352,14 +352,14 @@ class Diff3LineList : public std::list<Diff3Line>
         {
             if(resetDisplayCount)
                 d3l.mLinesNeededForDisplay = 1;
-            
+
             d3l.mSumLinesNeededForDisplay = sumOfLines;
             sumOfLines += d3l.linesNeededForDisplay();
         }
-        
+
         return sumOfLines;
     }
-    
+
     //TODO: Add safety guards to prevent list from getting too large. Same problem as with QLinkedList.
     qint32 size() const
     {
@@ -374,7 +374,7 @@ class Diff3LineList : public std::list<Diff3Line>
 
     void debugLineCheck(const LineCount size, const e_SrcSelector srcSelector) const;
 
-    qint32 numberOfLines(bool bWordWrap) const 
+    qint32 numberOfLines(bool bWordWrap) const
     {
         if(bWordWrap)
         {
@@ -551,8 +551,6 @@ inline int tabber(int outPos, int tabSize)
     the returned value is the current firstLine.
 */
 int getBestFirstLine(int line, int nofLines, int firstLine, int visibleLines);
-
-extern bool g_bAutoSolve;
 
 enum e_CoordType
 {

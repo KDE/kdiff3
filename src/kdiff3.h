@@ -298,7 +298,7 @@ public Q_SLOTS:
     void initView();
 
   private:
-    void mainInit(TotalDiffStatus* pTotalDiffStatus = nullptr, bool bLoadFiles = true, bool bUseCurrentEncoding = false);
+    void mainInit(TotalDiffStatus* pTotalDiffStatus = nullptr, bool bLoadFiles = true, bool bUseCurrentEncoding = false, bool bAutoSolve=true);
 
     void mainWindowEnable(bool bEnable);
     virtual void wheelEvent(QWheelEvent* pWheelEvent) override;
@@ -447,6 +447,8 @@ public Q_SLOTS:
     bool m_bAutoFlag = false;
     bool m_bAutoMode = false;
     bool m_bRecalcWordWrapPosted = false;
+
+    bool m_bAutoSolve = true;//TODO: Needed?
 
     int m_firstD3LIdx;                 // only needed during recalcWordWrap
     QPointer<QEventLoop> m_pEventLoopForPrinting;
