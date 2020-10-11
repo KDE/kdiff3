@@ -1256,8 +1256,6 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
             int i = s.toInt(&bOk);
             if(bOk && i >= 0 && i < 10000)
             {
-                s.setNum(i);
-                Q_ASSERT(s.size() <= 4);
                 s += QString(4-s.size(), '0');// This should help for correct sorting of numbers.
             }
             key += s + ' ';
@@ -1269,11 +1267,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
             // Now we want to know at which position it occurred. e.g. Jan=0, Feb=1, Mar=2, etc.
             QStringList sl = groupRegExp.split('|');
             int idx = sl.indexOf(s);
-            if(idx < 0)
-            {
-                // Didn't match
-            }
-            else
+            if(idx >= 0)
             {
                 QString sIdx;
                 sIdx.setNum(idx);
