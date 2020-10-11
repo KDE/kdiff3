@@ -1247,7 +1247,11 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
             bOk = false;
             int i = s.toInt(&bOk);
             if(bOk && i >= 0 && i < 10000)
-                s.asprintf("%04d", i); // This should help for correct sorting of numbers.
+            {
+                s.setNum(i);
+                Q_ASSERT(s.size() <= 4);
+                s += QString(4-s.size(), '0');// This should help for correct sorting of numbers.
+            }
             key += s + ' ';
         }
         else
@@ -1264,7 +1268,9 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
             else
             {
                 QString sIdx;
-                sIdx.asprintf("%02d", idx + 1); // Up to 99 words in the groupRegExp (more than 12 aren't expected)
+                sIdx.setNum(idx);
+                Q_ASSERT(sIdx.size() <= 2);
+                sIdx += QString(2 - sIdx.size(), '0'); // Up to 99 words in the groupRegExp (more than 12 aren't expected)
                 key += sIdx + ' ';
             }
         }
