@@ -43,7 +43,6 @@ OpenDialog::OpenDialog(
     //Abort if verticalLayout is not the imedient child of the dialog. This interferes with re-sizing.
     Q_ASSERT(dialogUi.virticalLayout->parent() == this);
 
-
     dialogUi.lineA->insertItems(0, m_pOptions->m_recentAFiles);
     dialogUi.lineA->setEditText(n1);
 
@@ -52,7 +51,6 @@ OpenDialog::OpenDialog(
     QPushButton* button2 = dialogUi.folderSelectA;
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirA);
     chk_connect(dialogUi.lineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
-
 
     dialogUi.lineB->setEditable(true);
     dialogUi.lineB->insertItems(0, m_pOptions->m_recentBFiles);
@@ -64,7 +62,6 @@ OpenDialog::OpenDialog(
     button2 = dialogUi.folderSelectB;
     chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirB);
     chk_connect(dialogUi.lineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
-
 
     dialogUi.lineC->setEditable(true);
     dialogUi.lineC->insertItems(0, m_pOptions->m_recentCFiles);

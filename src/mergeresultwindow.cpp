@@ -64,7 +64,7 @@ QPointer<QAction> MergeResultWindow::chooseCForUnsolvedWhiteSpaceConflicts;
 
 MergeResultWindow::MergeResultWindow(
     QWidget* pParent,
-    const QSharedPointer<Options> &pOptions,
+    const QSharedPointer<Options>& pOptions,
     QStatusBar* pStatusBar)
     : QWidget(pParent)
 {
@@ -134,7 +134,8 @@ void MergeResultWindow::init(
 //At that point in startup we don't have a MergeResultWindow object so we cannot connect the signals yet.
 void MergeResultWindow::initActions(KActionCollection* ac)
 {
-    if(ac == nullptr){
+    if(ac == nullptr)
+    {
         KMessageBox::error(nullptr, "actionCollection==0");
         exit(-1);//we cannot recover from this.
     }
@@ -165,7 +166,7 @@ void MergeResultWindow::connectActions() const
     chk_connect(chooseCForUnsolvedWhiteSpaceConflicts, &QAction::triggered, this, &MergeResultWindow::slotChooseCForUnsolvedWhiteSpaceConflicts);
 }
 
-void MergeResultWindow::setupConnections(const KDiff3App *app)
+void MergeResultWindow::setupConnections(const KDiff3App* app)
 {
     chk_connect(app, &KDiff3App::cut, this, &MergeResultWindow::slotCut);
     chk_connect(app, &KDiff3App::copy, this, &MergeResultWindow::slotCopy);
@@ -473,7 +474,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
 
             MergeLine ml;
             bool bLineRemoved;
-            d.mergeOneLine( ml.mergeDetails, ml.bConflict, bLineRemoved, ml.srcSelect, m_pldC == nullptr);
+            d.mergeOneLine(ml.mergeDetails, ml.bConflict, bLineRemoved, ml.srcSelect, m_pldC == nullptr);
 
             // Automatic solving for only whitespace changes.
             if(ml.bConflict &&
@@ -697,7 +698,7 @@ int MergeResultWindow::getMaxTextWidth()
                 textLayout.endLayout();
                 if(m_maxTextWidth < textLayout.maximumWidth())
                 {
-                    m_maxTextWidth =  qCeil(textLayout.maximumWidth());
+                    m_maxTextWidth = qCeil(textLayout.maximumWidth());
                 }
             }
         }
@@ -1256,7 +1257,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
             int i = s.toInt(&bOk);
             if(bOk && i >= 0 && i < 10000)
             {
-                s += QString(4-s.size(), '0');// This should help for correct sorting of numbers.
+                s += QString(4 - s.size(), '0'); // This should help for correct sorting of numbers.
             }
             key += s + ' ';
         }
@@ -1281,7 +1282,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
 }
 
 void MergeResultWindow::collectHistoryInformation(
-    e_SrcSelector src, Diff3LineList::const_iterator &iHistoryBegin, Diff3LineList::const_iterator &iHistoryEnd,
+    e_SrcSelector src, Diff3LineList::const_iterator& iHistoryBegin, Diff3LineList::const_iterator& iHistoryEnd,
     HistoryMap& historyMap,
     std::list<HistoryMap::iterator>& hitList // list of iterators
 )
@@ -1814,9 +1815,9 @@ void MergeResultWindow::writeLine(
 
         if(line == m_cursorYPos)
         {
-            m_cursorXPixelPos =  qCeil(textLayout.lineAt(0).cursorToX(m_cursorXPos));
+            m_cursorXPixelPos = qCeil(textLayout.lineAt(0).cursorToX(m_cursorXPos));
             if(m_pOptions->m_bRightToLeftLanguage)
-                m_cursorXPixelPos +=  qCeil(textLayout.position().x() - m_horizScrollOffset);
+                m_cursorXPixelPos += qCeil(textLayout.position().x() - m_horizScrollOffset);
         }
 
         p.setClipping(false);
@@ -1901,7 +1902,8 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
     {
         m_selection.bSelectionContainsData = false;
         const auto dpr = devicePixelRatioF();
-        if(size() * dpr != m_pixmap.size()) {
+        if(size() * dpr != m_pixmap.size())
+        {
             m_pixmap = QPixmap(size() * dpr);
             m_pixmap.setDevicePixelRatio(dpr);
         }
@@ -2100,9 +2102,9 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
             m_selection.end(line, pos);
         }
         m_cursorXPos = pos;
-        m_cursorXPixelPos =  qCeil(textLayout.lineAt(0).cursorToX(pos));
+        m_cursorXPixelPos = qCeil(textLayout.lineAt(0).cursorToX(pos));
         if(m_pOptions->m_bRightToLeftLanguage)
-            m_cursorXPixelPos +=  qCeil(textLayout.position().x() - m_horizScrollOffset);
+            m_cursorXPixelPos += qCeil(textLayout.position().x() - m_horizScrollOffset);
         m_cursorOldXPixelPos = m_cursorXPixelPos;
         m_cursorYPos = line;
 
@@ -2235,7 +2237,6 @@ void MergeResultWindow::slotCursorUpdate()
 
     m_cursorTimer.start(500);
 }
-
 
 void MergeResultWindow::wheelEvent(QWheelEvent* pWheelEvent)
 {
@@ -2601,11 +2602,11 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             x = textLayout.lineAt(0).xToCursor(m_cursorOldXPixelPos);
     }
 
-    m_cursorXPixelPos =  qCeil(textLayout.lineAt(0).cursorToX(x));
+    m_cursorXPixelPos = qCeil(textLayout.lineAt(0).cursorToX(x));
     int hF = 1; // horizontal factor
     if(m_pOptions->m_bRightToLeftLanguage)
     {
-        m_cursorXPixelPos +=  qCeil(textLayout.position().x() - m_horizScrollOffset);
+        m_cursorXPixelPos += qCeil(textLayout.position().x() - m_horizScrollOffset);
         hF = -1;
     }
     int cursorWidth = 5;
@@ -2631,7 +2632,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     // TODO if width of current line exceeds the current maximum width then force recalculating the scrollbars
     if(textLayout.maximumWidth() > getMaxTextWidth())
     {
-        m_maxTextWidth =  qCeil(textLayout.maximumWidth());
+        m_maxTextWidth = qCeil(textLayout.maximumWidth());
         Q_EMIT resizeSignal();
     }
     if(!bYMoveKey)
@@ -2876,7 +2877,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
     for(i = 0; i < len; ++i)
     {
         QChar c = clipBoard[i];
-        if(c == '\n' || (c == '\r' && clipBoard[i+1] != '\n'))
+        if(c == '\n' || (c == '\r' && clipBoard[i + 1] != '\n'))
         {
             melIt->setString(currentLine);
             MergeEditLine mel(mlIt->id3l); // Associate every mel with an id3l, even if not really valid.
@@ -3060,7 +3061,7 @@ void MergeResultWindow::setSelection(int firstLine, int startPos, int lastLine, 
     update();
 }
 
-WindowTitleWidget::WindowTitleWidget(const QSharedPointer<Options> &pOptions)
+WindowTitleWidget::WindowTitleWidget(const QSharedPointer<Options>& pOptions)
 {
     m_pOptions = pOptions;
     setAutoFillBackground(true);

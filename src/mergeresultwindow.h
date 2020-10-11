@@ -33,7 +33,7 @@ class KToggleAction;
 
 class KDiff3App;
 
-class MergeResultWindow : public QWidget
+class MergeResultWindow: public QWidget
 {
     Q_OBJECT
   public:
@@ -289,7 +289,7 @@ class QTextCodec;
 class QComboBox;
 class QLabel;
 
-class WindowTitleWidget : public QWidget
+class WindowTitleWidget: public QWidget
 {
     Q_OBJECT
   private:
