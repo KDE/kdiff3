@@ -240,7 +240,7 @@ class MergeResultWindow : public QWidget
     void mouseMoveEvent(QMouseEvent*) override;
     void resizeEvent(QResizeEvent* e) override;
     void keyPressEvent(QKeyEvent* e) override;
-    void wheelEvent(QWheelEvent* e) override;
+    void wheelEvent(QWheelEvent* pWheelEvent) override;
     void focusInEvent(QFocusEvent* e) override;
 
     bool canCut() { return hasFocus() && !getSelection().isEmpty(); }

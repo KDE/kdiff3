@@ -301,8 +301,8 @@ public Q_SLOTS:
     void mainInit(TotalDiffStatus* pTotalDiffStatus = nullptr, bool bLoadFiles = true, bool bUseCurrentEncoding = false, bool bAutoSolve=true);
 
     void mainWindowEnable(bool bEnable);
-    virtual void wheelEvent(QWheelEvent* pWheelEvent) override;
-    virtual void keyPressEvent(QKeyEvent* event) override;
+    void wheelEvent(QWheelEvent* pWheelEvent) override;
+    void keyPressEvent(QKeyEvent* event) override;
     void resizeEvent(QResizeEvent*) override;
 
     bool doDirectoryCompare(const bool bCreateNewInstance);
