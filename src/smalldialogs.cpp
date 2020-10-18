@@ -179,12 +179,16 @@ OpenDialog::OpenDialog(
     setFixedHeight(sh.height());
     m_bInputFileNameChanged = false;
 
-#ifdef Q_OS_WIN
+    /*
+        QComboBoxes default handling of Drag and Drop fails to clear existing text on drop.
+        On some systems it may fail to do anything at all.
+
+        This is not what we want. So we install these filters even on Linux.
+    */
     m_pLineA->lineEdit()->installEventFilter(this);
     m_pLineB->lineEdit()->installEventFilter(this);
     m_pLineC->lineEdit()->installEventFilter(this);
     m_pLineOut->lineEdit()->installEventFilter(this);
-#endif
 }
 
 // Eventfilter: Only needed under Windows.

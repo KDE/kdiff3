@@ -31,7 +31,11 @@ void FileNameLineEdit::dropEvent(QDropEvent* event)
 
     if(lst.count() > 0)
     {
-        setText(lst[0].toString());
+        /*
+            Do not use QUrl::toString() here. Sadly the Qt5 version does not permit Qt4 style
+            fullydecoded conversions. It also treats emtpy schemes as non-local.
+        */
+        setText(lst[0].toLocalFile());
         setFocus();
         emit returnPressed();
     }
