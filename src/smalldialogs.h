@@ -48,8 +48,6 @@ class OpenDialog: public QDialog
     bool merge() const { return dialogUi.mergeCheckBox->isChecked(); }
 
     void accept() override;
-    bool eventFilter(QObject* o, QEvent* e) override;
-
   private:
     void selectURL(QComboBox* pLine, bool bDir, int i, bool bSave);
 

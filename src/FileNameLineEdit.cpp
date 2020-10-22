@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
 #include "FileNameLineEdit.h"
+#include "fileaccess.h"
 
 #include <QDropEvent>
 #include <QDragEnterEvent>
@@ -19,7 +20,11 @@ void FileNameLineEdit::dropEvent(QDropEvent* event)
 
     if(lst.count() > 0)
     {
-        setText(lst[0].toString());
+        /*
+            Do not use QUrl::toString() here. Sadly the Qt5 version does not permit Qt4 style
+            fullydecoded conversions. It also treats empty schemes as non-local.
+        */
+        setText(FileAccess::prettyAbsPath(lst[0]));
         setFocus();
         Q_EMIT returnPressed();
     }

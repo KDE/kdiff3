@@ -7,10 +7,11 @@
 
 #include "smalldialogs.h"
 
-#include "TypeUtils.h"
 #include "diff.h"
+#include "FileNameLineEdit.h"
 #include "options.h"
 #include "kdiff3.h"
+#include "TypeUtils.h"
 #include "ui_opendialog.h"
 
 #include <QCheckBox>
@@ -120,43 +121,21 @@ OpenDialog::OpenDialog(
     }
     m_bInputFileNameChanged = false;
 
-#ifdef Q_OS_WIN
-    dialogUi.lineA->lineEdit()->installEventFilter(this);
-    dialogUi.lineB->lineEdit()->installEventFilter(this);
-    dialogUi.lineC->lineEdit()->installEventFilter(this);
-    dialogUi.lineOut->lineEdit()->installEventFilter(this);
-#endif
-}
+    /*
+        QComboBoxes default handling of Drag and Drop fails to clear existing text on drop.
+        On some systems it may fail to do anything at all.
 
-// Eventfilter: Only needed under Windows.
-// Without this, files dropped in the line edit have URL-encoding.
-// This eventfilter decodes the filenames as needed by KDiff3.
-bool OpenDialog::eventFilter(QObject* o, QEvent* e)
-{
-    if(e->type() == QEvent::DragEnter)
-    {
-        QDragEnterEvent* d = static_cast<QDragEnterEvent*>(e);
-        d->setAccepted(d->mimeData()->hasUrls());
-        return true;
-    }
-    if(e->type() == QEvent::Drop)
-    {
-        QDropEvent* d = static_cast<QDropEvent*>(e);
+        This is not what we want. So manually replace the each QLineEdit object with a FileNameLineEdit.
+        This makes behavoir consitant with the main window.
 
-        if(!d->mimeData()->hasUrls())
-            return false;
-
-        QList<QUrl> lst = d->mimeData()->urls();
-
-        if(lst.count() > 0)
-        {
-            static_cast<QLineEdit*>(o)->setText(QDir::toNativeSeparators(lst[0].toLocalFile()));
-            static_cast<QLineEdit*>(o)->setFocus();
-        }
-
-        return true;
-    }
-    return false;
+        On windows this step also needed to bypasses Qt's quirky behavoir when converting from QUrl
+        to QString. Specficly % encoding is by handled differently on windows. This is explictly documented
+        as platform specfic unspecfied behavoir. Not what we need.
+    */
+    dialogUi.lineA->setLineEdit(new FileNameLineEdit(dialogUi.lineA));
+    dialogUi.lineB->setLineEdit(new FileNameLineEdit(dialogUi.lineB));
+    dialogUi.lineC->setLineEdit(new FileNameLineEdit(dialogUi.lineC));
+    dialogUi.lineOut->setLineEdit(new FileNameLineEdit(dialogUi.lineOut));
 }
 
 void OpenDialog::selectURL(QComboBox* pLine, bool bDir, int i, bool bSave)
