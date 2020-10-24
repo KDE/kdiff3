@@ -342,19 +342,18 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
     QString fileNameOut1;
     QString fileNameIn2;
     QString fileNameOut2;
-
-    if(m_fileAccess.isValid() && !m_fileAccess.isNormal())
-    {
-        mErrors.append(i18n("%1 is not a normal file.", m_fileAccess.prettyAbsPath()));
-        return mErrors;
-    }
-
-    Q_ASSERT(!m_fileAccess.isDir());
     bool bTempFileFromClipboard = !m_fileAccess.isValid();
 
     // Detect the input for the preprocessing operations
     if(!bTempFileFromClipboard)
     {
+        Q_ASSERT(!m_fileAccess.isDir());
+        if(!m_fileAccess.isNormal())
+        {
+            mErrors.append(i18n("%1 is not a normal file.", m_fileAccess.prettyAbsPath()));
+            return mErrors;
+        }
+
         if(m_fileAccess.isLocal())
         {
             fileNameIn1 = m_fileAccess.absoluteFilePath();
@@ -376,6 +375,12 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
     }
     else // The input was set via setData(), probably from clipboard.
     {
+        /*
+            Happens during intial startup. This means we have nothing to compare
+        */
+        if(m_tempInputFileName.isEmpty())
+            return mErrors;
+
         fileNameIn1 = m_tempInputFileName;
         m_pEncoding = QTextCodec::codecForName("UTF-8");
     }
