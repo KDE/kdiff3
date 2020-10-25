@@ -48,10 +48,10 @@ OpenDialog::OpenDialog(
     dialogUi.lineA->setEditText(n1);
 
     QPushButton* button = dialogUi.fileSelectA;
-    chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileA);
+    chk_connect_a(button, &QPushButton::clicked, this, &OpenDialog::selectFileA);
     QPushButton* button2 = dialogUi.folderSelectA;
-    chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirA);
-    chk_connect(dialogUi.lineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
+    chk_connect_a(button2, &QPushButton::clicked, this, &OpenDialog::selectDirA);
+    chk_connect_a(dialogUi.lineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
     dialogUi.lineB->setEditable(true);
     dialogUi.lineB->insertItems(0, m_pOptions->m_recentBFiles);
@@ -59,20 +59,20 @@ OpenDialog::OpenDialog(
 
     dialogUi.lineB->setMinimumWidth(200);
     button = dialogUi.fileSelectB;
-    chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileB);
+    chk_connect_a(button, &QPushButton::clicked, this, &OpenDialog::selectFileB);
     button2 = dialogUi.folderSelectB;
-    chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirB);
-    chk_connect(dialogUi.lineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
+    chk_connect_a(button2, &QPushButton::clicked, this, &OpenDialog::selectDirB);
+    chk_connect_a(dialogUi.lineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
     dialogUi.lineC->setEditable(true);
     dialogUi.lineC->insertItems(0, m_pOptions->m_recentCFiles);
     dialogUi.lineC->setEditText(n3);
     dialogUi.lineC->setMinimumWidth(200);
     button = dialogUi.fileSelectC;
-    chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectFileC);
+    chk_connect_a(button, &QPushButton::clicked, this, &OpenDialog::selectFileC);
     button2 = dialogUi.folderSelectC;
-    chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectDirC);
-    chk_connect(dialogUi.lineC, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
+    chk_connect_a(button2, &QPushButton::clicked, this, &OpenDialog::selectDirC);
+    chk_connect_a(dialogUi.lineC, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
     button = dialogUi.swapCopy;
 
@@ -86,29 +86,29 @@ OpenDialog::OpenDialog(
     m->addAction(i18n("Swap %1<->Output", i18n("A")));
     m->addAction(i18n("Swap %1<->Output", i18n("B")));
     m->addAction(i18n("Swap %1<->Output", i18n("C")));
-    chk_connect(m, &QMenu::triggered, this, &OpenDialog::slotSwapCopyNames);
+    chk_connect_a(m, &QMenu::triggered, this, &OpenDialog::slotSwapCopyNames);
     button->setMenu(m);
 
     dialogUi.lineOut->insertItems(0, m_pOptions->m_recentOutputFiles);
     dialogUi.lineOut->setEditText(outputName);
 
     button = dialogUi.selectOutputFile;
-    chk_connect(button, &QPushButton::clicked, this, &OpenDialog::selectOutputName);
+    chk_connect_a(button, &QPushButton::clicked, this, &OpenDialog::selectOutputName);
     button2 = dialogUi.selectOutputFolder;
-    chk_connect(button2, &QPushButton::clicked, this, &OpenDialog::selectOutputDir);
-    chk_connect(dialogUi.mergeCheckBox, &QCheckBox::stateChanged, this, &OpenDialog::internalSlot);
-    chk_connect(this, &OpenDialog::internalSignal, dialogUi.lineOut, &QComboBox::setEnabled);
-    chk_connect(this, &OpenDialog::internalSignal, button, &QPushButton::setEnabled);
-    chk_connect(this, &OpenDialog::internalSignal, button2, &QPushButton::setEnabled);
+    chk_connect_a(button2, &QPushButton::clicked, this, &OpenDialog::selectOutputDir);
+    chk_connect_a(dialogUi.mergeCheckBox, &QCheckBox::stateChanged, this, &OpenDialog::internalSlot);
+    chk_connect_a(this, &OpenDialog::internalSignal, dialogUi.lineOut, &QComboBox::setEnabled);
+    chk_connect_a(this, &OpenDialog::internalSignal, button, &QPushButton::setEnabled);
+    chk_connect_a(this, &OpenDialog::internalSignal, button2, &QPushButton::setEnabled);
 
     dialogUi.mergeCheckBox->setChecked(bMerge);
 
     QDialogButtonBox *box = dialogUi.buttonBox;
     button = box->addButton(i18n("Configure..."), QDialogButtonBox::ActionRole);
     button->setIcon(QIcon::fromTheme("configure"));
-    chk_connect(button, &QPushButton::clicked, pParent, &KDiff3App::slotConfigure);
-    chk_connect(box, &QDialogButtonBox::accepted, this, &OpenDialog::accept);
-    chk_connect(box, &QDialogButtonBox::rejected, this, &OpenDialog::reject);
+    chk_connect_a(button, &QPushButton::clicked, pParent, &KDiff3App::slotConfigure);
+    chk_connect_a(box, &QDialogButtonBox::accepted, this, &OpenDialog::accept);
+    chk_connect_a(box, &QDialogButtonBox::rejected, this, &OpenDialog::reject);
 
     QSize sh = sizeHint();
     if(sh.height() > 10)
