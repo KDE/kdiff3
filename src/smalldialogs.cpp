@@ -257,45 +257,47 @@ void OpenDialog::slotSwapCopyNames(QAction* pAction) const // id selected in the
     QtNumberType id = pAction->parentWidget()->actions().indexOf(pAction);
     QComboBox* cb1 = nullptr;
     QComboBox* cb2 = nullptr;
+
     switch(id)
     {
-    case 0:
-        cb1 = dialogUi.lineA;
-        cb2 = dialogUi.lineB;
-        break;
-    case 1:
-        cb1 = dialogUi.lineB;
-        cb2 = dialogUi.lineC;
-        break;
-    case 2:
-        cb1 = dialogUi.lineC;
-        cb2 = dialogUi.lineA;
-        break;
-    case 3:
-        cb1 = dialogUi.lineA;
-        cb2 = dialogUi.lineOut;
-        break;
-    case 4:
-        cb1 = dialogUi.lineB;
-        cb2 = dialogUi.lineOut;
-        break;
-    case 5:
-        cb1 = dialogUi.lineC;
-        cb2 = dialogUi.lineOut;
-        break;
-    case 6:
-        cb1 = dialogUi.lineA;
-        cb2 = dialogUi.lineOut;
-        break;
-    case 7:
-        cb1 = dialogUi.lineB;
-        cb2 = dialogUi.lineOut;
-        break;
-    case 8:
-        cb1 = dialogUi.lineC;
-        cb2 = dialogUi.lineOut;
-        break;
+        case 0:
+            cb1 = dialogUi.lineA;
+            cb2 = dialogUi.lineB;
+            break;
+        case 1:
+            cb1 = dialogUi.lineB;
+            cb2 = dialogUi.lineC;
+            break;
+        case 2:
+            cb1 = dialogUi.lineC;
+            cb2 = dialogUi.lineA;
+            break;
+        case 3:
+            cb1 = dialogUi.lineA;
+            cb2 = dialogUi.lineOut;
+            break;
+        case 4:
+            cb1 = dialogUi.lineB;
+            cb2 = dialogUi.lineOut;
+            break;
+        case 5:
+            cb1 = dialogUi.lineC;
+            cb2 = dialogUi.lineOut;
+            break;
+        case 6:
+            cb1 = dialogUi.lineA;
+            cb2 = dialogUi.lineOut;
+            break;
+        case 7:
+            cb1 = dialogUi.lineB;
+            cb2 = dialogUi.lineOut;
+            break;
+        case 8:
+            cb1 = dialogUi.lineC;
+            cb2 = dialogUi.lineOut;
+            break;
     }
+
     if(cb1 && cb2)
     {
         QString t1 = cb1->currentText();
