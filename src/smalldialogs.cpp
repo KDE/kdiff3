@@ -122,7 +122,7 @@ OpenDialog::OpenDialog(
     m_bInputFileNameChanged = false;
 
     /*
-        QComboBoxes default handling of Drag and Drop fails to clear existing text on drop.
+        QComboBox's default handling of Drag and Drop fails to clear existing text on drop.
         On some systems it may fail to do anything at all.
 
         This is not what we want. So manually replace the each QLineEdit object with a FileNameLineEdit.
