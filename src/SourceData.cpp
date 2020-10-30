@@ -34,6 +34,8 @@ Optimizations: Skip unneeded steps.
 #include "Utils.h"
 #include "diff.h"
 #include "Logging.h"
+#include "difftextwindow.h"
+#include "kdiff3.h"
 
 #include <QScopedPointer>
 #include <QProcess>
@@ -44,6 +46,11 @@ Optimizations: Skip unneeded steps.
 #include <QVector>
 
 #include <KLocalizedString>
+
+void SourceData::setupConnections()
+{
+    connections.push_back(KDiff3App::encodingChanged.connect(boost::bind(&SourceData::setEncoding, this, _1)));
+}
 
 void SourceData::reset()
 {

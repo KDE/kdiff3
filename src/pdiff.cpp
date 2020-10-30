@@ -2047,7 +2047,7 @@ void KDiff3App::slotClearManualDiffHelpList()
 
 void KDiff3App::slotEncodingChanged(QTextCodec* c)
 {
-    Q_UNUSED(c);
+    encodingChanged(c);
     mainInit(nullptr, true, true); // Init with reload
     slotRefresh();
 }
