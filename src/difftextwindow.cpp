@@ -1544,7 +1544,7 @@ int DiffTextWindowData::convertLineOnScreenToLineInSource(int lineOnScreen, e_Co
             else
                 --d3lIdx;
         }
-        if(coordType == eFileCoords) return line;
+        Q_ASSERT(coordType == eFileCoords);
     }
     return line;
 }
