@@ -29,7 +29,7 @@ class MergeEditLine
         mChanged = false;
         m_str = QString();
     }
-    bool isConflict() const { return m_src == e_SrcSelector::None && !m_bLineRemoved && !mChanged; }
+    Q_REQUIRED_RESULT bool isConflict() const { return m_src == e_SrcSelector::None && !m_bLineRemoved && !mChanged; }
     void setRemoved(e_SrcSelector src = e_SrcSelector::None)
     {
         m_src = src;
@@ -37,8 +37,8 @@ class MergeEditLine
         m_str = QString();
         mChanged = (src == e_SrcSelector::None);
     }
-    bool isRemoved() const { return m_bLineRemoved; }
-    bool isEditableText() const { return !isConflict(); }
+    Q_REQUIRED_RESULT bool isRemoved() const { return m_bLineRemoved; }
+    Q_REQUIRED_RESULT bool isEditableText() const { return !isConflict(); }
     void setString(const QString& s)
     {
         m_str = s;
@@ -46,8 +46,8 @@ class MergeEditLine
         m_src = e_SrcSelector::None;
         mChanged = true;
     }
-    QString getString(const QVector<LineData>* pLineDataA, const QVector<LineData>* pLineDataB, const QVector<LineData>* pLineDataC);
-    bool isModified() const { return mChanged; }
+    Q_REQUIRED_RESULT QString getString(const QVector<LineData>* pLineDataA, const QVector<LineData>* pLineDataB, const QVector<LineData>* pLineDataC);
+    Q_REQUIRED_RESULT bool isModified() const { return mChanged; }
 
     void setSource(e_SrcSelector src, bool bLineRemoved)
     {
@@ -82,7 +82,7 @@ class MergeEditLineList :public std::list<MergeEditLine>
     typedef std::list<MergeEditLine>::const_iterator const_iterator;
 
 
-    int size()
+    Q_REQUIRED_RESULT int size()
     {
         return (int)BASE::size();
     }
