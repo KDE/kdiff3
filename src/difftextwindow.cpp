@@ -193,7 +193,7 @@ e_LineEndStyle DiffTextWindow::getLineEndStyle() const { return d->m_eLineEndSty
 
 const Diff3LineVector* DiffTextWindow::getDiff3LineVector() const { return d->getDiff3LineVector(); }
 
-qint32 DiffTextWindow::getLineNumberWidth() const { return (int)log10((double)std::max(d->m_size, 1)) + 1; }
+qint32 DiffTextWindow::getLineNumberWidth() const { return (int)floor(log10((double)std::max(d->m_size, 1))) + 1; }
 
 DiffTextWindow::DiffTextWindow(
     DiffTextWindowFrame* pParent,
