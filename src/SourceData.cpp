@@ -34,7 +34,6 @@ Optimizations: Skip unneeded steps.
 #include "Utils.h"
 #include "diff.h"
 #include "Logging.h"
-#include "difftextwindow.h"
 #include "kdiff3.h"
 
 #include <QScopedPointer>

@@ -169,7 +169,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
         }
         if(!s.isEmpty())
         {
-            //KMessageBox::information(0, s,i18n("KDiff3-Usage"));
 #ifndef Q_OS_WIN
             if(isatty(fileno(stderr)) != 1)
 #endif
