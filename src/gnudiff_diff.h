@@ -4,7 +4,7 @@
     The original file was part of GNU DIFF.
 
     Part of KDiff3 - Text Diff And Merge Tool
-   
+
     SPDX-FileCopyrightText: 1988-2002 Free Software Foundation, Inc.
     SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
     SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
@@ -209,11 +209,6 @@ class GnuDiff
     void *xmalloc(size_t n);
     void *xrealloc(void *p, size_t n);
     void xalloc_die();
-
-    inline bool isWhite(QChar c)
-    {
-        return c == ' ' || c == '\t' || c == '\r';
-    }
 }; // class GnuDiff
 
 #endif

@@ -65,8 +65,8 @@ bool LineData::equal(const LineData& l1, const LineData& l2)
 
         for(; p1 != p1End && p2 != p2End; p1++, p2++)
         {
-            while(isWhite(*p1) && p1 != p1End) ++p1;
-            while(isWhite(*p2) && p2 != p2End) ++p2;
+            while(isspace(p1->unicode()) && p1 != p1End) ++p1;
+            while(isspace(p2->unicode()) && p2 != p2End) ++p2;
 
             if(*p1 != *p2)
                 return false;

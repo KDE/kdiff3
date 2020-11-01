@@ -534,11 +534,6 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
 
 void calcDiff(const QString &line1, const QString &line2, DiffList& diffList, int match, int maxSearchRange);
 
-inline bool isWhite(QChar c)
-{
-    return c == ' ' || c == '\t' || c == '\r';
-}
-
 /** Returns the number of equivalent spaces at position outPos.
 */
 inline int tabber(int outPos, int tabSize)
