@@ -120,6 +120,8 @@ add_definitions(
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_PROCESS_COMBINED_ARGUMENT_START
     -DQT_DISABLE_DEPRECATED_BEFORE=0x050800#disable depriated api for Qt<5.8.
+    #Boost 1.74 and posiablely others trigger these warnings in boosts own internal headers making
+    #the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
     #KF5 5.64+ flags
     #Don't warn for API depreciated after 5.36.0 (below as hex.hex.hex number)
