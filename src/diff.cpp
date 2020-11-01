@@ -54,7 +54,7 @@ int LineData::width(int tabSize) const
 bool LineData::equal(const LineData& l1, const LineData& l2)
 {
     if(l1.getLine() == nullptr || l2.getLine() == nullptr) return false;
-    //TODO: Can this be done with QString comparision API?
+
     if(g_bIgnoreWhiteSpace)
     {
         // Ignore white space diff
