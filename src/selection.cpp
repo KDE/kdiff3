@@ -14,7 +14,7 @@
 
 #include <QtGlobal>
 
-int Selection::firstPosInLine(LineRef l)
+int Selection::firstPosInLine(LineRef l) const
 {
     Q_ASSERT(firstLine.isValid());
 
@@ -34,10 +34,11 @@ int Selection::firstPosInLine(LineRef l)
 
     if(l == l1)
         return p1;
+
     return 0;
 }
 
-int Selection::lastPosInLine(LineRef l)
+int Selection::lastPosInLine(LineRef l) const
 {
     Q_ASSERT(firstLine.isValid());
 
@@ -58,10 +59,11 @@ int Selection::lastPosInLine(LineRef l)
 
     if(l == l2)
         return p2;
+
     return TYPE_MAX(int);
 }
 
-bool Selection::within(LineRef l, LineRef p)
+bool Selection::within(LineRef l, LineRef p) const
 {
     if(!firstLine.isValid())
         return false;
@@ -92,7 +94,7 @@ bool Selection::within(LineRef l, LineRef p)
     return false;
 }
 
-bool Selection::lineWithin(LineRef l)
+bool Selection::lineWithin(LineRef l) const
 {
     if(!firstLine.isValid())
         return false;

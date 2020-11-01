@@ -46,7 +46,7 @@ class MergeEditLine
         m_src = e_SrcSelector::None;
         mChanged = true;
     }
-    Q_REQUIRED_RESULT QString getString(const QVector<LineData>* pLineDataA, const QVector<LineData>* pLineDataB, const QVector<LineData>* pLineDataC);
+    Q_REQUIRED_RESULT QString getString(const QVector<LineData>* pLineDataA, const QVector<LineData>* pLineDataB, const QVector<LineData>* pLineDataC) const;
     Q_REQUIRED_RESULT bool isModified() const { return mChanged; }
 
     void setSource(e_SrcSelector src, bool bLineRemoved)
