@@ -586,7 +586,7 @@ int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& 
     return -1;
 }
 
-bool DiffList::runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2,
+void DiffList::runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2,
                     const QSharedPointer<Options> &pOptions)
 {
     ProgressProxy pp;
@@ -680,11 +680,9 @@ bool DiffList::runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef
     }
 
     pp.setCurrent(1);
-
-    return true;
 }
 
-bool ManualDiffHelpList::runDiff(const QVector<LineData>* p1, LineRef size1, const QVector<LineData>* p2, LineRef size2, DiffList& diffList,
+void ManualDiffHelpList::runDiff(const QVector<LineData>* p1, LineRef size1, const QVector<LineData>* p2, LineRef size2, DiffList& diffList,
                                  e_SrcSelector winIdx1, e_SrcSelector winIdx2,
                                  const QSharedPointer<Options> &pOptions)
 {
@@ -724,7 +722,6 @@ bool ManualDiffHelpList::runDiff(const QVector<LineData>* p1, LineRef size1, con
     }
     diffList2.runDiff(p1, l1begin, size1 - l1begin, p2, l2begin, size2 - l2begin, pOptions);
     diffList.splice(diffList.end(), diffList2);
-    return true;
 }
 
 void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHelpList)

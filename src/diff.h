@@ -113,7 +113,7 @@ class Diff
 class DiffList : public std::list<Diff>
 {
   public:
-    Q_REQUIRED_RESULT bool runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2, const QSharedPointer<Options>& pOptions);
+    void runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2, const QSharedPointer<Options>& pOptions);
 };
 
 class LineData
@@ -528,7 +528,7 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
         Q_REQUIRED_RESULT bool isValidMove(int line1, int line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
         void insertEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine);
 
-        bool runDiff(const QVector<LineData>* p1, LineRef size1, const QVector<LineData>* p2, LineRef size2, DiffList& diffList,
+        void runDiff(const QVector<LineData>* p1, LineRef size1, const QVector<LineData>* p2, LineRef size2, DiffList& diffList,
                      e_SrcSelector winIdx1, e_SrcSelector winIdx2,
                      const QSharedPointer<Options> &pOptions);
 };
