@@ -31,13 +31,13 @@ Optimizations: Skip unneeded steps.
 #include "SourceData.h"
 
 #include "CommentParser.h"
-#include "Utils.h"
 #include "diff.h"
-#include "Logging.h"
 #include "kdiff3.h"
+#include "Logging.h"
+#include "Utils.h"
 
-#include <QScopedPointer>
 #include <QProcess>
+#include <QScopedPointer>
 #include <QString>
 #include <QTemporaryFile>
 #include <QTextCodec>
@@ -252,8 +252,8 @@ bool SourceData::FileData::readFile(FileAccess& file)
     mDataSize = file.sizeForReading();
     char* pBuf;
     m_pBuf = pBuf = new char[mDataSize + 100]; // Alloc 100 byte extra: Safety hack, not nice but does no harm.
-                                            // Some extra bytes at the end of the buffer are needed by
-                                            // the diff algorithm. See also GnuDiff::diff_2_files().
+                                               // Some extra bytes at the end of the buffer are needed by
+                                               // the diff algorithm. See also GnuDiff::diff_2_files().
     bool bSuccess = file.readFile(pBuf, mDataSize);
     if(!bSuccess)
     {
@@ -288,8 +288,8 @@ bool SourceData::FileData::readFile(const QString& filename)
     mDataSize = fa.sizeForReading();
     char* pBuf;
     m_pBuf = pBuf = new char[mDataSize + 100]; // Alloc 100 byte extra: Safety hack, not nice but does no harm.
-                                            // Some extra bytes at the end of the buffer are needed by
-                                            // the diff algorithm. See also GnuDiff::diff_2_files().
+                                               // Some extra bytes at the end of the buffer are needed by
+                                               // the diff algorithm. See also GnuDiff::diff_2_files().
     bool bSuccess = fa.readFile(pBuf, mDataSize);
     if(!bSuccess)
     {
@@ -579,7 +579,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         return false;
 
     QString line;
-    QChar   curChar;
+    QChar curChar;
     LineCount lineCount = 0;
     qint64 lastOffset = 0;
     qint64 skipBytes = 0;
@@ -616,7 +616,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
         ts >> curChar;
 
-        quint32 firstNonwhite=0;
+        quint32 firstNonwhite = 0;
         //QTextStream::readLine doesn't tell us abount line endings.
         while(curChar != '\n' && curChar != '\r')
         {
@@ -651,7 +651,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
                 if(lastOffset < mDataSize)
                 {
                     //workaround for lack of peak API in QTextStream.
-                    qint64  j;
+                    qint64 j;
                     for(j = 0; j < 4 && lastOffset + j < mDataSize; ++j)
                     {
                         if(m_pBuf[lastOffset + j] != '\0')
