@@ -53,6 +53,7 @@ void SourceData::setupConnections()
 
 void SourceData::reset()
 {
+    mFromClipBoard = false;
     m_pEncoding = nullptr;
     m_fileAccess = FileAccess();
     m_normalData.reset();
@@ -68,6 +69,8 @@ void SourceData::reset()
 
 void SourceData::setFilename(const QString& filename)
 {
+    mFromClipBoard = false;
+
     if(filename.isEmpty())
     {
         reset();
@@ -140,10 +143,9 @@ const QString SourceData::setData(const QString& data)
         FileAccess::createTempFile(m_tempFile);
         m_tempInputFileName = m_tempFile.fileName();
     }
-
-    FileAccess f(m_tempInputFileName);
+    m_fileAccess = FileAccess(m_tempInputFileName);
     QByteArray ba = QTextCodec::codecForName("UTF-8")->fromUnicode(data);
-    bool bSuccess = f.writeFile(ba.constData(), ba.length());
+    bool bSuccess = m_fileAccess.writeFile(ba.constData(), ba.length());
     if(!bSuccess)
     {
         mErrors.append(i18n("Writing clipboard data to temp file failed."));
@@ -152,7 +154,8 @@ const QString SourceData::setData(const QString& data)
     else
     {
         m_aliasName = i18n("From Clipboard");
-        m_fileAccess = FileAccess(); // Insure m_fileAccess is not valid
+        mFromClipBoard = true;
+        //m_fileAccess = FileAccess(); // Insure m_fileAccess is not valid
     }
 
     return QLatin1String("");
@@ -203,7 +206,7 @@ bool SourceData::isIncompleteConversion() const
 
 bool SourceData::isFromBuffer() const
 {
-    return !m_fileAccess.isValid();
+    return mFromClipBoard;
 }
 
 bool SourceData::isBinaryEqualWith(const QSharedPointer<SourceData>& other) const
@@ -348,10 +351,10 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
     QString fileNameOut1;
     QString fileNameIn2;
     QString fileNameOut2;
-    bool bTempFileFromClipboard = !m_fileAccess.isValid();
+    //bool bTempFileFromClipboard = !m_fileAccess.isValid();
 
     // Detect the input for the preprocessing operations
-    if(!bTempFileFromClipboard)
+    if(!mFromClipBoard)
     {
         Q_ASSERT(!m_fileAccess.isDir());
         if(!m_fileAccess.isNormal())

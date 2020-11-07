@@ -80,6 +80,8 @@ class SourceData
 
     QStringList mErrors;
 
+    bool mFromClipBoard = false;
+
     class FileData
     {
       private:
