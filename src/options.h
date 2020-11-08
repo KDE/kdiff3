@@ -55,6 +55,10 @@ public:
     const QPoint& getPosition() const { return m_position; }
     void setPosition(const QPoint& pos) { m_position = pos; }
 
+    bool isFullScreen() const { return m_bFullScreen; };
+
+    void setFullScreen(const bool fullScreen) { m_bFullScreen = fullScreen;};
+
     bool isMaximised() const { return m_bMaximised; };
 
     void setMaximised(const bool maximised) { m_bMaximised = maximised;};
@@ -74,6 +78,7 @@ public:
     // Some settings that are not available in the option dialog:
     QSize  m_geometry = QSize(600, 400);
     QPoint m_position = QPoint(0, 22);
+    bool   m_bFullScreen = false;
     bool   m_bMaximised = false;
     bool   m_bShowToolBar = true;
     bool   m_bShowStatusBar = true;

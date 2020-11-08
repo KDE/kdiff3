@@ -19,6 +19,7 @@ void Options::init()
 {
     addOptionItem(new OptionSize(QSize(600, 400), "Geometry", &m_geometry));
     addOptionItem(new OptionPoint(QPoint(0, 22), "Position", &m_position));
+    addOptionItem(new OptionToggleAction(false, "WindowStateFullScreen", &m_bFullScreen));
     addOptionItem(new OptionToggleAction(false, "WindowStateMaximised", &m_bMaximised));
 
     addOptionItem(new OptionToggleAction(true, "Show Toolbar", &m_bShowToolBar));

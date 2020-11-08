@@ -468,7 +468,10 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     }
     m_bAutoMode = false;
 
-    KToggleFullScreenAction::setFullScreen(m_pKDiff3Shell, m_pOptions->isMaximised());
+    if(!isPart() && m_pOptions->isFullScreen())
+        m_pKDiff3Shell->showFullScreen();
+    else if(!isPart() && m_pOptions->isMaximised())
+        m_pKDiff3Shell->showMaximized();
 
     if(!isPart() && !m_pKDiff3Shell->isVisible())
     {
@@ -685,8 +688,9 @@ void KDiff3App::saveOptions(KSharedConfigPtr config)
     {
         if(!isPart())
         {
+            m_pOptions->setFullScreen(m_pKDiff3Shell->isFullScreen());
             m_pOptions->setMaximised(m_pKDiff3Shell->isMaximized());
-            if(!m_pKDiff3Shell->isMaximized() && m_pKDiff3Shell->isVisible())
+            if(!m_pKDiff3Shell->isFullScreen() && !m_pKDiff3Shell->isMaximized() && m_pKDiff3Shell->isVisible())
             {
                 m_pOptions->setGeometry(m_pKDiff3Shell->size());
                 m_pOptions->setPosition(m_pKDiff3Shell->pos());
