@@ -909,7 +909,7 @@ QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, qint64& ski
         if(buf[0] == '\xEF' && buf[1] == '\xBB' && buf[2] == '\xBF')
         {
             skipBytes = 3;
-            return QTextCodec::codecForName("UTF-8-BOM");
+            return QTextCodec::codecForName("UTF-8");
         }
     }
     skipBytes = 0;
