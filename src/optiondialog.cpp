@@ -558,6 +558,7 @@ void OptionDialog::setupOtherOptions()
     addOptionItem(new OptionNum<int>( Qt::TopToolBarArea, "ToolBarPos", (int*)&m_options.m_toolBarPos));
     addOptionItem(new OptionSize(QSize(600, 400), "Geometry", &m_options.m_geometry));
     addOptionItem(new OptionPoint(QPoint(0, 22), "Position", &m_options.m_position));
+    addOptionItem(new OptionToggleAction(false, "WindowStateFullScreen", &m_options.m_bFullScreen));
     addOptionItem(new OptionToggleAction(false, "WindowStateMaximised", &m_options.m_bMaximised));
 
     addOptionItem(new OptionStringList(&m_options.m_recentAFiles, "RecentAFiles"));

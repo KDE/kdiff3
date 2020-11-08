@@ -44,6 +44,7 @@ public:
     // Some settings are not available in the option dialog:
     QSize  m_geometry;
     QPoint m_position;
+    bool   m_bFullScreen;
     bool   m_bMaximised;
     bool   m_bShowToolBar;
     bool   m_bShowStatusBar;
