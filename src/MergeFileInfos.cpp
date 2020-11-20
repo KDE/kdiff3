@@ -267,14 +267,11 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
         }
         if(existsInB() && existsInC())
         {
-            if(m_bEqualAB && m_bEqualAC)
+            if((m_bEqualAB && m_bEqualAC) || isDirB())
                 m_bEqualBC = true;
             else
             {
-                if(isDirB())
-                    m_bEqualBC = true;
-                else
-                    m_bEqualBC = fastFileComparison(*getFileInfoB(), *getFileInfoC(), bError, eqStatus, pOptions);
+                m_bEqualBC = fastFileComparison(*getFileInfoB(), *getFileInfoC(), bError, eqStatus, pOptions);
             }
         }
         if(bError)
