@@ -113,7 +113,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
 };
 
 /*
-    Find comments if any and set is pure comment flag it it has nothing but whitespace and comments.
+    Find comments if any and set is pure comment flag if it has nothing but whitespace and comments.
 */
 void DefaultCommentParser::processLine(const QString &line)
 {

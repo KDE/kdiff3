@@ -350,7 +350,7 @@ class CommentParserTest : public QObject
         QVERIFY(line == correct);
         QVERIFY(line.length() == correct.length());
 
-        //invalid in C++ should not be flagged as non-comment
+        //invalid in C++ should be flagged as non-comment
         test = DefaultCommentParser();
         line = correct = " */";
         test.processLine(" */");
