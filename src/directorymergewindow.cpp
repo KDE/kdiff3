@@ -36,11 +36,11 @@
 #include <QRegExp>
 #include <QSplitter>
 #include <QStyledItemDelegate>
+#include <QTextEdit>
 #include <QTextStream>
 
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KTextEdit>
 #include <KToggleAction>
 
 struct DirectoryMergeWindow::t_ItemInfo {
@@ -53,14 +53,13 @@ struct DirectoryMergeWindow::t_ItemInfo {
 class StatusInfo : public QDialog
 {
   private:
-    KTextEdit* m_pTextEdit;
+    QTextEdit* m_pTextEdit;
 
   public:
-    explicit StatusInfo(QWidget* pParent)
-        : QDialog(pParent)
+    explicit StatusInfo(QWidget* pParent): QDialog(pParent)
     {
         QVBoxLayout* pVLayout = new QVBoxLayout(this);
-        m_pTextEdit = new KTextEdit(this);
+        m_pTextEdit = new QTextEdit(this);
         pVLayout->addWidget(m_pTextEdit);
         setObjectName("StatusInfo");
         setWindowFlags(Qt::Dialog);

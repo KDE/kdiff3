@@ -47,6 +47,7 @@
 #include <QPushButton>
 #include <QSplitter>
 #include <QStatusBar>
+#include <QTextEdit>
 #include <QTextStream>
 #include <QUrl>
 // include files for KDE
@@ -57,7 +58,6 @@
 #include <KStandardAction>
 #include <KActionCollection>
 #include <KIconLoader>
-#include <KTextEdit>
 #include <KToggleAction>
 #include <KToolBar>
 
@@ -178,7 +178,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
                 pDialog->setModal(true);
                 pDialog->setWindowTitle(title);
                 QVBoxLayout* pVBoxLayout = new QVBoxLayout(pDialog);
-                QPointer<KTextEdit> pTextEdit = QPointer<KTextEdit>(new KTextEdit(pDialog));
+                QPointer<QTextEdit> pTextEdit = QPointer<QTextEdit>(new QTextEdit(pDialog));
                 pTextEdit->setText(s);
                 pTextEdit->setReadOnly(true);
                 pTextEdit->setWordWrapMode(QTextOption::NoWrap);
