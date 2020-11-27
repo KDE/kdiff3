@@ -243,6 +243,9 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             case KIO::UDSEntry::UDS_URL:
                 m_url = QUrl(e.stringValue(f));
                 break;
+            case KIO::UDSEntry::UDS_DISPLAY_NAME:
+                mDisplayName = e.stringValue(f);
+                break;
             case KIO::UDSEntry::UDS_MIME_TYPE:
             case KIO::UDSEntry::UDS_GUESSED_MIME_TYPE:
             case KIO::UDSEntry::UDS_XML_PROPERTIES:

@@ -57,6 +57,7 @@ class FileAccess
 
     QDateTime lastModified() const;
 
+    Q_REQUIRED_RESULT QString displayName() const { return mDisplayName.isEmpty() ? fileName() : mDisplayName; }
     QString fileName(bool needTmp = false) const; // Just the name-part of the path, without parent directories
     QString fileRelPath() const;                  // The path relative to base comparison directory
     QString prettyAbsPath() const;
@@ -136,6 +137,8 @@ class FileAccess
     QFileInfo m_fileInfo;
     QString m_linkTarget;
     QString m_name;
+
+    QString mDisplayName;
     QString m_localCopy;
     QSharedPointer<QTemporaryFile> tmpFile = QSharedPointer<QTemporaryFile>::create();
     QSharedPointer<QFile> realFile = nullptr;
