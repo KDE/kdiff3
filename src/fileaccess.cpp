@@ -275,6 +275,14 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             return;
         }
     }
+    /*
+        According to KIO docs UDS_LINK_DEST not S_ISLNK should be used to determine if the url is a symlink.
+        This is not further explained and is assumed to be because some protocols/systems may not support POSIX
+        stat flags. KDiff3 uses the file type flags to check this it is unclear whether or not this is affected.
+        Never the less if a linkTarget is supplied assume this is link.
+    */
+    if(!m_linkTarget.isEmpty())
+        m_bSymLink = true;
 
     m_name = m_fileInfo.fileName();
     if(isLocal() && m_name.isEmpty())
