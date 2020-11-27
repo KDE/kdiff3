@@ -27,40 +27,40 @@ class SourceData
     void setupConnections();
     void setOptions(const QSharedPointer<Options> &pOptions);
 
-    LineRef getSizeLines() const;
-    qint64 getSizeBytes() const;
-    const char* getBuf() const;
-    const QString& getText() const;
-    const QVector<LineData>* getLineDataForDisplay() const;
-    const QVector<LineData>* getLineDataForDiff() const;
+    Q_REQUIRED_RESULT LineRef getSizeLines() const;
+    Q_REQUIRED_RESULT qint64 getSizeBytes() const;
+    Q_REQUIRED_RESULT const char* getBuf() const;
+    Q_REQUIRED_RESULT const QString& getText() const;
+    Q_REQUIRED_RESULT const QVector<LineData>* getLineDataForDisplay() const;
+    Q_REQUIRED_RESULT const QVector<LineData>* getLineDataForDiff() const;
 
     void setFilename(const QString& filename);
     void setFileAccess(const FileAccess& fileAccess);
-    QString getFilename() const;
+    Q_REQUIRED_RESULT QString getFilename() const;
     void setAliasName(const QString& name);
-    QString getAliasName() const;
-    bool isEmpty() const;                // File was set
-    bool hasData() const;                // Data was readable
-    bool isText() const;                 // is it pure text (vs. binary data)
-    bool isIncompleteConversion() const; // true if some replacement characters were found
-    bool isFromBuffer() const;           // was it set via setData() (vs. setFileAccess() or setFilename())
-    const QString setData(const QString& data);
-    bool isValid() const; // Either no file is specified or reading was successful
+    Q_REQUIRED_RESULT QString getAliasName() const;
+    Q_REQUIRED_RESULT bool isEmpty() const;                // File was set
+    Q_REQUIRED_RESULT bool hasData() const;                // Data was readable
+    Q_REQUIRED_RESULT bool isText() const;                 // is it pure text (vs. binary data)
+    Q_REQUIRED_RESULT bool isIncompleteConversion() const; // true if some replacement characters were found
+    Q_REQUIRED_RESULT bool isFromBuffer() const;           // was it set via setData() (vs. setFileAccess() or setFilename())
+    Q_REQUIRED_RESULT const QString setData(const QString& data);
+    Q_REQUIRED_RESULT bool isValid() const; // Either no file is specified or reading was successful
 
     // Returns a list of error messages if anything went wrong
     const QStringList& readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode);
     bool saveNormalDataAs(const QString& fileName);
 
-    bool isBinaryEqualWith(const QSharedPointer<SourceData>& other) const;
+    Q_REQUIRED_RESULT bool isBinaryEqualWith(const QSharedPointer<SourceData>& other) const;
 
     void reset();
 
-    bool isDir() { return m_fileAccess.isDir(); }
+    Q_REQUIRED_RESULT bool isDir() const { return m_fileAccess.isDir(); }
 
-    QTextCodec* getEncoding() const { return m_pEncoding; }
-    e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
+    Q_REQUIRED_RESULT QTextCodec* getEncoding() const { return m_pEncoding; }
+    Q_REQUIRED_RESULT e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
 
-    const QStringList& getErrors() { return mErrors; }
+    Q_REQUIRED_RESULT const QStringList& getErrors() const { return mErrors; }
 
     void setEncoding(QTextCodec* pEncoding);
 
