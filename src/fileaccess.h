@@ -41,39 +41,39 @@ class FileAccess
 
     void loadData();
 
-    bool isNormal() const;
-    bool isValid() const;
-    bool isFile() const;
-    bool isDir() const;
-    bool isSymLink() const;
-    bool exists() const;
-    qint64 size() const;     // Size as returned by stat().
-    qint64 sizeForReading(); // If the size can't be determined by stat() then the file is copied to a local temp file.
-    bool isReadable() const;
-    bool isWritable() const;
-    bool isExecutable() const;
-    bool isHidden() const;
-    QString readLink() const;
+    Q_REQUIRED_RESULT bool isNormal() const;
+    Q_REQUIRED_RESULT bool isValid() const;
+    Q_REQUIRED_RESULT bool isFile() const;
+    Q_REQUIRED_RESULT bool isDir() const;
+    Q_REQUIRED_RESULT bool isSymLink() const;
+    Q_REQUIRED_RESULT bool exists() const;
+    Q_REQUIRED_RESULT qint64 size() const;     // Size as returned by stat().
+    Q_REQUIRED_RESULT qint64 sizeForReading(); // If the size can't be determined by stat() then the file is copied to a local temp file.
+    Q_REQUIRED_RESULT bool isReadable() const;
+    Q_REQUIRED_RESULT bool isWritable() const;
+    Q_REQUIRED_RESULT bool isExecutable() const;
+    Q_REQUIRED_RESULT bool isHidden() const;
+    Q_REQUIRED_RESULT QString readLink() const;
 
-    QDateTime lastModified() const;
+    Q_REQUIRED_RESULT QDateTime lastModified() const;
 
     Q_REQUIRED_RESULT QString displayName() const { return mDisplayName.isEmpty() ? fileName() : mDisplayName; }
-    QString fileName(bool needTmp = false) const; // Just the name-part of the path, without parent directories
-    QString fileRelPath() const;                  // The path relative to base comparison directory
-    QString prettyAbsPath() const;
-    QUrl url() const;
+    Q_REQUIRED_RESULT QString fileName(bool needTmp = false) const; // Just the name-part of the path, without parent directories
+    Q_REQUIRED_RESULT QString fileRelPath() const;                  // The path relative to base comparison directory
+    Q_REQUIRED_RESULT QString prettyAbsPath() const;
+    Q_REQUIRED_RESULT QUrl url() const;
     void setUrl(const QUrl& inUrl) { m_url = inUrl; }
 
     //Workaround for QUrl::toDisplayString/QUrl::toString behavoir that does not fit KDiff3's expectations
-    QString absoluteFilePath() const;
-    static QString prettyAbsPath(const QUrl& url)
+    Q_REQUIRED_RESULT QString absoluteFilePath() const;
+    Q_REQUIRED_RESULT static QString prettyAbsPath(const QUrl& url)
     {
         return isLocal(url) ? QFileInfo(url.toString(QUrl::DecodeReserved)).absoluteFilePath() : url.toDisplayString();
     }
 
     //Workaround for QUrl::isLocalFile behavoir that does not fit KDiff3's expectations.
-    bool isLocal() const;
-    static bool isLocal(const QUrl& url)
+    Q_REQUIRED_RESULT bool isLocal() const;
+    Q_REQUIRED_RESULT static bool isLocal(const QUrl& url)
     {
         return url.isLocalFile() || !url.isValid() || url.scheme().isEmpty();
     }
@@ -86,7 +86,7 @@ class FileAccess
     bool copyFile(const QString& destUrl);
     bool createBackup(const QString& bakExtension);
 
-    QString getTempName() const;
+    Q_REQUIRED_RESULT QString getTempName() const;
     bool createLocalCopy();
     static void createTempFile(QTemporaryFile&);
     bool removeFile();
@@ -100,16 +100,16 @@ class FileAccess
     static bool symLink(const QString& linkTarget, const QString& linkLocation);
 
     void addPath(const QString& txt);
-    const QString& getStatusText() const;
+    Q_REQUIRED_RESULT const QString& getStatusText() const;
 
-    FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
+    Q_REQUIRED_RESULT FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
 
     void doError();
     void filterList(t_DirectoryList* pDirList, const QString& filePattern,
                     const QString& fileAntiPattern, const QString& dirAntiPattern,
                     const bool bUseCvsIgnore);
 
-    QDir getBaseDirectory() const { return m_baseDir; }
+    Q_REQUIRED_RESULT QDir getBaseDirectory() const { return m_baseDir; }
 
     bool open(const QFile::OpenMode flags);
 
