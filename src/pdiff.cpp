@@ -991,9 +991,7 @@ void KDiff3App::slotFileOpen2(QStringList &errors, const QString& fn1, const QSt
             return;
         }
 
-        if(!((!m_sd1->isEmpty() && !m_sd1->hasData()) ||
-           (!m_sd2->isEmpty() && !m_sd2->hasData()) ||
-           (!m_sd3->isEmpty() && !m_sd3->hasData())))
+        if(m_sd1->isValid() && m_sd2->isValid() && m_sd3->isValid())
         {
             if(m_pDirectoryMergeWindow != nullptr && m_pDirectoryMergeWindow->isVisible() && !dirShowBoth->isChecked())
             {
