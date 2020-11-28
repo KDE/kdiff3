@@ -1019,12 +1019,12 @@ void KDiff3App::slotFileNameChanged(const QString& fileName, e_SrcSelector winId
         fn1 = fileName;
         an1 = "";
     }
-    if(winIdx == e_SrcSelector::B)
+    else if(winIdx == e_SrcSelector::B)
     {
         fn2 = fileName;
         an2 = "";
     }
-    if(winIdx == e_SrcSelector::C)
+    else if(winIdx == e_SrcSelector::C)
     {
         fn3 = fileName;
         an3 = "";
