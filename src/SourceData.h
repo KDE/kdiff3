@@ -48,7 +48,7 @@ class SourceData
     Q_REQUIRED_RESULT bool isValid() const; // Either no file is specified or reading was successful
 
     // Returns a list of error messages if anything went wrong
-    const QStringList& readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode);
+    void readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode);
     bool saveNormalDataAs(const QString& fileName);
 
     Q_REQUIRED_RESULT bool isBinaryEqualWith(const QSharedPointer<SourceData>& other) const;

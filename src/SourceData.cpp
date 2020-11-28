@@ -343,7 +343,7 @@ QTextCodec* SourceData::detectEncoding(const QString& fileName, QTextCodec* pFal
     return pFallbackCodec;
 }
 
-const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode)
+void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode)
 {
     m_pEncoding = pEncoding;
     QTemporaryFile fileIn1, fileOut1;
@@ -360,7 +360,7 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
         if(!m_fileAccess.isNormal())
         {
             mErrors.append(i18n("%1 is not a normal file.", m_fileAccess.prettyAbsPath()));
-            return mErrors;
+            return;
         }
 
         if(m_fileAccess.isLocal())
@@ -388,7 +388,7 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
             Happens during intial startup. This means we have nothing to compare
         */
         if(m_tempInputFileName.isEmpty())
-            return mErrors;
+            return;
 
         fileNameIn1 = m_tempInputFileName;
         m_pEncoding = QTextCodec::codecForName("UTF-8");
@@ -411,7 +411,7 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
             if(!m_normalData.readFile(faIn))
             {
                 mErrors.append(faIn.getStatusText());
-                return mErrors;
+                return;
             }
         }
         else
@@ -454,7 +454,7 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
                 {
                     mErrors.append(faIn.getStatusText());
                     mErrors.append(i18n("    Temp file is: %1", fileNameIn1));
-                    return mErrors;
+                    return;
                 }
                 mErrors.append(
                     i18n("Preprocessing possibly failed. Check this command:\n\n  %1"
@@ -469,11 +469,11 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
         if(!m_normalData.preprocess(pEncoding1, false))
         {
             mErrors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
-            return mErrors;
+            return;
         }
         //exit early for non text data further processing assumes a text file as input
         if(!m_normalData.isText())
-            return mErrors;
+            return;
 
         // LineMatching Preprocessor
         if(!m_pOptions->m_LineMatchingPreProcessorCmd.isEmpty())
@@ -519,7 +519,7 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
                 if(!m_lmppData.readFile(fileNameIn2))
                 {
                     mErrors.append(i18n("Failed to read file: %1", fileNameIn2));
-                    return mErrors;
+                    return;
                 }
             }
         }
@@ -532,13 +532,13 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
     else
     {
         //exit early for nonexistent files
-        return mErrors;
+        return;
     }
 
     if(!m_lmppData.preprocess(pEncoding2, true))
     {
         mErrors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
-        return mErrors;
+        return;
     }
 
     Q_ASSERT(m_lmppData.isText());
@@ -565,8 +565,6 @@ const QStringList& SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAu
             m_normalData.m_v[i].setPureComment(m_lmppData.m_v[i].isPureComment());
         }
     }
-
-    return mErrors;
 }
 
 /** Prepare the linedata vector for every input line.*/
