@@ -198,31 +198,30 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
 {
     long acc = 0;
     long fileType = 0;
-    QVector<uint> fields = e.fields();
+    const QVector<uint> fields = e.fields();
     QString filePath;
 
     m_pParent = parent;
-    for(QVector<uint>::ConstIterator ei = fields.constBegin(); ei != fields.constEnd(); ++ei)
+    for(const uint fieldId: fields)
     {
-        uint f = *ei;
-        switch(f)
+        switch(fieldId)
         {
             case KIO::UDSEntry::UDS_SIZE:
-                m_size = e.numberValue(f);
+                m_size = e.numberValue(fieldId);
                 break;
             case KIO::UDSEntry::UDS_NAME:
-                filePath = e.stringValue(f);
+                filePath = e.stringValue(fieldId);
                 break; // During listDir the relative path is given here.
             case KIO::UDSEntry::UDS_MODIFICATION_TIME:
-                m_modificationTime = QDateTime::fromMSecsSinceEpoch(e.numberValue(f));
+                m_modificationTime = QDateTime::fromMSecsSinceEpoch(e.numberValue(fieldId));
                 break;
             case KIO::UDSEntry::UDS_LINK_DEST:
-                m_linkTarget = e.stringValue(f);
+                m_linkTarget = e.stringValue(fieldId);
                 break;
             case KIO::UDSEntry::UDS_ACCESS:
             {
 #ifndef Q_OS_WIN
-                acc = e.numberValue(f);
+                acc = e.numberValue(fieldId);
                 m_bReadable = (acc & S_IRUSR) != 0;
                 m_bWritable = (acc & S_IWUSR) != 0;
                 m_bExecutable = (acc & S_IXUSR) != 0;
@@ -239,7 +238,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
                 m_bSymLink = e.isLink();
                 if(!m_bSymLink)
                 {
-                    fileType = e.numberValue(f);
+                    fileType = e.numberValue(fieldId);
                     m_bDir = (fileType & QT_STAT_MASK) == QT_STAT_DIR;
                     m_bFile = (fileType & QT_STAT_MASK) == QT_STAT_REG;
                 }
@@ -254,10 +253,10 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             }
 
             case KIO::UDSEntry::UDS_URL:
-                m_url = QUrl(e.stringValue(f));
+                m_url = QUrl(e.stringValue(fieldId));
                 break;
             case KIO::UDSEntry::UDS_DISPLAY_NAME:
-                mDisplayName = e.stringValue(f);
+                mDisplayName = e.stringValue(fieldId);
                 break;
             case KIO::UDSEntry::UDS_LOCAL_PATH:
                 //TODO: Support this. We don't want to expose implmentation details to the user
