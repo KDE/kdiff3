@@ -258,11 +258,25 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             }
             case KIO::UDSEntry::UDS_FILE_TYPE:
             {
-                fileType = e.numberValue(f);
-                m_bDir = (fileType & QT_STAT_MASK) == QT_STAT_DIR;
-                m_bFile = (fileType & QT_STAT_MASK) == QT_STAT_REG;
-                m_bSymLink = (fileType & QT_STAT_MASK) == QT_STAT_LNK;
-                m_bExists = fileType != 0;
+                /*
+                    According to KIO docs UDS_LINK_DEST not S_ISLNK should be used to determine if the url is a symlink.
+                    UDS_FILE_TYPE is explictitly stated to be the type of the linked file not the link itself.
+                */
+                if(!e.isLink())
+                {
+                    fileType = e.numberValue(f);
+                    m_bDir = (fileType & QT_STAT_MASK) == QT_STAT_DIR;
+                    m_bFile = (fileType & QT_STAT_MASK) == QT_STAT_REG;
+                    m_bSymLink = (fileType & QT_STAT_MASK) == QT_STAT_LNK;
+                }
+                else
+                {
+                    m_bDir = false;
+                    m_bFile = false;
+                    m_bSymLink = true;
+                }
+                    
+                m_bExists = m_bSymLink || fileType != 0;
                 //m_fileType = fileType;
                 break;
             }
