@@ -231,12 +231,25 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             }
             case KIO::UDSEntry::UDS_FILE_TYPE:
             {
-                fileType = e.numberValue(f);
-                m_bDir = (fileType & QT_STAT_MASK) == QT_STAT_DIR;
-                m_bFile = (fileType & QT_STAT_MASK) == QT_STAT_REG;
-                m_bSymLink = (fileType & QT_STAT_MASK) == QT_STAT_LNK;
-                m_bExists = fileType != 0;
-                //m_fileType = fileType;
+                /*
+                    According to KIO docs UDS_LINK_DEST not S_ISLNK should be used to determine if the url is a symlink.
+                    UDS_FILE_TYPE is explictitly stated to be the type of the linked file not the link itself.
+                */
+
+                m_bSymLink = e.isLink();
+                if(!m_bSymLink)
+                {
+                    fileType = e.numberValue(f);
+                    m_bDir = (fileType & QT_STAT_MASK) == QT_STAT_DIR;
+                    m_bFile = (fileType & QT_STAT_MASK) == QT_STAT_REG;
+                }
+                else
+                {
+                    m_bDir = false;
+                    m_bFile = false;
+                }
+                    
+                m_bExists = m_bSymLink || fileType != 0;
                 break;
             }
 
@@ -275,14 +288,6 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             return;
         }
     }
-    /*
-        According to KIO docs UDS_LINK_DEST not S_ISLNK should be used to determine if the url is a symlink.
-        This is not further explained and is assumed to be because some protocols/systems may not support POSIX
-        stat flags. KDiff3 uses the file type flags to check this it is unclear whether or not this is affected.
-        Never the less if a linkTarget is supplied assume this is link.
-    */
-    if(!m_linkTarget.isEmpty())
-        m_bSymLink = true;
 
     m_name = m_fileInfo.fileName();
     if(isLocal() && m_name.isEmpty())
