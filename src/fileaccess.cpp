@@ -219,7 +219,6 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
                 m_linkTarget = e.stringValue(fieldId);
                 break;
             case KIO::UDSEntry::UDS_ACCESS:
-            {
 #ifndef Q_OS_WIN
                 acc = e.numberValue(fieldId);
                 m_bReadable = (acc & S_IRUSR) != 0;
@@ -227,9 +226,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
                 m_bExecutable = (acc & S_IXUSR) != 0;
 #endif
                 break;
-            }
             case KIO::UDSEntry::UDS_FILE_TYPE:
-            {
                 /*
                     According to KIO docs UDS_LINK_DEST not S_ISLNK should be used to determine if the url is a symlink.
                     UDS_FILE_TYPE is explictitly stated to be the type of the linked file not the link itself.
@@ -241,17 +238,15 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
                     fileType = e.numberValue(fieldId);
                     m_bDir = (fileType & QT_STAT_MASK) == QT_STAT_DIR;
                     m_bFile = (fileType & QT_STAT_MASK) == QT_STAT_REG;
+                    m_bExists = fileType != 0;
                 }
                 else
                 {
                     m_bDir = false;
                     m_bFile = false;
+                    m_bExists = true;
                 }
-                    
-                m_bExists = m_bSymLink || fileType != 0;
                 break;
-            }
-
             case KIO::UDSEntry::UDS_URL:
                 m_url = QUrl(e.stringValue(fieldId));
                 break;
@@ -273,13 +268,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
     m_fileInfo.setCaching(true);
     if(m_url.isEmpty())
     {
-        if(parent != nullptr)
-        {
-            m_url = parent->url().resolved(QUrl(filePath));
-            //Verify that the scheme doesn't change.
-            Q_ASSERT(m_url.scheme() == parent->url().scheme());
-        }
-        else
+        if(parent == nullptr)
         {
             /*
              Invalid entry we don't know the full url because KIO didn't tell us and there is no parent
@@ -289,20 +278,26 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             qCWarning(kdiffFileAccess) << i18n("Unable to determine full url. No parent specified.");
             return;
         }
+        
+        m_url = parent->url().resolved(QUrl(filePath));
+        //Verify that the scheme doesn't change.
+        Q_ASSERT(m_url.scheme() == parent->url().scheme());
     }
 
     m_name = m_fileInfo.fileName();
-    if(isLocal() && m_name.isEmpty())
-    {
-        m_name = m_fileInfo.absoluteDir().dirName();
-    }
+
     if(isLocal())
+    {
+        if(m_name.isEmpty())
+            m_name = m_fileInfo.absoluteDir().dirName();
+        
         m_bExists = m_fileInfo.exists();
 
-    //insure modification time is initialized if it wasn't already.
-    if(isLocal() && m_modificationTime == QDateTime::fromMSecsSinceEpoch(0))
-        m_modificationTime = m_fileInfo.lastModified();
-
+        //insure modification time is initialized if it wasn't already.
+        if(m_modificationTime == QDateTime::fromMSecsSinceEpoch(0))
+            m_modificationTime = m_fileInfo.lastModified();
+    }
+        
     m_bValidData = true;
     m_bSymLink = !m_linkTarget.isEmpty();
 
