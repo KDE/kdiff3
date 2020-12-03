@@ -110,7 +110,7 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     if(m_url.scheme().isEmpty())
         m_url.setScheme(QLatin1String("file"));
 
-    if(m_url.isLocalFile() || !m_url.isValid()) // Treat invalid urls as local files.
+    if(isLocal()) // Invalid urls are treated as local files.
     {
         m_fileInfo.setFile(m_url.toLocalFile());
         m_pParent = nullptr;
@@ -391,7 +391,7 @@ QUrl FileAccess::url() const
 {
     QUrl url = m_url;
 
-    if(url.isLocalFile())
+    if(isLocal())
     {
         url = QUrl::fromLocalFile(absoluteFilePath());
     }
