@@ -57,8 +57,6 @@ void FileAccess::setFile(FileAccess* pParent, const QFileInfo& fi)
 
     m_fileInfo = fi;
     m_url = QUrl::fromLocalFile(m_fileInfo.filePath());
-    if(!m_url.scheme().isEmpty())
-        m_url.setScheme(QLatin1String("file"));
 
     m_pParent = pParent;
     loadData();
@@ -79,9 +77,6 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     Q_ASSERT(parent() == nullptr || url != parent()->url());
 
     m_url = url;
-    //QUrl::isLocalFile assumes the scheme is set.
-    if(m_url.scheme().isEmpty())
-        m_url.setScheme(QLatin1String("file"));
 
     if(isLocal()) // Invalid urls are treated as local files.
     {
