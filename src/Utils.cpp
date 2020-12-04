@@ -17,13 +17,13 @@
 
 /* Split the command line into arguments.
  * Normally split at white space separators except when quoting with " or '.
- * Backslash is treated as meta character within single quotes ' only.
+ * Backslash is treated as meta.
  * Detect parsing errors like unclosed quotes.
  * The first item in the list will be the command itself.
  * Returns the error reason as string or an empty string on success.
  * Eg. >"1" "2"<           => >1<, >2<
- * Eg. >'\'\\'<            => >'\<   backslash is a meta character between single quotes
- * Eg. > "\\" <            => >\\<   but not between double quotes
+ * Eg. >'\'\\'<            => >'\<   backslash is a meta character
+ * Eg. > "\\" <            => >\<
  * Eg. >"c:\sed" 's/a/\' /g'<  => >c:\sed<, >s/a/' /g<
  */
 QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
