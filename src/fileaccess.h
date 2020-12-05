@@ -130,7 +130,6 @@ class FileAccess
     QUrl m_url;
     bool m_bValidData = false;
 
-    //long m_fileType; // for testing only
     FileAccess* m_pParent = nullptr;
 
     QDir m_baseDir;
@@ -140,6 +139,7 @@ class FileAccess
 
     QString mDisplayName;
     QString m_localCopy;
+    QString mPhysicalPath;
     QSharedPointer<QTemporaryFile> tmpFile = QSharedPointer<QTemporaryFile>::create();
     QSharedPointer<QFile> realFile = nullptr;
 

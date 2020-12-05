@@ -249,7 +249,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
                 mDisplayName = e.stringValue(fieldId);
                 break;
             case KIO::UDSEntry::UDS_LOCAL_PATH:
-                //TODO: Support this. We don't want to expose implmentation details to the user
+                mPhysicalPath = e.stringValue(fieldId);
                 break;
             case KIO::UDSEntry::UDS_MIME_TYPE:
             case KIO::UDSEntry::UDS_GUESSED_MIME_TYPE:
@@ -617,7 +617,10 @@ bool FileAccess::listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindH
 
 QString FileAccess::getTempName() const
 {
-    return m_localCopy;
+    if(mPhysicalPath.isEmpty())
+        return m_localCopy;
+    else
+        return mPhysicalPath;
 }
 
 const QString& FileAccess::errorString() const
@@ -690,7 +693,7 @@ void FileAccess::close()
 
 bool FileAccess::createLocalCopy()
 {
-    if(isLocal() || !m_localCopy.isEmpty())
+    if(isLocal() || !m_localCopy.isEmpty() || !mPhysicalPath.isEmpty())
         return true;
 
     tmpFile->setAutoRemove(true);
@@ -738,7 +741,7 @@ bool FileAccess::exists(const QString& name)
 // If the size couldn't be determined by stat() then the file is copied to a local temp file.
 qint64 FileAccess::sizeForReading()
 {
-    if(!isLocal() && m_size == 0)
+    if(!isLocal() && m_size == 0 && mPhysicalPath.isEmpty())
     {
         // Size couldn't be determined. Copy the file to a local temp place.
         createLocalCopy();
