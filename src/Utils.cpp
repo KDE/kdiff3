@@ -113,6 +113,7 @@ bool Utils::wildcardMultiMatch(const QString& wildcard, const QString& testStrin
     return false;
 }
 
+//TODO: Only used by calcTokenPos.
 bool Utils::isCTokenChar(QChar c)
 {
     return (c == '_') ||
@@ -120,6 +121,8 @@ bool Utils::isCTokenChar(QChar c)
            (c >= '0' && c <= '9');
 }
 
+
+//TODO: Needed? Only user of isCTokenChar.
 /// Calculate where a token starts and ends, given the x-position on screen.
 void Utils::calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2)
 {
@@ -158,3 +161,4 @@ QString Utils::calcHistoryLead(const QString& s)
     
     return s.left(i);
 }
+

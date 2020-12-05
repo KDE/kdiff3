@@ -41,8 +41,10 @@ class Utils{
       }
 
       static void calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2);
-      static bool isCTokenChar(QChar c);
       static QString calcHistoryLead(const QString& s);
+
+    private:
+      static bool isCTokenChar(QChar c);
 };
 
 #endif
