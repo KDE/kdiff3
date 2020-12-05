@@ -149,7 +149,7 @@ void FileAccess::loadData()
 
 void FileAccess::addPath(const QString& txt)
 {
-    if(!isLocal() && m_url.isValid())
+    if(!isLocal())
     {
         QUrl url = m_url.adjusted(QUrl::StripTrailingSlash);
         url.setPath(url.path() + '/' + txt);
