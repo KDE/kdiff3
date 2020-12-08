@@ -67,6 +67,8 @@ class FileAccess
 
     bool isLocal() const;
 
+    static bool isLocal(const QUrl &url) { return url.isLocalFile() || !url.isValid() || url.scheme().isEmpty(); };
+
     bool readFile(void* pDestBuffer, qint64 maxLength);
     bool writeFile(const void* pSrcBuffer, qint64 length);
     bool listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,

@@ -395,7 +395,7 @@ QUrl FileAccess::url() const
 
 bool FileAccess::isLocal() const
 {
-    return m_url.isLocalFile() || !m_url.isValid();
+    return m_url.isLocalFile() || !m_url.isValid() || m_url.scheme().isEmpty();
 }
 
 bool FileAccess::isReadable() const
