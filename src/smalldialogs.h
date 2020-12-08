@@ -44,7 +44,6 @@ public:
 
    QCheckBox* m_pMerge;
    void accept() override;
-   bool eventFilter(QObject* o, QEvent* e) override;
 private:
    Options* m_pOptions;
    void selectURL( QComboBox* pLine, bool bDir, int i, bool bSave );

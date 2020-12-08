@@ -20,6 +20,7 @@
 
 #include "smalldialogs.h"
 #include "diff.h"
+#include "FileNameLineEdit.h"
 #include "options.h"
 #include "kdiff3.h"
 
@@ -167,7 +168,7 @@ OpenDialog::OpenDialog(
 
     h->addItem(new QSpacerItem(200, 0), 0, 1);
 
-    QDialogButtonBox *box = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    QDialogButtonBox* box = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     v->addWidget(box);
     button = box->addButton(i18n("Configure..."), QDialogButtonBox::ActionRole);
     button->setIcon(QIcon::fromTheme("configure"));
@@ -183,43 +184,17 @@ OpenDialog::OpenDialog(
         QComboBoxes default handling of Drag and Drop fails to clear existing text on drop.
         On some systems it may fail to do anything at all.
 
-        This is not what we want. So we install these filters even on Linux.
+        This is not what we want. So manually replace the each QLineEdit object with a FileNameLineEdit.
+        This makes behavoir consitant with the main window.
+
+        On windows this step also needed to bypasses Qt's quirky behavoir when converting from QUrl
+        to QString. Specficly % encoding is by handled differently on windows. This is explictly documented
+        as platform specfic unspecfied behavoir. Not what we need.
     */
-    m_pLineA->lineEdit()->installEventFilter(this);
-    m_pLineB->lineEdit()->installEventFilter(this);
-    m_pLineC->lineEdit()->installEventFilter(this);
-    m_pLineOut->lineEdit()->installEventFilter(this);
-}
-
-// Eventfilter: Only needed under Windows.
-// Without this, files dropped in the line edit have URL-encoding.
-// This eventfilter decodes the filenames as needed by KDiff3.
-bool OpenDialog::eventFilter(QObject* o, QEvent* e)
-{
-    if(e->type() == QEvent::DragEnter)
-    {
-        QDragEnterEvent* d = static_cast<QDragEnterEvent*>(e);
-        d->setAccepted(d->mimeData()->hasUrls());
-        return true;
-    }
-    if(e->type() == QEvent::Drop)
-    {
-        QDropEvent* d = static_cast<QDropEvent*>(e);
-
-        if(!d->mimeData()->hasUrls())
-            return false;
-
-        QList<QUrl> lst = d->mimeData()->urls();
-
-        if(lst.count() > 0)
-        {
-            static_cast<QLineEdit*>(o)->setText(QDir::toNativeSeparators(lst[0].toLocalFile()));
-            static_cast<QLineEdit*>(o)->setFocus();
-        }
-
-        return true;
-    }
-    return false;
+    m_pLineA->setLineEdit(new FileNameLineEdit(m_pLineA));
+    m_pLineB->setLineEdit(new FileNameLineEdit(m_pLineB));
+    m_pLineC->setLineEdit(new FileNameLineEdit(m_pLineC));
+    m_pLineOut->setLineEdit(new FileNameLineEdit(m_pLineOut));
 }
 
 void OpenDialog::selectURL(QComboBox* pLine, bool bDir, int i, bool bSave)
