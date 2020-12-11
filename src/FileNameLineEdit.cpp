@@ -17,6 +17,7 @@
  * along with KDiff3.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "FileNameLineEdit.h"
+#include "fileaccess.h"
 
 #include <QDropEvent>
 #include <QDragEnterEvent>
@@ -35,7 +36,17 @@ void FileNameLineEdit::dropEvent(QDropEvent* event)
             Do not use QUrl::toString() here. Sadly the Qt5 version does not permit Qt4 style
             fullydecoded conversions. It also treats emtpy schemes as non-local.
         */
-        setText(lst[0].toLocalFile());
+        if(FileAccess::isLocal(lst[0]))
+        {
+            if(lst[0].scheme().isEmpty())
+                lst[0].setScheme("file");
+            //QUrl::toLocalFile returns empty for empty schemes or anything else Qt thinks is not local
+            setText(lst[0].toLocalFile());
+            Q_ASSERT(!text().isEmpty());
+        }
+        else
+            setText(lst[0].toDisplayString());
+        
         setFocus();
         emit returnPressed();
     }
