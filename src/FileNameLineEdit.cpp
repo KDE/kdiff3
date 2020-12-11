@@ -19,6 +19,8 @@
 #include "FileNameLineEdit.h"
 #include "fileaccess.h"
 
+#include "Logging.h"
+
 #include <QDropEvent>
 #include <QDragEnterEvent>
 #include <QMimeData>
@@ -28,6 +30,7 @@ void FileNameLineEdit::dropEvent(QDropEvent* event)
 {
     Q_ASSERT(event->mimeData()->hasUrls());//Debugging aid in case FileNameLineEdit::dragEnterEvent is changed to accept other types.
 
+    qCDebug(kdeMain) << "Enter FileNameLineEdit::dropEvent";
     QList<QUrl> lst = event->mimeData()->urls();
 
     if(lst.count() > 0)
@@ -36,20 +39,28 @@ void FileNameLineEdit::dropEvent(QDropEvent* event)
             Do not use QUrl::toString() here. Sadly the Qt5 version does not permit Qt4 style
             fullydecoded conversions. It also treats emtpy schemes as non-local.
         */
+        qCDebug(kdeMain) << "Recieved Drop Event";
+        qCDebug(kdeMain) << "Url List Size: " << lst.count();
+        qCDebug(kdeMain) << "lst[0] = " << lst[0];
+
         if(FileAccess::isLocal(lst[0]))
         {
+            qCInfo(kdeMain) << "Interpurting lst[0] as a local file.";
             if(lst[0].scheme().isEmpty())
                 lst[0].setScheme("file");
             //QUrl::toLocalFile returns empty for empty schemes or anything else Qt thinks is not local
             setText(lst[0].toLocalFile());
-            Q_ASSERT(!text().isEmpty());
         }
         else
+        {
+            qCInfo(kdeMain) << "Interpurting lst[0] as a remote url.";
             setText(lst[0].toDisplayString());
-        
+        }
+        qCDebug(kdeMain) << "Set line edit text to: " << text() ;
         setFocus();
         emit returnPressed();
     }
+    qCDebug(kdeMain) << "Leave FileNameLineEdit::dropEvent";
 }
 
 void FileNameLineEdit::dragEnterEvent(QDragEnterEvent* e)
