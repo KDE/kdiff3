@@ -36,6 +36,8 @@ class FileAccess
     FileAccess();
     ~FileAccess();
     explicit FileAccess(const QString& name, bool bWantToWrite = false); // name: local file or dirname or url (when supported)
+
+    explicit FileAccess(const QUrl& name, bool bWantToWrite = false); // name: local file or dirname or url (when supported)
     void setFile(const QString& name, bool bWantToWrite = false);
     void setFile(const QUrl& url, bool bWantToWrite = false);
     void setFile(FileAccess* pParent, const QFileInfo& fi);
@@ -63,9 +65,20 @@ class FileAccess
     QString prettyAbsPath() const;
     QUrl url() const;
     void setUrl(const QUrl& inUrl) { m_url = inUrl; }
-    QString absoluteFilePath() const;
 
+    //Workaround for QUrl::toDisplayString/QUrl::toString behavoir that does not fit KDiff3's expectations
+    QString absoluteFilePath() const;
+    static QString prettyAbsPath(const QUrl& url)
+    {
+        return isLocal(url) ? QFileInfo(url.toString(QUrl::DecodeReserved)).absoluteFilePath() : url.toDisplayString();
+    }
+
+    //Workaround for QUrl::isLocalFile behavoir that does not fit KDiff3's expectations.
     bool isLocal() const;
+    static bool isLocal(const QUrl& url)
+    {
+        return url.isLocalFile() || !url.isValid() || url.scheme().isEmpty();
+    }
 
     static bool isLocal(const QUrl &url) { return url.isLocalFile() || !url.isValid() || url.scheme().isEmpty(); };
 
