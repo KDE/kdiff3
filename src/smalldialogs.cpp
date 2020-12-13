@@ -4,6 +4,7 @@
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
+//clazy:excludeall=connect-non-signal,incorrect-emit
 
 #include "smalldialogs.h"
 

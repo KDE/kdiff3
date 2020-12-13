@@ -5,6 +5,7 @@
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
+//clazy:excludeall=connect-non-signal,incorrect-emit
 
 #include "kdiff3_shell.h"
 #include "kdiff3.h"
