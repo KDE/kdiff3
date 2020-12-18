@@ -19,7 +19,7 @@ class CommentParser
     virtual void removeComment(QString &line) = 0;
     virtual bool inComment() const = 0;
     virtual bool isPureComment() const = 0;
-    virtual ~CommentParser(){};
+    virtual ~CommentParser() = default;
 };
 
 class DefaultCommentParser : public CommentParser

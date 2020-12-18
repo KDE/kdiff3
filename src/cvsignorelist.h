@@ -24,7 +24,7 @@
 class CvsIgnoreList
 {
   public:
-    CvsIgnoreList() {}
+    CvsIgnoreList() = default;
     void init(FileAccess& dir, const t_DirectoryList* pDirList);
     bool matches(const QString& text, bool bCaseSensitive) const;
 

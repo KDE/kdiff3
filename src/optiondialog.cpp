@@ -524,9 +524,7 @@ void OptionDialog::helpRequested()
     KHelpClient::invokeHelp(QStringLiteral("kdiff3/index.html"));
 }
 
-OptionDialog::~OptionDialog()
-{
-}
+OptionDialog::~OptionDialog() = default;
 
 void OptionDialog::setupOtherOptions()
 {

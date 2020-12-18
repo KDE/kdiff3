@@ -132,7 +132,7 @@ class MergeFileInfos
     Q_REQUIRED_RESULT inline bool isEqualAB() const { return m_bEqualAB; }
     Q_REQUIRED_RESULT inline bool isEqualAC() const { return m_bEqualAC; }
     Q_REQUIRED_RESULT inline bool isEqualBC() const { return m_bEqualBC; }
-    bool compareFilesAndCalcAges(QStringList& errors, QSharedPointer<Options> const pOptions, DirectoryMergeWindow* pDMW);
+    bool compareFilesAndCalcAges(QStringList& errors, QSharedPointer<Options> const &pOptions, DirectoryMergeWindow* pDMW);
 
     void updateAge();
 

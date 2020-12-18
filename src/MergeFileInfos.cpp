@@ -192,7 +192,7 @@ QString MergeFileInfos::fullNameDest() const
         return m_dirInfo->destDir().absoluteFilePath() + '/' + subPath();
 }
 
-bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer<Options> const pOptions, DirectoryMergeWindow* pDMW)
+bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer<Options> const &pOptions, DirectoryMergeWindow* pDMW)
 {
     std::map<QDateTime, int> dateMap;
 

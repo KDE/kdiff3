@@ -28,7 +28,7 @@ class OptionItemBase
         m_saveName = saveName;
         m_bPreserved = false;
     }
-    virtual ~OptionItemBase(){};
+    virtual ~OptionItemBase() = default;
     virtual void setToDefault() = 0;
     virtual void setToCurrent() = 0;
 

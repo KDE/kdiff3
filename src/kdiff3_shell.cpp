@@ -80,9 +80,7 @@ KDiff3Shell::KDiff3Shell(bool bCompleteInit)
     m_bUnderConstruction = false;
 }
 
-KDiff3Shell::~KDiff3Shell()
-{
-}
+KDiff3Shell::~KDiff3Shell() = default;
 
 bool KDiff3Shell::queryClose()
 {

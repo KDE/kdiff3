@@ -15,7 +15,7 @@
 class Selection
 {
 public:
-  Selection(){}
+  Selection() = default;
 private:
   LineRef firstLine;
   LineRef lastLine;

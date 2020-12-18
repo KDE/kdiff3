@@ -222,13 +222,15 @@ class Diff3Line
 
     ~Diff3Line()
     {
-        if(pFineAB != nullptr) delete pFineAB;
-        if(pFineBC != nullptr) delete pFineBC;
-        if(pFineCA != nullptr) delete pFineCA;
+        delete pFineAB;
+        delete pFineBC;
+        delete pFineCA;
+
         pFineAB = nullptr;
         pFineBC = nullptr;
         pFineCA = nullptr;
     }
+    
     Q_REQUIRED_RESULT LineRef getLineA() const { return lineA; }
     Q_REQUIRED_RESULT LineRef getLineB() const { return lineB; }
     Q_REQUIRED_RESULT LineRef getLineC() const { return lineC; }
@@ -308,20 +310,17 @@ class Diff3Line
         Q_ASSERT(selector == e_SrcSelector::A || selector == e_SrcSelector::B || selector == e_SrcSelector::C);
         if(selector == e_SrcSelector::A)
         {
-            if(pFineAB != nullptr)
-                delete pFineAB;
+            delete pFineAB;
             pFineAB = pDiffList;
         }
         else if(selector == e_SrcSelector::B)
         {
-            if(pFineBC != nullptr)
-                delete pFineBC;
+            delete pFineBC;
             pFineBC = pDiffList;
         }
         else if(selector == e_SrcSelector::C)
         {
-            if(pFineCA)
-                delete pFineCA;
+            delete pFineCA;
             pFineCA = pDiffList;
         }
     }

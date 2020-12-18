@@ -169,9 +169,7 @@ QList<QAction*> KDiff3FileItemAction::actions(const KFileItemListProperties& fil
     return actions;
 }
 
-KDiff3FileItemAction::~KDiff3FileItemAction()
-{
-}
+KDiff3FileItemAction::~KDiff3FileItemAction() = default;
 
 void KDiff3FileItemAction::slotCompareWith()
 {

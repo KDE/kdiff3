@@ -15,13 +15,9 @@
 #include <qfont.h>
 #include <qpoint.h>
 
-ValueMap::ValueMap()
-{
-}
+ValueMap::ValueMap() = default;
 
-ValueMap::~ValueMap()
-{
-}
+ValueMap::~ValueMap() = default;
 
 void ValueMap::save(QTextStream& ts)
 {

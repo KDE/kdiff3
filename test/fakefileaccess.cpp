@@ -8,19 +8,11 @@
 
 #include <QString>
 
-FileAccess::FileAccess()
-{
-}
-
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
   Q_ASSERT(!bWantToWrite);
 
   m_name = name;
-}
-
-FileAccess::~FileAccess()
-{
 }
 
 //   FileAccess( const QString& name, bool bWantToWrite=false ); // name: local file or dirname or url (when supported)

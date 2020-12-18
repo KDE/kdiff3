@@ -85,7 +85,7 @@ QAtomicInt RecalcWordWrapRunnable::s_maxNofRunnables = 0;
 class WrapLineCacheData
 {
   public:
-    WrapLineCacheData() {}
+    WrapLineCacheData() = default;
     WrapLineCacheData(int d3LineIdx, int textStart, int textLength)
         : m_d3LineIdx(d3LineIdx), m_textStart(textStart), m_textLength(textLength) {}
     qint32 d3LineIdx() const { return m_d3LineIdx; }

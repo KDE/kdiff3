@@ -13,7 +13,8 @@
 class DirectoryInfo
 {
     public:
-      explicit DirectoryInfo(){};
+      explicit DirectoryInfo() = default;
+      
       DirectoryInfo(FileAccess& dirA, FileAccess& dirB, FileAccess& dirC, FileAccess& dirDest)
       {
           m_dirA = dirA;
