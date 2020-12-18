@@ -5,7 +5,9 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
 #include "FileNameLineEdit.h"
+
 #include "fileaccess.h"
+#include "Logging.h"
 
 #include <QDropEvent>
 #include <QDragEnterEvent>
@@ -16,6 +18,7 @@ void FileNameLineEdit::dropEvent(QDropEvent* event)
 {
     Q_ASSERT(event->mimeData()->hasUrls());//Debugging aid in case FileNameLineEdit::dragEnterEvent is changed to accept other types.
 
+    qCDebug(kdiffMain) << "Enter FileNameLineEdit::dropEvent";
     QList<QUrl> lst = event->mimeData()->urls();
 
     if(lst.count() > 0)
@@ -24,10 +27,15 @@ void FileNameLineEdit::dropEvent(QDropEvent* event)
             Do not use QUrl::toString() here. Sadly the Qt5 version does not permit Qt4 style
             fullydecoded conversions. It also treats empty schemes as non-local.
         */
+        qCDebug(kdiffMain) << "Recieved Drop Event";
+        qCDebug(kdiffMain) << "Url List Size: " << lst.count();
+        qCDebug(kdiffMain) << "lst[0] = " << lst[0];
         setText(FileAccess::prettyAbsPath(lst[0]));
+        qCDebug(kdiffMain) << "Set line edit text to: " << text() ;
         setFocus();
         Q_EMIT returnPressed();
     }
+    qCDebug(kdiffMain) << "Leave FileNameLineEdit::dropEvent";
 }
 
 void FileNameLineEdit::dragEnterEvent(QDragEnterEvent* e)
