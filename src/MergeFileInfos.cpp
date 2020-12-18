@@ -381,7 +381,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
 
 bool MergeFileInfos::fastFileComparison(
     FileAccess& fi1, FileAccess& fi2,
-    bool& bError, QString& status, QSharedPointer<Options> const pOptions)
+    bool& bError, QString& status, const QSharedPointer<const Options> &pOptions)
 {
     ProgressProxy pp;
     bool bEqual = false;

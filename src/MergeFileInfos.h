@@ -163,7 +163,7 @@ class MergeFileInfos
     Q_REQUIRED_RESULT bool conflictingAges() const { return m_bConflictingAges; }
 
   private:
-    bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status, QSharedPointer<Options> const pOptions);
+    bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status, const QSharedPointer<const Options> &pOptions);
     inline void setAgeA(const e_Age inAge) { m_ageA = inAge; }
     inline void setAgeB(const e_Age inAge) { m_ageB = inAge; }
     inline void setAgeC(const e_Age inAge) { m_ageC = inAge; }
