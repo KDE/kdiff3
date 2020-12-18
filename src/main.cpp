@@ -114,7 +114,7 @@ int main(int argc, char* argv[])
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("b") << QLatin1String("base"), i18n("Explicit base file. For compatibility with certain tools."), QLatin1String("file")));
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("o") << QLatin1String("output"), i18n("Output file. Implies -m. E.g.: -o newfile.txt"), QLatin1String("file")));
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("out"), i18n("Output file, again. (For compatibility with certain tools.)"), QLatin1String("file")));
-#ifdef ENABLE_AUTO
+#if ENABLE_AUTO
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("auto"), i18n("No GUI if all conflicts are auto-solvable. (Needs -o file)")));
 #else
     cmdLineParser->addOption(QCommandLineOption(QStringList() << QLatin1String("auto"), i18n("Ignored.")));
