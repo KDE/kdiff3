@@ -75,11 +75,6 @@ class FileAccess
 
     //Workaround for QUrl::isLocalFile behavoir that does not fit KDiff3's expectations.
     bool isLocal() const;
-    static bool isLocal(const QUrl& url)
-    {
-        return url.isLocalFile() || !url.isValid() || url.scheme().isEmpty();
-    }
-
     static bool isLocal(const QUrl &url) { return url.isLocalFile() || !url.isValid() || url.scheme().isEmpty(); };
 
     bool readFile(void* pDestBuffer, qint64 maxLength);
