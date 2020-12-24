@@ -3,13 +3,14 @@ Building KDiff3 requires the fallowing minimium versions:
  2)KF5 5.27+
  3)CMake 3.1
  4)ECM 1.8
+ 5)boost 1.66+
  Support compilers:
  5)MSVC 2015+, gcc 5.0+, clang 3.3+
 
 *nix:
 
 On debian based systems you needed to install the fallowing.
-gettext, qtbase5-dev, extra-cmake-modules libkf5i18n-dev, libkf5coreaddons-dev, libkf5iconthemes-dev libkf5parts-dev, libkf5doctools-dev, libkf5crash-dev, cmake, (gcc or clang)
+gettext, qtbase5-dev, extra-cmake-modules, libboost-dev, libkf5i18n-dev, libkf5coreaddons-dev, libkf5iconthemes-dev libkf5parts-dev, libkf5doctools-dev, libkf5crash-dev, cmake, (gcc or clang)
 These should aviable as part of the standard repos.
 To build KDiff3 run:
   cmake && make
