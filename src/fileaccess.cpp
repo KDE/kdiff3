@@ -294,13 +294,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
     m_fileInfo.setCaching(true);
     if(m_url.isEmpty())
     {
-        if(parent != nullptr)
-        {
-            m_url = parent->url().resolved(QUrl(filePath));
-            //Verify that the scheme doesn't change.
-            Q_ASSERT(m_url.scheme() == parent->url().scheme());
-        }
-        else
+        if(parent == nullptr)
         {
             /*
              Invalid entry we don't know the full url because KIO didn't tell us and there is no parent
@@ -310,6 +304,17 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             qCWarning(kdiffFileAccess) << i18n("Unable to determine full url. No parent specified.");
             return;
         }
+        /*
+            Don't trust QUrl::resolved it doesn't always do what kdiff3 wants.
+        */
+        m_url = parent->url();
+        if(isDir() && !m_url.path().endsWith('/'))
+            m_url.setPath(parent->url().path() + "/" + filePath);
+        else
+            m_url.setPath(parent->url().path() + filePath);
+
+        //Verify that the scheme doesn't change.
+        Q_ASSERT(m_url.scheme() == parent->url().scheme());
     }
 
     m_name = m_fileInfo.fileName();
