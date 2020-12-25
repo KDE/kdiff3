@@ -206,6 +206,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
                 break;
             case KIO::UDSEntry::UDS_NAME:
                 filePath = e.stringValue(fieldId);
+                qCDebug(kdiffFileAccess) << "filePath = " << filePath;
                 break; // During listDir the relative path is given here.
             case KIO::UDSEntry::UDS_MODIFICATION_TIME:
                 m_modificationTime = QDateTime::fromMSecsSinceEpoch(e.numberValue(fieldId));
@@ -244,6 +245,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
                 break;
             case KIO::UDSEntry::UDS_URL:
                 m_url = QUrl(e.stringValue(fieldId));
+                qCDebug(kdiffFileAccess) << "Url = " << m_url;
                 break;
             case KIO::UDSEntry::UDS_DISPLAY_NAME:
                 mDisplayName = e.stringValue(fieldId);
@@ -263,6 +265,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
     m_fileInfo.setCaching(true);
     if(m_url.isEmpty())
     {
+        qCInfo(kdiffFileAccess) << "Url not received from KIO.";
         if(Q_UNLIKELY(parent == nullptr))
         {
             /*
@@ -274,9 +277,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             return;
         }
 
-        m_url = parent->url().resolved(QUrl(filePath));
-
-        qCDebug(kdiffFileAccess) << "Resolved Url is: " << m_url;
+        qCDebug(kdiffFileAccess) << "Computed url is: " << m_url;
         //Verify that the scheme doesn't change.
         Q_ASSERT(m_url.scheme() == parent->url().scheme());
     }
@@ -887,6 +888,9 @@ void FileAccessJobHandler::slotStatResult(KJob* pJob)
     if(pJob->error() != KJob::NoError)
     {
         //pJob->uiDelegate()->showErrorMessage();
+
+        qCDebug(kdiffFileAccess) << "slotStatResult: pJob->error() = " << pJob->error();
+
         m_pFileAccess->doError();
         m_bSuccess = true;
     }
@@ -929,6 +933,7 @@ void FileAccessJobHandler::slotGetData(KJob* pJob, const QByteArray& newData)
 {
     if(pJob->error() != KJob::NoError)
     {
+        qCDebug(kdiffFileAccess) << "slotGetData: pJob->error() = " << pJob->error();
         pJob->uiDelegate()->showErrorMessage();
     }
     else
@@ -968,6 +973,7 @@ void FileAccessJobHandler::slotPutData(KIO::Job* pJob, QByteArray& data)
 {
     if(pJob->error() != KJob::NoError)
     {
+        qCDebug(kdiffFileAccess) << "slotPutData: pJob->error() = " << pJob->error();
         pJob->uiDelegate()->showErrorMessage();
     }
     else
@@ -1001,6 +1007,7 @@ void FileAccessJobHandler::slotPutJobResult(KJob* pJob)
 {
     if(pJob->error() != KJob::NoError)
     {
+        qCDebug(kdiffFileAccess) << "slotPutJobResult: pJob->error() = " << pJob->error();
         pJob->uiDelegate()->showErrorMessage();
     }
     else
@@ -1122,6 +1129,7 @@ void FileAccessJobHandler::slotSimpleJobResult(KJob* pJob)
 {
     if(pJob->error() != KJob::NoError)
     {
+        qCDebug(kdiffFileAccess) << "slotSimpleJobResult: pJob->error() = " << pJob->error();
         pJob->uiDelegate()->showErrorMessage();
     }
     else
