@@ -64,14 +64,14 @@ class FileAccess
     Q_REQUIRED_RESULT QUrl url() const;
     void setUrl(const QUrl& inUrl) { m_url = inUrl; }
 
-    //Workaround for QUrl::toDisplayString/QUrl::toString behavoir that does not fit KDiff3's expectations
+    //Workaround for QUrl::toDisplayString/QUrl::toString behavior that does not fit KDiff3's expectations
     Q_REQUIRED_RESULT QString absoluteFilePath() const;
     Q_REQUIRED_RESULT static QString prettyAbsPath(const QUrl& url)
     {
         return isLocal(url) ? QFileInfo(url.toString(QUrl::DecodeReserved)).absoluteFilePath() : url.toDisplayString();
     }
 
-    //Workaround for QUrl::isLocalFile behavoir that does not fit KDiff3's expectations.
+    //Workaround for QUrl::isLocalFile behavior that does not fit KDiff3's expectations.
     Q_REQUIRED_RESULT bool isLocal() const;
     Q_REQUIRED_RESULT static bool isLocal(const QUrl& url)
     {

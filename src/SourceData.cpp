@@ -449,7 +449,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
             bool bSuccess = errorReason.isEmpty() && m_normalData.readFile(fileNameOut1);
             if(fileInSize > 0 && (!bSuccess || m_normalData.byteCount() == 0))
             {
-                //Don't fail the preprocessor command if the file cann't be read.
+                //Don't fail the preprocessor command if the file can't be read.
                 if(!m_normalData.readFile(faIn))
                 {
                     mErrors.append(faIn.getStatusText());
@@ -615,7 +615,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         ts >> curChar;
 
         quint32 firstNonwhite = 0;
-        //QTextStream::readLine doesn't tell us abount line endings.
+        //QTextStream::readLine doesn't tell us about line endings.
         while(curChar != '\n' && curChar != '\r')
         {
             if(curChar.isNull() || curChar.isNonCharacter())

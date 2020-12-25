@@ -153,7 +153,7 @@ void FileAccess::addPath(const QString& txt)
     {
         QUrl url = m_url.adjusted(QUrl::StripTrailingSlash);
         url.setPath(url.path() + '/' + txt);
-        setFile(url); // reinitialise
+        setFile(url); // reinitialize
     }
     else
     {
@@ -224,7 +224,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             case KIO::UDSEntry::UDS_FILE_TYPE:
                 /*
                     According to KIO docs UDS_LINK_DEST not S_ISLNK should be used to determine if the url is a symlink.
-                    UDS_FILE_TYPE is explictitly stated to be the type of the linked file not the link itself.
+                    UDS_FILE_TYPE is explicitly stated to be the type of the linked file not the link itself.
                 */
 
                 m_bSymLink = e.isLink();
@@ -263,7 +263,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
     m_fileInfo.setCaching(true);
     if(m_url.isEmpty())
     {
-        if(parent == nullptr)
+        if(Q_UNLIKELY(parent == nullptr))
         {
             /*
              Invalid entry we don't know the full url because KIO didn't tell us and there is no parent
@@ -273,8 +273,10 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             qCWarning(kdiffFileAccess) << i18n("Unable to determine full url. No parent specified.");
             return;
         }
-        
+
         m_url = parent->url().resolved(QUrl(filePath));
+
+        qCDebug(kdiffFileAccess) << "Resolved Url is: " << m_url;
         //Verify that the scheme doesn't change.
         Q_ASSERT(m_url.scheme() == parent->url().scheme());
     }
@@ -312,7 +314,7 @@ bool FileAccess::isNormal() const
         Speed is important here isNormal is called for every file during directory
         comparison. It can therefor have great impact on overall performance.
 
-        We alse need to in sure that we don't keep looking indefinatly when following
+        We also need to in sure that we don't keep looking indefinitely when following
         links that point to links. Therefore we hard cap at 15 such links in a chain
         and make sure we don't cycle back to something we already saw.
     */
@@ -326,7 +328,7 @@ bool FileAccess::isNormal() const
             Catch local links to special files. '/dev' has many of these.
         */
         bool result = target.isSymLink() || target.isNormal();
-        // mVistited has done its job and should be reset here.
+        // mVisited has done its job and should be reset here.
         mVisited = false;
         mDepth--;
 
@@ -390,7 +392,7 @@ QUrl FileAccess::url() const
     return url;
 }
 
-//Workaround for QUrl::isLocalFile behavoir that does not fit KDiff3's expectations.
+//Workaround for QUrl::isLocalFile behavior that does not fit KDiff3's expectations.
 bool FileAccess::isLocal() const
 {
     return m_url.isLocalFile() || !m_url.isValid() || m_url.scheme().isEmpty();
@@ -465,7 +467,7 @@ FileAccess* FileAccess::parent() const
     return m_pParent;
 }
 
-//Workaround for QUrl::toDisplayString/QUrl::toString behavoir that does not fit KDiff3's expectations
+//Workaround for QUrl::toDisplayString/QUrl::toString behavior that does not fit KDiff3's expectations
 QString FileAccess::prettyAbsPath() const
 {
     return isLocal() ? absoluteFilePath() : m_url.toDisplayString();
@@ -1186,8 +1188,8 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
         if(fiList.isEmpty())
         {
             /*
-                Sadly Qt provides no error information making this case ambigious.
-                A readablity check is the best we can do.
+                Sadly Qt provides no error information making this case ambiguous.
+                A readability check is the best we can do.
             */
             m_bSuccess = dir.isReadable();
         }

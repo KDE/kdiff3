@@ -27,7 +27,7 @@ void FileNameLineEdit::dropEvent(QDropEvent* event)
             Do not use QUrl::toString() here. Sadly the Qt5 version does not permit Qt4 style
             fullydecoded conversions. It also treats empty schemes as non-local.
         */
-        qCDebug(kdiffMain) << "Recieved Drop Event";
+        qCDebug(kdiffMain) << "Received Drop Event";
         qCDebug(kdiffMain) << "Url List Size: " << lst.count();
         qCDebug(kdiffMain) << "lst[0] = " << lst[0];
         setText(FileAccess::prettyAbsPath(lst[0]));
