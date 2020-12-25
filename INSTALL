@@ -1,21 +1,21 @@
-Building KDiff3 requires the fallowing minimium versions:
+Building KDiff3 requires the fallowing minimum versions:
  1)Qt 5.6 or later
  2)KF5 5.27+
  3)CMake 3.1
  4)ECM 1.8
  5)boost 1.66+
  Support compilers:
- 5)MSVC 2015+, gcc 5.0+, clang 3.3+
+ 6)MSVC 2015+, gcc 5.0+, clang 3.3+
 
 *nix:
 
 On debian based systems you needed to install the fallowing.
 gettext, qtbase5-dev, extra-cmake-modules, libboost-dev, libkf5i18n-dev, libkf5coreaddons-dev, libkf5iconthemes-dev libkf5parts-dev, libkf5doctools-dev, libkf5crash-dev, cmake, (gcc or clang)
-These should aviable as part of the standard repos.
+These should available as part of the standard repos.
 To build KDiff3 run:
   cmake && make
   sudo make install
-cmake will automacticly verify that the requirements are met before attempting to build.
+cmake will automatically verify that the requirements are met before attempting to build.
 
 Windows:
 
@@ -24,9 +24,9 @@ tested.
 
 Craft requires python 3.6 or later to be installed it can be downloaded here:
 https://www.python.org/downloads/windows/
-This should be automacticly installed by craft.
+This should be automatically installed by craft.
 
-You will also need to start a power shell envirionment as administrator instruction for that are at:
+You will also need to start a power shell environment as administrator instruction for that are at:
 https://docs.microsoft.com/en-us/powershell/scripting/getting-started/starting-windows-powershell?view=powershell-6
 
 On Windows 10 this will be the default shell.
@@ -34,7 +34,7 @@ Run the following:
 1)Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 2)iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/KDE/craft/master/setup/install_craft.ps1'))
 
-You may also have to exempt your craft directory from virus scans as these can interefer with the build process.
+You may also have to exempt your craft directory from virus scans as these can interfere with the build process.
 
 1)cd to your craft root
 Run:
@@ -44,7 +44,7 @@ Run:
 If you what to build 1.8x than use:
 4) craft --target 1.8 kdiff3
 
-Otherwise craft will use master which is the developement branch and therefor more likely to experiance breakage.
+Otherwise craft will use master which is the development branch and therefor more likely to experience breakage.
 
 At this point you can run kdiff3 itself via the following:
 cb kdiff3
