@@ -276,7 +276,15 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             qCWarning(kdiffFileAccess) << i18n("Unable to determine full url. No parent specified.");
             return;
         }
-
+        /*
+            Don't trust QUrl::resolved it doesn't always do what kdiff3 wants.
+        */
+        m_url = parent->url();
+        if(isDir() && !m_url.path().endsWith('/'))
+            m_url.setPath(parent->url().path() + "/" + filePath);
+        else
+            m_url.setPath(parent->url().path() + filePath);
+        
         qCDebug(kdiffFileAccess) << "Computed url is: " << m_url;
         //Verify that the scheme doesn't change.
         Q_ASSERT(m_url.scheme() == parent->url().scheme());
