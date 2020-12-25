@@ -323,7 +323,7 @@ bool FileAccess::isNormal() const
         Speed is important here isNormal is called for every file during directory
         comparison. It can therefor have great impact on overall performance.
 
-        We also need to in sure that we don't keep looking indefinitely when following
+        We also need to insure that we don't keep looking indefinitely when following
         links that point to links. Therefore we hard cap at 15 such links in a chain
         and make sure we don't cycle back to something we already saw.
     */
@@ -339,7 +339,7 @@ bool FileAccess::isNormal() const
         bool result = target.isSymLink() || target.isNormal();
         // mVisited has done its job and should be reset here.
         mVisited = false;
-        mDepth--;
+        --mDepth;
 
         return result;
     }
