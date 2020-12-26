@@ -783,7 +783,7 @@ QString FileAccess::cleanPath(const QString& path) // static
     FileAccess fa(path);
     if(fa.isLocal())
     {
-        return QDir().cleanPath(path);
+        return QDir::cleanPath(path);
     }
     else
     {

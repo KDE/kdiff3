@@ -182,7 +182,7 @@ int main(int argc, char* argv[])
 
     //p->setWindowState( p->windowState() | Qt::WindowActive ); // Patch for ubuntu: window not active on startup
     //app.installEventFilter( new CFilter );
-    int retVal = app.exec();
+    int retVal = QApplication::exec();
     /*  if (QApplication::clipboard()->text().size() == 0)
      QApplication::clipboard()->clear(); // Patch for Ubuntu: Fix issue with Qt clipboard*/
     return retVal;

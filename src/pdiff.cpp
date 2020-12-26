@@ -278,7 +278,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, boo
             pp.step();
             pp.setInformation(i18n("Linediff: B <-> C"));
             if(m_sd2.hasData() && m_sd3.hasData() && m_sd2.isText() && m_sd3.isText())
-            pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(B, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
+              pTotalDiffStatus->bTextBEqC = m_diff3LineList.fineDiff(B, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay());
             pp.step();
             pp.setInformation(i18n("Linediff: A <-> C"));
             if(m_sd1.hasData() && m_sd3.hasData() && m_sd1.isText() && m_sd3.isText())
