@@ -180,7 +180,7 @@ void FileAccess::addPath(const QString& txt)
     {
         QUrl url = m_url.adjusted(QUrl::StripTrailingSlash);
         url.setPath(url.path() + '/' + txt);
-        setFile(url); // reinitialise
+        setFile(url); // reinitialize
     }
     else
     {
@@ -255,7 +255,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             {
                 /*
                     According to KIO docs UDS_LINK_DEST not S_ISLNK should be used to determine if the url is a symlink.
-                    UDS_FILE_TYPE is explictitly stated to be the type of the linked file not the link itself.
+                    UDS_FILE_TYPE is explicitly stated to be the type of the linked file not the link itself.
                 */
                 if(!e.isLink())
                 {
@@ -398,7 +398,7 @@ QUrl FileAccess::url() const
     return url;
 }
 
-//Workaround for QUrl::isLocalFile behavoir that does not fit KDiff3's expectations.
+//Workaround for QUrl::isLocalFile behavior that does not fit KDiff3's expectations.
 bool FileAccess::isLocal() const
 {
     return m_url.isLocalFile() || !m_url.isValid() || m_url.scheme().isEmpty();
@@ -473,7 +473,7 @@ FileAccess* FileAccess::parent() const
     return m_pParent;
 }
 
-//Workaround for QUrl::toDisplayString/QUrl::toString behavoir that does not fit KDiff3's expectations
+//Workaround for QUrl::toDisplayString/QUrl::toString behavior that does not fit KDiff3's expectations
 QString FileAccess::prettyAbsPath() const
 {
     return isLocal() ? absoluteFilePath() : m_url.toDisplayString();
@@ -1191,8 +1191,8 @@ bool FileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, b
         if(fiList.isEmpty())
         {
             /*
-                Sadly Qt provides no error information making this case ambigious.
-                A readablity check is the best we can do.
+                Sadly Qt provides no error information making this case ambiguous.
+                A readability check is the best we can do.
             */
             m_bSuccess = dir.isReadable();
         }
