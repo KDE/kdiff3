@@ -786,8 +786,13 @@ void FileAccess::setStatusText(const QString& s)
 
 QString FileAccess::cleanPath(const QString& path) // static
 {
-    FileAccess fa(path);
-    if(fa.isLocal())
+    /*
+        Tell Qt to treat the supplied path as user input otherwise it will not make usefull decisions
+        about how to convert from the possibly local or remote "path" string to QUrl.
+    */
+    QUrl url = QUrl::fromUserInput(path, QString(), QUrl::AssumeLocalFile);
+
+    if( FileAccess::isLocal(url) )
     {
         return QDir::cleanPath(path);
     }
