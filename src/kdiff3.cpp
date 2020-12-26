@@ -204,7 +204,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     m_sd2->setOptions(m_pOptions);
     m_sd3->setOptions(m_pOptions);
 
-#if ENABLE_AUTO
+#ifdef ENABLE_AUTO
     m_bAutoFlag = hasArgs && KDiff3Shell::getParser()->isSet("auto") && !KDiff3Shell::getParser()->isSet("noauto");
 #else
     m_bAutoFlag = false;
