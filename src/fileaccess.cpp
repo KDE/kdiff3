@@ -53,6 +53,7 @@ void FileAccess::reset()
 */
 void FileAccess::setFile(FileAccess* pParent, const QFileInfo& fi)
 {
+    Q_ASSERT(pParent != this);
     reset();
 
     m_fileInfo = fi;
@@ -199,7 +200,9 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
     const QVector<uint> fields = e.fields();
     QString filePath;
 
+    Q_ASSERT(this != parent);
     m_pParent = parent;
+    
     for(const uint fieldId: fields)
     {
         switch(fieldId)
@@ -473,6 +476,7 @@ QString FileAccess::fileRelPath() const
 
 FileAccess* FileAccess::parent() const
 {
+    Q_ASSERT(m_pParent != this);
     return m_pParent;
 }
 
@@ -913,7 +917,7 @@ void FileAccessJobHandler::slotStatResult(KJob* pJob)
 
         const KIO::UDSEntry e = static_cast<KIO::StatJob*>(pJob)->statResult();
 
-        m_pFileAccess->setFromUdsEntry(e, m_pFileAccess);
+        m_pFileAccess->setFromUdsEntry(e, m_pFileAccess->parent());
     }
 }
 
