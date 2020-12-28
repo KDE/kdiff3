@@ -116,11 +116,10 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     {
         m_name = m_url.fileName();
         FileAccessJobHandler jh(this);            // A friend, which writes to the parameters of this class!
-        jh.stat(2 /*all details*/, bWantToWrite); // returns bSuccess, ignored
-
-        m_bValidData = true; // After running stat() the variables are initialised
-                             // and valid even if the file doesn't exist and the stat
-                             // query failed.
+        if(jh.stat(2 /*all details*/, bWantToWrite))
+            m_bValidData = true; // After running stat() the variables are initialised
+                                // and valid even if the file doesn't exist and the stat
+                                // query failed.
     }
 }
 
@@ -842,6 +841,7 @@ bool FileAccess::createBackup(const QString& bakExtension)
 
 void FileAccess::doError()
 {
+    m_bValidData = true;
     m_bExists = false;
 }
 
@@ -910,11 +910,20 @@ bool FileAccessJobHandler::stat(short detail, bool bWantToWrite)
 
 void FileAccessJobHandler::slotStatResult(KJob* pJob)
 {
-    if(pJob->error())
+    int err = pJob->error();
+    if(err != KJob::NoError)
     {
-        //pJob->uiDelegate()->showErrorMessage();
-        m_pFileAccess->doError();
-        m_bSuccess = true;
+        if(err != KIO::ERR_DOES_NOT_EXIST)
+        {
+            pJob->uiDelegate()->showErrorMessage();
+            m_bSuccess = false;
+            m_pFileAccess->reset();
+        }
+        else
+        {
+            m_pFileAccess->doError();
+            m_bSuccess = true;
+        }
     }
     else
     {
