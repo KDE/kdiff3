@@ -181,7 +181,7 @@ void FileAccess::addPath(const QString& txt, bool reinit)
         QUrl url = m_url.adjusted(QUrl::StripTrailingSlash);
         url.setPath(url.path() + '/' + txt);
         m_url = url;
-        
+
         if(reinit)
             setFile(url); // reinitialize
     }
@@ -463,9 +463,31 @@ QString FileAccess::fileName(bool needTmp) const
 
 QString FileAccess::fileRelPath() const
 {
-    QString path = m_baseDir.relativeFilePath(m_fileInfo.absoluteFilePath());
+    QString path;
 
-    return path;
+    if(isLocal())
+    {
+        path = m_baseDir.relativeFilePath(m_fileInfo.absoluteFilePath());
+
+        return path;
+    }
+    else
+    {
+        //Stop right before the root directory
+        if(parent() == nullptr) return QString();
+
+        const FileAccess *curEntry = this;
+        path = fileName();
+        //Avoid recursing to FileAccess::fileRelPath or we can get very large stacks.
+        curEntry = curEntry->parent();
+        while(curEntry != nullptr)
+        {
+            if(curEntry->parent())
+                path.prepend(curEntry->fileName() + "/");
+            curEntry= curEntry->parent();
+        }
+        return path;
+    }    
 }
 
 FileAccess* FileAccess::parent() const
