@@ -174,13 +174,16 @@ void FileAccess::loadData()
     m_bValidData = true;
 }
 
-void FileAccess::addPath(const QString& txt)
+void FileAccess::addPath(const QString& txt, bool reinit)
 {
     if(!isLocal() && m_url.isValid())
     {
         QUrl url = m_url.adjusted(QUrl::StripTrailingSlash);
         url.setPath(url.path() + '/' + txt);
-        setFile(url); // reinitialize
+        m_url = url;
+        
+        if(reinit)
+            setFile(url); // reinitialize
     }
     else
     {
@@ -308,10 +311,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
             Don't trust QUrl::resolved it doesn't always do what kdiff3 wants.
         */
         m_url = parent->url();
-        if(isDir() && !m_url.path().endsWith('/'))
-            m_url.setPath(parent->url().path() + "/" + filePath);
-        else
-            m_url.setPath(parent->url().path() + filePath);
+        addPath(filePath, false);
 
         //Verify that the scheme doesn't change.
         Q_ASSERT(m_url.scheme() == parent->url().scheme());

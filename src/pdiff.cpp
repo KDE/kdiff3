@@ -1709,7 +1709,7 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
     }
     else
     {
-        //don't leave proccessing incomplete if m_diff3LineList isEmpty as when an error occures during reading.
+        //don't leave proccessing incomplete if m_diff3LineList isEmpty as when an error occurs during reading.
         slotFinishRecalcWordWrap(visibleTextWidthForPrinting);
     }
 }

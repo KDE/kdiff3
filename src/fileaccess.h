@@ -98,7 +98,7 @@ class FileAccess
     bool rename(const FileAccess&);
     static bool symLink(const QString& linkTarget, const QString& linkLocation);
 
-    void addPath(const QString& txt);
+    void addPath(const QString& txt, bool reinit=true);
     QString getStatusText() const;
 
     FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
