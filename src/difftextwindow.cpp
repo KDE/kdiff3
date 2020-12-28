@@ -942,7 +942,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
 
 /*
     Don't try to use invalid rect to block drawing of lines based on there apparent horizontal dementions.
-    This does not always work for very long lines being scrolled horzontally. (Causes blanking of diff text area)
+    This does not always work for very long lines being scrolled horizontally. (Causes blanking of diff text area)
 */
 void DiffTextWindowData::writeLine(
     RLPainter& p,

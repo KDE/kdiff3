@@ -241,7 +241,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
                 m_bEqualAC = diffStatus().isBinaryEqualAC();
             }
 
-            //Limit size of error list in memmory.
+            //Limit size of error list in memory.
             if(errors.size() >= 30)
             {
                 //Bail out something is very wrong.
