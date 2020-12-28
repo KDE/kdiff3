@@ -17,7 +17,9 @@
 #include <cstdlib>
 #include <sys/stat.h>
 #include <sys/types.h>
+#ifndef Q_OS_WIN
 #include <unistd.h>
+#endif
 #include <vector>
 
 #include <QDir>
