@@ -17,6 +17,7 @@
 #include <cstdlib>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <unistd.h>
 #include <vector>
 
 #include <QDir>
@@ -25,6 +26,7 @@
 #include <QRegExp>
 #include <QTemporaryFile>
 
+#ifndef AUTOTEST
 #include <KIO/CopyJob>
 #include <KIO/Job>
 #include <KLocalizedString>
@@ -32,6 +34,9 @@
 #include <kio/global.h>
 #include <kio/jobclasses.h>
 #include <kio/jobuidelegate.h>
+#else
+#include <KLocalizedString>
+#endif
 
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
@@ -165,6 +170,7 @@ void FileAccess::addPath(const QString& txt, bool reinit)
     }
 }
 
+#ifndef AUTOTEST
 /*     Filetype:
        S_IFMT     0170000   bitmask for the file type bitfields
        S_IFSOCK   0140000   socket
@@ -313,6 +319,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
     m_bHidden = m_name[0] == '.';
 #endif
 }
+#endif
 
 bool FileAccess::isValid() const
 {
@@ -867,7 +874,9 @@ void FileAccess::filterList(t_DirectoryList* pDirList, const QString& filePatter
     CvsIgnoreList cvsIgnoreList;
     if(bUseCvsIgnore)
     {
+        #ifndef AUTOTEST
         cvsIgnoreList.init(*this, pDirList);
+        #endif
     }
     //TODO: Ask os for this information don't hard code it.
 #if defined(Q_OS_WIN)
@@ -901,6 +910,7 @@ void FileAccess::filterList(t_DirectoryList* pDirList, const QString& filePatter
     }
 }
 
+#ifndef AUTOTEST
 FileAccessJobHandler::FileAccessJobHandler(FileAccess* pFileAccess)
 {
     m_pFileAccess = pFileAccess;
@@ -1329,5 +1339,5 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
         }
     }
 }
-
+#endif
 //#include "fileaccess.moc"

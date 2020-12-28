@@ -17,8 +17,10 @@
 #include <QTemporaryFile>
 #include <QUrl>
 
+#ifndef AUTOTEST
 #include <KIO/UDSEntry>
 #include <KJob>
+#endif
 
 #include <type_traits>
 
@@ -118,9 +120,12 @@ class FileAccess
 
     const QString& errorString() const;
 
-  private:
+    //These should be exposed for auto tests
+  protected:
+    #ifndef AUTOTEST
     friend class FileAccessJobHandler;
     void setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent);
+    #endif
     void setStatusText(const QString& s);
 
     void reset();
@@ -155,6 +160,8 @@ class FileAccess
     bool m_bHidden = false;
 
     QString m_statusText; // Might contain an error string, when the last operation didn't succeed.
+
+  private:
     /*
     These two variables are used to prevent infinate/long running loops when a symlinks true target
     must be found. isNormal is right now the only place this is needed.
@@ -173,6 +180,7 @@ class t_DirectoryList : public std::list<FileAccess>
 {
 };
 
+#ifndef AUTOTEST
 class FileAccessJobHandler : public QObject
 {
     Q_OBJECT
@@ -222,5 +230,26 @@ class FileAccessJobHandler : public QObject
 
     void slotListDirProcessNewEntries(KIO::Job*, const KIO::UDSEntryList& l);
 };
+#else
+class FileAccessJobHandler : public QObject
+{
+    Q_OBJECT
+  public:
+    explicit FileAccessJobHandler(FileAccess* pFileAccess){Q_UNUSED(pFileAccess)};
+
+    bool get(void* pDestBuffer, long maxLength){return true;};
+    bool put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume = false, int permissions = -1){return true;};
+    bool stat(short detailLevel = 2, bool bWantToWrite = false){return true;};
+    bool copyFile(const QString& dest){return true;};
+    bool rename(const FileAccess& dest){return true;};
+    bool listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
+                 const QString& filePattern, const QString& fileAntiPattern,
+                 const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore){return true;};
+    bool mkDir(const QString& dirName){return true;};
+    bool rmDir(const QString& dirName){return true;};
+    bool removeFile(const QUrl& fileName){return true;};
+    bool symLink(const QUrl& linkTarget, const QUrl& linkLocation) { return true;};
+};
+#endif
 
 #endif

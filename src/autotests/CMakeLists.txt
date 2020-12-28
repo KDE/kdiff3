@@ -18,6 +18,11 @@ ecm_add_test(CvsIgnorelist.cpp ../cvsignorelist.cpp
     LINK_LIBRARIES Qt5::Test
 )
 
+ecm_add_test(FileAccessTest.cpp ../fileaccess.cpp ../Utils.cpp ../progress.cpp ../cvsignorelist.cpp
+    TEST_NAME "fileaccesstest"
+    LINK_LIBRARIES Qt5::Gui Qt5::Widgets Qt5::Test KF5::KIOCore KF5::I18n
+)
+
 ecm_add_test(combinertest.cpp
     TEST_NAME "combinertest"
     LINK_LIBRARIES Qt5::Test
