@@ -4,6 +4,8 @@
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
+#ifndef FILEACCESS_H
+
 #ifndef MOCIGNOREFILE_H
 #define MOCIGNOREFILE_H
 
@@ -42,3 +44,4 @@ class MocIgnoreFile
 };
 
 #endif
+#endif // !FILEACCESS_H
