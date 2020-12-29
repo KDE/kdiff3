@@ -278,7 +278,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
         }
         if(bError)
         {
-            //Limit size of error list in memmory.
+            //Limit size of error list in memory.
             if(errors.size() < 30)
                 errors.append(eqStatus);
             return false;
