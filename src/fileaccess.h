@@ -237,18 +237,18 @@ class FileAccessJobHandler : public QObject
   public:
     explicit FileAccessJobHandler(FileAccess* pFileAccess){Q_UNUSED(pFileAccess)};
 
-    bool get(void* pDestBuffer, long maxLength){return true;};
-    bool put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume = false, int permissions = -1){return true;};
-    bool stat(short detailLevel = 2, bool bWantToWrite = false){return true;};
-    bool copyFile(const QString& dest){return true;};
-    bool rename(const FileAccess& dest){return true;};
-    bool listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
-                 const QString& filePattern, const QString& fileAntiPattern,
-                 const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore){return true;};
-    bool mkDir(const QString& dirName){return true;};
-    bool rmDir(const QString& dirName){return true;};
-    bool removeFile(const QUrl& fileName){return true;};
-    bool symLink(const QUrl& linkTarget, const QUrl& linkLocation) { return true;};
+    bool get(void*  /*pDestBuffer*/, long  /*maxLength*/){return true;};
+    bool put(const void*  /*pSrcBuffer*/, long  /*maxLength*/, bool  /*bOverwrite*/, bool  /*bResume*/ = false, int  /*permissions*/ = -1){return true;};
+    bool stat(short  /*detailLevel*/ = 2, bool  /*bWantToWrite*/ = false){return true;};
+    bool copyFile(const QString&  /*dest*/){return true;};
+    bool rename(const FileAccess&  /*dest*/){return true;};
+    bool listDir(t_DirectoryList*  /*pDirList*/, bool  /*bRecursive*/, bool  /*bFindHidden*/,
+                 const QString&  /*filePattern*/, const QString&  /*fileAntiPattern*/,
+                 const QString&  /*dirAntiPattern*/, bool  /*bFollowDirLinks*/, bool  /*bUseCvsIgnore*/){return true;};
+    bool mkDir(const QString&  /*dirName*/){return true;};
+    bool rmDir(const QString&  /*dirName*/){return true;};
+    bool removeFile(const QUrl&  /*fileName*/){return true;};
+    bool symLink(const QUrl&  /*linkTarget*/, const QUrl&  /*linkLocation*/) { return true;};
 };
 #endif
 
