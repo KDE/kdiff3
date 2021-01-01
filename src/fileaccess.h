@@ -9,6 +9,8 @@
 #ifndef FILEACCESS_H
 #define FILEACCESS_H
 
+#include <type_traits>
+
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
@@ -21,8 +23,6 @@
 #include <KIO/UDSEntry>
 #include <KJob>
 #endif
-
-#include <type_traits>
 
 namespace KIO {
 class Job;
