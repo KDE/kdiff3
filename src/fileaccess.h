@@ -170,7 +170,6 @@ class FileAccess
     */
     mutable bool mVisited = false;
     mutable quint32 mDepth = 0;
-
 };
 
 static_assert(std::is_move_assignable<FileAccess>::value, "FileAccess must be move assignable.");
