@@ -171,9 +171,13 @@ class FileAccess
     mutable bool mVisited = false;
     mutable quint32 mDepth = 0;
 };
-
+/*
+ FileAccess objects should be copy and move assignable.
+  Used a few places in KDiff3 itself.
+  Also used in std::list<FileAccess>
+*/
+static_assert(std::is_copy_assignable<FileAccess>::value, "FileAccess must be copy assignable.");
 static_assert(std::is_move_assignable<FileAccess>::value, "FileAccess must be move assignable.");
-static_assert(std::is_move_constructible<FileAccess>::value, "FileAccess must be move constructable.");
 
 class t_DirectoryList : public std::list<FileAccess>
 {
