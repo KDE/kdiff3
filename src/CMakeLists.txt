@@ -16,6 +16,7 @@ set(kdiff3part_PART_SRCS
    optiondialog.cpp
    mergeresultwindow.cpp
    fileaccess.cpp
+   FileAccessJobHandler.cpp
    gnudiff_analyze.cpp
    gnudiff_io.cpp
    gnudiff_xmalloc.cpp

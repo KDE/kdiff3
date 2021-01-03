@@ -9,6 +9,7 @@
 #include <QTest>
 #include <qglobal.h>
 
+#include "../FileAccessJobHandler.h"
 #include "../fileaccess.h"
 
 class FileAccessMoc: public FileAccess
