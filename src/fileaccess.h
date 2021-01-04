@@ -24,32 +24,37 @@
 #endif
 
 class t_DirectoryList;
-
+/*
+  Defining a function as virtual in FileAccess is intended to allow testing sub classes to be written
+  more easily. This way the test can use a moc class that emulates the needed conditions with no
+  actual file being present. This would otherwise be a technical and logistical nightmare.
+*/
 class FileAccess
 {
   public:
     FileAccess() = default;
+    virtual ~FileAccess() = default;
     explicit FileAccess(const QString& name, bool bWantToWrite = false); // name: local file or dirname or url (when supported)
 
     explicit FileAccess(const QUrl& name, bool bWantToWrite = false); // name: local file or dirname or url (when supported)
-    void setFile(const QString& name, bool bWantToWrite = false);
-    void setFile(const QUrl& url, bool bWantToWrite = false);
-    void setFile(FileAccess* pParent, const QFileInfo& fi);
+    virtual void setFile(const QString& name, bool bWantToWrite = false);
+    virtual void setFile(const QUrl& url, bool bWantToWrite = false);
+    virtual void setFile(FileAccess* pParent, const QFileInfo& fi);
 
-    void loadData();
+    virtual void loadData();
 
     Q_REQUIRED_RESULT bool isNormal() const;
     Q_REQUIRED_RESULT bool isValid() const;
-    Q_REQUIRED_RESULT bool isFile() const;
-    Q_REQUIRED_RESULT bool isDir() const;
-    Q_REQUIRED_RESULT bool isSymLink() const;
-    Q_REQUIRED_RESULT bool exists() const;
-    Q_REQUIRED_RESULT qint64 size() const;     // Size as returned by stat().
-    Q_REQUIRED_RESULT qint64 sizeForReading(); // If the size can't be determined by stat() then the file is copied to a local temp file.
-    Q_REQUIRED_RESULT bool isReadable() const;
-    Q_REQUIRED_RESULT bool isWritable() const;
-    Q_REQUIRED_RESULT bool isExecutable() const;
-    Q_REQUIRED_RESULT bool isHidden() const;
+    Q_REQUIRED_RESULT virtual bool isFile() const;
+    Q_REQUIRED_RESULT virtual bool isDir() const;
+    Q_REQUIRED_RESULT virtual bool isSymLink() const;
+    Q_REQUIRED_RESULT virtual bool exists() const;
+    Q_REQUIRED_RESULT virtual qint64 size() const;     // Size as returned by stat().
+    Q_REQUIRED_RESULT virtual qint64 sizeForReading(); // If the size can't be determined by stat() then the file is copied to a local temp file.
+    Q_REQUIRED_RESULT virtual bool isReadable() const;
+    Q_REQUIRED_RESULT virtual bool isWritable() const;
+    Q_REQUIRED_RESULT virtual bool isExecutable() const;
+    Q_REQUIRED_RESULT virtual bool isHidden() const;
     Q_REQUIRED_RESULT QString readLink() const;
 
     Q_REQUIRED_RESULT QDateTime lastModified() const;
@@ -75,16 +80,16 @@ class FileAccess
         return url.isLocalFile() || !url.isValid() || url.scheme().isEmpty();
     }
 
-    bool readFile(void* pDestBuffer, qint64 maxLength);
-    bool writeFile(const void* pSrcBuffer, qint64 length);
+    virtual bool readFile(void* pDestBuffer, qint64 maxLength);
+    virtual bool writeFile(const void* pSrcBuffer, qint64 length);
     bool listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                  const QString& filePattern, const QString& fileAntiPattern,
                  const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore);
-    bool copyFile(const QString& destUrl);
-    bool createBackup(const QString& bakExtension);
+    virtual bool copyFile(const QString& destUrl);
+    virtual bool createBackup(const QString& bakExtension);
 
     Q_REQUIRED_RESULT QString getTempName() const;
-    bool createLocalCopy();
+    virtual bool createLocalCopy();
     static void createTempFile(QTemporaryFile&);
     bool removeFile();
     static bool makeDir(const QString&);
@@ -96,7 +101,7 @@ class FileAccess
     bool rename(const FileAccess&);
     static bool symLink(const QString& linkTarget, const QString& linkLocation);
 
-    void addPath(const QString& txt, bool reinit=true);
+    virtual void addPath(const QString& txt, bool reinit=true);
     Q_REQUIRED_RESULT const QString& getStatusText() const;
 
     Q_REQUIRED_RESULT FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.

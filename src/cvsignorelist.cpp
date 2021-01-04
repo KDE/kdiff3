@@ -55,7 +55,7 @@ void CvsIgnoreList::addEntriesFromString(const QString& str)
 }
 
 /*
-    MocIgnoreFile is incapatiable with addEntriesFromFile so do nothing in AUTORUN mode
+    We don't have a real file in AUTORUN mode
 */
 void CvsIgnoreList::addEntriesFromFile(const QString& name)
 {

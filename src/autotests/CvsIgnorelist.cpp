@@ -9,6 +9,7 @@
 #include <qglobal.h>
 
 #include "../cvsignorelist.h"
+#include "MocIgnoreFile.h"
 
 class CvsIgnoreListTest : public QObject
 {
@@ -19,12 +20,18 @@ class CvsIgnoreListTest : public QObject
   private Q_SLOTS:
     void init()
     {
+        MocIgnoreFile file;
         CvsIgnoreList test;
         //sanity check defaults
         QVERIFY(test.m_exactPatterns.isEmpty());
         QVERIFY(test.m_endPatterns.isEmpty());
         QVERIFY(test.m_generalPatterns.isEmpty());
         QVERIFY(test.m_startPatterns.isEmpty());
+        //MocIgnoreFile should be emulating a readable local file.
+        QVERIFY(file.isLocal());
+        QVERIFY(file.exists());
+        QVERIFY(file.isReadable());
+        QVERIFY(file.fileName() == ".cvsignore");
     }
 
     void addEntriesFromString()

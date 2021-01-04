@@ -12,11 +12,7 @@
 #ifndef CVSIGNORELIST_H
 #define CVSIGNORELIST_H
 
-#ifndef AUTOTEST
 #include "fileaccess.h"
-#else
-#include "MocIgnoreFile.h"
-#endif
 
 #include <QString>
 #include <QStringList>
