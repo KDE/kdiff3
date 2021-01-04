@@ -273,23 +273,23 @@ class CommentParserTest : public QObject
 
         test.processLine(line);
         test.removeComment(line);
-        QVERIFY(line == correct);
-        QVERIFY(line.length() == correct.length());
+        QCOMPARE(line, correct);
+        QCOMPARE(line.length(), correct.length());
         
         test = DefaultCommentParser();
         correct = line = QLatin1String("  //int i = 8 / 8 * 3;");
 
         test.processLine(line);
         test.removeComment(line);
-        QVERIFY(line == correct);
+        QCOMPARE(line, correct);
 
         test = DefaultCommentParser();
         correct = line = QLatin1String("//  int i = 8 / 8 * 3;");
 
         test.processLine(line);
         test.removeComment(line);
-        QVERIFY(line == correct);
-        QVERIFY(line.length() == correct.length());
+        QCOMPARE(line, correct);
+        QCOMPARE(line.length(), correct.length());
 
         test = DefaultCommentParser();
         line = QLatin1String("  int i = 8 / 8 * 3;// comment");
@@ -297,8 +297,8 @@ class CommentParserTest : public QObject
 
         test.processLine(line);
         test.removeComment(line);
-        QVERIFY(line == correct);
-        QVERIFY(line.length() == correct.length());
+        QCOMPARE(line, correct);
+        QCOMPARE(line.length(), correct.length());
 
         test = DefaultCommentParser();
         line = QLatin1String("  int i = 8 / 8 * 3;/* comment");
@@ -306,14 +306,14 @@ class CommentParserTest : public QObject
 
         test.processLine(line);
         test.removeComment(line);
-        QVERIFY(line == correct);
-        QVERIFY(line.length() == correct.length());
+        QCOMPARE(line, correct);
+        QCOMPARE(line.length(), correct.length());
         
         correct = line = QLatin1String("  int i = 8 / 8 * 3;/* mot a comment");
         test.processLine(line);
         test.removeComment(line);
-        QVERIFY(line == correct);
-        QVERIFY(line.length() == correct.length());
+        QCOMPARE(line, correct);
+        QCOMPARE(line.length(), correct.length());
 
         //end comment mid-line
         line = QLatin1String("d  */ why");
@@ -321,8 +321,8 @@ class CommentParserTest : public QObject
 
         test.processLine(line);
         test.removeComment(line);
-        QVERIFY(line == correct);
-        QVERIFY(line.length() == correct.length());
+        QCOMPARE(line, correct);
+        QCOMPARE(line.length(), correct.length());
         
         test = DefaultCommentParser();
         line = QLatin1String("  int i = 8 / 8 * 3;/* comment*/");
@@ -330,16 +330,16 @@ class CommentParserTest : public QObject
 
         test.processLine(line);
         test.removeComment(line);
-        QVERIFY(line == correct);
-        QVERIFY(line.length() == correct.length());
+        QCOMPARE(line, correct);
+        QCOMPARE(line.length(), correct.length());
         
         test = DefaultCommentParser();
         correct = line = QLatin1String("  /*int i = 8 / 8 * 3;/* comment*/");
 
         test.processLine(line);
         test.removeComment(line);
-        QVERIFY(line == correct);
-        QVERIFY(line.length() == correct.length());
+        QCOMPARE(line, correct);
+        QCOMPARE(line.length(), correct.length());
 
         //line with multiple comments weird but legal c/c++
         test = DefaultCommentParser();
@@ -347,15 +347,15 @@ class CommentParserTest : public QObject
         correct = QLatin1String("  int          i = 8 / 8 * 3;            ");
         test.processLine(line);
         test.removeComment(line);
-        QVERIFY(line == correct);
-        QVERIFY(line.length() == correct.length());
+        QCOMPARE(line, correct);
+        QCOMPARE(line.length(), correct.length());
 
         //invalid in C++ should be flagged as non-comment
         test = DefaultCommentParser();
         line = correct = " */";
         test.processLine(" */");
-        QVERIFY(line == correct);
-        QVERIFY(line.length() == correct.length());
+        QCOMPARE(line, correct);
+        QCOMPARE(line.length(), correct.length());
     }
 };
 

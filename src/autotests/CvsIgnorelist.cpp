@@ -31,7 +31,7 @@ class CvsIgnoreListTest : public QObject
         QVERIFY(file.isLocal());
         QVERIFY(file.exists());
         QVERIFY(file.isReadable());
-        QVERIFY(file.fileName() == ".cvsignore");
+        QCOMPARE(file.fileName(), ".cvsignore");
     }
 
     void addEntriesFromString()

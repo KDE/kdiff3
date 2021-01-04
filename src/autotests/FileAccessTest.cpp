@@ -34,19 +34,20 @@ class FileAccessTest: public QObject
     {
         FileAccessMoc mocFile, mocRoot, mocFile2;
 
+        //Check remote url.
         mocRoot.setFileName(QLatin1String("root"));
         mocRoot.setUrl(QUrl("fish://i@0.0.0.0/root"));
-        QVERIFY(mocRoot.fileRelPath().isEmpty());
+        QCOMPARE(mocRoot.fileRelPath(), "");
 
         mocFile.setFileName(QLatin1String("x"));
         mocFile.setUrl(QUrl("fish://i@0.0.0.0/root/x"));
         mocFile.setParent(&mocRoot);
-        QVERIFY(mocFile.fileRelPath() == "x");
+        QCOMPARE(mocFile.fileRelPath(), "x");
 
         mocFile2.setFileName("y");
         mocFile2.setUrl(QUrl("fish://i@0.0.0.0/root/x/y"));
         mocFile2.setParent(&mocFile);
-        QVERIFY(mocFile2.fileRelPath() == "x/y");
+        QCOMPARE(mocFile2.fileRelPath(), "x/y");
     }
 };
 
