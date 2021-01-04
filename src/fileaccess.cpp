@@ -466,6 +466,9 @@ QString FileAccess::fileName(bool needTmp) const
 
 QString FileAccess::fileRelPath() const
 {
+#ifndef AUTOTEST
+    Q_ASSERT(m_pParent == nullptr || m_baseDir == m_pParent->m_baseDir);
+#endif
     QString path;
 
     if(isLocal())

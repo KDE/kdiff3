@@ -15,12 +15,17 @@
 class FileAccessMoc: public FileAccess
 {
   public:
-        void setParent(FileAccessMoc* parent) { m_pParent = (FileAccess*)parent;}
-        void setFileName(const QString& name) { m_name = name;}
-        void setUrl(const QUrl& url) { m_url = url; }
+    void setParent(FileAccessMoc* parent)
+    {
+        m_pParent = (FileAccess*)parent;
+        m_baseDir = parent->m_baseDir;
+    }
+    void setFileName(const QString& name) { m_name = name; }
+    void setUrl(const QUrl& url) { m_url = url; }
 
-        QString fileRelPath() const { return ((FileAccess*)this)->fileRelPath(); }
+    QString fileRelPath() const { return ((FileAccess*)this)->fileRelPath(); }
 };
+
 class FileAccessTest: public QObject
 {
     Q_OBJECT;

@@ -385,7 +385,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
     else // The input was set via setData(), probably from clipboard.
     {
         /*
-            Happens during intial startup. This means we have nothing to compare
+            Happens during initial startup. This means we have nothing to compare
         */
         if(m_tempInputFileName.isEmpty())
             return;
