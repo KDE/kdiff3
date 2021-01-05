@@ -262,9 +262,20 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
                 break;
         }
     }
+    //If this happens its a protocol bug. We can't do anything without knowing what file/folder we are working with.
+    if(Q_UNLIKELY(filePath.isEmpty()))
+    {
+        /*
+            Invalid entry we don't know the fileName because KIO didn't tell us.
+            This is a bug if it happens and should be logged. However it is a recoverable error.
+        */
+        qCCritical(kdiffFileAccess) << i18n("Unable to determine full url. No file path/name specified.");
+        return;
+    }
 
     m_fileInfo = QFileInfo(filePath);
     m_fileInfo.setCaching(true);
+    //Seems to be the norm for fish and possibly other prototcol handlers.
     if(m_url.isEmpty())
     {
         qCInfo(kdiffFileAccess) << "Url not received from KIO.";
@@ -275,7 +286,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
              node supplied.
              This is a bug if it happens and should be logged. However it is a recoverable error.
             */
-            qCWarning(kdiffFileAccess) << i18n("Unable to determine full url. No parent specified.");
+            qCCritical(kdiffFileAccess) << i18n("Unable to determine full url. No parent specified.");
             return;
         }
         /*

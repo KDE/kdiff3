@@ -67,6 +67,7 @@ void FileAccessJobHandler::slotStatResult(KJob* pJob)
         const KIO::UDSEntry e = static_cast<KIO::StatJob*>(pJob)->statResult();
 
         m_pFileAccess->setFromUdsEntry(e, m_pFileAccess->parent());
+        m_bSuccess = m_pFileAccess->isValid();
     }
 }
 
@@ -443,7 +444,7 @@ void FileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const KIO::UD
         fa.setFromUdsEntry(e, m_pFileAccess);
 
         //must be manually filtered KDE does not supply API for ignoring these.
-        if(fa.fileName() != "." && fa.fileName() != "..")
+        if(fa.fileName() != "." && fa.fileName() != ".." && fa.isValid())
         {
             m_pDirList->push_back(std::move(fa));
         }
