@@ -166,9 +166,6 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 case e_MergeDetails::eBCAddedAndEqual:   // possible conflict
                     c = m_pOptions->m_colorForConflict;
                     break;
-                default:
-                    Q_ASSERT(true);
-                    break;
             }
         }
         else if(eOverviewMode == e_OverviewMode::eOMAvsB)
