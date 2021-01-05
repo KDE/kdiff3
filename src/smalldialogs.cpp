@@ -219,7 +219,7 @@ void OpenDialog::accept()
     fixCurrentText(dialogUi.lineA);
 
     QString s = dialogUi.lineA->currentText();
-    s = QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile).toLocalFile();
+    s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
     QStringList* sl = &m_pOptions->m_recentAFiles;
     // If an item exist, remove it from the list and reinsert it at the beginning.
     sl->removeAll(s);
@@ -228,7 +228,7 @@ void OpenDialog::accept()
 
     fixCurrentText(dialogUi.lineB);
     s = dialogUi.lineB->currentText();
-    s = QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile).toLocalFile();
+    s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
     sl = &m_pOptions->m_recentBFiles;
     sl->removeAll(s);
     if(!s.isEmpty()) sl->prepend(s);
@@ -236,7 +236,7 @@ void OpenDialog::accept()
 
     fixCurrentText(dialogUi.lineC);
     s = dialogUi.lineC->currentText();
-    s = QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile).toLocalFile();
+    s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
     sl = &m_pOptions->m_recentCFiles;
     sl->removeAll(s);
     if(!s.isEmpty()) sl->prepend(s);
@@ -244,7 +244,7 @@ void OpenDialog::accept()
 
     fixCurrentText(dialogUi.lineOut);
     s = dialogUi.lineOut->currentText();
-    s = QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile).toLocalFile();
+    s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
     sl = &m_pOptions->m_recentOutputFiles;
     sl->removeAll(s);
     if(!s.isEmpty()) sl->prepend(s);

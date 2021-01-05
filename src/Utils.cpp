@@ -7,6 +7,8 @@
 */
 #include "Utils.h"
 
+#include "fileaccess.h"
+
 #include <KLocalizedString>
 
 #include <QString>
@@ -160,5 +162,21 @@ QString Utils::calcHistoryLead(const QString& s)
         return s;// Very unlikely
     
     return s.left(i);
+}
+
+/*
+    QUrl::toLocalFile does some special handling for locally visable windows network drives.
+    If QUrl::isLocal however it returns false we get an empty string back.
+*/
+QString Utils::urlToString(const QUrl &url)
+{
+    if(!FileAccess::isLocal(url))
+        return url.toString();
+
+    QString result = url.toLocalFile();
+    if(result.isEmpty())
+        return url.path();
+
+    return result;
 }
 

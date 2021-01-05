@@ -354,7 +354,7 @@ void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
 
         if(KDiff3App::shouldContinue() && !urlList.isEmpty())
         {
-            QString filename = urlList.first().toLocalFile();
+            QString filename = Utils::urlToString(urlList.first());
 
             d->sourceData->setFilename(filename);
 
