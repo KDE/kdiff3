@@ -120,6 +120,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
     int oldConflictY = -1;
     int wrapLineIdx = 0;
     Diff3LineList::const_iterator i;
+
     for(i = m_pDiff3LineList->begin(); i != m_pDiff3LineList->end();)
     {
         const Diff3Line& d3l = *i;
@@ -134,87 +135,86 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         bool bWhiteSpaceChange = false;
         //if( bConflict )  c=m_pOptions->m_colorForConflict;
         //else
-        if(eOverviewMode == e_OverviewMode::eOMNormal)
+        switch(eOverviewMode)
         {
-            switch(md)
-            {
-                case e_MergeDetails::eDefault:
-                case e_MergeDetails::eNoChange:
-                    c = m_pOptions->m_bgColor;
-                    break;
+            case e_OverviewMode::eOMNormal:
+                switch(md)
+                {
+                    case e_MergeDetails::eDefault:
+                    case e_MergeDetails::eNoChange:
+                        c = m_pOptions->m_bgColor;
+                        break;
 
-                case e_MergeDetails::eBAdded:
-                case e_MergeDetails::eBDeleted:
-                case e_MergeDetails::eBChanged:
-                    c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorB;
-                    bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::B));
-                    break;
+                    case e_MergeDetails::eBAdded:
+                    case e_MergeDetails::eBDeleted:
+                    case e_MergeDetails::eBChanged:
+                        c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorB;
+                        bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::B));
+                        break;
 
-                case e_MergeDetails::eCAdded:
-                case e_MergeDetails::eCDeleted:
-                case e_MergeDetails::eCChanged:
-                    bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::C));
-                    c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorC;
-                    break;
+                    case e_MergeDetails::eCAdded:
+                    case e_MergeDetails::eCDeleted:
+                    case e_MergeDetails::eCChanged:
+                        bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::C));
+                        c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorC;
+                        break;
 
-                case e_MergeDetails::eBCChanged:         // conflict
-                case e_MergeDetails::eBCChangedAndEqual: // possible conflict
-                case e_MergeDetails::eBCDeleted:         // possible conflict
-                case e_MergeDetails::eBChanged_CDeleted: // conflict
-                case e_MergeDetails::eCChanged_BDeleted: // conflict
-                case e_MergeDetails::eBCAdded:           // conflict
-                case e_MergeDetails::eBCAddedAndEqual:   // possible conflict
-                    c = m_pOptions->m_colorForConflict;
-                    break;
-            }
-        }
-        else if(eOverviewMode == e_OverviewMode::eOMAvsB)
-        {
-            switch(md)
-            {
-                case e_MergeDetails::eDefault:
-                case e_MergeDetails::eNoChange:
-                case e_MergeDetails::eCAdded:
-                case e_MergeDetails::eCDeleted:
-                case e_MergeDetails::eCChanged:
-                    break;
-                default:
-                    c = m_pOptions->m_colorForConflict;
-                    bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::B));
-                    break;
-            }
-        }
-        else if(eOverviewMode == e_OverviewMode::eOMAvsC)
-        {
-            switch(md)
-            {
-                case e_MergeDetails::eDefault:
-                case e_MergeDetails::eNoChange:
-                case e_MergeDetails::eBAdded:
-                case e_MergeDetails::eBDeleted:
-                case e_MergeDetails::eBChanged:
-                    break;
-                default:
-                    c = m_pOptions->m_colorForConflict;
-                    bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::C));
-                    break;
-            }
-        }
-        else if(eOverviewMode == e_OverviewMode::eOMBvsC)
-        {
-            switch(md)
-            {
-                case e_MergeDetails::eDefault:
-                case e_MergeDetails::eNoChange:
-                case e_MergeDetails::eBCChangedAndEqual:
-                case e_MergeDetails::eBCDeleted:
-                case e_MergeDetails::eBCAddedAndEqual:
-                    break;
-                default:
-                    c = m_pOptions->m_colorForConflict;
-                    bWhiteSpaceChange = d3l.isEqualBC() || (d3l.isWhiteLine(e_SrcSelector::B) && d3l.isWhiteLine(e_SrcSelector::C));
-                    break;
-            }
+                    case e_MergeDetails::eBCChanged:         // conflict
+                    case e_MergeDetails::eBCChangedAndEqual: // possible conflict
+                    case e_MergeDetails::eBCDeleted:         // possible conflict
+                    case e_MergeDetails::eBChanged_CDeleted: // conflict
+                    case e_MergeDetails::eCChanged_BDeleted: // conflict
+                    case e_MergeDetails::eBCAdded:           // conflict
+                    case e_MergeDetails::eBCAddedAndEqual:   // possible conflict
+                        c = m_pOptions->m_colorForConflict;
+                        break;
+                }
+                break;
+            case e_OverviewMode::eOMAvsB:
+                switch(md)
+                {
+                    case e_MergeDetails::eDefault:
+                    case e_MergeDetails::eNoChange:
+                    case e_MergeDetails::eCAdded:
+                    case e_MergeDetails::eCDeleted:
+                    case e_MergeDetails::eCChanged:
+                        break;
+                    default:
+                        c = m_pOptions->m_colorForConflict;
+                        bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::B));
+                        break;
+                }
+                break;
+            case e_OverviewMode::eOMAvsC:
+                switch(md)
+                {
+                    case e_MergeDetails::eDefault:
+                    case e_MergeDetails::eNoChange:
+                    case e_MergeDetails::eBAdded:
+                    case e_MergeDetails::eBDeleted:
+                    case e_MergeDetails::eBChanged:
+                        break;
+                    default:
+                        c = m_pOptions->m_colorForConflict;
+                        bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::C));
+                        break;
+                }
+                break;
+            case e_OverviewMode::eOMBvsC:
+                switch(md)
+                {
+                    case e_MergeDetails::eDefault:
+                    case e_MergeDetails::eNoChange:
+                    case e_MergeDetails::eBCChangedAndEqual:
+                    case e_MergeDetails::eBCDeleted:
+                    case e_MergeDetails::eBCAddedAndEqual:
+                        break;
+                    default:
+                        c = m_pOptions->m_colorForConflict;
+                        bWhiteSpaceChange = d3l.isEqualBC() || (d3l.isWhiteLine(e_SrcSelector::B) && d3l.isWhiteLine(e_SrcSelector::C));
+                        break;
+                }
+                break;
         }
 
         int x2 = x;
