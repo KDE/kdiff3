@@ -42,7 +42,7 @@ OpenDialog::OpenDialog(
     dialogUi.setupUi(this);
     setModal(true);
     m_pOptions = pOptions;
-    //Abort if verticalLayout is not the imedient child of the dialog. This interferes with re-sizing.
+    //Abort if verticalLayout is not the immediate child of the dialog. This interferes with re-sizing.
     Q_ASSERT(dialogUi.virticalLayout->parent() == this);
 
     dialogUi.lineA->insertItems(0, m_pOptions->m_recentAFiles);
@@ -127,11 +127,11 @@ OpenDialog::OpenDialog(
         On some systems it may fail to do anything at all.
 
         This is not what we want. So manually replace the each QLineEdit object with a FileNameLineEdit.
-        This makes behavoir consitant with the main window.
+        This makes behavior consitant with the main window.
 
-        On windows this step also needed to bypasses Qt's quirky behavoir when converting from QUrl
-        to QString. Specficly % encoding is by handled differently on windows. This is explictly documented
-        as platform specfic unspecfied behavoir. Not what we need.
+        On windows this step also needed to bypasses Qt's quirky behavior when converting from QUrl
+        to QString. Specifically % encoding is by handled differently on windows. This is explicitly documented
+        as platform specfic unspecified behavior. Not what we need.
     */
     dialogUi.lineA->setLineEdit(new FileNameLineEdit(dialogUi.lineA));
     dialogUi.lineB->setLineEdit(new FileNameLineEdit(dialogUi.lineB));

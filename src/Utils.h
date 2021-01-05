@@ -24,7 +24,7 @@ class Utils{
       static QString getArguments(QString cmd, QString& program, QStringList& args);
       inline static bool isEndOfLine( QChar c ) { return c=='\n' || c=='\r' || c=='\x0b'; }
 
-      //Where posiable use QTextLayout in place of these functions especially when dealing with non-latin scripts.
+      //Where possible use QTextLayout in place of these functions especially when dealing with non-latin scripts.
       inline static int getHorizontalAdvance(const QFontMetrics &metrics, const QString& s, int len = -1)
       {
         //Warning: The Qt API used here is not accurate for some non-latin characters.
