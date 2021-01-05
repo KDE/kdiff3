@@ -53,7 +53,7 @@ void FileAccess::setFile(FileAccess* pParent, const QFileInfo& fi)
     reset();
 
     m_fileInfo = fi;
-    m_url = QUrl::fromLocalFile(m_fileInfo.filePath());
+    m_url = QUrl::fromLocalFile(m_fileInfo.absoluteFilePath());
 
     m_pParent = pParent;
     loadData();
@@ -403,16 +403,13 @@ qint64 FileAccess::size() const
 
 QUrl FileAccess::url() const
 {
-    QUrl url = m_url;
-
-    if(isLocal())
-    {
-        url = QUrl::fromLocalFile(absoluteFilePath());
-    }
-    return url;
+    return m_url;
 }
 
-//Workaround for QUrl::isLocalFile behavior that does not fit KDiff3's expectations.
+/*
+    FileAccess::isLocal() should return whether or not the m_url contains what KDiff3 considers
+    a local i.e. non-KIO path. This is not the necessarily same as what QUrl::isLocalFile thinks.
+*/
 bool FileAccess::isLocal() const
 {
     return m_url.isLocalFile() || !m_url.isValid() || m_url.scheme().isEmpty();
