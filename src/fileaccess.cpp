@@ -193,6 +193,15 @@ void FileAccess::addPath(const QString& txt, bool reinit)
        S_IWOTH    00002     others have write permission
        S_IXOTH    00001     others have execute permission
 */
+//This is what KIO uses on windows so we might as well check it.
+#ifdef Q_OS_WIN
+#define	S_IRUSR	0400	// Read by owner.
+#define	S_IWUSR	0200	// Write by owner.
+#define S_IXUSR 0100    // Execute by owner.
+#define S_IROTH 00004   // others have read permission
+#define S_IWOTH 00002   // others have write permission
+#define S_IXOTH 00001   // others have execute permission
+#endif
 void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
 {
     long acc = 0;
@@ -221,12 +230,10 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
                 m_linkTarget = e.stringValue(fieldId);
                 break;
             case KIO::UDSEntry::UDS_ACCESS:
-#ifndef Q_OS_WIN
                 acc = e.numberValue(fieldId);
                 m_bReadable = (acc & S_IRUSR) != 0;
                 m_bWritable = (acc & S_IWUSR) != 0;
                 m_bExecutable = (acc & S_IXUSR) != 0;
-#endif
                 break;
             case KIO::UDSEntry::UDS_FILE_TYPE:
                 /*
