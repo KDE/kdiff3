@@ -106,7 +106,8 @@ enum class InitFlag
     loadFiles = 1,
     useCurrentEncoding = 2,
     autoSolve = 4,
-    defaultFlags = loadFiles | autoSolve
+    initGUI = 8,
+    defaultFlags = loadFiles | autoSolve | initGUI
 };
 
 Q_DECLARE_FLAGS(InitFlags, InitFlag);

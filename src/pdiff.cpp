@@ -67,7 +67,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     bool bUseCurrentEncoding = inFlags & InitFlag::useCurrentEncoding;
     bool bAutoSolve = inFlags & InitFlag::autoSolve;
 
-    bool bGUI = pTotalDiffStatus == nullptr;
+    bool bGUI = (inFlags & InitFlag::initGUI);
     if(pTotalDiffStatus == nullptr)
         pTotalDiffStatus = m_totalDiffStatus;
 
@@ -984,7 +984,7 @@ void KDiff3App::slotFileOpen2(QStringList &errors, const QString& fn1, const QSt
     if(!m_sd1->isDir())
     {
         improveFilenames();
-        mainInit(pTotalDiffStatus);
+        mainInit(pTotalDiffStatus, (InitFlags)InitFlag::defaultFlags ^ InitFlag::initGUI);
 
         if(m_bDirCompare)
         {
@@ -2035,7 +2035,7 @@ void KDiff3App::slotAddManualDiffHelp()
     {
         m_manualDiffHelpList.insertEntry(winIdx, firstLine, lastLine);
 
-        mainInit(nullptr, InitFlag::autoSolve); // Init without reload
+        mainInit(nullptr, InitFlag::autoSolve | InitFlag::initGUI); // Init without reload
         slotRefresh();
     }
 }
@@ -2043,14 +2043,14 @@ void KDiff3App::slotAddManualDiffHelp()
 void KDiff3App::slotClearManualDiffHelpList()
 {
     m_manualDiffHelpList.clear();
-    mainInit(nullptr, InitFlag::autoSolve); // Init without reload
+    mainInit(nullptr, InitFlag::autoSolve | InitFlag::initGUI); // Init without reload
     slotRefresh();
 }
 
 void KDiff3App::slotEncodingChanged(QTextCodec* c)
 {
     encodingChanged(c);
-    mainInit(nullptr, InitFlag::loadFiles | InitFlag::useCurrentEncoding | InitFlag::autoSolve); // Init with reload
+    mainInit(nullptr, InitFlag::loadFiles | InitFlag::useCurrentEncoding | InitFlag::autoSolve | InitFlag::initGUI); // Init with reload
     slotRefresh();
 }
 
