@@ -424,7 +424,7 @@ public Q_SLOTS:
 
     QWidget* m_pCornerWidget = nullptr;
 
-    TotalDiffStatus m_totalDiffStatus;
+    TotalDiffStatus *m_totalDiffStatus = new TotalDiffStatus();
 
     QSharedPointer<SourceData> m_sd1 = QSharedPointer<SourceData>::create();
     QSharedPointer<SourceData> m_sd2 = QSharedPointer<SourceData>::create();

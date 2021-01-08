@@ -69,7 +69,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
     bool bGUI = pTotalDiffStatus == nullptr;
     if(pTotalDiffStatus == nullptr)
-        pTotalDiffStatus = &m_totalDiffStatus;
+        pTotalDiffStatus = m_totalDiffStatus;
 
     //bool bPreserveCarriageReturn = m_pOptions->m_bPreserveCarriageReturn;
 
@@ -714,8 +714,7 @@ void KDiff3App::slotFinishMainInit()
     setUpdatesEnabled(true);
 
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
-    TotalDiffStatus* pTotalDiffStatus = &m_totalDiffStatus;
-
+    
     if(m_bLoadFiles)
     {
         if(bVisibleMergeResultWindow)
@@ -726,23 +725,23 @@ void KDiff3App::slotFinishMainInit()
             (m_sd1->isValid() && m_sd2->isValid() && m_sd3->isValid()))
         {
             QString totalInfo;
-            if(pTotalDiffStatus->isBinaryEqualAB() && pTotalDiffStatus->isBinaryEqualAC())
+            if(m_totalDiffStatus->isBinaryEqualAB() && m_totalDiffStatus->isBinaryEqualAC())
                 totalInfo += i18n("All input files are binary equal.");
-            else if(pTotalDiffStatus->isTextEqualAB() && pTotalDiffStatus->isTextEqualAC())
+            else if(m_totalDiffStatus->isTextEqualAB() && m_totalDiffStatus->isTextEqualAC())
                 totalInfo += i18n("All input files contain the same text, but are not binary equal.");
             else
             {
-                if(pTotalDiffStatus->isBinaryEqualAB())
+                if(m_totalDiffStatus->isBinaryEqualAB())
                     totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("B"));
-                else if(pTotalDiffStatus->isTextEqualAB())
+                else if(m_totalDiffStatus->isTextEqualAB())
                     totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", i18n("A"), i18n("B"));
-                if(pTotalDiffStatus->isBinaryEqualAC())
+                if(m_totalDiffStatus->isBinaryEqualAC())
                     totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("C"));
-                else if(pTotalDiffStatus->isTextEqualAC())
+                else if(m_totalDiffStatus->isTextEqualAC())
                     totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", i18n("A"), i18n("C"));
-                if(pTotalDiffStatus->isBinaryEqualBC())
+                if(m_totalDiffStatus->isBinaryEqualBC())
                     totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("B"), i18n("C"));
-                else if(pTotalDiffStatus->isTextEqualBC())
+                else if(m_totalDiffStatus->isTextEqualBC())
                     totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", i18n("B"), i18n("C"));
             }
 

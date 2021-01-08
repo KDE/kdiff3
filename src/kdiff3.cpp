@@ -428,18 +428,18 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         {
             QSharedPointer<SourceData> pSD = nullptr;
             if(m_sd3->isEmpty()) {
-                if(m_totalDiffStatus.isBinaryEqualAB()) {
+                if(m_totalDiffStatus->isBinaryEqualAB()) {
                     pSD = m_sd1;
                 }
             }
             else
             {
-                if(m_totalDiffStatus.isBinaryEqualBC() || m_totalDiffStatus.isBinaryEqualAB())
+                if(m_totalDiffStatus->isBinaryEqualBC() || m_totalDiffStatus->isBinaryEqualAB())
                 {
                     //if B==C (assume A is old), if A==B then C has changed
                     pSD = m_sd3;
                 }
-                else if(m_totalDiffStatus.isBinaryEqualAC())
+                else if(m_totalDiffStatus->isBinaryEqualAC())
                 {
                     pSD = m_sd2; // assuming B has changed
                 }
