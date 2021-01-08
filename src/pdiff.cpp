@@ -57,12 +57,16 @@ void addWidget(L* layout, W* widget)
     layout->addWidget(widget);
 }
 
-void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles, bool bUseCurrentEncoding, bool bAutoSolve)
+void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFlags)
 {
     ProgressProxy pp;
     QStringList errors;
     // When doing a full analysis in the directory-comparison, then the statistics-results
     // will be stored in the given TotalDiffStatus. Otherwise it will be 0.
+    bool bLoadFiles = inFlags & InitFlag::loadFiles;
+    bool bUseCurrentEncoding = inFlags & InitFlag::useCurrentEncoding;
+    bool bAutoSolve = inFlags & InitFlag::autoSolve;
+
     bool bGUI = pTotalDiffStatus == nullptr;
     if(pTotalDiffStatus == nullptr)
         pTotalDiffStatus = &m_totalDiffStatus;
@@ -2032,7 +2036,7 @@ void KDiff3App::slotAddManualDiffHelp()
     {
         m_manualDiffHelpList.insertEntry(winIdx, firstLine, lastLine);
 
-        mainInit(nullptr, false); // Init without reload
+        mainInit(nullptr, InitFlag::autoSolve); // Init without reload
         slotRefresh();
     }
 }
@@ -2040,14 +2044,14 @@ void KDiff3App::slotAddManualDiffHelp()
 void KDiff3App::slotClearManualDiffHelpList()
 {
     m_manualDiffHelpList.clear();
-    mainInit(nullptr, false); // Init without reload
+    mainInit(nullptr, InitFlag::autoSolve); // Init without reload
     slotRefresh();
 }
 
 void KDiff3App::slotEncodingChanged(QTextCodec* c)
 {
     encodingChanged(c);
-    mainInit(nullptr, true, true); // Init with reload
+    mainInit(nullptr, InitFlag::loadFiles | InitFlag::useCurrentEncoding | InitFlag::autoSolve); // Init with reload
     slotRefresh();
 }
 

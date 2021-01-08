@@ -97,6 +97,21 @@ class ReversibleScrollBar : public QScrollBar
     void valueChanged2(int);
 };
 
+/*
+  InitFlag 
+*/
+
+enum class InitFlag
+{
+    loadFiles = 1,
+    useCurrentEncoding = 2,
+    autoSolve = 4,
+    defaultFlags = loadFiles | autoSolve
+};
+
+Q_DECLARE_FLAGS(InitFlags, InitFlag);
+Q_DECLARE_OPERATORS_FOR_FLAGS(InitFlags);
+
 class KDiff3App : public QSplitter
 {
     Q_OBJECT
@@ -300,8 +315,7 @@ public Q_SLOTS:
     void initView();
 
   private:
-    void mainInit(TotalDiffStatus* pTotalDiffStatus = nullptr, bool bLoadFiles = true, bool bUseCurrentEncoding = false, bool bAutoSolve=true);
-
+    void mainInit(TotalDiffStatus* pTotalDiffStatus = nullptr, const InitFlags inFlags = InitFlag::defaultFlags);
     void mainWindowEnable(bool bEnable);
     void wheelEvent(QWheelEvent* pWheelEvent) override;
     void keyPressEvent(QKeyEvent* event) override;
