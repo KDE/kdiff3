@@ -423,7 +423,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         improveFilenames();
         m_pDirectoryMergeSplitter->hide();
 
-        mainInit();
+        mainInit(m_totalDiffStatus);
         if(m_bAutoMode)
         {
             QSharedPointer<SourceData> pSD = nullptr;

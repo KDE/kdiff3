@@ -316,7 +316,7 @@ public Q_SLOTS:
     void initView();
 
   private:
-    void mainInit(TotalDiffStatus* pTotalDiffStatus = nullptr, const InitFlags inFlags = InitFlag::defaultFlags);
+    void mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFlags = InitFlag::defaultFlags);
     void mainWindowEnable(bool bEnable);
     void wheelEvent(QWheelEvent* pWheelEvent) override;
     void keyPressEvent(QKeyEvent* event) override;

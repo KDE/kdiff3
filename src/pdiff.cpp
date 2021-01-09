@@ -71,6 +71,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     if(pTotalDiffStatus == nullptr)
         pTotalDiffStatus = m_totalDiffStatus;
 
+    Q_ASSERT(pTotalDiffStatus != nullptr);
     //bool bPreserveCarriageReturn = m_pOptions->m_bPreserveCarriageReturn;
 
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
@@ -846,7 +847,7 @@ void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
 void KDiff3App::slotFinishDrop()
 {
     raise();
-    mainInit();
+    mainInit(m_totalDiffStatus);
 }
 
 void KDiff3App::slotFileOpen()
@@ -918,7 +919,7 @@ void KDiff3App::slotFileOpen()
                 improveFilenames();
 
                 m_pDirectoryMergeSplitter->hide();
-                mainInit();
+                mainInit(m_totalDiffStatus);
 
                 if((!m_sd1->getErrors().isEmpty()) ||
                    (!m_sd2->getErrors().isEmpty()) ||
@@ -1091,7 +1092,7 @@ void KDiff3App::slotEditPaste()
 
             if(do_init)
             {
-                mainInit();
+                mainInit(m_totalDiffStatus);
             }
         }
     }
@@ -1645,7 +1646,7 @@ void KDiff3App::slotReload()
 {
     if(!shouldContinue()) return;
 
-    mainInit();
+    mainInit(m_totalDiffStatus);
 }
 
 bool KDiff3App::canContinue()
@@ -1883,7 +1884,7 @@ void KDiff3App::slotMergeCurrentFile()
                 m_bDefaultFilename = true;
             }
         }
-        mainInit();
+        mainInit(m_totalDiffStatus);
     }
 }
 
@@ -2035,7 +2036,7 @@ void KDiff3App::slotAddManualDiffHelp()
     {
         m_manualDiffHelpList.insertEntry(winIdx, firstLine, lastLine);
 
-        mainInit(nullptr, InitFlag::autoSolve | InitFlag::initGUI); // Init without reload
+        mainInit(m_totalDiffStatus, InitFlag::autoSolve | InitFlag::initGUI); // Init without reload
         slotRefresh();
     }
 }
@@ -2043,14 +2044,14 @@ void KDiff3App::slotAddManualDiffHelp()
 void KDiff3App::slotClearManualDiffHelpList()
 {
     m_manualDiffHelpList.clear();
-    mainInit(nullptr, InitFlag::autoSolve | InitFlag::initGUI); // Init without reload
+    mainInit(m_totalDiffStatus, InitFlag::autoSolve | InitFlag::initGUI); // Init without reload
     slotRefresh();
 }
 
 void KDiff3App::slotEncodingChanged(QTextCodec* c)
 {
     encodingChanged(c);
-    mainInit(nullptr, InitFlag::loadFiles | InitFlag::useCurrentEncoding | InitFlag::autoSolve | InitFlag::initGUI); // Init with reload
+    mainInit(m_totalDiffStatus, InitFlag::loadFiles | InitFlag::useCurrentEncoding | InitFlag::autoSolve ); // Init with reload
     slotRefresh();
 }
 
