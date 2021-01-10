@@ -107,7 +107,11 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
 
     if(isLocal()) // Invalid urls are treated as local files.
     {
-        m_fileInfo.setFile(m_url.toLocalFile());
+        /*
+            Utils::urlToString handles choosing the right API from QUrl.
+        */
+        m_fileInfo.setFile(Utils::urlToString(url));
+        
         m_pParent = nullptr;
 
         loadData();

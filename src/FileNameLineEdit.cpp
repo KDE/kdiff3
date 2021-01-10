@@ -17,9 +17,10 @@
  * along with KDiff3.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "FileNameLineEdit.h"
-#include "fileaccess.h"
 
+#include "fileaccess.h"
 #include "Logging.h"
+#include "Utils.h"
 
 #include <QDropEvent>
 #include <QDragEnterEvent>
@@ -49,7 +50,7 @@ void FileNameLineEdit::dropEvent(QDropEvent* event)
             if(lst[0].scheme().isEmpty())
                 lst[0].setScheme("file");
             //QUrl::toLocalFile returns empty for empty schemes or anything else Qt thinks is not local
-            setText(lst[0].toLocalFile());
+            setText(Utils::urlToString(lst[0]));
         }
         else
         {

@@ -981,7 +981,7 @@ bool KDiff3App::eventFilter(QObject* o, QEvent* e)
             if(canContinue() && !urlList.isEmpty())
             {
                 raise();
-                QString filename = urlList.first().toLocalFile();
+                QString filename = Utils::urlToString(urlList.first());
                 if(o == m_pDiffTextWindow1)
                     m_sd1.setFilename(filename);
                 else if(o == m_pDiffTextWindow2)
