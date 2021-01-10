@@ -292,8 +292,6 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
         }
     }
 
-    m_fileInfo = QFileInfo(filePath);
-    m_fileInfo.setCaching(true);
     if(m_url.isEmpty())
     {
         if(parent == nullptr)
@@ -311,16 +309,31 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
         */
         m_url = parent->url();
         addPath(filePath, false);
+        //Not something I expect to happen but can't rule it out either
+        if(Q_UNLIKELY(m_url == parent->url()))
+        {
+            m_url.clear();
+            qCritical() << "Parent and child could not be distingished.";
+            return;
+        }
 
         //Verify that the scheme doesn't change.
         Q_ASSERT(m_url.scheme() == parent->url().scheme());
     }
 
-    m_name = m_fileInfo.fileName();
-    if(isLocal() && m_name.isEmpty())
+    //KIO does this when stating a remote folder.
+    if(filePath.isEmpty())
     {
-        m_name = m_fileInfo.absoluteDir().dirName();
+        filePath = m_url.path();
     }
+
+    m_fileInfo = QFileInfo(filePath);
+    m_fileInfo.setCaching(true);
+
+    m_name = m_fileInfo.fileName();
+    if(m_name.isEmpty())
+        m_name = m_fileInfo.absoluteDir().dirName();
+    
     if(isLocal())
         m_bExists = m_fileInfo.exists();
 
