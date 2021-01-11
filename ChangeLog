@@ -1,3 +1,12 @@
+Version 1.8.5 - 2020-01-10
+===========================
+BUG:417189 Fix url handling for drag and drop.
+BUG:426823 Fix regression in handing paste from clipboard to blank diff window.
+*Fix link detection via KIO
+*Drop custom event filter in OpenDialog. We now use FileNameLineEdit instead as in the main window.
+*Fix url/path handling bugs for remote files
+*Don't ignore stat errors unless it tells us the file was not found.
+
 Version 1.8.4 - 2020-08-25
 ===========================
 *Fix typos in man page
@@ -10,31 +19,31 @@ Bug 423001 fixed reload on Windows.
 15f1cc4e - Fixed error handling during directory compare.
 065a3997, 2d56cd94, 42b3b5e4 - Only give one error message per directory compare opperation.
 Bug 419722 - Fix crash when clipboard is available. Mainly affects some network setups.
-f2d89bbc - Rework intial window display and full screen toggling.
-BUG:421048 - Treat /dev/null as non-existant as git expects.
+f2d89bbc - Rework initial window display and full screen toggling.
+BUG:421048 - Treat /dev/null as non-existent as git expects.
 
 Version 1.8.2 - 2020-03-29
 ===========================
 Bug 411472 Allow editing of blank lines and don't mark newly intserted lines as a confilict
 2ba20222 - Remove broken attempt to optimize drawing on horizonal scroll.
 Bug 418813 - Fix line numbers not shown. Use QString::number directly not through a format string.
-11e93232 - Correcly support "Print Current Page"
+11e93232 - Correctly support "Print Current Page"
 64804a64 - Don't attempt to free nullptr in SourceData::FileData::reset()
-f4c66ace - Make Preferance dialog panes scrollable if too large to fit on screen.
+f4c66ace - Make Preference dialog panes scrollable if too large to fit on screen.
 de06e561 - Fix dialog filter on windows.
-e8d06774 - Switch to QElapsedTime for timing avoids explictly undefined behavior inside qt if time is changed.
+e8d06774 - Switch to QElapsedTime for timing avoids explicitly undefined behavior inside qt if time is changed.
 05e2d6fb - Fix sync mode.
 f9bd88a1 - Make matching in CvsIngnoreList always honor bCaseSensitive setting.
 418ea78c - Don't use temporary with QLatin1String constructor strange things will happen.
 b058c060 - ignore over size cvsignore files
 Bug 410962 - Fix '-L' parameter handling
 b4b2c970 - Restore acciedently deleted --auto option
-Bug 411602 - Fixing missing menu items also resolves a potiential crash in MergeResultWindow::slotUpdateAvailabilities (Bug 407745).
-d4239b92 - Prevent intermient crash during reload/refresh
+Bug 411602 - Fixing missing menu items also resolves a potential crash in MergeResultWindow::slotUpdateAvailabilities (Bug 407745).
+d4239b92 - Prevent intermittent crash during reload/refresh
 Bug 410008 - Show diff for empty/missing files.
 3bb755c5 - Don't give false error when comparing empty folders
 Bug 408991 - 4ad69790,0737cc3e,0402f84a - Close files when not in use - Fixes "Too many open files" bug.
-Bug 407829 - Avoid crash when recieving mouse or key events during earily startup.
+Bug 407829 - Avoid crash when receiving mouse or key events during early startup.
 cc6d76e3 - Don't try to manually build url if parent is not set.
 85052379 - Fix crash when canceling by using only one event loop in ProgressDialog.
 d151f151 - Don't append to already complete url.
@@ -53,13 +62,13 @@ Version 1.7.90 - 2017-01-23
 ============================
 -ported to QT5/KDEFramework5
 -require cmake 3.1
--abandonded Konqueror specific plugin no longer applicable.
+-abandoned Konqueror specific plugin no longer applicable.
 -kde4 support dropped due to extensive changes needed for QT5/KDEFramework5
   -QT5 now required because of above changes.
--bugfix: Show Indentical files setting not applied after rescan.
+-bugfix: Show Identical files setting not applied after rescan.
 -Change parameter errors to use dialog on Linux as well as console output.
 -Don't sort twice when sorting in reverse order.
--fix memmory leak introduced in 0.9.91.
+-fix memory leak introduced in 0.9.91.
 -change version numbering.
 -scrap ClearCase support
 -implement Cut/Paste.
