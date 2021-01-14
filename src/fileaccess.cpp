@@ -314,7 +314,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
 
     m_fileInfo = QFileInfo(filePath);
     m_fileInfo.setCaching(true);
-
+    //These functions work on the path string without accessing the file system
     m_name = m_fileInfo.fileName();
     if(m_name.isEmpty())
         m_name = m_fileInfo.absoluteDir().dirName();
@@ -803,12 +803,11 @@ qint64 FileAccess::sizeForReading()
     if(!isLocal() && m_size == 0 && mPhysicalPath.isEmpty())
     {
         // Size couldn't be determined. Copy the file to a local temp place.
-        createLocalCopy();
-        QString localCopy = tmpFile->fileName();
-        bool bSuccess = copyFile(localCopy);
-        if(bSuccess)
+        if(createLocalCopy())
         {
+            QString localCopy = tmpFile->fileName();
             QFileInfo fi(localCopy);
+            
             m_size = fi.size();
             m_localCopy = localCopy;
             return m_size;
