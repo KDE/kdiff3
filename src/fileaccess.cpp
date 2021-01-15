@@ -297,7 +297,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
         if(Q_UNLIKELY(m_url == parent->url()))
         {
             m_url.clear();
-            qCritical() << "Parent and child could not be distingished.";
+            qCritical() << "Parent and child could not be distinguished.";
             return;
         }
 
@@ -511,7 +511,7 @@ QString FileAccess::fileRelPath() const
         while(curEntry != nullptr)
         {
             if(curEntry->parent())
-                path.prepend(curEntry->fileName() + "/");
+                path.prepend(curEntry->fileName() + '/');
             curEntry= curEntry->parent();
         }
         return path;
@@ -834,7 +834,7 @@ void FileAccess::setStatusText(const QString& s)
 QString FileAccess::cleanPath(const QString& path) // static
 {
     /*
-        Tell Qt to treat the supplied path as user input otherwise it will not make usefull decisions
+        Tell Qt to treat the supplied path as user input otherwise it will not make useful decisions
         about how to convert from the possibly local or remote "path" string to QUrl.
     */
     QUrl url = QUrl::fromUserInput(path, QString(), QUrl::AssumeLocalFile);

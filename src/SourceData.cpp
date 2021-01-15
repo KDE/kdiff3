@@ -217,8 +217,8 @@ bool SourceData::isBinaryEqualWith(const QSharedPointer<SourceData>& other) cons
 }
 
 /*
-    Warning: Don not call this function without re-runing the comparision or
-    otherwise resetting the DiffTextWindows as theses store a pointer to the file
+    Warning: Do not call this function without re-running the comparison or
+    otherwise resetting the DiffTextWindows as these store a pointer to the file
     data stored here.
 */
 void SourceData::FileData::reset()

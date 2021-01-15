@@ -56,7 +56,7 @@ struct and
 
 template<typename T> struct FirstNonEmpty
 {
-    //This just provides a better error message if an in apropriate parameter is passed.
+    //This just provides a better error message if an in appropriate parameter is passed.
     static_assert(std::is_class<typename std::remove_reference<T>::type>(), "First parameter must be a class.");
     static_assert(std::is_same<decltype(std::declval<T>().isEmpty()), bool>(),
         "First parameter must implement or inherit isEmpty().");
