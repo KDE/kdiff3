@@ -64,8 +64,8 @@ template<typename T> struct FirstNonEmpty
     typedef T result_type;
     template <typename InputIterator> T operator()(InputIterator first, InputIterator last) const
     {
-        // If there are no slots to call, just return empty string
-        if(first == last) return "";
+        // If there are no slots to call, just return empty container
+        if(first == last) return T();
 
         T ret = *first++;
         //return first non-true as if && were used
