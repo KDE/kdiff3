@@ -75,7 +75,7 @@ class FileAccessJobHandler : public QObject
 };
 
 #else
-class FileAccessJobHandler: public QObject
+class FileAccessJobHandler
 {
   public:
     explicit FileAccessJobHandler(FileAccess* pFileAccess){Q_UNUSED(pFileAccess)};
