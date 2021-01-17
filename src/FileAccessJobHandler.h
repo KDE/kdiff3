@@ -38,12 +38,17 @@ class FileAccessJobHandler : public QObject
     bool listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                  const QString& filePattern, const QString& fileAntiPattern,
                  const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore);
-    bool mkDir(const QString& dirName);
-    bool rmDir(const QString& dirName);
+
+    static bool mkDir(const QString& dirName) {return FileAccessJobHandler(nullptr).mkDirImp(dirName);}
+    static bool rmDir(const QString& dirName) {return FileAccessJobHandler(nullptr).rmDirImp(dirName);}
+
     bool removeFile(const QUrl& fileName);
     bool symLink(const QUrl& linkTarget, const QUrl& linkLocation);
 
   private:
+    bool mkDirImp(const QString& dirName);
+    bool rmDirImp(const QString& dirName);
+
     FileAccess* m_pFileAccess = nullptr;
     bool m_bSuccess = false;
 
@@ -88,8 +93,8 @@ class FileAccessJobHandler
     bool listDir(t_DirectoryList*  /*pDirList*/, bool  /*bRecursive*/, bool  /*bFindHidden*/,
                  const QString&  /*filePattern*/, const QString&  /*fileAntiPattern*/,
                  const QString&  /*dirAntiPattern*/, bool  /*bFollowDirLinks*/, bool  /*bUseCvsIgnore*/){return true;};
-    bool mkDir(const QString&  /*dirName*/){return true;};
-    bool rmDir(const QString&  /*dirName*/){return true;};
+    static bool mkDir(const QString&  /*dirName*/){return true;};
+    static bool rmDir(const QString&  /*dirName*/){return true;};
     bool removeFile(const QUrl&  /*fileName*/){return true;};
     bool symLink(const QUrl&  /*linkTarget*/, const QUrl&  /*linkLocation*/) { return true;};
 };

@@ -183,7 +183,7 @@ void FileAccessJobHandler::slotPutJobResult(KJob* pJob)
     }
 }
 
-bool FileAccessJobHandler::mkDir(const QString& dirName)
+bool FileAccessJobHandler::mkDirImp(const QString& dirName)
 {
     if(dirName.isEmpty())
         return false;
@@ -205,7 +205,7 @@ bool FileAccessJobHandler::mkDir(const QString& dirName)
     }
 }
 
-bool FileAccessJobHandler::rmDir(const QString& dirName)
+bool FileAccessJobHandler::rmDirImp(const QString& dirName)
 {
     if(dirName.isEmpty())
         return false;

@@ -24,6 +24,7 @@
 #endif
 
 class t_DirectoryList;
+class FileAccessJobHandler;
 /*
   Defining a function as virtual in FileAccess is intended to allow testing sub classes to be written
   more easily. This way the test can use a moc class that emulates the needed conditions with no
@@ -33,7 +34,7 @@ class FileAccess
 {
   public:
     FileAccess() = default;
-    virtual ~FileAccess() = default;
+    virtual ~FileAccess();
     explicit FileAccess(const QString& name, bool bWantToWrite = false); // name: local file or dirname or url (when supported)
 
     explicit FileAccess(const QUrl& name, bool bWantToWrite = false); // name: local file or dirname or url (when supported)
@@ -123,7 +124,7 @@ class FileAccess
     //These should be exposed for auto tests
   protected:
     #ifndef AUTOTEST
-    friend class FileAccessJobHandler;
+    friend FileAccessJobHandler;
     void setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent);
     #endif
     void setStatusText(const QString& s);
@@ -132,10 +133,10 @@ class FileAccess
 
     bool interruptableReadFile(void* pDestBuffer, qint64 maxLength);
 
+    FileAccessJobHandler *mJobHandler = nullptr;
+    FileAccess* m_pParent = nullptr;
     QUrl m_url;
     bool m_bValidData = false;
-
-    FileAccess* m_pParent = nullptr;
 
     QDir m_baseDir;
     QFileInfo m_fileInfo;

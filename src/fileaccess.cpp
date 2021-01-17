@@ -31,13 +31,17 @@
 
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
+    mJobHandler = new FileAccessJobHandler(this);
     setFile(name, bWantToWrite);
 }
 
 FileAccess::FileAccess(const QUrl& name, bool bWantToWrite)
 {
+    mJobHandler = new FileAccessJobHandler(this);
     setFile(name, bWantToWrite);
 }
+
+FileAccess::~FileAccess() { delete mJobHandler; };
 
 void FileAccess::reset()
 {
@@ -89,8 +93,8 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     else
     {
         m_name = m_url.fileName();
-        FileAccessJobHandler jh(this);            // A friend, which writes to the parameters of this class!
-        if(jh.stat(2 /*all details*/, bWantToWrite))
+
+        if(mJobHandler->stat(2 /*all details*/, bWantToWrite))
             m_bValidData = true; // After running stat() the variables are initialised
                                 // and valid even if the file doesn't exist and the stat
                                 // query failed.
@@ -577,8 +581,7 @@ bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
     }
     else
     {
-        FileAccessJobHandler jh(this);
-        success = jh.get(pDestBuffer, maxLength);
+        success = mJobHandler->get(pDestBuffer, maxLength);
     }
 
     close();
@@ -627,8 +630,7 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
     }
     else
     {
-        FileAccessJobHandler jh(this);
-        bool success = jh.put(pSrcBuffer, length, true /*overwrite*/);
+        bool success = mJobHandler->put(pSrcBuffer, length, true /*overwrite*/);
         close();
 
         Q_ASSERT(!realFile->isOpen() && !tmpFile->isOpen());
@@ -642,14 +644,13 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
 
 bool FileAccess::copyFile(const QString& dest)
 {
-    FileAccessJobHandler jh(this);
-    return jh.copyFile(dest); // Handles local and remote copying.
+    return mJobHandler->copyFile(dest); // Handles local and remote copying.
 }
 
 bool FileAccess::rename(const FileAccess& dest)
 {
-    FileAccessJobHandler jh(this);
-    return jh.rename(dest);
+    
+    return mJobHandler->rename(dest);
 }
 
 bool FileAccess::removeFile()
@@ -660,8 +661,7 @@ bool FileAccess::removeFile()
     }
     else
     {
-        FileAccessJobHandler jh(this);
-        return jh.removeFile(url());
+        return mJobHandler->removeFile(url());
     }
 }
 
@@ -669,8 +669,7 @@ bool FileAccess::listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindH
                          const QString& filePattern, const QString& fileAntiPattern, const QString& dirAntiPattern,
                          bool bFollowDirLinks, bool bUseCvsIgnore)
 {
-    FileAccessJobHandler jh(this);
-    return jh.listDir(pDirList, bRecursive, bFindHidden, filePattern, fileAntiPattern,
+    return mJobHandler->listDir(pDirList, bRecursive, bFindHidden, filePattern, fileAntiPattern,
                       dirAntiPattern, bFollowDirLinks, bUseCvsIgnore);
 }
 
@@ -772,14 +771,12 @@ void FileAccess::createTempFile(QTemporaryFile& tmpFile)
 
 bool FileAccess::makeDir(const QString& dirName)
 {
-    FileAccessJobHandler fh(nullptr);
-    return fh.mkDir(dirName);
+    return FileAccessJobHandler::mkDir(dirName);
 }
 
 bool FileAccess::removeDir(const QString& dirName)
 {
-    FileAccessJobHandler fh(nullptr);
-    return fh.rmDir(dirName);
+    return FileAccessJobHandler::rmDir(dirName);
 }
 
 bool FileAccess::symLink(const QString& linkTarget, const QString& linkLocation)
