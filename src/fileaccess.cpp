@@ -894,9 +894,7 @@ void FileAccess::filterList(t_DirectoryList* pDirList, const QString& filePatter
     CvsIgnoreList cvsIgnoreList;
     if(bUseCvsIgnore)
     {
-        #ifndef AUTOTEST
         cvsIgnoreList.init(*this, pDirList);
-        #endif
     }
     //TODO: Ask os for this information don't hard code it.
 #if defined(Q_OS_WIN)

@@ -14,9 +14,8 @@
 #include <QObject>
 #include <QString>
 
-#ifndef AUTOTEST
 #include <KIO/UDSEntry>
-#endif
+
 namespace KIO {
 class Job;
 }
