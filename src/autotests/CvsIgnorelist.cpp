@@ -11,6 +11,7 @@
 #include "../cvsignorelist.h"
 #include "MocIgnoreFile.h"
 
+
 class CvsIgnoreListTest : public QObject
 {
     const QString defaultPatterns = QString::fromLatin1(". .. core RCSLOG tags TAGS RCS SCCS .make.state "

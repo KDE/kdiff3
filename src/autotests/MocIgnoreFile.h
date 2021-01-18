@@ -8,6 +8,7 @@
 #ifndef MOCIGNOREFILE_H
 #define MOCIGNOREFILE_H
 
+#include "FileAccessJobHandlerMoc.h"
 #include "../fileaccess.h"
 
 #include <QString>
@@ -23,11 +24,12 @@ class MocIgnoreFile: public FileAccess
     MocIgnoreFile()
     {
         //Q_ASSERT(false);
-      /*
-        FileAccess set file calls our overriden loadData to actually get file meta data.
-        This way we can avoid making any actual FileSystem checks on the simulated file.
-      */
-      setFile(QUrl("/test/ui/.cvsignore"));
+        mJobHandler = new FileAccessJobHandlerMoc(this);
+        /*
+          FileAccess set file calls our overriden loadData to actually get file meta data.
+          This way we can avoid making any actual FileSystem checks on the simulated file.
+        */
+        setFile(QUrl("/test/ui/.cvsignore"));
     }
     void setParent(MocIgnoreFile* parent) { m_pParent = (FileAccess*)parent;}
     void setFileName(const QString& name) { m_name = name; }

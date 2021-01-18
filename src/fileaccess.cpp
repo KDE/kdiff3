@@ -6,8 +6,12 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
 #include "fileaccess.h"
+
 #include "cvsignorelist.h"
 #include "common.h"
+#ifndef AUTOTEST
+#include "DefaultFileAccessJobHandler.h"
+#endif
 #include "FileAccessJobHandler.h"
 #include "Logging.h"
 #include "progress.h"
@@ -31,13 +35,11 @@
 
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
-    mJobHandler = new FileAccessJobHandler(this);
     setFile(name, bWantToWrite);
 }
 
 FileAccess::FileAccess(const QUrl& name, bool bWantToWrite)
 {
-    mJobHandler = new FileAccessJobHandler(this);
     setFile(name, bWantToWrite);
 }
 
@@ -54,6 +56,9 @@ void FileAccess::reset()
 void FileAccess::setFile(FileAccess* pParent, const QFileInfo& fi)
 {
     Q_ASSERT(pParent != this);
+    #ifndef AUTOTEST
+    if(mJobHandler == nullptr)  mJobHandler = new DefaultFileAccessJobHandler(this);
+    #endif
     reset();
 
     m_fileInfo = fi;
@@ -761,6 +766,7 @@ bool FileAccess::createLocalCopy()
 
     return copyFile(tmpFile->fileName());
 }
+
 //static tempfile Generator
 void FileAccess::createTempFile(QTemporaryFile& tmpFile)
 {
@@ -769,22 +775,24 @@ void FileAccess::createTempFile(QTemporaryFile& tmpFile)
     tmpFile.close();
 }
 
+#ifndef AUTOTEST
 bool FileAccess::makeDir(const QString& dirName)
 {
-    return FileAccessJobHandler::mkDir(dirName);
+    return DefaultFileAccessJobHandler::mkDir(dirName);
 }
 
 bool FileAccess::removeDir(const QString& dirName)
 {
-    return FileAccessJobHandler::rmDir(dirName);
+    return DefaultFileAccessJobHandler::rmDir(dirName);
 }
+#endif // !AUTOTEST
 
 bool FileAccess::symLink(const QString& linkTarget, const QString& linkLocation)
 {
     if(linkTarget.isEmpty() || linkLocation.isEmpty())
         return false;
     return QFile::link(linkTarget, linkLocation);
-    //FileAccessJobHandler fh(0);
+    //DefaultFileAccessJobHandler fh(0);
     //return fh.symLink( linkTarget, linkLocation );
 }
 

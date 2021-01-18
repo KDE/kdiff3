@@ -9,12 +9,17 @@
 #include <QTest>
 #include <qglobal.h>
 
-#include "../FileAccessJobHandler.h"
 #include "../fileaccess.h"
+#include "FileAccessJobHandlerMoc.h"
 
 class FileAccessMoc: public FileAccess
 {
   public:
+    void setEngine(FileAccessJobHandler* handler)
+    {
+        if(handler != mJobHandler) delete mJobHandler, mJobHandler = handler;
+    }
+
     void setParent(FileAccessMoc* parent)
     {
         m_pParent = (FileAccess*)parent;
@@ -31,6 +36,10 @@ class FileAccessTest: public QObject
     void testFileRelPath()
     {
         FileAccessMoc mocFile, mocRoot, mocFile2;
+
+        mocRoot.setEngine(new FileAccessJobHandlerMoc(&mocRoot));
+        mocFile.setEngine(new FileAccessJobHandlerMoc(&mocRoot));
+        mocFile2.setEngine(new FileAccessJobHandlerMoc(&mocRoot));
 
         //Check remote url.
         mocRoot.setFileName(QLatin1String("root"));

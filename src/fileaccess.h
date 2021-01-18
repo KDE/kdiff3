@@ -25,6 +25,7 @@
 
 class t_DirectoryList;
 class FileAccessJobHandler;
+class DefaultFileAccessJobHandler;
 /*
   Defining a function as virtual in FileAccess is intended to allow testing sub classes to be written
   more easily. This way the test can use a moc class that emulates the needed conditions with no
@@ -124,7 +125,7 @@ class FileAccess
     //These should be exposed for auto tests
   protected:
     #ifndef AUTOTEST
-    friend FileAccessJobHandler;
+    friend DefaultFileAccessJobHandler;
     void setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent);
     #endif
     void setStatusText(const QString& s);
