@@ -79,6 +79,9 @@ void FileAccess::setFile(const QString& name, bool bWantToWrite)
 
 void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
 {
+    if(url.isEmpty())
+        return;
+    
     reset();
     Q_ASSERT(parent() == nullptr || url != parent()->url());
 
