@@ -72,7 +72,11 @@ class FileAccess
     Q_REQUIRED_RESULT QString absoluteFilePath() const;
     Q_REQUIRED_RESULT static QString prettyAbsPath(const QUrl& url)
     {
-        return isLocal(url) ? QFileInfo(url.toString(QUrl::DecodeReserved)).absoluteFilePath() : url.toDisplayString();
+        if(!isLocal(url)) return url.toDisplayString();
+
+        QFileInfo theFile = QFileInfo(url.path());
+
+        return QFileInfo(url.path()).absoluteFilePath();
     }
 
     //Workaround for QUrl::isLocalFile behavior that does not fit KDiff3's expectations.
