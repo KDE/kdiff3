@@ -34,6 +34,7 @@ class FileAccessMoc: public FileAccess
 class FileAccessTest: public QObject
 {
     Q_OBJECT;
+
   private Q_SLOTS:
     void testFileRelPath()
     {
@@ -44,34 +45,53 @@ class FileAccessTest: public QObject
         mocFile2.setEngine(new FileAccessJobHandlerMoc(&mocRoot));
 
         //Check remote url.
-        mocRoot.setFileName(QLatin1String("root"));
-        mocRoot.setUrl(QUrl("fish://i@0.0.0.0/root"));
+        mocRoot.setFile(QLatin1String("fish://i@0.0.0.0/root"));
         QCOMPARE(mocRoot.fileRelPath(), "");
 
-        mocFile.setFileName(QLatin1String("x"));
-        mocFile.setUrl(QUrl("fish://i@0.0.0.0/root/x"));
+        mocFile.setFile(QLatin1String("fish://i@0.0.0.0/root/x"));
         mocFile.setParent(&mocRoot);
         QCOMPARE(mocFile.fileRelPath(), "x");
 
-        mocFile2.setFileName("y");
-        mocFile2.setUrl(QUrl("fish://i@0.0.0.0/root/x/y"));
+        mocFile2.setFile("fish://i@0.0.0.0/root/x/y");
         mocFile2.setParent(&mocFile);
         QCOMPARE(mocFile2.fileRelPath(), "x/y");
     }
 
     void testUrl()
     {
+#ifndef Q_OS_WIN
+        const QString expected = "/dds/root";
+        const QString expected2 = "file:///dds/root";
+#else
+        const QString expected = "C:/dds/root";
+        const QString expected2 = "file:///C:/dds/root";
+#endif // !Q_OS_WIN
         FileAccessMoc mocFile;
 
         mocFile.setEngine(new FileAccessJobHandlerMoc(&mocFile));
 
+        //Sanity check FileAccess::url by directly setting the url.
         mocFile.setFileName(QLatin1String("root"));
         mocFile.setUrl(QUrl("fish://i@0.0.0.0/root"));
         QCOMPARE(mocFile.url(), QUrl("fish://i@0.0.0.0/root"));
+
+        //Now check that setFile does what its supposed to
+        mocFile.setFile(QUrl("fish://i@0.0.0.0/root"));
+        QCOMPARE(mocFile.url(), QUrl("fish://i@0.0.0.0/root"));
+
+        mocFile.setFile(QUrl(expected));
+        QCOMPARE(mocFile.url(), QUrl(expected));
+        //Try the QString version
+        mocFile.setFile("fish://i@0.0.0.0/root");
+        QCOMPARE(mocFile.url(), QUrl("fish://i@0.0.0.0/root"));
+
+        mocFile.setFile(expected);
+        QCOMPARE(mocFile.url(), QUrl(expected2));
     }
 
     void testIsLocal()
     {
+
         FileAccessMoc mocFile;
 
         mocFile.setEngine(new FileAccessJobHandlerMoc(&mocFile));
@@ -80,17 +100,17 @@ class FileAccessTest: public QObject
         QVERIFY(FileAccess::isLocal(QUrl("file:///dds/root")));
         QVERIFY(FileAccess::isLocal(QUrl("/dds/root")));
         //Check remote url.
-        mocFile.setFileName(QLatin1String("root"));
+        mocFile.setFile(QLatin1String("root"));
         mocFile.setUrl(QUrl("fish://i@0.0.0.0/root"));
         QVERIFY(!mocFile.isLocal());
 
         //Check local file.
-        mocFile.setFileName(QLatin1String("root"));
-        mocFile.setUrl(QUrl("file:///dds/root"));
+        mocFile.setFile(QStringLiteral("file:///dds/root"));
+        //mocFile.setUrl(QUrl("file:///dds/root"));
         QVERIFY(mocFile.isLocal());
         //Path only
-        mocFile.setFileName(QLatin1String("root"));
-        mocFile.setUrl(QUrl("/dds/root"));
+        mocFile.setFile(QStringLiteral("/dds/root"));
+        //mocFile.setUrl(QUrl("/dds/root"));
         QVERIFY(mocFile.isLocal());
     }
     
@@ -117,6 +137,12 @@ class FileAccessTest: public QObject
         QCOMPARE(mocFile.prettyAbsPath(), expected);
 
         mocFile.setFile(QUrl("/dds/root"));
+        QCOMPARE(mocFile.prettyAbsPath(), expected);
+
+        mocFile.setFile("file:///dds/root");
+        QCOMPARE(mocFile.prettyAbsPath(), expected);
+
+        mocFile.setFile("/dds/root");
         QCOMPARE(mocFile.prettyAbsPath(), expected);
     }
 };
