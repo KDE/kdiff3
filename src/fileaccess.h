@@ -74,8 +74,7 @@ class FileAccess
     {
         if(!isLocal(url)) return url.toDisplayString();
 
-        QFileInfo theFile = QFileInfo(url.path());
-
+  
         return QFileInfo(url.path()).absoluteFilePath();
     }
 
