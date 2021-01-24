@@ -96,23 +96,28 @@ class FileAccessTest: public QObject
     
     void testAbsolutePath()
     {
+#ifndef Q_OS_WIN
+        const QString expected = "/dds/root";
+#else
+        const QString expected = "C:/dds/root";
+#endif // !Q_OS_WIN
         FileAccessMoc mocFile;
         mocFile.setEngine(new FileAccessJobHandlerMoc(&mocFile));
 
         const QUrl url = QUrl("fish://i@0.0.0.0/root");
 
         QCOMPARE(FileAccess::prettyAbsPath(url), url.toDisplayString());
-        QCOMPARE(FileAccess::prettyAbsPath(QUrl("file:///dds/root")), "/dds/root");
-        QCOMPARE(FileAccess::prettyAbsPath(QUrl("/dds/root")), "/dds/root");
+        QCOMPARE(FileAccess::prettyAbsPath(QUrl("file:///dds/root")), expected);
+        QCOMPARE(FileAccess::prettyAbsPath(QUrl("/dds/root")), expected);
 
         mocFile.setFile(url);
         QCOMPARE(mocFile.prettyAbsPath(url), url.toDisplayString());
 
         mocFile.setFile(QUrl("file:///dds/root"));
-        QCOMPARE(mocFile.prettyAbsPath(), "/dds/root");
+        QCOMPARE(mocFile.prettyAbsPath(), expected);
 
         mocFile.setFile(QUrl("/dds/root"));
-        QCOMPARE(mocFile.prettyAbsPath(), "/dds/root");
+        QCOMPARE(mocFile.prettyAbsPath(), expected);
     }
 };
 
