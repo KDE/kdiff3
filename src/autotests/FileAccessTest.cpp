@@ -27,6 +27,8 @@ class FileAccessMoc: public FileAccess
     }
     void setFileName(const QString& name) { m_name = name; }
     void setUrl(const QUrl& url) { m_url = url; }
+
+    void loadData() override {}
 };
 
 class FileAccessTest: public QObject
@@ -56,8 +58,64 @@ class FileAccessTest: public QObject
         mocFile2.setParent(&mocFile);
         QCOMPARE(mocFile2.fileRelPath(), "x/y");
     }
+
+    void testUrl()
+    {
+        FileAccessMoc mocFile;
+
+        mocFile.setEngine(new FileAccessJobHandlerMoc(&mocFile));
+
+        mocFile.setFileName(QLatin1String("root"));
+        mocFile.setUrl(QUrl("fish://i@0.0.0.0/root"));
+        QCOMPARE(mocFile.url(), QUrl("fish://i@0.0.0.0/root"));
+    }
+
+    void testIsLocal()
+    {
+        FileAccessMoc mocFile;
+
+        mocFile.setEngine(new FileAccessJobHandlerMoc(&mocFile));
+
+        QVERIFY(!FileAccess::isLocal(QUrl("fish://i@0.0.0.0/root")));
+        QVERIFY(FileAccess::isLocal(QUrl("file:///dds/root")));
+        QVERIFY(FileAccess::isLocal(QUrl("/dds/root")));
+        //Check remote url.
+        mocFile.setFileName(QLatin1String("root"));
+        mocFile.setUrl(QUrl("fish://i@0.0.0.0/root"));
+        QVERIFY(!mocFile.isLocal());
+
+        //Check local file.
+        mocFile.setFileName(QLatin1String("root"));
+        mocFile.setUrl(QUrl("file:///dds/root"));
+        QVERIFY(mocFile.isLocal());
+        //Path only
+        mocFile.setFileName(QLatin1String("root"));
+        mocFile.setUrl(QUrl("/dds/root"));
+        QVERIFY(mocFile.isLocal());
+    }
+    
+    void testAbsolutePath()
+    {
+        FileAccessMoc mocFile;
+        mocFile.setEngine(new FileAccessJobHandlerMoc(&mocFile));
+
+        const QUrl url = QUrl("fish://i@0.0.0.0/root");
+
+        QCOMPARE(FileAccess::prettyAbsPath(url), url.toDisplayString());
+        QCOMPARE(FileAccess::prettyAbsPath(QUrl("file:///dds/root")), "/dds/root");
+        QCOMPARE(FileAccess::prettyAbsPath(QUrl("/dds/root")), "/dds/root");
+
+        mocFile.setFile(url);
+        QCOMPARE(mocFile.prettyAbsPath(url), url.toDisplayString());
+
+        mocFile.setFile(QUrl("file:///dds/root"));
+        QCOMPARE(mocFile.prettyAbsPath(), "/dds/root");
+
+        mocFile.setFile(QUrl("/dds/root"));
+        QCOMPARE(mocFile.prettyAbsPath(), "/dds/root");
+    }
 };
 
-QTEST_MAIN(FileAccessTest);
+QTEST_APPLESS_MAIN(FileAccessTest);
 
 #include "FileAccessTest.moc"

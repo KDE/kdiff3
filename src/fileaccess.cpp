@@ -45,9 +45,32 @@ FileAccess::FileAccess(const QUrl& name, bool bWantToWrite)
 
 FileAccess::~FileAccess() { delete mJobHandler; };
 
+/*
+    Performs a re-init. This delibratly does not include mJobHandler.
+*/
 void FileAccess::reset()
 {
-    *this = FileAccess();
+    m_url.clear();
+    m_name.clear();
+    m_fileInfo = QFileInfo();
+    m_bExists = false;
+    m_bFile = false;
+    m_bDir = false;
+    m_bSymLink = false;
+    m_bWritable = false;
+    m_bHidden = false;
+    m_size = 0;
+    m_modificationTime = QDateTime::fromMSecsSinceEpoch(0);
+    
+    mDisplayName.clear();
+    mPhysicalPath.clear();
+    m_linkTarget.clear();
+    //Cleanup temp file if any.
+    tmpFile = QSharedPointer<QTemporaryFile>::create();
+    realFile.clear();
+
+    m_pParent = nullptr;
+    m_bValidData = false;
 }
 
 /*
