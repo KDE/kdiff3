@@ -88,7 +88,7 @@ class SourceData
         friend SourceData;
         const char* m_pBuf = nullptr; //TODO: Phase out needlessly wastes memory and time by keeping second copy of file data.
         qint64 mDataSize = 0;
-        qint64 mLineCount = 0; // Nr of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
+        qint64 mLineCount = 0; // Number of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
         QSharedPointer<QString> m_unicodeBuf=QSharedPointer<QString>::create();
         QVector<LineData> m_v;
         bool m_bIsText = false;

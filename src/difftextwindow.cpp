@@ -124,7 +124,7 @@ class DiffTextWindowData
 
     void myUpdate(int afterMilliSecs);
 
-    int leftInfoWidth() const { return 4 + m_lineNumberWidth; } // Nr of information columns on left side
+    int leftInfoWidth() const { return 4 + m_lineNumberWidth; } // Number of information columns on left side
     int convertLineOnScreenToLineInSource(int lineOnScreen, e_CoordType coordType, bool bFirstLine);
 
     void prepareTextLayout(QTextLayout& textLayout, int visibleTextWidth = -1);

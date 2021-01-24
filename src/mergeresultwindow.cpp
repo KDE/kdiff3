@@ -1043,8 +1043,8 @@ void MergeResultWindow::showNrOfConflicts()
 
     KMessageBox::information(this,
                              i18n("Total number of conflicts: %1\n"
-                                  "Nr of automatically solved conflicts: %2\n"
-                                  "Nr of unsolved conflicts: %3\n"
+                                  "Number of automatically solved conflicts: %2\n"
+                                  "Number of unsolved conflicts: %3\n"
                                   "%4",
                                   nrOfConflicts, nrOfConflicts - nrOfUnsolvedConflicts,
                                   nrOfUnsolvedConflicts, totalInfo),

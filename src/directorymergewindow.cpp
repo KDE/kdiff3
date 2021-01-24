@@ -110,10 +110,10 @@ enum Columns
     s_CCol = 3,
     s_OpCol = 4,
     s_OpStatusCol = 5,
-    s_UnsolvedCol = 6, // Nr of unsolved conflicts (for 3 input files)
-    s_SolvedCol = 7,   // Nr of auto-solvable conflicts (for 3 input files)
-    s_NonWhiteCol = 8, // Nr of nonwhite deltas (for 2 input files)
-    s_WhiteCol = 9     // Nr of white deltas (for 2 input files)
+    s_UnsolvedCol = 6, // Number of unsolved conflicts (for 3 input files)
+    s_SolvedCol = 7,   // Number of auto-solvable conflicts (for 3 input files)
+    s_NonWhiteCol = 8, // Number of nonwhite deltas (for 2 input files)
+    s_WhiteCol = 9     // Number of white deltas (for 2 input files)
 };
 
 static Qt::CaseSensitivity s_eCaseSensitivity = Qt::CaseSensitive;
