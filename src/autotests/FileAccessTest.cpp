@@ -135,7 +135,7 @@ class FileAccessTest: public QObject
         mocFile.setFile(QUrl("/dds/root"));
         QCOMPARE(mocFile.prettyAbsPath(), expected);
 
-        mocFile.setFile(QStringLiteral("file:///dds/root");
+        mocFile.setFile(QStringLiteral("file:///dds/root"));
         QCOMPARE(mocFile.prettyAbsPath(), expected);
 
         mocFile.setFile(QStringLiteral("/dds/root"));
