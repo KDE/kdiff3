@@ -91,7 +91,6 @@ class FileAccessTest: public QObject
 
     void testIsLocal()
     {
-
         FileAccessMoc mocFile;
 
         mocFile.setEngine(new FileAccessJobHandlerMoc(&mocFile));
@@ -100,17 +99,14 @@ class FileAccessTest: public QObject
         QVERIFY(FileAccess::isLocal(QUrl("file:///dds/root")));
         QVERIFY(FileAccess::isLocal(QUrl("/dds/root")));
         //Check remote url.
-        mocFile.setFile(QLatin1String("root"));
-        mocFile.setUrl(QUrl("fish://i@0.0.0.0/root"));
+        mocFile.setFile("fish://i@0.0.0.0/root");
         QVERIFY(!mocFile.isLocal());
 
         //Check local file.
         mocFile.setFile(QStringLiteral("file:///dds/root"));
-        //mocFile.setUrl(QUrl("file:///dds/root"));
         QVERIFY(mocFile.isLocal());
         //Path only
         mocFile.setFile(QStringLiteral("/dds/root"));
-        //mocFile.setUrl(QUrl("/dds/root"));
         QVERIFY(mocFile.isLocal());
     }
     
