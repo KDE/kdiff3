@@ -46,15 +46,15 @@ class FileAccessTest: public QObject
 
         //Check remote url.
         mocRoot.setFile(QLatin1String("fish://i@0.0.0.0/root"));
-        QCOMPARE(mocRoot.fileRelPath(), "");
+        QCOMPARE(mocRoot.fileRelPath(), QStringLiteral(""));
 
         mocFile.setFile(QLatin1String("fish://i@0.0.0.0/root/x"));
         mocFile.setParent(&mocRoot);
-        QCOMPARE(mocFile.fileRelPath(), "x");
+        QCOMPARE(mocFile.fileRelPath(), QStringLiteral("x"));
 
         mocFile2.setFile("fish://i@0.0.0.0/root/x/y");
         mocFile2.setParent(&mocFile);
-        QCOMPARE(mocFile2.fileRelPath(), "x/y");
+        QCOMPARE(mocFile2.fileRelPath(), QStringLiteral("x/y"));
     }
 
     void testUrl()
@@ -135,10 +135,10 @@ class FileAccessTest: public QObject
         mocFile.setFile(QUrl("/dds/root"));
         QCOMPARE(mocFile.prettyAbsPath(), expected);
 
-        mocFile.setFile("file:///dds/root");
+        mocFile.setFile(QStringLiteral("file:///dds/root");
         QCOMPARE(mocFile.prettyAbsPath(), expected);
 
-        mocFile.setFile("/dds/root");
+        mocFile.setFile(QStringLiteral("/dds/root"));
         QCOMPARE(mocFile.prettyAbsPath(), expected);
     }
 };
