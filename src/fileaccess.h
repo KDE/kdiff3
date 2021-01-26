@@ -11,10 +11,10 @@
 
 #include <type_traits>
 
+#include <QDateTime>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QDateTime>
 #include <QSharedPointer>
 #include <QTemporaryFile>
 #include <QUrl>
@@ -74,7 +74,6 @@ class FileAccess
     {
         if(!isLocal(url)) return url.toDisplayString();
 
-  
         return QFileInfo(url.path()).absoluteFilePath();
     }
 
@@ -106,7 +105,7 @@ class FileAccess
     bool rename(const FileAccess&);
     static bool symLink(const QString& linkTarget, const QString& linkLocation);
 
-    virtual void addPath(const QString& txt, bool reinit=true);
+    virtual void addPath(const QString& txt, bool reinit = true);
     Q_REQUIRED_RESULT const QString& getStatusText() const;
 
     Q_REQUIRED_RESULT FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
@@ -127,17 +126,17 @@ class FileAccess
 
     //These should be exposed for auto tests
   protected:
-    #ifndef AUTOTEST
+#ifndef AUTOTEST
     friend DefaultFileAccessJobHandler;
     void setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent);
-    #endif
+#endif
     void setStatusText(const QString& s);
 
     void reset();
 
     bool interruptableReadFile(void* pDestBuffer, qint64 maxLength);
 
-    FileAccessJobHandler *mJobHandler = nullptr;
+    FileAccessJobHandler* mJobHandler = nullptr;
     FileAccess* m_pParent = nullptr;
     QUrl m_url;
     bool m_bValidData = false;
@@ -184,7 +183,7 @@ class FileAccess
 static_assert(std::is_copy_assignable<FileAccess>::value, "FileAccess must be copy assignable.");
 static_assert(std::is_move_assignable<FileAccess>::value, "FileAccess must be move assignable.");
 
-class t_DirectoryList : public std::list<FileAccess>
+class t_DirectoryList: public std::list<FileAccess>
 {
 };
 
