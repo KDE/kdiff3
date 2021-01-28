@@ -41,8 +41,8 @@ class FileAccessTest: public QObject
         FileAccessMoc mocFile, mocRoot, mocFile2;
 
         mocRoot.setEngine(new FileAccessJobHandlerMoc(&mocRoot));
-        mocFile.setEngine(new FileAccessJobHandlerMoc(&mocRoot));
-        mocFile2.setEngine(new FileAccessJobHandlerMoc(&mocRoot));
+        mocFile.setEngine(new FileAccessJobHandlerMoc(&mocFile));
+        mocFile2.setEngine(new FileAccessJobHandlerMoc(&mocFile2));
 
         //Check remote url.
         mocRoot.setFile(QLatin1String("fish://i@0.0.0.0/root"));

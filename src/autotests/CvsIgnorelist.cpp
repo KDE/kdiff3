@@ -19,7 +19,7 @@ class CvsIgnoreListTest : public QObject
                                                         "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$");
     Q_OBJECT
   private Q_SLOTS:
-    void init()
+    void initTestCase()
     {
         MocIgnoreFile file;
         CvsIgnoreList test;
