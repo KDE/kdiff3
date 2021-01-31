@@ -46,7 +46,7 @@ class FileAccessTest: public QObject
 
         //Check remote url.
         mocRoot.setFile(QLatin1String("fish://i@0.0.0.0/root"));
-        QCOMPARE(mocRoot.fileRelPath(), QStringLiteral(""));
+        QCOMPARE(mocRoot.fileRelPath(), QLatin1String(""));
 
         mocFile.setFile(QLatin1String("fish://i@0.0.0.0/root/x"));
         mocFile.setParent(&mocRoot);
