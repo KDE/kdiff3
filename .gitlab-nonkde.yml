@@ -19,17 +19,17 @@ build_ubuntu_18_04-boost(1.66):
       - runner_system_failure
       - stuck_or_timeout_failure
 
-ubuntu_18_04_test:
-    stage: test
-    needs: ["build_ubuntu_18_04-boost(1.66)"]
-    image: reporter123/kdiff3env:bionic
-    before_script:
-      - apt-get update
-      - apt-get install -y libqt5test5
-    script:
-      - make ARGS="-V -E appstreamtest" test #exclude appstreamtest this does not run properly in my image
-    retry:
-      max: 2
-      when:
-       - runner_system_failure
-       - stuck_or_timeout_failure
+#ubuntu_18_04_test:
+#    stage: test
+#    needs: ["build_ubuntu_18_04-boost(1.66)"]
+#    image: reporter123/kdiff3env:bionic
+#    before_script:
+#      - apt-get update
+#      - apt-get install -y libqt5test5
+#    script:
+#      - make ARGS="-V -E appstreamtest" test #exclude appstreamtest this does not run properly in my #image
+#    retry:
+#      max: 2
+#      when:
+#       - runner_system_failure
+#       - stuck_or_timeout_failure
