@@ -36,6 +36,7 @@ class FileAccessTest: public QObject
     Q_OBJECT;
 
   private Q_SLOTS:
+
     void testFileRelPath()
     {
         FileAccessMoc mocFile, mocRoot, mocFile2;
@@ -140,6 +141,23 @@ class FileAccessTest: public QObject
 
         mocFile.setFile(QStringLiteral("/dds/root"));
         QCOMPARE(mocFile.prettyAbsPath(), expected);
+    }
+
+    void liveTest()
+    {
+        QTemporaryFile testFile;
+        QVERIFY(testFile.open());
+        FileAccess fileData(testFile.fileName());
+
+        QVERIFY(fileData.isValid());
+        QVERIFY(fileData.isLocal());
+        QVERIFY(fileData.isNormal());
+        QVERIFY(fileData.isReadable());
+        QVERIFY(fileData.isWritable());
+        //sanity check
+        QVERIFY(!fileData.isSymLink());
+        QVERIFY(!fileData.isDir());
+        QVERIFY(fileData.isFile());
     }
 };
 
