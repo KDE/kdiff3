@@ -34,7 +34,11 @@ class DefaultFileAccessJobHandler;
 class FileAccess
 {
   public:
-    FileAccess() = default;
+    FileAccess();
+    FileAccess(const FileAccess&);
+    FileAccess(FileAccess&&);
+    FileAccess& operator=(const FileAccess&);
+    FileAccess& operator=(FileAccess&&);
     virtual ~FileAccess();
     explicit FileAccess(const QString& name, bool bWantToWrite = false); // name: local file or dirname or url (when supported)
 
