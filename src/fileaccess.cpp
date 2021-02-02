@@ -33,6 +33,172 @@
 
 #include <KLocalizedString>
 
+FileAccess::FileAccess() = default;
+
+FileAccess::FileAccess(const FileAccess& b)
+#ifndef AUTOTEST
+    : mJobHandler{b.mJobHandler ? new DefaultFileAccessJobHandler(this) : nullptr}
+#else
+    : mJobHandler{nullptr}
+#endif
+    , m_pParent{b.m_pParent}
+    , m_url{b.m_url}
+    , m_bValidData{b.m_bValidData}
+    , m_baseDir{b.m_baseDir}
+    , m_fileInfo{b.m_fileInfo}
+    , m_linkTarget{b.m_linkTarget}
+    , m_name{b.m_name}
+    , mDisplayName{b.mDisplayName}
+    , m_localCopy{b.m_localCopy}
+    , mPhysicalPath{b.mPhysicalPath}
+    , tmpFile{b.tmpFile}
+    , realFile{b.realFile}
+    , m_size{b.m_size}
+    , m_modificationTime{b.m_modificationTime}
+    , m_bSymLink{b.m_bSymLink}
+    , m_bFile{b.m_bFile}
+    , m_bDir{b.m_bDir}
+    , m_bExists{b.m_bExists}
+    , m_bWritable{b.m_bWritable}
+    , m_bReadable{b.m_bReadable}
+    , m_bExecutable{b.m_bExecutable}
+    , m_bHidden{b.m_bHidden} {}
+
+FileAccess::FileAccess(FileAccess&& b)
+    : mJobHandler{b.mJobHandler}
+    , m_pParent{b.m_pParent}
+    , m_url{b.m_url}
+    , m_bValidData{b.m_bValidData}
+    , m_baseDir{b.m_baseDir}
+    , m_fileInfo{b.m_fileInfo}
+    , m_linkTarget{b.m_linkTarget}
+    , m_name{b.m_name}
+    , mDisplayName{b.mDisplayName}
+    , m_localCopy{b.m_localCopy}
+    , mPhysicalPath{b.mPhysicalPath}
+    , tmpFile{b.tmpFile}
+    , realFile{b.realFile}
+    , m_size{b.m_size}
+    , m_modificationTime{b.m_modificationTime}
+    , m_bSymLink{b.m_bSymLink}
+    , m_bFile{b.m_bFile}
+    , m_bDir{b.m_bDir}
+    , m_bExists{b.m_bExists}
+    , m_bWritable{b.m_bWritable}
+    , m_bReadable{b.m_bReadable}
+    , m_bExecutable{b.m_bExecutable}
+    , m_bHidden{b.m_bHidden} {
+    b.mJobHandler = nullptr;
+    b.m_pParent = nullptr;
+    b.m_url = QUrl{};
+    b.m_bValidData = false;
+
+    b.m_baseDir = QDir{};
+    b.m_fileInfo = QFileInfo{};
+    b.m_linkTarget = QString{};
+    b.m_name = QString{};
+    b.mDisplayName = QString{};
+    b.m_localCopy = QString{};
+    b.mPhysicalPath = QString{};
+    b.tmpFile = nullptr;
+    b.realFile = nullptr;
+    b.m_size = 0;
+    b.m_modificationTime = QDateTime::fromMSecsSinceEpoch(0);
+    b.m_bSymLink = false;
+    b.m_bFile = false;
+    b.m_bDir = false;
+    b.m_bExists = false;
+    b.m_bWritable = false;
+    b.m_bReadable = false;
+    b.m_bExecutable = false;
+    b.m_bHidden = false;
+}
+
+FileAccess& FileAccess::operator=(const FileAccess& b) {
+    delete mJobHandler;
+#ifndef AUTOTEST
+    mJobHandler = b.mJobHandler ? new DefaultFileAccessJobHandler(this) : nullptr;
+#else
+    mJobHandler = nullptr;
+#endif
+    m_pParent = b.m_pParent;
+    m_url = b.m_url;
+    m_bValidData = b.m_bValidData;
+    m_baseDir = b.m_baseDir;
+    m_fileInfo = b.m_fileInfo;
+    m_linkTarget = b.m_linkTarget;
+    m_name = b.m_name;
+    mDisplayName = b.mDisplayName;
+    m_localCopy = b.m_localCopy;
+    mPhysicalPath = b.mPhysicalPath;
+    tmpFile = b.tmpFile;
+    realFile = b.realFile;
+    m_size = b.m_size;
+    m_modificationTime = b.m_modificationTime;
+    m_bSymLink = b.m_bSymLink;
+    m_bFile = b.m_bFile;
+    m_bDir = b.m_bDir;
+    m_bExists = b.m_bExists;
+    m_bWritable = b.m_bWritable;
+    m_bReadable = b.m_bReadable;
+    m_bExecutable = b.m_bExecutable;
+    m_bHidden = b.m_bHidden;
+    return *this;
+}
+
+FileAccess& FileAccess::operator=(FileAccess&& b) {
+    delete mJobHandler;
+    mJobHandler = b.mJobHandler;
+    m_pParent = b.m_pParent;
+    m_url = b.m_url;
+    m_bValidData = b.m_bValidData;
+    m_baseDir = b.m_baseDir;
+    m_fileInfo = b.m_fileInfo;
+    m_linkTarget = b.m_linkTarget;
+    m_name = b.m_name;
+    mDisplayName = b.mDisplayName;
+    m_localCopy = b.m_localCopy;
+    mPhysicalPath = b.mPhysicalPath;
+    tmpFile = b.tmpFile;
+    realFile = b.realFile;
+    m_size = b.m_size;
+    m_modificationTime = b.m_modificationTime;
+    m_bSymLink = b.m_bSymLink;
+    m_bFile = b.m_bFile;
+    m_bDir = b.m_bDir;
+    m_bExists = b.m_bExists;
+    m_bWritable = b.m_bWritable;
+    m_bReadable = b.m_bReadable;
+    m_bExecutable = b.m_bExecutable;
+    m_bHidden = b.m_bHidden;
+
+    b.mJobHandler = nullptr;
+    b.m_pParent = nullptr;
+    b.m_url = QUrl{};
+    b.m_bValidData = false;
+
+    b.m_baseDir = QDir{};
+    b.m_fileInfo = QFileInfo{};
+    b.m_linkTarget = QString{};
+    b.m_name = QString{};
+    b.mDisplayName = QString{};
+    b.m_localCopy = QString{};
+    b.mPhysicalPath = QString{};
+    b.tmpFile = nullptr;
+    b.realFile = nullptr;
+    b.m_size = 0;
+    b.m_modificationTime = QDateTime::fromMSecsSinceEpoch(0);
+    b.m_bSymLink = false;
+    b.m_bFile = false;
+    b.m_bDir = false;
+    b.m_bExists = false;
+    b.m_bWritable = false;
+    b.m_bReadable = false;
+    b.m_bExecutable = false;
+    b.m_bHidden = false;
+    return *this;
+}
+
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
     setFile(name, bWantToWrite);
@@ -105,6 +271,9 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     if(url.isEmpty())
         return;
     
+    #ifndef AUTOTEST
+    if(mJobHandler == nullptr)  mJobHandler = new DefaultFileAccessJobHandler(this);
+    #endif
     reset();
     Q_ASSERT(parent() == nullptr || url != parent()->url());
 
@@ -700,6 +869,7 @@ bool FileAccess::listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindH
                          const QString& filePattern, const QString& fileAntiPattern, const QString& dirAntiPattern,
                          bool bFollowDirLinks, bool bUseCvsIgnore)
 {
+    Q_ASSERT(mJobHandler != nullptr);
     return mJobHandler->listDir(pDirList, bRecursive, bFindHidden, filePattern, fileAntiPattern,
                       dirAntiPattern, bFollowDirLinks, bUseCvsIgnore);
 }
