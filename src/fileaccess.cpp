@@ -42,55 +42,55 @@ FileAccess::FileAccess(const FileAccess& b):
 #ifndef AUTOTEST
     mJobHandler {b.mJobHandler}, 
 #endif
-    m_pParent{b.m_pParent}
-    , m_url{b.m_url}
-    , m_bValidData{b.m_bValidData}
-    , m_baseDir{b.m_baseDir}
-    , m_fileInfo{b.m_fileInfo}
-    , m_linkTarget{b.m_linkTarget}
-    , m_name{b.m_name}
-    , mDisplayName{b.mDisplayName}
-    , m_localCopy{b.m_localCopy}
-    , mPhysicalPath{b.mPhysicalPath}
-    , tmpFile{b.tmpFile}
-    , realFile{b.realFile}
-    , m_size{b.m_size}
-    , m_modificationTime{b.m_modificationTime}
-    , m_bSymLink{b.m_bSymLink}
-    , m_bFile{b.m_bFile}
-    , m_bDir{b.m_bDir}
-    , m_bExists{b.m_bExists}
-    , m_bWritable{b.m_bWritable}
-    , m_bReadable{b.m_bReadable}
-    , m_bExecutable{b.m_bExecutable}
-    , m_bHidden{b.m_bHidden}
+    m_pParent{b.m_pParent},
+    m_url{b.m_url},
+    m_bValidData{b.m_bValidData},
+    m_baseDir{b.m_baseDir},
+    m_fileInfo{b.m_fileInfo},
+    m_linkTarget{b.m_linkTarget},
+    m_name{b.m_name},
+    mDisplayName{b.mDisplayName},
+    m_localCopy{b.m_localCopy},
+    mPhysicalPath{b.mPhysicalPath},
+    tmpFile{b.tmpFile},
+    realFile{b.realFile},
+    m_size{b.m_size},
+    m_modificationTime{b.m_modificationTime},
+    m_bSymLink{b.m_bSymLink},
+    m_bFile{b.m_bFile},
+    m_bDir{b.m_bDir},
+    m_bExists{b.m_bExists},
+    m_bWritable{b.m_bWritable},
+    m_bReadable{b.m_bReadable},
+    m_bExecutable{b.m_bExecutable},
+    m_bHidden{b.m_bHidden}
 {
 }
 
-FileAccess::FileAccess(FileAccess&& b)
-    : mJobHandler{b.mJobHandler}
-    , m_pParent{b.m_pParent}
-    , m_url{b.m_url}
-    , m_bValidData{b.m_bValidData}
-    , m_baseDir{b.m_baseDir}
-    , m_fileInfo{b.m_fileInfo}
-    , m_linkTarget{b.m_linkTarget}
-    , m_name{b.m_name}
-    , mDisplayName{b.mDisplayName}
-    , m_localCopy{b.m_localCopy}
-    , mPhysicalPath{b.mPhysicalPath}
-    , tmpFile{b.tmpFile}
-    , realFile{b.realFile}
-    , m_size{b.m_size}
-    , m_modificationTime{b.m_modificationTime}
-    , m_bSymLink{b.m_bSymLink}
-    , m_bFile{b.m_bFile}
-    , m_bDir{b.m_bDir}
-    , m_bExists{b.m_bExists}
-    , m_bWritable{b.m_bWritable}
-    , m_bReadable{b.m_bReadable}
-    , m_bExecutable{b.m_bExecutable}
-    , m_bHidden{b.m_bHidden}
+FileAccess::FileAccess(FileAccess&& b):
+    mJobHandler{b.mJobHandler},
+    m_pParent{b.m_pParent},
+    m_url{b.m_url},
+    m_bValidData{b.m_bValidData},
+    m_baseDir{b.m_baseDir},
+    m_fileInfo{b.m_fileInfo},
+    m_linkTarget{b.m_linkTarget},
+    m_name{b.m_name},
+    mDisplayName{b.mDisplayName},
+    m_localCopy{b.m_localCopy},
+    mPhysicalPath{b.mPhysicalPath},
+    tmpFile{b.tmpFile},
+    realFile{b.realFile},
+    m_size{b.m_size},
+    m_modificationTime{b.m_modificationTime},
+    m_bSymLink{b.m_bSymLink},
+    m_bFile{b.m_bFile},
+    m_bDir{b.m_bDir},
+    m_bExists{b.m_bExists},
+    m_bWritable{b.m_bWritable},
+    m_bReadable{b.m_bReadable},
+    m_bExecutable{b.m_bExecutable},
+    m_bHidden{b.m_bHidden}
 {
     mJobHandler->setFileAccess(this);
     b.mJobHandler = nullptr;
