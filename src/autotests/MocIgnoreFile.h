@@ -24,7 +24,7 @@ class MocIgnoreFile: public FileAccess
     MocIgnoreFile()
     {
         //Q_ASSERT(false);
-        mJobHandler = new FileAccessJobHandlerMoc(this);
+        mJobHandler.reset(new FileAccessJobHandlerMoc(this));
         /*
           FileAccess set file calls our overriden loadData to actually get file meta data.
           This way we can avoid making any actual FileSystem checks on the simulated file.

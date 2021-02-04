@@ -34,14 +34,13 @@
 
 #include <KLocalizedString>
 
-/*
-    Notice to future editors this project uses in-line default initiallization. Please do not duplicate
-    that here. Also defaulted or deleted functions should be left in-line.
-*/
+
+//This triggers template instantiation.
+FileAccess::FileAccess() = default;
+
+FileAccess::~FileAccess() = default;
+
 FileAccess::FileAccess(const FileAccess& b):
-#ifndef AUTOTEST
-    mJobHandler{b.mJobHandler ? new DefaultFileAccessJobHandler(this) : nullptr},
-#endif
     m_pParent{b.m_pParent},
     m_url{b.m_url},
     m_bValidData{b.m_bValidData},
@@ -65,10 +64,12 @@ FileAccess::FileAccess(const FileAccess& b):
     m_bExecutable{b.m_bExecutable},
     m_bHidden{b.m_bHidden}
 {
+    #ifndef AUTOTEST
+    mJobHandler.reset(b.mJobHandler ? new DefaultFileAccessJobHandler(this) : nullptr);
+    #endif
 }
 
 FileAccess::FileAccess(FileAccess&& b):
-    mJobHandler{b.mJobHandler},
     m_pParent{b.m_pParent},
     m_url{b.m_url},
     m_bValidData{b.m_bValidData},
@@ -92,8 +93,9 @@ FileAccess::FileAccess(FileAccess&& b):
     m_bExecutable{b.m_bExecutable},
     m_bHidden{b.m_bHidden}
 {
+    mJobHandler.reset(b.mJobHandler.take());
     if (mJobHandler) mJobHandler->setFileAccess(this);
-    b.mJobHandler = nullptr;
+    
     b.m_pParent = nullptr;
     b.m_url = QUrl();
     b.m_bValidData = false;
@@ -121,11 +123,11 @@ FileAccess::FileAccess(FileAccess&& b):
 
 FileAccess& FileAccess::operator=(const FileAccess& b)
 {
-    delete mJobHandler;
+    if(&b == this) return *this;
+
+    //mJobHandler defaults to nullptr
 #ifndef AUTOTEST
-    mJobHandler = b.mJobHandler ? new DefaultFileAccessJobHandler(this) : nullptr;
-#else
-    mJobHandler = nullptr;
+    mJobHandler.reset(b.mJobHandler ? new DefaultFileAccessJobHandler(this) : nullptr);
 #endif
     m_pParent = b.m_pParent;
     m_url = b.m_url;
@@ -155,9 +157,10 @@ FileAccess& FileAccess::operator=(const FileAccess& b)
 FileAccess& FileAccess::operator=(FileAccess&& b)
 {
     if(&b == this) return *this;
-    delete mJobHandler;
-    mJobHandler = b.mJobHandler;
+    
+    mJobHandler.reset(b.mJobHandler.take());
     if (mJobHandler) mJobHandler->setFileAccess(this);
+
     m_pParent = b.m_pParent;
     m_url = b.m_url;
     m_bValidData = b.m_bValidData;
@@ -181,7 +184,6 @@ FileAccess& FileAccess::operator=(FileAccess&& b)
     m_bExecutable = b.m_bExecutable;
     m_bHidden = b.m_bHidden;
 
-    b.mJobHandler = nullptr;
     b.m_pParent = nullptr;
     b.m_url = QUrl();
     b.m_bValidData = false;
@@ -218,11 +220,6 @@ FileAccess::FileAccess(const QUrl& name, bool bWantToWrite)
     setFile(name, bWantToWrite);
 }
 
-FileAccess::~FileAccess()
-{
-    delete mJobHandler;
-};
-
 /*
     Performs a re-init. This delibratly does not include mJobHandler.
 */
@@ -258,7 +255,7 @@ void FileAccess::setFile(FileAccess* pParent, const QFileInfo& fi)
 {
     Q_ASSERT(pParent != this);
 #ifndef AUTOTEST
-    if(mJobHandler == nullptr) mJobHandler = new DefaultFileAccessJobHandler(this);
+    if(mJobHandler == nullptr) mJobHandler.reset(new DefaultFileAccessJobHandler(this));
 #endif
     reset();
 
@@ -284,7 +281,7 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
         return;
 
 #ifndef AUTOTEST
-    if(mJobHandler == nullptr) mJobHandler = new DefaultFileAccessJobHandler(this);
+    if(mJobHandler == nullptr) mJobHandler.reset(new DefaultFileAccessJobHandler(this));
 #endif
     reset();
     Q_ASSERT(parent() == nullptr || url != parent()->url());

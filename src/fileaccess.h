@@ -34,7 +34,8 @@ class DefaultFileAccessJobHandler;
 class FileAccess
 {
   public:
-    FileAccess() = default;
+    FileAccess();
+
     FileAccess(const FileAccess&);
     FileAccess(FileAccess&&);
     FileAccess& operator=(const FileAccess&);
@@ -140,7 +141,7 @@ class FileAccess
 
     bool interruptableReadFile(void* pDestBuffer, qint64 maxLength);
 
-    FileAccessJobHandler* mJobHandler = nullptr;
+    QScopedPointer<FileAccessJobHandler> mJobHandler;
     FileAccess* m_pParent = nullptr;
     QUrl m_url;
     bool m_bValidData = false;

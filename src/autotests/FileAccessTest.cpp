@@ -17,7 +17,7 @@ class FileAccessMoc: public FileAccess
   public:
     void setEngine(FileAccessJobHandler* handler)
     {
-        if(handler != mJobHandler) delete mJobHandler, mJobHandler = handler;
+        if(handler != mJobHandler.data()) mJobHandler.reset(handler);
     }
 
     void setParent(FileAccessMoc* parent)
