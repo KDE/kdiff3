@@ -40,7 +40,7 @@
 */
 FileAccess::FileAccess(const FileAccess& b):
 #ifndef AUTOTEST
-    mJobHandler {b.mJobHandler}, 
+    mJobHandler{b.mJobHandler}, 
 #endif
     m_pParent{b.m_pParent},
     m_url{b.m_url},
@@ -95,16 +95,16 @@ FileAccess::FileAccess(FileAccess&& b):
     mJobHandler->setFileAccess(this);
     b.mJobHandler = nullptr;
     b.m_pParent = nullptr;
-    b.m_url = QUrl{};
+    b.m_url = QUrl();
     b.m_bValidData = false;
 
-    b.m_baseDir = QDir{};
-    b.m_fileInfo = QFileInfo{};
-    b.m_linkTarget = QString{};
-    b.m_name = QString{};
-    b.mDisplayName = QString{};
-    b.m_localCopy = QString{};
-    b.mPhysicalPath = QString{};
+    b.m_baseDir = QDir();
+    b.m_fileInfo = QFileInfo();
+    b.m_linkTarget = QString();
+    b.m_name = QString();
+    b.mDisplayName = QString();
+    b.m_localCopy = QString();
+    b.mPhysicalPath = QString();
     b.tmpFile = nullptr;
     b.realFile = nullptr;
     b.m_size = 0;
@@ -183,16 +183,16 @@ FileAccess& FileAccess::operator=(FileAccess&& b)
 
     b.mJobHandler = nullptr;
     b.m_pParent = nullptr;
-    b.m_url = QUrl{};
+    b.m_url = QUrl();
     b.m_bValidData = false;
 
-    b.m_baseDir = QDir{};
-    b.m_fileInfo = QFileInfo{};
-    b.m_linkTarget = QString{};
-    b.m_name = QString{};
-    b.mDisplayName = QString{};
-    b.m_localCopy = QString{};
-    b.mPhysicalPath = QString{};
+    b.m_baseDir = QDir();
+    b.m_fileInfo = QFileInfo();
+    b.m_linkTarget = QString();
+    b.m_name = QString();
+    b.mDisplayName = QString();
+    b.m_localCopy = QString();
+    b.mPhysicalPath = QString();
     b.tmpFile = nullptr;
     b.realFile = nullptr;
     b.m_size = 0;
