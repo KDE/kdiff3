@@ -34,7 +34,7 @@ class DefaultFileAccessJobHandler;
 class FileAccess
 {
   public:
-    FileAccess();
+    FileAccess() = default;
     FileAccess(const FileAccess&);
     FileAccess(FileAccess&&);
     FileAccess& operator=(const FileAccess&);

@@ -32,8 +32,10 @@ class FileAccessJobHandler: public QObject
   public:
     FileAccessJobHandler(FileAccess* pFileAccess)
     {
-        m_pFileAccess = pFileAccess;
+        mFileAccess = pFileAccess;
     }
+    //This exists soley to allow FileAccess to be no-except movable
+    void setFileAccess(FileAccess* pFileAccess) {  mFileAccess = pFileAccess; }
     virtual bool get(void* pDestBuffer, long maxLength) = 0;
     virtual bool put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume = false, int permissions = -1) = 0;
     virtual bool stat(short detailLevel = 2, bool bWantToWrite = false) = 0;
@@ -46,7 +48,7 @@ class FileAccessJobHandler: public QObject
     virtual bool symLink(const QUrl& linkTarget, const QUrl& linkLocation) = 0;
 
   protected:
-    FileAccess* m_pFileAccess = nullptr;
+    FileAccess* mFileAccess = nullptr;
     bool m_bSuccess = false;
 
     // Data needed during Job

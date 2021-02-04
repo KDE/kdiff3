@@ -33,13 +33,14 @@
 
 #include <KLocalizedString>
 
-FileAccess::FileAccess() = default;
+/*
+    Notice to future editors this project uses in-line default initiallization. Please do not duplicate
+    that here. Also defaulted or deleted functions should be left in-line.
+*/
 
 FileAccess::FileAccess(const FileAccess& b)
 #ifndef AUTOTEST
-    : mJobHandler{b.mJobHandler ? new DefaultFileAccessJobHandler(this) : nullptr}
-#else
-    : mJobHandler{nullptr}
+    : mJobHandler {b.mJobHandler}
 #endif
     , m_pParent{b.m_pParent}
     , m_url{b.m_url}
@@ -62,7 +63,9 @@ FileAccess::FileAccess(const FileAccess& b)
     , m_bWritable{b.m_bWritable}
     , m_bReadable{b.m_bReadable}
     , m_bExecutable{b.m_bExecutable}
-    , m_bHidden{b.m_bHidden} {}
+    , m_bHidden{b.m_bHidden}
+{
+}
 
 FileAccess::FileAccess(FileAccess&& b)
     : mJobHandler{b.mJobHandler}
@@ -87,7 +90,9 @@ FileAccess::FileAccess(FileAccess&& b)
     , m_bWritable{b.m_bWritable}
     , m_bReadable{b.m_bReadable}
     , m_bExecutable{b.m_bExecutable}
-    , m_bHidden{b.m_bHidden} {
+    , m_bHidden{b.m_bHidden}
+{
+    mJobHandler->setFileAccess(this);
     b.mJobHandler = nullptr;
     b.m_pParent = nullptr;
     b.m_url = QUrl{};
@@ -114,7 +119,8 @@ FileAccess::FileAccess(FileAccess&& b)
     b.m_bHidden = false;
 }
 
-FileAccess& FileAccess::operator=(const FileAccess& b) {
+FileAccess& FileAccess::operator=(const FileAccess& b)
+{
     delete mJobHandler;
 #ifndef AUTOTEST
     mJobHandler = b.mJobHandler ? new DefaultFileAccessJobHandler(this) : nullptr;
@@ -146,9 +152,11 @@ FileAccess& FileAccess::operator=(const FileAccess& b) {
     return *this;
 }
 
-FileAccess& FileAccess::operator=(FileAccess&& b) {
+FileAccess& FileAccess::operator=(FileAccess&& b)
+{
     delete mJobHandler;
     mJobHandler = b.mJobHandler;
+    mJobHandler->setFileAccess(this);
     m_pParent = b.m_pParent;
     m_url = b.m_url;
     m_bValidData = b.m_bValidData;
