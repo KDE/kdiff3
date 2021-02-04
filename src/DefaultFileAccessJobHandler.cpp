@@ -24,15 +24,15 @@
 bool DefaultFileAccessJobHandler::stat(short detail, bool bWantToWrite)
 {
     m_bSuccess = false;
-    m_pFileAccess->setStatusText(QString());
-    KIO::StatJob* pStatJob = KIO::stat(m_pFileAccess->url(),
+    mFileAccess->setStatusText(QString());
+    KIO::StatJob* pStatJob = KIO::stat(mFileAccess->url(),
                                        bWantToWrite ? KIO::StatJob::DestinationSide : KIO::StatJob::SourceSide,
                                        detail, KIO::HideProgressInfo);
 
     chk_connect(pStatJob, &KIO::StatJob::result, this, &DefaultFileAccessJobHandler::slotStatResult);
     chk_connect(pStatJob, &KIO::StatJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
 
-    ProgressProxy::enterEventLoop(pStatJob, i18n("Getting file status: %1", m_pFileAccess->prettyAbsPath()));
+    ProgressProxy::enterEventLoop(pStatJob, i18n("Getting file status: %1", mFileAccess->prettyAbsPath()));
 
     return m_bSuccess;
 }
@@ -47,11 +47,11 @@ void DefaultFileAccessJobHandler::slotStatResult(KJob* pJob)
         {
             pJob->uiDelegate()->showErrorMessage();
             m_bSuccess = false;
-            m_pFileAccess->reset();
+            mFileAccess->reset();
         }
         else
         {
-            m_pFileAccess->doError();
+            mFileAccess->doError();
             m_bSuccess = true;
         }
     }
@@ -61,8 +61,8 @@ void DefaultFileAccessJobHandler::slotStatResult(KJob* pJob)
 
         const KIO::UDSEntry e = static_cast<KIO::StatJob*>(pJob)->statResult();
 
-        m_pFileAccess->setFromUdsEntry(e, m_pFileAccess->parent());
-        m_bSuccess = m_pFileAccess->isValid();
+        mFileAccess->setFromUdsEntry(e, mFileAccess->parent());
+        m_bSuccess = mFileAccess->isValid();
     }
 }
 
@@ -72,19 +72,19 @@ bool DefaultFileAccessJobHandler::get(void* pDestBuffer, long maxLength)
 
     if(maxLength > 0 && !pp.wasCancelled())
     {
-        KIO::TransferJob* pJob = KIO::get(m_pFileAccess->url(), KIO::NoReload);
+        KIO::TransferJob* pJob = KIO::get(mFileAccess->url(), KIO::NoReload);
         m_transferredBytes = 0;
         m_pTransferBuffer = (char*)pDestBuffer;
         m_maxLength = maxLength;
         m_bSuccess = false;
-        m_pFileAccess->setStatusText(QString());
+        mFileAccess->setStatusText(QString());
 
         chk_connect(pJob, &KIO::TransferJob::result, this, &DefaultFileAccessJobHandler::slotSimpleJobResult);
         chk_connect(pJob, &KIO::TransferJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
         chk_connect(pJob, &KIO::TransferJob::data, this, &DefaultFileAccessJobHandler::slotGetData);
         chk_connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
 
-        ProgressProxy::enterEventLoop(pJob, i18n("Reading file: %1", m_pFileAccess->prettyAbsPath()));
+        ProgressProxy::enterEventLoop(pJob, i18n("Reading file: %1", mFileAccess->prettyAbsPath()));
         return m_bSuccess;
     }
     else
@@ -111,20 +111,20 @@ bool DefaultFileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bo
     ProgressProxyExtender pp; // Implicitly used in slotPercent()
     if(maxLength > 0)
     {
-        KIO::TransferJob* pJob = KIO::put(m_pFileAccess->url(), permissions,
+        KIO::TransferJob* pJob = KIO::put(mFileAccess->url(), permissions,
                                           KIO::HideProgressInfo | (bOverwrite ? KIO::Overwrite : KIO::DefaultFlags) | (bResume ? KIO::Resume : KIO::DefaultFlags));
         m_transferredBytes = 0;
         m_pTransferBuffer = (char*)pSrcBuffer;
         m_maxLength = maxLength;
         m_bSuccess = false;
-        m_pFileAccess->setStatusText(QString());
+        mFileAccess->setStatusText(QString());
 
         chk_connect(pJob, &KIO::TransferJob::result, this, &DefaultFileAccessJobHandler::slotPutJobResult);
         chk_connect(pJob, &KIO::TransferJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
         chk_connect(pJob, &KIO::TransferJob::dataReq, this, &DefaultFileAccessJobHandler::slotPutData);
         chk_connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
 
-        ProgressProxy::enterEventLoop(pJob, i18n("Writing file: %1", m_pFileAccess->prettyAbsPath()));
+        ProgressProxy::enterEventLoop(pJob, i18n("Writing file: %1", mFileAccess->prettyAbsPath()));
         return m_bSuccess;
     }
     else
@@ -260,22 +260,22 @@ bool DefaultFileAccessJobHandler::rename(const FileAccess& destFile)
     if(destFile.fileName().isEmpty())
         return false;
 
-    if(m_pFileAccess->isLocal() && destFile.isLocal())
+    if(mFileAccess->isLocal() && destFile.isLocal())
     {
-        return QDir().rename(m_pFileAccess->absoluteFilePath(), destFile.absoluteFilePath());
+        return QDir().rename(mFileAccess->absoluteFilePath(), destFile.absoluteFilePath());
     }
     else
     {
         ProgressProxyExtender pp;
         int permissions = -1;
         m_bSuccess = false;
-        KIO::FileCopyJob* pJob = KIO::file_move(m_pFileAccess->url(), destFile.url(), permissions, KIO::HideProgressInfo);
+        KIO::FileCopyJob* pJob = KIO::file_move(mFileAccess->url(), destFile.url(), permissions, KIO::HideProgressInfo);
         chk_connect(pJob, &KIO::FileCopyJob::result, this, &DefaultFileAccessJobHandler::slotSimpleJobResult);
         chk_connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
         chk_connect(pJob, &KIO::FileCopyJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
 
         ProgressProxy::enterEventLoop(pJob,
-                                      i18n("Renaming file: %1 -> %2", m_pFileAccess->prettyAbsPath(), destFile.prettyAbsPath()));
+                                      i18n("Renaming file: %1 -> %2", mFileAccess->prettyAbsPath(), destFile.prettyAbsPath()));
         return m_bSuccess;
     }
 }
@@ -307,18 +307,18 @@ bool DefaultFileAccessJobHandler::copyFile(const QString& inDest)
     FileAccess dest;
     dest.setFile(inDest);
 
-    m_pFileAccess->setStatusText(QString());
-    if(!m_pFileAccess->isNormal() || !dest.isNormal()) return false;
+    mFileAccess->setStatusText(QString());
+    if(!mFileAccess->isNormal() || !dest.isNormal()) return false;
 
-    int permissions = (m_pFileAccess->isExecutable() ? 0111 : 0) + (m_pFileAccess->isWritable() ? 0222 : 0) + (m_pFileAccess->isReadable() ? 0444 : 0);
+    int permissions = (mFileAccess->isExecutable() ? 0111 : 0) + (mFileAccess->isWritable() ? 0222 : 0) + (mFileAccess->isReadable() ? 0444 : 0);
     m_bSuccess = false;
-    KIO::FileCopyJob* pJob = KIO::file_copy(m_pFileAccess->url(), dest.url(), permissions, KIO::HideProgressInfo|KIO::Overwrite);
+    KIO::FileCopyJob* pJob = KIO::file_copy(mFileAccess->url(), dest.url(), permissions, KIO::HideProgressInfo|KIO::Overwrite);
     chk_connect(pJob, &KIO::FileCopyJob::result, this, &DefaultFileAccessJobHandler::slotSimpleJobResult);
     chk_connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
     chk_connect(pJob, &KIO::FileCopyJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
 
     ProgressProxy::enterEventLoop(pJob,
-                                  i18n("Copying file: %1 -> %2", m_pFileAccess->prettyAbsPath(), dest.prettyAbsPath()));
+                                  i18n("Copying file: %1 -> %2", mFileAccess->prettyAbsPath(), dest.prettyAbsPath()));
 
     return m_bSuccess;
     // Note that the KIO-slave preserves the original date, if this is supported.
@@ -340,13 +340,13 @@ bool DefaultFileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecur
     if(pp.wasCancelled())
         return true; // Cancelled is not an error.
 
-    pp.setInformation(i18n("Reading folder: %1", m_pFileAccess->absoluteFilePath()), 0, false);
-    qCInfo(kdiffFileAccess) << "Reading folder: " << m_pFileAccess->absoluteFilePath();
+    pp.setInformation(i18n("Reading folder: %1", mFileAccess->absoluteFilePath()), 0, false);
+    qCInfo(kdiffFileAccess) << "Reading folder: " << mFileAccess->absoluteFilePath();
 
-    if(m_pFileAccess->isLocal())
+    if(mFileAccess->isLocal())
     {
         m_bSuccess = true;
-        QDir dir(m_pFileAccess->absoluteFilePath());
+        QDir dir(mFileAccess->absoluteFilePath());
 
         dir.setSorting(QDir::Name | QDir::DirsFirst);
         if(bFindHidden)
@@ -374,7 +374,7 @@ bool DefaultFileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecur
 
                 FileAccess fa;
 
-                fa.setFile(m_pFileAccess, fi);
+                fa.setFile(mFileAccess, fi);
                 pDirList->push_back(fa);
             }
         }
@@ -382,7 +382,7 @@ bool DefaultFileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecur
     else
     {
         KIO::ListJob* pListJob = nullptr;
-        pListJob = KIO::listDir(m_pFileAccess->url(), KIO::HideProgressInfo, true /*bFindHidden*/);
+        pListJob = KIO::listDir(mFileAccess->url(), KIO::HideProgressInfo, true /*bFindHidden*/);
 
         m_bSuccess = false;
         if(pListJob != nullptr)
@@ -393,16 +393,16 @@ bool DefaultFileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecur
             chk_connect(pListJob, &KIO::ListJob::infoMessage, &pp, &ProgressProxyExtender::slotListDirInfoMessage);
 
             // This line makes the transfer via fish unreliable.:-(
-            /*if(m_pFileAccess->url().scheme() != QLatin1String("fish")){
+            /*if(mFileAccess->url().scheme() != QLatin1String("fish")){
                 chk_connect( pListJob, static_cast<void (KIO::ListJob::*)(KJob*,qint64)>(&KIO::ListJob::percent), &pp, &ProgressProxyExtender::slotPercent);
             }*/
 
             ProgressProxy::enterEventLoop(pListJob,
-                                          i18n("Listing directory: %1", m_pFileAccess->prettyAbsPath()));
+                                          i18n("Listing directory: %1", mFileAccess->prettyAbsPath()));
         }
     }
 
-    m_pFileAccess->filterList(pDirList, filePattern, fileAntiPattern, dirAntiPattern, bUseCvsIgnore);
+    mFileAccess->filterList(pDirList, filePattern, fileAntiPattern, dirAntiPattern, bUseCvsIgnore);
 
     if(bRecursive)
     {
@@ -436,7 +436,7 @@ void DefaultFileAccessJobHandler::slotListDirProcessNewEntries(KIO::Job*, const 
     {
         FileAccess fa;
 
-        fa.setFromUdsEntry(e, m_pFileAccess);
+        fa.setFromUdsEntry(e, mFileAccess);
 
         //must be manually filtered KDE does not supply API for ignoring these.
         if(fa.fileName() != "." && fa.fileName() != ".." && fa.isValid())

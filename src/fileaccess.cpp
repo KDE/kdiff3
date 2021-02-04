@@ -38,12 +38,11 @@
     Notice to future editors this project uses in-line default initiallization. Please do not duplicate
     that here. Also defaulted or deleted functions should be left in-line.
 */
-
-FileAccess::FileAccess(const FileAccess& b)
+FileAccess::FileAccess(const FileAccess& b):
 #ifndef AUTOTEST
-    : mJobHandler {b.mJobHandler}
+    mJobHandler {b.mJobHandler}, 
 #endif
-    , m_pParent{b.m_pParent}
+    m_pParent{b.m_pParent}
     , m_url{b.m_url}
     , m_bValidData{b.m_bValidData}
     , m_baseDir{b.m_baseDir}
@@ -155,6 +154,7 @@ FileAccess& FileAccess::operator=(const FileAccess& b)
 
 FileAccess& FileAccess::operator=(FileAccess&& b)
 {
+    if(&b == this) return *this;
     delete mJobHandler;
     mJobHandler = b.mJobHandler;
     mJobHandler->setFileAccess(this);
