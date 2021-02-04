@@ -40,7 +40,7 @@
 */
 FileAccess::FileAccess(const FileAccess& b):
 #ifndef AUTOTEST
-    mJobHandler{b.mJobHandler}, 
+    mJobHandler{b.mJobHandler ? new DefaultFileAccessJobHandler(this) : nullptr},
 #endif
     m_pParent{b.m_pParent},
     m_url{b.m_url},
