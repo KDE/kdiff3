@@ -7,15 +7,16 @@
 */
 #include "fileaccess.h"
 
-#include "cvsignorelist.h"
 #include "common.h"
+#include "cvsignorelist.h"
+#include <qglobal.h>
 #ifndef AUTOTEST
 #include "DefaultFileAccessJobHandler.h"
 #endif
 #include "FileAccessJobHandler.h"
 #include "Logging.h"
-#include "progress.h"
 #include "Utils.h"
+#include "progress.h"
 
 #include <cstdlib>
 #include <sys/stat.h>
@@ -27,9 +28,9 @@
 
 #include <QDir>
 #include <QFile>
-#include <QtMath>
 #include <QRegExp>
 #include <QTemporaryFile>
+#include <QtMath>
 
 #include <KLocalizedString>
 
@@ -217,7 +218,10 @@ FileAccess::FileAccess(const QUrl& name, bool bWantToWrite)
     setFile(name, bWantToWrite);
 }
 
-FileAccess::~FileAccess() { delete mJobHandler; };
+FileAccess::~FileAccess()
+{
+    delete mJobHandler;
+};
 
 /*
     Performs a re-init. This delibratly does not include mJobHandler.
@@ -235,7 +239,7 @@ void FileAccess::reset()
     m_bHidden = false;
     m_size = 0;
     m_modificationTime = QDateTime::fromMSecsSinceEpoch(0);
-    
+
     mDisplayName.clear();
     mPhysicalPath.clear();
     m_linkTarget.clear();
@@ -253,9 +257,9 @@ void FileAccess::reset()
 void FileAccess::setFile(FileAccess* pParent, const QFileInfo& fi)
 {
     Q_ASSERT(pParent != this);
-    #ifndef AUTOTEST
-    if(mJobHandler == nullptr)  mJobHandler = new DefaultFileAccessJobHandler(this);
-    #endif
+#ifndef AUTOTEST
+    if(mJobHandler == nullptr) mJobHandler = new DefaultFileAccessJobHandler(this);
+#endif
     reset();
 
     m_fileInfo = fi;
@@ -278,10 +282,10 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
 {
     if(url.isEmpty())
         return;
-    
-    #ifndef AUTOTEST
-    if(mJobHandler == nullptr)  mJobHandler = new DefaultFileAccessJobHandler(this);
-    #endif
+
+#ifndef AUTOTEST
+    if(mJobHandler == nullptr) mJobHandler = new DefaultFileAccessJobHandler(this);
+#endif
     reset();
     Q_ASSERT(parent() == nullptr || url != parent()->url());
 
@@ -293,7 +297,7 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
             Utils::urlToString handles choosing the right API from QUrl.
         */
         m_fileInfo.setFile(Utils::urlToString(url));
-        
+
         m_pParent = nullptr;
 
         loadData();
@@ -304,8 +308,8 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
 
         if(mJobHandler->stat(2 /*all details*/, bWantToWrite))
             m_bValidData = true; // After running stat() the variables are initialised
-                                // and valid even if the file doesn't exist and the stat
-                                // query failed.
+                                 // and valid even if the file doesn't exist and the stat
+                                 // query failed.
     }
 }
 
@@ -407,14 +411,14 @@ void FileAccess::addPath(const QString& txt, bool reinit)
 */
 //This is what KIO uses on windows so we might as well check it.
 #ifdef Q_OS_WIN
-#define	S_IRUSR	0400	// Read by owner.
-#define	S_IWUSR	0200	// Write by owner.
-#define S_IXUSR 0100    // Execute by owner.
-#define S_IROTH 00004   // others have read permission
-#define S_IWOTH 00002   // others have write permission
-#define S_IXOTH 00001   // others have execute permission
+#define S_IRUSR 0400  // Read by owner.
+#define S_IWUSR 0200  // Write by owner.
+#define S_IXUSR 0100  // Execute by owner.
+#define S_IROTH 00004 // others have read permission
+#define S_IWOTH 00002 // others have write permission
+#define S_IXOTH 00001 // others have execute permission
 #endif
-void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
+void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent)
 {
     long acc = 0;
     long fileType = 0;
@@ -530,7 +534,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess *parent)
     m_name = m_fileInfo.fileName();
     if(m_name.isEmpty())
         m_name = m_fileInfo.absoluteDir().dirName();
-    
+
     if(isLocal())
     {
         m_bExists = m_fileInfo.exists();
@@ -716,7 +720,7 @@ QString FileAccess::fileRelPath() const
         //Stop right before the root directory
         if(parent() == nullptr) return QString();
 
-        const FileAccess *curEntry = this;
+        const FileAccess* curEntry = this;
         path = fileName();
         //Avoid recursing to FileAccess::fileRelPath or we can get very large stacks.
         curEntry = curEntry->parent();
@@ -724,10 +728,10 @@ QString FileAccess::fileRelPath() const
         {
             if(curEntry->parent())
                 path.prepend(curEntry->fileName() + '/');
-            curEntry= curEntry->parent();
+            curEntry = curEntry->parent();
         }
         return path;
-    }    
+    }
 }
 
 FileAccess* FileAccess::parent() const
@@ -857,7 +861,6 @@ bool FileAccess::copyFile(const QString& dest)
 
 bool FileAccess::rename(const FileAccess& dest)
 {
-    
     return mJobHandler->rename(dest);
 }
 
@@ -1016,7 +1019,7 @@ qint64 FileAccess::sizeForReading()
         {
             QString localCopy = tmpFile->fileName();
             QFileInfo fi(localCopy);
-            
+
             m_size = fi.size();
             m_localCopy = localCopy;
             return m_size;
@@ -1048,7 +1051,7 @@ QString FileAccess::cleanPath(const QString& path) // static
     */
     QUrl url = QUrl::fromUserInput(path, QString(), QUrl::AssumeLocalFile);
 
-    if( FileAccess::isLocal(url) )
+    if(FileAccess::isLocal(url))
     {
         return QDir::cleanPath(path);
     }
