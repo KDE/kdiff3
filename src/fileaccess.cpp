@@ -92,7 +92,7 @@ FileAccess::FileAccess(FileAccess&& b):
     m_bExecutable{b.m_bExecutable},
     m_bHidden{b.m_bHidden}
 {
-    mJobHandler->setFileAccess(this);
+    if (mJobHandler) mJobHandler->setFileAccess(this);
     b.mJobHandler = nullptr;
     b.m_pParent = nullptr;
     b.m_url = QUrl();
@@ -157,7 +157,7 @@ FileAccess& FileAccess::operator=(FileAccess&& b)
     if(&b == this) return *this;
     delete mJobHandler;
     mJobHandler = b.mJobHandler;
-    mJobHandler->setFileAccess(this);
+    if (mJobHandler) mJobHandler->setFileAccess(this);
     m_pParent = b.m_pParent;
     m_url = b.m_url;
     m_bValidData = b.m_bValidData;
