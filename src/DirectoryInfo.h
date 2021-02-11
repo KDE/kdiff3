@@ -27,10 +27,10 @@ class DirectoryInfo
           m_dirListC.clear();
       }
 
-      inline FileAccess dirA() const { return m_dirA; }
-      inline FileAccess dirB() const { return m_dirB; }
-      inline FileAccess dirC() const { return m_dirC; }
-      inline FileAccess destDir() const
+      inline const FileAccess& dirA() const { return m_dirA; }
+      inline const FileAccess& dirB() const { return m_dirB; }
+      inline const FileAccess& dirC() const { return m_dirC; }
+      inline const FileAccess& destDir() const
       {
           if(m_dirDest.isValid())
               return m_dirDest;

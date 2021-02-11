@@ -837,10 +837,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         m_pDirShowFilesOnlyInC->setChecked(true);
     }
     Q_ASSERT(dirInfo != nullptr);
-    FileAccess dirA = dirInfo->dirA();
-    FileAccess dirB = dirInfo->dirB();
-    FileAccess dirC = dirInfo->dirC();
-    const FileAccess dirDest = dirInfo->destDir();
+    const FileAccess& dirA = dirInfo->dirA();
+    const FileAccess& dirB = dirInfo->dirB();
+    const FileAccess& dirC = dirInfo->dirC();
+    const FileAccess& dirDest = dirInfo->destDir();
     // Check if all input directories exist and are valid. The dest dir is not tested now.
     // The test will happen only when we are going to write to it.
     if(!dirA.isDir() || !dirB.isDir() ||
