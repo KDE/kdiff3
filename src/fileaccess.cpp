@@ -70,9 +70,7 @@ FileAccess::FileAccess(const FileAccess& b):
     m_bExecutable{b.m_bExecutable},
     m_bHidden{b.m_bHidden}
 {
-    #ifndef AUTOTEST
-    mJobHandler.reset(b.mJobHandler ? new DefaultFileAccessJobHandler(this) : nullptr);
-    #endif
+    mJobHandler.reset(b.mJobHandler ? b.mJobHandler->copy(this) : nullptr);
 }
 
 FileAccess::FileAccess(FileAccess&& b):
@@ -132,9 +130,9 @@ FileAccess& FileAccess::operator=(const FileAccess& b)
     if(&b == this) return *this;
 
     //mJobHandler defaults to nullptr
-#ifndef AUTOTEST
-    mJobHandler.reset(b.mJobHandler ? new DefaultFileAccessJobHandler(this) : nullptr);
-#endif
+
+    mJobHandler.reset(b.mJobHandler ? b.mJobHandler->copy(this) : nullptr);
+
     m_pParent = b.m_pParent;
     m_url = b.m_url;
     m_bValidData = b.m_bValidData;

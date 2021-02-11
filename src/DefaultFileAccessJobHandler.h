@@ -1,9 +1,9 @@
 /**
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2021 Michael Reeves <reeves.87@gmail.com>
  * SPDX-License-Identifier: GPL-2.0-or-later
- * 
+ *
  */
 
 #ifndef DEFAULTFILEACCESSJOBHANDLER_H
@@ -30,6 +30,8 @@ class DefaultFileAccessJobHandler: public FileAccessJobHandler
     Q_OBJECT
   public:
     using FileAccessJobHandler::FileAccessJobHandler;
+
+    FileAccessJobHandler* copy(FileAccess* inFileAccess) override { return new DefaultFileAccessJobHandler(inFileAccess);}
 
     bool get(void* pDestBuffer, long maxLength) override;
     bool put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume = false, int permissions = -1) override;

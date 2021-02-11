@@ -1,9 +1,9 @@
 /**
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2021 Michael Reeves <reeves.87@gmail.com>
  * SPDX-License-Identifier: GPL-2.0-or-later
- * 
+ *
  */
 
 #ifndef FILEACCESSJOBHANDLERMOC_H
@@ -15,7 +15,8 @@ class FileAccessJobHandlerMoc: public FileAccessJobHandler
 {
   public:
     using FileAccessJobHandler::FileAccessJobHandler;
-    
+
+    FileAccessJobHandler* copy(FileAccess* inFileAccess) override { return new FileAccessJobHandlerMoc(inFileAccess);}
     bool get(void*  /*pDestBuffer*/, long  /*maxLength*/) override {return true;};
     bool put(const void*  /*pSrcBuffer*/, long  /*maxLength*/, bool  /*bOverwrite*/, bool  /*bResume*/ = false, int  /*permissions*/ = -1) override {return true;};
     bool stat(short  /*detailLevel*/ = 2, bool  /*bWantToWrite*/ = false) override {return true;};
@@ -30,7 +31,6 @@ class FileAccessJobHandlerMoc: public FileAccessJobHandler
   protected:
     bool mkDirImp(const QString&  /*dirName*/) override {return true;};
     bool rmDirImp(const QString&  /*dirName*/) override {return true;};
-    
 };
 
 #endif /* FILEACCESSJOBHANDLERMOC_H */

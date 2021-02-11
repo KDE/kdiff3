@@ -1,9 +1,9 @@
 /**
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2021 Michael Reeves <reeves.87@gmail.com>
  * SPDX-License-Identifier: GPL-2.0-or-later
- * 
+ *
  */
 
 #ifndef FILEACCESSJOBHANDLER_H
@@ -34,6 +34,8 @@ class FileAccessJobHandler: public QObject
     {
         mFileAccess = pFileAccess;
     }
+
+    virtual FileAccessJobHandler* copy(FileAccess* fileAccess) = 0;
     //This exists soley to allow FileAccess to be no-except movable
     void setFileAccess(FileAccess* pFileAccess) {  mFileAccess = pFileAccess; }
     virtual bool get(void* pDestBuffer, long maxLength) = 0;
