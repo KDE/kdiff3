@@ -1180,12 +1180,12 @@ void OptionDialog::setupDirectoryMergePage()
         "Several Patterns can be specified by using the separator: ';'"));
     ++line;
 
-    OptionCheckBox* pUseCvsIgnore = new OptionCheckBox(i18n("Use .cvsignore"), false, "UseCvsIgnore", &m_options->m_bDmUseCvsIgnore, page);
+    OptionCheckBox* pUseCvsIgnore = new OptionCheckBox(i18n("Use Ignore File"), false, "UseCvsIgnore", &m_options->m_bDmUseCvsIgnore, page);
     gbox->addWidget(pUseCvsIgnore, line, 0, 1, 2);
     addOptionItem(pUseCvsIgnore);
     pUseCvsIgnore->setToolTip(i18n(
-        "Extends the antipattern to anything that would be ignored by CVS.\n"
-        "Via local \".cvsignore\" files this can be folder-specific."));
+        "Extends the antipattern to anything that would be ignored by source control.\n"
+        "Via local ingore files this can be folder-specific."));
     ++line;
 
     OptionCheckBox* pFindHidden = new OptionCheckBox(i18n("Find hidden files and folders"), true, "FindHidden", &m_options->m_bDmFindHidden, page);
