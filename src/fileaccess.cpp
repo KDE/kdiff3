@@ -34,9 +34,15 @@
 
 #include <KLocalizedString>
 
-
-//This triggers template instantiation.
+//This triggers template instantiation even if set to default.
+#ifndef AUTOTEST
+FileAccess::FileAccess()
+{
+    mJobHandler.reset(new DefaultFileAccessJobHandler(this));
+}
+#else
 FileAccess::FileAccess() = default;
+#endif
 
 FileAccess::~FileAccess() = default;
 
@@ -95,7 +101,7 @@ FileAccess::FileAccess(FileAccess&& b):
 {
     mJobHandler.reset(b.mJobHandler.take());
     if (mJobHandler) mJobHandler->setFileAccess(this);
-    
+
     b.m_pParent = nullptr;
     b.m_url = QUrl();
     b.m_bValidData = false;
@@ -157,7 +163,7 @@ FileAccess& FileAccess::operator=(const FileAccess& b)
 FileAccess& FileAccess::operator=(FileAccess&& b)
 {
     if(&b == this) return *this;
-    
+
     mJobHandler.reset(b.mJobHandler.take());
     if (mJobHandler) mJobHandler->setFileAccess(this);
 
