@@ -21,20 +21,20 @@ void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
                                    ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
                                    "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$");
 
-    constexpr char varname[] = "CVSIGNORE";
+    const char* varname = getVarName();
 
     addEntriesFromString(ignorestr);
-    addEntriesFromFile(QDir::homePath() + "/.cvsignore");
+    addEntriesFromFile(QDir::homePath() + '/'+ getGlobalIgnoreName());
     if(qEnvironmentVariableIsSet(varname) && !qEnvironmentVariableIsEmpty(varname))
     {
         addEntriesFromString(QString::fromLocal8Bit(qgetenv(varname)));
     }
 
-    const bool bUseLocalCvsIgnore = cvsIgnoreExists(pDirList);
+    const bool bUseLocalCvsIgnore = ignoreExists(pDirList);
     if(bUseLocalCvsIgnore)
     {
         FileAccess file(dir);
-        file.addPath(".cvsignore");
+        file.addPath(getIgnoreName());
         if(file.exists() && file.isLocal())
             addEntriesFromFile(file.absoluteFilePath());
         else
@@ -166,11 +166,11 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
     return false;
 }
 
-bool CvsIgnoreList::cvsIgnoreExists(const t_DirectoryList* pDirList)
+bool CvsIgnoreList::ignoreExists(const t_DirectoryList* pDirList)
 {
     for(const FileAccess& dir : *pDirList)
     {
-        if(dir.fileName() == ".cvsignore")
+        if(dir.fileName() == getIgnoreName())
             return true;
     }
     return false;

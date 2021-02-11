@@ -1,8 +1,8 @@
 /*
-  class CvsIgnoreList from Cervisia cvsdir.cpp                            
-     SPDX-FileCopyrightText: 1999-2002 Bernd Gehrmann <bernd at mail.berlios.de>    
-  with elements from class StringMatcher                                  
-     SPDX-FileCopyrightText: 2003 Andre Woebbeking <Woebbeking at web.de>           
+  class CvsIgnoreList from Cervisia cvsdir.cpp
+     SPDX-FileCopyrightText: 1999-2002 Bernd Gehrmann <bernd at mail.berlios.de>
+  with elements from class StringMatcher
+     SPDX-FileCopyrightText: 2003 Andre Woebbeking <Woebbeking at web.de>
   Modifications for KDiff3 by Joachim Eibl
 
   SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
@@ -24,9 +24,16 @@ class CvsIgnoreList
     void init(FileAccess& dir, const t_DirectoryList* pDirList);
     bool matches(const QString& text, bool bCaseSensitive) const;
 
+    virtual ~CvsIgnoreList() = default;
+
   private:
     friend class CvsIgnoreListTest;
-    bool cvsIgnoreExists(const t_DirectoryList* pDirList);
+
+    //The name of the users global ingore
+    inline virtual const QString getGlobalIgnoreName() const { return getIgnoreName(); }
+    inline virtual const char* getVarName() const { return "CVSIGNORE";}
+    inline virtual const QString getIgnoreName() const { return QStringLiteral(".cvsignore");}
+    bool ignoreExists(const t_DirectoryList* pDirList);
 
     void addEntriesFromString(const QString& str);
     void addEntriesFromFile(const QString& name);
