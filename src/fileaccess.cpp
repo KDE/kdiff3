@@ -102,7 +102,6 @@ FileAccess::FileAccess(FileAccess&& b):
     m_url = std::move(b.m_url);
 
     b.m_pParent = nullptr;
-    b.m_url = QUrl();
     b.m_bValidData = false;
 
     b.m_baseDir = QDir();

@@ -37,9 +37,9 @@ class FileAccess
     FileAccess();
 
     FileAccess(const FileAccess&);
-    FileAccess(FileAccess&&);
+    FileAccess(FileAccess&&) noexcept;
     FileAccess& operator=(const FileAccess&);
-    FileAccess& operator=(FileAccess&&);
+    FileAccess& operator=(FileAccess&&) noexcept;
     virtual ~FileAccess();
     explicit FileAccess(const QString& name, bool bWantToWrite = false); // name: local file or dirname or url (when supported)
 
