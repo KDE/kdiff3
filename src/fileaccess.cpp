@@ -75,7 +75,6 @@ FileAccess::FileAccess(const FileAccess& b):
 
 FileAccess::FileAccess(FileAccess&& b):
     m_pParent{b.m_pParent},
-    m_url{b.m_url},
     m_bValidData{b.m_bValidData},
     m_baseDir{b.m_baseDir},
     m_fileInfo{b.m_fileInfo},
@@ -98,7 +97,9 @@ FileAccess::FileAccess(FileAccess&& b):
     m_bHidden{b.m_bHidden}
 {
     mJobHandler.reset(b.mJobHandler.take());
-    if (mJobHandler) mJobHandler->setFileAccess(this);
+    if(mJobHandler) mJobHandler->setFileAccess(this);
+
+    m_url = std::move(b.m_url);
 
     b.m_pParent = nullptr;
     b.m_url = QUrl();
