@@ -1659,11 +1659,12 @@ So this is what this program can do for you: &kdiff3; ...
          will be excluded from the tree. More than one pattern may be specified here
          via using the semicolon ";" as separator. Valid wildcards: '*' and '?'. Default
          is "<literal>CVS;deps;.svn</literal>".</para></listitem></varlistentry>
-   <varlistentry><term><guilabel>Use .cvsignore</guilabel></term><listitem><para>
-         Ignore files and folders that would also be ignored by CVS.
-         Many automatically generated files are ignored by CVS.
-         The big advantage is that this can be folder-specific via a local <filename>.cvsignore</filename> file.
-         (See <ulink url="info:/cvs/cvsignore">info:/cvs/cvsignore</ulink>.)</para></listitem></varlistentry>
+   <varlistentry><term><guilabel>Use Ignore File</guilabel></term><listitem><para>
+         Ignore files and folders that would also be ignored by the your source control.
+         Many automatically generated files are ignored using ignore lists.
+         The big advantage is that this can be folder-specific via a local ignore file.
+         (See version control docs for more detail.)
+         </para></listitem></varlistentry>
    <varlistentry><term><guilabel>Find hidden files and folders</guilabel></term><listitem><para> On some file systems files
          have an "Hidden"-attribute. On other systems a filename starting with a dot
          "." causes it to be hidden. This option allows you to decide whether to
