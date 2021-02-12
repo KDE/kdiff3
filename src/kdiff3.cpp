@@ -239,7 +239,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
             m_bDefaultFilename = false;
         }
 
-        m_bAutoSolve = !KDiff3Shell::getParser()->isSet("qall"); // Note that this is effective only once.
         QStringList args = KDiff3Shell::getParser()->positionalArguments();
 
         m_sd1->setFilename(KDiff3Shell::getParser()->value("base"));
@@ -292,7 +291,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     else
     {
         m_bDefaultFilename = false;
-        m_bAutoSolve = false;
     }
     g_pProgressDialog->setStayHidden(m_bAutoMode);
 

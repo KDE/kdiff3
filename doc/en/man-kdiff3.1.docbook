@@ -37,7 +37,6 @@
 <arg choice="opt"><option>--out</option> <replaceable>file</replaceable></arg>
 <arg choice="opt"><option>--noauto</option></arg>
 <arg choice="opt"><option>--auto</option></arg>
-<arg choice="opt"><option>--qall</option></arg>
 <arg choice="opt"><option>--L1</option> <replaceable>alias1</replaceable></arg>
 <arg choice="opt"><option>--L2</option> <replaceable>alias2</replaceable></arg>
 <arg choice="opt"><option>--L3</option> <replaceable>alias3</replaceable></arg>
@@ -116,8 +115,8 @@
 </varlistentry>
 
 <varlistentry>
-<term><option>--qall</option></term>
-<listitem><para>Don't solve conflicts automatically.
+<term><option>--noauto</option></term>
+<listitem><para>Ignore --auto and always show GUI.
 </para></listitem>
 </varlistentry>
 

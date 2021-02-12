@@ -121,7 +121,6 @@ int main(int argc, char* argv[])
     cmdLineParser->addOption(QCommandLineOption(QLatin1String("noauto"), i18n("Ignored.")));
     cmdLineParser->addOption(QCommandLineOption(QLatin1String("auto"), i18n("Ignored.")));
 #endif
-    cmdLineParser->addOption(QCommandLineOption(QLatin1String("qall"), i18n("Do not solve conflicts automatically.")));
     cmdLineParser->addOption(QCommandLineOption(QLatin1String("L1"), i18n("Visible name replacement for input file 1 (base)."), QLatin1String("alias1")));
     cmdLineParser->addOption(QCommandLineOption(QLatin1String("L2"), i18n("Visible name replacement for input file 2."), QLatin1String("alias2")));
     cmdLineParser->addOption(QCommandLineOption(QLatin1String("L3"), i18n("Visible name replacement for input file 3."), QLatin1String("alias3")));

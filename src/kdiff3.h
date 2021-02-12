@@ -98,7 +98,7 @@ class ReversibleScrollBar : public QScrollBar
 };
 
 /*
-  InitFlag 
+  InitFlag
 */
 
 enum class InitFlag
@@ -464,8 +464,6 @@ public Q_SLOTS:
     bool m_bAutoFlag = false;
     bool m_bAutoMode = false;
     bool m_bRecalcWordWrapPosted = false;
-
-    bool m_bAutoSolve = true;//TODO: Needed?
 
     int m_firstD3LIdx;                 // only needed during recalcWordWrap
     QPointer<QEventLoop> m_pEventLoopForPrinting;
