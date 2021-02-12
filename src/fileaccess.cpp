@@ -8,7 +8,7 @@
 #include "fileaccess.h"
 
 #include "common.h"
-#include "cvsignorelist.h"
+#include "CvsIgnoreList.h"
 #include <qglobal.h>
 #ifndef AUTOTEST
 #include "DefaultFileAccessJobHandler.h"

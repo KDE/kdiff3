@@ -28,7 +28,7 @@ set(kdiff3part_PART_SRCS
    MergeFileInfos.cpp
    Utils.cpp
    selection.cpp
-   cvsignorelist.cpp
+   ignorelist.cpp
    SourceData.cpp
    Overview.cpp
    Logging.cpp

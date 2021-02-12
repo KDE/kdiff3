@@ -8,9 +8,22 @@
 #include <QTest>
 #include <qglobal.h>
 
-#include "../cvsignorelist.h"
+#include "../CvsIgnoreList.h"
 #include "MocIgnoreFile.h"
 
+class IgnoreListTestInterface: public CvsIgnoreList
+{
+  public:
+    bool isEmpty() const
+    {
+        return m_exactPatterns.isEmpty() && m_endPatterns.isEmpty() && m_generalPatterns.isEmpty() && m_startPatterns.isEmpty();
+    }
+
+    const QStringList& getExactMatchList() const
+    {
+        return m_exactPatterns;
+    }
+};
 
 class CvsIgnoreListTest : public QObject
 {
@@ -22,12 +35,12 @@ class CvsIgnoreListTest : public QObject
     void initTestCase()
     {
         MocIgnoreFile file;
-        CvsIgnoreList test;
+        IgnoreListTestInterface test;
         //sanity check defaults
-        QVERIFY(test.m_exactPatterns.isEmpty());
-        QVERIFY(test.m_endPatterns.isEmpty());
-        QVERIFY(test.m_generalPatterns.isEmpty());
-        QVERIFY(test.m_startPatterns.isEmpty());
+        QVERIFY(test.isEmpty());
+        QVERIFY(test.isEmpty());
+        QVERIFY(test.isEmpty());
+        QVERIFY(test.isEmpty());
         //MocIgnoreFile should be emulating a readable local file.
         QVERIFY(file.isLocal());
         QVERIFY(file.exists());
@@ -37,12 +50,12 @@ class CvsIgnoreListTest : public QObject
 
     void addEntriesFromString()
     {
-        CvsIgnoreList test;
+        IgnoreListTestInterface test;
 
         QString testString = ". .. core RCSLOG tags TAGS RCS SCCS .make.state";
         test.addEntriesFromString(testString);
-        QVERIFY(!test.m_exactPatterns.isEmpty());
-        QVERIFY(test.m_exactPatterns == testString.split(' '));
+        QVERIFY(!test.getExactMatchList().isEmpty());
+        QVERIFY(test.getExactMatchList() == testString.split(' '));
     }
 
     void matches()
@@ -116,4 +129,4 @@ class CvsIgnoreListTest : public QObject
 
 QTEST_MAIN(CvsIgnoreListTest);
 
-#include "CvsIgnorelist.moc"
+#include "CvsIgnoreListTest.moc"

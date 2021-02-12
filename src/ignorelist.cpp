@@ -9,13 +9,13 @@
   SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
   SPDX-License-Identifier: GPL-2.0-or-later
  */
-#include "cvsignorelist.h"
+#include "CvsIgnoreList.h"
 #include "TypeUtils.h"
 
 #include <QDir>
 #include <QTextStream>
 
-void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
+void IgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
 {
     static const QString ignorestr = QString::fromLatin1(". .. core RCSLOG tags TAGS RCS SCCS .make.state "
                                    ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
@@ -45,7 +45,7 @@ void CvsIgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
     }
 }
 
-void CvsIgnoreList::addEntriesFromString(const QString& str)
+void IgnoreList::addEntriesFromString(const QString& str)
 {
     const QStringList patternList = str.split(' ');
     for(const QString& pattern : patternList)
@@ -57,7 +57,7 @@ void CvsIgnoreList::addEntriesFromString(const QString& str)
 /*
     We don't have a real file in AUTORUN mode
 */
-void CvsIgnoreList::addEntriesFromFile(const QString& name)
+void IgnoreList::addEntriesFromFile(const QString& name)
 {
     #ifdef AUTORUN
     Q_UNUSED(name)
@@ -75,7 +75,7 @@ void CvsIgnoreList::addEntriesFromFile(const QString& name)
     #endif
 }
 
-void CvsIgnoreList::addEntry(const QString& pattern)
+void IgnoreList::addEntry(const QString& pattern)
 {
     if(pattern != QString("!"))
     {
@@ -131,7 +131,7 @@ void CvsIgnoreList::addEntry(const QString& pattern)
     }
 }
 
-bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
+bool IgnoreList::matches(const QString& text, bool bCaseSensitive) const
 {
     QRegExp regexp(text, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
     if(m_exactPatterns.indexOf(regexp) >= 0)
@@ -166,7 +166,7 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
     return false;
 }
 
-bool CvsIgnoreList::ignoreExists(const t_DirectoryList* pDirList)
+bool IgnoreList::ignoreExists(const t_DirectoryList* pDirList)
 {
     for(const FileAccess& dir : *pDirList)
     {
