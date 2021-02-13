@@ -1185,7 +1185,7 @@ void OptionDialog::setupDirectoryMergePage()
     addOptionItem(pUseCvsIgnore);
     pUseCvsIgnore->setToolTip(i18n(
         "Extends the antipattern to anything that would be ignored by source control.\n"
-        "Via local ingore files this can be folder-specific."));
+        "Via local ignore files this can be folder-specific."));
     ++line;
 
     OptionCheckBox* pFindHidden = new OptionCheckBox(i18n("Find hidden files and folders"), true, "FindHidden", &m_options->m_bDmFindHidden, page);
