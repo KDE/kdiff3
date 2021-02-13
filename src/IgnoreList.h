@@ -12,42 +12,11 @@
 #ifndef IGNORELIST_H
 #define IGNORELIST_H
 
-#include "fileaccess.h"
-
-#include <QString>
-#include <QStringList>
-
 class IgnoreList
 {
-  public:
-    IgnoreList() = default;
-    void init(FileAccess& dir, const DirectoryList* pDirList);
-    [[nodiscard]] bool matches(const QString& text, bool bCaseSensitive) const;
-
+public:
     virtual ~IgnoreList() = default;
-
-  protected:
-    bool ignoreExists(const DirectoryList* pDirList);
-
-    void addEntriesFromString(const QString& str);
-    virtual void addEntriesFromFile(const QString& name);
-    void addEntry(const QString& pattern);
-
-    QStringList m_exactPatterns;
-    QStringList m_startPatterns;
-    QStringList m_endPatterns;
-    QStringList m_generalPatterns;
-
-  private:
-    /*
-        The name of the users global ignore can be changed separately in some cases in the future
-        kdiff will handle this through a user settings.
-        For now just return the same thing as gerIngoreName. That works
-    */
-    [[nodiscard]] inline virtual const QString getGlobalIgnoreName() const { return getIgnoreName(); }
-    [[nodiscard]] virtual const char* getVarName() const = 0;
-    [[nodiscard]] virtual const QString getIgnoreName() const = 0;
-
+    [[nodiscard]] virtual bool matches(const QString& text, bool bCaseSensitive) const = 0;
 };
 
 #endif

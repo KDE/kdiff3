@@ -15,7 +15,7 @@
 #include <QDir>
 #include <QTextStream>
 
-void IgnoreList::init(FileAccess& dir, const DirectoryList* pDirList)
+void CvsIgnoreList::init(FileAccess& dir, const DirectoryList* pDirList)
 {
     static const QString ignorestr = QString::fromLatin1(". .. core RCSLOG tags TAGS RCS SCCS .make.state "
                                    ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
@@ -45,7 +45,7 @@ void IgnoreList::init(FileAccess& dir, const DirectoryList* pDirList)
     }
 }
 
-void IgnoreList::addEntriesFromString(const QString& str)
+void CvsIgnoreList::addEntriesFromString(const QString& str)
 {
     const QStringList patternList = str.split(' ');
     for(const QString& pattern : patternList)
@@ -57,7 +57,7 @@ void IgnoreList::addEntriesFromString(const QString& str)
 /*
     We don't have a real file in AUTORUN mode
 */
-void IgnoreList::addEntriesFromFile(const QString& name)
+void CvsIgnoreList::addEntriesFromFile(const QString& name)
 {
     #ifdef AUTORUN
     Q_UNUSED(name)
@@ -75,7 +75,7 @@ void IgnoreList::addEntriesFromFile(const QString& name)
     #endif
 }
 
-void IgnoreList::addEntry(const QString& pattern)
+void CvsIgnoreList::addEntry(const QString& pattern)
 {
     if(pattern != QString("!"))
     {
@@ -131,7 +131,7 @@ void IgnoreList::addEntry(const QString& pattern)
     }
 }
 
-bool IgnoreList::matches(const QString& text, bool bCaseSensitive) const
+bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
 {
     QRegExp regexp(text, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
     if(m_exactPatterns.indexOf(regexp) >= 0)
@@ -166,7 +166,7 @@ bool IgnoreList::matches(const QString& text, bool bCaseSensitive) const
     return false;
 }
 
-bool IgnoreList::ignoreExists(const DirectoryList* pDirList)
+bool CvsIgnoreList::ignoreExists(const DirectoryList* pDirList)
 {
     for(const FileAccess& dir : *pDirList)
     {

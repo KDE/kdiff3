@@ -28,14 +28,15 @@ set(kdiff3part_PART_SRCS
    MergeFileInfos.cpp
    Utils.cpp
    selection.cpp
-   IgnoreList.cpp
    SourceData.cpp
    Overview.cpp
    Logging.cpp
    FileNameLineEdit.cpp
    MergeEditLine.cpp
    Options.cpp
-   CommentParser.cpp )
+   CommentParser.cpp
+   CvsIgnoreList.cpp
+)
 
 ki18n_wrap_ui(kdiff3part_PART_SRCS
     scroller.ui
