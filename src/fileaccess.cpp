@@ -73,7 +73,7 @@ FileAccess::FileAccess(const FileAccess& b):
     mJobHandler.reset(b.mJobHandler ? b.mJobHandler->copy(this) : nullptr);
 }
 
-FileAccess::FileAccess(FileAccess&& b):
+FileAccess::FileAccess(FileAccess&& b) noexcept:
     m_pParent{b.m_pParent},
     m_bValidData{b.m_bValidData},
     m_baseDir{b.m_baseDir},
@@ -125,7 +125,7 @@ FileAccess::FileAccess(FileAccess&& b):
     b.m_bHidden = false;
 }
 
-FileAccess& FileAccess::operator=(const FileAccess& b)
+FileAccess& FileAccess::operator=(const FileAccess& b) noexcept
 {
     if(&b == this) return *this;
 
