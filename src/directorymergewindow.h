@@ -66,10 +66,10 @@ class DirectoryMergeWindow : public QTreeView
    void focusOutEvent(QFocusEvent* e) override;
    void contextMenuEvent(QContextMenuEvent* e) override;
 
-   QString getDirNameA() const;
-   QString getDirNameB() const;
-   QString getDirNameC() const;
-   QString getDirNameDest() const;
+   [[nodiscard]] QString getDirNameA() const;
+   [[nodiscard]] QString getDirNameB() const;
+   [[nodiscard]] QString getDirNameC() const;
+   [[nodiscard]] QString getDirNameDest() const;
 
  public Q_SLOTS:
    void reload();
@@ -128,8 +128,8 @@ protected Q_SLOTS:
    void onExpanded();
    void currentChanged(const QModelIndex& current, const QModelIndex& previous) override; // override
 private:
-  int getIntFromIndex(const QModelIndex& index) const;
-  const QSharedPointer<Options>& getOptions() const;
+  [[nodiscard]] int getIntFromIndex(const QModelIndex& index) const;
+  [[nodiscard]] const QSharedPointer<Options>& getOptions() const;
 
   class DirectoryMergeWindowPrivate;
   DirectoryMergeWindowPrivate* d;

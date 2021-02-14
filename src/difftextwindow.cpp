@@ -88,9 +88,9 @@ class WrapLineCacheData
     WrapLineCacheData() = default;
     WrapLineCacheData(int d3LineIdx, int textStart, int textLength)
         : m_d3LineIdx(d3LineIdx), m_textStart(textStart), m_textLength(textLength) {}
-    qint32 d3LineIdx() const { return m_d3LineIdx; }
-    qint32 textStart() const { return m_textStart; }
-    qint32 textLength() const { return m_textLength; }
+    [[nodiscard]] qint32 d3LineIdx() const { return m_d3LineIdx; }
+    [[nodiscard]] qint32 textStart() const { return m_textStart; }
+    [[nodiscard]] qint32 textLength() const { return m_textLength; }
 
   private:
     qint32 m_d3LineIdx = 0;
@@ -124,12 +124,12 @@ class DiffTextWindowData
 
     void myUpdate(int afterMilliSecs);
 
-    int leftInfoWidth() const { return 4 + m_lineNumberWidth; } // Number of information columns on left side
+    [[nodiscard]] int leftInfoWidth() const { return 4 + m_lineNumberWidth; } // Number of information columns on left side
     int convertLineOnScreenToLineInSource(int lineOnScreen, e_CoordType coordType, bool bFirstLine);
 
     void prepareTextLayout(QTextLayout& textLayout, int visibleTextWidth = -1);
 
-    bool isThreeWay() const { return KDiff3App::isTripleDiff(); };
+    [[nodiscard]] bool isThreeWay() const { return KDiff3App::isTripleDiff(); };
     const QString& getFileName() { return m_filename; }
 
     const Diff3LineVector* getDiff3LineVector() { return m_pDiff3LineVector; }
@@ -1827,10 +1827,10 @@ class DiffTextWindowFrameData
         m_pTopLine = new QLabel(m_pTopLineWidget);
     }
 
-    const QPushButton* getBrowseButton() const { return m_pBrowseButton; }
-    const FileNameLineEdit* getFileSelectionField() const { return m_pFileSelection; }
-    const QWidget* getTopLineWidget() const { return m_pTopLineWidget; }
-    const QLabel* getLabel() const { return m_pLabel; }
+    [[nodiscard]] const QPushButton* getBrowseButton() const { return m_pBrowseButton; }
+    [[nodiscard]] const FileNameLineEdit* getFileSelectionField() const { return m_pFileSelection; }
+    [[nodiscard]] const QWidget* getTopLineWidget() const { return m_pTopLineWidget; }
+    [[nodiscard]] const QLabel* getLabel() const { return m_pLabel; }
 
     const QSharedPointer<Options> getOptions() { return m_pOptions; }
 

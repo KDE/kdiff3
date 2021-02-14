@@ -49,28 +49,28 @@ public:
 
     void addOptionItem(OptionItemBase* inItem);
 
-    const QSize& getGeometry() const { return m_geometry; }
+    [[nodiscard]] const QSize& getGeometry() const { return m_geometry; }
     void setGeometry(const QSize& size) { m_geometry = size; }
 
-    const QPoint& getPosition() const { return m_position; }
+    [[nodiscard]] const QPoint& getPosition() const { return m_position; }
     void setPosition(const QPoint& pos) { m_position = pos; }
 
-    bool isFullScreen() const { return m_bFullScreen; };
+    [[nodiscard]] bool isFullScreen() const { return m_bFullScreen; };
 
     void setFullScreen(const bool fullScreen) { m_bFullScreen = fullScreen;};
 
-    bool isMaximised() const { return m_bMaximised; };
+    [[nodiscard]] bool isMaximised() const { return m_bMaximised; };
 
     void setMaximised(const bool maximised) { m_bMaximised = maximised;};
 
 
-    bool isToolBarVisable() const { return m_bShowToolBar; }
+    [[nodiscard]] bool isToolBarVisable() const { return m_bShowToolBar; }
     void setToolbarState(bool inShown) { m_bShowToolBar = inShown; }
 
-    bool isStatusBarVisable() const { return m_bShowStatusBar; }
+    [[nodiscard]] bool isStatusBarVisable() const { return m_bShowStatusBar; }
     void setStatusBarState(bool inShown) { m_bShowStatusBar = inShown; }
 
-    bool wordWrapOn() const { return m_bWordWrap; }
+    [[nodiscard]] bool wordWrapOn() const { return m_bWordWrap; }
     void setWordWrap(const bool enabled) { m_bWordWrap = enabled;}
   private:
     std::list<OptionItemBase*> mOptionItemList;

@@ -137,10 +137,10 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     bool init(const QSharedPointer<DirectoryInfo>& dirInfo, bool bDirectoryMerge, bool bReload);
 
     // Implement QAbstractItemModel
-    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+    [[nodiscard]] QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 
     //Qt::ItemFlags flags ( const QModelIndex & index ) const
-    QModelIndex parent(const QModelIndex& index) const override
+    [[nodiscard]] QModelIndex parent(const QModelIndex& index) const override
     {
         MergeFileInfos* pMFI = getMFI(index);
         if(pMFI == nullptr || pMFI == m_pRoot || pMFI->parent() == m_pRoot)
@@ -150,7 +150,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         return createIndex(pParentsParent->children().indexOf(pMFI->parent()), 0, pMFI->parent());
     }
 
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override
+    [[nodiscard]] int rowCount(const QModelIndex& parent = QModelIndex()) const override
     {
         MergeFileInfos* pParentMFI = getMFI(parent);
         if(pParentMFI != nullptr)
@@ -159,12 +159,12 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
             return m_pRoot->children().count();
     }
 
-    int columnCount(const QModelIndex& /*parent*/) const override
+    [[nodiscard]] int columnCount(const QModelIndex& /*parent*/) const override
     {
         return 10;
     }
 
-    QModelIndex index(int row, int column, const QModelIndex& parent) const override
+    [[nodiscard]] QModelIndex index(int row, int column, const QModelIndex& parent) const override
     {
         MergeFileInfos* pParentMFI = getMFI(parent);
         if(pParentMFI == nullptr && row < m_pRoot->children().count())
@@ -175,7 +175,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
             return QModelIndex();
     }
 
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    [[nodiscard]] QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
     void sort(int column, Qt::SortOrder order) override;
 
@@ -193,7 +193,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     QModelIndex nextSibling(const QModelIndex& mi);
 
     // private data and helper methods
-    MergeFileInfos* getMFI(const QModelIndex& mi) const
+    [[nodiscard]] MergeFileInfos* getMFI(const QModelIndex& mi) const
     {
         if(mi.isValid())
             return (MergeFileInfos*)mi.internalPointer();
@@ -201,13 +201,13 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
             return nullptr;
     }
 
-    bool isThreeWay() const
+    [[nodiscard]] bool isThreeWay() const
     {
         if(rootMFI() == nullptr) return false;
         return rootMFI()->isThreeWay();
     }
 
-    MergeFileInfos* rootMFI() const { return m_pRoot; }
+    [[nodiscard]] MergeFileInfos* rootMFI() const { return m_pRoot; }
 
     void calcDirStatus(bool bThreeDirs, const QModelIndex& mi,
                        int& nofFiles, int& nofDirs, int& nofEqualFiles, int& nofManualMerges);
@@ -227,8 +227,8 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     void scanLocalDirectory(const QString& dirName, t_DirectoryList& dirList);
 
     void setMergeOperation(const QModelIndex& mi, e_MergeOperation eMergeOp, bool bRecursive = true);
-    bool isDir(const QModelIndex& mi) const;
-    QString getFileName(const QModelIndex& mi) const;
+    [[nodiscard]] bool isDir(const QModelIndex& mi) const;
+    [[nodiscard]] QString getFileName(const QModelIndex& mi) const;
 
     bool copyFLD(const QString& srcName, const QString& destName);
     bool deleteFLD(const QString& name, bool bCreateBackup);
@@ -555,7 +555,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
 {
   private:
     DirectoryMergeWindow* m_pDMW;
-    const QSharedPointer<Options>& getOptions() const { return m_pDMW->getOptions(); }
+    [[nodiscard]] const QSharedPointer<Options>& getOptions() const { return m_pDMW->getOptions(); }
 
   public:
     explicit DirMergeItemDelegate(DirectoryMergeWindow* pParent)
@@ -626,7 +626,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
         }
         QStyledItemDelegate::paint(thePainter, option2, index);
     }
-    QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override
+    [[nodiscard]] QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override
     {
         QSize sz = QStyledItemDelegate::sizeHint(option, index);
         return sz.expandedTo(QSize(0, 18));

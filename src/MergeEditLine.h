@@ -61,8 +61,8 @@ class MergeEditLine
             m_str=QLatin1String("");
         }
     }
-    e_SrcSelector src() const { return m_src; }
-    Diff3LineList::const_iterator id3l() const { return m_id3l; }
+    [[nodiscard]] e_SrcSelector src() const { return m_src; }
+    [[nodiscard]] Diff3LineList::const_iterator id3l() const { return m_id3l; }
   private:
     Diff3LineList::const_iterator m_id3l;
     e_SrcSelector m_src; // 1, 2 or 3 for A, B or C respectively, or 0 when line is from neither source.

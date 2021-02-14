@@ -51,7 +51,7 @@ class OptionItemBase
             unpreserve();
         }
     }
-    QString getSaveName() const { return m_saveName; }
+    [[nodiscard]] QString getSaveName() const { return m_saveName; }
   protected:
     virtual void preserve() = 0;
     virtual void unpreserve() = 0;
@@ -89,8 +89,8 @@ class Option : public OptionItemBase
 
     void setToDefault() override {};
     void setToCurrent() override {};
-    const T& getDefault() const { return m_defaultVal; };
-    const T getCurrent() const { return *m_pVar; };
+    [[nodiscard]] const T& getDefault() const { return m_defaultVal; };
+    [[nodiscard]] const T getCurrent() const { return *m_pVar; };
 
     virtual void setCurrent(const T inValue) { *m_pVar = inValue; }
 
@@ -136,7 +136,7 @@ class OptionNum : public Option<T>
         //QString::setNum does not use locale formatting instead it always use QLocale::C.
         return QLocale().toString(inValue);
     }
-    const QString getString() const
+    [[nodiscard]] const QString getString() const
     {
         //QString::setNum does not use locale formatting instead it always use QLocale::C.
         return QLocale().toString(Option<T>::getCurrent());
@@ -164,10 +164,10 @@ class OptionCodec : public OptionString
 
     void setCurrent(const QString name) override { OptionString::setCurrent(name); };
     void setCurrent(const QByteArray& name) { OptionString::setCurrent(QString::fromLatin1(name)); }
-    const QString& defaultName() const { return mDefaultName; }
+    [[nodiscard]] const QString& defaultName() const { return mDefaultName; }
 
     void saveDefaultIndex(const int i) { defaultIndex = i; };
-    int getDefaultIndex() const { return defaultIndex; }
+    [[nodiscard]] int getDefaultIndex() const { return defaultIndex; }
 
   private:
     const QString mDefaultName = QLatin1String(QTextCodec::codecForLocale()->name());

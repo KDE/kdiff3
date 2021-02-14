@@ -177,7 +177,7 @@ public:
     void init(Diff3LineList* d3ll, const Diff3LineVector* d3lv,
               const QVector<LineData>* pldA, LineCount sizeA, const QVector<LineData>* pldB, LineCount sizeB, const QVector<LineData>* pldC, LineCount sizeC);
 
-    inline const QVector<LineData>* getLineData(e_SrcSelector srcIndex) const
+    [[nodiscard]] inline const QVector<LineData>* getLineData(e_SrcSelector srcIndex) const
     {
         switch(srcIndex)
         {
@@ -361,7 +361,7 @@ class Diff3LineList : public std::list<Diff3Line>
     }
 
     //TODO: Add safety guards to prevent list from getting too large. Same problem as with QLinkedList.
-    qint32 size() const
+    [[nodiscard]] qint32 size() const
     {
         if(std::list<Diff3Line>::size() > (size_t)TYPE_MAX(qint32))//explicit cast to silence gcc
         {
@@ -374,7 +374,7 @@ class Diff3LineList : public std::list<Diff3Line>
 
     void debugLineCheck(const LineCount size, const e_SrcSelector srcSelector) const;
 
-    qint32 numberOfLines(bool bWordWrap) const
+    [[nodiscard]] qint32 numberOfLines(bool bWordWrap) const
     {
         if(bWordWrap)
         {
@@ -426,29 +426,29 @@ class TotalDiffStatus
         nofWhitespaceConflicts = 0;
     }
 
-    inline int getUnsolvedConflicts() const { return nofUnsolvedConflicts; }
+    [[nodiscard]] inline int getUnsolvedConflicts() const { return nofUnsolvedConflicts; }
     inline void setUnsolvedConflicts(const int unsolved) { nofUnsolvedConflicts = unsolved; }
 
-    inline int getSolvedConflicts() const { return nofSolvedConflicts; }
+    [[nodiscard]] inline int getSolvedConflicts() const { return nofSolvedConflicts; }
     inline void setSolvedConflicts(const int solved) { nofSolvedConflicts = solved; }
 
-    inline int getWhitespaceConflicts() const { return nofWhitespaceConflicts; }
+    [[nodiscard]] inline int getWhitespaceConflicts() const { return nofWhitespaceConflicts; }
     inline void setWhitespaceConflicts(const int wintespace) { nofWhitespaceConflicts = wintespace; }
 
-    inline int getNonWhitespaceConflicts() const { return getUnsolvedConflicts() + getSolvedConflicts() - getWhitespaceConflicts(); }
+    [[nodiscard]] inline int getNonWhitespaceConflicts() const { return getUnsolvedConflicts() + getSolvedConflicts() - getWhitespaceConflicts(); }
 
-    bool isBinaryEqualAC() const { return bBinaryAEqC; }
-    bool isBinaryEqualBC() const { return bBinaryBEqC; }
-    bool isBinaryEqualAB() const { return bBinaryAEqB; }
+    [[nodiscard]] bool isBinaryEqualAC() const { return bBinaryAEqC; }
+    [[nodiscard]] bool isBinaryEqualBC() const { return bBinaryBEqC; }
+    [[nodiscard]] bool isBinaryEqualAB() const { return bBinaryAEqB; }
 
     void setBinaryEqualAC(const bool equal) { bBinaryAEqC = equal; }
     void setBinaryEqualBC(const bool equal) { bBinaryBEqC = equal; }
     void setBinaryEqualAB(const bool equal) { bBinaryAEqB = equal; }
 
 
-    bool isTextEqualAC() const { return bTextAEqC; }
-    bool isTextEqualBC() const { return bTextBEqC; }
-    bool isTextEqualAB() const { return bTextAEqB; }
+    [[nodiscard]] bool isTextEqualAC() const { return bTextAEqC; }
+    [[nodiscard]] bool isTextEqualBC() const { return bTextBEqC; }
+    [[nodiscard]] bool isTextEqualAB() const { return bTextAEqB; }
 
 
     void setTextEqualAC(const bool equal) { bTextAEqC = equal; }
@@ -515,9 +515,9 @@ class ManualDiffHelpEntry
         }
     }
 
-    inline const LineRef& getLine1(const e_SrcSelector winIdx) const { return winIdx == e_SrcSelector::A ? lineA1 : winIdx == e_SrcSelector::B ? lineB1 : lineC1;}
-    inline const LineRef& getLine2(const e_SrcSelector winIdx) const { return winIdx == e_SrcSelector::A ? lineA2 : winIdx == e_SrcSelector::B ? lineB2 : lineC2;}
-    bool isValidMove(int line1, int line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
+    [[nodiscard]] inline const LineRef& getLine1(const e_SrcSelector winIdx) const { return winIdx == e_SrcSelector::A ? lineA1 : winIdx == e_SrcSelector::B ? lineB1 : lineC1;}
+    [[nodiscard]] inline const LineRef& getLine2(const e_SrcSelector winIdx) const { return winIdx == e_SrcSelector::A ? lineA2 : winIdx == e_SrcSelector::B ? lineB2 : lineC2;}
+    [[nodiscard]] bool isValidMove(int line1, int line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
 };
 
 // A list of corresponding ranges

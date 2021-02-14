@@ -40,9 +40,9 @@ class Merger
 
       public:
         MergeData(const DiffList* p, int i);
-        bool eq() const;
+        [[nodiscard]] bool eq() const;
         void update();
-        bool isEnd() const;
+        [[nodiscard]] bool isEnd() const;
     };
 
     MergeData md1;

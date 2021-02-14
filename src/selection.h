@@ -29,19 +29,19 @@ public:
 //private:
   bool bSelectionContainsData = false;
 public:
-  inline LineRef getFirstLine() const { return firstLine; };
-  inline LineRef getLastLine() const { return lastLine; };
+  [[nodiscard]] inline LineRef getFirstLine() const { return firstLine; };
+  [[nodiscard]] inline LineRef getLastLine() const { return lastLine; };
 
-  inline int getFirstPos() const { return firstPos; };
-  inline int getLastPos() const { return lastPos; };
+  [[nodiscard]] inline int getFirstPos() const { return firstPos; };
+  [[nodiscard]] inline int getLastPos() const { return lastPos; };
 
   inline bool isValidFirstLine() { return firstLine.isValid(); }
   inline void clearOldSelection() { oldLastLine.invalidate(), oldFirstLine.invalidate(); };
 
-  inline LineRef getOldLastLine() const { return oldLastLine; };
-  inline LineRef getOldFirstLine() const  { return oldFirstLine; };
-  inline bool selectionContainsData() const { return bSelectionContainsData; };
-  bool isEmpty() const { return !firstLine.isValid() || (firstLine == lastLine && firstPos == lastPos) || !bSelectionContainsData; }
+  [[nodiscard]] inline LineRef getOldLastLine() const { return oldLastLine; };
+  [[nodiscard]] inline LineRef getOldFirstLine() const  { return oldFirstLine; };
+  [[nodiscard]] inline bool selectionContainsData() const { return bSelectionContainsData; };
+  [[nodiscard]] bool isEmpty() const { return !firstLine.isValid() || (firstLine == lastLine && firstPos == lastPos) || !bSelectionContainsData; }
   void reset()
   {
       oldLastLine = lastLine;
@@ -58,27 +58,27 @@ public:
       lastPos  = p;
       //bSelectionContainsData = (firstLine == lastLine && firstPos == lastPos);
    }
-   bool within( LineRef l, LineRef p ) const;
+   [[nodiscard]] bool within( LineRef l, LineRef p ) const;
 
-   bool lineWithin( LineRef l ) const;
-   int firstPosInLine(LineRef l) const;
-   int lastPosInLine(LineRef l) const;
+   [[nodiscard]] bool lineWithin( LineRef l ) const;
+   [[nodiscard]] int firstPosInLine(LineRef l) const;
+   [[nodiscard]] int lastPosInLine(LineRef l) const;
 
-   LineRef beginLine() const
+   [[nodiscard]] LineRef beginLine() const
    {
       if (!firstLine.isValid() && !lastLine.isValid()) return LineRef();
       return std::max((LineRef)0,std::min(firstLine,lastLine));
    }
 
-   LineRef endLine() const
+   [[nodiscard]] LineRef endLine() const
    {
       if (!firstLine.isValid() && !lastLine.isValid()) return LineRef();
       return std::max(firstLine,lastLine);
    }
 
-   int beginPos() const { return firstLine==lastLine ? std::min(firstPos,lastPos) :
+   [[nodiscard]] int beginPos() const { return firstLine==lastLine ? std::min(firstPos,lastPos) :
                            firstLine<lastLine ? (!firstLine.isValid()?0:firstPos) : (!lastLine.isValid()?0:lastPos);  }
-   int endPos() const { return firstLine==lastLine ? std::max(firstPos,lastPos) :
+   [[nodiscard]] int endPos() const { return firstLine==lastLine ? std::max(firstPos,lastPos) :
                            firstLine<lastLine ? lastPos : firstPos;      }
 };
 

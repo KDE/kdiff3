@@ -22,7 +22,7 @@ class IgnoreList
   public:
     IgnoreList() = default;
     void init(FileAccess& dir, const t_DirectoryList* pDirList);
-    bool matches(const QString& text, bool bCaseSensitive) const;
+    [[nodiscard]] bool matches(const QString& text, bool bCaseSensitive) const;
 
     virtual ~IgnoreList() = default;
 
@@ -44,9 +44,9 @@ class IgnoreList
         kdiff will handle this through a user settings.
         For now just return the same thing as gerIngoreName. That works
     */
-    inline virtual const QString getGlobalIgnoreName() const { return getIgnoreName(); }
-    virtual const char* getVarName() const = 0;
-    virtual const QString getIgnoreName() const = 0;
+    [[nodiscard]] inline virtual const QString getGlobalIgnoreName() const { return getIgnoreName(); }
+    [[nodiscard]] virtual const char* getVarName() const = 0;
+    [[nodiscard]] virtual const QString getIgnoreName() const = 0;
 
 };
 

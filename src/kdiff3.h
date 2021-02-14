@@ -80,7 +80,7 @@ class ReversibleScrollBar : public QScrollBar
             QScrollBar::setValue(i);
     }
 
-    int value() const
+    [[nodiscard]] int value() const
     {
         return m_realVal;
     }
@@ -123,7 +123,7 @@ class KDiff3App : public QSplitter
     KDiff3App(QWidget* parent, const QString& name, KDiff3Part* pKDiff3Part);
     ~KDiff3App() override;
 
-    bool isPart() const;
+    [[nodiscard]] bool isPart() const;
 
     /** initializes the KActions of the application */
     void initActions(KActionCollection*);
@@ -145,12 +145,12 @@ class KDiff3App : public QSplitter
      * @see KMainWindow#closeEvent
      */
     virtual bool queryClose();
-    virtual bool isFileSaved() const;
-    virtual bool isDirComparison() const;
+    [[nodiscard]] virtual bool isFileSaved() const;
+    [[nodiscard]] virtual bool isDirComparison() const;
 
     static bool isTripleDiff() { return m_bTripleDiff; }
 
-    KActionCollection* actionCollection() const;
+    [[nodiscard]] KActionCollection* actionCollection() const;
 
     static boost::signals2::signal<QString (), FirstNonEmpty<QString>> getSelection;
     static boost::signals2::signal<bool (), or> allowCopy;
@@ -329,8 +329,8 @@ public Q_SLOTS:
 
     void choose(e_SrcSelector choice);
 
-    QStatusBar* statusBar() const;
-    KToolBar* toolBar(const QLatin1String &toolBarId) const;
+    [[nodiscard]] QStatusBar* statusBar() const;
+    [[nodiscard]] KToolBar* toolBar(const QLatin1String &toolBarId) const;
     void recalcWordWrap(int visibleTextWidthForPrinting = -1);
 
     bool canCut();

@@ -17,8 +17,8 @@ class CommentParser
     virtual void processChar(const QString &line, const QChar &inChar) = 0;
     virtual void processLine(const QString &line) = 0;
     virtual void removeComment(QString &line) = 0;
-    virtual bool inComment() const = 0;
-    virtual bool isPureComment() const = 0;
+    [[nodiscard]] virtual bool inComment() const = 0;
+    [[nodiscard]] virtual bool isPureComment() const = 0;
     virtual ~CommentParser() = default;
 };
 
@@ -28,8 +28,8 @@ class DefaultCommentParser : public CommentParser
     typedef enum {none, singleLine, multiLine}CommentType;
   public:
     void processLine(const QString &line) override;
-    inline bool inComment() const override { return mCommentType != none; };
-    inline bool isPureComment() const override { return mIsPureComment; };
+    [[nodiscard]] inline bool inComment() const override { return mCommentType != none; };
+    [[nodiscard]] inline bool isPureComment() const override { return mIsPureComment; };
 
     void removeComment(QString &line) override;
   protected:
@@ -37,8 +37,8 @@ class DefaultCommentParser : public CommentParser
 
     void processChar(const QString &line, const QChar &inChar) override;
     //For tests only.
-    inline bool isEscaped() const{ return bIsEscaped; }
-    inline bool inString() const{ return bInString; }
+    [[nodiscard]] inline bool isEscaped() const{ return bIsEscaped; }
+    [[nodiscard]] inline bool inString() const{ return bInString; }
   private:
     QChar mLastChar, mStartChar;
 

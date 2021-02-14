@@ -106,12 +106,12 @@ class SourceData
         void reset();
         void copyBufFrom(const FileData& src);
 
-        bool isEmpty() const { return mDataSize == 0; }
+        [[nodiscard]] bool isEmpty() const { return mDataSize == 0; }
 
-        bool isText() const { return m_bIsText || isEmpty(); }
+        [[nodiscard]] bool isText() const { return m_bIsText || isEmpty(); }
 
-        inline qint64 lineCount() const { return mLineCount; }
-        inline qint64 byteCount() const { return mDataSize; }
+        [[nodiscard]] inline qint64 lineCount() const { return mLineCount; }
+        [[nodiscard]] inline qint64 byteCount() const { return mDataSize; }
     };
     FileData m_normalData;
     FileData m_lmppData;

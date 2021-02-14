@@ -20,8 +20,8 @@ class CvsIgnoreList: public IgnoreList
 {
   private:
     friend class CvsIgnoreListTest;
-    inline const char* getVarName() const override { return "CVSIGNORE"; }
-    inline const QString getIgnoreName() const override { return QStringLiteral(".cvsignore"); }
+    [[nodiscard]] inline const char* getVarName() const override { return "CVSIGNORE"; }
+    [[nodiscard]] inline const QString getIgnoreName() const override { return QStringLiteral(".cvsignore"); }
 };
 
 #endif /* CVSIGNORELIST_H */

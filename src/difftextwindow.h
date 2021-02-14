@@ -84,16 +84,16 @@ class DiffTextWindow : public QWidget
 
     static bool startRunnables();
 
-    bool isThreeWay() const;
-    const QString& getFileName() const;
+    [[nodiscard]] bool isThreeWay() const;
+    [[nodiscard]] const QString& getFileName() const;
 
-    e_SrcSelector getWindowIndex() const;
+    [[nodiscard]] e_SrcSelector getWindowIndex() const;
 
-    const QString getEncodingDisplayString() const;
-    e_LineEndStyle getLineEndStyle() const;
-    const Diff3LineVector* getDiff3LineVector() const;
+    [[nodiscard]] const QString getEncodingDisplayString() const;
+    [[nodiscard]] e_LineEndStyle getLineEndStyle() const;
+    [[nodiscard]] const Diff3LineVector* getDiff3LineVector() const;
 
-    qint32 getLineNumberWidth() const;
+    [[nodiscard]] qint32 getLineNumberWidth() const;
 
     void setSourceData(const QSharedPointer<SourceData>& inData);
   Q_SIGNALS:

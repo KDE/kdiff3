@@ -65,7 +65,7 @@ class LineRef
         return line;
     };
     inline void invalidate() noexcept { mLineNumber = -1; }
-    inline bool isValid() const noexcept { return mLineNumber != -1; }
+    [[nodiscard]] inline bool isValid() const noexcept { return mLineNumber != -1; }
 
   private:
     LineType mLineNumber = -1;
