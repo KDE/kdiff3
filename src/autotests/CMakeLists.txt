@@ -27,3 +27,10 @@ ecm_add_test(combinertest.cpp
     TEST_NAME "combinertest"
     LINK_LIBRARIES Qt5::Test
 )
+
+ecm_add_test(CompositeIgnoreListTest.cpp ../CompositeIgnoreList.cpp
+    TEST_NAME "CompositeIgnoreListTest"
+    LINK_LIBRARIES Qt5::Test
+)
+
+target_compile_features(CompositeIgnoreListTest PRIVATE ${needed_features})

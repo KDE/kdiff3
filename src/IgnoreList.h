@@ -12,6 +12,8 @@
 #ifndef IGNORELIST_H
 #define IGNORELIST_H
 
+#include <QString>
+
 class IgnoreList
 {
 public:
