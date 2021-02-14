@@ -11,9 +11,9 @@ project(kdiff3)
 set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(ECM_MIN_VERSION "5.10.0")
-set(QT_MIN_VERSION "5.8.0")
+set(QT_MIN_VERSION "5.12.0")
 #KF5 5.27 fixes a crash bug triggered on exit.
-set(KF5_MIN_VERSION "5.37.0")
+set(KF5_MIN_VERSION "5.50.0")
 
 find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED)
 set(
@@ -32,7 +32,7 @@ include(ECMAddAppIcon)
 include(ECMSetupVersion)
 include(ECMAddTests)
 
-ecm_setup_version(1.8.70 VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DIR}/src/version.h)
+ecm_setup_version(1.9.70 VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DIR}/src/version.h)
 
 # Some older versions on boost contain a bug that prevents compiling gcc offers a built-in workaround
 # but that isn't enough to ship as clang has no such workaround. 1.65 is known to be affected.
@@ -103,7 +103,7 @@ set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 set(
     needed_features
-    cxx_std_11
+    cxx_std_17
 )
 
 if(ENABLE_AUTO)
@@ -124,9 +124,9 @@ add_definitions(
     #the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
     #KF5 5.64+ flags
-    #Don't warn for API depreciated after 5.36.0 (below as hex.hex.hex number)
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x052400
-    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x052400
+    #Don't warn for API depreciated after 5.50.0 (below as hex.hex.hex number)
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x053200
+    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x053200
 )
 
 add_subdirectory(src)
