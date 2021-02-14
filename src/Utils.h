@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -28,21 +28,13 @@ class Utils{
       inline static int getHorizontalAdvance(const QFontMetrics &metrics, const QString& s, int len = -1)
       {
         //Warning: The Qt API used here is not accurate for some non-latin characters.
-        #if QT_VERSION < QT_VERSION_CHECK(5,12,0)
-          return metrics.width(s, len);
-        #else
-          return metrics.horizontalAdvance(s, len);
-        #endif
+        return metrics.horizontalAdvance(s, len);
       }
 
       inline static int getHorizontalAdvance(const QFontMetrics &metrics, const QChar& c)
       {
         //Warning: The Qt API used here is not accurate for some non-latin characters.
-        #if QT_VERSION < QT_VERSION_CHECK(5,12,0)
-          return metrics.width(c);
-        #else
-          return metrics.horizontalAdvance(c);
-        #endif
+        return metrics.horizontalAdvance(c);
       }
 
       static void calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2);
