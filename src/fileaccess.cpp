@@ -125,7 +125,7 @@ FileAccess::FileAccess(FileAccess&& b) noexcept:
     b.m_bHidden = false;
 }
 
-FileAccess& FileAccess::operator=(const FileAccess& b) noexcept
+FileAccess& FileAccess::operator=(const FileAccess& b)
 {
     if(&b == this) return *this;
 
@@ -158,7 +158,7 @@ FileAccess& FileAccess::operator=(const FileAccess& b) noexcept
     return *this;
 }
 
-FileAccess& FileAccess::operator=(FileAccess&& b)
+FileAccess& FileAccess::operator=(FileAccess&& b) noexcept
 {
     if(&b == this) return *this;
 
