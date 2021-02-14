@@ -8,6 +8,7 @@
 #include "fileaccess.h"
 
 #include "common.h"
+#include "CompositeIgnoreList.h"
 #include "CvsIgnoreList.h"
 #include <qglobal.h>
 #ifndef AUTOTEST
@@ -1099,10 +1100,12 @@ void FileAccess::filterList(DirectoryList* pDirList, const QString& filePattern,
                             const QString& fileAntiPattern, const QString& dirAntiPattern,
                             const bool bUseCvsIgnore)
 {
-    CvsIgnoreList cvsIgnoreList;
+    CompositeIgnoreList ignoreList;
     if(bUseCvsIgnore)
     {
-        cvsIgnoreList.init(*this, pDirList);
+        auto cvsIgnoreList = std::make_unique<CvsIgnoreList>();
+        cvsIgnoreList->init(*this, pDirList);
+        ignoreList.addIgnoreList(std::move(cvsIgnoreList));
     }
     //TODO: Ask os for this information don't hard code it.
 #if defined(Q_OS_WIN)
@@ -1123,7 +1126,7 @@ void FileAccess::filterList(DirectoryList* pDirList, const QString& filePattern,
             (!Utils::wildcardMultiMatch(filePattern, fileName, bCaseSensitive) ||
              Utils::wildcardMultiMatch(fileAntiPattern, fileName, bCaseSensitive))) ||
            (i->isDir() && Utils::wildcardMultiMatch(dirAntiPattern, fileName, bCaseSensitive)) ||
-           (bUseCvsIgnore && cvsIgnoreList.matches(fileName, bCaseSensitive)))
+           (bUseCvsIgnore && ignoreList.matches(fileName, bCaseSensitive)))
         {
             // Remove it
             pDirList->erase(i);

@@ -13,15 +13,17 @@ ecm_add_test(commentparser.cpp ../CommentParser.cpp
     LINK_LIBRARIES Qt5::Test
 )
 
-ecm_add_test(CvsIgnoreListTest.cpp ../CvsIgnoreList.cpp ../fileaccess.cpp ../Utils.cpp ../progress.cpp
+ecm_add_test(CvsIgnoreListTest.cpp ../CvsIgnoreList.cpp ../fileaccess.cpp ../Utils.cpp ../progress.cpp ../CompositeIgnoreList.cpp
     TEST_NAME "cvsignorelisttest"
     LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::KIOCore KF5::I18n
 )
+target_compile_features(cvsignorelisttest PRIVATE ${needed_features})
 
-ecm_add_test(FileAccessTest.cpp ../fileaccess.cpp ../Utils.cpp ../progress.cpp ../CvsIgnoreList.cpp
+ecm_add_test(FileAccessTest.cpp ../fileaccess.cpp ../Utils.cpp ../progress.cpp ../CvsIgnoreList.cpp ../CompositeIgnoreList.cpp
     TEST_NAME "fileaccesstest"
     LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::KIOCore KF5::I18n
 )
+target_compile_features(fileaccesstest PRIVATE ${needed_features})
 
 ecm_add_test(combinertest.cpp
     TEST_NAME "combinertest"
