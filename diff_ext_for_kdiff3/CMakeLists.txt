@@ -1,4 +1,3 @@
-
 # Work around buggy windows sdk headers that prevent certain symbols from being exported the normal way
 # even though they are required exports for shell exentions.
 if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
@@ -26,4 +25,4 @@ target_link_libraries(kdiff3ext KF5::I18n uuid ole32)
 target_compile_definitions(kdiff3ext PRIVATE -DTRANSLATION_DOMAIN=\"kdiff3\" -DUNICODE=1 -DWINVER=0x0502 -D_WIN32_WINNT=WINVER)
 
 #If we don't do this the nsi packer won't pickup the shell extention library.
-install(TARGETS kdiff3ext DESTINATION  ${KDE_INSTALL_PLUGINDIR}/kf5 )
+install(TARGETS kdiff3ext DESTINATION  ${KDE_INSTALL_PLUGINDIR} )
