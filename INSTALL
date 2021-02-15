@@ -1,6 +1,6 @@
 Building KDiff3 requires the fallowing minimum versions:
- 1)Qt 5.6 or later
- 2)KF5 5.27+
+ 1)Qt 5.8 or later
+ 2)KF5 5.37+
  3)CMake 3.1
  4)ECM 1.8
  5)boost 1.66+
@@ -41,8 +41,8 @@ Run:
 2)C:\CraftRoot\craft\craftenv.ps1
 3)craft png2ico
 4)craft kdiff3
-If you what to build 1.8x than use:
-4) craft --target 1.8 kdiff3
+If you what to build 1.9x than use:
+4) craft --target 1.9 kdiff3
 
 Otherwise craft will use master which is the development branch and therefor more likely to experience breakage.
 
@@ -53,10 +53,10 @@ bin/kdiff3
 If you want to create an install package you would run:
 5)craft nsis
 
-6)craft --package kdiff3 or craft --target 1.8 --package kdiff3
+6)craft --package kdiff3 or craft --target 1.9 --package kdiff3
 
 This will be a time consuming process on first run as craft will have to download all dependencies.
-KDiff3 does not require special configuration for craft. 
+KDiff3 does not require special configuration for craft.
 
 There should be an installer package generated in CraftRoot/tmp
 
