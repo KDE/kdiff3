@@ -2054,7 +2054,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
     QtNumberType pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
 
     bool bLMB = e->button() == Qt::LeftButton;
-    bool bMMB = e->button() == Qt::MidButton;
+    bool bMMB = e->button() == Qt::MiddleButton;
     bool bRMB = e->button() == Qt::RightButton;
 
     if((bLMB && (e->x() < xOffset)) || bRMB) // Fast range selection
