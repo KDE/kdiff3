@@ -30,7 +30,7 @@ class IgnoreList
     bool ignoreExists(const t_DirectoryList* pDirList);
 
     void addEntriesFromString(const QString& str);
-    void addEntriesFromFile(const QString& name);
+    virtual void addEntriesFromFile(const QString& name);
     void addEntry(const QString& pattern);
 
     QStringList m_exactPatterns;
