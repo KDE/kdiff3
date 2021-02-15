@@ -418,7 +418,7 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
             // The m_codecVec.size will at this point return the value we need for the index.
             if(codecName == defaultName())
                 saveDefaultIndex(m_codecVec.size());
-            QString itemText = visibleCodecName.isEmpty() ? codecName : visibleCodecName + QLatin1String(" (") + codecName + QLatin1String(")");
+            QString itemText = visibleCodecName.isEmpty() ? codecName : visibleCodecName + u8" (" + codecName + u8")";
             addItem(itemText, m_codecVec.size());
             m_codecVec.push_back(c);
         }

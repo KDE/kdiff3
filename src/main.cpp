@@ -42,7 +42,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
         while(!ts.atEnd())
         {
             QString line = ts.readLine();
-            if(line.startsWith(QLatin1String("IgnorableCmdLineOptions=")))
+            if(line.startsWith(u8"IgnorableCmdLineOptions="))
             {
                 int pos = line.indexOf('=');
                 if(pos >= 0)
@@ -65,7 +65,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
             if(!ignorableOption.isEmpty())
             {
                 if(ignorableOption.length() == 1) {
-                    cmdLineParser->addOption(QCommandLineOption({ignorableOption, QLatin1String("ignore")}, i18n("Ignored. (User defined.)")));
+                    cmdLineParser->addOption(QCommandLineOption({ignorableOption, u8"ignore"}, i18n("Ignored. (User defined.)")));
                 }
                 else
                 {
@@ -110,29 +110,29 @@ int main(int argc, char* argv[])
 
     initialiseCmdLineArgs(cmdLineParser);
     // ignorable command options
-    cmdLineParser->addOption(QCommandLineOption({QLatin1String("m"), QLatin1String("merge")}, i18n("Merge the input.")));
-    cmdLineParser->addOption(QCommandLineOption({QLatin1String("b"), QLatin1String("base")}, i18n("Explicit base file. For compatibility with certain tools."), QLatin1String("file")));
-    cmdLineParser->addOption(QCommandLineOption({QLatin1String("o"), QLatin1String("output")}, i18n("Output file. Implies -m. E.g.: -o newfile.txt"), QLatin1String("file")));
-    cmdLineParser->addOption(QCommandLineOption(QLatin1String("out"), i18n("Output file, again. (For compatibility with certain tools.)"), QLatin1String("file")));
+    cmdLineParser->addOption(QCommandLineOption({u8"m", u8"merge"}, i18n("Merge the input.")));
+    cmdLineParser->addOption(QCommandLineOption({u8"b", u8"base"}, i18n("Explicit base file. For compatibility with certain tools."), u8"file"));
+    cmdLineParser->addOption(QCommandLineOption({u8"o", u8"output"}, i18n("Output file. Implies -m. E.g.: -o newfile.txt"), u8"file"));
+    cmdLineParser->addOption(QCommandLineOption(u8"out", i18n("Output file, again. (For compatibility with certain tools.)"), u8"file"));
 #ifdef ENABLE_AUTO
-    cmdLineParser->addOption(QCommandLineOption(QLatin1String("auto"), i18n("No GUI if all conflicts are auto-solvable. (Needs -o file)")));
-    cmdLineParser->addOption(QCommandLineOption(QLatin1String("noauto"), i18n("Ignore --auto and always show GUI.")));
+    cmdLineParser->addOption(QCommandLineOption(u8"auto", i18n("No GUI if all conflicts are auto-solvable. (Needs -o file)")));
+    cmdLineParser->addOption(QCommandLineOption(u8"noauto", i18n("Ignore --auto and always show GUI.")));
 #else
-    cmdLineParser->addOption(QCommandLineOption(QLatin1String("noauto"), i18n("Ignored.")));
-    cmdLineParser->addOption(QCommandLineOption(QLatin1String("auto"), i18n("Ignored.")));
+    cmdLineParser->addOption(QCommandLineOption(u8"noauto", i18n("Ignored.")));
+    cmdLineParser->addOption(QCommandLineOption(u8"auto", i18n("Ignored.")));
 #endif
-    cmdLineParser->addOption(QCommandLineOption(QLatin1String("L1"), i18n("Visible name replacement for input file 1 (base)."), QLatin1String("alias1")));
-    cmdLineParser->addOption(QCommandLineOption(QLatin1String("L2"), i18n("Visible name replacement for input file 2."), QLatin1String("alias2")));
-    cmdLineParser->addOption(QCommandLineOption(QLatin1String("L3"), i18n("Visible name replacement for input file 3."), QLatin1String("alias3")));
-    cmdLineParser->addOption(QCommandLineOption({QLatin1String("L"), QLatin1String("fname")}, i18n("Alternative visible name replacement. Supply this once for every input."), QLatin1String("alias")));
-    cmdLineParser->addOption(QCommandLineOption(QLatin1String("cs"), i18n("Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\""), QLatin1String("string")));
-    cmdLineParser->addOption(QCommandLineOption(QLatin1String("confighelp"), i18n("Show list of config settings and current values.")));
-    cmdLineParser->addOption(QCommandLineOption(QLatin1String("config"), i18n("Use a different config file."), QLatin1String("file")));
+    cmdLineParser->addOption(QCommandLineOption(u8"L1", i18n("Visible name replacement for input file 1 (base)."), u8"alias1"));
+    cmdLineParser->addOption(QCommandLineOption(u8"L2", i18n("Visible name replacement for input file 2."), u8"alias2"));
+    cmdLineParser->addOption(QCommandLineOption(u8"L3", i18n("Visible name replacement for input file 3."), u8"alias3"));
+    cmdLineParser->addOption(QCommandLineOption({u8"L", u8"fname"}, i18n("Alternative visible name replacement. Supply this once for every input."), u8"alias"));
+    cmdLineParser->addOption(QCommandLineOption(u8"cs", i18n("Override a config setting. Use once for every setting. E.g.: --cs \"AutoAdvance=1\""), u8"string"));
+    cmdLineParser->addOption(QCommandLineOption(u8"confighelp", i18n("Show list of config settings and current values.")));
+    cmdLineParser->addOption(QCommandLineOption(u8"config", i18n("Use a different config file."), u8"file"));
 
     // other command options
-    cmdLineParser->addPositionalArgument(QLatin1String("[File1]"), i18n("file1 to open (base, if not specified via --base)"));
-    cmdLineParser->addPositionalArgument(QLatin1String("[File2]"), i18n("file2 to open"));
-    cmdLineParser->addPositionalArgument(QLatin1String("[File3]"), i18n("file3 to open"));
+    cmdLineParser->addPositionalArgument(u8"[File1]", i18n("file1 to open (base, if not specified via --base)"));
+    cmdLineParser->addPositionalArgument(u8"[File2]", i18n("file2 to open"));
+    cmdLineParser->addPositionalArgument(u8"[File3]", i18n("file3 to open"));
 
     bool isAtty = true;
 

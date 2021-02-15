@@ -3142,8 +3142,8 @@ void WindowTitleWidget::setLineEndStyles(e_LineEndStyle eLineEndStyleA, e_LineEn
     if(eLineEndStyleC == eLineEndStyleUnix)
         unxUsers += QLatin1String(unxUsers.isEmpty() ? "" : ", ") + i18n("C");
 
-    m_pLineEndStyleSelector->addItem(i18n("Unix") + (unxUsers.isEmpty() ? QString("") : QLatin1String(" (") + unxUsers + QLatin1String(")")));
-    m_pLineEndStyleSelector->addItem(i18n("DOS") + (dosUsers.isEmpty() ? QString("") : QLatin1String(" (") + dosUsers + QLatin1String(")")));
+    m_pLineEndStyleSelector->addItem(i18n("Unix") + (unxUsers.isEmpty() ? QString("") : u8" (" + unxUsers + u8")"));
+    m_pLineEndStyleSelector->addItem(i18n("DOS") + (dosUsers.isEmpty() ? QString("") : u8" (" + dosUsers + u8")"));
 
     e_LineEndStyle autoChoice = (e_LineEndStyle)m_pOptions->m_lineEndStyle;
 

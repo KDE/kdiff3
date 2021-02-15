@@ -127,22 +127,22 @@ QStringList safeStringSplit(const QString& s, char sepChar, char metaChar)
 
 void ValueMap::writeEntry(const QString& k, const QFont& v)
 {
-    m_map[k] = v.family() + QLatin1String(",") + QString::number(v.pointSize()) + QLatin1String(",") + (v.bold() ? QLatin1String("bold") : QLatin1String("normal"));
+    m_map[k] = v.family() + u8"," + QString::number(v.pointSize()) + u8"," + (v.bold() ? QStringLiteral("bold") : QStringLiteral("normal"));
 }
 
 void ValueMap::writeEntry(const QString& k, const QColor& v)
 {
-    m_map[k].setNum(v.red()) + QLatin1String(",") + QString().setNum(v.green()) + QLatin1String(",") + QString().setNum(v.blue());
+    m_map[k].setNum(v.red()) + u8"," + QString().setNum(v.green()) + u8"," + QString().setNum(v.blue());
 }
 
 void ValueMap::writeEntry(const QString& k, const QSize& v)
 {
-    m_map[k].setNum(v.width()) + QLatin1String(",") + QString().setNum(v.height());
+    m_map[k].setNum(v.width()) + u8"," + QString().setNum(v.height());
 }
 
 void ValueMap::writeEntry(const QString& k, const QPoint& v)
 {
-    m_map[k].setNum(v.x()) + QLatin1String(",") + QString().setNum(v.y());
+    m_map[k].setNum(v.x()) + u8"," + QString().setNum(v.y());
 }
 
 void ValueMap::writeEntry(const QString& k, int v)

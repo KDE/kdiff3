@@ -31,7 +31,7 @@ KAboutData KDiff3Part::createAboutData()
     else if(sizeof(void*) == 4)
         appVersion += " (32 bit)";
 
-    KAboutData aboutData(QLatin1String("kdiff3part"), i18n("KDiff3 Part"),
+    KAboutData aboutData(u8"kdiff3part", i18n("KDiff3 Part"),
                          appVersion, i18n("A KPart to display SVG images"),
                          KAboutLicense::GPL_V2,
                          i18n("Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"));

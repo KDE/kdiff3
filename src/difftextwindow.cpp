@@ -2094,7 +2094,7 @@ void EncodingLabel::insertCodec(const QString& visibleCodecName, QTextCodec* pCo
         QByteArray nameArray = pCodec->name();
         QLatin1String codecName = QLatin1String(nameArray);
 
-        pAction->setText(visibleCodecName.isEmpty() ? codecName : visibleCodecName + QLatin1String(" (") + codecName + QLatin1String(")"));
+        pAction->setText(visibleCodecName.isEmpty() ? codecName : visibleCodecName + u8" (" + codecName + u8")");
         pAction->setData(CodecMIBEnum);
         pAction->setCheckable(true);
         if(currentTextCodecEnum == CodecMIBEnum)

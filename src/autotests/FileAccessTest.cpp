@@ -46,10 +46,10 @@ class FileAccessTest: public QObject
         mocFile2.setEngine(new FileAccessJobHandlerMoc(&mocFile2));
 
         //Check remote url.
-        mocRoot.setFile(QLatin1String("fish://i@0.0.0.0/root"));
-        QCOMPARE(mocRoot.fileRelPath(), QLatin1String(""));
+        mocRoot.setFile(u8"fish://i@0.0.0.0/root");
+        QCOMPARE(mocRoot.fileRelPath(), u8"");
 
-        mocFile.setFile(QLatin1String("fish://i@0.0.0.0/root/x"));
+        mocFile.setFile(u8"fish://i@0.0.0.0/root/x");
         mocFile.setParent(&mocRoot);
         QCOMPARE(mocFile.fileRelPath(), QStringLiteral("x"));
 
@@ -72,7 +72,7 @@ class FileAccessTest: public QObject
         mocFile.setEngine(new FileAccessJobHandlerMoc(&mocFile));
 
         //Sanity check FileAccess::url by directly setting the url.
-        mocFile.setFileName(QLatin1String("root"));
+        mocFile.setFileName(u8"root");
         mocFile.setUrl(QUrl("fish://i@0.0.0.0/root"));
         QCOMPARE(mocFile.url(), QUrl("fish://i@0.0.0.0/root"));
 

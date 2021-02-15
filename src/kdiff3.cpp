@@ -545,7 +545,7 @@ void KDiff3App::initActions(KActionCollection* ac)
     fileOpen = KStandardAction::open(this, &KDiff3App::slotFileOpen, ac);
     fileOpen->setStatusTip(i18n("Opens documents for comparison..."));
 
-    fileReload = GuiUtils::createAction<QAction>(i18n("Reload"), QKeySequence(QKeySequence::Refresh), this, &KDiff3App::slotReload, ac, QLatin1String("file_reload"));
+    fileReload = GuiUtils::createAction<QAction>(i18n("Reload"), QKeySequence(QKeySequence::Refresh), this, &KDiff3App::slotReload, ac, u8"file_reload");
 
     fileSave = KStandardAction::save(this, &KDiff3App::slotFileSave, ac);
     fileSave->setStatusTip(i18n("Saves the merge result. All conflicts must be solved!"));

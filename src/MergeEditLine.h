@@ -58,7 +58,7 @@ class MergeEditLine
         else if(m_src != e_SrcSelector::None)
         {
             mChanged = false;
-            m_str=QLatin1String("");
+            m_str=u8"";
         }
     }
     [[nodiscard]] e_SrcSelector src() const { return m_src; }

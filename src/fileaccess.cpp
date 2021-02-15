@@ -377,7 +377,7 @@ void FileAccess::addPath(const QString& txt, bool reinit)
     }
     else
     {
-        QString slash = (txt.isEmpty() || txt[0] == '/') ? QLatin1String("") : QLatin1String("/");
+        QString slash = (txt.isEmpty() || txt[0] == '/') ? QString() : u8"/";
         setFile(absoluteFilePath() + slash + txt);
     }
 }

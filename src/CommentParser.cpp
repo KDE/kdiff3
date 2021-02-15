@@ -44,7 +44,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 if(!inComment() && mLastChar == '/')
                 {
                     mCommentType = singleLine;
-                    mIsPureComment = line.startsWith(QLatin1String("//"));
+                    mIsPureComment = line.startsWith(u8"//");
                     lastComment.startOffset = offset - 1;
                 }
                 else if(mLastChar == '*' && mCommentType == multiLine)
@@ -54,7 +54,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     lastComment.endOffset = offset + 1; //include last char in offset
                     comments.push_back(lastComment);
                     if(!isFirstLine)
-                        mIsPureComment = line.endsWith(QLatin1String("*/")) ? true : mIsPureComment;
+                        mIsPureComment = line.endsWith(u8"*/") ? true : mIsPureComment;
                 }
                 break;
             case '*':
@@ -64,7 +64,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 if(mLastChar == '/' && !inComment())
                 {
                     mCommentType = multiLine;
-                    mIsPureComment = line.startsWith(QLatin1String("/*")) ? true : mIsPureComment;
+                    mIsPureComment = line.startsWith(u8"/*") ? true : mIsPureComment;
                     isFirstLine = true;
                     lastComment.startOffset = offset - 1;
                 }
@@ -133,7 +133,7 @@ void DefaultCommentParser::processLine(const QString &line)
 }
 
 /*
- Modifies the input data, and replaces comments with whitespace when the line contains other data too. 
+ Modifies the input data, and replaces comments with whitespace when the line contains other data too.
 */
 void DefaultCommentParser::removeComment(QString &line)
 {

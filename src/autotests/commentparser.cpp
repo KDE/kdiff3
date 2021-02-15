@@ -269,7 +269,7 @@ class CommentParserTest : public QObject
     void removeComment()
     {
         DefaultCommentParser test;
-        QString line=QLatin1String("  int i = 8 / 8 * 3;"), correct=QLatin1String("  int i = 8 / 8 * 3;");
+        QString line=u8"  int i = 8 / 8 * 3;", correct=u8"  int i = 8 / 8 * 3;";
 
         test.processLine(line);
         test.removeComment(line);
@@ -277,23 +277,14 @@ class CommentParserTest : public QObject
         QCOMPARE(line.length(), correct.length());
         
         test = DefaultCommentParser();
-        correct = line = QLatin1String("  //int i = 8 / 8 * 3;");
+        correct = line = u8"  //int i = 8 / 8 * 3;";
 
         test.processLine(line);
         test.removeComment(line);
         QCOMPARE(line, correct);
 
         test = DefaultCommentParser();
-        correct = line = QLatin1String("//  int i = 8 / 8 * 3;");
-
-        test.processLine(line);
-        test.removeComment(line);
-        QCOMPARE(line, correct);
-        QCOMPARE(line.length(), correct.length());
-
-        test = DefaultCommentParser();
-        line = QLatin1String("  int i = 8 / 8 * 3;// comment");
-        correct = QLatin1String("  int i = 8 / 8 * 3;          ");
+        correct = line = u8"//  int i = 8 / 8 * 3;";
 
         test.processLine(line);
         test.removeComment(line);
@@ -301,23 +292,32 @@ class CommentParserTest : public QObject
         QCOMPARE(line.length(), correct.length());
 
         test = DefaultCommentParser();
-        line = QLatin1String("  int i = 8 / 8 * 3;/* comment");
-        correct = QLatin1String("  int i = 8 / 8 * 3;          ");
+        line = u8"  int i = 8 / 8 * 3;// comment";
+        correct = u8"  int i = 8 / 8 * 3;          ";
+
+        test.processLine(line);
+        test.removeComment(line);
+        QCOMPARE(line, correct);
+        QCOMPARE(line.length(), correct.length());
+
+        test = DefaultCommentParser();
+        line = u8"  int i = 8 / 8 * 3;/* comment";
+        correct = u8"  int i = 8 / 8 * 3;          ";
 
         test.processLine(line);
         test.removeComment(line);
         QCOMPARE(line, correct);
         QCOMPARE(line.length(), correct.length());
         
-        correct = line = QLatin1String("  int i = 8 / 8 * 3;/* mot a comment");
+        correct = line = u8"  int i = 8 / 8 * 3;/* mot a comment";
         test.processLine(line);
         test.removeComment(line);
         QCOMPARE(line, correct);
         QCOMPARE(line.length(), correct.length());
 
         //end comment mid-line
-        line = QLatin1String("d  */ why");
-        correct = QLatin1String("      why");
+        line = u8"d  */ why";
+        correct = u8"      why";
 
         test.processLine(line);
         test.removeComment(line);
@@ -325,8 +325,8 @@ class CommentParserTest : public QObject
         QCOMPARE(line.length(), correct.length());
         
         test = DefaultCommentParser();
-        line = QLatin1String("  int i = 8 / 8 * 3;/* comment*/");
-        correct = QLatin1String("  int i = 8 / 8 * 3;            ");
+        line = u8"  int i = 8 / 8 * 3;/* comment*/";
+        correct = u8"  int i = 8 / 8 * 3;            ";
 
         test.processLine(line);
         test.removeComment(line);
@@ -334,7 +334,7 @@ class CommentParserTest : public QObject
         QCOMPARE(line.length(), correct.length());
         
         test = DefaultCommentParser();
-        correct = line = QLatin1String("  /*int i = 8 / 8 * 3;/* comment*/");
+        correct = line = u8"  /*int i = 8 / 8 * 3;/* comment*/";
 
         test.processLine(line);
         test.removeComment(line);
@@ -343,8 +343,8 @@ class CommentParserTest : public QObject
 
         //line with multiple comments weird but legal c/c++
         test = DefaultCommentParser();
-        line = QLatin1String("  int /*why?*/ i = 8 / 8 * 3;/* comment*/");
-        correct = QLatin1String("  int          i = 8 / 8 * 3;            ");
+        line = u8"  int /*why?*/ i = 8 / 8 * 3;/* comment*/";
+        correct = u8"  int          i = 8 / 8 * 3;            ";
         test.processLine(line);
         test.removeComment(line);
         QCOMPARE(line, correct);

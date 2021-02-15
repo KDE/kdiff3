@@ -393,7 +393,7 @@ bool DefaultFileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecur
             chk_connect(pListJob, &KIO::ListJob::infoMessage, &pp, &ProgressProxyExtender::slotListDirInfoMessage);
 
             // This line makes the transfer via fish unreliable.:-(
-            /*if(mFileAccess->url().scheme() != QLatin1String("fish")){
+            /*if(mFileAccess->url().scheme() != u8"fish"){
                 chk_connect( pListJob, static_cast<void (KIO::ListJob::*)(KJob*,qint64)>(&KIO::ListJob::percent), &pp, &ProgressProxyExtender::slotPercent);
             }*/
 
