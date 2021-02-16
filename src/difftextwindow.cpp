@@ -1925,7 +1925,6 @@ void DiffTextWindowFrame::setupConnections(const KDiff3App* app)
 {
     chk_connect(this, &DiffTextWindowFrame::fileNameChanged, app, &KDiff3App::slotFileNameChanged);
     chk_connect(this, &DiffTextWindowFrame::encodingChanged, app, &KDiff3App::slotEncodingChanged);
-    d->mSourceData->setupConnections();
 }
 
 // Search for the first visible line (search loop needed when no line exists for this file.)
@@ -2019,6 +2018,12 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
         DiffTextWindow* pDTW = d->m_pDiffTextWindow;
         Q_EMIT fileNameChanged(newURL.url(), pDTW->getWindowIndex());
     }
+}
+
+void DiffTextWindowFrame::slotEncodingChanged(QTextCodec* c)
+{
+    Q_EMIT encodingChanged(c); //relay signal from encoding label
+    d->mSourceData->setEncoding(c);
 }
 
 EncodingLabel::EncodingLabel(const QString& text, const QSharedPointer<SourceData>& pSD, const QSharedPointer<Options>& pOptions)

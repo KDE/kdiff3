@@ -2048,9 +2048,8 @@ void KDiff3App::slotClearManualDiffHelpList()
     slotRefresh();
 }
 
-void KDiff3App::slotEncodingChanged(QTextCodec* c)
+void KDiff3App::slotEncodingChanged(QTextCodec*)
 {
-    encodingChanged(c);
     mainInit(m_totalDiffStatus, InitFlag::loadFiles | InitFlag::useCurrentEncoding | InitFlag::autoSolve ); // Init with reload
     slotRefresh();
 }

@@ -13,8 +13,6 @@
 #include "fileaccess.h"
 #include "LineRef.h"
 
-#include <boost/signals2.hpp>
-
 #include <QTextCodec>
 #include <QTemporaryFile>
 #include <QString>
@@ -24,7 +22,6 @@ class LineData;
 class SourceData
 {
   public:
-    void setupConnections();
     void setOptions(const QSharedPointer<Options> &pOptions);
 
     Q_REQUIRED_RESULT LineRef getSizeLines() const;
@@ -116,11 +113,6 @@ class SourceData
     FileData m_normalData;
     FileData m_lmppData;
     QTextCodec* m_pEncoding = nullptr;
-
-    /*
-      This list exists solely to auto disconnect boost signals.
-    */
-    std::list<boost::signals2::scoped_connection> connections;
 };
 
 #endif // !SOURCEDATA_H
