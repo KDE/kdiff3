@@ -9,6 +9,7 @@
 #ifndef FILEACCESS_H
 #define FILEACCESS_H
 
+#include <list>
 #include <type_traits>
 
 #include <QDateTime>
@@ -23,7 +24,8 @@
 #include <KIO/UDSEntry>
 #endif
 
-class t_DirectoryList;
+class FileAccess;
+using t_DirectoryList =  std::list<FileAccess>;
 class FileAccessJobHandler;
 class DefaultFileAccessJobHandler;
 /*
@@ -187,9 +189,5 @@ class FileAccess
 */
 static_assert(std::is_copy_assignable<FileAccess>::value, "FileAccess must be copy assignable.");
 static_assert(std::is_move_assignable<FileAccess>::value, "FileAccess must be move assignable.");
-
-class t_DirectoryList: public std::list<FileAccess>
-{
-};
 
 #endif
