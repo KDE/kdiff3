@@ -21,13 +21,13 @@ class IgnoreList
 {
   public:
     IgnoreList() = default;
-    void init(FileAccess& dir, const t_DirectoryList* pDirList);
+    void init(FileAccess& dir, const DirectoryList* pDirList);
     [[nodiscard]] bool matches(const QString& text, bool bCaseSensitive) const;
 
     virtual ~IgnoreList() = default;
 
   protected:
-    bool ignoreExists(const t_DirectoryList* pDirList);
+    bool ignoreExists(const DirectoryList* pDirList);
 
     void addEntriesFromString(const QString& str);
     virtual void addEntriesFromFile(const QString& name);

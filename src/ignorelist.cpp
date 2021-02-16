@@ -15,7 +15,7 @@
 #include <QDir>
 #include <QTextStream>
 
-void IgnoreList::init(FileAccess& dir, const t_DirectoryList* pDirList)
+void IgnoreList::init(FileAccess& dir, const DirectoryList* pDirList)
 {
     static const QString ignorestr = QString::fromLatin1(". .. core RCSLOG tags TAGS RCS SCCS .make.state "
                                    ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
@@ -166,7 +166,7 @@ bool IgnoreList::matches(const QString& text, bool bCaseSensitive) const
     return false;
 }
 
-bool IgnoreList::ignoreExists(const t_DirectoryList* pDirList)
+bool IgnoreList::ignoreExists(const DirectoryList* pDirList)
 {
     for(const FileAccess& dir : *pDirList)
     {

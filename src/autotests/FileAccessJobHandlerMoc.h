@@ -22,7 +22,7 @@ class FileAccessJobHandlerMoc: public FileAccessJobHandler
     bool stat(short  /*detailLevel*/ = 2, bool  /*bWantToWrite*/ = false) override {return true;};
     bool copyFile(const QString&  /*dest*/) override {return true;};
     bool rename(const FileAccess&  /*dest*/) override {return true;};
-    bool listDir(t_DirectoryList*  /*pDirList*/, bool  /*bRecursive*/, bool  /*bFindHidden*/,
+    bool listDir(DirectoryList*  /*pDirList*/, bool  /*bRecursive*/, bool  /*bFindHidden*/,
                  const QString&  /*filePattern*/, const QString&  /*fileAntiPattern*/,
                  const QString&  /*dirAntiPattern*/, bool  /*bFollowDirLinks*/, bool  /*bUseCvsIgnore*/) override {return true;};
     bool removeFile(const QUrl&  /*fileName*/) override {return true;};

@@ -35,7 +35,7 @@ class DefaultFileAccessJobHandler: public FileAccessJobHandler
     bool stat(short detailLevel = 2, bool bWantToWrite = false) override;
     bool copyFile(const QString& dest) override;
     bool rename(const FileAccess& dest) override;
-    bool listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
+    bool listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                  const QString& filePattern, const QString& fileAntiPattern,
                  const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore) override;
 
@@ -49,7 +49,7 @@ class DefaultFileAccessJobHandler: public FileAccessJobHandler
     bool mkDirImp(const QString& dirName) override;
     bool rmDirImp(const QString& dirName) override;
 
-    bool scanLocalDirectory(const QString& dirName, t_DirectoryList* dirList);
+    bool scanLocalDirectory(const QString& dirName, DirectoryList* dirList);
 
   private Q_SLOTS:
     void slotJobEnded(KJob*);

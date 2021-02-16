@@ -877,7 +877,7 @@ bool FileAccess::removeFile()
     }
 }
 
-bool FileAccess::listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
+bool FileAccess::listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                          const QString& filePattern, const QString& fileAntiPattern, const QString& dirAntiPattern,
                          bool bFollowDirLinks, bool bUseCvsIgnore)
 {
@@ -1095,7 +1095,7 @@ void FileAccess::doError()
     m_bExists = false;
 }
 
-void FileAccess::filterList(t_DirectoryList* pDirList, const QString& filePattern,
+void FileAccess::filterList(DirectoryList* pDirList, const QString& filePattern,
                             const QString& fileAntiPattern, const QString& dirAntiPattern,
                             const bool bUseCvsIgnore)
 {
@@ -1112,10 +1112,10 @@ void FileAccess::filterList(t_DirectoryList* pDirList, const QString& filePatter
 #endif
 
     // Now remove all entries that should be ignored:
-    t_DirectoryList::iterator i;
+    DirectoryList::iterator i;
     for(i = pDirList->begin(); i != pDirList->end();)
     {
-        t_DirectoryList::iterator i2 = i;
+        DirectoryList::iterator i2 = i;
         ++i2;
         QString fileName = i->fileName();
 

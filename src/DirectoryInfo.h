@@ -67,16 +67,16 @@ class DirectoryInfo
                                         options.m_bDmUseCvsIgnore);
       }
 
-      t_DirectoryList& getDirListA() { return m_dirListA; }
-      t_DirectoryList& getDirListB() { return m_dirListB; }
-      t_DirectoryList& getDirListC() { return m_dirListC; }
+      DirectoryList& getDirListA() { return m_dirListA; }
+      DirectoryList& getDirListB() { return m_dirListB; }
+      DirectoryList& getDirListC() { return m_dirListC; }
 
     private:
       FileAccess m_dirA, m_dirB, m_dirC;
 
-      t_DirectoryList m_dirListA;
-      t_DirectoryList m_dirListB;
-      t_DirectoryList m_dirListC;
+      DirectoryList m_dirListA;
+      DirectoryList m_dirListB;
+      DirectoryList m_dirListC;
       FileAccess m_dirDest;
 };
 

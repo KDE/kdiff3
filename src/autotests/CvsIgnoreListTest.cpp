@@ -105,7 +105,7 @@ class CvsIgnoreListTest : public QObject
         CvsIgnoreList test;
         CvsIgnoreList expected;
         MocIgnoreFile file;
-        t_DirectoryList dirList;
+        DirectoryList dirList;
 
         /*
             Verify default init. For this to work we must:

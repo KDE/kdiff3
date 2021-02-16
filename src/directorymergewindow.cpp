@@ -223,8 +223,8 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     void prepareMergeStart(const QModelIndex& miBegin, const QModelIndex& miEnd, bool bVerbose);
     bool executeMergeOperation(MergeFileInfos& mfi, bool& bSingleFileMerge);
 
-    void scanDirectory(const QString& dirName, t_DirectoryList& dirList);
-    void scanLocalDirectory(const QString& dirName, t_DirectoryList& dirList);
+    void scanDirectory(const QString& dirName, DirectoryList& dirList);
+    void scanLocalDirectory(const QString& dirName, DirectoryList& dirList);
 
     void setMergeOperation(const QModelIndex& mi, e_MergeOperation eMergeOp, bool bRecursive = true);
     [[nodiscard]] bool isDir(const QModelIndex& mi) const;
@@ -732,7 +732,7 @@ bool DirectoryMergeWindow::init(
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSharedPointer<DirectoryInfo>& dirInfo)
 {
-    t_DirectoryList::iterator dirIterator;
+    DirectoryList::iterator dirIterator;
 
     if(dirInfo->dirA().isValid())
     {
@@ -2460,7 +2460,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::deleteFLD(const QString&
 
         if(fi.isDir() && !fi.isSymLink()) // recursive directory delete only for real dirs, not symlinks
         {
-            t_DirectoryList dirList;
+            DirectoryList dirList;
             bool bSuccess = fi.listDir(&dirList, false, true, "*", "", "", false, false); // not recursive, find hidden files
 
             if(!bSuccess)

@@ -324,7 +324,7 @@ bool DefaultFileAccessJobHandler::copyFile(const QString& inDest)
     // Note that the KIO-slave preserves the original date, if this is supported.
 }
 
-bool DefaultFileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden, const QString& filePattern,
+bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden, const QString& filePattern,
                                    const QString& fileAntiPattern, const QString& dirAntiPattern, bool bFollowDirLinks, const bool bUseCvsIgnore)
 {
     ProgressProxyExtender pp;
@@ -406,15 +406,15 @@ bool DefaultFileAccessJobHandler::listDir(t_DirectoryList* pDirList, bool bRecur
 
     if(bRecursive)
     {
-        t_DirectoryList::iterator i;
-        t_DirectoryList subDirsList;
+        DirectoryList::iterator i;
+        DirectoryList subDirsList;
 
         for(i = m_pDirList->begin(); i != m_pDirList->end(); ++i)
         {
             Q_ASSERT(i->isValid());
             if(i->isDir() && (!i->isSymLink() || m_bFollowDirLinks))
             {
-                t_DirectoryList dirList;
+                DirectoryList dirList;
                 i->listDir(&dirList, bRecursive, bFindHidden,
                            filePattern, fileAntiPattern, dirAntiPattern, bFollowDirLinks, bUseCvsIgnore);
 

@@ -40,7 +40,7 @@ class FileAccessJobHandler: public QObject
     virtual bool stat(short detailLevel = 2, bool bWantToWrite = false) = 0;
     virtual bool copyFile(const QString& dest) = 0;
     virtual bool rename(const FileAccess& dest) = 0;
-    virtual bool listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
+    virtual bool listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                  const QString& filePattern, const QString& fileAntiPattern,
                  const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore) = 0;
     virtual bool removeFile(const QUrl& fileName) = 0;
@@ -58,7 +58,7 @@ class FileAccessJobHandler: public QObject
     QString m_filePattern;
     QString m_fileAntiPattern;
     QString m_dirAntiPattern;
-    t_DirectoryList* m_pDirList = nullptr;
+    DirectoryList* m_pDirList = nullptr;
     bool m_bFindHidden = false;
     bool m_bRecursive = false;
     bool m_bFollowDirLinks = false;

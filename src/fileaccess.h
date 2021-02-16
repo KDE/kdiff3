@@ -25,7 +25,7 @@
 #endif
 
 class FileAccess;
-using t_DirectoryList =  std::list<FileAccess>;
+using DirectoryList =  std::list<FileAccess>;
 class FileAccessJobHandler;
 class DefaultFileAccessJobHandler;
 /*
@@ -93,7 +93,7 @@ class FileAccess
 
     virtual bool readFile(void* pDestBuffer, qint64 maxLength);
     virtual bool writeFile(const void* pSrcBuffer, qint64 length);
-    bool listDir(t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
+    bool listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                  const QString& filePattern, const QString& fileAntiPattern,
                  const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore);
     virtual bool copyFile(const QString& destUrl);
@@ -118,7 +118,7 @@ class FileAccess
     Q_REQUIRED_RESULT FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
 
     void doError();
-    void filterList(t_DirectoryList* pDirList, const QString& filePattern,
+    void filterList(DirectoryList* pDirList, const QString& filePattern,
                     const QString& fileAntiPattern, const QString& dirAntiPattern,
                     const bool bUseCvsIgnore);
 
