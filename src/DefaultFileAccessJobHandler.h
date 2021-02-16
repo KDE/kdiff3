@@ -22,9 +22,6 @@ class Job;
 
 class KJob;
 
-class FileAccess;
-class t_DirectoryList;
-
 class DefaultFileAccessJobHandler: public FileAccessJobHandler
 {
     Q_OBJECT
