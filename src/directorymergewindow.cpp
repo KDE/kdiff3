@@ -123,7 +123,8 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
     friend class DirMergeItem;
 
   public:
-    explicit DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW)
+    DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW, KDiff3App &app)
+       : m_app(app)
     {
         mWindow = pDMW;
         m_pStatusInfo = new StatusInfo(mWindow);
@@ -295,6 +296,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
   public:
     DirectoryMergeWindow* mWindow;
     QSharedPointer<Options> m_pOptions = nullptr;
+    KDiff3App &m_app;
 
     bool m_bFollowDirLinks = false;
     bool m_bFollowFileLinks = false;
@@ -633,10 +635,10 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
     }
 };
 
-DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions)
+DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions, KDiff3App &app)
     : QTreeView(pParent)
 {
-    d = new DirectoryMergeWindowPrivate(this);
+    d = new DirectoryMergeWindowPrivate(this, app);
     setModel(d);
     setItemDelegate(new DirMergeItemDelegate(this));
     chk_connect(this, &DirectoryMergeWindow::doubleClicked, this, &DirectoryMergeWindow::onDoubleClick);
@@ -781,7 +783,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         QStringList errors;
         // A full analysis uses the same resources that a normal text-diff/merge uses.
         // So make sure that the user saves his data first.
-        if(!KDiff3App::shouldContinue())
+        if(!m_app.canContinue())
             return false;
         Q_EMIT mWindow->startDiffMerge(errors, "", "", "", "", "", "", "", nullptr); // hide main window
     }
@@ -1998,7 +2000,7 @@ void DirectoryMergeWindow::mergeResultSaved(const QString& fileName)
 
 bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::canContinue()
 {
-    if(KDiff3App::shouldContinue() && !m_bError)
+    if(m_app.canContinue() && !m_bError)
     {
         QModelIndex mi = (m_mergeItemList.empty() || m_currentIndexForOperation == m_mergeItemList.end()) ? QModelIndex() : *m_currentIndexForOperation;
         MergeFileInfos* pMFI = getMFI(mi);

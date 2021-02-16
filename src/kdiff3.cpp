@@ -67,7 +67,6 @@ bool KDiff3App::m_bTripleDiff = false;
 boost::signals2::signal<QString (), FirstNonEmpty<QString>> KDiff3App::getSelection;
 boost::signals2::signal<bool (), or> KDiff3App::allowCopy;
 boost::signals2::signal<bool (), or> KDiff3App::allowCut;
-boost::signals2::signal<bool(), and> KDiff3App::shouldContinue;
 
 /*
     To be a constexpr the QLatin1String constructor must be given the size of the string explicitly.
@@ -334,7 +333,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     m_pDirectoryMergeSplitter->setObjectName("DirectoryMergeSplitter");
     m_pMainSplitter->addWidget(m_pDirectoryMergeSplitter);
     m_pDirectoryMergeSplitter->setOrientation(Qt::Horizontal);
-    m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeSplitter, m_pOptions);
+    m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeSplitter, m_pOptions, *this);
     m_pDirectoryMergeSplitter->addWidget(m_pDirectoryMergeWindow);
     m_pDirectoryMergeInfo = new DirectoryMergeInfo(m_pDirectoryMergeSplitter);
     m_pDirectoryMergeWindow->setDirectoryMergeInfo(m_pDirectoryMergeInfo);
@@ -344,7 +343,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 
     chk_connect(QApplication::clipboard(), &QClipboard::dataChanged, this, &KDiff3App::slotClipboardChanged);
     chk_connect_q(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap);
-    connections.push_back(shouldContinue.connect(boost::bind(&KDiff3App::canContinue, this)));
     chk_connect(this, &KDiff3App::finishDrop, this, &KDiff3App::slotFinishDrop);
 
     connections.push_back(allowCut.connect(boost::bind(&KDiff3App::canCut, this)));

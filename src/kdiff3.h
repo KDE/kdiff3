@@ -155,7 +155,8 @@ class KDiff3App : public QSplitter
     static boost::signals2::signal<QString (), FirstNonEmpty<QString>> getSelection;
     static boost::signals2::signal<bool (), or> allowCopy;
     static boost::signals2::signal<bool (), or> allowCut;
-    static boost::signals2::signal<bool (), and> shouldContinue;
+
+    bool canContinue();
 
   Q_SIGNALS:
     void createNewInstance(const QString& fn1, const QString& fn2, const QString& fn3);
@@ -323,8 +324,6 @@ public Q_SLOTS:
 
     bool doDirectoryCompare(const bool bCreateNewInstance);
     void improveFilenames();
-
-    bool canContinue();
 
     void choose(e_SrcSelector choice);
 

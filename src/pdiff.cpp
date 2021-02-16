@@ -574,11 +574,11 @@ void KDiff3App::initView()
     chk_connect(this, &KDiff3App::showWhiteSpaceToggled, m_pOverview, &Overview::slotRedraw);
     chk_connect(this, &KDiff3App::changeOverViewMode, m_pOverview, &Overview::setOverviewMode);
 
-    m_pDiffTextWindowFrame1 = new DiffTextWindowFrame(m_pDiffWindowSplitter, m_pOptionDialog->getOptions(), e_SrcSelector::A, m_sd1);
+    m_pDiffTextWindowFrame1 = new DiffTextWindowFrame(m_pDiffWindowSplitter, m_pOptionDialog->getOptions(), e_SrcSelector::A, m_sd1, *this);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame1);
-    m_pDiffTextWindowFrame2 = new DiffTextWindowFrame(m_pDiffWindowSplitter, m_pOptionDialog->getOptions(), e_SrcSelector::B, m_sd2);
+    m_pDiffTextWindowFrame2 = new DiffTextWindowFrame(m_pDiffWindowSplitter, m_pOptionDialog->getOptions(), e_SrcSelector::B, m_sd2, *this);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame2);
-    m_pDiffTextWindowFrame3 = new DiffTextWindowFrame(m_pDiffWindowSplitter, m_pOptionDialog->getOptions(), e_SrcSelector::C, m_sd3);
+    m_pDiffTextWindowFrame3 = new DiffTextWindowFrame(m_pDiffWindowSplitter, m_pOptionDialog->getOptions(), e_SrcSelector::C, m_sd3, *this);
     m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame3);
     m_pDiffTextWindow1 = m_pDiffTextWindowFrame1->getDiffTextWindow();
     m_pDiffTextWindow2 = m_pDiffTextWindowFrame2->getDiffTextWindow();
@@ -852,7 +852,7 @@ void KDiff3App::slotFinishDrop()
 
 void KDiff3App::slotFileOpen()
 {
-    if(!shouldContinue()) return;
+    if(!canContinue()) return;
     //create dummy DirectoryInfo record for first run so we don't crash.
     if(m_dirinfo == nullptr)
         m_dirinfo = QSharedPointer<DirectoryInfo>::create();
@@ -950,7 +950,7 @@ void KDiff3App::slotFileOpen()
 void KDiff3App::slotFileOpen2(QStringList &errors, const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
                               const QString& an1, const QString& an2, const QString& an3, TotalDiffStatus* pTotalDiffStatus)
 {
-    if(!shouldContinue()) return;
+    if(!canContinue()) return;
 
     if(fn1.isEmpty() && fn2.isEmpty() && fn3.isEmpty() && ofn.isEmpty())
     {
@@ -1064,7 +1064,7 @@ void KDiff3App::slotEditPaste()
     }
     else
     {
-        if(shouldContinue())
+        if(canContinue())
         {
             QString error;
             bool do_init = false;
@@ -1644,7 +1644,7 @@ void KDiff3App::improveFilenames()
 
 void KDiff3App::slotReload()
 {
-    if(!shouldContinue()) return;
+    if(!canContinue()) return;
 
     mainInit(m_totalDiffStatus);
 }
@@ -1862,7 +1862,7 @@ void KDiff3App::slotMergeCurrentFile()
     }
     else if(m_pMainWidget->isVisible())
     {
-        if(!shouldContinue()) return;
+        if(!canContinue()) return;
 
         if(m_outputFilename.isEmpty())
         {

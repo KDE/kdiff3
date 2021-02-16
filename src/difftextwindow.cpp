@@ -196,11 +196,12 @@ const Diff3LineVector* DiffTextWindow::getDiff3LineVector() const { return d->ge
 
 qint32 DiffTextWindow::getLineNumberWidth() const { return (int)floor(log10((double)std::max(d->m_size, 1))) + 1; }
 
-DiffTextWindow::DiffTextWindow(
-    DiffTextWindowFrame* pParent,
+DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
     const QSharedPointer<Options>& pOptions,
-    e_SrcSelector winIdx)
+    e_SrcSelector winIdx,
+    KDiff3App &app)
     : QWidget(pParent)
+    , m_app(app)
 {
     setObjectName(QString("DiffTextWindow%1").arg((int)winIdx));
     setAttribute(Qt::WA_OpaquePaintEvent);
@@ -352,7 +353,7 @@ void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
     {
         QList<QUrl> urlList = dropEvent->mimeData()->urls();
 
-        if(KDiff3App::shouldContinue() && !urlList.isEmpty())
+        if(m_app.canContinue() && !urlList.isEmpty())
         {
             QString filename = Utils::urlToString(urlList.first());
 
@@ -365,7 +366,7 @@ void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
     {
         QString text = dropEvent->mimeData()->text();
 
-        if(KDiff3App::shouldContinue())
+        if(m_app.canContinue())
         {
             QString error;
 
@@ -1850,7 +1851,7 @@ class DiffTextWindowFrameData
     QSharedPointer<SourceData> mSourceData;
 };
 
-DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd)
+DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App &app)
     : QWidget(pParent)
 {
     d = new DiffTextWindowFrameData(this, pOptions, winIdx);
@@ -1859,7 +1860,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<
     chk_connect(d->getBrowseButton(), &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
     chk_connect(d->getFileSelectionField(), &QLineEdit::returnPressed, this, &DiffTextWindowFrame::slotReturnPressed);
 
-    d->m_pDiffTextWindow = new DiffTextWindow(this, pOptions, winIdx);
+    d->m_pDiffTextWindow = new DiffTextWindow(this, pOptions, winIdx, app);
     d->m_pDiffTextWindow->setSourceData(psd);
     QVBoxLayout* pVTopLayout = new QVBoxLayout(const_cast<QWidget*>(d->getTopLineWidget()));
     pVTopLayout->setMargin(2);

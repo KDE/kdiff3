@@ -37,7 +37,7 @@ class DiffTextWindow : public QWidget
     //Using this as a scoped global
     static QScrollBar* mVScrollBar;
 
-    DiffTextWindow(DiffTextWindowFrame* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx);
+    DiffTextWindow(DiffTextWindowFrame* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, KDiff3App &app);
     ~DiffTextWindow() override;
     void init(
         const QString& fileName,
@@ -149,7 +149,7 @@ class DiffTextWindow : public QWidget
       This list exists solely to auto disconnect boost signals.
     */
     std::list<boost::signals2::scoped_connection> connections;
-
+    KDiff3App &m_app;
     DiffTextWindowData* d;
     void showStatusLine(const LineRef lineFromPos);
 
@@ -162,7 +162,7 @@ class DiffTextWindowFrame : public QWidget
 {
     Q_OBJECT
   public:
-    DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData> &psd);
+    DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options> &pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData> &psd, KDiff3App &app);
     ~DiffTextWindowFrame() override;
     DiffTextWindow* getDiffTextWindow();
     void init();
