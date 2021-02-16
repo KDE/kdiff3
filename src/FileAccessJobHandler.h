@@ -24,9 +24,6 @@ class Job;
 
 class KJob;
 
-class FileAccess;
-class t_DirectoryList;
-
 class FileAccessJobHandler: public QObject
 {
   public:
