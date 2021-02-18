@@ -175,9 +175,10 @@ void KDiff3FileItemAction::slotCompareWith()
 {
     if(m_list.count() > 0 && s_pHistory && !s_pHistory->empty())
     {
-        QStringList args;
-        args << s_pHistory->first();
-        args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
+        QStringList args = {
+            s_pHistory->first(),
+            m_list.first().toDisplayString(QUrl::PreferLocalFile)
+        };
         KProcess::startDetached("kdiff3", args);
     }
 }
@@ -187,9 +188,10 @@ void KDiff3FileItemAction::slotCompareWithHistoryItem()
     const QAction* pAction = dynamic_cast<const QAction*>(sender());
     if(!m_list.isEmpty() && pAction)
     {
-        QStringList args;
-        args << pAction->data().toString();
-        args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
+        QStringList args = {
+            pAction->data().toString(),
+            m_list.first().toDisplayString(QUrl::PreferLocalFile)
+        };
         KProcess::startDetached("kdiff3", args);
     }
 }
@@ -198,9 +200,10 @@ void KDiff3FileItemAction::slotCompareTwoFiles()
 {
     if(m_list.count() == 2)
     {
-        QStringList args;
-        args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
-        args << m_list.last().toDisplayString(QUrl::PreferLocalFile);
+        QStringList args = {
+            m_list.first().toDisplayString(QUrl::PreferLocalFile),
+            m_list.last().toDisplayString(QUrl::PreferLocalFile)
+        };
         KProcess::startDetached("kdiff3", args);
     }
 }
@@ -209,10 +212,11 @@ void KDiff3FileItemAction::slotCompareThreeFiles()
 {
     if(m_list.count() == 3)
     {
-        QStringList args;
-        args << m_list.at(0).toDisplayString(QUrl::PreferLocalFile);
-        args << m_list.at(1).toDisplayString(QUrl::PreferLocalFile);
-        args << m_list.at(2).toDisplayString(QUrl::PreferLocalFile);
+        QStringList args = {
+            m_list.at(0).toDisplayString(QUrl::PreferLocalFile),
+            m_list.at(1).toDisplayString(QUrl::PreferLocalFile),
+            m_list.at(2).toDisplayString(QUrl::PreferLocalFile)
+        };
         KProcess::startDetached("kdiff3", args);
     }
 }
@@ -221,10 +225,11 @@ void KDiff3FileItemAction::slotMergeWith()
 {
     if(m_list.count() > 0 && s_pHistory && !s_pHistory->empty())
     {
-        QStringList args;
-        args << s_pHistory->first();
-        args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
-        args << ("-o" + m_list.first().toDisplayString(QUrl::PreferLocalFile));
+        QStringList args = {
+            s_pHistory->first(),
+            m_list.first().toDisplayString(QUrl::PreferLocalFile),
+            ("-o" + m_list.first().toDisplayString(QUrl::PreferLocalFile))
+        };
         KProcess::startDetached("kdiff3", args);
     }
 }
@@ -233,11 +238,12 @@ void KDiff3FileItemAction::slotMergeThreeWay()
 {
     if(m_list.count() > 0 && s_pHistory && s_pHistory->count() >= 2)
     {
-        QStringList args;
-        args << s_pHistory->at(1);
-        args << s_pHistory->at(0);
-        args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
-        args << ("-o" + m_list.first().toDisplayString(QUrl::PreferLocalFile));
+        QStringList args = {
+            s_pHistory->at(1),
+            s_pHistory->at(0),
+            m_list.first().toDisplayString(QUrl::PreferLocalFile),
+            ("-o" + m_list.first().toDisplayString(QUrl::PreferLocalFile))
+        };
         KProcess::startDetached("kdiff3", args);
     }
 }

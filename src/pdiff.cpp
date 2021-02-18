@@ -619,8 +619,8 @@ void KDiff3App::initView()
     sizes[1] = total / 2;
     pVSplitter->setSizes(sizes);
 
-    QList<int> hSizes;
-    hSizes << 1 << 1 << 1;
+    QList<int> hSizes={1, 1, 1};
+
     m_pDiffWindowSplitter->setSizes(hSizes);
 
     m_pMergeResultWindow->installEventFilter(m_pMergeResultWindowTitle); // for focus tracking
@@ -715,7 +715,7 @@ void KDiff3App::slotFinishMainInit()
     setUpdatesEnabled(true);
 
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
-    
+
     if(m_bLoadFiles)
     {
         if(bVisibleMergeResultWindow)
