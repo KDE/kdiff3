@@ -8,6 +8,9 @@
 
 #include "kdiff3fileitemaction.h"
 
+#include "../src/fileaccess.h"
+#include "../src/Utils.h"
+
 #include <QAction>
 #include <QMenu>
 #include <QUrl>
@@ -20,8 +23,6 @@
 #include <KPluginFactory>
 #include <KPluginLoader>
 #include <KProcess>
-
-//#include <iostream>
 
 static QStringList* s_pHistory = nullptr;
 
@@ -114,7 +115,7 @@ QList<QAction*> KDiff3FileItemAction::actions(const KFileItemListProperties& fil
         pAction->setEnabled(m_list.count() > 0 && historyCount > 0);
         pActionMenu->addAction(pAction);
 
-        actionText = i18n("Save '%1' for later", (m_list.first().toDisplayString(QUrl::PreferLocalFile)));
+        actionText = i18n("Save '%1' for later", m_list.first().fileName());
         pAction = new QAction(actionText, this);
         connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotSaveForLater);
         pAction->setEnabled(m_list.count() > 0);
@@ -177,7 +178,7 @@ void KDiff3FileItemAction::slotCompareWith()
     {
         QStringList args;
         args << s_pHistory->first();
-        args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
+        args << Utils::urlToString(m_list.first());
         KProcess::startDetached("kdiff3", args);
     }
 }
@@ -189,7 +190,7 @@ void KDiff3FileItemAction::slotCompareWithHistoryItem()
     {
         QStringList args;
         args << pAction->data().toString();
-        args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
+        args << Utils::urlToString(m_list.first());
         KProcess::startDetached("kdiff3", args);
     }
 }
@@ -199,8 +200,8 @@ void KDiff3FileItemAction::slotCompareTwoFiles()
     if(m_list.count() == 2)
     {
         QStringList args;
-        args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
-        args << m_list.last().toDisplayString(QUrl::PreferLocalFile);
+        args << Utils::urlToString(m_list.first(e);
+        args << Utils::urlToString(m_list.last());
         KProcess::startDetached("kdiff3", args);
     }
 }
@@ -210,9 +211,9 @@ void KDiff3FileItemAction::slotCompareThreeFiles()
     if(m_list.count() == 3)
     {
         QStringList args;
-        args << m_list.at(0).toDisplayString(QUrl::PreferLocalFile);
-        args << m_list.at(1).toDisplayString(QUrl::PreferLocalFile);
-        args << m_list.at(2).toDisplayString(QUrl::PreferLocalFile);
+        args << Utils::urlToString(m_list.at(0));
+        args << Utils::urlToString(m_list.at(1));
+        args <<Utils::urlToString(m_list.at(2));
         KProcess::startDetached("kdiff3", args);
     }
 }
@@ -223,8 +224,8 @@ void KDiff3FileItemAction::slotMergeWith()
     {
         QStringList args;
         args << s_pHistory->first();
-        args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
-        args << ("-o" + m_list.first().toDisplayString(QUrl::PreferLocalFile));
+        args << Utils::urlToString(m_list.first());
+        args << ("-o" + Utils::urlToString(m_list.first()));
         KProcess::startDetached("kdiff3", args);
     }
 }
@@ -236,8 +237,8 @@ void KDiff3FileItemAction::slotMergeThreeWay()
         QStringList args;
         args << s_pHistory->at(1);
         args << s_pHistory->at(0);
-        args << m_list.first().toDisplayString(QUrl::PreferLocalFile);
-        args << ("-o" + m_list.first().toDisplayString(QUrl::PreferLocalFile));
+        args << Utils::urlToString(m_list.first());
+        args << ("-o" + Utils::urlToString(m_list.first()));
         KProcess::startDetached("kdiff3", args);
     }
 }
@@ -250,7 +251,7 @@ void KDiff3FileItemAction::slotSaveForLater()
         {
             s_pHistory->removeLast();
         }
-        const QString file = m_list.first().toDisplayString(QUrl::PreferLocalFile);
+        const QString file = Utils::urlToString(m_list.first());
         s_pHistory->removeAll(file);
         s_pHistory->prepend(file);
     }
