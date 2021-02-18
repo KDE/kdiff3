@@ -181,7 +181,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
             if(bLoadFiles)
             {
                 pp.setInformation(i18n("Loading C"));
-                qCInfo(kdiffMain) << i18n("Loading C: %1", m_sd2->getFilename());
+                qCInfo(kdiffMain) << i18n("Loading C: %1", m_sd3->getFilename());
 
                 if(bUseCurrentEncoding)
                     m_sd3->readAndPreprocess(m_sd3->getEncoding(), false);
