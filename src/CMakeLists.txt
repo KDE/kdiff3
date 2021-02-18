@@ -45,7 +45,6 @@ ki18n_wrap_ui(kdiff3part_PART_SRCS
 add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
 set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
-target_compile_features(kdiff3part PRIVATE ${needed_features})
 target_link_libraries(kdiff3part ${KDiff3_LIBRARIES} KF5::Parts KF5::Crash)
 target_compile_definitions(kdiff3part PRIVATE -DTRANSLATION_DOMAIN=\"kdiff3\")
 
@@ -68,7 +67,6 @@ include(icons/CMakeLists.txt)
 add_executable(kdiff3 ${kdiff3_SRCS})
 
 target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::Parts KF5::Crash ${KDiff3_LIBRARIES} )
-target_compile_features(kdiff3 PRIVATE ${needed_features})
 
 # See https://cmake.org/cmake/help/v3.15/prop_tgt/MACOSX_BUNDLE_INFO_PLIST.html
 if(APPLE)
