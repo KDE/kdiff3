@@ -181,7 +181,7 @@ qint64 SourceData::getSizeBytes() const
 
 const char* SourceData::getBuf() const
 {
-    return m_normalData.m_pBuf;
+    return m_normalData.m_pBuf.get();
 }
 
 const QString& SourceData::getText() const
@@ -218,11 +218,7 @@ bool SourceData::isBinaryEqualWith(const QSharedPointer<SourceData>& other) cons
 */
 void SourceData::FileData::reset()
 {
-    if(m_pBuf != nullptr)
-    {
-        delete[](char*) m_pBuf;
-        m_pBuf = nullptr;
-    }
+    m_pBuf.reset();
     m_v.clear();
     mDataSize = 0;
     mLineCount = 0;
@@ -245,24 +241,22 @@ bool SourceData::FileData::readFile(FileAccess& file)
         return true;
 
     mDataSize = file.sizeForReading();
-    char* pBuf;
-    m_pBuf = pBuf = new char[mDataSize + 100]; // Alloc 100 byte extra: Safety hack, not nice but does no harm.
-                                               // Some extra bytes at the end of the buffer are needed by
-                                               // the diff algorithm. See also GnuDiff::diff_2_files().
-    bool bSuccess = file.readFile(pBuf, mDataSize);
+    m_pBuf = std::make_unique<char[]>(mDataSize + 100); // Alloc 100 byte extra: Safety hack, not nice but does no harm.
+                                                        // Some extra bytes at the end of the buffer are needed by
+                                                        // the diff algorithm. See also GnuDiff::diff_2_files().
+    bool bSuccess = file.readFile(m_pBuf.get(), mDataSize);
     if(!bSuccess)
     {
-        delete[] pBuf;
         m_pBuf = nullptr;
         mDataSize = 0;
     }
     else
     {
         //null terminate buffer
-        pBuf[mDataSize + 1] = 0;
-        pBuf[mDataSize + 2] = 0;
-        pBuf[mDataSize + 3] = 0;
-        pBuf[mDataSize + 4] = 0;
+        m_pBuf[mDataSize + 1] = 0;
+        m_pBuf[mDataSize + 2] = 0;
+        m_pBuf[mDataSize + 3] = 0;
+        m_pBuf[mDataSize + 4] = 0;
     }
     return bSuccess;
 }
@@ -281,14 +275,12 @@ bool SourceData::FileData::readFile(const QString& filename)
         return true;
 
     mDataSize = fa.sizeForReading();
-    char* pBuf;
-    m_pBuf = pBuf = new char[mDataSize + 100]; // Alloc 100 byte extra: Safety hack, not nice but does no harm.
-                                               // Some extra bytes at the end of the buffer are needed by
-                                               // the diff algorithm. See also GnuDiff::diff_2_files().
-    bool bSuccess = fa.readFile(pBuf, mDataSize);
+    m_pBuf = std::make_unique<char[]>(mDataSize + 100); // Alloc 100 byte extra: Safety hack, not nice but does no harm.
+                                                        // Some extra bytes at the end of the buffer are needed by
+                                                        // the diff algorithm. See also GnuDiff::diff_2_files().
+    bool bSuccess = fa.readFile(m_pBuf.get(), mDataSize);
     if(!bSuccess)
     {
-        delete[] pBuf;
         m_pBuf = nullptr;
         mDataSize = 0;
     }
@@ -308,7 +300,7 @@ bool SourceData::FileData::writeFile(const QString& filename)
     }
 
     FileAccess fa(filename);
-    bool bSuccess = fa.writeFile(m_pBuf, mDataSize);
+    bool bSuccess = fa.writeFile(m_pBuf.get(), mDataSize);
     return bSuccess;
 }
 
@@ -316,11 +308,10 @@ bool SourceData::FileData::writeFile(const QString& filename)
 void SourceData::FileData::copyBufFrom(const FileData& src) //TODO: Remove me.
 {
     reset();
-    char* pBuf;
     mDataSize = src.mDataSize;
-    m_pBuf = pBuf = new char[mDataSize + 100];
+    m_pBuf = std::make_unique<char[]>(mDataSize + 100);
     Q_ASSERT(src.m_pBuf != nullptr);
-    memcpy(pBuf, src.m_pBuf, mDataSize);
+    memcpy(m_pBuf.get(), src.m_pBuf.get(), mDataSize);
 }
 
 QTextCodec* SourceData::detectEncoding(const QString& fileName, QTextCodec* pFallbackCodec)
@@ -582,14 +573,14 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     QVector<e_LineEndStyle> vOrigDataLineEndStyle;
     m_eLineEndStyle = eLineEndStyleUndefined;
 
-    QTextCodec* pCodec = detectEncoding(m_pBuf, mDataSize, skipBytes);
+    QTextCodec* pCodec = detectEncoding(m_pBuf.get(), mDataSize, skipBytes);
     if(pCodec != pEncoding)
         skipBytes = 0;
 
     if(mDataSize - skipBytes > TYPE_MAX(QtNumberType))
         return false;
 
-    const QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, (int)(mDataSize - skipBytes));
+    const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (int)(mDataSize - skipBytes));
     QTextStream ts(ba, QIODevice::ReadOnly); //Don't use text mode we need to see the actual line ending.
     ts.setCodec(pEncoding);
     ts.setAutoDetectUnicode(false);
