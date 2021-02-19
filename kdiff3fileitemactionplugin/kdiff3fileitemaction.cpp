@@ -200,7 +200,7 @@ void KDiff3FileItemAction::slotCompareTwoFiles()
     if(m_list.count() == 2)
     {
         QStringList args;
-        args << Utils::urlToString(m_list.first(e);
+        args << Utils::urlToString(m_list.first());
         args << Utils::urlToString(m_list.last());
         KProcess::startDetached("kdiff3", args);
     }
