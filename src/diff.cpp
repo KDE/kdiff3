@@ -885,7 +885,7 @@ void Diff3LineList::calcDiff3LineListTrim(
     const Diff3Line d3l_empty = Diff3Line();//gcc 6.3 is over zealous about insisisting on explict initialization of a const.
     remove(d3l_empty);
 
-    Diff3LineList::iterator i3 = begin();
+    Diff3LineList::iterator lookAhead = begin();
     Diff3LineList::iterator i3A = begin();
     Diff3LineList::iterator i3B = begin();
     Diff3LineList::iterator i3C = begin();
@@ -896,21 +896,21 @@ void Diff3LineList::calcDiff3LineListTrim(
     int lineC = 0;
 
     ManualDiffHelpList::iterator iMDHL = pManualDiffHelpList->begin();
-    // The iterator i3 and the variable line look ahead.
+    // The iterator lookAhead is the variable line look ahead.
     // The iterators i3A, i3B, i3C and corresponding lineA, lineB and lineC stop at empty lines, if found.
     // If possible, then the texts from the look ahead will be moved back to the empty places.
 
-    for(; i3 != end(); ++i3, ++line)
+    for(; lookAhead != end(); ++lookAhead, ++line)
     {
         if(iMDHL != pManualDiffHelpList->end())
         {
-            if((i3->getLineA().isValid() && i3->getLineA() == iMDHL->getLine1(e_SrcSelector::A)) ||
-               (i3->getLineB().isValid() && i3->getLineB() == iMDHL->getLine1(e_SrcSelector::B)) ||
-               (i3->getLineC().isValid() && i3->getLineC() == iMDHL->getLine1(e_SrcSelector::C)))
+            if((lookAhead->getLineA().isValid() && lookAhead->getLineA() == iMDHL->getLine1(e_SrcSelector::A)) ||
+               (lookAhead->getLineB().isValid() && lookAhead->getLineB() == iMDHL->getLine1(e_SrcSelector::B)) ||
+               (lookAhead->getLineC().isValid() && lookAhead->getLineC() == iMDHL->getLine1(e_SrcSelector::C)))
             {
-                i3A = i3;
-                i3B = i3;
-                i3C = i3;
+                i3A = lookAhead;
+                i3B = lookAhead;
+                i3C = lookAhead;
                 lineA = line;
                 lineB = line;
                 lineC = line;
@@ -918,62 +918,62 @@ void Diff3LineList::calcDiff3LineListTrim(
             }
         }
 
-        if(line > lineA && i3->getLineA().isValid() && i3A->getLineB().isValid() && i3A->isEqualBC() &&
-           LineData::equal((*pldA)[i3->getLineA()], (*pldB)[i3A->getLineB()]) &&
-           pManualDiffHelpList->isValidMove(i3->getLineA(), i3A->getLineB(), e_SrcSelector::A, e_SrcSelector::B) &&
-           pManualDiffHelpList->isValidMove(i3->getLineA(), i3A->getLineC(), e_SrcSelector::A, e_SrcSelector::C))
+        if(line > lineA && lookAhead->getLineA().isValid() && i3A->getLineB().isValid() && i3A->isEqualBC() &&
+           LineData::equal((*pldA)[lookAhead->getLineA()], (*pldB)[i3A->getLineB()]) &&
+           pManualDiffHelpList->isValidMove(lookAhead->getLineA(), i3A->getLineB(), e_SrcSelector::A, e_SrcSelector::B) &&
+           pManualDiffHelpList->isValidMove(lookAhead->getLineA(), i3A->getLineC(), e_SrcSelector::A, e_SrcSelector::C))
         {
             // Empty space for A. A matches B and C in the empty line. Move it up.
-            i3A->setLineA(i3->getLineA());
+            i3A->setLineA(lookAhead->getLineA());
             i3A->bAEqB = true;
             i3A->bAEqC = true;
 
-            i3->getLineA().invalidate();
-            i3->bAEqB = false;
-            i3->bAEqC = false;
+            lookAhead->getLineA().invalidate();
+            lookAhead->bAEqB = false;
+            lookAhead->bAEqC = false;
             ++i3A;
             ++lineA;
         }
 
-        if(line > lineB && i3->getLineB().isValid() && i3B->getLineA().isValid() && i3B->isEqualAC() &&
-           LineData::equal((*pldB)[i3->getLineB()], (*pldA)[i3B->getLineA()]) &&
-           pManualDiffHelpList->isValidMove(i3->getLineB(), i3B->getLineA(), e_SrcSelector::B, e_SrcSelector::A) &&
-           pManualDiffHelpList->isValidMove(i3->getLineB(), i3B->getLineC(), e_SrcSelector::B, e_SrcSelector::C))
+        if(line > lineB && lookAhead->getLineB().isValid() && i3B->getLineA().isValid() && i3B->isEqualAC() &&
+           LineData::equal((*pldB)[lookAhead->getLineB()], (*pldA)[i3B->getLineA()]) &&
+           pManualDiffHelpList->isValidMove(lookAhead->getLineB(), i3B->getLineA(), e_SrcSelector::B, e_SrcSelector::A) &&
+           pManualDiffHelpList->isValidMove(lookAhead->getLineB(), i3B->getLineC(), e_SrcSelector::B, e_SrcSelector::C))
         {
             // Empty space for B. B matches A and C in the empty line. Move it up.
-            i3B->setLineB(i3->getLineB());
+            i3B->setLineB(lookAhead->getLineB());
             i3B->bAEqB = true;
             i3B->bBEqC = true;
-            i3->getLineB().invalidate();
-            i3->bAEqB = false;
-            i3->bBEqC = false;
+            lookAhead->getLineB().invalidate();
+            lookAhead->bAEqB = false;
+            lookAhead->bBEqC = false;
             ++i3B;
             ++lineB;
         }
 
-        if(line > lineC && i3->getLineC().isValid() && i3C->getLineA().isValid() && i3C->isEqualAB() &&
-           LineData::equal((*pldC)[i3->getLineC()], (*pldA)[i3C->getLineA()]) &&
-           pManualDiffHelpList->isValidMove(i3->getLineC(), i3C->getLineA(), e_SrcSelector::C, e_SrcSelector::A) &&
-           pManualDiffHelpList->isValidMove(i3->getLineC(), i3C->getLineB(), e_SrcSelector::C, e_SrcSelector::B))
+        if(line > lineC && lookAhead->getLineC().isValid() && i3C->getLineA().isValid() && i3C->isEqualAB() &&
+           LineData::equal((*pldC)[lookAhead->getLineC()], (*pldA)[i3C->getLineA()]) &&
+           pManualDiffHelpList->isValidMove(lookAhead->getLineC(), i3C->getLineA(), e_SrcSelector::C, e_SrcSelector::A) &&
+           pManualDiffHelpList->isValidMove(lookAhead->getLineC(), i3C->getLineB(), e_SrcSelector::C, e_SrcSelector::B))
         {
             // Empty space for C. C matches A and B in the empty line. Move it up.
-            i3C->setLineC(i3->getLineC());
+            i3C->setLineC(lookAhead->getLineC());
             i3C->bAEqC = true;
             i3C->bBEqC = true;
-            i3->getLineC().invalidate();
-            i3->bAEqC = false;
-            i3->bBEqC = false;
+            lookAhead->getLineC().invalidate();
+            lookAhead->bAEqC = false;
+            lookAhead->bBEqC = false;
             ++i3C;
             ++lineC;
         }
 
-        if(line > lineA && i3->getLineA().isValid() && !i3->isEqualAB() && !i3->isEqualAC() &&
-           pManualDiffHelpList->isValidMove(i3->getLineA(), i3A->getLineB(), e_SrcSelector::A, e_SrcSelector::B) &&
-           pManualDiffHelpList->isValidMove(i3->getLineA(), i3A->getLineC(), e_SrcSelector::A, e_SrcSelector::C))
+        if(line > lineA && lookAhead->getLineA().isValid() && !lookAhead->isEqualAB() && !lookAhead->isEqualAC() &&
+           pManualDiffHelpList->isValidMove(lookAhead->getLineA(), i3A->getLineB(), e_SrcSelector::A, e_SrcSelector::B) &&
+           pManualDiffHelpList->isValidMove(lookAhead->getLineA(), i3A->getLineC(), e_SrcSelector::A, e_SrcSelector::C))
         {
             // Empty space for A. A doesn't match B or C. Move it up.
-            i3A->setLineA(i3->getLineA());
-            i3->getLineA().invalidate();
+            i3A->setLineA(lookAhead->getLineA());
+            lookAhead->getLineA().invalidate();
 
             if(i3A->getLineB().isValid() && LineData::equal((*pldA)[i3A->getLineA()], (*pldB)[i3A->getLineB()]))
             {
@@ -989,13 +989,13 @@ void Diff3LineList::calcDiff3LineListTrim(
             ++lineA;
         }
 
-        if(line > lineB && i3->getLineB().isValid() && !i3->isEqualAB() && !i3->isEqualBC() &&
-           pManualDiffHelpList->isValidMove(i3->getLineB(), i3B->getLineA(), e_SrcSelector::B, e_SrcSelector::A) &&
-           pManualDiffHelpList->isValidMove(i3->getLineB(), i3B->getLineC(), e_SrcSelector::B, e_SrcSelector::C))
+        if(line > lineB && lookAhead->getLineB().isValid() && !lookAhead->isEqualAB() && !lookAhead->isEqualBC() &&
+           pManualDiffHelpList->isValidMove(lookAhead->getLineB(), i3B->getLineA(), e_SrcSelector::B, e_SrcSelector::A) &&
+           pManualDiffHelpList->isValidMove(lookAhead->getLineB(), i3B->getLineC(), e_SrcSelector::B, e_SrcSelector::C))
         {
             // Empty space for B. B matches neither A nor C. Move B up.
-            i3B->setLineB(i3->getLineB());
-            i3->getLineB().invalidate();
+            i3B->setLineB(lookAhead->getLineB());
+            lookAhead->getLineB().invalidate();
 
             if(i3B->getLineA().isValid() && LineData::equal((*pldA)[i3B->getLineA()], (*pldB)[i3B->getLineB()]))
             {
@@ -1011,13 +1011,13 @@ void Diff3LineList::calcDiff3LineListTrim(
             ++lineB;
         }
 
-        if(line > lineC && i3->getLineC().isValid() && !i3->isEqualAC() && !i3->isEqualBC() &&
-           pManualDiffHelpList->isValidMove(i3->getLineC(), i3C->getLineA(), e_SrcSelector::C, e_SrcSelector::A) &&
-           pManualDiffHelpList->isValidMove(i3->getLineC(), i3C->getLineB(), e_SrcSelector::C, e_SrcSelector::B))
+        if(line > lineC && lookAhead->getLineC().isValid() && !lookAhead->isEqualAC() && !lookAhead->isEqualBC() &&
+           pManualDiffHelpList->isValidMove(lookAhead->getLineC(), i3C->getLineA(), e_SrcSelector::C, e_SrcSelector::A) &&
+           pManualDiffHelpList->isValidMove(lookAhead->getLineC(), i3C->getLineB(), e_SrcSelector::C, e_SrcSelector::B))
         {
             // Empty space for C. C matches neither A nor B. Move C up.
-            i3C->setLineC(i3->getLineC());
-            i3->getLineC().invalidate();
+            i3C->setLineC(lookAhead->getLineC());
+            lookAhead->getLineC().invalidate();
 
             if(i3C->getLineA().isValid() && LineData::equal((*pldA)[i3C->getLineA()], (*pldC)[i3C->getLineC()]))
             {
@@ -1033,17 +1033,17 @@ void Diff3LineList::calcDiff3LineListTrim(
             ++lineC;
         }
 
-        if(line > lineA && line > lineB && i3->getLineA().isValid() && i3->isEqualAB() && !i3->isEqualAC())
+        if(line > lineA && line > lineB && lookAhead->getLineA().isValid() && lookAhead->isEqualAB() && !lookAhead->isEqualAC())
         {
             // Empty space for A and B. A matches B, but not C. Move A & B up.
             Diff3LineList::iterator i = lineA > lineB ? i3A : i3B;
             int l = lineA > lineB ? lineA : lineB;
 
-            if(pManualDiffHelpList->isValidMove(i->getLineC(), i3->getLineA(), e_SrcSelector::C, e_SrcSelector::A) &&
-               pManualDiffHelpList->isValidMove(i->getLineC(), i3->getLineB(), e_SrcSelector::C, e_SrcSelector::B))
+            if(pManualDiffHelpList->isValidMove(i->getLineC(), lookAhead->getLineA(), e_SrcSelector::C, e_SrcSelector::A) &&
+               pManualDiffHelpList->isValidMove(i->getLineC(), lookAhead->getLineB(), e_SrcSelector::C, e_SrcSelector::B))
             {
-                i->setLineA(i3->getLineA());
-                i->setLineB(i3->getLineB());
+                i->setLineA(lookAhead->getLineA());
+                i->setLineB(lookAhead->getLineB());
                 i->bAEqB = true;
 
                 if(i->getLineC().isValid() && LineData::equal((*pldA)[i->getLineA()], (*pldC)[i->getLineC()]))
@@ -1052,9 +1052,9 @@ void Diff3LineList::calcDiff3LineListTrim(
                     i->bBEqC = true;
                 }
 
-                i3->getLineA().invalidate();
-                i3->getLineB().invalidate();
-                i3->bAEqB = false;
+                lookAhead->getLineA().invalidate();
+                lookAhead->getLineB().invalidate();
+                lookAhead->bAEqB = false;
                 i3A = i;
                 i3B = i;
                 ++i3A;
@@ -1063,17 +1063,17 @@ void Diff3LineList::calcDiff3LineListTrim(
                 lineB = l + 1;
             }
         }
-        else if(line > lineA && line > lineC && i3->getLineA().isValid() && i3->isEqualAC() && !i3->isEqualAB())
+        else if(line > lineA && line > lineC && lookAhead->getLineA().isValid() && lookAhead->isEqualAC() && !lookAhead->isEqualAB())
         {
             // Empty space for A and C. A matches C, but not B. Move A & C up.
             Diff3LineList::iterator i = lineA > lineC ? i3A : i3C;
             int l = lineA > lineC ? lineA : lineC;
 
-            if(pManualDiffHelpList->isValidMove(i->getLineB(), i3->getLineA(), e_SrcSelector::B, e_SrcSelector::A) &&
-               pManualDiffHelpList->isValidMove(i->getLineB(), i3->getLineC(), e_SrcSelector::B, e_SrcSelector::C))
+            if(pManualDiffHelpList->isValidMove(i->getLineB(), lookAhead->getLineA(), e_SrcSelector::B, e_SrcSelector::A) &&
+               pManualDiffHelpList->isValidMove(i->getLineB(), lookAhead->getLineC(), e_SrcSelector::B, e_SrcSelector::C))
             {
-                i->setLineA(i3->getLineA());
-                i->setLineC(i3->getLineC());
+                i->setLineA(lookAhead->getLineA());
+                i->setLineC(lookAhead->getLineC());
                 i->bAEqC = true;
 
                 if(i->getLineB().isValid() && LineData::equal((*pldA)[i->getLineA()], (*pldB)[i->getLineB()]))
@@ -1082,9 +1082,9 @@ void Diff3LineList::calcDiff3LineListTrim(
                     i->bBEqC = true;
                 }
 
-                i3->getLineA().invalidate();
-                i3->getLineC().invalidate();
-                i3->bAEqC = false;
+                lookAhead->getLineA().invalidate();
+                lookAhead->getLineC().invalidate();
+                lookAhead->bAEqC = false;
                 i3A = i;
                 i3C = i;
                 ++i3A;
@@ -1093,16 +1093,16 @@ void Diff3LineList::calcDiff3LineListTrim(
                 lineC = l + 1;
             }
         }
-        else if(line > lineB && line > lineC && i3->getLineB().isValid() && i3->isEqualBC() && !i3->isEqualAC())
+        else if(line > lineB && line > lineC && lookAhead->getLineB().isValid() && lookAhead->isEqualBC() && !lookAhead->isEqualAC())
         {
             // Empty space for B and C. B matches C, but not A. Move B & C up.
             Diff3LineList::iterator i = lineB > lineC ? i3B : i3C;
             int l = lineB > lineC ? lineB : lineC;
-            if(pManualDiffHelpList->isValidMove(i->getLineA(), i3->getLineB(), e_SrcSelector::A, e_SrcSelector::B) &&
-               pManualDiffHelpList->isValidMove(i->getLineA(), i3->getLineC(), e_SrcSelector::A, e_SrcSelector::C))
+            if(pManualDiffHelpList->isValidMove(i->getLineA(), lookAhead->getLineB(), e_SrcSelector::A, e_SrcSelector::B) &&
+               pManualDiffHelpList->isValidMove(i->getLineA(), lookAhead->getLineC(), e_SrcSelector::A, e_SrcSelector::C))
             {
-                i->setLineB(i3->getLineB());
-                i->setLineC(i3->getLineC());
+                i->setLineB(lookAhead->getLineB());
+                i->setLineC(lookAhead->getLineC());
                 i->bBEqC = true;
 
                 if(i->getLineA().isValid() && LineData::equal((*pldA)[i->getLineA()], (*pldB)[i->getLineB()]))
@@ -1111,9 +1111,9 @@ void Diff3LineList::calcDiff3LineListTrim(
                     i->bAEqC = true;
                 }
 
-                i3->getLineB().invalidate();
-                i3->getLineC().invalidate();
-                i3->bBEqC = false;
+                lookAhead->getLineB().invalidate();
+                lookAhead->getLineC().invalidate();
+                lookAhead->bBEqC = false;
                 i3B = i;
                 i3C = i;
                 ++i3B;
@@ -1123,22 +1123,22 @@ void Diff3LineList::calcDiff3LineListTrim(
             }
         }
 
-        if(i3->getLineA().isValid())
+        if(lookAhead->getLineA().isValid())
         {
             lineA = line + 1;
-            i3A = i3;
+            i3A = lookAhead;
             ++i3A;
         }
-        if(i3->getLineB().isValid())
+        if(lookAhead->getLineB().isValid())
         {
             lineB = line + 1;
-            i3B = i3;
+            i3B = lookAhead;
             ++i3B;
         }
-        if(i3->getLineC().isValid())
+        if(lookAhead->getLineC().isValid())
         {
             lineC = line + 1;
-            i3C = i3;
+            i3C = lookAhead;
             ++i3C;
         }
     }
