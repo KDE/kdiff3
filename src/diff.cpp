@@ -882,7 +882,7 @@ void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHe
 void Diff3LineList::calcDiff3LineListTrim(
     const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList)
 {
-    const Diff3Line d3l_empty = Diff3Line();//gcc 6.3 is over zealous about insisisting on explict initialization of a const.
+    const Diff3Line d3l_empty;
     remove(d3l_empty);
 
     Diff3LineList::iterator lookAhead = begin();
