@@ -469,7 +469,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
 }
 
 // Test if the move would pass a barrier. Return true if not.
-bool ManualDiffHelpList::isValidMove(int line1, int line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const
+bool ManualDiffHelpList::isValidMove(LineRef line1, LineRef line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const
 {
     if(line1 >= 0 && line2 >= 0)
     {
@@ -543,13 +543,13 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
     remove(ManualDiffHelpEntry()); // Remove all completely empty items.
 }
 
-bool ManualDiffHelpEntry::isValidMove(int line1, int line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const
+bool ManualDiffHelpEntry::isValidMove(LineRef line1, LineRef line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const
 {
     // Barrier
-    int l1 = winIdx1 == e_SrcSelector::A ? lineA1 : winIdx1 == e_SrcSelector::B ? lineB1 : lineC1;
-    int l2 = winIdx2 == e_SrcSelector::A ? lineA1 : winIdx2 == e_SrcSelector::B ? lineB1 : lineC1;
+    LineRef l1 = winIdx1 == e_SrcSelector::A ? lineA1 : winIdx1 == e_SrcSelector::B ? lineB1 : lineC1;
+    LineRef l2 = winIdx2 == e_SrcSelector::A ? lineA1 : winIdx2 == e_SrcSelector::B ? lineB1 : lineC1;
 
-    if(l1 >= 0 && l2 >= 0)
+    if(l1.isValid() && l2.isValid())
     {
         if((line1 >= l1 && line2 < l2) || (line1 < l1 && line2 >= l2))
             return false;
