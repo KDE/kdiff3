@@ -86,8 +86,8 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
     // First make d3ll for AB (from pDiffListAB)
 
     DiffList::const_iterator i = pDiffListAB->begin();
-    LineRef::LineType lineA = 0;
-    LineRef::LineType lineB = 0;
+    LineRef lineA = 0;
+    LineRef lineB = 0;
     Diff d;
 
     qCInfo(kdiffMain) << "Enter: calcDiff3LineListUsingAB" ;
@@ -152,8 +152,8 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
 
     DiffList::const_iterator i = pDiffListAC->begin();
     Diff3LineList::iterator i3 = begin();
-    LineRef::LineType lineA = 0;
-    LineRef::LineType lineC = 0;
+    LineRef lineA = 0;
+    LineRef lineC = 0;
     Diff d;
 
     for(;;)
@@ -222,8 +222,8 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
     DiffList::const_iterator i = pDiffListBC->begin();
     Diff3LineList::iterator i3b = begin();
     Diff3LineList::iterator i3c = begin();
-    LineRef::LineType lineB = 0;
-    LineRef::LineType lineC = 0;
+    LineRef lineB = 0;
+    LineRef lineC = 0;
     Diff d;
 
     for(d=*i;i != pDiffListBC->end(); ++i)
@@ -659,13 +659,14 @@ void DiffList::runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef
 
     // Verify difflist
     {
-        LineRef::LineType l1 = 0;
-        LineRef::LineType l2 = 0;
+        LineRef l1 = 0;
+        LineRef l2 = 0;
         DiffList::iterator i;
         for(i = begin(); i != end(); ++i)
         {
-            l1 += i->numberOfEquals() + i->diff1();
-            l2 += i->numberOfEquals() + i->diff2();
+            Q_ASSERT(i->diff1() <= TYPE_MAX(LineRef::LineType) && i->diff2() <= TYPE_MAX(LineRef::LineType));
+            l1 += i->numberOfEquals() + LineRef(i->diff1());
+            l2 += i->numberOfEquals() + LineRef(i->diff2());
         }
 
         Q_ASSERT(l1 == size1 && l2 == size2);
