@@ -18,8 +18,8 @@ class LineRef
 {
   public:
     typedef qint32 LineType;
-    inline LineRef() noexcept = default;
-    inline LineRef(const LineType i) noexcept { mLineNumber = i; }
+    constexpr inline LineRef() noexcept = default;
+    constexpr inline LineRef(const LineType i) noexcept { mLineNumber = i; }
     inline LineRef(const qint64 i) noexcept
     {
         if(i <= TYPE_MAX(LineType))
@@ -73,7 +73,7 @@ class LineRef
 
 /*
     This is here because its easy to unknowingly break these conditions. The resulting
-    compiler errors are a bit cryptic if you aren't famialar with the C++ language.
+    compiler errors are numerous and may be a bit cryptic if you aren't famialar with the C++ language.
     Also some IDEs with clangd or ccls integration can automatically check static_asserts
     without doing a full compile.
 */
