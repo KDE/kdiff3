@@ -230,7 +230,7 @@ class Diff3Line
         pFineBC = nullptr;
         pFineCA = nullptr;
     }
-    
+
     Q_REQUIRED_RESULT LineRef getLineA() const { return lineA; }
     Q_REQUIRED_RESULT LineRef getLineB() const { return lineB; }
     Q_REQUIRED_RESULT LineRef getLineC() const { return lineC; }
@@ -373,6 +373,8 @@ class Diff3LineList : public std::list<Diff3Line>
     } //safe for small files same limit as exited with QLinkedList. This should ultimatly be removed.
 
     void debugLineCheck(const LineCount size, const e_SrcSelector srcSelector) const;
+
+    void dump();
 
     [[nodiscard]] qint32 numberOfLines(bool bWordWrap) const
     {

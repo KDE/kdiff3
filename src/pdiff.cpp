@@ -165,6 +165,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                 pp.setInformation(i18n("Linediff: A <-> B"));
                 qCInfo(kdiffMain) << i18n("Linediff: A <-> B");
                 m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
+                m_diff3LineList.debugLineCheck(m_sd1->getSizeLines(), e_SrcSelector::A);
+
                 pTotalDiffStatus->setTextEqualAB(m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1->getLineDataForDisplay(), m_sd2->getLineDataForDisplay()));
                 if(m_sd1->getSizeBytes() == 0) pTotalDiffStatus->setTextEqualAB(false);
 
@@ -206,6 +208,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                 m_diff3LineList.calcDiff3LineListUsingAB(&m_diffList12);
             }
             pp.step();
+            m_diff3LineList.debugLineCheck(m_sd1->getSizeLines(), e_SrcSelector::A);
 
             pp.setInformation(i18n("Diff: A <-> C"));
             qCInfo(kdiffMain) << i18n("Diff: A <-> C");
@@ -216,7 +219,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                                              m_pOptionDialog->getOptions());
 
                 m_diff3LineList.calcDiff3LineListUsingAC(&m_diffList13);
+                //m_diff3LineList.dump();
                 m_diff3LineList.correctManualDiffAlignment(&m_manualDiffHelpList);
+                //m_diff3LineList.dump();
                 m_diff3LineList.calcDiff3LineListTrim(m_sd1->getLineDataForDiff(), m_sd2->getLineDataForDiff(), m_sd3->getLineDataForDiff(), &m_manualDiffHelpList);
             }
             pp.step();
