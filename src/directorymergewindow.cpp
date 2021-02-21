@@ -3059,9 +3059,9 @@ void DirectoryMergeWindow::updateAvailabilities(bool bMergeEditorVisible, bool b
     d->m_pDirCurrentDelete->setEnabled(bItemActive && bMergeMode);
     if(bDirWindowHasFocus)
     {
-        chooseA->setEnabled(bItemActive && pMFI->existsInA());
-        chooseB->setEnabled(bItemActive && pMFI->existsInB());
-        chooseC->setEnabled(bItemActive && pMFI->existsInC());
+        chooseA->setEnabled(bItemActive && bDirCompare ? pMFI->existsInA() : true);
+        chooseB->setEnabled(bItemActive && bDirCompare ? pMFI->existsInB() : true);
+        chooseC->setEnabled(bItemActive && bDirCompare ? pMFI->existsInC() : KDiff3App::isTripleDiff() );
         chooseA->setChecked(false);
         chooseB->setChecked(false);
         chooseC->setChecked(false);
@@ -3070,7 +3070,7 @@ void DirectoryMergeWindow::updateAvailabilities(bool bMergeEditorVisible, bool b
     {
         chooseA->setEnabled(bMergeEditorVisible);
         chooseB->setEnabled(bMergeEditorVisible);
-        chooseC->setEnabled(bMergeEditorVisible && bThreeDirs);
+        chooseC->setEnabled(bMergeEditorVisible && KDiff3App::isTripleDiff());
     }
 
     d->m_pDirCurrentSyncDoNothing->setEnabled(bItemActive && !bMergeMode);
