@@ -202,7 +202,13 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
             return nullptr;
     }
 
-    [[nodiscard]] bool isThreeWay() const
+    /*
+        returns whether or not we doing three way directory comparision
+
+        This will return false when comparing three files.
+        Use KDiff3App::isTripleDiff() if this is a problem.
+    */
+    [[nodiscard]] bool isDirThreeWay() const
     {
         if(rootMFI() == nullptr) return false;
         return rootMFI()->isThreeWay();
@@ -1083,7 +1089,7 @@ void DirectoryMergeWindow::slotChooseCEverywhere()
 
 void DirectoryMergeWindow::slotAutoChooseEverywhere()
 {
-    e_MergeOperation eDefaultMergeOp = d->isThreeWay() ? eMergeABCToDest : d->m_bSyncMode ? eMergeToAB : eMergeABToDest;
+    e_MergeOperation eDefaultMergeOp = d->isDirThreeWay() ? eMergeABCToDest : d->m_bSyncMode ? eMergeToAB : eMergeABToDest;
     d->setAllMergeOperations(eDefaultMergeOp);
 }
 
@@ -1121,7 +1127,7 @@ void DirectoryMergeWindow::slotCurrentChooseC()
 }
 void DirectoryMergeWindow::slotCurrentMerge()
 {
-    bool bThreeDirs = d->isThreeWay();
+    bool bThreeDirs = d->isDirThreeWay();
     d->setMergeOperation(currentIndex(), bThreeDirs ? eMergeABCToDest : eMergeABToDest);
 }
 void DirectoryMergeWindow::slotCurrentDelete()
@@ -1629,7 +1635,7 @@ void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
 
     if(c == s_OpCol)
     {
-        bool bThreeDirs = d->isThreeWay();
+        bool bThreeDirs = d->isDirThreeWay();
 
         QMenu m(this);
         if(bThreeDirs)
@@ -2882,7 +2888,7 @@ void DirectoryMergeWindow::updateFileVisibilities()
     bool bShowOnlyInA = d->m_pDirShowFilesOnlyInA->isChecked();
     bool bShowOnlyInB = d->m_pDirShowFilesOnlyInB->isChecked();
     bool bShowOnlyInC = d->m_pDirShowFilesOnlyInC->isChecked();
-    bool bThreeDirs = d->isThreeWay();
+    bool bThreeDirs = d->isDirThreeWay();
     d->m_selection1Index = QModelIndex();
     d->m_selection2Index = QModelIndex();
     d->m_selection3Index = QModelIndex();
@@ -3027,7 +3033,7 @@ void DirectoryMergeWindow::updateAvailabilities(bool bMergeEditorVisible, bool b
 
     d->m_pDirRescan->setEnabled(bDirCompare);
 
-    bool bThreeDirs = d->isThreeWay();
+    bool bThreeDirs = d->isDirThreeWay();
     d->m_pDirAutoChoiceEverywhere->setEnabled(bDirCompare && isVisible());
     d->m_pDirDoNothingEverywhere->setEnabled(bDirCompare && isVisible());
     d->m_pDirChooseAEverywhere->setEnabled(bDirCompare && isVisible());
