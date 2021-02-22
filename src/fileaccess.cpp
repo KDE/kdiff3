@@ -8,13 +8,12 @@
 #include "fileaccess.h"
 
 #include "common.h"
-#include "CompositeIgnoreList.h"
-#include "CvsIgnoreList.h"
 #include <qglobal.h>
 #ifndef AUTOTEST
 #include "DefaultFileAccessJobHandler.h"
 #endif
 #include "FileAccessJobHandler.h"
+#include "IgnoreList.h"
 #include "Logging.h"
 #include "Utils.h"
 #include "progress.h"
@@ -880,11 +879,11 @@ bool FileAccess::removeFile()
 
 bool FileAccess::listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                          const QString& filePattern, const QString& fileAntiPattern, const QString& dirAntiPattern,
-                         bool bFollowDirLinks, bool bUseCvsIgnore)
+                         bool bFollowDirLinks, IgnoreList& ignoreList)
 {
     Q_ASSERT(mJobHandler != nullptr);
     return mJobHandler->listDir(pDirList, bRecursive, bFindHidden, filePattern, fileAntiPattern,
-                      dirAntiPattern, bFollowDirLinks, bUseCvsIgnore);
+                      dirAntiPattern, bFollowDirLinks, ignoreList);
 }
 
 QString FileAccess::getTempName() const
@@ -1096,17 +1095,10 @@ void FileAccess::doError()
     m_bExists = false;
 }
 
-void FileAccess::filterList(DirectoryList* pDirList, const QString& filePattern,
+void FileAccess::filterList(const QString& dir, DirectoryList* pDirList, const QString& filePattern,
                             const QString& fileAntiPattern, const QString& dirAntiPattern,
-                            const bool bUseCvsIgnore)
+                            IgnoreList& ignoreList)
 {
-    CompositeIgnoreList ignoreList;
-    if(bUseCvsIgnore)
-    {
-        auto cvsIgnoreList = std::make_unique<CvsIgnoreList>();
-        cvsIgnoreList->init(*this, pDirList);
-        ignoreList.addIgnoreList(std::move(cvsIgnoreList));
-    }
     //TODO: Ask os for this information don't hard code it.
 #if defined(Q_OS_WIN)
     bool bCaseSensitive = false;
@@ -1126,7 +1118,7 @@ void FileAccess::filterList(DirectoryList* pDirList, const QString& filePattern,
             (!Utils::wildcardMultiMatch(filePattern, fileName, bCaseSensitive) ||
              Utils::wildcardMultiMatch(fileAntiPattern, fileName, bCaseSensitive))) ||
            (i->isDir() && Utils::wildcardMultiMatch(dirAntiPattern, fileName, bCaseSensitive)) ||
-           (bUseCvsIgnore && ignoreList.matches(fileName, bCaseSensitive)))
+           (ignoreList.matches(dir, fileName, bCaseSensitive)))
         {
             // Remove it
             pDirList->erase(i);

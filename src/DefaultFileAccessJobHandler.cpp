@@ -9,6 +9,7 @@
 #include "DefaultFileAccessJobHandler.h"
 
 #include "defmac.h"
+#include "IgnoreList.h"
 #include "Logging.h"
 #include "progress.h"
 #include "ProgressProxyExtender.h"
@@ -325,7 +326,7 @@ bool DefaultFileAccessJobHandler::copyFile(const QString& inDest)
 }
 
 bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden, const QString& filePattern,
-                                   const QString& fileAntiPattern, const QString& dirAntiPattern, bool bFollowDirLinks, const bool bUseCvsIgnore)
+                                   const QString& fileAntiPattern, const QString& dirAntiPattern, bool bFollowDirLinks, IgnoreList& ignoreList)
 {
     ProgressProxyExtender pp;
     m_pDirList = pDirList;
@@ -402,7 +403,8 @@ bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursi
         }
     }
 
-    mFileAccess->filterList(pDirList, filePattern, fileAntiPattern, dirAntiPattern, bUseCvsIgnore);
+    ignoreList.enterDir(mFileAccess->absoluteFilePath(), *pDirList);
+    mFileAccess->filterList(mFileAccess->absoluteFilePath(), pDirList, filePattern, fileAntiPattern, dirAntiPattern, ignoreList);
 
     if(bRecursive)
     {
@@ -416,7 +418,7 @@ bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursi
             {
                 DirectoryList dirList;
                 i->listDir(&dirList, bRecursive, bFindHidden,
-                           filePattern, fileAntiPattern, dirAntiPattern, bFollowDirLinks, bUseCvsIgnore);
+                           filePattern, fileAntiPattern, dirAntiPattern, bFollowDirLinks, ignoreList);
 
                 // append data onto the main list
                 subDirsList.splice(subDirsList.end(), dirList);

@@ -7,9 +7,15 @@
 
 #include "CompositeIgnoreList.h"
 
-bool CompositeIgnoreList::matches(const QString& text, bool bCaseSensitive) const {
+void CompositeIgnoreList::enterDir(const QString& dir, const DirectoryList& directoryList) {
     for (const auto& ignoreList : m_ignoreLists) {
-        if (ignoreList->matches(text, bCaseSensitive)) {
+        ignoreList->enterDir(dir, directoryList);
+    }
+}
+
+bool CompositeIgnoreList::matches(const QString& dir, const QString& text, bool bCaseSensitive) const {
+    for (const auto& ignoreList : m_ignoreLists) {
+        if (ignoreList->matches(dir, text, bCaseSensitive)) {
             return true;
         }
     }

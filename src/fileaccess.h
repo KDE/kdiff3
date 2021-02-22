@@ -9,7 +9,8 @@
 #ifndef FILEACCESS_H
 #define FILEACCESS_H
 
-#include <list>
+#include "DirectoryList.h"
+
 #include <type_traits>
 
 #include <QDateTime>
@@ -24,10 +25,9 @@
 #include <KIO/UDSEntry>
 #endif
 
-class FileAccess;
-using DirectoryList =  std::list<FileAccess>;
 class FileAccessJobHandler;
 class DefaultFileAccessJobHandler;
+class IgnoreList;
 /*
   Defining a function as virtual in FileAccess is intended to allow testing sub classes to be written
   more easily. This way the test can use a moc class that emulates the needed conditions with no
@@ -95,7 +95,7 @@ class FileAccess
     virtual bool writeFile(const void* pSrcBuffer, qint64 length);
     bool listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                  const QString& filePattern, const QString& fileAntiPattern,
-                 const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore);
+                 const QString& dirAntiPattern, bool bFollowDirLinks, IgnoreList& ignoreList);
     virtual bool copyFile(const QString& destUrl);
     virtual bool createBackup(const QString& bakExtension);
 
@@ -118,9 +118,9 @@ class FileAccess
     Q_REQUIRED_RESULT FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
 
     void doError();
-    void filterList(DirectoryList* pDirList, const QString& filePattern,
+    void filterList(const QString& dir, DirectoryList* pDirList, const QString& filePattern,
                     const QString& fileAntiPattern, const QString& dirAntiPattern,
-                    const bool bUseCvsIgnore);
+                    IgnoreList& ignoreList);
 
     Q_REQUIRED_RESULT QDir getBaseDirectory() const { return m_baseDir; }
 

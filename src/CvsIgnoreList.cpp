@@ -15,49 +15,52 @@
 #include <QDir>
 #include <QTextStream>
 
-void CvsIgnoreList::init(FileAccess& dir, const DirectoryList* pDirList)
+CvsIgnoreList::CvsIgnoreList() = default;
+
+CvsIgnoreList::~CvsIgnoreList() = default;
+
+void CvsIgnoreList::enterDir(const QString& dir, const DirectoryList& directoryList)
 {
     static const QString ignorestr = QString::fromLatin1(". .. core RCSLOG tags TAGS RCS SCCS .make.state "
                                    ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
                                    "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$");
-
+    addEntriesFromString(dir, ignorestr);
+    addEntriesFromFile(dir, QDir::homePath() + '/'+ getGlobalIgnoreName());
     const char* varname = getVarName();
-
-    addEntriesFromString(ignorestr);
-    addEntriesFromFile(QDir::homePath() + '/'+ getGlobalIgnoreName());
     if(qEnvironmentVariableIsSet(varname) && !qEnvironmentVariableIsEmpty(varname))
     {
-        addEntriesFromString(QString::fromLocal8Bit(qgetenv(varname)));
+        addEntriesFromString(dir, QString::fromLocal8Bit(qgetenv(varname)));
     }
-
-    const bool bUseLocalCvsIgnore = ignoreExists(pDirList);
+    const bool bUseLocalCvsIgnore = ignoreExists(directoryList);
     if(bUseLocalCvsIgnore)
     {
         FileAccess file(dir);
         file.addPath(getIgnoreName());
         if(file.exists() && file.isLocal())
-            addEntriesFromFile(file.absoluteFilePath());
+        {
+            addEntriesFromFile(dir, file.absoluteFilePath());
+        }
         else
         {
             file.createLocalCopy();
-            addEntriesFromFile(file.getTempName());
+            addEntriesFromFile(dir, file.getTempName());
         }
     }
 }
 
-void CvsIgnoreList::addEntriesFromString(const QString& str)
+void CvsIgnoreList::addEntriesFromString(const QString& dir, const QString& str)
 {
     const QStringList patternList = str.split(' ');
     for(const QString& pattern : patternList)
     {
-        addEntry(pattern);
+        addEntry(dir, pattern);
     }
 }
 
 /*
     We don't have a real file in AUTORUN mode
 */
-void CvsIgnoreList::addEntriesFromFile(const QString& name)
+void CvsIgnoreList::addEntriesFromFile(const QString& dir, const QString& name)
 {
     #ifdef AUTORUN
     Q_UNUSED(name)
@@ -69,13 +72,13 @@ void CvsIgnoreList::addEntriesFromFile(const QString& name)
         QTextStream stream(&file);
         while(!stream.atEnd())
         {
-            addEntry(stream.readLine());
+            addEntry(dir, stream.readLine());
         }
     }
     #endif
 }
 
-void CvsIgnoreList::addEntry(const QString& pattern)
+void CvsIgnoreList::addEntry(const QString& dir, const QString& pattern)
 {
     if(pattern != QString("!"))
     {
@@ -100,47 +103,49 @@ void CvsIgnoreList::addEntry(const QString& pattern)
 
         if(nofMetaCharacters == 0)
         {
-            m_exactPatterns.append(pattern);
+            m_ignorePatterns[dir].m_exactPatterns.append(pattern);
         }
         else if(nofMetaCharacters == 1)
         {
             if(pattern.at(0) == QChar('*'))
             {
-                m_endPatterns.append(pattern.right(pattern.length() - 1));
+                m_ignorePatterns[dir].m_endPatterns.append(pattern.right(pattern.length() - 1));
             }
             else if(pattern.at(pattern.length() - 1) == QChar('*'))
             {
-                m_startPatterns.append(pattern.left(pattern.length() - 1));
+                m_ignorePatterns[dir].m_startPatterns.append(pattern.left(pattern.length() - 1));
             }
             else
             {
-                m_generalPatterns.append(pattern);
+                m_ignorePatterns[dir].m_generalPatterns.append(pattern);
             }
         }
         else
         {
-            m_generalPatterns.append(pattern);
+            m_ignorePatterns[dir].m_generalPatterns.append(pattern);
         }
     }
     else
     {
-        m_exactPatterns.clear();
-        m_startPatterns.clear();
-        m_endPatterns.clear();
-        m_generalPatterns.clear();
+        m_ignorePatterns.erase(dir);
     }
 }
 
-bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
+bool CvsIgnoreList::matches(const QString& dir, const QString& text, bool bCaseSensitive) const
 {
+    const auto ignorePatternsIt = m_ignorePatterns.find(dir);
+    if (ignorePatternsIt == m_ignorePatterns.end())
+    {
+        return false;
+    }
     QRegExp regexp(text, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
-    if(m_exactPatterns.indexOf(regexp) >= 0)
+    if(ignorePatternsIt->second.m_exactPatterns.indexOf(regexp) >= 0)
     {
         return true;
     }
 
 
-    for(const QString& startPattern: m_startPatterns)
+    for(const QString& startPattern: ignorePatternsIt->second.m_startPatterns)
     {
         if(text.startsWith(startPattern, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive))
         {
@@ -148,7 +153,7 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
         }
     }
 
-    for(const QString& endPattern: m_endPatterns)
+    for(const QString& endPattern: ignorePatternsIt->second.m_endPatterns)
     {
         if(text.endsWith(endPattern, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive))
         {
@@ -156,7 +161,7 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
         }
     }
 
-    for(const QString& globStr : m_generalPatterns)
+    for(const QString& globStr : ignorePatternsIt->second.m_generalPatterns)
     {
         QRegExp pattern(globStr, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::Wildcard);
         if(pattern.exactMatch(text))
@@ -166,9 +171,9 @@ bool CvsIgnoreList::matches(const QString& text, bool bCaseSensitive) const
     return false;
 }
 
-bool CvsIgnoreList::ignoreExists(const DirectoryList* pDirList)
+bool CvsIgnoreList::ignoreExists(const DirectoryList& pDirList)
 {
-    for(const FileAccess& dir : *pDirList)
+    for(const FileAccess& dir : pDirList)
     {
         if(dir.fileName() == getIgnoreName())
             return true;

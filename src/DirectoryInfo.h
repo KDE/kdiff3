@@ -40,38 +40,16 @@ class DirectoryInfo
 
       inline bool allowSyncMode() { return !m_dirC.isValid() && !m_dirDest.isValid(); }
 
-      inline bool listDirA(const Options& options)
-      {
-          return m_dirA.listDir(&m_dirListA,
-                                        options.m_bDmRecursiveDirs, options.m_bDmFindHidden,
-                                        options.m_DmFilePattern, options.m_DmFileAntiPattern,
-                                        options.m_DmDirAntiPattern, options.m_bDmFollowDirLinks,
-                                        options.m_bDmUseCvsIgnore);
-      }
-
-      inline bool listDirB(const Options& options)
-      {
-          return m_dirB.listDir(&m_dirListB,
-                                        options.m_bDmRecursiveDirs, options.m_bDmFindHidden,
-                                        options.m_DmFilePattern, options.m_DmFileAntiPattern,
-                                        options.m_DmDirAntiPattern, options.m_bDmFollowDirLinks,
-                                        options.m_bDmUseCvsIgnore);
-      }
-
-      inline bool listDirC(const Options& options)
-      {
-          return m_dirC.listDir(&m_dirListC,
-                                        options.m_bDmRecursiveDirs, options.m_bDmFindHidden,
-                                        options.m_DmFilePattern, options.m_DmFileAntiPattern,
-                                        options.m_DmDirAntiPattern, options.m_bDmFollowDirLinks,
-                                        options.m_bDmUseCvsIgnore);
-      }
-
+      bool listDirA(const Options& options);
+      bool listDirB(const Options& options);
+      bool listDirC(const Options& options);
       DirectoryList& getDirListA() { return m_dirListA; }
       DirectoryList& getDirListB() { return m_dirListB; }
       DirectoryList& getDirListC() { return m_dirListC; }
 
     private:
+      bool listDir(FileAccess& fileAccess, DirectoryList& dirList, const Options& options);
+
       FileAccess m_dirA, m_dirB, m_dirC;
 
       DirectoryList m_dirListA;

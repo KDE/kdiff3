@@ -12,13 +12,16 @@
 #ifndef IGNORELIST_H
 #define IGNORELIST_H
 
+#include "DirectoryList.h"
+
 #include <QString>
 
 class IgnoreList
 {
 public:
     virtual ~IgnoreList() = default;
-    [[nodiscard]] virtual bool matches(const QString& text, bool bCaseSensitive) const = 0;
+    virtual void enterDir(const QString& dir, const DirectoryList& directoryList) = 0;
+    [[nodiscard]] virtual bool matches(const QString& dir, const QString& text, bool bCaseSensitive) const = 0;
 };
 
 #endif

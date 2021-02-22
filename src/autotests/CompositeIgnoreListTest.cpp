@@ -14,7 +14,9 @@ class IgnoreListMock final : public IgnoreList {
 public:
     mutable unsigned callCount = 0;
     bool match = false;
-    [[nodiscard]] bool matches(const QString& text, bool bCaseSensitive) const final {
+    void enterDir(const QString&, const DirectoryList&) final {}
+    [[nodiscard]] bool matches(const QString& dir, const QString& text, bool bCaseSensitive) const final {
+        Q_UNUSED(dir);
         Q_UNUSED(text);
         Q_UNUSED(bCaseSensitive);
         ++callCount;
@@ -30,16 +32,16 @@ private Q_SLOTS:
     {
         CompositeIgnoreList testObject;
         // Verify that with no ignore list handlers added, matches returns false
-        QVERIFY(testObject.matches(QString(), false) == false);
+        QVERIFY(testObject.matches(QString(), QString(), false) == false);
         auto firstIgnoreList = std::make_unique<IgnoreListMock>();
         auto firstIgnoreListPtr = firstIgnoreList.get();
         testObject.addIgnoreList(std::move(firstIgnoreList));
         // Verify that the added ignore list is called, and the return value of CompositeIgnoreList is that
         // of the added ignore list class
-        QVERIFY(testObject.matches(QString(), false) == firstIgnoreListPtr->match);
+        QVERIFY(testObject.matches(QString(), QString(), false) == firstIgnoreListPtr->match);
         QVERIFY(firstIgnoreListPtr->callCount == 1);
         firstIgnoreListPtr->match = true;
-        QVERIFY(testObject.matches(QString(), false) == firstIgnoreListPtr->match);
+        QVERIFY(testObject.matches(QString(), QString(), false) == firstIgnoreListPtr->match);
         QVERIFY(firstIgnoreListPtr->callCount == 2);
         // Verify that CompositeIgnoreList calls each added ignore list class and returns true the first time
         // a match is made
@@ -53,7 +55,7 @@ private Q_SLOTS:
         firstIgnoreListPtr->match = false;
         secondIgnoreListPtr->match = true;
         thirdIgnoreListPtr->match = false;
-        QVERIFY(testObject.matches(QString(), false) == true);
+        QVERIFY(testObject.matches(QString(), QString(), false) == true);
         QVERIFY(firstIgnoreListPtr->callCount == 1);
         QVERIFY(secondIgnoreListPtr->callCount == 1);
         QVERIFY(thirdIgnoreListPtr->callCount == 0);

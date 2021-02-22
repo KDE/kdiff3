@@ -37,7 +37,7 @@ class DefaultFileAccessJobHandler: public FileAccessJobHandler
     bool rename(const FileAccess& dest) override;
     bool listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                  const QString& filePattern, const QString& fileAntiPattern,
-                 const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore) override;
+                 const QString& dirAntiPattern, bool bFollowDirLinks, IgnoreList& ignoreList) override;
 
     static bool mkDir(const QString& dirName) {return DefaultFileAccessJobHandler(nullptr).mkDirImp(dirName);}
     static bool rmDir(const QString& dirName) {return DefaultFileAccessJobHandler(nullptr).rmDirImp(dirName);}

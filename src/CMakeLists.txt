@@ -37,6 +37,7 @@ set(kdiff3part_PART_SRCS
    CommentParser.cpp
    CvsIgnoreList.cpp
    CompositeIgnoreList.cpp
+   DirectoryInfo.cpp
 )
 
 ki18n_wrap_ui(kdiff3part_PART_SRCS

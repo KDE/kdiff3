@@ -14,14 +14,15 @@
 class IgnoreListTestInterface: public CvsIgnoreList
 {
   public:
-    bool isEmpty() const
+    bool isEmpty(const QString& dir) const
     {
-        return m_exactPatterns.isEmpty() && m_endPatterns.isEmpty() && m_generalPatterns.isEmpty() && m_startPatterns.isEmpty();
+        return m_ignorePatterns.find(dir) == m_ignorePatterns.end();
     }
 
-    const QStringList& getExactMatchList() const
+    QStringList getExactMatchList(const QString& dir) const
     {
-        return m_exactPatterns;
+        const auto ignorePatternsIt = m_ignorePatterns.find(dir);
+        return ignorePatternsIt != m_ignorePatterns.end() ? ignorePatternsIt->second.m_exactPatterns : QStringList();
     }
 };
 
@@ -37,10 +38,7 @@ class CvsIgnoreListTest : public QObject
         MocIgnoreFile file;
         IgnoreListTestInterface test;
         //sanity check defaults
-        QVERIFY(test.isEmpty());
-        QVERIFY(test.isEmpty());
-        QVERIFY(test.isEmpty());
-        QVERIFY(test.isEmpty());
+        QVERIFY(test.isEmpty(file.absoluteFilePath()));
         //MocIgnoreFile should be emulating a readable local file.
         QVERIFY(file.isLocal());
         QVERIFY(file.exists());
@@ -51,53 +49,58 @@ class CvsIgnoreListTest : public QObject
     void addEntriesFromString()
     {
         IgnoreListTestInterface test;
-
+        QString testDir("dir");
         QString testString = ". .. core RCSLOG tags TAGS RCS SCCS .make.state";
-        test.addEntriesFromString(testString);
-        QVERIFY(!test.getExactMatchList().isEmpty());
-        QVERIFY(test.getExactMatchList() == testString.split(' '));
+        test.addEntriesFromString(testDir, testString);
+        QVERIFY(!test.getExactMatchList(testDir).isEmpty());
+        QVERIFY(test.getExactMatchList(testDir) == testString.split(' '));
     }
 
     void matches()
     {
         CvsIgnoreList test;
 
+        QString testDir("dir");
         QString testString = ". .. core RCSLOG tags TAGS RCS SCCS .make.state *.so _$*";
-        test.addEntriesFromString(testString);
+        test.addEntriesFromString(testDir, testString);
 
-        QVERIFY(test.matches(".", false));
-        QVERIFY(!test.matches("cores core", true));
-        QVERIFY(test.matches("core", true));
-        QVERIFY(!test.matches("Core", true));
-        QVERIFY(test.matches("Core", false));
-        QVERIFY(!test.matches("a", false));
-        QVERIFY(test.matches("core", false));
+        QVERIFY(test.matches(testDir, ".", false));
+        QVERIFY(!test.matches(testDir, "cores core", true));
+        QVERIFY(test.matches(testDir, "core", true));
+        QVERIFY(!test.matches(testDir, "Core", true));
+        QVERIFY(test.matches(testDir, "Core", false));
+        QVERIFY(!test.matches(testDir, "a", false));
+        QVERIFY(test.matches(testDir, "core", false));
         //ends with .so
-        QVERIFY(test.matches("sdf3.so", true));
-        QVERIFY(!test.matches("sdf3.to", true));
-        QVERIFY(test.matches("*.so", true));
-        QVERIFY(test.matches("sdf4.So", false));
-        QVERIFY(!test.matches("sdf4.So", true));
+        QVERIFY(test.matches(testDir, "sdf3.so", true));
+        QVERIFY(!test.matches(testDir, "sdf3.to", true));
+        QVERIFY(test.matches(testDir, "*.so", true));
+        QVERIFY(test.matches(testDir, "sdf4.So", false));
+        QVERIFY(!test.matches(testDir, "sdf4.So", true));
         //starts with _$ddsf
-        QVERIFY(test.matches("_$ddsf", true));
+        QVERIFY(test.matches(testDir, "_$ddsf", true));
         //Should only match exact strings not partial ones
-        QVERIFY(!test.matches("sdf4.so ", true));
-        QVERIFY(!test.matches(" _$ddsf", true));
+        QVERIFY(!test.matches(testDir, "sdf4.so ", true));
+        QVERIFY(!test.matches(testDir, " _$ddsf", true));
 
         testString = "*.*";
         test = CvsIgnoreList();
-        test.addEntriesFromString("*.*");
+        test.addEntriesFromString(testDir, "*.*");
 
-        QVERIFY(test.matches("k.K", false));
-        QVERIFY(test.matches("*.K", false));
-        QVERIFY(test.matches("*.*", false));
-        QVERIFY(!test.matches("*+*", false));
-        QVERIFY(!test.matches("asd", false));
-        //The fallowing are matched by the above
-        QVERIFY(test.matches("a k.k", false));
-        QVERIFY(test.matches("k.k v", false));
-        QVERIFY(test.matches(" k.k", false));
-        QVERIFY(test.matches("k.k ", false));
+        QVERIFY(test.matches(testDir, "k.K", false));
+        QVERIFY(test.matches(testDir, "*.K", false));
+        QVERIFY(test.matches(testDir, "*.*", false));
+        QVERIFY(!test.matches(testDir, "*+*", false));
+        QVERIFY(!test.matches(testDir, "asd", false));
+        //The following are matched by the above
+        QVERIFY(test.matches(testDir, "a k.k", false));
+        QVERIFY(test.matches(testDir, "k.k v", false));
+        QVERIFY(test.matches(testDir, " k.k", false));
+        QVERIFY(test.matches(testDir, "k.k ", false));
+
+        // Test matches from a different dir
+        QString otherDir("other_dir");
+        QVERIFY(!test.matches(otherDir, "sdf3.so", true));
     }
 
     void testDefaults()
@@ -117,13 +120,14 @@ class CvsIgnoreListTest : public QObject
         //
         qunsetenv("CVSIGNORE");
 
-        expected.addEntriesFromString(defaultPatterns);
+        QString testDir("dir");
+        expected.addEntriesFromString(testDir, defaultPatterns);
 
-        test.init(file, &dirList);
-        QVERIFY(test.m_endPatterns == expected.m_endPatterns);
-        QVERIFY(test.m_exactPatterns == expected.m_exactPatterns);
-        QVERIFY(test.m_startPatterns == expected.m_startPatterns);
-        QVERIFY(test.m_generalPatterns == expected.m_generalPatterns);
+        test.enterDir(testDir, dirList);
+        QVERIFY(test.m_ignorePatterns[testDir].m_endPatterns == expected.m_ignorePatterns[testDir].m_endPatterns);
+        QVERIFY(test.m_ignorePatterns[testDir].m_exactPatterns == expected.m_ignorePatterns[testDir].m_exactPatterns);
+        QVERIFY(test.m_ignorePatterns[testDir].m_startPatterns == expected.m_ignorePatterns[testDir].m_startPatterns);
+        QVERIFY(test.m_ignorePatterns[testDir].m_generalPatterns == expected.m_ignorePatterns[testDir].m_generalPatterns);
     }
 };
 

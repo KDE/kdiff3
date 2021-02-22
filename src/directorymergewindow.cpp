@@ -9,6 +9,7 @@
 
 #include "directorymergewindow.h"
 
+#include "CompositeIgnoreList.h"
 #include "DirectoryInfo.h"
 #include "MergeFileInfos.h"
 #include "PixMapUtils.h"
@@ -2469,7 +2470,8 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::deleteFLD(const QString&
         if(fi.isDir() && !fi.isSymLink()) // recursive directory delete only for real dirs, not symlinks
         {
             DirectoryList dirList;
-            bool bSuccess = fi.listDir(&dirList, false, true, "*", "", "", false, false); // not recursive, find hidden files
+            CompositeIgnoreList ignoreList;
+            bool bSuccess = fi.listDir(&dirList, false, true, "*", "", "", false, ignoreList); // not recursive, find hidden files
 
             if(!bSuccess)
             {

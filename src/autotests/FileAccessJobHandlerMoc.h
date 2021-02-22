@@ -24,7 +24,7 @@ class FileAccessJobHandlerMoc: public FileAccessJobHandler
     bool rename(const FileAccess&  /*dest*/) override {return true;};
     bool listDir(DirectoryList*  /*pDirList*/, bool  /*bRecursive*/, bool  /*bFindHidden*/,
                  const QString&  /*filePattern*/, const QString&  /*fileAntiPattern*/,
-                 const QString&  /*dirAntiPattern*/, bool  /*bFollowDirLinks*/, bool  /*bUseCvsIgnore*/) override {return true;};
+                 const QString&  /*dirAntiPattern*/, bool  /*bFollowDirLinks*/, IgnoreList& /*ignoreList*/) override {return true;};
     bool removeFile(const QUrl&  /*fileName*/) override {return true;};
     bool symLink(const QUrl&  /*linkTarget*/, const QUrl&  /*linkLocation*/) override { return true;};
 

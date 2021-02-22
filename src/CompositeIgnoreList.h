@@ -17,7 +17,8 @@ class CompositeIgnoreList : public IgnoreList
 {
 public:
     ~CompositeIgnoreList() override = default;
-    [[nodiscard]] bool matches(const QString& text, bool bCaseSensitive) const override;
+    void enterDir(const QString& dir, const DirectoryList& directoryList) override;
+    [[nodiscard]] bool matches(const QString& dir, const QString& text, bool bCaseSensitive) const override;
     void addIgnoreList(std::unique_ptr<IgnoreList> ignoreList);
 private:
     std::vector<std::unique_ptr<IgnoreList>> m_ignoreLists;

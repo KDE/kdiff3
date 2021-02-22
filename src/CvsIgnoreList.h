@@ -16,25 +16,32 @@
 #include <QString>
 #include <QStringList>
 
-class CvsIgnoreList : public IgnoreList
+#include <map>
+
+struct CvsIgnorePatterns
 {
-public:
-    CvsIgnoreList() = default;
-    void init(FileAccess& dir, const DirectoryList* pDirList);
-    [[nodiscard]] bool matches(const QString& text, bool bCaseSensitive) const override;
-
-protected:
-    bool ignoreExists(const DirectoryList* pDirList);
-
-    void addEntriesFromString(const QString& str);
-    void addEntriesFromFile(const QString& name);
-    void addEntry(const QString& pattern);
-
     QStringList m_exactPatterns;
     QStringList m_startPatterns;
     QStringList m_endPatterns;
     QStringList m_generalPatterns;
+};
 
+class CvsIgnoreList : public IgnoreList
+{
+public:
+    CvsIgnoreList();
+    ~CvsIgnoreList() override;
+    void enterDir(const QString& dir, const DirectoryList& directoryList) override;
+    [[nodiscard]] bool matches(const QString& dir, const QString& text, bool bCaseSensitive) const override;
+
+protected:
+    bool ignoreExists(const DirectoryList& pDirList);
+
+    void addEntriesFromString(const QString& dir, const QString& str);
+    void addEntriesFromFile(const QString& dir, const QString& name);
+    void addEntry(const QString& dir, const QString& pattern);
+
+    std::map<QString, CvsIgnorePatterns> m_ignorePatterns;
 private:
     friend class CvsIgnoreListTest;
     /*

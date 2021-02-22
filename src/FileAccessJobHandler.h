@@ -42,7 +42,7 @@ class FileAccessJobHandler: public QObject
     virtual bool rename(const FileAccess& dest) = 0;
     virtual bool listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden,
                  const QString& filePattern, const QString& fileAntiPattern,
-                 const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore) = 0;
+                 const QString& dirAntiPattern, bool bFollowDirLinks, IgnoreList& ignoreList) = 0;
     virtual bool removeFile(const QUrl& fileName) = 0;
     virtual bool symLink(const QUrl& linkTarget, const QUrl& linkLocation) = 0;
 
