@@ -267,8 +267,6 @@ void DiffTextWindow::setupConnections(const KDiff3App* app)
 {
     Q_ASSERT(qobject_cast<DiffTextWindowFrame*>(parent()) != nullptr);
 
-    chk_connect(this, &DiffTextWindow::scrollVertically, mVScrollBar, &QScrollBar::setValue);
-
     chk_connect(this, &DiffTextWindow::firstLineChanged, dynamic_cast<DiffTextWindowFrame*>(parent()), &DiffTextWindowFrame::setFirstLine);
     chk_connect(this, &DiffTextWindow::newSelection, app, &KDiff3App::slotSelectionStart);
     chk_connect(this, &DiffTextWindow::newSelection, this, &DiffTextWindow::resetSelection);
@@ -554,7 +552,7 @@ void DiffTextWindow::setFastSelectorRange(int line1, int nofLines)
             getNofVisibleLines());
         if(newFirstLine != d->m_firstLine)
         {
-            Q_EMIT scrollVertically(newFirstLine - d->m_firstLine);
+            scrollVertically(newFirstLine - d->m_firstLine);
         }
 
         update();
@@ -587,6 +585,11 @@ void DiffTextWindow::showStatusLine(const LineRef lineFromPos)
             Q_EMIT lineClicked(d->m_winIdx, actualLine);
         }
     }
+}
+
+void DiffTextWindow::scrollVertically(QtNumberType deltaY)
+{
+    mVScrollBar->setValue(mVScrollBar->value()  + deltaY);
 }
 
 void DiffTextWindow::focusInEvent(QFocusEvent* e)

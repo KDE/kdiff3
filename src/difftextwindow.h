@@ -96,9 +96,10 @@ class DiffTextWindow : public QWidget
     [[nodiscard]] qint32 getLineNumberWidth() const;
 
     void setSourceData(const QSharedPointer<SourceData>& inData);
+
+    void scrollVertically(QtNumberType deltaY);
   Q_SIGNALS:
     void statusBarMessage(const QString& message);
-    void scrollVertically(QtNumberType deltaY);
     void resizeHeightChangedSignal(int nofVisibleLines);
     void resizeWidthChangedSignal(int nofVisibleColumns);
     void scrollDiffTextWindow(int deltaX, int deltaY);
