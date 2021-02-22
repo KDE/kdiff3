@@ -18,14 +18,17 @@ class LineRef
 {
   public:
     typedef qint32 LineType;
+
+    static constexpr LineType invalid = -1;
     inline LineRef() noexcept = default;
     inline LineRef(const LineType i) noexcept { mLineNumber = i; }
+
     inline LineRef(const qint64 i) noexcept
     {
         if(i <= TYPE_MAX(LineType))
             mLineNumber = (LineType)i;
         else
-            mLineNumber = -1;
+            mLineNumber = invalid;
     }
     inline operator LineType() const noexcept { return mLineNumber; }
     inline LineRef& operator=(const LineType lineIn) noexcept
@@ -64,11 +67,11 @@ class LineRef
         --mLineNumber;
         return line;
     };
-    inline void invalidate() noexcept { mLineNumber = -1; }
-    inline bool isValid() const noexcept { return mLineNumber != -1; }
+    inline void invalidate() noexcept { mLineNumber = invalid; }
+    inline bool isValid() const noexcept { return mLineNumber != invalid; }
 
   private:
-    LineType mLineNumber = -1;
+    LineType mLineNumber = invalid;
 };
 
 /*
