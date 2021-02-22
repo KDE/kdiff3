@@ -2079,9 +2079,8 @@ void KDiff3App::slotUpdateAvailabilities()
 
     bool bDiffWindowVisible =  m_pMainWidget->isVisible();
     bool bMergeEditorVisible = m_pMergeWindowFrame != nullptr && m_pMergeWindowFrame->isVisible() && m_pMergeResultWindow != nullptr;
-    bool bDirWindowHasFocus = m_pDirectoryMergeSplitter != nullptr && m_pDirectoryMergeSplitter->isVisible() && m_pDirectoryMergeWindow->hasFocus();
 
-    m_pDirectoryMergeWindow->updateAvailabilities(bDirWindowHasFocus, m_bDirCompare, bDiffWindowVisible, chooseA, chooseB, chooseC);
+    m_pDirectoryMergeWindow->updateAvailabilities(bMergeEditorVisible, m_bDirCompare, bDiffWindowVisible, chooseA, chooseB, chooseC);
 
     dirShowBoth->setEnabled(m_bDirCompare);
     dirViewToggle->setEnabled(
