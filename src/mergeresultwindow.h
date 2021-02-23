@@ -131,9 +131,10 @@ class MergeResultWindow: public QWidget
 
     void slotSelectAll();
 
+    void scrollVertically(QtNumberType deltaY);
+
   Q_SIGNALS:
     void statusBarMessage(const QString& message);
-    void scrollVertically(QtNumberType deltaY);
     void scrollMergeResultWindow(int deltaX, int deltaY);
     void modifiedChanged(bool bModified);
     void setFastSelectorRange(LineRef line1, LineCount nofLines);

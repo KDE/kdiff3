@@ -173,7 +173,6 @@ void MergeResultWindow::setupConnections(const KDiff3App* app)
     chk_connect(app, &KDiff3App::copy, this, &MergeResultWindow::slotCopy);
     chk_connect(app, &KDiff3App::selectAll, this, &MergeResultWindow::slotSelectAll);
 
-    chk_connect(this, &MergeResultWindow::scrollVertically, mVScrollBar, &QScrollBar::setValue);
     chk_connect(this, &MergeResultWindow::scrollMergeResultWindow, app, &KDiff3App::scrollMergeResultWindow);
     chk_connect(this, &MergeResultWindow::sourceMask, app, &KDiff3App::sourceMask);
     chk_connect(this, &MergeResultWindow::resizeSignal, app, &KDiff3App::setHScrollBarRange);
@@ -1072,7 +1071,7 @@ void MergeResultWindow::setFastSelector(MergeLineList::iterator i)
     int newFirstLine = getBestFirstLine(line1, nofLines, m_firstLine, getNofVisibleLines());
     if(newFirstLine != m_firstLine)
     {
-        Q_EMIT scrollVertically(newFirstLine - m_firstLine);
+        scrollVertically(newFirstLine - m_firstLine);
     }
 
     if(m_selection.isEmpty())
@@ -3060,6 +3059,11 @@ void MergeResultWindow::setSelection(int firstLine, int startPos, int lastLine, 
     m_selection.start(firstLine, startPos);
     m_selection.end(lastLine, endPos);
     update();
+}
+
+void MergeResultWindow::scrollVertically(QtNumberType deltaY)
+{
+    mVScrollBar->setValue(mVScrollBar->value()  + deltaY);
 }
 
 WindowTitleWidget::WindowTitleWidget(const QSharedPointer<Options>& pOptions)
