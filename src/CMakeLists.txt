@@ -38,6 +38,7 @@ set(kdiff3part_PART_SRCS
    CvsIgnoreList.cpp
    CompositeIgnoreList.cpp
    DirectoryInfo.cpp
+   GitIgnoreList.cpp
 )
 
 ki18n_wrap_ui(kdiff3part_PART_SRCS

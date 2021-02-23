@@ -7,21 +7,27 @@
 
 #include "CompositeIgnoreList.h"
 
-void CompositeIgnoreList::enterDir(const QString& dir, const DirectoryList& directoryList) {
-    for (const auto& ignoreList : m_ignoreLists) {
+void CompositeIgnoreList::enterDir(const QString& dir, const DirectoryList& directoryList)
+{
+    for(const std::unique_ptr<IgnoreList>& ignoreList : m_ignoreLists)
+    {
         ignoreList->enterDir(dir, directoryList);
     }
 }
 
-bool CompositeIgnoreList::matches(const QString& dir, const QString& text, bool bCaseSensitive) const {
-    for (const auto& ignoreList : m_ignoreLists) {
-        if (ignoreList->matches(dir, text, bCaseSensitive)) {
+bool CompositeIgnoreList::matches(const QString& dir, const QString& text, bool bCaseSensitive) const
+{
+    for(const std::unique_ptr<IgnoreList>& ignoreList : m_ignoreLists)
+    {
+        if(ignoreList->matches(dir, text, bCaseSensitive))
+        {
             return true;
         }
     }
     return false;
 }
 
-void CompositeIgnoreList::addIgnoreList(std::unique_ptr<IgnoreList> ignoreList) {
+void CompositeIgnoreList::addIgnoreList(std::unique_ptr<IgnoreList> ignoreList)
+{
     m_ignoreLists.push_back(std::move(ignoreList));
 }

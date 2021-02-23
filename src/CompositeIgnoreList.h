@@ -15,12 +15,13 @@
 
 class CompositeIgnoreList : public IgnoreList
 {
-public:
+  public:
     ~CompositeIgnoreList() override = default;
     void enterDir(const QString& dir, const DirectoryList& directoryList) override;
     [[nodiscard]] bool matches(const QString& dir, const QString& text, bool bCaseSensitive) const override;
     void addIgnoreList(std::unique_ptr<IgnoreList> ignoreList);
-private:
+
+  private:
     std::vector<std::unique_ptr<IgnoreList>> m_ignoreLists;
 };
 

@@ -35,4 +35,9 @@ ecm_add_test(CompositeIgnoreListTest.cpp ../CompositeIgnoreList.cpp
     LINK_LIBRARIES Qt5::Test
 )
 
+ecm_add_test(GitIgnoreListTest.cpp ../GitIgnoreList.cpp ../fileaccess.cpp ../Utils.cpp ../progress.cpp ../Logging.cpp
+    TEST_NAME "GitIgnoreListTest"
+    LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::KIOCore KF5::I18n
+)
+
 target_compile_features(CompositeIgnoreListTest PRIVATE ${needed_features})

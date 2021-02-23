@@ -8,6 +8,7 @@
 #include "DirectoryInfo.h"
 #include "CompositeIgnoreList.h"
 #include "CvsIgnoreList.h"
+#include "GitIgnoreList.h"
 
 bool DirectoryInfo::listDirA(const Options& options)
 {
@@ -30,6 +31,7 @@ bool DirectoryInfo::listDir(FileAccess& fileAccess, DirectoryList& dirList, cons
     if (options.m_bDmUseCvsIgnore)
     {
         ignoreList.addIgnoreList(std::make_unique<CvsIgnoreList>());
+        ignoreList.addIgnoreList(std::make_unique<GitIgnoreList>());
     }
     return fileAccess.listDir(&dirList,
                               options.m_bDmRecursiveDirs, options.m_bDmFindHidden,
