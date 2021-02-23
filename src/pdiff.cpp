@@ -68,8 +68,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     bool bAutoSolve = inFlags & InitFlag::autoSolve;
 
     bool bGUI = (inFlags & InitFlag::initGUI);
-    if(pTotalDiffStatus == nullptr)
-        pTotalDiffStatus = m_totalDiffStatus;
 
     Q_ASSERT(pTotalDiffStatus != nullptr);
     //bool bPreserveCarriageReturn = m_pOptions->m_bPreserveCarriageReturn;
@@ -990,7 +988,11 @@ void KDiff3App::slotFileOpen2(QStringList &errors, const QString& fn1, const QSt
     if(!m_sd1->isDir())
     {
         improveFilenames();
-        mainInit(pTotalDiffStatus, (InitFlags)InitFlag::defaultFlags ^ InitFlag::initGUI);
+        //KDiff3App::slotFileOpen2 needs to handle both GUI and non-GUI diffs.
+        if(pTotalDiffStatus == nullptr)
+            mainInit(m_totalDiffStatus);
+        else
+            mainInit(pTotalDiffStatus, InitFlag::loadFiles | InitFlag::autoSolve);
 
         if(m_bDirCompare)
         {
