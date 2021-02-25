@@ -104,7 +104,7 @@ void KDiff3Part::setModified(bool /*modified*/)
 
 void KDiff3Part::getNameAndVersion(const QString& str, const QString& lineStart, QString& fileName, QString& version)
 {
-    if(str.left(lineStart.length()) == lineStart && fileName.isEmpty())
+    if(str.startsWith(lineStart) && fileName.isEmpty())
     {
         int pos = lineStart.length();
         while(pos < str.length() && (str[pos] == ' ' || str[pos] == '\t')) ++pos;
@@ -161,8 +161,8 @@ bool KDiff3Part::openFile()
         return false;
     }
 
-    FileAccess f1(fileName1);
-    FileAccess f2(fileName2);
+    const FileAccess f1(fileName1);
+    const FileAccess f2(fileName2);
 
     if(f1.exists() && f2.exists() && fileName1 != fileName2)
     {
@@ -175,8 +175,8 @@ bool KDiff3Part::openFile()
         // patch -f -u --ignore-whitespace -i [inputfile] -o [outfile] [patchfile]
         QTemporaryFile tmpFile;
         FileAccess::createTempFile(tmpFile);
-        QString tempFileName = tmpFile.fileName();
-        QString cmd = "patch";
+        const QString tempFileName = tmpFile.fileName();
+        const QString cmd = "patch";
         QStringList args = {"-f", "-u", "--ignore-whitespace", "-i", '"' + localFilePath() + '"',
                     "-o", '"' + tempFileName + '"', '"' + fileName1 + '"'};
 
@@ -193,9 +193,9 @@ bool KDiff3Part::openFile()
         // patch -f -u -R --ignore-whitespace -i [inputfile] -o [outfile] [patchfile]
         QTemporaryFile tmpFile;
         FileAccess::createTempFile(tmpFile);
-        QString tempFileName = tmpFile.fileName();
-        QString cmd = "patch";
-        QStringList args = {"-f", "-u", "-R", "--ignore-whitespace", "-i", '"' + localFilePath() + '"',
+        const QString tempFileName = tmpFile.fileName();
+        const QString cmd = "patch";
+        const QStringList args = {"-f", "-u", "-R", "--ignore-whitespace", "-i", '"' + localFilePath() + '"',
                       "-o", '"' + tempFileName + '"', '"' + fileName2 + '"'};
 
         QProcess process;
@@ -215,8 +215,8 @@ bool KDiff3Part::openFile()
 
         QTemporaryFile tmpFile1;
         FileAccess::createTempFile(tmpFile1);
-        QString tempFileName1 = tmpFile1.fileName();
-        QString cmd = "cvs";
+        const QString tempFileName1 = tmpFile1.fileName();
+        const QString cmd = "cvs";
         QStringList args = {"update", "-p", "-r",  version1, '"' + fileName1 + '"'};
         QProcess process1;
 
