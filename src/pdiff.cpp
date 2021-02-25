@@ -287,8 +287,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
                 pTotalDiffStatus->setTextEqualAB(false);
                 pTotalDiffStatus->setTextEqualBC(false);
             }
+
+            errors.append(m_sd3->getErrors());
         }
-        errors.append(m_sd3->getErrors());
     }
     else
     {
