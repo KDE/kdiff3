@@ -7,6 +7,7 @@
 */
 
 #include "kdiff3_part.h"
+
 #include "fileaccess.h"
 #include "kdiff3.h"
 #include "Logging.h"
@@ -71,7 +72,7 @@ KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantLis
 KDiff3Part::~KDiff3Part()
 {
     //TODO: Is parent check needed?
-    if(m_widget != nullptr && qobject_cast<KParts::MainWindow*>(parent()) != nullptr )
+    if(m_widget != nullptr && qobject_cast<KParts::MainWindow*>(parent()) != nullptr)
     {
         m_widget->saveOptions(KSharedConfig::openConfig());
     }
@@ -106,14 +107,18 @@ void KDiff3Part::getNameAndVersion(const QString& str, const QString& lineStart,
 {
     if(str.startsWith(lineStart) && fileName.isEmpty())
     {
+        //Skip the start string
         int pos = lineStart.length();
+        //Skip white space if any after start string.
         while(pos < str.length() && (str[pos] == ' ' || str[pos] == '\t')) ++pos;
         int pos2 = str.length() - 1;
         while(pos2 > pos)
         {
+            //skip trailing whitespace
             while(pos2 > pos && str[pos2] != ' ' && str[pos2] != '\t') --pos2;
             fileName = str.mid(pos, pos2 - pos);
             qCDebug(kdiffMain) << "KDiff3Part::getNameAndVersion: fileName = " << fileName << "\n";
+            //Always fails for cvs output this is a designed failure.
             if(FileAccess(fileName).exists()) break;
             --pos2;
         }
@@ -146,6 +151,9 @@ bool KDiff3Part::openFile()
     QString version2;
     QStringList errors;
 
+    /*
+        This assumes use of -u otherwise the patch file may not be recognized.
+    */
     while(!stream.atEnd() && (fileName1.isEmpty() || fileName2.isEmpty()))
     {
         str = stream.readLine() + '\n';
@@ -204,7 +212,6 @@ bool KDiff3Part::openFile()
 
         m_widget->slotFileOpen2(errors, tempFileName, fileName2, "", "",
                                 version1.isEmpty() ? fileName1 : "REV:" + version1 + ':' + fileName1, "", "", nullptr); // alias name
-                                                                                                                  //    std::cerr << "KDiff3: f2:" << fileName2.toLatin1() <<"<->"<<tempFileName.toLatin1()<< std::endl;
     }
     else if(!version1.isEmpty() && !version2.isEmpty())
     {
@@ -217,7 +224,7 @@ bool KDiff3Part::openFile()
         FileAccess::createTempFile(tmpFile1);
         const QString tempFileName1 = tmpFile1.fileName();
         const QString cmd = "cvs";
-        QStringList args = {"update", "-p", "-r",  version1, '"' + fileName1 + '"'};
+        QStringList args = {"update", "-p", "-r", version1, '"' + fileName1 + '"'};
         QProcess process1;
 
         process1.setStandardOutputFile(tempFileName1);
