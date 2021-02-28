@@ -47,10 +47,15 @@ KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantLis
 {
     //set AboutData
     setComponentData(createAboutData());
-    const QString widgetName = args[0].toString();
+    if(!args.isEmpty())
+    {
+        const QString widgetName = args[0].toString();
 
-    // this should be your custom internal widget
-    m_widget = new KDiff3App(parentWidget, widgetName, this);
+        // this should be your custom internal widget
+        m_widget = new KDiff3App(parentWidget, widgetName, this);
+    }
+    else
+        m_widget = new KDiff3App(parentWidget, u8"KDiff3Part", this);
 
     // notify the part that this is our internal widget
     setWidget(m_widget);
@@ -153,6 +158,7 @@ bool KDiff3Part::openFile()
 
     /*
         This assumes use of -u otherwise the patch file may not be recognized.
+        Also assumes cvs or diff was used to gernerate the path.
     */
     while(!stream.atEnd() && (fileName1.isEmpty() || fileName2.isEmpty()))
     {
