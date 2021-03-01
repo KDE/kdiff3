@@ -128,7 +128,7 @@ void KDiff3Part::getNameAndVersion(const QString& str, const QString& lineStart,
             //skip trailing whitespace
             while(pos2 > pos && str[pos2] != ' ' && str[pos2] != '\t') --pos2;
             fileName = str.mid(pos, pos2 - pos);
-            qCDebug(kdiffMain) << "KDiff3Part::getNameAndVersion: fileName = " << fileName << "\n";
+            qCDebug(kdiffMain) << "KDiff3Part::getNameAndVersion: fileName = " << fileName;
             //Always fails for cvs output this is a designed failure.
             if(FileAccess(fileName).exists()) break;
             --pos2;
@@ -148,7 +148,7 @@ bool KDiff3Part::openFile()
 {
     // m_file is always local so we can use QFile on it
     //fprintf(stderr, "KDiff3: %s\n", localFilePath().toLatin1().constData());
-    qCDebug(kdiffMain) << "KDiff3Part::openFile(): localFilePath() == " << localFilePath() << "\n";
+    qCDebug(kdiffMain) << "KDiff3Part::openFile(): localFilePath() == " << localFilePath();
     QFile file(localFilePath());
     if(!file.open(QIODevice::ReadOnly))
         return false;
