@@ -6,7 +6,6 @@
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts WidgetsAddons)
 
 set(kdiff3part_PART_SRCS
-   kdiff3_shell.cpp #only needed for qt metadata so we can tell if the part was setup by KDiff3Shell
    kdiff3_part.cpp
    kdiff3.cpp
    directorymergewindow.cpp
@@ -95,7 +94,6 @@ install(TARGETS kdiff3 ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
-install( FILES  kdiff3part.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR} )
 install( FILES  kdiff3_part.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/kdiff3part )
 install( FILES  kdiff3_shell.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/kdiff3 )
 #install( PROGRAMS  kdiff3.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
