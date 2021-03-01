@@ -6,6 +6,7 @@
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts WidgetsAddons)
 
 set(kdiff3part_PART_SRCS
+   kdiff3_shell.cpp #only needed for qt metadata so we can tell if the part was setup by KDiff3Shell
    kdiff3_part.cpp
    kdiff3.cpp
    directorymergewindow.cpp
