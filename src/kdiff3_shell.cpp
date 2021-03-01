@@ -23,6 +23,7 @@
 #include <KStandardAction>
 #include <KToolBar>
 
+
 KDiff3Shell::KDiff3Shell(bool bCompleteInit)
 {
     m_bUnderConstruction = true;
@@ -39,6 +40,9 @@ KDiff3Shell::KDiff3Shell(bool bCompleteInit)
         if( m_part )
             break;
     }*/
+
+    //Avoid redudant init call.
+    KDiff3Part::noInit();
 
     m_part = new KDiff3Part(this, this, {QVariant(u8"KDiff3Part")});
     m_widget = qobject_cast<KDiff3App*>(m_part->widget());

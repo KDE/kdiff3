@@ -24,6 +24,9 @@
 
 #include <version.h>
 
+//A bit of a hack but I don't have control over the constructor for KDiff3Part since its a KPart plugin.
+bool KDiff3Part::bNeedInit = true;
+
 KAboutData KDiff3Part::createAboutData()
 {
     QString appVersion = QString(KDIFF3_VERSION_STRING);
@@ -72,6 +75,9 @@ KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantLis
 
     // we are not modified since we haven't done anything yet
     setModified(false);
+
+    if(bNeedInit)
+        m_widget->completeInit();
 }
 
 KDiff3Part::~KDiff3Part()
