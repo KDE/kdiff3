@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -98,8 +98,8 @@ private:
    QString m_currentJobInfo;  // Needed if the job doesn't stop after a reasonable time.
    bool m_bStayHidden;
    QThread* m_pGuiThread;
-   QStatusBar* m_pStatusBar;  // status bar of main window (if exists)
-   QWidget* m_pStatusBarWidget;
+   QStatusBar* m_pStatusBar = nullptr;  // status bar of main window (if exists)
+   QWidget* m_pStatusBarWidget = nullptr;
    QProgressBar* m_pStatusProgressBar;
    QPushButton* m_pStatusAbortButton;
 protected:
