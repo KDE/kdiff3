@@ -7,6 +7,7 @@
 */
 
 #include "kdiff3_part.h"
+
 #include "fileaccess.h"
 #include "kdiff3.h"
 #include "Logging.h"
@@ -46,10 +47,15 @@ KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantLis
 {
     //set AboutData
     setComponentData(createAboutData());
-    const QString widgetName = args[0].toString();
+    if(!args.isEmpty())
+    {
+        const QString widgetName = args[0].toString();
 
-    // this should be your custom internal widget
-    m_widget = new KDiff3App(parentWidget, widgetName, this);
+        // this should be your custom internal widget
+        m_widget = new KDiff3App(parentWidget, widgetName, this);
+    }
+    else
+        m_widget = new KDiff3App(parentWidget, u8"KDiff3Part", this);
 
     // notify the part that this is our internal widget
     setWidget(m_widget);
@@ -107,6 +113,7 @@ void KDiff3Part::getNameAndVersion(const QString& str, const QString& lineStart,
     if(str.left(lineStart.length()) == lineStart && fileName.isEmpty())
     {
         int pos = lineStart.length();
+
         while(pos < str.length() && (str[pos] == ' ' || str[pos] == '\t')) ++pos;
         int pos2 = str.length() - 1;
         while(pos2 > pos)
@@ -114,6 +121,7 @@ void KDiff3Part::getNameAndVersion(const QString& str, const QString& lineStart,
             while(pos2 > pos && str[pos2] != ' ' && str[pos2] != '\t') --pos2;
             fileName = str.mid(pos, pos2 - pos);
             qCDebug(kdiffMain) << "KDiff3Part::getNameAndVersion: fileName = " << fileName << "\n";
+
             if(FileAccess(fileName).exists()) break;
             --pos2;
         }
@@ -146,6 +154,10 @@ bool KDiff3Part::openFile()
     QString version2;
     QStringList errors;
 
+    /*
+        This assumes use of -u otherwise the patch file may not be recognized.
+        Also assumes cvs or diff was used to gernerate the path.
+    */
     while(!stream.atEnd() && (fileName1.isEmpty() || fileName2.isEmpty()))
     {
         str = stream.readLine() + '\n';
