@@ -113,7 +113,6 @@ void KDiff3Part::getNameAndVersion(const QString& str, const QString& lineStart,
         {
             while(pos2 > pos && str[pos2] != ' ' && str[pos2] != '\t') --pos2;
             fileName = str.mid(pos, pos2 - pos);
-            //fprintf(stderr, "KDiff3: %s\n", fileName.toLatin1().constData());
             qCDebug(kdiffMain) << "KDiff3Part::getNameAndVersion: fileName = " << fileName << "\n";
             if(FileAccess(fileName).exists()) break;
             --pos2;
@@ -210,7 +209,6 @@ bool KDiff3Part::openFile()
     else if(!version1.isEmpty() && !version2.isEmpty())
     {
         qCDebug(kdiffMain) << "KDiff3Part::openFile():" << fileName1 << "<->" << fileName2 << "\n";
-        //fprintf(stderr, "KDiff3: f1/2:%s<->%s\n", fileName1.toLatin1().constData(), fileName2.toLatin1().constData());
         // FIXME: Why must this be cvs?
         // Assuming that files are on CVS: Try to get them
         // cvs update -p -r [REV] [FILE] > [OUTPUTFILE]
@@ -229,7 +227,7 @@ bool KDiff3Part::openFile()
         QTemporaryFile tmpFile2;
         FileAccess::createTempFile(tmpFile2);
         QString tempFileName2 = tmpFile2.fileName();
-        //QString cmd2 = "cvs
+
         args = QStringList{"update", "-p", "-r", version2, '"' + fileName2 + '"'};
         QProcess process2;
         process2.setStandardOutputFile(tempFileName2);
@@ -241,7 +239,7 @@ bool KDiff3Part::openFile()
                                 "REV:" + version2 + ':' + fileName2,
                                 "", nullptr);
 
-        //    std::cerr << "KDiff3: f1/2:" << tempFileName1.toLatin1() <<"<->"<<tempFileName2.toLatin1()<< std::endl;
+        qCDebug(kdiffMain) << "KDiff3Part::openFile():" << tempFileName1 << "<->" << tempFileName2 << "\n";
         return true;
     }
     else
