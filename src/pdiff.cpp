@@ -80,6 +80,11 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     //bool bPreserveCarriageReturn = m_pOptions->m_bPreserveCarriageReturn;
 
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
+
+    //Easier to do here then have all eleven of our call points due the check.
+    if(m_sd1->isEmpty() && m_sd2->isEmpty() && m_sd3->isEmpty())
+        bLoadFiles = false;
+
     if(bGUI)
     {
         if(bVisibleMergeResultWindow && !m_pOptions->m_PreProcessorCmd.isEmpty())
