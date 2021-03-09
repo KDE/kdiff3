@@ -615,6 +615,8 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         ts >> curChar;
 
         quint32 firstNonwhite = 0;
+        bool    foundNonWhite = false;
+
         //QTextStream::readLine doesn't tell us about line endings.
         while(curChar != '\n' && curChar != '\r')
         {
@@ -627,8 +629,11 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
             if(curChar == QChar::ReplacementCharacter)
                 m_bIncompleteConversion = true;
 
-            if(!curChar.isSpace() && firstNonwhite == 0)
+            if(!curChar.isSpace() && !foundNonWhite)
+            {
                 firstNonwhite = line.length();
+                foundNonWhite = true;
+            }
 
             line.append(curChar);
 
