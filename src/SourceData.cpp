@@ -523,7 +523,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
                 }
             }
         }
-        else if(m_pOptions->m_bIgnoreComments || m_pOptions->m_bIgnoreCase)
+        else if(m_pOptions->ignoreComments() || m_pOptions->m_bIgnoreCase)
         {
             // We need a copy of the normal data.
             m_lmppData.copyBufFrom(m_normalData);
@@ -555,7 +555,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
     }
 
     // Ignore comments
-    if(m_pOptions->m_bIgnoreComments && hasData())
+    if(m_pOptions->ignoreComments() && hasData())
     {
         qint64 vSize = std::min(m_normalData.lineCount(), m_lmppData.lineCount());
         Q_ASSERT(vSize < TYPE_MAX(qint32));

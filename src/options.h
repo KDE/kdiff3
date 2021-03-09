@@ -72,6 +72,8 @@ public:
 
     bool wordWrapOn() const { return m_bWordWrap; }
     void setWordWrap(const bool enabled) { m_bWordWrap = enabled;}
+
+    [[nodiscard]] bool ignoreComments() const { return m_bIgnoreComments;}
   private:
     std::list<OptionItemBase*> mOptionItemList;
 
