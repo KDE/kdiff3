@@ -71,7 +71,9 @@ public:
     void setStatusBarState(bool inShown) { m_bShowStatusBar = inShown; }
 
     [[nodiscard]] bool wordWrapOn() const { return m_bWordWrap; }
-    void setWordWrap(const bool enabled) { m_bWordWrap = enabled;}
+    void setWordWrap(const bool enabled) { m_bWordWrap = enabled; }
+
+    [[nodiscard]] bool ignoreComments() const { return m_bIgnoreComments;}
   private:
     std::list<OptionItemBase*> mOptionItemList;
 

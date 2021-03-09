@@ -207,7 +207,11 @@ class Diff3Line
 
     bool bWhiteLineA = false;
     bool bWhiteLineB = false;
-    bool bWhiteLineC  = false;
+    bool bWhiteLineC = false;
+
+    bool bIsPureCommentA = false;
+    bool bIsPureCommentB = false;
+    bool bIsPureCommentC = false;
 
     DiffList* pFineAB = nullptr; // These are NULL only if completely equal or if either source doesn't exist.
     DiffList* pFineBC = nullptr;
@@ -333,7 +337,7 @@ class Diff3LineList : public std::list<Diff3Line>
                              Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd) const;
     bool fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2);
     void calcDiff3LineVector(Diff3LineVector& d3lv);
-    void calcWhiteDiff3Lines(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC);
+    void calcWhiteDiff3Lines(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, const bool bIgnoreComments);
 
     void calcDiff3LineListUsingAB(const DiffList* pDiffListAB);
     void calcDiff3LineListUsingAC(const DiffList* pDiffListAC);

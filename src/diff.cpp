@@ -1174,15 +1174,20 @@ void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
 }
 
 void Diff3LineList::calcWhiteDiff3Lines(
-    const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC)
+    const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, const bool bIgnoreComments)
 {
     Diff3LineList::iterator i3;
 
     for(i3 = begin(); i3 != end(); ++i3)
     {
-        i3->bWhiteLineA = (!i3->getLineA().isValid() || pldA == nullptr || (*pldA)[i3->getLineA()].whiteLine() || (*pldA)[i3->getLineA()].isPureComment());
-        i3->bWhiteLineB = (!i3->getLineB().isValid() || pldB == nullptr || (*pldB)[i3->getLineB()].whiteLine() || (*pldB)[i3->getLineB()].isPureComment());
-        i3->bWhiteLineC = (!i3->getLineC().isValid() || pldC == nullptr || (*pldC)[i3->getLineC()].whiteLine() || (*pldC)[i3->getLineC()].isPureComment());
+        i3->bIsPureCommentA = (i3->getLineA().isValid() && pldA != nullptr  && (*pldA)[i3->getLineA()].isPureComment());
+        i3->bIsPureCommentB = (i3->getLineB().isValid() && pldB != nullptr  && (*pldB)[i3->getLineB()].isPureComment());
+        i3->bIsPureCommentC = (i3->getLineC().isValid() && pldC != nullptr  && (*pldC)[i3->getLineA()].isPureComment());
+
+
+        i3->bWhiteLineA = (!i3->getLineA().isValid() || pldA == nullptr || (*pldA)[i3->getLineA()].whiteLine() || (bIgnoreComments && (*pldA)[i3->getLineA()].isPureComment()));
+        i3->bWhiteLineB = (!i3->getLineB().isValid() || pldB == nullptr || (*pldB)[i3->getLineB()].whiteLine() || (bIgnoreComments && (*pldB)[i3->getLineB()].isPureComment()));
+        i3->bWhiteLineC = (!i3->getLineC().isValid() || pldC == nullptr || (*pldC)[i3->getLineC()].whiteLine() || (bIgnoreComments && (*pldC)[i3->getLineC()].isPureComment()));
     }
 }
 
