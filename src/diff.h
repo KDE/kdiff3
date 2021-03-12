@@ -10,14 +10,13 @@
 #define DIFF_H
 
 #include "common.h"
-#include "fileaccess.h"
 #include "LineRef.h"
-#include "SourceData.h"
 #include "Logging.h"
 
 #include <QList>
 #include <QVector>
 
+class LineData;
 class Options;
 
 //e_SrcSelector must be sequential with no gaps between Min and Max.

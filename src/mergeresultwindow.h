@@ -12,8 +12,8 @@
 #include "diff.h"
 #include "FileNameLineEdit.h"
 #include "MergeEditLine.h"
+#include "options.h"
 #include "Overview.h"
-
 #include "selection.h"
 
 #include <boost/signals2.hpp>

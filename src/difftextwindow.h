@@ -12,7 +12,11 @@
 
 #include "diff.h"
 
+#include "SourceData.h"
+
 #include <QLabel>
+#include <QMouseEvent>
+#include <QWheelEvent>
 #include <QSharedPointer>  // for QSharedPointer
 #include <QString>         // for QString
 

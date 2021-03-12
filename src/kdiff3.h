@@ -12,6 +12,7 @@
 #include "diff.h"
 #include "defmac.h"
 #include "combiners.h"
+#include "SourceData.h"
 
 #include <boost/signals2.hpp>
 

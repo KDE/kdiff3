@@ -9,9 +9,10 @@
 #ifndef SOURCEDATA_H
 #define SOURCEDATA_H
 
-#include "options.h"
+#include "diff.h"
 #include "fileaccess.h"
 #include "LineRef.h"
+#include "options.h"
 
 #include <QTextCodec>
 #include <QTemporaryFile>
@@ -20,7 +21,6 @@
 
 #include <memory>
 
-class LineData;
 class SourceData
 {
   public:
