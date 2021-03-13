@@ -39,19 +39,19 @@ void GitIgnoreList::enterDir(const QString& dir, const DirectoryList& directoryL
 
 bool GitIgnoreList::matches(const QString& dir, const QString& text, bool bCaseSensitive) const
 {
-    for(auto& dirPattern : m_patterns)
+    for(auto& dirPattern: m_patterns)
     {
-        if(dir.startsWith(dirPattern.first) == false)
+        if(!dir.startsWith(dirPattern.first))
         {
             continue;
         }
-        for(auto& pattern : dirPattern.second)
+        for(QRegularExpression& pattern: dirPattern.second)
         {
-            if(bCaseSensitive == false)
+            if(!bCaseSensitive)
             {
                 pattern.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
             }
-            const auto match = pattern.match(text);
+            const QRegularExpressionMatch match = pattern.match(text);
             if(match.hasMatch())
             {
                 qCDebug(kdiffGitIgnoreList) << "Matched entry" << text;
@@ -65,7 +65,7 @@ bool GitIgnoreList::matches(const QString& dir, const QString& text, bool bCaseS
 QString GitIgnoreList::readFile(const QString& fileName) const
 {
     QFile file(fileName);
-    if(file.open(QIODevice::ReadOnly) == false)
+    if(!file.open(QIODevice::ReadOnly))
     {
         return QString();
     }
@@ -76,14 +76,14 @@ QString GitIgnoreList::readFile(const QString& fileName) const
 void GitIgnoreList::addEntries(const QString& dir, const QString& lines)
 {
     const QStringList lineList = lines.split(QRegularExpression("[\r\n]"), Qt::SkipEmptyParts);
-    for(const auto& line : lineList)
+    for(const QString& line: lineList)
     {
         if(isComment(line))
         {
             continue;
         }
         QRegularExpression expression(QRegularExpression::wildcardToRegularExpression(line));
-        if(expression.isValid() == false)
+        if(!expression.isValid())
         {
             qCDebug(kdiffGitIgnoreList) << "Expression" << line << "is not valid - skipping ...";
             continue;
