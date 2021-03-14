@@ -44,7 +44,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 if(!inComment() && mLastChar == '/')
                 {
                     mCommentType = singleLine;
-                    mIsPureComment = line.startsWith(u8"//");
+                    mIsCommentOrWhite = line.startsWith(u8"//");
                     lastComment.startOffset = offset - 1;
                 }
                 else if(mLastChar == '*' && mCommentType == multiLine)
@@ -54,7 +54,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     lastComment.endOffset = offset + 1; //include last char in offset
                     comments.push_back(lastComment);
                     if(!isFirstLine)
-                        mIsPureComment = line.endsWith(u8"*/") ? true : mIsPureComment;
+                        mIsCommentOrWhite = line.endsWith(u8"*/") ? true : mIsCommentOrWhite;
                 }
                 break;
             case '*':
@@ -64,7 +64,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 if(mLastChar == '/' && !inComment())
                 {
                     mCommentType = multiLine;
-                    mIsPureComment = line.startsWith(u8"/*") ? true : mIsPureComment;
+                    mIsCommentOrWhite = line.startsWith(u8"/*") ? true : mIsCommentOrWhite;
                     isFirstLine = true;
                     lastComment.startOffset = offset - 1;
                 }
@@ -79,7 +79,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
 
                 if(mCommentType == multiLine && !isFirstLine)
                 {
-                    mIsPureComment = true;
+                    mIsCommentOrWhite = true;
                 }
 
                 if(lastComment.startOffset > 0 && lastComment.endOffset == 0)
@@ -97,7 +97,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     break;
                 }
 
-                mIsPureComment = false;
+                mIsCommentOrWhite = false;
                 break;
         }
 
@@ -128,6 +128,7 @@ void DefaultCommentParser::processLine(const QString &line)
     {
         processChar(trimmedLine, c);
     }
+    //mIsPureComment = mIsPureComment && offset == 0;
 
     processChar(trimmedLine, '\n');
 }
@@ -137,7 +138,7 @@ void DefaultCommentParser::processLine(const QString &line)
 */
 void DefaultCommentParser::removeComment(QString &line)
 {
-    if(isPureComment() || lastComment.startOffset == lastComment.endOffset) return;
+    if(isSkipable() || lastComment.startOffset == lastComment.endOffset) return;
 
     for(const CommentRange &range : comments)
     {

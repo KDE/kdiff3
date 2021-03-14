@@ -548,7 +548,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
         //Perform explcit cast to insure well defined behavior comparing 32-bit to a 64-bit value
         for(qint32 i = 0; (qint64)i < vSize; ++i)
         {
-            m_normalData.m_v[i].setPureComment(m_lmppData.m_v[i].isPureComment());
+            m_normalData.m_v[i].setSkipable(m_lmppData.m_v[i].isSkipable());
         }
     }
 }
@@ -664,7 +664,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
             parser->removeComment(line);
 
         //kdiff3 internally uses only unix style endings for simplicity.
-        m_v.push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isPureComment()));
+        m_v.push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isSkipable()));
         m_unicodeBuf->append(line).append('\n');
 
         lastOffset = m_unicodeBuf->length();
