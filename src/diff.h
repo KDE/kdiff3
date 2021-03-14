@@ -147,7 +147,7 @@ class LineData
     Q_REQUIRED_RESULT inline qint64 getOffset() const { return mOffset; }
     Q_REQUIRED_RESULT int width(int tabSize) const; // Calcs width considering tabs.
     //int occurrences;
-    Q_REQUIRED_RESULT inline bool whiteLine() const { return mFirstNonWhiteChar == mSize - 1; }
+    Q_REQUIRED_RESULT inline bool whiteLine() const { return mFirstNonWhiteChar == 0; }
 
     Q_REQUIRED_RESULT inline bool isPureComment() const { return bContainsPureComment; }
     inline void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
