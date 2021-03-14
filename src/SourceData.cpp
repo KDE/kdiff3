@@ -629,13 +629,12 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
             if(curChar == QChar::ReplacementCharacter)
                 m_bIncompleteConversion = true;
 
+            line.append(curChar);
             if(!curChar.isSpace() && !foundNonWhite)
             {
                 firstNonwhite = line.length();
                 foundNonWhite = true;
             }
-
-            line.append(curChar);
 
             if(ts.atEnd())
                 break;
