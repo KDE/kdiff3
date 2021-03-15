@@ -18,7 +18,7 @@ class CommentParserTest : public QObject
         DefaultCommentParser parser;
 
         //Sanity check defaults.
-        QVERIFY(!parser.isPureComment());
+        QVERIFY(!parser.isSkipable());
         QVERIFY(!parser.isEscaped());
         QVERIFY(!parser.inString());
         QVERIFY(!parser.inComment());
@@ -30,28 +30,28 @@ class CommentParserTest : public QObject
 
         test.processLine("//ddj ?*8");
         QVERIFY(!test.inComment());
-        QVERIFY(test.isPureComment());
+        QVERIFY(test.isSkipable());
 
         //ignore trailing+leading whitespace
         test = DefaultCommentParser();
         test.processLine("\t  \t  // comment     ");
         QVERIFY(!test.inComment());
-        QVERIFY(test.isPureComment());
+        QVERIFY(test.isSkipable());
 
         test = DefaultCommentParser();
         test.processLine("//comment with quotes embedded \"\"");
         QVERIFY(!test.inComment());
-        QVERIFY(test.isPureComment());
+        QVERIFY(test.isSkipable());
 
         test = DefaultCommentParser();
         test.processLine("anythis//endof line comment");
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test = DefaultCommentParser();
         test.processLine("anythis//ignore embedded multiline sequence  /*");
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
     }
 
     void inComment()
@@ -74,78 +74,78 @@ class CommentParserTest : public QObject
 
         //mutiline syntax on one line
         test.processLine("/* kjd*/");
-        QVERIFY(test.isPureComment());
+        QVERIFY(test.isSkipable());
         QVERIFY(!test.inComment());
 
         //mid line comment start.
         test = DefaultCommentParser();
         test.processLine("fskk /* kjd */");
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         //mid line comment start. multiple lines
         test = DefaultCommentParser();
         test.processLine("fskk /* kjd ");
         QVERIFY(test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test.processLine("  comment line ");
         QVERIFY(test.inComment());
-        QVERIFY(test.isPureComment());
+        QVERIFY(test.isSkipable());
 
         test.processLine("  comment */ not comment ");
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         //mid line comment start. multiple lines
         test = DefaultCommentParser();
         test.processLine("fskk /* kjd ");
         QVERIFY(test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test.processLine("  comment line ");
         QVERIFY(test.inComment());
-        QVERIFY(test.isPureComment());
+        QVERIFY(test.isSkipable());
 
         test.processLine("  comment * line /  ");
         QVERIFY(test.inComment());
-        QVERIFY(test.isPureComment());
+        QVERIFY(test.isSkipable());
         //embedded single line character sequence should not end comment
         test.processLine("  comment line //");
         QVERIFY(test.inComment());
-        QVERIFY(test.isPureComment());
+        QVERIFY(test.isSkipable());
 
         test.processLine("  comment */");
         QVERIFY(!test.inComment());
-        QVERIFY(test.isPureComment());
+        QVERIFY(test.isSkipable());
 
         //Escape squeances not relavate to comments
         test = DefaultCommentParser();
         test.processLine("/*  comment \\*/");
         QVERIFY(!test.inComment());
-        QVERIFY(test.isPureComment());
+        QVERIFY(test.isSkipable());
 
         test = DefaultCommentParser();
         test.processLine("  int i = 8 / 8 * 3;/* comment*/");
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         //invalid in C++ should not be flagged as pure comment
         test.processLine("/*  comment */ */");
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         //leading whitespace
         test = DefaultCommentParser();
         test.processLine("\t  \t  /*  comment */");
         QVERIFY(!test.inComment());
-        QVERIFY(test.isPureComment());
+        QVERIFY(test.isSkipable());
 
         //trailing whitespace
         test = DefaultCommentParser();
         test.processLine("\t  \t  /*  comment */    ");
         QVERIFY(!test.inComment());
-        QVERIFY(test.isPureComment());
+        QVERIFY(test.isSkipable());
     }
 
     void stringTest()
@@ -155,19 +155,19 @@ class CommentParserTest : public QObject
         test.processLine("\"quoted string // \"");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test = DefaultCommentParser();
         test.processLine("\"quoted string /* \"");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test = DefaultCommentParser();
         test.processLine("\"\"");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test = DefaultCommentParser();
         test.processChar("\"", '"');
@@ -203,27 +203,27 @@ class CommentParserTest : public QObject
         test.processLine("'\"'");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test.processLine("'a'");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test.processLine("'\\\''");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test.processLine("'*'");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test.processLine("'/'");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
     }
 
     void nonComment()
@@ -233,37 +233,37 @@ class CommentParserTest : public QObject
         test.processLine("  int i = 8 / 8 * 3;");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test = DefaultCommentParser();
         test.processLine("  ");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test = DefaultCommentParser();
         test.processLine("");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test = DefaultCommentParser();
         test.processLine("  / ");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         test = DefaultCommentParser();
         test.processLine("  * ");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
 
         //invalid in C++ should not be flagged as non-comment
         test.processLine(" */");
         QVERIFY(!test.inString());
         QVERIFY(!test.inComment());
-        QVERIFY(!test.isPureComment());
+        QVERIFY(!test.isSkipable());
     }
 
     void removeComment()
@@ -275,7 +275,7 @@ class CommentParserTest : public QObject
         test.removeComment(line);
         QCOMPARE(line, correct);
         QCOMPARE(line.length(), correct.length());
-        
+
         test = DefaultCommentParser();
         correct = line = QLatin1String("  //int i = 8 / 8 * 3;");
 
@@ -308,7 +308,7 @@ class CommentParserTest : public QObject
         test.removeComment(line);
         QCOMPARE(line, correct);
         QCOMPARE(line.length(), correct.length());
-        
+
         correct = line = QLatin1String("  int i = 8 / 8 * 3;/* mot a comment");
         test.processLine(line);
         test.removeComment(line);
@@ -323,7 +323,7 @@ class CommentParserTest : public QObject
         test.removeComment(line);
         QCOMPARE(line, correct);
         QCOMPARE(line.length(), correct.length());
-        
+
         test = DefaultCommentParser();
         line = QLatin1String("  int i = 8 / 8 * 3;/* comment*/");
         correct = QLatin1String("  int i = 8 / 8 * 3;            ");
@@ -332,7 +332,7 @@ class CommentParserTest : public QObject
         test.removeComment(line);
         QCOMPARE(line, correct);
         QCOMPARE(line.length(), correct.length());
-        
+
         test = DefaultCommentParser();
         correct = line = QLatin1String("  /*int i = 8 / 8 * 3;/* comment*/");
 

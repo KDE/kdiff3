@@ -1187,13 +1187,13 @@ void Diff3LineList::calcWhiteDiff3Lines(
 
     for(i3 = begin(); i3 != end(); ++i3)
     {
-        i3->bIsPureCommentA = (i3->getLineA().isValid() && pldA != nullptr  && (*pldA)[i3->getLineA()].isPureComment());
-        i3->bIsPureCommentB = (i3->getLineB().isValid() && pldB != nullptr  && (*pldB)[i3->getLineB()].isPureComment());
-        i3->bIsPureCommentC = (i3->getLineC().isValid() && pldC != nullptr  && (*pldC)[i3->getLineA()].isPureComment());
+        i3->bIsPureCommentA = (i3->getLineA().isValid() && pldA != nullptr  && (*pldA)[i3->getLineA()].isSkipable());
+        i3->bIsPureCommentB = (i3->getLineB().isValid() && pldB != nullptr  && (*pldB)[i3->getLineB()].isSkipable());
+        i3->bIsPureCommentC = (i3->getLineC().isValid() && pldC != nullptr  && (*pldC)[i3->getLineA()].isSkipable());
 
-        i3->bWhiteLineA = (!i3->getLineA().isValid() || pldA == nullptr || (*pldA)[i3->getLineA()].whiteLine() || (bIgnoreComments && (*pldA)[i3->getLineA()].isPureComment()));
-        i3->bWhiteLineB = (!i3->getLineB().isValid() || pldB == nullptr || (*pldB)[i3->getLineB()].whiteLine() || (bIgnoreComments && (*pldB)[i3->getLineB()].isPureComment()));
-        i3->bWhiteLineC = (!i3->getLineC().isValid() || pldC == nullptr || (*pldC)[i3->getLineC()].whiteLine() || (bIgnoreComments && (*pldC)[i3->getLineC()].isPureComment()));
+        i3->bWhiteLineA = (!i3->getLineA().isValid() || pldA == nullptr || (*pldA)[i3->getLineA()].whiteLine() || (bIgnoreComments && (*pldA)[i3->getLineA()].isSkipable()));
+        i3->bWhiteLineB = (!i3->getLineB().isValid() || pldB == nullptr || (*pldB)[i3->getLineB()].whiteLine() || (bIgnoreComments && (*pldB)[i3->getLineB()].isSkipable()));
+        i3->bWhiteLineC = (!i3->getLineC().isValid() || pldC == nullptr || (*pldC)[i3->getLineC()].whiteLine() || (bIgnoreComments && (*pldC)[i3->getLineC()].isSkipable()));
     }
 }
 
@@ -1421,7 +1421,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
             setFineDiff(selector, pDiffList);
         }
 
-        if(((*v1)[k1].isPureComment() || (*v1)[k1].whiteLine()) && ((*v2)[k2].isPureComment() || (*v2)[k2].whiteLine()))
+        if(((*v1)[k1].isSkipable() || (*v1)[k1].whiteLine()) && ((*v2)[k2].isSkipable() || (*v2)[k2].whiteLine()))
         {
             if(selector == e_SrcSelector::A)
             {

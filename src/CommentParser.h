@@ -18,7 +18,7 @@ class CommentParser
     virtual void processLine(const QString &line) = 0;
     virtual void removeComment(QString &line) = 0;
     virtual bool inComment() const = 0;
-    virtual bool isPureComment() const = 0;
+    virtual bool isSkipable() const = 0;
     virtual ~CommentParser() = default;
 };
 
@@ -29,7 +29,6 @@ class DefaultCommentParser : public CommentParser
   public:
     void processLine(const QString &line) override;
     inline bool inComment() const override { return mCommentType != none; };
-    inline bool isPureComment() const override { return mIsPureComment; };
 
     void removeComment(QString &line) override;
   protected:
@@ -55,7 +54,8 @@ class DefaultCommentParser : public CommentParser
     std::vector<CommentRange> comments;
 
     bool isFirstLine = false;
-    bool mIsPureComment = false;
+    bool mIsCommentOrWhite = false;
+    //bool mIsPureComment = false;
     bool bInString = false;
     bool bIsEscaped = false;
 

@@ -44,7 +44,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 if(!inComment() && mLastChar == '/')
                 {
                     mCommentType = singleLine;
-                    mIsPureComment = line.startsWith(QLatin1String("//"));
+                    mIsCommentOrWhite = line.startsWith(QLatin1String("//"));
                     lastComment.startOffset = offset - 1;
                 }
                 else if(mLastChar == '*' && mCommentType == multiLine)
@@ -54,7 +54,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     lastComment.endOffset = offset + 1; //include last char in offset
                     comments.push_back(lastComment);
                     if(!isFirstLine)
-                        mIsPureComment = line.endsWith(QLatin1String("*/")) ? true : mIsPureComment;
+                        mIsCommentOrWhite = line.endsWith(QLatin1String("*/")) ? true : mIsCommentOrWhite;
                 }
                 break;
             case '*':
@@ -64,7 +64,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 if(mLastChar == '/' && !inComment())
                 {
                     mCommentType = multiLine;
-                    mIsPureComment = line.startsWith(QLatin1String("/*")) ? true : mIsPureComment;
+                    mIsCommentOrWhite = line.startsWith(QLatin1String("/*")) ? true : mIsCommentOrWhite;
                     isFirstLine = true;
                     lastComment.startOffset = offset - 1;
                 }
@@ -79,7 +79,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
 
                 if(mCommentType == multiLine && !isFirstLine)
                 {
-                    mIsPureComment = true;
+                    mIsCommentOrWhite = true;
                 }
 
                 if(lastComment.startOffset > 0 && lastComment.endOffset == 0)
@@ -97,7 +97,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     break;
                 }
 
-                mIsPureComment = false;
+                mIsCommentOrWhite = false;
                 break;
         }
 
@@ -137,7 +137,7 @@ void DefaultCommentParser::processLine(const QString &line)
 */
 void DefaultCommentParser::removeComment(QString &line)
 {
-    if(isPureComment() || lastComment.startOffset == lastComment.endOffset) return;
+    if(isSkipable() || lastComment.startOffset == lastComment.endOffset) return;
 
     for(const CommentRange &range : comments)
     {
