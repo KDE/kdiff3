@@ -7,6 +7,8 @@
 
 #include "CommentParser.h"
 
+#include "TypeUtils.h"
+
 #include <QChar>
 #include <QRegularExpression>
 #include <QSharedPointer>
@@ -137,7 +139,7 @@ void DefaultCommentParser::processLine(const QString &line)
     {
         processChar(trimmedLine, c);
     }
-    
+
     /*
         Line has trailing space after multi-line comment ended.
     */
@@ -150,7 +152,7 @@ void DefaultCommentParser::processLine(const QString &line)
 }
 
 /*
- Modifies the input data, and replaces comments with whitespace when the line contains other data too. 
+ Modifies the input data, and replaces comments with whitespace when the line contains other data too.
 */
 void DefaultCommentParser::removeComment(QString &line)
 {

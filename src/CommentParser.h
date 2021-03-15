@@ -19,6 +19,8 @@ class CommentParser
     virtual void removeComment(QString &line) = 0;
     virtual bool inComment() const = 0;
     virtual bool isPureComment() const = 0;
+
+    virtual inline bool isSkipable() const = 0;
     virtual ~CommentParser() = default;
 };
 
@@ -29,7 +31,10 @@ class DefaultCommentParser : public CommentParser
   public:
     void processLine(const QString &line) override;
     inline bool inComment() const override { return mCommentType != none; };
+
     inline bool isPureComment() const override { return mIsPureComment; };
+
+    inline bool isSkipable() const override { return mIsSkipable; };
 
     void removeComment(QString &line) override;
   protected:
@@ -56,6 +61,8 @@ class DefaultCommentParser : public CommentParser
 
     bool isFirstLine = false;
     bool mIsCommentOrWhite = false;
+
+    bool mIsSkipable = false;
     bool mIsPureComment = false;
     bool bInString = false;
     bool bIsEscaped = false;

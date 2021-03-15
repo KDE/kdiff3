@@ -48,7 +48,9 @@ Optimizations: Skip unneeded steps.
 
 void SourceData::setupConnections()
 {
+#ifndef AUTOTEST
     connections.push_back(KDiff3App::encodingChanged.connect(boost::bind(&SourceData::setEncoding, this, boost::placeholders::_1)));
+#endif
 }
 
 void SourceData::reset()
