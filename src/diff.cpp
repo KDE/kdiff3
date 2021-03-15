@@ -1181,11 +1181,6 @@ void Diff3LineList::calcWhiteDiff3Lines(
 
     for(i3 = begin(); i3 != end(); ++i3)
     {
-        i3->bIsPureCommentA = (i3->getLineA().isValid() && pldA != nullptr  && (*pldA)[i3->getLineA()].isPureComment());
-        i3->bIsPureCommentB = (i3->getLineB().isValid() && pldB != nullptr  && (*pldB)[i3->getLineB()].isPureComment());
-        i3->bIsPureCommentC = (i3->getLineC().isValid() && pldC != nullptr  && (*pldC)[i3->getLineA()].isPureComment());
-
-
         i3->bWhiteLineA = (!i3->getLineA().isValid() || pldA == nullptr || (*pldA)[i3->getLineA()].whiteLine() || (bIgnoreComments && (*pldA)[i3->getLineA()].isPureComment()));
         i3->bWhiteLineB = (!i3->getLineB().isValid() || pldB == nullptr || (*pldB)[i3->getLineB()].whiteLine() || (bIgnoreComments && (*pldB)[i3->getLineB()].isPureComment()));
         i3->bWhiteLineC = (!i3->getLineC().isValid() || pldC == nullptr || (*pldC)[i3->getLineC()].whiteLine() || (bIgnoreComments && (*pldC)[i3->getLineC()].isPureComment()));

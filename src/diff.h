@@ -213,10 +213,6 @@ class Diff3Line
     bool bWhiteLineB = false;
     bool bWhiteLineC = false;
 
-    bool bIsPureCommentA = false;
-    bool bIsPureCommentB = false;
-    bool bIsPureCommentC = false;
-
     std::shared_ptr<DiffList> pFineAB; // These are NULL only if completely equal or if either source doesn't exist.
     std::shared_ptr<DiffList> pFineBC;
     std::shared_ptr<DiffList> pFineCA;
