@@ -15,6 +15,7 @@
 
 #include <cstdlib>
 #include <ctype.h>
+#include <memory>
 
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -1387,7 +1388,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
         if((*v1)[k1].size() != (*v2)[k2].size() || QString::compare((*v1)[k1].getLine(), (*v2)[k2].getLine()) != 0)
         {
             bTextsTotalEqual = false;
-            DiffList* pDiffList = new DiffList;
+            auto pDiffList = std::make_shared<DiffList>();
             calcDiff((*v1)[k1].getLine(), (*v2)[k2].getLine(), *pDiffList, 2, maxSearchLength);
 
             // Optimize the diff list.
@@ -1411,7 +1412,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
                     dli->setNumberOfEquals(0);
                 }
             }
-
+            //In case its not obvious setFineDiff moves pDiffList to a memeber variable so control changes to class scope after this call.
             setFineDiff(selector, pDiffList);
         }
 
@@ -1449,8 +1450,8 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, Lin
     if(winIdx == e_SrcSelector::A)
     {
         lineIdx = getLineA();
-        pFineDiff1 = pFineAB;
-        pFineDiff2 = pFineCA;
+        pFineDiff1 = pFineAB.get();
+        pFineDiff2 = pFineCA.get();
 
         changed = ((!getLineB().isValid()) != (!lineIdx.isValid()) ? AChanged : NoChange) |
                    ((!getLineC().isValid()) != (!lineIdx.isValid()) && isTriple ? BChanged : NoChange);
@@ -1459,8 +1460,8 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, Lin
     else if(winIdx == e_SrcSelector::B)
     {
         lineIdx = getLineB();
-        pFineDiff1 = pFineBC;
-        pFineDiff2 = pFineAB;
+        pFineDiff1 = pFineBC.get();
+        pFineDiff2 = pFineAB.get();
         changed = ((!getLineC().isValid()) != (!lineIdx.isValid()) && isTriple ? AChanged : NoChange) |
                    ((!getLineA().isValid()) != (!lineIdx.isValid()) ? BChanged : NoChange);
         changed2 = (bBEqualC || !isTriple ? NoChange : AChanged) | (bAEqualB ? NoChange : BChanged);
@@ -1468,8 +1469,8 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, Lin
     else if(winIdx == e_SrcSelector::C)
     {
         lineIdx = getLineC();
-        pFineDiff1 = pFineCA;
-        pFineDiff2 = pFineBC;
+        pFineDiff1 = pFineCA.get();
+        pFineDiff2 = pFineBC.get();
         changed = ((!getLineA().isValid()) != (!lineIdx.isValid()) ? AChanged : NoChange) |
                    ((!getLineB().isValid()) != (!lineIdx.isValid()) ? BChanged : NoChange);
         changed2 = (bAEqualC ? NoChange : AChanged) | (bBEqualC ? NoChange : BChanged);

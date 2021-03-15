@@ -217,27 +217,15 @@ class Diff3Line
     bool bIsPureCommentB = false;
     bool bIsPureCommentC = false;
 
-    DiffList* pFineAB = nullptr; // These are NULL only if completely equal or if either source doesn't exist.
-    DiffList* pFineBC = nullptr;
-    DiffList* pFineCA = nullptr;
-
+    std::shared_ptr<DiffList> pFineAB; // These are NULL only if completely equal or if either source doesn't exist.
+    std::shared_ptr<DiffList> pFineBC;
+    std::shared_ptr<DiffList> pFineCA;
 
     qint32 mLinesNeededForDisplay = 1;    // Due to wordwrap
     qint32 mSumLinesNeededForDisplay = 0; // For fast conversion to m_diff3WrapLineVector
 
   public:
     static QSharedPointer<DiffBufferInfo> m_pDiffBufferInfo; // For convenience
-
-    ~Diff3Line()
-    {
-        delete pFineAB;
-        delete pFineBC;
-        delete pFineCA;
-
-        pFineAB = nullptr;
-        pFineBC = nullptr;
-        pFineCA = nullptr;
-    }
 
     Q_REQUIRED_RESULT LineRef getLineA() const { return lineA; }
     Q_REQUIRED_RESULT LineRef getLineB() const { return lineB; }
@@ -313,22 +301,19 @@ class Diff3Line
         DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
         ChangeFlags& changed, ChangeFlags& changed2) const;
   private:
-    void setFineDiff(const e_SrcSelector selector, DiffList* pDiffList)
+    void setFineDiff(const e_SrcSelector selector, std::shared_ptr<DiffList>& pDiffList)
     {
         Q_ASSERT(selector == e_SrcSelector::A || selector == e_SrcSelector::B || selector == e_SrcSelector::C);
         if(selector == e_SrcSelector::A)
         {
-            delete pFineAB;
             pFineAB = pDiffList;
         }
         else if(selector == e_SrcSelector::B)
         {
-            delete pFineBC;
             pFineBC = pDiffList;
         }
         else if(selector == e_SrcSelector::C)
         {
-            delete pFineCA;
             pFineCA = pDiffList;
         }
     }
