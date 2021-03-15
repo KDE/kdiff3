@@ -167,6 +167,9 @@ void DefaultCommentParser::removeComment(QString &line)
 #ifndef AUTOTEST
         Q_ASSERT(range.endOffset <= line.length() && range.startOffset <= line.length());
         Q_ASSERT(range.endOffset >= range.startOffset);
+#else
+        if(range.endOffset > line.length() && range.startOffset > line.length()) return;
+        if(range.endOffset < range.startOffset) return;
 #endif
         qint32 size = range.endOffset - range.startOffset;
         line.replace(range.startOffset, size, QString(" ").repeated(size));
