@@ -69,8 +69,6 @@ void SourceData::reset()
 
 void SourceData::setFilename(const QString& filename)
 {
-    mFromClipBoard = false;
-
     if(filename.isEmpty())
     {
         reset();
@@ -119,6 +117,8 @@ void SourceData::setAliasName(const QString& name)
 
 void SourceData::setFileAccess(const FileAccess& fileAccess)
 {
+    mFromClipBoard = false;
+
     m_fileAccess = fileAccess;
     m_aliasName = QString();
     if(!m_tempInputFileName.isEmpty())
