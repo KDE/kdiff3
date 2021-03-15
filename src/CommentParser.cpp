@@ -6,8 +6,10 @@
 */
 
 #include "CommentParser.h"
+#include "TypeUtils.h"
 
 #include <QChar>
+#include <QDebug>
 #include <QRegularExpression>
 #include <QSharedPointer>
 #include <QString>
@@ -44,8 +46,12 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 if(!inComment() && mLastChar == '/')
                 {
                     mCommentType = singleLine;
-                    mIsCommentOrWhite = line.startsWith(u8"//");
+                    mIsPureComment = mIsCommentOrWhite = line.startsWith(u8"//");
                     lastComment.startOffset = offset - 1;
+                    if(lastComment.startOffset != 0) //whitespace at begining
+                    {
+                        mIsPureComment = false;
+                    }
                 }
                 else if(mLastChar == '*' && mCommentType == multiLine)
                 {
@@ -54,7 +60,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     lastComment.endOffset = offset + 1; //include last char in offset
                     comments.push_back(lastComment);
                     if(!isFirstLine)
-                        mIsCommentOrWhite = line.endsWith(u8"*/") ? true : mIsCommentOrWhite;
+                        mIsPureComment = mIsCommentOrWhite = line.endsWith(u8"*/") ? true : mIsCommentOrWhite;
                 }
                 break;
             case '*':
@@ -64,9 +70,13 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                 if(mLastChar == '/' && !inComment())
                 {
                     mCommentType = multiLine;
-                    mIsCommentOrWhite = line.startsWith(u8"/*") ? true : mIsCommentOrWhite;
+                    mIsPureComment = mIsCommentOrWhite = line.startsWith(u8"/*") ? true : mIsCommentOrWhite;
                     isFirstLine = true;
                     lastComment.startOffset = offset - 1;
+                    if(lastComment.startOffset != 0) //whitespace at begining
+                    {
+                        mIsPureComment = false;
+                    }
                 }
                 break;
             case '\n':
@@ -79,7 +89,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
 
                 if(mCommentType == multiLine && !isFirstLine)
                 {
-                    mIsCommentOrWhite = true;
+                    mIsPureComment = mIsCommentOrWhite = true;
                 }
 
                 if(lastComment.startOffset > 0 && lastComment.endOffset == 0)
@@ -97,7 +107,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
                     break;
                 }
 
-                mIsCommentOrWhite = false;
+                mIsPureComment = mIsCommentOrWhite = false;
                 break;
         }
 
@@ -118,6 +128,7 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
 void DefaultCommentParser::processLine(const QString &line)
 {
     offset = line.indexOf(QRegularExpression("[\\S]", QRegularExpression::UseUnicodePropertiesOption));
+    const QtNumberType  trailIndex = line.lastIndexOf(QRegularExpression("\\s+$", QRegularExpression::UseUnicodePropertiesOption));
     lastComment.startOffset = lastComment.endOffset = 0; //reset these for each line
     comments.clear();
 
@@ -128,8 +139,15 @@ void DefaultCommentParser::processLine(const QString &line)
     {
         processChar(trimmedLine, c);
     }
-    //mIsPureComment = mIsPureComment && offset == 0;
+    /*
+        Line has trailing space after multi-line comment ended.
+    */
+    if(trailIndex != -1 && !inComment())
+    {
+        mIsPureComment = false;
+    }
 
+    //mIsPureComment = mIsPureComment && offset == 0;
     processChar(trimmedLine, '\n');
 }
 
