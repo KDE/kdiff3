@@ -22,13 +22,13 @@ class Options;
 //e_SrcSelector must be sequential with no gaps between Min and Max.
 enum class e_SrcSelector
 {
-   Min = -1,
-   Invalid=-1,
-   None=0,
-   A = 1,
-   B = 2,
-   C = 3,
-   Max=C
+    Min = -1,
+    Invalid = -1,
+    None = 0,
+    A = 1,
+    B = 2,
+    C = 3,
+    Max = C
 };
 
 inline e_SrcSelector nextSelector(e_SrcSelector selector)
@@ -50,22 +50,22 @@ inline e_SrcSelector nextSelector(e_SrcSelector selector)
 
 enum class e_MergeDetails
 {
-   eDefault,
-   eNoChange,
-   eBChanged,
-   eCChanged,
-   eBCChanged,         // conflict
-   eBCChangedAndEqual, // possible conflict
-   eBDeleted,
-   eCDeleted,
-   eBCDeleted,         // possible conflict
+    eDefault,
+    eNoChange,
+    eBChanged,
+    eCChanged,
+    eBCChanged,         // conflict
+    eBCChangedAndEqual, // possible conflict
+    eBDeleted,
+    eCDeleted,
+    eBCDeleted,         // possible conflict
 
-   eBChanged_CDeleted, // conflict
-   eCChanged_BDeleted, // conflict
-   eBAdded,
-   eCAdded,
-   eBCAdded,           // conflict
-   eBCAddedAndEqual    // possible conflict
+    eBChanged_CDeleted, // conflict
+    eCChanged_BDeleted, // conflict
+    eBAdded,
+    eCAdded,
+    eBCAdded,           // conflict
+    eBCAddedAndEqual    // possible conflict
 };
 
 enum ChangeFlag
@@ -88,6 +88,7 @@ class Diff
 
     qint64 mDiff1 = 0;
     qint64 mDiff2 = 0;
+
   public:
     Diff() = default;//We use defualt initialization force compiler to generate a default constructor
     Diff(LineCount eq, const qint64 inDiff1, const qint64 inDiff2)
@@ -109,7 +110,7 @@ class Diff
     inline void adjustDiff2(const qint64 delta) { mDiff2 += delta; }
 };
 
-class DiffList : public std::list<Diff>
+class DiffList: public std::list<Diff>
 {
   public:
     void runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2, const QSharedPointer<Options>& pOptions);
@@ -128,7 +129,7 @@ class LineData
 
   public:
     explicit LineData() = default; // needed for Qt internal reasons should not be used.
-    inline LineData(const QSharedPointer<QString> &buffer, const qint64 inOffset, QtNumberType inSize = 0, QtNumberType inFirstNonWhiteChar=0, bool inIsSkipable=false,const bool inIsPureComment = false)
+    inline LineData(const QSharedPointer<QString>& buffer, const qint64 inOffset, QtNumberType inSize = 0, QtNumberType inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
     {
         mBuffer = buffer;
         mOffset = inOffset;
@@ -177,7 +178,8 @@ class DiffBufferInfo
     LineCount m_sizeC;
     const Diff3LineList* m_pDiff3LineList;
     const Diff3LineVector* m_pDiff3LineVector;
-public:
+
+  public:
     void init(Diff3LineList* d3ll, const Diff3LineVector* d3lv,
               const QVector<LineData>* pldA, LineCount sizeA, const QVector<LineData>* pldB, LineCount sizeB, const QVector<LineData>* pldC, LineCount sizeC);
 
@@ -219,7 +221,6 @@ class Diff3Line
 
     qint32 mLinesNeededForDisplay = 1;    // Due to wordwrap
     qint32 mSumLinesNeededForDisplay = 0; // For fast conversion to m_diff3WrapLineVector
-
   public:
     static QSharedPointer<DiffBufferInfo> m_pDiffBufferInfo; // For convenience
 
@@ -294,8 +295,9 @@ class Diff3Line
     void mergeOneLine(e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, e_SrcSelector& src, bool bTwoInputs) const;
 
     void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
-        DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
-        ChangeFlags& changed, ChangeFlags& changed2) const;
+                     DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
+                     ChangeFlags& changed, ChangeFlags& changed2) const;
+
   private:
     void setFineDiff(const e_SrcSelector selector, std::shared_ptr<DiffList>& pDiffList)
     {
@@ -315,11 +317,11 @@ class Diff3Line
     }
 };
 
-class Diff3LineList : public std::list<Diff3Line>
+class Diff3LineList: public std::list<Diff3Line>
 {
   public:
     void findHistoryRange(const QRegExp& historyStart, bool bThreeFiles,
-                             Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd) const;
+                          Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd) const;
     bool fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2);
     void calcDiff3LineVector(Diff3LineVector& d3lv);
     void calcWhiteDiff3Lines(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, const bool bIgnoreComments);
@@ -331,7 +333,6 @@ class Diff3LineList : public std::list<Diff3Line>
     void correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHelpList);
 
     void calcDiff3LineListTrim(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList);
-
 
     LineCount recalcWordWrap(bool resetDisplayCount)
     {
@@ -436,11 +437,9 @@ class TotalDiffStatus
     void setBinaryEqualBC(const bool equal) { bBinaryBEqC = equal; }
     void setBinaryEqualAB(const bool equal) { bBinaryAEqB = equal; }
 
-
     [[nodiscard]] bool isTextEqualAC() const { return bTextAEqC; }
     [[nodiscard]] bool isTextEqualBC() const { return bTextBEqC; }
     [[nodiscard]] bool isTextEqualAB() const { return bTextAEqB; }
-
 
     void setTextEqualAC(const bool equal) { bTextAEqC = equal; }
     void setTextEqualBC(const bool equal) { bTextBEqC = equal; }
@@ -491,16 +490,20 @@ class ManualDiffHelpEntry
 
     int calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv);
 
-    void getRangeForUI(const e_SrcSelector winIdx, LineRef *rangeLine1, LineRef *rangeLine2) const {
-        if(winIdx == e_SrcSelector::A) {
+    void getRangeForUI(const e_SrcSelector winIdx, LineRef* rangeLine1, LineRef* rangeLine2) const
+    {
+        if(winIdx == e_SrcSelector::A)
+        {
             *rangeLine1 = lineA1;
             *rangeLine2 = lineA2;
         }
-        if(winIdx == e_SrcSelector::B) {
+        if(winIdx == e_SrcSelector::B)
+        {
             *rangeLine1 = lineB1;
             *rangeLine2 = lineB2;
         }
-        if(winIdx == e_SrcSelector::C) {
+        if(winIdx == e_SrcSelector::C)
+        {
             *rangeLine1 = lineC1;
             *rangeLine2 = lineC2;
         }
@@ -514,16 +517,16 @@ class ManualDiffHelpEntry
 // A list of corresponding ranges
 class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
 {
-    public:
-        Q_REQUIRED_RESULT bool isValidMove(LineRef line1, LineRef line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
-        void insertEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine);
+  public:
+    Q_REQUIRED_RESULT bool isValidMove(LineRef line1, LineRef line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
+    void insertEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine);
 
-        void runDiff(const QVector<LineData>* p1, LineRef size1, const QVector<LineData>* p2, LineRef size2, DiffList& diffList,
-                     e_SrcSelector winIdx1, e_SrcSelector winIdx2,
-                     const QSharedPointer<Options> &pOptions);
+    void runDiff(const QVector<LineData>* p1, LineRef size1, const QVector<LineData>* p2, LineRef size2, DiffList& diffList,
+                 e_SrcSelector winIdx1, e_SrcSelector winIdx2,
+                 const QSharedPointer<Options>& pOptions);
 };
 
-void calcDiff(const QString &line1, const QString &line2, DiffList& diffList, int match, int maxSearchRange);
+void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, int match, int maxSearchRange);
 
 /** Returns the number of equivalent spaces at position outPos.
 */
