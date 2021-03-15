@@ -27,3 +27,9 @@ ecm_add_test(combinertest.cpp
     TEST_NAME "combinertest"
     LINK_LIBRARIES Qt5::Test
 )
+
+
+ecm_add_test(DiffTest.cpp ../diff.cpp ../Logging.cpp ../Utils.cpp ../progress.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp
+    TEST_NAME "difftest"
+    LINK_LIBRARIES Qt5::Test Qt5::Widgets Qt5::Gui KF5::ConfigCore KF5::I18n KF5::WidgetsAddons KF5::Parts KF5::XmlGui KF5::KIOCore
+)
