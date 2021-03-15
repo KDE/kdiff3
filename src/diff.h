@@ -124,15 +124,17 @@ class LineData
     QtNumberType mFirstNonWhiteChar = 0;
     qint64 mOffset = 0;
     QtNumberType mSize = 0;
+    bool bContainsPureComment = false;
     bool bSkipable = false;//TODO: Move me
 
   public:
     explicit LineData() = default; // needed for Qt internal reasons should not be used.
-    inline LineData(const QSharedPointer<QString> &buffer, const qint64 inOffset, QtNumberType inSize = 0, QtNumberType inFirstNonWhiteChar=0, bool inIsSkipable=false)
+    inline LineData(const QSharedPointer<QString> &buffer, const qint64 inOffset, QtNumberType inSize = 0, QtNumberType inFirstNonWhiteChar=0, bool inIsSkipable=false,const bool inIsPureComment = false)
     {
         mBuffer = buffer;
         mOffset = inOffset;
         mSize = inSize;
+        bContainsPureComment = inIsPureComment;
         bSkipable = inIsSkipable;
         mFirstNonWhiteChar = inFirstNonWhiteChar;
     }
@@ -150,8 +152,11 @@ class LineData
     //int occurrences;
     Q_REQUIRED_RESULT inline bool whiteLine() const { return mFirstNonWhiteChar == 0; }
 
+    Q_REQUIRED_RESULT inline bool isPureComment() const { return bContainsPureComment; }
+    inline void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
+
     Q_REQUIRED_RESULT inline bool isSkipable() const { return bSkipable; }
-    inline void setSkipable(const bool bPureComment) { bSkipable = bPureComment; }
+    inline void setSkipable(const bool inSkipable) { bSkipable = inSkipable; }
 
     Q_REQUIRED_RESULT static bool equal(const LineData& l1, const LineData& l2);
 };
