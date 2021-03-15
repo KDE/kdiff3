@@ -1394,9 +1394,9 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
             // Optimize the diff list.
             DiffList::iterator dli;
             bool bUsefulFineDiff = false;
-            for(dli = pDiffList->begin(); dli != pDiffList->end(); ++dli)
+            for(const Diff& diff: *pDiffList)
             {
-                if(dli->numberOfEquals() >= 4)
+                if(diff.numberOfEquals() >= 4)
                 {
                     bUsefulFineDiff = true;
                     break;
@@ -1511,20 +1511,19 @@ void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
 // Just make sure that all input lines are in the output too, exactly once.
 void Diff3LineList::debugLineCheck(const LineCount size, const e_SrcSelector srcSelector) const
 {
-    Diff3LineList::const_iterator it = begin();
     int i = 0;
 
-    for(it = begin(); it != end(); ++it)
+    for(const Diff3Line &entry: *this)
     {
         LineRef line;
 
         Q_ASSERT(srcSelector == e_SrcSelector::A || srcSelector == e_SrcSelector::B || srcSelector == e_SrcSelector::C);
         if(srcSelector == e_SrcSelector::A)
-            line = it->getLineA();
+            line = entry.getLineA();
         else if(srcSelector == e_SrcSelector::B)
-            line = it->getLineB();
+            line = entry.getLineB();
         else if(srcSelector == e_SrcSelector::C)
-            line = it->getLineC();
+            line = entry.getLineC();
 
         if(line.isValid())
         {
