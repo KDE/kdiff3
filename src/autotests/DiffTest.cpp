@@ -13,6 +13,7 @@
 #include <QTest>
 
 #include <qglobal.h>
+#include <qttestglobal.h>
 
 class DiffTest: public QObject
 {
@@ -39,32 +40,20 @@ class DiffTest: public QObject
     }
     void testWhiteLineComment()
     {
-        //First chech LineData itself. Not much to check here only whiteLine does actual work.
-        auto line = QSharedPointer<QString>::create(u8"/*\n");
-        auto dataRec = LineData(line, 0, line->length(), 0, true);
-
-        QVERIFY(dataRec.isPureComment());
-        QVERIFY(!dataRec.whiteLine());
-
-        line = QSharedPointer<QString>::create(u8"     \t\n");
-        dataRec = LineData(line, 0, line->length(), 6, false);
-
-        QVERIFY(!dataRec.isPureComment());
-        QVERIFY(dataRec.whiteLine());
-
-        line = QSharedPointer<QString>::create(u8"  /*   \t\n");
-        dataRec = LineData(line, 0, line->length(), 2, false);
-
-        QVERIFY(!dataRec.isPureComment());
-        QVERIFY(!dataRec.whiteLine());
-
         tempFile.open();
-        tempFile.write(u8"/*\n */\n     \t\n  /*   \t\n");
+        tempFile.write(u8"//\n //\n     \t\n  D//   \t\n");
+        tempFile.close();
 
         auto file = FileAccess(tempFile.fileName());
         QVERIFY(file.exists());
         QVERIFY(file.isFile());
         QVERIFY(file.isReadable());
+
+        FileAccess faRec = FileAccess(tempFile.fileName());
+        QVERIFY(faRec.isLocal());
+        QVERIFY(faRec.exists());
+        QVERIFY(faRec.isFile());
+        QVERIFY(faRec.size() > 0);
 
         simData.setFilename(tempFile.fileName());
         QVERIFY(!simData.isFromBuffer());
@@ -77,6 +66,27 @@ class DiffTest: public QObject
         QVERIFY(!simData.isEmpty());
         QVERIFY(simData.hasData());
         QVERIFY(simData.getEncoding() != nullptr);
+        QCOMPARE(simData.getSizeLines(), 4);
+        QCOMPARE(simData.getSizeBytes(), file.size());
+
+        const QVector<LineData>* lineData = simData.getLineDataForDisplay();
+        QVERIFY(lineData != nullptr);
+        QCOMPARE(lineData->size() - 1, 4);
+        QVERIFY(!(*lineData)[0].whiteLine());
+        QVERIFY((*lineData)[0].isSkipable());
+        QVERIFY((*lineData)[0].isPureComment());
+
+        QVERIFY(!(*lineData)[1].whiteLine());
+        QVERIFY(!(*lineData)[1].isPureComment());
+        QVERIFY((*lineData)[1].isSkipable());
+
+        QVERIFY((*lineData)[2].whiteLine());
+        QVERIFY(!(*lineData)[2].isPureComment());
+        QVERIFY((*lineData)[2].isSkipable());
+
+        QVERIFY(!(*lineData)[3].whiteLine());
+        QVERIFY(!(*lineData)[3].isPureComment());
+        QVERIFY(!(*lineData)[3].isSkipable());
    }
 
 };
