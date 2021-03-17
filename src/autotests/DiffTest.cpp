@@ -20,12 +20,14 @@ class DiffTest: public QObject
     Q_OBJECT;
   private:
     QTemporaryFile  tempFile;
-    SourceData      simData;
+    FileAccess      file;
     QSharedPointer<Options>  defualtOptions = QSharedPointer<Options>::create();
 
   private Q_SLOTS:
     void initTestCase()
     {
+        SourceData simData;
+
         //Check assumed default values.
         QVERIFY(simData.isEmpty());
         QVERIFY(simData.isValid());
@@ -37,28 +39,39 @@ class DiffTest: public QObject
         QVERIFY(simData.getErrors().isEmpty());
         //Setup default options for.
         simData.setOptions(defualtOptions);
-    }
-    void testWhiteLineComment()
-    {
+        //write out test file
         tempFile.open();
         tempFile.write(u8"//\n //\n     \t\n  D//   \t\n");
         tempFile.close();
-
-        auto file = FileAccess(tempFile.fileName());
+        //Verify that we actcually wrote the test file.
+        file = FileAccess(tempFile.fileName());
         QVERIFY(file.exists());
         QVERIFY(file.isFile());
         QVERIFY(file.isReadable());
-
-        FileAccess faRec = FileAccess(tempFile.fileName());
-        QVERIFY(faRec.isLocal());
-        QVERIFY(faRec.exists());
-        QVERIFY(faRec.isFile());
-        QVERIFY(faRec.size() > 0);
-
+        QVERIFY(file.isLocal());
+        QVERIFY(file.size() > 0);
+        //Sanity check essential functions. Failure of these makes further testing pointless.
         simData.setFilename(tempFile.fileName());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
-        QVERIFY(!simData.hasData()); //setFileName should not load data.
+        QVERIFY(!simData.hasData());
+        QCOMPARE(simData.getFilename(), tempFile.fileName());
+
+        simData.setFilename("");
+        QVERIFY(simData.isEmpty());
+        QVERIFY(!simData.hasData());
+        QVERIFY(!simData.isFromBuffer());
+        QVERIFY(simData.getFilename().isEmpty());
+    }
+    /*
+        Check basic ablity to read data in.
+    */
+    void testRead()
+    {
+        SourceData simData;
+        simData.setOptions(defualtOptions);
+
+        simData.setFilename(tempFile.fileName());
 
         simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
         QVERIFY(simData.getErrors().isEmpty());
@@ -68,10 +81,65 @@ class DiffTest: public QObject
         QVERIFY(simData.getEncoding() != nullptr);
         QCOMPARE(simData.getSizeLines(), 4);
         QCOMPARE(simData.getSizeBytes(), file.size());
+    }
+
+    void testLineData()
+    {
+        SourceData simData;
+        simData.setOptions(defualtOptions);
+        simData.setFilename(tempFile.fileName());
+
+        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+
+        QVERIFY(simData.getErrors().isEmpty());
+        QVERIFY(simData.hasData());
+        QCOMPARE(simData.getSizeLines(), 4);
+        QCOMPARE(simData.getSizeBytes(), file.size());
 
         const QVector<LineData>* lineData = simData.getLineDataForDisplay();
+        //Verify LineData is being setup correctly.
         QVERIFY(lineData != nullptr);
         QCOMPARE(lineData->size() - 1, 4);
+
+        QVERIFY((*lineData)[0].getBuffer() != nullptr);
+        QCOMPARE((*lineData)[0].size(), 2);
+        QCOMPARE((*lineData)[0].getFirstNonWhiteChar(), 1);
+        QCOMPARE((*lineData)[0].getLine(), "//");
+
+        QVERIFY((*lineData)[1].getBuffer() != nullptr);
+        QCOMPARE((*lineData)[1].size(), 3);
+        QCOMPARE((*lineData)[1].getFirstNonWhiteChar(), 2);
+        QCOMPARE((*lineData)[1].getLine(), " //");
+
+        QVERIFY((*lineData)[2].getBuffer() != nullptr);
+        QCOMPARE((*lineData)[2].size(), 6);
+        QCOMPARE((*lineData)[2].getFirstNonWhiteChar(), 0);
+        QCOMPARE((*lineData)[2].getLine(), "     \t");
+
+        QVERIFY((*lineData)[3].getBuffer() != nullptr);
+        QCOMPARE((*lineData)[3].size(), 9);
+        QCOMPARE((*lineData)[3].getFirstNonWhiteChar(), 3);
+        QCOMPARE((*lineData)[3].getLine(), "  D//   \t");
+    }
+
+    void testWhiteLineComment()
+    {
+        SourceData simData;
+        simData.setOptions(defualtOptions);
+
+        simData.setFilename(tempFile.fileName());
+
+        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+        QVERIFY(simData.getErrors().isEmpty());
+        QVERIFY(!simData.isEmpty());
+        QVERIFY(simData.hasData());
+        QCOMPARE(simData.getSizeBytes(), file.size());
+
+        const QVector<LineData>* lineData = simData.getLineDataForDisplay();
+        //Verify we actually have data.
+        QVERIFY(lineData != nullptr);
+        QCOMPARE(lineData->size() - 1, 4);
+
         QVERIFY(!(*lineData)[0].whiteLine());
         QVERIFY((*lineData)[0].isSkipable());
         QVERIFY((*lineData)[0].isPureComment());
