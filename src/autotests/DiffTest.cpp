@@ -19,7 +19,7 @@ class DiffTest: public QObject
 {
     Q_OBJECT;
   private:
-    QTemporaryFile  tempFile;
+    QTemporaryFile  testFile;
     FileAccess      file;
     QSharedPointer<Options>  defualtOptions = QSharedPointer<Options>::create();
 
@@ -40,22 +40,22 @@ class DiffTest: public QObject
         //Setup default options for.
         simData.setOptions(defualtOptions);
         //write out test file
-        tempFile.open();
-        tempFile.write(u8"//\n //\n     \t\n  D//   \t\n");
-        tempFile.close();
+        testFile.open();
+        testFile.write(u8"//\n //\n     \t\n  D//   \t\n");
+        testFile.close();
         //Verify that we actcually wrote the test file.
-        file = FileAccess(tempFile.fileName());
+        file = FileAccess(testFile.fileName());
         QVERIFY(file.exists());
         QVERIFY(file.isFile());
         QVERIFY(file.isReadable());
         QVERIFY(file.isLocal());
         QVERIFY(file.size() > 0);
         //Sanity check essential functions. Failure of these makes further testing pointless.
-        simData.setFilename(tempFile.fileName());
+        simData.setFilename(testFile.fileName());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
         QVERIFY(!simData.hasData());
-        QCOMPARE(simData.getFilename(), tempFile.fileName());
+        QCOMPARE(simData.getFilename(), testFile.fileName());
 
         simData.setFilename("");
         QVERIFY(simData.isEmpty());
@@ -63,6 +63,7 @@ class DiffTest: public QObject
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(simData.getFilename().isEmpty());
     }
+
     /*
         Check basic ablity to read data in.
     */
@@ -71,7 +72,7 @@ class DiffTest: public QObject
         SourceData simData;
         simData.setOptions(defualtOptions);
 
-        simData.setFilename(tempFile.fileName());
+        simData.setFilename(testFile.fileName());
 
         simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
         QVERIFY(simData.getErrors().isEmpty());
@@ -83,11 +84,15 @@ class DiffTest: public QObject
         QCOMPARE(simData.getSizeBytes(), file.size());
     }
 
+    /*
+        This validates that LineData records are being setup with the correct data.
+        Only size and raw content are checked here.
+    */
     void testLineData()
     {
         SourceData simData;
         simData.setOptions(defualtOptions);
-        simData.setFilename(tempFile.fileName());
+        simData.setFilename(testFile.fileName());
 
         simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
 
@@ -127,7 +132,7 @@ class DiffTest: public QObject
         SourceData simData;
         simData.setOptions(defualtOptions);
 
-        simData.setFilename(tempFile.fileName());
+        simData.setFilename(testFile.fileName());
 
         simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
         QVERIFY(simData.getErrors().isEmpty());
