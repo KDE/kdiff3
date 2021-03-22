@@ -17,8 +17,10 @@
 #include <ctype.h>
 #include <memory>
 
+#ifndef AUTOTEST
 #include <KLocalizedString>
 #include <KMessageBox>
+#endif
 
 #include <QtGlobal>
 #include <QSharedPointer>
@@ -1531,12 +1533,13 @@ void Diff3LineList::debugLineCheck(const LineCount size, const e_SrcSelector src
         {
             if(line != i)
             {
-                KMessageBox::error(nullptr, i18n(
-                                          "Data loss error:\n"
-                                          "If it is reproducible please contact the author.\n"),
+                #ifndef AUTOTEST
+                KMessageBox::error(nullptr, i18n("Data loss error:\n"
+                                                 "If it is reproducible please contact the author.\n"),
                                    i18n("Severe Internal Error"));
+                #endif
 
-                qCCritical(kdiffMain) << i18n("Severe Internal Error.") << " line != i for srcSelector=" << (int)srcSelector << "\n";
+                qCCritical(kdiffMain) << "Severe Internal Error." << " line != i for srcSelector=" << (int)srcSelector << "\n";
                 ::exit(-1);
             }
             ++i;
@@ -1545,12 +1548,14 @@ void Diff3LineList::debugLineCheck(const LineCount size, const e_SrcSelector src
 
     if(size != i)
     {
+        #ifndef AUTOTEST
         KMessageBox::error(nullptr, i18n(
                                   "Data loss error:\n"
                                   "If it is reproducible please contact the author.\n"),
                            i18n("Severe Internal Error"));
+        #endif
 
-        qCCritical(kdiffMain) << i18n("Severe Internal Error.: ") << size << " != " << i << "\n";
+        qCCritical(kdiffMain) << "Severe Internal Error.: " << size << " != " << i << "\n";
         ::exit(-1);
     }
 }

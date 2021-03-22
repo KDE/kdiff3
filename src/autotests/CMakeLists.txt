@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
+# SPDX-FileCopyrightText: 2018-2021 Michael Reeves reeves.87@gmail.com
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 find_package(
@@ -17,13 +17,11 @@ ecm_add_test(CvsIgnoreListTest.cpp ../CvsIgnoreList.cpp ../fileaccess.cpp ../Uti
     TEST_NAME "cvsignorelisttest"
     LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::KIOCore KF5::I18n
 )
-target_compile_features(cvsignorelisttest PRIVATE ${needed_features})
 
 ecm_add_test(FileAccessTest.cpp ../fileaccess.cpp ../Utils.cpp ../progress.cpp ../CvsIgnoreList.cpp ../CompositeIgnoreList.cpp
     TEST_NAME "fileaccesstest"
     LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::KIOCore KF5::I18n
 )
-target_compile_features(fileaccesstest PRIVATE ${needed_features})
 
 ecm_add_test(combinertest.cpp
     TEST_NAME "combinertest"
@@ -40,10 +38,7 @@ ecm_add_test(GitIgnoreListTest.cpp ../GitIgnoreList.cpp ../fileaccess.cpp ../Uti
     LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::KIOCore KF5::I18n
 )
 
-target_compile_features(CompositeIgnoreListTest PRIVATE ${needed_features})
-
 ecm_add_test(DiffTest.cpp ../diff.cpp ../Logging.cpp ../Utils.cpp ../progress.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp
     TEST_NAME "difftest"
-    LINK_LIBRARIES Qt5::Test Qt5::Widgets Qt5::Gui KF5::ConfigCore KF5::I18n KF5::WidgetsAddons KF5::Parts KF5::XmlGui KF5::KIOCore
+    LINK_LIBRARIES Qt5::Test Qt5::Widgets Qt5::Gui KF5::ConfigCore KF5::KIOCore KF5::Parts
 )
-
