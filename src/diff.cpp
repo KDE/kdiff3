@@ -93,7 +93,7 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
     LineRef lineB = 0;
     Diff d;
 
-    qCInfo(kdiffMain) << "Enter: calcDiff3LineListUsingAB" ;
+    qCInfo(kdiffMain) << "Enter: calcDiff3LineListUsingAB";
     for(;;)
     {
         if(d.numberOfEquals() == 0 && d.diff1() == 0 && d.diff2() == 0)
@@ -229,10 +229,18 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
     LineRef lineC = 0;
     Diff d;
 
-    for(d=*i;i != pDiffListBC->end(); ++i)
+    for(;;)
     {
         if(d.numberOfEquals() == 0 && d.diff1() == 0 && d.diff2() == 0)
-            continue;
+        {
+            if(i != pDiffListBC->end())
+            {
+                d = *i;
+                ++i;
+            }
+            else
+                break;
+        }
 
         Diff3Line d3l;
         if(d.numberOfEquals() > 0)
