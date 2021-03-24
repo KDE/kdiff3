@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 # SPDX-FileCopyrightText: 2002-2007 Joachim Eibl, joachim.eibl at gmx.de
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -22,7 +22,7 @@ parser.add_argument('-d', metavar='destination_path', nargs=1, default=['testdat
 args = parser.parse_args()
 dirname=args.d[0]
 
-print 'Generating input files in %s ...' % dirname
+print ('Generating input files in %s ...') % dirname
 sys.stdout.flush()
 
 if not os.path.exists(dirname):
@@ -34,12 +34,12 @@ for entry in merges.splitlines():
     fields = entry.split()
 
     if len(fields) > 3:
-        print 'merge %s had more than 2 parents: %s' % (fields[0], fields)
+        print ('merge %s had more than 2 parents: %s') % (fields[0], fields)
 
     merge, contrib1, contrib2 = fields[:3]
 
     if glob.glob('%s/%s_*' % (dirname, merge)):
-        print 'skipping merge %s because files for this merge already present' % merge
+        print ('skipping merge %s because files for this merge already present') % merge
         continue
 
     base = sp.check_output(('git merge-base %s %s' % (contrib1, contrib2)).split()).strip()
@@ -50,9 +50,9 @@ for entry in merges.splitlines():
     fileschangedboth = set(fileschanged1) & set(fileschanged2)
 
     if not fileschangedboth:
-        print 'No files overlapped for merge %s' % merge
+        print ('No files overlapped for merge %s') % merge
     else:
-        print 'Overlapping files for merge %s with base %s: %s' % (merge, base, fileschangedboth)
+        print ('Overlapping files for merge %s with base %s: %s') % (merge, base, fileschangedboth)
         for filename in fileschangedboth:
             simplified_filename = filename.replace('/', '_').replace('.', '_')
 
@@ -64,7 +64,7 @@ for entry in merges.splitlines():
                 if base_content == contrib1_content or \
                    base_content == contrib2_content or \
                    contrib1_content == contrib2_content:
-                   print 'this merge was trivial. Skipping.'
+                   print ('this merge was trivial. Skipping.')
                 else:
                     basefilename = '%s/%s_%s_base.txt' % (dirname, merge, simplified_filename)
                     contrib1filename = '%s/%s_%s_contrib1.txt' % (dirname, merge, simplified_filename)
@@ -80,12 +80,12 @@ for entry in merges.splitlines():
                         pass
 
             except sp.CalledProcessError:
-                print 'error from git show, continuing with next file'
+                print ('error from git show, continuing with next file')
 
-print 'Input files generated.'
-print ''
-print 'To create a reference set of expected_result.txt files, run alignmenttest and copy/move all %s/*_actual_result.txt files to %s/*_expected_result.txt:' % (dirname, dirname)
-print '  ./alignmenttest > /dev/null'
-print '  cd %s' % dirname
-print '  for file in *_actual_result.txt; do mv ${file} ${file/actual/expected}; done'
-print 'If you\'ve already modified the algorithm, you can run the alignment test of an older version of kdiff3 and copy those result files over'
+print ('Input files generated.')
+print ('')
+print ('To create a reference set of expected_result.txt files, run alignmenttest and copy/move all %s/*_actual_result.txt files to %s/*_expected_result.txt:') % (dirname, dirname)
+print ('  ./alignmenttest > /dev/null')
+print ('  cd %s') % dirname
+print ('  for file in *_actual_result.txt; do mv ${file} ${file/actual/expected}; done')
+print ('If you\'ve already modified the algorithm, you can run the alignment test of an older version of kdiff3 and copy those result files over')

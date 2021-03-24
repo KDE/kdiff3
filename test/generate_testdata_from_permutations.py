@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 # SPDX-FileCopyrightText: 2002-2007 Joachim Eibl, joachim.eibl at gmx.de
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -92,16 +92,16 @@ args = parser.parse_args()
 if not os.path.exists(dirname):
     os.makedirs(dirname)
 
-print 'Generating input files in %s ...' % dirname
+print ('Generating input files in %s ...' % dirname)
 sys.stdout.flush()
 
 random.seed(args.s)
 permutations(args.r, len(defaultlines), [])
 
-print 'Input files generated.'
-print ''
-print 'To create a reference set of expected_result.txt files, run alignmenttest and copy/move all %s/*_actual_result.txt files to %s/*_expected_result.txt:' % (dirname, dirname)
-print '  ./alignmenttest > /dev/null'
-print '  cd %s' % dirname
-print '  for file in *_actual_result.txt; do mv ${file} ${file/actual/expected}; done'
-print 'If you\'ve already modified the algorithm, you can run the alignment test of an older version of kdiff3 and copy those result files over'
+print ('Input files generated.')
+print ('')
+print ('To create a reference set of expected_result.txt files, run alignmenttest and copy/move all %s/*_actual_result.txt files to %s/*_expected_result.txt:') % (dirname, dirname)
+print ('  ./alignmenttest > /dev/null')
+print ('  cd %s') % dirname
+print ('  for file in *_actual_result.txt; do mv ${file} ${file/actual/expected}; done')
+print ('If you\'ve already modified the algorithm, you can run the alignment test of an older version of kdiff3 and copy those result files over')

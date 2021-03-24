@@ -3,18 +3,20 @@
   SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
   SPDX-License-Identifier: GPL-2.0-or-later
 */
+#include "diff.h"
+#include "gnudiff_diff.h"
+#include "options.h"
+#include "progress.h"
+#include "SourceData.h"
 
 #include <iostream>
 #include <stdio.h>
 
 #include <QDirIterator>
+#include <QRegularExpression>
 #include <QTextCodec>
 #include <QTextStream>
 
-#include "diff.h"
-#include "gnudiff_diff.h"
-#include "options.h"
-#include "progress.h"
 
 #define i18n(s) s
 
@@ -116,16 +118,16 @@ void determineFileAlignment(SourceData &m_sd1, SourceData &m_sd2, SourceData &m_
    // Run the diff.
    if ( m_sd3.isEmpty() )
    {
-      m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12,A,B,
+      m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12,e_SrcSelector::A,e_SrcSelector::B,
                m_pOptions);
       m_diff3LineList.calcDiff3LineListUsingAB( &m_diffList12);
-      m_diff3LineList.fineDiff(A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
+      m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
    }
    else
    {
-      m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12,A,B, m_pOptions);
-      m_manualDiffHelpList.runDiff( m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23,B,C, m_pOptions);
-      m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13,A,C, m_pOptions);
+      m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12,e_SrcSelector::A,e_SrcSelector::B, m_pOptions);
+      m_manualDiffHelpList.runDiff( m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList23,e_SrcSelector::B,e_SrcSelector::C, m_pOptions);
+      m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd3.getLineDataForDiff(), m_sd3.getSizeLines(), m_diffList13,e_SrcSelector::A,e_SrcSelector::C, m_pOptions);
 
       if (verbose)
       {
@@ -153,11 +155,11 @@ void determineFileAlignment(SourceData &m_sd1, SourceData &m_sd2, SourceData &m_
          if (verbose) printDiff3List("after 2nd calcDiff3LineListTrim", m_diff3LineList, m_sd1, m_sd2, m_sd3);
       }
 
-      m_diff3LineList.fineDiff(A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
-      m_diff3LineList.fineDiff(B, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay() );
-      m_diff3LineList.fineDiff(C, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay() );
+      m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
+      m_diff3LineList.fineDiff(e_SrcSelector::B, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay() );
+      m_diff3LineList.fineDiff(e_SrcSelector::C, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay() );
    }
-   m_diff3LineList.calcWhiteDiff3Lines( m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff() );
+   m_diff3LineList.calcWhiteDiff3Lines( m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), false);
 }
 
 QString getLineFromSourceData(const SourceData &sd, int line)
@@ -183,7 +185,7 @@ void loadExpectedAlignmentFile(QString expectedResultFileName, Diff3LineList &ex
       QTextStream t( &file );
       while ( !t.atEnd() )
       {
-         QStringList lst = t.readLine().split(QRegExp("\\s+"));
+         QStringList lst = t.readLine().split(QRegularExpression("\\s+"));
          d3l.setLineA(lst.at(0).toInt());
          d3l.setLineB(lst.at(1).toInt());
          d3l.setLineC(lst.at(2).toInt());
@@ -464,11 +466,11 @@ int main(int argc, char *argv[])
    {
       QString fileName = it.next();
 
-      QRegExp baseFileRegExp("(.*)_base\\.(.*)");
-      baseFileRegExp.exactMatch(fileName);
+      QRegularExpression baseFileRegExp("(.*)_base\\.(.*)");
+      QRegularExpressionMatch match = baseFileRegExp.match(fileName);
 
-      QString prefix = baseFileRegExp.cap(1);
-      QString suffix = baseFileRegExp.cap(2);
+      QString prefix = match.captured(1);
+      QString suffix = match.captured(2);
 
       QString contrib1FileName(prefix + "_contrib1." + suffix);
       QString contrib2FileName(prefix + "_contrib2." + suffix);
