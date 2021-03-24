@@ -66,6 +66,7 @@ class CvsIgnoreListTest : public QObject
         test.addEntriesFromString(testString);
 
         QVERIFY(test.matches(".", false));
+        QVERIFY(test.matches(".", true));
         QVERIFY(!test.matches("cores core", true));
         QVERIFY(test.matches("core", true));
         QVERIFY(!test.matches("Core", true));

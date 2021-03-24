@@ -133,12 +133,11 @@ void IgnoreList::addEntry(const QString& pattern)
 
 bool IgnoreList::matches(const QString& text, bool bCaseSensitive) const
 {
-    QRegExp regexp(text, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
-    if(m_exactPatterns.indexOf(regexp) >= 0)
+    //Do not use QStringList::indexof here it has no case flag
+    if(m_exactPatterns.contains(text, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive))
     {
         return true;
     }
-
 
     for(const QString& startPattern: m_startPatterns)
     {
