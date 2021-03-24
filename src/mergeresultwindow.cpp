@@ -37,7 +37,7 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QPointer>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QResizeEvent>
 #include <QStatusBar>
 #include <QTextCodec>
@@ -1230,7 +1230,7 @@ bool findParenthesesGroups(const QString& s, QStringList& sl)
     return startPosStack.empty(); // false if parentheses don't match
 }
 
-QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, const QStringList& parenthesesGroupList)
+QString calcHistorySortKey(const QString& keyOrder, QRegularExpressionMatch& regExprMatch, const QStringList& parenthesesGroupList)
 {
     const QStringList keyOrderList = keyOrder.split(',');
     QString key;
@@ -1243,7 +1243,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegExp& matchedRegExpr, con
         int groupIdx = keyIt.toInt(&bOk);
         if(!bOk || groupIdx < 0 || groupIdx > parenthesesGroupList.size())
             continue;
-        QString s = matchedRegExpr.cap(groupIdx);
+        QString s = regExprMatch.captured(groupIdx);
         if(groupIdx == 0)
         {
             key += s + ' ';
@@ -1295,17 +1295,19 @@ void MergeResultWindow::collectHistoryInformation(
 
         historyLead = Utils::calcHistoryLead(pld->getLine());
     }
-    QRegExp historyStart(m_pOptions->m_historyStartRegExp);
+    QRegularExpression historyStart(m_pOptions->m_historyStartRegExp);
     if(id3l == iHistoryEnd)
         return;
     ++id3l; // Skip line with "$Log ... $"
-    QRegExp newHistoryEntry(m_pOptions->m_historyEntryStartRegExp);
+    QRegularExpression newHistoryEntry(m_pOptions->m_historyEntryStartRegExp);
+    QRegularExpressionMatch match;
     QStringList parenthesesGroups;
     findParenthesesGroups(m_pOptions->m_historyEntryStartRegExp, parenthesesGroups);
     QString key;
     MergeEditLineList melList;
     bool bPrevLineIsEmpty = true;
     bool bUseRegExp = !m_pOptions->m_historyEntryStartRegExp.isEmpty();
+
     for(; id3l != iHistoryEnd; ++id3l)
     {
         const LineData* pld = id3l->getLineData(src);
@@ -1314,7 +1316,8 @@ void MergeResultWindow::collectHistoryInformation(
         const QString& oriLine = pld->getLine();
         if(historyLead.isEmpty()) historyLead = Utils::calcHistoryLead(oriLine);
         QString sLine = oriLine.mid(historyLead.length());
-        if((!bUseRegExp && !sLine.trimmed().isEmpty() && bPrevLineIsEmpty) || (bUseRegExp && newHistoryEntry.exactMatch(sLine)))
+        match = newHistoryEntry.match(sLine);
+        if((!bUseRegExp && !sLine.trimmed().isEmpty() && bPrevLineIsEmpty) || (bUseRegExp && match.hasMatch()))
         {
             if(!key.isEmpty() && !melList.empty())
             {
@@ -1333,12 +1336,12 @@ void MergeResultWindow::collectHistoryInformation(
             if(!bUseRegExp)
                 key = sLine;
             else
-                key = calcHistorySortKey(m_pOptions->m_historyEntryStartSortKeyOrder, newHistoryEntry, parenthesesGroups);
+                key = calcHistorySortKey(m_pOptions->m_historyEntryStartSortKeyOrder, match, parenthesesGroups);
 
             melList.clear();
             melList.push_back(MergeEditLine(id3l, src));
         }
-        else if(!historyStart.exactMatch(oriLine))
+        else if(!historyStart.match(oriLine).hasMatch())
         {
             melList.push_back(MergeEditLine(id3l, src));
         }
@@ -1418,7 +1421,7 @@ void MergeResultWindow::slotMergeHistory()
     int d3lHistoryEndLineIdx = -1;
 
     // Search for history start, history end in the diff3LineList
-    m_pDiff3LineList->findHistoryRange(QRegExp(m_pOptions->m_historyStartRegExp), m_pldC != nullptr, iD3LHistoryBegin, iD3LHistoryEnd, d3lHistoryBeginLineIdx, d3lHistoryEndLineIdx);
+    m_pDiff3LineList->findHistoryRange(QRegularExpression(m_pOptions->m_historyStartRegExp), m_pldC != nullptr, iD3LHistoryBegin, iD3LHistoryEnd, d3lHistoryBeginLineIdx, d3lHistoryEndLineIdx);
 
     if(iD3LHistoryBegin != m_pDiff3LineList->end())
     {
@@ -1544,16 +1547,16 @@ void MergeResultWindow::slotRegExpAutoMerge()
     if(m_pOptions->m_autoMergeRegExp.isEmpty())
         return;
 
-    QRegExp vcsKeywords(m_pOptions->m_autoMergeRegExp);
+    QRegularExpression vcsKeywords(m_pOptions->m_autoMergeRegExp);
     MergeLineList::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
         if(i->bConflict)
         {
             Diff3LineList::const_iterator id3l = i->id3l;
-            if(vcsKeywords.exactMatch(id3l->getString(e_SrcSelector::A)) &&
-               vcsKeywords.exactMatch(id3l->getString(e_SrcSelector::B)) &&
-               (m_pldC == nullptr || vcsKeywords.exactMatch(id3l->getString(e_SrcSelector::C))))
+            if(vcsKeywords.match(id3l->getString(e_SrcSelector::A)).hasMatch() &&
+               vcsKeywords.match(id3l->getString(e_SrcSelector::B)).hasMatch() &&
+               (m_pldC == nullptr || vcsKeywords.match(id3l->getString(e_SrcSelector::C)).hasMatch()))
             {
                 MergeEditLine& mel = *i->mergeEditLineList.begin();
                 mel.setSource(m_pldC == nullptr ? e_SrcSelector::B : e_SrcSelector::C, false);

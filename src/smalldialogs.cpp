@@ -516,8 +516,10 @@ QString RegExpTester::historySortKeyOrder()
 
 void RegExpTester::slotRecalc()
 {
-    QRegExp autoMergeRegExp(m_pAutoMergeRegExpEdit->text());
-    if(autoMergeRegExp.exactMatch(m_pAutoMergeExampleEdit->text()))
+    QRegularExpression autoMergeRegExp(m_pAutoMergeRegExpEdit->text());
+    QRegularExpressionMatch match = autoMergeRegExp.match(m_pAutoMergeExampleEdit->text());
+
+    if(match.hasMatch())
     {
         m_pAutoMergeMatchResult->setText(i18n("Match success."));
     }
@@ -526,8 +528,10 @@ void RegExpTester::slotRecalc()
         m_pAutoMergeMatchResult->setText(i18n("Match failed."));
     }
 
-    QRegExp historyStartRegExp(m_pHistoryStartRegExpEdit->text());
-    if(historyStartRegExp.exactMatch(m_pHistoryStartExampleEdit->text()))
+    QRegularExpression historyStartRegExp(m_pHistoryStartRegExpEdit->text());
+    match = historyStartRegExp.match(m_pHistoryStartExampleEdit->text());
+
+    if(match.hasMatch())
     {
         m_pHistoryStartMatchResult->setText(i18n("Match success."));
     }
@@ -544,13 +548,14 @@ void RegExpTester::slotRecalc()
         m_pHistorySortKeyResult->setText("");
         return;
     }
-    QRegExp historyEntryStartRegExp(m_pHistoryEntryStartRegExpEdit->text());
+    QRegularExpression historyEntryStartRegExp(m_pHistoryEntryStartRegExpEdit->text());
     QString s = m_pHistoryEntryStartExampleEdit->text();
+    match = historyEntryStartRegExp.match(s);
 
-    if(historyEntryStartRegExp.exactMatch(s))
+    if(match.hasMatch())
     {
         m_pHistoryEntryStartMatchResult->setText(i18n("Match success."));
-        QString key = calcHistorySortKey(m_pHistorySortKeyOrderEdit->text(), historyEntryStartRegExp, parenthesesGroups);
+        QString key = calcHistorySortKey(m_pHistorySortKeyOrderEdit->text(), match, parenthesesGroups);
         m_pHistorySortKeyResult->setText(key);
     }
     else

@@ -28,7 +28,6 @@
 
 #include <QDir>
 #include <QFile>
-#include <QRegExp>
 #include <QTemporaryFile>
 #include <QtMath>
 

@@ -12,7 +12,9 @@
 #include "CvsIgnoreList.h"
 #include "TypeUtils.h"
 
+#include <QDebug>
 #include <QDir>
+#include <QRegularExpression>
 #include <QTextStream>
 
 CvsIgnoreList::CvsIgnoreList() = default;
@@ -139,7 +141,7 @@ bool CvsIgnoreList::matches(const QString& dir, const QString& text, bool bCaseS
     {
         return false;
     }
-    QRegExp regexp(text, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
+    QRegularExpression regexp(QRegularExpression::wildcardToRegularExpression(text),  bCaseSensitive ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
     if(ignorePatternsIt->second.m_exactPatterns.indexOf(regexp) >= 0)
     {
         return true;
@@ -164,8 +166,8 @@ bool CvsIgnoreList::matches(const QString& dir, const QString& text, bool bCaseS
 
     for(const QString& globStr : ignorePatternsIt->second.m_generalPatterns)
     {
-        QRegExp pattern(globStr, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::Wildcard);
-        if(pattern.exactMatch(text))
+        QRegularExpression pattern(QRegularExpression::wildcardToRegularExpression(globStr), bCaseSensitive ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
+        if(pattern.match(text).hasMatch())
             return true;
     }
 

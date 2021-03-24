@@ -36,7 +36,6 @@
 #include <QMenu>
 #include <QPainter>
 #include <QPushButton>
-#include <QRegExp>
 #include <QSplitter>
 #include <QStyledItemDelegate>
 #include <QTextEdit>

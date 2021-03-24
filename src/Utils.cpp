@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -14,7 +14,6 @@
 #include <QString>
 #include <QStringList>
 #include <QHash>
-#include <QRegExp>
 #include <QRegularExpression>
 
 /* Split the command line into arguments.
@@ -95,20 +94,20 @@ QString Utils::getArguments(QString cmd, QString& program, QStringList& args)
 
 bool Utils::wildcardMultiMatch(const QString& wildcard, const QString& testString, bool bCaseSensitive)
 {
-    static QHash<QString, QRegExp> s_patternMap;
+    static QHash<QString, QRegularExpression> s_patternMap;
 
     const QStringList regExpList = wildcard.split(QChar(';'));
 
     for(const QString& regExp : regExpList)
     {
-        QHash<QString, QRegExp>::iterator patIt = s_patternMap.find(regExp);
+        QHash<QString, QRegularExpression>::iterator patIt = s_patternMap.find(regExp);
         if(patIt == s_patternMap.end())
         {
-            QRegExp pattern(regExp, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::Wildcard);
+            QRegularExpression pattern(QRegularExpression::wildcardToRegularExpression(regExp), bCaseSensitive ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
             patIt = s_patternMap.insert(regExp, pattern);
         }
 
-        if(patIt.value().exactMatch(testString))
+        if(patIt.value().match(testString).hasMatch())
             return true;
     }
 
@@ -156,11 +155,11 @@ QString Utils::calcHistoryLead(const QString& s)
     int i = s.indexOf(QRegularExpression("\\S"));
     if(i == -1)
         return QString("");
-    
+
     i = s.indexOf(QRegularExpression("\\s"), i);
     if(Q_UNLIKELY(i == -1))
         return s;// Very unlikely
-    
+
     return s.left(i);
 }
 

@@ -23,6 +23,7 @@
 #endif
 
 #include <QtGlobal>
+#include <QRegularExpression>
 #include <QSharedPointer>
 
 constexpr bool g_bIgnoreWhiteSpace = true;
@@ -1568,16 +1569,16 @@ void Diff3LineList::debugLineCheck(const LineCount size, const e_SrcSelector src
     }
 }
 
-void Diff3LineList::findHistoryRange(const QRegExp& historyStart, bool bThreeFiles,
+void Diff3LineList::findHistoryRange(const QRegularExpression& historyStart, bool bThreeFiles,
                              Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd) const
 {
     QString historyLead;
     // Search for start of history
     for(iBegin = begin(), idxBegin = 0; iBegin != end(); ++iBegin, ++idxBegin)
     {
-        if(historyStart.exactMatch(iBegin->getString(e_SrcSelector::A)) &&
-           historyStart.exactMatch(iBegin->getString(e_SrcSelector::B)) &&
-           (!bThreeFiles || historyStart.exactMatch(iBegin->getString(e_SrcSelector::C))))
+        if(historyStart.match(iBegin->getString(e_SrcSelector::A)).hasMatch() &&
+           historyStart.match(iBegin->getString(e_SrcSelector::B)).hasMatch() &&
+           (!bThreeFiles || historyStart.match(iBegin->getString(e_SrcSelector::C)).hasMatch()))
         {
             historyLead = Utils::calcHistoryLead(iBegin->getString(e_SrcSelector::A));
             break;
