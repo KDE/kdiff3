@@ -65,6 +65,7 @@ class CvsIgnoreListTest : public QObject
         test.addEntriesFromString(testDir, testString);
 
         QVERIFY(test.matches(testDir, ".", false));
+        QVERIFY(test.matches(testDir, ".", true));
         QVERIFY(!test.matches(testDir, "cores core", true));
         QVERIFY(test.matches(testDir, "core", true));
         QVERIFY(!test.matches(testDir, "Core", true));

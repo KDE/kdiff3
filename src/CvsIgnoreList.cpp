@@ -141,12 +141,11 @@ bool CvsIgnoreList::matches(const QString& dir, const QString& text, bool bCaseS
     {
         return false;
     }
-    QRegularExpression regexp(QRegularExpression::wildcardToRegularExpression(text),  bCaseSensitive ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
-    if(ignorePatternsIt->second.m_exactPatterns.indexOf(regexp) >= 0)
+    //Do not use QStringList::indexof here it has no case flag
+    if(ignorePatternsIt->second.m_exactPatterns.contains(text, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive))
     {
         return true;
     }
-
 
     for(const QString& startPattern: ignorePatternsIt->second.m_startPatterns)
     {
