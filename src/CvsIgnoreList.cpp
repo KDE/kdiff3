@@ -27,7 +27,7 @@ void CvsIgnoreList::enterDir(const QString& dir, const DirectoryList& directoryL
                                    ".nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj "
                                    "*.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$");
     addEntriesFromString(dir, ignorestr);
-    addEntriesFromFile(dir, QDir::homePath() + '/'+ getGlobalIgnoreName());
+    addEntriesFromFile(dir, QDir::homePath() + '/' + getGlobalIgnoreName());
     const char* varname = getVarName();
     if(qEnvironmentVariableIsSet(varname) && !qEnvironmentVariableIsEmpty(varname))
     {
@@ -53,7 +53,7 @@ void CvsIgnoreList::enterDir(const QString& dir, const DirectoryList& directoryL
 void CvsIgnoreList::addEntriesFromString(const QString& dir, const QString& str)
 {
     const QStringList patternList = str.split(' ');
-    for(const QString& pattern : patternList)
+    for(const QString& pattern: patternList)
     {
         addEntry(dir, pattern);
     }
@@ -64,10 +64,10 @@ void CvsIgnoreList::addEntriesFromString(const QString& dir, const QString& str)
 */
 void CvsIgnoreList::addEntriesFromFile(const QString& dir, const QString& name)
 {
-    #ifdef AUTOTEST
+#ifdef AUTOTEST
     Q_UNUSED(name);
     Q_UNUSED(dir);
-    #else
+#else
     QFile file(name);
 
     if(file.open(QIODevice::ReadOnly))
@@ -78,7 +78,7 @@ void CvsIgnoreList::addEntriesFromFile(const QString& dir, const QString& name)
             addEntry(dir, stream.readLine());
         }
     }
-    #endif
+#endif
 }
 
 void CvsIgnoreList::addEntry(const QString& dir, const QString& pattern)
@@ -137,7 +137,7 @@ void CvsIgnoreList::addEntry(const QString& dir, const QString& pattern)
 bool CvsIgnoreList::matches(const QString& dir, const QString& text, bool bCaseSensitive) const
 {
     const auto ignorePatternsIt = m_ignorePatterns.find(dir);
-    if (ignorePatternsIt == m_ignorePatterns.end())
+    if(ignorePatternsIt == m_ignorePatterns.end())
     {
         return false;
     }
@@ -163,7 +163,7 @@ bool CvsIgnoreList::matches(const QString& dir, const QString& text, bool bCaseS
         }
     }
 
-    for(const QString& globStr : ignorePatternsIt->second.m_generalPatterns)
+    for(const QString& globStr: ignorePatternsIt->second.m_generalPatterns)
     {
         QRegularExpression pattern(QRegularExpression::wildcardToRegularExpression(globStr), bCaseSensitive ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
         if(pattern.match(text).hasMatch())
@@ -175,7 +175,7 @@ bool CvsIgnoreList::matches(const QString& dir, const QString& text, bool bCaseS
 
 bool CvsIgnoreList::ignoreExists(const DirectoryList& pDirList)
 {
-    for(const FileAccess& dir : pDirList)
+    for(const FileAccess& dir: pDirList)
     {
         if(dir.fileName() == getIgnoreName())
             return true;

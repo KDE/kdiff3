@@ -302,9 +302,9 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
                         }
 
                         /* If i3_last_equal_A isn't still set to d3ll.end(), then
-                   * we've found a line in A that is equal to one in B
-                   * somewhere between i3c and i3b
-                   */
+                        * we've found a line in A that is equal to one in B
+                        * somewhere between i3c and i3b
+                        */
                         bool before_or_on_equal_line_in_A = (i3_last_equal_A != end());
 
                         // Move the disturbing lines up, out of sight.
