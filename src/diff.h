@@ -199,6 +199,16 @@ class DiffBufferInfo
     }
 };
 
+enum class IgnoreFlag
+{
+    none = 0,
+    ignoreWhiteSpace,
+    ignoreComments
+};
+
+Q_DECLARE_FLAGS(IgnoreFlags, IgnoreFlag);
+Q_DECLARE_OPERATORS_FOR_FLAGS(IgnoreFlags);
+
 class Diff3Line
 {
   private:
@@ -291,7 +301,7 @@ class Diff3Line
     Q_REQUIRED_RESULT inline qint32 linesNeededForDisplay() const { return mLinesNeededForDisplay; }
 
     void setLinesNeeded(const qint32 lines) { mLinesNeededForDisplay = lines; }
-    Q_REQUIRED_RESULT bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2);
+    Q_REQUIRED_RESULT bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2, const IgnoreFlags eIgnoreFlags);
     void mergeOneLine(e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, e_SrcSelector& src, bool bTwoInputs) const;
 
     void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
@@ -322,7 +332,7 @@ class Diff3LineList: public std::list<Diff3Line>
   public:
     void findHistoryRange(const QRegularExpression& historyStart, bool bThreeFiles,
                           Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd) const;
-    bool fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2);
+    bool fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2, const IgnoreFlags eIgnoreFlags);
     void calcDiff3LineVector(Diff3LineVector& d3lv);
     void calcWhiteDiff3Lines(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, const bool bIgnoreComments);
 
