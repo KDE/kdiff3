@@ -1323,8 +1323,8 @@ void MergeResultWindow::collectHistoryInformation(
                 std::pair<HistoryMap::iterator, bool> p = historyMap.insert(HistoryMap::value_type(key, HistoryMapEntry()));
                 HistoryMapEntry& hme = p.first->second;
                 if(src == e_SrcSelector::A) hme.mellA = melList;
-                if(src == e_SrcSelector::B) hme.mellB = melList;
-                if(src == e_SrcSelector::C) hme.mellC = melList;
+                else if(src == e_SrcSelector::B) hme.mellB = melList;
+                else hme.mellC = melList;
                 if(p.second) // Not in list yet?
                 {
                     hitList.insert(itHitListFront, p.first);
