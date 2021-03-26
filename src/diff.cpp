@@ -1361,12 +1361,13 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
     }
 }
 
-bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2)
+bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2, const IgnoreFlags eIgnoreFlags)
 {
     LineRef k1 = 0;
     LineRef k2 = 0;
     int maxSearchLength = 500;
-    bool bTextsTotalEqual = inBTextsTotalEqual;
+    bool bTextsTotalEqual = inBTextsTotalEqual, bIgnoreComments = eIgnoreFlags | IgnoreFlag::ignoreComments;
+    bool bIgnoreWhiteSpace = eIgnoreFlags | IgnoreFlag::ignoreWhiteSpace;
 
     Q_ASSERT(selector == e_SrcSelector::A || selector == e_SrcSelector::B || selector == e_SrcSelector::C);
 
@@ -1420,8 +1421,10 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
 
             setFineDiff(selector, pDiffList);
         }
-
-        if(((*v1)[k1].isSkipable() || (*v1)[k1].whiteLine()) && ((*v2)[k2].isSkipable() || (*v2)[k2].whiteLine()))
+        /*
+            Override default euality for white lines and comments.
+        */
+        if(((bIgnoreComments && (*v1)[k1].isSkipable()) || (bIgnoreWhiteSpace && (*v1)[k1].whiteLine())) && ((bIgnoreComments && (*v2)[k2].isSkipable()) || (bIgnoreWhiteSpace && (*v2)[k2].whiteLine())))
         {
             if(selector == e_SrcSelector::A)
             {
@@ -1482,7 +1485,7 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, Lin
     }
 }
 
-bool Diff3LineList::fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2)
+bool Diff3LineList::fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2, const IgnoreFlags eIgnoreFlags)
 {
     // Finetuning: Diff each line with deltas
     ProgressProxy pp;
@@ -1493,7 +1496,7 @@ bool Diff3LineList::fineDiff(const e_SrcSelector selector, const QVector<LineDat
     int listIdx = 0;
     for(i = begin(); i != end(); ++i)
     {
-        bTextsTotalEqual = i->fineDiff(bTextsTotalEqual, selector, v1, v2);
+        bTextsTotalEqual = i->fineDiff(bTextsTotalEqual, selector, v1, v2, eIgnoreFlags);
         ++listIdx;
         pp.step();
     }
