@@ -270,23 +270,20 @@ class Diff3Line
         return lineA == d3l.lineA && lineB == d3l.lineB && lineC == d3l.lineC && bAEqB == d3l.bAEqB && bAEqC == d3l.bAEqC && bBEqC == d3l.bBEqC;
     }
 
-    Q_REQUIRED_RESULT const LineData* getLineData(e_SrcSelector src) const
+    Q_REQUIRED_RESULT const LineData& getLineData(e_SrcSelector src) const
     {
         Q_ASSERT(m_pDiffBufferInfo != nullptr);
+        Q_ASSERT(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
         //Use at() here not [] to avoid using really weird syntax
-        if(src == e_SrcSelector::A && lineA.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineA);
-        if(src == e_SrcSelector::B && lineB.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineB);
-        if(src == e_SrcSelector::C && lineC.isValid()) return &m_pDiffBufferInfo->getLineData(src)->at(lineC);
-
-        return nullptr;
+        if(src == e_SrcSelector::A && lineA.isValid()) return m_pDiffBufferInfo->getLineData(src)->at(lineA);
+        if(src == e_SrcSelector::B && lineB.isValid()) return m_pDiffBufferInfo->getLineData(src)->at(lineB);
+        return m_pDiffBufferInfo->getLineData(src)->at(lineC);
     }
     Q_REQUIRED_RESULT const QString getString(const e_SrcSelector src) const
     {
-        const LineData* pld = getLineData(src);
-        if(pld)
-            return pld->getLine();
-        else
-            return QString();
+        const LineData& pld = getLineData(src);
+
+        return pld.getLine();
     }
     Q_REQUIRED_RESULT LineRef getLineInFile(e_SrcSelector src) const
     {

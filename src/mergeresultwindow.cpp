@@ -1291,9 +1291,9 @@ void MergeResultWindow::collectHistoryInformation(
     Diff3LineList::const_iterator id3l = iHistoryBegin;
     QString historyLead;
     {
-        const LineData* pld = id3l->getLineData(src);
+        const LineData& pld = id3l->getLineData(src);
 
-        historyLead = Utils::calcHistoryLead(pld->getLine());
+        historyLead = Utils::calcHistoryLead(pld.getLine());
     }
     QRegularExpression historyStart(m_pOptions->m_historyStartRegExp);
     if(id3l == iHistoryEnd)
@@ -1310,10 +1310,8 @@ void MergeResultWindow::collectHistoryInformation(
 
     for(; id3l != iHistoryEnd; ++id3l)
     {
-        const LineData* pld = id3l->getLineData(src);
-        if(!pld) continue;
-
-        const QString& oriLine = pld->getLine();
+        const LineData& pld = id3l->getLineData(src);
+        const QString& oriLine = pld.getLine();
         if(historyLead.isEmpty()) historyLead = Utils::calcHistoryLead(oriLine);
         QString sLine = oriLine.mid(historyLead.length());
         match = newHistoryEntry.match(sLine);
