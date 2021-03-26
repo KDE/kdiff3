@@ -1254,7 +1254,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
             //Bail this should never happen. Not a nice exit but acts as a back stop against harder to detect infine looping.
             if(i1 == TYPE_MAX(int))
             {
-                Q_ASSERT(true);
+                Q_ASSERT(false);
                 abort();
                 return;
             }
