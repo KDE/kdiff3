@@ -113,6 +113,7 @@ class Diff
 class DiffList: public std::list<Diff>
 {
   public:
+    using std::list<Diff>::list;
     void runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2, const QSharedPointer<Options>& pOptions);
 };
 
