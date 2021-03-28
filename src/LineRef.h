@@ -22,6 +22,7 @@ class LineRef
     static constexpr LineType invalid = -1;
     constexpr inline LineRef() noexcept = default;
     constexpr inline LineRef(const LineType i) noexcept { mLineNumber = i; }
+
     inline LineRef(const qint64 i) noexcept
     {
         if(i <= TYPE_MAX(LineType))
@@ -29,12 +30,15 @@ class LineRef
         else
             mLineNumber = invalid;
     }
+
     inline operator LineType() const noexcept { return mLineNumber; }
+
     inline LineRef& operator=(const LineType lineIn) noexcept
     {
         mLineNumber = lineIn;
         return *this;
     }
+
     inline LineRef& operator+=(const LineType& inLine)
     {
         mLineNumber += inLine;
