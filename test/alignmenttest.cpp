@@ -122,7 +122,7 @@ void determineFileAlignment(SourceData &m_sd1, SourceData &m_sd2, SourceData &m_
       m_manualDiffHelpList.runDiff( m_sd1.getLineDataForDiff(), m_sd1.getSizeLines(), m_sd2.getLineDataForDiff(), m_sd2.getSizeLines(), m_diffList12,e_SrcSelector::A,e_SrcSelector::B,
                m_pOptions);
       m_diff3LineList.calcDiff3LineListUsingAB( &m_diffList12);
-      m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
+      m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay(), IgnoreFlag::none);
    }
    else
    {
@@ -156,9 +156,9 @@ void determineFileAlignment(SourceData &m_sd1, SourceData &m_sd2, SourceData &m_
          if (verbose) printDiff3List("after 2nd calcDiff3LineListTrim", m_diff3LineList, m_sd1, m_sd2, m_sd3);
       }
 
-      m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay() );
-      m_diff3LineList.fineDiff(e_SrcSelector::B, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay() );
-      m_diff3LineList.fineDiff(e_SrcSelector::C, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay() );
+      m_diff3LineList.fineDiff(e_SrcSelector::A, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay(), IgnoreFlag::none );
+      m_diff3LineList.fineDiff(e_SrcSelector::B, m_sd2.getLineDataForDisplay(), m_sd3.getLineDataForDisplay(), IgnoreFlag::none );
+      m_diff3LineList.fineDiff(e_SrcSelector::C, m_sd3.getLineDataForDisplay(), m_sd1.getLineDataForDisplay(), IgnoreFlag::none );
    }
    m_diff3LineList.calcWhiteDiff3Lines( m_sd1.getLineDataForDiff(), m_sd2.getLineDataForDiff(), m_sd3.getLineDataForDiff(), false);
 }
