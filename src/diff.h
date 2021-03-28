@@ -329,6 +329,7 @@ class Diff3LineList: public std::list<Diff3Line>
 {
   public:
     using std::list<Diff3Line>::list;
+
     void findHistoryRange(const QRegularExpression& historyStart, bool bThreeFiles,
                           Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd) const;
     bool fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2, const IgnoreFlags eIgnoreFlags);

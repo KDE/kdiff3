@@ -485,11 +485,8 @@ bool ManualDiffHelpList::isValidMove(LineRef line1, LineRef line2, e_SrcSelector
 {
     if(line1 >= 0 && line2 >= 0)
     {
-        ManualDiffHelpList::const_iterator i;
-        for(i = begin(); i != end(); ++i)
+        for(const ManualDiffHelpEntry& mdhe: *this)
         {
-            const ManualDiffHelpEntry& mdhe = *i;
-
             if(!mdhe.isValidMove(line1, line2, winIdx1, winIdx2)) return false;
         }
     }
@@ -673,12 +670,12 @@ void DiffList::runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef
     {
         LineRef l1 = 0;
         LineRef l2 = 0;
-        DiffList::iterator i;
-        for(i = begin(); i != end(); ++i)
+
+        for(const Diff& curDiff: *this)
         {
-            Q_ASSERT(i->diff1() <= TYPE_MAX(LineRef::LineType) && i->diff2() <= TYPE_MAX(LineRef::LineType));
-            l1 += i->numberOfEquals() + LineRef(i->diff1());
-            l2 += i->numberOfEquals() + LineRef(i->diff2());
+            Q_ASSERT(curDiff.diff1() <= TYPE_MAX(LineRef::LineType) && curDiff.diff2() <= TYPE_MAX(LineRef::LineType));
+            l1 += curDiff.numberOfEquals() + LineRef(curDiff.diff1());
+            l2 += curDiff.numberOfEquals() + LineRef(curDiff.diff2());
         }
 
         Q_ASSERT(l1 == size1 && l2 == size2);
@@ -1188,13 +1185,11 @@ void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
 void Diff3LineList::calcWhiteDiff3Lines(
     const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, const bool bIgnoreComments)
 {
-    Diff3LineList::iterator i3;
-
-    for(i3 = begin(); i3 != end(); ++i3)
+    for(Diff3Line& diff3Line: *this)
     {
-        i3->bWhiteLineA = (!i3->getLineA().isValid() || pldA == nullptr || (*pldA)[i3->getLineA()].whiteLine() || (bIgnoreComments && (*pldA)[i3->getLineA()].isPureComment()));
-        i3->bWhiteLineB = (!i3->getLineB().isValid() || pldB == nullptr || (*pldB)[i3->getLineB()].whiteLine() || (bIgnoreComments && (*pldB)[i3->getLineB()].isPureComment()));
-        i3->bWhiteLineC = (!i3->getLineC().isValid() || pldC == nullptr || (*pldC)[i3->getLineC()].whiteLine() || (bIgnoreComments && (*pldC)[i3->getLineC()].isPureComment()));
+        diff3Line.bWhiteLineA = (!diff3Line.getLineA().isValid() || pldA == nullptr || (*pldA)[diff3Line.getLineA()].whiteLine() || (bIgnoreComments && (*pldA)[diff3Line.getLineA()].isPureComment()));
+        diff3Line.bWhiteLineB = (!diff3Line.getLineB().isValid() || pldB == nullptr || (*pldB)[diff3Line.getLineB()].whiteLine() || (bIgnoreComments && (*pldB)[diff3Line.getLineB()].isPureComment()));
+        diff3Line.bWhiteLineC = (!diff3Line.getLineC().isValid() || pldC == nullptr || (*pldC)[diff3Line.getLineC()].whiteLine() || (bIgnoreComments && (*pldC)[diff3Line.getLineC()].isPureComment()));
     }
 }
 
@@ -1497,14 +1492,14 @@ bool Diff3LineList::fineDiff(const e_SrcSelector selector, const QVector<LineDat
 {
     // Finetuning: Diff each line with deltas
     ProgressProxy pp;
-    Diff3LineList::iterator i;
     bool bTextsTotalEqual = true;
     int listSize = size();
     pp.setMaxNofSteps(listSize);
     int listIdx = 0;
-    for(i = begin(); i != end(); ++i)
+
+    for(Diff3Line &diff: *this)
     {
-        bTextsTotalEqual = i->fineDiff(bTextsTotalEqual, selector, v1, v2, eIgnoreFlags);
+        bTextsTotalEqual = diff.fineDiff(bTextsTotalEqual, selector, v1, v2, eIgnoreFlags);
         ++listIdx;
         pp.step();
     }
