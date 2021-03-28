@@ -165,7 +165,7 @@ bool CvsIgnoreList::matches(const QString& dir, const QString& text, bool bCaseS
 
     for(const QString& globStr: ignorePatternsIt->second.m_generalPatterns)
     {
-        QRegularExpression pattern(QRegularExpression::wildcardToRegularExpression(globStr), bCaseSensitive ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
+        QRegularExpression pattern(QRegularExpression::wildcardToRegularExpression(globStr), bCaseSensitive ? QRegularExpression::UseUnicodePropertiesOption : QRegularExpression::UseUnicodePropertiesOption | QRegularExpression::CaseInsensitiveOption);
         if(pattern.match(text).hasMatch())
             return true;
     }

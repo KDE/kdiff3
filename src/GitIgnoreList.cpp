@@ -49,7 +49,11 @@ bool GitIgnoreList::matches(const QString& dir, const QString& text, bool bCaseS
         {
             if(!bCaseSensitive)
             {
-                pattern.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+                pattern.setPatternOptions(QRegularExpression::CaseInsensitiveOption | QRegularExpression::UseUnicodePropertiesOption);
+            }
+            else
+            {
+                pattern.setPatternOptions(QRegularExpression::UseUnicodePropertiesOption);
             }
             const QRegularExpressionMatch match = pattern.match(text);
             if(match.hasMatch())
