@@ -5,6 +5,7 @@
 */
 #include "diff.h"
 #include "gnudiff_diff.h"
+#include "LineRef.h"
 #include "options.h"
 #include "progress.h"
 #include "SourceData.h"
@@ -215,11 +216,11 @@ void writeActualAlignmentFile(QString actualResultFileName, const Diff3LineList 
    }
 }
 
-bool dataIsConsistent(int line1, QString &line1Text, int line2, QString &line2Text, bool equal)
+bool dataIsConsistent(LineRef line1, QString &line1Text, LineRef line2, QString &line2Text, bool equal)
 {
    bool consistent = false;
 
-   if(line1 == -1 || line2 == -1)
+   if(!line1.isValid() || line2.isValid())
    {
       consistent = !equal;
    }

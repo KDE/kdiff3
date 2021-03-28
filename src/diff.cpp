@@ -483,7 +483,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
 // Test if the move would pass a barrier. Return true if not.
 bool ManualDiffHelpList::isValidMove(LineRef line1, LineRef line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const
 {
-    if(line1 >= 0 && line2 >= 0)
+    if(line1.isValid() && line2.isValid())
     {
         for(const ManualDiffHelpEntry& mdhe: *this)
         {
