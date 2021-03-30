@@ -10,7 +10,7 @@ project(kdiff3)
 
 set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(ECM_MIN_VERSION "5.10.0")
+set(ECM_MIN_VERSION "5.50.0")
 set(QT_MIN_VERSION "5.12.0")
 #KF5 5.27 fixes a crash bug triggered on exit.
 set(KF5_MIN_VERSION "5.50.0")
