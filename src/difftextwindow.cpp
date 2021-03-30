@@ -269,9 +269,7 @@ void DiffTextWindow::setupConnections(const KDiff3App* app)
 
     chk_connect(this, &DiffTextWindow::firstLineChanged, dynamic_cast<DiffTextWindowFrame*>(parent()), &DiffTextWindowFrame::setFirstLine);
     chk_connect(this, &DiffTextWindow::newSelection, app, &KDiff3App::slotSelectionStart);
-    chk_connect(this, &DiffTextWindow::newSelection, this, &DiffTextWindow::resetSelection);
     chk_connect(this, &DiffTextWindow::selectionEnd, app, &KDiff3App::slotSelectionEnd);
-
     chk_connect(this, &DiffTextWindow::scrollDiffTextWindow, app, &KDiff3App::scrollDiffTextWindow);
     chk_connect_q(this, &DiffTextWindow::finishRecalcWordWrap, app, &KDiff3App::slotFinishRecalcWordWrap);
 

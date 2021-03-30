@@ -1311,6 +1311,12 @@ void KDiff3App::slotRefresh()
 
 void KDiff3App::slotSelectionStart()
 {
+    const QObject* s = sender();
+
+    if(m_pDiffTextWindow1 && s != m_pDiffTextWindow1) m_pDiffTextWindow1->resetSelection();
+    if(m_pDiffTextWindow2 && s != m_pDiffTextWindow2) m_pDiffTextWindow2->resetSelection();
+    if(m_pDiffTextWindow3 && s != m_pDiffTextWindow3) m_pDiffTextWindow3->resetSelection();
+    if(m_pMergeResultWindow && s != m_pMergeResultWindow) m_pMergeResultWindow->resetSelection();
 }
 
 void KDiff3App::slotSelectionEnd()
