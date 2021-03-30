@@ -670,16 +670,15 @@ void DiffTextWindow::mouseReleaseEvent(QMouseEvent* e)
 {
     d->m_bSelectionInProgress = false;
     d->m_lastKnownMousePos = e->pos();
-    //if ( e->button() == LeftButton )
+
+    if(d->m_delayedDrawTimer)
+        killTimer(d->m_delayedDrawTimer);
+    d->m_delayedDrawTimer = 0;
+    if(d->m_selection.isValidFirstLine())
     {
-        if(d->m_delayedDrawTimer)
-            killTimer(d->m_delayedDrawTimer);
-        d->m_delayedDrawTimer = 0;
-        if(d->m_selection.isValidFirstLine())
-        {
-            Q_EMIT selectionEnd();
-        }
+        Q_EMIT selectionEnd();
     }
+
     d->m_scrollDeltaX = 0;
     d->m_scrollDeltaY = 0;
 }
