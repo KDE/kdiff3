@@ -1298,13 +1298,12 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
             --pu2;
         }
 
-        Diff d = diffList.back();
         if(nofUnmatched > 0)
         {
             // We want to go backwards the nofUnmatched elements and redo
             // the matching
-            d = diffList.back();
-            Diff origBack = d;
+            Diff d = diffList.back();
+            const Diff origBack = d;
             diffList.pop_back();
 
             while(nofUnmatched > 0)
