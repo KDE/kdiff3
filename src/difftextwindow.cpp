@@ -598,11 +598,14 @@ void DiffTextWindow::focusInEvent(QFocusEvent* e)
 
 void DiffTextWindow::mousePressEvent(QMouseEvent* e)
 {
+    qCInfo(kdiffDiffTextWindow) << "mousePressEvent triggered";
     if(e->button() == Qt::LeftButton)
     {
         LineRef line;
         int pos;
         convertToLinePos(e->x(), e->y(), line, pos);
+        qCInfo(kdiffDiffTextWindow) << "Left Button detected,";
+        qCDebug(kdiffDiffTextWindow) << "line = " << line << ", pos = " << pos;
 
         int fontWidth = Utils::getHorizontalAdvance(fontMetrics(), '0');
         int xOffset = d->leftInfoWidth() * fontWidth;
@@ -627,6 +630,10 @@ void DiffTextWindow::mousePressEvent(QMouseEvent* e)
 
 void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
 {
+    qCInfo(kdiffDiffTextWindow) << "Mouse Double Clicked";
+    qCDebug(kdiffDiffTextWindow) << "d->m_lastKnownMousePos = " << d->m_lastKnownMousePos << ", e->pos() = " << e->pos();
+    qCDebug(kdiffDiffTextWindow) << "d->m_bSelectionInProgress = " << d->m_bSelectionInProgress;
+
     d->m_bSelectionInProgress = false;
     d->m_lastKnownMousePos = e->pos();
     if(e->button() == Qt::LeftButton)
@@ -634,6 +641,8 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
         LineRef line;
         int pos;
         convertToLinePos(e->x(), e->y(), line, pos);
+        qCInfo(kdiffDiffTextWindow) << "Left Button detected,";
+        qCDebug(kdiffDiffTextWindow) << "line = " << line << ", pos = " << pos;
 
         // Get the string data of the current line
         QString s;
@@ -668,14 +677,20 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
 
 void DiffTextWindow::mouseReleaseEvent(QMouseEvent* e)
 {
+    qCInfo(kdiffDiffTextWindow) << "Mouse Released";
+    qCDebug(kdiffDiffTextWindow) << "d->m_lastKnownMousePos = " << d->m_lastKnownMousePos << ", e->pos() = " << e->pos();
+    qCDebug(kdiffDiffTextWindow) << "d->m_bSelectionInProgress = " << d->m_bSelectionInProgress;
+
     d->m_bSelectionInProgress = false;
     d->m_lastKnownMousePos = e->pos();
+
 
     if(d->m_delayedDrawTimer)
         killTimer(d->m_delayedDrawTimer);
     d->m_delayedDrawTimer = 0;
     if(d->m_selection.isValidFirstLine())
     {
+        qCInfo(kdiffDiffTextWindow) << "Ending selection.";
         Q_EMIT selectionEnd();
     }
 
@@ -687,11 +702,18 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent* e)
 {//Handles selection highlighting.
     LineRef line;
     int pos;
+
+    qCInfo(kdiffDiffTextWindow) << "Mouse Moved";
+    qCDebug(kdiffDiffTextWindow) << "d->m_lastKnownMousePos = " << d->m_lastKnownMousePos << ", e->pos() = " << e->pos();
+
     convertToLinePos(e->x(), e->y(), line, pos);
     d->m_lastKnownMousePos = e->pos();
 
+    qCDebug(kdiffDiffTextWindow) << "line = " << line << ", pos = " << pos;
+
     if(d->m_selection.isValidFirstLine())
     {
+        qCDebug(kdiffDiffTextWindow) << "d->m_selection.isValidFirstLine() = " << d->m_selection.isValidFirstLine();
         d->m_selection.end(line, pos);
 
         showStatusLine(line);
@@ -798,6 +820,7 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
 
 void DiffTextWindow::resetSelection()
 {
+    qCInfo(kdiffDiffTextWindow) << "Resetting Selection";
     d->m_selection.reset();
     update();
 }

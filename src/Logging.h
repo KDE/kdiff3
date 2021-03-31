@@ -9,10 +9,11 @@
 #define LOGGING_H
 #include <QLoggingCategory>
 
-Q_DECLARE_LOGGING_CATEGORY(kdiffMain)
+Q_DECLARE_LOGGING_CATEGORY(kdiffMain);
 
+Q_DECLARE_LOGGING_CATEGORY(kdiffDiffTextWindow);
 Q_DECLARE_LOGGING_CATEGORY(kdiffFileAccess);
-Q_DECLARE_LOGGING_CATEGORY(kdiffCore) //very noisey shows internal state information for kdiffs core.
-Q_DECLARE_LOGGING_CATEGORY(kdiffGitIgnoreList)
+Q_DECLARE_LOGGING_CATEGORY(kdiffCore); //very noisey shows internal state information for kdiffs core.
+Q_DECLARE_LOGGING_CATEGORY(kdiffGitIgnoreList);
 
 #endif // !LOGGING_H
