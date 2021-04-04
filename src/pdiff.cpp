@@ -323,6 +323,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     if(m_pDirectoryMergeSplitter->isVisible())
         oldHeights = m_pMainSplitter->sizes();
 
+    //initView does first time setup for ui. Why is called it here?
     initView();
     m_pMergeResultWindow->connectActions();
 

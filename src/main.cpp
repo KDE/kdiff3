@@ -33,7 +33,7 @@
 
 void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 {
-    QString configFileName = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "kdiff3rc");
+    const QString configFileName = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "kdiff3rc");
     QFile configFile(configFileName);
     QString ignorableOptionsLine = "-u;-query;-html;-abort";
     if(configFile.open(QIODevice::ReadOnly))
@@ -41,10 +41,10 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
         QTextStream ts(&configFile);
         while(!ts.atEnd())
         {
-            QString line = ts.readLine();
+            const QString line = ts.readLine();
             if(line.startsWith(u8"IgnorableCmdLineOptions="))
             {
-                int pos = line.indexOf('=');
+                const int pos = line.indexOf('=');
                 if(pos >= 0)
                 {
                     ignorableOptionsLine = line.mid(pos + 1);
@@ -54,7 +54,7 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
         }
     }
     //support our own old preferences this is obsolete
-    QStringList sl = ignorableOptionsLine.split(',');
+    const QStringList sl = ignorableOptionsLine.split(',');
 
     if(!sl.isEmpty())
     {
@@ -155,7 +155,7 @@ int main(int argc, char* argv[])
         */
         if(!cmdLineParser->parse(QCoreApplication::arguments()))
         {
-            QString errorMessage = cmdLineParser->errorText();
+            const QString errorMessage = cmdLineParser->errorText();
 
             KMessageBox::error(nullptr, "<html><head/><body><h2>" + errorMessage + "</h2><pre>" + i18n("See kdiff3 --help for supported options.") + "</pre></body></html>", aboutData.displayName());
             exit(1);
@@ -181,10 +181,9 @@ int main(int argc, char* argv[])
       Do not attempt to call show here that will be done later.
       This variable exists solely to insure the KDiff3Shell is deleted on exit.
     */
-    QPointer<KDiff3Shell> p(new KDiff3Shell());
+    const QPointer<KDiff3Shell> p(new KDiff3Shell());//QPointer will take it from here.
     Q_UNUSED(p);
 
     int retVal = QApplication::exec();
-    p.clear();
     return retVal;
 }
