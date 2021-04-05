@@ -12,6 +12,7 @@
 #include "DirectoryInfo.h"
 #include "directorymergewindow.h"
 #include "fileaccess.h"
+#include "Logging.h"
 #include "progress.h"
 
 #include <QString>
@@ -389,27 +390,40 @@ bool MergeFileInfos::fastFileComparison(
     status = "";
     bError = true;
 
+    qCDebug(kdiffMergeFileInfo) << "Entering MergeFileInfos::fastFileComparison";
     if(fi1.isNormal() != fi2.isNormal())
     {
+        qCDebug(kdiffMergeFileInfo) << "Have: \'" << fi2.fileName() << "\' , isNormal = " << fi2.isNormal();
+
         status = i18n("Unable to compare non-normal file with normal file.");
         return false;
     }
 
     if(!fi1.isNormal())
     {
+        qCInfo(kdiffMergeFileInfo) << "Skipping not a normal file.";
         bError = false;
         return false;
     }
 
     if(!pOptions->m_bDmFollowFileLinks)
     {
+        qCInfo(kdiffMergeFileInfo) << "Have: \'" << fi2.fileName() << "\' , isSymLink = " << fi2.isSymLink();
+        /*
+            "git difftool --dir-diff"
+            sets up directory comparsions with symlinks to the current work tree being compared with real files.
+
+            m_bAllowMismatch is a compatibility work around.
+        */
         if(fi1.isSymLink() != fi2.isSymLink())
         {
+            qCDebug(kdiffMergeFileInfo) << "Rejecting comparison of link to file. With the same relitive path.";
             status = i18n("Mix of links and normal files.");
             return bEqual;
         }
         else if(fi1.isSymLink() && fi2.isSymLink())
         {
+            qCDebug(kdiffMergeFileInfo) << "Comparison of link to link. OK.";
             bError = false;
             bEqual = fi1.readLink() == fi2.readLink();
             status = i18n("Link: ");
@@ -419,6 +433,7 @@ bool MergeFileInfos::fastFileComparison(
 
     if(fi1.size() != fi2.size())
     {
+        qCInfo(kdiffMergeFileInfo) << "Sizes differ.";
         bError = false;
         bEqual = false;
         status = i18n("Size. ");
@@ -426,6 +441,8 @@ bool MergeFileInfos::fastFileComparison(
     }
     else if(pOptions->m_bDmTrustSize)
     {
+        qCInfo(kdiffMergeFileInfo) << "Same size. Trusting result.";
+
         bEqual = true;
         bError = false;
         return bEqual;
@@ -465,7 +482,7 @@ bool MergeFileInfos::fastFileComparison(
         status = fi2.errorString();
         return bEqual;
     }
-
+    qCInfo(kdiffMergeFileInfo) << "Comparing files...";
     pp.setInformation(i18n("Comparing file..."), 0, false);
     typedef qint64 t_FileSize;
     t_FileSize fullSize = fi1.size();
