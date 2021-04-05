@@ -168,30 +168,30 @@ class MergeFileInfos
     inline void setAgeB(const e_Age inAge) { m_ageB = inAge; }
     inline void setAgeC(const e_Age inAge) { m_ageC = inAge; }
 
-    MergeFileInfos* m_pParent;
+    MergeFileInfos* m_pParent = nullptr;
     QList<MergeFileInfos*> m_children;
 
-    FileAccess* m_pFileInfoA;
-    FileAccess* m_pFileInfoB;
-    FileAccess* m_pFileInfoC;
+    FileAccess* m_pFileInfoA = nullptr;
+    FileAccess* m_pFileInfoB = nullptr;
+    FileAccess* m_pFileInfoC = nullptr;
 
     static QSharedPointer<DirectoryInfo> m_dirInfo;
 
     TotalDiffStatus m_totalDiffStatus;
 
-    e_MergeOperation m_eMergeOperation;
-    e_OperationStatus m_eOpStatus;
-    e_Age m_ageA;
-    e_Age m_ageB;
-    e_Age m_ageC;
+    e_MergeOperation m_eMergeOperation = eNoOperation;
+    e_OperationStatus m_eOpStatus = eOpStatusNone;
+    e_Age m_ageA = eNotThere;
+    e_Age m_ageB = eNotThere;
+    e_Age m_ageC = eNotThere;
 
-    bool m_bOperationComplete;
-    bool m_bSimOpComplete;
+    bool m_bOperationComplete = false;
+    bool m_bSimOpComplete = false;
 
-    bool m_bEqualAB;
-    bool m_bEqualAC;
-    bool m_bEqualBC;
-    bool m_bConflictingAges; // Equal age but files are not!
+    bool m_bEqualAB = false;
+    bool m_bEqualAC = false;
+    bool m_bEqualBC = false;
+    bool m_bConflictingAges = false; // Equal age but files are not!
 };
 
 QTextStream& operator<<(QTextStream& ts, MergeFileInfos& mfi);

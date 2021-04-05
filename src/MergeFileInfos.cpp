@@ -23,21 +23,6 @@ QSharedPointer<DirectoryInfo> MergeFileInfos::m_dirInfo;
 
 MergeFileInfos::MergeFileInfos()
 {
-    m_bEqualAB = false;
-    m_bEqualAC = false;
-    m_bEqualBC = false;
-    m_pParent = nullptr;
-    m_bOperationComplete = false;
-    m_bSimOpComplete = false;
-    m_eMergeOperation = eNoOperation;
-    m_eOpStatus = eOpStatusNone;
-    m_ageA = eNotThere;
-    m_ageB = eNotThere;
-    m_ageC = eNotThere;
-    m_bConflictingAges = false;
-    m_pFileInfoA = nullptr;
-    m_pFileInfoB = nullptr;
-    m_pFileInfoC = nullptr;
     m_dirInfo.clear();
 }
 
