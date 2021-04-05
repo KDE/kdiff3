@@ -176,7 +176,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
                 pDialog->setAttribute(Qt::WA_DeleteOnClose);
                 pDialog->setModal(true);
                 pDialog->setWindowTitle(title);
-                QVBoxLayout* pVBoxLayout = new QVBoxLayout(pDialog);
+                QPointer<QVBoxLayout> pVBoxLayout = new QVBoxLayout(pDialog);
                 QPointer<QTextEdit> pTextEdit = QPointer<QTextEdit>(new QTextEdit(pDialog));
                 pTextEdit->setText(s);
                 pTextEdit->setReadOnly(true);
