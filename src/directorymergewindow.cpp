@@ -740,37 +740,35 @@ bool DirectoryMergeWindow::init(
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSharedPointer<DirectoryInfo>& dirInfo)
 {
-    DirectoryList::iterator dirIterator;
-
     if(dirInfo->dirA().isValid())
     {
-        for(dirIterator = dirInfo->getDirListA().begin(); dirIterator != dirInfo->getDirListA().end(); ++dirIterator)
+        for(FileAccess& fileRecord: dirInfo->getDirListA())
         {
-            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
+            MergeFileInfos& mfi = m_fileMergeMap[FileKey(fileRecord)];
 
-            mfi.setFileInfoA(&(*dirIterator));
+            mfi.setFileInfoA(&fileRecord);
             mfi.setDirectoryInfo(dirInfo);
         }
     }
 
     if(dirInfo->dirB().isValid())
     {
-        for(dirIterator = dirInfo->getDirListB().begin(); dirIterator != dirInfo->getDirListB().end(); ++dirIterator)
+        for(FileAccess& fileRecord: dirInfo->getDirListB())
         {
-            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
+            MergeFileInfos& mfi = m_fileMergeMap[FileKey(fileRecord)];
 
-            mfi.setFileInfoB(&(*dirIterator));
+            mfi.setFileInfoB(&(fileRecord));
             mfi.setDirectoryInfo(dirInfo);
         }
     }
 
     if(dirInfo->dirC().isValid())
     {
-        for(dirIterator = dirInfo->getDirListC().begin(); dirIterator != dirInfo->getDirListC().end(); ++dirIterator)
+        for(FileAccess& fileRecord: dirInfo->getDirListC())
         {
-            MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
+            MergeFileInfos& mfi = m_fileMergeMap[FileKey(fileRecord)];
 
-            mfi.setFileInfoC(&(*dirIterator));
+            mfi.setFileInfoC(&(fileRecord));
             mfi.setDirectoryInfo(dirInfo);
         }
     }
