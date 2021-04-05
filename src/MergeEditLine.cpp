@@ -10,6 +10,10 @@
 
 QString MergeEditLine::getString(const QVector<LineData>* pLineDataA, const QVector<LineData>* pLineDataB, const QVector<LineData>* pLineDataC) const
 {
+    //Triggered by resize event during early init. Ignore these calls.
+    if((m_src == e_SrcSelector::A && pLineDataA->empty()) || (m_src == e_SrcSelector::B && pLineDataB->empty()) || (m_src == e_SrcSelector::C && pLineDataC->empty()))
+        return QString();
+
     if(isRemoved())
     {
         return QString();
@@ -25,6 +29,7 @@ QString MergeEditLine::getString(const QVector<LineData>* pLineDataA, const QVec
         const Diff3Line& d3l = *m_id3l;
         const LineData* pld = nullptr;
         Q_ASSERT(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
+
         if(src == e_SrcSelector::A && d3l.getLineA().isValid())
             pld = &(*pLineDataA)[d3l.getLineA()];
         else if(src == e_SrcSelector::B && d3l.getLineB().isValid())
