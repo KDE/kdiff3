@@ -306,11 +306,10 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
     if(errors.isEmpty() && m_sd1->isText() && m_sd2->isText())
     {
-        m_diffBufferInfo->init(&m_diff3LineList, &m_diff3LineVector,
+        Diff3Line::m_pDiffBufferInfo->init(&m_diff3LineList, &m_diff3LineVector,
                                m_sd1->getLineDataForDiff(), m_sd1->getSizeLines(),
                                m_sd2->getLineDataForDiff(), m_sd2->getSizeLines(),
                                m_sd3->getLineDataForDiff(), m_sd3->getSizeLines());
-        Diff3Line::m_pDiffBufferInfo = m_diffBufferInfo;
 
         m_diff3LineList.calcWhiteDiff3Lines(m_sd1->getLineDataForDiff(), m_sd2->getLineDataForDiff(), m_sd3->getLineDataForDiff(), m_pOptions->ignoreComments());
         m_diff3LineList.calcDiff3LineVector(m_diff3LineVector);

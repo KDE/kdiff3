@@ -438,8 +438,6 @@ public Q_SLOTS:
     DiffList m_diffList12;
     DiffList m_diffList23;
     DiffList m_diffList13;
-
-    QSharedPointer<DiffBufferInfo> m_diffBufferInfo = QSharedPointer<DiffBufferInfo>::create();
     Diff3LineList m_diff3LineList;
     Diff3LineVector m_diff3LineVector;
     //ManualDiffHelpDialog* m_pManualDiffHelpDialog;
