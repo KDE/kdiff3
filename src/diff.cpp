@@ -28,7 +28,7 @@
 
 constexpr bool g_bIgnoreWhiteSpace = true;
 
-QSharedPointer<DiffBufferInfo> Diff3Line::m_pDiffBufferInfo = nullptr;
+QSharedPointer<DiffBufferInfo> Diff3Line::m_pDiffBufferInfo = QSharedPointer<DiffBufferInfo>::create();
 
 int LineData::width(int tabSize) const
 {
