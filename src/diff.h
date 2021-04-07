@@ -170,15 +170,15 @@ class Diff3LineVector;
 class DiffBufferInfo
 {
   private:
-    const QVector<LineData>* mLineDataA;
-    const QVector<LineData>* mLineDataB;
-    const QVector<LineData>* mLineDataC;
+    const QVector<LineData>* mLineDataA = nullptr;
+    const QVector<LineData>* mLineDataB = nullptr;
+    const QVector<LineData>* mLineDataC = nullptr;
 
     LineCount m_sizeA;
     LineCount m_sizeB;
     LineCount m_sizeC;
-    const Diff3LineList* m_pDiff3LineList;
-    const Diff3LineVector* m_pDiff3LineVector;
+    const Diff3LineList* m_pDiff3LineList = nullptr;
+    const Diff3LineVector* m_pDiff3LineVector = nullptr;
 
   public:
     void init(Diff3LineList* d3ll, const Diff3LineVector* d3lv,
