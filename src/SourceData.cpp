@@ -337,11 +337,13 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
     QString fileNameOut1;
     QString fileNameIn2;
     QString fileNameOut2;
-    //bool bTempFileFromClipboard = !m_fileAccess.isValid();
 
     // Detect the input for the preprocessing operations
     if(!mFromClipBoard)
     {
+        //Routine result of directory compare finding a file that isn't in all locations.
+        if(!m_fileAccess.isValid()) return;
+
         Q_ASSERT(!m_fileAccess.isDir());
         if(!m_fileAccess.isNormal())
         {
