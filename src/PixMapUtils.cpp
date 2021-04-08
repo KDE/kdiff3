@@ -13,7 +13,6 @@
 #include <QPainter>
 #include <QPixmap>
 
-
 namespace PixMapUtils {
 namespace {
 QPixmap* s_pm_dir = nullptr;
@@ -51,35 +50,22 @@ QPixmap colorToPixmap(const QColor& inColor)
     p.drawRect(0, 0, pm.width(), pm.height());
     return pm;
 }
-// Copy pm2 onto pm1, but preserve the alpha value from pm1 where pm2 is transparent.
-QPixmap pixCombiner(const QPixmap* pm1, const QPixmap* pm2)
+
+/*
+    Copy pm2 onto pm1, but preserve the alpha value from pm1 where pm2 is transparent.
+    Opactiy controls wheather or not pm1 will show through.
+*/
+QPixmap pixCombiner(const QPixmap* pm1, const QPixmap* pm2, const qreal inOpacity = 1)
 {
     QImage img1 = pm1->toImage().convertToFormat(QImage::Format_ARGB32);
     QImage img2 = pm2->toImage().convertToFormat(QImage::Format_ARGB32);
+    QPainter painter(&img1);
 
-    for(int y = 0; y < img1.height(); y++)
-    {
-        quint32* line1 = reinterpret_cast<quint32*>(img1.scanLine(y));
-        quint32* line2 = reinterpret_cast<quint32*>(img2.scanLine(y));
-        for(int x = 0; x < img1.width(); x++)
-        {
-            if(qAlpha(line2[x]) > 0)
-                line1[x] = (line2[x] | 0xff000000);
-        }
-    }
+    painter.setOpacity(inOpacity);
+    painter.drawImage(0, 0, img2);
+    painter.end();
+
     return QPixmap::fromImage(img1);
-}
-
-// like pixCombiner but let the pm1 color shine through
-QPixmap pixCombiner2(const QPixmap* pm1, const QPixmap* pm2)
-{
-    QPixmap pix = *pm1;
-    QPainter p(&pix);
-    p.setOpacity(0.5);
-    p.drawPixmap(0, 0, *pm2);
-    p.end();
-
-    return pix;
 }
 
 void initPixmaps(const QColor& newest, const QColor& oldest, const QColor& middle, const QColor& notThere)
@@ -136,9 +122,9 @@ void initPixmaps(const QColor& newest, const QColor& oldest, const QColor& middl
     *pmOldLink = pixCombiner(pmOld, pmLink);
     *pmMiddleLink = pixCombiner(pmMiddle, pmLink);
 
-    *pmNewDir = pixCombiner2(pmNew, s_pm_dir);
-    *pmMiddleDir = pixCombiner2(pmMiddle, s_pm_dir);
-    *pmOldDir = pixCombiner2(pmOld, s_pm_dir);
+    *pmNewDir = pixCombiner(pmNew, s_pm_dir, 0.5);
+    *pmMiddleDir = pixCombiner(pmMiddle, s_pm_dir, 0.5);
+    *pmOldDir = pixCombiner(pmOld, s_pm_dir, 0.5);
 
     *pmNewDirLink = pixCombiner(pmNewDir, pmLink);
     *pmMiddleDirLink = pixCombiner(pmMiddleDir, pmLink);
