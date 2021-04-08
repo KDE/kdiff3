@@ -19,12 +19,9 @@
 
 #include <KLocalizedString>
 
-QSharedPointer<DirectoryInfo> MergeFileInfos::m_dirInfo;
+QSharedPointer<DirectoryInfo> MergeFileInfos::m_dirInfo = QSharedPointer<DirectoryInfo>::create();
 
-MergeFileInfos::MergeFileInfos()
-{
-    m_dirInfo.clear();
-}
+MergeFileInfos::MergeFileInfos() = default;
 
 MergeFileInfos::~MergeFileInfos()
 {
