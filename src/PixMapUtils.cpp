@@ -1,20 +1,21 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
-
-#include <QPixmap>
-#include <KIconLoader>
-#include <QPainter>
+ */
 
 #include "MergeFileInfos.h"
 
-namespace PixMapUtils
-{
-namespace{
+#include <KIconLoader>
+
+#include <QPainter>
+#include <QPixmap>
+
+
+namespace PixMapUtils {
+namespace {
 QPixmap* s_pm_dir = nullptr;
 QPixmap* s_pm_file = nullptr;
 
@@ -39,8 +40,9 @@ QPixmap* pmOldDir;
 QPixmap* pmNewDirLink;
 QPixmap* pmMiddleDirLink;
 QPixmap* pmOldDirLink;
-}
-QPixmap colorToPixmap(const QColor &inColor)
+}// namespace
+
+QPixmap colorToPixmap(const QColor& inColor)
 {
     QPixmap pm(16, 16);
     QPainter p(&pm);
