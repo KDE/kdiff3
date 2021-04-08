@@ -182,7 +182,7 @@ class DiffBufferInfo
 
   public:
     void init(Diff3LineList* d3ll, const Diff3LineVector* d3lv,
-              const QVector<LineData>* pldA, LineCount sizeA, const QVector<LineData>* pldB, LineCount sizeB, const QVector<LineData>* pldC, LineCount sizeC);
+              const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC);
 
     [[nodiscard]] inline const QVector<LineData>* getLineData(e_SrcSelector srcIndex) const
     {

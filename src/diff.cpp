@@ -1170,16 +1170,17 @@ void Diff3LineList::calcDiff3LineListTrim(
 }
 
 void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
-                          const QVector<LineData>* pldA, LineCount sizeA, const QVector<LineData>* pldB, LineCount sizeB, const QVector<LineData>* pldC, LineCount sizeC)
+                          const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC)
 {
     m_pDiff3LineList = pD3ll;
     m_pDiff3LineVector = pD3lv;
     mLineDataA = pldA;
     mLineDataB = pldB;
     mLineDataC = pldC;
-    m_sizeA = sizeA;
-    m_sizeB = sizeB;
-    m_sizeC = sizeC;
+
+    m_sizeA = pldA->size() - 1;
+    m_sizeB = pldB->size() - 1;
+    m_sizeC = pldC->size() - 1;
 }
 
 void Diff3LineList::calcWhiteDiff3Lines(
