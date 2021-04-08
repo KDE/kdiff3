@@ -1177,10 +1177,6 @@ void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
     mLineDataA = pldA;
     mLineDataB = pldB;
     mLineDataC = pldC;
-
-    m_sizeA = pldA->size() - 1;
-    m_sizeB = pldB->size() - 1;
-    m_sizeC = pldC->size() - 1;
 }
 
 void Diff3LineList::calcWhiteDiff3Lines(

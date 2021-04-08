@@ -173,10 +173,6 @@ class DiffBufferInfo
     const QVector<LineData>* mLineDataA = nullptr;
     const QVector<LineData>* mLineDataB = nullptr;
     const QVector<LineData>* mLineDataC = nullptr;
-
-    LineCount m_sizeA;
-    LineCount m_sizeB;
-    LineCount m_sizeC;
     const Diff3LineList* m_pDiff3LineList = nullptr;
     const Diff3LineVector* m_pDiff3LineVector = nullptr;
 
