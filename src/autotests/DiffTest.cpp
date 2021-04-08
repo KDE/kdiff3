@@ -13,7 +13,6 @@
 #include <QTest>
 
 #include <qglobal.h>
-#include <qttestglobal.h>
 
 class DiffTest: public QObject
 {
