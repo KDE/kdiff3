@@ -38,7 +38,7 @@ class DirectoryMergeWindow : public QTreeView
 {
    Q_OBJECT
  public:
-   struct t_ItemInfo;
+   struct ItemInfo;
 
    DirectoryMergeWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions, KDiff3App &app);
    ~DirectoryMergeWindow() override;

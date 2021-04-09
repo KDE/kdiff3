@@ -45,7 +45,7 @@
 #include <KMessageBox>
 #include <KToggleAction>
 
-struct DirectoryMergeWindow::t_ItemInfo {
+struct DirectoryMergeWindow::ItemInfo {
     bool bExpanded;
     bool bOperationComplete;
     QString status;
@@ -787,7 +787,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     mWindow->show();
     mWindow->setUpdatesEnabled(true);
 
-    std::map<QString, t_ItemInfo> expandedDirsMap;
+    std::map<QString, ItemInfo> expandedDirsMap;
 
     if(bReload)
     {
