@@ -166,8 +166,8 @@ public:
     // Directory Merge options
     bool m_bDmSyncMode = false;
     bool m_bDmRecursiveDirs = true;
-    bool m_bDmFollowFileLinks = false;
-    bool m_bDmFollowDirLinks = false;
+    bool m_bDmFollowFileLinks = true;
+    bool m_bDmFollowDirLinks = true;
     bool m_bDmFindHidden = true;
     bool m_bDmCreateBakFiles;
     bool m_bDmBinaryComparison = true;
