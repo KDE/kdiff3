@@ -1298,7 +1298,7 @@ void KDiff3App::slotConfigureKeys()
 
 void KDiff3App::slotRefresh()
 {
-    QApplication::setFont(m_pOptions->m_appFont);
+    QApplication::setFont(m_pOptions->appFont());
 
     Q_EMIT doRefresh();
 

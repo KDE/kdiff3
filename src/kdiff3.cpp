@@ -839,7 +839,7 @@ void KDiff3App::slotFilePrint()
         int columns = m_bTripleDiff ? 3 : 2;
         int columnWidth = (pPaintDevice->width() - (columns - 1) * columnDistance) / columns;
 
-        QFont f = m_pOptions->m_font;
+        QFont f = m_pOptions->defaultFont();
         f.setPointSizeF(f.pointSizeF() - 1); // Print with slightly smaller font.
         painter.setFont(f);
         QFontMetrics fm = painter.fontMetrics();

@@ -70,13 +70,18 @@ public:
     [[nodiscard]] bool isStatusBarVisable() const { return m_bShowStatusBar; }
     void setStatusBarState(bool inShown) { m_bShowStatusBar = inShown; }
 
+    [[nodiscard]] inline const QFont& defaultFont() { return mFont; };
+    [[nodiscard]] inline const QFont& appFont(){ return mAppFont; };
+
     [[nodiscard]] bool wordWrapOn() const { return m_bWordWrap; }
     void setWordWrap(const bool enabled) { m_bWordWrap = enabled; }
 
     [[nodiscard]] bool ignoreComments() const { return m_bIgnoreComments; }
 
     [[nodiscard]] bool whiteSpaceIsEqual() const { return m_bDmWhiteSpaceEqual; }
+
   private:
+    friend class OptionDialog;
     std::list<OptionItemBase*> mOptionItemList;
 
     // Some settings that are not available in the option dialog:
@@ -86,12 +91,13 @@ public:
     bool   m_bMaximised = false;
     bool   m_bShowToolBar = true;
     bool   m_bShowStatusBar = true;
-  public:
 
     // These are the results of the option dialog.
-    QFont m_font;
+    QFont mFont;
+    QFont mAppFont;
+
     //bool m_bItalicForDeltas;
-    QFont m_appFont;
+  public:
 
     QColor m_fgColor = Qt::black;
     QColor m_bgColor = Qt::white;

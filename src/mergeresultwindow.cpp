@@ -87,7 +87,7 @@ MergeResultWindow::MergeResultWindow(
     m_selection.reset();
 
     setMinimumSize(QSize(20, 20));
-    setFont(m_pOptions->m_font);
+    setFont(m_pOptions->defaultFont());
 }
 
 void MergeResultWindow::init(
@@ -263,7 +263,7 @@ void MergeResultWindow::showUnsolvedConflictsStatusMessage()
 
 void MergeResultWindow::slotRefresh()
 {
-    setFont(m_pOptions->m_font);
+    setFont(m_pOptions->defaultFont());
     update();
 }
 

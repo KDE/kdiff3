@@ -565,12 +565,12 @@ void OptionDialog::setupFontPage()
     static const QFont defaultFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
     static QFont defaultAppFont = QApplication::font();
 
-    OptionFontChooser* pAppFontChooser = new OptionFontChooser(defaultAppFont, "ApplicationFont", &m_options->m_appFont, page);
+    OptionFontChooser* pAppFontChooser = new OptionFontChooser(defaultAppFont, "ApplicationFont", &m_options->mAppFont, page);
     addOptionItem(pAppFontChooser);
     topLayout->addWidget(pAppFontChooser);
     pAppFontChooser->setTitle(i18n("Application font"));
 
-    OptionFontChooser* pFontChooser = new OptionFontChooser(defaultFont, "Font", &m_options->m_font, page);
+    OptionFontChooser* pFontChooser = new OptionFontChooser(defaultFont, "Font", &m_options->mFont, page);
     addOptionItem(pFontChooser);
     topLayout->addWidget(pFontChooser);
     pFontChooser->setTitle(i18n("File view font"));

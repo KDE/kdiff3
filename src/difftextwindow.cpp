@@ -220,7 +220,7 @@ DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
     d->m_bWordWrap = false;
     d->m_winIdx = winIdx;
 
-    setFont(d->getOptions()->m_font);
+    setFont(d->getOptions()->defaultFont());
 }
 
 DiffTextWindow::~DiffTextWindow()
@@ -298,7 +298,7 @@ void DiffTextWindow::reset()
 
 void DiffTextWindow::slotRefresh()
 {
-    setFont(d->getOptions()->m_font);
+    setFont(d->getOptions()->defaultFont());
     update();
 }
 
