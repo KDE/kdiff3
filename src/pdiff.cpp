@@ -1637,7 +1637,10 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
 
     return true;
 }
-
+/*
+    If A is targetted to an existing file and the paths point to directories attempt to find that file in the corrisponding
+    directory. If it exists then the filename from A will be appended to the path.
+*/
 void KDiff3App::improveFilenames()
 {
     FileAccess f1(m_sd1->getFilename());
