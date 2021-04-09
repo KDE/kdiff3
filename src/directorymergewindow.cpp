@@ -135,7 +135,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         delete m_pRoot;
     }
 
-    bool init(const QSharedPointer<DirectoryInfo>& dirInfo, bool bDirectoryMerge, bool bReload);
+    bool init(bool bDirectoryMerge, bool bReload);
 
     // Implement QAbstractItemModel
     [[nodiscard]] QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
@@ -700,7 +700,7 @@ void DirectoryMergeWindow::reload()
             return;
     }
 
-    init(MergeFileInfos::getDirectoryInfo(), true);
+    init(true);
     //fix file visibilities after reload or menu will be out of sync with display if changed from defaults.
     updateFileVisibilities();
 }
@@ -731,11 +731,10 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcDirStatus(bool bThre
 }
 
 bool DirectoryMergeWindow::init(
-    const QSharedPointer<DirectoryInfo>& dirInfo,
     bool bDirectoryMerge,
     bool bReload)
 {
-    return d->init(dirInfo, bDirectoryMerge, bReload);
+    return d->init(bDirectoryMerge, bReload);
 }
 
 void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSharedPointer<DirectoryInfo>& dirInfo)
@@ -772,13 +771,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
 }
 
 bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
-    const QSharedPointer<DirectoryInfo>& dirInfo,
     bool bDirectoryMerge,
     bool bReload)
 {
-    //set root data now that we have the directory info.
-    MergeFileInfos::setDirectoryInfo(dirInfo);
-
     if(m_pOptions->m_bDmFullAnalysis)
     {
         QStringList errors;
@@ -839,6 +834,8 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         m_pDirShowFilesOnlyInB->setChecked(true);
         m_pDirShowFilesOnlyInC->setChecked(true);
     }
+
+    const QSharedPointer<DirectoryInfo>& dirInfo = MergeFileInfos::getDirectoryInfo();
     Q_ASSERT(dirInfo != nullptr);
     const FileAccess& dirA = dirInfo->dirA();
     const FileAccess& dirB = dirInfo->dirB();

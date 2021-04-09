@@ -44,7 +44,6 @@ class DirectoryMergeWindow : public QTreeView
    ~DirectoryMergeWindow() override;
    void setDirectoryMergeInfo(DirectoryMergeInfo* p);
    bool init(
-      const QSharedPointer<DirectoryInfo>& dirInfo,
       bool bDirectoryMerge,
       bool bReload = false
    );

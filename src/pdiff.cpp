@@ -12,6 +12,7 @@
 #include "directorymergewindow.h"
 #include "fileaccess.h"
 #include "Logging.h"
+#include "MergeFileInfos.h"
 #include "kdiff3.h"
 #include "optiondialog.h"
 #include "progress.h"
@@ -867,7 +868,10 @@ void KDiff3App::slotFileOpen()
     if(!canContinue()) return;
     //create dummy DirectoryInfo record for first run so we don't crash.
     if(m_dirinfo == nullptr)
+    {
         m_dirinfo = QSharedPointer<DirectoryInfo>::create();
+        MergeFileInfos::setDirectoryInfo(m_dirinfo);
+    }
 
     if(m_pDirectoryMergeWindow->isDirectoryMergeInProgress())
     {
@@ -1599,9 +1603,9 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
         m_pMainWidget->hide();
         setUpdatesEnabled(true);
 
-        m_dirinfo = QSharedPointer<DirectoryInfo>::create(f1, f2, f3, destDir);
+        (*m_dirinfo) = DirectoryInfo(f1, f2, f3, destDir);
+
         bool bSuccess = m_pDirectoryMergeWindow->init(
-            m_dirinfo,
             !m_outputFilename.isEmpty());
         //This is a bug if it still happens.
         Q_ASSERT(m_bDirCompare == bDirCompare);
