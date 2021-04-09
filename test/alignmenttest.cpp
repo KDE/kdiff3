@@ -260,7 +260,6 @@ bool runTest(QString file1, QString file2, QString file3, QString expectedResult
    QTextStream out(stdout);
 
    m_pOptions->m_bIgnoreCase = false;
-   m_pOptions->m_bPreserveCarriageReturn = false;
    m_pOptions->m_bDiff3AlignBC = true;
 
    SourceData m_sd1, m_sd2, m_sd3;

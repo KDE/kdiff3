@@ -78,7 +78,6 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         eIgnoreFlags |= IgnoreFlag::ignoreWhiteSpace;
 
     Q_ASSERT(pTotalDiffStatus != nullptr);
-    //bool bPreserveCarriageReturn = m_pOptions->m_bPreserveCarriageReturn;
 
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
 

@@ -126,7 +126,6 @@ public:
     QTextCodec*  m_pEncodingPP = nullptr;
     e_LineEndStyle  m_lineEndStyle = eLineEndStyleAutoDetect;
 
-    bool m_bPreserveCarriageReturn = false;
     bool m_bTryHard = true;
     bool m_bShowWhiteSpaceCharacters = true;
     bool m_bShowWhiteSpace = true;

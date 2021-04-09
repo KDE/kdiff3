@@ -859,17 +859,6 @@ void OptionDialog::setupDiffPage()
 
     QLabel* label = nullptr;
 
-    m_options->m_bPreserveCarriageReturn = false;
-    /*
-    OptionCheckBox* pPreserveCarriageReturn = new OptionCheckBox( i18n("Preserve carriage return"), false, "PreserveCarriageReturn", &m_options->m_bPreserveCarriageReturn, page, this );
-    addOptionItem(pPreserveCarriageReturn);
-    gbox->addWidget( pPreserveCarriageReturn, line, 0, 1, 2 );
-    pPreserveCarriageReturn->setToolTip( i18n(
-       "Show carriage return characters '\\r' if they exist.\n"
-       "Helps to compare files that were modified under different operating systems.")
-       );
-    ++line;
-*/
     OptionCheckBox* pIgnoreNumbers = new OptionCheckBox(i18n("Ignore numbers (treat as white space)"), false, "IgnoreNumbers", &m_options->m_bIgnoreNumbers, page);
     gbox->addWidget(pIgnoreNumbers, line, 0, 1, 2);
     addOptionItem(pIgnoreNumbers);
