@@ -43,8 +43,6 @@ public:
 
     void setState(); // Must be called before calling exec();
 
-    void addOptionItem(OptionItemBase*);
-
     QSharedPointer<Options> getOptions() { return m_options; }
 
     static const QString s_historyEntryStartRegExpToolTip;
