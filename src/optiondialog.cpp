@@ -502,7 +502,7 @@ OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageD
     setupEditPage();
     setupDiffPage();
     setupMergePage();
-    setupOtherOptions();
+
     if(bShowDirMergeSettings)
         setupDirectoryMergePage();
 
@@ -525,25 +525,6 @@ void OptionDialog::helpRequested()
 }
 
 OptionDialog::~OptionDialog() = default;
-
-void OptionDialog::setupOtherOptions()
-{
-    //TODO move to Options class
-    addOptionItem(new OptionToggleAction(false, "AutoAdvance", &m_options->m_bAutoAdvance));
-    addOptionItem(new OptionToggleAction(true, "ShowWhiteSpaceCharacters", &m_options->m_bShowWhiteSpaceCharacters));
-    addOptionItem(new OptionToggleAction(true, "ShowWhiteSpace", &m_options->m_bShowWhiteSpace));
-    addOptionItem(new OptionToggleAction(false, "ShowLineNumbers", &m_options->m_bShowLineNumbers));
-    addOptionItem(new OptionToggleAction(true, "HorizDiffWindowSplitting", &m_options->m_bHorizDiffWindowSplitting));
-    addOptionItem(new OptionToggleAction(false, "WordWrap", &m_options->m_bWordWrap));
-
-    addOptionItem(new OptionToggleAction(true, "ShowIdenticalFiles", &m_options->m_bDmShowIdenticalFiles));
-
-    addOptionItem(new OptionStringList(&m_options->m_recentAFiles, "RecentAFiles"));
-    addOptionItem(new OptionStringList(&m_options->m_recentBFiles, "RecentBFiles"));
-    addOptionItem(new OptionStringList(&m_options->m_recentCFiles, "RecentCFiles"));
-    addOptionItem(new OptionStringList(&m_options->m_recentOutputFiles, "RecentOutputFiles"));
-    addOptionItem(new OptionStringList(&m_options->m_recentEncodings, "RecentEncodings"));
-}
 
 void OptionDialog::setupFontPage()
 {

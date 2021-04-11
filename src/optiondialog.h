@@ -51,7 +51,7 @@ public:
     static const QString s_historyEntryStartSortKeyOrderToolTip;
     static const QString s_autoMergeRegExpToolTip;
     static const QString s_historyStartRegExpToolTip;
-    
+
 protected Q_SLOTS:
     virtual void slotDefault();
     virtual void slotOk();
@@ -72,8 +72,6 @@ private:
     void setupDirectoryMergePage();
     void setupRegionalPage();
     void setupIntegrationPage();
-    void setupOtherOptions();
-
     void resetToDefaults();
 
     QSharedPointer<Options> m_options=QSharedPointer<Options>::create();

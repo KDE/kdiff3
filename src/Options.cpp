@@ -17,6 +17,7 @@
 
 void Options::init()
 {
+    //Settings not in Options dialog
     addOptionItem(new OptionSize(QSize(600, 400), "Geometry", &m_geometry));
     addOptionItem(new OptionPoint(QPoint(0, 22), "Position", &m_position));
     addOptionItem(new OptionToggleAction(false, "WindowStateFullScreen", &m_bFullScreen));
@@ -24,6 +25,22 @@ void Options::init()
 
     addOptionItem(new OptionToggleAction(true, "Show Toolbar", &m_bShowToolBar));
     addOptionItem(new OptionToggleAction(true, "Show Statusbar", &m_bShowStatusBar));
+
+    //Options in Options dialog.
+    addOptionItem(new OptionToggleAction(false, "AutoAdvance", &m_bAutoAdvance));
+    addOptionItem(new OptionToggleAction(true, "ShowWhiteSpaceCharacters", &m_bShowWhiteSpaceCharacters));
+    addOptionItem(new OptionToggleAction(true, "ShowWhiteSpace", &m_bShowWhiteSpace));
+    addOptionItem(new OptionToggleAction(false, "ShowLineNumbers", &m_bShowLineNumbers));
+    addOptionItem(new OptionToggleAction(true, "HorizDiffWindowSplitting", &m_bHorizDiffWindowSplitting));
+    addOptionItem(new OptionToggleAction(false, "WordWrap", &m_bWordWrap));
+
+    addOptionItem(new OptionToggleAction(true, "ShowIdenticalFiles", &m_bDmShowIdenticalFiles));
+
+    addOptionItem(new OptionStringList(&m_recentAFiles, "RecentAFiles"));
+    addOptionItem(new OptionStringList(&m_recentBFiles, "RecentBFiles"));
+    addOptionItem(new OptionStringList(&m_recentCFiles, "RecentCFiles"));
+    addOptionItem(new OptionStringList(&m_recentOutputFiles, "RecentOutputFiles"));
+    addOptionItem(new OptionStringList(&m_recentEncodings, "RecentEncodings"));
 }
 
 void Options::apply()
