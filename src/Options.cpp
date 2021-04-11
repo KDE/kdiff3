@@ -94,7 +94,7 @@ void Options::readOptions(const KSharedConfigPtr config)
     if(m_whiteSpace2FileMergeDefault <= (int)e_SrcSelector::Min)
         m_whiteSpace2FileMergeDefault = (int)e_SrcSelector::None;
 
-    if(m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Max)
+    if(m_whiteSpace2FileMergeDefault > (int)e_SrcSelector::Max)
         m_whiteSpace2FileMergeDefault = (int)e_SrcSelector::C;
 }
 

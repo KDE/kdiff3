@@ -8,7 +8,7 @@
 #include "fileaccess.h"
 
 #include "common.h"
-#include <qglobal.h>
+
 #ifndef AUTOTEST
 #include "DefaultFileAccessJobHandler.h"
 #endif
@@ -28,6 +28,7 @@
 
 #include <QDir>
 #include <QFile>
+#include <QtGlobal>
 #include <QTemporaryFile>
 #include <QtMath>
 

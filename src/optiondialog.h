@@ -6,8 +6,8 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef OPTION_DIALOG_H
-#define OPTION_DIALOG_H
+#ifndef OPTIONDIALOG_H
+#define OPTIONDIALOG_H
 
 #include "options.h"
 
@@ -17,7 +17,6 @@
 
 #include <KPageDialog>
 #include <KSharedConfig>
-
 
 class QLabel;
 class QPlainTextEdit;

@@ -41,11 +41,11 @@ public:
 
     void setToCurrent();
 
-    void saveOptions(const KSharedConfigPtr config);
     void readOptions(const KSharedConfigPtr config);
+    void saveOptions(const KSharedConfigPtr config);
 
     const QString parseOptions(const QStringList& optionList);
-    QString calcOptionHelp();
+    [[nodiscard]] QString calcOptionHelp();
 
     void addOptionItem(OptionItemBase* inItem);
 
