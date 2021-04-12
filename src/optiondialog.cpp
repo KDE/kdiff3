@@ -1484,7 +1484,7 @@ void OptionDialog::slotOk()
 /** Copy the values from the widgets to the public variables.*/
 void OptionDialog::slotApply()
 {
-    m_options->apply();
+    Options::apply();
 
     Q_EMIT applyDone();
 }
@@ -1502,14 +1502,15 @@ void OptionDialog::slotDefault()
 
 void OptionDialog::resetToDefaults()
 {
-    m_options->resetToDefaults();
+    Options::resetToDefaults();
+
     slotEncodingChanged();
 }
 
 /** Initialise the widgets using the values in the public varibles. */
 void OptionDialog::setState()
 {
-    m_options->setToCurrent();
+    Options::setToCurrent();
 
     slotEncodingChanged();
 }

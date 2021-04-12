@@ -9,8 +9,7 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-#include <KSharedConfig>
-
+#include <boost/signals2.hpp>
 #include <list>
 
 #include <QColor>
@@ -18,6 +17,8 @@
 #include <QPoint>
 #include <QSize>
 #include <QStringList>
+
+#include <KSharedConfig>
 
 class OptionItemBase;
 
@@ -32,14 +33,12 @@ enum e_LineEndStyle
 
 class Options
 {
-public:
+  public:
+    static boost::signals2::signal<void ()> apply;
+    static boost::signals2::signal<void ()> resetToDefaults;
+    static boost::signals2::signal<void ()> setToCurrent;
+
     void init();
-
-    void apply();
-
-    void resetToDefaults();
-
-    void setToCurrent();
 
     void readOptions(const KSharedConfigPtr config);
     void saveOptions(const KSharedConfigPtr config);

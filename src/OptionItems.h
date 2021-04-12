@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -10,6 +10,9 @@
 #define OPTIONITEMS_H
 
 #include "common.h"
+#include "options.h"
+
+#include <boost/signals2.hpp>
 
 #include <QComboBox>
 #include <QLabel>
@@ -27,13 +30,16 @@ class OptionItemBase
     {
         m_saveName = saveName;
         m_bPreserved = false;
+        connections.push_back(Options::apply.connect(boost::bind(&OptionItemBase::apply, this)));
+        connections.push_back(Options::setToCurrent.connect(boost::bind(&OptionItemBase::setToCurrent, this)));
+        connections.push_back(Options::resetToDefaults.connect(boost::bind(&OptionItemBase::setToDefault, this)));
     }
     virtual ~OptionItemBase() = default;
     virtual void setToDefault() = 0;
     virtual void setToCurrent() = 0;
 
     virtual void apply() = 0;
-    
+
     virtual void write(ValueMap*) const = 0;
     virtual void read(ValueMap*) = 0;
     void doPreserve()
@@ -57,7 +63,7 @@ class OptionItemBase
     virtual void unpreserve() = 0;
     bool m_bPreserved;
     QString m_saveName;
-
+    std::list<boost::signals2::scoped_connection> connections;
     Q_DISABLE_COPY(OptionItemBase)
 };
 

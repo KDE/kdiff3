@@ -11,9 +11,15 @@
 #include "diff.h"
 #include "OptionItems.h"
 
+#include <boost/signals2.hpp>
+
 #include <KSharedConfig>
 
 #define KDIFF3_CONFIG_GROUP "KDiff3 Options"
+
+boost::signals2::signal<void ()> Options::apply;
+boost::signals2::signal<void ()> Options::resetToDefaults;
+boost::signals2::signal<void()> Options::setToCurrent;
 
 void Options::init()
 {
@@ -41,30 +47,6 @@ void Options::init()
     addOptionItem(new OptionStringList(&m_recentCFiles, "RecentCFiles"));
     addOptionItem(new OptionStringList(&m_recentOutputFiles, "RecentOutputFiles"));
     addOptionItem(new OptionStringList(&m_recentEncodings, "RecentEncodings"));
-}
-
-void Options::apply()
-{
-    for(OptionItemBase* item : mOptionItemList)
-    {
-        item->apply();
-    }
-}
-
-void Options::resetToDefaults()
-{
-    for(OptionItemBase* item : mOptionItemList)
-    {
-        item->setToDefault();
-    }
-}
-
-void Options::setToCurrent()
-{
-    for(OptionItemBase* item : mOptionItemList)
-    {
-        item->setToCurrent();
-    }
 }
 
 void Options::saveOptions(const KSharedConfigPtr config)
@@ -97,7 +79,6 @@ void Options::readOptions(const KSharedConfigPtr config)
     if(m_whiteSpace2FileMergeDefault > (int)e_SrcSelector::Max)
         m_whiteSpace2FileMergeDefault = (int)e_SrcSelector::C;
 }
-
 
 const QString Options::parseOptions(const QStringList& optionList)
 {
