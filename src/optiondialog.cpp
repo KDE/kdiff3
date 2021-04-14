@@ -322,7 +322,7 @@ class OptionComboBox : public QComboBox, public OptionItemBase
         else
             *m_pVarNum = config->readEntry(m_saveName, *m_pVarNum);
     }
-    void preserve() override
+    void preserveImp() override
     {
         if(m_pVarStr != nullptr) {
             m_preservedStrVal = *m_pVarStr;
@@ -332,7 +332,7 @@ class OptionComboBox : public QComboBox, public OptionItemBase
             m_preservedNumVal = *m_pVarNum;
         }
     }
-    void unpreserve() override
+    void unpreserveImp() override
     {
         if(m_pVarStr != nullptr) {
             *m_pVarStr = m_preservedStrVal;
@@ -474,8 +474,8 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
     }
 
   protected:
-    void preserve() override { m_preservedVal = currentIndex(); }
-    void unpreserve() override { setCurrentIndex(m_preservedVal); }
+    void preserveImp() override { m_preservedVal = currentIndex(); }
+    void unpreserveImp() override { setCurrentIndex(m_preservedVal); }
     int m_preservedVal;
 };
 

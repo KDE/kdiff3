@@ -42,25 +42,25 @@ class OptionItemBase
 
     virtual void write(ValueMap*) const = 0;
     virtual void read(ValueMap*) = 0;
-    void doPreserve()
+    void preserve()
     {
         if(!m_bPreserved)
         {
             m_bPreserved = true;
-            preserve();
+            preserveImp();
         }
     }
-    void doUnpreserve()
+    void unpreserve()
     {
         if(m_bPreserved)
         {
-            unpreserve();
+            unpreserveImp();
         }
     }
     [[nodiscard]] QString getSaveName() const { return m_saveName; }
   protected:
-    virtual void preserve() = 0;
-    virtual void unpreserve() = 0;
+    virtual void preserveImp() = 0;
+    virtual void unpreserveImp() = 0;
     bool m_bPreserved;
     QString m_saveName;
     std::list<boost::signals2::scoped_connection> connections;
@@ -107,8 +107,8 @@ class Option : public OptionItemBase
     void read(ValueMap* config) override { *m_pVar = config->readEntry(m_saveName, m_defaultVal); }
 
   protected:
-    void preserve() override { m_preservedVal = *m_pVar; }
-    void unpreserve() override { *m_pVar = m_preservedVal; }
+    void preserveImp() override { m_preservedVal = *m_pVar; }
+    void unpreserveImp() override { *m_pVar = m_preservedVal; }
     T* m_pVar;
     T m_preservedVal;
     T m_defaultVal;
