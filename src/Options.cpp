@@ -64,29 +64,29 @@ bool OptionItemBase::accept(const QString& key, const QString& val)
 void Options::init()
 {
     //Settings not in Options dialog
-    addOptionItem(new OptionSize(QSize(600, 400), "Geometry", &m_geometry));
-    addOptionItem(new OptionPoint(QPoint(0, 22), "Position", &m_position));
-    addOptionItem(new OptionToggleAction(false, "WindowStateFullScreen", &m_bFullScreen));
-    addOptionItem(new OptionToggleAction(false, "WindowStateMaximised", &m_bMaximised));
+    addOptionItem(std::make_shared<OptionSize>(QSize(600, 400), "Geometry", &m_geometry));
+    addOptionItem(std::make_shared<OptionPoint>(QPoint(0, 22), "Position", &m_position));
+    addOptionItem(std::make_shared<OptionToggleAction>(false, "WindowStateFullScreen", &m_bFullScreen));
+    addOptionItem(std::make_shared<OptionToggleAction>(false, "WindowStateMaximised", &m_bMaximised));
 
-    addOptionItem(new OptionToggleAction(true, "Show Toolbar", &m_bShowToolBar));
-    addOptionItem(new OptionToggleAction(true, "Show Statusbar", &m_bShowStatusBar));
+    addOptionItem(std::make_shared<OptionToggleAction>(true, "Show Toolbar", &m_bShowToolBar));
+    addOptionItem(std::make_shared<OptionToggleAction>(true, "Show Statusbar", &m_bShowStatusBar));
 
     //Options in Options dialog.
-    addOptionItem(new OptionToggleAction(false, "AutoAdvance", &m_bAutoAdvance));
-    addOptionItem(new OptionToggleAction(true, "ShowWhiteSpaceCharacters", &m_bShowWhiteSpaceCharacters));
-    addOptionItem(new OptionToggleAction(true, "ShowWhiteSpace", &m_bShowWhiteSpace));
-    addOptionItem(new OptionToggleAction(false, "ShowLineNumbers", &m_bShowLineNumbers));
-    addOptionItem(new OptionToggleAction(true, "HorizDiffWindowSplitting", &m_bHorizDiffWindowSplitting));
-    addOptionItem(new OptionToggleAction(false, "WordWrap", &m_bWordWrap));
+    addOptionItem(std::make_shared<OptionToggleAction>(false, "AutoAdvance", &m_bAutoAdvance));
+    addOptionItem(std::make_shared<OptionToggleAction>(true, "ShowWhiteSpaceCharacters", &m_bShowWhiteSpaceCharacters));
+    addOptionItem(std::make_shared<OptionToggleAction>(true, "ShowWhiteSpace", &m_bShowWhiteSpace));
+    addOptionItem(std::make_shared<OptionToggleAction>(false, "ShowLineNumbers", &m_bShowLineNumbers));
+    addOptionItem(std::make_shared<OptionToggleAction>(true, "HorizDiffWindowSplitting", &m_bHorizDiffWindowSplitting));
+    addOptionItem(std::make_shared<OptionToggleAction>(false, "WordWrap", &m_bWordWrap));
 
-    addOptionItem(new OptionToggleAction(true, "ShowIdenticalFiles", &m_bDmShowIdenticalFiles));
+    addOptionItem(std::make_shared<OptionToggleAction>(true, "ShowIdenticalFiles", &m_bDmShowIdenticalFiles));
 
-    addOptionItem(new OptionStringList(&m_recentAFiles, "RecentAFiles"));
-    addOptionItem(new OptionStringList(&m_recentBFiles, "RecentBFiles"));
-    addOptionItem(new OptionStringList(&m_recentCFiles, "RecentCFiles"));
-    addOptionItem(new OptionStringList(&m_recentOutputFiles, "RecentOutputFiles"));
-    addOptionItem(new OptionStringList(&m_recentEncodings, "RecentEncodings"));
+    addOptionItem(std::make_shared<OptionStringList>(&m_recentAFiles, "RecentAFiles"));
+    addOptionItem(std::make_shared<OptionStringList>(&m_recentBFiles, "RecentBFiles"));
+    addOptionItem(std::make_shared<OptionStringList>(&m_recentCFiles, "RecentCFiles"));
+    addOptionItem(std::make_shared<OptionStringList>(&m_recentOutputFiles, "RecentOutputFiles"));
+    addOptionItem(std::make_shared<OptionStringList>(&m_recentEncodings, "RecentEncodings"));
 }
 
 
@@ -151,7 +151,7 @@ QString Options::calcOptionHelp()
     return config.getAsString();
 }
 
-void Options::addOptionItem(OptionItemBase* inItem)
+void Options::addOptionItem(std::shared_ptr<OptionItemBase> inItem)
 {
     mOptionItemList.push_back(inItem);
 }

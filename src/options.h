@@ -55,9 +55,6 @@ class Options
 
     const QString parseOptions(const QStringList& optionList);
     [[nodiscard]] QString calcOptionHelp();
-
-    void addOptionItem(OptionItemBase* inItem);
-
     [[nodiscard]] const QSize& getGeometry() const { return m_geometry; }
     void setGeometry(const QSize& size) { m_geometry = size; }
 
@@ -90,8 +87,10 @@ class Options
     [[nodiscard]] bool whiteSpaceIsEqual() const { return m_bDmWhiteSpaceEqual; }
 
   private:
+    void addOptionItem(std::shared_ptr<OptionItemBase> inItem);
+
     friend class OptionDialog;
-    std::list<OptionItemBase*> mOptionItemList;
+    std::list<std::shared_ptr<OptionItemBase>> mOptionItemList;
 
     // Some settings that are not available in the option dialog:
     QSize  m_geometry = QSize(600, 400);
