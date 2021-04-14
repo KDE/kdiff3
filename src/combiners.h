@@ -79,6 +79,27 @@ template<typename T> struct FirstNonEmpty
     }
 };
 
+//Like 'or' but default to false if there are no connections and stop looking once true is returned.
+struct find
+{
+    typedef bool result_type;
+    template <typename InputIterator> bool operator()(InputIterator first, InputIterator last) const
+    {
+        // If there are no slots to call, just return true
+        if(first == last)
+            return false;
+
+        bool found = *first++;
+        //return true if any slot returns true
+        while(first != last && !found)
+        {
+            found = *first;
+            ++first;
+        }
+
+        return found;
+    }
+};
 #ifdef BOOST_NO_EXCEPTIONS
 //Because boost doesn't define this
 inline void boost::throw_exception(std::exception const& e) { Q_UNUSED(e); std::terminate();}

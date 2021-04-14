@@ -7,6 +7,7 @@
 
 #include "options.h"
 
+#include "combiners.h"
 #include "ConfigValueMap.h"
 #include "diff.h"
 #include "OptionItems.h"
@@ -20,6 +21,45 @@
 boost::signals2::signal<void ()> Options::apply;
 boost::signals2::signal<void ()> Options::resetToDefaults;
 boost::signals2::signal<void()> Options::setToCurrent;
+boost::signals2::signal<void (ValueMap*)> Options::read;
+boost::signals2::signal<void (ValueMap*)> Options::write;
+
+boost::signals2::signal<void ()> Options::preserve;
+boost::signals2::signal<void ()> Options::unpreserve;
+
+boost::signals2::signal<bool (const QString&, const QString&), find> Options::accept;
+
+OptionItemBase::OptionItemBase(const QString& saveName)
+{
+    m_saveName = saveName;
+    m_bPreserved = false;
+
+    connections.push_back(Options::apply.connect(boost::bind(&OptionItemBase::apply, this)));
+    connections.push_back(Options::setToCurrent.connect(boost::bind(&OptionItemBase::setToCurrent, this)));
+    connections.push_back(Options::resetToDefaults.connect(boost::bind(&OptionItemBase::setToDefault, this)));
+
+    connections.push_back(Options::read.connect(boost::bind(&OptionItemBase::read, this, _1)));
+    connections.push_back(Options::write.connect(boost::bind(&OptionItemBase::write, this, _1)));
+
+    connections.push_back(Options::preserve.connect(boost::bind(&OptionItemBase::preserve, this)));
+    connections.push_back(Options::unpreserve.connect(boost::bind(&OptionItemBase::unpreserve, this)));
+
+    connections.push_back(Options::accept.connect(boost::bind(&OptionItemBase::accept, this, _1, _2)));
+}
+
+bool OptionItemBase::accept(const QString& key, const QString& val)
+{
+    if(getSaveName() != key)
+        return false;
+
+    preserve();
+
+    ValueMap config;
+    config.writeEntry(key, val); // Write the value as a string and
+    read(&config);               // use the internal conversion from string to the needed value.
+
+    return true;
+}
 
 void Options::init()
 {
@@ -49,17 +89,15 @@ void Options::init()
     addOptionItem(new OptionStringList(&m_recentEncodings, "RecentEncodings"));
 }
 
+
 void Options::saveOptions(const KSharedConfigPtr config)
 {
     // No i18n()-Translations here!
 
     ConfigValueMap cvm(config->group(KDIFF3_CONFIG_GROUP));
 
-    for(OptionItemBase* item : mOptionItemList)
-    {
-        item->doUnpreserve();
-        item->write(&cvm);
-    }
+    unpreserve();
+    write(&cvm);
 }
 
 void Options::readOptions(const KSharedConfigPtr config)
@@ -68,10 +106,7 @@ void Options::readOptions(const KSharedConfigPtr config)
 
     ConfigValueMap cvm(config->group(KDIFF3_CONFIG_GROUP));
 
-    for(OptionItemBase* item : mOptionItemList)
-    {
-        item->read(&cvm);
-    }
+    read(&cvm);
 
     if(m_whiteSpace2FileMergeDefault <= (int)e_SrcSelector::Min)
         m_whiteSpace2FileMergeDefault = (int)e_SrcSelector::None;
@@ -92,19 +127,8 @@ const QString Options::parseOptions(const QStringList& optionList)
             const QString key = optionString.left(pos);
             const QString val = optionString.mid(pos + 1);
 
-            bool bFound = false;
-            for(OptionItemBase* item : mOptionItemList)
-            {
-                if(item->getSaveName() == key)
-                {
-                    item->doPreserve();
-                    ValueMap config;
-                    config.writeEntry(key, val); // Write the value as a string and
-                    item->read(&config);         // use the internal conversion from string to the needed value.
-                    bFound = true;
-                    break;
-                }
-            }
+            bool bFound = accept(key, val);
+
             if(!bFound)
             {
                 result += "No config item named \"" + key + "\"\n";
@@ -122,10 +146,8 @@ QString Options::calcOptionHelp()
 {
     ValueMap config;
 
-    for(OptionItemBase* item : mOptionItemList)
-    {
-        item->write(&config);
-    }
+    write(&config);
+
     return config.getAsString();
 }
 

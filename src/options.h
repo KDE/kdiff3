@@ -9,6 +9,8 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
+#include "combiners.h"
+
 #include <boost/signals2.hpp>
 #include <list>
 
@@ -19,6 +21,8 @@
 #include <QStringList>
 
 #include <KSharedConfig>
+
+class ValueMap;
 
 class OptionItemBase;
 
@@ -37,6 +41,12 @@ class Options
     static boost::signals2::signal<void ()> apply;
     static boost::signals2::signal<void ()> resetToDefaults;
     static boost::signals2::signal<void ()> setToCurrent;
+    static boost::signals2::signal<void (ValueMap*)> read;
+    static boost::signals2::signal<void (ValueMap*)> write;
+
+    static boost::signals2::signal<void ()> preserve;
+    static boost::signals2::signal<void ()> unpreserve;
+    static boost::signals2::signal<bool (const QString&, const QString&), find> accept;
 
     void init();
 

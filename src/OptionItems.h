@@ -26,15 +26,9 @@
 class OptionItemBase
 {
   public:
-    explicit OptionItemBase(const QString& saveName)
-    {
-        m_saveName = saveName;
-        m_bPreserved = false;
-        connections.push_back(Options::apply.connect(boost::bind(&OptionItemBase::apply, this)));
-        connections.push_back(Options::setToCurrent.connect(boost::bind(&OptionItemBase::setToCurrent, this)));
-        connections.push_back(Options::resetToDefaults.connect(boost::bind(&OptionItemBase::setToDefault, this)));
-    }
+    explicit OptionItemBase(const QString& saveName);
     virtual ~OptionItemBase() = default;
+
     virtual void setToDefault() = 0;
     virtual void setToCurrent() = 0;
 
@@ -42,6 +36,7 @@ class OptionItemBase
 
     virtual void write(ValueMap*) const = 0;
     virtual void read(ValueMap*) = 0;
+
     void preserve()
     {
         if(!m_bPreserved)
@@ -50,6 +45,7 @@ class OptionItemBase
             preserveImp();
         }
     }
+
     void unpreserve()
     {
         if(m_bPreserved)
@@ -57,6 +53,9 @@ class OptionItemBase
             unpreserveImp();
         }
     }
+
+    bool accept(const QString& key, const QString& val);
+
     [[nodiscard]] QString getSaveName() const { return m_saveName; }
   protected:
     virtual void preserveImp() = 0;
