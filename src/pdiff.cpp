@@ -1593,7 +1593,7 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
     else
     {
         //Only a debugging aid now. Used to insure m_bDirCompare is not changed
-        const bool bDirCompare = m_bDirCompare;
+        [[maybe_unused]] const bool bDirCompare = m_bDirCompare;
 
         FileAccess destDir;
 
