@@ -13,6 +13,7 @@
 #include "OptionItems.h"
 
 #include <boost/signals2.hpp>
+#include <boost/bind/bind.hpp>
 
 #include <KSharedConfig>
 
