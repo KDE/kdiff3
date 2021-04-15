@@ -38,13 +38,13 @@ OptionItemBase::OptionItemBase(const QString& saveName)
     connections.push_back(Options::setToCurrent.connect(boost::bind(&OptionItemBase::setToCurrent, this)));
     connections.push_back(Options::resetToDefaults.connect(boost::bind(&OptionItemBase::setToDefault, this)));
 
-    connections.push_back(Options::read.connect(boost::bind(&OptionItemBase::read, this, _1)));
-    connections.push_back(Options::write.connect(boost::bind(&OptionItemBase::write, this, _1)));
+    connections.push_back(Options::read.connect(boost::bind(&OptionItemBase::read, this, boost::placeholders::_1)));
+    connections.push_back(Options::write.connect(boost::bind(&OptionItemBase::write, this, boost::placeholders::_1)));
 
     connections.push_back(Options::preserve.connect(boost::bind(&OptionItemBase::preserve, this)));
     connections.push_back(Options::unpreserve.connect(boost::bind(&OptionItemBase::unpreserve, this)));
 
-    connections.push_back(Options::accept.connect(boost::bind(&OptionItemBase::accept, this, _1, _2)));
+    connections.push_back(Options::accept.connect(boost::bind(&OptionItemBase::accept, this, boost::placeholders::_1, boost::placeholders::_2)));
 }
 
 bool OptionItemBase::accept(const QString& key, const QString& val)
