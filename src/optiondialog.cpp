@@ -1194,7 +1194,7 @@ void OptionDialog::setupDirectoryMergePage()
     pFindHidden->setToolTip(i18n("Finds hidden files and folders."));
     ++line;
 
-    OptionCheckBox* pFollowFileLinks = new OptionCheckBox(i18n("Follow file links"), false, "FollowFileLinks", &m_options->m_bDmFollowFileLinks, page);
+    OptionCheckBox* pFollowFileLinks = new OptionCheckBox(i18n("Follow file links"), true, "FollowFileLinks", &m_options->m_bDmFollowFileLinks, page);
     gbox->addWidget(pFollowFileLinks, line, 0, 1, 2);
     addOptionItem(pFollowFileLinks);
     pFollowFileLinks->setToolTip(i18n(
@@ -1202,7 +1202,7 @@ void OptionDialog::setupDirectoryMergePage()
         "Off: Compare the links."));
     ++line;
 
-    OptionCheckBox* pFollowDirLinks = new OptionCheckBox(i18n("Follow folder links"), false, "FollowDirLinks", &m_options->m_bDmFollowDirLinks, page);
+    OptionCheckBox* pFollowDirLinks = new OptionCheckBox(i18n("Follow folder links"), true, "FollowDirLinks", &m_options->m_bDmFollowDirLinks, page);
     gbox->addWidget(pFollowDirLinks, line, 0, 1, 2);
     addOptionItem(pFollowDirLinks);
     pFollowDirLinks->setToolTip(i18n(
