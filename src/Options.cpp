@@ -20,7 +20,7 @@
 
 boost::signals2::signal<void ()> Options::apply;
 boost::signals2::signal<void ()> Options::resetToDefaults;
-boost::signals2::signal<void()> Options::setToCurrent;
+boost::signals2::signal<void ()> Options::setToCurrent;
 boost::signals2::signal<void (ValueMap*)> Options::read;
 boost::signals2::signal<void (ValueMap*)> Options::write;
 
@@ -89,7 +89,6 @@ void Options::init()
     addOptionItem(std::make_shared<OptionStringList>(&m_recentEncodings, "RecentEncodings"));
 }
 
-
 void Options::saveOptions(const KSharedConfigPtr config)
 {
     // No i18n()-Translations here!
@@ -119,7 +118,7 @@ const QString Options::parseOptions(const QStringList& optionList)
 {
     QString result;
 
-    for(const QString &optionString : optionList)
+    for(const QString& optionString: optionList)
     {
         int pos = optionString.indexOf('=');
         if(pos > 0) // seems not to have a tag
@@ -155,4 +154,3 @@ void Options::addOptionItem(std::shared_ptr<OptionItemBase> inItem)
 {
     mOptionItemList.push_back(inItem);
 }
-

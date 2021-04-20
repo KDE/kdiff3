@@ -11,9 +11,9 @@
 #include "DirectoryInfo.h"
 #include "directorymergewindow.h"
 #include "fileaccess.h"
+#include "kdiff3.h"
 #include "Logging.h"
 #include "MergeFileInfos.h"
-#include "kdiff3.h"
 #include "optiondialog.h"
 #include "progress.h"
 #include "Utils.h"
@@ -631,7 +631,7 @@ void KDiff3App::initView()
     sizes[1] = total / 2;
     pVSplitter->setSizes(sizes);
 
-    QList<int> hSizes={1, 1, 1};
+    QList<int> hSizes = {1, 1, 1};
 
     m_pDiffWindowSplitter->setSizes(hSizes);
 
@@ -962,7 +962,7 @@ void KDiff3App::slotFileOpen()
     slotStatusMsg(i18n("Ready."));
 }
 
-void KDiff3App::slotFileOpen2(QStringList &errors, const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
+void KDiff3App::slotFileOpen2(QStringList& errors, const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn,
                               const QString& an1, const QString& an2, const QString& an3, TotalDiffStatus* pTotalDiffStatus)
 {
     if(!canContinue()) return;
@@ -2078,7 +2078,7 @@ void KDiff3App::slotClearManualDiffHelpList()
 
 void KDiff3App::slotEncodingChanged(QTextCodec*)
 {
-    mainInit(m_totalDiffStatus, InitFlag::loadFiles | InitFlag::useCurrentEncoding | InitFlag::autoSolve ); // Init with reload
+    mainInit(m_totalDiffStatus, InitFlag::loadFiles | InitFlag::useCurrentEncoding | InitFlag::autoSolve); // Init with reload
     slotRefresh();
 }
 
@@ -2094,12 +2094,12 @@ void KDiff3App::slotUpdateAvailabilities()
         if(m_pDirectoryMergeSplitter != nullptr)
             m_pDirectoryMergeSplitter->setVisible(m_bDirCompare);
 
-        if( !m_pMainWidget->isVisible() &&
+        if(!m_pMainWidget->isVisible() &&
            bTextDataAvailable && !m_pDirectoryMergeWindow->isScanning())
             m_pMainWidget->show();
     }
 
-    bool bDiffWindowVisible =  m_pMainWidget->isVisible();
+    bool bDiffWindowVisible = m_pMainWidget->isVisible();
     bool bMergeEditorVisible = m_pMergeWindowFrame != nullptr && m_pMergeWindowFrame->isVisible() && m_pMergeResultWindow != nullptr;
 
     m_pDirectoryMergeWindow->updateAvailabilities(bMergeEditorVisible, m_bDirCompare, bDiffWindowVisible, chooseA, chooseB, chooseC);
@@ -2107,7 +2107,7 @@ void KDiff3App::slotUpdateAvailabilities()
     dirShowBoth->setEnabled(m_bDirCompare);
     dirViewToggle->setEnabled(
         m_bDirCompare &&
-        ( m_pDirectoryMergeSplitter != nullptr &&
+        (m_pDirectoryMergeSplitter != nullptr &&
          ((!m_pDirectoryMergeSplitter->isVisible() && m_pMainWidget->isVisible()) ||
           (m_pDirectoryMergeSplitter->isVisible() && !m_pMainWidget->isVisible() && bTextDataAvailable))));
 

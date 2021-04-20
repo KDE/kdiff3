@@ -38,34 +38,36 @@
 #include <QPointer>
 #include <QPushButton>
 #include <QRadioButton>
-#include <QTextCodec>
 #include <QScrollArea>
+#include <QTextCodec>
 
 const QString OptionDialog::s_historyEntryStartRegExpToolTip = i18n("A version control history entry consists of several lines.\n"
-                                                "Specify the regular expression to detect the first line (without the leading comment).\n"
-                                                "Use parentheses to group the keys you want to use for sorting.\n"
-                                                "If left empty, then KDiff3 assumes that empty lines separate history entries.\n"
-                                                "See the documentation for details.");
+                                                                    "Specify the regular expression to detect the first line (without the leading comment).\n"
+                                                                    "Use parentheses to group the keys you want to use for sorting.\n"
+                                                                    "If left empty, then KDiff3 assumes that empty lines separate history entries.\n"
+                                                                    "See the documentation for details.");
 const QString OptionDialog::s_historyEntryStartSortKeyOrderToolTip = i18n("Each pair of parentheses used in the regular expression for the history start entry\n"
-                                                      "groups a key that can be used for sorting.\n"
-                                                      "Specify the list of keys (that are numbered in order of occurrence\n"
-                                                      "starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
-                                                      "If left empty, then no sorting will be done.\n"
-                                                      "See the documentation for details.");
+                                                                          "groups a key that can be used for sorting.\n"
+                                                                          "Specify the list of keys (that are numbered in order of occurrence\n"
+                                                                          "starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
+                                                                          "If left empty, then no sorting will be done.\n"
+                                                                          "See the documentation for details.");
 const QString OptionDialog::s_autoMergeRegExpToolTip = i18n("Regular expression for lines where KDiff3 should automatically choose one source.\n"
-                                        "When a line with a conflict matches the regular expression then\n"
-                                        "- if available - C, otherwise B will be chosen.");
+                                                            "When a line with a conflict matches the regular expression then\n"
+                                                            "- if available - C, otherwise B will be chosen.");
 const QString OptionDialog::s_historyStartRegExpToolTip = i18n("Regular expression for the start of the version control history entry.\n"
-                                           "Usually this line contains the \"$Log$\" keyword.\n"
-                                           "Default value: \".*\\$Log.*\\$.*\"");
+                                                               "Usually this line contains the \"$Log$\" keyword.\n"
+                                                               "Default value: \".*\\$Log.*\\$.*\"");
 
-class OptionCheckBox : public QCheckBox, public OptionBool
+class OptionCheckBox: public QCheckBox, public OptionBool
 {
   public:
     OptionCheckBox(const QString& text, bool bDefaultVal, const QString& saveName, bool* pbVar,
-                   QWidget* pParent)
-        : QCheckBox(text, pParent), OptionBool(pbVar, bDefaultVal, saveName)
-    {}
+                   QWidget* pParent):
+        QCheckBox(text, pParent),
+        OptionBool(pbVar, bDefaultVal, saveName)
+    {
+    }
     void setToDefault() override { setChecked(getDefault()); }
     void setToCurrent() override { setChecked(getCurrent()); }
 
@@ -76,13 +78,16 @@ class OptionCheckBox : public QCheckBox, public OptionBool
     Q_DISABLE_COPY(OptionCheckBox)
 };
 
-class OptionRadioButton : public QRadioButton, public OptionBool
+class OptionRadioButton: public QRadioButton, public OptionBool
 {
   public:
     OptionRadioButton(const QString& text, bool bDefaultVal, const QString& saveName, bool* pbVar,
-                      QWidget* pParent)
-        : QRadioButton(text, pParent), OptionBool(pbVar, bDefaultVal, saveName)
-    {}
+                      QWidget* pParent):
+        QRadioButton(text, pParent),
+        OptionBool(pbVar, bDefaultVal, saveName)
+    {
+    }
+
     void setToDefault() override { setChecked(getDefault()); }
     void setToCurrent() override { setChecked(getCurrent()); }
 
@@ -93,8 +98,8 @@ class OptionRadioButton : public QRadioButton, public OptionBool
     Q_DISABLE_COPY(OptionRadioButton)
 };
 
-FontChooser::FontChooser(QWidget* pParent)
-    : QGroupBox(pParent)
+FontChooser::FontChooser(QWidget* pParent):
+    QGroupBox(pParent)
 {
     QVBoxLayout* pLayout = new QVBoxLayout(this);
     m_pLabel = new QLabel(QString());
@@ -140,27 +145,31 @@ void FontChooser::slotSelectFont()
     m_pLabel->setText(i18n("Font: %1, %2, %3\n\nExample:", m_font.family(), m_font.styleName(), m_font.pointSize()));
 }
 
-class OptionFontChooser : public FontChooser, public OptionFont
+class OptionFontChooser: public FontChooser, public OptionFont
 {
   public:
-    OptionFontChooser(const QFont& defaultVal, const QString& saveName, QFont* pVar, QWidget* pParent) : FontChooser(pParent),
-                                                                                                                            OptionFont(pVar, defaultVal, saveName)
-    {}
+    OptionFontChooser(const QFont& defaultVal, const QString& saveName, QFont* pVar, QWidget* pParent):
+        FontChooser(pParent),
+        OptionFont(pVar, defaultVal, saveName)
+    {
+    }
 
     void setToDefault() override { setFont(getDefault(), false); }
     void setToCurrent() override { setFont(getCurrent(), false); }
     using OptionFont::apply;
     void apply() override { apply(font()); }
+
   private:
     Q_DISABLE_COPY(OptionFontChooser)
 };
 
-class OptionColorButton : public KColorButton, public OptionColor
+class OptionColorButton: public KColorButton, public OptionColor
 {
   public:
-    OptionColorButton(const QColor &defaultVal, const QString& saveName, QColor* pVar, QWidget* pParent)
-        : KColorButton(pParent), OptionColor(pVar, defaultVal, saveName)
-    {}
+    OptionColorButton(const QColor& defaultVal, const QString& saveName, QColor* pVar, QWidget* pParent):
+        KColorButton(pParent), OptionColor(pVar, defaultVal, saveName)
+    {
+    }
 
     void setToDefault() override { setColor(getDefault()); }
     void setToCurrent() override { setColor(getCurrent()); }
@@ -171,12 +180,13 @@ class OptionColorButton : public KColorButton, public OptionColor
     Q_DISABLE_COPY(OptionColorButton)
 };
 
-class OptionLineEdit : public QComboBox, public OptionString
+class OptionLineEdit: public QComboBox, public OptionString
 {
   public:
     OptionLineEdit(const QString& defaultVal, const QString& saveName, QString* pVar,
-                   QWidget* pParent)
-        : QComboBox(pParent), OptionString(pVar, defaultVal, saveName)
+                   QWidget* pParent):
+        QComboBox(pParent),
+        OptionString(pVar, defaultVal, saveName)
     {
         setMinimumWidth(50);
         setEditable(true);
@@ -226,12 +236,13 @@ class OptionLineEdit : public QComboBox, public OptionString
     QStringList m_list;
 };
 
-class OptionIntEdit : public QLineEdit, public OptionNum<int>
+class OptionIntEdit: public QLineEdit, public OptionNum<int>
 {
   public:
     OptionIntEdit(int defaultVal, const QString& saveName, int* pVar, int rangeMin, int rangeMax,
-                  QWidget* pParent)
-        : QLineEdit(pParent), OptionNum<int>(pVar, defaultVal, saveName)
+                  QWidget* pParent):
+        QLineEdit(pParent),
+        OptionNum<int>(pVar, defaultVal, saveName)
     {
         QIntValidator* v = new QIntValidator(this);
         v->setRange(rangeMin, rangeMax);
@@ -252,7 +263,7 @@ class OptionIntEdit : public QLineEdit, public OptionNum<int>
     void apply() override
     {
         const QIntValidator* v = static_cast<const QIntValidator*>(validator());
-        setCurrent( qBound(v->bottom(), text().toInt(), v->top()) );
+        setCurrent(qBound(v->bottom(), text().toInt(), v->top()));
 
         setText(getString());
     }
@@ -261,12 +272,13 @@ class OptionIntEdit : public QLineEdit, public OptionNum<int>
     Q_DISABLE_COPY(OptionIntEdit)
 };
 
-class OptionComboBox : public QComboBox, public OptionItemBase
+class OptionComboBox: public QComboBox, public OptionItemBase
 {
   public:
     OptionComboBox(int defaultVal, const QString& saveName, int* pVarNum,
-                   QWidget* pParent)
-        : QComboBox(pParent), OptionItemBase(saveName)
+                   QWidget* pParent):
+        QComboBox(pParent),
+        OptionItemBase(saveName)
     {
         setMinimumWidth(50);
         m_pVarNum = pVarNum;
@@ -275,8 +287,9 @@ class OptionComboBox : public QComboBox, public OptionItemBase
         setEditable(false);
     }
     OptionComboBox(int defaultVal, const QString& saveName, QString* pVarStr,
-                   QWidget* pParent)
-        : QComboBox(pParent), OptionItemBase(saveName)
+                   QWidget* pParent):
+        QComboBox(pParent),
+        OptionItemBase(saveName)
     {
         m_pVarNum = nullptr;
         m_pVarStr = pVarStr;
@@ -286,7 +299,8 @@ class OptionComboBox : public QComboBox, public OptionItemBase
     void setToDefault() override
     {
         setCurrentIndex(m_defaultVal);
-        if(m_pVarStr != nullptr) {
+        if(m_pVarStr != nullptr)
+        {
             *m_pVarStr = currentText();
         }
     }
@@ -300,7 +314,8 @@ class OptionComboBox : public QComboBox, public OptionItemBase
     using OptionItemBase::apply;
     void apply() override
     {
-        if(m_pVarNum != nullptr) {
+        if(m_pVarNum != nullptr)
+        {
             *m_pVarNum = currentIndex();
         }
         else
@@ -324,7 +339,8 @@ class OptionComboBox : public QComboBox, public OptionItemBase
     }
     void preserveImp() override
     {
-        if(m_pVarStr != nullptr) {
+        if(m_pVarStr != nullptr)
+        {
             m_preservedStrVal = *m_pVarStr;
         }
         else
@@ -334,7 +350,8 @@ class OptionComboBox : public QComboBox, public OptionItemBase
     }
     void unpreserveImp() override
     {
-        if(m_pVarStr != nullptr) {
+        if(m_pVarStr != nullptr)
+        {
             *m_pVarStr = m_preservedStrVal;
         }
         else
@@ -367,7 +384,7 @@ class OptionComboBox : public QComboBox, public OptionItemBase
     }
 };
 
-class OptionEncodingComboBox : public QComboBox, public OptionCodec
+class OptionEncodingComboBox: public QComboBox, public OptionCodec
 {
     Q_OBJECT
     QVector<QTextCodec*> m_codecVec;
@@ -375,8 +392,9 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
 
   public:
     OptionEncodingComboBox(const QString& saveName, QTextCodec** ppVarCodec,
-                           QWidget* pParent)
-        : QComboBox(pParent), OptionCodec(saveName)
+                           QWidget* pParent):
+        QComboBox(pParent),
+        OptionCodec(saveName)
     {
         m_ppVarCodec = ppVarCodec;
         insertCodec(i18n("Unicode, 8 bit"), QTextCodec::codecForName("UTF-8"));
@@ -479,7 +497,8 @@ class OptionEncodingComboBox : public QComboBox, public OptionCodec
     int m_preservedVal;
 };
 
-OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageDialog(parent)
+OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent):
+    KPageDialog(parent)
 {
     setFaceType(List);
     setWindowTitle(i18n("Configure"));
@@ -568,7 +587,7 @@ void OptionDialog::setupFontPage()
 void OptionDialog::setupColorPage()
 {
     QScrollArea* pageFrame = new QScrollArea();
-    KPageWidgetItem* pageItem = new KPageWidgetItem(pageFrame, i18nc("Title for color settings page","Color"));
+    KPageWidgetItem* pageItem = new KPageWidgetItem(pageFrame, i18nc("Title for color settings page", "Color"));
     pageItem->setHeader(i18n("Colors Settings"));
     pageItem->setIcon(QIcon::fromTheme(QStringLiteral("colormanagement")));
     addPage(pageItem);
@@ -1085,7 +1104,7 @@ void OptionDialog::setupMergePage()
 
 void OptionDialog::setupDirectoryMergePage()
 {
-    QScrollArea*  pageFrame = new QScrollArea();
+    QScrollArea* pageFrame = new QScrollArea();
     KPageWidgetItem* pageItem = new KPageWidgetItem(pageFrame, i18n("Folder"));
     pageItem->setHeader(i18n("Folder"));
     pageItem->setIcon(QIcon::fromTheme(QStringLiteral("inode-directory")));
@@ -1441,7 +1460,6 @@ void OptionDialog::setupIntegrationPage()
     topLayout->addStretch(10);
 }
 
-
 void OptionDialog::slotEncodingChanged()
 {
     if(m_pSameEncoding->isChecked())
@@ -1542,10 +1560,10 @@ QString OptionDialog::calcOptionHelp()
 
 void OptionDialog::slotHistoryMergeRegExpTester()
 {
-    QPointer<RegExpTester> dlg=QPointer<RegExpTester>(new RegExpTester(this, s_autoMergeRegExpToolTip, s_historyStartRegExpToolTip,
-                     s_historyEntryStartRegExpToolTip, s_historyEntryStartSortKeyOrderToolTip));
+    QPointer<RegExpTester> dlg = QPointer<RegExpTester>(new RegExpTester(this, s_autoMergeRegExpToolTip, s_historyStartRegExpToolTip,
+                                                                         s_historyEntryStartRegExpToolTip, s_historyEntryStartSortKeyOrderToolTip));
     dlg->init(m_pAutoMergeRegExpLineEdit->currentText(), m_pHistoryStartRegExpLineEdit->currentText(),
-             m_pHistoryEntryStartRegExpLineEdit->currentText(), m_pHistorySortKeyOrderLineEdit->currentText());
+              m_pHistoryEntryStartRegExpLineEdit->currentText(), m_pHistorySortKeyOrderLineEdit->currentText());
     if(dlg->exec())
     {
         m_pAutoMergeRegExpLineEdit->setEditText(dlg->autoMergeRegExp());
