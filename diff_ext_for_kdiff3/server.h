@@ -18,7 +18,8 @@
 
 typedef std::wstring tstring;
 
-#define i18n(x) getTranslation( TEXT(x) )
+#define toQString(s) QString::fromStdWString(s)
+#define fromQString(s) (s).toStdWString()
 
 #else
 
