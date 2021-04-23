@@ -63,7 +63,8 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     ProgressProxy pp;
     QStringList errors;
     // When doing a full analysis in the directory-comparison, then the statistics-results
-    // will be stored in the given TotalDiffStatus. Otherwise it will be 0.
+    // will be stored in the given TotalDiffStatus. Otherwise pTotalDiffStatus will
+    // point to m_totalDiffStatus.
     bool bLoadFiles = inFlags & InitFlag::loadFiles;
     bool bUseCurrentEncoding = inFlags & InitFlag::useCurrentEncoding;
     bool bAutoSolve = inFlags & InitFlag::autoSolve;
@@ -1038,6 +1039,7 @@ void KDiff3App::slotFileNameChanged(const QString& fileName, e_SrcSelector winId
     QString an2 = m_sd2->getAliasName();
     QString fn3 = m_sd3->getFilename();
     QString an3 = m_sd3->getAliasName();
+
     if(winIdx == e_SrcSelector::A)
     {
         fn1 = fileName;
