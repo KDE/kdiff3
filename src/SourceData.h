@@ -95,8 +95,6 @@ class SourceData
         e_LineEndStyle m_eLineEndStyle = eLineEndStyleUndefined;
 
       public:
-        ~FileData() { reset(); }
-
         bool readFile(FileAccess& file);
         bool readFile(const QString& filename);
         bool writeFile(const QString& filename);
