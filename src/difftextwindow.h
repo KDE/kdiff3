@@ -47,7 +47,7 @@ class DiffTextWindow : public QWidget
         const QString& fileName,
         QTextCodec* pTextCodec,
         e_LineEndStyle eLineEndStyle,
-        const std::shared_ptr<QVector<LineData>> &pLineData,
+        const std::shared_ptr<LineDataVector> &pLineData,
         int size,
         const Diff3LineVector* pDiff3LineVector,
         const ManualDiffHelpList* pManualDiffHelpList
@@ -154,8 +154,10 @@ class DiffTextWindow : public QWidget
       This list exists solely to auto disconnect boost signals.
     */
     std::list<boost::signals2::scoped_connection> connections;
+
     KDiff3App &m_app;
     DiffTextWindowData* d;
+
     void showStatusLine(const LineRef lineFromPos);
 
     bool canCopy() { return hasFocus() && !getSelection().isEmpty(); }

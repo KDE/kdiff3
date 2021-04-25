@@ -156,7 +156,7 @@ const QString SourceData::setData(const QString& data)
     return u8"";
 }
 
-const std::shared_ptr<QVector<LineData>>& SourceData::getLineDataForDiff() const
+const std::shared_ptr<LineDataVector>& SourceData::getLineDataForDiff() const
 {
     if(m_lmppData.m_pBuf == nullptr)
     {
@@ -168,7 +168,7 @@ const std::shared_ptr<QVector<LineData>>& SourceData::getLineDataForDiff() const
     }
 }
 
-const std::shared_ptr<QVector<LineData>>& SourceData::getLineDataForDisplay() const
+const std::shared_ptr<LineDataVector>& SourceData::getLineDataForDisplay() const
 {
     return m_normalData.m_v;
 }

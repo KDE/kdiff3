@@ -30,8 +30,8 @@ class SourceData
     Q_REQUIRED_RESULT qint64 getSizeBytes() const;
     Q_REQUIRED_RESULT const char* getBuf() const;
     Q_REQUIRED_RESULT const QString& getText() const;
-    Q_REQUIRED_RESULT const std::shared_ptr<QVector<LineData>>& getLineDataForDisplay() const;
-    Q_REQUIRED_RESULT const std::shared_ptr<QVector<LineData>>& getLineDataForDiff() const;
+    Q_REQUIRED_RESULT const std::shared_ptr<LineDataVector>& getLineDataForDisplay() const;
+    Q_REQUIRED_RESULT const std::shared_ptr<LineDataVector>& getLineDataForDiff() const;
 
     void setFilename(const QString& filename);
     void setFileAccess(const FileAccess& fileAccess);
@@ -89,7 +89,7 @@ class SourceData
         qint64 mDataSize = 0;
         qint64 mLineCount = 0; // Number of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
         QSharedPointer<QString> m_unicodeBuf=QSharedPointer<QString>::create();
-        std::shared_ptr<QVector<LineData>> m_v=std::make_shared<QVector<LineData>>();
+        std::shared_ptr<LineDataVector> m_v=std::make_shared<LineDataVector>();
         bool m_bIsText = false;
         bool m_bIncompleteConversion = false;
         e_LineEndStyle m_eLineEndStyle = eLineEndStyleUndefined;
