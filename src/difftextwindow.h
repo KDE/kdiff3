@@ -47,7 +47,7 @@ class DiffTextWindow : public QWidget
         const QString& fileName,
         QTextCodec* pTextCodec,
         e_LineEndStyle eLineEndStyle,
-        const QVector<LineData>* pLineData,
+        const std::shared_ptr<QVector<LineData>> &pLineData,
         int size,
         const Diff3LineVector* pDiff3LineVector,
         const ManualDiffHelpList* pManualDiffHelpList

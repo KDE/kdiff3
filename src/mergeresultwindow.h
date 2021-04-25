@@ -42,9 +42,9 @@ class MergeResultWindow: public QWidget
     MergeResultWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions, QStatusBar* pStatusBar);
 
     void init(
-        const QVector<LineData>* pLineDataA, LineRef sizeA,
-        const QVector<LineData>* pLineDataB, LineRef sizeB,
-        const QVector<LineData>* pLineDataC, LineRef sizeC,
+        const std::shared_ptr<QVector<LineData>> &pLineDataA, LineRef sizeA,
+        const std::shared_ptr<QVector<LineData>> &pLineDataB, LineRef sizeB,
+        const std::shared_ptr<QVector<LineData>> &pLineDataC, LineRef sizeC,
         const Diff3LineList* pDiff3LineList,
         TotalDiffStatus* pTotalDiffStatus,
         bool bAutoSolve
@@ -163,9 +163,9 @@ class MergeResultWindow: public QWidget
 
     QSharedPointer<Options> m_pOptions = nullptr;
 
-    const QVector<LineData>* m_pldA = nullptr;
-    const QVector<LineData>* m_pldB = nullptr;
-    const QVector<LineData>* m_pldC = nullptr;
+    std::shared_ptr<QVector<LineData>> m_pldA = nullptr;
+    std::shared_ptr<QVector<LineData>> m_pldB = nullptr;
+    std::shared_ptr<QVector<LineData>> m_pldC = nullptr;
     LineRef m_sizeA = 0;
     LineRef m_sizeB = 0;
     LineRef m_sizeC = 0;

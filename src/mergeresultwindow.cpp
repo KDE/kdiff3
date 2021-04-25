@@ -91,9 +91,9 @@ MergeResultWindow::MergeResultWindow(
 }
 
 void MergeResultWindow::init(
-    const QVector<LineData>* pLineDataA, LineRef sizeA,
-    const QVector<LineData>* pLineDataB, LineRef sizeB,
-    const QVector<LineData>* pLineDataC, LineRef sizeC,
+    const std::shared_ptr<QVector<LineData>> &pLineDataA, LineRef sizeA,
+    const std::shared_ptr<QVector<LineData>> &pLineDataB, LineRef sizeB,
+    const std::shared_ptr<QVector<LineData>> &pLineDataC, LineRef sizeC,
     const Diff3LineList* pDiff3LineList,
     TotalDiffStatus* pTotalDiffStatus,
     bool bAutoSolve)

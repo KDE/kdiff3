@@ -587,7 +587,7 @@ int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& 
     return -1;
 }
 
-void DiffList::runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2,
+void DiffList::runDiff(const std::shared_ptr<QVector<LineData>> &p1, const qint32 index1, LineRef size1, const std::shared_ptr<QVector<LineData>> &p2, const qint32 index2, LineRef size2,
                     const QSharedPointer<Options> &pOptions)
 {
     ProgressProxy pp;
@@ -596,9 +596,9 @@ void DiffList::runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef
     pp.setCurrent(0);
 
     clear();
-    if(p1 == nullptr || (*p1)[index1].getLine() == nullptr || p2 == nullptr || (*p2)[index2].getLine() == nullptr || size1 == 0 || size2 == 0)
+    if(p1->empty() || (*p1)[index1].getLine() == nullptr || p2->empty() || (*p2)[index2].getLine() == nullptr || size1 == 0 || size2 == 0)
     {
-        if(p1 != nullptr && p2 != nullptr && (*p1)[index1].getLine() == nullptr && (*p2)[index2].getLine() == nullptr && size1 == size2)
+        if(!p1->empty() && !p2->empty() && (*p1)[index1].getLine() == nullptr && (*p2)[index2].getLine() == nullptr && size1 == size2)
             push_back(Diff(size1, 0, 0));
         else
         {
@@ -684,7 +684,7 @@ void DiffList::runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef
     pp.setCurrent(1);
 }
 
-void ManualDiffHelpList::runDiff(const QVector<LineData>* p1, LineRef size1, const QVector<LineData>* p2, LineRef size2, DiffList& diffList,
+void ManualDiffHelpList::runDiff(const std::shared_ptr<QVector<LineData>> &p1, LineRef size1, const std::shared_ptr<QVector<LineData>> &p2, LineRef size2, DiffList& diffList,
                                  e_SrcSelector winIdx1, e_SrcSelector winIdx2,
                                  const QSharedPointer<Options> &pOptions)
 {
@@ -890,7 +890,7 @@ void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHe
 
 // Fourth step
 void Diff3LineList::calcDiff3LineListTrim(
-    const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList)
+    const std::shared_ptr<QVector<LineData>> &pldA, const std::shared_ptr<QVector<LineData>> &pldB, const std::shared_ptr<QVector<LineData>> &pldC, ManualDiffHelpList* pManualDiffHelpList)
 {
     const Diff3Line d3l_empty;
     remove(d3l_empty);
@@ -1170,7 +1170,7 @@ void Diff3LineList::calcDiff3LineListTrim(
 }
 
 void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
-                          const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC)
+                          const std::shared_ptr<QVector<LineData>> &pldA, const std::shared_ptr<QVector<LineData>> &pldB, const std::shared_ptr<QVector<LineData>> &pldC)
 {
     m_pDiff3LineList = pD3ll;
     m_pDiff3LineVector = pD3lv;
@@ -1180,13 +1180,13 @@ void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
 }
 
 void Diff3LineList::calcWhiteDiff3Lines(
-    const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, const bool bIgnoreComments)
+    const std::shared_ptr<QVector<LineData>> &pldA, const std::shared_ptr<QVector<LineData>> &pldB, const std::shared_ptr<QVector<LineData>> &pldC, const bool bIgnoreComments)
 {
     for(Diff3Line& diff3Line: *this)
     {
-        diff3Line.bWhiteLineA = (!diff3Line.getLineA().isValid() || pldA == nullptr || (*pldA)[diff3Line.getLineA()].whiteLine() || (bIgnoreComments && (*pldA)[diff3Line.getLineA()].isPureComment()));
-        diff3Line.bWhiteLineB = (!diff3Line.getLineB().isValid() || pldB == nullptr || (*pldB)[diff3Line.getLineB()].whiteLine() || (bIgnoreComments && (*pldB)[diff3Line.getLineB()].isPureComment()));
-        diff3Line.bWhiteLineC = (!diff3Line.getLineC().isValid() || pldC == nullptr || (*pldC)[diff3Line.getLineC()].whiteLine() || (bIgnoreComments && (*pldC)[diff3Line.getLineC()].isPureComment()));
+        diff3Line.bWhiteLineA = (!diff3Line.getLineA().isValid() || (*pldA)[diff3Line.getLineA()].whiteLine() || (bIgnoreComments && (*pldA)[diff3Line.getLineA()].isPureComment()));
+        diff3Line.bWhiteLineB = (!diff3Line.getLineB().isValid() || (*pldB)[diff3Line.getLineB()].whiteLine() || (bIgnoreComments && (*pldB)[diff3Line.getLineB()].isPureComment()));
+        diff3Line.bWhiteLineC = (!diff3Line.getLineC().isValid() || (*pldC)[diff3Line.getLineC()].whiteLine() || (bIgnoreComments && (*pldC)[diff3Line.getLineC()].isPureComment()));
     }
 }
 
@@ -1360,7 +1360,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
     }
 }
 
-bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2, const IgnoreFlags eIgnoreFlags)
+bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, const std::shared_ptr<QVector<LineData>> &v1, const std::shared_ptr<QVector<LineData>> &v2, const IgnoreFlags eIgnoreFlags)
 {
     LineRef k1 = 0;
     LineRef k2 = 0;
@@ -1484,7 +1484,7 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, Lin
     }
 }
 
-bool Diff3LineList::fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2, const IgnoreFlags eIgnoreFlags)
+bool Diff3LineList::fineDiff(const e_SrcSelector selector, const std::shared_ptr<QVector<LineData>> &v1, const std::shared_ptr<QVector<LineData>> &v2, const IgnoreFlags eIgnoreFlags)
 {
     // Finetuning: Diff each line with deltas
     ProgressProxy pp;

@@ -114,7 +114,7 @@ class DiffList: public std::list<Diff>
 {
   public:
     using std::list<Diff>::list;
-    void runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef size1, const QVector<LineData>* p2, const qint32 index2, LineRef size2, const QSharedPointer<Options>& pOptions);
+    void runDiff(const std::shared_ptr<QVector<LineData>> &p1, const qint32 index1, LineRef size1, const std::shared_ptr<QVector<LineData>> &p2, const qint32 index2, LineRef size2, const QSharedPointer<Options>& pOptions);
 };
 
 class LineData
@@ -170,17 +170,17 @@ class Diff3LineVector;
 class DiffBufferInfo
 {
   private:
-    const QVector<LineData>* mLineDataA = nullptr;
-    const QVector<LineData>* mLineDataB = nullptr;
-    const QVector<LineData>* mLineDataC = nullptr;
+    std::shared_ptr<QVector<LineData>> mLineDataA;
+    std::shared_ptr<QVector<LineData>> mLineDataB;
+    std::shared_ptr<QVector<LineData>> mLineDataC;
     const Diff3LineList* m_pDiff3LineList = nullptr;
     const Diff3LineVector* m_pDiff3LineVector = nullptr;
 
   public:
     void init(Diff3LineList* d3ll, const Diff3LineVector* d3lv,
-              const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC);
+              const std::shared_ptr<QVector<LineData>> &pldA, const std::shared_ptr<QVector<LineData>> &pldB, const std::shared_ptr<QVector<LineData>> &pldC);
 
-    [[nodiscard]] inline const QVector<LineData>* getLineData(e_SrcSelector srcIndex) const
+    [[nodiscard]] inline std::shared_ptr<QVector<LineData>> getLineData(e_SrcSelector srcIndex) const
     {
         switch(srcIndex)
         {
@@ -295,7 +295,7 @@ class Diff3Line
     Q_REQUIRED_RESULT inline qint32 linesNeededForDisplay() const { return mLinesNeededForDisplay; }
 
     void setLinesNeeded(const qint32 lines) { mLinesNeededForDisplay = lines; }
-    Q_REQUIRED_RESULT bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2, const IgnoreFlags eIgnoreFlags);
+    Q_REQUIRED_RESULT bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const std::shared_ptr<QVector<LineData>> &v1, const std::shared_ptr<QVector<LineData>> &v2, const IgnoreFlags eIgnoreFlags);
     void mergeOneLine(e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, e_SrcSelector& src, bool bTwoInputs) const;
 
     void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
@@ -328,9 +328,9 @@ class Diff3LineList: public std::list<Diff3Line>
 
     void findHistoryRange(const QRegularExpression& historyStart, bool bThreeFiles,
                           Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd) const;
-    bool fineDiff(const e_SrcSelector selector, const QVector<LineData>* v1, const QVector<LineData>* v2, const IgnoreFlags eIgnoreFlags);
+    bool fineDiff(const e_SrcSelector selector, const std::shared_ptr<QVector<LineData>> &v1, const std::shared_ptr<QVector<LineData>> &v2, const IgnoreFlags eIgnoreFlags);
     void calcDiff3LineVector(Diff3LineVector& d3lv);
-    void calcWhiteDiff3Lines(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, const bool bIgnoreComments);
+    void calcWhiteDiff3Lines(const std::shared_ptr<QVector<LineData>> &pldA, const std::shared_ptr<QVector<LineData>> &pldB, const std::shared_ptr<QVector<LineData>> &pldC, const bool bIgnoreComments);
 
     void calcDiff3LineListUsingAB(const DiffList* pDiffListAB);
     void calcDiff3LineListUsingAC(const DiffList* pDiffListAC);
@@ -338,7 +338,7 @@ class Diff3LineList: public std::list<Diff3Line>
 
     void correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHelpList);
 
-    void calcDiff3LineListTrim(const QVector<LineData>* pldA, const QVector<LineData>* pldB, const QVector<LineData>* pldC, ManualDiffHelpList* pManualDiffHelpList);
+    void calcDiff3LineListTrim(const std::shared_ptr<QVector<LineData>> &pldA, const std::shared_ptr<QVector<LineData>> &pldB, const std::shared_ptr<QVector<LineData>> &pldC, ManualDiffHelpList* pManualDiffHelpList);
 
     LineCount recalcWordWrap(bool resetDisplayCount)
     {
@@ -527,7 +527,7 @@ class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
     Q_REQUIRED_RESULT bool isValidMove(LineRef line1, LineRef line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
     void insertEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine);
 
-    void runDiff(const QVector<LineData>* p1, LineRef size1, const QVector<LineData>* p2, LineRef size2, DiffList& diffList,
+    void runDiff(const std::shared_ptr<QVector<LineData>> &p1, LineRef size1, const std::shared_ptr<QVector<LineData>> &p2, LineRef size2, DiffList& diffList,
                  e_SrcSelector winIdx1, e_SrcSelector winIdx2,
                  const QSharedPointer<Options>& pOptions);
 };

@@ -156,17 +156,21 @@ const QString SourceData::setData(const QString& data)
     return u8"";
 }
 
-const QVector<LineData>* SourceData::getLineDataForDiff() const
+const std::shared_ptr<QVector<LineData>>& SourceData::getLineDataForDiff() const
 {
     if(m_lmppData.m_pBuf == nullptr)
-        return m_normalData.m_v.size() > 0 ? &m_normalData.m_v : nullptr;
+    {
+        return m_normalData.m_v;
+    }
     else
-        return m_lmppData.m_v.size() > 0 ? &m_lmppData.m_v : nullptr;
+    {
+        return m_lmppData.m_v;
+    }
 }
 
-const QVector<LineData>* SourceData::getLineDataForDisplay() const
+const std::shared_ptr<QVector<LineData>>& SourceData::getLineDataForDisplay() const
 {
-    return m_normalData.m_v.size() > 0 ? &m_normalData.m_v : nullptr;
+    return m_normalData.m_v;
 }
 
 LineRef SourceData::getSizeLines() const
@@ -219,7 +223,7 @@ bool SourceData::isBinaryEqualWith(const QSharedPointer<SourceData>& other) cons
 void SourceData::FileData::reset()
 {
     m_pBuf.reset();
-    m_v.clear();
+    m_v->clear();
     mDataSize = 0;
     mLineCount = 0;
     m_bIsText = false;
@@ -536,7 +540,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
         // Preprocessing command may result in smaller data buffer so adjust size
         for(qint64 i = m_lmppData.lineCount(); i < m_normalData.lineCount(); ++i)
         { // Set all empty lines to point to the end of the buffer.
-            m_lmppData.m_v.push_back(LineData(m_lmppData.m_unicodeBuf, m_lmppData.m_unicodeBuf->length()));
+            m_lmppData.m_v->push_back(LineData(m_lmppData.m_unicodeBuf, m_lmppData.m_unicodeBuf->length()));
         }
 
         m_lmppData.mLineCount = m_normalData.lineCount();
@@ -551,8 +555,8 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
         for(qint32 i = 0; (qint64)i < vSize; ++i)
         {
             //TODO: Phase this out. We should not be messing with these flags outside the parser.
-            m_normalData.m_v[i].setSkipable(m_lmppData.m_v[i].isPureComment());
-            m_normalData.m_v[i].setSkipable(m_lmppData.m_v[i].isSkipable());
+            (*m_normalData.m_v)[i].setSkipable((*m_lmppData.m_v)[i].isPureComment());
+            (*m_normalData.m_v)[i].setSkipable((*m_lmppData.m_v)[i].isSkipable());
         }
     }
 }
@@ -598,7 +602,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         line.clear();
         if(lineCount >= TYPE_MAX(LineCount) - 5)
         {
-            m_v.clear();
+            m_v->clear();
             return false;
         }
 
@@ -612,7 +616,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         {
             if(curChar.isNull() || curChar.isNonCharacter())
             {
-                m_v.clear();
+                m_v->clear();
                 return true;
             }
 
@@ -668,14 +672,14 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
             parser->removeComment(line);
 
         //kdiff3 internally uses only unix style endings for simplicity.
-        m_v.push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isSkipable(), parser->isPureComment()));
+        m_v->push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isSkipable(), parser->isPureComment()));
         m_unicodeBuf->append(line).append('\n');
 
         lastOffset = m_unicodeBuf->length();
     }
 
-    m_v.push_back(LineData(m_unicodeBuf, lastOffset));
-    Q_ASSERT(m_v.size() < 2 || m_v[m_v.size() - 1].getOffset() != m_v[m_v.size() - 2].getOffset());
+    m_v->push_back(LineData(m_unicodeBuf, lastOffset));
+    Q_ASSERT(m_v->size() < 2 || (*m_v)[m_v->size() - 1].getOffset() != (*m_v)[m_v->size() - 2].getOffset());
 
     m_bIsText = true;
 

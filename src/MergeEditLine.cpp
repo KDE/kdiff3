@@ -8,7 +8,7 @@
 
 #include "MergeEditLine.h"
 
-QString MergeEditLine::getString(const QVector<LineData>* pLineDataA, const QVector<LineData>* pLineDataB, const QVector<LineData>* pLineDataC) const
+QString MergeEditLine::getString(const std::shared_ptr<QVector<LineData>> &pLineDataA, const std::shared_ptr<QVector<LineData>> &pLineDataB, const std::shared_ptr<QVector<LineData>> &pLineDataC) const
 {
     //Triggered by resize event during early init. Ignore these calls.
     if((m_src == e_SrcSelector::A && pLineDataA->empty()) || (m_src == e_SrcSelector::B && pLineDataB->empty()) || (m_src == e_SrcSelector::C && pLineDataC->empty()))

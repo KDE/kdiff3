@@ -143,7 +143,7 @@ class DiffTextWindowData
     QTextCodec* m_pTextCodec = nullptr;
     e_LineEndStyle m_eLineEndStyle;
 
-    const QVector<LineData>* m_pLineData = nullptr;
+    std::shared_ptr<QVector<LineData>> m_pLineData;
     int m_size = 0;
     QString m_filename;
     bool m_bWordWrap = false;
@@ -232,7 +232,7 @@ void DiffTextWindow::init(
     const QString& filename,
     QTextCodec* pTextCodec,
     e_LineEndStyle eLineEndStyle,
-    const QVector<LineData>* pLineData,
+    const std::shared_ptr<QVector<LineData>> &pLineData,
     int size,
     const Diff3LineVector* pDiff3LineVector,
     const ManualDiffHelpList* pManualDiffHelpList)

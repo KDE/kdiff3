@@ -100,7 +100,7 @@ class DiffTest: public QObject
         QCOMPARE(simData.getSizeLines(), 4);
         QCOMPARE(simData.getSizeBytes(), file.size());
 
-        const QVector<LineData>* lineData = simData.getLineDataForDisplay();
+        const std::shared_ptr<QVector<LineData>> &lineData = simData.getLineDataForDisplay();
         //Verify LineData is being setup correctly.
         QVERIFY(lineData != nullptr);
         QCOMPARE(lineData->size() - 1, 4);
@@ -139,7 +139,7 @@ class DiffTest: public QObject
         QVERIFY(simData.hasData());
         QCOMPARE(simData.getSizeBytes(), file.size());
 
-        const QVector<LineData>* lineData = simData.getLineDataForDisplay();
+        const std::shared_ptr<QVector<LineData>> &lineData = simData.getLineDataForDisplay();
         //Verify we actually have data.
         QVERIFY(lineData != nullptr);
         QCOMPARE(lineData->size() - 1, 4);
