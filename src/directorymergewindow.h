@@ -20,7 +20,6 @@
 #include <map>
 
 class Options;
-class KIconLoader;
 class StatusInfo;
 class DirectoryMergeInfo;
 class OneDirectoryInfo;

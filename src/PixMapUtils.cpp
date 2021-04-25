@@ -8,10 +8,11 @@
 
 #include "MergeFileInfos.h"
 
-#include <KIconLoader>
-
+#include <QApplication>
+#include <QIcon>
 #include <QPainter>
 #include <QPixmap>
+#include <QStyle>
 
 namespace PixMapUtils {
 namespace {
@@ -74,7 +75,8 @@ void initPixmaps(const QColor& newest, const QColor& oldest, const QColor& middl
     {
 #include "xpm/file.xpm"
 #include "xpm/folder.xpm"
-        s_pm_dir = new QPixmap(KIconLoader::global()->loadIcon("folder", KIconLoader::Small));
+        const int smallIcon = qApp->style()->pixelMetric(QStyle::PM_SmallIconSize);
+        s_pm_dir = new QPixmap(QIcon::fromTheme(QStringLiteral("folder")).pixmap(smallIcon));
         if(s_pm_dir->size() != QSize(16, 16))
         {
             delete s_pm_dir;

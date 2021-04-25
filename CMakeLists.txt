@@ -59,7 +59,6 @@ find_package(
     I18n
     CoreAddons
     Crash
-    IconThemes
     OPTIONAL_COMPONENTS
     DocTools
 )
@@ -69,7 +68,7 @@ set_package_properties(KF5DocTools PROPERTIES PURPOSE "Allows generating and ins
 option(ENABLE_AUTO "Enable kdiff3's '--auto' flag" ON)
 option(ENABLE_CLANG_TIDY "Run clang-tidy if available and cmake version >=3.6" OFF)
 
-set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::IconThemes )
+set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons )
 
 set(CMAKE_CXX_STANDARD 17)
 
