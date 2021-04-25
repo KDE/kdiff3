@@ -80,7 +80,10 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     add_compile_options("/EHs")
-    add_definitions(-DNOMINMAX) #Suppress MSVCs min/max macros
+    #Suppress MSVCs min/max macros
+    add_definitions(-DNOMINMAX)
+    #Suppress Microsoft specfic C4996 "deprecatation" warnings. Not helpful for code intended to run on any other platform.
+    add_definitions(-D_CRT_NONSTDC_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS_GLOBALS)
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8.0)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fstack-check")
