@@ -24,6 +24,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <memory>
 
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -207,7 +208,7 @@ DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
     setAttribute(Qt::WA_OpaquePaintEvent);
     setUpdatesEnabled(false);
 
-    d = new DiffTextWindowData(this);
+    d = std::make_unique<DiffTextWindowData>(this);
     setFocusPolicy(Qt::ClickFocus);
     setAcceptDrops(true);
 
@@ -223,10 +224,7 @@ DiffTextWindow::DiffTextWindow(DiffTextWindowFrame* pParent,
     setFont(d->getOptions()->defaultFont());
 }
 
-DiffTextWindow::~DiffTextWindow()
-{
-    delete d;
-}
+DiffTextWindow::~DiffTextWindow() = default;
 
 void DiffTextWindow::init(
     const QString& filename,
@@ -1877,7 +1875,7 @@ class DiffTextWindowFrameData
 DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<Options>& pOptions, e_SrcSelector winIdx, const QSharedPointer<SourceData>& psd, KDiff3App &app)
     : QWidget(pParent)
 {
-    d = new DiffTextWindowFrameData(this, pOptions, winIdx);
+    d = std::make_unique<DiffTextWindowFrameData>(this, pOptions, winIdx);
     d->mSourceData = psd;
     setAutoFillBackground(true);
     chk_connect(d->getBrowseButton(), &QPushButton::clicked, this, &DiffTextWindowFrame::slotBrowseButtonClicked);
@@ -1926,10 +1924,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<
     init();
 }
 
-DiffTextWindowFrame::~DiffTextWindowFrame()
-{
-    delete d;
-}
+DiffTextWindowFrame::~DiffTextWindowFrame() = default;
 
 void DiffTextWindowFrame::init()
 {

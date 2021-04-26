@@ -351,8 +351,6 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 
     if(qApp != nullptr)
         chk_connect(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
-
-    delete KDiff3Shell::getParser();
 }
 
 /*

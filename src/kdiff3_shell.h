@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -46,8 +46,8 @@ public:
     bool queryExit();
     void closeEvent(QCloseEvent*e) override;
 
-    static inline QCommandLineParser* getParser(){
-      static QCommandLineParser *parser = new QCommandLineParser();
+    static inline std::unique_ptr<QCommandLineParser>& getParser(){
+      static std::unique_ptr<QCommandLineParser> parser = std::make_unique<QCommandLineParser>();
       return parser;
     };
 private Q_SLOTS:

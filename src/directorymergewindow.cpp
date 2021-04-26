@@ -21,6 +21,7 @@
 
 #include <algorithm>
 #include <map>
+#include <memory>
 #include <vector>
 
 #include <QAction>
@@ -644,8 +645,8 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
 DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions, KDiff3App &app)
     : QTreeView(pParent)
 {
-    d = new DirectoryMergeWindowPrivate(this, app);
-    setModel(d);
+    d = std::make_unique<DirectoryMergeWindowPrivate>(this, app);
+    setModel(d.get());
     setItemDelegate(new DirMergeItemDelegate(this));
     chk_connect(this, &DirectoryMergeWindow::doubleClicked, this, &DirectoryMergeWindow::onDoubleClick);
     chk_connect(this, &DirectoryMergeWindow::expanded, this, &DirectoryMergeWindow::onExpanded);
@@ -655,10 +656,7 @@ DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointe
     setSortingEnabled(true);
 }
 
-DirectoryMergeWindow::~DirectoryMergeWindow()
-{
-    delete d;
-}
+DirectoryMergeWindow::~DirectoryMergeWindow() = default;
 
 void DirectoryMergeWindow::setDirectoryMergeInfo(DirectoryMergeInfo* p)
 {

@@ -130,7 +130,7 @@ private:
   [[nodiscard]] const QSharedPointer<Options>& getOptions() const;
 
   class DirectoryMergeWindowPrivate;
-  DirectoryMergeWindowPrivate* d;
+  std::unique_ptr<DirectoryMergeWindowPrivate> d;
   class DirMergeItemDelegate;
 };
 

@@ -11,6 +11,8 @@
 #include "../src/fileaccess.h"
 #include "../src/Utils.h"
 
+#include <memory>
+
 #include <QAction>
 #include <QMenu>
 #include <QUrl>
@@ -25,14 +27,14 @@
 #include <KProcess>
 
 
-//#include <iostream>
 
-static QStringList* s_pHistory = nullptr;
+
+static std::unique_ptr<QStringList> s_pHistory;
 
 class KDiff3PluginHistory
 {
-    KConfig* m_pConfig;
-    KConfigGroup* m_pConfigGroup;
+    std::unique_ptr<KConfig> m_pConfig;
+    std::unique_ptr<KConfigGroup> m_pConfigGroup;
 
   public:
     KDiff3PluginHistory()
@@ -41,9 +43,9 @@ class KDiff3PluginHistory
         if(s_pHistory == nullptr)
         {
             //std::cout << "New History: " << instanceName << std::endl;
-            s_pHistory = new QStringList;
-            m_pConfig = new KConfig("kdiff3fileitemactionrc", KConfig::SimpleConfig);
-            m_pConfigGroup = new KConfigGroup(m_pConfig, "KDiff3Plugin");
+            s_pHistory = std::make_unique<QStringList>();
+            m_pConfig = std::make_unique<KConfig>("kdiff3fileitemactionrc", KConfig::SimpleConfig);
+            m_pConfigGroup = std::make_unique<KConfigGroup>(m_pConfig.get(), "KDiff3Plugin");
             *s_pHistory = m_pConfigGroup->readEntry("HistoryStack", QStringList());
         }
     }
@@ -53,11 +55,8 @@ class KDiff3PluginHistory
         //std::cout << "Delete History" << std::endl;
         if(s_pHistory && m_pConfigGroup)
             m_pConfigGroup->writeEntry("HistoryStack", *s_pHistory);
-        delete s_pHistory;
-        delete m_pConfigGroup;
-        delete m_pConfig;
+
         s_pHistory = nullptr;
-        m_pConfig = nullptr;
     }
 };
 

@@ -156,7 +156,7 @@ class DiffTextWindow : public QWidget
     std::list<boost::signals2::scoped_connection> connections;
 
     KDiff3App &m_app;
-    DiffTextWindowData* d;
+    std::unique_ptr<DiffTextWindowData> d;
 
     void showStatusLine(const LineRef lineFromPos);
 
@@ -193,7 +193,7 @@ class DiffTextWindowFrame : public QWidget
     void slotEncodingChanged(QTextCodec* c);
 
   private:
-    DiffTextWindowFrameData* d;
+    std::unique_ptr<DiffTextWindowFrameData> d;
 };
 
 class EncodingLabel : public QLabel
