@@ -3,8 +3,6 @@
   <!ENTITY kdiff3 "<application>KDiff3</application>">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">
-  <!-- This entity is missing from KF5DocTools 5.44 -->
-  <!ENTITY ASCII "<acronym>ASCII</acronym>">
 ]>
 
 <book lang="&language;">
@@ -1958,6 +1956,15 @@ and menu. Merging or folder comparison are not supported then.
    How can I synchronise the diff and merge views, so that all views show the same text position?
 </para></question><answer><para>
   Click into the summary column left of the text. (<link linkend="synchronise_views">See also here.</link>)
+</para></answer></qandaentry>
+
+<qandaentry><question><para>
+    Why does <userinput>git difftool --dir-diff</userinput> give "Mix of links and normal files error" when using KDiff3 as the difftool?
+</para></question><answer><para>
+    This is a side effect of gits internal workings. If you try to compare a previous revision to the current work tree git will compare actually files representing the past commit to symlinks pointing to the
+    worktree. As of 1.9 KDiff3 defaults to having <guilabel>Follow file links</guilabel> and <guilabel>Follow folder links</guilabel> on. Prior to this they were off by default.
+    This didn't matter when not doing if "Full analysis" was also off. However, with <guilabel>Full analysis</guilabel> on KDiff3 would intially attempt to compare the path pointed to by a link rather than fallow it.
+    Prior to 1.8 the resulting error was ignored. However, 1.8 began reporting the error.
 </para></answer></qandaentry>
 
 <qandaentry><question><para>
