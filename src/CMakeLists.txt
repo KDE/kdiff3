@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 ########### kdiff3 KPart ###############
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts WidgetsAddons)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n Parts WidgetsAddons)
 
 set(kdiff3part_PART_SRCS
    kdiff3_part.cpp
@@ -70,7 +70,7 @@ endif()
 include(icons/CMakeLists.txt)
 add_executable(kdiff3 ${kdiff3_SRCS})
 
-target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::Parts KF5::Crash ${KDiff3_LIBRARIES} )
+target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::I18n KF5::Parts KF5::Crash ${KDiff3_LIBRARIES} )
 
 # See https://cmake.org/cmake/help/v3.15/prop_tgt/MACOSX_BUNDLE_INFO_PLIST.html
 if(APPLE)

@@ -45,7 +45,7 @@ ecm_add_test(GitIgnoreListTest.cpp ../GitIgnoreList.cpp ../fileaccess.cpp ../Uti
 
 ecm_add_test(DiffTest.cpp ../diff.cpp ../Logging.cpp ../Utils.cpp ../progress.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp
     TEST_NAME "difftest"
-    LINK_LIBRARIES Qt5::Test Qt5::Widgets Qt5::Gui KF5::ConfigCore KF5::KIOCore KF5::Parts
+    LINK_LIBRARIES Qt5::Test Qt5::Widgets Qt5::Gui KF5::ConfigCore KF5::I18n KF5::KIOCore KF5::Parts
 )
 
 ecm_add_test(Diff3LineTest.cpp ../diff.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../Logging.cpp ../Utils.cpp ../progress.cpp
