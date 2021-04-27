@@ -320,13 +320,13 @@ DIFF_EXT::InvokeCommand(LPCMINVOKECOMMANDINFO ici)
       else if(id == m_id_About)
       {
          LOG();
-         QString sBits = i18n("(32 Bit)");
-         if (sizeof(void*)==8)
+
          MessageBox( _hwnd, (fromQString(i18n("Diff-Ext Copyright (c) 2003-2006, Sergey Zorin. All rights reserved.\n")
             + i18n("This software is distributable under the BSD-2-Clause license.\n")
             + i18n("Some extensions for KDiff3 (c) 2006-2013 by Joachim Eibl.\n")
+            + i18n("Ported to Qt5/Kf5 by Michael Reeves\n")
             + i18n("Homepage for Diff-Ext: http://diff-ext.sourceforge.net\n"))).c_str()
-            , fromQString(i18n("About Diff-Ext for KDiff3 ")+sBits).c_str(), MB_OK );
+            , fromQString(i18n("About Diff-Ext for KDiff3 (64 Bit)")).c_str(), MB_OK );
       }
       else
       {
