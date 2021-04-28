@@ -166,8 +166,10 @@ class LineData
 
 class ManualDiffHelpList; // A list of corresponding ranges
 
+class Diff3Line;
 class Diff3LineList;
-class Diff3LineVector;
+
+using Diff3LineVector = QVector<Diff3Line*>;
 
 class DiffBufferInfo
 {
@@ -396,9 +398,6 @@ class Diff3LineList: public std::list<Diff3Line>
     }
 };
 
-class Diff3LineVector : public QVector<Diff3Line*>
-{
-};
 
 struct Diff3WrapLine
 {
