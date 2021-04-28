@@ -26,9 +26,6 @@
 #include <KPluginLoader>
 #include <KProcess>
 
-
-
-
 static std::unique_ptr<QStringList> s_pHistory;
 
 class KDiff3PluginHistory
@@ -65,8 +62,8 @@ KDiff3PluginHistory s_history;
 K_PLUGIN_FACTORY_WITH_JSON(KDiff3FileItemActionFactory, "kdiff3fileitemaction.json", registerPlugin<KDiff3FileItemAction>();)
 #include "kdiff3fileitemaction.moc"
 
-KDiff3FileItemAction::KDiff3FileItemAction(QObject* pParent, const QVariantList& /*args*/)
-    : KAbstractFileItemActionPlugin(pParent)
+KDiff3FileItemAction::KDiff3FileItemAction(QObject* pParent, const QVariantList& /*args*/):
+    KAbstractFileItemActionPlugin(pParent)
 {
 }
 
