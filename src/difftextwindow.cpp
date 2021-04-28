@@ -112,7 +112,7 @@ class DiffTextWindowData
 #endif
     }
 
-    QString getString(int d3lIdx);
+    QString getString(LineIndex d3lIdx);
     QString getLineString(int line);
 
     void writeLine(
@@ -501,7 +501,7 @@ LineCount DiffTextWindow::getNofLines()
     return d->m_bWordWrap ? d->m_diff3WrapLineVector.size() : d->getDiff3LineVector()->size();
 }
 
-int DiffTextWindow::convertLineToDiff3LineIdx(LineRef line)
+LineIndex DiffTextWindow::convertLineToDiff3LineIdx(LineRef line)
 {
     if(line.isValid() && d->m_bWordWrap && d->m_diff3WrapLineVector.size() > 0)
         return d->m_diff3WrapLineVector[std::min((LineRef::LineType)line, d->m_diff3WrapLineVector.size() - 1)].diff3LineIndex;
@@ -509,7 +509,7 @@ int DiffTextWindow::convertLineToDiff3LineIdx(LineRef line)
         return line;
 }
 
-LineRef DiffTextWindow::convertDiff3LineIdxToLine(int d3lIdx)
+LineRef DiffTextWindow::convertDiff3LineIdxToLine(LineIndex d3lIdx)
 {
     if(d->m_bWordWrap && d->getDiff3LineVector() != nullptr && d->getDiff3LineVector()->size() > 0)
         return (*d->getDiff3LineVector())[std::min(d3lIdx, d->getDiff3LineVector()->size() - 1)]->sumLinesNeededForDisplay();
@@ -1288,7 +1288,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int beginL
     }
 }
 
-QString DiffTextWindowData::getString(int d3lIdx)
+QString DiffTextWindowData::getString(LineIndex d3lIdx)
 {
     Q_ASSERT(!(m_pLineData != nullptr && m_pLineData->empty() && m_size != 0));
 

@@ -7,7 +7,10 @@
 #ifndef COMMENTPARSER_H
 #define COMMENTPARSER_H
 
+#include "TypeUtils.h"
+
 #include <vector>
+
 #include <QChar>
 #include <QString>
 
@@ -46,11 +49,11 @@ class DefaultCommentParser : public CommentParser
 
     struct CommentRange
     {
-          qint32 startOffset = 0;
-          qint32 endOffset = 0;
+          QtSizeType startOffset = 0;
+          QtSizeType endOffset = 0;
     };
 
-    qint32 offset = -1;
+    QtSizeType offset = -1;
 
     CommentRange lastComment;
 

@@ -325,7 +325,7 @@ QTextCodec* SourceData::detectEncoding(const QString& fileName, QTextCodec* pFal
     {
         char buf[200];
         qint64 size = f.read(buf, sizeof(buf));
-        qint64 skipBytes = 0;
+        FileOffset skipBytes = 0;
         QTextCodec* pCodec = detectEncoding(buf, size, skipBytes);
         if(pCodec)
             return pCodec;
@@ -573,8 +573,8 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     QString line;
     QChar curChar;
     LineCount lineCount = 0;
-    qint64 lastOffset = 0;
-    qint64 skipBytes = 0;
+    FileOffset lastOffset = 0;
+    FileOffset skipBytes = 0;
     QScopedPointer<CommentParser> parser(new DefaultCommentParser());
 
     // detect line end style
@@ -588,7 +588,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     if(mDataSize - skipBytes > TYPE_MAX(QtNumberType))
         return false;
 
-    const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (int)(mDataSize - skipBytes));
+    const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (QtSizeType)(mDataSize - skipBytes));
     QTextStream ts(ba, QIODevice::ReadOnly); //Don't use text mode we need to see the actual line ending.
     ts.setCodec(pEncoding);
     ts.setAutoDetectUnicode(false);
@@ -608,8 +608,8 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
         ts >> curChar;
 
-        quint32 firstNonwhite = 0;
-        bool    foundNonWhite = false;
+        QtSizeType  firstNonwhite = 0;
+        bool        foundNonWhite = false;
 
         //QTextStream::readLine doesn't tell us about line endings.
         while(curChar != '\n' && curChar != '\r')
@@ -715,11 +715,11 @@ bool SourceData::convertFileEncoding(const QString& fileNameIn, QTextCodec* pCod
 
 QTextCodec* SourceData::getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag)
 {
-    int encodingPos = s.indexOf(encodingTag);
+    QtSizeType encodingPos = s.indexOf(encodingTag);
     if(encodingPos >= 0)
     {
-        int apostrophPos = s.indexOf('"', encodingPos + encodingTag.length());
-        int apostroph2Pos = s.indexOf('\'', encodingPos + encodingTag.length());
+        QtSizeType apostrophPos = s.indexOf('"', encodingPos + encodingTag.length());
+        QtSizeType apostroph2Pos = s.indexOf('\'', encodingPos + encodingTag.length());
         char apostroph = '"';
         if(apostroph2Pos >= 0 && (apostrophPos < 0 || apostroph2Pos < apostrophPos))
         {
@@ -727,7 +727,7 @@ QTextCodec* SourceData::getEncodingFromTag(const QByteArray& s, const QByteArray
             apostrophPos = apostroph2Pos;
         }
 
-        int encodingEnd = s.indexOf(apostroph, apostrophPos + 1);
+        QtSizeType encodingEnd = s.indexOf(apostroph, apostrophPos + 1);
         if(encodingEnd >= 0) // e.g.: <meta charset="utf-8"> or <?xml version="1.0" encoding="ISO-8859-1"?>
         {
             QByteArray encoding = s.mid(apostrophPos + 1, encodingEnd - (apostrophPos + 1));
@@ -742,7 +742,7 @@ QTextCodec* SourceData::getEncodingFromTag(const QByteArray& s, const QByteArray
     return nullptr;
 }
 
-QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, qint64& skipBytes)
+QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes)
 {
     if(size >= 2)
     {
@@ -772,14 +772,14 @@ QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, qint64& ski
         We don't need the whole file here just the header.
 ]    */
     if(size <= 5000)
-        s = QByteArray(buf, (int)size);
+        s = QByteArray(buf, (QtSizeType)size);
     else
         s = QByteArray(buf, 5000);
 
-    int xmlHeaderPos = s.indexOf("<?xml");
+    QtSizeType xmlHeaderPos = s.indexOf("<?xml");
     if(xmlHeaderPos >= 0)
     {
-        int xmlHeaderEnd = s.indexOf("?>", xmlHeaderPos);
+        QtSizeType xmlHeaderEnd = s.indexOf("?>", xmlHeaderPos);
         if(xmlHeaderEnd >= 0)
         {
             QTextCodec* pCodec = getEncodingFromTag(s.mid(xmlHeaderPos, xmlHeaderEnd - xmlHeaderPos), "encoding=");
@@ -789,10 +789,10 @@ QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, qint64& ski
     }
     else // HTML
     {
-        int metaHeaderPos = s.indexOf("<meta");
+        QtSizeType metaHeaderPos = s.indexOf("<meta");
         while(metaHeaderPos >= 0)
         {
-            int metaHeaderEnd = s.indexOf(">", metaHeaderPos);
+            QtSizeType metaHeaderEnd = s.indexOf(">", metaHeaderPos);
             if(metaHeaderEnd >= 0)
             {
                 QTextCodec* pCodec = getEncodingFromTag(s.mid(metaHeaderPos, metaHeaderEnd - metaHeaderPos), "charset=");

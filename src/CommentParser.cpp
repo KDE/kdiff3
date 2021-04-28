@@ -171,7 +171,7 @@ void DefaultCommentParser::removeComment(QString &line)
         if(range.endOffset > line.length() && range.startOffset > line.length()) return;
         if(range.endOffset < range.startOffset) return;
 #endif
-        qint32 size = range.endOffset - range.startOffset;
+        QtSizeType size = range.endOffset - range.startOffset;
         line.replace(range.startOffset, size, QString(" ").repeated(size));
     }
 }

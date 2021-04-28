@@ -1,9 +1,9 @@
 /**
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2021 Michael Reeves <reeves.87@gmail.com>
  * SPDX-License-Identifier: GPL-2.0-or-later
- * 
+ *
  */
 
 #include "DefaultFileAccessJobHandler.h"
@@ -13,6 +13,7 @@
 #include "Logging.h"
 #include "progress.h"
 #include "ProgressProxyExtender.h"
+#include "TypeUtils.h"
 
 #include <KJob>
 #include <KIO/CopyJob>
@@ -143,13 +144,12 @@ void DefaultFileAccessJobHandler::slotPutData(KIO::Job* pJob, QByteArray& data)
     {
         /*
             Think twice before doing this in new code.
-            The maxChunkSize must be able to fit a 32-bit int. Given that the fallowing is safe.
-
+            The maxChunkSize must be able to fit a 32-bit int. Given that the fallowing is safe for qt5.
         */
         qint64 maxChunkSize = 100000;
         qint64 length = std::min(maxChunkSize, m_maxLength - m_transferredBytes);
-        data.resize((int)length);
-        if(data.size() == (int)length)
+        data.resize((QtSizeType)length);
+        if(data.size() == (QtSizeType)length)
         {
             if(length > 0)
             {

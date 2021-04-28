@@ -35,7 +35,7 @@ int LineData::width(int tabSize) const
     QString pLine = getLine();
     int w = 0;
     int j = 0;
-    for(int i = 0; i < size(); ++i)
+    for(QtSizeType i = 0; i < size(); ++i)
     {
         if(pLine[i] == '\t')
         {
@@ -587,7 +587,7 @@ int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& 
     return -1;
 }
 
-void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const qint32 index1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, const qint32 index2, LineRef size2,
+void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t index1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, const size_t index2, LineRef size2,
                     const QSharedPointer<Options> &pOptions)
 {
     ProgressProxy pp;
@@ -1489,7 +1489,7 @@ bool Diff3LineList::fineDiff(const e_SrcSelector selector, const std::shared_ptr
     // Finetuning: Diff each line with deltas
     ProgressProxy pp;
     bool bTextsTotalEqual = true;
-    int listSize = size();
+    QtSizeType listSize = size();
     pp.setMaxNofSteps(listSize);
     int listIdx = 0;
 
@@ -1518,7 +1518,7 @@ void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
 // Just make sure that all input lines are in the output too, exactly once.
 void Diff3LineList::debugLineCheck(const LineCount size, const e_SrcSelector srcSelector) const
 {
-    int i = 0;
+    LineCount i = 0;
 
     for(const Diff3Line &entry: *this)
     {

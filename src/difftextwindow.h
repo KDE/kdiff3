@@ -67,8 +67,8 @@ class DiffTextWindow : public QWidget
     int getNofVisibleLines();
     int getVisibleTextAreaWidth();
 
-    int convertLineToDiff3LineIdx(LineRef line);
-    LineRef convertDiff3LineIdxToLine(int d3lIdx);
+    LineIndex convertLineToDiff3LineIdx(LineRef line);
+    LineRef convertDiff3LineIdxToLine(LineIndex d3lIdx);
 
     void convertD3LCoordsToLineCoords(int d3LIdx, int d3LPos, int& line, int& pos);
     void convertLineCoordsToD3LCoords(int line, int pos, int& d3LIdx, int& d3LPos);

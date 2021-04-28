@@ -67,7 +67,7 @@ class SourceData
     bool convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
                                 const QString& fileNameOut, QTextCodec* pCodecOut);
 
-    static QTextCodec* detectEncoding(const char* buf, qint64 size, qint64& skipBytes);
+    static QTextCodec* detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes);
     static QTextCodec* getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag);
 
     QTextCodec* detectEncoding(const QString& fileName, QTextCodec* pFallbackCodec);
@@ -86,7 +86,7 @@ class SourceData
       private:
         friend SourceData;
         std::unique_ptr<char[]> m_pBuf; //TODO: Phase out needlessly wastes memory and time by keeping second copy of file data.
-        qint64 mDataSize = 0;
+        quint64 mDataSize = 0;
         qint64 mLineCount = 0; // Number of lines in m_pBuf1 and size of m_v1, m_dv12 and m_dv13
         QSharedPointer<QString> m_unicodeBuf=QSharedPointer<QString>::create();
         std::shared_ptr<LineDataVector> m_v=std::make_shared<LineDataVector>();

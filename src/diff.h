@@ -118,7 +118,7 @@ class DiffList: public std::list<Diff>
 {
   public:
     using std::list<Diff>::list;
-    void runDiff(const std::shared_ptr<LineDataVector> &p1, const qint32 index1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, const qint32 index2, LineRef size2, const QSharedPointer<Options>& pOptions);
+    void runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t index1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, const size_t index2, LineRef size2, const QSharedPointer<Options>& pOptions);
 };
 
 class LineData
@@ -126,15 +126,15 @@ class LineData
   private:
     QSharedPointer<QString> mBuffer;
     //QString pLine;
-    QtNumberType mFirstNonWhiteChar = 0;
-    qint64 mOffset = 0;
-    QtNumberType mSize = 0;
+    QtSizeType mFirstNonWhiteChar = 0;
+    FileOffset mOffset = 0;
+    QtSizeType mSize = 0;
     bool bContainsPureComment = false;
     bool bSkipable = false;//TODO: Move me
 
   public:
     explicit LineData() = default; // needed for Qt internal reasons should not be used.
-    inline LineData(const QSharedPointer<QString>& buffer, const qint64 inOffset, QtNumberType inSize = 0, QtNumberType inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
+    inline LineData(const QSharedPointer<QString>& buffer, const FileOffset inOffset, QtSizeType inSize = 0, QtSizeType inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
     {
         mBuffer = buffer;
         mOffset = inOffset;
@@ -143,7 +143,7 @@ class LineData
         bSkipable = inIsSkipable;
         mFirstNonWhiteChar = inFirstNonWhiteChar;
     }
-    Q_REQUIRED_RESULT inline int size() const { return mSize; }
+    Q_REQUIRED_RESULT inline QtSizeType size() const { return mSize; }
     Q_REQUIRED_RESULT inline qint32 getFirstNonWhiteChar() const { return mFirstNonWhiteChar; }
 
     /*
@@ -363,15 +363,15 @@ class Diff3LineList: public std::list<Diff3Line>
     }
 
     //TODO: Add safety guards to prevent list from getting too large. Same problem as with QLinkedList.
-    [[nodiscard]] qint32 size() const
+    [[nodiscard]] QtSizeType size() const
     {
-        if(std::list<Diff3Line>::size() > (size_t)TYPE_MAX(qint32))//explicit cast to silence gcc
+        if(std::list<Diff3Line>::size() > (size_t)TYPE_MAX(QtSizeType))//explicit cast to silence gcc
         {
             qCDebug(kdiffMain) << "Diff3Line: List too large. size=" << std::list<Diff3Line>::size();
             Q_ASSERT(false); //Unsupported size
             return 0;
         }
-        return (qint32)std::list<Diff3Line>::size();
+        return (QtSizeType)std::list<Diff3Line>::size();
     } //safe for small files same limit as exited with QLinkedList. This should ultimatly be removed.
 
     void debugLineCheck(const LineCount size, const e_SrcSelector srcSelector) const;
