@@ -13,13 +13,15 @@
 #include "LineRef.h"
 #include "Logging.h"
 
+#include <vector>
+
 #include <QList>
 #include <QVector>
 
 class LineData;
 class Options;
 
-using LineDataVector=QVector<LineData>;
+using LineDataVector=std::vector<LineData>;
 
 //e_SrcSelector must be sequential with no gaps between Min and Max.
 enum class e_SrcSelector

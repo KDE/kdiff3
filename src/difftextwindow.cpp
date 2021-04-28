@@ -1221,7 +1221,7 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, int nofLin
 
 void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int beginLine, int endLine)
 {
-    if(m_pLineData == nullptr || m_pLineData->isEmpty()) return;
+    if(m_pLineData == nullptr || m_pLineData->empty()) return;
     m_lineNumberWidth = m_pOptions->m_bShowLineNumbers ? (int)log10((double)std::max(m_size, 1)) + 1 : 0;
 
     if(m_winIdx == e_SrcSelector::A)
@@ -1290,9 +1290,9 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int beginL
 
 QString DiffTextWindowData::getString(int d3lIdx)
 {
-    Q_ASSERT(!(m_pLineData != nullptr && m_pLineData->isEmpty() && m_size != 0));
+    Q_ASSERT(!(m_pLineData != nullptr && m_pLineData->empty() && m_size != 0));
 
-    if(m_pLineData == nullptr || m_pLineData->isEmpty() || d3lIdx < 0 || d3lIdx >= m_pDiff3LineVector->size())
+    if(m_pLineData == nullptr || m_pLineData->empty() || d3lIdx < 0 || d3lIdx >= m_pDiff3LineVector->size())
         return QString();
 
     const Diff3Line* d3l = (*m_pDiff3LineVector)[d3lIdx];
