@@ -78,7 +78,9 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CLANG_WARNING_FLAGS "-Wno-undef -Wno-trigraphs -Wno-invalid-pp-token -Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing -fstack-protector-all")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-    add_compile_options("/EHs")
+    #Make MSVC obey standard exception C++ handling by destroying all objects going out of scope as a result of the exception.
+    #This also separates a Microsoft specific SEH which catches non-c++ asynchronous exceptions.
+    add_compile_options("/EHsc")
     #Suppress MSVCs min/max macros
     add_definitions(-DNOMINMAX)
     #Suppress Microsoft specfic C4996 "deprecatation" warnings. Not helpful for code intended to run on any other platform.
