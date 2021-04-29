@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
@@ -28,12 +28,12 @@ T max3( T d1, T d2, T d3 )
 
 inline int getAtomic(QAtomicInt& ai)
 {
-   return ai.load();
+   return ai.loadRelaxed();
 }
 
 inline qint64 getAtomic(QAtomicInteger<qint64>& ai)
 {
-   return ai.load();
+   return ai.loadRelaxed();
 }
 
 class QFont;
