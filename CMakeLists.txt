@@ -12,7 +12,7 @@ set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially remo
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(ECM_MIN_VERSION "5.50.0")
 set(QT_MIN_VERSION "5.12.0")
-#KF5 5.27 fixes a crash bug triggered on exit.
+
 set(KF5_MIN_VERSION "5.50.0")
 
 find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED)
