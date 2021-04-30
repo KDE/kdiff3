@@ -28,12 +28,20 @@ T max3( T d1, T d2, T d3 )
 
 inline int getAtomic(QAtomicInt& ai)
 {
-   return ai.loadRelaxed();
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+    return ai.load();
+#else
+    return ai.loadRelaxed();
+#endif
 }
 
 inline qint64 getAtomic(QAtomicInteger<qint64>& ai)
 {
-   return ai.loadRelaxed();
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+    return ai.load();
+#else
+    return ai.loadRelaxed();
+#endif
 }
 
 class QFont;
