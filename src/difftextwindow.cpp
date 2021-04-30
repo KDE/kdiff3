@@ -1865,7 +1865,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<
     d->m_pDiffTextWindow = new DiffTextWindow(this, pOptions, winIdx);
     d->m_pDiffTextWindow->setSourceData(psd);
     QVBoxLayout* pVTopLayout = new QVBoxLayout(const_cast<QWidget*>(d->getTopLineWidget()));
-    pVTopLayout->setMargin(2);
+    pVTopLayout->setContentsMargins(2, 2, 2, 2);
     pVTopLayout->setSpacing(0);
     QHBoxLayout* pHL = new QHBoxLayout();
     QHBoxLayout* pHL2 = new QHBoxLayout();
@@ -1873,7 +1873,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<
     pVTopLayout->addLayout(pHL2);
 
     // Upper line:
-    pHL->setMargin(0);
+    pHL->setContentsMargins(0, 0, 0, 0);
     pHL->setSpacing(2);
 
     pHL->addWidget(const_cast<QLabel*>(d->getLabel()), 0);
@@ -1882,7 +1882,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<
     pHL->addWidget(d->m_pTopLine, 0);
 
     // Lower line
-    pHL2->setMargin(0);
+    pHL2->setContentsMargins(0, 0, 0, 0);
     pHL2->setSpacing(2);
     pHL2->addWidget(d->m_pTopLine, 0);
     d->m_pEncoding = new EncodingLabel(i18n("Encoding:"), psd, pOptions);
@@ -1894,7 +1894,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget* pParent, const QSharedPointer<
     pHL2->addWidget(d->m_pLineEndStyle);
 
     QVBoxLayout* pVL = new QVBoxLayout(this);
-    pVL->setMargin(0);
+    pVL->setContentsMargins(0, 0, 0, 0);
     pVL->setSpacing(0);
     pVL->addWidget(const_cast<QWidget*>(d->getTopLineWidget()), 0);
     pVL->addWidget(d->m_pDiffTextWindow, 1);

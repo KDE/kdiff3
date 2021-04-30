@@ -63,7 +63,7 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     {
         m_pStatusBarWidget = new QWidget;
         QHBoxLayout* pStatusBarLayout = new QHBoxLayout(m_pStatusBarWidget);
-        pStatusBarLayout->setMargin(0);
+        pStatusBarLayout->setContentsMargins(0, 0, 0, 0);
         pStatusBarLayout->setSpacing(3);
         m_pStatusProgressBar = new QProgressBar;
         m_pStatusProgressBar->setRange(0, 1000);

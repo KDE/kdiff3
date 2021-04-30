@@ -559,7 +559,7 @@ void OptionDialog::setupFontPage()
     addPage(pageItem);
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
-    topLayout->setMargin(5);
+    topLayout->setContentsMargins(5, 5, 5, 5);
 
     //requires QT 5.2 or later.
     static const QFont defaultFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
@@ -598,7 +598,7 @@ void OptionDialog::setupColorPage()
     addPage(pageItem);
 
     QVBoxLayout* scrollLayout = new QVBoxLayout();
-    scrollLayout->setMargin(2);
+    scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
@@ -606,7 +606,7 @@ void OptionDialog::setupColorPage()
 
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
     QVBoxLayout* topLayout = new QVBoxLayout(page);
-    topLayout->setMargin(5);
+    topLayout->setContentsMargins(5, 5, 5, 5);
 
     QGridLayout* gbox = new QGridLayout();
     gbox->setColumnStretch(1, 5);
@@ -766,7 +766,7 @@ void OptionDialog::setupEditPage()
     addPage(pageItem);
 
     QVBoxLayout* scrollLayout = new QVBoxLayout();
-    scrollLayout->setMargin(2);
+    scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
@@ -775,7 +775,7 @@ void OptionDialog::setupEditPage()
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
-    topLayout->setMargin(5);
+    topLayout->setContentsMargins(5, 5, 5, 5);
 
     QGridLayout* gbox = new QGridLayout();
     gbox->setColumnStretch(1, 5);
@@ -841,7 +841,7 @@ void OptionDialog::setupDiffPage()
     addPage(pageItem);
 
     QVBoxLayout* scrollLayout = new QVBoxLayout();
-    scrollLayout->setMargin(2);
+    scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
@@ -850,7 +850,7 @@ void OptionDialog::setupDiffPage()
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
-    topLayout->setMargin(5);
+    topLayout->setContentsMargins(5, 5, 5, 5);
 
     QGridLayout* gbox = new QGridLayout();
     gbox->setColumnStretch(1, 5);
@@ -936,7 +936,7 @@ void OptionDialog::setupMergePage()
     addPage(pageItem);
 
     QVBoxLayout* scrollLayout = new QVBoxLayout();
-    scrollLayout->setMargin(2);
+    scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
@@ -945,7 +945,7 @@ void OptionDialog::setupMergePage()
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
-    topLayout->setMargin(5);
+    topLayout->setContentsMargins(5, 5, 5, 5);
 
     QGridLayout* gbox = new QGridLayout();
     gbox->setColumnStretch(1, 5);
@@ -1127,7 +1127,7 @@ void OptionDialog::setupDirectoryMergePage()
     addPage(pageItem);
 
     QVBoxLayout* scrollLayout = new QVBoxLayout();
-    scrollLayout->setMargin(2);
+    scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
@@ -1135,7 +1135,7 @@ void OptionDialog::setupDirectoryMergePage()
 
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
     QVBoxLayout* topLayout = new QVBoxLayout(page);
-    topLayout->setMargin(5);
+    topLayout->setContentsMargins(5, 5, 5, 5);
 
     QGridLayout* gbox = new QGridLayout();
     gbox->setColumnStretch(1, 5);
@@ -1326,7 +1326,7 @@ void OptionDialog::setupRegionalPage()
     addPage(pageItem);
 
     QVBoxLayout* scrollLayout = new QVBoxLayout();
-    scrollLayout->setMargin(2);
+    scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
@@ -1335,7 +1335,7 @@ void OptionDialog::setupRegionalPage()
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
 
     QVBoxLayout* topLayout = new QVBoxLayout(page);
-    topLayout->setMargin(5);
+    topLayout->setContentsMargins(5, 5, 5, 5);
 
     QGridLayout* gbox = new QGridLayout();
     gbox->setColumnStretch(1, 5);
@@ -1438,7 +1438,7 @@ void OptionDialog::setupIntegrationPage()
     addPage(pageItem);
 
     QVBoxLayout* scrollLayout = new QVBoxLayout();
-    scrollLayout->setMargin(2);
+    scrollLayout->setContentsMargins(2, 2, 2, 2);
     scrollLayout->addWidget(pageFrame);
 
     QScopedPointer<Ui::ScrollArea> scrollArea(new Ui::ScrollArea());
@@ -1446,7 +1446,7 @@ void OptionDialog::setupIntegrationPage()
 
     QWidget* page = pageFrame->findChild<QWidget*>("contents");
     QVBoxLayout* topLayout = new QVBoxLayout(page);
-    topLayout->setMargin(5);
+    topLayout->setContentsMargins(5, 5, 5, 5);
 
     QGridLayout* gbox = new QGridLayout();
     gbox->setColumnStretch(2, 5);

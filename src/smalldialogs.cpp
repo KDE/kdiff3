@@ -317,7 +317,7 @@ FindDialog::FindDialog(QWidget* pParent)
     : QDialog(pParent)
 {
     QGridLayout* layout = new QGridLayout(this);
-    layout->setMargin(5);
+    layout->setContentsMargins(5, 5, 5, 5);
     layout->setSpacing(5);
 
     int line = 0;
@@ -382,7 +382,7 @@ RegExpTester::RegExpTester(QWidget* pParent, const QString& autoMergeRegExpToolT
     setWindowTitle(i18n("Regular Expression Tester"));
     QGridLayout* pGrid = new QGridLayout(this);
     pGrid->setSpacing(5);
-    pGrid->setMargin(5);
+    pGrid->setContentsMargins(5, 5, 5, 5);
 
     QLabel* l = new QLabel(i18n("Auto merge regular expression:"), this);
     pGrid->addWidget(l, line, 0);
