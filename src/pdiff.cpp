@@ -553,7 +553,7 @@ void KDiff3App::initView()
     m_pMainSplitter->addWidget(m_pMainWidget);
     m_pMainWidget->setObjectName("MainWidget");
     QVBoxLayout* pVLayout = new QVBoxLayout(m_pMainWidget);
-    pVLayout->setMargin(0);
+    pVLayout->setContentsMargins(0, 0, 0, 0);
     pVLayout->setSpacing(0);
 
     QSplitter* pVSplitter = new QSplitter();
@@ -565,7 +565,7 @@ void KDiff3App::initView()
     QWidget* pDiffWindowFrame = new QWidget(); // Contains diff windows, overview and vert scrollbar
     pDiffWindowFrame->setObjectName("DiffWindowFrame");
     QHBoxLayout* pDiffHLayout = new QHBoxLayout(pDiffWindowFrame);
-    pDiffHLayout->setMargin(0);
+    pDiffHLayout->setContentsMargins(0, 0, 0, 0);
     pDiffHLayout->setSpacing(0);
     pVSplitter->addWidget(pDiffWindowFrame);
 
@@ -606,7 +606,7 @@ void KDiff3App::initView()
     m_pMergeWindowFrame->setObjectName("MergeWindowFrame");
     pVSplitter->addWidget(m_pMergeWindowFrame);
     QHBoxLayout* pMergeHLayout = new QHBoxLayout(m_pMergeWindowFrame);
-    pMergeHLayout->setMargin(0);
+    pMergeHLayout->setContentsMargins(0, 0, 0, 0);
     pMergeHLayout->setSpacing(0);
     QVBoxLayout* pMergeVLayout = new QVBoxLayout();
     pMergeHLayout->addLayout(pMergeVLayout, 1);

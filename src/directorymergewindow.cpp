@@ -2696,7 +2696,7 @@ DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent)
     : QFrame(pParent)
 {
     QVBoxLayout* topLayout = new QVBoxLayout(this);
-    topLayout->setMargin(0);
+    topLayout->setContentsMargins(0, 0, 0, 0);
 
     QGridLayout* grid = new QGridLayout();
     topLayout->addLayout(grid);
