@@ -58,7 +58,6 @@
 #include <KMessageBox>
 #include <KStandardAction>
 #include <KActionCollection>
-#include <KIconLoader>
 #include <KToggleAction>
 #include <KToolBar>
 

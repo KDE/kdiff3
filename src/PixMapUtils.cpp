@@ -1,16 +1,18 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <QPixmap>
-#include <KIconLoader>
-#include <QPainter>
-
 #include "MergeFileInfos.h"
+
+#include <QApplication>
+#include <QIcon>
+#include <QPainter>
+#include <QPixmap>
+#include <QStyle>
 
 namespace PixMapUtils
 {
@@ -86,7 +88,8 @@ void initPixmaps(const QColor& newest, const QColor& oldest, const QColor& middl
     {
 #include "xpm/file.xpm"
 #include "xpm/folder.xpm"
-        s_pm_dir = new QPixmap(KIconLoader::global()->loadIcon("folder", KIconLoader::Small));
+        const int smallIcon = qApp->style()->pixelMetric(QStyle::PM_SmallIconSize);
+        s_pm_dir = new QPixmap(QIcon::fromTheme(QStringLiteral("folder")).pixmap(smallIcon));
         if(s_pm_dir->size() != QSize(16, 16))
         {
             delete s_pm_dir;
