@@ -896,7 +896,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
 {
     QTextOption textOption;
 
-    textOption.setTabStopDistance(QFontMetricsF(m_pDiffTextWindow->font()).width(' ') * m_pOptions->m_tabSize);
+    textOption.setTabStopDistance(QFontMetricsF(m_pDiffTextWindow->font()).horizontalAdvance(' ') * m_pOptions->m_tabSize);
 
     if(m_pOptions->m_bShowWhiteSpaceCharacters)
         textOption.setFlags(QTextOption::ShowTabsAndSpaces);
@@ -938,7 +938,7 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
 
         height += leading;
         //if ( !bFirstLine )
-        //   indentation = m_pDiffTextWindow->fontMetrics().width(' ') * m_pOptions->m_tabSize;
+        //   indentation =  Utils::getHorizontalAdvance(m_pDiffTextWindow->fontMetrics(), (' ')) * m_pOptions->m_tabSize;
         if(visibleTextWidth >= 0)
         {
             line.setLineWidth(visibleTextWidth - indentation);
