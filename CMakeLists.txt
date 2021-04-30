@@ -79,7 +79,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     #Make MSVC obey standard exception C++ handling by destroying all objects going out of scope as a result of the exception.
-    #This also separates a Microsoft specific SEH which catches non-c++ asynchronous exceptions.
+    #This also separates a Microsoft specific exention SEH which catches non-c++ asynchronous exceptions.
     add_compile_options("/EHsc")
     #Suppress MSVCs min/max macros
     add_definitions(-DNOMINMAX)
@@ -96,7 +96,7 @@ endif()
 
 #new in cmake 3.6+ integrate clang-tidy
 if(ENABLE_CLANG_TIDY)
-    find_program(CLANG_TIDY_EXE NAMES "clang-tidy" "clang-tidy-7" "clang-tidy-6.0" "clang-tidy-6" DOC "Path to clang-tidy executable")
+    find_program(CLANG_TIDY_EXE NAMES "clang-tidy" DOC "Path to clang-tidy executable")
     if(NOT CLANG_TIDY_EXE)
         message(STATUS "clang-tidy not found disabling integration.")
     else()
@@ -120,7 +120,7 @@ add_definitions(
     -DQT_NO_KEYWORDS
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_PROCESS_COMBINED_ARGUMENT_START
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x050800#disable deprecated api for Qt<5.8.
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050C00#disable deprecated api for Qt<5.12.
     #Boost 1.74 and possibly others trigger these warnings in boosts own internal headers making
     #the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
