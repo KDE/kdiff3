@@ -32,7 +32,7 @@ class DefaultFileAccessJobHandler: public FileAccessJobHandler
 
     bool get(void* pDestBuffer, long maxLength) override;
     bool put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume = false, int permissions = -1) override;
-    bool stat(short detailLevel = 2, bool bWantToWrite = false) override;
+    bool stat(bool bWantToWrite = false) override;
     bool copyFile(const QString& dest) override;
     bool rename(const FileAccess& dest) override;
     bool listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden,

@@ -65,6 +65,11 @@ find_package(
 
 set_package_properties(KF5DocTools PROPERTIES PURPOSE "Allows generating and installing docs.")
 
+string(REPLACE "." ";" VERSION_LIST "${KF5_VERSION}")
+list(GET VERSION_LIST 0 KF_VERSION_MAJOR)
+list(GET VERSION_LIST 1 KF_VERSION_MINOR)
+list(GET VERSION_LIST 2 KF_VERSION_PATCH)
+
 option(ENABLE_AUTO "Enable kdiff3's '--auto' flag" ON)
 option(ENABLE_CLANG_TIDY "Run clang-tidy if available and cmake version >=3.6" OFF)
 
@@ -126,9 +131,12 @@ add_definitions(
     #the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
     #KF5 5.64+ flags
-    #Don't warn for API depreciated after 5.50.0 (below as hex.hex.hex number)
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x053200
-    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x053200
+    #Don't warn for API depreciated after 5.70.0 (below as hex.hex.hex number)
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x054600
+    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x054600
+    -DKF_VERSION_MAJOR=${KF_VERSION_MAJOR}
+    -DKF_VERSION_MINOR=${KF_VERSION_MINOR}
+    -DKF_VERSION_PATCH=${KF_VERSION_PATCH}
 )
 
 add_subdirectory(src)
@@ -147,4 +155,5 @@ if(WIN32)
 add_subdirectory(diff_ext_for_kdiff3)
 endif()
 
+message(INFO " ${KF5_VERSION}")
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

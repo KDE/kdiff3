@@ -19,7 +19,7 @@ class FileAccessJobHandlerMoc: public FileAccessJobHandler
     FileAccessJobHandler* copy(FileAccess* inFileAccess) override { return new FileAccessJobHandlerMoc(inFileAccess);}
     bool get(void*  /*pDestBuffer*/, long  /*maxLength*/) override {return true;};
     bool put(const void*  /*pSrcBuffer*/, long  /*maxLength*/, bool  /*bOverwrite*/, bool  /*bResume*/ = false, int  /*permissions*/ = -1) override {return true;};
-    bool stat(short  /*detailLevel*/ = 2, bool  /*bWantToWrite*/ = false) override {return true;};
+    bool stat(bool  /*bWantToWrite*/ = false) override {return true;};
     bool copyFile(const QString&  /*dest*/) override {return true;};
     bool rename(const FileAccess&  /*dest*/) override {return true;};
     bool listDir(DirectoryList*  /*pDirList*/, bool  /*bRecursive*/, bool  /*bFindHidden*/,

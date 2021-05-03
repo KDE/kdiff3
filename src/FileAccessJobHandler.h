@@ -37,7 +37,7 @@ class FileAccessJobHandler: public QObject
     void setFileAccess(FileAccess* pFileAccess) {  mFileAccess = pFileAccess; }
     virtual bool get(void* pDestBuffer, long maxLength) = 0;
     virtual bool put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume = false, int permissions = -1) = 0;
-    virtual bool stat(short detailLevel = 2, bool bWantToWrite = false) = 0;
+    virtual bool stat(bool bWantToWrite = false) = 0;
     virtual bool copyFile(const QString& dest) = 0;
     virtual bool rename(const FileAccess& dest) = 0;
     virtual bool listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHidden,

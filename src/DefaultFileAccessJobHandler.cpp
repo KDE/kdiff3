@@ -8,6 +8,7 @@
 
 #include "DefaultFileAccessJobHandler.h"
 
+#include "common.h"
 #include "defmac.h"
 #include "IgnoreList.h"
 #include "Logging.h"
@@ -23,13 +24,20 @@
 #include <KMessageBox>
 #include <KIO/JobUiDelegate>
 
-bool DefaultFileAccessJobHandler::stat(short detail, bool bWantToWrite)
+bool DefaultFileAccessJobHandler::stat(bool bWantToWrite)
 {
     m_bSuccess = false;
     mFileAccess->setStatusText(QString());
+#if KF_VERSION < KF_VERSION_CHECK(5, 69, 0)
     KIO::StatJob* pStatJob = KIO::stat(mFileAccess->url(),
                                        bWantToWrite ? KIO::StatJob::DestinationSide : KIO::StatJob::SourceSide,
-                                       detail, KIO::HideProgressInfo);
+                                       2/*all details*/, KIO::HideProgressInfo);
+#else
+    KIO::StatJob* pStatJob = KIO::statDetails(mFileAccess->url(),
+                                       bWantToWrite ? KIO::StatJob::DestinationSide : KIO::StatJob::SourceSide,
+                                       KIO::StatDefaultDetails, KIO::HideProgressInfo);
+
+#endif
 
     chk_connect(pStatJob, &KIO::StatJob::result, this, &DefaultFileAccessJobHandler::slotStatResult);
     chk_connect(pStatJob, &KIO::StatJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);

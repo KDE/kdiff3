@@ -307,7 +307,7 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     {
         m_name = m_url.fileName();
 
-        if(mJobHandler->stat(2 /*all details*/, bWantToWrite))
+        if(mJobHandler->stat(bWantToWrite))
             m_bValidData = true; // After running stat() the variables are initialised
                                  // and valid even if the file doesn't exist and the stat
                                  // query failed.

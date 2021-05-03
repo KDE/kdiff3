@@ -14,6 +14,9 @@
 #include <algorithm>
 #include <map>
 
+#define KF_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
+#define KF_VERSION KF_VERSION_CHECK(KF_VERSION_MAJOR, KF_VERSION_MINOR, KF_VERSION_PATCH)
+
 template <class T>
 T min3( T d1, T d2, T d3 )
 {
