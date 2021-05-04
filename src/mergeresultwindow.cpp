@@ -309,13 +309,12 @@ void MergeResultWindow::reset()
 // Calculate the merge information for the given Diff3Line.
 // Results will be stored in mergeDetails, bConflict, bLineRemoved and src.
 void Diff3Line::mergeOneLine(
-    e_MergeDetails& mergeDetails, bool& bConflict,
-    bool& bLineRemoved, e_SrcSelector& src, bool bTwoInputs) const
+    MergeLine &inMergeLine, bool& bLineRemoved, bool bTwoInputs) const
 {
-    mergeDetails = e_MergeDetails::eDefault;
-    bConflict = false;
+    inMergeLine.mergeDetails = e_MergeDetails::eDefault;
+    inMergeLine.bConflict = false;
     bLineRemoved = false;
-    src = e_SrcSelector::None;
+    inMergeLine.srcSelect = e_SrcSelector::None;
 
     if(bTwoInputs) // Only two input files
     {
@@ -323,19 +322,19 @@ void Diff3Line::mergeOneLine(
         {
             if(pFineAB == nullptr)
             {
-                mergeDetails = e_MergeDetails::eNoChange;
-                src = e_SrcSelector::A;
+                inMergeLine.mergeDetails = e_MergeDetails::eNoChange;
+                inMergeLine.srcSelect = e_SrcSelector::A;
             }
             else
             {
-                mergeDetails = e_MergeDetails::eBChanged;
-                bConflict = true;
+                inMergeLine.mergeDetails = e_MergeDetails::eBChanged;
+                inMergeLine.bConflict = true;
             }
         }
         else
         {
-            mergeDetails = e_MergeDetails::eBDeleted;
-            bConflict = true;
+            inMergeLine.mergeDetails = e_MergeDetails::eBDeleted;
+            inMergeLine.bConflict = true;
         }
         return;
     }
@@ -345,28 +344,28 @@ void Diff3Line::mergeOneLine(
     {
         if(pFineAB == nullptr && pFineBC == nullptr && pFineCA == nullptr)
         {
-            mergeDetails = e_MergeDetails::eNoChange;
-            src = e_SrcSelector::A;
+            inMergeLine.mergeDetails = e_MergeDetails::eNoChange;
+            inMergeLine.srcSelect = e_SrcSelector::A;
         }
         else if(pFineAB == nullptr && pFineBC != nullptr && pFineCA != nullptr)
         {
-            mergeDetails = e_MergeDetails::eCChanged;
-            src = e_SrcSelector::C;
+            inMergeLine.mergeDetails = e_MergeDetails::eCChanged;
+            inMergeLine.srcSelect = e_SrcSelector::C;
         }
         else if(pFineAB != nullptr && pFineBC != nullptr && pFineCA == nullptr)
         {
-            mergeDetails = e_MergeDetails::eBChanged;
-            src = e_SrcSelector::B;
+            inMergeLine.mergeDetails = e_MergeDetails::eBChanged;
+            inMergeLine.srcSelect = e_SrcSelector::B;
         }
         else if(pFineAB != nullptr && pFineBC == nullptr && pFineCA != nullptr)
         {
-            mergeDetails = e_MergeDetails::eBCChangedAndEqual;
-            src = e_SrcSelector::C;
+            inMergeLine.mergeDetails = e_MergeDetails::eBCChangedAndEqual;
+            inMergeLine.srcSelect = e_SrcSelector::C;
         }
         else if(pFineAB != nullptr && pFineBC != nullptr && pFineCA != nullptr)
         {
-            mergeDetails = e_MergeDetails::eBCChanged;
-            bConflict = true;
+            inMergeLine.mergeDetails = e_MergeDetails::eBCChanged;
+            inMergeLine.bConflict = true;
         }
         else
             Q_ASSERT(true);
@@ -375,58 +374,58 @@ void Diff3Line::mergeOneLine(
     {
         if(pFineAB != nullptr)
         {
-            mergeDetails = e_MergeDetails::eBChanged_CDeleted;
-            bConflict = true;
+            inMergeLine.mergeDetails = e_MergeDetails::eBChanged_CDeleted;
+            inMergeLine.bConflict = true;
         }
         else
         {
-            mergeDetails = e_MergeDetails::eCDeleted;
+            inMergeLine.mergeDetails = e_MergeDetails::eCDeleted;
             bLineRemoved = true;
-            src = e_SrcSelector::C;
+            inMergeLine.srcSelect = e_SrcSelector::C;
         }
     }
     else if(getLineA().isValid() && !getLineB().isValid() && getLineC().isValid())
     {
         if(pFineCA != nullptr)
         {
-            mergeDetails = e_MergeDetails::eCChanged_BDeleted;
-            bConflict = true;
+            inMergeLine.mergeDetails = e_MergeDetails::eCChanged_BDeleted;
+            inMergeLine.bConflict = true;
         }
         else
         {
-            mergeDetails = e_MergeDetails::eBDeleted;
+            inMergeLine.mergeDetails = e_MergeDetails::eBDeleted;
             bLineRemoved = true;
-            src = e_SrcSelector::B;
+            inMergeLine.srcSelect = e_SrcSelector::B;
         }
     }
     else if(!getLineA().isValid() && getLineB().isValid() && getLineC().isValid())
     {
         if(pFineBC != nullptr)
         {
-            mergeDetails = e_MergeDetails::eBCAdded;
-            bConflict = true;
+            inMergeLine.mergeDetails = e_MergeDetails::eBCAdded;
+            inMergeLine.bConflict = true;
         }
         else // B==C
         {
-            mergeDetails = e_MergeDetails::eBCAddedAndEqual;
-            src = e_SrcSelector::C;
+            inMergeLine.mergeDetails = e_MergeDetails::eBCAddedAndEqual;
+            inMergeLine.srcSelect = e_SrcSelector::C;
         }
     }
     else if(!getLineA().isValid() && !getLineB().isValid() && getLineC().isValid())
     {
-        mergeDetails = e_MergeDetails::eCAdded;
-        src = e_SrcSelector::C;
+        inMergeLine.mergeDetails = e_MergeDetails::eCAdded;
+        inMergeLine.srcSelect = e_SrcSelector::C;
     }
     else if(!getLineA().isValid() && getLineB().isValid() && !getLineC().isValid())
     {
-        mergeDetails = e_MergeDetails::eBAdded;
-        src = e_SrcSelector::B;
+        inMergeLine.mergeDetails = e_MergeDetails::eBAdded;
+        inMergeLine.srcSelect = e_SrcSelector::B;
     }
     else if(getLineA().isValid() && !getLineB().isValid() && !getLineC().isValid())
     {
-        mergeDetails = e_MergeDetails::eBCDeleted;
+        inMergeLine.mergeDetails = e_MergeDetails::eBCDeleted;
         bLineRemoved = true;
-        src = e_SrcSelector::C;
+        inMergeLine.srcSelect = e_SrcSelector::C;
     }
     else
         Q_ASSERT(true);
@@ -472,7 +471,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
 
             MergeLine ml;
             bool bLineRemoved;
-            d.mergeOneLine(ml.mergeDetails, ml.bConflict, bLineRemoved, ml.srcSelect, m_pldC == nullptr);
+            d.mergeOneLine(ml, bLineRemoved, m_pldC == nullptr);
 
             // Automatic solving for only whitespace changes.
             if(ml.bConflict &&

@@ -19,6 +19,8 @@
 #include <QVector>
 
 class LineData;
+
+class MergeLine;
 class Options;
 
 using LineDataVector=std::vector<LineData>;
@@ -302,7 +304,7 @@ class Diff3Line
 
     void setLinesNeeded(const qint32 lines) { mLinesNeededForDisplay = lines; }
     Q_REQUIRED_RESULT bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const std::shared_ptr<LineDataVector> &v1, const std::shared_ptr<LineDataVector> &v2, const IgnoreFlags eIgnoreFlags);
-    void mergeOneLine(e_MergeDetails& mergeDetails, bool& bConflict, bool& bLineRemoved, e_SrcSelector& src, bool bTwoInputs) const;
+    void mergeOneLine(MergeLine &inMergeLine, bool& bLineRemoved, bool bTwoInputs) const;
 
     void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
                      DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values

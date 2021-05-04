@@ -9,6 +9,7 @@
 
 #include "diff.h"
 #include "kdiff3.h"
+#include "MergeEditLine.h"
 #include "options.h"
 
 #include <algorithm> // for max
@@ -125,11 +126,15 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
     {
         const Diff3Line& d3l = *i;
         int y = h * (line + 1) / nofLines;
+        MergeLine lMergeLine;
         e_MergeDetails md;
         bool bConflict;
         bool bLineRemoved;
         e_SrcSelector src;
-        d3l.mergeOneLine(md, bConflict, bLineRemoved, src, !KDiff3App::isTripleDiff());
+        d3l.mergeOneLine(lMergeLine, bLineRemoved, !KDiff3App::isTripleDiff());
+        md = lMergeLine.mergeDetails;
+        bConflict = lMergeLine.bConflict;
+        src = lMergeLine.srcSelect;
 
         QColor c = m_pOptions->m_bgColor;
         bool bWhiteSpaceChange = false;
