@@ -26,8 +26,8 @@ QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDat
         {
             return QString();
         }
-        const Diff3Line& d3l = *m_id3l;
-        const LineData* pld = nullptr;
+        const Diff3Line &d3l = *m_id3l;
+        const LineData *pld = nullptr;
         Q_ASSERT(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
 
         if(src == e_SrcSelector::A && d3l.getLineA().isValid())

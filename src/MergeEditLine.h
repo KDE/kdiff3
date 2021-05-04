@@ -22,6 +22,7 @@ class MergeEditLine
         m_bLineRemoved = false;
         mChanged = false;
     }
+
     void setConflict()
     {
         m_src = e_SrcSelector::None;
@@ -30,6 +31,7 @@ class MergeEditLine
         m_str = QString();
     }
     Q_REQUIRED_RESULT bool isConflict() const { return m_src == e_SrcSelector::None && !m_bLineRemoved && !mChanged; }
+
     void setRemoved(e_SrcSelector src = e_SrcSelector::None)
     {
         m_src = src;
@@ -38,7 +40,9 @@ class MergeEditLine
         mChanged = (src == e_SrcSelector::None);
     }
     Q_REQUIRED_RESULT bool isRemoved() const { return m_bLineRemoved; }
+
     Q_REQUIRED_RESULT bool isEditableText() const { return !isConflict(); }
+
     void setString(const QString& s)
     {
         m_str = s;
@@ -46,7 +50,7 @@ class MergeEditLine
         m_src = e_SrcSelector::None;
         mChanged = true;
     }
-    Q_REQUIRED_RESULT QString getString(const std::shared_ptr<LineDataVector> &pLineDataA, const std::shared_ptr<LineDataVector> &pLineDataB, const std::shared_ptr<LineDataVector> &pLineDataC) const;
+    Q_REQUIRED_RESULT QString getString(const std::shared_ptr<LineDataVector>& pLineDataA, const std::shared_ptr<LineDataVector>& pLineDataB, const std::shared_ptr<LineDataVector>& pLineDataC) const;
     Q_REQUIRED_RESULT bool isModified() const { return mChanged; }
 
     void setSource(e_SrcSelector src, bool bLineRemoved)
@@ -58,11 +62,13 @@ class MergeEditLine
         else if(m_src != e_SrcSelector::None)
         {
             mChanged = false;
-            m_str=u8"";
+            m_str = u8"";
         }
     }
+
     [[nodiscard]] e_SrcSelector src() const { return m_src; }
     [[nodiscard]] Diff3LineList::const_iterator id3l() const { return m_id3l; }
+
   private:
     Diff3LineList::const_iterator m_id3l;
     e_SrcSelector m_src; // 1, 2 or 3 for A, B or C respectively, or 0 when line is from neither source.
@@ -71,15 +77,13 @@ class MergeEditLine
     bool mChanged;
 };
 
-class MergeEditLineList :public std::list<MergeEditLine>
+class MergeEditLineList: public std::list<MergeEditLine>
 {
   private:
     typedef std::list<MergeEditLine> BASE;
 
   public:
-    typedef std::list<MergeEditLine>::iterator iterator;
-    typedef std::list<MergeEditLine>::reverse_iterator reverse_iterator;
-    typedef std::list<MergeEditLine>::const_iterator const_iterator;
+    using std::list<MergeEditLine>::list;
 
 
     Q_REQUIRED_RESULT int size()
@@ -93,13 +97,14 @@ class MergeLine
   public:
     Diff3LineList::const_iterator id3l;
     LineIndex d3lLineIdx = -1;    // Needed to show the correct window pos.
-    LineCount srcRangeLength = 0; // how many src-lines have this properties
+    LineCount srcRangeLength = 0; // how many src-lines have these properties
     e_MergeDetails mergeDetails = e_MergeDetails::eDefault;
     bool bConflict = false;
     bool bWhiteSpaceConflict = false;
     bool bDelta = false;
     e_SrcSelector srcSelect = e_SrcSelector::None;
     MergeEditLineList mergeEditLineList;
+
     void split(MergeLine& ml2, int d3lLineIdx2) // The caller must insert the ml2 after this ml in the m_mergeLineList
     {
         if(d3lLineIdx2 < d3lLineIdx || d3lLineIdx2 >= d3lLineIdx + srcRangeLength)
@@ -129,6 +134,7 @@ class MergeLine
         }
         ml2.mergeEditLineList.push_back(MergeEditLine(ml2.id3l));
     }
+
     void join(MergeLine& ml2) // The caller must remove the ml2 from the m_mergeLineList after this call
     {
         srcRangeLength += ml2.srcRangeLength;
