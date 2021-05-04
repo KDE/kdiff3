@@ -732,7 +732,7 @@ void KDiff3App::slotFinishMainInit()
     if(m_bLoadFiles)
     {
         if(bVisibleMergeResultWindow)
-            m_pMergeResultWindow->showNrOfConflicts();
+            m_pMergeResultWindow->showNumberOfConflicts();
         else if(
             // Avoid showing this message during startup without parameters.
             !(m_sd1->getAliasName().isEmpty() && m_sd2->getAliasName().isEmpty() && m_sd3->getAliasName().isEmpty()) &&
@@ -2136,7 +2136,7 @@ void KDiff3App::slotUpdateAvailabilities()
     m_pFindDialog->m_pSearchInC->setEnabled(m_bTripleDiff);
     m_pFindDialog->m_pSearchInOutput->setEnabled(bMergeEditorVisible);
 
-    bool bSavable = bMergeEditorVisible && m_pMergeResultWindow->getNrOfUnsolvedConflicts() == 0;
+    bool bSavable = bMergeEditorVisible && m_pMergeResultWindow->getNumberOfUnsolvedConflicts() == 0;
     fileSave->setEnabled(m_bOutputModified && bSavable);
     fileSaveAs->setEnabled(bSavable);
 

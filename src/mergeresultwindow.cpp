@@ -253,7 +253,7 @@ void MergeResultWindow::showUnsolvedConflictsStatusMessage()
     if(m_pStatusBar != nullptr)
     {
         int wsc;
-        int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
+        int nofUnsolved = getNumberOfUnsolvedConflicts(&wsc);
 
         m_persistentStatusMessage = i18n("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)", nofUnsolved, wsc);
 
@@ -482,6 +482,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
                 ml.bWhiteSpaceConflict = true;
             }
 
+            //TODO:Move me
             ml.d3lLineIdx = lineIdx;
             ml.bDelta = ml.srcSelect != e_SrcSelector::A;
             ml.id3l = it;
@@ -982,7 +983,7 @@ void MergeResultWindow::slotSetFastSelectorLine(LineIndex line)
     }
 }
 
-int MergeResultWindow::getNrOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts)
+int MergeResultWindow::getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts)
 {
     int nrOfUnsolvedConflicts = 0;
     if(pNrOfWhiteSpaceConflicts != nullptr)
@@ -1004,7 +1005,7 @@ int MergeResultWindow::getNrOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts)
     return nrOfUnsolvedConflicts;
 }
 
-void MergeResultWindow::showNrOfConflicts()
+void MergeResultWindow::showNumberOfConflicts()
 {
     if(!m_pOptions->m_bShowInfoDialogs)
         return;
@@ -1036,7 +1037,7 @@ void MergeResultWindow::showNrOfConflicts()
             totalInfo += i18n("Files %1 and %2 have equal text.\n", i18n("B"), i18n("C"));
     }
 
-    int nrOfUnsolvedConflicts = getNrOfUnsolvedConflicts();
+    int nrOfUnsolvedConflicts = getNumberOfUnsolvedConflicts();
 
     KMessageBox::information(this,
                              i18n("Total number of conflicts: %1\n"
@@ -1187,7 +1188,7 @@ void MergeResultWindow::slotAutoSolve()
     setModified(true);
     update();
     showUnsolvedConflictsStatusMessage();
-    showNrOfConflicts();
+    showNumberOfConflicts();
 }
 
 void MergeResultWindow::slotUnsolve()
@@ -2921,7 +2922,7 @@ void MergeResultWindow::setModified(bool bModified)
 bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle)
 {
     // Are still conflicts somewhere?
-    if(getNrOfUnsolvedConflicts() > 0)
+    if(getNumberOfUnsolvedConflicts() > 0)
     {
         KMessageBox::error(this,
                            i18n("Not all conflicts are solved yet.\n"

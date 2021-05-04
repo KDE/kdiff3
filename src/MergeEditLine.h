@@ -94,7 +94,7 @@ class MergeEditLineList: public std::list<MergeEditLine>
 
 class MergeLine
 {
-  public:
+  private:
     Diff3LineList::const_iterator id3l;
     LineIndex d3lLineIdx = -1;    // Needed to show the correct window pos.
     LineCount srcRangeLength = 0; // how many src-lines have these properties
@@ -105,6 +105,7 @@ class MergeLine
     e_SrcSelector srcSelect = e_SrcSelector::None;
     MergeEditLineList mergeEditLineList;
 
+  public:
     void split(MergeLine& ml2, int d3lLineIdx2) // The caller must insert the ml2 after this ml in the m_mergeLineList
     {
         if(d3lLineIdx2 < d3lLineIdx || d3lLineIdx2 >= d3lLineIdx + srcRangeLength)

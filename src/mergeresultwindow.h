@@ -63,7 +63,7 @@ class MergeResultWindow: public QWidget
     void reset();
 
     bool saveDocument(const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle);
-    int getNrOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts = nullptr);
+    int getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts = nullptr);
     void choose(e_SrcSelector selector);
     void chooseGlobal(e_SrcSelector selector, bool bConflictsOnly, bool bWhiteSpaceOnly);
 
@@ -73,7 +73,7 @@ class MergeResultWindow: public QWidget
     int getNofVisibleLines();
     QString getSelection();
     void resetSelection();
-    void showNrOfConflicts();
+    void showNumberOfConflicts();
     bool isDeltaAboveCurrent();
     bool isDeltaBelowCurrent();
     bool isConflictAboveCurrent();
