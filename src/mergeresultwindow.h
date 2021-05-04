@@ -178,7 +178,6 @@ class MergeResultWindow: public QWidget
     QString m_persistentStatusMessage;
 
   private:
-    static bool sameKindCheck(const MergeLine& ml1, const MergeLine& ml2);
     struct HistoryMapEntry {
         MergeEditLineList mellA;
         MergeEditLineList mellB;

@@ -7,6 +7,7 @@
 */
 
 #include "MergeEditLine.h"
+#include "diff.h"
 
 QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDataA, const std::shared_ptr<LineDataVector> &pLineDataB, const std::shared_ptr<LineDataVector> &pLineDataC) const
 {
@@ -50,4 +51,18 @@ QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDat
         return m_str;
     }
     return QString();
+}
+
+bool MergeLine::isSameKind(const MergeLine &ml2) const
+{
+    if(bConflict && ml2.bConflict)
+    {
+        // Both lines have conflicts: If one is only a white space conflict and
+        // the other one is a real conflict, then this line returns false.
+        return id3l->isEqualAC() == ml2.id3l->isEqualAC() && id3l->isEqualAB() == ml2.id3l->isEqualAB();
+    }
+    else
+        return (
+            (!bConflict && !ml2.bConflict && bDelta && ml2.bDelta && srcSelect == ml2.srcSelect && (mergeDetails == ml2.mergeDetails || (mergeDetails != e_MergeDetails::eBCAddedAndEqual && ml2.mergeDetails != e_MergeDetails::eBCAddedAndEqual))) ||
+            (!bDelta && !ml2.bDelta));
 }

@@ -431,20 +431,6 @@ void Diff3Line::mergeOneLine(
         Q_ASSERT(true);
 }
 
-bool MergeResultWindow::sameKindCheck(const MergeLine& ml1, const MergeLine& ml2)
-{
-    if(ml1.bConflict && ml2.bConflict)
-    {
-        // Both lines have conflicts: If one is only a white space conflict and
-        // the other one is a real conflict, then this line returns false.
-        return ml1.id3l->isEqualAC() == ml2.id3l->isEqualAC() && ml1.id3l->isEqualAB() == ml2.id3l->isEqualAB();
-    }
-    else
-        return (
-            (!ml1.bConflict && !ml2.bConflict && ml1.bDelta && ml2.bDelta && ml1.srcSelect == ml2.srcSelect && (ml1.mergeDetails == ml2.mergeDetails || (ml1.mergeDetails != e_MergeDetails::eBCAddedAndEqual && ml2.mergeDetails != e_MergeDetails::eBCAddedAndEqual))) ||
-            (!ml1.bDelta && !ml2.bDelta));
-}
-
 void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly, bool bWhiteSpaceOnly)
 {
     if(!bConflictsOnly)
@@ -489,7 +475,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
 
             MergeLine* back = m_mergeLineList.empty() ? nullptr : &m_mergeLineList.back();
 
-            bool bSame = back != nullptr && sameKindCheck(ml, *back);
+            bool bSame = back != nullptr && ml.isSameKind(*back);
             if(bSame)
             {
                 ++back->srcRangeLength;

@@ -145,6 +145,8 @@ class MergeLine
         if(!ml2.bWhiteSpaceConflict) bWhiteSpaceConflict = false;
         if(ml2.bDelta) bDelta = true;
     }
+
+    bool isSameKind(const MergeLine& ml2) const;
 };
 
 typedef std::list<MergeLine> MergeLineList;
