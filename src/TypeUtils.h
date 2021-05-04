@@ -9,6 +9,7 @@
 
 #include <stdlib.h>
 #include <type_traits>
+#include <limits>
 
 #include <QtGlobal>
 
