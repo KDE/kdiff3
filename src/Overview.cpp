@@ -130,11 +130,10 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         e_MergeDetails md;
         bool bConflict;
         bool bLineRemoved;
-        e_SrcSelector src;
+
         d3l.mergeOneLine(lMergeLine, bLineRemoved, !KDiff3App::isTripleDiff());
         md = lMergeLine.mergeDetails;
         bConflict = lMergeLine.bConflict;
-        src = lMergeLine.srcSelect;
 
         QColor c = m_pOptions->m_bgColor;
         bool bWhiteSpaceChange = false;
