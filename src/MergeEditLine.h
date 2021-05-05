@@ -105,9 +105,9 @@ class MergeLine
     e_SrcSelector srcSelect = e_SrcSelector::None;
     MergeEditLineList mergeEditLineList;
 
-    bool isConflict() const { return bConflict; }
-    bool isWhiteSpaceConflict() const { return bWhiteSpaceConflict; }
-    bool isDelta() const { return bDelta; }
+    [[nodiscard]] inline bool isConflict() const { return bConflict; }
+    [[nodiscard]] inline bool isWhiteSpaceConflict() const { return bWhiteSpaceConflict; }
+    [[nodiscard]] inline bool isDelta() const { return bDelta; }
 
     void split(MergeLine& ml2, int d3lLineIdx2) // The caller must insert the ml2 after this ml in the m_mergeLineList
     {

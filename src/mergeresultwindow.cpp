@@ -335,7 +335,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
             ml.mergeOneLine(d, bLineRemoved, m_pldC == nullptr);
 
             // Automatic solving for only whitespace changes.
-            if(ml.bConflict &&
+            if(ml.isConflict() &&
                ((m_pldC == nullptr && (d.isEqualAB() || (d.isWhiteLine(e_SrcSelector::A) && d.isWhiteLine(e_SrcSelector::B)))) ||
                 (m_pldC != nullptr && ((d.isEqualAB() && d.isEqualAC()) || (d.isWhiteLine(e_SrcSelector::A) && d.isWhiteLine(e_SrcSelector::B) && d.isWhiteLine(e_SrcSelector::C))))))
             {
@@ -354,7 +354,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
             if(bSame)
             {
                 ++back->srcRangeLength;
-                if(back->bWhiteSpaceConflict && !ml.bWhiteSpaceConflict)
+                if(back->isWhiteSpaceConflict() && !ml.isWhiteSpaceConflict())
                     back->bWhiteSpaceConflict = false;
             }
             else
@@ -362,14 +362,14 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
                 m_mergeLineList.push_back(ml);
             }
 
-            if(!ml.bConflict)
+            if(!ml.isConflict())
             {
                 MergeLine& tmpBack = m_mergeLineList.back();
                 MergeEditLine mel(ml.id3l);
                 mel.setSource(ml.srcSelect, bLineRemoved);
                 tmpBack.mergeEditLineList.push_back(mel);
             }
-            else if(back == nullptr || !back->bConflict || !bSame)
+            else if(back == nullptr || !back->isConflict() || !bSame)
             {
                 MergeLine& tmpBack = m_mergeLineList.back();
                 MergeEditLine mel(ml.id3l);
@@ -400,16 +400,17 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
 
     if(!bAutoSolve || bSolveWhiteSpaceConflicts)
     {
+        // TODO: Move this.
         // Change all auto selections
         MergeLineList::iterator mlIt;
         for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
         {
             MergeLine& ml = *mlIt;
             bool bConflict = ml.mergeEditLineList.empty() || ml.mergeEditLineList.begin()->isConflict();
-            if(ml.bDelta && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || ml.bWhiteSpaceConflict))
+            if(ml.isDelta() && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || ml.isWhiteSpaceConflict()))
             {
                 ml.mergeEditLineList.clear();
-                if(defaultSelector == e_SrcSelector::Invalid && ml.bDelta)
+                if(defaultSelector == e_SrcSelector::Invalid && ml.isDelta())
                 {
                     MergeEditLine mel(ml.id3l);
 
@@ -493,12 +494,12 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     MergeLineList::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
-        if(i->bConflict)
+        if(i->isConflict())
             ++nrOfUnsolvedConflicts;
-        else if(i->bDelta)
+        else if(i->isDelta())
             ++nrOfSolvedConflicts;
 
-        if(i->bWhiteSpaceConflict)
+        if(i->isWhiteSpaceConflict())
             ++nrOfWhiteSpaceConflicts;
     }
 
@@ -630,7 +631,7 @@ void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
         else
             i = --m_mergeLineList.end(); // last mergeline
 
-        while(isItAtEnd(eDir == eUp, i) && !i->bDelta)
+        while(isItAtEnd(eDir == eUp, i) && !i->isDelta())
         {
             if(eDir == eUp)
                 ++i; // search downwards
@@ -646,7 +647,7 @@ void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
                 --i;
             else
                 ++i;
-        } while(isItAtEnd(eDir != eUp, i) && (!i->bDelta || checkOverviewIgnore(i) || (bSkipWhiteConflicts && i->bWhiteSpaceConflict)));
+        } while(isItAtEnd(eDir != eUp, i) && (!i->isDelta() || checkOverviewIgnore(i) || (bSkipWhiteConflicts && i->isWhiteSpaceConflict())));
     }
     else if(eEndPoint == eConflict && isItAtEnd(eDir != eUp, i))
     {
@@ -656,7 +657,7 @@ void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
                 --i;
             else
                 ++i;
-        } while(isItAtEnd(eDir != eUp, i) && (!i->bConflict || (bSkipWhiteConflicts && i->bWhiteSpaceConflict)));
+        } while(isItAtEnd(eDir != eUp, i) && (!i->isConflict() || (bSkipWhiteConflicts && i->isWhiteSpaceConflict())));
     }
     else if(isItAtEnd(eDir != eUp, i) && eEndPoint == eUnsolvedConflict)
     {
@@ -684,7 +685,7 @@ bool MergeResultWindow::isDeltaAboveCurrent()
     do
     {
         --i;
-        if(i->bDelta && !checkOverviewIgnore(i) && !(bSkipWhiteConflicts && i->bWhiteSpaceConflict)) return true;
+        if(i->isDelta() && !checkOverviewIgnore(i) && !(bSkipWhiteConflicts && i->isWhiteSpaceConflict())) return true;
     } while(i != m_mergeLineList.begin());
 
     return false;
@@ -701,7 +702,7 @@ bool MergeResultWindow::isDeltaBelowCurrent()
         ++i;
         for(; i != m_mergeLineList.end(); ++i)
         {
-            if(i->bDelta && !checkOverviewIgnore(i) && !(bSkipWhiteConflicts && i->bWhiteSpaceConflict)) return true;
+            if(i->isDelta() && !checkOverviewIgnore(i) && !(bSkipWhiteConflicts && i->isWhiteSpaceConflict())) return true;
         }
     }
     return false;
@@ -718,7 +719,7 @@ bool MergeResultWindow::isConflictAboveCurrent()
     do
     {
         --i;
-        if(i->bConflict && !(bSkipWhiteConflicts && i->bWhiteSpaceConflict)) return true;
+        if(i->isConflict() && !(bSkipWhiteConflicts && i->isWhiteSpaceConflict())) return true;
     } while(i != m_mergeLineList.begin());
 
     return false;
@@ -736,7 +737,7 @@ bool MergeResultWindow::isConflictBelowCurrent()
         ++i;
         for(; i != m_mergeLineList.end(); ++i)
         {
-            if(i->bConflict && !(bSkipWhiteConflicts && i->bWhiteSpaceConflict)) return true;
+            if(i->isConflict() && !(bSkipWhiteConflicts && i->isWhiteSpaceConflict())) return true;
         }
     }
     return false;
@@ -834,7 +835,7 @@ void MergeResultWindow::slotSetFastSelectorLine(LineIndex line)
     {
         if(line >= i->d3lLineIdx && line < i->d3lLineIdx + i->srcRangeLength)
         {
-            //if ( i->bDelta )
+            //if ( i->isDelta() )
             {
                 setFastSelector(i);
             }
@@ -857,7 +858,7 @@ int MergeResultWindow::getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflict
         if(melIt->isConflict())
         {
             ++nrOfUnsolvedConflicts;
-            if(ml.bWhiteSpaceConflict && pNrOfWhiteSpaceConflicts != nullptr)
+            if(ml.isWhiteSpaceConflict() && pNrOfWhiteSpaceConflicts != nullptr)
                 ++*pNrOfWhiteSpaceConflicts;
         }
     }
@@ -873,7 +874,7 @@ void MergeResultWindow::showNumberOfConflicts()
     MergeLineList::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
-        if(i->bConflict || i->bDelta)
+        if(i->isConflict() || i->isDelta())
             ++nrOfConflicts;
     }
     QString totalInfo;
@@ -1408,7 +1409,7 @@ void MergeResultWindow::slotRegExpAutoMerge()
     MergeLineList::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
-        if(i->bConflict)
+        if(i->isConflict())
         {
             Diff3LineList::const_iterator id3l = i->id3l;
             if(vcsKeywords.match(id3l->getString(e_SrcSelector::A)).hasMatch() &&
@@ -1437,7 +1438,7 @@ bool MergeResultWindow::doRelevantChangesExist()
     MergeLineList::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
-        if((i->bConflict && i->mergeEditLineList.begin()->src() != e_SrcSelector::C) || i->srcSelect == e_SrcSelector::B)
+        if((i->isConflict() && i->mergeEditLineList.begin()->src() != e_SrcSelector::C) || i->srcSelect == e_SrcSelector::B)
         {
             return true;
         }
@@ -1803,7 +1804,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
                         s = mel.getString(m_pldA, m_pldB, m_pldC);
 
                         writeLine(p, line, s, mel.src(), ml.mergeDetails, rangeMark,
-                                  mel.isModified(), mel.isRemoved(), ml.bWhiteSpaceConflict);
+                                  mel.isModified(), mel.isRemoved(), ml.isWhiteSpaceConflict());
                     }
                     ++line;
                 }
