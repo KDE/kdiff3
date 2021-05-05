@@ -105,6 +105,10 @@ class MergeLine
     e_SrcSelector srcSelect = e_SrcSelector::None;
     MergeEditLineList mergeEditLineList;
 
+    bool isConflict() const { return bConflict; }
+    bool isWhiteSpaceConflict() const { return bWhiteSpaceConflict; }
+    bool isDelta() const { return bDelta; }
+
     void split(MergeLine& ml2, int d3lLineIdx2) // The caller must insert the ml2 after this ml in the m_mergeLineList
     {
         if(d3lLineIdx2 < d3lLineIdx || d3lLineIdx2 >= d3lLineIdx + srcRangeLength)
@@ -147,6 +151,8 @@ class MergeLine
     }
 
     bool isSameKind(const MergeLine& ml2) const;
+
+    void mergeOneLine(const Diff3Line &diffRec, bool& bLineRemoved, bool bTwoInputs);
 };
 
 typedef std::list<MergeLine> MergeLineList;

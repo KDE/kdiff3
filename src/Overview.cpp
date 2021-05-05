@@ -131,9 +131,9 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         bool bConflict;
         bool bLineRemoved;
 
-        d3l.mergeOneLine(lMergeLine, bLineRemoved, !KDiff3App::isTripleDiff());
+        lMergeLine.mergeOneLine(d3l, bLineRemoved, !KDiff3App::isTripleDiff());
         md = lMergeLine.mergeDetails;
-        bConflict = lMergeLine.bConflict;
+        bConflict = lMergeLine.isConflict();
 
         QColor c = m_pOptions->m_bgColor;
         bool bWhiteSpaceChange = false;

@@ -66,3 +66,127 @@ bool MergeLine::isSameKind(const MergeLine &ml2) const
             (!bConflict && !ml2.bConflict && bDelta && ml2.bDelta && srcSelect == ml2.srcSelect && (mergeDetails == ml2.mergeDetails || (mergeDetails != e_MergeDetails::eBCAddedAndEqual && ml2.mergeDetails != e_MergeDetails::eBCAddedAndEqual))) ||
             (!bDelta && !ml2.bDelta));
 }
+
+// Calculate the merge information for the given Diff3Line.
+// Results will be stored in this and bLineRemoved.
+void MergeLine::mergeOneLine(const Diff3Line &diffRec, bool &bLineRemoved, bool bTwoInputs)
+{
+    mergeDetails = e_MergeDetails::eDefault;
+    bConflict = false;
+    bLineRemoved = false;
+    srcSelect = e_SrcSelector::None;
+
+    if(bTwoInputs) // Only two input files
+    {
+        if(diffRec.getLineA().isValid() && diffRec.getLineB().isValid())
+        {
+            if(!diffRec.hasFineDiffAB())
+            {
+                mergeDetails = e_MergeDetails::eNoChange;
+                srcSelect = e_SrcSelector::A;
+            }
+            else
+            {
+                mergeDetails = e_MergeDetails::eBChanged;
+                bConflict = true;
+            }
+        }
+        else
+        {
+            mergeDetails = e_MergeDetails::eBDeleted;
+            bConflict = true;
+        }
+        return;
+    }
+
+    // A is base.
+    if(diffRec.getLineA().isValid() && diffRec.getLineB().isValid() && diffRec.getLineC().isValid())
+    {
+        if(!diffRec.hasFineDiffAB() && !diffRec.hasFineDiffBC() && !diffRec.hasFineDiffCA())
+        {
+            mergeDetails = e_MergeDetails::eNoChange;
+            srcSelect = e_SrcSelector::A;
+        }
+        else if(!diffRec.hasFineDiffAB() && diffRec.hasFineDiffBC() && diffRec.hasFineDiffCA())
+        {
+            mergeDetails = e_MergeDetails::eCChanged;
+            srcSelect = e_SrcSelector::C;
+        }
+        else if(diffRec.hasFineDiffAB() && diffRec.hasFineDiffBC() && !diffRec.hasFineDiffCA())
+        {
+            mergeDetails = e_MergeDetails::eBChanged;
+            srcSelect = e_SrcSelector::B;
+        }
+        else if(diffRec.hasFineDiffAB() && !diffRec.hasFineDiffBC() && diffRec.hasFineDiffCA())
+        {
+            mergeDetails = e_MergeDetails::eBCChangedAndEqual;
+            srcSelect = e_SrcSelector::C;
+        }
+        else if(diffRec.hasFineDiffAB() && diffRec.hasFineDiffBC() && diffRec.hasFineDiffCA())
+        {
+            mergeDetails = e_MergeDetails::eBCChanged;
+            bConflict = true;
+        }
+        else
+            Q_ASSERT(true);
+    }
+    else if(diffRec.getLineA().isValid() && diffRec.getLineB().isValid() && !diffRec.getLineC().isValid())
+    {
+        if(diffRec.hasFineDiffAB())
+        {
+            mergeDetails = e_MergeDetails::eBChanged_CDeleted;
+            bConflict = true;
+        }
+        else
+        {
+            mergeDetails = e_MergeDetails::eCDeleted;
+            bLineRemoved = true;
+            srcSelect = e_SrcSelector::C;
+        }
+    }
+    else if(diffRec.getLineA().isValid() && !diffRec.getLineB().isValid() && diffRec.getLineC().isValid())
+    {
+        if(diffRec.hasFineDiffCA())
+        {
+            mergeDetails = e_MergeDetails::eCChanged_BDeleted;
+            bConflict = true;
+        }
+        else
+        {
+            mergeDetails = e_MergeDetails::eBDeleted;
+            bLineRemoved = true;
+            srcSelect = e_SrcSelector::B;
+        }
+    }
+    else if(!diffRec.getLineA().isValid() && diffRec.getLineB().isValid() && diffRec.getLineC().isValid())
+    {
+        if(diffRec.hasFineDiffBC())
+        {
+            mergeDetails = e_MergeDetails::eBCAdded;
+            bConflict = true;
+        }
+        else // B==C
+        {
+            mergeDetails = e_MergeDetails::eBCAddedAndEqual;
+            srcSelect = e_SrcSelector::C;
+        }
+    }
+    else if(!diffRec.getLineA().isValid() && !diffRec.getLineB().isValid() && diffRec.getLineC().isValid())
+    {
+        mergeDetails = e_MergeDetails::eCAdded;
+        srcSelect = e_SrcSelector::C;
+    }
+    else if(!diffRec.getLineA().isValid() && diffRec.getLineB().isValid() && !diffRec.getLineC().isValid())
+    {
+        mergeDetails = e_MergeDetails::eBAdded;
+        srcSelect = e_SrcSelector::B;
+    }
+    else if(diffRec.getLineA().isValid() && !diffRec.getLineB().isValid() && !diffRec.getLineC().isValid())
+    {
+        mergeDetails = e_MergeDetails::eBCDeleted;
+        bLineRemoved = true;
+        srcSelect = e_SrcSelector::C;
+    }
+    else
+        Q_ASSERT(true);
+}

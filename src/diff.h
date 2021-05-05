@@ -239,6 +239,10 @@ class Diff3Line
   public:
     static QSharedPointer<DiffBufferInfo> m_pDiffBufferInfo; // Needed by this class and only this but inited directly from KDiff3App::mainInit
 
+    [[nodiscard]] inline bool hasFineDiffAB() const { return pFineAB != nullptr; }
+    [[nodiscard]] inline bool hasFineDiffBC() const { return pFineBC != nullptr; }
+    [[nodiscard]] inline bool hasFineDiffCA() const { return pFineCA != nullptr; }
+
     Q_REQUIRED_RESULT LineRef getLineA() const { return lineA; }
     Q_REQUIRED_RESULT LineRef getLineB() const { return lineB; }
     Q_REQUIRED_RESULT LineRef getLineC() const { return lineC; }
@@ -304,8 +308,6 @@ class Diff3Line
 
     void setLinesNeeded(const qint32 lines) { mLinesNeededForDisplay = lines; }
     Q_REQUIRED_RESULT bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const std::shared_ptr<LineDataVector> &v1, const std::shared_ptr<LineDataVector> &v2, const IgnoreFlags eIgnoreFlags);
-    void mergeOneLine(MergeLine &inMergeLine, bool& bLineRemoved, bool bTwoInputs) const;
-
     void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
                      DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
                      ChangeFlags& changed, ChangeFlags& changed2) const;
