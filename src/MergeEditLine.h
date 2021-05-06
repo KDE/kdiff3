@@ -171,8 +171,8 @@ class MergeLineList: public std::list<MergeLine>
   public:
     inline void clear() { mList.clear(); }
 
-    void buildFromDiff3(const Diff3LineList &diff3List, bool isThreeway);
-
+    void buildFromDiff3(const Diff3LineList& diff3List, bool isThreeway);
+    void updateDefaults(const e_SrcSelector defaultSelector, const bool bConflictsOnly, const bool bWhiteSpaceOnly);
 };
 
 #endif

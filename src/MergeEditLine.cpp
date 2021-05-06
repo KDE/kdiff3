@@ -242,6 +242,59 @@ void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreew
         ++lineIdx;
     }
 }
+/*
+    Changes default merge settings currently used when not in auto mode or if white space is being auto solved.
+*/
+void MergeLineList::updateDefaults(const e_SrcSelector defaultSelector, const bool bConflictsOnly, const bool bWhiteSpaceOnly)
+{
+    // Change all auto selections
+    MergeLineList::iterator mlIt;
+    for(mlIt = mList.begin(); mlIt != mList.end(); ++mlIt)
+    {
+        MergeLine &ml = *mlIt;
+        bool bConflict = ml.mergeEditLineList.empty() || ml.mergeEditLineList.begin()->isConflict();
+        if(ml.isDelta() && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || ml.isWhiteSpaceConflict()))
+        {
+            ml.mergeEditLineList.clear();
+            if(defaultSelector == e_SrcSelector::Invalid && ml.isDelta())
+            {
+                MergeEditLine mel(ml.id3l());
+
+                mel.setConflict();
+                ml.bConflict = true;
+                ml.mergeEditLineList.push_back(mel);
+            }
+            else
+            {
+                Diff3LineList::const_iterator d3llit = ml.id3l();
+                int j;
+
+                for(j = 0; j < ml.srcRangeLength; ++j)
+                {
+                    MergeEditLine mel(d3llit);
+                    mel.setSource(defaultSelector, false);
+
+                    LineRef srcLine = defaultSelector == e_SrcSelector::A ? d3llit->getLineA() : defaultSelector == e_SrcSelector::B ? d3llit->getLineB() :
+                                                                                             defaultSelector == e_SrcSelector::C     ? d3llit->getLineC() :
+                                                                                                                                       LineRef();
+                    if(srcLine.isValid())
+                    {
+                        ml.mergeEditLineList.push_back(mel);
+                    }
+
+                    ++d3llit;
+                }
+
+                if(ml.mergeEditLineList.empty()) // Make a line nevertheless
+                {
+                    MergeEditLine mel(ml.id3l());
+                    mel.setRemoved(defaultSelector);
+                    ml.mergeEditLineList.push_back(mel);
+                }
+            }
+        }
+    }
+}
 
 void MergeLine::dectectWhiteSpaceConflict(const Diff3Line &d, const bool isThreeWay)
 {

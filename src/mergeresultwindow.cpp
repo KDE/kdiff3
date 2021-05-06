@@ -350,53 +350,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
 
     if(!bAutoSolve || bSolveWhiteSpaceConflicts)
     {
-        // TODO: Move this.
-        // Change all auto selections
-        MergeLineList::iterator mlIt;
-        for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
-        {
-            MergeLine& ml = *mlIt;
-            bool bConflict = ml.mergeEditLineList.empty() || ml.mergeEditLineList.begin()->isConflict();
-            if(ml.isDelta() && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || ml.isWhiteSpaceConflict()))
-            {
-                ml.mergeEditLineList.clear();
-                if(defaultSelector == e_SrcSelector::Invalid && ml.isDelta())
-                {
-                    MergeEditLine mel(ml.id3l());
-
-                    mel.setConflict();
-                    ml.bConflict = true;
-                    ml.mergeEditLineList.push_back(mel);
-                }
-                else
-                {
-                    Diff3LineList::const_iterator d3llit = ml.id3l();
-                    int j;
-
-                    for(j = 0; j < ml.srcRangeLength; ++j)
-                    {
-                        MergeEditLine mel(d3llit);
-                        mel.setSource(defaultSelector, false);
-
-                        LineRef srcLine = defaultSelector == e_SrcSelector::A ? d3llit->getLineA() : defaultSelector == e_SrcSelector::B ? d3llit->getLineB() : defaultSelector == e_SrcSelector::C ? d3llit->getLineC() : LineRef();
-
-                        if(srcLine.isValid())
-                        {
-                            ml.mergeEditLineList.push_back(mel);
-                        }
-
-                        ++d3llit;
-                    }
-
-                    if(ml.mergeEditLineList.empty()) // Make a line nevertheless
-                    {
-                        MergeEditLine mel(ml.id3l());
-                        mel.setRemoved(defaultSelector);
-                        ml.mergeEditLineList.push_back(mel);
-                    }
-                }
-            }
-        }
+        m_mergeLineList.updateDefaults(defaultSelector, bConflictsOnly, bWhiteSpaceOnly);
     }
 
     MergeLineList::iterator mlIt;
@@ -433,7 +387,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
             slotMergeHistory();
         if(m_pOptions->m_bRunRegExpAutoMergeOnMergeStart)
             slotRegExpAutoMerge();
-        if(lIsThreeWay && !doRelevantChangesExist())
+        if(m_pldC != nullptr && !doRelevantChangesExist())
             Q_EMIT noRelevantChangesDetected();
     }
 
