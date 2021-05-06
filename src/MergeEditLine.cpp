@@ -59,7 +59,7 @@ bool MergeLine::isSameKind(const MergeLine &ml2) const
     {
         // Both lines have conflicts: If one is only a white space conflict and
         // the other one is a real conflict, then this line returns false.
-        return id3l->isEqualAC() == ml2.id3l->isEqualAC() && id3l->isEqualAB() == ml2.id3l->isEqualAB();
+        return mId3l->isEqualAC() == ml2.mId3l->isEqualAC() && mId3l->isEqualAB() == ml2.mId3l->isEqualAB();
     }
     else
         return (

@@ -132,7 +132,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         bool bLineRemoved;
 
         lMergeLine.mergeOneLine(d3l, bLineRemoved, !KDiff3App::isTripleDiff());
-        md = lMergeLine.mergeDetails;
+        md = lMergeLine.details();
         bConflict = lMergeLine.isConflict();
 
         QColor c = m_pOptions->m_bgColor;

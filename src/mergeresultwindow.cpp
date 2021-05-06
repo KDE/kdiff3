@@ -345,7 +345,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
             //TODO:Move me
             ml.d3lLineIdx = lineIdx;
             ml.bDelta = ml.srcSelect != e_SrcSelector::A;
-            ml.id3l = it;
+            ml.mId3l = it;
             ml.srcRangeLength = 1;
 
             MergeLine* back = m_mergeLineList.empty() ? nullptr : &m_mergeLineList.back();
@@ -365,14 +365,14 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
             if(!ml.isConflict())
             {
                 MergeLine& tmpBack = m_mergeLineList.back();
-                MergeEditLine mel(ml.id3l);
+                MergeEditLine mel(ml.id3l());
                 mel.setSource(ml.srcSelect, bLineRemoved);
                 tmpBack.mergeEditLineList.push_back(mel);
             }
             else if(back == nullptr || !back->isConflict() || !bSame)
             {
                 MergeLine& tmpBack = m_mergeLineList.back();
-                MergeEditLine mel(ml.id3l);
+                MergeEditLine mel(ml.id3l());
                 mel.setConflict();
                 tmpBack.mergeEditLineList.push_back(mel);
             }
@@ -412,7 +412,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
                 ml.mergeEditLineList.clear();
                 if(defaultSelector == e_SrcSelector::Invalid && ml.isDelta())
                 {
-                    MergeEditLine mel(ml.id3l);
+                    MergeEditLine mel(ml.id3l());
 
                     mel.setConflict();
                     ml.bConflict = true;
@@ -420,7 +420,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
                 }
                 else
                 {
-                    Diff3LineList::const_iterator d3llit = ml.id3l;
+                    Diff3LineList::const_iterator d3llit = ml.id3l();
                     int j;
 
                     for(j = 0; j < ml.srcRangeLength; ++j)
@@ -440,7 +440,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
 
                     if(ml.mergeEditLineList.empty()) // Make a line nevertheless
                     {
-                        MergeEditLine mel(ml.id3l);
+                        MergeEditLine mel(ml.id3l());
                         mel.setRemoved(defaultSelector);
                         ml.mergeEditLineList.push_back(mel);
                     }
@@ -610,11 +610,11 @@ bool MergeResultWindow::checkOverviewIgnore(MergeLineList::iterator& i)
 {
     if(mOverviewMode == e_OverviewMode::eOMNormal) return false;
     if(mOverviewMode == e_OverviewMode::eOMAvsB)
-        return i->mergeDetails == e_MergeDetails::eCAdded || i->mergeDetails == e_MergeDetails::eCDeleted || i->mergeDetails == e_MergeDetails::eCChanged;
+        return i->details() == e_MergeDetails::eCAdded || i->details() == e_MergeDetails::eCDeleted || i->details() == e_MergeDetails::eCChanged;
     if(mOverviewMode == e_OverviewMode::eOMAvsC)
-        return i->mergeDetails == e_MergeDetails::eBAdded || i->mergeDetails == e_MergeDetails::eBDeleted || i->mergeDetails == e_MergeDetails::eBChanged;
+        return i->details() == e_MergeDetails::eBAdded || i->details() == e_MergeDetails::eBDeleted || i->details() == e_MergeDetails::eBChanged;
     if(mOverviewMode == e_OverviewMode::eOMBvsC)
-        return i->mergeDetails == e_MergeDetails::eBCAddedAndEqual || i->mergeDetails == e_MergeDetails::eBCDeleted || i->mergeDetails == e_MergeDetails::eBCChangedAndEqual;
+        return i->details() == e_MergeDetails::eBCAddedAndEqual || i->details() == e_MergeDetails::eBCDeleted || i->details() == e_MergeDetails::eBCChangedAndEqual;
     return false;
 }
 
@@ -976,7 +976,7 @@ void MergeResultWindow::choose(e_SrcSelector selector)
 
     if(!bActive) // Selected source wasn't active.
     {            // Append the lines from selected source here at rangeEnd.
-        Diff3LineList::const_iterator d3llit = ml.id3l;
+        Diff3LineList::const_iterator d3llit = ml.id3l();
         int j;
 
         for(j = 0; j < ml.srcRangeLength; ++j)
@@ -1008,7 +1008,7 @@ void MergeResultWindow::choose(e_SrcSelector selector)
     if(ml.mergeEditLineList.empty())
     {
         // Insert a dummy line:
-        MergeEditLine mel(ml.id3l);
+        MergeEditLine mel(ml.id3l());
 
         if(bActive)
             mel.setConflict(); // All src entries deleted => conflict
@@ -1411,7 +1411,7 @@ void MergeResultWindow::slotRegExpAutoMerge()
     {
         if(i->isConflict())
         {
-            Diff3LineList::const_iterator id3l = i->id3l;
+            Diff3LineList::const_iterator id3l = i->id3l();
             if(vcsKeywords.match(id3l->getString(e_SrcSelector::A)).hasMatch() &&
                vcsKeywords.match(id3l->getString(e_SrcSelector::B)).hasMatch() &&
                (m_pldC == nullptr || vcsKeywords.match(id3l->getString(e_SrcSelector::C)).hasMatch()))
@@ -1523,7 +1523,7 @@ void MergeResultWindow::slotJoinDiffs(int firstD3lLineIdx, int lastD3lLineIdx)
     {
         iMLLStart->mergeEditLineList.clear();
         // Insert a conflict line as placeholder
-        iMLLStart->mergeEditLineList.push_back(MergeEditLine(iMLLStart->id3l));
+        iMLLStart->mergeEditLineList.push_back(MergeEditLine(iMLLStart->id3l()));
     }
     setFastSelector(iMLLStart);
 }
@@ -1803,7 +1803,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
                         QString s;
                         s = mel.getString(m_pldA, m_pldB, m_pldC);
 
-                        writeLine(p, line, s, mel.src(), ml.mergeDetails, rangeMark,
+                        writeLine(p, line, s, mel.src(), ml.details(), rangeMark,
                                   mel.isModified(), mel.isRemoved(), ml.isWhiteSpaceConflict());
                     }
                     ++line;
@@ -1873,7 +1873,7 @@ void MergeResultWindow::updateSourceMask()
             if(mel.isModified() || !mel.isEditableText()) bModified = true;
         }
 
-        if(ml.mergeDetails == e_MergeDetails::eNoChange)
+        if(ml.details() == e_MergeDetails::eNoChange)
         {
             srcMask = 0;
             enabledMask = bModified ? 1 : 0;
@@ -2262,7 +2262,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
                     }
                 }
             }
-            MergeEditLine mel(mlIt->id3l); // Associate every mel with an id3l, even if not really valid.
+            MergeEditLine mel(mlIt->id3l()); // Associate every mel with an id3l, even if not really valid.
             mel.setString(indentation + str.mid(x));
 
             if(x < str.length()) // Cut off the old line.
@@ -2739,7 +2739,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
         if(c == '\n' || (c == '\r' && clipBoard[i + 1] != '\n'))
         {
             melIt->setString(currentLine);
-            MergeEditLine mel(mlIt->id3l); // Associate every mel with an id3l, even if not really valid.
+            MergeEditLine mel(mlIt->id3l()); // Associate every mel with an id3l, even if not really valid.
             melIt = mlIt->mergeEditLineList.insert(melItAfter, mel);
             currentLine = "";
             x = 0;
