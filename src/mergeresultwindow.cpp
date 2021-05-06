@@ -333,14 +333,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
             MergeLine ml;
             bool bLineRemoved;
             ml.mergeOneLine(d, bLineRemoved, m_pldC == nullptr);
-
-            // Automatic solving for only whitespace changes.
-            if(ml.isConflict() &&
-               ((m_pldC == nullptr && (d.isEqualAB() || (d.isWhiteLine(e_SrcSelector::A) && d.isWhiteLine(e_SrcSelector::B)))) ||
-                (m_pldC != nullptr && ((d.isEqualAB() && d.isEqualAC()) || (d.isWhiteLine(e_SrcSelector::A) && d.isWhiteLine(e_SrcSelector::B) && d.isWhiteLine(e_SrcSelector::C))))))
-            {
-                ml.bWhiteSpaceConflict = true;
-            }
+            ml.dectectWhiteSpaceConflict(d, m_pldC != nullptr);
 
             //TODO:Move me
             ml.d3lLineIdx = lineIdx;

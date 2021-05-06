@@ -190,3 +190,14 @@ void MergeLine::mergeOneLine(const Diff3Line &diffRec, bool &bLineRemoved, bool 
     else
         Q_ASSERT(true);
 }
+
+void MergeLine::dectectWhiteSpaceConflict(const Diff3Line &d, const bool isThreeWay)
+{
+    // Automatic solving for only whitespace changes.
+    if(isConflict() &&
+       ((!isThreeWay && (d.isEqualAB() || (d.isWhiteLine(e_SrcSelector::A) && d.isWhiteLine(e_SrcSelector::B)))) ||
+        (isThreeWay && ((d.isEqualAB() && d.isEqualAC()) || (d.isWhiteLine(e_SrcSelector::A) && d.isWhiteLine(e_SrcSelector::B) && d.isWhiteLine(e_SrcSelector::C))))))
+    {
+        bWhiteSpaceConflict = true;
+    }
+}
