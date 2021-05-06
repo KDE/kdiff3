@@ -7,6 +7,7 @@
 */
 
 #include "MergeEditLine.h"
+#include "LineRef.h"
 #include "diff.h"
 
 QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDataA, const std::shared_ptr<LineDataVector> &pLineDataB, const std::shared_ptr<LineDataVector> &pLineDataC) const
@@ -195,7 +196,7 @@ void MergeLine::mergeOneLine(const Diff3Line &diffRec, bool &bLineRemoved, bool 
 */
 void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreeway)
 {
-    int lineIdx = 0;
+    LineIndex lineIdx = 0;
     Diff3LineList::const_iterator it;
     for(const Diff3Line &d: diff3List)
     {
