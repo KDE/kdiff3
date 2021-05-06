@@ -308,6 +308,8 @@ void MergeResultWindow::reset()
 
 void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bool bConflictsOnly, bool bWhiteSpaceOnly)
 {
+    const bool lIsThreeWay = m_pldC != nullptr;
+
     if(!bConflictsOnly)
     {
         if(m_bModified)
@@ -324,20 +326,20 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
 
         m_mergeLineList.clear();
 
-        m_mergeLineList.buildFromDiff3(*m_pDiff3LineList, m_pldC != nullptr);
+        m_mergeLineList.buildFromDiff3(*m_pDiff3LineList, lIsThreeWay);
     }
 
     bool bSolveWhiteSpaceConflicts = false;
     if(bAutoSolve) // when true, then the other params are not used and we can change them here. (see all invocations of merge())
     {
-        if(m_pldC == nullptr && m_pOptions->m_whiteSpace2FileMergeDefault != (int)e_SrcSelector::None) // Only two inputs
+        if(!lIsThreeWay && m_pOptions->m_whiteSpace2FileMergeDefault != (int)e_SrcSelector::None) // Only two inputs
         {
             Q_ASSERT(m_pOptions->m_whiteSpace2FileMergeDefault <= (int)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
             defaultSelector = (e_SrcSelector)m_pOptions->m_whiteSpace2FileMergeDefault;
             bWhiteSpaceOnly = true;
             bSolveWhiteSpaceConflicts = true;
         }
-        else if(m_pldC != nullptr && m_pOptions->m_whiteSpace3FileMergeDefault != (int)e_SrcSelector::None)
+        else if(lIsThreeWay && m_pOptions->m_whiteSpace3FileMergeDefault != (int)e_SrcSelector::None)
         {
             Q_ASSERT(m_pOptions->m_whiteSpace3FileMergeDefault <= (int)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
             defaultSelector = (e_SrcSelector)m_pOptions->m_whiteSpace3FileMergeDefault;
@@ -431,7 +433,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
             slotMergeHistory();
         if(m_pOptions->m_bRunRegExpAutoMergeOnMergeStart)
             slotRegExpAutoMerge();
-        if(m_pldC != nullptr && !doRelevantChangesExist())
+        if(lIsThreeWay && !doRelevantChangesExist())
             Q_EMIT noRelevantChangesDetected();
     }
 
