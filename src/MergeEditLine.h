@@ -85,11 +85,11 @@ class MergeEditLineList: public std::list<MergeEditLine>
   public:
     using std::list<MergeEditLine>::list;
 
-
     Q_REQUIRED_RESULT int size()
     {
         return (int)BASE::size();
     }
+
 };
 
 class MergeLine
@@ -104,6 +104,8 @@ class MergeLine
     bool bDelta = false;
     e_SrcSelector srcSelect = e_SrcSelector::None;
     MergeEditLineList mergeEditLineList;
+
+    void dectectWhiteSpaceConflict(const Diff3Line &d, const bool isThreeWay);
 
     [[nodiscard]] inline bool isConflict() const { return bConflict; }
     [[nodiscard]] inline bool isWhiteSpaceConflict() const { return bWhiteSpaceConflict; }
@@ -156,9 +158,21 @@ class MergeLine
 
     bool isSameKind(const MergeLine& ml2) const;
 
-    void mergeOneLine(const Diff3Line &diffRec, bool& bLineRemoved, bool bTwoInputs);
+    void mergeOneLine(const Diff3Line& diffRec, bool& bLineRemoved, bool bTwoInputs);
 };
 
-typedef std::list<MergeLine> MergeLineList;
+//typedef std::list<MergeLine> MergeLineList;
+
+class MergeLineList: public std::list<MergeLine>
+{
+  private:
+    std::list<MergeLine> mList;
+
+  public:
+    inline void clear() { mList.clear(); }
+
+    void buildFromDiff3(const Diff3LineList &diff3List, bool isThreeway);
+
+};
 
 #endif

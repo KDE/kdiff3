@@ -190,6 +190,57 @@ void MergeLine::mergeOneLine(const Diff3Line &diffRec, bool &bLineRemoved, bool 
     else
         Q_ASSERT(true);
 }
+/*
+    Build a new MergeLineList from scratch using a Diff3LineList.
+*/
+void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreeway)
+{
+    int lineIdx = 0;
+    Diff3LineList::const_iterator it;
+    for(const Diff3Line &d: diff3List)
+    {
+        MergeLine ml;
+        bool bLineRemoved;
+        ml.mergeOneLine(d, bLineRemoved, !isThreeway);
+        ml.dectectWhiteSpaceConflict(d, isThreeway);
+
+        ml.d3lLineIdx = lineIdx;
+        ml.bDelta = ml.srcSelect != e_SrcSelector::A;
+        ml.mId3l = it;
+        ml.srcRangeLength = 1;
+
+        MergeLine *back = mList.empty() ? nullptr : &mList.back();
+
+        bool bSame = back != nullptr && ml.isSameKind(*back);
+        if(bSame)
+        {
+            ++back->srcRangeLength;
+            if(back->isWhiteSpaceConflict() && !ml.isWhiteSpaceConflict())
+                back->bWhiteSpaceConflict = false;
+        }
+        else
+        {
+            mList.push_back(ml);
+        }
+
+        if(!ml.isConflict())
+        {
+            MergeLine &tmpBack = mList.back();
+            MergeEditLine mel(ml.id3l());
+            mel.setSource(ml.srcSelect, bLineRemoved);
+            tmpBack.mergeEditLineList.push_back(mel);
+        }
+        else if(back == nullptr || !back->isConflict() || !bSame)
+        {
+            MergeLine &tmpBack = mList.back();
+            MergeEditLine mel(ml.id3l());
+            mel.setConflict();
+            tmpBack.mergeEditLineList.push_back(mel);
+        }
+
+        ++lineIdx;
+    }
+}
 
 void MergeLine::dectectWhiteSpaceConflict(const Diff3Line &d, const bool isThreeWay)
 {

@@ -324,52 +324,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
 
         m_mergeLineList.clear();
 
-        int lineIdx = 0;
-        Diff3LineList::const_iterator it;
-        for(it = m_pDiff3LineList->begin(); it != m_pDiff3LineList->end(); ++it, ++lineIdx)
-        {
-            const Diff3Line& d = *it;
-
-            MergeLine ml;
-            bool bLineRemoved;
-            ml.mergeOneLine(d, bLineRemoved, m_pldC == nullptr);
-            ml.dectectWhiteSpaceConflict(d, m_pldC != nullptr);
-
-            //TODO:Move me
-            ml.d3lLineIdx = lineIdx;
-            ml.bDelta = ml.srcSelect != e_SrcSelector::A;
-            ml.mId3l = it;
-            ml.srcRangeLength = 1;
-
-            MergeLine* back = m_mergeLineList.empty() ? nullptr : &m_mergeLineList.back();
-
-            bool bSame = back != nullptr && ml.isSameKind(*back);
-            if(bSame)
-            {
-                ++back->srcRangeLength;
-                if(back->isWhiteSpaceConflict() && !ml.isWhiteSpaceConflict())
-                    back->bWhiteSpaceConflict = false;
-            }
-            else
-            {
-                m_mergeLineList.push_back(ml);
-            }
-
-            if(!ml.isConflict())
-            {
-                MergeLine& tmpBack = m_mergeLineList.back();
-                MergeEditLine mel(ml.id3l());
-                mel.setSource(ml.srcSelect, bLineRemoved);
-                tmpBack.mergeEditLineList.push_back(mel);
-            }
-            else if(back == nullptr || !back->isConflict() || !bSame)
-            {
-                MergeLine& tmpBack = m_mergeLineList.back();
-                MergeEditLine mel(ml.id3l());
-                mel.setConflict();
-                tmpBack.mergeEditLineList.push_back(mel);
-            }
-        }
+        m_mergeLineList.buildFromDiff3(*m_pDiff3LineList, m_pldC != nullptr);
     }
 
     bool bSolveWhiteSpaceConflicts = false;
