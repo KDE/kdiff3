@@ -1054,11 +1054,9 @@ void MergeResultWindow::collectHistoryInformation(
     std::list<HistoryMap::iterator>::iterator itHitListFront = hitList.begin();
     Diff3LineList::const_iterator id3l = iHistoryBegin;
     QString historyLead;
-    {
-        const LineData& pld = id3l->getLineData(src);
 
-        historyLead = Utils::calcHistoryLead(pld.getLine());
-    }
+    historyLead = Utils::calcHistoryLead(id3l->getLineData(src).getLine());
+
     QRegularExpression historyStart(m_pOptions->m_historyStartRegExp);
     if(id3l == iHistoryEnd)
         return;
