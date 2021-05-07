@@ -737,7 +737,7 @@ void MergeResultWindow::slotSetFastSelectorLine(LineIndex line)
     MergeLineList::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
-        if(line >= i->d3lLineIdx && line < i->d3lLineIdx + i->srcRangeLength)
+        if(line >= i->getIndex() && line < i->getIndex() + i->sourceRangeLength())
         {
             //if ( i->isDelta() )
             {
@@ -819,7 +819,7 @@ void MergeResultWindow::setFastSelector(MergeLineList::iterator i)
     if(i == m_mergeLineList.end())
         return;
     m_currentMergeLineIt = i;
-    Q_EMIT setFastSelectorRange(i->d3lLineIdx, i->srcRangeLength);
+    Q_EMIT setFastSelectorRange(i->getIndex(), i->sourceRangeLength());
 
     int line1 = 0;
 
@@ -883,7 +883,7 @@ void MergeResultWindow::choose(e_SrcSelector selector)
         Diff3LineList::const_iterator d3llit = ml.id3l();
         int j;
 
-        for(j = 0; j < ml.srcRangeLength; ++j)
+        for(j = 0; j < ml.sourceRangeLength(); ++j)
         {
             MergeEditLine mel(d3llit);
             mel.setSource(selector, false);
@@ -1320,7 +1320,7 @@ void MergeResultWindow::slotRegExpAutoMerge()
             {
                 MergeEditLine& mel = *i->mergeEditLineList.begin();
                 mel.setSource(m_pldC == nullptr ? e_SrcSelector::B : e_SrcSelector::C, false);
-                splitAtDiff3LineIdx(i->d3lLineIdx + 1);
+                splitAtDiff3LineIdx(i->getIndex() + 1);
             }
         }
     }
@@ -1355,12 +1355,12 @@ MergeLineList::iterator MergeResultWindow::splitAtDiff3LineIdx(int d3lLineIdx)
     MergeLineList::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
-        if(i->d3lLineIdx == d3lLineIdx)
+        if(i->getIndex() == d3lLineIdx)
         {
             // No split needed, this is the beginning of a MergeLine
             return i;
         }
-        else if(i->d3lLineIdx > d3lLineIdx)
+        else if(i->getIndex() > d3lLineIdx)
         {
             // The split must be in the previous MergeLine
             --i;
@@ -1395,11 +1395,11 @@ void MergeResultWindow::slotJoinDiffs(int firstD3lLineIdx, int lastD3lLineIdx)
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
         MergeLine& ml = *i;
-        if(firstD3lLineIdx >= ml.d3lLineIdx && firstD3lLineIdx < ml.d3lLineIdx + ml.srcRangeLength)
+        if(firstD3lLineIdx >= ml.getIndex() && firstD3lLineIdx < ml.getIndex() + ml.sourceRangeLength())
         {
             iMLLStart = i;
         }
-        if(lastD3lLineIdx >= ml.d3lLineIdx && lastD3lLineIdx < ml.d3lLineIdx + ml.srcRangeLength)
+        if(lastD3lLineIdx >= ml.getIndex() && lastD3lLineIdx < ml.getIndex() + ml.sourceRangeLength())
         {
             iMLLEnd = i;
             ++iMLLEnd;

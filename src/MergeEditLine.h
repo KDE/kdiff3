@@ -7,6 +7,7 @@
 */
 
 #ifndef MERGEEDITLINE_H
+
 #include "diff.h"
 
 #include <QString>
@@ -95,6 +96,8 @@ class MergeEditLineList: public std::list<MergeEditLine>
 class MergeLine
 {
   public:
+    friend class MergeLineList;
+
     Diff3LineList::const_iterator mId3l;
     LineIndex d3lLineIdx = -1;    // Needed to show the correct window pos.
     LineCount srcRangeLength = 0; // how many src-lines have these properties
@@ -105,7 +108,8 @@ class MergeLine
     e_SrcSelector srcSelect = e_SrcSelector::None;
     MergeEditLineList mergeEditLineList;
 
-    void dectectWhiteSpaceConflict(const Diff3Line &d, const bool isThreeWay);
+    [[nodiscard]] inline LineIndex getIndex() const { return d3lLineIdx; }
+    [[nodiscard]] inline LineCount sourceRangeLength() const { return srcRangeLength; }
 
     [[nodiscard]] inline bool isConflict() const { return bConflict; }
     [[nodiscard]] inline bool isWhiteSpaceConflict() const { return bWhiteSpaceConflict; }
@@ -159,9 +163,9 @@ class MergeLine
     bool isSameKind(const MergeLine& ml2) const;
 
     void mergeOneLine(const Diff3Line& diffRec, bool& bLineRemoved, bool bTwoInputs);
-};
+    void dectectWhiteSpaceConflict(const Diff3Line& d, const bool isThreeWay);
 
-//typedef std::list<MergeLine> MergeLineList;
+};
 
 class MergeLineList: public std::list<MergeLine>
 {
