@@ -173,15 +173,16 @@ class MergeLine
     void removeEmptySource();
 };
 
-class MergeLineList: public std::list<MergeLine>
+typedef std::list<MergeLine> MergeLineListImp;
+class MergeLineList: public MergeLineListImp
 {
   public:
-    using std::list<MergeLine>::list;
+    using MergeLineListImp::list;
 
     void buildFromDiff3(const Diff3LineList& diff3List, bool isThreeway);
     void updateDefaults(const e_SrcSelector defaultSelector, const bool bConflictsOnly, const bool bWhiteSpaceOnly);
 
-    MergeLineList::iterator splitAtDiff3LineIdx(int d3lLineIdx);
+    MergeLineListImp::iterator splitAtDiff3LineIdx(int d3lLineIdx);
 };
 
 #endif

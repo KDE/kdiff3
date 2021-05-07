@@ -248,7 +248,7 @@ void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreew
 void MergeLineList::updateDefaults(const e_SrcSelector defaultSelector, const bool bConflictsOnly, const bool bWhiteSpaceOnly)
 {
     // Change all auto selections
-    MergeLineList::iterator mlIt;
+    MergeLineListImp::iterator mlIt;
     for(mlIt = begin(); mlIt != end(); ++mlIt)
     {
         MergeLine &ml = *mlIt;
@@ -332,9 +332,9 @@ void MergeLine::removeEmptySource()
 }
 
 // Returns the iterator to the MergeLine after the split
-MergeLineList::iterator MergeLineList::splitAtDiff3LineIdx(int d3lLineIdx)
+MergeLineListImp::iterator MergeLineList::splitAtDiff3LineIdx(int d3lLineIdx)
 {
-    MergeLineList::iterator i;
+    MergeLineListImp::iterator i;
     for(i = begin(); i != end(); ++i)
     {
         if(i->getIndex() == d3lLineIdx)

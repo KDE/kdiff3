@@ -353,7 +353,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
         m_mergeLineList.updateDefaults(defaultSelector, bConflictsOnly, bWhiteSpaceOnly);
     }
 
-    MergeLineList::iterator mlIt;
+    MergeLineListImp::iterator mlIt;
     for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
     {
         MergeLine& ml = *mlIt;
@@ -375,7 +375,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     int nrOfUnsolvedConflicts = 0;
     int nrOfWhiteSpaceConflicts = 0;
 
-    MergeLineList::iterator i;
+    MergeLineListImp::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
         if(i->isConflict())
@@ -426,7 +426,7 @@ int MergeResultWindow::getMaxTextWidth()
     {
         m_maxTextWidth = 0;
 
-        MergeLineList::iterator mlIt = m_mergeLineList.begin();
+        MergeLineListImp::iterator mlIt = m_mergeLineList.begin();
         for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
         {
             MergeLine& ml = *mlIt;
@@ -490,7 +490,7 @@ void MergeResultWindow::setOverviewMode(e_OverviewMode eOverviewMode)
 }
 
 // Check whether we should ignore current delta when moving to next/previous delta
-bool MergeResultWindow::checkOverviewIgnore(MergeLineList::iterator& i)
+bool MergeResultWindow::checkOverviewIgnore(MergeLineListImp::iterator& i)
 {
     if(mOverviewMode == e_OverviewMode::eOMNormal) return false;
     if(mOverviewMode == e_OverviewMode::eOMAvsB)
@@ -506,7 +506,7 @@ bool MergeResultWindow::checkOverviewIgnore(MergeLineList::iterator& i)
 void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
 {
     Q_ASSERT(eDir == eUp || eDir == eDown);
-    MergeLineList::iterator i = m_currentMergeLineIt;
+    MergeLineListImp::iterator i = m_currentMergeLineIt;
     bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
     if(eEndPoint == eEnd)
     {
@@ -564,7 +564,7 @@ bool MergeResultWindow::isDeltaAboveCurrent()
 {
     bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
     if(m_mergeLineList.empty()) return false;
-    MergeLineList::iterator i = m_currentMergeLineIt;
+    MergeLineListImp::iterator i = m_currentMergeLineIt;
     if(i == m_mergeLineList.begin()) return false;
     do
     {
@@ -580,7 +580,7 @@ bool MergeResultWindow::isDeltaBelowCurrent()
     bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
     if(m_mergeLineList.empty()) return false;
 
-    MergeLineList::iterator i = m_currentMergeLineIt;
+    MergeLineListImp::iterator i = m_currentMergeLineIt;
     if(i != m_mergeLineList.end())
     {
         ++i;
@@ -595,7 +595,7 @@ bool MergeResultWindow::isDeltaBelowCurrent()
 bool MergeResultWindow::isConflictAboveCurrent()
 {
     if(m_mergeLineList.empty()) return false;
-    MergeLineList::iterator i = m_currentMergeLineIt;
+    MergeLineListImp::iterator i = m_currentMergeLineIt;
     if(i == m_mergeLineList.begin()) return false;
 
     bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
@@ -611,7 +611,7 @@ bool MergeResultWindow::isConflictAboveCurrent()
 
 bool MergeResultWindow::isConflictBelowCurrent()
 {
-    MergeLineList::iterator i = m_currentMergeLineIt;
+    MergeLineListImp::iterator i = m_currentMergeLineIt;
     if(m_mergeLineList.empty()) return false;
 
     bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
@@ -630,14 +630,14 @@ bool MergeResultWindow::isConflictBelowCurrent()
 bool MergeResultWindow::isUnsolvedConflictAtCurrent()
 {
     if(m_mergeLineList.empty()) return false;
-    MergeLineList::iterator i = m_currentMergeLineIt;
+    MergeLineListImp::iterator i = m_currentMergeLineIt;
     return i->list().begin()->isConflict();
 }
 
 bool MergeResultWindow::isUnsolvedConflictAboveCurrent()
 {
     if(m_mergeLineList.empty()) return false;
-    MergeLineList::iterator i = m_currentMergeLineIt;
+    MergeLineListImp::iterator i = m_currentMergeLineIt;
     if(i == m_mergeLineList.begin()) return false;
 
     do
@@ -651,7 +651,7 @@ bool MergeResultWindow::isUnsolvedConflictAboveCurrent()
 
 bool MergeResultWindow::isUnsolvedConflictBelowCurrent()
 {
-    MergeLineList::iterator i = m_currentMergeLineIt;
+    MergeLineListImp::iterator i = m_currentMergeLineIt;
     if(m_mergeLineList.empty()) return false;
 
     if(i != m_mergeLineList.end())
@@ -714,7 +714,7 @@ void MergeResultWindow::slotGoNextUnsolvedConflict()
     The function calculates the corresponding iterator. */
 void MergeResultWindow::slotSetFastSelectorLine(LineIndex line)
 {
-    MergeLineList::iterator i;
+    MergeLineListImp::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
         if(line >= i->getIndex() && line < i->getIndex() + i->sourceRangeLength())
@@ -734,7 +734,7 @@ int MergeResultWindow::getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflict
     if(pNrOfWhiteSpaceConflicts != nullptr)
         *pNrOfWhiteSpaceConflicts = 0;
 
-    MergeLineList::iterator mlIt = m_mergeLineList.begin();
+    MergeLineListImp::iterator mlIt = m_mergeLineList.begin();
     for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
     {
         MergeLine& ml = *mlIt;
@@ -755,7 +755,7 @@ void MergeResultWindow::showNumberOfConflicts()
     if(!m_pOptions->m_bShowInfoDialogs)
         return;
     int nrOfConflicts = 0;
-    MergeLineList::iterator i;
+    MergeLineListImp::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
         if(i->isConflict() || i->isDelta())
@@ -794,7 +794,7 @@ void MergeResultWindow::showNumberOfConflicts()
                              i18n("Conflicts"));
 }
 
-void MergeResultWindow::setFastSelector(MergeLineList::iterator i)
+void MergeResultWindow::setFastSelector(MergeLineListImp::iterator i)
 {
     if(i == m_mergeLineList.end())
         return;
@@ -803,7 +803,7 @@ void MergeResultWindow::setFastSelector(MergeLineList::iterator i)
 
     int line1 = 0;
 
-    MergeLineList::iterator mlIt = m_mergeLineList.begin();
+    MergeLineListImp::iterator mlIt = m_mergeLineList.begin();
     for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
     {
         if(mlIt == m_currentMergeLineIt)
@@ -1217,10 +1217,10 @@ void MergeResultWindow::slotMergeHistory()
             }
         }
 
-        MergeLineList::iterator iMLLStart = m_mergeLineList.splitAtDiff3LineIdx(d3lHistoryBeginLineIdx);
-        MergeLineList::iterator iMLLEnd = m_mergeLineList.splitAtDiff3LineIdx(d3lHistoryEndLineIdx);
+        MergeLineListImp::iterator iMLLStart = m_mergeLineList.splitAtDiff3LineIdx(d3lHistoryBeginLineIdx);
+        MergeLineListImp::iterator iMLLEnd = m_mergeLineList.splitAtDiff3LineIdx(d3lHistoryEndLineIdx);
         // Now join all MergeLines in the history
-        MergeLineList::iterator i = iMLLStart;
+        MergeLineListImp::iterator i = iMLLStart;
         if(i != iMLLEnd)
         {
             ++i;
@@ -1288,7 +1288,7 @@ void MergeResultWindow::slotRegExpAutoMerge()
         return;
 
     QRegularExpression vcsKeywords(m_pOptions->m_autoMergeRegExp);
-    MergeLineList::iterator i;
+    MergeLineListImp::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
         if(i->isConflict())
@@ -1317,7 +1317,7 @@ bool MergeResultWindow::doRelevantChangesExist()
     if(m_pldC == nullptr || m_mergeLineList.size() <= 1)
         return true;
 
-    MergeLineList::iterator i;
+    MergeLineListImp::iterator i;
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
         if((i->isConflict() && i->list().begin()->src() != e_SrcSelector::C) || i->source() == e_SrcSelector::B)
@@ -1338,9 +1338,9 @@ void MergeResultWindow::slotSplitDiff(int firstD3lLineIdx, int lastD3lLineIdx)
 
 void MergeResultWindow::slotJoinDiffs(int firstD3lLineIdx, int lastD3lLineIdx)
 {
-    MergeLineList::iterator i;
-    MergeLineList::iterator iMLLStart = m_mergeLineList.end();
-    MergeLineList::iterator iMLLEnd = m_mergeLineList.end();
+    MergeLineListImp::iterator i;
+    MergeLineListImp::iterator iMLLStart = m_mergeLineList.end();
+    MergeLineListImp::iterator iMLLEnd = m_mergeLineList.end();
     for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
     {
         MergeLine& ml = *i;
@@ -1626,7 +1626,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
         int lastVisibleLine = m_firstLine + getNofVisibleLines() + 5;
         LineRef line = 0;
-        MergeLineList::iterator mlIt = m_mergeLineList.begin();
+        MergeLineListImp::iterator mlIt = m_mergeLineList.begin();
         for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
         {
             MergeLine& ml = *mlIt;
@@ -1774,7 +1774,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
         m_cursorOldXPixelPos = 0;
         m_cursorYPos = std::max((LineRef::LineType)line, 0);
         int l = 0;
-        MergeLineList::iterator i = m_mergeLineList.begin();
+        MergeLineListImp::iterator i = m_mergeLineList.begin();
         for(i = m_mergeLineList.begin(); i != m_mergeLineList.end(); ++i)
         {
             if(l == line)
@@ -1976,7 +1976,7 @@ bool MergeResultWindow::event(QEvent* e)
 void MergeResultWindow::keyPressEvent(QKeyEvent* e)
 {
     int y = m_cursorYPos;
-    MergeLineList::iterator mlIt;
+    MergeLineListImp::iterator mlIt;
     MergeEditLineList::iterator melIt;
     calcIteratorFromLineNr(y, mlIt, melIt);
 
@@ -2013,7 +2013,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
                 if(y < m_nofLines - 1)
                 {
                     setModified();
-                    MergeLineList::iterator mlIt1;
+                    MergeLineListImp::iterator mlIt1;
                     MergeEditLineList::iterator melIt1;
                     calcIteratorFromLineNr(y + 1, mlIt1, melIt1);
                     if(melIt1->isEditableText())
@@ -2046,7 +2046,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
                 if(y > 0)
                 {
                     setModified();
-                    MergeLineList::iterator mlIt1;
+                    MergeLineListImp::iterator mlIt1;
                     MergeEditLineList::iterator melIt1;
                     calcIteratorFromLineNr(y - 1, mlIt1, melIt1);
                     if(melIt1->isEditableText())
@@ -2083,7 +2083,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
             QString indentation;
             if(m_pOptions->m_bAutoIndentation)
             { // calc last indentation
-                MergeLineList::iterator mlIt1 = mlIt;
+                MergeLineListImp::iterator mlIt1 = mlIt;
                 MergeEditLineList::iterator melIt1 = melIt;
                 for(;;)
                 {
@@ -2362,7 +2362,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
 
 void MergeResultWindow::calcIteratorFromLineNr(
     int line,
-    MergeLineList::iterator& mlIt,
+    MergeLineListImp::iterator& mlIt,
     MergeEditLineList::iterator& melIt)
 {
     for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
@@ -2388,7 +2388,7 @@ QString MergeResultWindow::getSelection()
     QString selectionString;
 
     int line = 0;
-    MergeLineList::iterator mlIt = m_mergeLineList.begin();
+    MergeLineListImp::iterator mlIt = m_mergeLineList.begin();
     for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
     {
         MergeLine& ml = *mlIt;
@@ -2444,7 +2444,7 @@ QString MergeResultWindow::getSelection()
 }
 
 bool MergeResultWindow::deleteSelection2(QString& s, int& x, int& y,
-                                         MergeLineList::iterator& mlIt, MergeEditLineList::iterator& melIt)
+                                         MergeLineListImp::iterator& mlIt, MergeEditLineList::iterator& melIt)
 {
     if(m_selection.selectionContainsData())
     {
@@ -2471,14 +2471,14 @@ void MergeResultWindow::deleteSelection()
     setModified();
 
     LineRef line = 0;
-    MergeLineList::iterator mlItFirst;
+    MergeLineListImp::iterator mlItFirst;
     MergeEditLineList::iterator melItFirst;
     QString firstLineString;
 
     LineRef firstLine;
     LineRef lastLine;
 
-    MergeLineList::iterator mlIt;
+    MergeLineListImp::iterator mlIt;
     for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
     {
         MergeLine& ml = *mlIt;
@@ -2567,7 +2567,7 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
     setModified();
 
     int y = m_cursorYPos;
-    MergeLineList::iterator mlIt;
+    MergeLineListImp::iterator mlIt;
     MergeEditLineList::iterator melIt, melItAfter;
     calcIteratorFromLineNr(y, mlIt, melIt);
     melItAfter = melIt;
@@ -2674,7 +2674,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
     textOutStream.setCodec(pEncoding);
 
     int line = 0;
-    MergeLineList::iterator mlIt = m_mergeLineList.begin();
+    MergeLineListImp::iterator mlIt = m_mergeLineList.begin();
     for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
     {
         MergeLine& ml = *mlIt;
@@ -2720,7 +2720,7 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
 
 QString MergeResultWindow::getString(int lineIdx)
 {
-    MergeLineList::iterator mlIt;
+    MergeLineListImp::iterator mlIt;
     MergeEditLineList::iterator melIt;
     if(m_mergeLineList.empty())
     {

@@ -189,8 +189,8 @@ class MergeResultWindow: public QWidget
     void collectHistoryInformation(e_SrcSelector src, Diff3LineList::const_iterator& iHistoryBegin, Diff3LineList::const_iterator& iHistoryEnd, HistoryMap& historyMap, std::list<HistoryMap::iterator>& hitList);
 
     MergeLineList m_mergeLineList;
-    MergeLineList::iterator m_currentMergeLineIt;
-    bool isItAtEnd(bool bIncrement, MergeLineList::iterator i)
+    MergeLineListImp::iterator m_currentMergeLineIt;
+    bool isItAtEnd(bool bIncrement, MergeLineListImp::iterator i)
     {
         if(bIncrement)
             return i != m_mergeLineList.end();
@@ -199,7 +199,7 @@ class MergeResultWindow: public QWidget
     }
 
     int m_currentPos;
-    bool checkOverviewIgnore(MergeLineList::iterator& i);
+    bool checkOverviewIgnore(MergeLineListImp::iterator& i);
 
     enum e_Direction
     {
@@ -217,7 +217,7 @@ class MergeResultWindow: public QWidget
     void go(e_Direction eDir, e_EndPoint eEndPoint);
     void calcIteratorFromLineNr(
         int line,
-        MergeLineList::iterator& mlIt,
+        MergeLineListImp::iterator& mlIt,
         MergeEditLineList::iterator& melIt);
 
     void paintEvent(QPaintEvent* e) override;
@@ -230,7 +230,7 @@ class MergeResultWindow: public QWidget
         RLPainter& p, int line, const QString& str,
         enum e_SrcSelector srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
     );
-    void setFastSelector(MergeLineList::iterator i);
+    void setFastSelector(MergeLineListImp::iterator i);
     LineRef convertToLine(QtNumberType y);
     bool event(QEvent*) override;
     void mousePressEvent(QMouseEvent* e) override;
@@ -269,7 +269,7 @@ class MergeResultWindow: public QWidget
     Selection m_selection;
 
     bool deleteSelection2(QString& str, int& x, int& y,
-                          MergeLineList::iterator& mlIt, MergeEditLineList::iterator& melIt);
+                          MergeLineListImp::iterator& mlIt, MergeEditLineList::iterator& melIt);
     bool doRelevantChangesExist();
 
     /*
