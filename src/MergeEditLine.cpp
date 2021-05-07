@@ -229,14 +229,14 @@ void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreew
             MergeLine &tmpBack = this->back();
             MergeEditLine mel(ml.id3l());
             mel.setSource(ml.srcSelect, bLineRemoved);
-            tmpBack.mergeEditLineList.push_back(mel);
+            tmpBack.list().push_back(mel);
         }
         else if(lBack == nullptr || !lBack->isConflict() || !bSame)
         {
             MergeLine &tmpBack = this->back();
             MergeEditLine mel(ml.id3l());
             mel.setConflict();
-            tmpBack.mergeEditLineList.push_back(mel);
+            tmpBack.list().push_back(mel);
         }
 
         ++lineIdx;
@@ -252,17 +252,17 @@ void MergeLineList::updateDefaults(const e_SrcSelector defaultSelector, const bo
     for(mlIt = begin(); mlIt != end(); ++mlIt)
     {
         MergeLine &ml = *mlIt;
-        bool bConflict = ml.mergeEditLineList.empty() || ml.mergeEditLineList.begin()->isConflict();
+        bool bConflict = ml.list().empty() || ml.list().begin()->isConflict();
         if(ml.isDelta() && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || ml.isWhiteSpaceConflict()))
         {
-            ml.mergeEditLineList.clear();
+            ml.list().clear();
             if(defaultSelector == e_SrcSelector::Invalid && ml.isDelta())
             {
                 MergeEditLine mel(ml.id3l());
 
                 mel.setConflict();
                 ml.bConflict = true;
-                ml.mergeEditLineList.push_back(mel);
+                ml.list().push_back(mel);
             }
             else
             {
@@ -279,17 +279,17 @@ void MergeLineList::updateDefaults(const e_SrcSelector defaultSelector, const bo
                                                                                                                                        LineRef();
                     if(srcLine.isValid())
                     {
-                        ml.mergeEditLineList.push_back(mel);
+                        ml.list().push_back(mel);
                     }
 
                     ++d3llit;
                 }
 
-                if(ml.mergeEditLineList.empty()) // Make a line nevertheless
+                if(ml.list().empty()) // Make a line nevertheless
                 {
                     MergeEditLine mel(ml.id3l());
                     mel.setRemoved(defaultSelector);
-                    ml.mergeEditLineList.push_back(mel);
+                    ml.list().push_back(mel);
                 }
             }
         }
@@ -312,7 +312,7 @@ void MergeLine::removeEmptySource()
     LineRef oldSrcLine;
     e_SrcSelector oldSrc = e_SrcSelector::Invalid;
     MergeEditLineList::iterator melIt;
-    for(melIt = mergeEditLineList.begin(); melIt != mergeEditLineList.end();)
+    for(melIt = list().begin(); melIt != list().end();)
     {
         MergeEditLine& mel = *melIt;
         e_SrcSelector melsrc = mel.src();
@@ -322,7 +322,7 @@ void MergeLine::removeEmptySource()
         // At least one line remains because oldSrc != melsrc for first line in list
         // Other empty lines will be removed
         if(!srcLine.isValid() && !oldSrcLine.isValid() && oldSrc == melsrc)
-            melIt = mergeEditLineList.erase(melIt);
+            melIt = list().erase(melIt);
         else
             ++melIt;
 

@@ -95,7 +95,7 @@ class MergeEditLineList: public std::list<MergeEditLine>
 
 class MergeLine
 {
-  public:
+  private:
     friend class MergeLineList;
 
     Diff3LineList::const_iterator mId3l;
@@ -106,7 +106,12 @@ class MergeLine
     bool bWhiteSpaceConflict = false;
     bool bDelta = false;
     e_SrcSelector srcSelect = e_SrcSelector::None;
-    MergeEditLineList mergeEditLineList;
+    MergeEditLineList mMergeEditLineList;
+
+  public:
+    [[nodiscard]] inline MergeEditLineList list() const { return mMergeEditLineList; }
+
+    [[nodiscard]] inline e_SrcSelector source() const { return srcSelect; }
 
     [[nodiscard]] inline LineIndex getIndex() const { return d3lLineIdx; }
     [[nodiscard]] inline LineCount sourceRangeLength() const { return srcRangeLength; }
@@ -136,25 +141,25 @@ class MergeLine
         for(int i = 0; i < srcRangeLength; ++i)
             ++ml2.mId3l;
 
-        ml2.mergeEditLineList.clear();
+        ml2.mMergeEditLineList.clear();
         // Search for best place to splice
-        for(MergeEditLineList::iterator i = mergeEditLineList.begin(); i != mergeEditLineList.end(); ++i)
+        for(MergeEditLineList::iterator i = mMergeEditLineList.begin(); i != mMergeEditLineList.end(); ++i)
         {
             if(i->id3l() == ml2.mId3l)
             {
-                ml2.mergeEditLineList.splice(ml2.mergeEditLineList.begin(), mergeEditLineList, i, mergeEditLineList.end());
+                ml2.mMergeEditLineList.splice(ml2.mMergeEditLineList.begin(), mMergeEditLineList, i, mMergeEditLineList.end());
                 return;
             }
         }
-        ml2.mergeEditLineList.push_back(MergeEditLine(ml2.mId3l));
+        ml2.mMergeEditLineList.push_back(MergeEditLine(ml2.mId3l));
     }
 
     void join(MergeLine& ml2) // The caller must remove the ml2 from the m_mergeLineList after this call
     {
         srcRangeLength += ml2.srcRangeLength;
-        ml2.mergeEditLineList.clear();
-        mergeEditLineList.clear();
-        mergeEditLineList.push_back(MergeEditLine(mId3l)); // Create a simple conflict
+        ml2.mMergeEditLineList.clear();
+        mMergeEditLineList.clear();
+        mMergeEditLineList.push_back(MergeEditLine(mId3l)); // Create a simple conflict
         if(ml2.bConflict) bConflict = true;
         if(!ml2.bWhiteSpaceConflict) bWhiteSpaceConflict = false;
         if(ml2.bDelta) bDelta = true;
