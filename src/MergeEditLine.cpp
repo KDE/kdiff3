@@ -306,3 +306,27 @@ void MergeLine::dectectWhiteSpaceConflict(const Diff3Line &d, const bool isThree
         bWhiteSpaceConflict = true;
     }
 }
+// Remove all lines that are empty, because no src lines are there.
+void MergeLine::removeEmptySource()
+{
+    LineRef oldSrcLine;
+    e_SrcSelector oldSrc = e_SrcSelector::Invalid;
+    MergeEditLineList::iterator melIt;
+    for(melIt = mergeEditLineList.begin(); melIt != mergeEditLineList.end();)
+    {
+        MergeEditLine& mel = *melIt;
+        e_SrcSelector melsrc = mel.src();
+
+        LineRef srcLine = mel.isRemoved() ? LineRef() : melsrc == e_SrcSelector::A ? mel.id3l()->getLineA() : melsrc == e_SrcSelector::B ? mel.id3l()->getLineB() : melsrc == e_SrcSelector::C ? mel.id3l()->getLineC() : LineRef();
+
+        // At least one line remains because oldSrc != melsrc for first line in list
+        // Other empty lines will be removed
+        if(!srcLine.isValid() && !oldSrcLine.isValid() && oldSrc == melsrc)
+            melIt = mergeEditLineList.erase(melIt);
+        else
+            ++melIt;
+
+        oldSrcLine = srcLine;
+        oldSrc = melsrc;
+    }
+}

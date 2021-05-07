@@ -165,6 +165,7 @@ class MergeLine
     void mergeOneLine(const Diff3Line& diffRec, bool& bLineRemoved, bool bTwoInputs);
     void dectectWhiteSpaceConflict(const Diff3Line& d, const bool isThreeWay);
 
+    void removeEmptySource();
 };
 
 class MergeLineList: public std::list<MergeLine>
