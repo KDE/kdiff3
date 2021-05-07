@@ -219,7 +219,6 @@ class MergeResultWindow: public QWidget
         int line,
         MergeLineList::iterator& mlIt,
         MergeEditLineList::iterator& melIt);
-    MergeLineList::iterator splitAtDiff3LineIdx(int d3lLineIdx);
 
     void paintEvent(QPaintEvent* e) override;
 

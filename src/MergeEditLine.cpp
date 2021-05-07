@@ -330,3 +330,34 @@ void MergeLine::removeEmptySource()
         oldSrc = melsrc;
     }
 }
+
+// Returns the iterator to the MergeLine after the split
+MergeLineList::iterator MergeLineList::splitAtDiff3LineIdx(int d3lLineIdx)
+{
+    MergeLineList::iterator i;
+    for(i = begin(); i != end(); ++i)
+    {
+        if(i->getIndex() == d3lLineIdx)
+        {
+            // No split needed, this is the beginning of a MergeLine
+            return i;
+        }
+        else if(i->getIndex() > d3lLineIdx)
+        {
+            // The split must be in the previous MergeLine
+            --i;
+            MergeLine& ml = *i;
+            MergeLine newML;
+            ml.split(newML, d3lLineIdx);
+            ++i;
+            return insert(i, newML);
+        }
+    }
+    // The split must be in the previous MergeLine
+    --i;
+    MergeLine& ml = *i;
+    MergeLine newML;
+    ml.split(newML, d3lLineIdx);
+    ++i;
+    return insert(i, newML);
+}
