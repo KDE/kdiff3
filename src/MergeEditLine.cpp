@@ -210,30 +210,30 @@ void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreew
         ml.mId3l = it;
         ml.srcRangeLength = 1;
 
-        MergeLine *back = mList.empty() ? nullptr : &mList.back();
+        MergeLine *lBack = empty() ? nullptr : &this->back();
 
-        bool bSame = back != nullptr && ml.isSameKind(*back);
+        bool bSame = lBack != nullptr && ml.isSameKind(*lBack);
         if(bSame)
         {
-            ++back->srcRangeLength;
-            if(back->isWhiteSpaceConflict() && !ml.isWhiteSpaceConflict())
-                back->bWhiteSpaceConflict = false;
+            ++lBack->srcRangeLength;
+            if(lBack->isWhiteSpaceConflict() && !ml.isWhiteSpaceConflict())
+                lBack->bWhiteSpaceConflict = false;
         }
         else
         {
-            mList.push_back(ml);
+            push_back(ml);
         }
 
         if(!ml.isConflict())
         {
-            MergeLine &tmpBack = mList.back();
+            MergeLine &tmpBack = this->back();
             MergeEditLine mel(ml.id3l());
             mel.setSource(ml.srcSelect, bLineRemoved);
             tmpBack.mergeEditLineList.push_back(mel);
         }
-        else if(back == nullptr || !back->isConflict() || !bSame)
+        else if(lBack == nullptr || !lBack->isConflict() || !bSame)
         {
-            MergeLine &tmpBack = mList.back();
+            MergeLine &tmpBack = this->back();
             MergeEditLine mel(ml.id3l());
             mel.setConflict();
             tmpBack.mergeEditLineList.push_back(mel);
@@ -249,7 +249,7 @@ void MergeLineList::updateDefaults(const e_SrcSelector defaultSelector, const bo
 {
     // Change all auto selections
     MergeLineList::iterator mlIt;
-    for(mlIt = mList.begin(); mlIt != mList.end(); ++mlIt)
+    for(mlIt = begin(); mlIt != end(); ++mlIt)
     {
         MergeLine &ml = *mlIt;
         bool bConflict = ml.mergeEditLineList.empty() || ml.mergeEditLineList.begin()->isConflict();
