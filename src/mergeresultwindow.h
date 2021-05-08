@@ -54,7 +54,7 @@ class MergeResultWindow: public QWidget
 
     inline void clearMergeList()
     {
-        m_mergeLineList.clear();
+        m_mergeLineList.list().clear();
     }
 
     static void initActions(KActionCollection* ac);
@@ -193,9 +193,9 @@ class MergeResultWindow: public QWidget
     bool isItAtEnd(bool bIncrement, MergeLineListImp::iterator i)
     {
         if(bIncrement)
-            return i != m_mergeLineList.end();
+            return i != m_mergeLineList.list().end();
         else
-            return i != m_mergeLineList.begin();
+            return i != m_mergeLineList.list().begin();
     }
 
     int m_currentPos;

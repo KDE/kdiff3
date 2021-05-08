@@ -210,7 +210,7 @@ void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreew
         ml.mId3l = it;
         ml.srcRangeLength = 1;
 
-        MergeLine *lBack = empty() ? nullptr : &this->back();
+        MergeLine *lBack = mImp.empty() ? nullptr : &mImp.back();
 
         bool bSame = lBack != nullptr && ml.isSameKind(*lBack);
         if(bSame)
@@ -221,19 +221,19 @@ void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreew
         }
         else
         {
-            push_back(ml);
+            mImp.push_back(ml);
         }
 
         if(!ml.isConflict())
         {
-            MergeLine &tmpBack = this->back();
+            MergeLine &tmpBack = mImp.back();
             MergeEditLine mel(ml.id3l());
             mel.setSource(ml.srcSelect, bLineRemoved);
             tmpBack.list().push_back(mel);
         }
         else if(lBack == nullptr || !lBack->isConflict() || !bSame)
         {
-            MergeLine &tmpBack = this->back();
+            MergeLine &tmpBack = mImp.back();
             MergeEditLine mel(ml.id3l());
             mel.setConflict();
             tmpBack.list().push_back(mel);
@@ -249,7 +249,7 @@ void MergeLineList::updateDefaults(const e_SrcSelector defaultSelector, const bo
 {
     // Change all auto selections
     MergeLineListImp::iterator mlIt;
-    for(mlIt = begin(); mlIt != end(); ++mlIt)
+    for(mlIt = mImp.begin(); mlIt != mImp.end(); ++mlIt)
     {
         MergeLine &ml = *mlIt;
         bool bConflict = ml.list().empty() || ml.list().begin()->isConflict();
@@ -335,7 +335,7 @@ void MergeLine::removeEmptySource()
 MergeLineListImp::iterator MergeLineList::splitAtDiff3LineIdx(int d3lLineIdx)
 {
     MergeLineListImp::iterator i;
-    for(i = begin(); i != end(); ++i)
+    for(i = mImp.begin(); i != mImp.end(); ++i)
     {
         if(i->getIndex() == d3lLineIdx)
         {
@@ -350,7 +350,7 @@ MergeLineListImp::iterator MergeLineList::splitAtDiff3LineIdx(int d3lLineIdx)
             MergeLine newML;
             ml.split(newML, d3lLineIdx);
             ++i;
-            return insert(i, newML);
+            return mImp.insert(i, newML);
         }
     }
     // The split must be in the previous MergeLine
@@ -359,5 +359,5 @@ MergeLineListImp::iterator MergeLineList::splitAtDiff3LineIdx(int d3lLineIdx)
     MergeLine newML;
     ml.split(newML, d3lLineIdx);
     ++i;
-    return insert(i, newML);
+    return mImp.insert(i, newML);
 }

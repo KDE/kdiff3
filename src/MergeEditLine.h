@@ -174,10 +174,14 @@ class MergeLine
 };
 
 typedef std::list<MergeLine> MergeLineListImp;
-class MergeLineList: public MergeLineListImp
+class MergeLineList
 {
+  private:
+    MergeLineListImp mImp;
+
   public:
-    using MergeLineListImp::list;
+    [[nodiscard]] inline const MergeLineListImp& list() const { return mImp; }
+    [[nodiscard]] inline MergeLineListImp& list() { return mImp; }
 
     void buildFromDiff3(const Diff3LineList& diff3List, bool isThreeway);
     void updateDefaults(const e_SrcSelector defaultSelector, const bool bConflictsOnly, const bool bWhiteSpaceOnly);
