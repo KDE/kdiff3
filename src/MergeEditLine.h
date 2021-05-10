@@ -96,7 +96,8 @@ class MergeLine
     MergeEditLineList mMergeEditLineList;
 
   public:
-    [[nodiscard]] inline MergeEditLineList list() const { return mMergeEditLineList; }
+    [[nodiscard]] inline const MergeEditLineList& list() const { return mMergeEditLineList; }
+    [[nodiscard]] inline MergeEditLineList& list() { return mMergeEditLineList; }
 
     [[nodiscard]] inline e_SrcSelector source() const { return srcSelect; }
 
