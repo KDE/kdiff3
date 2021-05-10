@@ -15,6 +15,7 @@
 #include "options.h"
 #include "Overview.h"
 #include "selection.h"
+#include "TypeUtils.h"
 
 #include <boost/signals2.hpp>
 
@@ -216,7 +217,7 @@ class MergeResultWindow: public QWidget
     };
     void go(e_Direction eDir, e_EndPoint eEndPoint);
     void calcIteratorFromLineNr(
-        int line,
+        LineRef::LineType line,
         MergeLineListImp::iterator& mlIt,
         MergeEditLineList::iterator& melIt);
 
@@ -257,7 +258,7 @@ class MergeResultWindow: public QWidget
 
     int m_scrollDeltaX = 0;
     int m_scrollDeltaY = 0;
-    int m_cursorXPos = 0;
+    QtNumberType m_cursorXPos = 0;
     int m_cursorXPixelPos;
     int m_cursorYPos = 0;
     int m_cursorOldXPixelPos = 0;

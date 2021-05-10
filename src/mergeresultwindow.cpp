@@ -14,6 +14,7 @@
 #include "options.h"
 #include "RLPainter.h"
 #include "guiutils.h"
+#include "TypeUtils.h"
 #include "Utils.h"             // for Utils
 
 #include <QAction>
@@ -808,10 +809,10 @@ void MergeResultWindow::setFastSelector(MergeLineListImp::iterator i)
     {
         if(mlIt == m_currentMergeLineIt)
             break;
-        line1 += mlIt->list().size();
+        line1 += mlIt->lineCount();
     }
 
-    int nofLines = m_currentMergeLineIt->list().size();
+    int nofLines = m_currentMergeLineIt->lineCount();
     int newFirstLine = getBestFirstLine(line1, nofLines, m_firstLine, getNofVisibleLines());
     if(newFirstLine != m_firstLine)
     {
@@ -1630,9 +1631,9 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
         for(mlIt = m_mergeLineList.list().begin(); mlIt != m_mergeLineList.list().end(); ++mlIt)
         {
             MergeLine& ml = *mlIt;
-            if(line > lastVisibleLine || line + ml.list().size() < m_firstLine)
+            if(line > lastVisibleLine || line + ml.lineCount() < m_firstLine)
             {
-                line += ml.list().size();
+                line += ml.lineCount();
             }
             else
             {
@@ -1975,13 +1976,13 @@ bool MergeResultWindow::event(QEvent* e)
 }
 void MergeResultWindow::keyPressEvent(QKeyEvent* e)
 {
-    int y = m_cursorYPos;
+    QtNumberType y = m_cursorYPos;
     MergeLineListImp::iterator mlIt;
     MergeEditLineList::iterator melIt;
     calcIteratorFromLineNr(y, mlIt, melIt);
 
     QString str = melIt->getString(m_pldA, m_pldB, m_pldC);
-    int x = m_cursorXPos;
+    QtNumberType x = m_cursorXPos;
 
     QTextLayout textLayoutOrig(str, font(), this);
     getTextLayoutForLine(y, str, textLayoutOrig);
@@ -2022,7 +2023,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
                         melIt->setString(str + s2);
 
                         // Remove the line
-                        if(mlIt1->list().size() > 1)
+                        if(mlIt1->lineCount() > 1)
                             mlIt1->list().erase(melIt1);
                         else
                             melIt1->setRemoved();
@@ -2055,7 +2056,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
                         melIt1->setString(s1 + str);
 
                         // Remove the previous line
-                        if(mlIt->list().size() > 1)
+                        if(mlIt->lineCount() > 1)
                             mlIt->list().erase(melIt);
                         else
                             melIt->setRemoved();
@@ -2361,23 +2362,23 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
 }
 
 void MergeResultWindow::calcIteratorFromLineNr(
-    int line,
+    LineRef::LineType line,
     MergeLineListImp::iterator& mlIt,
     MergeEditLineList::iterator& melIt)
 {
     for(mlIt = m_mergeLineList.list().begin(); mlIt != m_mergeLineList.list().end(); ++mlIt)
     {
         MergeLine& ml = *mlIt;
-        if(line > ml.list().size())
+        if(line > ml.lineCount())
         {
-            line -= ml.list().size();
+            line -= ml.lineCount();
         }
         else
         {
             for(melIt = ml.list().begin(); melIt != ml.list().end(); ++melIt)
             {
                 --line;
-                if(line < 0) return;
+                if(line <= LineRef::invalid) return;
             }
         }
     }
@@ -2540,7 +2541,7 @@ void MergeResultWindow::deleteSelection()
                 if(line != firstLine || (m_selection.endPos() - m_selection.beginPos()) == lineString.length())
                 {
                     // Remove the line
-                    if(mlIt->list().size() > 1)
+                    if(mlIt->lineCount() > 1)
                         mlIt->list().erase(melIt);
                     else
                         melIt->setRemoved();

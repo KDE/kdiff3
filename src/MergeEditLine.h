@@ -13,6 +13,8 @@
 #include <QString>
 #include <QVector>
 
+using MergeEditLineList = std::list<class MergeEditLine>;
+
 class MergeEditLine
 {
   public:
@@ -78,20 +80,6 @@ class MergeEditLine
     bool mChanged;
 };
 
-class MergeEditLineList: public std::list<MergeEditLine>
-{
-  private:
-    typedef std::list<MergeEditLine> BASE;
-
-  public:
-    using std::list<MergeEditLine>::list;
-
-    Q_REQUIRED_RESULT int size()
-    {
-        return (int)BASE::size();
-    }
-
-};
 
 class MergeLine
 {
@@ -123,6 +111,8 @@ class MergeLine
     [[nodiscard]] inline Diff3LineList::const_iterator id3l() const { return mId3l; }
 
     [[nodiscard]] inline e_MergeDetails details() const { return mergeDetails; }
+
+    [[nodiscard]] inline LineRef lineCount() const { return (qint64)list().size(); }
 
     void split(MergeLine& ml2, int d3lLineIdx2) // The caller must insert the ml2 after this ml in the m_mergeLineList
     {
@@ -174,6 +164,7 @@ class MergeLine
 };
 
 typedef std::list<MergeLine> MergeLineListImp;
+
 class MergeLineList
 {
   private:
