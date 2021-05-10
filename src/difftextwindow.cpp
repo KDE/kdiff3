@@ -876,9 +876,12 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
     QTextOption textOption;
 #if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
     textOption.setTabStop(QFontMetricsF(m_pDiffTextWindow->font()).width(' ') * m_pOptions->m_tabSize);
+#elif QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+    textOption.setTabStopDistance(QFontMetricsF(font()).width(' ') * m_pOptions->m_tabSize);
 #else
-    textOption.setTabStopDistance(QFontMetricsF(m_pDiffTextWindow->font()).width(' ') * m_pOptions->m_tabSize);
+    textOption.setTabStopDistance(QFontMetricsF(m_pDiffTextWindow->font()).horizontalAdvance(' ') * m_pOptions->m_tabSize);
 #endif
+
     if(m_pOptions->m_bShowWhiteSpaceCharacters)
         textOption.setFlags(QTextOption::ShowTabsAndSpaces);
     if(m_pOptions->m_bRightToLeftLanguage)
