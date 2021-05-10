@@ -1765,11 +1765,11 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
     getTextLayoutForLine(line, s, textLayout);
     QtNumberType pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
 
-    bool bLMB = e->button() == Qt::LeftButton;
-    bool bMMB = e->button() == Qt::MiddleButton;
-    bool bRMB = e->button() == Qt::RightButton;
+    bool lLeftMouseButton = e->button() == Qt::LeftButton;
+    bool lMiddleMouseButton = e->button() == Qt::MiddleButton;
+    bool lRightMouseButton = e->button() == Qt::RightButton;
 
-    if((bLMB && (e->x() < xOffset)) || bRMB) // Fast range selection
+    if((lLeftMouseButton && (e->x() < xOffset)) || lRightMouseButton) // Fast range selection
     {
         m_cursorXPos = 0;
         m_cursorOldXPixelPos = 0;
@@ -1781,7 +1781,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
             if(l == line)
                 break;
 
-            l += i->list().size();
+            l += i->lineCount();
             if(l > line)
                 break;
         }
@@ -1790,12 +1790,12 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
         m_bCursorOn = true;
         setFastSelector(i);
 
-        if(bRMB)
+        if(lRightMouseButton)
         {
             Q_EMIT showPopupMenu(QCursor::pos());
         }
     }
-    else if(bLMB) // Normal cursor placement
+    else if(lLeftMouseButton) // Normal cursor placement
     {
         pos = std::max(pos, 0);
         line = std::max((LineRef::LineType)line, 0);
@@ -1822,7 +1822,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
         update();
         //showStatusLine( line, m_winIdx, m_pFilename, m_pDiff3LineList, m_pStatusBar );
     }
-    else if(bMMB) // Paste clipboard
+    else if(lMiddleMouseButton) // Paste clipboard
     {
         pos = std::max(pos, 0);
         line = std::max((LineRef::LineType)line, 0);

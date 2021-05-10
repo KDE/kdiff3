@@ -80,7 +80,6 @@ class MergeEditLine
     bool mChanged;
 };
 
-
 class MergeLine
 {
   private:
