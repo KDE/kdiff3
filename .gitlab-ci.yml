@@ -4,3 +4,9 @@ include:
  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-extragear-linux.yml
 #  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-extragear-freebsd.yml
 #  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-extragear-windows.yml
+linux kf5-qt5 qt5.15:
+  extends: .linux
+  only:
+    - master
+    - merge_requests
+    - /^([1-9][0-9]*|[0-9])\.[0-9]+$/
