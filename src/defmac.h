@@ -13,6 +13,10 @@
 #ifndef DEFMAC_H
 #define DEFMAC_H
 
+#if defined(QT_NO_DEBUG)
+#undef NDEBUG
+#endif
+
 #pragma once
 
 #define DISABLE_DEFAULT_CONSTRUCT( ClassName ) \
@@ -35,7 +39,7 @@
 
 
 #ifndef NDEBUG
-#define QCONNECT_ASSERT(COND_) Q_ASSERT(COND_)
+#define QCONNECT_ASSERT(COND_) assert(COND_)
 #else
 #define QCONNECT_ASSERT(COND_) COND_
 #endif
