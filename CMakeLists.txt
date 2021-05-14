@@ -155,5 +155,4 @@ if(WIN32)
 add_subdirectory(diff_ext_for_kdiff3)
 endif()
 
-message(INFO " ${KF5_VERSION}")
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
