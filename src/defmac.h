@@ -13,10 +13,6 @@
 #ifndef DEFMAC_H
 #define DEFMAC_H
 
-#if defined(QT_NO_DEBUG)
-#undef NDEBUG
-#endif
-
 #pragma once
 
 #define DISABLE_DEFAULT_CONSTRUCT( ClassName ) \
@@ -36,7 +32,6 @@
     ClassName ( const ClassName & ) = delete;  \
     ClassName & operator = ( ClassName && ) = delete; \
     ClassName & operator = ( const ClassName & ) = delete;
-
 
 #ifndef NDEBUG
 #define QCONNECT_ASSERT(COND_) assert(COND_)

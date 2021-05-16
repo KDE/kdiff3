@@ -8,6 +8,11 @@ find_package(
     )
 add_definitions(-DAUTOTEST)
 
+ecm_add_test(connectiontest.cpp
+    TEST_NAME "connntiontest"
+    LINK_LIBRARIES Qt5::Test
+)
+
 ecm_add_test(commentparser.cpp ../CommentParser.cpp
     TEST_NAME "commentparser"
     LINK_LIBRARIES Qt5::Test
