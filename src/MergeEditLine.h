@@ -9,9 +9,11 @@
 #ifndef MERGEEDITLINE_H
 
 #include "diff.h"
+#include "LineRef.h"
+
+#include <memory>
 
 #include <QString>
-#include <QVector>
 
 using MergeEditLineList = std::list<class MergeEditLine>;
 

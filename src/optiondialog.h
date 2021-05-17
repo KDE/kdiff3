@@ -11,7 +11,8 @@
 
 #include "options.h"
 
-#include <QSharedPointer>   // for QSharedPointer
+#include <QFont>
+#include <QSharedPointer>
 #include <QStringList>
 #include <QGroupBox>
 
@@ -21,7 +22,6 @@
 class QLabel;
 class QPlainTextEdit;
 
-class OptionItemBase;
 class OptionCheckBox;
 class OptionEncodingComboBox;
 class OptionLineEdit;

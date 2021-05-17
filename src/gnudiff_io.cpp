@@ -12,6 +12,9 @@
 */
 
 #include "gnudiff_diff.h"
+
+#include "Utils.h"
+
 #include <stdlib.h>
 #include <type_traits>
 

@@ -32,9 +32,11 @@ Optimizations: Skip unneeded steps.
 
 #include "CommentParser.h"
 #include "diff.h"
-#include "kdiff3.h"
 #include "Logging.h"
 #include "Utils.h"
+
+#include <algorithm>         // for min
+#include <vector>            // for vector
 
 #include <QProcess>
 #include <QScopedPointer>

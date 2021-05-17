@@ -16,8 +16,9 @@
 
 #include <QTextCodec>
 #include <QTemporaryFile>
+#include <QSharedPointer>
 #include <QString>
-#include <QVector>
+#include <QStringList>
 
 #include <memory>
 

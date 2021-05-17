@@ -8,10 +8,10 @@
 #include "CommentParser.h"
 #include "TypeUtils.h"
 
+#include <algorithm>
+
 #include <QChar>
-#include <QDebug>
 #include <QRegularExpression>
-#include <QSharedPointer>
 #include <QString>
 
 void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)

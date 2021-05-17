@@ -15,12 +15,15 @@
 #include "options.h"
 #include "Overview.h"
 #include "selection.h"
+#include "LineRef.h"
 #include "TypeUtils.h"
 
 #include <boost/signals2.hpp>
+#include <memory>
 
 #include <QLineEdit>
 #include <QPointer>
+#include <QSharedPointer>
 #include <QStatusBar>
 #include <QTextLayout>
 #include <QTimer>

@@ -11,11 +11,12 @@
 
 #include "FileNameLineEdit.h"
 #include "RLPainter.h"
-#include "SourceData.h" // for SourceData
-#include "Utils.h"      // for Utils
+#include "SourceData.h"
+#include "Utils.h"
 #include "common.h"     // for getAtomic, max3, min3
 #include "defmac.h"
 #include "kdiff3.h"
+#include "Logging.h"
 #include "merger.h"
 #include "options.h"
 #include "progress.h"
@@ -25,6 +26,8 @@
 #include <cmath>
 #include <cstdlib>
 #include <memory>
+#include <utility>
+#include <vector>
 
 #include <KLocalizedString>
 #include <KMessageBox>

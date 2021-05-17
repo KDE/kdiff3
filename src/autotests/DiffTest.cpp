@@ -9,6 +9,7 @@
 #include "../diff.h"
 #include "../SourceData.h"
 
+#include <QTextCodec>
 #include <QString>
 #include <QTest>
 

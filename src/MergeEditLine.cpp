@@ -7,8 +7,11 @@
 */
 
 #include "MergeEditLine.h"
-#include "LineRef.h"
+
 #include "diff.h"
+#include "LineRef.h"
+
+#include <vector>
 
 QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDataA, const std::shared_ptr<LineDataVector> &pLineDataB, const std::shared_ptr<LineDataVector> &pLineDataC) const
 {

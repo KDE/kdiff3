@@ -15,6 +15,9 @@
 #include "Logging.h"
 #include "progress.h"
 
+#include <map>
+#include <vector>
+
 #include <QString>
 
 #include <KLocalizedString>

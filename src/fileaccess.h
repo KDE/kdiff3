@@ -17,6 +17,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
+#include <QScopedPointer>
 #include <QSharedPointer>
 #include <QTemporaryFile>
 #include <QUrl>

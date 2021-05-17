@@ -7,13 +7,18 @@
 */
 
 #include "common.h"
+
+#include <map>
+#include <utility>            // for pair
+
 #include <QColor>
+#include <QFont>
+#include <QPoint>
+#include <QLatin1String>
 #include <QSize>
 #include <QStringList>
+#include <QStringLiteral>
 #include <QTextStream>
-#include <map>
-#include <qfont.h>
-#include <qpoint.h>
 
 ValueMap::ValueMap() = default;
 

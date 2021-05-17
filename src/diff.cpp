@@ -9,13 +9,16 @@
 #include "diff.h"
 
 #include "gnudiff_diff.h"
-#include "merger.h"
+#include "Logging.h"
 #include "options.h"
 #include "progress.h"
+#include "Utils.h"
 
+#include <algorithm>           // for min
 #include <cstdlib>
 #include <ctype.h>
 #include <memory>
+#include <utility>             // for swap
 
 #ifndef AUTOTEST
 #include <KLocalizedString>
@@ -25,6 +28,7 @@
 #include <QtGlobal>
 #include <QRegularExpression>
 #include <QSharedPointer>
+#include <QTextStream>
 
 constexpr bool g_bIgnoreWhiteSpace = true;
 

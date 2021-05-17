@@ -22,15 +22,17 @@
 #include <QEventLoop>
 #include <QPointer>
 #include <QScrollBar>
+#include <QSharedPointer>
 #include <QSplitter>
 
 // include files for KDE
 #include <KConfigGroup>
 #include <KMainWindow>
-#include <KParts/MainWindow>
 #include <KSharedConfig>
 #include <KToggleAction>
+
 // forward declaration of the KDiff3 classes
+class Options;
 class OptionDialog;
 
 class Overview;
@@ -45,7 +47,6 @@ class WindowTitleWidget;
 class QStatusBar;
 class QMenu;
 
-class KToggleAction;
 class KToolBar;
 class KActionCollection;
 

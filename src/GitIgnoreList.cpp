@@ -12,6 +12,11 @@
 #include "fileaccess.h"
 
 #include <algorithm>
+#include <utility>
+
+#include <QFile>
+#include <QStringList>
+#include <QTextStream>
 
 namespace {
 

@@ -10,17 +10,22 @@
 #ifndef DIFFTEXTWINDOW_H
 #define DIFFTEXTWINDOW_H
 
+#include "SourceData.h"
 #include "diff.h"
 
-#include "SourceData.h"
+#include "LineRef.h"
+#include "TypeUtils.h"
 
 #include <QLabel>
 #include <QMouseEvent>
+#include <QPaintEvent>
+#include <QSharedPointer>
+#include <QString>
 #include <QWheelEvent>
-#include <QSharedPointer>  // for QSharedPointer
-#include <QString>         // for QString
 
 #include <boost/signals2.hpp>
+#include <list>
+#include <memory>
 
 class QMenu;
 class RecalcWordWrapRunnable;
@@ -31,6 +36,7 @@ class DiffTextWindowData;
 class DiffTextWindowFrame;
 class EncodingLabel;
 class RLPainter;
+class SourceData;
 
 class KDiff3App;
 

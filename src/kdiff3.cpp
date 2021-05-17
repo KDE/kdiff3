@@ -24,9 +24,11 @@
 #include "RLPainter.h"
 #include "Utils.h"
 
+#include <memory>
 #ifndef Q_OS_WIN
 #include <unistd.h>
 #endif
+#include <utility>
 
 // include files for QT
 #include <QClipboard>

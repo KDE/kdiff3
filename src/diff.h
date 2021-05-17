@@ -12,15 +12,19 @@
 #include "common.h"
 #include "LineRef.h"
 #include "Logging.h"
+#include "TypeUtils.h"
 
+#include <list>
+#include <memory>
 #include <vector>
 
-#include <QList>
+#include <QSharedPointer>
+#include <QString>
+#include <QStringList>
 #include <QVector>
 
 class LineData;
 
-class MergeLine;
 class Options;
 
 using LineDataVector=std::vector<LineData>;

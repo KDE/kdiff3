@@ -8,8 +8,6 @@
 #include "kdiff3_shell.h"
 #include "version.h"
 
-#include "Logging.h"
-
 #include <stdio.h>  // for fileno, stderr
 #include <stdlib.h> // for exit
 

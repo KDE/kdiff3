@@ -21,6 +21,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include <algorithm>
 #include <ctype.h>
 #include <limits.h>
 #include <stdlib.h>

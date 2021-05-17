@@ -7,6 +7,9 @@
 
 #include "CompositeIgnoreList.h"
 
+#include <algorithm>  // for max
+#include <utility>    // for move
+
 void CompositeIgnoreList::enterDir(const QString& dir, const DirectoryList& directoryList)
 {
     for(const std::unique_ptr<IgnoreList>& ignoreList : m_ignoreLists)

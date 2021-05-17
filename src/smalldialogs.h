@@ -15,7 +15,7 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDialog>
-#include <QPointer>
+#include <QSharedPointer>
 
 class Options;
 class QLineEdit;

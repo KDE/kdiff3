@@ -10,19 +10,20 @@
 #include "directorymergewindow.h"
 
 #include "CompositeIgnoreList.h"
+#include "defmac.h"
 #include "DirectoryInfo.h"
-#include "MergeFileInfos.h"
-#include "PixMapUtils.h"
-#include "Utils.h"
 #include "guiutils.h"
 #include "kdiff3.h"
+#include "Logging.h"
+#include "MergeFileInfos.h"
+#include "PixMapUtils.h"
 #include "options.h"
 #include "progress.h"
+#include "TypeUtils.h"
+#include "Utils.h"
 
-#include <algorithm>
 #include <map>
 #include <memory>
-#include <vector>
 
 #include <QAction>
 #include <QApplication>
@@ -30,13 +31,11 @@
 #include <QDir>
 #include <QElapsedTimer>
 #include <QFileDialog>
-#include <QImage>
 #include <QKeyEvent>
 #include <QLabel>
 #include <QLayout>
 #include <QMenu>
 #include <QPainter>
-#include <QPushButton>
 #include <QSplitter>
 #include <QStyledItemDelegate>
 #include <QTextEdit>

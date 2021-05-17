@@ -11,24 +11,18 @@
 
 #include "common.h"
 #include "fileaccess.h"
-#include "diff.h" //TotalDiffStatus
 
 #include <QTreeWidget>
 #include <QEvent>
 
 #include <list>
-#include <map>
 
 class Options;
-class StatusInfo;
 class DirectoryMergeInfo;
-class OneDirectoryInfo;
 class QLabel;
-class QAction;
 class KToggleAction;
 class KActionCollection;
 class TotalDiffStatus;
-class DirectoryInfo;
 
 class MergeFileInfos;
 

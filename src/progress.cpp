@@ -19,6 +19,7 @@
 #include <QStatusBar>
 #include <QThread>
 #include <QTimer>
+#include <QTimerEvent>
 #include <QVBoxLayout>
 
 #include <KIO/Job>

@@ -11,7 +11,9 @@
 
 #include "FileAccessJobHandler.h"
 
-#include <QObject>
+#include "DirectoryList.h"         // for DirectoryList
+
+#include <QByteArray>
 #include <QString>
 
 #include <KIO/UDSEntry>

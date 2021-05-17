@@ -10,11 +10,17 @@
   SPDX-License-Identifier: GPL-2.0-or-later
  */
 #include "CvsIgnoreList.h"
-#include "TypeUtils.h"
 
-#include <QDebug>
+#include "fileaccess.h"        // for FileAccess
+
+#include <list>
+#include <utility>             // for pair
+
+#include <QByteArray>
 #include <QDir>
+#include <QFile>
 #include <QRegularExpression>
+#include <QStringList>
 #include <QTextStream>
 
 CvsIgnoreList::CvsIgnoreList() = default;

@@ -9,8 +9,9 @@
 #ifndef CVSIGNORELIST_H
 #define CVSIGNORELIST_H
 
-#include "fileaccess.h"
+//#include "fileaccess.h"
 
+#include "DirectoryList.h"
 #include "IgnoreList.h"
 
 #include <QString>

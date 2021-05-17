@@ -10,11 +10,20 @@
 
 #include "common.h"
 #include "defmac.h"
+#include "fileaccess.h"
 #include "IgnoreList.h"
 #include "Logging.h"
 #include "progress.h"
 #include "ProgressProxyExtender.h"
 #include "TypeUtils.h"
+
+#include <algorithm>
+#include <list>
+#include <utility>
+
+#include <QFileInfoList>
+#include <QDir>
+#include <QUrl>
 
 #include <KJob>
 #include <KIO/CopyJob>

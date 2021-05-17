@@ -6,9 +6,12 @@
 */
 
 #include "DirectoryInfo.h"
+
 #include "CompositeIgnoreList.h"
 #include "CvsIgnoreList.h"
 #include "GitIgnoreList.h"
+
+#include <memory>
 
 bool DirectoryInfo::listDirA(const Options& options)
 {

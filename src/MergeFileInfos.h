@@ -12,9 +12,8 @@
 #include "diff.h"
 #include "fileaccess.h"
 
+#include <QSharedPointer>
 #include <QString>
-
-//class DirectoryInfo;
 
 enum e_MergeOperation
 {

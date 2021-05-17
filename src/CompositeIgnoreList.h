@@ -9,9 +9,12 @@
 #define COMPOSITEIGNORELIST_H
 
 #include "IgnoreList.h"
+#include "DirectoryList.h"
 
 #include <memory>
 #include <vector>
+
+#include <QString>
 
 class CompositeIgnoreList : public IgnoreList
 {

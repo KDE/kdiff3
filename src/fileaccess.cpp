@@ -18,17 +18,17 @@
 #include "Utils.h"
 #include "progress.h"
 
+#include <algorithm>                      // for min
 #include <cstdlib>
 #include <sys/stat.h>
-#include <sys/types.h>
+//#include <sys/types.h>
 #ifndef Q_OS_WIN
 #include <unistd.h>
 #endif
-#include <vector>
+#include <utility>                        // for move
 
 #include <QDir>
 #include <QFile>
-#include <QtGlobal>
 #include <QTemporaryFile>
 #include <QtMath>
 

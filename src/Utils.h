@@ -12,6 +12,7 @@
 #include <QFontMetrics>
 #include <QString>
 #include <QStringList>
+#include <QUrl>
 
 class Utils{
   public:

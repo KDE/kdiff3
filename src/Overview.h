@@ -11,6 +11,7 @@
 #include "LineRef.h"       // for LineRef
 #include "TypeUtils.h"     // for QtNumberType
 
+#include <QSharedPointer>
 #include <QString>         // for QString
 #include <QPixmap>
 #include <QWidget>
