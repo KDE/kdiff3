@@ -29,7 +29,7 @@ class Options;
 
 using LineDataVector=std::vector<LineData>;
 
-//e_SrcSelector must be sequential with no gaps between Min and Max.
+//e_SrcSelector must be sequential integers with no gaps between Min and Max.
 enum class e_SrcSelector
 {
     Min = -1,
@@ -54,8 +54,6 @@ inline e_SrcSelector nextSelector(e_SrcSelector selector)
         default:
             return e_SrcSelector::Invalid;
     }
-
-    return e_SrcSelector::Invalid;
 }
 
 enum class e_MergeDetails
