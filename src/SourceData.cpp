@@ -316,7 +316,7 @@ void SourceData::FileData::copyBufFrom(const FileData& src) //TODO: Remove me.
     reset();
     mDataSize = src.mDataSize;
     m_pBuf = std::make_unique<char[]>(mDataSize + 100);
-    Q_ASSERT(src.m_pBuf != nullptr);
+    assert(src.m_pBuf != nullptr);
     memcpy(m_pBuf.get(), src.m_pBuf.get(), mDataSize);
 }
 
@@ -350,7 +350,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
         //Routine result of directory compare finding a file that isn't in all locations.
         if(!m_fileAccess.isValid()) return;
 
-        Q_ASSERT(!m_fileAccess.isDir());
+        assert(!m_fileAccess.isDir());
         if(!m_fileAccess.isNormal())
         {
             mErrors.append(i18n("%1 is not a normal file.", m_fileAccess.prettyAbsPath()));
@@ -535,7 +535,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
         return;
     }
 
-    Q_ASSERT(m_lmppData.isText());
+    assert(m_lmppData.isText());
     //TODO: Needed?
     if(m_lmppData.lineCount() < m_normalData.lineCount())
     {
@@ -552,7 +552,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
     if(m_pOptions->ignoreComments() && hasData())
     {
         qint64 vSize = std::min(m_normalData.lineCount(), m_lmppData.lineCount());
-        Q_ASSERT(vSize < TYPE_MAX(qint32));
+        assert(vSize < TYPE_MAX(qint32));
         //Perform explcit cast to insure well defined behavior comparing 32-bit to a 64-bit value
         for(qint32 i = 0; (qint64)i < vSize; ++i)
         {
@@ -597,7 +597,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
     m_bIncompleteConversion = false;
     m_unicodeBuf->clear();
-    Q_ASSERT(m_unicodeBuf->length() == 0);
+    assert(m_unicodeBuf->length() == 0);
 
     while(!ts.atEnd())
     {
@@ -681,7 +681,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     }
 
     m_v->push_back(LineData(m_unicodeBuf, lastOffset));
-    Q_ASSERT(m_v->size() < 2 || (*m_v)[m_v->size() - 1].getOffset() != (*m_v)[m_v->size() - 2].getOffset());
+    assert(m_v->size() < 2 || (*m_v)[m_v->size() - 1].getOffset() != (*m_v)[m_v->size() - 2].getOffset());
 
     m_bIsText = true;
 

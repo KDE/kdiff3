@@ -161,12 +161,12 @@ void DefaultCommentParser::removeComment(QString &line)
     for(const CommentRange &range : comments)
     {
         /*
-            Q_ASSERT isn't useful during auto testing as it causes the QTest not to show the actual line that
+            assert isn't useful during auto testing as it causes the QTest not to show the actual line that
             the test failed on.
         */
 #ifndef AUTOTEST
-        Q_ASSERT(range.endOffset <= line.length() && range.startOffset <= line.length());
-        Q_ASSERT(range.endOffset >= range.startOffset);
+        assert(range.endOffset <= line.length() && range.startOffset <= line.length());
+        assert(range.endOffset >= range.startOffset);
 #else
         if(range.endOffset > line.length() && range.startOffset > line.length()) return;
         if(range.endOffset < range.startOffset) return;

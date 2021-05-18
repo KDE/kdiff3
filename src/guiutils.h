@@ -23,7 +23,7 @@ namespace GuiUtils {
        KActionCollection* ac,
        const QString& actionName)
    {
-       Q_ASSERT(ac != nullptr);
+       assert(ac != nullptr);
        QAction* theAction;
 
        theAction = ac->addAction(actionName);
@@ -39,7 +39,7 @@ namespace GuiUtils {
                    const Func slot,
                    KActionCollection* ac,
                    const QString &actionName)    {
-      Q_ASSERT( ac != nullptr );
+      assert( ac != nullptr );
       KToggleAction* theAction = new KToggleAction(ac);
       ac->addAction( actionName, theAction );
       theAction->setText( text );
@@ -128,7 +128,7 @@ namespace GuiUtils {
        KActionCollection* ac,
        const QString& actionName)
    {
-       Q_ASSERT(ac != nullptr);
+       assert(ac != nullptr);
        QAction* theAction;
 
        theAction = ac->addAction(actionName);
@@ -142,7 +142,7 @@ namespace GuiUtils {
                    const QString& text,
                    KActionCollection* ac,
                    const QString &actionName)    {
-      Q_ASSERT( ac != nullptr );
+      assert( ac != nullptr );
       KToggleAction* theAction = new KToggleAction(ac);
       ac->addAction( actionName, theAction );
       theAction->setText( text );

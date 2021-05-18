@@ -16,7 +16,7 @@
 
 int Selection::firstPosInLine(LineRef l) const
 {
-    Q_ASSERT(firstLine.isValid());
+    assert(firstLine.isValid());
 
     LineRef l1 = firstLine;
     LineRef l2 = lastLine;
@@ -40,7 +40,7 @@ int Selection::firstPosInLine(LineRef l) const
 
 int Selection::lastPosInLine(LineRef l) const
 {
-    Q_ASSERT(firstLine.isValid());
+    assert(firstLine.isValid());
 
     LineRef l1 = firstLine;
     LineRef l2 = lastLine;

@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2018-2021 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -23,7 +23,7 @@ class MocIgnoreFile: public FileAccess
   public:
     MocIgnoreFile()
     {
-        //Q_ASSERT(false);
+        //assert(false);
         mJobHandler.reset(new FileAccessJobHandlerMoc(this));
         /*
           FileAccess set file calls our overriden loadData to actually get file meta data.
@@ -47,7 +47,7 @@ class MocIgnoreFile: public FileAccess
     bool createLocalCopy() override { return true; }
 
     Q_REQUIRED_RESULT qint64 size() const override { return 0; };
-    
+
     Q_REQUIRED_RESULT bool isFile() const override {return true;};
     Q_REQUIRED_RESULT bool isDir() const override {return false;};
     Q_REQUIRED_RESULT bool isSymLink() const override {return false;};
@@ -56,7 +56,7 @@ class MocIgnoreFile: public FileAccess
     Q_REQUIRED_RESULT bool isWritable() const override {return m_bWritable;};
     Q_REQUIRED_RESULT bool isExecutable() const override {return m_bExecutable;};
     Q_REQUIRED_RESULT bool isHidden() const override { return m_bHidden; };
-    
+
     bool readFile(void*  /*pDestBuffer*/, qint64  /*maxLength*/) override { return true;};
     bool writeFile(const void* /*pSrcBuffer*/, qint64 /*length*/) override { return true; };
 

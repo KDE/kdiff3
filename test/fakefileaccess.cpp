@@ -10,7 +10,7 @@
 
 FileAccess::FileAccess(const QString& name, bool bWantToWrite)
 {
-  Q_ASSERT(!bWantToWrite);
+  assert(!bWantToWrite);
 
   m_name = name;
 }

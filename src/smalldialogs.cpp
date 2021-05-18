@@ -43,7 +43,7 @@ OpenDialog::OpenDialog(
     setModal(true);
     m_pOptions = pOptions;
     //Abort if verticalLayout is not the immediate child of the dialog. This interferes with re-sizing.
-    Q_ASSERT(dialogUi.virticalLayout->parent() == this);
+    assert(dialogUi.virticalLayout->parent() == this);
 
     dialogUi.lineA->insertItems(0, m_pOptions->m_recentAFiles);
     dialogUi.lineA->setEditText(n1);
@@ -117,7 +117,7 @@ OpenDialog::OpenDialog(
     else
     {
         //This is likely a bug. It is also a recoverable condition. Assert for it in debug builds.
-        Q_ASSERT(sh.isValid() && sh.height() > 10);
+        assert(sh.isValid() && sh.height() > 10);
         setFixedHeight(262);
     }
     m_bInputFileNameChanged = false;

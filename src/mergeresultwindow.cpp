@@ -221,7 +221,7 @@ void MergeResultWindow::slotResize()
 void MergeResultWindow::slotCut()
 {
     const QString curSelection = getSelection();
-    Q_ASSERT(!curSelection.isEmpty() && hasFocus());
+    assert(!curSelection.isEmpty() && hasFocus());
     deleteSelection();
     update();
 
@@ -271,7 +271,7 @@ void MergeResultWindow::slotRefresh()
 void MergeResultWindow::slotUpdateAvailabilities()
 {
     const QWidget* frame = qobject_cast<QWidget*>(parent());
-    Q_ASSERT(frame != nullptr);
+    assert(frame != nullptr);
     const bool bMergeEditorVisible = frame->isVisible();
     const bool bTripleDiff = KDiff3App::isTripleDiff();
 
@@ -335,14 +335,14 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     {
         if(!lIsThreeWay && m_pOptions->m_whiteSpace2FileMergeDefault != (int)e_SrcSelector::None) // Only two inputs
         {
-            Q_ASSERT(m_pOptions->m_whiteSpace2FileMergeDefault <= (int)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
+            assert(m_pOptions->m_whiteSpace2FileMergeDefault <= (int)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
             defaultSelector = (e_SrcSelector)m_pOptions->m_whiteSpace2FileMergeDefault;
             bWhiteSpaceOnly = true;
             bSolveWhiteSpaceConflicts = true;
         }
         else if(lIsThreeWay && m_pOptions->m_whiteSpace3FileMergeDefault != (int)e_SrcSelector::None)
         {
-            Q_ASSERT(m_pOptions->m_whiteSpace3FileMergeDefault <= (int)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
+            assert(m_pOptions->m_whiteSpace3FileMergeDefault <= (int)e_SrcSelector::Max && m_pOptions->m_whiteSpace2FileMergeDefault >= (int)e_SrcSelector::Min);
             defaultSelector = (e_SrcSelector)m_pOptions->m_whiteSpace3FileMergeDefault;
             bWhiteSpaceOnly = true;
             bSolveWhiteSpaceConflicts = true;
@@ -506,7 +506,7 @@ bool MergeResultWindow::checkOverviewIgnore(MergeLineListImp::iterator& i)
 // Go to prev/next delta/conflict or first/last delta.
 void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
 {
-    Q_ASSERT(eDir == eUp || eDir == eDown);
+    assert(eDir == eUp || eDir == eDown);
     MergeLineListImp::iterator i = m_currentMergeLineIt;
     bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
     if(eEndPoint == eEnd)
@@ -1017,7 +1017,7 @@ QString calcHistorySortKey(const QString& keyOrder, QRegularExpressionMatch& reg
             {
                 QString sIdx;
                 sIdx.setNum(idx);
-                Q_ASSERT(sIdx.size() <= 2);
+                assert(sIdx.size() <= 2);
                 sIdx += QString(2 - sIdx.size(), '0'); // Up to 99 words in the groupRegExp (more than 12 aren't expected)
                 key += sIdx + ' ';
             }
@@ -1555,7 +1555,7 @@ void MergeResultWindow::writeLine(
         if(m_cursorYPos == line) m_cursorXPos = 0;
     }
     else
-        Q_ASSERT(true);
+        assert(false);
 
     xOffset -= Utils::getHorizontalAdvance(fm, '0');
     p.setPen(m_pOptions->m_fgColor);
@@ -2449,7 +2449,7 @@ bool MergeResultWindow::deleteSelection2(QString& s, int& x, int& y,
 {
     if(m_selection.selectionContainsData())
     {
-        Q_ASSERT(m_selection.isValidFirstLine());
+        assert(m_selection.isValidFirstLine());
         deleteSelection();
         y = m_cursorYPos;
         calcIteratorFromLineNr(y, mlIt, melIt);
@@ -2467,7 +2467,7 @@ void MergeResultWindow::deleteSelection()
     {
         return;
     }
-    Q_ASSERT(m_selection.isValidFirstLine());
+    assert(m_selection.isValidFirstLine());
 
     setModified();
 

@@ -279,7 +279,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
     if(isDirA() != isDirC()) m_bEqualAC = false;
     if(isDirB() != isDirC()) m_bEqualBC = false;
 
-    Q_ASSERT(eNew == 0 && eMiddle == 1 && eOld == 2);
+    assert(eNew == 0 && eMiddle == 1 && eOld == 2);
 
     // The map automatically sorts the keys.
     int age = eNew;

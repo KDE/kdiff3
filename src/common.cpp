@@ -70,7 +70,7 @@ QString safeStringJoin(const QStringList& sl, char sepChar, char metaChar)
     // If a string contains the separator character, it will be replaced with "\,".
     // Any occurrences of "\" (one backslash) will be replaced with "\\" (2 backslashes)
 
-    Q_ASSERT(sepChar != metaChar);
+    assert(sepChar != metaChar);
 
     QString sep;
     sep += sepChar;
@@ -96,7 +96,7 @@ QString safeStringJoin(const QStringList& sl, char sepChar, char metaChar)
 // Split a string that was joined with safeStringJoin
 QStringList safeStringSplit(const QString& s, char sepChar, char metaChar)
 {
-    Q_ASSERT(sepChar != metaChar);
+    assert(sepChar != metaChar);
     QStringList sl;
     // Miniparser
     int i = 0;

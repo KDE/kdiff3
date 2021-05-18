@@ -144,7 +144,7 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
             ++lineB;
         }
 
-        Q_ASSERT(d.numberOfEquals() >= 0);
+        assert(d.numberOfEquals() >= 0);
 
         qCDebug(kdiffCore) << "lineA = " << d3l.getLineA() << ", lineB = " << d3l.getLineB() ;
         push_back(d3l);
@@ -257,12 +257,12 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
             while(i3c != end() && i3c->getLineC() != lineC)
                 ++i3c;
 
-            Q_ASSERT(i3b != end());
-            Q_ASSERT(i3c != end());
+            assert(i3b != end());
+            assert(i3c != end());
 
             if(i3b == i3c)
             {
-                Q_ASSERT(i3b->getLineC() == lineC);
+                assert(i3b->getLineC() == lineC);
                 i3b->bBEqC = true;
             }
             else
@@ -275,7 +275,7 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
                 Diff3LineList::iterator i3b1 = i3b;
                 while(i3c1 != i3b && i3b1 != i3c)
                 {
-                    Q_ASSERT(i3b1 != end() || i3c1 != end());
+                    assert(i3b1 != end() || i3c1 != end());
                     if(i3c1 != end()) ++i3c1;
                     if(i3b1 != end()) ++i3b1;
                 }
@@ -633,7 +633,7 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t i
         for(GnuDiff::change* e = script; e; e = p)
         {
             Diff d((LineCount)(e->line0 - currentLine1), e->deleted, e->inserted);
-            Q_ASSERT(d.numberOfEquals() == e->line1 - currentLine2);
+            assert(d.numberOfEquals() == e->line1 - currentLine2);
 
             currentLine1 += (LineRef)(d.numberOfEquals() + d.diff1());
             currentLine2 += (LineRef)(d.numberOfEquals() + d.diff2());
@@ -677,12 +677,12 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t i
 
         for(const Diff& curDiff: *this)
         {
-            Q_ASSERT(curDiff.diff1() <= TYPE_MAX(LineRef::LineType) && curDiff.diff2() <= TYPE_MAX(LineRef::LineType));
+            assert(curDiff.diff1() <= TYPE_MAX(LineRef::LineType) && curDiff.diff2() <= TYPE_MAX(LineRef::LineType));
             l1 += curDiff.numberOfEquals() + LineRef(curDiff.diff1());
             l2 += curDiff.numberOfEquals() + LineRef(curDiff.diff2());
         }
 
-        Q_ASSERT(l1 == size1 && l2 == size2);
+        assert(l1 == size1 && l2 == size2);
     }
 
     pp.setCurrent(1);
@@ -1250,7 +1250,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
             //Bail this should never happen. Not a nice exit but acts as a back stop against harder to detect infine looping.
             if(i1 == TYPE_MAX(int))
             {
-                Q_ASSERT(false);
+                assert(false);
                 abort();
                 return;
             }
@@ -1269,7 +1269,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
         {
             // continue somehow
             Diff d(nofEquals, bestI1, bestI2);
-            Q_ASSERT(nofEquals + bestI1 + bestI2 != 0);
+            assert(nofEquals + bestI1 + bestI2 != 0);
             diffList.push_back(d);
 
             p1 += bestI1;
@@ -1347,7 +1347,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
             break;
     }
 
-    Q_ASSERT(diffList.size() * sizeof(Diff) + sizeof(DiffList) <= (50 << 20));
+    assert(diffList.size() * sizeof(Diff) + sizeof(DiffList) <= (50 << 20));
 
     // Verify difflist
     {
@@ -1360,7 +1360,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
             l2 += (theDiff.numberOfEquals() + theDiff.diff2());
         }
 
-        Q_ASSERT(l1 == line1.size() && l2 == line2.size());
+        assert(l1 == line1.size() && l2 == line2.size());
     }
 }
 
@@ -1372,7 +1372,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
     bool bTextsTotalEqual = inBTextsTotalEqual, bIgnoreComments = eIgnoreFlags | IgnoreFlag::ignoreComments;
     bool bIgnoreWhiteSpace = eIgnoreFlags | IgnoreFlag::ignoreWhiteSpace;
 
-    Q_ASSERT(selector == e_SrcSelector::A || selector == e_SrcSelector::B || selector == e_SrcSelector::C);
+    assert(selector == e_SrcSelector::A || selector == e_SrcSelector::B || selector == e_SrcSelector::C);
 
     if(selector == e_SrcSelector::A)
     {
@@ -1457,7 +1457,7 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, Lin
     bool bAEqualC = this->isEqualAC() || (bWhiteLineA && bWhiteLineC);
     bool bBEqualC = this->isEqualBC() || (bWhiteLineB && bWhiteLineC);
 
-    Q_ASSERT(winIdx >= e_SrcSelector::A && winIdx <= e_SrcSelector::C);
+    assert(winIdx >= e_SrcSelector::A && winIdx <= e_SrcSelector::C);
     if(winIdx == e_SrcSelector::A)
     {
         lineIdx = getLineA();
@@ -1516,7 +1516,7 @@ void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
     {
         d3lv[j] = &(*i);
     }
-    Q_ASSERT(j == d3lv.size());
+    assert(j == d3lv.size());
 }
 
 // Just make sure that all input lines are in the output too, exactly once.
@@ -1528,7 +1528,7 @@ void Diff3LineList::debugLineCheck(const LineCount size, const e_SrcSelector src
     {
         LineRef line;
 
-        Q_ASSERT(srcSelector == e_SrcSelector::A || srcSelector == e_SrcSelector::B || srcSelector == e_SrcSelector::C);
+        assert(srcSelector == e_SrcSelector::A || srcSelector == e_SrcSelector::B || srcSelector == e_SrcSelector::C);
         if(srcSelector == e_SrcSelector::A)
             line = entry.getLineA();
         else if(srcSelector == e_SrcSelector::B)

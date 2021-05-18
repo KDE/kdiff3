@@ -16,7 +16,7 @@
 
 void FileNameLineEdit::dropEvent(QDropEvent* event)
 {
-    Q_ASSERT(event->mimeData()->hasUrls());//Debugging aid in case FileNameLineEdit::dragEnterEvent is changed to accept other types.
+    assert(event->mimeData()->hasUrls());//Debugging aid in case FileNameLineEdit::dragEnterEvent is changed to accept other types.
 
     qCDebug(kdiffMain) << "Enter FileNameLineEdit::dropEvent";
     QList<QUrl> lst = event->mimeData()->urls();

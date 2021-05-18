@@ -33,7 +33,7 @@ QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDat
         }
         const Diff3Line &d3l = *m_id3l;
         const LineData *pld = nullptr;
-        Q_ASSERT(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
+        assert(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
 
         if(src == e_SrcSelector::A && d3l.getLineA().isValid())
             pld = &(*pLineDataA)[d3l.getLineA()];
@@ -132,7 +132,9 @@ void MergeLine::mergeOneLine(const Diff3Line &diffRec, bool &bLineRemoved, bool 
             bConflict = true;
         }
         else
-            Q_ASSERT(true);
+        {
+            assert(false);
+        }
     }
     else if(diffRec.getLineA().isValid() && diffRec.getLineB().isValid() && !diffRec.getLineC().isValid())
     {
@@ -192,7 +194,7 @@ void MergeLine::mergeOneLine(const Diff3Line &diffRec, bool &bLineRemoved, bool 
         srcSelect = e_SrcSelector::C;
     }
     else
-        Q_ASSERT(true);
+        assert(false);
 }
 /*
     Build a new MergeLineList from scratch using a Diff3LineList.

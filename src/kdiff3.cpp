@@ -401,7 +401,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     }
 
     //should not happen now.
-    Q_ASSERT(m_bDirCompare == m_sd1->isDir());
+    assert(m_bDirCompare == m_sd1->isDir());
 
     if(m_bAutoFlag && m_bAutoMode && m_bDirCompare)
     {
@@ -1036,7 +1036,7 @@ void KDiff3App::slotFileQuit()
 
 void KDiff3App::slotViewToolBar()
 {
-    Q_ASSERT(viewToolBar != nullptr);
+    assert(viewToolBar != nullptr);
     slotStatusMsg(i18n("Toggling toolbar..."));
     m_pOptions->setToolbarState(viewToolBar->isChecked());
     ///////////////////////////////////////////////////////////////////

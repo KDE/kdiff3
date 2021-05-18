@@ -388,7 +388,7 @@ bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursi
                 if(pp.wasCancelled())
                     break;
 
-                Q_ASSERT(fi.fileName() != "." && fi.fileName() != "..");
+                assert(fi.fileName() != "." && fi.fileName() != "..");
 
                 FileAccess fa;
 
@@ -430,7 +430,7 @@ bool DefaultFileAccessJobHandler::listDir(DirectoryList* pDirList, bool bRecursi
 
         for(i = m_pDirList->begin(); i != m_pDirList->end(); ++i)
         {
-            Q_ASSERT(i->isValid());
+            assert(i->isValid());
             if(i->isDir() && (!i->isSymLink() || m_bFollowDirLinks))
             {
                 DirectoryList dirList;

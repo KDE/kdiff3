@@ -261,7 +261,7 @@ class Diff3Line
 
     Q_REQUIRED_RESULT inline bool isWhiteLine(e_SrcSelector src) const
     {
-        Q_ASSERT(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
+        assert(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
 
         switch(src)
         {
@@ -273,7 +273,7 @@ class Diff3Line
                 return bWhiteLineC;
             default:
                 //should never get here
-                Q_ASSERT(false);
+                assert(false);
                 return false;
         }
     }
@@ -285,8 +285,8 @@ class Diff3Line
 
     Q_REQUIRED_RESULT const LineData& getLineData(e_SrcSelector src) const
     {
-        Q_ASSERT(m_pDiffBufferInfo != nullptr);
-        Q_ASSERT(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
+        assert(m_pDiffBufferInfo != nullptr);
+        assert(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
         //Use at() here not [] to avoid using really weird syntax
         if(src == e_SrcSelector::A && lineA.isValid()) return m_pDiffBufferInfo->getLineData(src)->at(lineA);
         if(src == e_SrcSelector::B && lineB.isValid()) return m_pDiffBufferInfo->getLineData(src)->at(lineB);
@@ -319,7 +319,7 @@ class Diff3Line
   private:
     void setFineDiff(const e_SrcSelector selector, std::shared_ptr<DiffList>& pDiffList)
     {
-        Q_ASSERT(selector == e_SrcSelector::A || selector == e_SrcSelector::B || selector == e_SrcSelector::C);
+        assert(selector == e_SrcSelector::A || selector == e_SrcSelector::B || selector == e_SrcSelector::C);
         if(selector == e_SrcSelector::A)
         {
             pFineAB = pDiffList;
@@ -376,7 +376,7 @@ class Diff3LineList: public std::list<Diff3Line>
         if(std::list<Diff3Line>::size() > (size_t)TYPE_MAX(QtSizeType))//explicit cast to silence gcc
         {
             qCDebug(kdiffMain) << "Diff3Line: List too large. size=" << std::list<Diff3Line>::size();
-            Q_ASSERT(false); //Unsupported size
+            assert(false); //Unsupported size
             return 0;
         }
         return (QtSizeType)std::list<Diff3Line>::size();

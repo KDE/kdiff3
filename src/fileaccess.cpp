@@ -257,7 +257,7 @@ void FileAccess::reset()
 */
 void FileAccess::setFile(FileAccess* pParent, const QFileInfo& fi)
 {
-    Q_ASSERT(pParent != this);
+    assert(pParent != this);
 #ifndef AUTOTEST
     if(mJobHandler == nullptr) mJobHandler.reset(new DefaultFileAccessJobHandler(this));
 #endif
@@ -288,7 +288,7 @@ void FileAccess::setFile(const QUrl& url, bool bWantToWrite)
     if(mJobHandler == nullptr) mJobHandler.reset(new DefaultFileAccessJobHandler(this));
 #endif
     reset();
-    Q_ASSERT(parent() == nullptr || url != parent()->url());
+    assert(parent() == nullptr || url != parent()->url());
 
     m_url = url;
 
@@ -426,7 +426,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent)
     const QVector<uint> fields = e.fields();
     QString filePath;
 
-    Q_ASSERT(this != parent);
+    assert(this != parent);
     m_pParent = parent;
 
     for(const uint fieldId: fields)
@@ -520,7 +520,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent)
 
         qCDebug(kdiffFileAccess) << "Computed url is: " << m_url;
         //Verify that the scheme doesn't change.
-        Q_ASSERT(m_url.scheme() == parent->url().scheme());
+        assert(m_url.scheme() == parent->url().scheme());
     }
 
     //KIO does this when stating a remote folder.
@@ -706,7 +706,7 @@ QString FileAccess::fileName(bool needTmp) const
 QString FileAccess::fileRelPath() const
 {
 #ifndef AUTOTEST
-    Q_ASSERT(m_pParent == nullptr || m_baseDir == m_pParent->m_baseDir);
+    assert(m_pParent == nullptr || m_baseDir == m_pParent->m_baseDir);
 #endif
     QString path;
 
@@ -737,7 +737,7 @@ QString FileAccess::fileRelPath() const
 
 FileAccess* FileAccess::parent() const
 {
-    Q_ASSERT(m_pParent != this);
+    assert(m_pParent != this);
     return m_pParent;
 }
 
@@ -749,7 +749,7 @@ QString FileAccess::prettyAbsPath() const
 
 QDateTime FileAccess::lastModified() const
 {
-    Q_ASSERT(!m_modificationTime.isNull());
+    assert(!m_modificationTime.isNull());
     return m_modificationTime;
 }
 
@@ -798,7 +798,7 @@ bool FileAccess::readFile(void* pDestBuffer, qint64 maxLength)
     }
 
     close();
-    Q_ASSERT(!realFile->isOpen() && !tmpFile->isOpen());
+    assert(!realFile->isOpen() && !tmpFile->isOpen());
     return success;
 }
 
@@ -846,12 +846,12 @@ bool FileAccess::writeFile(const void* pSrcBuffer, qint64 length)
         bool success = mJobHandler->put(pSrcBuffer, length, true /*overwrite*/);
         close();
 
-        Q_ASSERT(!realFile->isOpen() && !tmpFile->isOpen());
+        assert(!realFile->isOpen() && !tmpFile->isOpen());
 
         return success;
     }
     close();
-    Q_ASSERT(!realFile->isOpen() && !tmpFile->isOpen());
+    assert(!realFile->isOpen() && !tmpFile->isOpen());
     return false;
 }
 
@@ -881,7 +881,7 @@ bool FileAccess::listDir(DirectoryList* pDirList, bool bRecursive, bool bFindHid
                          const QString& filePattern, const QString& fileAntiPattern, const QString& dirAntiPattern,
                          bool bFollowDirLinks, IgnoreList& ignoreList)
 {
-    Q_ASSERT(mJobHandler != nullptr);
+    assert(mJobHandler != nullptr);
     return mJobHandler->listDir(pDirList, bRecursive, bFindHidden, filePattern, fileAntiPattern,
                       dirAntiPattern, bFollowDirLinks, ignoreList);
 }

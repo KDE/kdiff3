@@ -266,7 +266,7 @@ void DiffTextWindow::init(
 
 void DiffTextWindow::setupConnections(const KDiff3App* app)
 {
-    Q_ASSERT(qobject_cast<DiffTextWindowFrame*>(parent()) != nullptr);
+    assert(qobject_cast<DiffTextWindowFrame*>(parent()) != nullptr);
 
     chk_connect(this, &DiffTextWindow::firstLineChanged, dynamic_cast<DiffTextWindowFrame*>(parent()), &DiffTextWindowFrame::setFirstLine);
     chk_connect(this, &DiffTextWindow::newSelection, app, &KDiff3App::slotSelectionStart);
@@ -1126,7 +1126,7 @@ void DiffTextWindowData::writeLine(
         if(m_pOptions->m_bShowLineNumbers && !bWrapLine)
         {
             QString num = QString::number(srcLineIdx + 1);
-            Q_ASSERT(!num.isEmpty());
+            assert(!num.isEmpty());
             p.drawText(0, yOffset + fontAscent, num);
         }
         if(!bWrapLine || wrapLineLength > 0)
@@ -1293,7 +1293,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int beginL
 
 QString DiffTextWindowData::getString(LineIndex d3lIdx)
 {
-    Q_ASSERT(!(m_pLineData != nullptr && m_pLineData->empty() && m_size != 0));
+    assert(!(m_pLineData != nullptr && m_pLineData->empty() && m_size != 0));
 
     if(m_pLineData == nullptr || m_pLineData->empty() || d3lIdx < 0 || d3lIdx >= m_pDiff3LineVector->size())
         return QString();
@@ -1374,7 +1374,7 @@ QString DiffTextWindow::getSelection()
     {
         const Diff3Line* d3l = d->m_bWordWrap ? d->m_diff3WrapLineVector[it].pD3L : (*d->getDiff3LineVector())[it];
 
-        Q_ASSERT(d->m_winIdx >= e_SrcSelector::A && d->m_winIdx <= e_SrcSelector::C);
+        assert(d->m_winIdx >= e_SrcSelector::A && d->m_winIdx <= e_SrcSelector::C);
 
         if(d->m_winIdx == e_SrcSelector::A)
         {
@@ -1568,7 +1568,7 @@ int DiffTextWindowData::convertLineOnScreenToLineInSource(int lineOnScreen, e_Co
             else
                 --d3lIdx;
         }
-        Q_ASSERT(coordType == eFileCoords);
+        assert(coordType == eFileCoords);
     }
     return line;
 }
@@ -1754,7 +1754,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
             Diff3Line& d3l = *(*d->getDiff3LineVector())[i];
             if(d3l.linesNeededForDisplay() < linesNeeded)
             {
-                Q_ASSERT(wrapLineVectorSize == 0);
+                assert(wrapLineVectorSize == 0);
                 d3l.setLinesNeeded(linesNeeded);
             }
 

@@ -5,7 +5,7 @@
 
 
     Part of KDiff3 - Text Diff And Merge Tool
-   
+
     SPDX-FileCopyrightText: 1988-2002 Free Software Foundation, Inc.
     SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
     SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
@@ -349,7 +349,7 @@ void GnuDiff::compareseq(GNULineRef xoff, GNULineRef xlim, GNULineRef yoff, GNUL
         /* This should be impossible, because it implies that
          one of the two subsequences is empty,
          and that case was handled above without calling `diag'. */
-        Q_ASSERT(c != 1);
+        assert(c != 1);
 
         /* Use the partitions to split this problem into subproblems.  */
         compareseq(xoff, part.xmid, yoff, part.ymid, part.lo_minimal);

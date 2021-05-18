@@ -79,7 +79,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     if(m_pOptions->whiteSpaceIsEqual())
         eIgnoreFlags |= IgnoreFlag::ignoreWhiteSpace;
 
-    Q_ASSERT(pTotalDiffStatus != nullptr);
+    assert(pTotalDiffStatus != nullptr);
 
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
 
@@ -695,7 +695,7 @@ void KDiff3App::initView()
 // called after word wrap is complete
 void KDiff3App::slotFinishMainInit()
 {
-    Q_ASSERT(m_pDiffTextWindow1 != nullptr && DiffTextWindow::mVScrollBar != nullptr && m_pOverview != nullptr);
+    assert(m_pDiffTextWindow1 != nullptr && DiffTextWindow::mVScrollBar != nullptr && m_pOverview != nullptr);
 
     setHScrollBarRange();
 
@@ -1587,7 +1587,7 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
     FileAccess f3(m_sd3->getFilename());
     FileAccess f4(m_outputFilename);
 
-    Q_ASSERT(f1.isDir());
+    assert(f1.isDir());
 
     if(bCreateNewInstance)
     {
@@ -1610,7 +1610,7 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
         bool bSuccess = m_pDirectoryMergeWindow->init(
             !m_outputFilename.isEmpty());
         //This is a bug if it still happens.
-        Q_ASSERT(m_bDirCompare == bDirCompare);
+        assert(m_bDirCompare == bDirCompare);
 
         if(bSuccess)
         {

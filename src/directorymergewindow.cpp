@@ -461,7 +461,7 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
                         return i18n("Error: Dates are equal but files are not.");
                         break;
                     default:
-                        Q_ASSERT(true);
+                        assert(false);
                         break;
                 }
             }
@@ -833,7 +833,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     }
 
     const QSharedPointer<DirectoryInfo>& dirInfo = MergeFileInfos::getDirectoryInfo();
-    Q_ASSERT(dirInfo != nullptr);
+    assert(dirInfo != nullptr);
     const FileAccess& dirA = dirInfo->dirA();
     const FileAccess& dirB = dirInfo->dirB();
     const FileAccess& dirC = dirInfo->dirC();
@@ -1408,8 +1408,8 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
 
     //Crash and burn in debug mode these states are never valid.
     //The checks are duplicated here so they show in the assert text.
-    Q_ASSERT(!(eDefaultMergeOp == eMergeABCToDest && !bCheckC));
-    Q_ASSERT(!(eDefaultMergeOp == eMergeToAB && bCheckC));
+    assert(!(eDefaultMergeOp == eMergeABCToDest && !bCheckC));
+    assert(!(eDefaultMergeOp == eMergeToAB && bCheckC));
 
     //Check for two bugged states that are recoverable. This should never happen!
     if(Q_UNLIKELY(eDefaultMergeOp == eMergeABCToDest && !bCheckC))
@@ -1583,7 +1583,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
             case eMergeABToDest:
                 break;
             default:
-                Q_ASSERT(true);
+                assert(false);
                 break;
         }
         setMergeOperation(mi, eMO);
@@ -2470,7 +2470,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::deleteFLD(const QString&
 
             for(const FileAccess& fi2: dirList) // for each file...
             {
-                Q_ASSERT(fi2.fileName() != "." && fi2.fileName() != "..");
+                assert(fi2.fileName() != "." && fi2.fileName() != "..");
 
                 bSuccess = deleteFLD(fi2.absoluteFilePath(), false);
                 if(!bSuccess) break;
