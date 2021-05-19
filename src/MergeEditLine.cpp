@@ -16,7 +16,7 @@
 QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDataA, const std::shared_ptr<LineDataVector> &pLineDataB, const std::shared_ptr<LineDataVector> &pLineDataC) const
 {
     //Triggered by resize event during early init. Ignore these calls.
-    if((m_src == e_SrcSelector::A && pLineDataA->empty()) || (m_src == e_SrcSelector::B && pLineDataB->empty()) || (m_src == e_SrcSelector::C && pLineDataC->empty()))
+    if((mSrc == e_SrcSelector::A && pLineDataA->empty()) || (mSrc == e_SrcSelector::B && pLineDataB->empty()) || (mSrc == e_SrcSelector::C && pLineDataC->empty()))
         return QString();
 
     if(isRemoved())
@@ -26,32 +26,32 @@ QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDat
 
     if(!isModified())
     {
-        if(m_src == e_SrcSelector::None)
+        if(mSrc == e_SrcSelector::None)
         {
             return QString();
         }
 
-        std::optional<LineData> pld;
-        assert(m_src == e_SrcSelector::A || m_src == e_SrcSelector::B || m_src == e_SrcSelector::C);
+        std::optional<LineData> lineData;
+        assert(mSrc == e_SrcSelector::A || mSrc == e_SrcSelector::B || mSrc == e_SrcSelector::C);
 
-        if(m_src == e_SrcSelector::A && m_id3l->getLineA().isValid())
-            pld = (*pLineDataA)[m_id3l->getLineA()];
-        else if(m_src == e_SrcSelector::B && m_id3l->getLineB().isValid())
-            pld = (*pLineDataB)[m_id3l->getLineB()];
-        else if(m_src == e_SrcSelector::C && m_id3l->getLineC().isValid())
-            pld = (*pLineDataC)[m_id3l->getLineC()];
+        if(mSrc == e_SrcSelector::A && m_id3l->getLineA().isValid())
+            lineData = (*pLineDataA)[m_id3l->getLineA()];
+        else if(mSrc == e_SrcSelector::B && m_id3l->getLineB().isValid())
+            lineData = (*pLineDataB)[m_id3l->getLineB()];
+        else if(mSrc == e_SrcSelector::C && m_id3l->getLineC().isValid())
+            lineData = (*pLineDataC)[m_id3l->getLineC()];
 
         //Not an error.
-        if(!pld.has_value())
+        if(!lineData.has_value())
         {
             return QString();
         }
 
-        return pld->getLine();
+        return lineData->getLine();
     }
     else
     {
-        return m_str;
+        return mStr;
     }
     return QString();
 }
