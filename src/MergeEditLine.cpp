@@ -19,18 +19,13 @@ QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDat
     if((mSrc == e_SrcSelector::A && pLineDataA->empty()) || (mSrc == e_SrcSelector::B && pLineDataB->empty()) || (mSrc == e_SrcSelector::C && pLineDataC->empty()))
         return QString();
 
-    if(isRemoved())
+    if(isRemoved() || (!isModified() && mSrc == e_SrcSelector::None))
     {
         return QString();
     }
 
     if(!isModified())
     {
-        if(mSrc == e_SrcSelector::None)
-        {
-            return QString();
-        }
-
         std::optional<LineData> lineData;
         assert(mSrc == e_SrcSelector::A || mSrc == e_SrcSelector::B || mSrc == e_SrcSelector::C);
 
@@ -49,11 +44,8 @@ QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDat
 
         return lineData->getLine();
     }
-    else
-    {
-        return mStr;
-    }
-    return QString();
+    
+    return mStr;
 }
 
 bool MergeLine::isSameKind(const MergeLine &ml2) const
