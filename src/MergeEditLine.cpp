@@ -26,24 +26,23 @@ QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDat
 
     if(!isModified())
     {
-        e_SrcSelector src = m_src;
-        if(src == e_SrcSelector::None)
+        if(m_src == e_SrcSelector::None)
         {
             return QString();
         }
-        const Diff3Line &d3l = *m_id3l;
-        const LineData *pld = nullptr;
-        assert(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
 
-        if(src == e_SrcSelector::A && d3l.getLineA().isValid())
-            pld = &(*pLineDataA)[d3l.getLineA()];
-        else if(src == e_SrcSelector::B && d3l.getLineB().isValid())
-            pld = &(*pLineDataB)[d3l.getLineB()];
-        else if(src == e_SrcSelector::C && d3l.getLineC().isValid())
-            pld = &(*pLineDataC)[d3l.getLineC()];
+        std::optional<LineData> pld;
+        assert(m_src == e_SrcSelector::A || m_src == e_SrcSelector::B || m_src == e_SrcSelector::C);
+
+        if(m_src == e_SrcSelector::A && m_id3l->getLineA().isValid())
+            pld = (*pLineDataA)[m_id3l->getLineA()];
+        else if(m_src == e_SrcSelector::B && m_id3l->getLineB().isValid())
+            pld = (*pLineDataB)[m_id3l->getLineB()];
+        else if(m_src == e_SrcSelector::C && m_id3l->getLineC().isValid())
+            pld = (*pLineDataC)[m_id3l->getLineC()];
 
         //Not an error.
-        if(pld == nullptr)
+        if(!pld.has_value())
         {
             return QString();
         }
