@@ -11,6 +11,7 @@
 #include "LineRef.h"
 
 #include <algorithm>  // for max, min
+#include <qglobal.h>
 
 class Selection
 {
@@ -20,8 +21,8 @@ private:
   LineRef firstLine;
   LineRef lastLine;
 
-  int firstPos = -1;
-  int lastPos = -1;
+  qint32 firstPos = -1;
+  qint32 lastPos = -1;
 
   LineRef oldFirstLine;
   LineRef oldLastLine;
@@ -32,8 +33,8 @@ public:
   [[nodiscard]] inline LineRef getFirstLine() const { return firstLine; };
   [[nodiscard]] inline LineRef getLastLine() const { return lastLine; };
 
-  [[nodiscard]] inline int getFirstPos() const { return firstPos; };
-  [[nodiscard]] inline int getLastPos() const { return lastPos; };
+  [[nodiscard]] inline qint32 getFirstPos() const { return firstPos; };
+  [[nodiscard]] inline qint32 getLastPos() const { return lastPos; };
 
   inline bool isValidFirstLine() { return firstLine.isValid(); }
   inline void clearOldSelection() { oldLastLine.invalidate(), oldFirstLine.invalidate(); };
@@ -50,19 +51,19 @@ public:
       lastLine.invalidate();
       bSelectionContainsData = false;
    }
-   void start( LineRef l, int p ) { firstLine = l; firstPos = p; }
-   void end( LineRef l, int p )  {
+   void start( LineRef l, qint32 p ) { firstLine = l; firstPos = p; }
+   void end( LineRef l, qint32 p )  {
       if ( !oldLastLine.isValid() )
          oldLastLine = lastLine;
       lastLine  = l;
       lastPos  = p;
       //bSelectionContainsData = (firstLine == lastLine && firstPos == lastPos);
    }
-   [[nodiscard]] bool within( LineRef l, LineRef p ) const;
+   [[nodiscard]] bool within( LineRef l, qint32 p ) const;
 
    [[nodiscard]] bool lineWithin( LineRef l ) const;
-   [[nodiscard]] int firstPosInLine(LineRef l) const;
-   [[nodiscard]] int lastPosInLine(LineRef l) const;
+   [[nodiscard]] qint32 firstPosInLine(LineRef l) const;
+   [[nodiscard]] qint32 lastPosInLine(LineRef l) const;
 
    [[nodiscard]] LineRef beginLine() const
    {
@@ -76,9 +77,9 @@ public:
       return std::max(firstLine,lastLine);
    }
 
-   [[nodiscard]] int beginPos() const { return firstLine==lastLine ? std::min(firstPos,lastPos) :
+   [[nodiscard]] qint32 beginPos() const { return firstLine==lastLine ? std::min(firstPos,lastPos) :
                            firstLine<lastLine ? (!firstLine.isValid()?0:firstPos) : (!lastLine.isValid()?0:lastPos);  }
-   [[nodiscard]] int endPos() const { return firstLine==lastLine ? std::max(firstPos,lastPos) :
+   [[nodiscard]] qint32 endPos() const { return firstLine==lastLine ? std::max(firstPos,lastPos) :
                            firstLine<lastLine ? lastPos : firstPos;      }
 };
 
