@@ -190,7 +190,7 @@ class MergeResultWindow: public QWidget
         bool staysInPlace(bool bThreeInputs, Diff3LineList::const_iterator& iHistoryEnd);
     };
     typedef std::map<QString, HistoryMapEntry> HistoryMap;
-    void collectHistoryInformation(e_SrcSelector src, Diff3LineList::const_iterator& iHistoryBegin, Diff3LineList::const_iterator& iHistoryEnd, HistoryMap& historyMap, std::list<HistoryMap::iterator>& hitList);
+    void collectHistoryInformation(e_SrcSelector src, const HistoryRange& historyRange, HistoryMap& historyMap, std::list<HistoryMap::iterator>& hitList);
 
     MergeLineList m_mergeLineList;
     MergeLineListImp::iterator m_currentMergeLineIt;

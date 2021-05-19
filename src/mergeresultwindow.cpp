@@ -1027,20 +1027,21 @@ QString calcHistorySortKey(const QString& keyOrder, QRegularExpressionMatch& reg
 }
 
 void MergeResultWindow::collectHistoryInformation(
-    e_SrcSelector src, Diff3LineList::const_iterator& iHistoryBegin, Diff3LineList::const_iterator& iHistoryEnd,
+    e_SrcSelector src, const HistoryRange& historyRange,
     HistoryMap& historyMap,
     std::list<HistoryMap::iterator>& hitList // list of iterators
 )
 {
     std::list<HistoryMap::iterator>::iterator itHitListFront = hitList.begin();
-    Diff3LineList::const_iterator id3l = iHistoryBegin;
+    Diff3LineList::const_iterator id3l = historyRange.start;
     QString historyLead;
 
     historyLead = Utils::calcHistoryLead(id3l->getLineData(src).getLine());
 
     QRegularExpression historyStart(m_pOptions->m_historyStartRegExp);
-    if(id3l == iHistoryEnd)
+    if(id3l == historyRange.end)
         return;
+    //TODO: Where is this assumption coming from?
     ++id3l; // Skip line with "$Log ... $"
     QRegularExpression newHistoryEntry(m_pOptions->m_historyEntryStartRegExp);
     QRegularExpressionMatch match;
@@ -1051,7 +1052,7 @@ void MergeResultWindow::collectHistoryInformation(
     bool bPrevLineIsEmpty = true;
     bool bUseRegExp = !m_pOptions->m_historyEntryStartRegExp.isEmpty();
 
-    for(; id3l != iHistoryEnd; ++id3l)
+    for(; id3l != historyRange.end; ++id3l)
     {
         const LineData& pld = id3l->getLineData(src);
         const QString& oriLine = pld.getLine();
@@ -1156,32 +1157,28 @@ bool MergeResultWindow::HistoryMapEntry::staysInPlace(bool bThreeInputs, Diff3Li
 
 void MergeResultWindow::slotMergeHistory()
 {
-    Diff3LineList::const_iterator iD3LHistoryBegin;
-    Diff3LineList::const_iterator iD3LHistoryEnd;
-    int d3lHistoryBeginLineIdx = -1;
-    int d3lHistoryEndLineIdx = -1;
+    HistoryRange        historyRange;
 
     // Search for history start, history end in the diff3LineList
-    m_pDiff3LineList->findHistoryRange(QRegularExpression(m_pOptions->m_historyStartRegExp), m_pldC != nullptr, iD3LHistoryBegin, iD3LHistoryEnd, d3lHistoryBeginLineIdx, d3lHistoryEndLineIdx);
-
-    if(iD3LHistoryBegin != m_pDiff3LineList->end())
+    m_pDiff3LineList->findHistoryRange(QRegularExpression(m_pOptions->m_historyStartRegExp), m_pldC != nullptr, historyRange);
+    if(historyRange.start != m_pDiff3LineList->end())
     {
         // Now collect the historyMap information
         HistoryMap historyMap;
         std::list<HistoryMap::iterator> hitList;
         if(m_pldC == nullptr)
         {
-            collectHistoryInformation(e_SrcSelector::A, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
-            collectHistoryInformation(e_SrcSelector::B, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
+            collectHistoryInformation(e_SrcSelector::A, historyRange, historyMap, hitList);
+            collectHistoryInformation(e_SrcSelector::B, historyRange, historyMap, hitList);
         }
         else
         {
-            collectHistoryInformation(e_SrcSelector::A, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
-            collectHistoryInformation(e_SrcSelector::B, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
-            collectHistoryInformation(e_SrcSelector::C, iD3LHistoryBegin, iD3LHistoryEnd, historyMap, hitList);
+            collectHistoryInformation(e_SrcSelector::A, historyRange, historyMap, hitList);
+            collectHistoryInformation(e_SrcSelector::B, historyRange, historyMap, hitList);
+            collectHistoryInformation(e_SrcSelector::C, historyRange, historyMap, hitList);
         }
 
-        Diff3LineList::const_iterator iD3LHistoryOrigEnd = iD3LHistoryEnd;
+        Diff3LineList::const_iterator iD3LHistoryOrigEnd = historyRange.end;
 
         bool bHistoryMergeSorting = m_pOptions->m_bHistoryMergeSorting && !m_pOptions->m_historyEntryStartSortKeyOrder.isEmpty() &&
                                     !m_pOptions->m_historyEntryStartRegExp.isEmpty();
@@ -1194,7 +1191,7 @@ void MergeResultWindow::slotMergeHistory()
                 while(!historyMap.empty())
                 {
                     HistoryMap::iterator hMapIt = historyMap.begin();
-                    if(hMapIt->second.staysInPlace(m_pldC != nullptr, iD3LHistoryEnd))
+                    if(hMapIt->second.staysInPlace(m_pldC != nullptr, historyRange.end))
                         historyMap.erase(hMapIt);
                     else
                         break;
@@ -1205,21 +1202,21 @@ void MergeResultWindow::slotMergeHistory()
                 while(!hitList.empty())
                 {
                     HistoryMap::iterator hMapIt = hitList.back();
-                    if(hMapIt->second.staysInPlace(m_pldC != nullptr, iD3LHistoryEnd))
+                    if(hMapIt->second.staysInPlace(m_pldC != nullptr, historyRange.end))
                         hitList.pop_back();
                     else
                         break;
                 }
             }
-            while(iD3LHistoryOrigEnd != iD3LHistoryEnd)
+            while(iD3LHistoryOrigEnd != historyRange.end)
             {
                 --iD3LHistoryOrigEnd;
-                --d3lHistoryEndLineIdx;
+                --historyRange.endIdx;
             }
         }
 
-        MergeLineListImp::iterator iMLLStart = m_mergeLineList.splitAtDiff3LineIdx(d3lHistoryBeginLineIdx);
-        MergeLineListImp::iterator iMLLEnd = m_mergeLineList.splitAtDiff3LineIdx(d3lHistoryEndLineIdx);
+        MergeLineListImp::iterator iMLLStart = m_mergeLineList.splitAtDiff3LineIdx(historyRange.startIdx);
+        MergeLineListImp::iterator iMLLEnd = m_mergeLineList.splitAtDiff3LineIdx(historyRange.endIdx);
         // Now join all MergeLines in the history
         MergeLineListImp::iterator i = iMLLStart;
         if(i != iMLLEnd)
@@ -1233,8 +1230,8 @@ void MergeResultWindow::slotMergeHistory()
         }
         iMLLStart->list().clear();
         // Now insert the complete history into the first MergeLine of the history
-        iMLLStart->list().push_back(MergeEditLine(iD3LHistoryBegin, m_pldC == nullptr ? e_SrcSelector::B : e_SrcSelector::C));
-        QString lead = Utils::calcHistoryLead(iD3LHistoryBegin->getString(e_SrcSelector::A));
+        iMLLStart->list().push_back(MergeEditLine(historyRange.start, m_pldC == nullptr ? e_SrcSelector::B : e_SrcSelector::C));
+        QString lead = Utils::calcHistoryLead(historyRange.start->getString(e_SrcSelector::A));
         MergeEditLine mel(m_pDiff3LineList->end());
         mel.setString(lead);
         iMLLStart->list().push_back(mel);

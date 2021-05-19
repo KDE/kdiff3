@@ -333,13 +333,14 @@ class Diff3Line
     }
 };
 
+struct HistoryRange;
+
 class Diff3LineList: public std::list<Diff3Line>
 {
   public:
     using std::list<Diff3Line>::list;
 
-    void findHistoryRange(const QRegularExpression& historyStart, bool bThreeFiles,
-                          Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd) const;
+    void findHistoryRange(const QRegularExpression& historyStart, bool bThreeFiles, HistoryRange& range) const;
     bool fineDiff(const e_SrcSelector selector, const std::shared_ptr<LineDataVector> &v1, const std::shared_ptr<LineDataVector> &v2, const IgnoreFlags eIgnoreFlags);
     void calcDiff3LineVector(Diff3LineVector& d3lv);
     void calcWhiteDiff3Lines(const std::shared_ptr<LineDataVector> &pldA, const std::shared_ptr<LineDataVector> &pldB, const std::shared_ptr<LineDataVector> &pldC, const bool bIgnoreComments);
@@ -406,6 +407,13 @@ class Diff3LineList: public std::list<Diff3Line>
     }
 };
 
+struct HistoryRange
+{
+    Diff3LineList::const_iterator start;
+    Diff3LineList::const_iterator end;
+    int startIdx = -1;
+    int endIdx = -1;
+};
 
 struct Diff3WrapLine
 {

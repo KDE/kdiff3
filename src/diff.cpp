@@ -1567,27 +1567,26 @@ void Diff3LineList::debugLineCheck(const LineCount size, const e_SrcSelector src
     }
 }
 
-void Diff3LineList::findHistoryRange(const QRegularExpression& historyStart, bool bThreeFiles,
-                             Diff3LineList::const_iterator& iBegin, Diff3LineList::const_iterator& iEnd, int& idxBegin, int& idxEnd) const
+void Diff3LineList::findHistoryRange(const QRegularExpression& historyStart, bool bThreeFiles, HistoryRange& range) const
 {
     QString historyLead;
     // Search for start of history
-    for(iBegin = begin(), idxBegin = 0; iBegin != end(); ++iBegin, ++idxBegin)
+    for(range.start = begin(), range.startIdx = 0; range.start != end(); ++range.start, ++range.startIdx)
     {
-        if(historyStart.match(iBegin->getString(e_SrcSelector::A)).hasMatch() &&
-           historyStart.match(iBegin->getString(e_SrcSelector::B)).hasMatch() &&
-           (!bThreeFiles || historyStart.match(iBegin->getString(e_SrcSelector::C)).hasMatch()))
+        if(historyStart.match(range.start->getString(e_SrcSelector::A)).hasMatch() &&
+           historyStart.match(range.start->getString(e_SrcSelector::B)).hasMatch() &&
+           (!bThreeFiles || historyStart.match(range.start->getString(e_SrcSelector::C)).hasMatch()))
         {
-            historyLead = Utils::calcHistoryLead(iBegin->getString(e_SrcSelector::A));
+            historyLead = Utils::calcHistoryLead(range.start->getString(e_SrcSelector::A));
             break;
         }
     }
     // Search for end of history
-    for(iEnd = iBegin, idxEnd = idxBegin; iEnd != end(); ++iEnd, ++idxEnd)
+    for(range.end = range.start, range.endIdx = range.startIdx; range.end != end(); ++range.end, ++range.endIdx)
     {
-        QString sA = iEnd->getString(e_SrcSelector::A);
-        QString sB = iEnd->getString(e_SrcSelector::B);
-        QString sC = iEnd->getString(e_SrcSelector::C);
+        QString sA = range.end->getString(e_SrcSelector::A);
+        QString sB = range.end->getString(e_SrcSelector::B);
+        QString sC = range.end->getString(e_SrcSelector::C);
         if(!((sA.isEmpty() || historyLead == Utils::calcHistoryLead(sA)) &&
              (sB.isEmpty() || historyLead == Utils::calcHistoryLead(sB)) &&
              (!bThreeFiles || sC.isEmpty() || historyLead == Utils::calcHistoryLead(sC))))
