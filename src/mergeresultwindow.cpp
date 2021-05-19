@@ -2388,16 +2388,11 @@ QString MergeResultWindow::getSelection()
 {
     QString selectionString;
 
-    int line = 0;
-    MergeLineListImp::iterator mlIt = m_mergeLineList.list().begin();
-    for(mlIt = m_mergeLineList.list().begin(); mlIt != m_mergeLineList.list().end(); ++mlIt)
+    LineRef line = 0;
+    for(const MergeLine& ml: m_mergeLineList.list())
     {
-        MergeLine& ml = *mlIt;
-        MergeEditLineList::iterator melIt;
-        for(melIt = ml.list().begin(); melIt != ml.list().end(); ++melIt)
+        for(const MergeEditLine& mel: ml.list())
         {
-            MergeEditLine& mel = *melIt;
-
             if(m_selection.lineWithin(line))
             {
                 int outPos = 0;
@@ -2406,7 +2401,6 @@ QString MergeResultWindow::getSelection()
                     const QString str = mel.getString(m_pldA, m_pldB, m_pldC);
 
                     // Consider tabs
-
                     for(int i = 0; i < str.length(); ++i)
                     {
                         int spaces = 1;
