@@ -905,7 +905,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessA = dirInfo->listDirA(*m_pOptions);
+        bListDirSuccessA = dirInfo->listDirA(m_pOptions);
     }
 
     if(dirB.isValid())
@@ -914,7 +914,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessB = dirInfo->listDirB(*m_pOptions);
+        bListDirSuccessB = dirInfo->listDirB(m_pOptions);
     }
 
     e_MergeOperation eDefaultMergeOp;
@@ -924,7 +924,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessC = dirInfo->listDirC(*m_pOptions);
+        bListDirSuccessC = dirInfo->listDirC(m_pOptions);
 
         eDefaultMergeOp = eMergeABCToDest;
     }

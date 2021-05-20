@@ -13,32 +13,32 @@
 
 #include <memory>
 
-bool DirectoryInfo::listDirA(const Options& options)
+bool DirectoryInfo::listDirA(const QSharedPointer<const Options>& options)
 {
     return listDir(m_dirA, m_dirListA, options);
 }
 
-bool DirectoryInfo::listDirB(const Options& options)
+bool DirectoryInfo::listDirB(const QSharedPointer<const Options>& options)
 {
     return listDir(m_dirB, m_dirListB, options);
 }
 
-bool DirectoryInfo::listDirC(const Options& options)
+bool DirectoryInfo::listDirC(const QSharedPointer<const Options>& options)
 {
     return listDir(m_dirC, m_dirListC, options);
 }
 
-bool DirectoryInfo::listDir(FileAccess& fileAccess, DirectoryList& dirList, const Options& options)
+bool DirectoryInfo::listDir(FileAccess& fileAccess, DirectoryList& dirList, const QSharedPointer<const Options>& options)
 {
     CompositeIgnoreList ignoreList;
-    if (options.m_bDmUseCvsIgnore)
+    if (options->m_bDmUseCvsIgnore)
     {
         ignoreList.addIgnoreList(std::make_unique<CvsIgnoreList>());
         ignoreList.addIgnoreList(std::make_unique<GitIgnoreList>());
     }
     return fileAccess.listDir(&dirList,
-                              options.m_bDmRecursiveDirs, options.m_bDmFindHidden,
-                              options.m_DmFilePattern, options.m_DmFileAntiPattern,
-                              options.m_DmDirAntiPattern, options.m_bDmFollowDirLinks,
+                              options->m_bDmRecursiveDirs, options->m_bDmFindHidden,
+                              options->m_DmFilePattern, options->m_DmFileAntiPattern,
+                              options->m_DmDirAntiPattern, options->m_bDmFollowDirLinks,
                               ignoreList);
 }

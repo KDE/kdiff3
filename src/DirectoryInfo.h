@@ -1,6 +1,6 @@
 /*
  * KDiff3 - Text Diff And Merge Tool
- * 
+ *
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -14,7 +14,7 @@ class DirectoryInfo
 {
     public:
       explicit DirectoryInfo() = default;
-      
+
       DirectoryInfo(FileAccess& dirA, FileAccess& dirB, FileAccess& dirC, FileAccess& dirDest)
       {
           m_dirA = dirA;
@@ -40,15 +40,15 @@ class DirectoryInfo
 
       inline bool allowSyncMode() { return !m_dirC.isValid() && !m_dirDest.isValid(); }
 
-      bool listDirA(const Options& options);
-      bool listDirB(const Options& options);
-      bool listDirC(const Options& options);
+      bool listDirA(const QSharedPointer<const Options>& options);
+      bool listDirB(const QSharedPointer<const Options>& options);
+      bool listDirC(const QSharedPointer<const Options>& options);
       DirectoryList& getDirListA() { return m_dirListA; }
       DirectoryList& getDirListB() { return m_dirListB; }
       DirectoryList& getDirListC() { return m_dirListC; }
 
     private:
-      bool listDir(FileAccess& fileAccess, DirectoryList& dirList, const Options& options);
+      bool listDir(FileAccess& fileAccess, DirectoryList& dirList, const QSharedPointer<const Options>& options);
 
       FileAccess m_dirA, m_dirB, m_dirC;
 
