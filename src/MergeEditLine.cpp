@@ -195,10 +195,12 @@ void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreew
 {
     LineIndex lineIdx = 0;
     Diff3LineList::const_iterator it;
-    for(const Diff3Line &d: diff3List)
+    for(it = diff3List.begin(); it != diff3List.end(); ++it)
     {
+        const Diff3Line d = *it;
         MergeLine ml;
         bool bLineRemoved;
+
         ml.mergeOneLine(d, bLineRemoved, !isThreeway);
         ml.dectectWhiteSpaceConflict(d, isThreeway);
 
