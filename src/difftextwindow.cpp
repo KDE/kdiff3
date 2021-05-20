@@ -995,8 +995,8 @@ void DiffTextWindowData::writeLine(
     int fastSelectorLine2 = m_pDiffTextWindow->convertDiff3LineIdxToLine(m_fastSelectorLine1 + m_fastSelectorNofLines) - 1;
 
     bool bFastSelectionRange = (line >= fastSelectorLine1 && line <= fastSelectorLine2);
-    QColor bgColor = m_pOptions->m_bgColor;
-    QColor diffBgColor = m_pOptions->m_diffBgColor;
+    QColor bgColor = m_pOptions->backgroundColor();
+    QColor diffBgColor = m_pOptions->diffBackgroundColor();
 
     if(bFastSelectionRange)
     {
@@ -1011,7 +1011,7 @@ void DiffTextWindowData::writeLine(
     if(pLineDiff1 != nullptr) changed |= AChanged;
     if(pLineDiff2 != nullptr) changed |= BChanged;
 
-    QColor penColor = m_pOptions->m_fgColor;
+    QColor penColor = m_pOptions->forgroundColor();
     p.setPen(penColor);
     if(changed == BChanged)
     {
@@ -1064,7 +1064,7 @@ void DiffTextWindowData::writeLine(
 
         for(i = wrapLineOffset; i < lineLength; ++i)
         {
-            penColor = m_pOptions->m_fgColor;
+            penColor = m_pOptions->forgroundColor();
             ChangeFlags cchanged = charChanged[i] | whatChanged;
 
             if(cchanged == BChanged)
@@ -1080,16 +1080,16 @@ void DiffTextWindowData::writeLine(
                 penColor = m_cDiffBoth;
             }
 
-            if(penColor != m_pOptions->m_fgColor && whatChanged2 == NoChange && !m_pOptions->m_bShowWhiteSpace)
+            if(penColor != m_pOptions->forgroundColor() && whatChanged2 == NoChange && !m_pOptions->m_bShowWhiteSpace)
             {
                 // The user doesn't want to see highlighted white space.
-                penColor = m_pOptions->m_fgColor;
+                penColor = m_pOptions->forgroundColor();
             }
 
             frh.setBackground(bgColor);
             if(!m_selection.within(line, outPos))
             {
-                if(penColor != m_pOptions->m_fgColor)
+                if(penColor != m_pOptions->forgroundColor())
                 {
                     frh.setBackground(diffBgColor);
                     // Setting italic font here doesn't work: Changing the font only when drawing is too late
@@ -1116,11 +1116,11 @@ void DiffTextWindowData::writeLine(
         textLayout.draw(&p, QPoint(0, yOffset), frh /*, const QRectF & clip = QRectF() */);
     }
 
-    p.fillRect(0, yOffset, leftInfoWidth() * fontWidth, fontHeight, m_pOptions->m_bgColor);
+    p.fillRect(0, yOffset, leftInfoWidth() * fontWidth, fontHeight, m_pOptions->backgroundColor());
 
     xOffset = (m_lineNumberWidth + 2) * fontWidth;
     int xLeft = m_lineNumberWidth * fontWidth;
-    p.setPen(m_pOptions->m_fgColor);
+    p.setPen(m_pOptions->forgroundColor());
     if(pld != nullptr)
     {
         if(m_pOptions->m_bShowLineNumbers && !bWrapLine)
@@ -1133,12 +1133,12 @@ void DiffTextWindowData::writeLine(
         {
             Qt::PenStyle wrapLinePenStyle = Qt::DotLine;
 
-            p.setPen(QPen(m_pOptions->m_fgColor, 0, bWrapLine ? wrapLinePenStyle : Qt::SolidLine));
+            p.setPen(QPen(m_pOptions->forgroundColor(), 0, bWrapLine ? wrapLinePenStyle : Qt::SolidLine));
             p.drawLine(xOffset + 1, yOffset, xOffset + 1, yOffset + fontHeight - 1);
-            p.setPen(QPen(m_pOptions->m_fgColor, 0, Qt::SolidLine));
+            p.setPen(QPen(m_pOptions->forgroundColor(), 0, Qt::SolidLine));
         }
     }
-    if(penColor != m_pOptions->m_fgColor && whatChanged2 == NoChange)
+    if(penColor != m_pOptions->forgroundColor() && whatChanged2 == NoChange)
     {
         if(m_pOptions->m_bShowWhiteSpace)
         {
@@ -1148,12 +1148,12 @@ void DiffTextWindowData::writeLine(
     }
     else
     {
-        p.fillRect(xLeft, yOffset, fontWidth * 2 - 1, fontHeight, penColor == m_pOptions->m_fgColor ? bgColor : penColor);
+        p.fillRect(xLeft, yOffset, fontWidth * 2 - 1, fontHeight, penColor == m_pOptions->forgroundColor() ? bgColor : penColor);
     }
 
     if(bFastSelectionRange)
     {
-        p.fillRect(xOffset + fontWidth - 1, yOffset, 3, fontHeight, m_pOptions->m_fgColor);
+        p.fillRect(xOffset + fontWidth - 1, yOffset, 3, fontHeight, m_pOptions->forgroundColor());
     }
 
     // Check if line needs a manual diff help mark
@@ -1182,7 +1182,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     if(d->getDiff3LineVector() == nullptr || (d->m_diff3WrapLineVector.empty() && d->m_bWordWrap))
     {
         QPainter p(this);
-        p.fillRect(invalidRect, d->getOptions()->m_bgColor);
+        p.fillRect(invalidRect, d->getOptions()->backgroundColor());
         return;
     }
 
@@ -1194,7 +1194,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     RLPainter p(this, d->getOptions()->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(), '0'));
 
     p.setFont(font());
-    p.QPainter::fillRect(invalidRect, d->getOptions()->m_bgColor);
+    p.QPainter::fillRect(invalidRect, d->getOptions()->backgroundColor());
 
     d->draw(p, invalidRect, d->m_firstLine, endLine);
     p.end();
@@ -1215,10 +1215,9 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, int nofLin
     int oldFirstLine = d->m_firstLine;
     d->m_firstLine = firstLine;
     QRect invalidRect = QRect(0, 0, 1000000000, 1000000000);
-    QColor bgColor = d->getOptions()->m_bgColor;
-    d->getOptions()->m_bgColor = Qt::white;
+    d->getOptions()->beginPrint();
     d->draw(p, invalidRect, firstLine, std::min(firstLine + nofLinesPerPage, getNofLines()));
-    d->getOptions()->m_bgColor = bgColor;
+    d->getOptions()->endPrint();
     d->m_firstLine = oldFirstLine;
 }
 
@@ -1229,23 +1228,23 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int beginL
 
     if(m_winIdx == e_SrcSelector::A)
     {
-        m_cThis = m_pOptions->m_colorA;
-        m_cDiff1 = m_pOptions->m_colorB;
-        m_cDiff2 = m_pOptions->m_colorC;
+        m_cThis = m_pOptions->aColor();
+        m_cDiff1 = m_pOptions->bColor();
+        m_cDiff2 = m_pOptions->cColor();
     }
     if(m_winIdx == e_SrcSelector::B)
     {
-        m_cThis = m_pOptions->m_colorB;
-        m_cDiff1 = m_pOptions->m_colorC;
-        m_cDiff2 = m_pOptions->m_colorA;
+        m_cThis = m_pOptions->bColor();
+        m_cDiff1 = m_pOptions->cColor();
+        m_cDiff2 = m_pOptions->aColor();
     }
     if(m_winIdx == e_SrcSelector::C)
     {
-        m_cThis = m_pOptions->m_colorC;
-        m_cDiff1 = m_pOptions->m_colorA;
-        m_cDiff2 = m_pOptions->m_colorB;
+        m_cThis = m_pOptions->cColor();
+        m_cDiff1 = m_pOptions->aColor();
+        m_cDiff2 = m_pOptions->bColor();
     }
-    m_cDiffBoth = m_pOptions->m_colorForConflict; // Conflict color
+    m_cDiffBoth = m_pOptions->conflictColor(); // Conflict color
 
     p.setPen(m_cThis);
 
@@ -1995,14 +1994,14 @@ bool DiffTextWindowFrame::eventFilter(QObject* o, QEvent* e)
     Q_UNUSED(o);
     if(e->type() == QEvent::FocusIn || e->type() == QEvent::FocusOut)
     {
-        QColor c1 = d->getOptions()->m_bgColor;
+        QColor c1 = d->getOptions()->backgroundColor();
         QColor c2;
         if(d->m_winIdx == e_SrcSelector::A)
-            c2 = d->getOptions()->m_colorA;
+            c2 = d->getOptions()->aColor();
         else if(d->m_winIdx == e_SrcSelector::B)
-            c2 = d->getOptions()->m_colorB;
+            c2 = d->getOptions()->bColor();
         else if(d->m_winIdx == e_SrcSelector::C)
-            c2 = d->getOptions()->m_colorC;
+            c2 = d->getOptions()->cColor();
 
         QPalette p = d->m_pTopLineWidget->palette();
         if(e->type() == QEvent::FocusOut)

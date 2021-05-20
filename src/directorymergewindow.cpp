@@ -606,7 +606,7 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
                 int i = m_pDMW->getIntFromIndex(index);
                 if(i != 0)
                 {
-                    QColor c(i == 1 ? getOptions()->m_colorA : i == 2 ? getOptions()->m_colorB : getOptions()->m_colorC);
+                    QColor c(i == 1 ? getOptions()->aColor() : i == 2 ? getOptions()->bColor() : getOptions()->cColor());
                     thePainter->setPen(c); // highlight() );
                     thePainter->drawRect(x + 2, y + yOffset, w, h);
                     thePainter->setPen(QPen(c, 0, Qt::DotLine));

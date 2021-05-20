@@ -21,6 +21,7 @@
 #include <QStringList>
 
 #include <KSharedConfig>
+#include <qcolor.h>
 
 class ValueMap;
 
@@ -62,11 +63,9 @@ class Options
     void setPosition(const QPoint& pos) { m_position = pos; }
 
     [[nodiscard]] bool isFullScreen() const { return m_bFullScreen; };
-
     void setFullScreen(const bool fullScreen) { m_bFullScreen = fullScreen;};
 
     [[nodiscard]] bool isMaximised() const { return m_bMaximised; };
-
     void setMaximised(const bool maximised) { m_bMaximised = maximised;};
 
 
@@ -86,11 +85,30 @@ class Options
 
     [[nodiscard]] bool whiteSpaceIsEqual() const { return m_bDmWhiteSpaceEqual; }
 
+    [[nodiscard]] const QColor& forgroundColor() const { return m_fgColor; };
+    [[nodiscard]] const QColor& backgroundColor() const
+    {
+        if(mPrintMode) return mPrintBackground;
+        return m_bgColor;
+    };
+    [[nodiscard]] const QColor& diffBackgroundColor() const { return m_diffBgColor; };
+    [[nodiscard]] const QColor& aColor() const { return m_colorA; };
+    [[nodiscard]] const QColor& bColor() const { return m_colorB; };
+    [[nodiscard]] const QColor& cColor() const { return m_colorC; };
+
+    [[nodiscard]] const QColor& conflictColor() const { return m_colorForConflict; }
+
+    inline void beginPrint() { mPrintMode = true; }
+    inline void endPrint() { mPrintMode = false; }
   private:
     void addOptionItem(std::shared_ptr<OptionItemBase> inItem);
 
     friend class OptionDialog;
     std::list<std::shared_ptr<OptionItemBase>> mOptionItemList;
+
+    bool mPrintMode = false;
+
+    const QColor mPrintBackground = Qt::white;
 
     // Some settings that are not available in the option dialog:
     QSize  m_geometry = QSize(600, 400);
@@ -105,7 +123,6 @@ class Options
     QFont mAppFont;
 
     //bool m_bItalicForDeltas;
-  public:
 
     QColor m_fgColor = Qt::black;
     QColor m_bgColor = Qt::white;
@@ -114,6 +131,7 @@ class Options
     QColor m_colorB;
     QColor m_colorC;
     QColor m_colorForConflict = Qt::red;
+  public:
     QColor m_currentRangeBgColor;
     QColor m_currentRangeDiffBgColor;
     QColor m_oldestFileColor = qRgb(0xf0, 0, 0);

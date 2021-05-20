@@ -135,9 +135,9 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         md = lMergeLine.details();
         bConflict = lMergeLine.isConflict();
 
-        QColor c = m_pOptions->m_bgColor;
+        QColor c = m_pOptions->backgroundColor();
         bool bWhiteSpaceChange = false;
-        //if( bConflict )  c=m_pOptions->m_colorForConflict;
+        //if( bConflict )  c=m_pOptions->conflictColor();
         //else
         switch(eOverviewMode)
         {
@@ -146,13 +146,13 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                 {
                     case e_MergeDetails::eDefault:
                     case e_MergeDetails::eNoChange:
-                        c = m_pOptions->m_bgColor;
+                        c = m_pOptions->backgroundColor();
                         break;
 
                     case e_MergeDetails::eBAdded:
                     case e_MergeDetails::eBDeleted:
                     case e_MergeDetails::eBChanged:
-                        c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorB;
+                        c = bConflict ? m_pOptions->conflictColor() : m_pOptions->bColor();
                         bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::B));
                         break;
 
@@ -160,7 +160,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                     case e_MergeDetails::eCDeleted:
                     case e_MergeDetails::eCChanged:
                         bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::C));
-                        c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorC;
+                        c = bConflict ? m_pOptions->conflictColor() : m_pOptions->cColor();
                         break;
 
                     case e_MergeDetails::eBCChanged:         // conflict
@@ -170,7 +170,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                     case e_MergeDetails::eCChanged_BDeleted: // conflict
                     case e_MergeDetails::eBCAdded:           // conflict
                     case e_MergeDetails::eBCAddedAndEqual:   // possible conflict
-                        c = m_pOptions->m_colorForConflict;
+                        c = m_pOptions->conflictColor();
                         break;
                 }
                 break;
@@ -184,7 +184,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                     case e_MergeDetails::eCChanged:
                         break;
                     default:
-                        c = m_pOptions->m_colorForConflict;
+                        c = m_pOptions->conflictColor();
                         bWhiteSpaceChange = d3l.isEqualAB() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::B));
                         break;
                 }
@@ -199,7 +199,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                     case e_MergeDetails::eBChanged:
                         break;
                     default:
-                        c = m_pOptions->m_colorForConflict;
+                        c = m_pOptions->conflictColor();
                         bWhiteSpaceChange = d3l.isEqualAC() || (d3l.isWhiteLine(e_SrcSelector::A) && d3l.isWhiteLine(e_SrcSelector::C));
                         break;
                 }
@@ -214,7 +214,7 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
                     case e_MergeDetails::eBCAddedAndEqual:
                         break;
                     default:
-                        c = m_pOptions->m_colorForConflict;
+                        c = m_pOptions->conflictColor();
                         bWhiteSpaceChange = d3l.isEqualBC() || (d3l.isWhiteLine(e_SrcSelector::B) && d3l.isWhiteLine(e_SrcSelector::C));
                         break;
                 }
@@ -228,13 +228,13 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         {
             if(!d3l.getLineA().isValid() && d3l.getLineB().isValid())
             {
-                c = m_pOptions->m_colorA;
+                c = m_pOptions->aColor();
                 x2 = w / 2;
                 w2 = x2;
             }
             if(d3l.getLineA().isValid() && !d3l.getLineB().isValid())
             {
-                c = m_pOptions->m_colorB;
+                c = m_pOptions->bColor();
                 w2 = w / 2;
             }
         }
@@ -242,12 +242,12 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
         if(!bWhiteSpaceChange || m_pOptions->m_bShowWhiteSpace)
         {
             // Make sure that lines with conflict are not overwritten.
-            if(c == m_pOptions->m_colorForConflict)
+            if(c == m_pOptions->conflictColor())
             {
                 p.fillRect(x2 + 1, oldY, w2, std::max(1, y - oldY), bWhiteSpaceChange ? QBrush(c, Qt::Dense4Pattern) : QBrush(c));
                 oldConflictY = oldY;
             }
-            else if(c != m_pOptions->m_bgColor && oldY > oldConflictY)
+            else if(c != m_pOptions->backgroundColor() && oldY > oldConflictY)
             {
                 p.fillRect(x2 + 1, oldY, w2, std::max(1, y - oldY), bWhiteSpaceChange ? QBrush(c, Qt::Dense4Pattern) : QBrush(c));
             }
@@ -287,7 +287,7 @@ void Overview::paintEvent(QPaintEvent*)
         m_pixmap.setDevicePixelRatio(dpr);
 
         QPainter p(&m_pixmap);
-        p.fillRect(rect(), m_pOptions->m_bgColor);
+        p.fillRect(rect(), m_pOptions->backgroundColor());
 
         if(!KDiff3App::isTripleDiff() || mOverviewMode == e_OverviewMode::eOMNormal)
         {

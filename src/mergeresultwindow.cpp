@@ -1515,7 +1515,7 @@ void MergeResultWindow::writeLine(
             outPos += spaces;
         }
 
-        p.setPen(m_pOptions->m_fgColor);
+        p.setPen(m_pOptions->forgroundColor());
 
         QTextLayout textLayout(str, font(), this);
         QVector<QTextLayout::FormatRange> selectionFormat = getTextLayoutForLine(line, str, textLayout);
@@ -1530,20 +1530,20 @@ void MergeResultWindow::writeLine(
 
         p.setClipping(false);
 
-        p.setPen(m_pOptions->m_fgColor);
+        p.setPen(m_pOptions->forgroundColor());
 
         p.drawText(1, yOffset + fontAscent, srcName, true);
     }
     else if(bLineRemoved)
     {
-        p.setPen(m_pOptions->m_colorForConflict);
+        p.setPen(m_pOptions->conflictColor());
         p.drawText(xOffset, yOffset + fontAscent, i18n("<No src line>"));
         p.drawText(1, yOffset + fontAscent, srcName);
         if(m_cursorYPos == line) m_cursorXPos = 0;
     }
     else if(srcSelect == e_SrcSelector::None)
     {
-        p.setPen(m_pOptions->m_colorForConflict);
+        p.setPen(m_pOptions->conflictColor());
         if(bWhiteSpaceConflict)
             p.drawText(xOffset, yOffset + fontAscent, i18n("<Merge Conflict (Whitespace only)>"));
         else
@@ -1555,7 +1555,7 @@ void MergeResultWindow::writeLine(
         assert(false);
 
     xOffset -= Utils::getHorizontalAdvance(fm, '0');
-    p.setPen(m_pOptions->m_fgColor);
+    p.setPen(m_pOptions->forgroundColor());
     if(rangeMark & 1) // begin mark
     {
         p.drawLine(xOffset, yOffset + 1, xOffset, yOffset + fontHeight / 2);
@@ -1578,7 +1578,7 @@ void MergeResultWindow::writeLine(
 
     if(rangeMark & 4)
     {
-        p.fillRect(xOffset + 3, yOffset, 3, fontHeight, m_pOptions->m_fgColor);
+        p.fillRect(xOffset + 3, yOffset, 3, fontHeight, m_pOptions->forgroundColor());
         /*      p.setPen( blue );
       p.drawLine( xOffset+2, yOffset, xOffset+2, yOffset+fontHeight-1 );
       p.drawLine( xOffset+3, yOffset, xOffset+3, yOffset+fontHeight-1 );*/
@@ -1618,7 +1618,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
         RLPainter p(&m_pixmap, m_pOptions->m_bRightToLeftLanguage, width(), fontWidth);
         p.setFont(font());
-        p.QPainter::fillRect(rect(), m_pOptions->m_bgColor);
+        p.QPainter::fillRect(rect(), m_pOptions->backgroundColor());
 
         //int visibleLines = height() / fontHeight;
 
@@ -1682,7 +1682,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
     if(m_bCursorOn && hasFocus() && m_cursorYPos >= m_firstLine)
     {
-        painter.setPen(m_pOptions->m_fgColor);
+        painter.setPen(m_pOptions->forgroundColor());
 
         QString str = getString(m_cursorYPos);
         QTextLayout textLayout(str, font(), this);
@@ -2990,10 +2990,10 @@ bool WindowTitleWidget::eventFilter(QObject* o, QEvent* e)
     {
         QPalette p = m_pLabel->palette();
 
-        QColor c1 = m_pOptions->m_fgColor;
+        QColor c1 = m_pOptions->forgroundColor();
         QColor c2 = Qt::lightGray;
         if(e->type() == QEvent::FocusOut)
-            c2 = m_pOptions->m_bgColor;
+            c2 = m_pOptions->backgroundColor();
 
         p.setColor(QPalette::Window, c2);
         setPalette(p);

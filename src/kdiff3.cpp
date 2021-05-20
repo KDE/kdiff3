@@ -966,23 +966,23 @@ void KDiff3App::slotFilePrint()
 
                 painter.setClipping(true);
 
-                painter.setPen(m_pOptions->m_colorA);
+                painter.setPen(m_pOptions->aColor());
                 QString headerText1 = m_sd1->getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow1->calcTopLineInFile(line) + 1);
-                m_pDiffTextWindow1->printWindow(painter, view1, headerText1, line, linesPerPage, m_pOptions->m_fgColor);
+                m_pDiffTextWindow1->printWindow(painter, view1, headerText1, line, linesPerPage, m_pOptions->forgroundColor());
 
-                painter.setPen(m_pOptions->m_colorB);
+                painter.setPen(m_pOptions->bColor());
                 QString headerText2 = m_sd2->getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow2->calcTopLineInFile(line) + 1);
-                m_pDiffTextWindow2->printWindow(painter, view2, headerText2, line, linesPerPage, m_pOptions->m_fgColor);
+                m_pDiffTextWindow2->printWindow(painter, view2, headerText2, line, linesPerPage, m_pOptions->forgroundColor());
 
                 if(m_bTripleDiff && m_pDiffTextWindow3 != nullptr)
                 {
-                    painter.setPen(m_pOptions->m_colorC);
+                    painter.setPen(m_pOptions->cColor());
                     QString headerText3 = m_sd3->getAliasName() + ", " + topLineText + ": " + QString::number(m_pDiffTextWindow3->calcTopLineInFile(line) + 1);
-                    m_pDiffTextWindow3->printWindow(painter, view3, headerText3, line, linesPerPage, m_pOptions->m_fgColor);
+                    m_pDiffTextWindow3->printWindow(painter, view3, headerText3, line, linesPerPage, m_pOptions->forgroundColor());
                 }
                 painter.setClipping(false);
 
-                painter.setPen(m_pOptions->m_fgColor);
+                painter.setPen(m_pOptions->forgroundColor());
                 painter.drawLine(0, view.bottom() + 3, view.width(), view.bottom() + 3);
                 QString s = bPrintCurrentPage ? QString("")
                                               : QString::number(page) + '/' + QString::number(totalNofPages);
