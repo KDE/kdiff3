@@ -9,7 +9,7 @@ find_package(
 add_definitions(-DAUTOTEST)
 
 ecm_add_test(connectiontest.cpp
-    TEST_NAME "connntiontest"
+    TEST_NAME "connectiontest"
     LINK_LIBRARIES Qt5::Test
 )
 
