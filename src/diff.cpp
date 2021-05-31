@@ -579,14 +579,14 @@ bool ManualDiffHelpEntry::isValidMove(LineRef line1, LineRef line2, e_SrcSelecto
 
 int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& d3lv)
 {
-    int i;
+    QtSizeType i;
     for(i = 0; i < d3lv.size(); ++i)
     {
         const Diff3Line& d3l = *d3lv[i];
         if((lineA1.isValid() && lineA1 == d3l.getLineA()) ||
            (lineB1.isValid() && lineB1 == d3l.getLineB()) ||
            (lineC1.isValid() && lineC1 == d3l.getLineC()))
-            return i;
+            return SafeInt32<int>(i);
     }
     return -1;
 }
@@ -1493,7 +1493,7 @@ bool Diff3LineList::fineDiff(const e_SrcSelector selector, const std::shared_ptr
     // Finetuning: Diff each line with deltas
     ProgressProxy pp;
     bool bTextsTotalEqual = true;
-    QtSizeType listSize = size();
+    size_t listSize = size();
     pp.setMaxNofSteps(listSize);
     int listIdx = 0;
 
@@ -1509,7 +1509,7 @@ bool Diff3LineList::fineDiff(const e_SrcSelector selector, const std::shared_ptr
 // Convert the list to a vector of pointers
 void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
 {
-    d3lv.resize(size());
+    d3lv.resize(SafeInt32<QtSizeType>(size()));
     Diff3LineList::iterator i;
     int j = 0;
     for(i = begin(); i != end(); ++i, ++j)

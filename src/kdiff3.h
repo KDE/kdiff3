@@ -13,6 +13,7 @@
 #include "defmac.h"
 #include "combiners.h"
 #include "SourceData.h"
+#include "TypeUtils.h"
 
 #include <boost/signals2.hpp>
 
@@ -444,7 +445,7 @@ public Q_SLOTS:
     //ManualDiffHelpDialog* m_pManualDiffHelpDialog;
     ManualDiffHelpList m_manualDiffHelpList;
 
-    int m_neededLines;
+    SafeInt32<QtNumberType> m_neededLines;
     int m_DTWHeight;
     bool m_bOutputModified = false;
     bool m_bFileSaved = false;

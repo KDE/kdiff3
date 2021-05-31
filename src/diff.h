@@ -369,27 +369,15 @@ class Diff3LineList: public std::list<Diff3Line>
         return sumOfLines;
     }
 
-    //TODO: Add safety guards to prevent list from getting too large. Same problem as with QLinkedList.
-    [[nodiscard]] QtSizeType size() const
-    {
-        if(std::list<Diff3Line>::size() > (size_t)TYPE_MAX(QtSizeType))//explicit cast to silence gcc
-        {
-            qCDebug(kdiffMain) << "Diff3Line: List too large. size=" << std::list<Diff3Line>::size();
-            assert(false); //Unsupported size
-            return 0;
-        }
-        return (QtSizeType)std::list<Diff3Line>::size();
-    } //safe for small files same limit as exited with QLinkedList. This should ultimatly be removed.
-
     void debugLineCheck(const LineCount size, const e_SrcSelector srcSelector) const;
 
     void dump();
 
-    [[nodiscard]] qint32 numberOfLines(bool bWordWrap) const
+    [[nodiscard]] LineCount numberOfLines(bool bWordWrap) const
     {
         if(bWordWrap)
         {
-            qint32 lines;
+            LineCount lines;
 
             lines = 0;
             Diff3LineList::const_iterator i;
@@ -402,7 +390,7 @@ class Diff3LineList: public std::list<Diff3Line>
         }
         else
         {
-            return size();
+            return SafeInt32<LineCount>(size());
         }
     }
 };
