@@ -1173,11 +1173,10 @@ void Diff3LineList::calcDiff3LineListTrim(
 */
 }
 
-void DiffBufferInfo::init(Diff3LineList* pD3ll, const Diff3LineVector* pD3lv,
+void DiffBufferInfo::init(Diff3LineList* pD3ll,
                           const std::shared_ptr<LineDataVector> &pldA, const std::shared_ptr<LineDataVector> &pldB, const std::shared_ptr<LineDataVector> &pldC)
 {
     m_pDiff3LineList = pD3ll;
-    m_pDiff3LineVector = pD3lv;
     mLineDataA = pldA;
     mLineDataB = pldB;
     mLineDataC = pldC;

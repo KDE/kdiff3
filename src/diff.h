@@ -184,10 +184,9 @@ class DiffBufferInfo
     std::shared_ptr<LineDataVector> mLineDataB;
     std::shared_ptr<LineDataVector> mLineDataC;
     const Diff3LineList* m_pDiff3LineList = nullptr;
-    const Diff3LineVector* m_pDiff3LineVector = nullptr;
 
   public:
-    void init(Diff3LineList* d3ll, const Diff3LineVector* d3lv,
+    void init(Diff3LineList* d3ll,
               const std::shared_ptr<LineDataVector> &pldA, const std::shared_ptr<LineDataVector> &pldB, const std::shared_ptr<LineDataVector> &pldC);
 
     [[nodiscard]] inline std::shared_ptr<LineDataVector> getLineData(e_SrcSelector srcIndex) const

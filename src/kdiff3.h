@@ -441,7 +441,7 @@ public Q_SLOTS:
     DiffList m_diffList23;
     DiffList m_diffList13;
     Diff3LineList m_diff3LineList;
-    Diff3LineVector m_diff3LineVector;
+    Diff3LineVector mDiff3LineVector;
     //ManualDiffHelpDialog* m_pManualDiffHelpDialog;
     ManualDiffHelpList m_manualDiffHelpList;
 

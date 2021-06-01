@@ -114,7 +114,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     //insure merge result window never has stale iterators.
     if(m_pMergeResultWindow) m_pMergeResultWindow->clearMergeList();
     m_diff3LineList.clear();
-    m_diff3LineVector.clear();
+    mDiff3LineVector.clear();
 
     if(bLoadFiles)
     {
@@ -308,13 +308,13 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
     if(errors.isEmpty() && m_sd1->isText() && m_sd2->isText())
     {
-        Diff3Line::m_pDiffBufferInfo->init(&m_diff3LineList, &m_diff3LineVector,
+        Diff3Line::m_pDiffBufferInfo->init(&m_diff3LineList,
                                m_sd1->getLineDataForDiff(),
                                m_sd2->getLineDataForDiff(),
                                m_sd3->getLineDataForDiff());
 
         m_diff3LineList.calcWhiteDiff3Lines(m_sd1->getLineDataForDiff(), m_sd2->getLineDataForDiff(), m_sd3->getLineDataForDiff(), m_pOptions->ignoreComments());
-        m_diff3LineList.calcDiff3LineVector(m_diff3LineVector);
+        m_diff3LineList.calcDiff3LineVector(mDiff3LineVector);
     }
 
     // Calc needed lines for display
@@ -364,15 +364,15 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
     {
         const ManualDiffHelpList* pMDHL = &m_manualDiffHelpList;
         m_pDiffTextWindow1->init(m_sd1->getAliasName(), m_sd1->getEncoding(), m_sd1->getLineEndStyle(),
-                                 m_sd1->getLineDataForDisplay(), m_sd1->getSizeLines(), &m_diff3LineVector, pMDHL);
+                                 m_sd1->getLineDataForDisplay(), m_sd1->getSizeLines(), &mDiff3LineVector, pMDHL);
         m_pDiffTextWindowFrame1->init();
 
         m_pDiffTextWindow2->init(m_sd2->getAliasName(), m_sd2->getEncoding(), m_sd2->getLineEndStyle(),
-                                 m_sd2->getLineDataForDisplay(), m_sd2->getSizeLines(), &m_diff3LineVector, pMDHL);
+                                 m_sd2->getLineDataForDisplay(), m_sd2->getSizeLines(), &mDiff3LineVector, pMDHL);
         m_pDiffTextWindowFrame2->init();
 
         m_pDiffTextWindow3->init(m_sd3->getAliasName(), m_sd3->getEncoding(), m_sd3->getLineEndStyle(),
-                                 m_sd3->getLineDataForDisplay(), m_sd3->getSizeLines(), &m_diff3LineVector, pMDHL);
+                                 m_sd3->getLineDataForDisplay(), m_sd3->getSizeLines(), &mDiff3LineVector, pMDHL);
         m_pDiffTextWindowFrame3->init();
 
         m_pDiffTextWindowFrame3->setVisible(m_bTripleDiff);
@@ -714,7 +714,7 @@ void KDiff3App::slotFinishMainInit()
 
     int d3l = -1;
     if(!m_manualDiffHelpList.empty())
-        d3l = m_manualDiffHelpList.front().calcManualDiffFirstDiff3LineIdx(m_diff3LineVector);
+        d3l = m_manualDiffHelpList.front().calcManualDiffFirstDiff3LineIdx(mDiff3LineVector);
     if(d3l >= 0 && m_pDiffTextWindow1)
     {
         int line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(d3l);
@@ -1462,7 +1462,7 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
         }
         else
         {
-            m_neededLines = m_diff3LineVector.size();
+            m_neededLines = m_diff3LineList.size();
             if(m_pDiffTextWindow1)
                 m_pDiffTextWindow1->recalcWordWrap(false, 0, 0);
             if(m_pDiffTextWindow2)

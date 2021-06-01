@@ -136,7 +136,7 @@ class DiffTextWindowData
     [[nodiscard]] bool isThreeWay() const { return KDiff3App::isTripleDiff(); };
     const QString& getFileName() { return m_filename; }
 
-    const Diff3LineVector* getDiff3LineVector() { return m_pDiff3LineVector; }
+    const Diff3LineVector* getDiff3LineVector() { return mDiff3LineVector; }
 
     const QSharedPointer<Options>& getOptions() { return m_pOptions; }
 
@@ -153,7 +153,7 @@ class DiffTextWindowData
     bool m_bWordWrap = false;
     int m_delayedDrawTimer = 0;
 
-    const Diff3LineVector* m_pDiff3LineVector = nullptr;
+    const Diff3LineVector* mDiff3LineVector = nullptr;
     Diff3WrapLineVector m_diff3WrapLineVector;
     const ManualDiffHelpList* m_pManualDiffHelpList = nullptr;
     QList<QVector<WrapLineCacheData>> m_wrapLineCacheList;
@@ -243,7 +243,7 @@ void DiffTextWindow::init(
     d->m_filename = filename;
     d->m_pLineData = pLineData;
     d->m_size = size;
-    d->m_pDiff3LineVector = pDiff3LineVector;
+    d->mDiff3LineVector = pDiff3LineVector;
     d->m_diff3WrapLineVector.clear();
     d->m_pManualDiffHelpList = pManualDiffHelpList;
 
@@ -292,7 +292,7 @@ void DiffTextWindow::reset()
 {
     d->m_pLineData = nullptr;
     d->m_size = 0;
-    d->m_pDiff3LineVector = nullptr;
+    d->mDiff3LineVector = nullptr;
     d->m_filename = "";
     d->m_diff3WrapLineVector.clear();
 }
@@ -1264,7 +1264,7 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int beginL
         }
         else
         {
-            d3l = (*m_pDiff3LineVector)[line];
+            d3l = (*mDiff3LineVector)[line];
         }
         DiffList* pFineDiff1;
         DiffList* pFineDiff2;
@@ -1294,10 +1294,10 @@ QString DiffTextWindowData::getString(LineIndex d3lIdx)
 {
     assert(!(m_pLineData != nullptr && m_pLineData->empty() && m_size != 0));
 
-    if(m_pLineData == nullptr || m_pLineData->empty() || d3lIdx < 0 || d3lIdx >= m_pDiff3LineVector->size())
+    if(m_pLineData == nullptr || m_pLineData->empty() || d3lIdx < 0 || d3lIdx >= mDiff3LineVector->size())
         return QString();
 
-    const Diff3Line* d3l = (*m_pDiff3LineVector)[d3lIdx];
+    const Diff3Line* d3l = (*mDiff3LineVector)[d3lIdx];
     DiffList* pFineDiff1;
     DiffList* pFineDiff2;
     ChangeFlags changed = NoChange;
@@ -1553,12 +1553,12 @@ int DiffTextWindowData::convertLineOnScreenToLineInSource(int lineOnScreen, e_Co
     {
         if(coordType == eWrapCoords) return lineOnScreen;
         int d3lIdx = m_pDiffTextWindow->convertLineToDiff3LineIdx(lineOnScreen);
-        if(!bFirstLine && d3lIdx >= m_pDiff3LineVector->size())
-            d3lIdx = m_pDiff3LineVector->size() - 1;
+        if(!bFirstLine && d3lIdx >= mDiff3LineVector->size())
+            d3lIdx = mDiff3LineVector->size() - 1;
         if(coordType == eD3LLineCoords) return d3lIdx;
-        while(!line.isValid() && d3lIdx < m_pDiff3LineVector->size() && d3lIdx >= 0)
+        while(!line.isValid() && d3lIdx < mDiff3LineVector->size() && d3lIdx >= 0)
         {
-            const Diff3Line* d3l = (*m_pDiff3LineVector)[d3lIdx];
+            const Diff3Line* d3l = (*mDiff3LineVector)[d3lIdx];
             if(m_winIdx == e_SrcSelector::A) line = d3l->getLineA();
             if(m_winIdx == e_SrcSelector::B) line = d3l->getLineB();
             if(m_winIdx == e_SrcSelector::C) line = d3l->getLineC();
