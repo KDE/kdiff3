@@ -548,7 +548,8 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
             }
             if(i->firstLine(wIdx).isValid()) // Current item is not empty -> move it to the empty place
             {
-                std::swap(iEmpty, i);
+                std::swap(iEmpty->firstLine(wIdx), i->firstLine(wIdx));
+                std::swap(iEmpty->lastLine(wIdx), i->lastLine(wIdx));
                 ++iEmpty;
             }
         }
