@@ -761,7 +761,7 @@ void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHe
         e_SrcSelector wi = e_SrcSelector::None;
         for(; i3 != end(); ++i3)
         {
-            for(wi = e_SrcSelector::A; wi <= e_SrcSelector::Max; wi=nextSelector(wi))
+            for(wi = e_SrcSelector::A; wi != e_SrcSelector::Invalid; wi=nextSelector(wi))
             {
                 if(i3->getLineInFile(wi).isValid() && iMDHL->firstLine(wi) == i3->getLineInFile(wi))
                     break;
