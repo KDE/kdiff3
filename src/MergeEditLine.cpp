@@ -194,10 +194,9 @@ void MergeLine::mergeOneLine(const Diff3Line &diffRec, bool &bLineRemoved, bool 
 void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreeway)
 {
     LineIndex lineIdx = 0;
-    Diff3LineList::const_iterator it;
-    for(it = diff3List.begin(); it != diff3List.end(); ++it)
+    for(auto it = diff3List.cbegin(); it != diff3List.cend(); ++it)
     {
-        const Diff3Line d = *it;
+        const auto &d = *it;
         MergeLine ml;
         bool bLineRemoved;
 
