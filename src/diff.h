@@ -404,10 +404,10 @@ struct HistoryRange
 
 struct Diff3WrapLine
 {
-    Diff3Line* pD3L;
-    int diff3LineIndex;
-    int wrapLineOffset;
-    int wrapLineLength;
+    Diff3Line* pD3L = nullptr;
+    int diff3LineIndex = 0;
+    int wrapLineOffset = 0;
+    int wrapLineLength = 0;
 };
 
 typedef QVector<Diff3WrapLine> Diff3WrapLineVector;
