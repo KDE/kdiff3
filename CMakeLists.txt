@@ -79,7 +79,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     #Adjust clang specific  warnings
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -fexceptions")
     set(CLANG_WARNING_FLAGS "-Wno-undef -Wno-trigraphs -Wno-invalid-pp-token -Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing -fstack-protector-all")
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${CLANG_WARNING_FLAGS}")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
@@ -94,9 +94,7 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8.0)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fstack-check")
     endif()
-    if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 7.0)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-trigraphs -Wduplicated-cond -Wduplicated-branches -Wshadow")
-    endif()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-trigraphs -Wduplicated-cond -Wduplicated-branches -Wshadow -fexceptions")
 endif()
 
 #new in cmake 3.6+ integrate clang-tidy
