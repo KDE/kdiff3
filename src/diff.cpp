@@ -775,12 +775,12 @@ void Diff3LineList::correctManualDiffAlignment(ManualDiffHelpList* pManualDiffHe
             e_SrcSelector wi2 = e_SrcSelector::None;
             for(; i3 != end(); ++i3)
             {
-                for(wi2 = e_SrcSelector::A; wi2 <= e_SrcSelector::C; wi2 = nextSelector(wi2))
+                for(wi2 = e_SrcSelector::A; wi2 != e_SrcSelector::Invalid; wi2 = nextSelector(wi2))
                 {
                     if(wi != wi2 && i3->getLineInFile(wi2).isValid() && iMDHL->firstLine(wi2) == i3->getLineInFile(wi2))
                         break;
                 }
-                if(wi2 > e_SrcSelector::C)
+                if(wi2 == e_SrcSelector::Invalid)
                 { // Not yet found
                     // Move both others up
                     Diff3Line d3l;
