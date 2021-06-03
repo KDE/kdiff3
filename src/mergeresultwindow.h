@@ -219,7 +219,7 @@ class MergeResultWindow: public QWidget
         eEnd
     };
     void go(e_Direction eDir, e_EndPoint eEndPoint);
-    void calcIteratorFromLineNr(
+    bool calcIteratorFromLineNr(
         LineRef::LineType line,
         MergeLineListImp::iterator& mlIt,
         MergeEditLineList::iterator& melIt);
