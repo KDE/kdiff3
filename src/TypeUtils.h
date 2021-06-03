@@ -30,7 +30,6 @@ using FileOffset = quint64;
 using QtNumberType = qint32;//Qt insists on one type for all but does not create a typedef for it.
 
 using PtrDiffRef = size_t;
-// using SafeInt32 = boost::safe_numerics::safe<int>;
 
 #ifndef Q_CC_MSVC
 template<typename T> using SafeInt32 = boost::safe_numerics::safe<T, boost::safe_numerics::native>;
