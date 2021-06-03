@@ -31,10 +31,9 @@ using QtNumberType = qint32;//Qt insists on one type for all but does not create
 
 using PtrDiffRef = size_t;
 // using SafeInt32 = boost::safe_numerics::safe<int>;
-using namespace boost;
 
 #ifndef Q_CC_MSVC
-template<typename T> using SafeInt32 = safe_numerics::safe<T, safe_numerics::native>;
+template<typename T> using SafeInt32 = boost::safe_numerics::safe<T, boost::safe_numerics::native>;
 #else
 template<typename T> using SafeInt32 = T;
 #endif
