@@ -11,7 +11,13 @@
 #include <type_traits>
 #include <limits>
 
+/*
+    MSVC is not compatiable with boost::safe_numerics it creates duplicate symbols as this is specfic to MSCV blacklist it
+    I don't have time to deal with wierd link-time wonkyness.
+*/
+#ifndef Q_CC_MSVC
 #include <boost/safe_numerics/safe_integer.hpp>
+#endif
 
 #include <QtGlobal>
 
@@ -27,7 +33,11 @@ using PtrDiffRef = size_t;
 // using SafeInt32 = boost::safe_numerics::safe<int>;
 using namespace boost;
 
+#ifndef Q_CC_MSVC
 template<typename T> using SafeInt32 = safe_numerics::safe<T, safe_numerics::native>;
+#else
+template<typename T> using SafeInt32 = T;
+#endif
 
 #define TYPE_MAX(x) std::numeric_limits<x>::max()
 #define TYPE_MIN(x) std::numeric_limits<x>::min()
