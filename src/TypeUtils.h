@@ -10,9 +10,9 @@
 #include <stdlib.h>
 #include <type_traits>
 #include <limits>
-
+#ifndef Q_OS_WIN
 #include <boost/safe_numerics/safe_integer.hpp>
-
+#endif
 #include <QtGlobal>
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
@@ -25,7 +25,12 @@ using QtNumberType = qint32;//Qt insists on one type for all but does not create
 
 using PtrDiffRef = size_t;
 
+// Don't use boost::safe_numerics on windows until boost 1.71 is part of craft. It has a link-time header bug.
+#ifndef Q_OS_WIN
 template<typename T> using SafeInt32 = boost::safe_numerics::safe<T, boost::safe_numerics::native>;
+#else
+template<typename T> using SafeInt32 = qint32;
+#endif
 
 #define TYPE_MAX(x) std::numeric_limits<x>::max()
 #define TYPE_MIN(x) std::numeric_limits<x>::min()
