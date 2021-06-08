@@ -37,8 +37,8 @@ ecm_setup_version(1.9.70 VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DI
 # Some older versions on boost contain a bug that prevents compiling gcc offers a built-in workaround
 # but that isn't enough to ship as clang has no such workaround. 1.65 is known to be affected.
 #
-# Don't use safe numerics on MSVC until boost 1.71 is part of craft.
-find_package(Boost 1.69 REQUIRED)
+# 1.71 or later is required for safe_numerics to work on MSVC otherwise we get a link-time error.
+find_package(Boost 1.71 REQUIRED)
 
 #needed on craft and possiablely other custom setups.
 include_directories(${Boost_INCLUDE_DIRS})
