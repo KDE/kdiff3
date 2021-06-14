@@ -2695,6 +2695,8 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
             }
         }
     }
+    // At the end of the stream, needs a newline
+    textOutStream << lineFeed;
     textOutStream.flush();
     bool bSuccess = file.writeFile(dataArray.data(), dataArray.size());
     if(!bSuccess)
