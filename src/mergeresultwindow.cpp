@@ -2964,6 +2964,9 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
         textOutStream.setGenerateByteOrderMark(true); // Only for UTF-16
     textOutStream.setCodec(pEncoding);
 
+    // Determine the line feed for this file
+    const QString lineFeed(eLineEndStyle == eLineEndStyleDos ? QString("\r\n") : QString("\n"));
+
     int line = 0;
     MergeLineList::iterator mlIt = m_mergeLineList.begin();
     for(mlIt = m_mergeLineList.begin(); mlIt != m_mergeLineList.end(); ++mlIt)
@@ -2976,18 +2979,11 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
 
             if(mel.isEditableText())
             {
-                QString str = mel.getString(m_pldA, m_pldB, m_pldC);
+                const QString str = mel.getString(m_pldA, m_pldB, m_pldC);
 
                 if(line > 0) // Prepend line feed, but not for first line
                 {
-                    if(eLineEndStyle == eLineEndStyleDos)
-                    {
-                        str.prepend("\r\n");
-                    }
-                    else
-                    {
-                        str.prepend("\n");
-                    }
+                    textOutStream << lineFeed;
                 }
 
                 textOutStream << str;
