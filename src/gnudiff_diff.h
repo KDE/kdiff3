@@ -17,6 +17,8 @@
 #include "LineRef.h"
 #include "Utils.h"
 
+#include <QtGlobal>
+
 #include <stdint.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -31,7 +33,6 @@
 #include <stdio.h>
 
 #include <QString>
-#include <QtGlobal>
 
 /* The integer type of a line number. */
 typedef qint64 GNULineRef;

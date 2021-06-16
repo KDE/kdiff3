@@ -7,6 +7,7 @@
 */
 
 #include "diff.h"
+#include <QtGlobal>
 
 #include "gnudiff_diff.h"
 #include "Logging.h"
@@ -25,7 +26,6 @@
 #include <KMessageBox>
 #endif
 
-#include <QtGlobal>
 #include <QRegularExpression>
 #include <QSharedPointer>
 #include <QTextStream>

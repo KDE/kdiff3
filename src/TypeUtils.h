@@ -7,6 +7,8 @@
 #ifndef TYPEUTILS_H
 #define TYPEUTILS_H
 
+#include <QtGlobal>
+
 #include <stdlib.h>
 #include <type_traits>
 #include <limits>
@@ -16,8 +18,6 @@
 #ifndef Q_OS_WIN
 #include <boost/safe_numerics/safe_integer.hpp>
 #endif
-
-#include <QtGlobal>
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 using QtSizeType = qint32;

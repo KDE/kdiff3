@@ -7,12 +7,12 @@
 */
 
 #include "selection.h"
-
 #include "TypeUtils.h"
+
+#include <QtGlobal>
 
 #include <utility>   // for swap
 
-#include <QtGlobal>
 
 qint32 Selection::firstPosInLine(LineRef l) const
 {
