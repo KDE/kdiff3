@@ -61,6 +61,9 @@ find_package(
     COMPONENTS
     I18n
     CoreAddons
+    Parts
+    WidgetsAddons
+    Config
     Crash
     OPTIONAL_COMPONENTS
     DocTools
@@ -75,8 +78,6 @@ list(GET VERSION_LIST 2 KF_VERSION_PATCH)
 
 option(ENABLE_AUTO "Enable kdiff3's '--auto' flag" ON)
 option(ENABLE_CLANG_TIDY "Run clang-tidy if available and cmake version >=3.6" OFF)
-
-set(KDiff3_LIBRARIES ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons )
 
 set(CMAKE_CXX_STANDARD 17)
 

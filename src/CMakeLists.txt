@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 ########### kdiff3 KPart ###############
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n Parts WidgetsAddons)
+
 
 set(kdiff3part_PART_SRCS
    kdiff3_part.cpp
@@ -49,13 +49,12 @@ ki18n_wrap_ui(kdiff3part_PART_SRCS
 add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
 
 set_target_properties(kdiff3part PROPERTIES DEFINE_SYMBOL KDIFF3_PART)
-target_link_libraries(kdiff3part ${KDiff3_LIBRARIES} KF5::Parts KF5::Crash)
+target_link_libraries(kdiff3part ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons KF5::Parts KF5::Crash)
 target_compile_definitions(kdiff3part PRIVATE -DTRANSLATION_DOMAIN=\"kdiff3\")
 
 install(TARGETS kdiff3part DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts )
 
 ########### kdiff3 executable ###############
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts WidgetsAddons Config)
 
 set(kdiff3_SRCS
    main.cpp
@@ -70,7 +69,7 @@ endif()
 include(icons/CMakeLists.txt)
 add_executable(kdiff3 ${kdiff3_SRCS})
 
-target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::I18n KF5::Parts KF5::Crash ${KDiff3_LIBRARIES} )
+target_link_libraries(kdiff3 KF5::ConfigCore KF5::ConfigGui KF5::Parts KF5::Crash ${Qt5PrintSupport_LIBRARIES} KF5::I18n KF5::CoreAddons )
 
 # See https://cmake.org/cmake/help/v3.15/prop_tgt/MACOSX_BUNDLE_INFO_PLIST.html
 if(APPLE)
@@ -102,4 +101,3 @@ install( FILES  kdiff3_shell.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/kdiff3 )
 #install( PROGRAMS  kdiff3.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( PROGRAMS org.kde.kdiff3.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES org.kde.kdiff3.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR} )
-
