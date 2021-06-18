@@ -596,9 +596,9 @@ void DiffList::runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef
     pp.setCurrent(0);
 
     clear();
-    if(p1 == nullptr || (*p1)[index1].getLine() == nullptr || p2 == nullptr || (*p2)[index2].getLine() == nullptr || size1 == 0 || size2 == 0)
+    if(p1 == nullptr || (*p1)[index1].getBuffer() == nullptr || p2 == nullptr || (*p2)[index2].getBuffer() == nullptr || size1 == 0 || size2 == 0)
     {
-        if(p1 != nullptr && p2 != nullptr && (*p1)[index1].getLine() == nullptr && (*p2)[index2].getLine() == nullptr && size1 == size2)
+        if(p1 != nullptr && p2 != nullptr && (*p1)[index1].getBuffer() == nullptr && (*p2)[index2].getBuffer() == nullptr && size1 == size2)
             push_back(Diff(size1, 0, 0));
         else
         {
@@ -613,9 +613,9 @@ void DiffList::runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef
         memset(&comparisonInput, 0, sizeof(comparisonInput));
         comparisonInput.parent = nullptr;
         comparisonInput.file[0].buffer = (*p1)[index1].getBuffer()->unicode() + (*p1)[index1].getOffset();                                                      //ptr to buffer
-        comparisonInput.file[0].buffered = ((*p1)[size1].getOffset() - 1); // size of buffer
+        comparisonInput.file[0].buffered = ((*p1)[index1 + size1 - 1].getOffset() + (*p1)[index1 + size1 - 1].size() - (*p1)[index1].getOffset()); // size of buffer
         comparisonInput.file[1].buffer = (*p2)[index2].getBuffer()->unicode() + (*p2)[index2].getOffset();                                                      //ptr to buffer
-        comparisonInput.file[1].buffered = ((*p2)[size2].getOffset() - 1); // size of buffer
+        comparisonInput.file[1].buffered = ((*p2)[index2 + size2 - 1].getOffset() + (*p2)[index2 + size2 - 1].size() - (*p2)[index2].getOffset()); // size of buffer
 
         gnuDiff.ignore_white_space = GnuDiff::IGNORE_ALL_SPACE; // I think nobody needs anything else ...
         gnuDiff.bIgnoreWhiteSpace = true;
