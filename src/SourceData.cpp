@@ -680,7 +680,10 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         lastOffset = m_unicodeBuf->length();
     }
 
+    mHasEOLTermination = m_v->size() >= 2 && ((*m_v)[m_v->size() - 1].getLine() == ("\n")
+                              && (*m_v)[m_v->size() - 2].getLine() == ("\n"));
     m_v->push_back(LineData(m_unicodeBuf, lastOffset));
+
     assert(m_v->size() < 2 || (*m_v)[m_v->size() - 1].getOffset() != (*m_v)[m_v->size() - 2].getOffset());
 
     m_bIsText = true;

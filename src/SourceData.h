@@ -59,6 +59,8 @@ class SourceData
 
     Q_REQUIRED_RESULT QTextCodec* getEncoding() const { return m_pEncoding; }
     Q_REQUIRED_RESULT e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
+    [[nodiscard]] inline bool hasEOLTermiantion() { return m_normalData.hasEOLTermiantion(); }
+
 
     Q_REQUIRED_RESULT const QStringList& getErrors() const { return mErrors; }
 
@@ -94,6 +96,7 @@ class SourceData
         bool m_bIsText = false;
         bool m_bIncompleteConversion = false;
         e_LineEndStyle m_eLineEndStyle = eLineEndStyleUndefined;
+        bool mHasEOLTermination = false;
 
       public:
         bool readFile(FileAccess& file);
@@ -107,6 +110,7 @@ class SourceData
         [[nodiscard]] bool isEmpty() const { return mDataSize == 0; }
 
         [[nodiscard]] bool isText() const { return m_bIsText || isEmpty(); }
+        [[nodiscard]] inline bool hasEOLTermiantion() { return m_bIsText && mHasEOLTermination; }
 
         [[nodiscard]] inline qint64 lineCount() const { return mLineCount; }
         [[nodiscard]] inline qint64 byteCount() const { return mDataSize; }
