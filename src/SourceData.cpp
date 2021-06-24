@@ -618,7 +618,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
             return false;
         }
 
-        ts >> curChar;
+        curChar = ts.read(1).unicode()[0];
 
         quint32 firstNonwhite = 0;
         bool    foundNonWhite = false;
@@ -645,7 +645,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
             if(ts.atEnd())
                 break;
 
-            ts >> curChar;
+            curChar = ts.read(1).unicode()[0];
         }
 
         ++lineCount;
@@ -668,7 +668,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
                     if(m_pBuf[lastOffset + j] == '\n')
                     {
-                        ts >> curChar;
+                        curChar = ts.read(1).unicode()[0];
                         vOrigDataLineEndStyle.push_back(eLineEndStyleDos);
                         lastOffset = ts.pos();
                         break;
@@ -685,13 +685,33 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
         //kdiff3 internally uses only unix style endings for simplicity.
         m_v.push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isSkipable(), parser->isPureComment()));
-        m_unicodeBuf->append(line).append('\n');
+        //The last line may not have an EOL mark. In that case don't add one to our buffer.
+        m_unicodeBuf->append(line);
+        if(curChar == '\n')
+        {
+            m_unicodeBuf->append('\n');
+        }
 
         lastOffset = m_unicodeBuf->length();
     }
 
     m_v.push_back(LineData(m_unicodeBuf, lastOffset));
-    Q_ASSERT(m_v.size() < 2 || m_v[m_v.size() - 1].getOffset() != m_v[m_v.size() - 2].getOffset());
+    /*
+        Process trailing new line as if there were a blank non-terminated line after it.
+        But do nothing to the data buffer since this a phantom line needed for internal purposes.
+    */
+    if(curChar == '\n')
+    {
+        ++lineCount;
+
+        parser->processLine("");
+        m_v.push_back(LineData(m_unicodeBuf, lastOffset, 0, 0, parser->isSkipable(), parser->isPureComment()));
+    }
+
+    m_v.push_back(LineData(m_unicodeBuf, lastOffset));
+
+    //Check if we have two identical offsets at the end. Indicates a bug in the read loop.
+    Q_ASSERT(m_v.size() < 2 || m_v[m_v.size() - 2].getOffset() != m_v[m_v.size() - 3].getOffset());
 
     m_bIsText = true;
 
@@ -782,7 +802,7 @@ QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, qint64& ski
     QByteArray s;
     /*
         We don't need the whole file here just the header.
-]    */
+    */
     if(size <= 5000)
         s = QByteArray(buf, (int)size);
     else
