@@ -648,7 +648,6 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
             curChar = ts.read(1).unicode()[0];
         }
 
-        ++lineCount;
 
         switch(curChar.unicode())
         {
@@ -683,12 +682,13 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         if(removeComments)
             parser->removeComment(line);
 
-        //kdiff3 internally uses only unix style endings for simplicity.
+        ++lineCount;
         m_v.push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isSkipable(), parser->isPureComment()));
         //The last line may not have an EOL mark. In that case don't add one to our buffer.
         m_unicodeBuf->append(line);
-        if(curChar == '\n')
+        if(curChar == '\n' || curChar == '\r')
         {
+            //kdiff3 internally uses only unix style endings for simplicity.
             m_unicodeBuf->append('\n');
         }
 
@@ -698,7 +698,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         Process trailing new line as if there were a blank non-terminated line after it.
         But do nothing to the data buffer since this a phantom line needed for internal purposes.
     */
-    if(curChar == '\n')
+    if(curChar == '\n' || curChar == '\r')
     {
         ++lineCount;
 
