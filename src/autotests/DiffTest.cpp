@@ -66,12 +66,12 @@ class DiffTest: public QObject
         QVERIFY(!simData.isEmpty());
         QVERIFY(simData.hasData());
         QVERIFY(simData.getEncoding() != nullptr);
-        QCOMPARE(simData.getSizeLines(), 4);
+        QCOMPARE(simData.getSizeLines(), 5);
         QCOMPARE(simData.getSizeBytes(), file.size());
 
         const QVector<LineData>* lineData = simData.getLineDataForDisplay();
         QVERIFY(lineData != nullptr);
-        QCOMPARE(lineData->size() - 1, 4);
+        QCOMPARE(lineData->size() - 1, 5);
         QVERIFY(!(*lineData)[0].whiteLine());
         QVERIFY((*lineData)[0].isSkipable());
         QVERIFY((*lineData)[0].isPureComment());
@@ -87,6 +87,10 @@ class DiffTest: public QObject
         QVERIFY(!(*lineData)[3].whiteLine());
         QVERIFY(!(*lineData)[3].isPureComment());
         QVERIFY(!(*lineData)[3].isSkipable());
+
+        QVERIFY((*lineData)[4].whiteLine());
+        QVERIFY(!(*lineData)[4].isPureComment());
+        QVERIFY(!(*lineData)[4].isSkipable());
    }
 
 };

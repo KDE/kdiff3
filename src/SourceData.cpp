@@ -694,8 +694,6 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
         lastOffset = m_unicodeBuf->length();
     }
-
-    m_v.push_back(LineData(m_unicodeBuf, lastOffset));
     /*
         Process trailing new line as if there were a blank non-terminated line after it.
         But do nothing to the data buffer since this a phantom line needed for internal purposes.
