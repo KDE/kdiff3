@@ -612,6 +612,8 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t i
     }
     else
     {
+        assert((size_t)size1 < p1->size() && (size_t)size2 < p2->size());
+
         GnuDiff::comparison comparisonInput;
         memset(&comparisonInput, 0, sizeof(comparisonInput));
         comparisonInput.parent = nullptr;

@@ -27,7 +27,7 @@ class SourceData
   public:
     void setOptions(const QSharedPointer<Options> &pOptions);
 
-    Q_REQUIRED_RESULT LineRef getSizeLines() const;
+    Q_REQUIRED_RESULT LineCount getSizeLines() const;
     Q_REQUIRED_RESULT qint64 getSizeBytes() const;
     Q_REQUIRED_RESULT const char* getBuf() const;
     Q_REQUIRED_RESULT const QString& getText() const;
@@ -66,7 +66,7 @@ class SourceData
 
     void setEncoding(QTextCodec* pEncoding);
 
-  private:
+  protected:
     bool convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
                                 const QString& fileNameOut, QTextCodec* pCodecOut);
 
