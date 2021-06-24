@@ -607,7 +607,7 @@ void DiffList::runDiff(const QVector<LineData>* p1, const qint32 index1, LineRef
     }
     else
     {
-        assert((size_t)size1 < p1->size() && (size_t)size2 < p2->size());
+        assert(size1 < p1->size() && size2 < p2->size());
 
         GnuDiff::comparison comparisonInput;
         memset(&comparisonInput, 0, sizeof(comparisonInput));
