@@ -196,7 +196,7 @@ void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreew
     LineIndex lineIdx = 0;
     for(auto it = diff3List.cbegin(); it != diff3List.cend(); ++it)
     {
-        const auto &d = *it;
+        const Diff3Line &d = *it;
         MergeLine ml;
         bool bLineRemoved;
 
