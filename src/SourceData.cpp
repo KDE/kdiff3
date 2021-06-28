@@ -594,15 +594,12 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
     const QByteArray ba = QByteArray::fromRawData(m_pBuf.get() + skipBytes, (QtSizeType)(mDataSize - skipBytes));
     QTextStream ts(ba, QIODevice::ReadOnly); // Don't use text mode we need to see the actual line ending.
-    QTextStream ts2(ba, QIODevice::ReadOnly);
     ts.setCodec(pEncoding);
     ts.setAutoDetectUnicode(false);
-    ts2.setCodec(pEncoding);
-    ts2.setAutoDetectUnicode(false);
-    QString s = ts2.readAll();
+
     m_bIncompleteConversion = false;
     m_unicodeBuf->clear();
-    //*m_unicodeBuf = ts.readAll();
+
     assert(m_unicodeBuf->length() == 0);
 
     mHasEOLTermination = false;
@@ -705,16 +702,9 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         parser->processLine("");
         m_v->push_back(LineData(m_unicodeBuf, lastOffset, 0, 0, parser->isSkipable(), parser->isPureComment()));
     }
+    assert(m_v->size() < 2 || (*m_v)[m_v->size() - 1].getOffset() != (*m_v)[m_v->size() - 2].getOffset());
 
     m_v->push_back(LineData(m_unicodeBuf, lastOffset));
-    //Insure GNU:Diff can access one byte passed the end of the file. This is quick fix workaround.
-    //TODO: Fix this properly we should not be sending GNU:Diff invalid offsets.
-    //m_unicodeBuf->append('\u0000');
-
-    //Check if we have two identical offsets at the end. Indicates a bug in the read loop.
-    assert(m_v->size() < 2 || (*m_v)[m_v->size() - 2].getOffset() != (*m_v)[m_v->size() - 3].getOffset());
-    //Validate
-    //assert(m_v->size() < 1 || (quint64)(*m_v)[m_v->size() - 2].getOffset() == lastOffset);
 
     m_bIsText = true;
 
