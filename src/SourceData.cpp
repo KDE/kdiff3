@@ -559,7 +559,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
         for(qint32 i = 0; (qint64)i < vSize; ++i)
         {
             //TODO: Phase this out. We should not be messing with these flags outside the parser.
-            (*m_normalData.m_v)[i].setSkipable((*m_lmppData.m_v)[i].isPureComment());
+            (*m_normalData.m_v)[i].setPureComment((*m_lmppData.m_v)[i].isPureComment());
             (*m_normalData.m_v)[i].setSkipable((*m_lmppData.m_v)[i].isSkipable());
         }
     }
