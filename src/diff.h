@@ -208,8 +208,8 @@ class DiffBufferInfo
 enum class IgnoreFlag
 {
     none = 0,
-    ignoreWhiteSpace,
-    ignoreComments
+    ignoreWhiteSpace = 1 << 1,
+    ignoreComments = 1 << 2,
 };
 
 Q_DECLARE_FLAGS(IgnoreFlags, IgnoreFlag);
