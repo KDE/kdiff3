@@ -705,11 +705,10 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         parser->processLine("");
         m_v.push_back(LineData(m_unicodeBuf, lastOffset, 0, 0, parser->isSkipable(), parser->isPureComment()));
     }
+    //Check if we have two identical offsets at the end. Indicates a bug in the read loop.
+    Q_ASSERT(m_v.size() < 2 || m_v[m_v.size() - 1].getOffset() != m_v[m_v.size() - 2].getOffset());
 
     m_v.push_back(LineData(m_unicodeBuf, lastOffset));
-
-    //Check if we have two identical offsets at the end. Indicates a bug in the read loop.
-    Q_ASSERT(m_v.size() < 2 || m_v[m_v.size() - 2].getOffset() != m_v[m_v.size() - 3].getOffset());
 
     m_bIsText = true;
 
