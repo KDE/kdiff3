@@ -26,7 +26,7 @@
 #include <KPluginLoader>
 #include <KProcess>
 
-static std::unique_ptr<QStringList> s_pHistory;
+std::unique_ptr<QStringList> s_pHistory;
 
 class KDiff3PluginHistory
 {
