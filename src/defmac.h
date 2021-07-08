@@ -8,7 +8,7 @@
   This header is defined macros of general purpose.
 
 *****************************************************************************/
-//clazy:excludeall=connect-non-signal,incorrect-emit
+
 
 #ifndef DEFMAC_H
 #define DEFMAC_H
