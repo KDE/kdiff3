@@ -5,7 +5,9 @@
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
+
 #include "kdiff3_shell.h"
+#include "UTF8BOMCodec.h"
 #include "version.h"
 
 #include "Logging.h"
@@ -79,6 +81,13 @@ void initialiseCmdLineArgs(QCommandLineParser* cmdLineParser)
 int main(int argc, char* argv[])
 {
     constexpr QLatin1String appName("kdiff3", sizeof("kdiff3") - 1);
+    /*
+        QTextCodec auto registers text codecs in its constructor.
+        Do this now because we only need one codec object.
+        This object is Qt's domain once created and must be on the heap.
+    */
+    const UTF8BOMCodec *textCodec = new UTF8BOMCodec();
+    Q_UNUSED(textCodec)
 
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QApplication app(argc, argv); // KAboutData and QCommandLineParser depend on this being setup.
