@@ -113,7 +113,7 @@ class DirectoryMergeWindow : public QTreeView
 
 Q_SIGNALS:
    void startDiffMerge(QStringList &errors, const QString& fn1, const QString& fn2, const QString& fn3, const QString& ofn, const QString&, const QString&, const QString&, TotalDiffStatus*);
-   void updateAvailabilities();//TODO: This should not overload an existing signal from qt.
+   void updateAvailabilities();
    void statusBarMessage(const QString& msg);
 protected Q_SLOTS:
    void onDoubleClick(const QModelIndex&);
