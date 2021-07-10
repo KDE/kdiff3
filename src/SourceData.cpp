@@ -94,7 +94,7 @@ bool SourceData::isValid() const
     return isEmpty() || hasData();
 }
 
-void SourceData::setOptions(const QSharedPointer<Options> &pOptions)
+void SourceData::setOptions(const QSharedPointer<Options>& pOptions)
 {
     m_pOptions = pOptions;
 }
@@ -642,7 +642,6 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
             curChar = ts.read(1).unicode()[0];
         }
-
 
         switch(curChar.unicode())
         {
