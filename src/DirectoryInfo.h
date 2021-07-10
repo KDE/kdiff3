@@ -58,4 +58,6 @@ class DirectoryInfo
       FileAccess m_dirDest;
 };
 
+extern QSharedPointer<DirectoryInfo> gDirInfo;
+
 #endif

@@ -22,8 +22,6 @@
 
 #include <KLocalizedString>
 
-QSharedPointer<DirectoryInfo> MergeFileInfos::m_dirInfo = QSharedPointer<DirectoryInfo>::create();
-
 MergeFileInfos::MergeFileInfos() = default;
 
 MergeFileInfos::~MergeFileInfos()
@@ -141,7 +139,7 @@ QString MergeFileInfos::fullNameA() const
     if(existsInA())
         return getFileInfoA()->absoluteFilePath();
 
-    return m_dirInfo->dirA().absoluteFilePath() + '/' + subPath();
+    return gDirInfo->dirA().absoluteFilePath() + '/' + subPath();
 }
 
 QString MergeFileInfos::fullNameB() const
@@ -149,7 +147,7 @@ QString MergeFileInfos::fullNameB() const
     if(existsInB())
         return getFileInfoB()->absoluteFilePath();
 
-    return m_dirInfo->dirB().absoluteFilePath() + '/' + subPath();
+    return gDirInfo->dirB().absoluteFilePath() + '/' + subPath();
 }
 
 QString MergeFileInfos::fullNameC() const
@@ -157,7 +155,7 @@ QString MergeFileInfos::fullNameC() const
     if(existsInC())
         return getFileInfoC()->absoluteFilePath();
 
-    return m_dirInfo->dirC().absoluteFilePath() + '/' + subPath();
+    return gDirInfo->dirC().absoluteFilePath() + '/' + subPath();
 }
 
 void MergeFileInfos::sort(Qt::SortOrder order)
@@ -170,12 +168,12 @@ void MergeFileInfos::sort(Qt::SortOrder order)
 
 QString MergeFileInfos::fullNameDest() const
 {
-    if(m_dirInfo->destDir().prettyAbsPath() == m_dirInfo->dirC().prettyAbsPath())
+    if(gDirInfo->destDir().prettyAbsPath() == gDirInfo->dirC().prettyAbsPath())
         return fullNameC();
-    else if(m_dirInfo->destDir().prettyAbsPath() == m_dirInfo->dirB().prettyAbsPath())
+    else if(gDirInfo->destDir().prettyAbsPath() == gDirInfo->dirB().prettyAbsPath())
         return fullNameB();
     else
-        return m_dirInfo->destDir().absoluteFilePath() + '/' + subPath();
+        return gDirInfo->destDir().absoluteFilePath() + '/' + subPath();
 }
 
 bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer<Options> const &pOptions, DirectoryMergeWindow* pDMW)

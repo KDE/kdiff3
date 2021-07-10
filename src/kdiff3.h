@@ -432,8 +432,6 @@ public Q_SLOTS:
     QSharedPointer<SourceData> m_sd2 = QSharedPointer<SourceData>::create();
     QSharedPointer<SourceData> m_sd3 = QSharedPointer<SourceData>::create();
 
-    QSharedPointer<class DirectoryInfo> m_dirinfo;
-
     QString m_outputFilename;
     bool m_bDefaultFilename;
 

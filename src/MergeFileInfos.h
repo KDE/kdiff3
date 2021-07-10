@@ -108,8 +108,7 @@ class MergeFileInfos
     Q_REQUIRED_RESULT QString fullNameC() const;
     Q_REQUIRED_RESULT QString fullNameDest() const;
 
-    Q_REQUIRED_RESULT static inline QSharedPointer<DirectoryInfo> getDirectoryInfo() { return m_dirInfo; }
-    static void setDirectoryInfo(const QSharedPointer<DirectoryInfo>& dirInfo) { assert(dirInfo != nullptr); m_dirInfo = dirInfo; }
+    Q_REQUIRED_RESULT static inline QSharedPointer<DirectoryInfo> getDirectoryInfo() { return gDirInfo; }
 
     Q_REQUIRED_RESULT inline QString getDirNameA() const { return getDirectoryInfo()->dirA().prettyAbsPath(); }
     Q_REQUIRED_RESULT inline QString getDirNameB() const { return getDirectoryInfo()->dirB().prettyAbsPath(); }
@@ -173,8 +172,6 @@ class MergeFileInfos
     FileAccess* m_pFileInfoA = nullptr;
     FileAccess* m_pFileInfoB = nullptr;
     FileAccess* m_pFileInfoC = nullptr;
-
-    static QSharedPointer<DirectoryInfo> m_dirInfo;
 
     TotalDiffStatus m_totalDiffStatus;
 

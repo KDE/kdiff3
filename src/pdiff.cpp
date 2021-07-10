@@ -872,12 +872,6 @@ void KDiff3App::slotFinishDrop()
 void KDiff3App::slotFileOpen()
 {
     if(!canContinue()) return;
-    //create dummy DirectoryInfo record for first run so we don't crash.
-    if(m_dirinfo == nullptr)
-    {
-        m_dirinfo = QSharedPointer<DirectoryInfo>::create();
-        MergeFileInfos::setDirectoryInfo(m_dirinfo);
-    }
 
     if(m_pDirectoryMergeWindow->isDirectoryMergeInProgress())
     {
@@ -895,10 +889,10 @@ void KDiff3App::slotFileOpen()
     for(;;)
     {
         QPointer<OpenDialog> d = QPointer<OpenDialog>(new OpenDialog(this,
-                     QDir::toNativeSeparators(m_bDirCompare ? m_dirinfo->dirA().prettyAbsPath() : m_sd1->isFromBuffer() ? QString("") : m_sd1->getAliasName()),
-                     QDir::toNativeSeparators(m_bDirCompare ? m_dirinfo->dirB().prettyAbsPath() : m_sd2->isFromBuffer() ? QString("") : m_sd2->getAliasName()),
-                     QDir::toNativeSeparators(m_bDirCompare ? m_dirinfo->dirC().prettyAbsPath() : m_sd3->isFromBuffer() ? QString("") : m_sd3->getAliasName()),
-                     m_bDirCompare ? !m_dirinfo->destDir().prettyAbsPath().isEmpty() : !m_outputFilename.isEmpty(),
+                     QDir::toNativeSeparators(m_bDirCompare ? gDirInfo->dirA().prettyAbsPath() : m_sd1->isFromBuffer() ? QString("") : m_sd1->getAliasName()),
+                     QDir::toNativeSeparators(m_bDirCompare ? gDirInfo->dirB().prettyAbsPath() : m_sd2->isFromBuffer() ? QString("") : m_sd2->getAliasName()),
+                     QDir::toNativeSeparators(m_bDirCompare ? gDirInfo->dirC().prettyAbsPath() : m_sd3->isFromBuffer() ? QString("") : m_sd3->getAliasName()),
+                     m_bDirCompare ? !gDirInfo->destDir().prettyAbsPath().isEmpty() : !m_outputFilename.isEmpty(),
                      QDir::toNativeSeparators(m_bDefaultFilename ? QString("") : m_outputFilename), m_pOptionDialog->getOptions()));
 
         int status = d->exec();
@@ -1610,7 +1604,7 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
         m_pMainWidget->hide();
         setUpdatesEnabled(true);
 
-        (*m_dirinfo) = DirectoryInfo(f1, f2, f3, destDir);
+        (*gDirInfo) = DirectoryInfo(f1, f2, f3, destDir);
 
         bool bSuccess = m_pDirectoryMergeWindow->init(
             !m_outputFilename.isEmpty());

@@ -13,6 +13,9 @@
 
 #include <memory>
 
+//Intialize with a dummy default DirectoryInfo so we don't crash on first run.
+QSharedPointer<DirectoryInfo>  gDirInfo = QSharedPointer<DirectoryInfo>::create();
+
 bool DirectoryInfo::listDirA(const QSharedPointer<const Options>& options)
 {
     return listDir(m_dirA, m_dirListA, options);
