@@ -868,9 +868,6 @@ void KDiff3App::slotFinishDrop()
 void KDiff3App::slotFileOpen()
 {
     if(!shouldContinue()) return;
-    //create dummy DirectoryInfo record for first run so we don't crash.
-    if(m_dirinfo == nullptr)
-        m_dirinfo = QSharedPointer<DirectoryInfo>::create();
 
     if(m_pDirectoryMergeWindow->isDirectoryMergeInProgress())
     {
@@ -888,10 +885,10 @@ void KDiff3App::slotFileOpen()
     for(;;)
     {
         QPointer<OpenDialog> d = QPointer<OpenDialog>(new OpenDialog(this,
-                     QDir::toNativeSeparators(m_bDirCompare ? m_dirinfo->dirA().prettyAbsPath() : m_sd1->isFromBuffer() ? QString("") : m_sd1->getAliasName()),
-                     QDir::toNativeSeparators(m_bDirCompare ? m_dirinfo->dirB().prettyAbsPath() : m_sd2->isFromBuffer() ? QString("") : m_sd2->getAliasName()),
-                     QDir::toNativeSeparators(m_bDirCompare ? m_dirinfo->dirC().prettyAbsPath() : m_sd3->isFromBuffer() ? QString("") : m_sd3->getAliasName()),
-                     m_bDirCompare ? !m_dirinfo->destDir().prettyAbsPath().isEmpty() : !m_outputFilename.isEmpty(),
+                     QDir::toNativeSeparators(m_bDirCompare ? gDirInfo->dirA().prettyAbsPath() : m_sd1->isFromBuffer() ? QString("") : m_sd1->getAliasName()),
+                     QDir::toNativeSeparators(m_bDirCompare ? gDirInfo->dirB().prettyAbsPath() : m_sd2->isFromBuffer() ? QString("") : m_sd2->getAliasName()),
+                     QDir::toNativeSeparators(m_bDirCompare ? gDirInfo->dirC().prettyAbsPath() : m_sd3->isFromBuffer() ? QString("") : m_sd3->getAliasName()),
+                     m_bDirCompare ? !gDirInfo->destDir().prettyAbsPath().isEmpty() : !m_outputFilename.isEmpty(),
                      QDir::toNativeSeparators(m_bDefaultFilename ? QString("") : m_outputFilename), m_pOptionDialog->getOptions()));
 
         int status = d->exec();
@@ -1602,9 +1599,9 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
         m_pMainWidget->hide();
         setUpdatesEnabled(true);
 
-        m_dirinfo = QSharedPointer<DirectoryInfo>::create(f1, f2, f3, destDir);
+        (*gDirInfo) = DirectoryInfo(f1, f2, f3, destDir);
         bool bSuccess = m_pDirectoryMergeWindow->init(
-            m_dirinfo,
+            gDirInfo,
             !m_outputFilename.isEmpty());
         //This is a bug if it still happens.
         Q_ASSERT(m_bDirCompare == bDirCompare);
@@ -1637,6 +1634,10 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
     return true;
 }
 
+/*
+    If A is targetted to an existing file and the paths point to directories attempt to find that file in the corrisponding
+    directory. If it exists then the filename from A will be appended to the path.
+*/
 void KDiff3App::improveFilenames()
 {
     FileAccess f1(m_sd1->getFilename());

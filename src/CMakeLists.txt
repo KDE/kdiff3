@@ -8,6 +8,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Parts WidgetsAddons)
 set(kdiff3part_PART_SRCS
    kdiff3_part.cpp
    kdiff3.cpp
+   DirectoryInfo.cpp
    directorymergewindow.cpp
    merger.cpp
    pdiff.cpp

@@ -692,7 +692,7 @@ void DirectoryMergeWindow::reload()
             return;
     }
 
-    init(d->rootMFI()->getDirectoryInfo(), true);
+    init(gDirInfo, true);
     //fix file visibilities after reload or menu will be out of sync with display if changed from defaults.
     updateFileVisibilities();
 }
@@ -741,7 +741,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
 
             mfi.setFileInfoA(&(*dirIterator));
-            mfi.setDirectoryInfo(dirInfo);
         }
     }
 
@@ -752,7 +751,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
 
             mfi.setFileInfoB(&(*dirIterator));
-            mfi.setDirectoryInfo(dirInfo);
         }
     }
 
@@ -763,7 +761,6 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::buildMergeMap(const QSha
             MergeFileInfos& mfi = m_fileMergeMap[FileKey(*dirIterator)];
 
             mfi.setFileInfoC(&(*dirIterator));
-            mfi.setDirectoryInfo(dirInfo);
         }
     }
 }
@@ -773,9 +770,6 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     bool bDirectoryMerge,
     bool bReload)
 {
-    //set root data now that we have the directory info.
-    rootMFI()->setDirectoryInfo(dirInfo);
-
     if(m_pOptions->m_bDmFullAnalysis)
     {
         QStringList errors;
@@ -1044,19 +1038,19 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
 inline QString DirectoryMergeWindow::getDirNameA() const
 {
-    return d->rootMFI()->getDirectoryInfo()->dirA().prettyAbsPath();
+    return gDirInfo->dirA().prettyAbsPath();
 }
 inline QString DirectoryMergeWindow::getDirNameB() const
 {
-    return d->rootMFI()->getDirectoryInfo()->dirB().prettyAbsPath();
+    return gDirInfo->dirB().prettyAbsPath();
 }
 inline QString DirectoryMergeWindow::getDirNameC() const
 {
-    return d->rootMFI()->getDirectoryInfo()->dirC().prettyAbsPath();
+    return gDirInfo->dirC().prettyAbsPath();
 }
 inline QString DirectoryMergeWindow::getDirNameDest() const
 {
-    return d->rootMFI()->getDirectoryInfo()->destDir().prettyAbsPath();
+    return gDirInfo->destDir().prettyAbsPath();
 }
 
 void DirectoryMergeWindow::onExpanded()
@@ -1405,9 +1399,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
 
     bool bCheckC = pMFI->isThreeWay();
     bool bCopyNewer = m_pOptions->m_bDmCopyNewer;
-    bool bOtherDest = !((pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirA().absoluteFilePath()) ||
-                        (pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirB().absoluteFilePath()) ||
-                        (bCheckC && pMFI->getDirectoryInfo()->destDir().absoluteFilePath() == pMFI->getDirectoryInfo()->dirC().absoluteFilePath()));
+    bool bOtherDest = !((gDirInfo->destDir().absoluteFilePath() == gDirInfo->dirA().absoluteFilePath()) ||
+                        (gDirInfo->destDir().absoluteFilePath() == gDirInfo->dirB().absoluteFilePath()) ||
+                        (bCheckC && gDirInfo->destDir().absoluteFilePath() == gDirInfo->dirC().absoluteFilePath()));
 
     //Crash and burn in debug mode these states are never valid.
     //The checks are duplicated here so they show in the assert text.
@@ -1612,7 +1606,7 @@ void DirectoryMergeWindow::currentChanged(const QModelIndex& current, const QMod
     if(pMFI == nullptr)
         return;
 
-    d->m_pDirectoryMergeInfo->setInfo(pMFI->getDirectoryInfo()->dirA(), pMFI->getDirectoryInfo()->dirB(), pMFI->getDirectoryInfo()->dirC(), pMFI->getDirectoryInfo()->destDir(), *pMFI);
+    d->m_pDirectoryMergeInfo->setInfo(gDirInfo->dirA(), gDirInfo->dirB(), gDirInfo->dirC(), gDirInfo->destDir(), *pMFI);
 }
 
 void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
