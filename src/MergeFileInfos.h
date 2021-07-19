@@ -108,12 +108,10 @@ class MergeFileInfos
     Q_REQUIRED_RESULT QString fullNameC() const;
     Q_REQUIRED_RESULT QString fullNameDest() const;
 
-    Q_REQUIRED_RESULT static inline QSharedPointer<DirectoryInfo> getDirectoryInfo() { return gDirInfo; }
-
-    Q_REQUIRED_RESULT inline QString getDirNameA() const { return getDirectoryInfo()->dirA().prettyAbsPath(); }
-    Q_REQUIRED_RESULT inline QString getDirNameB() const { return getDirectoryInfo()->dirB().prettyAbsPath(); }
-    Q_REQUIRED_RESULT inline QString getDirNameC() const { return getDirectoryInfo()->dirC().prettyAbsPath(); }
-    Q_REQUIRED_RESULT inline QString getDirNameDest() const { return getDirectoryInfo()->destDir().prettyAbsPath(); }
+    Q_REQUIRED_RESULT inline QString getDirNameA() const { return gDirInfo->dirA().prettyAbsPath(); }
+    Q_REQUIRED_RESULT inline QString getDirNameB() const { return gDirInfo->dirB().prettyAbsPath(); }
+    Q_REQUIRED_RESULT inline QString getDirNameC() const { return gDirInfo->dirC().prettyAbsPath(); }
+    Q_REQUIRED_RESULT inline QString getDirNameDest() const { return gDirInfo->destDir().prettyAbsPath(); }
 
     Q_REQUIRED_RESULT inline TotalDiffStatus& diffStatus() { return m_totalDiffStatus; }
 
@@ -147,8 +145,8 @@ class MergeFileInfos
 
     Q_REQUIRED_RESULT inline bool isThreeWay() const
     {
-        if(getDirectoryInfo() == nullptr) return false;
-        return getDirectoryInfo()->dirC().isValid();
+        if(gDirInfo == nullptr) return false;
+        return gDirInfo->dirC().isValid();
     }
     Q_REQUIRED_RESULT inline bool existsEveryWhere() const { return existsInA() && existsInB() && (existsInC() || !isThreeWay()); }
 

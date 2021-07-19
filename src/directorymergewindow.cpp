@@ -832,12 +832,11 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         m_pDirShowFilesOnlyInC->setChecked(true);
     }
 
-    const QSharedPointer<DirectoryInfo>& dirInfo = MergeFileInfos::getDirectoryInfo();
-    assert(dirInfo != nullptr);
-    const FileAccess& dirA = dirInfo->dirA();
-    const FileAccess& dirB = dirInfo->dirB();
-    const FileAccess& dirC = dirInfo->dirC();
-    const FileAccess& dirDest = dirInfo->destDir();
+    assert(gDirInfo != nullptr);
+    const FileAccess& dirA = gDirInfo->dirA();
+    const FileAccess& dirB = gDirInfo->dirB();
+    const FileAccess& dirC = gDirInfo->dirC();
+    const FileAccess& dirDest = gDirInfo->destDir();
     // Check if all input directories exist and are valid. The dest dir is not tested now.
     // The test will happen only when we are going to write to it.
     if(!dirA.isDir() || !dirB.isDir() ||
@@ -877,7 +876,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     m_bScanning = true;
     Q_EMIT mWindow->statusBarMessage(i18n("Scanning folders..."));
 
-    m_bSyncMode = m_pOptions->m_bDmSyncMode && dirInfo->allowSyncMode();
+    m_bSyncMode = m_pOptions->m_bDmSyncMode && gDirInfo->allowSyncMode();
 
     m_fileMergeMap.clear();
     s_eCaseSensitivity = m_bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
@@ -905,7 +904,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessA = dirInfo->listDirA(m_pOptions);
+        bListDirSuccessA = gDirInfo->listDirA(m_pOptions);
     }
 
     if(dirB.isValid())
@@ -914,7 +913,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessB = dirInfo->listDirB(m_pOptions);
+        bListDirSuccessB = gDirInfo->listDirB(m_pOptions);
     }
 
     e_MergeOperation eDefaultMergeOp;
@@ -924,14 +923,14 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         pp.setSubRangeTransformation(currentScan / nofScans, (currentScan + 1) / nofScans);
         ++currentScan;
 
-        bListDirSuccessC = dirInfo->listDirC(m_pOptions);
+        bListDirSuccessC = gDirInfo->listDirC(m_pOptions);
 
         eDefaultMergeOp = eMergeABCToDest;
     }
     else
         eDefaultMergeOp = m_bSyncMode ? eMergeToAB : eMergeABToDest;
 
-    buildMergeMap(dirInfo);
+    buildMergeMap(gDirInfo);
 
     bool bContinue = true;
     if(!bListDirSuccessA || !bListDirSuccessB || !bListDirSuccessC)
@@ -1041,19 +1040,19 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
 
 inline QString DirectoryMergeWindow::getDirNameA() const
 {
-    return MergeFileInfos::getDirectoryInfo()->dirA().prettyAbsPath();
+    return gDirInfo->dirA().prettyAbsPath();
 }
 inline QString DirectoryMergeWindow::getDirNameB() const
 {
-    return MergeFileInfos::getDirectoryInfo()->dirB().prettyAbsPath();
+    return gDirInfo->dirB().prettyAbsPath();
 }
 inline QString DirectoryMergeWindow::getDirNameC() const
 {
-    return MergeFileInfos::getDirectoryInfo()->dirC().prettyAbsPath();
+    return gDirInfo->dirC().prettyAbsPath();
 }
 inline QString DirectoryMergeWindow::getDirNameDest() const
 {
-    return MergeFileInfos::getDirectoryInfo()->destDir().prettyAbsPath();
+    return gDirInfo->destDir().prettyAbsPath();
 }
 
 void DirectoryMergeWindow::onExpanded()
@@ -1402,9 +1401,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
 
     bool bCheckC = pMFI->isThreeWay();
     bool bCopyNewer = m_pOptions->m_bDmCopyNewer;
-    bool bOtherDest = !((MergeFileInfos::getDirectoryInfo()->destDir().absoluteFilePath() == MergeFileInfos::getDirectoryInfo()->dirA().absoluteFilePath()) ||
-                        (MergeFileInfos::getDirectoryInfo()->destDir().absoluteFilePath() == MergeFileInfos::getDirectoryInfo()->dirB().absoluteFilePath()) ||
-                        (bCheckC && MergeFileInfos::getDirectoryInfo()->destDir().absoluteFilePath() == MergeFileInfos::getDirectoryInfo()->dirC().absoluteFilePath()));
+    bool bOtherDest = !((gDirInfo->destDir().absoluteFilePath() == gDirInfo->dirA().absoluteFilePath()) ||
+                        (gDirInfo->destDir().absoluteFilePath() == gDirInfo->dirB().absoluteFilePath()) ||
+                        (bCheckC && gDirInfo->destDir().absoluteFilePath() == gDirInfo->dirC().absoluteFilePath()));
 
     //Crash and burn in debug mode these states are never valid.
     //The checks are duplicated here so they show in the assert text.
@@ -1609,7 +1608,7 @@ void DirectoryMergeWindow::currentChanged(const QModelIndex& current, const QMod
     if(pMFI == nullptr)
         return;
 
-    d->m_pDirectoryMergeInfo->setInfo(MergeFileInfos::getDirectoryInfo()->dirA(), MergeFileInfos::getDirectoryInfo()->dirB(), MergeFileInfos::getDirectoryInfo()->dirC(), MergeFileInfos::getDirectoryInfo()->destDir(), *pMFI);
+    d->m_pDirectoryMergeInfo->setInfo(gDirInfo->dirA(), gDirInfo->dirB(), gDirInfo->dirC(), gDirInfo->destDir(), *pMFI);
 }
 
 void DirectoryMergeWindow::mousePressEvent(QMouseEvent* e)
