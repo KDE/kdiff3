@@ -1369,8 +1369,9 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
     LineRef k1 = 0;
     LineRef k2 = 0;
     int maxSearchLength = 500;
-    bool bTextsTotalEqual = inBTextsTotalEqual, bIgnoreComments = eIgnoreFlags | IgnoreFlag::ignoreComments;
-    bool bIgnoreWhiteSpace = eIgnoreFlags | IgnoreFlag::ignoreWhiteSpace;
+    bool bTextsTotalEqual = inBTextsTotalEqual;
+    bool bIgnoreComments = eIgnoreFlags & IgnoreFlag::ignoreComments;
+    bool bIgnoreWhiteSpace = eIgnoreFlags & IgnoreFlag::ignoreWhiteSpace;
 
     Q_ASSERT(selector == e_SrcSelector::A || selector == e_SrcSelector::B || selector == e_SrcSelector::C);
 
