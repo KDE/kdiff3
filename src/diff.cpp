@@ -673,6 +673,7 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t i
         }
     }
 
+    #ifndef NDDEBUG
     // Verify difflist
     {
         LineRef l1 = 0;
@@ -687,7 +688,7 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t i
 
         assert(l1 == size1 && l2 == size2);
     }
-
+    #endif
     pp.setCurrent(1);
 }
 
