@@ -1452,7 +1452,7 @@ bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, int& posInLi
     return false;
 }
 
-void DiffTextWindow::convertD3LCoordsToLineCoords(int d3LIdx, int d3LPos, int& line, int& pos)
+void DiffTextWindow::convertD3LCoordsToLineCoords(LineIndex d3LIdx, int d3LPos, LineRef& line, int& pos)
 {
     if(d->m_bWordWrap)
     {
@@ -1473,7 +1473,7 @@ void DiffTextWindow::convertD3LCoordsToLineCoords(int d3LIdx, int d3LPos, int& l
     }
 }
 
-void DiffTextWindow::convertLineCoordsToD3LCoords(int line, int pos, int& d3LIdx, int& d3LPos)
+void DiffTextWindow::convertLineCoordsToD3LCoords(LineRef line, int pos, LineIndex& d3LIdx, int& d3LPos)
 {
     if(d->m_bWordWrap)
     {
@@ -1828,11 +1828,11 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
         // Wrap them now.
 
         // convert the d->m_selection to unwrapped coordinates.
-        LineRef firstLine
+        LineRef firstLine;
         qint32  firstPos;
         convertD3LCoordsToLineCoords(d->m_selection.beginLine(), d->m_selection.beginPos(), firstLine, firstPos);
 
-        LineRef lastLine
+        LineRef lastLine;
         qint32  lastPos;
         convertD3LCoordsToLineCoords(d->m_selection.endLine(), d->m_selection.endPos(), lastLine, lastPos);
 

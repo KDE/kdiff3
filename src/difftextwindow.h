@@ -76,8 +76,8 @@ class DiffTextWindow : public QWidget
     LineIndex convertLineToDiff3LineIdx(LineRef line);
     LineRef convertDiff3LineIdxToLine(LineIndex d3lIdx);
 
-    void convertD3LCoordsToLineCoords(int d3LIdx, int d3LPos, int& line, int& pos);
-    void convertLineCoordsToD3LCoords(int line, int pos, int& d3LIdx, int& d3LPos);
+    void convertD3LCoordsToLineCoords(LineIndex d3LIdx, int d3LPos, LineRef& line, int& pos);
+    void convertLineCoordsToD3LCoords(LineRef line, int pos, LineIndex& d3LIdx, int& d3LPos);
 
     void convertSelectionToD3LCoords();
 
@@ -87,7 +87,7 @@ class DiffTextWindow : public QWidget
 
     void setPaintingAllowed(bool bAllowPainting);
     void recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, int visibleTextWidth);
-    void recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, int cacheListIdx);
+    void recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, QtSizeType cacheListIdx);
 
     void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, int linesPerPage, const QColor& fgColor);
     void print(RLPainter& painter, const QRect& r, int firstLine, int nofLinesPerPage);
