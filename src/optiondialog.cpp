@@ -12,6 +12,7 @@
 #include "common.h"
 #include "defmac.h"
 #include "smalldialogs.h"
+#include "TypeUtils.h"
 
 #include <map>
 
@@ -427,7 +428,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
             const QByteArray nameArray = c->name();
             const QLatin1String codecName = QLatin1String(nameArray);
 
-            for(int i = 0; i < m_codecVec.size(); ++i)
+            for(QtSizeType i = 0; i < m_codecVec.size(); ++i)
             {
                 if(c == m_codecVec[i])
                     return; // don't insert any codec twice
@@ -443,7 +444,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
     }
     void setToDefault() override
     {
-        int index = getDefaultIndex();
+        QtNumberType index = getDefaultIndex();
 
         setCurrentIndex(index);
         if(m_ppVarCodec != nullptr)
@@ -455,7 +456,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
     {
         if(m_ppVarCodec != nullptr)
         {
-            for(int i = 0; i < m_codecVec.size(); ++i)
+            for(QtNumberType i = 0; i < m_codecVec.size(); ++i)
             {
                 if(*m_ppVarCodec == m_codecVec[i])
                 {

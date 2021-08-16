@@ -11,6 +11,7 @@
 
 #include "common.h"
 #include "options.h"
+#include "TypeUtils.h"
 
 #include <boost/signals2.hpp>
 
@@ -171,12 +172,12 @@ class OptionCodec : public OptionString
     void setCurrent(const QByteArray& name) { OptionString::setCurrent(QString::fromLatin1(name)); }
     [[nodiscard]] const QString& defaultName() const { return mDefaultName; }
 
-    void saveDefaultIndex(const int i) { defaultIndex = i; };
-    [[nodiscard]] int getDefaultIndex() const { return defaultIndex; }
+    void saveDefaultIndex(const SafeInt32<QtNumberType> i) { defaultIndex = i; };
+    [[nodiscard]] QtNumberType getDefaultIndex() const { return defaultIndex; }
 
   private:
     const QString mDefaultName = QLatin1String(QTextCodec::codecForLocale()->name());
-    int defaultIndex = 0;
+    QtNumberType defaultIndex = 0;
     Q_DISABLE_COPY(OptionCodec)
 };
 

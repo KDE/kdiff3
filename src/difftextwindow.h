@@ -54,7 +54,7 @@ class DiffTextWindow : public QWidget
         QTextCodec* pTextCodec,
         e_LineEndStyle eLineEndStyle,
         const std::shared_ptr<LineDataVector> &pLineData,
-        int size,
+        LineCount size,
         const Diff3LineVector* pDiff3LineVector,
         const ManualDiffHelpList* pManualDiffHelpList
     );
@@ -86,8 +86,8 @@ class DiffTextWindow : public QWidget
     void getSelectionRange(LineRef* firstLine, LineRef* lastLine, e_CoordType coordType);
 
     void setPaintingAllowed(bool bAllowPainting);
-    void recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth);
-    void recalcWordWrapHelper(int wrapLineVectorSize, int visibleTextWidth, int cacheListIdx);
+    void recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, int visibleTextWidth);
+    void recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, int cacheListIdx);
 
     void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, int linesPerPage, const QColor& fgColor);
     void print(RLPainter& painter, const QRect& r, int firstLine, int nofLinesPerPage);

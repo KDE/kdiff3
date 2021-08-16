@@ -1521,7 +1521,7 @@ void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
 {
     d3lv.resize(SafeInt32<QtSizeType>(size()));
     Diff3LineList::iterator i;
-    int j = 0;
+    QtSizeType j = 0;
     for(i = begin(); i != end(); ++i, ++j)
     {
         d3lv[j] = &(*i);

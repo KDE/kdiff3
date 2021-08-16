@@ -10,8 +10,10 @@
 #include "difftextwindow.h"
 
 #include "FileNameLineEdit.h"
+#include "LineRef.h"
 #include "RLPainter.h"
 #include "SourceData.h"
+#include "TypeUtils.h"
 #include "Utils.h"
 #include "common.h"     // for getAtomic, max3, min3
 #include "defmac.h"
@@ -61,11 +63,11 @@ class RecalcWordWrapRunnable : public QRunnable
     static QAtomicInt s_runnableCount;
     DiffTextWindow* m_pDTW;
     int m_visibleTextWidth;
-    int m_cacheIdx;
+    QtSizeType m_cacheIdx;
 
   public:
     static QAtomicInt s_maxNofRunnables;
-    RecalcWordWrapRunnable(DiffTextWindow* p, int visibleTextWidth, int cacheIdx)
+    RecalcWordWrapRunnable(DiffTextWindow* p, int visibleTextWidth, QtSizeType cacheIdx)
         : m_pDTW(p), m_visibleTextWidth(visibleTextWidth), m_cacheIdx(cacheIdx)
     {
         setAutoDelete(true);
@@ -148,7 +150,7 @@ class DiffTextWindowData
     e_LineEndStyle m_eLineEndStyle;
 
     std::shared_ptr<LineDataVector> m_pLineData;
-    int m_size = 0;
+    LineCount m_size = 0;
     QString m_filename;
     bool m_bWordWrap = false;
     int m_delayedDrawTimer = 0;
@@ -234,7 +236,7 @@ void DiffTextWindow::init(
     QTextCodec* pTextCodec,
     e_LineEndStyle eLineEndStyle,
     const std::shared_ptr<LineDataVector> &pLineData,
-    int size,
+    LineCount size,
     const Diff3LineVector* pDiff3LineVector,
     const ManualDiffHelpList* pManualDiffHelpList)
 {
@@ -499,6 +501,7 @@ int DiffTextWindow::getMaxTextWidth()
     return getAtomic(d->m_maxTextWidth);
 }
 
+//FIXME:not 64-bit size safe
 LineCount DiffTextWindow::getNofLines()
 {
     return d->m_bWordWrap ? d->m_diff3WrapLineVector.size() : d->getDiff3LineVector()->size();
@@ -1029,7 +1032,7 @@ void DiffTextWindowData::writeLine(
     if(pld != nullptr)
     {
         // First calculate the "changed" information for each character.
-        int i = 0;
+        QtSizeType i = 0;
         QString lineString = pld->getLine();
         if(!lineString.isEmpty())
         {
@@ -1058,7 +1061,7 @@ void DiffTextWindowData::writeLine(
 
         int outPos = 0;
 
-        int lineLength = m_bWordWrap ? wrapLineOffset + wrapLineLength : lineString.length();
+        QtSizeType lineLength = m_bWordWrap ? wrapLineOffset + wrapLineLength : lineString.length();
 
         FormatRangeHelper frh;
 
@@ -1390,7 +1393,7 @@ QString DiffTextWindow::getSelection()
 
         if(lineIdx != -1)
         {
-            int size = (*d->m_pLineData)[lineIdx].size();
+            QtSizeType size = (*d->m_pLineData)[lineIdx].size();
             QString lineString = (*d->m_pLineData)[lineIdx].getLine();
 
             if(d->m_bWordWrap)
@@ -1399,7 +1402,7 @@ QString DiffTextWindow::getSelection()
                 lineString = lineString.mid(d->m_diff3WrapLineVector[it].wrapLineOffset, size);
             }
 
-            for(int i = 0; i < size; ++i)
+            for(QtSizeType i = 0; i < size; ++i)
             {
                 if(d->m_selection.within(line, i))
                 {
@@ -1422,11 +1425,11 @@ QString DiffTextWindow::getSelection()
 
     return selectionString;
 }
-
+//FIXME:64-bit size safe?
 bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive)
 {
-    int it = d3vLine;
-    int endIt = bDirDown ? d->getDiff3LineVector()->size() : -1;
+    LineRef it = d3vLine;
+    QtSizeType endIt = bDirDown ? d->getDiff3LineVector()->size() : -1;
     int step = bDirDown ? 1 : -1;
     int startPos = posInLine;
 
@@ -1435,7 +1438,7 @@ bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, int& posInLi
         QString line = d->getString(it);
         if(!line.isEmpty())
         {
-            int pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
+            QtSizeType pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
             if(pos != -1)
             {
                 d3vLine = it;
@@ -1454,7 +1457,7 @@ void DiffTextWindow::convertD3LCoordsToLineCoords(int d3LIdx, int d3LPos, int& l
     if(d->m_bWordWrap)
     {
         int wrapPos = d3LPos;
-        int wrapLine = convertDiff3LineIdxToLine(d3LIdx);
+        LineRef wrapLine = convertDiff3LineIdxToLine(d3LIdx);
         while(wrapPos > d->m_diff3WrapLineVector[wrapLine].wrapLineLength)
         {
             wrapPos -= d->m_diff3WrapLineVector[wrapLine].wrapLineLength;
@@ -1545,14 +1548,14 @@ void DiffTextWindow::setSelection(LineRef firstLine, int startPos, LineRef lastL
     }
     update();
 }
-
+//FIXME: Comparison LineIndex and QtSizeType?
 int DiffTextWindowData::convertLineOnScreenToLineInSource(int lineOnScreen, e_CoordType coordType, bool bFirstLine)
 {
     LineRef line;
     if(lineOnScreen >= 0)
     {
         if(coordType == eWrapCoords) return lineOnScreen;
-        int d3lIdx = m_pDiffTextWindow->convertLineToDiff3LineIdx(lineOnScreen);
+        LineIndex d3lIdx = m_pDiffTextWindow->convertLineToDiff3LineIdx(lineOnScreen);
         if(!bFirstLine && d3lIdx >= mDiff3LineVector->size())
             d3lIdx = mDiff3LineVector->size() - 1;
         if(coordType == eD3LLineCoords) return d3lIdx;
@@ -1626,7 +1629,7 @@ bool DiffTextWindow::startRunnables()
     }
 }
 
-void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int visibleTextWidth)
+void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, int visibleTextWidth)
 {
     if(d->getDiff3LineVector() == nullptr || !isVisible())
     {
@@ -1647,7 +1650,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
         {
             d->m_wrapLineCacheList.clear();
             setUpdatesEnabled(false);
-            for(int i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
+            for(QtSizeType i = 0, j = 0; i < d->getDiff3LineVector()->size(); i += s_linesPerRunnable, ++j)
             {
                 d->m_wrapLineCacheList.append(QVector<WrapLineCacheData>());
                 s_runnables.push_back(new RecalcWordWrapRunnable(this, visibleTextWidth, j));
@@ -1677,8 +1680,8 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int 
         }
     }
 }
-
-void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTextWidth, int cacheListIdx)
+//FIXME: incoming visableTextWidth used as de-facto bool.
+void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, QtSizeType cacheListIdx)
 {
     if(d->m_bWordWrap)
     {
@@ -1688,20 +1691,22 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
             visibleTextWidth = getVisibleTextAreaWidth();
         else
             visibleTextWidth -= d->leftInfoWidth() * Utils::getHorizontalAdvance(fontMetrics(), '0');
-        int i;
-        int wrapLineIdx = 0;
-        int size = d->getDiff3LineVector()->size();
-        int firstD3LineIdx = wrapLineVectorSize > 0 ? 0 : cacheListIdx * s_linesPerRunnable;
-        int endIdx = wrapLineVectorSize > 0 ? size : std::min(firstD3LineIdx + s_linesPerRunnable, size);
+        LineIndex i;
+        QtSizeType wrapLineIdx = 0;
+        QtSizeType size = d->getDiff3LineVector()->size();
+        //FIXME: Safe for 64-bit QtSizeType?
+        LineIndex firstD3LineIdx = wrapLineVectorSize > 0 ? 0 : cacheListIdx * s_linesPerRunnable;
+        LineIndex endIdx = wrapLineVectorSize > 0 ? size : std::min(firstD3LineIdx + s_linesPerRunnable, size);
         QVector<WrapLineCacheData>& wrapLineCache = d->m_wrapLineCacheList[cacheListIdx];
-        int cacheListIdx2 = 0;
+        QtSizeType cacheListIdx2 = 0;
         QTextLayout textLayout(QString(), font(), this);
+
         for(i = firstD3LineIdx; i < endIdx; ++i)
         {
             if(g_pProgressDialog->wasCancelled())
                 return;
 
-            int linesNeeded = 0;
+            LineCount linesNeeded = 0;
             if(wrapLineVectorSize == 0)
             {
                 QString s = d->getString(i);
@@ -1709,7 +1714,7 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
                 textLayout.setText(s);
                 d->prepareTextLayout(textLayout, visibleTextWidth);
                 linesNeeded = textLayout.lineCount();
-                for(int l = 0; l < linesNeeded; ++l)
+                for(QtNumberType l = 0; l < linesNeeded; ++l)
                 {
                     QTextLine line = textLayout.lineAt(l);
                     wrapLineCache.push_back(WrapLineCacheData(i, line.textStart(), line.textLength()));
@@ -1718,11 +1723,12 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
             else if(wrapLineVectorSize > 0 && cacheListIdx2 < d->m_wrapLineCacheList.count())
             {
                 WrapLineCacheData* pWrapLineCache = d->m_wrapLineCacheList[cacheListIdx2].data();
-                int cacheIdx = 0;
-                int clc = d->m_wrapLineCacheList.count() - 1;
-                int cllc = d->m_wrapLineCacheList.last().count();
-                int curCount = d->m_wrapLineCacheList[cacheListIdx2].count() - 1;
-                int l = 0;
+                QtSizeType cacheIdx = 0;
+                QtSizeType clc = d->m_wrapLineCacheList.count() - 1;
+                QtSizeType cllc = d->m_wrapLineCacheList.last().count();
+                QtSizeType curCount = d->m_wrapLineCacheList[cacheListIdx2].count() - 1;
+                LineCount l = 0;
+
                 while((cacheListIdx2 < clc || (cacheListIdx2 == clc && cacheIdx < cllc)) && pWrapLineCache->d3LineIdx() <= i)
                 {
                     if(pWrapLineCache->d3LineIdx() == i)
@@ -1786,13 +1792,14 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
     {
         if(g_pProgressDialog->wasCancelled())
             return;
-        int size = d->getDiff3LineVector()->size();
-        int firstD3LineIdx = cacheListIdx * s_linesPerRunnable;
-        int endIdx = std::min(firstD3LineIdx + s_linesPerRunnable, size);
+        //FIXME: 64-bit size safe?
+        QtSizeType size = d->getDiff3LineVector()->size();
+        LineIndex firstD3LineIdx = cacheListIdx * s_linesPerRunnable;
+        LineIndex endIdx = std::min(firstD3LineIdx + s_linesPerRunnable, size);
 
         int maxTextWidth = getAtomic(d->m_maxTextWidth); // current value
         QTextLayout textLayout(QString(), font(), this);
-        for(int i = firstD3LineIdx; i < endIdx; ++i)
+        for(LineIndex i = firstD3LineIdx; i < endIdx; ++i)
         {
             if(g_pProgressDialog->wasCancelled())
                 return;
@@ -1821,10 +1828,12 @@ void DiffTextWindow::recalcWordWrapHelper(int wrapLineVectorSize, int visibleTex
         // Wrap them now.
 
         // convert the d->m_selection to unwrapped coordinates.
-        int firstLine, firstPos;
+        LineRef firstLine
+        qint32  firstPos;
         convertD3LCoordsToLineCoords(d->m_selection.beginLine(), d->m_selection.beginPos(), firstLine, firstPos);
 
-        int lastLine, lastPos;
+        LineRef lastLine
+        qint32  lastPos;
         convertD3LCoordsToLineCoords(d->m_selection.endLine(), d->m_selection.endPos(), lastLine, lastPos);
 
         d->m_selection.start(firstLine, firstPos);
@@ -1952,7 +1961,7 @@ void DiffTextWindowFrame::setupConnections(const KDiff3App* app)
 LineRef DiffTextWindow::calcTopLineInFile(const LineRef firstLine)
 {
     LineRef currentLine;
-    for(int i = convertLineToDiff3LineIdx(firstLine); i < (int)d->getDiff3LineVector()->size(); ++i)
+    for(QtSizeType i = convertLineToDiff3LineIdx(firstLine); i < d->getDiff3LineVector()->size(); ++i)
     {
         const Diff3Line* d3l = (*d->getDiff3LineVector())[i];
         currentLine = d3l->getLineInFile(d->m_winIdx);
