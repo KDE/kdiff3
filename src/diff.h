@@ -123,6 +123,7 @@ class DiffList: public std::list<Diff>
   public:
     using std::list<Diff>::list;
     void runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t index1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, const size_t index2, LineRef size2, const QSharedPointer<Options>& pOptions);
+    void verify(const LineRef size1, const LineRef size2);
 };
 
 class LineData

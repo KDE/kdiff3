@@ -673,23 +673,29 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t i
         }
     }
 
-    #ifndef NDDEBUG
-    // Verify difflist
-    {
-        LineRef l1 = 0;
-        LineRef l2 = 0;
+    verify(size1, size2);
 
-        for(const Diff& curDiff: *this)
-        {
-            assert(curDiff.diff1() <= TYPE_MAX(LineRef::LineType) && curDiff.diff2() <= TYPE_MAX(LineRef::LineType));
-            l1 += curDiff.numberOfEquals() + LineRef(curDiff.diff1());
-            l2 += curDiff.numberOfEquals() + LineRef(curDiff.diff2());
-        }
-
-        assert(l1 == size1 && l2 == size2);
-    }
-    #endif
     pp.setCurrent(1);
+}
+
+// Verify difflist
+void DiffList::verify(const LineRef size1, const LineRef size2)
+{
+#ifndef NDEBUG
+    LineRef l1 = 0;
+    LineRef l2 = 0;
+
+    for(const Diff& curDiff: *this)
+    {
+        assert(curDiff.diff1() <= TYPE_MAX(LineRef::LineType) && curDiff.diff2() <= TYPE_MAX(LineRef::LineType));
+        l1 += curDiff.numberOfEquals() + LineRef(curDiff.diff1());
+        l2 += curDiff.numberOfEquals() + LineRef(curDiff.diff2());
+    }
+
+    assert(l1 == size1 && l2 == size2);
+#else
+    Q_UNUSED(size1); Q_UNUSED(size2);
+#endif
 }
 
 void ManualDiffHelpList::runDiff(const std::shared_ptr<LineDataVector> &p1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, LineRef size2, DiffList& diffList,
