@@ -36,7 +36,7 @@ QSharedPointer<DiffBufferInfo> Diff3Line::m_pDiffBufferInfo = QSharedPointer<Dif
 
 int LineData::width(int tabSize) const
 {
-    QString pLine = getLine();
+    const QString pLine = getLine();
     int w = 0;
     int j = 0;
     for(QtSizeType i = 0; i < size(); ++i)
@@ -382,9 +382,9 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
                         }
 
                         /* If i3_last_equal_A isn't still set to d3ll.end(), then
-                   * we've found a line in A that is equal to one in C
-                   * somewhere between i3b and i3c
-                   */
+                        * we've found a line in A that is equal to one in C
+                        * somewhere between i3b and i3c
+                        */
                         bool before_or_on_equal_line_in_A = (i3_last_equal_A != end());
 
                         // Move the disturbing lines up.
@@ -617,9 +617,9 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t i
         GnuDiff::comparison comparisonInput;
         memset(&comparisonInput, 0, sizeof(comparisonInput));
         comparisonInput.parent = nullptr;
-        comparisonInput.file[0].buffer = (*p1)[index1].getBuffer()->unicode() + (*p1)[index1].getOffset();                                                      //ptr to buffer
+        comparisonInput.file[0].buffer = (*p1)[index1].getBuffer()->unicode() + (*p1)[index1].getOffset();                                         //ptr to buffer
         comparisonInput.file[0].buffered = ((*p1)[index1 + size1 - 1].getOffset() + (*p1)[index1 + size1 - 1].size() - (*p1)[index1].getOffset()); // size of buffer
-        comparisonInput.file[1].buffer = (*p2)[index2].getBuffer()->unicode() + (*p2)[index2].getOffset();                                                      //ptr to buffer
+        comparisonInput.file[1].buffer = (*p2)[index2].getBuffer()->unicode() + (*p2)[index2].getOffset();                                         //ptr to buffer
         comparisonInput.file[1].buffered = ((*p2)[index2 + size2 - 1].getOffset() + (*p2)[index2 + size2 - 1].size() - (*p2)[index2].getOffset()); // size of buffer
 
         gnuDiff.ignore_white_space = GnuDiff::IGNORE_ALL_SPACE; // I think nobody needs anything else ...

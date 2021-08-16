@@ -421,6 +421,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
         setToolTip(i18n(
             "Change this if non-ASCII characters are not displayed correctly."));
     }
+
     void insertCodec(const QString& visibleCodecName, QTextCodec* c)
     {
         if(c != nullptr)
@@ -442,6 +443,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
             m_codecVec.push_back(c);
         }
     }
+
     void setToDefault() override
     {
         QtNumberType index = getDefaultIndex();
@@ -452,6 +454,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
             *m_ppVarCodec = m_codecVec[index];
         }
     }
+
     void setToCurrent() override
     {
         if(m_ppVarCodec != nullptr)
@@ -466,6 +469,7 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
             }
         }
     }
+
     using OptionCodec::apply;
     void apply() override
     {
@@ -474,10 +478,12 @@ class OptionEncodingComboBox: public QComboBox, public OptionCodec
             *m_ppVarCodec = m_codecVec[currentIndex()];
         }
     }
+
     void write(ValueMap* config) const override
     {
         if(m_ppVarCodec != nullptr) config->writeEntry(m_saveName, (const char*)(*m_ppVarCodec)->name());
     }
+
     void read(ValueMap* config) override
     {
         QString codecName = config->readEntry(m_saveName, (const char*)m_codecVec[currentIndex()]->name());
