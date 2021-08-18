@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 # SPDX-FileCopyrightText: 2002-2007 Joachim Eibl, joachim.eibl at gmx.de
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -57,16 +57,16 @@ def permutations(nr_of_options, count, currentlist):
             elif option[2] == '3':
                 contrib2lines.append('yyy' + defaultline)
 
-        with open('%s/perm_%s_base.txt' % (dirname, filename), 'wb') as f:
+        with open(f'{dirname}/perm_{filename}_base.txt', 'wb') as f:
             f.writelines(baselines)
 
-        with open('%s/perm_%s_contrib1.txt' % (dirname, filename), 'wb') as f:
+        with open(f'{dirname}/perm_{filename}_contrib1.txt', 'wb') as f:
             f.writelines(contrib1lines)
 
-        with open('%s/perm_%s_contrib2.txt' % (dirname, filename), 'wb') as f:
+        with open(f'{dirname}/perm_{filename}_contrib2.txt', 'wb') as f:
             f.writelines(contrib2lines)
 
-        with open('%s/perm_%s_expected_result.txt' % (dirname, filename), 'a') as f:
+        with open(f'{dirname}/perm_{filename}_expected_result.txt', 'a') as f:
             pass
 
     else:
@@ -79,12 +79,12 @@ parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpForm
                                  description='Generate input files for alignmenttest in ./testdata/permutations/ containing some or all permutations of 3 sets of 5 lines.\n\n' +
                                              'Everything is based on a default set of 5 different lines: aaa, bbb, ccc, ddd and eee.\n' +
                                              'For the base file each line will be either equal to the default set or removed.\n' +
-                                             'For contributor 1 each line will either be equal to the default set, different than the default set (\'xxx\' prepended) or removed.\n' +
-                                             'For contributor 2 each line will either be equal to the default set, equal to contributor 1, different (\'yyy\' prepended) or removed.\n' +
-                                             'This results in %d possible permutations. The -r option can be used to make a smaller \'random\' selection (the same seed is used each time).' % (len(options) ** len(defaultlines)))
+                                             "For contributor 1 each line will either be equal to the default set, different than the default set('xxx' prepended) or removed.\n" +
+                                             "For contributor 2 each line will either be equal to the default set, equal to contributor 1, different('yyy' prepended) or removed.\n" +
+                                             f"This results in {len(options) ** len(defaultlines)} possible permutations. The -r option can be used to make a smaller 'random' selection (the same seed is used each time).")
 
 parser.add_argument('-r', metavar='num', nargs='?', type=int, default=len(options), const=len(options),
-                    help='instead of generating all %d permutations for each line, generate <num> randomly chosen ones. The number of test cases will become num^5.' % len(options))
+                    help=f'instead of generating all {len(options)} permutations for each line, generate <num> randomly chosen ones. The number of test cases will become num^5.')
 parser.add_argument('-s', metavar='num', nargs='?', type=int, default=0, const=0,
                     help='specify the seed to use for the random number generator (default=0). This only makes sense when the -r option is specified.')
 args = parser.parse_args()
@@ -92,16 +92,16 @@ args = parser.parse_args()
 if not os.path.exists(dirname):
     os.makedirs(dirname)
 
-print ('Generating input files in %s ...' % dirname)
+print(f'Generating input files in {dirname} ...')
 sys.stdout.flush()
 
 random.seed(args.s)
 permutations(args.r, len(defaultlines), [])
 
-print ('Input files generated.')
-print ('')
-print ('To create a reference set of expected_result.txt files, run alignmenttest and copy/move all %s/*_actual_result.txt files to %s/*_expected_result.txt:') % (dirname, dirname)
-print ('  ./alignmenttest > /dev/null')
-print ('  cd %s') % dirname
-print ('  for file in *_actual_result.txt; do mv ${file} ${file/actual/expected}; done')
-print ('If you\'ve already modified the algorithm, you can run the alignment test of an older version of kdiff3 and copy those result files over')
+print('Input files generated.')
+print('')
+print(f'To create a reference set of expected_result.txt files, run alignmenttest and copy/move all {dirname}/*_actual_result.txt files to {dirname}/*_expected_result.txt:')
+print('  ./alignmenttest > /dev/null')
+print(f'  cd {dirname}')
+print('  for file in *_actual_result.txt; do mv ${file} ${file/actual/expected}; done')
+print("If you've already modified the algorithm, you can run the alignment test of an older version of kdiff3 and copy those result files over")
