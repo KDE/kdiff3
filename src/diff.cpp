@@ -99,55 +99,50 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
     Diff d;
 
     qCInfo(kdiffMain) << "Enter: calcDiff3LineListUsingAB";
-    for(;;)
+    while(i != pDiffListAB->end())
     {
-        if(d.isEmpty())
+        d = *i;
+        ++i;
+
+        while(!d.isEmpty())
         {
-            if(i != pDiffListAB->end())
+            Diff3Line d3l;
+            if(d.numberOfEquals() > 0)
             {
-                d = *i;
-                ++i;
+                d3l.bAEqB = true;
+                d3l.setLineA(lineA);
+                d3l.setLineB(lineB);
+                d.adjustNumberOfEquals(-1);
+                ++lineA;
+                ++lineB;
             }
-            else
-                break;
-        }
+            else if(d.diff1() > 0 && d.diff2() > 0)
+            {
+                d3l.setLineA(lineA);
+                d3l.setLineB(lineB);
+                d.adjustDiff1(-1);
+                d.adjustDiff2(-1);
+                ++lineA;
+                ++lineB;
+            }
+            else if(d.diff1() > 0)
+            {
+                d3l.setLineA(lineA);
+                d.adjustDiff1(-1);
+                ++lineA;
+            }
+            else if(d.diff2() > 0)
+            {
+                d3l.setLineB(lineB);
+                d.adjustDiff2(-1);
+                ++lineB;
+            }
 
-        Diff3Line d3l;
-        if(d.numberOfEquals() > 0)
-        {
-            d3l.bAEqB = true;
-            d3l.setLineA(lineA);
-            d3l.setLineB(lineB);
-            d.adjustNumberOfEquals(-1);
-            ++lineA;
-            ++lineB;
-        }
-        else if(d.diff1() > 0 && d.diff2() > 0)
-        {
-            d3l.setLineA(lineA);
-            d3l.setLineB(lineB);
-            d.adjustDiff1(-1);
-            d.adjustDiff2(-1);
-            ++lineA;
-            ++lineB;
-        }
-        else if(d.diff1() > 0)
-        {
-            d3l.setLineA(lineA);
-            d.adjustDiff1(-1);
-            ++lineA;
-        }
-        else if(d.diff2() > 0)
-        {
-            d3l.setLineB(lineB);
-            d.adjustDiff2(-1);
-            ++lineB;
-        }
+            assert(d.numberOfEquals() >= 0);
 
-        assert(d.numberOfEquals() >= 0);
-
-        qCDebug(kdiffCore) << "lineA = " << d3l.getLineA() << ", lineB = " << d3l.getLineB() ;
-        push_back(d3l);
+            qCDebug(kdiffCore) << "lineA = " << d3l.getLineA() << ", lineB = " << d3l.getLineB() ;
+            push_back(d3l);
+        }
     }
     qCInfo(kdiffMain) << "Leave: calcDiff3LineListUsingAB" ;
 }
@@ -164,55 +159,50 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
     LineRef lineC = 0;
     Diff d;
 
-    for(;;)
+    while(i != pDiffListAC->end())
     {
-        if(d.isEmpty())
+        d = *i;
+        ++i;
+
+        while(!d.isEmpty())
         {
-            if(i != pDiffListAC->end())
+            Diff3Line d3l;
+            if(d.numberOfEquals() > 0)
             {
-                d = *i;
-                ++i;
-            }
-            else
-                break;
-        }
+                // Find the corresponding lineA
+                while(i3->getLineA() != lineA)
+                    ++i3;
 
-        Diff3Line d3l;
-        if(d.numberOfEquals() > 0)
-        {
-            // Find the corresponding lineA
-            while(i3->getLineA() != lineA)
+                i3->setLineC(lineC);
+                i3->bAEqC = true;
+                i3->bBEqC = i3->isEqualAB();
+
+                d.adjustNumberOfEquals(-1);
+                ++lineA;
+                ++lineC;
                 ++i3;
-
-            i3->setLineC(lineC);
-            i3->bAEqC = true;
-            i3->bBEqC = i3->isEqualAB();
-
-            d.adjustNumberOfEquals(-1);
-            ++lineA;
-            ++lineC;
-            ++i3;
-        }
-        else if(d.diff1() > 0 && d.diff2() > 0)
-        {
-            d3l.setLineC(lineC);
-            insert(i3, d3l);
-            d.adjustDiff1(-1);
-            d.adjustDiff2(-1);
-            ++lineA;
-            ++lineC;
-        }
-        else if(d.diff1() > 0)
-        {
-            d.adjustDiff1(-1);
-            ++lineA;
-        }
-        else if(d.diff2() > 0)
-        {
-            d3l.setLineC(lineC);
-            insert(i3, d3l);
-            d.adjustDiff2(-1);
-            ++lineC;
+            }
+            else if(d.diff1() > 0 && d.diff2() > 0)
+            {
+                d3l.setLineC(lineC);
+                insert(i3, d3l);
+                d.adjustDiff1(-1);
+                d.adjustDiff2(-1);
+                ++lineA;
+                ++lineC;
+            }
+            else if(d.diff1() > 0)
+            {
+                d.adjustDiff1(-1);
+                ++lineA;
+            }
+            else if(d.diff2() > 0)
+            {
+                d3l.setLineC(lineC);
+                insert(i3, d3l);
+                d.adjustDiff2(-1);
+                ++lineC;
+            }
         }
     }
 }
@@ -234,242 +224,237 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
     LineRef lineC = 0;
     Diff d;
 
-    for(;;)
+    while(i == pDiffListBC->end())
     {
-        if(d.isEmpty())
-        {
-            if(i != pDiffListBC->end())
-            {
-                d = *i;
-                ++i;
-            }
-            else
-                break;
-        }
+        d = *i;
+        ++i;
 
-        Diff3Line d3l;
-        if(d.numberOfEquals() > 0)
+        while(!d.isEmpty())
         {
-            // Find the corresponding lineB and lineC
-            while(i3b != end() && i3b->getLineB() != lineB)
+            Diff3Line d3l;
+            if(d.numberOfEquals() > 0)
+            {
+                // Find the corresponding lineB and lineC
+                while(i3b != end() && i3b->getLineB() != lineB)
+                    ++i3b;
+
+                while(i3c != end() && i3c->getLineC() != lineC)
+                    ++i3c;
+
+                assert(i3b != end());
+                assert(i3c != end());
+
+                if(i3b == i3c)
+                {
+                    assert(i3b->getLineC() == lineC);
+                    i3b->bBEqC = true;
+                }
+                else
+                {
+                    // Is it possible to move this line up?
+                    // Test if no other B's are used between i3c and i3b
+
+                    // First test which is before: i3c or i3b ?
+                    Diff3LineList::iterator i3c1 = i3c;
+                    Diff3LineList::iterator i3b1 = i3b;
+                    while(i3c1 != i3b && i3b1 != i3c)
+                    {
+                        assert(i3b1 != end() || i3c1 != end());
+                        if(i3c1 != end()) ++i3c1;
+                        if(i3b1 != end()) ++i3b1;
+                    }
+
+                    if(i3c1 == i3b && !i3b->isEqualAB()) // i3c before i3b
+                    {
+                        Diff3LineList::iterator i3 = i3c;
+                        int nofDisturbingLines = 0;
+                        while(i3 != i3b && i3 != end())
+                        {
+                            if(i3->getLineB().isValid())
+                                ++nofDisturbingLines;
+                            ++i3;
+                        }
+
+                        if(nofDisturbingLines > 0) //&& nofDisturbingLines < d.nofEquals*d.nofEquals+4 )
+                        {
+                            Diff3LineList::iterator i3_last_equal_A = end();
+
+                            i3 = i3c;
+                            while(i3 != i3b)
+                            {
+                                if(i3->isEqualAB())
+                                {
+                                    i3_last_equal_A = i3;
+                                }
+                                ++i3;
+                            }
+
+                            /* If i3_last_equal_A isn't still set to d3ll.end(), then
+                            * we've found a line in A that is equal to one in B
+                            * somewhere between i3c and i3b
+                            */
+                            bool before_or_on_equal_line_in_A = (i3_last_equal_A != end());
+
+                            // Move the disturbing lines up, out of sight.
+                            i3 = i3c;
+                            while(i3 != i3b)
+                            {
+                                if(i3->getLineB().isValid() ||
+                                (before_or_on_equal_line_in_A && i3->getLineA().isValid()))
+                                {
+                                    d3l.setLineB(i3->getLineB());
+                                    i3->setLineB(LineRef::invalid);
+
+                                    // Move A along if it matched B
+                                    if(before_or_on_equal_line_in_A)
+                                    {
+                                        d3l.setLineA(i3->getLineA());
+                                        d3l.bAEqB = i3->isEqualAB();
+                                        i3->setLineA(LineRef::invalid);
+                                        i3->bAEqC = false;
+                                    }
+
+                                    i3->bAEqB = false;
+                                    i3->bBEqC = false;
+                                    insert(i3c, d3l);
+                                }
+
+                                if(i3 == i3_last_equal_A)
+                                {
+                                    before_or_on_equal_line_in_A = false;
+                                }
+
+                                ++i3;
+                            }
+                            nofDisturbingLines = 0;
+                        }
+
+                        if(nofDisturbingLines == 0)
+                        {
+                            // Yes, the line from B can be moved.
+                            i3b->setLineB(LineRef::invalid); // This might leave an empty line: removed later.
+                            i3b->bAEqB = false;
+                            i3b->bBEqC = false;
+                            i3c->setLineB(lineB);
+                            i3c->bBEqC = true;
+                            i3c->bAEqB = i3c->isEqualAC();
+                        }
+                    }
+                    else if(i3b1 == i3c && !i3c->isEqualAC())
+                    {
+                        Diff3LineList::iterator i3 = i3b;
+                        int nofDisturbingLines = 0;
+                        while(i3 != i3c && i3 != end())
+                        {
+                            if(i3->getLineC().isValid())
+                                ++nofDisturbingLines;
+                            ++i3;
+                        }
+
+                        if(nofDisturbingLines > 0) //&& nofDisturbingLines < d.nofEquals*d.nofEquals+4 )
+                        {
+                            Diff3LineList::iterator i3_last_equal_A = end();
+
+                            i3 = i3b;
+                            while(i3 != i3c)
+                            {
+                                if(i3->isEqualAC())
+                                {
+                                    i3_last_equal_A = i3;
+                                }
+                                ++i3;
+                            }
+
+                            /* If i3_last_equal_A isn't still set to d3ll.end(), then
+                            * we've found a line in A that is equal to one in C
+                            * somewhere between i3b and i3c
+                            */
+                            bool before_or_on_equal_line_in_A = (i3_last_equal_A != end());
+
+                            // Move the disturbing lines up.
+                            i3 = i3b;
+                            while(i3 != i3c)
+                            {
+                                if(i3->getLineC().isValid() ||
+                                (before_or_on_equal_line_in_A && i3->getLineA().isValid()))
+                                {
+                                    d3l.setLineC(i3->getLineC());
+                                    i3->setLineC(LineRef::invalid);
+
+                                    // Move A along if it matched C
+                                    if(before_or_on_equal_line_in_A)
+                                    {
+                                        d3l.setLineA(i3->getLineA());
+                                        d3l.bAEqC = i3->isEqualAC();
+                                        i3->setLineA(LineRef::invalid);
+                                        i3->bAEqB = false;
+                                    }
+
+                                    i3->bAEqC = false;
+                                    i3->bBEqC = false;
+                                    insert(i3b, d3l);
+                                }
+
+                                if(i3 == i3_last_equal_A)
+                                {
+                                    before_or_on_equal_line_in_A = false;
+                                }
+
+                                ++i3;
+                            }
+                            nofDisturbingLines = 0;
+                        }
+
+                        if(nofDisturbingLines == 0)
+                        {
+                            // Yes, the line from C can be moved.
+                            i3c->setLineC(LineRef::invalid); // This might leave an empty line: removed later.
+                            i3c->bAEqC = false;
+                            i3c->bBEqC = false;
+                            i3b->setLineC(lineC);
+                            i3b->bBEqC = true;
+                            i3b->bAEqC = i3b->isEqualAB();
+                        }
+                    }
+                }
+
+                d.adjustNumberOfEquals(-1);
+                ++lineB;
+                ++lineC;
+                ++i3b;
+                ++i3c;
+            }
+            else if(d.diff1() > 0)
+            {
+                Diff3LineList::iterator i3 = i3b;
+                while(i3->getLineB() != lineB)
+                    ++i3;
+                if(i3 != i3b && !i3->isEqualAB())
+                {
+                    // Take B from this line and move it up as far as possible
+                    d3l.setLineB(lineB);
+                    insert(i3b, d3l);
+                    i3->setLineB(LineRef::invalid);
+                }
+                else
+                {
+                    i3b = i3;
+                }
+                d.adjustDiff1(-1);
+                ++lineB;
                 ++i3b;
 
-            while(i3c != end() && i3c->getLineC() != lineC)
-                ++i3c;
-
-            assert(i3b != end());
-            assert(i3c != end());
-
-            if(i3b == i3c)
-            {
-                assert(i3b->getLineC() == lineC);
-                i3b->bBEqC = true;
-            }
-            else
-            {
-                // Is it possible to move this line up?
-                // Test if no other B's are used between i3c and i3b
-
-                // First test which is before: i3c or i3b ?
-                Diff3LineList::iterator i3c1 = i3c;
-                Diff3LineList::iterator i3b1 = i3b;
-                while(i3c1 != i3b && i3b1 != i3c)
+                if(d.diff2() > 0)
                 {
-                    assert(i3b1 != end() || i3c1 != end());
-                    if(i3c1 != end()) ++i3c1;
-                    if(i3b1 != end()) ++i3b1;
-                }
-
-                if(i3c1 == i3b && !i3b->isEqualAB()) // i3c before i3b
-                {
-                    Diff3LineList::iterator i3 = i3c;
-                    int nofDisturbingLines = 0;
-                    while(i3 != i3b && i3 != end())
-                    {
-                        if(i3->getLineB().isValid())
-                            ++nofDisturbingLines;
-                        ++i3;
-                    }
-
-                    if(nofDisturbingLines > 0) //&& nofDisturbingLines < d.nofEquals*d.nofEquals+4 )
-                    {
-                        Diff3LineList::iterator i3_last_equal_A = end();
-
-                        i3 = i3c;
-                        while(i3 != i3b)
-                        {
-                            if(i3->isEqualAB())
-                            {
-                                i3_last_equal_A = i3;
-                            }
-                            ++i3;
-                        }
-
-                        /* If i3_last_equal_A isn't still set to d3ll.end(), then
-                        * we've found a line in A that is equal to one in B
-                        * somewhere between i3c and i3b
-                        */
-                        bool before_or_on_equal_line_in_A = (i3_last_equal_A != end());
-
-                        // Move the disturbing lines up, out of sight.
-                        i3 = i3c;
-                        while(i3 != i3b)
-                        {
-                            if(i3->getLineB().isValid() ||
-                               (before_or_on_equal_line_in_A && i3->getLineA().isValid()))
-                            {
-                                d3l.setLineB(i3->getLineB());
-                                i3->setLineB(LineRef::invalid);
-
-                                // Move A along if it matched B
-                                if(before_or_on_equal_line_in_A)
-                                {
-                                    d3l.setLineA(i3->getLineA());
-                                    d3l.bAEqB = i3->isEqualAB();
-                                    i3->setLineA(LineRef::invalid);
-                                    i3->bAEqC = false;
-                                }
-
-                                i3->bAEqB = false;
-                                i3->bBEqC = false;
-                                insert(i3c, d3l);
-                            }
-
-                            if(i3 == i3_last_equal_A)
-                            {
-                                before_or_on_equal_line_in_A = false;
-                            }
-
-                            ++i3;
-                        }
-                        nofDisturbingLines = 0;
-                    }
-
-                    if(nofDisturbingLines == 0)
-                    {
-                        // Yes, the line from B can be moved.
-                        i3b->setLineB(LineRef::invalid); // This might leave an empty line: removed later.
-                        i3b->bAEqB = false;
-                        i3b->bBEqC = false;
-                        i3c->setLineB(lineB);
-                        i3c->bBEqC = true;
-                        i3c->bAEqB = i3c->isEqualAC();
-                    }
-                }
-                else if(i3b1 == i3c && !i3c->isEqualAC())
-                {
-                    Diff3LineList::iterator i3 = i3b;
-                    int nofDisturbingLines = 0;
-                    while(i3 != i3c && i3 != end())
-                    {
-                        if(i3->getLineC().isValid())
-                            ++nofDisturbingLines;
-                        ++i3;
-                    }
-
-                    if(nofDisturbingLines > 0) //&& nofDisturbingLines < d.nofEquals*d.nofEquals+4 )
-                    {
-                        Diff3LineList::iterator i3_last_equal_A = end();
-
-                        i3 = i3b;
-                        while(i3 != i3c)
-                        {
-                            if(i3->isEqualAC())
-                            {
-                                i3_last_equal_A = i3;
-                            }
-                            ++i3;
-                        }
-
-                        /* If i3_last_equal_A isn't still set to d3ll.end(), then
-                        * we've found a line in A that is equal to one in C
-                        * somewhere between i3b and i3c
-                        */
-                        bool before_or_on_equal_line_in_A = (i3_last_equal_A != end());
-
-                        // Move the disturbing lines up.
-                        i3 = i3b;
-                        while(i3 != i3c)
-                        {
-                            if(i3->getLineC().isValid() ||
-                               (before_or_on_equal_line_in_A && i3->getLineA().isValid()))
-                            {
-                                d3l.setLineC(i3->getLineC());
-                                i3->setLineC(LineRef::invalid);
-
-                                // Move A along if it matched C
-                                if(before_or_on_equal_line_in_A)
-                                {
-                                    d3l.setLineA(i3->getLineA());
-                                    d3l.bAEqC = i3->isEqualAC();
-                                    i3->setLineA(LineRef::invalid);
-                                    i3->bAEqB = false;
-                                }
-
-                                i3->bAEqC = false;
-                                i3->bBEqC = false;
-                                insert(i3b, d3l);
-                            }
-
-                            if(i3 == i3_last_equal_A)
-                            {
-                                before_or_on_equal_line_in_A = false;
-                            }
-
-                            ++i3;
-                        }
-                        nofDisturbingLines = 0;
-                    }
-
-                    if(nofDisturbingLines == 0)
-                    {
-                        // Yes, the line from C can be moved.
-                        i3c->setLineC(LineRef::invalid); // This might leave an empty line: removed later.
-                        i3c->bAEqC = false;
-                        i3c->bBEqC = false;
-                        i3b->setLineC(lineC);
-                        i3b->bBEqC = true;
-                        i3b->bAEqC = i3b->isEqualAB();
-                    }
+                    d.adjustDiff2(-1);
+                    ++lineC;
                 }
             }
-
-            d.adjustNumberOfEquals(-1);
-            ++lineB;
-            ++lineC;
-            ++i3b;
-            ++i3c;
-        }
-        else if(d.diff1() > 0)
-        {
-            Diff3LineList::iterator i3 = i3b;
-            while(i3->getLineB() != lineB)
-                ++i3;
-            if(i3 != i3b && !i3->isEqualAB())
-            {
-                // Take B from this line and move it up as far as possible
-                d3l.setLineB(lineB);
-                insert(i3b, d3l);
-                i3->setLineB(LineRef::invalid);
-            }
-            else
-            {
-                i3b = i3;
-            }
-            d.adjustDiff1(-1);
-            ++lineB;
-            ++i3b;
-
-            if(d.diff2() > 0)
+            else if(d.diff2() > 0)
             {
                 d.adjustDiff2(-1);
                 ++lineC;
             }
-        }
-        else if(d.diff2() > 0)
-        {
-            d.adjustDiff2(-1);
-            ++lineC;
         }
     }
     /*
