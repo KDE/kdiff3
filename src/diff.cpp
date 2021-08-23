@@ -105,7 +105,6 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
         ++i;
 
         Diff3Line d3l;
-
         while(d.numberOfEquals() > 0)
         {
             d3l.bAEqB = true;
@@ -114,6 +113,9 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
             d.adjustNumberOfEquals(-1);
             ++lineA;
             ++lineB;
+
+            qCDebug(kdiffCore) << "lineA = " << d3l.getLineA() << ", lineB = " << d3l.getLineB() ;
+            push_back(d3l);
         }
 
         while(d.diff1() > 0 && d.diff2() > 0)
@@ -124,6 +126,9 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
             d.adjustDiff2(-1);
             ++lineA;
             ++lineB;
+
+            qCDebug(kdiffCore) << "lineA = " << d3l.getLineA() << ", lineB = " << d3l.getLineB() ;
+            push_back(d3l);
         }
 
         while(d.diff1() > 0)
@@ -131,6 +136,9 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
             d3l.setLineA(lineA);
             d.adjustDiff1(-1);
             ++lineA;
+
+            qCDebug(kdiffCore) << "lineA = " << d3l.getLineA() << ", lineB = " << d3l.getLineB() ;
+            push_back(d3l);
         }
 
         while(d.diff2() > 0)
@@ -138,12 +146,10 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
             d3l.setLineB(lineB);
             d.adjustDiff2(-1);
             ++lineB;
+
+            qCDebug(kdiffCore) << "lineA = " << d3l.getLineA() << ", lineB = " << d3l.getLineB() ;
+            push_back(d3l);
         }
-
-        assert(d.numberOfEquals() >= 0);
-
-        qCDebug(kdiffCore) << "lineA = " << d3l.getLineA() << ", lineB = " << d3l.getLineB() ;
-        push_back(d3l);
     }
     qCInfo(kdiffMain) << "Leave: calcDiff3LineListUsingAB" ;
 }
