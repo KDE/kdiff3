@@ -106,6 +106,8 @@ class Diff
         mDiff2 = inDiff2;
     }
 
+    [[nodiscard]] bool isEmpty() const { return nofEquals == 0 && mDiff1 == 0 && mDiff2 == 0;}
+
     Q_REQUIRED_RESULT inline qint32 numberOfEquals() const { return nofEquals; };
 
     Q_REQUIRED_RESULT inline qint64 diff1() const { return mDiff1; };
