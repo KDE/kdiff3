@@ -1335,10 +1335,11 @@ QString DiffTextWindowData::getLineString(int line)
 
 void DiffTextWindow::resizeEvent(QResizeEvent* e)
 {
-    QSize s = e->size();
+    QSize newSize = e->size();
     QFontMetrics fm = fontMetrics();
-    int visibleLines = s.height() / fm.lineSpacing() - 2;
-    int visibleColumns = s.width() / Utils::getHorizontalAdvance(fm, '0') - d->leftInfoWidth();
+    int visibleLines = newSize.height() / fm.lineSpacing() - 2;
+    int visibleColumns = newSize.width() / Utils::getHorizontalAdvance(fm, '0') - d->leftInfoWidth();
+
     if(e->size().height() != e->oldSize().height())
         Q_EMIT resizeHeightChangedSignal(visibleLines);
     if(e->size().width() != e->oldSize().width())
@@ -1349,14 +1350,14 @@ void DiffTextWindow::resizeEvent(QResizeEvent* e)
 int DiffTextWindow::getNofVisibleLines()
 {
     QFontMetrics fm = fontMetrics();
-    int fmh = fm.lineSpacing();
-    int h = height();
-    return h / fmh - 1;
+
+    return height() / fm.lineSpacing() - 1;
 }
 
 int DiffTextWindow::getVisibleTextAreaWidth()
 {
     QFontMetrics fm = fontMetrics();
+
     return width() - d->leftInfoWidth() * Utils::getHorizontalAdvance(fm, '0');
 }
 
