@@ -177,7 +177,7 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
         while(d.numberOfEquals() > 0)
         {
             // Find the corresponding lineA
-            while(i3->getLineA() != lineA)
+            while(i3->getLineA() != lineA && i3 != end())
                 ++i3;
             assert(i3 != end());
 
