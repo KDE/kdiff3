@@ -74,7 +74,7 @@ class LineRef
     [[nodiscard]] inline bool isValid() const noexcept { return mLineNumber != invalid; }
 
   private:
-    LineType mLineNumber = invalid;
+    SafeInt32<LineType> mLineNumber = invalid;
 };
 
 /*
