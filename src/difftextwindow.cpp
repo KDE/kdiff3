@@ -866,14 +866,17 @@ class FormatRangeHelper
         m_background = QColor(Qt::white);
         m_currentPos = 0;
     }
+
     void setFont(const QFont& f)
     {
         m_font = f;
     }
+
     void setPen(const QPen& pen)
     {
         m_pen = pen;
     }
+
     void setBackground(const QColor& background)
     {
         m_background = background;
