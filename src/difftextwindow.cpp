@@ -43,6 +43,7 @@
 #include <QLineEdit>
 #include <QMenu>
 #include <QMimeData>
+#include <QPainter>
 #include <QPushButton>
 #include <QRunnable>
 #include <QScrollBar>
@@ -388,25 +389,15 @@ void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QS
     painter.setClipRect(clipRect);
     painter.translate(view.left(), 0);
     QFontMetrics fm = painter.fontMetrics();
-    //if ( fm.width(headerText) > view.width() )
     {
-        // A simple wrapline algorithm
-        int l = 0;
-        for(int p = 0; p < headerText.length();)
-        {
-            QString s = headerText.mid(p);
-            int i;
-            for(i = 2; i < s.length(); ++i)
-                if(Utils::getHorizontalAdvance(fm, s, i) > view.width())
-                {
-                    --i;
-                    break;
-                }
+        int lineHeight = fm.height() + fm.ascent();
+        const QRectF headerRect(0, 5, view.width(), 3 * (lineHeight));
+        QTextOption options;
+        options.setWrapMode(QTextOption::WordWrap);
+        // TODO: transition to Qt::LayoutDirectionAuto
+        options.setTextDirection(Qt::LeftToRight);
+        static_cast<QPainter&>(painter).drawText(headerRect, headerText, options);
 
-            painter.drawText(0, l * fm.height() + fm.ascent(), s.left(i));
-            p += i;
-            ++l;
-        }
         painter.setPen(fgColor);
         painter.drawLine(0, view.top() - 2, view.width(), view.top() - 2);
     }
@@ -910,7 +901,10 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
     if(m_pOptions->m_bShowWhiteSpaceCharacters)
         textOption.setFlags(QTextOption::ShowTabsAndSpaces);
     if(m_pOptions->m_bRightToLeftLanguage)
+
+    {
         textOption.setAlignment(Qt::AlignRight); // only relevant for multi line text layout
+    }
     if(visibleTextWidth >= 0)
         textOption.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
 
