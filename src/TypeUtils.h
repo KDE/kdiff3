@@ -30,8 +30,14 @@ using QtNumberType = qint32;//Qt insists on one type for all but does not create
 using PtrDiffRef = size_t;
 
 #ifndef Q_OS_WIN
+using KDiff3_exception_policy = boost::safe_numerics::exception_policy<
+    boost::safe_numerics::throw_exception, // arithmetic error
+    boost::safe_numerics::trap_exception,  // implementation defined behavior
+    boost::safe_numerics::trap_exception,  // undefined behavior
+    boost::safe_numerics::trap_exception   // uninitialized value
+>;
 
-template<typename T> using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::native>;
+template<typename T> using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::native, KDiff3_exception_policy>;
 #else
 template<typename T> using SafeInt = T;
 #endif
