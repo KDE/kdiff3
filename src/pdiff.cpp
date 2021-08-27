@@ -319,7 +319,7 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
 
     // Calc needed lines for display
     if(m_diff3LineList.size() <= TYPE_MAX(QtNumberType))
-        m_neededLines = SafeInt32<QtNumberType>(m_diff3LineList.size());
+        m_neededLines = SafeInt<QtNumberType>(m_diff3LineList.size());
     else
     {
         errors.append("Too many lines in diff. Skiping file.");

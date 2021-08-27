@@ -74,7 +74,7 @@ class LineRef
     [[nodiscard]] inline bool isValid() const noexcept { return mLineNumber != invalid; }
 
   private:
-    SafeInt32<LineType> mLineNumber = invalid;
+    SafeInt<LineType> mLineNumber = invalid;
 };
 
 /*
@@ -93,4 +93,6 @@ static_assert(std::is_convertible<int, LineRef>::value, "Can not convert int to 
 typedef LineRef::LineType LineCount;
 typedef LineRef::LineType LineIndex;
 
+//Break in an obvious way if way cann't get LineCounts from Qt supplied ints without overflow issues.
+static_assert(sizeof(LineCount) >= sizeof(QtNumberType)); //Generally assumed by KDiff3
 #endif

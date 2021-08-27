@@ -584,7 +584,7 @@ int ManualDiffHelpEntry::calcManualDiffFirstDiff3LineIdx(const Diff3LineVector& 
         if((lineA1.isValid() && lineA1 == d3l.getLineA()) ||
            (lineB1.isValid() && lineB1 == d3l.getLineB()) ||
            (lineC1.isValid() && lineC1 == d3l.getLineC()))
-            return SafeInt32<int>(i);
+            return SafeInt<int>(i);
     }
     return -1;
 }
@@ -1516,7 +1516,7 @@ bool Diff3LineList::fineDiff(const e_SrcSelector selector, const std::shared_ptr
 // Convert the list to a vector of pointers
 void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
 {
-    d3lv.resize(SafeInt32<QtSizeType>(size()));
+    d3lv.resize(SafeInt<QtSizeType>(size()));
     Diff3LineList::iterator i;
     QtSizeType j = 0;
     for(i = begin(); i != end(); ++i, ++j)

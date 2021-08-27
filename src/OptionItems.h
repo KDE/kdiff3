@@ -172,7 +172,7 @@ class OptionCodec : public OptionString
     void setCurrent(const QByteArray& name) { OptionString::setCurrent(QString::fromLatin1(name)); }
     [[nodiscard]] const QString& defaultName() const { return mDefaultName; }
 
-    void saveDefaultIndex(const SafeInt32<QtNumberType> i) { defaultIndex = i; };
+    void saveDefaultIndex(const SafeInt<QtNumberType> i) { defaultIndex = i; };
     [[nodiscard]] QtNumberType getDefaultIndex() const { return defaultIndex; }
 
   private:

@@ -392,7 +392,7 @@ class Diff3LineList: public std::list<Diff3Line>
         }
         else
         {
-            return SafeInt32<LineCount>(size());
+            return SafeInt<LineCount>(size());
         }
     }
 };

@@ -179,7 +179,7 @@ const std::shared_ptr<LineDataVector>& SourceData::getLineDataForDisplay() const
 
 LineCount SourceData::getSizeLines() const
 {
-    return SafeInt32<LineCount>(m_normalData.lineCount());
+    return SafeInt<LineCount>(m_normalData.lineCount());
 }
 
 qint64 SourceData::getSizeBytes() const

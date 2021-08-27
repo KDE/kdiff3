@@ -856,7 +856,7 @@ void KDiff3App::slotFilePrint()
         QRect view2(1 * (columnWidth + columnDistance), view.top(), columnWidth, view.height());
         QRect view3(2 * (columnWidth + columnDistance), view.top(), columnWidth, view.height());
 
-        int linesPerPage = view.height() / fm.lineSpacing();
+        LineCount linesPerPage = view.height() / fm.lineSpacing();
 
         m_pEventLoopForPrinting = QPointer<QEventLoop>(new QEventLoop());
         if(m_pOptions->wordWrapOn())
@@ -877,7 +877,7 @@ void KDiff3App::slotFilePrint()
         bool bFirstPrintedPage = false;
 
         bool bPrintSelection = false;
-        int totalNofPages = (totalNofLines + linesPerPage - 1) / linesPerPage;
+        LineCount totalNofPages = (totalNofLines + linesPerPage - 1) / linesPerPage;
         LineRef line;
         LineRef selectionEndLine;
 

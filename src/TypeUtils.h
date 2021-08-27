@@ -30,9 +30,10 @@ using QtNumberType = qint32;//Qt insists on one type for all but does not create
 using PtrDiffRef = size_t;
 
 #ifndef Q_OS_WIN
-template<typename T> using SafeInt32 = boost::safe_numerics::safe<T, boost::safe_numerics::native>;
+
+template<typename T> using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::native>;
 #else
-template<typename T> using SafeInt32 = T;
+template<typename T> using SafeInt = T;
 #endif
 
 #define TYPE_MAX(x) std::numeric_limits<x>::max()

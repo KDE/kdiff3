@@ -70,7 +70,7 @@ class DiffTextWindow : public QWidget
 
     int getMaxTextWidth();
     LineCount getNofLines();
-    int getNofVisibleLines();
+    LineCount getNofVisibleLines();
     int getVisibleTextAreaWidth();
 
     LineIndex convertLineToDiff3LineIdx(LineRef line);
@@ -89,8 +89,8 @@ class DiffTextWindow : public QWidget
     void recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, int visibleTextWidth);
     void recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, QtSizeType cacheListIdx);
 
-    void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, int linesPerPage, const QColor& fgColor);
-    void print(RLPainter& painter, const QRect& r, int firstLine, int nofLinesPerPage);
+    void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, const LineCount linesPerPage, const QColor& fgColor);
+    void print(RLPainter& painter, const QRect& r, int firstLine, const LineCount nofLinesPerPage);
 
     static bool startRunnables();
 

@@ -126,7 +126,7 @@ class DiffTextWindowData
         const ChangeFlags whatChanged, const ChangeFlags whatChanged2, const LineRef& srcLineIdx,
         int wrapLineOffset, int wrapLineLength, bool bWrapLine, const QRect& invalidRect);
 
-    void draw(RLPainter& p, const QRect& invalidRect, int beginLine, int endLine);
+    void draw(RLPainter& p, const QRect& invalidRect, const int beginLine, const LineRef& endLine);
 
     void myUpdate(int afterMilliSecs);
 
@@ -381,7 +381,7 @@ void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
     }
 }
 
-void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, int linesPerPage, const QColor& fgColor)
+void DiffTextWindow::printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, const LineCount linesPerPage, const QColor& fgColor)
 {
     QRect clipRect = view;
     clipRect.setTop(0);
@@ -1192,7 +1192,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
     bool bOldSelectionContainsData = d->m_selection.bSelectionContainsData;
     d->m_selection.bSelectionContainsData = false;
 
-    int endLine = std::min(d->m_firstLine + getNofVisibleLines() + 2, getNofLines());
+    LineRef endLine = std::min(d->m_firstLine + getNofVisibleLines() + 2, getNofLines());
 
     RLPainter p(this, d->getOptions()->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(), '0'));
 
@@ -1209,7 +1209,7 @@ void DiffTextWindow::paintEvent(QPaintEvent* e)
         Q_EMIT newSelection();
 }
 
-void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, int nofLinesPerPage)
+void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, const LineCount nofLinesPerPage)
 {
     if(d->getDiff3LineVector() == nullptr || !updatesEnabled() ||
        (d->m_diff3WrapLineVector.empty() && d->m_bWordWrap))
@@ -1224,7 +1224,7 @@ void DiffTextWindow::print(RLPainter& p, const QRect&, int firstLine, int nofLin
     d->m_firstLine = oldFirstLine;
 }
 
-void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int beginLine, int endLine)
+void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int beginLine, const LineRef& endLine)
 {
     if(m_pLineData == nullptr || m_pLineData->empty()) return;
     m_lineNumberWidth = m_pOptions->m_bShowLineNumbers ? (int)log10((double)std::max(m_size, 1)) + 1 : 0;
@@ -1235,13 +1235,14 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, int beginL
         m_cDiff1 = m_pOptions->bColor();
         m_cDiff2 = m_pOptions->cColor();
     }
-    if(m_winIdx == e_SrcSelector::B)
+    else if(m_winIdx == e_SrcSelector::B)
     {
         m_cThis = m_pOptions->bColor();
         m_cDiff1 = m_pOptions->cColor();
         m_cDiff2 = m_pOptions->aColor();
     }
-    if(m_winIdx == e_SrcSelector::C)
+    else
+        if(m_winIdx == e_SrcSelector::C)
     {
         m_cThis = m_pOptions->cColor();
         m_cDiff1 = m_pOptions->aColor();
@@ -1347,7 +1348,7 @@ void DiffTextWindow::resizeEvent(QResizeEvent* e)
     QWidget::resizeEvent(e);
 }
 
-int DiffTextWindow::getNofVisibleLines()
+LineCount DiffTextWindow::getNofVisibleLines()
 {
     QFontMetrics fm = fontMetrics();
 
