@@ -8,6 +8,7 @@ cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
 project(kdiff3)
 
+set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
 set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(ECM_MIN_VERSION "5.50.0")
