@@ -13,14 +13,17 @@
 // Helper class that swaps left and right for some commands.
 class RLPainter : public QPainter
 {
+  private:
     int m_factor;
     int m_xOffset;
     int m_fontWidth;
+    bool bRightToLeft = false;
 
   public:
     RLPainter(QPaintDevice* pd, bool bRTL, int width, int fontWidth)
         : QPainter(pd)
     {
+        bRightToLeft = bRTL;
         if(bRTL)
         {
             m_fontWidth = fontWidth;
@@ -37,7 +40,7 @@ class RLPainter : public QPainter
 
     void fillRect(int x, int y, int w, int h, const QBrush& b)
     {
-        if(m_factor == 1)
+        if(!bRightToLeft)
             QPainter::fillRect(m_xOffset + x, y, w, h, b);
         else
             QPainter::fillRect(m_xOffset - x - w, y, w, h, b);
@@ -45,7 +48,7 @@ class RLPainter : public QPainter
 
     void drawText(int x, int y, const QString& s, bool bAdapt = false)
     {
-        Qt::LayoutDirection ld = (m_factor == 1 || !bAdapt) ? Qt::LeftToRight : Qt::RightToLeft;
+        Qt::LayoutDirection ld = (!bRightToLeft || !bAdapt) ? Qt::LeftToRight : Qt::RightToLeft;
         //QPainter::setLayoutDirection( ld );
         if(ld == Qt::RightToLeft) // Reverse the text
         {
