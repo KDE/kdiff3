@@ -127,8 +127,11 @@ void DefaultCommentParser::processChar(const QString &line, const QChar &inChar)
 */
 void DefaultCommentParser::processLine(const QString &line)
 {
-    offset = line.indexOf(QRegularExpression("[\\S]", QRegularExpression::UseUnicodePropertiesOption));
-    const QtNumberType  trailIndex = line.lastIndexOf(QRegularExpression("\\s+$", QRegularExpression::UseUnicodePropertiesOption));
+    static const QRegularExpression nonWhiteRegexp = QRegularExpression("[\\S]", QRegularExpression::UseUnicodePropertiesOption);
+    static const QRegularExpression tailRegexp = QRegularExpression("\\s+$", QRegularExpression::UseUnicodePropertiesOption);
+    offset = line.indexOf(nonWhiteRegexp);
+    const QtNumberType trailIndex = line.lastIndexOf(tailRegexp);
+
     lastComment.startOffset = lastComment.endOffset = 0; //reset these for each line
     comments.clear();
 
