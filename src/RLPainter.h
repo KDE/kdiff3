@@ -14,7 +14,6 @@
 class RLPainter : public QPainter
 {
   private:
-    int m_factor;
     int m_xOffset;
     int m_fontWidth;
     bool bRightToLeft = false;
@@ -27,13 +26,11 @@ class RLPainter : public QPainter
         if(bRTL)
         {
             m_fontWidth = fontWidth;
-            m_factor = -1;
             m_xOffset = width - 1;
         }
         else
         {
             m_fontWidth = 0;
-            m_factor = 1;
             m_xOffset = 0;
         }
     }
@@ -57,15 +54,18 @@ class RLPainter : public QPainter
             {
                 s2 += s[i];
             }
-            QPainter::drawText(m_xOffset - m_fontWidth * s.length() + m_factor * x, y, s2);
+            QPainter::drawText(m_xOffset - m_fontWidth * s.length() - x, y, s2);
             return;
         }
-        QPainter::drawText(m_xOffset - m_fontWidth * s.length() + m_factor * x, y, s);
+        QPainter::drawText(m_xOffset - m_fontWidth * s.length() + x, y, s);
     }
 
     void drawLine(int x1, int y1, int x2, int y2)
     {
-        QPainter::drawLine(m_xOffset + m_factor * x1, y1, m_xOffset + m_factor * x2, y2);
+        if(bRightToLeft)
+            QPainter::drawLine(m_xOffset - x1, y1, m_xOffset - x2, y2);
+        else
+            QPainter::drawLine(m_xOffset + x1, y1, m_xOffset + x2, y2);
     }
 };
 
