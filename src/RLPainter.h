@@ -11,6 +11,10 @@
 
 #include <QPainter>
 // Helper class that swaps left and right for some commands.
+
+/*
+    This class assists with changing KDiff3 between RTL and LTR layout.
+*/
 class RLPainter : public QPainter
 {
   private:
@@ -46,10 +50,9 @@ class RLPainter : public QPainter
     void drawText(int x, int y, const QString& s, bool bAdapt = false)
     {
         Qt::LayoutDirection ld = (!bRightToLeft || !bAdapt) ? Qt::LeftToRight : Qt::RightToLeft;
-
+        // Qt will automaticly reverse the text as needed just set the layout direction
         QPainter::setLayoutDirection(ld);
-
-        if(ld == Qt::RightToLeft) // Reverse the text
+        if(ld == Qt::RightToLeft)
         {
             QPainter::drawText(m_xOffset - m_fontWidth * s.length() - x, y, s);
             return;
