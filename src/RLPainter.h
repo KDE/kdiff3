@@ -46,15 +46,12 @@ class RLPainter : public QPainter
     void drawText(int x, int y, const QString& s, bool bAdapt = false)
     {
         Qt::LayoutDirection ld = (!bRightToLeft || !bAdapt) ? Qt::LeftToRight : Qt::RightToLeft;
-        //QPainter::setLayoutDirection( ld );
+
+        QPainter::setLayoutDirection(ld);
+
         if(ld == Qt::RightToLeft) // Reverse the text
         {
-            QString s2;
-            for(int i = s.length() - 1; i >= 0; --i)
-            {
-                s2 += s[i];
-            }
-            QPainter::drawText(m_xOffset - m_fontWidth * s.length() - x, y, s2);
+            QPainter::drawText(m_xOffset - m_fontWidth * s.length() - x, y, s);
             return;
         }
         QPainter::drawText(m_xOffset - m_fontWidth * s.length() + x, y, s);
