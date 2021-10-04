@@ -1,3 +1,7 @@
+#  SPDX-FileCopyrightText: 2003-2006, Sergey Zorin. All rights reserved.
+#  SPDX-FileCopyrightText:  2018-2020 Michael Reeves reeves.87@gmail.com
+#  SPDX-License-Identifier: BSD-2-Clause
+
 # Work around buggy windows sdk headers that prevent certain symbols from being exported the normal way
 # even though they are required exports for shell exentions.
 if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
