@@ -4,8 +4,7 @@
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
-
+ */
 
 #include "directorymergewindow.h"
 
@@ -52,13 +51,14 @@ struct DirectoryMergeWindow::ItemInfo {
     e_MergeOperation eMergeOperation;
 };
 
-class StatusInfo : public QDialog
+class StatusInfo: public QDialog
 {
   private:
     QTextEdit* m_pTextEdit;
 
   public:
-    explicit StatusInfo(QWidget* pParent): QDialog(pParent)
+    explicit StatusInfo(QWidget* pParent):
+        QDialog(pParent)
     {
         QVBoxLayout* pVLayout = new QVBoxLayout(this);
         m_pTextEdit = new QTextEdit(this);
@@ -118,13 +118,13 @@ enum Columns
 
 static Qt::CaseSensitivity s_eCaseSensitivity = Qt::CaseSensitive;
 
-class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemModel
+class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemModel
 {
     friend class DirMergeItem;
 
   public:
-    DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW, KDiff3App &app)
-       : m_app(app)
+    DirectoryMergeWindowPrivate(DirectoryMergeWindow* pDMW, KDiff3App& app):
+        m_app(app)
     {
         mWindow = pDMW;
         m_pStatusInfo = new StatusInfo(mWindow);
@@ -253,8 +253,8 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
         const FileAccess* m_pFA;
 
       public:
-        explicit FileKey(const FileAccess& fa)
-            : m_pFA(&fa) {}
+        explicit FileKey(const FileAccess& fa):
+            m_pFA(&fa) {}
 
         quint32 getParents(const FileAccess* pFA, const FileAccess* v[], quint32 maxSize) const
         {
@@ -302,7 +302,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate : public QAbstractItemMo
   public:
     DirectoryMergeWindow* mWindow;
     QSharedPointer<Options> m_pOptions = nullptr;
-    KDiff3App &m_app;
+    KDiff3App& m_app;
 
     bool m_bFollowDirLinks = false;
     bool m_bFollowFileLinks = false;
@@ -559,17 +559,18 @@ const QSharedPointer<Options>& DirectoryMergeWindow::getOptions() const
 }
 
 // Previously  Q3ListViewItem::paintCell(p,cg,column,width,align);
-class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
+class DirectoryMergeWindow::DirMergeItemDelegate: public QStyledItemDelegate
 {
   private:
     DirectoryMergeWindow* m_pDMW;
     [[nodiscard]] const QSharedPointer<Options>& getOptions() const { return m_pDMW->getOptions(); }
 
   public:
-    explicit DirMergeItemDelegate(DirectoryMergeWindow* pParent)
-        : QStyledItemDelegate(pParent), m_pDMW(pParent)
+    explicit DirMergeItemDelegate(DirectoryMergeWindow* pParent):
+        QStyledItemDelegate(pParent), m_pDMW(pParent)
     {
     }
+
     void paint(QPainter* thePainter, const QStyleOptionViewItem& option, const QModelIndex& index) const override
     {
         QtNumberType column = index.column();
@@ -641,8 +642,8 @@ class DirectoryMergeWindow::DirMergeItemDelegate : public QStyledItemDelegate
     }
 };
 
-DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions, KDiff3App &app)
-    : QTreeView(pParent)
+DirectoryMergeWindow::DirectoryMergeWindow(QWidget* pParent, const QSharedPointer<Options>& pOptions, KDiff3App& app):
+    QTreeView(pParent)
 {
     d = std::make_unique<DirectoryMergeWindowPrivate>(this, app);
     setModel(d.get());
@@ -1329,7 +1330,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
     t.start();
     pp.setMaxNofSteps(nrOfFiles);
 
-    for(MergeFileInfos &mfi: m_fileMergeMap)
+    for(MergeFileInfos& mfi: m_fileMergeMap)
     {
         const QString& fileName = mfi.subPath();
 
@@ -1359,15 +1360,16 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
 
         if(dirPart.isEmpty()) // Top level
         {
-            m_pRoot->addChild(&mfi); //new DirMergeItem( this, filePart, &mfi );
+            m_pRoot->addChild(&mfi); // new DirMergeItem( this, filePart, &mfi );
             mfi.setParent(m_pRoot);
         }
         else
         {
-            const FileAccess* pFA = mfi.getFileInfoA() ? mfi.getFileInfoA() : mfi.getFileInfoB() ? mfi.getFileInfoB() : mfi.getFileInfoC();
+            const FileAccess* pFA = mfi.getFileInfoA() ? mfi.getFileInfoA() : mfi.getFileInfoB() ? mfi.getFileInfoB() :
+                                                                                                   mfi.getFileInfoC();
             MergeFileInfos& dirMfi = pFA->parent() ? m_fileMergeMap[FileKey(*pFA->parent())] : *m_pRoot; // parent
 
-            dirMfi.addChild(&mfi); //new DirMergeItem( dirMfi.m_pDMI, filePart, &mfi );
+            dirMfi.addChild(&mfi); // new DirMergeItem( dirMfi.m_pDMI, filePart, &mfi );
             mfi.setParent(&dirMfi);
             //   // Equality for parent dirs is set in updateFileVisibilities()
         }
@@ -1881,11 +1883,11 @@ void DirectoryMergeWindow::compareCurrentFile()
         if(!(pMFI->hasDir()))
         {
             Q_EMIT startDiffMerge(errors,
-                pMFI->existsInA() ? pMFI->getFileInfoA()->absoluteFilePath() : QString(""),
-                pMFI->existsInB() ? pMFI->getFileInfoB()->absoluteFilePath() : QString(""),
-                pMFI->existsInC() ? pMFI->getFileInfoC()->absoluteFilePath() : QString(""),
-                "",
-                "", "", "", nullptr);
+                                  pMFI->existsInA() ? pMFI->getFileInfoA()->absoluteFilePath() : QString(""),
+                                  pMFI->existsInB() ? pMFI->getFileInfoB()->absoluteFilePath() : QString(""),
+                                  pMFI->existsInC() ? pMFI->getFileInfoC()->absoluteFilePath() : QString(""),
+                                  "",
+                                  "", "", "", nullptr);
         }
     }
     Q_EMIT updateAvailabilities();
@@ -1903,11 +1905,11 @@ void DirectoryMergeWindow::slotCompareExplicitlySelectedFiles()
 
     QStringList errors;
     Q_EMIT startDiffMerge(errors,
-        d->getFileName(d->m_selection1Index),
-        d->getFileName(d->m_selection2Index),
-        d->getFileName(d->m_selection3Index),
-        "",
-        "", "", "", nullptr);
+                          d->getFileName(d->m_selection1Index),
+                          d->getFileName(d->m_selection2Index),
+                          d->getFileName(d->m_selection3Index),
+                          "",
+                          "", "", "", nullptr);
     d->m_selection1Index = QModelIndex();
     d->m_selection2Index = QModelIndex();
     d->m_selection3Index = QModelIndex();
@@ -2236,7 +2238,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
     int nrOfCompletedSimItems = 0;
 
     // Count the number of completed items (for the progress bar).
-    for(const QModelIndex& i : m_mergeItemList)
+    for(const QModelIndex& i: m_mergeItemList)
     {
         MergeFileInfos* pMFI = getMFI(i);
         ++nrOfItems;
@@ -2690,8 +2692,8 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::makeDir(const QString& n
     return true;
 }
 
-DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent)
-    : QFrame(pParent)
+DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent):
+    QFrame(pParent)
 {
     QVBoxLayout* topLayout = new QVBoxLayout(this);
     topLayout->setContentsMargins(0, 0, 0, 0);
@@ -3003,7 +3005,7 @@ void DirectoryMergeWindow::setupConnections(const KDiff3App* app)
     chk_connect(this, &DirectoryMergeWindow::startDiffMerge, app, &KDiff3App::slotFileOpen2);
     chk_connect(selectionModel(), &QItemSelectionModel::selectionChanged, app, &KDiff3App::slotUpdateAvailabilities);
     chk_connect(selectionModel(), &QItemSelectionModel::currentChanged, app, &KDiff3App::slotUpdateAvailabilities);
-    chk_connect(this, static_cast<void (DirectoryMergeWindow::*) (void)>(&DirectoryMergeWindow::updateAvailabilities), app, &KDiff3App::slotUpdateAvailabilities);
+    chk_connect(this, static_cast<void (DirectoryMergeWindow::*)(void)>(&DirectoryMergeWindow::updateAvailabilities), app, &KDiff3App::slotUpdateAvailabilities);
     chk_connect(this, &DirectoryMergeWindow::statusBarMessage, app, &KDiff3App::slotStatusMsg);
     chk_connect(app, &KDiff3App::doRefresh, this, &DirectoryMergeWindow::slotRefresh);
 }
@@ -3056,7 +3058,7 @@ void DirectoryMergeWindow::updateAvailabilities(bool bMergeEditorVisible, bool b
     {
         chooseA->setEnabled(bItemActive && bDirCompare ? pMFI->existsInA() : true);
         chooseB->setEnabled(bItemActive && bDirCompare ? pMFI->existsInB() : true);
-        chooseC->setEnabled(bItemActive && bDirCompare ? pMFI->existsInC() : KDiff3App::isTripleDiff() );
+        chooseC->setEnabled(bItemActive && bDirCompare ? pMFI->existsInC() : KDiff3App::isTripleDiff());
         chooseA->setChecked(false);
         chooseB->setChecked(false);
         chooseC->setChecked(false);
