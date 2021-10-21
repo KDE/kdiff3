@@ -178,19 +178,26 @@ QString MergeFileInfos::fullNameDest() const
 
 bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer<Options> const &pOptions, DirectoryMergeWindow* pDMW)
 {
-    std::map<QDateTime, int> dateMap;
+    enum class FilesFound
+    {
+        aOnly,
+        bAndA,
+        all
+    };
+
+    std::map<QDateTime, FilesFound> dateMap;
 
     if(existsInA())
     {
-        dateMap[getFileInfoA()->lastModified()] = 0;
+        dateMap[getFileInfoA()->lastModified()] = FilesFound::aOnly;
     }
     if(existsInB())
     {
-        dateMap[getFileInfoB()->lastModified()] = 1;
+        dateMap[getFileInfoB()->lastModified()] = FilesFound::bAndA;
     }
     if(existsInC())
     {
-        dateMap[getFileInfoC()->lastModified()] = 2;
+        dateMap[getFileInfoC()->lastModified()] = FilesFound::all;
     }
 
     if(pOptions->m_bDmFullAnalysis)
@@ -281,11 +288,12 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
 
     // The map automatically sorts the keys.
     int age = eNew;
-    std::map<QDateTime, int>::reverse_iterator i;
+    std::map<QDateTime, FilesFound>::reverse_iterator i;
     for(i = dateMap.rbegin(); i != dateMap.rend(); ++i)
     {
-        int n = i->second;
-        if(n == 0 && getAgeA() == eNotThere)
+        FilesFound n = i->second;
+
+        if(n == FilesFound::aOnly && getAgeA() == eNotThere)
         {
             setAgeA((e_Age)age);
             ++age;
@@ -300,7 +308,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
                 ++age;
             }
         }
-        else if(n == 1 && getAgeB() == eNotThere)
+        else if(n == FilesFound::bAndA && getAgeB() == eNotThere)
         {
             setAgeB((e_Age)age);
             ++age;
@@ -315,7 +323,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
                 ++age;
             }
         }
-        else if(n == 2 && getAgeC() == eNotThere)
+        else if(n == FilesFound::all && getAgeC() == eNotThere)
         {
             setAgeC((e_Age)age);
             ++age;
