@@ -118,6 +118,16 @@ class Diff
     inline void adjustNumberOfEquals(const qint64 delta) { nofEquals += delta; }
     inline void adjustDiff1(const qint64 delta) { mDiff1 += delta; }
     inline void adjustDiff2(const qint64 delta) { mDiff2 += delta; }
+
+    bool operator==(const Diff& b) const
+    {
+        return nofEquals == b.nofEquals && mDiff1 == b.mDiff1 && mDiff2 == b.mDiff2;
+    };
+
+    bool operator!=(const Diff& b) const
+    {
+        return !(*this == b);
+    };
 };
 
 class DiffList: public std::list<Diff>
