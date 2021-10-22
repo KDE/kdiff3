@@ -104,9 +104,10 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
         d = *i;
         ++i;
 
-        Diff3Line d3l;
         while(d.numberOfEquals() > 0)
         {
+            Diff3Line d3l;
+
             d3l.bAEqB = true;
             d3l.setLineA(lineA);
             d3l.setLineB(lineB);
@@ -120,6 +121,8 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
 
         while(d.diff1() > 0 && d.diff2() > 0)
         {
+            Diff3Line d3l;
+
             d3l.setLineA(lineA);
             d3l.setLineB(lineB);
             d.adjustDiff1(-1);
@@ -133,6 +136,8 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
 
         while(d.diff1() > 0)
         {
+            Diff3Line d3l;
+
             d3l.setLineA(lineA);
             d.adjustDiff1(-1);
             ++lineA;
@@ -143,6 +148,8 @@ void Diff3LineList::calcDiff3LineListUsingAB(const DiffList* pDiffListAB)
 
         while(d.diff2() > 0)
         {
+            Diff3Line d3l;
+
             d3l.setLineB(lineB);
             d.adjustDiff2(-1);
             ++lineB;
@@ -171,11 +178,12 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
         d = *i;
         ++i;
 
-        Q_ASSERT(d.diff1() <=TYPE_MAX(LineRef::LineType) && d.diff2() <=TYPE_MAX(LineRef::LineType));
-        Diff3Line d3l;
+        Q_ASSERT(d.diff1() <= TYPE_MAX(LineRef::LineType) && d.diff2() <= TYPE_MAX(LineRef::LineType));
 
         while(d.numberOfEquals() > 0)
         {
+            Diff3Line d3l;
+
             // Find the corresponding lineA
             while(i3->getLineA() != lineA && i3 != end())
                 ++i3;
@@ -190,11 +198,12 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
             ++lineC;
             ++i3;
         }
-
         assert(i3 != end() || (d.diff1() == 0 && d.diff2() == 0));
 
         while(d.diff1() > 0 && d.diff2() > 0)
         {
+            Diff3Line d3l;
+
             d3l.setLineC(lineC);
             insert(i3, d3l);
             d.adjustDiff1(-1);
@@ -205,12 +214,16 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
 
         while(d.diff1() > 0)
         {
+            Diff3Line d3l;
+
             d.adjustDiff1(-1);
             ++lineA;
         }
 
         while(d.diff2() > 0)
         {
+            Diff3Line d3l;
+
             d3l.setLineC(lineC);
             insert(i3, d3l);
             d.adjustDiff2(-1);
@@ -241,10 +254,9 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
         d = *i;
         ++i;
 
-        Diff3Line d3l;
-
         while(d.numberOfEquals() > 0)
         {
+            Diff3Line d3l;
             // Find the corresponding lineB and lineC
             while(i3b != end() && i3b->getLineB() != lineB)
                 ++i3b;
@@ -438,7 +450,9 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
 
         while(d.diff1() > 0)
         {
+            Diff3Line d3l;
             Diff3LineList::iterator i3 = i3b;
+
             while(i3->getLineB() != lineB)
                 ++i3;
             if(i3 != i3b && !i3->isEqualAB())
@@ -465,6 +479,8 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
 
         while(d.diff2() > 0)
         {
+            Diff3Line d3l;
+
             d.adjustDiff2(-1);
             ++lineC;
         }

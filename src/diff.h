@@ -468,7 +468,7 @@ class TotalDiffStatus
     bool bTextAEqB = false;
     int nofUnsolvedConflicts = 0;
     int nofSolvedConflicts = 0;
-    int nofWhitespaceConflicts = 0;
+    int nofWhitespaceConflicts = -1;
 };
 
 // Three corresponding ranges. (Minimum size of a valid range is one line.)
