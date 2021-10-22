@@ -214,8 +214,6 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
 
         while(d.diff1() > 0)
         {
-            Diff3Line d3l;
-
             d.adjustDiff1(-1);
             ++lineA;
         }
@@ -479,8 +477,6 @@ void Diff3LineList::calcDiff3LineListUsingBC(const DiffList* pDiffListBC)
 
         while(d.diff2() > 0)
         {
-            Diff3Line d3l;
-
             d.adjustDiff2(-1);
             ++lineC;
         }
