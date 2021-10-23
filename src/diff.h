@@ -290,7 +290,9 @@ class Diff3Line
 
     bool operator==(const Diff3Line& d3l) const
     {
-        return lineA == d3l.lineA && lineB == d3l.lineB && lineC == d3l.lineC && bAEqB == d3l.bAEqB && bAEqC == d3l.bAEqC && bBEqC == d3l.bBEqC;
+        return lineA == d3l.lineA && lineB == d3l.lineB && lineC == d3l.lineC &&
+               bAEqB == d3l.bAEqB && bAEqC == d3l.bAEqC && bBEqC == d3l.bBEqC &&
+               bWhiteLineA == d3l.bWhiteLineA && bWhiteLineB == d3l.bWhiteLineB && bWhiteLineC == d3l.bWhiteLineC;
     }
 
     Q_REQUIRED_RESULT const LineData& getLineData(e_SrcSelector src) const
