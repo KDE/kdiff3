@@ -230,7 +230,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(IgnoreFlags);
 
 class Diff3Line
 {
-  private:
+  protected:
     friend class Diff3LineList;
     LineRef lineA;
     LineRef lineB;
