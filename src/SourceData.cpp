@@ -577,7 +577,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     QString line;
     QChar curChar;
     LineCount lineCount = 0;
-    FileOffset lastOffset = 0;
+    QtSizeType lastOffset = 0;
     FileOffset skipBytes = 0;
     QScopedPointer<CommentParser> parser(new DefaultCommentParser());
 
@@ -649,10 +649,10 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
                 vOrigDataLineEndStyle.push_back(eLineEndStyleUnix);
                 break;
             case '\r':
-                if(lastOffset < mDataSize)
+                if((FileOffset)lastOffset < mDataSize)
                 {
                     //workaround for lack of peak API in QTextStream.
-                    qint64 j;
+                    quint64 j;
                     for(j = 0; j < 4 && lastOffset + j < mDataSize; ++j)
                     {
                         if(m_pBuf[ts.pos() + j] != '\0')

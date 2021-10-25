@@ -144,14 +144,15 @@ class LineData
     QSharedPointer<QString> mBuffer;
     //QString pLine;
     QtSizeType mFirstNonWhiteChar = 0;
-    FileOffset mOffset = 0;
+    //This tracks the offset with-in our unicode buffer not the file offset
+    QtSizeType mOffset = 0;
     QtSizeType mSize = 0;
     bool bContainsPureComment = false;
     bool bSkipable = false;//TODO: Move me
 
   public:
     explicit LineData() = default; // needed for Qt internal reasons should not be used.
-    inline LineData(const QSharedPointer<QString>& buffer, const FileOffset inOffset, QtSizeType inSize = 0, QtSizeType inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
+    inline LineData(const QSharedPointer<QString>& buffer, const QtSizeType inOffset, QtSizeType inSize = 0, QtSizeType inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
     {
         mBuffer = buffer;
         mOffset = inOffset;
@@ -169,7 +170,7 @@ class LineData
     Q_REQUIRED_RESULT inline const QString getLine() const { return QString::fromRawData(mBuffer->data() + mOffset, mSize); }
     Q_REQUIRED_RESULT inline const QSharedPointer<QString>& getBuffer() const { return mBuffer; }
 
-    Q_REQUIRED_RESULT inline qint64 getOffset() const { return mOffset; }
+    Q_REQUIRED_RESULT inline QtSizeType getOffset() const { return mOffset; }
     Q_REQUIRED_RESULT int width(int tabSize) const; // Calcs width considering tabs.
     //int occurrences;
     Q_REQUIRED_RESULT inline bool whiteLine() const { return mFirstNonWhiteChar == 0; }
