@@ -44,16 +44,19 @@ class DataReadTest: public QObject
         QVERIFY(file.size() > 0);
         // Sanity check essential functions. Failure of these makes further testing pointless.
         simData.setFilename(testFile.fileName());
+        QCOMPARE(simData.getFilename(), testFile.fileName());
         QVERIFY(!simData.isFromBuffer());
         QVERIFY(!simData.isEmpty());
         QVERIFY(!simData.hasData());
-        QCOMPARE(simData.getFilename(), testFile.fileName());
+        QVERIFY(simData.isText());
+        QVERIFY(!simData.isDir());
 
         simData.setFilename("");
+        QVERIFY(simData.getFilename().isEmpty());
         QVERIFY(simData.isEmpty());
         QVERIFY(!simData.hasData());
         QVERIFY(!simData.isFromBuffer());
-        QVERIFY(simData.getFilename().isEmpty());
+        QVERIFY(simData.isText());
     }
 
     /*
