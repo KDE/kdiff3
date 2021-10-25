@@ -655,15 +655,14 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
                     qint64 j;
                     for(j = 0; j < 4 && lastOffset + j < mDataSize; ++j)
                     {
-                        if(m_pBuf[lastOffset + j] != '\0')
+                        if(m_pBuf[ts.pos() + j] != '\0')
                             break;
                     }
 
-                    if(m_pBuf[lastOffset + j] == '\n')
+                    if(m_pBuf[ts.pos() + j] == '\n')
                     {
                         curChar = ts.read(1).unicode()[0];
                         vOrigDataLineEndStyle.push_back(eLineEndStyleDos);
-                        lastOffset = ts.pos();
                         break;
                     }
                 }
