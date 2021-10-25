@@ -82,6 +82,40 @@ class DataReadTest: public QObject
         QCOMPARE(simData.getSizeBytes(), file.size());
     }
 
+    void testEOLStyle()
+    {
+        QTemporaryFile testFile;
+        SourceDataMoc simData;
+
+        testFile.open();
+        testFile.write(u8"//\n //\n     \t\n  D//   \t\n");
+        testFile.close();
+
+        simData.setFilename(testFile.fileName());
+        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+        QVERIFY(simData.getErrors().isEmpty());
+        QVERIFY(!simData.isFromBuffer());
+        QVERIFY(!simData.isEmpty());
+        QVERIFY(simData.hasData());
+
+        QVERIFY(simData.getLineEndStyle() == eLineEndStyleUnix);
+
+        testFile.resize(0);
+        testFile.open();
+        testFile.write(u8"//\r\n //\r\n     \t\r\n  D//   \t\r\n");
+        testFile.close();
+
+        simData.reset();
+        simData.setFilename(testFile.fileName());
+        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
+        QVERIFY(simData.getErrors().isEmpty());
+        QVERIFY(!simData.isFromBuffer());
+        QVERIFY(!simData.isEmpty());
+        QVERIFY(simData.hasData());
+
+        QVERIFY(simData.getLineEndStyle() == eLineEndStyleDos);
+    }
+
     void eolTest()
     {
         QTemporaryFile eolTest;
