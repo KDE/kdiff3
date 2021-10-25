@@ -48,6 +48,7 @@ K_PLUGIN_FACTORY(KDiff3PartFactory, registerPlugin<KDiff3Part>();)
 KDiff3Part::KDiff3Part(QWidget* parentWidget, QObject* parent, const QVariantList& args)
     : KParts::ReadWritePart(parent)
 {
+    Q_ASSERT(parentWidget);
     //set AboutData
     setComponentData(createAboutData());
     if(!args.isEmpty())
