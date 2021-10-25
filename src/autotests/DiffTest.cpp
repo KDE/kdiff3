@@ -7,7 +7,9 @@
  */
 
 #include "../diff.h"
-#include "../SourceData.h"
+#include "../fileaccess.h"
+
+#include "SourceDataMoc.h"
 
 #include <QTextCodec>
 #include <QString>
@@ -32,18 +34,6 @@ class Diff3LineTest: public Diff3Line
         bWhiteLineB = inWhiteLineB;
         bWhiteLineC = inWhiteLineC;
     }
-};
-class SourceDataMoc: public SourceData
-{
-    private:
-        QSharedPointer<Options> defualtOptions = QSharedPointer<Options>::create();
-    public:
-        SourceDataMoc()
-        {
-            setOptions(defualtOptions);
-        }
-
-        [[nodiscard]] const QSharedPointer<Options>& options() { return defualtOptions; }
 };
 
 class DiffTest: public QObject
@@ -79,79 +69,6 @@ class DiffTest: public QObject
         QVERIFY(file.isReadable());
         QVERIFY(file.isLocal());
         QVERIFY(file.size() > 0);
-        //Sanity check essential functions. Failure of these makes further testing pointless.
-        simData.setFilename(testFile.fileName());
-        QVERIFY(!simData.isFromBuffer());
-        QVERIFY(!simData.isEmpty());
-        QVERIFY(!simData.hasData());
-        QCOMPARE(simData.getFilename(), testFile.fileName());
-
-        simData.setFilename("");
-        QVERIFY(simData.isEmpty());
-        QVERIFY(!simData.hasData());
-        QVERIFY(!simData.isFromBuffer());
-        QVERIFY(simData.getFilename().isEmpty());
-    }
-
-    /*
-        Check basic ablity to read data in.
-    */
-    void testRead()
-    {
-        SourceDataMoc simData;
-
-        simData.setFilename(testFile.fileName());
-
-        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
-        QVERIFY(simData.getErrors().isEmpty());
-        QVERIFY(!simData.isFromBuffer());
-        QVERIFY(!simData.isEmpty());
-        QVERIFY(simData.hasData());
-        QVERIFY(simData.getEncoding() != nullptr);
-        QCOMPARE(simData.getSizeLines(), 5);
-        QCOMPARE(simData.getSizeBytes(), file.size());
-    }
-
-    void eolTest()
-    {
-        QTemporaryFile eolTest;
-        SourceDataMoc simData;
-
-        eolTest.open();
-        eolTest.write("\n}\n");
-        eolTest.close();
-
-        simData.setFilename(eolTest.fileName());
-        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
-
-        QVERIFY(simData.getErrors().isEmpty());
-        QVERIFY(!simData.isFromBuffer());
-        QVERIFY(!simData.isEmpty());
-        QVERIFY(simData.hasData());
-        QVERIFY(simData.getEncoding() != nullptr);
-
-        QVERIFY(simData.hasEOLTermiantion());
-        QCOMPARE(simData.getSizeLines(), 3);
-        QCOMPARE(simData.getSizeBytes(), FileAccess(eolTest.fileName()).size());
-
-        const std::shared_ptr<LineDataVector> &lineData = simData.getLineDataForDisplay();
-        QVERIFY(lineData != nullptr);
-        QCOMPARE(lineData->size() - 1, 3);//Phantom line generated for last EOL mark if present
-
-        QVERIFY(eolTest.remove());
-
-        eolTest.open();
-        eolTest.write("\n}");
-        eolTest.close();
-
-        simData.setFilename(eolTest.fileName());
-        simData.readAndPreprocess(QTextCodec::codecForName("UTF-8"), true);
-
-        QVERIFY(simData.getErrors().isEmpty());
-
-        QVERIFY(!simData.hasEOLTermiantion());
-        QCOMPARE(simData.getSizeLines(), 2);
-        QCOMPARE(simData.getSizeBytes(), FileAccess(eolTest.fileName()).size());
     }
 
     /*
