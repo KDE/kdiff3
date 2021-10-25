@@ -12,7 +12,6 @@
 #include <QTextCodec>
 #include <QString>
 #include <QTest>
-#include <qtestcase.h>
 
 class Diff3LineTest: public Diff3Line
 {
