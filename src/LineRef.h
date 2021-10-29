@@ -20,7 +20,7 @@ class LineRef
     typedef qint32 LineType;
 
     static constexpr LineType invalid = -1;
-    inline LineRef() noexcept = default;
+    inline LineRef() = default;
     inline LineRef(const LineType i) noexcept { mLineNumber = i; }
 
     inline LineRef(const qint64 i) noexcept
