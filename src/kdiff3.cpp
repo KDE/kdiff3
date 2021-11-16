@@ -529,7 +529,11 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     }
 }
 
-KDiff3App::~KDiff3App() = default;
+KDiff3App::~KDiff3App()
+{
+    // Prevent spurious focus change signals from Qt from being picked up by KDiff3App during distuction.
+    QObject::disconnect(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
+};
 
 /**
  * Helper function used to create actions into the ac collection

@@ -2,6 +2,7 @@
 Version 1.9.3 - 2021-7-15
 ===========================
 *Fix windows style cr/lf line ending handling
+*Fix race on exit if qt sends QApplication::focusChanged during teardown.
 
 Version 1.9.3 - 2021-7-15
 ===========================
