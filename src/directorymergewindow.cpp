@@ -1435,6 +1435,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::calcSuggestedOperation(c
             }
             else if(pMFI->existsInA() && pMFI->existsInB())
             {
+                //TODO: verify conditions here
                 if(!bCopyNewer || pMFI->isDirA())
                     setMergeOperation(mi, eDefaultMergeOp);
                 else if(bCopyNewer && pMFI->conflictingAges())
