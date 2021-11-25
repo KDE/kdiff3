@@ -45,10 +45,10 @@ KDiff3Shell::KDiff3Shell(bool bCompleteInit)
     KDiff3Part::noInit();
 
     m_part = new KDiff3Part(this, this, {QVariant(u8"KDiff3Part")});
-    m_widget = qobject_cast<KDiff3App*>(m_part->widget());
 
     if(m_part)
     {
+        m_widget = qobject_cast<KDiff3App*>(m_part->widget());
         // and integrate the part's GUI with the shell's
         createGUI(m_part);
         //toolBar()->setToolButtonStyle( Qt::ToolButtonIconOnly );

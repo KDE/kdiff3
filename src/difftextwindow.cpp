@@ -2121,8 +2121,11 @@ void EncodingLabel::mousePressEvent(QMouseEvent*)
 
 void EncodingLabel::insertCodec(const QString& visibleCodecName, QTextCodec* pCodec, QList<int>& codecEnumList, QMenu* pMenu, int currentTextCodecEnum) const
 {
+    if(pCodec == nullptr)
+        return;
+
     int CodecMIBEnum = pCodec->mibEnum();
-    if(pCodec != nullptr && !codecEnumList.contains(CodecMIBEnum))
+    if(!codecEnumList.contains(CodecMIBEnum))
     {
         QAction* pAction = new QAction(pMenu); // menu takes ownership, so deleting the menu deletes the action too.
         QByteArray nameArray = pCodec->name();
