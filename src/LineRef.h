@@ -21,8 +21,9 @@ class LineRef
 
     static constexpr LineType invalid = -1;
     constexpr inline LineRef() = default;
+    //cppcheck-suppress noExplicitConstructor
     constexpr inline LineRef(const LineType i) noexcept { mLineNumber = i; }
-
+    //cppcheck-suppress noExplicitConstructor
     inline LineRef(const qint64 i) noexcept
     {
         if(i <= TYPE_MAX(LineType))

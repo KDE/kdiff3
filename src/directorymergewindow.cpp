@@ -228,7 +228,7 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
     bool canContinue();
     QModelIndex treeIterator(QModelIndex mi, bool bVisitChildren = true, bool bFindInvisible = false);
     void prepareMergeStart(const QModelIndex& miBegin, const QModelIndex& miEnd, bool bVerbose);
-    bool executeMergeOperation(MergeFileInfos& mfi, bool& bSingleFileMerge);
+    bool executeMergeOperation(const MergeFileInfos& mfi, bool& bSingleFileMerge);
 
     void scanDirectory(const QString& dirName, DirectoryList& dirList);
     void scanLocalDirectory(const QString& dirName, DirectoryList& dirList);
@@ -2017,7 +2017,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::canContinue()
     return false;
 }
 
-bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(MergeFileInfos& mfi, bool& bSingleFileMerge)
+bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(const MergeFileInfos& mfi, bool& bSingleFileMerge)
 {
     bool bCreateBackups = m_pOptions->m_bDmCreateBakFiles;
     // First decide destname
@@ -2772,7 +2772,7 @@ void DirectoryMergeInfo::setInfo(
     const FileAccess& dirB,
     const FileAccess& dirC,
     const FileAccess& dirDest,
-    MergeFileInfos& mfi)
+    const MergeFileInfos& mfi)
 {
     bool bHideDest = false;
     if(dirA.absoluteFilePath() == dirDest.absoluteFilePath())

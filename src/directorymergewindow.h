@@ -134,11 +134,11 @@ class DirectoryMergeInfo : public QFrame
 public:
    explicit DirectoryMergeInfo(QWidget* pParent);
    void setInfo(
-      const FileAccess& dirA,
-      const FileAccess& dirB,
-      const FileAccess& dirC,
-      const FileAccess& dirDest,
-      MergeFileInfos& mfi);
+       const FileAccess& dirA,
+       const FileAccess& dirB,
+       const FileAccess& dirC,
+       const FileAccess& dirDest,
+       const MergeFileInfos& mfi);
    QTreeWidget* getInfoList() { return m_pInfoList; }
    bool eventFilter(QObject* o, QEvent* e) override;
 Q_SIGNALS:

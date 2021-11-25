@@ -15,7 +15,7 @@ class DirectoryInfo
   public:
     explicit DirectoryInfo() = default;
 
-    DirectoryInfo(FileAccess& dirA, FileAccess& dirB, FileAccess& dirC, FileAccess& dirDest)
+    DirectoryInfo(const FileAccess& dirA, const FileAccess& dirB, const FileAccess& dirC, const FileAccess& dirDest)
     {
         m_dirA = dirA;
         m_dirB = dirB;
