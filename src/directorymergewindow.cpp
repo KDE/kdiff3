@@ -2280,6 +2280,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
     while(bSuccess)
     {
         MergeFileInfos* pMFI = getMFI(miCurrent);
+
         if(pMFI == nullptr)
         {
             m_mergeItemList.clear();
@@ -2287,7 +2288,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
             break;
         }
 
-        if(pMFI != nullptr && !bContinueWithCurrentItem)
+        if(!bContinueWithCurrentItem)
         {
             if(bSim)
             {
@@ -2312,10 +2313,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
                     setOpStatus(miCurrent, eOpStatusInProgress);
                 }
             }
-        }
 
-        if(!bContinueWithCurrentItem)
-        {
             // Depth first
             QModelIndex miPrev = miCurrent;
             ++m_currentIndexForOperation;
