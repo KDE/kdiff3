@@ -194,7 +194,7 @@ class MergeResultWindow: public QWidget
 
     MergeLineList m_mergeLineList;
     MergeLineListImp::iterator m_currentMergeLineIt;
-    bool isItAtEnd(bool bIncrement, MergeLineListImp::iterator i)
+    bool isItAtEnd(bool bIncrement, MergeLineListImp::iterator i) const
     {
         if(bIncrement)
             return i != m_mergeLineList.list().end();
@@ -203,7 +203,7 @@ class MergeResultWindow: public QWidget
     }
 
     int m_currentPos;
-    bool checkOverviewIgnore(MergeLineListImp::iterator& i);
+    bool checkOverviewIgnore(MergeLineListImp::iterator& i) const;
 
     enum e_Direction
     {

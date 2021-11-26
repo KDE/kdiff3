@@ -487,7 +487,7 @@ void MergeResultWindow::setOverviewMode(e_OverviewMode eOverviewMode)
 }
 
 // Check whether we should ignore current delta when moving to next/previous delta
-bool MergeResultWindow::checkOverviewIgnore(MergeLineListImp::iterator& i)
+bool MergeResultWindow::checkOverviewIgnore(MergeLineListImp::iterator& i) const
 {
     if(mOverviewMode == e_OverviewMode::eOMNormal) return false;
     if(mOverviewMode == e_OverviewMode::eOMAvsB)
@@ -592,8 +592,8 @@ bool MergeResultWindow::isDeltaBelowCurrent()
 bool MergeResultWindow::isConflictAboveCurrent()
 {
     if(m_mergeLineList.list().empty()) return false;
-    MergeLineListImp::iterator i = m_currentMergeLineIt;
-    if(i == m_mergeLineList.list().begin()) return false;
+    MergeLineListImp::const_iterator i = m_currentMergeLineIt;
+    if(i == m_mergeLineList.list().cbegin()) return false;
 
     bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
 
@@ -601,22 +601,22 @@ bool MergeResultWindow::isConflictAboveCurrent()
     {
         --i;
         if(i->isConflict() && !(bSkipWhiteConflicts && i->isWhiteSpaceConflict())) return true;
-    } while(i != m_mergeLineList.list().begin());
+    } while(i != m_mergeLineList.list().cbegin());
 
     return false;
 }
 
 bool MergeResultWindow::isConflictBelowCurrent()
 {
-    MergeLineListImp::iterator i = m_currentMergeLineIt;
+    MergeLineListImp::const_iterator i = m_currentMergeLineIt;
     if(m_mergeLineList.list().empty()) return false;
 
     bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
 
-    if(i != m_mergeLineList.list().end())
+    if(i != m_mergeLineList.list().cend())
     {
         ++i;
-        for(; i != m_mergeLineList.list().end(); ++i)
+        for(; i != m_mergeLineList.list().cend(); ++i)
         {
             if(i->isConflict() && !(bSkipWhiteConflicts && i->isWhiteSpaceConflict())) return true;
         }
@@ -627,36 +627,36 @@ bool MergeResultWindow::isConflictBelowCurrent()
 bool MergeResultWindow::isUnsolvedConflictAtCurrent()
 {
     if(m_mergeLineList.list().empty()) return false;
-    MergeLineListImp::iterator i = m_currentMergeLineIt;
-    return i->list().begin()->isConflict();
+
+    return m_currentMergeLineIt->list().cbegin()->isConflict();
 }
 
 bool MergeResultWindow::isUnsolvedConflictAboveCurrent()
 {
     if(m_mergeLineList.list().empty()) return false;
-    MergeLineListImp::iterator i = m_currentMergeLineIt;
-    if(i == m_mergeLineList.list().begin()) return false;
+    MergeLineListImp::const_iterator i = m_currentMergeLineIt;
+    if(i == m_mergeLineList.list().cbegin()) return false;
 
     do
     {
         --i;
-        if(i->list().begin()->isConflict()) return true;
-    } while(i != m_mergeLineList.list().begin());
+        if(i->list().cbegin()->isConflict()) return true;
+    } while(i != m_mergeLineList.list().cbegin());
 
     return false;
 }
 
 bool MergeResultWindow::isUnsolvedConflictBelowCurrent()
 {
-    MergeLineListImp::iterator i = m_currentMergeLineIt;
+    MergeLineListImp::const_iterator i = m_currentMergeLineIt;
     if(m_mergeLineList.list().empty()) return false;
 
-    if(i != m_mergeLineList.list().end())
+    if(i != m_mergeLineList.list().cend())
     {
         ++i;
-        for(; i != m_mergeLineList.list().end(); ++i)
+        for(; i != m_mergeLineList.list().cend(); ++i)
         {
-            if(i->list().begin()->isConflict()) return true;
+            if(i->list().cbegin()->isConflict()) return true;
         }
     }
     return false;
