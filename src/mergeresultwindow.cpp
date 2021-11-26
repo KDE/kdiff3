@@ -427,14 +427,10 @@ int MergeResultWindow::getMaxTextWidth()
     {
         m_maxTextWidth = 0;
 
-        MergeLineListImp::iterator mlIt = m_mergeLineList.list().begin();
-        for(mlIt = m_mergeLineList.list().begin(); mlIt != m_mergeLineList.list().end(); ++mlIt)
+        for(const MergeLine& ml: m_mergeLineList.list())
         {
-            MergeLine& ml = *mlIt;
-            MergeEditLineList::iterator melIt;
-            for(melIt = ml.list().begin(); melIt != ml.list().end(); ++melIt)
+            for(const MergeEditLine& mel: ml.list())
             {
-                MergeEditLine& mel = *melIt;
                 QString s = mel.getString(m_pldA, m_pldB, m_pldC);
 
                 QTextLayout textLayout(s, font(), this);
@@ -735,11 +731,9 @@ int MergeResultWindow::getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflict
     if(pNrOfWhiteSpaceConflicts != nullptr)
         *pNrOfWhiteSpaceConflicts = 0;
 
-    MergeLineListImp::iterator mlIt = m_mergeLineList.list().begin();
-    for(mlIt = m_mergeLineList.list().begin(); mlIt != m_mergeLineList.list().end(); ++mlIt)
+    for(const MergeLine& ml: m_mergeLineList.list())
     {
-        MergeLine& ml = *mlIt;
-        MergeEditLineList::iterator melIt = ml.list().begin();
+        MergeEditLineList::const_iterator melIt = ml.list().cbegin();
         if(melIt->isConflict())
         {
             ++nrOfUnsolvedConflicts;
@@ -756,12 +750,13 @@ void MergeResultWindow::showNumberOfConflicts()
     if(!m_pOptions->m_bShowInfoDialogs)
         return;
     int nrOfConflicts = 0;
-    MergeLineListImp::iterator i;
-    for(i = m_mergeLineList.list().begin(); i != m_mergeLineList.list().end(); ++i)
+
+    for(MergeLine& entry: m_mergeLineList.list())
     {
-        if(i->isConflict() || i->isDelta())
+        if(entry.isConflict() || entry.isDelta())
             ++nrOfConflicts;
     }
+
     QString totalInfo;
     if(m_pTotalDiffStatus->isBinaryEqualAB() && m_pTotalDiffStatus->isBinaryEqualAC())
         totalInfo += i18n("All input files are binary equal.");
@@ -804,8 +799,8 @@ void MergeResultWindow::setFastSelector(MergeLineListImp::iterator i)
 
     int line1 = 0;
 
-    MergeLineListImp::iterator mlIt = m_mergeLineList.list().begin();
-    for(mlIt = m_mergeLineList.list().begin(); mlIt != m_mergeLineList.list().end(); ++mlIt)
+    MergeLineListImp::const_iterator mlIt = m_mergeLineList.list().cbegin();
+    for(; mlIt != m_mergeLineList.list().cend(); ++mlIt)
     {
         if(mlIt == m_currentMergeLineIt)
             break;
@@ -1624,28 +1619,28 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
         int lastVisibleLine = m_firstLine + getNofVisibleLines() + 5;
         LineRef line = 0;
-        MergeLineListImp::iterator mlIt = m_mergeLineList.list().begin();
-        for(mlIt = m_mergeLineList.list().begin(); mlIt != m_mergeLineList.list().end(); ++mlIt)
+        MergeLineListImp::const_iterator mlIt = m_mergeLineList.list().cbegin();
+        for(; mlIt != m_mergeLineList.list().cend(); ++mlIt)
         {
-            MergeLine& ml = *mlIt;
+            const MergeLine& ml = *mlIt;
             if(line > lastVisibleLine || line + ml.lineCount() < m_firstLine)
             {
                 line += ml.lineCount();
             }
             else
             {
-                MergeEditLineList::iterator melIt;
-                for(melIt = ml.list().begin(); melIt != ml.list().end(); ++melIt)
+                MergeEditLineList::const_iterator melIt;
+                for(melIt = ml.list().cbegin(); melIt != ml.list().cend(); ++melIt)
                 {
                     if(line >= m_firstLine && line <= lastVisibleLine)
                     {
-                        MergeEditLine& mel = *melIt;
-                        MergeEditLineList::iterator melIt1 = melIt;
+                        const MergeEditLine& mel = *melIt;
+                        MergeEditLineList::const_iterator melIt1 = melIt;
                         ++melIt1;
 
                         int rangeMark = 0;
-                        if(melIt == ml.list().begin()) rangeMark |= 1; // Begin range mark
-                        if(melIt1 == ml.list().end()) rangeMark |= 2;  // End range mark
+                        if(melIt == ml.list().cbegin()) rangeMark |= 1; // Begin range mark
+                        if(melIt1 == ml.list().cend()) rangeMark |= 2;  // End range mark
 
                         if(mlIt == m_currentMergeLineIt) rangeMark |= 4; // Mark of the current line
 
@@ -2688,15 +2683,10 @@ bool MergeResultWindow::saveDocument(const QString& fileName, QTextCodec* pEncod
     const QString lineFeed(eLineEndStyle == eLineEndStyleDos ? QString("\r\n") : QString("\n"));
 
     int line = 0;
-    MergeLineListImp::iterator mlIt = m_mergeLineList.list().begin();
-    for(mlIt = m_mergeLineList.list().begin(); mlIt != m_mergeLineList.list().end(); ++mlIt)
+    for(const MergeLine& ml: m_mergeLineList.list())
     {
-        MergeLine& ml = *mlIt;
-        MergeEditLineList::iterator melIt;
-        for(melIt = ml.list().begin(); melIt != ml.list().end(); ++melIt)
+        for(const MergeEditLine& mel: ml.list())
         {
-            MergeEditLine& mel = *melIt;
-
             if(mel.isEditableText())
             {
                 const QString str = mel.getString(m_pldA, m_pldB, m_pldC);
