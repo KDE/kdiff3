@@ -67,27 +67,27 @@ class MergeResultWindow: public QWidget
     void reset();
 
     bool saveDocument(const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle);
-    int getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts = nullptr);
+    int getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts = nullptr) const;
     void choose(e_SrcSelector selector);
     void chooseGlobal(e_SrcSelector selector, bool bConflictsOnly, bool bWhiteSpaceOnly);
 
     int getMaxTextWidth();         // width of longest text line
     [[nodiscard]] int getNofLines() const;
-    int getVisibleTextAreaWidth(); // text area width without the border
-    int getNofVisibleLines();
-    QString getSelection();
+    int getVisibleTextAreaWidth() const; // text area width without the border
+    int getNofVisibleLines() const;
+    QString getSelection() const;
     void resetSelection();
     void showNumberOfConflicts();
-    bool isDeltaAboveCurrent();
-    bool isDeltaBelowCurrent();
-    bool isConflictAboveCurrent();
-    bool isConflictBelowCurrent();
-    bool isUnsolvedConflictAtCurrent();
-    bool isUnsolvedConflictAboveCurrent();
-    bool isUnsolvedConflictBelowCurrent();
+    bool isDeltaAboveCurrent() const;
+    bool isDeltaBelowCurrent() const;
+    bool isConflictAboveCurrent() const;
+    bool isConflictBelowCurrent() const;
+    bool isUnsolvedConflictAtCurrent() const;
+    bool isUnsolvedConflictAboveCurrent() const;
+    bool isUnsolvedConflictBelowCurrent() const;
     bool findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive);
     void setSelection(int firstLine, int startPos, int lastLine, int endPos);
-    e_OverviewMode getOverviewMode();
+    e_OverviewMode getOverviewMode() const;
 
     void slotUpdateAvailabilities();
 
@@ -226,7 +226,7 @@ class MergeResultWindow: public QWidget
 
     void paintEvent(QPaintEvent* e) override;
 
-    int getTextXOffset();
+    int getTextXOffset() const;
     QVector<QTextLayout::FormatRange> getTextLayoutForLine(int line, const QString& s, QTextLayout& textLayout);
     void myUpdate(int afterMilliSecs);
     void timerEvent(QTimerEvent*) override;

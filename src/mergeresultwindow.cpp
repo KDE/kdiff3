@@ -453,18 +453,18 @@ int MergeResultWindow::getNofLines() const
     return m_nofLines;
 }
 
-int MergeResultWindow::getVisibleTextAreaWidth()
+int MergeResultWindow::getVisibleTextAreaWidth() const
 {
     return width() - getTextXOffset();
 }
 
-int MergeResultWindow::getNofVisibleLines()
+int MergeResultWindow::getNofVisibleLines() const
 {
     QFontMetrics fm = fontMetrics();
     return (height() - 3) / fm.lineSpacing() - 2;
 }
 
-int MergeResultWindow::getTextXOffset()
+int MergeResultWindow::getTextXOffset() const
 {
     QFontMetrics fm = fontMetrics();
     return 3 * Utils::getHorizontalAdvance(fm, '0');
@@ -476,7 +476,7 @@ void MergeResultWindow::resizeEvent(QResizeEvent* e)
     Q_EMIT resizeSignal();
 }
 
-e_OverviewMode MergeResultWindow::getOverviewMode()
+e_OverviewMode MergeResultWindow::getOverviewMode() const
 {
     return mOverviewMode;
 }
@@ -557,7 +557,7 @@ void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
     setFastSelector(i);
 }
 
-bool MergeResultWindow::isDeltaAboveCurrent()
+bool MergeResultWindow::isDeltaAboveCurrent() const
 {
     bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
     if(m_mergeLineList.list().empty()) return false;
@@ -572,7 +572,7 @@ bool MergeResultWindow::isDeltaAboveCurrent()
     return false;
 }
 
-bool MergeResultWindow::isDeltaBelowCurrent()
+bool MergeResultWindow::isDeltaBelowCurrent() const
 {
     bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
     if(m_mergeLineList.list().empty()) return false;
@@ -589,7 +589,7 @@ bool MergeResultWindow::isDeltaBelowCurrent()
     return false;
 }
 
-bool MergeResultWindow::isConflictAboveCurrent()
+bool MergeResultWindow::isConflictAboveCurrent() const
 {
     if(m_mergeLineList.list().empty()) return false;
     MergeLineListImp::const_iterator i = m_currentMergeLineIt;
@@ -606,7 +606,7 @@ bool MergeResultWindow::isConflictAboveCurrent()
     return false;
 }
 
-bool MergeResultWindow::isConflictBelowCurrent()
+bool MergeResultWindow::isConflictBelowCurrent() const
 {
     MergeLineListImp::const_iterator i = m_currentMergeLineIt;
     if(m_mergeLineList.list().empty()) return false;
@@ -624,14 +624,14 @@ bool MergeResultWindow::isConflictBelowCurrent()
     return false;
 }
 
-bool MergeResultWindow::isUnsolvedConflictAtCurrent()
+bool MergeResultWindow::isUnsolvedConflictAtCurrent() const
 {
     if(m_mergeLineList.list().empty()) return false;
 
     return m_currentMergeLineIt->list().cbegin()->isConflict();
 }
 
-bool MergeResultWindow::isUnsolvedConflictAboveCurrent()
+bool MergeResultWindow::isUnsolvedConflictAboveCurrent() const
 {
     if(m_mergeLineList.list().empty()) return false;
     MergeLineListImp::const_iterator i = m_currentMergeLineIt;
@@ -646,7 +646,7 @@ bool MergeResultWindow::isUnsolvedConflictAboveCurrent()
     return false;
 }
 
-bool MergeResultWindow::isUnsolvedConflictBelowCurrent()
+bool MergeResultWindow::isUnsolvedConflictBelowCurrent() const
 {
     MergeLineListImp::const_iterator i = m_currentMergeLineIt;
     if(m_mergeLineList.list().empty()) return false;
@@ -725,7 +725,7 @@ void MergeResultWindow::slotSetFastSelectorLine(LineIndex line)
     }
 }
 
-int MergeResultWindow::getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts)
+int MergeResultWindow::getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts) const
 {
     int nrOfUnsolvedConflicts = 0;
     if(pNrOfWhiteSpaceConflicts != nullptr)
@@ -751,7 +751,7 @@ void MergeResultWindow::showNumberOfConflicts()
         return;
     int nrOfConflicts = 0;
 
-    for(MergeLine& entry: m_mergeLineList.list())
+    for(const MergeLine& entry: m_mergeLineList.list())
     {
         if(entry.isConflict() || entry.isDelta())
             ++nrOfConflicts;
@@ -2386,7 +2386,7 @@ bool MergeResultWindow::calcIteratorFromLineNr(
     return false;
 }
 
-QString MergeResultWindow::getSelection()
+QString MergeResultWindow::getSelection() const
 {
     QString selectionString;
 
