@@ -9,6 +9,9 @@ import os
 import subprocess as sp
 import sys
 
+# Prior to this python for windows still uses legancy non uft-8 encoding by default.
+assert sys.version_info >= (3, 7)
+
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
                                  description='Generate input files for alignmenttest from the files merged for each merge commit in a git repository.\n\n' +
                                              'This script finds all merge commits in the clone where it is run, checks which files were modified in both\n' +
