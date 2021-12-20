@@ -15,10 +15,10 @@
 #include <QString>
 #include <QTest>
 
-class Diff3LineTest: public Diff3Line
+class Diff3LineMoc: public Diff3Line
 {
   public:
-    Diff3LineTest(const LineRef inLineA, const LineRef inLineB, const LineRef inLineC,
+    Diff3LineMoc(const LineRef inLineA, const LineRef inLineB, const LineRef inLineC,
                   bool inAEqC, bool inBEqC, bool inAEqB,
                   bool inWhiteLineA, bool inWhiteLineB, bool inWhiteLineC)
     {
@@ -169,10 +169,10 @@ class DiffTest: public QObject
         QCOMPARE(diff3List.size(), 4);
         // This hard codes the known good result of the above for comparison.
         // In general this should not be changed unless you know what your doing.
-        expectedDiff3 = {Diff3LineTest(0, 0, LineRef::invalid, false, false, true, false, false, false),
-                         Diff3LineTest(1, 1, LineRef::invalid, false, false, false, false, false, false),
-                         Diff3LineTest(2, 2, LineRef::invalid, false, false, true, false, false, false),
-                         Diff3LineTest(3, 3, LineRef::invalid, false, false, true, false, false, false)};
+        expectedDiff3 = {Diff3LineMoc(0, 0, LineRef::invalid, false, false, true, false, false, false),
+                         Diff3LineMoc(1, 1, LineRef::invalid, false, false, false, false, false, false),
+                         Diff3LineMoc(2, 2, LineRef::invalid, false, false, true, false, false, false),
+                         Diff3LineMoc(3, 3, LineRef::invalid, false, false, true, false, false, false)};
 
         QVERIFY(diff3List == expectedDiff3);
     }
