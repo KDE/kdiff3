@@ -2481,15 +2481,10 @@ void MergeResultWindow::deleteSelection()
     LineRef firstLine;
     LineRef lastLine;
 
-    MergeLineListImp::iterator mlIt;
-    for(mlIt = m_mergeLineList.list().begin(); mlIt != m_mergeLineList.list().end(); ++mlIt)
+    for(const MergeLine& ml: m_mergeLineList.list())
     {
-        MergeLine& ml = *mlIt;
-        MergeEditLineList::iterator melIt;
-        for(melIt = ml.list().begin(); melIt != ml.list().end(); ++melIt)
+        for(const MergeEditLine& mel: ml.list())
         {
-            MergeEditLine& mel = *melIt;
-
             if(mel.isEditableText() && m_selection.lineWithin(line))
             {
                 if(!firstLine.isValid())
@@ -2506,6 +2501,7 @@ void MergeResultWindow::deleteSelection()
         return; // Nothing to delete.
     }
 
+    MergeLineListImp::iterator mlIt;
     line = 0;
     for(mlIt = m_mergeLineList.list().begin(); mlIt != m_mergeLineList.list().end(); ++mlIt)
     {
@@ -2513,13 +2509,13 @@ void MergeResultWindow::deleteSelection()
         MergeEditLineList::iterator melIt, melIt1;
         for(melIt = ml.list().begin(); melIt != ml.list().end();)
         {
-            MergeEditLine& mel = *melIt;
+            const MergeEditLine& mel = *melIt;
             melIt1 = melIt;
             ++melIt1;
 
             if(mel.isEditableText() && m_selection.lineWithin(line))
             {
-                QString lineString = mel.getString(m_pldA, m_pldB, m_pldC);
+                const QString lineString = mel.getString(m_pldA, m_pldB, m_pldC);
 
                 int firstPosInLine = m_selection.firstPosInLine(line);
                 int lastPosInLine = m_selection.lastPosInLine(line);
@@ -2543,8 +2539,8 @@ void MergeResultWindow::deleteSelection()
                 if(line != firstLine || (m_selection.endPos() - m_selection.beginPos()) == lineString.length())
                 {
                     // Remove the line
-                    if(mlIt->lineCount() > 1)
-                        mlIt->list().erase(melIt);
+                    if(ml.lineCount() > 1)
+                        ml.list().erase(melIt);
                     else
                         melIt->setRemoved();
                 }
