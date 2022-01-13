@@ -1217,6 +1217,9 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
 {
     diffList.clear();
 
+    const QChar* p1end = line1.constData() + line1.size();
+    const QChar* p2end = line2.constData() + line2.size();
+
     QString::const_iterator p1=line1.begin(), p2=line2.begin();
 
     /*
@@ -1242,19 +1245,19 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
 
         for(i1 = 0;; ++i1)
         {
-            if(p1[i1] == *line1.end() || (bBestValid && i1 >= bestI1 + bestI2))
+            if(&p1[i1] == p1end || (bBestValid && i1 >= bestI1 + bestI2))
             {
                 break;
             }
             for(i2 = 0; i2 < maxSearchRange; ++i2)
             {
-                if(p2[i2] == *line2.end() || (bBestValid && i1 + i2 >= bestI1 + bestI2))
+                if(&p2[i2] == p2end || (bBestValid && i1 + i2 >= bestI1 + bestI2))
                 {
                     break;
                 }
                 else if(p2[i2] == p1[i1] &&
-                        (match == 1 || abs(i1 - i2) < 3 || (p2[i2 + 1] == *line2.end() && p1[i1 + 1] == *line1.end()) ||
-                         (p2[i2 + 1] != *line2.end() && p1[i1 + 1] != *line1.end() && p2[i2 + 1] == p1[i1 + 1])))
+                        (match == 1 || abs(i1 - i2) < 3 || (&p2[i2 + 1] == p2end && &p1[i1 + 1] == p1end) ||
+                         (&p2[i2 + 1] != p2end && &p1[i1 + 1] != p1end && p2[i2 + 1] == p1[i1 + 1])))
                 {
                     if(i1 + i2 < bestI1 + bestI2 || !bBestValid)
                     {
