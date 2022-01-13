@@ -98,7 +98,7 @@ class Option : public OptionItemBase
     [[nodiscard]] const T& getDefault() const { return m_defaultVal; };
     [[nodiscard]] const T getCurrent() const { return *m_pVar; };
 
-    virtual void setCurrent(const T inValue) { *m_pVar = inValue; }
+    virtual void setCurrent(const T& inValue) { *m_pVar = inValue; }
 
     void apply() override {};
     virtual void apply(const T& inValue) { *m_pVar = inValue; }
@@ -109,7 +109,7 @@ class Option : public OptionItemBase
   protected:
     void preserveImp() override { m_preservedVal = *m_pVar; }
     void unpreserveImp() override { *m_pVar = m_preservedVal; }
-    T* m_pVar;
+    T* m_pVar = nullptr;
     T m_preservedVal;
     T m_defaultVal;
 
@@ -132,7 +132,7 @@ class OptionNum : public Option<T>
     {
     }
 
-    void setCurrent(const T inValue) override
+    void setCurrent(const T& inValue) override
     {
         Option<T>::setCurrent(inValue);
     }
@@ -168,7 +168,7 @@ class OptionCodec : public OptionString
   public:
     using OptionString::Option;
 
-    void setCurrent(const QString name) override { OptionString::setCurrent(name); };
+    void setCurrent(const QString& name) override { OptionString::setCurrent(name); };
     void setCurrent(const QByteArray& name) { OptionString::setCurrent(QString::fromLatin1(name)); }
     [[nodiscard]] const QString& defaultName() const { return mDefaultName; }
 

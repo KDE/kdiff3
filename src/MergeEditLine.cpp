@@ -254,7 +254,7 @@ void MergeLineList::updateDefaults(const e_SrcSelector defaultSelector, const bo
         if(ml.isDelta() && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || ml.isWhiteSpaceConflict()))
         {
             ml.list().clear();
-            if(defaultSelector == e_SrcSelector::Invalid && ml.isDelta())
+            if(defaultSelector == e_SrcSelector::Invalid)
             {
                 MergeEditLine mel(ml.id3l());
 
