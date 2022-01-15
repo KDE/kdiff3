@@ -1279,17 +1279,16 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
             }
         }
 
-        // The match was found using the strict search. Go back if there are non-strict
-        // matches.
-        while(bestI1 >= 1 && bestI2 >= 1 && p1[bestI1 - 1] == p2[bestI2 - 1])
-        {
-            --bestI1;
-            --bestI2;
-        }
-
         bool bEndReached = false;
         if(bBestValid)
         {
+            // The match was found using the strict search. Go back if there are non-strict
+            // matches.
+            while(bestI1 >= 1 && bestI2 >= 1 && p1[bestI1 - 1] == p2[bestI2 - 1])
+            {
+                --bestI1;
+                --bestI2;
+            }
             // continue somehow
             Diff d(nofEquals, bestI1, bestI2);
             assert(nofEquals + bestI1 + bestI2 != 0);
