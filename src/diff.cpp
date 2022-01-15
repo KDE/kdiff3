@@ -1222,7 +1222,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
     const QChar* p1end = line1.constData() + line1.size();
     const QChar* p2end = line2.constData() + line2.size();
 
-    QString::const_iterator p1=line1.begin(), p2=line2.begin();
+    QString::const_iterator p1 = line1.cbegin(), p2 = line2.cbegin();
 
     /*
         This loop should never reach the exit condition specified here. However it must have a hard wired
@@ -1232,7 +1232,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
     for(; diffList.size() * sizeof(Diff) + sizeof(DiffList) < (50 << 20);)
     {
         int nofEquals = 0;
-        while(p1 != line1.end() && p2 != line2.end() &&  *p1 == *p2)
+        while(p1 != line1.cend() && p2 != line2.cend() && *p1 == *p2)
         {
             ++p1;
             ++p2;
@@ -1247,14 +1247,16 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
 
         for(i1 = 0;; ++i1)
         {
-            if(&p1[i1] == p1end || (bBestValid && i1 >= bestI1 + bestI2))
+            if(nofEquals + i1 == line1.size() || (bBestValid && i1 >= bestI1 + bestI2))
             {
+                Q_ASSERT(&p1[i1] == p1end);
                 break;
             }
             for(i2 = 0; i2 < maxSearchRange; ++i2)
             {
-                if(&p2[i2] == p2end || (bBestValid && i1 + i2 >= bestI1 + bestI2))
+                if(nofEquals + i2 == line2.size() || (bBestValid && i1 + i2 >= bestI1 + bestI2))
                 {
+                    Q_ASSERT(&p2[i2] == p2end);
                     break;
                 }
                 else if(p2[i2] == p1[i1] &&
@@ -1300,8 +1302,10 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
         else
         {
             // Nothing else to match.
-            Diff d(nofEquals, line1.end() - p1, line2.end() - p2);
+            Diff d(nofEquals, line1.size() - nofEquals, line2.size() - nofEquals);
             diffList.push_back(d);
+            Q_ASSERT(d.diff1() == p1end - p1);
+            Q_ASSERT(d.diff2() == p2end - p2);
 
             bEndReached = true; //break;
         }
