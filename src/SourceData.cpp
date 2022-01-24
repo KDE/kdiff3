@@ -327,7 +327,8 @@ QTextCodec* SourceData::detectEncoding(const QString& fileName, QTextCodec* pFal
     QFile f(fileName);
     if(f.open(QIODevice::ReadOnly))
     {
-        char buf[200];
+        char buf[400];
+
         qint64 size = f.read(buf, sizeof(buf));
         FileOffset skipBytes = 0;
         QTextCodec* pCodec = detectEncoding(buf, size, skipBytes);
@@ -829,5 +830,18 @@ QTextCodec* SourceData::detectEncoding(const char* buf, qint64 size, FileOffset&
                 break;
         }
     }
+    //Attempt to detect non-bom UTF8. This is a very common encoding.
+    return dectectUTF8(s);
+}
+
+QTextCodec* SourceData::dectectUTF8(const QByteArray& data)
+{
+    QTextCodec* utf8 = QTextCodec::codecForName("UTF-8");
+
+    QTextCodec::ConverterState state;
+    const QString validText = utf8->toUnicode(data.constData(), data.size(), &state);
+    if(state.invalidChars == 0)
+        return utf8;
+
     return nullptr;
 }

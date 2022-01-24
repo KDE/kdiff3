@@ -70,6 +70,7 @@ class SourceData
     bool convertFileEncoding(const QString& fileNameIn, QTextCodec* pCodecIn,
                                 const QString& fileNameOut, QTextCodec* pCodecOut);
 
+    static QTextCodec* dectectUTF8(const QByteArray& data);
     static QTextCodec* detectEncoding(const char* buf, qint64 size, FileOffset& skipBytes);
     static QTextCodec* getEncodingFromTag(const QByteArray& s, const QByteArray& encodingTag);
 
