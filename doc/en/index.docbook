@@ -917,6 +917,8 @@ Yet there is one option here that is also relevant for saving single files:
 	</para></listitem></varlistentry>
     <varlistentry><term><guilabel>Note: Local Encoding is "..."</guilabel></term><listitem><para>Above the codec-selectors appears this note that tells you what the local encoding is. (This is not adjustable but for your information just in case you don't know your local encoding, but need to select it.)
 	</para></listitem></varlistentry>
+    <varlistentry><term><guilabel>Auto Dectect Unicode</guilabel></term><listitem><para> This option attempts to use the BOM or meta data from XML/HTML documents to dectect unicode encodings. Failing that it will check if a short same from the being of the can be interprupted as UTF-8. If this check passes UTF-8 will be used. Otherwise it will fall back to the user selected codec. Only UTF-8 is supported with no BOM or metadata presesent.
+	</para></listitem></varlistentry>
     <varlistentry><term><guilabel>File Encoding for A/B/C:</guilabel></term><listitem><para> Adjust the file encoding for input files. This has an effect on how the special characters are interpreted. Since you can adjust each codec separately you can even compare and merge files that were saved using different codecs.
 	</para></listitem></varlistentry>
     <varlistentry><term><guilabel>File Encoding for Merge Output and Saving:</guilabel></term><listitem><para> When you have edited a file, then you can adjust which encoding will be used when saving to disk.
