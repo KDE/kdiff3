@@ -521,7 +521,7 @@ OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent) : KPageD
 
 void OptionDialog::helpRequested()
 {
-    KHelpClient::invokeHelp(QStringLiteral("kdiff3/index.html"));
+    KHelpClient::invokeHelp();
 }
 
 OptionDialog::~OptionDialog() = default;
