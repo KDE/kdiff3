@@ -151,12 +151,14 @@ void Utils::calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2
 
 QString Utils::calcHistoryLead(const QString& s)
 {
+    static const QRegularExpression nonWhitespace("\\S"), whitespace("\\s");
+
     // Return the start of the line until the first white char after the first non white char.
-    int i = s.indexOf(QRegularExpression("\\S"));
+    int i = s.indexOf(nonWhitespace);
     if(i == -1)
         return QString("");
 
-    i = s.indexOf(QRegularExpression("\\s"), i);
+    i = s.indexOf(whitespace, i);
     if(Q_UNLIKELY(i == -1))
         return s;// Very unlikely
 
