@@ -2452,7 +2452,7 @@ bool MergeResultWindow::deleteSelection2(QString& s, int& x, int& y,
         {
             // deleteSelection() should never remove or empty the first line, so
             // resolving m_cursorYPos shall always succeed
-            Q_ASSERT(false);
+            assert(false);
         }
 
         s = melIt->getString(m_pldA, m_pldB, m_pldC);

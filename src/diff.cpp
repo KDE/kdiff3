@@ -180,7 +180,7 @@ void Diff3LineList::calcDiff3LineListUsingAC(const DiffList* pDiffListAC)
         d = *i;
         ++i;
 
-        Q_ASSERT(d.diff1() <= TYPE_MAX(LineRef::LineType) && d.diff2() <= TYPE_MAX(LineRef::LineType));
+        assert(d.diff1() <= TYPE_MAX(LineRef::LineType) && d.diff2() <= TYPE_MAX(LineRef::LineType));
 
         while(d.numberOfEquals() > 0)
         {
@@ -1249,14 +1249,14 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
         {
             if(nofEquals + i1 == line1.size() || (bBestValid && i1 >= bestI1 + bestI2))
             {
-                Q_ASSERT(&p1[i1] == p1end);
+                assert(&p1[i1] == p1end);
                 break;
             }
             for(i2 = 0; i2 < maxSearchRange; ++i2)
             {
                 if(nofEquals + i2 == line2.size() || (bBestValid && i1 + i2 >= bestI1 + bestI2))
                 {
-                    Q_ASSERT(&p2[i2] == p2end);
+                    assert(&p2[i2] == p2end);
                     break;
                 }
                 else if(p2[i2] == p1[i1] &&
@@ -1304,8 +1304,8 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
             // Nothing else to match.
             Diff d(nofEquals, line1.size() - nofEquals, line2.size() - nofEquals);
             diffList.push_back(d);
-            Q_ASSERT(d.diff1() == p1end - p1);
-            Q_ASSERT(d.diff2() == p2end - p2);
+            assert(d.diff1() == p1end - p1);
+            assert(d.diff2() == p2end - p2);
 
             bEndReached = true; //break;
         }
