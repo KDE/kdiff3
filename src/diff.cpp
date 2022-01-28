@@ -1247,16 +1247,14 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
 
         for(i1 = 0;; ++i1)
         {
-            if(nofEquals + i1 == line1.size() || (bBestValid && i1 >= bestI1 + bestI2))
+            if(&p1[i1] == p1end || (bBestValid && i1 >= bestI1 + bestI2))
             {
-                assert(&p1[i1] == p1end || (bBestValid && i1 >= bestI1 + bestI2));
                 break;
             }
             for(i2 = 0; i2 < maxSearchRange; ++i2)
             {
-                if(nofEquals + i2 == line2.size() || (bBestValid && i1 + i2 >= bestI1 + bestI2))
+                if (&p2[i2] == p2end || (bBestValid && i1 + i2 >= bestI1 + bestI2))
                 {
-                    assert(&p2[i2] == p2end || (bBestValid && i1 + i2 >= bestI1 + bestI2));
                     break;
                 }
                 else if(p2[i2] == p1[i1] &&
@@ -1302,10 +1300,8 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
         else
         {
             // Nothing else to match.
-            Diff d(nofEquals, line1.size() - nofEquals, line2.size() - nofEquals);
+            Diff d(nofEquals, p1end - p1, p2end - p2);
             diffList.push_back(d);
-            assert(d.diff1() == p1end - p1);
-            assert(d.diff2() == p2end - p2);
 
             bEndReached = true; //break;
         }
