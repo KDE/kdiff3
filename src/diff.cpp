@@ -1249,14 +1249,14 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
         {
             if(nofEquals + i1 == line1.size() || (bBestValid && i1 >= bestI1 + bestI2))
             {
-                assert(&p1[i1] == p1end);
+                assert(&p1[i1] == p1end || (bBestValid && i1 >= bestI1 + bestI2));
                 break;
             }
             for(i2 = 0; i2 < maxSearchRange; ++i2)
             {
                 if(nofEquals + i2 == line2.size() || (bBestValid && i1 + i2 >= bestI1 + bestI2))
                 {
-                    assert(&p2[i2] == p2end);
+                    assert(&p2[i2] == p2end || (bBestValid && i1 + i2 >= bestI1 + bestI2));
                     break;
                 }
                 else if(p2[i2] == p1[i1] &&
