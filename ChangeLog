@@ -1,4 +1,11 @@
 
+Version 1.9.5 - 2022-2-23
+===========================
+*Attempt encoding detection for non-BOM UTF-8
+*BUG:448353,450225 Rewrite EOL detection
+    -fixes speed regression.
+    -Better EOL detection decoding handled by Qt
+
 Version 1.9.3 - 2021-7-15
 ===========================
 *Fix windows style cr/lf line ending handling
