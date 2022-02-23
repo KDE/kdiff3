@@ -584,7 +584,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         return false;
 
     QString line;
-    QChar curChar;
+    QChar curChar, prevChar = 0;
     LineCount lineCount = 0;
     qint64 lastOffset = 0;
     qint64 skipBytes = 0;
@@ -610,6 +610,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     m_unicodeBuf->clear();
     Q_ASSERT(m_unicodeBuf->length() == 0);
 
+    bool skipNextRead = false;
     while(!ts.atEnd())
     {
         line.clear();
@@ -619,7 +620,12 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
             return false;
         }
 
-        curChar = ts.read(1).unicode()[0];
+        if(!skipNextRead){
+            prevChar = curChar;
+            curChar = ts.read(1).unicode()[0];
+        }
+        else
+            skipNextRead = false;
 
         quint32 firstNonwhite = 0;
         bool    foundNonWhite = false;
@@ -646,6 +652,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
             if(ts.atEnd())
                 break;
 
+            prevChar = curChar;
             curChar = ts.read(1).unicode()[0];
         }
 
@@ -658,20 +665,16 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
             case '\r':
                 if(lastOffset < mDataSize)
                 {
-                    //workaround for lack of peak API in QTextStream.
-                    qint64 j;
-                    for(j = 0; j < 4 && lastOffset + j < mDataSize; ++j)
-                    {
-                        if(m_pBuf[ts.pos() + j] != '\0')
-                            break;
-                    }
+                    prevChar = curChar;
+                    curChar = ts.read(1).unicode()[0];
 
-                    if(m_pBuf[ts.pos() + j] == '\n')
+                    if(curChar == '\n')
                     {
-                        curChar = ts.read(1).unicode()[0];
                         vOrigDataLineEndStyle.push_back(eLineEndStyleDos);
                         break;
                     }
+                    //work around for lack of seek API in QTextStream
+                    skipNextRead = true;
                 }
 
                 //old mac style ending.
