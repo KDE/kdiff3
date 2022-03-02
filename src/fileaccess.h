@@ -82,6 +82,11 @@ class FileAccess
     {
         if(!isLocal(url)) return url.toDisplayString();
 
+        //work around for bad path in windows drop event urls. (Qt 5.15.2 affected)
+        QString path = url.toLocalFile();
+        if(!path.isEmpty() && !path.startsWith('/'))
+          return path;
+
         return QFileInfo(url.path()).absoluteFilePath();
     }
 
