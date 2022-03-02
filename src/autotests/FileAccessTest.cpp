@@ -116,7 +116,7 @@ class FileAccessTest: public QObject
 #ifndef Q_OS_WIN
         const QString expected = "/dds/root";
 #else
-        const QString expected = "C:/dds/root";
+        const QString expected = "c:/dds/root";
 #endif // !Q_OS_WIN
         FileAccessMoc mocFile;
         mocFile.setEngine(new FileAccessJobHandlerMoc(&mocFile));
@@ -124,23 +124,30 @@ class FileAccessTest: public QObject
         const QUrl url = QUrl("fish://i@0.0.0.0/root");
 
         QCOMPARE(FileAccess::prettyAbsPath(url), url.toDisplayString());
-        QCOMPARE(FileAccess::prettyAbsPath(QUrl("file:///dds/root")), expected);
-        QCOMPARE(FileAccess::prettyAbsPath(QUrl("/dds/root")), expected);
+        QCOMPARE(FileAccess::prettyAbsPath(QUrl("file:///dds/root")).toLower(), expected);
+        QCOMPARE(FileAccess::prettyAbsPath(QUrl("/dds/root")).toLower(), expected);
+        QCOMPARE(FileAccess::prettyAbsPath(QUrl("c:/dds/root")).toLower(), "c:/dds/root");
+        //work around for bad path in windows drop event urls. (Qt 5.15.2 affected)
+#ifndef Q_OS_WIN
+        QCOMPARE(FileAccess::prettyAbsPath(QUrl("file:///c:/dds/root")).toLower(), "/c:/dds/root");
+#else
+        QCOMPARE(FileAccess::prettyAbsPath(QUrl("file:///c:/dds/root")).toLower(), "c:/dds/root");
+#endif // !Q_OS_WIN
 
         mocFile.setFile(url);
         QCOMPARE(mocFile.prettyAbsPath(url), url.toDisplayString());
 
         mocFile.setFile(QUrl("file:///dds/root"));
-        QCOMPARE(mocFile.prettyAbsPath(), expected);
+        QCOMPARE(mocFile.prettyAbsPath().toLower(), expected);
 
         mocFile.setFile(QUrl("/dds/root"));
-        QCOMPARE(mocFile.prettyAbsPath(), expected);
+        QCOMPARE(mocFile.prettyAbsPath().toLower(), expected);
 
         mocFile.setFile(QStringLiteral("file:///dds/root"));
-        QCOMPARE(mocFile.prettyAbsPath(), expected);
+        QCOMPARE(mocFile.prettyAbsPath().toLower(), expected);
 
         mocFile.setFile(QStringLiteral("/dds/root"));
-        QCOMPARE(mocFile.prettyAbsPath(), expected);
+        QCOMPARE(mocFile.prettyAbsPath().toLower(), expected);
     }
 
     void liveTest()
