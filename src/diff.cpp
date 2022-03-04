@@ -1215,9 +1215,9 @@ void Diff3LineList::calcWhiteDiff3Lines(
 }
 
 // My own diff-invention:
-void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, int match, int maxSearchRange)
+void DiffList::calcDiff(const QString& line1, const QString& line2, int match, int maxSearchRange)
 {
-    diffList.clear();
+    clear();
 
     const QChar* p1end = line1.constData() + line1.size();
     const QChar* p2end = line2.constData() + line2.size();
@@ -1229,7 +1229,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
         stopping point to prevent runaway allocation if something unexpected happens.
         diffList is therefor hard capped at aprox 50 MB in size.
      */
-    for(; diffList.size() * sizeof(Diff) + sizeof(DiffList) < (50 << 20);)
+    for(; size() * sizeof(Diff) + sizeof(DiffList) < (50 << 20);)
     {
         int nofEquals = 0;
         while(p1 != line1.cend() && p2 != line2.cend() && *p1 == *p2)
@@ -1292,7 +1292,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
             // continue somehow
             Diff d(nofEquals, bestI1, bestI2);
             assert(nofEquals + bestI1 + bestI2 != 0);
-            diffList.push_back(d);
+            push_back(d);
 
             p1 += bestI1;
             p2 += bestI2;
@@ -1302,7 +1302,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
             // NOTE: Very consitantly entered with p1end == p1 and p2end == p2
             // Nothing else to match.
             Diff d(nofEquals, p1end - p1, p2end - p2);
-            diffList.push_back(d);
+            push_back(d);
 
             bEndReached = true; //break;
         }
@@ -1326,9 +1326,9 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
         {
             // We want to go backwards the nofUnmatched elements and redo
             // the matching
-            Diff d = diffList.back();
+            Diff d = back();
             const Diff origBack = d;
-            diffList.pop_back();
+            pop_back();
 
             while(nofUnmatched > 0)
             {
@@ -1346,38 +1346,38 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
 
                 if(d.numberOfEquals() == 0 && (d.diff1() == 0 || d.diff2() == 0) && nofUnmatched > 0)
                 {
-                    if(diffList.empty())
+                    if(empty())
                         break;
-                    d.adjustNumberOfEquals(diffList.back().numberOfEquals());
-                    d.adjustDiff1(diffList.back().diff1());
-                    d.adjustDiff2(diffList.back().diff2());
-                    diffList.pop_back();
+                    d.adjustNumberOfEquals(back().numberOfEquals());
+                    d.adjustDiff1(back().diff1());
+                    d.adjustDiff2(back().diff2());
+                    pop_back();
                     bEndReached = false;
                 }
             }
 
             if(bEndReached)
-                diffList.push_back(origBack);
+                push_back(origBack);
             else
             {
 
                 p1 = pu1 + 1 + nofUnmatched;
                 p2 = pu2 + 1 + nofUnmatched;
-                diffList.push_back(d);
+                push_back(d);
             }
         }
         if(bEndReached)
             break;
     }
 
-    assert(diffList.size() * sizeof(Diff) + sizeof(DiffList) <= (50 << 20));
+    assert(size() * sizeof(Diff) + sizeof(DiffList) <= (50 << 20));
 
     // Verify difflist
     {
         qint32 l1 = 0;
         qint32 l2 = 0;
 
-        for(const Diff& theDiff: diffList)
+        for(const Diff& theDiff: *this)
         {
             l1 += (theDiff.numberOfEquals() + theDiff.diff1());
             l2 += (theDiff.numberOfEquals() + theDiff.diff2());
@@ -1422,7 +1422,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
         {
             bTextsTotalEqual = false;
             auto pDiffList = std::make_shared<DiffList>();
-            calcDiff((*v1)[k1].getLine(), (*v2)[k2].getLine(), *pDiffList, 2, maxSearchLength);
+            pDiffList->calcDiff((*v1)[k1].getLine(), (*v2)[k2].getLine(), 2, maxSearchLength);
 
             // Optimize the diff list.
             DiffList::iterator dli;
