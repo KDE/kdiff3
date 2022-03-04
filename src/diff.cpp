@@ -1218,7 +1218,7 @@ void Diff3LineList::calcWhiteDiff3Lines(
 /*
     Builds DiffList for scratch. Automaticly clears all previous data in list.
 */
-void DiffList::calcDiff(const QString& line1, const QString& line2, const int match, const int maxSearchRange)
+void DiffList::calcDiff(const QString& line1, const QString& line2, const int maxSearchRange)
 {
     clear();
 
@@ -1261,7 +1261,7 @@ void DiffList::calcDiff(const QString& line1, const QString& line2, const int ma
                     break;
                 }
                 else if(p2[i2] == p1[i1] &&
-                        (match == 1 || abs(i1 - i2) < 3 || (&p2[i2 + 1] == p2end && &p1[i1 + 1] == p1end) ||
+                        (abs(i1 - i2) < 3 || (&p2[i2 + 1] == p2end && &p1[i1 + 1] == p1end) ||
                          (&p2[i2 + 1] != p2end && &p1[i1 + 1] != p1end && p2[i2 + 1] == p1[i1 + 1])))
                 {
                     if(i1 + i2 < bestI1 + bestI2 || !bBestValid)
@@ -1425,7 +1425,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
         {
             bTextsTotalEqual = false;
             auto pDiffList = std::make_shared<DiffList>();
-            pDiffList->calcDiff((*v1)[k1].getLine(), (*v2)[k2].getLine(), 2, maxSearchLength);
+            pDiffList->calcDiff((*v1)[k1].getLine(), (*v2)[k2].getLine(), maxSearchLength);
 
             // Optimize the diff list.
             DiffList::iterator dli;
