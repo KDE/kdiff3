@@ -1215,7 +1215,10 @@ void Diff3LineList::calcWhiteDiff3Lines(
 }
 
 // My own diff-invention:
-void DiffList::calcDiff(const QString& line1, const QString& line2, int match, int maxSearchRange)
+/*
+    Builds DiffList for scratch. Automaticly clears all previous data in list.
+*/
+void DiffList::calcDiff(const QString& line1, const QString& line2, const int match, const int maxSearchRange)
 {
     clear();
 
