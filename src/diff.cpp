@@ -1299,6 +1299,7 @@ void calcDiff(const QString& line1, const QString& line2, DiffList& diffList, in
         }
         else
         {
+            // NOTE: Very consitantly entered with p1end == p1 and p2end == p2
             // Nothing else to match.
             Diff d(nofEquals, p1end - p1, p2end - p2);
             diffList.push_back(d);
