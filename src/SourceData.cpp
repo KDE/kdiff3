@@ -693,7 +693,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
     /*
         Process trailing new line as if there were a blank non-terminated line after it.
-        But do nothing to the data buffer since this a phantom line needed for internal purposes.
+        But do nothing to the data buffer since this is a phantom line needed for internal purposes.
     */
     if(curChar == '\n' || curChar == '\r')
     {
