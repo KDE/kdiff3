@@ -8,7 +8,6 @@
 
 #include "progress.h"
 
-#include <KIO/Job>
 #include <QDialog>
 #include <QString>
 
