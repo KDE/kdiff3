@@ -23,6 +23,7 @@ set(kdiff3part_PART_SRCS
    common.cpp
    smalldialogs.cpp
    progress.cpp
+   ProgressProxy.cpp
    ProgressProxyExtender.cpp
    PixMapUtils.cpp
    MergeFileInfos.cpp
