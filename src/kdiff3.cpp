@@ -23,13 +23,14 @@
 #include "mergeresultwindow.h"
 #include "RLPainter.h"
 #include "Utils.h"
-
+// Standard c/c++ includes
 #include <memory>
 #ifndef Q_OS_WIN
 #include <unistd.h>
 #endif
 #include <utility>
-
+// Anything else that isn't Qt/Frameworks
+#include <boost/signals2.hpp>
 // include files for QT
 #include <QClipboard>
 #include <QCheckBox>
@@ -79,24 +80,24 @@ KActionCollection* KDiff3App::actionCollection() const
 {
     if(m_pKDiff3Shell == nullptr)
         return m_pKDiff3Part->actionCollection();
-    else
-        return m_pKDiff3Shell->actionCollection();
+
+    return m_pKDiff3Shell->actionCollection();
 }
 
 QStatusBar* KDiff3App::statusBar() const
 {
     if(m_pKDiff3Shell == nullptr)
         return nullptr;
-    else
-        return m_pKDiff3Shell->statusBar();
+
+    return m_pKDiff3Shell->statusBar();
 }
 
 KToolBar* KDiff3App::toolBar(const QLatin1String &toolBarId) const
 {
     if(m_pKDiff3Shell == nullptr)
         return nullptr;
-    else
-        return m_pKDiff3Shell->toolBar(toolBarId);
+
+    return m_pKDiff3Shell->toolBar(toolBarId);
 }
 
 bool KDiff3App::isPart() const
