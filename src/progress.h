@@ -64,11 +64,19 @@ class ProgressDialog: public QDialog
     void delayedHideStatusBarWidget();
 
     void timerEvent(QTimerEvent* event) override;
-  public Q_SLOTS:
-    void recalc(bool bUpdate);
+
+  protected:
+    void reject() override;
 
   private:
     void setInformationImp(const QString& info);
+
+  public Q_SLOTS:
+    void recalc(bool bUpdate);
+
+  private Q_SLOTS:
+    void delayedHide();
+    void slotAbort();
 
   private:
     struct ProgressLevelData {
@@ -113,12 +121,6 @@ class ProgressDialog: public QDialog
     QWidget* m_pStatusBarWidget = nullptr;
     QProgressBar* m_pStatusProgressBar;
     QPushButton* m_pStatusAbortButton;
-
-  protected:
-    void reject() override;
-  private Q_SLOTS:
-    void delayedHide();
-    void slotAbort();
 };
 
 #ifndef PROGRESSPROXY_H
