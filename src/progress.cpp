@@ -169,26 +169,17 @@ void ProgressDialog::setInformation(const QString& info, int current, bool bRedr
     if(m_progressStack.empty())
         return;
 
-#ifndef AUTOTEST
     setCurrentImp(current);
-#else
-    Q_UNUSED(current);
-#endif
     setInformation(info, bRedrawUpdate);
 }
 
 void ProgressDialog::setInformation(const QString& info, bool bRedrawUpdate)
 {
-#ifndef AUTOTEST
     if(m_progressStack.empty())
         return;
 
     setInformationImp(info);
     recalc(bRedrawUpdate);
-#else
-    Q_UNUSED(info);
-    Q_UNUSED(bRedrawUpdate);
-#endif
 }
 
 void ProgressDialog::setMaxNofSteps(const qint64 maxNofSteps)
@@ -206,6 +197,7 @@ void ProgressDialog::setMaxNofSteps(const qint64 maxNofSteps)
 
 void ProgressDialog::setInformationImp(const QString& info)
 {
+#ifndef AUTOTEST
     assert(!m_progressStack.empty());
 
     int level = m_progressStack.size();
@@ -220,6 +212,9 @@ void ProgressDialog::setInformationImp(const QString& info)
     {
         m_pSubInformation->setText(info);
     }
+#else
+    Q_UNUSED(info);
+#endif
 }
 
 void ProgressDialog::addNofSteps(const qint64 nofSteps)
@@ -249,19 +244,15 @@ void ProgressDialog::step(bool bRedrawUpdate)
 
 void ProgressDialog::setCurrent(qint64 subCurrent, bool bRedrawUpdate)
 {
-#ifndef AUTOTEST
     if(m_progressStack.empty())
         return;
     setCurrentImp(subCurrent);
     recalc(bRedrawUpdate);
-#else
-    Q_UNUSED(subCurrent);
-    Q_UNUSED(bRedrawUpdate);
-#endif
 }
 
 void ProgressDialog::setCurrentImp(qint64 subCurrent)
 {
+    Q_ASSERT(!m_progressStack.empty());
     ProgressLevelData& pld = m_progressStack.back();
     pld.m_current = subCurrent;
 }
