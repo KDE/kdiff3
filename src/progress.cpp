@@ -166,29 +166,15 @@ void ProgressDialog::pop(bool bRedrawUpdate)
 
 void ProgressDialog::setInformation(const QString& info, int current, bool bRedrawUpdate)
 {
-#ifndef AUTOTEST
     if(m_progressStack.empty())
         return;
+#ifndef AUTOTEST
     ProgressLevelData& pld = m_progressStack.back();
     pld.m_current = current;
-    int level = m_progressStack.size();
-    if(level == 1)
-    {
-        m_pInformation->setText(info);
-        m_pSubInformation->setText("");
-        if(m_pStatusBar != nullptr && m_bStayHidden)
-            m_pStatusBar->showMessage(info);
-    }
-    else if(level == 2)
-    {
-        m_pSubInformation->setText(info);
-    }
-    recalc(bRedrawUpdate);
 #else
-    Q_UNUSED(info);
-    Q_UNUSED(bRedrawUpdate);
     Q_UNUSED(current);
 #endif
+    setInformation(info, bRedrawUpdate);
 }
 
 void ProgressDialog::setInformation(const QString& info, bool bRedrawUpdate)
@@ -197,18 +183,7 @@ void ProgressDialog::setInformation(const QString& info, bool bRedrawUpdate)
     if(m_progressStack.empty())
         return;
 
-    int level = m_progressStack.size();
-    if(level == 1)
-    {
-        m_pInformation->setText(info);
-        m_pSubInformation->setText("");
-        if(m_pStatusBar && m_bStayHidden)
-            m_pStatusBar->showMessage(info);
-    }
-    else if(level == 2)
-    {
-        m_pSubInformation->setText(info);
-    }
+    setInformationImp(info);
     recalc(bRedrawUpdate);
 #else
     Q_UNUSED(info);
@@ -227,6 +202,24 @@ void ProgressDialog::setMaxNofSteps(const qint64 maxNofSteps)
 #else
     Q_UNUSED(maxNofSteps);
 #endif
+}
+
+void ProgressDialog::setInformationImp(const QString& info)
+{
+    assert(!m_progressStack.empty());
+
+    int level = m_progressStack.size();
+    if(level == 1)
+    {
+        m_pInformation->setText(info);
+        m_pSubInformation->setText("");
+        if(m_pStatusBar && m_bStayHidden)
+            m_pStatusBar->showMessage(info);
+    }
+    else if(level == 2)
+    {
+        m_pSubInformation->setText(info);
+    }
 }
 
 void ProgressDialog::addNofSteps(const qint64 nofSteps)

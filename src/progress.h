@@ -68,6 +68,9 @@ class ProgressDialog: public QDialog
     void recalc(bool bUpdate);
 
   private:
+    void setInformationImp(const QString& info);
+
+  private:
     struct ProgressLevelData {
         ProgressLevelData()
         {
