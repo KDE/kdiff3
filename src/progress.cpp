@@ -168,9 +168,9 @@ void ProgressDialog::setInformation(const QString& info, int current, bool bRedr
 {
     if(m_progressStack.empty())
         return;
+
 #ifndef AUTOTEST
-    ProgressLevelData& pld = m_progressStack.back();
-    pld.m_current = current;
+    setCurrentImp(current);
 #else
     Q_UNUSED(current);
 #endif
@@ -252,13 +252,18 @@ void ProgressDialog::setCurrent(qint64 subCurrent, bool bRedrawUpdate)
 #ifndef AUTOTEST
     if(m_progressStack.empty())
         return;
-    ProgressLevelData& pld = m_progressStack.back();
-    pld.m_current = subCurrent;
+    setCurrentImp(subCurrent);
     recalc(bRedrawUpdate);
 #else
     Q_UNUSED(subCurrent);
     Q_UNUSED(bRedrawUpdate);
 #endif
+}
+
+void ProgressDialog::setCurrentImp(qint64 subCurrent)
+{
+    ProgressLevelData& pld = m_progressStack.back();
+    pld.m_current = subCurrent;
 }
 
 void ProgressDialog::clear()

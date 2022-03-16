@@ -71,6 +71,7 @@ class ProgressDialog: public QDialog
 
   private:
     void setInformationImp(const QString& info);
+    void setCurrentImp(qint64 subCurrent);
 
   private Q_SLOTS:
     void delayedHide();
