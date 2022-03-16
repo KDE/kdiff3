@@ -64,15 +64,13 @@ class ProgressDialog: public QDialog
     void delayedHideStatusBarWidget();
 
     void timerEvent(QTimerEvent* event) override;
+    void recalc(bool bUpdate);
 
   protected:
     void reject() override;
 
   private:
     void setInformationImp(const QString& info);
-
-  public Q_SLOTS:
-    void recalc(bool bUpdate);
 
   private Q_SLOTS:
     void delayedHide();
