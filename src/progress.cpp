@@ -196,7 +196,7 @@ void ProgressDialog::setInformation(const QString& info, bool bRedrawUpdate)
 #ifndef AUTOTEST
     if(m_progressStack.empty())
         return;
-    //ProgressLevelData& pld = m_progressStack.back();
+
     int level = m_progressStack.size();
     if(level == 1)
     {
