@@ -25,6 +25,8 @@
 #include <KIO/Job>
 #include <KLocalizedString>
 
+namespace placeholders = boost::placeholders;
+
 ProgressDialog* g_pProgressDialog = nullptr;
 
 ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
@@ -94,6 +96,28 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     m_bWasCancelled = false;
     m_eCancelReason = eUserAbort;
     m_pJob = nullptr;
+
+    initConnections();
+}
+
+void ProgressDialog::initConnections()
+{
+    connections.push_back(ProgressProxy::push.connect(boost::bind(&ProgressDialog::push, this)));
+    connections.push_back(ProgressProxy::pop.connect(boost::bind(&ProgressDialog::pop, this, placeholders::_1)));
+    connections.push_back(ProgressProxy::clearSig.connect(boost::bind(&ProgressDialog::clear, this)));
+
+    connections.push_back(ProgressProxy::enterEventLoopSig.connect(boost::bind(&ProgressDialog::enterEventLoop, this, placeholders::_1, placeholders::_2)));
+    connections.push_back(ProgressProxy::exitEventLoopSig.connect(boost::bind(&ProgressDialog::exitEventLoop, this)));
+
+    connections.push_back(ProgressProxy::setCurrentSig.connect(boost::bind(&ProgressDialog::setCurrent, this, placeholders::_1, placeholders::_2)));
+    connections.push_back(ProgressProxy::addNofStepsSig.connect(boost::bind(&ProgressDialog::addNofSteps, this, placeholders::_1)));
+    connections.push_back(ProgressProxy::setMaxNofStepsSig.connect(boost::bind(&ProgressDialog::setMaxNofSteps, this, placeholders::_1)));
+    connections.push_back(ProgressProxy::stepSig.connect(boost::bind(&ProgressDialog::step, this, placeholders::_1)));
+
+    connections.push_back(ProgressProxy::setRangeTransformationSig.connect(boost::bind(&ProgressDialog::setRangeTransformation, this, placeholders::_1, placeholders::_2)));
+    connections.push_back(ProgressProxy::setSubRangeTransformationSig.connect(boost::bind(&ProgressDialog::setSubRangeTransformation, this, placeholders::_1, placeholders::_2)));
+
+    connections.push_back(ProgressProxy::wasCancelledSig.connect(boost::bind(&ProgressDialog::wasCancelled, this)));
 }
 
 void ProgressDialog::setStayHidden(bool bStayHidden)

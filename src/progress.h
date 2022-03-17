@@ -22,6 +22,9 @@ class QLabel;
 class QProgressBar;
 class QStatusBar;
 
+/*
+    Due to Qt/automoc wonkyness multiple inhertance can not be used with by this class.
+*/
 class ProgressDialog: public QDialog
 {
     Q_OBJECT
@@ -72,6 +75,7 @@ class ProgressDialog: public QDialog
   private:
     void setInformationImp(const QString& info);
     void setCurrentImp(qint64 subCurrent);
+    void initConnections();
 
   private Q_SLOTS:
     void delayedHide();
@@ -120,6 +124,10 @@ class ProgressDialog: public QDialog
     QWidget* m_pStatusBarWidget = nullptr;
     QProgressBar* m_pStatusProgressBar;
     QPushButton* m_pStatusAbortButton;
+    /*
+        This list exists solely to auto disconnect boost signals.
+    */
+    std::list<boost::signals2::scoped_connection> connections;
 };
 
 #ifndef PROGRESSPROXY_H

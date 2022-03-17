@@ -8,43 +8,48 @@
 
 #include "progress.h"
 
+#include <boost/signals2.hpp>
+
 #include <QDialog>
 #include <QString>
 
-#ifndef AUTOTEST
+namespace signals2 = boost::signals2;
+
+signals2::signal<void()> ProgressProxy::push;
+signals2::signal<void(bool)> ProgressProxy::pop;
+signals2::signal<void()> ProgressProxy::clearSig;
+
+signals2::signal<void(KJob*, const QString&)> ProgressProxy::enterEventLoopSig;
+signals2::signal<void()> ProgressProxy::exitEventLoopSig;
+
+signals2::signal<void(qint64, bool)> ProgressProxy::setCurrentSig;
+signals2::signal<void(qint64)> ProgressProxy::setMaxNofStepsSig;
+signals2::signal<void(qint64)> ProgressProxy::addNofStepsSig;
+signals2::signal<void(bool)> ProgressProxy::stepSig;
+
+signals2::signal<void(double, double)> ProgressProxy::setRangeTransformationSig;
+signals2::signal<void(double, double)> ProgressProxy::setSubRangeTransformationSig;
+
+signals2::signal<bool()> ProgressProxy::wasCancelledSig;
+
 ProgressProxy::ProgressProxy()
 {
-    g_pProgressDialog->push();
+    push();
 }
-#else
-ProgressProxy::ProgressProxy() = default;
-#endif
 
-#ifndef AUTOTEST
 ProgressProxy::~ProgressProxy()
 {
-    g_pProgressDialog->pop(false);
+    pop(false);
 }
-
-#else
-ProgressProxy::~ProgressProxy() = default;
-#endif
 
 void ProgressProxy::enterEventLoop(KJob* pJob, const QString& jobInfo)
 {
-#ifndef AUTOTEST
-    g_pProgressDialog->enterEventLoop(pJob, jobInfo);
-#else
-    Q_UNUSED(pJob);
-    Q_UNUSED(jobInfo);
-#endif
+    enterEventLoopSig(pJob, jobInfo);
 }
 
 void ProgressProxy::exitEventLoop()
 {
-#ifndef AUTOTEST
-    g_pProgressDialog->exitEventLoop();
-#endif
+    exitEventLoopSig();
 }
 
 QDialog* ProgressProxy::getDialog()
@@ -75,52 +80,33 @@ void ProgressProxy::setInformation(const QString& info, int current, bool bRedra
 
 void ProgressProxy::setCurrent(qint64 current, bool bRedrawUpdate)
 {
-#ifndef AUTOTEST
-    g_pProgressDialog->setCurrent(current, bRedrawUpdate);
-#else
-    Q_UNUSED(bRedrawUpdate);
-    Q_UNUSED(current);
-#endif
+    setCurrentSig(current, bRedrawUpdate);
 }
 
 void ProgressProxy::step(bool bRedrawUpdate)
 {
-#ifndef AUTOTEST
-    g_pProgressDialog->step(bRedrawUpdate);
-#else
-    Q_UNUSED(bRedrawUpdate);
-#endif
+    stepSig(bRedrawUpdate);
 }
 
 void ProgressProxy::clear()
 {
-#ifndef AUTOTEST
-    g_pProgressDialog->clear();
-#endif
+    clearSig();
 }
 
 void ProgressProxy::setMaxNofSteps(const qint64 maxNofSteps)
 {
-#ifndef AUTOTEST
-    g_pProgressDialog->setMaxNofSteps(maxNofSteps);
-#else
-    Q_UNUSED(maxNofSteps);
-#endif
+    setMaxNofStepsSig(maxNofSteps);
 }
 
 void ProgressProxy::addNofSteps(const qint64 nofSteps)
 {
-#ifndef AUTOTEST
-    g_pProgressDialog->addNofSteps(nofSteps);
-#else
-    Q_UNUSED(nofSteps)
-#endif
+    addNofStepsSig(nofSteps);
 }
 
 bool ProgressProxy::wasCancelled()
 {
 #ifndef AUTOTEST
-    return g_pProgressDialog->wasCancelled();
+    return wasCancelledSig().value();
 #else
     return false;
 #endif
@@ -128,20 +114,10 @@ bool ProgressProxy::wasCancelled()
 
 void ProgressProxy::setRangeTransformation(double dMin, double dMax)
 {
-#ifndef AUTOTEST
-    g_pProgressDialog->setRangeTransformation(dMin, dMax);
-#else
-    Q_UNUSED(dMin);
-    Q_UNUSED(dMax);
-#endif
+    setRangeTransformationSig(dMin, dMax);
 }
 
 void ProgressProxy::setSubRangeTransformation(double dMin, double dMax)
 {
-#ifndef AUTOTEST
-    g_pProgressDialog->setSubRangeTransformation(dMin, dMax);
-#else
-    Q_UNUSED(dMin);
-    Q_UNUSED(dMax);
-#endif
+    setSubRangeTransformationSig(dMin, dMax);
 }
