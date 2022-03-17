@@ -30,7 +30,6 @@ class ProgressProxy: public QObject
     static void exitEventLoop();
     static void enterEventLoop(KJob* pJob, const QString& jobInfo);
     static QDialog* getDialog();
-    static void recalc();
 
   private:
 };

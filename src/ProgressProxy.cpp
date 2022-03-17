@@ -145,10 +145,3 @@ void ProgressProxy::setSubRangeTransformation(double dMin, double dMax)
     Q_UNUSED(dMax);
 #endif
 }
-
-void ProgressProxy::recalc()
-{
-#ifndef AUTOTEST
-    g_pProgressDialog->recalc(true);
-#endif
-}
