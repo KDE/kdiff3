@@ -56,7 +56,7 @@ struct and
 
 template<typename T> struct FirstNonEmpty
 {
-    //This just provides a better error message if an in appropriate parameter is passed.
+    //This just provides a better error message if an inappropriate parameter is passed.
     static_assert(std::is_class<typename std::remove_reference<T>::type>(), "First parameter must be a class.");
     static_assert(std::is_same<decltype(std::declval<T>().isEmpty()), bool>(),
         "First parameter must implement or inherit isEmpty().");
@@ -79,7 +79,7 @@ template<typename T> struct FirstNonEmpty
     }
 };
 
-//Like 'or' but default to false if there are no connections and stop looking once true is returned.
+//Like 'or' but default to false if there are no connections and stops looking once true is returned.
 struct find
 {
     typedef bool result_type;
