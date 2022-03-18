@@ -32,10 +32,7 @@ ProgressDialog* g_pProgressDialog = nullptr;
 ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     : QDialog(pParent), m_pStatusBar(pStatusBar)
 {
-    m_pGuiThread = QThread::currentThread();
-
     setObjectName("ProgressDialog");
-    m_bStayHidden = false;
     setModal(true);
     QVBoxLayout* layout = new QVBoxLayout(this);
 
@@ -79,23 +76,12 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
         m_pStatusBarWidget->setFixedHeight(m_pStatusBar->height());
         m_pStatusBarWidget->hide();
     }
-    else
-    {
-        m_pStatusProgressBar = nullptr;
-        m_pStatusAbortButton = nullptr;
-    }
 
-    m_progressDelayTimer = 0;
-    m_delayedHideTimer = 0;
-    m_delayedHideStatusBarWidgetTimer = 0;
     resize(400, 100);
 #ifndef AUTOTEST
     m_t1.start();
     m_t2.start();
 #endif
-    m_bWasCancelled = false;
-    m_eCancelReason = eUserAbort;
-    m_pJob = nullptr;
 
     initConnections();
 }
