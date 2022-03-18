@@ -118,6 +118,15 @@ void ProgressDialog::initConnections()
     connections.push_back(ProgressProxy::setSubRangeTransformationSig.connect(boost::bind(&ProgressDialog::setSubRangeTransformation, this, placeholders::_1, placeholders::_2)));
 
     connections.push_back(ProgressProxy::wasCancelledSig.connect(boost::bind(&ProgressDialog::wasCancelled, this)));
+
+    connections.push_back(ProgressProxy::setInformationSig.connect(boost::bind(
+        static_cast<void (ProgressDialog::*)(const QString&, bool)>(&ProgressDialog::setInformation),
+        this,
+        placeholders::_1, placeholders::_2)));
+    connections.push_back(ProgressProxy::setInfoAndStepSig.connect(boost::bind(
+        static_cast<void (ProgressDialog::*)(const QString&, int, bool)>(&ProgressDialog::setInformation),
+        this,
+        placeholders::_1, placeholders::_2, placeholders::_3)));
 }
 
 void ProgressDialog::setStayHidden(bool bStayHidden)

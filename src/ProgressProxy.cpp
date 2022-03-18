@@ -32,6 +32,9 @@ signals2::signal<void(double, double)> ProgressProxy::setSubRangeTransformationS
 
 signals2::signal<bool()> ProgressProxy::wasCancelledSig;
 
+signals2::signal<void(const QString&, bool)> ProgressProxy::setInformationSig;
+signals2::signal<void(const QString&, int, bool)> ProgressProxy::setInfoAndStepSig;
+
 ProgressProxy::ProgressProxy()
 {
     push();
@@ -59,23 +62,12 @@ QDialog* ProgressProxy::getDialog()
 
 void ProgressProxy::setInformation(const QString& info, bool bRedrawUpdate)
 {
-#ifndef AUTOTEST
-    g_pProgressDialog->setInformation(info, bRedrawUpdate);
-#else
-    Q_UNUSED(info);
-    Q_UNUSED(bRedrawUpdate);
-#endif
+    setInformationSig(info, bRedrawUpdate);
 }
 
 void ProgressProxy::setInformation(const QString& info, int current, bool bRedrawUpdate)
 {
-#ifndef AUTOTEST
-    g_pProgressDialog->setInformation(info, current, bRedrawUpdate);
-#else
-    Q_UNUSED(info);
-    Q_UNUSED(bRedrawUpdate);
-    Q_UNUSED(current);
-#endif
+    setInfoAndStepSig(info, current, bRedrawUpdate);
 }
 
 void ProgressProxy::setCurrent(qint64 current, bool bRedrawUpdate)
