@@ -92,11 +92,7 @@ void ProgressProxy::addNofSteps(const qint64 nofSteps)
 
 bool ProgressProxy::wasCancelled()
 {
-#ifndef AUTOTEST
-    return wasCancelledSig().value();
-#else
-    return false;
-#endif
+    return wasCancelledSig().get_value_or(false);
 }
 
 void ProgressProxy::setRangeTransformation(double dMin, double dMax)
