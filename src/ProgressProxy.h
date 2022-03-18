@@ -32,7 +32,6 @@ class ProgressProxy: public QObject
 
     static void exitEventLoop();
     static void enterEventLoop(KJob* pJob, const QString& jobInfo);
-    static QDialog* getDialog();
 
     static signals2::signal<void()> push;
     static signals2::signal<void(bool)> pop;
@@ -54,7 +53,5 @@ class ProgressProxy: public QObject
     static signals2::signal<void(const QString&, bool)> setInformationSig;
     static signals2::signal<void(const QString&, int, bool)> setInfoAndStepSig;
 };
-
-extern ProgressDialog* g_pProgressDialog;
 
 #endif /* PROGRESSPROXY_H */

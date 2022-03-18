@@ -55,11 +55,6 @@ void ProgressProxy::exitEventLoop()
     exitEventLoopSig();
 }
 
-QDialog* ProgressProxy::getDialog()
-{
-    return g_pProgressDialog;
-}
-
 void ProgressProxy::setInformation(const QString& info, bool bRedrawUpdate)
 {
     setInformationSig(info, bRedrawUpdate);

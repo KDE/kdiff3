@@ -130,8 +130,6 @@ class ProgressDialog: public QDialog
     std::list<boost::signals2::scoped_connection> connections;
 };
 
-#ifndef PROGRESSPROXY_H
 extern ProgressDialog* g_pProgressDialog;
-#endif // !1
 
 #endif
