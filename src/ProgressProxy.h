@@ -1,6 +1,8 @@
 #ifndef PROGRESSPROXY_H
 #define PROGRESSPROXY_H
 
+#include "combiners.h"
+
 #include <boost/signals2.hpp>
 
 #include <QDialog>
@@ -48,7 +50,7 @@ class ProgressProxy: public QObject
     static signals2::signal<void(double, double)> setRangeTransformationSig;
     static signals2::signal<void(double, double)> setSubRangeTransformationSig;
 
-    static signals2::signal<bool()> wasCancelledSig;
+    static signals2::signal<bool(), find> wasCancelledSig;
 
     static signals2::signal<void(const QString&, bool)> setInformationSig;
     static signals2::signal<void(const QString&, int, bool)> setInfoAndStepSig;

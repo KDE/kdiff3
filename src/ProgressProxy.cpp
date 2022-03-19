@@ -6,7 +6,8 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#include "progress.h"
+
+#include "combiners.h"
 
 #include <boost/signals2.hpp>
 
@@ -30,7 +31,7 @@ signals2::signal<void(bool)> ProgressProxy::stepSig;
 signals2::signal<void(double, double)> ProgressProxy::setRangeTransformationSig;
 signals2::signal<void(double, double)> ProgressProxy::setSubRangeTransformationSig;
 
-signals2::signal<bool()> ProgressProxy::wasCancelledSig;
+signals2::signal<bool(), find> ProgressProxy::wasCancelledSig;
 
 signals2::signal<void(const QString&, bool)> ProgressProxy::setInformationSig;
 signals2::signal<void(const QString&, int, bool)> ProgressProxy::setInfoAndStepSig;
@@ -92,7 +93,7 @@ void ProgressProxy::addNofSteps(const qint64 nofSteps)
 
 bool ProgressProxy::wasCancelled()
 {
-    return wasCancelledSig().get_value_or(false);
+    return wasCancelledSig();
 }
 
 void ProgressProxy::setRangeTransformation(double dMin, double dMax)
