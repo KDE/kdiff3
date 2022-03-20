@@ -18,14 +18,14 @@ ecm_add_test(commentparser.cpp ../CommentParser.cpp
     LINK_LIBRARIES Qt5::Test
 )
 
-ecm_add_test(CvsIgnoreListTest.cpp ../CvsIgnoreList.cpp ../fileaccess.cpp ../Utils.cpp ../progress.cpp ../ProgressProxy.cpp ../CompositeIgnoreList.cpp
+ecm_add_test(CvsIgnoreListTest.cpp ../CvsIgnoreList.cpp ../fileaccess.cpp ../Utils.cpp ../ProgressProxy.cpp ../CompositeIgnoreList.cpp
     TEST_NAME "cvsignorelisttest"
-    LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::KIOCore KF5::I18n
+    LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::I18n
 )
 
-ecm_add_test(FileAccessTest.cpp ../fileaccess.cpp ../Utils.cpp ../progress.cpp ../ProgressProxy.cpp ../CvsIgnoreList.cpp ../CompositeIgnoreList.cpp
+ecm_add_test(FileAccessTest.cpp ../fileaccess.cpp ../Utils.cpp ../ProgressProxy.cpp ../CvsIgnoreList.cpp ../CompositeIgnoreList.cpp
     TEST_NAME "fileaccesstest"
-    LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::KIOCore KF5::I18n
+    LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::I18n
 )
 
 ecm_add_test(combinertest.cpp
@@ -38,22 +38,22 @@ ecm_add_test(CompositeIgnoreListTest.cpp ../CompositeIgnoreList.cpp
     LINK_LIBRARIES Qt5::Test
 )
 
-ecm_add_test(GitIgnoreListTest.cpp ../GitIgnoreList.cpp ../fileaccess.cpp ../Utils.cpp ../progress.cpp ../ProgressProxy.cpp ../Logging.cpp
+ecm_add_test(GitIgnoreListTest.cpp ../GitIgnoreList.cpp ../fileaccess.cpp ../Utils.cpp ../ProgressProxy.cpp ../Logging.cpp
     TEST_NAME "GitIgnoreListTest"
-    LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::KIOCore KF5::I18n
+    LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::I18n
 )
 
-ecm_add_test(datareadtest.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp ../Utils.cpp ../progress.cpp ../ProgressProxy.cpp ../Logging.cpp
+ecm_add_test(datareadtest.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp ../Utils.cpp ../ProgressProxy.cpp ../Logging.cpp
     TEST_NAME "datareadtest"
-    LINK_LIBRARIES Qt5::Test Qt5::Widgets Qt5::Gui KF5::KIOCore KF5::Parts KF5::ConfigCore KF5::I18n
+    LINK_LIBRARIES Qt5::Test Qt5::Widgets Qt5::Gui KF5::Parts KF5::ConfigCore KF5::I18n
 )
 
-ecm_add_test(DiffTest.cpp ../diff.cpp ../Logging.cpp ../Utils.cpp ../progress.cpp ../ProgressProxy.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp
+ecm_add_test(DiffTest.cpp ../diff.cpp ../Logging.cpp ../Utils.cpp ../ProgressProxy.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp
     TEST_NAME "difftest"
-    LINK_LIBRARIES Qt5::Test Qt5::Widgets Qt5::Gui KF5::ConfigCore KF5::I18n KF5::KIOCore KF5::Parts
+    LINK_LIBRARIES Qt5::Test Qt5::Widgets Qt5::Gui KF5::ConfigCore KF5::I18n KF5::Parts
 )
 
-ecm_add_test(Diff3LineTest.cpp ../diff.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../Logging.cpp ../Utils.cpp ../progress.cpp ../ProgressProxy.cpp
+ecm_add_test(Diff3LineTest.cpp ../diff.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../Logging.cpp ../Utils.cpp ../ProgressProxy.cpp
     TEST_NAME "diff3linetest"
-    LINK_LIBRARIES Qt5::Test Qt5::Widgets Qt5::Gui KF5::ConfigCore KF5::KIOCore KF5::I18n
+    LINK_LIBRARIES Qt5::Test Qt5::Widgets Qt5::Gui KF5::ConfigCore KF5::I18n
 )

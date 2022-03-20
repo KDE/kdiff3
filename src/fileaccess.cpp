@@ -15,8 +15,8 @@
 #include "FileAccessJobHandler.h"
 #include "IgnoreList.h"
 #include "Logging.h"
+#include "ProgressProxy.h"
 #include "Utils.h"
-#include "progress.h"
 
 #include <algorithm>                      // for min
 #include <cstdlib>
