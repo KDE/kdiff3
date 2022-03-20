@@ -8,7 +8,7 @@
 #include "../CompositeIgnoreList.h"
 
 #include <QTest>
-#include <qglobal.h>
+#include <QtGlobal>
 
 class IgnoreListMock final : public IgnoreList {
 public:

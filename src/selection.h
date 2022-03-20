@@ -11,7 +11,7 @@
 #include "LineRef.h"
 
 #include <algorithm>  // for max, min
-#include <qglobal.h>
+#include <QtGlobal>
 
 class Selection
 {

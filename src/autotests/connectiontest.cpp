@@ -7,10 +7,10 @@
 
 #include "../defmac.h"
 
-#include <QTest>
-#include <QtTest/qtestcase.h>
-#include <qglobal.h>
 #include <qobjectdefs.h>
+#include <QTest>
+#include <QtGlobal>
+#include <QtTest/qtestcase.h>
 
 class SigTest: public QObject
 {

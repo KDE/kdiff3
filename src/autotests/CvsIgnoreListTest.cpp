@@ -6,7 +6,7 @@
 */
 
 #include <QTest>
-#include <qglobal.h>
+#include <QtGlobal>
 
 #include "../CvsIgnoreList.h"
 #include "MocIgnoreFile.h"

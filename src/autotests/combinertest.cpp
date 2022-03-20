@@ -6,7 +6,7 @@
 */
 
 #include <QTest>
-#include <qglobal.h>
+#include <QtGlobal>
 
 #include "../combiners.h"
 
@@ -15,9 +15,9 @@ class CombinertestTest: public QObject
     Q_OBJECT;
 
   private:
-    QString nonEmpty2(){ return "test 2";}  
+    QString nonEmpty2(){ return "test 2";}
 
-    QString nonEmpty1(){ return "test 1";}  
+    QString nonEmpty1(){ return "test 1";}
     QString emptyString(){ return "";}
     bool yes() { return true; }
     bool no() { return false;}
@@ -100,28 +100,28 @@ class CombinertestTest: public QObject
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::nonEmpty1, this)));
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::emptyString, this)));
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::nonEmpty2, this)));
-        
+
         QCOMPARE(test1(), nonEmpty1());
         connections.clear();
 
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::nonEmpty1, this)));
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::emptyString, this)));
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::nonEmpty2, this)));
-        
+
         QCOMPARE(test1(), nonEmpty1());
         connections.clear();
-        
+
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::emptyString, this)));
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::nonEmpty2, this)));
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::nonEmpty1, this)));
-        
+
         QCOMPARE(test1(), nonEmpty2());
         connections.clear();
 
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::emptyString, this)));
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::emptyString, this)));
         connections.push_back(test1.connect(boost::bind(&CombinertestTest::emptyString, this)));
-        
+
         QCOMPARE(test1(), emptyString());
         connections.clear();
     }
