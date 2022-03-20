@@ -5,7 +5,6 @@
 
 #include <boost/signals2.hpp>
 
-#include <QDialog>
 #include <QObject>
 #include <QString>
 
