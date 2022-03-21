@@ -227,7 +227,7 @@ class MergeResultWindow: public QWidget
     void paintEvent(QPaintEvent* e) override;
 
     int getTextXOffset() const;
-    QVector<QTextLayout::FormatRange> getTextLayoutForLine(int line, const QString& s, QTextLayout& textLayout);
+    QVector<QTextLayout::FormatRange> getTextLayoutForLine(LineRef line, const QString& s, QTextLayout& textLayout);
     void myUpdate(int afterMilliSecs);
     void timerEvent(QTimerEvent*) override;
     void writeLine(

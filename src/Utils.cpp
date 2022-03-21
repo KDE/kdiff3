@@ -8,6 +8,7 @@
 #include "Utils.h"
 
 #include "fileaccess.h"
+#include "TypeUtils.h"
 
 #include <KLocalizedString>
 
@@ -125,10 +126,10 @@ bool Utils::isCTokenChar(QChar c)
 
 //TODO: Needed? Only user of isCTokenChar.
 /// Calculate where a token starts and ends, given the x-position on screen.
-void Utils::calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2)
+void Utils::calcTokenPos(const QString& s, int posOnScreen, QtSizeType& pos1, QtSizeType& pos2)
 {
-    int pos = std::max(0, posOnScreen);
-    if(pos >= (int)s.length())
+    QtSizeType pos = std::max(0, posOnScreen);
+    if(pos >= s.length())
     {
         pos1 = s.length();
         pos2 = s.length();
@@ -144,7 +145,7 @@ void Utils::calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2
             --pos1;
         ++pos1;
 
-        while(pos2 < (int)s.length() && isCTokenChar(s[pos2]))
+        while(pos2 < s.length() && isCTokenChar(s[pos2]))
             ++pos2;
     }
 }

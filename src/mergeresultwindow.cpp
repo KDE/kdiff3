@@ -1400,7 +1400,7 @@ void MergeResultWindow::timerEvent(QTimerEvent*)
     }
 }
 
-QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(int line, const QString& str, QTextLayout& textLayout)
+QVector<QTextLayout::FormatRange> MergeResultWindow::getTextLayoutForLine(LineRef line, const QString& str, QTextLayout& textLayout)
 {
     // tabs
     QTextOption textOption;
@@ -1836,14 +1836,14 @@ void MergeResultWindow::mouseDoubleClickEvent(QMouseEvent* e)
         QString s = getString(line);
         QTextLayout textLayout(s, font(), this);
         getTextLayoutForLine(line, s, textLayout);
-        int pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
+        QtNumberType pos = textLayout.lineAt(0).xToCursor(e->x() - textLayout.position().x());
         m_cursorXPos = pos;
         m_cursorOldXPixelPos = m_cursorXPixelPos;
         m_cursorYPos = line;
 
         if(!s.isEmpty())
         {
-            int pos1, pos2;
+            QtSizeType pos1, pos2;
 
             Utils::calcTokenPos(s, pos, pos1, pos2);
 

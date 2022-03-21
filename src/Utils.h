@@ -8,6 +8,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include "TypeUtils.h"
+
 #include <QChar>
 #include <QFontMetrics>
 #include <QString>
@@ -38,7 +40,7 @@ class Utils{
         return metrics.horizontalAdvance(c);
       }
 
-      static void calcTokenPos(const QString& s, int posOnScreen, int& pos1, int& pos2);
+      static void calcTokenPos(const QString& s, int posOnScreen, QtSizeType& pos1, QtSizeType& pos2);
       static QString calcHistoryLead(const QString& s);
 
     private:

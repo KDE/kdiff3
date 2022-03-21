@@ -634,7 +634,7 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
     if(e->button() == Qt::LeftButton)
     {
         LineRef line;
-        int pos;
+        QtNumberType pos;
         convertToLinePos(e->x(), e->y(), line, pos);
         qCInfo(kdiffDiffTextWindow) << "Left Button detected,";
         qCDebug(kdiffDiffTextWindow) << "line = " << line << ", pos = " << pos;
@@ -643,21 +643,21 @@ void DiffTextWindow::mouseDoubleClickEvent(QMouseEvent* e)
         QString s;
         if(d->m_bWordWrap)
         {
-            if(!line.isValid() || line >= (int)d->m_diff3WrapLineVector.size())
+            if(!line.isValid() || line >= d->m_diff3WrapLineVector.size())
                 return;
             const Diff3WrapLine& d3wl = d->m_diff3WrapLineVector[line];
             s = d->getString(d3wl.diff3LineIndex).mid(d3wl.wrapLineOffset, d3wl.wrapLineLength);
         }
         else
         {
-            if(!line.isValid() || line >= (int)d->getDiff3LineVector()->size())
+            if(!line.isValid() || line >= d->getDiff3LineVector()->size())
                 return;
             s = d->getString(line);
         }
 
         if(!s.isEmpty())
         {
-            int pos1, pos2;
+            QtSizeType pos1, pos2;
             Utils::calcTokenPos(s, pos, pos1, pos2);
 
             resetSelection();
@@ -820,7 +820,7 @@ void DiffTextWindow::resetSelection()
     update();
 }
 
-void DiffTextWindow::convertToLinePos(int x, int y, LineRef& line, int& pos)
+void DiffTextWindow::convertToLinePos(int x, int y, LineRef& line, QtNumberType& pos)
 {
     const QFontMetrics& fm = fontMetrics();
     int fontHeight = fm.lineSpacing();

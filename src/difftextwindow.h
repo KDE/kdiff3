@@ -62,7 +62,7 @@ class DiffTextWindow : public QWidget
     void setupConnections(const KDiff3App *app);
 
     void reset();
-    void convertToLinePos(int x, int y, LineRef& line, int& pos);
+    void convertToLinePos(int x, int y, LineRef& line, QtNumberType& pos);
 
     QString getSelection();
     int getFirstLine();
