@@ -143,7 +143,6 @@ class LineData
 {
   private:
     QSharedPointer<QString> mBuffer;
-    //QString pLine;
     QtSizeType mFirstNonWhiteChar = 0;
     //This tracks the offset with-in our unicode buffer not the file offset
     QtSizeType mOffset = 0;
@@ -173,7 +172,7 @@ class LineData
 
     Q_REQUIRED_RESULT inline QtSizeType getOffset() const { return mOffset; }
     Q_REQUIRED_RESULT int width(int tabSize) const; // Calcs width considering tabs.
-    //int occurrences;
+
     Q_REQUIRED_RESULT inline bool whiteLine() const { return mFirstNonWhiteChar == 0; }
 
     Q_REQUIRED_RESULT inline bool isPureComment() const { return bContainsPureComment; }

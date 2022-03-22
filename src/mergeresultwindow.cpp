@@ -1812,7 +1812,6 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
         m_cursorYPos = line;
 
         update();
-        //showStatusLine( line, m_winIdx, m_pFilename, m_pDiff3LineList, m_pStatusBar );
     }
     else if(lMiddleMouseButton) // Paste clipboard
     {
@@ -1890,8 +1889,6 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent* e)
     {
         m_selection.end(line, pos);
         myUpdate(0);
-
-        //showStatusLine( line, m_winIdx, m_pFilename, m_pDiff3LineList, m_pStatusBar );
 
         // Scroll because mouse moved out of the window
         const QFontMetrics& fm = fontMetrics();
@@ -2000,7 +1997,6 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     switch(e->key())
     {
         case Qt::Key_Escape:
-        //case Qt::Key_Tab:
         case Qt::Key_Backtab:
             break;
         case Qt::Key_Delete: {
