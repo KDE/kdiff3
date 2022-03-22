@@ -343,7 +343,7 @@ class Diff3Line
     void setLinesNeeded(const qint32 lines) { mLinesNeededForDisplay = lines; }
     Q_REQUIRED_RESULT bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const std::shared_ptr<LineDataVector> &v1, const std::shared_ptr<LineDataVector> &v2, const IgnoreFlags eIgnoreFlags);
     void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
-                     DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
+                     std::shared_ptr<DiffList>& pFineDiff1, std::shared_ptr<DiffList>& pFineDiff2, // return values
                      ChangeFlags& changed, ChangeFlags& changed2) const;
 
   private:

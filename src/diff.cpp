@@ -1475,7 +1475,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
 }
 
 void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
-                            DiffList*& pFineDiff1, DiffList*& pFineDiff2, // return values
+                            std::shared_ptr<DiffList>& pFineDiff1, std::shared_ptr<DiffList>& pFineDiff2, // return values
                             ChangeFlags& changed, ChangeFlags& changed2) const
 {
     changed = NoChange;
@@ -1488,8 +1488,8 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, Lin
     if(winIdx == e_SrcSelector::A)
     {
         lineIdx = getLineA();
-        pFineDiff1 = pFineAB.get();
-        pFineDiff2 = pFineCA.get();
+        pFineDiff1 = pFineAB;
+        pFineDiff2 = pFineCA;
 
         changed = ((!getLineB().isValid()) != (!lineIdx.isValid()) ? AChanged : NoChange) |
                    ((!getLineC().isValid()) != (!lineIdx.isValid()) && isTriple ? BChanged : NoChange);
@@ -1498,8 +1498,8 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, Lin
     else if(winIdx == e_SrcSelector::B)
     {
         lineIdx = getLineB();
-        pFineDiff1 = pFineBC.get();
-        pFineDiff2 = pFineAB.get();
+        pFineDiff1 = pFineBC;
+        pFineDiff2 = pFineAB;
         changed = ((!getLineC().isValid()) != (!lineIdx.isValid()) && isTriple ? AChanged : NoChange) |
                    ((!getLineA().isValid()) != (!lineIdx.isValid()) ? BChanged : NoChange);
         changed2 = (bBEqualC || !isTriple ? NoChange : AChanged) | (bAEqualB ? NoChange : BChanged);
@@ -1507,8 +1507,8 @@ void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, Lin
     else if(winIdx == e_SrcSelector::C)
     {
         lineIdx = getLineC();
-        pFineDiff1 = pFineCA.get();
-        pFineDiff2 = pFineBC.get();
+        pFineDiff1 = pFineCA;
+        pFineDiff2 = pFineBC;
         changed = ((!getLineA().isValid()) != (!lineIdx.isValid()) ? AChanged : NoChange) |
                    ((!getLineB().isValid()) != (!lineIdx.isValid()) ? BChanged : NoChange);
         changed2 = (bAEqualC ? NoChange : AChanged) | (bBEqualC ? NoChange : BChanged);
