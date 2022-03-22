@@ -1299,13 +1299,7 @@ QString DiffTextWindowData::getString(LineIndex d3lIdx)
         return QString();
 
     const Diff3Line* d3l = (*mDiff3LineVector)[d3lIdx];
-    DiffList* pFineDiff1;
-    DiffList* pFineDiff2;
-    ChangeFlags changed = NoChange;
-    ChangeFlags changed2 = NoChange;
-    LineRef lineIdx;
-
-    d3l->getLineInfo(m_winIdx, KDiff3App::isTripleDiff(), lineIdx, pFineDiff1, pFineDiff2, changed, changed2);
+    const LineRef lineIdx = d3l->getLineIndex(m_winIdx);
 
     if(!lineIdx.isValid())
         return QString();

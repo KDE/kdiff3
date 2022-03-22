@@ -259,6 +259,22 @@ class Diff3Line
     [[nodiscard]] inline bool hasFineDiffBC() const { return pFineBC != nullptr; }
     [[nodiscard]] inline bool hasFineDiffCA() const { return pFineCA != nullptr; }
 
+    [[nodiscard]] inline LineRef getLineIndex(e_SrcSelector src) const
+    {
+        switch(src)
+        {
+            case e_SrcSelector::A:
+                return getLineA();
+            case e_SrcSelector::B:
+                return getLineB();
+            case e_SrcSelector::C:
+                return getLineC();
+            default:
+                assert(false);
+                return LineRef::invalid;
+        }
+    }
+
     Q_REQUIRED_RESULT LineRef getLineA() const { return lineA; }
     Q_REQUIRED_RESULT LineRef getLineB() const { return lineB; }
     Q_REQUIRED_RESULT LineRef getLineC() const { return lineC; }
