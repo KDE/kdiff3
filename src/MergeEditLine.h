@@ -114,7 +114,7 @@ class MergeLine
 
     [[nodiscard]] inline e_MergeDetails details() const { return mergeDetails; }
 
-    [[nodiscard]] inline LineRef lineCount() const { return (qint64)list().size(); }
+    [[nodiscard]] inline LineCount lineCount() const { return SafeInt<qint32>(list().size()); }
 
     void split(MergeLine& ml2, int d3lLineIdx2) // The caller must insert the ml2 after this ml in the m_mergeLineList
     {
