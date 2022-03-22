@@ -1751,7 +1751,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
 
     const int xOffset = getTextXOffset();
 
-    LineRef line = convertToLine(e->y());
+    const LineRef line = std::max<LineRef::LineType>(convertToLine(e->y()), 0);
     const QString s = getString(line);
     QTextLayout textLayout(s, font(), this);
     getTextLayoutForLine(line, s, textLayout);
@@ -1765,7 +1765,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
     {
         m_cursorXPos = 0;
         m_cursorOldXPixelPos = 0;
-        m_cursorYPos = std::max((LineRef::LineType)line, 0);
+        m_cursorYPos = line;
         LineCount l = 0;
         MergeLineListImp::iterator i = m_mergeLineList.list().begin();
         for(i = m_mergeLineList.list().begin(); i != m_mergeLineList.list().end(); ++i)
@@ -1790,7 +1790,6 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
     else if(lLeftMouseButton) // Normal cursor placement
     {
         pos = std::max(pos, 0);
-        line = std::max((LineRef::LineType)line, 0);
         if(e->QInputEvent::modifiers() & Qt::ShiftModifier)
         {
             if(!m_selection.isValidFirstLine())
@@ -1816,7 +1815,6 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
     else if(lMiddleMouseButton) // Paste clipboard
     {
         pos = std::max(pos, 0);
-        line = std::max((LineRef::LineType)line, 0);
 
         m_selection.reset();
         m_cursorXPos = pos;
