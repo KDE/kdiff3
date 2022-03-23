@@ -440,11 +440,6 @@ int DiffTextWindow::getFirstLine()
 
 void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
 {
-    int fontWidth = Utils::getHorizontalAdvance(fontMetrics(), '0');
-    int xOffset = d->leftInfoWidth() * fontWidth;
-
-    int deltaX = d->m_horizScrollOffset - std::max(0, horizScrollOffset);
-
     d->m_horizScrollOffset = std::max(0, horizScrollOffset);
 
     if(d->m_bSelectionInProgress && d->m_selection.isValidFirstLine())
@@ -453,18 +448,6 @@ void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
         int pos;
         convertToLinePos(d->m_lastKnownMousePos.x(), d->m_lastKnownMousePos.y(), line, pos);
         d->m_selection.end(line, pos);
-    }
-    else
-    {
-        QRect r(xOffset, 0, width(), height());
-
-        if(d->getOptions()->m_bRightToLeftLanguage)
-        {
-            deltaX = -deltaX;
-            r = QRect(width() - xOffset - 2, 0, -(width()), height()).normalized();
-        }
-
-        scroll(deltaX, 0, r);
     }
 
     update();
