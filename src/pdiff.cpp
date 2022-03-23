@@ -498,6 +498,7 @@ void KDiff3App::setHScrollBarRange()
         rangeMax = wm - vm;
 
     m_pHScrollBar->setRange(0, rangeMax);
+    m_pHScrollBar->setSingleStep(Utils::getHorizontalAdvance(fontMetrics(), '0') * 10);
     m_pHScrollBar->setPageStep(pageStep);
 }
 
