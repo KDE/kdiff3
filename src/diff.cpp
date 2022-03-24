@@ -1375,8 +1375,10 @@ void DiffList::calcDiff(const QString& line1, const QString& line2, const int ma
 
     assert(size() * sizeof(Diff) + sizeof(DiffList) <= (50 << 20));
 
+#ifndef NDEBUG
     // Verify difflist
     {
+
         qint32 l1 = 0;
         qint32 l2 = 0;
 
@@ -1388,6 +1390,7 @@ void DiffList::calcDiff(const QString& line1, const QString& line2, const int ma
 
         assert(l1 == line1.size() && l2 == line2.size());
     }
+#endif // !NDEBUG
 }
 
 bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, const std::shared_ptr<LineDataVector> &v1, const std::shared_ptr<LineDataVector> &v2, const IgnoreFlags eIgnoreFlags)
