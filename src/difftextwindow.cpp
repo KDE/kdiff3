@@ -433,7 +433,7 @@ void DiffTextWindow::setFirstLine(QtNumberType firstLine)
     Q_EMIT firstLineChanged(d->m_firstLine);
 }
 
-int DiffTextWindow::getFirstLine()
+int DiffTextWindow::getFirstLine() const
 {
     return d->m_firstLine;
 }
@@ -453,7 +453,7 @@ void DiffTextWindow::setHorizScrollOffset(int horizScrollOffset)
     update();
 }
 
-int DiffTextWindow::getMaxTextWidth()
+int DiffTextWindow::getMaxTextWidth() const
 {
     if(d->m_bWordWrap)
     {
@@ -476,7 +476,7 @@ int DiffTextWindow::getMaxTextWidth()
 }
 
 //FIXME:not 64-bit size safe
-LineCount DiffTextWindow::getNofLines()
+LineCount DiffTextWindow::getNofLines() const
 {
     return d->m_bWordWrap ? d->m_diff3WrapLineVector.size() : d->getDiff3LineVector()->size();
 }
@@ -1322,21 +1322,21 @@ void DiffTextWindow::resizeEvent(QResizeEvent* e)
     QWidget::resizeEvent(e);
 }
 
-LineCount DiffTextWindow::getNofVisibleLines()
+LineCount DiffTextWindow::getNofVisibleLines() const
 {
     QFontMetrics fm = fontMetrics();
 
     return height() / fm.lineSpacing() - 1;
 }
 
-int DiffTextWindow::getVisibleTextAreaWidth()
+int DiffTextWindow::getVisibleTextAreaWidth() const
 {
     QFontMetrics fm = fontMetrics();
 
     return width() - d->leftInfoWidth() * Utils::getHorizontalAdvance(fm, '0');
 }
 
-QString DiffTextWindow::getSelection()
+QString DiffTextWindow::getSelection() const
 {
     if(d->m_pLineData == nullptr)
         return QString();

@@ -64,14 +64,14 @@ class DiffTextWindow : public QWidget
     void reset();
     void convertToLinePos(int x, int y, LineRef& line, QtNumberType& pos);
 
-    QString getSelection();
-    int getFirstLine();
+    [[nodiscard]] QString getSelection() const;
+    [[nodiscard]] int getFirstLine() const;
     LineRef calcTopLineInFile(const LineRef firstLine);
 
-    int getMaxTextWidth();
-    LineCount getNofLines();
-    LineCount getNofVisibleLines();
-    int getVisibleTextAreaWidth();
+    [[nodiscard]] int getMaxTextWidth() const;
+    [[nodiscard]] LineCount getNofLines() const;
+    [[nodiscard]] LineCount getNofVisibleLines() const;
+    [[nodiscard]] int getVisibleTextAreaWidth() const;
 
     LineIndex convertLineToDiff3LineIdx(LineRef line);
     LineRef convertDiff3LineIdxToLine(LineIndex d3lIdx);
