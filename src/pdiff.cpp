@@ -1340,6 +1340,8 @@ void KDiff3App::slotSelectionEnd()
             }
         }
     }
+
+    slotUpdateAvailabilities();
 }
 
 void KDiff3App::slotClipboardChanged()
