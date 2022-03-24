@@ -368,8 +368,11 @@ bool KDiff3App::canCut()
 }
 
 /*
+    Please do not add logic for MerdgeResultWindow or DiffTextWindow here they have their own handlers.
     This function is only concerned with qt objects that don't support canCopy.
-    allowCopy() or's the results from all canCopy signals
+    allowCopy() or's the results from all canCopy signals sent via boost.
+
+    returns true if a QLineEdit is in focus because Qt handles these internally.
 */
 bool KDiff3App::canCopy()
 {
