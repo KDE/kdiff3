@@ -512,6 +512,26 @@ class ManualDiffHelpEntry
     LineRef lineC2;
 
   public:
+    ManualDiffHelpEntry() = default;
+    ManualDiffHelpEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine)
+    {
+        if(winIdx == e_SrcSelector::A)
+        {
+            lineA1 = firstLine;
+            lineA2 = lastLine;
+        }
+        else if(winIdx == e_SrcSelector::B)
+        {
+            lineB1 = firstLine;
+            lineB2 = lastLine;
+        }
+        else
+        {
+            lineC1 = firstLine;
+            lineC2 = lastLine;
+        }
+    }
+
     LineRef& firstLine(e_SrcSelector winIdx)
     {
         return winIdx == e_SrcSelector::A ? lineA1 : (winIdx == e_SrcSelector::B ? lineB1 : lineC1);

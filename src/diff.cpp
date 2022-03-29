@@ -516,15 +516,13 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
     // First insert the new item without regarding compactness.
     // If the new item overlaps with previous items then the previous items will be removed.
 
-    ManualDiffHelpEntry mdhe;
-    mdhe.firstLine(winIdx) = firstLine;
-    mdhe.lastLine(winIdx) = lastLine;
+    ManualDiffHelpEntry mdhe(winIdx, firstLine, lastLine);
 
     ManualDiffHelpList::iterator i;
     for(i = begin(); i != end(); ++i)
     {
-        LineRef& l1 = i->firstLine(winIdx);
-        LineRef& l2 = i->lastLine(winIdx);
+        LineRef l1 = i->firstLine(winIdx);
+        LineRef l2 = i->lastLine(winIdx);
         if(l1.isValid() && l2.isValid())
         {
             if((firstLine <= l1 && lastLine >= l1) || (firstLine <= l2 && lastLine >= l2))
