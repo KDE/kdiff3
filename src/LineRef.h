@@ -40,32 +40,32 @@ class LineRef
         return *this;
     }
 
-    inline LineRef& operator+=(const LineType& inLine)
+    inline LineRef& operator+=(const LineType& inLine) noexcept
     {
         mLineNumber += inLine;
         return *this;
     };
 
-    LineRef& operator++()
+    LineRef& operator++() noexcept
     {
         ++mLineNumber;
         return *this;
     };
 
-    const LineRef operator++(int)
+    const LineRef operator++(int) noexcept
     {
         LineRef line(*this);
         ++mLineNumber;
         return line;
     };
 
-    LineRef& operator--()
+    LineRef& operator--() noexcept
     {
         --mLineNumber;
         return *this;
     };
 
-    const LineRef operator--(int)
+    const LineRef operator--(int) noexcept
     {
         LineRef line(*this);
         --mLineNumber;
