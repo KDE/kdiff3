@@ -16,6 +16,11 @@ set(QT_MIN_VERSION "5.12.0")
 
 set(KF5_MIN_VERSION "5.50.0")
 
+if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8.2)
+    message(WARNING "gcc < 8.2 is not recomended support is best effort-only.")
+endif()
+
+
 find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED)
 set(
     CMAKE_MODULE_PATH
@@ -96,9 +101,6 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     #Suppress Microsoft specfic C4996 "deprecatation" warnings. Not helpful for code intended to run on any other platform.
     add_definitions(-D_CRT_NONSTDC_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS_GLOBALS)
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8.0)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fstack-check")
-    endif()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-trigraphs -Wduplicated-cond -Wduplicated-branches -Wshadow -fexceptions")
 endif()
 
