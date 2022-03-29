@@ -149,7 +149,7 @@ if(KF5DocTools_FOUND)
     add_subdirectory(doc)
     kdoctools_install(po)
 else()
-    message(WARNING "DocTools not found.")
+    message(WARNING "DocTools not found. Docs will not be generated.")
 endif()
 
 ki18n_install(po)
