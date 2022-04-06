@@ -15,8 +15,8 @@
 #include "kdiff3.h"
 #include "Logging.h"
 #include "MergeFileInfos.h"
-#include "PixMapUtils.h"
 #include "options.h"
+#include "PixMapUtils.h"
 #include "progress.h"
 #include "TypeUtils.h"
 #include "Utils.h"
@@ -607,7 +607,8 @@ class DirectoryMergeWindow::DirMergeItemDelegate: public QStyledItemDelegate
                 int i = m_pDMW->getIntFromIndex(index);
                 if(i != 0)
                 {
-                    QColor c(i == 1 ? getOptions()->aColor() : i == 2 ? getOptions()->bColor() : getOptions()->cColor());
+                    QColor c(i == 1 ? getOptions()->aColor() : i == 2 ? getOptions()->bColor() :
+                                                                        getOptions()->cColor());
                     thePainter->setPen(c); // highlight() );
                     thePainter->drawRect(x + 2, y + yOffset, w, h);
                     thePainter->setPen(QPen(c, 0, Qt::DotLine));
@@ -1078,7 +1079,8 @@ void DirectoryMergeWindow::slotChooseCEverywhere()
 
 void DirectoryMergeWindow::slotAutoChooseEverywhere()
 {
-    e_MergeOperation eDefaultMergeOp = d->isDirThreeWay() ? eMergeABCToDest : d->m_bSyncMode ? eMergeToAB : eMergeABToDest;
+    e_MergeOperation eDefaultMergeOp = d->isDirThreeWay() ? eMergeABCToDest : d->m_bSyncMode ? eMergeToAB :
+                                                                                               eMergeABToDest;
     d->setAllMergeOperations(eDefaultMergeOp);
 }
 
@@ -2044,6 +2046,10 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(co
         case eCopyBToDest:
         case eCopyCToDest:
         case eDeleteFromDest:
+            /*
+                Do not replace with code that ignores gDirInfo->destDir().
+                Any such patch will be rejected. KDiff3 intentionally supports custom destination directories.
+            */
             destName = mfi.fullNameDest();
             break;
         default:
