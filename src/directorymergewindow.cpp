@@ -2041,8 +2041,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::executeMergeOperation(Me
         case eDeleteFromDest:
             /*
                 Do not replace with code that ignores gDirInfo->destDir().
-                Any such patch will be rejected. KDiff3 intentionaly supports custom destination directories.
-                Also any path returned here can not allow changes outside the destion directory via that path.
+                Any such patch will be rejected. KDiff3 intentionally supports custom destination directories.
             */
             destName = mfi.fullNameDest();
             break;
