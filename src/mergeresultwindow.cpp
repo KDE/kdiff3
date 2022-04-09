@@ -17,6 +17,8 @@
 #include "TypeUtils.h"
 #include "Utils.h"             // for Utils
 
+#include <memory>
+
 #include <QAction>
 #include <QApplication>
 #include <QClipboard>

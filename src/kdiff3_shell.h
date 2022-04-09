@@ -9,9 +9,12 @@
 #ifndef KDIFF3SHELL_H
 #define KDIFF3SHELL_H
 
-#include <KParts/MainWindow>
+#include <memory>
+
 #include <QCommandLineParser>
 #include <QString>
+
+#include <KParts/MainWindow>
 
 class KToggleAction;
 

@@ -14,13 +14,13 @@
 #include "LineRef.h"
 #include "options.h"
 
+#include <memory>
+
 #include <QTextCodec>
 #include <QTemporaryFile>
 #include <QSharedPointer>
 #include <QString>
 #include <QStringList>
-
-#include <memory>
 
 class SourceData
 {

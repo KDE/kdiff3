@@ -16,6 +16,7 @@
 #include <QEvent>
 
 #include <list>
+#include <memory>
 
 class Options;
 class DirectoryMergeInfo;

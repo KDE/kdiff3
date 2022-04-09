@@ -13,6 +13,7 @@
 
 #include <boost/signals2.hpp>
 #include <list>
+#include <memory>
 
 #include <QColor>
 #include <QFont>

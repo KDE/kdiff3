@@ -11,6 +11,7 @@
 #include "diff.h"
 #include "LineRef.h"
 
+#include <memory>
 #include <optional>
 #include <vector>
 

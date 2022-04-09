@@ -11,6 +11,8 @@
 
 #include "SourceDataMoc.h"
 
+#include <memory>
+
 #include <QTextCodec>
 #include <QString>
 #include <QTest>

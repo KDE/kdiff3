@@ -37,8 +37,10 @@ Optimizations: Skip unneeded steps.
 #include "Utils.h"
 
 #include <algorithm>         // for min
-#include <QtGlobal>
+#include <memory>
 #include <vector>            // for vector
+
+#include <QtGlobal>
 
 #include <QProcess>
 #include <QScopedPointer>

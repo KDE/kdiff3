@@ -9,6 +9,8 @@
 #include "../fileaccess.h"
 #include "SourceDataMoc.h"
 
+#include <memory>
+
 #include <QTemporaryFile>
 #include <QTest>
 

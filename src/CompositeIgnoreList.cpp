@@ -8,6 +8,7 @@
 #include "CompositeIgnoreList.h"
 
 #include <algorithm>  // for max
+#include <memory>
 #include <utility>    // for move
 
 void CompositeIgnoreList::enterDir(const QString& dir, const DirectoryList& directoryList)

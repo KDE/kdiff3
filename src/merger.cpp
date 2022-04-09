@@ -9,6 +9,7 @@
 #include "merger.h"
 
 #include <list>
+#include <memory>
 
 Merger::Merger(const std::shared_ptr<DiffList>& pDiffList1, const std::shared_ptr<DiffList>& pDiffList2):
     md1(pDiffList1, 0), md2(pDiffList2, 1)

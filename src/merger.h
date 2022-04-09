@@ -11,6 +11,8 @@
 
 #include "diff.h"
 
+#include <memory>
+
 class Merger
 {
   public:
