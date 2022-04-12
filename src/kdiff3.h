@@ -116,7 +116,7 @@ enum class InitFlag
 Q_DECLARE_FLAGS(InitFlags, InitFlag);
 Q_DECLARE_OPERATORS_FOR_FLAGS(InitFlags);
 
-class KDiff3App : public QSplitter
+class KDiff3App: public QMainWindow
 {
     Q_OBJECT
 
@@ -400,8 +400,9 @@ public Q_SLOTS:
 
     QMenu* m_pMergeEditorPopupMenu;
 
-    QSplitter* m_pMainSplitter = nullptr;
-    QWidget* m_pMainWidget = new QWidget();// Contains vertical splitter and horiz scrollbar
+    QWidget* m_pMainWidget = nullptr; // Contains vertical splitter and horiz scrollbar
+    QWidget* m_pCentralWidget = nullptr;
+    QDockWidget* m_pMergeWindowDock = nullptr;
     QWidget* m_pMergeWindowFrame = nullptr;
     ReversibleScrollBar* m_pHScrollBar = nullptr;
 
@@ -417,8 +418,10 @@ public Q_SLOTS:
     WindowTitleWidget* m_pMergeResultWindowTitle;
     static bool m_bTripleDiff;
 
-    QSplitter* m_pDirectoryMergeSplitter = nullptr;
+    //QSplitter* m_pDirectoryMergeSplitter = nullptr;
+    QDockWidget* m_pDirectoryMergeDock = nullptr;
     DirectoryMergeWindow* m_pDirectoryMergeWindow = nullptr;
+    QDockWidget* m_pDirectoryMergeInfoDock = nullptr;
     DirectoryMergeInfo* m_pDirectoryMergeInfo;
     bool m_bDirCompare = false;
 

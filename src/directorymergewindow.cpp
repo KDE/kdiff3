@@ -964,20 +964,6 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     for(int column = 0; column < columnCount(QModelIndex()); ++column)
         mWindow->resizeColumnToContents(column);
 
-    // Try to improve the view a little bit.
-    QWidget* pParent = mWindow->parentWidget();
-    QSplitter* pSplitter = static_cast<QSplitter*>(pParent);
-    if(pSplitter != nullptr)
-    {
-        QList<int> sizes = pSplitter->sizes();
-        int total = sizes[0] + sizes[1];
-        if(total < 10)
-            total = 100;
-        sizes[0] = total * 6 / 10;
-        sizes[1] = total - sizes[0];
-        pSplitter->setSizes(sizes);
-    }
-
     m_bScanning = false;
     Q_EMIT mWindow->statusBarMessage(i18n("Ready."));
 

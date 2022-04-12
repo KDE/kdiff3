@@ -32,11 +32,12 @@
 // Anything else that isn't Qt/Frameworks
 #include <boost/signals2.hpp>
 // include files for QT
-#include <QClipboard>
 #include <QCheckBox>
+#include <QClipboard>
 #include <QCommandLineParser>
 #include <QDesktopWidget>
 #include <QDir>
+#include <QDockWidget>
 #include <QFileDialog>
 #include <QLabel>
 #include <QLayout>
@@ -118,15 +119,26 @@ bool KDiff3App::isDirComparison() const
 /*
     Don't call completeInit from here it will be called in KDiff3Shell as needed.
 */
-KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3Part)
-    : QSplitter(pParent) //previously KMainWindow
+KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3Part):
+    QMainWindow(pParent) //previously KMainWindow
 {
+    setWindowFlags(Qt::Widget);
     setObjectName(name);
     m_pKDiff3Part = pKDiff3Part;
     m_pKDiff3Shell = qobject_cast<KParts::MainWindow*>(pParent);
 
+    m_pCentralWidget = new QWidget(this);
+    QVBoxLayout* pCentralLayout = new QVBoxLayout(m_pCentralWidget);
+    pCentralLayout->setContentsMargins(0, 0, 0, 0);
+    pCentralLayout->setSpacing(0);
+    setCentralWidget(m_pCentralWidget);
+
+    m_pMainWidget = new QWidget(m_pCentralWidget);
+    m_pMainWidget->setObjectName("MainWidget");
+    pCentralLayout->addWidget(m_pMainWidget);
+    m_pMainWidget->hide();
+
     setWindowTitle("KDiff3");
-    setOpaqueResize(false); // faster resizing
     setUpdatesEnabled(false);
     KCrash::initialize();
 
@@ -328,20 +340,19 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     }
     slotRefresh();
 
-    m_pMainSplitter = this;
-    m_pMainSplitter->setOrientation(Qt::Vertical);
-    //   setCentralWidget( m_pMainSplitter );
-    m_pDirectoryMergeSplitter = new QSplitter(m_pMainSplitter);
-    m_pDirectoryMergeSplitter->setObjectName("DirectoryMergeSplitter");
-    m_pMainSplitter->addWidget(m_pDirectoryMergeSplitter);
-    m_pDirectoryMergeSplitter->setOrientation(Qt::Horizontal);
-    m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeSplitter, m_pOptions, *this);
-    m_pDirectoryMergeSplitter->addWidget(m_pDirectoryMergeWindow);
-    m_pDirectoryMergeInfo = new DirectoryMergeInfo(m_pDirectoryMergeSplitter);
+    m_pDirectoryMergeDock = new QDockWidget(i18n("Directory merge"), this);
+    m_pDirectoryMergeWindow = new DirectoryMergeWindow(m_pDirectoryMergeDock, m_pOptions, *this);
+    m_pDirectoryMergeDock->setWidget(m_pDirectoryMergeWindow);
+    m_pDirectoryMergeDock->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
+    m_pDirectoryMergeInfoDock = new QDockWidget(i18n("Merge info"), this);
+    m_pDirectoryMergeInfo = new DirectoryMergeInfo(m_pDirectoryMergeInfoDock);
+    m_pDirectoryMergeInfoDock->setWidget(m_pDirectoryMergeInfo);
+    m_pDirectoryMergeInfoDock->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
     m_pDirectoryMergeWindow->setDirectoryMergeInfo(m_pDirectoryMergeInfo);
-    m_pDirectoryMergeSplitter->addWidget(m_pDirectoryMergeInfo);
     //Warning: Make sure DirectoryMergeWindow::initActions is called before this point or we can crash when selectionChanged is sent.
     m_pDirectoryMergeWindow->setupConnections(this);
+    addDockWidget(Qt::LeftDockWidgetArea, m_pDirectoryMergeDock);
+    splitDockWidget(m_pDirectoryMergeDock, m_pDirectoryMergeInfoDock, Qt::Vertical);
 
     chk_connect(QApplication::clipboard(), &QClipboard::dataChanged, this, &KDiff3App::slotClipboardChanged);
     chk_connect_q(this, &KDiff3App::sigRecalcWordWrap, this, &KDiff3App::slotRecalcWordWrap);
@@ -419,7 +430,8 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     else
     {
         improveFilenames();
-        m_pDirectoryMergeSplitter->hide();
+        m_pDirectoryMergeDock->hide();
+        m_pDirectoryMergeInfoDock->hide();
 
         mainInit(m_totalDiffStatus);
         if(m_bAutoMode)

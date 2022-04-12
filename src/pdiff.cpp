@@ -30,6 +30,7 @@
 #include <QComboBox>
 #include <QDialog>
 #include <QDir>
+#include <QDockWidget>
 #include <QEvent> // QKeyEvent, QDropEvent, QInputEvent
 #include <QFile>
 #include <QLayout>
@@ -325,30 +326,9 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         errors.append("Too many lines in diff. Skiping file.");
     }
 
-    QList<int> oldHeights;
-    if(m_pDirectoryMergeSplitter->isVisible())
-        oldHeights = m_pMainSplitter->sizes();
-
     //initView does first time setup for ui. Why is called it here?
     initView();
     m_pMergeResultWindow->connectActions();
-
-    if(m_pDirectoryMergeSplitter->isVisible())
-    {
-        if(oldHeights.count() < 2)
-            oldHeights.append(0);
-        if(oldHeights[1] == 0) // Distribute the available space evenly between the two widgets.
-        {
-            oldHeights[1] = oldHeights[0] / 2;
-            oldHeights[0] -= oldHeights[1];
-        }
-        if(oldHeights[0] == 0 && oldHeights[1] == 0)
-        {
-            oldHeights[1] = 100;
-            oldHeights[0] = 100;
-        }
-        m_pMainSplitter->setSizes(oldHeights);
-    }
 
     m_pMainWidget->setVisible(bGUI);
 
@@ -557,8 +537,6 @@ void KDiff3App::initView()
 
     mInitCalled = true;
     //m_pMainWidget // Contains vertical splitter and horiz scrollbar
-    m_pMainSplitter->addWidget(m_pMainWidget);
-    m_pMainWidget->setObjectName("MainWidget");
     QVBoxLayout* pVLayout = new QVBoxLayout(m_pMainWidget);
     pVLayout->setContentsMargins(0, 0, 0, 0);
     pVLayout->setSpacing(0);
@@ -626,8 +604,6 @@ void KDiff3App::initView()
 
     MergeResultWindow::mVScrollBar = new QScrollBar(Qt::Vertical, m_pMergeWindowFrame);
     pMergeHLayout->addWidget(MergeResultWindow::mVScrollBar);
-
-    m_pMainSplitter->addWidget(m_pMainWidget);
 
     autoAdvance->setEnabled(true);
 
@@ -806,7 +782,7 @@ void KDiff3App::slotFinishMainInit()
 
 void KDiff3App::resizeEvent(QResizeEvent* e)
 {
-    QSplitter::resizeEvent(e);
+    QMainWindow::resizeEvent(e);
     if(m_pCornerWidget)
         m_pCornerWidget->setFixedSize(DiffTextWindow::mVScrollBar->width(), m_pHScrollBar->height());
 }
@@ -926,7 +902,8 @@ void KDiff3App::slotFileOpen()
                 bool bSuccess = doDirectoryCompare(false);
                 if(bSuccess)
                 {
-                    m_pDirectoryMergeSplitter->show();
+                    m_pDirectoryMergeDock->show();
+                    m_pDirectoryMergeInfoDock->show();
                     m_pMainWidget->hide();
                     break;
                 }
@@ -935,7 +912,8 @@ void KDiff3App::slotFileOpen()
             {
                 improveFilenames();
 
-                m_pDirectoryMergeSplitter->hide();
+                m_pDirectoryMergeDock->hide();
+                m_pDirectoryMergeInfoDock->hide();
                 mainInit(m_totalDiffStatus);
 
                 if((!m_sd1->getErrors().isEmpty()) ||
@@ -1603,7 +1581,8 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
         FileAccess destDir;
 
         if(!m_bDefaultFilename) destDir = f4;
-        m_pDirectoryMergeSplitter->show();
+        m_pDirectoryMergeDock->show();
+        m_pDirectoryMergeInfoDock->show();
         m_pMainWidget->hide();
         setUpdatesEnabled(true);
 
@@ -1713,8 +1692,10 @@ void KDiff3App::slotDirShowBoth()
 {
     if(dirShowBoth->isChecked())
     {
-        if(m_pDirectoryMergeSplitter)
-            m_pDirectoryMergeSplitter->setVisible(m_bDirCompare);
+        if(m_pDirectoryMergeDock)
+            m_pDirectoryMergeDock->setVisible(m_bDirCompare);
+        if(m_pDirectoryMergeInfoDock)
+            m_pDirectoryMergeInfoDock->setVisible(m_bDirCompare);
 
         m_pMainWidget->show();
     }
@@ -1724,11 +1705,13 @@ void KDiff3App::slotDirShowBoth()
         if(bTextDataAvailable)
         {
             m_pMainWidget->show();
-            m_pDirectoryMergeSplitter->hide();
+            m_pDirectoryMergeDock->hide();
+            m_pDirectoryMergeInfoDock->hide();
         }
         else if(m_bDirCompare)
         {
-            m_pDirectoryMergeSplitter->show();
+            m_pDirectoryMergeDock->show();
+            m_pDirectoryMergeInfoDock->show();
         }
     }
 
@@ -1739,14 +1722,16 @@ void KDiff3App::slotDirViewToggle()
 {
     if(m_bDirCompare)
     {
-        if(!m_pDirectoryMergeSplitter->isVisible())
+        if(!m_pDirectoryMergeDock->isVisible())
         {
-            m_pDirectoryMergeSplitter->show();
+            m_pDirectoryMergeDock->show();
+            m_pDirectoryMergeInfoDock->show();
             m_pMainWidget->hide();
         }
         else
         {
-            m_pDirectoryMergeSplitter->hide();
+            m_pDirectoryMergeDock->hide();
+            m_pDirectoryMergeInfoDock->hide();
             m_pMainWidget->show();
         }
     }
@@ -2089,15 +2074,17 @@ void KDiff3App::slotEncodingChanged(QTextCodec*)
 
 void KDiff3App::slotUpdateAvailabilities()
 {
-    if(m_pMainSplitter == nullptr || m_pDiffTextWindow2 == nullptr || m_pDiffTextWindow1 == nullptr || m_pDiffTextWindow3 == nullptr)
+    if(m_pDiffTextWindow2 == nullptr || m_pDiffTextWindow1 == nullptr || m_pDiffTextWindow3 == nullptr)
         return;
 
     bool bTextDataAvailable = (m_sd1->hasData() || m_sd2->hasData() || m_sd3->hasData());
 
     if(dirShowBoth->isChecked())
     {
-        if(m_pDirectoryMergeSplitter != nullptr)
-            m_pDirectoryMergeSplitter->setVisible(m_bDirCompare);
+        if(m_pDirectoryMergeDock != nullptr)
+            m_pDirectoryMergeDock->setVisible(m_bDirCompare);
+        if(m_pDirectoryMergeInfoDock != nullptr)
+            m_pDirectoryMergeInfoDock->setVisible(m_bDirCompare);
 
         if(!m_pMainWidget->isVisible() &&
            bTextDataAvailable && !m_pDirectoryMergeWindow->isScanning())
@@ -2112,9 +2099,9 @@ void KDiff3App::slotUpdateAvailabilities()
     dirShowBoth->setEnabled(m_bDirCompare);
     dirViewToggle->setEnabled(
         m_bDirCompare &&
-        (m_pDirectoryMergeSplitter != nullptr &&
-         ((!m_pDirectoryMergeSplitter->isVisible() && m_pMainWidget->isVisible()) ||
-          (m_pDirectoryMergeSplitter->isVisible() && !m_pMainWidget->isVisible() && bTextDataAvailable))));
+        (m_pDirectoryMergeDock != nullptr && m_pDirectoryMergeInfoDock != nullptr &&
+         ((!m_pDirectoryMergeDock->isVisible() && m_pMainWidget->isVisible()) ||
+          (m_pDirectoryMergeDock->isVisible() && !m_pMainWidget->isVisible() && bTextDataAvailable))));
 
     showWhiteSpaceCharacters->setEnabled(bDiffWindowVisible);
     autoAdvance->setEnabled(bMergeEditorVisible);
