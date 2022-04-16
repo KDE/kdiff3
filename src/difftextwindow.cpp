@@ -1923,7 +1923,8 @@ void DiffTextWindowFrame::init()
         QString winId = pDTW->getWindowIndex() == e_SrcSelector::A ? (pDTW->isThreeWay() ? i18n("A (Base)") : i18n("A")) : (pDTW->getWindowIndex() == e_SrcSelector::B ? i18n("B") : i18n("C"));
         d->m_pLabel->setText(winId + ':');
         d->m_pEncoding->setText(i18n("Encoding: %1", pDTW->getEncodingDisplayString()));
-        d->m_pLineEndStyle->setText(i18n("Line end style: %1", pDTW->getLineEndStyle() == eLineEndStyleDos ? i18n("DOS") : i18n("Unix")));
+        d->m_pLineEndStyle->setText(i18n("Line end style: %1", pDTW->getLineEndStyle() == eLineEndStyleDos ? i18n("DOS") : pDTW->getLineEndStyle() == eLineEndStyleUnix ? i18n("Unix") :
+                                                                                                                                                                          i18n("Unknown")));
     }
 }
 
