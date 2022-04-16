@@ -514,9 +514,6 @@ OptionDialog::OptionDialog(bool bShowDirMergeSettings, QWidget* parent):
     setModal(true);
     setMinimumSize(600, 500);
 
-    //showButtonSeparator( true );
-    //setHelp( "kdiff3/index.html", QString::null );
-
     m_options->init();
     setupFontPage();
     setupColorPage();
