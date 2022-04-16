@@ -30,25 +30,25 @@ class OptionItemBase;
 
 enum e_LineEndStyle
 {
-   eLineEndStyleUnix=0,
-   eLineEndStyleDos,
-   eLineEndStyleAutoDetect,
-   eLineEndStyleUndefined, // only one line exists
-   eLineEndStyleConflict   // User must resolve manually
+    eLineEndStyleUnix = 0,
+    eLineEndStyleDos,
+    eLineEndStyleAutoDetect,
+    eLineEndStyleUndefined, // only one line exists
+    eLineEndStyleConflict   // User must resolve manually
 };
 
 class Options
 {
   public:
-    static boost::signals2::signal<void ()> apply;
-    static boost::signals2::signal<void ()> resetToDefaults;
-    static boost::signals2::signal<void ()> setToCurrent;
-    static boost::signals2::signal<void (ValueMap*)> read;
-    static boost::signals2::signal<void (ValueMap*)> write;
+    static boost::signals2::signal<void()> apply;
+    static boost::signals2::signal<void()> resetToDefaults;
+    static boost::signals2::signal<void()> setToCurrent;
+    static boost::signals2::signal<void(ValueMap*)> read;
+    static boost::signals2::signal<void(ValueMap*)> write;
 
-    static boost::signals2::signal<void ()> preserve;
-    static boost::signals2::signal<void ()> unpreserve;
-    static boost::signals2::signal<bool (const QString&, const QString&), find> accept;
+    static boost::signals2::signal<void()> preserve;
+    static boost::signals2::signal<void()> unpreserve;
+    static boost::signals2::signal<bool(const QString&, const QString&), find> accept;
 
     void init();
 
@@ -64,11 +64,10 @@ class Options
     void setPosition(const QPoint& pos) { m_position = pos; }
 
     [[nodiscard]] bool isFullScreen() const { return m_bFullScreen; };
-    void setFullScreen(const bool fullScreen) { m_bFullScreen = fullScreen;};
+    void setFullScreen(const bool fullScreen) { m_bFullScreen = fullScreen; };
 
     [[nodiscard]] bool isMaximised() const { return m_bMaximised; };
-    void setMaximised(const bool maximised) { m_bMaximised = maximised;};
-
+    void setMaximised(const bool maximised) { m_bMaximised = maximised; };
 
     [[nodiscard]] bool isToolBarVisable() const { return m_bShowToolBar; }
     void setToolbarState(bool inShown) { m_bShowToolBar = inShown; }
@@ -77,7 +76,7 @@ class Options
     void setStatusBarState(bool inShown) { m_bShowStatusBar = inShown; }
 
     [[nodiscard]] inline const QFont& defaultFont() { return mFont; };
-    [[nodiscard]] inline const QFont& appFont(){ return mAppFont; };
+    [[nodiscard]] inline const QFont& appFont() { return mAppFont; };
 
     [[nodiscard]] bool wordWrapOn() const { return m_bWordWrap; }
     void setWordWrap(const bool enabled) { m_bWordWrap = enabled; }
@@ -101,6 +100,7 @@ class Options
 
     inline void beginPrint() { mPrintMode = true; }
     inline void endPrint() { mPrintMode = false; }
+
   private:
     void addOptionItem(std::shared_ptr<OptionItemBase> inItem);
 
@@ -132,6 +132,7 @@ class Options
     QColor m_colorB;
     QColor m_colorC;
     QColor m_colorForConflict = Qt::red;
+
   public:
     QColor m_currentRangeBgColor;
     QColor m_currentRangeDiffBgColor;
@@ -148,16 +149,16 @@ class Options
     int  m_tabSize = 8;
     bool m_bAutoCopySelection = false;
     bool m_bSameEncoding = true;
-    QTextCodec*  m_pEncodingA = nullptr;
+    QTextCodec* m_pEncodingA = nullptr;
     bool m_bAutoDetectUnicodeA = true;
-    QTextCodec*  m_pEncodingB = nullptr;
+    QTextCodec* m_pEncodingB = nullptr;
     bool m_bAutoDetectUnicodeB = true;
-    QTextCodec*  m_pEncodingC = nullptr;
+    QTextCodec* m_pEncodingC = nullptr;
     bool m_bAutoDetectUnicodeC = true;
-    QTextCodec*  m_pEncodingOut = nullptr;
+    QTextCodec* m_pEncodingOut = nullptr;
     bool m_bAutoSelectOutEncoding = true;
-    QTextCodec*  m_pEncodingPP = nullptr;
-    e_LineEndStyle  m_lineEndStyle = eLineEndStyleAutoDetect;
+    QTextCodec* m_pEncodingPP = nullptr;
+    e_LineEndStyle m_lineEndStyle = eLineEndStyleAutoDetect;
 
     bool m_bTryHard = true;
     bool m_bShowWhiteSpaceCharacters = true;
@@ -225,6 +226,5 @@ class Options
     QString m_ignorableCmdLineOptions = QString("-u;-query;-html;-abort");
     bool m_bEscapeKeyQuits = false;
 };
-
 
 #endif
