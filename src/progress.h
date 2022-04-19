@@ -87,21 +87,12 @@ class ProgressDialog: public QDialog
 
   private:
     struct ProgressLevelData {
-        ProgressLevelData()
-        {
-            m_current = 0;
-            m_maxNofSteps = 1;
-            m_dRangeMin = 0;
-            m_dRangeMax = 1;
-            m_dSubRangeMin = 0;
-            m_dSubRangeMax = 1;
-        }
-        QAtomicInteger<qint64> m_current;
-        QAtomicInteger<qint64> m_maxNofSteps; // when step() is used.
-        double m_dRangeMax;
-        double m_dRangeMin;
-        double m_dSubRangeMax;
-        double m_dSubRangeMin;
+        QAtomicInteger<qint64> m_current = 0;
+        QAtomicInteger<qint64> m_maxNofSteps = 1; // when step() is used.
+        double m_dRangeMax = 1;
+        double m_dRangeMin = 0;
+        double m_dSubRangeMax = 1;
+        double m_dSubRangeMin = 0;
     };
     QList<ProgressLevelData> m_progressStack;
 
