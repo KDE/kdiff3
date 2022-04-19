@@ -145,7 +145,6 @@ void ProgressDialog::setStayHidden(bool bStayHidden)
 
 void ProgressDialog::push()
 {
-#ifndef AUTOTEST
     ProgressLevelData pld;
     if(!m_progressStack.empty())
     {
@@ -155,19 +154,19 @@ void ProgressDialog::push()
     else
     {
         m_bWasCancelled = false;
+#ifndef AUTOTEST
         m_t1.restart();
         m_t2.restart();
+#endif
         if(!m_bStayHidden)
             show();
     }
 
     m_progressStack.push_back(pld);
-#endif
 }
 
 void ProgressDialog::pop(bool bRedrawUpdate)
 {
-#ifndef AUTOTEST
     if(!m_progressStack.empty())
     {
         m_progressStack.pop_back();
@@ -178,9 +177,6 @@ void ProgressDialog::pop(bool bRedrawUpdate)
         else
             recalc(bRedrawUpdate);
     }
-#else
-    Q_UNUSED(bRedrawUpdate);
-#endif
 }
 
 void ProgressDialog::setInformation(const QString& info, int current, bool bRedrawUpdate)
@@ -203,15 +199,12 @@ void ProgressDialog::setInformation(const QString& info, bool bRedrawUpdate)
 
 void ProgressDialog::setMaxNofSteps(const qint64 maxNofSteps)
 {
-#ifndef AUTOTEST
     if(m_progressStack.empty() || maxNofSteps == 0)
         return;
+
     ProgressLevelData& pld = m_progressStack.back();
     pld.m_maxNofSteps = maxNofSteps;
     pld.m_current = 0;
-#else
-    Q_UNUSED(maxNofSteps);
-#endif
 }
 
 void ProgressDialog::setInformationImp(const QString& info)
@@ -238,27 +231,21 @@ void ProgressDialog::setInformationImp(const QString& info)
 
 void ProgressDialog::addNofSteps(const qint64 nofSteps)
 {
-#ifndef AUTOTEST
     if(m_progressStack.empty())
         return;
+
     ProgressLevelData& pld = m_progressStack.back();
     pld.m_maxNofSteps.fetchAndAddRelaxed(nofSteps);
-#else
-    Q_UNUSED(nofSteps);
-#endif
 }
 
 void ProgressDialog::step(bool bRedrawUpdate)
 {
-#ifndef AUTOTEST
     if(m_progressStack.empty())
         return;
+
     ProgressLevelData& pld = m_progressStack.back();
     pld.m_current.fetchAndAddRelaxed(1);
     recalc(bRedrawUpdate);
-#else
-    Q_UNUSED(bRedrawUpdate);
-#endif
 }
 
 void ProgressDialog::setCurrent(qint64 subCurrent, bool bRedrawUpdate)
@@ -278,13 +265,11 @@ void ProgressDialog::setCurrentImp(qint64 subCurrent)
 
 void ProgressDialog::clear()
 {
-#ifndef AUTOTEST
     if(m_progressStack.isEmpty())
         return;
 
     ProgressLevelData& pld = m_progressStack.back();
     setCurrent(pld.m_maxNofSteps);
-#endif
 }
 
 // The progressbar goes from 0 to 1 usually.
@@ -293,31 +278,23 @@ void ProgressDialog::clear()
 // Requirement: 0 < dMin < dMax < 1
 void ProgressDialog::setRangeTransformation(double dMin, double dMax)
 {
-#ifndef AUTOTEST
     if(m_progressStack.empty())
         return;
+
     ProgressLevelData& pld = m_progressStack.back();
     pld.m_dRangeMin = dMin;
     pld.m_dRangeMax = dMax;
     pld.m_current = 0;
-#else
-    Q_UNUSED(dMin);
-    Q_UNUSED(dMax);
-#endif
 }
 
 void ProgressDialog::setSubRangeTransformation(double dMin, double dMax)
 {
-#ifndef AUTOTEST
     if(m_progressStack.empty())
         return;
+
     ProgressLevelData& pld = m_progressStack.back();
     pld.m_dSubRangeMin = dMin;
     pld.m_dSubRangeMax = dMax;
-#else
-    Q_UNUSED(dMin);
-    Q_UNUSED(dMax);
-#endif
 }
 
 void ProgressDialog::enterEventLoop(KJob* pJob, const QString& jobInfo)
