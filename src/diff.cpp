@@ -12,7 +12,7 @@
 #include "gnudiff_diff.h"
 #include "Logging.h"
 #include "options.h"
-#include "progress.h"
+#include "ProgressProxy.h"
 #include "Utils.h"
 
 #include <algorithm>           // for min
