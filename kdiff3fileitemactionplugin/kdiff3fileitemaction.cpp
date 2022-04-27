@@ -8,7 +8,6 @@
 
 #include "kdiff3fileitemaction.h"
 
-#include "../src/fileaccess.h"
 #include "../src/Utils.h"
 #include "../src/TypeUtils.h"
 
