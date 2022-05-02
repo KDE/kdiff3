@@ -37,6 +37,7 @@ include(ECMInstallIcons)
 include(ECMAddAppIcon)
 include(ECMSetupVersion)
 include(ECMAddTests)
+include(ECMOptionalAddSubdirectory)
 
 ecm_setup_version(1.9.70 VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DIR}/src/version.h)
 
@@ -148,7 +149,7 @@ add_definitions(
 
 add_subdirectory(src)
 if(KF5DocTools_FOUND)
-    add_subdirectory(doc)
+    ecm_optional_add_subdirectory(doc)
     kdoctools_install(po)
 else()
     message(WARNING "DocTools not found. Docs will not be generated.")
