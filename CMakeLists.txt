@@ -50,8 +50,10 @@ find_package(Boost 1.69 REQUIRED)
 #needed on craft and possiablely other custom setups.
 include_directories(${Boost_INCLUDE_DIRS})
 
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
+
 find_package(
-    Qt5 ${QT_MIN_VERSION}
+    Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION}
     CONFIG
     REQUIRED
     COMPONENTS
