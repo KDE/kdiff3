@@ -162,6 +162,7 @@ void DefaultFileAccessJobHandler::slotPutData(KIO::Job* pJob, QByteArray& data)
         /*
             Think twice before doing this in new code.
             The maxChunkSize must be able to fit a 32-bit int. Given that the fallowing is safe for qt5.
+            Qt6 resolves this issue as it uses 64 bit sizes.
         */
         qint64 maxChunkSize = 100000;
         qint64 length = std::min(maxChunkSize, m_maxLength - m_transferredBytes);
