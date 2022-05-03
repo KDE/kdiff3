@@ -1,13 +1,23 @@
 # SPDX-FileCopyrightText: 2018-2021 Michael Reeves reeves.87@gmail.com
 # SPDX-License-Identifier: GPL-2.0-or-later
-find_package(QT NAMES Qt6 Qt5 REQUIRED Test)
+#find_package(QT NAMES Qt5 Qt6  REQUIRED Test)
+#set(BUILD_WITH_QT6 OFF)
 
-find_package(
-    Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION}
-    REQUIRED
-    COMPONENTS
-    Test
+if(NOT BUILD_WITH_QT6)
+    find_package(
+        Qt5 ${QT_MIN_VERSION}
+        REQUIRED
+        COMPONENTS
+        Test
     )
+else()
+    find_package(
+        Qt6 ${QT_MIN_VERSION}
+        REQUIRED
+        COMPONENTS
+        Test
+    )
+endif()
 add_definitions(-DAUTOTEST)
 
 ecm_add_test(connectiontest.cpp
@@ -47,7 +57,7 @@ ecm_add_test(GitIgnoreListTest.cpp ../GitIgnoreList.cpp ../fileaccess.cpp ../Uti
 
 ecm_add_test(datareadtest.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp ../Utils.cpp ../ProgressProxy.cpp ../Logging.cpp
     TEST_NAME "datareadtest"
-    LINK_LIBRARIES Qt5::Test Qt5::Gui Qt5::Widgets KF5::Parts KF5::ConfigCore KF5::I18n
+    LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets KF5::Parts KF5::ConfigCore KF5::I18n
 )
 
 ecm_add_test(DiffTest.cpp ../diff.cpp ../Logging.cpp ../Utils.cpp ../ProgressProxy.cpp ../gnudiff_io.cpp ../gnudiff_analyze.cpp ../gnudiff_xmalloc.cpp ../fileaccess.cpp ../SourceData.cpp ../CommentParser.cpp

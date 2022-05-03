@@ -3,14 +3,23 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 #cmake < 3.1 has no sane way of checking C++11 features and needed flags
-#need at least 3.8 for cxx_std_11.
-cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
+#CMP0077 is defined in 3.13 or later
+cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 
 project(kdiff3)
 
-set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
-set(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+option(BUILD_WITH_QT6 OFF)
+option(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
+option(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
+option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+#Avaliable as QtVersionOption starting in ECM 5.82.
+option(BUILD_WITH_QT6 "Build against Qt 6" OFF)
+if (BUILD_WITH_QT6)
+    set(QT_MAJOR_VERSION 6)
+else()
+    set(QT_MAJOR_VERSION 5)
+endif()
+
 set(ECM_MIN_VERSION "5.50.0")
 set(QT_MIN_VERSION "5.12.0")
 
@@ -51,10 +60,8 @@ find_package(Boost 1.69 REQUIRED)
 #needed on craft and possiablely other custom setups.
 include_directories(${Boost_INCLUDE_DIRS})
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
-
 find_package(
-    Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION}
+    Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION}
     CONFIG
     REQUIRED
     COMPONENTS
