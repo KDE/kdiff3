@@ -17,6 +17,9 @@
 
 namespace signals2 = boost::signals2;
 
+signals2::signal<void()> ProgressProxy::startBackgroundTask;
+signals2::signal<void()> ProgressProxy::endBackgroundTask;
+
 signals2::signal<void()> ProgressProxy::push;
 signals2::signal<void(bool)> ProgressProxy::pop;
 signals2::signal<void()> ProgressProxy::clearSig;

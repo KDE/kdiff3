@@ -88,6 +88,9 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
 
 void ProgressDialog::initConnections()
 {
+    connections.push_back(ProgressProxy::startBackgroundTask.connect(boost::bind(&ProgressDialog::beginBackgroundTask, this)));
+    connections.push_back(ProgressProxy::endBackgroundTask.connect(boost::bind(&ProgressDialog::endBackgroundTask, this)));
+
     connections.push_back(ProgressProxy::push.connect(boost::bind(&ProgressDialog::push, this)));
     connections.push_back(ProgressProxy::pop.connect(boost::bind(&ProgressDialog::pop, this, placeholders::_1)));
     connections.push_back(ProgressProxy::clearSig.connect(boost::bind(&ProgressDialog::clear, this)));
@@ -163,6 +166,32 @@ void ProgressDialog::push()
     }
 
     m_progressStack.push_back(pld);
+}
+
+void ProgressDialog::beginBackgroundTask()
+{
+    if(backgroundTaskCount > 0)
+    {
+#ifndef AUTOTEST
+        m_t1.restart();
+        m_t2.restart();
+#endif
+    }
+    backgroundTaskCount++;
+    if(!m_bStayHidden)
+        show();
+}
+
+void ProgressDialog::endBackgroundTask()
+{
+    if(backgroundTaskCount > 0)
+    {
+        backgroundTaskCount--;
+        if(backgroundTaskCount == 0)
+        {
+            hide();
+        }
+    }
 }
 
 void ProgressDialog::pop(bool bRedrawUpdate)

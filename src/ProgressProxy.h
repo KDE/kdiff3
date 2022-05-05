@@ -34,6 +34,9 @@ class ProgressProxy: public QObject
     static void exitEventLoop();
     static void enterEventLoop(KJob* pJob, const QString& jobInfo);
 
+    static signals2::signal<void()> startBackgroundTask;
+    static signals2::signal<void()> endBackgroundTask;
+
     static signals2::signal<void()> push;
     static signals2::signal<void(bool)> pop;
     static signals2::signal<void()> clearSig;

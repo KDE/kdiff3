@@ -1590,7 +1590,7 @@ bool DiffTextWindow::startRunnables()
     else
     {
         g_pProgressDialog->setStayHidden(true);
-        g_pProgressDialog->push();
+        ProgressProxy::startBackgroundTask();
         g_pProgressDialog->setMaxNofSteps(s_runnables.count());
         RecalcWordWrapRunnable::s_maxNofRunnables = s_runnables.count();
         g_pProgressDialog->setCurrent(0);

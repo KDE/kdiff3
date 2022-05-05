@@ -32,6 +32,9 @@ class ProgressDialog: public QDialog
   public:
     ProgressDialog(QWidget* pParent, QStatusBar*);
 
+    void beginBackgroundTask();
+    void endBackgroundTask();
+
     void setStayHidden(bool bStayHidden);
     void setInformation(const QString& info, bool bRedrawUpdate = true);
     void setInformation(const QString& info, int current, bool bRedrawUpdate = true);
@@ -94,6 +97,7 @@ class ProgressDialog: public QDialog
         double m_dSubRangeMax = 1;
         double m_dSubRangeMin = 0;
     };
+    quint64 backgroundTaskCount = 0;
     QList<ProgressLevelData> m_progressStack;
 
     int m_progressDelayTimer = 0;

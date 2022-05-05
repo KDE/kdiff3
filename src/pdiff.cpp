@@ -1467,7 +1467,7 @@ void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
 {
     if(mRunnablesStarted)
     {
-        g_pProgressDialog->pop();
+        ProgressProxy::endBackgroundTask();
         mRunnablesStarted = false;
     }
 
