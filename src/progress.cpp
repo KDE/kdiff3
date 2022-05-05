@@ -10,6 +10,8 @@
 #include "common.h"
 #include "defmac.h"
 
+#include <cmath>
+
 #include <QApplication>
 #include <QEventLoop>
 #include <QLabel>
