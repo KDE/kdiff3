@@ -372,9 +372,9 @@ void ProgressDialog::recalc(bool bUpdate)
 
                     ++i;
                     if(i != m_progressStack.end())
-                        m_pSubProgressBar->setValue(int(1000.0 * (getAtomic(i->m_current) * (i->m_dRangeMax - i->m_dRangeMin) / getAtomic(i->m_maxNofSteps) + i->m_dRangeMin)));
+                        m_pSubProgressBar->setValue((int)lround(1000.0 * (getAtomic(i->m_current) * (i->m_dRangeMax - i->m_dRangeMin) / getAtomic(i->m_maxNofSteps) + i->m_dRangeMin)));
                     else
-                        m_pSubProgressBar->setValue(int(1000.0 * m_progressStack.front().m_dSubRangeMin));
+                        m_pSubProgressBar->setValue((int)lround(1000.0 * m_progressStack.front().m_dSubRangeMin));
                 }
 
                 if(!m_bStayHidden && !isVisible())
