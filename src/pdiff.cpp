@@ -1445,8 +1445,8 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
             if(m_pDiffTextWindow3)
                 m_pDiffTextWindow3->recalcWordWrap(false, 0, 0);
         }
-        bool bRunnablesStarted = DiffTextWindow::startRunnables();
-        if(!bRunnablesStarted)
+        mRunnablesStarted = DiffTextWindow::startRunnables();
+        if(!mRunnablesStarted)
             slotFinishRecalcWordWrap(visibleTextWidthForPrinting);
         else
         {
@@ -1465,7 +1465,11 @@ void KDiff3App::recalcWordWrap(int visibleTextWidthForPrinting)
 
 void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
 {
-    g_pProgressDialog->pop();
+    if(mRunnablesStarted)
+    {
+        g_pProgressDialog->pop();
+        mRunnablesStarted = false;
+    }
 
     if(m_pOptions->wordWrapOn() && g_pProgressDialog->wasCancelled())
     {

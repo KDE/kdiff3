@@ -468,6 +468,8 @@ public Q_SLOTS:
     int m_firstD3LIdx;                 // only needed during recalcWordWrap
     QPointer<QEventLoop> m_pEventLoopForPrinting;
 
+    bool mRunnablesStarted = false;
+
     /*
       This list exists solely to auto disconnect boost signals.
     */
