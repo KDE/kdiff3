@@ -45,6 +45,7 @@ set(kdiff3part_PART_SRCS
 ki18n_wrap_ui(kdiff3part_PART_SRCS
     scroller.ui
     opendialog.ui
+    progressdialog.ui
 )
 
 add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
@@ -63,9 +64,8 @@ set(kdiff3_SRCS
    ${kdiff3part_PART_SRCS}
     )
 
-if(BUILD_TESTING)
-   add_subdirectory( autotests )
-endif()
+ecm_optional_add_subdirectory( autotests )
+
 #cann't use add_subdirectory because it changes the scope.
 include(icons/CMakeLists.txt)
 add_executable(kdiff3 ${kdiff3_SRCS})

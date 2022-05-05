@@ -7,6 +7,7 @@
 */
 
 #include "progress.h"
+
 #include "common.h"
 #include "defmac.h"
 
@@ -32,33 +33,12 @@ ProgressDialog* g_pProgressDialog = nullptr;
 ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     : QDialog(pParent), m_pStatusBar(pStatusBar)
 {
-    setObjectName("ProgressDialog");
+    dialogUi.setupUi(this);
     setModal(true);
-    QVBoxLayout* layout = new QVBoxLayout(this);
+    //Abort if verticalLayout is not the immediate child of the dialog. This interferes with re-sizing.
+    assert(dialogUi.layout->parent() == this);
 
-    m_pInformation = new QLabel(" ", this);
-    layout->addWidget(m_pInformation);
-
-    m_pProgressBar = new QProgressBar();
-    m_pProgressBar->setRange(0, 1000);
-    layout->addWidget(m_pProgressBar);
-
-    m_pSubInformation = new QLabel(" ", this);
-    layout->addWidget(m_pSubInformation);
-
-    m_pSubProgressBar = new QProgressBar();
-    m_pSubProgressBar->setRange(0, 1000);
-    layout->addWidget(m_pSubProgressBar);
-
-    m_pSlowJobInfo = new QLabel(" ", this);
-    layout->addWidget(m_pSlowJobInfo);
-
-    QHBoxLayout* hlayout = new QHBoxLayout();
-    layout->addLayout(hlayout);
-    hlayout->addStretch(1);
-    m_pAbortButton = new QPushButton(i18n("&Cancel"), this);
-    hlayout->addWidget(m_pAbortButton);
-    chk_connect(m_pAbortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
+    chk_connect(dialogUi.abortButton, &QPushButton::clicked, this, &ProgressDialog::slotAbort);
     if(m_pStatusBar != nullptr)
     {
         m_pStatusBarWidget = new QWidget;
@@ -244,14 +224,14 @@ void ProgressDialog::setInformationImp(const QString& info)
     int level = m_progressStack.size();
     if(level == 1)
     {
-        m_pInformation->setText(info);
-        m_pSubInformation->setText("");
+        dialogUi.information->setText(info);
+        dialogUi.subInformation->setText("");
         if(m_pStatusBar && m_bStayHidden)
             m_pStatusBar->showMessage(info);
     }
     else if(level == 2)
     {
-        m_pSubInformation->setText(info);
+        dialogUi.subInformation->setText(info);
     }
 #else
     Q_UNUSED(info);
@@ -331,7 +311,7 @@ void ProgressDialog::enterEventLoop(KJob* pJob, const QString& jobInfo)
 #ifndef AUTOTEST
     m_pJob = pJob;
     m_currentJobInfo = jobInfo;
-    m_pSlowJobInfo->setText(m_currentJobInfo);
+    dialogUi.slowJobInfo->setText(m_currentJobInfo);
     if(m_progressDelayTimer)
         killTimer(m_progressDelayTimer);
     m_progressDelayTimer = startTimer(3000); /* 3 s delay */
@@ -388,22 +368,22 @@ void ProgressDialog::recalc(bool bUpdate)
             {
                 if(m_progressStack.empty())
                 {
-                    m_pProgressBar->setValue(0);
-                    m_pSubProgressBar->setValue(0);
+                    dialogUi.progressBar->setValue(0);
+                    dialogUi.subProgressBar->setValue(0);
                 }
                 else
                 {
                     QList<ProgressLevelData>::iterator i = m_progressStack.begin();
                     int value = int(1000.0 * (getAtomic(i->m_current) * (i->m_dRangeMax - i->m_dRangeMin) / getAtomic(i->m_maxNofSteps) + i->m_dRangeMin));
-                    m_pProgressBar->setValue(value);
+                    dialogUi.progressBar->setValue(value);
                     if(m_bStayHidden && m_pStatusProgressBar)
                         m_pStatusProgressBar->setValue(value);
 
                     ++i;
                     if(i != m_progressStack.end())
-                        m_pSubProgressBar->setValue((int)lround(1000.0 * (getAtomic(i->m_current) * (i->m_dRangeMax - i->m_dRangeMin) / getAtomic(i->m_maxNofSteps) + i->m_dRangeMin)));
+                        dialogUi.subProgressBar->setValue((int)lround(1000.0 * (getAtomic(i->m_current) * (i->m_dRangeMax - i->m_dRangeMin) / getAtomic(i->m_maxNofSteps) + i->m_dRangeMin)));
                     else
-                        m_pSubProgressBar->setValue((int)lround(1000.0 * m_progressStack.front().m_dSubRangeMin));
+                        dialogUi.subProgressBar->setValue((int)lround(1000.0 * m_progressStack.front().m_dSubRangeMin));
                 }
 
                 if(!m_bStayHidden && !isVisible())
@@ -460,14 +440,14 @@ void ProgressDialog::delayedHide()
         m_pJob = nullptr;
     }
     QDialog::hide();
-    m_pInformation->setText("");
+    dialogUi.information->setText("");
 
     //m_progressStack.clear();
 
-    m_pProgressBar->setValue(0);
-    m_pSubProgressBar->setValue(0);
-    m_pSubInformation->setText("");
-    m_pSlowJobInfo->setText("");
+    dialogUi.progressBar->setValue(0);
+    dialogUi.subProgressBar->setValue(0);
+    dialogUi.subInformation->setText("");
+    dialogUi.slowJobInfo->setText("");
 #endif
 }
 
@@ -563,7 +543,7 @@ void ProgressDialog::timerEvent(QTimerEvent* te)
         {
             show();
         }
-        m_pSlowJobInfo->setText(m_currentJobInfo);
+        dialogUi.slowJobInfo->setText(m_currentJobInfo);
     }
     else if(te->timerId() == m_delayedHideTimer)
     {

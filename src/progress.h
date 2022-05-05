@@ -10,6 +10,7 @@
 #define PROGRESS_H
 
 #include "ProgressProxy.h"
+#include "ui_progressdialog.h"
 
 #include <QDialog>
 #include <QElapsedTimer>
@@ -89,6 +90,8 @@ class ProgressDialog: public QDialog
     void slotAbort();
 
   private:
+    Ui::ProgressDialog dialogUi;
+
     struct ProgressLevelData {
         QAtomicInteger<qint64> m_current = 0;
         QAtomicInteger<qint64> m_maxNofSteps = 1; // when step() is used.
@@ -105,12 +108,6 @@ class ProgressDialog: public QDialog
     int m_delayedHideStatusBarWidgetTimer = 0;
     QPointer<QEventLoop> m_eventLoop;
 
-    QProgressBar* m_pProgressBar;
-    QProgressBar* m_pSubProgressBar;
-    QLabel* m_pInformation;
-    QLabel* m_pSubInformation;
-    QLabel* m_pSlowJobInfo;
-    QPushButton* m_pAbortButton;
     QElapsedTimer m_t1;
     QElapsedTimer m_t2;
     bool m_bWasCancelled = false;
