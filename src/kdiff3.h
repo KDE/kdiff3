@@ -264,6 +264,7 @@ public Q_SLOTS:
     void slotGoNextConflict();
     void slotGoPrevDelta();
     void slotGoNextDelta();
+    void slotGoToLine();
     void slotChooseA();
     void slotChooseB();
     void slotChooseC();
@@ -369,6 +370,7 @@ public Q_SLOTS:
     QPointer<QAction> mGoNextConflict;
     QPointer<QAction> mGoPrevDelta;
     QPointer<QAction> mGoNextDelta;
+    QPointer<QAction> mGotoLine;
     KToggleAction* chooseA;
     KToggleAction* chooseB;
     KToggleAction* chooseC;

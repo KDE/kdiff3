@@ -6,7 +6,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
+#include "defmac.h"
 #include "difftextwindow.h"
 #include "DirectoryInfo.h"
 #include "directorymergewindow.h"
@@ -1145,6 +1145,37 @@ void KDiff3App::slotGoPrevDelta()
 void KDiff3App::slotGoNextDelta()
 {
     Q_EMIT goNextDelta();
+}
+
+void KDiff3App::slotGoToLine()
+{
+    QDialog pDialog;
+    QVBoxLayout* l = new QVBoxLayout(&pDialog);
+
+    QLineEdit* pLineNumEdit = new QLineEdit();
+    //Limit imput to valid 1 based line numbers
+    pLineNumEdit->setValidator(new QIntValidator(1, DiffTextWindow::mVScrollBar->maximum(), pLineNumEdit));
+
+    QPushButton* pOkButton = new QPushButton(i18n("Ok"));
+    l->addWidget(pLineNumEdit);
+    l->addWidget(pOkButton);
+
+    chk_connect(pOkButton, &QPushButton::clicked, &pDialog,
+                ([&pDialog, pLineNumEdit]() {
+                    if(pLineNumEdit->text() != "")
+                    {
+                        int lineNum = pLineNumEdit->text().toInt();
+                        lineNum = qMax(lineNum - 2, 0);
+                        //No need for anything else here setValue triggers a valueChanged signal internally.
+                        DiffTextWindow::mVScrollBar->setValue(lineNum);
+                    }
+                    pDialog.close();
+                }));
+
+    pDialog.setWindowTitle(i18n("Go to Line"));
+    pDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+    pDialog.setFixedSize(260, 110);
+    pDialog.exec();
 }
 
 void KDiff3App::choose(e_SrcSelector choice)

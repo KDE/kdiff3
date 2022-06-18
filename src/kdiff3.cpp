@@ -604,6 +604,7 @@ void KDiff3App::initActions(KActionCollection* ac)
 #include "xpm/down1arrow.xpm"
 #include "xpm/down2arrow.xpm"
 #include "xpm/downend.xpm"
+#include "xpm/gotoline.xpm"
 #include "xpm/iconA.xpm"
 #include "xpm/iconB.xpm"
 #include "xpm/iconC.xpm"
@@ -636,6 +637,8 @@ void KDiff3App::initActions(KActionCollection* ac)
     mGoPrevUnsolvedConflict->setToolTip(mGoPrevUnsolvedConflict->text() + includeWhitespace);
     mGoNextUnsolvedConflict = GuiUtils::createAction<QAction>(i18n("Go to Next Unsolved Conflict"), QIcon(QPixmap(nextunsolved)), i18n("Next\nUnsolved"), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_PageDown), this, &KDiff3App::slotGoNextUnsolvedConflict, ac, "go_next_unsolved_conflict");
     mGoNextUnsolvedConflict->setToolTip(mGoNextUnsolvedConflict->text() + includeWhitespace);
+    mGotoLine = GuiUtils::createAction<QAction>(i18n("Go to Line"), QIcon(QPixmap(gotoline)), i18n("Go\nLine"), QKeySequence(Qt::CTRL + Qt::Key_G), this, &KDiff3App::slotGoToLine, ac, "go_to_line");
+    mGoNextUnsolvedConflict->setToolTip(mGoNextUnsolvedConflict->text() + i18n(".\n Goto specified line."));
     chooseA = GuiUtils::createAction<KToggleAction>(i18n("Select Line(s) From A"), QIcon(QPixmap(iconA)), i18n("Choose\nA"), QKeySequence(Qt::CTRL + Qt::Key_1), this, &KDiff3App::slotChooseA, ac, "merge_choose_a");
     chooseB = GuiUtils::createAction<KToggleAction>(i18n("Select Line(s) From B"), QIcon(QPixmap(iconB)), i18n("Choose\nB"), QKeySequence(Qt::CTRL + Qt::Key_2), this, &KDiff3App::slotChooseB, ac, "merge_choose_b");
     chooseC = GuiUtils::createAction<KToggleAction>(i18n("Select Line(s) From C"), QIcon(QPixmap(iconC)), i18n("Choose\nC"), QKeySequence(Qt::CTRL + Qt::Key_3), this, &KDiff3App::slotChooseC, ac, "merge_choose_c");
