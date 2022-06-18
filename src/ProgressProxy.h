@@ -31,9 +31,6 @@ class ProgressProxy: public QObject
     void setRangeTransformation(double dMin, double dMax);
     void setSubRangeTransformation(double dMin, double dMax);
 
-    static void exitEventLoop();
-    static void enterEventLoop(KJob* pJob, const QString& jobInfo);
-
     static signals2::signal<void()> startBackgroundTask;
     static signals2::signal<void()> endBackgroundTask;
 
@@ -41,8 +38,8 @@ class ProgressProxy: public QObject
     static signals2::signal<void(bool)> pop;
     static signals2::signal<void()> clearSig;
 
-    static signals2::signal<void(KJob*, const QString&)> enterEventLoopSig;
-    static signals2::signal<void()> exitEventLoopSig;
+    static signals2::signal<void(KJob*, const QString&)> enterEventLoop;
+    static signals2::signal<void()> exitEventLoop;
 
     static signals2::signal<void(qint64, bool)> setCurrentSig;
     static signals2::signal<void(qint64)> setMaxNofStepsSig;
@@ -55,7 +52,6 @@ class ProgressProxy: public QObject
     static signals2::signal<bool(), find> wasCancelledSig;
 
     static signals2::signal<void(const QString&, bool)> setInformationSig;
-    static signals2::signal<void(const QString&, int, bool)> setInfoAndStepSig;
 };
 
 #endif /* PROGRESSPROXY_H */

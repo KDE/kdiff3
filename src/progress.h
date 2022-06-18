@@ -78,7 +78,6 @@ class ProgressDialog: public QDialog
 
   private:
     void setInformationImp(const QString& info);
-    void setCurrentImp(qint64 subCurrent);
     void initConnections();
 
     //Treated as slot by direct call to QMetaObject::invokeMethod

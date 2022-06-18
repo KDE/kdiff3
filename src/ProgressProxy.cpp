@@ -24,8 +24,8 @@ signals2::signal<void()> ProgressProxy::push;
 signals2::signal<void(bool)> ProgressProxy::pop;
 signals2::signal<void()> ProgressProxy::clearSig;
 
-signals2::signal<void(KJob*, const QString&)> ProgressProxy::enterEventLoopSig;
-signals2::signal<void()> ProgressProxy::exitEventLoopSig;
+signals2::signal<void(KJob*, const QString&)> ProgressProxy::enterEventLoop;
+signals2::signal<void()> ProgressProxy::exitEventLoop;
 
 signals2::signal<void(qint64, bool)> ProgressProxy::setCurrentSig;
 signals2::signal<void(qint64)> ProgressProxy::setMaxNofStepsSig;
@@ -38,7 +38,6 @@ signals2::signal<void(double, double)> ProgressProxy::setSubRangeTransformationS
 signals2::signal<bool(), find> ProgressProxy::wasCancelledSig;
 
 signals2::signal<void(const QString&, bool)> ProgressProxy::setInformationSig;
-signals2::signal<void(const QString&, int, bool)> ProgressProxy::setInfoAndStepSig;
 
 ProgressProxy::ProgressProxy()
 {
@@ -50,16 +49,6 @@ ProgressProxy::~ProgressProxy()
     pop(false);
 }
 
-void ProgressProxy::enterEventLoop(KJob* pJob, const QString& jobInfo)
-{
-    enterEventLoopSig(pJob, jobInfo);
-}
-
-void ProgressProxy::exitEventLoop()
-{
-    exitEventLoopSig();
-}
-
 void ProgressProxy::setInformation(const QString& info, bool bRedrawUpdate)
 {
     setInformationSig(info, bRedrawUpdate);
@@ -67,7 +56,8 @@ void ProgressProxy::setInformation(const QString& info, bool bRedrawUpdate)
 
 void ProgressProxy::setInformation(const QString& info, int current, bool bRedrawUpdate)
 {
-    setInfoAndStepSig(info, current, bRedrawUpdate);
+    setCurrentSig(current, false);
+    setInformationSig(info, bRedrawUpdate);
 }
 
 void ProgressProxy::setCurrent(qint64 current, bool bRedrawUpdate)

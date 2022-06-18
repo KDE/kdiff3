@@ -77,8 +77,8 @@ void ProgressDialog::initConnections()
     connections.push_back(ProgressProxy::pop.connect(boost::bind(&ProgressDialog::pop, this, placeholders::_1)));
     connections.push_back(ProgressProxy::clearSig.connect(boost::bind(&ProgressDialog::clear, this)));
 
-    connections.push_back(ProgressProxy::enterEventLoopSig.connect(boost::bind(&ProgressDialog::enterEventLoop, this, placeholders::_1, placeholders::_2)));
-    connections.push_back(ProgressProxy::exitEventLoopSig.connect(boost::bind(&ProgressDialog::exitEventLoop, this)));
+    connections.push_back(ProgressProxy::enterEventLoop.connect(boost::bind(&ProgressDialog::enterEventLoop, this, placeholders::_1, placeholders::_2)));
+    connections.push_back(ProgressProxy::exitEventLoop.connect(boost::bind(&ProgressDialog::exitEventLoop, this)));
 
     connections.push_back(ProgressProxy::setCurrentSig.connect(boost::bind(&ProgressDialog::setCurrent, this, placeholders::_1, placeholders::_2)));
     connections.push_back(ProgressProxy::addNofStepsSig.connect(boost::bind(&ProgressDialog::addNofSteps, this, placeholders::_1)));
@@ -94,10 +94,6 @@ void ProgressDialog::initConnections()
         static_cast<void (ProgressDialog::*)(const QString&, bool)>(&ProgressDialog::setInformation),
         this,
         placeholders::_1, placeholders::_2)));
-    connections.push_back(ProgressProxy::setInfoAndStepSig.connect(boost::bind(
-        static_cast<void (ProgressDialog::*)(const QString&, int, bool)>(&ProgressDialog::setInformation),
-        this,
-        placeholders::_1, placeholders::_2, placeholders::_3)));
 }
 
 void ProgressDialog::setStayHidden(bool bStayHidden)
@@ -195,8 +191,9 @@ void ProgressDialog::setInformation(const QString& info, int current, bool bRedr
     if(m_progressStack.empty())
         return;
 
-    setCurrentImp(current);
-    setInformation(info, bRedrawUpdate);
+    setCurrent(current, false);
+    setInformationImp(info);
+    recalc(bRedrawUpdate);
 }
 
 void ProgressDialog::setInformation(const QString& info, bool bRedrawUpdate)
@@ -263,15 +260,11 @@ void ProgressDialog::setCurrent(qint64 subCurrent, bool bRedrawUpdate)
 {
     if(m_progressStack.empty())
         return;
-    setCurrentImp(subCurrent);
-    recalc(bRedrawUpdate);
-}
 
-void ProgressDialog::setCurrentImp(qint64 subCurrent)
-{
-    Q_ASSERT(!m_progressStack.empty());
     ProgressLevelData& pld = m_progressStack.back();
     pld.m_current = subCurrent;
+
+    recalc(bRedrawUpdate);
 }
 
 void ProgressDialog::clear()
