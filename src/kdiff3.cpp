@@ -573,6 +573,11 @@ void KDiff3App::initActions(KActionCollection* ac)
 #endif
     fileQuit = KStandardAction::quit(this, &KDiff3App::slotFileQuit, ac);
     fileQuit->setStatusTip(i18n("Quits the application"));
+
+    editUndo = KStandardAction::undo(this, &KDiff3App::slotEditUndo, ac);
+    editUndo->setShortcuts(QKeySequence::Undo);
+    editUndo->setStatusTip(i18n("Undo last action."));
+
     editCut = KStandardAction::cut(this, &KDiff3App::slotEditCut, ac);
     editCut->setShortcuts(QKeySequence::Cut);
     editCut->setStatusTip(i18n("Cuts the selected section and puts it to the clipboard"));

@@ -2143,6 +2143,7 @@ void KDiff3App::slotUpdateAvailabilities()
     mAutoSolve->setEnabled(bMergeEditorVisible && m_bTripleDiff);
     mUnsolve->setEnabled(bMergeEditorVisible);
 
+    editUndo->setEnabled(false); //Not yet implemented but planned.
     editCut->setEnabled(allowCut());
     editCopy->setEnabled(allowCopy());
 

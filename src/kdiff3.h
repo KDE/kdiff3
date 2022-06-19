@@ -216,6 +216,8 @@ public Q_SLOTS:
      * If queryClose() returns false because the user canceled the saveModified() dialog, the closing breaks.
      */
     void slotFileQuit();
+
+    void slotEditUndo(){};
     /** put the marked text/object into the clipboard and remove
      *  it from the document
      */
@@ -349,6 +351,7 @@ public Q_SLOTS:
     QPointer<QAction> filePrint;
     QPointer<QAction> fileQuit;
     QPointer<QAction> fileReload;
+    QPointer<QAction> editUndo;
     QPointer<QAction> editCut;
     QPointer<QAction> editCopy;
     QPointer<QAction> editPaste;
