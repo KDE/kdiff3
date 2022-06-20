@@ -707,7 +707,7 @@ void KDiff3App::slotFinishMainInit()
     if(m_pCornerWidget)
         m_pCornerWidget->setFixedSize(DiffTextWindow::mVScrollBar->width(), m_pHScrollBar->height());
 
-    slotUpdateAvailabilities();
+    Q_EMIT updateAvailabilities();
     setUpdatesEnabled(true);
 
     bool bVisibleMergeResultWindow = !m_outputFilename.isEmpty();
@@ -938,7 +938,7 @@ void KDiff3App::slotFileOpen()
         break;
     }
 
-    slotUpdateAvailabilities();
+    Q_EMIT updateAvailabilities();
     slotStatusMsg(i18n("Ready."));
 }
 
@@ -1221,7 +1221,7 @@ void KDiff3App::slotAutoSolve()
 {
     Q_EMIT autoSolve();
 
-    slotUpdateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 void KDiff3App::slotUnsolve()
@@ -1355,7 +1355,7 @@ void KDiff3App::slotSelectionEnd()
         }
     }
 
-    slotUpdateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 void KDiff3App::slotClipboardChanged()
@@ -1378,7 +1378,7 @@ void KDiff3App::slotOutputModified(bool bModified)
     if(bModified && !m_bOutputModified)
     {
         m_bOutputModified = true;
-        slotUpdateAvailabilities();
+        Q_EMIT updateAvailabilities();
     }
 }
 
@@ -1649,7 +1649,7 @@ bool KDiff3App::doDirectoryCompare(const bool bCreateNewInstance)
                 m_pDiffTextWindowFrame3->init();
             }
         }
-        slotUpdateAvailabilities();
+        Q_EMIT updateAvailabilities();
         return bSuccess;
     }
 
@@ -1750,7 +1750,7 @@ void KDiff3App::slotDirShowBoth()
         }
     }
 
-    slotUpdateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 void KDiff3App::slotDirViewToggle()
@@ -1770,7 +1770,7 @@ void KDiff3App::slotDirViewToggle()
             m_pMainWidget->show();
         }
     }
-    slotUpdateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 void KDiff3App::slotShowWindowAToggled()
@@ -1778,7 +1778,7 @@ void KDiff3App::slotShowWindowAToggled()
     if(m_pDiffTextWindow1 != nullptr)
     {
         m_pDiffTextWindowFrame1->setVisible(showWindowA->isChecked());
-        slotUpdateAvailabilities();
+        Q_EMIT updateAvailabilities();
     }
 }
 
@@ -1787,7 +1787,7 @@ void KDiff3App::slotShowWindowBToggled()
     if(m_pDiffTextWindow2 != nullptr)
     {
         m_pDiffTextWindowFrame2->setVisible(showWindowB->isChecked());
-        slotUpdateAvailabilities();
+        Q_EMIT updateAvailabilities();
     }
 }
 
@@ -1796,7 +1796,7 @@ void KDiff3App::slotShowWindowCToggled()
     if(m_pDiffTextWindow3 != nullptr)
     {
         m_pDiffTextWindowFrame3->setVisible(showWindowC->isChecked());
-        slotUpdateAvailabilities();
+        Q_EMIT updateAvailabilities();
     }
 }
 
@@ -2016,28 +2016,28 @@ void KDiff3App::slotOverviewNormal()
 {
     Q_EMIT changeOverViewMode(e_OverviewMode::eOMNormal);
 
-    slotUpdateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 void KDiff3App::slotOverviewAB()
 {
     Q_EMIT changeOverViewMode(e_OverviewMode::eOMAvsB);
 
-    slotUpdateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 void KDiff3App::slotOverviewAC()
 {
     Q_EMIT changeOverViewMode(e_OverviewMode::eOMAvsC);
 
-    slotUpdateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 void KDiff3App::slotOverviewBC()
 {
     Q_EMIT changeOverViewMode(e_OverviewMode::eOMBvsC);
 
-    slotUpdateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 void KDiff3App::slotNoRelevantChangesDetected()
@@ -2146,11 +2146,6 @@ void KDiff3App::slotUpdateAvailabilities()
     editUndo->setEnabled(false); //Not yet implemented but planned.
     editCut->setEnabled(allowCut());
     editCopy->setEnabled(allowCopy());
-
-    if(m_pMergeResultWindow != nullptr)
-    {
-        m_pMergeResultWindow->slotUpdateAvailabilities();
-    }
 
     mMergeHistory->setEnabled(bMergeEditorVisible);
     mergeRegExp->setEnabled(bMergeEditorVisible);

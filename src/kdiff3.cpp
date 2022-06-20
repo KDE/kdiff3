@@ -365,6 +365,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 
     if(qApp != nullptr)
         chk_connect(qApp, &QApplication::focusChanged, this, &KDiff3App::slotFocusChanged);
+
+    chk_connect_a(this, &KDiff3App::updateAvailabilities, this, &KDiff3App::slotUpdateAvailabilities);
 }
 
 /*
@@ -399,7 +401,7 @@ void KDiff3App::slotFocusChanged(QWidget* old, QWidget* now)
     Q_UNUSED(now);
     Q_UNUSED(old);
 
-    slotUpdateAvailabilities();
+    Q_EMIT updateAvailabilities();
 }
 
 void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)
@@ -510,7 +512,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
 
     slotClipboardChanged(); // For initialisation.
 
-    slotUpdateAvailabilities();
+    Q_EMIT updateAvailabilities();
 
     if(!m_bDirCompare && m_pKDiff3Shell != nullptr)
     {

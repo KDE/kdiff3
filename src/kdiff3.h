@@ -310,6 +310,8 @@ public Q_SLOTS:
     void setHScrollBarRange();
 
     void slotFocusChanged(QWidget *old, QWidget *now);
+  Q_SIGNALS:
+    void updateAvailabilities();
 
   protected:
     void setLockPainting(bool bLock);
