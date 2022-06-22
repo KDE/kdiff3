@@ -1,3 +1,7 @@
+Version 1.9.6 - 2022-6-23
+===========================
+*BUG:428759 -Fix horizontal scroll to be by character not pixels
+*BUG:444636 - Update window when ending selection mode.
 
 Version 1.9.5 - 2022-2-23
 ===========================
@@ -6,7 +10,7 @@ Version 1.9.5 - 2022-2-23
     -fixes speed regression.
     -Better EOL detection decoding handled by Qt
 
-Version 1.9.3 - 2021-7-15
+Version 1.9.4 - 2021-11-17
 ===========================
 *Fix windows style cr/lf line ending handling
 *Fix race on exit if qt sends QApplication::focusChanged during teardown.
