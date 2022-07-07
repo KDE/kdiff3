@@ -8,12 +8,13 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
 project(kdiff3)
 
-option(BUILD_WITH_QT6 OFF)
+#Avaliable as QtVersionOption starting in ECM 5.82.
+option(BUILD_WITH_QT6 "Build against Qt 6" OFF)
+
 option(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
 option(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
 option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-#Avaliable as QtVersionOption starting in ECM 5.82.
-option(BUILD_WITH_QT6 "Build against Qt 6" OFF)
+
 if (BUILD_WITH_QT6)
     set(QT_MAJOR_VERSION 6)
 else()
