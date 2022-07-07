@@ -36,7 +36,7 @@ KAboutData KDiff3Part::createAboutData()
         appVersion += " (32 bit)";
 
     KAboutData aboutData(u8"kdiff3part", i18n("KDiff3 Part"),
-                         appVersion, i18n("A KPart to display SVG images"),
+                         appVersion, i18n("A KPart for KDiff3"),
                          KAboutLicense::GPL_V2,
                          i18n("Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"));
     aboutData.addAuthor(i18n("Joachim Eibl"), QString(), QString("joachim.eibl at gmx.de"));
