@@ -4,7 +4,7 @@
 
 #cmake < 3.1 has no sane way of checking C++11 features and needed flags
 #CMP0077 is defined in 3.13 or later
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
 
 project(kdiff3)
 
@@ -22,9 +22,9 @@ if (BUILD_WITH_QT6)
     set(KF5_MIN_VERSION "5.82.0")
 else()
     set(QT_MAJOR_VERSION "5")
-    set(ECM_MIN_VERSION "5.50.0")
+    set(ECM_MIN_VERSION "5.70.0")
     set(QT_MIN_VERSION "5.15.2")
-    set(KF5_MIN_VERSION "5.50.0")
+    set(KF5_MIN_VERSION "5.70.0")
 endif()
 
 if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8.2)
@@ -155,9 +155,9 @@ add_definitions(
     #the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
     #KF5 5.64+ flags
-    #Don't warn for API depreciated after 5.70.0 (below as hex.hex.hex number)
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x054600
-    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x054600
+    #Don't warn for API depreciated after 5.80.0 (below as hex.hex.hex number)
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x055000
+    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x055000
     -DKF_VERSION_MAJOR=${KF_VERSION_MAJOR}
     -DKF_VERSION_MINOR=${KF_VERSION_MINOR}
     -DKF_VERSION_PATCH=${KF_VERSION_PATCH}
