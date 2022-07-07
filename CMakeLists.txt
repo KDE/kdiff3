@@ -16,20 +16,20 @@ option(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially r
 option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if (BUILD_WITH_QT6)
-    set(QT_MAJOR_VERSION 6)
+    set(QT_MAJOR_VERSION "6")
+    set(ECM_MIN_VERSION "5.82.0")
+    set(QT_MIN_VERSION "6.0.0")
+    set(KF5_MIN_VERSION "5.82.0")
 else()
-    set(QT_MAJOR_VERSION 5)
+    set(QT_MAJOR_VERSION "5")
+    set(ECM_MIN_VERSION "5.50.0")
+    set(QT_MIN_VERSION "5.15.2")
+    set(KF5_MIN_VERSION "5.50.0")
 endif()
-
-set(ECM_MIN_VERSION "5.50.0")
-set(QT_MIN_VERSION "5.15.2")
-
-set(KF5_MIN_VERSION "5.50.0")
 
 if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8.2)
     message(WARNING "gcc < 8.2 is not recomended support is best effort-only.")
 endif()
-
 
 find_package(ECM ${ECM_MIN_VERSION} CONFIG REQUIRED)
 set(
@@ -38,7 +38,12 @@ set(
     ${ECM_MODULE_PATH}
 )
 
-include(KDEInstallDirs)
+if(BUILD_WITH_QT6)
+    include(QtVersionOption)
+    include(KDEInstallDirs5)
+else()
+    include(KDEInstallDirs)
+endif()
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings NO_POLICY_SCOPE)
 include(FeatureSummary)
@@ -70,6 +75,10 @@ find_package(
     Widgets
     PrintSupport
 )
+
+if (QT_MAJOR_VERSION STREQUAL "6")
+    find_package(Qt6Core5Compat)
+endif()
 
 find_package(
     KF5 ${KF5_MIN_VERSION}
