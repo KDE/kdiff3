@@ -89,8 +89,8 @@ find_package(
     Parts
     WidgetsAddons
     Config
-    Crash
     OPTIONAL_COMPONENTS
+    Crash
     DocTools
 )
 
@@ -162,6 +162,12 @@ add_definitions(
     -DKF_VERSION_MINOR=${KF_VERSION_MINOR}
     -DKF_VERSION_PATCH=${KF_VERSION_PATCH}
 )
+#The CMake boolean value  is not properly translated if we assign the variable directly to a C/C++ define. clangd will catch this in sytax hightlighting other language servers may not.
+if(${KF5Crash_FOUND})
+    add_definitions(
+        -DHAS_KFCRASH=1
+    )
+endif()
 
 add_subdirectory(src)
 if(KF5DocTools_FOUND)
