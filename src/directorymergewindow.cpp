@@ -412,28 +412,28 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
                         return "";
                         break;
                     case eCopyAToB:
-                        return i18nc("Operation column message",Copy A to B");
+                        return i18nc("Operation column message", "Copy A to B");
                         break;
                     case eCopyBToA:
-                        return i18nc("Operation column message",Copy B to A");
+                        return i18nc("Operation column message", "Copy B to A");
                         break;
                     case eDeleteA:
-                        return i18nc("Operation column message",Delete A");
+                        return i18nc("Operation column message", "Delete A");
                         break;
                     case eDeleteB:
-                        return i18nc("Operation column message",Delete B");
+                        return i18nc("Operation column message", "Delete B");
                         break;
                     case eDeleteAB:
-                        return i18nc("Operation column message",Delete A & B");
+                        return i18nc("Operation column message", "Delete A & B");
                         break;
                     case eMergeToA:
-                        return i18nc("Operation column message",Merge to A");
+                        return i18nc("Operation column message", "Merge to A");
                         break;
                     case eMergeToB:
-                        return i18nc("Operation column message",Merge to B");
+                        return i18nc("Operation column message", "Merge to B");
                         break;
                     case eMergeToAB:
-                        return i18nc("Operation column message",Merge to A & B");
+                        return i18nc("Operation column message", "Merge to A & B");
                         break;
                     case eCopyAToDest:
                         return i18n("A");
@@ -449,7 +449,7 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
                         break;
                     case eMergeABCToDest:
                     case eMergeABToDest:
-                        return bDir ? i18nc("Operation column message (Directory merge)","Merge") : i18nc("Operation column message (File merge)","Merge (manual)");
+                        return bDir ? i18nc("Operation column message (Directory merge)", "Merge") : i18nc("Operation column message (File merge)", "Merge (manual)");
                         break;
                     case eConflictingFileTypes:
                         return i18nc("Operation column message", "Error: Conflicting File Types");
@@ -522,7 +522,7 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::headerData(int secti
         switch(section)
         {
             case s_NameCol:
-                return i18n("Column title", "Name");
+                return i18nc("Column title", "Name");
             case s_ACol:
                 return i18n("A");
             case s_BCol:
@@ -530,17 +530,17 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::headerData(int secti
             case s_CCol:
                 return i18n("C");
             case s_OpCol:
-                return i18n("Column title", "Operation");
+                return i18nc("Column title", "Operation");
             case s_OpStatusCol:
-                return i18n("Column title", "Status");
+                return i18nc("Column title", "Status");
             case s_UnsolvedCol:
-                return i18n("Column title", "Unsolved");
+                return i18nc("Column title", "Unsolved");
             case s_SolvedCol:
-                return i18n("Column title", "Solved");
+                return i18nc("Column title", "Solved");
             case s_NonWhiteCol:
-                return i18n("Column title", "Nonwhite");
+                return i18nc("Column title", "Nonwhite");
             case s_WhiteCol:
-                return i18n("Column title", "White");
+                return i18nc("Column title", "White");
             default:
                 return QVariant();
         }
@@ -2102,7 +2102,7 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareMergeStart(const 
                                                           "Choosing \"Simulate it\" will tell you what would happen.\n\n"
                                                           "Be aware that this program still has beta status "
                                                           "and there is NO WARRANTY whatsoever! Make backups of your vital data!"),
-                                                     i18n("Caption merger confirmation", "Starting Merge"),
+                                                     i18nc("Caption", "Starting Merge"),
                                                      KGuiItem(i18nc("Button title to confirm merge", "Do It")),
                                                      KGuiItem(i18nc("Button title to simulate merge", "Simulate It")));
         if(status == KMessageBox::Yes)
