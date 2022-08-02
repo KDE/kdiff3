@@ -770,17 +770,17 @@ void MergeResultWindow::showNumberOfConflicts()
     else
     {
         if(m_pTotalDiffStatus->isBinaryEqualAB())
-            totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("B"));
+            totalInfo += i18n("Files %1 and %2 are binary equal.\n", QStringLiteral("A"), QStringLiteral("B"));
         else if(m_pTotalDiffStatus->isTextEqualAB())
-            totalInfo += i18n("Files %1 and %2 have equal text.\n", i18n("A"), i18n("B"));
+            totalInfo += i18n("Files %1 and %2 have equal text.\n", QStringLiteral("A"), QStringLiteral("B"));
         if(m_pTotalDiffStatus->isBinaryEqualAC())
-            totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("C"));
+            totalInfo += i18n("Files %1 and %2 are binary equal.\n", QStringLiteral("A"), QStringLiteral("C"));
         else if(m_pTotalDiffStatus->isTextEqualAC())
-            totalInfo += i18n("Files %1 and %2 have equal text.\n", i18n("A"), i18n("C"));
+            totalInfo += i18n("Files %1 and %2 have equal text.\n", QStringLiteral("A"), QStringLiteral("C"));
         if(m_pTotalDiffStatus->isBinaryEqualBC())
-            totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("B"), i18n("C"));
+            totalInfo += i18n("Files %1 and %2 are binary equal.\n", QStringLiteral("B"), QStringLiteral("C"));
         else if(m_pTotalDiffStatus->isTextEqualBC())
-            totalInfo += i18n("Files %1 and %2 have equal text.\n", i18n("B"), i18n("C"));
+            totalInfo += i18n("Files %1 and %2 have equal text.\n", QStringLiteral("B"), QStringLiteral("C"));
     }
 
     int nrOfUnsolvedConflicts = getNumberOfUnsolvedConflicts();
@@ -1478,11 +1478,11 @@ void MergeResultWindow::writeLine(
     if(bUserModified)
         srcName = QChar('m');
     else if(srcSelect == e_SrcSelector::A && mergeDetails != e_MergeDetails::eNoChange)
-        srcName = i18n("A");
+        srcName = QStringLiteral("A");
     else if(srcSelect == e_SrcSelector::B)
-        srcName = i18n("B");
+        srcName = QStringLiteral("B");
     else if(srcSelect == e_SrcSelector::C)
-        srcName = i18n("C");
+        srcName = QStringLiteral("C");
 
     if(rangeMark & 4)
     {
@@ -2839,18 +2839,18 @@ void WindowTitleWidget::setLineEndStyles(e_LineEndStyle eLineEndStyleA, e_LineEn
     m_pLineEndStyleSelector->clear();
     QString dosUsers;
     if(eLineEndStyleA == eLineEndStyleDos)
-        dosUsers += i18n("A");
+        dosUsers += QStringLiteral("A");
     if(eLineEndStyleB == eLineEndStyleDos)
-        dosUsers += QLatin1String(dosUsers.isEmpty() ? "" : ", ") + i18n("B");
+        dosUsers += QLatin1String(dosUsers.isEmpty() ? "" : ", ") + QStringLiteral("B");
     if(eLineEndStyleC == eLineEndStyleDos)
-        dosUsers += QLatin1String(dosUsers.isEmpty() ? "" : ", ") + i18n("C");
+        dosUsers += QLatin1String(dosUsers.isEmpty() ? "" : ", ") + QStringLiteral("C");
     QString unxUsers;
     if(eLineEndStyleA == eLineEndStyleUnix)
-        unxUsers += i18n("A");
+        unxUsers += QStringLiteral("A");
     if(eLineEndStyleB == eLineEndStyleUnix)
-        unxUsers += QLatin1String(unxUsers.isEmpty() ? "" : ", ") + i18n("B");
+        unxUsers += QLatin1String(unxUsers.isEmpty() ? "" : ", ") + QStringLiteral("B");
     if(eLineEndStyleC == eLineEndStyleUnix)
-        unxUsers += QLatin1String(unxUsers.isEmpty() ? "" : ", ") + i18n("C");
+        unxUsers += QLatin1String(unxUsers.isEmpty() ? "" : ", ") + QStringLiteral("C");
 
     m_pLineEndStyleSelector->addItem(i18n("Unix") + (unxUsers.isEmpty() ? QString("") : u8" (" + unxUsers + u8")"));
     m_pLineEndStyleSelector->addItem(i18n("DOS") + (dosUsers.isEmpty() ? QString("") : u8" (" + dosUsers + u8")"));

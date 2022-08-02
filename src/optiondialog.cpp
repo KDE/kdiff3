@@ -964,8 +964,8 @@ void OptionDialog::setupMergePage()
     gbox->addWidget(pWhiteSpace2FileMergeDefault, line, 1);
 
     pWhiteSpace2FileMergeDefault->insertItem(0, i18n("Manual Choice"));
-    pWhiteSpace2FileMergeDefault->insertItem(1, i18n("A"));
-    pWhiteSpace2FileMergeDefault->insertItem(2, i18n("B"));
+    pWhiteSpace2FileMergeDefault->insertItem(1, QStringLiteral("A"));
+    pWhiteSpace2FileMergeDefault->insertItem(2, QStringLiteral("B"));
     label->setToolTip(i18n(
         "Allow the merge algorithm to automatically select an input for "
         "white-space-only changes."));
@@ -977,9 +977,9 @@ void OptionDialog::setupMergePage()
     gbox->addWidget(pWhiteSpace3FileMergeDefault, line, 1);
 
     pWhiteSpace3FileMergeDefault->insertItem(0, i18n("Manual Choice"));
-    pWhiteSpace3FileMergeDefault->insertItem(1, i18n("A"));
-    pWhiteSpace3FileMergeDefault->insertItem(2, i18n("B"));
-    pWhiteSpace3FileMergeDefault->insertItem(3, i18n("C"));
+    pWhiteSpace3FileMergeDefault->insertItem(1, QStringLiteral("A"));
+    pWhiteSpace3FileMergeDefault->insertItem(2, QStringLiteral("B"));
+    pWhiteSpace3FileMergeDefault->insertItem(3, QStringLiteral("C"));
     label->setToolTip(i18n(
         "Allow the merge algorithm to automatically select an input for "
         "white-space-only changes."));

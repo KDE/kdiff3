@@ -729,17 +729,17 @@ void KDiff3App::slotFinishMainInit()
             else
             {
                 if(m_totalDiffStatus->isBinaryEqualAB())
-                    totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("B"));
+                    totalInfo += i18n("Files %1 and %2 are binary equal.\n", QStringLiteral("A"), QStringLiteral("B"));
                 else if(m_totalDiffStatus->isTextEqualAB())
-                    totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", i18n("A"), i18n("B"));
+                    totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", QStringLiteral("A"), QStringLiteral("B"));
                 if(m_totalDiffStatus->isBinaryEqualAC())
-                    totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("A"), i18n("C"));
+                    totalInfo += i18n("Files %1 and %2 are binary equal.\n", QStringLiteral("A"), QStringLiteral("C"));
                 else if(m_totalDiffStatus->isTextEqualAC())
-                    totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", i18n("A"), i18n("C"));
+                    totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", QStringLiteral("A"), QStringLiteral("C"));
                 if(m_totalDiffStatus->isBinaryEqualBC())
-                    totalInfo += i18n("Files %1 and %2 are binary equal.\n", i18n("B"), i18n("C"));
+                    totalInfo += i18n("Files %1 and %2 are binary equal.\n", QStringLiteral("B"), QStringLiteral("C"));
                 else if(m_totalDiffStatus->isTextEqualBC())
-                    totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", i18n("B"), i18n("C"));
+                    totalInfo += i18n("Files %1 and %2 have equal text, but are not binary equal. \n", QStringLiteral("B"), QStringLiteral("C"));
             }
 
             if(!totalInfo.isEmpty())
@@ -757,11 +757,11 @@ void KDiff3App::slotFinishMainInit()
         {
             QString files;
             if(m_sd1->isIncompleteConversion())
-                files += i18n("A");
+                files += QStringLiteral("A");
             if(m_sd2->isIncompleteConversion())
-                files += files.isEmpty() ? i18n("B") : i18n(", B");
+                files += files.isEmpty() ? QStringLiteral("B") : i18n(", B");
             if(m_sd3->isIncompleteConversion())
-                files += files.isEmpty() ? i18n("C") : i18n(", C");
+                files += files.isEmpty() ? QStringLiteral("C") : i18n(", C");
 
             KMessageBox::information(this, i18n("Some input characters could not be converted to valid unicode.\n"
                                                 "You might be using the wrong codec. (e.g. UTF-8 for non UTF-8 files).\n"
