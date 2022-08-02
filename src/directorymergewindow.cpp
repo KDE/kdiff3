@@ -385,11 +385,11 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
                 case s_NameCol:
                     return QFileInfo(pMFI->subPath()).fileName();
                 case s_ACol:
-                    return u8"A";
+                    return i18n("A");
                 case s_BCol:
-                    return u8"B";
+                    return i18n("B");
                 case s_CCol:
-                    return u8"C";
+                    return i18n("C");
                 //case s_OpCol:       return i18n("Operation");
                 //case s_OpStatusCol: return i18n("Status");
                 case s_UnsolvedCol:
@@ -436,13 +436,13 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
                         return i18nc("Operation column message",Merge to A & B");
                         break;
                     case eCopyAToDest:
-                        return u8"A";
+                        return i18n("A");
                         break;
                     case eCopyBToDest:
-                        return u8"B";
+                        return i18n("B");
                         break;
                     case eCopyCToDest:
-                        return u8"C";
+                        return i18n("C");
                         break;
                     case eDeleteFromDest:
                         return i18nc("Operation column message", "Delete (if exists)");
@@ -524,11 +524,11 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::headerData(int secti
             case s_NameCol:
                 return i18n("Column title", "Name");
             case s_ACol:
-                return u8"A";
+                return i18n("A");
             case s_BCol:
-                return u8"B";
+                return i18n("B");
             case s_CCol:
-                return u8"C";
+                return i18n("C");
             case s_OpCol:
                 return i18n("Column title", "Operation");
             case s_OpStatusCol:
@@ -2695,19 +2695,19 @@ DirectoryMergeInfo::DirectoryMergeInfo(QWidget* pParent):
 
     int line = 0;
 
-    m_pA = new QLabel(u8"A", this);
+    m_pA = new QLabel(i18n("A"), this);
     grid->addWidget(m_pA, line, 0);
     m_pInfoA = new QLabel(this);
     grid->addWidget(m_pInfoA, line, 1);
     ++line;
 
-    m_pB = new QLabel(u8"B", this);
+    m_pB = new QLabel(i18n("B"), this);
     grid->addWidget(m_pB, line, 0);
     m_pInfoB = new QLabel(this);
     grid->addWidget(m_pInfoB, line, 1);
     ++line;
 
-    m_pC = new QLabel(u8"C", this);
+    m_pC = new QLabel(i18n("C"), this);
     grid->addWidget(m_pC, line, 0);
     m_pInfoC = new QLabel(this);
     grid->addWidget(m_pInfoC, line, 1);
@@ -2821,9 +2821,9 @@ void DirectoryMergeInfo::setInfo(
     }
 
     m_pInfoList->clear();
-    addListViewItem(u8"A", dirA.prettyAbsPath(), mfi.getFileInfoA());
-    addListViewItem(u8"B", dirB.prettyAbsPath(), mfi.getFileInfoB());
-    addListViewItem(u8"C", dirC.prettyAbsPath(), mfi.getFileInfoC());
+    addListViewItem(i18n("A"), dirA.prettyAbsPath(), mfi.getFileInfoA());
+    addListViewItem(i18n("B"), dirB.prettyAbsPath(), mfi.getFileInfoB());
+    addListViewItem(i18n("C"), dirC.prettyAbsPath(), mfi.getFileInfoC());
     if(!bHideDest)
     {
         FileAccess fiDest(dirDest.prettyAbsPath() + '/' + mfi.subPath(), true);
@@ -2974,9 +2974,9 @@ void DirectoryMergeWindow::initDirectoryMergeActions(KDiff3App* pKDiff3App, KAct
     d->m_pDirMergeExplicit = GuiUtils::createAction<QAction>(i18n("Merge Explicitly Selected Files"), this, &DirectoryMergeWindow::slotMergeExplicitlySelectedFiles, ac, "dir_merge_explicitly_selected_files");
 
     d->m_pDirCurrentDoNothing = GuiUtils::createAction<QAction>(i18n("Do Nothing"), this, &DirectoryMergeWindow::slotCurrentDoNothing, ac, "dir_current_do_nothing");
-    d->m_pDirCurrentChooseA = GuiUtils::createAction<QAction>(u8"A", this, &DirectoryMergeWindow::slotCurrentChooseA, ac, "dir_current_choose_a");
-    d->m_pDirCurrentChooseB = GuiUtils::createAction<QAction>(u8"B", this, &DirectoryMergeWindow::slotCurrentChooseB, ac, "dir_current_choose_b");
-    d->m_pDirCurrentChooseC = GuiUtils::createAction<QAction>(u8"C", this, &DirectoryMergeWindow::slotCurrentChooseC, ac, "dir_current_choose_c");
+    d->m_pDirCurrentChooseA = GuiUtils::createAction<QAction>(i18n("A"), this, &DirectoryMergeWindow::slotCurrentChooseA, ac, "dir_current_choose_a");
+    d->m_pDirCurrentChooseB = GuiUtils::createAction<QAction>(i18n("B"), this, &DirectoryMergeWindow::slotCurrentChooseB, ac, "dir_current_choose_b");
+    d->m_pDirCurrentChooseC = GuiUtils::createAction<QAction>(i18n("C"), this, &DirectoryMergeWindow::slotCurrentChooseC, ac, "dir_current_choose_c");
     d->m_pDirCurrentMerge = GuiUtils::createAction<QAction>(i18n("Merge"), this, &DirectoryMergeWindow::slotCurrentMerge, ac, "dir_current_merge");
     d->m_pDirCurrentDelete = GuiUtils::createAction<QAction>(i18n("Delete (if exists)"), this, &DirectoryMergeWindow::slotCurrentDelete, ac, "dir_current_delete");
 
