@@ -103,7 +103,7 @@ bool DefaultFileAccessJobHandler::get(void* pDestBuffer, long maxLength)
         chk_connect(pJob, &KIO::TransferJob::data, this, &DefaultFileAccessJobHandler::slotGetData);
         chk_connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
 
-        ProgressProxy::enterEventLoop(pJob, i18n("Reading file: %1", mFileAccess->prettyAbsPath()));
+        ProgressProxy::enterEventLoop(pJob, i18nc("Mesage for progress dialog %1 = path to file", "Reading file: %1", mFileAccess->prettyAbsPath()));
         return m_bSuccess;
     }
     else
@@ -143,7 +143,7 @@ bool DefaultFileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bo
         chk_connect(pJob, &KIO::TransferJob::dataReq, this, &DefaultFileAccessJobHandler::slotPutData);
         chk_connect(pJob, SIGNAL(percent(KJob*,ulong)), &pp, SLOT(slotPercent(KJob*,ulong)));
 
-        ProgressProxy::enterEventLoop(pJob, i18n("Writing file: %1", mFileAccess->prettyAbsPath()));
+        ProgressProxy::enterEventLoop(pJob, i18nc("Mesage for progress dialog %1 = path to file", "Writing file: %1", mFileAccess->prettyAbsPath()));
         return m_bSuccess;
     }
     else
@@ -214,7 +214,7 @@ bool DefaultFileAccessJobHandler::mkDirImp(const QString& dirName)
         chk_connect(pJob, &KIO::SimpleJob::result, this, &DefaultFileAccessJobHandler::slotSimpleJobResult);
         chk_connect(pJob, &KIO::SimpleJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
 
-        ProgressProxy::enterEventLoop(pJob, i18n("Making folder: %1", dirName));
+        ProgressProxy::enterEventLoop(pJob, i18nc("Mesage for progress dialog %1 = path to file", "Making folder: %1", dirName));
         return m_bSuccess;
     }
 }
@@ -236,7 +236,7 @@ bool DefaultFileAccessJobHandler::rmDirImp(const QString& dirName)
         chk_connect(pJob, &KIO::SimpleJob::result, this, &DefaultFileAccessJobHandler::slotSimpleJobResult);
         chk_connect(pJob, &KIO::SimpleJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
 
-        ProgressProxy::enterEventLoop(pJob, i18n("Removing folder: %1", dirName));
+        ProgressProxy::enterEventLoop(pJob, i18nc("Mesage for progress dialog %1 = path to file", "Removing folder: %1", dirName));
         return m_bSuccess;
     }
 }
@@ -252,7 +252,7 @@ bool DefaultFileAccessJobHandler::removeFile(const QUrl& fileName)
         chk_connect(pJob, &KIO::SimpleJob::result, this, &DefaultFileAccessJobHandler::slotSimpleJobResult);
         chk_connect(pJob, &KIO::SimpleJob::finished, this, &DefaultFileAccessJobHandler::slotJobEnded);
 
-        ProgressProxy::enterEventLoop(pJob, i18n("Removing file: %1", FileAccess::prettyAbsPath(fileName)));
+        ProgressProxy::enterEventLoop(pJob, i18nc("Mesage for progress dialog %1 = path to file", "Removing file: %1", FileAccess::prettyAbsPath(fileName)));
         return m_bSuccess;
     }
 }

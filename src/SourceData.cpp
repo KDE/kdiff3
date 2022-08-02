@@ -517,7 +517,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
                 m_pOptions->m_LineMatchingPreProcessorCmd = "";
                 if(!m_lmppData.readFile(fileNameIn2))
                 {
-                    mErrors.append(i18n("Failed to read file: %1", fileNameIn2));
+                    mErrors.append(i18nc("Read error message. %1 = filepath", "Failed to read file: %1", fileNameIn2));
                     return;
                 }
             }
@@ -536,7 +536,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
 
     if(!m_lmppData.preprocess(pEncoding2, true))
     {
-        mErrors.append(i18n("File %1 too large to process. Skipping.", fileNameIn1));
+        mErrors.append(i18nc("Read error message. %1 = filepath", "File %1 too large to process. Skipping.", fileNameIn1));
         return;
     }
 

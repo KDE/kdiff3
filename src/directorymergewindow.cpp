@@ -412,28 +412,28 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
                         return "";
                         break;
                     case eCopyAToB:
-                        return i18n("Copy A to B");
+                        return i18nc("Operation column message",Copy A to B");
                         break;
                     case eCopyBToA:
-                        return i18n("Copy B to A");
+                        return i18nc("Operation column message",Copy B to A");
                         break;
                     case eDeleteA:
-                        return i18n("Delete A");
+                        return i18nc("Operation column message",Delete A");
                         break;
                     case eDeleteB:
-                        return i18n("Delete B");
+                        return i18nc("Operation column message",Delete B");
                         break;
                     case eDeleteAB:
-                        return i18n("Delete A & B");
+                        return i18nc("Operation column message",Delete A & B");
                         break;
                     case eMergeToA:
-                        return i18n("Merge to A");
+                        return i18nc("Operation column message",Merge to A");
                         break;
                     case eMergeToB:
-                        return i18n("Merge to B");
+                        return i18nc("Operation column message",Merge to B");
                         break;
                     case eMergeToAB:
-                        return i18n("Merge to A & B");
+                        return i18nc("Operation column message",Merge to A & B");
                         break;
                     case eCopyAToDest:
                         return i18n("A");
@@ -445,20 +445,20 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
                         return i18n("C");
                         break;
                     case eDeleteFromDest:
-                        return i18n("Delete (if exists)");
+                        return i18nc("Operation column message", "Delete (if exists)");
                         break;
                     case eMergeABCToDest:
                     case eMergeABToDest:
-                        return bDir ? i18n("Merge") : i18n("Merge (manual)");
+                        return bDir ? i18nc("Operation column message (Directory merge)","Merge") : i18nc("Operation column message (File merge)","Merge (manual)");
                         break;
                     case eConflictingFileTypes:
-                        return i18n("Error: Conflicting File Types");
+                        return i18nc("Operation column message", "Error: Conflicting File Types");
                         break;
                     case eChangedAndDeleted:
-                        return i18n("Error: Changed and Deleted");
+                        return i18nc("Operation column message", "Error: Changed and Deleted");
                         break;
                     case eConflictingAges:
-                        return i18n("Error: Dates are equal but files are not.");
+                        return i18nc("Operation column message", "Error: Dates are equal but files are not.");
                         break;
                     default:
                         assert(false);
@@ -472,17 +472,17 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::data(const QModelInd
                     case eOpStatusNone:
                         return "";
                     case eOpStatusDone:
-                        return i18n("Done");
+                        return i18nc("Status column message", "Done");
                     case eOpStatusError:
-                        return i18n("Error");
+                        return i18nc("Status column message", "Error");
                     case eOpStatusSkipped:
-                        return i18n("Skipped.");
+                        return i18nc("Status column message", "Skipped.");
                     case eOpStatusNotSaved:
-                        return i18n("Not saved.");
+                        return i18nc("Status column message", "Not saved.");
                     case eOpStatusInProgress:
-                        return i18n("In progress...");
+                        return i18nc("Status column message", "In progress...");
                     case eOpStatusToDo:
-                        return i18n("To do.");
+                        return i18nc("Status column message", "To do.");
                 }
             }
         }
@@ -522,7 +522,7 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::headerData(int secti
         switch(section)
         {
             case s_NameCol:
-                return i18n("Name");
+                return i18n("Column title", "Name");
             case s_ACol:
                 return i18n("A");
             case s_BCol:
@@ -530,17 +530,17 @@ QVariant DirectoryMergeWindow::DirectoryMergeWindowPrivate::headerData(int secti
             case s_CCol:
                 return i18n("C");
             case s_OpCol:
-                return i18n("Operation");
+                return i18n("Column title", "Operation");
             case s_OpStatusCol:
-                return i18n("Status");
+                return i18n("Column title", "Status");
             case s_UnsolvedCol:
-                return i18n("Unsolved");
+                return i18n("Column title", "Unsolved");
             case s_SolvedCol:
-                return i18n("Solved");
+                return i18n("Column title", "Solved");
             case s_NonWhiteCol:
-                return i18n("Nonwhite");
+                return i18n("Column title", "Nonwhite");
             case s_WhiteCol:
-                return i18n("White");
+                return i18n("Column title", "White");
             default:
                 return QVariant();
         }
@@ -692,9 +692,9 @@ void DirectoryMergeWindow::reload()
     {
         int result = KMessageBox::warningYesNo(this,
                                                i18n("You are currently doing a folder merge. Are you sure, you want to abort the merge and rescan the folder?"),
-                                               i18n("Warning"),
-                                               KGuiItem(i18n("Rescan")),
-                                               KGuiItem(i18n("Continue Merging")));
+                                               i18nc("Error dialog caption", "Warning"),
+                                               KGuiItem(i18nc("Title for rescan button", "Rescan")),
+                                               KGuiItem(i18nc("Title for continue button", "Continue Merging")));
         if(result != KMessageBox::Yes)
             return;
     }
@@ -2102,9 +2102,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareMergeStart(const 
                                                           "Choosing \"Simulate it\" will tell you what would happen.\n\n"
                                                           "Be aware that this program still has beta status "
                                                           "and there is NO WARRANTY whatsoever! Make backups of your vital data!"),
-                                                     i18n("Starting Merge"),
-                                                     KGuiItem(i18n("Do It")),
-                                                     KGuiItem(i18n("Simulate It")));
+                                                     i18n("Caption merger confirmation", "Starting Merge"),
+                                                     KGuiItem(i18nc("Button title to confirm merge", "Do It")),
+                                                     KGuiItem(i18nc("Button title to simulate merge", "Simulate It")));
         if(status == KMessageBox::Yes)
             m_bRealMergeStarted = true;
         else if(status == KMessageBox::No)
@@ -2253,9 +2253,9 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::mergeContinue(bool bStar
         int status = KMessageBox::warningYesNoCancel(mWindow,
                                                      i18n("There was an error in the last step.\n"
                                                           "Do you want to continue with the item that caused the error or do you want to skip this item?"),
-                                                     i18n("Continue merge after an error"),
-                                                     KGuiItem(i18n("Continue With Last Item")),
-                                                     KGuiItem(i18n("Skip Item")));
+                                                     i18nc("Caption for message dialog", "Continue merge after an error"),
+                                                     KGuiItem(i18nc("Continue button title", "Continue With Last Item")),
+                                                     KGuiItem(i18nc("Skip button title", "Skip Item")));
         if(status == KMessageBox::Yes)
             bContinueWithCurrentItem = true;
         else if(status == KMessageBox::No)

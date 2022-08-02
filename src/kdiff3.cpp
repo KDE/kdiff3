@@ -644,17 +644,17 @@ void KDiff3App::initActions(KActionCollection* ac)
     mGoPrevUnsolvedConflict->setToolTip(mGoPrevUnsolvedConflict->text() + includeWhitespace);
     mGoNextUnsolvedConflict = GuiUtils::createAction<QAction>(i18n("Go to Next Unsolved Conflict"), QIcon(QPixmap(nextunsolved)), i18n("Next\nUnsolved"), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_PageDown), this, &KDiff3App::slotGoNextUnsolvedConflict, ac, "go_next_unsolved_conflict");
     mGoNextUnsolvedConflict->setToolTip(mGoNextUnsolvedConflict->text() + includeWhitespace);
-    mGotoLine = GuiUtils::createAction<QAction>(i18n("Go to Line"), QIcon(QPixmap(gotoline)), i18n("Go\nLine"), QKeySequence(Qt::CTRL + Qt::Key_G), this, &KDiff3App::slotGoToLine, ac, "go_to_line");
+    mGotoLine = GuiUtils::createAction<QAction>(i18nc("Title for menu item", "Go to Line"), QIcon(QPixmap(gotoline)), i18nc("Text used for toolbar button.", "Go\nLine"), QKeySequence(Qt::CTRL + Qt::Key_G), this, &KDiff3App::slotGoToLine, ac, "go_to_line");
     mGoNextUnsolvedConflict->setToolTip(mGoNextUnsolvedConflict->text() + i18n(".\n Goto specified line."));
-    chooseA = GuiUtils::createAction<KToggleAction>(i18n("Select Line(s) From A"), QIcon(QPixmap(iconA)), i18n("Choose\nA"), QKeySequence(Qt::CTRL + Qt::Key_1), this, &KDiff3App::slotChooseA, ac, "merge_choose_a");
-    chooseB = GuiUtils::createAction<KToggleAction>(i18n("Select Line(s) From B"), QIcon(QPixmap(iconB)), i18n("Choose\nB"), QKeySequence(Qt::CTRL + Qt::Key_2), this, &KDiff3App::slotChooseB, ac, "merge_choose_b");
-    chooseC = GuiUtils::createAction<KToggleAction>(i18n("Select Line(s) From C"), QIcon(QPixmap(iconC)), i18n("Choose\nC"), QKeySequence(Qt::CTRL + Qt::Key_3), this, &KDiff3App::slotChooseC, ac, "merge_choose_c");
-    autoAdvance = GuiUtils::createAction<KToggleAction>(i18n("Automatically Go to Next Unsolved Conflict After Source Selection"), QIcon(QPixmap(autoadvance)), i18n("Auto\nNext"), this, &KDiff3App::slotAutoAdvanceToggled, ac, "merge_autoadvance");
+    chooseA = GuiUtils::createAction<KToggleAction>(i18nc("Title for menu item", "Select Line(s) From A"), QIcon(QPixmap(iconA)), i18nc("Text used for select A toolbar button.", "Choose\nA"), QKeySequence(Qt::CTRL + Qt::Key_1), this, &KDiff3App::slotChooseA, ac, "merge_choose_a");
+    chooseB = GuiUtils::createAction<KToggleAction>(i18nc("Title for menu item", "Select Line(s) From B"), QIcon(QPixmap(iconB)), i18nc("Text used for select B when toolbar button.", "Choose\nB"), QKeySequence(Qt::CTRL + Qt::Key_2), this, &KDiff3App::slotChooseB, ac, "merge_choose_b");
+    chooseC = GuiUtils::createAction<KToggleAction>(i18nc("Title for menu item", "Select Line(s) From C"), QIcon(QPixmap(iconC)), i18nc("Text used for select C toolbar button.", "Choose\nC"), QKeySequence(Qt::CTRL + Qt::Key_3), this, &KDiff3App::slotChooseC, ac, "merge_choose_c");
+    autoAdvance = GuiUtils::createAction<KToggleAction>(i18nc("Title for menu item", "Automatically Go to Next Unsolved Conflict After Source Selection"), QIcon(QPixmap(autoadvance)), i18nc("Auto goto next unsolced toolbar text.", "Auto\nNext"), this, &KDiff3App::slotAutoAdvanceToggled, ac, "merge_autoadvance");
 
-    showWhiteSpaceCharacters = GuiUtils::createAction<KToggleAction>(i18n("Show Space && Tabulator Characters"), QIcon(QPixmap(showwhitespacechars)), i18n("White\nCharacters"), this, &KDiff3App::slotShowWhiteSpaceToggled, ac, "diff_show_whitespace_characters");
-    showWhiteSpace = GuiUtils::createAction<KToggleAction>(i18n("Show White Space"), QIcon(QPixmap(showwhitespace)), i18n("White\nDeltas"), this, &KDiff3App::slotShowWhiteSpaceToggled, ac, "diff_show_whitespace");
+    showWhiteSpaceCharacters = GuiUtils::createAction<KToggleAction>(i18n("Show Space && Tabulator Characters"), QIcon(QPixmap(showwhitespacechars)), i18nc("Show whitespace toolbar text.", "White\nCharacters"), this, &KDiff3App::slotShowWhiteSpaceToggled, ac, "diff_show_whitespace_characters");
+    showWhiteSpace = GuiUtils::createAction<KToggleAction>(i18n("Show White Space"), QIcon(QPixmap(showwhitespace)), i18nc("Show whitespace changes toolbar text.", "White\nDeltas"), this, &KDiff3App::slotShowWhiteSpaceToggled, ac, "diff_show_whitespace");
 
-    showLineNumbers = GuiUtils::createAction<KToggleAction>(i18n("Show Line Numbers"), QIcon(QPixmap(showlinenumbers)), i18n("Line\nNumbers"), this, &KDiff3App::slotShowLineNumbersToggled, ac, "diff_showlinenumbers");
+    showLineNumbers = GuiUtils::createAction<KToggleAction>(i18n("Show Line Numbers"), QIcon(QPixmap(showlinenumbers)), i18nc("Show line numbers toolbar text", "Line\nNumbers"), this, &KDiff3App::slotShowLineNumbersToggled, ac, "diff_showlinenumbers");
 
     mAutoSolve = GuiUtils::createAction<QAction>(i18n("Automatically Solve Simple Conflicts"), this, &KDiff3App::slotAutoSolve, ac, "merge_autosolve");
     mUnsolve = GuiUtils::createAction<QAction>(i18n("Set Deltas to Conflicts"), this, &KDiff3App::slotUnsolve, ac, "merge_autounsolve");
@@ -732,7 +732,7 @@ bool KDiff3App::queryClose()
     {
         int result = KMessageBox::warningYesNoCancel(this,
                                                      i18n("The merge result has not been saved."),
-                                                     i18n("Warning"),
+                                                     i18nc("Error dialog caption", "Warning"),
                                                      KGuiItem(i18n("Save && Quit")),
                                                      KGuiItem(i18n("Quit Without Saving")));
         if(result == KMessageBox::Cancel)
@@ -742,7 +742,7 @@ bool KDiff3App::queryClose()
             slotFileSave();
             if(m_bOutputModified)
             {
-                KMessageBox::sorry(this, i18n("Saving the merge result failed."), i18n("Warning"));
+                KMessageBox::sorry(this, i18n("Saving the merge result failed."), i18nc("Error dialog caption", "Warning"));
                 return false;
             }
         }
@@ -754,7 +754,7 @@ bool KDiff3App::queryClose()
     {
         int result = KMessageBox::warningYesNo(this,
                                                i18n("You are currently doing a folder merge. Are you sure, you want to abort?"),
-                                               i18n("Warning"),
+                                               i18nc("Error dialog caption", "Warning"),
                                                KStandardGuiItem::quit(),
                                                KStandardGuiItem::cont() /* i18n("Continue Merging") */);
         if(result != KMessageBox::Yes)
