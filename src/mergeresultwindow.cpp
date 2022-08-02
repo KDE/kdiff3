@@ -323,7 +323,7 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
             int result = KMessageBox::warningYesNo(this,
                                                    i18n("The output has been modified.\n"
                                                         "If you continue your changes will be lost."),
-                                                   i18n("Warning"),
+                                                   i18nc("Error dialog caption", "Warning"),
                                                    KStandardGuiItem::cont(),
                                                    KStandardGuiItem::cancel());
             if(result == KMessageBox::No)

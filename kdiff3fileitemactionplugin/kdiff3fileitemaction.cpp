@@ -140,7 +140,7 @@ QList<QAction*> KDiff3FileItemAction::actions(const KFileItemListProperties& fil
                 pHistoryMenu->addAction(pAction);
             }
 
-            pAction = new QAction(i18n("Clear list"), this);
+            pAction = new QAction(i18nc("Contexualmenu option to cleat comparison list", "Clear list"), this);
             connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotClearList);
             pActionMenu->addAction(pAction);
             pAction->setEnabled(historyCount > 0);
@@ -148,7 +148,7 @@ QList<QAction*> KDiff3FileItemAction::actions(const KFileItemListProperties& fil
     }
     else if(m_list.count() == 2)
     {
-        pAction = new QAction(i18n("Compare"), this);
+        pAction = new QAction(i18nc("Contexualmenu option ", "Compare"), this);
         connect(pAction, &QAction::triggered, this, &KDiff3FileItemAction::slotCompareTwoFiles);
         pActionMenu->addAction(pAction);
     }

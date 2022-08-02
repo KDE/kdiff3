@@ -98,9 +98,9 @@ int main(int argc, char* argv[])
     QString appVersion(KDIFF3_VERSION_STRING);
 
     if(sizeof(void*) == 8)
-        appVersion += i18n(" (64 bit)");
+        appVersion += i18nc("Program version info.", " (64 bit)");
     else if(sizeof(void*) == 4)
-        appVersion += i18n(" (32 bit)");
+        appVersion += i18nc("Program version info.", " (32 bit)");
     const QString description = i18n("Tool for Comparison and Merge of Files and Folders");
     const QString copyright = i18n("(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port");
     const QString homePage = QStringLiteral("https://kde.org/applications/development/kdiff3");

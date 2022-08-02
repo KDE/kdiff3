@@ -117,7 +117,7 @@ FontChooser::FontChooser(QWidget* pParent):
     m_pExampleTextEdit->setReadOnly(true);
     pLayout->addWidget(m_pExampleTextEdit);
 
-    m_pSelectFont = new QPushButton(i18n("Change Font"));
+    m_pSelectFont = new QPushButton(i18nc("Button title", "Change Font"));
     m_pSelectFont->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     chk_connect(m_pSelectFont, &QPushButton::clicked, this, &FontChooser::slotSelectFont);
     pLayout->addWidget(m_pSelectFont);
@@ -133,7 +133,7 @@ void FontChooser::setFont(const QFont& font, bool)
 {
     m_font = font;
     m_pExampleTextEdit->setFont(m_font);
-    m_pLabel->setText(i18n("Font: %1, %2, %3\n\nExample:", m_font.family(), m_font.styleName(), m_font.pointSize()));
+    m_pLabel->setText(i18nc("Font sample display, %1 = family, %2 = style, %3 = size", "Font: %1, %2, %3\n\nExample:", m_font.family(), m_font.styleName(), m_font.pointSize()));
 
     //update();
 }
@@ -143,7 +143,7 @@ void FontChooser::slotSelectFont()
     bool bOk;
     m_font = QFontDialog::getFont(&bOk, m_font);
     m_pExampleTextEdit->setFont(m_font);
-    m_pLabel->setText(i18n("Font: %1, %2, %3\n\nExample:", m_font.family(), m_font.styleName(), m_font.pointSize()));
+    m_pLabel->setText(i18n("Font sample display, %1 = family, %2 = style, %3 = size", "Font: %1, %2, %3\n\nExample:", m_font.family(), m_font.styleName(), m_font.pointSize()));
 }
 
 class OptionFontChooser: public FontChooser, public OptionFont

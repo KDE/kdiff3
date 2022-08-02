@@ -854,7 +854,7 @@ void KDiff3App::slotFileOpen()
     {
         int result = KMessageBox::warningYesNo(this,
                                                i18n("You are currently doing a folder merge. Are you sure, you want to abort?"),
-                                               i18n("Warning"),
+                                               i18nc("Error dialog caption", "Warning"),
                                                KGuiItem(i18n("Abort")),
                                                KGuiItem(i18n("Continue Merging")));
         if(result != KMessageBox::Yes)
@@ -1703,7 +1703,7 @@ bool KDiff3App::canContinue()
     {
         int result = KMessageBox::warningYesNoCancel(this,
                                                      i18n("The merge result has not been saved."),
-                                                     i18n("Warning"),
+                                                     i18nc("Error dialog caption", "Warning"),
                                                      KGuiItem(i18n("Save && Continue")),
                                                      KGuiItem(i18n("Continue Without Saving")));
         if(result == KMessageBox::Cancel)
@@ -1713,7 +1713,7 @@ bool KDiff3App::canContinue()
             slotFileSave();
             if(m_bOutputModified)
             {
-                KMessageBox::sorry(this, i18n("Saving the merge result failed."), i18n("Warning"));
+                KMessageBox::sorry(this, i18n("Saving the merge result failed."), i18nc("Error dialog caption", "Warning"));
                 return false;
             }
         }
