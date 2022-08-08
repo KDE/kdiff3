@@ -4,7 +4,7 @@
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 #include "optiondialog.h"
 #include "OptionItems.h"
 #include "ui_scroller.h"
@@ -194,10 +194,12 @@ class OptionLineEdit: public QComboBox, public OptionString
         m_list.push_back(defaultVal);
         insertText();
     }
+
     void setToDefault() override
     {
         setEditText(getDefault());
     }
+
     void setToCurrent() override
     {
         setEditText(getCurrent());
@@ -209,10 +211,12 @@ class OptionLineEdit: public QComboBox, public OptionString
         apply(currentText());
         insertText();
     }
+
     void write(ValueMap* config) const override
     {
         config->writeEntry(m_saveName, m_list);
     }
+
     void read(ValueMap* config) override
     {
         m_list = config->readEntry(m_saveName, QStringList(m_defaultVal));
@@ -287,6 +291,7 @@ class OptionComboBox: public QComboBox, public OptionItemBase
         m_defaultVal = defaultVal;
         setEditable(false);
     }
+
     OptionComboBox(int defaultVal, const QString& saveName, QString* pVarStr,
                    QWidget* pParent):
         QComboBox(pParent),
@@ -297,6 +302,7 @@ class OptionComboBox: public QComboBox, public OptionItemBase
         m_defaultVal = defaultVal;
         setEditable(false);
     }
+
     void setToDefault() override
     {
         setCurrentIndex(m_defaultVal);
@@ -305,6 +311,7 @@ class OptionComboBox: public QComboBox, public OptionItemBase
             *m_pVarStr = currentText();
         }
     }
+
     void setToCurrent() override
     {
         if(m_pVarNum != nullptr)
@@ -312,6 +319,7 @@ class OptionComboBox: public QComboBox, public OptionItemBase
         else
             setText(*m_pVarStr);
     }
+
     using OptionItemBase::apply;
     void apply() override
     {
@@ -324,6 +332,7 @@ class OptionComboBox: public QComboBox, public OptionItemBase
             *m_pVarStr = currentText();
         }
     }
+
     void write(ValueMap* config) const override
     {
         if(m_pVarStr != nullptr)
@@ -331,6 +340,7 @@ class OptionComboBox: public QComboBox, public OptionItemBase
         else
             config->writeEntry(m_saveName, *m_pVarNum);
     }
+
     void read(ValueMap* config) override
     {
         if(m_pVarStr != nullptr)
@@ -338,6 +348,7 @@ class OptionComboBox: public QComboBox, public OptionItemBase
         else
             *m_pVarNum = config->readEntry(m_saveName, *m_pVarNum);
     }
+
     void preserveImp() override
     {
         if(m_pVarStr != nullptr)
@@ -349,6 +360,7 @@ class OptionComboBox: public QComboBox, public OptionItemBase
             m_preservedNumVal = *m_pVarNum;
         }
     }
+
     void unpreserveImp() override
     {
         if(m_pVarStr != nullptr)
