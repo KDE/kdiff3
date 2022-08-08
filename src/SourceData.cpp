@@ -355,7 +355,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
         //Routine result of directory compare finding a file that isn't in all locations.
         if(!m_fileAccess.isValid()) return;
 
-        assert(!m_fileAccess.isDir());
+        assert(!m_fileAccess.exists() || !m_fileAccess.isDir());
         if(!m_fileAccess.isNormal())
         {
             mErrors.append(i18n("%1 is not a normal file.", m_fileAccess.prettyAbsPath()));
