@@ -45,7 +45,7 @@ OpenDialog::OpenDialog(
     //Abort if verticalLayout is not the immediate child of the dialog. This interferes with re-sizing.
     assert(dialogUi.virticalLayout->parent() == this);
 
-    dialogUi.lineA->insertItems(0, m_pOptions->m_recentAFiles);
+    dialogUi.lineA->insertItems(0, m_pOptions->getRecentFilesA());
     dialogUi.lineA->setEditText(n1);
 
     QPushButton* button = dialogUi.fileSelectA;
@@ -55,7 +55,7 @@ OpenDialog::OpenDialog(
     chk_connect_a(dialogUi.lineA, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
     dialogUi.lineB->setEditable(true);
-    dialogUi.lineB->insertItems(0, m_pOptions->m_recentBFiles);
+    dialogUi.lineB->insertItems(0, m_pOptions->getRecentFilesB());
     dialogUi.lineB->setEditText(n2);
 
     dialogUi.lineB->setMinimumWidth(200);
@@ -66,7 +66,7 @@ OpenDialog::OpenDialog(
     chk_connect_a(dialogUi.lineB, &QComboBox::editTextChanged, this, &OpenDialog::inputFilenameChanged);
 
     dialogUi.lineC->setEditable(true);
-    dialogUi.lineC->insertItems(0, m_pOptions->m_recentCFiles);
+    dialogUi.lineC->insertItems(0, m_pOptions->getRecentFilesC());
     dialogUi.lineC->setEditText(n3);
     dialogUi.lineC->setMinimumWidth(200);
     button = dialogUi.fileSelectC;
@@ -90,7 +90,7 @@ OpenDialog::OpenDialog(
     chk_connect_a(m, &QMenu::triggered, this, &OpenDialog::slotSwapCopyNames);
     button->setMenu(m);
 
-    dialogUi.lineOut->insertItems(0, m_pOptions->m_recentOutputFiles);
+    dialogUi.lineOut->insertItems(0, m_pOptions->getRecentOutputFiles());
     dialogUi.lineOut->setEditText(outputName);
 
     button = dialogUi.selectOutputFile;
@@ -220,35 +220,35 @@ void OpenDialog::accept()
 
     QString s = dialogUi.lineA->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    QStringList* sl = &m_pOptions->m_recentAFiles;
+    QStringList& sl = m_pOptions->getRecentFilesA();
     // If an item exist, remove it from the list and reinsert it at the beginning.
-    sl->removeAll(s);
-    if(!s.isEmpty()) sl->prepend(s);
-    if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
+    sl.removeAll(s);
+    if(!s.isEmpty()) sl.prepend(s);
+    if(sl.count() > maxNofRecentFiles) sl.erase(sl.begin() + maxNofRecentFiles, sl.end());
 
     fixCurrentText(dialogUi.lineB);
     s = dialogUi.lineB->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    sl = &m_pOptions->m_recentBFiles;
-    sl->removeAll(s);
-    if(!s.isEmpty()) sl->prepend(s);
-    if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
+    sl = m_pOptions->getRecentFilesB();
+    sl.removeAll(s);
+    if(!s.isEmpty()) sl.prepend(s);
+    if(sl.count() > maxNofRecentFiles) sl.erase(sl.begin() + maxNofRecentFiles, sl.end());
 
     fixCurrentText(dialogUi.lineC);
     s = dialogUi.lineC->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    sl = &m_pOptions->m_recentCFiles;
-    sl->removeAll(s);
-    if(!s.isEmpty()) sl->prepend(s);
-    if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
+    sl = m_pOptions->getRecentFilesC();
+    sl.removeAll(s);
+    if(!s.isEmpty()) sl.prepend(s);
+    if(sl.count() > maxNofRecentFiles) sl.erase(sl.begin() + maxNofRecentFiles, sl.end());
 
     fixCurrentText(dialogUi.lineOut);
     s = dialogUi.lineOut->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    sl = &m_pOptions->m_recentOutputFiles;
-    sl->removeAll(s);
-    if(!s.isEmpty()) sl->prepend(s);
-    if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
+    sl = m_pOptions->getRecentOutputFiles();
+    sl.removeAll(s);
+    if(!s.isEmpty()) sl.prepend(s);
+    if(sl.count() > maxNofRecentFiles) sl.erase(sl.begin() + maxNofRecentFiles, sl.end());
 
     QDialog::accept();
 }

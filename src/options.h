@@ -98,6 +98,12 @@ class Options
 
     [[nodiscard]] const QColor& conflictColor() const { return m_colorForConflict; }
 
+    [[nodiscard]] QStringList& getRecentFilesA() { return m_recentAFiles; }
+    [[nodiscard]] QStringList& getRecentFilesB() { return m_recentBFiles; }
+    [[nodiscard]] QStringList& getRecentFilesC() { return m_recentCFiles; }
+
+    [[nodiscard]] QStringList& getRecentOutputFiles() { return m_recentOutputFiles; }
+
     inline void beginPrint() { mPrintMode = true; }
     inline void endPrint() { mPrintMode = false; }
 
