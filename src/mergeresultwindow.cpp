@@ -1315,10 +1315,9 @@ bool MergeResultWindow::doRelevantChangesExist()
     if(m_pldC == nullptr || m_mergeLineList.list().size() <= 1)
         return true;
 
-    MergeLineListImp::const_iterator i;
-    for(i = m_mergeLineList.list().cbegin(); i != m_mergeLineList.list().cend(); ++i)
+    for(const MergeLine& mergeLine: m_mergeLineList.list())
     {
-        if((i->isConflict() && i->list().begin()->src() != e_SrcSelector::C) || i->source() == e_SrcSelector::B)
+        if((mergeLine.isConflict() && mergeLine.list().cbegin()->src() != e_SrcSelector::C) || mergeLine.source() == e_SrcSelector::B)
         {
             return true;
         }
