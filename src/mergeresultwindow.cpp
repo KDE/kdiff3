@@ -492,7 +492,7 @@ void MergeResultWindow::setOverviewMode(e_OverviewMode eOverviewMode)
 }
 
 // Check whether we should ignore current delta when moving to next/previous delta
-bool MergeResultWindow::checkOverviewIgnore(MergeLineListImp::iterator& i) const
+bool MergeResultWindow::checkOverviewIgnore(const MergeLineListImp::const_iterator i) const
 {
     if(mOverviewMode == e_OverviewMode::eOMNormal) return false;
     if(mOverviewMode == e_OverviewMode::eOMAvsB)
@@ -1032,7 +1032,7 @@ void MergeResultWindow::collectHistoryInformation(
     std::list<HistoryMap::iterator>& hitList // list of iterators
 )
 {
-    std::list<HistoryMap::iterator>::iterator itHitListFront = hitList.begin();
+    std::list<HistoryMap::iterator>::const_iterator itHitListFront = hitList.cbegin();
     Diff3LineList::const_iterator id3l = historyRange.start;
     QString historyLead;
 
@@ -1255,7 +1255,7 @@ void MergeResultWindow::slotMergeHistory()
         else
         {
             // Create history in order of appearance
-            std::list<HistoryMap::iterator>::iterator hlit;
+            std::list<HistoryMap::iterator>::const_iterator hlit;
             for(hlit = hitList.begin(); hlit != hitList.end(); ++hlit)
             {
                 if(historyCount == m_pOptions->m_maxNofHistoryEntries)
@@ -1315,8 +1315,8 @@ bool MergeResultWindow::doRelevantChangesExist()
     if(m_pldC == nullptr || m_mergeLineList.list().size() <= 1)
         return true;
 
-    MergeLineListImp::iterator i;
-    for(i = m_mergeLineList.list().begin(); i != m_mergeLineList.list().end(); ++i)
+    MergeLineListImp::const_iterator i;
+    for(i = m_mergeLineList.list().cbegin(); i != m_mergeLineList.list().cend(); ++i)
     {
         if((i->isConflict() && i->list().begin()->src() != e_SrcSelector::C) || i->source() == e_SrcSelector::B)
         {
