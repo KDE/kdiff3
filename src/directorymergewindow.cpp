@@ -861,7 +861,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
             text += i18n("Folder C \"%1\" does not exist or is not a folder.\n", dirC.prettyAbsPath());
         }
 
-        KMessageBox::sorry(mWindow, text, i18n("Folder Opening Error"));
+        KMessageBox::error(mWindow, text, i18n("Folder Opening Error"));
         return false;
     }
 
@@ -1863,7 +1863,7 @@ void DirectoryMergeWindow::compareCurrentFile()
 
     if(d->m_bRealMergeStarted)
     {
-        KMessageBox::sorry(this, i18n("This operation is currently not possible."), i18n("Operation Not Possible"));
+        KMessageBox::error(this, i18n("This operation is currently not possible."), i18n("Operation Not Possible"));
         return;
     }
     QStringList errors;
@@ -1888,7 +1888,7 @@ void DirectoryMergeWindow::slotCompareExplicitlySelectedFiles()
 
     if(d->m_bRealMergeStarted)
     {
-        KMessageBox::sorry(this, i18n("This operation is currently not possible."), i18n("Operation Not Possible"));
+        KMessageBox::error(this, i18n("This operation is currently not possible."), i18n("Operation Not Possible"));
         return;
     }
 
@@ -1913,7 +1913,7 @@ void DirectoryMergeWindow::slotMergeExplicitlySelectedFiles()
 
     if(d->m_bRealMergeStarted)
     {
-        KMessageBox::sorry(this, i18n("This operation is currently not possible."), i18n("Operation Not Possible"));
+        KMessageBox::error(this, i18n("This operation is currently not possible."), i18n("Operation Not Possible"));
         return;
     }
     QStringList errors;
@@ -2194,7 +2194,7 @@ void DirectoryMergeWindow::mergeCurrentFile()
 
     if(d->m_bRealMergeStarted)
     {
-        KMessageBox::sorry(this, i18n("This operation is currently not possible because folder merge is currently running."), i18n("Operation Not Possible"));
+        KMessageBox::error(this, i18n("This operation is currently not possible because folder merge is currently running."), i18n("Operation Not Possible"));
         return;
     }
 
