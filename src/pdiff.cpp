@@ -929,7 +929,7 @@ void KDiff3App::slotFileOpen()
                     if(!m_sd3->getErrors().isEmpty())
                         text += " - " + m_sd3->getAliasName() + '\n' + m_sd3->getErrors().join('\n') + '\n';
 
-                    KMessageBox::sorry(this, text, i18n("File open error"));
+                    KMessageBox::error(this, text, i18n("File open error"));
 
                     continue;
                 }
@@ -1713,7 +1713,7 @@ bool KDiff3App::canContinue()
             slotFileSave();
             if(m_bOutputModified)
             {
-                KMessageBox::sorry(this, i18n("Saving the merge result failed."), i18nc("Error dialog caption", "Warning"));
+                KMessageBox::error(this, i18n("Saving the merge result failed."), i18nc("Error dialog caption", "Warning"));
                 return false;
             }
         }

@@ -178,7 +178,7 @@ bool KDiff3Part::openFile()
 
     if(fileName1.isEmpty() && fileName2.isEmpty())
     {
-        KMessageBox::sorry(m_widget, i18n("Could not find files for comparison."));
+        KMessageBox::error(m_widget, i18n("Could not find files for comparison."));
         return false;
     }
 
@@ -264,7 +264,7 @@ bool KDiff3Part::openFile()
     }
     else
     {
-        KMessageBox::sorry(m_widget, i18n("Could not find files for comparison."));
+        KMessageBox::error(m_widget, i18n("Could not find files for comparison."));
     }
 
     return true;
