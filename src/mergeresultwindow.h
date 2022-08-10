@@ -67,34 +67,34 @@ class MergeResultWindow: public QWidget
     void reset();
 
     bool saveDocument(const QString& fileName, QTextCodec* pEncoding, e_LineEndStyle eLineEndStyle);
-    int getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts = nullptr) const;
+    [[nodiscard]] int getNumberOfUnsolvedConflicts(int* pNrOfWhiteSpaceConflicts = nullptr) const;
     void choose(e_SrcSelector selector);
     void chooseGlobal(e_SrcSelector selector, bool bConflictsOnly, bool bWhiteSpaceOnly);
 
     int getMaxTextWidth();         // width of longest text line
     [[nodiscard]] int getNofLines() const;
-    int getVisibleTextAreaWidth() const; // text area width without the border
-    int getNofVisibleLines() const;
-    QString getSelection() const;
+    [[nodiscard]] int getVisibleTextAreaWidth() const; // text area width without the border
+    [[nodiscard]] int getNofVisibleLines() const;
+    [[nodiscard]] QString getSelection() const;
     void resetSelection();
     void showNumberOfConflicts();
-    bool isDeltaAboveCurrent() const;
-    bool isDeltaBelowCurrent() const;
-    bool isConflictAboveCurrent() const;
-    bool isConflictBelowCurrent() const;
-    bool isUnsolvedConflictAtCurrent() const;
-    bool isUnsolvedConflictAboveCurrent() const;
-    bool isUnsolvedConflictBelowCurrent() const;
+    [[nodiscard]] bool isDeltaAboveCurrent() const;
+    [[nodiscard]] bool isDeltaBelowCurrent() const;
+    [[nodiscard]] bool isConflictAboveCurrent() const;
+    [[nodiscard]] bool isConflictBelowCurrent() const;
+    [[nodiscard]] bool isUnsolvedConflictAtCurrent() const;
+    [[nodiscard]] bool isUnsolvedConflictAboveCurrent() const;
+    [[nodiscard]] bool isUnsolvedConflictBelowCurrent() const;
     bool findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive);
     void setSelection(int firstLine, int startPos, int lastLine, int endPos);
-    e_OverviewMode getOverviewMode() const;
+    [[nodiscard]] e_OverviewMode getOverviewMode() const;
 
     void slotUpdateAvailabilities();
 
   public Q_SLOTS:
     void setOverviewMode(e_OverviewMode eOverviewMode);
     void setFirstLine(QtNumberType firstLine);
-    void setHorizScrollOffset(int horizScrollOffset);
+    void setHorizScrollOffset(const int horizScrollOffset);
 
     void slotGoCurrent();
     void slotGoTop();

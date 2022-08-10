@@ -420,7 +420,7 @@ void MergeResultWindow::setFirstLine(QtNumberType firstLine)
     update();
 }
 
-void MergeResultWindow::setHorizScrollOffset(int horizScrollOffset)
+void MergeResultWindow::setHorizScrollOffset(const int horizScrollOffset)
 {
     m_horizScrollOffset = std::max(0, horizScrollOffset);
     update();
@@ -566,7 +566,7 @@ bool MergeResultWindow::isDeltaAboveCurrent() const
 {
     bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
     if(m_mergeLineList.list().empty()) return false;
-    MergeLineListImp::iterator i = m_currentMergeLineIt;
+    MergeLineListImp::const_iterator i = m_currentMergeLineIt;
     if(i == m_mergeLineList.list().begin()) return false;
     do
     {
@@ -579,10 +579,10 @@ bool MergeResultWindow::isDeltaAboveCurrent() const
 
 bool MergeResultWindow::isDeltaBelowCurrent() const
 {
-    bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
+    const bool bSkipWhiteConflicts = !m_pOptions->m_bShowWhiteSpace;
     if(m_mergeLineList.list().empty()) return false;
 
-    MergeLineListImp::iterator i = m_currentMergeLineIt;
+    MergeLineListImp::const_iterator i = m_currentMergeLineIt;
     if(i != m_mergeLineList.list().end())
     {
         ++i;
@@ -1340,7 +1340,7 @@ void MergeResultWindow::slotJoinDiffs(int firstD3lLineIdx, int lastD3lLineIdx)
     MergeLineListImp::iterator iMLLEnd = m_mergeLineList.list().end();
     for(i = m_mergeLineList.list().begin(); i != m_mergeLineList.list().end(); ++i)
     {
-        MergeLine& ml = *i;
+        const MergeLine& ml = *i;
         if(firstD3lLineIdx >= ml.getIndex() && firstD3lLineIdx < ml.getIndex() + ml.sourceRangeLength())
         {
             iMLLStart = i;
