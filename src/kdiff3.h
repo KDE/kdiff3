@@ -425,7 +425,6 @@ public Q_SLOTS:
     WindowTitleWidget* m_pMergeResultWindowTitle;
     static bool m_bTripleDiff;
 
-    //QSplitter* m_pDirectoryMergeSplitter = nullptr;
     QDockWidget* m_pDirectoryMergeDock = nullptr;
     DirectoryMergeWindow* m_pDirectoryMergeWindow = nullptr;
     QDockWidget* m_pDirectoryMergeInfoDock = nullptr;
