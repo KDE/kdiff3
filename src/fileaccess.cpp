@@ -632,7 +632,7 @@ qint64 FileAccess::size() const
         return m_fileInfo.size();
 }
 
-QUrl FileAccess::url() const
+const QUrl& FileAccess::url() const
 {
     return m_url;
 }
@@ -681,7 +681,7 @@ bool FileAccess::isHidden() const
         return m_fileInfo.isHidden();
 }
 
-QString FileAccess::readLink() const
+const QString& FileAccess::readLink() const
 {
     return m_linkTarget;
 }
@@ -695,7 +695,7 @@ QString FileAccess::absoluteFilePath() const
 } // Full abs path
 
 // Just the name-part of the path, without parent directories
-QString FileAccess::fileName(bool needTmp) const
+const QString& FileAccess::fileName(bool needTmp) const
 {
     if(!isLocal())
         return (needTmp) ? m_localCopy : m_name;
@@ -723,7 +723,7 @@ QString FileAccess::fileRelPath() const
 
         const FileAccess* curEntry = this;
         path = fileName();
-        //Avoid recursing to FileAccess::fileRelPath or we can get very large stacks.
+        //Avoid recursively calling FileAccess::fileRelPath or we can get very large stacks.
         curEntry = curEntry->parent();
         while(curEntry != nullptr)
         {
@@ -747,7 +747,7 @@ QString FileAccess::prettyAbsPath() const
     return isLocal() ? absoluteFilePath() : m_url.toDisplayString();
 }
 
-QDateTime FileAccess::lastModified() const
+const QDateTime& FileAccess::lastModified() const
 {
     assert(!m_modificationTime.isNull());
     return m_modificationTime;
@@ -1006,7 +1006,7 @@ bool FileAccess::symLink(const QString& linkTarget, const QString& linkLocation)
 
 bool FileAccess::exists(const QString& name)
 {
-    FileAccess fa(name);
+    const FileAccess fa(name);
     return fa.exists();
 }
 
@@ -1018,8 +1018,8 @@ qint64 FileAccess::sizeForReading()
         // Size couldn't be determined. Copy the file to a local temp place.
         if(createLocalCopy())
         {
-            QString localCopy = tmpFile->fileName();
-            QFileInfo fi(localCopy);
+            const QString localCopy = tmpFile->fileName();
+            const QFileInfo fi(localCopy);
 
             m_size = fi.size();
             m_localCopy = localCopy;
@@ -1050,7 +1050,7 @@ QString FileAccess::cleanPath(const QString& path) // static
         Tell Qt to treat the supplied path as user input otherwise it will not make useful decisions
         about how to convert from the possibly local or remote "path" string to QUrl.
     */
-    QUrl url = QUrl::fromUserInput(path, QString(), QUrl::AssumeLocalFile);
+    const QUrl url = QUrl::fromUserInput(path, QString(), QUrl::AssumeLocalFile);
 
     if(FileAccess::isLocal(url))
     {
@@ -1067,7 +1067,7 @@ bool FileAccess::createBackup(const QString& bakExtension)
     if(exists())
     {
         // First rename the existing file to the bak-file. If a bak-file file exists, delete that.
-        QString bakName = absoluteFilePath() + bakExtension;
+        const QString bakName = absoluteFilePath() + bakExtension;
         FileAccess bakFile(bakName, true /*bWantToWrite*/);
         if(bakFile.exists())
         {
@@ -1097,7 +1097,7 @@ void FileAccess::doError()
 
 void FileAccess::filterList(const QString& dir, DirectoryList* pDirList, const QString& filePattern,
                             const QString& fileAntiPattern, const QString& dirAntiPattern,
-                            IgnoreList& ignoreList)
+                            const IgnoreList& ignoreList)
 {
     //TODO: Ask os for this information don't hard code it.
 #if defined(Q_OS_WIN)
@@ -1107,12 +1107,12 @@ void FileAccess::filterList(const QString& dir, DirectoryList* pDirList, const Q
 #endif
 
     // Now remove all entries that should be ignored:
-    DirectoryList::iterator i;
-    for(i = pDirList->begin(); i != pDirList->end();)
+    DirectoryList::const_iterator i;
+    for(i = pDirList->cbegin(); i != pDirList->cend();)
     {
-        DirectoryList::iterator i2 = i;
+        DirectoryList::const_iterator i2 = i;
         ++i2;
-        QString fileName = i->fileName();
+        const QString& fileName = i->fileName();
 
         if((i->isFile() &&
             (!Utils::wildcardMultiMatch(filePattern, fileName, bCaseSensitive) ||

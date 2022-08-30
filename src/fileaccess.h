@@ -65,15 +65,15 @@ class FileAccess
     [[nodiscard]] virtual bool isWritable() const;
     [[nodiscard]] virtual bool isExecutable() const;
     [[nodiscard]] virtual bool isHidden() const;
-    [[nodiscard]] QString readLink() const;
+    [[nodiscard]] const QString& readLink() const;
 
-    [[nodiscard]] QDateTime lastModified() const;
+    [[nodiscard]] const QDateTime& lastModified() const;
 
-    [[nodiscard]] QString displayName() const { return mDisplayName.isEmpty() ? fileName() : mDisplayName; }
-    [[nodiscard]] QString fileName(bool needTmp = false) const; // Just the name-part of the path, without parent directories
+    [[nodiscard]] const QString& displayName() const { return mDisplayName.isEmpty() ? fileName() : mDisplayName; }
+    [[nodiscard]] const QString& fileName(bool needTmp = false) const; // Just the name-part of the path, without parent directories
     [[nodiscard]] QString fileRelPath() const;                  // The path relative to base comparison directory
     [[nodiscard]] QString prettyAbsPath() const;
-    [[nodiscard]] QUrl url() const;
+    [[nodiscard]] const QUrl& url() const;
     void setUrl(const QUrl& inUrl) { m_url = inUrl; }
 
     //Workaround for QUrl::toDisplayString/QUrl::toString behavior that does not fit KDiff3's expectations
@@ -83,7 +83,7 @@ class FileAccess
         if(!isLocal(url)) return url.toDisplayString();
 
         //work around for bad path in windows drop event urls. (Qt 5.15.2 affected)
-        QString path = url.toLocalFile();
+        const QString path = url.toLocalFile();
         if(!path.isEmpty() && !path.startsWith('/'))
           return path;
 
@@ -126,7 +126,7 @@ class FileAccess
     void doError();
     void filterList(const QString& dir, DirectoryList* pDirList, const QString& filePattern,
                     const QString& fileAntiPattern, const QString& dirAntiPattern,
-                    IgnoreList& ignoreList);
+                    const IgnoreList& ignoreList);
 
     [[nodiscard]] QDir getBaseDirectory() const { return m_baseDir; }
 
