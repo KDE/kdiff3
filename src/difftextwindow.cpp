@@ -370,7 +370,10 @@ void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
         {
             QString error;
 
-            error = d->sourceData->setData(text);
+            d->sourceData->setData(text);
+            const QStringList& errors = d->sourceData->getErrors();
+            if(!errors.isEmpty())
+                error = d->sourceData->getErrors()[0];
 
             if(!error.isEmpty())
             {

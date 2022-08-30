@@ -135,7 +135,7 @@ void SourceData::setEncoding(QTextCodec* pEncoding)
     m_pEncoding = pEncoding;
 }
 
-const QString SourceData::setData(const QString& data)
+void SourceData::setData(const QString& data)
 {
     mErrors.clear();
     // Create a temp file for preprocessing:
@@ -150,7 +150,7 @@ const QString SourceData::setData(const QString& data)
     if(!bSuccess)
     {
         mErrors.append(i18n("Writing clipboard data to temp file failed."));
-        return mErrors[0];
+        return;
     }
     else
     {
@@ -158,8 +158,6 @@ const QString SourceData::setData(const QString& data)
         mFromClipBoard = true;
         //m_fileAccess = FileAccess(); // Insure m_fileAccess is not valid
     }
-
-    return u8"";
 }
 
 const std::shared_ptr<LineDataVector>& SourceData::getLineDataForDiff() const

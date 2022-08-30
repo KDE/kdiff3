@@ -44,7 +44,7 @@ class SourceData
     [[nodiscard]] bool isText() const;                 // is it pure text (vs. binary data)
     [[nodiscard]] bool isIncompleteConversion() const; // true if some replacement characters were found
     [[nodiscard]] bool isFromBuffer() const;           // was it set via setData() (vs. setFileAccess() or setFilename())
-    [[nodiscard]] const QString setData(const QString& data);
+    void setData(const QString& data);
     [[nodiscard]] bool isValid() const; // Either no file is specified or reading was successful
 
     // Returns a list of error messages if anything went wrong
