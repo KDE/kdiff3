@@ -35,7 +35,7 @@ class MergeEditLine
         mChanged = false;
         mStr = QString();
     }
-    Q_REQUIRED_RESULT inline bool isConflict() const { return mSrc == e_SrcSelector::None && !mLineRemoved && !mChanged; }
+    [[nodiscard]] inline bool isConflict() const { return mSrc == e_SrcSelector::None && !mLineRemoved && !mChanged; }
 
     void setRemoved(e_SrcSelector src = e_SrcSelector::None)
     {
@@ -44,9 +44,9 @@ class MergeEditLine
         mStr = QString();
         mChanged = (src == e_SrcSelector::None);
     }
-    Q_REQUIRED_RESULT inline bool isRemoved() const { return mLineRemoved; }
+    [[nodiscard]] inline bool isRemoved() const { return mLineRemoved; }
 
-    Q_REQUIRED_RESULT inline bool isEditableText() const { return !isConflict(); }
+    [[nodiscard]] inline bool isEditableText() const { return !isConflict(); }
 
     void setString(const QString& s)
     {
@@ -55,8 +55,8 @@ class MergeEditLine
         mSrc = e_SrcSelector::None;
         mChanged = true;
     }
-    Q_REQUIRED_RESULT QString getString(const std::shared_ptr<LineDataVector>& pLineDataA, const std::shared_ptr<LineDataVector>& pLineDataB, const std::shared_ptr<LineDataVector>& pLineDataC) const;
-    Q_REQUIRED_RESULT inline bool isModified() const { return mChanged; }
+    [[nodiscard]] QString getString(const std::shared_ptr<LineDataVector>& pLineDataA, const std::shared_ptr<LineDataVector>& pLineDataB, const std::shared_ptr<LineDataVector>& pLineDataC) const;
+    [[nodiscard]] inline bool isModified() const { return mChanged; }
 
     void setSource(e_SrcSelector src, bool bLineRemoved)
     {

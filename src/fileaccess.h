@@ -53,32 +53,32 @@ class FileAccess
 
     virtual void loadData();
 
-    Q_REQUIRED_RESULT bool isNormal() const;
-    Q_REQUIRED_RESULT bool isValid() const;
-    Q_REQUIRED_RESULT virtual bool isFile() const;
-    Q_REQUIRED_RESULT virtual bool isDir() const;
-    Q_REQUIRED_RESULT virtual bool isSymLink() const;
-    Q_REQUIRED_RESULT virtual bool exists() const;
-    Q_REQUIRED_RESULT virtual qint64 size() const;     // Size as returned by stat().
-    Q_REQUIRED_RESULT virtual qint64 sizeForReading(); // If the size can't be determined by stat() then the file is copied to a local temp file.
-    Q_REQUIRED_RESULT virtual bool isReadable() const;
-    Q_REQUIRED_RESULT virtual bool isWritable() const;
-    Q_REQUIRED_RESULT virtual bool isExecutable() const;
-    Q_REQUIRED_RESULT virtual bool isHidden() const;
-    Q_REQUIRED_RESULT QString readLink() const;
+    [[nodiscard]] bool isNormal() const;
+    [[nodiscard]] bool isValid() const;
+    [[nodiscard]] virtual bool isFile() const;
+    [[nodiscard]] virtual bool isDir() const;
+    [[nodiscard]] virtual bool isSymLink() const;
+    [[nodiscard]] virtual bool exists() const;
+    [[nodiscard]] virtual qint64 size() const;     // Size as returned by stat().
+    [[nodiscard]] virtual qint64 sizeForReading(); // If the size can't be determined by stat() then the file is copied to a local temp file.
+    [[nodiscard]] virtual bool isReadable() const;
+    [[nodiscard]] virtual bool isWritable() const;
+    [[nodiscard]] virtual bool isExecutable() const;
+    [[nodiscard]] virtual bool isHidden() const;
+    [[nodiscard]] QString readLink() const;
 
-    Q_REQUIRED_RESULT QDateTime lastModified() const;
+    [[nodiscard]] QDateTime lastModified() const;
 
-    Q_REQUIRED_RESULT QString displayName() const { return mDisplayName.isEmpty() ? fileName() : mDisplayName; }
-    Q_REQUIRED_RESULT QString fileName(bool needTmp = false) const; // Just the name-part of the path, without parent directories
-    Q_REQUIRED_RESULT QString fileRelPath() const;                  // The path relative to base comparison directory
-    Q_REQUIRED_RESULT QString prettyAbsPath() const;
-    Q_REQUIRED_RESULT QUrl url() const;
+    [[nodiscard]] QString displayName() const { return mDisplayName.isEmpty() ? fileName() : mDisplayName; }
+    [[nodiscard]] QString fileName(bool needTmp = false) const; // Just the name-part of the path, without parent directories
+    [[nodiscard]] QString fileRelPath() const;                  // The path relative to base comparison directory
+    [[nodiscard]] QString prettyAbsPath() const;
+    [[nodiscard]] QUrl url() const;
     void setUrl(const QUrl& inUrl) { m_url = inUrl; }
 
     //Workaround for QUrl::toDisplayString/QUrl::toString behavior that does not fit KDiff3's expectations
-    Q_REQUIRED_RESULT QString absoluteFilePath() const;
-    Q_REQUIRED_RESULT static QString prettyAbsPath(const QUrl& url)
+    [[nodiscard]] QString absoluteFilePath() const;
+    [[nodiscard]] static QString prettyAbsPath(const QUrl& url)
     {
         if(!isLocal(url)) return url.toDisplayString();
 
@@ -91,8 +91,8 @@ class FileAccess
     }
 
     //Workaround for QUrl::isLocalFile behavior that does not fit KDiff3's expectations.
-    Q_REQUIRED_RESULT bool isLocal() const;
-    Q_REQUIRED_RESULT static bool isLocal(const QUrl& url)
+    [[nodiscard]] bool isLocal() const;
+    [[nodiscard]] static bool isLocal(const QUrl& url)
     {
         return url.isLocalFile() || !url.isValid() || url.scheme().isEmpty();
     }
@@ -105,7 +105,7 @@ class FileAccess
     virtual bool copyFile(const QString& destUrl);
     virtual bool createBackup(const QString& bakExtension);
 
-    Q_REQUIRED_RESULT QString getTempName() const;
+    [[nodiscard]] QString getTempName() const;
     virtual bool createLocalCopy();
     static void createTempFile(QTemporaryFile&);
     bool removeFile();
@@ -119,16 +119,16 @@ class FileAccess
     static bool symLink(const QString& linkTarget, const QString& linkLocation);
 
     virtual void addPath(const QString& txt, bool reinit = true);
-    Q_REQUIRED_RESULT const QString& getStatusText() const;
+    [[nodiscard]] const QString& getStatusText() const;
 
-    Q_REQUIRED_RESULT FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
+    [[nodiscard]] FileAccess* parent() const; // !=0 for listDir-results, but only valid if the parent was not yet destroyed.
 
     void doError();
     void filterList(const QString& dir, DirectoryList* pDirList, const QString& filePattern,
                     const QString& fileAntiPattern, const QString& dirAntiPattern,
                     IgnoreList& ignoreList);
 
-    Q_REQUIRED_RESULT QDir getBaseDirectory() const { return m_baseDir; }
+    [[nodiscard]] QDir getBaseDirectory() const { return m_baseDir; }
 
     bool open(const QFile::OpenMode flags);
 

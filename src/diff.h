@@ -108,10 +108,10 @@ class Diff
 
     [[nodiscard]] bool isEmpty() const { return nofEquals == 0 && mDiff1 == 0 && mDiff2 == 0;}
 
-    Q_REQUIRED_RESULT inline qint32 numberOfEquals() const { return nofEquals; };
+    [[nodiscard]] inline qint32 numberOfEquals() const { return nofEquals; };
 
-    Q_REQUIRED_RESULT inline qint64 diff1() const { return mDiff1; };
-    Q_REQUIRED_RESULT inline qint64 diff2() const { return mDiff2; };
+    [[nodiscard]] inline qint64 diff1() const { return mDiff1; };
+    [[nodiscard]] inline qint64 diff2() const { return mDiff2; };
 
     inline void setNumberOfEquals(const qint32 inNumOfEquals) { nofEquals = inNumOfEquals; }
 
@@ -161,27 +161,27 @@ class LineData
         bSkipable = inIsSkipable;
         mFirstNonWhiteChar = inFirstNonWhiteChar;
     }
-    Q_REQUIRED_RESULT inline QtSizeType size() const { return mSize; }
-    Q_REQUIRED_RESULT inline qint32 getFirstNonWhiteChar() const { return mFirstNonWhiteChar; }
+    [[nodiscard]] inline QtSizeType size() const { return mSize; }
+    [[nodiscard]] inline qint32 getFirstNonWhiteChar() const { return mFirstNonWhiteChar; }
 
     /*
         QString::fromRawData allows us to create a light weight QString backed by the buffer memmory.
     */
-    Q_REQUIRED_RESULT inline const QString getLine() const { return QString::fromRawData(mBuffer->data() + mOffset, mSize); }
-    Q_REQUIRED_RESULT inline const QSharedPointer<QString>& getBuffer() const { return mBuffer; }
+    [[nodiscard]] inline const QString getLine() const { return QString::fromRawData(mBuffer->data() + mOffset, mSize); }
+    [[nodiscard]] inline const QSharedPointer<QString>& getBuffer() const { return mBuffer; }
 
-    Q_REQUIRED_RESULT inline QtSizeType getOffset() const { return mOffset; }
-    Q_REQUIRED_RESULT int width(int tabSize) const; // Calcs width considering tabs.
+    [[nodiscard]] inline QtSizeType getOffset() const { return mOffset; }
+    [[nodiscard]] int width(int tabSize) const; // Calcs width considering tabs.
 
-    Q_REQUIRED_RESULT inline bool whiteLine() const { return mFirstNonWhiteChar == 0; }
+    [[nodiscard]] inline bool whiteLine() const { return mFirstNonWhiteChar == 0; }
 
-    Q_REQUIRED_RESULT inline bool isPureComment() const { return bContainsPureComment; }
+    [[nodiscard]] inline bool isPureComment() const { return bContainsPureComment; }
     inline void setPureComment(const bool bPureComment) { bContainsPureComment = bPureComment; }
 
-    Q_REQUIRED_RESULT inline bool isSkipable() const { return bSkipable; }
+    [[nodiscard]] inline bool isSkipable() const { return bSkipable; }
     inline void setSkipable(const bool inSkipable) { bSkipable = inSkipable; }
 
-    Q_REQUIRED_RESULT static bool equal(const LineData& l1, const LineData& l2);
+    [[nodiscard]] static bool equal(const LineData& l1, const LineData& l2);
 };
 
 class ManualDiffHelpList; // A list of corresponding ranges
@@ -274,19 +274,19 @@ class Diff3Line
         }
     }
 
-    Q_REQUIRED_RESULT LineRef getLineA() const { return lineA; }
-    Q_REQUIRED_RESULT LineRef getLineB() const { return lineB; }
-    Q_REQUIRED_RESULT LineRef getLineC() const { return lineC; }
+    [[nodiscard]] LineRef getLineA() const { return lineA; }
+    [[nodiscard]] LineRef getLineB() const { return lineB; }
+    [[nodiscard]] LineRef getLineC() const { return lineC; }
 
     inline void setLineA(const LineRef& line) { lineA = line; }
     inline void setLineB(const LineRef& line) { lineB = line; }
     inline void setLineC(const LineRef& line) { lineC = line; }
 
-    Q_REQUIRED_RESULT inline bool isEqualAB() const { return bAEqB; }
-    Q_REQUIRED_RESULT inline bool isEqualAC() const { return bAEqC; }
-    Q_REQUIRED_RESULT inline bool isEqualBC() const { return bBEqC; }
+    [[nodiscard]] inline bool isEqualAB() const { return bAEqB; }
+    [[nodiscard]] inline bool isEqualAC() const { return bAEqC; }
+    [[nodiscard]] inline bool isEqualBC() const { return bBEqC; }
 
-    Q_REQUIRED_RESULT inline bool isWhiteLine(e_SrcSelector src) const
+    [[nodiscard]] inline bool isWhiteLine(e_SrcSelector src) const
     {
         assert(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
 
@@ -312,7 +312,7 @@ class Diff3Line
                bWhiteLineA == d3l.bWhiteLineA && bWhiteLineB == d3l.bWhiteLineB && bWhiteLineC == d3l.bWhiteLineC;
     }
 
-    Q_REQUIRED_RESULT const LineData& getLineData(e_SrcSelector src) const
+    [[nodiscard]] const LineData& getLineData(e_SrcSelector src) const
     {
         assert(m_pDiffBufferInfo != nullptr);
         assert(src == e_SrcSelector::A || src == e_SrcSelector::B || src == e_SrcSelector::C);
@@ -321,13 +321,13 @@ class Diff3Line
         if(src == e_SrcSelector::B && lineB.isValid()) return m_pDiffBufferInfo->getLineData(src)->at(lineB);
         return m_pDiffBufferInfo->getLineData(src)->at(lineC);
     }
-    Q_REQUIRED_RESULT const QString getString(const e_SrcSelector src) const
+    [[nodiscard]] const QString getString(const e_SrcSelector src) const
     {
         const LineData& pld = getLineData(src);
 
         return pld.getLine();
     }
-    Q_REQUIRED_RESULT LineRef getLineInFile(e_SrcSelector src) const
+    [[nodiscard]] LineRef getLineInFile(e_SrcSelector src) const
     {
         if(src == e_SrcSelector::A) return lineA;
         if(src == e_SrcSelector::B) return lineB;
@@ -335,12 +335,12 @@ class Diff3Line
         return LineRef();
     }
 
-    Q_REQUIRED_RESULT inline qint32 sumLinesNeededForDisplay() const { return mSumLinesNeededForDisplay; }
+    [[nodiscard]] inline qint32 sumLinesNeededForDisplay() const { return mSumLinesNeededForDisplay; }
 
-    Q_REQUIRED_RESULT inline qint32 linesNeededForDisplay() const { return mLinesNeededForDisplay; }
+    [[nodiscard]] inline qint32 linesNeededForDisplay() const { return mLinesNeededForDisplay; }
 
     void setLinesNeeded(const qint32 lines) { mLinesNeededForDisplay = lines; }
-    Q_REQUIRED_RESULT bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const std::shared_ptr<LineDataVector> &v1, const std::shared_ptr<LineDataVector> &v2, const IgnoreFlags eIgnoreFlags);
+    [[nodiscard]] bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const std::shared_ptr<LineDataVector>& v1, const std::shared_ptr<LineDataVector>& v2, const IgnoreFlags eIgnoreFlags);
     void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
                      std::shared_ptr<DiffList>& pFineDiff1, std::shared_ptr<DiffList>& pFineDiff2, // return values
                      ChangeFlags& changed, ChangeFlags& changed2) const;
@@ -580,7 +580,7 @@ class ManualDiffHelpEntry
 class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
 {
   public:
-    Q_REQUIRED_RESULT bool isValidMove(LineRef line1, LineRef line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
+    [[nodiscard]] bool isValidMove(LineRef line1, LineRef line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
     void insertEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine);
 
     void runDiff(const std::shared_ptr<LineDataVector> &p1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, LineRef size2, DiffList& diffList,

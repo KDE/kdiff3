@@ -27,42 +27,41 @@ class SourceData
   public:
     void setOptions(const QSharedPointer<Options> &pOptions);
 
-    Q_REQUIRED_RESULT LineCount getSizeLines() const;
-    Q_REQUIRED_RESULT qint64 getSizeBytes() const;
-    Q_REQUIRED_RESULT const char* getBuf() const;
-    Q_REQUIRED_RESULT const QString& getText() const;
-    Q_REQUIRED_RESULT const std::shared_ptr<LineDataVector>& getLineDataForDisplay() const;
-    Q_REQUIRED_RESULT const std::shared_ptr<LineDataVector>& getLineDataForDiff() const;
+    [[nodiscard]] LineCount getSizeLines() const;
+    [[nodiscard]] qint64 getSizeBytes() const;
+    [[nodiscard]] const char* getBuf() const;
+    [[nodiscard]] const QString& getText() const;
+    [[nodiscard]] const std::shared_ptr<LineDataVector>& getLineDataForDisplay() const;
+    [[nodiscard]] const std::shared_ptr<LineDataVector>& getLineDataForDiff() const;
 
     void setFilename(const QString& filename);
     void setFileAccess(const FileAccess& fileAccess);
-    Q_REQUIRED_RESULT QString getFilename() const;
+    [[nodiscard]] QString getFilename() const;
     void setAliasName(const QString& name);
-    Q_REQUIRED_RESULT QString getAliasName() const;
-    Q_REQUIRED_RESULT bool isEmpty() const;                // File was set
-    Q_REQUIRED_RESULT bool hasData() const;                // Data was readable
-    Q_REQUIRED_RESULT bool isText() const;                 // is it pure text (vs. binary data)
-    Q_REQUIRED_RESULT bool isIncompleteConversion() const; // true if some replacement characters were found
-    Q_REQUIRED_RESULT bool isFromBuffer() const;           // was it set via setData() (vs. setFileAccess() or setFilename())
-    Q_REQUIRED_RESULT const QString setData(const QString& data);
-    Q_REQUIRED_RESULT bool isValid() const; // Either no file is specified or reading was successful
+    [[nodiscard]] QString getAliasName() const;
+    [[nodiscard]] bool isEmpty() const;                // File was set
+    [[nodiscard]] bool hasData() const;                // Data was readable
+    [[nodiscard]] bool isText() const;                 // is it pure text (vs. binary data)
+    [[nodiscard]] bool isIncompleteConversion() const; // true if some replacement characters were found
+    [[nodiscard]] bool isFromBuffer() const;           // was it set via setData() (vs. setFileAccess() or setFilename())
+    [[nodiscard]] const QString setData(const QString& data);
+    [[nodiscard]] bool isValid() const; // Either no file is specified or reading was successful
 
     // Returns a list of error messages if anything went wrong
     void readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicode);
     bool saveNormalDataAs(const QString& fileName);
 
-    Q_REQUIRED_RESULT bool isBinaryEqualWith(const QSharedPointer<SourceData>& other) const;
+    [[nodiscard]] bool isBinaryEqualWith(const QSharedPointer<SourceData>& other) const;
 
     void reset();
 
-    Q_REQUIRED_RESULT bool isDir() const { return m_fileAccess.isDir(); }
+    [[nodiscard]] bool isDir() const { return m_fileAccess.isDir(); }
 
-    Q_REQUIRED_RESULT QTextCodec* getEncoding() const { return m_pEncoding; }
-    Q_REQUIRED_RESULT e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
+    [[nodiscard]] QTextCodec* getEncoding() const { return m_pEncoding; }
+    [[nodiscard]] e_LineEndStyle getLineEndStyle() const { return m_normalData.m_eLineEndStyle; }
     [[nodiscard]] inline bool hasEOLTermiantion() { return m_normalData.hasEOLTermiantion(); }
 
-
-    Q_REQUIRED_RESULT const QStringList& getErrors() const { return mErrors; }
+    [[nodiscard]] const QStringList& getErrors() const { return mErrors; }
 
     void setEncoding(QTextCodec* pEncoding);
 

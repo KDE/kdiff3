@@ -46,16 +46,16 @@ class MocIgnoreFile: public FileAccess
     void addPath(const QString& txt, bool /*reinit*/=true) override { Q_UNUSED(txt); }
     bool createLocalCopy() override { return true; }
 
-    Q_REQUIRED_RESULT qint64 size() const override { return 0; };
+    [[nodiscard]] qint64 size() const override { return 0; };
 
-    Q_REQUIRED_RESULT bool isFile() const override {return true;};
-    Q_REQUIRED_RESULT bool isDir() const override {return false;};
-    Q_REQUIRED_RESULT bool isSymLink() const override {return false;};
-    Q_REQUIRED_RESULT bool exists() const override {return m_bExists; };
-    Q_REQUIRED_RESULT bool isReadable() const override {return m_bReadable;};
-    Q_REQUIRED_RESULT bool isWritable() const override {return m_bWritable;};
-    Q_REQUIRED_RESULT bool isExecutable() const override {return m_bExecutable;};
-    Q_REQUIRED_RESULT bool isHidden() const override { return m_bHidden; };
+    [[nodiscard]] bool isFile() const override { return true; };
+    [[nodiscard]] bool isDir() const override { return false; };
+    [[nodiscard]] bool isSymLink() const override { return false; };
+    [[nodiscard]] bool exists() const override { return m_bExists; };
+    [[nodiscard]] bool isReadable() const override { return m_bReadable; };
+    [[nodiscard]] bool isWritable() const override { return m_bWritable; };
+    [[nodiscard]] bool isExecutable() const override { return m_bExecutable; };
+    [[nodiscard]] bool isHidden() const override { return m_bHidden; };
 
     bool readFile(void*  /*pDestBuffer*/, qint64  /*maxLength*/) override { return true;};
     bool writeFile(const void* /*pSrcBuffer*/, qint64 /*length*/) override { return true; };
