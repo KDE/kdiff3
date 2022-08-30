@@ -92,10 +92,10 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(ChangeFlags);
 class Diff
 {
   private:
-    LineCount nofEquals = 0;
+    SafeInt<LineCount> nofEquals = 0;
 
-    qint64 mDiff1 = 0;
-    qint64 mDiff2 = 0;
+    SafeInt<qint64> mDiff1 = 0;
+    SafeInt<qint64> mDiff2 = 0;
 
   public:
     Diff() = default;//We use defualt initialization force compiler to generate a default constructor

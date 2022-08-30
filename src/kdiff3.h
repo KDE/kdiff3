@@ -453,7 +453,7 @@ public Q_SLOTS:
     //ManualDiffHelpDialog* m_pManualDiffHelpDialog;
     ManualDiffHelpList m_manualDiffHelpList;
 
-    SafeInt<QtNumberType> m_neededLines = 0;
+    QtNumberType m_neededLines = 0;
     int m_DTWHeight;
     bool m_bOutputModified = false;
     bool m_bFileSaved = false;
