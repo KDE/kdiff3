@@ -16,4 +16,4 @@ Dependencies:
     'frameworks/kxmlgui': '@stable'
 
 Options:
-    cppcheck-arguments: '--enable=warning,style,performance -i build -i test --suppressions-list=CppCheckSuppressions.txt'
+    cppcheck-arguments: '--enable=warning,style,performance -i build -i test -i src/xpm --suppressions-list=CppCheckSuppressions.txt'

@@ -65,6 +65,8 @@ bool LineData::equal(const LineData& l1, const LineData& l2)
 
     if(g_bIgnoreWhiteSpace)
     {
+        if(l1.size() != l2.size())
+            return false;
         // Ignore white space diff
         const QString line1 = l1.getLine(), line2 = l2.getLine();
         QString::const_iterator p1 = line1.begin();
@@ -72,12 +74,12 @@ bool LineData::equal(const LineData& l1, const LineData& l2)
         QString::const_iterator p2 = line2.begin();
         QString::const_iterator p2End = line2.end();
 
-        for(; p1 != p1End && p2 != p2End; p1++, p2++)
+        for(; p1 != p1End && p2 != p2End; ++p1, ++p2)
         {
             while(isspace(p1->unicode()) && p1 != p1End) ++p1;
             while(isspace(p2->unicode()) && p2 != p2End) ++p2;
 
-            if(*p1 != *p2)
+            if((p1 != p1End && p2 != p2End) && *p1 != *p2)
                 return false;
         }
 

@@ -577,7 +577,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
     QString line;
     QChar curChar, prevChar = 0;
-    LineCount lineCount = 0;
+    LineCount lines = 0;
     QtSizeType lastOffset = 0;
     FileOffset skipBytes = 0;
     QScopedPointer<CommentParser> parser(new DefaultCommentParser());
@@ -608,7 +608,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     while(!ts.atEnd())
     {
         line.clear();
-        if(lineCount >= TYPE_MAX(LineCount) - 5)
+        if(lines >= TYPE_MAX(LineCount) - 5)
         {
             m_v->clear();
             return false;
@@ -678,7 +678,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         if(removeComments)
             parser->removeComment(line);
 
-        ++lineCount;
+        ++lines;
         m_v->push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isSkipable(), parser->isPureComment()));
         //The last line may not have an EOL mark. In that case don't add one to our buffer.
         m_unicodeBuf->append(line);
@@ -698,7 +698,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     if(curChar == '\n' || curChar == '\r')
     {
         mHasEOLTermination = true;
-        ++lineCount;
+        ++lines;
 
         parser->processLine("");
         m_v->push_back(LineData(m_unicodeBuf, lastOffset, 0, 0, parser->isSkipable(), parser->isPureComment()));
@@ -712,7 +712,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     if(!vOrigDataLineEndStyle.isEmpty())
         m_eLineEndStyle = vOrigDataLineEndStyle[0];
 
-    mLineCount = lineCount;
+    mLineCount = lines;
     return true;
 }
 

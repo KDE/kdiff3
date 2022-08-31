@@ -457,9 +457,8 @@ void KDiff3App::setHScrollBarRange()
     int vm = m_pMergeResultWindow != nullptr && m_pMergeResultWindow->isVisible() ? m_pMergeResultWindow->getVisibleTextAreaWidth() : 0;
 
     // Find the minimum, but don't consider 0.
-    int pageStep = 0;
-    if((pageStep == 0 || pageStep > v1) && v1 > 0)
-        pageStep = v1;
+    int pageStep = v1;
+
     if((pageStep == 0 || pageStep > v2) && v2 > 0)
         pageStep = v2;
     if((pageStep == 0 || pageStep > v3) && v3 > 0)
@@ -692,7 +691,7 @@ void KDiff3App::slotFinishMainInit()
     int d3l = -1;
     if(!m_manualDiffHelpList.empty())
         d3l = m_manualDiffHelpList.front().calcManualDiffFirstDiff3LineIdx(mDiff3LineVector);
-    if(d3l >= 0 && m_pDiffTextWindow1)
+    if(d3l >= 0)
     {
         int line = m_pDiffTextWindow1->convertDiff3LineIdxToLine(d3l);
         DiffTextWindow::mVScrollBar->setValue(std::max(0, line - 1));
