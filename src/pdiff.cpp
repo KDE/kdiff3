@@ -1071,17 +1071,29 @@ void KDiff3App::slotEditPaste()
 
             if(m_pDiffTextWindow1->hasFocus())
             {
-                error = m_sd1->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
+                m_sd1->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
+                const QStringList& errors = m_sd1->getErrors();
+                if(!errors.isEmpty())
+                    error = m_sd1->getErrors()[0];
+
                 do_init = true;
             }
             else if(m_pDiffTextWindow2->hasFocus())
             {
-                error = m_sd2->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
+                m_sd2->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
+                const QStringList& errors = m_sd2->getErrors();
+                if(!errors.isEmpty())
+                    error = m_sd2->getErrors()[0];
+
                 do_init = true;
             }
             else if(m_pDiffTextWindow3->hasFocus())
             {
-                error = m_sd3->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
+                m_sd3->setData(QApplication::clipboard()->text(QClipboard::Clipboard));
+                const QStringList& errors = m_sd3->getErrors();
+                if(!errors.isEmpty())
+                    error = m_sd3->getErrors()[0];
+
                 do_init = true;
             }
 
