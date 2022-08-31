@@ -14,3 +14,6 @@ Dependencies:
     'frameworks/kparts': '@stable'
     'frameworks/kwidgetsaddons': '@stable'
     'frameworks/kxmlgui': '@stable'
+
+Options:
+    cppcheck-arguments: '--enable=warning,style,performance -ibuild -itest -suppressions-list=CppCheckSuppressions.txt'
