@@ -718,11 +718,6 @@ void ManualDiffHelpList::runDiff(const std::shared_ptr<LineDataVector> &p1, Line
     int l2begin = 0;
     ManualDiffHelpList::const_iterator i;
 
-    //frequently p1->size() == size1 + 1 or 0
-    qDebug(kdiffMain) << "p1->size =" << p1->size() << "," << size1;
-    //frequently p2->size() == size2 + 1 or 0
-    qDebug(kdiffMain) << "p2->size =" << p2->size() << "," << size2;
-
     for(i = begin(); i != end(); ++i)
     {
         const ManualDiffHelpEntry& mdhe = *i;
