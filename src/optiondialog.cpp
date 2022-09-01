@@ -576,8 +576,8 @@ void OptionDialog::setupFontPage()
     topLayout->addWidget(pFontChooser);
     pFontChooser->setTitle(i18n("File view font"));
 
-    QGridLayout* gbox = new QGridLayout();
-    topLayout->addLayout(gbox);
+    //QGridLayout* gbox = new QGridLayout();
+    //topLayout->addLayout(gbox);
     //int line=0;
 
     // This currently does not work (see rendering in class DiffTextWindow)
