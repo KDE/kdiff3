@@ -10,6 +10,7 @@
 #define OPTIONDIALOG_H
 
 #include "options.h"
+#include "ui_FontChooser.h"
 
 #include <QFont>
 #include <QSharedPointer>
@@ -18,9 +19,6 @@
 
 #include <KPageDialog>
 #include <KSharedConfig>
-
-class QLabel;
-class QPlainTextEdit;
 
 class OptionCheckBox;
 class OptionEncodingComboBox;
@@ -96,9 +94,7 @@ class FontChooser : public QGroupBox
 {
    Q_OBJECT
    QFont m_font;
-   QPushButton* m_pSelectFont;
-   QPlainTextEdit* m_pExampleTextEdit;
-   QLabel* m_pLabel;
+   Ui::FontGroupBox fontChooserUi;
 public:
    explicit FontChooser( QWidget* pParent );
    QFont font();

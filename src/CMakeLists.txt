@@ -46,6 +46,7 @@ ki18n_wrap_ui(kdiff3part_PART_SRCS
     scroller.ui
     opendialog.ui
     progressdialog.ui
+    FontChooser.ui
 )
 
 add_library(kdiff3part MODULE ${kdiff3part_PART_SRCS})
