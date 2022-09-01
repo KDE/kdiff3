@@ -13,9 +13,9 @@
 #include "ui_FontChooser.h"
 
 #include <QFont>
+#include <QGroupBox>
 #include <QSharedPointer>
 #include <QStringList>
-#include <QGroupBox>
 
 #include <KPageDialog>
 #include <KSharedConfig>
@@ -24,15 +24,14 @@ class OptionCheckBox;
 class OptionEncodingComboBox;
 class OptionLineEdit;
 
-class OptionDialog : public KPageDialog
+class OptionDialog: public KPageDialog
 {
-   Q_OBJECT
+    Q_OBJECT
 
-public:
-
-    explicit OptionDialog( bool bShowDirMergeSettings, QWidget *parent = nullptr );
+  public:
+    explicit OptionDialog(bool bShowDirMergeSettings, QWidget* parent = nullptr);
     ~OptionDialog() override;
-    const QString parseOptions( const QStringList& optionList );
+    const QString parseOptions(const QStringList& optionList);
     QString calcOptionHelp();
 
     void saveOptions(KSharedConfigPtr config);
@@ -47,7 +46,7 @@ public:
     static const QString s_autoMergeRegExpToolTip;
     static const QString s_historyStartRegExpToolTip;
 
-protected Q_SLOTS:
+  protected Q_SLOTS:
     virtual void slotDefault();
     virtual void slotOk();
     virtual void slotApply();
@@ -56,9 +55,10 @@ protected Q_SLOTS:
 
     void slotEncodingChanged();
     void slotHistoryMergeRegExpTester();
-Q_SIGNALS:
+  Q_SIGNALS:
     void applyDone();
-private:
+
+  private:
     void setupFontPage();
     void setupColorPage();
     void setupEditPage();
@@ -69,7 +69,7 @@ private:
     void setupIntegrationPage();
     void resetToDefaults();
 
-    QSharedPointer<Options> m_options=QSharedPointer<Options>::create();
+    QSharedPointer<Options> m_options = QSharedPointer<Options>::create();
     //QDialogButtonBox *mButtonBox;
     OptionCheckBox* m_pSameEncoding;
     OptionEncodingComboBox* m_pEncodingAComboBox;
@@ -89,25 +89,19 @@ private:
     OptionLineEdit* m_pHistorySortKeyOrderLineEdit;
 };
 
-
-class FontChooser : public QGroupBox
+class FontChooser: public QGroupBox
 {
-   Q_OBJECT
-   QFont m_font;
-   Ui::FontGroupBox fontChooserUi;
-public:
-   explicit FontChooser( QWidget* pParent );
-   QFont font();
-   void setFont( const QFont&, bool );
-private Q_SLOTS:
-   void slotSelectFont();
+    Q_OBJECT
+    QFont m_font;
+    Ui::FontGroupBox fontChooserUi;
+
+  public:
+    explicit FontChooser(QWidget* pParent);
+    QFont font();
+    void setFont(const QFont&, bool);
+
+  private Q_SLOTS:
+    void slotSelectFont();
 };
 
 #endif
-
-
-
-
-
-
-
