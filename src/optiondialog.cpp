@@ -110,7 +110,7 @@ FontChooser::FontChooser(QWidget* pParent):
 
 QFont FontChooser::font()
 {
-    return m_font; //QFont("courier",10);
+    return m_font;
 }
 
 void FontChooser::setFont(const QFont& font, bool)
@@ -122,8 +122,6 @@ void FontChooser::setFont(const QFont& font, bool)
         style = i18nc("No text styling", "none");
 
     fontChooserUi.label->setText(i18nc("Font sample display, %1 = family, %2 = style, %3 = size", "Font: %1, %2, %3\n\nExample:", m_font.family(), style, m_font.pointSize()));
-
-    //update();
 }
 
 void FontChooser::slotSelectFont()

@@ -70,7 +70,6 @@ class OptionDialog: public KPageDialog
     void resetToDefaults();
 
     QSharedPointer<Options> m_options = QSharedPointer<Options>::create();
-    //QDialogButtonBox *mButtonBox;
     OptionCheckBox* m_pSameEncoding;
     OptionEncodingComboBox* m_pEncodingAComboBox;
     OptionCheckBox* m_pAutoDetectUnicodeA;
