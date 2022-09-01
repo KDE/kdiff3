@@ -102,20 +102,12 @@ class OptionRadioButton: public QRadioButton, public OptionBool
 FontChooser::FontChooser(QWidget* pParent):
     QGroupBox(pParent)
 {
-    QVBoxLayout* pLayout = new QVBoxLayout(this);
-    m_pLabel = new QLabel(QString());
-    pLayout->addWidget(m_pLabel);
+    fontChooserUi.setupUi(this);
+    QVBoxLayout* pLayout = fontChooserUi.layout;
+    m_pLabel = fontChooserUi.label;
 
-    QChar visualTab(0x2192);
-    QChar visualSpace((ushort)0xb7);
-    m_pExampleTextEdit = new QPlainTextEdit(i18n("The quick brown fox jumps over the river\n"
-                                                 "but the little red hen escapes with a shiver.\n"
-                                                 ":-)") +
-                                                visualTab + visualSpace,
-                                            this);
+    m_pExampleTextEdit = fontChooserUi.plainTextEdit;
     m_pExampleTextEdit->setFont(m_font);
-    m_pExampleTextEdit->setReadOnly(true);
-    pLayout->addWidget(m_pExampleTextEdit);
 
     m_pSelectFont = new QPushButton(i18nc("Button title", "Change Font"));
     m_pSelectFont->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -133,7 +125,11 @@ void FontChooser::setFont(const QFont& font, bool)
 {
     m_font = font;
     m_pExampleTextEdit->setFont(m_font);
-    m_pLabel->setText(i18nc("Font sample display, %1 = family, %2 = style, %3 = size", "Font: %1, %2, %3\n\nExample:", m_font.family(), m_font.styleName(), m_font.pointSize()));
+    QString style = m_font.styleName();
+    if(style.isEmpty())
+        style = i18nc("No text styling", "none");
+
+    m_pLabel->setText(i18nc("Font sample display, %1 = family, %2 = style, %3 = size", "Font: %1, %2, %3\n\nExample:", m_font.family(), style, m_font.pointSize()));
 
     //update();
 }
@@ -143,6 +139,10 @@ void FontChooser::slotSelectFont()
     bool bOk;
     m_font = QFontDialog::getFont(&bOk, m_font);
     m_pExampleTextEdit->setFont(m_font);
+    QString style = m_font.styleName();
+    if(style.isEmpty())
+        style = i18nc("No text styling", "none");
+
     m_pLabel->setText(i18nc("Font sample display, %1 = family, %2 = style, %3 = size", "Font: %1, %2, %3\n\nExample:", m_font.family(), m_font.styleName(), m_font.pointSize()));
 }
 
