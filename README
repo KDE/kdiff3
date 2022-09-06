@@ -5,10 +5,11 @@ Author: Joachim Eibl  (joachim.eibl at gmx.de)
 Port to KF5/Qt5 by Michael Reeves (reeves.87@gmail.com)
 KDiff3-Version: 1.9.70
 
-Now requires Qt 5.8 or later and KF5 5.37+. Legacy 0.9.98 and earlier builds are not supported.
+Now requires Qt 5.15 or later and KF5 5.50+. Legacy 0.9.98 and earlier builds are not supported.
 MacOS X build is 64-bit only unfortunately I can't test build locally. The Konqueror specific plug-in
-is not ported and no longer maintained. This plug-in would only apply to KDE before 4.6. As of 1/13/17
-cmake 3.1+ is the targeted cmake version.
+is not ported and no longer maintained. This plug-in would only apply to KDE before 4.6.
+
+cmake 3.14+ is the targeted cmake version.
 
 cmake is now the only build system supported. KF5/Qt5 was big jump. A lot changed besides just the API.
 I am not against a Qt5-only build variant but see no reason to maintain two separate build systems.
@@ -32,10 +33,6 @@ Copyright: (C) 2002-2014 by Joachim Eibl
 KDiff3 runs best on KDE but can be built without it, depending only on Qt-libs.
 These are available for Un*x, Windows, Mac.
 Thus there are many setup possibilities to consider.
-
-Supported Qt-versions: 4.8, 5.2 or higher.
-Supported KDE-version: 4, 5
-(For KDE3/Qt3 use KDiff3-0.9.92 or older.)
 
 Contents
 --------
