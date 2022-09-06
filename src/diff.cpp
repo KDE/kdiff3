@@ -1393,6 +1393,30 @@ void DiffList::calcDiff(const QString& line1, const QString& line2, const int ma
     }
 #endif // !NDEBUG
 }
+//Compute fineDiff
+void DiffList::optimize()
+{
+    DiffList::iterator dli;
+    bool bUsefulFineDiff = false;
+    qint64 index = 0;
+
+    for(const Diff& diff: *this)
+    {
+        if(diff.numberOfEquals() >= 4)
+        {
+            bUsefulFineDiff = true;
+            break;
+        }
+    }
+
+    for(Diff& diff: *this)
+    {
+        if(!(bUsefulFineDiff && index > 0))
+            diff.refine();
+
+        ++index;
+    }
+}
 
 bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, const std::shared_ptr<LineDataVector> &v1, const std::shared_ptr<LineDataVector> &v2, const IgnoreFlags eIgnoreFlags)
 {
@@ -1432,27 +1456,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
             pDiffList->calcDiff((*v1)[k1].getLine(), (*v2)[k2].getLine(), maxSearchLength);
 
             // Optimize the diff list.
-            DiffList::iterator dli;
-            bool bUsefulFineDiff = false;
-            qint64 index = 0;
-
-            for(const Diff& diff: *pDiffList)
-            {
-                if(diff.numberOfEquals() >= 4)
-                {
-                    bUsefulFineDiff = true;
-                    break;
-                }
-            }
-
-            for(Diff& diff: *pDiffList)
-            {
-                if(!(bUsefulFineDiff && index > 0))
-                    diff.refine();
-
-                ++index;
-            }
-
+            pDiffList->optimize();
             setFineDiff(selector, pDiffList);
         }
         /*

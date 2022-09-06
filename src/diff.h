@@ -147,6 +147,7 @@ class DiffList: public std::list<Diff>
     void calcDiff(const QString& line1, const QString& line2, const int maxSearchRange);
     void runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t index1, LineRef size1, const std::shared_ptr<LineDataVector> &p2, const size_t index2, LineRef size2, const QSharedPointer<Options>& pOptions);
     void verify(const LineRef size1, const LineRef size2);
+    void optimize();
 };
 
 class LineData
