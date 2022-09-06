@@ -128,6 +128,16 @@ class Diff
     {
         return !(*this == b);
     };
+
+    inline void refine()
+    {
+        if(nofEquals < 4 && (mDiff1 > 0 || mDiff2 > 0))
+        {
+            mDiff1 += nofEquals;
+            mDiff2 += nofEquals;
+            nofEquals = 0;
+        }
+    }
 };
 
 class DiffList: public std::list<Diff>

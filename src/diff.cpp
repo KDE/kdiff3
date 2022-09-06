@@ -1447,14 +1447,9 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
 
             for(Diff& diff: *pDiffList)
             {
-                if(diff.numberOfEquals() < 4 &&
-                   (diff.diff1() > 0 || diff.diff2() > 0) &&
-                   !(bUsefulFineDiff && index > 0))
-                {
-                    diff.adjustDiff1(diff.numberOfEquals());
-                    diff.adjustDiff2(diff.numberOfEquals());
-                    diff.setNumberOfEquals(0);
-                }
+                if(!(bUsefulFineDiff && index > 0))
+                    diff.refine();
+
                 ++index;
             }
 
