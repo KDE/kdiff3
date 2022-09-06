@@ -1434,6 +1434,8 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
             // Optimize the diff list.
             DiffList::iterator dli;
             bool bUsefulFineDiff = false;
+            qint64 index = 0;
+
             for(const Diff& diff: *pDiffList)
             {
                 if(diff.numberOfEquals() >= 4)
@@ -1443,14 +1445,17 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
                 }
             }
 
-            for(dli = pDiffList->begin(); dli != pDiffList->end(); ++dli)
+            for(Diff& diff: *pDiffList)
             {
-                if(dli->numberOfEquals() < 4 && (dli->diff1() > 0 || dli->diff2() > 0) && !(bUsefulFineDiff && dli == pDiffList->begin()))
+                if(diff.numberOfEquals() < 4 &&
+                   (diff.diff1() > 0 || diff.diff2() > 0) &&
+                   !(bUsefulFineDiff && index > 0))
                 {
-                    dli->adjustDiff1(dli->numberOfEquals());
-                    dli->adjustDiff2(dli->numberOfEquals());
-                    dli->setNumberOfEquals(0);
+                    diff.adjustDiff1(diff.numberOfEquals());
+                    diff.adjustDiff2(diff.numberOfEquals());
+                    diff.setNumberOfEquals(0);
                 }
+                ++index;
             }
 
             setFineDiff(selector, pDiffList);
