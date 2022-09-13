@@ -133,7 +133,7 @@ void FontChooser::slotSelectFont()
     if(style.isEmpty())
         style = i18nc("No text styling", "none");
 
-    fontChooserUi.label->setText(i18nc("Font sample display, %1 = family, %2 = style, %3 = size", "Font: %1, %2, %3\n\nExample:", m_font.family(), m_font.styleName(), m_font.pointSize()));
+    fontChooserUi.label->setText(i18nc("Font sample display, %1 = family, %2 = style, %3 = size", "Font: %1, %2, %3\n\nExample:", m_font.family(), style, m_font.pointSize()));
 }
 
 class OptionFontChooser: public FontChooser, public OptionFont
