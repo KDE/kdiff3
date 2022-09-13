@@ -1495,25 +1495,6 @@ void MergeResultWindow::writeLine(
         else
             p.setClipRect(QRectF(0, 0, width() - xOffset, height()));
 
-        int outPos = 0;
-        QString s;
-        int size = str.length();
-        for(int i = 0; i < size; ++i)
-        {
-            int spaces = 1;
-            if(str[i] == '\t')
-            {
-                spaces = tabber(outPos, m_pOptions->m_tabSize);
-                for(int j = 0; j < spaces; ++j)
-                    s += ' ';
-            }
-            else
-            {
-                s += str[i];
-            }
-            outPos += spaces;
-        }
-
         p.setPen(m_pOptions->forgroundColor());
 
         QTextLayout textLayout(str, font(), this);
