@@ -256,9 +256,9 @@ class Diff3Line
     bool bWhiteLineB = false;
     bool bWhiteLineC = false;
 
-    std::shared_ptr<DiffList> pFineAB; // These are NULL only if completely equal or if either source doesn't exist.
-    std::shared_ptr<DiffList> pFineBC;
-    std::shared_ptr<DiffList> pFineCA;
+    std::shared_ptr<const DiffList> pFineAB; // These are NULL only if completely equal or if either source doesn't exist.
+    std::shared_ptr<const DiffList> pFineBC;
+    std::shared_ptr<const DiffList> pFineCA;
 
     qint32 mLinesNeededForDisplay = 1;    // Due to wordwrap
     qint32 mSumLinesNeededForDisplay = 0; // For fast conversion to m_diff3WrapLineVector
@@ -353,11 +353,11 @@ class Diff3Line
     void setLinesNeeded(const qint32 lines) { mLinesNeededForDisplay = lines; }
     [[nodiscard]] bool fineDiff(bool bTextsTotalEqual, const e_SrcSelector selector, const std::shared_ptr<LineDataVector>& v1, const std::shared_ptr<LineDataVector>& v2, const IgnoreFlags eIgnoreFlags);
     void getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
-                     std::shared_ptr<DiffList>& pFineDiff1, std::shared_ptr<DiffList>& pFineDiff2, // return values
+                     std::shared_ptr<const DiffList>& pFineDiff1, std::shared_ptr<const DiffList>& pFineDiff2, // return values
                      ChangeFlags& changed, ChangeFlags& changed2) const;
 
   private:
-    void setFineDiff(const e_SrcSelector selector, std::shared_ptr<DiffList>& pDiffList)
+    void setFineDiff(const e_SrcSelector selector, const std::shared_ptr<DiffList>& pDiffList)
     {
         assert(selector == e_SrcSelector::A || selector == e_SrcSelector::B || selector == e_SrcSelector::C);
         if(selector == e_SrcSelector::A)

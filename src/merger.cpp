@@ -11,12 +11,12 @@
 #include <list>
 #include <memory>
 
-Merger::Merger(const std::shared_ptr<DiffList>& pDiffList1, const std::shared_ptr<DiffList>& pDiffList2):
+Merger::Merger(const std::shared_ptr<const DiffList>& pDiffList1, const std::shared_ptr<const DiffList>& pDiffList2):
     md1(pDiffList1, 0), md2(pDiffList2, 1)
 {
 }
 
-Merger::MergeData::MergeData(const std::shared_ptr<DiffList>& p, int i)
+Merger::MergeData::MergeData(const std::shared_ptr<const DiffList>& p, int i)
 {
     idx = i;
     pDiffList = p;

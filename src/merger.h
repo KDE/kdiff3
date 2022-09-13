@@ -16,7 +16,7 @@
 class Merger
 {
   public:
-    Merger(const std::shared_ptr<DiffList>& pDiffList1, const std::shared_ptr<DiffList>& pDiffList2);
+    Merger(const std::shared_ptr<const DiffList>& pDiffList1, const std::shared_ptr<const DiffList>& pDiffList2);
 
     /** Go one step. */
     void next();
@@ -36,12 +36,12 @@ class Merger
     {
       private:
         DiffList::const_iterator it;
-        std::shared_ptr<DiffList> pDiffList;
+        std::shared_ptr<const DiffList> pDiffList;
         Diff d;
         int idx;
 
       public:
-        MergeData(const std::shared_ptr<DiffList>& p, int i);
+        MergeData(const std::shared_ptr<const DiffList>& p, int i);
         [[nodiscard]] bool eq() const;
         void update();
         [[nodiscard]] bool isEnd() const;

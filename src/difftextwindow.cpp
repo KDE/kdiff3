@@ -123,7 +123,7 @@ class DiffTextWindowData
 
     void writeLine(
         RLPainter& p, const LineData* pld,
-        const std::shared_ptr<DiffList>& pLineDiff1, const std::shared_ptr<DiffList>& pLineDiff2, const LineRef& line,
+        const std::shared_ptr<const DiffList>& pLineDiff1, const std::shared_ptr<const DiffList>& pLineDiff2, const LineRef& line,
         const ChangeFlags whatChanged, const ChangeFlags whatChanged2, const LineRef& srcLineIdx,
         int wrapLineOffset, int wrapLineLength, bool bWrapLine, const QRect& invalidRect);
 
@@ -956,8 +956,8 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
 void DiffTextWindowData::writeLine(
     RLPainter& p,
     const LineData* pld,
-    const std::shared_ptr<DiffList>& pLineDiff1,
-    const std::shared_ptr<DiffList>& pLineDiff2,
+    const std::shared_ptr<const DiffList>& pLineDiff1,
+    const std::shared_ptr<const DiffList>& pLineDiff2,
     const LineRef& line,
     const ChangeFlags whatChanged,
     const ChangeFlags whatChanged2,
@@ -1253,8 +1253,8 @@ void DiffTextWindowData::draw(RLPainter& p, const QRect& invalidRect, const int 
         {
             d3l = (*mDiff3LineVector)[line];
         }
-        std::shared_ptr<DiffList> pFineDiff1;
-        std::shared_ptr<DiffList> pFineDiff2;
+        std::shared_ptr<const DiffList> pFineDiff1;
+        std::shared_ptr<const DiffList> pFineDiff2;
         ChangeFlags changed = NoChange;
         ChangeFlags changed2 = NoChange;
 

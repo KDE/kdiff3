@@ -1483,7 +1483,7 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
 }
 
 void Diff3Line::getLineInfo(const e_SrcSelector winIdx, const bool isTriple, LineRef& lineIdx,
-                            std::shared_ptr<DiffList>& pFineDiff1, std::shared_ptr<DiffList>& pFineDiff2, // return values
+                            std::shared_ptr<const DiffList>& pFineDiff1, std::shared_ptr<const DiffList>& pFineDiff2, // return values
                             ChangeFlags& changed, ChangeFlags& changed2) const
 {
     changed = NoChange;
