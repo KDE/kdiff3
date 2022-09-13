@@ -521,8 +521,8 @@ void ManualDiffHelpList::insertEntry(e_SrcSelector winIdx, LineRef firstLine, Li
     ManualDiffHelpList::iterator i;
     for(i = begin(); i != end(); ++i)
     {
-        LineRef l1 = i->firstLine(winIdx);
-        LineRef l2 = i->lastLine(winIdx);
+        LineRef& l1 = i->firstLine(winIdx);
+        LineRef& l2 = i->lastLine(winIdx);
         if(l1.isValid() && l2.isValid())
         {
             if((firstLine <= l1 && lastLine >= l1) || (firstLine <= l2 && lastLine >= l2))
