@@ -591,6 +591,8 @@ class ManualDiffHelpEntry
 class ManualDiffHelpList: public std::list<ManualDiffHelpEntry>
 {
   public:
+    using std::list<ManualDiffHelpEntry>::list;
+
     [[nodiscard]] bool isValidMove(LineRef line1, LineRef line2, e_SrcSelector winIdx1, e_SrcSelector winIdx2) const;
     void insertEntry(e_SrcSelector winIdx, LineRef firstLine, LineRef lastLine);
 
