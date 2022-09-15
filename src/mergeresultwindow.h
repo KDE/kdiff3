@@ -119,12 +119,15 @@ class MergeResultWindow: public QWidget
     void slotChooseAEverywhere() { chooseGlobal(e_SrcSelector::A, false, false); }
     void slotChooseBEverywhere() { chooseGlobal(e_SrcSelector::B, false, false); }
     void slotChooseCEverywhere() { chooseGlobal(e_SrcSelector::C, false, false); }
+
     void slotChooseAForUnsolvedConflicts() { chooseGlobal(e_SrcSelector::A, true, false); }
     void slotChooseBForUnsolvedConflicts() { chooseGlobal(e_SrcSelector::B, true, false); }
     void slotChooseCForUnsolvedConflicts() { chooseGlobal(e_SrcSelector::C, true, false); }
+
     void slotChooseAForUnsolvedWhiteSpaceConflicts() { chooseGlobal(e_SrcSelector::A, true, true); }
     void slotChooseBForUnsolvedWhiteSpaceConflicts() { chooseGlobal(e_SrcSelector::B, true, true); }
     void slotChooseCForUnsolvedWhiteSpaceConflicts() { chooseGlobal(e_SrcSelector::C, true, true); }
+
     void slotRefresh();
 
     void slotResize();

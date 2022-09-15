@@ -1030,14 +1030,17 @@ inline QString DirectoryMergeWindow::getDirNameA() const
 {
     return gDirInfo->dirA().prettyAbsPath();
 }
+
 inline QString DirectoryMergeWindow::getDirNameB() const
 {
     return gDirInfo->dirB().prettyAbsPath();
 }
+
 inline QString DirectoryMergeWindow::getDirNameC() const
 {
     return gDirInfo->dirC().prettyAbsPath();
 }
+
 inline QString DirectoryMergeWindow::getDirNameDest() const
 {
     return gDirInfo->destDir().prettyAbsPath();
@@ -1090,23 +1093,28 @@ void DirectoryMergeWindow::slotCurrentDoNothing()
 {
     d->setMergeOperation(currentIndex(), eNoOperation);
 }
+
 void DirectoryMergeWindow::slotCurrentChooseA()
 {
     d->setMergeOperation(currentIndex(), d->m_bSyncMode ? eCopyAToB : eCopyAToDest);
 }
+
 void DirectoryMergeWindow::slotCurrentChooseB()
 {
     d->setMergeOperation(currentIndex(), d->m_bSyncMode ? eCopyBToA : eCopyBToDest);
 }
+
 void DirectoryMergeWindow::slotCurrentChooseC()
 {
     d->setMergeOperation(currentIndex(), eCopyCToDest);
 }
+
 void DirectoryMergeWindow::slotCurrentMerge()
 {
     bool bThreeDirs = d->isDirThreeWay();
     d->setMergeOperation(currentIndex(), bThreeDirs ? eMergeABCToDest : eMergeABToDest);
 }
+
 void DirectoryMergeWindow::slotCurrentDelete()
 {
     d->setMergeOperation(currentIndex(), eDeleteFromDest);
@@ -1116,22 +1124,27 @@ void DirectoryMergeWindow::slotCurrentCopyAToB()
 {
     d->setMergeOperation(currentIndex(), eCopyAToB);
 }
+
 void DirectoryMergeWindow::slotCurrentCopyBToA()
 {
     d->setMergeOperation(currentIndex(), eCopyBToA);
 }
+
 void DirectoryMergeWindow::slotCurrentDeleteA()
 {
     d->setMergeOperation(currentIndex(), eDeleteA);
 }
+
 void DirectoryMergeWindow::slotCurrentDeleteB()
 {
     d->setMergeOperation(currentIndex(), eDeleteB);
 }
+
 void DirectoryMergeWindow::slotCurrentDeleteAAndB()
 {
     d->setMergeOperation(currentIndex(), eDeleteAB);
 }
+
 void DirectoryMergeWindow::slotCurrentMergeToA()
 {
     d->setMergeOperation(currentIndex(), eMergeToA);
@@ -1140,6 +1153,7 @@ void DirectoryMergeWindow::slotCurrentMergeToB()
 {
     d->setMergeOperation(currentIndex(), eMergeToB);
 }
+
 void DirectoryMergeWindow::slotCurrentMergeToAAndB()
 {
     d->setMergeOperation(currentIndex(), eMergeToAB);
