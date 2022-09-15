@@ -107,6 +107,9 @@ option(ENABLE_CLANG_TIDY "Run clang-tidy if available and cmake version >=3.6" O
 set(CMAKE_CXX_STANDARD 17)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    if(ENABLE_CLAZY)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -plugin-arg-clazy -Xclang level0,level1,no-overloaded-signal,auto-unexpected-qstringbuilder,unused-non-trivial-variable,returning-void-expression,isempty-vs-count,container-inside-loop,assert-with-side-effects")
+    endif()
     #Adjust clang specific  warnings
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -fexceptions")
     set(CLANG_WARNING_FLAGS "-Wno-undef -Wno-trigraphs -Wno-invalid-pp-token -Wno-comment -Wshorten-64-to-32 -Wstring-conversion -Wc++11-narrowing -fstack-protector-all")
