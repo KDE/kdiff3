@@ -1026,22 +1026,22 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     return true;
 }
 
-inline QString DirectoryMergeWindow::getDirNameA() const
+QString DirectoryMergeWindow::getDirNameA() const
 {
     return gDirInfo->dirA().prettyAbsPath();
 }
 
-inline QString DirectoryMergeWindow::getDirNameB() const
+QString DirectoryMergeWindow::getDirNameB() const
 {
     return gDirInfo->dirB().prettyAbsPath();
 }
 
-inline QString DirectoryMergeWindow::getDirNameC() const
+QString DirectoryMergeWindow::getDirNameC() const
 {
     return gDirInfo->dirC().prettyAbsPath();
 }
 
-inline QString DirectoryMergeWindow::getDirNameDest() const
+QString DirectoryMergeWindow::getDirNameDest() const
 {
     return gDirInfo->destDir().prettyAbsPath();
 }
