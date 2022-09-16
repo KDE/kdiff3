@@ -15,16 +15,13 @@ option(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
 option(CMAKE_CXX_EXTENSIONS ON ) #disable trigraphs in clang/gcc -- officially removed in c++17
 option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+set(KF5_MIN_VERSION "5.82.0")
 if (BUILD_WITH_QT6)
     set(QT_MAJOR_VERSION "6")
-    set(ECM_MIN_VERSION "5.82.0")
     set(QT_MIN_VERSION "6.0.0")
-    set(KF5_MIN_VERSION "5.82.0")
 else()
     set(QT_MAJOR_VERSION "5")
-    set(ECM_MIN_VERSION "5.70.0")
     set(QT_MIN_VERSION "5.15.2")
-    set(KF5_MIN_VERSION "5.70.0")
 endif()
 
 if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8.2)
