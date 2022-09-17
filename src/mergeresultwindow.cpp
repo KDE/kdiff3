@@ -381,15 +381,14 @@ void MergeResultWindow::merge(bool bAutoSolve, e_SrcSelector defaultSelector, bo
     int nrOfUnsolvedConflicts = 0;
     int nrOfWhiteSpaceConflicts = 0;
 
-    MergeBlockListImp::iterator i;
-    for(i = m_mergeLineList.list().begin(); i != m_mergeLineList.list().end(); ++i)
+    for(const MergeBlock& mb: m_mergeLineList.list())
     {
-        if(i->isConflict())
+        if(mb.isConflict())
             ++nrOfUnsolvedConflicts;
-        else if(i->isDelta())
+        else if(mb.isDelta())
             ++nrOfSolvedConflicts;
 
-        if(i->isWhiteSpaceConflict())
+        if(mb.isWhiteSpaceConflict())
             ++nrOfWhiteSpaceConflicts;
     }
 
