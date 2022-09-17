@@ -58,7 +58,7 @@ class MergeResultWindow: public QWidget
 
     inline void clearMergeList()
     {
-        m_mergeLineList.list().clear();
+        m_mergeBlockList.list().clear();
     }
 
     static void initActions(KActionCollection* ac);
@@ -195,14 +195,14 @@ class MergeResultWindow: public QWidget
     typedef std::map<QString, HistoryMapEntry> HistoryMap;
     void collectHistoryInformation(e_SrcSelector src, const HistoryRange& historyRange, HistoryMap& historyMap, std::list<HistoryMap::iterator>& hitList);
 
-    MergeBlockList m_mergeLineList;
+    MergeBlockList m_mergeBlockList;
     MergeBlockListImp::iterator m_currentMergeBlockIt;
     bool isItAtEnd(bool bIncrement, const MergeBlockListImp::const_iterator i) const
     {
         if(bIncrement)
-            return i != m_mergeLineList.list().end();
+            return i != m_mergeBlockList.list().end();
         else
-            return i != m_mergeLineList.list().begin();
+            return i != m_mergeBlockList.list().begin();
     }
 
     int m_currentPos;
