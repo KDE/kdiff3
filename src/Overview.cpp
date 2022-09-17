@@ -126,14 +126,14 @@ void Overview::drawColumn(QPainter& p, e_OverviewMode eOverviewMode, int x, int 
     {
         const Diff3Line& d3l = *i;
         int y = h * (line + 1) / nofLines;
-        MergeLine lMergeLine;
+        MergeBlock lMergeBlock;
         e_MergeDetails md;
         bool bConflict;
         bool bLineRemoved;
 
-        lMergeLine.mergeOneLine(d3l, bLineRemoved, !KDiff3App::isTripleDiff());
-        md = lMergeLine.details();
-        bConflict = lMergeLine.isConflict();
+        lMergeBlock.mergeOneLine(d3l, bLineRemoved, !KDiff3App::isTripleDiff());
+        md = lMergeBlock.details();
+        bConflict = lMergeBlock.isConflict();
 
         QColor c = m_pOptions->backgroundColor();
         bool bWhiteSpaceChange = false;

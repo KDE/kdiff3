@@ -195,9 +195,9 @@ class MergeResultWindow: public QWidget
     typedef std::map<QString, HistoryMapEntry> HistoryMap;
     void collectHistoryInformation(e_SrcSelector src, const HistoryRange& historyRange, HistoryMap& historyMap, std::list<HistoryMap::iterator>& hitList);
 
-    MergeLineList m_mergeLineList;
-    MergeLineListImp::iterator m_currentMergeLineIt;
-    bool isItAtEnd(bool bIncrement, const MergeLineListImp::const_iterator i) const
+    MergeBlockList m_mergeLineList;
+    MergeBlockListImp::iterator m_currentMergeBlockIt;
+    bool isItAtEnd(bool bIncrement, const MergeBlockListImp::const_iterator i) const
     {
         if(bIncrement)
             return i != m_mergeLineList.list().end();
@@ -206,7 +206,7 @@ class MergeResultWindow: public QWidget
     }
 
     int m_currentPos;
-    bool checkOverviewIgnore(const MergeLineListImp::const_iterator i) const;
+    bool checkOverviewIgnore(const MergeBlockListImp::const_iterator i) const;
 
     enum e_Direction
     {
@@ -224,7 +224,7 @@ class MergeResultWindow: public QWidget
     void go(e_Direction eDir, e_EndPoint eEndPoint);
     bool calcIteratorFromLineNr(
         LineRef::LineType line,
-        MergeLineListImp::iterator& mlIt,
+        MergeBlockListImp::iterator& mbIt,
         MergeEditLineList::iterator& melIt);
 
     void paintEvent(QPaintEvent* e) override;
@@ -237,7 +237,7 @@ class MergeResultWindow: public QWidget
         RLPainter& p, int line, const QString& str,
         enum e_SrcSelector srcSelect, e_MergeDetails mergeDetails, int rangeMark, bool bUserModified, bool bLineRemoved, bool bWhiteSpaceConflict
     );
-    void setFastSelector(MergeLineListImp::iterator i);
+    void setFastSelector(MergeBlockListImp::iterator i);
     LineRef convertToLine(QtNumberType y);
     bool event(QEvent*) override;
     void mousePressEvent(QMouseEvent* e) override;
@@ -276,7 +276,7 @@ class MergeResultWindow: public QWidget
     Selection m_selection;
 
     bool deleteSelection2(QString& str, int& x, int& y,
-                          MergeLineListImp::iterator& mlIt, MergeEditLineList::iterator& melIt);
+                          MergeBlockListImp::iterator& mbIt, MergeEditLineList::iterator& melIt);
     bool doRelevantChangesExist();
 
     /*

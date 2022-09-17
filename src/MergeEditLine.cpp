@@ -50,23 +50,23 @@ QString MergeEditLine::getString(const std::shared_ptr<LineDataVector> &pLineDat
     return mStr;
 }
 
-bool MergeLine::isSameKind(const MergeLine &ml2) const
+bool MergeBlock::isSameKind(const MergeBlock &mb2) const
 {
-    if(bConflict && ml2.bConflict)
+    if(bConflict && mb2.bConflict)
     {
         // Both lines have conflicts: If one is only a white space conflict and
         // the other one is a real conflict, then this line returns false.
-        return mId3l->isEqualAC() == ml2.mId3l->isEqualAC() && mId3l->isEqualAB() == ml2.mId3l->isEqualAB();
+        return mId3l->isEqualAC() == mb2.mId3l->isEqualAC() && mId3l->isEqualAB() == mb2.mId3l->isEqualAB();
     }
     else
         return (
-            (!bConflict && !ml2.bConflict && bDelta && ml2.bDelta && srcSelect == ml2.srcSelect && (mergeDetails == ml2.mergeDetails || (mergeDetails != e_MergeDetails::eBCAddedAndEqual && ml2.mergeDetails != e_MergeDetails::eBCAddedAndEqual))) ||
-            (!bDelta && !ml2.bDelta));
+            (!bConflict && !mb2.bConflict && bDelta && mb2.bDelta && srcSelect == mb2.srcSelect && (mergeDetails == mb2.mergeDetails || (mergeDetails != e_MergeDetails::eBCAddedAndEqual && mb2.mergeDetails != e_MergeDetails::eBCAddedAndEqual))) ||
+            (!bDelta && !mb2.bDelta));
 }
 
 // Calculate the merge information for the given Diff3Line.
 // Results will be stored in this and bLineRemoved.
-void MergeLine::mergeOneLine(const Diff3Line &diffRec, bool &bLineRemoved, bool bTwoInputs)
+void MergeBlock::mergeOneLine(const Diff3Line &diffRec, bool &bLineRemoved, bool bTwoInputs)
 {
     mergeDetails = e_MergeDetails::eDefault;
     bConflict = false;
@@ -190,50 +190,50 @@ void MergeLine::mergeOneLine(const Diff3Line &diffRec, bool &bLineRemoved, bool 
         assert(false);
 }
 /*
-    Build a new MergeLineList from scratch using a Diff3LineList.
+    Build a new MergeBlockList from scratch using a Diff3LineList.
 */
-void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreeway)
+void MergeBlockList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreeway)
 {
     LineIndex lineIdx = 0;
     for(auto it = diff3List.cbegin(); it != diff3List.cend(); ++it)
     {
         const Diff3Line &d = *it;
-        MergeLine ml;
+        MergeBlock mb;
         bool bLineRemoved;
 
-        ml.mergeOneLine(d, bLineRemoved, !isThreeway);
-        ml.dectectWhiteSpaceConflict(d, isThreeway);
+        mb.mergeOneLine(d, bLineRemoved, !isThreeway);
+        mb.dectectWhiteSpaceConflict(d, isThreeway);
 
-        ml.d3lLineIdx = lineIdx;
-        ml.bDelta = ml.srcSelect != e_SrcSelector::A;
-        ml.mId3l = it;
-        ml.srcRangeLength = 1;
+        mb.d3lLineIdx = lineIdx;
+        mb.bDelta = mb.srcSelect != e_SrcSelector::A;
+        mb.mId3l = it;
+        mb.srcRangeLength = 1;
 
-        MergeLine *lBack = mImp.empty() ? nullptr : &mImp.back();
+        MergeBlock *lBack = mImp.empty() ? nullptr : &mImp.back();
 
-        bool bSame = lBack != nullptr && ml.isSameKind(*lBack);
+        bool bSame = lBack != nullptr && mb.isSameKind(*lBack);
         if(bSame)
         {
             ++lBack->srcRangeLength;
-            if(lBack->isWhiteSpaceConflict() && !ml.isWhiteSpaceConflict())
+            if(lBack->isWhiteSpaceConflict() && !mb.isWhiteSpaceConflict())
                 lBack->bWhiteSpaceConflict = false;
         }
         else
         {
-            mImp.push_back(ml);
+            mImp.push_back(mb);
         }
 
-        if(!ml.isConflict())
+        if(!mb.isConflict())
         {
-            MergeLine &tmpBack = mImp.back();
-            MergeEditLine mel(ml.id3l());
-            mel.setSource(ml.srcSelect, bLineRemoved);
+            MergeBlock &tmpBack = mImp.back();
+            MergeEditLine mel(mb.id3l());
+            mel.setSource(mb.srcSelect, bLineRemoved);
             tmpBack.list().push_back(mel);
         }
         else if(lBack == nullptr || !lBack->isConflict() || !bSame)
         {
-            MergeLine &tmpBack = mImp.back();
-            MergeEditLine mel(ml.id3l());
+            MergeBlock &tmpBack = mImp.back();
+            MergeEditLine mel(mb.id3l());
             mel.setConflict();
             tmpBack.list().push_back(mel);
         }
@@ -244,31 +244,31 @@ void MergeLineList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreew
 /*
     Changes default merge settings currently used when not in auto mode or if white space is being auto solved.
 */
-void MergeLineList::updateDefaults(const e_SrcSelector defaultSelector, const bool bConflictsOnly, const bool bWhiteSpaceOnly)
+void MergeBlockList::updateDefaults(const e_SrcSelector defaultSelector, const bool bConflictsOnly, const bool bWhiteSpaceOnly)
 {
     // Change all auto selections
-    MergeLineListImp::iterator mlIt;
-    for(mlIt = mImp.begin(); mlIt != mImp.end(); ++mlIt)
+    MergeBlockListImp::iterator mbIt;
+    for(mbIt = mImp.begin(); mbIt != mImp.end(); ++mbIt)
     {
-        MergeLine &ml = *mlIt;
-        bool bConflict = ml.list().empty() || ml.list().begin()->isConflict();
-        if(ml.isDelta() && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || ml.isWhiteSpaceConflict()))
+        MergeBlock &mb = *mbIt;
+        bool bConflict = mb.list().empty() || mb.list().begin()->isConflict();
+        if(mb.isDelta() && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || mb.isWhiteSpaceConflict()))
         {
-            ml.list().clear();
+            mb.list().clear();
             if(defaultSelector == e_SrcSelector::Invalid)
             {
-                MergeEditLine mel(ml.id3l());
+                MergeEditLine mel(mb.id3l());
 
                 mel.setConflict();
-                ml.bConflict = true;
-                ml.list().push_back(mel);
+                mb.bConflict = true;
+                mb.list().push_back(mel);
             }
             else
             {
-                Diff3LineList::const_iterator d3llit = ml.id3l();
+                Diff3LineList::const_iterator d3llit = mb.id3l();
                 int j;
 
-                for(j = 0; j < ml.srcRangeLength; ++j)
+                for(j = 0; j < mb.srcRangeLength; ++j)
                 {
                     MergeEditLine mel(d3llit);
                     mel.setSource(defaultSelector, false);
@@ -278,24 +278,24 @@ void MergeLineList::updateDefaults(const e_SrcSelector defaultSelector, const bo
                                                                                                                                        LineRef();
                     if(srcLine.isValid())
                     {
-                        ml.list().push_back(mel);
+                        mb.list().push_back(mel);
                     }
 
                     ++d3llit;
                 }
 
-                if(ml.list().empty()) // Make a line nevertheless
+                if(mb.list().empty()) // Make a line nevertheless
                 {
-                    MergeEditLine mel(ml.id3l());
+                    MergeEditLine mel(mb.id3l());
                     mel.setRemoved(defaultSelector);
-                    ml.list().push_back(mel);
+                    mb.list().push_back(mel);
                 }
             }
         }
     }
 }
 
-void MergeLine::dectectWhiteSpaceConflict(const Diff3Line &d, const bool isThreeWay)
+void MergeBlock::dectectWhiteSpaceConflict(const Diff3Line &d, const bool isThreeWay)
 {
     // Automatic solving for only whitespace changes.
     if(isConflict() &&
@@ -306,7 +306,7 @@ void MergeLine::dectectWhiteSpaceConflict(const Diff3Line &d, const bool isThree
     }
 }
 // Remove all lines that are empty, because no src lines are there.
-void MergeLine::removeEmptySource()
+void MergeBlock::removeEmptySource()
 {
     LineRef oldSrcLine;
     e_SrcSelector oldSrc = e_SrcSelector::Invalid;
@@ -330,33 +330,33 @@ void MergeLine::removeEmptySource()
     }
 }
 
-// Returns the iterator to the MergeLine after the split
-MergeLineListImp::iterator MergeLineList::splitAtDiff3LineIdx(int d3lLineIdx)
+// Returns the iterator to the MergeBlock after the split
+MergeBlockListImp::iterator MergeBlockList::splitAtDiff3LineIdx(int d3lLineIdx)
 {
-    MergeLineListImp::iterator i;
+    MergeBlockListImp::iterator i;
     for(i = mImp.begin(); i != mImp.end(); ++i)
     {
         if(i->getIndex() == d3lLineIdx)
         {
-            // No split needed, this is the beginning of a MergeLine
+            // No split needed, this is the beginning of a MergeBlock
             return i;
         }
         else if(i->getIndex() > d3lLineIdx)
         {
-            // The split must be in the previous MergeLine
+            // The split must be in the previous MergeBlock
             --i;
-            MergeLine& ml = *i;
-            MergeLine newML;
-            ml.split(newML, d3lLineIdx);
+            MergeBlock &mb = *i;
+            MergeBlock newMB;
+            mb.split(newMB, d3lLineIdx);
             ++i;
-            return mImp.insert(i, newML);
+            return mImp.insert(i, newMB);
         }
     }
-    // The split must be in the previous MergeLine
+    // The split must be in the previous MergeBlock
     --i;
-    MergeLine& ml = *i;
-    MergeLine newML;
-    ml.split(newML, d3lLineIdx);
+    MergeBlock &mb = *i;
+    MergeBlock newMB;
+    mb.split(newMB, d3lLineIdx);
     ++i;
-    return mImp.insert(i, newML);
+    return mImp.insert(i, newMB);
 }

@@ -82,10 +82,10 @@ class MergeEditLine
     bool mChanged;
 };
 
-class MergeLine
+class MergeBlock
 {
   private:
-    friend class MergeLineList;
+    friend class MergeBlockList;
 
     Diff3LineList::const_iterator mId3l;
     LineIndex d3lLineIdx = -1;    // Needed to show the correct window pos.
@@ -116,48 +116,48 @@ class MergeLine
 
     [[nodiscard]] inline LineCount lineCount() const { return SafeInt<qint32>(list().size()); }
 
-    void split(MergeLine& ml2, int d3lLineIdx2) // The caller must insert the ml2 after this ml in the m_mergeLineList
+    void split(MergeBlock& mb2, int d3lLineIdx2) // The caller must insert the mb2 after this mb in the m_mergeLineList
     {
         if(d3lLineIdx2 < d3lLineIdx || d3lLineIdx2 >= d3lLineIdx + srcRangeLength)
             return; //Error
-        ml2.mergeDetails = mergeDetails;
-        ml2.bConflict = bConflict;
-        ml2.bWhiteSpaceConflict = bWhiteSpaceConflict;
-        ml2.bDelta = bDelta;
-        ml2.srcSelect = srcSelect;
+        mb2.mergeDetails = mergeDetails;
+        mb2.bConflict = bConflict;
+        mb2.bWhiteSpaceConflict = bWhiteSpaceConflict;
+        mb2.bDelta = bDelta;
+        mb2.srcSelect = srcSelect;
 
-        ml2.d3lLineIdx = d3lLineIdx2;
-        ml2.srcRangeLength = srcRangeLength - (d3lLineIdx2 - d3lLineIdx);
-        srcRangeLength = d3lLineIdx2 - d3lLineIdx; // current MergeLine controls fewer lines
-        ml2.mId3l = mId3l;
+        mb2.d3lLineIdx = d3lLineIdx2;
+        mb2.srcRangeLength = srcRangeLength - (d3lLineIdx2 - d3lLineIdx);
+        srcRangeLength = d3lLineIdx2 - d3lLineIdx; // current MergeBlock controls fewer lines
+        mb2.mId3l = mId3l;
         for(int i = 0; i < srcRangeLength; ++i)
-            ++ml2.mId3l;
+            ++mb2.mId3l;
 
-        ml2.mMergeEditLineList.clear();
+        mb2.mMergeEditLineList.clear();
         // Search for best place to splice
         for(MergeEditLineList::iterator i = mMergeEditLineList.begin(); i != mMergeEditLineList.end(); ++i)
         {
-            if(i->id3l() == ml2.mId3l)
+            if(i->id3l() == mb2.mId3l)
             {
-                ml2.mMergeEditLineList.splice(ml2.mMergeEditLineList.begin(), mMergeEditLineList, i, mMergeEditLineList.end());
+                mb2.mMergeEditLineList.splice(mb2.mMergeEditLineList.begin(), mMergeEditLineList, i, mMergeEditLineList.end());
                 return;
             }
         }
-        ml2.mMergeEditLineList.push_back(MergeEditLine(ml2.mId3l));
+        mb2.mMergeEditLineList.push_back(MergeEditLine(mb2.mId3l));
     }
 
-    void join(MergeLine& ml2) // The caller must remove the ml2 from the m_mergeLineList after this call
+    void join(MergeBlock& mb2) // The caller must remove the ml2 from the m_mergeLineList after this call
     {
-        srcRangeLength += ml2.srcRangeLength;
-        ml2.mMergeEditLineList.clear();
+        srcRangeLength += mb2.srcRangeLength;
+        mb2.mMergeEditLineList.clear();
         mMergeEditLineList.clear();
         mMergeEditLineList.push_back(MergeEditLine(mId3l)); // Create a simple conflict
-        if(ml2.bConflict) bConflict = true;
-        if(!ml2.bWhiteSpaceConflict) bWhiteSpaceConflict = false;
-        if(ml2.bDelta) bDelta = true;
+        if(mb2.bConflict) bConflict = true;
+        if(!mb2.bWhiteSpaceConflict) bWhiteSpaceConflict = false;
+        if(mb2.bDelta) bDelta = true;
     }
 
-    bool isSameKind(const MergeLine& ml2) const;
+    bool isSameKind(const MergeBlock& mb2) const;
 
     void mergeOneLine(const Diff3Line& diffRec, bool& bLineRemoved, bool bTwoInputs);
     void dectectWhiteSpaceConflict(const Diff3Line& d, const bool isThreeWay);
@@ -165,21 +165,21 @@ class MergeLine
     void removeEmptySource();
 };
 
-typedef std::list<MergeLine> MergeLineListImp;
+typedef std::list<MergeBlock> MergeBlockListImp;
 
-class MergeLineList
+class MergeBlockList
 {
   private:
-    MergeLineListImp mImp;
+    MergeBlockListImp mImp;
 
   public:
-    [[nodiscard]] inline const MergeLineListImp& list() const { return mImp; }
-    [[nodiscard]] inline MergeLineListImp& list() { return mImp; }
+    [[nodiscard]] inline const MergeBlockListImp& list() const { return mImp; }
+    [[nodiscard]] inline MergeBlockListImp& list() { return mImp; }
 
     void buildFromDiff3(const Diff3LineList& diff3List, bool isThreeway);
     void updateDefaults(const e_SrcSelector defaultSelector, const bool bConflictsOnly, const bool bWhiteSpaceOnly);
 
-    MergeLineListImp::iterator splitAtDiff3LineIdx(int d3lLineIdx);
+    MergeBlockListImp::iterator splitAtDiff3LineIdx(int d3lLineIdx);
 };
 
 #endif
