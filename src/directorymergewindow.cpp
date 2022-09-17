@@ -3036,7 +3036,7 @@ void DirectoryMergeWindow::updateAvailabilities(bool bMergeEditorVisible, bool b
     d->m_pDirChooseBEverywhere->setEnabled(bDirCompare && isVisible());
     d->m_pDirChooseCEverywhere->setEnabled(bDirCompare && isVisible() && bThreeDirs);
 
-    MergeFileInfos* pMFI = d->getMFI(currentIndex());
+    const MergeFileInfos* pMFI = d->getMFI(currentIndex());
 
     bool bItemActive = bDirCompare && isVisible() && pMFI != nullptr; //  &&  hasFocus();
     bool bMergeMode = bThreeDirs || !d->m_bSyncMode;
