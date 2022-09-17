@@ -2427,7 +2427,10 @@ bool MergeResultWindow::deleteSelection2(QString& s, int& x, int& y,
     {
         assert(m_selection.isValidFirstLine());
         deleteSelection();
+
         y = m_cursorYPos;
+        x = m_cursorXPos;
+
         if(!calcIteratorFromLineNr(y, mlIt, melIt))
         {
             // deleteSelection() should never remove or empty the first line, so
@@ -2436,7 +2439,6 @@ bool MergeResultWindow::deleteSelection2(QString& s, int& x, int& y,
         }
 
         s = melIt->getString(m_pldA, m_pldB, m_pldC);
-        x = m_cursorXPos;
         return true;
     }
 
