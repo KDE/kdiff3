@@ -109,6 +109,10 @@ class MergeBlock
     [[nodiscard]] inline bool isConflict() const { return bConflict; }
     [[nodiscard]] inline bool isWhiteSpaceConflict() const { return bWhiteSpaceConflict; }
     [[nodiscard]] inline bool isDelta() const { return bDelta; }
+    [[nodiscard]] inline bool hasModfiedText()
+    {
+        return std::any_of(list().cbegin(), list().cend(), [](const MergeEditLine& mel) { return mel.isModified(); });
+    }
 
     [[nodiscard]] inline Diff3LineList::const_iterator id3l() const { return mId3l; }
 

@@ -252,7 +252,7 @@ void MergeBlockList::updateDefaults(const e_SrcSelector defaultSelector, const b
     {
         MergeBlock &mb = *mbIt;
         bool bConflict = mb.list().empty() || mb.list().begin()->isConflict();
-        if(mb.isDelta() && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || mb.isWhiteSpaceConflict()))
+        if(mb.isDelta() && !(mb.hasModfiedText() && (bConflictsOnly || bWhiteSpaceOnly)) && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || mb.isWhiteSpaceConflict()))
         {
             mb.list().clear();
             if(defaultSelector == e_SrcSelector::Invalid)
