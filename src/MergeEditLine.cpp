@@ -252,7 +252,7 @@ void MergeLineList::updateDefaults(const e_SrcSelector defaultSelector, const bo
     {
         MergeLine &ml = *mlIt;
         bool bConflict = ml.list().empty() || ml.list().begin()->isConflict();
-        if(ml.isDelta() && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || ml.isWhiteSpaceConflict()))
+        if(ml.isDelta() && !(ml.hasModfiedText() && (bConflictsOnly || bWhiteSpaceOnly)) && (!bConflictsOnly || bConflict) && (!bWhiteSpaceOnly || ml.isWhiteSpaceConflict()))
         {
             ml.list().clear();
             if(defaultSelector == e_SrcSelector::Invalid)
