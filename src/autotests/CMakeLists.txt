@@ -30,12 +30,12 @@ ecm_add_test(commentparser.cpp ../CommentParser.cpp
     LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test
 )
 
-ecm_add_test(CvsIgnoreListTest.cpp ../CvsIgnoreList.cpp ../fileaccess.cpp ../Utils.cpp ../ProgressProxy.cpp ../CompositeIgnoreList.cpp
+ecm_add_test(CvsIgnoreListTest.cpp ../CvsIgnoreList.cpp ../fileaccess.cpp ../Utils.cpp ../ProgressProxy.cpp ../CompositeIgnoreList.cpp ../Logging.cpp
     TEST_NAME "cvsignorelisttest"
     LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets KF5::I18n
 )
 
-ecm_add_test(FileAccessTest.cpp ../fileaccess.cpp ../Utils.cpp ../ProgressProxy.cpp ../CvsIgnoreList.cpp ../CompositeIgnoreList.cpp
+ecm_add_test(FileAccessTest.cpp ../fileaccess.cpp ../Utils.cpp ../ProgressProxy.cpp ../CvsIgnoreList.cpp ../CompositeIgnoreList.cpp ../Logging.cpp
     TEST_NAME "fileaccesstest"
     LINK_LIBRARIES Qt${QT_VERSION_MAJOR}::Test Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets KF5::I18n
 )
