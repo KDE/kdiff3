@@ -577,7 +577,7 @@ bool FileAccess::isNormal() const
         */
         if(m_linkTarget.startsWith("pipe:"))
         {
-            return true;
+            return false;
         }
 
         FileAccess target(m_linkTarget);
