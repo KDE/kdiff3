@@ -936,7 +936,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     bool bContinue = true;
     if(!bListDirSuccessA || !bListDirSuccessB || !bListDirSuccessC)
     {
-        QString s = i18n("Warning text", "Some subfolders were not readable in");
+        QString s = i18nc("Warning text", "Some subfolders were not readable in");
         if(!bListDirSuccessA) s += "\nA: " + dirA.prettyAbsPath();
         if(!bListDirSuccessB) s += "\nB: " + dirB.prettyAbsPath();
         if(!bListDirSuccessC) s += "\nC: " + dirC.prettyAbsPath();
