@@ -692,7 +692,7 @@ void DirectoryMergeWindow::reload()
     {
         int result = KMessageBox::warningYesNo(this,
                                                i18n("You are currently doing a folder merge. Are you sure, you want to abort the merge and rescan the folder?"),
-                                               i18nc("Error dialog caption", "Warning"),
+                                               i18nc("Error dialog title", "Warning"),
                                                KGuiItem(i18nc("Title for rescan button", "Rescan")),
                                                KGuiItem(i18nc("Title for continue button", "Continue Merging")));
         if(result != KMessageBox::Yes)
@@ -860,7 +860,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
             text += i18n("Folder C \"%1\" does not exist or is not a folder.\n", dirC.prettyAbsPath());
         }
 
-        KMessageBox::error(mWindow, text, i18nc("Error dialog caption", "Folder Opening Error"));
+        KMessageBox::error(mWindow, text, i18nc("Error dialog title", "Folder Opening Error"));
         return false;
     }
 
@@ -870,7 +870,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         KMessageBox::error(mWindow,
                            i18n("The destination folder must not be the same as A or B when "
                                 "three folders are merged.\nCheck again before continuing."),
-                           i18nc("Error dialog caption", "Parameter Warning"));
+                           i18nc("Error dialog title", "Parameter Warning"));
         return false;
     }
 
