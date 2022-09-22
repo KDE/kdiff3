@@ -340,14 +340,14 @@ class DirectoryMergeWindow::DirectoryMergeWindowPrivate: public QAbstractItemMod
     QPointer<QAction> m_pDirFoldAll;
     QPointer<QAction> m_pDirUnfoldAll;
 
-    KToggleAction* m_pDirShowIdenticalFiles;
-    KToggleAction* m_pDirShowDifferentFiles;
-    KToggleAction* m_pDirShowFilesOnlyInA;
-    KToggleAction* m_pDirShowFilesOnlyInB;
-    KToggleAction* m_pDirShowFilesOnlyInC;
+    QPointer<KToggleAction> m_pDirShowIdenticalFiles;
+    QPointer<KToggleAction> m_pDirShowDifferentFiles;
+    QPointer<KToggleAction> m_pDirShowFilesOnlyInA;
+    QPointer<KToggleAction> m_pDirShowFilesOnlyInB;
+    QPointer<KToggleAction> m_pDirShowFilesOnlyInC;
 
-    KToggleAction* m_pDirSynchronizeDirectories;
-    KToggleAction* m_pDirChooseNewerFiles;
+    QPointer<KToggleAction> m_pDirSynchronizeDirectories;
+    QPointer<KToggleAction> m_pDirChooseNewerFiles;
 
     QPointer<QAction> m_pDirCompareExplicit;
     QPointer<QAction> m_pDirMergeExplicit;
