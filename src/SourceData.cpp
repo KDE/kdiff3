@@ -156,7 +156,6 @@ const QString SourceData::setData(const QString& data)
     {
         m_aliasName = i18n("From Clipboard");
         mFromClipBoard = true;
-        //m_fileAccess = FileAccess(); // Insure m_fileAccess is not valid
     }
 
     return u8"";
@@ -244,8 +243,6 @@ bool SourceData::FileData::readFile(FileAccess& file)
     {
         return true;
     }
-
-    //FileAccess fa(filename);
 
     if(!file.isNormal())
         return true;
