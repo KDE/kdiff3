@@ -860,7 +860,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
             text += i18n("Folder C \"%1\" does not exist or is not a folder.\n", dirC.prettyAbsPath());
         }
 
-        KMessageBox::error(mWindow, text, i18n("Folder Opening Error"));
+        KMessageBox::error(mWindow, text, i18nc("Error dialog caption", "Folder Opening Error"));
         return false;
     }
 
@@ -870,7 +870,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         KMessageBox::error(mWindow,
                            i18n("The destination folder must not be the same as A or B when "
                                 "three folders are merged.\nCheck again before continuing."),
-                           i18n("Parameter Warning"));
+                           i18nc("Error dialog caption", "Parameter Warning"));
         return false;
     }
 
@@ -936,12 +936,12 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     bool bContinue = true;
     if(!bListDirSuccessA || !bListDirSuccessB || !bListDirSuccessC)
     {
-        QString s = i18n("Some subfolders were not readable in");
+        QString s = i18n("Warning text", "Some subfolders were not readable in");
         if(!bListDirSuccessA) s += "\nA: " + dirA.prettyAbsPath();
         if(!bListDirSuccessB) s += "\nB: " + dirB.prettyAbsPath();
         if(!bListDirSuccessC) s += "\nC: " + dirC.prettyAbsPath();
         s += '\n';
-        s += i18n("Check the permissions of the subfolders.");
+        s += i18nc("Warning text", "Check the permissions of the subfolders.");
         bContinue = KMessageBox::Continue == KMessageBox::warningContinueCancel(mWindow, s);
     }
 
@@ -964,7 +964,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
         mWindow->resizeColumnToContents(column);
 
     m_bScanning = false;
-    Q_EMIT mWindow->statusBarMessage(i18n("Ready."));
+    Q_EMIT mWindow->statusBarMessage(i18nc("Status bar idle message.", "Ready."));
 
     if(bContinue && !m_bSkipDirStatus)
     {
