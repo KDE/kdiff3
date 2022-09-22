@@ -841,8 +841,7 @@ bool DirectoryMergeWindow::DirectoryMergeWindowPrivate::init(
     const FileAccess& dirDest = gDirInfo->destDir();
     // Check if all input directories exist and are valid. The dest dir is not tested now.
     // The test will happen only when we are going to write to it.
-    if(!dirA.isDir() || !dirB.isDir() ||
-       (dirC.isValid() && !dirC.isDir()))
+    if(!dirA.isDir() || !dirB.isDir() || (dirC.isValid() && !dirC.isDir()))
     {
         QString text(i18n("Opening of folders failed:"));
         text += "\n\n";
