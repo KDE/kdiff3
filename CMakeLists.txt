@@ -158,9 +158,9 @@ add_definitions(
     #the warning useless.
     -DBOOST_ALLOW_DEPRECATED_HEADERS
     #KF5 5.64+ flags
-    #Don't warn for API depreciated after 5.80.0 (below as hex.hex.hex number)
-    -DKF_DEPRECATED_WARNINGS_SINCE=0x055000
-    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x055000
+    #Don't warn for API depreciated after 5.86.0 (below as hex.hex.hex number)
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x056200
+    -DKIOCORE_DEPRECATED_WARNINGS_SINCE=0x055600
     -DKF_VERSION_MAJOR=${KF_VERSION_MAJOR}
     -DKF_VERSION_MINOR=${KF_VERSION_MINOR}
     -DKF_VERSION_PATCH=${KF_VERSION_PATCH}
