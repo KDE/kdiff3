@@ -215,40 +215,40 @@ void OpenDialog::fixCurrentText(QComboBox* pCB)
 
 void OpenDialog::accept()
 {
-    int maxNofRecentFiles = 10;
+    constexpr int maxNofRecentFiles = 10;
     fixCurrentText(dialogUi.lineA);
 
     QString s = dialogUi.lineA->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    QStringList& sl = m_pOptions->getRecentFilesA();
+    QStringList* sl = &m_pOptions->m_recentAFiles;
     // If an item exist, remove it from the list and reinsert it at the beginning.
-    sl.removeAll(s);
-    if(!s.isEmpty()) sl.prepend(s);
-    if(sl.count() > maxNofRecentFiles) sl.erase(sl.begin() + maxNofRecentFiles, sl.end());
+    sl->removeAll(s);
+    if(!s.isEmpty()) sl->prepend(s);
+    if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
 
     fixCurrentText(dialogUi.lineB);
     s = dialogUi.lineB->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    sl = m_pOptions->getRecentFilesB();
-    sl.removeAll(s);
-    if(!s.isEmpty()) sl.prepend(s);
-    if(sl.count() > maxNofRecentFiles) sl.erase(sl.begin() + maxNofRecentFiles, sl.end());
+    sl = &m_pOptions->m_recentBFiles;
+    sl->removeAll(s);
+    if(!s.isEmpty()) sl->prepend(s);
+    if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
 
     fixCurrentText(dialogUi.lineC);
     s = dialogUi.lineC->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    sl = m_pOptions->getRecentFilesC();
-    sl.removeAll(s);
-    if(!s.isEmpty()) sl.prepend(s);
-    if(sl.count() > maxNofRecentFiles) sl.erase(sl.begin() + maxNofRecentFiles, sl.end());
+    sl = &m_pOptions->m_recentCFiles;
+    sl->removeAll(s);
+    if(!s.isEmpty()) sl->prepend(s);
+    if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
 
     fixCurrentText(dialogUi.lineOut);
     s = dialogUi.lineOut->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    sl = m_pOptions->getRecentOutputFiles();
-    sl.removeAll(s);
-    if(!s.isEmpty()) sl.prepend(s);
-    if(sl.count() > maxNofRecentFiles) sl.erase(sl.begin() + maxNofRecentFiles, sl.end());
+    sl = &m_pOptions->m_recentOutputFiles;
+    sl->removeAll(s);
+    if(!s.isEmpty()) sl->prepend(s);
+    if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
 
     QDialog::accept();
 }
