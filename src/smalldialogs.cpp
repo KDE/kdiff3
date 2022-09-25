@@ -10,8 +10,8 @@
 
 #include "diff.h"
 #include "FileNameLineEdit.h"
-#include "options.h"
 #include "kdiff3.h"
+#include "options.h"
 #include "TypeUtils.h"
 #include "ui_opendialog.h"
 
@@ -215,40 +215,25 @@ void OpenDialog::fixCurrentText(QComboBox* pCB)
 
 void OpenDialog::accept()
 {
-    constexpr int maxNofRecentFiles = 10;
     fixCurrentText(dialogUi.lineA);
-
     QString s = dialogUi.lineA->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    QStringList* sl = &m_pOptions->m_recentAFiles;
-    // If an item exist, remove it from the list and reinsert it at the beginning.
-    sl->removeAll(s);
-    if(!s.isEmpty()) sl->prepend(s);
-    if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
+    m_pOptions->getRecentFilesA().addFile(s);
 
     fixCurrentText(dialogUi.lineB);
     s = dialogUi.lineB->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    sl = &m_pOptions->m_recentBFiles;
-    sl->removeAll(s);
-    if(!s.isEmpty()) sl->prepend(s);
-    if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
+    m_pOptions->getRecentFilesB().addFile(s);
 
     fixCurrentText(dialogUi.lineC);
     s = dialogUi.lineC->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    sl = &m_pOptions->m_recentCFiles;
-    sl->removeAll(s);
-    if(!s.isEmpty()) sl->prepend(s);
-    if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
+    m_pOptions->getRecentFilesC().addFile(s);
 
     fixCurrentText(dialogUi.lineOut);
     s = dialogUi.lineOut->currentText();
     s = FileAccess::prettyAbsPath(QUrl::fromUserInput(s, QString(), QUrl::AssumeLocalFile));
-    sl = &m_pOptions->m_recentOutputFiles;
-    sl->removeAll(s);
-    if(!s.isEmpty()) sl->prepend(s);
-    if(sl->count() > maxNofRecentFiles) sl->erase(sl->begin() + maxNofRecentFiles, sl->end());
+    m_pOptions->getRecentOutputFiles().addFile(s);
 
     QDialog::accept();
 }
