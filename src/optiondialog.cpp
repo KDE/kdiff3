@@ -243,6 +243,7 @@ class OptionIntEdit: public QLineEdit, public OptionNum<int>
         v->setRange(rangeMin, rangeMax);
         setValidator(v);
     }
+
     void setToDefault() override
     {
         //QString::setNum does not account for locale settings
