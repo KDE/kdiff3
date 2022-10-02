@@ -1,0 +1,451 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Catalan  "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Manual d'usuari del KDiff3</title>
+<author
+><firstname
+>Burkhard</firstname
+><surname
+>Lueck</surname
+> <contrib
+>Pàgina de manual del KDiff3.</contrib
+> &Burkhard.Lueck.mail; </author>
+<date
+>22 de febrer de 2019</date>
+<releaseinfo
+>kdiff3 1.8</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdiff3</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdiff3</command
+></refname>
+<refpurpose
+>Eina per a comparar i fusionar fitxers i carpetes</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kdiff3</command
+> <arg choice="opt"
+><option
+>-u, --ignore</option
+></arg
+> <arg choice="opt"
+><option
+>--query</option
+></arg
+> <arg choice="opt"
+><option
+>--html</option
+></arg
+> <arg choice="opt"
+><option
+>--abort</option
+></arg
+> <arg choice="opt"
+><option
+>-m, --merge</option
+></arg
+> <arg choice="opt"
+><option
+>-b, --base</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-o, --output</option
+> <replaceable
+>fitxer</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--out</option
+> <replaceable
+>fitxer</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--noauto</option
+></arg
+> <arg choice="opt"
+><option
+>--auto</option
+></arg
+> <arg choice="opt"
+><option
+>--L1</option
+> <replaceable
+>àlies_1</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L2</option
+> <replaceable
+>àlies_2</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L3</option
+> <replaceable
+>àlies_3</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-L, --fname</option
+> <replaceable
+>àlies</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--cs</option
+> <replaceable
+>cadena</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--confighelp</option
+></arg
+> <arg choice="opt"
+><option
+>--config</option
+> <replaceable
+>fitxer</replaceable
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>fitxer_1</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>fitxer_2</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>fitxer_3</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Descripció</title>
+<para
+>Compara dos o tres fitxers o carpetes des de l'entrada.</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Opcions</title>
+<variablelist>
+<varlistentry>
+<term
+><option
+>-u, --ignore</option
+></term>
+<listitem
+><para
+>Ignorat. (Definit per l'usuari). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--query</option
+></term>
+<listitem
+><para
+>Ignorat. (Definit per l'usuari). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--html</option
+></term>
+<listitem
+><para
+>Ignorat. (Definit per l'usuari). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--abort</option
+></term>
+<listitem
+><para
+>Ignorat. (Definit per l'usuari). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-m, --merge</option
+></term>
+<listitem
+><para
+>Fusiona l'entrada. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-b, --base</option
+> <replaceable
+>fitxer</replaceable
+></term>
+<listitem
+><para
+>Fitxer base explícit. Per compatibilitat amb certes eines. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-o, --output</option
+> <replaceable
+>fitxer</replaceable
+></term>
+<listitem
+><para
+>Fitxer de sortida. Implica -m. &pex;: -o fitxernou.txt </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--out</option
+> <replaceable
+>fitxer</replaceable
+></term>
+<listitem
+><para
+>Fitxer de sortida, un altre cop. (Per compatibilitat amb certes eines). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--auto</option
+></term>
+<listitem
+><para
+>Sense IGU si tots els conflictes es poden resoldre automàticament. (Cal <option
+>-o</option
+> <replaceable
+>fitxer</replaceable
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--noauto</option
+></term>
+<listitem
+><para
+>Ignora --auto i mostra sempre la IGU. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L1</option
+> <replaceable
+>àlies_1</replaceable
+></term>
+<listitem
+><para
+>Reemplaçament del nom visible pel fitxer de sortida 1 (base). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L2</option
+> <replaceable
+>àlies_2</replaceable
+></term>
+<listitem
+><para
+>Reemplaçament del nom visible pel fitxer de sortida 2. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L3</option
+> <replaceable
+>àlies_3</replaceable
+></term>
+<listitem
+><para
+>Reemplaçament del nom visible pel fitxer de sortida 3. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-L, --fname</option
+> <replaceable
+>àlies</replaceable
+></term>
+<listitem
+><para
+>Reemplaçament del nom visible alternatiu. Proporcioneu-lo per a cada sortida. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--cs</option
+> <replaceable
+>cadena</replaceable
+></term>
+<listitem
+><para
+>Sobreescriu l'opció de la configuració. Useu-ho per a cada opció. &pex;: <option
+>--cs</option
+> <replaceable
+>AutoAdvance=1</replaceable
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--confighelp</option
+></term>
+<listitem
+><para
+>Mostra una llista de les opcions de configuració i els valors actuals. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--config</option
+> <replaceable
+>fitxer</replaceable
+></term>
+<listitem
+><para
+>Usa un fitxer de configuració diferent. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>fitxer_1</replaceable
+></option
+></term>
+<listitem
+><para
+>Fitxer 1 a obrir (base, si no s'especifica via <option
+>--base</option
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>fitxer_2</replaceable
+></option
+></term>
+<listitem
+><para
+>Fitxer 2 a obrir. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>fitxer_3</replaceable
+></option
+></term>
+<listitem
+><para
+>Fitxer 3 a obrir. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Vegeu també</title>
+<simplelist>
+<member
+>Hi ha disponible documentació d'usuari més detallada des de <ulink url="help:/kdiff3"
+>help:/kdiff3</ulink
+> (podeu emprar aquest &URL; al &konqueror; o bé executar <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/kdiff3</parameter
+></userinput
+>).</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Autors</title>
+<para
+>Aquesta pàgina de manual ha estat preparada per en &Burkhard.Lueck; &Burkhard.Lueck.mail;.</para>
+</refsect1>
+
+</refentry>

@@ -1,0 +1,128 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <megaribi@epn.ba>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdiff3fileitemactionplugin.po\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-03 00:49+0000\n"
+"PO-Revision-Date: 2015-02-15 22:44+0000\n"
+"Last-Translator: Samir Ribić <Unknown>\n"
+"Language-Team: bs <bs@kde.org>\n"
+"Language: bs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2015-02-16 06:45+0000\n"
+"X-Generator: Launchpad (build 17341)\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: kdiff3fileitemaction.cpp:80
+#, fuzzy, kde-format
+#| msgid "KDiff3 ..."
+msgid "KDiff3..."
+msgstr "KDiff3 ..."
+
+#: kdiff3fileitemaction.cpp:105
+#, kde-format
+msgid "Compare with %1"
+msgstr "Poredi sa %1"
+
+#: kdiff3fileitemaction.cpp:111
+#, kde-format
+msgid "Merge with %1"
+msgstr "Spoji sa %1"
+
+#: kdiff3fileitemaction.cpp:117
+#, kde-format
+msgid "Save '%1' for later"
+msgstr "Snimi '%1' za kasnije"
+
+#: kdiff3fileitemaction.cpp:123
+#, kde-format
+msgid "3-way merge with base"
+msgstr "trostrano spajanje s osnovom"
+
+#: kdiff3fileitemaction.cpp:130
+#, fuzzy, kde-format
+#| msgid "Compare with ..."
+msgid "Compare with..."
+msgstr "Poredi sa..."
+
+#: kdiff3fileitemaction.cpp:143
+#, fuzzy, kde-format
+#| msgid "Clear list"
+msgctxt "Contexualmenu option to cleat comparison list"
+msgid "Clear list"
+msgstr "Očisti spisak"
+
+#: kdiff3fileitemaction.cpp:151
+#, fuzzy, kde-format
+#| msgid "Compare"
+msgctxt "Contexualmenu option "
+msgid "Compare"
+msgstr "Uporedi"
+
+#: kdiff3fileitemaction.cpp:157
+#, kde-format
+msgid "3 way comparison"
+msgstr "Trostrano poređenje"
+
+#: kdiff3fileitemaction.cpp:161
+#, fuzzy, kde-format
+#| msgid "About KDiff3 menu plugin ..."
+msgid "About KDiff3 menu plugin..."
+msgstr "O KDiff3 meni priključku ..."
+
+#: kdiff3fileitemaction.cpp:275
+#, fuzzy, kde-format
+#| msgid ""
+#| "KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
+#| "KDiff3 homepage: http://kdiff3.sourceforge.net\n"
+#| "\n"
+msgid "KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
+msgstr ""
+"KDiff3 Priključak za datotečne akcije: Copyright (C) 2011 Joachim Eibl\n"
+"KDiff3 homepage: http://kdiff3.sourceforge.net\n"
+"\n"
+
+#: kdiff3fileitemaction.cpp:276
+#, fuzzy, kde-format
+#| msgid ""
+#| "Using the contextmenu extension:\n"
+#| "For simple comparison of two selected files choose \"Compare\".\n"
+#| "If the other file is somewhere else \"Save\" the first file for later. It "
+#| "will appear in the \"Compare With ...\" submenu. Then use \"Compare With"
+#| "\" on second file.\n"
+#| "For a 3-way merge first \"Save\" the base file, then the branch to merge "
+#| "and choose \"3-way merge with base\" on the other branch which will be "
+#| "used as destination.\n"
+#| "Same also applies to directory comparison and merge."
+msgid ""
+"Using the context menu extension:\n"
+"For simple comparison of two selected files choose \"Compare\".\n"
+"If the other file is somewhere else \"Save\" the first file for later. It "
+"will appear in the \"Compare with...\" submenu. Then use \"Compare With\" on "
+"the second file.\n"
+"For a 3-way merge first \"Save\" the base file, then the branch to merge and "
+"choose \"3-way merge with base\" on the other branch which will be used as "
+"destination.\n"
+"Same also applies to folder comparison and merge."
+msgstr ""
+"Korišćenje ekstenzije kontekst menija:\n"
+"Za jednostavno upoređivanje dvije izabrane datoteke izabrati \"Uporedi\".\n"
+"Ako je druga datoteka negdje drugo \"Snimi\" prvu datoteku za kasnije. Ona "
+"će se pojaviti u \"uporedi sa ...\" podmeniju. Zatim koristite \"Uporedi sa"
+"\" na drugom fajlu.\n"
+"Za 3-vai spoji prvi \"Save\" baznu fajl, a zatim granu za spajanje i izabere "
+"\"3-vai spojiti sa bazom\" na drugoj grani koja će se koristiti kao "
+"odredište.\n"
+"Isto se odnosi i na direktorijum poređenja i stapanja."
+
+#: kdiff3fileitemaction.cpp:284
+#, kde-format
+msgid "About KDiff3 File Item Action Plugin"
+msgstr "O KDiff3 priključku za datotečne akcije"
