@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-26 00:48+0000\n"
-"PO-Revision-Date: 2022-08-09 13:19+0200\n"
+"PO-Revision-Date: 2022-10-03 16:46+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
-"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language-Team: Korean <kde-i18n-doc@kde.org>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -354,9 +354,7 @@ msgstr ""
 
 #: directorymergewindow.cpp:695 kdiff3.cpp:735 kdiff3.cpp:745 kdiff3.cpp:757
 #: mergeresultwindow.cpp:326 pdiff.cpp:856 pdiff.cpp:1721 pdiff.cpp:1731
-#, fuzzy, kde-format
-#| msgctxt "Error dialog caption"
-#| msgid "Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
 msgstr "경고"
@@ -394,8 +392,7 @@ msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "폴더 C \"%1\"이(가) 없거나 폴더가 아닙니다.\n"
 
 #: directorymergewindow.cpp:863
-#, fuzzy, kde-format
-#| msgid "Folder Opening Error"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
 msgstr "폴더 열기 오류"
@@ -411,8 +408,7 @@ msgstr ""
 "계속하기 전에 확인하십시오."
 
 #: directorymergewindow.cpp:873
-#, fuzzy, kde-format
-#| msgid "Parameter Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
 msgstr "인자 경고"
@@ -438,25 +434,22 @@ msgid "Reading Folder C"
 msgstr "폴더 C 읽는 중"
 
 #: directorymergewindow.cpp:939
-#, fuzzy, kde-format
-#| msgid "Some subfolders were not readable in"
+#, kde-format
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
 msgstr "다음의 일부 하위 폴더를 읽을 수 없음:"
 
 #: directorymergewindow.cpp:944
-#, fuzzy, kde-format
-#| msgid "Check the permissions of the subfolders."
+#, kde-format
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
 msgstr "하위 폴더의 권한을 확인하십시오."
 
 #: directorymergewindow.cpp:967
-#, fuzzy, kde-format
-#| msgid "Ready."
+#, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
-msgstr "준비."
+msgstr "준비됨."
 
 #: directorymergewindow.cpp:982
 #, kde-format
@@ -1104,15 +1097,11 @@ msgstr ""
 #: FontChooser.ui:17
 #, kde-format
 msgid "TextLabel"
-msgstr ""
+msgstr "텍스트 레이블"
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:30
-#, fuzzy, kde-format
-#| msgid ""
-#| "The quick brown fox jumps over the river\n"
-#| "but the little red hen escapes with a shiver.\n"
-#| ":-)"
+#, kde-format
 msgid ""
 "The quick brown fox jumps over the river\n"
 "but the little red hen escapes with a shiver\n"
@@ -1120,16 +1109,14 @@ msgid ""
 msgstr ""
 "키스의 고유 조건은 입술끼리 만나야 되고 특별한 요령은 필요치 않다.\n"
 "그러나 입술끼리 만나게 되는 일은 흔하지 않을 뿐이다.\n"
-":-)"
+":-)\n"
 
 #. i18n: ectx: property (text), widget (QPushButton, selectFont)
 #: FontChooser.ui:43
-#, fuzzy, kde-format
-#| msgctxt "Button title"
-#| msgid "Change Font"
+#, kde-format
 msgctxt "Button Title"
 msgid "Change Font"
-msgstr "글꼴 변경"
+msgstr "글꼴 바꾸기"
 
 #: kdiff3.cpp:176
 #, kde-format
@@ -2285,7 +2272,7 @@ msgstr ""
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
-msgstr ""
+msgstr "없음"
 
 #: optiondialog.cpp:124 optiondialog.cpp:136
 #, kde-format
