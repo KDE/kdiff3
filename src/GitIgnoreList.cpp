@@ -84,7 +84,8 @@ QString GitIgnoreList::readFile(const QString& fileName) const
 
 void GitIgnoreList::addEntries(const QString& dir, const QString& lines)
 {
-    const QStringList lineList = lines.split(QRegularExpression("[\r\n]"), Qt::SkipEmptyParts);
+    static const QRegularExpression newLineReg = QRegularExpression("[\r\n]");
+    const QStringList lineList = lines.split(newLineReg, Qt::SkipEmptyParts);
     for(const QString& line: lineList)
     {
         if(isComment(line))
