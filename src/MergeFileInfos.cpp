@@ -287,55 +287,56 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
     assert(eNew == 0 && eMiddle == 1 && eOld == 2);
 
     // The map automatically sorts the keys.
-    int age = eNew;
+    e_Age age = eNew;
     std::map<QDateTime, FilesFound>::reverse_iterator i;
+    assert(dateMap.size() <= 3);
     for(i = dateMap.rbegin(); i != dateMap.rend(); ++i)
     {
         FilesFound n = i->second;
 
         if(n == FilesFound::aOnly && getAgeA() == eNotThere)
         {
-            setAgeA((e_Age)age);
-            ++age;
+            setAgeA(age);
+            age = nextAgeValue(age);
             if(m_bEqualAB)
             {
                 setAgeB(getAgeA());
-                ++age;
+                age = nextAgeValue(age);
             }
             if(m_bEqualAC)
             {
                 setAgeC(getAgeA());
-                ++age;
+                age = nextAgeValue(age);
             }
         }
         else if(n == FilesFound::bAndA && getAgeB() == eNotThere)
         {
-            setAgeB((e_Age)age);
-            ++age;
+            setAgeB(age);
+            age = nextAgeValue(age);
             if(m_bEqualAB)
             {
                 setAgeA(getAgeB());
-                ++age;
+                age = nextAgeValue(age);
             }
             if(m_bEqualBC)
             {
                 setAgeC(getAgeB());
-                ++age;
+                age = nextAgeValue(age);
             }
         }
         else if(n == FilesFound::all && getAgeC() == eNotThere)
         {
-            setAgeC((e_Age)age);
-            ++age;
+            setAgeC(age);
+            age = nextAgeValue(age);
             if(m_bEqualAC)
             {
                 setAgeA(getAgeC());
-                ++age;
+                age = nextAgeValue(age);
             }
             if(m_bEqualBC)
             {
                 setAgeB(getAgeC());
-                ++age;
+                age = nextAgeValue(age);
             }
         }
     }
@@ -344,20 +345,21 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
     // files are not. One wouldn't expect this to happen, yet it happens sometimes.
     if(existsInC() && getAgeC() == eNotThere)
     {
-        setAgeC((e_Age)age);
-        ++age;
+        setAgeC(age);
+        age = nextAgeValue(age);
         m_bConflictingAges = true;
     }
     if(existsInB() && getAgeB() == eNotThere)
     {
-        setAgeB((e_Age)age);
-        ++age;
+        setAgeB(age);
+        age = nextAgeValue(age);
         m_bConflictingAges = true;
     }
     if(existsInA() && getAgeA() == eNotThere)
     {
-        setAgeA((e_Age)age);
-        ++age;
+        setAgeA(age);
+        //unneeded as long as this is the last condition checked.
+        //age = nextAgeValue(age);
         m_bConflictingAges = true;
     }
 

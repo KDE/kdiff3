@@ -159,6 +159,24 @@ class MergeFileInfos
     [[nodiscard]] bool conflictingAges() const { return m_bConflictingAges; }
 
   private:
+    [[nodiscard]] e_Age nextAgeValue(e_Age age)
+    {
+        switch(age)
+        {
+            case eNew:
+                return eMiddle;
+            case eMiddle:
+                return eOld;
+            case eOld:
+                return eNotThere;
+            case eNotThere:
+                return eAgeEnd;
+            case eAgeEnd:
+                assert(false);
+                return age;
+        }
+    }
+
     bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status, const QSharedPointer<const Options>& pOptions);
     inline void setAgeA(const e_Age inAge) { m_ageA = inAge; }
     inline void setAgeB(const e_Age inAge) { m_ageB = inAge; }
