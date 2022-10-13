@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-26 00:48+0000\n"
-"PO-Revision-Date: 2022-07-15 11:50+0200\n"
+"PO-Revision-Date: 2022-10-12 15:41+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -33,18 +33,16 @@ msgid "Getting file status: %1"
 msgstr ""
 
 #: DefaultFileAccessJobHandler.cpp:106
-#, fuzzy, kde-format
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
-msgstr "Removente dossier : %1"
+msgstr "Legente file: %1"
 
 #: DefaultFileAccessJobHandler.cpp:146
-#, fuzzy, kde-format
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
-msgstr "Removente dossier : %1"
+msgstr "Scribente file : %1"
 
 #: DefaultFileAccessJobHandler.cpp:180
 #, kde-format
@@ -52,25 +50,22 @@ msgid "Out of memory"
 msgstr "Foras de Memoria"
 
 #: DefaultFileAccessJobHandler.cpp:217
-#, fuzzy, kde-format
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
-msgstr "Removente dossier : %1"
+msgstr "Creante dossier : %1"
 
 #: DefaultFileAccessJobHandler.cpp:239
-#, fuzzy, kde-format
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Removente dossier : %1"
 
 #: DefaultFileAccessJobHandler.cpp:255
-#, fuzzy, kde-format
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
-msgstr "Removente dossier : %1"
+msgstr "Removente file: %1"
 
 #: DefaultFileAccessJobHandler.cpp:272
 #, kde-format
@@ -185,78 +180,67 @@ msgid "Other"
 msgstr "Altere"
 
 #: directorymergewindow.cpp:415
-#, fuzzy, kde-format
-#| msgid "Copy A to B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Copy A to B"
 msgstr "Copia A in B"
 
 #: directorymergewindow.cpp:418
-#, fuzzy, kde-format
-#| msgid "Copy B to A"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Copy B to A"
 msgstr "Copia B in A"
 
 #: directorymergewindow.cpp:421
-#, fuzzy, kde-format
-#| msgid "Delete A"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Delete A"
 msgstr "Dele A"
 
 #: directorymergewindow.cpp:424
-#, fuzzy, kde-format
-#| msgid "Delete B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Delete B"
 msgstr "Dele B"
 
 #: directorymergewindow.cpp:427
-#, fuzzy, kde-format
-#| msgid "Delete A & B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Delete A & B"
 msgstr "Dele A & B"
 
 #: directorymergewindow.cpp:430
-#, fuzzy, kde-format
-#| msgid "Merge to A"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A"
 msgstr "Fusiona in A"
 
 #: directorymergewindow.cpp:433
-#, fuzzy, kde-format
-#| msgid "Merge to B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Merge to B"
 msgstr "Fusiona in B"
 
 #: directorymergewindow.cpp:436
-#, fuzzy, kde-format
-#| msgid "Merge to A & B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A & B"
 msgstr "Fusiona in  A & B"
 
 #: directorymergewindow.cpp:448
-#, fuzzy, kde-format
-#| msgid "Delete (if exists)"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Delete (if exists)"
 msgstr "Dele (si existe)"
 
 #: directorymergewindow.cpp:452
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgctxt "Operation column message (Directory merge)"
 msgid "Merge"
 msgstr "Fusiona"
 
 #: directorymergewindow.cpp:452
-#, fuzzy, kde-format
-#| msgid "Merge (manual)"
+#, kde-format
 msgctxt "Operation column message (File merge)"
 msgid "Merge (manual)"
 msgstr "Fusiona (manual)"
@@ -280,50 +264,43 @@ msgid "Error: Dates are equal but files are not."
 msgstr ""
 
 #: directorymergewindow.cpp:475
-#, fuzzy, kde-format
-#| msgid "Done"
+#, kde-format
 msgctxt "Status column message"
 msgid "Done"
 msgstr "Facite"
 
 #: directorymergewindow.cpp:477
-#, fuzzy, kde-format
-#| msgid "Error"
+#, kde-format
 msgctxt "Status column message"
 msgid "Error"
 msgstr "Error"
 
 #: directorymergewindow.cpp:479
-#, fuzzy, kde-format
-#| msgid "Skipped."
+#, kde-format
 msgctxt "Status column message"
 msgid "Skipped."
 msgstr "Saltate."
 
 #: directorymergewindow.cpp:481
-#, fuzzy, kde-format
-#| msgid "Not saved."
+#, kde-format
 msgctxt "Status column message"
 msgid "Not saved."
 msgstr "Non salveguardate."
 
 #: directorymergewindow.cpp:483
-#, fuzzy, kde-format
-#| msgid "In progress..."
+#, kde-format
 msgctxt "Status column message"
 msgid "In progress..."
 msgstr "In progresso..."
 
 #: directorymergewindow.cpp:485
-#, fuzzy, kde-format
-#| msgid "To do."
+#, kde-format
 msgctxt "Status column message"
 msgid "To do."
 msgstr "De facer."
 
 #: directorymergewindow.cpp:525
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "Column title"
 msgid "Name"
 msgstr "Nomine"
@@ -343,29 +320,25 @@ msgid "Status"
 msgstr "Stato"
 
 #: directorymergewindow.cpp:537
-#, fuzzy, kde-format
-#| msgid "Unsolved"
+#, kde-format
 msgctxt "Column title"
 msgid "Unsolved"
 msgstr "Non resolvite"
 
 #: directorymergewindow.cpp:539
-#, fuzzy, kde-format
-#| msgid "Solved"
+#, kde-format
 msgctxt "Column title"
 msgid "Solved"
 msgstr "Resolvite"
 
 #: directorymergewindow.cpp:541
-#, fuzzy, kde-format
-#| msgid "White"
+#, kde-format
 msgctxt "Column title"
 msgid "Nonwhite"
-msgstr "Blanco"
+msgstr "NonBlanco"
 
 #: directorymergewindow.cpp:543
-#, fuzzy, kde-format
-#| msgid "White"
+#, kde-format
 msgctxt "Column title"
 msgid "White"
 msgstr "Blanco"
@@ -386,15 +359,13 @@ msgid "Warning"
 msgstr "Aviso"
 
 #: directorymergewindow.cpp:696
-#, fuzzy, kde-format
-#| msgid "Rescan"
+#, kde-format
 msgctxt "Title for rescan button"
 msgid "Rescan"
 msgstr "Re-examina"
 
 #: directorymergewindow.cpp:697
-#, fuzzy, kde-format
-#| msgid "Continue Merging"
+#, kde-format
 msgctxt "Title for continue button"
 msgid "Continue Merging"
 msgstr "Continua fusionar"
@@ -420,8 +391,7 @@ msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "Dossier C \"%1\" non existe o non es un dossier.\n"
 
 #: directorymergewindow.cpp:863
-#, fuzzy, kde-format
-#| msgid "Folder Opening Error"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
 msgstr "Error de aperir dossier"
@@ -435,8 +405,7 @@ msgid ""
 msgstr ""
 
 #: directorymergewindow.cpp:873
-#, fuzzy, kde-format
-#| msgid "Parameter Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
 msgstr "Aviso de parametro"
@@ -474,8 +443,7 @@ msgid "Check the permissions of the subfolders."
 msgstr ""
 
 #: directorymergewindow.cpp:967
-#, fuzzy, kde-format
-#| msgid "Ready."
+#, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "Preste."
@@ -570,15 +538,13 @@ msgid ""
 msgstr ""
 
 #: directorymergewindow.cpp:2118
-#, fuzzy, kde-format
-#| msgid "Starting Merge"
+#, kde-format
 msgctxt "Caption"
 msgid "Starting Merge"
 msgstr "Initiante fusion"
 
 #: directorymergewindow.cpp:2119
-#, fuzzy, kde-format
-#| msgid "Do It"
+#, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
 msgstr "Face lo"
@@ -628,22 +594,19 @@ msgid ""
 msgstr ""
 
 #: directorymergewindow.cpp:2269
-#, fuzzy, kde-format
-#| msgid "Continue merge after an error"
+#, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "Continua fusionar post un error"
 
 #: directorymergewindow.cpp:2270
-#, fuzzy, kde-format
-#| msgid "Continue With Last Item"
+#, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "Continua con ultime elemento"
 
 #: directorymergewindow.cpp:2271
-#, fuzzy, kde-format
-#| msgid "Skip Item"
+#, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "Salta elemento"
@@ -1095,9 +1058,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: FontChooser.ui:17
-#, kde-format
+#, fuzzy, kde-format
 msgid "TextLabel"
-msgstr ""
+msgstr "Etiquetta de Texto (TextLabel)"
 
 #. i18n: ectx: property (plainText), widget (QPlainTextEdit, exampleTextEdit)
 #: FontChooser.ui:30
@@ -1110,8 +1073,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, selectFont)
 #: FontChooser.ui:43
-#, fuzzy, kde-format
-#| msgid "Change Font"
+#, kde-format
 msgctxt "Button Title"
 msgid "Change Font"
 msgstr "Cambia font"
@@ -1364,13 +1326,14 @@ msgid "Go to Line"
 msgstr "Vade a Linea"
 
 #: kdiff3.cpp:647
-#, fuzzy, kde-format
-#| msgid "Go to Line"
+#, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
 "Go\n"
 "Line"
-msgstr "Vade a Linea"
+msgstr ""
+"Vade a \n"
+"Linea"
 
 #: kdiff3.cpp:648
 #, kde-format
@@ -1428,14 +1391,14 @@ msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
 
 #: kdiff3.cpp:652
-#, fuzzy, kde-format
-#| msgctxt "Automatically detected line ending"
-#| msgid "Autodetect"
+#, kde-format
 msgctxt "Auto goto next unsolced toolbar text."
 msgid ""
 "Auto\n"
 "Next"
-msgstr "Auto relevate"
+msgstr ""
+"Auto \n"
+"Proxime"
 
 #: kdiff3.cpp:654
 #, kde-format
@@ -1469,13 +1432,14 @@ msgid "Show Line Numbers"
 msgstr "Monstra numeros de linea (rango)"
 
 #: kdiff3.cpp:657
-#, fuzzy, kde-format
-#| msgid "Show Line Numbers"
+#, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
 "Line\n"
 "Numbers"
-msgstr "Monstra numeros de linea (rango)"
+msgstr ""
+"Linea\n"
+"Numeros"
 
 #: kdiff3.cpp:659
 #, kde-format
@@ -1787,8 +1751,7 @@ msgid "Ignored. (User defined.)"
 msgstr ""
 
 #: main.cpp:103
-#, fuzzy, kde-format
-#| msgid " (64 bit)"
+#, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bit)"
@@ -2203,10 +2166,10 @@ msgid ""
 msgstr ""
 
 #: optiondialog.cpp:122 optiondialog.cpp:134
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "No text styling"
 msgid "none"
-msgstr ""
+msgstr "nulle"
 
 #: optiondialog.cpp:124 optiondialog.cpp:136
 #, kde-format

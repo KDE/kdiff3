@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-26 00:48+0000\n"
-"PO-Revision-Date: 2022-09-10 19:36+0200\n"
+"PO-Revision-Date: 2022-10-01 12:24+0200\n"
 "Last-Translator: Valter Mura <valtermura@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -358,9 +358,7 @@ msgstr ""
 
 #: directorymergewindow.cpp:695 kdiff3.cpp:735 kdiff3.cpp:745 kdiff3.cpp:757
 #: mergeresultwindow.cpp:326 pdiff.cpp:856 pdiff.cpp:1721 pdiff.cpp:1731
-#, fuzzy, kde-format
-#| msgctxt "Error dialog caption"
-#| msgid "Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
 msgstr "Avviso"
@@ -398,8 +396,7 @@ msgid "Folder C \"%1\" does not exist or is not a folder.\n"
 msgstr "La cartella C «%1» non esiste o non è una cartella.\n"
 
 #: directorymergewindow.cpp:863
-#, fuzzy, kde-format
-#| msgid "Folder Opening Error"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Folder Opening Error"
 msgstr "Errore nell'apertura di una cartella"
@@ -416,8 +413,7 @@ msgstr ""
 "Ricontrolla prima di continuare."
 
 #: directorymergewindow.cpp:873
-#, fuzzy, kde-format
-#| msgid "Parameter Warning"
+#, kde-format
 msgctxt "Error dialog title"
 msgid "Parameter Warning"
 msgstr "Attenzione ai parametri"
@@ -443,22 +439,19 @@ msgid "Reading Folder C"
 msgstr "Lettura della cartella C"
 
 #: directorymergewindow.cpp:939
-#, fuzzy, kde-format
-#| msgid "Some subfolders were not readable in"
+#, kde-format
 msgctxt "Warning text"
 msgid "Some subfolders were not readable in"
 msgstr "Alcune sottocartelle non erano leggibili"
 
 #: directorymergewindow.cpp:944
-#, fuzzy, kde-format
-#| msgid "Check the permissions of the subfolders."
+#, kde-format
 msgctxt "Warning text"
 msgid "Check the permissions of the subfolders."
 msgstr "Controlla i permessi per le sottocartelle."
 
 #: directorymergewindow.cpp:967
-#, fuzzy, kde-format
-#| msgid "Ready."
+#, kde-format
 msgctxt "Status bar idle message."
 msgid "Ready."
 msgstr "Pronto."
