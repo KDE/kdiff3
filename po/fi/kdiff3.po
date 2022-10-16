@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-26 00:48+0000\n"
-"PO-Revision-Date: 2022-07-27 19:33+0300\n"
+"PO-Revision-Date: 2022-08-19 14:26+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -36,15 +36,13 @@ msgid "Getting file status: %1"
 msgstr "Noudetaan tiedoston tilaa: %1"
 
 #: DefaultFileAccessJobHandler.cpp:106
-#, fuzzy, kde-format
-#| msgid "Reading file: %1"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "Luetaan tiedostoa: %1"
 
 #: DefaultFileAccessJobHandler.cpp:146
-#, fuzzy, kde-format
-#| msgid "Writing file: %1"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "Kirjoitetaan tiedostoa: %1"
@@ -55,25 +53,22 @@ msgid "Out of memory"
 msgstr "Muisti lopussa"
 
 #: DefaultFileAccessJobHandler.cpp:217
-#, fuzzy, kde-format
-#| msgid "Making folder: %1"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "Tehdään kansio: %1"
 
 #: DefaultFileAccessJobHandler.cpp:239
-#, fuzzy, kde-format
-#| msgid "Removing folder: %1"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "Poistetaan kansio: %1"
 
 #: DefaultFileAccessJobHandler.cpp:255
-#, fuzzy, kde-format
-#| msgid "Removing file: %1"
+#, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
-msgstr "Poistetaan tiedostoa: %1"
+msgstr "Poistetaan tiedosto: %1"
 
 #: DefaultFileAccessJobHandler.cpp:272
 #, kde-format
@@ -190,191 +185,164 @@ msgid "Other"
 msgstr "Muu"
 
 #: directorymergewindow.cpp:415
-#, fuzzy, kde-format
-#| msgid "Copy A to B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Copy A to B"
 msgstr "Kopioi A B:hen"
 
 #: directorymergewindow.cpp:418
-#, fuzzy, kde-format
-#| msgid "Copy B to A"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Copy B to A"
 msgstr "Kopioi B A:hen"
 
 #: directorymergewindow.cpp:421
-#, fuzzy, kde-format
-#| msgid "Delete A"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Delete A"
 msgstr "Poista A"
 
 #: directorymergewindow.cpp:424
-#, fuzzy, kde-format
-#| msgid "Delete B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Delete B"
 msgstr "Poista B"
 
 #: directorymergewindow.cpp:427
-#, fuzzy, kde-format
-#| msgid "Delete A & B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Delete A & B"
 msgstr "Poista A ja B"
 
 #: directorymergewindow.cpp:430
-#, fuzzy, kde-format
-#| msgid "Merge to A"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A"
 msgstr "Yhdistä A:han"
 
 #: directorymergewindow.cpp:433
-#, fuzzy, kde-format
-#| msgid "Merge to B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Merge to B"
 msgstr "Yhdistä B:hen"
 
 #: directorymergewindow.cpp:436
-#, fuzzy, kde-format
-#| msgid "Merge to A & B"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A & B"
 msgstr "Yhdistä A:han ja B:hen"
 
 #: directorymergewindow.cpp:448
-#, fuzzy, kde-format
-#| msgid "Delete (if exists)"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Delete (if exists)"
 msgstr "Poista (jos olemassa)"
 
 #: directorymergewindow.cpp:452
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgctxt "Operation column message (Directory merge)"
 msgid "Merge"
 msgstr "Yhdistä"
 
 #: directorymergewindow.cpp:452
-#, fuzzy, kde-format
-#| msgid "Merge (manual)"
+#, kde-format
 msgctxt "Operation column message (File merge)"
 msgid "Merge (manual)"
 msgstr "Yhdistä (käsin)"
 
 #: directorymergewindow.cpp:455
-#, fuzzy, kde-format
-#| msgid "Error: Conflicting File Types"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Error: Conflicting File Types"
-msgstr "Virhe: Tiedostotyypit ristiriidassa-"
+msgstr "Virhe: Tiedostotyypit ristiriidassa"
 
 #: directorymergewindow.cpp:458
-#, fuzzy, kde-format
-#| msgid "Error: Changed and Deleted"
+#, kde-format
 msgctxt "Operation column message"
 msgid "Error: Changed and Deleted"
 msgstr "Virhe: Muuttunut ja poistettu"
 
 #: directorymergewindow.cpp:461
-#, fuzzy, kde-format
-#| msgid "Error: Dates are equal but files are not."
+#, kde-format
 msgctxt "Operation column message"
 msgid "Error: Dates are equal but files are not."
 msgstr "Virhe: Päiväykset yhtenevät mutta tiedostot eivät."
 
 #: directorymergewindow.cpp:475
-#, fuzzy, kde-format
-#| msgid "Done"
+#, kde-format
 msgctxt "Status column message"
 msgid "Done"
 msgstr "Valmis"
 
 #: directorymergewindow.cpp:477
-#, fuzzy, kde-format
-#| msgid "Error"
+#, kde-format
 msgctxt "Status column message"
 msgid "Error"
 msgstr "Virhe"
 
 #: directorymergewindow.cpp:479
-#, fuzzy, kde-format
-#| msgid "Skipped."
+#, kde-format
 msgctxt "Status column message"
 msgid "Skipped."
-msgstr "Ohitettu."
+msgstr "Sivuutettu."
 
 #: directorymergewindow.cpp:481
-#, fuzzy, kde-format
-#| msgid "Not saved."
+#, kde-format
 msgctxt "Status column message"
 msgid "Not saved."
 msgstr "Ei tallennettu."
 
 #: directorymergewindow.cpp:483
-#, fuzzy, kde-format
-#| msgid "In progress..."
+#, kde-format
 msgctxt "Status column message"
 msgid "In progress..."
 msgstr "Käynnissä…"
 
 # *** TARKISTA: Kun tietäisi kontekstin, olisi helpompi keksiä käännös!
 #: directorymergewindow.cpp:485
-#, fuzzy, kde-format
-#| msgid "To do."
+#, kde-format
 msgctxt "Status column message"
 msgid "To do."
-msgstr "Tehtäviä."
+msgstr "Tehtävää."
 
 #: directorymergewindow.cpp:525
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "Column title"
 msgid "Name"
 msgstr "Nimi"
 
 #: directorymergewindow.cpp:533
-#, fuzzy, kde-format
-#| msgid "Operation"
+#, kde-format
 msgctxt "Column title"
 msgid "Operation"
-msgstr "Toiminto"
+msgstr "Toimenpide"
 
 #: directorymergewindow.cpp:535
-#, fuzzy, kde-format
-#| msgid "Status"
+#, kde-format
 msgctxt "Column title"
 msgid "Status"
 msgstr "Tila"
 
 #: directorymergewindow.cpp:537
-#, fuzzy, kde-format
-#| msgid "Unsolved"
+#, kde-format
 msgctxt "Column title"
 msgid "Unsolved"
-msgstr "Ratkaisematon"
+msgstr "Ratkaisematta"
 
 #: directorymergewindow.cpp:539
-#, fuzzy, kde-format
-#| msgid "Solved"
+#, kde-format
 msgctxt "Column title"
 msgid "Solved"
 msgstr "Ratkaistu"
 
 #: directorymergewindow.cpp:541
-#, fuzzy, kde-format
-#| msgid "Nonwhite"
+#, kde-format
 msgctxt "Column title"
 msgid "Nonwhite"
 msgstr "Ei-tyhje"
 
 #: directorymergewindow.cpp:543
-#, fuzzy, kde-format
-#| msgid "White"
+#, kde-format
 msgctxt "Column title"
 msgid "White"
 msgstr "Tyhje"
@@ -397,15 +365,13 @@ msgid "Warning"
 msgstr "Varoitus"
 
 #: directorymergewindow.cpp:696
-#, fuzzy, kde-format
-#| msgid "Rescan"
+#, kde-format
 msgctxt "Title for rescan button"
 msgid "Rescan"
 msgstr "Tutki uudelleen"
 
 #: directorymergewindow.cpp:697
-#, fuzzy, kde-format
-#| msgid "Continue Merging"
+#, kde-format
 msgctxt "Title for continue button"
 msgid "Continue Merging"
 msgstr "Jatka yhdistämistä"
@@ -597,22 +563,19 @@ msgstr ""
 "anneta! Tee varmuuskopiot tärkeistä tiedoistasi!"
 
 #: directorymergewindow.cpp:2118
-#, fuzzy, kde-format
-#| msgid "Starting Merge"
+#, kde-format
 msgctxt "Caption"
 msgid "Starting Merge"
-msgstr "Aloitetaan yhdistäminen"
+msgstr "Aletaan yhdistää"
 
 #: directorymergewindow.cpp:2119
-#, fuzzy, kde-format
-#| msgid "Do It"
+#, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
 msgstr "Toteuta"
 
 #: directorymergewindow.cpp:2120
-#, fuzzy, kde-format
-#| msgid "Simulate It"
+#, kde-format
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
 msgstr "Simuloi"
@@ -656,26 +619,23 @@ msgid ""
 "Do you want to continue with the item that caused the error or do you want "
 "to skip this item?"
 msgstr ""
-"Viime vaiheessa sattui virhe.\n"
-"Haluatko jatkaa kohteesta, joka aiheutti virheen, vai ohittaa tämän kohteen?"
+"Viimeisessä vaiheessa sattui virhe.\n"
+"Haluatko jatkaa virheen aiheuttaneesta kohteesta vai sivuuttaa tämän kohteen?"
 
 #: directorymergewindow.cpp:2269
-#, fuzzy, kde-format
-#| msgid "Continue merge after an error"
+#, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
 msgstr "Jatka yhdistämistä virheen jälkeen"
 
 #: directorymergewindow.cpp:2270
-#, fuzzy, kde-format
-#| msgid "Continue With Last Item"
+#, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
 msgstr "Jatka viimeisimmästä kohteesta"
 
 #: directorymergewindow.cpp:2271
-#, fuzzy, kde-format
-#| msgid "Skip Item"
+#, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
 msgstr "Ohita kohde"
@@ -1345,7 +1305,8 @@ msgstr ""
 #: kdiff3.cpp:633
 #, kde-format
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
-msgstr "(Ohittaa tyhjemerkkierot, kun ”Näytä tyhjemerkit” on poissa käytöstä.)"
+msgstr ""
+"(Sivuuttaa tyhjemerkkierot, kun ”Näytä tyhjemerkit” on poissa käytöstä.)"
 
 #: kdiff3.cpp:634
 #, kde-format
@@ -1353,8 +1314,8 @@ msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
 msgstr ""
-"(Ei ohita tyhjemerkkieroja silloinkaan, kun ”Näytä tyhjemerkit” on poissa "
-"käytöstä.)"
+"(Ei sivuuta tyhjemerkkien eroja silloinkaan, kun ”Näytä tyhjemerkit” on "
+"poissa käytöstä.)"
 
 #: kdiff3.cpp:635
 #, kde-format
@@ -1441,20 +1402,20 @@ msgstr ""
 "ratkaisematon"
 
 #: kdiff3.cpp:647
-#, fuzzy, kde-format
-#| msgid "Go to Last Delta"
+#, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
-msgstr "Siirry viimeiseen muutokseen"
+msgstr "Siirry riville"
 
 #: kdiff3.cpp:647
-#, fuzzy, kde-format
-#| msgid "Line"
+#, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
 "Go\n"
 "Line"
-msgstr "Rivi"
+msgstr ""
+"Siirry\n"
+"riville"
 
 #: kdiff3.cpp:648
 #, kde-format
@@ -1466,17 +1427,13 @@ msgstr ""
 " Siirry annetulle riville."
 
 #: kdiff3.cpp:649
-#, fuzzy, kde-format
-#| msgid "Select Line(s) From A"
+#, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Valitse rivejä A:sta"
 
 #: kdiff3.cpp:649
-#, fuzzy, kde-format
-#| msgid ""
-#| "Choose\n"
-#| "A"
+#, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
 "Choose\n"
@@ -1486,17 +1443,13 @@ msgstr ""
 "A"
 
 #: kdiff3.cpp:650
-#, fuzzy, kde-format
-#| msgid "Select Line(s) From B"
+#, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Valitse rivejä B:stä"
 
 #: kdiff3.cpp:650
-#, fuzzy, kde-format
-#| msgid ""
-#| "Choose\n"
-#| "B"
+#, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
 "Choose\n"
@@ -1506,17 +1459,13 @@ msgstr ""
 "B"
 
 #: kdiff3.cpp:651
-#, fuzzy, kde-format
-#| msgid "Select Line(s) From C"
+#, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Valitse rivejä C:stä"
 
 #: kdiff3.cpp:651
-#, fuzzy, kde-format
-#| msgid ""
-#| "Choose\n"
-#| "C"
+#, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
 "Choose\n"
@@ -1526,19 +1475,15 @@ msgstr ""
 "C"
 
 #: kdiff3.cpp:652
-#, fuzzy, kde-format
-#| msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
+#, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr ""
-"Siirry automaattisesti seuraavaan ratkaisemattomaan ristiriitaan lähteen "
-"valinnan jälkeen"
+"Lähteen valinnan jälkeen siirry automaattisesti seuraavaan ratkaisemattomaan "
+"ristiriitaan"
 
 #: kdiff3.cpp:652
-#, fuzzy, kde-format
-#| msgid ""
-#| "Auto\n"
-#| "Next"
+#, kde-format
 msgctxt "Auto goto next unsolced toolbar text."
 msgid ""
 "Auto\n"
@@ -1553,10 +1498,7 @@ msgid "Show Space && Tabulator Characters"
 msgstr "Näytä välilyönti- ja sarkainmerkit"
 
 #: kdiff3.cpp:654
-#, fuzzy, kde-format
-#| msgid ""
-#| "White\n"
-#| "Characters"
+#, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
 "White\n"
@@ -1571,10 +1513,7 @@ msgid "Show White Space"
 msgstr "Näytä tyhjemerkit"
 
 #: kdiff3.cpp:655
-#, fuzzy, kde-format
-#| msgid ""
-#| "White\n"
-#| "Deltas"
+#, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
 "White\n"
@@ -1589,10 +1528,7 @@ msgid "Show Line Numbers"
 msgstr "Näytä rivinumerot"
 
 #: kdiff3.cpp:657
-#, fuzzy, kde-format
-#| msgid ""
-#| "Line\n"
-#| "Numbers"
+#, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
 "Line\n"
@@ -1806,10 +1742,9 @@ msgid "KDiff3 Part"
 msgstr "KDiff3-osa"
 
 #: kdiff3_part.cpp:37
-#, fuzzy, kde-format
-#| msgid "A KPart to display SVG images"
+#, kde-format
 msgid "A KPart for displaying diffs"
-msgstr "KPart-osa SVG-kuvien näyttämiseksi"
+msgstr "KPart-osa eroavuuksien näyttämiseen"
 
 #: kdiff3_part.cpp:39
 #, kde-format
@@ -1915,8 +1850,7 @@ msgid "Ignored. (User defined.)"
 msgstr "Ohitettu. (Käyttäjän määritys.)"
 
 #: main.cpp:103
-#, fuzzy, kde-format
-#| msgid " (64 bit)"
+#, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64-bittinen)"
@@ -2380,11 +2314,7 @@ msgid "none"
 msgstr ""
 
 #: optiondialog.cpp:124 optiondialog.cpp:136
-#, fuzzy, kde-format
-#| msgid ""
-#| "Font: %1, %2, %3\n"
-#| "\n"
-#| "Example:"
+#, kde-format
 msgctxt "Font sample display, %1 = family, %2 = style, %3 = size"
 msgid ""
 "Font: %1, %2, %3\n"
@@ -3037,7 +2967,7 @@ msgstr ""
 #: optiondialog.cpp:1225
 #, kde-format
 msgid "Skip folder status report"
-msgstr "Ohita kansioiden tilaraportti"
+msgstr "Sivuuta kansioiden tilaraportti"
 
 #: optiondialog.cpp:1229
 #, kde-format
@@ -3747,7 +3677,7 @@ msgstr ""
 #: SourceData.cpp:465
 #, kde-format
 msgid "File %1 too large to process. Skipping."
-msgstr "Tiedosto %1 on liian iso käsiteltäväksi. Ohitetaan."
+msgstr "Tiedosto %1 on liian iso käsiteltäväksi. Sivuutetaan."
 
 #: SourceData.cpp:509
 #, kde-format
@@ -3764,18 +3694,16 @@ msgstr ""
 "Rivinsovitusesikäsittelykomento poistetaan nyt käytöstä."
 
 #: SourceData.cpp:515
-#, fuzzy, kde-format
-#| msgid "Failed to read file: %1"
+#, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
 msgstr "Tiedoston luku epäonnistui: %1"
 
 #: SourceData.cpp:534
-#, fuzzy, kde-format
-#| msgid "File %1 too large to process. Skipping."
+#, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
-msgstr "Tiedosto %1 on liian iso käsiteltäväksi. Ohitetaan."
+msgstr "Tiedosto %1 on liian iso käsiteltäväksi. Sivuutetaan."
 
 #: Utils.cpp:68
 #, kde-format
