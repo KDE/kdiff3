@@ -3,7 +3,8 @@
  *
  * SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
+// clang-format on
 
 #ifndef SMALLDIALOGS_H
 #define SMALLDIALOGS_H
