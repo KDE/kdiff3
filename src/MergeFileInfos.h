@@ -174,8 +174,8 @@ class MergeFileInfos
                 return eAgeEnd;
             case eAgeEnd:
                 assert(false);
-                return age;
         }
+        return age;
     }
 
     bool fastFileComparison(FileAccess& fi1, FileAccess& fi2, bool& bError, QString& status, const QSharedPointer<const Options>& pOptions);
