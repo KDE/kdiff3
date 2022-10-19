@@ -178,26 +178,26 @@ QString MergeFileInfos::fullNameDest() const
 
 bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer<Options> const &pOptions, DirectoryMergeWindow* pDMW)
 {
-    enum class FilesFound
+    enum class FileIndex
     {
-        aOnly,
-        bAndA,
-        all
+        a,
+        b,
+        c
     };
 
-    std::map<QDateTime, FilesFound> dateMap;
+    std::map<QDateTime, FileIndex> dateMap;
 
     if(existsInA())
     {
-        dateMap[getFileInfoA()->lastModified()] = FilesFound::aOnly;
+        dateMap[getFileInfoA()->lastModified()] = FileIndex::a;
     }
     if(existsInB())
     {
-        dateMap[getFileInfoB()->lastModified()] = FilesFound::bAndA;
+        dateMap[getFileInfoB()->lastModified()] = FileIndex::b;
     }
     if(existsInC())
     {
-        dateMap[getFileInfoC()->lastModified()] = FilesFound::all;
+        dateMap[getFileInfoC()->lastModified()] = FileIndex::c;
     }
 
     if(pOptions->m_bDmFullAnalysis)
@@ -288,13 +288,13 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
 
     // The map automatically sorts the keys.
     e_Age age = eNew;
-    std::map<QDateTime, FilesFound>::reverse_iterator i;
+    std::map<QDateTime, FileIndex>::reverse_iterator i;
     assert(dateMap.size() <= 3);
     for(i = dateMap.rbegin(); i != dateMap.rend(); ++i)
     {
-        FilesFound n = i->second;
+        FileIndex n = i->second;
 
-        if(n == FilesFound::aOnly && getAgeA() == eNotThere)
+        if(n == FileIndex::a && getAgeA() == eNotThere)
         {
             setAgeA(age);
             age = nextAgeValue(age);
@@ -309,7 +309,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
                 age = nextAgeValue(age);
             }
         }
-        else if(n == FilesFound::bAndA && getAgeB() == eNotThere)
+        else if(n == FileIndex::b && getAgeB() == eNotThere)
         {
             setAgeB(age);
             age = nextAgeValue(age);
@@ -324,7 +324,7 @@ bool MergeFileInfos::compareFilesAndCalcAges(QStringList& errors, QSharedPointer
                 age = nextAgeValue(age);
             }
         }
-        else if(n == FilesFound::all && getAgeC() == eNotThere)
+        else if(n == FileIndex::c && getAgeC() == eNotThere)
         {
             setAgeC(age);
             age = nextAgeValue(age);
