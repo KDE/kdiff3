@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-26 00:48+0000\n"
+"POT-Creation-Date: 2022-10-27 00:49+0000\n"
 "PO-Revision-Date: 2022-10-22 05:28\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -92,7 +92,7 @@ msgstr "正在读取文件夹：%1"
 msgid "Listing directory: %1"
 msgstr "正在列出目录：%1"
 
-#: diff.cpp:1579 diff.cpp:1595
+#: diff.cpp:1581 diff.cpp:1597
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -101,7 +101,7 @@ msgstr ""
 "数据丢失错误：\n"
 "如果您可以复现该错误，请联系软件作者。\n"
 
-#: diff.cpp:1581 diff.cpp:1597
+#: diff.cpp:1583 diff.cpp:1599
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "严重内部错误"
@@ -156,7 +156,7 @@ msgstr "行尾格式：%1"
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1958 kdiff3.cpp:876
+#: difftextwindow.cpp:1958 kdiff3.cpp:877
 #, kde-format
 msgid "Top line"
 msgstr "顶行"
@@ -350,8 +350,8 @@ msgid ""
 "merge and rescan the folder?"
 msgstr "您正在合并文件夹，确定要放弃合并并重新扫描文件夹吗？"
 
-#: directorymergewindow.cpp:695 kdiff3.cpp:735 kdiff3.cpp:745 kdiff3.cpp:757
-#: mergeresultwindow.cpp:326 pdiff.cpp:856 pdiff.cpp:1721 pdiff.cpp:1731
+#: directorymergewindow.cpp:695 kdiff3.cpp:736 kdiff3.cpp:746 kdiff3.cpp:758
+#: mergeresultwindow.cpp:326 pdiff.cpp:858 pdiff.cpp:1723 pdiff.cpp:1733
 #, kde-format
 msgctxt "Error dialog title"
 msgid "Warning"
@@ -1036,32 +1036,32 @@ msgstr "合并到 B"
 msgid "Merge to A && B"
 msgstr "合并到 A 和 B"
 
-#: fileaccess.cpp:505
+#: fileaccess.cpp:506
 #, kde-format
 msgid "Unable to determine full url. No parent specified."
 msgstr "无法确定完整 URL。没有指定父目录。"
 
-#: fileaccess.cpp:777
+#: fileaccess.cpp:778
 #, kde-format
 msgid "Failed to read file: %1"
 msgstr "读取文件失败 %1"
 
-#: fileaccess.cpp:917
+#: fileaccess.cpp:918
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "创建 %1 的临时副本失败。"
 
-#: fileaccess.cpp:925 fileaccess.cpp:930
+#: fileaccess.cpp:926 fileaccess.cpp:931
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "打开 %1 失败。%2"
 
-#: fileaccess.cpp:949 fileaccess.cpp:957
+#: fileaccess.cpp:950 fileaccess.cpp:958
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "读取 %1 出错。%2"
 
-#: fileaccess.cpp:1086
+#: fileaccess.cpp:1087
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1070,7 +1070,7 @@ msgstr ""
 "试图备份时，删除旧备份失败。\n"
 "文件名：%1"
 
-#: fileaccess.cpp:1093
+#: fileaccess.cpp:1094
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
@@ -1101,132 +1101,132 @@ msgctxt "Button Title"
 msgid "Change Font"
 msgstr "更改字体"
 
-#: kdiff3.cpp:176
+#: kdiff3.cpp:177
 #, kde-format
 msgid "Current Configuration:"
 msgstr "当前配置："
 
-#: kdiff3.cpp:181
+#: kdiff3.cpp:182
 #, kde-format
 msgid "Config Option Error:"
 msgstr "配置选项错误："
 
-#: kdiff3.cpp:239
+#: kdiff3.cpp:240
 #, kde-format
 msgid "Option --auto used, but no output file specified."
 msgstr "已使用选项 --auto ，但没有指定输出文件。"
 
-#: kdiff3.cpp:343
+#: kdiff3.cpp:344
 #, kde-format
 msgid "Directory merge"
 msgstr ""
 
-#: kdiff3.cpp:347
+#: kdiff3.cpp:348
 #, kde-format
 msgid "Merge info"
 msgstr ""
 
-#: kdiff3.cpp:425
+#: kdiff3.cpp:426
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
 msgstr "执行文件夹比较时会忽略选项 --auto。"
 
-#: kdiff3.cpp:473
+#: kdiff3.cpp:474
 #, kde-format
 msgid "Saving failed."
 msgstr "保存失败。"
 
-#: kdiff3.cpp:524 pdiff.cpp:922
+#: kdiff3.cpp:525 pdiff.cpp:924
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "打开文件失败:"
 
-#: kdiff3.cpp:533 pdiff.cpp:931
+#: kdiff3.cpp:534 pdiff.cpp:933
 #, kde-format
 msgid "File open error"
 msgstr "打开文件出错"
 
-#: kdiff3.cpp:564
+#: kdiff3.cpp:565
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "打开文件进行比较..."
 
-#: kdiff3.cpp:566
+#: kdiff3.cpp:567
 #, kde-format
 msgid "Reload"
 msgstr "重新加载"
 
-#: kdiff3.cpp:569
+#: kdiff3.cpp:570
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "保存合并结果。必须先解决全部冲突！"
 
-#: kdiff3.cpp:571
+#: kdiff3.cpp:572
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "保存当前文档为..."
 
-#: kdiff3.cpp:574
+#: kdiff3.cpp:575
 #, kde-format
 msgid "Print the differences"
 msgstr "打印差异"
 
-#: kdiff3.cpp:577
+#: kdiff3.cpp:578
 #, kde-format
 msgid "Quits the application"
 msgstr "退出应用程序"
 
-#: kdiff3.cpp:581
+#: kdiff3.cpp:582
 #, kde-format
 msgid "Undo last action."
 msgstr ""
 
-#: kdiff3.cpp:585
+#: kdiff3.cpp:586
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "剪切所选部分到剪贴板"
 
-#: kdiff3.cpp:588
+#: kdiff3.cpp:589
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "复制选区到剪贴板"
 
-#: kdiff3.cpp:590
+#: kdiff3.cpp:591
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "粘贴剪贴板内容到当前位置"
 
-#: kdiff3.cpp:593
+#: kdiff3.cpp:594
 #, kde-format
 msgid "Select everything in current window"
 msgstr "当前窗口全选"
 
-#: kdiff3.cpp:596
+#: kdiff3.cpp:597
 #, kde-format
 msgid "Search for a string"
 msgstr "搜索字符串"
 
-#: kdiff3.cpp:598
+#: kdiff3.cpp:599
 #, kde-format
 msgid "Search again for the string"
 msgstr "再次搜索该字符串"
 
-#: kdiff3.cpp:603
+#: kdiff3.cpp:604
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "启用/禁用状态栏"
 
-#: kdiff3.cpp:607
+#: kdiff3.cpp:608
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "配置 KDiff3..."
 
-#: kdiff3.cpp:627
+#: kdiff3.cpp:628
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "转到当前增补"
 
-#: kdiff3.cpp:627
+#: kdiff3.cpp:628
 #, kde-format
 msgid ""
 "Current\n"
@@ -1235,12 +1235,12 @@ msgstr ""
 "当前\n"
 "增补"
 
-#: kdiff3.cpp:629
+#: kdiff3.cpp:630
 #, kde-format
 msgid "Go to First Delta"
 msgstr "转到第一个增补"
 
-#: kdiff3.cpp:629
+#: kdiff3.cpp:630
 #, kde-format
 msgid ""
 "First\n"
@@ -1249,12 +1249,12 @@ msgstr ""
 "第一个\n"
 "增补"
 
-#: kdiff3.cpp:631
+#: kdiff3.cpp:632
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "转到最后一个增补"
 
-#: kdiff3.cpp:631
+#: kdiff3.cpp:632
 #, kde-format
 msgid ""
 "Last\n"
@@ -1263,24 +1263,24 @@ msgstr ""
 "最后\n"
 "增补"
 
-#: kdiff3.cpp:633
+#: kdiff3.cpp:634
 #, kde-format
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr "(禁用“显示空白字符”时跳过空白字符差异。)"
 
-#: kdiff3.cpp:634
+#: kdiff3.cpp:635
 #, kde-format
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
 "disabled.)"
 msgstr "(即使禁用“显示空白字符”，也不会跳过检查空白字符差异。)"
 
-#: kdiff3.cpp:635
+#: kdiff3.cpp:636
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "转到上一个增补"
 
-#: kdiff3.cpp:635
+#: kdiff3.cpp:636
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1289,12 +1289,12 @@ msgstr ""
 "上一个\n"
 "增补"
 
-#: kdiff3.cpp:637
+#: kdiff3.cpp:638
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "转到下一个增补"
 
-#: kdiff3.cpp:637
+#: kdiff3.cpp:638
 #, kde-format
 msgid ""
 "Next\n"
@@ -1303,12 +1303,12 @@ msgstr ""
 "下一个\n"
 "增补"
 
-#: kdiff3.cpp:639
+#: kdiff3.cpp:640
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "转到前一个冲突"
 
-#: kdiff3.cpp:639
+#: kdiff3.cpp:640
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1317,12 +1317,12 @@ msgstr ""
 "上一个\n"
 "冲突"
 
-#: kdiff3.cpp:641
+#: kdiff3.cpp:642
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "转到下一个冲突"
 
-#: kdiff3.cpp:641
+#: kdiff3.cpp:642
 #, kde-format
 msgid ""
 "Next\n"
@@ -1331,12 +1331,12 @@ msgstr ""
 "下一个\n"
 "冲突"
 
-#: kdiff3.cpp:643
+#: kdiff3.cpp:644
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "转到上一个未解决的冲突"
 
-#: kdiff3.cpp:643
+#: kdiff3.cpp:644
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1345,12 +1345,12 @@ msgstr ""
 "上一个\n"
 "未解决"
 
-#: kdiff3.cpp:645
+#: kdiff3.cpp:646
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "转到下一个未解决的冲突"
 
-#: kdiff3.cpp:645
+#: kdiff3.cpp:646
 #, kde-format
 msgid ""
 "Next\n"
@@ -1359,13 +1359,13 @@ msgstr ""
 "下一个\n"
 "未解决"
 
-#: kdiff3.cpp:647
+#: kdiff3.cpp:648
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr ""
 
-#: kdiff3.cpp:647
+#: kdiff3.cpp:648
 #, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1373,20 +1373,20 @@ msgid ""
 "Line"
 msgstr ""
 
-#: kdiff3.cpp:648
+#: kdiff3.cpp:649
 #, kde-format
 msgid ""
 ".\n"
 " Goto specified line."
 msgstr ""
 
-#: kdiff3.cpp:649
+#: kdiff3.cpp:650
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "从 A 选择行"
 
-#: kdiff3.cpp:649
+#: kdiff3.cpp:650
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1396,13 +1396,13 @@ msgstr ""
 "选择\n"
 "A"
 
-#: kdiff3.cpp:650
+#: kdiff3.cpp:651
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "从 B 选择行"
 
-#: kdiff3.cpp:650
+#: kdiff3.cpp:651
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1412,13 +1412,13 @@ msgstr ""
 "选择\n"
 "B"
 
-#: kdiff3.cpp:651
+#: kdiff3.cpp:652
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "从 C 选择行"
 
-#: kdiff3.cpp:651
+#: kdiff3.cpp:652
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1428,13 +1428,13 @@ msgstr ""
 "选择\n"
 "C"
 
-#: kdiff3.cpp:652
+#: kdiff3.cpp:653
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "选择源内容后自动跳转至下一个未解决冲突"
 
-#: kdiff3.cpp:652
+#: kdiff3.cpp:653
 #, kde-format
 msgctxt "Auto goto next unsolced toolbar text."
 msgid ""
@@ -1444,12 +1444,12 @@ msgstr ""
 "自动\n"
 "下一个"
 
-#: kdiff3.cpp:654
+#: kdiff3.cpp:655
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "显示空格和制表符"
 
-#: kdiff3.cpp:654
+#: kdiff3.cpp:655
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1459,12 +1459,12 @@ msgstr ""
 "空白\n"
 "字符"
 
-#: kdiff3.cpp:655
+#: kdiff3.cpp:656
 #, kde-format
 msgid "Show White Space"
 msgstr "显示空白字符"
 
-#: kdiff3.cpp:655
+#: kdiff3.cpp:656
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1474,12 +1474,12 @@ msgstr ""
 "空白\n"
 "增补"
 
-#: kdiff3.cpp:657
+#: kdiff3.cpp:658
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "显示行号"
 
-#: kdiff3.cpp:657
+#: kdiff3.cpp:658
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1487,225 +1487,225 @@ msgid ""
 "Numbers"
 msgstr "行号"
 
-#: kdiff3.cpp:659
+#: kdiff3.cpp:660
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "自动解决简单冲突"
 
-#: kdiff3.cpp:660
+#: kdiff3.cpp:661
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "设置增补为冲突"
 
-#: kdiff3.cpp:661
+#: kdiff3.cpp:662
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "运行正则表达式自动合并"
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:663
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "自动解决历史冲突"
 
-#: kdiff3.cpp:663
+#: kdiff3.cpp:664
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "在选择时分割差异"
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:665
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "合并所选差异"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:667
 #, kde-format
 msgid "Show Window A"
 msgstr "显示A窗口"
 
-#: kdiff3.cpp:667
+#: kdiff3.cpp:668
 #, kde-format
 msgid "Show Window B"
 msgstr "显示B窗口"
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:669
 #, kde-format
 msgid "Show Window C"
 msgstr "显示C窗口"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:671
 #, kde-format
 msgid "Normal Overview"
 msgstr "标准视图"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:672
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "A、B 比较视图"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:673
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "A、C 比较视图"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:674
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "B、C 比较视图"
 
-#: kdiff3.cpp:674
+#: kdiff3.cpp:675
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "比较窗口自动换行"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:676
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "手动添加比较对齐线"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:677
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "清除所有手动添加的比较对齐线"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:679
 #, kde-format
 msgid "Focus Next Window"
 msgstr "聚焦下一个窗口"
 
-#: kdiff3.cpp:679
+#: kdiff3.cpp:680
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "聚焦上一个窗口"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:681
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "切换分割方向"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:683
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "文件夹和文本分割视图"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:685
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "切换文件夹和文本视图"
 
-#: kdiff3.cpp:705 kdiff3.cpp:790 kdiff3.cpp:814 kdiff3.cpp:1086 kdiff3.cpp:1107
-#: pdiff.cpp:941 pdiff.cpp:1008 pdiff.cpp:1044 pdiff.cpp:1053 pdiff.cpp:1111
-#: pdiff.cpp:1119
+#: kdiff3.cpp:706 kdiff3.cpp:791 kdiff3.cpp:815 kdiff3.cpp:1087 kdiff3.cpp:1108
+#: pdiff.cpp:943 pdiff.cpp:1010 pdiff.cpp:1046 pdiff.cpp:1055 pdiff.cpp:1113
+#: pdiff.cpp:1121
 #, kde-format
 msgid "Ready."
 msgstr "就绪。"
 
-#: kdiff3.cpp:734 pdiff.cpp:1720
+#: kdiff3.cpp:735 pdiff.cpp:1722
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "合并结果未保存。"
 
-#: kdiff3.cpp:736
+#: kdiff3.cpp:737
 #, kde-format
 msgid "Save && Quit"
 msgstr "保存并退出"
 
-#: kdiff3.cpp:737
+#: kdiff3.cpp:738
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "退出且不保存"
 
-#: kdiff3.cpp:745 pdiff.cpp:1731
+#: kdiff3.cpp:746 pdiff.cpp:1733
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "保存合并结果失败。"
 
-#: kdiff3.cpp:756 pdiff.cpp:855
+#: kdiff3.cpp:757 pdiff.cpp:857
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "您正在合并文件夹，确定要放弃合并吗？"
 
-#: kdiff3.cpp:779
+#: kdiff3.cpp:780
 #, kde-format
 msgid "Saving file..."
 msgstr "正在保存文件..."
 
-#: kdiff3.cpp:796
+#: kdiff3.cpp:797
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "用新文件名保存文件..."
 
-#: kdiff3.cpp:798
+#: kdiff3.cpp:799
 #, kde-format
 msgid "Save As..."
 msgstr "另存为..."
 
-#: kdiff3.cpp:822
+#: kdiff3.cpp:823
 #, kde-format
 msgid "Printing not implemented."
 msgstr "打印功能尚未实现"
 
-#: kdiff3.cpp:860
+#: kdiff3.cpp:861
 #, kde-format
 msgid "Printing..."
 msgstr "正在打印..."
 
-#: kdiff3.cpp:962
+#: kdiff3.cpp:963
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr "正在打印第 %1 页，共 %2 页"
 
-#: kdiff3.cpp:1019
+#: kdiff3.cpp:1020
 #, kde-format
 msgid " (Selection)"
 msgstr " (选择)"
 
-#: kdiff3.cpp:1048
+#: kdiff3.cpp:1049
 #, kde-format
 msgid "Printing completed."
 msgstr "打印完成。"
 
-#: kdiff3.cpp:1052
+#: kdiff3.cpp:1053
 #, kde-format
 msgid "Printing aborted."
 msgstr "打印中止。"
 
-#: kdiff3.cpp:1059
+#: kdiff3.cpp:1060
 #, kde-format
 msgid "Exiting..."
 msgstr "正在退出..."
 
-#: kdiff3.cpp:1070
+#: kdiff3.cpp:1071
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "正在切换工具栏..."
 
-#: kdiff3.cpp:1091
+#: kdiff3.cpp:1092
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "切换状态栏..."
 
-#: kdiff3_part.cpp:36
+#: kdiff3_part.cpp:37
 #, kde-format
 msgid "KDiff3 Part"
 msgstr "KDiff3 Part"
 
-#: kdiff3_part.cpp:37
+#: kdiff3_part.cpp:38
 #, kde-format
 msgid "A KPart for displaying diffs"
 msgstr ""
 
-#: kdiff3_part.cpp:39
+#: kdiff3_part.cpp:40
 #, kde-format
 msgid "Copyright 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
 msgstr "版权 2007, Aurélien Gâteau <aurelien.gateau@free.fr>"
 
-#: kdiff3_part.cpp:40
+#: kdiff3_part.cpp:41
 #, kde-format
 msgid "Joachim Eibl"
 msgstr "Joachim Eibl"
 
-#: kdiff3_part.cpp:182 kdiff3_part.cpp:268
+#: kdiff3_part.cpp:183 kdiff3_part.cpp:269
 #, kde-format
 msgid "Could not find files for comparison."
 msgstr "找不到要比较的文件。"
@@ -1723,7 +1723,7 @@ msgid "Configure KDiff3"
 msgstr "配置 KDiff3"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:100
+#: kdiff3_part.rc:21 main.cpp:102
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
@@ -1792,84 +1792,84 @@ msgstr "窗口(&W)"
 msgid "Main Toolbar"
 msgstr "主工具栏"
 
-#: main.cpp:71 main.cpp:75
+#: main.cpp:73 main.cpp:77
 #, kde-format
 msgid "Ignored. (User defined.)"
 msgstr "已忽略。（用户定义的）"
 
-#: main.cpp:103
+#: main.cpp:105
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 位)"
 
-#: main.cpp:105
+#: main.cpp:107
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "用于比较、合并文件和文件夹的工具"
 
-#: main.cpp:106
+#: main.cpp:108
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 
-#: main.cpp:126
+#: main.cpp:128
 #, kde-format
 msgid "Merge the input."
 msgstr "合并输入。"
 
-#: main.cpp:127
+#: main.cpp:129
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "明确被比较的文件，用于兼容某些工具。"
 
-#: main.cpp:128
+#: main.cpp:130
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "输出文件，隐含了 -m 选项。例如：-o newfile.txt"
 
-#: main.cpp:129
+#: main.cpp:131
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "再次输出文件。（为了与某些工具兼容。）"
 
-#: main.cpp:131
+#: main.cpp:133
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "如果所有冲突都被自动解决了，就不弹出图形用户界面。（同时需要 -o 文件名）"
 
-#: main.cpp:132
+#: main.cpp:134
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "忽略 --auto 选项并始终显示图形用户界面。"
 
-#: main.cpp:134 main.cpp:135
+#: main.cpp:136 main.cpp:137
 #, kde-format
 msgid "Ignored."
 msgstr "已忽略。"
 
-#: main.cpp:137
+#: main.cpp:139
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "替换 (被比较的) 文件 1 的显示名称。"
 
-#: main.cpp:138
+#: main.cpp:140
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "替换文件 2 的显示名称。"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "替换文件 3 的显示名称。"
 
-#: main.cpp:140
+#: main.cpp:142
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr "另一种替换显示名称的方法，每输入一个文件参数就使用一次此选项。"
 
-#: main.cpp:141
+#: main.cpp:143
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1877,62 +1877,62 @@ msgid ""
 msgstr ""
 "覆盖配置文件的设置，每一个设置使用一次本选项。例如：--cs \"AutoAdvance=1\""
 
-#: main.cpp:142
+#: main.cpp:144
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "显示当前配置项的列表。"
 
-#: main.cpp:143
+#: main.cpp:145
 #, kde-format
 msgid "Use a different config file."
 msgstr "使用另外的配置文件。"
 
-#: main.cpp:146
+#: main.cpp:148
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "要打开的文件 1 (若未使用 --base 指定，则默认为被比较的文件)"
 
-#: main.cpp:147
+#: main.cpp:149
 #, kde-format
 msgid "file2 to open"
 msgstr "要打开的文件 2"
 
-#: main.cpp:148
+#: main.cpp:150
 #, kde-format
 msgid "file3 to open"
 msgstr "要打开的文件 3"
 
-#: main.cpp:172
+#: main.cpp:174
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "参见 kdiff3 --help 以了解支持的选项。"
 
-#: MergeFileInfos.cpp:389
+#: MergeFileInfos.cpp:391
 #, kde-format
 msgid "Unable to compare non-normal file with normal file."
 msgstr "无法将普通文件与非普通文件进行比较。"
 
-#: MergeFileInfos.cpp:412
+#: MergeFileInfos.cpp:414
 #, kde-format
 msgid "Mix of links and normal files."
 msgstr "两者为链接与普通文件。"
 
-#: MergeFileInfos.cpp:420
+#: MergeFileInfos.cpp:422
 #, kde-format
 msgid "Link: "
 msgstr "链接: "
 
-#: MergeFileInfos.cpp:430
+#: MergeFileInfos.cpp:432
 #, kde-format
 msgid "Size. "
 msgstr "尺寸. "
 
-#: MergeFileInfos.cpp:446 MergeFileInfos.cpp:456
+#: MergeFileInfos.cpp:448 MergeFileInfos.cpp:458
 #, kde-format
 msgid "Date & Size: "
 msgstr "日期和大小： "
 
-#: MergeFileInfos.cpp:477
+#: MergeFileInfos.cpp:479
 #, kde-format
 msgid "Comparing file..."
 msgstr "正在比较文件..."
@@ -1996,7 +1996,7 @@ msgstr ""
 "已修改输出。\n"
 "如果您继续您的更改将丢失。"
 
-#: mergeresultwindow.cpp:766 pdiff.cpp:725
+#: mergeresultwindow.cpp:766 pdiff.cpp:727
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "全部输入文件二进制数据相同。"
@@ -2007,7 +2007,7 @@ msgid "All input files contain the same text."
 msgstr "全部输入文件包含相同文本。"
 
 #: mergeresultwindow.cpp:772 mergeresultwindow.cpp:776
-#: mergeresultwindow.cpp:780 pdiff.cpp:731 pdiff.cpp:735 pdiff.cpp:739
+#: mergeresultwindow.cpp:780 pdiff.cpp:733 pdiff.cpp:737 pdiff.cpp:741
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "文件 %1 和 %2 二进制数据相同。\n"
@@ -3176,17 +3176,17 @@ msgstr ""
 msgid "This resets all options. Not only those of the current topic."
 msgstr "这将重置全部选项，而不仅是当前页面的选项。"
 
-#: pdiff.cpp:95
+#: pdiff.cpp:97
 #, kde-format
 msgid "PreprocessorCmd: "
 msgstr "预处理程序命令："
 
-#: pdiff.cpp:97
+#: pdiff.cpp:99
 #, kde-format
 msgid "The following option(s) you selected might change data:\n"
 msgstr "您所指定的以下选项可能会更改数据：\n"
 
-#: pdiff.cpp:98
+#: pdiff.cpp:100
 #, kde-format
 msgid ""
 "\n"
@@ -3197,92 +3197,92 @@ msgstr ""
 "大多数情况下合并应该不会用到这些选项。\n"
 "您想禁用这些设置还是继续激活这些设置？"
 
-#: pdiff.cpp:100
+#: pdiff.cpp:102
 #, kde-format
 msgid "Option Unsafe for Merging"
 msgstr "合并时会造成不安全的选项"
 
-#: pdiff.cpp:101
+#: pdiff.cpp:103
 #, kde-format
 msgid "Use These Options During Merge"
 msgstr "合并时使用这些选项"
 
-#: pdiff.cpp:102
+#: pdiff.cpp:104
 #, kde-format
 msgid "Disable Unsafe Options"
 msgstr "禁用不安全的选项"
 
-#: pdiff.cpp:130
+#: pdiff.cpp:132
 #, kde-format
 msgid "Loading A"
 msgstr "正在加载A"
 
-#: pdiff.cpp:131
+#: pdiff.cpp:133
 #, kde-format
 msgid "Loading A: %1"
 msgstr "正在加载 A：%1"
 
-#: pdiff.cpp:140
+#: pdiff.cpp:142
 #, kde-format
 msgid "Loading B"
 msgstr "正在加载B"
 
-#: pdiff.cpp:141
+#: pdiff.cpp:143
 #, kde-format
 msgid "Loading B: %1"
 msgstr "正在加载B：%1"
 
-#: pdiff.cpp:171 pdiff.cpp:172 pdiff.cpp:212 pdiff.cpp:213
+#: pdiff.cpp:173 pdiff.cpp:174 pdiff.cpp:214 pdiff.cpp:215
 #, kde-format
 msgid "Diff: A <-> B"
 msgstr "比较：A <-> B"
 
-#: pdiff.cpp:178 pdiff.cpp:179 pdiff.cpp:258 pdiff.cpp:259 pdiff.cpp:277
+#: pdiff.cpp:180 pdiff.cpp:181 pdiff.cpp:260 pdiff.cpp:261 pdiff.cpp:279
 #, kde-format
 msgid "Linediff: A <-> B"
 msgstr "行比较：A <-> B"
 
-#: pdiff.cpp:197
+#: pdiff.cpp:199
 #, kde-format
 msgid "Loading C"
 msgstr "正在加载C"
 
-#: pdiff.cpp:198
+#: pdiff.cpp:200
 #, kde-format
 msgid "Loading C: %1"
 msgstr "正在加载 C：%1"
 
-#: pdiff.cpp:224 pdiff.cpp:225
+#: pdiff.cpp:226 pdiff.cpp:227
 #, kde-format
 msgid "Diff: A <-> C"
 msgstr "比较：A <-> C"
 
-#: pdiff.cpp:238 pdiff.cpp:239
+#: pdiff.cpp:240 pdiff.cpp:241
 #, kde-format
 msgid "Diff: B <-> C"
 msgstr "比较：B <-> C"
 
-#: pdiff.cpp:264 pdiff.cpp:265 pdiff.cpp:282
+#: pdiff.cpp:266 pdiff.cpp:267 pdiff.cpp:284
 #, kde-format
 msgid "Linediff: B <-> C"
 msgstr "行比较：B <-> C"
 
-#: pdiff.cpp:270 pdiff.cpp:271 pdiff.cpp:287
+#: pdiff.cpp:272 pdiff.cpp:273 pdiff.cpp:289
 #, kde-format
 msgid "Linediff: A <-> C"
 msgstr "行比较：A <-> C"
 
-#: pdiff.cpp:727
+#: pdiff.cpp:729
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr "全部输入文件包含相同文本，但二进制不相同。"
 
-#: pdiff.cpp:733 pdiff.cpp:737 pdiff.cpp:741
+#: pdiff.cpp:735 pdiff.cpp:739 pdiff.cpp:743
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr "文件%1和%2文本相同，但二进制数据不相同。\n"
 
-#: pdiff.cpp:751
+#: pdiff.cpp:753
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3293,17 +3293,17 @@ msgstr ""
 "注意 KDiff3 的合并功能不适用于二进制数据。\n"
 "继续则需您自己承担风险。"
 
-#: pdiff.cpp:761
+#: pdiff.cpp:763
 #, kde-format
 msgid ", B"
 msgstr ", B"
 
-#: pdiff.cpp:763
+#: pdiff.cpp:765
 #, kde-format
 msgid ", C"
 msgstr ", C"
 
-#: pdiff.cpp:765
+#: pdiff.cpp:767
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3316,88 +3316,88 @@ msgstr ""
 "如果不确定，请不要保存。继续则需您自己承担风险。\n"
 "受影响的输入文件在 %1。"
 
-#: pdiff.cpp:857
+#: pdiff.cpp:859
 #, kde-format
 msgid "Abort"
 msgstr "中止"
 
-#: pdiff.cpp:858
+#: pdiff.cpp:860
 #, kde-format
 msgid "Continue Merging"
 msgstr "继续合并"
 
-#: pdiff.cpp:863 pdiff.cpp:955
+#: pdiff.cpp:865 pdiff.cpp:957
 #, kde-format
 msgid "Opening files..."
 msgstr "打开文件..."
 
-#: pdiff.cpp:1042
+#: pdiff.cpp:1044
 #, kde-format
 msgid "Cutting selection..."
 msgstr "剪切选中内容..."
 
-#: pdiff.cpp:1049
+#: pdiff.cpp:1051
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "复制选中内容到剪贴板..."
 
-#: pdiff.cpp:1058
+#: pdiff.cpp:1060
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "正在插入剪贴板内容..."
 
-#: pdiff.cpp:1170
+#: pdiff.cpp:1172
 #, kde-format
 msgid "Ok"
 msgstr ""
 
-#: pdiff.cpp:1186
+#: pdiff.cpp:1188
 #, kde-format
 msgid "Go to Line"
 msgstr ""
 
-#: pdiff.cpp:1500
+#: pdiff.cpp:1502
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "文本换行"
 
-#: pdiff.cpp:1501
+#: pdiff.cpp:1503
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "计算水平滚动条的最大宽度"
 
-#: pdiff.cpp:1722
+#: pdiff.cpp:1724
 #, kde-format
 msgid "Save && Continue"
 msgstr "保存并继续"
 
-#: pdiff.cpp:1723
+#: pdiff.cpp:1725
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "继续并不保存"
 
-#: pdiff.cpp:1921
+#: pdiff.cpp:1923
 #, kde-format
 msgid "Search complete."
 msgstr "搜索完成。"
 
-#: pdiff.cpp:1921
+#: pdiff.cpp:1923
 #, kde-format
 msgid "Search Complete"
 msgstr "搜索完成"
 
-#: pdiff.cpp:2102
+#: pdiff.cpp:2104
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "比较输入窗口没有选择内容。"
 
-#: pdiff.cpp:2102
+#: pdiff.cpp:2104
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "添加手动比较区域时出错"
 
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: progress.cpp:53 progressdialog.ui:94
+#: progress.cpp:54 progressdialog.ui:94
 #, kde-format
 msgid "&Cancel"
 msgstr "取消(&C)"
@@ -3540,27 +3540,27 @@ msgstr "匹配失败。"
 msgid "Opening and closing parentheses do not match in regular expression."
 msgstr "正则表达式中打开和闭合括号不匹配。"
 
-#: SourceData.cpp:152
+#: SourceData.cpp:153
 #, kde-format
 msgid "Writing clipboard data to temp file failed."
 msgstr "将剪贴板数据写入临时文件失败。"
 
-#: SourceData.cpp:157
+#: SourceData.cpp:158
 #, kde-format
 msgid "From Clipboard"
 msgstr "从剪贴板"
 
-#: SourceData.cpp:356
+#: SourceData.cpp:357
 #, kde-format
 msgid "%1 is not a normal file."
 msgstr "%1 不是一个正常的文件。"
 
-#: SourceData.cpp:450
+#: SourceData.cpp:451
 #, kde-format
 msgid "    Temp file is: %1"
 msgstr "    临时文件是：%1"
 
-#: SourceData.cpp:454
+#: SourceData.cpp:455
 #, kde-format
 msgid ""
 "Preprocessing possibly failed. Check this command:\n"
@@ -3575,12 +3575,12 @@ msgstr ""
 "\n"
 "预处理命令将会被禁用。"
 
-#: SourceData.cpp:465
+#: SourceData.cpp:466
 #, kde-format
 msgid "File %1 too large to process. Skipping."
 msgstr "文件 %1 太大，无法处理。跳过。"
 
-#: SourceData.cpp:509
+#: SourceData.cpp:510
 #, kde-format
 msgid ""
 "The line-matching-preprocessing possibly failed. Check this command:\n"
@@ -3594,34 +3594,34 @@ msgstr ""
 "\n"
 "行匹配处理命令将会被禁用。"
 
-#: SourceData.cpp:515
+#: SourceData.cpp:516
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
 msgstr ""
 
-#: SourceData.cpp:534
+#: SourceData.cpp:535
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
 msgstr ""
 
-#: Utils.cpp:68
+#: Utils.cpp:69
 #, kde-format
 msgid "Expecting space after closing quote."
 msgstr "闭合引号后应有空格。"
 
-#: Utils.cpp:71
+#: Utils.cpp:72
 #, kde-format
 msgid "Unmatched quote."
 msgstr "引号对不匹配。"
 
-#: Utils.cpp:80
+#: Utils.cpp:81
 #, kde-format
 msgid "Unexpected quote character within argument."
 msgstr "参数中有未预期的引号字符。"
 
-#: Utils.cpp:87
+#: Utils.cpp:88
 #, kde-format
 msgid "No program specified."
 msgstr "没有指定程序。"
