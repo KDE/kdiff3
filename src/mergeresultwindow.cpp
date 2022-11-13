@@ -2704,7 +2704,7 @@ QString MergeResultWindow::getString(int lineIdx)
     return melIt->getString(m_pldA, m_pldB, m_pldC);
 }
 
-bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive)
+bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, QtSizeType& posInLine, bool bDirDown, bool bCaseSensitive)
 {
     int it = d3vLine;
     int endIt = bDirDown ? getNofLines() : -1;
@@ -2716,7 +2716,15 @@ bool MergeResultWindow::findString(const QString& s, LineRef& d3vLine, int& posI
         QString line = getString(it);
         if(!line.isEmpty())
         {
-            int pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
+            QtSizeType pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
+
+            //TODO: Provide error message when failsafe is triggered.
+            if(Q_UNLIKELY(pos > TYPE_MAX(int)))
+            {
+                qCWarning(kdiffMain) << "Skip possiable match line offset to large.";
+                continue;
+            }
+
             if(pos != -1)
             {
                 d3vLine = it;

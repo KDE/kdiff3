@@ -9,6 +9,7 @@
 #ifndef SMALLDIALOGS_H
 #define SMALLDIALOGS_H
 
+#include "LineRef.h"
 #include "ui_opendialog.h"
 
 #include "Logging.h"
@@ -122,8 +123,8 @@ class FindDialog: public QDialog
     QCheckBox* m_pSearchInOutput;
     QCheckBox* m_pCaseSensitive;
 
-    int currentLine = 0;
-    int currentPos = 0;
+    LineRef currentLine = 0;
+    QtSizeType currentPos = 0;
 
   private:
     eWindowIndex currentWindow = eWindowIndex::None;

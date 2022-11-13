@@ -81,8 +81,8 @@ class DiffTextWindow : public QWidget
 
     void convertSelectionToD3LCoords();
 
-    bool findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive);
-    void setSelection(LineRef firstLine, int startPos, LineRef lastLine, int endPos, LineRef& l, int& p);
+    bool findString(const QString& s, LineRef& d3vLine, QtSizeType& posInLine, bool bDirDown, bool bCaseSensitive);
+    void setSelection(LineRef firstLine, QtSizeType startPos, LineRef lastLine, int endPos, LineRef& l, int& p);
     void getSelectionRange(LineRef* firstLine, LineRef* lastLine, e_CoordType coordType);
 
     void setPaintingAllowed(bool bAllowPainting);

@@ -1404,13 +1404,13 @@ QString DiffTextWindow::getSelection() const
 
     return selectionString;
 }
-//FIXME:64-bit size safe?
-bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive)
+
+bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, QtSizeType& posInLine, bool bDirDown, bool bCaseSensitive)
 {
     LineRef it = d3vLine;
     QtSizeType endIt = bDirDown ? d->getDiff3LineVector()->size() : -1;
-    int step = bDirDown ? 1 : -1;
-    int startPos = posInLine;
+    quint32 step = bDirDown ? 1 : -1;
+    QtSizeType startPos = posInLine;
 
     for(; it != endIt; it += step)
     {
@@ -1418,6 +1418,13 @@ bool DiffTextWindow::findString(const QString& s, LineRef& d3vLine, int& posInLi
         if(!line.isEmpty())
         {
             QtSizeType pos = line.indexOf(s, startPos, bCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive);
+            //TODO: Provide error message when failsafe is triggered.
+            if(Q_UNLIKELY(pos > TYPE_MAX(int)))
+            {
+                qCWarning(kdiffMain) << "Skip possiable match line offset to large.";
+                continue;
+            }
+
             if(pos != -1)
             {
                 d3vLine = it;
@@ -1472,7 +1479,7 @@ void DiffTextWindow::convertLineCoordsToD3LCoords(LineRef line, int pos, LineInd
     }
 }
 
-void DiffTextWindow::setSelection(LineRef firstLine, int startPos, LineRef lastLine, int endPos, LineRef& l, int& p)
+void DiffTextWindow::setSelection(LineRef firstLine, QtSizeType startPos, LineRef lastLine, int endPos, LineRef& l, int& p)
 {
     d->m_selection.reset();
     if(lastLine >= getNofLines())
