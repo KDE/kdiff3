@@ -1390,7 +1390,7 @@ QString DiffTextWindow::getSelection() const
             }
 
             if(d->m_selection.within(line, size) &&
-               !(d->m_bWordWrap && it + 1 < vectorSize && d3l == d->m_diff3WrapLineVector[it + 1].pD3L))
+               (!d->m_bWordWrap || it + 1 >= vectorSize || d3l != d->m_diff3WrapLineVector[it + 1].pD3L))
             {
 #if defined(Q_OS_WIN)
                 selectionString += '\r';

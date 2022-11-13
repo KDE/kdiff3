@@ -1413,7 +1413,7 @@ void DiffList::optimize()
 
     for(Diff& diff: *this)
     {
-        if(!(bUsefulFineDiff && index > 0))
+        if(!bUsefulFineDiff || index <= 0)
             diff.refine();
 
         ++index;
@@ -1532,12 +1532,10 @@ bool Diff3LineList::fineDiff(const e_SrcSelector selector, const std::shared_ptr
     bool bTextsTotalEqual = true;
     size_t listSize = size();
     pp.setMaxNofSteps(listSize);
-    int listIdx = 0;
 
     for(Diff3Line &diff: *this)
     {
         bTextsTotalEqual = diff.fineDiff(bTextsTotalEqual, selector, v1, v2, eIgnoreFlags);
-        ++listIdx;
         pp.step();
     }
     return bTextsTotalEqual;
@@ -1624,9 +1622,9 @@ void Diff3LineList::findHistoryRange(const QRegularExpression& historyStart, boo
         QString sA = range.end->getString(e_SrcSelector::A);
         QString sB = range.end->getString(e_SrcSelector::B);
         QString sC = range.end->getString(e_SrcSelector::C);
-        if(!((sA.isEmpty() || historyLead == Utils::calcHistoryLead(sA)) &&
-             (sB.isEmpty() || historyLead == Utils::calcHistoryLead(sB)) &&
-             (!bThreeFiles || sC.isEmpty() || historyLead == Utils::calcHistoryLead(sC))))
+        if((!sA.isEmpty() && historyLead != Utils::calcHistoryLead(sA)) ||
+           (!sB.isEmpty() && historyLead != Utils::calcHistoryLead(sB)) ||
+           (bThreeFiles && !sC.isEmpty() && historyLead != Utils::calcHistoryLead(sC)))
         {
             break; // End of the history
         }
