@@ -12,17 +12,17 @@
 #include "kdiff3.h"
 
 #include "defmac.h"
+#include "difftextwindow.h"
 #include "directorymergewindow.h"
 #include "fileaccess.h"
 #include "guiutils.h"
 #include "kdiff3_part.h"
 #include "kdiff3_shell.h"
+#include "mergeresultwindow.h"
 #include "optiondialog.h"
 #include "progress.h"
-#include "smalldialogs.h"
-#include "difftextwindow.h"
-#include "mergeresultwindow.h"
 #include "RLPainter.h"
+#include "smalldialogs.h"
 #include "Utils.h"
 // Standard c/c++ includes
 #include <memory>
@@ -57,20 +57,20 @@
 #include <QTextStream>
 #include <QUrl>
 // include files for KDE
-#include <KCrash>
+#include <KActionCollection>
 #include <KConfig>
+#include <KCrash>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KStandardAction>
-#include <KActionCollection>
 #include <KToggleAction>
 #include <KToolBar>
 
 bool KDiff3App::m_bTripleDiff = false;
 
-boost::signals2::signal<QString (), FirstNonEmpty<QString>> KDiff3App::getSelection;
-boost::signals2::signal<bool (), or> KDiff3App::allowCopy;
-boost::signals2::signal<bool (), or> KDiff3App::allowCut;
+boost::signals2::signal<QString(), FirstNonEmpty<QString>> KDiff3App::getSelection;
+boost::signals2::signal<bool(), or> KDiff3App::allowCopy;
+boost::signals2::signal<bool(), or> KDiff3App::allowCut;
 
 /*
     To be a constexpr the QLatin1String constructor must be given the size of the string explicitly.
@@ -94,7 +94,7 @@ QStatusBar* KDiff3App::statusBar() const
     return m_pKDiff3Shell->statusBar();
 }
 
-KToolBar* KDiff3App::toolBar(const QLatin1String &toolBarId) const
+KToolBar* KDiff3App::toolBar(const QLatin1String& toolBarId) const
 {
     if(m_pKDiff3Shell == nullptr)
         return nullptr;
@@ -168,7 +168,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     // Option handling: Only when pParent==0 (no parent)
     int argCount = KDiff3Shell::getParser()->optionNames().count() + KDiff3Shell::getParser()->positionalArguments().count();
     bool hasArgs = !isPart() && argCount > 0;
-    if(hasArgs) {
+    if(hasArgs)
+    {
         QString s;
         QString title;
         if(KDiff3Shell::getParser()->isSet("confighelp"))
@@ -224,7 +225,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 #endif
 
     m_bAutoMode = m_bAutoFlag || m_pOptions->m_bAutoSaveAndQuitOnMergeWithoutConflicts;
-    if(hasArgs) {
+    if(hasArgs)
+    {
         m_outputFilename = KDiff3Shell::getParser()->value("output");
 
         if(m_outputFilename.isEmpty())
@@ -255,7 +257,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
         QStringList args = KDiff3Shell::getParser()->positionalArguments();
 
         m_sd1->setFilename(KDiff3Shell::getParser()->value("base"));
-        if(m_sd1->isEmpty()) {
+        if(m_sd1->isEmpty())
+        {
             if(args.count() > 0) m_sd1->setFilename(args[0]); // args->arg(0)
             if(args.count() > 1) m_sd2->setFilename(args[1]);
             if(args.count() > 2) m_sd3->setFilename(args[2]);
@@ -268,11 +271,12 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
         //Set m_bDirCompare flag
         m_bDirCompare = m_sd1->isDir();
 
-        QStringList aliasList = KDiff3Shell::getParser()->values( "fname" );
+        QStringList aliasList = KDiff3Shell::getParser()->values("fname");
         QStringList::Iterator ali = aliasList.begin();
 
         QString an1 = KDiff3Shell::getParser()->value("L1");
-        if(!an1.isEmpty()) {
+        if(!an1.isEmpty())
+        {
             m_sd1->setAliasName(an1);
         }
         else if(ali != aliasList.end())
@@ -282,7 +286,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
         }
 
         QString an2 = KDiff3Shell::getParser()->value("L2");
-        if(!an2.isEmpty()) {
+        if(!an2.isEmpty())
+        {
             m_sd2->setAliasName(an2);
         }
         else if(ali != aliasList.end())
@@ -292,7 +297,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
         }
 
         QString an3 = KDiff3Shell::getParser()->value("L3");
-        if(!an3.isEmpty()) {
+        if(!an3.isEmpty())
+        {
             m_sd3->setAliasName(an3);
         }
         else if(ali != aliasList.end())
@@ -333,11 +339,11 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
         viewStatusBar->setChecked(m_pOptions->isStatusBarVisable());
         slotViewStatusBar();
 
-        KToolBar *mainToolBar = toolBar(MAIN_TOOLBAR_NAME);
-        if(mainToolBar != nullptr){
+        KToolBar* mainToolBar = toolBar(MAIN_TOOLBAR_NAME);
+        if(mainToolBar != nullptr)
+        {
             mainToolBar->mainWindow()->addToolBar(Qt::TopToolBarArea, mainToolBar);
         }
-
     }
     slotRefresh();
 
@@ -407,14 +413,17 @@ void KDiff3App::slotFocusChanged(QWidget* old, QWidget* now)
 
 void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)
 {
-    if(!fn1.isEmpty()) {
+    if(!fn1.isEmpty())
+    {
         m_sd1->setFilename(fn1);
         m_bDirCompare = m_sd1->isDir();
     }
-    if(!fn2.isEmpty()) {
+    if(!fn2.isEmpty())
+    {
         m_sd2->setFilename(fn2);
     }
-    if(!fn3.isEmpty()) {
+    if(!fn3.isEmpty())
+    {
         m_sd3->setFilename(fn3);
     }
 
@@ -440,8 +449,10 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         if(m_bAutoMode)
         {
             QSharedPointer<SourceData> pSD = nullptr;
-            if(m_sd3->isEmpty()) {
-                if(m_totalDiffStatus->isBinaryEqualAB()) {
+            if(m_sd3->isEmpty())
+            {
+                if(m_totalDiffStatus->isBinaryEqualAB())
+                {
                     pSD = m_sd1;
                 }
             }
@@ -519,8 +530,8 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     {
         bool bFileOpenError = false;
         if((!m_sd1->getErrors().isEmpty()) ||
-            (!m_sd2->getErrors().isEmpty()) ||
-            (!m_sd3->getErrors().isEmpty()))
+           (!m_sd2->getErrors().isEmpty()) ||
+           (!m_sd3->getErrors().isEmpty()))
         {
             QString text(i18n("Opening of these files failed:"));
             text += "\n\n";
@@ -557,9 +568,10 @@ KDiff3App::~KDiff3App()
 
 void KDiff3App::initActions(KActionCollection* ac)
 {
-    if(ac == nullptr){
+    if(ac == nullptr)
+    {
         KMessageBox::error(nullptr, "actionCollection==0");
-        exit(-1);//we cannot recover from this.
+        exit(-1); //we cannot recover from this.
     }
     fileOpen = KStandardAction::open(this, &KDiff3App::slotFileOpen, ac);
     fileOpen->setStatusTip(i18n("Opens documents for comparison..."));
@@ -797,7 +809,8 @@ void KDiff3App::slotFileSaveAs()
     slotStatusMsg(i18n("Saving file with a new filename..."));
 
     QString s = QFileDialog::getSaveFileUrl(this, i18n("Save As..."), QUrl::fromLocalFile(QDir::currentPath())).url(QUrl::PreferLocalFile);
-    if(!s.isEmpty()) {
+    if(!s.isEmpty())
+    {
         m_outputFilename = s;
         m_pMergeResultWindowTitle->setFileName(m_outputFilename);
         bool bSuccess = m_pMergeResultWindow->saveDocument(m_outputFilename, m_pMergeResultWindowTitle->getEncoding(), m_pMergeResultWindowTitle->getLineEndStyle());
@@ -823,23 +836,26 @@ void KDiff3App::slotFilePrint()
     slotStatusMsg(i18n("Printing not implemented."));
 #else
     QPrinter printer;
-    QPointer<QPrintDialog> printDialog=QPointer<QPrintDialog>(new QPrintDialog(&printer, this));
+    QPointer<QPrintDialog> printDialog = QPointer<QPrintDialog>(new QPrintDialog(&printer, this));
 
     LineRef firstSelectionD3LIdx;
     LineRef lastSelectionD3LIdx;
 
     m_pDiffTextWindow1->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
 
-    if(!firstSelectionD3LIdx.isValid()) {
+    if(!firstSelectionD3LIdx.isValid())
+    {
         m_pDiffTextWindow2->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
     }
-    if(!firstSelectionD3LIdx.isValid() && m_pDiffTextWindow3 != nullptr) {
+    if(!firstSelectionD3LIdx.isValid() && m_pDiffTextWindow3 != nullptr)
+    {
         m_pDiffTextWindow3->getSelectionRange(&firstSelectionD3LIdx, &lastSelectionD3LIdx, eD3LLineCoords);
     }
 
     printDialog->setOption(QPrintDialog::PrintCurrentPage);
 
-    if(firstSelectionD3LIdx.isValid()) {
+    if(firstSelectionD3LIdx.isValid())
+    {
         printDialog->setOption(QPrintDialog::PrintSelection);
         printDialog->setPrintRange(QAbstractPrintDialog::Selection);
     }
@@ -860,7 +876,7 @@ void KDiff3App::slotFilePrint()
     {
         slotStatusMsg(i18n("Printing..."));
         // create a painter to paint on the printer object
-        RLPainter painter(&printer, m_pOptions->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(),'W'));
+        RLPainter painter(&printer, m_pOptions->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(), 'W'));
 
         QPaintDevice* pPaintDevice = painter.device();
         int dpiy = pPaintDevice->logicalDpiY();
@@ -912,7 +928,8 @@ void KDiff3App::slotFilePrint()
         LineRef line;
         LineRef selectionEndLine;
 
-        if(printer.printRange() == QPrinter::AllPages) {
+        if(printer.printRange() == QPrinter::AllPages)
+        {
             pageList.clear();
             for(int i = 0; i < totalNofPages; ++i)
             {
@@ -959,7 +976,8 @@ void KDiff3App::slotFilePrint()
         ProgressProxy pp;
         pp.setMaxNofSteps(totalNofPages);
         QList<int>::iterator pageListIt = pageList.begin();
-        for(;;) {
+        for(;;)
+        {
             pp.setInformation(i18n("Printing page %1 of %2", page, totalNofPages), false);
             pp.setCurrent(page - 1);
             if(pp.wasCancelled())
@@ -967,7 +985,8 @@ void KDiff3App::slotFilePrint()
                 printer.abort();
                 break;
             }
-            if(!bPrintSelection) {
+            if(!bPrintSelection)
+            {
                 if(pageListIt == pageList.end())
                     break;
                 page = *pageListIt;
@@ -981,7 +1000,8 @@ void KDiff3App::slotFilePrint()
             }
             else
             {
-                if(line >= selectionEndLine) {
+                if(line >= selectionEndLine)
+                {
                     break;
                 }
                 else
