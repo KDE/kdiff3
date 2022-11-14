@@ -1984,7 +1984,7 @@ and menu. Merging or folder comparison are not supported then.
    there is nothing left in a section, not even a new line character.
    This  can happen either while merging automatically or by editing. This is
    no problem, since this hint won't appear in the saved file. If you want
-   the orignal source  back just select the section (click on the left summary
+   the original source back just select the section (click on the left summary
    column) and then click the source button with the needed contents
    (<guilabel>A</guilabel>/<guilabel>B</guilabel> or <guilabel>C</guilabel>).
 </para></answer></qandaentry>
@@ -1997,14 +1997,15 @@ and menu. Merging or folder comparison are not supported then.
 </para></answer></qandaentry>
 
 <qandaentry><question><para>
-   Can I use &kdiff3; to compare <trademark class="registered">
-   OpenOffice.org</trademark>, <application>&Microsoft; Word</application>,
+   Can I use &kdiff3; to compare <application>LibreOffice</application>/<trademark
+   class="registered">OpenOffice.org</trademark>, <application>&Microsoft; Word</application>,
    <application>&Microsoft; Excel</application>, &PDF;, &etc; files?
 </para></question><answer><para>
    Although &kdiff3; will analyse any kind of file the result will probably
    not be very satisfactory for you.
 </para><para>
-   &kdiff3; was made to compare pure text files. <trademark class="registered">
+   &kdiff3; was made to compare pure text files.
+   <application>LibreOffice</application>/<trademark class="registered">
    OpenOffice.org</trademark>, <application>&Microsoft; Word</application>,
    <application>&Microsoft; Excel</application>, &etc; store much more information
    in the files (about fonts, pictures, pages, colors, &etc;) which &kdiff3; doesn't
