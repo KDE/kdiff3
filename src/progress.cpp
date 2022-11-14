@@ -206,7 +206,7 @@ void ProgressDialog::setInformation(const QString& info, bool bRedrawUpdate)
     recalc(bRedrawUpdate);
 }
 
-void ProgressDialog::setMaxNofSteps(const qint64 maxNofSteps)
+void ProgressDialog::setMaxNofSteps(const quint64 maxNofSteps)
 {
     if(m_progressStack.empty() || maxNofSteps == 0)
         return;
@@ -238,7 +238,7 @@ void ProgressDialog::setInformationImp(const QString& info)
 #endif
 }
 
-void ProgressDialog::addNofSteps(const qint64 nofSteps)
+void ProgressDialog::addNofSteps(const quint64 nofSteps)
 {
     if(m_progressStack.empty())
         return;
@@ -257,7 +257,7 @@ void ProgressDialog::step(bool bRedrawUpdate)
     recalc(bRedrawUpdate);
 }
 
-void ProgressDialog::setCurrent(qint64 subCurrent, bool bRedrawUpdate)
+void ProgressDialog::setCurrent(quint64 subCurrent, bool bRedrawUpdate)
 {
     if(m_progressStack.empty())
         return;
@@ -370,14 +370,14 @@ void ProgressDialog::recalc(bool bUpdate)
                 else
                 {
                     QList<ProgressLevelData>::iterator i = m_progressStack.begin();
-                    int value = int(1000.0 * (getAtomic(i->m_current) * (i->m_dRangeMax - i->m_dRangeMin) / getAtomic(i->m_maxNofSteps) + i->m_dRangeMin));
+                    int value = int(1000.0 * (i->m_current.loadRelaxed() * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps.loadRelaxed() + i->m_dRangeMin));
                     dialogUi.progressBar->setValue(value);
                     if(m_bStayHidden && m_pStatusProgressBar)
                         m_pStatusProgressBar->setValue(value);
 
                     ++i;
                     if(i != m_progressStack.end())
-                        dialogUi.subProgressBar->setValue((int)lround(1000.0 * (getAtomic(i->m_current) * (i->m_dRangeMax - i->m_dRangeMin) / getAtomic(i->m_maxNofSteps) + i->m_dRangeMin)));
+                        dialogUi.subProgressBar->setValue((int)lround(1000.0 * (i->m_current.loadRelaxed() * (i->m_dRangeMax - i->m_dRangeMin) / i->m_maxNofSteps.loadRelaxed() + i->m_dRangeMin)));
                     else
                         dialogUi.subProgressBar->setValue((int)lround(1000.0 * m_progressStack.front().m_dSubRangeMin));
                 }

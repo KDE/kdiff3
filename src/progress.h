@@ -39,11 +39,11 @@ class ProgressDialog: public QDialog
     void setStayHidden(bool bStayHidden);
     void setInformation(const QString& info, bool bRedrawUpdate = true);
     void setInformation(const QString& info, int current, bool bRedrawUpdate = true);
-    void setCurrent(qint64 current, bool bRedrawUpdate = true);
+    void setCurrent(quint64 current, bool bRedrawUpdate = true);
     void step(bool bRedrawUpdate = true);
     void clear();
-    void setMaxNofSteps(const qint64 dMaxNofSteps);
-    void addNofSteps(const qint64 nofSteps);
+    void setMaxNofSteps(const quint64 dMaxNofSteps);
+    void addNofSteps(const quint64 nofSteps);
     void push();
     void pop(bool bRedrawUpdate = true);
 
@@ -92,8 +92,8 @@ class ProgressDialog: public QDialog
     Ui::ProgressDialog dialogUi;
 
     struct ProgressLevelData {
-        QAtomicInteger<qint64> m_current = 0;
-        QAtomicInteger<qint64> m_maxNofSteps = 1; // when step() is used.
+        QAtomicInteger<quint64> m_current = 0;
+        QAtomicInteger<quint64> m_maxNofSteps = 1; // when step() is used.
         double m_dRangeMax = 1;
         double m_dRangeMin = 0;
         double m_dSubRangeMax = 1;

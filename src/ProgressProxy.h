@@ -22,11 +22,11 @@ class ProgressProxy: public QObject
 
     void setInformation(const QString& info, bool bRedrawUpdate = true);
     void setInformation(const QString& info, int current, bool bRedrawUpdate = true);
-    void setCurrent(qint64 current, bool bRedrawUpdate = true);
+    void setCurrent(quint64 current, bool bRedrawUpdate = true);
     void step(bool bRedrawUpdate = true);
     void clear();
-    void setMaxNofSteps(const qint64 maxNofSteps);
-    void addNofSteps(const qint64 nofSteps);
+    void setMaxNofSteps(const quint64 maxNofSteps);
+    void addNofSteps(const quint64 nofSteps);
     bool wasCancelled();
     void setRangeTransformation(double dMin, double dMax);
     void setSubRangeTransformation(double dMin, double dMax);
@@ -41,9 +41,9 @@ class ProgressProxy: public QObject
     static signals2::signal<void(KJob*, const QString&)> enterEventLoop;
     static signals2::signal<void()> exitEventLoop;
 
-    static signals2::signal<void(qint64, bool)> setCurrentSig;
-    static signals2::signal<void(qint64)> setMaxNofStepsSig;
-    static signals2::signal<void(qint64)> addNofStepsSig;
+    static signals2::signal<void(quint64, bool)> setCurrentSig;
+    static signals2::signal<void(quint64)> setMaxNofStepsSig;
+    static signals2::signal<void(quint64)> addNofStepsSig;
     static signals2::signal<void(bool)> stepSig;
 
     static signals2::signal<void(double, double)> setRangeTransformationSig;
