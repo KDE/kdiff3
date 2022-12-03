@@ -57,7 +57,7 @@ KDiff3Shell::KDiff3Shell(bool bCompleteInit)
         setCentralWidget(m_widget);
 
         if(bCompleteInit)
-            m_widget->completeInit(QString());
+            m_widget->completeInit();
         chk_connect(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
     }
     else
