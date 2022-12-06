@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * KDiff3 - Text Diff And Merge Tool
  *
@@ -19,9 +20,11 @@
 
 class KToggleAction;
 
+// clang-format off
 namespace KParts {
     class ReadWritePart;
 }
+// clang-format on
 
 class KDiff3App;
 
@@ -32,10 +35,10 @@ class KDiff3App;
  * @short Application Shell
  * @author Joachim Eibl <joachim.eibl at gmx.de>
  */
-class KDiff3Shell : public KParts::MainWindow
+class KDiff3Shell: public KParts::MainWindow
 {
     Q_OBJECT
-public:
+  public:
     /**
      * Default Constructor
      */
@@ -48,27 +51,28 @@ public:
 
     bool queryClose() override;
     bool queryExit();
-    void closeEvent(QCloseEvent*e) override;
+    void closeEvent(QCloseEvent* e) override;
 
-    static inline std::unique_ptr<QCommandLineParser>& getParser(){
-      static std::unique_ptr<QCommandLineParser> parser = std::make_unique<QCommandLineParser>();
-      return parser;
+    static inline std::unique_ptr<QCommandLineParser>& getParser()
+    {
+        static std::unique_ptr<QCommandLineParser> parser = std::make_unique<QCommandLineParser>();
+        return parser;
     };
-private Q_SLOTS:
+  private Q_SLOTS:
     void optionsShowToolbar();
     void optionsShowStatusbar();
     void optionsConfigureKeys();
     void optionsConfigureToolbars();
 
     void applyNewToolbarConfig();
-    void slotNewInstance( const QString& fn1, const QString& fn2, const QString& fn3 );
+    void slotNewInstance(const QString& fn1, const QString& fn2, const QString& fn3);
 
-private:
-    KParts::ReadWritePart *m_part;
-    KDiff3App *m_widget;
+  private:
+    KParts::ReadWritePart* m_part;
+    KDiff3App* m_widget;
 
-    KToggleAction *m_toolbarAction;
-    KToggleAction *m_statusbarAction;
+    KToggleAction* m_toolbarAction;
+    KToggleAction* m_statusbarAction;
     bool m_bUnderConstruction;
 };
 
