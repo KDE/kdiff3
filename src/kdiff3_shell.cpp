@@ -23,8 +23,7 @@
 #include <KStandardAction>
 #include <KToolBar>
 
-
-KDiff3Shell::KDiff3Shell(bool bCompleteInit)
+KDiff3Shell::KDiff3Shell(const QString& fn1, const QString& fn2, const QString& fn3)
 {
     m_bUnderConstruction = true;
     // set the shell's ui resource file
@@ -48,8 +47,7 @@ KDiff3Shell::KDiff3Shell(bool bCompleteInit)
         // tell the KParts::MainWindow that this is indeed the main widget
         setCentralWidget(m_widget);
 
-        if(bCompleteInit)
-            m_widget->completeInit();
+        m_widget->completeInit(fn1, fn2, fn3);
         chk_connect(m_widget, &KDiff3App::createNewInstance, this, &KDiff3Shell::slotNewInstance);
     }
     else
@@ -152,8 +150,8 @@ void KDiff3Shell::applyNewToolbarConfig()
 
 void KDiff3Shell::slotNewInstance(const QString& fn1, const QString& fn2, const QString& fn3)
 {
-    static KDiff3Shell* pKDiff3Shell = new KDiff3Shell(false);
-    pKDiff3Shell->m_widget->completeInit(fn1, fn2, fn3);
+    static KDiff3Shell* pKDiff3Shell = new KDiff3Shell(fn1, fn2, fn3);
+    Q_UNUSED(pKDiff3Shell);
 }
 
 //#include "kdiff3_shell.moc"

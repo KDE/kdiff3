@@ -39,7 +39,7 @@ public:
     /**
      * Default Constructor
      */
-    explicit KDiff3Shell(bool bCompleteInit=true);
+    explicit KDiff3Shell(const QString& fn1 = "", const QString& fn2 = "", const QString& fn3 = "");
 
     /**
      * Default Destructor
