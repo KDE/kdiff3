@@ -122,6 +122,8 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     add_definitions(-DNOMINMAX)
     #Suppress Microsoft specfic C4996 "deprecatation" warnings. Not helpful for code intended to run on any other platform.
     add_definitions(-D_CRT_NONSTDC_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS_GLOBALS)
+    #force compliant use of __cplusplus
+    add_compile_options("/Zc:__cplusplus")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-trigraphs -Wduplicated-cond -Wduplicated-branches -Wshadow -fexceptions")
 endif()
