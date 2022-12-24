@@ -1,3 +1,4 @@
+// clang-format off
 /* xmalloc.c -- malloc with out of memory checking
 
    Modified for KDiff3 by Joachim Eibl 2003.
@@ -5,12 +6,13 @@
 
 
     Part of KDiff3 - Text Diff And Merge Tool
-   
+
     SPDX-FileCopyrightText: 1988-2002 Free Software Foundation, Inc.
     SPDX-FileCopyrightText: 2002-2011 Joachim Eibl, joachim.eibl at gmx.de
     SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
     SPDX-License-Identifier: GPL-2.0-or-later
 */
+// clang-format on
 
 #include <stdlib.h>
 #include <string.h>

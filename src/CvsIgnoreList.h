@@ -1,3 +1,4 @@
+// clang-format off
 /**
  * KDiff3 - Text Diff And Merge Tool
  *
@@ -5,6 +6,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  *
  */
+// clang-format on
 
 #ifndef CVSIGNORELIST_H
 #define CVSIGNORELIST_H

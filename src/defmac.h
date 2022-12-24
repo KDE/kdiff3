@@ -1,14 +1,14 @@
-/* clang-format off */
+// clang-format off
 /*****************************************************************************
 
   SPDX-FileCopyrightText: Copyright © 2010 Pavel Karelin (hkarel), <hkarel@yandex.ru>
   SPDX-License-Identifier: MIT
   ---
 
-  This header is defined macros of general purpose.
+  This header defines macros of general purpose.
 
 *****************************************************************************/
-
+// clang-format on
 
 #ifndef DEFMAC_H
 #define DEFMAC_H

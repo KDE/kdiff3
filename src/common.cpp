@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * KDiff3 - Text Diff And Merge Tool
 

@@ -1,3 +1,4 @@
+// clang-format off
 /* Analyze file differences for GNU DIFF.
 
    Modified for KDiff3 by Joachim Eibl <joachim.eibl at gmx.de> 2003.
@@ -24,6 +25,7 @@
    The basic algorithm was independently discovered as described in:
    "Algorithms for Approximate String Matching", E. Ukkonen,
    Information and Control Vol. 64, 1985, pp. 100-118.  */
+// clang-format on
 
 #define GDIFF_MAIN
 

@@ -1,3 +1,4 @@
+// clang-format off
 /* File I/O for GNU DIFF.
 
     Modified for KDiff3 by Joachim Eibl <joachim.eibl at gmx.de> 2003, 2004, 2005.
@@ -10,6 +11,7 @@
     SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
     SPDX-License-Identifier: GPL-2.0-or-later
 */
+// clang-format on
 
 #include "gnudiff_diff.h"
 
