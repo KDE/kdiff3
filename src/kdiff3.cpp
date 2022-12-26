@@ -379,6 +379,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
 /*
     This function is only concerned with qt objects that don't support canCut.
     allowCut() or's the results from all canCut signals
+
+    returns true if a QLineEdit or QLineEdit is in focus because Qt handles these internally.
 */
 bool KDiff3App::canCut()
 {
@@ -392,7 +394,7 @@ bool KDiff3App::canCut()
     This function is only concerned with qt objects that don't support canCopy.
     allowCopy() or's the results from all canCopy signals sent via boost.
 
-    returns true if a QLineEdit is in focus because Qt handles these internally.
+    returns true if a QLineEdit or QLineEdit is in focus because Qt handles these internally.
 */
 bool KDiff3App::canCopy()
 {
