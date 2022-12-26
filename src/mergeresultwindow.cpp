@@ -11,12 +11,12 @@
 #include "mergeresultwindow.h"
 
 #include "defmac.h"
+#include "guiutils.h"
 #include "kdiff3.h"
 #include "options.h"
 #include "RLPainter.h"
-#include "guiutils.h"
 #include "TypeUtils.h"
-#include "Utils.h"             // for Utils
+#include "Utils.h"
 
 #include <memory>
 
