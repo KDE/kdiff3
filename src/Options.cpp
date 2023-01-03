@@ -19,8 +19,6 @@
 
 #include <KSharedConfig>
 
-#define KDIFF3_CONFIG_GROUP "KDiff3 Options"
-
 boost::signals2::signal<void ()> Options::apply;
 boost::signals2::signal<void ()> Options::resetToDefaults;
 boost::signals2::signal<void ()> Options::setToCurrent;

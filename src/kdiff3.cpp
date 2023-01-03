@@ -495,25 +495,31 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
     }
     m_bAutoMode = false;
 
-    if(!isPart() && m_pOptions->isFullScreen())
-        m_pKDiff3Shell->showFullScreen();
-    else if(!isPart() && m_pOptions->isMaximised())
-        m_pKDiff3Shell->showMaximized();
-
-    if(!isPart() && !m_pKDiff3Shell->isVisible())
+    if(!isPart())
     {
-        /*
-            This is just an intital state before qt does a proper restore.
-        */
-        QSize size = m_pOptions->getGeometry();
-        QPoint pos = m_pOptions->getPosition();
-        if(!size.isEmpty())
+        if(!m_pKDiff3Shell->isVisible() && !restoreWindow(KSharedConfig::openConfig()))
         {
-            m_pKDiff3Shell->resize(size);
+            /*
+                Set default state/geometry from config file.
+                This will no longer be updated but serves as a fallback.
+                Qt's restoreState/saveState can handle multiple screens this won't.
+            */
+            if(m_pOptions->isFullScreen())
+                m_pKDiff3Shell->showFullScreen();
+            else if(m_pOptions->isMaximised())
+                m_pKDiff3Shell->showMaximized();
 
-            QRect visibleRect = QRect(pos, size) & QApplication::desktop()->rect();
-            if(visibleRect.width() > 100 && visibleRect.height() > 100)
-                m_pKDiff3Shell->move(pos);
+            QSize size = m_pOptions->getGeometry();
+            QPoint pos = m_pOptions->getPosition();
+
+            if(!size.isEmpty())
+            {
+                m_pKDiff3Shell->resize(size);
+
+                QRect visibleRect = QRect(pos, size) & QApplication::desktop()->rect();
+                if(visibleRect.width() > 100 && visibleRect.height() > 100)
+                    m_pKDiff3Shell->move(pos);
+            }
         }
 
         m_pKDiff3Shell->show();
@@ -720,19 +726,29 @@ void KDiff3App::initStatusBar()
         statusBar()->showMessage(i18n("Ready."));
 }
 
+void KDiff3App::saveWindow(const KSharedConfigPtr config)
+{
+    KConfigGroup group = config->group(KDIFF3_CONFIG_GROUP);
+
+    group.writeEntry("mainWindow-geometry", m_pKDiff3Shell->saveGeometry());
+    group.writeEntry("mainWindow-state", m_pKDiff3Shell->saveState());
+}
+
+bool KDiff3App::restoreWindow(const KSharedConfigPtr config)
+{
+    KConfigGroup group = config->group(KDIFF3_CONFIG_GROUP);
+
+    return (m_pKDiff3Shell->restoreGeometry(group.readEntry("mainWindow-geometry", QVariant(QByteArray())).toByteArray()) &&
+            m_pKDiff3Shell->restoreState(group.readEntry("mainWindow-state", QVariant(QByteArray())).toByteArray()));
+}
+
 void KDiff3App::saveOptions(KSharedConfigPtr config)
 {
     if(!m_bAutoMode)
     {
         if(!isPart())
         {
-            m_pOptions->setFullScreen(m_pKDiff3Shell->isFullScreen());
-            m_pOptions->setMaximised(m_pKDiff3Shell->isMaximized());
-            if(!m_pKDiff3Shell->isFullScreen() && !m_pKDiff3Shell->isMaximized() && m_pKDiff3Shell->isVisible())
-            {
-                m_pOptions->setGeometry(m_pKDiff3Shell->size());
-                m_pOptions->setPosition(m_pKDiff3Shell->pos());
-            }
+            saveWindow(config);
         }
 
         m_pOptionDialog->saveOptions(std::move(config));

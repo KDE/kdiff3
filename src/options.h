@@ -31,6 +31,8 @@ class ValueMap;
 
 class OptionItemBase;
 
+constexpr char KDIFF3_CONFIG_GROUP[] = "KDiff3 Options";
+
 enum e_LineEndStyle
 {
     eLineEndStyleUnix = 0,
@@ -60,11 +62,9 @@ class Options
 
     const QString parseOptions(const QStringList& optionList);
     [[nodiscard]] QString calcOptionHelp();
-    [[nodiscard]] const QSize& getGeometry() const { return m_geometry; }
-    void setGeometry(const QSize& size) { m_geometry = size; }
 
+    [[nodiscard]] const QSize& getGeometry() const { return m_geometry; }
     [[nodiscard]] const QPoint& getPosition() const { return m_position; }
-    void setPosition(const QPoint& pos) { m_position = pos; }
 
     [[nodiscard]] bool isFullScreen() const { return m_bFullScreen; };
     void setFullScreen(const bool fullScreen) { m_bFullScreen = fullScreen; };
