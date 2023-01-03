@@ -1,3 +1,4 @@
+// clang-format off
 /*
  *  This file is part of KDiff3.
  *
@@ -5,7 +6,7 @@
  * SPDX-FileCopyrightText: 2018-2020 Michael Reeves reeves.87@gmail.com
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
-
+// clang-format on
 
 // application specific includes
 #include "kdiff3.h"

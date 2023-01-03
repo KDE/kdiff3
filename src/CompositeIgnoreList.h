@@ -1,9 +1,11 @@
+// clang-format off
 /*
  * This file is part of KDiff3
  *
  * SPDX-FileCopyrightText: 2021-2021 David Hallas, david@davidhallas.dk
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
+// clang-format on
 
 #ifndef COMPOSITEIGNORELIST_H
 #define COMPOSITEIGNORELIST_H
