@@ -1795,7 +1795,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
     else if(lLeftMouseButton) // Normal cursor placement
     {
         pos = std::max(pos, 0);
-        if(e->QInputEvent::modifiers() & Qt::ShiftModifier)
+        if(e->modifiers() & Qt::ShiftModifier)
         {
             if(!m_selection.isValidFirstLine())
                 m_selection.start(line, pos);
@@ -1985,10 +1985,10 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
     QTextLayout textLayoutOrig(str, font(), this);
     getTextLayoutForLine(y, str, textLayoutOrig);
 
-    bool bCtrl = (e->QInputEvent::modifiers() & Qt::ControlModifier) != 0;
-    bool bShift = (e->QInputEvent::modifiers() & Qt::ShiftModifier) != 0;
+    bool bCtrl = (e->modifiers() & Qt::ControlModifier) != 0;
+    bool bShift = (e->modifiers() & Qt::ShiftModifier) != 0;
 #ifdef Q_OS_WIN
-    bool bAlt = (e->QInputEvent::modifiers() & Qt::AltModifier) != 0;
+    bool bAlt = (e->modifiers() & Qt::AltModifier) != 0;
     if(bCtrl && bAlt)
     {
         bCtrl = false;

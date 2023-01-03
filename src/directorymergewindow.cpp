@@ -1147,7 +1147,7 @@ void DirectoryMergeWindow::slotCurrentMergeToAAndB()
 
 void DirectoryMergeWindow::keyPressEvent(QKeyEvent* e)
 {
-    if((e->QInputEvent::modifiers() & Qt::ControlModifier) != 0)
+    if((e->modifiers() & Qt::ControlModifier) != 0)
     {
         MergeFileInfos* pMFI = d->getMFI(currentIndex());
         if(pMFI == nullptr)

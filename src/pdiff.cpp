@@ -804,7 +804,7 @@ void KDiff3App::keyPressEvent(QKeyEvent* keyEvent)
         return;
     }
 
-    bool bCtrl = (keyEvent->QInputEvent::modifiers() & Qt::ControlModifier) != 0;
+    bool bCtrl = (keyEvent->modifiers() & Qt::ControlModifier) != 0;
 
     switch(keyEvent->key())
     {
