@@ -15,7 +15,6 @@
 #include "fileaccess.h"
 #include "kdiff3.h"
 #include "Logging.h"
-#include "MergeFileInfos.h"
 #include "optiondialog.h"
 #include "progress.h"
 #include "Utils.h"
