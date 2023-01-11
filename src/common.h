@@ -32,24 +32,6 @@ T max3( T d1, T d2, T d3 )
    return std::max( std::max( d1, d2 ), d3 );
 }
 
-inline int getAtomic(QAtomicInt& ai)
-{
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-    return ai.load();
-#else
-    return ai.loadRelaxed();
-#endif
-}
-
-inline qint64 getAtomic(QAtomicInteger<qint64>& ai)
-{
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-    return ai.load();
-#else
-    return ai.loadRelaxed();
-#endif
-}
-
 class QFont;
 class QColor;
 class QSize;

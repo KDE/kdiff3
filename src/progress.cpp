@@ -10,7 +10,6 @@
 
 #include "progress.h"
 
-#include "common.h"
 #include "defmac.h"
 
 #include <cmath>

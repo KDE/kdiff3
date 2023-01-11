@@ -16,7 +16,7 @@
 #include "SourceData.h"
 #include "TypeUtils.h"
 #include "Utils.h"
-#include "common.h"     // for getAtomic, max3, min3
+#include "common.h"     // for max3, min3
 #include "defmac.h"
 #include "kdiff3.h"
 #include "Logging.h"
@@ -79,7 +79,7 @@ class RecalcWordWrapRunnable : public QRunnable
     {
         m_pDTW->recalcWordWrapHelper(0, m_visibleTextWidth, m_cacheIdx);
         int newValue = s_runnableCount.fetchAndAddOrdered(-1) - 1;
-        g_pProgressDialog->setCurrent(s_maxNofRunnables - getAtomic(s_runnableCount));
+        g_pProgressDialog->setCurrent(s_maxNofRunnables - s_runnableCount.loadRelaxed());
         if(newValue == 0)
         {
             Q_EMIT m_pDTW->finishRecalcWordWrap(m_visibleTextWidth);
@@ -463,7 +463,7 @@ int DiffTextWindow::getMaxTextWidth() const
     {
         return getVisibleTextAreaWidth();
     }
-    else if(getAtomic(d->m_maxTextWidth) < 0)
+    else if(d->m_maxTextWidth.loadRelaxed() < 0)
     {
         d->m_maxTextWidth = 0;
         QTextLayout textLayout(QString(), font(), this);
@@ -472,11 +472,11 @@ int DiffTextWindow::getMaxTextWidth() const
             textLayout.clearLayout();
             textLayout.setText(d->getString(i));
             d->prepareTextLayout(textLayout);
-            if(textLayout.maximumWidth() > getAtomic(d->m_maxTextWidth))
+            if(textLayout.maximumWidth() > d->m_maxTextWidth.loadRelaxed())
                 d->m_maxTextWidth = qCeil(textLayout.maximumWidth());
         }
     }
-    return getAtomic(d->m_maxTextWidth);
+    return d->m_maxTextWidth.loadRelaxed();
 }
 
 //FIXME:not 64-bit size safe
@@ -1651,7 +1651,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSiz
     }
     else
     {
-        if(wrapLineVectorSize == 0 && getAtomic(d->m_maxTextWidth) < 0)
+        if(wrapLineVectorSize == 0 && d->m_maxTextWidth.loadRelaxed() < 0)
         {
             d->m_diff3WrapLineVector.resize(0);
             d->m_wrapLineCacheList.clear();
@@ -1784,7 +1784,7 @@ void DiffTextWindow::recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int vis
         LineIndex firstD3LineIdx = cacheListIdx * s_linesPerRunnable;
         LineIndex endIdx = std::min(firstD3LineIdx + s_linesPerRunnable, size);
 
-        int maxTextWidth = getAtomic(d->m_maxTextWidth); // current value
+        int maxTextWidth = d->m_maxTextWidth.loadRelaxed(); // current value
         QTextLayout textLayout(QString(), font(), this);
         for(LineIndex i = firstD3LineIdx; i < endIdx; ++i)
         {
