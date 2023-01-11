@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdiff3 package.
 #
-# giovanni <g.sora@tiscali.it>, 2020, 2021.
+# giovanni <g.sora@tiscali.it>, 2020, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-25 00:52+0000\n"
-"PO-Revision-Date: 2021-12-28 21:27+0100\n"
+"PO-Revision-Date: 2023-01-10 16:13+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.0\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: kdiff3fileitemaction.cpp:82
 #, kde-format
@@ -48,15 +48,13 @@ msgid "Compare with..."
 msgstr "Compara con ..."
 
 #: kdiff3fileitemaction.cpp:145
-#, fuzzy, kde-format
-#| msgid "Clear list"
+#, kde-format
 msgctxt "Contexualmenu option to cleat comparison list"
 msgid "Clear list"
 msgstr "Netta lista"
 
 #: kdiff3fileitemaction.cpp:153
-#, fuzzy, kde-format
-#| msgid "Compare"
+#, kde-format
 msgctxt "Contexualmenu option "
 msgid "Compare"
 msgstr "Compara"
@@ -75,6 +73,8 @@ msgstr "A proposito de plugin de menu de KDiff3...."
 #, kde-format
 msgid "KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
 msgstr ""
+"KDiff3 File Item Action Plugin (Plugin de Action de Elemento de File): "
+"Copyright (C) 2011 Joachim Eibl\n"
 
 #: kdiff3fileitemaction.cpp:278
 #, kde-format
@@ -89,8 +89,17 @@ msgid ""
 "destination.\n"
 "Same also applies to folder comparison and merge."
 msgstr ""
+"Uante le extension de contexto de menut:\n"
+"Per simple comparation de duo files selectionate selige \"Compara\".\n"
+"Si le altere file es alibi  \"Salveguiarda\" le prime file per depost."
+"Illoarrarera in le submenu  \"Compara con...\" . Alora usa \"Compara Con\" "
+"surle secunde file.\n"
+"Per un fusion a 3 vias primo \"Salveguarda\" le file de base, post le branca "
+"a fusionar e selige \"fusion a 3-vias con  base\" sur le altre branca que "
+"essera uste como destination.\n"
+"Le mesme anque applica a comparation e fusion de dossier."
 
 #: kdiff3fileitemaction.cpp:286
 #, kde-format
 msgid "About KDiff3 File Item Action Plugin"
-msgstr ""
+msgstr "Re KDiff3 File Item Action Plugin"
