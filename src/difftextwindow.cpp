@@ -10,20 +10,20 @@
 
 #include "difftextwindow.h"
 
-#include "FileNameLineEdit.h"
-#include "LineRef.h"
-#include "RLPainter.h"
-#include "SourceData.h"
-#include "TypeUtils.h"
-#include "Utils.h"
-#include "common.h"     // for max3, min3
+#include "common.h" // for max3, min3
 #include "defmac.h"
+#include "FileNameLineEdit.h"
 #include "kdiff3.h"
+#include "LineRef.h"
 #include "Logging.h"
 #include "merger.h"
 #include "options.h"
 #include "progress.h"
+#include "RLPainter.h"
 #include "selection.h"
+#include "SourceData.h"
+#include "TypeUtils.h"
+#include "Utils.h"
 
 #include <algorithm>
 #include <cmath>
