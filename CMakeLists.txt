@@ -48,7 +48,7 @@ include(ECMSetupVersion)
 include(ECMAddTests)
 include(ECMOptionalAddSubdirectory)
 
-ecm_setup_version(1.9.70 VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DIR}/src/version.h)
+ecm_setup_version(1.10.0 VARIABLE_PREFIX KDIFF3 VERSION_HEADER ${CMAKE_BINARY_DIR}/src/version.h)
 
 # Some older versions on boost contain a bug that prevents compiling gcc offers a built-in workaround
 # but that isn't enough to ship as clang has no such workaround. 1.65 is known to be affected.
