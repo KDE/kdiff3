@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-05 00:51+0000\n"
+"POT-Creation-Date: 2023-01-12 00:58+0000\n"
 "PO-Revision-Date: 2022-09-26 10:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -31,67 +31,67 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "joanmaspons@gmail.com,antonibella5@yahoo.com"
 
-#: DefaultFileAccessJobHandler.cpp:56
+#: DefaultFileAccessJobHandler.cpp:49
 #, kde-format
 msgid "Getting file status: %1"
 msgstr "S'està obtenint l'estat del fitxer: %1"
 
-#: DefaultFileAccessJobHandler.cpp:108
+#: DefaultFileAccessJobHandler.cpp:101
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
 msgstr "S'està llegint el fitxer: %1"
 
-#: DefaultFileAccessJobHandler.cpp:148
+#: DefaultFileAccessJobHandler.cpp:141
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
 msgstr "S'està escrivint el fitxer: %1"
 
-#: DefaultFileAccessJobHandler.cpp:182
+#: DefaultFileAccessJobHandler.cpp:175
 #, kde-format
 msgid "Out of memory"
 msgstr "Memòria exhaurida"
 
-#: DefaultFileAccessJobHandler.cpp:219
+#: DefaultFileAccessJobHandler.cpp:212
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
 msgstr "S'està creant la carpeta: %1"
 
-#: DefaultFileAccessJobHandler.cpp:241
+#: DefaultFileAccessJobHandler.cpp:234
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
 msgstr "S'està eliminant la carpeta: %1"
 
-#: DefaultFileAccessJobHandler.cpp:257
+#: DefaultFileAccessJobHandler.cpp:250
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
 msgstr "S'està eliminant el fitxer: %1"
 
-#: DefaultFileAccessJobHandler.cpp:274
+#: DefaultFileAccessJobHandler.cpp:267
 #, kde-format
 msgid "Creating symbolic link: %1 -> %2"
 msgstr "S'està creant l'enllaç simbòlic: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:299
+#: DefaultFileAccessJobHandler.cpp:292
 #, kde-format
 msgid "Renaming file: %1 -> %2"
 msgstr "S'està reanomenant el fitxer: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:342
+#: DefaultFileAccessJobHandler.cpp:335
 #, kde-format
 msgid "Copying file: %1 -> %2"
 msgstr "S'està copiant el fitxer: %1 -> %2"
 
-#: DefaultFileAccessJobHandler.cpp:364
+#: DefaultFileAccessJobHandler.cpp:357
 #, kde-format
 msgid "Reading folder: %1"
 msgstr "S'està llegint la carpeta: %1"
 
-#: DefaultFileAccessJobHandler.cpp:422
+#: DefaultFileAccessJobHandler.cpp:415
 #, kde-format
 msgid "Listing directory: %1"
 msgstr "S'està llistant la carpeta: %1"
@@ -3515,7 +3515,7 @@ msgid "Error while adding manual diff range"
 msgstr "Error en afegir un interval manual de diferències"
 
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: progress.cpp:55 progressdialog.ui:94
+#: progress.cpp:54 progressdialog.ui:94
 #, kde-format
 msgid "&Cancel"
 msgstr "&Cancel·la"
