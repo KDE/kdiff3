@@ -19,6 +19,7 @@
 #include <QString>
 #include <QSize>
 #include <QPoint>
+
 class ConfigValueMap : public ValueMap
 {
   private:
