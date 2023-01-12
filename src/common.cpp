@@ -12,12 +12,12 @@
 #include "TypeUtils.h"
 
 #include <map>
-#include <utility>            // for pair
+#include <utility> // for pair
 
 #include <QColor>
 #include <QFont>
-#include <QPoint>
 #include <QLatin1String>
+#include <QPoint>
 #include <QSize>
 #include <QStringList>
 #include <QStringLiteral>
@@ -274,7 +274,8 @@ QStringList ValueMap::readListEntry(const QString& k, const QStringList& default
     QStringList strList;
 
     std::map<QString, QString>::iterator i = m_map.find(k);
-    if(i != m_map.end()) {
+    if(i != m_map.end())
+    {
         strList = safeStringSplit(i->second);
         return strList;
     }
@@ -286,34 +287,42 @@ QString ValueMap::readEntry(const QString& s, const QString& defaultVal)
 {
     return readStringEntry(s, defaultVal);
 }
+
 QString ValueMap::readEntry(const QString& s, const char* defaultVal)
 {
     return readStringEntry(s, QString::fromLatin1(defaultVal));
 }
+
 QFont ValueMap::readEntry(const QString& s, const QFont& defaultVal)
 {
     return readFontEntry(s, &defaultVal);
 }
+
 QColor ValueMap::readEntry(const QString& s, const QColor defaultVal)
 {
     return readColorEntry(s, &defaultVal);
 }
+
 QSize ValueMap::readEntry(const QString& s, const QSize defaultVal)
 {
     return readSizeEntry(s, &defaultVal);
 }
+
 QPoint ValueMap::readEntry(const QString& s, const QPoint defaultVal)
 {
     return readPointEntry(s, &defaultVal);
 }
+
 bool ValueMap::readEntry(const QString& s, bool bDefault)
 {
     return readBoolEntry(s, bDefault);
 }
+
 int ValueMap::readEntry(const QString& s, int iDefault)
 {
     return readNumEntry(s, iDefault);
 }
+
 QStringList ValueMap::readEntry(const QString& s, const QStringList& defaultVal)
 {
     return readListEntry(s, defaultVal);
