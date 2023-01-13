@@ -10,7 +10,6 @@
 
 #include "difftextwindow.h"
 
-#include "common.h" // for max3, min3
 #include "defmac.h"
 #include "FileNameLineEdit.h"
 #include "kdiff3.h"
@@ -770,8 +769,8 @@ void DiffTextWindow::timerEvent(QTimerEvent*)
             int firstLine;
             if(d->m_selection.getOldFirstLine().isValid())
             {
-                firstLine = min3(d->m_selection.getOldFirstLine(), d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
-                lastLine = max3(d->m_selection.getOldFirstLine(), d->m_selection.getLastLine(), d->m_selection.getOldLastLine());
+                firstLine = std::min({d->m_selection.getOldFirstLine(), d->m_selection.getLastLine(), d->m_selection.getOldLastLine()});
+                lastLine = std::max({d->m_selection.getOldFirstLine(), d->m_selection.getLastLine(), d->m_selection.getOldLastLine()});
             }
             else
             {

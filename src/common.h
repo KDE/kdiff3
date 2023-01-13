@@ -20,18 +20,6 @@
 #define KF_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
 #define KF_VERSION KF_VERSION_CHECK(KF_VERSION_MAJOR, KF_VERSION_MINOR, KF_VERSION_PATCH)
 
-template <class T>
-T min3( T d1, T d2, T d3 )
-{
-   return std::min( std::min( d1, d2 ), d3 );
-}
-
-template <class T>
-T max3( T d1, T d2, T d3 )
-{
-   return std::max( std::max( d1, d2 ), d3 );
-}
-
 class QFont;
 class QColor;
 class QSize;
