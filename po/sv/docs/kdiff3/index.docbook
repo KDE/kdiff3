@@ -1,0 +1,4084 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdiff3 "<application
+>KDiff3</application
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Swedish "INCLUDE">
+]>
+
+<book lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Handbok &kdiff3;</title>
+
+<authorgroup>
+  <othercredit role="developer"
+><firstname
+>Michael</firstname
+> <surname
+>Reeves</surname
+> <affiliation
+><address
+> <email
+>reeves.87@gmail.com</email>
+    </address
+></affiliation>
+  </othercredit>
+  <othercredit role="developer"
+><firstname
+>Joachim</firstname
+> <surname
+>Eibl</surname
+> <affiliation
+><address
+> <email
+>joachim.eibl snabela gmx.de</email>
+    </address
+></affiliation>
+  </othercredit>
+<othercredit role="translator"
+><firstname
+>Stefan</firstname
+><surname
+>Asserhäll</surname
+><affiliation
+><address
+><email
+>stefan.asserhall@bredband.net</email
+></address
+></affiliation
+><contrib
+>Översättare</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2002-2007</year>
+<holder
+>Joachim Eibl</holder>
+</copyright>
+<copyright>
+<year
+>2017-2019</year>
+<holder
+>Michael Reeves</holder>
+</copyright>
+<!-- Translators: put here the copyright notice of the translation -->
+<!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
+     and in the FDL itself on how to use it. -->
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<!-- Date and version information of the documentation
+Don't forget to include this last date and this last revision number, we
+need them for translation coordination !
+Please respect the format of the date (YYYY-MM-DD) and of the version
+(V.MM.LL), it could be used by automation scripts.
+Do NOT change these in the translation. -->
+
+<date
+>2019-02-22</date>
+<releaseinfo
+>1.08.70</releaseinfo>
+
+
+<abstract>
+<para
+>&kdiff3; är ett verktyg för jämförelser och sammanfogning av filer och kataloger, som <itemizedlist>
+<listitem
+><para
+>jämför och sammanfogar två eller tre indatafiler med text eller kataloger,</para
+></listitem>
+<listitem
+><para
+>visar skillnaden rad-för-rad och tecken-för-tecken(!),</para
+></listitem>
+<listitem
+><para
+>tillhandahåller en automatisk sammanfogningsfunktion,</para
+></listitem>
+<listitem
+><para
+>har en editor för bekväm upplösning av sammanfogningskonflikter,</para
+></listitem>
+<listitem
+><para
+>erbjuder nätverkstransparens via KIO,</para
+></listitem>
+<listitem
+><para
+>har alternativ för att färglägga eller dölja ändringar av blanktecken och kommentarer,</para
+></listitem>
+<listitem
+><para
+>stöder Unicode, UTF-8 och andra filkodningar,</para
+></listitem>
+<listitem
+><para
+>skriver ut skillnader,</para
+></listitem>
+<listitem
+><para
+>stöder versionshanteringsnyckelord och historiksammanfogning.</para
+></listitem>
+</itemizedlist>
+</para
+><para
+>This document describes &kdiff3;-version 1.11. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdiff3</keyword>
+<keyword
+>diff</keyword>
+<keyword
+>sammanfoga</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>trippeljämförelse</keyword>
+<keyword
+>jämföra</keyword>
+<keyword
+>filer</keyword>
+<keyword
+>kataloger</keyword>
+<keyword
+>kataloger</keyword>
+<keyword
+>versionshantering</keyword>
+<keyword
+>trevägs sammanfogning</keyword>
+<keyword
+>skillnader på plats</keyword>
+<keyword
+>synkronisera</keyword>
+<keyword
+>kpart</keyword>
+<keyword
+>kio</keyword>
+<keyword
+>nätverkstransparent</keyword>
+<keyword
+>editor</keyword>
+<keyword
+>blanktecken</keyword>
+<keyword
+>kommentarer</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction"
+><title
+>Inledning</title>
+<sect1 id="why"
+><title
+>Ännu ett jämförelsegränssnitt?</title>
+<para
+>Det finns flera grafiska jämförelseverktyg. Varför ska du välja &kdiff3;? Låt mig tala om varför jag skrev det. </para
+><para
+>&kdiff3; påbörjades därför att jag var tvungen att göra en svår sammanfogning. Att sammanfoga är nödvändigt när flera personer arbetar med samma fil i ett projekt. En sammanfogning kan vara delvis automatiserad, när sammanfogningsverktyget inte bara har tillgång till de nya ändrade filerna (som kallas "grenar"), utan också originalfilen (som kallas "bas"). Sammanfogningsverktyget väljer automatiskt en ändring som bara gjorts i en gren. När flera bidragsgivare ändrar samma rader, detekterar sammanfogningsverktyget en konflikt som måste lösas manuellt. </para
+><para
+>Sammanfogningen var svår eftersom en bidragsgivare hade ändrat mycket och rättat indenteringen på många ställen. Den andra bidragsgivaren hade också ändrat mycket text i samma fil, vilket orsakade flera konflikter vid sammanfogningen. </para
+><para
+>Verktyget som jag då använde visade bara ändrade rader, men inte vad som hade ändrats inom raden. Det fanns inte heller någon information om var bara indenteringen hade ändrats. Sammanfogningen var en mindre mardröm. </para
+><para
+>Det var alltså början. Den första versionen kunde visa skillnader på en rad, och visade skillnader i blanktecken. Senare tillkom många funktioner för att öka användbarheten. </para
+><para
+>Om du till exempel snabbt vill jämföra en text, kan du kopiera den till klippbordet och klistra in i endera jämförelsefönstret. </para
+><para
+>En funktion som krävde en stor ansträngning var funktionen för katalogjämförelse och sammanfogning, som gjorde programmet till en nästan fullständig filbläddrare. </para
+><para
+>Jag hoppas att &kdiff3; fungerar för dig, också. Ha det så kul! </para
+><para
+>Joachim Eibl (2003) </para>
+</sect1>
+
+<sect1 id="screenshots"
+><title
+>Skärmbilder och funktioner</title>
+<para
+>Den här skärmbilden visar skillnaden mellan två textfiler (med en tidig version av &kdiff3;)</para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+
+<para
+>Trevägs sammanfogning stöds fullständigt. Den är användbar om två personer ändrar kod oberoende av varandra. Originalfilen (basen) används för att hjälpa &kdiff3; att automatiskt välja de riktiga ändringarna. Sammanfogningseditorn under jämförelsefönstren låter dig lösa konflikter, medan utdata du kommer att få visas. Skärmbilden visar tre indatafiler som håller på att' sammanfogas: </para
+><para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</para>
+
+<para id="dirmergebigscreenshot"
+>&kdiff3; hjälper dig också att jämföra och sammanfoga hela kataloger. Den här skärmbilden visar &kdiff3; under en katalogsammanfogning: </para
+><para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="dirmergebig.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</para>
+</sect1>
+
+<sect1 id="features"
+><title
+>Mer funktioner</title>
+<sect2
+><title
+>Rad-för-rad och tecken-för-tecken jämförelsevisning</title>
+<para
+>Genom att använda möjligheterna hos en grafisk färgskärm, visar &kdiff3; exakt vad skillnaderna är. När du måste göra många kodgranskningar, gillar du det här. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="letter_by_letter.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Se skillnader i blanktecken med en blick</title>
+<para
+>Mellanslag och tabulatorer som skiljer sig åt syns. När rader bara skiljer sig i mängden blanktecken syns det med en blick i sammanfattningskolumnen till vänster. (Inga mer problem om någon ändrar indenteringen.) </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="white_space.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Trevägsjämförelse</title>
+<para
+>Analysera tre filer och se var de skiljer sig åt. </para
+><para
+>Vänster/mitten/höger fönster kallas <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> och har blå/grön/magenta färg. </para
+><para
+>Om en fil är likadan och en annan annorlunda för en rad, så visar färgerna vilken fil som är annorlunda. Den röda färgen betyder att båda de andra filerna är olika. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="triple_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Bekväm sammanfogning av två eller tre indatafiler</title>
+<para
+>&kdiff3; kan användas för att sammanfoga två eller tre indatafiler och sammanfogar automatiskt så mycket som möjligt. Resultatet visas i ett redigerbart fönster där de flesta konflikter kan lösas med ett enda musklick. Välj knapparna <guibutton
+>...</guibutton
+> i respektive fönster <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> för att välja källan som ska användas. Du kan också välja mer än en källa. Eftersom utmatningsfönstret är en editor, kan till och med konflikter som behöver ytterligare korrigering lösas här utan att kräva ett annat verktyg. </para>
+</sect2>
+
+<sect2
+><title
+>Och ...</title>
+<itemizedlist>
+   <listitem
+><para
+>Snabb navigering via knappar.</para
+></listitem>
+   <listitem
+><para
+>Ett musklick i sammanfattningskolumnen synkroniserar alla fönster så att samma position visas.</para
+></listitem>
+   <listitem
+><para
+>Markera och kopiera från vilket fönster som helst, och klistra in i resultatfönstret för sammanfogning.</para
+></listitem>
+   <listitem
+><para
+>Översiktskolumn som visar var ändringar och konflikter finns.</para
+></listitem>
+   <listitem
+><para
+>Färgerna kan justeras enligt dina specifika önskemål.</para
+></listitem>
+   <listitem
+><para
+>Justerbar flikstorlek.</para
+></listitem>
+   <listitem
+><para
+>Alternativ för att infoga mellanslag istället för tabulatortecken.</para
+></listitem>
+   <listitem
+><para
+>Öppna filer bekvämt via dialogrutor, eller ange filnamn på kommandoraden.</para
+></listitem>
+   <listitem
+><para
+>Sök efter strängar i alla textfönster med menyalternativen <menuchoice
+><guimenu
+>Redigera</guimenu
+><guimenuitem
+>Sök</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) och <menuchoice
+><guimenu
+>Redigera</guimenu
+><guimenuitem
+>Sök nästa</guimenuitem
+></menuchoice
+> (<keycap
+>F3</keycap
+>).</para
+></listitem>
+   <listitem
+><para
+>Visa radnummer för varje rad. </para
+></listitem>
+   <listitem
+><para
+>Klistra in klippbordet eller dra text till ett indatafönster för jämförelse</para
+></listitem>
+   <listitem
+><para
+>Nätverkstransparens via KIO.</para
+></listitem>
+   <listitem
+><para
+>Kan användas för jämförelsevisning i &kdevelop; 3.</para
+></listitem>
+   <listitem
+><para
+>Radbrytning för långa rader.</para
+></listitem>
+   <listitem
+><para
+>Stöd för Unicode, UTF-8 och andra kodningar.</para
+></listitem>
+   <listitem
+><para
+>Stöd för språk som läses från höger till vänster.</para
+></listitem>
+   <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="documentation"
+><title
+>Filjämförelse och sammanfogning</title>
+
+<sect1 id="commandline"
+><title
+>Kommandoradsväljare</title>
+
+<sect2
+><title
+>Jämföra två filer: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>fil1 fil2</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Sammanfoga två filer: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>fil1 fil2</replaceable
+> -m
+   <command
+>kdiff3</command
+> <replaceable
+>fil1 fil2</replaceable
+> -o <replaceable
+>utdatafil</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Jämföra tre filer: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>fil1 fil2 fil3</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Sammanfoga tre filer: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>fil1 fil2 fil3</replaceable
+> -m
+   <command
+>kdiff3</command
+> <replaceable
+>fil1 fil2 fil3</replaceable
+> -o <replaceable
+>utdatafil</replaceable
+>
+</screen>
+<para
+>Observera att <replaceable
+>fil1</replaceable
+> behandlas som bas för <replaceable
+>fil2</replaceable
+> och <replaceable
+>fil3</replaceable
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Specialfall: Filer med samma namn </title>
+<para
+>Om alla filer har samma namn men finns i olika kataloger, kan du reducera hur mycket du måste skriva genom att bara ange filnamnet för den första filen. T.ex.: </para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>katalog1/filnamn katalog2 katalog3</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Kommandorad för att starta en katalogjämförelse eller sammanfogning: </title>
+<para
+>Det här är mycket likt, men nu handlar det om kataloger.</para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>katalog1 katalog2</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>katalog1 katalog2</replaceable
+> -o <replaceable
+>målkatalog</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>katalog1 katalog2 katalog3</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>katalog1 katalog2 katalog3</replaceable
+> -o <replaceable
+>målkatalog</replaceable
+>
+</screen>
+<para
+>För katalogjämförelse och sammanfogning kan du fortsätta att läsa <link linkend="dirmerge"
+>här</link
+>.</para>
+</sect2>
+
+<sect2
+><title
+>Andra kommandoradsväljare</title>
+<para
+>För att se alla tillgängliga kommandoradsväljare, skriv</para>
+<screen
+><command
+>kdiff3</command
+> --help
+</screen>
+<para
+>Exempel på utmatning:</para>
+<screen
+>Väljare:
+  -m, --merge               Sammanfoga indata.
+  -b, --base file           Explicit basfil. För att fungera tillsammans med vissa verktyg.
+  -o, --output file         Utdatafil. Betyder underförstått -m. T.ex.: -o ny_fil.txt
+  --out file                Utdatafil, igen. (för att fungera med vissa verktyg.)
+  --noauto                  Ignorera --auto och visa alltid användargränssnittet.
+  --auto                    Inget grafiskt gränssnitt om alla konflikter kan lösas automatiskt (kräver -o fil).
+  --L1 alias1               Synlig ersättning av namn för indatafil 1 (bas).
+  --L2 alias2               Synlig ersättning av namn för indatafil 2.
+  --L3 alias3               Synlig ersättning av namn för indatafil 3.
+  -L, --fname alias         Alternativ synlig ersättning av namn. Ange detta en gång för all indata.
+  --cs string               Överskrid en inställning. Använd en gång för varje inställning, t.ex.  --cs "AutoAdvance=1"
+  --confighelp              Visa lista med inställningar och nuvarande värden.
+  --config file             Använd en annan inställningsfil.
+</screen>
+<para
+>Väljaren <option
+>-cs</option
+> låter dig justera ett inställningsalternativ som annars bara kan justeras via inställningsdialogrutorna. Men var medveten om att när &kdiff3; avslutas lagras det ändrade värdet tillsammans med andra inställningar. Med <option
+>--confighelp</option
+> kan du ta reda på namnen på tillgängliga alternativ och nuvarande värden.</para>
+<para
+>Via <option
+>--config</option
+> kan du ange en annan inställningsfil. Om du ofta använder &kdiff3; med helt olika inställningar låter det dig enkelt byta mellan dem.</para>
+</sect2>
+<sect2
+><title
+>Kommandoradsväljare som ignoreras</title>
+<para
+>Många personer vill använda &kdiff3; tillsammans med något versionshanteringssystem, men när versionshanteringssystemet anropar &kdiff3; med kommandoradsväljare som &kdiff3; inte känner igen, avslutas &kdiff3; med ett fel. Alternativet <guilabel
+>Integration</guilabel
+> i inställningsdialogrutan gör det möjligt att ange kommandoradsväljare som ska ignoreras av &kdiff3;. De visas i användningshjälpen som i det här exemplet:</para>
+<screen
+>--<replaceable
+>väljare</replaceable
+>                     Ignoreras. (anvädardefinierad)
+</screen>
+<variablelist>
+  <varlistentry
+><term
+><guilabel
+>Kommandoradsväljare att ignorera:</guilabel
+></term
+><listitem
+><para
+>En lista med väljare, åtskilda med semikolon ';'. När en av dessa väljare finns på kommenderaden, ignorerar &kdiff3; den och kör utan att rapportera ett fel. (Förval är <literal
+>u;query;html;abort</literal
+>).</para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Om det inte är nog, rekommenderas du att skriva ett skalskript som gör översättningen av väljare.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="opendialog"
+><title
+>Dialogrutan Öppna</title>
+<para
+>Eftersom många indatafiler måste kunna väljas, har programmet en särskild öppningsdialogruta: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="open_dialog.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>Öppningsdialogrutan tillåter att filnamnen redigeras för hand, att en fil väljes via filbläddraren med knappen <guibutton
+>Fil...</guibutton
+> eller att senast använda filer väljes i kombinationsrutorna. Om du öppnar dialogrutan igen, finns de nuvarande namnen fortfarande där. Den tredje indatafilen krävs inte. Om fältet för <guilabel
+>C</guilabel
+> förblir tomt, görs bara en tvåvägs jämförelseanalys. </para
+><para
+>Du kan också välja en katalog med knappen <guibutton
+>Katalog...</guibutton
+>. Om en katalog anges för <guilabel
+>A</guilabel
+>, startar en katalogjämförelse och sammanfogning. Om <guilabel
+>A</guilabel
+> anger en fil, men <guilabel
+>B</guilabel
+>, <guilabel
+>C</guilabel
+> eller utmatningen anger en katalog, använder &kdiff3; filnamnet från <guilabel
+>A</guilabel
+> i de angivna katalogerna. </para
+><para
+>Om kryssrutan <guilabel
+>Sammanfoga</guilabel
+> är markerad, blir raden <guilabel
+>Utmatning</guilabel
+> redigerbar. Det krävs dock inte att utdatafilens namn anges omedelbart. Du kan också vänta med detta till du sparar. </para
+><para
+>Knappen <guibutton
+>Anpassa...</guibutton
+> visar inställningsdialogrutan, så att du kan ställa in alternativ innan analysen utförs. </para>
+</sect1>
+
+<sect1 id="pasteinput"
+><title
+>Klistra in eller släpp indata</title>
+<para
+>Ibland vill du jämföra delar av en text som inte är en egen fil. &kdiff3; låter dig också klistra in text från klippbordet i det indatafönster för jämförelse som har fokus. Jämförelseanalysen sker då omedelbart. I öppningsdialogrutan behöver du då inte ange filer, utan bara stänga den via knappen <guibutton
+>Avbryt</guibutton
+>. </para
+><para
+>Du kan också använda drag och släpp: Dra en fil från en filhanterare eller markerad text från en editor och släpp den på ett indatafönster för jämförelse. </para
+><para
+>Vad är idén? Ibland innehåller en fil två liknande funktioner, men att kontrollera hur lika de verkligen är blir en stor ansträngning om du först måste skapa två filer och sedan ladda dem. Nu kan du helt enkelt kopiera, klistra in och jämföra de relevanta avsnitten. </para
+><note
+><para
+>För närvarande kan du inte dra någonting från &kdiff3;. Bara att släppa indata i jämförelsefönstret stöds. </para
+></note
+><warning
+><para
+>Vissa editorer tolkar fortfarande drag och släpp till ett annat program som klipp ut (istället för kopiera) och klistra in. Ditt ursprungliga data kan då gå förlorat. </para
+></warning>
+</sect1>
+
+<sect1 id="interpretinginformation"
+><title
+>Jämföra filer och tolka informationen i indatafönstren</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<sect2
+><title
+>Informationsrad</title
+><para
+>Längst upp i varje textfönster finns dess "informationsrad". Informationsraderna i indatafönstret innehåller bokstaven <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> eller <guilabel
+>C</guilabel
+>, filnamnet och radnumret för den första synliga raden i fönstret. (Observera att fönstret "C" är valfritt.) Varje informationsrad visas i en egen färg. </para
+><para
+>När du väljer en annan fil genom att bläddra eller avslutar redigera filnamnet här genom att trycka på returtangenten, laddas den nya filen och jämförs med filen eller filerna som redan är laddade. </para
+></sect2
+><sect2
+><title
+>Färgläggning</title
+><para
+>De tre indatafönstren tilldelas bokstäverna <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> och <guilabel
+>C</guilabel
+>. <guilabel
+>A</guilabel
+> har blå färg, <guilabel
+>B</guilabel
+> har grön färg och <guilabel
+>C</guilabel
+> har magenta. (Det är förvalda färger, men kan ändras med alternativet <guilabel
+>Färg</guilabel
+> i inställningsdialogrutan.) </para
+><para
+>När en skillnad upptäcks visar färgen vilken indatafil som skiljer sig åt. När båda övriga indatafiler skiljer sig åt, är färgen som används för att uttrycka det normalt röd (<guilabel
+>Konfliktfärg</guilabel
+> med alternativet <guilabel
+>Färg</guilabel
+> i inställningsdialogrutan). Färgschemat är särskilt användbart i fallet med tre indatafiler, som framgår av nästa avsnitt (<link linkend="merging"
+>Sammanfogning</link
+>). </para
+></sect2
+><sect2
+><title
+>Sammanfattningskolumn</title
+><para
+>Till vänster om varje text är "sammanfattningskolumnen". Om skillnader uppstod på en rad, visar sammanfattningskolumnen motsvarande färg. För en skillnad som bara består av blanktecken är sammanfattningen kryssad. För programspråk, där blanktecken inte är så viktiga är det användbart för att se med en blick om något av vikt ändrades. (För C/C++ är blanktecken bara intressanta inne i strängar, i kommentarer, för preprocessorn och i några mycket esoteriska situationer.) </para
+><para
+>Den vertikala linjen som skiljer sammanfattningskolumnen och texten är avbruten om indatafilen inte har några rader där. När radbrytning är aktiverad visas den vertikala linjen med punkter för brutna rader. </para
+></sect2
+><sect2
+><title
+>Översiktskolumn</title
+><para
+>På höger sida är en "översiktskolumn" synlig till vänster om den vertikala rullningslisten. Den visar en komprimerad sammanfattning av indata <guilabel
+>A</guilabel
+>. Alla skillnader och konflikter är synliga med en blick. När bara två indatafönster används, syns alla skillnader i rött här, eftersom alla skillnader också är konflikter. En svart rektangel ramar in den synliga delen av indata. För mycket långa indatafiler, där antalet indatarader är större än höjden på översikten i bildpunkter, delar flera indatarader en översiktsrad. En konflikt har prioritet över enkla skillnader, som har prioritet över inga ändringar, så att inga skillnader eller konflikter går förlorade här. Genom att klicka på översiktskolumnen visas motsvarande text. </para
+></sect2
+><sect2 id="manualdiffhelp"
+><title
+>Justera rader manuellt</title
+><para
+>Ibland placerar algoritmen fel rader intill varandra, eller så vill du jämföra ett textstycke med text på en helt annan position i den andra filen. I dessa fall kan du manuellt tala om för &kdiff3; att vissa rader ska arrangeras i rak linje. Markera texten som du vill arrangera med musen, som du skulle göra vid kopiera och klistra in i det första jämförelsefönstret och välj därefter <menuchoice
+><guimenu
+>Jämförelsevy</guimenu
+><guimenuitem
+>Lägg till manuell justering av jämförelse</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+>). En orange rad visas i sammanfattningskolumnen intill den markerade texten. Upprepa det för den andra och (om tillgänglig) tredje jämförelsevyn. &kdiff3; beräknar omedelbart om jämförelsen varje gång du gör det, och radar upp de markerade raderna. Naturligtvis kanske några av raderna som tidigare matchade inte längre matchar. </para
+><para
+>För närvarande stöder inte sammanfogning användning av manuell hjälp vid jämförelse. </para
+></sect2
+><sect2 id="joinsplitsections"
+><title
+>Manuell ihopfogning och delning av jämförelseavsnitt</title
+><para
+>I vissa fall ser &kdiff3; för många eller för få avsnitt att sammanfoga. I ett sådant fall kan du foga ihop eller dela befintliga avsnitt. </para
+><para
+>Lägg till nya avsnitt genom att först markera texten på raderna som hör ihop i något av indatafönstren (som vid kopiering till klippbordet). Välj därefter menyalternativet <menuchoice
+><guimenu
+>Sammanfoga</guimenu
+><guimenuitem
+>Dela jämförelse vid markering</guimenuitem
+></menuchoice
+>. Delningen görs ovanför den första raden och under den sista raden i den markerade texten. Om du bara vill lägga till ett avsnitt, markera text som börjar på ett annat avsnitts delning. </para
+><para
+>För att foga ihop avsnitt i något indatafönster, markera någonting på raderna i avsnitten som ska fogas ihop. (Du kan också foga ihop flera avsnitt i ett steg.) Välj därefter menyalternativet <menuchoice
+><guimenu
+>Sammanfoga</guimenu
+><guimenuitem
+>Foga ihop markerade jämförelser</guimenuitem
+></menuchoice
+>. </para
+></sect2>
+</sect1>
+
+
+<sect1 id="merging"
+><title
+>Sammanfogning och editorfönstret för sammanfogningsutdata</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>Editorfönstret för sammanfogningsutdata (under indatafönstren för jämförelse) har också en informationsrad längst upp som visar <guilabel
+>Utmatning</guilabel
+>, filnamnet och <replaceable
+>[Ändrad]</replaceable
+> om du redigerat något. Oftast innehåller det någon text från de automatiska sammanfogningsfunktionerna, men det innehåller också ofta konflikter. </para
+><para
+>Spara är inaktiverat till alla konflikter är lösta! (Använd knapparna <guibutton
+>Gå till föregående/nästa olösta konflikt</guibutton
+> för att hitta återstående konflikter.) </para
+><para
+>Med bara två filer är varje skillnad också en konflikt, som måste lösas manuellt. </para
+><para
+>Med tre indatafiler behandlas den första som bas, medan den andra och tredje indatafilen innehåller ändringar. Om bara indata <guilabel
+>B</guilabel
+> eller <guilabel
+>C</guilabel
+> har ändrats för en viss rad, men inte båda väljes den ändrade källan automatiskt. Bara om <guilabel
+>B</guilabel
+> och <guilabel
+>C</guilabel
+> har ändrats på samma rader, detekterar verktyget en konflikt som måste lösas manuellt. När <guilabel
+>B</guilabel
+> och <guilabel
+>C</guilabel
+> är likadana, men inte samma som <guilabel
+>A</guilabel
+>, väljes <guilabel
+>C</guilabel
+>. </para
+><sect2
+><title
+>Sammanfattningskolumnen</title
+><para
+>Editorfönstret för sammanfogningsutdata har också en sammanfattningskolumn till vänster. Den visar bokstaven för indata som raden valdes, eller ingenting om alla tre källorna var likadana för raden. Vid konflikter visar den ett frågetecken "?" och raden visar "&lt; Konflikter vid sammanfogning &gt;", allt med rött. Eftersom det skulle ta mycket lång tid att lösa konflikter rad för rad, grupperas rader i grupper som har samma skillnader och konfliktkaraktär. Konflikter med bara blanktecken skiljs dock från andra konflikter för att förbättra sammanfogningen av filer där indenteringen ändrats på många rader. </para
+></sect2
+><sect2 id="synchronise_views"
+><title
+>Ställa in aktuell grupp och synkronisera sammanfognings- och jämförelsevyns position</title
+><para
+>När du klickar på sammanfattningskolumnen med vänster musknapp i endera fönstret, så markeras gruppen som hör till den raden i alla fönster och gruppens början visas. (Det här kan innebära ett automatiskt byte av position i fönstren om gruppens början inte syns.) Gruppen blir då den "aktuella gruppen". Den markeras med alternativet<guilabel
+>Bakgrundsfärgen för aktuellt jämförelseintervall</guilabel
+> i objektet <guilabel
+>Integrering</guilabel
+> och en svart rad visas till vänster om texten. </para
+></sect2
+><sect2
+><title
+>Välja indata A, B eller C för aktuell konflikt och redigering</title
+><para
+>Knappraden under menyraden innehåller tre knappar för indataval som innehåller bokstäverna <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> och <guilabel
+>C</guilabel
+>. Klicka på knappen för indataval för att infoga rader (eller ta bort dem om de redan infogats) från respektive källfil. För att välja rader från flera indatafiler klicka på respektive knappar i nödvändig ordning. Om du till exempel vill att rader från <guilabel
+>B</guilabel
+> ska hamna före rader från <guilabel
+>A</guilabel
+> i utdata, klicka först på <guilabel
+>B</guilabel
+> och därefter på <guilabel
+>A</guilabel
+>. </para
+><para
+>Om du använder knappen <guibutton
+>Gå automatiskt till nästa olösta konflikt efter val av källa</guibutton
+> (see <link linkend="autoadvance"
+>Avancera automatiskt</link
+>), måste du inaktivera det innan du väljer rader från flera indatafiler eller om du vill redigera raderna efter du valt dem. Annars går &kdiff3; till nästa konflikt efter den första indatafilen valts. </para
+><para
+>Det är ofta användbart att direkt redigera sammanfogad utdata. Sammanfattningskolumnen visar "m" för varje rad som ändrades manuellt. När skillnaderna till exempel justeras på ett sätt så att ett enkelt val av indata inte är tillfredsställande, kan du markera texten som behövs och använda normal <link linkend="selections"
+>kopiera och klistra in</link
+> för att placera den i sammanfogad utdata. </para
+><para
+>Ibland, när en rad tas bort antingen på grund av automatisk sammanfogning eller genom redigering och inga andra rader finns kvar i gruppen, visas texten &lt;Ingen källrad&gt; på raden. Det är bara en platsmarkör för gruppen om du ändrar dig och väljer en källa igen. Texten syns inte i sparade filer eller i några markeringar som du vill kopiera och klistra in. </para
+><para
+>Texten "&lt; Konflikter vid sammanfogning &gt;" visas på klippbordet om du kopierar och klistrar in någon text som innehåller en sådan rad. Men var ändå försiktig med att göra det. </para
+></sect2
+><sect2
+><title
+>Välja indata A, B eller C för alla konflikter</title
+><para
+>Den normala sammanfogningen börjar med att automatiskt lösa enkla konflikter. Menyn <guimenu
+>Sammanfoga</guimenu
+> tillhandahåller också några alternativ för andra vanliga behov. Om du måste välja samma källfil för de flesta konflikter, kan du välja <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> eller <guilabel
+>C</guilabel
+> överallt, eller bara för återstående olösta konflikter, eller för olösta konflikter med blanktecken. Om du vill bestämma själv för varje enskild skillnad, kan du <guimenuitem
+>Ändra skillnader till konflikter</guimenuitem
+>, eller om du vill återgå till de automatiska valen i &kdiff3; kan du välja <guimenuitem
+>Lös automatiskt enkla konflikter</guimenuitem
+>. Då startar &kdiff3; om sammanfogningen. För åtgärder som påverkar dina tidigare ändringar frågar &kdiff3; om bekräftelse innan åtgärden utförs. </para
+><note
+><para
+>När endera källan väljes för olösta konflikter för blanktecken och alternativet <guilabel
+>Ignorera siffror (behandla som blanktecken)</guilabel
+> eller <guilabel
+>Ignorera C/C++ kommentarer (behandla som blanktecken)</guilabel
+> under alternativet <guilabel
+>Jämför</guilabel
+> används, så behandlas ändringar i siffror eller kommentarer också som blanktecken. </para
+></note
+></sect2
+><sect2 id="vcskeywordsmergesupport"
+><title
+>Sammanfoga automatiskt nyckelord för versionshantering och historik (logg)</title
+><para
+>Många versionshanteringssystem stöder särskilda nyckelord i filen (t.ex. "<literal
+>&#36;Date&#36;</literal
+>", "<literal
+>&#36;Header&#36;</literal
+>", "<literal
+>&#36;Author&#36;</literal
+>", "<literal
+>&#36;Log&#36;</literal
+>" etc.) Vid arkivering ändrar versionshanteringssystemet (VCN) dessa rader. Till exempel ändras "<literal
+>&#36;Date&#36;</literal
+>" till "<literal
+>&#36;Date: 2005/03/22 18:45:01 &#36;</literal
+>". Eftersom raden är olika i varje version av filen, skulle den kräva manuell interaktion under sammanfogningen. </para
+><para
+>&kdiff3; erbjuder automatisk sammanfogning av dessa poster med alternativet <guilabel
+>Sammanfoga</guilabel
+> i inställningsdialogrutan. För enkla rader som matchar alternativet <guilabel
+>Reguljärt uttryck för automatisk sammanfogning</guilabel
+> i alla indatafiler väljer &kdiff3; raden från <guilabel
+>B</guilabel
+>, eller om tillgänglig, den från <guilabel
+>C</guilabel
+>. (Dessutom är det nödvändigt att raderna i fråga radas upp i jämförelsen och att föregående rad inte innehåller en konflikt.) Den automatiska sammanfogningen kan antingen utföras omedelbart när sammanfogningen startas (aktivera alternativet <guilabel
+>Kör automatisk sammanfogning med reguljärt uttryck när sammanfogning startar</guilabel
+>) eller senare via menyalternativet <menuchoice
+><guimenu
+>Sammanfoga</guimenu
+><guimenuitem
+>Kör automatisk sammanfogning med reguljärt uttryck</guimenuitem
+></menuchoice
+>. </para
+><para
+>Automatisk sammanfogning för versionshanteringshistorik (också kallat "logg") stöds också. Automatisk sammanfogning av historik kan antingen utföras omedelbart när sammanfogningen startas genom att aktivera alternativet <guilabel
+>Sammanfogning enligt versionshanteringshistorik när sammanfogning startar</guilabel
+> under alternativet <guilabel
+>Sammanfoga</guilabel
+> i inställningsdialogrutan eller senare via menyalternativet <menuchoice
+><guimenu
+>Sammanfoga</guimenu
+><guimenuitem
+>Lös automatiskt historikkonflikter</guimenuitem
+></menuchoice
+>. </para
+><para
+>Oftast börjar versionshanteringshistoriken med en rad som innehåller nyckelordet "<literal
+>&#36;Log&#36;</literal
+>". Den måste matchas av alternativet <guilabel
+>Reguljärt uttryck för historikens början:</guilabel
+>. &kdiff3; detekterar vilka efterföljande rader som ingår i historiken genom att analysera de inledande tecknen som fanns före nyckelordet "<literal
+>&#36;Log&#36;</literal
+>". Om samma "inledande kommentar" också finns på följande rader inkluderas de också i historiken. </para
+><para
+>Vid varje arkivering skriver VCS en unik rad som anger version, datum- och tidsinformation följd av rader med användarens kommentarer. Raderna utgör en historikpost. Historikavsnittet växer vid varje arkivering och de senaste posterna visas längst upp (efter historikens startrad). </para
+><para
+>När två utvecklare arkiverar grenar av en fil under parallell utveckling, kommer historiken för sammanfogning att innehålla flera poster som visas som konflikter under sammafogning av grenarna. Eftersom sammafogning av dem kan bli mycket tröttsam, erbjuder &kdiff3; stöd för den med två möjliga strategier: Bara infoga historikinformationen från båda bidragsgivarna längst upp, eller sortera historikinformationen enligt en användardefinierad nyckel. </para
+><para
+>Metoden att bara infoga alla poster är enklast att ställa in. &kdiff3; behöver bara en metod att detektera vilka rader som hör till en historikpost. De flesta VCS infogar en tom rad efter varje historikpost. Om det inte finns några andra tomma rader, är det ett tillräckligt villkor för &kdiff3;. Ange bara ett tomt <guilabel
+>Reguljärt uttryck för historikens början</guilabel
+> under alternativet <guilabel
+>Sammanfoga</guilabel
+> i inställningsdialogrutan. Om kriteriet med en tom rad inte är tillräckligt kan du ange ett reguljärt uttryck för att detektera historikpostens början. </para
+><para
+>Observera att &kdiff3; tar bort duplicerade historikposter.Om en historikpost fanns flera gånger i en indatafils historik, förblir bara en post i utmatningen. </para
+><para
+>Om du vill sortera historiken måste du ange hur sorteringsnyckeln ska byggas. Använd parenteser som i <guilabel
+>Reguljärt uttryck för historikpostens början</guilabel
+> under alternativet <guilabel
+>Sammanfoga</guilabel
+> i inställningsdialogrutan för att gruppera delar av det reguljära uttrycket som senare ska användas i sorteringsnyckeln. Ange därefter <guilabel
+>Sorteringsnycklarnas ordning från historikpostens början</guilabel
+> med en lista av nummer som refererar till gruppens position i det reguljära uttrycket åtskilda av kommatecken ",". </para
+><para
+>Eftersom det inte är så enkelt att få det rätt omedelbart, kan du prova och förbättra det reguljära uttrycket och nyckelgenereringen i en särskild dialogruta genom att klicka på knappen <guibutton
+>Prova dina reguljära uttryck</guibutton
+>. </para
+><para
+>Exempel: antag en historik som ser ut så här: </para>
+<screen
+>/**************************************************************************
+** HISTORIK:    &#36;Log: \toms_sammanfogning_huvudvy\Mitt_program\kod\komplexalgoritm.cpp &#36;
+**
+**     \head\integreringsgren_12   2 Apr 2001 10:45:41   tom
+**  Sammanfogade grenen simongren_15.
+**
+**     \main\henry_felrättningsgren_7\1   30 Mar 2001 19:22:05   henry
+**  Förbättrade hastigheten för delrutinen omvandlaTill().
+**  Fixade krasch.
+**************************************************************************/
+</screen>
+<para
+>Historikens inledande rad matchar det reguljära uttrycket "<literal
+>.*\&#36;Log.*\&#36;.*</literal
+>". Därefter följer historikposterna. </para
+><para
+>Raden med nyckelordet "<literal
+>&#36;Log&#36;</literal
+>" börjar med två "*" och därefter följer ett mellanslag. &kdiff3; använder den första strängen utan blanktecken som "inledande kommentar" och antar att historiken slutar med den första raden utan denna inledande kommentar. I exemplet slutar den sista raden med en sträng som också börjar med två "*", men istället för ett mellanslag följer fler "*". Därför avslutar denna rad historiken. </para
+><para
+>Om sortering av historiken inte krävs kan det reguljära uttrycket för historikpostens början se ut så här. (Raden är delad i två eftersom den inte skulle få plats annars.) </para>
+<screen
+>\s*\\main\\\S+\s+[0-9]+ (Jan|Feb|Mar|Apr|Maj|Jun|Jul|Aug|Sep|Okt|Nov|Dec)
+ [0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]\s+.*
+</screen>
+<para
+>Om sortering av historiken inte krävs kan det reguljära uttrycket för historikpostens början se ut så här. (Raden är delad i två eftersom den inte skulle få plats annars.) <screen>
+\s*\\main\\\S+\s+[0-9]+ (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
+ [0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]\s+.*
+</screen
+> För detaljinformation om reguljära uttryck se <ulink url="https://doc.qt.io/archives/3.3/qregexp.html#details"
+>Trolltechs dokumentation av reguljära uttryck</ulink
+>. Observera att "<literal
+>\s</literal
+>" (med ett litet "<literal
+>s</literal
+>") matchar alla blanktecken och  "<literal
+>\S</literal
+>" (med ett stort "<literal
+>S</literal
+>") matchar alla tecken som inte är blanktecken. I vårt exempel innehåller historikpostens början först versionsinformation med det reguljära uttrycket "<literal
+>\\main\\\S+</literal
+>", datumet som består av dagen "<literal
+>[0-9]+</literal
+>", månaden "<literal
+>(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)</literal
+>" och året "<literal
+>[0-9][0-9][0-9][0-9]</literal
+>", tiden "<literal
+>[0-9][0-9]:[0-9][0-9]:[0-9][0-9]</literal
+>" och till sist utvecklarens inloggningsnamn "<literal
+>.*</literal
+>". </para
+><para
+>Observera att de "inledande kommentartecknen" (i exemplet "<literal
+>**</literal
+>") redan har tagits bort av &kdiff3; innan försöket att matcha, alltså börjar det reguljära uttrycket med att matcha ett eller flera blanktecken "<literal
+>\s*</literal
+>". Eftersom kommentartecken kan skilja sig åt i varje fil (C/C++ använder t.ex. andra kommentartecken än ett Perl-skript), tar &kdiff3; hand om de inledande kommentartecknen och du ska inte ange dem i det reguljära uttrycket. </para
+><para
+>Om du kräver sorterad historik måste sorteringsnyckeln beräknas. För att göra det måste relevanta delar i det reguljära uttrycket grupperas med parenteser. (De extra parenteserna kan också vara kvar även om historiksortering inaktiveras.) </para>
+<screen
+>\s*\\main\\(\S+)\s+([0-9]+) (Jan|Feb|Mar|Apr|Maj|Jun|Jul|Aug|Sep|Okt|Nov|Dec)
+ ([0-9][0-9][0-9][0-9]) ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])\s+(.*)
+</screen>
+<para
+>Om du kräver sorterad historik måste sorteringsnyckeln beräknas. För att göra det måste relevanta delar i det reguljära uttrycket grupperas med parenteser. (De extra parenteserna kan också vara kvar även om historiksortering inaktiveras.) <screen>
+\s*\\main\\(\S+)\s+([0-9]+) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
+ ([0-9][0-9][0-9][0-9]) ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])\s+(.*)
+</screen
+> Parenteserna innehåller nu <literal
+>1</literal
+>. versionsinformation, <literal
+>2</literal
+>. dag, <literal
+>3</literal
+>. månad, <literal
+>4</literal
+>. år, <literal
+>5</literal
+>. tid, <literal
+>6</literal
+>. namn. Men om vi vill sortera enligt datum och tid måste vi skapa en nyckel med elementen synliga i en annan ordning: Först året, följt av månad, dag, tid, versionsinformation och namn. Därför ska sorteringsnyckelns ordning som anges vara  "<literal
+>4,3,2,5,1,6</literal
+>". </para
+><para
+>Eftersom månadsnamn inte är bra att sortera enligt ("<literal
+>Apr</literal
+>" skulle vara först) detekterar &kdiff3; vilken ordning månadsnamnen anges och använder det numret istället ("<literal
+>Apr</literal
+>" -&gt; "<literal
+>04</literal
+>"). Och om ett rent nummer hittas omvandlas det till ett fyrasiffrors värde med inledande nollor för sortering. Till sist blir den resulterande sorteringsnyckeln för den första historikpostens inledande rad: </para>
+<screen
+>2001 04 0002 10:45:41 integreringsgren_12   tom
+</screen>
+<para
+>För mer information, se också avsnittet <link linkend="mergeoptions"
+>Inställningar av sammanfoga</link
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="navigation"
+><title
+>Navigering och redigering</title>
+<para
+>Mycket navigering görs med rullningslisterna och musen, men du kan också navigera med tangentbordet. Om du klickar på något fönster kan du använda genvägarna <keycap
+>vänsterpil</keycap
+>, <keycap
+>högerpil</keycap
+>, <keycap
+>uppåtpil</keycap
+>, <keycap
+>neråtpil</keycap
+>, <keycap
+>Page Up</keycap
+>, <keycap
+>Page Down</keycap
+>, <keycap
+>Home</keycap
+>, <keycap
+>End</keycap
+>, <keycombo
+>&Ctrl;<keycap
+>Home</keycap
+></keycombo
+> och <keycombo
+>&Ctrl;<keycap
+>End</keycap
+></keycombo
+> som du kan i andra program. Sammanfattningskolumnen intill indatafilernas vertikala rullningslist kan också användas för att navigera genom att klicka i den. </para
+><para
+>Du kan också använda <mousebutton
+>mushjulet</mousebutton
+> för att rulla uppåt och neråt. </para
+><para
+>I editorn för sammanfogningsutdata kan du också använda andra tangenter för redigering. Du kan byta mellan infognings- och ersättningsläge med tangenten <keycap
+>Insert</keycap
+>. (Normalläget är infoga.) </para
+><para
+>Ett klick med vänster musknapp i någon sammanfattningskolumn synkroniserar alla fönster för att visa början på samma grupp av rader (som förklaras i avsnittet <link linkend="synchronise_views"
+>Ställa in aktuell grupp och synkronisera sammanfognings- och jämförelsevyns position</link
+>). </para
+><para
+>Knappraden innehåller också nio navigeringsknappar som du kan använda för att gå till aktuell/första/sista skillnaden, till nästa/föregående skillnad (<keycombo
+>&Ctrl;<keycap
+>Neråtpil</keycap
+></keycombo
+> eller <keycombo
+>&Ctrl;<keycap
+>Uppåtpil</keycap
+></keycombo
+>), till nästa/föregående konflikt (<keycombo
+>&Ctrl;<keycap
+>Page Down</keycap
+></keycombo
+> eller <keycombo
+>&Ctrl;<keycap
+>Page Up</keycap
+></keycombo
+>) eller till föregående/nästa olösta konflikt. Observera att för &kdiff3; förblir en "konflikt" som inte automatiskt löstes vid start av sammanfogningen alltid en "konflikt" även om den är löst. Därav nödvändigheten att särskilja "olösta konflikter". </para>
+<sect2 id="autoadvance"
+><title
+>Automatisk fortsättning</title>
+<para
+>Det finns också en knapp som heter <guibutton
+>Gå automatiskt till nästa olösta konflikt efter val av källa</guibutton
+> (automatisk fortsättning). Om du aktiverar det här, så går &kdiff3; automatiskt till nästa olösta konflikt när en källa väljes. Det kan hjälpa till när du bara vill välja en källa. När du behöver båda källor, eller du vill redigera efter valet, bör du troligen stänga av det här. Innan &kdiff3; fortsätter till nästa olösta konflikt, visas effekten av valet en kort tid. Den här fördröjningen kan justeras i inställningarna under Jämför och sammanfoga. Du kan ange "Fördröjning vid automatisk fortsättning" i millisekunder mellan 0 och 2000. Tips: Är du trött på många klick? Använd en kort fördröjning vid automatisk fortsättning och snabbtangenterna <keycombo
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>/<keycap
+>2</keycap
+>/<keycap
+>3</keycap
+> för att välja <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> för många konflikter. </para>
+</sect2>
+</sect1>
+
+<sect1 id="selections"
+><title
+>Markera, kopiera och klistra in</title>
+<para
+>Indatafönstren visar inte någon markör, så markeringar måste göras med musen, genom att klicka med vänster musknapp på början, hålla nere musknappen och gå till slutet, där musknappen släpps upp igen. Du kan också markera ett ord genom att dubbelklicka på det. I editorn för sammanfogningsutdata kan du också markera med tangentbordet, genom att hålla nere skifttangenten och navigera med piltangenterna. </para
+><para
+>Om markeringen överstiger det synliga området, kan du flytta musen över fönsterkanterna, vilket gör att &kdiff3; rullar i den riktningen. </para
+><para
+>För mycket stora markeringar kan du också använda navigationstangenterna medan musknappen hålls nere. Använd t.ex. <keycap
+>Page Up</keycap
+> och <keycap
+>Page Down</keycap
+> för att snabbt gå till en viss position. Släpp upp musknappen på slutpositionen. </para
+><para
+>Använd menyalternativet <menuchoice
+><guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Markera alla</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+>) för att markera allting i aktuellt fönster. </para
+><para
+>För att kopiera till klippbordet måste du trycka på knappen <guibutton
+>Kopiera</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> eller <keycombo
+>&Ctrl;<keycap
+>Insert</keycap
+></keycombo
+>). Men det finns ett alternativ som heter <guilabel
+>Kopiera automatiskt markering</guilabel
+>. Om det är aktiverat, kopieras vad du än väljer omedelbart, och du behöver aldrig explicit kopiera. Men var försiktig när du använder detta, eftersom klippbordets innehåll kan förstöras av misstag. </para
+><para
+><guibutton
+>Klipp ut</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> eller <keycombo
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+>) kopierar till klippbordet och tar bort den markerade texten. </para
+><para
+><guibutton
+>Klistra in</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> eller <keycombo
+>&Shift;<keycap
+>Insert</keycap
+></keycombo
+>) infogar texten på klippbordet vid markörens position eller istället för den nuvarande markeringen. Om du klistrar in i något av jämförelsefönstren visas klippbordets innehåll i fönstret och jämförelsen startas omedelbart om. Det är användbart om du snabbt vill hämta ett textstycke någonstans och jämföra det med något annat utan att först skapa filer. </para>
+</sect1>
+
+<sect1 id="saving"
+><title
+>Spara</title>
+<para
+>Att spara tillåts bara när alla konflikter är lösta. Om filen redan finns och alternativet <guilabel
+>Säkerhetskopiera filer</guilabel
+> är markerat under alternativet <guilabel
+>Katalog</guilabel
+> i inställningsdialogrutan, ändras originalversionens namn med tillägg av filändelsen <literal role="extension"
+>.orig</literal
+>, och om en sådan fil redan finns tas den bort. När du avslutar eller startar en ny jämförelseanalys och data inte sparats ännu, frågar &kdiff3; om du vill spara, avbryta eller fortsätta utan att spara. (&kdiff3; fångar inga signaler, så om du "dödar" &kdiff3; går data förlorat.) </para
+><para
+>Radslut sparas enligt den normala metoden i det underliggande operativsystemet. För Unix slutar varje rad med ett nyradstecken "<literal
+>\n</literal
+>", medan för Windows-baserade system slutar varje rad med ett returtecken och ett nyradstecken "<literal
+>\r\n</literal
+>". &kdiff3; behåller inte radslut för indatafilerna, vilket också betyder att du inte ska använda &kdiff3; med binärfiler. </para>
+</sect1>
+
+<sect1 id="find"
+><title
+>Söka efter strängar</title>
+<para
+>Du kan söka efter en sträng i vilket textfönster som helst i &kdiff3;. Menyalternativet <menuchoice
+><guimenu
+>Redigera</guimenu
+><guimenuitem
+>Sök...</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) visar en dialogruta som låter dig ange strängen att söka efter. Du kan också välja de fönster som ska sökas. Sökning startar alltid från början. Använd kommandot <menuchoice
+><guimenu
+>Redigera</guimenu
+><guimenuitem
+>Sök igen</guimenuitem
+></menuchoice
+> (<keycap
+>F3</keycap
+>) för att fortsätta till nästa förekomst. Om du väljer att söka i flera fönster, söks det första fönstret från början till slut innan sökningen fortsätter från början i nästa fönster, etc. </para>
+</sect1>
+
+<sect1 id="printing"
+><title
+>Utskrift</title>
+<para
+>&kdiff3; stöder utskrift av skillnader mellan textfiler. Kommandot <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Skriv ut...</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+>) i menyn Arkiv visar en dialogruta som låter dig välja skrivare och justera andra alternativ. </para
+><para
+>Det finns flera möjligheter att justera intervallet. Beroende på olika utskriftsdialogrutor på olika operativsystem, varierar metoden för att åstadkomma val av ett visst intervall. </para>
+<variablelist>
+   <varlistentry
+><term
+>Alla:</term
+><listitem
+><para
+>Skriv ut allt.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Aktuell:</term
+><listitem
+><para
+>Skriv ut en sida som börjar på den första synliga raden i fönstret. (På system utan alternativet kan det åstadkommas genom att ange sidnumret 10000 för utskrift.)</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Markering:</term
+><listitem
+><para
+>Innan du väljer att skriva ut, markera text med musen (som för kopiera och klistra in) i ett av jämförelsefönstren för att definiera start- och slutrad. Om ingen text var markerad i något av jämförelsefönstren, är inte alternativet tillgängligt. (På system utan alternativet kan det åstadkommas genom att ange sidnumret 9999 för utskrift.)</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Intervall:</term
+><listitem
+><para
+>Ange första och sista sidan. </para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Andra viktiga inställningar för utskrift tas från de normala inställningarna: </para
+><itemizedlist>
+   <listitem
+><para
+>Teckensnitt, teckenstorlek</para
+></listitem>
+   <listitem
+><para
+>Visa radnummer</para
+></listitem>
+   <listitem
+><para
+>Radbryt</para
+></listitem>
+   <listitem
+><para
+>Färger</para
+></listitem>
+   <listitem
+><para
+>etc.</para
+></listitem>
+</itemizedlist>
+<para
+>Liggande formatering rekommenderas också för utskrift. </para>
+</sect1>
+
+<sect1 id="options"
+><title
+>Alternativ</title>
+<para
+>Alternativ och listan med senaste filer sparas när du avslutar programmet, och laddas igen när du startar det. (Menyn <menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Anpassa &kdiff3;...</guimenuitem
+></menuchoice
+>). </para>
+<sect2
+><title
+>Teckensnitt</title>
+<para
+>Välj ett teckensnitt med fast breddsteg. (På vissa system visar dialogrutan också teckensnitt med variabel bredd, men du bör inte använda dem.) </para>
+</sect2>
+
+<sect2
+><title
+>Färger</title>
+<variablelist>
+  <varlistentry
+><term
+><guilabel
+>Editor- och skillnadsvyer:</guilabel
+></term
+><listitem>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Förgrundsfärg:</guilabel
+></term
+><listitem
+><para
+>Oftast svart. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Bakgrundsfärg:</guilabel
+></term
+><listitem
+><para
+>Oftast vit. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Bakgrundsfärg för jämförelse:</guilabel
+></term
+><listitem
+><para
+>Oftast ljusgrå. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Färg A:</guilabel
+></term
+><listitem
+><para
+>Oftast mörkblå. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Färg B:</guilabel
+></term
+><listitem
+><para
+>Oftast mörkgrön. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Färg C:</guilabel
+></term
+><listitem
+><para
+>Oftast mörk magenta. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Konfliktfärg:</guilabel
+></term
+><listitem
+><para
+>Oftast röd.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Bakgrundsfärg för aktuellt intervall:</guilabel
+></term
+><listitem
+><para
+>Oftast ljusgul.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Bakgrundsfärg för aktuellt jämförelseintervall:</guilabel
+></term
+><listitem
+><para
+>Oftast mörkgul.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Färg för manuellt justerade jämförelseintervall:</guilabel
+></term
+><listitem
+><para
+>Oftast orange.</para
+></listitem
+></varlistentry>
+  </variablelist
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guilabel
+>Katalogjämförelsevy:</guilabel
+></term
+><listitem>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Färg för nyaste fil:</guilabel
+></term
+><listitem
+><para
+>Oftast grön.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Färg för äldsta fil:</guilabel
+></term
+><listitem
+><para
+>Oftast röd.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Färg för medelgamla filer:</guilabel
+></term
+><listitem
+><para
+>Oftast mörkgul.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Färg för saknade filer:</guilabel
+></term
+><listitem
+><para
+>Oftast svart.</para
+></listitem
+></varlistentry>
+  </variablelist
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Att ändra färgerna för katalogjämförelser får inte någon effekt förrän nästa katalogjämförelse startas. </para>
+<para
+>För system med bara 16 eller 256 färger är vissa rena färger inte tillgängliga. För sådana system väljer knappen <guibutton
+>Förval</guibutton
+> en ren färg. </para>
+</sect2>
+
+<sect2
+><title
+>Inställningar för editor</title>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Tabulator infogar mellanslag</guilabel
+></term
+><listitem
+><para
+>Om det här inte är markerat, och du trycker på tabulatortangenten, infogas en tabulator, annars infogas lämpligt antal mellanslag.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Tabulatorbredd:</guilabel
+></term
+><listitem
+><para
+>Kan justeras för dina speciella behov. Normalvärdet är <literal
+>8</literal
+>.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Automatisk indentering</guilabel
+></term
+><listitem
+><para
+>När du trycker på Enter eller returtangenten, används föregående rads indentering för den nya raden.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Kopiera automatiskt markering</guilabel
+></term
+><listitem
+><para
+>Varje markering kopieras omedelbart till klippbordet när den aktiveras, och du behöver inte kopiera den explicit.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Radslutstil:</guilabel
+></term
+><listitem
+><para
+>När du sparar kan du välja vilken radslutsstil du föredrar. Förvald inställning är det vanliga valet för operativsystemet som används.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="diffoptions"
+><title
+>Inställningar av jämför</title>
+<para
+>När filer jämförs försöker &kdiff3; först att matcha rader som är lika i alla indatafiler. Det är bara under detta steg som blanktecken kan ignoreras. Det andra steget jämför varje rad. Under detta steg ignoreras inte blanktecken. Under sammanfogning ignoreras inte heller blanktecken. </para>
+
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Ignorera tal (behandla som blanktecken)</guilabel
+></term
+><listitem
+><para
+>Normalvärdet är av. Siffertecken ('0'-'9', '.', '-') ignoreras under första delen av analysen när radmatchningen görs. Skillnaderna för resultatet visas ändå, men de behandlas som blanktecken. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ignorera skiftläge (behandla som blanktecken)</guilabel
+></term
+><listitem
+><para
+>Normalvärdet är av. Ändringar i kommentarer behandlas som ändringar i blanktecken. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ignorera skiftläge (behandla som blanktecken)</guilabel
+></term
+><listitem
+><para
+>Normalvärdet är av. Ändringar i skiftläge för tecken (som 'A' eller 'a') hanteras som ändringar i blanktecken. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Preprocessorkommando:</guilabel
+></term
+><listitem
+><para
+>Se <link linkend="preprocessors"
+>nästa avsnitt</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Preprocessorkommando för radmatchning:</guilabel
+></term
+><listitem
+><para
+>Se <link linkend="preprocessors"
+>nästa avsnitt</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Var noggrann (långsammare)</guilabel
+></term
+><listitem
+><para
+>Gör en ansträngning att hitta en ännu mindre skillnad (Normalvärdet är på). Det här är troligen effektivt för komplicerade och stora filer, och långsamt för mycket stora filer. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Justera B och C vid tre indatafiler</guilabel
+></term
+><listitem
+><para
+>Försök justera <guilabel
+>B</guilabel
+> och <guilabel
+>C</guilabel
+> vid jämförelse eller sammanfogning av tre indatafiler. Rekommenderas inte vid sammanfogning eftersom den kan bli mer komplicerad (normalvärdet är av). </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="mergeoptions"
+><title
+>Inställningar av sammanfoga</title>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Fördröjning vid automatisk fortsättning (ms):</guilabel
+></term
+><listitem
+><para
+>I automatiskt fortsättningsläge anger den här inställningen hur länge resultatet för gruppen ska visas innan hopp till nästa olösta konflikt. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Visa informationsdialogrutor</guilabel
+></term
+><listitem
+><para
+>Visa en dialogruta med information om antal konflikter. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Standardvärde för sammanfogning av blanktecken med två/tre filer:</guilabel
+></term
+><listitem
+><para
+>Lös automatiskt alla konflikter för blanktecken genom att välja angiven fil. (Normalvärdet är manuellt val.) Användbart om blanktecken verkligen är oviktiga i många filer. Om du bara behöver det ibland, är det bättre att använda <guilabel
+>Välj A/B/C för olösta konflikter med blanktecken</guilabel
+> i menyn <guimenu
+>Sammanfoga</guimenu
+>. Observera att om du antingen aktiverar <guilabel
+>Ignorera siffror</guilabel
+> eller <guilabel
+>Ignorera C/C++ kommentarer</guilabel
+> gäller det automatiska valet också vid konflikter för siffror eller kommentarer. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Reguljärt uttryck för automatisk sammanfogning:</guilabel
+></term
+><listitem
+><para
+>Reguljärt uttryck för rader där &kdiff3; automatisk ska välja en källa. Se också <link linkend="vcskeywordsmergesupport"
+>Automatisk sammanfogning...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Kör automatisk sammanfogning med reguljärt uttryck när sammanfogning startar</guilabel
+></term
+><listitem
+><para
+>Om aktiverad utför &kdiff3; den automatiska sammanfogningen med <guilabel
+>Reguljärt uttryck för automatisk sammanfogning</guilabel
+> när en sammanfogning startas. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Reguljärt uttryck för historikpostens början:</guilabel
+></term
+><listitem
+><para
+>Reguljärt uttryck för början av historikposten för sammanfogning. Oftast innehåller raden nyckelordet "<literal
+>&#36;Log&#36;</literal
+>". Förvalt värde: "<literal
+>.*\&#36;Log.*\&#36;.*</literal
+>" </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Reguljärt uttryck för historikpostens början:</guilabel
+></term
+><listitem
+><para
+>En historikpost för sammanfogning består av flera rader. Ange det reguljära uttrycket för att detektera den första raden (utan inledande kommentar). Använd parenteser för att gruppera nycklarna du vill använda för sortering. Om det lämnas tomt, antar &kdiff3; att tomma rader skiljer historikposterna åt. Se också <link linkend="vcskeywordsmergesupport"
+>Automatisk sammanfogning...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Sortering av historiksammanfogning</guilabel
+></term
+><listitem
+><para
+>Aktivera sortering av versionshanteringshistorik. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Sorteringsnycklarnas ordning från historikpostens början:</guilabel
+></term
+><listitem
+><para
+>Varje parentespar som används i det reguljära uttrycket för historikens startpost grupperar en nyckel som kan användas för sortering. Ange listan med nycklar (som numreras i ordning de uppträder med början på <literal
+>1</literal
+>) med ',' som skiljetecken (t.ex. "<literal
+>4,5,6,1,2,3,7</literal
+>"). Om det lämnas tomt utförs ingen sortering. Se också <link linkend="vcskeywordsmergesupport"
+>Automatisk sammanfogning...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Sammanfogning enligt versionshanteringshistorik när sammanfogning startar</guilabel
+></term
+><listitem
+><para
+>Om aktiverad utför &kdiff3; den automatiska sammafogningen av historik med tidigarenämnda alternativ när en sammanfogning startas. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Maximalt antal historikposter:</guilabel
+></term
+><listitem
+><para
+>&kdiff3; kortar av historiklistan till angivet antal poster. Använd <literal
+>-1</literal
+> för att undvika avkortning. (Standardvärde är <literal
+>-1</literal
+>). </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Prova dina reguljära uttryck</guilabel
+></term
+><listitem
+><para
+>Knappen visar en dialogruta som låter dig förbättra och prova det reguljära uttrycket ovan. Kopiera bara respektive data från dina filer till exempelraderna. <guilabel
+>Matchningsresultat</guilabel
+> visar omedelbart om matchningen lyckas eller inte. <guilabel
+>Sorteringsnyckelresultat</guilabel
+> visar nyckeln som används för sortering vid sammanfogning av historik. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ej relevant sammanfogningskommando:</guilabel
+></term
+><listitem
+><para
+>Ange ett eget kommando som ska anropas när &kdiff3; detekterar att filen från <guilabel
+>B</guilabel
+> inte bidrar med något relevant data som inte reda finns i filen från <guilabel
+>C</guilabel
+>. Kommandot anropas med de tre filnamnen som parametrar. Data som matchas av <guilabel
+>Reguljärt uttryck för automatisk sammanfogning</guilabel
+> eller i historiken anses inte vara relevant. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Spara automatiskt och avsluta vid sammanfogning utan konflikter</guilabel
+></term
+><listitem
+><para
+>När &kdiff3; startas från kommandoraden för en filsammanfogning och alla konflikter kan lösas utan användarinteraktion, spara då automatiskt och avsluta. (Liknar kommandoradsväljaren <option
+>--auto</option
+>.) </para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2
+><title
+>Katalogsammanfogning</title>
+<para
+>De här alternativen har att göra med avsökning av katalogen och hantering av sammanfogningen: Se <link linkend="dirmergeoptions"
+>Katalogjämförelse och sammanfogning</link
+> för detaljinformation. </para
+><para
+>Ändå finns det ett alternativ här som också är relevant för att spara enstaka filer: </para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Säkerhetskopior (.orig)</guilabel
+></term
+><listitem
+><para
+>När en fil sparas och en äldre version redan finns, ändras originalversionens namn med tillägg av filändelsen <literal role="extension"
+>.orig</literal
+>. Om en gammal säkerhetskopia med filändelsen <literal role="extension"
+>.orig</literal
+> redan finns tas den bort utan säkerhetskopiering. </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>Inställningar för region och språk</title>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Använd samma kodning för allt</guilabel
+></term
+><listitem
+><para
+>Följande kodningsalternativ kan justeras separat för varje objekt, eller om alternativet är sant, ställs alla värden in till det första värdet. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Observera: Lokal kodning är "..."</guilabel
+></term
+><listitem
+><para
+>Ovanför kodningsväljarna visas den här anmärkningen som talar om för dig vad den lokala kodningen är (Den kan inte justeras, utan bara som information om du inte vet vad den lokala kodningen är, men behöver kunna välja den.) </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Detektera automatiskt Unicode</guilabel
+></term
+><listitem
+><para
+>Alternativet försöker använda BOM eller metadata från XML/HTML-dokument för att detektera Unicode-kodning. Misslyckas det kontrollerar det om ett kort prov från början av en fil kan tolkas som UTF-8. Om kontrollen går igenom används UTF-8. Annars återgår det till den användarutvalda kodaren. Bara UTF-8 stöds utan när BOM eller metadata inte finns. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Filkodning för A/B/C:</guilabel
+></term
+><listitem
+><para
+>Justera filkodningen för indatafiler. Det ger effekt på hur specialtecken tolkas. Eftersom du kan justera varje kodning separat, kan du till och med jämföra och sammanfoga filer som sparades med olika kodningar. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Filkodning för sammanfogad utdata och vid spara:</guilabel
+></term
+><listitem
+><para
+>När du har redigerat en fil, kan du justera vilken kodning som används när den sparas till disk. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Filkodning för preprocessorfiler:</guilabel
+></term
+><listitem
+><para
+>När du definierar preprocessorer kanske de inte kan hantera din kodning (exempelvis om dina filer använder 16-bitars Unicode och preprocessorn bara kan hantera 8-bitars &ASCII;). Med det här alternativet kan du definiera kodningen för preprocessorns utdata. </para
+></listitem
+></varlistentry>
+	<varlistentry
+><term
+><guilabel
+>Språk som läses från höger till vänster</guilabel
+></term
+><listitem
+><para
+>Vissa språk skrivs från höger till vänster. När alternativet är aktiverat, ritar &kdiff3; text från höger till vänster i jämförelsefönstren och i sammanfogningsfönstret. Observera att om du startar &kdiff3; med kommandoradsväljaren <option
+>--reverse</option
+> så visas all layout också från höger till vänster. (Det är en funktion som &Qt; tillhandahåller.) </para
+><note
+><para
+>Dokumentationen är skriven med antagandet att det här alternativet eller omvänd layout är inaktiverad. Så vissa referenser till "vänster" eller "höger" måste ersätta av respektive motpart om du använder de här alternativen. </para
+></note
+></listitem
+></varlistentry>
+
+  </variablelist>
+</sect2>
+
+<sect2
+><title
+>Diverse</title>
+<para
+>(Dessa alternativ och åtgärder är tillgängliga i menyerna eller verktygsraden.)</para>
+<variablelist>
+  <varlistentry
+><term
+><emphasis
+>Översiktsalternativ:</emphasis
+></term
+><listitem
+><para
+>Dessa alternativ är bara tillgängliga när du jämför tre filer. I normalläge visas alla skillnader i en färgkodad översiktskolumn, men ibland är du särskilt intresserad av skillnaderna mellan två av de tre filerna. Genom att välja översikten "A mot B", "A mot C" eller "B mot C", visas en andra översiktskolumn med begärd information intill den vanliga översikten. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guimenuitem
+>Radbryt skillnadsfönster</guimenuitem
+></term
+><listitem
+><para
+>Radbryt rader när deras längd skulle överskrida ett fönsters bredd. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Visa fönster A/B/C:</guibutton
+></term
+><listitem
+><para
+>Ibland vill du använda skärmutrymmet bättre för långa rader. Dölj fönster som inte är viktiga. (I menyn Fönster.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Byt delningsorientering</guibutton
+></term
+><listitem
+><para
+>Byt mellan jämförelsefönster som visas intill varandra (<guilabel
+>A</guilabel
+> till vänster om <guilabel
+>B</guilabel
+> till vänster om <guilabel
+>C</guilabel
+>) eller ovanför varandra (<guilabel
+>A</guilabel
+> ovanför <guilabel
+>B</guilabel
+> ovanför <guilabel
+>C</guilabel
+>). Det bör också hjälpa för långa rader. (I menyn <guimenu
+>Fönster</guimenu
+>.) </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Sammanfoga aktuell fil</guibutton
+></term
+><listitem
+><para
+>Fungerar om du bara jämför två filer. Ett enkelklick startar sammanfogningen och använder filnamnet på den sista indatafilen som förvalt utmatningsfilnamn. (När detta används för att starta om en sammanfogning, behålls utmatningsfilnamnet.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Visa blanktecken</guibutton
+></term
+><listitem
+><para
+>Stäng av det här för att inte visa ändringar av bara blanktecken i texten eller översiktskolumnerna. (Observera att detta också gäller ändringar av siffror eller kommentarer om alternativen <guilabel
+>Ignorera siffror</guilabel
+> eller <guilabel
+>Ignorera C/C++ kommentarer</guilabel
+> är aktiva.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Visa mellanslag och tabulatortecken</guibutton
+></term
+><listitem
+><para
+>Ibland är synliga mellanslag och tabulatortecken störande. Du kan stänga av detta.</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Visa radnummer</guibutton
+></term
+><listitem
+><para
+>Du kan välja om radnummer ska visas för indatafilerna.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="shortcuts"
+><title
+>Anpassa snabbtangenter</title>
+<para
+>För närvarande stöder bara ramverksversionen anpassningsbara snabbtangenter (Menyn <menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Anpassa genvägar...</guimenuitem
+></menuchoice
+>). </para>
+</sect2>
+</sect1>
+
+<sect1 id="preprocessors"
+><title
+>Preprocessorkommandon</title>
+<para
+>&kdiff3; stöder två preprocessoralternativ. </para
+><para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Preprocessorkommando:</guilabel
+></term
+><listitem
+><para
+>När en fil läses, skickas den via det här externa kommandot. Utmatningen från kommandot visas istället för den ursprungliga filen. Du kan skriva din egen preprocessor som uppfyller dina speciella behov. Använd det här för att ta bort störande delar av filen, eller för att automatiskt korrigera indenteringen, etc. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Preprocessorkommando för radmatchning:</guilabel
+></term
+><listitem
+><para
+>När en fil läses, skickas den via det här externa kommandot. Om ett preprocessorkommando (se ovan) också anges är utmatningen från preprocessorn inmatning till den radmatchande preprocessorn. Utmatningen används bara under radmatchningsfasen av analysen. Du kan skriva din egen preprocessor som uppfyller dina speciella behov. Varje indatarad måste ha en motsvarande utdatarad. </para
+></listitem
+></varlistentry>
+</variablelist>
+</para>
+<para
+>Idén är att ge användaren större flexibilitet när jämförelseresultatet ställs in, men det kräver ett externt program, och många användare vill inte skriva ett själva. De goda nyheterna är att ofta klarar <command
+>sed</command
+> eller <command
+>perl</command
+> av jobbet. </para>
+<para
+>Exempel: enkelt testfall: betrakta filen a.txt (6 rader): </para>
+<screen
+>aa
+      ba
+      ca
+      da
+      ea
+      fa
+</screen>
+<para
+>Och filen b.txt (3 rader): </para>
+<screen
+>cg
+      dg
+      eg
+</screen>
+<para
+>Utan en preprocessor skulle följande rader placeras intill varandra: </para>
+<screen
+>aa - cg
+      ba - dg
+      ca - eg
+      da
+      ea
+      fa
+</screen>
+<para
+>Det är troligen inte vad som önskas eftersom den första bokstaven innehåller den intressanta informationen. För att hjälpa matchningsalgoritmen att ignorera den andra bokstaven kan man använda ett radmatchande preprocessorkommando som ersätter 'g' med 'a': </para>
+<screen
+><command
+>sed</command
+> 's/g/a/'
+</screen>
+<para
+>Med det här kommandot skulle resultatet av jämförelsen vara: </para>
+<screen
+>aa
+      ba
+      ca - cg
+      da - dg
+      ea - eg
+      fa
+</screen>
+<para
+>Internt ser matchningsalgoritmen filerna efter den radmatchande preprocessorn har körts, men på skärmen är filen oförändrad. (Den normala preprocessorn skulle också ändra data på skärmen.) </para>
+
+<sect2 id="sedbasics"
+><title
+>Grundläggande information om <command
+>sed</command
+></title>
+<para
+>Det här avsnittet introducerar bara några mycket grundläggande funktioner i <command
+>sed</command
+>. För mer information se <ulink url="info:/sed"
+>info:/sed</ulink
+> eller <ulink url="https://www.gnu.org/software/sed/manual/html_mono/sed.html"
+>https://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink
+>. En förkompilerad version för &Windows; finns på <ulink url="http://unxutils.sourceforge.net"
+>http://unxutils.sourceforge.net</ulink
+>. Observera att följande exempel antar att <command
+>sed</command
+> finns i någon katalog i miljövariabeln <envar
+>PATH</envar
+>. Om det inte är fallet, måste du ange fullständig absolut sökväg till kommandot. </para>
+<para
+>I det här sammanhanget används bara ersättningskommandot <command
+>sed</command
+>: </para>
+<screen
+><command
+>sed</command
+> 's/<replaceable
+>REGUTTRYCK</replaceable
+>/<replaceable
+>ERSÄTTNING</replaceable
+>/<replaceable
+>FLAGGOR</replaceable
+>'
+</screen>
+<para
+>Innan du använder ett nytt kommando inne i &kdiff3;, bör du först prova det i en terminal. Då är kommandot <command
+>echo</command
+> användbart. Till exempel: </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/'
+   -> obrakadabra
+</screen>
+<para
+> Exemplet visar ett mycket enkelt sed-kommando som ersätter den första förekomsten av "a" med "o". Om du vill ersätta alla förekomster behöver du flaggan "g": </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g'
+   -> obrokodobro
+</screen>
+<para
+>Symbolen "|" är rörledningskommandot som överför utdata från föregående kommando till indata i efterföljande kommando. Om du vill prova med en längre fil kan du använda <command
+>cat</command
+> på &UNIX;-liknande system eller <command
+>type</command
+> på &Windows;-liknande system. <command
+>sed</command
+> utför ersättningen för varje rad. <screen
+><command
+>cat</command
+> <replaceable
+>filnamn</replaceable
+> |<command
+>sed</command
+> <replaceable
+>väljare</replaceable
+>
+</screen>
+</para>
+</sect2>
+<sect2 id="sedforkdiff3"
+><title
+>Exempel på användning av <command
+>sed</command
+> i &kdiff3;</title>
+<sect3
+><title
+>Ignorera andra typer av kommentarer</title>
+<para
+>För närvarande förstår &kdiff3; bara C/C++ kommentarer. Genom att använda ett radmatchande preprocessorkommando kan du också ignorera andra typer av kommentarer genom att konvertera dem till C/C++ kommentarer. </para>
+<para
+> Exempel: För att ignorera kommentarer som börjar med "<literal
+>#</literal
+>", skulle du vilja konvertera dem till "<literal
+>//</literal
+>". Observera att du också måste aktivera alternativet <guilabel
+>Ignorera C/C++ kommentarer</guilabel
+> för att få någon effekt. Ett lämpligt <guilabel
+>Radmatchande preprocessorkommando:</guilabel
+> skulle vara:  </para>
+<screen
+><command
+>sed</command
+> 's/#/\/\//'
+</screen>
+<para
+>Eftersom tecknet "<literal
+>/</literal
+>" har en särskild betydelse i <command
+>sed</command
+>, är det nödvändigt att lägga till tecknet "<literal
+>\</literal
+>" innan varje "<literal
+>/</literal
+>" i ersättningssträngen. Ibland behövs "<literal
+>\</literal
+>" för att lägga till eller ta bort en särskild betydelse för vissa tecken. De enkla citationstecknen (') är bara viktiga vid utprovning i kommandoskalet eftersom det annars skulle försöka tolka vissa tecken. &kdiff3; gör inte det utom för teckenföljderna '<literal
+>\"</literal
+>' och '<literal
+>\\</literal
+>'. </para>
+</sect3>
+<sect3
+><title
+>Jämförelse som inte är skiftlägeskänslig</title>
+<para
+>Använd följande <guilabel
+>Radmatchande preprocessorkommando</guilabel
+> för att omvandla all indata till stora bokstäver: </para>
+<screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+</screen>
+<para
+>Här är "<literal
+>.*</literal
+>" ett reguljärt uttryck som matchar alla strängar, och i det här sammanhanget matchar alla tecken på raden. Tecknet "<literal
+>\1</literal
+>" i ersättningssträngen motsvarar den matchade texten mellan det första paret "<literal
+>\(</literal
+>" och "<literal
+>\)</literal
+>". "<literal
+>\U</literal
+>" konverterar den infogade texten till stora bokstäver. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorera nyckelord för versionshantering</title>
+<para
+>CVS och andra versionshanteringssystem använder flera nyckelord för att infoga automatiskt skapade strängar (<ulink url="info:/cvs/Keyword substitution"
+>info:/cvs/Keyword substitution</ulink
+>). Alla följer mönstret "$NYCKELORD skapad text$". Nu behöver vi ett radmatchande preprocessorkommando som bara tar bort den skapade texten: </para>
+<screen
+><command
+>sed</command
+> 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'
+</screen>
+<para
+>Strängen "<literal
+>\|</literal
+>" skiljer de möjliga nyckelorden åt. Du kanske vill ändra listan enligt dina behov. Tecknet "<literal
+>\</literal
+>" framför "<literal
+>$</literal
+>" behövs eftersom annars matchar  "<literal
+>$</literal
+>" radens slut. </para>
+<para
+>Medan du experimenterar med <command
+>sed</command
+> kan du komma att förstå och till och med tycka om de reguljära uttrycken. De är användbara eftersom det finns många andra program som också stöder liknande funktioner. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorera siffror</title>
+<para
+>Att ignorera siffror är i själva verket ett inbyggt alternativ, men som ett annat exempel, visas hur det skulle se ut som ett radmatchande preprocessorkommando. </para>
+<screen
+><command
+>sed</command
+> 's/[0123456789.-]//g'
+</screen>
+<para
+>Alla tecken inom '<literal
+>[</literal
+>' och '<literal
+>]</literal
+>' matchar och kommer att ersättas av ingenting. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorera vissa kolumner</title>
+<para
+>Ibland är texten mycket strikt formaterad, och innehåller kolumner som du alltid vill ignorera, medan det finns andra kolumner du vill bevara för analys. I följande exempel ignoreras de fem första kolumnerna (tecknen), de följande tio kolumnerna bevaras, därefter ignoreras återigen fem kolumner och resten av raden bevaras. </para>
+<screen
+><command
+>sed</command
+> 's/.....\(..........\).....\(.*\)/\1\2/'
+</screen>
+<para
+>Varje punkt '<literal
+>.</literal
+>' motsvarar vilket enstaka tecken som helst. Strängarna "<literal
+>\1</literal
+>" och "<literal
+>\2</literal
+>" i ersättningssträngen refererar till den matchande texten inom det första och andra paret av  "<literal
+>\(</literal
+>" och "<literal
+>\)</literal
+>" som anger texten att bevara. </para>
+</sect3>
+
+<sect3
+><title
+>Kombinera flera ersättningar</title>
+<para
+>Ibland vill du tillämpa flera ersättningar samtidigt. Då kan du använda semikolon '<literal
+>;</literal
+>' för att skilja dem från varandra. Till exempel: </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g;s/\(.*\)/\U\1/'
+   -> OBROKODOBRO
+</screen>
+</sect3>
+
+<sect3
+><title
+>Använda <command
+>perl</command
+> istället för <command
+>sed</command
+></title>
+<para
+>Istället för <command
+>sed</command
+> kanske du vill använda någonting annat såsom <command
+>perl</command
+>. </para>
+<screen
+><command
+>perl</command
+> -p -e 's/<replaceable
+>REGUTTRYCK</replaceable
+>/<replaceable
+>ERSÄTTNING</replaceable
+>/<replaceable
+>FLAGGOR</replaceable
+>
+</screen>
+<para
+>Men vissa detaljer är annorlunda i <command
+>perl</command
+>. Observera att där <command
+>sed</command
+> behöver "<literal
+>\(</literal
+>" och "<literal
+>\)</literal
+>" kräver <command
+>perl</command
+> det enklare  "<literal
+>(</literal
+>" och "<literal
+>)</literal
+>" utan inledande '<literal
+>\</literal
+>'. Till exempel: </para>
+<screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+   <command
+>perl</command
+> -p -e 's/(.*)/\U\1/'
+</screen>
+</sect3>
+</sect2>
+
+<sect2
+><title
+>Ordning vid körning av preprocessor</title>
+<para
+>Data skickas igenom all intern och extern förbehandling i följande ordning: </para>
+<itemizedlist>
+<listitem
+><para
+>Normal preprocessor,</para
+></listitem>
+<listitem
+><para
+>Preprocessor för radmatchning,</para
+></listitem>
+<listitem
+><para
+>Ignorera skiftläge (behandla som blanktecken) (konvertering till stora bokstäver),</para
+></listitem>
+<listitem
+><para
+>Detektering av C/C++ kommentarer,</para
+></listitem>
+<listitem
+><para
+>Ignorera tal (behandla som blanktecken),</para
+></listitem>
+<listitem
+><para
+>Ignorera blanktecken</para
+></listitem>
+</itemizedlist>
+<para
+>Data efter den normala förbehandlingen bevaras för att visas och sammanfogas. De andra åtgärderna ändrar bara data som algoritmen för radmatchande jämförelse ser. </para
+><para
+>I de sällsynta fall då du använder normal förbehandling, observera att den radmatchande förbehandlingen ser utdata från den normala förbehandlingen som indata. </para>
+</sect2>
+
+<sect2
+><title
+>Varning</title>
+<para
+>Förbehandlingskommandon är ofta mycket användbara, men som med alla alternativ som ändrar texten eller döljer vissa skillnader automatiskt, kan du av misstag hoppa över vissa skillnader och i värsta fall förstöra viktig data. </para
+><para
+>Av denna orsak, om ett normalt preprocessorkommando används under en sammanfogning, talar &kdiff3; om det för dig och frågar om det ska inaktiveras eller inte. Men du får ingen varning om ett <guilabel
+>Radmatchande preprocessorkommando</guilabel
+> är aktivt. Sammanfogningen sker inte förrän alla konflikter är lösta. Om du inaktiverade <menuchoice
+><guimenu
+>Jämförelsevy</guimenu
+><guimenuitem
+>Visa blanktecken</guimenuitem
+></menuchoice
+> blir också skillnaderna som togs bort med <guilabel
+>Radmatchande preprocessorkommando</guilabel
+> osynliga. Om knappen <guibutton
+>Spara</guibutton
+> förblir inaktiv under en sammanfogning (på grund av kvarvarande konflikter), försäkra dig om att aktivera <menuchoice
+><guimenu
+>Jämförelsevy</guimenu
+><guimenuitem
+>Visa blanktecken</guimenuitem
+></menuchoice
+>. Om du inte vill sammanfoga dessa mindre viktiga skillnader för hand kan du välja <menuchoice
+><guimenu
+>Sammanfoga</guimenu
+><guimenuitem
+>Välj [A|B|C] för olösta konflikter med blanktecken</guimenuitem
+></menuchoice
+>. </para>
+</sect2>
+</sect1>
+</chapter>
+
+
+<chapter id="dirmerge"
+><title
+>Katalogjämförelse och sammanfogning med &kdiff3;</title>
+<sect1 id="dirmergeintro"
+><title
+>Introduktion till katalogjämförelse och sammanfogning</title>
+<para
+>Ofta måste programmerare ändra många filer i en katalog för att uppnå sina syften. För att åstadkomma detta låter &kdiff3; dig också jämföra och sammanfoga hela kataloger rekursivt! </para
+><para
+>Även om jämförelse och sammanfogning av kataloger verkar vara ganska självklart, finns det flera detaljer som du bör känna till. Det viktigaste är förstås faktum att många filer nu kan påverkas av varje åtgärd. Om du inte har säkerhetskopior av originaldata, kan det vara mycket svårt eller till och med omöjligt att återgå till originalläget. Så innan du påbörjar en sammanfogning, försäkra dig om att data är säkert, och att det är möjligt att återställa. Om du skapar ett arkiv, eller använder ett versionshanteringssystem är ditt eget beslut, men till och med erfarna programmerare och integratörer behöver ibland gammal källkod. Observera också att även om jag (upphovsmannen till &kdiff3;) försöker att göra mitt bästa, kan jag inte garantera att det inte finns fel. Enligt &GNU; GPL finns det INGEN GARANTI av något slag för det här programmet. Så var ödmjuk, och kom alltid ihåg: </para>
+<blockquote
+><para>
+   <emphasis
+>Att fela är mänskligt, men för att verkligen ställa till det behövs en dator.</emphasis>
+</para
+></blockquote>
+<para
+>Så det här är vad programmet kan göra åt dig: &kdiff3; ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... läser och jämför två eller tre kataloger rekursivt,</para
+></listitem>
+     <listitem
+><para
+>... hanterar symboliska länkar särskilt,</para
+></listitem>
+     <listitem
+><para
+>... låter dig bläddra mellan filer med ett dubbelklick på musen,</para
+></listitem>
+     <listitem
+><para
+>... föreslår ett sammanfogningsalternativ för varje objekt, som du kan ändra innan katalogsammanfogningen startas,</para
+></listitem>
+     <listitem
+><para
+>... låter dig simulera sammanfogningen och listar åtgärderna som skulle ske, utan att verkligen göra dem,</para
+></listitem>
+     <listitem
+><para
+>... låter dig utföra sammanfogningen, och låter dig bestämma så fort manuell interaktion behövs,</para
+></listitem>
+     <listitem
+><para
+>... låter dig utföra vald åtgärd för alla objekt (tangenten <keycap
+>F7</keycap
+>) eller markerat objekt (tangenten <keycap
+>F6</keycap
+>),</para
+></listitem>
+     <listitem
+><para
+>... låter dig fortsätta sammanfogningen efter manuell interaktion med tangenten <keycap
+>F7</keycap
+>,</para
+></listitem>
+     <listitem
+><para
+>... skapar valfria säkerhetskopior, med filändelsen <literal role="extension"
+>.orig</literal
+>,</para
+></listitem>
+     <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="startingdirmerge"
+><title
+>Starta katalogjämförelse eller sammanfogning</title>
+<para
+>Det här liknar mycket sammanfogning och jämförelse av en enstaka fil. Du måste bara ange kataloger på kommandoraden eller i dialogrutan för filöppning. </para>
+<sect2
+><title
+>Jämföra eller sammanfoga två kataloger: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>katalog1 katalog2</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>katalog1 katalog2</replaceable
+> <option
+>-o</option
+> <replaceable
+>målkatalog</replaceable
+>
+</screen>
+<para
+>Om ingen målkatalog anges, använder &kdiff3; <replaceable
+>katalog2</replaceable
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Jämföra eller sammanfoga tre kataloger: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>katalog1 katalog2 katalog3</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>katalog1 katalog2 katalog3</replaceable
+> <option
+>-o</option
+> <replaceable
+>målkatalog</replaceable
+>
+</screen>
+<para
+>När tre kataloger sammanfogas, används <replaceable
+>katalog1</replaceable
+> som basen för sammanfogningen. Om ingen målkatalog anges, använder &kdiff3; <replaceable
+>katalog3</replaceable
+> som målkatalog för sammanfogningen. </para>
+
+<para
+>Observera att bara jämförelsen startas automatiskt, inte sammanfogningen. För det måste du först välja ett menyalternativ eller tangenten <keycap
+>F7</keycap
+>. (Mer information kommer senare.) </para>
+</sect2>
+</sect1>
+
+<sect1 id="dirmergevisible"
+><title
+>Katalogsammanfogning av synlig information</title>
+<para
+>Medan katalogerna läses visas en meddelanderuta som informerar dig om förloppet. Om du avbryter katalogavsökningen, visas bara filer som hittills har jämförts. </para
+><para
+>När katalogavsökningen är färdig, visar &kdiff3; en listruta med återstående resultat, ... </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="dirbrowser.png" format="PNG"/></imageobject
+> <!--alt="Image of the folder browser."-->
+</mediaobject
+></screenshot>
+<para
+>... och detaljinformation om det markerade objektet till höger: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="iteminfo.png" format="PNG"/></imageobject>
+   <!--alt="Image with information about the selected item."-->
+</mediaobject
+></screenshot>
+
+<sect2 id="name"
+><title
+>Namnkolumnen</title>
+<para
+>Varje fil och katalog som hittades under avsökningen visas här i ett träd. Du kan välja ett objekt genom att klicka en gång på det med musen. </para
+><para
+>Katalogerna är normalt ihopdragna. Du kan expandera och dra ihop dem genom att klicka på "+"/"-", genom att dubbelklicka på objektet eller genom att använda tangenterna vänsterpil och högerpil. Menyn <guimenu
+>Katalog</guimenu
+> innehåller också två alternativ <guimenuitem
+>Dra ihop alla underkataloger</guimenuitem
+> och <guimenuitem
+>Expandera alla underkataloger</guimenuitem
+> som du kan använda för att dra ihop eller expandera alla kataloger på en gång. </para
+><para
+>Om du dubbelklickar på ett filobjekt, utförs filjämförelsen och jämförelsefönstret för filer visas. </para>
+<para
+>Ikonen i namnkolumnen motsvarar filtypen i den första katalogen (<guilabel
+>A</guilabel
+>). Den kan vara någon av dessa: </para>
+<itemizedlist>
+     <listitem
+><para
+>Normal fil</para
+></listitem>
+     <listitem
+><para
+>Normal katalog (katalogikon)</para
+></listitem>
+     <listitem
+><para
+>Länk till en fil (filikon med en länkpil)</para
+></listitem>
+     <listitem
+><para
+>Länk till en fil (filikon med en länkpil)</para
+></listitem>
+</itemizedlist>
+<para
+>Om filtypen är annorlunda i övriga kataloger, syns det i kolumnerna <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> och i fönstret som visar detaljinformation om det markerade objektet. Observera att i dessa fall kan inte någon sammanfogningsåtgärd väljas automatiskt. När sammanfogningen startas, informeras användaren om den här sortens problem. </para>
+</sect2>
+
+<sect2 id="coloring"
+><title
+>Kolumnerna A/B/C och färgläggningsschemat</title>
+<para
+>Som syns i bilden ovan, används färgerna röd, grön, gul och svart i kolumnerna <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+>. </para>
+<itemizedlist>
+     <listitem
+><para
+>Svart: Det här objektet finns inte i den här katalogen.</para
+></listitem>
+     <listitem
+><para
+>Grön: Nyaste objektet.</para
+></listitem>
+     <listitem
+><para
+>Gul: Äldre än grön, nyare än röd.</para
+></listitem>
+     <listitem
+><para
+>Röd: Äldsta objektet.</para
+></listitem>
+</itemizedlist>
+<para
+>Utom för objekt som var identiska i jämförelsen, där är färgen också identisk även om åldern inte är det. </para
+><para
+>Kataloger anses vara likadana om alla objekt de innehåller är likadana. Då har de också samma färg. Åldern på en katalog spelar dock ingen roll för dess färg. </para
+><para
+>Idén för färgläggningsschemat hittade jag i <ulink url="https://www.samba.org/ftp/paulus/"
+><command
+>dirdiff</command
+></ulink
+>. Färgerna motsvarar färgerna hos ett löv som är grönt från början, sedan blir gult och till sist rött när det är gammalt. </para>
+
+</sect2
+><sect2 id="operation"
+><title
+>Åtgärdskolumnen</title>
+<para
+>Efter att ha jämfört katalogerna utvärderar &kdiff3; också ett förslag på sammanfogningsåtgärd. Det visas i kolumnen <guilabel
+>Åtgärd</guilabel
+>. Du kan ändra den genom att klicka på åtgärden du vill ändra. En liten meny dyker upp och låter dig välja en åtgärd för objektet. (Du kan också välja den oftast använda åtgärden via tangentbordet. <keycombo
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>/<keycap
+>2</keycap
+>/<keycap
+>3</keycap
+>/<keycap
+>4</keycap
+>/<keycap
+>Delete</keycap
+> väljer <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+>/<guilabel
+>Sammanfoga</guilabel
+>/<guilabel
+>Ta bort</guilabel
+> om de är tillgängliga.) Åtgärden utförs under sammanfogningen. Vilka åtgärder som är tillgängliga beror på objektet och sammanfogningsläget som används. Sammanfogningsläget är ett av </para>
+<itemizedlist>
+     <listitem
+><para
+>Sammanfogning av tre kataloger (<guilabel
+>A</guilabel
+> behandlas som äldsta bas för båda).</para
+></listitem>
+     <listitem
+><para
+>Sammanfogning av två kataloger.</para
+></listitem>
+     <listitem
+><para
+>Tvåkatalogs synkroniseringsläge (aktiveras med alternativet <guilabel
+>Synkronisera kataloger</guilabel
+>).</para
+></listitem>
+</itemizedlist>
+<para
+>Vid trekatalogers sammanfogning är den förslagna åtgärden: Om för ett objekt... </para>
+<itemizedlist>
+     <listitem
+><para
+>... alla tre katalogerna är likadana: Kopiera från <guilabel
+>C</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> och <guilabel
+>C</guilabel
+> är likadana med <guilabel
+>B</guilabel
+> är det inte: Kopiera från <guilabel
+>B</guilabel
+> (eller om <guilabel
+>B</guilabel
+> inte finns, ta bort målet om det finns) </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> och <guilabel
+>B</guilabel
+> är likadana med <guilabel
+>C</guilabel
+> är det inte: Kopiera från <guilabel
+>C</guilabel
+> (eller om <guilabel
+>C</guilabel
+> inte finns, ta bort målet om det finns) </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>B</guilabel
+> och <guilabel
+>C</guilabel
+> är likadana med <guilabel
+>A</guilabel
+> är det inte: Kopiera från <guilabel
+>C</guilabel
+> (eller om <guilabel
+>C</guilabel
+> inte finns, ta bort målet om det finns) </para
+></listitem>
+     <listitem
+><para
+>... bara <guilabel
+>A</guilabel
+> finns: Ta bort målet (om det finns) </para
+></listitem>
+     <listitem
+><para
+>... bara <guilabel
+>B</guilabel
+> finns: Kopiera från <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... bara <guilabel
+>C</guilabel
+> finns: Kopiera från <guilabel
+>C</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> och <guilabel
+>C</guilabel
+> är inte likadana: Sammanfoga </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> och <guilabel
+>C</guilabel
+> har inte samma filtyp (t.ex. <guilabel
+>A</guilabel
+> är en katalog, <guilabel
+>B</guilabel
+> är en fil): "Fel: Konflikt i filtyper". Medan sådana objekt finns, kan inte katalogsammanfogningen startas. </para
+></listitem>
+</itemizedlist>
+<para
+>Vid tvåkatalogers sammanfogning är den förslagna åtgärden: Om för ett objekt... </para>
+<itemizedlist>
+     <listitem
+><para
+>... båda katalogerna är likadana: Kopiera från <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> finns men inte <guilabel
+>B</guilabel
+>: Kopiera från <guilabel
+>A</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>B</guilabel
+> finns men inte <guilabel
+>A</guilabel
+>: Kopiera från <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> och <guilabel
+>B</guilabel
+> finns men är inte likadana: Sammanfoga </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> och <guilabel
+>B</guilabel
+> har inte samma filtyp (t.ex. <guilabel
+>A</guilabel
+> är en katalog, <guilabel
+>B</guilabel
+> är en fil): "Fel: Konflikt i filtyper". Medan sådana objekt finns, kan inte katalogsammanfogningen startas. </para
+></listitem>
+</itemizedlist>
+<para
+>Synkroniseringsläge är bara aktivt om två kataloger och ingen explicit målkatalog anges, och om alternativet <guilabel
+>Synkronisera kataloger</guilabel
+> är aktivt. &kdiff3; väljer då en standardåtgärd så att båda katalogerna är likadana efteråt. Om för ett objekt ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... båda katalogerna är lika: Ingenting görs. </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> finns, men inte <guilabel
+>B</guilabel
+>: Kopiera <guilabel
+>A</guilabel
+> till <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>B</guilabel
+> finns, men inte <guilabel
+>A</guilabel
+>: Kopiera <guilabel
+>B</guilabel
+> till <guilabel
+>A</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> och <guilabel
+>B</guilabel
+> finns, men är inte likadana: Sammanfoga och lagra resultatet i båda kataloger. (För användaren är det synliga filnamnet för att spara <guilabel
+>B</guilabel
+>, men därefter kopierar &kdiff3; också <guilabel
+>B</guilabel
+> till <guilabel
+>A</guilabel
+>.) </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> och <guilabel
+>B</guilabel
+> har inte samma filtyp (t.ex. <guilabel
+>A</guilabel
+> är en katalog, <guilabel
+>B</guilabel
+> är en fil): "Fel: Konflikt i filtyper". Medan sådana objekt finns, kan inte katalogsammanfogningen startas. </para
+></listitem>
+</itemizedlist>
+<para
+>När två kataloger sammanfogas och alternativet <guilabel
+>Kopiera nyare istället för att sammanfoga</guilabel
+> är markerat, tittar &kdiff3; på datum och föreslår att välja den nyare filen. Om filerna inte är lika men har samma datum, innehåller åtgärden "Fel: Datum är lika men filerna är det inte." Medan sådana objekt finns, kan inte katalogsammanfogningen startas. </para>
+</sect2>
+
+<sect2 id="status"
+><title
+>Statuskolumnen</title>
+<para
+>Under sammanfogningen behandlas en fil i taget. Statuskolumnen visar <guilabel
+>Klar</guilabel
+> för objekt där sammanfogningsåtgärden har lyckats, och någon annan text om något oväntat inträffade. När en sammanfogning är färdig, bör du göra en sista kontroll för att se att status för alla objekt är acceptabel. </para>
+</sect2>
+
+<sect2 id="statisticscolulmns"
+><title
+>Statistikkolumner</title>
+<para
+>När filjämförelseläget <guilabel
+>Fullständig analys</guilabel
+> är aktiverat i alternativen, visar &kdiff3; extra kolumner som innehåller antal oupplösta, upplösta, inte blanka och blanka konflikter. (Kolumnen <guilabel
+>Lösta</guilabel
+> visas bara när kataloger jämförs eller sammanfogas.) </para>
+</sect2>
+
+<sect2 id="selectingvisiblefiles"
+><title
+>Välja listade filer</title>
+<para
+>Flera alternativ påverkar vilka filer som listas här. Vissa är tillgängliga i <link linkend="dirmergeoptions"
+>inställningsdialogrutan</link
+>. Menyn <guilabel
+>Katalog</guilabel
+> innehåller alternativen: </para
+><para
+><itemizedlist>
+     <listitem
+><para
+><guilabel
+>Visa identiska filer</guilabel
+>: Filer som har detekterats som lika i alla indatakataloger. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Visa olika filer</guilabel
+>: Filer som finns i två eller flera kataloger men inte är lika. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Visa bara filer i A</guilabel
+>: Filer som bara finns i <guilabel
+>A</guilabel
+>, men inte i <guilabel
+>B</guilabel
+> eller <guilabel
+>C</guilabel
+>. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Visa bara filer i B</guilabel
+>: Filer som bara finns i <guilabel
+>B</guilabel
+>, men inte i <guilabel
+>A</guilabel
+> eller <guilabel
+>C</guilabel
+>. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Visa bara filer i C</guilabel
+>: Filer som bara finns i <guilabel
+>C</guilabel
+>, men inte i <guilabel
+>A</guilabel
+> eller <guilabel
+>B</guilabel
+>. </para
+></listitem>
+</itemizedlist
+></para>
+<para
+>Aktivera bara alternativen <guilabel
+>Visa</guilabel
+> för objekten du vill lista. Om du till exempel bara vill lista alla objekt som antingen finns i <guilabel
+>A</guilabel
+> eller i <guilabel
+>B</guilabel
+> men inte i båda, måste du aktivera <guilabel
+>Visa bara filer i A</guilabel
+> och <guilabel
+>Visa bara filer i B</guilabel
+> och inaktivera alla andra (<guilabel
+>Visa identiska filer</guilabel
+>, <guilabel
+>Visa olika filer</guilabel
+>, <guilabel
+>Visa bara filer i C</guilabel
+>). Listan uppdateras omedelbart för att motsvara ändringen. </para
+><para
+>Alternativen gäller också för kataloger med ett undantag: Att inaktivera <guilabel
+>Visa olika filer</guilabel
+> döljer inte hela kataloger. Det fungerar bara för filer inne i dem. </para
+><para
+>Observera att av dessa är bara alternativet <guilabel
+>Visa identiska filer</guilabel
+> som är bestående Övriga aktiveras när &kdiff3; startas. </para>
+</sect2>
+
+</sect1>
+
+
+<sect1 id="dothemerge"
+><title
+>Utföra en katalogsammanfogning</title>
+<para
+>Du kan antingen sammanfoga markerat objekt (fil eller katalog), eller alla objekt. När du har gjort alla val av åtgärder (också i alla underkataloger), kan du utföra sammanfogningen. </para
+><para
+>Var medveten om att om du inte explicit angav en målkatalog, blir målet <guilabel
+>C</guilabel
+> i trekatalogsläge, <guilabel
+>B</guilabel
+> i tvåkatalogsläge, och i synkroniseringsläge är det <guilabel
+>A</guilabel
+> och/eller <guilabel
+>B</guilabel
+>. </para
+><para
+>Om du också har angivit en målkatalog, kontrollera att alla objekt som ska finnas i utmatningen finns i trädet. Det finns några alternativ som får vissa objekt att utelämnas från katalogjämförelsen och sammanfogningen. Kontrollera dessa alternativ för att undvika obehagliga överraskningar: </para>
+<itemizedlist>
+     <listitem
+><para
+><guilabel
+>Rekursiva kataloger</guilabel
+>: Om det är av, hittas inte objekt i underkataloger.</para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Mönster</guilabel
+> eller <guilabel
+>Undantagsmönster</guilabel
+>: Inkludera eller undanta objekt som matchar</para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Undanta gömda filer</guilabel
+></para
+></listitem>
+     <listitem
+><para
+><link linkend="selectingvisiblefiles"
+>Visa alternativ</link
+> (<guilabel
+>Visa identiska/olika filer</guilabel
+>, <guilabel
+>Bara filer i A/B/C</guilabel
+>)</para
+></listitem>
+</itemizedlist>
+<para
+>Om du ändrar inställningarna för att visa fler filer, måste du göra en omsökning via menyn <menuchoice
+><guimenu
+>Katalog</guimenu
+><guimenuitem
+>Avsök igen</guimenuitem
+></menuchoice
+>. (Orsaken till det är att &kdiff3; utelämnar jämförelsen för filer enligt kriterierna för att få snabbare jämförelsehastighet.) Om du ändrade fil- och katalogmönster för att undanta filer, uppdateras fillistan omedelbart när inställningsdialogrutan stängs. </para
+><para
+>Observera att när du skriver till en helt ny katalog vill du oftast också kopiera de identiska filerna. Aktivera <guilabel
+>Visa identiska filer</guilabel
+> i detta fall. Om din målkatalog är en av indatakatalogerna, är det inte nödvändigt eftersom filerna redan finns där. </para
+><para
+>Om du är nöjd hittills, är resten enkelt. </para
+><para
+>För att sammanfoga alla objekt: Välj <guimenuitem
+>Starta eller fortsätt katalogsammanfogning</guimenuitem
+> i menyn <guimenu
+>Katalog</guimenu
+> eller tryck på <keycap
+>F7</keycap
+> (som är snabbtangenten). För att bara sammanfoga aktuellt objekt: Välj <guilabel
+>Utför åtgärd för aktuellt objekt</guilabel
+> eller tryck på <keycap
+>F6</keycap
+>. </para
+><para
+>Om vissa objekt med ogiltiga filtyper fortfarande finns, på grund av filtyper med konflikter, visas en meddelanderuta och objekten pekas ut, så att du kan välja en giltig åtgärd för objektet. </para
+><para
+>Om du sammanfogar alla objekt visas en dialogruta som ger dig alternativen <guilabel
+>Gör det</guilabel
+>, <guilabel
+>Simulera det</guilabel
+> och <guilabel
+>Avbryt</guilabel
+>. </para>
+<itemizedlist>
+     <listitem
+><para
+>Välj <guilabel
+>Simulera det</guilabel
+> om du vill se vad som skulle göras utan att verkligen göra det. En utförlig lista med alla åtgärder visas.</para
+></listitem>
+     <listitem
+><para
+>Välj annars <guilabel
+>Gör det</guilabel
+> för att verkligen utföra sammanfogningen.</para
+></listitem>
+</itemizedlist>
+<para
+>Därefter utför &kdiff3; den angivna åtgärden för alla objekt. Om manuell interaktion krävs (sammanfogning av enstaka fil), visas ett sammanfogningsfönster (<link linkend="dirmergebigscreenshot"
+>se den stora skärmbilden</link
+>). </para
+><para
+>När du är klar med manuell sammanfogning av en fil, välj återigen <guimenuitem
+>Starta eller fortsätt katalogsammanfogning</guimenuitem
+> eller tryck på <keycap
+>F7</keycap
+>. Om du inte har sparat ännu, ber en dialogruta dig att göra det. Därefter fortsätter &kdiff3; till nästa objekt. </para
+><para
+>När &kdiff3; stöter på ett fel, meddelas det och utförlig statusinformation visas. Längst ner i listan finns det några felmeddelanden som bör hjälpa dig att förstå problemets orsak. När du fortsätter sammanslagningen (tangenten <keycap
+>F7</keycap
+>), ger &kdiff3; dig valet att försöka igen eller hoppa över objektet som orsakade problemet. Det betyder att du kan välja en annan åtgärd, eller lösa problemet på annat sätt, innan du fortsätter. </para
+><para
+>När sammanfogningen är färdig, informerar &kdiff3; dig med en meddelanderuta. </para
+><para
+>Om vissa objekt sammanfogades individuellt innan katalogsammanfogningen, kommer &kdiff3; ihåg det (medan sammanfogningssessionen pågår), och sammanfogar dem inte igen när sammanfogningen för alla objekt utförs. Även när sammanfogningen hoppas över eller ingenting sparas räknas dessa objekt som färdiga. Bara när sammanfogningsåtgärden ändras, tas objektets status <guilabel
+>Klar</guilabel
+> bort och det kan sammanfogas igen. </para>
+</sect1>
+
+<sect1 id="dirmergeoptions"
+><title
+>Alternativ för att jämföra och sammanfoga kataloger</title>
+<para
+>Inställning av &kdiff3; (menyn <menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Anpassa &kdiff3;</guimenuitem
+></menuchoice
+>) har en sida som heter "Katalogsammanfogning" med följande alternativ: </para>
+
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Rekursiva kataloger</guilabel
+></term
+><listitem
+><para
+>Välj om kataloger ska sökas igenom rekursivt.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Mönster för filer</guilabel
+></term
+><listitem
+><para
+>Bara filer som matchar något mönster här läggs till i trädet. Mer än ett mönster kan anges genom att använda semikolon ";" som skiljetecken. Giltiga jokertecken: '*' och '?'. (t.ex. "<literal
+>*.cpp;*.h</literal
+>"). Normalvärdet är "*". Mönstret används inte för kataloger.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Undantagsmönster för filer:</guilabel
+></term
+><listitem
+><para
+>Filer som matchar något mönster undantas från trädet. Mer än ett mönster kan anges här genom att använda semikolon ";" som skiljetecken. Giltiga jokertecken: '*' och '?'. Normalvärdet är "<literal
+>*.orig;*.o;*.obj</literal
+>".</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Undantagsmönster för filer:</guilabel
+></term
+><listitem
+><para
+>Kataloger som matchar något mönster undantas från trädet. Mer än ett mönster kan anges genom att använda semikolon ";" som skiljetecken. Giltiga jokertecken: '*' och '?'. Normalvärdet är "<literal
+>CVS;deps;.svn</literal
+>".</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Använd ignoreringsfil</guilabel
+></term
+><listitem
+><para
+>Ignorera filer och kataloger som också skulle ignoreras av källkontroll. Många automatiskt genererade filer ignoreras av genom att använda ignoreringslistor. Den stora fördelen är att det kan vara katalogspecifikt via en lokal ignoreringsfil (se versionshanteringens dokumentation för mer information). </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Sök efter gömda filer och kataloger</guilabel
+></term
+><listitem
+><para
+>För vissa filsystem har filer egenskapen "Dold". För andra system döljs ett filnamn som börjar med en punkt ("."). Alternativet låter dig bestämma om dessa filer ska ingå i trädet eller inte. Normalvärdet är på.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Följ fillänkar</guilabel
+></term
+><listitem
+><para
+>För länkar till filer: Om inaktiverad, jämförs de symboliska länkarna. Om aktiverad, jämförs filerna bakom länkarna. Normalvärdet är av.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Följ fillänkar</guilabel
+></term
+><listitem
+><para
+>För länkar till kataloger: Om inaktiverad, jämförs symboliska länkar. Om aktiverad behandlas länken som en katalog och avsöks rekursivt. (Observera att programmet inte kontrollerar om länken är "rekursiv". En katalog som innehåller en länk till samma katalog skulle orsaka en oändlig snurra, och efter en viss tid när stacken blir full eller minnet tar slut, kraschar programmet.) Normalvärdet är av.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Skiftlägeskänslig filnamnsjämförelse</guilabel
+></term
+><listitem
+><para
+>Förvalt värde är falskt på &Windows;, och sant för andra operativsystem.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Filjämförelseläge:</guilabel
+></term
+><listitem
+><para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Binär jämförelse</guilabel
+></term
+><listitem
+><para
+>Det här är förvalt filjämförelseläge. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Fullständig analys</guilabel
+></term
+><listitem
+><para
+>Gör en fullständig analys av varje fil och visa kolumner med statistisk information. (Antal <guilabel
+>Upplösta</guilabel
+>, <guilabel
+>Oupplösta</guilabel
+>, <guilabel
+>Inte blanka</guilabel
+> och <guilabel
+>Blanka</guilabel
+> konflikter.) Den fullständiga analysen är långsammare än en enkel binäranalys, och är mycket långsammare för filer som inte innehåller text. (Ange lämpliga filmönster för att undvika dem.) </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Lita på storlek och ändringsdatum (inte säkert)</guilabel
+></term
+><listitem
+><para
+>Om du jämför stora kataloger via ett långsamt nätverk, kan det gå snabbare att bara jämföra ändringsdatum och fillängd. Men hastighetsförbättringen sker till priset av en liten osäkerhet. Använd alternativet med försiktighet. Normalvärdet är av.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Lita på storleken (inte säkert)</guilabel
+></term
+><listitem
+><para
+>Liknar att lita på ändringsdatum. Ingen verklig jämförelse sker. Två filer anses vara lika om deras filstorlekar är lika. Detta är användbart när filkopieringsåtgärden inte bevarade ändringsdatum. Använd alternativet med försiktighet. Normalvärdet är av.</para
+></listitem
+></varlistentry>
+</variablelist
+></para
+></listitem
+></varlistentry>
+
+   <varlistentry
+><term
+><guilabel
+>Synkronisera kataloger</guilabel
+></term
+><listitem
+><para
+>Aktiverar synkroniseringsläge när två kataloger jämförs och ingen explicit målkatalog anges. I det här läget väljes föreslagna åtgärder så att båda källkatalogerna är likadana efteråt. Sammanfogningsresultatet skrivs också till båda kataloger. Normalvärdet är av.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Kopiera nyare istället för att sammanfoga (inte säkert)</guilabel
+></term
+><listitem
+><para
+>Istället för att sammanfoga kopierar den föreslagna åtgärden den nyare källan om ändringar har skett. (Anses vara osäkert, eftersom det förutsätter att du vet att den andra filen inte också har redigerats. Kontrollera för att vara säker i varje enskilt fall.) Normalvärdet är av.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Säkerhetskopior (.orig)</guilabel
+></term
+><listitem
+><para
+>Om en fil eller hel katalog ersätts med en annan eller tas bort, då ändras originalversionens namn med tillägg av filändelsen <literal role="extension"
+>.orig</literal
+>. Om en gammal säkerhetskopia med filändelsen <literal role="extension"
+>.orig</literal
+> redan finns tas den bort utan säkerhetskopiering. Det här gäller också normal sammanfogning av enstaka filer, inte bara sammanfogningsläge för kataloger. Normalvärdet är på.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="other"
+><title
+>Andra funktioner i katalogsammanfogningsfönstret</title>
+<sect2
+><title
+>Delat eller fullskärmsläge</title>
+<para
+>Oftast förblir listfönstret för katalogsammanfogning synligt medan en enstaka fil jämförs eller sammanfogas. Du kan flytta raden som delar fillistan från fönstren för textjämförelse med musen. Om du inte vill göra det, kan du inaktivera <menuchoice
+><guimenu
+>Katalog</guimenu
+><guimenuitem
+>Delad skärmvy för kataloger och text</guimenuitem
+></menuchoice
+>. Därefter kan du använda <menuchoice
+><guimenu
+>Katalog</guimenu
+><guimenuitem
+>Byt vy</guimenuitem
+></menuchoice
+> för att byta mellan fillistan och fönstren för textjämförelse, som då upptar hela fönstret. </para>
+</sect2>
+<sect2
+><title
+>Jämföra och sammanfoga en ensam fil</title>
+<para
+>Du föredrar troligen ett vanligt dubbelklick på musen för att jämföra en fil. Hur som helst finns det också ett alternativ i menyn <guimenu
+>Katalog</guimenu
+>. Du kan också direkt sammanfoga en enstaka fil, utan att starta katalogsammanfogning via <menuchoice
+><guimenu
+>Sammanfoga</guimenu
+><guimenuitem
+>Sammanfoga markerade filer</guimenuitem
+></menuchoice
+>. När resultatet sparas, sätts status till klar, och filen sammanfogas inte igen om en katalogsammanfogning startas. </para
+><para
+>Men observera att statusinformationen går förlorad när du kör om en katalogavsökning: <menuchoice
+><guimenu
+>Katalog</guimenu
+><guimenuitem
+>Avsök igen</guimenuitem
+></menuchoice
+> </para>
+</sect2>
+<sect2
+><title
+>Jämföra eller sammanfoga filer med olika namn</title>
+<para
+>Ibland behöver du jämföra eller sammanfoga filer med olika namn (t.ex. nuvarande fil och säkerhetskopian i samma katalog). </para
+><para
+>Markera den exakta filen genom att klicka på ikonen i kolumnen <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> eller <guilabel
+>C</guilabel
+>. Filen som först markeras på det sättet markeras med <guilabel
+>A</guilabel
+>, den andra och tredje med <guilabel
+>B</guilabel
+> och <guilabel
+>C</guilabel
+> oberoende av vilken kolumn de finns i. Bara upp till tre filer kan markeras på detta sätt. </para
+><para
+>Fortsätt genom att välja menyalternativet <menuchoice
+><guimenu
+>Katalog</guimenu
+><guimenuitem
+>Jämför explicit markerade filer</guimenuitem
+></menuchoice
+> eller <menuchoice
+><guimenu
+>Katalog</guimenu
+><guimenuitem
+>Sammanfoga explicit markerade filer</guimenuitem
+></menuchoice
+>. Av bekvämlighetsskäl finns också menyalternativen som en sammanhangsberoende meny som visas när du klickar på den senast markerade filen. </para
+><para
+>Jämförelsen eller sammanfogningen av en fil sker i samma fönster. Om metoden används för kataloger öppnas ett nytt fönster. </para
+></sect2>
+</sect1>
+</chapter>
+
+<chapter id="misc">
+<title
+>Diverse ämnen</title>
+<sect1 id="networktransparency">
+<title
+>Nätverkstransparens via KIO</title>
+<sect2
+><title
+>I/O-slavar</title>
+<para
+>KIO-biblioteket i Ramverk stöder nätverkstransparens via I/O-slavar. &kdiff3; använder dem för att läsa indatafiler och avsöka kataloger. Det betyder att du kan ange filer och kataloger på lokal- och fjärr-resurser via webbadresser. </para
+><para
+>Exempel: </para
+><para>
+<screen
+><command
+>kdiff3</command
+> test.cpp  ftp://ftp.langtbortistan.org/test.cpp
+   <command
+>kdiff3</command
+> tar:/home/hackare/arkiv.tar.gz/kat ./kat
+</screen>
+</para>
+<para
+>Den första raden jämför en lokal fil med en fil på en &FTP;-server. Den andra raden jämför en katalog i ett komprimerat arkiv med en lokal katalog. </para
+><para
+>Andra I/O-slavar som är intressanta är: </para>
+<itemizedlist>
+<listitem
+><para
+>Filer från WWW (http:),</para
+></listitem>
+<listitem
+><para
+>Filer från &FTP; (ftp:),</para
+></listitem>
+<listitem
+><para
+>Krypterad filöverföring (fish:, sftp:),</para
+></listitem>
+<listitem
+><para
+>&Windows;-resurser (smb:),</para
+></listitem>
+<listitem
+><para
+>Lokala filer (file:),</para
+></listitem>
+</itemizedlist>
+<para
+>Andra saker som är möjliga, men troligen mindre användbara, är: </para>
+<itemizedlist>
+<listitem
+><para
+>Manualsidor (man:),</para
+></listitem>
+<listitem
+><para
+>Infosidor (info:),</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2
+><title
+>Hur man skriver webbadresser</title>
+<para
+>En webbadress har en annorlunda syntax jämfört med sökvägar till lokala filer och kataloger. Vissa saker måste tas hänsyn till: </para>
+<itemizedlist>
+<listitem
+><para
+>En sökväg kan vara relativ, och kan innehålla "." eller "..". Det är inte möjligt för webbadresser, som alltid är absoluta. </para
+></listitem
+><listitem
+><para
+>Specialtecken måste skrivas med särskilda "teckenföljder". ("<literal
+>#</literal
+>" blir "<literal
+>%23</literal
+>", mellanslag blir "<literal
+>%20</literal
+>", etc.) Till exempel skulle en fil med namnet "<literal
+>#</literal
+>foo<literal
+>#</literal
+>" ha webbadressen "file:/<literal
+>%23</literal
+>foo<literal
+>%23</literal
+>". </para
+></listitem
+><listitem
+><para
+>När webbadresser inte fungerar som väntat, försök att öppna dem i &konqueror; först. </para
+></listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2
+><title
+>Möjligheter med I/O-slavar</title>
+<para
+>Nätverkstransparens har en nackdel: Alla resurser har inte samma möjligheter. </para
+><para
+>Ibland beror det på serverns filsystem, ibland på protokollet. Här är en kort lista med begränsningar: </para>
+<itemizedlist>
+<listitem
+><para
+>Ibland finns det inget stöd för länkar. </para
+></listitem
+><listitem
+><para
+>Eller finns det inget sätt att särskilja om en länk pekar på en fil eller katalog, då antas alltid en fil (ftp:, sftp:). </para
+></listitem
+><listitem
+><para
+>Kan inte alltid avgöra filstorleken. </para
+></listitem
+><listitem
+><para
+>Begränsat stöd för rättigheter. </para
+></listitem
+><listitem
+><para
+>Ingen möjlighet att ändra rättigheter eller ändringstid, så rättigheter eller tiden för en kopia skiljer sig från originalet. (Se alternativet <guilabel
+>Lita på storleken (inte säkert)</guilabel
+>. Ändring av rättigheter eller ändringstid är bara möjligt för lokala filer.) </para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+<sect1 id="kpart">
+<title
+>Använda &kdiff3; som en Kpart</title>
+<para
+>&kdiff3; är en Kpart. För närvarande implementeras gränssnittet KParts::ReadOnlyPart. </para
+><para
+>Den huvudsakliga användningen är för skillnadsvisning i &kdevelop;. &kdevelop; startar alltid den interna skillnadsvisningen först. För att använda &kdiff3;, klicka med höger musknapp i skillnadsvisningens fönster och välj <guimenuitem
+>Visa i KDiff3-del</guimenuitem
+> i den sammanhangsberoende menyn. </para
+><para
+>&kdiff3; kräver normalt två fullständiga filer som indata. När det används som en del, antar &kdiff3; att indatafilen är en programfixfil med unifierat format. &kdiff3; hämtar därefter originalfilernas namn i programfixfilen. Åtminstone en av de två filerna måste vara tillgänglig. &kdiff3; startar då kommandot <command
+>patch</command
+> för att återskapa den andra filen. </para
+><para
+>Du kan välja en programfixfil i &dolphin; och välja <menuchoice
+><guimenuitem
+>Förhandsgranska i</guimenuitem
+><guisubmenu
+>Kdiff3-del</guisubmenu
+></menuchoice
+> i den sammanhangsberoende menyn. Var medveten om att det inte fungerar om ingen av originalfilerna finns tillgänglig, och är inte tillförlitligt om originalfilen eller filerna har ändrats sedan programfixfilen skapades. </para
+><para
+>När det kör som ett delprogram tillhandahåller &kdiff3; bara jämförelse mellan två filer, en mycket liten verktygsrad och meny. Sammanfogning eller katalogjämförelse stöds då inte. </para>
+</sect1>
+
+<sect1 id="git">
+<title
+>Använda &kdiff3; som ett verktyg för jämförelse och sammanfogning med &git;</title>
+<para
+>&kdiff3; kan användas som ett verktyg för jämförelse och sammanfogning med <ulink url="https://git-scm.com/"
+>&git;</ulink
+>. </para>
+<para
+>Lägg bara till följande rader i filen <filename
+>gitconfig</filename
+>. </para>
+<programlisting
+>[diff]
+        tool = kdiff3
+[difftool "kdiff3"]
+        path = &lt;sökväg till binärfilen kdiff3 på systemet>
+[difftool]
+        prompt = false
+        keepBackup = false
+        trustExitCode = false
+[merge]
+        tool = kdiff3
+[mergetool]
+        prompt = false
+        keepBackup = false
+        keepTemporaries = false
+[mergetool "kdiff3"]
+        path = &lt;sökväg till binärfilen kdiff3 på systemet
+>
+</programlisting>
+<para
+>För att därefter se skillnaden mellan två incheckningar använd <userinput
+>git difftool <replaceable
+>första kondensat</replaceable
+> <replaceable
+>andra kondensat</replaceable
+> --tool=kdiff3 --cc <replaceable
+>någon fil i git-trädet</replaceable
+></userinput
+> </para>
+<para
+>Använd <userinput
+>git merge <replaceable
+>grennamn</replaceable
+> &amp;&amp; git mergetool --tool=kdiff3</userinput
+> för att sammanfoga en gren med &kdiff3;. </para>
+<para
+>Efter att sammanfogningskonflikter har lösts på <link linkend="synchronise_views"
+>vanligt sätt</link
+> är det tillräckligt att checka in ändringarna för att göra färdigt. </para>
+</sect1>
+</chapter>
+
+<chapter id="faq">
+<title
+>Vanliga frågor</title
+>&reporting.bugs; &updating.documentation; <qandaset id="faqlist">
+
+<qandaentry
+><question
+><para
+>Varför kallas det "&kdiff3;"? </para
+></question
+><answer
+><para
+>Verktyg som heter <application
+>KDiff</application
+> och <application
+>KDiff2</application
+> (som nu kallas &kompare;) fanns redan. Dessutom ska &kdiff3; antyda att programmet kan sammanfoga som verktyget <command
+>diff3</command
+> från samlingen med diff-verktyg. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Varför licensieras det under GPL? </para
+></question
+><answer
+><para
+>Jag har använt GPL-program under mycket lång tid nu, och lärt mig mycket genom att titta på en hel del av källkoden. Alltså är det här mitt "tack" till alla programmerare som också gjorde eller kommer att göra samma sak. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Vissa knappar och funktioner saknas. Vad är fel? </para
+></question
+><answer
+><para
+>Du kompilerade från källkod, men angav troligen inte rätt prefix för installationen. Normalt vill <command
+>cmake</command
+> installera i <filename class="directory"
+>/usr/local</filename
+>, men då kan inte resursfilen för användargränssnittet (dvs. <filename
+>kdiff3ui.rc</filename
+>) hittas. Filen <filename
+>README</filename
+> innehåller mer information om det riktiga prefixet. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Ofta visas rader som är liknande men inte identiska intill varandra, men inte alltid. Varför? </para
+></question
+><answer
+><para
+>Rader där bara antal blanktecken är olika behandlas som "lika", medan bara ett annorlunda blanktecken gör att raderna är "olika". Om liknande rader finns intill varandra, är detta i själva verket en slump men det är som tur är oftast fallet. Se också <link linkend="manualdiffhelp"
+>hjälpen på manualsidan för diff</link
+>. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Varför måste alla konflikter vara lösta innan sammanfogningsresultatet kan sparas? </para
+></question
+><answer
+><para
+>För varje likadant eller annorlunda avsnitt kommer editorn i fönstret med sammanfogningsresultatet ihåg var det börjar och slutar. Det behövs eftersom konflikter kan lösas upp manuellt genom att helt enkelt välja källknappen (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> eller <guilabel
+>C</guilabel
+>). Informationen går förlorad när filen sparas som text, och det är för mycket ansträngning att skapa ett speciellt filformat som stöder att spara och återställa all nödvändig information. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Hur kan jag synkronisera jämförelsevyn och sammanfogningsvyn så att alla vyer visar samma textposition? </para
+></question
+><answer
+><para
+>Klicka på sammanfattningskolumnen till vänster om texten. (<link linkend="synchronise_views"
+>Se också här.</link
+>) </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Varför ger <userinput
+>git difftool --dir-diff</userinput
+> "Blandning av länkar och normala filer" fel när KDiff3 används som jämförelseverktyg? </para
+></question
+><answer
+><para
+>Det är en sidoeffekt av hur git fungerar internt. Om du försöker jämföra en tidigare version med det aktuella arbetsträdet, jämför git verkliga filer som representerar de tidigare arkiveringarna med symboliska länkar som pekar på arbetsträdet. Från och med 1.9 är <guilabel
+>Följ fillänkar</guilabel
+> och <guilabel
+>Följ kataloglänkar</guilabel
+> förvalda i Kidff3. Tidigare var de normalt avstängda. Det spelade ingen roll om "Fullständig analys" också var avstängt. Dock försökte KDiff3 initialt jämföra sökvägen som länken pekade på istället för att följa den med <guilabel
+>Fullständig analys</guilabel
+> på. Tidigare än 1.8 ignorerades det resulterande felet. Dock började 1.8 rapportera felet. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Varför har inte editorn i resultatfönstret för sammanfogning en "ångra"-funktion? </para
+></question
+><answer
+><para
+>Hittills har det varit för stor ansträngning. Du kan alltid återställa en version från en källa (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> eller <guilabel
+>C</guilabel
+>) genom att klicka på motsvarande knapp. För större redigering, rekommenderas användning av en annan editor ändå. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>När jag tog bort en del text, visades plötsligt "&lt;Ingen källrad&gt;" och det kan inte tas bort. Vad betyder det och hur kan man ta bort det? </para
+></question
+><answer
+><para
+>För varje likadant eller annorlunda avsnitt kommer editorn i fönstret med sammanfogningsresultatet ihåg var det börjar och slutar. "&lt;Ingen källrad&gt;" betyder att det inte finns någonting kvar i ett avsnitt, inte ens ett nyradstecken. Detta kan inträffa antingen vid automatisk sammanfogning eller efter redigering. Det är inget problem, eftersom informationen inte finns med i den sparade filen. Om du vill ha tillbaka originalkällan, markera bara källan (klicka på sammanfattningskolumnen till vänster) och klicka därefter på källknappen med innehållet som önskas (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> eller <guilabel
+>C</guilabel
+>). </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Varför stöder inte &kdiff3; syntaxfärgläggning? </para
+></question
+><answer
+><para
+>&kdiff3; använder redan många färger för färgläggning av jämförelser. Ytterligare färgläggning skulle vara förvirrande. Använd en annan editor för detta. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Kan man använda &kdiff3; för att jämföra <trademark class="registered"
+> OpenOffice.org</trademark
+>, <application
+>&Microsoft; Word</application
+>, <application
+>&Microsoft; Excel</application
+>, &PDF;-filer, etc.? </para
+></question
+><answer
+><para
+>Även om &kdiff3; kan analysera alla sorters filer, är resultatet troligen inte särskilt tillfredsställande för dig. </para
+><para
+>&kdiff3; skapades för att jämföra rena textfiler. <trademark class="registered"
+>OpenOffice</trademark
+>, <application
+>&Microsoft; Word</application
+>, <application
+>&Microsoft; Excel</application
+>, och så vidare, lagrar mycket mer information i filerna (om teckensnitt, bilder, sidor, färger, etc.), som &kdiff3; inte känner till. Alltså visar &kdiff3; dig innehållet i filen tolkat som ren text, men det kan vara oläsbart eller åtminstone se mycket konstigt ut. </para
+><para
+>Eftersom de flesta program nuförtiden lagrar sitt innehåll med &XML;-format, kanske du kan läsa det som ren text. Om ändringen bara var liten, kanske &kdiff3; fortfarande kan hjälpa dig. </para
+><para
+>Den bästa lösningen om du bara vill jämföra texten (utan inbäddade objekt som bilder) är att använda menyalternativen <menuchoice
+><guimenu
+>Redigera</guimenu
+><guimenuitem
+>Markera alla</guimenuitem
+></menuchoice
+> och <menuchoice
+><guimenu
+>Redigera</guimenu
+><guimenuitem
+>Kopiera</guimenuitem
+></menuchoice
+> i programmet för att kopiera den intressanta texten till klippbordet och därefter klistra in texten i något av jämförelsefönstren i &kdiff3;. (Se också <link linkend="selections"
+>Markera, kopiera och klistra in</link
+>.) </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Vart har katalogalternativet <guimenuitem
+>Lista bara skillnader</guimenuitem
+> tagit vägen? </para
+></question
+><answer
+><para
+>Det finns nu flera olika <link linkend="selectingvisiblefiles"
+>"Visa"-alternativ</link
+> i menyn <guimenu
+>Katalog</guimenu
+>. Att inaktivera <guimenuitem
+>Visa identiska filer</guimenuitem
+> åstadkommer vad aktivering av <guimenuitem
+>Lista bara skillnader</guimenuitem
+> brukade göra. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Hur kan man göra en stor markering i jämförelsefönstret fastän det tar så lång tid att rulla texten? </para
+></question
+><answer
+><para
+>Påbörja markeringen som vanligt (klicka och håll nere vänster musknapp). Använd därefter navigationstangenterna (t.ex. <keycode
+>Page Up</keycode
+>, <keycode
+>Page Down</keycode
+>) medan vänster musknapp hålls nere. (Se också <link linkend="selections"
+>Markera, kopiera och klistra in</link
+>.) </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Det finns en stor mängd  information här, men din fråga har ändå inte besvarats? </para
+></question
+><answer
+><para
+>Skicka gärna din fråga till mig. Jag uppskattar alla kommentarer. </para
+></answer
+></qandaentry>
+
+</qandaset>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Tack till och licens</title>
+
+<para
+>&kdiff3;: Verktyg för jämförelser och sammanfogning av filer och kataloger </para>
+<para
+>Program copyright 2002-2007 Joachim Eibl <email
+>joachim.eibl snabela gmx.de</email
+> </para>
+<para
+>Flera häftiga idéer och felrapporter kom från kolleger och många personer ute i den Vida Vilda Världen. Tack! </para>
+
+<para
+>Dokumentation Copyright &copy; 2002-2007 Joachim Eibl <email
+>joachim. eibl snabela gmx.de</email
+> </para>
+
+<para
+>Dokumentation Copyright &copy; 2017-2019 Michael Reeves <email
+>reeves.87 snabela gmail.com</email
+> </para>
+
+<para
+>Översättning Stefan Asserhäll<email
+>stefan.asserhall@bredband.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab
+-->

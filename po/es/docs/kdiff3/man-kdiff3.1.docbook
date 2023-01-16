@@ -1,0 +1,452 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Spanish "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Manual del usuario de KDiff3</title>
+<author
+><firstname
+>Burkhard</firstname
+><surname
+>Lueck</surname
+> <contrib
+>Página man de KDiff3.</contrib
+> &Burkhard.Lueck.mail; </author>
+<date
+>2019-02-22</date>
+<releaseinfo
+>kdiff3 1.8</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdiff3</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdiff3</command
+></refname>
+<refpurpose
+>Tool for Comparison and Merge of Files and Directories</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kdiff3</command
+> <arg choice="opt"
+><option
+>-u, --ignore</option
+></arg
+> <arg choice="opt"
+><option
+>--query</option
+></arg
+> <arg choice="opt"
+><option
+>--html</option
+></arg
+> <arg choice="opt"
+><option
+>--abort</option
+></arg
+> <arg choice="opt"
+><option
+>-m, --merge</option
+></arg
+> <arg choice="opt"
+><option
+>-b, --base</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-o, --output</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--out</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--auto</option
+></arg
+> <arg choice="opt"
+><option
+>--qall</option
+></arg
+> <arg choice="opt"
+><option
+>--L1</option
+> <replaceable
+>alias1</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L2</option
+> <replaceable
+>alias2</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L3</option
+> <replaceable
+>alias3</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-L, --fname</option
+> <replaceable
+>alias</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--cs</option
+> <replaceable
+>string</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--confighelp</option
+></arg
+> <arg choice="opt"
+><option
+>--config</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>File1</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>File2</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>File3</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Descripción</title>
+<para
+>Compares two or three input files or directories.</para
+> 
+
+</refsect1>
+
+<refsect1>
+<title
+>Opciones</title>
+<variablelist>
+<varlistentry>
+<term
+><option
+>-u, --ignore</option
+></term>
+<listitem
+><para
+>Ignorado (definido por el usuario). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--query</option
+></term>
+<listitem
+><para
+>Ignorado (definido por el usuario). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--html</option
+></term>
+<listitem
+><para
+>Ignorado (definido por el usuario). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--abort</option
+></term>
+<listitem
+><para
+>Ignorado (definido por el usuario). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-m, --merge</option
+></term>
+<listitem
+><para
+>Fusionar la entrada. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-b, --base</option
+> <replaceable
+>archivo</replaceable
+></term>
+<listitem
+><para
+>Archivo base explícito (para compatibilidad con otras herramientas). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-o, --output</option
+> <replaceable
+>archivo</replaceable
+></term>
+<listitem
+><para
+>Archivo de salida. Implica -m. Por ejemplo: -o archivonuevo.txt </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--out</option
+> <replaceable
+>archivo</replaceable
+></term>
+<listitem
+><para
+>Archivo de salida, también (para compatibilidad con otras herramientas). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--auto</option
+></term>
+<listitem
+><para
+>No mostrar la interfaz gráfica si todos los conflictos se pueden resolver automáticamente (necesita <option
+>-o</option
+> <replaceable
+>archivo</replaceable
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--qall</option
+></term>
+<listitem
+><para
+>Don't solve conflicts automatically. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L1</option
+> <replaceable
+>alias1</replaceable
+></term>
+<listitem
+><para
+>Sustituto de nombre visible para el archivo de entrada 1 (base). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L2</option
+> <replaceable
+>alias2</replaceable
+></term>
+<listitem
+><para
+>Sustituto de nombre visible para el archivo de entrada 2. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L3</option
+> <replaceable
+>alias3</replaceable
+></term>
+<listitem
+><para
+>Sustituto de nombre visible para el archivo de entrada 3. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-L, --fname</option
+> <replaceable
+>alias</replaceable
+></term>
+<listitem
+><para
+>Sustituto alternativo de nombre visible. Debe introducirse una vez para cada entrada. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--cs</option
+> <replaceable
+>texto</replaceable
+></term>
+<listitem
+><para
+>Usar este valor en lugar de una preferencia de configuración. Debe usarlo una vez para cada preferencia. Por ejemplo: <option
+>--cs</option
+> <replaceable
+>AutoAdvance=1</replaceable
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--confighelp</option
+></term>
+<listitem
+><para
+>Mostrar una lista de las preferencias de configuración y sus valores actuales. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--config</option
+> <replaceable
+>archivo</replaceable
+></term>
+<listitem
+><para
+>Usar un archivo de configuración diferente. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Archivo1</replaceable
+></option
+></term>
+<listitem
+><para
+>archivo1 a abrir (base, si no se indica usando --<option
+>base</option
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Archivo2</replaceable
+></option
+></term>
+<listitem
+><para
+>archivo2 a abrir. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Archivo3</replaceable
+></option
+></term>
+<listitem
+><para
+>archivo3 a abrir. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Consulte también</title>
+<simplelist>
+<member
+>Dispone de documentación de usuario más detallada usando <ulink url="help:/kdiff3"
+>help:/kdiff3</ulink
+> (introduzca esta &URL; en &konqueror; o ejecute <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/kdiff3</parameter
+></userinput
+>).</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Autores</title>
+<para
+>Esta página de manual fue escrita por &Burkhard.Lueck; &Burkhard.Lueck.mail;.</para>
+</refsect1>
+
+</refentry>

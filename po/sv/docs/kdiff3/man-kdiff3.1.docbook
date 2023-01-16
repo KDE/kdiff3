@@ -1,0 +1,451 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Swedish "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Kdiff3 användarhandbok</title>
+<author
+><firstname
+>Burkhard</firstname
+><surname
+>Lueck</surname
+> <contrib
+>KDiff3 manualsida.</contrib
+> &Burkhard.Lueck.mail; </author>
+<date
+>2019-02-22</date>
+<releaseinfo
+>kdiff3 1.8</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdiff3</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdiff3</command
+></refname>
+<refpurpose
+>Verktyg för jämförelse och sammanfogning av filer och kataloger</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kdiff3</command
+> <arg choice="opt"
+><option
+>-u, --ignore</option
+></arg
+> <arg choice="opt"
+><option
+>--query</option
+></arg
+> <arg choice="opt"
+><option
+>--html</option
+></arg
+> <arg choice="opt"
+><option
+>--abort</option
+></arg
+> <arg choice="opt"
+><option
+>-m, --merge</option
+></arg
+> <arg choice="opt"
+><option
+>-b, --base</option
+> <replaceable
+>fil</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-o, --output</option
+> <replaceable
+>fil</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--out</option
+> <replaceable
+>fil</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--noauto</option
+></arg
+> <arg choice="opt"
+><option
+>--auto</option
+></arg
+> <arg choice="opt"
+><option
+>--L1</option
+> <replaceable
+>alias1</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L2</option
+> <replaceable
+>alias2</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L3</option
+> <replaceable
+>alias3</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-L, --fname</option
+> <replaceable
+>alias</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--cs</option
+> <replaceable
+>sträng</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--confighelp</option
+></arg
+> <arg choice="opt"
+><option
+>--config</option
+> <replaceable
+>fil</replaceable
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>Fil1</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>Fil2</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>Fil3</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Beskrivning</title>
+<para
+>Jämför två eller tre indatafiler eller -kataloger.</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Alternativ</title>
+<variablelist>
+<varlistentry>
+<term
+><option
+>-u, --ignore</option
+></term>
+<listitem
+><para
+>Ignorera (användardefinierad). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--query</option
+></term>
+<listitem
+><para
+>Ignorera (användardefinierad). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--html</option
+></term>
+<listitem
+><para
+>Ignorera (användardefinierad). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--abort</option
+></term>
+<listitem
+><para
+>Ignorera (användardefinierad). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-m, --merge</option
+></term>
+<listitem
+><para
+>Sammanfoga indata. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-b, --base</option
+> <replaceable
+>fil</replaceable
+></term>
+<listitem
+><para
+>Explicit grundfil. För kompatibilitet med vissa verktyg. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-o, --output</option
+> <replaceable
+>fil</replaceable
+></term>
+<listitem
+><para
+>Utdatafil. Förutsätter -m. T.ex. -o nyfil.txt </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--out</option
+> <replaceable
+>fil</replaceable
+></term>
+<listitem
+><para
+>Utdatafil, igen. (För kompatibilitet med vissa verktyg.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--auto</option
+></term>
+<listitem
+><para
+>Inget grafiskt användargränssnitt om alla konflikter kan lösas automatiskt. (Kräver <option
+>-o</option
+> <replaceable
+>fil</replaceable
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--noauto</option
+></term>
+<listitem
+><para
+>Ignorera --auto och visa alltid användargränssnittet. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L1</option
+> <replaceable
+>alias1</replaceable
+></term>
+<listitem
+><para
+>Synlig namnersättning för indatafil 1 (grund). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L2</option
+> <replaceable
+>alias2</replaceable
+></term>
+<listitem
+><para
+>Synlig namnersättning för indatafil 2. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L3</option
+> <replaceable
+>alias3</replaceable
+></term>
+<listitem
+><para
+>Synlig namnersättning för indatafil 3. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-L, --fname</option
+> <replaceable
+>alias</replaceable
+></term>
+<listitem
+><para
+>Alternativ synlig namnersättning. Använd en gång för varje indata. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--cs</option
+> <replaceable
+>sträng</replaceable
+></term>
+<listitem
+><para
+>Överskrid en inställning. Använd en gång för varje inställning. T.ex. <option
+>--cs</option
+> <replaceable
+>AutoAdvance=1</replaceable
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--confighelp</option
+></term>
+<listitem
+><para
+>Visa en lista över inställningsalternativ och nuvarande värden. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--config</option
+> <replaceable
+>fil</replaceable
+></term>
+<listitem
+><para
+>Använd en annan inställningsfil. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Fil 1</replaceable
+></option
+></term>
+<listitem
+><para
+>Fil 1 att öppna (grund, om ej angiven via --<option
+>base</option
+>) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Fil 2</replaceable
+></option
+></term>
+<listitem
+><para
+>Fil 2 att öppna </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>Fil 3</replaceable
+></option
+></term>
+<listitem
+><para
+>Fil 3 att öppna </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Se också</title>
+<simplelist>
+<member
+>Mer detaljerad användardokumentation är tillgänglig med <ulink url="help:/kdiff3"
+>help:/kdiff3</ulink
+> (skriv antingen in webbadressen i &konqueror;, eller kör <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/kdiff3</parameter
+></userinput
+>)</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Upphovsmän</title>
+<para
+>Den här manualsidan är skriven av &Burkhard.Lueck; &Burkhard.Lueck.mail;.</para>
+</refsect1>
+
+</refentry>

@@ -1,0 +1,4035 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdiff3 "<application
+>KDiff3</application
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Catalan  "INCLUDE">
+]>
+
+<book lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>El manual del &kdiff3;</title>
+
+<authorgroup>
+  <othercredit role="developer"
+><firstname
+>Michael</firstname
+> <surname
+>Reeves</surname
+> <affiliation
+><address
+> <email
+>reeves.87@gmail.com</email>
+    </address
+></affiliation>
+  </othercredit>
+  <othercredit role="developer"
+><firstname
+>Joachim</firstname
+> <surname
+>Eibl</surname
+> <affiliation
+><address
+> <email
+>joachim.eibl at gmx.de</email>
+    </address
+></affiliation>
+  </othercredit>
+&traductor.Antoni.Bella; 
+</authorgroup>
+
+<copyright>
+<year
+>2002-2007</year>
+<holder
+>Joachim Eibl</holder>
+</copyright>
+<copyright>
+<year
+>2017-2019</year>
+<holder
+>Michael Reeves</holder>
+</copyright>
+<!-- Translators: put here the copyright notice of the translation -->
+<!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
+     and in the FDL itself on how to use it. -->
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<!-- Date and version information of the documentation
+Don't forget to include this last date and this last revision number, we
+need them for translation coordination !
+Please respect the format of the date (YYYY-MM-DD) and of the version
+(V.MM.LL), it could be used by automation scripts.
+Do NOT change these in the translation. -->
+
+<date
+>22 de febrer de 2019</date>
+<releaseinfo
+>1.08.70</releaseinfo>
+
+
+<abstract>
+<para
+>El &kdiff3; és una eina per a la comparació i fusió de fitxers i carpetes <itemizedlist>
+<listitem
+><para
+>compara i fusiona dos o tres fitxers o carpetes des de l'entrada,</para
+></listitem>
+<listitem
+><para
+>mostra les diferències línia per línia i caràcter per caràcter (!),</para
+></listitem>
+<listitem
+><para
+>proporciona la facilitat de la fusió automàtica,</para
+></listitem>
+<listitem
+><para
+>té un editor per a la solució còmoda dels conflictes de fusió,</para
+></listitem>
+<listitem
+><para
+>proporciona transparència de xarxa a través del KIO,</para
+></listitem>
+<listitem
+><para
+>té opcions per a ressaltar o ocultar els canvis en els espais en blanc o els comentaris,</para
+></listitem>
+<listitem
+><para
+>admet Unicode, UTF-8 i altres codificacions de fitxer,</para
+></listitem>
+<listitem
+><para
+>imprimeix les diferències,</para
+></listitem>
+<listitem
+><para
+>admet la paraula clau per al control de versions i un historial de les fusions.</para
+></listitem>
+</itemizedlist>
+</para
+><para
+>Aquest document descriu la versió 1.10 del &kdiff3;. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdiff3</keyword>
+<keyword
+>diff</keyword>
+<keyword
+>fusiona</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>diff triple</keyword>
+<keyword
+>compara</keyword>
+<keyword
+>fitxers</keyword>
+<keyword
+>carpetes</keyword>
+<keyword
+>carpetes</keyword>
+<keyword
+>control de versions</keyword>
+<keyword
+>fusió a tres bandes</keyword>
+<keyword
+>diferències a la línia</keyword>
+<keyword
+>sincronitza</keyword>
+<keyword
+>kpart</keyword>
+<keyword
+>kio</keyword>
+<keyword
+>transparent a la xarxa</keyword>
+<keyword
+>editor</keyword>
+<keyword
+>espai en blanc</keyword>
+<keyword
+>comentaris</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction"
+><title
+>Introducció</title>
+<sect1 id="why"
+><title
+>Un altre frontal de diferències?</title>
+<para
+>Hi ha diverses eines gràfiques de diferències. Perquè triar el &kdiff3;? Deixeu-me dir perquè el vaig escriure. </para
+><para
+>El &kdiff3; va començar perquè vaig haver de fer una fusió difícil. La fusió és necessària quan diverses persones treballen en els mateixos fitxers en un projecte. Una fusió pot ser una cosa automatitzada, quan l'eina de fusió no només té fitxers nous (anomenats «branques»), sinó també el fitxer original (anomenat «base»). L'eina de fusió prendrà qualsevol modificació que només s'hagi realitzat en una branca. Quan diversos col·laboradors canvien les mateixes línies, l'eina de fusió detectarà els conflictes que s'han de resoldre manualment. </para
+><para
+>Llavors la fusió serà difícil perquè un col·laborador ha canviat moltes coses i ha corregit el sagnat en molts llocs. Un altre col·laborador també ha canviat molt text en el mateix fitxer, el qual ha resultat en diversos conflictes de fusió. </para
+><para
+>L'eina que vaig emprar llavors, només mostrava les línies canviades, però no el que s'havia canviat dins d'aquestes línies. I no hi havia informació només sobre on s'havia canviat el sagnat. La fusió va ser un petit malson. </para
+><para
+>De manera que aquest va ser el començament. La primera versió podia mostrar les diferències dins d'una línia i mostrava les diferències dels espais en blanc. Més tard es van anar afegint moltes altres característiques per a fer augmentar la utilitat. </para
+><para
+>Per exemple, si voleu comparar un text amb rapidesa, podreu copiar-lo al porta-retalls i enganxar-lo a qualsevol de les finestres de diferències. </para
+><para
+>Una característica que va requerir un gran esforç va ser la facilitat de comparació i fusió de les carpetes, la qual va convertir el programa gairebé en tot un navegador de fitxers. </para
+><para
+>Espero que el &kdiff3; també funcioni per a vosaltres. Gaudiu-ne! </para
+><para
+>Joachim Eibl (2003) </para>
+</sect1>
+
+<sect1 id="screenshots"
+><title
+>Captures de pantalla i característiques</title>
+<para
+>Aquesta captura de pantalla mostra la diferència entre dos fitxers de text (emprant una versió inicial del &kdiff3;):</para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+
+<para
+>La fusió a 3 bandes està totalment admesa. Aquesta és útil si dues persones canvien el codi de forma independent. El fitxer original (la base) s'utilitzarà per a ajudar al &kdiff3; a seleccionar automàticament els canvis correctes. L'editor de la fusió que hi ha a sota les finestres de diferències permet resoldre els conflictes, mentre mostra el resultat que obtindreu. Fins i tot podreu editar la sortida. Aquesta captura de pantalla mostra els tres fitxers fusionats des de l'entrada: </para
+><para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</para>
+
+<para id="dirmergebigscreenshot"
+>El &kdiff3; també ajuda a comparar i fusionar carpetes senceres. Aquesta captura de pantalla mostra el &kdiff3; durant una fusió de carpetes: </para
+><para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="dirmergebig.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</para>
+</sect1>
+
+<sect1 id="features"
+><title
+>Més característiques</title>
+<sect2
+><title
+>Visualitzador de diferències línia per línia i caràcter per caràcter</title>
+<para
+>En utilitzar les possibilitats d'una pantalla gràfica en color, el &kdiff3; mostrarà amb exactitud quina és la diferència. Us agradarà quan hàgiu de fer moltes revisions de codi. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="letter_by_letter.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Vegeu d'una mirada les diferències en els espais en blanc</title>
+<para
+>Els espais i les tabulacions que difereixen apareixeran visibles. Quan les línies només difereixin en la quantitat d'espais en blanc, això es veurà d'una ullada a la columna del resum al costat esquerre. (No més preocupacions quan algú canviï el sagnat). </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="white_space.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Diferències triples</title>
+<para
+>Analitzeu tres fitxers i vegeu en què difereixen. </para
+><para
+>Les finestres esquerra/mig/dreta s'anomenen <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> i tenen el color blau/verd/magenta respectivament. </para
+><para
+>Si un fitxer és el mateix i un fitxer és diferent en una línia, el color mostrarà quin fitxer difereix. El color vermell indicarà que els altres dos fitxers són diferents. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="triple_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Fusió còmoda de dos o tres fitxers des de l'entrada</title>
+<para
+>Es pot emprar el &kdiff3; per a fusionar dos o tres fitxers des de l'entrada i els fusionarà automàticament tant com sigui possible. El resultat es presentarà en una finestra editable on la majoria dels conflictes es podran resoldre amb un sol clic del ratolí: Seleccioneu els respectius botons <guibutton
+>...</guibutton
+> a les finestres <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> per a seleccionar la font que s'emprarà. També podreu seleccionar més d'una font. Atès que aquesta finestra de sortida és un editor, fins i tot els conflictes que necessiten correccions addicionals es podran resoldre aquí sense requerir cap altra eina. </para>
+</sect2>
+
+<sect2
+><title
+>I...</title>
+<itemizedlist>
+   <listitem
+><para
+>Navegació ràpida mitjançant botons.</para
+></listitem>
+   <listitem
+><para
+>Un clic del ratolí en una columna del resum sincronitzarà totes les finestres per a mostrar la mateixa posició.</para
+></listitem>
+   <listitem
+><para
+>Seleccioneu i copieu des de qualsevol finestra i enganxeu-ho a la finestra de resultats de la fusió.</para
+></listitem>
+   <listitem
+><para
+>Columna de la visió de conjunt que mostra on es troben els canvis i els conflictes.</para
+></listitem>
+   <listitem
+><para
+>Els colors es poden ajustar a les vostres preferències específiques.</para
+></listitem>
+   <listitem
+><para
+>Mida ajustable de la pestanya.</para
+></listitem>
+   <listitem
+><para
+>Opció per a inserir espais en lloc de tabulacions.</para
+></listitem>
+   <listitem
+><para
+>Obriu fitxers amb comoditat mitjançant el diàleg o especifiqueu els fitxers a la línia d'ordres.</para
+></listitem>
+   <listitem
+><para
+>Cerqueu cadenes en totes les finestres de text amb els elements de menú <menuchoice
+><guimenu
+>Edita</guimenu
+><guimenuitem
+>Cerca</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) i <menuchoice
+><guimenu
+>Edita</guimenu
+><guimenuitem
+>Cerca la següent</guimenuitem
+></menuchoice
+> (<keycap
+>F3</keycap
+>).</para
+></listitem>
+   <listitem
+><para
+>Mostra els números de línia per a cada línia. </para
+></listitem>
+   <listitem
+><para
+>Enganxeu des del porta-retalls o arrossegueu el text a una finestra d'entrada de diferències.</para
+></listitem>
+   <listitem
+><para
+>Transparència de xarxa a través del KIO.</para
+></listitem>
+   <listitem
+><para
+>Es pot emprar com a visualitzador de diferències des del &kdevelop; 3.</para
+></listitem>
+   <listitem
+><para
+>Ajust de les paraules per a les línies llargues.</para
+></listitem>
+   <listitem
+><para
+>Admet Unicode, UTF-8 i altres còdecs.</para
+></listitem>
+   <listitem
+><para
+>Admet els idiomes de dreta a esquerra.</para
+></listitem>
+   <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="documentation"
+><title
+>Comparar i fusionar fitxers</title>
+
+<sect1 id="commandline"
+><title
+>Opcions de la línia d'ordres</title>
+
+<sect2
+><title
+>Comparar 2 fitxers: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>fitxer_1 fitxer_2</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Fusionar 2 fitxers: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>fitxer_1 fitxer_2</replaceable
+> -m
+   <command
+>kdiff3</command
+> <replaceable
+>fitxer_1 fitxer_2</replaceable
+> -o <replaceable
+>fitxer_de_sortida</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Comparar 3 fitxers: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>fitxer_1 fitxer_2 fitxer_3</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Fusionar 3 fitxers: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>fitxer_1 fitxer_2 fitxer_3</replaceable
+> -m
+<command
+>kdiff3</command
+> <replaceable
+>fitxer_1 fitxer_2 fitxer_3</replaceable
+> -o <replaceable
+>fitxer_de_sortida</replaceable
+>
+</screen>
+<para
+>Cal tenir en compte que el <replaceable
+>fitxer_1</replaceable
+> es tractarà com la base del <replaceable
+>fitxer_2</replaceable
+> i el <replaceable
+>fitxer_3</replaceable
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Cas especial: fitxers amb el mateix nom </title>
+<para
+>Si tots els fitxers tenen el mateix nom però estan en carpetes diferents, podreu reduir el treball de tipografia especificant el nom de fitxer només per al primer fitxer, &pex;: </para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>carpeta_1/nom_fitxer carpeta_2 carpeta_3</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Línia d'ordres per a iniciar una comparació o fusió de carpetes: </title>
+<para
+>Això és molt similar, però ara es tracta de carpetes.</para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>carpeta_1 carpeta_2</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>carpeta_1 carpeta_2</replaceable
+> -o <replaceable
+>carpeta_de_destinació</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>carpeta_1 carpeta_2 carpeta_3</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>carpeta_1 carpeta_2 carpeta_3</replaceable
+> -o <replaceable
+>carpeta_de_destinació</replaceable
+>
+</screen>
+<para
+>Per a comparar i fusionar carpetes, encara podeu continuar llegint <link linkend="dirmerge"
+>aquí</link
+>.</para>
+</sect2>
+
+<sect2
+><title
+>D'altres opcions a la línia d'ordres</title>
+<para
+>Per a veure tots els tipus d'opcions disponibles de la línia d'ordres, escriviu</para>
+<screen
+><command
+>kdiff3</command
+> --help
+</screen>
+<para
+>Sortida d'exemple:</para>
+<screen
+>Opcions:
+  -m, --merge               Fusiona l'entrada.
+  -b, --base fitxer         Fitxer base explícit. Per compatibilitat amb certes eines.
+  -o, --output fitxer       Fitxer de sortida. Implica -m. P. ex.: -o fitxer_nou.txt
+  --out fitxer              Fitxer de sortida, de nou. (Per compatibilitat amb certes eines).
+  --noauto                  Ignora --auto i mostra sempre la IGU.
+  --auto                    Sense IGU si tots els conflictes es poden resoldre automàticament. (Necessita -o fitxer)
+  --L1 àlies_1              Substitueix el nom visible per al fitxer d'entrada 1 (base).
+  --L2 àlies_2              Substitueix el nom visible per al fitxer d'entrada 2.
+  --L3 àlies_3              Substitueix el nom visible per al fitxer d'entrada 3.
+  -L, --fname àlies         El nom visible alternatiu per a la substitució. Proporcioneu-lo una vegada per a cada entrada.
+  --cs cadena               Substitueix una opció de la configuració. Useu-lo un cop per a cada opció. P. ex.: --cs "AutoAdvance=1"
+  --confighelp              Mostra una llista de les opcions de configuració amb els valors actuals.
+  --config fitxer           Usa un fitxer de configuració diferent.
+</screen>
+<para
+>L'opció <option
+>--cs</option
+> permet ajustar un valor de configuració que d'una altra manera només es podrà ajustar a través dels diàlegs de configuració. Fixeu-vos, que quan finalitzi el &kdiff3;, el valor modificat s'emmagatzemarà juntament amb les altres opcions. Amb <option
+>--confighelp</option
+> trobareu els noms dels elements disponibles amb el seu valor actual.</para>
+<para
+>Mitjançant <option
+>--config</option
+> podreu especificar un fitxer de configuració diferent. Quan empreu sovint el &kdiff3; amb configuracions completament diferents, això permetrà canviar amb facilitat entre elles.</para>
+</sect2>
+<sect2
+><title
+>Opcions a ignorar de la línia d'ordres</title>
+<para
+>Molta gent vol emprar el &kdiff3; amb algun sistema per al control de versions. Però quan aquest sistema per al control de versions crida al &kdiff3; utilitzant paràmetres de la línia d'ordres que el &kdiff3; no reconeix, llavors el &kdiff3; finalitzarà amb un error. L'element <guilabel
+>Integració</guilabel
+> en el diàleg de configuració permet especificar paràmetres de la línia d'ordres que el &kdiff3; haurà d'ignorar. Apareixeran en l'ús de l'ajuda com en aquest exemple:</para>
+<screen
+>--<replaceable
+>foo</replaceable
+>                     Ignorada. (Definida per l'usuari).
+</screen>
+<variablelist>
+  <varlistentry
+><term
+><guilabel
+>Opcions a ignorar de la línia d'ordres:</guilabel
+></term
+><listitem
+><para
+>Una llista d'opcions, separades per punt i coma «;». Quan aparegui una d'aquestes opcions a la línia d'ordres, el &kdiff3; la ignorarà i s'executarà sense informar d'un error. (De manera predeterminada és «<literal
+>u;query;html;abort</literal
+>»).</para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Quan això no és suficient, es recomana escriure un script d'intèrpret d'ordres que faci la traducció de l'opció.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="opendialog"
+><title
+>Diàleg d'obertura</title>
+<para
+>Atès que la majoria dels fitxers d'entrada hauran de ser seleccionables, el programa té un diàleg d'obertura especial: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="open_dialog.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>El diàleg d'obertura permet editar els noms dels fitxers, seleccionant un fitxer mitjançant l'explorador de fitxers mitjançant botó <guibutton
+>Fitxer...</guibutton
+> o permet escollir fitxers recents des de les llistes desplegables. Si torneu a obrir el diàleg, els noms actuals encara hi romandran. El tercer fitxer d'entrada no és obligatori. Si l'entrada per a <guilabel
+>C</guilabel
+> roman buida, només es realitzarà una anàlisi de diferències entre dos fitxers. </para
+><para
+>També podreu seleccionar una carpeta mitjançant el botó <guibutton
+>Carpeta...</guibutton
+>. Si s'especifica una carpeta per a <guilabel
+>A</guilabel
+>, s'iniciarà una comparació/fusió de carpetes. Si <guilabel
+>A</guilabel
+> especifica un fitxer però <guilabel
+>B</guilabel
+>, <guilabel
+>C</guilabel
+> o la sortida especifiquen una carpeta, llavors el &kdiff3; utilitzarà el nom de fitxer d'<guilabel
+>A</guilabel
+> en les carpetes especificades. </para
+><para
+>Si se selecciona la casella de selecció <guilabel
+>Fusiona</guilabel
+>, llavors la línia <guilabel
+>Sortida</guilabel
+> esdevindrà editable. Però no caldrà especificar immediatament el nom del fitxer de sortida. També ho podreu posposar fins al desament. </para
+><para
+>El botó <guibutton
+>Configura...</guibutton
+> obrirà el diàleg de configuració, de manera que podreu establir les opcions abans d'executar l'anàlisi. </para>
+</sect1>
+
+<sect1 id="pasteinput"
+><title
+>Enganxar i arrossegar a l'entrada</title>
+<para
+>De vegades voldreu comparar parts d'un text que no prové d'un fitxer. El &kdiff3; també permet enganxar text des del porta-retalls a la finestra d'entrada de diferències que té el focus. L'anàlisi de les diferències ocorrerà immediatament. En el diàleg d'obertura no necessitareu especificar cap fitxer, simplement tanqueu-lo mitjançant el botó <guibutton
+>Cancel·la</guibutton
+>. </para
+><para
+>També podreu utilitzar l'acció arrossegar i deixar anar: arrossegueu un fitxer des d'un gestor de fitxers o el text seleccionat des d'un editor i deixeu-lo anar en una finestra d'entrada de diferències. </para
+><para
+>Quina és la idea? De vegades, un fitxer contindrà dues funcions similars, però comprovar com són de similars en realitat és un gran esforç si primer heu de crear dos fitxers i després carregar-los. Ara podreu simplement copiar, enganxar i comparar les seccions rellevants. </para
+><note
+><para
+>Actualment no es pot arrossegar res des del &kdiff3;. Només s'admet deixar anar a la finestra d'entrada de diferències. </para
+></note
+><warning
+><para
+>Alguns editors encara interpreten l'arrossegament i deixat anar en un altre programa com un retallat (en lloc de copiat) i enganxat. Llavors podríeu perdre les vostres dades originals. </para
+></warning>
+</sect1>
+
+<sect1 id="interpretinginformation"
+><title
+>Comparar fitxers i interpretar la informació a les finestres d'entrada</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<sect2
+><title
+>Línia d'informació</title
+><para
+>A la part superior de cada finestra de text es troba la seva «línia d'informació». Les línies d'informació de les finestres d'entrada contenen una lletra <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> o <guilabel
+>C</guilabel
+>, el nom editable del fitxer, un botó per a examinar i el número de línia de la primera línia visible a la finestra. (Cal tenir en compte que la finestra <guilabel
+>C</guilabel
+> és opcional). Cada línia d'informació apareix en un color diferent. </para
+><para
+>Quan seleccioneu un altre fitxer mitjançant l'exploració o acabeu d'editar el nom del fitxer prement &Intro;, el fitxer nou es carregarà i es compararà amb el/s fitxer/s ja carregat/s. </para
+></sect2
+><sect2
+><title
+>Donar color</title
+><para
+>Les tres finestres d'entrada tenen assignades les lletres <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> i <guilabel
+>C</guilabel
+>. <guilabel
+>A</guilabel
+> té color blau, <guilabel
+>B</guilabel
+> té verd i <guilabel
+>C</guilabel
+> té magenta. (Aquests són els valors predeterminats, però es poden canviar a l'element <guilabel
+>Color</guilabel
+> en el diàleg de configuració). </para
+><para
+>Quan es detecta una diferència, el color mostrarà quin fitxer d'entrada difereix. Quan difereixen els altres dos fitxers d'entrada, el color utilitzat per a expressar-ho serà el vermell de manera predeterminada (l'opció <guilabel
+>Color del conflicte</guilabel
+> a l'element <guilabel
+>Color</guilabel
+> en el diàleg de configuració). Aquest esquema de colors és especialment útil en el cas de tres fitxers d'entrada, els quals es veuran a la següent secció (<link linkend="merging"
+>Fusionar</link
+>). </para
+></sect2
+><sect2
+><title
+>Columna del resum</title
+><para
+>A l'esquerra de cada text hi ha la columna del «resum». Si ocorre cap diferència en una línia, la columna del resum mostrarà el color respectiu. Per a una diferència de només espais en blanc, el resum estarà marcat. Per als llenguatges de programació on l'espai en blanc no és tan important, això és útil per a veure d'una ullada si s'ha modificat quelcom important. (En C/C++, l'espai en blanc només és interessant dins de les cadenes, comentaris, per al preprocessador i en algunes situacions molt esotèriques). </para
+><para
+>La línia vertical que separa la columna del resum i el text s'interromprà si el fitxer d'entrada no hi tenia línies. Quan estigui habilitat l'ajust de paraules, aquesta línia vertical apareixerà puntejada per a les línies ajustades. </para
+></sect2
+><sect2
+><title
+>Columna de la visió de conjunt</title
+><para
+>A la part dreta, es veu una columna «visió de conjunt» a l'esquerra de la barra de desplaçament vertical. Mostra la columna del resum comprimida de l'entrada <guilabel
+>A</guilabel
+>. Totes les diferències i els conflictes seran visibles d'una ullada. Quan només s'emprin dues finestres d'entrada, totes les diferències apareixeran aquí en vermell perquè cada diferència també és un conflicte. Un rectangle negre emmarcarà la part visible de les entrades. Per als fitxers d'entrada molt llargs, quan el nombre de línies d'entrada sigui més gran que l'alçada de la columna del resum en píxels, diverses línies d'entrada compartiran una línia del resum. Llavors, un conflicte tindrà la màxima prioritat sobre les diferències senzilles, les quals tindran prioritat sobre sense canvis, de manera que aquí no es perdrà cap diferència o conflicte. En fer clic a dins d'aquesta columna del resum, es mostrarà el text corresponent. </para
+></sect2
+><sect2 id="manualdiffhelp"
+><title
+>Alinear les línies manualment</title
+><para
+>De vegades, l'algoritme col·loca línies incorrectes una al costat de l'altra. O voldreu comparar una part del text amb el text en una posició completament diferent en l'altre fitxer. Per a aquestes situacions, podreu indicar manualment al &kdiff3; que s'alineï amb certes línies. Seleccioneu amb el ratolí el text per al qual voleu millorar l'alineació com ho faríeu per a copiar i enganxar a la primera vista de diferències i després escolliu l'element de menú <menuchoice
+><guimenu
+>Vista de les diferències</guimenu
+><guimenuitem
+>Afegeix alineació manual de les diferències</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+>). Apareixerà una barra taronja a la columna de la visió de conjunt al costat del text triat. Repetiu-ho per a la segona i (si està disponible) per a la tercera vista de diferències. El &kdiff3; tornarà immediatament a calcular les diferències cada vegada que ho feu, i alinearà les línies triades. Per descomptat, algunes de les línies intermèdies prèviament coincidents podrien no coincidir més. </para
+><para
+>Actualment, la fusió no admet l'ús de l'ajuda del manual de «diff». </para
+></sect2
+><sect2 id="joinsplitsections"
+><title
+>Unir i dividir manualment seccions del «diff»</title
+><para
+>En alguns casos, el &kdiff3; veurà massa o molt poques seccions de diferències a fusionar. En aquest cas, podreu unir o dividir les seccions existents. </para
+><para
+>Afegiu seccions noves seleccionant primer el text en les línies que estan juntes en qualsevol finestra d'entrada (com per a copiar al porta-retalls). Després trieu l'element de menú <menuchoice
+><guimenu
+>Fusiona</guimenu
+><guimenuitem
+>Divideix les diferències a la selecció</guimenuitem
+></menuchoice
+>. Les divisions s'afegiran a sobre de la primera línia i a sota de l'última línia del text seleccionat. Si només voleu afegir una secció, seleccioneu el text que comença en una altra secció dividida. </para
+><para
+>Per a unir seccions en qualsevol finestra d'entrada, seleccioneu quelcom en les línies de les seccions a unir. (També podreu unir diverses seccions en un sol pas). Després, trieu l'element de menú <menuchoice
+><guimenu
+>Fusiona</guimenu
+><guimenuitem
+>Uneix les diferències seleccionades</guimenuitem
+></menuchoice
+>. </para
+></sect2>
+</sect1>
+
+
+<sect1 id="merging"
+><title
+>Fusionar i la finestra de l'editor per a la sortida de la fusió</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>La finestra de l'editor per a la sortida de la fusió (a sota de les finestres d'entrada de diferències) també té una línia d'informació a la part superior que mostra <guilabel
+>Sortida:</guilabel
+>, el nom del fitxer i l'etiqueta <replaceable
+>[Modificat]</replaceable
+> si heu editat quelcom. En general, contindrà una mica de text mitjançant les instal·lacions de fusió automàtica, però sovint també contindrà conflictes. </para
+><para
+>El desament estarà inhabilitat fins que es resolguin tots els conflictes! (Utilitzeu els botons <guibutton
+>Ves al conflicte no resolt anterior/següent</guibutton
+> per a trobar els conflictes restants). </para
+><para
+>Amb només dos fitxers d'entrada, cada diferència també és un conflicte que s'haurà de resoldre manualment. </para
+><para
+>Amb tres fitxers d'entrada, el primer fitxer es tractarà com a base, mentre que el segon i el tercer contindran les modificacions. Quan en qualsevol línia només hagin canviat l'entrada <guilabel
+>B</guilabel
+> o <guilabel
+>C</guilabel
+> però no totes dues, llavors se seleccionarà automàticament la font canviada. Només quan <guilabel
+>B</guilabel
+> i <guilabel
+>C</guilabel
+> hagin canviat en les mateixes línies, l'eina detectarà un conflicte que s'haurà de resoldre manualment. Quan <guilabel
+>B</guilabel
+> i <guilabel
+>C</guilabel
+> siguin iguals, però no iguals que <guilabel
+>A</guilabel
+>, llavors se seleccionarà <guilabel
+>C</guilabel
+>. </para
+><sect2
+><title
+>La columna del resum</title
+><para
+>La finestra de l'editor per a la sortida de la fusió també té una columna del resum a l'esquerra. Mostra la lletra de l'entrada des de la qual s'ha seleccionat una línia o res si les tres fonts són iguals en una línia. Per als conflictes, mostrarà un signe d'interrogació «?» i la línia mostrarà «&lt;Conflicte de fusió&gt;», tot en vermell. Com resoldre els conflictes línia per línia triga molt temps, les línies s'agruparan en grups que tenen la mateixa diferència i característiques del conflicte. Però només els conflictes d'espai en blanc se separaran dels conflictes que no són d'espai en blanc per a facilitar la fusió dels fitxers si el sagnat s'ha canviat en moltes línies. </para
+></sect2
+><sect2 id="synchronise_views"
+><title
+>Establir el grup actual, sincronitzar la fusió i la posició de la vista de les diferències</title
+><para
+>En fer clic a dins de la columna del resum amb el &BER; a qualsevol finestra, el començament del grup que pertanyi a aquesta línia es mostrarà en totes les finestres. Aquest grup es convertirà en el «grup actual». Es ressaltarà amb l'opció <guilabel
+>Color de fons de les diferències de l'interval actual</guilabel
+> de l'element <guilabel
+>Integració</guilabel
+> en el diàleg de configuració i apareixerà una barra negra a la banda esquerra del text. </para
+></sect2
+><sect2
+><title
+>Triar les entrades A, B o C per als conflictes actuals i editar</title
+><para
+>La barra de botons que hi ha a sota de la barra de menús conté tres botons selectors d'entrada que contenen les lletres <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> i <guilabel
+>C</guilabel
+>. Feu clic al botó selector d'entrada per a inserir (o eliminar si ja està inserit) les línies des de la respectiva font. Per a triar les línies des de diverses entrades, feu clic als botons respectius en l'ordre necessari. Per exemple, si voleu que les línies de <guilabel
+>B</guilabel
+> apareguin a la sortida abans que les línies d'<guilabel
+>A</guilabel
+>, primer feu clic a <guilabel
+>B</guilabel
+> i després a <guilabel
+>A</guilabel
+>. </para
+><para
+>Si utilitzeu el botó <guibutton
+>Ves automàticament al conflicte no resolt següent després de seleccionar una font</guibutton
+> (vegeu la secció <link linkend="autoadvance"
+>Avanç automàtic</link
+>), haureu d'inhabilitar això abans d'escollir línies des de diverses entrades o si voleu editar les línies després de la vostra elecció. Altrament, el &kdiff3; saltarà al següent conflicte després de triar la primera entrada. </para
+><para
+>Sovint és útil editar directament la sortida de la fusió. La columna del resum mostrarà «m» per a cada línia que s'ha modificat manualment. Quan, per exemple, les diferències estiguin alineades de manera que simplement triar les entrades no serà satisfactori, podreu marcar el text necessari i utilitzar copia i enganxa normalment per a col·locar-ho a la sortida de la fusió. </para
+><para
+>De vegades, quan s'elimina una línia, sigui per fusió automàtica o per edició, i no queden altres línies en aquest grup, llavors apareixerà el text «&lt;La línia no és codi&gt;» en aquesta línia. Només es tracta d'un marcador de posició per al grup per a quan pugueu canviar d'opinió i seleccionar de nou alguna font. Aquest text no apareixerà al fitxer desat ni en cap selecció que vulgueu copiar i enganxar. </para
+><para
+>El text «&lt;Conflicte de fusió&gt;» apareixerà en el porta-retalls si copieu i enganxeu algun text que contingui aquesta línia. Però així i tot aneu amb compte en fer-ho. </para
+></sect2
+><sect2
+><title
+>Triar l'entrada A, B o C per a tots els conflictes</title
+><para
+>La fusió normal començarà resolent automàticament els conflictes senzills. Però el menú <guimenu
+>Fusiona</guimenu
+> proporciona algunes accions per a altres necessitats habituals. Si heu de seleccionar la mateixa font per a la majoria dels conflictes, podreu triar <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> o <guilabel
+>C</guilabel
+> a tot arreu, o només per als conflictes restants sense resoldre, o per als conflictes d'espais en blanc sense resoldre. Si voleu decidir cada diferència d'espai, podreu fer <guimenuitem
+>Estableix les diferències d'espais com a conflictes</guimenuitem
+>. O si voleu tornar a les opcions automàtiques del &kdiff3;, seleccioneu <guimenuitem
+>Resol automàticament els conflictes senzills</guimenuitem
+>. Després, el &kdiff3; tornarà a iniciar la fusió. Per a accions que canviïn les vostres modificacions anteriors, el &kdiff3; demanarà la vostra confirmació abans de continuar. </para
+><note
+><para
+>En triar una font per als conflictes dels espais en blanc sense resoldre i s'emprin les opcions <guilabel
+>Ignora els números (tracta'ls com a espais en blanc)</guilabel
+> o <guilabel
+>Ignora els comentaris de C/C++ (tracta'ls com a espais en blanc)</guilabel
+> a l'element <guilabel
+>Diff</guilabel
+> en el diàleg de configuració són emprades de manera que els canvis en els números o comentaris també es tractaran com a espais en blanc. </para
+></note
+></sect2
+><sect2 id="vcskeywordsmergesupport"
+><title
+>Fusió automàtica de les paraules clau i l'historial en el control de versions (registre)</title
+><para
+>Molts sistemes per al control de versions admeten paraules clau especials al fitxer. (P. ex., «<literal
+>&#36;Date&#36;</literal
+>», «<literal
+>&#36;Header&#36;</literal
+>», «<literal
+>&#36;Author&#36;</literal
+>», «<literal
+>&#36;Log&#36;</literal
+>», &etc;) Durant el registre, el sistema per al control de versions (VCS) canvia aquestes línies. Per exemple, «<literal
+>&#36;Date&#36;</literal
+>» es convertirà en «<literal
+>&#36;Date: 2005/03/22 18:45:01 &#36;</literal
+>». Atès que aquesta línia serà diferent en cada versió del fitxer, requerirà la interacció manual durant la fusió. </para
+><para
+>El &kdiff3; ofereix la fusió automàtica per a aquests elements a l'element <guilabel
+>Fusiona</guilabel
+> en el diàleg de configuració. Per a les línies senzilles que coincideixen amb l'opció <guilabel
+>Fusiona automàticament amb l'expressió regular</guilabel
+> en tots els fitxers d'entrada, el &kdiff3; triarà la línia des de <guilabel
+>B</guilabel
+> o, si està disponible, des de <guilabel
+>C</guilabel
+>. (A més, cal que les línies en qüestió s'alineïn en la comparació i la línia anterior no contingui cap conflicte). Aquesta fusió automàtica pot executar-se immediatament després que comenci una fusió (activeu l'opció <guilabel
+>Executa la fusió automàtica amb l'expressió regular a l'inici de la fusió</guilabel
+>) o més tard mitjançant l'element de menú <menuchoice
+><guimenu
+>Fusiona</guimenu
+><guimenuitem
+>Executa la fusió automàtica amb l'expressió regular</guimenuitem
+></menuchoice
+>. </para
+><para
+>També s'admet la fusió automàtica per a l'historial del control de versions (també anomenat «registre»). La fusió automàtica de l'historial pot executar-se immediatament quan comença la fusió activant l'opció <guilabel
+>Fusiona l'historial del control de versions quan es comenci a fusionar</guilabel
+> a l'element <guilabel
+>Fusiona</guilabel
+> en el diàleg de configuració o més tard mitjançant l'element de menú <menuchoice
+><guimenu
+>Fusiona</guimenu
+><guimenuitem
+>Resol automàticament els conflictes cronològics</guimenuitem
+></menuchoice
+>. </para
+><para
+>En general, l'historial del control de versions comença amb una línia que conté la paraula clau «<literal
+>&#36;Log&#36;</literal
+>». Aquesta haurà de coincidir amb l'opció <guilabel
+>Expressió regular per a l'inici de l'historial:</guilabel
+> a l'element <guilabel
+>Fusiona</guilabel
+> en el diàleg de configuració. El &kdiff3; detectarà quines línies posteriors hi ha a l'historial mitjançant l'anàlisi dels caràcters principals que precedeixen a la paraula clau «<literal
+>&#36;Log&#36;</literal
+>». Si també apareixen els mateixos caràcters de «comentari principal» en les següents línies, també s'inclouran a l'historial. </para
+><para
+>Durant cada registre, el VCS escriu una línia única que especifica la informació de la versió, data i hora seguida de les línies amb els comentaris de l'usuari. Aquestes línies formen una entrada a l'historial. Aquesta secció de l'historial creixerà amb cada registre i les entrades més recents apareixeran a la part superior (després de la línia d'inici de l'historial). </para
+><para
+>Quan per al desenvolupament en paral·lel dos o més desenvolupadors registrin en una branca del fitxer, l'historial de fusió contindrà diverses entrades que apareixeran com a conflictes durant la fusió de les branques. Atès que fusionar-les pot tornar-se molt tediós, el &kdiff3; ofereix suport amb dues estratègies possibles: simplement inserir a la part superior la informació de l'historial d'ambdós col·laboradors o ordenar la informació de l'historial amb una clau definida per l'usuari. </para
+><para
+>El mètode de simplement inserir totes les entrades és més fàcil de configurar. El &kdiff3; només necessita un mètode per a detectar quines línies pertanyen a una entrada de l'historial. La majoria dels VCS insereixen una línia buida després de cada entrada de l'historial. Si no hi ha altres línies buides, aquest és un criteri suficient per al &kdiff3;. Simplement establiu una <guilabel
+>Expressió regular per a l'inici d'entrada de l'historial</guilabel
+> buida a l'element <guilabel
+>Fusiona</guilabel
+> en el diàleg de configuració. Si el criteri de línia buida no és suficient, podreu especificar una expressió regular per a detectar el començament de l'entrada de l'historial. </para
+><para
+>Cal tenir present que el &kdiff3; eliminarà les entrades duplicades de l'historial. Si una entrada de l'historial aparèixer diverses vegades en l'historial d'un fitxer d'entrada, només quedarà una entrada a la sortida. </para
+><para
+>Si voleu ordenar l'historial, haureu d'especificar com s'haurà de construir la clau d'ordenació. Utilitzeu parèntesis a l'<guilabel
+>Expressió regular per a l'inici d'entrada de l'historial</guilabel
+> a l'element <guilabel
+>Fusiona</guilabel
+> en el diàleg de configuració per a agrupar parts de l'expressió regular que després s'utilitzaran per a la clau d'ordenació. Després, especifiqueu el <guilabel
+>Criteri d'ordenació de les claus per a l'inici de l'entrada de l'historial</guilabel
+>, especificant una llista separada per comes «,» dels números que es refereixen a la posició del grup en l'expressió regular. </para
+><para
+>A causa que això no és tan fàcil de fer immediatament, podreu provar i millorar les expressions regulars i la generació de les claus en un diàleg dedicat prement el botó <guibutton
+>Comprova les expressions regulars</guibutton
+>. </para
+><para
+>Exemple: suposem un historial similar a aquest: </para>
+<screen
+>/**************************************************************************
+** HISTORY:    &#36;Log: \toms_merge_main_view\MyApplication\src\complexalgorithm.cpp &#36;
+**
+**     \main\integration_branch_12   2 Apr 2001 10:45:41   tom
+**  Merged branch simon_branch_15.
+**
+**     \main\henry_bugfix_branch_7\1   30 Mar 2001 19:22:05   henry
+**  Improved the speed for subroutine convertToMesh().
+**  Fixed crash.
+**************************************************************************/
+</screen>
+<para
+>La línia d'inici de l'historial coincideix amb l'expressió regular «<literal
+>.*\&#36;Log.*\&#36;.*</literal
+>». Després segueixen les entrades de l'historial. </para
+><para
+>La línia amb la paraula clau «<literal
+>&#36;Log&#36;</literal
+>» comença amb dos «*», després dels quals segueix un espai. El &kdiff3; utilitzarà la primera cadena que no sigui un espai en blanc com a «comentari principal» i suposarà que l'historial acaba en la primera línia sense aquest comentari principal. En aquest exemple, l'última línia acaba amb una cadena que també comença amb dos «*», però en lloc d'un caràcter d'espai més segueix «*». Per tant, aquesta línia acaba l'historial. </para
+><para
+>Si no es requereix l'ordenació de l'historial, l'expressió regular de la línia d'inici per a l'entrada de l'historial podria tenir aquest aspecte. (Aquesta línia es divideix en dos perquè d'una altra manera no hi cabria). </para>
+<screen
+>\s*\\main\\\S+\s+[0-9]+ (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
+ [0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]\s+.*
+</screen>
+<para
+>Per a obtenir detalls sobre les expressions regulars, consulteu la <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>documentació sobre expressions regulars</ulink
+>. Recordeu que «<literal
+>\s</literal
+>» (amb «<literal
+>s</literal
+>» en minúscula) coincidirà amb qualsevol espai en blanc i «<literal
+>\S</literal
+>» (amb «<literal
+>S</literal
+>» en majúscula) coincidirà amb qualsevol espai que no sigui en blanc. En el nostre exemple, l'inici de l'entrada de l'historial conté primer la informació de la versió amb l'expressió regular «<literal
+>\\main\\\S+</literal
+>», la data que consisteix en el dia «<literal
+>[0-9]+</literal
+>», el mes «<literal
+>(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)</literal
+>» i l'any «<literal
+>[0-9][0-9][0-9][0-9]</literal
+>», l'hora «<literal
+>[0-9][0-9]:[0-9][0-9]:[0-9][0-9]</literal
+>» i finalment el nom d'inici de la sessió dels desenvolupadors «<literal
+>.*</literal
+>». </para
+><para
+>Recordeu que els caràcters en el «comentari principal» (a l'exemple «<literal
+>**</literal
+>») ja seran eliminats pel &kdiff3; abans d'intentar fer coincidir, per tant, l'expressió regular començarà amb una coincidència per a cap o més caràcters d'espai en blanc «<literal
+>\s*</literal
+>». A causa que els caràcters de comentari poden diferir en cada fitxer (&pex;, a C/C++ s'utilitzen altres caràcters de comentari que en un script en Perl) el &kdiff3; s'ocuparà dels caràcters de comentari principals i no haureu d'especificar-los a l'expressió regular. </para
+><para
+>Si necessiteu un historial ordenat. Llavors s'haurà de calcular la clau d'ordenació. Per això, les parts rellevants de l'expressió regular s'hauran d'agrupar entre parèntesis. (Els parèntesis addicionals també poden romandre si l'ordenació de l'historial està inhabilitada). </para>
+<screen
+>\s*\\main\\(\S+)\s+([0-9]+) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)
+ ([0-9][0-9][0-9][0-9]) ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])\s+(.*)
+</screen>
+<para
+>Els parèntesis ara contenen <literal
+>1</literal
+>. informació de la versió, <literal
+>2</literal
+>. dia, <literal
+>3</literal
+>. mes, <literal
+>4</literal
+>. any, <literal
+>5</literal
+>. hora i <literal
+>6</literal
+>. nom. Però si volem ordenar per data i hora, ens caldrà construir una clau amb els elements en un ordre diferent d'aparició: Primer l'any, seguit del mes, dia, hora, informació de la versió i nom. Per tant, l'ordre d'ordenació a especificar serà «<literal
+>4,3,2,5,1,6</literal
+>». </para
+><para
+>A causa que els noms dels mesos no són bons per a l'ordenació («<literal
+>Abr</literal
+>» seria el primer) el &kdiff3; detectarà en quin ordre s'han donat els noms dels mesos i utilitzarà aquest nombre en el seu lloc («<literal
+>Abr</literal
+>» -&gt; «<literal
+>04</literal
+>»). I si es troba un nombre pur, es transformarà en un valor de 4 dígits amb zeros a l'esquerra per a l'ordenació. Finalment, la clau d'ordenació resultant per a la primera línia d'inici de l'entrada de l'historial serà: </para>
+<screen
+>2001 04 0002 10:45:41 integration_branch_12   tom
+</screen>
+<para
+>Per a més informació, vegeu la secció <link linkend="mergeoptions"
+>Configuració de la fusió</link
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="navigation"
+><title
+>Navegar i editar</title>
+<para
+>Es realitza molta navegació amb les barres de desplaçament i el ratolí, però també es pot navegar amb les tecles. Si feu clic a qualsevol de les finestres, podreu utilitzar les dreceres &Left;, &Right;, &Up;, &Down;, &PgUp;, &PgDn;, &Home;, &End;, <keycombo
+>&Ctrl;&Home;</keycombo
+> i <keycombo
+>&Ctrl;&End;</keycombo
+> com ho faríeu en altres programes. La columna de la visió de conjunt que hi ha al costat de la barra de desplaçament vertical dels fitxers d'entrada també es pot utilitzar per a navegar fent-hi clic. </para
+><para
+>També podreu utilitzar la <mousebutton
+>roda</mousebutton
+> del ratolí per a desplaçar-vos cap amunt i cap avall. </para
+><para
+>A l'editor de la sortida de la fusió també podreu utilitzar les altres tecles per a editar. Podeu alternar entre el mode d'inserció i sobreescriptura amb la tecla &Ins;. (De manera predeterminada és el mode inserció). </para
+><para
+>Un clic amb el &BER; dins de qualsevol columna del resum, se sincronitzaran totes les finestres per a mostrar el començament del mateix grup de línies (com s'explica a la secció <link linkend="synchronise_views"
+>Establir el grup actual, sincronitzar la fusió i la posició de la vista de les diferències</link
+>). </para
+><para
+>La barra de botons també conté nou botons de navegació amb els quals podreu saltar a la diferència actual/primera/última, a la diferència següent/anterior (<keycombo
+>&Ctrl;&Down;</keycombo
+>/<keycombo
+>&Ctrl;&Up;</keycombo
+>), al conflicte anterior/següent (<keycombo
+>&Ctrl;&PgDn;</keycombo
+>/<keycombo
+>&Ctrl;&PgUp;</keycombo
+>), o al conflicte sense resoldre anterior/següent. Recordeu que per al &kdiff3; un «conflicte» que no s'ha resolt automàticament a l'inici de la fusió seguirà sent un «conflicte» fins i tot si es resol. D'aquí la necessitat de distingir els «conflictes no resolts». </para>
+<sect2 id="autoadvance"
+><title
+>Avanç automàtic</title>
+<para
+>També hi ha un botó <guibutton
+>Ves automàticament al conflicte no resolt següent després de seleccionar una font</guibutton
+> (avanç automàtic). Si l'habiliteu, llavors, quan se selecciona una font, el &kdiff3; saltarà i seleccionarà el següent conflicte no resolt automàticament. Això ajudarà sempre que vulgueu triar una única font. Quan necessiteu les dues fonts, o vulgueu editar després de seleccionar, llavors probablement ho voldreu desactivar. Abans de continuar amb el següent conflicte no resolt, el &kdiff3; mostrarà l'efecte de la vostra elecció durant un curt temps. Aquest retard es pot ajustar a l'element <guilabel
+>Fusiona</guilabel
+> en el diàleg de configuració: podeu especificar el <guilabel
+>Retard de l'avanç automàtic (ms):</guilabel
+> en mil·lisegons entre 0 i 2000. Consell: Cansat de molts clics? Utilitzeu un petit retard i les dreceres <keycombo
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>/<keycap
+>2</keycap
+>/<keycap
+>3</keycap
+> per a seleccionar <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> per a molts conflictes. </para>
+</sect2>
+</sect1>
+
+<sect1 id="selections"
+><title
+>Seleccionar, copiar i enganxar</title>
+<para
+>Les finestres d'entrada no mostren un cursor, de manera que les seleccions s'han de fer amb el ratolí; fent clic amb el &BER; a l'inici, mantenint premut el botó del ratolí i movent-se fins al final, on el deixareu anar de nou. També podeu seleccionar una paraula fent-hi doble clic. A l'editor de sortida de la fusió també podreu seleccionar mitjançant el teclat mantenint premuda la tecla &Maj; i navegant amb les tecles de cursor. </para
+><para
+>Si la selecció excedeix l'interval visible, podreu moure el ratolí sobre les vores de la finestra, el qual farà que el &kdiff3; es desplaci en aquesta direcció. </para
+><para
+>Per a seleccions molt grans també podreu utilitzar les tecles de navegació mentre manteniu premut el ratolí. Per exemple, empreu &PgUp; i &PgDn; per a anar ràpidament a una determinada posició. A la posició final deixeu anar el botó del ratolí. </para
+><para
+>Per a seleccionar tot el que hi ha a la finestra actual, utilitzeu l'element de menú <menuchoice
+><guimenu
+>Edita</guimenu
+> <guimenuitem
+>Selecciona-ho tot</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+>). </para
+><para
+>Per a copiar al porta-retalls, haureu de prémer el botó <guibutton
+>Copia</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> o <keycombo
+>&Ctrl;&Ins;</keycombo
+>). Però hi ha una opció <guilabel
+>Copia la selecció automàticament</guilabel
+> a l'element <guibutton
+>Editor</guibutton
+> en el diàleg de configuració. Si està habilitada, el que seleccioneu es copiarà immediatament i no caldrà copiar explícitament. Però aneu amb compte en emprar-ho, perquè el contingut del porta-retalls podria destruir-se de manera accidental. </para
+><para
+><guibutton
+>Retalla</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> o <keycombo
+>&Maj;&Del;</keycombo
+>) copia al porta-retalls i suprimeix el text seleccionat. </para
+><para
+><guibutton
+>Enganxa</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> o <keycombo
+>&Maj;&Ins;</keycombo
+>) insereix el text en el porta-retalls a la posició del cursor o sobre la selecció actual. Si enganxeu a qualsevol de les finestres d'entrada de diferències, el contingut del porta-retalls es mostrarà en aquesta finestra i la comparació es reiniciarà immediatament. Això és útil per a obtenir ràpidament un fragment de text d'algun lloc i comparar-lo amb una altra cosa sense crear primer els fitxers. </para>
+</sect1>
+
+<sect1 id="saving"
+><title
+>Desar</title>
+<para
+>El desament només es permetrà quan es resolguin tots els conflictes. Si el fitxer ja existeix i l'opció <guilabel
+>Fitxers per a còpia de seguretat</guilabel
+> està habilitada a l'element <guilabel
+>Carpeta</guilabel
+> en el diàleg de configuració, el fitxer existent serà reanomenat amb una extensió <literal role="extension"
+>.orig</literal
+>, però si aquest fitxer existeix, s'eliminarà. Quan sortiu o comenceu una altra anàlisi de diferències i les dades encara no s'hagin desat, el &kdiff3; demanarà si les voleu desar, cancel·lar o continuar sense desar. (El &kdiff3; no capta cap senyal. Per tant, si «mateu» una instància del &kdiff3;, es perdran les vostres dades). </para
+><para
+>Els finals de línia es desen d'acord amb el mètode normal en el sistema operatiu subjacent. Per als Unices, cada línia acaba amb un caràcter de salt de línia «<literal
+>\n</literal
+>», mentre que per als sistemes basats en Win32 cada línia acaba amb un retorn de carro + un salt de línia «<literal
+>\r\n</literal
+>». El &kdiff3; no conservarà els finals de línia dels fitxers d'entrada, el qual també voldrà dir que no heu d'emprar el &kdiff3; amb els fitxers binaris. </para>
+</sect1>
+
+<sect1 id="find"
+><title
+>Cercar les cadenes</title>
+<para
+>Podeu cercar una cadena en qualsevol finestra de text del &kdiff3;. L'element de menú <menuchoice
+><guimenu
+>Edita</guimenu
+><guimenuitem
+>Cerca...</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) obre un diàleg que permetrà especificar la cadena a cercar. També podreu seleccionar les finestres on s'ha de cercar. Sempre es començarà a cercar per la part superior. Utilitzeu l'element de menú <menuchoice
+><guimenu
+>Edita</guimenu
+><guimenuitem
+>Cerca la següent...</guimenuitem
+></menuchoice
+> (<keycap
+>F3</keycap
+>) per a passar a la següent ocurrència. Si seleccioneu cercar a diverses finestres, se cercarà des de la primera finestra de dalt a baix abans que es comenci la cerca de nou a la següent finestra a la part superior, &etc; </para>
+</sect1>
+
+<sect1 id="printing"
+><title
+>Imprimir</title>
+<para
+>El &kdiff3; admet la impressió de diferències en fitxers de text. L'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Imprimeix...</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+>) obre un diàleg que permetrà seleccionar la impressora i ajustar altres opcions. </para
+><para
+>Hi ha diverses possibilitats per a ajustar l'interval. A causa dels diferents diàlegs d'impressió en els diferents sistemes operatius, varia el mètode per a aconseguir certes seleccions de l'interval. </para>
+<variablelist>
+   <varlistentry
+><term
+>Tot:</term
+><listitem
+><para
+>Ho imprimeix tot.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Actual:</term
+><listitem
+><para
+>Imprimeix una pàgina que comença en la primera línia visible de la finestra. (En els sistemes sense aquesta opció, això es pot aconseguir especificant el número de pàgina 10.000 per a imprimir).</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Selecció:</term
+><listitem
+><para
+>Abans de triar imprimir, seleccioneu el text amb el ratolí (com per a copiar i enganxar) en una de les finestres d'entrada de diferències per a definir l'inici i final de la línia. Si no s'ha seleccionat cap text en una de les finestres d'entrada de diferències, llavors aquesta no serà una opció disponible. (En els sistemes sense aquesta opció, això es pot aconseguir especificant el número de pàgina 9.999 per a imprimir).</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Interval:</term
+><listitem
+><para
+>Especifica la primera i la darrera pàgina. </para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Altres opcions importants per a imprimir es prenen de les opcions normals: </para
+><itemizedlist>
+   <listitem
+><para
+>Tipus de lletra i mida</para
+></listitem>
+   <listitem
+><para
+>Mostra els números de les línies</para
+></listitem>
+   <listitem
+><para
+>Ajust de les paraules</para
+></listitem>
+   <listitem
+><para
+>Colors</para
+></listitem>
+   <listitem
+><para
+>&etc;</para
+></listitem>
+</itemizedlist>
+<para
+>El format apaïsat també es recomana per a la impressió. </para>
+</sect1>
+
+<sect1 id="options"
+><title
+>Opcions</title>
+<para
+>Les opcions i la llista de fitxers recents es desaran quan sortiu del programa i es tornaran a carregar quan l'inicieu. (Element de menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Configura el &kdiff3;...</guimenuitem
+></menuchoice
+>). </para>
+<sect2
+><title
+>Tipus de lletra</title>
+<para
+>Seleccioneu un tipus de lletra d'amplada fixa. (En alguns sistemes, aquest diàleg també presentarà tipus de lletra d'amplada variable, però no les hauríeu d'emprar). </para>
+</sect2>
+
+<sect2
+><title
+>Colors</title>
+<variablelist>
+  <varlistentry
+><term
+><guilabel
+>Vistes de l'editor i les diferències:</guilabel
+></term
+><listitem>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Color de primer pla:</guilabel
+></term
+><listitem
+><para
+>En general negre. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Color de fons:</guilabel
+></term
+><listitem
+><para
+>En general blanc. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Color de fons de les diferències:</guilabel
+></term
+><listitem
+><para
+>En general gris clar. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Color A:</guilabel
+></term
+><listitem
+><para
+>En general blau fosc. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Color B:</guilabel
+></term
+><listitem
+><para
+>En general verd fosc. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Color C:</guilabel
+></term
+><listitem
+><para
+>En general magenta fosc. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Color del conflicte:</guilabel
+></term
+><listitem
+><para
+>En general vermell.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Color de fons de l'interval actual:</guilabel
+></term
+><listitem
+><para
+>En general groc clar.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Color de fons de les diferències de l'interval actual:</guilabel
+></term
+><listitem
+><para
+>En general groc fosc.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Color per als intervals de diferències alineades manualment:</guilabel
+></term
+><listitem
+><para
+>En general taronja.</para
+></listitem
+></varlistentry>
+  </variablelist
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guilabel
+>Vista en la comparació de carpetes:</guilabel
+></term
+><listitem>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Color del fitxer més nou:</guilabel
+></term
+><listitem
+><para
+>En general verd.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Color del fitxer més antic:</guilabel
+></term
+><listitem
+><para
+>En general vermell.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Color del fitxer d'edat intermèdia:</guilabel
+></term
+><listitem
+><para
+>En general groc fosc.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Color dels fitxers no disponibles:</guilabel
+></term
+><listitem
+><para
+>En general negre.</para
+></listitem
+></varlistentry>
+  </variablelist
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Canviar els colors per a la comparació de carpetes serà efectiu només quan inicieu la propera comparació de carpetes. </para>
+<para
+>En els sistemes amb només 16 o 256 colors, alguns colors no estaran disponibles en forma pura. En aquests sistemes, el botó <guibutton
+>Omissió</guibutton
+> triarà un color pur. </para>
+</sect2>
+
+<sect2
+><title
+>Arranjament de l'editor</title>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>El tabulador insereix espais</guilabel
+></term
+><listitem
+><para
+>Si està inhabilitada i premeu la tecla &Tab;, s'inserirà un caràcter de tabulació. En cas contrari, s'inseriran la quantitat adequada de caràcters.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Mida de la tabulació:</guilabel
+></term
+><listitem
+><para
+>Es pot ajustar a les vostres necessitats específiques. El valor predeterminat és <literal
+>8</literal
+>.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Sagnat automàtic</guilabel
+></term
+><listitem
+><para
+>Quan es prem &Intro; o <keycap
+>Entra</keycap
+>, s'utilitzarà el sagnat de la línia anterior per a la línia nova.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Copia la selecció automàticament</guilabel
+></term
+><listitem
+><para
+>Cada selecció es copiarà immediatament al porta-retalls quan està activa i no necessitareu copiar explícitament.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Estil del salt de línia:</guilabel
+></term
+><listitem
+><para
+>Quan deseu, podreu seleccionar l'estil del final de línia que preferiu. L'opció predeterminada és l'opció comuna per al sistema operatiu emprat.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="diffoptions"
+><title
+>Arranjament del «diff»</title>
+<para
+>Quan es comparen fitxers, el &kdiff3; primer intentarà fer coincidir les línies que són iguals en tots els fitxers d'entrada. Només durant aquest pas podreu ignorar els espais en blanc. El segon pas compararà cada línia. En aquest pas no s'ignoraran els espais en blanc. A més, durant la fusió, no s'ignoraran els espais en blanc. </para>
+
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Ignora els números (tracta'ls com a espais en blanc)</guilabel
+></term
+><listitem
+><para
+>El valor predeterminat és desactivat. Els caràcters numèrics («0»-«9», «.», «-») s'ignoraran en la primera part de l'anàlisi en la qual es realitza la coincidència de les línies. No obstant això, en el resultat es mostraran les diferències, però es tractaran com a espais en blanc. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ignora els comentaris de C/C++ (tracta'ls com a espais en blanc)</guilabel
+></term
+><listitem
+><para
+>El valor predeterminat és desactivat. Els canvis en els comentaris es tractaran com a canvis en els espais en blanc. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ignora les majúscules/minúscules (tracta-les com a espais en blanc)</guilabel
+></term
+><listitem
+><para
+>El valor predeterminat és desactivat. Les diferències entre majúscules i minúscules dels caràcters (com «A» front «a») es tractaran com a canvis en els espais en blanc. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ordre del preprocessador:</guilabel
+></term
+><listitem
+><para
+>Vegeu la <link linkend="preprocessors"
+>següent secció</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ordre del preprocessador de coincidència de les línies:</guilabel
+></term
+><listitem
+><para
+>Vegeu la <link linkend="preprocessors"
+>següent secció</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Esforça't (més lent)</guilabel
+></term
+><listitem
+><para
+>Intenta trobar una diferència d'espai encara més petita. (El valor predeterminat és activada). Això probablement serà efectiu per a fitxers complicats i grans. I lent per a fitxers molt grans. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Alinea B i C per a 3 fitxers d'entrada</guilabel
+></term
+><listitem
+><para
+>Intenta alinear <guilabel
+>B</guilabel
+> i <guilabel
+>C</guilabel
+> quan es comparin o fusionin tres fitxers d'entrada. No recomanat per a fusionar, ja que pot ser més complicat. (De manera predeterminada està desactivat). </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="mergeoptions"
+><title
+>Arranjament de la fusió</title>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Retard de l'avanç automàtic (ms):</guilabel
+></term
+><listitem
+><para
+>Quan està en el mode d'avanç automàtic, aquesta opció especificarà quant de temps mostrar el resultat de la selecció abans de saltar al següent conflicte sense resoldre. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Mostra els diàlegs informatius</guilabel
+></term
+><listitem
+><para
+>Mostra un diàleg amb informació sobre el nombre de conflictes. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Opció predeterminada dels espais en blanc en la fusió de 2/3 fitxers:</guilabel
+></term
+><listitem
+><para
+>Resoldrà automàticament tots els conflictes en els espais en blanc triant el fitxer especificat. (El valor predeterminat és elecció manual). Útil si els espais en blanc en realitat no són importants en molts fitxers. Si ho necessiteu ocasionalment, millor utilitzeu <guilabel
+>Escull A/B/C a tots els conflictes dels espais en blanc no resolts</guilabel
+> al menú <guimenu
+>Fusiona</guimenu
+>. Recordeu que si s'habilita <guilabel
+>Ignora els números (tracta'ls com a espais en blanc)</guilabel
+> o <guilabel
+>Ignora els comentaris de C/C++ (tracta'ls com a espais en blanc)</guilabel
+>, aquesta opció automàtica també s'aplicarà als conflictes en els nombres o comentaris. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Fusiona automàticament amb l'expressió regular:</guilabel
+></term
+><listitem
+><para
+>Expressió regular per a les línies on el &kdiff3; haurà de triar automàticament una font. Vegeu també <link linkend="vcskeywordsmergesupport"
+>Fusió automàtica...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Executa la fusió automàtica amb l'expressió regular a l'inici de la fusió</guilabel
+></term
+><listitem
+><para
+>Si està activada, el &kdiff3; executarà la fusió automàtica utilitzant l'opció <guilabel
+>Fusiona automàticament amb l'expressió regular</guilabel
+> quan s'inicia una fusió. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Expressió regular per a l'inici d'entrada de l'historial:</guilabel
+></term
+><listitem
+><para
+>Expressió regular per a l'inici de les entrades de l'historial de fusió. Normalment aquesta línia conté la paraula clau «<literal
+>&#36;Log&#36;</literal
+>». Valor predeterminat «<literal
+>.*\&#36;Log.*\&#36;.</literal
+>» </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Expressió regular per a l'inici d'entrada de l'historial:</guilabel
+></term
+><listitem
+><para
+>Una entrada de l'historial per al control de versions consisteix en diverses línies. Especifiqueu l'expressió regular per a detectar la primera línia (sense el comentari inicial). Empreu els parèntesis per a agrupar les claus que vulgueu utilitzar per a ordenar-les. Si es deixa en blanc, llavors el &kdiff3; assumirà que les línies en blanc separen les entrades de l'historial. Per a més detalls, vegeu també el <link linkend="vcskeywordsmergesupport"
+>Fusió automàtica...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ordena la fusió de l'historial</guilabel
+></term
+><listitem
+><para
+>Habilita l'ordenació de l'historial en el control de versions. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Criteri d'ordenació de les claus per a l'inici de l'entrada de l'historial:</guilabel
+></term
+><listitem
+><para
+>Cada parell de parèntesis emprats a l'expressió regular per a l'inici de l'entrada de l'historial agruparà una clau que es pot emprar per a ordenar. Especifiqueu la llista de claus (que estan numerades en ordre d'ocurrència començant per <literal
+>1</literal
+>) utilitzant «,» com a separador (&pex;, «<literal
+>4,5,6,1,2,3,7</literal
+>»). Si es deixa en blanc, no s'ordenarà. Per a més detalls, vegeu també el <link linkend="vcskeywordsmergesupport"
+>Fusió automàtic...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Fusiona l'historial del control de versions quan es comenci a fusionar</guilabel
+></term
+><listitem
+><para
+>Si està activada, el &kdiff3; executarà la fusió automàtica de l'historial utilitzant les opcions abans esmentades quan s'inicia una fusió. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Nombre màxim d'entrades de l'historial:</guilabel
+></term
+><listitem
+><para
+>El &kdiff3; truncarà la llista de l'historial després del nombre especificat d'entrades. Utilitzeu <literal
+>-1</literal
+> per a evitar el truncament. (De manera predeterminada és <literal
+>-1</literal
+>). </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Comprova les expressions regulars</guilabel
+></term
+><listitem
+><para
+>Aquest botó mostra un diàleg que permet millorar i provar les expressions regulars anteriors. Simplement copieu les dades respectives dels vostres fitxers a les línies d'exemple. L'opció <guilabel
+>Resultat coincident:</guilabel
+> mostrarà immediatament si coincideixen. L'opció <guilabel
+>Resultat de la clau d'ordenació:</guilabel
+> mostrarà la clau utilitzada per a l'ordenació en la fusió de l'historial. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ordre de fusió irrellevant:</guilabel
+></term
+><listitem
+><para
+>Especifiqueu una ordre que s'haurà de cridar quan el &kdiff3; detecti que per a una fusió de tres fitxers, el fitxer <guilabel
+>B</guilabel
+> no aporta cap dada rellevant que no es trobi en el contingut del fitxer <guilabel
+>C</guilabel
+>. L'ordre es cridarà amb els tres noms de fitxer com a paràmetres. Les dades que coincideixin amb <guilabel
+>Fusiona automàticament amb l'expressió regular</guilabel
+> o en l'historial no es consideraran rellevants. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>En les fusions sense conflictes desa i surt automàticament</guilabel
+></term
+><listitem
+><para
+>Si el &kdiff3; s'inicia des de la línia d'ordres per a fusionar fitxers i tots els conflictes es poden resoldre sense la interacció de l'usuari, desa i surt. (Similar a l'opció de la línia d'ordres <option
+>--auto</option
+>). </para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2
+><title
+>Fusionar les carpetes</title>
+<para
+>Aquestes opcions estan relacionades amb l'exploració de les carpetes i el maneig de la fusió: Per als detalls, vegeu <link linkend="dirmergeoptions"
+>Comparar/Fusionar carpetes</link
+>. </para
+><para
+>No obstant això, aquí hi ha una opció que també és rellevant per al desament de fitxers individuals: </para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Fitxers de còpia de seguretat (.orig)</guilabel
+></term
+><listitem
+><para
+>Quan es desa un fitxer i ja hi ha una versió anterior, la versió original canviarà de nom amb l'extensió <filename class="extension"
+>.orig</filename
+>. Si ja existeix un fitxer de còpia de seguretat antic amb l'extensió <filename class="extension"
+>.orig</filename
+>, s'eliminarà per fer-ho sense còpia de seguretat. </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>Opcions regional i d'idioma</title>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Usa la mateixa codificació a tot arreu</guilabel
+></term
+><listitem
+><para
+>Les següents opcions de codificació es poden ajustar per separat per a cada element o si aquesta opció és certa, tots els valors prendran el primer valor. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Nota: la codificació local és «...»</guilabel
+></term
+><listitem
+><para
+>A sobre dels selectors del còdec apareixerà aquesta nota indicant quina és la codificació local. (Això no és ajustable, però per a la vostra informació en el cas que no la conegueu, però necessiteu seleccionar-la). </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Detecta automàticament l'Unicode</guilabel
+></term
+><listitem
+><para
+>Aquesta opció intenta utilitzar el BOM o les metadades dels documents XML/HTML per detectar la codificació Unicode. En cas contrari comprovarà si es pot interpretar com UTF-8 una mostra petita des del principi del fitxer. Si aquesta comprovació passa s'utilitzarà UTF-8. En cas contrari tornarà al còdec seleccionat per l'usuari. Només s'admet UTF-8 sense BOM ni metadades presents. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Codificació per al fitxer A/B/C:</guilabel
+></term
+><listitem
+><para
+>Ajusta la codificació del fitxer per als fitxers d'entrada. Això té un efecte sobre com s'interpretaran els caràcters especials. Podreu ajustar cada còdec per separat, fins i tot podreu comparar i fusionar fitxers que s'han desat amb còdecs diferents. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Codificació dels fitxers de sortida en la fusió i desament:</guilabel
+></term
+><listitem
+><para
+>Quan hàgiu editat un fitxer, podreu ajustar quina codificació es farà servir en fer el desament al disc. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Codificació dels fitxers del preprocessador:</guilabel
+></term
+><listitem
+><para
+>Quan definiu els preprocessadors, és possible que no puguin operar amb el vostre còdec. (&pex;: els fitxers tenen unicode de 16 bits i el preprocessador només pot prendre &ASCII; de 8 bits). Amb aquesta opció podreu definir la codificació per a la sortida del preprocessador. </para
+></listitem
+></varlistentry>
+	<varlistentry
+><term
+><guilabel
+>Idioma de dreta a esquerra:</guilabel
+></term
+><listitem
+><para
+>Alguns idiomes s'escriuen de dreta a esquerra. Quan aquesta opció està habilitada, el &kdiff3; dibuixarà el text de dreta a esquerra en les finestres d'entrada de les diferències i en la finestra de sortida de la fusió. Recordeu que si inicieu el &kdiff3; amb l'opció de línia d'ordres <option
+>--reverse</option
+>, llavors tota la disposició també es mostrarà de dreta a esquerra. (Aquesta és una característica proporcionada per les &Qt;). </para
+><note
+><para
+>Aquesta documentació es va escriure assumint que aquesta opció o la disposició inversa estan inhabilitades. Per tant, algunes referències a «esquerra» o «dreta» s'hauran de substituir per les seves respectives contraparts si empreu aquestes opcions. </para
+></note
+></listitem
+></varlistentry>
+
+  </variablelist>
+</sect2>
+
+<sect2
+><title
+>Miscel·lània</title>
+<para
+>(Aquestes opcions i accions estan disponibles en els menús o a la barra de botons).</para>
+<variablelist>
+  <varlistentry
+><term
+><emphasis
+>Opcions de la visió de conjunt:</emphasis
+></term
+><listitem
+><para
+>Aquestes opcions només estaran disponibles quan es comparin tres fitxers. En el mode normal, totes les diferències es mostraran en una columna de la visió de conjunt codificada per colors. Però de vegades és especialment interessant en les diferències entre només dos d'aquests tres fitxers. En seleccionar «A front B», «A front C» o «B front C», es mostrarà una segona columna de la visió de conjunt amb la informació requerida al costat de la visió de conjunt normal. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guimenuitem
+>Ajusta les línies a les finestres de diferències</guimenuitem
+></term
+><listitem
+><para
+>Ajusta les línies quan la seva longitud excedeix l'amplada d'una finestra. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Mostra la finestra A/B/C:</guibutton
+></term
+><listitem
+><para
+>De vegades es vol utilitzar millor l'espai a la pantalla per a les línies llargues. Oculta les finestres que no són importants. (Al menú <guimenu
+>Finestra</guimenu
+>).</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Commuta l'orientació de les divisions</guibutton
+></term
+><listitem
+><para
+>Canvia entre les finestres de diferències que es mostren una al costat de l'altra (<guilabel
+>A</guilabel
+> a l'esquerra de <guilabel
+>B</guilabel
+>, i <guilabel
+>B</guilabel
+> a l'esquerra de <guilabel
+>C</guilabel
+>) o una damunt de l'altra (<guilabel
+>A</guilabel
+> a sobre de <guilabel
+>B</guilabel
+>, i <guilabel
+>B</guilabel
+> a sobre de <guilabel
+>C</guilabel
+>). Això també hauria d'ajudar per a línies llargues. (Al menú <guimenu
+>Finestres</guimenu
+>). </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Fusiona el fitxer actual</guibutton
+></term
+><listitem
+><para
+>De vegades esteu veient les diferències d'espais i decidiu fusionar. Un sol clic inicia la fusió i utilitza el nom del fitxer de l'últim fitxer d'entrada com el nom predeterminat del fitxer de sortida. (Quan s'utilitza per a tornar a iniciar una fusió, es mantindrà el nom del fitxer de sortida).</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Mostra els espais en blanc</guibutton
+></term
+><listitem
+><para
+>Desactiveu-la per a suprimir qualsevol ressaltat dels canvis només dels espais en blanc en el text o en les columnes de la visió de conjunt. (Cal tenir en compte que això també s'aplicarà als canvis en els números o comentaris si estan actives les opcions <guilabel
+>Ignora els números (tracta'ls com a espais en blanc)</guilabel
+> o <guilabel
+>Ignora els comentaris de C/C++ (tracta'ls com a espais en blanc)</guilabel
+>).</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Mostra els caràcters d'espai en blanc i els de tabulació</guibutton
+></term
+><listitem
+><para
+>De vegades, els espais visibles i les tabulacions molesten. Ho podeu desactivar.</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Mostra els números de les línies</guibutton
+></term
+><listitem
+><para
+>Podeu seleccionar si s'han de mostrar els números de línia per als fitxers d'entrada.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="shortcuts"
+><title
+>Configurar les dreceres del teclat</title>
+<para
+>Actualment, només la versió dels &frameworks; admet dreceres de teclat configurables per l'usuari. (Menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura les dreceres...</guimenuitem
+></menuchoice
+>). </para>
+</sect2>
+</sect1>
+
+<sect1 id="preprocessors"
+><title
+>Ordres del preprocessador</title>
+<para
+>El &kdiff3; admet dues opcions del preprocessador. </para
+><para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Ordre del preprocessador:</guilabel
+></term
+><listitem
+><para
+>Quan es llegeix qualsevol fitxer, es canalitzarà a través d'aquesta ordre externa. La sortida d'aquesta ordre serà visible en lloc del fitxer original. Podeu escriure el vostre propi preprocessador que satisfaci les vostres necessitats específiques. Empreu-la per a retallar parts pertorbadores del fitxer, o per a corregir automàticament el sagnat, &etc; </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Ordre del preprocessador de coincidència de les línies:</guilabel
+></term
+><listitem
+><para
+>Quan es llegeix qualsevol fitxer, es canalitzarà a través d'aquesta ordre externa. Si també s'especifica una ordre del preprocessador (vegeu a dalt), llavors la sortida del preprocessador serà l'entrada del preprocessador de coincidència de les línies. La sortida només s'utilitzarà en l'anàlisi durant la fase de coincidència de les línies. Podeu escriure el vostre propi preprocessador que satisfaci les vostres necessitats específiques. Cada línia d'entrada haurà de tenir una línia de sortida corresponent. </para
+></listitem
+></varlistentry>
+</variablelist>
+</para>
+<para
+>La idea és permetre a l'usuari una major flexibilitat mentre configura el resultat de les diferències. Però això requereix un programa extern, i molts usuaris no volen escriure'n un ells mateixos. La bona notícia és que molt sovint <command
+>sed</command
+> o <command
+>perl</command
+> faran la feina. </para>
+<para
+>Exemple: un cas senzill de prova: es considera el fitxer a.txt (6 línies): </para>
+<screen
+>aa
+      ba
+      ca
+      da
+      ea
+      fa
+</screen>
+<para
+>I el fitxer b.txt (3 línies): </para>
+<screen
+>cg
+      dg
+      eg
+</screen>
+<para
+>Sense un preprocessador, les següents línies es col·locarien una a una al costat de l'altra: </para>
+<screen
+>aa - cg
+      ba - dg
+      ca - eg
+      da
+      ea
+      fa
+</screen>
+<para
+>Probablement això no sigui desitjable perquè la primera lletra conté la informació realment interessant. Per a ajudar a l'algoritme de coincidència a ignorar la segona lletra, podem utilitzar una ordre de preprocessador per a la coincidència de les línies, que substitueixi «g» amb «a»: </para>
+<screen
+><command
+>sed</command
+> 's/g/a/'
+</screen>
+<para
+>Amb aquesta ordre, el resultat de la comparació serà: </para>
+<screen
+>aa
+      ba
+      ca - cg
+      da - dg
+      ea - eg
+      fa
+</screen>
+<para
+>Internament, l'algoritme de coincidència veu els fitxers després d'executar el preprocessador de coincidència de les línies, però a la pantalla el fitxer no canviarà. (El preprocessador normal també canviarà les dades a la pantalla). </para>
+
+<sect2 id="sedbasics"
+><title
+>Bàsics al <command
+>sed</command
+></title>
+<para
+>Aquesta secció només presenta algunes característiques molt bàsiques de <command
+>sed</command
+>. Per a més informació, vegeu <ulink url="info:/sed"
+>info:/sed</ulink
+> o <ulink url="https://www.gnu.org/software/sed/manual/html_mono/sed.html"
+>https://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink
+>. Trobareu una versió precompilada per a &Windows; a <ulink url="http://unxutils.sourceforge.net"
+>http://unxutils.sourceforge.net</ulink
+>. Recordeu que els següents exemples suposen que l'ordre <command
+>sed</command
+> es troba en alguna carpeta a la variable d'entorn <envar
+>PATH</envar
+>. Si aquest no és el cas, haureu d'especificar el camí absolut per a l'ordre. </para>
+<para
+>En aquest context, només s'utilitza l'ordre <command
+>sed</command
+> com a ordre de substitució: </para>
+<screen
+><command
+>sed</command
+> 's/<replaceable
+>EXPRESSIÓ_REGULAR</replaceable
+>/<replaceable
+>SUBSTITUCIÓ</replaceable
+>/<replaceable
+>ETIQUETES</replaceable
+>'
+</screen>
+<para
+>Abans d'utilitzar una ordre nova dins del &kdiff3;, primer haureu de provar-ho a la consola. Aquí l'ordre <command
+>echo</command
+> és d'utilitat. Exemple: </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/'
+   -> obrakadabra
+</screen>
+<para
+>Aquest exemple mostra una ordre de <command
+>sed</command
+> molt senzilla que substitueix la primera ocurrència de «a» amb «o». Si voleu substituir-les totes, llavors necessitareu l'etiqueta «g»: </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g'
+   -> obrokodobro
+</screen>
+<para
+>El símbol «|» és l'ordre de canonada que transfereix la sortida de l'ordre anterior a l'entrada de la següent ordre. Si voleu provar amb un fitxer més llarg, podreu utilitzar l'ordre <command
+>cat</command
+> en els sistemes similars a &UNIX; o <command
+>type</command
+> en els sistemes similars a &Windows;. L'ordre <command
+>sed</command
+> farà la substitució de cada línia. <screen
+><command
+>cat</command
+> <replaceable
+>nom_fitxer</replaceable
+> | <command
+>sed</command
+> <replaceable
+>opcions</replaceable
+>
+</screen>
+</para>
+</sect2>
+<sect2 id="sedforkdiff3"
+><title
+>Exemples per a <command
+>sed</command
+> emprats al &kdiff3;</title>
+<sect3
+><title
+>Ignorar els altres tipus de comentaris</title>
+<para
+>Actualment, el &kdiff3; només comprèn els comentaris a C/C++. Utilitzant l'opció <guilabel
+>Ordre del preprocessador de coincidència de les línies:</guilabel
+> també podreu ignorar altres tipus de comentaris, convertint-los en comentaris a C/C++. </para>
+<para
+>Exemple: per a ignorar els comentaris que comencen amb «<literal
+>#</literal
+>», us agradarà convertir-los a «<literal
+>//</literal
+>». Recordeu que també haureu d'habilitar l'opció <guilabel
+>Ignora els comentaris de C/C++ (tracta'ls com a espais en blanc)</guilabel
+> perquè tingui efecte. Una ordre apropiada per a l'<guilabel
+>Ordre del preprocessador per a la coincidència de les línies:</guilabel
+> seria: </para>
+<screen
+><command
+>sed</command
+> 's/#/\/\//'
+</screen>
+<para
+>Com que per a <command
+>sed</command
+>, el caràcter «<literal
+>/</literal
+>» té un significat especial, cal col·locar el caràcter «<literal
+>\</literal
+>» abans de cada «<literal
+>/</literal
+>» a la cadena de substitució. De vegades es requereix «<literal
+>\</literal
+>» per a afegir o eliminar un significat especial de certs caràcters. Les cometes simples «'» només són importants quan es prova a l'intèrpret d'ordres, ja que en cas contrari intentarà processar alguns caràcters. El &kdiff3; no fa això excepte per a les seqüències d'escapament «<literal
+>\"</literal
+>» i «<literal
+>\\</literal
+>». </para>
+</sect3>
+<sect3
+><title
+>Diferències sense distingir majúscules i minúscules</title>
+<para
+>Utilitzeu la següent <guilabel
+>Ordre del preprocessador per a la coincidència de les línies:</guilabel
+> per a convertir tota l'entrada a majúscules: </para>
+<screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+</screen>
+<para
+>Aquí el «<literal
+>.*</literal
+>» és una expressió regular que coincideix amb qualsevol cadena i en aquest context coincideix amb tots els caràcters de la línia. El «<literal
+>\1</literal
+>» a la cadena de substitució es refereix al text coincident dins el primer parell de «<literal
+>\(</literal
+>» i «<literal
+>\)</literal
+>». La «<literal
+>\U</literal
+>» converteix el text inserit en majúscules. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorar les paraules clau del control de versions</title>
+<para
+>El CVS i altres sistemes per al control de versions utilitzen diverses paraules clau per a inserir cadenes generades automàticament (<ulink url="info:/cvs/Keyword substitution"
+>info:/cvs/Keyword substitution</ulink
+>). Tots segueixen el patró «<replaceable
+>$PARAULA_CLAU text generat$</replaceable
+>». Ara necessitem una ordre del preprocessador per a la coincidència de les línies que només elimini el text generat: </para>
+<screen
+><command
+>sed</command
+> 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'
+</screen>
+<para
+>Aquí el «<literal
+>.*</literal
+>» és una expressió regular que coincideix amb qualsevol cadena i en aquest context coincideix amb tots els caràcters de la línia. El «<literal
+>\1</literal
+>» a la cadena de substitució es refereix al text coincident dins el primer parell de «<literal
+>\(</literal
+>» i «<literal
+>\)</literal
+>». La «<literal
+>\U</literal
+>» converteix el text inserit en majúscules. </para>
+<para
+>Mentre experimenteu amb <command
+>sed</command
+>, podríeu arribar a comprendre fins i tot aquestes expressions regulars. Són útils perquè hi ha molts altres programes que també admeten coses similars. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorar els números</title>
+<para
+>Ignorar els números en realitat és una opció incorporada. Però com un altre exemple, així és com es veuria com a ordre del preprocessador de coincidència de les línies. </para>
+<screen
+><command
+>sed</command
+> 's/[0123456789.-]//g'
+</screen>
+<para
+>Qualsevol caràcter dins de «<literal
+>[</literal
+>» i «<literal
+>]</literal
+>» serà una coincidència i serà substituït per res. </para>
+</sect3>
+
+<sect3
+><title
+>Ignorar certes columnes</title>
+<para
+>De vegades, un text té un format molt estricte i conté columnes que sempre voleu ignorar, mentre que hi ha altres columnes que voldreu conservar per a la seva anàlisi. En el següent exemple, s'ignoren les primeres cinc columnes (caràcters), es conserven les següents deu columnes, després de nou s'ignoren cinc columnes i es conserva la resta de la línia. </para>
+<screen
+><command
+>sed</command
+> 's/.....\(..........\).....\(.*\)/\1\2/'
+</screen>
+<para
+>Cada punt «<literal
+>.</literal
+>» coincidirà amb qualsevol caràcter individual. El «<literal
+>\1</literal
+>» i «<literal
+>\2</literal
+>» a la cadena de substitució es refereixen al text coincident dins del primer i segon parell de «<literal
+>\(</literal
+>» i «<literal
+>\)</literal
+>» denotant el text a conservar. </para>
+</sect3>
+
+<sect3
+><title
+>Combinar diverses substitucions</title>
+<para
+>De vegades voldreu aplicar diverses substitucions alhora. Després podreu utilitzar el punt i coma «<literal
+>;</literal
+>» per a separar les unes de les altres. Exemple: </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g;s/\(.*\)/\U\1/'
+   -> OBROKODOBRO
+</screen>
+</sect3>
+
+<sect3
+><title
+>Emprar <command
+>perl</command
+> en comptes de <command
+>sed</command
+></title>
+<para
+>En comptes de <command
+>sed</command
+>, possiblement voldreu utilitzar una mica més com <command
+>perl</command
+>. </para>
+<screen
+><command
+>perl</command
+> -p -e 's/<replaceable
+>EXPRESSIÓ_REGULAR</replaceable
+>/<replaceable
+>SUBSTITUCIÓ</replaceable
+>/<replaceable
+>ETIQUETES</replaceable
+>
+</screen>
+<para
+>Però alguns detalls són diferents en <command
+>perl</command
+>. Recordeu que on <command
+>sed</command
+> necessitava «<literal
+>\(</literal
+>» i «<literal
+>\)</literal
+>» el <command
+>perl</command
+> requereix el més simple «<literal
+>(</literal
+>» i «<literal
+>)</literal
+>» sense precedir «<literal
+>\</literal
+>». Exemple: </para>
+<screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+   <command
+>perl</command
+> -p -e 's/(.*)/\U\1/'
+</screen>
+</sect3>
+</sect2>
+
+<sect2
+><title
+>Ordre d'execució del preprocessador</title>
+<para
+>En la següent ordre, les dades es canalitzen a través de tots els preprocessadors interns i externs: </para>
+<itemizedlist>
+<listitem
+><para
+>Prepocessador normal,</para
+></listitem>
+<listitem
+><para
+>Preprocessador de coincidència de les línies,</para
+></listitem>
+<listitem
+><para
+>Ignora les majúscules/minúscules (tracta-les com a espais en blanc) (conversió a majúscules),</para
+></listitem>
+<listitem
+><para
+>Detecció dels comentaris a C/C++,</para
+></listitem>
+<listitem
+><para
+>Ignora els números (tracta'ls com a espais en blanc),</para
+></listitem>
+<listitem
+><para
+>Ignora els espais en blanc</para
+></listitem>
+</itemizedlist>
+<para
+>Les dades després del preprocessador normal es conservaran per a la seva visualització i fusió. Les altres operacions només modificaran les dades que vegi l'algoritme de coincidència de les línies. </para
+><para
+>En els rars casos en què utilitzeu un preprocessador normal, cal tenir en compte que el preprocessador de coincidència de les línies veurà la sortida del preprocessador normal com a una entrada. </para>
+</sect2>
+
+<sect2
+><title
+>Avís</title>
+<para
+>Les ordres del preprocessador solen ser molt útils, però com amb qualsevol opció que modifiqui els textos o oculti certes diferències automàticament, pot passar per alt certes diferències accidentalment i, en el pitjor dels casos, destruir dades importants. </para
+><para
+>Per aquesta raó, durant una fusió, si s'empra una ordre del preprocessador normal, el &kdiff3; dirà i us demanarà si s'ha d'inhabilitar o no. Però no us avisarà si està activada una opció <guilabel
+>Ordre del preprocessador per a la coincidència de les línies:</guilabel
+>. La fusió no es completarà fins que es resolguin tots els conflictes. Si inhabiliteu l'element de menú <menuchoice
+><guimenu
+>Vista de les diferències</guimenu
+><guimenuitem
+>Mostra els espais en blanc</guimenuitem
+></menuchoice
+>, també seran visibles les diferències que es van eliminar amb l'opció <guilabel
+>Ordre del preprocessador de coincidència de les línies:</guilabel
+>. Si el botó <guibutton
+>Desa</guibutton
+> roman inhabilitat durant una fusió (a causa que romanen conflictes), podreu habilitar l'element de menú <menuchoice
+><guimenu
+>Vista de les diferències</guimenu
+><guimenuitem
+>Mostra els espais en blanc</guimenuitem
+></menuchoice
+>. Si no voleu fusionar manualment aquestes diferències menys importants, podreu seleccionar l'element de menú <menuchoice
+><guimenu
+>Fusiona</guimenu
+><guimenuitem
+>Escull [A|B|C] a tots els conflictes dels espais en blanc no resolts</guimenuitem
+></menuchoice
+>. </para>
+</sect2>
+</sect1>
+</chapter>
+
+
+<chapter id="dirmerge"
+><title
+>Comparació i fusió de carpetes amb el &kdiff3;</title>
+<sect1 id="dirmergeintro"
+><title
+>Introducció a la comparació i fusió de carpetes</title>
+<para
+>Sovint, els programadors han de modificar molts fitxers en una carpeta per a aconseguir la seva intenció. Per això, el &kdiff3; també permet comparar i fusionar carpetes completes de forma recursiva! </para
+><para
+>Encara que comparar i fusionar carpetes sembla força obvi, hi ha diversos detalls que haureu de conèixer. Per descomptat, el més important és el fet que ara es podran veure afectats molts fitxers per cada operació. Si no teniu còpies de seguretat de totes les dades originals, podria ser molt difícil o fins i tot impossible tornar a l'estat original. De manera que abans de començar una fusió, assegureu-vos que les vostres dades estan segures i que serà possible tornar a l'estat inicial. Si creeu un arxiu o utilitzeu algun sistema per al control de versions -aquesta és la vostra decisió-, fins i tot els programadors i integradors experimentats necessiten de tant en tant les fonts antigues. I teniu en compte que encara que jo (l'autor del &kdiff3;) intento fer-ho el millor possible, no puc garantir que no hi hagi errors. Segons la GPL de &GNU;, NO HI HA CAP GARANTIA per a aquest programa. Així que sigueu humil i teniu-ho sempre present: </para>
+<blockquote
+><para>
+   <emphasis
+>Errar és humà, però per a arruïnar realment les coses, necessitareu un ordinador.</emphasis>
+</para
+></blockquote>
+<para
+>De manera que això és el que aquest programa pot fer: el &kdiff3;... </para>
+<itemizedlist>
+     <listitem
+><para
+>...llegeix i compara dues o tres carpetes de forma recursiva,</para
+></listitem>
+     <listitem
+><para
+>...té una cura especial en els enllaços simbòlics,</para
+></listitem>
+     <listitem
+><para
+>...permet explorar fitxers amb doble clic del ratolí,</para
+></listitem>
+     <listitem
+><para
+>...per a cada element proposa una operació de fusió, el qual podreu canviar abans d'iniciar la fusió de la carpeta,</para
+></listitem>
+     <listitem
+><para
+>...permet simular la fusió i llista les accions que tindran lloc, sense fer-les realment,</para
+></listitem>
+     <listitem
+><para
+>...permet realment fer la fusió, i permet interactuar quan sigui necessària la interacció manual,</para
+></listitem>
+     <listitem
+><para
+>...permet executar l'operació seleccionada per a tots els elements (tecla <keycap
+>F7</keycap
+>) o l'element seleccionat (tecla <keycap
+>F6</keycap
+>),</para
+></listitem>
+     <listitem
+><para
+>...permet continuar la fusió després de la interacció manual amb la tecla <keycap
+>F7</keycap
+>,</para
+></listitem>
+     <listitem
+><para
+>...de manera opcional crea còpies de seguretat, amb l'extensió <literal role="extension"
+>.orig</literal
+>,</para
+></listitem>
+     <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="startingdirmerge"
+><title
+>Començar amb la comparació o fusió de les carpetes</title>
+<para
+>Això és molt similar a la fusió i comparació de fitxers individuals. Només haureu d'especificar les carpetes a la línia d'ordres o en el diàleg per a obrir fitxers. </para>
+<sect2
+><title
+>Comparar/Fusionar dues carpetes: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>carpeta_1 carpeta_2</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>carpeta_1 carpeta_2</replaceable
+> -o <replaceable
+>carpeta_de_destinació</replaceable
+>
+</screen>
+<para
+>Si no s'especifica una carpeta de destinació, el &kdiff3; emprarà <replaceable
+>carpeta_2</replaceable
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Comparar/Fusionar l'arbre de carpetes: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>carpeta_1 carpeta_2 carpeta_3</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>carpeta_1 carpeta_2 carpeta_3</replaceable
+> -o <replaceable
+>carpeta_de_destinació</replaceable
+>
+</screen>
+<para
+>Quan es fusionen 3 carpetes, s'utilitza <replaceable
+>carpeta_1</replaceable
+> com a base per a la fusió. Si no s'especifica cap carpeta de destinació, el &kdiff3; utilitzarà <replaceable
+>carpeta_3</replaceable
+> com la carpeta de destinació per a la fusió. </para>
+
+<para
+>Recordeu que només la comparació començarà automàticament, no la fusió. Per això, primer haureu de seleccionar una entrada de menú o la tecla <keycap
+>F7</keycap
+>. (Més detalls més endavant). </para>
+</sect2>
+</sect1>
+
+<sect1 id="dirmergevisible"
+><title
+>Informació visible en fusionar carpetes</title>
+<para
+>Mentre es llegeixen les carpetes, apareixerà un quadre de missatge informant sobre el progrés. Si interrompeu l'exploració de la carpeta, només es llistaran els fitxers que s'hagin comparat fins llavors. </para
+><para
+>Quan es completa l'exploració de la carpeta, el &kdiff3; mostrarà un quadre de llista amb els resultats restants... </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="dirbrowser.png" format="PNG"/></imageobject
+> <!--alt="Image of the folder browser."-->
+</mediaobject
+></screenshot>
+<para
+>...i els detalls sobre l'element actualment seleccionat a la dreta: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="iteminfo.png" format="PNG"/></imageobject>
+   <!--alt="Image with information about the selected item."-->
+</mediaobject
+></screenshot>
+
+<sect2 id="name"
+><title
+>La columna Nom</title>
+<para
+>Cada fitxer i carpeta que s'ha trobat durant l'exploració es mostrarà aquí en un arbre. Podreu seleccionar un element fent-hi clic amb el ratolí. </para
+><para
+>Les carpetes estaran plegades de manera predeterminada. Les podreu desplegar i plegar fent clic al signe «+»/«-» o fent doble clic sobre l'element o amb les tecles de cursor &Left;/&Right;. El menú <guimenu
+>Carpeta</guimenu
+> també conté dues accions <guimenuitem
+>Plega totes les subcarpetes</guimenuitem
+> i <guimenuitem
+>Desplega totes les subcarpetes</guimenuitem
+> amb les quals podreu contraure o expandir totes les carpetes alhora. </para
+><para
+>Si feu doble clic a un element de fitxer, s'iniciarà la comparació dels fitxers i apareixerà la finestra de diferències. </para>
+<para
+>La imatge a la columna Nom reflectirà el tipus de fitxer en la primera carpeta (<guilabel
+>A</guilabel
+>). Pot ser una d'aquestes: </para>
+<itemizedlist>
+     <listitem
+><para
+>Fitxer normal</para
+></listitem>
+     <listitem
+><para
+>Carpeta normal (imatge de carpeta)</para
+></listitem>
+     <listitem
+><para
+>Enllaç amb un fitxer (imatge de fitxer amb una fletxa d'enllaç)</para
+></listitem>
+     <listitem
+><para
+>Enllaç amb una carpeta (imatge de carpeta amb una fletxa d'enllaç)</para
+></listitem>
+</itemizedlist>
+<para
+>Si el tipus de fitxer és diferent en les altres carpetes, això serà visible en les columnes <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> i en la finestra que mostra els detalls sobre l'element seleccionat. Cal tenir en compte que, en aquest cas, no es podrà seleccionar automàticament cap operació de fusió. En iniciar la fusió, l'usuari serà informat dels problemes d'aquest tipus. </para>
+</sect2>
+
+<sect2 id="coloring"
+><title
+>Les columnes A/B/C i l'esquema de colors</title>
+<para
+>Com es pot veure a la imatge de dalt, els colors vermell, verd, groc i negre s'utilitzen en les columnes <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+>. </para>
+<itemizedlist>
+     <listitem
+><para
+>Negre: aquest element no existeix en aquesta carpeta.</para
+></listitem>
+     <listitem
+><para
+>Verd: element més nou.</para
+></listitem>
+     <listitem
+><para
+>Groc: més antic que el verd, més nou que el vermell.</para
+></listitem>
+     <listitem
+><para
+>Vermell: element més antic.</para
+></listitem>
+</itemizedlist>
+<para
+>Però per als elements que eren idèntics en la comparació, el seu color també serà idèntic fins i tot si l'antiguitat no ho és. </para
+><para
+>Les carpetes es consideraran iguals si tots els elements que contenen són idèntics. Llavors també tindran el mateix color. Però l'antiguitat d'una carpeta no es considerarà pel seu color. </para
+><para
+>La idea d'aquest esquema de coloració el vaig trobar a <ulink url="https://www.samba.org/ftp/paulus/"
+><command
+>dirdiff</command
+></ulink
+>. Els colors s'assemblen als colors d'una fulla que és verda quan és nova, més tard es torna groga i vermella quan és vella. </para>
+
+</sect2
+><sect2 id="operation"
+><title
+>La columna Operació</title>
+<para
+>Després de comparar les carpetes, el &kdiff3; també avaluarà una proposta per a una operació de fusió. Això es mostra a la columna <guilabel
+>Operació</guilabel
+>. Podreu modificar l'operació fent clic sobre l'operació que voleu canviar. Apareixerà un petit menú emergent que us permetrà seleccionar una operació per a aquest element. (També podreu seleccionar les operacions més necessàries mitjançant el teclat. <keycombo
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>/<keycap
+>2</keycap
+>/<keycap
+>3</keycap
+>/<keycap
+>4</keycap
+>/&Del; seleccionarà <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+>/<guilabel
+>Fusiona</guilabel
+>/<guilabel
+>Suprimeix</guilabel
+> respectivament, si està disponible). Aquesta operació s'executarà durant la fusió. Quines operacions hi haurà disponibles, dependrà de l'element i del mode de fusió en què esteu. El mode de fusió serà un de </para>
+<itemizedlist>
+     <listitem
+><para
+>Fusionar tres carpetes (<guilabel
+>A</guilabel
+> es tracta com la base més antiga d'ambdues).</para
+></listitem>
+     <listitem
+><para
+>Fusionar dues carpetes.</para
+></listitem>
+     <listitem
+><para
+>Mode sincronitza dues carpetes (s'activa mitjançant l'opció <guilabel
+>Sincronitza les carpetes</guilabel
+>).</para
+></listitem>
+</itemizedlist>
+<para
+>En la fusió de tres carpetes, la proposta d'operació serà: Si per a un element... </para>
+<itemizedlist>
+     <listitem
+><para
+>...les tres carpetes són iguals: copiar des de <guilabel
+>C</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>A</guilabel
+> i <guilabel
+>C</guilabel
+> són iguals però <guilabel
+>B</guilabel
+> no ho és: copiar des de <guilabel
+>B</guilabel
+> (o si <guilabel
+>B</guilabel
+> no existeix, suprimir la destinació si existeix) </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>A</guilabel
+> i <guilabel
+>B</guilabel
+> són iguals però <guilabel
+>C</guilabel
+> no ho és: copiar des de <guilabel
+>C</guilabel
+> (o si <guilabel
+>C</guilabel
+> no existeix, suprimir la destinació si existeix) </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>B</guilabel
+> i <guilabel
+>C</guilabel
+> són iguals però <guilabel
+>A</guilabel
+> no ho és: copiar des de <guilabel
+>C</guilabel
+> (o si <guilabel
+>C</guilabel
+> no existeix, suprimir la destinació si existeix) </para
+></listitem>
+     <listitem
+><para
+>...només existeix <guilabel
+>A</guilabel
+>: suprimir la destinació (si existeix) </para
+></listitem>
+     <listitem
+><para
+>...només existeix <guilabel
+>B</guilabel
+>: copiar des de <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>...només existeix <guilabel
+>C</guilabel
+>: copiar des de <guilabel
+>C</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> i <guilabel
+>C</guilabel
+> no són iguals: fusionar </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> i <guilabel
+>C</guilabel
+> no tenen el mateix tipus de fitxer (&pex;, <guilabel
+>A</guilabel
+> és una carpeta, <guilabel
+>B</guilabel
+> és un fitxer): «Error: Tipus de fitxer en conflicte». Si bé aquests elements existeixen, la fusió de carpetes no pot començar. </para
+></listitem>
+</itemizedlist>
+<para
+>En la fusió de dues carpetes, la proposta d'operació serà: Si per a un element... </para>
+<itemizedlist>
+     <listitem
+><para
+>...ambdues carpetes són iguals: copiar des de <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>A</guilabel
+> existeix, però no <guilabel
+>B</guilabel
+>: copiar des d'<guilabel
+>A</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>B</guilabel
+> existeix, però no <guilabel
+>A</guilabel
+>: copiar des de <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>A</guilabel
+> i <guilabel
+>B</guilabel
+> existeixen però no són iguals: fusionar </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>A</guilabel
+> i <guilabel
+>B</guilabel
+> no tenen el mateix tipus de fitxer (&pex;, <guilabel
+>A</guilabel
+> és una carpeta, <guilabel
+>B</guilabel
+> és un fitxer): «Error: Tipus de fitxer en conflicte». Si bé aquests elements existeixen, la fusió de carpetes no podrà començar. </para
+></listitem>
+</itemizedlist>
+<para
+>El mode de sincronització estarà actiu si només s'han especificat dues carpetes i cap destinació explícita, i si l'opció <guilabel
+>Sincronitza les carpetes</guilabel
+> està activa. Després, el &kdiff3; seleccionarà una operació predeterminada perquè les dues carpetes siguin iguals després. Si per a un element... </para>
+<itemizedlist>
+     <listitem
+><para
+>...ambdues carpetes són iguals: no es farà res. </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>A</guilabel
+> existeix, però no <guilabel
+>B</guilabel
+>: copiar <guilabel
+>A</guilabel
+> a <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>B</guilabel
+> existeix, però no <guilabel
+>A</guilabel
+>: copiar <guilabel
+>B</guilabel
+> a <guilabel
+>A</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>A</guilabel
+> i <guilabel
+>B</guilabel
+> existeixen, però no són iguals: fusionar i emmagatzemar el resultat en ambdues carpetes. (Per a l'usuari, el nom visible del fitxer desat és <guilabel
+>B</guilabel
+>, però després el &kdiff3; també copiarà <guilabel
+>B</guilabel
+> a <guilabel
+>A</guilabel
+>). </para
+></listitem>
+     <listitem
+><para
+>...<guilabel
+>A</guilabel
+> i <guilabel
+>B</guilabel
+> no tenen el mateix tipus de fitxer (&pex;, <guilabel
+>A</guilabel
+> és una carpeta, <guilabel
+>B</guilabel
+> és un fitxer): «Error: Tipus de fitxer en conflicte». Si bé aquests elements existeixen, la fusió de carpetes no podrà començar. </para
+></listitem>
+</itemizedlist>
+<para
+>Quan es fusionen dues carpetes i se selecciona l'opció <guilabel
+>Copia el més nou en comptes de fusionar-los</guilabel
+>, el &kdiff3; examinarà les dates i proposarà triar el fitxer més nou. Si els fitxers no són iguals però tenen dates iguals, llavors l'operació contindrà «Error: les dates són iguals però els fitxers no». Si bé aquests elements existeixen, la fusió de carpetes no podrà començar. </para>
+</sect2>
+
+<sect2 id="status"
+><title
+>La columna Estat</title>
+<para
+>Durant la fusió, es processarà un fitxer rere l'altre. La columna d'estat mostrarà <guilabel
+>Fet</guilabel
+> per als elements on l'operació de fusió ha tingut èxit i altres textos si succeeix alguna cosa inesperada. Quan es completa una fusió, haureu de realitzar una última comprovació per a veure si l'estat de tots els elements és acceptable. </para>
+</sect2>
+
+<sect2 id="statisticscolulmns"
+><title
+>Columnes d'estadístiques</title>
+<para
+>Quan el mode de comparació de fitxers <guilabel
+>Anàlisi completa</guilabel
+> està habilitat en les opcions, el &kdiff3; mostrarà columnes addicionals que contenen el nombre de conflictes no resolts, resolts, no blanc i espai en blanc. (La columna <guilabel
+>Resolt</guilabel
+> només es mostrarà en comparar o fusionar tres carpetes). </para>
+</sect2>
+
+<sect2 id="selectingvisiblefiles"
+><title
+>Seleccionar els fitxers llistats</title>
+<para
+>Diverses opcions influeixen en els fitxers que es llisten aquí. Alguns són accessibles en el <link linkend="dirmergeoptions"
+>diàleg de configuració</link
+>. El menú <guilabel
+>Carpeta</guilabel
+> conté les entrades: </para
+><para
+><itemizedlist>
+     <listitem
+><para
+><guilabel
+>Mostra els fitxers idèntics</guilabel
+>: els fitxers que s'han detectat com a iguals en totes les carpetes de l'entrada. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Mostra els fitxers diferents</guilabel
+>: els fitxers que existeixen a dues o més carpetes però que no són iguals. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Mostra els fitxers que només són a A</guilabel
+>: els fitxers que només existeixen a <guilabel
+>A</guilabel
+>, però no a <guilabel
+>B</guilabel
+> o <guilabel
+>C</guilabel
+>. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Mostra els fitxers que només són a B</guilabel
+>: els fitxers que només existeixen a <guilabel
+>B</guilabel
+>, però no a <guilabel
+>A</guilabel
+> o <guilabel
+>C</guilabel
+>. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Mostra els fitxers que només són a C</guilabel
+>: els fitxers que només existeixen a <guilabel
+>C</guilabel
+>, però no a <guilabel
+>A</guilabel
+> o <guilabel
+>B</guilabel
+>. </para
+></listitem>
+</itemizedlist
+></para>
+<para
+>Activeu només les opcions <guilabel
+>Mostra</guilabel
+> per als elements que voleu llistar. Si, per exemple, només voleu llistar tots els elements que hi ha a <guilabel
+>A</guilabel
+> o a <guilabel
+>B</guilabel
+> però no en ambdós, haureu d'activar <guilabel
+>Mostra els fitxers que només són a A</guilabel
+> i <guilabel
+>Mostra els fitxers que només són a B</guilabel
+> i desactivar totes les altres (<guilabel
+>Mostra els fitxers idèntics</guilabel
+>, <guilabel
+>Mostra els fitxers diferents</guilabel
+>, <guilabel
+>Mostra els fitxers que només són a C</guilabel
+>). La llista s'actualitzarà immediatament per a reflectir el canvi. </para
+><para
+>Aquestes opcions també s'apliquen a les carpetes amb una excepció: inhabilitant <guilabel
+>Mostra els fitxers diferents</guilabel
+> no ocultarà cap carpeta sencera. Això només funcionarà per a dins dels fitxers. </para
+><para
+>Cal tenir en compte que d'aquestes, només l'opció <guilabel
+>Mostra els fitxers idèntics</guilabel
+> és persistent. Les altres estaran habilitades en iniciar el &kdiff3;. </para>
+</sect2>
+
+</sect1>
+
+
+<sect1 id="dothemerge"
+><title
+>Fer una fusió de la carpeta A</title>
+<para
+>Podreu fusionar l'element seleccionat (fitxer o carpeta) o tots els elements. Quan hàgiu realitzat totes les vostres eleccions d'operació (també en totes les subcarpetes), llavors podreu iniciar la fusió. </para
+><para
+>Recordeu que si no heu especificat explícitament una carpeta de destinació, llavors la destinació serà <guilabel
+>C</guilabel
+> en el mode de tres carpetes, <guilabel
+>B</guilabel
+> en el mode de fusió de dues carpetes, i en el mode de sincronització serà <guilabel
+>A</guilabel
+> o/i <guilabel
+>B</guilabel
+>. </para
+><para
+>Si heu especificat una carpeta de destinació, comproveu també que tots els elements que haurien d'estar a la sortida estiguin a l'arbre. Hi ha algunes opcions que fan que certs elements siguin omesos en la comparació i fusió de carpetes. Marqueu aquestes opcions per a evitar sorpreses desagradables: </para>
+<itemizedlist>
+     <listitem
+><para
+><guilabel
+>Carpetes recursives</guilabel
+>: si està desactivada, no es trobaran els elements a les subcarpetes.</para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Patró</guilabel
+>/<guilabel
+>Negatiu del patró</guilabel
+>: inclou/exclou els elements que coincideixen</para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Excloure els fitxers ocults</guilabel
+></para
+></listitem>
+     <listitem
+><para
+>Les <link linkend="selectingvisiblefiles"
+>opcions «Mostra»</link
+> (<guilabel
+>Mostra els fitxers idèntics/diferents</guilabel
+>, <guilabel
+>Mostra els fitxers que només són a A/B/C</guilabel
+>)</para
+></listitem>
+</itemizedlist>
+<para
+>Si canvieu la configuració per a llistar més fitxers, haureu de tornar a escanejar a través de l'element de menú <menuchoice
+><guimenu
+>Carpeta</guimenu
+><guimenuitem
+>Torna a explorar</guimenuitem
+></menuchoice
+>. (La raó d'això és que per a una velocitat de comparació més ràpida, el &kdiff3; ometrà la comparació dels fitxers suprimits seguint aquest criteri). Si heu canviat els vostres patrons de fitxers i carpetes per a excloure fitxers, la llista de fitxers s'actualitzarà immediatament en tancar el diàleg d'opcions. </para
+><para
+>Recordeu que quan escriviu en una carpeta completament nova, generalment també voldreu copiar els fitxers idèntics. En aquest cas, habiliteu l'opció <guilabel
+>Mostra els fitxers idèntics</guilabel
+>. Si la carpeta de destinació és una de les entrades, llavors això no caldrà perquè el fitxer ja hi és. </para
+><para
+>Si fins ara esteu satisfet, la resta serà fàcil. </para
+><para
+>Per a fusionar tots els elements: Seleccioneu <guimenuitem
+>Comença/Continua la fusió de les carpetes</guimenuitem
+> al menú <guimenu
+>Carpeta</guimenu
+> o premeu <keycap
+>F7</keycap
+> (la qual és la drecera predeterminada). Per a només fusionar l'element actual: seleccioneu <guilabel
+>Executa l'operació per a l'element actual</guilabel
+> o premeu <keycap
+>F6</keycap
+>. </para
+><para
+>Si a causa de tipus de fitxer en conflicte encara hi ha alguns elements amb operacions no vàlides, apareixerà un quadre de missatge i s'indicaran aquests elements, de manera que pugueu seleccionar una operació vàlida per a l'element. </para
+><para
+>Si fusioneu tots els elements, apareixerà un diàleg que us donarà les opcions <guilabel
+>Fes-ho</guilabel
+>, <guilabel
+>Simula-ho</guilabel
+> i <guilabel
+>Cancel·la</guilabel
+>. </para>
+<itemizedlist>
+     <listitem
+><para
+>Seleccioneu <guilabel
+>Simula-ho</guilabel
+> si voleu veure el que es faria sense fer-ho en realitat. Es mostrarà una llista detallada de totes les operacions.</para
+></listitem>
+     <listitem
+><para
+>En cas contrari, seleccioneu <guilabel
+>Fes-ho</guilabel
+> per a començar en realitat a fusionar.</para
+></listitem>
+</itemizedlist>
+<para
+>Llavors el &kdiff3; executarà l'operació especificada per a tots els elements. Si es requereix interacció manual (fusió d'un sol fitxer), s'obrirà una finestra de fusió (<link linkend="dirmergebigscreenshot"
+>vegeu la captura de pantalla gran</link
+>). </para
+><para
+>En acabar de fusionar manualment un fitxer, torneu a seleccionar <guimenuitem
+>Comença/Continua la fusió de les carpetes</guimenuitem
+> o la tecla <keycap
+>F7</keycap
+>. Si encara no l'heu desat, un diàleg us demanarà que ho feu. Llavors el &kdiff3; continuarà amb el següent element. </para
+><para
+>Quan el &kdiff3; troba un error, us ho indicarà i mostrarà la informació detallada sobre l'estat. A la part inferior d'aquesta llista, hi haurà alguns missatges d'error que us ajudaran a comprendre la causa del problema. Quan continueu fusionant (tecla <keycap
+>F7</keycap
+>), el &kdiff3; us donarà l'opció de tornar a intentar o ometre l'element que ha causat el problema. Això vol dir que abans de continuar podreu triar una altra operació o resoldre el problema per altres mitjans. </para
+><para
+>Quan es completi la fusió, el &kdiff3; us informarà mitjançant un quadre de missatge. </para
+><para
+>Si alguns elements s'han fusionat individualment abans d'executar la fusió de carpetes, el &kdiff3; us ho recordarà (mentre continueu amb aquesta sessió de fusió), i no els tornarà a fusionar més tard quan s'executi la fusió de tots els elements. Fins i tot quan s'ha omès la fusió o no s'ha desat res, aquests elements comptaran com a completats. Només quan canvieu l'operació de fusió, l'estat <guilabel
+>Fet</guilabel
+> de l'element serà eliminat i podreu fusionar de nou. </para>
+</sect1>
+
+<sect1 id="dirmergeoptions"
+><title
+>Opcions per a comparar i fusionar carpetes</title>
+<para
+>Les preferències del &kdiff3; (menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura el &kdiff3;...</guimenuitem
+></menuchoice
+>) té una secció anomenada <guilabel
+>Fusió de carpetes</guilabel
+> amb aquestes opcions: </para>
+
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Carpetes recursives</guilabel
+></term
+><listitem
+><para
+>Seleccioneu si voleu cercar a les carpetes de forma recursiva.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Patró/ons de fitxer:</guilabel
+></term
+><listitem
+><para
+>Només es col·locaran a l'arbre els fitxers que coincideixin aquí amb qualsevol patró. Podreu especificar més d'un patró utilitzant el punt i coma «;» com a separador. Els comodins vàlids: «*» i «?». (&pex;, «<literal
+>*.cpp;*.h</literal
+>»). El valor predeterminat és «*». Aquest patró no s'utilitzarà en les carpetes.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Negatiu del/s patró/ons dels fitxers:</guilabel
+></term
+><listitem
+><para
+>Els fitxers que coincideixin amb aquest patró s'exclouran de l'arbre. Podreu especificar més d'un patró utilitzant el punt i coma «;» com a separador. Els comodins vàlids: «*» i «?». El valor predeterminat és «<literal
+>*.orig;*.o;*.obj</literal
+>».</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Negatiu del/s patró/ons de les carpetes:</guilabel
+></term
+><listitem
+><para
+>Les carpetes que coincideixin amb aquest patró s'exclouran de l'arbre. Podreu especificar més d'un patró utilitzant el punt i coma «;» com a separador. Els comodins vàlids: «*» i «?» El valor predeterminat és «<literal
+>CVS;deps;.svn</literal
+>».</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Usa el fitxer «Ignore»</guilabel
+></term
+><listitem
+><para
+>S'ignoraran els fitxers i carpetes que també serien ignorats pel vostre control del codi font. Molts fitxers generats automàticament són ignorants emprar la llista per a ignorar. El gran avantatge és que pot ser una carpeta específica a través d'un fitxer local. (Per a més detalls, vegeu la documentació per al control del codi font). </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Cerca als fitxers i carpetes ocults</guilabel
+></term
+><listitem
+><para
+>En alguns sistemes de fitxers, els fitxers tenen un atribut «Ocult». En altres sistemes, un nom de fitxer que comença amb un punt «.» fa que resti ocult. Aquesta opció permet decidir si voleu incloure o no aquests fitxers en l'arbre. El valor predeterminat és activat.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Segueix els enllaços de fitxer</guilabel
+></term
+><listitem
+><para
+>Per als enllaços a fitxers: quan està inhabilitada, es compararan els enllaços simbòlics. Quan està habilitada, es compararan els fitxers que hi ha al darrere dels enllaços. El valor predeterminat és desactivat.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Segueix els enllaços de carpeta</guilabel
+></term
+><listitem
+><para
+>Per als enllaços a carpetes: quan està inhabilitada, es compararan els enllaços simbòlics. Quan està habilitada, l'enllaç es tractarà com una carpeta i s'explorarà de forma recursiva. (Recordeu que el programa no comprovarà si l'enllaç és «recursiu». Llavors, per exemple, una carpeta que conté un enllaç a una carpeta causaria un bucle infinit, i després d'un temps quan la pila es desbordi o s'esgoti tota la memòria, es bloquejarà el programa). El valor predeterminat és desactivat.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>La comparació dels noms de fitxer distingeix majúscules i minúscules</guilabel
+></term
+><listitem
+><para
+>De manera predeterminada és fals al &Windows;, cert per als altres sistemes operatius.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Mode de comparació dels fitxers:</guilabel
+></term
+><listitem
+><para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Comparació binària</guilabel
+></term
+><listitem
+><para
+>Aquest és el mode de comparació de fitxers predeterminat. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Anàlisi completa</guilabel
+></term
+><listitem
+><para
+>Fa una anàlisi completa de cada fitxer i mostra les columnes d'informació estadística. (Nombre de conflictes <guilabel
+>Resolt</guilabel
+>, <guilabel
+>No resolt</guilabel
+>, <guilabel
+>No blanc</guilabel
+> i <guilabel
+>Blanc</guilabel
+>). L'anàlisi completa és més lenta que una anàlisi binària senzilla, i molt més lenta quan s'utilitza en fitxers que no contenen text. (Especifiqueu el negatiu dels patrons apropiats de fitxer). </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Confia en la mida i la data de modificació (insegur)</guilabel
+></term
+><listitem
+><para
+>Si compareu carpetes grans en una xarxa lenta, podria ser més ràpid comparar només les dates de modificació i la longitud del fitxer. Però aquesta millora en la velocitat ve amb el preu d'una petita incertesa. Utilitzeu aquesta opció amb cura. El valor predeterminat és desactivat.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Confia en la mida (insegur)</guilabel
+></term
+><listitem
+><para
+>Similar a confiar en la data de modificació. No succeeix una comparació real. Dos fitxers es consideraran iguals si les seves mides de fitxer són iguals. Això és útil quan l'operació de còpia de fitxers no conserva la data de modificació. Utilitzeu aquesta opció amb cura. El valor predeterminat és desactivat.</para
+></listitem
+></varlistentry>
+</variablelist
+></para
+></listitem
+></varlistentry>
+
+   <varlistentry
+><term
+><guilabel
+>Sincronitza les carpetes</guilabel
+></term
+><listitem
+><para
+>Activa el mode de sincronització quan es comparen dues carpetes i no s'ha especificat cap carpeta de destinació explícita. En aquest mode, les operacions proposades s'escolliran de manera que ambdues carpetes font siguin iguals després. A més, el resultat de la fusió s'escriurà en ambdues carpetes. El valor predeterminat és desactivat.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Copia el més nou en comptes de fusionar-los (insegur)</guilabel
+></term
+><listitem
+><para
+>En lloc de fusionar l'operació proposada, es copiarà la font més nova si han succeït canvis. (Considerat insegur, perquè implica que sabeu que l'altre fitxer no ha estat també editat. Comproveu-ho per a assegurar-vos en tots els casos). El valor predeterminat és desactivat.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Fitxers de còpia de seguretat (.orig)</guilabel
+></term
+><listitem
+><para
+>Si se substitueix un fitxer o carpeta completa per una altra o se suprimeix, la versió original canviarà de nom amb l'extensió <literal role="extension"
+>.orig</literal
+>. Si ja existeix un fitxer antic de còpia de seguretat amb aquesta extensió, se suprimirà sense còpia de seguretat. Això també afectarà la fusió normal de fitxers individuals, no només en el mode fusió de carpetes. El valor predeterminat és activat.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="other"
+><title
+>Altres funcions a la finestra de fusió de carpetes</title>
+<sect2
+><title
+>Mode de pantalla dividida/completa</title>
+<para
+>En general, la vista de llista per a la fusió de carpetes romandrà visible mentre es compara o fusiona un sol fitxer. Amb el ratolí, podreu moure la barra divisòria que separa la llista de fitxers de les finestres de diferències de text. Si no voleu això, podreu inhabilitar l'element de menú <menuchoice
+><guimenu
+>Carpeta</guimenu
+><guimenuitem
+>Vista de pantalla dividida en text i carpetes</guimenuitem
+></menuchoice
+>. Després podreu utilitzar l'element de menú <menuchoice
+><guimenu
+>Carpeta</guimenu
+><guimenuitem
+>Commuta la vista</guimenuitem
+></menuchoice
+> per a canviar entre la llista de fitxers i la vista de diferències de text que després ocuparan la pantalla completa. </para>
+</sect2>
+<sect2
+><title
+>Comparar o fusionar un sol fitxer</title>
+<para
+>Probablement preferireu un doble clic del ratolí en un fitxer per a comparar-lo. No obstant això, també hi ha una entrada al menú <guimenu
+>Carpeta</guimenu
+>. També podreu fusionar directament un sol fitxer seleccionant-lo i triant l'element de menú <menuchoice
+><guimenu
+>Fusiona</guimenu
+><guimenuitem
+>Fusiona el fitxer actual</guimenuitem
+></menuchoice
+>. En desar el resultat, l'estat s'establirà com a fet i el fitxer no es fusionarà de nou si s'inicia una fusió de carpeta. </para
+><para
+>Fixeu-vos, que aquesta informació d'estat es perdrà quan torneu a executar una exploració de la carpeta: <menuchoice
+><guimenu
+>Carpeta</guimenu
+><guimenuitem
+>Torna a explorar</guimenuitem
+></menuchoice
+> </para>
+</sect2>
+<sect2
+><title
+>Comparar o fusionar fitxers amb noms diferents</title>
+<para
+>A vegades necessitareu comparar o fusionar fitxers amb noms diferents (&pex;, el fitxer actual i la còpia de seguretat a la mateixa carpeta). </para
+><para
+>Seleccioneu el fitxer exacte fent clic a la icona a la columna <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> o <guilabel
+>C</guilabel
+>. El primer fitxer seleccionat s'haurà de marcar amb una <guilabel
+>A</guilabel
+>, el segon i el tercer amb <guilabel
+>B</guilabel
+> i <guilabel
+>C</guilabel
+>, independentment de la columna en què es trobin. D'aquesta manera només es podran triar fins a tres fitxers. </para
+><para
+>Continueu triant l'element de menú <menuchoice
+><guimenu
+>Carpeta</guimenu
+><guimenuitem
+>Compara els fitxers seleccionats explícitament</guimenuitem
+></menuchoice
+> o <menuchoice
+><guimenu
+>Carpeta</guimenu
+><guimenuitem
+>Fusiona els fitxers seleccionats explícitament</guimenuitem
+></menuchoice
+>. Per a la vostra comoditat, aquestes entrades de menú també apareixeran com un menú contextual quan feu clic dret en l'últim fitxer seleccionat. </para
+><para
+>La comparació o fusió d'un fitxer succeirà a la mateixa finestra. Si s'utilitza aquest mètode per a les carpetes, s'obrirà una finestra nova. </para
+></sect2>
+</sect1>
+</chapter>
+
+<chapter id="misc">
+<title
+>Temes diversos</title>
+<sect1 id="networktransparency">
+<title
+>Transparència de xarxa a través del KIO</title>
+<sect2
+><title
+>Esclaus KIO</title>
+<para
+>La biblioteca KIO dels &frameworks; admet la transparència de xarxa mitjançant els esclaus KIO. El &kdiff3; la farà servir per a llegir els fitxers d'entrada i per a explorar les carpetes. Això vol dir que podreu especificar fitxers i carpetes en recursos locals i remots mitjançant els &URL;. </para
+><para
+>Exemple: </para
+><para>
+<screen
+><command
+>kdiff3</command
+> test.cpp  ftp://ftp.faraway.org/test.cpp
+   <command
+>kdiff3</command
+> tar:/home/hacker/arxiu.tar.gz/carpeta ./carpeta
+</screen>
+</para>
+<para
+>La primera línia compara un fitxer local amb un fitxer en un servidor &FTP;. La segona línia compara una carpeta dins d'un arxiu comprimit amb una carpeta local. </para
+><para
+>Altres esclaus KIO que també són interessants: </para>
+<itemizedlist>
+<listitem
+><para
+>Fitxers des del WWW (http:),</para
+></listitem>
+<listitem
+><para
+>Fitxers des de l'&FTP; (ftp:),</para
+></listitem>
+<listitem
+><para
+>Transferència de fitxers encriptats (fish:, sftp:),</para
+></listitem>
+<listitem
+><para
+>Recursos de &Windows; (smb:),</para
+></listitem>
+<listitem
+><para
+>Fitxers locals (file:),</para
+></listitem>
+</itemizedlist>
+<para
+>Altres coses que també són possibles, però probablement menys útils: </para>
+<itemizedlist>
+<listitem
+><para
+>Pàgines «man» (man:),</para
+></listitem>
+<listitem
+><para
+>Pàgines «info» (info:),</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2
+><title
+>Com escriure els &URL;</title>
+<para
+>Un &URL; té una sintaxi diferent en comparació amb els camins dels fitxers i carpetes locals. S'han de considerar algunes coses: </para>
+<itemizedlist>
+<listitem
+><para
+>Un camí pot ser relatiu i pot contenir «.» o «..». Això no és possible per als &URL; que sempre són absoluts. </para
+></listitem
+><listitem
+><para
+>Els caràcters especials s'han d'escriure amb «escapament». («<literal
+>#</literal
+>» -&gt; «<literal
+>%23</literal
+>», espai -&gt; «<literal
+>%20</literal
+>», &etc;) Per exemple, un fitxer amb el nom «<literal
+>/#</literal
+>foo<literal
+>#</literal
+>» tindria l'&URL; «file:/<literal
+>%23</literal
+>foo<literal
+>%23</literal
+>». </para
+></listitem
+><listitem
+><para
+>Quan els &URL; no funcionin com s'espera, primer intenteu obrir-los al &konqueror;. </para
+></listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2
+><title
+>Capacitats dels esclaus KIO</title>
+<para
+>La transparència de xarxa té un inconvenient: no tots els recursos tenen les mateixes capacitats. </para
+><para
+>De vegades això es deu al sistema de fitxers del servidor, de vegades a causa del protocol. Aquí hi ha una breu llista de les restriccions: </para>
+<itemizedlist>
+<listitem
+><para
+>De vegades no s'admeten els enllaços. </para
+></listitem
+><listitem
+><para
+>O no hi ha forma de distingir si un enllaç apunta a un fitxer o carpeta. Sempre assumint un fitxer. (ftp:, sftp:). </para
+></listitem
+><listitem
+><para
+>No sempre es pot determinar la mida del fitxer. </para
+></listitem
+><listitem
+><para
+>Suport limitat per als permisos. </para
+></listitem
+><listitem
+><para
+>No hi ha possibilitat de modificar els permisos o el temps de modificació, de manera que els permisos o el temps d'una còpia diferiran de l'original. (Vegeu l'opció <guilabel
+>Confia en la mida (insegur)</guilabel
+>). (Per a modificar els permisos o el temps de modificació només és possible per als fitxers locals). </para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+<sect1 id="kpart">
+<title
+>Emprar el &kdiff3; com a una KPart</title>
+<para
+>El &kdiff3; és una KPart. Actualment implementa la interfície «KParts::ReadOnlyPart». </para
+><para
+>El seu ús principal és com a visualitzador de diferències en el &kdevelop;. El &kdevelop; sempre inicia primer el visualitzador de diferències intern. Per a invocar el &kdiff3;, premeu el &BDR; a la finestra de la vista de diferències i seleccioneu <guimenuitem
+>Mostra a la part del &kdiff3;</guimenuitem
+> des del menú contextual. </para
+><para
+>El &kdiff3; normalment requereix dos fitxers complets com a entrada. Quan s'utilitza com a part, el &kdiff3; assumirà que el fitxer d'entrada és un fitxer de pedaç en el format unificat. Llavors el &kdiff3; recuperarà els noms de fitxer originals des del fitxer de pedaç. Almenys un dels dos fitxers haurà d'estar disponible. Llavors el &kdiff3; invocarà l'ordre <command
+>patch</command
+> per a recrear el segon fitxer. </para
+><para
+>En el &dolphin; podreu seleccionar un fitxer de pedaç i seleccionar l'element <menuchoice
+><guimenuitem
+>Vista prèvia a</guimenuitem
+><guisubmenu
+>Part del &kdiff3;</guisubmenu
+></menuchoice
+> des del menú contextual. Cal tenir en compte que això no funcionarà si cap dels fitxers originals està disponible, i no és fiable si els fitxers originals han canviat des que es va generar el fitxer de pedaç. </para
+><para
+>Quan s'executa com a part, el &kdiff3; només proporciona una diferència de dos fitxers amb una barra d'eines i un menú molt petits. De manera que la fusió o la comparació de carpetes no s'admeten. </para>
+</sect1>
+
+<sect1 id="git">
+<title
+>Usar el &kdiff3; com a una eina de «diff» i fusió de &git;</title>
+<para
+>Es pot emprar el &kdiff3; com a una eina de «diff» i fusió de <ulink url="https://git-scm.com/"
+>&git;</ulink
+>. </para>
+<para
+>Simplement afegiu les següents línies al vostre fitxer <filename
+>gitconfig</filename
+>. </para>
+<programlisting
+>[diff]
+        tool = kdiff3
+[difftool "kdiff3"]
+        path = &lt;camí cap al binari kdiff3 al vostre sistema&gt;
+[difftool]
+        prompt = false
+        keepBackup = false
+        trustExitCode = false
+[merge]
+        tool = kdiff3
+[mergetool]
+        prompt = false
+        keepBackup = false
+        keepTemporaries = false
+[mergetool "kdiff3"]
+        path = &lt;camí cap al binari kdiff3 al vostre sistema&gt;
+</programlisting>
+<para
+>Després, per a veure les diferències entre dos «commits», utilitzeu <userinput
+>git difftool <replaceable
+>primera_suma</replaceable
+> <replaceable
+>segona_suma</replaceable
+> --tool=kdiff3 --cc <replaceable
+>algun_fitxer_a_larbre_de_Git</replaceable
+></userinput
+> </para>
+<para
+>Per a fusionar una branca amb el &kdiff3;, utilitzeu <userinput
+>git merge <replaceable
+>nom_branca</replaceable
+> &amp;&amp; git mergetool --tool=kdiff3</userinput
+> </para>
+<para
+>Una vegada resolts els conflictes de fusió de la <link linkend="synchronise_views"
+>forma habitual</link
+>, n'hi haurà prou amb confirmar els canvis per a fer la tasca. </para>
+</sect1>
+</chapter>
+
+<chapter id="faq">
+<title
+>Preguntes i respostes</title
+>&reporting.bugs; &updating.documentation; <qandaset id="faqlist">
+
+<qandaentry
+><question
+><para
+>Per què s'anomena «&kdiff3;»? </para
+></question
+><answer
+><para
+>Les eines anomenades <application
+>KDiff</application
+> i <application
+>KDiff2</application
+> (ara s'anomenen &kompare;) ja existeixen. A més, el &kdiff3; hauria de suggerir que pot fusionar com l'eina <command
+>diff3</command
+> a la col·lecció «Diff-Tool». </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Per què el vaig alliberar sota la GPL? </para
+></question
+><answer
+><para
+>Estic emprant programes GPL des de fa molt de temps i vaig aprendre molt en donar una ullada a moltes de les fonts. Per tant, aquest és el meu «Gràcies» a tots els programadors que també ho van fer o que faran el mateix. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Manquen alguns botons i funcions. Què passa? </para
+></question
+><answer
+><para
+>Heu compilat des del codi font però probablement no heu especificat el prefix correcte per a la instal·lació. De manera predeterminada, el <command
+>cmake</command
+> vol instal·lar a <filename class="directory"
+>/usr/local</filename
+> però després no pot trobar el fitxer de recursos de la interfície d'usuari (&ead;, <filename
+>kdiff3ui.rc</filename
+>). El fitxer <filename
+>README</filename
+> conté més informació sobre el prefix correcte. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Sovint, les línies que són similars però no idèntiques apareixen una al costat de l'altra, però de vegades no. Per què? </para
+></question
+><answer
+><para
+>Les línies on només la quantitat de caràcters d'espai en blanc és diferent, es tractaran com a «iguals» al començament, mentre que només un caràcter no blanc diferent farà que les línies siguin «diferents». Si apareixen línies similars una al costat de l'altra, això en realitat és una coincidència, però afortunadament sovint és així. Vegeu també l'<link linkend="manualdiffhelp"
+>ajuda del manual de «diff»</link
+>. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Per què s'han de resoldre tots els conflictes abans que es pugui desar el resultat de la fusió? </para
+></question
+><answer
+><para
+>Per a cada secció igual o diferent, l'editor a la finestra de resultats de la fusió recordarà on comença o on acaba. Això és necessari perquè els conflictes es puguin resoldre manualment simplement seleccionant el botó de la font (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> o <guilabel
+>C</guilabel
+>). Aquesta informació es perdrà mentre es desa com a text i és massa esforç crear un format de fitxer especial que admeti desar i restaurar tota la informació necessària. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Com puc sincronitzar les vistes de les diferències i la fusió, de manera que totes les vistes mostrin la mateixa posició al text? </para
+></question
+><answer
+><para
+>Feu clic a la columna del resum a l'esquerra del text. (<link linkend="synchronise_views"
+>Vegeu també aquí</link
+>). </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Perquè <userinput
+>git difftool --dir-diff</userinput
+> dona «Barreja d'enllaços i fitxers normals» en emprar el &kdiff3; com a eina de «diff»? </para
+></question
+><answer
+><para
+>Aquest és un efecte secundari del funcionament intern de git. Si voleu comparar una revisió anterior amb l'arbre de treball actual, el git compararà els fitxers que representen la confirmació anterior amb els enllaços simbòlics que apuntin a l'arbre de treball. A partir de la versió 1.9, el &kdiff3; té activat de manera predeterminada <guilabel
+>Segueix els enllaços de fitxer</guilabel
+> i <guilabel
+>Segueix els enllaços de carpeta</guilabel
+>. Abans d'això, de manera predeterminada estaven desactivades. Això no importava si també estava desactivada <quote
+>Anàlisi completa</quote
+>. No obstant això, amb <guilabel
+>Anàlisi completa</guilabel
+>, el &kdiff3; inicialment intentaria comparar el camí apuntat per un enllaç en lloc de seguir-lo. Abans de la 1.8, s'ignorava l'error resultant. No obstant això, la 1.8 va començar a informar de l'error. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Per què l'editor a la finestra de resultats de la fusió no té l'opció «Desfés»? </para
+></question
+><answer
+><para
+>Això seria massa esforç fins ara. Sempre podreu restaurar una versió des d'una font (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> o <guilabel
+>C</guilabel
+>) fent clic al botó corresponent. De totes maneres, per a una gran edició, es recomana emprar un altre editor. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Quan elimino una mica de text, de sobte apareix «&lt;La línia no és codi&gt;» i no es pot suprimir. Què vol dir i com es pot treure? </para
+></question
+><answer
+><para
+>Per a cada secció igual o diferent, l'editor a la finestra de resultats de la fusió recordarà on comença o on acaba. «&lt;La línia no és codi&gt;» vol dir que no queda res en una secció, ni tan sols un caràcter de línia nova. Això pot succeir mentre es fusiona automàticament o s'edita. Això no és cap problema, ja que aquest suggeriment no apareixerà en el fitxer desat. Si voleu recuperar la font original, només haureu de seleccionar la secció (feu clic a la columna del resum a l'esquerra) i després feu clic al botó de la font amb el contingut necessari (<guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+> o <guilabel
+>C</guilabel
+>). </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Per què el &kdiff3; no admet el ressaltat de la sintaxi? </para
+></question
+><answer
+><para
+>El &kdiff3; ja utilitza molts colors per a ressaltar les diferències. Més ressaltat seria confús. Per a això, empreu un altre editor. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Puc emprar el &kdiff3; per a comparar fitxers <trademark class="registered"
+>OpenOffice.org</trademark
+>, <application
+>&Microsoft; Word</application
+>, <application
+>&Microsoft; Excel</application
+>, &PDF;, &etc;? </para
+></question
+><answer
+><para
+>Encara que el &kdiff3; analitzarà qualsevol classe de fitxer, el resultat probablement no serà molt satisfactori. </para
+><para
+>El &kdiff3; es va crear per a comparar fitxers de text pur. L'<trademark class="registered"
+>OpenOffice.org</trademark
+>, el <application
+>&Microsoft; Word</application
+>, el <application
+>&Microsoft; Excel</application
+>, &etc; emmagatzemen molta més informació en els fitxers (sobre els tipus de lletra, imatges, pàgines, colors, &etc;) que el &kdiff3; no coneix. Per tant, el &kdiff3; mostrarà el contingut del fitxer interpretat com a text pur, però això podria ser il·legible o almenys es veurà molt estrany. </para
+><para
+>Com la majoria dels programes avui en dia emmagatzemen el seu contingut en el format &XML;, és possible que pugueu llegir-lo com a text pur. Llavors, si el canvi només ha estat petit, el &kdiff3; encara podria ajudar-vos. </para
+><para
+>La millor solució si només voleu comparar el text (sense objectes incrustats com les imatges) és utilitzar els elements de menú <menuchoice
+><guimenu
+>Edita</guimenu
+><guimenuitem
+>Selecciona-ho tot</guimenuitem
+></menuchoice
+> i <menuchoice
+><guimenu
+>Edita</guimenu
+><guimenuitem
+>Copia</guimenuitem
+></menuchoice
+> en el vostre programa per a copiar el text interessant en el porta-retalls i després en el &kdiff3; enganxar el text en qualsevol finestra d'entrada de les diferències. (Vegeu també <link linkend="selections"
+>Seleccionar, copiar i enganxar</link
+>). </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>On està l'opció de carpetes <guimenuitem
+>Llista només les diferències en els espais</guimenuitem
+>? </para
+></question
+><answer
+><para
+>Ara hi ha diverses <link linkend="selectingvisiblefiles"
+>opcions «Mostra»</link
+> al menú <guimenu
+>Carpeta</guimenu
+>. Inhabilitant <guimenuitem
+>Mostra els fitxers idèntics</guimenuitem
+> aconseguireu el que solíeu fer habilitant <guimenuitem
+>Llista només les diferències en els espais</guimenuitem
+>. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Com puc fer una gran selecció a la finestra d'entrada de les diferències? El desplaçament triga tant temps? </para
+></question
+><answer
+><para
+>Inicieu la selecció com de costum (feu clic i manteniu premut el &BER;). Llavors empreu les tecles de navegació (&pex;, &PgUp;, &PgDn;) mentre manteniu premut el &BER;. (Vegeu també <link linkend="selections"
+>Seleccionar, copiar i enganxar</link
+>). </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Aquí hi ha molta informació, però la meva pregunta encara no s'ha respost. </para
+></question
+><answer
+><para
+>Si us plau, envieu-me la vostra pregunta. Agraeixo cada comentari. </para
+></answer
+></qandaentry>
+
+</qandaset>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Crèdits i llicència</title>
+
+<para
+>&kdiff3;: Eina per a la comparació i fusió de fitxers i carpetes </para>
+<para
+>Copyright del programa 2002-2007 Joachim Eibl <email
+>joachim.eibl at gmx.de</email
+> </para>
+<para
+>Diverses idees genials i informes d'errors han vingut de col·legues i molta gent a la Wild Wild Web. Gràcies a vosaltres! </para>
+
+<para
+>Copyright de la documentació &copy; 2002-2007 Joachim Eibl <email
+>joachim.eibl at gmx.de</email
+> </para>
+
+<para
+>Copyright de la documentació &copy; 2017-2019 Michael Reeves <email
+>reeves.87 at gmail.com</email
+> </para>
+
+<para
+>Traductor de la documentació: &credits.Antoni.Bella;</para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab
+-->

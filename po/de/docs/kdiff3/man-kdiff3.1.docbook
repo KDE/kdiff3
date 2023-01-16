@@ -1,0 +1,451 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % German "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>KDiff3-Benutzerhandbuch</title>
+<author
+><firstname
+>Burkhard</firstname
+><surname
+>Lück</surname
+> <contrib
+>Handbuchseite zu KDiff3.</contrib
+> &Burkhard.Lueck.mail; </author>
+<date
+>2019-02-22</date>
+<releaseinfo
+>kdiff3 1.9</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdiff3</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdiff3</command
+></refname>
+<refpurpose
+>Programm zum Vergleichen und Zusammenführen von Dateien und Ordnern</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kdiff3</command
+> <arg choice="opt"
+><option
+>-u, --ignore</option
+></arg
+> <arg choice="opt"
+><option
+>--query</option
+></arg
+> <arg choice="opt"
+><option
+>--html</option
+></arg
+> <arg choice="opt"
+><option
+>--abort</option
+></arg
+> <arg choice="opt"
+><option
+>-m, --merge</option
+></arg
+> <arg choice="opt"
+><option
+>-b, --base</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-o, --output</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--out</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--noauto</option
+></arg
+> <arg choice="opt"
+><option
+>--auto</option
+></arg
+> <arg choice="opt"
+><option
+>--L1</option
+> <replaceable
+>alias1</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L2</option
+> <replaceable
+>alias2</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--L3</option
+> <replaceable
+>alias3</replaceable
+></arg
+> <arg choice="opt"
+><option
+>-L, --fname</option
+> <replaceable
+>alias</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--cs</option
+> <replaceable
+>string</replaceable
+></arg
+> <arg choice="opt"
+><option
+>--confighelp</option
+></arg
+> <arg choice="opt"
+><option
+>--config</option
+> <replaceable
+>file</replaceable
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>File1</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>File2</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>File3</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Beschreibung</title>
+<para
+>Vergleicht zwei oder drei Eingabedateien oder Ordner.</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Optionen</title>
+<variablelist>
+<varlistentry>
+<term
+><option
+>-u, --ignore</option
+></term>
+<listitem
+><para
+>Ignoriert. (Benutzerdefiniert.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--query</option
+></term>
+<listitem
+><para
+>Ignoriert. (Benutzerdefiniert.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--html</option
+></term>
+<listitem
+><para
+>Ignoriert. (Benutzerdefiniert.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--abort</option
+></term>
+<listitem
+><para
+>Ignoriert. (Benutzerdefiniert.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-m, --merge</option
+></term>
+<listitem
+><para
+>Quellen zusammenführen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-b, --base</option
+> <replaceable
+>file</replaceable
+></term>
+<listitem
+><para
+>Explizite Basisdatei. Für Kompatibilität mit anderen Werkzeugen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-o, --output</option
+> <replaceable
+>file</replaceable
+></term>
+<listitem
+><para
+>Ausgabedatei. Beinhaltet -m &eg;: -o newfile.txt </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--out</option
+> <replaceable
+>file</replaceable
+></term>
+<listitem
+><para
+>Ausgabedatei. (Für Kompatibilität mit anderen Werkzeugen.) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--auto</option
+></term>
+<listitem
+><para
+>Kein Fenster anzeigen, wenn alle Konflikte automatisch auflösbar sind, benötigt <option
+>-o</option
+><replaceable
+>file</replaceable
+> </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--noauto</option
+></term>
+<listitem
+><para
+>Die Option --auto ignorieren und immer die grafische Oberfläche anzeigen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L1</option
+> <replaceable
+>alias1</replaceable
+></term>
+<listitem
+><para
+>Anderer angezeigter Dateiname für erste Datei (Basis). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L2</option
+> <replaceable
+>alias2</replaceable
+></term>
+<listitem
+><para
+>Anderer angezeigter Dateiname für zweite Datei. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--L3</option
+> <replaceable
+>alias3</replaceable
+></term>
+<listitem
+><para
+>Anderer angezeigter Dateiname für dritte Datei. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-L, --fname</option
+> <replaceable
+>alias</replaceable
+></term>
+<listitem
+><para
+>Anderer angezeigter Dateiname: Kann für jede Quelle spezifiziert werden. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--cs</option
+> <replaceable
+>string</replaceable
+></term>
+<listitem
+><para
+>Eine Einstellung Überschreiben. Je Einstellung verwendbar &eg;: <option
+>--cs</option
+> <replaceable
+>AutoAdvance=1</replaceable
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--confighelp</option
+></term>
+<listitem
+><para
+>Liste aller Einstellungen und aktueller Werte anzeigen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--config</option
+> <replaceable
+>file</replaceable
+></term>
+<listitem
+><para
+>Eine andere Einstellungsdatei verwenden. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>File1</replaceable
+></option
+></term>
+<listitem
+><para
+>Erste Datei (Basis, falls nicht <option
+>--base</option
+> verwendet wird) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>File2</replaceable
+></option
+></term>
+<listitem
+><para
+>Zweite Datei </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>File3</replaceable
+></option
+></term>
+<listitem
+><para
+>Dritte Datei </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+<refsect1>
+<title
+>Siehe auch</title>
+<simplelist>
+<member
+>Weitere ausführliche Dokumentation finden Sie unter <ulink url="help:/kdiff3"
+>help:/kdiff3</ulink
+>. Geben Sie diese &URL; entweder im &konqueror; ein oder starten Sie <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/kdiff3</parameter
+></userinput
+>.</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Autoren</title>
+<para
+>Diese Handbuchseite wurde von &Burkhard.Lueck; &Burkhard.Lueck.mail; geschrieben</para>
+</refsect1>
+
+</refentry>

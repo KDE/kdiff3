@@ -1,0 +1,124 @@
+# Translation of kdiff3fileitemactionplugin.po into Serbian.
+# Chusslove Illich <caslav.ilic@gmx.net>, 2012, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdiff3fileitemactionplugin\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2019-08-30 07:40+0200\n"
+"PO-Revision-Date: 2017-09-28 17:57+0200\n"
+"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: kdiff3fileitemaction.cpp:92
+#, fuzzy, kde-format
+#| msgid "KDiff3 ..."
+msgid "KDiff3..."
+msgstr "К‑диф3..."
+
+# >> %1 file path
+#: kdiff3fileitemaction.cpp:124
+#, kde-format
+msgid "Compare with %1"
+msgstr "Упореди са %1"
+
+# >> %1 file path
+#: kdiff3fileitemaction.cpp:130
+#, kde-format
+msgid "Merge with %1"
+msgstr "Стопи са %1"
+
+#: kdiff3fileitemaction.cpp:136
+#, kde-format
+msgid "Save '%1' for later"
+msgstr "Сачувај „%1“ за касније"
+
+#: kdiff3fileitemaction.cpp:142
+#, kde-format
+msgid "3-way merge with base"
+msgstr "Тространо стопи са базом"
+
+#: kdiff3fileitemaction.cpp:149
+#, fuzzy, kde-format
+#| msgid "Compare with ..."
+msgid "Compare with..."
+msgstr "Упореди са..."
+
+#: kdiff3fileitemaction.cpp:161
+#, kde-format
+msgid "Clear list"
+msgstr "Очисти списак"
+
+#: kdiff3fileitemaction.cpp:169
+#, kde-format
+msgid "Compare"
+msgstr "Упореди"
+
+#: kdiff3fileitemaction.cpp:175
+#, kde-format
+msgid "3 way comparison"
+msgstr "Тространо упореди"
+
+#: kdiff3fileitemaction.cpp:179
+#, fuzzy, kde-format
+#| msgid "About KDiff3 menu plugin ..."
+msgid "About KDiff3 menu plugin..."
+msgstr "О прикључку менија за К‑диф3..."
+
+#: kdiff3fileitemaction.cpp:287
+#, fuzzy, kde-format
+#| msgid ""
+#| "KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
+#| "KDiff3 homepage: http://kdiff3.sourceforge.net\n"
+#| "\n"
+msgid "KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
+msgstr ""
+"Прикључак за радње над фајловима К‑диф3: © 2011, Јоахим Ајбл\n"
+"Домаћа страница К‑диф3: http://kdiff3.sourceforge.net\n"
+"\n"
+
+# >! Wtf: ...then the branch to merge...
+#: kdiff3fileitemaction.cpp:288
+#, fuzzy, kde-format
+#| msgid ""
+#| "Using the contextmenu extension:\n"
+#| "For simple comparison of two selected files choose \"Compare\".\n"
+#| "If the other file is somewhere else \"Save\" the first file for later. It "
+#| "will appear in the \"Compare With ...\" submenu. Then use \"Compare With"
+#| "\" on second file.\n"
+#| "For a 3-way merge first \"Save\" the base file, then the branch to merge "
+#| "and choose \"3-way merge with base\" on the other branch which will be "
+#| "used as destination.\n"
+#| "Same also applies to directory comparison and merge."
+msgid ""
+"Using the context menu extension:\n"
+"For simple comparison of two selected files choose \"Compare\".\n"
+"If the other file is somewhere else \"Save\" the first file for later. It "
+"will appear in the \"Compare with...\" submenu. Then use \"Compare With\" on "
+"the second file.\n"
+"For a 3-way merge first \"Save\" the base file, then the branch to merge and "
+"choose \"3-way merge with base\" on the other branch which will be used as "
+"destination.\n"
+"Same also applies to directory comparison and merge."
+msgstr ""
+"Коришћење проширења контекстног менија:\n"
+"За једноставно поређење, изаберите „Упореди“.\n"
+"Ако је други фајл негде другде, прво сачувајте први фајл. Појавиће се у "
+"подменију „Упореди са...“. Затим употребите „Упореди са...“ над другим "
+"фајлом.\n"
+"За тространо стапање, прво сачувајте базни фајл, затим на грану за стапање, "
+"па „Тространо стопи са базом“ на другој грани која ће бити одредиште.\n"
+"Исто важи за поређење и стапање фасцикли."
+
+#: kdiff3fileitemaction.cpp:296
+#, kde-format
+msgid "About KDiff3 File Item Action Plugin"
+msgstr "О прикључку за радње над фајловима К‑диф3"

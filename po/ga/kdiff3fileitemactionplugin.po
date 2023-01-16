@@ -1,0 +1,96 @@
+# Irish translation of kdiff3fileitemactionplugin
+# Copyright (C) 2011 This_file_is_part_of_KDE
+# This file is distributed under the same license as the kdiff3fileitemactionplugin package.
+# Kevin Scannell <kscanne@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdiff3fileitemactionplugin\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-01-04 03:46+0000\n"
+"PO-Revision-Date: 2011-12-28 12:28-0500\n"
+"Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
+"Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
+"Language: ga\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
+"3 : 4\n"
+
+#: kdiff3fileitemaction.cpp:81
+#, kde-format
+msgid "KDiff3..."
+msgstr ""
+
+#: kdiff3fileitemaction.cpp:106
+#, kde-format
+msgid "Compare with %1"
+msgstr ""
+
+#: kdiff3fileitemaction.cpp:112
+#, kde-format
+msgid "Merge with %1"
+msgstr ""
+
+#: kdiff3fileitemaction.cpp:118
+#, kde-format
+msgid "Save '%1' for later"
+msgstr ""
+
+#: kdiff3fileitemaction.cpp:124
+#, kde-format
+msgid "3-way merge with base"
+msgstr ""
+
+#: kdiff3fileitemaction.cpp:131
+#, fuzzy, kde-format
+#| msgid "Compare"
+msgid "Compare with..."
+msgstr "Cuir i gComparáid"
+
+#: kdiff3fileitemaction.cpp:144
+#, kde-format
+msgctxt "Contexualmenu option to cleat comparison list"
+msgid "Clear list"
+msgstr ""
+
+#: kdiff3fileitemaction.cpp:152
+#, fuzzy, kde-format
+#| msgid "Compare"
+msgctxt "Contexualmenu option "
+msgid "Compare"
+msgstr "Cuir i gComparáid"
+
+#: kdiff3fileitemaction.cpp:158
+#, kde-format
+msgid "3 way comparison"
+msgstr ""
+
+#: kdiff3fileitemaction.cpp:162
+#, kde-format
+msgid "About KDiff3 menu plugin..."
+msgstr ""
+
+#: kdiff3fileitemaction.cpp:276
+#, kde-format
+msgid "KDiff3 File Item Action Plugin: Copyright (C) 2011 Joachim Eibl\n"
+msgstr ""
+
+#: kdiff3fileitemaction.cpp:277
+#, kde-format
+msgid ""
+"Using the context menu extension:\n"
+"For simple comparison of two selected files choose \"Compare\".\n"
+"If the other file is somewhere else \"Save\" the first file for later. It "
+"will appear in the \"Compare with...\" submenu. Then use \"Compare With\" on "
+"the second file.\n"
+"For a 3-way merge first \"Save\" the base file, then the branch to merge and "
+"choose \"3-way merge with base\" on the other branch which will be used as "
+"destination.\n"
+"Same also applies to folder comparison and merge."
+msgstr ""
+
+#: kdiff3fileitemaction.cpp:285
+#, kde-format
+msgid "About KDiff3 File Item Action Plugin"
+msgstr ""

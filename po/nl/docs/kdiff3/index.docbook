@@ -1,0 +1,4012 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdiff3 "<application
+>KDiff3</application
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Dutch "INCLUDE">
+]>
+
+<book lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Het handboek van &kdiff3;</title>
+
+<authorgroup>
+  <othercredit role="developer"
+><firstname
+>Michael</firstname
+> <surname
+>Reeves</surname
+> <affiliation
+><address
+> <email
+>reeves.87@gmail.com</email>
+    </address
+></affiliation>
+  </othercredit>
+  <othercredit role="developer"
+><firstname
+>Joachim</firstname
+> <surname
+>Eibl</surname
+> <affiliation
+><address
+> <email
+>joachim.eibl at gmx.de</email>
+    </address
+></affiliation>
+  </othercredit>
+&Sander.Koning;&Freek.de.Kruijf;&Ronald.Stroethoff; 
+</authorgroup>
+
+<copyright>
+<year
+>2002-2007</year>
+<holder
+>Joachim Eibl</holder>
+</copyright>
+<copyright>
+<year
+>2017-2019</year>
+<holder
+>Michael Reeves</holder>
+</copyright>
+<!-- Translators: put here the copyright notice of the translation -->
+<!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
+     and in the FDL itself on how to use it. -->
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<!-- Date and version information of the documentation
+Don't forget to include this last date and this last revision number, we
+need them for translation coordination !
+Please respect the format of the date (YYYY-MM-DD) and of the version
+(V.MM.LL), it could be used by automation scripts.
+Do NOT change these in the translation. -->
+
+<date
+>2019-02-22</date>
+<releaseinfo
+>1.08.70</releaseinfo>
+
+
+<abstract>
+<para
+>&kdiff3; is een hulpmiddel om bestanden en mappen te vergelijken en samen te voegen dat <itemizedlist>
+<listitem
+><para
+>twee of drie tekstbestanden of mappen vergelijkt en samenvoegt,</para
+></listitem>
+<listitem
+><para
+>de verschillen regel-voor-regel en teken-voor-teken(!) aangeeft,</para
+></listitem>
+<listitem
+><para
+>een automatische samenvoegfunctie biedt,</para
+></listitem>
+<listitem
+><para
+>een editor heeft voor het comfortabel oplossen van samenvoegconflicten,</para
+></listitem>
+<listitem
+><para
+>netwerktransparantie biedt via KIO,</para
+></listitem>
+<listitem
+><para
+>opties heeft voor het accentueren of verbergen van wijzigingen in witruimte of commentaar,</para
+></listitem>
+<listitem
+><para
+>Unicode, UTF-8 en andere bestandscoderingen ondersteunt,</para
+></listitem>
+<listitem
+><para
+>verschillen in regels afdrukt,</para
+></listitem>
+<listitem
+><para
+>versiebeheersleutelwoorden ondersteunt en samenvoegen van geschiedenis.</para
+></listitem>
+</itemizedlist>
+</para
+><para
+>Dit document beschrijft &kdiff3; versie 1.10. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdiff3</keyword>
+<keyword
+>verschil</keyword>
+<keyword
+>samenvoegen</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>drievoudig verschil</keyword>
+<keyword
+>vergelijken</keyword>
+<keyword
+>bestanden</keyword>
+<keyword
+>mappen</keyword>
+<keyword
+>mappen</keyword>
+<keyword
+>versiebeheer</keyword>
+<keyword
+>drievoudig samenvoegen</keyword>
+<keyword
+>verschillen in regels</keyword>
+<keyword
+>synchroniseren</keyword>
+<keyword
+>kpart</keyword>
+<keyword
+>kio</keyword>
+<keyword
+>netwerktransparant</keyword>
+<keyword
+>editor</keyword>
+<keyword
+>witruimte</keyword>
+<keyword
+>commentaar</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction"
+><title
+>Inleiding</title>
+<sect1 id="why"
+><title
+>Alweer een front-end voor diff?</title>
+<para
+>Er bestaan diverse grafische hulpmiddelen voor diff. Waarom &kdiff3; gebruiken? Laat me uitleggen waarom ik het geschreven heb. </para
+><para
+>&kdiff3; begon omdat ik een moeilijke samenvoegoperatie moest doen. Samenvoegen is nodig als diverse mensen aan dezelfde bestanden in een project werken. Een samenvoeging kan enigszins geautomatiseerd worden, als het samenvoeghulpmiddel daartoe niet alleen de nieuwe, gewijzigde bestanden heeft ("takken") maar ook het originele bestand ("basis"). Het samenvoeghulpmiddel kiest automatisch een verandering die alleen in één tak is gedaan. Als diverse mensen dezelfde regels veranderen, detecteert het samenvoeghulpmiddel een conflict dat handmatig opgelost moet worden. </para
+><para
+>De samenvoeging was moeilijk omdat één van de helpers veel dingen had gewijzigd en de insprong op veel plaatsen had verbeterd. Een andere helper had ook veel tekst in hetzelfde bestand veranderd, hetgeen in diverse samenvoegconflicten resulteerde. </para
+><para
+>Het hulpmiddel dat ik toen gebruikte toonde alleen de gewijzigde regels, maar niet wat er in die regels was gewijzigd. En er was geen informatie over of alleen de insprong gewijzigd was. Het samenvoegen was een kleine ramp. </para
+><para
+>Dus dat was het begin. De eerste versie kon verschillen binnen een regel en verschillen in witruimte tonen. Later werden veel andere mogelijkheden toegevoegd om het nut te vergroten. </para
+><para
+>Als u bijvoorbeeld snel wat tekst wilt vergelijken, kunt u het naar het klembord kopiëren en in een van de vergelijkingsvensters plakken. </para
+><para
+>Een optie die veel werk vereiste was het vergelijken en samenvoegen van mappen, dat het programma bijna in een bestandsverkenner veranderde. </para
+><para
+>Ik hoop dat &kdiff3; ook voor u werkt. Veel plezier! </para
+><para
+>Joachim Eibl (2003) </para>
+</sect1>
+
+<sect1 id="screenshots"
+><title
+>Schermafdrukken en mogelijkheden</title>
+<para
+>Deze schermafdruk toont het verschil tussen twee tekstbestanden (met gebruik van een eerdere versie van &kdiff3;):</para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+
+<para
+>3-voudig samenvoegen wordt volledig ondersteunt. Dit is nuttig als twee mensen code onafhankelijk wijzigen. Het originele bestand (de basis) wordt gebruikt om &kdiff3; te helpen bij het automatisch selecteren van de goede wijzigingen. In de samenvoeg-editor onder de verschillenvensters kunt u conflicten oplossen, terwijl u de uitvoer ziet die dat oplevert. U kunt zelfs de uitvoer wijzigen. Deze schermafdruk toont het samenvoegen van drie invoerbestanden: </para
+><para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</para>
+
+<para id="dirmergebigscreenshot"
+>&kdiff3; helpt u ook bij het vergelijken en samenvoegen van complete mappen. Deze schermafdruk toont &kdiff3; gedurende het samenvoegen van een map. </para
+><para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="dirmergebig.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</para>
+</sect1>
+
+<sect1 id="features"
+><title
+>Meer mogelijkheden</title>
+<sect2
+><title
+>Verschillen regel-voor-regel en teken-voor-teken tonen</title>
+<para
+>Door de mogelijkheden van een grafisch kleurenbeeldscherm te gebruiken toont &kdiff3; u precies wat het verschil is. U zult dit prettig vinden als u veel code moet doornemen. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="letter_by_letter.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Verschillen in witruimte in één oogopslag zien</title>
+<para
+>Spaties en tabs die verschillen worden getoond. Als regels alleen in de hoeveelheid witruimte verschillen kunt u dit in één oogopslag zien in de overzichtskolom aan de linkerkant. (Geen zorgen meer als mensen de insprong veranderen.) </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="white_space.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Drievoudig verschil</title>
+<para
+>Drie bestanden analyseren en zien waar ze verschillen. </para
+><para
+>De vensters links/midden/rechts heten <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> en zijn respectievelijk blauw/groen/magenta gekleurd. </para
+><para
+>Als één bestand hetzelfde is en één bestand verschilt op een regel geeft de kleur aan welk bestand verschilt. De rode kleur geeft aan dat beide andere bestanden verschillen. </para>
+<screenshot
+><mediaobject>
+   <imageobject
+><imagedata fileref="triple_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+</sect2>
+
+<sect2
+><title
+>Comfortabel samenvoegen van twee of meer invoerbestanden</title>
+<para
+>U kunt &kdiff3; gebruiken om twee of drie invoerbestanden samen te voegen en het samenvoegen zo veel mogelijk automatisch te laten verlopen. Het resultaat wordt getoond in een bewerkbaar venster waarin de meeste conflicten met een enkele muisklik opgelost kunnen worden: kies respectievelijk de knoppen <guibutton
+>...</guibutton
+> in de vensters <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> om de bron te kiezen die gebruikt moet worden. U kunt hier ook meer dan één bron kiezen. Aangezien dit uitvoervenster een editor is, kunnen ook conflicten die verdere correctie vereisen hier uitgevoerd worden zonder een extra hulpmiddel. </para>
+</sect2>
+
+<sect2
+><title
+>En...</title>
+<itemizedlist>
+   <listitem
+><para
+>Snelle navigatie via knoppen.</para
+></listitem>
+   <listitem
+><para
+>Een muisklik in een samenvattingskolom synchroniseert alle vensters om dezelfde positie te laten zien.</para
+></listitem>
+   <listitem
+><para
+>Selecteer en kopieer vanuit elk venster en plak het in het samengevoegde resultaatvenster.</para
+></listitem>
+   <listitem
+><para
+>Een overzichtskolom die toont waar de wijzigingen en conflicten zijn.</para
+></listitem>
+   <listitem
+><para
+>De kleuren zijn aan te passen aan uw specifieke voorkeuren.</para
+></listitem>
+   <listitem
+><para
+>Aanpasbare tabgrootte.</para
+></listitem>
+   <listitem
+><para
+>Een optie om spaties in plaats van tabs in te voegen.</para
+></listitem>
+   <listitem
+><para
+>Bestanden comfortabel openen via een dialoogvenster of bestanden opgeven op de opdrachtregel.</para
+></listitem>
+   <listitem
+><para
+>Zoek naar tekenreeksen in alle tekstvensters met menu-items <menuchoice
+><guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Zoeken</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) en <menuchoice
+><guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Volgende zoeken</guimenuitem
+></menuchoice
+> (<keycap
+>F3</keycap
+>).</para
+></listitem>
+   <listitem
+><para
+>De regelnummers voor elke regel tonen. </para
+></listitem>
+   <listitem
+><para
+>Het klembord plakken of tekst in een verschil-invoervenster slepen.</para
+></listitem>
+   <listitem
+><para
+>Netwerktransparantie via KIO.</para
+></listitem>
+   <listitem
+><para
+>Kan gebruikt worden als verschillenviewer uit &kdevelop; 3.</para
+></listitem>
+   <listitem
+><para
+>Regelafbreking voor lange regels.</para
+></listitem>
+   <listitem
+><para
+>Ondersteuning voor Unicode, UTF-8 en andere coderingen.</para
+></listitem>
+   <listitem
+><para
+>Ondersteuning voor talen die rechts-naar-links schrijven.</para
+></listitem>
+   <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="documentation"
+><title
+>Vergelijken en samenvoegen van bestanden</title>
+
+<sect1 id="commandline"
+><title
+>Opdrachtregel-opties</title>
+
+<sect2
+><title
+>2 bestanden vergelijken: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>bestand1 bestand2</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>2 bestanden samenvoegen: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>bestand1 bestand2</replaceable
+> -m
+   <command
+>kdiff3</command
+> <replaceable
+>bestand1 bestand2</replaceable
+> -o <replaceable
+>uitvoerbestand</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>3 bestanden vergelijken: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>bestand1 bestand2 bestand3</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>3 bestanden samenvoegen: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>bestand1 bestand2 bestand3</replaceable
+> -m
+   <command
+>kdiff3</command
+> <replaceable
+>bestand1 bestand2 bestand3</replaceable
+> -o <replaceable
+>uitvoerbestand</replaceable
+>
+</screen>
+<para
+>Merk op dat <replaceable
+>bestand1</replaceable
+> als basisbestand voor <replaceable
+>bestand2</replaceable
+> en <replaceable
+>bestand3</replaceable
+> gebruikt zal worden. </para>
+</sect2>
+
+<sect2
+><title
+>Speciaal geval: bestanden met dezelfde naam </title>
+<para
+>Als alle bestanden dezelfde naam hebben maar zich in verschillende mappen bevinden, kunt u typewerk besparen door de bestandsnaam alleen voor het eerste bestand op te geven, &eg;: </para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>map1/bestandsnaam map2 map3</replaceable
+>
+</screen>
+</sect2>
+
+<sect2
+><title
+>Opdrachtregel voor het vergelijken of samenvoegen van mappen: </title>
+<para
+>Dit lijkt er erg op, maar gaat nu over mappen.</para>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>map1 map2</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>map1 map2</replaceable
+> -o <replaceable
+>doelmap</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>map1 map2 map3</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>map1 map2 map3</replaceable
+> -o <replaceable
+>doelmap</replaceable
+>
+</screen>
+<para
+>Voor het vergelijken en samenvoegen van mappen kunt u <link linkend="dirmerge"
+>hier</link
+> verder lezen.</para>
+</sect2>
+
+<sect2
+><title
+>Overige opdrachtregel-opties</title>
+<para
+>Voor meer informatie over opdrachtregel-opties gebruikt u:</para>
+<screen
+><command
+>kdiff3</command
+> --help
+</screen>
+<para
+>Voorbeeld uitvoer:</para>
+<screen
+>Opties:
+  -m, --merge               De invoer samenvoegen.
+  -b, --base bestand        Expliciet basisbestand. Voor compatibiliteit met bepaalde hulpmiddelen.
+  -o, --output bestand      Uitvoerbestand. Impliceert -m. Bijv: -o nieuwbestand.txt
+  --out bestand             Uitvoerbestand. Voor compatibiliteit met bepaalde programma's.)
+  --noauto                  Negeer --auto en toon altijd GUI.
+  --auto                    Geen GUI als alle conflicten automatisch te doen zijn. (Vereist -o)
+  --L1 alias1               Zichtbare naamvervanging voor invoerbestand1 (basis).
+  --L2 alias2               Zichtbare naamvervanging voor invoerbestand 2.
+  --L3 alias3               Zichtbare naamvervanging voor invoerbestand 3.
+  -L, --fname alias         Alternatieve zichtbare naamvervanging. Eenmaal voor elke invoer opgeven..
+  --cs string               Vervang een config instelling. Voor elke instelling er één gebruiken. Bijv.: --cs "AutoAdvance=1"
+  --confighelp              Toon een lijst met config instellingen en huidige waarden.
+  --config file             Gebruik een ander config-bestand.
+</screen>
+<para
+>De optie <option
+>--cs</option
+> maakt het mogelijk om een configuratie-waarde aan te passen die anders alleen via de configuratiedialoog veranderd kan worden. Let op: bij het beëindigen van &kdiff3; wordt de aangepaste waarde samen met de andere instellingen opgeslagen. De namen van de beschikbare configuratie-waarden en de waarden daarvan kunt U te weten komen door het gebruik van <option
+>--confighelp</option
+>.</para>
+<para
+>Via <option
+>--config</option
+> kunt u een ander config-bestand specificeren. Wanneer u &kdiff3; vaak gebruikt met compleet andere instellingen dan stelt dit u in staat om gemakkelijk tussen hen te wisselen.</para>
+</sect2>
+<sect2
+><title
+>Opdrachtregel-opties die genegeerd mogen worden</title>
+<para
+>Vele mensen willen &kdiff3; in combinatie met een versiecontrolesysteem gebruiken. Maar wanneer dit versiecontrolesysteem &kdiff3; aanroept door gebruik van parameters op de commandoregel, die &kdiff3; niet herkent, dan eindigt &kdiff3; met een foutmelding. U kunt in de instellingendialoog in het item <guilabel
+>Integratie</guilabel
+> commandoregelargumenten opgeven die door &kdiff3; genegeerd moeten worden. Ze zullen in de help voor gebruik verschijnen zoals in dit voorbeeld:</para>
+<screen
+>--<replaceable
+>foo</replaceable
+>                     Genegeerd (gebruikergedefinieerd).
+</screen>
+<variablelist>
+  <varlistentry
+><term
+><guilabel
+>Te negeren opdrachtregel-opties:</guilabel
+></term
+><listitem
+><para
+>Een lijst opties, gescheiden door puntkomma's ';'. Wanneer een van deze opties op de commandoregel verschijnt zal &kdiff3; deze negeren en draaien zonder een fout te geven. (Standaard is het "<literal
+>u;query;html;abort</literal
+>").</para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Wanneer dit niet genoeg is, dan wordt het schrijven van een shell-script aanbevolen die de vertaling van de optie doet.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="opendialog"
+><title
+>Het venster "Openen"</title>
+<para
+>Aangezien veel bestanden geselecteerd moeten kunnen worden, heeft het programma een speciaal dialoogvenster hiervoor: </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="open_dialog.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>In dit dialoogvenster kunt u de bestandsnamen met de hand wijzigen, een bestand via het bladerprogramma kiezen via knop <guibutton
+>Bestand...</guibutton
+>) of recente bestanden via de afrolmenu's kiezen. Als u het dialoogvenster opnieuw opent, blijven de huidige bestandsnamen staan. Het derde invoerbestand is niet verplicht. Als het item bij <guilabel
+>C</guilabel
+> leeg blijft, wordt slechts een verschillenanalyse op twee bestanden uitgevoerd. </para
+><para
+>U kunt ook een map kiezen met <guibutton
+>Map...</guibutton
+>. Als voor <guilabel
+>A</guilabel
+> een map opgegeven is wordt een vergelijking/samenvoeging op mappen gestart. Als <guilabel
+>A</guilabel
+> een bestand opgeeft maar <guilabel
+>B</guilabel
+>, <guilabel
+>C</guilabel
+> of de uitvoer een map opgeeft, gebruikt &kdiff3; de bestandsnaam van <guilabel
+>A</guilabel
+> in de opgegeven mappen. </para
+><para
+>Als <guilabel
+>Samenvoegen</guilabel
+> geselecteerd is, kunt u de regel <guilabel
+>Uitvoer</guilabel
+> bewerken. Maar het is niet nodig om direct de uitvoerbestandsnaam op te geven. U kunt hiermee ook wachten tot bij het opslaan. </para
+><para
+>De knop <guibutton
+>Configureren...</guibutton
+> opent de instellingendialoog, waarmee u de opties kunt instellen voordat de analyse gestart wordt. </para>
+</sect1>
+
+<sect1 id="pasteinput"
+><title
+>Invoer plakken en slepen</title>
+<para
+>Soms wilt u tekstdelen die niet in een eigen bestand staan vergelijken. &kdiff3; biedt u ook de mogelijkheid tekst vanaf het klembord in een vergelijkingsvenster, dat de focus heeft, te plakken. De vergelijkingsanalyse begint dan direct. In het venster "Openen" hoeft u dan geen bestanden op te geven, sluit dit gewoon met de knop <guibutton
+>Annuleren</guibutton
+>. </para
+><para
+>U kunt ook slepen en neerzetten: Sleep een bestand uit een bestandsbeheerder of geselecteerde tekst uit een editor en zet deze neer in een verschillenvenster. </para
+><para
+>Wat is het idee? Soms bevat een bestand twee gelijksoortige functies, maar bekijken hoe gelijk ze werkelijk zijn is een grote moeite als u eerst twee bestanden moet maken en deze dan moet laden. Nu kunt u eenvoudigweg de relevante secties kopiëren, plakken, en vergelijken. </para
+><note
+><para
+>Momenteel kunt u niets uit &kdiff3; slepen. Alleen slepen naar de vergelijkingsinvoer wordt ondersteund. </para
+></note
+><warning
+><para
+>Sommige editors interpreteren slepen en neerzetten in een ander programma nog steeds als knippen (in plaats van kopiëren) en plakken. Uw originele gegevens kunnen daardoor verloren gaan. </para
+></warning>
+</sect1>
+
+<sect1 id="interpretinginformation"
+><title
+>Bestanden vergelijken en de informatie in de invoervensters interpreteren</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_diff.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<sect2
+><title
+>Inforegel</title
+><para
+>Bovenaan elk tekstvenster staat de "inforegel". De inforegels van de invoervensters bevatten een letter <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> of <guilabel
+>C</guilabel
+>, de te bewerken bestandsnaam, een knop voor bladeren en het regelnummer van de eerste zichtbare regel in het venster. (Merk op dat venster <guilabel
+>C</guilabel
+> optioneel is). Elke inforegel verschijnt in een aparte kleur. </para
+><para
+>Als u een ander bestand heeft geselecteerd door zoeken of door na het invoeren van de bestandsnaam op de toets &Enter; te drukken, dan zal het nieuwe bestand geladen worden en vergeleken met de al eerder geladen bestanden. </para
+></sect2
+><sect2
+><title
+>Kleuren</title
+><para
+>De drie invoervensters krijgen de letters <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> en <guilabel
+>C</guilabel
+>. <guilabel
+>A</guilabel
+> heeft de kleur blauw, <guilabel
+>B</guilabel
+> is groen en <guilabel
+>C</guilabel
+> is magenta. (Dit zijn de standaard kleuren, u kunt ze wijzigen via het item <guilabel
+>Kleur</guilabel
+> de instellingendialoog.) </para
+><para
+>Als er een verschil opgemerkt wordt, toont de kleur welk invoerbestand er verschilt. Als beide andere invoerbestanden verschillen is de kleur die dit aangeeft standaard rood (<guilabel
+>Conflictkleur</guilabel
+> in optie in item <guilabel
+>Kleur</guilabel
+> in de instellingendialoog). Dit kleurenschema is vooral handig in het geval van drie invoerbestanden, hetgeen u zult zien in de volgende sectie (<link linkend="merging"
+>Samenvoegen</link
+>). </para
+></sect2
+><sect2
+><title
+>Samenvattingskolom</title
+><para
+>Links van elke tekst staat een "samenvattingskolom". Als er verschillen op een regel opgetreden zijn geeft deze kolom de respectievelijke kleur aan. Voor een verschil alleen in witruimte is de samenvatting geblokt. Voor programmeertalen waar witruimte niet zo belangrijk is, is dit nuttig om te zien of er iets belangrijks veranderd is. (In C/C++ is witruimte alleen interessant binnen tekenreeksen, commentaar, voor de preprocessor en sommige zeer uitzonderlijke situaties.) </para
+><para
+>De verticale lijn die de overzichtskolom en de tekst scheidt wordt onderbroken als het invoerbestand daar geen regels heeft. Als regelafbreking ingeschakeld is, wordt deze lijn gestippeld voor afgebroken regels. </para
+></sect2
+><sect2
+><title
+>Overzichtskolom</title
+><para
+>Aan de rechterkant is een "overzichts"-kolom zichtbaar, links van de verticale schuifbalk. Deze toont gecomprimeerd de samenvattingskolom van invoer <guilabel
+>A</guilabel
+>. Alle verschillen en conflicten zijn in één oogopslag zichtbaar. Als er slechts twee invoervensters gebruikt worden, verschijnen alle verschillen in rood omdat elk verschil dan een conflict is. Een zwarte rechthoek omrandt het zichtbare deel van de invoer. Voor zeer lange invoerbestanden, waarbij het aantal regels groter is dan de hoogte van de overzichtskolom in pixels, delen diverse invoerregels één overzichtsregel. Een conflict heeft dan topprioriteit boven eenvoudige verschillen, die prioriteit hebben boven geen wijziging, zodat geen verschil of conflict verloren gaat. Door in deze overzichtskolom te klikken wordt de bijbehorende tekst getoond. </para
+></sect2
+><sect2 id="manualdiffhelp"
+><title
+>Handmatig regels uitlijnen</title
+><para
+>Soms plaatst het algoritme de verkeerde regels naast elkaar. Of u wilt een stuk tekst vergelijken met een ander stuk tekst op een compleet andere locatie in het andere bestand. Voor dit soort situaties kunt u handmatig &kdiff3; bepaalde regels naast elkaar laten uitlijnen. Markeer met de muis de tekst die u wilt uitlijnen alsof u het wilt kopiëren en kies vervolgens <menuchoice
+><guimenu
+>Verschilweergave</guimenu
+><guimenuitem
+>Handmatige uitlijning van vergelijking toevoegen</guimenuitem
+></menuchoice
+> (sneltoets <keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+>). Er zal een oranje balk in de samenvattingskolom naast de gekozen tekst verschijnen. Herhaal dit voor de tweede en (indien aanwezig) derde venster met verschillen. &kdiff3; zal iedere keer onmiddellijk de verschillen herberekenen en de aangewezen regels uitlijnen. Natuurlijk zullen sommige regels die voorheen wel uitgelijnd waren en nu niet meer uitgelijnd zijn. </para
+><para
+>Op dit moment ondersteunt samenvoegen het handmatig uitlijnen niet. </para
+></sect2
+><sect2 id="joinsplitsections"
+><title
+>Handmatig samenvoegen en opsplitsen van secties met verschillen</title
+><para
+>In sommige gevallen heeft &kdiff3; te veel of te weinig secties om te kunnen samenvoegen. In dergelijke gevallen kunt u bestaande secties opsplitsen of juist samenvoegen. </para
+><para
+>Voeg nieuwe secties toe door tekst in de regels die bij elkaar horen te selecteren in beide invoervensters (op dezelfde manier als kopiëren naar het klembord). Kies vervolgens het menu-item <menuchoice
+><guimenu
+>Samenvoegen</guimenu
+><guimenuitem
+>Vergelijking bij selectie splitsen</guimenuitem
+></menuchoice
+>. Splitsingen worden boven de eerste regel en onder de laatste regel van de geselecteerde tekst geplaatst. Als u maar één sectie wilt toevoegen, dan moet u vanaf een andere sectie-splitsing de tekst selecteren. </para
+><para
+>Voor het samenvoegen van secties in beide invoervenster selecteert u iets in de regels uit de samen te voegen secties. (U kunt ook meerdere secties in één bewerking samenvoegen). Kies vervolgens menu-item <menuchoice
+><guimenu
+>Samenvoegen</guimenu
+><guimenuitem
+>Geselecteerde verschillen samenvoegen</guimenuitem
+></menuchoice
+>. </para
+></sect2>
+</sect1>
+
+
+<sect1 id="merging"
+><title
+>Samenvoegen en het editorvenster voor samenvoegingsuitvoer</title>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="screenshot_merge.png" format="PNG"/></imageobject>
+</mediaobject
+></screenshot>
+<para
+>Het editorvenster voor de samenvoegingsuitvoer (onder de verschil-invoervensters) heeft ook een inforegel bovenaan met <guilabel
+>Uitvoer:</guilabel
+>, de bestandsnaam en <replaceable
+>[Gewijzigd]</replaceable
+> als u iets bewerkt hebt. Meestal bevat dit wat tekst door de automatische samenvoegingsfunctie, maar vaak bevat het ook conflicten. </para
+><para
+>!!! Opslaan is uitgeschakeld totdat alle conflicten opgelost zijn !!! (Gebruik de knoppen <guibutton
+>Ga naar vorig/volgend onopgelost conflict</guibutton
+> om de overgebleven conflicten te vinden.) </para
+><para
+>Met maar twee invoerbestanden is elk verschil ook een conflict dat handmatig opgelost moet worden. </para
+><para
+>Met drie invoerbestanden wordt het eerste bestand als basis gebruikt, en het tweede en derde bestand bevatten wijzigingen. Als op een bepaalde regel alleen invoer <guilabel
+>B</guilabel
+> of <guilabel
+>C</guilabel
+> gewijzigd is, maar niet beide, wordt de veranderde bron gekozen. Alleen als <guilabel
+>B</guilabel
+> en <guilabel
+>C</guilabel
+> op dezelfde regel veranderd zijn, detecteert het hulpmiddel een conflict dat handmatig opgelost moet worden. Als <guilabel
+>B</guilabel
+> en <guilabel
+>C</guilabel
+> hetzelfde zijn, maar niet hetzelfde als <guilabel
+>A</guilabel
+>, wordt <guilabel
+>C</guilabel
+> gekozen. </para
+><sect2
+><title
+>De kolom Samenvatting</title
+><para
+>Het editorvenster voor samenvoegingsuitvoer heeft ook links een samenvattingskolom. Deze toont de letter van de invoer waaruit een regel geselecteerd is of niets als alle drie de bronnen gelijk waren op die regel. Bij conflicten wordt een vraagteken "?" getoond en de regel toont dan "&lt;Samenvoegconflict&gt;", het geheel in rood. Omdat conflicten regel voor regel oplossen erg lang duurt, worden de regels gegroepeerd in groepen die dezelfde verschil- en conflictkenmerken hebben, Alleen witruimte-conflicten worden gescheiden van niet-witruimte-conflicten om het samenvoegen van bestanden waarin de insprong gewijzigd is, gemakkelijker te maken. </para
+></sect2
+><sect2 id="synchronise_views"
+><title
+>De huidige groep instellen en zichtposities van samenvoegen en verschillen synchroniseren</title
+><para
+>Als u met de &LMB; in een samenvattingskolom klikt, wordt de groep die bij die regel hoort geselecteerd in alle vensters en wordt het begin van de groep getoond. Deze groep wordt dan de "huidige groep". Deze wordt geaccentueerd met het optie <guilabel
+>Achtergrondkleur van diff voor huidig bereik</guilabel
+> van item <guilabel
+>Integratie</guilabel
+> in de instellingendialoog en er verschijnt een zwarte balk links van de tekst. </para
+></sect2
+><sect2
+><title
+>Kies invoer A, B of C voor het huidige conflict en bewerking</title
+><para
+>De knoppenbalk onder de menubalk heeft drie selectieknoppen voor invoer met de letters <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> en <guilabel
+>C</guilabel
+>. Klik op de keuzeknop voor invoer om de regels uit de desbetreffende bron te plakken (of na het plakken weer te verwijderen). Voor gebruik van regels uit verschillende bronnen klikt u op de knoppen in de gewenste volgorde. Als u bijvoorbeeld wilt dat de regels van <guilabel
+>B</guilabel
+> boven de regels van <guilabel
+>A</guilabel
+> in de uitvoer verschijnen, klik dan eerst op <guilabel
+>B</guilabel
+> en daarna op <guilabel
+>A</guilabel
+>. </para
+><para
+>Als u de knop <guibutton
+>Automatisch na bronselectie naar volgende onopgeloste conflict gaan</guibutton
+> gebruikt (zie sectie (<link linkend="autoadvance"
+>Automatisch doorgaan</link
+>), is het verstandig om dit uit te schakelen voordat u uit diverse bronnen regels selecteert en deze daarna wilt gaan bewerken. Als u dit nalaat zal &kdiff3; naar het volgende conflict springen na het selecteren van de eerste invoer. </para
+><para
+>Het is vaak handig om de samenvoegingsuitvoer te kunnen bewerken. In de samenvattingskolom is een "m" te zien voor iedere regel die handmatig is bewerkt. Wanneer bijvoorbeeld de verschillen zodanig zijn uitgelijnd dat eenvoudig de invoer kiezen niet het gewenste resultaat oplevert, dan kunt u de gewenste tekst markeren  en de normale manier van <link linkend="selections"
+>kopiëren en plakken</link
+> gebruiken voor het samenvoegen. </para
+><para
+>Soms verschijnt de tekst "&lt;Geen regel in de bron&gt;" in een regel als die ofwel door automatisch samenvoegen ofwel door bewerken verwijderd is, en er geen andere regels in die groep overblijven. Dit is een plaatshouder voor de groep voor als u zich bedenkt en weer een bron aangeeft. De tekst verschijnt niet in het opgeslagen bestand of in gekopieerde of geplakte selecties. </para
+><para
+>De tekst "&lt;Samenvoegconflict&gt;" verschijnt in het klembord als u tekst met zo'n regel kopieert en plakt. Maar wees alsnog voorzichtig. </para
+></sect2
+><sect2
+><title
+>Kiezen van invoer A, B, of C voor alle conflicten</title
+><para
+>Het normale samenvoegen begint door het automatisch oplossen van eenvoudige conflicten. Maar het menu <guimenu
+>Samenvoegen</guimenu
+> biedt wat acties voor andere veelvoorkomende zaken. Als u dezelfde bron voor de meeste conflicten wilt gebruiken, kunt u <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> of <guilabel
+>C</guilabel
+> overal kiezen, of alleen voor de overgebleven niet-opgeloste conflicten, of voor de niet-opgeloste witruimteconflicten. Als u elk apart onderscheid zelf wilt bepalen, kunt u <guimenuitem
+>Elk onderscheid maken bij conflicten</guimenuitem
+> instellen. Of als u terug wilt gaan naar de automatische keuzes van &kdiff3; kiest u <guimenuitem
+>Eenvoudige conflicten automatisch oplossen</guimenuitem
+>. &kdiff3; herstart het samenvoegen dan. Voor acties die uw vorige wijzigingen aanpassen vraagt &kdiff3; om uw instemming alvorens door te gaan. </para
+><note
+><para
+>Als u één van de bronnen voor onopgeloste witruimte-conflicten kiest en de optie <guilabel
+>Getallen negeren (als witruimte behandelen)</guilabel
+> of <guilabel
+>C/C++ commentaar negeren (als witruimte behandelen)</guilabel
+> bij het item <guilabel
+>Diff</guilabel
+> is gekozen in de instellingendialoog, dan worden wijzigingen in getallen respectievelijk commentaar ook als witruimte behandeld. </para
+></note
+></sect2
+><sect2 id="vcskeywordsmergesupport"
+><title
+>Automatisch samenvoegen van trefwoorden en geschiedenis (Log) uit versiebeheer</title
+><para
+>Veel systemen voor versiecontrole gebruiken speciale trefwoorden in het bestand. (&eg; "<literal
+>&#36;Date&#36;</literal
+>", "<literal
+>&#36;Header&#36;</literal
+>", "<literal
+>&#36;Author&#36;</literal
+>", "<literal
+>&#36;Log&#36;</literal
+>", &etc;). Deze regels worden aangepast tijdens het inchecken in het version control system (VCS). Bijvoorbeeld "<literal
+>&#36;Date&#36;</literal
+>" zal veranderen in "<literal
+>&#36;Date: 2005/03/22 18:45:01 &#36;</literal
+>". Omdat deze regel in iedere versie van het bestand verschillend is, is daarom het handmatig ingrijpen noodzakelijk tijdens het samenvoegen. </para
+><para
+>&kdiff3; heeft de mogelijkheid om dit soort items automatisch in item <guilabel
+>Samenvoegen</guilabel
+> in de instellen. Bij eenvoudige regels die overeenkomen met de instellingen voor <guilabel
+>Reguliere expressie voor automatisch samenvoegen</guilabel
+> voor alle invoerbestanden, zal &kdiff3; kiezen voor de regel uit <guilabel
+>B</guilabel
+> of - indien beschikbaar - uit <guilabel
+>C</guilabel
+>. (Het is bovendien noodzakelijk dat voor de vergelijking de regels uitgelijnd zijn en dat de voorgaande regels geen conflicten hebben). Dit automatisch samenvoegen kunt u naar keuze onmiddellijk na het starten van het samenvoegen uitvoeren (door het inschakelen van de optie <guilabel
+>Bij starten van samenvoegen automatisch reguliere expressie gebruiken</guilabel
+>) of later via menu-item <menuchoice
+><guimenu
+>Samenvoegen</guimenu
+><guimenuitem
+>Automatisch samenvoegen d.m.v. reguliere expressie uitvoeren</guimenuitem
+></menuchoice
+>. </para
+><para
+>Ook het automatisch samenvoegen van de geschiedenis van versiebeheer (ook "log" genoemd) is ondersteund. De geschiedenis samenvoegen kunt u naar keuze onmiddellijk na het starten van het samenvoegen uitvoeren door het inschakelen van de keuze <guilabel
+>Geschiedenis versiebeheer samenvoegen bij aanvang van samenvoegen</guilabel
+> in het item <guilabel
+>Samenvoegen</guilabel
+> in de instellingendialoog of later via het menu-item <menuchoice
+><guimenu
+>Samenvoegen</guimenu
+><guimenuitem
+>Automatisch geschiedenisconflicten oplossen</guimenuitem
+></menuchoice
+> </para
+><para
+>Meestal begint de geschiedenis van het versiebeheer met een regel waarin het trefwoord "<literal
+>&#36;Log&#36;</literal
+>" voor komt. Dit moet overeenkomen met de <guilabel
+>Reguliere expressie voor begin van geschiedenis</guilabel
+>. &kdiff3; bepaalt welke opvolgende regels ook in de geschiedenis thuishoren door te kijken naar de voorafgaande tekens die voor het trefwoord "<literal
+>&#36;Log&#36;</literal
+>" staan. Als dezelfde "voorafgaand commentaar"-tekens ook in volgende regels verschijnen, dan worden deze regels ook in de geschiedenis opgenomen. </para
+><para
+>Tijdens elke check-in schrijft het VCS een unieke regel met daarin informatie over de versie, datum en tijdstip gevolgd door regels met commentaar van de gebruiker. Deze regels vormen samen een geschiedenisitem. Deze geschiedenis groeit met elke check-in met het meest recente item bovenaan (na de beginregel van de geschiedenis). </para
+><para
+>Wanneer bij parallelle ontwikkeling twee of meer ontwikkelaars een tak van een bestand inchecken dan verschijnen bij het samenvoegen van de geschiedenis verschillende items met conflicten. Omdat het samenvoegen van deze takken vervelend kan zijn, komt  &kdiff3; met twee mogelijke strategieën: Gewoon de geschiedenisitems van beide ontwikkelaars bovenaan invoegen of de geschiedenisitems sorteren via een door de gebruiker opgegeven trefwoord. </para
+><para
+>De gewoon-toevoegen-van-alle-items-methode is makkelijker om in te stellen. &kdiff3; heeft alleen maar een methode nodig om vast te stellen welke regels bij een geschiedenis-item horen. De meeste VCS voegen een lege regel toe onder elke geschiedenis-item. Als er geen andere lege regels zijn dan is dit voldoende voor &kdiff3;.  Maak eenvoudig een lege <guilabel
+>Reguliere expressie voor begin van een geschiedenis</guilabel
+> aan in item <guilabel
+>Samenvoegen</guilabel
+> in de instellingendialoog. Als het lege regel criterium niet voldoende is dan kunt u een normale expressie aanmaken voor het detecteren van het begin van het geschiedenis-item. </para
+><para
+>Merk op dat &kdiff3; duplicaat geschiedenis-items zal verwijderen. Als een geschiedenis-item meerdere keren aanwezig is in de geschiedenis van een invoerbestand dan blijft deze maar één keer bewaart in het uitvoerbestand. </para
+><para
+>Als u de geschiedenis op volgorde wilt leggen dan moet u opgeven hoe de sorteersleutel is opgebouwd.  Gebruik haakjes in de <guilabel
+>Reguliere expressie voor het begin van een geschiedenis</guilabel
+>  in item <guilabel
+>Samenvoegen</guilabel
+> in de instellingendialoog voor het groeperen van gedeeltes van de reguliere expressie die u later wilt gebruiken voor de sorteersleutel. Geef vervolgens in de <guilabel
+>Sorteervolgorde van het begin van geschiedenis</guilabel
+> met door komma's "," gescheiden lijst op van nummers die de volgorde aangeven in de reguliere expressie. </para
+><para
+>Omdat het niet gemakkelijk is om dit in een keer goed te krijgen, kunt u de reguliere expressie uitproberen en daarna zo nodig verbeteren in een speciaal dialoogvenster door het gebruik van de knop <guibutton
+>Reguliere expressies testen</guibutton
+>. </para
+><para
+>Voorbeeld: neem een geschiedenis aan die lijkt op dit: </para>
+<screen
+>/**************************************************************************
+** HISTORY:    &#36;Log: \toms_merge_main_view\MyApplication\src\complexalgorithm.cpp &#36;
+**
+**     \main\integration_branch_12   2 Apr 2001 10:45:41   tom
+**  Samengevoegde branch simon_branch_15.
+**
+**     \main\henry_bugfix_branch_7\1   30 Mar 2001 19:22:05   henry
+**  Snelheid van subroutine convertToMesh() verbeterd.
+**  crash opgelost.
+**************************************************************************/
+</screen>
+<para
+>De beginregel van de geschiedenis komt overeen met de reguliere expressie "<literal
+>.*\&#36;Log.*\&#36;.*</literal
+>". Daarna volgen de geschiedenisitems. </para
+><para
+>De regel met het trefwoord "<literal
+>&#36;Log&#36;</literal
+>" begint met twee keer "*" waarna een spatie volgt. &kdiff3; gebruikt de eerste regel met niet-witruimte als "voorafgaand commentaar" en concludeert dat de geschiedenis eindigt in de eerste regel zonder dit voorafgaand commentaar. In dit voorbeeld eindigt de laatste regel met een tekenreeks die ook start met twee keer "*", maar in plaats van een spatie volgt meer keer "*". Met deze regel eindigt daarom de geschiedenis. </para
+><para
+>Als sorteren niet vereist is dan kan de beginregel met de reguliere expressie van het geschiedenisitem er uitzien als dit. (Deze regel is opgesplitst in tweeën omdat het anders niet zou passen.) </para>
+<screen
+>\s*\\main\\\S+\s+[0-9]+ (jan|feb|maa|apr|mei|jun|jul|aug|sep|okt|nov|dec)
+ [0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]\s+.*
+</screen>
+<para
+>Meer details over reguliere expressies kunt u lezen in de <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>documentatie over reguliere expressies</ulink
+>. Merk op dat "<literal
+>\s</literal
+>" (kleine letter "<literal
+>s</literal
+>") overeenkomt met witruimte en "<literal
+>\S</literal
+>" (Hoofdletter "S") overeenkomt met niet-witruimte. In ons voorbeeld bestaat de beginregel van ons geschiedenis-item als eerste informatie over de versie met de reguliere expressie "<literal
+>\\main\\\S+</literal
+>", de datum bestaande uit de dag "<literal
+>[0-9]+</literal
+>", maand "<literal
+>(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)</literal
+>" en jaar "<literal
+>[0-9][0-9][0-9][0-9]</literal
+>", de tijd "<literal
+>[0-9][0-9]:[0-9][0-9]:[0-9][0-9]</literal
+>" en tenslotte de gebruikersnaam van de ontwikkelaar "<literal
+>.*</literal
+>". </para
+><para
+>Merk op dat de tekens van het "voorafgaand commentaar" (in het voorbeeld "<literal
+>**</literal
+>") al verwijderd zijn door &kdiff3; voor de poging tot uitlijnen, daarom begint de reguliere expressie met een overeenkomst voor een of meer witruimte-tekens "<literal
+>\s*</literal
+>". Omdat commentaar-tekens kunnen verschillen in ieder bestand (&eg; C/C++ gebruikt andere commentaar-tekens dan een Perl script) let &kdiff3; zelf op de tekens van voorafgaand commentaar en hoeven deze daarom niet opgegeven te worden in de reguliere expressie. </para
+><para
+>Als u een gesorteerde geschiedenis vereist. Dan moet de sorteersleutel berekend worden. Hiervoor moeten de relevante delen in de reguliere expressie gegroepeerd worden door haakjes. (De extra haakjes kunnen er ook in blijven als sorteren van de geschiedenis is uitgeschakeld). </para>
+<screen
+>\s*\\main\\(\S+)\s+([0-9]+) (jan|feb|maa|apr|mei|jun|jul|aug|sep|okt|nov|dec)
+ ([0-9][0-9][0-9][0-9]) ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])\s+(.*)
+</screen>
+<para
+>Tussen de haken vindt u nu <literal
+>1</literal
+>. versie-info, <literal
+>2</literal
+>. dag, <literal
+>3</literal
+>. maand, <literal
+>4</literal
+>. jaar, <literal
+>5</literal
+>. tijd, <literal
+>6</literal
+>. naam. Maar als we op datum en tijd willen sorteren dan moeten we een sleutel creëren waarvan de onderdelen een andere volgorde hebben: eerst het jaar, gevolgd door de maand, dag, tijd, versienummer en naam. De sorteersleutel moet daarom zijn als volgt "<literal
+>4,3,2,5,1,6</literal
+>". </para
+><para
+>Omdat de namen van maanden niet handig zijn voor het op volgorde leggen ("<literal
+>Apr</literal
+>" zou dan de eerste zijn) detecteert &kdiff3; in welke volgorde de namen van maanden zijn opgegeven en gebruikt in plaats daarvan dat nummer ("<literal
+>Apr</literal
+>"-&gt;"<literal
+>04</literal
+>"). En als een kaal nummer is gevonden dan zal dit worden omgezet naar een viercijferig getal met voorloopnullen voor het op volgorde leggen. Tenslotte zal de sorteersleutel voor de beginregel van de geschiedenis er als volgt uit zien: </para>
+<screen
+>2001 04 0002 10:45:41 integration_branch_12   tom
+</screen>
+<para
+>Lees voor meer informatie ook de sectie <link linkend="mergeoptions"
+>Instellingen samenvoegen</link
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="navigation"
+><title
+>Navigatie en bewerken</title>
+<para
+>Veel navigatie doet u met de schuifbalken en de muis maar u kunt ook met de toetsen navigeren. Als u in een venster klikt, kunt u de sneltoetsen &Left;, &Right;, &Up;, &Down;, &PgUp;, &PgDn;, &Home;, &End;, <keycombo
+>&Ctrl;&Home;</keycombo
+> and <keycombo
+>&Ctrl;&End;</keycombo
+> gebruiken zoals in andere programma's. De overzichtskolom naast de verticale schuifbalk van de invoerbestanden kan ook voor navigatie gebruikt worden door erin te klikken. </para
+><para
+>U kunt ook een muis<mousebutton
+>wiel</mousebutton
+> gebruiken om omhoog en omlaag te bladeren. </para
+><para
+>In de uitvoereditor voor samenvoegen kunt u ook de andere toetsen gebruiken om de tekst te bewerken. U kunt tussen invoeg- en overschrijfmodus wisselen met de toets &Ins;. (Standaard is invoegmodus.) </para
+><para
+>Een klik met de &LMB; in een samenvattingskolom synchroniseert alle vensters zodat ze het begin van dezelfde groep regels tonen (zoals uitgelegd in de sectie <link linkend="synchronise_views"
+>"De huidige groep instellen en zichtposities van samenvoegen en verschillen synchroniseren"</link
+>). </para
+><para
+>De knoppenbalk heeft ook negen navigatieknoppen waarmee u naar het huidige/eerste/laatste verschil kunt springen, naar het volgende/vorige verschil (<keycombo
+>&Ctrl;&Down;</keycombo
+>/<keycombo
+>&Ctrl;&Up;</keycombo
+>), naar het volgende/vorige conflict (<keycombo
+>&Ctrl;&PgDn;</keycombo
+>/<keycombo
+>&Ctrl;&PgUp;</keycombo
+>) of naar het volgende/vorige onopgeloste conflict. Merk op dat voor &kdiff3; een "conflict" dat niet automatisch werd opgelost bij het begin van het samenvoegen een "conflict" blijft, zelfs als het wordt opgelost. Vandaar de noodzaak om "onopgeloste conflicten" te onderscheiden. </para>
+<sect2 id="autoadvance"
+><title
+>Automatisch doorgaan</title>
+<para
+>Er is ook een knop <guibutton
+>Automatisch naar het volgende onopgeloste conflict gaan</guibutton
+> (Automatisch doorgaan). Als u dit inschakelt, springt &kdiff3; automatisch naar het volgende onopgeloste conflict, zodra u een bron hebt geselecteerd. Dit kan helpen als u altijd slechts één bron wilt kiezen. Als u beide bronnen nodig hebt of als u na het kiezen nog wilt wijzigen, dan wilt u deze optie waarschijnlijk uitschakelen. Voordat u naar het volgende onopgeloste conflict gaat, toont &kdiff3; u korte tijd het effect van uw keuze. Deze vertraging is instelbaar in het item <guilabel
+>Samenvoegen</guilabel
+> in de instellingendialoog: u kunt <guilabel
+>Vertraging voor automatisch doorgaan (ms)</guilabel
+> instellen in milliseconden tussen 0 en 2000. Tip: Niet te veel klikken? Kies een korte vertragingstijd voor automatisch doorgaan en de sneltoetsen <keycombo
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>/<keycap
+>2</keycap
+>/<keycap
+>3</keycap
+> om <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> voor conflicten te selecteren. </para>
+</sect2>
+</sect1>
+
+<sect1 id="selections"
+><title
+>Selecteren, kopiëren en plakken</title>
+<para
+>De invoervensters tonen geen cursor, dus selecteren moet gedaan worden met de muis door met de &RMB; aan het begin te klikken, de muisknop ingedrukt te houden en naar het eind te bewegen, waar u de muisknop weer loslaat. U kunt ook een woord selecteren door erop te dubbelklikken. In de samenvoegeditor kunt u ook met het toetsenbord selecteren met &Shift; en de pijltoetsen. </para
+><para
+>Als datgene wat u wilt selecteren niet in het venster past dan kunt u de muis naar buiten de randen van het venster verplaatsen zodat &kdiff3; in die richting schuift. </para
+><para
+>Bij zeer grote selecties kunt u ook de navigatie-toetsen gebruiken terwijl u de muis ingedrukt houdt. Gebruik b.v &PgUp; en &PgDn; om snel naar een bepaalde positie te gaan en laat op de gewenste positie de muisknop los. </para
+><para
+>Om alles in het huidige venster te selecteren gebruikt u het menu-item <menuchoice
+><guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Alles selecteren</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+>). </para
+><para
+>Om naar het klembord te kopiëren moet u de knop <guibutton
+>Kopiëren</guibutton
+> indrukken (<keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> of <keycombo
+>&Ctrl;&Ins;</keycombo
+>). Maar er bestaat een optie <guilabel
+>Selectie automatisch kopiëren</guilabel
+>. Als deze is ingeschakeld, wordt geselecteerde tekst direct naar het klembord gekopieerd. Let er hierbij wel op dat bestaande inhoud van uw klembord niet per ongeluk ongewenst verwijderd wordt. </para
+><para
+><guibutton
+>Knippen</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> of <keycombo
+>&Shift;&Del;</keycombo
+>) kopieert naar het klembord en verwijdert de geselecteerde tekst. </para
+><para
+><guibutton
+>Plakken</guibutton
+> (<keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> of <keycombo
+>&Shift;&Ins;</keycombo
+>) plakt de tekst uit het klembord naar de cursorpositie. Als u plakt naar een willekeurig invoervenster dan krijgt u de klembordinhoud in dat venster te zien en zal de vergelijking onmiddellijk starten. Dit is handig als u snel een stuk tekst ergens vandaan haalt en dit wilt vergelijken met iets anders zonder eerst bestanden te hoeven aan te maken. </para>
+</sect1>
+
+<sect1 id="saving"
+><title
+>Opslaan</title>
+<para
+>Opslaan is alleen toegestaan als alle conflicten opgelost zijn. Als het bestand al bestaat en de optie <guilabel
+>Reservekopie</guilabel
+> ingeschakeld is op item <guilabel
+>Map</guilabel
+> in de instellingendialoog, wordt het bestaande bestand hernoemd met een extensie <literal role="extension"
+>.orig</literal
+>, een bestaande reservekopie wordt hierbij overschreven. Als u afsluit of een andere verschillenanalyse start en de gegevens nog niet zijn opgeslagen, vraagt &kdiff3; u of u wilt opslaan, annuleren of doorgaan zonder opslaan. (&kdiff3; vangt geen signalen. Dus als u &kdiff3; "kill"t gaan uw gegevens verloren.) </para
+><para
+>Regeleinden worden opgeslagen volgens de normale methode op het onderliggende besturingssysteem. Voor Unix-systemen eindigt elke regel met een 'linefeed' "<literal
+>\n</literal
+>", terwijl op Win32-systemen elke regel met een 'carriage-return' en een 'linefeed' eindigt "<literal
+>\r\n</literal
+>". &kdiff3; bewaart de regeleinden van de invoerbestanden niet, hetgeen ook betekent dat u &kdiff3; niet met binaire bestanden moet gebruiken. </para>
+</sect1>
+
+<sect1 id="find"
+><title
+>Tekenreeksen zoeken</title>
+<para
+>U kunt naar tekenreeksen zoeken in elk tekstvenster van &kdiff3;. Het menu-item <menuchoice
+><guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Zoeken...</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+>) opent een dialoog waarin u de te zoeken tekenreeks kunt opgeven. U kunt ook de vensters opgeven waarin gezocht moet worden. Zoeken begint altijd bovenaan. Gebruik het menu-item <menuchoice
+><guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Volgende zoeken...</guimenuitem
+></menuchoice
+> (<keycap
+>F3</keycap
+>) om naar het volgende voorkomen door te gaan. Als u meerdere vensters opgeeft om in te zoeken wordt het eerste venster van boven naar beneden doorzocht, voordat het volgende venster weer van bovenaf wordt doorzocht, &etc; </para>
+</sect1>
+
+<sect1 id="printing"
+><title
+>Bezig met afdrukken</title>
+<para
+>&kdiff3; ondersteunt het printen van verschillen tussen tekstbestanden. Het menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Afdrukken...</guimenuitem
+></menuchoice
+> (<keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+>) opent een dialoog waarin u de printer kunt kiezen en diverse keuzemogelijkheden kunt instellen. </para
+><para
+>Er zijn diverse mogelijkheden om de afdrukselectie in te stellen. Omdat de afdrukdialogen bij de diverse besturingssystemen verschillend zijn, is de methode voor het instellen van de afdrukselectie ook verschillend. </para>
+<variablelist>
+   <varlistentry
+><term
+>Alles:</term
+><listitem
+><para
+>Alles afdrukken.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Huidige:</term
+><listitem
+><para
+>Drukt een pagina af die begint met de eerst in het venster zichtbare regel. (Bij systemen zonder deze mogelijkheid kunt u dit bereiken door het paginanummer 10000 op te geven voor het afdrukken.)</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Selectie:</term
+><listitem
+><para
+>Voordat u gaat printen selecteert u eerst de tekst met de muis (zoals voor kopiëren en plakken) in een van de diff-invoervensters om de beginregel en de eindregel te bepalen. Als geen tekst in een van invoervensters van diff is geselecteerd dan is deze keuze niet beschikbaar. (Bij systemen zonder deze mogelijkheid kunt u dit bereiken door het paginanummer 9999 op te geven voor het afdrukken.)</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+>Bereik:</term
+><listitem
+><para
+>Geef de beginpagina en de eindpagina op. </para
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>Andere belangrijke keuzemogelijkheden voor het afdrukken zijn de normale keuzes: </para
+><itemizedlist>
+   <listitem
+><para
+>Lettertype, lettergrootte</para
+></listitem>
+   <listitem
+><para
+>Regelnummering tonen</para
+></listitem>
+   <listitem
+><para
+>Regelafbreking</para
+></listitem>
+   <listitem
+><para
+>Kleuren</para
+></listitem>
+   <listitem
+><para
+>&etc;</para
+></listitem>
+</itemizedlist>
+<para
+>Liggend (landschap) afdrukken wordt aanbevolen. </para>
+</sect1>
+
+<sect1 id="options"
+><title
+>Opties</title>
+<para
+>Opties en de recente-bestandenlijst worden opgeslagen als u het programma afsluit, en opnieuw ingelezen als u het start. Menu-item (<menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>&kdiff3; configuren...</guimenuitem
+></menuchoice
+>). </para>
+<sect2
+><title
+>Lettertype</title>
+<para
+>Kies een lettertype met vaste breedte. (Op sommige systemen toont dit dialoogvenster ook lettertypes met variabele breedte, maar die dient u liever niet te gebruiken.) </para>
+</sect2>
+
+<sect2
+><title
+>Kleuren</title>
+<variablelist>
+  <varlistentry
+><term
+><guilabel
+>Weergaven voor editor en vergelijkingen:</guilabel
+></term
+><listitem>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Voorgrondkleur:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk zwart. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Achtergrondkleur:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk wit. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Achtergrondkleur bij verschillen:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk lichtgrijs. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Kleur voor A:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk donkerblauw. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Kleur voor B:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk donkergroen. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Kleur voor C:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk donkermagenta. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Kleur voor conflicten:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk rood.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Achtergrondkleur voor huidig bereik:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk lichtgeel.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Achtergrondkleur voor verschillen in huidig bereik:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk donkergeel.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Kleur voor handmatig uitgelijnde verschilbereiken:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk oranje.</para
+></listitem
+></varlistentry>
+  </variablelist
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guilabel
+>Weergave mappenvergelijking:</guilabel
+></term
+><listitem>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Kleur nieuwste bestand:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk groen.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Kleur oudste bestand:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk rood.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Kleur bestand met gemiddelde leeftijd:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk helder geel.</para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Kleur voor ontbrekende bestanden:</guilabel
+></term
+><listitem
+><para
+>Gewoonlijk zwart.</para
+></listitem
+></varlistentry>
+  </variablelist
+></listitem
+></varlistentry>
+</variablelist>
+<para
+>De kleuren wijzigen voor vergelijken van mappen zal alleen effectief zijn na het starten van het volgende vergelijken van mappen. </para>
+<para
+>Op systemen met slechts 16 of 256 kleuren zijn sommige kleuren niet beschikbaar in pure vorm. Op zulke systemen zorgt de knop <guibutton
+>Standaard</guibutton
+> voor een pure kleur. </para>
+</sect2>
+
+<sect2
+><title
+>Editor-instellingen</title>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Tab voegt spaties in</guilabel
+></term
+><listitem
+><para
+>Als dit uitgeschakeld is en u de toets &Tab; indrukt, wordt een tab-teken ingevoegd, anders het aangegeven aantal spaties.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Tabgrootte:</guilabel
+></term
+><listitem
+><para
+>Kan ingesteld worden voor uw specifieke wensen. Standaard is <literal
+>8</literal
+>.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Automatisch inspringen</guilabel
+></term
+><listitem
+><para
+>Als u op &Enter; of <keycap
+>Return</keycap
+> drukt wordt het inspringen van de vorige regel gebruikt voor de nieuwe.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Automatische kopieerselectie</guilabel
+></term
+><listitem
+><para
+>Elke selectie wordt onmiddellijk naar het klembord gekopieerd, indien actief, u hoeft het niet expliciet te kopiëren.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Regeleinde:</guilabel
+></term
+><listitem
+><para
+>Bij het opslaan kunt u opgeven welk regeleinde u verkiest. De standaardinstelling is de gebruikelijke keuze voor het gebruikte besturingssysteem.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="diffoptions"
+><title
+>Diff-instellingen</title>
+<para
+>Bij het vergelijken van bestanden, probeert &kdiff3; eerst regels te vinden die gelijk zijn in alle invoerbestanden. Alleen gedurende deze stap wordt witruimte mogelijk genegeerd. De tweede stap vergelijkt elke regel. In deze stap wordt witruimte niet genegeerd. Ook gedurende het samenvoegen wordt witruimte niet genegeerd. </para>
+
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Getallen negeren (als witruimte behandelen)</guilabel
+></term
+><listitem
+><para
+>Standaard uit. Getaltekens ('0'-'9', '.', '-') worden genegeerd in het eerste deel van de analyse waarin regels worden vergeleken. In het resultaat worden de verschillen wel getoond, maar behandeld als witruimte. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>C/C++ commentaar negeren (als witruimte behandelen)</guilabel
+></term
+><listitem
+><para
+>Standaard uit. Wijzigingen in commentaar worden behandeld als wijzigingen in witruimte. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Hoofd-/kleine letter negeren (als witruimte behandelen)</guilabel
+></term
+><listitem
+><para
+>Standaard uit. Wijzigingen in verschillen tussen hoofd en kleine letters (zoals 'A' vs. 'a') worden behandeld als wijzigingen in witruimte. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Preprocessorcommando:</guilabel
+></term
+><listitem
+><para
+>Zie <link linkend="preprocessors"
+>de volgende sectie</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Preprocessor-commando alleen voor regelcontroles:</guilabel
+></term
+><listitem
+><para
+>Zie <link linkend="preprocessors"
+>de volgende sectie</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Grondig zoeken (trager)</guilabel
+></term
+><listitem
+><para
+>Doe veel moeite om kleinere onderscheiden te vinden (standaard aan). Dit is waarschijnlijk effectief voor gecompliceerde, grote bestanden. En langzaam voor erg grote bestanden. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Lijn B en C uit voor 3 invoerbestanden</guilabel
+></term
+><listitem
+><para
+>Probeer <guilabel
+>B</guilabel
+> en <guilabel
+>C</guilabel
+> uit te lijnen bij het vergelijken of samenvoegen van drie invoerbestanden. Niet aanbevolen voor samenvoegen omdat dit veel gecompliceerder kan worden. (Standaard is uit). </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="mergeoptions"
+><title
+>Instellingen samenvoegen</title>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Vertraging voor automatisch doorgaan (ms):</guilabel
+></term
+><listitem
+><para
+>Bij het automatisch doorgaan bepaalt deze instelling hoe lang het resultaat van de selectie getoond wordt voordat er naar het volgende onopgeloste conflict gesprongen wordt. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Toon informatievensters</guilabel
+></term
+><listitem
+><para
+>Toon een venster met informatie over het aantal conflicten. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Standaardsamenvoeging van witruimtes bij 2/3 bestanden:</guilabel
+></term
+><listitem
+><para
+>Automatisch alle witruimteconflicten oplossen door een gespecificeerd bestand te kiezen. (Standaard is handmatige keuze.) Nuttig als witruimte in veel bestanden niet belangrijk is. Als u dit alleen af en toe nodig hebt kunt u beter <guilabel
+>A/B/C voor alle onopgeloste conflicten kiezen</guilabel
+> in het menu <guimenu
+>Samenvoegen</guimenu
+> kiezen. Merk op dat als u <guilabel
+>Getallen negeren (als witruimte behandelen)</guilabel
+> of <guilabel
+>C/C++ commentaar negeren (als witruimte behandelen)</guilabel
+> hebt ingeschakeld, deze automatische keuze ook voor conflicten in getallen of commentaar geldt. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Reguliere expressie voor automatisch samenvoegen:</guilabel
+></term
+><listitem
+><para
+>Reguliere expressie voor regels waar &kdiff3; automatisch één bron moet kiezen. Zie ook <link linkend="vcskeywordsmergesupport"
+>Automatisch samenvoegen ...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Bij starten van samenvoegen automatisch reguliere expressie gebruiken</guilabel
+></term
+><listitem
+><para
+>Indien u automatisch samenvoegen inschakelt dan gebruikt &kdiff3; de optie <guilabel
+>Reguliere expressie voor automatisch samenvoegen</guilabel
+> bij het samenvoegen. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Reguliere expressie voor begin van geschiedenisitem:</guilabel
+></term
+><listitem
+><para
+>Reguliere expressie voor het begin van het item van de geschiedenis van het samenvoegen. Veel voorkomende waarde in deze regel is het trefwoord "<literal
+>&#36;Log&#36;</literal
+>". Standaardwaarde: "<literal
+>.*\&#36;Log.*\&#36;.*</literal
+>" </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Reguliere expressie voor begin van geschiedenisitem:</guilabel
+></term
+><listitem
+><para
+>Een samenvoeg-geschiedenis-item bestaat uit verschillende regels. Geef de reguliere expressie op voor het detecteren van de eerste regel (zonder het voorafgaand commentaar). Gebruik haakjes ('(' of ')') om de sleutels te groeperen die u wilt gebruiken bij het sorteren of op volgorde leggen. indien leeg, dan neemt &kdiff3; aan dat lege regels geschiedenis-items scheiden. Lees ook <link linkend="vcskeywordsmergesupport"
+>Automatisch samenvoegen ...</link
+>. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Geschiedenis samenvoegend sorteren</guilabel
+></term
+><listitem
+><para
+>Geschiedenis van sorteren van versiebeheer inschakelen. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Sorteervolgorde van begin van geschiedenisitems:</guilabel
+></term
+><listitem
+><para
+>Elk paar haakjes gebruikt in de reguliere expressie groepeert een sleutel die gebruikt kan worden voor sorteren. Geef een lijst op met sleutels (die genummerd worden in volgorde van gebruik met de <literal
+>1</literal
+> als begin) met ',' als scheidingsteken (&eg; "<literal
+>4,5,6,1,2,3,7</literal
+>"). Indien leeg zal er niet worden gesorteerd. Lees ook <link linkend="vcskeywordsmergesupport"
+>Automatisch samenvoegen ...</link
+> </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Geschiedenis versiebeheer samenvoegen bij aanvang van samenvoegen</guilabel
+></term
+><listitem
+><para
+>Indien u automatisch samenvoegen inschakelt dan gebruikt &kdiff3; de bovengenoemde keuzes bij het samenvoegen van de geschiedenis. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Max. aantal items in geschiedenis:</guilabel
+></term
+><listitem
+><para
+>&kdiff3; verkort de geschiedenislijst na het gespecificeerde aantal items. Gebruik <literal
+>-1</literal
+> om verkorting te voorkomen. (Standaard is <literal
+>-1</literal
+>). </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Uw reguliere expressies testen</guilabel
+></term
+><listitem
+><para
+>Deze knop opent een dialoogvenster waarin u de hierboven beschreven reguliere expressies kunt testen en zo nodig verbeteren. Kopieer respectievelijke data uit uw bestanden naar de voorbeeld regels. In het <guilabel
+>Resultaat van overeenkomsten</guilabel
+> zal  onmiddellijk te zien zijn of de resultaten wel of niet succesvol zijn. In het <guilabel
+>Resulterende sorteersleutel:</guilabel
+> is de voor het samenvoegen van de geschiedenis gebruikte sleutel te zien. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Irrelevant samenvoegcommando:</guilabel
+></term
+><listitem
+><para
+>Geef uw eigen commando op dat gebruikt moet worden wanneer &kdiff3; bemerkt dat bij het samenvoegen van een groep bestanden het bestand van <guilabel
+>B</guilabel
+> geen relevante data toevoegt die niet al door een bestand uit <guilabel
+>C</guilabel
+> is toegevoegd. Het commando wordt gestart met de drie bestandsnamen als parameters. Data die overeenkomt met <guilabel
+>Reguliere expressie voor automatisch samenvoegen</guilabel
+> of in de geschiedenis voorkomt is hierbij niet relevant. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Automatisch opslaan en afsluiten bij samenvoegingen zonder conflicten</guilabel
+></term
+><listitem
+><para
+>Als &kdiff3; vanaf de commandoregel is gestart om bestanden samen te voegen en alle conflicten waren oplosbaar zonder dat ingrijpen van de gebruiker nodig was, sla het resultaat dan automatisch op en sluit het programma af. (Vergelijkbaar met de commandoregeloptie  <option
+>--auto</option
+>). </para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2
+><title
+>Samenvoegen van mappen</title>
+<para
+>Deze opties gaan over het doorzoeken van de map en de afhandeling van het samenvoegen: zie <link linkend="dirmergeoptions"
+>Mapvergelijking/samenvoeging</link
+> voor details. </para
+><para
+>Er is hier echter één optie die ook relevant is voor het opslaan van enkele bestanden: </para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Reservekopie aanmaken (.orig)</guilabel
+></term
+><listitem
+><para
+>Als een bestand wordt opgeslagen en er al een oudere versie bestaat, wordt het oude bestand hernoemd met een extensie <literal role="extension"
+>.orig</literal
+>. Als een oud reservekopiebestand met de extensie <literal role="extension"
+>.orig</literal
+> al bestaat, wordt deze zonder reservekopie verwijderd. </para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+>Regio- en taalinstellingen</title>
+  <variablelist>
+    <varlistentry
+><term
+><guilabel
+>Dezelfde codering gebruiken voor alles</guilabel
+></term
+><listitem
+><para
+>De volgende coderingsopties kunnen apart aangepast worden voor elk item. Als deze optie is ingeschakeld nemen alle waarden deze over. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Opmerking: lokale codering is "..."</guilabel
+></term
+><listitem
+><para
+>Boven de coderings-selectors komt deze opmerking die u vertelt wat de lokale codering is. (Dit is niet aan te passen, maar wordt aangegeven als u uw lokale codering niet weet, maar wel wilt kiezen.) </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Unicode automatisch detecteren</guilabel
+></term
+><listitem
+><para
+>Deze optie probeert de BOM of metagegevens uit XML/HTML documenten te gebruiken om codering met Unicode te detecteren. Als dat mislukt zal het controleren of een kort stukje uit het begin van het bestand geïnterpreteerd kan worden als UTF-8. Als deze controle lukt zal UTF-8 gebruikt worden. Anders zal het terugvallen op de door de gebruiker geselecteerde codec. UTF-8 wordt alleen ondersteund zonder BOM of metagegevens aanwezig. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Bestandscodering voor A/B/C:</guilabel
+></term
+><listitem
+><para
+>Pas de bestandscodering voor invoerbestanden aan. Dit heeft effect op hoe speciale tekens geïnterpreteerd worden. Aangezien u elke codering apart kunt instellen, kunt u zelfs bestanden vergelijken en samenvoegen die met verschillende coderingen zijn opgeslagen. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Bestandscodering voor samenvoeguitvoer en opslag:</guilabel
+></term
+><listitem
+><para
+>Als u een bestand hebt bewerkt, kunt op aanpassen met welke codering het weer op schijf wordt opgeslagen. </para
+></listitem
+></varlistentry>
+    <varlistentry
+><term
+><guilabel
+>Bestandscodering voor preprocessorbestanden:</guilabel
+></term
+><listitem
+><para
+>Als u preprocessors opgeeft kunnen deze misschien niet met uw codering werken (&eg;: uw bestanden zijn 16-bits unicode en uw preprocessor kan alleen met 8-bits &ASCII; overweg). Met deze optie kunt u de codering van preprocessor-uitvoer opgeven. </para
+></listitem
+></varlistentry>
+	<varlistentry
+><term
+><guilabel
+>Rechts-naar-links-taal</guilabel
+></term
+><listitem
+><para
+>Sommige talen worden van rechts naar links geschreven. Als ieze optie is ingeschakeld, tekent &kdiff3; de tekst van rechs naar links in de verschillenvensters en in het uitvoervenster. Merk op dat, als u &kdiff3; met de opdrachtregeloptie <option
+>--reverse</option
+> start, alle schermopmaak ook van rechts naar links gedaan wordt. (Dit is een optie die door Qt aangeboden wordt). </para
+><note
+><para
+>Deze documentatie is geschreven onder de aanname dat deze optie of omgekeerde indeling uitgeschakeld zijn. Dus referenties naar "links" of "rechts" moeten vervangen worden door hun respectievelijke tegendeel als u deze opties gebruikt. </para
+></note
+></listitem
+></varlistentry>
+
+  </variablelist>
+</sect2>
+
+<sect2
+><title
+>Diverse</title>
+<para
+>(Deze opties en acties zijn in menu's of in de knoppenbalk beschikbaar.)</para>
+<variablelist>
+  <varlistentry
+><term
+><emphasis
+>Overzichtsopties:</emphasis
+></term
+><listitem
+><para
+>Deze keuzes zijn alleen beschikbaar als u drie bestanden vergelijkt. In normale modus worden alle verschillen getoond in één kleurgecodeerde overzichtskolom. Maar soms bent u speciaal geïnteresseerd in de verschillen tussen slechts twee van deze drie bestanden. Door "A vs B", "A vs C" of "B vs C" te kiezen wordt er een tweede overzichtskolom met de vereiste informatie getoond naast het normale overzicht. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guimenuitem
+>Regels afbreken in vensters met verschillen</guimenuitem
+></term
+><listitem
+><para
+>Regels afbreken als hun lengte de breedte van een venster zou overschrijden. </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Venster A/B/C tonen:</guibutton
+></term
+><listitem
+><para
+>Soms wilt u de ruimte op het scherm beter gebruiken voor lange regels. Verberg dan de vensters die niet belangrijk zijn. (In het menu Venster.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Splitsen van vensters omschakelen</guibutton
+></term
+><listitem
+><para
+>Wisselen tussen weergave van verschilvensters naast elkaar (<guilabel
+>A</guilabel
+> links van <guilabel
+>B</guilabel
+> links van <guilabel
+>C</guilabel
+>) of boven elkaar (<guilabel
+>A</guilabel
+> boven <guilabel
+>B</guilabel
+> boven <guilabel
+>C</guilabel
+>). Dit moet ook voor lange regels helpen. (In het menu <guimenu
+>Venster</guimenu
+>). </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Huidig bestand samenvoegen</guibutton
+></term
+><listitem
+><para
+>Werkt ook als u slechts twee bestanden vergelijkt. Een enkele klik start het samenvoegen en gebruikt de bestandsnaam van het laatste invoerbestand als het standaard uitvoerbestand. (Als dit gebruikt wordt om een samenvoeging te herstarten, wordt de uitvoerbestandsnaam behouden.)</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Witruimte tonen</guibutton
+></term
+><listitem
+><para
+>Schakel dit uit om accentuering van alleen-witruimte-veranderingen in de tekst of overzichtskolommen uit te schakelen. (Merk op dat dit ook van toepassing is op wijzigingen in getallen of commentaar als de opties <guilabel
+>Getallen negeren (als witruimte behandelen)</guilabel
+> of <guilabel
+>C/C++ commentaar negeren (als witruimte behandelen)</guilabel
+> actief zijn.) </para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Spatie &amp;&amp; tabulator-tekens tonen</guibutton
+></term
+><listitem
+><para
+>Soms zijn de zichtbare spaties en tabs storend. U kunt dit uitschakelen.</para
+></listitem
+></varlistentry>
+  <varlistentry
+><term
+><guibutton
+>Regelnummering tonen</guibutton
+></term
+><listitem
+><para
+>U kunt kiezen of regelnummers voor de invoerbestanden getoond moeten worden.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="shortcuts"
+><title
+>Sneltoetsen instellen</title>
+<para
+>Momenteel ondersteunt alleen de &frameworks;-versie gebruikergedefinieerde sneltoetsen. (Menu <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Sneltoetsen configureren...</guimenuitem
+></menuchoice
+>) </para>
+</sect2>
+</sect1>
+
+<sect1 id="preprocessors"
+><title
+>Preprocessor-opdrachten</title>
+<para
+>&kdiff3; ondersteunt twee preprocessor-opties. </para
+><para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Preprocessorcommando:</guilabel
+></term
+><listitem
+><para
+>Als een bestand gelezen is, wordt het door deze externe opdracht gesluisd. De uitvoer van deze opdracht is dan zichtbaar in plaats van het originele bestand. U kunt uw eigen preprocessor schrijven om uw specifieke wensen te vervullen. Gebruik dit om storende delen van het bestand weg te halen, of automatisch de insprong te verbeteren, &etc; </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Preprocessor-commando alleen voor regelcontroles:</guilabel
+></term
+><listitem
+><para
+>Als een bestand gelezen is, wordt het door deze externe opdracht gesluisd. Als een preprocessor-opdracht (zie boven) ook opgegeven wordt, wordt de uitvoer van de preprocessor de invoer van de preprocessor voor regelovereenkomsten. De uitvoer wordt dan alleen gebruikt bij de regelvergelijkingsfase van de analyse. U kunt uw eigen preprocessor schrijven om uw specifieke wensen te vervullen. Elke invoerregel moet een overeenkomende uitvoerregel hebben. </para
+></listitem
+></varlistentry>
+</variablelist>
+</para>
+<para
+>Het idee is om de gebruiker grotere flexibiliteit te geven bij het instellen van het resultaat. Maar dit vereist een extern programma, en veel gebruikers willen dat niet zelf schrijven. Het goede nieuws is dat <command
+>sed</command
+> of <command
+>perl</command
+> vaak voldoende is. </para>
+<para
+>Voorbeeld: eenvoudig testgeval: bekijk bestand a.txt (6 regels): </para>
+<screen
+>aa
+      ba
+      ca
+      da
+      ea
+      fa
+</screen>
+<para
+>En bestand b.txt (3 lines): </para>
+<screen
+>cg
+      dg
+      eg
+</screen>
+<para
+>Zonder een preprocessor zouden de volgende regels naast elkaar geplaatstworden: </para>
+<screen
+>aa - cg
+      ba - dg
+      ca - eg
+      da
+      ea
+      fa
+</screen>
+<para
+>Dit is waarschijnlijk niet gewenst omdat de eerste letter de werkelijk interessante informatie bevat. Om te helpen bij het algoritme voor overeenkomst om de tweede letter te negeren kunnen we een preprocessorcommando gebruiken voor overeenkomst in regels, die 'g' vervangt door 'a': </para>
+<screen
+><command
+>sed</command
+> 's/g/a/'
+</screen>
+<para
+>Met dit commando zal het resultaat van de vergelijking zijn: </para>
+<screen
+>aa
+      ba
+      ca - cg
+      da - dg
+      ea - eg
+      fa
+</screen>
+<para
+>Intern ziet het algoritme voor overeenkomst de bestanden na uitvoeren van de preprocessor voor regelovereenkomst, maar op het scherm is het bestand ongewijzigd. (De normale preprocessor zou de gegevens ook op het scherm wijzigen). </para>
+
+<sect2 id="sedbasics"
+><title
+>De basis van <command
+>sed</command
+></title>
+<para
+>Deze sectie geeft alleen een inleiding op een paar basismogelijkheden van <command
+>sed</command
+>. Zie voor meer informatie <ulink url="info:/sed"
+>info:/sed</ulink
+> of <ulink url="http://www.gnu.org/software/sed/manual/html_mono/sed.html"
+>https://www.gnu.org/software/sed/manual/html_mono/sed.html</ulink
+>. Een voorgecompileerde versie voor &Windows; kunt u vinden op <ulink url="http://unxutils.sourceforge.net"
+>http://unxutils.sourceforge.net</ulink
+>. Merk op dat de volgende voorbeelden ervan uitgaan dat de opdracht <command
+>sed</command
+> in een map in uw omgevingsvariabele <envar
+>PATH</envar
+> staat. Als dit niet het geval is, dient u het volledige absolute pad voor de opdracht te gebruiken. </para>
+<para
+>In deze context is alleen het substitutiecommando <command
+>sed</command
+> gebruikt: </para>
+<screen
+><command
+>sed</command
+> 's/<replaceable
+>REGEXP</replaceable
+>/<replaceable
+>VERVANGING</replaceable
+>/<replaceable
+>VLAGGEN</replaceable
+>'
+</screen>
+<para
+>Voordat u een nieuw commando in &kdiff3; gebruikt, zou u het eerst moeten testen in een console. Hierbij is het commando <command
+>echo</command
+> nuttig. Bijvoorbeeld: </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/'
+   -> obrakadabra
+</screen>
+<para
+>Dit voorbeeld toont een erg eenvoudig sed-commando dat het eerste voorkomen van "a" vervangt door "o". Als u alle voorkomen wilt vervangen dan heeft u de vlag "g" nodig: </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g'
+   -> obrokodobro
+</screen>
+<para
+>Het symbool "|" is het pipe-commando die de uitvoer van het vorige commando naar de invoer van het volgende commando stuurt. Als u met een langer bestand wilt testen dan kunt u <command
+>cat</command
+> op &UNIX;-achtige systemen gebruiken of <command
+>type</command
+> op &Windows;-achtige systemen. <command
+>sed</command
+> zal de substitutie doen voor elke regel. <screen
+><command
+>cat</command
+> <replaceable
+>bestandsnaam</replaceable
+> | <command
+>sed</command
+> <replaceable
+>opties</replaceable
+>
+</screen>
+</para>
+</sect2>
+<sect2 id="sedforkdiff3"
+><title
+>Voorbeelden van het gebruik van <command
+>sed</command
+> in &kdiff3;</title>
+<sect3
+><title
+>Andere soorten commentaar negeren</title>
+<para
+>&kdiff3; verstaat op dit moment alleen C/C++ commentaar. Met gebruik van de optie <guilabel
+>Commando voor preprocessing regels:</guilabel
+> kunt u ook andere soorten commentaar negeren, door ze te converteren in C/C++-commentaar. </para>
+<para
+>Voorbeeld: om commentaar die begint met "<literal
+>#</literal
+>" te negeren, zou u ze willen converteren in "<literal
+>//</literal
+>". Merk op dat u ook de optie <guilabel
+>C/C++ commentaar negeren (behandelen als witruimte)</guilabel
+> moet inschakelen om een effect te krijgen. Een van toepassing zijnd <guilabel
+>Commando voor preprocessing regels:</guilabel
+> zou zijn: </para>
+<screen
+><command
+>sed</command
+> 's/#/\/\//'
+</screen>
+<para
+>Omdat in <command
+>sed</command
+> het teken "<literal
+>/</literal
+>" een aparte betekenis heeft, is het nodig om het teken "<literal
+>\</literal
+>" voor elke "<literal
+>/</literal
+>" in de vervangende tekenreeks te plaatsen. Soms is de "<literal
+>\</literal
+>" ook nodig om een teken een speciale betekenis te geven of deze juist weg te halen. De accenten (') zijn alleen belangrijk bij testen op de commandoshell omdat het anders sommige tekens probeert te verwerken. &kdiff3; doet dat niet behalve voor de escape-sequences '<literal
+>\"</literal
+>' en '<literal
+>\\</literal
+>'. </para>
+</sect3>
+<sect3
+><title
+>Niet-hoofdlettergevoelige verschillen</title>
+<para
+>Gebruik het volgende <guilabel
+>Commando voor Preprocessor voor regelovereenkomsten:</guilabel
+> om alle invoer naar hoofdletters te converteren: </para>
+<screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+</screen>
+<para
+>Hier is de "<literal
+>.*</literal
+>" een reguliere expressie die met elke tekenreeks overeenkomt en in deze context met alle lettertekens op de regel overeenkomt. De "<literal
+>\1</literal
+>" in de vervangende tekenreeks verwijst naar de overeenkomende tekst binnen het eerste paar "<literal
+>\(</literal
+>" en "<literal
+>\)</literal
+>". De "<literal
+>\U</literal
+>" zet de ingevoegde tekst om in hoofdletters. </para>
+</sect3>
+
+<sect3
+><title
+>Versiebeheer-trefwoorden negeren</title>
+<para
+>CVS en andere versiebeheersystemen gebruiken diverse trefwoorden om automatisch gegenereerde tekenreeksen in te voegen (<ulink url="info:/cvs/Keyword substitution"
+>info:/cvs/Trefwoordvervanging</ulink
+>. Deze volgen allemaal het patroon "<replaceable
+>$TREFWOORD gegenereerde tekst$</replaceable
+>". We hebben nu een preprocessoropdracht voor regelovereenkomsten nodig die alleen de gegenereerde tekst verwijdert: </para>
+<screen
+><command
+>sed</command
+> 's/\$\(Revision\|Author\|Log\|Header\|Date\).*\$/\$\1\$/'
+</screen>
+<para
+>Het teken "<literal
+>\|</literal
+>" scheidt de mogelijke sleutelwoorden. U zou deze lijst willen wijzigen naar wat u nodig hebt. De tekens "<literal
+>\</literal
+>" voor het teken "<literal
+>$</literal
+>" is nodig omdat anders het teken "<literal
+>$</literal
+>" overeenkomst met het eind van de regel. </para>
+<para
+>Terwijl u experimenteert met <command
+>sed</command
+> gaat u wellicht deze reguliere expressies begrijpen en op prijs stellen. Ze zijn nuttig omdat er veel andere programma's zijn die soortgelijke dingen ondersteunen.  </para>
+</sect3>
+
+<sect3
+><title
+>Getallen negeren</title>
+<para
+>Getallen negeren is in feite een ingebouwde optie. Maar als een ander voorbeeld is dit het commando voor Preprocessor voor regelovereenkomsten: </para>
+<screen
+><command
+>sed</command
+> 's/[0123456789.-]//g'
+</screen>
+<para
+>Elk teken binnen de tekens '<literal
+>[</literal
+>' en '<literal
+>]</literal
+>' is een overeenkomst en zal door niets vervangen worden. </para>
+</sect3>
+
+<sect3
+><title
+>Bepaalde kolommen negeren</title>
+<para
+>Soms is een tekst erg strict opgebouwd, en bevat deze kolommen die u altijd wilt negeren, terwijl er andere kolommen zijn die u voor analyse wilt bewaren. In het volgende voorbeeld worden de eerste vijf kolommen (lettertekens) genegeerd, de volgende tien worden bewaard, dan worden er weer vijf genegeerd en de rest van de regel wordt bewaard. </para>
+<screen
+><command
+>sed</command
+> 's/.....\(..........\).....\(.*\)/\1\2/'
+</screen>
+<para
+>Elke punt '<literal
+>.</literal
+>' komt overeen met een enkel teken. De "<literal
+>\1</literal
+>" en "<literal
+>\2</literal
+>" in de vervangstekenreeks verwijst naar de overeenkomende tekst binnen het eerste en tweede paar haakjes "<literal
+>\(</literal
+>" en "<literal
+>\)</literal
+>" die aangeeft welke tekst bewaard moet worden. </para>
+</sect3>
+
+<sect3
+><title
+>Diverse vervangingen combineren</title>
+<para
+>Soms wilt u diverse vervangingen tegelijk uitvoeren. U kunt dan de puntkomma '<literal
+>;</literal
+>' gebruiken om deze van elkaar te scheiden. Voorbeeld: </para>
+<screen
+><command
+>echo</command
+> abrakadabra | <command
+>sed</command
+> 's/a/o/g;s/\(.*\)/\U\1/'
+   -> OBROKODOBRO
+</screen>
+</sect3>
+
+<sect3
+><title
+><command
+>perl</command
+> in plaats van <command
+>sed</command
+> gebruiken</title>
+<para
+>In plaats van <command
+>sed</command
+> zou u <command
+>perl</command
+> kunnen gebruiken </para>
+<screen
+><command
+>perl</command
+> -p -e 's/<replaceable
+>REGEXP</replaceable
+>/<replaceable
+>VERVANGING</replaceable
+>/<replaceable
+>VLAGGEN</replaceable
+>'
+</screen>
+<para
+>Maar sommige details zijn anders in <command
+>perl</command
+>. Merk op waar <command
+>sed</command
+> "<literal
+>\(</literal
+>" en "<literal
+>\)</literal
+>" vereist, <command
+>perl</command
+> de eenvoudigere "<literal
+>(</literal
+>" en "<literal
+>)</literal
+>" zonder voorafgaande '<literal
+>\</literal
+>' vereist. Voorbeeld: </para>
+<screen
+><command
+>sed</command
+> 's/\(.*\)/\U\1/'
+   <command
+>perl</command
+> -p -e 's/(.*)/\U\1/'
+</screen>
+</sect3>
+</sect2>
+
+<sect2
+><title
+>Uitvoervolgorde van preprocessors</title>
+<para
+>De data wordt doorgesluisd door alle interne en externe preprocessors, in deze volgorde: </para>
+<itemizedlist>
+<listitem
+><para
+>Normale preprocessor.</para
+></listitem>
+<listitem
+><para
+>Preprocessor voor regelovereenkomsten.</para
+></listitem>
+<listitem
+><para
+>Hoofdletterongevoelig (behandelen als witruimte) (conversie naar hoofdletters).</para
+></listitem>
+<listitem
+><para
+>Opsporen van C/C++ commentaar.</para
+></listitem>
+<listitem
+><para
+>Getallen negeren (als witruimte behandelen),</para
+></listitem>
+<listitem
+><para
+>Witruimte negeren.</para
+></listitem>
+</itemizedlist>
+<para
+>De gegevens zoals die na de normale preprocessor zijn worden bewaard voor weergave en samenvoeging. De andere handelingen wijzigen alleen de gegevens die het verschillenalgoritme voor regelovereenkomsten ziet. </para
+><para
+>Merk op dat, in de zeldzame gevallen waar u een normale preprocessor gebruikt, de preprocessor voor regelovereenkomsten de uitvoer van de normale preprocessor als invoer ziet. </para>
+</sect2>
+
+<sect2
+><title
+>Waarschuwing</title>
+<para
+>De preprocessor-opdrachten zijn vaak erg nuttig, maar net zoals elke andere optie die automatisch uw teksten wijzigt of bepaalde verschillen verbergt, kunt u per ongeluk bepaalde verschillen over het hoofd zien en in het ergste geval belangrijke gegevens vernietigen. </para
+><para
+>Om deze reden vertelt &kdiff3; u het als er een normale preprocessor-opdracht wordt gebruikt bij het samenvoegen, en wordt u gevraagd of deze uitgeschakeld moet worden of niet. Maar u wordt niet gewaarschuwd als er een <guilabel
+>Commando voor Preprocessor voor regelovereenkomsten:</guilabel
+> actief is. Het samenvoegen is niet voltooid totdat alle conflicten opgelost zijn. Als u menu-item <menuchoice
+><guimenu
+>Diffweergave</guimenu
+><guimenuitem
+>Witruimte tonen</guimenuitem
+></menuchoice
+> uitgeschakeld hebt, zijn de verschillen die met de optie <guilabel
+>Preprocessoropdracht voor regelovereenkomsten</guilabel
+> verwijderd zijn, ook onzichtbaar. Als de knop <guibutton
+>Opslaan</guibutton
+> inactief blijft tijdens het samenvoegen (door overblijvende conflicten), schakel dan menu-item <menuchoice
+><guimenu
+>Diffweergave</guimenu
+><guimenuitem
+>Witruimte tonen</guimenuitem
+></menuchoice
+> in. Als u deze minder belangrijke verschillen niet handmatig wilt samenvoegen kunt u menu-item <menuchoice
+><guimenu
+>Samenvoegen</guimenu
+><guimenuitem
+>[A|B|C] voor alle onopgeloste witruimteconflicten gebruiken</guimenuitem
+></menuchoice
+> kiezen. </para>
+</sect2>
+</sect1>
+</chapter>
+
+
+<chapter id="dirmerge"
+><title
+>Mappen vergelijken en samenvoegen met &kdiff3;</title>
+<sect1 id="dirmergeintro"
+><title
+>Introductie tot mappen vergelijken en samenvoegen</title>
+<para
+>Programmeurs moeten vaak veel bestanden in een map veranderen om hun doel te bereiken. Daarom laat &kdiff3; u ook hele mappen recursief vergelijken en samenvoegen! </para
+><para
+>Hoewel het vergelijken en samenvoegen van mappen nogal duidelijk lijkt, zijn er aan paar details die u moet kennen. Het belangrijkste is natuurlijk het feit dat nu door elke handeling veel bestanden gewijzigd kunnen worden. Als u geen reservekopieën van uw originele gegevens hebt, kan het erg moeilijk of zelfs onmogelijk zijn om naar de originele staat terug te keren. Dus voordat u een samenvoeging start, zorg ervoor dat uw gegevens veilig zijn en dat u terug kunt keren. Of u een archief maakt of een versiebeheersysteem gebruikt is uw keuze, maar zelfs ervaren programmeurs en integrators hebben zo nu en dan de oude broncodes nodig. En merk op dat ik (de auteur van &kdiff3;) mijn best doe, maar ik kan niet garanderen dat er geen bugs zijn. Volgens de &GNU;-GPL is er GEEN WAARBORG op welke manier dan ook voor dit programma. Dus wees bescheiden en onthoud: </para>
+<blockquote
+><para>
+   <emphasis
+>Vergissen is menselijk, maar om dingen echt te verknoeien hebt u een computer nodig.</emphasis>
+</para
+></blockquote>
+<para
+>Dus dit kan dit programma voor u doen: &kdiff3; ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... leest en vergelijkt twee of drie mappen recursief,</para
+></listitem>
+     <listitem
+><para
+>... houdt speciaal rekening met symbolische koppelingen,</para
+></listitem>
+     <listitem
+><para
+>... laat u door bestanden bladeren door te dubbelklikken,</para
+></listitem>
+     <listitem
+><para
+>... stelt voor elk item een samenvoegingsoperatie voor, die u kunt wijzigen voordat het samenvoegen van de mappen begint,</para
+></listitem>
+     <listitem
+><para
+>... laat u het samenvoegen simuleren en geeft de acties aan die plaats zouden vinden, zonder ze uit te voeren,</para
+></listitem>
+     <listitem
+><para
+>... laat u het samenvoegen doen, en geeft u de mogelijkheid in te springen als er menselijke interactie nodig is,</para
+></listitem>
+     <listitem
+><para
+>... laat u de geselecteerde handeling op alle items (toets <keycap
+>F7</keycap
+>) of alleen het geselecteerde item (toets <keycap
+>F6</keycap
+>) uitvoeren,</para
+></listitem>
+     <listitem
+><para
+>... laat u het samenvoegen voortzetten na handmatige interactie met toets <keycap
+>F7</keycap
+>,</para
+></listitem>
+     <listitem
+><para
+>... maakt optioneel reservekopieën met de extensie <literal role="extension"
+>.orig</literal
+>,</para
+></listitem>
+     <listitem
+><para
+>...</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="startingdirmerge"
+><title
+>Mappen vergelijken of samenvoegen</title>
+<para
+>Dit lijkt erg op het vergelijken en samenvoegen van een enkel bestand. U hoeft slechts mappen op de opdrachtregel of in het venster "Openen" te kiezen. </para>
+<sect2
+><title
+>Twee mappen vergelijken/samenvoegen: </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>map1 map2</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>map1 map2</replaceable
+> -o <replaceable
+>doelmap</replaceable
+>
+</screen>
+<para
+>Als er geen doelmap wordt opgegeven, gebruikt &kdiff3; <replaceable
+>map2</replaceable
+>. </para>
+</sect2>
+
+<sect2
+><title
+>Drie mappen vergelijken/samenvoegen </title>
+<screen
+><command
+>kdiff3</command
+> <replaceable
+>map1 map2 map3</replaceable>
+   <command
+>kdiff3</command
+> <replaceable
+>map1 map2 map3</replaceable
+> -o <replaceable
+>doelmap</replaceable
+>
+</screen>
+<para
+>Bij het samenvoegen van drie mappen wordt <replaceable
+>map1</replaceable
+> als basis voor het samenvoegen gebruikt. Als er geen doelmap wordt opgegeven, gebruikt &kdiff3; <replaceable
+>map3</replaceable
+> als doelmap voor het samenvoegen. </para>
+
+<para
+>Merk op dat alleen het vergelijken automatisch start, niet het samenvoegen. Hiervoor dient u eerst een menu-item of de toets <keycap
+>F7</keycap
+> te gebruiken. (Meer details later.) </para>
+</sect2>
+</sect1>
+
+<sect1 id="dirmergevisible"
+><title
+>Mapsamenvoeging zichtbare informatie</title>
+<para
+>Terwijl de mappen worden gelezen verschijnt een melding die u over de voortgang informeert. Als u het inlezen van de mappen annuleert, worden alleen bestanden getoond die tot dan toe zijn vergeleken. </para
+><para
+>Als het inlezen van de mappen klaar is, toont &kdiff3; een lijst met de resultaten links ... </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="dirbrowser.png" format="PNG"/></imageobject
+> <!--alt="Image of the folder browser."-->
+</mediaobject
+></screenshot>
+<para
+>... en details over het geselecteerde item rechts. </para>
+<screenshot
+><mediaobject>
+<imageobject
+><imagedata fileref="iteminfo.png" format="PNG"/></imageobject>
+   <!--alt="Image with information about the selected item."-->
+</mediaobject
+></screenshot>
+
+<sect2 id="name"
+><title
+>De kolom "Naam"</title>
+<para
+>Elk bestand en elke map die tijdens het inlezen gevonden is, wordt hier in een boomstructuur getoond. U kunt een item selecteren door er éénmaal met de muis op te klikken. </para
+><para
+>Standaard zijn de mappen ingevouwen. U kunt ze uitvouwen en weer invouwen door op de "+"/"-" te klikken of door op het item te dubbelklikken, of door de toetsen &Left;/&Right; te gebruiken. Het menu <guimenu
+>Map</guimenu
+> bevat ook twee acties <guimenuitem
+>Alle submappen invouwen</guimenuitem
+> en <guimenuitem
+>Alle submappen uitvouwen</guimenuitem
+> waarmee u alle mappen in één keer kunt invouwen of uitvouwen. </para
+><para
+>Als u op een bestand dubbelklikt wordt de bestandsvergelijking gestart en verschijnt het verschillenvenster. </para>
+<para
+>De afbeelding in de naamkolom geeft het bestandstype in de eerste map (<guilabel
+>A</guilabel
+>) aan. Dit kan zijn: </para>
+<itemizedlist>
+     <listitem
+><para
+>Normaal bestand</para
+></listitem>
+     <listitem
+><para
+>Normale map (map-afbeelding)</para
+></listitem>
+     <listitem
+><para
+>Koppeling naar een bestand (bestandsafbeelding met pijl)</para
+></listitem>
+     <listitem
+><para
+>Koppeling naar een bestand (bestandsafbeelding met pijl)</para
+></listitem>
+</itemizedlist>
+<para
+>Als het bestandstype anders is in de andere mappen, is dit zichtbaar in de kolommen <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+> en in het venster dat de details over het geselecteerde item toont. Merk op dat het samenvoegen in zo'n geval niet automatisch gedaan kan worden. Als u het samenvoegen start, wordt u geïnformeerd over zulke problemen. </para>
+</sect2>
+
+<sect2 id="coloring"
+><title
+>De kolommen A/B/C en het kleurenschema</title>
+<para
+>Zoals in de afbeelding te zien is, worden de kleuren rood, groen, geel en zwart gebruikt in de kolommen <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+>. </para>
+<itemizedlist>
+     <listitem
+><para
+>Zwart: Dit item bestaat niet in deze map.</para
+></listitem>
+     <listitem
+><para
+>Groen: Nieuwste item.</para
+></listitem>
+     <listitem
+><para
+>Geel: Ouder dan groen, nieuwer dan rood.</para
+></listitem>
+     <listitem
+><para
+>Rood: Oudste item.</para
+></listitem>
+</itemizedlist>
+<para
+>Maar voor items die hetzelfde waren in de vergelijking, is ook de kleur hetzelfde, ook al zijn ze niet even oud. </para
+><para
+>Mappen worden als gelijk beschouwd als alle items die ze bevatten hetzelfde zijn. Dan hebben ze ook dezelfde kleur. De leeftijd van een map wordt niet gebruikt bij het bepalen van de kleur. </para
+><para
+>Het idee voor dit kleurenschema kreeg ik bij het commando <ulink url="https://www.samba.org/ftp/paulus"
+><command
+>dirdiff</command
+></ulink
+>. De kleuren stellen een blad voor dat groen is als het nieuw is, later geel wordt, en rood wordt als het oud is. </para>
+
+</sect2
+><sect2 id="operation"
+><title
+>De kolom "Operatie"</title>
+<para
+>Na het vergelijken van mappen maakt &kdiff3; ook een voorstel voor een samenvoegingsoperatie. Dit wordt getoond in de kolom <guilabel
+>Operatie</guilabel
+>. U kunt een operatie wijzigen door erop te klikken. Er verschijnt dan een klein menu waarmee u de operatie voor dat item kunt kiezen. (U kunt ook de meestgebruikte operaties met het toetsenbord kiezen. <keycombo
+>&Ctrl;<keycap
+>1</keycap
+></keycombo
+>/<keycap
+>2</keycap
+>/<keycap
+>3</keycap
+>/<keycap
+>4</keycap
+>/&Del; kiest respectievelijk <guilabel
+>A</guilabel
+>/<guilabel
+>B</guilabel
+>/<guilabel
+>C</guilabel
+>/<guilabel
+>Samenvoegen</guilabel
+>/<guilabel
+>Verwijderen</guilabel
+>.) Deze operatie wordt dan bij het samenvoegen uitgevoerd. Afhankelijk van het item en de samenvoegmodus zijn er andere operaties beschikbaar. De samenvoegmodus kan zijn: </para>
+<itemizedlist>
+     <listitem
+><para
+>Samenvoegen van drie mappen (<guilabel
+>A</guilabel
+> wordt als oudere basis van beide beschouwd).</para
+></listitem>
+     <listitem
+><para
+>Samenvoegen van twee mappen</para
+></listitem>
+     <listitem
+><para
+>Synchroniseren van twee mappen (via de optie <guilabel
+>Mappen synchroniseren</guilabel
+>)</para
+></listitem>
+</itemizedlist>
+<para
+>Bij het samenvoegen van drie mappen is het voorstel voor de operatie: als voor een item ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... alle drie de mappen gelijk zijn: kopiëren vanuit <guilabel
+>C</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> en <guilabel
+>C</guilabel
+> gelijk zijn maar <guilabel
+>B</guilabel
+> niet: kopiëren vanuit <guilabel
+>B</guilabel
+> (of als <guilabel
+>B</guilabel
+> niet bestaat, de bestemming verwijderen als deze bestaat) </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> en <guilabel
+>B</guilabel
+> gelijk zijn maar <guilabel
+>C</guilabel
+> niet: kopiëren vanuit <guilabel
+>C</guilabel
+> (of als <guilabel
+>C</guilabel
+> niet bestaat, de bestemming verwijderen als deze bestaat) </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>B</guilabel
+> en <guilabel
+>C</guilabel
+> gelijk zijn maar <guilabel
+>A</guilabel
+> niet: kopiëren vanuit <guilabel
+>C</guilabel
+> (of als <guilabel
+>C</guilabel
+> niet bestaat, de bestemming verwijderen als deze bestaat) </para
+></listitem>
+     <listitem
+><para
+>... alleen <guilabel
+>A</guilabel
+> bestaat: de bestemming verwijderen (als deze bestaat) </para
+></listitem>
+     <listitem
+><para
+>... alleen <guilabel
+>B</guilabel
+> bestaat: vanuit <guilabel
+>B</guilabel
+> kopiëren </para
+></listitem>
+     <listitem
+><para
+>... alleen <guilabel
+>C</guilabel
+> bestaat: vanuit <guilabel
+>C</guilabel
+> kopiëren </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> en <guilabel
+>C</guilabel
+> niet gelijk zijn: samenvoegen </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> en <guilabel
+>C</guilabel
+> niet hetzelfde bestandstype hebben (&eg; <guilabel
+>A</guilabel
+> is een map en <guilabel
+>B</guilabel
+> een bestand): "Fout: Conflicterende bestandstypen". Zolang zulke items bestaan kan het samenvoegen van de mappen niet beginnen. </para
+></listitem>
+</itemizedlist>
+<para
+>Bij het samenvoegen van twee mappen is het voorstel voor de operatie: Als voor een item... </para>
+<itemizedlist>
+     <listitem
+><para
+>... beide mappen gelijk zijn: kopiëren vanaf <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> bestaat, maar <guilabel
+>B</guilabel
+> niet: kopiëren vanaf <guilabel
+>A</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>B</guilabel
+> bestaat, maar <guilabel
+>A</guilabel
+> niet: kopiëren vanaf <guilabel
+>B</guilabel
+> </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> en <guilabel
+>B</guilabel
+> bestaan maar niet gelijk zijn: samenvoegen </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> en <guilabel
+>B</guilabel
+> niet hetzelfde bestandstype hebben (&eg; <guilabel
+>A</guilabel
+> is een map en <guilabel
+>B</guilabel
+> een bestand): "Fout: Conflicterende bestandstypen". Zolang zulke items bestaan kan het samenvoegen van de mappen niet beginnen. </para
+></listitem>
+</itemizedlist>
+<para
+>Synchronisatiemodus is actief als er slechts twee mappen en geen expliciet doel zijn opgegeven, en als de optie <guilabel
+>Mappen synchroniseren</guilabel
+> actief is. &kdiff3; kiest dan een standaard operatie zodanig dat beide mappen naderhand hetzelfde zijn. Als voor een item ... </para>
+<itemizedlist>
+     <listitem
+><para
+>... beide mappen gelijk zijn: er zal niets worden gedaan. </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> bestaat, maar <guilabel
+>B</guilabel
+> niet: <guilabel
+>A</guilabel
+> naar <guilabel
+>B</guilabel
+> kopiëren </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>B</guilabel
+> bestaat, maar <guilabel
+>A</guilabel
+> niet: <guilabel
+>B</guilabel
+> naar <guilabel
+>A</guilabel
+> kopiëren </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> en <guilabel
+>B</guilabel
+> bestaan, maar niet gelijk zijn: samenvoegen en het resultaat in beide mappen opslaan. (Voor de gebruiker is de zichtbare opslag-bestandsnaam B, maar &kdiff3; kopieert dan B ook naar A.) </para
+></listitem>
+     <listitem
+><para
+>... <guilabel
+>A</guilabel
+> en <guilabel
+>B</guilabel
+> niet hetzelfde bestandstype hebben (&eg; <guilabel
+>A</guilabel
+> is een map en <guilabel
+>B</guilabel
+> een bestand): "Fout: Conflicterende bestandstypen". Zolang zulke items bestaan kan het samenvoegen van de mappen niet beginnen. </para
+></listitem>
+</itemizedlist>
+<para
+>Als twee mappen samengevoegd worden en de optie <guilabel
+>Nieuwere kopiëren in plaats van samenvoegen (onveilig)</guilabel
+> geselecteerd is, kijkt &kdiff3; naar de datums en stelt dan voor om het nieuwere bestand te kiezen. Als de bestanden niet gelijk zijn maar wel gelijke datums hebben, bevat de operatie "Fout: Datums zijn gelijk maar bestanden niet." Zolang zulke items bestaan kan het samenvoegen niet beginnen. </para>
+</sect2>
+
+<sect2 id="status"
+><title
+>De statuskolom</title>
+<para
+>Gedurende het samenvoegen wordt het ene bestand na het andere verwerkt. De statuskolom toont <guilabel
+>Gereed</guilabel
+> bij items waar het samenvoegen is afgerond, en andere teksten als er iets onverwachts gebeurd is. Als het samenvoegen klaar is, dient u een laatste controle te doen om te zien of de status van alle items goed is. </para>
+</sect2>
+
+<sect2 id="statisticscolulmns"
+><title
+>Statistiekkolommen</title>
+<para
+>Als de bestandsvergelijkingsmodus <guilabel
+>Volledige analyse</guilabel
+> ingeschakeld is in de opties, toont &kdiff3; extra kolommen met het aantal onopgeloste en opgeloste conflicten en het aantal (niet-)witruimteconflicten. (De kolom <guilabel
+>Opgelost</guilabel
+> wordt alleen getoond bij het vergelijken of samenvoegen van drie mappen.) </para>
+</sect2>
+
+<sect2 id="selectingvisiblefiles"
+><title
+>Getoonde bestanden selecteren</title>
+<para
+>Verschillende opties beïnvloeden welke bestanden hier te zien zijn. Sommige van deze opties zijn instelbaar in de <link linkend="dirmergeoptions"
+>instellingendialoog</link
+>. Het menu <guilabel
+>Map</guilabel
+> heeft de volgende items: </para
+><para
+><itemizedlist>
+     <listitem
+><para
+><guilabel
+>Identieke bestanden tonen</guilabel
+>: Bestanden die in alle invoermappen gelijk zijn. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Bestanden die verschillen tonen</guilabel
+>: Bestanden die in twee of meer mappen voor komen maar niet gelijk zijn. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Bestanden alleen in A tonen</guilabel
+>: Bestanden die uitsluitend in <guilabel
+>A</guilabel
+> voorkomen, maar niet in <guilabel
+>B</guilabel
+> of <guilabel
+>C</guilabel
+>. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Bestanden alleen in B tonen</guilabel
+>: Bestanden die uitsluitend in <guilabel
+>B</guilabel
+> voorkomen, maar niet in <guilabel
+>A</guilabel
+> of <guilabel
+>C</guilabel
+>. </para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Bestanden alleen in C tonen</guilabel
+>: Bestanden die uitsluitend in <guilabel
+>C</guilabel
+> voorkomen, maar niet in <guilabel
+>A</guilabel
+> of <guilabel
+>B</guilabel
+>. </para
+></listitem>
+</itemizedlist
+></para>
+<para
+>Schakel alleen de opties <guilabel
+>Tonen</guilabel
+> in voor de items die u wilt tonen. Als u bijvoorbeeld alleen items wilt tonen die uitsluitend in <guilabel
+>A</guilabel
+> of in <guilabel
+>B</guilabel
+> voorkomen, dan moet u <guilabel
+>Bestanden alleen in A tonen</guilabel
+> en <guilabel
+>Bestanden alleen in B tonen</guilabel
+> inschakelen en alle anderen uitschakelen (<guilabel
+>Identieke bestanden tonen</guilabel
+>, <guilabel
+>Bestanden die verschillen tonen</guilabel
+>, <guilabel
+>Bestanden alleen in C tonen</guilabel
+>). De lijst zal vervolgens onmiddellijk bijgewerkt worden naar de nieuwe instellingen. </para
+><para
+>Deze keuzemogelijkheden zijn ook geldig voor mappen met een uitzondering: het uitschakelen van <guilabel
+>Bestanden die verschillen tonen</guilabel
+> zal niet complete mappen verbergen. Dit werkt alleen voor de bestanden in een map. </para
+><para
+>Merk op dat alleen de optie <guilabel
+>Identieke bestanden tonen</guilabel
+> bewaard wordt. De anderen worden ingeschakeld bij het starten van &kdiff3;. </para>
+</sect2>
+
+</sect1>
+
+
+<sect1 id="dothemerge"
+><title
+>Een mapsamenvoeging doen</title>
+<para
+>U kunt het geselecteerde item (bestand of map) samenvoegen, of alle items. Als u alle keuzes voor de operaties hebt gemaakt (ook in alle submappen) kunt u het samenvoegen starten. </para
+><para
+>Wees erop bedacht dat, als u niet expliciet een doelmap hebt opgegeven, de doelmap <guilabel
+>C</guilabel
+> is bij het behandelen van drie mappen, <guilabel
+>B</guilabel
+> bij het samenvoegen van twee mappen, en <guilabel
+>A</guilabel
+> en/of <guilabel
+>B</guilabel
+> in synchronisatiemodus. </para
+><para
+>Controleer ook als u een doelmap hebt opgegeven of alle items die zich in de uitvoer zouden moeten bevinden, daadwerkelijk in de boomstructuur staan. Er zijn enkele opties die ervoor zorgen dat bepaalde items uit het vergelijken en samenvoegen van mappen worden weggelaten. Controleer deze opties om onplezierige verrassingen te voorkomen: </para>
+<itemizedlist>
+     <listitem
+><para
+><guilabel
+>Recursieve mappen</guilabel
+>: Als dit uitgeschakeld is, worden items in submappen niet gevonden.</para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Patroon</guilabel
+>/<guilabel
+>Anti-patroon</guilabel
+>: Overeenkomende items al dan niet invoegen</para
+></listitem>
+     <listitem
+><para
+><guilabel
+>Verborgen bestanden uitsluiten</guilabel
+></para
+></listitem>
+     <listitem
+><para
+><link linkend="selectingvisiblefiles"
+>Opties voor tonen</link
+> (<guilabel
+>Bestanden die identiek zijn/verschillen</guilabel
+>, <guilabel
+>Bestanden alleen in A/B/C</guilabel
+>)</para
+></listitem>
+</itemizedlist>
+<para
+>Als u instellingen heeft gewijzigd om de hoeveelheid zichtbare bestanden in de lijst te vergroten, dan is het daarna noodzakelijk om zelf een rescan uit te voeren via het menu <menuchoice
+><guimenu
+>Map</guimenu
+><guimenuitem
+>Rescan</guimenuitem
+> </menuchoice
+>. (De reden hiervoor is dat voor snellere verwerking van de vergelijkingen, &kdiff3; de vergelijkingen niet uitvoert voor bestanden die al uitgesloten zijn.) Als u de bestand- en map-patronen heeft gewijzigd om meer bestanden uit te sluiten dan wordt de bestandenlijst onmiddellijk bijgewerkt bij het sluiten van de keuze-dialoog. </para
+><para
+>Als u naar een compleet nieuwe map wilt schrijven, dan wilt u meestal ook de identieke bestanden kopiëren. Schakel in dat geval de keuzemogelijkheid <guilabel
+>Identieke bestanden tonen</guilabel
+> in. Als uw doelmap een van de invoermappen is, dan is dit niet noodzakelijk omdat de bestanden al aanwezig zijn.  </para
+><para
+>Als u tot hier tevreden bent, is de rest eenvoudig. </para
+><para
+>Om alle items samen te voegen: kies <guimenuitem
+>Mapsamenvoeging starten/voortzetten</guimenuitem
+> in het menu <guimenu
+>Map</guimenu
+> of druk op <keycap
+>F7</keycap
+> (de standaard sneltoets). Om alleen het huidige item samen te voegen: kies <guilabel
+>Operatie uitvoeren voor huidig item</guilabel
+> of druk op <keycap
+>F6</keycap
+>. </para
+><para
+>Als er door conflicterende bestandstypes nog bestanden zijn met ongeldige operaties, verschijnt er een melding, worden die items aangewezen en kunt u een geldige operatie voor die items kiezen. </para
+><para
+>Als u alle items samenvoegt, verschijnt er een dialoogvenster met de opties <guilabel
+>Starten</guilabel
+>, <guilabel
+>Simuleren</guilabel
+> en <guilabel
+>Annuleren</guilabel
+>. </para>
+<itemizedlist>
+     <listitem
+><para
+>Kies <guilabel
+>Simuleren</guilabel
+> als u wilt zien wat er gedaan zou worden, zonder dit werkelijk te doen. Er wordt een uitgebreide lijst van alle bewerkingen getoond.</para
+></listitem>
+     <listitem
+><para
+>Kies anders <guilabel
+>Starten</guilabel
+> om het samenvoegen echt te starten.</para
+></listitem>
+</itemizedlist>
+<para
+>&kdiff3; voert dan de gekozen operatie uit op alle items. Als u handmatige actie moet ondernemen (samenvoegen van een enkel bestand) verschijnt er een samenvoegvenster (<link linkend="dirmergebigscreenshot"
+>zie de grote schermafdruk</link
+>). </para
+><para
+>Als u klaar bent met een bestand, kiest u opnieuw <guimenuitem
+>Samenvoegen starten/voortzetten</guimenuitem
+> of drukt u op <keycap
+>F7</keycap
+>. Als u nog niet hebt opgeslagen, wordt er een dialoogvenster getoond dat u vraagt om dat te doen. &kdiff3; gaat dan verder met het volgende item. </para
+><para
+>Als &kdiff3; een fout tegenkomt, meldt het dit en wordt de uitgebreide statusinformatie getoond. Onderaan deze lijst zullen er wat foutmeldingen staan die u zouden moeten helpen bij het begrijpen van de oorzaak van het probleem. Als u doorgaat met samenvoegen (<keycap
+>F7</keycap
+>) geeft &kdiff3; u de keuze tussen opnieuw proberen of het item overslaan dat het probleem veroorzaakte. Dit betekent dat u, voordat u doorgaat, een andere bewerking kunt kiezen of het probleem door andere middelen kunt oplossen. </para
+><para
+>Als het samenvoegen voltooid is, informeert &kdiff3; u hierover via een berichtvenster. </para
+><para
+>Als sommige items afzonderlijk samengevoegd zijn, onthoudt &kdiff3; dit (tijdens de samenvoegsessie) en worden deze niet opnieuw samengevoegd als later het samenvoegen voor alle items gestart wordt. Zelfs als het samenvoegen overgeslagen is of er niets is opgeslagen, tellen deze items als voltooid. Alleen als u de samenvoegoperatie wijzigt, wordt de status <guilabel
+>Gereed</guilabel
+> van het item verwijderd en kan het opnieuw samengevoegd worden. </para>
+</sect1>
+
+<sect1 id="dirmergeoptions"
+><title
+>Opties voor het vergelijken en samenvoegen van mappen</title>
+<para
+>De voorkeuren van &kdiff3; (menu <menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>&kdiff3; configureren...</guimenuitem
+></menuchoice
+>) bevatten nu een sectie "Mappen samenvoegen" met deze opties: </para>
+
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Recursieve mappen</guilabel
+></term
+><listitem
+><para
+>Kies of mappen recursief doorzocht moeten worden.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Bestandspatroon(en):</guilabel
+></term
+><listitem
+><para
+>Alleen bestanden die hier met een patroon overeenkomen worden in de boom geplaatst. U kunt hier meer dan één patroon opgeven door een puntkomma ";" als scheidingsteken te gebruiken. Geldige jokertekens: '*' en '?' (&eg; "<literal
+>*.cpp;*.h</literal
+>"). Standaard is "*". Mappen hoeven niet aan dit patroon te voldoen.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Bestand antipatroon(en):</guilabel
+></term
+><listitem
+><para
+>Bestanden die met dit patroon overeenkomen worden niet in de boom geplaatst. U kunt hier meer dan één patroon opgeven door een puntkomma ";" als scheidingsteken te gebruiken. Geldige jokertekens: '*' en '?'. Standaard is "<literal
+>*.orig;*.o;*.obj</literal
+>".</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Map-antipatroon(en):</guilabel
+></term
+><listitem
+><para
+>Mappen die met dit patroon overeenkomen worden niet in de boom geplaatst. U kunt hier meer dan één patroon opgeven door een puntkomma ";" als scheidingsteken te gebruiken. Geldige jokertekens: '*' en '?'. Standaard is "<literal
+>CVS;deps;.svn</literal
+>".</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Bestand negeren gebruiken</guilabel
+></term
+><listitem
+><para
+>Bestanden en mappen negeren die ook door uw beheer van broncode worden genegeerd. Veel automatisch gegenereerde bestanden worden genegeerd door lijsten met te negeren. Het grote voordeel hiervan is dat dit mapspecifiek kan zijn via een lokaal negeerbestand. (Zie documentatie over versiebeheer voor meer details). </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Verborgen bestanden en mappen zoeken</guilabel
+></term
+><listitem
+><para
+>Op sommige bestandssystemen hebben bestanden een attribuut "verborgen". Op andere systemen zorgt een punt "." aan het begin van een bestandsnaam ervoor dat het bestand verborgen is. Met deze optie kunt u deze bestanden al dan niet in de boom laten opnemen. Standaard is aan.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Bestandskoppelingen volgen</guilabel
+></term
+><listitem
+><para
+>Voor koppelingen naar bestanden: Als dit uitgeschakeld is, worden de koppelingen vergeleken. Als dit ingeschakeld is, worden de bestanden achter de koppelingen vergeleken. Standaard is uit.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Mapkoppelingen volgen</guilabel
+></term
+><listitem
+><para
+>Voor koppelingen naar mappen: als dit uitgeschakeld is, worden de symbolische koppelingen vergeleken. Als dit ingeschakeld is, worden de koppelingen beschouwd als mappen en recursief ingelezen. (Merk op dat het programma niet controleert of de koppeling "recursief" is. Dus bijvoorbeeld een map die een koppeling naar zichzelf bevat, zorgt voor een oneindige lus, en na enige tijd, als de "stack" overloopt of al het geheugen op is, voor een crash van het programma.) Standaard is uit.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Hoofdlettergevoelige bestandsnaamvergelijking</guilabel
+></term
+><listitem
+><para
+>Standaard uit onder &Windows;, aan onder andere besturingssystemen.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Bestandsvergelijkingsmodus:</guilabel
+></term
+><listitem
+><para>
+<variablelist>
+   <varlistentry
+><term
+><guilabel
+>Binaire vergelijking</guilabel
+></term
+><listitem
+><para
+>Dit is de standaard vergelijkingsmodus. </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Volledige analyse</guilabel
+></term
+><listitem
+><para
+>Doe een volledige analyse van elk bestand en toon de kolommen met statistische informatie. (Aantal conflicten <guilabel
+>opgelost</guilabel
+> en <guilabel
+>onopgelost</guilabel
+>, <guilabel
+>niet-witruimte</guilabel
+> en <guilabel
+>witruimte</guilabel
+>.) De volledige analyse is langzamer dan een eenvoudige binaire analyse, en veel langzamer bij bestanden die geen tekst bevatten. (Geef de van toepassing zijnde bestandsantipatronen op.) </para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Grootte en wijzigingsdatum vertrouwen (onveilig)</guilabel
+></term
+><listitem
+><para
+>Als u grote mappen over een langzaam netwerk vergelijkt, kan het sneller om alleen de wijzigingsdatums en bestandsgroottes te vergelijken. Deze snelheidsverbetering brengt echter wat onzekerheid met zich mee. Wees voorzichtig bij het gebruiken van deze optie. Standaard is uit.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Grootte vertrouwen (onveilig)</guilabel
+></term
+><listitem
+><para
+>Vergelijkbaar met het vertrouwen van de wijzigingsdatum. Er vindt geen echte vergelijking plaats. Twee bestanden worden als gelijk beschouwd als ze dezelfde grootte hebben. Dit is nuttig als de kopieeroperatie de wijzigingsdatum niet intact heeft gehouden. Wees voorzichtig bij het gebruiken van deze optie. Standaard is uit.</para
+></listitem
+></varlistentry>
+</variablelist
+></para
+></listitem
+></varlistentry>
+
+   <varlistentry
+><term
+><guilabel
+>Mappen synchroniseren</guilabel
+></term
+><listitem
+><para
+>Activeert de synchronisatiemodus als twee mappen vergeleken worden en er geen expliciete doelmap is opgegeven. In deze modus worden de voorgestelde operaties dusdanig gekezen dat beide bronmappen na de synchronisatie gelijk zijn. Het resultaat van het samenvoegen wordt ook naar beide mappen geschreven. Standaard is uit.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Nieuwere bestanden kopiëren in plaats van samenvoegen (onveilig)</guilabel
+></term
+><listitem
+><para
+>In plaats van het uitvoeren van de voorgestelde operatie wordt het nieuwere bestand gekopieerd als er wijzigingen zijn opgetreden. (Dit wordt als onveilig beschouwd, want het veronderstelt dat u weet dat het andere bestand niet ook gewijzigd is. Controleer dit in elk geval.) Standaard is uit.</para
+></listitem
+></varlistentry>
+   <varlistentry
+><term
+><guilabel
+>Reservekopie aanmaken (.orig)</guilabel
+></term
+><listitem
+><para
+>Als een bestand of gehele map door een andere wordt vervangen of verwijderd wordt, wordt de originele versie hernoemd met de extensie <literal role="extension"
+>.orig</literal
+>. Als een oud reservekopiebestand met de extensie <literal role="extension"
+>.orig</literal
+> al bestaat, wordt dit zonder reservekopie verwijderd. Dit beïnvloedt ook het normale samenvoegen van enkele bestanden, niet alleen bij het samenvoegen van mappen. Standaard is aan.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="other"
+><title
+>Andere mogelijkheden in het mappen-samenvoegenvenster</title>
+<sect2
+><title
+>Splitsen / Volledig-scherm-modus</title>
+<para
+>Normaal gesproken blijft de lijstweergave voor het samenvoegen van mappen zichtbaar als er een enkel bestand wordt vergeleken of samengevoegd. Met de muis kunt u de splitsbalk verplaatsen die de bestandenlijst van de verschillenvensters scheidt. Als u dat niet wilt, kunt u met menu-item <menuchoice
+><guimenu
+>Map</guimenu
+><guimenuitem
+>Map &amp;&amp; Gesplist scherm tekstweergave</guimenuitem
+></menuchoice
+> uitschakelen. U kunt dan <menuchoice
+><guimenu
+>Map</guimenu
+><guimenuitem
+>Weergave omschakelen</guimenuitem
+></menuchoice
+> kiezen om tussen de bestandenlijst en de tekstverschillenweergave over te schakelen, die dan het volledige scherm in beslag nemen. </para>
+</sect2>
+<sect2
+><title
+>Een enkel bestand vergelijken of samenvoegen</title>
+<para
+>U dubbelklikt waarschijnlijk het liefst op een bestand om het te vergelijken. Desalniettemin is er hiervoor ook een item in het menu <guimenu
+>Map</guimenu
+>. U kunt ook direct een enkel bestand samenvoegen, door menu-item <menuchoice
+><guimenu
+>Samenvoegen</guimenu
+><guimenuitem
+> Huidig bestand samenvoegen</guimenuitem
+></menuchoice
+> te kiezen. Als u het resultaat opslaat, wordt de status op "voltooid" gezet en wordt het bestand niet opnieuw samengevoegd als er een mapsamenvoeging wordt gestart. </para
+><para
+>Merk op dat deze statusinformatie verloren gaat als u de map opnieuw scant: <menuchoice
+><guimenu
+>Map</guimenu
+><guimenuitem
+>Opnieuw scannen</guimenuitem
+></menuchoice
+> </para>
+</sect2>
+<sect2
+><title
+>Bestanden net verschillende namen vergelijken of samenvoegen</title>
+<para
+>Soms wilt u bestanden met verschillende namen vergelijken of samenvoegen (&eg; het huidige bestand en de reservekopie in dezelfde map). </para
+><para
+>Selecteer het juiste bestand door op het pictogram in de kolom <guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> of <guilabel
+>C</guilabel
+> te klikken. Het eerste geselecteerde bestand zal gemarkeerd worden met een <guilabel
+>A</guilabel
+>, het tweede en derde met <guilabel
+>B</guilabel
+> en <guilabel
+>C</guilabel
+> onafhankelijk van de kolom waarin ze zijn. Er kunnen maximaal drie bestanden op deze manier gekozen worden. </para
+><para
+>Ga verder door menu-item <menuchoice
+><guimenu
+>Map</guimenu
+><guimenuitem
+>Expliciet geselecteerde bestanden vergelijken</guimenuitem
+></menuchoice
+> of <menuchoice
+><guimenu
+>Map</guimenu
+><guimenuitem
+>Expliciet geselecteerde bestanden samenvoegen</guimenuitem
+></menuchoice
+> te selecteren. Om het u makkelijker te maken verschijnt dit menu-item ook als contextmenu wanneer u met de &RMB; op het laatst geselecteerde bestand klikt. </para
+><para
+>Het vergelijken of samenvoegen gebeurt in hetzelfde venster. Als u deze methode gebruikt bij mappen dan wordt een nieuw venster geopend. </para
+></sect2>
+</sect1>
+</chapter>
+
+<chapter id="misc">
+<title
+>Diverse onderwerpen</title>
+<sect1 id="networktransparency">
+<title
+>Netwerktransparantie via KIO</title>
+<sect2
+><title
+>KIO-slaves</title>
+<para
+>De KIO-bibliotheek van &frameworks; biedt netwerktransparantie via KIO-slaves. &kdiff3; gebruikt dit om invoerbestanden en mappen te lezen. Dit betekent dat u bestanden en mappen op lokale en externe bronnen kunt opgeven via &URL;'s. </para
+><para
+>Voorbeeld: </para
+><para>
+<screen
+><command
+>kdiff3</command
+> test.cpp  ftp://ftp.verweg.org/test.cpp
+   <command
+>kdiff3</command
+> tar:/home/hacker/archief.tar.gz/map ./map
+</screen>
+</para>
+<para
+>De eerste regel vergelijkt een lokaal bestand met een bestand op een &FTP;-server. De tweede regel vergelijkt een map binnen een gecomprimeerd archief met een lokale map. </para
+><para
+>Andere interessante KIO-slaves zijn: </para>
+<itemizedlist>
+<listitem
+><para
+>Bestanden op het www (http:),</para
+></listitem>
+<listitem
+><para
+>Bestanden uit de &FTP; (ftp:),</para
+></listitem>
+<listitem
+><para
+>Versleutelde bestandsoverdracht (fish:, sftp:),</para
+></listitem>
+<listitem
+><para
+>&Windows;-hulpbronnen (smb:),</para
+></listitem>
+<listitem
+><para
+>Lokale bestanden (file:).</para
+></listitem>
+</itemizedlist>
+<para
+>Andere (waarschijnlijk minder nuttige) mogelijkheden zijn: </para>
+<itemizedlist>
+<listitem
+><para
+>Man-pagina's (man:),</para
+></listitem>
+<listitem
+><para
+>info-pagina's (info:).</para
+></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2
+><title
+>Hoe &URL;-adressen te schrijven</title>
+<para
+>Een &URL; heeft een andere syntaxis vergeleken met paden naar lokale bestanden en mappen. U dient met een aantal zaken rekening te houden: </para>
+<itemizedlist>
+<listitem
+><para
+>Een pad kan relatief zijn en "." of ".." bevatten. Dit is niet mogelijk met &URL;-adressen, die altijd absoluut zijn. </para
+></listitem
+><listitem
+><para
+>Speciale tekens dienen omgezet te worden. ("<literal
+>#</literal
+>" -&gt; "<literal
+>%23</literal
+>", spatie -&gt;"<literal
+>%20</literal
+>", &etc;) Een bestand met de naam "<literal
+>#</literal
+>foo<literal
+>#</literal
+>" wordt bijvoorbeeld het &URL;-adres "file:/<literal
+>%23</literal
+>foo<literal
+>%23</literal
+>". </para
+></listitem
+><listitem
+><para
+>Als &URL;-adressen niet werken zoals u verwacht, probeer ze dan eerst in &konqueror; te openen. </para
+></listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2
+><title
+>Mogelijkheden van KIO-slaves</title>
+<para
+>Netwerktransparantie heeft één nadeel: niet alle bronnen hebben dezelfde mogelijkheden. </para
+><para
+>Soms ligt dit aan het bestandssysteem van de server, soms aan het protocol. Een korte lijst van beperkingen: </para>
+<itemizedlist>
+<listitem
+><para
+>Er is soms geen ondersteuning voor koppelingen. </para
+></listitem
+><listitem
+><para
+>Of er is geen manier om te onderscheiden of een koppeling naar een map of een bestand verwijst, er wordt dan altijd van bestanden uitgegaan (ftp:, sftp:). </para
+></listitem
+><listitem
+><para
+>De bestandsgrootte kan niet altijd bepaald worden. </para
+></listitem
+><listitem
+><para
+>Beperkte ondersteuning voor permissies. </para
+></listitem
+><listitem
+><para
+>Geen mogelijkheden om permissies of wijzigingsdatums te veranderen, zodat de permissies of tijd van een kopie verschillen van het origineel. (Zie de optie <guilabel
+>Grootte vertrouwen (onveilig)</guilabel
+>). (Rechten of wijzigingsdatum veranderen is alleen mogelijk bij lokale bestanden). </para
+></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+<sect1 id="kpart">
+<title
+>&kdiff3; als een KPart gebruiken</title>
+<para
+>&kdiff3; is een KPart. Het implementeert momenteel de interface KParts::ReadOnlyPart. </para
+><para
+>Het belangrijkste gebruik is als een weergever van verschillen in &kdevelop;. &kdevelop; start altijd eerst de interne weergever van verschillen. Om &kdiff3; op te starten klikt u met de &RMB; op het verschilvenster en kiest u <guimenuitem
+>In KDiff3Part tonen</guimenuitem
+> uit het contextmenu. </para
+><para
+>&kdiff3; vereist normaal gesproken twee complete bestanden als invoer. Als het als een KPart gebruikt wordt, neemt &kdiff3; aan dat het invoerbestand een patch-bestand in het standaard formaat is. &kdiff3; haalt dan de twee bestandsnamen op uit het patch-bestand. Minstens één van de twee bestanden moet beschikbaar zijn. &kdiff3; roept dan <command
+>patch</command
+> aan om het andere bestand opnieuw te maken. </para
+><para
+>In &dolphin; kunt u een patch-bestand selecteren en item <menuchoice
+><guimenuitem
+>Tonen in</guimenuitem
+><guisubmenu
+>KDiff3Part</guisubmenu
+></menuchoice
+> uit het contextmenu kiezen. Merk op dat dit niet werkt als geen van de originele bestanden beschikbaar is en dat het niet betrouwbaar is als een origineel bestand gewijzigd is sinds het patch-bestand gegenereerd is. </para
+><para
+>Als het als een KPart gestart wordt, biedt &kdiff3; alleen een verschillenmodus voor twee bestanden, een kleine werkbalk en een menu. Samenvoegen of mappen vergelijken worden dan niet ondersteund. </para>
+</sect1>
+
+<sect1 id="git">
+<title
+>&kdiff3; gebruiken als een &git; Diff en hulpmiddel voor samenvoegen</title>
+<para
+>&kdiff3; kan gebruikt worden als een hulpmiddel <ulink url="https://git-scm.com/"
+>&git;</ulink
+>-diff en merge. </para>
+<para
+>Voeg eenvoudig de volgende regels toe in uw bestand <filename
+>gitconfig</filename
+>. </para>
+<programlisting
+>[diff]
+        tool = kdiff3
+[difftool "kdiff3"]
+        path = &lt;pad naar kdiff3 programma in uw systeem>
+[difftool]
+        prompt = false
+        keepBackup = false
+        trustExitCode = false
+[merge]
+        tool = kdiff3
+[mergetool]
+        prompt = false
+        keepBackup = false
+        keepTemporaries = false
+[mergetool "kdiff3"]
+        path = &lt;pad naar kdiff3 programma in uw systeem
+>
+</programlisting>
+<para
+>Om dan de verschillen te zien tussen twee commits, gebruik <userinput
+>git difftool <replaceable
+>eerste_hash</replaceable
+> <replaceable
+>tweede_hash</replaceable
+> --tool=kdiff3 --cc <replaceable
+>een_bestand_in_de_git_boomstructuur</replaceable
+></userinput
+> </para>
+<para
+>Om een branch samen te voegen met &kdiff3;, gebruik <userinput
+>git merge <replaceable
+>branch_naam</replaceable
+> &amp;&amp; git mergetool --tool=kdiff3</userinput
+> </para>
+<para
+>Na het oplossen van conflicten bij het samenvoegen op de <link linkend="synchronise_views"
+>gebruikelijke manier</link
+> is het genoeg een commit te doen voor de wijzigingen. </para>
+</sect1>
+</chapter>
+
+<chapter id="faq">
+<title
+>Vraag en antwoord</title
+>&reporting.bugs; &updating.documentation; <qandaset id="faqlist">
+
+<qandaentry
+><question
+><para
+>Waarom heet het "&kdiff3;"? </para
+></question
+><answer
+><para
+>Hulpmiddelen met de naam <application
+>KDiff</application
+> en <application
+>KDiff2</application
+> (nu genaamd &kompare;) bestaan al. &kdiff3; moet ook suggereren dat het kan samenvoegen, net als het hulpmiddel <command
+>diff3</command
+> in de Diff-Tool-verzameling. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Waarom heb ik het onder GPL uitgegeven? </para
+></question
+><answer
+><para
+>Ik gebruik al heel lang GPL-programma's en heb veel geleerd door de vele broncodes te bekijken. Dit is daarom mijn dankbetuiging aan alle programmeurs die hetzelfde hebben gedaan of zullen doen. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Sommige knoppen en functies ontbreken. Wat is er mis? </para
+></question
+><answer
+><para
+>U hebt waarschijnlijk vanuit de broncode gecompileerd zonder het juiste prefix voor de installatie op te geven. Standaard wil <command
+>cmake</command
+> installeren in de <filename class="directory"
+>/usr/local</filename
+>, maar het bronbestand voor de gebruikersinterface (&ie; <filename
+>kdiff3ui.rc</filename
+>) is dan niet te vinden. Het bestand <filename
+>README</filename
+> bevat meer informatie over de juiste prefix. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Regels die op elkaar lijken maar niet hetzelfde zijn, verschijnen vaak naast elkaar, maar soms niet. Waarom? </para
+></question
+><answer
+><para
+>Regels waar alleen de hoeveelheid witruimte verschillend is worden in eerste instantie als "gelijk" beschouwd, terwijl slechts één verschillend niet-witruimte-teken ervoor zorgt dat de regels "verschillend" zijn. Als op elkaar lijkende regels naast elkaar verschijnen is dit slechts toeval, maar dit is gelukkig vaak het geval. Zie ook <link linkend="manualdiffhelp"
+>Handboek Diff-hulp</link
+>. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Waarom moeten alle conflicten opgelost worden voordat het resultaat opgeslagen kan worden? </para
+></question
+><answer
+><para
+>Voor elke gelijke of verschillende sectie onthoudt de editor in het resultaatvenster waar deze begint en eindigt. Dit is nodig omdat dan conflicten handmatig opgelost kunnen worden door op de knop van de broncode (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> of <guilabel
+>C</guilabel
+>) te drukken. Deze informatie is opgelost bij het opslaan als tekst en het is te veel werk om een speciaal bestandsformaat te maken waarmee alle benodigde informatie opgeslagen en ingelezen kan worden. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Hoe kan ik het verschillenvenster en het samenvoegvenster synchroniseren zodat alle vensters dezelfde tekstpositie tonen? </para
+></question
+><answer
+><para
+>Klik in de kolom samenvatting links van de tekst. (<link linkend="synchronise_views"
+>Zie ook hier.</link
+>) </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Waarom geeft <userinput
+>git difftool --dir-diff</userinput
+> "Fout door mix van koppelingen en normale bestanden" bij gebruik van KDiff3 als het diff-hulpmiddel? </para
+></question
+><answer
+><para
+>Dit is een zijeffect van de interne werking van git. Als u een vorige revisie met de huidige werkveld wilt vergelijken zal git actuele bestanden de vorige commit representeren vergelijken met symbolische koppelingen die verwijzen naar het werkveld. Vanaf 1.9 heeft KDiff3 standaard <guilabel
+>Bestandskoppelingen volgen</guilabel
+> en <guilabel
+>Mapkoppelingen volgen</guilabel
+> aan staan. Eerder stonden deze standaard uit. Dit gaf geen problemen wanneer "Volledige analyse" ook uit stond. Echter, met <guilabel
+>Volledige analyse</guilabel
+> aan zou KDiff3 initieel het pad waarnaar een koppeling wijst vergelijken in plaats van het dan te volgen. Eerder dan 1.8 werd de resulterende fout genegeerd. Versie 1.8 begon de fout te rapporteren. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Waarom heeft de editor in het resultaatvenster geen functie "ongedaan maken"? </para
+></question
+><answer
+><para
+>Dit was tot nu toe te veel werk. U kunt altijd een versie vanuit ene bron (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> of <guilabel
+>C</guilabel
+>) herstellen daar op de overeenkomstige knop te klikken. Voor grote wijzigingen wordt het gebruik van een andere editor sowieso aanbevolen. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Toen ik wat tekst verwijderde, verscheen plotseling "&lt;Geen regel in de bron&gt;" en ik kon dit niet verwijderen. Wat betekent dit en hoe kan ik dit verwijderen? </para
+></question
+><answer
+><para
+>Voor elke gelijke of verschillende sectie onthoudt de editor in het resultaatvenster waar deze begint en eindigt. "&lt;Geen regel in de bron&gt;" betekent dat er niets over is in de sectie (zelfs geen regeleinde). Dit kan tijdens automatisch samenvoegen of tijdens bewerken gebeuren. Dit is geen probleem, want de aanwijzing verschijnt niet in het opgeslagen bestand. Als u de originele bron terug wilt, selecteert u de sectie (klik op de linker overzichtkolom) en klikt u op de knop van de bron met de gewenste inhoud (<guilabel
+>A</guilabel
+>, <guilabel
+>B</guilabel
+> of <guilabel
+>C</guilabel
+>). </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Waarom ondersteunt &kdiff3; geen syntaxis-accentuering? </para
+></question
+><answer
+><para
+>&kdiff3; gebruikt al veel kleuren voor het accentueren van verschillen. Meer accentuering zou verwarrend worden, gebruik daar een andere editor voor. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Kan ik &kdiff3; gebruiken om <trademark class="registered"
+> OpenOffice.org</trademark
+>, <application
+>&Microsoft; Word</application
+>, <application
+>&Microsoft; Excel</application
+>, &PDF;, &etc; bestanden gebruik? </para
+></question
+><answer
+><para
+>Hoewel &kdiff3; elk soort bestand zal analyseren zal het resultaat waarschijnlijk niet erg bevredigend voor u zijn. </para
+><para
+>&kdiff3; is ontworpen om pure tekstbestanden te vergelijken. <trademark class="registered"
+>OpenOffice.org</trademark
+>, <application
+>&Microsoft; Word</application
+>, <application
+>&Microsoft; Excel</application
+> &etc; slaan in de bestanden veel meer informatie op (over lettertypes, afbeeldingen, pagina's, kleuren &etc;) waarover &kdiff3; niets weet. Daarom zal &kdiff3; de inhoud van het bestand u als pure tekst tonen, maar dit kan onleesbaar zijn of er minstens zeer vreemd uitzien. </para
+><para
+>Omdat meer en meer programma's hun data opslaan in het &XML;-formaat, is er een kans dat u het als pure tekst kunt lezen. Hoewel de kans dus klein is, kan &kdiff3; u misschien nog steeds helpen. </para
+><para
+>Als u alleen de tekst wilt vergelijken (zonder ingebedde objecten zoals afbeeldingen), dan is het gebruikt van menu-items <menuchoice
+><guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Alles selecteren</guimenuitem
+></menuchoice
+> en <menuchoice
+><guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Kopiëren</guimenuitem
+></menuchoice
+> in uw programma de interessante tekst te kopiëren naar het klembord en vervolgens in &kdiff3; de tekst in een verschillenvenster te plakken. (Lees ook <link linkend="selections"
+>Selecteren, kopiëren en plakken</link
+>.) </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Waar is de mapoptie <guimenuitem
+>Alleen delta's tonen</guimenuitem
+> heen gegaan? </para
+></question
+><answer
+><para
+>Er zijn nu verschillende <link linkend="selectingvisiblefiles"
+>Opties "Tonen"</link
+> in het menu <guimenu
+>Map</guimenu
+>. Het uitschakelen van <guimenuitem
+>Identieke bestanden tonen</guimenuitem
+> zal hetzelfde resultaat hebben als het inschakelen van <guimenuitem
+>Alleen delta's tonen</guimenuitem
+> vroeger had. </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Hoe kan ik een grote selectie maken in het verschillenvenster als het scrollen zo langzaam gaat? </para
+></question
+><answer
+><para
+>Begin zoals gewoonlijk met de selectie (klik en houdt de &LMB; ingedrukt). Gebruik vervolgens de navigatieknoppen (&eg; &PgUp;, &PgDn;) terwijl u de &LMB; ingedrukt houd. (Lees ook <link linkend="selections"
+>Selecteren, kopiëren en plakken</link
+>). </para
+></answer
+></qandaentry>
+
+<qandaentry
+><question
+><para
+>Er staat hier zo veel informatie, maar uw vraag is nog niet beantwoord? </para
+></question
+><answer
+><para
+>Stuur me uw vraag. Ik stel alle opmerkingen op prijs. </para
+></answer
+></qandaentry>
+
+</qandaset>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Dankbetuigingen en licentie</title>
+
+<para
+>&kdiff3; - Hulpmiddel voor vergelijken en samenvoegen van bestanden en mappen </para>
+<para
+>Programma copyright 2002-2007 Joachim Eibl <email
+>joachim.eibl at gmx.de</email
+> </para>
+<para
+>Diverse gave ideeën en bugrapporten van collega's en veel mensen op het Wilde Wilde Web. Bedankt! </para>
+
+<para
+>Documentatie copyright &copy; 2002-2007 Joachim Eibl <email
+>joachim.eibl at gmx.de</email
+> </para>
+
+<para
+>Documentatie Copyright &copy; 2017-2019 Michael Reeves <email
+>reeves.87 at gmail.com</email
+> </para>
+
+&meld.fouten;&vertaling.sander;&vertaling.freek; &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab
+-->
