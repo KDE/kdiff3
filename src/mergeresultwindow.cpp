@@ -1485,7 +1485,7 @@ void MergeResultWindow::writeLine(
 
     if(rangeMark & 4)
     {
-        p.fillRect(xOffset, yOffset, width(), fontHeight, m_pOptions->m_currentRangeBgColor);
+        p.fillRect(xOffset, yOffset, width(), fontHeight, m_pOptions->getCurrentRangeBgColor());
     }
 
     if((srcSelect > e_SrcSelector::None || bUserModified) && !bLineRemoved)

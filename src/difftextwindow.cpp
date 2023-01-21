@@ -986,8 +986,8 @@ void DiffTextWindowData::writeLine(
 
     if(bFastSelectionRange)
     {
-        bgColor = m_pOptions->m_currentRangeBgColor;
-        diffBgColor = m_pOptions->m_currentRangeDiffBgColor;
+        bgColor = m_pOptions->getCurrentRangeBgColor();
+        diffBgColor = m_pOptions->getCurrentRangeDiffBgColor();
     }
 
     if(yOffset + fontHeight < invalidRect.top() || invalidRect.bottom() < yOffset - fontHeight)
@@ -1153,7 +1153,7 @@ void DiffTextWindowData::writeLine(
         mdhe.getRangeForUI(m_winIdx, &rangeLine1, &rangeLine2);
         if(rangeLine1.isValid() && rangeLine2.isValid() && srcLineIdx >= rangeLine1 && srcLineIdx <= rangeLine2)
         {
-            p.fillRect(xOffset - fontWidth, yOffset, fontWidth - 1, fontHeight, m_pOptions->m_manualHelpRangeColor);
+            p.fillRect(xOffset - fontWidth, yOffset, fontWidth - 1, fontHeight, m_pOptions->manualHelpRangeColor());
             break;
         }
     }

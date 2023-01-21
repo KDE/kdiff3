@@ -110,6 +110,14 @@ class Options
     inline void beginPrint() { mPrintMode = true; }
     inline void endPrint() { mPrintMode = false; }
 
+    [[nodiscard]] inline const QColor& getCurrentRangeBgColor() const { return m_currentRangeBgColor; };
+    [[nodiscard]] inline const QColor& getCurrentRangeDiffBgColor() const { return m_currentRangeDiffBgColor; };
+    [[nodiscard]] inline const QColor& oldestFileColor() const { return m_oldestFileColor; }
+    [[nodiscard]] inline const QColor& midAgeFileColor() const { return m_midAgeFileColor; }
+    [[nodiscard]] inline const QColor& newestFileColor() const { return m_newestFileColor; }
+    [[nodiscard]] inline const QColor& missingFileColor() const { return m_missingFileColor; }
+    [[nodiscard]] inline const QColor& manualHelpRangeColor() const { return m_manualHelpRangeColor; }
+
   private:
     void addOptionItem(std::shared_ptr<OptionItemBase> inItem);
 
@@ -142,15 +150,16 @@ class Options
     QColor m_colorC;
     QColor m_colorForConflict = Qt::red;
 
-  public:
     QColor m_currentRangeBgColor;
     QColor m_currentRangeDiffBgColor;
+
     QColor m_oldestFileColor = qRgb(0xf0, 0, 0);
     QColor m_midAgeFileColor = qRgb(0xc0, 0xc0, 0);
     QColor m_newestFileColor = qRgb(0, 0xd0, 0);
     QColor m_missingFileColor = qRgb(0, 0, 0);
     QColor m_manualHelpRangeColor = qRgb(0xff, 0xd0, 0x80);
 
+  public:
     bool m_bWordWrap = false;
 
     bool m_bReplaceTabs = false;

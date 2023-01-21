@@ -1322,8 +1322,8 @@ void DirectoryMergeWindow::DirectoryMergeWindowPrivate::prepareListView(Progress
 {
     QStringList errors;
     //TODO   clear();
-    PixMapUtils::initPixmaps(m_pOptions->m_newestFileColor, m_pOptions->m_oldestFileColor,
-                             m_pOptions->m_midAgeFileColor, m_pOptions->m_missingFileColor);
+    PixMapUtils::initPixmaps(m_pOptions->newestFileColor(), m_pOptions->oldestFileColor(),
+                             m_pOptions->midAgeFileColor(), m_pOptions->missingFileColor());
 
     mWindow->setRootIsDecorated(true);
 
