@@ -25,6 +25,7 @@ class RLPainter : public QPainter
     bool bRightToLeft = false;
 
   public:
+    //TODO: Drop RLPainter. How?
     RLPainter(QPaintDevice* pd, bool bRTL, int width, int fontWidth)
         : QPainter(pd)
     {

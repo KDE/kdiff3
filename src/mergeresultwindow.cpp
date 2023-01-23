@@ -1595,7 +1595,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
             m_pixmap = QPixmap(size() * dpr);
             m_pixmap.setDevicePixelRatio(dpr);
         }
-
+        //TODO: Drop RLPainter. How?
         RLPainter p(&m_pixmap, m_pOptions->m_bRightToLeftLanguage, width(), fontWidth);
         p.setFont(font());
         p.QPainter::fillRect(rect(), m_pOptions->backgroundColor());

@@ -893,6 +893,7 @@ void KDiff3App::slotFilePrint()
     if(printDialog->exec() == QDialog::Accepted)
     {
         slotStatusMsg(i18n("Printing..."));
+        //TODO: Drop RLPainter. How?
         // create a painter to paint on the printer object
         RLPainter painter(&printer, m_pOptions->m_bRightToLeftLanguage, width(), Utils::getHorizontalAdvance(fontMetrics(), 'W'));
 
