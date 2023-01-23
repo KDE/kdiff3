@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 00:59+0000\n"
+"POT-Creation-Date: 2023-01-23 00:59+0000\n"
 "PO-Revision-Date: 2022-09-26 10:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1777,7 +1777,7 @@ msgid "Configure KDiff3"
 msgstr "Configura KDiff3"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:102
+#: kdiff3_part.rc:21 main.cpp:103
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
@@ -1852,83 +1852,83 @@ msgstr "Barra d'eines principal"
 msgid "Ignored. (User defined.)"
 msgstr "Ignorat. (Definit per l'usuari)."
 
-#: main.cpp:105
+#: main.cpp:106
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bits)"
 
-#: main.cpp:107
+#: main.cpp:108
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Eina per a comparar i fusionar fitxers i carpetes"
 
-#: main.cpp:108
+#: main.cpp:109
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves adaptació a KF5/Qt5"
 
-#: main.cpp:128
+#: main.cpp:129
 #, kde-format
 msgid "Merge the input."
 msgstr "Fusiona l'entrada."
 
-#: main.cpp:129
+#: main.cpp:130
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Fitxer base explícit. Per compatibilitat amb certes eines."
 
-#: main.cpp:130
+#: main.cpp:131
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Fitxer d'eixida. Implica -m P. ex: -o fitxernou.txt"
 
-#: main.cpp:131
+#: main.cpp:132
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr ""
 "Fitxer d'eixida, una altra vegada. (Per compatibilitat amb certes eines)."
 
-#: main.cpp:133
+#: main.cpp:134
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Sense IGU si tots els conflictes es poden resoldre automàticament. (Cal -o "
 "fitxer)"
 
-#: main.cpp:134
+#: main.cpp:135
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "Ignora --auto i mostra sempre la IGU."
 
-#: main.cpp:136 main.cpp:137
+#: main.cpp:137 main.cpp:138
 #, kde-format
 msgid "Ignored."
 msgstr "Ignorat."
 
-#: main.cpp:139
+#: main.cpp:140
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Substitució del nom visible per al fitxer d'eixida 1 (base)."
 
-#: main.cpp:140
+#: main.cpp:141
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Substitució del nom visible per al fitxer d'eixida 2."
 
-#: main.cpp:141
+#: main.cpp:142
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Substitució del nom visible per al fitxer d'eixida 3."
 
-#: main.cpp:142
+#: main.cpp:143
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Substitució del nom visible alternatiu. Proporcioneu-lo per a cada eixida."
 
-#: main.cpp:143
+#: main.cpp:144
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1937,32 +1937,32 @@ msgstr ""
 "Sobreescriu una opció de la configuració. Utilitzeu-ho per a cada opció. P. "
 "ex.: --cs \"AutoAdvance=1\""
 
-#: main.cpp:144
+#: main.cpp:145
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Mostra una llista de les opcions de configuració i els valors actuals."
 
-#: main.cpp:145
+#: main.cpp:146
 #, kde-format
 msgid "Use a different config file."
 msgstr "Utilitza un fitxer de configuració diferent."
 
-#: main.cpp:148
+#: main.cpp:149
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "Fitxer1 que s'ha d'obrir (base, si no s'especifica via --base)"
 
-#: main.cpp:149
+#: main.cpp:150
 #, kde-format
 msgid "file2 to open"
 msgstr "Fitxer 2 que s'ha d'obrir"
 
-#: main.cpp:150
+#: main.cpp:151
 #, kde-format
 msgid "file3 to open"
 msgstr "Fitxer 3 que s'ha d'obrir"
 
-#: main.cpp:174
+#: main.cpp:175
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Vegeu «kdiff3 --help» per a les opcions admeses."
