@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-04 03:46+0000\n"
+"POT-Creation-Date: 2023-01-23 02:35+0000\n"
 "PO-Revision-Date: 2010-10-03 21:09-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -1883,7 +1883,7 @@ msgid "Configure KDiff3"
 msgstr "KDiff3 を設定"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:99
+#: kdiff3_part.rc:21 main.cpp:100
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
@@ -1964,117 +1964,117 @@ msgstr "メインツールバー"
 msgid "Ignored. (User defined.)"
 msgstr ""
 
-#: main.cpp:103
+#: main.cpp:104
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr ""
 
-#: main.cpp:105
+#: main.cpp:106
 #, kde-format
 msgctxt "Program version info."
 msgid " (32 bit)"
 msgstr ""
 
-#: main.cpp:106
+#: main.cpp:107
 #, fuzzy, kde-format
 #| msgid "Tool for Comparison and Merge of Files and Directories"
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "ファイルとディレクトリを比較/マージするためのツール"
 
-#: main.cpp:107
+#: main.cpp:108
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 
-#: main.cpp:127
+#: main.cpp:128
 #, kde-format
 msgid "Merge the input."
 msgstr "入力をマージ"
 
-#: main.cpp:128
+#: main.cpp:129
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "明示的にベースファイルを指定 (一部のツールとの互換性のため)"
 
-#: main.cpp:129
+#: main.cpp:130
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "出力ファイルを指定。暗示的に -m を指定。例: -o newfile.txt"
 
-#: main.cpp:130
+#: main.cpp:131
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "出力ファイルを指定 (一部のツールとの互換性のため)"
 
-#: main.cpp:132
+#: main.cpp:133
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr "すべての衝突を自動解決できる場合は GUI を使用しない (-o file が必要)"
 
-#: main.cpp:133
+#: main.cpp:134
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr ""
 
-#: main.cpp:135 main.cpp:136
+#: main.cpp:136 main.cpp:137
 #, kde-format
 msgid "Ignored."
 msgstr ""
 
-#: main.cpp:138
+#: main.cpp:139
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "入力ファイル 1 (ベース) の代替表示名"
 
-#: main.cpp:139
+#: main.cpp:140
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "入力ファイル 2 の代替表示名"
 
-#: main.cpp:140
+#: main.cpp:141
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "入力ファイル 3 の代替表示名"
 
-#: main.cpp:141
+#: main.cpp:142
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr "代替表示名。一度設定するとすべての入力に適用されます。"
 
-#: main.cpp:142
+#: main.cpp:143
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
 "\"AutoAdvance=1\""
 msgstr ""
 
-#: main.cpp:143
+#: main.cpp:144
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "設定項目と現在の値を一覧表示"
 
-#: main.cpp:144
+#: main.cpp:145
 #, kde-format
 msgid "Use a different config file."
 msgstr "使用する設定ファイルを指定"
 
-#: main.cpp:147
+#: main.cpp:148
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "開く file1 (ベース, --base が未指定の場合)"
 
-#: main.cpp:148
+#: main.cpp:149
 #, kde-format
 msgid "file2 to open"
 msgstr "開く file2"
 
-#: main.cpp:149
+#: main.cpp:150
 #, kde-format
 msgid "file3 to open"
 msgstr "開く file3"
 
-#: main.cpp:173
+#: main.cpp:174
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr ""

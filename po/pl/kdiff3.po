@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-04 03:46+0000\n"
+"POT-Creation-Date: 2023-01-23 02:35+0000\n"
 "PO-Revision-Date: 2022-08-06 08:16+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -1777,7 +1777,7 @@ msgid "Configure KDiff3"
 msgstr "Ustawienia KDiff3"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:99
+#: kdiff3_part.rc:21 main.cpp:100
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
@@ -1852,91 +1852,91 @@ msgstr "Główny pasek narzędzi"
 msgid "Ignored. (User defined.)"
 msgstr "Pomijane. (Określone przez użytkownika.)"
 
-#: main.cpp:103
+#: main.cpp:104
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bity)"
 
-#: main.cpp:105
+#: main.cpp:106
 #, kde-format
 msgctxt "Program version info."
 msgid " (32 bit)"
 msgstr " (32 bity)"
 
-#: main.cpp:106
+#: main.cpp:107
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Narzędzie do porównywania, a także scalania plików i katalogów"
 
-#: main.cpp:107
+#: main.cpp:108
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 
-#: main.cpp:127
+#: main.cpp:128
 #, kde-format
 msgid "Merge the input."
 msgstr "Scal pliki wejściowe."
 
-#: main.cpp:128
+#: main.cpp:129
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr ""
 "Bezpośrednio podany plik odniesienia - w celu zgodności z niektórymi "
 "narzędziami."
 
-#: main.cpp:129
+#: main.cpp:130
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Plik wyjściowy. Implikuje opcję -m. Przykład: -o nowyplik.txt"
 
-#: main.cpp:130
+#: main.cpp:131
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr ""
 "Plik wyjściowy, ponownie (w celu zapewnienia zgodności z niektórymi "
 "narzędziami)"
 
-#: main.cpp:132
+#: main.cpp:133
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Brak GUI jeśli wszystkie sprzeczności mogą być rozwiązane. (Wymaga pliku -o)"
 
-#: main.cpp:133
+#: main.cpp:134
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "Pomiń --auto i zawsze pokazuj graficzny interfejs użytkownika."
 
-#: main.cpp:135 main.cpp:136
+#: main.cpp:136 main.cpp:137
 #, kde-format
 msgid "Ignored."
 msgstr "Pominięte."
 
-#: main.cpp:138
+#: main.cpp:139
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Widoczna nazwa dla pliku 1 (podstawowego)."
 
-#: main.cpp:139
+#: main.cpp:140
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Widoczna nazwa dla pliku 2."
 
-#: main.cpp:140
+#: main.cpp:141
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Widoczna nazwa dla pliku 3."
 
-#: main.cpp:141
+#: main.cpp:142
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Alternatywna widoczna nazwa zastępcza. Proszę podać jedną dla każdego pliku "
 "wejściowego."
 
-#: main.cpp:142
+#: main.cpp:143
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1945,32 +1945,32 @@ msgstr ""
 "Nadpisz ustawienia. Użyj raz dla każdego ustawienia, np. --cs "
 "\"AutoAdvance=1\""
 
-#: main.cpp:143
+#: main.cpp:144
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Pokaż listę ustawień i bieżące wartości."
 
-#: main.cpp:144
+#: main.cpp:145
 #, kde-format
 msgid "Use a different config file."
 msgstr "Użyj innego pliku ustawień."
 
-#: main.cpp:147
+#: main.cpp:148
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "Otwórz plik 1 (podstawowy, jeśli nie określono poprzez --base)"
 
-#: main.cpp:148
+#: main.cpp:149
 #, kde-format
 msgid "file2 to open"
 msgstr "Otwórz plik 2 "
 
-#: main.cpp:149
+#: main.cpp:150
 #, kde-format
 msgid "file3 to open"
 msgstr "Otwórz plik 3"
 
-#: main.cpp:173
+#: main.cpp:174
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Zobacz kdiff3 --help po obsługiwane opcje."
