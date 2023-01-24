@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-23 00:59+0000\n"
-"PO-Revision-Date: 2023-01-05 04:28+0100\n"
+"PO-Revision-Date: 2023-01-23 06:40+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -334,7 +334,7 @@ msgstr "ამოხსნილი"
 #, kde-format
 msgctxt "Column title"
 msgid "Nonwhite"
-msgstr ""
+msgstr "არათეთრი"
 
 #: directorymergewindow.cpp:545
 #, kde-format
@@ -603,7 +603,7 @@ msgstr ""
 #, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
-msgstr ""
+msgstr "ელემენტის გამოტოვება"
 
 #: directorymergewindow.cpp:2367
 #, kde-format
@@ -705,7 +705,7 @@ msgstr "rename( %1 -> %2 )"
 #: directorymergewindow.cpp:2650
 #, kde-format
 msgid "Error: Rename failed."
-msgstr ""
+msgstr "შეცდომა: ფაილის გადარქმევის შეცდომა."
 
 #: directorymergewindow.cpp:2668
 #, kde-format
@@ -720,7 +720,7 @@ msgstr "makeDir( %1 )"
 #: directorymergewindow.cpp:2695
 #, kde-format
 msgid "Error while creating folder."
-msgstr ""
+msgstr "შეცდომა საქაღალდის შექმნისას"
 
 #: directorymergewindow.cpp:2731 directorymergewindow.cpp:2845
 #, kde-format
@@ -756,7 +756,7 @@ msgstr "ბოლო ცვლილება"
 #: directorymergewindow.cpp:2740
 #, kde-format
 msgid "Link-Destination"
-msgstr ""
+msgstr "ბმულის სამიზნე"
 
 #: directorymergewindow.cpp:2767
 #, kde-format
@@ -901,6 +901,8 @@ msgid ""
 "Identical\n"
 "Files"
 msgstr ""
+"იდენტური\n"
+"ფაილები"
 
 #: directorymergewindow.cpp:2981
 #, kde-format
@@ -967,7 +969,7 @@ msgstr "შერწყმა"
 #: directorymergewindow.cpp:2996
 #, kde-format
 msgid "Delete (if exists)"
-msgstr ""
+msgstr "წაშლა (თუ არსებობს)"
 
 #: directorymergewindow.cpp:2999
 #, kde-format
@@ -1153,17 +1155,17 @@ msgstr "ბოლო ქმედების გაუქმება."
 #: kdiff3.cpp:606
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
-msgstr ""
+msgstr "მონიშნული სექციის ამოჭრა და ბაფერში მოთავსება"
 
 #: kdiff3.cpp:609
 #, kde-format
 msgid "Copies the selected section to the clipboard"
-msgstr ""
+msgstr "მონიშნული სექციის ბაფერში კოპირება"
 
 #: kdiff3.cpp:611
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
-msgstr ""
+msgstr "ბაფერის შემცველობის მიმდინარე მდებარეობაზე ჩასმა"
 
 #: kdiff3.cpp:614
 #, kde-format
@@ -1568,12 +1570,12 @@ msgstr ""
 #: kdiff3.cpp:767
 #, kde-format
 msgid "Save && Quit"
-msgstr ""
+msgstr "შენახვა და გასვლა"
 
 #: kdiff3.cpp:768
 #, kde-format
 msgid "Quit Without Saving"
-msgstr ""
+msgstr "შენახვის გარეშე გასვლა"
 
 #: kdiff3.cpp:776 pdiff.cpp:1732
 #, kde-format
@@ -1639,12 +1641,12 @@ msgstr "გასვლა..."
 #: kdiff3.cpp:1109
 #, kde-format
 msgid "Toggling toolbar..."
-msgstr ""
+msgstr "ხელსაწყოების ზოლის გადართვა.."
 
 #: kdiff3.cpp:1130
 #, kde-format
 msgid "Toggle the statusbar..."
-msgstr ""
+msgstr "სტატუსის ზოლის გადართვა..."
 
 #: kdiff3_part.cpp:38
 #, kde-format
@@ -1681,7 +1683,7 @@ msgstr "&KDiff3"
 #: kdiff3_part.rc:18
 #, kde-format
 msgid "Configure KDiff3"
-msgstr ""
+msgstr "KDiff3-ის მორგება"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: kdiff3_part.rc:21 main.cpp:103
@@ -1805,7 +1807,7 @@ msgstr ""
 #: main.cpp:137 main.cpp:138
 #, kde-format
 msgid "Ignored."
-msgstr ""
+msgstr "იგნორირებულია."
 
 #: main.cpp:140
 #, kde-format
@@ -2048,12 +2050,12 @@ msgstr "გამოტანა:"
 #: mergeresultwindow.cpp:2783 mergeresultwindow.cpp:2973
 #, kde-format
 msgid "[Modified]"
-msgstr ""
+msgstr "[შეცვლილია]"
 
 #: mergeresultwindow.cpp:2790
 #, kde-format
 msgid "Encoding for saving:"
-msgstr ""
+msgstr "კოდირება შენახვისთვის:"
 
 #: mergeresultwindow.cpp:2890
 #, kde-format
@@ -2278,7 +2280,7 @@ msgstr "ფერი C:"
 #: optiondialog.cpp:686
 #, kde-format
 msgid "Conflict color:"
-msgstr ""
+msgstr "კონფლიქტის ფერი:"
 
 #: optiondialog.cpp:695
 #, kde-format
@@ -2303,7 +2305,7 @@ msgstr ""
 #: optiondialog.cpp:725
 #, kde-format
 msgid "Newest file color:"
-msgstr ""
+msgstr "უახლესი ფაილის ფერი:"
 
 #: optiondialog.cpp:730
 #, kde-format
@@ -2335,7 +2337,7 @@ msgstr "რედაქტორი"
 #: optiondialog.cpp:768
 #, kde-format
 msgid "Editor Behavior"
-msgstr ""
+msgstr "რედაქტორის ქცევა"
 
 #: optiondialog.cpp:790
 #, kde-format
@@ -2352,7 +2354,7 @@ msgstr ""
 #: optiondialog.cpp:799
 #, kde-format
 msgid "Tab size:"
-msgstr ""
+msgstr "ტაბულაციის ზომა:"
 
 #: optiondialog.cpp:806
 #, kde-format
@@ -2500,7 +2502,7 @@ msgstr "შერწყმა"
 #: optiondialog.cpp:927
 #, kde-format
 msgid "Merge Settings"
-msgstr ""
+msgstr "შერწყმის მორგება"
 
 #: optiondialog.cpp:950
 #, kde-format
@@ -2801,7 +2803,7 @@ msgstr ""
 #: optiondialog.cpp:1245
 #, kde-format
 msgid "Full analysis"
-msgstr ""
+msgstr "სრული ანალიზი"
 
 #: optiondialog.cpp:1247
 #, kde-format
@@ -2857,7 +2859,7 @@ msgstr ""
 #: optiondialog.cpp:1274
 #, kde-format
 msgid "Synchronize folders"
-msgstr ""
+msgstr "საქაღალდეების სინქრონიზაცია"
 
 #: optiondialog.cpp:1278
 #, kde-format
@@ -3179,17 +3181,17 @@ msgstr "ფაილების გახსნა..."
 #: pdiff.cpp:1043
 #, kde-format
 msgid "Cutting selection..."
-msgstr ""
+msgstr "მონიშნულის ამოჭრა..."
 
 #: pdiff.cpp:1050
 #, kde-format
 msgid "Copying selection to clipboard..."
-msgstr ""
+msgstr "მონიშნულის ბაფერში კოპირება..."
 
 #: pdiff.cpp:1059
 #, kde-format
 msgid "Inserting clipboard contents..."
-msgstr ""
+msgstr "ბაფერის შემცველობის ჩასმა..."
 
 #: pdiff.cpp:1171
 #, kde-format
