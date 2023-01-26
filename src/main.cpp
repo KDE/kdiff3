@@ -91,9 +91,11 @@ int main(int argc, char* argv[])
     */
     const UTF8BOMCodec *textCodec = new UTF8BOMCodec();
     Q_UNUSED(textCodec)
-
+    //Syncronize qt HDPI behavoir on all versions/platforms
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
+
     QApplication app(argc, argv); // KAboutData and QCommandLineParser depend on this being setup.
     KLocalizedString::setApplicationDomain(appName.data());
 
