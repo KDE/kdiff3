@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-23 00:59+0000\n"
+"POT-Creation-Date: 2023-01-27 01:01+0000\n"
 "PO-Revision-Date: 2022-12-31 15:41+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -159,7 +159,7 @@ msgstr "Line end style: %1"
 msgid "Unknown"
 msgstr "Unknown"
 
-#: difftextwindow.cpp:1965 kdiff3.cpp:911
+#: difftextwindow.cpp:1965 kdiff3.cpp:912
 #, kde-format
 msgid "Top line"
 msgstr "Top line"
@@ -1623,7 +1623,7 @@ msgstr "Folder && Text Split Screen View"
 msgid "Toggle Between Folder && Text View"
 msgstr "Toggle Between Folder && Text View"
 
-#: kdiff3.cpp:726 kdiff3.cpp:821 kdiff3.cpp:846 kdiff3.cpp:1125 kdiff3.cpp:1146
+#: kdiff3.cpp:726 kdiff3.cpp:821 kdiff3.cpp:846 kdiff3.cpp:1126 kdiff3.cpp:1147
 #: pdiff.cpp:942 pdiff.cpp:1009 pdiff.cpp:1045 pdiff.cpp:1054 pdiff.cpp:1112
 #: pdiff.cpp:1120
 #, kde-format
@@ -1682,37 +1682,37 @@ msgstr "Printing not implemented."
 msgid "Printing..."
 msgstr "Printing..."
 
-#: kdiff3.cpp:999
+#: kdiff3.cpp:1000
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr "Printing page %1 of %2"
 
-#: kdiff3.cpp:1058
+#: kdiff3.cpp:1059
 #, kde-format
 msgid " (Selection)"
 msgstr " (Selection)"
 
-#: kdiff3.cpp:1087
+#: kdiff3.cpp:1088
 #, kde-format
 msgid "Printing completed."
 msgstr "Printing completed."
 
-#: kdiff3.cpp:1091
+#: kdiff3.cpp:1092
 #, kde-format
 msgid "Printing aborted."
 msgstr "Printing aborted."
 
-#: kdiff3.cpp:1098
+#: kdiff3.cpp:1099
 #, kde-format
 msgid "Exiting..."
 msgstr "Exiting..."
 
-#: kdiff3.cpp:1109
+#: kdiff3.cpp:1110
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "Toggling toolbar..."
 
-#: kdiff3.cpp:1130
+#: kdiff3.cpp:1131
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Toggle the statusbar..."
@@ -1755,7 +1755,7 @@ msgid "Configure KDiff3"
 msgstr "Configure KDiff3"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:103
+#: kdiff3_part.rc:21 main.cpp:105
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
@@ -1830,79 +1830,79 @@ msgstr "Main Toolbar"
 msgid "Ignored. (User defined.)"
 msgstr "Ignored. (User defined.)"
 
-#: main.cpp:106
+#: main.cpp:108
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bit)"
 
-#: main.cpp:108
+#: main.cpp:110
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Tool for Comparison and Merge of Files and Folders"
 
-#: main.cpp:109
+#: main.cpp:111
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 
-#: main.cpp:129
+#: main.cpp:131
 #, kde-format
 msgid "Merge the input."
 msgstr "Merge the input."
 
-#: main.cpp:130
+#: main.cpp:132
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Explicit base file. For compatibility with certain tools."
 
-#: main.cpp:131
+#: main.cpp:133
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Output file. Implies -m. E.g.: -o newfile.txt"
 
-#: main.cpp:132
+#: main.cpp:134
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "Output file, again. (For compatibility with certain tools.)"
 
-#: main.cpp:134
+#: main.cpp:136
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 
-#: main.cpp:135
+#: main.cpp:137
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "Ignore --auto and always show GUI."
 
-#: main.cpp:137 main.cpp:138
+#: main.cpp:139 main.cpp:140
 #, kde-format
 msgid "Ignored."
 msgstr "Ignored."
 
-#: main.cpp:140
+#: main.cpp:142
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Visible name replacement for input file 1 (base)."
 
-#: main.cpp:141
+#: main.cpp:143
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Visible name replacement for input file 2."
 
-#: main.cpp:142
+#: main.cpp:144
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Visible name replacement for input file 3."
 
-#: main.cpp:143
+#: main.cpp:145
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Alternative visible name replacement. Supply this once for every input."
 
-#: main.cpp:144
+#: main.cpp:146
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1911,32 +1911,32 @@ msgstr ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
 "\"AutoAdvance=1\""
 
-#: main.cpp:145
+#: main.cpp:147
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Show list of config settings and current values."
 
-#: main.cpp:146
+#: main.cpp:148
 #, kde-format
 msgid "Use a different config file."
 msgstr "Use a different config file."
 
-#: main.cpp:149
+#: main.cpp:151
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "file1 to open (base, if not specified via --base)"
 
-#: main.cpp:150
+#: main.cpp:152
 #, kde-format
 msgid "file2 to open"
 msgstr "file2 to open"
 
-#: main.cpp:151
+#: main.cpp:153
 #, kde-format
 msgid "file3 to open"
 msgstr "file3 to open"
 
-#: main.cpp:175
+#: main.cpp:177
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "See kdiff3 --help for supported options."

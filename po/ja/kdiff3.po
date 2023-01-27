@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-23 00:59+0000\n"
+"POT-Creation-Date: 2023-01-27 01:01+0000\n"
 "PO-Revision-Date: 2010-10-03 21:09-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -167,7 +167,7 @@ msgstr "改行コード:"
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1965 kdiff3.cpp:911
+#: difftextwindow.cpp:1965 kdiff3.cpp:912
 #, kde-format
 msgid "Top line"
 msgstr "上部行"
@@ -1736,7 +1736,7 @@ msgstr "ディレクトリ/テキスト分割画面表示"
 msgid "Toggle Between Folder && Text View"
 msgstr "ディレクトリ表示/テキスト表示を切り替え"
 
-#: kdiff3.cpp:726 kdiff3.cpp:821 kdiff3.cpp:846 kdiff3.cpp:1125 kdiff3.cpp:1146
+#: kdiff3.cpp:726 kdiff3.cpp:821 kdiff3.cpp:846 kdiff3.cpp:1126 kdiff3.cpp:1147
 #: pdiff.cpp:942 pdiff.cpp:1009 pdiff.cpp:1045 pdiff.cpp:1054 pdiff.cpp:1112
 #: pdiff.cpp:1120
 #, kde-format
@@ -1799,38 +1799,38 @@ msgstr "印刷完了。"
 msgid "Printing..."
 msgstr "印刷中..."
 
-#: kdiff3.cpp:999
+#: kdiff3.cpp:1000
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr ""
 
-#: kdiff3.cpp:1058
+#: kdiff3.cpp:1059
 #, fuzzy, kde-format
 #| msgid "Selection"
 msgid " (Selection)"
 msgstr "選択"
 
-#: kdiff3.cpp:1087
+#: kdiff3.cpp:1088
 #, kde-format
 msgid "Printing completed."
 msgstr "印刷完了。"
 
-#: kdiff3.cpp:1091
+#: kdiff3.cpp:1092
 #, kde-format
 msgid "Printing aborted."
 msgstr "印刷中止。"
 
-#: kdiff3.cpp:1098
+#: kdiff3.cpp:1099
 #, kde-format
 msgid "Exiting..."
 msgstr "終了中..."
 
-#: kdiff3.cpp:1109
+#: kdiff3.cpp:1110
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "ツールバーの表示/非表示を切り替え中..."
 
-#: kdiff3.cpp:1130
+#: kdiff3.cpp:1131
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "ステータスバーの表示/非表示を切り替え中..."
@@ -1875,7 +1875,7 @@ msgid "Configure KDiff3"
 msgstr "KDiff3 を設定"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:103
+#: kdiff3_part.rc:21 main.cpp:105
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
@@ -1956,111 +1956,111 @@ msgstr "メインツールバー"
 msgid "Ignored. (User defined.)"
 msgstr ""
 
-#: main.cpp:106
+#: main.cpp:108
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr ""
 
-#: main.cpp:108
+#: main.cpp:110
 #, fuzzy, kde-format
 #| msgid "Tool for Comparison and Merge of Files and Directories"
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "ファイルとディレクトリを比較/マージするためのツール"
 
-#: main.cpp:109
+#: main.cpp:111
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 
-#: main.cpp:129
+#: main.cpp:131
 #, kde-format
 msgid "Merge the input."
 msgstr "入力をマージ"
 
-#: main.cpp:130
+#: main.cpp:132
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "明示的にベースファイルを指定 (一部のツールとの互換性のため)"
 
-#: main.cpp:131
+#: main.cpp:133
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "出力ファイルを指定。暗示的に -m を指定。例: -o newfile.txt"
 
-#: main.cpp:132
+#: main.cpp:134
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "出力ファイルを指定 (一部のツールとの互換性のため)"
 
-#: main.cpp:134
+#: main.cpp:136
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr "すべての衝突を自動解決できる場合は GUI を使用しない (-o file が必要)"
 
-#: main.cpp:135
+#: main.cpp:137
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr ""
 
-#: main.cpp:137 main.cpp:138
+#: main.cpp:139 main.cpp:140
 #, kde-format
 msgid "Ignored."
 msgstr ""
 
-#: main.cpp:140
+#: main.cpp:142
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "入力ファイル 1 (ベース) の代替表示名"
 
-#: main.cpp:141
+#: main.cpp:143
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "入力ファイル 2 の代替表示名"
 
-#: main.cpp:142
+#: main.cpp:144
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "入力ファイル 3 の代替表示名"
 
-#: main.cpp:143
+#: main.cpp:145
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr "代替表示名。一度設定するとすべての入力に適用されます。"
 
-#: main.cpp:144
+#: main.cpp:146
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
 "\"AutoAdvance=1\""
 msgstr ""
 
-#: main.cpp:145
+#: main.cpp:147
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "設定項目と現在の値を一覧表示"
 
-#: main.cpp:146
+#: main.cpp:148
 #, kde-format
 msgid "Use a different config file."
 msgstr "使用する設定ファイルを指定"
 
-#: main.cpp:149
+#: main.cpp:151
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "開く file1 (ベース, --base が未指定の場合)"
 
-#: main.cpp:150
+#: main.cpp:152
 #, kde-format
 msgid "file2 to open"
 msgstr "開く file2"
 
-#: main.cpp:151
+#: main.cpp:153
 #, kde-format
 msgid "file3 to open"
 msgstr "開く file3"
 
-#: main.cpp:175
+#: main.cpp:177
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr ""

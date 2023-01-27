@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-utils-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-23 00:59+0000\n"
+"POT-Creation-Date: 2023-01-27 01:01+0000\n"
 "PO-Revision-Date: 2022-12-17 18:33+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -165,7 +165,7 @@ msgstr "Satır sonu biçemi: %1"
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
-#: difftextwindow.cpp:1965 kdiff3.cpp:911
+#: difftextwindow.cpp:1965 kdiff3.cpp:912
 #, kde-format
 msgid "Top line"
 msgstr "En üst satır"
@@ -1631,7 +1631,7 @@ msgstr "Klasör ve Metin Ayırma Ekran Görünümü"
 msgid "Toggle Between Folder && Text View"
 msgstr "Klasör ve Metin Görünümü Arasında Geçiş Yap"
 
-#: kdiff3.cpp:726 kdiff3.cpp:821 kdiff3.cpp:846 kdiff3.cpp:1125 kdiff3.cpp:1146
+#: kdiff3.cpp:726 kdiff3.cpp:821 kdiff3.cpp:846 kdiff3.cpp:1126 kdiff3.cpp:1147
 #: pdiff.cpp:942 pdiff.cpp:1009 pdiff.cpp:1045 pdiff.cpp:1054 pdiff.cpp:1112
 #: pdiff.cpp:1120
 #, kde-format
@@ -1691,37 +1691,37 @@ msgstr "Yazdırma uygulamaya konmadı."
 msgid "Printing..."
 msgstr "Yazdırma..."
 
-#: kdiff3.cpp:999
+#: kdiff3.cpp:1000
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr "%1/%2 sayfa yazdırılıyor"
 
-#: kdiff3.cpp:1058
+#: kdiff3.cpp:1059
 #, kde-format
 msgid " (Selection)"
 msgstr " (Seçim)"
 
-#: kdiff3.cpp:1087
+#: kdiff3.cpp:1088
 #, kde-format
 msgid "Printing completed."
 msgstr "Yazdırma işlemi tamamlandı."
 
-#: kdiff3.cpp:1091
+#: kdiff3.cpp:1092
 #, kde-format
 msgid "Printing aborted."
 msgstr "Yazdırma işlemi sonlandırıldı."
 
-#: kdiff3.cpp:1098
+#: kdiff3.cpp:1099
 #, kde-format
 msgid "Exiting..."
 msgstr "Çıkılıyor..."
 
-#: kdiff3.cpp:1109
+#: kdiff3.cpp:1110
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "Araç çubuğu açılıyor/kapatılıyor..."
 
-#: kdiff3.cpp:1130
+#: kdiff3.cpp:1131
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Durum çubğunu göster/sakla..."
@@ -1764,7 +1764,7 @@ msgid "Configure KDiff3"
 msgstr "KDiff3 Uygulamasını Yapılandır"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:103
+#: kdiff3_part.rc:21 main.cpp:105
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
@@ -1839,79 +1839,79 @@ msgstr "Ana Araç Çubuğu"
 msgid "Ignored. (User defined.)"
 msgstr "Göz ardı edildi. (Kullanıcı tanımlı)"
 
-#: main.cpp:106
+#: main.cpp:108
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bit)"
 
-#: main.cpp:108
+#: main.cpp:110
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Dosyaları ve Klasörleri Karşılaştırma ve Birleştirme Aracı"
 
-#: main.cpp:109
+#: main.cpp:111
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 aktarımı"
 
-#: main.cpp:129
+#: main.cpp:131
 #, kde-format
 msgid "Merge the input."
 msgstr "Girdiyi birleştir."
 
-#: main.cpp:130
+#: main.cpp:132
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Açık temel dosya. Belirli araçlarla uyumluluk için."
 
-#: main.cpp:131
+#: main.cpp:133
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Çıktı dosyası. -m ima eder. Örneğin: -o yenidosya.txt"
 
-#: main.cpp:132
+#: main.cpp:134
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "Çıktı dosyası, tekrar. (Belirli araçlarla uyumluluk için.)"
 
-#: main.cpp:134
+#: main.cpp:136
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Tüm çakışmalar otomatik çözülebilirse GUI yok. (-o dosyaadı na ihtiyaç duyar)"
 
-#: main.cpp:135
+#: main.cpp:137
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "--auto'yu yok say ve her zaman grafik arabirimi göster."
 
-#: main.cpp:137 main.cpp:138
+#: main.cpp:139 main.cpp:140
 #, kde-format
 msgid "Ignored."
 msgstr "Yok sayıldı."
 
-#: main.cpp:140
+#: main.cpp:142
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Giriş dosyası 1 için görünür ad değiştirme (temel)."
 
-#: main.cpp:141
+#: main.cpp:143
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Giriş dosyası 2 için görünür ad değiştirme."
 
-#: main.cpp:142
+#: main.cpp:144
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Giriş dosyası 3 için görünür ad değiştirme."
 
-#: main.cpp:143
+#: main.cpp:145
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr "Alternatif görünür ao değiştirme. Her giriş için bunu bir kez verin."
 
-#: main.cpp:144
+#: main.cpp:146
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1920,32 +1920,32 @@ msgstr ""
 "Bir yapılandırma ayarının üzerine yazın. Her ayar için bir kez kullanın. "
 "Örneğin: --cs \"AutoAdvance=1\""
 
-#: main.cpp:145
+#: main.cpp:147
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Yapılandırma ayarlarının listesini ve geçerli değerleri göster."
 
-#: main.cpp:146
+#: main.cpp:148
 #, kde-format
 msgid "Use a different config file."
 msgstr "Farklı bir yapılandırma dosyası kullan."
 
-#: main.cpp:149
+#: main.cpp:151
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "file1'i açmak için (baz, --base ile belirtilmemişse)"
 
-#: main.cpp:150
+#: main.cpp:152
 #, kde-format
 msgid "file2 to open"
 msgstr "açılacak ikinci dosya"
 
-#: main.cpp:151
+#: main.cpp:153
 #, kde-format
 msgid "file3 to open"
 msgstr "açılacak üçüncü dosya"
 
-#: main.cpp:175
+#: main.cpp:177
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Desteklenen seçenekler için kdiff3 --help'e bakın."

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-23 00:59+0000\n"
+"POT-Creation-Date: 2023-01-27 01:01+0000\n"
 "PO-Revision-Date: 2022-09-26 10:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -160,7 +160,7 @@ msgstr "Estil del salt de línia: %1"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: difftextwindow.cpp:1965 kdiff3.cpp:911
+#: difftextwindow.cpp:1965 kdiff3.cpp:912
 #, kde-format
 msgid "Top line"
 msgstr "Línia superior"
@@ -1638,7 +1638,7 @@ msgstr "Vista de pantalla dividida en carpetes i text"
 msgid "Toggle Between Folder && Text View"
 msgstr "Commuta entre la vista de carpetes i text"
 
-#: kdiff3.cpp:726 kdiff3.cpp:821 kdiff3.cpp:846 kdiff3.cpp:1125 kdiff3.cpp:1146
+#: kdiff3.cpp:726 kdiff3.cpp:821 kdiff3.cpp:846 kdiff3.cpp:1126 kdiff3.cpp:1147
 #: pdiff.cpp:942 pdiff.cpp:1009 pdiff.cpp:1045 pdiff.cpp:1054 pdiff.cpp:1112
 #: pdiff.cpp:1120
 #, kde-format
@@ -1697,37 +1697,37 @@ msgstr "Impressió no implementada."
 msgid "Printing..."
 msgstr "S'està imprimint..."
 
-#: kdiff3.cpp:999
+#: kdiff3.cpp:1000
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr "S'està imprimint la pàgina %1 de %2"
 
-#: kdiff3.cpp:1058
+#: kdiff3.cpp:1059
 #, kde-format
 msgid " (Selection)"
 msgstr " (Selecció)"
 
-#: kdiff3.cpp:1087
+#: kdiff3.cpp:1088
 #, kde-format
 msgid "Printing completed."
 msgstr "Impressió completada."
 
-#: kdiff3.cpp:1091
+#: kdiff3.cpp:1092
 #, kde-format
 msgid "Printing aborted."
 msgstr "S'ha interromput la impressió."
 
-#: kdiff3.cpp:1098
+#: kdiff3.cpp:1099
 #, kde-format
 msgid "Exiting..."
 msgstr "S'està sortint..."
 
-#: kdiff3.cpp:1109
+#: kdiff3.cpp:1110
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "S'està commutant la barra d'eines..."
 
-#: kdiff3.cpp:1130
+#: kdiff3.cpp:1131
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Commuta la barra d'estat..."
@@ -1770,7 +1770,7 @@ msgid "Configure KDiff3"
 msgstr "Configura el KDiff3"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:103
+#: kdiff3_part.rc:21 main.cpp:105
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
@@ -1845,83 +1845,83 @@ msgstr "Barra d'eines principal"
 msgid "Ignored. (User defined.)"
 msgstr "Ignorat. (Definit per l'usuari)."
 
-#: main.cpp:106
+#: main.cpp:108
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bits)"
 
-#: main.cpp:108
+#: main.cpp:110
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Eina per a comparar i fusionar fitxers i carpetes"
 
-#: main.cpp:109
+#: main.cpp:111
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves adaptació a KF5/Qt5"
 
-#: main.cpp:129
+#: main.cpp:131
 #, kde-format
 msgid "Merge the input."
 msgstr "Fusiona l'entrada."
 
-#: main.cpp:130
+#: main.cpp:132
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Fitxer base explícit. Per compatibilitat amb certes eines."
 
-#: main.cpp:131
+#: main.cpp:133
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Fitxer de sortida. Implica -m P. ex: -o fitxernou.txt"
 
-#: main.cpp:132
+#: main.cpp:134
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr ""
 "Fitxer de sortida, un altre cop. (Per compatibilitat amb certes eines)."
 
-#: main.cpp:134
+#: main.cpp:136
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Sense IGU si tots els conflictes es poden resoldre automàticament. (Cal -o "
 "fitxer)"
 
-#: main.cpp:135
+#: main.cpp:137
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "Ignora --auto i mostra sempre la IGU."
 
-#: main.cpp:137 main.cpp:138
+#: main.cpp:139 main.cpp:140
 #, kde-format
 msgid "Ignored."
 msgstr "Ignorat."
 
-#: main.cpp:140
+#: main.cpp:142
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Substitució del nom visible per al fitxer de sortida 1 (base)."
 
-#: main.cpp:141
+#: main.cpp:143
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Substitució del nom visible per al fitxer de sortida 2."
 
-#: main.cpp:142
+#: main.cpp:144
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Substitució del nom visible per al fitxer de sortida 3."
 
-#: main.cpp:143
+#: main.cpp:145
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Substitució del nom visible alternatiu. Proporcioneu-lo per a cada sortida."
 
-#: main.cpp:144
+#: main.cpp:146
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1930,32 +1930,32 @@ msgstr ""
 "Sobreescriu una opció de la configuració. Useu-ho per a cada opció. P. ex.: "
 "--cs \"AutoAdvance=1\""
 
-#: main.cpp:145
+#: main.cpp:147
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Mostra una llista de les opcions de configuració i els valors actuals."
 
-#: main.cpp:146
+#: main.cpp:148
 #, kde-format
 msgid "Use a different config file."
 msgstr "Usa un fitxer de configuració diferent."
 
-#: main.cpp:149
+#: main.cpp:151
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "Fitxer1 a obrir (base, si no s'especifica via --base)"
 
-#: main.cpp:150
+#: main.cpp:152
 #, kde-format
 msgid "file2 to open"
 msgstr "Fitxer 2 a obrir"
 
-#: main.cpp:151
+#: main.cpp:153
 #, kde-format
 msgid "file3 to open"
 msgstr "Fitxer 3 a obrir"
 
-#: main.cpp:175
+#: main.cpp:177
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Vegeu «kdiff3 --help» per a les opcions admeses."
