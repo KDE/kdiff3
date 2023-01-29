@@ -149,7 +149,8 @@ KDiff3App::KDiff3App(QWidget* pParent, const QString& name, KDiff3Part* pKDiff3P
     pal.setColor(QPalette::Text, pal.color(QPalette::Active, QPalette::Text));
     setPalette(pal);
 
-    // Needed before any file operations via FileAccess happen.
+    // Setup progress ProgressDialog. No progress can be shown before this point.
+    // ProgressProxy will otherwise emit no-ops to disconnected boost signals.
     if(g_pProgressDialog == nullptr)
     {
         g_pProgressDialog = new ProgressDialog(this, statusBar());
@@ -418,7 +419,7 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         m_sd3->setFilename(fn3);
     }
 
-    //should not happen now.
+    //Should not fail ever.
     assert(m_bDirCompare == m_sd1->isDir());
 
     if(m_bAutoFlag && m_bAutoMode && m_bDirCompare)
@@ -426,6 +427,37 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         QTextStream(stderr) << i18n("Option --auto ignored for folder comparison.") << "\n";
         m_bAutoMode = false;
     }
+
+    if(!isPart())
+    {
+        if(!m_pKDiff3Shell->isVisible() && !restoreWindow(KSharedConfig::openConfig()))
+        {
+            /*
+                Set default state/geometry from config file.
+                This will no longer be updated but serves as a fallback.
+                Qt's restoreState/saveState can handle multiple screens this won't.
+            */
+            if(m_pOptions->isFullScreen())
+                m_pKDiff3Shell->showFullScreen();
+            else if(m_pOptions->isMaximised())
+                m_pKDiff3Shell->showMaximized();
+
+            QSize size = m_pOptions->getGeometry();
+            QPoint pos = m_pOptions->getPosition();
+
+            if(!size.isEmpty())
+            {
+                m_pKDiff3Shell->resize(size);
+
+                QRect visibleRect = QRect(pos, size) & QApplication::desktop()->rect();
+                if(visibleRect.width() > 100 && visibleRect.height() > 100)
+                    m_pKDiff3Shell->move(pos);
+            }
+        }
+
+        m_pKDiff3Shell->show();
+    }
+    g_pProgressDialog->setStayHidden(false);
 
     bool bSuccess = true;
     if(m_bDirCompare)
@@ -481,38 +513,6 @@ void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QStri
         }
     }
     m_bAutoMode = false;
-
-    if(!isPart())
-    {
-        if(!m_pKDiff3Shell->isVisible() && !restoreWindow(KSharedConfig::openConfig()))
-        {
-            /*
-                Set default state/geometry from config file.
-                This will no longer be updated but serves as a fallback.
-                Qt's restoreState/saveState can handle multiple screens this won't.
-            */
-            if(m_pOptions->isFullScreen())
-                m_pKDiff3Shell->showFullScreen();
-            else if(m_pOptions->isMaximised())
-                m_pKDiff3Shell->showMaximized();
-
-            QSize size = m_pOptions->getGeometry();
-            QPoint pos = m_pOptions->getPosition();
-
-            if(!size.isEmpty())
-            {
-                m_pKDiff3Shell->resize(size);
-
-                QRect visibleRect = QRect(pos, size) & QApplication::desktop()->rect();
-                if(visibleRect.width() > 100 && visibleRect.height() > 100)
-                    m_pKDiff3Shell->move(pos);
-            }
-        }
-
-        m_pKDiff3Shell->show();
-    }
-
-    g_pProgressDialog->setStayHidden(false);
 
     if(statusBar() != nullptr)
         statusBar()->setSizeGripEnabled(true);
