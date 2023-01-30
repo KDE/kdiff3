@@ -88,7 +88,8 @@ int main(int argc, char* argv[])
         This object is Qt's domain once created and must be on the heap.
     */
     const UTF8BOMCodec *textCodec = new UTF8BOMCodec();
-    Q_UNUSED(textCodec)
+    Q_UNUSED(textCodec);
+
     //Syncronize qt HDPI behavoir on all versions/platforms
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
