@@ -61,10 +61,9 @@ ProgressDialog::ProgressDialog(QWidget* pParent, QStatusBar* pStatusBar)
     }
 
     resize(400, 100);
-#ifndef AUTOTEST
+
     m_t1.start();
     m_t2.start();
-#endif
 
     initConnections();
 }
@@ -99,7 +98,6 @@ void ProgressDialog::initConnections()
 
 void ProgressDialog::setStayHidden(bool bStayHidden)
 {
-#ifndef AUTOTEST
     if(m_bStayHidden != bStayHidden)
     {
         m_bStayHidden = bStayHidden;
@@ -120,9 +118,6 @@ void ProgressDialog::setStayHidden(bool bStayHidden)
         if(m_bStayHidden)
             hide(); // delayed hide
     }
-#else
-    Q_UNUSED(bStayHidden);
-#endif
 }
 
 void ProgressDialog::push()
@@ -136,10 +131,10 @@ void ProgressDialog::push()
     else
     {
         m_bWasCancelled = false;
-#ifndef AUTOTEST
+
         m_t1.restart();
         m_t2.restart();
-#endif
+
         if(!m_bStayHidden)
             show();
     }
@@ -151,10 +146,8 @@ void ProgressDialog::beginBackgroundTask()
 {
     if(backgroundTaskCount > 0)
     {
-#ifndef AUTOTEST
         m_t1.restart();
         m_t2.restart();
-#endif
     }
     backgroundTaskCount++;
     if(!m_bStayHidden)
@@ -218,7 +211,6 @@ void ProgressDialog::setMaxNofSteps(const quint64 maxNofSteps)
 
 void ProgressDialog::setInformationImp(const QString& info)
 {
-#ifndef AUTOTEST
     assert(!m_progressStack.empty());
 
     int level = m_progressStack.size();
@@ -233,9 +225,6 @@ void ProgressDialog::setInformationImp(const QString& info)
     {
         dialogUi.subInformation->setText(info);
     }
-#else
-    Q_UNUSED(info);
-#endif
 }
 
 void ProgressDialog::addNofSteps(const quint64 nofSteps)
@@ -304,7 +293,6 @@ void ProgressDialog::setSubRangeTransformation(double dMin, double dMax)
 
 void ProgressDialog::enterEventLoop(KJob* pJob, const QString& jobInfo)
 {
-#ifndef AUTOTEST
     m_pJob = pJob;
     m_currentJobInfo = jobInfo;
     dialogUi.slowJobInfo->setText(m_currentJobInfo);
@@ -328,27 +316,20 @@ void ProgressDialog::enterEventLoop(KJob* pJob, const QString& jobInfo)
     {
         m_eventLoop->processEvents(QEventLoop::WaitForMoreEvents);
     }
-#else
-    Q_UNUSED(pJob);
-    Q_UNUSED(jobInfo);
-#endif
 }
 
 void ProgressDialog::exitEventLoop()
 {
-#ifndef AUTOTEST
     if(m_progressDelayTimer)
         killTimer(m_progressDelayTimer);
     m_progressDelayTimer = 0;
     m_pJob = nullptr;
     if(m_eventLoop != nullptr)
         m_eventLoop->exit();
-#endif
 }
 
 void ProgressDialog::recalc(bool bUpdate)
 {
-#ifndef AUTOTEST
     if(!m_bWasCancelled)
     {
         if(QThread::currentThread() == m_pGuiThread)
@@ -393,14 +374,10 @@ void ProgressDialog::recalc(bool bUpdate)
             QMetaObject::invokeMethod(this, "recalc", Qt::QueuedConnection, Q_ARG(bool, bUpdate));
         }
     }
-#else
-    Q_UNUSED(bUpdate);
-#endif
 }
 
 void ProgressDialog::show()
 {
-#ifndef AUTOTEST
     if(m_progressDelayTimer)
         killTimer(m_progressDelayTimer);
     if(m_delayedHideTimer)
@@ -411,12 +388,10 @@ void ProgressDialog::show()
     {
         QDialog::show();
     }
-#endif
 }
 
 void ProgressDialog::hide()
 {
-#ifndef AUTOTEST
     if(m_progressDelayTimer)
         killTimer(m_progressDelayTimer);
     m_progressDelayTimer = 0;
@@ -424,12 +399,10 @@ void ProgressDialog::hide()
     if(m_delayedHideTimer)
         killTimer(m_delayedHideTimer);
     m_delayedHideTimer = startTimer(100);
-#endif
 }
 
 void ProgressDialog::delayedHide()
 {
-#ifndef AUTOTEST
     if(m_pJob != nullptr)
     {
         m_pJob->kill(KJob::Quietly);
@@ -444,21 +417,17 @@ void ProgressDialog::delayedHide()
     dialogUi.subProgressBar->setValue(0);
     dialogUi.subInformation->setText("");
     dialogUi.slowJobInfo->setText("");
-#endif
 }
 
 void ProgressDialog::hideStatusBarWidget()
 {
-#ifndef AUTOTEST
     if(m_delayedHideStatusBarWidgetTimer)
         killTimer(m_delayedHideStatusBarWidgetTimer);
     m_delayedHideStatusBarWidgetTimer = startTimer(100);
-#endif
 }
 
 void ProgressDialog::delayedHideStatusBarWidget()
 {
-#ifndef AUTOTEST
     if(m_progressDelayTimer)
         killTimer(m_progressDelayTimer);
     m_progressDelayTimer = 0;
@@ -468,27 +437,21 @@ void ProgressDialog::delayedHideStatusBarWidget()
         m_pStatusProgressBar->setValue(0);
         m_pStatusBar->clearMessage();
     }
-#endif
 }
 
 void ProgressDialog::reject()
 {
-#ifndef AUTOTEST
     cancel(eUserAbort);
     QDialog::reject();
-#endif
 }
 
 void ProgressDialog::slotAbort()
 {
-#ifndef AUTOTEST
     reject();
-#endif
 }
 
 bool ProgressDialog::wasCancelled()
 {
-#ifndef AUTOTEST
     if(QThread::currentThread() == m_pGuiThread)
     {
         if(m_t2.elapsed() > 100)
@@ -498,21 +461,15 @@ bool ProgressDialog::wasCancelled()
         }
     }
     return m_bWasCancelled;
-#else
-    return false;
-#endif
 }
 
 void ProgressDialog::clearCancelState()
 {
-#ifndef AUTOTEST
     m_bWasCancelled = false;
-#endif
 }
 
 void ProgressDialog::cancel(e_CancelReason eCancelReason)
 {
-#ifndef AUTOTEST
     if(!m_bWasCancelled)
     {
         m_bWasCancelled = true;
@@ -520,9 +477,6 @@ void ProgressDialog::cancel(e_CancelReason eCancelReason)
         if(m_eventLoop != nullptr)
             m_eventLoop->exit(1);
     }
-#else
-    Q_UNUSED(eCancelReason);
-#endif
 }
 
 ProgressDialog::e_CancelReason ProgressDialog::cancelReason()
@@ -532,7 +486,6 @@ ProgressDialog::e_CancelReason ProgressDialog::cancelReason()
 
 void ProgressDialog::timerEvent(QTimerEvent* te)
 {
-#ifndef AUTOTEST
     if(te->timerId() == m_progressDelayTimer)
     {
         if(!m_bStayHidden)
@@ -553,7 +506,4 @@ void ProgressDialog::timerEvent(QTimerEvent* te)
         m_delayedHideStatusBarWidgetTimer = 0;
         delayedHideStatusBarWidget();
     }
-#else
-    Q_UNUSED(te);
-#endif
 }
