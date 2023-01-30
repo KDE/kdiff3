@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-23 02:35+0000\n"
+"POT-Creation-Date: 2023-01-30 03:08+0000\n"
 "PO-Revision-Date: 2022-06-27 16:03+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -1739,7 +1739,7 @@ msgid "Configure KDiff3"
 msgstr "Nastavit: KDiff3"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:100
+#: kdiff3_part.rc:21 main.cpp:102
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
@@ -1814,86 +1814,86 @@ msgstr "Hlavní panel nástrojů"
 msgid "Ignored. (User defined.)"
 msgstr "Ignorováno (Nastaveno uživatelem)"
 
-#: main.cpp:104
+#: main.cpp:106
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr ""
 
-#: main.cpp:106
+#: main.cpp:108
 #, kde-format
 msgctxt "Program version info."
 msgid " (32 bit)"
 msgstr ""
 
-#: main.cpp:107
+#: main.cpp:109
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Nástroj pro porovnávání a slučování souborů a složek"
 
-#: main.cpp:108
+#: main.cpp:110
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves port do KF5/Qt5"
 
-#: main.cpp:128
+#: main.cpp:130
 #, kde-format
 msgid "Merge the input."
 msgstr "Sloučit vstup."
 
-#: main.cpp:129
+#: main.cpp:131
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Výhradně základní soubor. Pro kompatibilitu s některými nástroji."
 
-#: main.cpp:130
+#: main.cpp:132
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Název výstupního souboru. Např.: -o novysoubor.txt"
 
-#: main.cpp:131
+#: main.cpp:133
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "Výstupní soubor znovu. (Kvůli kompatibilitě s určitými nástroji.)"
 
-#: main.cpp:133
+#: main.cpp:135
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Nezobrazovat GUI, pokud jsou všechny konflikty řešitelné automaticky. "
 "(Potřebuje -o soubor)"
 
-#: main.cpp:134
+#: main.cpp:136
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "Ignorovat --auto a vždy zobrazit grafické protředí."
 
-#: main.cpp:136 main.cpp:137
+#: main.cpp:138 main.cpp:139
 #, kde-format
 msgid "Ignored."
 msgstr "Ignorováno."
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Náhradní název pro vstupní soubor 1 (základní)."
 
-#: main.cpp:140
+#: main.cpp:142
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Náhradní název pro vstupní soubor 2."
 
-#: main.cpp:141
+#: main.cpp:143
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Náhradní název pro vstupní soubor 3."
 
-#: main.cpp:142
+#: main.cpp:144
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr "Alternativa náhradního názvu. Tato možnost se nabízí pro každý vstup."
 
-#: main.cpp:143
+#: main.cpp:145
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1902,32 +1902,32 @@ msgstr ""
 "Přepsat konfiguraci. Použít pro každé nastavení. Např.: --cs "
 "\"AutoAdvance=1\""
 
-#: main.cpp:144
+#: main.cpp:146
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Zobrazit seznam všech nastavení a aktuálních hodnot."
 
-#: main.cpp:145
+#: main.cpp:147
 #, kde-format
 msgid "Use a different config file."
 msgstr "Použít rozdílný konfigurační soubor."
 
-#: main.cpp:148
+#: main.cpp:150
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "první soubor k otevření (základní, pokud není zadáno pomocí --base)"
 
-#: main.cpp:149
+#: main.cpp:151
 #, kde-format
 msgid "file2 to open"
 msgstr "druhý soubor k otevření"
 
-#: main.cpp:150
+#: main.cpp:152
 #, kde-format
 msgid "file3 to open"
 msgstr "třetí soubor k otevření"
 
-#: main.cpp:174
+#: main.cpp:176
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Podporované volby zjistíte pomocí kdiff3 --help."
