@@ -117,7 +117,7 @@ void ProgressDialog::setStayHidden(bool bStayHidden)
             else
                 hideStatusBarWidget(); // delayed
         }
-        if(isVisible() && m_bStayHidden)
+        if(m_bStayHidden)
             hide(); // delayed hide
     }
 #else
@@ -382,7 +382,7 @@ void ProgressDialog::recalc(bool bUpdate)
                         dialogUi.subProgressBar->setValue((int)lround(1000.0 * m_progressStack.front().m_dSubRangeMin));
                 }
 
-                if(!m_bStayHidden && !isVisible())
+                if(!m_bStayHidden)
                     show();
                 qApp->processEvents();
                 m_t1.restart();
@@ -407,7 +407,7 @@ void ProgressDialog::show()
         killTimer(m_delayedHideTimer);
     m_progressDelayTimer = 0;
     m_delayedHideTimer = 0;
-    if(!isVisible() && (parentWidget() == nullptr || parentWidget()->isVisible()))
+    if(parentWidget() == nullptr || parentWidget()->isVisible())
     {
         QDialog::show();
     }
@@ -535,7 +535,7 @@ void ProgressDialog::timerEvent(QTimerEvent* te)
 #ifndef AUTOTEST
     if(te->timerId() == m_progressDelayTimer)
     {
-        if(!isVisible() && !m_bStayHidden)
+        if(!m_bStayHidden)
         {
             show();
         }
