@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 01:01+0000\n"
+"POT-Creation-Date: 2023-01-30 01:00+0000\n"
 "PO-Revision-Date: 2022-09-26 20:20+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -1763,7 +1763,7 @@ msgid "Configure KDiff3"
 msgstr "Anpassa Kdiff3"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:105
+#: kdiff3_part.rc:21 main.cpp:106
 #, kde-format
 msgid "KDiff3"
 msgstr "Kdiff3"
@@ -1838,82 +1838,82 @@ msgstr "Huvudverktygsrad"
 msgid "Ignored. (User defined.)"
 msgstr "Ignorerad. (Användardefinierad.)"
 
-#: main.cpp:108
+#: main.cpp:109
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bitar)"
 
-#: main.cpp:110
+#: main.cpp:111
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Verktyg för jämförelse och sammanfogning av filer och kataloger"
 
-#: main.cpp:111
+#: main.cpp:112
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 "© 2002-2014 Joachim Eibl, © 2017 Michael Reeves Konvertering till KF5/Qt5"
 
-#: main.cpp:131
+#: main.cpp:132
 #, kde-format
 msgid "Merge the input."
 msgstr "Sammanfoga indata."
 
-#: main.cpp:132
+#: main.cpp:133
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Explicit basfil. För att fungera tillsammans med vissa verktyg."
 
-#: main.cpp:133
+#: main.cpp:134
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Utdatafil. Betyder underförstått -m. T.ex.: -o ny_fil.txt"
 
-#: main.cpp:134
+#: main.cpp:135
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "Utdatafil, igen. (för att fungera med vissa verktyg.)"
 
-#: main.cpp:136
+#: main.cpp:137
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Inget grafiskt gränssnitt om alla konflikter kan lösas automatiskt (kräver -"
 "o fil)"
 
-#: main.cpp:137
+#: main.cpp:138
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "Ignorera --auto och visa alltid användargränssnittet."
 
-#: main.cpp:139 main.cpp:140
+#: main.cpp:140 main.cpp:141
 #, kde-format
 msgid "Ignored."
 msgstr "Ignorerad."
 
-#: main.cpp:142
+#: main.cpp:143
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Synlig ersättning av namn för indatafil 1 (bas)."
 
-#: main.cpp:143
+#: main.cpp:144
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Synlig ersättning av namn för indatafil 2."
 
-#: main.cpp:144
+#: main.cpp:145
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Synlig ersättning av namn för indatafil 3."
 
-#: main.cpp:145
+#: main.cpp:146
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Alternativ synlig ersättning av namn. Ange detta en gång för all indata."
 
-#: main.cpp:146
+#: main.cpp:147
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1922,32 +1922,32 @@ msgstr ""
 "Överskrid en inställning. Använd en gång för varje inställning, t.ex.  --cs "
 "\"AutoAdvance=1\""
 
-#: main.cpp:147
+#: main.cpp:148
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Visa lista med inställningar och nuvarande värden."
 
-#: main.cpp:148
+#: main.cpp:149
 #, kde-format
 msgid "Use a different config file."
 msgstr "Använd en annan inställningsfil."
 
-#: main.cpp:151
+#: main.cpp:152
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "Fil 1 att öppna (basfil, om den inte anges med --base)"
 
-#: main.cpp:152
+#: main.cpp:153
 #, kde-format
 msgid "file2 to open"
 msgstr "Fil 2 att öppna"
 
-#: main.cpp:153
+#: main.cpp:154
 #, kde-format
 msgid "file3 to open"
 msgstr "Fil 3 att öppna"
 
-#: main.cpp:177
+#: main.cpp:178
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Se kdiff3 --help för ytterligare väljare som stöds."
