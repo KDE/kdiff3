@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-30 03:08+0000\n"
+"POT-Creation-Date: 2023-01-31 02:44+0000\n"
 "PO-Revision-Date: 2014-10-20 20:22+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian\n"
@@ -1233,40 +1233,40 @@ msgstr ""
 "U toku pokušaja da se napravi rezerva, preimenovanje nije uspjelo.\n"
 "Nazivi datoteka: "
 
-#: kdiff3.cpp:177
+#: kdiff3.cpp:178
 #, kde-format
 msgid "Current Configuration:"
 msgstr "Trenutna konfiguracija:"
 
-#: kdiff3.cpp:182
+#: kdiff3.cpp:183
 #, kde-format
 msgid "Config Option Error:"
 msgstr "Greška konfiguracione opcije:"
 
-#: kdiff3.cpp:240
+#: kdiff3.cpp:241
 #, kde-format
 msgid "Option --auto used, but no output file specified."
 msgstr "Opcija --auto je upotrijebljena, ali nije navedena izlazna datoteka."
 
-#: kdiff3.cpp:344
+#: kdiff3.cpp:345
 #, fuzzy, kde-format
 #| msgid "Directory"
 msgid "Directory merge"
 msgstr "Direktorij"
 
-#: kdiff3.cpp:348
+#: kdiff3.cpp:349
 #, fuzzy, kde-format
 #| msgid "Merge to A"
 msgid "Merge info"
 msgstr "Stopi u A"
 
-#: kdiff3.cpp:426
+#: kdiff3.cpp:427
 #, fuzzy, kde-format
 #| msgid "Option --auto ignored for directory comparison."
 msgid "Option --auto ignored for folder comparison."
 msgstr "Opcija --auto se ignoriše za poređenje direktorija."
 
-#: kdiff3.cpp:474
+#: kdiff3.cpp:506
 #, kde-format
 msgid "Saving failed."
 msgstr "Snimanje nije uspjelo."
@@ -1894,7 +1894,7 @@ msgid "Configure KDiff3"
 msgstr "Podesi KDiff3"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:102
+#: kdiff3_part.rc:21 main.cpp:103
 #, kde-format
 msgid "KDiff3"
 msgstr "KDiff3"
@@ -1971,87 +1971,87 @@ msgstr "Glavna alatna traka"
 msgid "Ignored. (User defined.)"
 msgstr "Ignorisano. (Korisnički definisano)."
 
-#: main.cpp:106
+#: main.cpp:107
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr ""
 
-#: main.cpp:108
+#: main.cpp:109
 #, kde-format
 msgctxt "Program version info."
 msgid " (32 bit)"
 msgstr ""
 
-#: main.cpp:109
+#: main.cpp:110
 #, fuzzy, kde-format
 #| msgid "Tool for Comparison and Merge of Files and Directories"
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Alat za upoređivanje i stapanje datoteka i direktorija"
 
-#: main.cpp:110
+#: main.cpp:111
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 
-#: main.cpp:130
+#: main.cpp:131
 #, kde-format
 msgid "Merge the input."
 msgstr "Stopi ulaz."
 
-#: main.cpp:131
+#: main.cpp:132
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Eksplicitna bazna datoteka. Za kompatibilnost sa određenim alatima."
 
-#: main.cpp:132
+#: main.cpp:133
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Izlazna datoteka. Implicira -m. Npr.: -o newfile.txt"
 
-#: main.cpp:133
+#: main.cpp:134
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "Izlazna datoteka, ponovo. (Za kompatibilnost sa određenim alatima.)"
 
-#: main.cpp:135
+#: main.cpp:136
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr "Bez GUI-ja ako su svi sukobi automatski rješivi. (Zahtjeva -o file)"
 
-#: main.cpp:136
+#: main.cpp:137
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr ""
 
-#: main.cpp:138 main.cpp:139
+#: main.cpp:139 main.cpp:140
 #, fuzzy, kde-format
 #| msgid "Ignore"
 msgid "Ignored."
 msgstr "Ignoriši"
 
-#: main.cpp:141
+#: main.cpp:142
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Vidljiva zamjena naziva za ulaznu datoteku 1 (bazna)."
 
-#: main.cpp:142
+#: main.cpp:143
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Vidljiva zamjena naziva za ulaznu datoteku 2."
 
-#: main.cpp:143
+#: main.cpp:144
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Vidljiva zamjena naziva za ulaznu datoteku 3."
 
-#: main.cpp:144
+#: main.cpp:145
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Alternativa vidljivoj zamijeni naziva. Dobavite ovo jednom za svaki ulaz."
 
-#: main.cpp:145
+#: main.cpp:146
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -2060,32 +2060,32 @@ msgstr ""
 "Prespoji postavku konfiguracije. Koristi jednom za svaku postavku. Npr.: --"
 "cs \"AutoAdvance=1\""
 
-#: main.cpp:146
+#: main.cpp:147
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Prikaži listu postavki konfiguracije i trenutnih vrijednosti."
 
-#: main.cpp:147
+#: main.cpp:148
 #, kde-format
 msgid "Use a different config file."
 msgstr "Koristi drugačiju konfiguracionu datoteku."
 
-#: main.cpp:150
+#: main.cpp:151
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "datoteka 1 za otvaranje (bazna, ako nije naveden preko --base)"
 
-#: main.cpp:151
+#: main.cpp:152
 #, kde-format
 msgid "file2 to open"
 msgstr "datoteka 2 za otvaranje"
 
-#: main.cpp:152
+#: main.cpp:153
 #, kde-format
 msgid "file3 to open"
 msgstr "datoteka 3 za otvaranje"
 
-#: main.cpp:176
+#: main.cpp:177
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr ""

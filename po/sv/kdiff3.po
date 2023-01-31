@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-30 03:08+0000\n"
+"POT-Creation-Date: 2023-01-31 02:44+0000\n"
 "PO-Revision-Date: 2022-08-20 14:42+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -1143,37 +1143,37 @@ msgstr ""
 "Vid försök att skapa en säkerhetskopia, misslyckades namnbyte.\n"
 "Filnamn: %1 -> %2"
 
-#: kdiff3.cpp:177
+#: kdiff3.cpp:178
 #, kde-format
 msgid "Current Configuration:"
 msgstr "Aktuell inställning:"
 
-#: kdiff3.cpp:182
+#: kdiff3.cpp:183
 #, kde-format
 msgid "Config Option Error:"
 msgstr "Fel i inställningsalternativ:"
 
-#: kdiff3.cpp:240
+#: kdiff3.cpp:241
 #, kde-format
 msgid "Option --auto used, but no output file specified."
 msgstr "Väljaren --auto användes, men ingen utdatafil angavs."
 
-#: kdiff3.cpp:344
+#: kdiff3.cpp:345
 #, kde-format
 msgid "Directory merge"
 msgstr "Katalogsammanfogning"
 
-#: kdiff3.cpp:348
+#: kdiff3.cpp:349
 #, kde-format
 msgid "Merge info"
 msgstr "Sammanfoga information"
 
-#: kdiff3.cpp:426
+#: kdiff3.cpp:427
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
 msgstr "Väljaren --auto ignoreras för katalogjämförelse."
 
-#: kdiff3.cpp:474
+#: kdiff3.cpp:506
 #, kde-format
 msgid "Saving failed."
 msgstr "Misslyckades spara."
@@ -1770,7 +1770,7 @@ msgid "Configure KDiff3"
 msgstr "Anpassa Kdiff3"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:102
+#: kdiff3_part.rc:21 main.cpp:103
 #, kde-format
 msgid "KDiff3"
 msgstr "Kdiff3"
@@ -1845,88 +1845,88 @@ msgstr "Huvudverktygsrad"
 msgid "Ignored. (User defined.)"
 msgstr "Ignorerad. (Användardefinierad.)"
 
-#: main.cpp:106
+#: main.cpp:107
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr " (64 bitar)"
 
-#: main.cpp:108
+#: main.cpp:109
 #, kde-format
 msgctxt "Program version info."
 msgid " (32 bit)"
 msgstr " (32 bitar)"
 
-#: main.cpp:109
+#: main.cpp:110
 #, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "Verktyg för jämförelse och sammanfogning av filer och kataloger"
 
-#: main.cpp:110
+#: main.cpp:111
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 "© 2002-2014 Joachim Eibl, © 2017 Michael Reeves Konvertering till KF5/Qt5"
 
-#: main.cpp:130
+#: main.cpp:131
 #, kde-format
 msgid "Merge the input."
 msgstr "Sammanfoga indata."
 
-#: main.cpp:131
+#: main.cpp:132
 #, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "Explicit basfil. För att fungera tillsammans med vissa verktyg."
 
-#: main.cpp:132
+#: main.cpp:133
 #, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "Utdatafil. Betyder underförstått -m. T.ex.: -o ny_fil.txt"
 
-#: main.cpp:133
+#: main.cpp:134
 #, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "Utdatafil, igen. (för att fungera med vissa verktyg.)"
 
-#: main.cpp:135
+#: main.cpp:136
 #, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr ""
 "Inget grafiskt gränssnitt om alla konflikter kan lösas automatiskt (kräver -"
 "o fil)"
 
-#: main.cpp:136
+#: main.cpp:137
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr "Ignorera --auto och visa alltid användargränssnittet."
 
-#: main.cpp:138 main.cpp:139
+#: main.cpp:139 main.cpp:140
 #, kde-format
 msgid "Ignored."
 msgstr "Ignorerad."
 
-#: main.cpp:141
+#: main.cpp:142
 #, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Synlig ersättning av namn för indatafil 1 (bas)."
 
-#: main.cpp:142
+#: main.cpp:143
 #, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Synlig ersättning av namn för indatafil 2."
 
-#: main.cpp:143
+#: main.cpp:144
 #, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Synlig ersättning av namn för indatafil 3."
 
-#: main.cpp:144
+#: main.cpp:145
 #, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr ""
 "Alternativ synlig ersättning av namn. Ange detta en gång för all indata."
 
-#: main.cpp:145
+#: main.cpp:146
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
@@ -1935,32 +1935,32 @@ msgstr ""
 "Överskrid en inställning. Använd en gång för varje inställning, t.ex.  --cs "
 "\"AutoAdvance=1\""
 
-#: main.cpp:146
+#: main.cpp:147
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr "Visa lista med inställningar och nuvarande värden."
 
-#: main.cpp:147
+#: main.cpp:148
 #, kde-format
 msgid "Use a different config file."
 msgstr "Använd en annan inställningsfil."
 
-#: main.cpp:150
+#: main.cpp:151
 #, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "Fil 1 att öppna (basfil, om den inte anges med --base)"
 
-#: main.cpp:151
+#: main.cpp:152
 #, kde-format
 msgid "file2 to open"
 msgstr "Fil 2 att öppna"
 
-#: main.cpp:152
+#: main.cpp:153
 #, kde-format
 msgid "file3 to open"
 msgstr "Fil 3 att öppna"
 
-#: main.cpp:176
+#: main.cpp:177
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr "Se kdiff3 --help för ytterligare väljare som stöds."

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3 3.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-30 03:08+0000\n"
+"POT-Creation-Date: 2023-01-31 02:44+0000\n"
 "PO-Revision-Date: 2005-05-25 18:07-0600\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -1118,37 +1118,37 @@ msgstr ""
 "Kuri Ubwoko A Inyibutsa , Guhindura izina Byanze . \n"
 ": "
 
-#: kdiff3.cpp:177
+#: kdiff3.cpp:178
 #, fuzzy, kde-format
 msgid "Current Configuration:"
 msgstr "Iki cyiciro"
 
-#: kdiff3.cpp:182
+#: kdiff3.cpp:183
 #, fuzzy, kde-format
 msgid "Config Option Error:"
 msgstr "Ikosa gufungura idosiye"
 
-#: kdiff3.cpp:240
+#: kdiff3.cpp:241
 #, fuzzy, kde-format
 msgid "Option --auto used, but no output file specified."
 msgstr "- - Ikiyega Byakoreshejwe , Oya Ibisohoka Idosiye . "
 
-#: kdiff3.cpp:344
+#: kdiff3.cpp:345
 #, fuzzy, kde-format
 msgid "Directory merge"
 msgstr "Seriveri y'ububiko:"
 
-#: kdiff3.cpp:348
+#: kdiff3.cpp:349
 #, fuzzy, kde-format
 msgid "Merge info"
 msgstr "Kuri A "
 
-#: kdiff3.cpp:426
+#: kdiff3.cpp:427
 #, fuzzy, kde-format
 msgid "Option --auto ignored for folder comparison."
 msgstr "- - Ikiyega ya:  Ububiko . "
 
-#: kdiff3.cpp:474
+#: kdiff3.cpp:506
 #, fuzzy, kde-format
 msgid "Saving failed."
 msgstr "Byanze . "
@@ -1706,7 +1706,7 @@ msgid "Configure KDiff3"
 msgstr "Kuboneza Gucapa na KDE"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: kdiff3_part.rc:21 main.cpp:102
+#: kdiff3_part.rc:21 main.cpp:103
 #, fuzzy, kde-format
 msgid "KDiff3"
 msgstr "Igabanya"
@@ -1782,116 +1782,116 @@ msgstr ""
 msgid "Ignored. (User defined.)"
 msgstr ""
 
-#: main.cpp:106
+#: main.cpp:107
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
 msgstr ""
 
-#: main.cpp:108
+#: main.cpp:109
 #, kde-format
 msgctxt "Program version info."
 msgid " (32 bit)"
 msgstr ""
 
-#: main.cpp:109
+#: main.cpp:110
 #, fuzzy, kde-format
 msgid "Tool for Comparison and Merge of Files and Folders"
 msgstr "ya:  na Bya na "
 
-#: main.cpp:110
+#: main.cpp:111
 #, kde-format
 msgid "(c) 2002-2014 Joachim Eibl, (c) 2017 Michael Reeves KF5/Qt5 port"
 msgstr ""
 
-#: main.cpp:130
+#: main.cpp:131
 #, fuzzy, kde-format
 msgid "Merge the input."
 msgstr "i Iyinjiza . "
 
-#: main.cpp:131
+#: main.cpp:132
 #, fuzzy, kde-format
 msgid "Explicit base file. For compatibility with certain tools."
 msgstr "SHINGIRO Idosiye . Bihuye neza Na: Ibikoresho . "
 
-#: main.cpp:132
+#: main.cpp:133
 #, fuzzy, kde-format
 msgid "Output file. Implies -m. E.g.: -o newfile.txt"
 msgstr "E. G."
 
-#: main.cpp:133
+#: main.cpp:134
 #, fuzzy, kde-format
 msgid "Output file, again. (For compatibility with certain tools.)"
 msgstr "Idosiye , Nanone . ( Bihuye neza Na: Ibikoresho . ) "
 
-#: main.cpp:135
+#: main.cpp:136
 #, fuzzy, kde-format
 msgid "No GUI if all conflicts are auto-solvable. (Needs -o file)"
 msgstr "NIBA Byose Ikiyega - . ( - o Idosiye ) "
 
-#: main.cpp:136
+#: main.cpp:137
 #, kde-format
 msgid "Ignore --auto and always show GUI."
 msgstr ""
 
-#: main.cpp:138 main.cpp:139
+#: main.cpp:139 main.cpp:140
 #, fuzzy, kde-format
 msgid "Ignored."
 msgstr "Kwirengagiza Inshuro Imwe"
 
-#: main.cpp:141
+#: main.cpp:142
 #, fuzzy, kde-format
 msgid "Visible name replacement for input file 1 (base)."
 msgstr "Izina: ya:  Iyinjiza Idosiye 1 ( SHINGIRO ) . "
 
-#: main.cpp:142
+#: main.cpp:143
 #, fuzzy, kde-format
 msgid "Visible name replacement for input file 2."
 msgstr "Izina: ya:  Iyinjiza Idosiye 2 . "
 
-#: main.cpp:143
+#: main.cpp:144
 #, fuzzy, kde-format
 msgid "Visible name replacement for input file 3."
 msgstr "Izina: ya:  Iyinjiza Idosiye 3 . "
 
-#: main.cpp:144
+#: main.cpp:145
 #, fuzzy, kde-format
 msgid "Alternative visible name replacement. Supply this once for every input."
 msgstr "Kigaragara Izina: . iyi Rimwe ya:  buri Iyinjiza . "
 
-#: main.cpp:145
+#: main.cpp:146
 #, kde-format
 msgid ""
 "Override a config setting. Use once for every setting. E.g.: --cs "
 "\"AutoAdvance=1\""
 msgstr ""
 
-#: main.cpp:146
+#: main.cpp:147
 #, kde-format
 msgid "Show list of config settings and current values."
 msgstr ""
 
-#: main.cpp:147
+#: main.cpp:148
 #, fuzzy, kde-format
 msgid "Use a different config file."
 msgstr "Bya Idosiye : "
 
-#: main.cpp:150
+#: main.cpp:151
 #, fuzzy, kde-format
 msgid "file1 to open (base, if not specified via --base)"
 msgstr "Kuri Gufungura ( SHINGIRO , NIBA OYA Biturutse - - SHINGIRO ) "
 
-#: main.cpp:151
+#: main.cpp:152
 #, fuzzy, kde-format
 msgid "file2 to open"
 msgstr "Kuri Gufungura "
 
-#: main.cpp:152
+#: main.cpp:153
 #, fuzzy, kde-format
 msgid "file3 to open"
 msgstr "Kuri Gufungura "
 
-#: main.cpp:176
+#: main.cpp:177
 #, kde-format
 msgid "See kdiff3 --help for supported options."
 msgstr ""
