@@ -2,22 +2,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2013, 2014, 2015, 2017, 2018, 2019, 2020.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
-# Vit Pelcak <vit@pelcak.org>, 2021, 2022.
+# Vit Pelcak <vit@pelcak.org>, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: trunk_kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-31 02:44+0000\n"
-"PO-Revision-Date: 2022-06-27 16:03+0200\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2023-01-30 16:32+0100\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -38,13 +38,13 @@ msgstr "Získávám stav souboru: %1"
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Reading file: %1"
-msgstr ""
+msgstr "Čtu soubor: %1"
 
 #: DefaultFileAccessJobHandler.cpp:146
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Writing file: %1"
-msgstr ""
+msgstr "Zapisuji soubor: %1"
 
 #: DefaultFileAccessJobHandler.cpp:180
 #, kde-format
@@ -55,19 +55,19 @@ msgstr "Nedostatek paměti"
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Making folder: %1"
-msgstr ""
+msgstr "Vytvářím složku: %1"
 
 #: DefaultFileAccessJobHandler.cpp:239
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing folder: %1"
-msgstr ""
+msgstr "Odstraňuji složku: %1"
 
 #: DefaultFileAccessJobHandler.cpp:255
 #, kde-format
 msgctxt "Mesage for progress dialog %1 = path to file"
 msgid "Removing file: %1"
-msgstr ""
+msgstr "Odstraňuji soubor: %1"
 
 #: DefaultFileAccessJobHandler.cpp:272
 #, kde-format
@@ -229,163 +229,163 @@ msgstr "Jiné"
 #, kde-format
 msgctxt "Operation column message"
 msgid "Copy A to B"
-msgstr ""
+msgstr "Zkopírovat A do B"
 
 #: directorymergewindow.cpp:418
 #, kde-format
 msgctxt "Operation column message"
 msgid "Copy B to A"
-msgstr ""
+msgstr "Zkopírovat B do A"
 
 #: directorymergewindow.cpp:421
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete A"
-msgstr ""
+msgstr "Smazat A"
 
 #: directorymergewindow.cpp:424
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete B"
-msgstr ""
+msgstr "Smazat B"
 
 #: directorymergewindow.cpp:427
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete A & B"
-msgstr ""
+msgstr "Smazat A a B"
 
 #: directorymergewindow.cpp:430
 #, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A"
-msgstr ""
+msgstr "Sloučit do A"
 
 #: directorymergewindow.cpp:433
 #, kde-format
 msgctxt "Operation column message"
 msgid "Merge to B"
-msgstr ""
+msgstr "Sloučit do B"
 
 #: directorymergewindow.cpp:436
 #, kde-format
 msgctxt "Operation column message"
 msgid "Merge to A & B"
-msgstr ""
+msgstr "Sloučit do A a B"
 
 #: directorymergewindow.cpp:448
 #, kde-format
 msgctxt "Operation column message"
 msgid "Delete (if exists)"
-msgstr ""
+msgstr "Smazat (pokud existuje)"
 
 #: directorymergewindow.cpp:452
 #, kde-format
 msgctxt "Operation column message (Directory merge)"
 msgid "Merge"
-msgstr ""
+msgstr "Sloučení"
 
 #: directorymergewindow.cpp:452
 #, kde-format
 msgctxt "Operation column message (File merge)"
 msgid "Merge (manual)"
-msgstr ""
+msgstr "Sloučit (ručně)"
 
 #: directorymergewindow.cpp:455
 #, kde-format
 msgctxt "Operation column message"
 msgid "Error: Conflicting File Types"
-msgstr ""
+msgstr "Chyba: Konflikt typů souborů"
 
 #: directorymergewindow.cpp:458
 #, kde-format
 msgctxt "Operation column message"
 msgid "Error: Changed and Deleted"
-msgstr ""
+msgstr "Chyba: Změněno a smazáno"
 
 #: directorymergewindow.cpp:461
 #, kde-format
 msgctxt "Operation column message"
 msgid "Error: Dates are equal but files are not."
-msgstr ""
+msgstr "Chyba: Data jsou shodná, ale soubory nikoliv."
 
 #: directorymergewindow.cpp:475
 #, kde-format
 msgctxt "Status column message"
 msgid "Done"
-msgstr ""
+msgstr "Hotovo"
 
 #: directorymergewindow.cpp:477
 #, kde-format
 msgctxt "Status column message"
 msgid "Error"
-msgstr ""
+msgstr "Chyba"
 
 #: directorymergewindow.cpp:479
 #, kde-format
 msgctxt "Status column message"
 msgid "Skipped."
-msgstr ""
+msgstr "Přeskočeno."
 
 #: directorymergewindow.cpp:481
 #, kde-format
 msgctxt "Status column message"
 msgid "Not saved."
-msgstr ""
+msgstr "Neuloženo."
 
 #: directorymergewindow.cpp:483
 #, kde-format
 msgctxt "Status column message"
 msgid "In progress..."
-msgstr ""
+msgstr "Probíhá..."
 
 #: directorymergewindow.cpp:485
 #, kde-format
 msgctxt "Status column message"
 msgid "To do."
-msgstr ""
+msgstr "Úkol."
 
 #: directorymergewindow.cpp:525
 #, kde-format
 msgctxt "Column title"
 msgid "Name"
-msgstr ""
+msgstr "Název"
 
 #: directorymergewindow.cpp:533
 #, kde-format
 msgctxt "Column title"
 msgid "Operation"
-msgstr ""
+msgstr "Operace"
 
 #: directorymergewindow.cpp:535
 #, kde-format
 msgctxt "Column title"
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 #: directorymergewindow.cpp:537
 #, kde-format
 msgctxt "Column title"
 msgid "Unsolved"
-msgstr ""
+msgstr "Nevyřešeno"
 
 #: directorymergewindow.cpp:539
 #, kde-format
 msgctxt "Column title"
 msgid "Solved"
-msgstr ""
+msgstr "Vyřešeno"
 
 #: directorymergewindow.cpp:541
 #, kde-format
 msgctxt "Column title"
 msgid "Nonwhite"
-msgstr ""
+msgstr "Nebílý"
 
 #: directorymergewindow.cpp:543
 #, kde-format
 msgctxt "Column title"
 msgid "White"
-msgstr ""
+msgstr "Bílá"
 
 #: directorymergewindow.cpp:694
 #, kde-format
@@ -401,19 +401,19 @@ msgstr ""
 #, kde-format
 msgctxt "Error dialog caption"
 msgid "Warning"
-msgstr ""
+msgstr "Varování"
 
 #: directorymergewindow.cpp:696
 #, kde-format
 msgctxt "Title for rescan button"
 msgid "Rescan"
-msgstr ""
+msgstr "Znovu prohledat"
 
 #: directorymergewindow.cpp:697
 #, kde-format
 msgctxt "Title for continue button"
 msgid "Continue Merging"
-msgstr ""
+msgstr "Pokračovat se slučováním"
 
 #: directorymergewindow.cpp:847
 #, kde-format
@@ -597,19 +597,19 @@ msgstr ""
 #, kde-format
 msgctxt "Caption"
 msgid "Starting Merge"
-msgstr ""
+msgstr "Spouští se sloučení"
 
 #: directorymergewindow.cpp:2106
 #, kde-format
 msgctxt "Button title to confirm merge"
 msgid "Do It"
-msgstr ""
+msgstr "Provést"
 
 #: directorymergewindow.cpp:2107
 #, kde-format
 msgctxt "Button title to simulate merge"
 msgid "Simulate It"
-msgstr ""
+msgstr "Simulovat"
 
 #: directorymergewindow.cpp:2133
 #, kde-format
@@ -656,19 +656,19 @@ msgstr ""
 #, kde-format
 msgctxt "Caption for message dialog"
 msgid "Continue merge after an error"
-msgstr ""
+msgstr "Pokračovat se slučováním po chybě"
 
 #: directorymergewindow.cpp:2257
 #, kde-format
 msgctxt "Continue button title"
 msgid "Continue With Last Item"
-msgstr ""
+msgstr "Pokračovat s poslední položkou"
 
 #: directorymergewindow.cpp:2258
 #, kde-format
 msgctxt "Skip button title"
 msgid "Skip Item"
-msgstr ""
+msgstr "Přeskočit položku"
 
 #: directorymergewindow.cpp:2352
 #, kde-format
@@ -1396,7 +1396,7 @@ msgstr ""
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
-msgstr ""
+msgstr "Přejít na řádek"
 
 #: kdiff3.cpp:654
 #, kde-format
@@ -1405,6 +1405,8 @@ msgid ""
 "Go\n"
 "Line"
 msgstr ""
+"Přejít\n"
+"na řádek"
 
 #: kdiff3.cpp:655
 #, kde-format
@@ -1419,7 +1421,7 @@ msgstr ""
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
-msgstr ""
+msgstr "Vybrat řádky z A"
 
 #: kdiff3.cpp:656
 #, kde-format
@@ -1428,12 +1430,14 @@ msgid ""
 "Choose\n"
 "A"
 msgstr ""
+"Zvolit\n"
+"A"
 
 #: kdiff3.cpp:657
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
-msgstr ""
+msgstr "Vybrat řádky z B"
 
 #: kdiff3.cpp:657
 #, kde-format
@@ -1442,12 +1446,14 @@ msgid ""
 "Choose\n"
 "B"
 msgstr ""
+"Zvolit\n"
+"B"
 
 #: kdiff3.cpp:658
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
-msgstr ""
+msgstr "Vybrat řádky z C"
 
 #: kdiff3.cpp:658
 #, kde-format
@@ -1456,12 +1462,14 @@ msgid ""
 "Choose\n"
 "C"
 msgstr ""
+"Zvolit\n"
+"C"
 
 #: kdiff3.cpp:659
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
-msgstr ""
+msgstr "Po výběru zdroje automaticky přejít na následující nevyřešený konflikt"
 
 #: kdiff3.cpp:659
 #, kde-format
@@ -1470,6 +1478,8 @@ msgid ""
 "Auto\n"
 "Next"
 msgstr ""
+"Automaticky\n"
+"Následující"
 
 #: kdiff3.cpp:661
 #, kde-format
@@ -1483,6 +1493,8 @@ msgid ""
 "White\n"
 "Characters"
 msgstr ""
+"Bílé\n"
+"znaky"
 
 #: kdiff3.cpp:662
 #, kde-format
@@ -1496,6 +1508,8 @@ msgid ""
 "White\n"
 "Deltas"
 msgstr ""
+"Bílé\n"
+"rozdíly"
 
 #: kdiff3.cpp:664
 #, kde-format
@@ -1509,6 +1523,8 @@ msgid ""
 "Line\n"
 "Numbers"
 msgstr ""
+"Řádky\n"
+"čísla"
 
 #: kdiff3.cpp:666
 #, kde-format
@@ -1818,13 +1834,13 @@ msgstr "Ignorováno (Nastaveno uživatelem)"
 #, kde-format
 msgctxt "Program version info."
 msgid " (64 bit)"
-msgstr ""
+msgstr " (64 bit)"
 
 #: main.cpp:109
 #, kde-format
 msgctxt "Program version info."
 msgid " (32 bit)"
-msgstr ""
+msgstr " (32 bit)"
 
 #: main.cpp:110
 #, kde-format
@@ -2286,7 +2302,7 @@ msgstr ""
 #, kde-format
 msgctxt "Button title"
 msgid "Change Font"
-msgstr ""
+msgstr "Změnit písmo"
 
 #: optiondialog.cpp:136 optiondialog.cpp:146
 #, kde-format
@@ -2296,6 +2312,9 @@ msgid ""
 "\n"
 "Example:"
 msgstr ""
+"Písmo: %1, %2, %3\n"
+"\n"
+"Příklad:"
 
 #: optiondialog.cpp:402
 #, kde-format
@@ -3676,13 +3695,13 @@ msgstr ""
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "Failed to read file: %1"
-msgstr ""
+msgstr "Soubor nelze přečíst: %1"
 
 #: SourceData.cpp:537
 #, kde-format
 msgctxt "Read error message. %1 = filepath"
 msgid "File %1 too large to process. Skipping."
-msgstr ""
+msgstr "Soubor %1 je pro zpracování velký. Přeskakuji."
 
 #: Utils.cpp:69
 #, kde-format
