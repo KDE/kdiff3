@@ -12,7 +12,6 @@
 #define OPTIONITEMS_H
 
 #include "common.h"
-#include "options.h"
 #include "TypeUtils.h"
 
 #include <boost/signals2.hpp>

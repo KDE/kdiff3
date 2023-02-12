@@ -416,6 +416,7 @@ void KDiff3App::slotFocusChanged(QWidget* old, QWidget* now)
 
 void KDiff3App::completeInit(const QString& fn1, const QString& fn2, const QString& fn3)
 {
+    //This code may execute before QApplication::exec
     if(!fn1.isEmpty())
     {
         m_sd1->setFilename(fn1);
