@@ -1619,9 +1619,9 @@ void Diff3LineList::findHistoryRange(const QRegularExpression& historyStart, boo
     // Search for end of history
     for(range.end = range.start, range.endIdx = range.startIdx; range.end != end(); ++range.end, ++range.endIdx)
     {
-        QString sA = range.end->getString(e_SrcSelector::A);
-        QString sB = range.end->getString(e_SrcSelector::B);
-        QString sC = range.end->getString(e_SrcSelector::C);
+        const QString sA = range.end->getString(e_SrcSelector::A);
+        const QString sB = range.end->getString(e_SrcSelector::B);
+        const QString sC = range.end->getString(e_SrcSelector::C);
         if((!sA.isEmpty() && historyLead != Utils::calcHistoryLead(sA)) ||
            (!sB.isEmpty() && historyLead != Utils::calcHistoryLead(sB)) ||
            (bThreeFiles && !sC.isEmpty() && historyLead != Utils::calcHistoryLead(sC)))

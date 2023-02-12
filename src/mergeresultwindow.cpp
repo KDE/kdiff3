@@ -436,7 +436,7 @@ int MergeResultWindow::getMaxTextWidth()
         {
             for(const MergeEditLine& mel: mb.list())
             {
-                QString s = mel.getString(m_pldA, m_pldB, m_pldC);
+                const QString s = mel.getString(m_pldA, m_pldB, m_pldC);
 
                 QTextLayout textLayout(s, font(), this);
                 textLayout.beginLayout();
@@ -1231,7 +1231,7 @@ void MergeResultWindow::slotMergeHistory()
         iMBLStart->list().clear();
         // Now insert the complete history into the first MergeLine of the history
         iMBLStart->list().push_back(MergeEditLine(historyRange.start, m_pldC == nullptr ? e_SrcSelector::B : e_SrcSelector::C));
-        QString lead = Utils::calcHistoryLead(historyRange.start->getString(e_SrcSelector::A));
+        const QString lead = Utils::calcHistoryLead(historyRange.start->getString(e_SrcSelector::A));
         MergeEditLine mel(m_pDiff3LineList->end());
         mel.setString(lead);
         iMBLStart->list().push_back(mel);
@@ -1269,8 +1269,8 @@ void MergeResultWindow::slotMergeHistory()
             // If the end of start is empty and the first line at the end is empty remove the last line of start
             if(!iMBLStart->list().empty() && !iMBLEnd->list().empty())
             {
-                QString lastLineOfStart = iMBLStart->list().back().getString(m_pldA, m_pldB, m_pldC);
-                QString firstLineOfEnd = iMBLEnd->list().front().getString(m_pldA, m_pldB, m_pldC);
+                const QString lastLineOfStart = iMBLStart->list().back().getString(m_pldA, m_pldB, m_pldC);
+                const QString firstLineOfEnd = iMBLEnd->list().front().getString(m_pldA, m_pldB, m_pldC);
                 if(lastLineOfStart.mid(lead.length()).trimmed().isEmpty() && firstLineOfEnd.mid(lead.length()).trimmed().isEmpty())
                     iMBLStart->list().pop_back();
             }
@@ -1629,8 +1629,7 @@ void MergeResultWindow::paintEvent(QPaintEvent*)
 
                         if(mbIt == m_currentMergeBlockIt) rangeMark |= 4; // Mark of the current line
 
-                        QString s;
-                        s = mel.getString(m_pldA, m_pldB, m_pldC);
+                        const QString s = mel.getString(m_pldA, m_pldB, m_pldC);
 
                         writeLine(p, line, s, mel.src(), mb.details(), rangeMark,
                                   mel.isModified(), mel.isRemoved(), mb.isWhiteSpaceConflict());
@@ -1995,7 +1994,7 @@ void MergeResultWindow::keyPressEvent(QKeyEvent* e)
                     MergeEditLineList::iterator melIt1;
                     if(calcIteratorFromLineNr(y + 1, mbIt1, melIt1) && melIt1->isEditableText())
                     {
-                        QString s2 = melIt1->getString(m_pldA, m_pldB, m_pldC);
+                        const QString s2 = melIt1->getString(m_pldA, m_pldB, m_pldC);
                         melIt->setString(str + s2);
 
                         // Remove the line
@@ -2554,18 +2553,18 @@ void MergeResultWindow::pasteClipboard(bool bFromSelection)
     }
     melItAfter = melIt;
     ++melItAfter;
-    QString str = melIt->getString(m_pldA, m_pldB, m_pldC);
+    const QString str = melIt->getString(m_pldA, m_pldB, m_pldC);
     int x = m_cursorXPos;
 
     if(!QApplication::clipboard()->supportsSelection())
         bFromSelection = false;
 
-    QString clipBoard = QApplication::clipboard()->text(bFromSelection ? QClipboard::Selection : QClipboard::Clipboard);
+    const QString clipBoard = QApplication::clipboard()->text(bFromSelection ? QClipboard::Selection : QClipboard::Clipboard);
 
     QString currentLine = str.left(x);
-    QString endOfLine = str.mid(x);
-    int i;
-    int len = clipBoard.length();
+    const QString endOfLine = str.mid(x);
+    QtSizeType i;
+    const QtSizeType len = clipBoard.length();
     for(i = 0; i < len; ++i)
     {
         QChar c = clipBoard[i];
