@@ -170,7 +170,7 @@ QString Utils::calcHistoryLead(const QString& s)
 
 /*
     QUrl::toLocalFile does some special handling for locally visable windows network drives.
-    If QUrl::isLocal however it returns false we get an empty string back.
+    If QUrl::isLocal however it returns false and we get an empty string back.
 */
 QString Utils::urlToString(const QUrl &url)
 {

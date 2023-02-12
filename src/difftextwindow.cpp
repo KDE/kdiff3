@@ -355,9 +355,11 @@ void DiffTextWindow::dropEvent(QDropEvent* dropEvent)
 
         if(m_app.canContinue() && !urlList.isEmpty())
         {
-            QString filename = Utils::urlToString(urlList.first());
+            FileAccess fa(urlList.first());
+            if(fa.isDir())
+                return;
 
-            d->sourceData->setFilename(filename);
+            d->sourceData->setFileAccess(fa);
 
             Q_EMIT finishDrop();
         }
