@@ -18,31 +18,31 @@
 
 namespace PixMapUtils {
 namespace {
-QPixmap* s_pm_dir = nullptr;
-QPixmap* s_pm_file = nullptr;
+    QPixmap* s_pm_dir = nullptr;
+    QPixmap* s_pm_file = nullptr;
 
-QPixmap* pmNotThere;
-QPixmap* pmNew = nullptr;
-QPixmap* pmOld;
-QPixmap* pmMiddle;
+    QPixmap* pmNotThere;
+    QPixmap* pmNew = nullptr;
+    QPixmap* pmOld;
+    QPixmap* pmMiddle;
 
-QPixmap* pmLink;
+    QPixmap* pmLink;
 
-QPixmap* pmDirLink;
-QPixmap* pmFileLink;
+    QPixmap* pmDirLink;
+    QPixmap* pmFileLink;
 
-QPixmap* pmNewLink;
-QPixmap* pmOldLink;
-QPixmap* pmMiddleLink;
+    QPixmap* pmNewLink;
+    QPixmap* pmOldLink;
+    QPixmap* pmMiddleLink;
 
-QPixmap* pmNewDir;
-QPixmap* pmMiddleDir;
-QPixmap* pmOldDir;
+    QPixmap* pmNewDir;
+    QPixmap* pmMiddleDir;
+    QPixmap* pmOldDir;
 
-QPixmap* pmNewDirLink;
-QPixmap* pmMiddleDirLink;
-QPixmap* pmOldDirLink;
-}// namespace
+    QPixmap* pmNewDirLink;
+    QPixmap* pmMiddleDirLink;
+    QPixmap* pmOldDirLink;
+} // namespace
 
 QPixmap colorToPixmap(const QColor& inColor)
 {
