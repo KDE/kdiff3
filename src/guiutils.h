@@ -16,7 +16,11 @@
 #include <QObject>
 
 namespace GuiUtils {
-//Use std::enable_if since compilers don't disabiguate overloads based on return type alone
+/*
+    Use std::enable_if since compilers don't disambiguate overloads based on return type alone.
+    Further more KToggleAction is actually a subclass of QAction which would leave the call
+    ambigous even as a parameter.
+*/
 template <class T, class Receiver, class Func>
 inline typename std::enable_if<std::is_same<T, QAction>::value, QAction>::type* createAction(
     const QString& text,
