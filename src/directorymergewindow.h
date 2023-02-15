@@ -14,8 +14,8 @@
 #include "common.h"
 #include "fileaccess.h"
 
-#include <QTreeWidget>
 #include <QEvent>
+#include <QTreeWidget>
 
 #include <list>
 #include <memory>
@@ -123,12 +123,12 @@ protected Q_SLOTS:
    void onExpanded();
    void currentChanged(const QModelIndex& current, const QModelIndex& previous) override; // override
 private:
+  class DirectoryMergeWindowPrivate;
+  class DirMergeItemDelegate;
   [[nodiscard]] int getIntFromIndex(const QModelIndex& index) const;
   [[nodiscard]] const QSharedPointer<Options>& getOptions() const;
 
-  class DirectoryMergeWindowPrivate;
   std::unique_ptr<DirectoryMergeWindowPrivate> d;
-  class DirMergeItemDelegate;
 };
 
 class DirectoryMergeInfo : public QFrame
