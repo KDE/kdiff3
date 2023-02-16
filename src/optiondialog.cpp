@@ -45,24 +45,6 @@
 #include <QScrollArea>
 #include <QTextCodec>
 
-const QString OptionDialog::s_historyEntryStartRegExpToolTip = i18n("A version control history entry consists of several lines.\n"
-                                                                    "Specify the regular expression to detect the first line (without the leading comment).\n"
-                                                                    "Use parentheses to group the keys you want to use for sorting.\n"
-                                                                    "If left empty, then KDiff3 assumes that empty lines separate history entries.\n"
-                                                                    "See the documentation for details.");
-const QString OptionDialog::s_historyEntryStartSortKeyOrderToolTip = i18n("Each pair of parentheses used in the regular expression for the history start entry\n"
-                                                                          "groups a key that can be used for sorting.\n"
-                                                                          "Specify the list of keys (that are numbered in order of occurrence\n"
-                                                                          "starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
-                                                                          "If left empty, then no sorting will be done.\n"
-                                                                          "See the documentation for details.");
-const QString OptionDialog::s_autoMergeRegExpToolTip = i18n("Regular expression for lines where KDiff3 should automatically choose one source.\n"
-                                                            "When a line with a conflict matches the regular expression then\n"
-                                                            "- if available - C, otherwise B will be chosen.");
-const QString OptionDialog::s_historyStartRegExpToolTip = i18n("Regular expression for the start of the version control history entry.\n"
-                                                               "Usually this line contains the \"$Log$\" keyword.\n"
-                                                               "Default value: \".*\\$Log.*\\$.*\"");
-
 class OptionCheckBox: public QCheckBox, public OptionBool
 {
   public:
