@@ -3044,6 +3044,7 @@ void DirectoryMergeWindow::updateAvailabilities(bool bMergeEditorVisible, bool b
     bool bFTConflict = pMFI == nullptr ? false : pMFI->conflictingFileTypes();
 
     bool bDirWindowHasFocus = isVisible() && hasFocus();
+    assert(!bItemActive || !bDirCompare || !bMergeMode || pMFI != nullptr);
 
     d->m_pDirShowIdenticalFiles->setEnabled(bDirCompare && isVisible());
     d->m_pDirShowDifferentFiles->setEnabled(bDirCompare && isVisible());
