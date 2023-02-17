@@ -18,6 +18,8 @@
 #include <QStringList>
 #include <QGroupBox>
 
+#include <KLocalizedString>
+
 #include <KPageDialog>
 #include <KSharedConfig>
 
