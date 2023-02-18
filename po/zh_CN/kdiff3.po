@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-13 02:42+0000\n"
+"POT-Creation-Date: 2023-02-18 02:53+0000\n"
 "PO-Revision-Date: 2023-02-15 11:07\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -121,7 +121,7 @@ msgstr "文件 %1：行不可用"
 msgid "Encoding:"
 msgstr "编码："
 
-#: difftextwindow.cpp:1900 mergeresultwindow.cpp:2810 optiondialog.cpp:816
+#: difftextwindow.cpp:1900 mergeresultwindow.cpp:2810 optiondialog.cpp:798
 #, kde-format
 msgid "Line end style:"
 msgstr "行尾格式："
@@ -132,8 +132,8 @@ msgstr "行尾格式："
 #: directorymergewindow.cpp:2977 mergeresultwindow.cpp:773
 #: mergeresultwindow.cpp:775 mergeresultwindow.cpp:777
 #: mergeresultwindow.cpp:779 mergeresultwindow.cpp:1481
-#: mergeresultwindow.cpp:2842 mergeresultwindow.cpp:2849 optiondialog.cpp:967
-#: optiondialog.cpp:980 pdiff.cpp:733 pdiff.cpp:735 pdiff.cpp:737 pdiff.cpp:739
+#: mergeresultwindow.cpp:2842 mergeresultwindow.cpp:2849 optiondialog.cpp:949
+#: optiondialog.cpp:962 pdiff.cpp:733 pdiff.cpp:735 pdiff.cpp:737 pdiff.cpp:739
 #: pdiff.cpp:761 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
 #: smalldialogs.cpp:87
 #, kde-format
@@ -146,8 +146,8 @@ msgstr "A"
 #: directorymergewindow.cpp:2978 mergeresultwindow.cpp:773
 #: mergeresultwindow.cpp:775 mergeresultwindow.cpp:781
 #: mergeresultwindow.cpp:783 mergeresultwindow.cpp:1483
-#: mergeresultwindow.cpp:2844 mergeresultwindow.cpp:2851 optiondialog.cpp:968
-#: optiondialog.cpp:981 pdiff.cpp:733 pdiff.cpp:735 pdiff.cpp:741 pdiff.cpp:743
+#: mergeresultwindow.cpp:2844 mergeresultwindow.cpp:2851 optiondialog.cpp:950
+#: optiondialog.cpp:963 pdiff.cpp:733 pdiff.cpp:735 pdiff.cpp:741 pdiff.cpp:743
 #: pdiff.cpp:763 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
 #: smalldialogs.cpp:88
 #, kde-format
@@ -160,7 +160,7 @@ msgstr "B"
 #: directorymergewindow.cpp:2979 mergeresultwindow.cpp:777
 #: mergeresultwindow.cpp:779 mergeresultwindow.cpp:781
 #: mergeresultwindow.cpp:783 mergeresultwindow.cpp:1485
-#: mergeresultwindow.cpp:2846 mergeresultwindow.cpp:2853 optiondialog.cpp:982
+#: mergeresultwindow.cpp:2846 mergeresultwindow.cpp:2853 optiondialog.cpp:964
 #: pdiff.cpp:737 pdiff.cpp:739 pdiff.cpp:741 pdiff.cpp:743 pdiff.cpp:765
 #: smalldialogs.cpp:82 smalldialogs.cpp:83 smalldialogs.cpp:86
 #: smalldialogs.cpp:89
@@ -213,7 +213,7 @@ msgstr "末行"
 msgid "Open File"
 msgstr "打开文件"
 
-#: difftextwindow.cpp:2072 optiondialog.cpp:401
+#: difftextwindow.cpp:2072 optiondialog.cpp:383
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8位"
@@ -786,7 +786,7 @@ msgid "Dest"
 msgstr "目标"
 
 #: directorymergewindow.cpp:2724 directorymergewindow.cpp:2752
-#: optiondialog.cpp:1112 optiondialog.cpp:1113
+#: optiondialog.cpp:1094 optiondialog.cpp:1095
 #, kde-format
 msgid "Folder"
 msgstr "文件夹"
@@ -2202,63 +2202,7 @@ msgstr "C (可选)："
 msgid "Folder..."
 msgstr "文件夹..."
 
-#: optiondialog.cpp:45
-#, kde-format
-msgid ""
-"A version control history entry consists of several lines.\n"
-"Specify the regular expression to detect the first line (without the leading "
-"comment).\n"
-"Use parentheses to group the keys you want to use for sorting.\n"
-"If left empty, then KDiff3 assumes that empty lines separate history "
-"entries.\n"
-"See the documentation for details."
-msgstr ""
-"版本控制历史记录共由几行组成。\n"
-"请手动指定正则表达式来检测首行 (不包括开头的注释)。\n"
-"使用圆括号归类您想要用于排序的关键词。\n"
-"若留空，KDiff3 会假定使用空行来分割历史记录。\n"
-"请参阅文档了解详情。"
-
-#: optiondialog.cpp:50
-#, kde-format
-msgid ""
-"Each pair of parentheses used in the regular expression for the history "
-"start entry\n"
-"groups a key that can be used for sorting.\n"
-"Specify the list of keys (that are numbered in order of occurrence\n"
-"starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
-"If left empty, then no sorting will be done.\n"
-"See the documentation for details."
-msgstr ""
-"历史开始条目的正则表达式中括号对将关键字分组能被用于排序。\n"
-"指定关键字列表(使用数字，按出现顺序从1开始)使用 ',' 作为分隔符(例如 "
-"\"4,5,6,1,2,3,7\")。\n"
-"如果留空则不排序。\n"
-"详情参见帮助文档。"
-
-#: optiondialog.cpp:56
-#, kde-format
-msgid ""
-"Regular expression for lines where KDiff3 should automatically choose one "
-"source.\n"
-"When a line with a conflict matches the regular expression then\n"
-"- if available - C, otherwise B will be chosen."
-msgstr ""
-"如果有多行正则表达式，KDiff3 会自动选择其中一个。\n"
-"当一行冲突匹配到了正则表达式时，如果符合正则表达式，则选择 C，否则选择 B。"
-
-#: optiondialog.cpp:59
-#, kde-format
-msgid ""
-"Regular expression for the start of the version control history entry.\n"
-"Usually this line contains the \"$Log$\" keyword.\n"
-"Default value: \".*\\$Log.*\\$.*\""
-msgstr ""
-"为版本控制历史记录开头使用的正则表达式。\n"
-"通常这行会包含关键词“$Log$”。\n"
-"默认值：“.*\\$Log.*\\$.*”"
-
-#: optiondialog.cpp:111
+#: optiondialog.cpp:93
 #, kde-format
 msgid ""
 "The quick brown fox jumps over the river\n"
@@ -2269,13 +2213,13 @@ msgstr ""
 "但小红母鸡颤抖着逃走了。\n"
 ":-)"
 
-#: optiondialog.cpp:120
+#: optiondialog.cpp:102
 #, kde-format
 msgctxt "Button title"
 msgid "Change Font"
 msgstr "更改字体"
 
-#: optiondialog.cpp:136 optiondialog.cpp:146
+#: optiondialog.cpp:118 optiondialog.cpp:128
 #, kde-format
 msgctxt "Font sample display, %1 = family, %2 = style, %3 = size"
 msgid ""
@@ -2287,160 +2231,160 @@ msgstr ""
 "\n"
 "示例："
 
-#: optiondialog.cpp:402
+#: optiondialog.cpp:384
 #, kde-format
 msgid "Unicode"
 msgstr "Unicode"
 
-#: optiondialog.cpp:403
+#: optiondialog.cpp:385
 #, kde-format
 msgid "Latin1"
 msgstr "Latin1"
 
-#: optiondialog.cpp:422
+#: optiondialog.cpp:404
 #, kde-format
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "如果非 ASCII 字符不能正确显示，请更改此选项。"
 
-#: optiondialog.cpp:511
+#: optiondialog.cpp:493
 #, kde-format
 msgid "Configure"
 msgstr "配置"
 
-#: optiondialog.cpp:550
+#: optiondialog.cpp:532
 #, kde-format
 msgid "Font"
 msgstr "字体"
 
-#: optiondialog.cpp:552
+#: optiondialog.cpp:534
 #, kde-format
 msgid "Editor & Diff Output Font"
 msgstr "编辑器和比较输出字体"
 
-#: optiondialog.cpp:570
+#: optiondialog.cpp:552
 #, kde-format
 msgid "Application font"
 msgstr "应用程序字体"
 
-#: optiondialog.cpp:575
+#: optiondialog.cpp:557
 #, kde-format
 msgid "File view font"
 msgstr "文件视图字体"
 
-#: optiondialog.cpp:594
+#: optiondialog.cpp:576
 #, kde-format
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "颜色"
 
-#: optiondialog.cpp:595
+#: optiondialog.cpp:577
 #, kde-format
 msgid "Colors Settings"
 msgstr "颜色设置"
 
-#: optiondialog.cpp:620
+#: optiondialog.cpp:602
 #, kde-format
 msgid "Editor and Diff Views:"
 msgstr "编辑器和比较视图："
 
-#: optiondialog.cpp:628
+#: optiondialog.cpp:610
 #, kde-format
 msgid "Foreground color:"
 msgstr "前景色："
 
-#: optiondialog.cpp:636
+#: optiondialog.cpp:618
 #, kde-format
 msgid "Background color:"
 msgstr "背景色："
 
-#: optiondialog.cpp:646
+#: optiondialog.cpp:628
 #, kde-format
 msgid "Diff background color:"
 msgstr "差异背景色："
 
-#: optiondialog.cpp:655
+#: optiondialog.cpp:637
 #, kde-format
 msgid "Color A:"
 msgstr "A颜色："
 
-#: optiondialog.cpp:664
+#: optiondialog.cpp:646
 #, kde-format
 msgid "Color B:"
 msgstr "B颜色："
 
-#: optiondialog.cpp:673
+#: optiondialog.cpp:655
 #, kde-format
 msgid "Color C:"
 msgstr "C颜色："
 
-#: optiondialog.cpp:681
+#: optiondialog.cpp:663
 #, kde-format
 msgid "Conflict color:"
 msgstr "冲突颜色："
 
-#: optiondialog.cpp:690
+#: optiondialog.cpp:672
 #, kde-format
 msgid "Current range background color:"
 msgstr "选区背景色："
 
-#: optiondialog.cpp:699
+#: optiondialog.cpp:681
 #, kde-format
 msgid "Current range diff background color:"
 msgstr "选区差异背景色："
 
-#: optiondialog.cpp:707
+#: optiondialog.cpp:689
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
 msgstr "手动对齐差异区域颜色："
 
-#: optiondialog.cpp:714
+#: optiondialog.cpp:696
 #, kde-format
 msgid "Folder Comparison View:"
 msgstr "文件夹比较视图："
 
-#: optiondialog.cpp:720
+#: optiondialog.cpp:702
 #, kde-format
 msgid "Newest file color:"
 msgstr "最新文件颜色："
 
-#: optiondialog.cpp:725
+#: optiondialog.cpp:707
 #, kde-format
 msgid ""
 "Changing this color will only be effective when starting the next folder "
 "comparison."
 msgstr "颜色修改将在下次文件夹比较时生效。"
 
-#: optiondialog.cpp:730
+#: optiondialog.cpp:712
 #, kde-format
 msgid "Oldest file color:"
 msgstr "最旧文件颜色："
 
-#: optiondialog.cpp:739
+#: optiondialog.cpp:721
 #, kde-format
 msgid "Middle age file color:"
 msgstr "新旧之间的文件颜色："
 
-#: optiondialog.cpp:748
+#: optiondialog.cpp:730
 #, kde-format
 msgid "Color for missing files:"
 msgstr "缺失文件的颜色："
 
-#: optiondialog.cpp:762
+#: optiondialog.cpp:744
 #, kde-format
 msgid "Editor"
 msgstr "编辑"
 
-#: optiondialog.cpp:763
+#: optiondialog.cpp:745
 #, kde-format
 msgid "Editor Behavior"
 msgstr "编辑器行为"
 
-#: optiondialog.cpp:785
+#: optiondialog.cpp:767
 #, kde-format
 msgid "Tab inserts spaces"
 msgstr "空格代替制表符"
 
-#: optiondialog.cpp:789
+#: optiondialog.cpp:771
 #, kde-format
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
@@ -2449,27 +2393,27 @@ msgstr ""
 "启用：按下 tab 键后会产生相应数量的空格。\n"
 "禁用：会插入一个制表符。"
 
-#: optiondialog.cpp:794
+#: optiondialog.cpp:776
 #, kde-format
 msgid "Tab size:"
 msgstr "制表符大小："
 
-#: optiondialog.cpp:801
+#: optiondialog.cpp:783
 #, kde-format
 msgid "Auto indentation"
 msgstr "自动缩进"
 
-#: optiondialog.cpp:805
+#: optiondialog.cpp:787
 #, kde-format
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr "启用：前一行的缩进会应用到新一行。\n"
 
-#: optiondialog.cpp:808
+#: optiondialog.cpp:790
 #, kde-format
 msgid "Auto copy selection"
 msgstr "自动复制选区"
 
-#: optiondialog.cpp:812
+#: optiondialog.cpp:794
 #, kde-format
 msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
@@ -2478,25 +2422,25 @@ msgstr ""
 "开：选择的内容会复制到剪贴板。\n"
 "关：执行明确复制操作例如 Ctrl-C 才会复制到剪贴板。"
 
-#: optiondialog.cpp:822
+#: optiondialog.cpp:804
 #, kde-format
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr "Unix"
 
-#: optiondialog.cpp:823
+#: optiondialog.cpp:805
 #, kde-format
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
 msgstr "Dos/Windows"
 
-#: optiondialog.cpp:824
+#: optiondialog.cpp:806
 #, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
 msgstr "自动检测"
 
-#: optiondialog.cpp:827
+#: optiondialog.cpp:809
 #, kde-format
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
@@ -2505,22 +2449,22 @@ msgstr ""
 "当已编辑的文件保存时，会使用此设置的换行符。\n"
 "DOS/Windows：CR+LF；UNIX：LF；CR为0D，LF为0A"
 
-#: optiondialog.cpp:837
+#: optiondialog.cpp:819
 #, kde-format
 msgid "Diff"
 msgstr "差别"
 
-#: optiondialog.cpp:838
+#: optiondialog.cpp:820
 #, kde-format
 msgid "Diff Settings"
 msgstr "差异设置"
 
-#: optiondialog.cpp:861
+#: optiondialog.cpp:843
 #, kde-format
 msgid "Ignore numbers (treat as white space)"
 msgstr "忽略数字(作为空白字符处理)"
 
-#: optiondialog.cpp:865
+#: optiondialog.cpp:847
 #, kde-format
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore "
@@ -2530,42 +2474,42 @@ msgstr ""
 "在行匹配阶段忽略数字字符。(与忽略空白字符相似)\n"
 "可能对于比较带数值数据的文件有帮助。"
 
-#: optiondialog.cpp:869
+#: optiondialog.cpp:851
 #, kde-format
 msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "忽略 C/C++ 注释 (作为空白字符处理)"
 
-#: optiondialog.cpp:872
+#: optiondialog.cpp:854
 #, kde-format
 msgid "Treat C/C++ comments like white space."
 msgstr "C/C++ 注释作为空白字符处理。"
 
-#: optiondialog.cpp:875
+#: optiondialog.cpp:857
 #, kde-format
 msgid "Ignore case (treat as white space)"
 msgstr "忽略大小写(作为空白字符处理)"
 
-#: optiondialog.cpp:879
+#: optiondialog.cpp:861
 #, kde-format
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr "将大小写差异作为空白字符改动处理。('a'<=>'A')"
 
-#: optiondialog.cpp:882
+#: optiondialog.cpp:864
 #, kde-format
 msgid "Preprocessor command:"
 msgstr "预处理命令："
 
-#: optiondialog.cpp:887
+#: optiondialog.cpp:869
 #, kde-format
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr "用户定义的预处理。(详情见文档)"
 
-#: optiondialog.cpp:890
+#: optiondialog.cpp:872
 #, kde-format
 msgid "Line-matching preprocessor command:"
 msgstr "行匹配预处理命令："
 
-#: optiondialog.cpp:895
+#: optiondialog.cpp:877
 #, kde-format
 msgid ""
 "This pre-processor is only used during line matching.\n"
@@ -2574,12 +2518,12 @@ msgstr ""
 "此预处理仅在行匹配时使用。\n"
 "(详情参见文档)"
 
-#: optiondialog.cpp:898
+#: optiondialog.cpp:880
 #, kde-format
 msgid "Try hard (slower)"
 msgstr "尽量仔细 (较慢)"
 
-#: optiondialog.cpp:902
+#: optiondialog.cpp:884
 #, kde-format
 msgid ""
 "Enables the --minimal option for the external diff.\n"
@@ -2588,12 +2532,12 @@ msgstr ""
 "为外部比较程序启用 --minimal 选项。\n"
 "大文件的分析会慢得多。"
 
-#: optiondialog.cpp:906
+#: optiondialog.cpp:888
 #, kde-format
 msgid "Align B and C for 3 input files"
 msgstr "3路比较时对齐B和C"
 
-#: optiondialog.cpp:910
+#: optiondialog.cpp:892
 #, kde-format
 msgid ""
 "Try to align B and C when comparing or merging three input files.\n"
@@ -2604,23 +2548,23 @@ msgstr ""
 "合并时不推荐，因为会导致情况更复杂。\n"
 "(默认禁用)"
 
-#: optiondialog.cpp:921
+#: optiondialog.cpp:903
 #, kde-format
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "合并"
 
-#: optiondialog.cpp:922
+#: optiondialog.cpp:904
 #, kde-format
 msgid "Merge Settings"
 msgstr "合并设置"
 
-#: optiondialog.cpp:945
+#: optiondialog.cpp:927
 #, kde-format
 msgid "Auto advance delay (ms):"
 msgstr "自动继续模式延迟 (毫秒)："
 
-#: optiondialog.cpp:951
+#: optiondialog.cpp:933
 #, kde-format
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
@@ -2629,121 +2573,121 @@ msgstr ""
 "在自动继续模式下，当前选择的结果会显示一段时间，然后才会跳转至下一个冲突。\n"
 "范围：0 至 2000 毫秒"
 
-#: optiondialog.cpp:955
+#: optiondialog.cpp:937
 #, kde-format
 msgid "Show info dialogs"
 msgstr "显示信息对话框"
 
-#: optiondialog.cpp:958
+#: optiondialog.cpp:940
 #, kde-format
 msgid "Show a dialog with information about the number of conflicts."
 msgstr "显示关于冲突数量信息的对话框"
 
-#: optiondialog.cpp:961
+#: optiondialog.cpp:943
 #, kde-format
 msgid "White space 2-file merge default:"
 msgstr "双文件合并出现空白字符冲突时，默认选择："
 
-#: optiondialog.cpp:966 optiondialog.cpp:979
+#: optiondialog.cpp:948 optiondialog.cpp:961
 #, kde-format
 msgid "Manual Choice"
 msgstr "手动选择"
 
-#: optiondialog.cpp:970 optiondialog.cpp:984
+#: optiondialog.cpp:952 optiondialog.cpp:966
 #, kde-format
 msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-"
 "only changes."
 msgstr "仅有空白字符差异时，允许合并算法自动选择其中一个文件的内容。"
 
-#: optiondialog.cpp:974
+#: optiondialog.cpp:956
 #, kde-format
 msgid "White space 3-file merge default:"
 msgstr "三文件合并出现空白字符冲突时，默认选择："
 
-#: optiondialog.cpp:988
+#: optiondialog.cpp:970
 #, kde-format
 msgid "Automatic Merge Regular Expression"
 msgstr "自动合并正则表达式"
 
-#: optiondialog.cpp:996 smalldialogs.cpp:387
+#: optiondialog.cpp:978 smalldialogs.cpp:387
 #, kde-format
 msgid "Auto merge regular expression:"
 msgstr "自动合并正则表达式："
 
-#: optiondialog.cpp:1004
+#: optiondialog.cpp:986
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
 msgstr "合并开始时运行正则表达式自动合并"
 
-#: optiondialog.cpp:1007
+#: optiondialog.cpp:989
 #, kde-format
 msgid ""
 "Run the merge for auto merge regular expressions\n"
 "immediately when a merge starts.\n"
 msgstr "合并开始时，立即运行自动合并正则表达式。\n"
 
-#: optiondialog.cpp:1012
+#: optiondialog.cpp:994
 #, kde-format
 msgid "Version Control History Merging"
 msgstr "版本控制历史合并"
 
-#: optiondialog.cpp:1020 smalldialogs.cpp:414
+#: optiondialog.cpp:1002 smalldialogs.cpp:414
 #, kde-format
 msgid "History start regular expression:"
 msgstr "版本管理历史首行正则表达式："
 
-#: optiondialog.cpp:1028 smalldialogs.cpp:442
+#: optiondialog.cpp:1010 smalldialogs.cpp:442
 #, kde-format
 msgid "History entry start regular expression:"
 msgstr "版本管理历史记录首行正则表达式："
 
-#: optiondialog.cpp:1044
+#: optiondialog.cpp:1026
 #, kde-format
 msgid "History merge sorting"
 msgstr "历史合并排序"
 
-#: optiondialog.cpp:1047
+#: optiondialog.cpp:1029
 #, kde-format
 msgid "Sort version control history by a key."
 msgstr "按照关键字排序版本控制历史记录"
 
-#: optiondialog.cpp:1057
+#: optiondialog.cpp:1039
 #, kde-format
 msgid "History entry start sort key order:"
 msgstr "历史条目开始排序关键字顺序："
 
-#: optiondialog.cpp:1067
+#: optiondialog.cpp:1049
 #, kde-format
 msgid "Merge version control history on merge start"
 msgstr "开始合并时合并版本控制历史"
 
-#: optiondialog.cpp:1070
+#: optiondialog.cpp:1052
 #, kde-format
 msgid "Run version control history automerge on merge start."
 msgstr "开始合并时运行版本控制历史自动合并。"
 
-#: optiondialog.cpp:1074
+#: optiondialog.cpp:1056
 #, kde-format
 msgid "Max number of history entries:"
 msgstr "最大历史记录数："
 
-#: optiondialog.cpp:1078
+#: optiondialog.cpp:1060
 #, kde-format
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr "舍弃指定数量后的记录，指定 -1 则不舍弃记录。"
 
-#: optiondialog.cpp:1082
+#: optiondialog.cpp:1064
 #, kde-format
 msgid "Test your regular expressions"
 msgstr "测试您的正则表达式"
 
-#: optiondialog.cpp:1087
+#: optiondialog.cpp:1069
 #, kde-format
 msgid "Irrelevant merge command:"
 msgstr "无关合并的指令："
 
-#: optiondialog.cpp:1092
+#: optiondialog.cpp:1074
 #, kde-format
 msgid ""
 "If specified this script is run after automerge\n"
@@ -2753,12 +2697,12 @@ msgstr ""
 "在此项不为空且执行自动合并后，如果没有检测到任何相关的更改，\n"
 "这段脚本则会使用“文件名1 文件名2 文件名3”的参数运行。"
 
-#: optiondialog.cpp:1097
+#: optiondialog.cpp:1079
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
 msgstr "合并无冲突时自动保存并退出"
 
-#: optiondialog.cpp:1101
+#: optiondialog.cpp:1083
 #, kde-format
 msgid ""
 "If KDiff3 was started for a file-merge from the command line and all\n"
@@ -2770,22 +2714,22 @@ msgstr ""
 "冲突都可以自动解决，那么自动保存文件并退出。\n"
 "(类似命令行选项\"--auto\")"
 
-#: optiondialog.cpp:1133
+#: optiondialog.cpp:1115
 #, kde-format
 msgid "Recursive folders"
 msgstr "递归文件夹"
 
-#: optiondialog.cpp:1136
+#: optiondialog.cpp:1118
 #, kde-format
 msgid "Whether to analyze subfolders or not."
 msgstr "是否分析子文件夹。"
 
-#: optiondialog.cpp:1138
+#: optiondialog.cpp:1120
 #, kde-format
 msgid "File pattern(s):"
 msgstr "文件名表达式："
 
-#: optiondialog.cpp:1144
+#: optiondialog.cpp:1126
 #, kde-format
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
@@ -2796,12 +2740,12 @@ msgstr ""
 "通配符：'*' 和 '?'\n"
 "可以使用分隔符：分号 ';' 来指定多个表达式。"
 
-#: optiondialog.cpp:1149
+#: optiondialog.cpp:1131
 #, kde-format
 msgid "File-anti-pattern(s):"
 msgstr "排除文件表达式："
 
-#: optiondialog.cpp:1155
+#: optiondialog.cpp:1137
 #, kde-format
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
@@ -2812,12 +2756,12 @@ msgstr ""
 "通配符：'*' 和 '?'\n"
 "可以使用分隔符：分号 ';' 来指定多个表达式。"
 
-#: optiondialog.cpp:1160
+#: optiondialog.cpp:1142
 #, kde-format
 msgid "Folder-anti-pattern(s):"
 msgstr "排除文件夹表达式："
 
-#: optiondialog.cpp:1166
+#: optiondialog.cpp:1148
 #, kde-format
 msgid ""
 "Pattern(s) of folders to be excluded from analysis. \n"
@@ -2828,12 +2772,12 @@ msgstr ""
 "通配符：“*”和“?”\n"
 "可以使用分隔符“;”来指定多个表达式。"
 
-#: optiondialog.cpp:1171
+#: optiondialog.cpp:1153
 #, kde-format
 msgid "Use Ignore File"
 msgstr "使用忽略文件"
 
-#: optiondialog.cpp:1175
+#: optiondialog.cpp:1157
 #, kde-format
 msgid ""
 "Extends the antipattern to anything that would be ignored by source "
@@ -2843,22 +2787,22 @@ msgstr ""
 "排除任何被版本控制系统忽略的任何文件及文件夹。\n"
 "通过本地忽略文件则可排除特定的文件夹。"
 
-#: optiondialog.cpp:1179
+#: optiondialog.cpp:1161
 #, kde-format
 msgid "Find hidden files and folders"
 msgstr "查找隐藏的文件和文件夹"
 
-#: optiondialog.cpp:1182
+#: optiondialog.cpp:1164
 #, kde-format
 msgid "Finds hidden files and folders."
 msgstr "查找隐藏的文件和文件夹。"
 
-#: optiondialog.cpp:1185
+#: optiondialog.cpp:1167
 #, kde-format
 msgid "Follow file links"
 msgstr "跟随文件链接"
 
-#: optiondialog.cpp:1189
+#: optiondialog.cpp:1171
 #, kde-format
 msgid ""
 "On: Compare the file the link points to.\n"
@@ -2867,12 +2811,12 @@ msgstr ""
 "启用：比较链接指向的文件。\n"
 "禁用：比较链接。"
 
-#: optiondialog.cpp:1193
+#: optiondialog.cpp:1175
 #, kde-format
 msgid "Follow folder links"
 msgstr "追踪文件夹链接"
 
-#: optiondialog.cpp:1197
+#: optiondialog.cpp:1179
 #, kde-format
 msgid ""
 "On: Compare the folder the link points to.\n"
@@ -2881,12 +2825,12 @@ msgstr ""
 "启用：比较链接指向的文件夹。\n"
 "禁用：只比较链接本身。"
 
-#: optiondialog.cpp:1206
+#: optiondialog.cpp:1188
 #, kde-format
 msgid "Case sensitive filename comparison"
 msgstr "文件名区分大小写"
 
-#: optiondialog.cpp:1210
+#: optiondialog.cpp:1192
 #, kde-format
 msgid ""
 "The folder comparison will compare files or folders when their names match.\n"
@@ -2896,12 +2840,12 @@ msgstr ""
 "文件夹比较功能将比较名字相同的文件或文件夹。\n"
 "若要区分大小写，则需启用此选项。 (Windows 上默认关闭，其他操作系统默认开启)"
 
-#: optiondialog.cpp:1214
+#: optiondialog.cpp:1196
 #, kde-format
 msgid "Unfold all subfolders on load"
 msgstr "加载时展开所有子文件夹"
 
-#: optiondialog.cpp:1218
+#: optiondialog.cpp:1200
 #, kde-format
 msgid ""
 "On: Unfold all subfolders when starting a folder diff.\n"
@@ -2910,12 +2854,12 @@ msgstr ""
 "启用：比较目录时展开所有子文件夹。\n"
 "禁用：子文件夹保持折叠。"
 
-#: optiondialog.cpp:1222
+#: optiondialog.cpp:1204
 #, kde-format
 msgid "Skip folder status report"
 msgstr "跳过文件夹状态报告"
 
-#: optiondialog.cpp:1226
+#: optiondialog.cpp:1208
 #, kde-format
 msgid ""
 "On: Do not show the Folder Comparison Status.\n"
@@ -2924,27 +2868,27 @@ msgstr ""
 "启用：不要显示文件夹比较状态。\n"
 "关闭：开始时显示状态对话框。"
 
-#: optiondialog.cpp:1230
+#: optiondialog.cpp:1212
 #, kde-format
 msgid "File Comparison Mode"
 msgstr "文件比较模式"
 
-#: optiondialog.cpp:1235
+#: optiondialog.cpp:1217
 #, kde-format
 msgid "Binary comparison"
 msgstr "二进制比较"
 
-#: optiondialog.cpp:1237
+#: optiondialog.cpp:1219
 #, kde-format
 msgid "Binary comparison of each file. (Default)"
 msgstr "用二进制模式比较每个文件。(默认)"
 
-#: optiondialog.cpp:1240
+#: optiondialog.cpp:1222
 #, kde-format
 msgid "Full analysis"
 msgstr "完全分析"
 
-#: optiondialog.cpp:1242
+#: optiondialog.cpp:1224
 #, kde-format
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
@@ -2953,12 +2897,12 @@ msgstr ""
 "进行完全分析并且在额外的列里显示统计信息。\n"
 "(比二进制模式慢，对于二进制文件该模式更慢。)"
 
-#: optiondialog.cpp:1246
+#: optiondialog.cpp:1228
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
 msgstr "信任文件大小和修改日期(不安全)"
 
-#: optiondialog.cpp:1248
+#: optiondialog.cpp:1230
 #, kde-format
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -2971,14 +2915,14 @@ msgstr ""
 "相同内容但修改日期不同的文件会被视为不同文件。\n"
 "对大文件夹或慢速网络很有帮助。"
 
-#: optiondialog.cpp:1253
+#: optiondialog.cpp:1235
 #, kde-format
 msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
 "(unsafe)"
 msgstr "信任文件大小和修改日期，但日期不相同时使用二进制比较(不安全)"
 
-#: optiondialog.cpp:1255
+#: optiondialog.cpp:1237
 #, kde-format
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -2990,12 +2934,12 @@ msgstr ""
 "相同内容但日期不同时，则比较它们的二进制文件。\n"
 "对大文件夹或慢速网络很有帮助。"
 
-#: optiondialog.cpp:1260
+#: optiondialog.cpp:1242
 #, kde-format
 msgid "Trust the size (unsafe)"
 msgstr "信任文件大小(不安全)"
 
-#: optiondialog.cpp:1262
+#: optiondialog.cpp:1244
 #, kde-format
 msgid ""
 "Assume that files are equal if their file lengths are equal.\n"
@@ -3005,12 +2949,12 @@ msgstr ""
 "文件长度相同的文件会被视为同一文件。\n"
 "对大文件夹或慢速网络 (下载时会改变日期) 很有帮助。"
 
-#: optiondialog.cpp:1269
+#: optiondialog.cpp:1251
 #, kde-format
 msgid "Synchronize folders"
 msgstr "同步文件夹"
 
-#: optiondialog.cpp:1273
+#: optiondialog.cpp:1255
 #, kde-format
 msgid ""
 "Offers to store files in both folders so that\n"
@@ -3021,12 +2965,12 @@ msgstr ""
 "以使两个文件夹保持一致。\n"
 "仅用于未指定目标的双文件夹比较中。"
 
-#: optiondialog.cpp:1279
+#: optiondialog.cpp:1261
 #, kde-format
 msgid "White space differences considered equal"
 msgstr "忽略空白字符差异"
 
-#: optiondialog.cpp:1283
+#: optiondialog.cpp:1265
 #, kde-format
 msgid ""
 "If files differ only by white space consider them equal.\n"
@@ -3035,12 +2979,12 @@ msgstr ""
 "如果文件只在空白字符上有差异，则认为它们相同。\n"
 "仅当选择完全分析时此选项才激活。"
 
-#: optiondialog.cpp:1289
+#: optiondialog.cpp:1271
 #, kde-format
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "复制较新的文件而不合并(不安全)"
 
-#: optiondialog.cpp:1293
+#: optiondialog.cpp:1275
 #, kde-format
 msgid ""
 "Do not look inside, just take the newer file.\n"
@@ -3051,29 +2995,29 @@ msgstr ""
 "(请在深思熟虑后使用此选项！)\n"
 "只在比较两个文件夹时有效。"
 
-#: optiondialog.cpp:1298
+#: optiondialog.cpp:1280
 #, kde-format
 msgid "Backup files (.orig)"
 msgstr "备份文件 (.orig)"
 
-#: optiondialog.cpp:1302
+#: optiondialog.cpp:1284
 #, kde-format
 msgid ""
 "If a file would be saved over an old file, then the old file\n"
 "will be renamed with a '.orig' extension instead of being deleted."
 msgstr "保存文件会覆盖旧文件时，旧文件将被附加“.orig”扩展名而不是被删除。"
 
-#: optiondialog.cpp:1311 optiondialog.cpp:1312
+#: optiondialog.cpp:1293 optiondialog.cpp:1294
 #, kde-format
 msgid "Regional Settings"
 msgstr "区域设置"
 
-#: optiondialog.cpp:1335
+#: optiondialog.cpp:1317
 #, kde-format
 msgid "Use the same encoding for everything:"
 msgstr "所有内容使用同一编码："
 
-#: optiondialog.cpp:1339
+#: optiondialog.cpp:1321
 #, kde-format
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
@@ -3082,17 +3026,17 @@ msgstr ""
 "启用此选项将使得只更改第一个编码设置即可更改全部文件的编码。\n"
 "如果需要为每个文件设置不同的编码，请禁用此选项。"
 
-#: optiondialog.cpp:1343
+#: optiondialog.cpp:1325
 #, kde-format
 msgid "Note: Local Encoding is \"%1\""
 msgstr "注意：本地编码为“%1”"
 
-#: optiondialog.cpp:1347
+#: optiondialog.cpp:1329
 #, kde-format
 msgid "File Encoding for A:"
 msgstr "A 的文字编码："
 
-#: optiondialog.cpp:1354
+#: optiondialog.cpp:1336
 #, kde-format
 msgid ""
 "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
@@ -3104,32 +3048,32 @@ msgstr ""
 "如果文件非 Unicode 编码，将使用选择的编码作为后备。\n"
 "(Unicode 检测取决于文件的第一个字节)"
 
-#: optiondialog.cpp:1357 optiondialog.cpp:1368 optiondialog.cpp:1379
+#: optiondialog.cpp:1339 optiondialog.cpp:1350 optiondialog.cpp:1361
 #, kde-format
 msgid "Auto Detect Unicode"
 msgstr "自动检测 Unicode"
 
-#: optiondialog.cpp:1363
+#: optiondialog.cpp:1345
 #, kde-format
 msgid "File Encoding for B:"
 msgstr "B 的文字编码："
 
-#: optiondialog.cpp:1374
+#: optiondialog.cpp:1356
 #, kde-format
 msgid "File Encoding for C:"
 msgstr "C 的文字编码："
 
-#: optiondialog.cpp:1385
+#: optiondialog.cpp:1367
 #, kde-format
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "合并输出和保存的文件编码："
 
-#: optiondialog.cpp:1390
+#: optiondialog.cpp:1372
 #, kde-format
 msgid "Auto Select"
 msgstr "自动选择"
 
-#: optiondialog.cpp:1394
+#: optiondialog.cpp:1376
 #, kde-format
 msgid ""
 "If enabled then the encoding from the input files is used.\n"
@@ -3139,17 +3083,17 @@ msgstr ""
 "如果启用，使用输入文件的文字编码。\n"
 "在模棱两可的情况下，对话框将询问用户文件保存编码。"
 
-#: optiondialog.cpp:1397
+#: optiondialog.cpp:1379
 #, kde-format
 msgid "File Encoding for Preprocessor Files:"
 msgstr "预处理文件的文件编码："
 
-#: optiondialog.cpp:1409
+#: optiondialog.cpp:1391
 #, kde-format
 msgid "Right To Left Language"
 msgstr "从右至左语言"
 
-#: optiondialog.cpp:1413
+#: optiondialog.cpp:1395
 #, kde-format
 msgid ""
 "Some languages are read from right to left.\n"
@@ -3158,22 +3102,22 @@ msgstr ""
 "一些语言是从右到左书写的。\n"
 "查看器和编辑器的显示方向将据此更改。"
 
-#: optiondialog.cpp:1423
+#: optiondialog.cpp:1405
 #, kde-format
 msgid "Integration"
 msgstr "整合"
 
-#: optiondialog.cpp:1424
+#: optiondialog.cpp:1406
 #, kde-format
 msgid "Integration Settings"
 msgstr "集成设置"
 
-#: optiondialog.cpp:1445
+#: optiondialog.cpp:1427
 #, kde-format
 msgid "Command line options to ignore:"
 msgstr "要忽略的命令行选项："
 
-#: optiondialog.cpp:1451
+#: optiondialog.cpp:1433
 #, kde-format
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
@@ -3184,12 +3128,12 @@ msgstr ""
 "当 KDiff3 被其他工具调用时忽略的命令行选项。\n"
 "多个选项请用分号“;\"分隔，以避免出现“未知参数”错误。"
 
-#: optiondialog.cpp:1456
+#: optiondialog.cpp:1438
 #, kde-format
 msgid "Quit also via Escape key"
 msgstr "通过 Esc 键退出"
 
-#: optiondialog.cpp:1460
+#: optiondialog.cpp:1442
 #, kde-format
 msgid ""
 "Fast method to exit.\n"
@@ -3198,7 +3142,7 @@ msgstr ""
 "快速退出方法。\n"
 "给那些习惯使用 Esc 键退出的人使用。"
 
-#: optiondialog.cpp:1518
+#: optiondialog.cpp:1500
 #, kde-format
 msgid "This resets all options. Not only those of the current topic."
 msgstr "这将重置全部选项，而不仅是当前页面的选项。"
@@ -3657,3 +3601,51 @@ msgstr "参数中有未预期的引号字符。"
 #, kde-format
 msgid "No program specified."
 msgstr "没有指定程序。"
+
+#~ msgid ""
+#~ "A version control history entry consists of several lines.\n"
+#~ "Specify the regular expression to detect the first line (without the "
+#~ "leading comment).\n"
+#~ "Use parentheses to group the keys you want to use for sorting.\n"
+#~ "If left empty, then KDiff3 assumes that empty lines separate history "
+#~ "entries.\n"
+#~ "See the documentation for details."
+#~ msgstr ""
+#~ "版本控制历史记录共由几行组成。\n"
+#~ "请手动指定正则表达式来检测首行 (不包括开头的注释)。\n"
+#~ "使用圆括号归类您想要用于排序的关键词。\n"
+#~ "若留空，KDiff3 会假定使用空行来分割历史记录。\n"
+#~ "请参阅文档了解详情。"
+
+#~ msgid ""
+#~ "Each pair of parentheses used in the regular expression for the history "
+#~ "start entry\n"
+#~ "groups a key that can be used for sorting.\n"
+#~ "Specify the list of keys (that are numbered in order of occurrence\n"
+#~ "starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
+#~ "If left empty, then no sorting will be done.\n"
+#~ "See the documentation for details."
+#~ msgstr ""
+#~ "历史开始条目的正则表达式中括号对将关键字分组能被用于排序。\n"
+#~ "指定关键字列表(使用数字，按出现顺序从1开始)使用 ',' 作为分隔符(例如 "
+#~ "\"4,5,6,1,2,3,7\")。\n"
+#~ "如果留空则不排序。\n"
+#~ "详情参见帮助文档。"
+
+#~ msgid ""
+#~ "Regular expression for lines where KDiff3 should automatically choose one "
+#~ "source.\n"
+#~ "When a line with a conflict matches the regular expression then\n"
+#~ "- if available - C, otherwise B will be chosen."
+#~ msgstr ""
+#~ "如果有多行正则表达式，KDiff3 会自动选择其中一个。\n"
+#~ "当一行冲突匹配到了正则表达式时，如果符合正则表达式，则选择 C，否则选择 B。"
+
+#~ msgid ""
+#~ "Regular expression for the start of the version control history entry.\n"
+#~ "Usually this line contains the \"$Log$\" keyword.\n"
+#~ "Default value: \".*\\$Log.*\\$.*\""
+#~ msgstr ""
+#~ "为版本控制历史记录开头使用的正则表达式。\n"
+#~ "通常这行会包含关键词“$Log$”。\n"
+#~ "默认值：“.*\\$Log.*\\$.*”"
