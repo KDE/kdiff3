@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-13 01:00+0000\n"
+"POT-Creation-Date: 2023-02-18 01:02+0000\n"
 "PO-Revision-Date: 2022-09-26 10:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -125,7 +125,7 @@ msgstr "Fitxer %1: Línia no disponible"
 msgid "Encoding:"
 msgstr "Codificació:"
 
-#: difftextwindow.cpp:1910 mergeresultwindow.cpp:2797 optiondialog.cpp:821
+#: difftextwindow.cpp:1910 mergeresultwindow.cpp:2797 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr "Estil del salt de línia:"
@@ -160,7 +160,7 @@ msgstr "Estil del salt de línia: %1"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: difftextwindow.cpp:1967 kdiff3.cpp:912
+#: difftextwindow.cpp:1967 kdiff3.cpp:913
 #, kde-format
 msgid "Top line"
 msgstr "Línia superior"
@@ -175,7 +175,7 @@ msgstr "Final"
 msgid "Open File"
 msgstr "Obre un fitxer"
 
-#: difftextwindow.cpp:2082 optiondialog.cpp:406
+#: difftextwindow.cpp:2082 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 bits"
@@ -356,7 +356,7 @@ msgstr ""
 "Actualment esteu fent una fusió de carpetes. Segur que voleu interrompre la "
 "fusió i tornar a explorar la carpeta?"
 
-#: directorymergewindow.cpp:697 kdiff3.cpp:766 kdiff3.cpp:776 kdiff3.cpp:788
+#: directorymergewindow.cpp:697 kdiff3.cpp:767 kdiff3.cpp:777 kdiff3.cpp:789
 #: mergeresultwindow.cpp:327 pdiff.cpp:857 pdiff.cpp:1722 pdiff.cpp:1732
 #, kde-format
 msgctxt "Error dialog title"
@@ -774,7 +774,7 @@ msgid "Dest"
 msgstr "Destinació"
 
 #: directorymergewindow.cpp:2739 directorymergewindow.cpp:2767
-#: optiondialog.cpp:1117 optiondialog.cpp:1118
+#: optiondialog.cpp:1099 optiondialog.cpp:1100
 #, kde-format
 msgid "Folder"
 msgstr "Carpeta"
@@ -1160,107 +1160,107 @@ msgstr "Fusió de directoris"
 msgid "Merge info"
 msgstr "Informació de la fusió"
 
-#: kdiff3.cpp:438
+#: kdiff3.cpp:439
 #, kde-format
 msgid "Option --auto ignored for folder comparison."
 msgstr "L'opció --auto s'ignora en comparar carpetes."
 
-#: kdiff3.cpp:519
+#: kdiff3.cpp:520
 #, kde-format
 msgid "Saving failed."
 msgstr "El desament ha fallat."
 
-#: kdiff3.cpp:544 pdiff.cpp:923
+#: kdiff3.cpp:545 pdiff.cpp:923
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "Ha fallat en obrir aquests fitxers:"
 
-#: kdiff3.cpp:553 pdiff.cpp:932
+#: kdiff3.cpp:554 pdiff.cpp:932
 #, kde-format
 msgid "File open error"
 msgstr "S'ha produït un error en obrir el fitxer"
 
-#: kdiff3.cpp:585
+#: kdiff3.cpp:586
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "Obre els documents per a comparar-los..."
 
-#: kdiff3.cpp:587
+#: kdiff3.cpp:588
 #, kde-format
 msgid "Reload"
 msgstr "Recarrega"
 
-#: kdiff3.cpp:590
+#: kdiff3.cpp:591
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "Desa el resultat de la fusió. S'han de resoldre tots els conflictes!"
 
-#: kdiff3.cpp:592
+#: kdiff3.cpp:593
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "Desa el document actual com a..."
 
-#: kdiff3.cpp:595
+#: kdiff3.cpp:596
 #, kde-format
 msgid "Print the differences"
 msgstr "Imprimeix les diferències"
 
-#: kdiff3.cpp:598
+#: kdiff3.cpp:599
 #, kde-format
 msgid "Quits the application"
 msgstr "Surt de l'aplicació"
 
-#: kdiff3.cpp:602
+#: kdiff3.cpp:603
 #, kde-format
 msgid "Undo last action."
 msgstr "Desfà l'última acció."
 
-#: kdiff3.cpp:606
+#: kdiff3.cpp:607
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "Retalla la secció seleccionada i la posa al porta-retalls"
 
-#: kdiff3.cpp:609
+#: kdiff3.cpp:610
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "Copia la secció seleccionada al porta-retalls"
 
-#: kdiff3.cpp:611
+#: kdiff3.cpp:612
 #, kde-format
 msgid "Pastes the clipboard contents to current position"
 msgstr "Enganxa el contingut del porta-retalls a la posició actual"
 
-#: kdiff3.cpp:614
+#: kdiff3.cpp:615
 #, kde-format
 msgid "Select everything in current window"
 msgstr "Selecciona tot el que hi ha a la finestra actual"
 
-#: kdiff3.cpp:617
+#: kdiff3.cpp:618
 #, kde-format
 msgid "Search for a string"
 msgstr "Cerca una cadena"
 
-#: kdiff3.cpp:619
+#: kdiff3.cpp:620
 #, kde-format
 msgid "Search again for the string"
 msgstr "Torna a cercar la cadena"
 
-#: kdiff3.cpp:624
+#: kdiff3.cpp:625
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "Activa/desactiva la barra d'estat"
 
-#: kdiff3.cpp:628
+#: kdiff3.cpp:629
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "Configura el KDiff3..."
 
-#: kdiff3.cpp:648
+#: kdiff3.cpp:649
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "Ves a la diferència actual"
 
-#: kdiff3.cpp:648
+#: kdiff3.cpp:649
 #, kde-format
 msgid ""
 "Current\n"
@@ -1269,12 +1269,12 @@ msgstr ""
 "Diferència\n"
 "actual"
 
-#: kdiff3.cpp:650
+#: kdiff3.cpp:651
 #, kde-format
 msgid "Go to First Delta"
 msgstr "Ves a la primera diferència"
 
-#: kdiff3.cpp:650
+#: kdiff3.cpp:651
 #, kde-format
 msgid ""
 "First\n"
@@ -1283,12 +1283,12 @@ msgstr ""
 "Primera\n"
 "diferència"
 
-#: kdiff3.cpp:652
+#: kdiff3.cpp:653
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "Ves a l'última diferència"
 
-#: kdiff3.cpp:652
+#: kdiff3.cpp:653
 #, kde-format
 msgid ""
 "Last\n"
@@ -1297,14 +1297,14 @@ msgstr ""
 "Última\n"
 "diferència"
 
-#: kdiff3.cpp:654
+#: kdiff3.cpp:655
 #, kde-format
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 "(S'ignoren les diferències en els espais en blanc quan «Mostra els espais en "
 "blanc» està desactivat)."
 
-#: kdiff3.cpp:655
+#: kdiff3.cpp:656
 #, kde-format
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
@@ -1313,12 +1313,12 @@ msgstr ""
 "(No s'ignoren les diferències en els espais en blanc quan «Mostra els espais "
 "en blanc» està desactivat)."
 
-#: kdiff3.cpp:656
+#: kdiff3.cpp:657
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "Ves a la diferència anterior"
 
-#: kdiff3.cpp:656
+#: kdiff3.cpp:657
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1327,12 +1327,12 @@ msgstr ""
 "Diferència\n"
 "anterior"
 
-#: kdiff3.cpp:658
+#: kdiff3.cpp:659
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "Ves a la diferència següent"
 
-#: kdiff3.cpp:658
+#: kdiff3.cpp:659
 #, kde-format
 msgid ""
 "Next\n"
@@ -1341,12 +1341,12 @@ msgstr ""
 "Diferència\n"
 "següent"
 
-#: kdiff3.cpp:660
+#: kdiff3.cpp:661
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "Ves al conflicte anterior"
 
-#: kdiff3.cpp:660
+#: kdiff3.cpp:661
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1355,12 +1355,12 @@ msgstr ""
 "Conflicte\n"
 "anterior"
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:663
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "Ves al conflicte següent"
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:663
 #, kde-format
 msgid ""
 "Next\n"
@@ -1369,12 +1369,12 @@ msgstr ""
 "Conflicte\n"
 "següent"
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:665
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "Ves al conflicte no resolt anterior"
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:665
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1383,12 +1383,12 @@ msgstr ""
 "No resolt\n"
 "anterior"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:667
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "Ves al conflicte no resolt següent"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:667
 #, kde-format
 msgid ""
 "Next\n"
@@ -1397,13 +1397,13 @@ msgstr ""
 "No resolt\n"
 "següent"
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:669
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "Ves a la línia"
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:669
 #, kde-format
 msgctxt "Text used for toolbar button."
 msgid ""
@@ -1413,7 +1413,7 @@ msgstr ""
 "Va a la\n"
 "línia"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:670
 #, kde-format
 msgid ""
 ".\n"
@@ -1422,13 +1422,13 @@ msgstr ""
 ".\n"
 "Va a la línia especificada."
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:671
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "Selecciona línies d'A"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:671
 #, kde-format
 msgctxt "Text used for select A toolbar button."
 msgid ""
@@ -1438,13 +1438,13 @@ msgstr ""
 "Escull\n"
 "A"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:672
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "Selecciona línies de B"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:672
 #, kde-format
 msgctxt "Text used for select B when toolbar button."
 msgid ""
@@ -1454,13 +1454,13 @@ msgstr ""
 "Escull\n"
 "B"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:673
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "Selecciona línies de C"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:673
 #, kde-format
 msgctxt "Text used for select C toolbar button."
 msgid ""
@@ -1470,7 +1470,7 @@ msgstr ""
 "Escull\n"
 "C"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:674
 #, kde-format
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
@@ -1478,7 +1478,7 @@ msgstr ""
 "Ves automàticament al conflicte no resolt següent després de seleccionar una "
 "font"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:674
 #, kde-format
 msgctxt "Auto goto next unsolced toolbar text."
 msgid ""
@@ -1488,12 +1488,12 @@ msgstr ""
 "Automàticament\n"
 "al següent"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:676
 #, kde-format
 msgid "Show Space && Tabulator Characters"
 msgstr "Mostra els caràcters d'espai en blanc i els de tabulació"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:676
 #, kde-format
 msgctxt "Show whitespace toolbar text."
 msgid ""
@@ -1503,12 +1503,12 @@ msgstr ""
 "Caràcters\n"
 "en blanc"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:677
 #, kde-format
 msgid "Show White Space"
 msgstr "Mostra els espais en blanc"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:677
 #, kde-format
 msgctxt "Show whitespace changes toolbar text."
 msgid ""
@@ -1518,12 +1518,12 @@ msgstr ""
 "Diferències\n"
 "d'espais"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:679
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "Mostra els números de les línies"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:679
 #, kde-format
 msgctxt "Show line numbers toolbar text"
 msgid ""
@@ -1533,201 +1533,201 @@ msgstr ""
 "Números\n"
 "de línia"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:681
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "Resol automàticament els conflictes senzills"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:682
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "Estableix les diferències com a conflictes"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:683
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "Executa la fusió automàtica amb l'expressió regular"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:684
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "Resol automàticament els conflictes cronològics"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:685
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "Divideix les diferències a la selecció"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:686
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "Uneix les diferències seleccionades"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:688
 #, kde-format
 msgid "Show Window A"
 msgstr "Mostra la finestra A"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Show Window B"
 msgstr "Mostra la finestra B"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:690
 #, kde-format
 msgid "Show Window C"
 msgstr "Mostra la finestra C"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:692
 #, kde-format
 msgid "Normal Overview"
 msgstr "Visió de conjunt normal"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:693
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "Visió de conjunt d'A contra B"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:694
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "Visió de conjunt d'A contra C"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:695
 #, kde-format
 msgid "B vs. C Overview"
 msgstr "Visió de conjunt de B contra C"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:696
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "Ajusta les línies a les finestres de diferències"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:697
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "Afegeix alineació manual de les diferències"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:698
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "Neteja totes les alineacions manuals de les diferències"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:700
 #, kde-format
 msgid "Focus Next Window"
 msgstr "Focus a la finestra següent"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:701
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "Focus a la finestra anterior"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "Commuta l'orientació de les divisions"
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:704
 #, kde-format
 msgid "Folder && Text Split Screen View"
 msgstr "Vista de pantalla dividida en carpetes i text"
 
-#: kdiff3.cpp:705
+#: kdiff3.cpp:706
 #, kde-format
 msgid "Toggle Between Folder && Text View"
 msgstr "Commuta entre la vista de carpetes i text"
 
-#: kdiff3.cpp:726 kdiff3.cpp:821 kdiff3.cpp:846 kdiff3.cpp:1126 kdiff3.cpp:1147
+#: kdiff3.cpp:727 kdiff3.cpp:822 kdiff3.cpp:847 kdiff3.cpp:1127 kdiff3.cpp:1148
 #: pdiff.cpp:942 pdiff.cpp:1009 pdiff.cpp:1045 pdiff.cpp:1054 pdiff.cpp:1112
 #: pdiff.cpp:1120
 #, kde-format
 msgid "Ready."
 msgstr "Preparat."
 
-#: kdiff3.cpp:765 pdiff.cpp:1721
+#: kdiff3.cpp:766 pdiff.cpp:1721
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "El resultat de la fusió no s'ha desat."
 
-#: kdiff3.cpp:767
+#: kdiff3.cpp:768
 #, kde-format
 msgid "Save && Quit"
 msgstr "Desa i surt"
 
-#: kdiff3.cpp:768
+#: kdiff3.cpp:769
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "Surt sense desar"
 
-#: kdiff3.cpp:776 pdiff.cpp:1732
+#: kdiff3.cpp:777 pdiff.cpp:1732
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "Ha fallat en desar el resultat de la fusió."
 
-#: kdiff3.cpp:787 pdiff.cpp:856
+#: kdiff3.cpp:788 pdiff.cpp:856
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr ""
 "Actualment esteu fent una fusió de carpetes. Segur que la voleu interrompre?"
 
-#: kdiff3.cpp:810
+#: kdiff3.cpp:811
 #, kde-format
 msgid "Saving file..."
 msgstr "S'està desant el fitxer..."
 
-#: kdiff3.cpp:827
+#: kdiff3.cpp:828
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "S'està desant el fitxer amb un nom nou..."
 
-#: kdiff3.cpp:829
+#: kdiff3.cpp:830
 #, kde-format
 msgid "Save As..."
 msgstr "Desa com a..."
 
-#: kdiff3.cpp:854
+#: kdiff3.cpp:855
 #, kde-format
 msgid "Printing not implemented."
 msgstr "Impressió no implementada."
 
-#: kdiff3.cpp:895
+#: kdiff3.cpp:896
 #, kde-format
 msgid "Printing..."
 msgstr "S'està imprimint..."
 
-#: kdiff3.cpp:1000
+#: kdiff3.cpp:1001
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr "S'està imprimint la pàgina %1 de %2"
 
-#: kdiff3.cpp:1059
+#: kdiff3.cpp:1060
 #, kde-format
 msgid " (Selection)"
 msgstr " (Selecció)"
 
-#: kdiff3.cpp:1088
+#: kdiff3.cpp:1089
 #, kde-format
 msgid "Printing completed."
 msgstr "Impressió completada."
 
-#: kdiff3.cpp:1092
+#: kdiff3.cpp:1093
 #, kde-format
 msgid "Printing aborted."
 msgstr "S'ha interromput la impressió."
 
-#: kdiff3.cpp:1099
+#: kdiff3.cpp:1100
 #, kde-format
 msgid "Exiting..."
 msgstr "S'està sortint..."
 
-#: kdiff3.cpp:1110
+#: kdiff3.cpp:1111
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "S'està commutant la barra d'eines..."
 
-#: kdiff3.cpp:1131
+#: kdiff3.cpp:1132
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "Commuta la barra d'estat..."
@@ -2242,78 +2242,13 @@ msgstr "C (opcional):"
 msgid "Folder..."
 msgstr "Carpeta..."
 
-#: optiondialog.cpp:48
-#, kde-format
-msgid ""
-"A version control history entry consists of several lines.\n"
-"Specify the regular expression to detect the first line (without the leading "
-"comment).\n"
-"Use parentheses to group the keys you want to use for sorting.\n"
-"If left empty, then KDiff3 assumes that empty lines separate history "
-"entries.\n"
-"See the documentation for details."
-msgstr ""
-"Les entrades de l'historial del control de versions consten de diverses "
-"línies.\n"
-"Especifiqueu l'expressió regular per a detectar la primera línia (sense el "
-"comentari inicial).\n"
-"Useu parèntesis per a agrupar les claus que vulgueu usar per a ordenar-les.\n"
-"Si es deixa en blanc, el KDiff3 assumeix que les línies en blanc separen les "
-"entrades de l'historial.\n"
-"Per a més detalls, vegeu la documentació."
-
-#: optiondialog.cpp:53
-#, kde-format
-msgid ""
-"Each pair of parentheses used in the regular expression for the history "
-"start entry\n"
-"groups a key that can be used for sorting.\n"
-"Specify the list of keys (that are numbered in order of occurrence\n"
-"starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
-"If left empty, then no sorting will be done.\n"
-"See the documentation for details."
-msgstr ""
-"Cada parell de parèntesis usats en l'expressió regular per a l'inici de "
-"l'entrada de l'historial\n"
-"agrupa una clau que es pot usar per a ordenar.\n"
-"Especifica la llista de claus (que estan numerades en ordre d'ocurrència\n"
-"començant per 1) usant «,» com a separador (p. ex. «4,5,6,1,2,3,7»).\n"
-"Si es deixa en blanc, no s'ordenarà.\n"
-"Per a més detalls, vegeu la documentació."
-
-#: optiondialog.cpp:59
-#, kde-format
-msgid ""
-"Regular expression for lines where KDiff3 should automatically choose one "
-"source.\n"
-"When a line with a conflict matches the regular expression then\n"
-"- if available - C, otherwise B will be chosen."
-msgstr ""
-"Expressió regular per a les línies en què el KDiff3 hauria d'escollir una "
-"font automàticament.\n"
-"Quan una línia amb un conflicte concorda amb l'expressió regular, aleshores\n"
-"-si està disponible- s'escollirà C, si no, B."
-
-# skip-rule: t-pu_sp
-#: optiondialog.cpp:62
-#, kde-format
-msgid ""
-"Regular expression for the start of the version control history entry.\n"
-"Usually this line contains the \"$Log$\" keyword.\n"
-"Default value: \".*\\$Log.*\\$.*\""
-msgstr ""
-"Expressió regular per a l'inici de les entrades de l'historial del control "
-"de versions.\n"
-"Normalment aquesta línia conté la paraula clau «$Log$».\n"
-"Valor per defecte: «.*\\$Log.*\\$.*»"
-
-#: optiondialog.cpp:124 optiondialog.cpp:136
+#: optiondialog.cpp:106 optiondialog.cpp:118
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
 msgstr "sense"
 
-#: optiondialog.cpp:126 optiondialog.cpp:138
+#: optiondialog.cpp:108 optiondialog.cpp:120
 #, kde-format
 msgctxt "Font sample display, %1 = family, %2 = style, %3 = size"
 msgid ""
@@ -2325,123 +2260,123 @@ msgstr ""
 "\n"
 "Exemple:"
 
-#: optiondialog.cpp:407
+#: optiondialog.cpp:389
 #, kde-format
 msgid "Unicode"
 msgstr "Unicode"
 
-#: optiondialog.cpp:408
+#: optiondialog.cpp:390
 #, kde-format
 msgid "Latin1"
 msgstr "Latin1"
 
-#: optiondialog.cpp:427
+#: optiondialog.cpp:409
 #, kde-format
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "Canvia això si els caràcters no ASCII no es mostren correctament."
 
-#: optiondialog.cpp:516
+#: optiondialog.cpp:498
 #, kde-format
 msgid "Configure"
 msgstr "Configura"
 
-#: optiondialog.cpp:555
+#: optiondialog.cpp:537
 #, kde-format
 msgid "Font"
 msgstr "Tipus de lletra"
 
-#: optiondialog.cpp:557
+#: optiondialog.cpp:539
 #, kde-format
 msgid "Editor & Diff Output Font"
 msgstr "Tipus de lletra de l'editor i la sortida de diferències"
 
-#: optiondialog.cpp:575
+#: optiondialog.cpp:557
 #, kde-format
 msgid "Application font"
 msgstr "Tipus de lletra de l'aplicació"
 
-#: optiondialog.cpp:580
+#: optiondialog.cpp:562
 #, kde-format
 msgid "File view font"
 msgstr "Tipus de lletra de la vista de fitxers"
 
-#: optiondialog.cpp:599
+#: optiondialog.cpp:581
 #, kde-format
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "Color"
 
-#: optiondialog.cpp:600
+#: optiondialog.cpp:582
 #, kde-format
 msgid "Colors Settings"
 msgstr "Arranjament dels colors"
 
-#: optiondialog.cpp:625
+#: optiondialog.cpp:607
 #, kde-format
 msgid "Editor and Diff Views:"
 msgstr "Vistes de l'editor i les diferències:"
 
-#: optiondialog.cpp:633
+#: optiondialog.cpp:615
 #, kde-format
 msgid "Foreground color:"
 msgstr "Color de primer pla:"
 
-#: optiondialog.cpp:641
+#: optiondialog.cpp:623
 #, kde-format
 msgid "Background color:"
 msgstr "Color de fons:"
 
-#: optiondialog.cpp:651
+#: optiondialog.cpp:633
 #, kde-format
 msgid "Diff background color:"
 msgstr "Color de fons de les diferències:"
 
-#: optiondialog.cpp:660
+#: optiondialog.cpp:642
 #, kde-format
 msgid "Color A:"
 msgstr "Color A:"
 
-#: optiondialog.cpp:669
+#: optiondialog.cpp:651
 #, kde-format
 msgid "Color B:"
 msgstr "Color B:"
 
-#: optiondialog.cpp:678
+#: optiondialog.cpp:660
 #, kde-format
 msgid "Color C:"
 msgstr "Color C:"
 
-#: optiondialog.cpp:686
+#: optiondialog.cpp:668
 #, kde-format
 msgid "Conflict color:"
 msgstr "Color dels conflictes:"
 
-#: optiondialog.cpp:695
+#: optiondialog.cpp:677
 #, kde-format
 msgid "Current range background color:"
 msgstr "Color de fons de l'interval actual:"
 
-#: optiondialog.cpp:704
+#: optiondialog.cpp:686
 #, kde-format
 msgid "Current range diff background color:"
 msgstr "Color de fons de les diferències de l'interval actual:"
 
-#: optiondialog.cpp:712
+#: optiondialog.cpp:694
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
 msgstr "Color per als intervals de diferències alineats manualment:"
 
-#: optiondialog.cpp:719
+#: optiondialog.cpp:701
 #, kde-format
 msgid "Folder Comparison View:"
 msgstr "Vista en la comparació de carpetes:"
 
-#: optiondialog.cpp:725
+#: optiondialog.cpp:707
 #, kde-format
 msgid "Newest file color:"
 msgstr "Color del fitxer més nou:"
 
-#: optiondialog.cpp:730
+#: optiondialog.cpp:712
 #, kde-format
 msgid ""
 "Changing this color will only be effective when starting the next folder "
@@ -2450,37 +2385,37 @@ msgstr ""
 "El canvi d'aquest color només serà efectiu quan es comenci la propera "
 "comparació de carpetes."
 
-#: optiondialog.cpp:735
+#: optiondialog.cpp:717
 #, kde-format
 msgid "Oldest file color:"
 msgstr "Color del fitxer més antic:"
 
-#: optiondialog.cpp:744
+#: optiondialog.cpp:726
 #, kde-format
 msgid "Middle age file color:"
 msgstr "Color del fitxer d'edat intermèdia:"
 
-#: optiondialog.cpp:753
+#: optiondialog.cpp:735
 #, kde-format
 msgid "Color for missing files:"
 msgstr "Color dels fitxers no disponibles:"
 
-#: optiondialog.cpp:767
+#: optiondialog.cpp:749
 #, kde-format
 msgid "Editor"
 msgstr "Editor"
 
-#: optiondialog.cpp:768
+#: optiondialog.cpp:750
 #, kde-format
 msgid "Editor Behavior"
 msgstr "Comportament de l'editor"
 
-#: optiondialog.cpp:790
+#: optiondialog.cpp:772
 #, kde-format
 msgid "Tab inserts spaces"
 msgstr "El tabulador insereix espais"
 
-#: optiondialog.cpp:794
+#: optiondialog.cpp:776
 #, kde-format
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
@@ -2490,28 +2425,28 @@ msgstr ""
 "blanc.\n"
 "Desactivat: S'inserirà un caràcter de tabulació."
 
-#: optiondialog.cpp:799
+#: optiondialog.cpp:781
 #, kde-format
 msgid "Tab size:"
 msgstr "Mida de la tabulació:"
 
-#: optiondialog.cpp:806
+#: optiondialog.cpp:788
 #, kde-format
 msgid "Auto indentation"
 msgstr "Sagnat automàtic"
 
-#: optiondialog.cpp:810
+#: optiondialog.cpp:792
 #, kde-format
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr ""
 "Activat: S'usarà el sagnat de la línia prèvia per a les línies noves.\n"
 
-#: optiondialog.cpp:813
+#: optiondialog.cpp:795
 #, kde-format
 msgid "Auto copy selection"
 msgstr "Copia la selecció automàticament"
 
-#: optiondialog.cpp:817
+#: optiondialog.cpp:799
 #, kde-format
 msgid ""
 "On: Any selection is immediately written to the clipboard.\n"
@@ -2520,25 +2455,25 @@ msgstr ""
 "Activat: Totes les seleccions es desaran immediatament al porta-retalls.\n"
 "Desactivat: Haureu de copiar explícitament, p. ex. mitjançant Ctrl-C."
 
-#: optiondialog.cpp:827
+#: optiondialog.cpp:809
 #, kde-format
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr "Unix"
 
-#: optiondialog.cpp:828
+#: optiondialog.cpp:810
 #, kde-format
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
 msgstr "DOS/Windows"
 
-#: optiondialog.cpp:829
+#: optiondialog.cpp:811
 #, kde-format
 msgctxt "Automatically detected line ending"
 msgid "Autodetect"
 msgstr "Detecta automàticament"
 
-#: optiondialog.cpp:832
+#: optiondialog.cpp:814
 #, kde-format
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
@@ -2547,22 +2482,22 @@ msgstr ""
 "Estableix els finals de línia quan es desin els fitxers editats.\n"
 "Dos/Windows: CR+LF; UNIX: LF; amb CR=0D, LF=0A"
 
-#: optiondialog.cpp:842
+#: optiondialog.cpp:824
 #, kde-format
 msgid "Diff"
 msgstr "Diferència"
 
-#: optiondialog.cpp:843
+#: optiondialog.cpp:825
 #, kde-format
 msgid "Diff Settings"
 msgstr "Arranjament del diff"
 
-#: optiondialog.cpp:866
+#: optiondialog.cpp:848
 #, kde-format
 msgid "Ignore numbers (treat as white space)"
 msgstr "Ignora els números (tracta'ls com a espais en blanc)"
 
-#: optiondialog.cpp:870
+#: optiondialog.cpp:852
 #, kde-format
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore "
@@ -2573,46 +2508,46 @@ msgstr ""
 "ignorar els espais en blanc).\n"
 "Pot ajudar a comparar fitxers amb dades numèriques."
 
-#: optiondialog.cpp:874
+#: optiondialog.cpp:856
 #, kde-format
 msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "Ignora els comentaris de C/C++ (tracta'ls com a espais en blanc)"
 
-#: optiondialog.cpp:877
+#: optiondialog.cpp:859
 #, kde-format
 msgid "Treat C/C++ comments like white space."
 msgstr "Tracta els comentaris de C/C++ com si fossin espais en blanc."
 
-#: optiondialog.cpp:880
+#: optiondialog.cpp:862
 #, kde-format
 msgid "Ignore case (treat as white space)"
 msgstr "Ignora les majúscules/minúscules (tracta-les com a espais en blanc)"
 
-#: optiondialog.cpp:884
+#: optiondialog.cpp:866
 #, kde-format
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr ""
 "Tracta les diferències de caixa com si fossin canvis d'espais en blanc(«a» "
 "<=> «A»)"
 
-#: optiondialog.cpp:887
+#: optiondialog.cpp:869
 #, kde-format
 msgid "Preprocessor command:"
 msgstr "Ordre del preprocessador:"
 
-#: optiondialog.cpp:892
+#: optiondialog.cpp:874
 #, kde-format
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr ""
 "Preprocessament definit per l'usuari. (Vegeu la documentació per als "
 "detalls)."
 
-#: optiondialog.cpp:895
+#: optiondialog.cpp:877
 #, kde-format
 msgid "Line-matching preprocessor command:"
 msgstr "Ordre del preprocessador de coincidència de les línies:"
 
-#: optiondialog.cpp:900
+#: optiondialog.cpp:882
 #, kde-format
 msgid ""
 "This pre-processor is only used during line matching.\n"
@@ -2621,12 +2556,12 @@ msgstr ""
 "Aquest preprocessador només s'usa durant l'encaix de línies.\n"
 "(Per a més detalls vegeu la documentació)."
 
-#: optiondialog.cpp:903
+#: optiondialog.cpp:885
 #, kde-format
 msgid "Try hard (slower)"
 msgstr "Esforça't (més lent)"
 
-#: optiondialog.cpp:907
+#: optiondialog.cpp:889
 #, kde-format
 msgid ""
 "Enables the --minimal option for the external diff.\n"
@@ -2635,12 +2570,12 @@ msgstr ""
 "Activa l'opció --minimal per al «diff» extern.\n"
 "L'anàlisi de fitxers grans serà encara més lenta."
 
-#: optiondialog.cpp:911
+#: optiondialog.cpp:893
 #, kde-format
 msgid "Align B and C for 3 input files"
 msgstr "Alinea B i C per a 3 fitxers d'entrada"
 
-#: optiondialog.cpp:915
+#: optiondialog.cpp:897
 #, kde-format
 msgid ""
 "Try to align B and C when comparing or merging three input files.\n"
@@ -2651,23 +2586,23 @@ msgstr ""
 "No recomanat per a fusionar, ja que pot ser més complicat.\n"
 "(Desactivat per defecte)."
 
-#: optiondialog.cpp:926
+#: optiondialog.cpp:908
 #, kde-format
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "Fusió"
 
-#: optiondialog.cpp:927
+#: optiondialog.cpp:909
 #, kde-format
 msgid "Merge Settings"
 msgstr "Arranjament de la fusió"
 
-#: optiondialog.cpp:950
+#: optiondialog.cpp:932
 #, kde-format
 msgid "Auto advance delay (ms):"
 msgstr "Retard de l'avanç automàtic (ms):"
 
-#: optiondialog.cpp:956
+#: optiondialog.cpp:938
 #, kde-format
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
@@ -2677,27 +2612,27 @@ msgstr ""
 "de la selecció actual durant el temps especificat, abans de saltar al\n"
 "conflicte següent. Interval: 0-2000 ms"
 
-#: optiondialog.cpp:960
+#: optiondialog.cpp:942
 #, kde-format
 msgid "Show info dialogs"
 msgstr "Mostra els diàlegs informatius"
 
-#: optiondialog.cpp:963
+#: optiondialog.cpp:945
 #, kde-format
 msgid "Show a dialog with information about the number of conflicts."
 msgstr "Mostra un diàleg amb informació sobre el nombre de conflictes."
 
-#: optiondialog.cpp:966
+#: optiondialog.cpp:948
 #, kde-format
 msgid "White space 2-file merge default:"
 msgstr "Opció per defecte dels espais en blanc en la fusió de 2 fitxers:"
 
-#: optiondialog.cpp:971 optiondialog.cpp:984
+#: optiondialog.cpp:953 optiondialog.cpp:966
 #, kde-format
 msgid "Manual Choice"
 msgstr "Selecció manual"
 
-#: optiondialog.cpp:975 optiondialog.cpp:989
+#: optiondialog.cpp:957 optiondialog.cpp:971
 #, kde-format
 msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-"
@@ -2706,28 +2641,28 @@ msgstr ""
 "Permet que l'algoritme de fusió seleccioni automàticament una entrada per "
 "als canvis d'espais en blanc."
 
-#: optiondialog.cpp:979
+#: optiondialog.cpp:961
 #, kde-format
 msgid "White space 3-file merge default:"
 msgstr "Opció per defecte dels espais en blanc en la fusió de 3 fitxers:"
 
-#: optiondialog.cpp:993
+#: optiondialog.cpp:975
 #, kde-format
 msgid "Automatic Merge Regular Expression"
 msgstr "Fusió automàtica amb l'expressió regular"
 
-#: optiondialog.cpp:1001 smalldialogs.cpp:373
+#: optiondialog.cpp:983 smalldialogs.cpp:373
 #, kde-format
 msgid "Auto merge regular expression:"
 msgstr "Fusiona automàticament amb l'expressió regular:"
 
-#: optiondialog.cpp:1009
+#: optiondialog.cpp:991
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
 msgstr ""
 "Executa la fusió automàtica amb l'expressió regular a l'inici de la fusió"
 
-#: optiondialog.cpp:1012
+#: optiondialog.cpp:994
 #, kde-format
 msgid ""
 "Run the merge for auto merge regular expressions\n"
@@ -2736,73 +2671,73 @@ msgstr ""
 "Fusiona automàticament amb les expressions regulars\n"
 "just en començar la fusió.\n"
 
-#: optiondialog.cpp:1017
+#: optiondialog.cpp:999
 #, kde-format
 msgid "Version Control History Merging"
 msgstr "Fusió de l'historial del control de versions"
 
-#: optiondialog.cpp:1025 smalldialogs.cpp:400
+#: optiondialog.cpp:1007 smalldialogs.cpp:400
 #, kde-format
 msgid "History start regular expression:"
 msgstr "Expressió regular per a l'inici de l'historial:"
 
-#: optiondialog.cpp:1033 smalldialogs.cpp:428
+#: optiondialog.cpp:1015 smalldialogs.cpp:428
 #, kde-format
 msgid "History entry start regular expression:"
 msgstr "Expressió regular per a l'inici d'entrada de l'historial:"
 
-#: optiondialog.cpp:1049
+#: optiondialog.cpp:1031
 #, kde-format
 msgid "History merge sorting"
 msgstr "Ordena la fusió de l'historial"
 
-#: optiondialog.cpp:1052
+#: optiondialog.cpp:1034
 #, kde-format
 msgid "Sort version control history by a key."
 msgstr "Ordena l'historial del control de versions amb una clau."
 
-#: optiondialog.cpp:1062
+#: optiondialog.cpp:1044
 #, kde-format
 msgid "History entry start sort key order:"
 msgstr ""
 "Criteri d'ordenació de les claus per a l'inici de l'entrada de l'historial:"
 
-#: optiondialog.cpp:1072
+#: optiondialog.cpp:1054
 #, kde-format
 msgid "Merge version control history on merge start"
 msgstr "Fusiona l'historial del control de versions quan es comenci a fusionar"
 
-#: optiondialog.cpp:1075
+#: optiondialog.cpp:1057
 #, kde-format
 msgid "Run version control history automerge on merge start."
 msgstr ""
 "Executa la fusió automàtica de l'historial del control de versions quan es "
 "comenci a fusionar."
 
-#: optiondialog.cpp:1079
+#: optiondialog.cpp:1061
 #, kde-format
 msgid "Max number of history entries:"
 msgstr "Nombre màxim d'entrades de l'historial:"
 
 # skip-rule: kct-cut
-#: optiondialog.cpp:1083
+#: optiondialog.cpp:1065
 #, kde-format
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr ""
 "Talla a partir d'un número especificat. Useu -1 per a un nombre infinit "
 "d'entrades."
 
-#: optiondialog.cpp:1087
+#: optiondialog.cpp:1069
 #, kde-format
 msgid "Test your regular expressions"
 msgstr "Comprova les expressions regulars"
 
-#: optiondialog.cpp:1092
+#: optiondialog.cpp:1074
 #, kde-format
 msgid "Irrelevant merge command:"
 msgstr "Ordre de fusió irrellevant:"
 
-#: optiondialog.cpp:1097
+#: optiondialog.cpp:1079
 #, kde-format
 msgid ""
 "If specified this script is run after automerge\n"
@@ -2813,12 +2748,12 @@ msgstr ""
 "quan no s'hagin detectat altres canvis apropiats.\n"
 "Cridat amb els paràmetres: nomdefitxer1 nomdefitxer2 nomdefitxer3"
 
-#: optiondialog.cpp:1102
+#: optiondialog.cpp:1084
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
 msgstr "En les fusions sense conflictes desa i surt automàticament"
 
-#: optiondialog.cpp:1106
+#: optiondialog.cpp:1088
 #, kde-format
 msgid ""
 "If KDiff3 was started for a file-merge from the command line and all\n"
@@ -2831,22 +2766,22 @@ msgstr ""
 "desa i surt.\n"
 "(Similar a l'opció de la línia d'ordres «--auto»)."
 
-#: optiondialog.cpp:1138
+#: optiondialog.cpp:1120
 #, kde-format
 msgid "Recursive folders"
 msgstr "Carpetes recursives"
 
-#: optiondialog.cpp:1141
+#: optiondialog.cpp:1123
 #, kde-format
 msgid "Whether to analyze subfolders or not."
 msgstr "Si analitzar o no les subcarpetes."
 
-#: optiondialog.cpp:1143
+#: optiondialog.cpp:1125
 #, kde-format
 msgid "File pattern(s):"
 msgstr "Patró/ons de fitxer:"
 
-#: optiondialog.cpp:1149
+#: optiondialog.cpp:1131
 #, kde-format
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
@@ -2857,12 +2792,12 @@ msgstr ""
 "Comodins: «*» i «?»\n"
 "Es poden especificar diversos patrons separant-los amb: «;»"
 
-#: optiondialog.cpp:1154
+#: optiondialog.cpp:1136
 #, kde-format
 msgid "File-anti-pattern(s):"
 msgstr "Negatiu del patró dels fitxers:"
 
-#: optiondialog.cpp:1160
+#: optiondialog.cpp:1142
 #, kde-format
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
@@ -2873,12 +2808,12 @@ msgstr ""
 "Comodins: «*» i «?»\n"
 "Es poden especificar diversos patrons separant-los amb: «;»"
 
-#: optiondialog.cpp:1165
+#: optiondialog.cpp:1147
 #, kde-format
 msgid "Folder-anti-pattern(s):"
 msgstr "Negatiu del/s patró/ons de les carpetes:"
 
-#: optiondialog.cpp:1171
+#: optiondialog.cpp:1153
 #, kde-format
 msgid ""
 "Pattern(s) of folders to be excluded from analysis. \n"
@@ -2889,12 +2824,12 @@ msgstr ""
 "Comodins: «*» i «?»\n"
 "Es poden especificar diversos patrons separant-los amb: «;»"
 
-#: optiondialog.cpp:1176
+#: optiondialog.cpp:1158
 #, kde-format
 msgid "Use Ignore File"
 msgstr "Usa el fitxer «Ignore»"
 
-#: optiondialog.cpp:1180
+#: optiondialog.cpp:1162
 #, kde-format
 msgid ""
 "Extends the antipattern to anything that would be ignored by source "
@@ -2906,22 +2841,22 @@ msgstr ""
 "Per mitjà dels fitxers locals per a ignorar, això pot ser específic de cada "
 "carpeta."
 
-#: optiondialog.cpp:1184
+#: optiondialog.cpp:1166
 #, kde-format
 msgid "Find hidden files and folders"
 msgstr "Cerca als fitxers i carpetes ocults"
 
-#: optiondialog.cpp:1187
+#: optiondialog.cpp:1169
 #, kde-format
 msgid "Finds hidden files and folders."
 msgstr "Cerca als fitxers i carpetes ocults."
 
-#: optiondialog.cpp:1190
+#: optiondialog.cpp:1172
 #, kde-format
 msgid "Follow file links"
 msgstr "Segueix els enllaços de fitxer"
 
-#: optiondialog.cpp:1194
+#: optiondialog.cpp:1176
 #, kde-format
 msgid ""
 "On: Compare the file the link points to.\n"
@@ -2930,12 +2865,12 @@ msgstr ""
 "Activat: Compara el fitxer al qual apunta l'enllaç.\n"
 "Desactivat: Compara els enllaços."
 
-#: optiondialog.cpp:1198
+#: optiondialog.cpp:1180
 #, kde-format
 msgid "Follow folder links"
 msgstr "Segueix els enllaços de carpeta"
 
-#: optiondialog.cpp:1202
+#: optiondialog.cpp:1184
 #, kde-format
 msgid ""
 "On: Compare the folder the link points to.\n"
@@ -2944,12 +2879,12 @@ msgstr ""
 "Activat: Compara la carpeta a la qual apunta l'enllaç.\n"
 "Desactivat: Compara els enllaços."
 
-#: optiondialog.cpp:1211
+#: optiondialog.cpp:1193
 #, kde-format
 msgid "Case sensitive filename comparison"
 msgstr "La comparació dels noms de fitxer distingeix majúscules i minúscules"
 
-#: optiondialog.cpp:1215
+#: optiondialog.cpp:1197
 #, kde-format
 msgid ""
 "The folder comparison will compare files or folders when their names match.\n"
@@ -2962,12 +2897,12 @@ msgstr ""
 "predeterminada, estarà desactivada en Windows, en els altres entorns estarà "
 "activada)."
 
-#: optiondialog.cpp:1219
+#: optiondialog.cpp:1201
 #, kde-format
 msgid "Unfold all subfolders on load"
 msgstr "Desplega totes les subcarpetes en carregar"
 
-#: optiondialog.cpp:1223
+#: optiondialog.cpp:1205
 #, kde-format
 msgid ""
 "On: Unfold all subfolders when starting a folder diff.\n"
@@ -2976,12 +2911,12 @@ msgstr ""
 "Activa: Desplega totes les subcarpetes en iniciar un «diff» de carpeta.\n"
 "Inactiva: Deixa plegades les subcarpetes."
 
-#: optiondialog.cpp:1227
+#: optiondialog.cpp:1209
 #, kde-format
 msgid "Skip folder status report"
 msgstr "Omet l'informe d'estat de la carpeta"
 
-#: optiondialog.cpp:1231
+#: optiondialog.cpp:1213
 #, kde-format
 msgid ""
 "On: Do not show the Folder Comparison Status.\n"
@@ -2990,27 +2925,27 @@ msgstr ""
 "Activa: No mostra l'estat de comparació de la carpeta.\n"
 "Inactiva: Mostra el diàleg d'estat en iniciar."
 
-#: optiondialog.cpp:1235
+#: optiondialog.cpp:1217
 #, kde-format
 msgid "File Comparison Mode"
 msgstr "Mode de comparació dels fitxers"
 
-#: optiondialog.cpp:1240
+#: optiondialog.cpp:1222
 #, kde-format
 msgid "Binary comparison"
 msgstr "Comparació binària"
 
-#: optiondialog.cpp:1242
+#: optiondialog.cpp:1224
 #, kde-format
 msgid "Binary comparison of each file. (Default)"
 msgstr "Comparació binària de cada fitxer. (Per defecte)"
 
-#: optiondialog.cpp:1245
+#: optiondialog.cpp:1227
 #, kde-format
 msgid "Full analysis"
 msgstr "Anàlisi completa"
 
-#: optiondialog.cpp:1247
+#: optiondialog.cpp:1229
 #, kde-format
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
@@ -3021,12 +2956,12 @@ msgstr ""
 "(Més lent que una comparació binària, més lent encara per als fitxers "
 "binaris)."
 
-#: optiondialog.cpp:1251
+#: optiondialog.cpp:1233
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
 msgstr "Confia en la mida i la data de modificació (insegur)"
 
-#: optiondialog.cpp:1253
+#: optiondialog.cpp:1235
 #, kde-format
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -3041,7 +2976,7 @@ msgstr ""
 "mostraran com si fossin diferents.\n"
 "Útil per a carpetes grans o xarxes lentes."
 
-#: optiondialog.cpp:1258
+#: optiondialog.cpp:1240
 #, kde-format
 msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
@@ -3050,7 +2985,7 @@ msgstr ""
 "Confia en la mida i la data dels fitxers però compara'ls binàriament si les "
 "dates no concorden (insegur)"
 
-#: optiondialog.cpp:1260
+#: optiondialog.cpp:1242
 #, kde-format
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -3063,12 +2998,12 @@ msgstr ""
 "Si les dates no són iguals però les mides sí, usa la comparació binària.\n"
 "Útil per a carpetes grans o xarxes lentes."
 
-#: optiondialog.cpp:1265
+#: optiondialog.cpp:1247
 #, kde-format
 msgid "Trust the size (unsafe)"
 msgstr "Confia en la mida (insegur)"
 
-#: optiondialog.cpp:1267
+#: optiondialog.cpp:1249
 #, kde-format
 msgid ""
 "Assume that files are equal if their file lengths are equal.\n"
@@ -3079,12 +3014,12 @@ msgstr ""
 "Útil per a carpetes grans o xarxes lentes quan la data es modifica durant la "
 "baixada."
 
-#: optiondialog.cpp:1274
+#: optiondialog.cpp:1256
 #, kde-format
 msgid "Synchronize folders"
 msgstr "Sincronitza les carpetes"
 
-#: optiondialog.cpp:1278
+#: optiondialog.cpp:1260
 #, kde-format
 msgid ""
 "Offers to store files in both folders so that\n"
@@ -3096,12 +3031,12 @@ msgstr ""
 "Només funciona quan es comparen dues carpetes sense especificar una "
 "destinació."
 
-#: optiondialog.cpp:1284
+#: optiondialog.cpp:1266
 #, kde-format
 msgid "White space differences considered equal"
 msgstr "Les diferències en els espais en blanc no es consideren"
 
-#: optiondialog.cpp:1288
+#: optiondialog.cpp:1270
 #, kde-format
 msgid ""
 "If files differ only by white space consider them equal.\n"
@@ -3111,12 +3046,12 @@ msgstr ""
 "iguals.\n"
 "Això només és actiu quan s'escull l'anàlisi completa."
 
-#: optiondialog.cpp:1294
+#: optiondialog.cpp:1276
 #, kde-format
 msgid "Copy newer instead of merging (unsafe)"
 msgstr "Copia el més nou en comptes de fusionar-los (insegur)"
 
-#: optiondialog.cpp:1298
+#: optiondialog.cpp:1280
 #, kde-format
 msgid ""
 "Do not look inside, just take the newer file.\n"
@@ -3127,12 +3062,12 @@ msgstr ""
 "(Useu això només si sabeu què esteu fent).\n"
 "Només és efectiu quan es comparen dues carpetes."
 
-#: optiondialog.cpp:1303
+#: optiondialog.cpp:1285
 #, kde-format
 msgid "Backup files (.orig)"
 msgstr "Fitxers de còpia de seguretat (.orig)"
 
-#: optiondialog.cpp:1307
+#: optiondialog.cpp:1289
 #, kde-format
 msgid ""
 "If a file would be saved over an old file, then the old file\n"
@@ -3141,17 +3076,17 @@ msgstr ""
 "Si un fitxer es desa sobre un fitxer més antic, llavors el fitxer antic\n"
 "es reanomenarà amb una extensió «.orig» en comptes de ser suprimit."
 
-#: optiondialog.cpp:1316 optiondialog.cpp:1317
+#: optiondialog.cpp:1298 optiondialog.cpp:1299
 #, kde-format
 msgid "Regional Settings"
 msgstr "Arranjament regional"
 
-#: optiondialog.cpp:1340
+#: optiondialog.cpp:1322
 #, kde-format
 msgid "Use the same encoding for everything:"
 msgstr "Usa la mateixa codificació a tot arreu:"
 
-#: optiondialog.cpp:1344
+#: optiondialog.cpp:1326
 #, kde-format
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
@@ -3161,17 +3096,17 @@ msgstr ""
 "primera.\n"
 "Desactiveu-ho si necessiteu opcions individuals diferents per a cada fitxer."
 
-#: optiondialog.cpp:1348
+#: optiondialog.cpp:1330
 #, kde-format
 msgid "Note: Local Encoding is \"%1\""
 msgstr "Nota: La codificació local és «%1»"
 
-#: optiondialog.cpp:1352
+#: optiondialog.cpp:1334
 #, kde-format
 msgid "File Encoding for A:"
 msgstr "Codificació per al fitxer A:"
 
-#: optiondialog.cpp:1359
+#: optiondialog.cpp:1341
 #, kde-format
 msgid ""
 "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
@@ -3184,32 +3119,32 @@ msgstr ""
 "alternativa.\n"
 "(La detecció de l'Unicode depèn dels primers bytes d'un fitxer)."
 
-#: optiondialog.cpp:1362 optiondialog.cpp:1373 optiondialog.cpp:1384
+#: optiondialog.cpp:1344 optiondialog.cpp:1355 optiondialog.cpp:1366
 #, kde-format
 msgid "Auto Detect Unicode"
 msgstr "Detecta automàticament l'Unicode"
 
-#: optiondialog.cpp:1368
+#: optiondialog.cpp:1350
 #, kde-format
 msgid "File Encoding for B:"
 msgstr "Codificació per al fitxer B:"
 
-#: optiondialog.cpp:1379
+#: optiondialog.cpp:1361
 #, kde-format
 msgid "File Encoding for C:"
 msgstr "Codificació per al fitxer C:"
 
-#: optiondialog.cpp:1390
+#: optiondialog.cpp:1372
 #, kde-format
 msgid "File Encoding for Merge Output and Saving:"
 msgstr "Codificació dels fitxers de sortida en la fusió i desament:"
 
-#: optiondialog.cpp:1395
+#: optiondialog.cpp:1377
 #, kde-format
 msgid "Auto Select"
 msgstr "Selecciona automàticament"
 
-#: optiondialog.cpp:1399
+#: optiondialog.cpp:1381
 #, kde-format
 msgid ""
 "If enabled then the encoding from the input files is used.\n"
@@ -3220,17 +3155,17 @@ msgstr ""
 "En els casos ambigus un diàleg demanarà a l'usuari que esculli la "
 "codificació a usar per a desar."
 
-#: optiondialog.cpp:1402
+#: optiondialog.cpp:1384
 #, kde-format
 msgid "File Encoding for Preprocessor Files:"
 msgstr "Codificació dels fitxers del preprocessador:"
 
-#: optiondialog.cpp:1414
+#: optiondialog.cpp:1396
 #, kde-format
 msgid "Right To Left Language"
 msgstr "Idioma de dreta a esquerra"
 
-#: optiondialog.cpp:1418
+#: optiondialog.cpp:1400
 #, kde-format
 msgid ""
 "Some languages are read from right to left.\n"
@@ -3239,22 +3174,22 @@ msgstr ""
 "Alguns idiomes es llegeixen de dreta a esquerra.\n"
 "Aquesta opció canviarà el visualitzador i l'editor per a adaptar-s'hi."
 
-#: optiondialog.cpp:1428
+#: optiondialog.cpp:1410
 #, kde-format
 msgid "Integration"
 msgstr "Integració"
 
-#: optiondialog.cpp:1429
+#: optiondialog.cpp:1411
 #, kde-format
 msgid "Integration Settings"
 msgstr "Arranjament de la integració"
 
-#: optiondialog.cpp:1450
+#: optiondialog.cpp:1432
 #, kde-format
 msgid "Command line options to ignore:"
 msgstr "Opcions a ignorar de la línia d'ordres:"
 
-#: optiondialog.cpp:1456
+#: optiondialog.cpp:1438
 #, kde-format
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
@@ -3267,13 +3202,13 @@ msgstr ""
 "Es poden especificar diversos valors separant-los amb «;».\n"
 "Això solucionarà l'error «Opció desconeguda»."
 
-#: optiondialog.cpp:1461
+#: optiondialog.cpp:1443
 #, kde-format
 msgid "Quit also via Escape key"
 msgstr "Surt també en prémer la tecla d'escapada"
 
 # skip-rule: common-esteu
-#: optiondialog.cpp:1465
+#: optiondialog.cpp:1447
 #, kde-format
 msgid ""
 "Fast method to exit.\n"
@@ -3282,7 +3217,7 @@ msgstr ""
 "Mètode ràpid per a sortir.\n"
 "Per als que esteu acostumats a usar la tecla d'escapada."
 
-#: optiondialog.cpp:1523
+#: optiondialog.cpp:1505
 #, kde-format
 msgid "This resets all options. Not only those of the current topic."
 msgstr "Això restableix totes les opcions, no només les del tema actual."
@@ -3752,3 +3687,62 @@ msgstr "Caràcter inesperat de cometa en l'argument."
 #, kde-format
 msgid "No program specified."
 msgstr "No s'ha especificat cap programa."
+
+#~ msgid ""
+#~ "A version control history entry consists of several lines.\n"
+#~ "Specify the regular expression to detect the first line (without the "
+#~ "leading comment).\n"
+#~ "Use parentheses to group the keys you want to use for sorting.\n"
+#~ "If left empty, then KDiff3 assumes that empty lines separate history "
+#~ "entries.\n"
+#~ "See the documentation for details."
+#~ msgstr ""
+#~ "Les entrades de l'historial del control de versions consten de diverses "
+#~ "línies.\n"
+#~ "Especifiqueu l'expressió regular per a detectar la primera línia (sense "
+#~ "el comentari inicial).\n"
+#~ "Useu parèntesis per a agrupar les claus que vulgueu usar per a ordenar-"
+#~ "les.\n"
+#~ "Si es deixa en blanc, el KDiff3 assumeix que les línies en blanc separen "
+#~ "les entrades de l'historial.\n"
+#~ "Per a més detalls, vegeu la documentació."
+
+#~ msgid ""
+#~ "Each pair of parentheses used in the regular expression for the history "
+#~ "start entry\n"
+#~ "groups a key that can be used for sorting.\n"
+#~ "Specify the list of keys (that are numbered in order of occurrence\n"
+#~ "starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
+#~ "If left empty, then no sorting will be done.\n"
+#~ "See the documentation for details."
+#~ msgstr ""
+#~ "Cada parell de parèntesis usats en l'expressió regular per a l'inici de "
+#~ "l'entrada de l'historial\n"
+#~ "agrupa una clau que es pot usar per a ordenar.\n"
+#~ "Especifica la llista de claus (que estan numerades en ordre d'ocurrència\n"
+#~ "començant per 1) usant «,» com a separador (p. ex. «4,5,6,1,2,3,7»).\n"
+#~ "Si es deixa en blanc, no s'ordenarà.\n"
+#~ "Per a més detalls, vegeu la documentació."
+
+#~ msgid ""
+#~ "Regular expression for lines where KDiff3 should automatically choose one "
+#~ "source.\n"
+#~ "When a line with a conflict matches the regular expression then\n"
+#~ "- if available - C, otherwise B will be chosen."
+#~ msgstr ""
+#~ "Expressió regular per a les línies en què el KDiff3 hauria d'escollir una "
+#~ "font automàticament.\n"
+#~ "Quan una línia amb un conflicte concorda amb l'expressió regular, "
+#~ "aleshores\n"
+#~ "-si està disponible- s'escollirà C, si no, B."
+
+# skip-rule: t-pu_sp
+#~ msgid ""
+#~ "Regular expression for the start of the version control history entry.\n"
+#~ "Usually this line contains the \"$Log$\" keyword.\n"
+#~ "Default value: \".*\\$Log.*\\$.*\""
+#~ msgstr ""
+#~ "Expressió regular per a l'inici de les entrades de l'historial del "
+#~ "control de versions.\n"
+#~ "Normalment aquesta línia conté la paraula clau «$Log$».\n"
+#~ "Valor per defecte: «.*\\$Log.*\\$.*»"

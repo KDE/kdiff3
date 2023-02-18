@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-13 01:00+0000\n"
+"POT-Creation-Date: 2023-02-18 01:02+0000\n"
 "PO-Revision-Date: 2009-01-19 HO:MI+ZONE\n"
 "Last-Translator: SANKARANARAYANAN | ശങ്കരനാരായണന്‍ <snalledam@dataone.in>\n"
 "Language-Team: SMC <smc.org.in>\n"
@@ -130,7 +130,7 @@ msgstr ""
 msgid "Encoding:"
 msgstr ""
 
-#: difftextwindow.cpp:1910 mergeresultwindow.cpp:2797 optiondialog.cpp:821
+#: difftextwindow.cpp:1910 mergeresultwindow.cpp:2797 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr "വരി അവസാനിക്കുന്ന രീതി:"
@@ -167,7 +167,7 @@ msgstr "വരി അവസാനിക്കുന്ന രീതി:"
 msgid "Unknown"
 msgstr ""
 
-#: difftextwindow.cpp:1967 kdiff3.cpp:912
+#: difftextwindow.cpp:1967 kdiff3.cpp:913
 #, kde-format
 msgid "Top line"
 msgstr "മുകളിലെ വരി"
@@ -183,7 +183,7 @@ msgstr ""
 msgid "Open File"
 msgstr "തുറക്കുക"
 
-#: difftextwindow.cpp:2082 optiondialog.cpp:406
+#: difftextwindow.cpp:2082 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "യൂണിക്കോഡ്, 8ബിറ്റ്"
@@ -373,7 +373,7 @@ msgid ""
 "merge and rescan the folder?"
 msgstr "ഇപ്പോള്‍ നിങ്ങള്‍ ഒരു തട്ട് ലയിപ്പിച്ചുകൊണ്ടിരിക്കുകയാണ്. അലസിപ്പിക്കണമെന്ന് ഉറപ്പാണോ?"
 
-#: directorymergewindow.cpp:697 kdiff3.cpp:766 kdiff3.cpp:776 kdiff3.cpp:788
+#: directorymergewindow.cpp:697 kdiff3.cpp:767 kdiff3.cpp:777 kdiff3.cpp:789
 #: mergeresultwindow.cpp:327 pdiff.cpp:857 pdiff.cpp:1722 pdiff.cpp:1732
 #, fuzzy, kde-format
 #| msgid "Warning"
@@ -760,7 +760,7 @@ msgid "Dest"
 msgstr ""
 
 #: directorymergewindow.cpp:2739 directorymergewindow.cpp:2767
-#: optiondialog.cpp:1117 optiondialog.cpp:1118
+#: optiondialog.cpp:1099 optiondialog.cpp:1100
 #, kde-format
 msgid "Folder"
 msgstr ""
@@ -1141,110 +1141,110 @@ msgstr "തട്ടു്"
 msgid "Merge info"
 msgstr "ഒരുക്കങ്ങള്‍ ലയിപ്പിക്കുക"
 
-#: kdiff3.cpp:438
+#: kdiff3.cpp:439
 #, fuzzy, kde-format
 #| msgid "Option --auto ignored for directory comparison."
 msgid "Option --auto ignored for folder comparison."
 msgstr "--auto ഐച്ഛികം  തട്ടുകളുടെ താരതമ്യ‌‌ത്തിനു് അവഗണിച്ചു."
 
-#: kdiff3.cpp:519
+#: kdiff3.cpp:520
 #, kde-format
 msgid "Saving failed."
 msgstr "സൂക്ഷിക്കുന്നതു് പരാജയപ്പെട്ടു."
 
-#: kdiff3.cpp:544 pdiff.cpp:923
+#: kdiff3.cpp:545 pdiff.cpp:923
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "ഈ ഫയലുകള്‍ തുറക്കുന്നത് പരാജയപ്പെട്ടു:"
 
-#: kdiff3.cpp:553 pdiff.cpp:932
+#: kdiff3.cpp:554 pdiff.cpp:932
 #, fuzzy, kde-format
 #| msgid "File Open Error"
 msgid "File open error"
 msgstr "ഫയല്‍ തുറക്കുന്നതില്‍ പിശക്"
 
-#: kdiff3.cpp:585
+#: kdiff3.cpp:586
 #, kde-format
 msgid "Opens documents for comparison..."
 msgstr "താരതമ്യ‌‌ത്തിനായി പ്രമാണങ്ങള്‍ തുറക്കുന്നു..."
 
-#: kdiff3.cpp:587
+#: kdiff3.cpp:588
 #, kde-format
 msgid "Reload"
 msgstr "വീണ്ടും കയറ്റുക"
 
-#: kdiff3.cpp:590
+#: kdiff3.cpp:591
 #, kde-format
 msgid "Saves the merge result. All conflicts must be solved!"
 msgstr "ലയനഫലം സൂക്ഷിയ്ക്കുന്നു. എല്ലാ വൈരുദ്ധ്യ‌ങ്ങളും പരിഹരിക്കപ്പെടണം!"
 
-#: kdiff3.cpp:592
+#: kdiff3.cpp:593
 #, kde-format
 msgid "Saves the current document as..."
 msgstr "നിലവിലുള്ള പ്രമാണങ്ങള്‍ ഇങ്ങനെ സൂക്ഷിയ്ക്കുന്നു..."
 
-#: kdiff3.cpp:595
+#: kdiff3.cpp:596
 #, kde-format
 msgid "Print the differences"
 msgstr "വ്യ‌‌ത്യാ‌‌സങ്ങള്‍ അച്ചടിയ്ക്കുക"
 
-#: kdiff3.cpp:598
+#: kdiff3.cpp:599
 #, kde-format
 msgid "Quits the application"
 msgstr "പ്രയോഗം വിട്ടുപോകുന്നു"
 
-#: kdiff3.cpp:602
+#: kdiff3.cpp:603
 #, kde-format
 msgid "Undo last action."
 msgstr ""
 
-#: kdiff3.cpp:606
+#: kdiff3.cpp:607
 #, kde-format
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr "തെരഞ്ഞെടുത്ത ഭാഗം മുറിച്ചെടുത്ത് ഓര്‍മ്മച്ചെപ്പില്‍ വെയ്ക്കുന്നു"
 
-#: kdiff3.cpp:609
+#: kdiff3.cpp:610
 #, kde-format
 msgid "Copies the selected section to the clipboard"
 msgstr "തെരഞ്ഞെടുത്ത ഭാഗം പകര്‍ത്തെടുത്ത് ഓര്‍മ്മച്ചെപ്പില്‍ വെയ്ക്കുന്നു"
 
-#: kdiff3.cpp:611
+#: kdiff3.cpp:612
 #, fuzzy, kde-format
 #| msgid "Pastes the clipboard contents to actual position"
 msgid "Pastes the clipboard contents to current position"
 msgstr "ഓര്‍മ്മച്ചെപ്പിലെ ഉള്ളടക്കം യഥാസ്ഥാനത്ത് പതിക്കുന്നു"
 
-#: kdiff3.cpp:614
+#: kdiff3.cpp:615
 #, kde-format
 msgid "Select everything in current window"
 msgstr "നിലവിലുള്ള ജാലകത്തിലെ എല്ലാം തെരഞ്ഞെടുക്കുക"
 
-#: kdiff3.cpp:617
+#: kdiff3.cpp:618
 #, kde-format
 msgid "Search for a string"
 msgstr "ഒരു അക്ഷരനിര പരതുന്നു"
 
-#: kdiff3.cpp:619
+#: kdiff3.cpp:620
 #, kde-format
 msgid "Search again for the string"
 msgstr "വീണ്ടും ആ അക്ഷരനിര പരതുന്നു"
 
-#: kdiff3.cpp:624
+#: kdiff3.cpp:625
 #, kde-format
 msgid "Enables/disables the statusbar"
 msgstr "നിലവാരപ്പട്ട പ്രാവര്‍ത്തികമാക്കുന്നു/പ്രവര്‍ത്തനരഹിതമാക്കുന്നു"
 
-#: kdiff3.cpp:628
+#: kdiff3.cpp:629
 #, kde-format
 msgid "Configure KDiff3..."
 msgstr "കെഡിഫ്3 ക്രമീകരിക്കാം..."
 
-#: kdiff3.cpp:648
+#: kdiff3.cpp:649
 #, kde-format
 msgid "Go to Current Delta"
 msgstr "നിലവിലുള്ള ഡെല്‍ട്ടയിലേക്ക് പോകുക"
 
-#: kdiff3.cpp:648
+#: kdiff3.cpp:649
 #, kde-format
 msgid ""
 "Current\n"
@@ -1253,12 +1253,12 @@ msgstr ""
 "നിലവിലുള്ള\n"
 "ഡെല്‍ട്ട"
 
-#: kdiff3.cpp:650
+#: kdiff3.cpp:651
 #, kde-format
 msgid "Go to First Delta"
 msgstr "ആദ്യ ഡെല്‍ട്ടയിലേക്ക് പോകുക"
 
-#: kdiff3.cpp:650
+#: kdiff3.cpp:651
 #, kde-format
 msgid ""
 "First\n"
@@ -1267,12 +1267,12 @@ msgstr ""
 "ആദ്യ‌‌ത്തെ\n"
 "ഡെല്‍ട്ട"
 
-#: kdiff3.cpp:652
+#: kdiff3.cpp:653
 #, kde-format
 msgid "Go to Last Delta"
 msgstr "അവസാന ഡെല്‍ട്ടയിലേക്ക് പോകുക"
 
-#: kdiff3.cpp:652
+#: kdiff3.cpp:653
 #, kde-format
 msgid ""
 "Last\n"
@@ -1281,14 +1281,14 @@ msgstr ""
 "അവസാന\n"
 "ഡെല്‍ട്ട"
 
-#: kdiff3.cpp:654
+#: kdiff3.cpp:655
 #, kde-format
 msgid "(Skips white space differences when \"Show White Space\" is disabled.)"
 msgstr ""
 "(\"ഒഴിഞ്ഞ ഇടങ്ങള്‍ കാണിയ്ക്കുക\" പ്രവര്‍ത്തമരഹിതമാക്കിയാല്‍ ഒഴിഞ്ഞ ഇടങ്ങളിലെ വ്യ‌‌ത്യാ‌‌സങ്ങള്‍ "
 "ഒഴിവാക്കുന്നു.)"
 
-#: kdiff3.cpp:655
+#: kdiff3.cpp:656
 #, kde-format
 msgid ""
 "(Does not skip white space differences even when \"Show White Space\" is "
@@ -1297,12 +1297,12 @@ msgstr ""
 "( \"ഒഴിഞ്ഞ ഇടങ്ങള്‍ കാണിയ്ക്കുക\" പ്രവര്‍ത്തമരഹിതമാക്കിയാലും ഒഴിഞ്ഞ ഇടങ്ങളുടെ വ്യ‌‌ത്യാ‌‌സങ്ങള്‍ "
 "ഒഴിവാക്കുന്നില്ല.)"
 
-#: kdiff3.cpp:656
+#: kdiff3.cpp:657
 #, kde-format
 msgid "Go to Previous Delta"
 msgstr "മുന്‍ ഡെല്‍ട്ടയിലേക്ക് പോകുക"
 
-#: kdiff3.cpp:656
+#: kdiff3.cpp:657
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1311,12 +1311,12 @@ msgstr ""
 "മുന്‍\n"
 "ഡെല്‍ട്ട"
 
-#: kdiff3.cpp:658
+#: kdiff3.cpp:659
 #, kde-format
 msgid "Go to Next Delta"
 msgstr "അടുത്ത ഡെല്‍ട്ടയിലേക്ക് പോകുക"
 
-#: kdiff3.cpp:658
+#: kdiff3.cpp:659
 #, kde-format
 msgid ""
 "Next\n"
@@ -1325,12 +1325,12 @@ msgstr ""
 "അടുത്ത\n"
 "ഡെല്‍ട്ട"
 
-#: kdiff3.cpp:660
+#: kdiff3.cpp:661
 #, kde-format
 msgid "Go to Previous Conflict"
 msgstr "മുന്‍ വൈരുദ്ധ്യത്തിലേക്ക് പോകുക"
 
-#: kdiff3.cpp:660
+#: kdiff3.cpp:661
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1339,12 +1339,12 @@ msgstr ""
 "മുന്‍\n"
 "വൈരുദ്ധ്യം"
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:663
 #, kde-format
 msgid "Go to Next Conflict"
 msgstr "അടുത്ത വൈരുദ്ധ്യത്തിലേക്ക് പോകുക"
 
-#: kdiff3.cpp:662
+#: kdiff3.cpp:663
 #, kde-format
 msgid ""
 "Next\n"
@@ -1353,12 +1353,12 @@ msgstr ""
 "അടുത്ത\n"
 "വൈരുദ്ധ്യം"
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:665
 #, kde-format
 msgid "Go to Previous Unsolved Conflict"
 msgstr "പരിഹരിക്കപ്പെടാത്ത മുന്‍ വൈരുദ്ധ്യത്തിലേക്ക് പോകുക"
 
-#: kdiff3.cpp:664
+#: kdiff3.cpp:665
 #, kde-format
 msgid ""
 "Prev\n"
@@ -1367,12 +1367,12 @@ msgstr ""
 "മുന്‍\n"
 "പരിഹരിക്കപ്പെടാത്ത"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:667
 #, kde-format
 msgid "Go to Next Unsolved Conflict"
 msgstr "പരിഹരിക്കപ്പെടാത്ത അടുത്ത വൈരുദ്ധ്യത്തിലേക്ക് പോകുക"
 
-#: kdiff3.cpp:666
+#: kdiff3.cpp:667
 #, kde-format
 msgid ""
 "Next\n"
@@ -1381,14 +1381,14 @@ msgstr ""
 "അടുത്ത\n"
 "പരിഹരിക്കപ്പെടാത്ത"
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:669
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Title for menu item"
 msgid "Go to Line"
 msgstr "അവസാന ഡെല്‍ട്ടയിലേക്ക് പോകുക"
 
-#: kdiff3.cpp:668
+#: kdiff3.cpp:669
 #, fuzzy, kde-format
 #| msgid "Go to Last Delta"
 msgctxt "Text used for toolbar button."
@@ -1397,21 +1397,21 @@ msgid ""
 "Line"
 msgstr "അവസാന ഡെല്‍ട്ടയിലേക്ക് പോകുക"
 
-#: kdiff3.cpp:669
+#: kdiff3.cpp:670
 #, kde-format
 msgid ""
 ".\n"
 " Goto specified line."
 msgstr ""
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:671
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From A"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From A"
 msgstr "A യില്‍നിന്നു വരി (കള്‍) തെരഞ്ഞെടുക്കുക"
 
-#: kdiff3.cpp:670
+#: kdiff3.cpp:671
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1424,14 +1424,14 @@ msgstr ""
 "A\n"
 "തെരഞ്ഞെടുക്കുക"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:672
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From B"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From B"
 msgstr "B യില്‍നിന്നു വരി (കള്‍) തെരഞ്ഞെടുക്കുക"
 
-#: kdiff3.cpp:671
+#: kdiff3.cpp:672
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1444,14 +1444,14 @@ msgstr ""
 "B\n"
 "തെരഞ്ഞെടുക്കുക"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:673
 #, fuzzy, kde-format
 #| msgid "Select Line(s) From C"
 msgctxt "Title for menu item"
 msgid "Select Line(s) From C"
 msgstr "C യില്‍നിന്നു വരി (കള്‍) തെരഞ്ഞെടുക്കുക"
 
-#: kdiff3.cpp:672
+#: kdiff3.cpp:673
 #, fuzzy, kde-format
 #| msgid ""
 #| "Choose\n"
@@ -1464,14 +1464,14 @@ msgstr ""
 "C\n"
 "തെരഞ്ഞെടുക്കുക"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:674
 #, fuzzy, kde-format
 #| msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgctxt "Title for menu item"
 msgid "Automatically Go to Next Unsolved Conflict After Source Selection"
 msgstr "സ്രോതസ്സ് തെരഞ്ഞെടുത്താല്‍ സ്വയം അടുത്ത പരിഹരിക്കപ്പെടാത്ത വൈരുദ്ധ്യ‌ത്തിലേക്ക് പോകുക"
 
-#: kdiff3.cpp:673
+#: kdiff3.cpp:674
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto\n"
@@ -1484,13 +1484,13 @@ msgstr ""
 "സ്വയം\n"
 "അടുത്ത"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:676
 #, fuzzy, kde-format
 #| msgid "Show Space && Tabulator Characters for Differences"
 msgid "Show Space && Tabulator Characters"
 msgstr "വ്യ‌‌ത്യാ‌‌സങ്ങള്‍ക്കായി  ഇടവും പട്ടികയുടെ ചിഹ്നങ്ങളും കാണിക്കുക"
 
-#: kdiff3.cpp:675
+#: kdiff3.cpp:676
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1503,12 +1503,12 @@ msgstr ""
 "ഒഴിഞ്ഞ\n"
 "അക്ഷരങ്ങള്‍"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:677
 #, kde-format
 msgid "Show White Space"
 msgstr "ശുഭ്രസ്ഥാനങ്ങള്‍ കാണിക്കുക"
 
-#: kdiff3.cpp:676
+#: kdiff3.cpp:677
 #, fuzzy, kde-format
 #| msgid ""
 #| "White\n"
@@ -1521,12 +1521,12 @@ msgstr ""
 "എഴുതുക\n"
 "ഡെല്‍റ്റാസ്"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:679
 #, kde-format
 msgid "Show Line Numbers"
 msgstr "വരികളുടെ നമ്പര്‍ കാണിക്കുക"
 
-#: kdiff3.cpp:678
+#: kdiff3.cpp:679
 #, fuzzy, kde-format
 #| msgid ""
 #| "Line\n"
@@ -1539,142 +1539,142 @@ msgstr ""
 "വരി\n"
 "നമ്പര്‍"
 
-#: kdiff3.cpp:680
+#: kdiff3.cpp:681
 #, kde-format
 msgid "Automatically Solve Simple Conflicts"
 msgstr "നിസ്സാര വൈരുദ്ധ്യ‌ങ്ങള്‍ സ്വയം പരിഹരിക്കുക"
 
-#: kdiff3.cpp:681
+#: kdiff3.cpp:682
 #, kde-format
 msgid "Set Deltas to Conflicts"
 msgstr "വൈരുദ്ധ്യ‌ങ്ങള്‍ക്ക് ഡെല്‍റ്റകളെ തയ്യാറാക്കുക"
 
-#: kdiff3.cpp:682
+#: kdiff3.cpp:683
 #, kde-format
 msgid "Run Regular Expression Auto Merge"
 msgstr "റെഗുലര്‍ എക്സ്പ്രഷന്റെ യാന്ത്രികലയനം പ്രവര്‍ത്തിപ്പിക്കുക"
 
-#: kdiff3.cpp:683
+#: kdiff3.cpp:684
 #, kde-format
 msgid "Automatically Solve History Conflicts"
 msgstr "നാള്‍വഴി വൈരുദ്ധ്യ‌ങ്ങള്‍ സ്വയം പരിഹരിക്കുക"
 
-#: kdiff3.cpp:684
+#: kdiff3.cpp:685
 #, kde-format
 msgid "Split Diff At Selection"
 msgstr "തെരഞ്ഞെടുക്കുന്ന സമയത്ത് diff പിളര്ത്തുക"
 
-#: kdiff3.cpp:685
+#: kdiff3.cpp:686
 #, kde-format
 msgid "Join Selected Diffs"
 msgstr "തെരഞ്ഞെടുത്ത diff യോജിപ്പിക്കുക"
 
-#: kdiff3.cpp:687
+#: kdiff3.cpp:688
 #, kde-format
 msgid "Show Window A"
 msgstr "ജാലകം A കാണിക്കുക"
 
-#: kdiff3.cpp:688
+#: kdiff3.cpp:689
 #, kde-format
 msgid "Show Window B"
 msgstr "ജാലകം B കാണിക്കുക"
 
-#: kdiff3.cpp:689
+#: kdiff3.cpp:690
 #, kde-format
 msgid "Show Window C"
 msgstr "ജാലകം Cകാണിക്കുക"
 
-#: kdiff3.cpp:691
+#: kdiff3.cpp:692
 #, kde-format
 msgid "Normal Overview"
 msgstr "സാധാരണ ചെറുവിവരണം"
 
-#: kdiff3.cpp:692
+#: kdiff3.cpp:693
 #, kde-format
 msgid "A vs. B Overview"
 msgstr "A ക്കും Bക്കും പൊതുവായ ചെറുവിവരണം"
 
-#: kdiff3.cpp:693
+#: kdiff3.cpp:694
 #, kde-format
 msgid "A vs. C Overview"
 msgstr "A ക്കും Cക്കും പൊതുവായ ചെറുവിവരണം"
 
-#: kdiff3.cpp:694
+#: kdiff3.cpp:695
 #, kde-format
 msgid "B vs. C Overview"
 msgstr " Bക്കും Cക്കും പൊതുവായ ചെറുവിവരണം"
 
-#: kdiff3.cpp:695
+#: kdiff3.cpp:696
 #, kde-format
 msgid "Word Wrap Diff Windows"
 msgstr "ഡിഫ് ജാലകങ്ങളിലെ വാക്കുകള്‍ ഒതുക്കുക"
 
-#: kdiff3.cpp:696
+#: kdiff3.cpp:697
 #, kde-format
 msgid "Add Manual Diff Alignment"
 msgstr "ഡിഫില്‍ മാനവികമായി നിര ഒപ്പിക്കല്‍ ചേര്‍ക്കുക"
 
-#: kdiff3.cpp:697
+#: kdiff3.cpp:698
 #, kde-format
 msgid "Clear All Manual Diff Alignments"
 msgstr "ഡിഫിലെ എല്ലാ‍ മാനവികമായ നിര ഒപ്പിക്കലും നീക്കം ചെയ്യുക"
 
-#: kdiff3.cpp:699
+#: kdiff3.cpp:700
 #, kde-format
 msgid "Focus Next Window"
 msgstr "അടുത്ത ജാലകത്തില്‍ കേന്ദ്രീകരിക്കുക"
 
-#: kdiff3.cpp:700
+#: kdiff3.cpp:701
 #, kde-format
 msgid "Focus Prev Window"
 msgstr "പിന്നിട്ട ജാലകത്തില്‍ കേന്ദ്രീകരിക്കുക"
 
-#: kdiff3.cpp:701
+#: kdiff3.cpp:702
 #, kde-format
 msgid "Toggle Split Orientation"
 msgstr "പിളര്ന്ന ഘടന മാറ്റുക"
 
-#: kdiff3.cpp:703
+#: kdiff3.cpp:704
 #, fuzzy, kde-format
 #| msgid "Dir && Text Split Screen View"
 msgid "Folder && Text Split Screen View"
 msgstr "അറയും &പാഠങ്ങളും പിളര്ന്ന യവനികാദൃശ്യം"
 
-#: kdiff3.cpp:705
+#: kdiff3.cpp:706
 #, fuzzy, kde-format
 #| msgid "Toggle Between Dir && Text View"
 msgid "Toggle Between Folder && Text View"
 msgstr "അറയുടേയും പാഠങ്ങളുടേയും കാഴ്ചകള്‍ തമ്മില്‍ മാറ്റുക"
 
-#: kdiff3.cpp:726 kdiff3.cpp:821 kdiff3.cpp:846 kdiff3.cpp:1126 kdiff3.cpp:1147
+#: kdiff3.cpp:727 kdiff3.cpp:822 kdiff3.cpp:847 kdiff3.cpp:1127 kdiff3.cpp:1148
 #: pdiff.cpp:942 pdiff.cpp:1009 pdiff.cpp:1045 pdiff.cpp:1054 pdiff.cpp:1112
 #: pdiff.cpp:1120
 #, kde-format
 msgid "Ready."
 msgstr "തയ്യാര്‍"
 
-#: kdiff3.cpp:765 pdiff.cpp:1721
+#: kdiff3.cpp:766 pdiff.cpp:1721
 #, fuzzy, kde-format
 #| msgid "The merge result hasn't been saved."
 msgid "The merge result has not been saved."
 msgstr "ലയനഫലം സംരക്ഷിച്ചിട്ടില്ല."
 
-#: kdiff3.cpp:767
+#: kdiff3.cpp:768
 #, kde-format
 msgid "Save && Quit"
 msgstr "സംരക്ഷിച്ച് &&വിട്ടുപോകുക"
 
-#: kdiff3.cpp:768
+#: kdiff3.cpp:769
 #, kde-format
 msgid "Quit Without Saving"
 msgstr "സംരക്ഷിക്കാതെ വിട്ടുപോകുക"
 
-#: kdiff3.cpp:776 pdiff.cpp:1732
+#: kdiff3.cpp:777 pdiff.cpp:1732
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "ലയനഫലം സൂക്ഷിയ്ക്കുന്നതില്‍ പരാജയം"
 
-#: kdiff3.cpp:787 pdiff.cpp:856
+#: kdiff3.cpp:788 pdiff.cpp:856
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are currently doing a directory merge. Are you sure, you want to "
@@ -1683,64 +1683,64 @@ msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
 msgstr "ഇപ്പോള്‍ നിങ്ങള്‍ ഒരു തട്ട് ലയിപ്പിച്ചുകൊണ്ടിരിക്കുകയാണ്. അലസിപ്പിക്കണമെന്ന് ഉറപ്പാണോ?"
 
-#: kdiff3.cpp:810
+#: kdiff3.cpp:811
 #, kde-format
 msgid "Saving file..."
 msgstr "ഫയല്‍ സൂക്ഷിയ്ക്കുന്നു..."
 
-#: kdiff3.cpp:827
+#: kdiff3.cpp:828
 #, kde-format
 msgid "Saving file with a new filename..."
 msgstr "ഫയല്‍ ഒരു പുതിയ ഫയല്‍നാമത്തില്‍ സൂക്ഷിയ്ക്കുന്നു..."
 
-#: kdiff3.cpp:829
+#: kdiff3.cpp:830
 #, kde-format
 msgid "Save As..."
 msgstr "...ആയി സൂക്ഷിയ്ക്കുക"
 
-#: kdiff3.cpp:854
+#: kdiff3.cpp:855
 #, fuzzy, kde-format
 #| msgid "Printing completed."
 msgid "Printing not implemented."
 msgstr "അച്ചടി മുഴുവനായി"
 
-#: kdiff3.cpp:895
+#: kdiff3.cpp:896
 #, kde-format
 msgid "Printing..."
 msgstr "അച്ചടിക്കുന്നു"
 
-#: kdiff3.cpp:1000
+#: kdiff3.cpp:1001
 #, kde-format
 msgid "Printing page %1 of %2"
 msgstr ""
 
-#: kdiff3.cpp:1059
+#: kdiff3.cpp:1060
 #, fuzzy, kde-format
 #| msgid "Selection"
 msgid " (Selection)"
 msgstr "തെരഞ്ഞെടുക്കല്‍"
 
-#: kdiff3.cpp:1088
+#: kdiff3.cpp:1089
 #, kde-format
 msgid "Printing completed."
 msgstr "അച്ചടി മുഴുവനായി"
 
-#: kdiff3.cpp:1092
+#: kdiff3.cpp:1093
 #, kde-format
 msgid "Printing aborted."
 msgstr "അച്ചടി അലസി."
 
-#: kdiff3.cpp:1099
+#: kdiff3.cpp:1100
 #, kde-format
 msgid "Exiting..."
 msgstr "വിട്ടു പോകുന്നു..."
 
-#: kdiff3.cpp:1110
+#: kdiff3.cpp:1111
 #, kde-format
 msgid "Toggling toolbar..."
 msgstr "ഉപകരണപ്പട്ട മാറ്റുന്നു..."
 
-#: kdiff3.cpp:1131
+#: kdiff3.cpp:1132
 #, kde-format
 msgid "Toggle the statusbar..."
 msgstr "നിലവാരപ്പട്ട മാറ്റുക"
@@ -2237,67 +2237,13 @@ msgstr "സി (ഐച്ഛികം):"
 msgid "Folder..."
 msgstr "തുറക്കുക"
 
-#: optiondialog.cpp:48
-#, kde-format
-msgid ""
-"A version control history entry consists of several lines.\n"
-"Specify the regular expression to detect the first line (without the leading "
-"comment).\n"
-"Use parentheses to group the keys you want to use for sorting.\n"
-"If left empty, then KDiff3 assumes that empty lines separate history "
-"entries.\n"
-"See the documentation for details."
-msgstr ""
-"ഒരു ഭാഷാന്തര നിയന്ത്രണത്തിന്റെ നാള്‍വഴി ചേര്‍ക്കുന്നതില്‍ പല വരികളുണ്ടാകും.\n"
-"ആദ്യ‌‌ത്തെ വരി കണ്ടുപിടിക്കാനുള്ള നിത്യ‌‌ഭാവം നിര്‍ദ്ദേശിക്കുക (മുന്നിലെ വിശദീകരണം കൂടാതെ).\n"
-"ഇനം തിരിക്കാനുപയോഗിക്കുന്ന കീകളെ ഒന്നിച്ചാക്കാന്‍ ബ്രാക്കറ്റുകള്‍ ഉപയോഗിക്കുക.\n"
-"ഒഴിച്ചു വിട്ടാല്‍ ഒഴിഞ്ഞ വരികള്‍ നാള്‍വഴിയിലെ വിവരങ്ങള്‍ വേര്‍തിരിക്കാനാണെന്ന് കെഡിഫ്3 സങ്കല്‍"
-"പ്പിയ്ക്കും.\n"
-"വിശദീകരണങ്ങള്‍ക്ക് പ്രമാണപത്രം കാണുക."
-
-#: optiondialog.cpp:53
-#, kde-format
-msgid ""
-"Each pair of parentheses used in the regular expression for the history "
-"start entry\n"
-"groups a key that can be used for sorting.\n"
-"Specify the list of keys (that are numbered in order of occurrence\n"
-"starting with 1) using ',' as separator (e.g. \"4,5,6,1,2,3,7\").\n"
-"If left empty, then no sorting will be done.\n"
-"See the documentation for details."
-msgstr ""
-
-#: optiondialog.cpp:59
-#, kde-format
-msgid ""
-"Regular expression for lines where KDiff3 should automatically choose one "
-"source.\n"
-"When a line with a conflict matches the regular expression then\n"
-"- if available - C, otherwise B will be chosen."
-msgstr ""
-"കെഡിഫ്3 സ്വതന്ത്രമായി ഒരു സ്രോതസ്സ് തെരഞ്ഞെടുക്കുന്നിടത്ത് വരികള്‍ക്കുള്ള നിത്യഭാവം.\n"
-"സംഘട്ടനമുള്ള വരി ചേര്‍ന്നുവരുമ്പോള്‍ അതിന്റെ നിത്യ‌‌ഭാവം\n"
-"-സി ഉണ്ടെങ്കില്‍ അത്, അല്ലെങ്കില്‍ ബി തെരഞ്ഞെടുക്കപ്പെടും."
-
-#: optiondialog.cpp:62
-#, fuzzy, kde-format
-msgid ""
-"Regular expression for the start of the version control history entry.\n"
-"Usually this line contains the \"$Log$\" keyword.\n"
-"Default value: \".*\\$Log.*\\$.*\""
-msgstr ""
-"ഭാഷാന്തര നിയന്ത്രണത്തിന്റെ നാള്‍വഴി തുടങ്ങുന്നതിന്റെ നിത്യഭാവം എഴുതിച്ചേര്‍ക്കല്‍.\n"
-"സാധാരണയായി ഈ വരി  \"$Log$\"-keyword.\n"
-" ഉള്‍ക്കൊണ്ടിരിക്കും.\n"
-"തനത് മൂല്യം:\".*\\$Log.*\\$.*\""
-
-#: optiondialog.cpp:124 optiondialog.cpp:136
+#: optiondialog.cpp:106 optiondialog.cpp:118
 #, kde-format
 msgctxt "No text styling"
 msgid "none"
 msgstr ""
 
-#: optiondialog.cpp:126 optiondialog.cpp:138
+#: optiondialog.cpp:108 optiondialog.cpp:120
 #, kde-format
 msgctxt "Font sample display, %1 = family, %2 = style, %3 = size"
 msgid ""
@@ -2306,125 +2252,125 @@ msgid ""
 "Example:"
 msgstr ""
 
-#: optiondialog.cpp:407
+#: optiondialog.cpp:389
 #, kde-format
 msgid "Unicode"
 msgstr "യൂണിക്കോഡ്"
 
-#: optiondialog.cpp:408
+#: optiondialog.cpp:390
 #, kde-format
 msgid "Latin1"
 msgstr "ലാറ്റിന്‍1"
 
-#: optiondialog.cpp:427
+#: optiondialog.cpp:409
 #, kde-format
 msgid "Change this if non-ASCII characters are not displayed correctly."
 msgstr "ASCII അല്ലാത്ത ചിഹ്നങ്ങള്‍ ശരിയായി പ്രദര്ശിപ്പിക്കപ്പെടുന്നില്ലെങ്കില്‍ അത് മാറ്റുക"
 
-#: optiondialog.cpp:516
+#: optiondialog.cpp:498
 #, kde-format
 msgid "Configure"
 msgstr "ക്രമീകരിക്കുക"
 
-#: optiondialog.cpp:555
+#: optiondialog.cpp:537
 #, kde-format
 msgid "Font"
 msgstr "അക്ഷരരൂപം"
 
-#: optiondialog.cpp:557
+#: optiondialog.cpp:539
 #, kde-format
 msgid "Editor & Diff Output Font"
 msgstr "ഗ്രന്ധ പരിശോധകനും ഡിഫ് പുറത്ത് വിടുന്നതിന്റെ അക്ഷരരൂപവും"
 
-#: optiondialog.cpp:575
+#: optiondialog.cpp:557
 #, kde-format
 msgid "Application font"
 msgstr ""
 
-#: optiondialog.cpp:580
+#: optiondialog.cpp:562
 #, kde-format
 msgid "File view font"
 msgstr ""
 
-#: optiondialog.cpp:599
+#: optiondialog.cpp:581
 #, fuzzy, kde-format
 #| msgid "Color"
 msgctxt "Title for color settings page"
 msgid "Color"
 msgstr "വര്‍ണ്ണം"
 
-#: optiondialog.cpp:600
+#: optiondialog.cpp:582
 #, kde-format
 msgid "Colors Settings"
 msgstr "വര്‍ണ്ണങ്ങള്‍ ഉറപ്പിക്കല്‍ "
 
-#: optiondialog.cpp:625
+#: optiondialog.cpp:607
 #, kde-format
 msgid "Editor and Diff Views:"
 msgstr "ഗ്രന്ധപരിശോധകനും ഡിഫ് വീക്ഷണവും"
 
-#: optiondialog.cpp:633
+#: optiondialog.cpp:615
 #, kde-format
 msgid "Foreground color:"
 msgstr "പുരോതല വര്ണ്ണം:"
 
-#: optiondialog.cpp:641
+#: optiondialog.cpp:623
 #, kde-format
 msgid "Background color:"
 msgstr "പശ്ചാത്തല വര്‍ണ്ണം:"
 
-#: optiondialog.cpp:651
+#: optiondialog.cpp:633
 #, kde-format
 msgid "Diff background color:"
 msgstr "ഡിഫ് പശ്ചാത്തല വര്‍ണ്ണം:"
 
-#: optiondialog.cpp:660
+#: optiondialog.cpp:642
 #, kde-format
 msgid "Color A:"
 msgstr "വര്ണ്ണം ഏ:"
 
-#: optiondialog.cpp:669
+#: optiondialog.cpp:651
 #, kde-format
 msgid "Color B:"
 msgstr "വര്ണ്ണം ബി"
 
-#: optiondialog.cpp:678
+#: optiondialog.cpp:660
 #, kde-format
 msgid "Color C:"
 msgstr "വര്ണ്ണം സി"
 
-#: optiondialog.cpp:686
+#: optiondialog.cpp:668
 #, kde-format
 msgid "Conflict color:"
 msgstr "വര്ണ്ണ വൈരുദ്ധ്യം:"
 
-#: optiondialog.cpp:695
+#: optiondialog.cpp:677
 #, kde-format
 msgid "Current range background color:"
 msgstr "നടപ്പിലുള്ള റേഞ്ചിന്റെ പശ്ചാത്തല വര്ണ്ണം:"
 
-#: optiondialog.cpp:704
+#: optiondialog.cpp:686
 #, kde-format
 msgid "Current range diff background color:"
 msgstr "നടപ്പിലുള്ള റേഞ്ചിന്റെ ഡിഫ് പശ്ചാത്തല വര്ണ്ണം:"
 
-#: optiondialog.cpp:712
+#: optiondialog.cpp:694
 #, kde-format
 msgid "Color for manually aligned difference ranges:"
 msgstr "മാനവികമായി വരിയാക്കിയ വ്യ‌‌ത്യാ‌സ പരിധികളുടെ വര്ണ്ണം:"
 
-#: optiondialog.cpp:719
+#: optiondialog.cpp:701
 #, fuzzy, kde-format
 #| msgid "Directory Comparison View:"
 msgid "Folder Comparison View:"
 msgstr "അറകളുടെ താരതമ്യ‌‌വീക്ഷണം"
 
-#: optiondialog.cpp:725
+#: optiondialog.cpp:707
 #, kde-format
 msgid "Newest file color:"
 msgstr "ഏറ്റവും പുതിയ ഫയലിന്റെ വര്ണ്ണം"
 
-#: optiondialog.cpp:730
+#: optiondialog.cpp:712
 #, fuzzy, kde-format
 #| msgid ""
 #| "Changing this color will only be effective when starting the next "
@@ -2434,37 +2380,37 @@ msgid ""
 "comparison."
 msgstr "ഈ വര്ണ്ണം മാറുന്നത് മാത്രമേ അടുത്ത അറകളുടെ താരതമ്യം തുടങ്ങുമ്പോള്‍ഫലപ്രദമാകൂ."
 
-#: optiondialog.cpp:735
+#: optiondialog.cpp:717
 #, kde-format
 msgid "Oldest file color:"
 msgstr "ഏറ്റവും പഴയ ഫയലിന്റെ നിറം:"
 
-#: optiondialog.cpp:744
+#: optiondialog.cpp:726
 #, kde-format
 msgid "Middle age file color:"
 msgstr "മദ്ധ്യ‌‌കാല ഫയലിന്റെ നിറം:"
 
-#: optiondialog.cpp:753
+#: optiondialog.cpp:735
 #, kde-format
 msgid "Color for missing files:"
 msgstr "കാണാതെപോയ ഫയലിന്റെ നിറം"
 
-#: optiondialog.cpp:767
+#: optiondialog.cpp:749
 #, kde-format
 msgid "Editor"
 msgstr "ഗ്രന്ഥ പരിശോധകന്‍"
 
-#: optiondialog.cpp:768
+#: optiondialog.cpp:750
 #, kde-format
 msgid "Editor Behavior"
 msgstr "ഗ്രന്ഥ പരിശോധകന്റെ പെരുമാറ്റം"
 
-#: optiondialog.cpp:790
+#: optiondialog.cpp:772
 #, kde-format
 msgid "Tab inserts spaces"
 msgstr "തൊങ്ങല്‍ ഇടയ്ക്ക് സ്ഥലം ഇടുന്നു"
 
-#: optiondialog.cpp:794
+#: optiondialog.cpp:776
 #, fuzzy, kde-format
 msgid ""
 "On: Pressing tab generates the appropriate number of spaces.\n"
@@ -2473,27 +2419,27 @@ msgstr ""
 "ഓണ്‍: ടാബ് കീ അമര്ത്തിയാല്‍ ആവശ്യ‌‌ത്തിനുള്ള അച്ചകലം സൃഷ്ടിക്കും.\n"
 "ഓഫ്: ഒരു ടാബ് ചിഹ്നം പതിക്കും."
 
-#: optiondialog.cpp:799
+#: optiondialog.cpp:781
 #, kde-format
 msgid "Tab size:"
 msgstr "ടാബ് അളവ്:"
 
-#: optiondialog.cpp:806
+#: optiondialog.cpp:788
 #, kde-format
 msgid "Auto indentation"
 msgstr "യാന്ത്രികമായി സ്ഥലം ഒഴിച്ചുവിടല്‍ "
 
-#: optiondialog.cpp:810
+#: optiondialog.cpp:792
 #, kde-format
 msgid "On: The indentation of the previous line is used for a new line.\n"
 msgstr "ഓണ്‍: മുന്‍ വരിയില്‍ സ്ഥലം ഒഴിച്ചു വിട്ടത് പുതിയ വരി തുടങ്ങാന്‍ ഉപയോഗിച്ചു.\n"
 
-#: optiondialog.cpp:813
+#: optiondialog.cpp:795
 #, kde-format
 msgid "Auto copy selection"
 msgstr "യാന്ത്രിക പകര്പ്പ് തെരഞ്ഞെടുക്കുക"
 
-#: optiondialog.cpp:817
+#: optiondialog.cpp:799
 #, fuzzy, kde-format
 #| msgid ""
 #| "On: Any selection is immediately written to the clipboard.\n"
@@ -2505,20 +2451,20 @@ msgstr ""
 "ഓണ്‍: തെരഞ്ഞെടുത്തതെന്തും ഉടനടി ഓര്‍മ്മച്ചെപ്പില്‍ എഴുതപ്പെടും.\n"
 "ഓഫ്: നിങ്ങള്‍ നിസ്സംശയം പകര്‍പ്പെടുക്കണം. ഉദാഹരണമായി Ctrl+C വഴി."
 
-#: optiondialog.cpp:827
+#: optiondialog.cpp:809
 #, kde-format
 msgctxt "Unix line ending"
 msgid "Unix"
 msgstr ""
 
-#: optiondialog.cpp:828
+#: optiondialog.cpp:810
 #, fuzzy, kde-format
 #| msgid "&Window"
 msgctxt "Dos/Windows line ending"
 msgid "Dos/Windows"
 msgstr "&ജാലകം"
 
-#: optiondialog.cpp:829
+#: optiondialog.cpp:811
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto\n"
@@ -2529,7 +2475,7 @@ msgstr ""
 "സ്വയം\n"
 "അടുത്ത"
 
-#: optiondialog.cpp:832
+#: optiondialog.cpp:814
 #, kde-format
 msgid ""
 "Sets the line endings for when an edited file is saved.\n"
@@ -2538,23 +2484,23 @@ msgstr ""
 "ചിട്ടപ്പെടുത്തിക്കഴിഞ്ഞ ഒരു ഫയല്‍ സം‌രക്ഷിക്കുമ്പോള്‍ വരിയുടെ അവസാനം ഉറപ്പിക്കുന്നു.ഡോസ്/വിന്‍ഡോസ്: "
 "CR=0D, LF=0A നോട് ചേര്‍ത്ത് CR+LF; UNIX: LF"
 
-#: optiondialog.cpp:842
+#: optiondialog.cpp:824
 #, kde-format
 msgid "Diff"
 msgstr "ഡിഫ്"
 
-#: optiondialog.cpp:843
+#: optiondialog.cpp:825
 #, kde-format
 msgid "Diff Settings"
 msgstr "ഡിഫ് സജ്ജീകരണങ്ങള്‍"
 
-#: optiondialog.cpp:866
+#: optiondialog.cpp:848
 #, fuzzy, kde-format
 #| msgid "Treat as white space."
 msgid "Ignore numbers (treat as white space)"
 msgstr "വെളുത്ത അച്ചകലമായി കണക്കാക്കുക"
 
-#: optiondialog.cpp:870
+#: optiondialog.cpp:852
 #, kde-format
 msgid ""
 "Ignore number characters during line matching phase. (Similar to Ignore "
@@ -2565,44 +2511,44 @@ msgstr ""
 "വിഗണിച്ചപോലെ.)\n"
 "ഫയലുകള്‍ സാംഖ്യ‌‌‌‌വിവരങ്ങളുമായി താരതമ്യം ചെയ്യാന്‍ സഹായിച്ചേയ്ക്കും."
 
-#: optiondialog.cpp:874
+#: optiondialog.cpp:856
 #, fuzzy, kde-format
 #| msgid "Treat C/C++ comments like white space."
 msgid "Ignore C/C++ comments (treat as white space)"
 msgstr "സി/സി++ വിശദീകരണം വെള്ള അച്ചകലമായി കണക്കാക്കുക."
 
-#: optiondialog.cpp:877
+#: optiondialog.cpp:859
 #, kde-format
 msgid "Treat C/C++ comments like white space."
 msgstr "സി/സി++ വിശദീകരണം വെള്ള അച്ചകലമായി കണക്കാക്കുക."
 
-#: optiondialog.cpp:880
+#: optiondialog.cpp:862
 #, fuzzy, kde-format
 #| msgid "Treat as white space."
 msgid "Ignore case (treat as white space)"
 msgstr "വെളുത്ത അച്ചകലമായി കണക്കാക്കുക"
 
-#: optiondialog.cpp:884
+#: optiondialog.cpp:866
 #, kde-format
 msgid "Treat case differences like white space changes. ('a'<=>'A')"
 msgstr "അക്ഷരങ്ങളുടെ അവസ്ഥാന്തരങ്ങള്‍ ‍വെള്ള അച്ചകലമായി കണക്കാക്കുക ('a'<=>'A'"
 
-#: optiondialog.cpp:887
+#: optiondialog.cpp:869
 #, kde-format
 msgid "Preprocessor command:"
 msgstr "പൂര്‍വ്വ പ്രക്രിയയ്ക്കുള്ള ആജ്ഞ:"
 
-#: optiondialog.cpp:892
+#: optiondialog.cpp:874
 #, kde-format
 msgid "User defined pre-processing. (See the docs for details.)"
 msgstr "ഉപയോക്താവ് നിര്‍വ്വചിയ്ക്കുന്ന പൂര്‍വ്വ -പ്രക്രിയ. ( വിശദീകരണങ്ങള്ക്ക് പ്രമാണപത്രം നോക്കുക.)"
 
-#: optiondialog.cpp:895
+#: optiondialog.cpp:877
 #, kde-format
 msgid "Line-matching preprocessor command:"
 msgstr "വരികളുടെ-ചേര്‍ച്ച നോക്കുന്ന പൂര്‍വ്വ പ്രക്രിയയ്ക്കുള്ള ആജ്ഞ:"
 
-#: optiondialog.cpp:900
+#: optiondialog.cpp:882
 #, kde-format
 msgid ""
 "This pre-processor is only used during line matching.\n"
@@ -2611,12 +2557,12 @@ msgstr ""
 "വരികളുടെ ചേര്‍ച്ച നോക്കുമ്പോള്‍ മാത്രമേ ഈ പൂര്‍വ്വപ്രക്രിയ ഉപയോഗിക്കൂ.\n"
 "(വിശദീകരണങ്ങള്ക്ക് പ്രമാണപത്രം നോക്കുക.)"
 
-#: optiondialog.cpp:903
+#: optiondialog.cpp:885
 #, kde-format
 msgid "Try hard (slower)"
 msgstr "കഠിനമായി യത്നിക്കുക (സാവകാശം)"
 
-#: optiondialog.cpp:907
+#: optiondialog.cpp:889
 #, kde-format
 msgid ""
 "Enables the --minimal option for the external diff.\n"
@@ -2625,12 +2571,12 @@ msgstr ""
 "പുറം ഡിഫിനായി --ഏറ്റവും കുറഞ്ഞ ഐച്ഛികങ്ങള്‍ സജീവമാക്കുന്നു.\n"
 "വളരെ വലിയ ഫയലുകളുടെ വിശകലനം വളരെ സാവധാനത്തിലായിരിക്കും."
 
-#: optiondialog.cpp:911
+#: optiondialog.cpp:893
 #, kde-format
 msgid "Align B and C for 3 input files"
 msgstr "3 അകത്തുവിടാനുള്ള ഫയലുകള്‍ക്കായി ബിയും സിയും നിര ഒപ്പിക്കുക."
 
-#: optiondialog.cpp:915
+#: optiondialog.cpp:897
 #, kde-format
 msgid ""
 "Try to align B and C when comparing or merging three input files.\n"
@@ -2642,24 +2588,24 @@ msgstr ""
 "കൂടുതല്‍ കുഴപ്പം പിടിച്ചതായതുകൊണ്ട് ലയനത്തിന്റെ കാര്യ‌‌ത്തില്‍ അത് ശുപാര്‍ശ ചെയ്തിട്ടില്ല.\n"
 "(ഓഫ് ആണ് സഹജം.)"
 
-#: optiondialog.cpp:926
+#: optiondialog.cpp:908
 #, fuzzy, kde-format
 #| msgid "Merge"
 msgctxt "Settings page"
 msgid "Merge"
 msgstr "ലയിപ്പിക്കുക"
 
-#: optiondialog.cpp:927
+#: optiondialog.cpp:909
 #, kde-format
 msgid "Merge Settings"
 msgstr "ഒരുക്കങ്ങള്‍ ലയിപ്പിക്കുക"
 
-#: optiondialog.cpp:950
+#: optiondialog.cpp:932
 #, kde-format
 msgid "Auto advance delay (ms):"
 msgstr "യാന്ത്രികമായ മുന്‍കൂര്‍ വിളംബം (മിസെ):"
 
-#: optiondialog.cpp:956
+#: optiondialog.cpp:938
 #, kde-format
 msgid ""
 "When in Auto-Advance mode the result of the current selection is shown \n"
@@ -2669,27 +2615,27 @@ msgstr ""
 "തെരഞ്ഞെടുത്തതിന്റെ ഫലം നിര്‍ദ്ദേശിക്കപ്പെട്ടസമയത്തേയ്ക്ക് കാണിക്കും \n"
 "ദൈര്‍ഘ്യം: 0-2000മിസെ"
 
-#: optiondialog.cpp:960
+#: optiondialog.cpp:942
 #, kde-format
 msgid "Show info dialogs"
 msgstr "വിവരങ്ങളുടെ സംവാദ ജാലകം കാണിക്കുക"
 
-#: optiondialog.cpp:963
+#: optiondialog.cpp:945
 #, kde-format
 msgid "Show a dialog with information about the number of conflicts."
 msgstr "സംഘട്ടനങ്ങളുടെ എണ്ണത്തെ സംബന്ധിക്കുന്ന വിവരം ഒരു സംവാദജാലകത്തില്‍ കാണിക്കുക."
 
-#: optiondialog.cpp:966
+#: optiondialog.cpp:948
 #, kde-format
 msgid "White space 2-file merge default:"
 msgstr "ശുഭ്രസ്ഥാനം 2-ഫയല്‍ ലയനം സഹജം:"
 
-#: optiondialog.cpp:971 optiondialog.cpp:984
+#: optiondialog.cpp:953 optiondialog.cpp:966
 #, kde-format
 msgid "Manual Choice"
 msgstr "മാനവിക അവസരം"
 
-#: optiondialog.cpp:975 optiondialog.cpp:989
+#: optiondialog.cpp:957 optiondialog.cpp:971
 #, kde-format
 msgid ""
 "Allow the merge algorithm to automatically select an input for white-space-"
@@ -2698,27 +2644,27 @@ msgstr ""
 "ശുഭ്ര-സ്ഥാനത്തിന്-മാത്രം വേണ്ടി സ്വയം നിക്ഷേപം തെരഞ്ഞെടുക്കാന്‍ ലയനത്തിനായുള്ള ആജ്ഞാസംഹിതക്ക് "
 "മാറ്റങ്ങള്‍ അനുവദിക്കുക"
 
-#: optiondialog.cpp:979
+#: optiondialog.cpp:961
 #, kde-format
 msgid "White space 3-file merge default:"
 msgstr "ശുഭ്രസ്ഥാനം 3-ഫയല്‍ ലയനം സഹജം:"
 
-#: optiondialog.cpp:993
+#: optiondialog.cpp:975
 #, kde-format
 msgid "Automatic Merge Regular Expression"
 msgstr "നിത്യഭാവം സ്വയമേവ ലയിപ്പിക്കുക"
 
-#: optiondialog.cpp:1001 smalldialogs.cpp:373
+#: optiondialog.cpp:983 smalldialogs.cpp:373
 #, kde-format
 msgid "Auto merge regular expression:"
 msgstr "നിത്യഭാവം സ്വയം ലയിപ്പിക്കുക:"
 
-#: optiondialog.cpp:1009
+#: optiondialog.cpp:991
 #, kde-format
 msgid "Run regular expression auto merge on merge start"
 msgstr "ലയനം തുടങ്ങുമ്പോള്‍ നിത്യ‌‌ഭാവത്തിന്റെ യാന്ത്രികലയനം പ്രവര്‍ത്തിപ്പിക്കുക"
 
-#: optiondialog.cpp:1012
+#: optiondialog.cpp:994
 #, kde-format
 msgid ""
 "Run the merge for auto merge regular expressions\n"
@@ -2727,67 +2673,67 @@ msgstr ""
 "ഒരു ലയനം തുടങ്ങുമ്പോള്‍ ഉടനെത്തന്നെ നിത്യഭാവത്തിന്റെ സ്വയം ലയനത്തിന്\n"
 " വേണ്ടി ലയനം പ്രവര്‍ത്തിപ്പിക്കുക.\n"
 
-#: optiondialog.cpp:1017
+#: optiondialog.cpp:999
 #, kde-format
 msgid "Version Control History Merging"
 msgstr "ഭാഷാന്തര നിയന്ത്രണത്തിന്റെ നാള്‍വഴി ലയിപ്പിക്കല്‍"
 
-#: optiondialog.cpp:1025 smalldialogs.cpp:400
+#: optiondialog.cpp:1007 smalldialogs.cpp:400
 #, kde-format
 msgid "History start regular expression:"
 msgstr "നാള്‍വഴി നിത്യ‌‌ഭാവം തുടങ്ങുക:"
 
-#: optiondialog.cpp:1033 smalldialogs.cpp:428
+#: optiondialog.cpp:1015 smalldialogs.cpp:428
 #, kde-format
 msgid "History entry start regular expression:"
 msgstr "നാള്‍വഴി ചേര്‍ക്കുന്നത് നിത്യ‌‌ഭാവം തുടങ്ങും:"
 
-#: optiondialog.cpp:1049
+#: optiondialog.cpp:1031
 #, kde-format
 msgid "History merge sorting"
 msgstr "തരം തിരിക്കുന്നതിനെ നാള്‍വഴി ലയിപ്പിക്കുന്നു"
 
-#: optiondialog.cpp:1052
+#: optiondialog.cpp:1034
 #, kde-format
 msgid "Sort version control history by a key."
 msgstr "ഭാഷാന്തര നിയന്ത്രണ നാള്‍വഴി ഒരു കീ ഉപയോഗിച്ച് തരം തിരിക്കുക."
 
-#: optiondialog.cpp:1062
+#: optiondialog.cpp:1044
 #, kde-format
 msgid "History entry start sort key order:"
 msgstr "നാള്‍വഴി ചേര്‍ത്തത് കീകളുടെ ക്രമം തരം തിരിക്കാന്‍ തുടങ്ങുന്നു."
 
-#: optiondialog.cpp:1072
+#: optiondialog.cpp:1054
 #, kde-format
 msgid "Merge version control history on merge start"
 msgstr ""
 
-#: optiondialog.cpp:1075
+#: optiondialog.cpp:1057
 #, kde-format
 msgid "Run version control history automerge on merge start."
 msgstr ""
 
-#: optiondialog.cpp:1079
+#: optiondialog.cpp:1061
 #, kde-format
 msgid "Max number of history entries:"
 msgstr ""
 
-#: optiondialog.cpp:1083
+#: optiondialog.cpp:1065
 #, kde-format
 msgid "Cut off after specified number. Use -1 for infinite number of entries."
 msgstr ""
 
-#: optiondialog.cpp:1087
+#: optiondialog.cpp:1069
 #, kde-format
 msgid "Test your regular expressions"
 msgstr ""
 
-#: optiondialog.cpp:1092
+#: optiondialog.cpp:1074
 #, kde-format
 msgid "Irrelevant merge command:"
 msgstr ""
 
-#: optiondialog.cpp:1097
+#: optiondialog.cpp:1079
 #, kde-format
 msgid ""
 "If specified this script is run after automerge\n"
@@ -2795,12 +2741,12 @@ msgid ""
 "Called with the parameters: filename1 filename2 filename3"
 msgstr ""
 
-#: optiondialog.cpp:1102
+#: optiondialog.cpp:1084
 #, kde-format
 msgid "Auto save and quit on merge without conflicts"
 msgstr ""
 
-#: optiondialog.cpp:1106
+#: optiondialog.cpp:1088
 #, kde-format
 msgid ""
 "If KDiff3 was started for a file-merge from the command line and all\n"
@@ -2809,24 +2755,24 @@ msgid ""
 "(Similar to command line option \"--auto\".)"
 msgstr ""
 
-#: optiondialog.cpp:1138
+#: optiondialog.cpp:1120
 #, fuzzy, kde-format
 #| msgid "Recursive directories"
 msgid "Recursive folders"
 msgstr "തട്ടിനുള്ളിലെ തട്ടുകള്‍ കൂടി"
 
-#: optiondialog.cpp:1141
+#: optiondialog.cpp:1123
 #, fuzzy, kde-format
 #| msgid "Whether to analyze subdirectories or not."
 msgid "Whether to analyze subfolders or not."
 msgstr "തട്ടിനുള്ളിലെ തട്ടുകള്‍ കൂടി വിശകലനം ചെയ്യണോ വേണ്ടയോ എന്നു്."
 
-#: optiondialog.cpp:1143
+#: optiondialog.cpp:1125
 #, kde-format
 msgid "File pattern(s):"
 msgstr ""
 
-#: optiondialog.cpp:1149
+#: optiondialog.cpp:1131
 #, kde-format
 msgid ""
 "Pattern(s) of files to be analyzed. \n"
@@ -2834,12 +2780,12 @@ msgid ""
 "Several Patterns can be specified by using the separator: ';'"
 msgstr ""
 
-#: optiondialog.cpp:1154
+#: optiondialog.cpp:1136
 #, kde-format
 msgid "File-anti-pattern(s):"
 msgstr ""
 
-#: optiondialog.cpp:1160
+#: optiondialog.cpp:1142
 #, kde-format
 msgid ""
 "Pattern(s) of files to be excluded from analysis. \n"
@@ -2847,12 +2793,12 @@ msgid ""
 "Several Patterns can be specified by using the separator: ';'"
 msgstr ""
 
-#: optiondialog.cpp:1165
+#: optiondialog.cpp:1147
 #, kde-format
 msgid "Folder-anti-pattern(s):"
 msgstr ""
 
-#: optiondialog.cpp:1171
+#: optiondialog.cpp:1153
 #, kde-format
 msgid ""
 "Pattern(s) of folders to be excluded from analysis. \n"
@@ -2860,13 +2806,13 @@ msgid ""
 "Several Patterns can be specified by using the separator: ';'"
 msgstr ""
 
-#: optiondialog.cpp:1176
+#: optiondialog.cpp:1158
 #, fuzzy, kde-format
 #| msgid "Ignore case"
 msgid "Use Ignore File"
 msgstr "അക്ഷരങ്ങളുടെ അവസ്ഥ വിഗണിക്കുക"
 
-#: optiondialog.cpp:1180
+#: optiondialog.cpp:1162
 #, kde-format
 msgid ""
 "Extends the antipattern to anything that would be ignored by source "
@@ -2874,46 +2820,46 @@ msgid ""
 "Via local ignore files this can be folder-specific."
 msgstr ""
 
-#: optiondialog.cpp:1184
+#: optiondialog.cpp:1166
 #, kde-format
 msgid "Find hidden files and folders"
 msgstr ""
 
-#: optiondialog.cpp:1187
+#: optiondialog.cpp:1169
 #, kde-format
 msgid "Finds hidden files and folders."
 msgstr ""
 
-#: optiondialog.cpp:1190
+#: optiondialog.cpp:1172
 #, kde-format
 msgid "Follow file links"
 msgstr ""
 
-#: optiondialog.cpp:1194
+#: optiondialog.cpp:1176
 #, kde-format
 msgid ""
 "On: Compare the file the link points to.\n"
 "Off: Compare the links."
 msgstr ""
 
-#: optiondialog.cpp:1198
+#: optiondialog.cpp:1180
 #, kde-format
 msgid "Follow folder links"
 msgstr ""
 
-#: optiondialog.cpp:1202
+#: optiondialog.cpp:1184
 #, kde-format
 msgid ""
 "On: Compare the folder the link points to.\n"
 "Off: Compare the links."
 msgstr ""
 
-#: optiondialog.cpp:1211
+#: optiondialog.cpp:1193
 #, kde-format
 msgid "Case sensitive filename comparison"
 msgstr ""
 
-#: optiondialog.cpp:1215
+#: optiondialog.cpp:1197
 #, kde-format
 msgid ""
 "The folder comparison will compare files or folders when their names match.\n"
@@ -2921,64 +2867,64 @@ msgid ""
 "off, otherwise on.)"
 msgstr ""
 
-#: optiondialog.cpp:1219
+#: optiondialog.cpp:1201
 #, fuzzy, kde-format
 #| msgid "Whether to analyze subdirectories or not."
 msgid "Unfold all subfolders on load"
 msgstr "തട്ടിനുള്ളിലെ തട്ടുകള്‍ കൂടി വിശകലനം ചെയ്യണോ വേണ്ടയോ എന്നു്."
 
-#: optiondialog.cpp:1223
+#: optiondialog.cpp:1205
 #, kde-format
 msgid ""
 "On: Unfold all subfolders when starting a folder diff.\n"
 "Off: Leave subfolders folded."
 msgstr ""
 
-#: optiondialog.cpp:1227
+#: optiondialog.cpp:1209
 #, kde-format
 msgid "Skip folder status report"
 msgstr ""
 
-#: optiondialog.cpp:1231
+#: optiondialog.cpp:1213
 #, kde-format
 msgid ""
 "On: Do not show the Folder Comparison Status.\n"
 "Off: Show the status dialog on start."
 msgstr ""
 
-#: optiondialog.cpp:1235
+#: optiondialog.cpp:1217
 #, kde-format
 msgid "File Comparison Mode"
 msgstr ""
 
-#: optiondialog.cpp:1240
+#: optiondialog.cpp:1222
 #, kde-format
 msgid "Binary comparison"
 msgstr ""
 
-#: optiondialog.cpp:1242
+#: optiondialog.cpp:1224
 #, kde-format
 msgid "Binary comparison of each file. (Default)"
 msgstr ""
 
-#: optiondialog.cpp:1245
+#: optiondialog.cpp:1227
 #, kde-format
 msgid "Full analysis"
 msgstr ""
 
-#: optiondialog.cpp:1247
+#: optiondialog.cpp:1229
 #, kde-format
 msgid ""
 "Do a full analysis and show statistics information in extra columns.\n"
 "(Slower than a binary comparison, much slower for binary files.)"
 msgstr ""
 
-#: optiondialog.cpp:1251
+#: optiondialog.cpp:1233
 #, kde-format
 msgid "Trust the size and modification date (unsafe)"
 msgstr ""
 
-#: optiondialog.cpp:1253
+#: optiondialog.cpp:1235
 #, kde-format
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -2988,14 +2934,14 @@ msgid ""
 "Useful for big folders or slow networks."
 msgstr ""
 
-#: optiondialog.cpp:1258
+#: optiondialog.cpp:1240
 #, kde-format
 msgid ""
 "Trust the size and date, but use binary comparison if date does not match "
 "(unsafe)"
 msgstr ""
 
-#: optiondialog.cpp:1260
+#: optiondialog.cpp:1242
 #, kde-format
 msgid ""
 "Assume that files are equal if the modification date and file length are "
@@ -3004,12 +2950,12 @@ msgid ""
 "Useful for big folders or slow networks."
 msgstr ""
 
-#: optiondialog.cpp:1265
+#: optiondialog.cpp:1247
 #, kde-format
 msgid "Trust the size (unsafe)"
 msgstr ""
 
-#: optiondialog.cpp:1267
+#: optiondialog.cpp:1249
 #, kde-format
 msgid ""
 "Assume that files are equal if their file lengths are equal.\n"
@@ -3017,12 +2963,12 @@ msgid ""
 "download."
 msgstr ""
 
-#: optiondialog.cpp:1274
+#: optiondialog.cpp:1256
 #, kde-format
 msgid "Synchronize folders"
 msgstr ""
 
-#: optiondialog.cpp:1278
+#: optiondialog.cpp:1260
 #, kde-format
 msgid ""
 "Offers to store files in both folders so that\n"
@@ -3030,24 +2976,24 @@ msgid ""
 "Works only when comparing two folders without specifying a destination."
 msgstr ""
 
-#: optiondialog.cpp:1284
+#: optiondialog.cpp:1266
 #, kde-format
 msgid "White space differences considered equal"
 msgstr ""
 
-#: optiondialog.cpp:1288
+#: optiondialog.cpp:1270
 #, kde-format
 msgid ""
 "If files differ only by white space consider them equal.\n"
 "This is only active when full analysis is chosen."
 msgstr ""
 
-#: optiondialog.cpp:1294
+#: optiondialog.cpp:1276
 #, kde-format
 msgid "Copy newer instead of merging (unsafe)"
 msgstr ""
 
-#: optiondialog.cpp:1298
+#: optiondialog.cpp:1280
 #, kde-format
 msgid ""
 "Do not look inside, just take the newer file.\n"
@@ -3055,46 +3001,46 @@ msgid ""
 "Only effective when comparing two folders."
 msgstr ""
 
-#: optiondialog.cpp:1303
+#: optiondialog.cpp:1285
 #, kde-format
 msgid "Backup files (.orig)"
 msgstr ""
 
-#: optiondialog.cpp:1307
+#: optiondialog.cpp:1289
 #, kde-format
 msgid ""
 "If a file would be saved over an old file, then the old file\n"
 "will be renamed with a '.orig' extension instead of being deleted."
 msgstr ""
 
-#: optiondialog.cpp:1316 optiondialog.cpp:1317
+#: optiondialog.cpp:1298 optiondialog.cpp:1299
 #, kde-format
 msgid "Regional Settings"
 msgstr ""
 
-#: optiondialog.cpp:1340
+#: optiondialog.cpp:1322
 #, kde-format
 msgid "Use the same encoding for everything:"
 msgstr ""
 
-#: optiondialog.cpp:1344
+#: optiondialog.cpp:1326
 #, kde-format
 msgid ""
 "Enable this allows to change all encodings by changing the first only.\n"
 "Disable this if different individual settings are needed."
 msgstr ""
 
-#: optiondialog.cpp:1348
+#: optiondialog.cpp:1330
 #, kde-format
 msgid "Note: Local Encoding is \"%1\""
 msgstr ""
 
-#: optiondialog.cpp:1352
+#: optiondialog.cpp:1334
 #, kde-format
 msgid "File Encoding for A:"
 msgstr ""
 
-#: optiondialog.cpp:1359
+#: optiondialog.cpp:1341
 #, kde-format
 msgid ""
 "If enabled then Unicode (UTF-16 or UTF-8) encoding will be detected.\n"
@@ -3103,32 +3049,32 @@ msgid ""
 "(Unicode detection depends on the first bytes of a file.)"
 msgstr ""
 
-#: optiondialog.cpp:1362 optiondialog.cpp:1373 optiondialog.cpp:1384
+#: optiondialog.cpp:1344 optiondialog.cpp:1355 optiondialog.cpp:1366
 #, kde-format
 msgid "Auto Detect Unicode"
 msgstr ""
 
-#: optiondialog.cpp:1368
+#: optiondialog.cpp:1350
 #, kde-format
 msgid "File Encoding for B:"
 msgstr ""
 
-#: optiondialog.cpp:1379
+#: optiondialog.cpp:1361
 #, kde-format
 msgid "File Encoding for C:"
 msgstr ""
 
-#: optiondialog.cpp:1390
+#: optiondialog.cpp:1372
 #, kde-format
 msgid "File Encoding for Merge Output and Saving:"
 msgstr ""
 
-#: optiondialog.cpp:1395
+#: optiondialog.cpp:1377
 #, kde-format
 msgid "Auto Select"
 msgstr ""
 
-#: optiondialog.cpp:1399
+#: optiondialog.cpp:1381
 #, kde-format
 msgid ""
 "If enabled then the encoding from the input files is used.\n"
@@ -3136,39 +3082,39 @@ msgid ""
 "saving."
 msgstr ""
 
-#: optiondialog.cpp:1402
+#: optiondialog.cpp:1384
 #, kde-format
 msgid "File Encoding for Preprocessor Files:"
 msgstr ""
 
-#: optiondialog.cpp:1414
+#: optiondialog.cpp:1396
 #, kde-format
 msgid "Right To Left Language"
 msgstr ""
 
-#: optiondialog.cpp:1418
+#: optiondialog.cpp:1400
 #, kde-format
 msgid ""
 "Some languages are read from right to left.\n"
 "This setting will change the viewer and editor accordingly."
 msgstr ""
 
-#: optiondialog.cpp:1428
+#: optiondialog.cpp:1410
 #, kde-format
 msgid "Integration"
 msgstr ""
 
-#: optiondialog.cpp:1429
+#: optiondialog.cpp:1411
 #, kde-format
 msgid "Integration Settings"
 msgstr ""
 
-#: optiondialog.cpp:1450
+#: optiondialog.cpp:1432
 #, kde-format
 msgid "Command line options to ignore:"
 msgstr ""
 
-#: optiondialog.cpp:1456
+#: optiondialog.cpp:1438
 #, kde-format
 msgid ""
 "List of command line options that should be ignored when KDiff3 is used by "
@@ -3177,19 +3123,19 @@ msgid ""
 "This will suppress the \"Unknown option\" error."
 msgstr ""
 
-#: optiondialog.cpp:1461
+#: optiondialog.cpp:1443
 #, kde-format
 msgid "Quit also via Escape key"
 msgstr ""
 
-#: optiondialog.cpp:1465
+#: optiondialog.cpp:1447
 #, kde-format
 msgid ""
 "Fast method to exit.\n"
 "For those who are used to using the Escape key."
 msgstr ""
 
-#: optiondialog.cpp:1523
+#: optiondialog.cpp:1505
 #, kde-format
 msgid "This resets all options. Not only those of the current topic."
 msgstr ""
@@ -3638,6 +3584,43 @@ msgstr ""
 #, kde-format
 msgid "No program specified."
 msgstr ""
+
+#~ msgid ""
+#~ "A version control history entry consists of several lines.\n"
+#~ "Specify the regular expression to detect the first line (without the "
+#~ "leading comment).\n"
+#~ "Use parentheses to group the keys you want to use for sorting.\n"
+#~ "If left empty, then KDiff3 assumes that empty lines separate history "
+#~ "entries.\n"
+#~ "See the documentation for details."
+#~ msgstr ""
+#~ "ഒരു ഭാഷാന്തര നിയന്ത്രണത്തിന്റെ നാള്‍വഴി ചേര്‍ക്കുന്നതില്‍ പല വരികളുണ്ടാകും.\n"
+#~ "ആദ്യ‌‌ത്തെ വരി കണ്ടുപിടിക്കാനുള്ള നിത്യ‌‌ഭാവം നിര്‍ദ്ദേശിക്കുക (മുന്നിലെ വിശദീകരണം കൂടാതെ).\n"
+#~ "ഇനം തിരിക്കാനുപയോഗിക്കുന്ന കീകളെ ഒന്നിച്ചാക്കാന്‍ ബ്രാക്കറ്റുകള്‍ ഉപയോഗിക്കുക.\n"
+#~ "ഒഴിച്ചു വിട്ടാല്‍ ഒഴിഞ്ഞ വരികള്‍ നാള്‍വഴിയിലെ വിവരങ്ങള്‍ വേര്‍തിരിക്കാനാണെന്ന് കെഡിഫ്3 സങ്കല്‍"
+#~ "പ്പിയ്ക്കും.\n"
+#~ "വിശദീകരണങ്ങള്‍ക്ക് പ്രമാണപത്രം കാണുക."
+
+#~ msgid ""
+#~ "Regular expression for lines where KDiff3 should automatically choose one "
+#~ "source.\n"
+#~ "When a line with a conflict matches the regular expression then\n"
+#~ "- if available - C, otherwise B will be chosen."
+#~ msgstr ""
+#~ "കെഡിഫ്3 സ്വതന്ത്രമായി ഒരു സ്രോതസ്സ് തെരഞ്ഞെടുക്കുന്നിടത്ത് വരികള്‍ക്കുള്ള നിത്യഭാവം.\n"
+#~ "സംഘട്ടനമുള്ള വരി ചേര്‍ന്നുവരുമ്പോള്‍ അതിന്റെ നിത്യ‌‌ഭാവം\n"
+#~ "-സി ഉണ്ടെങ്കില്‍ അത്, അല്ലെങ്കില്‍ ബി തെരഞ്ഞെടുക്കപ്പെടും."
+
+#, fuzzy
+#~ msgid ""
+#~ "Regular expression for the start of the version control history entry.\n"
+#~ "Usually this line contains the \"$Log$\" keyword.\n"
+#~ "Default value: \".*\\$Log.*\\$.*\""
+#~ msgstr ""
+#~ "ഭാഷാന്തര നിയന്ത്രണത്തിന്റെ നാള്‍വഴി തുടങ്ങുന്നതിന്റെ നിത്യഭാവം എഴുതിച്ചേര്‍ക്കല്‍.\n"
+#~ "സാധാരണയായി ഈ വരി  \"$Log$\"-keyword.\n"
+#~ " ഉള്‍ക്കൊണ്ടിരിക്കും.\n"
+#~ "തനത് മൂല്യം:\".*\\$Log.*\\$.*\""
 
 #, fuzzy
 #~| msgid "Severe Internal Error"
