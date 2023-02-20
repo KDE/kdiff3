@@ -21,6 +21,7 @@
 
 #include <KPageDialog>
 #include <KSharedConfig>
+#include <KLocalizedString>
 
 class OptionCheckBox;
 class OptionEncodingComboBox;
