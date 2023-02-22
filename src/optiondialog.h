@@ -19,9 +19,9 @@
 #include <QSharedPointer>
 #include <QStringList>
 
+#include <KLocalizedString>
 #include <KPageDialog>
 #include <KSharedConfig>
-#include <KLocalizedString>
 
 class OptionCheckBox;
 class OptionEncodingComboBox;

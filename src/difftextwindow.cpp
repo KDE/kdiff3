@@ -928,14 +928,11 @@ void DiffTextWindowData::prepareTextLayout(QTextLayout& textLayout, int visibleT
             break;
 
         height += leading;
-        //if ( !bFirstLine )
-        //   indentation =  Utils::getHorizontalAdvance(m_pDiffTextWindow->fontMetrics(), (' ')) * m_pOptions->m_tabSize;
         if(visibleTextWidth >= 0)
         {
             line.setLineWidth(visibleTextWidth - indentation);
             line.setPosition(QPointF(indentation, height));
             height += qCeil(line.height());
-            //bFirstLine = false;
         }
         else // only one line
         {

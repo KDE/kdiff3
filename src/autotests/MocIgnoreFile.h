@@ -25,7 +25,6 @@ class MocIgnoreFile: public FileAccess
   public:
     MocIgnoreFile()
     {
-        //assert(false);
         mJobHandler.reset(new FileAccessJobHandlerMoc(this));
         /*
           FileAccess set file calls our overriden loadData to actually get file meta data.

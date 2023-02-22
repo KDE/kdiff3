@@ -39,7 +39,6 @@ class ValueMap
     void save(QTextStream& ts);
     void load(QTextStream& ts);
     QString getAsString();
-    // void load( const QString& s );
 
     virtual void writeEntry(const QString&, const QFont&);
     virtual void writeEntry(const QString&, const QColor&);
