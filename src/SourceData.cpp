@@ -399,7 +399,7 @@ void SourceData::readAndPreprocess(QTextCodec* pEncoding, bool bAutoDetectUnicod
     FileAccess faIn(fileNameIn1);
     qint64 fileInSize = faIn.size();
 
-    if(faIn.exists())
+    if(faIn.exists() && !faIn.isBrokenLink())
     {
         // Run the first preprocessor
         if(m_pOptions->m_PreProcessorCmd.isEmpty())

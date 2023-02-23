@@ -348,6 +348,7 @@ void FileAccess::loadData()
     if(isLocal() && m_bSymLink)
     {
         m_linkTarget = m_fileInfo.symLinkTarget();
+
 #ifndef Q_OS_WIN
         // Unfortunately Qt5 symLinkTarget/readLink always returns an absolute path, even if the link is relative
         char* s = (char*)malloc(PATH_MAX + 1);
@@ -359,6 +360,14 @@ void FileAccess::loadData()
         }
         free(s);
 #endif
+
+        m_bBrokenLink = !QFileInfo::exists(m_linkTarget);
+        //We want to know if the link itself exists
+        if(!m_bExists)
+            m_bExists = true;
+
+        if(!m_modificationTime.isValid())
+            m_modificationTime = QDateTime::fromMSecsSinceEpoch(0);
     }
 
     realFile = QSharedPointer<QFile>::create(absoluteFilePath());
@@ -630,8 +639,9 @@ bool FileAccess::exists() const
 {
     if(!isLocal())
         return m_bExists;
-    else//Thank you git for being different.
-        return m_fileInfo.exists() && absoluteFilePath() != "/dev/null";
+    else
+        return (m_fileInfo.exists() || isSymLink()) && // QFileInfo.exists returns false for broken links,
+               absoluteFilePath() != "/dev/null";      // git uses /dev/null as a placeholder meaning does not exist
 }
 
 qint64 FileAccess::size() const

@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * KDiff3 - Text Diff And Merge Tool
  *
@@ -57,6 +58,7 @@ class FileAccess
     Q_REQUIRED_RESULT bool isNormal() const;
     Q_REQUIRED_RESULT bool isValid() const;
     Q_REQUIRED_RESULT virtual bool isFile() const;
+    Q_REQUIRED_RESULT bool isBrokenLink() { return m_bBrokenLink; }
     Q_REQUIRED_RESULT virtual bool isDir() const;
     Q_REQUIRED_RESULT virtual bool isSymLink() const;
     Q_REQUIRED_RESULT virtual bool exists() const;
@@ -168,6 +170,7 @@ class FileAccess
 
     qint64 m_size = 0;
     QDateTime m_modificationTime = QDateTime::fromMSecsSinceEpoch(0);
+    bool m_bBrokenLink = false;
     bool m_bSymLink = false;
     bool m_bFile = false;
     bool m_bDir = false;
