@@ -548,10 +548,11 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent)
 
     if(isLocal())
     {
-        m_bExists = m_fileInfo.exists();
+        m_bBrokenLink = !m_fileInfo.exists() && m_fileInfo.isSymLink();
+        m_bExists = m_fileInfo.exists() || m_bBrokenLink;
 
         //insure modification time is initialized if it wasn't already.
-        if(m_modificationTime == QDateTime::fromMSecsSinceEpoch(0))
+        if(!m_bBrokenLink && m_modificationTime == QDateTime::fromMSecsSinceEpoch(0))
             m_modificationTime = m_fileInfo.lastModified();
     }
 
