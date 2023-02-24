@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-18 01:02+0000\n"
+"POT-Creation-Date: 2023-02-24 01:01+0000\n"
 "PO-Revision-Date: 2023-02-19 17:34+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -124,67 +124,67 @@ msgstr "Файл %1: Строка %2"
 msgid "File %1: Line not available"
 msgstr "Файл %1: строка недоступна"
 
-#: difftextwindow.cpp:1906
+#: difftextwindow.cpp:1903
 #, kde-format
 msgid "Encoding:"
 msgstr "Кодировка:"
 
-#: difftextwindow.cpp:1910 mergeresultwindow.cpp:2797 optiondialog.cpp:803
+#: difftextwindow.cpp:1907 mergeresultwindow.cpp:2797 optiondialog.cpp:803
 #, kde-format
 msgid "Line end style:"
 msgstr "Тип завершения строки:"
 
-#: difftextwindow.cpp:1935
+#: difftextwindow.cpp:1932
 #, kde-format
 msgid "A (Base)"
 msgstr "A (базовый):"
 
-#: difftextwindow.cpp:1937
+#: difftextwindow.cpp:1934
 #, kde-format
 msgid "Encoding: %1"
 msgstr "Кодировка: %1"
 
-#: difftextwindow.cpp:1938 mergeresultwindow.cpp:2843
+#: difftextwindow.cpp:1935 mergeresultwindow.cpp:2843
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1938 mergeresultwindow.cpp:2842
+#: difftextwindow.cpp:1935 mergeresultwindow.cpp:2842
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
 
-#: difftextwindow.cpp:1938
+#: difftextwindow.cpp:1935
 #, kde-format
 msgid "Line end style: %1"
 msgstr "Тип завершения строки: %1"
 
-#: difftextwindow.cpp:1939
+#: difftextwindow.cpp:1936
 #, kde-format
 msgid "Unknown"
 msgstr "Неизвестный"
 
-#: difftextwindow.cpp:1967 kdiff3.cpp:913
+#: difftextwindow.cpp:1964 kdiff3.cpp:913
 #, kde-format
 msgid "Top line"
 msgstr "Первая строка"
 
-#: difftextwindow.cpp:1976
+#: difftextwindow.cpp:1973
 #, kde-format
 msgid "End"
 msgstr "Конец"
 
-#: difftextwindow.cpp:2034 smalldialogs.cpp:164
+#: difftextwindow.cpp:2031 smalldialogs.cpp:164
 #, kde-format
 msgid "Open File"
 msgstr "Открыть файл"
 
-#: difftextwindow.cpp:2082 optiondialog.cpp:388
+#: difftextwindow.cpp:2079 optiondialog.cpp:388
 #, kde-format
 msgid "Unicode, 8 bit"
 msgstr "Unicode, 8 бит"
 
-#: difftextwindow.cpp:2098
+#: difftextwindow.cpp:2095
 #, kde-format
 msgid "Other"
 msgstr "Другое"
@@ -1064,33 +1064,33 @@ msgstr "Объединить в B"
 msgid "Merge to A && B"
 msgstr "Объединить в A и B"
 
-#: fileaccess.cpp:507
+#: fileaccess.cpp:516
 #, kde-format
 msgid "Unable to determine full url. No parent specified."
 msgstr ""
 "Не удалось определить полный адрес URL. Родительский элемент не указан."
 
-#: fileaccess.cpp:779
+#: fileaccess.cpp:790
 #, kde-format
 msgid "Failed to read file: %1"
 msgstr "Не удалось прочитать файл: %1"
 
-#: fileaccess.cpp:919
+#: fileaccess.cpp:930
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "Не удалось создать временную копию %1."
 
-#: fileaccess.cpp:927 fileaccess.cpp:932
+#: fileaccess.cpp:938 fileaccess.cpp:943
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "Не удалось открыть %1. %2"
 
-#: fileaccess.cpp:951 fileaccess.cpp:959
+#: fileaccess.cpp:962 fileaccess.cpp:970
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "Ошибка чтения из %1. %2"
 
-#: fileaccess.cpp:1088
+#: fileaccess.cpp:1099
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1099,7 +1099,7 @@ msgstr ""
 "Не удалось удалить старую резервную копию при попытке создать новую.\n"
 "Имя файла: %1"
 
-#: fileaccess.cpp:1095
+#: fileaccess.cpp:1106
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
