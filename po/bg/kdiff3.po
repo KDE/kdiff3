@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-18 02:53+0000\n"
+"POT-Creation-Date: 2023-02-24 02:52+0000\n"
 "PO-Revision-Date: 2022-08-03 14:11+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: \n"
@@ -1106,32 +1106,32 @@ msgstr "Сливане с B"
 msgid "Merge to A && B"
 msgstr "Сливане в А и B"
 
-#: fileaccess.cpp:506
+#: fileaccess.cpp:515
 #, kde-format
 msgid "Unable to determine full url. No parent specified."
 msgstr "Невъзможно е да се определи пълният url адрес. Не е посочен родител."
 
-#: fileaccess.cpp:778
+#: fileaccess.cpp:788
 #, kde-format
 msgid "Failed to read file: %1"
 msgstr "Неуспешно четене на файл: %1"
 
-#: fileaccess.cpp:918
+#: fileaccess.cpp:928
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "Създаването на временно копие на %1 беше неуспешно."
 
-#: fileaccess.cpp:926 fileaccess.cpp:931
+#: fileaccess.cpp:936 fileaccess.cpp:941
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "Отварянето на %1 се провали. %2"
 
-#: fileaccess.cpp:950 fileaccess.cpp:958
+#: fileaccess.cpp:960 fileaccess.cpp:968
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "Грешка при четене от %1. %2"
 
-#: fileaccess.cpp:1087
+#: fileaccess.cpp:1097
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1141,7 +1141,7 @@ msgstr ""
 "копие се провали.\n"
 "Име на файл: %1"
 
-#: fileaccess.cpp:1094
+#: fileaccess.cpp:1104
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
