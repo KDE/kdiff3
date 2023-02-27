@@ -521,7 +521,7 @@ void FileAccess::setFromUdsEntry(const KIO::UDSEntry& e, FileAccess* parent)
         */
         m_url = parent->url();
         addPath(filePath, false);
-        //Not something I expect to happen but can't rule it out either
+        //This too would be a bug somewhere. Don't crash out though.
         if(Q_UNLIKELY(m_url == parent->url()))
         {
             m_url.clear();
