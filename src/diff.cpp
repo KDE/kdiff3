@@ -1549,7 +1549,7 @@ void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
     QtSizeType j = 0;
     for(i = begin(); i != end(); ++i, ++j)
     {
-        d3lv[j] = &(*i);
+        d3lv[j] = std::make_shared<Diff3Line>(*i);
     }
     assert(j == d3lv.size());
 }

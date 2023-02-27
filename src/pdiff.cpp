@@ -113,8 +113,12 @@ void KDiff3App::mainInit(TotalDiffStatus* pTotalDiffStatus, const InitFlags inFl
         setLockPainting(true);
     }
 
-    //insure merge result window never has stale iterators.
-    if(m_pMergeResultWindow) m_pMergeResultWindow->clearMergeList();
+    //insure merge result window never has stale iterators/[poiners.
+    if(m_pMergeResultWindow) m_pMergeResultWindow->reset();
+    //Clear stale pointers in DiffTextWindow.
+    if(m_pDiffTextWindow1) m_pDiffTextWindow1->reset();
+    if(m_pDiffTextWindow2) m_pDiffTextWindow2->reset();
+    if(m_pDiffTextWindow3) m_pDiffTextWindow3->reset();
     m_diff3LineList.clear();
     mDiff3LineVector.clear();
 

@@ -58,11 +58,6 @@ class MergeResultWindow: public QWidget
 
     void setupConnections(const KDiff3App* app);
 
-    inline void clearMergeList()
-    {
-        m_mergeBlockList.list().clear();
-    }
-
     static void initActions(KActionCollection* ac);
 
     void connectActions() const;
