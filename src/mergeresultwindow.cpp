@@ -301,6 +301,8 @@ void MergeResultWindow::slotStatusMessageChanged(const QString& s)
 
 void MergeResultWindow::reset()
 {
+    m_mergeLineList.list().clear();
+
     m_pDiff3LineList = nullptr;
     m_pTotalDiffStatus = nullptr;
     m_pldA = nullptr;

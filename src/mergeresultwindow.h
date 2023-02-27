@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * KDiff3 - Text Diff And Merge Tool
  *
@@ -56,11 +57,6 @@ class MergeResultWindow: public QWidget
     );
 
     void setupConnections(const KDiff3App* app);
-
-    inline void clearMergeList()
-    {
-        m_mergeLineList.list().clear();
-    }
 
     static void initActions(KActionCollection* ac);
 
