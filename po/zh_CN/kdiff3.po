@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-24 02:52+0000\n"
+"POT-Creation-Date: 2023-02-28 03:04+0000\n"
 "PO-Revision-Date: 2023-02-24 12:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -121,7 +121,7 @@ msgstr "文件 %1：行不可用"
 msgid "Encoding:"
 msgstr "编码："
 
-#: difftextwindow.cpp:1900 mergeresultwindow.cpp:2810 optiondialog.cpp:798
+#: difftextwindow.cpp:1900 mergeresultwindow.cpp:2812 optiondialog.cpp:798
 #, kde-format
 msgid "Line end style:"
 msgstr "行尾格式："
@@ -129,12 +129,12 @@ msgstr "行尾格式："
 #: difftextwindow.cpp:1925 directorymergewindow.cpp:388
 #: directorymergewindow.cpp:439 directorymergewindow.cpp:527
 #: directorymergewindow.cpp:2698 directorymergewindow.cpp:2824
-#: directorymergewindow.cpp:2977 mergeresultwindow.cpp:773
-#: mergeresultwindow.cpp:775 mergeresultwindow.cpp:777
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:1481
-#: mergeresultwindow.cpp:2842 mergeresultwindow.cpp:2849 optiondialog.cpp:949
-#: optiondialog.cpp:962 pdiff.cpp:733 pdiff.cpp:735 pdiff.cpp:737 pdiff.cpp:739
-#: pdiff.cpp:761 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
+#: directorymergewindow.cpp:2977 mergeresultwindow.cpp:775
+#: mergeresultwindow.cpp:777 mergeresultwindow.cpp:779
+#: mergeresultwindow.cpp:781 mergeresultwindow.cpp:1483
+#: mergeresultwindow.cpp:2844 mergeresultwindow.cpp:2851 optiondialog.cpp:949
+#: optiondialog.cpp:962 pdiff.cpp:737 pdiff.cpp:739 pdiff.cpp:741 pdiff.cpp:743
+#: pdiff.cpp:765 smalldialogs.cpp:81 smalldialogs.cpp:83 smalldialogs.cpp:84
 #: smalldialogs.cpp:87
 #, kde-format
 msgid "A"
@@ -143,12 +143,12 @@ msgstr "A"
 #: difftextwindow.cpp:1925 directorymergewindow.cpp:390
 #: directorymergewindow.cpp:442 directorymergewindow.cpp:529
 #: directorymergewindow.cpp:2704 directorymergewindow.cpp:2825
-#: directorymergewindow.cpp:2978 mergeresultwindow.cpp:773
-#: mergeresultwindow.cpp:775 mergeresultwindow.cpp:781
-#: mergeresultwindow.cpp:783 mergeresultwindow.cpp:1483
-#: mergeresultwindow.cpp:2844 mergeresultwindow.cpp:2851 optiondialog.cpp:950
-#: optiondialog.cpp:963 pdiff.cpp:733 pdiff.cpp:735 pdiff.cpp:741 pdiff.cpp:743
-#: pdiff.cpp:763 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
+#: directorymergewindow.cpp:2978 mergeresultwindow.cpp:775
+#: mergeresultwindow.cpp:777 mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:785 mergeresultwindow.cpp:1485
+#: mergeresultwindow.cpp:2846 mergeresultwindow.cpp:2853 optiondialog.cpp:950
+#: optiondialog.cpp:963 pdiff.cpp:737 pdiff.cpp:739 pdiff.cpp:745 pdiff.cpp:747
+#: pdiff.cpp:767 smalldialogs.cpp:81 smalldialogs.cpp:82 smalldialogs.cpp:85
 #: smalldialogs.cpp:88
 #, kde-format
 msgid "B"
@@ -157,11 +157,11 @@ msgstr "B"
 #: difftextwindow.cpp:1925 directorymergewindow.cpp:392
 #: directorymergewindow.cpp:445 directorymergewindow.cpp:531
 #: directorymergewindow.cpp:2710 directorymergewindow.cpp:2826
-#: directorymergewindow.cpp:2979 mergeresultwindow.cpp:777
-#: mergeresultwindow.cpp:779 mergeresultwindow.cpp:781
-#: mergeresultwindow.cpp:783 mergeresultwindow.cpp:1485
-#: mergeresultwindow.cpp:2846 mergeresultwindow.cpp:2853 optiondialog.cpp:964
-#: pdiff.cpp:737 pdiff.cpp:739 pdiff.cpp:741 pdiff.cpp:743 pdiff.cpp:765
+#: directorymergewindow.cpp:2979 mergeresultwindow.cpp:779
+#: mergeresultwindow.cpp:781 mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:785 mergeresultwindow.cpp:1487
+#: mergeresultwindow.cpp:2848 mergeresultwindow.cpp:2855 optiondialog.cpp:964
+#: pdiff.cpp:741 pdiff.cpp:743 pdiff.cpp:745 pdiff.cpp:747 pdiff.cpp:769
 #: smalldialogs.cpp:82 smalldialogs.cpp:83 smalldialogs.cpp:86
 #: smalldialogs.cpp:89
 #, kde-format
@@ -178,12 +178,12 @@ msgstr "A (被比较)"
 msgid "Encoding: %1"
 msgstr "编码：%1"
 
-#: difftextwindow.cpp:1928 mergeresultwindow.cpp:2856
+#: difftextwindow.cpp:1928 mergeresultwindow.cpp:2858
 #, kde-format
 msgid "DOS"
 msgstr "DOS"
 
-#: difftextwindow.cpp:1928 mergeresultwindow.cpp:2855
+#: difftextwindow.cpp:1928 mergeresultwindow.cpp:2857
 #, kde-format
 msgid "Unix"
 msgstr "Unix"
@@ -393,7 +393,7 @@ msgid ""
 msgstr "您正在合并文件夹，确定要放弃合并并重新扫描文件夹吗？"
 
 #: directorymergewindow.cpp:695 kdiff3.cpp:752 kdiff3.cpp:762 kdiff3.cpp:774
-#: mergeresultwindow.cpp:326 pdiff.cpp:858 pdiff.cpp:1707 pdiff.cpp:1717
+#: mergeresultwindow.cpp:328 pdiff.cpp:862 pdiff.cpp:1711 pdiff.cpp:1721
 #, kde-format
 msgctxt "Error dialog caption"
 msgid "Warning"
@@ -482,8 +482,8 @@ msgid "Check the permissions of the subfolders."
 msgstr "请检查子文件夹的权限。"
 
 #: directorymergewindow.cpp:968 kdiff3.cpp:712 kdiff3.cpp:807 kdiff3.cpp:831
-#: kdiff3.cpp:1103 kdiff3.cpp:1124 pdiff.cpp:943 pdiff.cpp:1010 pdiff.cpp:1046
-#: pdiff.cpp:1055 pdiff.cpp:1101 pdiff.cpp:1109
+#: kdiff3.cpp:1103 kdiff3.cpp:1124 pdiff.cpp:947 pdiff.cpp:1014 pdiff.cpp:1050
+#: pdiff.cpp:1059 pdiff.cpp:1105 pdiff.cpp:1113
 #, kde-format
 msgid "Ready."
 msgstr "就绪。"
@@ -1080,27 +1080,27 @@ msgstr "合并到 A 和 B"
 msgid "Unable to determine full url. No parent specified."
 msgstr "无法确定完整 URL。没有指定父目录。"
 
-#: fileaccess.cpp:788
+#: fileaccess.cpp:789
 #, kde-format
 msgid "Failed to read file: %1"
 msgstr "读取文件失败 %1"
 
-#: fileaccess.cpp:928
+#: fileaccess.cpp:929
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "创建 %1 的临时副本失败。"
 
-#: fileaccess.cpp:936 fileaccess.cpp:941
+#: fileaccess.cpp:937 fileaccess.cpp:942
 #, kde-format
 msgid "Opening %1 failed. %2"
 msgstr "打开 %1 失败。%2"
 
-#: fileaccess.cpp:960 fileaccess.cpp:968
+#: fileaccess.cpp:961 fileaccess.cpp:969
 #, kde-format
 msgid "Error reading from %1. %2"
 msgstr "读取 %1 出错。%2"
 
-#: fileaccess.cpp:1097
+#: fileaccess.cpp:1098
 #, kde-format
 msgid ""
 "While trying to make a backup, deleting an older backup failed.\n"
@@ -1109,7 +1109,7 @@ msgstr ""
 "试图备份时，删除旧备份失败。\n"
 "文件名：%1"
 
-#: fileaccess.cpp:1104
+#: fileaccess.cpp:1105
 #, kde-format
 msgid ""
 "While trying to make a backup, renaming failed.\n"
@@ -1153,12 +1153,12 @@ msgstr "执行文件夹比较时会忽略选项 --auto。"
 msgid "Saving failed."
 msgstr "保存失败。"
 
-#: kdiff3.cpp:531 pdiff.cpp:924
+#: kdiff3.cpp:531 pdiff.cpp:928
 #, kde-format
 msgid "Opening of these files failed:"
 msgstr "打开文件失败:"
 
-#: kdiff3.cpp:540 pdiff.cpp:933
+#: kdiff3.cpp:540 pdiff.cpp:937
 #, kde-format
 msgid "File open error"
 msgstr "打开文件出错"
@@ -1609,7 +1609,7 @@ msgstr "文件夹和文本分割视图"
 msgid "Toggle Between Folder && Text View"
 msgstr "切换文件夹和文本视图"
 
-#: kdiff3.cpp:751 pdiff.cpp:1706
+#: kdiff3.cpp:751 pdiff.cpp:1710
 #, kde-format
 msgid "The merge result has not been saved."
 msgstr "合并结果未保存。"
@@ -1624,12 +1624,12 @@ msgstr "保存并退出"
 msgid "Quit Without Saving"
 msgstr "退出且不保存"
 
-#: kdiff3.cpp:762 pdiff.cpp:1717
+#: kdiff3.cpp:762 pdiff.cpp:1721
 #, kde-format
 msgid "Saving the merge result failed."
 msgstr "保存合并结果失败。"
 
-#: kdiff3.cpp:773 pdiff.cpp:857
+#: kdiff3.cpp:773 pdiff.cpp:861
 #, kde-format
 msgid ""
 "You are currently doing a folder merge. Are you sure, you want to abort?"
@@ -2003,7 +2003,7 @@ msgstr "所有未解决空白字符冲突均选择 C"
 msgid "Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
 msgstr "剩余冲突数：%1(其中 %2 项为空白字符)"
 
-#: mergeresultwindow.cpp:324
+#: mergeresultwindow.cpp:326
 #, kde-format
 msgid ""
 "The output has been modified.\n"
@@ -2012,29 +2012,29 @@ msgstr ""
 "已修改输出。\n"
 "如果您继续您的更改将丢失。"
 
-#: mergeresultwindow.cpp:767 pdiff.cpp:727
+#: mergeresultwindow.cpp:769 pdiff.cpp:731
 #, kde-format
 msgid "All input files are binary equal."
 msgstr "全部输入文件二进制数据相同。"
 
-#: mergeresultwindow.cpp:769
+#: mergeresultwindow.cpp:771
 #, kde-format
 msgid "All input files contain the same text."
 msgstr "全部输入文件包含相同文本。"
 
-#: mergeresultwindow.cpp:773 mergeresultwindow.cpp:777
-#: mergeresultwindow.cpp:781 pdiff.cpp:733 pdiff.cpp:737 pdiff.cpp:741
+#: mergeresultwindow.cpp:775 mergeresultwindow.cpp:779
+#: mergeresultwindow.cpp:783 pdiff.cpp:737 pdiff.cpp:741 pdiff.cpp:745
 #, kde-format
 msgid "Files %1 and %2 are binary equal.\n"
 msgstr "文件 %1 和 %2 二进制数据相同。\n"
 
-#: mergeresultwindow.cpp:775 mergeresultwindow.cpp:779
-#: mergeresultwindow.cpp:783
+#: mergeresultwindow.cpp:777 mergeresultwindow.cpp:781
+#: mergeresultwindow.cpp:785
 #, kde-format
 msgid "Files %1 and %2 have equal text.\n"
 msgstr "文件 %1 和 %2 文本相同。\n"
 
-#: mergeresultwindow.cpp:789
+#: mergeresultwindow.cpp:791
 #, kde-format
 msgid ""
 "Total number of conflicts: %1\n"
@@ -2047,27 +2047,27 @@ msgstr ""
 "未解决冲突数：%3\n"
 "%4"
 
-#: mergeresultwindow.cpp:795
+#: mergeresultwindow.cpp:797
 #, kde-format
 msgid "Conflicts"
 msgstr "冲突"
 
-#: mergeresultwindow.cpp:1540
+#: mergeresultwindow.cpp:1542
 #, kde-format
 msgid "<No src line>"
 msgstr "<此行无源文件中的内容>"
 
-#: mergeresultwindow.cpp:1548
+#: mergeresultwindow.cpp:1550
 #, kde-format
 msgid "<Merge Conflict (Whitespace only)>"
 msgstr "<合并冲突 (仅空白字符)>"
 
-#: mergeresultwindow.cpp:1550 mergeresultwindow.cpp:2424
+#: mergeresultwindow.cpp:1552 mergeresultwindow.cpp:2426
 #, kde-format
 msgid "<Merge Conflict>"
 msgstr "<合并冲突>"
 
-#: mergeresultwindow.cpp:2642
+#: mergeresultwindow.cpp:2644
 #, kde-format
 msgid ""
 "Not all conflicts are solved yet.\n"
@@ -2076,12 +2076,12 @@ msgstr ""
 "尚未解决全部冲突。\n"
 "文件未保存。"
 
-#: mergeresultwindow.cpp:2644 mergeresultwindow.cpp:2653
+#: mergeresultwindow.cpp:2646 mergeresultwindow.cpp:2655
 #, kde-format
 msgid "Conflicts Left"
 msgstr "剩余冲突"
 
-#: mergeresultwindow.cpp:2651
+#: mergeresultwindow.cpp:2653
 #, kde-format
 msgid ""
 "There is a line end style conflict. Please choose the line end style "
@@ -2091,7 +2091,7 @@ msgstr ""
 "有一处换行符冲突，请手动选择一种换行符风格。\n"
 "文件未保存。"
 
-#: mergeresultwindow.cpp:2665
+#: mergeresultwindow.cpp:2667
 #, kde-format
 msgid ""
 "\n"
@@ -2102,47 +2102,47 @@ msgstr ""
 "\n"
 "创建备份失败，文件未保存。"
 
-#: mergeresultwindow.cpp:2665 mergeresultwindow.cpp:2707
+#: mergeresultwindow.cpp:2667 mergeresultwindow.cpp:2709
 #, kde-format
 msgid "File Save Error"
 msgstr "文件保存错误"
 
-#: mergeresultwindow.cpp:2707
+#: mergeresultwindow.cpp:2709
 #, kde-format
 msgid "Error while writing."
 msgstr "写入时出错。"
 
-#: mergeresultwindow.cpp:2782
+#: mergeresultwindow.cpp:2784
 #, kde-format
 msgid "Output:"
 msgstr "输出："
 
-#: mergeresultwindow.cpp:2795 mergeresultwindow.cpp:2985
+#: mergeresultwindow.cpp:2797 mergeresultwindow.cpp:2987
 #, kde-format
 msgid "[Modified]"
 msgstr "[已修改]"
 
-#: mergeresultwindow.cpp:2802
+#: mergeresultwindow.cpp:2804
 #, kde-format
 msgid "Encoding for saving:"
 msgstr "保存所用编码："
 
-#: mergeresultwindow.cpp:2902
+#: mergeresultwindow.cpp:2904
 #, kde-format
 msgid "Conflict"
 msgstr "冲突"
 
-#: mergeresultwindow.cpp:2934
+#: mergeresultwindow.cpp:2936
 #, kde-format
 msgid "Codec from A: %1"
 msgstr "解码 A：%1"
 
-#: mergeresultwindow.cpp:2936
+#: mergeresultwindow.cpp:2938
 #, kde-format
 msgid "Codec from B: %1"
 msgstr "解码 B：%1"
 
-#: mergeresultwindow.cpp:2938
+#: mergeresultwindow.cpp:2940
 #, kde-format
 msgid "Codec from C: %1"
 msgstr "解码 C：%1"
@@ -3183,77 +3183,77 @@ msgstr "合并时使用这些选项"
 msgid "Disable Unsafe Options"
 msgstr "禁用不安全的选项"
 
-#: pdiff.cpp:131
+#: pdiff.cpp:135
 #, kde-format
 msgid "Loading A"
 msgstr "正在加载A"
 
-#: pdiff.cpp:132
+#: pdiff.cpp:136
 #, kde-format
 msgid "Loading A: %1"
 msgstr "正在加载 A：%1"
 
-#: pdiff.cpp:141
+#: pdiff.cpp:145
 #, kde-format
 msgid "Loading B"
 msgstr "正在加载B"
 
-#: pdiff.cpp:142
+#: pdiff.cpp:146
 #, kde-format
 msgid "Loading B: %1"
 msgstr "正在加载B：%1"
 
-#: pdiff.cpp:172 pdiff.cpp:173 pdiff.cpp:213 pdiff.cpp:214
+#: pdiff.cpp:176 pdiff.cpp:177 pdiff.cpp:217 pdiff.cpp:218
 #, kde-format
 msgid "Diff: A <-> B"
 msgstr "比较：A <-> B"
 
-#: pdiff.cpp:179 pdiff.cpp:180 pdiff.cpp:259 pdiff.cpp:260 pdiff.cpp:278
+#: pdiff.cpp:183 pdiff.cpp:184 pdiff.cpp:263 pdiff.cpp:264 pdiff.cpp:282
 #, kde-format
 msgid "Linediff: A <-> B"
 msgstr "行比较：A <-> B"
 
-#: pdiff.cpp:198
+#: pdiff.cpp:202
 #, kde-format
 msgid "Loading C"
 msgstr "正在加载C"
 
-#: pdiff.cpp:199
+#: pdiff.cpp:203
 #, kde-format
 msgid "Loading C: %1"
 msgstr "正在加载 C：%1"
 
-#: pdiff.cpp:225 pdiff.cpp:226
+#: pdiff.cpp:229 pdiff.cpp:230
 #, kde-format
 msgid "Diff: A <-> C"
 msgstr "比较：A <-> C"
 
-#: pdiff.cpp:239 pdiff.cpp:240
+#: pdiff.cpp:243 pdiff.cpp:244
 #, kde-format
 msgid "Diff: B <-> C"
 msgstr "比较：B <-> C"
 
-#: pdiff.cpp:265 pdiff.cpp:266 pdiff.cpp:283
+#: pdiff.cpp:269 pdiff.cpp:270 pdiff.cpp:287
 #, kde-format
 msgid "Linediff: B <-> C"
 msgstr "行比较：B <-> C"
 
-#: pdiff.cpp:271 pdiff.cpp:272 pdiff.cpp:288
+#: pdiff.cpp:275 pdiff.cpp:276 pdiff.cpp:292
 #, kde-format
 msgid "Linediff: A <-> C"
 msgstr "行比较：A <-> C"
 
-#: pdiff.cpp:729
+#: pdiff.cpp:733
 #, kde-format
 msgid "All input files contain the same text, but are not binary equal."
 msgstr "全部输入文件包含相同文本，但二进制不相同。"
 
-#: pdiff.cpp:735 pdiff.cpp:739 pdiff.cpp:743
+#: pdiff.cpp:739 pdiff.cpp:743 pdiff.cpp:747
 #, kde-format
 msgid "Files %1 and %2 have equal text, but are not binary equal. \n"
 msgstr "文件%1和%2文本相同，但二进制数据不相同。\n"
 
-#: pdiff.cpp:753
+#: pdiff.cpp:757
 #, kde-format
 msgid ""
 "Some input files do not seem to be pure text files.\n"
@@ -3264,17 +3264,17 @@ msgstr ""
 "注意 KDiff3 的合并功能不适用于二进制数据。\n"
 "继续则需您自己承担风险。"
 
-#: pdiff.cpp:763
+#: pdiff.cpp:767
 #, kde-format
 msgid ", B"
 msgstr ", B"
 
-#: pdiff.cpp:765
+#: pdiff.cpp:769
 #, kde-format
 msgid ", C"
 msgstr ", C"
 
-#: pdiff.cpp:767
+#: pdiff.cpp:771
 #, kde-format
 msgid ""
 "Some input characters could not be converted to valid unicode.\n"
@@ -3287,82 +3287,82 @@ msgstr ""
 "如果不确定，请不要保存。继续则需您自己承担风险。\n"
 "受影响的输入文件在 %1。"
 
-#: pdiff.cpp:859
+#: pdiff.cpp:863
 #, kde-format
 msgid "Abort"
 msgstr "中止"
 
-#: pdiff.cpp:860
+#: pdiff.cpp:864
 #, kde-format
 msgid "Continue Merging"
 msgstr "继续合并"
 
-#: pdiff.cpp:865 pdiff.cpp:957
+#: pdiff.cpp:869 pdiff.cpp:961
 #, kde-format
 msgid "Opening files..."
 msgstr "打开文件..."
 
-#: pdiff.cpp:1044
+#: pdiff.cpp:1048
 #, kde-format
 msgid "Cutting selection..."
 msgstr "剪切选中内容..."
 
-#: pdiff.cpp:1051
+#: pdiff.cpp:1055
 #, kde-format
 msgid "Copying selection to clipboard..."
 msgstr "复制选中内容到剪贴板..."
 
-#: pdiff.cpp:1060
+#: pdiff.cpp:1064
 #, kde-format
 msgid "Inserting clipboard contents..."
 msgstr "正在插入剪贴板内容..."
 
-#: pdiff.cpp:1160
+#: pdiff.cpp:1164
 #, kde-format
 msgid "Ok"
 msgstr ""
 
-#: pdiff.cpp:1176
+#: pdiff.cpp:1180
 #, kde-format
 msgid "Go to Line"
 msgstr ""
 
-#: pdiff.cpp:1486
+#: pdiff.cpp:1490
 #, kde-format
 msgid "Word wrap (Cancel disables word wrap)"
 msgstr "文本换行"
 
-#: pdiff.cpp:1487
+#: pdiff.cpp:1491
 #, kde-format
 msgid "Calculating max width for horizontal scrollbar"
 msgstr "计算水平滚动条的最大宽度"
 
-#: pdiff.cpp:1708
+#: pdiff.cpp:1712
 #, kde-format
 msgid "Save && Continue"
 msgstr "保存并继续"
 
-#: pdiff.cpp:1709
+#: pdiff.cpp:1713
 #, kde-format
 msgid "Continue Without Saving"
 msgstr "继续并不保存"
 
-#: pdiff.cpp:1907
+#: pdiff.cpp:1911
 #, kde-format
 msgid "Search complete."
 msgstr "搜索完成。"
 
-#: pdiff.cpp:1907
+#: pdiff.cpp:1911
 #, kde-format
 msgid "Search Complete"
 msgstr "搜索完成"
 
-#: pdiff.cpp:2088
+#: pdiff.cpp:2092
 #, kde-format
 msgid "Nothing is selected in either diff input window."
 msgstr "比较输入窗口没有选择内容。"
 
-#: pdiff.cpp:2088
+#: pdiff.cpp:2092
 #, kde-format
 msgid "Error while adding manual diff range"
 msgstr "添加手动比较区域时出错"
