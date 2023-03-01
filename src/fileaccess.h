@@ -57,7 +57,7 @@ class FileAccess
 
     [[nodiscard]] bool isNormal() const;
     [[nodiscard]] bool isValid() const;
-    [[nodiscard]] bool isBrokenLink() { return m_bBrokenLink; }
+    [[nodiscard]] bool isBrokenLink() const { return m_bBrokenLink; }
     [[nodiscard]] virtual bool isFile() const;
     [[nodiscard]] virtual bool isDir() const;
     [[nodiscard]] virtual bool isSymLink() const;
