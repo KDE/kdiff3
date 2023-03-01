@@ -58,7 +58,7 @@ class FileAccess
     Q_REQUIRED_RESULT bool isNormal() const;
     Q_REQUIRED_RESULT bool isValid() const;
     Q_REQUIRED_RESULT virtual bool isFile() const;
-    Q_REQUIRED_RESULT bool isBrokenLink() { return m_bBrokenLink; }
+    Q_REQUIRED_RESULT bool isBrokenLink() const { return m_bBrokenLink; }
     Q_REQUIRED_RESULT virtual bool isDir() const;
     Q_REQUIRED_RESULT virtual bool isSymLink() const;
     Q_REQUIRED_RESULT virtual bool exists() const;
