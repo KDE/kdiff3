@@ -15,6 +15,7 @@
 #include <type_traits>
 #include <limits>
 
+#include <boost/safe_numerics/automatic.hpp>
 #include <boost/safe_numerics/safe_integer.hpp>
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
@@ -34,7 +35,8 @@ using KDiff3_exception_policy = boost::safe_numerics::exception_policy<
     boost::safe_numerics::trap_exception   // uninitialized value
 >;
 
-template<typename T> using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::native, KDiff3_exception_policy>;
+template <typename T>
+using SafeInt = boost::safe_numerics::safe<T, boost::safe_numerics::automatic, KDiff3_exception_policy>;
 
 #define TYPE_MAX(x) std::numeric_limits<x>::max()
 #define TYPE_MIN(x) std::numeric_limits<x>::min()
