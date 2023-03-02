@@ -1451,6 +1451,9 @@ bool Diff3Line::fineDiff(bool inBTextsTotalEqual, const e_SrcSelector selector, 
     if((!k1.isValid() && k2.isValid()) || (k1.isValid() && !k2.isValid())) bTextsTotalEqual = false;
     if(k1.isValid() && k2.isValid())
     {
+        assert(((unsigned long)k1) <= (*v1).size() && (*v1)[k1].getBuffer() != nullptr);
+        assert(((unsigned long)k2) <= (*v2).size() && (*v2)[k2].getBuffer() != nullptr);
+
         if((*v1)[k1].size() != (*v2)[k2].size() || QString::compare((*v1)[k1].getLine(), (*v2)[k2].getLine()) != 0)
         {
             bTextsTotalEqual = false;
