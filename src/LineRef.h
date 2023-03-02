@@ -44,6 +44,8 @@ class LineRef
 
     inline operator LineType() const noexcept { return mLineNumber; }
 
+    inline operator SafeInt<LineType>() const noexcept { return mLineNumber; }
+
     inline LineRef& operator=(const LineType lineIn) noexcept
     {
         mLineNumber = lineIn;
