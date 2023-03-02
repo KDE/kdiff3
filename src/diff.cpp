@@ -698,6 +698,7 @@ void DiffList::verify(const LineRef size1, const LineRef size2)
 
     for(const Diff& curDiff: *this)
     {
+        assert(curDiff.numberOfEquals() >= 0);
         assert(curDiff.diff1() <= TYPE_MAX(LineRef::LineType) && curDiff.diff2() <= TYPE_MAX(LineRef::LineType));
         l1 += curDiff.numberOfEquals() + LineRef(curDiff.diff1());
         l2 += curDiff.numberOfEquals() + LineRef(curDiff.diff2());
