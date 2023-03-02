@@ -100,7 +100,7 @@ class Diff
     SafeInt<qint64> mDiff2 = 0;
 
   public:
-    Diff() = default;//We use defualt initialization force compiler to generate a default constructor
+    Diff() = default; //We use default initialization force compiler to generate a default constructor
     Diff(LineCount eq, const qint64 inDiff1, const qint64 inDiff2)
     {
         nofEquals = eq;
