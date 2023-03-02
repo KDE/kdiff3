@@ -164,7 +164,6 @@ class LineData
     bool bSkipable = false;//TODO: Move me
 
   public:
-    explicit LineData() = default; // needed for Qt internal reasons should not be used.
     inline LineData(const QSharedPointer<QString>& buffer, const QtSizeType inOffset, QtSizeType inSize = 0, QtSizeType inFirstNonWhiteChar = 0, bool inIsSkipable = false, const bool inIsPureComment = false)
     {
         mBuffer = buffer;
