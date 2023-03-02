@@ -651,8 +651,8 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t i
             Diff d((LineCount)(e->line0 - currentLine1), e->deleted, e->inserted);
             assert(d.numberOfEquals() == e->line1 - currentLine2);
 
-            currentLine1 += LineRef((qint64)d.numberOfEquals() + d.diff1());
-            currentLine2 += LineRef((qint64)d.numberOfEquals() + d.diff2());
+            currentLine1 += LineRef((quint64)d.numberOfEquals() + d.diff1());
+            currentLine2 += LineRef((quint64)d.numberOfEquals() + d.diff2());
             push_back(d);
 
             p = e->link;

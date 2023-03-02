@@ -96,8 +96,8 @@ class Diff
   private:
     SafeInt<LineCount> nofEquals = 0;
 
-    SafeInt<qint64> mDiff1 = 0;
-    SafeInt<qint64> mDiff2 = 0;
+    SafeInt<quint64> mDiff1 = 0;
+    SafeInt<quint64> mDiff2 = 0;
 
   public:
     Diff() = default; //We use default initialization force compiler to generate a default constructor
@@ -112,8 +112,8 @@ class Diff
 
     [[nodiscard]] inline qint32 numberOfEquals() const { return nofEquals; };
 
-    [[nodiscard]] inline qint64 diff1() const { return mDiff1; };
-    [[nodiscard]] inline qint64 diff2() const { return mDiff2; };
+    [[nodiscard]] inline quint64 diff1() const { return mDiff1; };
+    [[nodiscard]] inline quint64 diff2() const { return mDiff2; };
 
     inline void setNumberOfEquals(const qint32 inNumOfEquals) { nofEquals = inNumOfEquals; }
 
