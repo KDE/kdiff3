@@ -651,6 +651,7 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t i
 
             currentLine1 += (LineRef)(d.numberOfEquals() + d.diff1());
             currentLine2 += (LineRef)(d.numberOfEquals() + d.diff2());
+            assert(currentLine1 <= size1 && currentLine2 <= size2);
             push_back(d);
 
             p = e->link;
