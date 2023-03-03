@@ -681,12 +681,13 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         m_v->push_back(LineData(m_unicodeBuf, lastOffset, line.length(), firstNonwhite, parser->isSkipable(), parser->isPureComment()));
         //The last line may not have an EOL mark. In that case don't add one to our buffer.
         m_unicodeBuf->append(line);
-        if(curChar == '\n' || curChar == '\r')
+        if(curChar == '\n' || curChar == '\r' || prevChar == '\r')
         {
             //kdiff3 internally uses only unix style endings for simplicity.
             m_unicodeBuf->append('\n');
         }
 
+        assert(m_unicodeBuf->length() != lastOffset);
         lastOffset = m_unicodeBuf->length();
     }
 
@@ -702,7 +703,6 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
         parser->processLine("");
         m_v->push_back(LineData(m_unicodeBuf, lastOffset, 0, 0, parser->isSkipable(), parser->isPureComment()));
     }
-    assert(m_v->size() < 2 || (*m_v)[m_v->size() - 1].getOffset() != (*m_v)[m_v->size() - 2].getOffset());
 
     m_v->push_back(LineData(m_unicodeBuf, lastOffset));
 
