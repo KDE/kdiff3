@@ -27,7 +27,7 @@ class Utils{
       static QString urlToString(const QUrl &url);
       static bool wildcardMultiMatch(const QString& wildcard, const QString& testString, bool bCaseSensitive);
       static QString getArguments(QString cmd, QString& program, QStringList& args);
-      inline static bool isEndOfLine( QChar c ) { return c=='\n' || c=='\r' || c=='\x0b'; }
+      inline static bool isEndOfLine(QChar c) { return c == '\n' || c == '\r'; }
 
       //Where possible use QTextLayout in place of these functions especially when dealing with non-latin scripts.
       inline static int getHorizontalAdvance(const QFontMetrics &metrics, const QString& s, int len = -1)

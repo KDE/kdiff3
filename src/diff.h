@@ -103,6 +103,7 @@ class Diff
     Diff() = default; //We use default initialization force compiler to generate a default constructor
     Diff(LineCount eq, const qint64 inDiff1, const qint64 inDiff2)
     {
+        assert(eq >= 0);
         nofEquals = eq;
         mDiff1 = inDiff1;
         mDiff2 = inDiff2;
