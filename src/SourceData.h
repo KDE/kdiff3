@@ -29,7 +29,7 @@ class SourceData
   public:
     void setOptions(const QSharedPointer<Options> &pOptions);
 
-    [[nodiscard]] LineCount getSizeLines() const;
+    [[nodiscard]] LineType getSizeLines() const;
     [[nodiscard]] qint64 getSizeBytes() const;
     [[nodiscard]] const char* getBuf() const;
     [[nodiscard]] const QString& getText() const;

@@ -54,11 +54,10 @@ class DiffTextWindow : public QWidget
         const QString& fileName,
         QTextCodec* pTextCodec,
         e_LineEndStyle eLineEndStyle,
-        const std::shared_ptr<LineDataVector> &pLineData,
-        LineCount size,
+        const std::shared_ptr<LineDataVector>& pLineData,
+        LineType size,
         const Diff3LineVector* pDiff3LineVector,
-        const ManualDiffHelpList* pManualDiffHelpList
-    );
+        const ManualDiffHelpList* pManualDiffHelpList);
 
     void setupConnections(const KDiff3App *app);
 
@@ -70,15 +69,15 @@ class DiffTextWindow : public QWidget
     LineRef calcTopLineInFile(const LineRef firstLine);
 
     [[nodiscard]] int getMaxTextWidth() const;
-    [[nodiscard]] LineCount getNofLines() const;
-    [[nodiscard]] LineCount getNofVisibleLines() const;
+    [[nodiscard]] LineType getNofLines() const;
+    [[nodiscard]] LineType getNofVisibleLines() const;
     [[nodiscard]] int getVisibleTextAreaWidth() const;
 
-    LineIndex convertLineToDiff3LineIdx(LineRef line);
-    LineRef convertDiff3LineIdxToLine(LineIndex d3lIdx);
+    LineType convertLineToDiff3LineIdx(LineRef line);
+    LineRef convertDiff3LineIdxToLine(LineType d3lIdx);
 
-    void convertD3LCoordsToLineCoords(LineIndex d3LIdx, int d3LPos, LineRef& line, int& pos);
-    void convertLineCoordsToD3LCoords(LineRef line, int pos, LineIndex& d3LIdx, int& d3LPos);
+    void convertD3LCoordsToLineCoords(LineType d3LIdx, int d3LPos, LineRef& line, int& pos);
+    void convertLineCoordsToD3LCoords(LineRef line, int pos, LineType& d3LIdx, int& d3LPos);
 
     void convertSelectionToD3LCoords();
 
@@ -90,8 +89,8 @@ class DiffTextWindow : public QWidget
     void recalcWordWrap(bool bWordWrap, QtSizeType wrapLineVectorSize, int visibleTextWidth);
     void recalcWordWrapHelper(QtSizeType wrapLineVectorSize, int visibleTextWidth, QtSizeType cacheListIdx);
 
-    void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, const LineCount linesPerPage, const QColor& fgColor);
-    void print(RLPainter& painter, const QRect& r, int firstLine, const LineCount nofLinesPerPage);
+    void printWindow(RLPainter& painter, const QRect& view, const QString& headerText, int line, const LineType linesPerPage, const QColor& fgColor);
+    void print(RLPainter& painter, const QRect& r, int firstLine, const LineType nofLinesPerPage);
 
     static bool startRunnables();
 
@@ -116,7 +115,7 @@ class DiffTextWindow : public QWidget
     void scrollDiffTextWindow(int deltaX, int deltaY);
     void newSelection();
     void selectionEnd();
-    void setFastSelectorLine(LineIndex line);
+    void setFastSelectorLine(LineType line);
     void gotFocus();
     void lineClicked(e_SrcSelector winIdx, LineRef line);
 

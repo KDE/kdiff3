@@ -106,9 +106,9 @@ class MergeResultWindow: public QWidget
     void slotUnsolve();
     void slotMergeHistory();
     void slotRegExpAutoMerge();
-    void slotSplitDiff(LineIndex firstD3lLineIdx, LineIndex lastD3lLineIdx);
-    void slotJoinDiffs(LineIndex firstD3lLineIdx, LineIndex lastD3lLineIdx);
-    void slotSetFastSelectorLine(LineIndex);
+    void slotSplitDiff(LineType firstD3lLineIdx, LineType lastD3lLineIdx);
+    void slotJoinDiffs(LineType firstD3lLineIdx, LineType lastD3lLineIdx);
+    void slotSetFastSelectorLine(LineType);
     void setPaintingAllowed(bool);
     void updateSourceMask();
     void slotStatusMessageChanged(const QString&);
@@ -141,7 +141,7 @@ class MergeResultWindow: public QWidget
     void statusBarMessage(const QString& message);
     void scrollMergeResultWindow(int deltaX, int deltaY);
     void modifiedChanged(bool bModified);
-    void setFastSelectorRange(LineRef line1, LineCount nofLines);
+    void setFastSelectorRange(LineRef line1, LineType nofLines);
     void sourceMask(int srcMask, int enabledMask);
     void resizeSignal();
     void selectionEnd();
@@ -252,7 +252,7 @@ class MergeResultWindow: public QWidget
     QPixmap m_pixmap;
     LineRef m_firstLine = 0;
     int m_horizScrollOffset = 0;
-    LineCount m_nofLines = 0;
+    LineType m_nofLines = 0;
     int m_maxTextWidth = -1;
     bool m_bMyUpdate = false;
     bool m_bInsertMode = true;

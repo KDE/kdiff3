@@ -94,14 +94,14 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(ChangeFlags);
 class Diff
 {
   private:
-    SafeInt<LineCount> nofEquals = 0;
+    SafeInt<LineType> nofEquals = 0;
 
     SafeInt<quint64> mDiff1 = 0;
     SafeInt<quint64> mDiff2 = 0;
 
   public:
     Diff() = default; //We use default initialization force compiler to generate a default constructor
-    Diff(LineCount eq, const quint64 inDiff1, const quint64 inDiff2)
+    Diff(LineType eq, const quint64 inDiff1, const quint64 inDiff2)
     {
         assert(eq >= 0);
         nofEquals = eq;
@@ -397,9 +397,9 @@ class Diff3LineList: public std::list<Diff3Line>
 
     void calcDiff3LineListTrim(const std::shared_ptr<LineDataVector> &pldA, const std::shared_ptr<LineDataVector> &pldB, const std::shared_ptr<LineDataVector> &pldC, ManualDiffHelpList* pManualDiffHelpList);
 
-    LineCount recalcWordWrap(bool resetDisplayCount)
+    LineType recalcWordWrap(bool resetDisplayCount)
     {
-        LineCount sumOfLines = 0;
+        LineType sumOfLines = 0;
 
         for(Diff3Line& d3l: *this)
         {
@@ -413,15 +413,15 @@ class Diff3LineList: public std::list<Diff3Line>
         return sumOfLines;
     }
 
-    void debugLineCheck(const LineCount size, const e_SrcSelector srcSelector) const;
+    void debugLineCheck(const LineType size, const e_SrcSelector srcSelector) const;
 
     void dump();
 
-    [[nodiscard]] LineCount numberOfLines(bool bWordWrap) const
+    [[nodiscard]] LineType numberOfLines(bool bWordWrap) const
     {
         if(bWordWrap)
         {
-            LineCount lines;
+            LineType lines;
 
             lines = 0;
             Diff3LineList::const_iterator i;
@@ -434,7 +434,7 @@ class Diff3LineList: public std::list<Diff3Line>
         }
         else
         {
-            return SafeInt<LineCount>(size());
+            return SafeInt<LineType>(size());
         }
     }
 };

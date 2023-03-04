@@ -196,7 +196,7 @@ void MergeBlock::mergeOneLine(const Diff3Line &diffRec, bool &bLineRemoved, bool
 */
 void MergeBlockList::buildFromDiff3(const Diff3LineList &diff3List, bool isThreeway)
 {
-    LineIndex lineIdx = 0;
+    LineType lineIdx = 0;
     for(auto it = diff3List.cbegin(); it != diff3List.cend(); ++it)
     {
         const Diff3Line &d = *it;

@@ -178,9 +178,9 @@ const std::shared_ptr<LineDataVector>& SourceData::getLineDataForDisplay() const
     return m_normalData.m_v;
 }
 
-LineCount SourceData::getSizeLines() const
+LineType SourceData::getSizeLines() const
 {
-    return SafeInt<LineCount>(m_normalData.lineCount());
+    return SafeInt<LineType>(m_normalData.lineCount());
 }
 
 qint64 SourceData::getSizeBytes() const
@@ -576,7 +576,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
 
     QString line;
     QChar curChar, prevChar = 0;
-    LineCount lines = 0;
+    LineType lines = 0;
     QtSizeType lastOffset = 0;
     FileOffset skipBytes = 0;
     QScopedPointer<CommentParser> parser(new DefaultCommentParser());
@@ -607,7 +607,7 @@ bool SourceData::FileData::preprocess(QTextCodec* pEncoding, bool removeComments
     while(!ts.atEnd())
     {
         line.clear();
-        if(lines >= TYPE_MAX(LineCount) - 5)
+        if(lines >= TYPE_MAX(LineType) - 5)
         {
             m_v->clear();
             return false;

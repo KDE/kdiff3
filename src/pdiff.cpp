@@ -1546,7 +1546,7 @@ void KDiff3App::slotFinishRecalcWordWrap(int visibleTextWidthForPrinting)
     {
         if(m_pOptions->wordWrapOn())
         {
-            LineCount sumOfLines = m_diff3LineList.recalcWordWrap(false);
+            LineType sumOfLines = m_diff3LineList.recalcWordWrap(false);
 
             // Finish the word wrap
             if(m_pDiffTextWindow1)

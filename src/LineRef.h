@@ -103,9 +103,8 @@ static_assert(std::is_move_assignable<LineRef>::value, "LineRef must be move ass
 static_assert(std::is_convertible<LineRef, int>::value, "Can not convert LineRef to int.");
 static_assert(std::is_convertible<int, LineRef>::value, "Can not convert int to LineRef.");
 
-typedef LineRef::LineType LineCount;
-typedef LineRef::LineType LineIndex;
+using LineType = LineRef::LineType;
 
 //Break in an obvious way if way cann't get LineCounts from Qt supplied ints without overflow issues.
-static_assert(sizeof(LineCount) >= sizeof(QtNumberType)); //Generally assumed by KDiff3
+static_assert(sizeof(LineType) >= sizeof(QtNumberType)); //Generally assumed by KDiff3
 #endif

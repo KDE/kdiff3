@@ -648,7 +648,7 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t i
         GnuDiff::change* p = nullptr;
         for(GnuDiff::change* e = script; e; e = p)
         {
-            Diff d((LineCount)(e->line0 - currentLine1), e->deleted, e->inserted);
+            Diff d((LineType)(e->line0 - currentLine1), e->deleted, e->inserted);
             assert(d.numberOfEquals() == e->line1 - currentLine2);
 
             currentLine1 += LineRef((quint64)d.numberOfEquals() + d.diff1());
@@ -673,7 +673,7 @@ void DiffList::runDiff(const std::shared_ptr<LineDataVector> &p1, const size_t i
             currentLine1 += equalLinesAtStart;
             currentLine2 += equalLinesAtStart;
 
-            LineCount nofEquals = std::min(size1 - currentLine1, size2 - currentLine2);
+            LineType nofEquals = std::min(size1 - currentLine1, size2 - currentLine2);
             if(nofEquals == 0)
             {
                 back().adjustDiff1(size1 - currentLine1);
@@ -1560,9 +1560,9 @@ void Diff3LineList::calcDiff3LineVector(Diff3LineVector& d3lv)
 }
 
 // Just make sure that all input lines are in the output too, exactly once.
-void Diff3LineList::debugLineCheck(const LineCount size, const e_SrcSelector srcSelector) const
+void Diff3LineList::debugLineCheck(const LineType size, const e_SrcSelector srcSelector) const
 {
-    LineCount i = 0;
+    LineType i = 0;
 
     for(const Diff3Line &entry: *this)
     {

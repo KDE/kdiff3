@@ -90,8 +90,8 @@ class MergeBlock
     friend class MergeBlockList;
 
     Diff3LineList::const_iterator mId3l;
-    LineIndex d3lLineIdx = -1;    // Needed to show the correct window pos.
-    LineCount srcRangeLength = 0; // how many src-lines have these properties
+    LineType d3lLineIdx = -1;    // Needed to show the correct window pos.
+    LineType srcRangeLength = 0; // how many src-lines have these properties
     e_MergeDetails mergeDetails = e_MergeDetails::eDefault;
     bool bConflict = false;
     bool bWhiteSpaceConflict = false;
@@ -105,8 +105,8 @@ class MergeBlock
 
     [[nodiscard]] inline e_SrcSelector source() const { return srcSelect; }
 
-    [[nodiscard]] inline LineIndex getIndex() const { return d3lLineIdx; }
-    [[nodiscard]] inline LineCount sourceRangeLength() const { return srcRangeLength; }
+    [[nodiscard]] inline LineType getIndex() const { return d3lLineIdx; }
+    [[nodiscard]] inline LineType sourceRangeLength() const { return srcRangeLength; }
 
     [[nodiscard]] inline bool isConflict() const { return bConflict; }
     [[nodiscard]] inline bool isWhiteSpaceConflict() const { return bWhiteSpaceConflict; }
@@ -120,9 +120,9 @@ class MergeBlock
 
     [[nodiscard]] inline e_MergeDetails details() const { return mergeDetails; }
 
-    [[nodiscard]] inline LineCount lineCount() const { return SafeInt<qint32>(list().size()); }
+    [[nodiscard]] inline LineType lineCount() const { return SafeInt<qint32>(list().size()); }
 
-    void split(MergeBlock& mb2, int d3lLineIdx2) // The caller must insert the mb2 after this mb in the m_mergeLineList
+    void split(MergeBlock& mb2, LineType d3lLineIdx2) // The caller must insert the mb2 after this mb in the m_mergeLineList
     {
         if(d3lLineIdx2 < d3lLineIdx || d3lLineIdx2 >= d3lLineIdx + srcRangeLength)
             return; //Error
@@ -136,7 +136,7 @@ class MergeBlock
         mb2.srcRangeLength = srcRangeLength - (d3lLineIdx2 - d3lLineIdx);
         srcRangeLength = d3lLineIdx2 - d3lLineIdx; // current MergeBlock controls fewer lines
         mb2.mId3l = mId3l;
-        for(int i = 0; i < srcRangeLength; ++i)
+        for(LineType i = 0; i < srcRangeLength; ++i)
             ++mb2.mId3l;
 
         mb2.mMergeEditLineList.clear();

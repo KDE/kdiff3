@@ -923,7 +923,7 @@ void KDiff3App::slotFilePrint()
         QRect view2(1 * (columnWidth + columnDistance), view.top(), columnWidth, view.height());
         QRect view3(2 * (columnWidth + columnDistance), view.top(), columnWidth, view.height());
 
-        LineCount linesPerPage = view.height() / fm.lineSpacing();
+        LineType linesPerPage = view.height() / fm.lineSpacing();
 
         m_pEventLoopForPrinting = QPointer<QEventLoop>(new QEventLoop());
         if(m_pOptions->wordWrapOn())
@@ -933,25 +933,25 @@ void KDiff3App::slotFilePrint()
             m_pEventLoopForPrinting->exec();
         }
 
-        LineCount totalNofLines = std::max(m_pDiffTextWindow1->getNofLines(), m_pDiffTextWindow2->getNofLines());
+        LineType totalNofLines = std::max(m_pDiffTextWindow1->getNofLines(), m_pDiffTextWindow2->getNofLines());
 
         if(m_bTripleDiff && m_pDiffTextWindow3 != nullptr)
             totalNofLines = std::max(totalNofLines, m_pDiffTextWindow3->getNofLines());
 
-        QList<int> pageList; // = printer.pageList();
+        QList<quint32> pageList; // = printer.pageList();
 
         bool bPrintCurrentPage = false;
         bool bFirstPrintedPage = false;
 
         bool bPrintSelection = false;
-        LineCount totalNofPages = (totalNofLines + linesPerPage - 1) / linesPerPage;
+        quint32 totalNofPages = (totalNofLines + linesPerPage - 1) / linesPerPage;
         LineRef line;
         LineRef selectionEndLine;
 
         if(printer.printRange() == QPrinter::AllPages)
         {
             pageList.clear();
-            for(int i = 0; i < totalNofPages; ++i)
+            for(quint32 i = 0; i < totalNofPages; ++i)
             {
                 pageList.push_back(i + 1);
             }
@@ -960,7 +960,7 @@ void KDiff3App::slotFilePrint()
         {
             pageList.clear();
 
-            int from = printer.fromPage(), to = printer.toPage();
+            quint32 from = printer.fromPage(), to = printer.toPage();
             /*
                 Per Qt docs QPrinter::fromPage and QPrinter::toPage return 0 to indicate they are not set.
                 Account for this and other invalid settings the user may try.
@@ -970,7 +970,7 @@ void KDiff3App::slotFilePrint()
             if(to == 0 || to > totalNofPages) to = totalNofPages;
             if(from > to) to = from;
 
-            for(int i = from; i <= to; ++i)
+            for(quint32 i = from; i <= to; ++i)
             {
                 pageList.push_back(i);
             }
@@ -995,7 +995,7 @@ void KDiff3App::slotFilePrint()
 
         ProgressProxy pp;
         pp.setMaxNofSteps(totalNofPages);
-        QList<int>::iterator pageListIt = pageList.begin();
+        QList<quint32>::iterator pageListIt = pageList.begin();
         for(;;)
         {
             pp.setInformation(i18n("Printing page %1 of %2", page, totalNofPages), false);

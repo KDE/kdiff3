@@ -716,7 +716,7 @@ void MergeResultWindow::slotGoNextUnsolvedConflict()
 
 /** The line is given as a index in the Diff3LineList.
     The function calculates the corresponding iterator. */
-void MergeResultWindow::slotSetFastSelectorLine(LineIndex line)
+void MergeResultWindow::slotSetFastSelectorLine(LineType line)
 {
     MergeBlockListImp::iterator i;
     for(i = m_mergeBlockList.list().begin(); i != m_mergeBlockList.list().end(); ++i)
@@ -1752,7 +1752,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent* e)
         m_cursorXPos = 0;
         m_cursorOldXPixelPos = 0;
         m_cursorYPos = line;
-        LineCount l = 0;
+        LineType l = 0;
         MergeBlockListImp::iterator i = m_mergeBlockList.list().begin();
         for(i = m_mergeBlockList.list().begin(); i != m_mergeBlockList.list().end(); ++i)
         {
