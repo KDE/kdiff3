@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdiff3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-03 00:50+0000\n"
+"POT-Creation-Date: 2023-03-04 00:49+0000\n"
 "PO-Revision-Date: 2011-09-03 19:27+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -101,7 +101,7 @@ msgstr "Læser fil: %1"
 msgid "Listing directory: %1"
 msgstr "Giver en liste af mappe: %1"
 
-#: diff.cpp:1583 diff.cpp:1599
+#: diff.cpp:1584 diff.cpp:1600
 #, kde-format
 msgid ""
 "Data loss error:\n"
@@ -110,7 +110,7 @@ msgstr ""
 "Fejl med datatab:\n"
 "Hvis dette er reproducerbart så kontakt venligst udviklerne.\n"
 
-#: diff.cpp:1585 diff.cpp:1601
+#: diff.cpp:1586 diff.cpp:1602
 #, kde-format
 msgid "Severe Internal Error"
 msgstr "Alvorlig intern fejl"
@@ -1140,35 +1140,35 @@ msgstr "Indflet til B"
 msgid "Merge to A && B"
 msgstr "Indflet til A && B"
 
-#: fileaccess.cpp:516
+#: fileaccess.cpp:515
 #, kde-format
 msgid "Unable to determine full url. No parent specified."
 msgstr ""
 
-#: fileaccess.cpp:790
+#: fileaccess.cpp:789
 #, fuzzy, kde-format
 #| msgid "Reading file: %1"
 msgid "Failed to read file: %1"
 msgstr "Læser fil: %1"
 
-#: fileaccess.cpp:930
+#: fileaccess.cpp:929
 #, kde-format
 msgid "Creating temp copy of %1 failed."
 msgstr "Oprettelse af midlertidig kopi af %1 mislykkedes."
 
-#: fileaccess.cpp:938 fileaccess.cpp:943
+#: fileaccess.cpp:937 fileaccess.cpp:942
 #, fuzzy, kde-format
 #| msgid "Opening %1 failed."
 msgid "Opening %1 failed. %2"
 msgstr "Åbning af %1 mislykkedes."
 
-#: fileaccess.cpp:962 fileaccess.cpp:970
+#: fileaccess.cpp:961 fileaccess.cpp:969
 #, fuzzy, kde-format
 #| msgid "Error reading from %1"
 msgid "Error reading from %1. %2"
 msgstr "Fejl ved læsning fra %1"
 
-#: fileaccess.cpp:1099
+#: fileaccess.cpp:1098
 #, fuzzy, kde-format
 #| msgid ""
 #| "While trying to make a backup, deleting an older backup failed. \n"
@@ -1181,7 +1181,7 @@ msgstr ""
 "sikkerhedskopieringen.\n"
 "Filnavn: "
 
-#: fileaccess.cpp:1106
+#: fileaccess.cpp:1105
 #, fuzzy, kde-format
 #| msgid ""
 #| "While trying to make a backup, renaming failed. \n"
